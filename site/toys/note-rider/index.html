@@ -6,7 +6,7 @@
     <title>Note Rider · Splashery</title>
     <meta
       name="description"
-      content="Note Rider, a Splashery toy made of 3D Gaussian splats: Steer into each note's lane as it arrives (arrow keys, a swipe or a finger)."
+      content="Note Rider, a Splashery toy made of 3D Gaussian splats: Steer into each note's lane as it arrives (arrows, a swipe or a finger). ♪ Your song opens MIDI or audio."
     />
     <meta name="robots" content="noindex" />
     <link rel="canonical" href="https://ryanjosephkamp.github.io/splashery/site/toys/note-rider/" />
@@ -15,7 +15,7 @@
     <meta property="og:title" content="Note Rider · Splashery" />
     <meta
       property="og:description"
-      content="Note Rider, a Splashery toy made of 3D Gaussian splats: Steer into each note's lane as it arrives (arrow keys, a swipe or a finger)."
+      content="Note Rider, a Splashery toy made of 3D Gaussian splats: Steer into each note's lane as it arrives (arrows, a swipe or a finger). ♪ Your song opens MIDI or audio."
     />
     <meta
       property="og:url"
@@ -151,8 +151,8 @@
           <div class="toy-head">
             <h1>Note Rider <span class="badge">labs</span></h1>
             <p class="lead how-to">
-              Steer into each note's lane as it arrives (arrow keys, a swipe or a finger). Pick a
-              tune in the Toy tab.
+              Steer into each note's lane as it arrives (arrows, a swipe or a finger). ♪ Your song
+              opens MIDI or audio.
             </p>
             <dl class="does">
               <div>
@@ -175,6 +175,8 @@
               <a
                 class="button primary"
                 href="../../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im5vdGUtcmlkZXIifX0"
+                target="_blank"
+                rel="noopener"
                 >Open in the gallery<svg
                   class="arrow"
                   viewBox="0 0 16 16"
@@ -203,12 +205,14 @@
                 "
               ></span>
               <iframe
-                data-src="../../play/?toy=note-rider"
+                data-src="../../play/?toy=note-rider&sound=on"
                 title="Note Rider, live: drag to turn it"
                 allow="fullscreen"
               ></iframe>
             </div>
-            <figcaption>Drag to turn it; tap to play.</figcaption>
+            <figcaption>
+              Drag to turn it; tap to play. The speaker button mutes the sound.
+            </figcaption>
           </figure>
         </div>
         <section class="toy-section" aria-labelledby="h-about">
@@ -218,11 +222,13 @@
             moment, with the low notes in the low lane and the high notes in the high one. Steer the
             sled into each note's lane as the note arrives and it plays, so catching every note
             plays the whole tune; a missed note stays silent. The built-in tunes are Ode to Joy,
-            Twinkle, Twinkle, Little Star and Frère Jacques, or open a MIDI file of your own. In 2D,
-            on a phone held upright, the notes fall down three lanes side by side to their pads, the
-            low lane on the left (on a wide screen the lanes are stacked by pitch and the notes
-            slide in from the right); the 3D button turns it into a road coming toward you. The file
-            is read on this device and never leaves it.
+            Twinkle, Twinkle, Little Star and Frère Jacques, or open your own with ♪ Your song: a
+            MIDI file, or a recording, whose tune a note finder hears on this device, each caught
+            note then playing its own slice of the recording. In 2D, on a phone held upright, the
+            notes fall down three lanes side by side to their pads, the low lane on the left (on a
+            wide screen the lanes are stacked by pitch and the notes slide in from the right); the
+            3D button turns it into a road coming toward you. The file is read on this device and
+            never leaves it.
           </p>
         </section>
 
@@ -231,16 +237,17 @@
           <p>
             Built in your browser from a recipe and a seed: nothing in it comes from outside files.
             Its recipe is in
-            <a href="https://github.com/ryanjosephkamp/splashery/blob/main/src/packs/arcade.js"
+            <a
+              href="https://github.com/ryanjosephkamp/splashery/blob/main/src/packs/arcade.js"
+              target="_blank"
+              rel="noopener"
               ><code>src/packs/arcade.js</code></a
             >.
           </p>
 
           <p class="note">
             Splashery's code is under the MIT license; each asset above keeps its own license. Every
-            credit is also in
-            <a href="https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md">CREDITS.md</a
-            >.
+            credit is also in <a href="../../about/credits/">CREDITS.md</a>.
           </p>
         </section>
         <section class="toy-section" aria-labelledby="h-share">
@@ -326,8 +333,9 @@ https://ryanjosephkamp.github.io/splashery/site/toys/note-rider/</textarea
             </button>
           </div>
           <p class="note">
-            Embeds are silent and turn slowly when idle. Every option is in the
-            <a href="https://github.com/ryanjosephkamp/splashery#embedding">embed guide</a>.
+            Embeds are silent and turn slowly when idle; add <code>&amp;sound=on</code> to the
+            iframe's link for the toy's tap sound, with a mute button. Every option is in the
+            <a href="../../share/">embed guide</a>.
           </p>
         </section>
         <section class="toy-section" aria-labelledby="h-related">
@@ -486,21 +494,27 @@ https://ryanjosephkamp.github.io/splashery/site/toys/note-rider/</textarea
         <nav aria-label="More">
           <h2>More</h2>
           <ul>
-            <li><a href="../../../">The gallery</a></li>
+            <li><a href="../../../" target="_blank" rel="noopener">The gallery</a></li>
             <li><a href="../../search/">Search</a></li>
             <li><a href="../../../manual/">The Tinkerer's Manual</a></li>
-            <li><a href="https://github.com/ryanjosephkamp/splashery">Source on GitHub</a></li>
+            <li>
+              <a href="https://github.com/ryanjosephkamp/splashery" target="_blank" rel="noopener"
+                >Source on GitHub</a
+              >
+            </li>
             <li><a href="../../share/">Embed and share</a></li>
             <li><a href="../../about/credits/">Credits</a></li>
+            <li><a href="../../about/contact/">Contact</a></li>
             <li><a href="../../about/privacy/">Privacy</a></li>
             <li><a href="../../about/terms/">Terms</a></li>
           </ul>
         </nav>
       </div>
       <p class="fine">
-        Code under the MIT license; each toy's assets keep their own licenses. Built on the
-        PlayCanvas engine. This is a preview of Splashery's new site; the toys live in
-        <a href="../../../">the gallery</a>.
+        Made by <a href="../../about/contact/">Ryan Kamp</a>. Code under the MIT license; each toy's
+        assets keep their own licenses. Built on the PlayCanvas engine. This is a preview of
+        Splashery's new site; the toys live in
+        <a href="../../../" target="_blank" rel="noopener">the gallery</a>.
       </p>
     </footer>
   </body>

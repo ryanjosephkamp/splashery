@@ -6,7 +6,7 @@
     <title>Data in 3D · Splashery</title>
     <meta
       name="description"
-      content="Data in 3D, a Splashery toy made of 3D Gaussian splats: Open a CSV or TSV in the Toy tab, pick the columns for X, Y, Z and color, and tap the chart."
+      content="Data in 3D, a Splashery toy made of 3D Gaussian splats: Open a CSV or TSV in the Toy tab, pick the columns for X, Y, Z and color, and tap anywhere on the chart."
     />
     <meta name="robots" content="noindex" />
     <link rel="canonical" href="https://ryanjosephkamp.github.io/splashery/site/toys/data-in-3d/" />
@@ -15,7 +15,7 @@
     <meta property="og:title" content="Data in 3D · Splashery" />
     <meta
       property="og:description"
-      content="Data in 3D, a Splashery toy made of 3D Gaussian splats: Open a CSV or TSV in the Toy tab, pick the columns for X, Y, Z and color, and tap the chart."
+      content="Data in 3D, a Splashery toy made of 3D Gaussian splats: Open a CSV or TSV in the Toy tab, pick the columns for X, Y, Z and color, and tap anywhere on the chart."
     />
     <meta
       property="og:url"
@@ -151,8 +151,8 @@
           <div class="toy-head">
             <h1>Data in 3D <span class="badge">labs</span></h1>
             <p class="lead how-to">
-              Open a CSV or TSV in the Toy tab, pick the columns for X, Y, Z and color, and tap the
-              chart.
+              Open a CSV or TSV in the Toy tab, pick the columns for X, Y, Z and color, and tap
+              anywhere on the chart.
             </p>
             <dl class="does">
               <div>
@@ -171,6 +171,8 @@
               <a
                 class="button primary"
                 href="../../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImRhdGEtaW4tM2QifSwiY2FtZXJhIjp7InlhdyI6MC41NSwicGl0Y2giOjAuMywicm9sbCI6MCwiZGlzdGFuY2UiOjMuM319"
+                target="_blank"
+                rel="noopener"
                 >Open in the gallery<svg
                   class="arrow"
                   viewBox="0 0 16 16"
@@ -199,12 +201,14 @@
                 "
               ></span>
               <iframe
-                data-src="../../play/?toy=data-in-3d"
+                data-src="../../play/?toy=data-in-3d&sound=on"
                 title="Data in 3D, live: drag to turn it"
                 allow="fullscreen"
               ></iframe>
             </div>
-            <figcaption>Drag to turn it; tap to play.</figcaption>
+            <figcaption>
+              Drag to turn it; tap to play. The speaker button mutes the sound.
+            </figcaption>
           </figure>
         </div>
         <section class="toy-section" aria-labelledby="h-about">
@@ -229,44 +233,53 @@
             Built in your browser from a recipe, with the files credited below. Its recipe is in
             <a
               href="https://github.com/ryanjosephkamp/splashery/blob/main/src/packs/data-climate.js"
+              target="_blank"
+              rel="noopener"
               ><code>src/packs/data-climate.js</code></a
             >.
           </p>
           <ul class="toy-credits">
             <li>
               <b>Sample table</b>:
-              <a href="https://earthquake.usgs.gov/earthquakes/feed/v1.0/csv.php"
+              <a
+                href="https://earthquake.usgs.gov/earthquakes/feed/v1.0/csv.php"
+                target="_blank"
+                rel="noopener"
                 >Earthquakes of magnitude 4.5 and up, past 30 days (snapshot of October 5, 2026)</a
               >
               by U.S. Geological Survey,
               <a
                 href="https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
+                target="_blank"
+                rel="noopener"
                 >Public domain (U.S. government work)</a
               >.
             </li>
             <li>
               <b>Sample table</b>:
-              <a href="https://archive.ics.uci.edu/dataset/53/iris">Iris (Fisher, 1936)</a> by R. A.
-              Fisher; UCI Machine Learning Repository,
-              <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.
+              <a href="https://archive.ics.uci.edu/dataset/53/iris" target="_blank" rel="noopener"
+                >Iris (Fisher, 1936)</a
+              >
+              by R. A. Fisher; UCI Machine Learning Repository,
+              <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener"
+                >CC BY 4.0</a
+              >.
             </li>
             <li>
               <b>Sample table</b>:
-              <a href="https://gml.noaa.gov/ccgg/trends/data.html"
+              <a href="https://gml.noaa.gov/ccgg/trends/data.html" target="_blank" rel="noopener"
                 >Mauna Loa monthly mean CO2, May 1974 to August 2026 (snapshot of October 5,
                 2026)</a
               >
               by NOAA Global Monitoring Laboratory,
-              <a href="https://gml.noaa.gov/about/disclaimer.html"
+              <a href="https://gml.noaa.gov/about/disclaimer.html" target="_blank" rel="noopener"
                 >Public domain (U.S. government work)</a
               >.
             </li>
           </ul>
           <p class="note">
             Splashery's code is under the MIT license; each asset above keeps its own license. Every
-            credit is also in
-            <a href="https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md">CREDITS.md</a
-            >.
+            credit is also in <a href="../../about/credits/">CREDITS.md</a>.
           </p>
         </section>
         <section class="toy-section" aria-labelledby="h-share">
@@ -352,8 +365,9 @@ https://ryanjosephkamp.github.io/splashery/site/toys/data-in-3d/</textarea
             </button>
           </div>
           <p class="note">
-            Embeds are silent and turn slowly when idle. Every option is in the
-            <a href="https://github.com/ryanjosephkamp/splashery#embedding">embed guide</a>.
+            Embeds are silent and turn slowly when idle; add <code>&amp;sound=on</code> to the
+            iframe's link for the toy's tap sound, with a mute button. Every option is in the
+            <a href="../../share/">embed guide</a>.
           </p>
         </section>
         <section class="toy-section" aria-labelledby="h-related">
@@ -378,6 +392,30 @@ https://ryanjosephkamp.github.io/splashery/site/toys/data-in-3d/</textarea
             ></a>
           </div>
           <ul class="toy-grid">
+            <li class="toy-card" data-labs>
+              <a href="../../toys/barcodes/"
+                ><img
+                  src="../../../assets/toys/barcodes/thumb.webp"
+                  alt=""
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                /><span class="toy-name">Other barcodes <span class="badge">labs</span></span></a
+              >
+            </li>
+            <li class="toy-card" data-labs>
+              <a href="../../toys/chladni-cell/"
+                ><img
+                  src="../../../assets/toys/chladni-cell/thumb.webp"
+                  alt=""
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                /><span class="toy-name">Sound in a box <span class="badge">labs</span></span></a
+              >
+            </li>
             <li class="toy-card" data-labs>
               <a href="../../toys/chladni-plate/"
                 ><img
@@ -443,39 +481,15 @@ https://ryanjosephkamp.github.io/splashery/site/toys/data-in-3d/</textarea
               >
             </li>
             <li class="toy-card" data-labs>
-              <a href="../../toys/point-clouds/"
+              <a href="../../toys/qr-picture/"
                 ><img
-                  src="../../../assets/toys/point-clouds/thumb.webp"
+                  src="../../../assets/toys/qr-picture/thumb.webp"
                   alt=""
                   width="96"
                   height="96"
                   loading="lazy"
                   decoding="async"
-                /><span class="toy-name">Point clouds <span class="badge">labs</span></span></a
-              >
-            </li>
-            <li class="toy-card" data-labs>
-              <a href="../../toys/qr-code/"
-                ><img
-                  src="../../../assets/toys/qr-code/thumb.webp"
-                  alt=""
-                  width="96"
-                  height="96"
-                  loading="lazy"
-                  decoding="async"
-                /><span class="toy-name">QR code <span class="badge">labs</span></span></a
-              >
-            </li>
-            <li class="toy-card" data-labs>
-              <a href="../../toys/qr-damage/"
-                ><img
-                  src="../../../assets/toys/qr-damage/thumb.webp"
-                  alt=""
-                  width="96"
-                  height="96"
-                  loading="lazy"
-                  decoding="async"
-                /><span class="toy-name">QR damage lab <span class="badge">labs</span></span></a
+                /><span class="toy-name">Picture QR <span class="badge">labs</span></span></a
               >
             </li>
           </ul>
@@ -516,21 +530,27 @@ https://ryanjosephkamp.github.io/splashery/site/toys/data-in-3d/</textarea
         <nav aria-label="More">
           <h2>More</h2>
           <ul>
-            <li><a href="../../../">The gallery</a></li>
+            <li><a href="../../../" target="_blank" rel="noopener">The gallery</a></li>
             <li><a href="../../search/">Search</a></li>
             <li><a href="../../../manual/">The Tinkerer's Manual</a></li>
-            <li><a href="https://github.com/ryanjosephkamp/splashery">Source on GitHub</a></li>
+            <li>
+              <a href="https://github.com/ryanjosephkamp/splashery" target="_blank" rel="noopener"
+                >Source on GitHub</a
+              >
+            </li>
             <li><a href="../../share/">Embed and share</a></li>
             <li><a href="../../about/credits/">Credits</a></li>
+            <li><a href="../../about/contact/">Contact</a></li>
             <li><a href="../../about/privacy/">Privacy</a></li>
             <li><a href="../../about/terms/">Terms</a></li>
           </ul>
         </nav>
       </div>
       <p class="fine">
-        Code under the MIT license; each toy's assets keep their own licenses. Built on the
-        PlayCanvas engine. This is a preview of Splashery's new site; the toys live in
-        <a href="../../../">the gallery</a>.
+        Made by <a href="../../about/contact/">Ryan Kamp</a>. Code under the MIT license; each toy's
+        assets keep their own licenses. Built on the PlayCanvas engine. This is a preview of
+        Splashery's new site; the toys live in
+        <a href="../../../" target="_blank" rel="noopener">the gallery</a>.
       </p>
     </footer>
   </body>

@@ -63,6 +63,11 @@ export function createUI(app) {
     toySlider: $("toy-slider"), // lane Pages r6
     toySliderLabel: $("toy-slider-label"),
     toySliderInput: $("toy-slider-input"),
+    stageDial: $("stage-dial"), // Live r8
+    stageDialInput: $("stage-dial-input"),
+    stageDialLabel: $("stage-dial-label"),
+    stageDialHide: $("stage-dial-hide"),
+    stageDialShow: $("stage-dial-show"),
     tabs: $("tabs"),
     panes: $("panes"),
     shelf: $("shelf"),
@@ -644,6 +649,7 @@ export function createUI(app) {
       row.appendChild(input);
       els.toyOptions.appendChild(row);
     }
+    renderStageDial(info, recipe); // Live r8
     inputDrop = null;
     inputShown = null;
     if (recipe?.input) renderInputPanel(recipe.input);
@@ -2610,12 +2616,24 @@ export function createUI(app) {
   // ---- UI r3: the action button pauses and resumes a long effect ---------------------
   // While a long tap effect (a tune, a long demo) runs, the Toy tab's action
   // button reads Pause; while it is paused, Resume.
+  // Arcade r2: a game reports its own state, and the ▶ over the stage shows
+  // pause while the game plays (one button plays and pauses).
+  const playPath = els.handsPlay.querySelector("path");
+  const playD = playPath?.getAttribute("d");
   app.player?.on("frame", () => {
     const base = app.player.toyInfo?.recipe?.action?.label;
     if (!base) return;
-    const st = app.player.motion?.effectState?.();
+    const arc = app.player.arcade;
+    const st = arc?.effectState ? arc.effectState() : app.player.motion?.effectState?.();
     const label = st === "running" ? "Pause" : st === "paused" ? "Resume" : base;
     if (els.toyAction.textContent !== label) els.toyAction.textContent = label;
+    const pause = !!arc && st === "running";
+    if (playPath && els.handsPlay.dataset.pause !== String(pause)) {
+      els.handsPlay.dataset.pause = String(pause);
+      playPath.setAttribute("d", pause ? "M7 5.5h3.5v13H7zM13.5 5.5H17v13h-3.5z" : playD);
+      els.handsPlay.setAttribute("aria-label", pause ? "Pause" : "Play");
+      els.handsPlay.title = pause ? "Pause the game" : "Play (the toy's tap)";
+    }
   });
 
   // ---- A toy's labels (lane Anatomy) ------------------------------------------------
@@ -2644,6 +2662,16 @@ export function createUI(app) {
     for (const it of lg.items || []) {
       const li = document.createElement("li");
       li.textContent = it.text;
+      // Lane Powers of ten: a scale bar, `ruler: { size }` long in recipe
+      // units at the toy's center as the camera sees it now (at most the
+      // box's width), its text under it.
+      if (it.ruler) {
+        const bar = document.createElement("span");
+        bar.className = "toy-legend-ruler";
+        bar.style.width = `${Math.round(rulerPixels(it.ruler.size))}px`;
+        li.prepend(bar);
+        li.classList.add("ruler");
+      }
       if (it.head) li.classList.add("head");
       if (it.on) li.classList.add("on");
       if (it.dim) li.classList.add("dim");
@@ -2651,6 +2679,18 @@ export function createUI(app) {
     }
     legendBox.appendChild(list);
   });
+
+  // Lane Powers of ten: how many CSS pixels `size` recipe units span at the
+  // toy's center, across the screen.
+  function rulerPixels(size) {
+    const st = app.player.stage;
+    const s = app.player.proc?.ctx?.transform?.scale ?? 1;
+    const n = Number(size) * s;
+    if (!st?.toScreen || !(n > 0)) return 0;
+    const a = st.toScreen([0, 0, 0]);
+    const b = st.toScreen([n, 0, 0]);
+    return Math.min(140, Math.hypot(b[0] - a[0], b[1] - a[1]));
+  }
 
   // ---- The slider over the stage (lane Pages r6) ------------------------------------
   // A kit toy's drive() may set out.slider = { id, label, value } (value 0
@@ -2672,6 +2712,65 @@ export function createUI(app) {
   els.toySliderInput.addEventListener("input", () => {
     if (sliderId !== null)
       app.player.sliderInput(sliderId, Number(els.toySliderInput.value) / 1000);
+  });
+
+  // ---- The depth slider over the stage (lane Live r8) ------------------------------
+  // A kit toy's slider option marked `stage: true` (the Splat mirror's depth)
+  // also shows as a small vertical slider over the stage's right edge, page
+  // controls rather than splats. It sets the same option as the Toy tab's
+  // slider (on release, so the toy rebuilds once), and follows it. The ×
+  // hides it and a small button with its name brings it back; that choice is
+  // remembered on this device (one choice for every toy).
+  const DIAL_KEY = "splashery.stageDialHidden";
+  let dialOption = null;
+  let dialHide = false;
+  try {
+    dialHide = localStorage.getItem(DIAL_KEY) === "1";
+  } catch {
+    // No storage: shown, and a hide lasts this visit.
+  }
+  function setDialHidden(on) {
+    dialHide = on;
+    try {
+      if (on) localStorage.setItem(DIAL_KEY, "1");
+      else localStorage.removeItem(DIAL_KEY);
+    } catch {
+      // No storage: it still hides now.
+    }
+    showDial();
+  }
+  function showDial() {
+    els.stageDial.hidden = !dialOption || dialHide;
+    els.stageDialShow.hidden = !dialOption || !dialHide;
+    document.body.classList.toggle("has-stage-dial", !!dialOption);
+  }
+  function renderStageDial(info, recipe) {
+    const o = (recipe?.options || []).find((x) => x.stage && (x.type === "slider" || !x.type));
+    dialOption = o || null;
+    if (o) {
+      const input = els.stageDialInput;
+      input.min = String(o.min ?? 0);
+      input.max = String(o.max ?? 1);
+      input.step = String(o.step ?? 0.01);
+      input.value = String(info.options?.[o.key] ?? o.default);
+      input.setAttribute("aria-label", o.label);
+      els.stageDialLabel.textContent = o.label;
+      els.stageDialShow.textContent = o.label;
+      els.stageDialShow.setAttribute("aria-label", `Show the ${o.label.toLowerCase()} slider`);
+      els.stageDialHide.setAttribute("aria-label", `Hide the ${o.label.toLowerCase()} slider`);
+    }
+    showDial();
+  }
+  els.stageDialInput.addEventListener("change", () => {
+    if (dialOption) app.setToyOption(dialOption.key, Number(els.stageDialInput.value));
+  });
+  els.stageDialHide.addEventListener("click", () => {
+    setDialHidden(true);
+    els.stageDialShow.focus();
+  });
+  els.stageDialShow.addEventListener("click", () => {
+    setDialHidden(false);
+    els.stageDialInput.focus();
   });
 
   // ---- Toy help (lane Help) ---------------------------------------------------------

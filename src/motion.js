@@ -71,6 +71,10 @@ export class MotionDriver {
     this.addonU = null;
     this.out = null;
     this.sliderIn = null; // lane Pages r6: the stage slider's value
+    // Lane Powers of ten: the zoom gestures a recipe with `zoom: true` takes
+    // instead of the camera (info.zoom), and the toy's chunks (info.chunks).
+    this.zoomIn = { log: 0, n: 0, resets: 0 };
+    this.chunks = null;
     this.figures = []; // lane Pages r6: the scene's figure depths
     // UI r3: a long tap effect pauses on the next tap and resumes on the one
     // after (pausedAt is the clock time it paused at, pausedKey its control).
@@ -105,6 +109,17 @@ export class MotionDriver {
     this.pausedKey = null;
     this.unseen = null;
     this.sliderIn = null; // lane Pages r6
+    this.zoomIn = { log: 0, n: 0, resets: 0 }; // lane Powers of ten
+  }
+
+  // Lane Powers of ten: a zoom gesture (a pinch, the wheel, + and -) by
+  // `factor` (above 1 zooms out), for a recipe with zoom: true. Returns true
+  // (the camera keeps still).
+  takeZoom(factor) {
+    if (!(factor > 0) || !Number.isFinite(factor)) return true;
+    this.zoomIn.log += Math.log(factor);
+    this.zoomIn.n++;
+    return true;
   }
 
   // A rig's add-on (a small kit-built splat cloud with its own parts).
@@ -331,6 +346,11 @@ export class MotionDriver {
     // figure depths (toy.figures; a drive may hand back a new list in
     // out.figures, which the player keeps in the scene).
     about.slider = this.sliderIn;
+    // Lane Powers of ten: info.zoom = { log, n, resets }: the zoom gestures
+    // so far (log: the sum of their natural logs, above 0 out; n: how many;
+    // resets: Reset view presses), and info.chunks (src/chunks.js).
+    if (this.recipe?.zoom) about.zoom = { ...this.zoomIn };
+    if (this.chunks) about.chunks = this.chunks;
     about.figures = this.figures;
     // Lane Molecule viewer (engine): info.eye is where the camera stands in the
     // recipe's own frame, so a mark can face the camera (a measuring ring).

@@ -84,10 +84,25 @@ OR OTHER DEALINGS IN THE SOFTWARE.
   `ort-wasm-simd-threaded.mjs` and `ort-wasm-simd-threaded.wasm` (the WebAssembly build, without
   WebGPU), all unmodified. The license is copied to `vendor/onnxruntime-web/LICENSE`.
 - Loaded only when someone opens a photo in the Photo to 3D toy (a dynamic import in
-  `src/packs/photo-3d-depth.js`); never on the shelf or in an embed.
+  `src/packs/photo-3d-depth.js`), or a recording as their own song in Note Rider
+  (`src/packs/arcade-listen.js`); never on the shelf or in an embed.
 - Source: https://github.com/microsoft/onnxruntime
 - License: MIT (Copyright (c) Microsoft Corporation; the full text is in
   `vendor/onnxruntime-web/LICENSE`).
+
+## Basic Pitch note transcription model, ONNX (lane Arcade r2)
+
+- File: `vendor/basic-pitch/nmp.onnx` (230,444 bytes; SHA-256
+  `2c3c1d144bfa61ad236e92e169c13535c880469a12a047d4e73451f2c059a0ec`), the ICASSP 2022 model from
+  the `basic-pitch` 0.4.0 Python package (`basic_pitch/saved_models/icassp_2022/nmp.onnx`),
+  unmodified. Its license and NOTICE are copied to `vendor/basic-pitch/LICENSE` and
+  `vendor/basic-pitch/NOTICE`.
+- Loaded only when someone opens a recording as their own song in Note Rider (a dynamic import in
+  `src/packs/arcade-listen.js`, which runs it on the ONNX Runtime Web above); never on the shelf or
+  in an embed. The recording stays on the device.
+- Source: https://github.com/spotify/basic-pitch (Spotify AB)
+- License: Apache License 2.0 (the full text is in `vendor/basic-pitch/LICENSE`). The note decoding
+  in `src/packs/arcade-listen.js` follows the package's `note_creation.py` (Apache 2.0).
 
 ## Depth Anything V2 Small, quantized ONNX (lane Photo to 3D)
 
@@ -189,6 +204,18 @@ subject to the following conditions:
   `BarcodeDetector` doesn't read QR codes. The QR tests (`tests/qr.spec.mjs`) read the same copy.
 - License: Apache License 2.0 (checked on the npm package and the live repository page on October 3,
   2026; the full text is in `vendor/jsqr/LICENSE`).
+
+## ZXing for JavaScript 0.21.3 (lane QR craft)
+
+- Package: `@zxing/library@0.21.3` (file: `vendor/zxing-js/zxing.min.js`, the package's
+  `umd/index.min.js`, unchanged, 332 KB; the license is copied to `vendor/zxing-js/LICENSE`).
+- Source: https://github.com/zxing-js/library (the ZXing for JS authors, a port of ZXing).
+- Loaded only when the "Other barcodes" toy opens (labs), for its Data Matrix and Aztec writers and
+  to read its codes back. The same version is already a pinned devDependency (the QR scan lab's
+  reader).
+- License: Apache License 2.0 (the package's LICENSE file and the live repository's, checked on
+  October 6, 2026; the full text is in `vendor/zxing-js/LICENSE`). The package's `package.json` says
+  "MIT"; both are permissive and allowed here, and we follow the LICENSE file.
 
 ## pdf-lib 1.17.1 (lane PDF lab)
 
@@ -310,6 +337,10 @@ trained from them) is ours, and the models and textures they use keep their own 
   (`tools/fidelity/run-orrery.sh`). The version used is recorded in each run's report.
 - msplat (Apache-2.0), https://github.com/rayanht/msplat: the second choice of trainer on Apple
   Silicon, if Brush can't run.
+- GROOPH 0.4.0 (MIT, by the owner), https://www.npmjs.com/package/grooph: the command line
+  (`npx grooph@0.4.0`, run by `tools/site-loop.mjs`) draws the project's lane loop as an SVG for the
+  draft page "The loop a lane follows" (lane Site r2). Nothing of it is served; only the SVG it
+  wrote is, and the draft page links to the GROOPH app on the owner's own site.
 
 ## PDF motion audit build tools (Codex task 21; not shipped)
 

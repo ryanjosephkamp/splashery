@@ -1,0 +1,501 @@
+<!doctype html>
+<html lang="en" data-root="../../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Lane Sharpness: grain out of the renderer · Splashery</title>
+    <meta
+      name="description"
+      content="A lane's handoff file from the Splashery project, as it is in the repo: Sharpness."
+    />
+    <meta name="robots" content="noindex" />
+    <link
+      rel="canonical"
+      href="https://ryanjosephkamp.github.io/splashery/site/learn/notebook/sharpness/"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Splashery" />
+    <meta property="og:title" content="Lane Sharpness: grain out of the renderer · Splashery" />
+    <meta
+      property="og:description"
+      content="A lane's handoff file from the Splashery project, as it is in the repo: Sharpness."
+    />
+    <meta
+      property="og:url"
+      content="https://ryanjosephkamp.github.io/splashery/site/learn/notebook/sharpness/"
+    />
+    <meta
+      property="og:image"
+      content="https://ryanjosephkamp.github.io/splashery/site/assets/og.png"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="A strawberry made of soft 3D splats, beside the word Splashery"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#101010" />
+    <link rel="manifest" href="../../../manifest.webmanifest" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cg opacity='.92'%3E%3Cellipse cx='24' cy='26' rx='14' ry='11' fill='%23ff5fa2'/%3E%3Cellipse cx='40' cy='24' rx='12' ry='13' fill='%237bdff2'/%3E%3Cellipse cx='33' cy='41' rx='15' ry='11' fill='%23ffd166'/%3E%3C/g%3E%3C/svg%3E"
+    />
+    <link rel="apple-touch-icon" href="../../../../assets/app/icon-180.png" />
+    <script>
+      (function () {
+        var d = document.documentElement;
+        d.classList.add("js");
+        try {
+          var t = localStorage.getItem("splashery.site.theme");
+          if (t === "light" || t === "dark") d.dataset.theme = t;
+          var q = new URLSearchParams(location.search).get("labs");
+          if (q === "1") localStorage.setItem("splashery.labs", "1");
+          else if (q === "0") localStorage.removeItem("splashery.labs");
+          if (localStorage.getItem("splashery.labs") === "1") d.classList.add("labs");
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="stylesheet" href="../../../assets/site.css" />
+    <link rel="stylesheet" href="../../../assets/hubs.css" />
+    <link rel="stylesheet" href="../../../assets/outline.css" />
+    <script type="module" src="../../../assets/site.js"></script>
+    <script type="module" src="../../../assets/outline.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to the page</a>
+    <header class="site-header">
+      <div class="bar">
+        <a class="brand" href="../../../" aria-label="Splashery home"
+          ><svg class="logo" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true">
+            <g opacity=".92">
+              <ellipse cx="24" cy="26" rx="14" ry="11" fill="#ff5fa2" />
+              <ellipse cx="40" cy="24" rx="12" ry="13" fill="#7bdff2" />
+              <ellipse cx="33" cy="41" rx="15" ry="11" fill="#ffd166" />
+            </g></svg
+          ><span>Splashery</span></a
+        >
+        <a class="search-link" href="../../../search/" aria-label="Search"
+          ><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+            <circle
+              cx="10.5"
+              cy="10.5"
+              r="6.5"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            />
+            <path
+              d="m15.5 15.5 5 5"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            /></svg
+        ></a>
+        <button type="button" class="menu-button" aria-expanded="false" aria-controls="site-menu">
+          <span class="menu-icon" aria-hidden="true"></span><span class="menu-label">Menu</span>
+        </button>
+        <div class="menu" id="site-menu">
+          <nav aria-label="Site">
+            <ul>
+              <li><a href="../../../">Home</a></li>
+              <li><a href="../../../toys/">Toys</a></li>
+              <li><a href="../../../tools/">Tools</a></li>
+              <li><a href="../../../science/">Science</a></li>
+              <li><a href="../../../studio/">Studio</a></li>
+              <li><a href="../../../learn/" aria-current="page">Learn</a></li>
+              <li><a href="../../../new/">What's new</a></li>
+              <li><a href="../../../about/">About</a></li>
+            </ul>
+          </nav>
+          <form class="search-form" role="search" action="../../../search/" method="get">
+            <label class="visually-hidden" for="site-search">Search toys and pages</label>
+            <input
+              id="site-search"
+              type="search"
+              name="q"
+              placeholder="Search toys"
+              autocomplete="off"
+              enterkeyhint="search"
+            />
+            <button type="submit">Search</button>
+          </form>
+          <button type="button" class="theme-button" aria-label="Color theme: follows your device">
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+              <path d="M12 3a9 9 0 1 0 0 18V3z" fill="currentColor" />
+              <circle
+                cx="12"
+                cy="12"
+                r="8.25"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+              />
+            </svg>
+            <span class="theme-label">Auto</span>
+          </button>
+        </div>
+      </div>
+    </header>
+    <main id="main" tabindex="-1" data-outline>
+      <div class="page-intro">
+        <h1>Lane Sharpness: grain out of the renderer</h1>
+        <p class="lead">A lane's handoff file, exactly as the project keeps it.</p>
+      </div>
+      <p class="note"><a href="../../../learn/notebook/">Back to the lab notebook</a></p>
+      <nav class="toc" aria-label="On this page">
+        <h2>On this page</h2>
+        <ul>
+          <li>
+            <ul>
+              <li><a href="#brief">Brief</a></li>
+              <li><a href="#state">State</a></li>
+              <li><a href="#notes">Notes</a></li>
+              <li><a href="#known-issues">Known issues</a></li>
+              <li><a href="#for-the-operator">For the Operator</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <section class="md-file" aria-label="Lane Sharpness: grain out of the renderer">
+        <div class="prose">
+          <p>
+            Prefix <code>shp</code>. Branch <code>claude/lane-sharpness</code>. PR &quot;Engine:
+            sharper splats (labs switches and measurements)&quot;.
+          </p>
+          <h2 id="brief">Brief</h2>
+          <p>
+            (Written by the Operator on September 29, 2026, from the owner's marks and his message
+            that morning, and the second Lab round queued in WORKSTREAMS.md.)
+          </p>
+          <p>
+            The owner's words: &quot;I almost want to make things so incredible with this that
+            people won't even realize that they're looking at Gaussian splats … some of the stuff,
+            just, like, the resolution isn't great. It just looks grainy.&quot; This morning, on the
+            Worlds: &quot;still just a bit too grainy.&quot; On Books: &quot;The book itself (not
+            the pages) just seem a little bit blurry or grainy, especially around the edges.&quot;
+            On the blind toy piano, one maker's version was &quot;Too grainy&quot; and the other's
+            was not, from the same brief, so much of the grain is in how a toy is built. Lanes
+            Fidelity A and B fixed that side toy by toy (even placement, full opacity, full density,
+            clean colors) and the owner marked all of it good. Your lane is the other side: the
+            renderer and the engine settings every toy shares.
+          </p>
+          <p>
+            Find out what grain is left once a toy is built well, and take it out of the engine,
+            measured, behind switches first:
+          </p>
+          <ol>
+            <li>
+              <strong>Measure.</strong> Pick about ten toys the owner has called grainy or that
+              Fidelity A graded worst (docs/handoff/FidelityA.md, &quot;## Audit&quot;, on main
+              after #77 merges, or on claude/lane-fidelity-a), plus the book
+              (<code>your-book</code>), a Studio toy (<code>chladni-plate</code>) and, once lane
+              Worlds merges (#78), the test island. Render each at 390×844 with a device pixel ratio
+              of 2 and 3, the way <code>tools/lab-kernels.mjs</code> does (docs/lab/KERNELS.md), and
+              record edge width, speckle and shimmer, frame time and splats on screen. Say where the
+              grain comes from for each: the cull, the pixel-ratio cap, the adaptive drop in
+              resolution while frames are slow, the falloff, the tier's budget, or the toy's own
+              build.
+            </li>
+            <li>
+              <p>
+                <strong>The levers</strong>, each as a labs switch (off by default, on with
+                <code>?labs=1</code> and a URL switch, like <code>?kernel=sharp</code>):
+              </p>
+              <ul>
+                <li>
+                  the cull: <code>minPixelSize</code> and
+                  <code>minContribution</code> (src/stage.js; the engine skips splats under about 2
+                  screen pixels; Fidelity A found this hurts dense kit toys), per toy or globally;
+                </li>
+                <li>
+                  the pixel-ratio cap per tier (<code>PIXEL_RATIO</code> in src/player.js caps
+                  phones at 2; many phones are 3) and the adaptive drop (src/stage.js), for example
+                  holding full resolution while the toy is still and only dropping during a drag;
+                </li>
+                <li>
+                  the sharp kernel from lane Lab (<code>src/kernels.js</code>) on the toys with big,
+                  smooth splats, where Lab found a real win;
+                </li>
+                <li>
+                  anything else your measurements point to (a small sort or blend fix, a budget
+                  change on strong phones), as long as it stays additive and every other toy looks
+                  the same with the switches off.
+                </li>
+              </ul>
+            </li>
+            <li>
+              <strong>Show it.</strong> Before-and-after cards at 390×844 (&quot;built by Opus
+              5.5&quot;), lane record &quot;Sharpness&quot; on the Effect review page:
+              <code>shp-&lt;toy-id&gt;</code> for each measured toy (a still pair, plus a short turn
+              where shimmer matters), and <code>shp-summary</code> (a table as an image or text:
+              what each lever does and costs). Judge them as motion at phone size.
+            </li>
+            <li>
+              <strong>Propose.</strong> In &quot;For the Operator&quot;, say which levers should
+              become the default, for which toys or tiers, and at what cost in frame time and
+              battery. The owner decides what leaves labs; don't turn anything on by default for
+              public toys.
+            </li>
+          </ol>
+          <p>
+            Write down the method in docs/lab/SHARPNESS.md (like KERNELS.md), and your tests in
+            tests/shp.spec.mjs (each switch off leaves the renderer exactly as before; each switch
+            on changes what it should).
+          </p>
+          <h3 id="you-own">You own</h3>
+          <ul>
+            <li>
+              the render settings in <code>src/stage.js</code> (the culling, pixel ratio and
+              adaptive blocks) and <code>src/player.js</code> (<code>PIXEL_RATIO</code> and where it
+              is read), <code>src/kernels.js</code>, a new <code>tools/shp-measure.mjs</code> (or an
+              extension of <code>tools/lab-kernels.mjs</code>), docs/lab/SHARPNESS.md,
+              tests/shp.spec.mjs, your <code>shp-*</code> screenshots and docs/handoff/Sharpness.md.
+            </li>
+            <li>
+              Not the toy packs (Fidelity B and other lanes own toys), not
+              <code>src/worlds/</code> (lane Worlds owns it; say what the Worlds render should adopt
+              instead), not <code>src/pictures.js</code> (the picture engine).
+            </li>
+          </ul>
+          <p>
+            This is an &quot;Engine: …&quot; PR: additive, small in each file, with every switch off
+            by default. Lanes Worlds, Fidelity A, Fidelity B, the toy piano (maker B), Anatomy,
+            Pianos, Books and the Integrator run at the same time; leave their files alone. The
+            laptop is locked.
+          </p>
+          <h2 id="state">State</h2>
+          <p>Model: Opus 5.5 (claude-opus-5-5), default effort.</p>
+          <ul>
+            <li>
+              September 29, 2026: done and posted. The switches (src/sharpness.js, read in
+              src/player.js and applied in src/stage.js), tests in tests/shp.spec.mjs, the measuring
+              tool tools/shp-measure.mjs, the card tool tools/shp-cards.mjs and the method and
+              results in docs/lab/SHARPNESS.md. 14 toys and the test island measured on a local
+              checkout of main with Fidelity A (#77), Fidelity B (#90), Worlds (#78) and the toy
+              piano (maker B, #91) merged in (A and B have since merged to main).
+            </li>
+            <li>
+              Cards on the Effect review page, lane Sharpness: <code>shp-summary</code>,
+              <code>shp-&lt;toy id&gt;</code> for the 14 toys,
+              <code>shp-&lt;toy id&gt;-turn</code> for the sailboat, ocean liner, penguin and
+              Chladni plate, <code>shp-lamp-drop</code>, <code>shp-klein-bottle-drop</code> and
+              <code>shp-test-island</code>.
+            </li>
+            <li>
+              September 29, 2026, evening: the owner tried <code>?labs=1&amp;sharp=1</code> and said
+              &quot;sharp yes – looks noticeably better&quot;. The Operator made items 1 and 2 of
+              &quot;For the Operator&quot; the default for everyone on its own branch, stacked on
+              #107 (<code>claude/operator-sharp-defaults</code>): <code>PIXEL_RATIO</code> mid and
+              high 3, adapt &quot;drag&quot; (<code>SHARP_DEFAULT</code>), <code>?sharp=0</code> for
+              the renderer as before, and tests/shp.spec.mjs updated. #107 merges first.
+            </li>
+          </ul>
+          <h2 id="notes">Notes</h2>
+          <ul>
+            <li>
+              The switches, all labs only: <code>?cull=low|off|&lt;px&gt;</code>,
+              <code>?dpr=&lt;1–3&gt;|native</code>, <code>?adapt=drag</code>, <code>?aa=1</code>,
+              and <code>?sharp=1</code> (cull low, dpr native, adapt drag together). A recipe's
+              <code>render</code> field sets them for one toy; the URL wins.
+              <code>?kernel=sharp</code> is lane Lab's and works alongside.
+            </li>
+            <li>
+              With every switch off, <code>Stage.setSharpness(null)</code> returns before touching
+              anything, and <code>setPictureCulling</code> works as before (it now goes through
+              <code>applyCulling</code>, which gives the same values when no lever is on).
+            </li>
+            <li>
+              <code>setBusy</code> takes a second argument, whether the view is being dragged (the
+              camera or a paint stroke); only <code>adapt=drag</code> reads it.
+            </li>
+            <li>
+              WebGPU works in this container's Chromium (SwiftShader): the Klein bottle and the lamp
+              were measured on it too.
+            </li>
+            <li>
+              The software renderer's frame times are relative only; the phone is the real test of
+              cost.
+            </li>
+          </ul>
+          <h2 id="known-issues">Known issues</h2>
+          <ul>
+            <li>
+              The CPU estimate of culled splats counts splats hidden under others too, so it
+              overstates what the cull takes off the screen (the Klein bottle: 23% estimated on
+              WebGPU, no visible change).
+            </li>
+            <li>
+              The frame times come from SwiftShader, which is not fill-bound the way a phone GPU is;
+              the 3x cost on a real phone is likely higher for toys than measured here.
+            </li>
+            <li>
+              <code>?adapt=drag</code> means a slow phone may drop below 40 frames a second while a
+              toy plays on its own.
+            </li>
+          </ul>
+          <h2 id="for-the-operator">For the Operator</h2>
+          <p>Proposal for the owner (nothing is on by default; he decides what leaves labs):</p>
+          <ol>
+            <li>
+              <strong>Lift the pixel-ratio cap to 3 on the mid and high tiers</strong> (<code
+                >PIXEL_RATIO = { low: 1.5, mid: 3, high: 3, max: 3 }</code
+              >, still capped by the device's own ratio). The biggest and simplest win: every toy's
+              edges about a third narrower on a 3x phone, speckle down 10–60%, shimmer down 15–45%.
+              Cost: 2.25 times the pixels on a 3x phone; a toy is mostly per-splat work and stays
+              smooth on a recent phone, and the adaptive drop still catches a phone that can't keep
+              up. Battery: more GPU work per frame, but the player renders on demand (nothing is
+              drawn while a toy is still), so it costs only while something moves.
+            </li>
+            <li>
+              <strong>Make <code>adapt=drag</code> the default.</strong> Today a slow phone draws at
+              two-thirds resolution whenever anything moves, including the idle sway, which is where
+              toys look grainiest (and on WebGPU the cull then drops most of a toy's splats). Cost:
+              a slow phone's frame rate while a toy plays on its own; the tier step-down after slow
+              frames still happens during drags.
+            </li>
+            <li>
+              <strong>Leave the cull as it is</strong> globally (no visible gain at a toy's home
+              view). Lane Pictures' lower cull for pages stays.
+            </li>
+            <li>
+              <strong>The sharp kernel stays per toy</strong>:
+              <code>kernel: &quot;sharp&quot;</code> in a recipe for toys with big, smooth splats
+              (the splat equation toy, the math surfaces), and possibly the clock, the toy piano and
+              the book (small gains measured). Not the marble.
+            </li>
+            <li>
+              <strong>No budget change</strong>: more splats per toy made nothing sharper and
+              several toys shimmer more.
+            </li>
+            <li>
+              <strong>Worlds</strong> (lane Worlds owns src/worlds/): <code>WorldView</code> caps
+              the ratio at 2 (<code>Math.min(devicePixelRatio, 2)</code> in render.js). At 3x the
+              test island's edges go 0.73 → 0.53 and its ground speckle 0.16 → 0.10, but its frame
+              time about doubles (a world is fill-bound). Adopt 3x only on the high and max world
+              tiers, or with an adaptive drop during movement (the world page has none today). The
+              cull made no difference there.
+            </li>
+            <li>
+              <strong>What is left is the toys' build</strong>: the Chladni plate's sand, the white
+              blood cell's membrane, the Klein bottle's textured tube, the American football's
+              leather noise, the marble's glass, the sailboat's dark hull flecks and the book's
+              frayed cover edge. Items for a fidelity lane.
+            </li>
+            <li>
+              <p>
+                <strong>The owner's marks of September 29, 2026</strong>: 18 of 22 cards
+                &quot;good&quot; (the summary included); four &quot;fix&quot;. None is the
+                renderer's; each needs the lane that owns the toy (not this lane's files), so they
+                wait on the Operator:
+              </p>
+              <ul>
+                <li>
+                  <code>shp-clock</code>, &quot;The minute and hour hands on the clock aren't fully
+                  visible&quot;: the hands sit 1 to 3 cm above the dial (<code>hand()</code> in
+                  src/packs/objects.js: <code>zf + 0.01</code>, <code>0.02</code>,
+                  <code>0.03</code>), so from the home view the dial's big, flat splats sort in
+                  front of a hand pointing up and to the right. Reproduced at 1:52 (the hour hand
+                  vanishes, both at 2x and 3x). Lifting them to <code>0.04</code>,
+                  <code>0.055</code> and <code>0.07</code> shows the hand (tested locally, not
+                  committed). A small fix in the clock's recipe for whichever lane owns objects.js
+                  now; this lane can make it if the Operator says so.
+                </li>
+                <li>
+                  <code>shp-marble</code>, &quot;I can barely see the marble's glass spherical
+                  shape&quot;: the glass shell is a faint, nearly white cloud on a white background
+                  at any ratio; the build needs a visible rim (a brighter, more opaque edge where
+                  the shell turns away).
+                </li>
+                <li>
+                  <code>shp-your-book</code>, &quot;Background rectangle still looks too grainy. The
+                  border/edges aren't straight&quot;: the cover's edge splats are placed loosely (a
+                  frayed edge at any ratio). A build fix for the book's cover (lane Books or
+                  Pictures).
+                </li>
+                <li>
+                  <code>shp-test-island</code>, &quot;The person, however, doesn't look right … a
+                  polished video game character&quot;: the character's build (lane Worlds or its
+                  Character lane).
+                </li>
+              </ul>
+            </li>
+            <li>
+              For the backlog: a toy recipe's <code>render: { cull, dpr, adapt, aa }</code> (labs
+              only) lets a lane try the levers per toy.
+            </li>
+          </ol>
+        </div>
+      </section>
+      <p class="note">
+        This page is built from
+        <a
+          data-source
+          href="https://github.com/ryanjosephkamp/splashery/blob/main/docs/handoff/Sharpness.md"
+          target="_blank"
+          rel="noopener"
+          >docs/handoff/Sharpness.md</a
+        >
+        each time the site is built, so it always matches them.
+      </p>
+    </main>
+    <footer class="site-footer">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="brand" href="../../../"
+            ><svg class="logo" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true">
+              <g opacity=".92">
+                <ellipse cx="24" cy="26" rx="14" ry="11" fill="#ff5fa2" />
+                <ellipse cx="40" cy="24" rx="12" ry="13" fill="#7bdff2" />
+                <ellipse cx="33" cy="41" rx="15" ry="11" fill="#ffd166" />
+              </g></svg
+            ><span>Splashery</span></a
+          >
+          <p>
+            splats you can play with. Free, in your browser, with nothing to install; files you open
+            stay on your device.
+          </p>
+        </div>
+        <nav aria-label="Explore">
+          <h2>Explore</h2>
+          <ul>
+            <li><a href="../../../">Home</a></li>
+            <li><a href="../../../toys/">Toys</a></li>
+            <li><a href="../../../tools/">Tools</a></li>
+            <li><a href="../../../science/">Science</a></li>
+            <li><a href="../../../studio/">Studio</a></li>
+            <li><a href="../../../learn/">Learn</a></li>
+            <li><a href="../../../new/">What's new</a></li>
+            <li><a href="../../../about/">About</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="More">
+          <h2>More</h2>
+          <ul>
+            <li><a href="../../../../" target="_blank" rel="noopener">The gallery</a></li>
+            <li><a href="../../../search/">Search</a></li>
+            <li><a href="../../../../manual/">The Tinkerer's Manual</a></li>
+            <li>
+              <a href="https://github.com/ryanjosephkamp/splashery" target="_blank" rel="noopener"
+                >Source on GitHub</a
+              >
+            </li>
+            <li><a href="../../../share/">Embed and share</a></li>
+            <li><a href="../../../about/credits/">Credits</a></li>
+            <li><a href="../../../about/contact/">Contact</a></li>
+            <li><a href="../../../about/privacy/">Privacy</a></li>
+            <li><a href="../../../about/terms/">Terms</a></li>
+          </ul>
+        </nav>
+      </div>
+      <p class="fine">
+        Made by <a href="../../../about/contact/">Ryan Kamp</a>. Code under the MIT license; each
+        toy's assets keep their own licenses. Built on the PlayCanvas engine. This is a preview of
+        Splashery's new site; the toys live in
+        <a href="../../../../" target="_blank" rel="noopener">the gallery</a>.
+      </p>
+    </footer>
+  </body>
+</html>

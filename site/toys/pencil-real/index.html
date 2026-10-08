@@ -162,6 +162,8 @@
               <a
                 class="button primary"
                 href="../../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBlbmNpbC1yZWFsIn0sImNhbWVyYSI6eyJ5YXciOjAuMzUsInBpdGNoIjowLjU1LCJyb2xsIjowLCJkaXN0YW5jZSI6NC4yfX0"
+                target="_blank"
+                rel="noopener"
                 >Open in the gallery<svg
                   class="arrow"
                   viewBox="0 0 16 16"
@@ -190,13 +192,15 @@
                 "
               ></span>
               <iframe
-                src="../../play/?toy=pencil-real"
+                src="../../play/?toy=pencil-real&sound=on"
                 title="Real pencil, live: drag to turn it"
                 loading="eager"
                 allow="fullscreen"
               ></iframe>
             </div>
-            <figcaption>Drag to turn it; tap to play.</figcaption>
+            <figcaption>
+              Drag to turn it; tap to play. The speaker button mutes the sound.
+            </figcaption>
           </figure>
         </div>
         <section class="toy-section" aria-labelledby="h-about">
@@ -212,24 +216,38 @@
             slows to a stop where it began. Under Look in the Toy tab, pick yellow, red, blue,
             green, black, plain wood or the original scan.
           </p>
+          <p class="learn-more">
+            Learn more:
+            <a href="https://en.wikipedia.org/wiki/Pencil" target="_blank" rel="noopener"
+              >Pencil on Wikipedia</a
+            >
+          </p>
         </section>
 
         <section class="toy-section" aria-labelledby="h-credits">
           <h2 id="h-credits">Sources and credits</h2>
           <p>
             A real object, captured from photos and drawn with 3D Gaussian splats. Its recipe is in
-            <a href="https://github.com/ryanjosephkamp/splashery/blob/main/src/rigs.js"
+            <a
+              href="https://github.com/ryanjosephkamp/splashery/blob/main/src/rigs.js"
+              target="_blank"
+              rel="noopener"
               ><code>src/rigs.js</code></a
             >.
           </p>
           <ul class="toy-credits">
             <li>
               <b>Scan</b>:
-              <a href="https://commons.wikimedia.org/wiki/File:Kleiner_Bleistift_(40045317711).jpg"
+              <a
+                href="https://commons.wikimedia.org/wiki/File:Kleiner_Bleistift_(40045317711).jpg"
+                target="_blank"
+                rel="noopener"
                 >Kleiner Bleistift</a
               >
-              by Tim Reckmann, <a href="https://creativecommons.org/licenses/by/2.0/">CC BY 2.0</a>.
-              Made into 3D Gaussian splats from this one photo with the TRELLIS image-to-3D model
+              by Tim Reckmann,
+              <a href="https://creativecommons.org/licenses/by/2.0/" target="_blank" rel="noopener"
+                >CC BY 2.0</a
+              >. Made into 3D Gaussian splats from this one photo with the TRELLIS image-to-3D model
               (MIT), recentred and scaled. Painted as a classic yellow pencil (yellow body, silver
               ferrule, pink eraser, a plain HB mark) over the scan's own shading; other colors,
               plain wood and the bare scan are in Look.
@@ -237,9 +255,7 @@
           </ul>
           <p class="note">
             Splashery's code is under the MIT license; each asset above keeps its own license. Every
-            credit is also in
-            <a href="https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md">CREDITS.md</a
-            >.
+            credit is also in <a href="../../about/credits/">CREDITS.md</a>.
           </p>
         </section>
         <section class="toy-section" aria-labelledby="h-share">
@@ -325,8 +341,9 @@ https://ryanjosephkamp.github.io/splashery/site/toys/pencil-real/</textarea
             </button>
           </div>
           <p class="note">
-            Embeds are silent and turn slowly when idle. Every option is in the
-            <a href="https://github.com/ryanjosephkamp/splashery#embedding">embed guide</a>.
+            Embeds are silent and turn slowly when idle; add <code>&amp;sound=on</code> to the
+            iframe's link for the toy's tap sound, with a mute button. Every option is in the
+            <a href="../../share/">embed guide</a>.
           </p>
         </section>
         <section class="toy-section" aria-labelledby="h-related">
@@ -485,21 +502,27 @@ https://ryanjosephkamp.github.io/splashery/site/toys/pencil-real/</textarea
         <nav aria-label="More">
           <h2>More</h2>
           <ul>
-            <li><a href="../../../">The gallery</a></li>
+            <li><a href="../../../" target="_blank" rel="noopener">The gallery</a></li>
             <li><a href="../../search/">Search</a></li>
             <li><a href="../../../manual/">The Tinkerer's Manual</a></li>
-            <li><a href="https://github.com/ryanjosephkamp/splashery">Source on GitHub</a></li>
+            <li>
+              <a href="https://github.com/ryanjosephkamp/splashery" target="_blank" rel="noopener"
+                >Source on GitHub</a
+              >
+            </li>
             <li><a href="../../share/">Embed and share</a></li>
             <li><a href="../../about/credits/">Credits</a></li>
+            <li><a href="../../about/contact/">Contact</a></li>
             <li><a href="../../about/privacy/">Privacy</a></li>
             <li><a href="../../about/terms/">Terms</a></li>
           </ul>
         </nav>
       </div>
       <p class="fine">
-        Code under the MIT license; each toy's assets keep their own licenses. Built on the
-        PlayCanvas engine. This is a preview of Splashery's new site; the toys live in
-        <a href="../../../">the gallery</a>.
+        Made by <a href="../../about/contact/">Ryan Kamp</a>. Code under the MIT license; each toy's
+        assets keep their own licenses. Built on the PlayCanvas engine. This is a preview of
+        Splashery's new site; the toys live in
+        <a href="../../../" target="_blank" rel="noopener">the gallery</a>.
       </p>
     </footer>
   </body>

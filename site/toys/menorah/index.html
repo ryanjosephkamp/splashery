@@ -162,6 +162,8 @@
               <a
                 class="button primary"
                 href="../../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im1lbm9yYWgifSwiY2FtZXJhIjp7InlhdyI6MC4zLCJwaXRjaCI6MC4xOCwicm9sbCI6MCwiZGlzdGFuY2UiOjQuNn19"
+                target="_blank"
+                rel="noopener"
                 >Open in the gallery<svg
                   class="arrow"
                   viewBox="0 0 16 16"
@@ -188,13 +190,15 @@
                 style="background-image: url(&quot;../../../assets/toys/menorah/thumb.webp&quot;)"
               ></span>
               <iframe
-                src="../../play/?toy=menorah"
+                src="../../play/?toy=menorah&sound=on"
                 title="Menorah, live: drag to turn it"
                 loading="eager"
                 allow="fullscreen"
               ></iframe>
             </div>
-            <figcaption>Drag to turn it; tap to play.</figcaption>
+            <figcaption>
+              Drag to turn it; tap to play. The speaker button mutes the sound.
+            </figcaption>
           </figure>
         </div>
         <section class="toy-section" aria-labelledby="h-about">
@@ -210,6 +214,12 @@
             The menorah starts with every candle lit. Tap to put them out, and tap again to light
             them: the helper candle first, then the others one by one.
           </p>
+          <p class="learn-more">
+            Learn more:
+            <a href="https://en.wikipedia.org/wiki/Hanukkah_menorah" target="_blank" rel="noopener"
+              >Hanukkah menorah on Wikipedia</a
+            >
+          </p>
         </section>
 
         <section class="toy-section" aria-labelledby="h-credits">
@@ -217,16 +227,17 @@
           <p>
             Built in your browser from a recipe and a seed: nothing in it comes from outside files.
             Its recipe is in
-            <a href="https://github.com/ryanjosephkamp/splashery/blob/main/src/packs/holidays.js"
+            <a
+              href="https://github.com/ryanjosephkamp/splashery/blob/main/src/packs/holidays.js"
+              target="_blank"
+              rel="noopener"
               ><code>src/packs/holidays.js</code></a
             >.
           </p>
 
           <p class="note">
             Splashery's code is under the MIT license; each asset above keeps its own license. Every
-            credit is also in
-            <a href="https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md">CREDITS.md</a
-            >.
+            credit is also in <a href="../../about/credits/">CREDITS.md</a>.
           </p>
         </section>
         <section class="toy-section" aria-labelledby="h-share">
@@ -312,8 +323,9 @@ https://ryanjosephkamp.github.io/splashery/site/toys/menorah/</textarea
             </button>
           </div>
           <p class="note">
-            Embeds are silent and turn slowly when idle. Every option is in the
-            <a href="https://github.com/ryanjosephkamp/splashery#embedding">embed guide</a>.
+            Embeds are silent and turn slowly when idle; add <code>&amp;sound=on</code> to the
+            iframe's link for the toy's tap sound, with a mute button. Every option is in the
+            <a href="../../share/">embed guide</a>.
           </p>
         </section>
         <section class="toy-section" aria-labelledby="h-related">
@@ -460,21 +472,27 @@ https://ryanjosephkamp.github.io/splashery/site/toys/menorah/</textarea
         <nav aria-label="More">
           <h2>More</h2>
           <ul>
-            <li><a href="../../../">The gallery</a></li>
+            <li><a href="../../../" target="_blank" rel="noopener">The gallery</a></li>
             <li><a href="../../search/">Search</a></li>
             <li><a href="../../../manual/">The Tinkerer's Manual</a></li>
-            <li><a href="https://github.com/ryanjosephkamp/splashery">Source on GitHub</a></li>
+            <li>
+              <a href="https://github.com/ryanjosephkamp/splashery" target="_blank" rel="noopener"
+                >Source on GitHub</a
+              >
+            </li>
             <li><a href="../../share/">Embed and share</a></li>
             <li><a href="../../about/credits/">Credits</a></li>
+            <li><a href="../../about/contact/">Contact</a></li>
             <li><a href="../../about/privacy/">Privacy</a></li>
             <li><a href="../../about/terms/">Terms</a></li>
           </ul>
         </nav>
       </div>
       <p class="fine">
-        Code under the MIT license; each toy's assets keep their own licenses. Built on the
-        PlayCanvas engine. This is a preview of Splashery's new site; the toys live in
-        <a href="../../../">the gallery</a>.
+        Made by <a href="../../about/contact/">Ryan Kamp</a>. Code under the MIT license; each toy's
+        assets keep their own licenses. Built on the PlayCanvas engine. This is a preview of
+        Splashery's new site; the toys live in
+        <a href="../../../" target="_blank" rel="noopener">the gallery</a>.
       </p>
     </footer>
   </body>

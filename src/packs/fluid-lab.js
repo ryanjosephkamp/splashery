@@ -15,6 +15,7 @@
 
 import { mix, shade } from "../kit.js";
 import { PHONE_ENV, HINT, envelopeOn, isPhone } from "../fluids/phone.js";
+import { TOYS } from "../toys.js"; // Fix9: the way back
 
 const UNIT = 0.33;
 const TAP_SECS = 5;
@@ -36,6 +37,99 @@ const NOZZLE = [-0.06, 1.72, 0];
 
 // Which scene the last build made, for the tap's sound.
 const LAB = { scene: "glass", tapN: 0 };
+
+// Fix9 (the owner's walkthrough, October 6, 2026): on a phone that can't keep up, a short,
+// plain warning before it stalls. The lab times its frames for its first second (after a
+// quarter second to settle); if the typical frame takes longer than SLOW_MS, the warning
+// offers a lighter mode (the lowest tier) or a way back to the first toy. Once per build.
+const SLOW_MS = 50; // under 20 frames a second
+const WATCH = { t0: 0, last: 0, gaps: [], done: false, quiet: false }; // quiet: "Keep going"
+function watchFrames(now) {
+  if (WATCH.done || WATCH.quiet) return;
+  if (!WATCH.t0) WATCH.t0 = now;
+  const age = now - WATCH.t0;
+  if (WATCH.last && age > 250) WATCH.gaps.push(now - WATCH.last);
+  WATCH.last = now;
+  if (age < 1250) return;
+  WATCH.done = true;
+  const g = WATCH.gaps.slice().sort((a, b) => a - b);
+  const typical = g.length ? g[Math.floor(g.length / 2)] : Infinity;
+  if (typical > SLOW_MS) slowWarning();
+}
+function param(name) {
+  try {
+    return new URLSearchParams(location.search).get(name);
+  } catch {
+    return null;
+  }
+}
+// The warning (styled as the link box; ?slow=1 shows it on any device, for tests).
+export function slowWarning() {
+  if (typeof document === "undefined") return null;
+  const app = window.__splashery?.app;
+  let bar = document.getElementById("fluid-slow");
+  if (!bar) {
+    bar = document.createElement("div");
+    bar.id = "fluid-slow";
+    bar.className = "link-confirm";
+    bar.setAttribute("role", "alertdialog");
+    bar.setAttribute("aria-label", "This lab is slow here");
+    const text = document.createElement("p");
+    text.className = "link-confirm-text";
+    text.textContent = "This lab is running slowly on this phone.";
+    const more = document.createElement("p");
+    more.className = "link-confirm-url";
+    const row = document.createElement("div");
+    row.className = "button-row";
+    const lighter = document.createElement("button");
+    lighter.type = "button";
+    lighter.className = "primary";
+    lighter.id = "fluid-slow-lighter";
+    lighter.textContent = "Lighter";
+    const back = document.createElement("button");
+    back.type = "button";
+    back.id = "fluid-slow-back";
+    back.textContent = "Leave the lab";
+    const keep = document.createElement("button");
+    keep.type = "button";
+    keep.id = "fluid-slow-keep";
+    keep.textContent = "Keep going";
+    const close = () => (bar.hidden = true);
+    lighter.addEventListener("click", async () => {
+      close();
+      // The lowest tier for this visit (fewer splats, a smaller picture); the toy is built again
+      // in the same view. Detail's own choices are untouched.
+      const a = window.__splashery?.app;
+      const p = a?.player;
+      if (!p?.setProfile("low")) return;
+      const cam = p.camera.getState();
+      await a.loadToy(p.scene.toy);
+      p.camera.setState(cam, { snap: true });
+      a.updateRenderInfo?.();
+    });
+    back.addEventListener("click", () => {
+      close();
+      window.__splashery?.app?.chooseToy(TOYS[0].id);
+    });
+    keep.addEventListener("click", () => {
+      close();
+      WATCH.quiet = true;
+    });
+    bar.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") close();
+    });
+    row.append(lighter, back, keep);
+    bar.append(text, more, row);
+    document.body.appendChild(bar);
+  }
+  const low = app?.player?.profile === "low";
+  bar.querySelector(".link-confirm-url").textContent = low
+    ? "It is already at its lightest. Try it on a computer, or leave the lab."
+    : "Lighter draws it with fewer splats, in a smaller picture.";
+  bar.querySelector("#fluid-slow-lighter").hidden = low;
+  bar.hidden = false;
+  return bar;
+}
 
 // ---- Shared pieces ------------------------------------------------------------------------
 
@@ -372,6 +466,10 @@ export const RECIPES = {
     controls: [{ key: "go", label: "Pour, drop or blow", type: "pulse", ease: TAP_SECS }],
     action: { key: "go", label: "Pour, drop or blow", quiet: ["go"] },
     drive(t, c, out, info) {
+      // Fix9: a phone that can't keep up hears about it in the first second.
+      // (?slow=1 plays a phone at 8 frames a second, for tests.)
+      const slow = param("slow") === "1";
+      if (isPhone() || slow) watchFrames(slow ? (WATCH.last || 1) + 125 : performance.now());
       const d = info.data || {};
       const n = info.tap?.n ?? 0;
       // Seconds since the last tap (99: none yet, or long ago).
@@ -417,6 +515,7 @@ export const RECIPES = {
     build(k, o) {
       const scene = ["glass", "splash", "candle", "cup"].includes(o.scene) ? o.scene : "glass";
       LAB.scene = scene;
+      Object.assign(WATCH, { t0: 0, last: 0, gaps: [], done: false });
       if (scene === "glass") glassScene(k, o);
       else if (scene === "splash") splashScene(k, o);
       else if (scene === "candle") candleScene(k, o);

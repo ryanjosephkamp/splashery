@@ -727,7 +727,7 @@ export const TOY_HELP = {
     howTo:
       "Tap a tile to lift its sample and facts; tap the sample to turn it, its tile to set it back.",
     about:
-      "Every element as a real sample: lumps of metal, crystals, liquids and glowing gases in sealed glass. Each sample is an open photo of the real thing, cut out and raised in 3D by a depth model. The front is real; the depth is an estimate, and the back of a lifted sample is a darker mirror of its front.\n\nTap a tile and its sample lifts out and turns toward you, with its facts from PubChem: mass, group and period, state, density, melting and boiling points, discovery and uses. Tap the sample to turn it, or its tile to set it back. About 27 elements have no photo of a real sample, because the heaviest exist only a few atoms at a time; their tiles are hatched. Photos: Images of Elements (CC BY 3.0) and Wikimedia Commons.",
+      "Every element as a real sample: lumps of metal, crystals, liquids and glowing gases in sealed glass. Each sample is an open photo of the real thing, cut out and raised in 3D by a depth model. The front is real; the depth is an estimate, and the back of a lifted sample is made up from its own colors.\n\nTap a tile and its sample lifts out and turns toward you, with its facts from PubChem: mass, group and period, state, density, melting and boiling points, discovery and uses. Tap the sample to turn it, or its tile to set it back. 26 elements have no photo of a real sample, as the heaviest exist only a few atoms at a time; their hatched tiles show a stand-in. Photos: Images of Elements (CC BY 3.0) and Wikimedia Commons.",
   },
 
   "crystal-lattice": {
@@ -1139,7 +1139,7 @@ export const TOY_HELP = {
     howTo:
       "Pull a cherry out on its stem and let go; it swings back and knocks the other. Tap to swing them.",
     about:
-      "Cherries are small, round fruits that grow on trees, often in pairs whose long stems are joined at the top. Each cherry has one hard stone in the middle with the seed inside, so it is called a stone fruit, like a plum or a peach.\n\nPull a cherry out on its stem and let go: it swings back and knocks the other one, which swings out in turn, until they settle. Tap it and a flick swings the two cherries apart on their own stems. They swing back and knock together with a plink, bouncing apart again and again until they settle, while the joint of the stems bobs.",
+      "Cherries are small, round fruits that grow on trees, often in pairs whose long stems are joined at the top. Each cherry has one hard stone in the middle with the seed inside, so it is called a stone fruit, like a plum or a peach.\n\nPull a cherry out on its stem and let go: it swings back and knocks the other one, which swings out in turn, until they settle. Tap it and they swing like a small Newton's cradle, at their real speed: one cherry is flicked out, swings back and knocks the other out, which swings back and knocks the first, with a plink each time, until the swing dies away. A cherry on a stem about 4.5 cm long swings to and fro in under half a second.",
   },
   grapes: {
     howTo: "Tap it: grapes drop off the bunch, bounce and hop back.",
@@ -1308,7 +1308,7 @@ export const TOY_HELP = {
   "soda-can": {
     howTo: "Tap it to shake the can and pop it open.",
     about:
-      "A soda can holds a drink with carbon dioxide gas dissolved in it under pressure. Shaking the can makes lots of tiny bubbles, and when the ring pull opens it the pressure drops at once, so the gas rushes out of the drink and carries foam with it.\n\nThis can is made from a detailed 3D model of a real one, with a plain orange label. Tap it and it shakes, the ring pull levers up with a crack, and a jet of foam sprays out while drops spatter around it, then the tab folds back and the foam fizzes away.",
+      "A soda can holds a drink with carbon dioxide gas dissolved in it under pressure. Shaking the can makes lots of tiny bubbles, and when the ring pull opens it the pressure drops at once, so the gas rushes out of the drink and carries foam with it.\n\nThis can is made from a detailed 3D model of a real one, with a plain orange label. Tap it and it shakes, the ring pull levers up with a crack, and a jet of foam sprays out while drops spatter around it, then the suds spill over the rim and run down the can before they fade, and the tab folds back.",
   },
   "running-shoe": {
     howTo: "Tap it to untie the laces and tie them again, then watch it tap its toe.",
@@ -1460,7 +1460,7 @@ export const TOY_HELP = {
   mobius: {
     howTo: "Tap to send the rider round. Pick a rider in the Toy tab.",
     about:
-      "A Möbius strip is a loop with a half twist in it. It has only one side and only one edge: a line drawn along its middle comes back to where it started without ever crossing an edge. It is named after August Möbius, who wrote about it in the 1850s. You can make one from a strip of paper and some tape.\n\nTap it and the rider goes along the middle of the band. After one lap it is underneath where it started, and after two it is back on top. Pick a race car, a beach ball, a duck on a bike or an ant in the Toy tab. Pick its colors and glow in the Toy tab too.",
+      "A Möbius strip is a loop with a half twist in it. It has only one side and only one edge: a line drawn along its middle comes back to where it started without ever crossing an edge. It is named after August Möbius, who wrote about it in the 1850s. You can make one from a strip of paper and some tape.\n\nTap it and the rider goes along the middle of the band. After one lap it is underneath where it started, and after two it is back on top. Pick a race car, a beach ball, a duck on a bike, an ant, a toy train, a ladybug or a skateboard in the Toy tab, each with its own sound, and a rider color. Pick the band's colors and glow there too.",
   },
   "klein-bottle": {
     howTo: "Tap to send water through. Set the glow in the Toy tab.",
@@ -1475,7 +1475,7 @@ export const TOY_HELP = {
   hypercube: {
     howTo: "Tap to turn it inside out. Try the 4D turn slider in the Toy tab.",
     about:
-      "A hypercube, or tesseract, is a cube in four dimensions. A square has 4 corners and a cube has 8; a tesseract has 16 corners and 32 edges, and its sides are 8 cubes. We can't see four dimensions, so this toy shows its shadow in our three: a cube inside a cube, with their corners joined.\n\nAt rest it rocks gently in 4D. Tap it to turn it once around through the fourth dimension: the pink inner cube swells out to become the outer one while the blue one folds inside, then it turns on back to where it started. Every edge stays perfectly straight the whole time. The 4D turn slider changes the strength of its gentle resting rotation.",
+      "A hypercube, or tesseract, is a cube in four dimensions. A square has 4 corners and a cube has 8; a tesseract has 16 corners and 32 edges, and its sides are 8 cubes. We can't see four dimensions, so this toy shows its shadow in our three: a cube inside a cube, with their corners joined.\n\nAt rest it rocks gently in 4D. Tap it to turn it once around through the fourth dimension: the pink inner cube swells out to become the outer one while the blue one folds inside, then it turns on back to where it started. Every edge stays perfectly straight the whole time. The 4D turn slider changes the strength of its gentle resting rotation, and Colors picks a theme.",
   },
   "torus-knot": {
     howTo:
@@ -1491,7 +1491,7 @@ export const TOY_HELP = {
   mandelbulb: {
     howTo: "Tap it to turn its discs like the dials of a lock.",
     about:
-      "The Mandelbulb is a 3D fractal, a cousin of the famous flat Mandelbrot set. It is made by repeating one short formula over and over for each point in space and keeping only the points that never fly away. The mathematical fractal has detail on many scales; this toy has a fixed, finite set of points. It was found in 2009 by Daniel White and Paul Nylander.\n\nTap it and its seven slices turn like the dials of a combination lock, neighbors in opposite directions, then back again. Each turns one seventh of a turn, because the bulb looks the same after a seventh of a turn, so it lands on the same picture.",
+      "The Mandelbulb is a 3D fractal, a cousin of the famous flat Mandelbrot set. It is made by repeating one short formula over and over for each point in space and keeping only the points that never fly away. The mathematical fractal has detail on many scales; this toy has a fixed, finite set of points. It was found in 2009 by Daniel White and Paul Nylander.\n\nTap it and its seven slices turn like the dials of a combination lock, neighbors in opposite directions, then back again. Each turns one seventh of a turn, because the bulb looks the same after a seventh of a turn, so it lands on the same picture. Pick the power (power n has n − 1 lobes) or a Julia bulb, which turns whole, in the Toy tab.",
   },
   sierpinski: {
     howTo: "Tap to explode it; tap again to put it back. Pick the level in the Toy tab.",
@@ -1527,12 +1527,47 @@ export const TOY_HELP = {
   "fourier-circles": {
     howTo: "Tap to spin the circles. Type a word or a curve in the Toy tab.",
     about:
-      "Circles turning on circles can draw almost any closed shape, given enough of them. Each circle spins a whole number of times per loop while riding on the rim of the one before, and the tip of the last one traces the drawing. This is a Fourier series, named after Joseph Fourier, who showed in the early 1800s that repeating patterns can be built by adding up simple waves.\n\nTap to spin them and watch the shape drawn again. Few circles draw a wobbly shape and many draw a crisp one: set how many in the Toy tab, pick a heart, a star or a square wave, stack them in 3D, or type a word and each letter gets its own chain of circles.",
+      "Circles turning on circles can draw almost any closed shape, given enough of them. Each circle spins a whole number of times per loop while riding on the rim of the one before, and the tip of the last one traces the drawing. This is a Fourier series, named after Joseph Fourier, who showed in the early 1800s that repeating patterns can be built by adding up simple waves.\n\nTap to spin them and watch the shape drawn again. Few circles draw a wobbly shape and many draw a crisp one: set how many in the Toy tab, pick a heart, a star or a square wave, stack them in 3D, or type words (up to 40 letters) and each letter gets its own chain of circles, five letters at a time.",
   },
   "splat-equation": {
     howTo: "Tap to play time t. Pick a program, or type your own equations, in the Toy tab.",
     about:
       "Every splat has a place and a color. Here you program them with math: each splat gets two numbers, u and v, and your equations x, y and z turn them into its place, while hue (or r, g and b) gives its color. Time t runs from 0 to 2π, so the shape can move.\n\nTap it to play one cycle of t and watch the shape move. Pick a sphere, a torus, a Möbius strip, a seashell, a trefoil knot, a wave, a spiral galaxy or a Klein bottle in the Toy tab, or type your own, such as z = sin(u + t). Under Splats, Solid shows a clean surface, Fine a finer one, and Dots every splat on its own. The Tinkerer's Manual explains the whole language.",
+  },
+  "rossler-attractor": {
+    howTo: "Tap to drop a tracer where you tap. Up to four run at once.",
+    about:
+      'In 1976 the chemist Otto Rössler looked for the simplest flow that could be chaotic. His three equations, dx/dt = −y − z, dy/dt = x + 0.2y and dz/dt = 0.2 + z(x − 5.7), have only one term that is not linear. A point spirals outward on a flat disc until it is flung up and folded back into the middle, again and again, never repeating.\n\nTap to drop a glowing tracer where you tap. It follows the equations live, step by step, and is pulled onto the attractor wherever it starts. Source: O. E. Rössler, "An equation for continuous chaos", Physics Letters A, 1976.',
+  },
+  "thomas-attractor": {
+    howTo: "Tap to drop a tracer where you tap. Up to four run at once.",
+    about:
+      'The biologist René Thomas wrote down this flow in 1999: dx/dt = sin y − bx, dy/dt = sin z − by and dz/dt = sin x − bz. Each of x, y and z pushes the next one round, so the shape looks the same after you swap them in turn. The number b is friction; here b = 0.208186, where the motion is chaotic.\n\nTap to drop a glowing tracer where you tap. It follows the equations live, step by step, and wanders through the loops. Source: R. Thomas, "Deterministic chaos seen in terms of feedback circuits", International Journal of Bifurcation and Chaos, 1999.',
+  },
+  "aizawa-attractor": {
+    howTo: "Tap to drop a tracer where you tap. Up to four run at once.",
+    about:
+      'This flow, known as the Aizawa attractor, spins a point round a ball shape: it circles near the top, slips down the outside and shoots back up a narrow tube through the middle. Its three equations, with six numbers (a = 0.95, b = 0.7, c = 0.6, d = 3.5, e = 0.25, f = 0.1), were studied by Yoji Aizawa and by William Langford.\n\nTap to drop a glowing tracer where you tap. It follows the equations live, step by step, and is pulled onto the ball wherever it starts. Source: W. F. Langford, "Numerical studies of torus bifurcations", 1984.',
+  },
+  "five-cell": {
+    howTo: "Tap to roll it through the fourth dimension. Pick its colors in the Toy tab.",
+    about:
+      "The 5-cell is the simplest shape in four dimensions, the 4D cousin of a triangle and a tetrahedron. It has five corners, each joined to all four others by ten equal edges, and its walls are five tetrahedra. We can only see its shadow: here it is drawn in perspective from a point out along the fourth axis, so corners nearer us in 4D look bigger.\n\nTap it and it rolls a full turn through the fourth dimension and comes home. Source: H. S. M. Coxeter, Regular Polytopes, 1973.",
+  },
+  "sixteen-cell": {
+    howTo: "Tap to roll it through the fourth dimension. Pick its colors in the Toy tab.",
+    about:
+      "The 16-cell is the 4D cousin of the octahedron. Its eight corners sit one step out along each of the four axes, both ways, and each corner is joined to every other except the one opposite: 24 edges, and 16 tetrahedra for walls. Each pair of opposite corners has its own color. It is drawn in perspective from 4D, so corners nearer us in 4D look bigger.\n\nTap it and it rolls a full turn through the fourth dimension and comes home. Source: H. S. M. Coxeter, Regular Polytopes, 1973.",
+  },
+  "twenty-four-cell": {
+    howTo: "Tap to roll it through the fourth dimension. Pick its colors in the Toy tab.",
+    about:
+      "The 24-cell is a regular shape with no cousin among the regular solids of three dimensions: it exists only in 4D. Its 24 corners are every way to put two ±1s and two zeros in four places, joined by 96 edges, with 24 octahedra for walls. The corners split into three sets of eight, each one a 16-cell, shown in three colors. It is drawn in perspective from 4D.\n\nTap it and it rolls a full turn through the fourth dimension and comes home. Source: H. S. M. Coxeter, Regular Polytopes, 1973.",
+  },
+  duoprism: {
+    howTo: "Tap to roll it through the fourth dimension. Pick the two polygons in the Toy tab.",
+    about:
+      "A duoprism pairs two polygons at right angles in four dimensions: every corner of one is matched with every corner of the other. A 3,4-duoprism has 3 × 4 = 12 corners, and its walls are prisms. With two squares it is the hypercube. Each ring of the first polygon has its own color. It is drawn in perspective from 4D.\n\nTap it and it rolls a full turn through the fourth dimension and comes home. Pick each polygon, from a triangle to a hexagon, in the Toy tab. Source: J. H. Conway, H. Burgiel and C. Goodman-Strauss, The Symmetries of Things, 2008.",
   },
   "pythagoras-proof": {
     howTo: "Tap it to slide the triangles and show that a² + b² = c².",
@@ -1670,11 +1705,18 @@ export const TOY_HELP = {
       "Tap to bow the plate and watch the sand find its still lines. In the Toy tab, sing to it or play your audio.",
     about:
       "In 1787 Ernst Chladni sprinkled sand on a metal plate and drew a violin bow along its edge. The plate shook, and the sand jumped away from the places that moved and gathered on the lines that stayed still, a different picture for each pitch. Those still lines are called nodal lines.\n\nTap to bow the plate: it hums at the mode's pitch and every grain of sand, a splat of its own, hops and slides until the figure appears. Tap again to stir the sand up. The Mode choice picks the pitch and the pattern.\n\nOr sing to it, or open a song: the note it hears rings the plate's nearest mode, and the sand sets off for that figure at once; a new note moves it on, and silence leaves it put. A song's strongest pitch, moved by octaves into the plate's range, plays it as the song goes, and the file stays on your device. This toy uses the classic square-plate model, cos(nπx)·cos(mπy) ± cos(mπx)·cos(nπy) = 0, with a pitch that grows with n² + m².",
+  }, // Lane Live r8: the Chladni plate in three dimensions.
+  "chladni-cell": {
+    howTo:
+      "Tap to switch on the sound: the beads gather on the cell's still surfaces. Tap again to swirl them.",
+    about:
+      "Sand on a ringing plate gathers on the lines that stay still. The same happens in three dimensions, and labs use it to sort cells and tiny beads. Here a glass cell 1 cm across holds water and tiny plastic beads, and a transducer underneath fills it with ultrasound at one of the cell's resonances, so the sound stands still inside it. Each bead feels a gentle push, the acoustic radiation force, toward the places where the pressure hardly changes: the mode's nodal surfaces, the 3D cousins of a plate's nodal lines.\n\nThe toy works out that push from the Gor'kov potential for polystyrene beads in water (H. Bruus, \"Acoustofluidics 7\", Lab Chip, 2012) and moves every bead down it. The modes ring at about 100 to 370 kHz, far too high to hear, so you hear each one eight octaves down. A \"mixed\" mode blends modes that ring at the same pitch. Gravity is left out: beads this small sink only micrometers a second.",
   },
+
   // Lane Data and climate.
   "data-in-3d": {
     howTo:
-      "Open a CSV or TSV in the Toy tab, pick the columns for X, Y, Z and color, and tap the chart.",
+      "Open a CSV or TSV in the Toy tab, pick the columns for X, Y, Z and color, and tap anywhere on the chart.",
     about:
       "A table becomes a 3D chart you can turn: each row a point in a scatter, or rows gathered into bars or a surface whose heights are the mean of the rows in each cell. The labels turn to face you as you go round.\n\nYour file is read in your browser and never uploaded. Headers, quoted fields, dates, categories and missing cells are understood; a very big table is shown as an even random sample, and the Toy tab says so. Save a picture or a turning video from the Toy tab. The samples are a month of earthquakes (USGS), Fisher's 150 iris flowers (UCI, CC BY 4.0) and the CO2 record at Mauna Loa (NOAA).",
   },
@@ -1704,6 +1746,22 @@ export const TOY_HELP = {
     howTo: "Tap to pull the three codes apart. Read all three in the Toy tab.",
     about:
       "One square holds three QR codes here: the first sets each module's red, the second its green and the third its blue. So each module is one of eight colors, from white to black.\n\nSplashery's reader splits the picture into its red, green and blue and reads each one as an ordinary code, for three times the data in the same square. An ordinary phone reader sees only gray, which comes mostly from green, so it usually reads the green code or nothing. Tap the square to pull its three codes apart and back. Type your own three texts in the Toy tab.",
+  },
+  // Lane QR craft.
+  "qr-picture": {
+    howTo: "Pick a picture or open your own, then tap to turn the tiles over.",
+    about:
+      "A QR code reader decides each module from a sample at its center, so the rest of a module can carry a picture. Here every module keeps its bit in a dot at its middle, and the picture fills the rest, darkened in dark modules and lightened in light ones. The eyes, the timing lines and the format information stay plain, so a reader still finds the code.\n\nThe toy measures the contrast and reads its own code at phone size and smaller. If it won't scan, Make it scan finds the closest version that does: more contrast, a bigger center dot or a higher error correction level. Your picture never leaves your device.",
+  },
+  "qr-build": {
+    howTo: "Pick dominoes, marbles or tiles in the Toy tab, then tap to build the code.",
+    about:
+      "A QR code is only dark and light squares, so it can be built from real things. Here dominoes stand on end, and a push sends every row toppling, each domino knocking the next, until they lie flat as the code: ebony over dark modules, ivory over light ones. Or marbles roll in along their rows and settle into the dark modules, or two-sided tiles flip over in a wave.\n\nEvery piece is solid and moves as the real thing would. Each build ends on a code that scans, and the toy reads its own last frame to check. Type your own text in the Toy tab.",
+  },
+  barcodes: {
+    howTo: "Pick a kind of barcode in the Toy tab and type what it holds. Tap to scan it.",
+    about:
+      "Barcodes came before QR codes. Code 128 packs any plain text into bars and spaces one to four modules wide, with a check symbol worked out modulo 103. EAN-13 and UPC-A hold the numbers on things in shops, with a check digit from weights of 3 and 1, and quiet zones of blank space either side.\n\nHere those three are drawn by Splashery's own code, and Data Matrix and Aztec, two square codes of their own, come from the open-source ZXing library. Tap to sweep a scanner's red line across. The toy reads its own picture back to check that it scans.",
   },
   // Lane Live input.
   "room-echo": {
@@ -1735,7 +1793,7 @@ export const TOY_HELP = {
     howTo:
       "Tap to pause or play, and turn the picture to see its depth. Open your own GIF or video in the Toy tab.",
     about:
-      "A video is a string of photos, and a computer can guess how far away each part of a photo is. This toy does that for every frame: a depth model (Depth Anything V2 Small) gives every spot a distance, and the frames play back as splats that move toward you by as much as they are near. The bunny comes forward, the meadow stays back, and the relief moves with the clip. Turn the picture to see it from the side.\n\nPick a sample clip in the Toy tab (the bunny, Muybridge's horse, a dragon, a bridge and robot, or a machine; Blender Foundation, CC BY, and the horse is public domain), or open your own GIF or video of any length. It is read on your device, the model (about 27 MB) loads the first time, and nothing is uploaded. A long video plays while its depth is worked out. Depth sets the relief, and Speed plays the clip slower or faster, sound included. Show the original puts the flat clip in a corner, frame for frame.",
+      "A video is a string of photos, and a computer can guess how far away each part of a photo is. This toy does that for every frame: a depth model (Depth Anything V2 Small) gives every spot a distance, and the video itself plays on a relief that comes toward you by as much as each part is near, sharp enough to read small text (Splats rebuilds it from splats). The bunny comes forward, the meadow stays back.\n\nPick a sample clip in the Toy tab (the bunny, Muybridge's horse, a dragon, a bridge and robot, or a machine; Blender Foundation, CC BY, and the horse is public domain), or open your own GIF or video of any length. It is read on your device, the model (about 27 MB) loads the first time, and nothing is uploaded. A long video plays while its depth is worked out. Depth sets the relief, and Speed plays the clip slower or faster, sound included. Show the original puts the flat clip in a corner, frame for frame.",
   },
   "song-landscape": {
     howTo:
@@ -1755,7 +1813,7 @@ export const TOY_HELP = {
     howTo:
       "Tap to lift the picture's depth, then tap to lay it flat. Pick or open a photo in the Toy tab.",
     about:
-      "A depth model guesses relative depth from a single photo; it does not measure distances in meters. This toy runs the model on your device and rebuilds the picture as splats. Each takes the color at its place and moves to its guessed depth, giving an effect like a shallow sculpted relief when you turn the view.\n\nWhere depth jumps, such as a leaf in front of a tree, the toy separates the surface into layers to reduce smearing. Tap to raise them and sway; tap again to flatten them. Layers pulls them farther apart, and Depth sets the relief's strength. Choose a sample photo or open your own in the Toy tab. Show the original puts the flat photo in a corner, so you can see what the depth did. JPEG, PNG and WebP work; HEIC works where the browser supports it. The model, about 27 MB, loads the first time and can take longer on a phone. Your photo is processed locally.",
+      "A depth model guesses relative depth from a single photo; it does not measure distances in meters. This toy runs the model on your device and lifts the picture to its guessed depth, like a shallow sculpted relief when you turn the view. It shows the photo itself on that relief (Sharp picture), so even small text reads; Splats rebuilds it from splats instead.\n\nWhere depth jumps, such as a leaf in front of a tree, the toy separates the surface into layers to reduce smearing. Tap to raise them and sway; tap again to flatten them. Layers pulls them farther apart, and Depth sets the relief's strength. Choose a sample photo or open your own in the Toy tab. Show the original puts the flat photo in a corner, so you can see what the depth did. JPEG, PNG and WebP work; HEIC works where the browser supports it. The model, about 27 MB, loads the first time and can take longer on a phone. Your photo is processed locally.",
   },
 
   "video-3d": {
@@ -1798,6 +1856,17 @@ export const TOY_HELP = {
       "Pinch or scroll to zoom down to single molecules. Tap to see a thin slice at one depth.",
     about:
       "Ordinary light microscopy struggles to separate nearby objects about 200 to 300 nanometers apart. Single-molecule localization microscopy finds the centers of isolated fluorescent blinks more precisely, then builds a picture from many positions. Localization precision is not the same as the final image's resolution, and several blinks may come from one molecule. Here each blink is drawn as a Gaussian whose width represents its reported uncertainty.\n\nChoose microtubules and clathrin in a 12 µm cell region, a whole nucleus in 3D, or open a .smlm file or a CSV with positions and uncertainties in nanometers. Color by depth, time frame or channel. Depth scale shows true coordinates or stretches depth fourfold. Precision keeps all localizations or only those better than 5 or 3 nm. Pinch or scroll to zoom; tap for a 200 nm slice at that depth, then tap to restore all depths. Files stay on your device. This is a viewer, not a measurement tool.",
+  },
+  "unit-cells": {
+    howTo: "Tap to step from the unit cell to a block of cells, then to the bonds, and back.",
+    about:
+      "A crystal is one small box of atoms, its unit cell, repeated in every direction. This toy builds six real crystals from their measured cells: diamond, graphite, ice, and the metals copper (face-centered cubic), iron (body-centered cubic) and magnesium (hexagonal close-packed). The atoms are drawn to scale: in the metals, diamond and graphite, neighbors touch.\n\nTap to step from the unit cell to a block of cells, which grows out of it, and then to the bonds: each atom shrinks to a ball and sticks join its nearest neighbors (in the metals, atoms in contact). Choose the crystal, the cells along each edge and the first view. Thermal motion shows how far each atom's center wanders, from published measurements. Ice's hydrogens are one of the many arrangements real ice allows.",
+  },
+  "orbital-atlas": {
+    howTo:
+      "Tap to cut the orbital open and see the density inside. Pick any orbital in the Toy tab.",
+    about:
+      "An orbital is a wave that tells where an electron in an atom is likely to be. This atlas draws every orbital of hydrogen from the first shell to the fifth (s, p, d, f and g), plus 6s, 6p, 6d, 7s and 7p, from the exact solutions of the Schrödinger equation. The cloud shows where the electron is likely to be found; the surface holds about 90% of it. Orange and blue mark the wave's two signs.\n\nTap to cut the orbital in half and lift the front half away: the cut face is brightest where the electron is most often found and dark at the nodes, where it is never found. Each orbital is scaled to fill the view; real ones grow with the shell number squared.",
   },
   "cryoem-map": {
     howTo:
@@ -1896,9 +1965,9 @@ export const TOY_HELP = {
 
   longtail: {
     howTo:
-      "Tap or press Space to play. Steer with the arrow keys, a swipe or the pad; press 3D to fold the world up.",
+      "Tap to play. Tap beside the head to turn it that way, or use the arrows. 3D folds it up; drag to turn it.",
     about:
-      "A string of glass beads crawls from tile to tile, one tile a beat. Each berry it eats makes it two beads longer, and running into its own body ends the game. Arrow keys, a swipe or the pad turn it toward that side of the screen.\n\nThe tiles are a world you can fold. The Cube starts as a flat cross of six faces; leaving one edge of the cross brings you back in where that edge meets once folded, and the 3D button swings the faces up on their hinges into a cube you steer around. The Planet folds the same way and then rounds out into Mars, the Moon or Earth from the Space shelf, each tile the color of the ground under it. The Ring starts as a strip whose edges wrap round and rolls up into a tube bent into a ring. With Tunnels on, dark mouths lead straight through to the far side. P pauses, R starts again; the best score stays on this device.",
+      "A string of glass beads crawls from tile to tile, one tile a beat. Each berry it eats makes it two beads longer, and running into its own body ends the game. A tap beside the head, or the arrows, turn it toward that side.\n\nThe tiles fold into a world. The Cube starts as a flat cross of six faces; leaving one edge of the cross brings you back in where that edge meets once folded, and the 3D button swings the faces up on their hinges into a cube; drag to turn it. The Planet folds the same way and then rounds out into Mars, the Moon or Earth from the Space shelf, each tile the color of the ground under it. The Ring starts as a strip whose edges wrap round and rolls up into a tube bent into a ring. With Tunnels on, dark mouths lead straight through to the far side. P pauses, R starts again; the best score stays on this device.",
   },
   "grain-garden": {
     howTo:
@@ -1961,9 +2030,9 @@ export const TOY_HELP = {
 
   "note-rider": {
     howTo:
-      "Steer into each note's lane as it arrives (arrow keys, a swipe or a finger). Pick a tune in the Toy tab.",
+      "Steer into each note's lane as it arrives (arrows, a swipe or a finger). ♪ Your song opens MIDI or audio.",
     about:
-      "A song comes down the track as glowing notes: its melody, the highest note at each moment, with the low notes in the low lane and the high notes in the high one. Steer the sled into each note's lane as the note arrives and it plays, so catching every note plays the whole tune; a missed note stays silent. The built-in tunes are Ode to Joy, Twinkle, Twinkle, Little Star and Frère Jacques, or open a MIDI file of your own. In 2D, on a phone held upright, the notes fall down three lanes side by side to their pads, the low lane on the left (on a wide screen the lanes are stacked by pitch and the notes slide in from the right); the 3D button turns it into a road coming toward you. The file is read on this device and never leaves it.",
+      "A song comes down the track as glowing notes: its melody, the highest note at each moment, with the low notes in the low lane and the high notes in the high one. Steer the sled into each note's lane as the note arrives and it plays, so catching every note plays the whole tune; a missed note stays silent. The built-in tunes are Ode to Joy, Twinkle, Twinkle, Little Star and Frère Jacques, or open your own with ♪ Your song: a MIDI file, or a recording, whose tune a note finder hears on this device, each caught note then playing its own slice of the recording. In 2D, on a phone held upright, the notes fall down three lanes side by side to their pads, the low lane on the left (on a wide screen the lanes are stacked by pitch and the notes slide in from the right); the 3D button turns it into a road coming toward you. The file is read on this device and never leaves it.",
   },
 
   // ---- Holidays -------------------------------------------------------------------------
@@ -2265,39 +2334,40 @@ export const TOY_HELP = {
   },
   // ---- Space r2 (lane Space r2): real worlds ---------------------------------------------
   "real-moon": {
-    howTo:
-      "Tap to fly to Tycho, Copernicus or Apollo 11's site and back. The Sun slider moves the light.",
+    howTo: "Tap a spot to zoom in and name it; tap again to go out. Play flies to Tycho and more.",
     about:
-      "The real Moon from NASA's maps: its colors from the Lunar Reconnaissance Orbiter's wide-angle camera, its heights from the orbiter's laser altimeter. Each splat sits at its map's height and leans with its ground, so the sun lights the slopes facing it; craters stand out best near the line between day and night.\n\nThe relief is exaggerated ten times by default (the highest and lowest points are only about 20 km apart on a ball 3,475 km across); pick True height in the Toy tab to see it as it is. The Moon turns once every 27.3 days; here a day passes each second. Close up, the relief eases to at most twice its height. There are no shadows, and the colors are a little enhanced, as in NASA's map.",
+      "The real Moon from NASA's maps: its colors from the Lunar Reconnaissance Orbiter's wide-angle camera, its heights from the orbiter's laser altimeter. Each splat sits at its map's height and leans with its ground, so the sun lights the slopes facing it; craters stand out best near the line between day and night.\n\nThe relief is exaggerated ten times by default (the highest and lowest points are only about 20 km apart on a ball 3,475 km across); pick True height in the Toy tab to see it as it is. The Moon turns once every 27.3 days; here a day passes each second. There are no shadows, and the colors are a little enhanced, as in NASA's map. A tap zooms in and names the spot from the IAU's list; tap again to go out.",
   },
   "real-mars": {
-    howTo:
-      "Tap to fly to Olympus Mons, Valles Marineris or Gale crater and back. Move the Sun to relight.",
+    howTo: "Tap a spot to zoom in and name it; tap again to go out. Play flies to Olympus Mons.",
     about:
-      "The real Mars from NASA and USGS maps: its colors from the Viking orbiters' mosaic, its heights from the Mars Global Surveyor's laser altimeter (MOLA), above the areoid, Mars's sea level. Each splat sits at its height and leans with its ground, so the sun lights the slopes facing it.\n\nOlympus Mons, the tallest volcano in the solar system, rises about 21 km; Valles Marineris drops up to about 7 km; the Curiosity rover is climbing the mound in Gale crater. The relief is exaggerated ten times by default; pick True height in the Toy tab to see it as it is. A day on Mars lasts 24.6 hours; here an hour passes each second. The thin rim is its dusty air; there are no shadows.",
+      "The real Mars from NASA and USGS maps: its colors from the Viking orbiters' mosaic, its heights from the Mars Global Surveyor's laser altimeter (MOLA), above the areoid, Mars's sea level. Each splat sits at its height and leans with its ground, so the sun lights the slopes facing it.\n\nOlympus Mons, the tallest volcano in the solar system, rises about 21 km; Valles Marineris drops up to about 7 km; the Curiosity rover is climbing the mound in Gale crater. The relief is exaggerated ten times by default; pick True height in the Toy tab to see it as it is. A day on Mars lasts 24.6 hours; here an hour passes each second. The thin rim is its dusty air. A tap zooms in and names the spot from the IAU's list; tap again to go out.",
   },
   "real-earth": {
-    howTo:
-      "Tap to fly to Everest, the Grand Canyon or Hawaii and back. Move the Sun to see city lights.",
+    howTo: "Tap a spot to zoom in and name the place; tap again to go out. Play flies to Everest.",
     about:
-      "The real Earth from NASA and NOAA maps: colors from NASA's Blue Marble (a cloud-free mosaic from the Terra satellite), heights from NOAA's ETOPO 2022, and city lights from NASA's Black Marble. The oceans lie flat at sea level. Each splat sits at its height and leans with its ground, so the sun lights the slopes facing it.\n\nThe relief is exaggerated twenty times by default (Everest, 8.8 km high, is less than a thousandth of Earth's width); pick True height in the Toy tab to see it as it is. Earth turns once every 23 hours 56 minutes; here an hour passes each second. Close up, the relief eases to at most twice its height. There are no clouds or shadows.",
+      "The real Earth from NASA and NOAA maps: colors from NASA's Blue Marble (a cloud-free mosaic from the Terra satellite), heights from NOAA's ETOPO 2022, and city lights from NASA's Black Marble. The oceans lie flat at sea level. Each splat sits at its height and leans with its ground, so the sun lights the slopes facing it.\n\nThe relief is exaggerated twenty times by default (Everest, 8.8 km high, is less than a thousandth of Earth's width); pick True height in the Toy tab to see it as it is. Earth turns once every 23 hours 56 minutes; here an hour passes each second. There are no clouds or shadows. A tap zooms in and names the place from Natural Earth's maps; tap again to go out.",
   },
   "real-mercury": {
-    howTo:
-      "Tap to fly to Caloris, Rachmaninoff or Hokusai and back. Move the Sun slider to relight it.",
+    howTo: "Tap a spot to zoom in and name it; tap again to go out. Play flies to Caloris.",
     about:
-      "The real Mercury from the maps of NASA's MESSENGER, which orbited it from 2011 to 2015: color from three of its camera's filters (near-infrared, red and blue, shown as red, green and blue, so the rocks stand apart; not what an eye would see) and heights from the USGS's elevation model.\n\nThe Caloris basin, about 1,500 km across, is one of the largest impact basins in the solar system. Each splat leans with its ground, so the sun lights the slopes facing it. The relief is exaggerated ten times by default; pick True height in the Toy tab to see it as it is. Mercury turns once every 58.6 days; here a day passes each second. There are no shadows.",
+      "The real Mercury from the maps of NASA's MESSENGER, which orbited it from 2011 to 2015: color from three of its camera's filters (near-infrared, red and blue, shown as red, green and blue, so the rocks stand apart; not what an eye would see) and heights from the USGS's elevation model.\n\nThe Caloris basin, about 1,500 km across, is one of the largest impact basins in the solar system. Each splat leans with its ground, so the sun lights the slopes facing it. The relief is exaggerated ten times by default; pick True height in the Toy tab to see it as it is. Mercury turns once every 58.6 days; here a day passes each second. A tap zooms in and names the spot from the IAU's list; tap again to go out.",
   },
   "real-venus": {
-    howTo:
-      "Tap to fly to Maxwell Montes, Maat Mons or Artemis Corona and back. Move the Sun to relight it.",
+    howTo: "Tap a spot to zoom in and name it; tap again to go out. Play flies to Maxwell Montes.",
     about:
-      "The real surface of Venus, hidden from cameras by its thick clouds. NASA's Magellan spacecraft mapped it by radar from 1990 to 1994. The colors are the radar's brightness (rough ground bright, smooth dark), tinted orange like the Soviet Venera landers' photos; an eye would not see them. The heights come from Magellan's altimeter, and the clouds are left out.\n\nMaxwell Montes, about 11 km high, is the tallest mountain on Venus; Maat Mons is its tallest volcano; Artemis Corona is a ring of ridges about 2,600 km across. The relief is exaggerated ten times by default; pick True height in the Toy tab to see it as it is. Venus turns backward, once every 243 days; here a day passes each second. There are no shadows.",
+      "The real surface of Venus, hidden from cameras by its thick clouds. NASA's Magellan spacecraft mapped it by radar from 1990 to 1994. The colors are the radar's brightness (rough ground bright, smooth dark), tinted orange like the Soviet Venera landers' photos; an eye would not see them. The heights come from Magellan's altimeter, and the clouds are left out.\n\nMaxwell Montes, about 11 km high, is the tallest mountain on Venus; Maat Mons its tallest volcano; Artemis Corona a ring of ridges 2,600 km across. The relief is exaggerated ten times by default; pick True height in the Toy tab to see it as it is. Venus turns backward, once every 243 days; here a day passes each second. A tap zooms in and names the spot from the IAU's list; tap again to go out.",
   },
   "nearby-stars": {
     howTo: "Tap to fly to Alpha Centauri, Sirius, Barnard's Star, Vega or Arcturus and back.",
     about:
       "Every star within about 65 light-years (20 parsecs) of the Sun, where it really is: about 2,200 stars measured by ESA's Gaia spacecraft, from the tiny shift of each star's position as Earth goes round the Sun. About 35 of the brightest, which Gaia cannot measure, like Sirius and Vega, come from the older Hipparcos survey (via the HYG database).\n\nThe Sun is in the middle; the faint rings lie in our Galaxy's plane, and the line points to its center. Each star's color comes from its temperature: red dwarfs, the most common stars, are orange-red; hot stars are blue-white. The sizes show brightness, not size. Tap to fly to a named star and see its distance; the first is Alpha Centauri, with Proxima Centauri, the nearest star of all, beside it.",
+  },
+  "powers-of-ten": {
+    howTo:
+      "Pinch, scroll or drag up or down to zoom from a garden to a galaxy or a molecule. Tap to play.",
+    about:
+      "One continuous zoom through real scales, each a real picture or real data at its true size, centered on a garden bed beside the Smithsonian Castle in Washington, D.C. Every step of the zoom is ten times the last: the label names the power of ten, what you see and its size, and where the picture or data comes from, and the bar shows a round length at that scale.\n\nEach scene sits inside the larger one, where it really is, and fades in as it fills the view; each is loaded only as the zoom comes near it. The garden bed is a 3D capture made elsewhere and set here.",
   },
   "real-galaxies": {
     howTo: "Tap to turn the galaxy edge on and back. Pick another galaxy in the Toy tab.",
@@ -2320,20 +2390,26 @@ export const TOY_HELP = {
       "The Space Shuttle at launch, as splats from NASA's 3D model: the winged orbiter, the big orange external tank that fed its three main engines with liquid hydrogen and oxygen, and the two white solid rocket boosters. The Shuttles flew 135 missions from 1981 to 2011, carrying astronauts, satellites and the pieces of the International Space Station.\n\nTap to stage it in a flight's order, much faster than real: the boosters fall away about two minutes after launch, to be fished from the sea and used again; the main engines stop at about eight and a half minutes and the empty tank drops away, the only part not reused; the orbiter flies on with its two small maneuvering engines. The model's black and white tiles are drawn simply.",
   },
   "real-moons": {
-    howTo:
-      "Pick a moon in the Toy tab. Tap to fly to a named place and back. Move the Sun to relight it.",
+    howTo: "Pick a moon in the Toy tab. Tap a spot to zoom in and name it; tap again to go out.",
     about:
-      "Five big moons from USGS maps of pictures by the Voyager, Galileo and Cassini spacecraft: volcanic Io; Europa, cracked ice over a hidden ocean; Ganymede, the largest moon in the solar system; cratered Callisto; and Saturn's moon Titan, with lakes of liquid methane and ethane.\n\nNo spacecraft has mapped these moons' heights all the way round, so their ground is drawn smooth, in the moons' own colors (gray where the map is black and white). Titan's map was taken through its orange haze in near-infrared light, and the haze is left out. Seams show where the maps' pictures were lit differently. Each moon keeps one face toward its planet; here a day passes each second.",
+      "Five big moons from USGS maps of pictures by the Voyager, Galileo and Cassini spacecraft: volcanic Io; Europa, cracked ice over a hidden ocean; Ganymede, the largest moon in the solar system; cratered Callisto; and Saturn's moon Titan, with lakes of liquid methane and ethane.\n\nNo spacecraft has mapped these moons' heights all the way round, so their ground is drawn smooth, in the moons' own colors (gray where the map is black and white). Titan's map was taken through its orange haze in near-infrared light, and the haze is left out. Seams show where the maps' pictures were lit differently. Each moon keeps one face toward its planet; here a day passes each second. A tap zooms in and names the spot from the IAU's list; tap again to go out.",
   },
   "real-small-worlds": {
-    howTo: "Pick Pluto, Ceres or Vesta in the Toy tab. Tap to fly to a named place and back.",
+    howTo: "Pick Pluto, Ceres or Vesta. Tap a spot to zoom in and name it; tap again to go out.",
     about:
-      "Three small worlds with their real shapes and heights: Pluto, mapped by NASA's New Horizons as it flew past in 2015, and the dwarf planet Ceres and the asteroid Vesta, mapped by NASA's Dawn, which orbited both. Ceres's flattened shape and Vesta's lumpy one, with the huge Rheasilvia basin near its south pole, are real.\n\nNew Horizons saw only one side of Pluto up close; the rest is filled in smoothly and shown blurred. Pluto's bright heart is Sputnik Planitia, a plain of frozen nitrogen. Occator crater on Ceres holds bright salts, and Ahuna Mons is a lone mountain of ice about 4 km high. They are drawn at true height; pick ×5 or more in the Toy tab to exaggerate them.",
+      "Three small worlds with their real shapes and heights: Pluto, mapped by NASA's New Horizons as it flew past in 2015, and the dwarf planet Ceres and the asteroid Vesta, mapped by NASA's Dawn, which orbited both. Ceres's flattened shape and Vesta's lumpy one, with the huge Rheasilvia basin near its south pole, are real.\n\nNew Horizons saw only one side of Pluto up close; the rest is filled in smoothly and shown blurred. Pluto's bright heart is Sputnik Planitia, a plain of frozen nitrogen. Occator crater on Ceres holds bright salts, and Ahuna Mons is a lone mountain of ice about 4 km high. They are drawn at true height; pick ×5 or more in the Toy tab to exaggerate them. A tap zooms in and names the spot from the IAU's list; tap again to go out.",
   },
   "star-systems": {
     howTo: "Tap to see it edge on, as from Earth. Pick a system, speed and spacing in the Toy tab.",
     about:
       "Real planets round other stars, from the NASA Exoplanet Archive: TRAPPIST-1, a cool red dwarf 40 light-years away with seven rocky planets, all closer to it than Mercury is to the Sun; TOI-178, whose six planets go round in a chain of near-simple ratios; and 55 Cancri, with a planet whose year is shorter than a day. The inner Solar System is there to compare.\n\nThe orbits' sizes and periods are measured, and the planets move at those rates, sped up. Star and planets are drawn far larger than to scale. Nobody knows these planets' colors, so they show their size: gray-brown for rocky, blue for mid-sized, tan for giants. Tap to see the system edge on, as we see TRAPPIST-1 and TOI-178: their planets were found as they passed in front of their stars.",
+  },
+  // ---- Space r4 (lane Space r4) ----
+  "solar-orbits": {
+    howTo:
+      "Tap to fly to the next planet. Drag the date; set the speed and the scale in the Toy tab.",
+    about:
+      "The Sun, the eight planets, six big moons, four famous comets and 4,000 real asteroids, each where its real orbit puts it on the date you pick, from 1800 to 2050. The orbits come from JPL's published elements, and every body moves by Kepler's laws, faster near the Sun. The asteroids are a random sample of the cataloged ones: the main belt between Mars and Jupiter, and the Trojans that share Jupiter's orbit, 60 degrees ahead and behind.\n\nThe readable scale is not to scale: distances from the Sun are squeezed and the planets drawn hundreds of times larger, so everything fits. Pick the true scale to see how empty space is: the planets shrink to specks. A comet's tail always points away from the Sun; its length is a picture.",
   },
   // ---- Tiny world r2 (lane Tiny world r2) ----
   "dna-to-protein": {

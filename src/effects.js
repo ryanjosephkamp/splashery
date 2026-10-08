@@ -12,6 +12,8 @@
 // result is deterministic for a given seed and time; only pointer input
 // (pokes, magnet, paint) adds anything else.
 
+import { PHOTO_WRITE } from "./photo-splats.js"; // lane Photo fidelity
+
 const clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
 
 // ---- Effect catalogue -------------------------------------------------------
@@ -160,6 +162,7 @@ uniform vec4 uSpPat;     // x on, y projection (0 wrap, 1 front, 2 globe), z rep
 uniform vec4 uSpPatB;    // x keep detail, y half height, z mean luminance, w half width
 uniform sampler2D uSpPattern;
 __KIT_UNIFORMS__
+__KIT_PHOTO_UNIFORMS__
 vec3 spHome = vec3(0.0);
 vec3 spRest = vec3(0.0);
 float spKitScale = 1.0;
@@ -168,6 +171,7 @@ float spBright = 1.0;
 vec3 spTint = vec3(0.0);
 float spFlame = -1.0;
 float spNoPat = 0.0;
+float spPhotoBit = 0.0; // Photo fidelity: a photo-textured splat (src/photo-splats.js)
 vec4 spBodyQ = vec4(0.0, 0.0, 0.0, 1.0);
 vec4 spPartQ = vec4(0.0, 0.0, 0.0, 1.0);
 float spCut = 0.0;
@@ -426,6 +430,7 @@ void modifySplatRotationScale(vec3 originalCenter, vec3 modifiedCenter, inout ve
 
 void modifySplatColor(vec3 center, inout vec4 color) {
   __KIT_COLOR__
+  __KIT_PHOTO__
   if (uSpPat.x > 0.5 && spNoPat < 0.5) color.rgb = spPattern(color.rgb);
   if (spFlame >= 0.0) {
     color.rgb = mix(color.rgb, vec3(1.0, 0.36, 0.06), smoothstep(0.08, 0.6, spFlame));
@@ -487,6 +492,7 @@ uniform uSpPatB: vec4f;
 var uSpPattern: texture_2d<f32>;
 var uSpPatternSampler: sampler;
 __KIT_UNIFORMS__
+__KIT_PHOTO_UNIFORMS__
 var<private> spRest: vec3f = vec3f(0.0);
 var<private> spKitScale: f32 = 1.0;
 var<private> spFade: f32 = 1.0;
@@ -494,6 +500,7 @@ var<private> spBright: f32 = 1.0;
 var<private> spTint: vec3f = vec3f(0.0);
 var<private> spFlame: f32 = -1.0;
 var<private> spNoPat: f32 = 0.0;
+var<private> spPhotoBit: f32 = 0.0; // Photo fidelity (src/photo-splats.js)
 var<private> spBodyQ: vec4f = vec4f(0.0, 0.0, 0.0, 1.0);
 var<private> spPartQ: vec4f = vec4f(0.0, 0.0, 0.0, 1.0);
 var<private> spCut: f32 = 0.0;
@@ -743,6 +750,7 @@ fn modifySplatRotationScale(originalCenter: vec3f, modifiedCenter: vec3f, rotati
 fn modifySplatColor(center: vec3f, color: ptr<function, vec4f>) {
   var base = (*color).rgb;
   __KIT_COLOR__
+  __KIT_PHOTO__
   if (uniform.uSpPat.x > 0.5 && spNoPat < 0.5) { base = spPattern(base); }
   if (spFlame >= 0.0) {
     base = mix(base, vec3f(1.0, 0.36, 0.06), smoothstep(0.08, 0.6, spFlame));
@@ -873,6 +881,7 @@ vec3 spKitCenter(vec3 p) {
   int pk = int(an.x + 0.5);
   int part = pk & 15;
   spNoPat = float((pk >> 4) & 1);
+  spPhotoBit = float((pk >> 5) & 1);
   int kind = int(an.y + 0.5);
   vec3 toy = uSpToy.xyz;
   float R = uSpToy.w;
@@ -1141,6 +1150,7 @@ fn spKitCenter(p0: vec3f) -> vec3f {
   let pk = i32(an.x + 0.5);
   let part = pk & 15;
   spNoPat = f32((pk >> 4u) & 1);
+  spPhotoBit = f32((pk >> 5u) & 1);
   let kind = i32(an.y + 0.5);
   let toy = uniform.uSpToy.xyz;
   let R = uniform.uSpToy.w;
@@ -1834,6 +1844,9 @@ fn spRigCenter(p0: vec3f) -> vec3f {
 // (captured toys with a rig).
 function variant(code, mode, lang) {
   const glsl = lang === "glsl";
+  // Lane Photo fidelity: "kitphoto" is the kit's, writing each splat's photo coordinates too.
+  const photo = mode === "kitphoto";
+  if (photo) mode = "kit";
   const pick = (kit, rig) => (mode === "kit" ? kit : mode === "rig" ? rig : "");
   return code
     .replace(
@@ -1853,6 +1866,11 @@ function variant(code, mode, lang) {
         : "",
     )
     .replace(
+      "__KIT_PHOTO_UNIFORMS__",
+      photo ? (glsl ? PHOTO_WRITE.glslUniforms : PHOTO_WRITE.wgslUniforms) : "",
+    ) // prettier-ignore
+    .replace("__KIT_PHOTO__", photo ? (glsl ? PHOTO_WRITE.glsl : PHOTO_WRITE.wgsl) : "")
+    .replace(
       "__KIT_CENTER__",
       pick(
         glsl ? "center = spKitCenter(center);" : "*center = spKitCenter(*center);",
@@ -1867,6 +1885,12 @@ export const MODIFIER = { glsl: variant(GLSL, "plain", "glsl"), wgsl: variant(WG
 export const MODIFIER_KIT = {
   glsl: variant(GLSL, "kit", "glsl"),
   wgsl: variant(WGSL, "kit", "wgsl"),
+};
+// Lane Photo fidelity: generated toys whose splats take their colors from a photo
+// (src/photo-splats.js); used only while such a toy shows, with the spPhoto stream.
+export const MODIFIER_KIT_PHOTO = {
+  glsl: variant(GLSL, "kitphoto", "glsl"),
+  wgsl: variant(WGSL, "kitphoto", "wgsl"),
 };
 // Captured toys with a rig (they carry the splatPart stream).
 export const MODIFIER_RIG = {

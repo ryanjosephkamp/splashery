@@ -26,3 +26,21 @@ for (const b of document.querySelectorAll("button[data-copy]")) {
 if (document.documentElement.classList.contains("labs")) {
   for (const f of document.querySelectorAll("iframe[data-src]")) f.src = f.dataset.src;
 }
+
+// The player's own "Open in Splashery" link opens the app in a new tab, so the toy page
+// (and a toy being customized) stays where it was. The player is the same origin.
+for (const f of document.querySelectorAll(".toy-stage iframe")) {
+  const fix = () => {
+    try {
+      const a = f.contentDocument?.getElementById("open-link");
+      if (a) {
+        a.target = "_blank";
+        a.rel = "noopener";
+      }
+    } catch {
+      // A player from another origin keeps its link as it is.
+    }
+  };
+  f.addEventListener("load", fix);
+  fix();
+}

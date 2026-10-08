@@ -200,6 +200,7 @@ class App {
       ui.setPictures?.(p);
       this.updateStatus();
     });
+    player.on("chunks", () => this.updateStatus()); // lane Powers of ten
     player.on("media", (m) => ui.setPictures?.(player.pictures?.info() || null, m));
     const wm = webmSupport();
     ui.setWebmUnavailable(wm.ok ? null : wm.reason);
@@ -512,9 +513,12 @@ class App {
     const player = this.player;
     const info = player.toyInfo;
     if (!info) return;
-    // Pictures: a picture toy's sheets count too.
-    const splats = info.splats + (player.pictures?.splats() || 0);
-    const parts = [info.label, `${formatCount(splats)} splats`];
+    // Pictures: a picture toy's sheets count too (and lane Powers of ten: a
+    // toy's chunks on show).
+    const splats = info.splats + (player.pictures?.splats() || 0) + (player.chunks?.splats() || 0); // prettier-ignore
+    // Lane Photo sharp view: a toy drawn another way names what is on screen instead of its splats.
+    const shown = player.statusLabel?.(info);
+    const parts = [info.label, shown || `${formatCount(splats)} splats`];
     if (info.credit) parts.push(`by ${info.credit.author} (${info.credit.license})`);
     const pat = player.scene.pattern;
     this.flagCredit = null;
@@ -816,7 +820,8 @@ class App {
     const player = this.player;
     const [x, y] = player.canvasPoint(e);
     player.pickDirty = true;
-    const hit = await player.pickAt(x, y);
+    // Lane Fix9 (engine): a toy with a tap box takes a tap anywhere in it.
+    const hit = (await player.pickAt(x, y)) || player.tapBoxAt(x, y);
     if (hit) player.act(hit);
   }
 

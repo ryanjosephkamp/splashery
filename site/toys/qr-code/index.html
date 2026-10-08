@@ -174,6 +174,8 @@
               <a
                 class="button primary"
                 href="../../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InFyLWNvZGUifSwiY2FtZXJhIjp7InlhdyI6MCwicGl0Y2giOjAsInJvbGwiOjAsImRpc3RhbmNlIjozLjF9fQ"
+                target="_blank"
+                rel="noopener"
                 >Open in the gallery<svg
                   class="arrow"
                   viewBox="0 0 16 16"
@@ -200,12 +202,14 @@
                 style="background-image: url(&quot;../../../assets/toys/qr-code/thumb.webp&quot;)"
               ></span>
               <iframe
-                data-src="../../play/?toy=qr-code"
+                data-src="../../play/?toy=qr-code&sound=on"
                 title="QR code, live: drag to turn it"
                 allow="fullscreen"
               ></iframe>
             </div>
-            <figcaption>Drag to turn it; tap to play.</figcaption>
+            <figcaption>
+              Drag to turn it; tap to play. The speaker button mutes the sound.
+            </figcaption>
           </figure>
         </div>
         <section class="toy-section" aria-labelledby="h-about">
@@ -232,16 +236,17 @@
           <p>
             Built in your browser from a recipe and a seed: nothing in it comes from outside files.
             Its recipe is in
-            <a href="https://github.com/ryanjosephkamp/splashery/blob/main/src/packs/qr.js"
+            <a
+              href="https://github.com/ryanjosephkamp/splashery/blob/main/src/packs/qr.js"
+              target="_blank"
+              rel="noopener"
               ><code>src/packs/qr.js</code></a
             >.
           </p>
 
           <p class="note">
             Splashery's code is under the MIT license; each asset above keeps its own license. Every
-            credit is also in
-            <a href="https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md">CREDITS.md</a
-            >.
+            credit is also in <a href="../../about/credits/">CREDITS.md</a>.
           </p>
         </section>
         <section class="toy-section" aria-labelledby="h-share">
@@ -327,8 +332,9 @@ https://ryanjosephkamp.github.io/splashery/site/toys/qr-code/</textarea
             </button>
           </div>
           <p class="note">
-            Embeds are silent and turn slowly when idle. Every option is in the
-            <a href="https://github.com/ryanjosephkamp/splashery#embedding">embed guide</a>.
+            Embeds are silent and turn slowly when idle; add <code>&amp;sound=on</code> to the
+            iframe's link for the toy's tap sound, with a mute button. Every option is in the
+            <a href="../../share/">embed guide</a>.
           </p>
         </section>
         <section class="toy-section" aria-labelledby="h-related">
@@ -353,6 +359,18 @@ https://ryanjosephkamp.github.io/splashery/site/toys/qr-code/</textarea
             ></a>
           </div>
           <ul class="toy-grid">
+            <li class="toy-card" data-labs>
+              <a href="../../toys/barcodes/"
+                ><img
+                  src="../../../assets/toys/barcodes/thumb.webp"
+                  alt=""
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                /><span class="toy-name">Other barcodes <span class="badge">labs</span></span></a
+              >
+            </li>
             <li class="toy-card" data-labs>
               <a href="../../toys/qr-anatomy/"
                 ><img
@@ -394,6 +412,18 @@ https://ryanjosephkamp.github.io/splashery/site/toys/qr-code/</textarea
               >
             </li>
             <li class="toy-card" data-labs>
+              <a href="../../toys/qr-picture/"
+                ><img
+                  src="../../../assets/toys/qr-picture/thumb.webp"
+                  alt=""
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                /><span class="toy-name">Picture QR <span class="badge">labs</span></span></a
+              >
+            </li>
+            <li class="toy-card" data-labs>
               <a href="../../toys/qr-damage/"
                 ><img
                   src="../../../assets/toys/qr-damage/thumb.webp"
@@ -406,6 +436,20 @@ https://ryanjosephkamp.github.io/splashery/site/toys/qr-code/</textarea
               >
             </li>
             <li class="toy-card" data-labs>
+              <a href="../../toys/qr-build/"
+                ><img
+                  src="../../../assets/toys/qr-build/thumb.webp"
+                  alt=""
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                /><span class="toy-name"
+                  >QR from real things <span class="badge">labs</span></span
+                ></a
+              >
+            </li>
+            <li class="toy-card" data-labs>
               <a href="../../toys/sound-lab/"
                 ><img
                   src="../../../assets/toys/sound-lab/thumb.webp"
@@ -415,44 +459,6 @@ https://ryanjosephkamp.github.io/splashery/site/toys/qr-code/</textarea
                   loading="lazy"
                   decoding="async"
                 /><span class="toy-name">Sound lab <span class="badge">labs</span></span></a
-              >
-            </li>
-            <li class="toy-card" data-labs>
-              <a href="../../toys/splat-mirror/"
-                ><img
-                  src="../../../assets/toys/splat-mirror/thumb.webp"
-                  alt=""
-                  width="96"
-                  height="96"
-                  loading="lazy"
-                  decoding="async"
-                /><span class="toy-name">Splat mirror <span class="badge">labs</span></span></a
-              >
-            </li>
-            <li class="toy-card" data-labs>
-              <a href="../../toys/qr-three/"
-                ><img
-                  src="../../../assets/toys/qr-three/thumb.webp"
-                  alt=""
-                  width="96"
-                  height="96"
-                  loading="lazy"
-                  decoding="async"
-                /><span class="toy-name"
-                  >Three QR codes in one <span class="badge">labs</span></span
-                ></a
-              >
-            </li>
-            <li class="toy-card" data-labs>
-              <a href="../../toys/video-3d/"
-                ><img
-                  src="../../../assets/toys/video-3d/thumb.webp"
-                  alt=""
-                  width="96"
-                  height="96"
-                  loading="lazy"
-                  decoding="async"
-                /><span class="toy-name">Video to 3D <span class="badge">labs</span></span></a
               >
             </li>
           </ul>
@@ -493,21 +499,27 @@ https://ryanjosephkamp.github.io/splashery/site/toys/qr-code/</textarea
         <nav aria-label="More">
           <h2>More</h2>
           <ul>
-            <li><a href="../../../">The gallery</a></li>
+            <li><a href="../../../" target="_blank" rel="noopener">The gallery</a></li>
             <li><a href="../../search/">Search</a></li>
             <li><a href="../../../manual/">The Tinkerer's Manual</a></li>
-            <li><a href="https://github.com/ryanjosephkamp/splashery">Source on GitHub</a></li>
+            <li>
+              <a href="https://github.com/ryanjosephkamp/splashery" target="_blank" rel="noopener"
+                >Source on GitHub</a
+              >
+            </li>
             <li><a href="../../share/">Embed and share</a></li>
             <li><a href="../../about/credits/">Credits</a></li>
+            <li><a href="../../about/contact/">Contact</a></li>
             <li><a href="../../about/privacy/">Privacy</a></li>
             <li><a href="../../about/terms/">Terms</a></li>
           </ul>
         </nav>
       </div>
       <p class="fine">
-        Code under the MIT license; each toy's assets keep their own licenses. Built on the
-        PlayCanvas engine. This is a preview of Splashery's new site; the toys live in
-        <a href="../../../">the gallery</a>.
+        Made by <a href="../../about/contact/">Ryan Kamp</a>. Code under the MIT license; each toy's
+        assets keep their own licenses. Built on the PlayCanvas engine. This is a preview of
+        Splashery's new site; the toys live in
+        <a href="../../../" target="_blank" rel="noopener">the gallery</a>.
       </p>
     </footer>
   </body>

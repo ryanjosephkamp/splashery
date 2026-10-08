@@ -1,0 +1,1474 @@
+<!doctype html>
+<html lang="en" data-root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>How the parallel sessions work · Splashery</title>
+    <meta
+      name="description"
+      content="How Splashery's lanes, the Operator and the owner's reviews fit together: the rules the sessions that build Splashery follow."
+    />
+    <meta name="robots" content="noindex" />
+    <link rel="canonical" href="https://ryanjosephkamp.github.io/splashery/site/learn/operating/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Splashery" />
+    <meta property="og:title" content="How the parallel sessions work · Splashery" />
+    <meta
+      property="og:description"
+      content="How Splashery's lanes, the Operator and the owner's reviews fit together: the rules the sessions that build Splashery follow."
+    />
+    <meta
+      property="og:url"
+      content="https://ryanjosephkamp.github.io/splashery/site/learn/operating/"
+    />
+    <meta
+      property="og:image"
+      content="https://ryanjosephkamp.github.io/splashery/site/assets/og.png"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="A strawberry made of soft 3D splats, beside the word Splashery"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#101010" />
+    <link rel="manifest" href="../../manifest.webmanifest" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cg opacity='.92'%3E%3Cellipse cx='24' cy='26' rx='14' ry='11' fill='%23ff5fa2'/%3E%3Cellipse cx='40' cy='24' rx='12' ry='13' fill='%237bdff2'/%3E%3Cellipse cx='33' cy='41' rx='15' ry='11' fill='%23ffd166'/%3E%3C/g%3E%3C/svg%3E"
+    />
+    <link rel="apple-touch-icon" href="../../../assets/app/icon-180.png" />
+    <script>
+      (function () {
+        var d = document.documentElement;
+        d.classList.add("js");
+        try {
+          var t = localStorage.getItem("splashery.site.theme");
+          if (t === "light" || t === "dark") d.dataset.theme = t;
+          var q = new URLSearchParams(location.search).get("labs");
+          if (q === "1") localStorage.setItem("splashery.labs", "1");
+          else if (q === "0") localStorage.removeItem("splashery.labs");
+          if (localStorage.getItem("splashery.labs") === "1") d.classList.add("labs");
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="stylesheet" href="../../assets/site.css" />
+    <link rel="stylesheet" href="../../assets/hubs.css" />
+    <link rel="stylesheet" href="../../assets/outline.css" />
+    <script type="module" src="../../assets/site.js"></script>
+    <script type="module" src="../../assets/outline.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to the page</a>
+    <header class="site-header">
+      <div class="bar">
+        <a class="brand" href="../../" aria-label="Splashery home"
+          ><svg class="logo" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true">
+            <g opacity=".92">
+              <ellipse cx="24" cy="26" rx="14" ry="11" fill="#ff5fa2" />
+              <ellipse cx="40" cy="24" rx="12" ry="13" fill="#7bdff2" />
+              <ellipse cx="33" cy="41" rx="15" ry="11" fill="#ffd166" />
+            </g></svg
+          ><span>Splashery</span></a
+        >
+        <a class="search-link" href="../../search/" aria-label="Search"
+          ><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+            <circle
+              cx="10.5"
+              cy="10.5"
+              r="6.5"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            />
+            <path
+              d="m15.5 15.5 5 5"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            /></svg
+        ></a>
+        <button type="button" class="menu-button" aria-expanded="false" aria-controls="site-menu">
+          <span class="menu-icon" aria-hidden="true"></span><span class="menu-label">Menu</span>
+        </button>
+        <div class="menu" id="site-menu">
+          <nav aria-label="Site">
+            <ul>
+              <li><a href="../../">Home</a></li>
+              <li><a href="../../toys/">Toys</a></li>
+              <li><a href="../../tools/">Tools</a></li>
+              <li><a href="../../science/">Science</a></li>
+              <li><a href="../../studio/">Studio</a></li>
+              <li><a href="../../learn/" aria-current="page">Learn</a></li>
+              <li><a href="../../new/">What's new</a></li>
+              <li><a href="../../about/">About</a></li>
+            </ul>
+          </nav>
+          <form class="search-form" role="search" action="../../search/" method="get">
+            <label class="visually-hidden" for="site-search">Search toys and pages</label>
+            <input
+              id="site-search"
+              type="search"
+              name="q"
+              placeholder="Search toys"
+              autocomplete="off"
+              enterkeyhint="search"
+            />
+            <button type="submit">Search</button>
+          </form>
+          <button type="button" class="theme-button" aria-label="Color theme: follows your device">
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+              <path d="M12 3a9 9 0 1 0 0 18V3z" fill="currentColor" />
+              <circle
+                cx="12"
+                cy="12"
+                r="8.25"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+              />
+            </svg>
+            <span class="theme-label">Auto</span>
+          </button>
+        </div>
+      </div>
+    </header>
+    <main id="main" tabindex="-1" data-outline>
+      <div class="page-intro">
+        <h1>How the parallel sessions work</h1>
+        <p class="lead">How the lanes, the Operator and the reviews fit together.</p>
+      </div>
+
+      <nav class="toc" aria-label="On this page">
+        <h2>On this page</h2>
+        <ul>
+          <li>
+            <ul>
+              <li><a href="#who-does-what">Who does what</a></li>
+              <li><a href="#pages">Pages</a></li>
+              <li><a href="#lanes-and-file-ownership">Lanes and file ownership</a></li>
+              <li><a href="#how-the-operator-runs-a-lane">How the Operator runs a lane</a></li>
+              <li><a href="#language">Language</a></li>
+              <li><a href="#the-sound-review">The sound review</a></li>
+              <li><a href="#the-help-review">The help review</a></li>
+              <li><a href="#handoffs">Handoffs</a></li>
+              <li><a href="#tests">Tests</a></li>
+              <li><a href="#screenshots">Screenshots</a></li>
+              <li><a href="#the-effect-review-page">The Effect review page</a></li>
+              <li><a href="#the-toy-ideas-page">The Toy Ideas page</a></li>
+              <li><a href="#merging-and-conflicts">Merging and conflicts</a></li>
+              <li><a href="#concurrency-and-usage">Concurrency and usage</a></li>
+              <li>
+                <a href="#local-lanes-the-second-account-on-the-owner-s-mac"
+                  >Local lanes (the second account, on the owner's Mac)</a
+                >
+              </li>
+              <li><a href="#branches-and-prs">Branches and PRs</a></li>
+              <li><a href="#a-lane-s-start">A lane's start</a></li>
+              <li><a href="#a-lane-s-end">A lane's end</a></li>
+              <li><a href="#the-merge-tool-the-operator">The merge tool (the Operator)</a></li>
+              <li>
+                <a href="#upkeep-after-a-merge-the-operator">Upkeep after a merge (the Operator)</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <section class="md-file" aria-label="How the parallel sessions work">
+        <div class="prose">
+          <p>
+            How several Claude sessions build Splashery at once without getting in each other's way.
+            The owner accepted this setup on 2026-09-26 (the &quot;Splashery Parallel Plan&quot;
+            page), and on September 27, 2026 he handed the running of the lanes to the Operator
+            (Part 1 of the &quot;How Splashery Is Made&quot; page). The ground rules and the effect
+            quality rules in
+            <a
+              href="https://github.com/ryanjosephkamp/splashery/blob/main/CLAUDE.md"
+              target="_blank"
+              rel="noopener"
+              >CLAUDE.md</a
+            >
+            apply to every session.
+          </p>
+          <h2 id="who-does-what">Who does what</h2>
+          <ul>
+            <li>
+              <strong>A lane</strong> is one session with one job (a wave of toys, a set of fixes, a
+              feature), one branch, one draft PR and a set of files it owns. The lanes, their files
+              and their state are in
+              <a
+                href="https://github.com/ryanjosephkamp/splashery/blob/main/docs/WORKSTREAMS.md"
+                target="_blank"
+                rel="noopener"
+                >WORKSTREAMS.md</a
+              >. A lane builds; it does not change governance.
+            </li>
+            <li>
+              <strong>The Operator</strong> is one long-lived session that coordinates and never
+              builds toys. It keeps this file, WORKSTREAMS.md,
+              <a
+                href="https://github.com/ryanjosephkamp/splashery/blob/main/docs/HANDOFF.md"
+                target="_blank"
+                rel="noopener"
+                >HANDOFF.md</a
+              >
+              and CLAUDE.md; writes each lane's brief, starts its worker session and runs it
+              (below); does the upkeep on main after each merge; sends the owner a daily digest; and
+              runs the weekly toy-ideas routine (Mondays at 7:43 a.m. Eastern, in the Operator
+              session). Since September 30, 2026 the digest (7:54 a.m.) and a site patrol (7:21
+              a.m.: the live site at phone and desktop size, a sample of toys, errors) run each
+              morning as fresh, read-only Sonnet 5.5 sessions that report straight to the owner.
+              Governance questions go to it. It also keeps the owner's pages (below) and the Sound
+              Board.
+            </li>
+            <li>
+              <strong>The owner</strong> (Ryan) talks only to the Operator, reviews clips on the
+              Effect review page and sends notes (sound reviews as files). Since September 29, 2026
+              the Operator merges by tiers (&quot;Merging and conflicts&quot; below); the owner
+              decides what leaves labs, rule changes and the homepage.
+            </li>
+          </ul>
+          <p>
+            Every cloud session has its own container, clone and branch, so sessions never share a
+            working tree. Worktrees are only for helpers inside one session. What can still collide
+            is the shared material around the toys; the rules below keep it apart.
+          </p>
+          <h2 id="pages">Pages</h2>
+          <div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrolls sideways">
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">Page</th>
+                  <th scope="col">Link</th>
+                  <th scope="col">Who changes it</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">Effect review, page 2</th>
+                  <td>
+                    <a
+                      href="https://claude.ai/artifact/BSayVkzQ2FKESesrkrSUMK"
+                      target="_blank"
+                      rel="noopener"
+                      >https://claude.ai/artifact/BSayVkzQ2FKESesrkrSUMK</a
+                    >
+                  </td>
+                  <td>Lanes add clips and cards (below); the owner marks; the Operator tidies</td>
+                </tr>
+                <tr>
+                  <th scope="row">Effect review, page 1</th>
+                  <td>
+                    <a
+                      href="https://claude.ai/artifact/NCsg9V5SzFY3Mnwuwgq7pi"
+                      target="_blank"
+                      rel="noopener"
+                      >https://claude.ai/artifact/NCsg9V5SzFY3Mnwuwgq7pi</a
+                    >
+                  </td>
+                  <td>Full since September 30, 2026: older clips and marks; no new uploads</td>
+                </tr>
+                <tr>
+                  <th scope="row">Sound Board</th>
+                  <td>
+                    <a
+                      href="https://claude.ai/artifact/VE9XCTxH3djST6dGb6ZAkj"
+                      target="_blank"
+                      rel="noopener"
+                      >https://claude.ai/artifact/VE9XCTxH3djST6dGb6ZAkj</a
+                    >
+                  </td>
+                  <td>
+                    The Operator (after merges and each sound-review round); the owner may mark
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">Help Board</th>
+                  <td>
+                    <a
+                      href="https://claude.ai/artifact/P1NCWsGRE3MFqYTWTnTuqN"
+                      target="_blank"
+                      rel="noopener"
+                      >https://claude.ai/artifact/P1NCWsGRE3MFqYTWTnTuqN</a
+                    >
+                  </td>
+                  <td>
+                    The Operator (<code>node tools/help-board.mjs</code>, below); the owner marks
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">Toy Plan (owner's marks)</th>
+                  <td>
+                    <a
+                      href="https://claude.ai/artifact/PNGPx7REMdhxLMHDXARhw8"
+                      target="_blank"
+                      rel="noopener"
+                      >https://claude.ai/artifact/PNGPx7REMdhxLMHDXARhw8</a
+                    >
+                  </td>
+                  <td>
+                    The owner marks; the Operator republishes (<code
+                      >node tools/toy-plan.mjs --json</code
+                    >)
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">Toy Ideas</th>
+                  <td>
+                    <a
+                      href="https://claude.ai/artifact/5TukiuV3mCt3G3zk6Arx9S"
+                      target="_blank"
+                      rel="noopener"
+                      >https://claude.ai/artifact/5TukiuV3mCt3G3zk6Arx9S</a
+                    >
+                  </td>
+                  <td>The Operator adds three ideas each Monday; the owner marks (below)</td>
+                </tr>
+                <tr>
+                  <th scope="row">Hands-on Plan</th>
+                  <td>
+                    <a
+                      href="https://claude.ai/artifact/ENvHXomEozJrTYE3tUphyG"
+                      target="_blank"
+                      rel="noopener"
+                      >https://claude.ai/artifact/ENvHXomEozJrTYE3tUphyG</a
+                    >
+                  </td>
+                  <td>
+                    The owner marks each toy's hands-on line (approve, change or skip); the Operator
+                    rebuilds it from docs/HANDS-ON-PLAN.md
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">Splashery Parallel Plan</th>
+                  <td>
+                    <a
+                      href="https://claude.ai/artifact/KjJrfKxi4phzJmbgSyRbr7"
+                      target="_blank"
+                      rel="noopener"
+                      >https://claude.ai/artifact/KjJrfKxi4phzJmbgSyRbr7</a
+                    >
+                  </td>
+                  <td>The Operator (the lane prompts)</td>
+                </tr>
+                <tr>
+                  <th scope="row">Splashery Operator Manual</th>
+                  <td>
+                    <a
+                      href="https://claude.ai/artifact/3WYMJxtZDR7m1ecTCN47ZB"
+                      target="_blank"
+                      rel="noopener"
+                      >https://claude.ai/artifact/3WYMJxtZDR7m1ecTCN47ZB</a
+                    >
+                  </td>
+                  <td>The Operator (the owner's how-to)</td>
+                </tr>
+                <tr>
+                  <th scope="row">How Splashery Is Made</th>
+                  <td>
+                    <a
+                      href="https://claude.ai/artifact/HHj9PBXUQck3kAHrHhdkjA"
+                      target="_blank"
+                      rel="noopener"
+                      >https://claude.ai/artifact/HHj9PBXUQck3kAHrHhdkjA</a
+                    >
+                  </td>
+                  <td>The Operator (the plan in Part 1, the public write-up's basis in Part 2)</td>
+                </tr>
+                <tr>
+                  <th scope="row">Pages into Splats (report)</th>
+                  <td>
+                    <a
+                      href="https://claude.ai/artifact/9mrrJYPiZKbSD9s5gFBpaA"
+                      target="_blank"
+                      rel="noopener"
+                      >https://claude.ai/artifact/9mrrJYPiZKbSD9s5gFBpaA</a
+                    >
+                  </td>
+                  <td>The Operator (the picture-and-page plan, accepted September 28, 2026)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <h2 id="lanes-and-file-ownership">Lanes and file ownership</h2>
+          <p>
+            Each lane owns the files in its row of WORKSTREAMS.md: usually its pack files
+            (<code>src/packs/*.js</code>), its handoff file
+            (<code>docs/handoff/&lt;lane&gt;.md</code>), its own test file
+            (<code>tests/&lt;prefix&gt;.spec.mjs</code>), its screenshots
+            (<code>tests/screenshots/&lt;prefix&gt;-*.png</code>) and its toys' folders (<code
+              >assets/toys/&lt;toy id&gt;/</code
+            >). Only that lane edits them. Packs that no active lane owns (WORKSTREAMS.md,
+            &quot;Frozen packs&quot;) are frozen: a change to them needs a lane that the Operator
+            starts.
+          </p>
+          <p>
+            Each lane has a <strong>prefix</strong>, the lane id in lower case, used for card ids,
+            screenshot names and its test file: <code>e4f</code>, <code>e5</code>, <code>e6a</code>,
+            <code>e6b</code>, <code>f</code>, <code>g</code>, <code>ai</code>, <code>math</code>,
+            <code>help</code>, <code>hta</code>, <code>htb</code>, <code>pic</code>,
+            <code>bk</code>, <code>scr</code>, <code>man</code>.
+          </p>
+          <h3 id="shared-files-edit-only-your-own-toys-lines">
+            Shared files: edit only your own toys' lines
+          </h3>
+          <p>
+            These files list every toy. A lane edits only its own toys' entries, in place: don't
+            reorder, reflow or reformat anyone else's lines, so git can merge the lanes line by
+            line.
+          </p>
+          <ul>
+            <li><code>src/toy-sounds.js</code> (each toy's sound spec)</li>
+            <li>
+              <code>src/toy-help.js</code> (each toy's how-to line and About text, in its shelf's
+              section)
+            </li>
+            <li>
+              <code>tools/toy-plan.json</code> (each toy's plan entry:
+              <code>&quot;v&quot;: &quot;keep&quot;</code> and <code>improved</code> when finished)
+            </li>
+            <li><code>src/toys.js</code> (the shelf catalogue: only new toys add rows)</li>
+            <li><code>src/rigs.js</code> (a scan's rig)</li>
+            <li>
+              <code>tools/assets.json</code>, <code>tools/models.json</code>,
+              <code>CREDITS.md</code>, <code>LICENSES.md</code> (add your lines)
+            </li>
+          </ul>
+          <h3 id="files-only-the-operator-edits">Files only the Operator edits</h3>
+          <p>
+            <code>CLAUDE.md</code>, <code>docs/OPERATING.md</code>,
+            <code>docs/WORKSTREAMS.md</code>, <code>docs/HANDOFF.md</code>,
+            <code>docs/handoff/history.md</code>, <code>README.md</code>,
+            <code>docs/ROADMAP.md</code>, <code>docs/BACKLOG.md</code>, <code>docs/PACKS.md</code>,
+            <code>tests/taps.spec.mjs</code>, <code>tools/upkeep.mjs</code>,
+            <code>tools/sound-board.mjs</code>, <code>tools/pages/</code>,
+            <code>package.json</code> and <code>package-lock.json</code>, the standard screenshots
+            (below), and the sound review files (except a sound lane's own toys in them, &quot;The
+            sound review&quot;). A lane that has something for these files writes it in its handoff
+            file (under &quot;For the Operator&quot;: a lesson for PACKS.md, a backlog item, a
+            README line) and the Operator moves it after the merge.
+          </p>
+          <h3 id="generated-files">Generated files</h3>
+          <ul>
+            <li>
+              <code>docs/TOY-PLAN.md</code> comes from <code>tools/toy-plan.json</code>. Never merge
+              it by hand: on a conflict take main's copy, then run
+              <code>node tools/toy-plan.mjs &amp;&amp; npx prettier --write docs/TOY-PLAN.md</code>.
+            </li>
+            <li>
+              The Sound Board page is built by <code>node tools/sound-board.mjs</code> from main.
+              Only the Operator republishes it. If the owner wants to hear a lane's sounds before
+              its merge, the lane builds its own copy (<code
+                >node tools/sound-board.mjs --label=E5 --out=.cache/pages/sound-board-e5.html</code
+              >) and publishes it as a separate new page, linked from its PR.
+            </li>
+            <li>
+              Thumbnails (<code>assets/toys/&lt;id&gt;/thumb.webp</code>) belong to the toy's lane:
+              re-render only your toys.
+            </li>
+          </ul>
+          <h3 id="engine-changes">Engine changes</h3>
+          <p>
+            Everything in <code>src/</code> outside <code>src/packs/</code> (and the shared lists
+            above), <code>vendor/</code>, <code>index.html</code>, <code>styles.css</code> and
+            <code>embed/</code> is the engine. Lanes stay out of it. If a lane truly needs an engine
+            change:
+          </p>
+          <ol>
+            <li>
+              Keep it small, additive and backwards compatible (every other toy behaves exactly as
+              before; the laptop is locked), with a test.
+            </li>
+            <li>
+              Put it in its own small draft PR titled &quot;Engine: …&quot; from a branch named
+              after the lane's branch with <code>-engine</code> added, and say in both PRs that the
+              lane's PR needs it.
+            </li>
+            <li>
+              Tell the owner it should be merged first, then merge main into the lane's branch.
+            </li>
+          </ol>
+          <p>
+            The input path lane F built (pointer handling in <code>src/player.js</code> and
+            <code>src/stage.js</code>, and the grab and tap code in <code>src/motion.js</code>) is
+            engine code like the rest.
+          </p>
+          <h2 id="how-the-operator-runs-a-lane">How the Operator runs a lane</h2>
+          <p>
+            Since September 27, 2026 the owner talks only to the Operator; the Operator starts,
+            steers and reconciles the worker sessions and brings him finished work.
+          </p>
+          <ol>
+            <li>
+              <strong>Brief.</strong> The Operator writes the lane's brief (its toys or job, its
+              files, its branch and PR title, and the rules below) and adds the lane's row to
+              WORKSTREAMS.md.
+            </li>
+            <li>
+              <strong>Start.</strong> The Operator starts the worker session with the brief as its
+              first prompt, pinned to the lane's model (Opus 5.5 or Sonnet 5.5, per the owner's
+              split in CLAUDE.md), on the lane's branch. The worker copies the brief into
+              <code>docs/handoff/&lt;lane&gt;.md</code> and opens its draft PR early.
+            </li>
+            <li>
+              <strong>Model and effort.</strong> Each worker runs its lane's assigned model (Opus
+              5.5 or Sonnet 5.5); any other model needs the owner's permission first. At every
+              check-in the Operator reads the worker's session record, and if it has run on another
+              model (a fallback), the Operator stops it and tells the owner. Effort is high for
+              every worker, lanes and Integrators alike (the owner's call of October 8, 2026). The
+              Operator checks it in the session record too and tells the owner if a worker runs at
+              another level. Helpers use the worker's own model.
+            </li>
+            <li>
+              <strong>Messages.</strong> A worker never asks the owner. It ends each working turn
+              with a short final message: &quot;READY:&quot; (PR link, card ids, test results,
+              anything for the Operator), &quot;WORKING:&quot; (what is left) or
+              &quot;BLOCKED:&quot; (exactly what it needs). The Operator reads it from the session
+              record, answers or relays, and sends a worker its messages as one-shot triggers into
+              its session, headed &quot;From the Operator&quot;.
+            </li>
+            <li>
+              <strong>Checks.</strong> The Operator subscribes to each lane's PR and checks in about
+              hourly while lanes work. It tells lanes to merge main after each merge, answers their
+              questions, and keeps <code>tests/taps.spec.mjs</code> exceptions.
+            </li>
+            <li>
+              <strong>Present.</strong> When a lane is ready, the Operator reviews its diff and
+              tests and watches its clips, then sends the owner one short message: what it does,
+              which cards to mark and where it goes in the merge order.
+            </li>
+            <li>
+              <strong>Marks.</strong> The owner marks clips on the Effect review page (or says so in
+              chat, and the Operator passes it on). Lanes also read the marks on an hourly check-in
+              of their own, fix every &quot;fix&quot; in the same PR, and post &quot;-r2&quot;
+              cards.
+            </li>
+            <li>
+              <strong>End.</strong> After the merge the Operator does the upkeep, tells the worker
+              to stand down, and stops its check-ins.
+            </li>
+          </ol>
+          <p>
+            The owner can still open any worker to watch it. If he sends one an instruction, he
+            tells the Operator too, so they don't cross wires.
+          </p>
+          <h2 id="language">Language</h2>
+          <p>
+            Every new public-facing text is in American English: the docs in the repository, the
+            words on the site (toy names, descriptions, buttons, credits, messages) and PR titles
+            and bodies. So color, center, gray, math, license, toward, catalog, -ize endings, dates
+            like &quot;September 27, 2026&quot;, and commas and periods inside quotation marks.
+            Internal notes and pages follow it too, to keep one habit.
+          </p>
+          <ul>
+            <li>
+              Leave code identifiers, file names and anything stored in links or saved scenes as
+              they are (the pack file <code>maths.js</code>, option keys, toy ids), so old links
+              keep working.
+            </li>
+            <li>
+              Don't rewrite older British text on the side. One sweep does that, as a single Ops PR
+              at a quiet moment before the blog post.
+            </li>
+            <li>
+              <code>node tools/us-english.mjs --diff</code> lists British spellings in the public
+              text a branch adds (against <code>origin/main</code>); run it before you push. After
+              the sweep, the Operator runs it on everything.
+            </li>
+          </ul>
+          <h2 id="the-sound-review">The sound review</h2>
+          <p>
+            The owner reviews the sounds on the Sound Board and agrees on new ones there before they
+            reach the site.
+          </p>
+          <ol>
+            <li>
+              <strong>Notes.</strong> The owner sends notes as a Markdown file (voice-typed is
+              fine). He names only the toys he wants to comment on; any toy he doesn't mention stays
+              as it is.
+            </li>
+            <li>
+              <strong>Filed.</strong> The Operator keeps the notes word for word in
+              <code>docs/reviews/sounds-&lt;date&gt;.md</code> and writes a clean version per toy
+              into <code>tools/sound-review.json</code>:
+              <code
+                >{ &quot;round&quot;, &quot;note&quot;, &quot;toys&quot;: { &quot;&lt;toy
+                id&gt;&quot;: { &quot;status&quot;, &quot;said&quot;, &quot;note&quot;,
+                &quot;plan&quot;, &quot;candidates&quot; } } }</code
+              >. <code>status</code> is <code>keep</code>, <code>change</code>,
+              <code>ready</code> (a new sound to hear), <code>approved</code> or
+              <code>site</code> (in the site); <code>said</code> is his words, <code>note</code> the
+              clean version, <code>plan</code> what the new sound will be. The Sound Board shows
+              each toy's line, with filters (All, To change, Ready to hear, Approved), &quot;Play
+              through&quot; (the filtered toys one after another, the name shown large) and optional
+              marks.
+            </li>
+            <li>
+              <strong>New sounds, on the board only.</strong> Sound lanes add candidates to their
+              toys' entries:
+              <code
+                >candidates: [{ &quot;id&quot;: &quot;a&quot;, &quot;label&quot;: &quot;New A&quot;,
+                &quot;sound&quot;: &lt;spec&gt; }]</code
+              >, with the same specs as <code>src/toy-sounds.js</code>. New voices go in
+              <code>tools/sound-voices-next.js</code> as <code>VOICES.name = { … };</code> lines (no
+              imports or exports). The site doesn't change yet. The Operator rebuilds and
+              republishes the board (<code>node tools/sound-board.mjs</code>) after each round.
+            </li>
+            <li>
+              <strong>The owner listens</strong> and answers in chat or another notes file. A new
+              sound he doesn't mention counts as approved; the Operator lists every candidate so he
+              always knows what he is approving. His optional marks on the board are in its
+              <code>verdicts</code> collection:
+              <code
+                >{ verdict: &quot;good&quot; | &quot;fix&quot; | &quot;&quot;, pick:
+                &quot;&lt;candidate id&gt;&quot; | &quot;&quot;, note, at }</code
+              >.
+            </li>
+            <li>
+              <strong>Into the site.</strong> A sound lane moves approved sounds into
+              <code>src/toy-sounds.js</code> (and new voices into <code>src/voices.js</code>,
+              re-measuring levels with <code>node tools/sound-check.mjs --voices</code>), sets their
+              status to <code>site</code>, and posts no clips unless an effect changed.
+            </li>
+            <li>
+              <strong>Preferences.</strong> From the owner's notes the Operator drafts a &quot;Sound
+              preferences&quot; section for PACKS.md (general guidance, not strict rules). The owner
+              OKs it, and every lane follows it. The first version is PACKS.md section 7e (September
+              30, 2026).
+            </li>
+          </ol>
+          <p><strong>Since September 30, 2026 (the owner's call):</strong></p>
+          <ul>
+            <li>
+              <strong>Sounds go live.</strong> A sound lane puts new sounds straight into
+              <code>src/toy-sounds.js</code>, without waiting for the owner to hear them on the
+              board first. The board shows each toy's current sound, and the owner names any he
+              wants fixed.
+            </li>
+            <li>
+              <strong>The sound patrol.</strong> A routine, run as a fresh Sonnet session, checks
+              every new or changed toy's sound against PACKS.md section 7e with
+              <code>tools/sound-lint.mjs</code>. It reports to the Operator and never merges.
+            </li>
+            <li>
+              <strong>New toys' lanes</strong> follow section 7e from the start, with no separate
+              sound round.
+            </li>
+          </ul>
+          <h2 id="the-help-review">The help review</h2>
+          <p>
+            Every toy has a short &quot;how to play&quot; line and an About text in
+            <code>src/toy-help.js</code> (the style guide is in <code>docs/handoff/Help.md</code>).
+            The owner reads them on the Help Board: each toy's thumbnail, its line (or, under a
+            &quot;Built by the app&quot; tag, the line the app builds from its recipe) and its About
+            text. The owner approved all 303 toys' texts on September 28, 2026; a new or changed
+            toy's texts go on the board with its lane's review.
+          </p>
+          <ul>
+            <li>
+              The Operator builds the board with <code>node tools/help-board.mjs</code> (it writes
+              <code>.cache/pages/help-board.html</code>) and republishes it to its link, from main
+              after a merge or from a checkout with the text lanes' branches merged in while they
+              run.
+            </li>
+            <li>
+              The owner's marks are in the board's <code>verdicts</code> collection, one document
+              per toy id, with a mark for each part:
+              <code
+                >{ howTo: &quot;good&quot; | &quot;fix&quot; | &quot;&quot;, howToText, about:
+                &quot;good&quot; | &quot;fix&quot; | &quot;&quot;, aboutText, note, at }</code
+              >. A mark keeps the text it was given for, so a text changed since then shows as not
+              marked again. A lane reads the marks (never writes them), fixes every &quot;fix&quot;
+              on its toys and leaves approved texts as they are; the Operator republishes the board.
+            </li>
+            <li>
+              From the text lanes on, every lane writes its own toys' entries as part of
+              &quot;done&quot;, and they go on the board with the lane's review.
+            </li>
+          </ul>
+          <h2 id="handoffs">Handoffs</h2>
+          <ul>
+            <li>
+              <code>docs/HANDOFF.md</code> is a short index kept by the Operator: the state of main,
+              the active lanes, where the lessons live, open decisions.
+            </li>
+            <li>
+              <code>docs/handoff/&lt;lane&gt;.md</code> is each lane's own file: its brief (written
+              by the Operator), then its state, notes, known issues and &quot;For the
+              Operator&quot;, kept by the lane as it works. It replaces the old habit of updating
+              HANDOFF.md at the end of a phase.
+            </li>
+            <li>
+              <code>docs/handoff/history.md</code> holds the phase notes from A to E4. After a lane
+              merges, the Operator adds a summary of it there and moves its lessons into PACKS.md.
+            </li>
+          </ul>
+          <h2 id="tests">Tests</h2>
+          <ul>
+            <li>
+              Run the full suite before every push (CLAUDE.md). Keep &quot;embed transfer ≤ 30
+              MB&quot; green.
+            </li>
+            <li>
+              <code>tests/taps.spec.mjs</code> checks every kit toy's tap from data: when a lane
+              marks a toy <code>&quot;v&quot;: &quot;keep&quot;</code> in the plan, the test
+              requires a pulse or toggle tap, plays it frame by frame (twice for a pulse; on and off
+              for a toggle), and checks that every number is finite, that the effect's last moment
+              matches the rest pose, and that morph channels are back near 0 at rest. Lanes never
+              edit this file. If a toy of yours fails it, fix the toy. If the failure is right for a
+              reason (a piece that has faded out on a channel before its part is hidden), ask the
+              Operator to add it to <code>EXCEPT</code> with the reason, and say so in your PR.
+            </li>
+            <li>
+              A lane's own extra tests go in <code>tests/&lt;prefix&gt;.spec.mjs</code> (for example
+              <code>tests/e5.spec.mjs</code>). Don't edit the other spec files; a change to one is a
+              shared change for the Operator.
+            </li>
+          </ul>
+          <h3 id="running-the-suite-fast">Running the suite fast</h3>
+          <p>
+            The Integrators' command for the full run in the cloud container (lane Suite speed,
+            October 8, 2026):
+          </p>
+          <pre><code>node tools/suite.mjs --gl=llvmpipe --jobs=2</code></pre>
+          <ul>
+            <li>
+              <code>tools/suite.mjs</code> runs every spec file in its own single-worker Playwright
+              process, with a JSON report per file in <code>.cache/suite/</code>.
+              <strong>It picks up where it stopped</strong>: the container restarts when a session
+              sits idle for a while, which kills a plain <code>npx playwright test</code> run and
+              all its results; after a restart, run the same command again and only the unfinished
+              files run. Start a new run with <code>--fresh</code>. It prints (and saves as
+              <code>.cache/suite/summary.md</code>) the failures, the slowest files and the slowest
+              tests; <code>--report</code> prints that again without running anything.
+            </li>
+            <li>
+              <code>--gl=llvmpipe</code> draws WebGL2 with Mesa's llvmpipe (on a virtual display the
+              tool starts) instead of SwiftShader: the same frames, two to three times faster.
+              <code>--jobs=2</code> runs two files at once, longest first. Together they took the
+              full run from 5 h 24 min (170 files, one at a time, on SwiftShader) to 2 h 45 min (183
+              files; lane Suite speed, October 8, 2026), and the Worlds files boot about ten times
+              faster than before. Three at once was faster still but made a timing test fail; keep
+              it at two.
+            </li>
+            <li>
+              <code>tools/suite.json</code> holds each file's time (refresh with
+              <code>--save-times</code>) and two short lists: <code>solo</code>, files that check
+              the wall clock and fail beside another file (they run at the end, one at a time), and
+              <code>swiftshader</code>, files that fail on llvmpipe (they run on SwiftShader in a
+              <code>--gl=llvmpipe</code> run). The tests themselves never change for speed.
+            </li>
+            <li>
+              <strong>A failure in a fast run.</strong> Add <code>--recheck</code> (or run the same
+              command again with it once the run is done): each file that failed runs once more,
+              alone, and the summary lists which ones passed alone. The failures still count and the
+              exit code stays 1; a test that passes alone is a wall-clock check that a busy CPU
+              upset. Put its file on <code>solo</code> (or, if it fails only on llvmpipe, on
+              <code>swiftshader</code>) in your PR with the evidence, and report the failure as you
+              would any other. A test that fails alone too is a real failure.
+            </li>
+            <li>
+              Same tests, same config, no retries: nothing is skipped or loosened. The default
+              (<code>npx playwright test</code>, SwiftShader, headless) is unchanged, and the
+              owner's Mac keeps its own GPU.
+            </li>
+            <li>
+              Long runs: start it in the background, check on it every 30 to 60 minutes, and rerun
+              the command if the container restarted. Don't wait in short polls.
+            </li>
+            <li>
+              Two sessions can share a run: <code>--shard=1/2</code> in one and
+              <code>--shard=2/2</code> in the other split the files by time.
+            </li>
+            <li>
+              One file: <code>node tools/suite.mjs --files=kit,taps</code> (or
+              <code>npx playwright test tests/kit.spec.mjs</code> as before). Anything after
+              <code>--</code> goes to Playwright (<code>-- --trace=on</code>).
+            </li>
+            <li>
+              Screenshots from a fast run look the same but are not byte-for-byte the ones a
+              SwiftShader run writes (llvmpipe rounds a few pixels differently, and effects are
+              caught at slightly different moments). Restore the standard ones as usual (below); a
+              lane's own screenshots can come from either.
+            </li>
+          </ul>
+          <h2 id="screenshots">Screenshots</h2>
+          <ul>
+            <li>
+              CLAUDE.md asks for screenshots at 390×844 and 1440×900. A lane saves its own as
+              <code>tests/screenshots/&lt;prefix&gt;-&lt;name&gt;-390x844.png</code> and
+              <code>…-1440x900.png</code> (for example <code>e5-watermelon-390x844.png</code>).
+            </li>
+            <li>
+              Every full test run rewrites twelve standard screenshots (<code>app-*</code>,
+              <code>balls-*</code>, <code>embed-400x300</code>, <code>make-help-*</code>,
+              <code>shelf-*</code>, <code>v3-*</code>; the list is <code>STANDARD_SHOTS</code> in
+              <code>tools/upkeep.mjs</code>). Lanes never commit them: after a full run,
+              <code>node tools/upkeep.mjs --restore-shots</code> puts them back. A full run also
+              rewrites other lanes' screenshots (<code>e5-*</code>, <code>e6a-*</code> and so on):
+              put back every screenshot your branch didn't change with
+              <code>git checkout -- tests/screenshots/</code> (then re-add your own). The Operator
+              refreshes the standard ones on main.
+            </li>
+          </ul>
+          <h2 id="the-effect-review-page">The Effect review page</h2>
+          <p>
+            The owner reviews every new or changed effect as a clip on the Effect review page. Each
+            page holds 1 GB of clips, and page 1 (<a
+              href="https://claude.ai/artifact/NCsg9V5SzFY3Mnwuwgq7pi"
+              target="_blank"
+              rel="noopener"
+              >https://claude.ai/artifact/NCsg9V5SzFY3Mnwuwgq7pi</a
+            >) filled on September 30, 2026, so new clips go on page 2:
+            <a
+              href="https://claude.ai/artifact/BSayVkzQ2FKESesrkrSUMK"
+              target="_blank"
+              rel="noopener"
+              >https://claude.ai/artifact/BSayVkzQ2FKESesrkrSUMK</a
+            >. Page 1 keeps its clips and the owner's marks on them. Each page reads everything from
+            its own database, so lanes add clips and cards at the same time without republishing it.
+            The collections (the same on both pages):
+          </p>
+          <ul>
+            <li>
+              <code>lanes/&lt;lane id&gt;</code>:
+              <code>{ title, note, order, finished, groups: [{ id, title, note }] }</code>. The
+              Operator makes each lane's record. A lane may set its own record's
+              <code>groups</code> (sections within the lane).
+            </li>
+            <li>
+              <code>cards/&lt;card id&gt;</code>: one clip.
+              <code>{ lane, group, order, name, said, now, asset, at }</code>,
+              <code>video: true</code> when the clip is an MP4, and <code>replacedBy</code> once a
+              newer clip of the same effect is posted. <code>lane</code> is the lane id (as in
+              <code>lanes/</code>), <code>group</code> one of the lane's group ids (optional),
+              <code>order</code> a number (cards sort by it), <code>name</code> the toy's shelf name
+              (add &quot;: the second tap&quot; or &quot;: Cairn style&quot; for a variant),
+              <code>said</code> what the owner said about it (their review note or their mark's
+              note, quoted; else &quot;(No note; plan: …)&quot; with the plan's effect),
+              <code>now</code> what the tap does now in plain words with its length,
+              <code>asset</code> the uploaded clip's id, <code>at</code> the date (YYYY-MM-DD).
+              Older cards use <code>clip</code> (a file published with the page, such as
+              <code>e4/oak.gif</code>) instead of <code>asset</code>.
+            </li>
+            <li>
+              <code>verdicts/&lt;card id&gt;</code>: the owner's marks,
+              <code
+                >{ verdict: &quot;good&quot; | &quot;fix&quot; | &quot;&quot;, note, at, sharper
+                }</code
+              >
+              (<code>sharper: true</code> marks a &quot;Just sharper&quot; fix on page 2, below).
+              Only the owner writes these.
+            </li>
+          </ul>
+          <p>
+            Card ids are <code>&lt;prefix&gt;-&lt;toy id&gt;</code>, with a variant after it
+            (<code>e5-cherries-pair</code>). A clip redone after the owner's note gets the old
+            card's id plus <code>-r2</code> (then <code>-r3</code>), in the old card's lane. A
+            card's marks live on the same page as the card.
+          </p>
+          <p>
+            The pages' sources are <code>tools/pages/effect-review.html</code> (page 1) and
+            <code>tools/pages/effect-review-2.html</code> (page 2); only the Operator republishes
+            them. Their clip box takes each clip's own shape (square, landscape or a tall 390×844
+            phone clip), capped at about three quarters of the screen's height, where the clip
+            letterboxes. Never give <code>.clip</code> a fixed <code>aspect-ratio</code>: a clip
+            taller than the box spills over the card's text and buttons (the owner's report of
+            September 30, 2026). After any change to the page's layout, render a tall phone clip and
+            a square one in a card at 390 pixels and at desktop width, and check that nothing
+            overlaps before republishing. When page 2 fills, the Operator opens a page 3 the same
+            way: a copy with its own title, the active lanes' records, and a link each way.
+          </p>
+          <h3 id="steps-for-a-lane">Steps for a lane</h3>
+          <ol>
+            <li>
+              Render each clip:
+              <code
+                >node tools/effect-clip.mjs --strip=8 --size=320 &lt;toy
+                id&gt;:&lt;seconds&gt;</code
+              >
+              (the server must be running; <code>--taps</code>, <code>--opt=key=value</code> and
+              <code>--pgn=</code> are in the tool's header). It writes a looping GIF. Watch it
+              before posting. For a drag, use <code>node tools/drag-clip.mjs</code> instead. To save
+              space, post an MP4 instead of the GIF (about five times smaller) and add
+              <code>&quot;video&quot;: true</code> to its card:
+              <code>pip install imageio-ffmpeg</code>, then run its <code>ffmpeg</code> (<code
+                >python3 -c 'import imageio_ffmpeg;print(imageio_ffmpeg.get_ffmpeg_exe())'</code
+              >) with
+              <code
+                >-i clip.gif -movflags +faststart -pix_fmt yuv420p -vf
+                &quot;scale=trunc(iw/2)*2:trunc(ih/2)*2&quot; -c:v libx264 -crf 23 clip.mp4</code
+              >.
+            </li>
+            <li>
+              Read page 2 once in the session (a session must read an artifact before it can add to
+              it): Artifact tool, <code>action: &quot;read&quot;</code>, <code>url</code> the page's
+              link. &quot;The page&quot; in the steps below is page 2; nothing more goes on page 1.
+            </li>
+            <li>
+              Upload the clips: Artifact tool, <code>action: &quot;publish&quot;</code>,
+              <code>url</code> the page's link, <code>asset: true</code>,
+              <code>file_paths</code> the clips (up to 25 per call). Never publish to the page
+              without <code>asset: true</code>: that would replace the page. Each result line gives
+              a clip's id (32 hex characters).
+            </li>
+            <li>
+              Add the cards: ArtifactData tool, <code>action: &quot;batch&quot;</code>,
+              <code>url</code> the page's link, <code>writes</code> one entry per clip (up to 50 per
+              batch), for example
+              <code
+                >{ &quot;op&quot;: &quot;set&quot;, &quot;collection&quot;: &quot;cards&quot;,
+                &quot;doc_id&quot;: &quot;e5-watermelon&quot;, &quot;data&quot;: { &quot;lane&quot;:
+                &quot;E5&quot;, &quot;group&quot;: &quot;fruit&quot;, &quot;order&quot;: 10,
+                &quot;name&quot;: &quot;Watermelon&quot;, &quot;said&quot;: &quot;…&quot;,
+                &quot;now&quot;: &quot;…&quot;, &quot;asset&quot;: &quot;&lt;id&gt;&quot;,
+                &quot;at&quot;: &quot;2026-09-27&quot; } }</code
+              >. To give your lane sections, add
+              <code
+                >{ &quot;op&quot;: &quot;update&quot;, &quot;collection&quot;: &quot;lanes&quot;,
+                &quot;doc_id&quot;: &quot;E5&quot;, &quot;data&quot;: { &quot;groups&quot;: [{
+                &quot;id&quot;: &quot;fruit&quot;, &quot;title&quot;: &quot;Fruit&quot;,
+                &quot;note&quot;: &quot;…&quot; }] } }</code
+              >.
+            </li>
+            <li>
+              Read the owner's marks on both pages: ArtifactData,
+              <code>action: &quot;list&quot;</code>, <code>collection: &quot;verdicts&quot;</code>,
+              <code>query: { &quot;limit&quot;: 1000 }</code>, and keep the ids that start with your
+              prefix. Treat notes as the owner's review, and fix every &quot;fix&quot; in the same
+              PR.
+            </li>
+            <li>
+              After a fix, post the new clip as a new card (<code>&lt;old id&gt;-r2</code>, the
+              owner's note quoted in <code>said</code>) and mark the old one replaced in the same
+              batch:
+              <code
+                >{ &quot;op&quot;: &quot;update&quot;, &quot;collection&quot;: &quot;cards&quot;,
+                &quot;doc_id&quot;: &quot;&lt;old id&gt;&quot;, &quot;data&quot;: {
+                &quot;replacedBy&quot;: &quot;&lt;old id&gt;-r2&quot; } }</code
+              >. The page then shows only the new clip. When the old card is on page 1, post the new
+              one on page 2 and set the old card's <code>replacedBy</code> (on page 1) to
+              <code>&quot;page2:&lt;old id&gt;-r2&quot;</code>; page 1 then hides it.
+            </li>
+          </ol>
+          <p>
+            Never republish the page, write to <code>verdicts</code>, change another lane's cards or
+            record, or delete clips. When the owner has approved all of a lane's clips and its PR
+            has merged, the Operator sets the lane's <code>finished: true</code>, which folds it
+            away on the page.
+          </p>
+          <h2 id="the-toy-ideas-page">The Toy Ideas page</h2>
+          <p>
+            <a
+              href="https://claude.ai/artifact/5TukiuV3mCt3G3zk6Arx9S"
+              target="_blank"
+              rel="noopener"
+              >https://claude.ai/artifact/5TukiuV3mCt3G3zk6Arx9S</a
+            >
+            (source: <code>tools/pages/toy-ideas.html</code>). Every Monday (daily until September
+            30, 2026) the Operator's routine adds three new toy ideas that fit the ground rules,
+            each with a tap effect and a sound. Since September 29, 2026 they are useful tools and
+            simulations, not novelty toys. Its collections:
+          </p>
+          <ul>
+            <li>
+              <code>ideas/&lt;idea id&gt;</code>:
+              <code
+                >{ day, order, name, kind: &quot;kit&quot; | &quot;scan&quot;, shelf, tap, sound,
+                why, notes, source, lane, reply, revised, set, setNote, from }</code
+              >. The id is a slug of the name. A scan idea's <code>source</code> is
+              <code>{ title, url, licence, author }</code>, with the licence checked on the live
+              source page (CC0 or CC BY only). <code>set</code> groups ideas under a heading within
+              their day (<code>setNote</code> is its line), and
+              <code>from: &quot;owner&quot;</code> tags the owner's own ideas. Only the Operator
+              writes ideas.
+            </li>
+            <li>
+              <code>marks/&lt;idea id&gt;</code>: the owner's marks,
+              <code
+                >{ mark: &quot;approve&quot; | &quot;change&quot; | &quot;skip&quot; | &quot;&quot;,
+                note, at }</code
+              >. Only the owner writes these. &quot;Change&quot; keeps the idea with the owner's
+              note, and the note wins: the next morning run rewrites the idea to match and sets
+              <code>reply</code> and <code>revised</code>.
+            </li>
+          </ul>
+          <p>
+            Approved and changed ideas wait on the page until the owner asks for a lane. The
+            Operator then writes the lane's brief from them (like any new lane) and sets each idea's
+            <code>lane</code> to the lane id.
+          </p>
+          <h2 id="merging-and-conflicts">Merging and conflicts</h2>
+          <p>
+            The lane loop and its merge gates are drawn as a grooph graph in
+            <a
+              href="https://github.com/ryanjosephkamp/splashery/blob/main/docs/lane-loop.grooph.json"
+              target="_blank"
+              rel="noopener"
+              >lane-loop.grooph.json</a
+            >
+            (the owner's answer of September 29, 2026). It passes <code>grooph validate</code> with
+            no issues: every loop has a stop, and the two irreversible steps (merging a change to
+            public toys, and taking toys out of labs) each sit behind the owner's gate. Open it on a
+            phone with <code>grooph share docs/lane-loop.grooph.json</code>. Update it when these
+            rules change.
+          </p>
+          <ul>
+            <li>
+              <p>
+                Merge tiers (the owner's rules of September 29, 2026), always with &quot;Create a
+                merge commit&quot;:
+              </p>
+              <ul>
+                <li>
+                  The Operator merges its own Ops PRs, anything behind the labs switch, and additive
+                  engine PRs, once the full test run passes on main with the PR merged in (the
+                  Integrator runs it once 6 or more lanes run).
+                </li>
+                <li>
+                  Changes to toys the public already sees wait for the owner's &quot;good&quot;
+                  marks on every card; then the Operator merges them.
+                </li>
+                <li>
+                  The owner alone decides what leaves labs, changes to the rules, and the homepage.
+                </li>
+                <li>Workers never merge.</li>
+              </ul>
+            </li>
+            <li>
+              When main moves, every open lane merges it into its branch:
+              <code>git fetch origin main</code> then <code>git merge origin/main</code>, resolves
+              any conflict, runs the tests and pushes. Never rebase, amend or force-push a branch
+              that has been pushed. The session's PR watcher does this when a merge-conflict notice
+              arrives, and at each check-in.
+            </li>
+            <li>
+              <p>Resolving:</p>
+              <ul>
+                <li>
+                  Shared lists (<code>src/toy-sounds.js</code>, <code>tools/toy-plan.json</code>,
+                  <code>src/toys.js</code>, credits, licences, asset lists): keep both sides' lines.
+                </li>
+                <li>
+                  <code>docs/TOY-PLAN.md</code>: take main's copy (<code
+                    >git checkout origin/main -- docs/TOY-PLAN.md</code
+                  >), then regenerate it as above.
+                </li>
+                <li>
+                  Standard screenshots and anything else only the Operator edits: take main's copy.
+                </li>
+                <li>
+                  A conflict in a file you own means someone else edited it: keep your version and
+                  tell the Operator.
+                </li>
+              </ul>
+            </li>
+            <li>An engine PR a lane needs is merged before the lane's PR.</li>
+          </ul>
+          <h2 id="concurrency-and-usage">Concurrency and usage</h2>
+          <ul>
+            <li>
+              Up to 12 workers at once until the weekly reset (the owner's choice of September 29,
+              2026; it was 8 until that morning), paced by the 5-hour limit: each session record
+              shows it, and the owner reports the weekly usage morning and evening. Once 6 or more
+              lanes run, an Integrator worker (Sonnet 5.5) builds the combinations the Operator
+              names and runs the full test run, so merges don't queue behind the Operator. CLAUDE.md
+              records that seven parallel builders once used a week's usage in one go.
+            </li>
+            <li>
+              While lanes run in parallel, a lane uses at most one helper subagent at a time. The
+              Operator uses none.
+            </li>
+            <li>
+              The Operator starts the next lane when a slot is free, in the order in ROADMAP.md.
+            </li>
+          </ul>
+          <h3 id="the-save-point-when-an-account-s-weekly-usage-is-nearly-gone">
+            The save point (when an account's weekly usage is nearly gone)
+          </h3>
+          <p>
+            The owner's request of October 3, 2026: when an account is in its last 5% or so of
+            weekly usage, all work on it is saved and easy to pick up after the reset (automatic or
+            manual). The owner says &quot;save point&quot; (naming the account), or reports 95% or
+            more.
+          </p>
+          <ol>
+            <li>
+              The Operator tells every lane on that account at once: a PR comment starting
+              &quot;From the Operator: save point&quot; for each cloud lane, and one paste line for
+              the owner's local tabs: &quot;Save point: commit and push your work now, set State to
+              PAUSED with your next step, then stop.&quot;
+            </li>
+            <li>
+              <p>Each lane, right away:</p>
+              <ul>
+                <li>
+                  commits its work in progress (a commit titled &quot;WIP (save point): …&quot; is
+                  fine) and pushes its branch; it stops any test run that is going;
+                </li>
+                <li>
+                  sets its handoff file's State line to &quot;PAUSED (save point): &lt;the exact
+                  next step&gt;&quot;, and lists what is half done, the last test results and any
+                  clip not yet posted;
+                </li>
+                <li>pushes that, and stops: no new turns, no check-ins.</li>
+              </ul>
+            </li>
+            <li>
+              <p>The Operator:</p>
+              <ul>
+                <li>merges nothing and starts nothing;</li>
+                <li>cancels its check-ins except one set for just after the reset;</li>
+                <li>
+                  writes the resume list (each lane, its branch and its next step) into HANDOFF.md,
+                  or into the backup kit if there's too little usage left for a PR;
+                </li>
+                <li>sends the owner a fresh backup kit.</li>
+              </ul>
+            </li>
+            <li>
+              After the reset, the owner says &quot;resume&quot;. The Operator restarts each lane
+              with &quot;Read docs/handoff/&lt;lane&gt;.md and continue from its State line&quot;,
+              oldest first, within the usual limits.
+            </li>
+          </ol>
+          <p>
+            If the Operator's own account is the one running out, it does steps 1 to 3 first, then
+            stops.
+          </p>
+          <h2 id="local-lanes-the-second-account-on-the-owner-s-mac">
+            Local lanes (the second account, on the owner's Mac)
+          </h2>
+          <p>
+            Since October 3, 2026 (the owner's call that afternoon), some lanes run in Claude Code
+            on the owner's Mac, signed in to his second Claude account, so they use that account's
+            weekly usage. The Operator still writes their briefs, reviews their PRs and clips, and
+            merges; only the mechanics differ. A local lane's brief says &quot;Local lane&quot; at
+            the top. Its session:
+          </p>
+          <ul>
+            <li>
+              <strong>Starts</strong> from the owner, in a terminal, in the lane's own folder (a git
+              worktree on the lane's branch), with the one-line prompt &quot;Read
+              docs/handoff/&lt;lane&gt;.md in this repository and do it.&quot; Its brief is already
+              in that file, so it adds &quot;## State&quot; below it instead of copying it.
+            </li>
+            <li>
+              <strong>Has its own port.</strong> Several lanes share one computer, and the test
+              server reuses whatever already answers on its port, so a lane on another lane's port
+              tests the wrong files. Before any test or tool, in each new shell:
+              <code
+                >export SPLASHERY_PORT=&lt;its port&gt; SPLASHERY_URL=http://127.0.0.1:&lt;its
+                port&gt;/</code
+              >, and start the tools' server from the lane's own folder with
+              <code>python3 -m http.server &lt;its port&gt; --bind 127.0.0.1</code>. Never use 4173
+              there. Most tools read <code>SPLASHERY_URL</code>;
+              <code>tools/sound-check.mjs</code> takes
+              <code>--base=http://127.0.0.1:&lt;its port&gt;</code> instead.
+            </li>
+            <li>
+              <strong>Tests</strong> its own spec files, plus <code>tests/kit.spec.mjs</code>,
+              <code>tests/taps.spec.mjs</code>, <code>tests/help.spec.mjs</code> and
+              <code>tests/unit.spec.mjs</code>, on its port. Four files still expect 4173
+              (<code>bk</code>, <code>pic</code>, <code>smoke</code>, <code>vw</code>): skip them
+              locally and say so in the PR; the Integrators run the full suite in the cloud before
+              anything merges. On the Mac, leave <code>SPLASHERY_CHROMIUM</code> unset (the owner
+              installed Playwright's own Chromium once); never run <code>playwright install</code>.
+            </li>
+            <li>
+              <strong>Gets messages</strong> as comments on its own PR that start &quot;From the
+              Operator&quot;. It reads them (<code
+                >gh api repos/ryanjosephkamp/splashery/issues/&lt;PR&gt;/comments</code
+              >) when it starts each item of its brief and before every push, and does what they
+              say.
+            </li>
+            <li>
+              <strong>Reports</strong> in its handoff file: the first line under &quot;##
+              State&quot; is &quot;READY:&quot;, &quot;WORKING:&quot; or &quot;BLOCKED:&quot; with
+              the date and time, kept current and pushed, because the Operator can't read a local
+              session. It ends its session with the same line.
+            </li>
+            <li>
+              <strong>Posts clips</strong> as in &quot;Steps for a lane&quot; if its Artifact tools
+              can read page 2 (the owner shares page 2 with his second account). If they can't, it
+              pushes the MP4 clips and a <code>cards.json</code> (the card documents of step 4, with
+              <code>&quot;file&quot;</code> naming each clip in place of
+              <code>&quot;asset&quot;</code>) to its own branch
+              <code>claude/clips-&lt;lane&gt;</code> (never merged), and the Operator posts them.
+              The owner's marks then reach it through the owner, never through the repo or a PR.
+            </li>
+            <li>
+              <strong>Keeps going</strong> while the owner is away: when one item is blocked, it
+              says so in &quot;State&quot; and moves on to the next item of its brief. It pushes
+              only its own branches, never merges, and never asks the owner anything in the
+              terminal.
+            </li>
+          </ul>
+          <h2 id="branches-and-prs">Branches and PRs</h2>
+          <ul>
+            <li>
+              A lane works on the branch the Operator gives it and opens one draft PR against
+              <code>main</code>, titled &quot;Phase &lt;lane&gt;: …&quot; (for example &quot;Phase
+              E5: new tap effects for the food toys&quot;), with the five sections from CLAUDE.md.
+              Stacked parts add <code>-&lt;part&gt;</code> to the branch.
+            </li>
+            <li>
+              The Operator's branches are <code>claude/operator-&lt;topic&gt;</code> and its PRs
+              &quot;Ops: …&quot;.
+            </li>
+            <li>
+              An engine change for a lane is &quot;Engine: …&quot; on the lane's branch name plus
+              <code>-engine</code>.
+            </li>
+            <li>A lane's commits, PR and handoff name its lane.</li>
+          </ul>
+          <h2 id="a-lane-s-start">A lane's start</h2>
+          <ol>
+            <li>
+              Your brief is your session's first prompt. Copy it into
+              <code>docs/handoff/&lt;lane&gt;.md</code> under &quot;Brief&quot;, then read
+              CLAUDE.md, this file, WORKSTREAMS.md (your row), docs/PACKS.md and your toys in
+              docs/TOY-PLAN.md (new toys aren't there yet).
+            </li>
+            <li>
+              For toys already on the shelf, check the owner's marks on the Toy Plan page:
+              ArtifactData, <code>action: &quot;list&quot;</code>,
+              <code>collection: &quot;marks&quot;</code> on
+              <a
+                href="https://claude.ai/artifact/PNGPx7REMdhxLMHDXARhw8"
+                target="_blank"
+                rel="noopener"
+                >https://claude.ai/artifact/PNGPx7REMdhxLMHDXARhw8</a
+              >
+              (one document per toy id:
+              <code
+                >{ mark: &quot;yes&quot; | &quot;change&quot; | &quot;skip&quot; | &quot;&quot;,
+                note, at }</code
+              >). A &quot;change&quot; note overrides the proposal in
+              <code>tools/toy-plan.json</code>; update your toys' entries to match. If the tool is
+              not available, ask the owner to press &quot;Copy my marks and notes&quot; on the page
+              and paste the text.
+            </li>
+            <li>Merge the latest main into your branch.</li>
+            <li>
+              Fill in &quot;State&quot; in your handoff file and open your draft PR early, so the
+              owner and the Operator can see the lane.
+            </li>
+          </ol>
+          <h2 id="a-lane-s-end">A lane's end</h2>
+          <ol>
+            <li>
+              Every toy in the brief has its effect and sound (or the PR says which do not, and
+              why). Each finished toy is <code>&quot;v&quot;: &quot;keep&quot;</code> with an
+              <code>improved</code> entry, and TOY-PLAN.md is regenerated.
+            </li>
+            <li>
+              <code>node tools/check-packs.mjs &lt;pack&gt;</code>, a contact sheet, thumbnails for
+              your toys, your screenshots, <code>node tools/sound-check.mjs</code> on your toys.
+            </li>
+            <li>Clips of every new or changed effect are on the Effect review page.</li>
+            <li>
+              The full test suite passes, <code>node tools/upkeep.mjs --restore-shots</code> has put
+              the standard screenshots back, and <code>npx prettier --check .</code> is clean.
+            </li>
+            <li>
+              Your handoff file says what was done, the known issues, and anything for the Operator.
+            </li>
+            <li>
+              The PR is ready for the owner. Finish with &quot;READY:&quot; for the Operator. Keep
+              the PR mergeable, and fix whatever the owner marks &quot;Needs work&quot; in the same
+              PR. Since October 3, 2026 a &quot;fix&quot; mark on Effect review page 2 is stored
+              only when the owner sends it with its note, so every &quot;fix&quot; a lane reads
+              carries his note; act on the note, and if a &quot;fix&quot; ever comes without one,
+              ask the Operator instead of guessing. Since October 7, 2026 page 2 also has a
+              <strong>&quot;Just sharper&quot;</strong> button: one tap stores a &quot;fix&quot;
+              with <code>sharper: true</code> and the note &quot;Everything else looks right. Just
+              make it sharper and less grainy (finer, denser splats where it shows; no blur, no
+              speckle).&quot; Read it as exactly that: keep the effect, its motion, colors and
+              timing as they are, and only sharpen it (finer, denser splats where it shows, solid
+              opaque materials, no blur or speckle, still smooth on a phone). Post the sharper clip
+              as the card's replacement. If something else also needs work, the owner uses
+              &quot;Needs work&quot; with his own note instead.
+            </li>
+          </ol>
+          <h2 id="the-merge-tool-the-operator">The merge tool (the Operator)</h2>
+          <p>
+            <code>tools/op-merge.mjs</code> (the owner's pick of October 7, 2026) does the
+            Operator's merge routine in one command, so a merge costs a few lines of output instead
+            of a long session:
+          </p>
+          <pre><code>node tools/op-merge.mjs --topic oct7c --trailer-file .cache/trailers.txt \
+  --pr 389:&lt;full sha&gt; --title 389=&quot;Phase Showcase: the galaxy-box caption fits again&quot; \
+  --pr 391:&lt;full sha&gt; --title 391=&quot;Phase Space r3: handoff after merge&quot;</code></pre>
+          <ol>
+            <li>
+              It fetches main (and any PR head it lacks, as <code>pull/&lt;n&gt;/head</code>), makes
+              <code>claude/operator-merge-&lt;topic&gt;</code> from <code>origin/main</code> and
+              merges each head in the order given with <code>--no-ff</code> and the message
+              &quot;Merge #&lt;n&gt; (&lt;title&gt;)&quot; plus the trailer lines.
+            </li>
+            <li>
+              A conflict in a generated file (site/ apart from the hand-written site/assets/,
+              docs/TOY-PLAN.md, src/showcase/facts.json) takes one side and is rebuilt in step 4. A
+              conflict in <code>tools/sound-review.json</code> is merged toy by toy (3-way, per key
+              under &quot;toys&quot;). Anything else stops with the files named and the merge left
+              in progress: resolve them, <code>git add</code> them and rerun the same command with
+              <code>--continue</code> (or <code>git merge --abort</code>).
+            </li>
+            <li>
+              It checks that <code>src/toys.js</code>, <code>src/toy-help.js</code> and
+              <code>src/toy-sounds.js</code> parse and that the four JSON lists are valid.
+            </li>
+            <li>
+              It runs <code>toy-plan.mjs</code>, <code>site-build.mjs</code> and
+              <code>shw-facts.mjs</code>, formats their output, runs both <code>--check</code>s and
+              commits &quot;Ops: rebuild site/ after #a, #b&quot; when anything changed.
+            </li>
+            <li>
+              <p>
+                It runs the specs the PRs touched with <code>--workers=1</code>, restores the
+                screenshots, and runs <code>npx prettier --check .</code> and
+                <code>node tools/us-english.mjs --diff</code>. The specs (the PR body says why each
+                one ran):
+              </p>
+              <ul>
+                <li>
+                  changed specs, and specs whose prefix starts a changed file's name in src/, tools/
+                  or tests/screenshots/;
+                </li>
+                <li>
+                  taps, hta, help, unit and kit when <code>src/toys.js</code>,
+                  <code>src/toy-help.js</code> or <code>src/toy-sounds.js</code> changes or a PR
+                  adds a kit toy;
+                </li>
+                <li>
+                  for a changed <code>src/packs/&lt;pack&gt;.js</code>, every spec that names one of
+                  that pack's toy ids;
+                </li>
+                <li>
+                  smoke (the embed transfer ≤ 30 MB test) when anything under assets/ changes;
+                </li>
+                <li>site, spg and tpg when a PR changes site/.</li>
+              </ul>
+            </li>
+            <li>
+              It writes the PR body (the five sections) to
+              <code>.cache/op-merge/&lt;topic&gt;-pr.md</code> and prints a title. The full output
+              is in <code>.cache/op-merge/&lt;topic&gt;.log</code> (and
+              <code>&lt;topic&gt;-tests.log</code>).
+            </li>
+          </ol>
+          <p>
+            <code>--dry-run</code> predicts each merge (clean, settles itself, or stops on which
+            files) and the specs it would run, without touching a branch.
+            <code>--no-tests</code> skips the specs; <code>--spec &lt;file&gt;</code> adds one. Exit
+            code 0 means all green, 1 a stop, 3 finished with a failing check (under Known issues).
+            The tool never pushes, opens or merges a PR: push the branch, open the PR with the body
+            (add your own footer), and merge it through GitHub as before.
+          </p>
+          <h2 id="upkeep-after-a-merge-the-operator">Upkeep after a merge (the Operator)</h2>
+          <ol>
+            <li>Update your copy of main.</li>
+            <li>
+              <code>node tools/upkeep.mjs</code>: regenerates TOY-PLAN.md, rebuilds
+              <code>.cache/pages/sound-board.html</code> and refreshes the standard screenshots
+              (<code>--full</code> runs the whole suite instead; <code>--no-shots</code> skips
+              them).
+            </li>
+            <li>
+              Republish the Sound Board: Artifact tool, <code>url</code> the Sound Board's link,
+              <code>file_path</code> <code>.cache/pages/sound-board.html</code>. If toy help
+              changed, rebuild and republish the Help Board too (<code
+                >node tools/help-board.mjs</code
+              >).
+            </li>
+            <li>
+              Update WORKSTREAMS.md and HANDOFF.md, add the lane's summary to
+              <code>docs/handoff/history.md</code>, move its &quot;For the Operator&quot; items
+              (PACKS.md lessons, backlog, README), and set its review lane
+              <code>finished</code> once the owner has approved its clips.
+            </li>
+            <li>
+              Commit on <code>claude/operator-&lt;topic&gt;</code> as a small &quot;Ops: …&quot; PR,
+              and tell open lanes to merge main.
+            </li>
+            <li>
+              Tell the merged lane's worker to stand down (a one-shot trigger), and stop its
+              check-ins.
+            </li>
+          </ol>
+        </div>
+      </section>
+      <p class="note">
+        This page is built from
+        <a
+          data-source
+          href="https://github.com/ryanjosephkamp/splashery/blob/main/docs/OPERATING.md"
+          target="_blank"
+          rel="noopener"
+          >docs/OPERATING.md</a
+        >
+        each time the site is built, so it always matches them.
+      </p>
+    </main>
+    <footer class="site-footer">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="brand" href="../../"
+            ><svg class="logo" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true">
+              <g opacity=".92">
+                <ellipse cx="24" cy="26" rx="14" ry="11" fill="#ff5fa2" />
+                <ellipse cx="40" cy="24" rx="12" ry="13" fill="#7bdff2" />
+                <ellipse cx="33" cy="41" rx="15" ry="11" fill="#ffd166" />
+              </g></svg
+            ><span>Splashery</span></a
+          >
+          <p>
+            splats you can play with. Free, in your browser, with nothing to install; files you open
+            stay on your device.
+          </p>
+        </div>
+        <nav aria-label="Explore">
+          <h2>Explore</h2>
+          <ul>
+            <li><a href="../../">Home</a></li>
+            <li><a href="../../toys/">Toys</a></li>
+            <li><a href="../../tools/">Tools</a></li>
+            <li><a href="../../science/">Science</a></li>
+            <li><a href="../../studio/">Studio</a></li>
+            <li><a href="../../learn/">Learn</a></li>
+            <li><a href="../../new/">What's new</a></li>
+            <li><a href="../../about/">About</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="More">
+          <h2>More</h2>
+          <ul>
+            <li><a href="../../../" target="_blank" rel="noopener">The gallery</a></li>
+            <li><a href="../../search/">Search</a></li>
+            <li><a href="../../../manual/">The Tinkerer's Manual</a></li>
+            <li>
+              <a href="https://github.com/ryanjosephkamp/splashery" target="_blank" rel="noopener"
+                >Source on GitHub</a
+              >
+            </li>
+            <li><a href="../../share/">Embed and share</a></li>
+            <li><a href="../../about/credits/">Credits</a></li>
+            <li><a href="../../about/contact/">Contact</a></li>
+            <li><a href="../../about/privacy/">Privacy</a></li>
+            <li><a href="../../about/terms/">Terms</a></li>
+          </ul>
+        </nav>
+      </div>
+      <p class="fine">
+        Made by <a href="../../about/contact/">Ryan Kamp</a>. Code under the MIT license; each toy's
+        assets keep their own licenses. Built on the PlayCanvas engine. This is a preview of
+        Splashery's new site; the toys live in
+        <a href="../../../" target="_blank" rel="noopener">the gallery</a>.
+      </p>
+    </footer>
+  </body>
+</html>

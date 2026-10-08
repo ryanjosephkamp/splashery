@@ -1087,7 +1087,7 @@
     "u": "toys/real-moon/",
     "k": "toy",
     "s": "Space",
-    "d": "Tap to fly to Tycho, Copernicus or Apollo 11's site and back. The Sun slider moves the light.",
+    "d": "Tap a spot to zoom in and name it; tap again to go out. Play flies to Tycho and more.",
     "w": "the real moon space space moon lunar lro lola nasa real map elevation relief craters tycho copernicus apollo real-moon",
     "i": "../assets/toys/real-moon/thumb.webp",
     "l": 1
@@ -1097,7 +1097,7 @@
     "u": "toys/real-mars/",
     "k": "toy",
     "s": "Space",
-    "d": "Tap to fly to Olympus Mons, Valles Marineris or Gale crater and back. Move the Sun to relight.",
+    "d": "Tap a spot to zoom in and name it; tap again to go out. Play flies to Olympus Mons.",
     "w": "the real mars space space mars red planet viking mola nasa usgs real map elevation relief olympus mons valles marineris gale curiosity real-mars",
     "i": "../assets/toys/real-mars/thumb.webp",
     "l": 1
@@ -1107,7 +1107,7 @@
     "u": "toys/real-earth/",
     "k": "toy",
     "s": "Space",
-    "d": "Tap to fly to Everest, the Grand Canyon or Hawaii and back. Move the Sun to see city lights.",
+    "d": "Tap a spot to zoom in and name the place; tap again to go out. Play flies to Everest.",
     "w": "the real earth space space earth world globe blue marble etopo nasa noaa real map elevation relief night lights everest himalaya grand canyon hawaii real-earth",
     "i": "../assets/toys/real-earth/thumb.webp",
     "l": 1
@@ -1117,7 +1117,7 @@
     "u": "toys/real-mercury/",
     "k": "toy",
     "s": "Space",
-    "d": "Tap to fly to Caloris, Rachmaninoff or Hokusai and back. Move the Sun slider to relight it.",
+    "d": "Tap a spot to zoom in and name it; tap again to go out. Play flies to Caloris.",
     "w": "the real mercury space space mercury planet messenger nasa usgs real map elevation relief caloris rachmaninoff hokusai craters real-mercury",
     "i": "../assets/toys/real-mercury/thumb.webp",
     "l": 1
@@ -1127,7 +1127,7 @@
     "u": "toys/real-venus/",
     "k": "toy",
     "s": "Space",
-    "d": "Tap to fly to Maxwell Montes, Maat Mons or Artemis Corona and back. Move the Sun to relight it.",
+    "d": "Tap a spot to zoom in and name it; tap again to go out. Play flies to Maxwell Montes.",
     "w": "the real venus space space venus planet magellan radar nasa usgs real map elevation relief maxwell montes maat mons artemis corona real-venus",
     "i": "../assets/toys/real-venus/thumb.webp",
     "l": 1
@@ -1137,7 +1137,7 @@
     "u": "toys/real-moons/",
     "k": "toy",
     "s": "Space",
-    "d": "Pick a moon in the Toy tab. Tap to fly to a named place and back. Move the Sun to relight it.",
+    "d": "Pick a moon in the Toy tab. Tap a spot to zoom in and name it; tap again to go out.",
     "w": "real moons space space moons io europa ganymede callisto titan jupiter saturn galileo voyager cassini nasa usgs real map volcano ice real-moons",
     "i": "../assets/toys/real-moons/thumb.webp",
     "l": 1
@@ -1147,7 +1147,7 @@
     "u": "toys/real-small-worlds/",
     "k": "toy",
     "s": "Space",
-    "d": "Pick Pluto, Ceres or Vesta in the Toy tab. Tap to fly to a named place and back.",
+    "d": "Pick Pluto, Ceres or Vesta. Tap a spot to zoom in and name it; tap again to go out.",
     "w": "pluto, ceres and vesta space space dwarf planet pluto ceres vesta asteroid new horizons dawn nasa usgs real map elevation relief sputnik heart occator real-small-worlds",
     "i": "../assets/toys/real-small-worlds/thumb.webp",
     "l": 1
@@ -1183,6 +1183,16 @@
     "l": 1
   },
   {
+    "t": "Powers of ten",
+    "u": "toys/powers-of-ten/",
+    "k": "toy",
+    "s": "Space",
+    "d": "Pinch, scroll or drag up or down to zoom from a garden to a galaxy or a molecule. Tap to play.",
+    "w": "powers of ten space space powers of ten zoom scale sizes universe galaxy stars sun planets earth city garden leaf cell microscope molecule real powers-of-ten",
+    "i": "../assets/toys/powers-of-ten/thumb.webp",
+    "l": 1
+  },
+  {
     "t": "Saturn V",
     "u": "toys/saturn-v/",
     "k": "toy",
@@ -1210,6 +1220,16 @@
     "d": "Tap to fire its stages in the order of a real flight.",
     "w": "space shuttle space space rocket space shuttle orbiter external tank boosters launch stages staging nasa model space-shuttle",
     "i": "../assets/toys/space-shuttle/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "The solar system on real orbits",
+    "u": "toys/solar-orbits/",
+    "k": "toy",
+    "s": "Space",
+    "d": "Tap to fly to the next planet. Drag the date; set the speed and the scale in the Toy tab.",
+    "w": "the solar system on real orbits space space solar system orbits orrery planets kepler jpl real date asteroid belt asteroids comets halley moons jupiter saturn true scale solar-orbits",
+    "i": "../assets/toys/solar-orbits/thumb.webp",
     "l": 1
   },
   {
@@ -1458,6 +1478,26 @@
     "d": "Tap to send a wave through it. Pick one of eleven crystals in the Toy tab.",
     "w": "crystal lattice atoms atoms salt diamond graphite ice crystal structure atoms chemistry crystal-lattice",
     "i": "../assets/toys/crystal-lattice/thumb.webp"
+  },
+  {
+    "t": "Unit cells",
+    "u": "toys/unit-cells/",
+    "k": "toy",
+    "s": "Atoms",
+    "d": "Tap to step from the unit cell to a block of cells, then to the bonds, and back.",
+    "w": "unit cells atoms atoms crystal lattice unit cell diamond graphite ice copper iron magnesium fcc bcc hcp face-centered body-centered hexagonal close-packed metal bonds thermal motion debye waller chemistry unit-cells",
+    "i": "../assets/toys/unit-cells/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Orbital atlas",
+    "u": "toys/orbital-atlas/",
+    "k": "toy",
+    "s": "Atoms",
+    "d": "Tap to cut the orbital open and see the density inside. Pick any orbital in the Toy tab.",
+    "w": "orbital atlas atoms atoms orbital atlas electron hydrogen wave function quantum s p d f g 4d 5f 5g 6d 7p node phase cut chemistry orbital-atlas",
+    "i": "../assets/toys/orbital-atlas/thumb.webp",
+    "l": 1
   },
   {
     "t": "Molecule viewer",
@@ -2471,6 +2511,76 @@
     "i": "../assets/toys/pythagoras-proof/thumb.webp"
   },
   {
+    "t": "Rössler attractor",
+    "u": "toys/rossler-attractor/",
+    "k": "toy",
+    "s": "Math",
+    "d": "Tap to drop a tracer where you tap. Up to four run at once.",
+    "w": "rossler attractor math maths rossler roessler chaos strange attractor spiral differential equations tracer rossler-attractor",
+    "i": "../assets/toys/rossler-attractor/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Thomas attractor",
+    "u": "toys/thomas-attractor/",
+    "k": "toy",
+    "s": "Math",
+    "d": "Tap to drop a tracer where you tap. Up to four run at once.",
+    "w": "thomas attractor math maths thomas cyclically symmetric chaos strange attractor differential equations tracer thomas-attractor",
+    "i": "../assets/toys/thomas-attractor/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Aizawa attractor",
+    "u": "toys/aizawa-attractor/",
+    "k": "toy",
+    "s": "Math",
+    "d": "Tap to drop a tracer where you tap. Up to four run at once.",
+    "w": "aizawa attractor math maths aizawa langford chaos strange attractor sphere tube differential equations tracer aizawa-attractor",
+    "i": "../assets/toys/aizawa-attractor/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "5-cell",
+    "u": "toys/five-cell/",
+    "k": "toy",
+    "s": "Math",
+    "d": "Tap to roll it through the fourth dimension. Pick its colors in the Toy tab.",
+    "w": "5-cell math maths 5-cell pentachoron 4-simplex 4d four dimensions polytope projection five-cell",
+    "i": "../assets/toys/five-cell/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "16-cell",
+    "u": "toys/sixteen-cell/",
+    "k": "toy",
+    "s": "Math",
+    "d": "Tap to roll it through the fourth dimension. Pick its colors in the Toy tab.",
+    "w": "16-cell math maths 16-cell hexadecachoron cross polytope orthoplex 4d four dimensions projection sixteen-cell",
+    "i": "../assets/toys/sixteen-cell/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "24-cell",
+    "u": "toys/twenty-four-cell/",
+    "k": "toy",
+    "s": "Math",
+    "d": "Tap to roll it through the fourth dimension. Pick its colors in the Toy tab.",
+    "w": "24-cell math maths 24-cell icositetrachoron octaplex 4d four dimensions polytope projection twenty-four-cell",
+    "i": "../assets/toys/twenty-four-cell/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Duoprism",
+    "u": "toys/duoprism/",
+    "k": "toy",
+    "s": "Math",
+    "d": "Tap to roll it through the fourth dimension. Pick the two polygons in the Toy tab.",
+    "w": "duoprism math maths duoprism 4d four dimensions polygon prism polytope projection duoprism",
+    "i": "../assets/toys/duoprism/thumb.webp",
+    "l": 1
+  },
+  {
     "t": "Splat equation",
     "u": "toys/splat-equation/",
     "k": "toy",
@@ -3471,6 +3581,16 @@
     "l": 1
   },
   {
+    "t": "Sound in a box",
+    "u": "toys/chladni-cell/",
+    "k": "toy",
+    "s": "Studio",
+    "d": "Tap to switch on the sound: the beads gather on the cell's still surfaces. Tap again to swirl them.",
+    "w": "sound in a box studio studio chladni 3d sound ultrasound standing wave acoustic radiation force beads nodal surface cube flask acoustophoresis physics chladni-cell",
+    "i": "../assets/toys/chladni-cell/thumb.webp",
+    "l": 1
+  },
+  {
     "t": "Room echo meter",
     "u": "toys/room-echo/",
     "k": "toy",
@@ -3538,6 +3658,36 @@
     "d": "Tap to pull the three codes apart. Read all three in the Toy tab.",
     "w": "three qr codes in one studio studio qr code color rgb red green blue three codes multiplex channels qr-three",
     "i": "../assets/toys/qr-three/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Picture QR",
+    "u": "toys/qr-picture/",
+    "k": "toy",
+    "s": "Studio",
+    "d": "Pick a picture or open your own, then tap to turn the tiles over.",
+    "w": "picture qr studio studio qr code picture photo halftone image art custom scan png qr-picture",
+    "i": "../assets/toys/qr-picture/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "QR from real things",
+    "u": "toys/qr-build/",
+    "k": "toy",
+    "s": "Studio",
+    "d": "Pick dominoes, marbles or tiles in the Toy tab, then tap to build the code.",
+    "w": "qr from real things studio studio qr code dominoes marbles tiles flip build physics chain reaction scan qr-build",
+    "i": "../assets/toys/qr-build/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Other barcodes",
+    "u": "toys/barcodes/",
+    "k": "toy",
+    "s": "Studio",
+    "d": "Pick a kind of barcode in the Toy tab and type what it holds. Tap to scan it.",
+    "w": "other barcodes studio studio barcode code 128 ean-13 upc-a data matrix aztec check digit scanner laser barcodes",
+    "i": "../assets/toys/barcodes/thumb.webp",
     "l": 1
   },
   {
@@ -3895,7 +4045,7 @@
     "u": "toys/longtail/",
     "k": "toy",
     "s": "Arcade",
-    "d": "Tap or press Space to play. Steer with the arrow keys, a swipe or the pad; press 3D to fold the world up.",
+    "d": "Tap to play. Tap beside the head to turn it that way, or use the arrows. 3D folds it up; drag to turn it.",
     "w": "longtail arcade arcade game arcade grow trail beads berries grid cube net fold planet mars moon earth torus ring tunnels 3d play longtail",
     "i": "../assets/toys/longtail/thumb.webp",
     "l": 1
@@ -3995,7 +4145,7 @@
     "u": "toys/note-rider/",
     "k": "toy",
     "s": "Arcade",
-    "d": "Steer into each note's lane as it arrives (arrow keys, a swipe or a finger). Pick a tune in the Toy tab.",
+    "d": "Steer into each note's lane as it arrives (arrows, a swipe or a finger). ♪ Your song opens MIDI or audio.",
     "w": "note rider arcade arcade game arcade music song notes rhythm catch lanes melody midi your own song ode to joy 3d note-rider",
     "i": "../assets/toys/note-rider/thumb.webp",
     "l": 1
@@ -4015,7 +4165,7 @@
     "u": "toys/data-in-3d/",
     "k": "toy",
     "s": "Studio",
-    "d": "Open a CSV or TSV in the Toy tab, pick the columns for X, Y, Z and color, and tap the chart.",
+    "d": "Open a CSV or TSV in the Toy tab, pick the columns for X, Y, Z and color, and tap anywhere on the chart.",
     "w": "data in 3d studio studio data csv tsv spreadsheet table chart graph plot scatter bars surface 3d columns statistics excel data-in-3d",
     "i": "../assets/toys/data-in-3d/thumb.webp",
     "l": 1
@@ -4049,7 +4199,7 @@
     "u": "tools/",
     "k": "page",
     "d": "Every Splashery tool in one place: make and convert, open your own files, scan and measure, QR codes, sound and light.",
-    "w": "tools every splashery tool in one place: make and convert, open your own files, scan and measure, qr codes, sound and light. splashery is also a workshop. each of these opens in the gallery and works on your own things, on your device; nothing is uploaded."
+    "w": "tools every splashery tool in one place: make and convert, open your own files, scan and measure, qr codes, sound and light. splashery is also a workshop. each tool has its own page, and opens in the gallery, in a new tab, to work on your own things, on your device; nothing is uploaded."
   },
   {
     "t": "Orbit",
@@ -4186,17 +4336,24 @@
   },
   {
     "t": "Writing toy recipes",
-    "u": "https://github.com/ryanjosephkamp/splashery/blob/main/docs/PACKS.md",
+    "u": "learn/recipes/",
     "k": "page",
     "d": "How a toy's recipe says which parts move, and how.",
     "w": "writing toy recipes how a toy's recipe says which parts move, and how. learn"
   },
   {
     "t": "The scene format",
-    "u": "https://github.com/ryanjosephkamp/splashery/blob/main/docs/SCENE-SCHEMA.md",
+    "u": "learn/scene-format/",
     "k": "page",
     "d": "What a shared link or a saved scene holds.",
     "w": "the scene format what a shared link or a saved scene holds. learn"
+  },
+  {
+    "t": "Is it right? The evidence files",
+    "u": "learn/evidence/",
+    "k": "page",
+    "d": "How each toy that claims to show something true is checked against its sources.",
+    "w": "is it right? the evidence files how each toy that claims to show something true is checked against its sources. learn"
   },
   {
     "t": "How 3D Gaussian splats work",
@@ -4253,5 +4410,47 @@
     "k": "page",
     "d": "Nothing you open leaves your device. What the live feeds and the protein fetch read, and when; no tracking, no cookies.",
     "w": "privacy nothing you open leaves your device. what the live feeds and the protein fetch read, and when; no tracking, no cookies. nothing you open leaves your device. no accounts, no tracking."
+  },
+  {
+    "t": "Contact",
+    "u": "about/contact/",
+    "k": "page",
+    "d": "Who makes Splashery and where to find the maker: his website, GitHub, LinkedIn, YouTube and GitHub Sponsors.",
+    "w": "contact who makes splashery and where to find the maker: his website, github, linkedin, youtube and github sponsors. splashery is made by ryan kamp. here is where to find him."
+  },
+  {
+    "t": "Writing toy recipes",
+    "u": "learn/recipes/",
+    "k": "page",
+    "d": "How a Splashery toy's recipe says what it is built from, which parts move and how: the reference for writing your own.",
+    "w": "writing toy recipes how a splashery toy's recipe says what it is built from, which parts move and how: the reference for writing your own. how a toy's recipe says what it is built from, which parts move, and how."
+  },
+  {
+    "t": "The scene format",
+    "u": "learn/scene-format/",
+    "k": "page",
+    "d": "What a Splashery share link or saved scene holds: the toy, its settings, its camera and its look.",
+    "w": "the scene format what a splashery share link or saved scene holds: the toy, its settings, its camera and its look. what a shared link or a saved scene holds."
+  },
+  {
+    "t": "The evidence files",
+    "u": "learn/evidence/",
+    "k": "page",
+    "d": "How Splashery checks each toy that claims to show something true about the world: claims, sources and where it simplifies.",
+    "w": "the evidence files how splashery checks each toy that claims to show something true about the world: claims, sources and where it simplifies. how each toy that claims to show something true is checked."
+  },
+  {
+    "t": "How the parallel sessions work",
+    "u": "learn/operating/",
+    "k": "page",
+    "d": "How Splashery's lanes, the Operator and the owner's reviews fit together: the rules the sessions that build Splashery follow.",
+    "w": "how the parallel sessions work how splashery's lanes, the operator and the owner's reviews fit together: the rules the sessions that build splashery follow. how the lanes, the operator and the reviews fit together."
+  },
+  {
+    "t": "Fluids in toys",
+    "u": "learn/fluids/",
+    "k": "page",
+    "d": "How Splashery's fluid toys simulate water, smoke and other fluids with splats.",
+    "w": "fluids in toys how splashery's fluid toys simulate water, smoke and other fluids with splats. how the fluid toys work."
   }
 ]

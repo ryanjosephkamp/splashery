@@ -5,7 +5,7 @@
 //
 //   node tools/rel-credits.mjs
 import fs from "node:fs";
-import { SAMPLES, WITH_PHOTO, LICENSE_URL } from "../src/elements-real/samples.js";
+import { SAMPLES, WITH_PHOTO, STANDINS, LICENSE_URL } from "../src/elements-real/samples.js";
 import { FACTS } from "../src/elements-real/facts.js";
 
 const CHECKED = "October 5, 2026";
@@ -33,6 +33,34 @@ assets.elementSamples = WITH_PHOTO.map((z) => {
       (s.license.startsWith("CC BY-SA") ? " The cut-out sample stays under the same license." : ""),
   };
 });
+// The stand-in pictures (the owner's plan of October 5, 2026), for the elements with no photo.
+for (const [zs, s] of Object.entries(STANDINS)) {
+  const z = Number(zs);
+  assets.elementSamples.push({
+    id: `element-${z}-stand-in`,
+    file: `assets/toys/real-elements/${z}.jpg`,
+    depth: `assets/toys/real-elements/${z}.png`,
+    toy: "real-elements",
+    name: `${nameOf(z)} (stand-in, not the element): ${s.what}`,
+    author: s.author,
+    page: s.page,
+    license: s.license,
+    checked: CHECKED,
+    note:
+      `From the Commons file "${s.file}". ` +
+      {
+        portrait: "Shown flat, in black and white.",
+        flag: "Shown as a gently waving flag.",
+        arms: "Cut out along its own outline.",
+        photo: "Cut out of its background, with its depth from Depth Anything V2 Small.",
+      }[s.kind] + // prettier-ignore
+      " Reduced to 384 x 384 (and 64 x 64 in tiles.jpg) by tools/rel-samples.mjs." +
+      (s.license.startsWith("CC BY-SA")
+        ? " The picture made from it stays under the same license."
+        : ""),
+  });
+}
+assets.elementSamples.sort((a, b) => parseInt(a.id.slice(8)) - parseInt(b.id.slice(8)));
 fs.writeFileSync("tools/assets.json", JSON.stringify(assets, null, 2) + "\n");
 
 // CREDITS.md
@@ -59,6 +87,14 @@ const lines = [
       (SAMPLES[z].license.startsWith("CC BY-SA")
         ? " The cut-out sample made from it is shared under the same license, shown beside the sample in the toy."
         : ""),
+  ),
+  "",
+  `For the ${Object.keys(STANDINS).length} elements with no photo of a real sample, the toy shows a stand-in picture, said plainly to be one: the person, place or flag the element is named for, or a mineral that holds traces of it. Each from Wikimedia Commons, its license checked on the file page on ${CHECKED}:`,
+  "",
+  ...Object.entries(STANDINS).map(
+    ([z, s]) =>
+      `- ${nameOf(z)}: "${s.file}" by ${s.author}, [${s.license}](${LICENSE_URL[s.license]}), on [Commons](${s.page}).` +
+      (s.license.startsWith("CC BY-SA") ? " The picture made from it is shared under the same license, shown beside it in the toy." : ""), // prettier-ignore
   ),
   "",
   "The facts come from PubChem's periodic table and element pages (NCBI; public domain U.S.",

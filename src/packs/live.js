@@ -356,12 +356,26 @@ async function readBytes(rel) {
 
 const SPLAT_MIRROR = {
   alive: () => live.on("camera") || MIRROR.look === "hologram",
-  density: 1,
+  // Live r7 (the owner's "the splat mirror also needs to improve" of October
+  // 6): half as many splats again, as Photo to 3D takes, for a finer picture
+  // (relief.js, mirrorGrid).
+  density: 1.5,
   turntable: false,
   options: [
     // r5: a gentler default depth (was 0.6), so a person stands out from the
     // wall without looking cut out.
-    { key: "depth", label: "Depth", type: "slider", min: 0, max: 1, step: 0.05, default: 0.5 },
+    // Live r8: also a slider over the stage (the owner's walkthrough of
+    // October 6, 2026; Engine PR #383 draws it).
+    {
+      key: "depth",
+      label: "Depth",
+      type: "slider",
+      min: 0,
+      max: 1,
+      step: 0.05,
+      default: 0.5,
+      stage: true,
+    },
     {
       // r3: a hologram look beside the plain one.
       key: "look",

@@ -653,14 +653,18 @@ function gyroidLevel(p0, level, scale, clip) {
 
 // The power-8 Mandelbulb (its axis turned to point up): sphere-traced from
 // outside along many directions; each hit becomes a small patch of surface.
-function mandelDE(x0, y0, z0, out, iters = 6) {
+// Lane Math r2: any power n (the bulb then has n − 1-fold symmetry about its
+// axis), and a Julia-style variant: the same formula, but adding a fixed
+// point `julia` (on the axis, [0, 0, c], so the symmetry stays) instead of
+// the starting point.
+function mandelDE(x0, y0, z0, out, iters = 6, power = 8, julia = null) {
   // Formula axes: X, Z, Y (so the bulb's axis of symmetry is our Y).
   let x = x0;
   let y = z0;
   let z = y0;
-  const cx = x;
-  const cy = y;
-  const cz = z;
+  const cx = julia ? julia[0] : x;
+  const cy = julia ? julia[1] : y;
+  const cz = julia ? julia[2] : z;
   let dr = 1;
   let r = 0;
   let trap = 10;
@@ -668,10 +672,10 @@ function mandelDE(x0, y0, z0, out, iters = 6) {
     r = Math.sqrt(x * x + y * y + z * z);
     if (r > 2) break;
     trap = Math.min(trap, r);
-    const th = Math.acos(clamp(z / (r || 1e-9), -1, 1)) * 8;
-    const ph = Math.atan2(y, x) * 8;
-    const r7 = r ** 7;
-    dr = r7 * 8 * dr + 1;
+    const th = Math.acos(clamp(z / (r || 1e-9), -1, 1)) * power;
+    const ph = Math.atan2(y, x) * power;
+    const r7 = r ** (power - 1);
+    dr = r7 * power * dr + (julia ? 0 : 1);
     const zr = r7 * r;
     const st = Math.sin(th);
     x = zr * st * Math.cos(ph) + cx;
@@ -682,7 +686,11 @@ function mandelDE(x0, y0, z0, out, iters = 6) {
   return (0.5 * Math.log(Math.max(r, 1e-9)) * r) / dr;
 }
 
-function mandelbulbShape(rays = 12000) {
+export function mandelbulbShape(rays = 12000, { power = 8, julia = null, iters = 6 } = {}) {
+  const DE = (x, y, z, out) => mandelDE(x, y, z, out, iters, power, julia);
+  // A Julia point off the axis breaks the bulb's turning symmetry.
+  const fold = julia && (julia[0] || julia[1]) ? 1 : power - 1;
+  const step = TAU / fold;
   const hits = [];
   const ga = Math.PI * (3 - Math.sqrt(5));
   const o = {};
@@ -690,11 +698,11 @@ function mandelbulbShape(rays = 12000) {
     const yy = 1 - ((i + 0.5) / rays) * 2;
     const rr = Math.sqrt(1 - yy * yy);
     const d = [Math.cos(ga * i) * rr, yy, Math.sin(ga * i) * rr];
-    let s = 1.3;
+    let s = julia || power < 8 ? 1.6 : 1.3;
     let steps = 0;
     let hit = false;
     for (; steps < 70; steps++) {
-      const de = mandelDE(d[0] * s, d[1] * s, d[2] * s);
+      const de = DE(d[0] * s, d[1] * s, d[2] * s);
       if (de < 0.003) {
         hit = true;
         break;
@@ -706,11 +714,11 @@ function mandelbulbShape(rays = 12000) {
     const p = mul(d, s);
     const e = 0.007;
     const n = unit([
-      mandelDE(p[0] + e, p[1], p[2]) - mandelDE(p[0] - e, p[1], p[2]),
-      mandelDE(p[0], p[1] + e, p[2]) - mandelDE(p[0], p[1] - e, p[2]),
-      mandelDE(p[0], p[1], p[2] + e) - mandelDE(p[0], p[1], p[2] - e),
+      DE(p[0] + e, p[1], p[2]) - DE(p[0] - e, p[1], p[2]),
+      DE(p[0], p[1] + e, p[2]) - DE(p[0], p[1] - e, p[2]),
+      DE(p[0], p[1], p[2] + e) - DE(p[0], p[1], p[2] - e),
     ]);
-    mandelDE(p[0], p[1], p[2], o);
+    DE(p[0], p[1], p[2], o);
     const a = (4 * Math.PI * s * s) / rays / Math.max(0.4, Math.abs(dot(n, d)));
     hits.push({ p, n, trap: o.trap, steps, a, r: s });
   }
@@ -718,14 +726,14 @@ function mandelbulbShape(rays = 12000) {
   const cum = hits.map((h) => (total += h.a));
   // The splats come in sevens, turned a seventh of a turn apart (the bulb's
   // own symmetry), so a slice turned by a seventh looks exactly as before.
-  let copy = 7;
+  let copy = fold;
   let last = null;
   return {
     area: total,
     thick: 0.05,
     sample(rand) {
-      if (copy < 7) {
-        const a = copy++ * BULB_STEP;
+      if (copy < fold) {
+        const a = copy++ * step;
         return { ...last, p: rotY(last.p, a), n: rotY(last.n, a) };
       }
       copy = 1;
@@ -750,6 +758,13 @@ function mandelbulbShape(rays = 12000) {
   };
 }
 
+// Lane Math r2: the Julia bulb's fixed points c (in the formula's axes).
+const JULIA_POINTS = {
+  a: { c: [-0.8, 0.4, 0.4], label: "c = (−0.8, 0.4, 0.4)" },
+  b: { c: [0.9, 0, 0.4], label: "c = (0.9, 0, 0.4)" },
+  c: { c: [0.7, -0.7, 0], label: "c = (0.7, −0.7, 0)" },
+  d: { c: [-1, 0.2, 0.1], label: "c = (−1, 0.2, 0.1)" },
+};
 // The Mandelbulb's discs: BULB_BANDS horizontal slices between -BULB_Y and
 // BULB_Y, each turning BULB_STEP (a seventh of a turn, the bulb's symmetry)
 // with a little overshoot, like a dial clicking round.
@@ -804,6 +819,27 @@ const PALETTES = {
   jewel: ["#10002b", "#3c096c", "#7b2cbf", "#c77dff", "#e0aaff"],
   candy: ["#ff595e", "#ffca3a", "#8ac926", "#1982c4", "#6a4c93"],
 };
+
+// Lane Math r2: color themes for the 4D shapes: [first, second, third, fourth]; the
+// hypercube uses the first for its outer cube and the second for its inner.
+const FOUR_D_THEMES = {
+  classic: ["#35c3f0", "#f72585", "#ffd166", "#7bf1a8"],
+  sunset: ["#ffb347", "#e8436f", "#ff7a3d", "#ffe08a"],
+  ocean: ["#5ee7ff", "#3f6ff0", "#22c3a6", "#b8f3ff"],
+  jewel: ["#c77dff", "#8f3bdb", "#ff5ca8", "#ffd700"],
+  candy: ["#ff595e", "#1982c4", "#ffca3a", "#8ac926"],
+  neon: ["#39ff14", "#ff2bd6", "#00e5ff", "#fff200"],
+  silver: ["#f2f4f8", "#8d9bb8", "#c9d1e0", "#aab6cc"],
+};
+const FOUR_D_THEME_CHOICES = [
+  { id: "classic", label: "Blue and pink" },
+  { id: "sunset", label: "Sunset" },
+  { id: "ocean", label: "Ocean" },
+  { id: "jewel", label: "Jewel" },
+  { id: "candy", label: "Candy" },
+  { id: "neon", label: "Neon" },
+  { id: "silver", label: "Silver" },
+];
 
 // The tesseract: 16 corners (x, y, z, w each +-1; corner i has w = +1 when
 // i >= 8) and the 32 edges joining corners that differ in one coordinate.
@@ -996,6 +1032,42 @@ function wheelShapes(k, at, token, R, { tyre = 0.3, spokes = 0, rim = "#c9ced6" 
       });
   }
 }
+// Lane Math r2: the rider's color (the Rider color option); "auto" keeps
+// each rider's own colors.
+const RIDER_COLORS = {
+  red: "#d62424",
+  orange: "#ff7a1a",
+  yellow: "#ffc914",
+  green: "#25a244",
+  blue: "#1f5fe0",
+  purple: "#7b3fe4",
+  pink: "#ff4fa3",
+  white: "#f2f2ee",
+  black: "#2a2a30",
+};
+const LB = 1.35; // the ladybug's size
+const riderPaint = (o, own) => RIDER_COLORS[o?.riderColor] || own;
+// Six walking legs from hips like the ant's, each a token that swings.
+const walkingLegs = (col, reachScale = 1) =>
+  ANT_HIPS.map((hip, i) => ({
+    hub: hip,
+    // Legs 0, 3 and 4 swing together, 1, 2 and 5 against them.
+    swing: i === 0 || i === 3 || i === 4 ? 0 : Math.PI,
+    build(k, at, token) {
+      const side = Math.sign(hip[2]);
+      const reach = [0.035, 0, -0.035][i >> 1];
+      const leg = [
+        [0, 0, 0],
+        [reach * 0.6, 0.03, 0.045 * side * reachScale],
+        [reach * 1.7, -hip[1] / ANT, 0.085 * side * reachScale],
+      ].map((q) => add(at, mul(q, ANT)));
+      k.add(polyTube(leg, 0.0065 * ANT), {
+        ...token,
+        flat: 0.8,
+        color: (c) => keep(lit(col, c.n, { amb: 0.75, dif: 0.55, spec: 0.7, pow: 16 })),
+      });
+    },
+  }));
 const RIDERS = {
   // An open-wheel racing car with a white stripe and four spinning wheels,
   // blue (red on the ocean colours, so it always stands out).
@@ -1004,7 +1076,7 @@ const RIDERS = {
       hub: [0, 0, 0],
       build(k, at, token, o) {
         const S = CAR;
-        const paint = o?.colors === "ocean" ? "#d62424" : "#1f5fe0";
+        const paint = riderPaint(o, o?.colors === "ocean" ? "#d62424" : "#1f5fe0");
         const body = (c) => {
           const stripe = Math.abs(c.p[2] - at[2]) < 0.012 * S && c.n[1] > 0.3;
           return keep(lit(stripe ? "#f7f7f2" : paint, c.n, { amb: 0.62, dif: 0.45, spec: 0.7, pow: 22 })); // prettier-ignore
@@ -1047,8 +1119,11 @@ const RIDERS = {
     {
       hub: [0, 0.16, 0],
       roll: 0.16,
-      build(k, at, token) {
-        const gores = ["#e63946", "#f8f8f2", "#1d6fd8", "#ffd23f", "#f8f8f2", "#2bb673"];
+      build(k, at, token, o) {
+        const rc = RIDER_COLORS[o?.riderColor];
+        const gores = rc
+          ? [rc, "#f8f8f2", rc, "#f8f8f2", rc, "#f8f8f2"]
+          : ["#e63946", "#f8f8f2", "#1d6fd8", "#ffd23f", "#f8f8f2", "#2bb673"];
         k.add(k.sphere(0.16), {
           ...token,
           pos: at,
@@ -1069,10 +1144,10 @@ const RIDERS = {
   bike: [
     {
       hub: [0, 0, 0],
-      build(k, at, token) {
+      build(k, at, token, o) {
         const S = BIKE;
         const P = (x, y, z = 0) => add(at, [x * S, y * S, z * S]);
-        const frame = shiny("#1d9bd1", 0.5);
+        const frame = shiny(riderPaint(o, "#1d9bd1"), 0.5);
         const tube = (pts, r = 0.007) =>
           k.add(polyTube(pts, r * S), { ...token, flat: 0.8, color: frame });
         const bb = P(0, 0.065);
@@ -1132,9 +1207,9 @@ const RIDERS = {
   ant: [
     {
       hub: [0, 0, 0],
-      build(k, at, token) {
+      build(k, at, token, o) {
         const antCol = (c) =>
-          keep(lit("#2a1810", c.n, { amb: 0.75, dif: 0.55, spec: 0.7, pow: 16 }));
+          keep(lit(riderPaint(o, "#2a1810"), c.n, { amb: 0.75, dif: 0.55, spec: 0.7, pow: 16 }));
         const body = { ...token, flat: 0.5, color: antCol };
         for (const [pos, r] of ANT_BODY)
           k.add(k.sphere(1), { ...body, pos: add(at, pos), scale: r });
@@ -1169,6 +1244,118 @@ const RIDERS = {
           flat: 0.8,
           color: (c) => keep(lit("#2a1810", c.n, { amb: 0.75, dif: 0.55, spec: 0.7, pow: 16 })),
         });
+      },
+    })),
+  ],
+  // Lane Math r2: a toy steam train: a boiler, a cab and a chimney on a
+  // frame, and three axles of spoked wheels that turn with the distance.
+  train: [
+    {
+      hub: [0, 0, 0],
+      build(k, at, token, o) {
+        const paint = riderPaint(o, "#c81d25");
+        const P = (x, y, z = 0) => add(at, [x, y, z]);
+        const put = (shape, pos, color, rot) => k.add(shape, { ...token, pos, rot, color });
+        const gold = shiny("#e0b13a", 0.7);
+        const dark = shiny("#24262c", 0.4);
+        k.add(evenCylinder(0.058, 0.058, 0.25), { ...token, even: true, pos: P(0.04, 0.125), rot: [0, 0, 90], color: shiny(paint, 0.6) }); // prettier-ignore
+        put(k.disc(0.058), P(0.165, 0.125), dark, [0, 0, 90]);
+        for (const x of [-0.04, 0.06, 0.13])
+          put(k.torus(0.06, 0.007), P(x, 0.125), gold, [0, 0, 90]);
+        put(k.box(0.11, 0.15, 0.13), P(-0.12, 0.15), shiny(paint, 0.5));
+        put(k.box(0.13, 0.016, 0.15), P(-0.12, 0.232), dark);
+        for (const side of [-1, 1])
+          put(k.box(0.05, 0.045, 0.004), P(-0.12, 0.18, side * 0.066), shiny("#fff3c4", 0.2));
+        k.add(evenCylinder(0.02, 0.02, 0.07), { ...token, even: true, pos: P(0.12, 0.205), color: dark }); // prettier-ignore
+        put(k.cone(0.02, 0.032, 0.025), P(0.12, 0.25), dark);
+        put(k.sphere(0.024), P(0.03, 0.19), gold);
+        put(k.box(0.38, 0.022, 0.12), P(-0.005, 0.062), dark);
+        put(k.cone(0.06, 0.004, 0.05), P(0.205, 0.045), shiny("#9a9ea8", 0.5), [0, 0, -90]);
+      },
+    },
+    ...[0.11, 0.0, -0.12].map((x) => ({
+      hub: [x, 0.042, 0],
+      roll: 0.042,
+      build(k, at, token) {
+        for (const side of [-1, 1])
+          wheelShapes(k, add(at, [0, 0, side * 0.068]), token, 0.042, { tyre: 0.2, spokes: 6, rim: "#e0b13a" }); // prettier-ignore
+      },
+    })),
+  ],
+  // Lane Math r2: a ladybug: a spotted red shell split down the middle, a
+  // black head with two white spots, and six walking legs.
+  ladybug: [
+    {
+      hub: [0, 0, 0],
+      build(k, at, token, o) {
+        const paint = riderPaint(o, "#e3262b");
+        // Spots on each half of the shell: [along, out from the middle].
+        const spots = [
+          [0.045, 0.03],
+          [-0.005, 0.05],
+          [-0.06, 0.028],
+        ];
+        k.add(k.ellipsoid(0.11 * LB, 0.075 * LB, 0.085 * LB), {
+          ...token,
+          pos: add(at, [-0.01, 0.05 * LB, 0]),
+          flat: 0.35,
+          even: true,
+          color: (c) => {
+            const d = sub(c.p, add(at, [-0.01, 0.05 * LB, 0]));
+            if (d[1] < 0) return keep(lit("#1b1b1f", c.n, { amb: 0.7, dif: 0.4 }));
+            if (Math.abs(d[2]) < 0.006 && d[0] < 0.07 * LB) return keep(lit("#141416", c.n, { spec: 0.6 })); // prettier-ignore
+            for (const [x, z] of spots)
+              if (Math.hypot(d[0] - x * LB, Math.abs(d[2]) - z * LB) < 0.016 * LB) return keep(lit("#141416", c.n, { spec: 0.6 })); // prettier-ignore
+            return keep(lit(paint, c.n, { amb: 0.62, dif: 0.45, spec: 0.75, pow: 26 }));
+          },
+        });
+        k.add(k.sphere(0.04 * LB), { ...token, pos: add(at, [0.1 * LB, 0.045 * LB, 0]), flat: 0.4, color: shiny("#18181c", 0.5) }); // prettier-ignore
+        for (const side of [-1, 1])
+          k.add(k.sphere(0.012 * LB), { ...token, pos: add(at, [0.125 * LB, 0.062 * LB, side * 0.022 * LB]), weight: 8, color: shiny("#f4f4f0", 0.3) }); // prettier-ignore
+      },
+    },
+    ...walkingLegs("#18181c", 1.5),
+  ],
+  // Lane Math r2: a skateboard: a deck with kicked-up ends and grip tape,
+  // and two trucks of wheels that roll.
+  skateboard: [
+    {
+      hub: [0, 0, 0],
+      build(k, at, token, o) {
+        const paint = riderPaint(o, "#ff7a1a");
+        const put = (shape, pos, color, rot) => k.add(shape, { ...token, pos, rot, color });
+        put(k.box(0.48, 0.0224, 0.16), add(at, [0, 0.12, 0]), (c) =>
+          keep(lit(c.n[1] > 0.5 ? "#2b2b30" : paint, c.n, { amb: 0.65, dif: 0.45, spec: 0.3 })),
+        );
+        for (const side of [-1, 1])
+          put(
+            k.box(0.112, 0.0224, 0.16),
+            add(at, [side * 0.288, 0.1408, 0]),
+            (c) =>
+              keep(lit(c.n[1] > 0.5 ? "#2b2b30" : paint, c.n, { amb: 0.65, dif: 0.45, spec: 0.3 })),
+            [0, 0, side * 20],
+          );
+        for (const x of [-0.176, 0.176]) put(k.box(0.048, 0.048, 0.144), add(at, [x, 0.088, 0]), shiny("#b8bec8", 0.5)); // prettier-ignore
+      },
+    },
+    ...[-0.176, 0.176].map((x) => ({
+      hub: [x, 0.0416, 0],
+      roll: 0.0416,
+      build(k, at, token) {
+        for (const side of [-1, 1])
+          k.add(evenCylinder(0.0416, 0.0416, 0.0384), {
+            ...token,
+            even: true,
+            pos: add(at, [0, 0, side * 0.088]),
+            rot: [90, 0, 0],
+            color: (c) => {
+              const a = Math.atan2(c.lp[2], c.lp[0]);
+              const mark = c.s.cap && Math.abs(Math.sin(a)) < 0.25;
+              return keep(
+                lit(mark ? "#7a5cff" : "#f1ead2", c.n, { amb: 0.7, dif: 0.4, spec: 0.4 }),
+              );
+            },
+          });
       },
     })),
   ],
@@ -1311,6 +1498,27 @@ export const RECIPES = {
           { id: "ball", label: "Beach ball" },
           { id: "bike", label: "Duck on a bike" },
           { id: "ant", label: "Ant" },
+          { id: "train", label: "Toy train" },
+          { id: "ladybug", label: "Ladybug" },
+          { id: "skateboard", label: "Skateboard" },
+        ],
+      },
+      {
+        key: "riderColor",
+        label: "Rider color",
+        type: "select",
+        default: "auto",
+        choices: [
+          { id: "auto", label: "Its own" },
+          { id: "red", label: "Red" },
+          { id: "orange", label: "Orange" },
+          { id: "yellow", label: "Yellow" },
+          { id: "green", label: "Green" },
+          { id: "blue", label: "Blue" },
+          { id: "purple", label: "Purple" },
+          { id: "pink", label: "Pink" },
+          { id: "white", label: "White" },
+          { id: "black", label: "Black" },
         ],
       },
     ],
@@ -1619,6 +1827,18 @@ export const RECIPES = {
 
   hypercube: {
     alive: true,
+    density: 1.6, // lane Math r2: finer splats along the thin edges ("Just sharper")
+    // Lane Math r2: color themes (FOUR_D_THEMES); the first is the
+    // tesseract's own blue and pink.
+    options: [
+      {
+        key: "colors",
+        label: "Colors",
+        type: "select",
+        default: "classic",
+        choices: FOUR_D_THEME_CHOICES,
+      },
+    ],
     controls: [
       { key: "turn", label: "4D turn", type: "slider", default: 0.85 },
       { key: "flip", label: "Turn inside out", type: "pulse", ease: 5 },
@@ -1639,16 +1859,22 @@ export const RECIPES = {
       out.tokens = TESS.map((v) => ({ offset: sub(tessShow(tessTurn(v, a)), tessShow(v)) }));
       out.body = { quat: quatAxisAngle(unit([0.25, 1, 0.12]), t * 0.28) };
     },
-    build(k) {
-      const outerCol = "#35c3f0";
-      const innerCol = "#f72585";
+    build(k, o) {
+      const theme = FOUR_D_THEMES[o?.colors] || FOUR_D_THEMES.classic;
+      const outerCol = theme[0];
+      const innerCol = theme[1];
       const colOf = (i) => (TESS[i][3] > 0 ? outerCol : innerCol);
-      const glow = (col, n) => shade(col, 0.85 + 0.35 * Math.max(0, dot(n, LIGHT)));
+      // Lane Math r2 ("Just sharper"): one even color round each thin edge,
+      // its splats placed evenly; light that changed splat by splat round a
+      // tube a few pixels wide read as grain.
+      const glow = (col) => shade(col, 1.05);
       // Round splats: skinned splats keep their built orientation.
       for (const [i, j] of TESS_EDGES) {
         const w = TESS[i][3] + TESS[j][3];
         k.add(polyTube([tessShow(TESS[i]), tessShow(TESS[j])], w > 0 ? 0.026 : 0.022), {
           flat: 0.9,
+          even: true,
+          weight: 1.4,
           skin: (c) => [i, j, c.t],
           color: (c) => glow(mix(colOf(i), colOf(j), c.t), c.n),
         });
@@ -1832,6 +2058,28 @@ export const RECIPES = {
   },
 
   mandelbulb: {
+    // Lane Math r2: the power (5 to 12; 8 is the classic bulb) and a
+    // Julia-style variant.
+    options: [
+      { key: "power", label: "Power", type: "slider", min: 5, max: 12, step: 1, default: 8 },
+      {
+        key: "variant",
+        label: "Kind",
+        type: "select",
+        default: "bulb",
+        choices: [
+          { id: "bulb", label: "Mandelbulb" },
+          { id: "julia", label: "Julia bulb" },
+        ],
+      },
+      {
+        key: "julia",
+        label: "Julia point",
+        type: "select",
+        default: "a",
+        choices: Object.keys(JULIA_POINTS).map((id) => ({ id, label: JULIA_POINTS[id].label })),
+      },
+    ],
     controls: [{ key: "twist", label: "Turn", type: "pulse", ease: 4.2 }],
     action: { key: "twist", label: "Turn the discs" },
     // A tap turns the bulb's discs like the dials of a combination lock:
@@ -1842,31 +2090,50 @@ export const RECIPES = {
     // seventh of a turn and lands on the same picture; it then snaps back
     // to its built pose unseen (splats sort in their built pose, so no
     // slice ever turns much past that).
-    drive(t, c, out) {
+    drive(t, c, out, info) {
       const s = c.twist > 0 ? 4.2 * (1 - c.twist) : -1;
+      // Lane Math r2: a Julia bulb with its point off the axis has no turning
+      // symmetry, so its slices can't click round unseen: the whole bulb
+      // turns a quarter turn one way, then back (never far enough to draw
+      // its far side over its near side).
+      if (info?.data?.solid) {
+        const a = s >= 0 ? 0.5 * Math.PI * Math.sin(Math.PI * ease(band(s, 0.1, 4.0))) : 0;
+        out.body = { quat: quatAxisAngle([0, 1, 0], a) };
+        for (let i = 0; i < BULB_BANDS; i++) out.parts["b" + i] = { angle: 0 };
+        return;
+      }
       for (let i = 0; i < BULB_BANDS; i++) {
         const dir = i % 2 ? -1 : 1;
         let a = 0;
         if (s >= 0 && s < 1.9) a = dir * click((s - 0.1 - 0.1 * i) / 0.95);
         else if (s >= 1.9) a = -dir * click((s - 2.05 - 0.1 * (BULB_BANDS - 1 - i)) / 0.95);
-        out.parts["b" + i] = { angle: a * BULB_STEP };
+        out.parts["b" + i] = { angle: a * (info?.data?.step ?? BULB_STEP) };
       }
     },
-    build(k) {
+    build(k, o) {
       const bands = [];
       for (let i = 0; i < BULB_BANDS; i++) bands.push(k.part("b" + i));
-      k.add(mandelbulbShape(), {
-        part: (c) => bands[bulbBand(c.p[1])],
-        flat: 0.45,
-        color: (c) => {
-          const col = ramp(
-            ["#2a1457", "#6d2e9e", "#d9587d", "#ffb36b", "#fff0c9"],
-            clamp((c.s.r - 0.55) / 0.6, 0, 1),
-          );
-          const ao = 1 - clamp((c.s.steps - 10) / 45, 0, 0.5);
-          return shade(lit(col, c.n, { amb: 0.5, dif: 0.6, spec: 0.35 }), ao);
+      const power = clamp(Math.round(o?.power ?? 8), 5, 12);
+      const julia = o?.variant === "julia" ? (JULIA_POINTS[o.julia] || JULIA_POINTS.a).c : null;
+      const solid = !!(julia && (julia[0] || julia[1]));
+      k.data = { step: TAU / (power - 1), solid };
+      k.add(
+        power === 8 && !julia
+          ? mandelbulbShape()
+          : mandelbulbShape(k.data.solid ? 40000 : 14000, { power, julia, iters: julia ? 10 : 6 }),
+        {
+          part: (c) => bands[bulbBand(c.p[1])],
+          flat: 0.45,
+          color: (c) => {
+            const col = ramp(
+              ["#2a1457", "#6d2e9e", "#d9587d", "#ffb36b", "#fff0c9"],
+              solid ? clamp((c.s.r - 0.8) / 0.3, 0, 1) : clamp((c.s.r - 0.55) / 0.6, 0, 1),
+            );
+            const ao = 1 - clamp((c.s.steps - 10) / 45, 0, 0.5);
+            return shade(lit(col, c.n, { amb: 0.5, dif: 0.6, spec: 0.35 }), ao);
+          },
         },
-      });
+      );
     },
   },
 
@@ -2093,6 +2360,19 @@ const MOB_RIDER_SOUNDS = {
     [2.2, { voice: "quack", f: 260, n: 1, vol: 0.45 }],
   ],
   ant: [[0.3, { voice: "patter", f: 3200, n: 70, decay: 7, vol: 0.35 }]],
+  // Lane Math r2: the toy train's steam chuffs, the ladybug's light feet and
+  // a flutter of her wings halfway, and the skateboard's wheels rolling over
+  // the band's seams.
+  train: [[0.3, { voice: "chug", f: 600, n: 16, rate: 3.8, vol: 0.5 }]],
+  ladybug: [
+    [0.3, { voice: "patter", f: 2300, n: 50, decay: 7, vol: 0.3 }],
+    [2.4, { voice: "flutter", f: 900, rate: 30, decay: 0.5, vol: 0.3 }],
+  ],
+  skateboard: [
+    [0.3, { voice: "rumble", f: 120, rate: 8, decay: 2.4, vol: 0.45 }],
+    [0.35, { voice: "clack", f: 1800, decay: 0.6, vol: 0.4 }],
+    [4.4, { voice: "clack", f: 1700, decay: 0.6, vol: 0.35 }],
+  ],
 };
 // Plays each [at, spec] once as the effect's clock e passes `at`.
 function cuesAt(c, e, list, out, slot = "cue") {
@@ -3660,7 +3940,14 @@ const FOURIER_MAX = 60;
 const FOURIER_TOKENS = 46; // circles 0..45 are tokens, the rest parts
 const FOURIER_TIP = 46; // the glowing tip of a single chain (a token)
 const FOURIER_HEAD = 47; // the wave's head (a token)
-const FOURIER_WORD_MAX = 6; // letters in a word
+const FOURIER_WORD_MAX = 6; // letters drawn at once (one group)
+// Lane Math r2: longer text. Up to FOURIER_TEXT_MAX letters, in groups of
+// FOURIER_GROUP that take turns: each group's circles spin while the others
+// hide (they share the tokens), and the writing stays.
+const FOURIER_TEXT_MAX = 40;
+const FOURIER_GROUP = 5;
+const FOURIER_LINE = 10; // letters on a line, at most
+const FOURIER_GROUP_SECS = 2.6;
 // Letters as single strokes on a grid 4 wide and 6 tall (a stroke may run
 // back over itself); a chain draws the stroke there and back.
 const STROKES = {
@@ -4116,7 +4403,7 @@ function fourierCurvePath(eq, M) {
 // Everything a Fourier build draws: its chains ({ circles, centre }), and
 // whether it is the square wave.
 const FOURIER_CACHE = new Map();
-function fourierSet(o) {
+export function fourierSet(o) {
   const n = Math.max(3, Math.min(FOURIER_MAX, Math.round(o.circles ?? 12)));
   const key = `${o.shape}|${n}|${o.shape === "custom" ? o.eq : ""}|${o.shape === "words" ? o.words : ""}`; // prettier-ignore
   if (FOURIER_CACHE.has(key)) return FOURIER_CACHE.get(key);
@@ -4132,9 +4419,15 @@ function fourierSet(o) {
     const pts = fourierCurvePath(o.eq, 512);
     if (pts) set = { chains: [fourierOf(pts, n)], label: `Your curve: ${o.eq}` };
   } else if (o.shape === "words") {
-    const word = fourierWord(o.words).slice(0, FOURIER_WORD_MAX + 4);
-    const chars = [...word].filter((ch) => ch !== " ").slice(0, FOURIER_WORD_MAX);
-    if (chars.length && chars.every((ch) => charPath(ch, 8))) {
+    const word = fourierWord(o.words).slice(0, FOURIER_TEXT_MAX * 2);
+    const all = [...word].filter((ch) => ch !== " ");
+    const chars = all.slice(0, FOURIER_WORD_MAX);
+    if (
+      all.length > FOURIER_WORD_MAX &&
+      all.slice(0, FOURIER_TEXT_MAX).every((ch) => charPath(ch, 8))
+    ) {
+      set = fourierText(word, n);
+    } else if (chars.length && chars.every((ch) => charPath(ch, 8))) {
       // Each letter gets its own chain; together at most 60 circles. A long
       // word (or words) goes on two lines.
       const per = Math.max(3, Math.min(n, Math.floor(FOURIER_MAX / chars.length)));
@@ -4164,6 +4457,53 @@ function fourierSet(o) {
   FOURIER_CACHE.set(key, set);
   return set;
 }
+// Lane Math r2: longer text, laid out in lines of at most FOURIER_LINE
+// letters (broken at spaces where it can), each letter its own chain of up
+// to nine circles, the letters in groups of FOURIER_GROUP that take turns.
+function fourierText(word, n) {
+  const words = word.split(" ").filter(Boolean);
+  const lines = [];
+  let line = "";
+  let count = 0;
+  for (let w of words) {
+    w = [...w].slice(0, FOURIER_TEXT_MAX - count).join("");
+    if (!w) break;
+    count += [...w].length;
+    while ([...w].length > FOURIER_LINE) {
+      if (line) lines.push(line);
+      line = "";
+      lines.push([...w].slice(0, FOURIER_LINE).join(""));
+      w = [...w].slice(FOURIER_LINE).join("");
+    }
+    if (!w) continue;
+    if (!line) line = w;
+    else if ([...line].length + 1 + [...w].length <= FOURIER_LINE) line += " " + w;
+    else {
+      lines.push(line);
+      line = w;
+    }
+  }
+  if (line) lines.push(line);
+  const per = Math.max(3, Math.min(n, Math.floor(FOURIER_TOKENS / FOURIER_GROUP)));
+  const U = 0.14;
+  const chains = [];
+  lines.forEach((ln, row) => {
+    const w = ([...ln].length * 6 - 2) * U;
+    const y = (lines.length - 1) * 4.5 - row * 9;
+    [...ln].forEach((ch, i) => {
+      if (ch === " ") return;
+      const pts = charPath(ch, 256).map(([px, py]) => [(i * 6 + px) * U - w / 2, (py - 3 + y) * U]); // prettier-ignore
+      const F = fourierOf(pts, per);
+      F.group = Math.floor(chains.length / FOURIER_GROUP);
+      chains.push(F);
+    });
+  });
+  const groups = Math.ceil(chains.length / FOURIER_GROUP);
+  const shown = lines.join(" ").replace(/#/g, "♥").replace(/\*/g, "★");
+  return { chains, groups, label: `Your words: ${shown}` };
+}
+// The spin's length: 5 s, or for longer text 2.6 s for each group of letters.
+const fourierSecs = (set) => (set.groups > 1 ? 0.7 + FOURIER_GROUP_SECS * set.groups : 5);
 // Where each circle's centre is, and the tip, at θ (0..2π for one round).
 function fourierChain(F, th) {
   let x = F.centre[0];
@@ -4182,6 +4522,46 @@ const WAVE_W = 1.35;
 // The 3D view: circle i of a chain sits a little further forward than the
 // one it rides on, and the whole is turned to face the camera from the side.
 const FC3_Q = quatMul(quatAxisAngle([1, 0, 0], 0.3), quatAxisAngle([0, 1, 0], 0.5));
+// Lane Math r2: the drive for longer text: the groups take turns. Only the
+// group spinning shows its circles (the groups share the tokens); at rest
+// they all show, each in its rest pose.
+function fourierGroupsDrive(c, out, d) {
+  const G = d.set.groups;
+  const T = fourierSecs(d.set);
+  const e = since(c, "spin", T);
+  const on = e >= 0;
+  const fG = on ? band(e, 0.3, T - 0.4) : 0;
+  const active = on && fG < 1 ? Math.min(G - 1, Math.floor(fG * G)) : -1;
+  const local = active >= 0 ? easeInOut(clamp(fG * G - active, 0, 1)) : 0;
+  const th = TAU * local;
+  const Q = d.three ? FC3_Q : [0, 0, 0, 1];
+  const axis = quatRotate(Q, [0, 0, 1]);
+  for (let g = 0; g < G; g++) out.parts[`g${g}`] = { visible: active < 0 || g === active ? 1 : 0 };
+  const tokens = [];
+  if (active >= 0) {
+    let gi = 0;
+    for (const F of d.set.chains) {
+      if (F.group !== active) continue;
+      const now = fourierChain(F, th);
+      const rest = fourierChain(F, 0);
+      F.circles.forEach((ci, i) => {
+        const off = quatRotate(Q, [now.centres[i][0] - rest.centres[i][0], now.centres[i][1] - rest.centres[i][1], 0]); // prettier-ignore
+        const base = quatRotate(Q, [rest.centres[i][0], rest.centres[i][1], d.depth(i)]);
+        tokens[gi++] = { base, quat: quatAxisAngle(axis, ci.f * th), offset: off };
+      });
+    }
+  }
+  out.tokens = tokens;
+  out.morph = [active >= 0 ? 1.002 - (active + local) / G : 0, 0, 0, 0];
+  if (d.three) {
+    const m = mem(c);
+    const step = on ? Math.floor(e * 4) : -1;
+    if (step !== m.sortStep) {
+      if (m.sortStep !== undefined) out.resort = true;
+      m.sortStep = step;
+    }
+  }
+}
 const FOURIER_SHOWN = { label: "" };
 const FOURIER_INPUT = {
   title: "Your own shape",
@@ -4189,7 +4569,7 @@ const FOURIER_INPUT = {
   button: "Draw it",
   fileButton: "Open a text file…",
   accept: ".txt",
-  note: `Type a word (up to ${FOURIER_WORD_MAX} letters or digits; ♥ and ★ draw a heart and a star), and each letter gets its own chain of circles. Or type a closed curve: x = …, y = … with t from 0 to 2π, or r = … with θ.`,
+  note: `Type words (up to ${FOURIER_TEXT_MAX} letters or digits; ♥ and ★ draw a heart and a star), and each letter gets its own chain of circles; longer text is drawn ${FOURIER_GROUP} letters at a time. Or type a closed curve: x = …, y = … with t from 0 to 2π, or r = … with θ.`,
   async read(text) {
     const typed = String(text ?? "").trim();
     if (typed.includes("=")) {
@@ -4206,8 +4586,8 @@ const FOURIER_INPUT = {
     if (!chars.length) throw new Error("Type a word, or a curve like x = cos t, y = sin 3t.");
     const bad = chars.find((ch) => !charPath(ch, 8));
     if (bad) throw new Error(`“${bad}” can't be drawn: use letters, digits, ♥ and ★.`);
-    if (chars.length > FOURIER_WORD_MAX)
-      throw new Error(`That's more than ${FOURIER_WORD_MAX} letters; try a shorter word.`);
+    if (chars.length > FOURIER_TEXT_MAX)
+      throw new Error(`That's more than ${FOURIER_TEXT_MAX} letters; try something shorter.`);
     return { shape: "words", words: word };
   },
   shown: () => FOURIER_SHOWN.label,
@@ -4259,6 +4639,7 @@ Object.assign(RECIPES, {
     drive(t, c, out, info) {
       const d = info?.data?.fourier;
       if (!d) return;
+      if (d.set.groups > 1) return fourierGroupsDrive(c, out, d);
       const T = 5;
       const e = since(c, "spin", T);
       const on = e >= 0;
@@ -4306,6 +4687,12 @@ Object.assign(RECIPES, {
     build(k, o) {
       const set = fourierSet(o);
       FOURIER_SHOWN.label = set.label;
+      // The spin lasts longer for longer text (the control's ease is read
+      // each frame).
+      RECIPES["fourier-circles"].controls[0].ease = fourierSecs(set);
+      const groups = set.groups > 1 ? Array.from({ length: set.groups }, (_, g) => k.part(`g${g}`)) : null; // prettier-ignore
+      // Lighter circles behind words in 2D, so the writing reads.
+      const light = set.chains.length > 1 && o.view !== "3d";
       const three = o.view === "3d";
       const Q = three ? FC3_Q : [0, 0, 0, 1];
       const N = quatRotate(Q, [0, 0, 1]);
@@ -4351,22 +4738,25 @@ Object.assign(RECIPES, {
       // rides, a step forward in 3D), built at rest; the last arm carries
       // the tip.
       let gi = 0;
-      set.chains.forEach((F) => {
+      set.chains.forEach((F, fi) => {
         const rest = fourierChain(F, 0);
+        // Groups of letters share the tokens (circle j of the group).
+        if (groups && fi % FOURIER_GROUP === 0) gi = 0;
         F.circles.forEach((ci, i) => {
           const [cx, cy] = rest.centres[i];
           const z = depth(i);
-          const opt =
-            gi < FOURIER_TOKENS
+          const opt = groups
+            ? { kind: "token", params: [gi, 0], part: groups[F.group] }
+            : gi < FOURIER_TOKENS
               ? { kind: "token", params: [gi, 0] }
               : { part: k.part(`c${gi}`, { pivot: at([cx, cy, z]), axis: N }) };
           const hue = ramp(["#7dd3fc", "#a5b4fc", "#c4b5fd", "#f0abfc"], Math.min(1, i / 20));
           const w = Math.max(0.004, Math.min(0.01, ci.r * 0.06));
-          k.add(ribbon3((f) => at([cx + ci.r * Math.cos(TAU * f), cy + ci.r * Math.sin(TAU * f), z]), 96, w, N), { ...opt, weight: 1.6, size: 1.3, flat: 0.4, opacity: 0.7, pattern: false, color: shade(hue, 0.8) }); // prettier-ignore
+          k.add(ribbon3((f) => at([cx + ci.r * Math.cos(TAU * f), cy + ci.r * Math.sin(TAU * f), z]), 96, light ? w * 0.7 : w, N), { ...opt, weight: 1.6, size: light ? 1.1 : 1.3, flat: 0.4, opacity: light ? 0.32 : 0.7, pattern: false, color: shade(hue, light ? 0.65 : 0.8) }); // prettier-ignore
           const a = at([cx, cy, z + 0.004]);
           const last = i === F.circles.length - 1;
           const b = at([cx + ci.r * Math.cos(ci.ph), cy + ci.r * Math.sin(ci.ph), last ? Z : depth(i + 1)]); // prettier-ignore
-          k.add(ribbon3((f) => add(a, mul(sub(b, a), f)), 4, w * 1.4, N), { ...opt, weight: 2, size: 1.3, flat: 0.5, pattern: false, color: "#f1f5ff" }); // prettier-ignore
+          k.add(ribbon3((f) => add(a, mul(sub(b, a), f)), 4, w * 1.4, N), { ...opt, weight: 2, size: light ? 1.1 : 1.3, flat: 0.5, opacity: light ? 0.45 : 0.9, pattern: false, color: light ? "#aab6d0" : "#f1f5ff" }); // prettier-ignore
           // Several chains: each tip rides on its chain's last arm.
           if (last && !single)
             k.add(k.sphere(0.022), { ...opt, pos: add(b, mul(N, 0.01)), weight: 4, pattern: false, color: "#ffd166" }); // prettier-ignore
@@ -4385,7 +4775,7 @@ Object.assign(RECIPES, {
           flat: 0.5,
           stretch: 1.4,
           kind: "fade",
-          params: (c) => [1.002 - c.s.f, 0.004],
+          params: (c) => [groups ? 1.002 - (F.group + c.s.f) / set.groups : 1.002 - c.s.f, 0.004],
           channel: 0,
           pattern: false,
           color: (c) => keep(ramp(["#ff6b6b", "#ff8fab", "#ffd166"], 0.5 - 0.5 * Math.cos(TAU * c.s.f))), // prettier-ignore
@@ -4649,3 +5039,471 @@ color: shade(tri.col, 0.7),
     },
   },
 });
+
+// ---- Lane Math r2: three more strange attractors ------------------------------------
+// Each is a flow dp/dt = f(p) in three dimensions, integrated with the
+// classic fourth-order Runge-Kutta method. The glowing path is one long
+// solution, built once; a tap drops a tracer, a point integrated live (fixed
+// steps of h in the system's own time, so the motion is the same at any
+// frame rate) that leaves a short trail behind it. Up to four tracers run
+// at once; a fifth replaces the oldest. A tap on the toy drops it where you
+// tapped (off the attractor it is pulled onto it: that is what makes it an
+// attractor); the Play button drops it at a point of the path.
+export const rk4 = (f, p, h) => {
+  const k1 = f(p);
+  const k2 = f(add(p, mul(k1, h / 2)));
+  const k3 = f(add(p, mul(k2, h / 2)));
+  const k4 = f(add(p, mul(k3, h)));
+  return add(p, mul(add(add(k1, mul(k2, 2)), add(mul(k3, 2), k4)), h / 6));
+};
+// up: which of the system's axes points up in the toy (the others follow
+// round, so the picture is turned, never mirrored or stretched).
+export const ATTRACTORS = {
+  // Otto Rössler, 1976: a = b = 0.2, c = 5.7.
+  "rossler-attractor": {
+    f: ([x, y, z]) => [-y - z, x + 0.2 * y, 0.2 + z * (x - 5.7)],
+    p0: [1, 1, 0],
+    h: 0.01,
+    settle: 3000,
+    steps: 26000,
+    up: 2,
+    colorBy: "height",
+    stops: ["#0c2f4a", "#13697f", "#1fa69a", "#7fd17a", "#f3d35b", "#ff8a3d"],
+    tracers: ["#ffffff", "#ff5d8f", "#ffd23f", "#7af0ff"],
+  },
+  // René Thomas, 1999: b = 0.208186, near the edge of chaos.
+  "thomas-attractor": {
+    f: ([x, y, z]) => {
+      const b = 0.208186;
+      return [Math.sin(y) - b * x, Math.sin(z) - b * y, Math.sin(x) - b * z];
+    },
+    p0: [0.1, 0, 0],
+    h: 0.05,
+    settle: 1500,
+    steps: 50000,
+    up: 1,
+    radius: 0.008,
+    colorBy: "angle",
+    stops: ["#ff6b6b", "#ffd166", "#06d6a0", "#118ab2", "#9b5de5", "#ff6b6b"],
+    tracers: ["#ffffff", "#ffe66d", "#ff4f9a", "#5ef2ff"],
+  },
+  // Yoji Aizawa's system (as given by Langford, 1984): a = 0.95, b = 0.7,
+  // c = 0.6, d = 3.5, e = 0.25, f = 0.1.
+  "aizawa-attractor": {
+    f: ([x, y, z]) => [
+      (z - 0.7) * x - 3.5 * y,
+      3.5 * x + (z - 0.7) * y,
+      0.6 + 0.95 * z - (z * z * z) / 3 - (x * x + y * y) * (1 + 0.25 * z) + 0.1 * z * x * x * x,
+    ],
+    p0: [0.1, 0, 0],
+    h: 0.005,
+    settle: 4000,
+    steps: 22000,
+    up: 2,
+    radius: 0.0065,
+    colorBy: "height",
+    stops: ["#140f3d", "#33238f", "#6a3fd1", "#c34fc9", "#ff8fb1", "#fff1d6"],
+    tracers: ["#fff7c2", "#4ef0c8", "#ff6b6b", "#7ab8ff"],
+  },
+};
+const TRACERS = 4;
+const TRAIL = 11; // trail segments behind each tracer's head
+const TRAIL_SECS = 1.5;
+const TRACER_TOKENS = TRAIL + 1;
+const HEAD_SPEED = 0.75; // the heads' mean speed, in toy units a second
+
+// The system's path, its frame (center and scale, so the toy is about 2
+// across) and how fast its time runs. show(p) maps a state to the toy;
+// back(q) maps a toy point to a state.
+const ATTR_CACHE = new Map();
+export function attractorInfo(id) {
+  if (ATTR_CACHE.has(id)) return ATTR_CACHE.get(id);
+  const A = ATTRACTORS[id];
+  const perm = A.up === 2 ? [0, 2, 1] : A.up === 0 ? [1, 0, 2] : [0, 1, 2];
+  // Up as the toy's Y; the swap of two axes is undone by flipping the third.
+  const flip = A.up === 1 ? 1 : -1;
+  const turn = (p) => [p[perm[0]], p[perm[1]], flip * p[perm[2]]];
+  const unturn = (q) => {
+    const p = [0, 0, 0];
+    p[perm[0]] = q[0];
+    p[perm[1]] = q[1];
+    p[perm[2]] = flip * q[2];
+    return p;
+  };
+  let p = A.p0;
+  for (let i = 0; i < A.settle; i++) p = rk4(A.f, p, A.h);
+  const raw = [];
+  for (let i = 0; i < A.steps; i++) {
+    p = rk4(A.f, p, A.h);
+    raw.push(turn(p));
+  }
+  const lo = [Infinity, Infinity, Infinity];
+  const hi = [-Infinity, -Infinity, -Infinity];
+  for (const q of raw)
+    for (let j = 0; j < 3; j++) {
+      lo[j] = Math.min(lo[j], q[j]);
+      hi[j] = Math.max(hi[j], q[j]);
+    }
+  const center = mul(add(lo, hi), 0.5);
+  const scale = 2 / Math.max(hi[0] - lo[0], hi[1] - lo[1], hi[2] - lo[2]);
+  const show = (s) => mul(sub(turn(s), center), scale);
+  const back = (q) => unturn(add(mul(q, 1 / scale), center));
+  const pts = [];
+  let dist = 0;
+  for (let i = 0; i < raw.length; i++) {
+    if (i % 2 === 0) pts.push(mul(sub(raw[i], center), scale));
+    if (i) dist += len(sub(raw[i], raw[i - 1])) * scale;
+  }
+  const speed = dist / ((raw.length - 1) * A.h); // toy units per unit of system time
+  const info = { A, show, back, pts, rate: HEAD_SPEED / speed, half: mul(sub(hi, lo), scale / 2) };
+  ATTR_CACHE.set(id, info);
+  return info;
+}
+
+// The tracers' state for one build of the toy (kept between frames).
+const TRACER_STATE = new WeakMap();
+function tracerState(data, I, tap) {
+  let st = TRACER_STATE.get(data);
+  if (!st) {
+    const lag = Math.max(1, Math.round((TRAIL_SECS / TRAIL) * (I.rate / I.A.h)));
+    st = { t: null, tapN: tap?.n ?? 0, lag, slots: [], next: 0, sorted: -1, spawned: 0 };
+    TRACER_STATE.set(data, st);
+    spawnTracer(st, I, I.back(I.pts[0]));
+  }
+  return st;
+}
+function spawnTracer(st, I, s0) {
+  const n = TRAIL * st.lag + 1;
+  const hist = new Float64Array(n * 3);
+  for (let i = 0; i < n; i++) hist.set(s0, i * 3);
+  st.slots[st.next] = { s: s0.slice(), hist, head: 0, n, acc: 0, age: 0 };
+  st.next = (st.next + 1) % TRACERS;
+  st.spawned++;
+}
+// Where a tap drops a tracer: the tapped point, kept within the attractor's
+// box (a little beyond it), or, from the Play button, a point of the path.
+function dropPoint(I, st, point) {
+  if (point && point.every(Number.isFinite)) {
+    const q = point.map((v, j) => clamp(v, -I.half[j] * 1.1, I.half[j] * 1.1));
+    return I.back(q);
+  }
+  const i = Math.floor(I.pts.length * ((st.spawned * 0.618034) % 1));
+  return I.back(I.pts[i]);
+}
+function stepTracers(st, I, dt) {
+  const { f, h } = I.A;
+  for (const tr of st.slots) {
+    if (!tr) continue;
+    tr.age += dt;
+    tr.acc += dt * I.rate;
+    while (tr.acc >= h) {
+      tr.acc -= h;
+      let s = rk4(f, tr.s, h);
+      // A point thrown far off (or a broken number) starts again on the path.
+      const q = I.show(s);
+      if (!s.every(Number.isFinite) || q.some((v, j) => Math.abs(v) > I.half[j] * 3 + 1))
+        s = I.back(I.pts[0]);
+      tr.s = s;
+      tr.head = (tr.head + 1) % tr.n;
+      tr.hist.set(s, tr.head * 3);
+    }
+  }
+}
+
+function attractorRecipe(id) {
+  return {
+    alive: true,
+    density: 1.6, // finer splats along the thin path ("Just sharper")
+    controls: [
+      { key: "glow", label: "Glow", type: "slider", default: 0.6 },
+      { key: "drop", label: "Drop a tracer", type: "pulse", ease: 1.2 },
+    ],
+    action: { key: "drop", label: "Drop a tracer" },
+    drive(t, c, out, info) {
+      const I = attractorInfo(id);
+      const data = info?.data || attractorRecipe;
+      const tap = info?.tap;
+      const st = tracerState(data, I, tap);
+      if (tap && tap.n !== st.tapN) {
+        st.tapN = tap.n;
+        spawnTracer(st, I, dropPoint(I, st, tap.point));
+      }
+      const dt = st.t === null ? 0 : clamp(t - st.t, 0, 0.1);
+      st.t = t;
+      stepTracers(st, I, dt);
+      const tokens = [];
+      for (let i = 0; i < TRACERS; i++) {
+        const tr = st.slots[i];
+        out.parts[`tr${i}`] = { visible: tr ? 1 : 0 };
+        for (let k = 0; k <= TRAIL; k++) {
+          let off = [0, 0, 0];
+          if (tr) {
+            const j = (((tr.head - k * st.lag) % tr.n) + tr.n) % tr.n;
+            off = I.show([tr.hist[j * 3], tr.hist[j * 3 + 1], tr.hist[j * 3 + 2]]);
+          }
+          tokens[i * TRACER_TOKENS + k] = {
+            offset: off,
+            visible: k ? 1 : tr ? smoothstep(0, 0.25, tr.age) : 0,
+          };
+        }
+      }
+      out.tokens = tokens;
+      // The tracers sort again where they are, a few times a second.
+      const slot = Math.floor(t / 0.3);
+      if (slot !== st.sorted) {
+        st.sorted = slot;
+        out.resort = true;
+      }
+      const flash = c.drop > 0 ? Math.sin(Math.PI * Math.min(1, (1 - c.drop) * 2)) : 0;
+      out.glow = [1, 0.95, 0.85, 0.15 + 0.8 * c.glow + 0.9 * flash];
+    },
+    build(k) {
+      const I = attractorInfo(id);
+      const A = I.A;
+      k.data = { attractor: id };
+      const color = (c) => {
+        const u =
+          A.colorBy === "angle"
+            ? (Math.atan2(c.p[2], c.p[0]) / TAU + 0.5 + 0.15 * c.p[1]) % 1
+            : clamp((c.p[1] + I.half[1]) / (2 * I.half[1]), 0, 1);
+        // Lane Math r2 ("Just sharper"): one color round the thin tube (light
+        // that changed splat by splat read as grain).
+        return ramp(A.stops, u);
+      };
+      k.add(polyTube(I.pts, A.radius ?? 0.011), {
+        size: 0.6,
+        even: true,
+        flat: 0.6,
+        stretch: 3,
+        kind: "pulse",
+        params: (c) => [(c.t * 6) % 1, 0],
+        color,
+      });
+      // The tracers: each a bright head (token 0 of its twelve) and a trail
+      // skinned between the head and eleven points behind it, all built at
+      // the middle and moved by their tokens.
+      for (let i = 0; i < TRACERS; i++) {
+        const part = k.part(`tr${i}`);
+        const col = A.tracers[i];
+        const base = i * TRACER_TOKENS;
+        k.cloud({ share: 0.006, size: 1.4, pattern: false, fit: false }, (rand, j, n) => {
+          const halo = j < n * 0.35;
+          return {
+            p: mul(unit([rand() - 0.5, rand() - 0.5, rand() - 0.5]), (halo ? 0.05 : 0.024) * Math.cbrt(rand())), // prettier-ignore
+            color: halo ? col : mix(col, "#ffffff", 0.6),
+            opacity: halo ? 0.35 : 1,
+            size: halo ? 2.2 : 1,
+            kind: "token",
+            params: [base, 0],
+            part,
+          };
+        });
+        k.cloud({ share: 0.016, size: 1, pattern: false, fit: false }, (rand, j, n) => {
+          const s = (j + 0.5) / n; // 0 at the head, 1 at the tail
+          const seg = Math.min(TRAIL - 1, Math.floor(s * TRAIL));
+          const f = s * TRAIL - seg;
+          const fade = 1 - s;
+          return {
+            p: [0, 0, 0],
+            color: mix(mix(col, "#ffffff", 0.3 * fade), "#1a1030", 0.35 * s),
+            opacity: 0.5 + 0.5 * fade,
+            size: 1.1 + 1.3 * fade,
+            skin: [base + seg, base + seg + 1, f],
+            part,
+          };
+        });
+      }
+    },
+  };
+}
+Object.assign(RECIPES, Object.fromEntries(Object.keys(ATTRACTORS).map((id) => [id, attractorRecipe(id)]))); // prettier-ignore
+
+// ---- Lane Math r2: shapes in four dimensions -------------------------------------
+// The regular and uniform 4D shapes, each as corners (scaled to radius 1 in
+// 4D), edges (corner pairs) and a group per corner (for its color).
+const R5 = 1 / Math.sqrt(5);
+export function polytope(id, o = {}) {
+  let verts = [];
+  let group = [];
+  if (id === "five-cell") {
+    // The 4-simplex: five corners, each joined to the other four.
+    verts = [
+      [1, 1, 1, -R5],
+      [1, -1, -1, -R5],
+      [-1, 1, -1, -R5],
+      [-1, -1, 1, -R5],
+      [0, 0, 0, 4 * R5],
+    ];
+    group = [0, 1, 2, 3, 4];
+  } else if (id === "sixteen-cell") {
+    // The cross-polytope: the eight points one step along each axis, both
+    // ways; every corner is joined to all but its opposite.
+    for (let a = 0; a < 4; a++)
+      for (const s of [1, -1]) {
+        const v = [0, 0, 0, 0];
+        v[a] = s;
+        verts.push(v);
+        group.push(a);
+      }
+  } else if (id === "twenty-four-cell") {
+    // All arrangements of (±1, ±1, 0, 0): 24 corners. They fall into three
+    // sets of eight (each a 16-cell) by which pairs of axes are zero.
+    const pairs = [
+      [0, 1],
+      [2, 3],
+      [0, 2],
+      [1, 3],
+      [0, 3],
+      [1, 2],
+    ];
+    pairs.forEach(([a, b], pi) => {
+      for (const sa of [1, -1])
+        for (const sb of [1, -1]) {
+          const v = [0, 0, 0, 0];
+          v[a] = sa;
+          v[b] = sb;
+          verts.push(v);
+          group.push(pi >> 1);
+        }
+    });
+  } else if (id === "duoprism") {
+    // The p,q-duoprism: every corner of a p-gon (in the plane of x and y)
+    // paired with every corner of a q-gon (in z and w), edges all one length.
+    const p = o.p ?? 3;
+    const q = o.q ?? 4;
+    const r1 = 1 / (2 * Math.sin(Math.PI / p));
+    const r2 = 1 / (2 * Math.sin(Math.PI / q));
+    for (let i = 0; i < p; i++)
+      for (let j = 0; j < q; j++) {
+        const a = (TAU * i) / p;
+        const b = (TAU * j) / q;
+        verts.push([r1 * Math.cos(a), r1 * Math.sin(a), r2 * Math.cos(b), r2 * Math.sin(b)]);
+        group.push(j / q); // each p-gon ring its own color round the q-gon
+      }
+  }
+  const r = Math.max(...verts.map((v) => Math.hypot(...v)));
+  verts = verts.map((v) => v.map((x) => x / r));
+  // Edges: the corner pairs at the shortest distance.
+  const d4 = (a, b) => Math.hypot(a[0] - b[0], a[1] - b[1], a[2] - b[2], a[3] - b[3]);
+  let best = Infinity;
+  for (let i = 0; i < verts.length; i++)
+    for (let j = i + 1; j < verts.length; j++) best = Math.min(best, d4(verts[i], verts[j]));
+  const edges = [];
+  for (let i = 0; i < verts.length; i++)
+    for (let j = i + 1; j < verts.length; j++)
+      if (d4(verts[i], verts[j]) < best * 1.001) edges.push([i, j]);
+  return { verts, edges, group };
+}
+// Seen in perspective from a point 2.4 out along w: a corner nearer the eye
+// in 4D (w toward +1) shows bigger.
+const FOUR_D_EYE = 2.4;
+const show4 = (v) => mul([v[0], v[1], v[2]], FOUR_D_EYE / (FOUR_D_EYE - v[3]));
+// A turn by a in the plane of axes i and j.
+const turn4 = (v, i, j, a) => {
+  const out = v.slice();
+  const c = Math.cos(a);
+  const s = Math.sin(a);
+  out[i] = v[i] * c - v[j] * s;
+  out[j] = v[i] * s + v[j] * c;
+  return out;
+};
+
+const FOUR_D = {
+  "five-cell": { theme: "sunset" },
+  "sixteen-cell": { theme: "ocean" },
+  "twenty-four-cell": { theme: "jewel" },
+  duoprism: { theme: "candy" },
+};
+function fourDRecipe(id) {
+  const options = [
+    {
+      key: "colors",
+      label: "Colors",
+      type: "select",
+      default: FOUR_D[id].theme,
+      choices: FOUR_D_THEME_CHOICES,
+    },
+  ];
+  if (id === "duoprism")
+    options.push(
+      { key: "p", label: "First polygon", type: "slider", min: 3, max: 6, step: 1, default: 3 },
+      { key: "q", label: "Second polygon", type: "slider", min: 3, max: 6, step: 1, default: 4 },
+    );
+  return {
+    alive: true,
+    density: 1.6, // finer splats along the thin edges ("Just sharper")
+    options,
+    controls: [
+      { key: "turn", label: "4D turn", type: "slider", default: 0.85 },
+      { key: "roll", label: "Roll through 4D", type: "pulse", ease: 5 },
+    ],
+    action: { key: "roll", label: "Roll through 4D" },
+    // The corners are tokens placed each frame by true turns in 4D (in the
+    // planes of x and w and of y and w), then seen in perspective from 4D;
+    // every edge is skinned between its two corners, so it stays straight.
+    // At rest the shape rocks gently in 4D. A tap rolls it one whole turn
+    // through the fourth dimension, in the plane of x and w: the far side
+    // (small) swells to the near side (big) and back, home where it began.
+    drive(t, c, out, info) {
+      const P = info?.data?.poly;
+      if (!P) return;
+      const p = progress(c.roll);
+      const a = TAU * easeInOut(band(p, 0.03, 0.97)) + 0.35 * c.turn * Math.sin(t * 0.9);
+      const b = 0.3 * c.turn * Math.sin(t * 0.63 + 1);
+      out.tokens = P.verts.map((v) => ({
+        offset: sub(show4(turn4(turn4(v, 0, 3, a), 1, 3, b)), show4(v)),
+      }));
+      // While it rolls, sort again where the corners are, a few times a second.
+      const m = mem(c);
+      const slot = c.roll > 0 ? Math.floor(p * 20) : -1;
+      if (slot !== m.sortSlot) {
+        m.sortSlot = slot;
+        out.resort = true;
+      }
+      out.body = { quat: quatAxisAngle(unit([0.25, 1, 0.12]), t * 0.28) };
+    },
+    build(k, o) {
+      const P = polytope(id, { p: o.p, q: o.q });
+      const pal = FOUR_D_THEMES[o.colors] || FOUR_D_THEMES[FOUR_D[id].theme];
+      const colOf = (i) => {
+        const g = P.group[i];
+        if (id === "five-cell") return [pal[0], pal[1], pal[2], pal[3], "#ffffff"][g];
+        if (id === "duoprism") return ramp([pal[0], pal[1], pal[2], pal[3], pal[0]], g);
+        return pal[g % 4];
+      };
+      k.data = { poly: P };
+      // Lane Math r2 ("Just sharper"): one even color round each thin edge,
+      // its splats placed evenly; light that changed splat by splat round a
+      // tube a few pixels wide read as grain.
+      const glow = (col) => shade(col, 1.05);
+      const radius = P.verts.length > 16 ? 0.019 : 0.024;
+      for (const [i, j] of P.edges)
+        k.add(polyTube([show4(P.verts[i]), show4(P.verts[j])], radius), {
+          flat: 0.9,
+          even: true,
+          skin: (c) => [i, j, c.t],
+          color: (c) => glow(mix(colOf(i), colOf(j), c.t), c.n),
+        });
+      P.verts.forEach((v, i) => {
+        const col = colOf(i);
+        k.add(k.sphere(P.verts.length > 16 ? 0.045 : 0.055), {
+          pos: show4(v),
+          weight: 1.2,
+          flat: 0.5,
+          kind: "token",
+          params: [i, 0],
+          pattern: false,
+          color: (c) => keep(mix(col, "#ffffff", 0.45 + 0.4 * Math.max(0, dot(c.n, HALF)))),
+        });
+      });
+      // Room for the corners as they roll (at most about 1.1 from the middle).
+      for (let a = 0; a < 3; a++)
+        for (const sgn of [1, -1]) {
+          const r = [0, 0, 0];
+          r[a] = 1.15 * sgn;
+          k.reach(r);
+        }
+    },
+  };
+}
+Object.assign(RECIPES, Object.fromEntries(Object.keys(FOUR_D).map((id) => [id, fourDRecipe(id)])));

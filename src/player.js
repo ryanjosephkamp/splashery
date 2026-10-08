@@ -36,10 +36,12 @@ export function ui2On() {
   return true;
 }
 import { pickKernel } from "./kernels.js"; // Lab
+import { photoUniforms } from "./photo-splats.js"; // lane Photo fidelity
 import { pickSharpness, sharpOff } from "./sharpness.js"; // Sharpness
 import { createScene, THEMES, normalizeFigures } from "./state.js";
 import { mulberry32, mixSeed, hash32 } from "./noise.js";
 import { Pictures } from "./pictures.js"; // Pictures
+import { ChunkHost } from "./chunks.js"; // lane Powers of ten
 import { HandsOn } from "./physics/hands-on.js"; // lane Physics
 
 export { NoGPUError };
@@ -171,8 +173,12 @@ export class Player {
     this.painter = new Painter(this.stage);
     this.camera.onShake = () => this.shake();
     this.stage.onUpdate((dt) => this.update(dt));
+    // Owned listeners leave with the player (destroy() aborts this).
+    this.lifetime = new AbortController();
     this.media = matchMedia("(prefers-color-scheme: dark)");
-    this.media.addEventListener("change", () => this.applyLook());
+    this.media.addEventListener("change", () => this.applyLook(), {
+      signal: this.lifetime.signal,
+    });
     this.applyLook();
     this.watchDeviceShake();
     return this;
@@ -526,7 +532,12 @@ export class Player {
     this.disposeProcedural();
     // Lab: a recipe may bring its own GPU program for its splats (a field).
     const modifier = labsOn() ? recipe.gpuField?.(options, ctx.transform) || null : null;
-    this.stage.setToy({ resource: container, owned: true, kit: true, modifier });
+    // Lane Photo fidelity: a recipe with a photo has splats that take their colors from it.
+    const photo =
+      !!recipe.photo && !modifier && (recipe.photo.on ? !!recipe.photo.on(options) : true);
+    if (photo) this.stage.setPhoto(true);
+    this.stage.setToy({ resource: container, owned: true, kit: true, modifier, photo });
+    this.photo = photo ? { recipe, version: null } : null;
     this.proc = { ctx, container, clay: clay.slice(), kit: true };
     this.motion.setToy(recipe, ctx, this.scene.motion?.controls || {});
     this.screen = null;
@@ -541,7 +552,19 @@ export class Player {
     this.startPictures(ctx, toy, recipe, options); // Pictures
     this.startFluids(ctx, token); // Fluids
     this.startArcade(ctx, token, recipe, options); // Arcade
-    const b = ctx.buf.bounds();
+    // Lane Powers of ten: chunks the drive loads as it needs them, and the
+    // zoom gesture handed to the toy (src/chunks.js).
+    if (recipe.chunks) {
+      this.chunks = new ChunkHost(this, recipe, { id: def.id, options, transform: ctx.transform, count, profile: this.profile }); // prettier-ignore
+      this.motion.chunks = this.chunks.api;
+    }
+    if (recipe.zoom) this.camera.zoomTaker = (f) => this.motion.takeZoom(f);
+    // Lane Powers of ten: frameReaches frames the camera on the recipe's
+    // k.reach points alone (its own splats are a backdrop far behind them).
+    const b =
+      recipe.frameReaches && ctx.reaches?.length
+        ? { min: [Infinity, Infinity, Infinity], max: [-Infinity, -Infinity, -Infinity] }
+        : ctx.buf.bounds();
     for (const r of ctx.reaches || []) {
       for (let k = 0; k < 3; k++) {
         b.min[k] = Math.min(b.min[k], r[k]);
@@ -742,6 +765,12 @@ export class Player {
 
   disposeProcedural() {
     this.proc = null;
+    // Lane Powers of ten: the toy's chunks go with its sheets; the zoom
+    // gesture moves the camera again.
+    this.chunks?.destroy();
+    this.chunks = null;
+    this.motion.chunks = null;
+    this.camera.zoomTaker = null;
     // Arcade: the old game stops with its toy.
     this.arcade?.destroy();
     this.arcade = null;
@@ -1159,25 +1188,30 @@ export class Player {
     if (typeof DeviceMotionEvent === "undefined") return;
     let last = 0;
     let hits = 0;
-    addEventListener("devicemotion", (e) => {
-      const a = e.accelerationIncludingGravity || e.acceleration;
-      if (!a) return;
-      const m = Math.hypot(a.x || 0, a.y || 0, a.z || 0);
-      const now = performance.now();
-      if (m > 24) {
-        hits = now - last < 700 ? hits + 1 : 1;
-        last = now;
-        if (hits >= 3) {
-          hits = 0;
-          this.shake();
+    addEventListener(
+      "devicemotion",
+      (e) => {
+        const a = e.accelerationIncludingGravity || e.acceleration;
+        if (!a) return;
+        const m = Math.hypot(a.x || 0, a.y || 0, a.z || 0);
+        const now = performance.now();
+        if (m > 24) {
+          hits = now - last < 700 ? hits + 1 : 1;
+          last = now;
+          if (hits >= 3) {
+            hits = 0;
+            this.shake();
+          }
         }
-      }
-    });
+      },
+      { signal: this.lifetime.signal },
+    );
   }
 
   resetCamera() {
     // Page focus: no glide, and a page in view lets go to here.
     this.glide = null;
+    this.motion.zoomIn.resets++; // lane Powers of ten: a toy that takes the zoom goes home too
     if (this.pageView) this.pageView.back = null;
     this.camera.reset(); // UI r2: Reset also centers a moved view (pictures too)
     this.stage.requestRender();
@@ -1352,6 +1386,30 @@ export class Player {
     this.emit("action", { ...next, echo: true });
   }
 
+  // Lane Photo fidelity: a photo toy's picture (uploaded when its version changes) and where it lies
+  // (src/photo-splats.js). The recipe's photo: { rect() ([x0, y0, x1, y1] in its coordinates, y1 the
+  // top), version(t), source(t) (a canvas, an image or a video), on(options) (optional: whether this
+  // build uses it) }.
+  photoFrame(info, u) {
+    const ph = this.photo;
+    if (!ph || ph.recipe !== info.recipe || !this.stage.toy?.photo) return;
+    const spec = ph.recipe.photo;
+    const v = spec.version(this.time);
+    if (v !== ph.version) {
+      const src = spec.source(this.time);
+      if (src) {
+        this.stage.setPhotoSource(src);
+        ph.version = v;
+      }
+    }
+    const [x0, y0, x1, y1] = spec.rect();
+    const a = this.fromRecipe([x0, y1, 0]);
+    const b = this.fromRecipe([x1, y0, 0]);
+    const q = u.uSpBodyQ && (u.uSpBodyQ[3] || u.uSpBodyQ[0] || u.uSpBodyQ[1] || u.uSpBodyQ[2]) ? u.uSpBodyQ : [0, 0, 0, 1]; // prettier-ignore
+    const tex = this.stage.photoTex;
+    this.stage.setPhotoUniforms(photoUniforms({ x0: a[0], x1: b[0], y0: b[1], y1: a[1] }, q, u.uSpClock?.[2] ?? 1, tex ? [tex.width, tex.height] : [1, 1])); // prettier-ignore
+  }
+
   // A world point in the current toy's recipe coordinates: a kit toy's
   // build space (before it was centred and scaled), else the world.
   toRecipe(world) {
@@ -1491,6 +1549,8 @@ export class Player {
     if (info.rig) u.uSpRigDbg = [this.rigDebug ? 1 : 0, 0, 0, 0];
     if (info.kind === "kit") u["uSpLeaf[0]"] = this.leafUniform(); // Pictures
     this.stage.setUniforms(u);
+    this.chunks?.update(this.motion.out); // lane Powers of ten
+    this.photoFrame(info, u); // lane Photo fidelity
     // Redraw a live screen when the recipe says its picture changed.
     const scr = this.screen;
     if (scr && scr.recipe === info.recipe) {
@@ -1579,6 +1639,33 @@ export class Player {
     this.camera.interact();
     this.idle.weight = Math.min(this.idle.weight, 0.99);
     this.stage.requestRender();
+  }
+
+  // Lane Fix9 (engine): a toy whose recipe leaves a `tapBox` in its data
+  // ({ min: [3], max: [3] }, recipe coordinates) takes a tap anywhere in that
+  // box, where the pick buffer finds no splat (an empty plot's box between
+  // its axes): the ray's entry into the box, as a world point, or null.
+  tapBoxAt(x, y) {
+    const box = this.motion.ctx?.kit?.data?.tapBox;
+    if (!box || !this.stage.toy) return null;
+    const ray = this.stage.ray(x, y);
+    const o = this.toRecipe(ray.origin);
+    const e = this.toRecipe(ray.origin.map((v, i) => v + ray.dir[i]));
+    const d = e.map((v, i) => v - o[i]);
+    let t0 = 0;
+    let t1 = Infinity;
+    for (let i = 0; i < 3; i++) {
+      if (Math.abs(d[i]) < 1e-12) {
+        if (o[i] < box.min[i] || o[i] > box.max[i]) return null;
+        continue;
+      }
+      const a = (box.min[i] - o[i]) / d[i];
+      const b = (box.max[i] - o[i]) / d[i];
+      t0 = Math.max(t0, Math.min(a, b));
+      t1 = Math.min(t1, Math.max(a, b));
+    }
+    if (t0 > t1) return null;
+    return this.fromRecipe(o.map((v, i) => v + d[i] * t0));
   }
 
   // Pokes the toy at a canvas point. Resolves true when it hit the toy.
@@ -1847,6 +1934,7 @@ export class Player {
 
   destroy() {
     this.loadToken++;
+    this.lifetime?.abort();
     this.pictures?.destroy(); // Pictures
     this.closeMedia();
     this.painter?.detach();

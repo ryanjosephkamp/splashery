@@ -62,6 +62,14 @@ export function createSong(api) {
 }
 
 class NoteRider {
+  // The words under the title before a game: the song's name, or how to
+  // open one (Your own song chosen, no file opened yet).
+  attract() {
+    if (this.own === null) return ["Open a MIDI file with ♪ Your song. Until then, Ode to Joy."];
+    if (this.own) return [`♪ ${this.own}`, "Steer into each note's lane as it arrives."];
+    return null;
+  }
+
   constructor(api) {
     this.api = api;
     this.q = api.q;
@@ -73,6 +81,7 @@ class NoteRider {
       song = songFromText({ title: t.title, text: t.text, bpm: t.bpm });
     }
     this.song = song;
+    this.own = o.tune === "own" ? (RIDE.song ? RIDE.name || "Your song" : null) : undefined;
     // The melody: the highest note at each moment (the tune you'd sing).
     const byT = new Map();
     for (const n of song.notes) {
@@ -207,7 +216,10 @@ class NoteRider {
         this.caught++;
         this.streak++;
         this.score += 10 + Math.min(40, this.streak * 2);
-        this.api.sound({ voice: "grand", f: 440 * 2 ** ((n.n - 69) / 12), vol: 0.5 + 0.4 * n.v, decay: Math.min(2, 0.4 + n.d) }); // prettier-ignore
+        // A recording (src/packs/arcade-listen.js): the note plays its own
+        // slice of it, on time; else the note itself, on the grand piano.
+        if (this.song.audio) this.api.sound({ voice: "sample", file: this.song.audio, from: n.t, len: n.slice ?? n.d, at: Math.max(0, dtn), vol: 1 }); // prettier-ignore
+        else this.api.sound({ voice: "grand", f: 440 * 2 ** ((n.n - 69) / 12), vol: 0.5 + 0.4 * n.v, decay: Math.min(2, 0.4 + n.d) }); // prettier-ignore
         // its lane's pad presses down for as long as the note is held
         this.pads[n.lane].press = Math.max(0.12, Math.min(0.6, n.d));
         this.bursts.push({ lane: n.lane, age: 0, sprite: null });

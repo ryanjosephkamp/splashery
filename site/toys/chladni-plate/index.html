@@ -175,6 +175,8 @@
               <a
                 class="button primary"
                 href="../../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImNobGFkbmktcGxhdGUifSwiY2FtZXJhIjp7InlhdyI6MC4yLCJwaXRjaCI6MC45NSwicm9sbCI6MCwiZGlzdGFuY2UiOjQuMX0sImF1dG9wbGF5Ijp7InR1cm50YWJsZSI6ZmFsc2UsImVmZmVjdCI6Im5vbmUifX0"
+                target="_blank"
+                rel="noopener"
                 >Open in the gallery<svg
                   class="arrow"
                   viewBox="0 0 16 16"
@@ -203,12 +205,14 @@
                 "
               ></span>
               <iframe
-                data-src="../../play/?toy=chladni-plate&turntable=off"
+                data-src="../../play/?toy=chladni-plate&turntable=off&sound=on"
                 title="Chladni plate, live: drag to turn it"
                 allow="fullscreen"
               ></iframe>
             </div>
-            <figcaption>Drag to look around it; tap to play.</figcaption>
+            <figcaption>
+              Drag to look around it; tap to play. The speaker button mutes the sound.
+            </figcaption>
           </figure>
         </div>
         <section class="toy-section" aria-labelledby="h-about">
@@ -238,16 +242,17 @@
           <p>
             Built in your browser from a recipe and a seed: nothing in it comes from outside files.
             Its recipe is in
-            <a href="https://github.com/ryanjosephkamp/splashery/blob/main/src/packs/studio.js"
+            <a
+              href="https://github.com/ryanjosephkamp/splashery/blob/main/src/packs/studio.js"
+              target="_blank"
+              rel="noopener"
               ><code>src/packs/studio.js</code></a
             >.
           </p>
 
           <p class="note">
             Splashery's code is under the MIT license; each asset above keeps its own license. Every
-            credit is also in
-            <a href="https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md">CREDITS.md</a
-            >.
+            credit is also in <a href="../../about/credits/">CREDITS.md</a>.
           </p>
         </section>
         <section class="toy-section" aria-labelledby="h-share">
@@ -333,8 +338,9 @@ https://ryanjosephkamp.github.io/splashery/site/toys/chladni-plate/</textarea
             </button>
           </div>
           <p class="note">
-            Embeds are silent and turn slowly when idle. Every option is in the
-            <a href="https://github.com/ryanjosephkamp/splashery#embedding">embed guide</a>.
+            Embeds are silent and turn slowly when idle; add <code>&amp;sound=on</code> to the
+            iframe's link for the toy's tap sound, with a mute button. Every option is in the
+            <a href="../../share/">embed guide</a>.
           </p>
         </section>
         <section class="toy-section" aria-labelledby="h-related">
@@ -360,6 +366,18 @@ https://ryanjosephkamp.github.io/splashery/site/toys/chladni-plate/</textarea
           </div>
           <ul class="toy-grid">
             <li class="toy-card" data-labs>
+              <a href="../../toys/chladni-cell/"
+                ><img
+                  src="../../../assets/toys/chladni-cell/thumb.webp"
+                  alt=""
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                /><span class="toy-name">Sound in a box <span class="badge">labs</span></span></a
+              >
+            </li>
+            <li class="toy-card" data-labs>
               <a href="../../toys/sound-lab/"
                 ><img
                   src="../../../assets/toys/sound-lab/thumb.webp"
@@ -381,6 +399,20 @@ https://ryanjosephkamp.github.io/splashery/site/toys/chladni-plate/</textarea
                   loading="lazy"
                   decoding="async"
                 /><span class="toy-name">Song landscape <span class="badge">labs</span></span></a
+              >
+            </li>
+            <li class="toy-card" data-labs>
+              <a href="../../toys/qr-build/"
+                ><img
+                  src="../../../assets/toys/qr-build/thumb.webp"
+                  alt=""
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                /><span class="toy-name"
+                  >QR from real things <span class="badge">labs</span></span
+                ></a
               >
             </li>
             <li class="toy-card" data-labs>
@@ -433,32 +465,6 @@ https://ryanjosephkamp.github.io/splashery/site/toys/chladni-plate/</textarea
                 ></a
               >
             </li>
-            <li class="toy-card" data-labs>
-              <a href="../../toys/model-splats/"
-                ><img
-                  src="../../../assets/toys/model-splats/thumb.webp"
-                  alt=""
-                  width="96"
-                  height="96"
-                  loading="lazy"
-                  decoding="async"
-                /><span class="toy-name">Model to splats <span class="badge">labs</span></span></a
-              >
-            </li>
-            <li class="toy-card" data-labs>
-              <a href="../../toys/moving-photo-3d/"
-                ><img
-                  src="../../../assets/toys/moving-photo-3d/thumb.webp"
-                  alt=""
-                  width="96"
-                  height="96"
-                  loading="lazy"
-                  decoding="async"
-                /><span class="toy-name"
-                  >Moving photo to 3D <span class="badge">labs</span></span
-                ></a
-              >
-            </li>
           </ul>
         </section>
       </article>
@@ -497,21 +503,27 @@ https://ryanjosephkamp.github.io/splashery/site/toys/chladni-plate/</textarea
         <nav aria-label="More">
           <h2>More</h2>
           <ul>
-            <li><a href="../../../">The gallery</a></li>
+            <li><a href="../../../" target="_blank" rel="noopener">The gallery</a></li>
             <li><a href="../../search/">Search</a></li>
             <li><a href="../../../manual/">The Tinkerer's Manual</a></li>
-            <li><a href="https://github.com/ryanjosephkamp/splashery">Source on GitHub</a></li>
+            <li>
+              <a href="https://github.com/ryanjosephkamp/splashery" target="_blank" rel="noopener"
+                >Source on GitHub</a
+              >
+            </li>
             <li><a href="../../share/">Embed and share</a></li>
             <li><a href="../../about/credits/">Credits</a></li>
+            <li><a href="../../about/contact/">Contact</a></li>
             <li><a href="../../about/privacy/">Privacy</a></li>
             <li><a href="../../about/terms/">Terms</a></li>
           </ul>
         </nav>
       </div>
       <p class="fine">
-        Code under the MIT license; each toy's assets keep their own licenses. Built on the
-        PlayCanvas engine. This is a preview of Splashery's new site; the toys live in
-        <a href="../../../">the gallery</a>.
+        Made by <a href="../../about/contact/">Ryan Kamp</a>. Code under the MIT license; each toy's
+        assets keep their own licenses. Built on the PlayCanvas engine. This is a preview of
+        Splashery's new site; the toys live in
+        <a href="../../../" target="_blank" rel="noopener">the gallery</a>.
       </p>
     </footer>
   </body>

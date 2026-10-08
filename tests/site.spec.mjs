@@ -70,7 +70,8 @@ test.describe("site", () => {
     const problems = watchConsole(page);
     const sitemap = fs.readFileSync("site/sitemap.xml", "utf8");
     for (const p of SHELL_PAGES) {
-      expect(sitemap.includes(`/splashery/site/${p.path}<`), `sitemap has ${p.path || "home"}`).toBe(true); // prettier-ignore
+      // Draft pages and the lane records (sitemap: false) are left out of the sitemap on purpose.
+      if (p.sitemap !== false) expect(sitemap.includes(`/splashery/site/${p.path}<`), `sitemap has ${p.path || "home"}`).toBe(true); // prettier-ignore
       const res = await page.goto(`/site/${p.path}`);
       expect(res.status(), p.path).toBe(200);
       await expect(page.locator(".site-header nav a")).toHaveCount(MENU.length);

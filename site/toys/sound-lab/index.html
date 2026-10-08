@@ -174,6 +174,8 @@
               <a
                 class="button primary"
                 href="../../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNvdW5kLWxhYiJ9LCJjYW1lcmEiOnsieWF3IjowLCJwaXRjaCI6MC4wNiwicm9sbCI6MCwiZGlzdGFuY2UiOjN9fQ"
+                target="_blank"
+                rel="noopener"
                 >Open in the gallery<svg
                   class="arrow"
                   viewBox="0 0 16 16"
@@ -200,12 +202,14 @@
                 style="background-image: url(&quot;../../../assets/toys/sound-lab/thumb.webp&quot;)"
               ></span>
               <iframe
-                data-src="../../play/?toy=sound-lab"
+                data-src="../../play/?toy=sound-lab&sound=on"
                 title="Sound lab, live: drag to turn it"
                 allow="fullscreen"
               ></iframe>
             </div>
-            <figcaption>Drag to turn it; tap to play.</figcaption>
+            <figcaption>
+              Drag to turn it; tap to play. The speaker button mutes the sound.
+            </figcaption>
           </figure>
         </div>
         <section class="toy-section" aria-labelledby="h-about">
@@ -252,7 +256,9 @@
               </p>
               <ul class="sources">
                 <li>
-                  <a href="https://en.wikipedia.org/wiki/Spectrogram">Spectrogram</a>, Wikipedia:
+                  <a href="https://en.wikipedia.org/wiki/Spectrogram" target="_blank" rel="noopener"
+                    >Spectrogram</a
+                  >, Wikipedia:
                   <q
                     >Windowing the signal and taking the squared magnitude of its short-time Fourier
                     transform gives the spectrum at each moment.</q
@@ -271,7 +277,9 @@
               </p>
               <ul class="sources">
                 <li>
-                  <a href="https://en.wikipedia.org/wiki/Square_wave">Square wave</a>, Wikipedia:
+                  <a href="https://en.wikipedia.org/wiki/Square_wave" target="_blank" rel="noopener"
+                    >Square wave</a
+                  >, Wikipedia:
                   <q
                     >An ideal square wave contains only odd-integer harmonic frequencies, the nth
                     with amplitude 1/n of the fundamental.</q
@@ -294,8 +302,12 @@
               </p>
               <ul class="sources">
                 <li>
-                  <a href="https://en.wikipedia.org/wiki/Beat_(acoustics)">Beat (acoustics)</a>,
-                  Wikipedia:
+                  <a
+                    href="https://en.wikipedia.org/wiki/Beat_(acoustics)"
+                    target="_blank"
+                    rel="noopener"
+                    >Beat (acoustics)</a
+                  >, Wikipedia:
                   <q
                     >An interference pattern between two sounds of slightly different frequencies,
                     perceived as a periodic variation in volume, the rate of which is the difference
@@ -312,7 +324,9 @@
               <p>20 log10 of the RMS of the samples.</p>
               <ul class="sources">
                 <li>
-                  <a href="https://en.wikipedia.org/wiki/DBFS">DBFS</a>, Wikipedia:
+                  <a href="https://en.wikipedia.org/wiki/DBFS" target="_blank" rel="noopener"
+                    >DBFS</a
+                  >, Wikipedia:
                   <q
                     >In the convention where the RMS value of a full-scale square wave is 0 dB, a
                     sine wave cannot exist at a larger RMS value than −3 dB without clipping.</q
@@ -338,6 +352,8 @@
                 <li>
                   <a
                     href="https://www-cce.cldnet.analog.com/media/en/analog-dialogue/volume-46/number-2/articles/understanding_microphone_sensitivity.pdf"
+                    target="_blank"
+                    rel="noopener"
                     >Understanding Microphone Sensitivity (Analog Dialogue 46-05)</a
                   >, Analog Devices:
                   <q
@@ -358,7 +374,9 @@
               </p>
               <ul class="sources">
                 <li>
-                  <a href="https://en.wikipedia.org/wiki/Metronome">Metronome</a>, Wikipedia:
+                  <a href="https://en.wikipedia.org/wiki/Metronome" target="_blank" rel="noopener"
+                    >Metronome</a
+                  >, Wikipedia:
                   <q
                     >A device that produces a sound at a regular interval, set in beats per
                     minute.</q
@@ -390,16 +408,17 @@
           <p>
             Built in your browser from a recipe and a seed: nothing in it comes from outside files.
             Its recipe is in
-            <a href="https://github.com/ryanjosephkamp/splashery/blob/main/src/packs/sound-lab.js"
+            <a
+              href="https://github.com/ryanjosephkamp/splashery/blob/main/src/packs/sound-lab.js"
+              target="_blank"
+              rel="noopener"
               ><code>src/packs/sound-lab.js</code></a
             >.
           </p>
 
           <p class="note">
             Splashery's code is under the MIT license; each asset above keeps its own license. Every
-            credit is also in
-            <a href="https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md">CREDITS.md</a
-            >.
+            credit is also in <a href="../../about/credits/">CREDITS.md</a>.
           </p>
         </section>
         <section class="toy-section" aria-labelledby="h-share">
@@ -485,8 +504,9 @@ https://ryanjosephkamp.github.io/splashery/site/toys/sound-lab/</textarea
             </button>
           </div>
           <p class="note">
-            Embeds are silent and turn slowly when idle. Every option is in the
-            <a href="https://github.com/ryanjosephkamp/splashery#embedding">embed guide</a>.
+            Embeds are silent and turn slowly when idle; add <code>&amp;sound=on</code> to the
+            iframe's link for the toy's tap sound, with a mute button. Every option is in the
+            <a href="../../share/">embed guide</a>.
           </p>
         </section>
         <section class="toy-section" aria-labelledby="h-related">
@@ -560,6 +580,18 @@ https://ryanjosephkamp.github.io/splashery/site/toys/sound-lab/</textarea
               >
             </li>
             <li class="toy-card" data-labs>
+              <a href="../../toys/chladni-cell/"
+                ><img
+                  src="../../../assets/toys/chladni-cell/thumb.webp"
+                  alt=""
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                /><span class="toy-name">Sound in a box <span class="badge">labs</span></span></a
+              >
+            </li>
+            <li class="toy-card" data-labs>
               <a href="../../toys/qr-code/"
                 ><img
                   src="../../../assets/toys/qr-code/thumb.webp"
@@ -584,28 +616,16 @@ https://ryanjosephkamp.github.io/splashery/site/toys/sound-lab/</textarea
               >
             </li>
             <li class="toy-card" data-labs>
-              <a href="../../toys/data-in-3d/"
+              <a href="../../toys/qr-build/"
                 ><img
-                  src="../../../assets/toys/data-in-3d/thumb.webp"
-                  alt=""
-                  width="96"
-                  height="96"
-                  loading="lazy"
-                  decoding="async"
-                /><span class="toy-name">Data in 3D <span class="badge">labs</span></span></a
-              >
-            </li>
-            <li class="toy-card" data-labs>
-              <a href="../../toys/qr-anatomy/"
-                ><img
-                  src="../../../assets/toys/qr-anatomy/thumb.webp"
+                  src="../../../assets/toys/qr-build/thumb.webp"
                   alt=""
                   width="96"
                   height="96"
                   loading="lazy"
                   decoding="async"
                 /><span class="toy-name"
-                  >How a QR code works <span class="badge">labs</span></span
+                  >QR from real things <span class="badge">labs</span></span
                 ></a
               >
             </li>
@@ -647,21 +667,27 @@ https://ryanjosephkamp.github.io/splashery/site/toys/sound-lab/</textarea
         <nav aria-label="More">
           <h2>More</h2>
           <ul>
-            <li><a href="../../../">The gallery</a></li>
+            <li><a href="../../../" target="_blank" rel="noopener">The gallery</a></li>
             <li><a href="../../search/">Search</a></li>
             <li><a href="../../../manual/">The Tinkerer's Manual</a></li>
-            <li><a href="https://github.com/ryanjosephkamp/splashery">Source on GitHub</a></li>
+            <li>
+              <a href="https://github.com/ryanjosephkamp/splashery" target="_blank" rel="noopener"
+                >Source on GitHub</a
+              >
+            </li>
             <li><a href="../../share/">Embed and share</a></li>
             <li><a href="../../about/credits/">Credits</a></li>
+            <li><a href="../../about/contact/">Contact</a></li>
             <li><a href="../../about/privacy/">Privacy</a></li>
             <li><a href="../../about/terms/">Terms</a></li>
           </ul>
         </nav>
       </div>
       <p class="fine">
-        Code under the MIT license; each toy's assets keep their own licenses. Built on the
-        PlayCanvas engine. This is a preview of Splashery's new site; the toys live in
-        <a href="../../../">the gallery</a>.
+        Made by <a href="../../about/contact/">Ryan Kamp</a>. Code under the MIT license; each toy's
+        assets keep their own licenses. Built on the PlayCanvas engine. This is a preview of
+        Splashery's new site; the toys live in
+        <a href="../../../" target="_blank" rel="noopener">the gallery</a>.
       </p>
     </footer>
   </body>

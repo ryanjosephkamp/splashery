@@ -172,6 +172,8 @@
               <a
                 class="button primary"
                 href="../../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6IndhbG51dC1jdCJ9LCJjYW1lcmEiOnsieWF3IjowLjM1LCJwaXRjaCI6MC4yLCJyb2xsIjowLCJkaXN0YW5jZSI6Mi44fX0"
+                target="_blank"
+                rel="noopener"
                 >Open in the gallery<svg
                   class="arrow"
                   viewBox="0 0 16 16"
@@ -198,12 +200,14 @@
                 style="background-image: url(&quot;../../../assets/toys/walnut-ct/thumb.webp&quot;)"
               ></span>
               <iframe
-                data-src="../../play/?toy=walnut-ct"
+                data-src="../../play/?toy=walnut-ct&sound=on"
                 title="Walnut CT scan, live: drag to turn it"
                 allow="fullscreen"
               ></iframe>
             </div>
-            <figcaption>Drag to turn it; tap to play.</figcaption>
+            <figcaption>
+              Drag to turn it; tap to play. The speaker button mutes the sound.
+            </figcaption>
           </figure>
         </div>
         <section class="toy-section" aria-labelledby="h-about">
@@ -227,27 +231,30 @@
           <h2 id="h-credits">Sources and credits</h2>
           <p>
             Built in your browser from a recipe, with the files credited below. Its recipe is in
-            <a href="https://github.com/ryanjosephkamp/splashery/blob/main/src/packs/imaging.js"
+            <a
+              href="https://github.com/ryanjosephkamp/splashery/blob/main/src/packs/imaging.js"
+              target="_blank"
+              rel="noopener"
               ><code>src/packs/imaging.js</code></a
             >.
           </p>
           <ul class="toy-credits">
             <li>
               <b>Walnut</b>:
-              <a href="https://doi.org/10.5281/zenodo.2686726"
+              <a href="https://doi.org/10.5281/zenodo.2686726" target="_blank" rel="noopener"
                 >Cone-Beam X-Ray CT Data Collection Designed for Machine Learning: Samples 1-8
                 (Walnut 1)</a
               >
               by Henri Der Sarkissian, Felix Lucka, Maureen van Eijnatten, Giulia Colacicco, Sophia
               Bethany Coban, K. Joost Batenburg (CWI),
-              <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.
+              <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener"
+                >CC BY 4.0</a
+              >.
             </li>
           </ul>
           <p class="note">
             Splashery's code is under the MIT license; each asset above keeps its own license. Every
-            credit is also in
-            <a href="https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md">CREDITS.md</a
-            >.
+            credit is also in <a href="../../about/credits/">CREDITS.md</a>.
           </p>
         </section>
         <section class="toy-section" aria-labelledby="h-share">
@@ -333,8 +340,9 @@ https://ryanjosephkamp.github.io/splashery/site/toys/walnut-ct/</textarea
             </button>
           </div>
           <p class="note">
-            Embeds are silent and turn slowly when idle. Every option is in the
-            <a href="https://github.com/ryanjosephkamp/splashery#embedding">embed guide</a>.
+            Embeds are silent and turn slowly when idle; add <code>&amp;sound=on</code> to the
+            iframe's link for the toy's tap sound, with a mute button. Every option is in the
+            <a href="../../share/">embed guide</a>.
           </p>
         </section>
         <section class="toy-section" aria-labelledby="h-related">
@@ -461,21 +469,27 @@ https://ryanjosephkamp.github.io/splashery/site/toys/walnut-ct/</textarea
         <nav aria-label="More">
           <h2>More</h2>
           <ul>
-            <li><a href="../../../">The gallery</a></li>
+            <li><a href="../../../" target="_blank" rel="noopener">The gallery</a></li>
             <li><a href="../../search/">Search</a></li>
             <li><a href="../../../manual/">The Tinkerer's Manual</a></li>
-            <li><a href="https://github.com/ryanjosephkamp/splashery">Source on GitHub</a></li>
+            <li>
+              <a href="https://github.com/ryanjosephkamp/splashery" target="_blank" rel="noopener"
+                >Source on GitHub</a
+              >
+            </li>
             <li><a href="../../share/">Embed and share</a></li>
             <li><a href="../../about/credits/">Credits</a></li>
+            <li><a href="../../about/contact/">Contact</a></li>
             <li><a href="../../about/privacy/">Privacy</a></li>
             <li><a href="../../about/terms/">Terms</a></li>
           </ul>
         </nav>
       </div>
       <p class="fine">
-        Code under the MIT license; each toy's assets keep their own licenses. Built on the
-        PlayCanvas engine. This is a preview of Splashery's new site; the toys live in
-        <a href="../../../">the gallery</a>.
+        Made by <a href="../../about/contact/">Ryan Kamp</a>. Code under the MIT license; each toy's
+        assets keep their own licenses. Built on the PlayCanvas engine. This is a preview of
+        Splashery's new site; the toys live in
+        <a href="../../../" target="_blank" rel="noopener">the gallery</a>.
       </p>
     </footer>
   </body>

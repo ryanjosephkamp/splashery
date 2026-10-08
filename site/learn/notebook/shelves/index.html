@@ -1,0 +1,445 @@
+<!doctype html>
+<html lang="en" data-root="../../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Lane Shelves · Splashery</title>
+    <meta
+      name="description"
+      content="A lane's handoff file from the Splashery project, as it is in the repo: Shelves."
+    />
+    <meta name="robots" content="noindex" />
+    <link
+      rel="canonical"
+      href="https://ryanjosephkamp.github.io/splashery/site/learn/notebook/shelves/"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Splashery" />
+    <meta property="og:title" content="Lane Shelves · Splashery" />
+    <meta
+      property="og:description"
+      content="A lane's handoff file from the Splashery project, as it is in the repo: Shelves."
+    />
+    <meta
+      property="og:url"
+      content="https://ryanjosephkamp.github.io/splashery/site/learn/notebook/shelves/"
+    />
+    <meta
+      property="og:image"
+      content="https://ryanjosephkamp.github.io/splashery/site/assets/og.png"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="A strawberry made of soft 3D splats, beside the word Splashery"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#101010" />
+    <link rel="manifest" href="../../../manifest.webmanifest" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cg opacity='.92'%3E%3Cellipse cx='24' cy='26' rx='14' ry='11' fill='%23ff5fa2'/%3E%3Cellipse cx='40' cy='24' rx='12' ry='13' fill='%237bdff2'/%3E%3Cellipse cx='33' cy='41' rx='15' ry='11' fill='%23ffd166'/%3E%3C/g%3E%3C/svg%3E"
+    />
+    <link rel="apple-touch-icon" href="../../../../assets/app/icon-180.png" />
+    <script>
+      (function () {
+        var d = document.documentElement;
+        d.classList.add("js");
+        try {
+          var t = localStorage.getItem("splashery.site.theme");
+          if (t === "light" || t === "dark") d.dataset.theme = t;
+          var q = new URLSearchParams(location.search).get("labs");
+          if (q === "1") localStorage.setItem("splashery.labs", "1");
+          else if (q === "0") localStorage.removeItem("splashery.labs");
+          if (localStorage.getItem("splashery.labs") === "1") d.classList.add("labs");
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="stylesheet" href="../../../assets/site.css" />
+    <link rel="stylesheet" href="../../../assets/hubs.css" />
+    <link rel="stylesheet" href="../../../assets/outline.css" />
+    <script type="module" src="../../../assets/site.js"></script>
+    <script type="module" src="../../../assets/outline.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to the page</a>
+    <header class="site-header">
+      <div class="bar">
+        <a class="brand" href="../../../" aria-label="Splashery home"
+          ><svg class="logo" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true">
+            <g opacity=".92">
+              <ellipse cx="24" cy="26" rx="14" ry="11" fill="#ff5fa2" />
+              <ellipse cx="40" cy="24" rx="12" ry="13" fill="#7bdff2" />
+              <ellipse cx="33" cy="41" rx="15" ry="11" fill="#ffd166" />
+            </g></svg
+          ><span>Splashery</span></a
+        >
+        <a class="search-link" href="../../../search/" aria-label="Search"
+          ><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+            <circle
+              cx="10.5"
+              cy="10.5"
+              r="6.5"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            />
+            <path
+              d="m15.5 15.5 5 5"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            /></svg
+        ></a>
+        <button type="button" class="menu-button" aria-expanded="false" aria-controls="site-menu">
+          <span class="menu-icon" aria-hidden="true"></span><span class="menu-label">Menu</span>
+        </button>
+        <div class="menu" id="site-menu">
+          <nav aria-label="Site">
+            <ul>
+              <li><a href="../../../">Home</a></li>
+              <li><a href="../../../toys/">Toys</a></li>
+              <li><a href="../../../tools/">Tools</a></li>
+              <li><a href="../../../science/">Science</a></li>
+              <li><a href="../../../studio/">Studio</a></li>
+              <li><a href="../../../learn/" aria-current="page">Learn</a></li>
+              <li><a href="../../../new/">What's new</a></li>
+              <li><a href="../../../about/">About</a></li>
+            </ul>
+          </nav>
+          <form class="search-form" role="search" action="../../../search/" method="get">
+            <label class="visually-hidden" for="site-search">Search toys and pages</label>
+            <input
+              id="site-search"
+              type="search"
+              name="q"
+              placeholder="Search toys"
+              autocomplete="off"
+              enterkeyhint="search"
+            />
+            <button type="submit">Search</button>
+          </form>
+          <button type="button" class="theme-button" aria-label="Color theme: follows your device">
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+              <path d="M12 3a9 9 0 1 0 0 18V3z" fill="currentColor" />
+              <circle
+                cx="12"
+                cy="12"
+                r="8.25"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+              />
+            </svg>
+            <span class="theme-label">Auto</span>
+          </button>
+        </div>
+      </div>
+    </header>
+    <main id="main" tabindex="-1" data-outline>
+      <div class="page-intro">
+        <h1>Lane Shelves</h1>
+        <p class="lead">A lane's handoff file, exactly as the project keeps it.</p>
+      </div>
+      <p class="note"><a href="../../../learn/notebook/">Back to the lab notebook</a></p>
+      <nav class="toc" aria-label="On this page">
+        <h2>On this page</h2>
+        <ul>
+          <li>
+            <ul>
+              <li><a href="#brief">Brief</a></li>
+              <li><a href="#you-own">You own</a></li>
+              <li><a href="#state">State</a></li>
+              <li><a href="#notes">Notes</a></li>
+              <li><a href="#known-issues">Known issues</a></li>
+              <li><a href="#for-the-operator">For the Operator</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <section class="md-file" aria-label="Lane Shelves">
+        <div class="prose">
+          <h2 id="brief">Brief</h2>
+          <p>
+            Your lane: Shelves, &quot;Tidy the shelves: a torus, the donut in Food, the tiny planet
+            in Space&quot; (prefix <code>shv</code>). Branch: claude/lane-shelves. PR title:
+            &quot;Phase Shelves: the shapes shelf tidied, the donut in Food, the tiny planet in
+            Space&quot;. Handoff file: docs/handoff/Shelves.md. A small lane.
+          </p>
+          <p>
+            (Written by the Operator on September 30, 2026, from the owner's notes and his
+            &quot;shelves yes&quot; that day.)
+          </p>
+          <p>
+            In his notes of September 28 (docs/reviews/2026-09-28-sounds/review.md), the owner
+            questioned the Shapes shelf. He asked why the donut is in Shapes and not in Food, why
+            the tiny planet is in Shapes and not in Space, and whether the jelly blob is a shape. He
+            suggested that Shapes keep a plain torus people can dress as a donut, a bagel or a swim
+            ring, and that the crystal ball leave Gems (&quot;I don't believe that it belongs under
+            gems&quot;). The Operator proposed a plan, and he answered &quot;shelves yes&quot;
+            (September 30, 2026, 3:25 p.m. ET):
+          </p>
+          <ol>
+            <li>
+              <strong>The crystal ball moves to Medieval,</strong> next to the wizard's orb (its
+              <code>category</code> only).
+            </li>
+            <li>
+              <strong>The donut moves to Food.</strong> Its id, look, tap and links stay exactly as
+              they are.
+            </li>
+            <li>
+              <p>
+                <strong>A new toy in Shapes: &quot;Torus&quot;.</strong> A plain torus, sharp and
+                even (PACKS.md 7c), with a &quot;Dress it as&quot; choice: plain (a clean geometric
+                torus with a subtle material), donut (reuse the donut's look), bagel (a real,
+                glossy, seeded bagel) or swim ring (striped, with a soft plastic sheen).
+              </p>
+              <ul>
+                <li>
+                  Its tap is a real effect under the effect quality rules. For example, it rolls on
+                  its edge, wobbles and settles, and each dressing keeps the same physical motion.
+                  Choose what reads best at phone size.
+                </li>
+                <li>
+                  A sound that follows PACKS.md 7e: a soft roll and settle, with no clicks or
+                  whistles.
+                </li>
+                <li>Help line, About text, plan entry and thumbnail, like any toy.</li>
+              </ul>
+            </li>
+            <li>
+              <strong>The tiny planet moves to Space,</strong> with other planets to pick:
+              &quot;Planet: Earth (default), Mars, the Moon, Jupiter, Neptune&quot;, in the same
+              tiny-planet style (it's &quot;A tribute to Splashery v1&quot;, so keep its character).
+              Flag themes keep working.
+            </li>
+            <li>
+              <strong>The jelly blob and the neon knot stay in Shapes for now.</strong> A Knots
+              shelf with knot settings is in the backlog; don't build it.
+            </li>
+          </ol>
+          <p>
+            Old <code>#s=</code> links and saved scenes (schema v2 and v3) must keep loading: ids
+            don't change. The site's default toy and the gallery's order within each shelf stay
+            sensible. Say in your PR what someone sees first on a fresh visit, before and after.
+          </p>
+          <p>
+            tests/smoke.spec.mjs clicks the Shapes and Food chips and may expect the donut or the
+            tiny planet there. Don't edit it: name each failing line and why in your message, and
+            the Operator updates it. The same goes for any other finished lane's test that counts
+            shelves.
+          </p>
+          <p>
+            Cards (clips at 390×844, each labeled &quot;built by Opus 5.5&quot;, in the lane record
+            <code>Shelves</code> on the Effect review page; ask the Operator in your message if the
+            record is missing):
+          </p>
+          <ul>
+            <li><code>shv-torus</code>: the torus in each dressing, and its tap;</li>
+            <li><code>shv-planets</code>: the tiny planet as each planet;</li>
+            <li>
+              <code>shv-shelves</code>: stills of the Shapes, Food, Space, Gems and Medieval shelves
+              in the gallery, before and after.
+            </li>
+          </ul>
+          <p>These are public toys, so the PR merges after the owner's good marks.</p>
+          <p>Tests in tests/shv.spec.mjs:</p>
+          <ul>
+            <li>each moved toy is on its new shelf, with the same id;</li>
+            <li>
+              an old <code>#s=</code> link to the donut, the tiny planet and the crystal ball still
+              opens them;
+            </li>
+            <li>the torus builds in each dressing within its splat budget, and its tap runs;</li>
+            <li>each planet choice builds;</li>
+            <li>screenshots at 390×844 and 1440×900 (<code>shv-*</code>).</li>
+          </ul>
+          <h2 id="you-own">You own</h2>
+          <ul>
+            <li>
+              the new torus toy's recipe, in a new pack file
+              <code>src/packs/shapes-torus.js</code> or wherever the shapes live (tell the Operator
+              which);
+            </li>
+            <li>the tiny planet's generator options;</li>
+            <li>
+              the <code>category</code> fields of the crystal ball, the donut and the tiny planet;
+            </li>
+            <li>
+              these toys' entries in the shared lists (src/toys.js, src/toy-sounds.js,
+              src/toy-help.js, tools/toy-plan.json);
+            </li>
+            <li>
+              tests/shv.spec.mjs, your <code>shv-*</code> screenshots and docs/handoff/Shelves.md.
+            </li>
+          </ul>
+          <p>
+            Don't change the donut's or the crystal ball's recipes. Fix5 is renaming the scanned
+            alarm clock, and Sound A and B own the sounds of the existing toys (Sound A has the
+            shapes and gems, Sound B the food): leave those toys' sound entries alone.
+          </p>
+          <p>
+            Lanes Fluids r4, Science, Video 3D, Worlds r3, Sound A and B, Fix5, Live input and the
+            Integrators run at the same time; leave their files alone. The laptop is locked.
+          </p>
+          <h2 id="state">State</h2>
+          <p>Model: Opus 5.5 (default effort).</p>
+          <p>
+            <strong>Finished: merged October 2, 2026.</strong> Engine PR #147 merged on October 1
+            (main 6333e79), and lane PR #148 merged on October 2 (main 8c961ed, from head 3883fdf).
+            The owner marked all three cards good (September 30) and called the torus and the moved
+            toys fine in his review of October 2.
+          </p>
+          <p>What shipped:</p>
+          <ul>
+            <li>
+              The crystal ball is in Medieval (after the wizard's orb), the donut in Food (after the
+              macarons) and the tiny planet in Space (after Neptune). Ids, looks, taps, sounds and
+              old links are unchanged.
+            </li>
+            <li>
+              The tiny planet has a Planet choice in the Toy tab: Earth (default), Mars, the Moon,
+              Jupiter and Neptune, in the same v1 style (#147: procedural shelf toys can offer looks
+              with generator settings, <code>lookOption()</code> takes <code>lookLabel</code>, and
+              four new palettes).
+            </li>
+            <li>
+              A new Torus in Shapes (<code>src/packs/shapes-torus.js</code>) with four dressings
+              (plain, donut, bagel, swim ring), a wobble tap like a coin spun on a table (3.6 s) and
+              a soft roll sound. The Shapes shelf is now Torus, Jelly blob, Neon knot.
+            </li>
+            <li>
+              <code>tests/shv.spec.mjs</code> (15 tests) and two lines of
+              <code>tests/smoke.spec.mjs</code> (102 and 133, with the Operator's approval) for the
+              new shelves.
+            </li>
+          </ul>
+          <p>
+            Tests: the last run on head 3883fdf passed 141/141 (shv, smoke, unit, taps, hta, help);
+            the Operator's run on main 2ba6455 with the lane passed 145/145, and Integrator 2's full
+            run 674/675 (the one failure, wd.spec:210, fails on main alone too).
+          </p>
+          <p>
+            Cards on Effect review page 2: <code>shv-torus</code>, <code>shv-planets</code> (MP4s)
+            and <code>shv-shelves</code> (stills), all good.
+          </p>
+          <h2 id="notes">Notes</h2>
+          <ul>
+            <li>
+              The torus's pack is <code>src/packs/shapes-torus.js</code> (a new pack; the other
+              Shapes are procedural generator presets with rigs in <code>src/rigs.js</code>, so
+              there was no shapes pack to join).
+            </li>
+            <li>
+              The wobble is Euler's disk: the whole toy turns about a level axis that circles
+              (<code>out.body.quat</code>), tilting at most about 60°, so the draw order holds
+              without a second copy. The center lifts by 0.62 of what a real table contact would
+              give, which keeps the standing ring inside the frame without a <code>k.reach</code> (a
+              reach point shrank the resting toy and pushed it low in its thumbnail).
+            </li>
+            <li>
+              Clip tools: <code>tools/shv-clip.mjs</code> (a toy through several Toy tab choices as
+              one labeled 390×844 clip) and <code>tools/shv-shelves.mjs</code> (shelf stills before
+              and after, from two servers).
+            </li>
+          </ul>
+          <h2 id="known-issues">Known issues</h2>
+          <ul>
+            <li>
+              None known. The two <code>tests/smoke.spec.mjs</code> lines the move changed (102 and
+              133) were updated in #148 with the Operator's approval. Integrator 2 also found that
+              the planet palette test called <code>expect</code> once per splat and blocked its
+              worker; it now checks the splats in plain loops and asserts once.
+            </li>
+          </ul>
+          <h2 id="for-the-operator">For the Operator</h2>
+          <ul>
+            <li>
+              PACKS.md: a procedural shelf toy may now list <code>looks</code> with
+              <code>generator</code> settings and a <code>lookLabel</code> (engine PR #147); the
+              tiny planet is the example.
+            </li>
+            <li>The four new palettes show in the Make tab too, labeled &quot;(tribute)&quot;.</li>
+            <li>
+              PACKS.md lesson for tests: never call <code>expect</code> once per splat in a loop
+              over a buffer (150,000 calls blocked a worker past its timeout); collect the bad ones
+              and assert once.
+            </li>
+            <li>The Shelves lane on Effect review page 2 can be set <code>finished</code>.</li>
+          </ul>
+        </div>
+      </section>
+      <p class="note">
+        This page is built from
+        <a
+          data-source
+          href="https://github.com/ryanjosephkamp/splashery/blob/main/docs/handoff/Shelves.md"
+          target="_blank"
+          rel="noopener"
+          >docs/handoff/Shelves.md</a
+        >
+        each time the site is built, so it always matches them.
+      </p>
+    </main>
+    <footer class="site-footer">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="brand" href="../../../"
+            ><svg class="logo" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true">
+              <g opacity=".92">
+                <ellipse cx="24" cy="26" rx="14" ry="11" fill="#ff5fa2" />
+                <ellipse cx="40" cy="24" rx="12" ry="13" fill="#7bdff2" />
+                <ellipse cx="33" cy="41" rx="15" ry="11" fill="#ffd166" />
+              </g></svg
+            ><span>Splashery</span></a
+          >
+          <p>
+            splats you can play with. Free, in your browser, with nothing to install; files you open
+            stay on your device.
+          </p>
+        </div>
+        <nav aria-label="Explore">
+          <h2>Explore</h2>
+          <ul>
+            <li><a href="../../../">Home</a></li>
+            <li><a href="../../../toys/">Toys</a></li>
+            <li><a href="../../../tools/">Tools</a></li>
+            <li><a href="../../../science/">Science</a></li>
+            <li><a href="../../../studio/">Studio</a></li>
+            <li><a href="../../../learn/">Learn</a></li>
+            <li><a href="../../../new/">What's new</a></li>
+            <li><a href="../../../about/">About</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="More">
+          <h2>More</h2>
+          <ul>
+            <li><a href="../../../../" target="_blank" rel="noopener">The gallery</a></li>
+            <li><a href="../../../search/">Search</a></li>
+            <li><a href="../../../../manual/">The Tinkerer's Manual</a></li>
+            <li>
+              <a href="https://github.com/ryanjosephkamp/splashery" target="_blank" rel="noopener"
+                >Source on GitHub</a
+              >
+            </li>
+            <li><a href="../../../share/">Embed and share</a></li>
+            <li><a href="../../../about/credits/">Credits</a></li>
+            <li><a href="../../../about/contact/">Contact</a></li>
+            <li><a href="../../../about/privacy/">Privacy</a></li>
+            <li><a href="../../../about/terms/">Terms</a></li>
+          </ul>
+        </nav>
+      </div>
+      <p class="fine">
+        Made by <a href="../../../about/contact/">Ryan Kamp</a>. Code under the MIT license; each
+        toy's assets keep their own licenses. Built on the PlayCanvas engine. This is a preview of
+        Splashery's new site; the toys live in
+        <a href="../../../../" target="_blank" rel="noopener">the gallery</a>.
+      </p>
+    </footer>
+  </body>
+</html>

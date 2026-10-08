@@ -150,6 +150,27 @@ export function normalizeDepth(d) {
   return out;
 }
 
+// Lane Photo fidelity: how much of the relief to keep. The model's depth is relative, and it is
+// stretched to 0..1 between its 2nd and 98th percentiles, so a flat picture (a page of text, a phone
+// screenshot) would get its noise stretched into a full relief, bending its lines and tearing its
+// letters. The depth's own span against its nearest (p98 - p2 over p98) tells them apart: 0.21 to
+// 0.23 on our text page (and 0.06 on the Muybridge horse, a flat print), 0.51 to 1 on the photos and
+// clips of real scenes (October 8, 2026). Full relief from 0.45; at 0.25 or less a picture keeps
+// FLAT_KEEP of it (a gentle bend, so a screen recording still has its shape, but no steps that tear
+// letters apart); in between in proportion. Only for photos and clips people open: the samples keep
+// the relief they were approved with.
+export const FLAT_SPAN = [0.25, 0.45];
+export const FLAT_KEEP = 0.3;
+export function reliefScale(lo, hi) {
+  if (!(hi > 0) || !(hi > lo)) return 1;
+  const t = clamp(((hi - lo) / hi - FLAT_SPAN[0]) / (FLAT_SPAN[1] - FLAT_SPAN[0]), 0, 1);
+  return FLAT_KEEP + (1 - FLAT_KEEP) * t;
+}
+export function percentiles(d, a = 0.02, b = 0.98) {
+  const s = Float32Array.from(d).sort();
+  return [s[Math.floor(a * (s.length - 1))], s[Math.floor(b * (s.length - 1))]];
+}
+
 // The depth map enlarged to the grid, its edges pulled onto the photo's edges: each cell
 // takes the low-resolution depths around it, weighted by how near they lie and how alike
 // the photo's color is there and here (a joint bilateral filter), so a near object's outline
@@ -323,7 +344,12 @@ export function sharpen(rgb, gx, gy, amount = SHARPEN) {
 //   count   the most splats to make (the tier's budget)
 //   depth   how deep the relief is, 0..1 (0.5 is the default)
 // Returns { n, gx, gy (the fine grid), aspect, relief (3n), flat (3n), sigma (n), rgb (3n), band (n), gap, stats }.
-export function buildPhotoSplats(photo, depthMap, { count = 100000, depth = 0.5, cut = CUT } = {}) {
+export function buildPhotoSplats(
+  photo,
+  depthMap,
+  { count = 100000, depth = 0.5, cut = CUT, keepFlat = false } = {},
+) {
+  // prettier-ignore
   const aspect = photo.w / photo.h;
   // The fine grid: a block of 2 x 2 fine cells is drawn as one splat, or as four where there is detail
   // (SPLIT_SHARE of the blocks), so the splats are spent where they show: on detail, on near things and
@@ -344,6 +370,8 @@ export function buildPhotoSplats(photo, depthMap, { count = 100000, depth = 0.5,
   const { w: dw, h: dh } = depthMap;
   const guideLo = resampleArea(photo, dw, dh);
   const dn = normalizeDepth(depthMap.d);
+  const flatness = keepFlat ? reliefScale(...percentiles(depthMap.d)) : 1;
+  if (flatness < 1) for (let i = 0; i < dn.length; i++) dn[i] = 0.5 + (dn[i] - 0.5) * flatness;
   let d = upsampleDepth(dn, dw, dh, guideLo, gx, gy, rgb);
   const minCells = Math.max(6, Math.round(MIN_PIECE * gx * gy));
   let m = links(d, gx, gy, cut);
@@ -508,6 +536,7 @@ export function buildPhotoSplats(photo, depthMap, { count = 100000, depth = 0.5,
       bigPieces: big,
       cutEdges: cutCells,
       relief: R,
+      flatness,
       joined: joined.moved,
       blocks: nBlocks,
       splitBlocks,

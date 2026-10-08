@@ -1266,6 +1266,17 @@ export const TOYS = [
     tags: "galaxy galaxies hubble eso telescope whirlpool m51 pinwheel m101 phantom m74 m83 spiral real picture",
     camera: { yaw: 0, pitch: 0, roll: 0, distance: 2.6 },
   },
+  // ---- Pack: powers-of-ten (lane Powers of ten) ----
+  {
+    id: "powers-of-ten",
+    label: "Powers of ten",
+    category: "space",
+    kind: "kit",
+    pack: "powers-of-ten",
+    labs: true,
+    tags: "powers of ten zoom scale sizes universe galaxy stars sun planets earth city garden leaf cell microscope molecule real",
+    camera: { yaw: 0, pitch: 0, roll: 0, distance: 2.9 },
+  },
   {
     id: "saturn-v",
     label: "Saturn V",
@@ -1297,6 +1308,19 @@ export const TOYS = [
     camera: { yaw: 0.5, pitch: 0.12, roll: 0, distance: 3.1 },
   },
   // ---- End of pack: space-r2 ----
+
+  // ---- Pack: space-r4 (lane Space r4) ----
+  {
+    id: "solar-orbits",
+    label: "The solar system on real orbits",
+    category: "space",
+    kind: "kit",
+    pack: "space-r4",
+    labs: true,
+    tags: "solar system orbits orrery planets kepler jpl real date asteroid belt asteroids comets halley moons jupiter saturn true scale",
+    camera: { yaw: 0.35, pitch: 0.95, roll: 0, distance: 2.45 },
+  },
+  // ---- End of pack: space-r4 ----
 
   // ---- Pack: tiny ----
   // (entries for src/packs/tiny.js go here)
@@ -1535,6 +1559,28 @@ export const TOYS = [
     kind: "kit",
     pack: "atoms",
     tags: "salt diamond graphite ice crystal structure atoms chemistry",
+  },
+  // ---- Pack: lattices (lane Lattices and orbitals; labs) ----
+  {
+    id: "unit-cells",
+    label: "Unit cells",
+    category: "atoms",
+    kind: "kit",
+    pack: "lattices",
+    labs: true,
+    tags: "crystal lattice unit cell diamond graphite ice copper iron magnesium fcc bcc hcp face-centered body-centered hexagonal close-packed metal bonds thermal motion debye waller chemistry",
+    camera: { yaw: 0.55, pitch: 0.42, roll: 0, distance: 3.3 },
+  },
+  {
+    id: "orbital-atlas",
+    label: "Orbital atlas",
+    category: "atoms",
+    kind: "kit",
+    pack: "lattices",
+    labs: true,
+    tags: "orbital atlas electron hydrogen wave function quantum s p d f g 4d 5f 5g 6d 7p node phase cut chemistry",
+
+    camera: { yaw: 0, pitch: 0.12, roll: 0, distance: 3.2 },
   },
   // ---- Pack: molecule-viewer (lane Molecule viewer) ----
   {
@@ -2566,6 +2612,78 @@ export const TOYS = [
     tags: "pythagoras theorem proof right triangle square hypotenuse geometry",
     camera: { yaw: 0.2, pitch: 0.3, roll: 0, distance: 3.7 },
   },
+  // Lane Math r2: three more strange attractors (labs).
+  {
+    id: "rossler-attractor",
+    label: "Rössler attractor",
+    category: "maths",
+    kind: "kit",
+    pack: "maths",
+    labs: true,
+    tags: "rossler roessler chaos strange attractor spiral differential equations tracer",
+    camera: { yaw: 0.35, pitch: 0.35, roll: 0, distance: 4.2 },
+  },
+  {
+    id: "thomas-attractor",
+    label: "Thomas attractor",
+    category: "maths",
+    kind: "kit",
+    pack: "maths",
+    labs: true,
+    tags: "thomas cyclically symmetric chaos strange attractor differential equations tracer",
+    camera: { yaw: 0.5, pitch: 0.4, roll: 0, distance: 4.4 },
+  },
+  {
+    id: "aizawa-attractor",
+    label: "Aizawa attractor",
+    category: "maths",
+    kind: "kit",
+    pack: "maths",
+    labs: true,
+    tags: "aizawa langford chaos strange attractor sphere tube differential equations tracer",
+    camera: { yaw: 0.3, pitch: 0.3, roll: 0, distance: 4.2 },
+  },
+  // Lane Math r2: shapes in four dimensions (labs).
+  {
+    id: "five-cell",
+    label: "5-cell",
+    category: "maths",
+    kind: "kit",
+    pack: "maths",
+    labs: true,
+    tags: "5-cell pentachoron 4-simplex 4d four dimensions polytope projection",
+    camera: { yaw: 0.55, pitch: 0.35, roll: 0, distance: 4.1 },
+  },
+  {
+    id: "sixteen-cell",
+    label: "16-cell",
+    category: "maths",
+    kind: "kit",
+    pack: "maths",
+    labs: true,
+    tags: "16-cell hexadecachoron cross polytope orthoplex 4d four dimensions projection",
+    camera: { yaw: 0.55, pitch: 0.35, roll: 0, distance: 4.1 },
+  },
+  {
+    id: "twenty-four-cell",
+    label: "24-cell",
+    category: "maths",
+    kind: "kit",
+    pack: "maths",
+    labs: true,
+    tags: "24-cell icositetrachoron octaplex 4d four dimensions polytope projection",
+    camera: { yaw: 0.55, pitch: 0.35, roll: 0, distance: 4.1 },
+  },
+  {
+    id: "duoprism",
+    label: "Duoprism",
+    category: "maths",
+    kind: "kit",
+    pack: "maths",
+    labs: true,
+    tags: "duoprism 4d four dimensions polygon prism polytope projection",
+    camera: { yaw: 0.55, pitch: 0.35, roll: 0, distance: 4.1 },
+  },
   // Lane Manual: the splat equation toy (its own pack, on the Maths shelf).
   {
     id: "splat-equation",
@@ -3586,6 +3704,17 @@ export const TOYS = [
     tags: "chladni plate sand sound vibration frequency resonance mode nodal lines pattern bow physics",
     camera: { yaw: 0.2, pitch: 0.95, roll: 0, distance: 4.1 },
   },
+  // Lane Live r8: the Chladni plate in three dimensions (labs).
+  {
+    id: "chladni-cell",
+    label: "Sound in a box",
+    category: "studio",
+    kind: "kit",
+    pack: "studio",
+    labs: true,
+    tags: "chladni 3d sound ultrasound standing wave acoustic radiation force beads nodal surface cube flask acoustophoresis physics",
+    camera: { yaw: 0.55, pitch: 0.42, roll: 0, distance: 4.6 },
+  },
   // ---- Pack: live (lane Live input) ----
   {
     id: "room-echo",
@@ -3661,6 +3790,39 @@ export const TOYS = [
     labs: true,
     tags: "qr code color rgb red green blue three codes multiplex channels",
     camera: { yaw: 0, pitch: 0, roll: 0, distance: 3.4 },
+  },
+  // ---- Pack: qr-craft (lane QR craft) ----
+  {
+    id: "qr-picture",
+    label: "Picture QR",
+    category: "studio",
+    kind: "kit",
+    pack: "qr-craft",
+    labs: true,
+    tags: "qr code picture photo halftone image art custom scan png",
+    camera: { yaw: 0, pitch: 0, roll: 0, distance: 3.4 },
+  },
+  {
+    id: "qr-build",
+    label: "QR from real things",
+    category: "studio",
+    kind: "kit",
+    pack: "qr-craft",
+    labs: true,
+    tags: "qr code dominoes marbles tiles flip build physics chain reaction scan",
+    camera: { yaw: 0, pitch: 0.45, roll: 0, distance: 3.4 },
+  },
+  {
+    id: "barcodes",
+    label: "Other barcodes",
+    category: "studio",
+    kind: "kit",
+    pack: "qr-craft",
+    labs: true,
+    tags: "barcode code 128 ean-13 upc-a data matrix aztec check digit scanner laser",
+    // A little from above and the side, so the bars lifting as the scan line
+    // passes read as motion (the check reads it front on).
+    camera: { yaw: 0.25, pitch: 0.35, roll: 0, distance: 3.2 },
   },
   // ---- Pack: photo-3d (lane Photo to 3D) ----
   {

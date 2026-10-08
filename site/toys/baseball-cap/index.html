@@ -168,6 +168,8 @@
               <a
                 class="button primary"
                 href="../../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImJhc2ViYWxsLWNhcCJ9LCJjYW1lcmEiOnsieWF3IjowLjYsInBpdGNoIjowLjIsInJvbGwiOjAsImRpc3RhbmNlIjozLjh9fQ"
+                target="_blank"
+                rel="noopener"
                 >Open in the gallery<svg
                   class="arrow"
                   viewBox="0 0 16 16"
@@ -196,13 +198,15 @@
                 "
               ></span>
               <iframe
-                src="../../play/?toy=baseball-cap"
+                src="../../play/?toy=baseball-cap&sound=on"
                 title="Baseball cap, live: drag to turn it"
                 loading="eager"
                 allow="fullscreen"
               ></iframe>
             </div>
-            <figcaption>Drag to turn it; tap to play.</figcaption>
+            <figcaption>
+              Drag to turn it; tap to play. The speaker button mutes the sound.
+            </figcaption>
           </figure>
         </div>
         <section class="toy-section" aria-labelledby="h-about">
@@ -219,6 +223,12 @@
             because its spin resists being tipped over. Pick a flag in the top bar and the cap wears
             its colors.
           </p>
+          <p class="learn-more">
+            Learn more:
+            <a href="https://en.wikipedia.org/wiki/Baseball_cap" target="_blank" rel="noopener"
+              >Baseball cap on Wikipedia</a
+            >
+          </p>
         </section>
 
         <section class="toy-section" aria-labelledby="h-credits">
@@ -227,6 +237,8 @@
             Built in your browser from a recipe, with the files credited below. Its recipe is in
             <a
               href="https://github.com/ryanjosephkamp/splashery/blob/main/src/packs/real-objects.js"
+              target="_blank"
+              rel="noopener"
               ><code>src/packs/real-objects.js</code></a
             >.
           </p>
@@ -235,17 +247,19 @@
               <b>Baseball cap</b>:
               <a
                 href="https://sketchfab.com/3d-models/baseball-cap-1c1d34d73fd94e6b9e8f82b1eb7194a0"
+                target="_blank"
+                rel="noopener"
                 >Baseball Cap</a
               >
               by Scott VanArsdale,
-              <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.
+              <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener"
+                >CC BY 4.0</a
+              >.
             </li>
           </ul>
           <p class="note">
             Splashery's code is under the MIT license; each asset above keeps its own license. Every
-            credit is also in
-            <a href="https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md">CREDITS.md</a
-            >.
+            credit is also in <a href="../../about/credits/">CREDITS.md</a>.
           </p>
         </section>
         <section class="toy-section" aria-labelledby="h-share">
@@ -331,8 +345,9 @@ https://ryanjosephkamp.github.io/splashery/site/toys/baseball-cap/</textarea
             </button>
           </div>
           <p class="note">
-            Embeds are silent and turn slowly when idle. Every option is in the
-            <a href="https://github.com/ryanjosephkamp/splashery#embedding">embed guide</a>.
+            Embeds are silent and turn slowly when idle; add <code>&amp;sound=on</code> to the
+            iframe's link for the toy's tap sound, with a mute button. Every option is in the
+            <a href="../../share/">embed guide</a>.
           </p>
         </section>
         <section class="toy-section" aria-labelledby="h-related">
@@ -455,21 +470,27 @@ https://ryanjosephkamp.github.io/splashery/site/toys/baseball-cap/</textarea
         <nav aria-label="More">
           <h2>More</h2>
           <ul>
-            <li><a href="../../../">The gallery</a></li>
+            <li><a href="../../../" target="_blank" rel="noopener">The gallery</a></li>
             <li><a href="../../search/">Search</a></li>
             <li><a href="../../../manual/">The Tinkerer's Manual</a></li>
-            <li><a href="https://github.com/ryanjosephkamp/splashery">Source on GitHub</a></li>
+            <li>
+              <a href="https://github.com/ryanjosephkamp/splashery" target="_blank" rel="noopener"
+                >Source on GitHub</a
+              >
+            </li>
             <li><a href="../../share/">Embed and share</a></li>
             <li><a href="../../about/credits/">Credits</a></li>
+            <li><a href="../../about/contact/">Contact</a></li>
             <li><a href="../../about/privacy/">Privacy</a></li>
             <li><a href="../../about/terms/">Terms</a></li>
           </ul>
         </nav>
       </div>
       <p class="fine">
-        Code under the MIT license; each toy's assets keep their own licenses. Built on the
-        PlayCanvas engine. This is a preview of Splashery's new site; the toys live in
-        <a href="../../../">the gallery</a>.
+        Made by <a href="../../about/contact/">Ryan Kamp</a>. Code under the MIT license; each toy's
+        assets keep their own licenses. Built on the PlayCanvas engine. This is a preview of
+        Splashery's new site; the toys live in
+        <a href="../../../" target="_blank" rel="noopener">the gallery</a>.
       </p>
     </footer>
   </body>

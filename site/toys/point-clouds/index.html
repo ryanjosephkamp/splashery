@@ -169,13 +169,15 @@
               </div>
               <div>
                 <dt>Sound</dt>
-                <dd>An airy rising tone with faint ticks as the scan line crosses.</dd>
+                <dd>An airy rising tone and faint ticks as the scan line crosses, both quiet.</dd>
               </div>
             </dl>
             <p class="actions">
               <a
                 class="button primary"
                 href="../../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBvaW50LWNsb3VkcyJ9LCJjYW1lcmEiOnsieWF3IjowLjYsInBpdGNoIjowLjU1LCJyb2xsIjowLCJkaXN0YW5jZSI6Mi44fX0"
+                target="_blank"
+                rel="noopener"
                 >Open in the gallery<svg
                   class="arrow"
                   viewBox="0 0 16 16"
@@ -204,12 +206,14 @@
                 "
               ></span>
               <iframe
-                data-src="../../play/?toy=point-clouds"
+                data-src="../../play/?toy=point-clouds&sound=on"
                 title="Point clouds, live: drag to turn it"
                 allow="fullscreen"
               ></iframe>
             </div>
-            <figcaption>Drag to turn it; tap to play.</figcaption>
+            <figcaption>
+              Drag to turn it; tap to play. The speaker button mutes the sound.
+            </figcaption>
           </figure>
         </div>
         <section class="toy-section" aria-labelledby="h-about">
@@ -236,29 +240,32 @@
           <h2 id="h-credits">Sources and credits</h2>
           <p>
             Built in your browser from a recipe, with the files credited below. Its recipe is in
-            <a href="https://github.com/ryanjosephkamp/splashery/blob/main/src/packs/viewers.js"
+            <a
+              href="https://github.com/ryanjosephkamp/splashery/blob/main/src/packs/viewers.js"
+              target="_blank"
+              rel="noopener"
               ><code>src/packs/viewers.js</code></a
             >.
           </p>
           <ul class="toy-credits">
             <li>
               <b>Palace of Fine Arts, San Francisco (LAZ)</b>:
-              <a href="https://registry.opendata.aws/usgs-lidar/"
+              <a href="https://registry.opendata.aws/usgs-lidar/" target="_blank" rel="noopener"
                 >USGS 3DEP lidar, CA_SanFrancisco_1_B23 (300 m around the Palace of Fine Arts,
                 450,000 of its 8 million points)</a
               >
               by U.S. Geological Survey, 3D Elevation Program,
               <a
                 href="https://www.usgs.gov/faqs/what-are-terms-uselicensing-map-services-and-data-national-map"
+                target="_blank"
+                rel="noopener"
                 >Public domain (U.S. Government work)</a
               >.
             </li>
           </ul>
           <p class="note">
             Splashery's code is under the MIT license; each asset above keeps its own license. Every
-            credit is also in
-            <a href="https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md">CREDITS.md</a
-            >.
+            credit is also in <a href="../../about/credits/">CREDITS.md</a>.
           </p>
         </section>
         <section class="toy-section" aria-labelledby="h-share">
@@ -344,8 +351,9 @@ https://ryanjosephkamp.github.io/splashery/site/toys/point-clouds/</textarea
             </button>
           </div>
           <p class="note">
-            Embeds are silent and turn slowly when idle. Every option is in the
-            <a href="https://github.com/ryanjosephkamp/splashery#embedding">embed guide</a>.
+            Embeds are silent and turn slowly when idle; add <code>&amp;sound=on</code> to the
+            iframe's link for the toy's tap sound, with a mute button. Every option is in the
+            <a href="../../share/">embed guide</a>.
           </p>
         </section>
         <section class="toy-section" aria-labelledby="h-related">
@@ -508,21 +516,27 @@ https://ryanjosephkamp.github.io/splashery/site/toys/point-clouds/</textarea
         <nav aria-label="More">
           <h2>More</h2>
           <ul>
-            <li><a href="../../../">The gallery</a></li>
+            <li><a href="../../../" target="_blank" rel="noopener">The gallery</a></li>
             <li><a href="../../search/">Search</a></li>
             <li><a href="../../../manual/">The Tinkerer's Manual</a></li>
-            <li><a href="https://github.com/ryanjosephkamp/splashery">Source on GitHub</a></li>
+            <li>
+              <a href="https://github.com/ryanjosephkamp/splashery" target="_blank" rel="noopener"
+                >Source on GitHub</a
+              >
+            </li>
             <li><a href="../../share/">Embed and share</a></li>
             <li><a href="../../about/credits/">Credits</a></li>
+            <li><a href="../../about/contact/">Contact</a></li>
             <li><a href="../../about/privacy/">Privacy</a></li>
             <li><a href="../../about/terms/">Terms</a></li>
           </ul>
         </nav>
       </div>
       <p class="fine">
-        Code under the MIT license; each toy's assets keep their own licenses. Built on the
-        PlayCanvas engine. This is a preview of Splashery's new site; the toys live in
-        <a href="../../../">the gallery</a>.
+        Made by <a href="../../about/contact/">Ryan Kamp</a>. Code under the MIT license; each toy's
+        assets keep their own licenses. Built on the PlayCanvas engine. This is a preview of
+        Splashery's new site; the toys live in
+        <a href="../../../" target="_blank" rel="noopener">the gallery</a>.
       </p>
     </footer>
   </body>

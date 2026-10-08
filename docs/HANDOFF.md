@@ -4,7 +4,38 @@ Where Splashery stands, in short. The Operator session keeps this file; each lan
 in [handoff/](handoff/). The ground rules are in [CLAUDE.md](../CLAUDE.md); how the parallel lanes
 work is in [OPERATING.md](OPERATING.md).
 
-## State of main (2026-10-02)
+## Now (October 8, 2026, about 09:00 UTC)
+
+The Operator is `session_012GmKRUMZLir2nb27Bo8Cu2` (Opus 5.5). This section is current. The sections
+below it are history. The runbook is [OPERATOR.md](OPERATOR.md).
+
+**Effort (the owner's call of October 8, 2026):** every worker, lanes and Integrators alike, runs at
+high effort, and so do his Codex tasks. A session's effort is set in the Claude app; a message can't
+change it.
+
+**Main** is at `6201395c` (Ops #414). Merged October 8:
+
+- #409: the Codex kit (#398): the Codex cloud setup script, SETUP.md and Codex tasks 22 to 31
+- #410: Math r2 (#392) and Space r4 (#394), labs
+- #412: Lattices and orbitals (#393), labs
+- #413: the Ops merge tool (#397): `tools/op-merge.mjs`, now the Operator's merge routine (the hand
+  procedure stays the fallback)
+- #414: Photo sharp view (#402 engine, #403), labs: Sharp picture is the default view in Photo to 3D
+  and Moving photo to 3D (the owner's call), with Splats one tap away
+
+**Lanes running** (rows, sessions and files in WORKSTREAMS.md):
+
+- **Photo fidelity** (Opus): sharper splats in both photo toys; merging main after Photo sharp view.
+- **Suite speed** (Opus): measuring the full suite file by file, then cutting its wall time.
+
+**Open with the owner:** whether the Sharp or Splats choice is saved in scenes (nothing is stored
+until he says); the Codex bake-off runs and the blind review.
+
+**Next for the Operator:** a small fix in `tools/op-merge.mjs` (it misses the Moving photo specs
+when `src/packs/moving-photo.js` changes); the next lanes from the kept list (Photoreal r3, the S4
+volume viewer, the X-ray car and photoreal landmarks, H1 to H5) at about six workers.
+
+## State of main (2026-10-02, history)
 
 - Phases A to E4 are merged: A (splashery PR #13, homepage PR #33 in
   `ryanjosephkamp/ryanjosephkamp.github.io`), B (#17), C1 (#18), C2 (#19), D (#20), E1 (#21), E1b
