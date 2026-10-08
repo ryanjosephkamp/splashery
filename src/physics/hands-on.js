@@ -58,6 +58,9 @@ export function ownHands(recipe) {
 export function canPlay(info) {
   const r = info?.recipe;
   if (!info || r?.handsOn === false) return false;
+  // (A picture toy that asks for joints plays them: a picture frame swings
+  // on its nail; lane Hands-on H3.)
+  if (r?.hands?.joints) return true;
   if (r?.pictures || r?.turntable === false) return false;
   return true;
 }

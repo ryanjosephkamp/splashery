@@ -4,6 +4,7 @@
 // a thin toy's splats still takes it with the ✋ switch on.
 
 import { test, expect } from "@playwright/test";
+import { canPlay } from "../src/physics/hands-on.js";
 
 const APP = "/?renderer=webgl2&adapt=off&profile=mid";
 
@@ -99,7 +100,9 @@ async function snapOff(page, a, far) {
   return j;
 }
 
-test.afterEach(async ({ page }) => unpatch(page));
+test.afterEach(async ({ page }) => {
+  if (page.url().startsWith("http")) await unpatch(page);
+});
 
 test("reseat: a snapped-off piece brought back clicks home and holds fast again", async ({
   page,
@@ -245,4 +248,13 @@ test("a shake with fire: false only reads as info.hands.shake (no tap fires)", a
   });
   expect(r.felt).toBeGreaterThan(0.3);
   expect(r.fired).toBe(0);
+});
+
+test("a picture toy stays out of Hands-on unless it asks for joints", () => {
+  const frame = { pictures: {}, turntable: false };
+  expect(canPlay({ recipe: frame })).toBe(false);
+  expect(canPlay({ recipe: { ...frame, hands: { joints: [] } } })).toBe(true);
+  expect(canPlay({ recipe: { ...frame, hands: { joints: [] }, handsOn: false } })).toBe(false);
+  expect(canPlay({ recipe: { turntable: false } })).toBe(false);
+  expect(canPlay({ recipe: {} })).toBe(true);
 });
