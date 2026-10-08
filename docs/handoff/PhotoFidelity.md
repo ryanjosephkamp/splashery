@@ -76,7 +76,24 @@ so the owner can judge whether it reads. Before READY, re-read CLAUDE.md's "Effe
 repo) through your build at each READY and posts the comparison privately. Aim for a first READY
 with measurements within about six hours. Your Operator is session_012GmKRUMZLir2nb27Bo8Cu2.
 
+### Round 2 brief (the Operator, October 8, 2026, 11:15 UTC)
+
+> #405 and #406 merged via Ops #417 (main c6e3f11e); 125/125 specs on the merge. Thank you. You may
+> start the follow-up round now: branch claude/lane-photo-fidelity-2 from main c6e3f11e (engine
+> changes, if any, on claude/lane-photo-fidelity-2-engine), PR title "Phase Photo fidelity r2:
+> adaptive grid and edge-aware depth". Scope: the adaptive grid for "One color per splat" and
+> edge-aware depth upsampling for short clips, measured the same way, before-and-after clips on
+> Effect review page 2 (ids phf2-…), Sharp picture stays the default view. Keep the handoff current.
+> Reply with your usual READY/WORKING/BLOCKED line.
+
 ## State
+
+- October 8, 2026, 12:40 UTC, round 2 (`claude/lane-photo-fidelity-2`, Opus 5.5, high effort):
+  working. The adaptive grid for One color per splat is built (`adaptiveGrid` in
+  `src/packs/photo-3d-core.js`) and being measured; edge-aware depth for short clips (`guidedDepth`
+  in `src/packs/moving-photo.js`) is built and measured (`tools/phf-depth-edges.mjs`): it helps
+  little, because the depth model's input size, not the enlarging, sets where the edges are (see
+  Notes, "Round 2").
 
 - October 8, 2026, 10:30 UTC: the Detail choice Sharp is now Fine (the Operator's naming call). The
   "What makes a good photo/clip" paragraphs came out of the About texts: with the Sharp view lane's
