@@ -3,31 +3,34 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <title>How CT works · Splashery</title>
+    <title>Volume viewer · Splashery</title>
     <meta
       name="description"
-      content="How CT works, a Splashery toy made of 3D Gaussian splats: Tap to scan the shell."
+      content="Volume viewer, a Splashery toy made of 3D Gaussian splats: Drag up or down to cut into it; tap for the next window."
     />
     <meta name="robots" content="noindex" />
-    <link rel="canonical" href="https://ryanjosephkamp.github.io/splashery/site/toys/how-ct/" />
+    <link
+      rel="canonical"
+      href="https://ryanjosephkamp.github.io/splashery/site/toys/volume-viewer/"
+    />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Splashery" />
-    <meta property="og:title" content="How CT works · Splashery" />
+    <meta property="og:title" content="Volume viewer · Splashery" />
     <meta
       property="og:description"
-      content="How CT works, a Splashery toy made of 3D Gaussian splats: Tap to scan the shell."
+      content="Volume viewer, a Splashery toy made of 3D Gaussian splats: Drag up or down to cut into it; tap for the next window."
     />
     <meta
       property="og:url"
-      content="https://ryanjosephkamp.github.io/splashery/site/toys/how-ct/"
+      content="https://ryanjosephkamp.github.io/splashery/site/toys/volume-viewer/"
     />
     <meta
       property="og:image"
-      content="https://ryanjosephkamp.github.io/splashery/assets/toys/how-ct/thumb.webp"
+      content="https://ryanjosephkamp.github.io/splashery/assets/toys/volume-viewer/thumb.webp"
     />
     <meta property="og:image:width" content="256" />
     <meta property="og:image:height" content="256" />
-    <meta property="og:image:alt" content="How CT works, made of soft 3D splats" />
+    <meta property="og:image:alt" content="Volume viewer, made of soft 3D splats" />
     <meta name="twitter:card" content="summary" />
     <meta name="color-scheme" content="light dark" />
     <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
@@ -135,7 +138,7 @@
       <link rel="stylesheet" href="../../assets/toy-page.css" />
       <div class="labs-off" data-labs-off>
         <p class="eyebrow">In the labs</p>
-        <h1>How CT works</h1>
+        <h1>Volume viewer</h1>
         <p class="lead">This toy is still in the labs, so it shows only with the labs switch on.</p>
         <p class="actions">
           <a class="button primary" href="./?labs=1">Turn the labs on</a
@@ -145,34 +148,37 @@
       <article class="toy-page" data-labs>
         <nav class="crumbs" aria-label="Breadcrumb">
           <a href="../../toys/">Toys</a> <span aria-hidden="true">›</span>
-          <a href="../../toys/#shelf-imaging">Imaging</a>
+          <a href="../../toys/#shelf-studio">Studio</a>
         </nav>
         <div class="toy-hero">
           <div class="toy-head">
-            <h1>How CT works <span class="badge">labs</span></h1>
+            <h1>Volume viewer <span class="badge">labs</span></h1>
             <p class="lead how-to">
-              Tap to scan the shell. Once it is scanned, drag up or down on it to cut into it.
+              Drag up or down to cut into it; tap for the next window. Open your own scan in the Toy
+              tab.
             </p>
             <dl class="does">
               <div>
                 <dt>Tap</dt>
                 <dd>
-                  A CT gantry sweeps along a kit-built nautilus shell while its X-ray tube and
-                  detector arc turn; behind the ring the shell becomes its gray CT volume (the
-                  engine's cutting plane).
+                  A person's own CT, MRI or microscope volume (DICOM series, folder, zip or
+                  multi-frame file; NIfTI .nii and .nii.gz; TIFF stacks; raw with a size form) drawn
+                  as opaque volume splats spaced to the device's budget, each voxel at its true
+                  size.
                 </dd>
               </div>
               <div>
                 <dt>Sound</dt>
                 <dd>
-                  The gantry's knock as it starts and its motor's low run, lower on the way back.
+                  A soft click like a console's dial, then a short low tone as the new window
+                  settles.
                 </dd>
               </div>
             </dl>
             <p class="actions">
               <a
                 class="button primary"
-                href="../../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Imhvdy1jdCJ9LCJjYW1lcmEiOnsieWF3IjowLjQ1LCJwaXRjaCI6MC4yNSwicm9sbCI6MCwiZGlzdGFuY2UiOjMuMn19"
+                href="../../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InZvbHVtZS12aWV3ZXIifSwiY2FtZXJhIjp7InlhdyI6MC4zNSwicGl0Y2giOjAuMiwicm9sbCI6MCwiZGlzdGFuY2UiOjMuOH19"
                 target="_blank"
                 rel="noopener"
                 >Open in the gallery<svg
@@ -198,11 +204,13 @@
               <span
                 class="poster"
                 aria-hidden="true"
-                style="background-image: url(&quot;../../../assets/toys/how-ct/thumb.webp&quot;)"
+                style="
+                  background-image: url(&quot;../../../assets/toys/volume-viewer/thumb.webp&quot;);
+                "
               ></span>
               <iframe
-                data-src="../../play/?toy=how-ct&sound=on"
-                title="How CT works, live: drag to turn it"
+                data-src="../../play/?toy=volume-viewer&sound=on"
+                title="Volume viewer, live: drag to turn it"
                 allow="fullscreen"
               ></iframe>
             </div>
@@ -214,37 +222,61 @@
         <section class="toy-section" aria-labelledby="h-about">
           <h2 id="h-about">About this toy</h2>
           <p>
-            A CT scanner (computed tomography) turns an X-ray tube and a curved row of detectors
-            around the object, taking hundreds of views from every side. A computer works back from
-            those views to how dense the object is at every point of a thin slice. Moving the object
-            through the ring, slice after slice, gives a whole volume.
+            A CT, MRI or microscope scan is a volume: a stack of slices, each a grid of numbers
+            saying how dense or bright the object is there. Each little block is a voxel. Slices are
+            often farther apart than the pixels in them, so every voxel is placed at its real size.
           </p>
           <p>
-            Here the shell is a chambered nautilus, built for the toy. As the ring passes, the shell
-            turns into its CT volume: bright where the shell is dense, empty where there is air.
-            Drag up or down to cut into the volume and see the chambers and the walls between them.
-            Real scans of a nautilus show the same spiral.
+            The window picks which values show: below it is treated as air, and the colors run from
+            its bottom to its top. Bone shows the densest parts, Soft tissue the range below them,
+            Full range everything but the air (in a medical CT, in Hounsfield units: water 0, air
+            -1000). Tap to step through them, or set your own. Drag to move the cut, or show one
+            thin slice. Maximum intensity shows the brightest value along each line, as radiologists
+            view blood vessels.
           </p>
           <p>
-            Choose another toy to put in the scanner in the Toy tab. Its CT volume is worked out
-            from its shape: a dense skin around a softer, even inside, since the toy has no real
-            inside to measure.
+            Open your own DICOM, NIfTI, TIFF stack or raw file in the Toy tab; it stays on your
+            device. The samples, a walnut (CWI) and a young gar's head (Brian Metscher), are CC BY
+            4.0.
           </p>
         </section>
 
         <section class="toy-section" aria-labelledby="h-credits">
           <h2 id="h-credits">Sources and credits</h2>
           <p>
-            Built in your browser from a recipe and a seed: nothing in it comes from outside files.
-            Its recipe is in
+            Built in your browser from a recipe, with the files credited below. Its recipe is in
             <a
-              href="https://github.com/ryanjosephkamp/splashery/blob/main/src/packs/imaging.js"
+              href="https://github.com/ryanjosephkamp/splashery/blob/main/src/packs/volume-viewer.js"
               target="_blank"
               rel="noopener"
-              ><code>src/packs/imaging.js</code></a
+              ><code>src/packs/volume-viewer.js</code></a
             >.
           </p>
-
+          <ul class="toy-credits">
+            <li>
+              <b>Walnut</b>:
+              <a href="https://doi.org/10.5281/zenodo.2686726" target="_blank" rel="noopener"
+                >Cone-Beam X-Ray CT Data Collection Designed for Machine Learning: Samples 1-8
+                (Walnut 1)</a
+              >
+              by Henri Der Sarkissian, Felix Lucka, Maureen van Eijnatten, Giulia Colacicco, Sophia
+              Bethany Coban, K. Joost Batenburg (CWI),
+              <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener"
+                >CC BY 4.0</a
+              >.
+            </li>
+            <li>
+              <b>Gar</b>:
+              <a href="https://doi.org/10.5281/zenodo.19021581" target="_blank" rel="noopener"
+                >MicroCT images of 3 early gar (Lepisosteus osseus) stages between 12.7mm and 21.7mm
+                (the 12.8 mm larva, averaged to 17.7 µm)</a
+              >
+              by Brian Metscher (University of Vienna),
+              <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener"
+                >CC BY 4.0</a
+              >.
+            </li>
+          </ul>
           <p class="note">
             Splashery's code is under the MIT license; each asset above keeps its own license. Every
             credit is also in <a href="../../about/credits/">CREDITS.md</a>.
@@ -254,8 +286,8 @@
           <h2 id="h-share">Share and embed</h2>
           <div class="snippet">
             <label for="snip-link">A link to this page</label
-            ><textarea id="snip-link" readonly rows="1" spellcheck="false">
-https://ryanjosephkamp.github.io/splashery/site/toys/how-ct/</textarea
+            ><textarea id="snip-link" readonly rows="2" spellcheck="false">
+https://ryanjosephkamp.github.io/splashery/site/toys/volume-viewer/</textarea
             ><button type="button" class="copy" data-copy="snip-link">
               <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
                 <rect
@@ -281,7 +313,7 @@ https://ryanjosephkamp.github.io/splashery/site/toys/how-ct/</textarea
           <div class="snippet">
             <label for="snip-iframe">Put it on your page (an iframe, works anywhere)</label
             ><textarea id="snip-iframe" readonly rows="4" spellcheck="false">
-&lt;iframe src=&quot;https://ryanjosephkamp.github.io/splashery/embed/?toy=how-ct&quot; title=&quot;Splashery: How CT works&quot; loading=&quot;lazy&quot; style=&quot;width:100%;max-width:600px;aspect-ratio:4/3;border:0;border-radius:12px&quot;&gt;&lt;/iframe&gt;</textarea
+&lt;iframe src=&quot;https://ryanjosephkamp.github.io/splashery/embed/?toy=volume-viewer&quot; title=&quot;Splashery: Volume viewer&quot; loading=&quot;lazy&quot; style=&quot;width:100%;max-width:600px;aspect-ratio:4/3;border:0;border-radius:12px&quot;&gt;&lt;/iframe&gt;</textarea
             ><button type="button" class="copy" data-copy="snip-iframe">
               <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
                 <rect
@@ -309,7 +341,7 @@ https://ryanjosephkamp.github.io/splashery/site/toys/how-ct/</textarea
               >Or with one script tag (the &lt;splashery-toy&gt; element)</label
             ><textarea id="snip-element" readonly rows="3" spellcheck="false">
 &lt;script type=&quot;module&quot; src=&quot;https://ryanjosephkamp.github.io/splashery/src/element.js&quot;&gt;&lt;/script&gt;
-&lt;splashery-toy toy=&quot;how-ct&quot;&gt;&lt;/splashery-toy&gt;</textarea
+&lt;splashery-toy toy=&quot;volume-viewer&quot;&gt;&lt;/splashery-toy&gt;</textarea
             ><button type="button" class="copy" data-copy="snip-element">
               <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
                 <rect
@@ -341,8 +373,8 @@ https://ryanjosephkamp.github.io/splashery/site/toys/how-ct/</textarea
         <section class="toy-section" aria-labelledby="h-related">
           <div class="band-head">
             <h2 id="h-related">Related toys</h2>
-            <a href="../../toys/#shelf-imaging"
-              >The Imaging shelf<svg
+            <a href="../../toys/#shelf-studio"
+              >The Studio shelf<svg
                 class="arrow"
                 viewBox="0 0 16 16"
                 width="16"
@@ -373,79 +405,89 @@ https://ryanjosephkamp.github.io/splashery/site/toys/how-ct/</textarea
               >
             </li>
             <li class="toy-card" data-labs>
-              <a href="../../toys/airport-xray/"
+              <a href="../../toys/how-ct/"
                 ><img
-                  src="../../../assets/toys/airport-xray/thumb.webp"
+                  src="../../../assets/toys/how-ct/thumb.webp"
+                  alt=""
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                /><span class="toy-name">How CT works <span class="badge">labs</span></span></a
+              >
+            </li>
+            <li class="toy-card" data-labs>
+              <a href="../../toys/point-clouds/"
+                ><img
+                  src="../../../assets/toys/point-clouds/thumb.webp"
+                  alt=""
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                /><span class="toy-name">Point clouds <span class="badge">labs</span></span></a
+              >
+            </li>
+            <li class="toy-card" data-labs>
+              <a href="../../toys/sound-lab/"
+                ><img
+                  src="../../../assets/toys/sound-lab/thumb.webp"
+                  alt=""
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                /><span class="toy-name">Sound lab <span class="badge">labs</span></span></a
+              >
+            </li>
+            <li class="toy-card" data-labs>
+              <a href="../../toys/chladni-plate/"
+                ><img
+                  src="../../../assets/toys/chladni-plate/thumb.webp"
+                  alt=""
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                /><span class="toy-name">Chladni plate <span class="badge">labs</span></span></a
+              >
+            </li>
+            <li class="toy-card" data-labs>
+              <a href="../../toys/data-in-3d/"
+                ><img
+                  src="../../../assets/toys/data-in-3d/thumb.webp"
+                  alt=""
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                /><span class="toy-name">Data in 3D <span class="badge">labs</span></span></a
+              >
+            </li>
+            <li class="toy-card" data-labs>
+              <a href="../../toys/qr-anatomy/"
+                ><img
+                  src="../../../assets/toys/qr-anatomy/thumb.webp"
                   alt=""
                   width="96"
                   height="96"
                   loading="lazy"
                   decoding="async"
                 /><span class="toy-name"
-                  >Airport X-ray scanner <span class="badge">labs</span></span
+                  >How a QR code works <span class="badge">labs</span></span
                 ></a
               >
             </li>
             <li class="toy-card" data-labs>
-              <a href="../../toys/electron-microscope/"
+              <a href="../../toys/model-splats/"
                 ><img
-                  src="../../../assets/toys/electron-microscope/thumb.webp"
+                  src="../../../assets/toys/model-splats/thumb.webp"
                   alt=""
                   width="96"
                   height="96"
                   loading="lazy"
                   decoding="async"
-                /><span class="toy-name"
-                  >Electron microscope <span class="badge">labs</span></span
-                ></a
-              >
-            </li>
-            <li class="toy-card" data-labs>
-              <a href="../../toys/fruit-mri/"
-                ><img
-                  src="../../../assets/toys/fruit-mri/thumb.webp"
-                  alt=""
-                  width="96"
-                  height="96"
-                  loading="lazy"
-                  decoding="async"
-                /><span class="toy-name">MRI of a fruit <span class="badge">labs</span></span></a
-              >
-            </li>
-            <li class="toy-card" data-labs>
-              <a href="../../toys/thermal-camera/"
-                ><img
-                  src="../../../assets/toys/thermal-camera/thumb.webp"
-                  alt=""
-                  width="96"
-                  height="96"
-                  loading="lazy"
-                  decoding="async"
-                /><span class="toy-name">Thermal camera <span class="badge">labs</span></span></a
-              >
-            </li>
-            <li class="toy-card" data-labs>
-              <a href="../../toys/volume-viewer/"
-                ><img
-                  src="../../../assets/toys/volume-viewer/thumb.webp"
-                  alt=""
-                  width="96"
-                  height="96"
-                  loading="lazy"
-                  decoding="async"
-                /><span class="toy-name">Volume viewer <span class="badge">labs</span></span></a
-              >
-            </li>
-            <li class="toy-card">
-              <a href="../../toys/nautilus/"
-                ><img
-                  src="../../../assets/toys/nautilus/thumb.webp"
-                  alt=""
-                  width="96"
-                  height="96"
-                  loading="lazy"
-                  decoding="async"
-                /><span class="toy-name">Nautilus</span></a
+                /><span class="toy-name">Model to splats <span class="badge">labs</span></span></a
               >
             </li>
           </ul>
