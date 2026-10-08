@@ -92,6 +92,12 @@ One of three kinds:
   - `options`: the recipe's choices, such as `{ "style": "love", "color": "#c42f3c" }`. At most 16
     keys; values are numbers, `true`/`false`, `#rrggbb` colours or short lower-case words. The
     recipe checks their meaning when it builds, so unknown options are ignored.
+    - Photo to 3D and Moving photo to 3D (`photo-3d`, `moving-photo-3d`; added October 8, 2026, lane
+      Photo sharp view r2): `view` is `"sharp"` (Sharp picture: the picture itself on a 3D relief)
+      or `"splats"` (Splats). It is written when someone picks a view, without rebuilding the toy. A
+      scene without it, such as every scene and link saved before, opens in Sharp picture, the
+      default. Splats' own look is the recipe option `detail`: `"photo"` (Fine, the default) or
+      `"splats"` (One color per splat). See [PHOTO-VIEWS.md](PHOTO-VIEWS.md).
   - `clay`: clay edits, as for generated toys below.
 
   - `media` (picture toys, such as the Picture lab; added September 28, 2026): what the toy's
