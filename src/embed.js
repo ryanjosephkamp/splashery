@@ -1,6 +1,7 @@
 // Embed player page (embed/index.html): reads the scene from #s=..., takes
 // ?theme=light|dark, ?bg=transparent, ?autoplay=<idle effect>, ?zoom=0.5-2
-// and ?controls=0 (no zoom buttons) overrides.
+// ?controls=0 (no zoom buttons) and ?sound=on (the toy's tap sound, with a
+// mute button) overrides. Embeds are silent unless ?sound=on is given.
 
 import { Viewer, NoGPUError } from "./viewer.js";
 import { parseHash } from "./codec.js";
@@ -53,6 +54,28 @@ addEventListener("message", (e) => {
   if (e.data && e.data.type === "splashery:theme") viewer.setTheme(e.data.theme);
 });
 
+// The mute button of ?sound=on: a speaker that shows whether taps sound.
+function addSoundButton(sound) {
+  const b = document.createElement("button");
+  b.type = "button";
+  b.id = "sound-toggle";
+  b.className = "embed-sound";
+  const show = () => {
+    b.setAttribute("aria-pressed", String(sound.enabled));
+    b.setAttribute("aria-label", sound.enabled ? "Mute the sound" : "Turn the sound on");
+    b.title = b.getAttribute("aria-label");
+    b.textContent = sound.enabled ? "🔊" : "🔇";
+  };
+  b.addEventListener("click", () => {
+    sound.enabled = !sound.enabled; // not remembered: the app's speaker button is separate
+    if (!sound.enabled) sound.stopHeld("toy");
+    else sound.audio();
+    show();
+  });
+  show();
+  document.body.append(b);
+}
+
 const zoomButtons = document.getElementById("zoom-buttons");
 zoomButtons.hidden = params.get("controls") === "0";
 for (const b of zoomButtons.querySelectorAll("button")) {
@@ -62,6 +85,7 @@ for (const b of zoomButtons.querySelectorAll("button")) {
 try {
   await viewer.start();
   openLink.href = viewer.openURL();
+  if (params.get("sound") === "on") addSoundButton(await viewer.enableSound());
 } catch (err) {
   console.info("Splashery embed could not start:", err?.message || err);
   if (!(err instanceof NoGPUError)) {
