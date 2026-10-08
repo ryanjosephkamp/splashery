@@ -289,7 +289,9 @@ export class HandsOn {
     const data = this.player.proc?.ctx?.kit?.data;
     const g = (hands.gravity ?? GRAVITY) * R;
     const w = new World({ gravity: [0, -g, 0], substeps: hands.substeps ?? 10, sleepSpeed: 0.02 * R, minHit: 0.35 * R, maxPush: 0.01 * R, maxSpeed: 10 * R }); // prettier-ignore
-    w.plane([0, 1, 0], hands.floor ?? 0, { friction: hands.friction ?? 0.9, restitution: 0.15, grip: hands.grip ?? 0 }); // prettier-ignore
+    // (A floor may depend on the build: a d20 sits lower than two d6s; lane Hands-on H1.)
+    const floor = typeof hands.floor === "function" ? hands.floor(data, info) : hands.floor;
+    w.plane([0, 1, 0], floor ?? 0, { friction: hands.friction ?? 0.9, restitution: 0.15, grip: hands.grip ?? 0 }); // prettier-ignore
     const A = (hands.area ?? 1.6) * R;
     for (const [nx, nz] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) // prettier-ignore
       w.plane([nx, 0, nz], -A, { friction: 0.3, restitution: 0.3 });

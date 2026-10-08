@@ -190,3 +190,20 @@ test("hands.soft: a toy squishes on landing as much as its hands block says", as
   expect(usual.soft).toBeCloseTo(0.55, 3); // the list's
   expect(firm.peak).toBeLessThan(usual.peak * 0.5);
 });
+
+test("hands.floor may be a function of the build", async ({ page }) => {
+  await open(page, "dice", null);
+  const d = await page.evaluate(() => {
+    const { player } = window.__splashery;
+    player.toyInfo.recipe.hands = {
+      floor: (data, info) => (info.options?.kind === "d20" ? -0.8 : -0.5),
+      pieces: () => [{ part: "d6a", pos: [-0.64, 0, 0.18], solid: { type: "box", half: [0.5, 0.5, 0.5] } }], // prettier-ignore
+    };
+    const h = player.handsOn;
+    h.attach(player.toyInfo);
+    h.setOn(true);
+    h.ensure();
+    return h.world.planes[0].d;
+  });
+  expect(d).toBeCloseTo(-0.5, 5);
+});
