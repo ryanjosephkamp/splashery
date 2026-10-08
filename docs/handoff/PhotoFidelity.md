@@ -78,6 +78,10 @@ with measurements within about six hours. Your Operator is session_012GmKRUMZLir
 
 ## State
 
+- October 8, 2026, 09:20 UTC: main (#414, Photo sharp view) merged in, their hook calls kept as they
+  are. Sharp picture is the default view now, so the phf test, measure and clip tools pick Splats
+  explicitly. p3d, psv, live3, smd-moving, phf and phf-engine pass (57 of 57 after the fix).
+
 Model: Opus 5.5 (default effort). Started October 8, 2026, about 00:00 UTC. First READY October 8,
 2026, about 05:30 UTC.
 
