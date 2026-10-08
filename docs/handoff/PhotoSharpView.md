@@ -20,6 +20,12 @@ renders; alone, 16 of 16 pass.
   and `smd-moving` 36 of 37, the one miss the Speed slider timing test, which passed 3 of 3 on
   repeat (the engine branch's hook is a no-op).
 
+- October 8, 2026, 05:00 UTC, the Operator's two notes from the owner's recording, done: the status
+  line says "Sharp picture" while it shows (engine: `src/app.js` asks `player.statusLabel` first, on
+  #402), and the border is a straight clean edge (no cut within 1.5 cells of the rim, the depth
+  softened within six cells of it, the moving photo's frame glued to that softened depth). `psv` and
+  `p3d` specs: 18 of 18.
+
 ### Measurements (October 8, 2026)
 
 `tools/psv-legibility.mjs`, the text-scroll still at 10 s, 390 x 844 at device scale 3, mid profile,
