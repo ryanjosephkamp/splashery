@@ -19,10 +19,12 @@ import { RIGS } from "../src/rigs.js";
 
 const root = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
 const readJSON = (f) => JSON.parse(fs.readFileSync(path.join(root, f), "utf8"));
-const PLAN = readJSON("tools/toy-plan.json").toys;
+export const PLAN = readJSON("tools/toy-plan.json").toys;
 const ASSETS = readJSON("tools/assets.json");
 const MODELS = readJSON("tools/models.json").models;
 const EVIDENCE_DIR = path.join(root, "docs/evidence");
+// "Learn more" links (tools/toy-links.json): toy id -> { url, label }.
+export const TOY_LINKS = readJSON("tools/toy-links.json").links;
 
 // Where the live app is, for the embed snippets people paste into their own pages.
 const APP = "https://ryanjosephkamp.github.io/splashery/";
@@ -50,13 +52,13 @@ export function toyPageEntries() {
 }
 
 // Up to the first full stop that ends a sentence (not the one in "3.45 s" or "move.mp3").
-const firstSentence = (s) => (/^[\s\S]*?[.!?](?=\s+[A-Z"“(]|\s*$)/.exec(s)?.[0] || s).trim();
+export const firstSentence = (s) => (/^[\s\S]*?[.!?](?=\s+[A-Z"“(]|\s*$)/.exec(s)?.[0] || s).trim();
 
 // ---- Words: tap, sound, credits ---------------------------------------------------------
 
 // The plan's sound line, without the lane notes it sometimes carries
 // ("(Sound C, October 2, 2026)", "E1:").
-function soundLine(s) {
+export function soundLine(s) {
   if (!s) return "";
   const clean = s
     .replace(/\s*\([^()]*\b(19|20)\d\d\b[^()]*\)/g, "")
@@ -215,7 +217,9 @@ export async function toyPage(page, ctx) {
 
   // The live toy, from the site's player (inside the service worker's scope).
   const q = `toy=${encodeURIComponent(t.id)}${still ? "&turntable=off" : ""}`;
-  const play = `${up}play/?${q}`;
+  // The toy plays its tap sound here (sound=on, with a mute button in the player); the
+  // embed snippets below stay silent.
+  const play = `${up}play/?${q}&sound=on`;
   // A labs toy's player starts only once the labs switch is on (toy-page.js).
   const frame = t.labs
     ? `<iframe data-src="${play}" title="${esc(t.label)}, live: drag to turn it" allow="fullscreen"></iframe>`
@@ -231,6 +235,12 @@ export async function toyPage(page, ctx) {
     .filter(Boolean)
     .map((p) => `<p>${esc(p)}</p>`)
     .join("");
+  // Learn more: a trusted reference, in a new tab. Not where the page already cites its
+  // sources (a toy with an evidence file).
+  const link = TOY_LINKS[t.id];
+  const learn = link && !readEvidence(t.id)
+    ? `<p class="learn-more">Learn more: <a href="${esc(link.url)}" target="_blank" rel="noopener">${esc(link.label)}</a></p>`
+    : ""; // prettier-ignore
 
   // Sources, credits and license notices.
   const credits = await toyCredits(t, recipe);
@@ -264,7 +274,7 @@ ${creditItems ? `<ul class="toy-credits">${creditItems}</ul>` : ""}
 ${snippet("snip-link", "A link to this page", url)}
 ${snippet("snip-iframe", "Put it on your page (an iframe, works anywhere)", iframe)}
 ${snippet("snip-element", "Or with one script tag (the &lt;splashery-toy&gt; element)", element)}
-<p class="note">Embeds are silent and turn slowly when idle. Every option is in the <a href="https://github.com/ryanjosephkamp/splashery#embedding">embed guide</a>.</p>
+<p class="note">Embeds are silent and turn slowly when idle; add <code>&amp;sound=on</code> to the iframe's link for the toy's tap sound, with a mute button. Every option is in the <a href="https://github.com/ryanjosephkamp/splashery#embedding">embed guide</a>.</p>
 </section>`;
 
   const related = relatedToys(t);
@@ -286,17 +296,17 @@ ${labsNote}
 <h1>${esc(t.label)}${t.labs ? ' <span class="badge">labs</span>' : ""}</h1>
 <p class="lead how-to">${esc(how)}</p>
 ${does}
-<p class="actions"><a class="button primary" href="${up}${galleryHref(t)}">Open in the gallery${arrow}</a><a class="button" href="#h-share">Share or embed</a></p>
+<p class="actions"><a class="button primary" href="${up}${galleryHref(t)}" target="_blank" rel="noopener">Open in the gallery${arrow}</a><a class="button" href="#h-share">Share or embed</a></p>
 </div>
 <figure class="hero-toy toy-stage">
 <div class="stage">
 ${thumb ? `<span class="poster" aria-hidden="true" style="background-image: url('${up}${thumb}')"></span>` : ""}
 ${frame}
 </div>
-<figcaption>${still ? "Drag to look around it; tap to play." : "Drag to turn it; tap to play."}</figcaption>
+<figcaption>${still ? "Drag to look around it; tap to play." : "Drag to turn it; tap to play."} The speaker button mutes the sound.</figcaption>
 </figure>
 </div>
-${about ? `<section class="toy-section" aria-labelledby="h-about"><h2 id="h-about">About this toy</h2>${about}</section>` : ""}
+${about || learn ? `<section class="toy-section" aria-labelledby="h-about"><h2 id="h-about">About this toy</h2>${about}${learn}</section>` : ""}
 ${evidenceSection(readEvidence(t.id), esc)}
 ${creditsSection}
 ${share}

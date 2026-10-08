@@ -204,12 +204,14 @@
                 "
               ></span>
               <iframe
-                data-src="../../play/?toy=star-systems"
+                data-src="../../play/?toy=star-systems&sound=on"
                 title="Real star systems, live: drag to turn it"
                 allow="fullscreen"
               ></iframe>
             </div>
-            <figcaption>Drag to turn it; tap to play.</figcaption>
+            <figcaption>
+              Drag to turn it; tap to play. The speaker button mutes the sound.
+            </figcaption>
           </figure>
         </div>
         <section class="toy-section" aria-labelledby="h-about">
@@ -420,7 +422,8 @@ https://ryanjosephkamp.github.io/splashery/site/toys/star-systems/</textarea
             </button>
           </div>
           <p class="note">
-            Embeds are silent and turn slowly when idle. Every option is in the
+            Embeds are silent and turn slowly when idle; add <code>&amp;sound=on</code> to the
+            iframe's link for the toy's tap sound, with a mute button. Every option is in the
             <a href="../../share/">embed guide</a>.
           </p>
         </section>
@@ -446,6 +449,20 @@ https://ryanjosephkamp.github.io/splashery/site/toys/star-systems/</textarea
             ></a>
           </div>
           <ul class="toy-grid">
+            <li class="toy-card" data-labs>
+              <a href="../../toys/solar-orbits/"
+                ><img
+                  src="../../../assets/toys/solar-orbits/thumb.webp"
+                  alt=""
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                /><span class="toy-name"
+                  >The solar system on real orbits <span class="badge">labs</span></span
+                ></a
+              >
+            </li>
             <li class="toy-card">
               <a href="../../toys/solar-system/"
                 ><img
@@ -532,18 +549,6 @@ https://ryanjosephkamp.github.io/splashery/site/toys/star-systems/</textarea
                 /><span class="toy-name"
                   >Pluto, Ceres and Vesta <span class="badge">labs</span></span
                 ></a
-              >
-            </li>
-            <li class="toy-card" data-labs>
-              <a href="../../toys/powers-of-ten/"
-                ><img
-                  src="../../../assets/toys/powers-of-ten/thumb.webp"
-                  alt=""
-                  width="96"
-                  height="96"
-                  loading="lazy"
-                  decoding="async"
-                /><span class="toy-name">Powers of ten <span class="badge">labs</span></span></a
               >
             </li>
           </ul>

@@ -188,13 +188,15 @@
                 style="background-image: url(&quot;../../../assets/toys/lorenz/thumb.webp&quot;)"
               ></span>
               <iframe
-                src="../../play/?toy=lorenz"
+                src="../../play/?toy=lorenz&sound=on"
                 title="Lorenz attractor, live: drag to turn it"
                 loading="eager"
                 allow="fullscreen"
               ></iframe>
             </div>
-            <figcaption>Drag to turn it; tap to play.</figcaption>
+            <figcaption>
+              Drag to turn it; tap to play. The speaker button mutes the sound.
+            </figcaption>
           </figure>
         </div>
         <section class="toy-section" aria-labelledby="h-about">
@@ -210,6 +212,12 @@
             then fades. Two starting points that are almost the same soon follow very different
             paths. This is called chaos, or the butterfly effect, and it is why weather is so hard
             to forecast far ahead.
+          </p>
+          <p class="learn-more">
+            Learn more:
+            <a href="https://en.wikipedia.org/wiki/Lorenz_system" target="_blank" rel="noopener"
+              >Lorenz system on Wikipedia</a
+            >
           </p>
         </section>
 
@@ -314,7 +322,8 @@ https://ryanjosephkamp.github.io/splashery/site/toys/lorenz/</textarea
             </button>
           </div>
           <p class="note">
-            Embeds are silent and turn slowly when idle. Every option is in the
+            Embeds are silent and turn slowly when idle; add <code>&amp;sound=on</code> to the
+            iframe's link for the toy's tap sound, with a mute button. Every option is in the
             <a href="../../share/">embed guide</a>.
           </p>
         </section>
@@ -340,6 +349,42 @@ https://ryanjosephkamp.github.io/splashery/site/toys/lorenz/</textarea
             ></a>
           </div>
           <ul class="toy-grid">
+            <li class="toy-card" data-labs>
+              <a href="../../toys/aizawa-attractor/"
+                ><img
+                  src="../../../assets/toys/aizawa-attractor/thumb.webp"
+                  alt=""
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                /><span class="toy-name">Aizawa attractor <span class="badge">labs</span></span></a
+              >
+            </li>
+            <li class="toy-card" data-labs>
+              <a href="../../toys/rossler-attractor/"
+                ><img
+                  src="../../../assets/toys/rossler-attractor/thumb.webp"
+                  alt=""
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                /><span class="toy-name">Rössler attractor <span class="badge">labs</span></span></a
+              >
+            </li>
+            <li class="toy-card" data-labs>
+              <a href="../../toys/thomas-attractor/"
+                ><img
+                  src="../../../assets/toys/thomas-attractor/thumb.webp"
+                  alt=""
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                /><span class="toy-name">Thomas attractor <span class="badge">labs</span></span></a
+              >
+            </li>
             <li class="toy-card">
               <a href="../../toys/graph-plotter/"
                 ><img
@@ -398,42 +443,6 @@ https://ryanjosephkamp.github.io/splashery/site/toys/lorenz/</textarea
                   loading="lazy"
                   decoding="async"
                 /><span class="toy-name">Gyroid</span></a
-              >
-            </li>
-            <li class="toy-card">
-              <a href="../../toys/hypercube/"
-                ><img
-                  src="../../../assets/toys/hypercube/thumb.webp"
-                  alt=""
-                  width="96"
-                  height="96"
-                  loading="lazy"
-                  decoding="async"
-                /><span class="toy-name">Hypercube</span></a
-              >
-            </li>
-            <li class="toy-card">
-              <a href="../../toys/klein-bottle/"
-                ><img
-                  src="../../../assets/toys/klein-bottle/thumb.webp"
-                  alt=""
-                  width="96"
-                  height="96"
-                  loading="lazy"
-                  decoding="async"
-                /><span class="toy-name">Klein bottle</span></a
-              >
-            </li>
-            <li class="toy-card">
-              <a href="../../toys/mandelbulb/"
-                ><img
-                  src="../../../assets/toys/mandelbulb/thumb.webp"
-                  alt=""
-                  width="96"
-                  height="96"
-                  loading="lazy"
-                  decoding="async"
-                /><span class="toy-name">Mandelbulb</span></a
               >
             </li>
           </ul>

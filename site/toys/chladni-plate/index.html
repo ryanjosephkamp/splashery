@@ -205,12 +205,14 @@
                 "
               ></span>
               <iframe
-                data-src="../../play/?toy=chladni-plate&turntable=off"
+                data-src="../../play/?toy=chladni-plate&turntable=off&sound=on"
                 title="Chladni plate, live: drag to turn it"
                 allow="fullscreen"
               ></iframe>
             </div>
-            <figcaption>Drag to look around it; tap to play.</figcaption>
+            <figcaption>
+              Drag to look around it; tap to play. The speaker button mutes the sound.
+            </figcaption>
           </figure>
         </div>
         <section class="toy-section" aria-labelledby="h-about">
@@ -336,7 +338,8 @@ https://ryanjosephkamp.github.io/splashery/site/toys/chladni-plate/</textarea
             </button>
           </div>
           <p class="note">
-            Embeds are silent and turn slowly when idle. Every option is in the
+            Embeds are silent and turn slowly when idle; add <code>&amp;sound=on</code> to the
+            iframe's link for the toy's tap sound, with a mute button. Every option is in the
             <a href="../../share/">embed guide</a>.
           </p>
         </section>
@@ -362,6 +365,18 @@ https://ryanjosephkamp.github.io/splashery/site/toys/chladni-plate/</textarea
             ></a>
           </div>
           <ul class="toy-grid">
+            <li class="toy-card" data-labs>
+              <a href="../../toys/chladni-cell/"
+                ><img
+                  src="../../../assets/toys/chladni-cell/thumb.webp"
+                  alt=""
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                /><span class="toy-name">Sound in a box <span class="badge">labs</span></span></a
+              >
+            </li>
             <li class="toy-card" data-labs>
               <a href="../../toys/sound-lab/"
                 ><img
@@ -448,18 +463,6 @@ https://ryanjosephkamp.github.io/splashery/site/toys/chladni-plate/</textarea
                 /><span class="toy-name"
                   >How a QR code works <span class="badge">labs</span></span
                 ></a
-              >
-            </li>
-            <li class="toy-card" data-labs>
-              <a href="../../toys/model-splats/"
-                ><img
-                  src="../../../assets/toys/model-splats/thumb.webp"
-                  alt=""
-                  width="96"
-                  height="96"
-                  loading="lazy"
-                  decoding="async"
-                /><span class="toy-name">Model to splats <span class="badge">labs</span></span></a
               >
             </li>
           </ul>

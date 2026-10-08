@@ -117,8 +117,8 @@ failures in a row are real.
 
 ## Integrators
 
-Integrators are Sonnet 5.5 at medium effort, and their session IDs are in WORKSTREAMS.md. A job
-names:
+Integrators are Sonnet 5.5 at high effort (the owner's call of October 8, 2026), and their session
+IDs are in WORKSTREAMS.md. A job names:
 
 - the tree: main at a SHA, plus each PR at its full head SHA, merged `--no-ff` locally and never
   pushed;

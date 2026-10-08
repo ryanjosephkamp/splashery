@@ -1223,6 +1223,16 @@
     "l": 1
   },
   {
+    "t": "The solar system on real orbits",
+    "u": "toys/solar-orbits/",
+    "k": "toy",
+    "s": "Space",
+    "d": "Tap to fly to the next planet. Drag the date; set the speed and the scale in the Toy tab.",
+    "w": "the solar system on real orbits space space solar system orbits orrery planets kepler jpl real date asteroid belt asteroids comets halley moons jupiter saturn true scale solar-orbits",
+    "i": "../assets/toys/solar-orbits/thumb.webp",
+    "l": 1
+  },
+  {
     "t": "Virus",
     "u": "toys/virus/",
     "k": "toy",
@@ -1468,6 +1478,26 @@
     "d": "Tap to send a wave through it. Pick one of eleven crystals in the Toy tab.",
     "w": "crystal lattice atoms atoms salt diamond graphite ice crystal structure atoms chemistry crystal-lattice",
     "i": "../assets/toys/crystal-lattice/thumb.webp"
+  },
+  {
+    "t": "Unit cells",
+    "u": "toys/unit-cells/",
+    "k": "toy",
+    "s": "Atoms",
+    "d": "Tap to step from the unit cell to a block of cells, then to the bonds, and back.",
+    "w": "unit cells atoms atoms crystal lattice unit cell diamond graphite ice copper iron magnesium fcc bcc hcp face-centered body-centered hexagonal close-packed metal bonds thermal motion debye waller chemistry unit-cells",
+    "i": "../assets/toys/unit-cells/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Orbital atlas",
+    "u": "toys/orbital-atlas/",
+    "k": "toy",
+    "s": "Atoms",
+    "d": "Tap to cut the orbital open and see the density inside. Pick any orbital in the Toy tab.",
+    "w": "orbital atlas atoms atoms orbital atlas electron hydrogen wave function quantum s p d f g 4d 5f 5g 6d 7p node phase cut chemistry orbital-atlas",
+    "i": "../assets/toys/orbital-atlas/thumb.webp",
+    "l": 1
   },
   {
     "t": "Molecule viewer",
@@ -2481,6 +2511,76 @@
     "i": "../assets/toys/pythagoras-proof/thumb.webp"
   },
   {
+    "t": "Rössler attractor",
+    "u": "toys/rossler-attractor/",
+    "k": "toy",
+    "s": "Math",
+    "d": "Tap to drop a tracer where you tap. Up to four run at once.",
+    "w": "rossler attractor math maths rossler roessler chaos strange attractor spiral differential equations tracer rossler-attractor",
+    "i": "../assets/toys/rossler-attractor/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Thomas attractor",
+    "u": "toys/thomas-attractor/",
+    "k": "toy",
+    "s": "Math",
+    "d": "Tap to drop a tracer where you tap. Up to four run at once.",
+    "w": "thomas attractor math maths thomas cyclically symmetric chaos strange attractor differential equations tracer thomas-attractor",
+    "i": "../assets/toys/thomas-attractor/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Aizawa attractor",
+    "u": "toys/aizawa-attractor/",
+    "k": "toy",
+    "s": "Math",
+    "d": "Tap to drop a tracer where you tap. Up to four run at once.",
+    "w": "aizawa attractor math maths aizawa langford chaos strange attractor sphere tube differential equations tracer aizawa-attractor",
+    "i": "../assets/toys/aizawa-attractor/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "5-cell",
+    "u": "toys/five-cell/",
+    "k": "toy",
+    "s": "Math",
+    "d": "Tap to roll it through the fourth dimension. Pick its colors in the Toy tab.",
+    "w": "5-cell math maths 5-cell pentachoron 4-simplex 4d four dimensions polytope projection five-cell",
+    "i": "../assets/toys/five-cell/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "16-cell",
+    "u": "toys/sixteen-cell/",
+    "k": "toy",
+    "s": "Math",
+    "d": "Tap to roll it through the fourth dimension. Pick its colors in the Toy tab.",
+    "w": "16-cell math maths 16-cell hexadecachoron cross polytope orthoplex 4d four dimensions projection sixteen-cell",
+    "i": "../assets/toys/sixteen-cell/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "24-cell",
+    "u": "toys/twenty-four-cell/",
+    "k": "toy",
+    "s": "Math",
+    "d": "Tap to roll it through the fourth dimension. Pick its colors in the Toy tab.",
+    "w": "24-cell math maths 24-cell icositetrachoron octaplex 4d four dimensions polytope projection twenty-four-cell",
+    "i": "../assets/toys/twenty-four-cell/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Duoprism",
+    "u": "toys/duoprism/",
+    "k": "toy",
+    "s": "Math",
+    "d": "Tap to roll it through the fourth dimension. Pick the two polygons in the Toy tab.",
+    "w": "duoprism math maths duoprism 4d four dimensions polygon prism polytope projection duoprism",
+    "i": "../assets/toys/duoprism/thumb.webp",
+    "l": 1
+  },
+  {
     "t": "Splat equation",
     "u": "toys/splat-equation/",
     "k": "toy",
@@ -3478,6 +3578,16 @@
     "d": "Tap to bow the plate and watch the sand find its still lines. In the Toy tab, sing to it or play your audio.",
     "w": "chladni plate studio studio chladni plate sand sound vibration frequency resonance mode nodal lines pattern bow physics chladni-plate",
     "i": "../assets/toys/chladni-plate/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Sound in a box",
+    "u": "toys/chladni-cell/",
+    "k": "toy",
+    "s": "Studio",
+    "d": "Tap to switch on the sound: the beads gather on the cell's still surfaces. Tap again to swirl them.",
+    "w": "sound in a box studio studio chladni 3d sound ultrasound standing wave acoustic radiation force beads nodal surface cube flask acoustophoresis physics chladni-cell",
+    "i": "../assets/toys/chladni-cell/thumb.webp",
     "l": 1
   },
   {

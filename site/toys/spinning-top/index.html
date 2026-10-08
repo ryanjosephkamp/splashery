@@ -194,13 +194,15 @@
                 "
               ></span>
               <iframe
-                src="../../play/?toy=spinning-top"
+                src="../../play/?toy=spinning-top&sound=on"
                 title="Spinning top, live: drag to turn it"
                 loading="eager"
                 allow="fullscreen"
               ></iframe>
             </div>
-            <figcaption>Drag to turn it; tap to play.</figcaption>
+            <figcaption>
+              Drag to turn it; tap to play. The speaker button mutes the sound.
+            </figcaption>
           </figure>
         </div>
         <section class="toy-section" aria-labelledby="h-about">
@@ -215,6 +217,12 @@
             This top is always spinning. Tap it to spin it much faster: it tilts and circles more
             widely for a few seconds, then settles back to a steady spin. Pick one of three sets of
             colors in the Toy tab.
+          </p>
+          <p class="learn-more">
+            Learn more:
+            <a href="https://en.wikipedia.org/wiki/Spinning_top" target="_blank" rel="noopener"
+              >Spinning top on Wikipedia</a
+            >
           </p>
         </section>
 
@@ -332,7 +340,8 @@ https://ryanjosephkamp.github.io/splashery/site/toys/spinning-top/</textarea
             </button>
           </div>
           <p class="note">
-            Embeds are silent and turn slowly when idle. Every option is in the
+            Embeds are silent and turn slowly when idle; add <code>&amp;sound=on</code> to the
+            iframe's link for the toy's tap sound, with a mute button. Every option is in the
             <a href="../../share/">embed guide</a>.
           </p>
         </section>

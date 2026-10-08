@@ -187,13 +187,15 @@
                 "
               ></span>
               <iframe
-                src="../../play/?toy=stonehenge"
+                src="../../play/?toy=stonehenge&sound=on"
                 title="Stonehenge, live: drag to turn it"
                 loading="eager"
                 allow="fullscreen"
               ></iframe>
             </div>
-            <figcaption>Drag to turn it; tap to play.</figcaption>
+            <figcaption>
+              Drag to turn it; tap to play. The speaker button mutes the sound.
+            </figcaption>
           </figure>
         </div>
         <section class="toy-section" aria-labelledby="h-about">
@@ -209,6 +211,12 @@
             year, the sun rises in line with its entrance. Tap it: the sun comes up over the far
             bank, framed by the great trilithon, a golden beam shines through the stones, and they
             glow gold.
+          </p>
+          <p class="learn-more">
+            Learn more:
+            <a href="https://en.wikipedia.org/wiki/Stonehenge" target="_blank" rel="noopener"
+              >Stonehenge on Wikipedia</a
+            >
           </p>
         </section>
 
@@ -313,7 +321,8 @@ https://ryanjosephkamp.github.io/splashery/site/toys/stonehenge/</textarea
             </button>
           </div>
           <p class="note">
-            Embeds are silent and turn slowly when idle. Every option is in the
+            Embeds are silent and turn slowly when idle; add <code>&amp;sound=on</code> to the
+            iframe's link for the toy's tap sound, with a mute button. Every option is in the
             <a href="../../share/">embed guide</a>.
           </p>
         </section>
