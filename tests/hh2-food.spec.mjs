@@ -51,10 +51,36 @@ const screen = (page, pts) =>
     });
   }, pts);
 
-// A finger drag through recipe points; `flick` ends it with a quick move
-// up to that point, fed straight to Hands-on (the browser sends a page its
-// moves once a frame, and SwiftShader's frames are slow).
-async function drag(page, points, { steps = 12, hold = false, flick = null } = {}) {
+// A lift and a flick, both fed straight to Hands-on after a real press (the
+// browser hands a page its moves once a frame, and SwiftShader's frames are
+// slow and uneven under load, so real moves would arrive in bunches): along
+// the points, a 30th of a second a step, then a quick move up to `flick`.
+async function flickDrag(page, points, flick, steps = 12) {
+  const px = await screen(page, points);
+  await page.mouse.move(...px[0]);
+  await page.mouse.down();
+  await page.waitForTimeout(300); // (the press's pick is async)
+  await page.evaluate(
+    ([pts, flick, steps]) => {
+      const { player } = window.__splashery;
+      const go = (a, b, n, dt) => {
+        for (let i = 1; i <= n; i++) {
+          const p = a.map((v, k) => v + ((b[k] - v) * i) / n);
+          player.handsOn.moveTo(...player.screenPoint(p));
+          player.update(dt);
+        }
+      };
+      for (let k = 1; k < pts.length; k++) go(pts[k - 1], pts[k], steps, 1 / 30);
+      go(pts[pts.length - 1], flick, 6, 1 / 60);
+    },
+    [points, flick, steps],
+  );
+  await page.mouse.move(...(await screen(page, [flick]))[0]);
+  await page.mouse.up();
+}
+
+// A finger drag through recipe points (`hold`: the finger stays down).
+async function drag(page, points, { steps = 12, hold = false } = {}) {
   const px = await screen(page, points);
   await page.mouse.move(...px[0]);
   await page.mouse.down();
@@ -65,20 +91,6 @@ async function drag(page, points, { steps = 12, hold = false, flick = null } = {
       await page.mouse.move(a[0] + (b[0] - a[0]) * f, a[1] + (b[1] - a[1]) * f);
       await tick(page, 1 / 30);
     }
-  if (flick) {
-    await page.evaluate(
-      ([a, b]) => {
-        const { player } = window.__splashery;
-        for (let i = 1; i <= 6; i++) {
-          const p = a.map((v, k) => v + ((b[k] - v) * i) / 6);
-          player.handsOn.moveTo(...player.screenPoint(p));
-          player.update(1 / 60);
-        }
-      },
-      [points[points.length - 1], flick],
-    );
-    await page.mouse.move(...(await screen(page, [flick]))[0]);
-  }
   if (!hold) await page.mouse.up();
 }
 
@@ -136,7 +148,7 @@ test("pancakes: the top one flicked up flips over onto the stack, and flipped ag
     const top = (await pieces(page)).find((p) => p.name === "top");
     // (Pressed on its front, toward the rim.)
     const at = [top.pos[0], top.pos[1] + 0.07, top.pos[2] + 0.5];
-    await drag(page, [at, [at[0], at[1] + 0.2, at[2]]], { flick: [at[0], at[1] + 1.2, at[2]] }); // prettier-ignore
+    await flickDrag(page, [at, [at[0], at[1] + 0.2, at[2]]], [at[0], at[1] + 1.2, at[2]]);
     await tick(page, 2.5);
     return (await pieces(page)).find((p) => p.name === "top");
   };

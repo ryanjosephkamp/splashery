@@ -46,33 +46,33 @@ Proposals below are suggestions; the owner may change them.
   Cherry blossom, Maple tree, Bonsai, Weeping willow, Sunflower, Rose, Tulips, Daisies, Lotus,
   Toadstool, Fern, Saguaro cactus, Coral reef, Pinecone, Acorns, Succulent, Bamboo, Pebbles, Kelp,
   Storm cloud, Lava lamp, Snow globe, Ice swan, Tornado, Rainbow, Iceberg, Waterfall, Ocean wave,
-  Ice cream, Watermelon, Jelly, Pancakes, Cupcake, Lollipop, Candy cane, Macarons, Donut, Gummy
-  bear, Pretzel, Croissant, Pizza, Burger, Sushi, Taco, Coffee, Apple, Bananas, Orange, Kiwi,
-  Pineapple, Cherries, Grapes, Avocado, Building bricks, Rubber duck, Newton's cradle, Yo-yo, Puzzle
-  cube, Spring toy, Kite, Chess set, Lorenz attractor, Möbius strip, Klein bottle, Menger sponge,
-  Hypercube, Torus knot, Gyroid, Mandelbulb, Seashell spiral, Graph plotter, Surface plotter, Circle
-  and waves, Fourier circles, Pythagoras proof, Rössler attractor, Thomas attractor, Aizawa
-  attractor, 5-cell, 16-cell, 24-cell, Duoprism, Splat equation, Storybook, Music box, Fountain pen,
-  Water bottle, Soda can, Running shoe, Hoodie, Sunglasses, Baseball cap, Sword in the stone,
-  Heraldic shield, Bow and target, Crown, Wizard's orb, Crystal ball, Jellyfish, School of fish,
-  Pufferfish, Nautilus, Snail, Octopus, Sea urchin, Frog, Snowman, Fireworks, Decorated tree, Paper
-  lantern, Diya, Acoustic guitar, Snare drum, Xylophone, Toy piano, Grand piano, Upright piano,
-  Harpsichord, Electronic keyboard, Hot-air balloon, Sports car, Bus, Jet airliner, Sailboat,
-  Submarine, Bicycle, Eiffel Tower, Washington Monument, Pyramids of Giza, Twisting supertall,
-  Statue of Liberty, White House, Leaning Tower of Pisa, Colosseum, Parthenon, Stonehenge, Big Ben,
-  Taj Mahal, Castle, Pagoda, Windmill, Perceptron, Multilayer perceptron, Neural network,
-  Convolutional network, Recurrent network, Transformer, Looped transformer, Diffusion model,
-  Gradient descent, Gaussian splatting, Word vectors, Sorting machine, Half adder, Turing machine,
-  Difference engine, Enigma machine, Bombe, Picture lab, Your book, Photo album, Picture frame, Song
-  landscape, Chladni plate, Room echo meter, Splat mirror, Model to splats, QR code, Photo to 3D,
-  Moving photo to 3D, Video to 3D, Sound lab, Sound recorder, Splat toolkit, Point clouds, Splat
-  field, Light lab, Thermal ellipsoids, Super-resolution microscope, Galaxy in a box, Cryo-EM map,
-  Contour lab, Terrain in a box, Ripple tank, Light bench, Fluid lab, Grand Canyon, Mount St.
-  Helens, The sea floor, Tides at Bar Harbor, Hurricane, Relief map, Living city, Stork migration,
-  Earthquakes, Airport X-ray scanner, How CT works, Walnut CT scan, MRI of a fruit, Electron
-  microscope, Thermal camera, Screen, Shardball, Longtail, Grain Garden, Page Breaker, Strata,
-  Volley Table, Stone Belt, Soft Landing, Night Owl Pinball, Cast a Shadow, Photo Dash, Note Rider,
-  Data in 3D.
+  Ice cream, Watermelon, Birthday cake, Popcorn, Jelly, Pancakes, Cupcake, Lollipop, Candy cane,
+  Macarons, Donut, Gummy bear, Pretzel, Croissant, Pizza, Burger, Sushi, Taco, Boiled egg, Coffee,
+  Apple, Bananas, Orange, Kiwi, Pineapple, Cherries, Grapes, Avocado, Building bricks, Rubber duck,
+  Newton's cradle, Yo-yo, Puzzle cube, Spring toy, Kite, Chess set, Lorenz attractor, Möbius strip,
+  Klein bottle, Menger sponge, Hypercube, Torus knot, Gyroid, Mandelbulb, Seashell spiral, Graph
+  plotter, Surface plotter, Circle and waves, Fourier circles, Pythagoras proof, Rössler attractor,
+  Thomas attractor, Aizawa attractor, 5-cell, 16-cell, 24-cell, Duoprism, Splat equation, Storybook,
+  Music box, Fountain pen, Water bottle, Soda can, Running shoe, Hoodie, Sunglasses, Baseball cap,
+  Sword in the stone, Heraldic shield, Bow and target, Crown, Wizard's orb, Crystal ball, Jellyfish,
+  School of fish, Pufferfish, Nautilus, Snail, Octopus, Sea urchin, Frog, Snowman, Fireworks,
+  Decorated tree, Paper lantern, Diya, Acoustic guitar, Snare drum, Xylophone, Toy piano, Grand
+  piano, Upright piano, Harpsichord, Electronic keyboard, Hot-air balloon, Sports car, Bus, Jet
+  airliner, Sailboat, Submarine, Bicycle, Eiffel Tower, Washington Monument, Pyramids of Giza,
+  Twisting supertall, Statue of Liberty, White House, Leaning Tower of Pisa, Colosseum, Parthenon,
+  Stonehenge, Big Ben, Taj Mahal, Castle, Pagoda, Windmill, Perceptron, Multilayer perceptron,
+  Neural network, Convolutional network, Recurrent network, Transformer, Looped transformer,
+  Diffusion model, Gradient descent, Gaussian splatting, Word vectors, Sorting machine, Half adder,
+  Turing machine, Difference engine, Enigma machine, Bombe, Picture lab, Your book, Photo album,
+  Picture frame, Song landscape, Chladni plate, Room echo meter, Splat mirror, Model to splats, QR
+  code, Photo to 3D, Moving photo to 3D, Video to 3D, Sound lab, Sound recorder, Splat toolkit,
+  Point clouds, Splat field, Light lab, Thermal ellipsoids, Super-resolution microscope, Galaxy in a
+  box, Cryo-EM map, Contour lab, Terrain in a box, Ripple tank, Light bench, Fluid lab, Grand
+  Canyon, Mount St. Helens, The sea floor, Tides at Bar Harbor, Hurricane, Relief map, Living city,
+  Stork migration, Earthquakes, Airport X-ray scanner, How CT works, Walnut CT scan, MRI of a fruit,
+  Electron microscope, Thermal camera, Screen, Shardball, Longtail, Grain Garden, Page Breaker,
+  Strata, Volley Table, Stone Belt, Soft Landing, Night Owl Pinball, Cast a Shadow, Photo Dash, Note
+  Rider, Data in 3D.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
@@ -1868,21 +1868,29 @@ Proposals below are suggestions; the owner may change them.
   - Owner: Really neat; I like that you can melt it. Make melting part of the tap effect.
   - Effect: Tap melts it: drips run down the cone, then it refreezes.
   - Improved: C2: a tap melts it (the scoops slump and drips run down the cone), then it refreezes
-    (about 5 s). The Warmth slider still works.
+    (about 5 s). The Warmth slider still works. Hands-on H2 (Hands-on): Lift the scoops off and
+    stack them back, or pick up the cone and tip it: the top scoop slides off, and tipped further
+    the others follow; reset puts them back.
   - Sound: A slow, thick melt with heavy drops plopping down (no bubbles or drips).
 - **Watermelon** (`watermelon`). Now: tap: Chop into slices. Plan: keep.
   - Owner: Cut it in half or into slices.
   - Effect: Cuts into slices that fan out.
   - Improved: E5: a big knife chops the whole melon five times, right to left, then the six slices
     fan open on their bottoms like an accordion, showing red flesh, pale rind and black seeds on
-    their cut faces, and fold shut (about 3.6 s).
+    their cut faces, and fold shut (about 3.6 s). Hands-on H2 (Hands-on): Pick up the slices one by
+    one and fit them back together: brought close to its place, each one clicks in.
   - Sound: No whoosh at the start, only a soft settle; the chops and the fan are unchanged.
 - **Birthday cake** (`birthday-cake`). Now: tap: Blow out. Plan: keep.
   - Owner: Pretty much perfect.
+  - Improved: Hands-on H2 (Hands-on): Pull a candle out of the cake (it goes out) and push it back
+    into its hole, where it clicks home alight again; a candle set down on top lies on the frosting.
   - Sound: Blown out with a breath, then the last line of "Happy Birthday to You" on the piano with
     its chords (no voices); relighting keeps the match.
 - **Popcorn** (`popcorn`). Now: tap: Pop!. Plan: keep.
   - Owner: Basically perfect.
+  - Improved: Hands-on H2 (Hands-on): Pull the bucket's rim over and it tips on its bottom edge: the
+    loose kernels on top spill out over the rim one after another and bounce on the table; reset
+    stands it up again.
   - Sound: A clean, single dry pop for each kernel as it jumps (14 of them, at the toy's own times,
     from ten different real pops with the pot's rumble and the oil's hiss cut out); no sizzle (Sound
     D, October 6, 2026).
@@ -1894,14 +1902,17 @@ Proposals below are suggestions; the owner may change them.
 - **Pancakes** (`pancakes`). Now: tap: Flip the top one. Plan: keep.
   - Owner: Really neat.
   - Improved: Fix7: the syrup on the top pancake, and the drips down its side, flip with it; the
-    syrup that ran onto the pancakes below stays.
+    syrup that ran onto the pancakes below stays. Hands-on H2 (Hands-on): Lift the pancakes off the
+    stack one by one and stack them back; flick one quickly up and it flips over in the air and
+    lands upside down.
   - Sound: A smooth sizzle in the pan, the flip and the soft slap as it lands (no crackling ticks).
 - **Cupcake** (`cupcake`). Now: tap: Flick the cherry. Plan: keep.
   - Owner: Needs an effect.
   - Effect: A cherry drops on top and sprinkles rain down.
   - Improved: E5: the frosting springs and flicks the cherry up; it tumbles and drops back with a
     plop, the frosting squashes and wobbles, and the sprinkles jump off and rain back down (about
-    2.3 s).
+    2.3 s). Hands-on H2 (Hands-on): Lift the cherry off and put it back (it settles onto its place),
+    or push the soft frosting: it squishes and springs back.
   - Sound: Plop and sprinkle patter.
 - **Lollipop** (`lollipop`). Now: tap: Spin fast. Plan: keep.
   - Owner: Maybe spins really fast.
@@ -1948,7 +1959,9 @@ Proposals below are suggestions; the owner may change them.
   - Improved: E5 (r3, after the owner's notes): the pretzel twists like a knot, all in one piece:
     its two sides wring opposite ways and its loops fold a little towards you, and wherever the rope
     crosses or rests on itself it stays joined; let go, it springs a little past its shape into the
-    opposite twist and wobbles to a stop (about 3.8 s).
+    opposite twist and wobbles to a stop (about 3.8 s). Hands-on H2 (Hands-on): Pull one side of the
+    loop and the soft pretzel stretches after your finger; let go and it springs back into its
+    twist.
   - Sound: Soft dough squished and pulled, with a wet stretching sound.
 - **Croissant** (`croissant`). Now: tap: Open it. Plan: keep.
   - Owner: Must differ from the real croissant.
@@ -1956,7 +1969,8 @@ Proposals below are suggestions; the owner may change them.
   - Improved: E5 (r2, after the owner's note): a tap slices it open along its middle: the top lifts
     and tips back like a lid, showing the soft layered inside, where a pat of butter melts and
     spreads; then the top settles back down (about 3.3 s). Unlike the real croissant scan, which
-    tears in half.
+    tears in half. Hands-on H2 (Hands-on): Lift the top off like a lid and set it back: brought
+    close to its place, it settles home.
   - Sound: The flaky layers shattering softly under the knife, and a smooth butter sizzle (no
     clicks).
 - **Pizza** (`pizza`). Now: tap: Take a slice. Plan: keep.
@@ -1967,7 +1981,9 @@ Proposals below are suggestions; the owner may change them.
 - **Burger** (`burger`). Now: tap: Explode view. Plan: keep.
   - Owner: Perfect.
   - Improved: Fix7: about 160 real sesame seeds on the bun, and no pale crumb showing through the
-    crust close up (the white flash); the lettuce is whole, with no hole in its middle.
+    crust close up (the white flash); the lettuce is whole, with no hole in its middle. Hands-on H2
+    (Hands-on): Lift the layers off one by one and stack them again in any order; take one out from
+    the middle and the ones above it drop onto what is left.
   - Sound: The patty's smooth sizzle, no clicking.
 - **Sushi** (`sushi`). Now: tap: Pick up and dip. Plan: keep.
   - Owner: Chopsticks lifted by an invisible hand pick up the sushi.
@@ -1988,12 +2004,16 @@ Proposals below are suggestions; the owner may change them.
     now (taco-crack.mp3), with the synthesized sound as a fallback.
 - **Boiled egg** (`egg`). Now: tap: Crack. Plan: keep.
   - Owner: Perfect.
+  - Improved: Hands-on H2 (Hands-on): Lift the cracked top off like a cap and set it back on:
+    brought close, it settles home.
   - Sound: Shell tap.
 - **Coffee** (`coffee`). Now: tap: Stir. Plan: keep.
   - Owner: Needs work. The cream on top could spin in a swirl on tap.
   - Effect: Latte art swirl spins; steam curls up.
   - Improved: C2: the latte art twists into a swirl (the middle turns further than the edge) and
-    relaxes back, with a thick curl of steam.
+    relaxes back, with a thick curl of steam. Hands-on H2 (Hands-on): Drag round in the cup to stir:
+    the coffee under your finger turns after it, the rings near it most, so the latte art swirls,
+    then coasts and slows.
   - Sound: A simple "tap tap" of a spoon on the cup.
 - **Apple** (`apple`). Now: tap: Take a bite. Plan: keep.
   - Owner: A bite taken out of it, or a worm comes out.
@@ -2014,7 +2034,8 @@ Proposals below are suggestions; the owner may change them.
     gone, so each banana ends in the same neck and stalk tip, and nothing is left behind as they
     pull apart. Fix7: the three bananas lie side by side, just touching (they used to cross); the
     fruit and the inner peel show only while a banana is peeled, so no pale specks show through the
-    skin.
+    skin. Hands-on H2 (Hands-on): Pull a banana and it bends a little at its neck, then breaks off
+    the bunch whole, skin and all; reset puts it back.
   - Sound: A soft rustle as the bunch comes apart, and a quiet real banana peel as each one peels
     (no zipper) (Sound C, October 2, 2026).
 - **Orange** (`orange`). Now: tap: Open into wedges. Plan: keep.
@@ -2029,14 +2050,17 @@ Proposals below are suggestions; the owner may change them.
   - Owner: Pick something.
   - Effect: Halves open to show the green inside and seeds.
   - Improved: E5: the whole kiwi is cut across the middle; the halves slide apart and turn to show
-    their green faces with the ring of black seeds, then close up again (about 2.8 s).
+    their green faces with the ring of black seeds, then close up again (about 2.8 s). Hands-on H2
+    (Hands-on): Pull the two halves of the whole kiwi apart, each showing its green face, and set
+    them back together: brought close to its place, each clicks home.
   - Sound: Soft slice.
 - **Pineapple** (`pineapple`). Now: tap: Slice into rings. Plan: keep.
   - Owner: Maybe it gets cut.
   - Effect: Cut into rings that stack.
   - Improved: E5: four chops, top first: with each, everything above lifts and leans towards you,
     until five rings stand apart in a leaning stack showing their golden faces and pale cores; then
-    they drop back onto each other (about 3 s).
+    they drop back onto each other (about 3 s). Hands-on H2 (Hands-on): Lift the rings off one by
+    one, the crown with the top one, and stack them as you like.
   - Sound: Chop.
 - **Cherries** (`cherries`). Now: tap: Swing. Plan: keep.
   - Owner: No idea.
@@ -2055,13 +2079,17 @@ Proposals below are suggestions; the owner may change them.
   - Effect: Grapes drop off the stem and bounce, then return.
   - Improved: E5: ten grapes on the front come off one after another, drop and bounce on the table
     and roll a little, each on its own path, then hop back up to their places one by one (about 3.9
-    s). Unlike the grape scan, whose peel curls back.
+    s). Unlike the grape scan, whose peel curls back. Hands-on H2 (Hands-on): Pull a grape on the
+    front and it snaps off its stalk into your hand; let go and it drops, bounces and rolls; reset
+    puts them all back.
   - Sound: Plop-plop cascade.
 - **Avocado** (`avocado`). Now: tap: Pop the stone. Plan: keep.
   - Owner: Pick something.
   - Effect: Splits open and the stone pops out and back.
   - Improved: E5: the stone pops out of its half, flies over and drops into the empty half with a
-    thock, rocking it, then pops back home and the first half rocks (about 3.1 s).
+    thock, rocking it, then pops back home and the first half rocks (about 3.1 s). Hands-on H2
+    (Hands-on): Lift the stone out of its half and put it back (brought close, it settles into its
+    hollow), or pick up the empty half.
   - Sound: Thock.
 
 ## Toys (16)
