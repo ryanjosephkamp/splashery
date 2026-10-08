@@ -36,6 +36,7 @@ export function ui2On() {
   return true;
 }
 import { pickKernel } from "./kernels.js"; // Lab
+import { photoUniforms } from "./photo-splats.js"; // lane Photo fidelity
 import { pickSharpness, sharpOff } from "./sharpness.js"; // Sharpness
 import { createScene, THEMES, normalizeFigures } from "./state.js";
 import { mulberry32, mixSeed, hash32 } from "./noise.js";
@@ -531,7 +532,12 @@ export class Player {
     this.disposeProcedural();
     // Lab: a recipe may bring its own GPU program for its splats (a field).
     const modifier = labsOn() ? recipe.gpuField?.(options, ctx.transform) || null : null;
-    this.stage.setToy({ resource: container, owned: true, kit: true, modifier });
+    // Lane Photo fidelity: a recipe with a photo has splats that take their colors from it.
+    const photo =
+      !!recipe.photo && !modifier && (recipe.photo.on ? !!recipe.photo.on(options) : true);
+    if (photo) this.stage.setPhoto(true);
+    this.stage.setToy({ resource: container, owned: true, kit: true, modifier, photo });
+    this.photo = photo ? { recipe, version: null } : null;
     this.proc = { ctx, container, clay: clay.slice(), kit: true };
     this.motion.setToy(recipe, ctx, this.scene.motion?.controls || {});
     this.screen = null;
@@ -1380,6 +1386,29 @@ export class Player {
     this.emit("action", { ...next, echo: true });
   }
 
+  // Lane Photo fidelity: a photo toy's picture (uploaded when its version changes) and where it lies
+  // (src/photo-splats.js). The recipe's photo: { rect() ([x0, y0, x1, y1] in its coordinates, y1 the
+  // top), version(t), source(t) (a canvas, an image or a video), on(options) (optional: whether this
+  // build uses it) }.
+  photoFrame(info, u) {
+    const ph = this.photo;
+    if (!ph || ph.recipe !== info.recipe || !this.stage.toy?.photo) return;
+    const spec = ph.recipe.photo;
+    const v = spec.version(this.time);
+    if (v !== ph.version) {
+      const src = spec.source(this.time);
+      if (src) {
+        this.stage.setPhotoSource(src);
+        ph.version = v;
+      }
+    }
+    const [x0, y0, x1, y1] = spec.rect();
+    const a = this.fromRecipe([x0, y1, 0]);
+    const b = this.fromRecipe([x1, y0, 0]);
+    const q = u.uSpBodyQ && (u.uSpBodyQ[3] || u.uSpBodyQ[0] || u.uSpBodyQ[1] || u.uSpBodyQ[2]) ? u.uSpBodyQ : [0, 0, 0, 1]; // prettier-ignore
+    this.stage.setPhotoUniforms(photoUniforms({ x0: a[0], x1: b[0], y0: b[1], y1: a[1] }, q, u.uSpClock?.[2] ?? 1)); // prettier-ignore
+  }
+
   // A world point in the current toy's recipe coordinates: a kit toy's
   // build space (before it was centred and scaled), else the world.
   toRecipe(world) {
@@ -1520,6 +1549,7 @@ export class Player {
     if (info.kind === "kit") u["uSpLeaf[0]"] = this.leafUniform(); // Pictures
     this.stage.setUniforms(u);
     this.chunks?.update(this.motion.out); // lane Powers of ten
+    this.photoFrame(info, u); // lane Photo fidelity
     // Redraw a live screen when the recipe says its picture changed.
     const scr = this.screen;
     if (scr && scr.recipe === info.recipe) {
