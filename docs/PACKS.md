@@ -727,6 +727,12 @@ spins it on the fingertip; the basketball) and `warm: [first, top]` (a squash ba
 throw). Lift and the curve are set to show at Hands-on's slow throws, in the real direction and
 order. Pieces take a material too: `material` in a piece's def.
 
+**Room to roll** (`hands.area`, a whole toy with a material; lane Hands-on H1, October 8, 2026): the
+walls of the play area move out to `area` toy radii from home, as for wheels, so a ball rolls, a
+puck slides and a marble runs on (the view drifts after it). Without it the walls stay where Level 1
+puts them, just past the toy. A material's `nose` turns it only while it flies, near critically
+damped, so a shuttlecock flips cork first once and lies still where it lands.
+
 **A water line** (`hands.water`): the toy floats on a round pool, bobs and settles; a boat (any
 non-round toy) rocks and rights itself, since each point under water lifts where it is. By default
 the line sits where the toy, at home, floats as it stands (from its density), so nothing moves until

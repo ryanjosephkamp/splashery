@@ -115,7 +115,7 @@ export function applyMaterial(body, mat, floor) {
 // The air on one body, for one substep h: quadratic drag, the Magnus curve
 // of a spin, a flat flier's lift and a nose that turns into the wind. G is
 // the world's gravity (toy units), R the toy's radius (the body's units).
-export function airForce(b, mat, G, R, h) {
+export function airForce(b, mat, G, R, h, touching = false) {
   if (b.fixed || b.held) return;
   const v = b.vel;
   const sp = Math.hypot(v[0], v[1], v[2]);
@@ -157,14 +157,21 @@ export function airForce(b, mat, G, R, h) {
       }
     }
   }
-  if (mat.nose) {
+  if (mat.nose && !touching) {
     // A weathervane: the nose turns into its flight (a shuttlecock flips
-    // cork first), more strongly the faster it goes.
+    // cork first), more strongly the faster it goes; only in the air (on
+    // the ground it would flip over and over as it slides).
     const n = rotate(b.q, mat.nose);
     const d = [v[0] / sp, v[1] / sp, v[2] / sp];
     const t = [n[1] * d[2] - n[2] * d[1], n[2] * d[0] - n[0] * d[2], n[0] * d[1] - n[1] * d[0]];
-    const g = (mat.vane ?? 10) * Math.min(1, sp / (0.5 * R)) * h;
-    for (let i = 0; i < 3; i++) w[i] = (w[i] + t[i] * g * 20) * Math.exp(-6 * Math.min(1, sp / (0.5 * R)) * h); // prettier-ignore
+    // Its swing round is damped near critically (the air's damping grows
+    // with the vane's pull), so it turns nose first without swinging past
+    // over and over; its spin about the nose itself lasts.
+    const k = (mat.vane ?? 10) * 20 * Math.min(1, sp / (0.5 * R));
+    const s = n[0] * w[0] + n[1] * w[1] + n[2] * w[2];
+    const keep = Math.exp(-1.6 * Math.sqrt(k) * h);
+    const axial = Math.exp(-Math.min(1, sp / (0.5 * R)) * h);
+    for (let i = 0; i < 3; i++) w[i] = n[i] * s * axial + (w[i] - n[i] * s + t[i] * k * h) * keep;
   }
   for (let i = 0; i < 3; i++) v[i] += dv[i];
 }
