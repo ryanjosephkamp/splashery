@@ -128,11 +128,10 @@ test.describe("Photo to 3D", () => {
     await page.evaluate(() => window.__splashery.app.setToyOptions({ depth: 1 }));
     await page.waitForFunction(() => !window.__splashery.player.loading && window.__psv.state().on, null, { timeout: 60_000 }); // prettier-ignore
     expect(await splatsOn(page)).toBe(false);
-    // Nothing new in the scene.
+    // Nothing new in the scene but the view itself (round 2: saved scenes remember it).
     const options = await page.evaluate(() => Object.keys(window.__splashery.player.scene.toy.options || {})); // prettier-ignore
-    expect(options.every((k) => ["source", "depth", "original", "photoName"].includes(k))).toBe(
-      true,
-    );
+    const known = ["source", "depth", "original", "photoName", "view"];
+    expect(options.every((k) => known.includes(k))).toBe(true);
     // Back to the splats.
     await page.evaluate(() => document.querySelector("#psv-splats").click());
     await page.waitForTimeout(300);
