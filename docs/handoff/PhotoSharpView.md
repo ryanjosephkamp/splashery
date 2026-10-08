@@ -114,6 +114,23 @@ Photo to 3D and Moving photo to 3D"; merge it first). Sharp picture is the defau
   they come back). Saving the toy as a splat file is unaffected (it reads the splats, not the
   screen). Both toys' About lines now describe the view (`src/toy-help.js`).
 
+- October 8, 2026, 16:40 UTC, round 2 (branch `claude/lane-photo-sharp-view-2`, PR "Phase Photo
+  sharp view r2: saved view and the photo views guide"; Opus 5.5, high effort), on the owner's calls
+  "I want saved scenes to remember sharp/splat" and "We will need to properly document this
+  difference and our implementation":
+  - The view is saved: the switch writes the toy option `view` (`"sharp"` or `"splats"`) into the
+    scene without rebuilding the toy, and each build reads it back (`fromScene`). Splats' Detail was
+    already the recipe option `detail`. A scene without `view` (all of them before) opens in Sharp
+    picture. All in `src/packs/photo-sharp.js`, so no engine PR and no change to the toys' files.
+    Documented in `docs/SCENE-SCHEMA.md`; tests in `tests/psv2.spec.mjs`.
+  - `docs/PHOTO-VIEWS.md`: the guide to both views, linked from README.md. Its measurements were
+    taken again on main with Detail Fine (`tools/psv-legibility.mjs --detail=`).
+  - 17:58 UTC: PR #422 open (draft), head 2be1b2f5. Measured on main: face on, Splats on Fine read
+    text as well as Sharp picture (92 to 100% of lines apart in both); Sharp picture draws frames 2
+    to 6 times faster in SwiftShader. Clip pair `psv2-saved` / `psv2-reopened` on Effect review
+    page 2. psv, psv2, p3d, smd-moving, live3, help and hta pass (one round 1 psv check now allows
+    `view`).
+
 ### Measurements (October 8, 2026)
 
 `tools/psv-legibility.mjs`, the text-scroll still at 10 s, 390 x 844 at device scale 3, mid profile,

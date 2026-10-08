@@ -6,8 +6,13 @@
 //
 // Each toy calls three things (its one small hook): sharpEntry(id) in its input panel's live list
 // (the Splats / Sharp switch), sharpPhoto(...) or sharpClip(...) at the end of its build, and
-// sharpDrive(out) at the end of its drive. The choice lives only while the page is open: nothing
-// new goes into scenes or links, so an old scene or link opens in Sharp picture too.
+// sharpDrive(out) at the end of its drive.
+//
+// The choice is saved with the scene (the owner's call of October 8, 2026: "I want saved scenes to
+// remember sharp/splat"): the switch writes the toy option `view` ("sharp" or "splats") into the
+// scene, so a saved scene and a #s= link carry it, and each build reads it back. A scene without
+// the key (every scene saved before) opens in Sharp picture. It is stored as the scene's toy option
+// directly, so picking it doesn't rebuild the toy (docs/SCENE-SCHEMA.md, docs/PHOTO-VIEWS.md).
 //
 // Where the splats must stay, they show instead, and the switch and the status line say so: while
 // a tool that works on splats is picked (Poke, Paint, Magnet, Clay), in Hands-on, and while a Look
@@ -45,11 +50,25 @@ export const sharpView = (toy) => VIEW[toy] || "splats";
 // Picks the view for a toy ("splats" or "sharp").
 export function setSharpView(toy, view) {
   VIEW[toy] = view === "sharp" ? "sharp" : "splats";
+  // (into the scene, so saving it or copying its link keeps the choice)
+  const t = player()?.scene?.toy;
+  if (t?.kind === "builtin" && t.id === toy) t.options = { ...(t.options || {}), view: VIEW[toy] };
   for (const fn of LISTENERS) fn();
   sync();
   player()?.stage?.requestRender?.();
 }
 const LISTENERS = new Set();
+
+// The scene's saved choice, at each build: "splats" for Splats, anything else (or no key, as in
+// every scene saved before October 8, 2026) for Sharp picture.
+function fromScene(toy) {
+  const t = player()?.scene?.toy;
+  if (!t || t.id !== toy) return;
+  const v = t.options?.view === "splats" ? "splats" : "sharp";
+  if (VIEW[toy] === v) return;
+  VIEW[toy] = v;
+  for (const fn of LISTENERS) fn();
+}
 
 // The switch, for the toy's input panel (`input.live`).
 export function sharpEntry(toy) {
@@ -102,12 +121,14 @@ export function sharpEntry(toy) {
 // Photo to 3D's build: the photo, the splats' own depth (0..1 at gx x gy) and its relief.
 export function sharpPhoto({ photo, depth, gx, gy, aspect, relief, uid }) {
   S.src = { toy: "photo-3d", kind: "photo", photo, depth, gx, gy, aspect, relief, uid };
+  fromScene("photo-3d");
   S.key = "";
 }
 
 // Moving photo to 3D's build: the toy's state (MOVING), the picture's size and its lift.
 export function sharpClip(moving, { width, height, full }) {
   S.src = { toy: "moving-photo-3d", kind: "clip", moving, width, height, full, clip: moving.clip };
+  fromScene("moving-photo-3d");
   S.key = "";
   S.frame = -1;
 }
