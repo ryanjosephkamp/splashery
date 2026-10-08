@@ -154,8 +154,24 @@ function tapBox() {
   return { min: [-s.width / 2, -s.height / 2, -0.05], max: [s.width / 2, s.height / 2, s.full + 0.05] }; // prettier-ignore
 }
 
+// The status line under the toy says what is on screen: "Sharp picture" while the relief shows
+// (src/app.js asks player.statusLabel), the splat count otherwise.
+function status(on) {
+  const pl = player();
+  if (!pl) return;
+  if (!pl.psvLabel) {
+    pl.psvLabel = true;
+    const before = pl.statusLabel;
+    pl.statusLabel = (info) => (S.labelOn ? "Sharp picture" : before?.(info));
+  }
+  if (S.labelOn === on) return;
+  S.labelOn = on;
+  globalThis.window?.__splashery?.app?.updateStatus?.();
+}
+
 function hide() {
   if (S.mesh) S.mesh.show(false);
+  status(false);
   splats(true);
   if (S.video && !S.video.paused) S.video.pause();
 }
@@ -200,6 +216,7 @@ export function sync() {
   follow();
   m.show(true);
   if (m.visible) splats(false);
+  status(m.visible);
 }
 
 // The relief's grid: as fine as the depth, within the device's budget.
@@ -327,7 +344,9 @@ function shape(m, src, pl) {
       layers: 0,
       cut: CLIP_CUT,
       // the toy's thin dark frame (its splats hide with the rest): 0.05 wide, behind the picture
-      frame: { across: 0.05 / src.width, down: 0.05 / src.height, z: -0.03 },
+      // (at the depth of the picture's border, so the two meet with no gap and the edge stays
+      // straight however the depth runs along it)
+      frame: { across: 0.05 / src.width, down: 0.05 / src.height, z: 0.002 },
     });
   }
 }

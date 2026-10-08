@@ -35,7 +35,7 @@ uniform vec4 uTf;     // the recipe's fit: center (xyz), scale
 uniform vec4 uToy;    // the toy's center (toy coordinates)
 uniform vec4 uBodyQ;  // the body's turn (quaternion)
 uniform vec4 uBodyT;  // the body's offset
-uniform vec4 uFrame;  // the dark frame (mode 2): its width across and down (picture units), its z
+uniform vec4 uFrame;  // the dark frame (mode 2): its width across and down (picture units), z offset
 varying vec2 vUv;
 varying float vD;
 varying float vEdge;
@@ -46,6 +46,22 @@ vec4 psvPlace(vec3 p) {
   p = uToy.xyz + psvRot(q, p - uToy.xyz) + uBodyT.xyz;
   return matrix_viewProjection * matrix_model * vec4(p, 1.0);
 }
+// The depth softened over about a twelfth of the picture: the picture's border and its frame take
+// it, so the edge runs straight however noisy the depth is there.
+float psvSoft(vec2 p) {
+  vec2 st = vec2(0.02 * uGrid.y / uGrid.x, 0.02);
+  float s = 0.0;
+  for (int j = -2; j <= 2; j++)
+    for (int i = -2; i <= 2; i++) s += textureLod(uDepth, clamp(p + vec2(float(i), float(j)) * st, 0.0, 1.0), 0.0).r;
+  return s / 25.0;
+}
+// Within six cells of the border, the depth eases into the softened one (all of it within two).
+float psvRim(vec2 uv, float d) {
+  vec2 r = min(uv, 1.0 - uv) * uGrid.zw;
+  float rd = min(r.x, r.y);
+  if (rd >= 6.0) return d;
+  return mix(psvSoft(uv), d, smoothstep(2.0, 6.0, rd));
+}
 void main(void) {
   float back = uLayer.z;
   if (back > 1.5) {
@@ -53,7 +69,9 @@ void main(void) {
     vec2 f = aPosition.xy;
     f = mix(f, -uFrame.xy, step(f, vec2(-0.5)));
     f = mix(f, 1.0 + uFrame.xy, step(vec2(1.5), f));
-    gl_Position = psvPlace(vec3((f.x - 0.5) * uGrid.x, (0.5 - f.y) * uGrid.y, uFrame.z));
+    // (at the depth of the picture's border beside it, so frame and picture meet with no gap)
+    float fd = psvSoft(clamp(f, 0.0, 1.0));
+    gl_Position = psvPlace(vec3((f.x - 0.5) * uGrid.x, (0.5 - f.y) * uGrid.y, uLift.x * (fd - uLift.y) + uFrame.z));
     vUv = vec2(0.0);
     vD = 0.0;
     vEdge = 0.0;
@@ -79,7 +97,7 @@ void main(void) {
   float m0 = i0 < 0.5 ? uMorph.x : (i0 < 1.5 ? uMorph.y : uMorph.z);
   float m1 = i0 < 0.5 ? uMorph.y : (i0 < 1.5 ? uMorph.z : uMorph.w);
   float m = mix(m0, m1, f);
-  float z = uLift.x * (d - uLift.y);
+  float z = uLift.x * ((back > 0.5 ? d : psvRim(uv, d)) - uLift.y);
   if (back > 0.5) z = mix(z + uLift.z, uLift.w, m);
   else z = mix(z, 0.0, m);
   z += (b - 1.5) * uLayer.x;
@@ -107,7 +125,9 @@ varying vec2 vUv;
 varying float vD;
 varying float vEdge;
 void main(void) {
-  if (uLayer.z < 0.5) {
+  // (nothing is cut within a cell and a half of the picture's border, so its edge stays straight)
+  vec2 rim = min(vUv, 1.0 - vUv) * uGrid.zw;
+  if (uLayer.z < 0.5 && min(rim.x, rim.y) > 1.5) {
     if (vEdge > 0.001) discard;
     vec2 ux = dFdx(vUv);
     vec2 uy = dFdy(vUv);
@@ -151,6 +171,22 @@ fn psvPlace(p0: vec3f) -> vec4f {
   p = uniform.uToy.xyz + psvRot(q, p - uniform.uToy.xyz) + uniform.uBodyT.xyz;
   return uniform.matrix_viewProjection * uniform.matrix_model * vec4f(p, 1.0);
 }
+fn psvSoft(p: vec2f) -> f32 {
+  let st = vec2f(0.02 * uniform.uGrid.y / uniform.uGrid.x, 0.02);
+  var s = 0.0;
+  for (var j: i32 = -2; j <= 2; j++) {
+    for (var i: i32 = -2; i <= 2; i++) {
+      s += textureSampleLevel(uDepth, uDepthSampler, clamp(p + vec2f(f32(i), f32(j)) * st, vec2f(0.0), vec2f(1.0)), 0.0).r;
+    }
+  }
+  return s / 25.0;
+}
+fn psvRim(uv: vec2f, d: f32) -> f32 {
+  let r = min(uv, 1.0 - uv) * uniform.uGrid.zw;
+  let rd = min(r.x, r.y);
+  if (rd >= 6.0) { return d; }
+  return mix(psvSoft(uv), d, smoothstep(2.0, 6.0, rd));
+}
 @vertex fn vertexMain(input: VertexInput) -> VertexOutput {
   var output: VertexOutput;
   let back = uniform.uLayer.z;
@@ -158,7 +194,8 @@ fn psvPlace(p0: vec3f) -> vec4f {
     var f = input.aPosition.xy;
     f = mix(f, -uniform.uFrame.xy, step(f, vec2f(-0.5)));
     f = mix(f, 1.0 + uniform.uFrame.xy, step(vec2f(1.5), f));
-    output.position = psvPlace(vec3f((f.x - 0.5) * uniform.uGrid.x, (0.5 - f.y) * uniform.uGrid.y, uniform.uFrame.z));
+    let fd = psvSoft(clamp(f, vec2f(0.0), vec2f(1.0)));
+    output.position = psvPlace(vec3f((f.x - 0.5) * uniform.uGrid.x, (0.5 - f.y) * uniform.uGrid.y, uniform.uLift.x * (fd - uniform.uLift.y) + uniform.uFrame.z));
     output.vUv = vec2f(0.0);
     output.vD = 0.0;
     output.vEdge = 0.0;
@@ -189,7 +226,9 @@ fn psvPlace(p0: vec3f) -> vec4f {
   let m0 = select(select(mo.z, mo.y, i0 < 1.5), mo.x, i0 < 0.5);
   let m1 = select(select(mo.w, mo.z, i0 < 1.5), mo.y, i0 < 0.5);
   let m = mix(m0, m1, f);
-  var z = uniform.uLift.x * (d - uniform.uLift.y);
+  var dz = d;
+  if (back < 0.5) { dz = psvRim(uv, d); }
+  var z = uniform.uLift.x * (dz - uniform.uLift.y);
   if (back > 0.5) { z = mix(z + uniform.uLift.z, uniform.uLift.w, m); } else { z = mix(z, 0.0, m); }
   z += (b - 1.5) * uniform.uLayer.x;
   output.position = psvPlace(vec3f((uv.x - 0.5) * uniform.uGrid.x, (0.5 - uv.y) * uniform.uGrid.y, z));
@@ -225,7 +264,8 @@ varying vEdge: f32;
   let dx = dpdx(input.vD);
   let dy = dpdy(input.vD);
   let c = textureSample(uColor, uColorSampler, input.vUv);
-  if (uniform.uLayer.z < 0.5) {
+  let rim = min(input.vUv, 1.0 - input.vUv) * uniform.uGrid.zw;
+  if (uniform.uLayer.z < 0.5 && min(rim.x, rim.y) > 1.5) {
     if (input.vEdge > 0.001) { discard; }
     let det = ux.x * uy.y - ux.y * uy.x;
     if (abs(det) > 1e-18) {
@@ -269,21 +309,35 @@ function gridMesh(device, cols, rows) {
   return { mesh, bytes: pos.byteLength + idx.byteLength };
 }
 
-// A thin dark frame round the picture, as four strips; a corner at -1 or 2 lies the frame's width
+// A thin dark frame round the picture, as four strips cut into short pieces along their length
+// (so it follows the depth of the picture's border); a corner at -1 or 2 lies the frame's width
 // outside the picture (the shader's mode 2).
-function frameMesh(device) {
-  const quads = [
-    [-1, -1, 2, 0],
-    [-1, 1, 2, 2],
-    [-1, 0, 0, 1],
-    [1, 0, 2, 1],
+function frameMesh(device, n = 96) {
+  const along = [0];
+  for (let k = 1; k <= n; k++) along.push(k / n);
+  const strips = [
+    [
+      [-1, ...along, 2],
+      [-1, 0],
+    ],
+    [
+      [-1, ...along, 2],
+      [1, 2],
+    ],
+    [[-1, 0], along],
+    [[1, 2], along],
   ];
   const pos = [];
   const idx = [];
-  for (const [u0, v0, u1, v1] of quads) {
+  for (const [us, vs] of strips) {
     const o = pos.length / 3;
-    pos.push(u0, v0, 0, u1, v0, 0, u0, v1, 0, u1, v1, 0);
-    idx.push(o, o + 2, o + 1, o + 1, o + 2, o + 3);
+    for (const v of vs) for (const u of us) pos.push(u, v, 0);
+    for (let j = 0; j + 1 < vs.length; j++)
+      for (let i = 0; i + 1 < us.length; i++) {
+        const a = o + j * us.length + i;
+        const c = a + us.length;
+        idx.push(a, c, a + 1, a + 1, c, c + 1);
+      }
   }
   const mesh = new pc.Mesh(device);
   mesh.setPositions(new Float32Array(pos), 3);

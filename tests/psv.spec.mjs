@@ -159,6 +159,9 @@ test.describe("Moving photo to 3D", () => {
     });
     expect(s.depth).toEqual([clip.w, clip.h]);
     expect(await splatsOn(page)).toBe(false);
+    // the status line says what is on screen
+    await expect(page.locator("#toy-status")).toContainText("Sharp picture");
+    await expect(page.locator("#toy-status")).not.toContainText("splats");
     // pause, then scrub: the video copy goes where the clip is
     await page.evaluate(() => window.__splashery.app.act());
     await page.evaluate(async () =>
@@ -174,6 +177,7 @@ test.describe("Moving photo to 3D", () => {
     await page.waitForTimeout(300);
     expect((await state(page)).on).toBe(false);
     expect(await splatsOn(page)).toBe(true);
+    await expect(page.locator("#toy-status")).toContainText("splats");
     expect(errors).toEqual([]);
   });
 });
