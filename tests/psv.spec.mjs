@@ -128,11 +128,10 @@ test.describe("Photo to 3D", () => {
     await page.evaluate(() => window.__splashery.app.setToyOptions({ depth: 1 }));
     await page.waitForFunction(() => !window.__splashery.player.loading && window.__psv.state().on, null, { timeout: 60_000 }); // prettier-ignore
     expect(await splatsOn(page)).toBe(false);
-    // Nothing new in the scene.
+    // Nothing new in the scene but the view itself (round 2: saved scenes remember it).
     const options = await page.evaluate(() => Object.keys(window.__splashery.player.scene.toy.options || {})); // prettier-ignore
-    expect(options.every((k) => ["source", "depth", "original", "photoName"].includes(k))).toBe(
-      true,
-    );
+    const known = ["source", "depth", "original", "photoName", "view"];
+    expect(options.every((k) => known.includes(k))).toBe(true);
     // Back to the splats.
     await page.evaluate(() => document.querySelector("#psv-splats").click());
     await page.waitForTimeout(300);
@@ -145,10 +144,10 @@ test.describe("Photo to 3D", () => {
   test("another toy takes the relief away", async ({ page }) => {
     const errors = await open(page, "photo-3d", test);
     await page.waitForFunction(() => window.__psv.state().on, null, { timeout: 30_000 });
-    // (Moving photo to 3D keeps its own choice: Splats, picked for this test)
-    await page.evaluate(() => window.__psv.set("moving-photo-3d", "splats"));
     await page.evaluate(() => window.__splashery.app.chooseToy("moving-photo-3d"));
     await page.waitForFunction(() => !window.__splashery.player.loading && window.__splashery.player.proc?.ctx?.kit?.data?.moving, null, { timeout: 120_000 }); // prettier-ignore
+    // (Moving photo to 3D in Splats, picked here: no relief at all may stay on screen)
+    await page.evaluate(() => window.__psv.set("moving-photo-3d", "splats"));
     await page.waitForTimeout(500);
     expect((await state(page)).on).toBe(false);
     expect(await splatsOn(page)).toBe(true);

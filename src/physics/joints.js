@@ -377,8 +377,9 @@ export class Joints {
   // It snaps off: a loose body now, held by the finger the usual way.
   snap(j, h, f, dir) {
     const hands = this.hands;
-    j.broken = true;
+    // (Its pose before it is marked broken: bent, and at its seat; lane Hands-on H3.)
     const T = this.full(j);
+    j.broken = true;
     j.tug = null;
     const b = j.body;
     // Its pose as it was when it snapped (bent), then free.

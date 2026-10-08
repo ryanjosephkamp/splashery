@@ -4,6 +4,7 @@
 // a thin toy's splats still takes it with the ✋ switch on.
 
 import { test, expect } from "@playwright/test";
+import { canPlay } from "../src/physics/hands-on.js";
 
 const APP = "/?renderer=webgl2&adapt=off&profile=mid";
 
@@ -99,7 +100,9 @@ async function snapOff(page, a, far) {
   return j;
 }
 
-test.afterEach(async ({ page }) => unpatch(page));
+test.afterEach(async ({ page }) => {
+  if (page.url().startsWith("http")) await unpatch(page);
+});
 
 test("reseat: a snapped-off piece brought back clicks home and holds fast again", async ({
   page,
@@ -146,6 +149,27 @@ test("reseat: a second seat takes it, and ↺ brings it home from there", async 
   for (let i = 0; i < 3; i++) expect(now.pos[i]).toBeCloseTo(seat.pos[i], 4);
   // It stays there (held fast, not falling).
   await tick(page, 1.5);
+  now = (await joints(page)).find((x) => x.name === j.name);
+  for (let i = 0; i < 3; i++) expect(now.pos[i]).toBeCloseTo(seat.pos[i], 4);
+  // Pulled off the seat again, it starts from there (not from home).
+  const g = a.map((v, i) => v + seat.pos[i] - now.home[i]); // the same grip, at the seat
+  const away = [g[0] - 0.9, g[1] + 0.2, g[2] + 0.3];
+  const [pg, pa] = await screen(page, [g, away]);
+  await page.mouse.move(...pg);
+  await page.mouse.down();
+  let at = null;
+  for (let i = 1; i <= 30 && !at; i++) {
+    await page.mouse.move(pg[0] + ((pa[0] - pg[0]) * i) / 30, pg[1] + ((pa[1] - pg[1]) * i) / 30);
+    await tick(page, 1 / 60);
+    now = (await joints(page)).find((x) => x.name === j.name);
+    if (now.broken) at = now.pos;
+  }
+  expect(at).toBeTruthy();
+  // (The frame it snaps, it is still by the seat.)
+  expect(Math.hypot(...at.map((v, i) => v - seat.pos[i]))).toBeLessThan(0.3);
+  await drag(page, [away, over, seat.pos], { held: true, steps: 20 });
+  await page.mouse.up();
+  await tick(page, 1);
   now = (await joints(page)).find((x) => x.name === j.name);
   for (let i = 0; i < 3; i++) expect(now.pos[i]).toBeCloseTo(seat.pos[i], 4);
   // ↺: home from the seat, along the way.
@@ -245,4 +269,13 @@ test("a shake with fire: false only reads as info.hands.shake (no tap fires)", a
   });
   expect(r.felt).toBeGreaterThan(0.3);
   expect(r.fired).toBe(0);
+});
+
+test("a picture toy stays out of Hands-on unless it asks for joints", () => {
+  const frame = { pictures: {}, turntable: false };
+  expect(canPlay({ recipe: frame })).toBe(false);
+  expect(canPlay({ recipe: { ...frame, hands: { joints: [] } } })).toBe(true);
+  expect(canPlay({ recipe: { ...frame, hands: { joints: [] }, handsOn: false } })).toBe(false);
+  expect(canPlay({ recipe: { turntable: false } })).toBe(false);
+  expect(canPlay({ recipe: {} })).toBe(true);
 });

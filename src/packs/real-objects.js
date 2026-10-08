@@ -9,6 +9,7 @@
 // tools/models.json.
 
 import { clamp, smoothstep, mix, quatAxisAngle, quatFromTo, quatMul, quatRotate } from "../kit.js";
+import { surfacePoints } from "../physics/world.js"; // lane Hands-on H3
 
 // ---- The baked models ------------------------------------------------------------------------
 
@@ -793,8 +794,45 @@ function fpPen(s) {
   return { q, tip, u };
 }
 
+// Lane Hands-on H3: the pen's cap by hand, as a loose piece (an ellipsoid
+// about its middle), and the pen lying under it as ground.
+const FP_CAP = { type: "ellipsoid", r: [0.25, 0.075, 0.075] };
+const FP_BODY = { type: "box", half: [0.97, 0.06, 0.06] };
+
 const FOUNTAIN_PEN = {
   alive: false,
+  // Hands-on (lane Hands-on H3): pull the cap off the nib (it holds, then
+  // comes free with a click), and push it onto the back end, where it posts
+  // turned half round, or back over the nib. It holds fast wherever it
+  // clicks on; dropped, it lands on the notepad.
+  hands: {
+    floor: FP.paper,
+    pieces: () => [
+      { part: "cap", pos: FP.capC.slice(), pivot: FP.capC.slice(), solid: FP_CAP, points: surfacePoints(FP_CAP, 1), pick: [0.3, 0.13, 0.13], mass: 0.2, friction: 0.7, restitution: 0.2 }, // prettier-ignore
+      // The pen: ground for the cap, never picked up (the cap is how it's held).
+      { pos: [-0.015, FP.axis[1], FP.axis[2]], solid: FP_BODY, pick: [1e-3, 1e-3, 1e-3] },
+    ],
+    joints: [
+      {
+        type: "break",
+        part: "cap",
+        at: [FP.capC[0] + 0.24, FP.capC[1], FP.capC[2]],
+        pull: 0.14,
+        give: 0.02,
+        reseat: {
+          snap: 0.25,
+          seats: [{ pos: [2 * FP.post - FP.capC[0] - 0.12, FP.capC[1], FP.capC[2]], quat: quatAxisAngle([0, 1, 0], Math.PI) }], // prettier-ignore
+        },
+        sound: (ev) =>
+          ev.kind === "snap"
+            ? { voice: "click", f: 1500, decay: 0.06, vol: 0.6 }
+            : ev.kind === "socket"
+              ? { voice: "click", f: 2100, decay: 0.05, vol: 0.6 }
+              : undefined,
+      },
+    ],
+    sound: (hit, vol) => ({ voice: "clack", f: 900, decay: 0.06, vol: vol * 0.5 }),
+  },
   density: 1.5, // as the Model to splats toy: 300,000 splats on the high tier
   controls: [{ key: "write", label: "Write", type: "pulse", ease: FP.T }],
   action: { key: "write", label: "Uncap and write" },
