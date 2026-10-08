@@ -4,12 +4,12 @@
 //
 //   python3 -m http.server 4173 --bind 127.0.0.1 &
 //   pip install imageio-ffmpeg
-//   SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium node tools/pr3-clip.mjs <out-dir> [--scale=2] [--fps=15] [--before=0.4] [--crop=0.18,0.78] [--pose=up|side|down] [--strip=6] id[:secs] ...
+//   SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium node tools/pr3-clip.mjs <out-dir> [--scale=2] [--fps=15] [--before=0.4] [--crop=0.18,0.78] [--strip=6] id[:secs] ...
 //
 // Writes <out-dir>/<id>.mp4 (and <id>-strip.png with --strip). The clock is stepped by hand, so a
 // clip runs at real speed however slow the renderer is. --crop keeps that band of the frame's
-// height (the toy; the phone's sheet and bar are not drawn). --pose turns the toy on its side or
-// upside down first (the Any pose checks).
+// height (the toy; the phone's sheet and bar are not drawn). For a toy on its side or upside down,
+// use tools/pose-sweep.mjs --only=<ids>.
 
 import { chromium } from "@playwright/test";
 import { execFileSync } from "node:child_process";
@@ -27,7 +27,6 @@ const scale = Number(opt("scale", 2));
 const fps = Number(opt("fps", 15));
 const before = Number(opt("before", 0.4));
 const crop = opt("crop", "0.18,0.78").split(",").map(Number);
-const pose = opt("pose", "up");
 const stripN = Number(opt("strip", 0));
 const W = Math.round(390 * scale);
 const H = Math.round(844 * scale);
@@ -49,14 +48,10 @@ for (const spec of ids) {
   fs.rmSync(frames, { recursive: true, force: true });
   fs.mkdirSync(frames, { recursive: true });
   await page.evaluate(
-    async ({ id, W, H, pose }) => {
+    async ({ id, W, H }) => {
       const { app, player } = window.__splashery;
       await app.chooseToy(id);
       for (let t = 0; player.loading && t < 240; t++) await new Promise((r) => setTimeout(r, 250));
-      if (pose !== "up") {
-        const q = pose === "side" ? [0, 0, Math.SQRT1_2, Math.SQRT1_2] : [0, 0, 1, 0];
-        player.setPose?.(q);
-      }
       player.opts.idleDelay = 1e9;
       player.idle.weight = 0;
       await new Promise((r) => setTimeout(r, 1200));
@@ -72,7 +67,7 @@ for (const spec of ids) {
       window.__pr3.pending = 0.5;
       await stage.captureFrame();
     },
-    { id, W, H, pose },
+    { id, W, H },
   );
   const step = 1 / fps;
   const total = Math.round((before + secs) / step);
