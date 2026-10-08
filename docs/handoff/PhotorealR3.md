@@ -138,18 +138,24 @@ ND; NC per asset with `"nc": true`). CLAUDE.md's "Shelves" rule applies: no new 
 photoreal capture, nothing human without the owner's yes. Main has moved a lot since October 3 (read
 docs/HANDOFF.md "Now" and the Photoreal r2 files on main first). Update the handoff's "## State
 
-WORKING (October 8, 2026, cloud session, Opus 5.5 at high effort). PR #419 (draft).
+WORKING (October 8, 2026, about 19:10 UTC; cloud session, Opus 5.5 at high effort). PR #419 (draft).
 
-- Item 1, bases: done for 25 of the 30 r2 toys (the other five were fine). The "Photoreal r2 toys"
-  section of docs/audits/bases-2026-10.md has every verdict; before-and-after cards from below go on
-  Effect review page 2 (lane record `PhotorealR3`, "Closed bases").
-- Item 2, effects: every r2 toy has one now (table in "Notes"); clips are rendering.
+- Item 1, bases: done. 19 of the 30 r2 toys are visibly closed and have before-and-after cards from
+  below on Effect review page 2 (lane record `PhotorealR3`, "Closed bases", cards `pr3-base-…`).
+  Five more got a core inside that makes no visible change at phone size (no card); the crystal and
+  the lioness's neck are not closed (see "Known issues"); the other five were fine. The "Photoreal
+  r2 toys" section of docs/audits/bases-2026-10.md has every verdict.
+- Item 2, effects: every r2 toy but the dog plush (its hop is Fix9's, approved) has a new effect
+  (table in "Notes"). Clips are rendering (`tools/pr3-clip.mjs`); they go on page 2 next.
 - Item 3, sounds: the 14 the owner's table names that Sound D had not done are changed, checked with
   `node tools/sound-check.mjs`, and marked "ready" in tools/sound-review.json.
 - Item 4, framing: home views for the sushi boat, cherry blossom and murex shell (closer), the
   elephant (it faces you) and the cave lioness (whole in frame).
-- Item 5, new toys: the helper's source list is done (`.cache/pr3/candidates.md`, not committed);
-  building next.
+- Item 5, new toys: ten scientific toys are in (labs), with credits, help, sounds and plan entries:
+  a Triceratops skull and a cone shell (real splat captures), and eight museum scans baked by
+  `tools/pr3-bake.mjs` (a celestial globe whose ball turns, an armillary sphere whose inner rings
+  turn, five Stannern meteorite stones that fall one by one, fluorite under an ultraviolet lamp, an
+  ammonite, the Morasko iron, pyrite and a megalodon tooth). Thumbnails and their clips are next.
 
 What main already did for these toys since October 3 (so this lane does not redo it):
 
