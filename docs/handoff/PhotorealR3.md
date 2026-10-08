@@ -120,40 +120,55 @@ this file.
 - You run in Claude Code on the owner's Mac, signed in to his second Claude account. Follow
   docs/OPERATING.md, "Local lanes", exactly: your own port (4181), the local test set, messages as
   comments on your PR that start "From the Operator", the "READY:", "WORKING:" or "BLOCKED:" line at
-  the top of "## State", and clips on page 2 or on `claude/clips-PhotorealR3`.
-- The Operator (a cloud session) runs the lanes; the owner, Ryan, talks only to the Operator and is
-  often away from the Mac. Never ask him anything in the terminal or wait for him: put questions in
-  "State", move on to the next item, and keep going.
-- Model: Opus 5.5 only, at the default effort. If `/model` shows another model, stop and say so in
-  "State". At most one helper at a time, same model.
-- Merging: the Operator merges. Never merge anything. An engine change is its own small, additive
-  "Engine: …" PR on `claude/lane-photoreal-r3-engine`, merged first; toys not using it behave
-  exactly as before.
-- Every new toy is behind the labs switch (`labs: true`). Old `#s=` links and saved scenes keep
-  loading.
-- Every effect follows the effect quality rules in CLAUDE.md (real motion of solid pieces, separate
-  things moving separately, break-apart into real pieces that come back), judged as phone-size
-  clips, and works with the toy upright, on its side and upside down.
-- Licenses, for every asset and dataset (CLAUDE.md, "Ground rules"): read the license on the live
-  source page; record it in CREDITS.md, `tools/assets.json` (or `tools/models.json`) and the toy's
-  in-app credit; `"nc": true` on NC assets; never ND, unlicensed, personal-use or paid. A license
-  not on that list (ODbL, CERN-OHL, government terms, "free with attribution") is a question for the
-  Operator in "State", not a file in the repo. Nothing human (people, faces, human anatomy or human
-  scans) without the owner's yes. No logos or brand names.
-- A static site: data becomes splats at build time (your `tools/pr3-*.mjs`; any new devDependency
-  pinned and listed in LICENSES.md). The page never calls a data service or needs a key, and big
-  files load only when the toy opens. Keep sizes inside the phone budgets.
-- Work through the items in order. Open your draft PR early ("Phase Photoreal r3: …", five sections
-  from CLAUDE.md, naming Opus 5.5), push after each finished item with "State" updated, and run long
-  jobs (clips, tests) in the background.
-- Language: American English in every new text (color, center, gray, license, -ize endings, dates
-  like "October 3, 2026").
-- Read first: CLAUDE.md; docs/OPERATING.md ("Local lanes", "Steps for a lane", "A lane's end");
-  docs/PACKS.md; docs/handoff/PhotorealR2.md, docs/handoff/Photoreal.md and docs/handoff/SharpB.md;
-  docs/audits/bases-2026-10.md; docs/research/PHOTOREAL.md.
-- Before every push: CLAUDE.md, "Before every push", with the local test set. At the end: "A lane's
-  end".
+  the top of "### Brief, October 8, 2026 (cloud)
+
+You are a Splashery worker session, started by the Operator (the coordinating session). Repo:
+ryanjosephkamp/splashery. Your lane: Photoreal r3 (prefix `pr3`). Branch: `claude/lane-photoreal-r3`
+(engine changes on `claude/lane-photoreal-r3-engine`, as a small additive "Engine: …" PR merged
+first). PR title: "Phase Photoreal r3: bases, effects, sounds and scientific captures". Handoff
+file: docs/handoff/PhotorealR3.md. Model: Opus 5.5, at high effort (CLAUDE.md).
+
+Your full brief is already in docs/handoff/PhotorealR3.md (written October 3, 2026, for a local lane
+on the owner's Mac). The owner started it in the cloud instead on October 8, 2026: you run here, not
+on his Mac, so ignore the parts about his Mac, his second account and port 4181 (use
+`python3 -m http.server 4173 --bind 127.0.0.1` as CLAUDE.md says). Everything else in it stands, in
+its order: close the Photoreal r2 toys' bases, give them real effects and better sounds, fix their
+framing, then up to 10 new photoreal toys, scientific first, under CLAUDE.md's license rules (never
+ND; NC per asset with `"nc": true`). CLAUDE.md's "Shelves" rule applies: no new animals unless a
+photoreal capture, nothing human without the owner's yes. Main has moved a lot since October 3 (read
+docs/HANDOFF.md "Now" and the Photoreal r2 files on main first). Update the handoff's "## State",
+"## Notes", "## Known issues" and "## For the Operator" as you go; leave its brief as it is and add
+this one under it as "### Brief, October 8, 2026 (cloud)".
+
+How this lane runs: exactly as docs/handoff/ScienceR3.md, "How this lane runs", says (read it;
+replace the prefix and lane record with yours). New toys and views go behind the labs switch
+(`labs: true`); the Operator merges labs work after the tests pass (with tools/op-merge.mjs) and
+after the owner marks your cards; changes to toys the public already sees wait for his "good" marks.
+Finish every working turn with "READY:", "WORKING:" or "BLOCKED:"; Splashery has no CI to wait for;
+for a long job, schedule a check-in with send_later instead of going idle. Clips at phone size
+(390x844, device scale 3) go on Effect review page 2
+(https://claude.ai/artifact/BSayVkzQ2FKESesrkrSUMK) as docs/OPERATING.md, "Steps for a lane", says
+(no republish). New sounds go in tools/sound-review.json as "ready" (the owner hears them on the
+Sound Board), not as cards. Before READY, re-read CLAUDE.md's "Effect quality rules" and check each
+clip against them at phone size. About six workers run at once; keep an even pace. Your Operator is
+session_012GmKRUMZLir2nb27Bo8Cu2. Card ids pr3-…. Aim for a first READY with the bases and their
+clips within about six hours.
 
 ## State
 
-WORKING: not started yet (October 3, 2026).
+WORKING (October 8, 2026, cloud session, Opus 5.5 at high effort): item 1, the bases. Every r2 toy
+rendered from below at 390×844 (`tools/pr3-shot.mjs`); fixes next.
+
+What main already did for these toys since October 3 (so this lane does not redo it):
+
+- Sound D (October 6) rewrote 13 of the sounds in the owner's table (stollen, orange, physalis,
+  crystal, monkey doll, sunflower, white roses, bonsai, mushroom, crochet Earth, golden maple,
+  peonies, money tree); the owner marked all of them good on October 7.
+- Fix9 (October 7) cropped the orange's floaters and filled the dog plush's gaps with a hidden
+  kit-built core (its `dog-plush` rig); both marked good.
+
+## Notes
+
+## Known issues
+
+## For the Operator
