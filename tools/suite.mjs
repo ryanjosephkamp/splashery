@@ -16,7 +16,7 @@
 //   node tools/suite.mjs --shard=1/2      # half of the files by time (another session runs 2/2)
 //   node tools/suite.mjs --files=kit,taps # only these files (tests/<name>.spec.mjs)
 //   node tools/suite.mjs --out=DIR        # keep this run's reports in DIR (default .cache/suite)
-//   node tools/suite.mjs --save-times     # also write each file's time to tools/suite-times.json
+//   node tools/suite.mjs --save-times     # also write each file's time to tools/suite.json
 //   node tools/suite.mjs --report         # print the summary of the run in --out, run nothing
 //   node tools/suite.mjs --gl=llvmpipe    # WebGL2 on Mesa's llvmpipe in a virtual display
 //                                         # (playwright.config.mjs, SPLASHERY_GL)
@@ -45,7 +45,7 @@ const arg = (name, fallback = null) => {
 const OUT = path.resolve(root, arg("out", ".cache/suite"));
 const JOBS = Math.max(1, Number(arg("jobs", 1)) || 1);
 const PORT = Number(process.env.SPLASHERY_PORT) || 4173;
-const TIMES = path.join(root, "tools/suite-times.json");
+const PLAN = path.join(root, "tools/suite.json");
 
 const env = { ...process.env };
 if (!env.SPLASHERY_CHROMIUM && fs.existsSync("/opt/pw-browsers/chromium"))
@@ -64,7 +64,14 @@ const all = fs
   .filter((f) => f.endsWith(".spec.mjs"))
   .map((f) => f.slice(0, -".spec.mjs".length))
   .sort();
-const times = fs.existsSync(TIMES) ? JSON.parse(fs.readFileSync(TIMES, "utf8")).seconds : {};
+const timing = fs.existsSync(PLAN) ? JSON.parse(fs.readFileSync(PLAN, "utf8")) : {};
+const times = timing.seconds || {};
+// Files that check the wall clock (a clip's speed, a swing's timing) and fail when another file
+// shares the CPUs: with --jobs above 1 they run at the end, one at a time, with nothing beside them.
+const SOLO = new Set(timing.solo || []);
+// Files that fail on llvmpipe (a tight wall-clock window, physics that settles differently): they
+// run on SwiftShader even in a --gl=llvmpipe run.
+const ON_SWIFTSHADER = new Set(timing.swiftshader || []);
 // A file with no time yet counts as a slow one, so it starts early.
 const timeOf = (f) => times[f] ?? 120;
 
@@ -129,7 +136,7 @@ function runFile(f) {
     const child = spawn(
       "npx",
       ["playwright", "test", pattern, "--workers=1", "--reporter=json", `--output=${path.join(OUT, "results", f)}`, ...PASS], // prettier-ignore
-      { cwd: root, env: { ...env, PLAYWRIGHT_JSON_OUTPUT_NAME: tmp }, stdio: ["ignore", "pipe", "pipe"] }, // prettier-ignore
+      { cwd: root, env: { ...env, PLAYWRIGHT_JSON_OUTPUT_NAME: tmp, ...(ON_SWIFTSHADER.has(f) ? { SPLASHERY_GL: "swiftshader" } : {}) }, stdio: ["ignore", "pipe", "pipe"] }, // prettier-ignore
     );
     const log = fs.createWriteStream(path.join(OUT, `${f}.log`));
     child.stdout.pipe(log);
@@ -238,9 +245,8 @@ console.log(`${files.length - todo.length} of ${files.length} files already done
 const server = await serve();
 const xvfb = await display();
 const t0 = Date.now();
-const queue = [...todo];
 let finished = 0;
-async function lane() {
+async function lane(queue) {
   while (queue.length) {
     const f = queue.shift();
     const r = await runFile(f);
@@ -254,7 +260,10 @@ async function lane() {
     console.log(`[${finished}/${todo.length}] ${f} ${Math.round(r.wall)} s: ${note}`);
   }
 }
-await Promise.all(Array.from({ length: Math.min(JOBS, todo.length) }, lane));
+const shared = JOBS > 1 ? todo.filter((f) => !SOLO.has(f)) : [...todo];
+const alone = JOBS > 1 ? todo.filter((f) => SOLO.has(f)) : [];
+await Promise.all(Array.from({ length: Math.min(JOBS, shared.length) }, () => lane(shared)));
+await lane(alone);
 server?.kill();
 xvfb?.kill();
 
@@ -265,6 +274,6 @@ if (arg("save-times") && !s.missing.length) {
   const seconds = { ...times };
   for (const r of s.rows) seconds[r.f] = Math.round(r.wall);
   const sorted = Object.fromEntries(Object.keys(seconds).filter((f) => all.includes(f)).sort().map((f) => [f, seconds[f]])); // prettier-ignore
-  fs.writeFileSync(TIMES, JSON.stringify({ note: "Seconds per test file on the cloud container, for tools/suite.mjs (longest first, --shard).", seconds: sorted }, null, 2) + "\n"); // prettier-ignore
+  fs.writeFileSync(PLAN, JSON.stringify({ ...timing, seconds: sorted }, null, 2) + "\n");
 }
 process.exit(s.failed.length || s.missing.length ? 1 : 0);

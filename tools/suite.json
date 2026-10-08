@@ -1,5 +1,7 @@
 {
-  "note": "Seconds per test file on the cloud container (4 CPUs), one file at a time, for tools/suite.mjs (longest first, --shard). Refresh with --save-times.",
+  "note": "tools/suite.mjs: seconds per test file on the cloud container (4 CPUs, one at a time; longest first, --shard), the files that run alone when --jobs is above 1 (they check the wall clock and fail beside another file), and the files that run on SwiftShader even with --gl=llvmpipe (they fail on llvmpipe). Refresh the seconds with --save-times.",
+  "solo": ["bk", "hec", "smd-moving", "ui2"],
+  "swiftshader": ["phy", "sndc-engine"],
   "seconds": {
     "abb": 39,
     "ai": 83,
