@@ -130,3 +130,28 @@ test("guidedDepth puts a blurred depth edge on the picture's own edge", () => {
   expect(g[y * w + 43]).toBeLessThan(0.25);
   expect(g[y * w + 47]).toBeGreaterThan(0.45);
 });
+
+test("screenshots: Photo to 3D in Splats, One color per splat, at phone and desktop size", async ({
+  browser,
+}) => {
+  test.setTimeout(400_000);
+  for (const [w, h] of [
+    [390, 844],
+    [1440, 900],
+  ]) {
+    const page = await browser.newPage({ viewport: { width: w, height: h } });
+    await page.goto("/?renderer=webgl2&adapt=off&labs=1");
+    await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
+    await page.evaluate(async () => {
+      const { app, player } = window.__splashery;
+      (await import("/src/packs/photo-sharp.js")).setSharpView("photo-3d", "splats");
+      await app.chooseToy("photo-3d");
+      await app.setToyOptions({ detail: "splats" });
+      player.motion.setControl("flat", 0, { snap: true });
+    });
+    await page.waitForFunction(() => document.getElementById("progress").hidden, null, { timeout: 180_000 }); // prettier-ignore
+    await page.waitForTimeout(1500);
+    await page.screenshot({ path: `tests/screenshots/phf2-photo-3d-${w}x${h}.png` });
+    await page.close();
+  }
+});

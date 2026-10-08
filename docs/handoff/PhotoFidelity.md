@@ -7,7 +7,33 @@ ryanjosephkamp/splashery. Your lane: Photo fidelity (prefix `phf`). Branch:
 `claude/lane-photo-fidelity` (engine changes on `claude/lane-photo-fidelity-engine`). PR title:
 "Phase Photo fidelity: sharper Photo to 3D and Moving photo to 3D". Handoff file:
 docs/handoff/PhotoFidelity.md (create it; start it with this brief, word for word, under "## Brief",
-then keep "## State", "## Notes", "### Round 2: edge-aware depth for short clips (measured; not in
+then keep "## State", "## Notes", "### Round 2: the adaptive grid (One color per splat, Photo to 3D)
+
+`buildPhotoSplats` now lays its fine grid in blocks of 8 by 8 cells (`LEVELS` 3). A plain block
+(mean squared color difference within `FLAT_VAR`) is one splat; a block with detail splits to 2 by 2
+cells, and the 2 by 2 blocks split to single cells where that takes away the most color error
+(nearer things a little first), until the budget is spent (`adaptiveGrid`). A block with a depth cut
+inside always splits, so no splat bridges a cut. The grid's fineness follows how much of the picture
+is plain (`fineCells`: 2.2 cells per splat, r1's, for a busy picture, up to 6 for a page). Bigger
+splats sit `BLOCK_BACK` (0.002 picture heights) behind per level, so they never draw over the small
+ones: without that, a big white splat sorted in front of letters at random and the text got worse
+(mid SSIM 0.24).
+
+Text screenshot, Photo to 3D, Detail: One color per splat, Splats view, measured as in round 1:
+
+| tier | SSIM before → after | 12–16 px lines | letter gaps kept | grid before → after |
+| ---- | ------------------- | -------------- | ---------------- | ------------------- |
+| low  | 0.221 → 0.276       | 0/7 → 0/7      | 19% → 42%        | 292×636 → 488×1048  |
+| mid  | 0.362 → 0.410       | 0/7 → 1/7      | 64% → 69%        | 448×968 → 744×1608  |
+| high | 0.391 → 0.435       | 4/7 → 6/7      | 79% → 83%        | 534×1160 → 888×1928 |
+| max  | 0.440 → 0.520       | 7/7 → 7/7      | 89% → 93%        | 618×1336 → 944×2048 |
+
+Building the splats (Node, this machine): the samples take 0.5 to 0.7 s at low (r1: 0.2 to 0.45 s)
+and 1.4 to 1.8 s at max (r1: 0.9 to 1.1 s). The street, forest and still life use 2.9 to 3.8 cells
+per splat (the still life, with its plain wall, 6).
+
+### Round 2: edge-aware depth for short clips (measured; not in
+
 the toy)
 
 `guidedDepth` (src/packs/moving-photo.js) enlarges a clip's depth with the frame's colors as the
@@ -127,6 +153,11 @@ with measurements within about six hours. Your Operator is session_012GmKRUMZLir
 > Reply with your usual READY/WORKING/BLOCKED line.
 
 ## State
+
+- October 8, 2026, 13:00 UTC, round 2: the adaptive grid is in, measured, and on Effect review page
+  2 (6 cards, `phf2-…`, group `photo-r2`: the text screenshot and the street sample, before and
+  after, and two close-ups). Edge-aware depth is measured and left out of the toy (Notes). Waiting:
+  the Operator's call on a bigger depth for short clips (For the Operator), then the PR.
 
 - October 8, 2026, 12:40 UTC, round 2 (`claude/lane-photo-fidelity-2`, Opus 5.5, high effort):
   working. The adaptive grid for One color per splat is built (`adaptiveGrid` in
@@ -305,6 +336,16 @@ A portrait frame, single-thread WebAssembly, this container under load: 196 px 1
   are paused frames of the same video).
 
 ## For the Operator
+
+- Round 2: a bigger depth for short clips is a trade the owner should make (Notes, "Round 2:
+  edge-aware depth"). 392 px on 8 depth pictures instead of 196 on 32, at the same wait: the horse
+  48% → 12% of edge pixels on the wrong side, the machine 42% → 29%, the bunny 33% → 35%. 294 px on
+  all 32 pictures doubles the wait and helps the bunny (26%), the dragon and the bridge. My
+  suggestion: leave the clips as they are in this round.
+- Round 2 changes two checks in `tests/p3d.spec.mjs` (Photo to 3D's own tests, of the file this lane
+  owns): a splat's size may be up to 8 cells across (a plain block), and the flat pose may sit up to
+  0.006 behind the plane (the bigger splats). `tests/phf2.spec.mjs` checks that no block bridges a
+  depth cut.
 
 - Merge order: #405 (engine) first, then #406.
 - Specs run on the lane branch (October 8, 2026), all passing in the latest run:
