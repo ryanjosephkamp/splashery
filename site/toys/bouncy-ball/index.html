@@ -190,13 +190,15 @@
                 "
               ></span>
               <iframe
-                src="../../play/?toy=bouncy-ball"
+                src="../../play/?toy=bouncy-ball&sound=on"
                 title="Bouncy ball, live: drag to turn it"
                 loading="eager"
                 allow="fullscreen"
               ></iframe>
             </div>
-            <figcaption>Drag to turn it; tap to play.</figcaption>
+            <figcaption>
+              Drag to turn it; tap to play. The speaker button mutes the sound.
+            </figcaption>
           </figure>
         </div>
         <section class="toy-section" aria-labelledby="h-about">
@@ -210,6 +212,12 @@
             Tap it and it is thrown down hard: it ricochets all over the floor, keeping nearly all
             its speed, its spin flipping at every bounce, then comes home and settles. Pick its
             three colors in the Toy tab.
+          </p>
+          <p class="learn-more">
+            Learn more:
+            <a href="https://en.wikipedia.org/wiki/Bouncy_ball" target="_blank" rel="noopener"
+              >Bouncy ball on Wikipedia</a
+            >
           </p>
         </section>
 
@@ -314,7 +322,8 @@ https://ryanjosephkamp.github.io/splashery/site/toys/bouncy-ball/</textarea
             </button>
           </div>
           <p class="note">
-            Embeds are silent and turn slowly when idle. Every option is in the
+            Embeds are silent and turn slowly when idle; add <code>&amp;sound=on</code> to the
+            iframe's link for the toy's tap sound, with a mute button. Every option is in the
             <a href="../../share/">embed guide</a>.
           </p>
         </section>

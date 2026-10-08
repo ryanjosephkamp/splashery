@@ -198,13 +198,15 @@
                 "
               ></span>
               <iframe
-                src="../../play/?toy=unit-circle&turntable=off"
+                src="../../play/?toy=unit-circle&turntable=off&sound=on"
                 title="Circle and waves, live: drag to turn it"
                 loading="eager"
                 allow="fullscreen"
               ></iframe>
             </div>
-            <figcaption>Drag to look around it; tap to play.</figcaption>
+            <figcaption>
+              Drag to look around it; tap to play. The speaker button mutes the sound.
+            </figcaption>
           </figure>
         </div>
         <section class="toy-section" aria-labelledby="h-about">
@@ -220,6 +222,12 @@
             left-right place draws the cosine wave. For the circle, Euler's formula, e^(iθ) = cos θ
             + i sin θ, lights up piece by piece. In the Toy tab, try a 3D helix, another path, up to
             three turns, or type your own: x = …, y = … with t, or r = … with θ.
+          </p>
+          <p class="learn-more">
+            Learn more:
+            <a href="https://en.wikipedia.org/wiki/Unit_circle" target="_blank" rel="noopener"
+              >Unit circle on Wikipedia</a
+            >
           </p>
         </section>
 
@@ -324,7 +332,8 @@ https://ryanjosephkamp.github.io/splashery/site/toys/unit-circle/</textarea
             </button>
           </div>
           <p class="note">
-            Embeds are silent and turn slowly when idle. Every option is in the
+            Embeds are silent and turn slowly when idle; add <code>&amp;sound=on</code> to the
+            iframe's link for the toy's tap sound, with a mute button. Every option is in the
             <a href="../../share/">embed guide</a>.
           </p>
         </section>

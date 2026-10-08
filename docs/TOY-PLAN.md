@@ -10,10 +10,10 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 439 toys. 410 have a tap action today; the other 29 only hop.
-- **keep** (the effect is right: the owner liked it, or C2 finished it): 420.
+- 450 toys. 421 have a tap action today; the other 29 only hop.
+- **keep** (the effect is right: the owner liked it, or C2 finished it): 428.
 - **more** (has an effect; make it clearer or more dramatic): 0.
-- **new** (needs its own effect): 19.
+- **new** (needs its own effect): 22.
 - Visual fixes: 0 open, 31 done. Touch or drag interaction asked for: 4.
 
 ## By phase
@@ -36,52 +36,54 @@ Proposals below are suggestions; the owner may change them.
   Uranus, Neptune, Tiny planet, Aurora world, Asteroid, Comet, Meteor, Star, Pulsar, Black hole,
   Star cluster, Ring nebula, Nebula, Spiral galaxy, The real Moon, The real Mars, The real Earth,
   The real Mercury, The real Venus, Real moons, Pluto, Ceres and Vesta, Stars near the Sun, Real
-  star systems, Real galaxies, Powers of ten, Saturn V, Space Launch System, Space Shuttle, Virus,
-  Bacteriophage, Bacterium, Red blood cell, Neuron, Astrocyte, Animal cell, DNA, White blood cell,
-  Microglia, Diatom, Pollen grain, Snowflake, Chromosome, Mitochondrion, Paramecium, Amoeba, DNA to
-  protein, Cell division, Apoptosis, Phagocytosis, Electron orbital, Atom, Molecule, Protein,
-  Crystal lattice, Molecule viewer, Periodic table, Real elements, Diamond, Ruby, Emerald, Amethyst
-  geode, Sapphire, Quartz cluster, Opal, Brain, Eye, Lungs, Tooth, Kidney, Anatomy atlas, Oak tree,
-  Pine tree, Palm tree, Cherry blossom, Maple tree, Bonsai, Weeping willow, Sunflower, Rose, Tulips,
-  Daisies, Lotus, Toadstool, Fern, Saguaro cactus, Coral reef, Pinecone, Acorns, Succulent, Bamboo,
-  Pebbles, Kelp, Storm cloud, Lava lamp, Snow globe, Ice swan, Tornado, Rainbow, Iceberg, Waterfall,
-  Ocean wave, Ice cream, Watermelon, Jelly, Pancakes, Cupcake, Lollipop, Candy cane, Macarons,
-  Donut, Gummy bear, Pretzel, Croissant, Pizza, Burger, Sushi, Taco, Coffee, Apple, Bananas, Orange,
-  Kiwi, Pineapple, Cherries, Grapes, Avocado, Building bricks, Rubber duck, Newton's cradle, Yo-yo,
-  Puzzle cube, Spring toy, Kite, Chess set, Lorenz attractor, Möbius strip, Klein bottle, Menger
-  sponge, Hypercube, Torus knot, Gyroid, Mandelbulb, Seashell spiral, Graph plotter, Surface
-  plotter, Circle and waves, Fourier circles, Pythagoras proof, Splat equation, Storybook, Music
-  box, Fountain pen, Water bottle, Soda can, Running shoe, Hoodie, Sunglasses, Baseball cap, Sword
-  in the stone, Heraldic shield, Bow and target, Crown, Wizard's orb, Crystal ball, Jellyfish,
-  School of fish, Pufferfish, Nautilus, Snail, Octopus, Sea urchin, Frog, Snowman, Fireworks,
-  Decorated tree, Paper lantern, Diya, Acoustic guitar, Snare drum, Xylophone, Toy piano, Grand
-  piano, Upright piano, Harpsichord, Electronic keyboard, Hot-air balloon, Sports car, Bus, Jet
-  airliner, Sailboat, Submarine, Bicycle, Eiffel Tower, Washington Monument, Pyramids of Giza,
-  Twisting supertall, Statue of Liberty, White House, Leaning Tower of Pisa, Colosseum, Parthenon,
-  Stonehenge, Big Ben, Taj Mahal, Castle, Pagoda, Windmill, Perceptron, Multilayer perceptron,
-  Neural network, Convolutional network, Recurrent network, Transformer, Looped transformer,
-  Diffusion model, Gradient descent, Gaussian splatting, Word vectors, Sorting machine, Half adder,
-  Turing machine, Difference engine, Enigma machine, Bombe, Picture lab, Your book, Photo album,
-  Picture frame, Song landscape, Chladni plate, Room echo meter, Splat mirror, Model to splats, QR
-  code, Photo to 3D, Moving photo to 3D, Video to 3D, Sound lab, Sound recorder, Splat toolkit,
-  Point clouds, Splat field, Light lab, Thermal ellipsoids, Super-resolution microscope, Galaxy in a
-  box, Cryo-EM map, Contour lab, Terrain in a box, Ripple tank, Light bench, Fluid lab, Grand
-  Canyon, Mount St. Helens, The sea floor, Tides at Bar Harbor, Hurricane, Relief map, Living city,
-  Stork migration, Earthquakes, Airport X-ray scanner, How CT works, Walnut CT scan, MRI of a fruit,
-  Electron microscope, Thermal camera, Screen, Shardball, Longtail, Grain Garden, Page Breaker,
-  Strata, Volley Table, Stone Belt, Soft Landing, Night Owl Pinball, Cast a Shadow, Photo Dash, Note
-  Rider, Data in 3D.
+  star systems, Real galaxies, Powers of ten, Saturn V, Space Launch System, Space Shuttle, The
+  solar system on real orbits, Virus, Bacteriophage, Bacterium, Red blood cell, Neuron, Astrocyte,
+  Animal cell, DNA, White blood cell, Microglia, Diatom, Pollen grain, Snowflake, Chromosome,
+  Mitochondrion, Paramecium, Amoeba, DNA to protein, Cell division, Apoptosis, Phagocytosis,
+  Electron orbital, Atom, Molecule, Protein, Crystal lattice, Unit cells, Orbital atlas, Molecule
+  viewer, Periodic table, Real elements, Diamond, Ruby, Emerald, Amethyst geode, Sapphire, Quartz
+  cluster, Opal, Brain, Eye, Lungs, Tooth, Kidney, Anatomy atlas, Oak tree, Pine tree, Palm tree,
+  Cherry blossom, Maple tree, Bonsai, Weeping willow, Sunflower, Rose, Tulips, Daisies, Lotus,
+  Toadstool, Fern, Saguaro cactus, Coral reef, Pinecone, Acorns, Succulent, Bamboo, Pebbles, Kelp,
+  Storm cloud, Lava lamp, Snow globe, Ice swan, Tornado, Rainbow, Iceberg, Waterfall, Ocean wave,
+  Ice cream, Watermelon, Jelly, Pancakes, Cupcake, Lollipop, Candy cane, Macarons, Donut, Gummy
+  bear, Pretzel, Croissant, Pizza, Burger, Sushi, Taco, Coffee, Apple, Bananas, Orange, Kiwi,
+  Pineapple, Cherries, Grapes, Avocado, Building bricks, Rubber duck, Newton's cradle, Yo-yo, Puzzle
+  cube, Spring toy, Kite, Chess set, Lorenz attractor, Möbius strip, Klein bottle, Menger sponge,
+  Hypercube, Torus knot, Gyroid, Mandelbulb, Seashell spiral, Graph plotter, Surface plotter, Circle
+  and waves, Fourier circles, Pythagoras proof, Rössler attractor, Thomas attractor, Aizawa
+  attractor, 5-cell, 16-cell, 24-cell, Duoprism, Splat equation, Storybook, Music box, Fountain pen,
+  Water bottle, Soda can, Running shoe, Hoodie, Sunglasses, Baseball cap, Sword in the stone,
+  Heraldic shield, Bow and target, Crown, Wizard's orb, Crystal ball, Jellyfish, School of fish,
+  Pufferfish, Nautilus, Snail, Octopus, Sea urchin, Frog, Snowman, Fireworks, Decorated tree, Paper
+  lantern, Diya, Acoustic guitar, Snare drum, Xylophone, Toy piano, Grand piano, Upright piano,
+  Harpsichord, Electronic keyboard, Hot-air balloon, Sports car, Bus, Jet airliner, Sailboat,
+  Submarine, Bicycle, Eiffel Tower, Washington Monument, Pyramids of Giza, Twisting supertall,
+  Statue of Liberty, White House, Leaning Tower of Pisa, Colosseum, Parthenon, Stonehenge, Big Ben,
+  Taj Mahal, Castle, Pagoda, Windmill, Perceptron, Multilayer perceptron, Neural network,
+  Convolutional network, Recurrent network, Transformer, Looped transformer, Diffusion model,
+  Gradient descent, Gaussian splatting, Word vectors, Sorting machine, Half adder, Turing machine,
+  Difference engine, Enigma machine, Bombe, Picture lab, Your book, Photo album, Picture frame, Song
+  landscape, Chladni plate, Room echo meter, Splat mirror, Model to splats, QR code, Photo to 3D,
+  Moving photo to 3D, Video to 3D, Sound lab, Sound recorder, Splat toolkit, Point clouds, Splat
+  field, Light lab, Thermal ellipsoids, Super-resolution microscope, Galaxy in a box, Cryo-EM map,
+  Contour lab, Terrain in a box, Ripple tank, Light bench, Fluid lab, Grand Canyon, Mount St.
+  Helens, The sea floor, Tides at Bar Harbor, Hurricane, Relief map, Living city, Stork migration,
+  Earthquakes, Airport X-ray scanner, How CT works, Walnut CT scan, MRI of a fruit, Electron
+  microscope, Thermal camera, Screen, Shardball, Longtail, Grain Garden, Page Breaker, Strata,
+  Volley Table, Stone Belt, Soft Landing, Night Owl Pinball, Cast a Shadow, Photo Dash, Note Rider,
+  Data in 3D.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
-- **E2, new effects: space, atoms and gems.** Night sky
+- **E2, new effects: space, atoms and gems.** Unit cells, Orbital atlas, Night sky
 - **E3, new effects: tiny things, anatomy and maths.** None.
 - **E4, new effects: nature and weather.** None.
 - **E5, new effects: food.** None.
-- **E6, new effects: balls and the rest.** Picture lab, Song landscape, Chladni plate, QR code, How
-  a QR code works, QR damage lab, Three QR codes in one, Picture QR, QR from real things, Other
-  barcodes, Video to 3D, Splat toolkit, Point clouds, Cryo-EM map, Contour lab, Terrain in a box,
-  Data in 3D, Climate records
+- **E6, new effects: balls and the rest.** Picture lab, Song landscape, Chladni plate, Sound in a
+  box, QR code, How a QR code works, QR damage lab, Three QR codes in one, Picture QR, QR from real
+  things, Other barcodes, Video to 3D, Splat toolkit, Point clouds, Cryo-EM map, Contour lab,
+  Terrain in a box, Data in 3D, Climate records
 - **F, touch and drag interaction.** Gummy bear, Building bricks, Newton's cradle, Puzzle cube.
 
 ## Scans (62)
@@ -931,7 +933,7 @@ Proposals below are suggestions; the owner may change them.
   - Sound: The soda sloshing as it shakes, a sharp pssht as the tab opens and a fine, soft fizz that
     dies away (no bubbles).
 
-## Space (39)
+## Space (40)
 
 - **Sun** (`sun`). Now: tap: Solar flare. Plan: keep.
   - Owner: Incredible. It should pulse and churn by default, dramatically, like the real Sun. Needs
@@ -1313,6 +1315,17 @@ Proposals below are suggestions; the owner may change them.
   - Improved: Space r2: new toy (labs) from NASA 3D Resources; tools/sp2-rockets.mjs decodes the
     Draco-compressed model, cuts it into its pieces and colors them.
   - Sound: A rumble as the engines light, and a thud at each separation.
+- **The solar system on real orbits** (`solar-orbits`). Now: tap: Fly to the next planet. Plan:
+  keep.
+  - Owner: The Operator's brief of October 7, 2026 (lane Space r4; labs only).
+  - Effect: The Sun, the eight planets, six large moons, four comets and 4,000 sampled real
+    asteroids on their real Keplerian orbits (JPL elements) for any date from 1800 to 2050: a date
+    slider, a speed from paused to a year a second, a readable scale (labeled, not to scale) and a
+    true scale. A tap flies to the next planet (the system grows about it, turned so its sunlit side
+    shows), and after Neptune back out.
+  - Improved: Space r4: new toy (labs). The asteroids move on the graphics chip by Kepler's equation
+    (src/space/orbit-field.js); the data is a dated snapshot (tools/sp4-orbits.mjs).
+  - Sound: Space is silent: a soft breath as the view flies.
 - **Night sky** (`night-sky`). Now: tap: Name a star. Plan: new effect (E2).
   - Owner: Push Plan S15 (the owner's yes, October 4, 2026), lane Night sky, October 5, 2026.
   - Effect: The sky over a place and time, seen from the ground: about 5,000 stars to magnitude 6
@@ -1497,7 +1510,7 @@ Proposals below are suggestions; the owner may change them.
   - Sound: A soft stretch as the pseudopods reach out, a gulp as the phagosome closes and a low fizz
     as it is digested.
 
-## Atoms (8)
+## Atoms (10)
 
 - **Electron orbital** (`orbital`). Now: tap: Excite the electron. Plan: keep.
   - Owner: Chemistry toys need good effects.
@@ -1545,6 +1558,34 @@ Proposals below are suggestions; the owner may change them.
     slices), so atoms never leave their bonds.
   - Sound: One cleaner, softer metallic chime with a faint glassy ring, no rattle after (Sound C,
     October 2, 2026).
+- **Unit cells** (`unit-cells`). Now: tap: Next view: cell, block, bonds. Plan: new effect (E2).
+  - Owner: The Operator's brief of October 7, 2026 (BACKLOG.md, "More crystal lattices and electron
+    orbitals"; ROADMAP.md, "Now", item 4; lane Lattices and orbitals; labs only).
+  - Effect: Six real crystals (diamond, graphite, ice Ih, fcc copper, bcc iron, hcp magnesium) from
+    their published cells (COD), atoms as opaque even spheres with true relative radii. The tap
+    steps through three views: the unit cell (zoomed to fill the view, with its outline); a block of
+    n × n × n cells (slider 1 to 4), its shells of cells growing out of the central cell as the view
+    zooms out; and the bonds, where every atom shrinks in place to a ball (a morph spreads the atoms
+    by 2.5 while their parts shrink by 1/2.5 about the same point) and sticks join nearest neighbors
+    (dotted hydrogen bonds in ice). Optional thermal motion: each atom as one Gaussian splat whose
+    spread is its published mean-square displacement (Debye–Waller B / 8π²).
+  - Improved: Lattices and orbitals: built from src/lattice/cells.js; ice's hydrogens by the ice
+    rules (an Euler circuit on a periodic block of oxygens). Evidence in
+    docs/evidence/unit-cells.json.
+  - Sound: A small, clear glass clink as the view steps, and a soft wooden tick as the atoms settle.
+- **Orbital atlas** (`orbital-atlas`). Now: tap: Cut it open. Plan: new effect (E2).
+  - Owner: The Operator's brief of October 7, 2026 (BACKLOG.md, "More crystal lattices and electron
+    orbitals"; ROADMAP.md, "Now", item 4; lane Lattices and orbitals; labs only).
+  - Effect: Every hydrogen orbital of n = 1 to 5 (s, p, d, f, g) and 6s, 6p, 6d, 7s, 7p (68),
+    grouped by shell, drawn like the Electron orbital toy's newer orbitals: a boundary surface
+    holding 90% of the electron and a cloud sampled from |ψ|², in the two phase colors. The orbital
+    is turned so its densest vertical plane faces the viewer; the tap cuts it there, the front half
+    lifts up and away, and the back half's cut face shows |ψ|² in that plane, dark at the nodes;
+    then it closes.
+  - Improved: Lattices and orbitals: src/lattice/orbitals.js computes normalized R_nl and real Y_lm
+    for any n, l, m; tests check them against the analytic forms. Evidence in
+    docs/evidence/orbital-atlas.json.
+  - Sound: A soft, low whoosh as it is cut and opens, and a quiet low ding as the cut face shows.
 - **Molecule viewer** (`molecule-viewer`). Now: tap: Measure an example. Plan: keep.
   - Owner: Push Plan S1, approved by the owner with "PDB fetch yes" (October 5, 2026; lane Molecule
     viewer, labs).
@@ -2133,7 +2174,7 @@ Proposals below are suggestions; the owner may change them.
     like a good online-chess theme; real CC0 recordings now (chess-set-move.mp3), with the
     synthesized sound as a fallback.
 
-## Maths (17)
+## Maths (24)
 
 - **Lorenz attractor** (`lorenz`). Now: tap: Race along the path. Plan: keep.
   - Owner: Spin a little more or be more dynamic; looks good when still.
@@ -2148,7 +2189,11 @@ Proposals below are suggestions; the owner may change them.
     underneath (the band has one side), after two it is back on top where it started, while the band
     twists a little and untwists (about 5 s). After the owner's review the rider is a choice (the
     Rider option): a blue race car (the default) with spinning wheels, a rolling beach ball, a duck
-    riding a bicycle (wheels and pedals turning) or the ant.
+    riding a bicycle (wheels and pedals turning) or the ant. Math r2 (labs work on the public toy,
+    waiting for the owner's marks): three more riders, a toy train (chuffing steam, spoked wheels
+    turning), a ladybug (light feet and a flutter of wings, her six legs walking) and a skateboard
+    (wheels rolling, a clack on and off), and a Rider color choice for every rider (Its own keeps
+    each rider's colors).
   - Sound: No step tune; each rider has its own sound on the ride: a race car's engine, a rolling
     beach ball, a bicycle with one soft quack, the ant's tiny feet.
 - **Klein bottle** (`klein-bottle`). Now: tap: Send water through. Plan: keep.
@@ -2173,7 +2218,8 @@ Proposals below are suggestions; the owner may change them.
   - Effect: Rotates through the fourth dimension, turning inside out.
   - Improved: E3: a tap turns the tesseract once round through the fourth dimension: the pink inner
     cube swells out to become the outer one while the blue one folds inside, holds a moment, then
-    turns on back to where it started (about 5 s); at rest it rocks gently in 4D.
+    turns on back to where it started (about 5 s); at rest it rocks gently in 4D. Math r2: seven
+    color themes (Colors; Blue and pink is the default and unchanged).
   - Sound: No "vroom"; a great slow rush as it turns inside out and again as it turns home, over a
     low chord.
 - **Torus knot** (`torus-knot`). Now: tap: Pull and let go. Plan: keep.
@@ -2197,7 +2243,10 @@ Proposals below are suggestions; the owner may change them.
   - Improved: E3: a tap turns the bulb's seven horizontal discs like the dials of a combination
     lock: neighbours click round in opposite directions, top to bottom, then back the other way,
     bottom to top; each turns a seventh of a turn (the bulb's own symmetry), so it lands on the same
-    picture (about 4 s). This replaced a twist after the owner's review.
+    picture (about 4 s). This replaced a twist after the owner's review. Math r2: a Power option (5
+    to 12; power n has n − 1-fold symmetry, so the slices turn 1/(n − 1) of a turn) and a Julia bulb
+    (four fixed points c off the axis; with no turning symmetry the whole bulb turns a quarter turn
+    and back).
   - Sound: Deep morphing tone.
 - **Sierpinski tetrahedron** (`sierpinski`). Now: tap: Explode. Plan: keep.
   - Owner: Perfect as is.
@@ -2255,7 +2304,9 @@ Proposals below are suggestions; the owner may change them.
     parameters, and spelling a name): a View option stacks the circles in depth (3D); Your words
     gives each letter or digit its own chain of circles (up to six, on one or two lines; ♥ and ★,
     and heart and star emoji, draw a heart and a star); and your own closed curve (x = …, y = … or r
-    = …) can be typed too.
+    = …) can be typed too. Math r2: longer text, up to 40 letters on up to four lines, drawn five
+    letters at a time (2.6 s for each group of five; the circles of the group drawing show, the
+    writing stays), and lighter, thinner circles behind words in 2D so the writing reads.
   - Sound: Each circle hums its own frequency, building into a chord.
 - **Pythagoras proof** (`pythagoras-proof`). Now: tap: Rearrange. Plan: keep.
   - Owner: Toy Ideas page (approved, 2026-09-27).
@@ -2266,6 +2317,76 @@ Proposals below are suggestions; the owner may change them.
     a² + b² = c² below; then they slide back (4.5 s). In this classic arrangement the pieces slide
     without turning, and one stays put.
   - Sound: Wooden slides, and a click as each piece lands.
+- **Rössler attractor** (`rossler-attractor`). Now: tap: Drop a tracer. Plan: keep.
+  - Owner: The owner's Math notes (BACKLOG.md, Math r2): more dynamical systems beside the Lorenz
+    attractor.
+  - Effect: A tap drops a new tracer that follows the flow live.
+  - Improved: Math r2: new toy (labs), the Rössler attractor. The glowing path is one long solution
+    of the equations (RK4). A tap drops a bright tracer where you tap (Play: on the path),
+    integrated live with fixed RK4 steps so it moves the same at any frame rate, with a short trail;
+    off the attractor it is pulled onto it. Up to four tracers, each its own color; a fifth replaces
+    the oldest.
+  - Sound: A soft drip as the tracer drops, over a low, wide chord in the toy's own key.
+- **Thomas attractor** (`thomas-attractor`). Now: tap: Drop a tracer. Plan: keep.
+  - Owner: The owner's Math notes (BACKLOG.md, Math r2): more dynamical systems beside the Lorenz
+    attractor.
+  - Effect: A tap drops a new tracer that follows the flow live.
+  - Improved: Math r2: new toy (labs), the Thomas attractor. The glowing path is one long solution
+    of the equations (RK4). A tap drops a bright tracer where you tap (Play: on the path),
+    integrated live with fixed RK4 steps so it moves the same at any frame rate, with a short trail;
+    off the attractor it is pulled onto it. Up to four tracers, each its own color; a fifth replaces
+    the oldest.
+  - Sound: A soft drip as the tracer drops, over a low, wide chord in the toy's own key.
+- **Aizawa attractor** (`aizawa-attractor`). Now: tap: Drop a tracer. Plan: keep.
+  - Owner: The owner's Math notes (BACKLOG.md, Math r2): more dynamical systems beside the Lorenz
+    attractor.
+  - Effect: A tap drops a new tracer that follows the flow live.
+  - Improved: Math r2: new toy (labs), the Aizawa attractor. The glowing path is one long solution
+    of the equations (RK4). A tap drops a bright tracer where you tap (Play: on the path),
+    integrated live with fixed RK4 steps so it moves the same at any frame rate, with a short trail;
+    off the attractor it is pulled onto it. Up to four tracers, each its own color; a fifth replaces
+    the oldest.
+  - Sound: A soft drip as the tracer drops, over a low, wide chord in the toy's own key.
+- **5-cell** (`five-cell`). Now: tap: Roll through 4D. Plan: keep.
+  - Owner: The owner's Math notes (BACKLOG.md, Math r2): other 4D shapes beside the hypercube, and
+    color themes.
+  - Effect: Rolls one whole turn through the fourth dimension and comes home.
+  - Improved: Math r2: new toy (labs), the 5-cell. The corners are true 4D points turned in the
+    planes of x and w and of y and w and seen in perspective from 4D; the edges stay straight
+    between them. A tap rolls the shape one whole turn through the fourth dimension (about 5 s) and
+    home. Seven color themes.
+  - Sound: Like the hypercube: a slow rush as it rolls out and again as it rolls home, over a low
+    chord in its own key.
+- **16-cell** (`sixteen-cell`). Now: tap: Roll through 4D. Plan: keep.
+  - Owner: The owner's Math notes (BACKLOG.md, Math r2): other 4D shapes beside the hypercube, and
+    color themes.
+  - Effect: Rolls one whole turn through the fourth dimension and comes home.
+  - Improved: Math r2: new toy (labs), the 16-cell. The corners are true 4D points turned in the
+    planes of x and w and of y and w and seen in perspective from 4D; the edges stay straight
+    between them. A tap rolls the shape one whole turn through the fourth dimension (about 5 s) and
+    home. Seven color themes.
+  - Sound: Like the hypercube: a slow rush as it rolls out and again as it rolls home, over a low
+    chord in its own key.
+- **24-cell** (`twenty-four-cell`). Now: tap: Roll through 4D. Plan: keep.
+  - Owner: The owner's Math notes (BACKLOG.md, Math r2): other 4D shapes beside the hypercube, and
+    color themes.
+  - Effect: Rolls one whole turn through the fourth dimension and comes home.
+  - Improved: Math r2: new toy (labs), the 24-cell. The corners are true 4D points turned in the
+    planes of x and w and of y and w and seen in perspective from 4D; the edges stay straight
+    between them. A tap rolls the shape one whole turn through the fourth dimension (about 5 s) and
+    home. Seven color themes.
+  - Sound: Like the hypercube: a slow rush as it rolls out and again as it rolls home, over a low
+    chord in its own key.
+- **Duoprism** (`duoprism`). Now: tap: Roll through 4D. Plan: keep.
+  - Owner: The owner's Math notes (BACKLOG.md, Math r2): other 4D shapes beside the hypercube, and
+    color themes.
+  - Effect: Rolls one whole turn through the fourth dimension and comes home.
+  - Improved: Math r2: new toy (labs), the duoprism (3,4 by default; each polygon 3 to 6 sides). The
+    corners are true 4D points turned in the planes of x and w and of y and w and seen in
+    perspective from 4D; the edges stay straight between them. A tap rolls the shape one whole turn
+    through the fourth dimension (about 5 s) and home. Seven color themes.
+  - Sound: Like the hypercube: a slow rush as it rolls out and again as it rolls home, over a low
+    chord in its own key.
 - **Splat equation** (`splat-equation`). Now: tap: Play t. Plan: keep.
   - Owner: The owner's notes and the Pages into Splats plan (accepted September 28, 2026): people
     type their own Gaussian splat equations and play with them, with a Tinkerer's Manual that
@@ -3126,7 +3247,7 @@ Proposals below are suggestions; the owner may change them.
     style; sharp sets (even placement in square tiles, walnut, velvet, brass and gold).
   - Sound: Switching on is the click and crackle without the hum; switching off is unchanged.
 
-## Studio (20)
+## Studio (21)
 
 - **Song landscape** (`song-landscape`). Now: tap: Play or pause the song. Plan: new effect (E6).
   - Owner: Approved on the Splashery Universe page (lane Studio Sound), September 29, 2026.
@@ -3154,8 +3275,21 @@ Proposals below are suggestions; the owner may change them.
     plate of scattered sand), and silence leaves it put; the bow shows only for a tap with no audio
     open. Live r7 polish: the sharp kernel (each grain a crisp speck), a clean straight rim and a
     smooth top on the plate, and a bow drawn like a real one (a round stick, a ribbon of hair, a
-    frog and a tip).
+    frog and a tip). Live r8 (the owner's walkthrough of October 6, 2026: "It still looks kind of
+    grainy"): the stand's base and post in fine discs in rows (they were a random fuzz of specks
+    from the side), the rim's discs smaller and set inside the edges (no soft fringe past the edge,
+    no spike at the corners), a finer top, and each sand grain a little smaller and fully opaque.
   - Sound: The plate's hum with the sand sliding as it settles (no patter of clicks).
+- **Sound in a box** (`chladni-cell`). Now: tap: Switch on the sound. Plan: new effect (E6).
+  - Owner: The owner's walkthrough of October 6, 2026 ("Could there be a 3D version? ... I don't
+    want it to be BS"), lane Live r8, October 7, 2026.
+  - Effect: Sound in a box (labs): a 1 cm glass cell of water and tiny plastic beads over an
+    ultrasound transducer. A tap rings one of the cell's resonant modes and every bead slides down
+    the Gor'kov potential of the acoustic radiation force (polystyrene in water) onto the mode's
+    pressure-nodal surfaces, a 3D Chladni figure, in a few seconds; tap again on a formed figure to
+    swirl the water and start over. Modes of a cube (single and mixed) and of a round flask (shells
+    and cones).
+  - Sound: The mode's tone, eight octaves down (the real cell rings at about 100 to 370 kHz).
 - **Room echo meter** (`room-echo`). Now: tap: Clap in the sample room. Plan: keep.
   - Owner: The owner's approval of lane Live input ("live input go", September 30, 2026; labs only).
   - Effect: A splat room with a wooden floor and three walls. Tap “Use my microphone” and clap once:

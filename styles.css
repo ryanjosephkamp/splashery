@@ -2029,6 +2029,23 @@ body.embed #stage {
   border-radius: 999px;
 }
 
+.embed-sound {
+  position: fixed;
+  top: 8px;
+  left: 8px;
+  z-index: 5;
+  width: 28px;
+  height: 28px;
+  min-height: 0;
+  padding: 0;
+  font-size: 14px;
+  line-height: 1;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+}
+
 .embed-status {
   position: fixed;
   left: 8px;
@@ -2978,3 +2995,91 @@ body.focus #pop-toggle {
 }
 
 /* /Lane Pages r6 */
+
+/* Live r8: a toy's depth slider over the stage's right edge (page controls,
+   not splats), with a × to hide it and a small button to bring it back. */
+.stage-dial,
+.stage-dial-show {
+  position: fixed;
+  right: calc(var(--panel-w) + 60px);
+  top: 50%;
+  z-index: 5;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink);
+  background: color-mix(in srgb, var(--paper) 88%, transparent);
+  border: 1px solid var(--line);
+}
+
+.stage-dial {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  width: 44px;
+  padding: 4px 0 8px;
+  border-radius: 22px;
+  transform: translateY(-50%);
+}
+
+.stage-dial[hidden],
+.stage-dial-show[hidden] {
+  display: none;
+}
+
+.stage-dial-hide {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  font: inherit;
+  font-size: 18px;
+  line-height: 1;
+  color: var(--ink);
+  background: none;
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+/* The range input turned upright: up is more. */
+.stage-dial-track {
+  position: relative;
+  width: 44px;
+  height: 160px;
+}
+
+.stage-dial-track input {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 150px;
+  margin: 0;
+  transform: translate(-50%, -50%) rotate(-90deg);
+}
+
+.stage-dial-show {
+  padding: 6px 10px;
+  border-radius: 999px;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+@media (max-width: 760px) {
+  /* On a phone: the right edge, below the toy's name and well above the
+     stage's own buttons, clear of a face in the middle. */
+  .stage-dial,
+  .stage-dial-show {
+    right: 8px;
+    top: 132px;
+    transform: none;
+  }
+
+  body.sheet-open .stage-dial,
+  body.sheet-open .stage-dial-show,
+  body.shelf-grid .stage-dial,
+  body.shelf-grid .stage-dial-show {
+    display: none;
+  }
+}
+
+/* /Live r8 */

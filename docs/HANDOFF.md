@@ -4,46 +4,36 @@ Where Splashery stands, in short. The Operator session keeps this file; each lan
 in [handoff/](handoff/). The ground rules are in [CLAUDE.md](../CLAUDE.md); how the parallel lanes
 work is in [OPERATING.md](OPERATING.md).
 
-## Now (October 7, 2026, about 13:15 UTC): after the Operator handover
+## Now (October 8, 2026, about 09:00 UTC)
 
-A fresh Operator (`session_012GmKRUMZLir2nb27Bo8Cu2`, Opus 5.5) took over at 04:29 UTC; the outgoing
-one stands by. This section is current. The sections below it are history. The runbook is
-[OPERATOR.md](OPERATOR.md).
+The Operator is `session_012GmKRUMZLir2nb27Bo8Cu2` (Opus 5.5). This section is current. The sections
+below it are history. The runbook is [OPERATOR.md](OPERATOR.md).
 
-**Main** is at `9101fa2f` (Ops #387). Merged October 7:
+**Effort (the owner's call of October 8, 2026):** every worker, lanes and Integrators alike, runs at
+high effort, and so do his Codex tasks. A session's effort is set in the Claude app; a message can't
+change it.
 
-- #379: Live r7's polish (#333, the steadier splat mirror)
-- #381: Showcase (#350), labs; #382 its handoff
-- #385: Powers of ten (#351 engine, #353), labs; #386 its handoff
-- #387: Arcade r2 (#366 engine, #372), the walkthrough's game fixes and the new brick and block
-  sounds
+**Main** is at `6201395c` (Ops #414). Merged October 8:
 
-**The push** ends October 7, 2026, 20:00 UTC (4 p.m. ET), the weekly reset. After it, about six
-workers (seven at most).
+- #409: the Codex kit (#398): the Codex cloud setup script, SETUP.md and Codex tasks 22 to 31
+- #410: Math r2 (#392) and Space r4 (#394), labs
+- #412: Lattices and orbitals (#393), labs
+- #413: the Ops merge tool (#397): `tools/op-merge.mjs`, now the Operator's merge routine (the hand
+  procedure stays the fallback)
+- #414: Photo sharp view (#402 engine, #403), labs: Sharp picture is the default view in Photo to 3D
+  and Moving photo to 3D (the owner's call), with Splats one tap away
 
-**Lanes running** (rows, sessions and files in WORKSTREAMS.md); every one waits on a full test run,
-the owner's marks, or both:
+**Lanes running** (rows, sessions and files in WORKSTREAMS.md):
 
-- **Fix9** (#370 + engine #368, Opus): cards all good; full run under way.
-- **Toy pages r2** (#371 + engine #365, Sonnet) and **Site r2** (#367, Sonnet): run together (both
-  rebuild the site). Toy pages cards good; Site r2 waits for the owner's mark on its new contact
-  card.
-- **Real elements** (#318, Opus) and **Sound D** (#369, Opus): run together. Sound D's new sounds
-  are approved; Real elements waits for marks on new bismuth, neon and sulfur cards.
-- **ASCII r2** (#377, Sonnet, labs): cards good; full run under way.
-- **Space r3** (#380, Opus) and **Dot samples** (#378, Sonnet): run together. Space r3 changes toys
-  the public sees (the real planets), so it needs the owner's marks.
-- **Live r8** (#384 + engine #383, Opus): started October 7; a sharper Chladni plate, an on-screen
-  depth slider, a 3D look only if the physics holds.
-- **Integrators** 1, 3, 4, 5 and 6 (Sonnet) are all busy.
+- **Photo fidelity** (Opus): sharper splats in both photo toys; merging main after Photo sharp view.
+- **Suite speed** (Opus): measuring the full suite file by file, then cutting its wall time.
 
-**Open with the owner** (details on the Operator's private page): the Codex drafts #335 and #352;
-the Recipes page calls; "sandbox go"; what the Dot's cloud computer can run; the status report's six
-decisions.
+**Open with the owner:** whether the Sharp or Splats choice is saved in scenes (nothing is stored
+until he says); the Codex bake-off runs and the blind review.
 
-**Next for the Operator:** merge what turns green; Live r8's full run when an Integrator frees;
-after the reset, cut to about six workers; fold lessons from the owner's marks into CLAUDE.md's
-quality rules as general rules, without quoting his notes.
+**Next for the Operator:** a small fix in `tools/op-merge.mjs` (it misses the Moving photo specs
+when `src/packs/moving-photo.js` changes); the next lanes from the kept list (Photoreal r3, the S4
+volume viewer, the X-ray car and photoreal landmarks, H1 to H5) at about six workers.
 
 ## State of main (2026-10-02, history)
 

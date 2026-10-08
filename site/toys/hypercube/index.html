@@ -190,13 +190,15 @@
                 style="background-image: url(&quot;../../../assets/toys/hypercube/thumb.webp&quot;)"
               ></span>
               <iframe
-                src="../../play/?toy=hypercube"
+                src="../../play/?toy=hypercube&sound=on"
                 title="Hypercube, live: drag to turn it"
                 loading="eager"
                 allow="fullscreen"
               ></iframe>
             </div>
-            <figcaption>Drag to turn it; tap to play.</figcaption>
+            <figcaption>
+              Drag to turn it; tap to play. The speaker button mutes the sound.
+            </figcaption>
           </figure>
         </div>
         <section class="toy-section" aria-labelledby="h-about">
@@ -212,7 +214,13 @@
             dimension: the pink inner cube swells out to become the outer one while the blue one
             folds inside, then it turns on back to where it started. Every edge stays perfectly
             straight the whole time. The 4D turn slider changes the strength of its gentle resting
-            rotation.
+            rotation, and Colors picks a theme.
+          </p>
+          <p class="learn-more">
+            Learn more:
+            <a href="https://en.wikipedia.org/wiki/Hypercube" target="_blank" rel="noopener"
+              >Hypercube on Wikipedia</a
+            >
           </p>
         </section>
 
@@ -317,7 +325,8 @@ https://ryanjosephkamp.github.io/splashery/site/toys/hypercube/</textarea
             </button>
           </div>
           <p class="note">
-            Embeds are silent and turn slowly when idle. Every option is in the
+            Embeds are silent and turn slowly when idle; add <code>&amp;sound=on</code> to the
+            iframe's link for the toy's tap sound, with a mute button. Every option is in the
             <a href="../../share/">embed guide</a>.
           </p>
         </section>
@@ -343,6 +352,54 @@ https://ryanjosephkamp.github.io/splashery/site/toys/hypercube/</textarea
             ></a>
           </div>
           <ul class="toy-grid">
+            <li class="toy-card" data-labs>
+              <a href="../../toys/sixteen-cell/"
+                ><img
+                  src="../../../assets/toys/sixteen-cell/thumb.webp"
+                  alt=""
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                /><span class="toy-name">16-cell <span class="badge">labs</span></span></a
+              >
+            </li>
+            <li class="toy-card" data-labs>
+              <a href="../../toys/twenty-four-cell/"
+                ><img
+                  src="../../../assets/toys/twenty-four-cell/thumb.webp"
+                  alt=""
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                /><span class="toy-name">24-cell <span class="badge">labs</span></span></a
+              >
+            </li>
+            <li class="toy-card" data-labs>
+              <a href="../../toys/five-cell/"
+                ><img
+                  src="../../../assets/toys/five-cell/thumb.webp"
+                  alt=""
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                /><span class="toy-name">5-cell <span class="badge">labs</span></span></a
+              >
+            </li>
+            <li class="toy-card" data-labs>
+              <a href="../../toys/duoprism/"
+                ><img
+                  src="../../../assets/toys/duoprism/thumb.webp"
+                  alt=""
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                /><span class="toy-name">Duoprism <span class="badge">labs</span></span></a
+              >
+            </li>
             <li class="toy-card">
               <a href="../../toys/menger-sponge/"
                 ><img
@@ -389,54 +446,6 @@ https://ryanjosephkamp.github.io/splashery/site/toys/hypercube/</textarea
                   loading="lazy"
                   decoding="async"
                 /><span class="toy-name">Fourier circles</span></a
-              >
-            </li>
-            <li class="toy-card">
-              <a href="../../toys/graph-plotter/"
-                ><img
-                  src="../../../assets/toys/graph-plotter/thumb.webp"
-                  alt=""
-                  width="96"
-                  height="96"
-                  loading="lazy"
-                  decoding="async"
-                /><span class="toy-name">Graph plotter</span></a
-              >
-            </li>
-            <li class="toy-card">
-              <a href="../../toys/gyroid/"
-                ><img
-                  src="../../../assets/toys/gyroid/thumb.webp"
-                  alt=""
-                  width="96"
-                  height="96"
-                  loading="lazy"
-                  decoding="async"
-                /><span class="toy-name">Gyroid</span></a
-              >
-            </li>
-            <li class="toy-card">
-              <a href="../../toys/klein-bottle/"
-                ><img
-                  src="../../../assets/toys/klein-bottle/thumb.webp"
-                  alt=""
-                  width="96"
-                  height="96"
-                  loading="lazy"
-                  decoding="async"
-                /><span class="toy-name">Klein bottle</span></a
-              >
-            </li>
-            <li class="toy-card">
-              <a href="../../toys/lorenz/"
-                ><img
-                  src="../../../assets/toys/lorenz/thumb.webp"
-                  alt=""
-                  width="96"
-                  height="96"
-                  loading="lazy"
-                  decoding="async"
-                /><span class="toy-name">Lorenz attractor</span></a
               >
             </li>
           </ul>

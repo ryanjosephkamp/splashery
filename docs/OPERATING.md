@@ -114,9 +114,9 @@ reconciles the worker sessions and brings him finished work.
 3. **Model and effort.** Each worker runs its lane's assigned model (Opus 5.5 or Sonnet 5.5); any
    other model needs the owner's permission first. At every check-in the Operator reads the worker's
    session record, and if it has run on another model (a fallback), the Operator stops it and tells
-   the owner. Effort is the default for now, a trial the owner chose. If either of them thinks it
-   isn't enough, the owner adds `CLAUDE_CODE_EFFORT_LEVEL=xhigh` to the environment's variables, and
-   every new session runs at Extra High. Helpers use the worker's own model.
+   the owner. Effort is high for every worker, lanes and Integrators alike (the owner's call of
+   October 8, 2026). The Operator checks it in the session record too and tells the owner if a
+   worker runs at another level. Helpers use the worker's own model.
 4. **Messages.** A worker never asks the owner. It ends each working turn with a short final
    message: "READY:" (PR link, card ids, test results, anything for the Operator), "WORKING:" (what
    is left) or "BLOCKED:" (exactly what it needs). The Operator reads it from the session record,
@@ -266,8 +266,8 @@ clips and cards at the same time without republishing it. The collections (the s
   else "(No note; plan: …)" with the plan's effect), `now` what the tap does now in plain words with
   its length, `asset` the uploaded clip's id, `at` the date (YYYY-MM-DD). Older cards use `clip` (a
   file published with the page, such as `e4/oak.gif`) instead of `asset`.
-- `verdicts/<card id>`: the owner's marks, `{ verdict: "good" | "fix" | "", note, at }`. Only the
-  owner writes these.
+- `verdicts/<card id>`: the owner's marks, `{ verdict: "good" | "fix" | "", note, at, sharper }`
+  (`sharper: true` marks a "Just sharper" fix on page 2, below). Only the owner writes these.
 
 Card ids are `<prefix>-<toy id>`, with a variant after it (`e5-cherries-pair`). A clip redone after
 the owner's note gets the old card's id plus `-r2` (then `-r3`), in the old card's lane. A card's
@@ -479,7 +479,55 @@ differ. A local lane's brief says "Local lane" at the top. Its session:
    fix whatever the owner marks "Needs work" in the same PR. Since October 3, 2026 a "fix" mark on
    Effect review page 2 is stored only when the owner sends it with its note, so every "fix" a lane
    reads carries his note; act on the note, and if a "fix" ever comes without one, ask the Operator
-   instead of guessing.
+   instead of guessing. Since October 7, 2026 page 2 also has a **"Just sharper"** button: one tap
+   stores a "fix" with `sharper: true` and the note "Everything else looks right. Just make it
+   sharper and less grainy (finer, denser splats where it shows; no blur, no speckle)." Read it as
+   exactly that: keep the effect, its motion, colors and timing as they are, and only sharpen it
+   (finer, denser splats where it shows, solid opaque materials, no blur or speckle, still smooth on
+   a phone). Post the sharper clip as the card's replacement. If something else also needs work, the
+   owner uses "Needs work" with his own note instead.
+
+## The merge tool (the Operator)
+
+`tools/op-merge.mjs` (the owner's pick of October 7, 2026) does the Operator's merge routine in one
+command, so a merge costs a few lines of output instead of a long session:
+
+```sh
+node tools/op-merge.mjs --topic oct7c --trailer-file .cache/trailers.txt \
+  --pr 389:<full sha> --title 389="Phase Showcase: the galaxy-box caption fits again" \
+  --pr 391:<full sha> --title 391="Phase Space r3: handoff after merge"
+```
+
+1. It fetches main (and any PR head it lacks, as `pull/<n>/head`), makes
+   `claude/operator-merge-<topic>` from `origin/main` and merges each head in the order given with
+   `--no-ff` and the message "Merge #<n> (<title>)" plus the trailer lines.
+2. A conflict in a generated file (site/ apart from the hand-written site/assets/, docs/TOY-PLAN.md,
+   src/showcase/facts.json) takes one side and is rebuilt in step 4. A conflict in
+   `tools/sound-review.json` is merged toy by toy (3-way, per key under "toys"). Anything else stops
+   with the files named and the merge left in progress: resolve them, `git add` them and rerun the
+   same command with `--continue` (or `git merge --abort`).
+3. It checks that `src/toys.js`, `src/toy-help.js` and `src/toy-sounds.js` parse and that the four
+   JSON lists are valid.
+4. It runs `toy-plan.mjs`, `site-build.mjs` and `shw-facts.mjs`, formats their output, runs both
+   `--check`s and commits "Ops: rebuild site/ after #a, #b" when anything changed.
+5. It runs the specs the PRs touched with `--workers=1`, restores the screenshots, and runs
+   `npx prettier --check .` and `node tools/us-english.mjs --diff`. The specs (the PR body says why
+   each one ran):
+   - changed specs, and specs whose prefix starts a changed file's name in src/, tools/ or
+     tests/screenshots/;
+   - taps, hta, help, unit and kit when `src/toys.js`, `src/toy-help.js` or `src/toy-sounds.js`
+     changes or a PR adds a kit toy;
+   - for a changed `src/packs/<pack>.js`, every spec that names one of that pack's toy ids;
+   - smoke (the embed transfer ≤ 30 MB test) when anything under assets/ changes;
+   - site, spg and tpg when a PR changes site/.
+6. It writes the PR body (the five sections) to `.cache/op-merge/<topic>-pr.md` and prints a title.
+   The full output is in `.cache/op-merge/<topic>.log` (and `<topic>-tests.log`).
+
+`--dry-run` predicts each merge (clean, settles itself, or stops on which files) and the specs it
+would run, without touching a branch. `--no-tests` skips the specs; `--spec <file>` adds one. Exit
+code 0 means all green, 1 a stop, 3 finished with a failing check (under Known issues). The tool
+never pushes, opens or merges a PR: push the branch, open the PR with the body (add your own
+footer), and merge it through GitHub as before.
 
 ## Upkeep after a merge (the Operator)
 

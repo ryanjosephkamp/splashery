@@ -1,9 +1,9 @@
 {
   "note": "Measured by tools/shw-facts.mjs; regenerate after a toy or its pack changes.",
   "shelf": {
-    "toys": 439,
+    "toys": 450,
     "public": 319,
-    "kit": 373
+    "kit": 384
   },
   "depthModelMB": 27.3,
   "toys": {
@@ -101,14 +101,14 @@
     "photo-3d": {
       "kind": "kit",
       "recipeFile": "src/packs/photo-3d.js",
-      "recipeKB": 19.4,
-      "recipeGzipKB": 7.1,
+      "recipeKB": 21.6,
+      "recipeGzipKB": 7.7,
       "sharedBy": 1
     },
     "moving-photo-3d": {
       "kind": "kit",
       "recipeFile": "src/packs/live.js",
-      "recipeKB": 19.6,
+      "recipeKB": 19.7,
       "recipeGzipKB": 7.4,
       "sharedBy": 3
     },
@@ -129,9 +129,9 @@
     "chladni-plate": {
       "kind": "kit",
       "recipeFile": "src/packs/studio.js",
-      "recipeKB": 69.7,
-      "recipeGzipKB": 23.3,
-      "sharedBy": 2
+      "recipeKB": 73.1,
+      "recipeGzipKB": 24.2,
+      "sharedBy": 3
     },
     "light-lab": {
       "kind": "kit",
@@ -150,9 +150,9 @@
     "fourier-circles": {
       "kind": "kit",
       "recipeFile": "src/packs/maths.js",
-      "recipeKB": 169.3,
-      "recipeGzipKB": 49.6,
-      "sharedBy": 16
+      "recipeKB": 203,
+      "recipeGzipKB": 59.9,
+      "sharedBy": 23
     },
     "newtons-cradle": {
       "kind": "kit",

@@ -23,11 +23,11 @@ test("the host accepts only a known preset, the fixed settings and its own job",
   for (const id of Object.keys(PRESETS))
     expect(readLabMessage(startMessage(job, id), job)).toBe("start");
   expect(startMessage(job, "orange").options).toEqual({ style: "whole" });
-  expect(() => startMessage(job, "pizza")).toThrow();
+  expect(() => startMessage(job, "no-such-toy")).toThrow();
   const start = startMessage(job, "grapes");
   for (const bad of [
     { ...start, job: newJobId() },
-    { ...start, toy: "pizza" },
+    { ...start, toy: "no-such-toy" },
     { ...start, toy: "orange" }, // the orange needs its whole option
     { ...startMessage(job, "orange"), options: { style: "half" } },
     { ...startMessage(job, "orange"), options: { style: "whole", extra: 1 } },

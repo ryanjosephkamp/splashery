@@ -1247,6 +1247,25 @@ ETOPO 2022 at 60 arc-seconds), and names what is there:
   Working Group for Planetary System Nomenclature; USGS Astrogeology Science Center), center points
   of every adopted feature but the lettered satellite craters. Public domain.
 
+## The solar system on real orbits (lane Space r4)
+
+All from JPL's Solar System Dynamics group (NASA/JPL; public domain scientific data), checked on the
+live pages on October 7, 2026, shipped as a dated snapshot (`tools/sp4-orbits.mjs`); nothing is
+fetched at run time.
+
+- The planets: E. M. Standish's
+  [Keplerian Elements for Approximate Positions of the Major Planets](https://ssd.jpl.nasa.gov/planets/approx_pos.html)
+  (Table 1, 1800 to 2050), through the night sky's code.
+- The moons: JPL's [Planetary Satellite Mean Elements](https://ssd.jpl.nasa.gov/sats/elem/), and
+  Titan's osculating elements from [JPL Horizons](https://ssd.jpl.nasa.gov/horizons/).
+- The asteroids and comets: the
+  [JPL Small-Body Database](https://ssd.jpl.nasa.gov/tools/sbdb_query.html) through its
+  [APIs](https://ssd-api.jpl.nasa.gov/): a seeded random sample of 4,000 numbered asteroids (plus
+  Ceres, Pallas, Vesta and Hygiea), and 1P/Halley, 2P/Encke, 9P/Tempel 1 and
+  67P/Churyumov-Gerasimenko.
+- The planets' and moons' colors: small copies of the real worlds' NASA and USGS maps (above).
+- The tests compare positions with values recorded from JPL Horizons.
+
 ## Powers of ten (lane Powers of ten)
 
 The Powers of ten zoom (labs) shows each scale with real pictures and real data. Its own files are
@@ -1508,6 +1527,26 @@ uses.
 | `vintage-camera-flash.mp3`               | vintage-camera                                        | [Vintage Camera Flash Powder and Shutter](https://freesound.org/people/Werra/sounds/232130/)               | Werra            |
 | `wooden-elephant-trumpet.mp3`            | wooden-elephant                                       | [Elephant Trumpets Growls.flac](https://freesound.org/people/D.jones/sounds/527845/)                       | D.jones          |
 
+## Lattices and orbitals (lane Lattices and orbitals)
+
+The Unit cells toy (labs) is computed from published numbers; no files are shipped. The cells and
+atom positions come from the [Crystallography Open Database](https://www.crystallography.net/cod/),
+whose data are in the public domain ("All data on this site have been placed in the public domain by
+the contributors"), checked October 7, 2026:
+[COD 9008564](https://www.crystallography.net/cod/9008564.html) (diamond),
+[COD 9008468](https://www.crystallography.net/cod/9008468.html) (copper),
+[COD 9008536](https://www.crystallography.net/cod/9008536.html) (α-iron) and
+[COD 9008506](https://www.crystallography.net/cod/9008506.html) (magnesium), all from R. W. G.
+Wyckoff, Crystal Structures (1963); [COD 9011577](https://www.crystallography.net/cod/9011577.html)
+(graphite, P. Trucano and R. Chen, Nature 258, 136–137, 1975);
+[COD 1538173](https://www.crystallography.net/cod/1538173.html) (ice Ih, A. Goto, T. Hondoh and S.
+Mae, J. Chem. Phys. 93, 1412, 1990) and
+[COD 1572227](https://www.crystallography.net/cod/1572227.html) (ice Ih's displacements at 81 K,
+IUCrJ 11, 2024). The Debye–Waller factors of diamond, copper, iron and magnesium at 293 K are from
+L.-M. Peng, G. Ren, S. L. Dudarev and M. J. Whelan, Acta Crystallographica A 52, 456–470 (1996), and
+the covalent radii of O and H from B. Cordero et al., Dalton Transactions, 2832–2838 (2008); numbers
+are facts, quoted with their source. The Orbital atlas computes the hydrogen wave functions itself.
+
 ## Software
 
 Splashery is built on the [PlayCanvas engine](https://github.com/playcanvas/engine) (MIT) and uses
@@ -1523,3 +1562,43 @@ domain), a build tool only. The QR code toy (lane QR) uses Project Nayuki's
 its codes and [jsQR](https://github.com/cozmo/jsQR) (Apache 2.0) to check that they scan, both
 loaded only when that toy opens (jsQR only when a check runs in a browser without its own QR
 reader). "QR Code" is a registered trademark of DENSO WAVE INCORPORATED.
+
+## AI-made Studio samples (Dot samples)
+
+The owner made 40 pictures with his own AI image tool (the "Dot" prompt pack, D01 to D40). Thirty of
+them ship as Photo to 3D samples in `assets/toys/photo-3d/ai/` (a JPEG, 1,280 px wide, and a depth
+map made by `tools/dsm-depth.mjs`), under the AI-made sample rules of October 5, 2026: no people,
+logos or text; labeled AI-made beside them (in the picker, the label and the credit); never real
+captures or real places, and never used for science, math or engineering toys. The pictures belong
+to the owner, who made them; no third-party work is in them. Checked October 7, 2026:
+
+- Train on a viaduct (D01): `assets/toys/photo-3d/ai/train.jpg`.
+- Desert oasis (D03): `assets/toys/photo-3d/ai/oasis.jpg`.
+- Castle on a lake (D04): `assets/toys/photo-3d/ai/castle.jpg`.
+- Fishing cove (D05): `assets/toys/photo-3d/ai/cove.jpg`.
+- Toy harbor (D34): `assets/toys/photo-3d/ai/harbor.jpg`.
+- Paper valley (D36): `assets/toys/photo-3d/ai/paper-valley.jpg`.
+- Felt farm (D37): `assets/toys/photo-3d/ai/farm.jpg`.
+- Treehouse village (D02): `assets/toys/photo-3d/ai/treehouses.jpg`.
+- Long library (D06): `assets/toys/photo-3d/ai/library.jpg`.
+- Woodworking shop (D07): `assets/toys/photo-3d/ai/workshop.jpg`.
+- Stone cloister (D08): `assets/toys/photo-3d/ai/cloister.jpg`.
+- Greenhouse (D10): `assets/toys/photo-3d/ai/greenhouse.jpg`.
+- Attic (D14): `assets/toys/photo-3d/ai/attic.jpg`.
+- Bamboo path (D16): `assets/toys/photo-3d/ai/bamboo.jpg`.
+- Rice terraces (D11): `assets/toys/photo-3d/ai/terraces.jpg`.
+- Canyon at sunset (D13): `assets/toys/photo-3d/ai/canyon.jpg`.
+- Stone arch (D17): `assets/toys/photo-3d/ai/arch.jpg`.
+- Forest and fallen log (D19): `assets/toys/photo-3d/ai/fallen-log.jpg`.
+- Alpine lake (D20): `assets/toys/photo-3d/ai/alpine-lake.jpg`.
+- Frozen waterfall (D30): `assets/toys/photo-3d/ai/ice-falls.jpg`.
+- Floating islands (D32): `assets/toys/photo-3d/ai/floating-isles.jpg`.
+- Glass wave (D38): `assets/toys/photo-3d/ai/wave.jpg`.
+- Explorer's desk (D21): `assets/toys/photo-3d/ai/explorer-desk.jpg`.
+- Watchmaker's bench (D22): `assets/toys/photo-3d/ai/watchmaker.jpg`.
+- Dragonfly (D26): `assets/toys/photo-3d/ai/dragonfly.jpg`.
+- Mushrooms (D27): `assets/toys/photo-3d/ai/mushrooms.jpg`.
+- Fruit market (D28): `assets/toys/photo-3d/ai/market.jpg`.
+- Giant gears (D31): `assets/toys/photo-3d/ai/gears.jpg`.
+- Chess board (D40): `assets/toys/photo-3d/ai/chess.jpg`.
+- City of books (D29): `assets/toys/photo-3d/ai/book-city.jpg`.

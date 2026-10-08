@@ -196,13 +196,15 @@
                 "
               ></span>
               <iframe
-                src="../../play/?toy=red-blood-cell"
+                src="../../play/?toy=red-blood-cell&sound=on"
                 title="Red blood cell, live: drag to turn it"
                 loading="eager"
                 allow="fullscreen"
               ></iframe>
             </div>
-            <figcaption>Drag to turn it; tap to play.</figcaption>
+            <figcaption>
+              Drag to turn it; tap to play. The speaker button mutes the sound.
+            </figcaption>
           </figure>
         </div>
         <section class="toy-section" aria-labelledby="h-about">
@@ -218,6 +220,12 @@
             into a disc. This happens in sickle cell disease, where a change in the hemoglobin makes
             cells stiffen when oxygen is low. The body makes millions of new red blood cells every
             second.
+          </p>
+          <p class="learn-more">
+            Learn more:
+            <a href="https://en.wikipedia.org/wiki/Red_blood_cell" target="_blank" rel="noopener"
+              >Red blood cell on Wikipedia</a
+            >
           </p>
         </section>
 
@@ -322,7 +330,8 @@ https://ryanjosephkamp.github.io/splashery/site/toys/red-blood-cell/</textarea
             </button>
           </div>
           <p class="note">
-            Embeds are silent and turn slowly when idle. Every option is in the
+            Embeds are silent and turn slowly when idle; add <code>&amp;sound=on</code> to the
+            iframe's link for the toy's tap sound, with a mute button. Every option is in the
             <a href="../../share/">embed guide</a>.
           </p>
         </section>

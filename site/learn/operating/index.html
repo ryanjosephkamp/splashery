@@ -169,6 +169,7 @@
               <li><a href="#branches-and-prs">Branches and PRs</a></li>
               <li><a href="#a-lane-s-start">A lane's start</a></li>
               <li><a href="#a-lane-s-end">A lane's end</a></li>
+              <li><a href="#the-merge-tool-the-operator">The merge tool (the Operator)</a></li>
               <li>
                 <a href="#upkeep-after-a-merge-the-operator">Upkeep after a merge (the Operator)</a>
               </li>
@@ -516,10 +517,10 @@
               <strong>Model and effort.</strong> Each worker runs its lane's assigned model (Opus
               5.5 or Sonnet 5.5); any other model needs the owner's permission first. At every
               check-in the Operator reads the worker's session record, and if it has run on another
-              model (a fallback), the Operator stops it and tells the owner. Effort is the default
-              for now, a trial the owner chose. If either of them thinks it isn't enough, the owner
-              adds <code>CLAUDE_CODE_EFFORT_LEVEL=xhigh</code> to the environment's variables, and
-              every new session runs at Extra High. Helpers use the worker's own model.
+              model (a fallback), the Operator stops it and tells the owner. Effort is high for
+              every worker, lanes and Integrators alike (the owner's call of October 8, 2026). The
+              Operator checks it in the session record too and tells the owner if a worker runs at
+              another level. Helpers use the worker's own model.
             </li>
             <li>
               <strong>Messages.</strong> A worker never asks the owner. It ends each working turn
@@ -788,7 +789,11 @@
             </li>
             <li>
               <code>verdicts/&lt;card id&gt;</code>: the owner's marks,
-              <code>{ verdict: &quot;good&quot; | &quot;fix&quot; | &quot;&quot;, note, at }</code>.
+              <code
+                >{ verdict: &quot;good&quot; | &quot;fix&quot; | &quot;&quot;, note, at, sharper
+                }</code
+              >
+              (<code>sharper: true</code> marks a &quot;Just sharper&quot; fix on page 2, below).
               Only the owner writes these.
             </li>
           </ul>
@@ -1211,9 +1216,92 @@
               PR. Since October 3, 2026 a &quot;fix&quot; mark on Effect review page 2 is stored
               only when the owner sends it with its note, so every &quot;fix&quot; a lane reads
               carries his note; act on the note, and if a &quot;fix&quot; ever comes without one,
-              ask the Operator instead of guessing.
+              ask the Operator instead of guessing. Since October 7, 2026 page 2 also has a
+              <strong>&quot;Just sharper&quot;</strong> button: one tap stores a &quot;fix&quot;
+              with <code>sharper: true</code> and the note &quot;Everything else looks right. Just
+              make it sharper and less grainy (finer, denser splats where it shows; no blur, no
+              speckle).&quot; Read it as exactly that: keep the effect, its motion, colors and
+              timing as they are, and only sharpen it (finer, denser splats where it shows, solid
+              opaque materials, no blur or speckle, still smooth on a phone). Post the sharper clip
+              as the card's replacement. If something else also needs work, the owner uses
+              &quot;Needs work&quot; with his own note instead.
             </li>
           </ol>
+          <h2 id="the-merge-tool-the-operator">The merge tool (the Operator)</h2>
+          <p>
+            <code>tools/op-merge.mjs</code> (the owner's pick of October 7, 2026) does the
+            Operator's merge routine in one command, so a merge costs a few lines of output instead
+            of a long session:
+          </p>
+          <pre><code>node tools/op-merge.mjs --topic oct7c --trailer-file .cache/trailers.txt \
+  --pr 389:&lt;full sha&gt; --title 389=&quot;Phase Showcase: the galaxy-box caption fits again&quot; \
+  --pr 391:&lt;full sha&gt; --title 391=&quot;Phase Space r3: handoff after merge&quot;</code></pre>
+          <ol>
+            <li>
+              It fetches main (and any PR head it lacks, as <code>pull/&lt;n&gt;/head</code>), makes
+              <code>claude/operator-merge-&lt;topic&gt;</code> from <code>origin/main</code> and
+              merges each head in the order given with <code>--no-ff</code> and the message
+              &quot;Merge #&lt;n&gt; (&lt;title&gt;)&quot; plus the trailer lines.
+            </li>
+            <li>
+              A conflict in a generated file (site/ apart from the hand-written site/assets/,
+              docs/TOY-PLAN.md, src/showcase/facts.json) takes one side and is rebuilt in step 4. A
+              conflict in <code>tools/sound-review.json</code> is merged toy by toy (3-way, per key
+              under &quot;toys&quot;). Anything else stops with the files named and the merge left
+              in progress: resolve them, <code>git add</code> them and rerun the same command with
+              <code>--continue</code> (or <code>git merge --abort</code>).
+            </li>
+            <li>
+              It checks that <code>src/toys.js</code>, <code>src/toy-help.js</code> and
+              <code>src/toy-sounds.js</code> parse and that the four JSON lists are valid.
+            </li>
+            <li>
+              It runs <code>toy-plan.mjs</code>, <code>site-build.mjs</code> and
+              <code>shw-facts.mjs</code>, formats their output, runs both <code>--check</code>s and
+              commits &quot;Ops: rebuild site/ after #a, #b&quot; when anything changed.
+            </li>
+            <li>
+              <p>
+                It runs the specs the PRs touched with <code>--workers=1</code>, restores the
+                screenshots, and runs <code>npx prettier --check .</code> and
+                <code>node tools/us-english.mjs --diff</code>. The specs (the PR body says why each
+                one ran):
+              </p>
+              <ul>
+                <li>
+                  changed specs, and specs whose prefix starts a changed file's name in src/, tools/
+                  or tests/screenshots/;
+                </li>
+                <li>
+                  taps, hta, help, unit and kit when <code>src/toys.js</code>,
+                  <code>src/toy-help.js</code> or <code>src/toy-sounds.js</code> changes or a PR
+                  adds a kit toy;
+                </li>
+                <li>
+                  for a changed <code>src/packs/&lt;pack&gt;.js</code>, every spec that names one of
+                  that pack's toy ids;
+                </li>
+                <li>
+                  smoke (the embed transfer ≤ 30 MB test) when anything under assets/ changes;
+                </li>
+                <li>site, spg and tpg when a PR changes site/.</li>
+              </ul>
+            </li>
+            <li>
+              It writes the PR body (the five sections) to
+              <code>.cache/op-merge/&lt;topic&gt;-pr.md</code> and prints a title. The full output
+              is in <code>.cache/op-merge/&lt;topic&gt;.log</code> (and
+              <code>&lt;topic&gt;-tests.log</code>).
+            </li>
+          </ol>
+          <p>
+            <code>--dry-run</code> predicts each merge (clean, settles itself, or stops on which
+            files) and the specs it would run, without touching a branch.
+            <code>--no-tests</code> skips the specs; <code>--spec &lt;file&gt;</code> adds one. Exit
+            code 0 means all green, 1 a stop, 3 finished with a failing check (under Known issues).
+            The tool never pushes, opens or merges a PR: push the branch, open the PR with the body
+            (add your own footer), and merge it through GitHub as before.
+          </p>
           <h2 id="upkeep-after-a-merge-the-operator">Upkeep after a merge (the Operator)</h2>
           <ol>
             <li>Update your copy of main.</li>
