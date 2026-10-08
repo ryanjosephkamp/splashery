@@ -811,14 +811,19 @@ Lane Hands-on H2 (October 8, 2026) added these keys to a piece's def:
   its splats were built (a kiwi's half, built face up and shown closed): the body starts and goes
   home there, and the piece's splats move from where they were built.
 - `ride: [index | { token, visible }]`: other tokens that move with the piece (a banana's skin
-  strips; `visible: 0` keeps one hidden, its pale inside).
+  strips; `visible: 0` keeps one hidden, its pale inside). A part piece can carry other parts too:
+  `{ part, pivot, upside }` moves that part with it (about `pivot`, the piece's own by default), and
+  merges `upside` into it while the piece lies upside down (a flipped pancake's syrup and butter,
+  now under it: `{ visible: 0 }`). The drive moves it with the piece the rest of the time.
 - `offHome: { … }`: entries merged into the piece's part while it is off its place (a candle pulled
   out of the cake goes out: `{ visible: 0 }`).
 - `flip: true` (below).
 
 And `hands.foot` (0.6): how far out from its middle, as a share of its pick radius, a held piece
 looks for what is under it; 0.95 lets a wide piece (a burger's bun) set down beside a stack sit on
-its edge instead of being lowered into it.
+its edge instead of being lowered into it. And `hands.walls` (`[x0, x1, z0, z1]`, toy radii) in
+place of the square `area`, for a play area that isn't square: the croissant's lid stays on its
+baking tray.
 
 `info.hands.moved` is whether anything is off home (or on its way back), so a drive can show what
 Hands-on uncovered (the cut face of the kiwi half left behind). And a break joint takes `spill`
