@@ -778,9 +778,14 @@ tree's trunk) fires the toy's tap action (or `key`), at most every `gap` seconds
 lag behind the moving toy: `info.hands.slosh` is a sideways offset (recipe units, at most that much)
 for a part (the snow globe's snow; keep the part inside its glass by that margin).
 
+With `fire: false` the shake fires nothing and only `info.hands.shake` reads it (a decorated tree's
+baubles swing harder the harder it is shaken, while its tap still switches the lights; lane Hands-on
+H3).
+
 ```js
 hands: { shake: true },
 hands: { shake: { key: "snow", gap: 0.6 } },
+hands: { shake: { fire: false } },
 drive(t, c, out, info) {
   const s = Math.max(c.shake, info.hands?.shake ?? 0); // the harder the shake, the more snow
 ```
