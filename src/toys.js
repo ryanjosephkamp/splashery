@@ -3597,6 +3597,17 @@ export const TOYS = [
     tags: "chladni plate sand sound vibration frequency resonance mode nodal lines pattern bow physics",
     camera: { yaw: 0.2, pitch: 0.95, roll: 0, distance: 4.1 },
   },
+  // Lane Live r8: the Chladni plate in three dimensions (labs).
+  {
+    id: "chladni-cell",
+    label: "Sound in a box",
+    category: "studio",
+    kind: "kit",
+    pack: "studio",
+    labs: true,
+    tags: "chladni 3d sound ultrasound standing wave acoustic radiation force beads nodal surface cube flask acoustophoresis physics",
+    camera: { yaw: 0.55, pitch: 0.42, roll: 0, distance: 4.6 },
+  },
   // ---- Pack: live (lane Live input) ----
   {
     id: "room-echo",

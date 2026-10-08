@@ -18,11 +18,12 @@ coordinates. [docs/OPERATING.md](docs/OPERATING.md) has the rules. In short:
   worker session with it, checks and steers it, reconciles the PRs and brings the owner finished
   work. The owner talks only to the Operator and reviews the clips. A worker puts its questions in
   its final message ("READY:", "WORKING:" or "BLOCKED:"), not to the owner.
-- Each worker runs the model its lane is assigned, at the default effort (the owner's split of
-  September 29, 2026): Opus 5.5 for the engine, the toys, sounds, fidelity and the Operator; Sonnet
-  5.5 for the Worlds content (games, templates), the Studio converters, the docs and the Integrator.
-  Any other model needs the owner's permission first. Every lane, PR and clip names its model. The
-  Operator checks each worker's model at every check-in and stops one that has run on another.
+- Each worker runs the model its lane is assigned, at high effort (the owner's call of October 8,
+  2026; the model split is his of September 29, 2026): Opus 5.5 for the engine, the toys, sounds,
+  fidelity and the Operator; Sonnet 5.5 for the Worlds content (games, templates), the Studio
+  converters, the docs and the Integrator. Any other model needs the owner's permission first. Every
+  lane, PR and clip names its model. The Operator checks each worker's model at every check-in and
+  stops one that has run on another.
 - A lane edits only the files it owns (its row in WORKSTREAMS.md) and its own toys' entries in the
   shared lists (`src/toy-sounds.js`, `src/toy-help.js`, `tools/toy-plan.json`, `src/toys.js`,
   credits).

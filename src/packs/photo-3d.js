@@ -17,6 +17,7 @@ import {
   SPLAT_OPACITY,
   SPLAT_FLAT,
 } from "./photo-3d-core.js";
+import { DOT_SAMPLES } from "./dot-samples.js"; // lane Dot samples: the AI-made pictures
 
 export { PHOTO_BUDGETS };
 import { sharpEntry, sharpPhoto, sharpDrive } from "./photo-sharp.js"; // lane Photo sharp view
@@ -91,6 +92,10 @@ export const SAMPLES = [
     licenseUrl: "https://creativecommons.org/publicdomain/zero/1.0/",
   },
 ];
+
+// Every sample the picker offers: the CC0 photos above, then the AI-made pictures (lane Dot samples;
+// SAMPLES stays the CC0 six, which p3d.spec builds on every tier).
+export const ALL_SAMPLES = [...SAMPLES, ...DOT_SAMPLES];
 
 // Smd r2: the backing layer of a built photo: a coarse grid of splats, each at the deepest depth of
 // the splats near it and in their color (the far side of a depth edge), a little behind them.
@@ -279,11 +284,13 @@ async function readBytes(rel) {
 }
 
 async function loadSample(id) {
-  const s = SAMPLES.find((x) => x.id === id) || SAMPLES[0];
+  const s = ALL_SAMPLES.find((x) => x.id === id) || SAMPLES[0];
   if (!P3D.samples.has(s.id)) {
+    const dir = s.dir ? `${s.dir}/` : ""; // (lane Dot samples: the AI-made ones are in ai/)
+    const file = s.file || s.id;
     const [jpg, dep] = await Promise.all([
-      readBytes(`../../assets/toys/photo-3d/${s.id}.jpg`),
-      readBytes(`../../assets/toys/photo-3d/${s.id}.depth`),
+      readBytes(`../../assets/toys/photo-3d/${dir}${file}.${s.ext || "jpg"}`),
+      readBytes(`../../assets/toys/photo-3d/${dir}${file}.depth`),
     ]);
     P3D.samples.set(s.id, {
       photo: await decodePhoto(jpg),
@@ -335,11 +342,25 @@ const PHOTO_3D = {
       type: "select",
       default: "forest",
       choices: [
-        ...SAMPLES.map((s) => ({ id: s.id, label: s.label })),
+        ...ALL_SAMPLES.map((s) => ({
+          id: s.id,
+          label: s.label,
+          ...(s.group && { group: s.group }),
+        })),
         { id: "custom", label: "Your photo (open one below)" },
       ],
     },
-    { key: "depth", label: "Depth", type: "slider", min: 0, max: 1, step: 0.05, default: 0.5 },
+    // Live r8: also a slider over the stage.
+    {
+      key: "depth",
+      label: "Depth",
+      type: "slider",
+      min: 0,
+      max: 1,
+      step: 0.05,
+      default: 0.5,
+      stage: true,
+    },
     {
       key: "original",
       label: "Show the original",
@@ -383,7 +404,7 @@ const PHOTO_3D = {
       return `${i.name}: ${fmt(i.splats)} splats in ${i.pieces} pieces of surface.${took}`;
     },
   },
-  credits: SAMPLES.map((s) => ({
+  credits: ALL_SAMPLES.map((s) => ({
     label: s.label,
     title: s.title,
     source: s.source,
