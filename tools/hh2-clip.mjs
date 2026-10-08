@@ -18,6 +18,7 @@
 //        points over secs, hold, let go (the app's own pointer path)
 //   { "from3": [x, y, z], "to3": [[x, y, z], ...], "secs": 0.6 }
 //        the same, from and to recipe points (a piece's home, a spot)
+//   ... "flick3": [x, y, z], "flickSecs": 0.15  then a quick move there before letting go
 //   { "tap": [dx, dy] }                     a tap there
 //   { "tap3": [x, y, z] }                   a tap on a recipe point
 //   { "toy": "id" }                         opens another toy (one clip, several toys)
@@ -219,14 +220,28 @@ for (const s of script) {
       await shoot();
     }
     for (let t = 0; t < (s.hold ?? 0) - 1e-6; t += step) await shoot();
-    await page.evaluate(
-      (p) => {
-        const S = window.__clip;
-        S.pointer("pointerup", ...p);
-        S.finger = null;
-      },
-      pts[pts.length - 1],
-    );
+    // `flick3`: then a quick move to that recipe point (over `flickSecs`,
+    // 0.15 s) before letting go there (a pancake flipped).
+    let last = pts[pts.length - 1];
+    if (s.flick3) {
+      const to = await page.evaluate((p) => window.__clip.screenOf(p), s.flick3);
+      const k = Math.max(2, Math.round((s.flickSecs ?? 0.15) / step));
+      for (let i = 1; i <= k; i++) {
+        const p = [last[0] + ((to[0] - last[0]) * i) / k, last[1] + ((to[1] - last[1]) * i) / k];
+        await page.evaluate((p) => {
+          const S = window.__clip;
+          S.finger = p;
+          S.pointer("pointermove", ...p);
+        }, p);
+        await shoot();
+      }
+      last = to;
+    }
+    await page.evaluate((p) => {
+      const S = window.__clip;
+      S.pointer("pointerup", ...p);
+      S.finger = null;
+    }, last);
   }
 }
 await browser.close();

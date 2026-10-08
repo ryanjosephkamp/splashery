@@ -90,6 +90,78 @@ file. The engine files belong to the merged engines; another lane's toys are the
 - Before every push: CLAUDE.md, "Before every push", with the local test set. At the end: "A lane's
   end".
 
+### Brief, October 8, 2026 (cloud)
+
+The Operator (session_012GmKRUMZLir2nb27Bo8Cu2) restarted this lane in the cloud on October 8, 2026:
+run in the cloud, not on the owner's Mac (ignore the parts about his Mac, his second account and the
+local port; use `python3 -m http.server 4173 --bind 127.0.0.1`), and post clips on Effect review
+page 2 rather than a clips branch. The first check (docs/PACKS.md sections 5f, 5g and 5h) passes.
+Everything else in the brief above stands, in its order. Hands-on play only adds to a toy: with the
+✋ switch off every toy plays exactly as before, and these are toys the public sees, so each shelf's
+PR waits for the owner's "good" marks on its cards. How this lane runs: as
+docs/handoff/ScienceR3.md, "How this lane runs", says (prefix `hh2`, lane record `HandsH2`). Clips
+at phone size (390×844, device scale 3) on Effect review page 2; new sounds in
+tools/sound-review.json as "ready". Finish every working turn with "READY:", "WORKING:" or
+"BLOCKED:". Card ids hh2-…. A first READY with the first shelf and its clips within about six hours.
+
 ## State
 
-WORKING: not started yet (October 3, 2026).
+WORKING: Food shelf built and tested on `claude/lane-hands-h2-food` (PR to come with its clips); the
+engine pieces it needed are in draft PR #420 (`claude/lane-hands-h2-engine`, merged into the Food
+branch). Nature is next. (October 8, 2026.)
+
+Food, line by line (docs/HANDS-ON-PLAN.md):
+
+- Done: ice cream (scoops ride the cone on break joints, lift off, and spill when the cone is
+  tipped), watermelon (six slices on sockets; the wedge picks up), birthday cake (each candle a
+  token carrying its own flame part; pulled out it goes out; sockets push it back; the cake is a
+  fixed collider), popcorn (the bucket tips on a hinge on its bottom edge; 14 kernels ride it and
+  spill), pancakes (each pancake its own part; the plate a piece; a quick flick up flips one),
+  cupcake (cherry on a socket; the frosting stretches), pretzel (stretches from its sides),
+  croissant (the top on a socket), burger (six layers, free, stack in any order), boiled egg (the
+  cap on a socket), coffee (stirred: the latte art's twelve rings turn after the finger), bananas
+  (each breaks off at its neck with its skin riding it), kiwi (halves pulled apart show their faces;
+  sockets put them back), pineapple (rings and crown stack), grapes (nine snap off and bounce),
+  avocado (the stone lifts out and back; the empty half picks up).
+- Skipped as the plan says: lollipop, taco, apple (Level 1 only); jelly, macarons, sushi, cherries
+  (lane Physics); gummy bear (already hands-on); candy cane, pizza, orange (engine demo toys).
+- Cut for now: the avocado's "drop it in either half" (the stone only goes back into its own half;
+  see Known issues).
+
+## Notes
+
+- Engine pieces added (PR #420, all opt-in, documented in docs/PACKS.md 5f): `flip` (a placed piece
+  flicked up turns over), `shown` (a piece's rest pose when the drive shows it away from where it
+  was built), `ride` (tokens that move with a piece, on token or part pieces), `place: false` on one
+  piece, `offHome` (part entries while a piece is off its place), `hands.foot`, `info.hands.moved`,
+  and on a break joint `spill` (comes loose when what it rides tips) and `place: true` (snapped off,
+  it is held as a picked piece is).
+- With ✋ off, every changed Food toy builds exactly the same splats as on main (positions, colors,
+  sizes, turns and behaviors compared splat by splat; only the part indices differ, and the drives
+  give the new parts the same moves the old ones had). The birthday cake's candles became tokens
+  (behavior code changes, look identical in a screenshot side by side).
+- `tools/hh2-bounds.mjs` prints each part's and token's extent in recipe units (for sizing pieces).
+  `tools/hh2-clip.mjs` is lane Physics's clip tool with `--scale` and a `flick3` step.
+- L1 sweep (docs/audits/hands-l1-sweep-2026-10.md): its findings on Food and Nature are engine-side
+  ("rest-height" from the sparse hull, "center-miss" in app.js), nothing in these toys' recipes.
+- Any pose: these toys play in pieces mode (the toy itself stays put), so the three poses are the
+  pieces': tests/hh2-food.spec.mjs puts a kiwi half back after laying it face down, flips a pancake
+  twice, and pushes a candle back after it lay on its side.
+
+## Known issues
+
+- Avocado: the stone goes back only into its own half. A physical cup in the tipped empty half did
+  not hold it (it rolls out over the low side); a socket with several seats would need an engine
+  piece. The empty seat of the first half shows flat flesh (it was never built hollow; changing it
+  would change the toy with ✋ off).
+- Pancakes: a flipped top pancake lands with its syrup and butter under it; the butter shows faintly
+  through it at phone size.
+- Coffee: ↺ doesn't unstir the art (stirring isn't a piece); turning ✋ off resets it.
+- A wide piece set down right beside a stack (the burger's bun) can topple off its edge and nudge
+  the light layers; that is the physics, and it reads as such.
+
+## For the Operator
+
+- Clips are at device scale 2, not 3: SwiftShader here takes about 2.7 s a frame at scale 2 and
+  about 6 s (15 s with tests running) at scale 3, about 5 hours for the 16 Food clips. Say if you
+  want them redone at 3.

@@ -59,7 +59,8 @@ async function flickDrag(page, points, flick, steps = 12) {
   const px = await screen(page, points);
   await page.mouse.move(...px[0]);
   await page.mouse.down();
-  await page.waitForTimeout(300); // (the press's pick is async)
+  // (The press's pick is async: wait for Hands-on to have it.)
+  await page.waitForFunction(() => !!window.__splashery.player.handsOn.press, null, { timeout: 5000 }); // prettier-ignore
   await page.evaluate(
     ([pts, flick, steps]) => {
       const { player } = window.__splashery;
