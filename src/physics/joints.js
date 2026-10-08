@@ -353,7 +353,7 @@ export class Joints {
     const strength = (j.d.pull ?? 0.35) * R;
     j.pull = v3.len(pull) / strength;
     if (j.pull >= 1) {
-      this.snap(j, h, f, ray.dir);
+      this.snap(j, h, f, ray.dir, ray);
       return;
     }
     // Bend: about `at`, turning the grab toward the finger, up to `give`.
@@ -371,7 +371,7 @@ export class Joints {
   }
 
   // It snaps off: a loose body now, held by the finger the usual way.
-  snap(j, h, f, dir) {
+  snap(j, h, f, dir, ray) {
     const hands = this.hands;
     j.broken = true;
     const T = this.full(j);
@@ -397,6 +397,19 @@ export class Joints {
     b.angDampingFree ??= b.angDamping;
     b.angDamping = 1.2;
     hands.hold = { body: b, joint, place: false, plane: { point: at.slice(), normal: dir.slice() }, target: f.slice(), follow: at.slice(), followV: [0, 0, 0], trail: [], x0: h.x0, y0: h.y0, travel: h.travel, minY: -Infinity, raise: 0 }; // prettier-ignore
+    // Lane Hands-on H2: `place: true` holds it as a picked piece is held
+    // instead: by its middle, level, hovering over whatever is under the
+    // finger (a stone dropped into the half under the finger).
+    if (j.d.place && ray) {
+      joint.la = [0, 0, 0];
+      joint.lb = b.pos.slice();
+      const fw = quat.rotate(b.q, [1, 0, 0]);
+      b.holdQ = quat.axisAngle([0, 1, 0], Math.atan2(-fw[2], fw[0]));
+      b.holdK = 10;
+      b.angDamping = 7;
+      Object.assign(hands.hold, { place: true, target: b.pos.slice(), follow: b.pos.slice(), lift: hands.time }); // prettier-ignore
+      hands.placeAt(hands.hold, ray);
+    }
     w.wake();
   }
 
@@ -808,10 +821,37 @@ export class Joints {
     for (const j of this.list) {
       if (j.type !== "break" || j.broken || !j.parent) continue;
       if (this.moves(j.parent)) {
+        // Lane Hands-on H2: a piece riding another comes loose when that one
+        // tips past `spill` radians (a scoop off a tipped cone).
+        if (j.d.spill != null && this.tilt(j.parent) > j.d.spill) {
+          this.spill(j);
+          continue;
+        }
         this.glue(j);
         this.pose(j);
       } else if (j.gluedTo && j.parent.body.pinned) this.unglue(j);
     }
+  }
+
+  // Lane Hands-on H2: how far a joint's piece has tipped from how it was
+  // built (radians between its up and its up at home).
+  tilt(j) {
+    const up = quat.rotate(this.full(j).q, [0, 1, 0]);
+    return Math.acos(Math.max(-1, Math.min(1, up[1])));
+  }
+
+  // It comes loose where it is, moving as the piece it rode was.
+  spill(j) {
+    const b = j.body;
+    const pb = j.parent.body;
+    j.broken = true;
+    this.unglue(j);
+    this.hands.free(b);
+    b.invMass = b.invMassFree || 1;
+    b.invI = (b.invIFree || [1, 1, 1]).slice();
+    b.vel = pb.vel.slice();
+    b.omega = pb.omega.slice();
+    this.cue(j, "spill", v3.len(pb.vel) / this.hands.R());
   }
 
   // Parts that ride on a joint without being pieces (`also`): a recipe
