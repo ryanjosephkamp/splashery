@@ -190,13 +190,15 @@
                 style="background-image: url(&quot;../../../assets/toys/orbital/thumb.webp&quot;)"
               ></span>
               <iframe
-                src="../../play/?toy=orbital"
+                src="../../play/?toy=orbital&sound=on"
                 title="Electron orbital, live: drag to turn it"
                 loading="eager"
                 allow="fullscreen"
               ></iframe>
             </div>
-            <figcaption>Drag to turn it; tap to play.</figcaption>
+            <figcaption>
+              Drag to turn it; tap to play. The speaker button mutes the sound.
+            </figcaption>
           </figure>
         </div>
         <section class="toy-section" aria-labelledby="h-about">
@@ -212,6 +214,12 @@
             packet of light, a photon, comes in. The electron takes it in, jumps up to a bigger
             orbital and glows, then drops back with a flash and gives the light out again. This is
             how glowing gases give off light of their own colors.
+          </p>
+          <p class="learn-more">
+            Learn more:
+            <a href="https://en.wikipedia.org/wiki/Atomic_orbital" target="_blank" rel="noopener"
+              >Atomic orbital on Wikipedia</a
+            >
           </p>
         </section>
 
@@ -332,7 +340,8 @@ https://ryanjosephkamp.github.io/splashery/site/toys/orbital/</textarea
             </button>
           </div>
           <p class="note">
-            Embeds are silent and turn slowly when idle. Every option is in the
+            Embeds are silent and turn slowly when idle; add <code>&amp;sound=on</code> to the
+            iframe's link for the toy's tap sound, with a mute button. Every option is in the
             <a href="../../share/">embed guide</a>.
           </p>
         </section>

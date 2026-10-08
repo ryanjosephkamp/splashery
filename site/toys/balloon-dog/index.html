@@ -193,13 +193,15 @@
                 "
               ></span>
               <iframe
-                src="../../play/?toy=balloon-dog"
+                src="../../play/?toy=balloon-dog&sound=on"
                 title="Balloon dog, live: drag to turn it"
                 loading="eager"
                 allow="fullscreen"
               ></iframe>
             </div>
-            <figcaption>Drag to turn it; tap to play.</figcaption>
+            <figcaption>
+              Drag to turn it; tap to play. The speaker button mutes the sound.
+            </figcaption>
           </figure>
         </div>
         <section class="toy-section" aria-labelledby="h-about">
@@ -212,6 +214,12 @@
           <p>
             Tap it and it pops: bits of rubber fly out and fall away. Then the dog blows back up,
             part by part, until it stands whole again. Pick the color of the balloon in the Toy tab.
+          </p>
+          <p class="learn-more">
+            Learn more:
+            <a href="https://en.wikipedia.org/wiki/Balloon_modelling" target="_blank" rel="noopener"
+              >Balloon modelling on Wikipedia</a
+            >
           </p>
         </section>
 
@@ -329,7 +337,8 @@ https://ryanjosephkamp.github.io/splashery/site/toys/balloon-dog/</textarea
             </button>
           </div>
           <p class="note">
-            Embeds are silent and turn slowly when idle. Every option is in the
+            Embeds are silent and turn slowly when idle; add <code>&amp;sound=on</code> to the
+            iframe's link for the toy's tap sound, with a mute button. Every option is in the
             <a href="../../share/">embed guide</a>.
           </p>
         </section>

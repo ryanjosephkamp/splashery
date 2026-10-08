@@ -197,13 +197,15 @@
                 "
               ></span>
               <iframe
-                src="../../play/?toy=puzzle-cube&turntable=off"
+                src="../../play/?toy=puzzle-cube&turntable=off&sound=on"
                 title="Puzzle cube, live: drag to turn it"
                 loading="eager"
                 allow="fullscreen"
               ></iframe>
             </div>
-            <figcaption>Drag to look around it; tap to play.</figcaption>
+            <figcaption>
+              Drag to look around it; tap to play. The speaker button mutes the sound.
+            </figcaption>
           </figure>
         </div>
         <section class="toy-section" aria-labelledby="h-about">
@@ -221,6 +223,15 @@
             own move ends the automatic one, and the next tap starts again from there. Solving it by
             hand earns a hop and a chime. The cube has about 43 quintillion arrangements, yet any of
             them can be solved in 20 moves or fewer when a half-turn counts as one move.
+          </p>
+          <p class="learn-more">
+            Learn more:
+            <a
+              href="https://en.wikipedia.org/wiki/Combination_puzzle"
+              target="_blank"
+              rel="noopener"
+              >Combination puzzle on Wikipedia</a
+            >
           </p>
         </section>
 
@@ -338,7 +349,8 @@ https://ryanjosephkamp.github.io/splashery/site/toys/puzzle-cube/</textarea
             </button>
           </div>
           <p class="note">
-            Embeds are silent and turn slowly when idle. Every option is in the
+            Embeds are silent and turn slowly when idle; add <code>&amp;sound=on</code> to the
+            iframe's link for the toy's tap sound, with a mute button. Every option is in the
             <a href="../../share/">embed guide</a>.
           </p>
         </section>
