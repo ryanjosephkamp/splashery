@@ -731,9 +731,10 @@ order. Pieces take a material too: `material` in a piece's def.
 walls of the play area move out to `area` toy radii from home, as for wheels, so a ball rolls, a
 puck slides and a marble runs on (the view drifts after it). Without it the walls stay where Level 1
 puts them, just past the toy. `hands.view` (0 to 1, 0.8 by default) is how far the view drifts after
-a tossed whole toy: less (a ball's 0.5) lets a roll read as a roll. A material's `nose` turns it
-only while it flies, near critically damped, so a shuttlecock flips cork first once and lies still
-where it lands.
+a tossed whole toy: less (a ball's 0.4) lets a roll read as a roll. `hands.friction` sets the
+floor's friction under a whole toy with a material (a hockey puck's ice: 0.04). A material's `nose`
+turns it only while it flies, near critically damped, so a shuttlecock flips cork first once and
+lies still where it lands.
 
 **A water line** (`hands.water`): the toy floats on a round pool, bobs and settles; a boat (any
 non-round toy) rocks and rights itself, since each point under water lifts where it is. By default

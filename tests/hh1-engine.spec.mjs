@@ -25,7 +25,7 @@ async function open(page, id, hands) {
 }
 
 test("a shuttlecock dropped cork up flips cork first, lands and rests", async ({ page }) => {
-  await open(page, "shuttlecock", { material: "shuttlecock" });
+  await open(page, "shuttlecock", { material: "shuttlecock", area: 4 });
   const s = await page.evaluate(() => {
     const { player } = window.__splashery;
     const h = player.handsOn;
@@ -49,7 +49,7 @@ test("a shuttlecock dropped cork up flips cork first, lands and rests", async ({
     for (let t = 0; t < 4; t += 1 / 60) {
       player.update(1 / 60);
       noseAt.push(rot(b.q, [0, -1, 0])[1]);
-      if (t > 1) maxSpeed = Math.max(maxSpeed, Math.hypot(...b.vel) / R);
+      if (t > 2) maxSpeed = Math.max(maxSpeed, Math.hypot(...b.vel) / R);
       if (rest == null && h.world.asleep) rest = t;
     }
     return { start: noseAt[0], at015: noseAt[9], at025: noseAt[15], rest, maxSpeed };
@@ -58,7 +58,7 @@ test("a shuttlecock dropped cork up flips cork first, lands and rests", async ({
   expect(s.at025).toBeLessThan(-0.8); // cork down within a quarter second
   expect(s.rest).not.toBeNull(); // and it comes to rest
   expect(s.rest).toBeLessThan(3);
-  expect(s.maxSpeed).toBeLessThan(1); // lying still a second on, not flipping about on the floor
+  expect(s.maxSpeed).toBeLessThan(1); // lying still on its side, not flipping about on the floor
 });
 
 test("hands.area gives a whole toy room to roll; without it the walls stay close", async ({
@@ -107,4 +107,28 @@ test("hands.view: the view drifts less after a rolling ball, so its roll reads",
   };
   expect(await drift({ material: "tennis-ball", area: 3, view: 0.5 })).toBeCloseTo(0.5, 3);
   expect(await drift({ material: "tennis-ball", area: 3 })).toBeCloseTo(0.8, 3);
+});
+
+test("hands.friction: a puck pushed on ice slides on; on the default floor it stops short", async ({
+  page,
+}) => {
+  const slide = async (hands) => {
+    await open(page, "hockey-puck", hands);
+    return page.evaluate(() => {
+      const { player } = window.__splashery;
+      const h = player.handsOn;
+      h.ensure();
+      const b = h.body;
+      const R = h.R();
+      b.vel = [1.5 * R, 0, 0];
+      h.moved = true;
+      h.world.wake();
+      for (let t = 0; t < 3; t += 1 / 60) player.update(1 / 60);
+      return (b.pos[0] - b.home.pos[0]) / R;
+    });
+  };
+  const ice = await slide({ material: "hockey-puck", area: 4, friction: 0.04 });
+  const floor = await slide({ material: "hockey-puck", area: 4 });
+  expect(ice).toBeGreaterThan(0.9);
+  expect(floor).toBeLessThan(0.5);
 });

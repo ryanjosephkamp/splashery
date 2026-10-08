@@ -166,8 +166,10 @@ export function airForce(b, mat, G, R, h, touching = false) {
     const t = [n[1] * d[2] - n[2] * d[1], n[2] * d[0] - n[0] * d[2], n[0] * d[1] - n[1] * d[0]];
     // Its swing round is damped near critically (the air's damping grows
     // with the vane's pull), so it turns nose first without swinging past
-    // over and over; its spin about the nose itself lasts.
-    const k = (mat.vane ?? 10) * 20 * Math.min(1, sp / (0.5 * R));
+    // over and over; its spin about the nose itself lasts. The pull grows
+    // with the speed squared (full at a brisk 2 toy radii per second), as
+    // the air's does, so a slow hop after a landing barely turns it.
+    const k = (mat.vane ?? 10) * 20 * Math.min(1, (sp / (2 * R)) ** 2);
     const s = n[0] * w[0] + n[1] * w[1] + n[2] * w[2];
     const keep = Math.exp(-1.6 * Math.sqrt(k) * h);
     const axial = Math.exp(-Math.min(1, sp / (0.5 * R)) * h);

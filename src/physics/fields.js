@@ -394,6 +394,8 @@ export class Extras {
     if (ho.mode === "toy" && this.mat) {
       applyMaterial(ho.body, this.mat, floor);
       this.mats.set(ho.body, this.mat);
+      // The floor's own friction, when the recipe says (ice for a puck).
+      if (hands.friction != null) floor.friction = hands.friction;
     }
     if (ho.mode === "pieces")
       for (const pc of ho.pieces) {
