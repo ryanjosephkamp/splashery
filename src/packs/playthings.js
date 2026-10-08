@@ -1551,6 +1551,27 @@ export const RECIPES = {
 
   "rubber-duck": {
     alive: true,
+    // Hands-on (lane Hands-on H1): press and hold it and it squashes down
+    // with a squeak; let go and it springs back with a wobble. Tossed, it is
+    // a light, hollow rubber toy (estimates: 50 g, 9 cm).
+    hands: {
+      area: 3,
+      view: 0.55,
+      press: { amount: 0.28 },
+      material: {
+        mass: 0.05,
+        r: 0.045,
+        bounce: 0.45,
+        friction: 0.8,
+        roll: 0.2,
+        cd: 0.8,
+        spin: 0.4,
+      },
+      sound: (hit, vol) =>
+        hit.press
+          ? { voice: "squeak", f: 1500, to: 1.3, decay: 1.6, vol: 0.8 }
+          : { voice: "squeak", f: 1100, decay: 0.8, vol: vol * 0.5 },
+    },
     options: [{ key: "color", label: "Colour", type: "color", default: "#ffd21f" }],
     controls: [{ key: "squeak", label: "Squeak", type: "pulse", ease: 1.8 }],
     action: { key: "squeak", label: "Squeak" },
@@ -2847,6 +2868,17 @@ export const RECIPES = {
   },
   "balloon-dog": {
     options: [{ key: "color", label: "Balloon", type: "color", default: "#ff4f8b" }],
+    // Hands-on (lane Hands-on H1): press and hold to squeeze it (it bulges
+    // and squeaks, and springs back when let go); light as a balloon, it
+    // falls slowly and drifts, and bulges as it lands with a rubbery squeak.
+    // (Estimates from tools/hands-on-materials.json: 15 g, 30 cm long.)
+    hands: {
+      area: 3,
+      view: 0.55,
+      press: { amount: 0.22 },
+      material: { mass: 0.015, r: 0.15, bounce: 0.5, friction: 0.7, roll: 0.15, cd: 0.6, spin: 0.4, spinDecay: 0.5, drift: 0.05 }, // prettier-ignore
+      sound: (hit, vol) => hit.press ? { voice: "squeak", f: 700, to: 1.5, decay: 2.2, vol: 0.8 } : { voice: "squeak", f: 900 + 300 * Math.min(1, hit.speed / 4), vol: vol * 0.7 }, // prettier-ignore
+    },
     controls: [{ key: "pop", label: "Pop", type: "pulse", ease: 2.6 }],
     action: { key: "pop", label: "Pop" },
     drive(t, c, out) {
@@ -2943,10 +2975,33 @@ export const RECIPES = {
     controls: [{ key: "blow", label: "Blow", type: "pulse", ease: 2.5 }],
     action: { key: "blow", label: "Blow bubbles" },
     sounds: [{ voice: "sample", file: "soap-bubbles-pops.mp3" }], // Sound C: the pops
-    drive(t, c, out) {
+    // Hands-on (lane Hands-on H1): poke a bubble and it pops (the finger is
+    // a line through the scene; a bubble it passes through bursts at once,
+    // and a new one comes from the wand on its next round).
+    hands: { follow: true },
+    drive(t, c, out, info) {
       const m = mem(c);
       const tau = integrate(m, "tau", t, 0.07 + 0.35 * c.blow);
       const pops = [];
+      const finger = info?.hands?.on ? info.hands.finger : null;
+      // The bubble the finger touches first (the nearest along its line):
+      // once as it presses, then only as it moves on (a held finger doesn't
+      // pop the bubbles behind).
+      const moved = finger && (!m.finger || len(sub(finger.dir, m.finger)) > 1e-4);
+      m.finger = finger ? finger.dir.slice() : null;
+      let poke = -1;
+      let near = Infinity;
+      if (moved)
+        BUBBLES.forEach((b, i) => {
+          const s = (tau * b.speed + b.s0) % 1;
+          if (m["popped" + i] != null || s < 0.05 || s > 0.94) return;
+          const d = sub(bubbleAt(b, s), finger.origin);
+          const along = dot(d, finger.dir);
+          if (len(sub(d, mul(finger.dir, along))) < b.r * 1.05 && along < near) {
+            near = along;
+            poke = i;
+          }
+        });
       BUBBLES.forEach((b, i) => {
         const s = (tau * b.speed + b.s0) % 1;
         // Sound C (his note of October 2): while it's blown, each bubble
@@ -2955,9 +3010,17 @@ export const RECIPES = {
         m["s" + i] = s;
         if (c.blow > 0.05 && was < 0.95 && s >= 0.95) pops.push(bubblePop(i));
         const p = bubbleAt(b, s);
+        // Poked: it bursts (gone in a twentieth of a second) until it comes
+        // round from the wand again.
+        if (s < was) m["popped" + i] = null;
+        if (i === poke) {
+          m["popped" + i] = t;
+          pops.push(bubblePop(i));
+        }
+        const gone = m["popped" + i] == null ? 1 : 1 - clamp((t - m["popped" + i]) / 0.05, 0, 1);
         out.parts["b" + i] = {
           offset: sub(p, b.rest),
-          visible: smoothstep(0, 0.05, s) * (1 - smoothstep(0.94, 1, s)),
+          visible: smoothstep(0, 0.05, s) * (1 - smoothstep(0.94, 1, s)) * gone,
         };
       });
       if (pops.length) out.cues.push(pops);
