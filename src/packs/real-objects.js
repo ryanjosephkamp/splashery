@@ -553,6 +553,18 @@ const SUNGLASSES = {
   pickAlpha: 0.06,
   controls: [{ key: "flip", label: "Fold and flip", type: "pulse", ease: SG.T }],
   action: { key: "flip", label: "Fold, flip and darken" },
+  // Hands-on (lane Hands-on H1): fold each arm in on its hinge, and out
+  // again; an arm stays where it is left, as a real one does, and stops at
+  // open and at folded. (The frame keeps its resting turn: a locked hinge the
+  // arms ride on.)
+  hands: {
+    floor: -0.3,
+    joints: [
+      { type: "hinge", part: "front", name: "front", pivot: SG.center, axis: [0, 1, 0], min: SG.rest, max: SG.rest, start: () => SG.rest, gravity: false, pos: [0, 0, 0.62], pick: [0.001, 0.001, 0.001] }, // prettier-ignore
+      { type: "hinge", part: "armR", parent: "front", pivot: SG.hingeR, axis: [0, 1, 0], min: 0, max: 1.53, gravity: false, friction: 6, bounce: 0.1, pos: [0.52, 0, 0.1], pick: [0.12, 0.12, 0.45], sound: (ev, vol) => ({ voice: "click", f: 2600, vol: 0.3 + 0.3 * vol }) }, // prettier-ignore
+      { type: "hinge", part: "armL", parent: "front", pivot: SG.hingeL, axis: [0, 1, 0], min: -1.36, max: 0, gravity: false, friction: 6, bounce: 0.1, pos: [-0.52, 0, 0.1], pick: [0.12, 0.12, 0.45], sound: (ev, vol) => ({ voice: "click", f: 2400, vol: 0.3 + 0.3 * vol }) }, // prettier-ignore
+    ],
+  },
   credits: [
     {
       label: "Sunglasses",
@@ -664,6 +676,9 @@ const BASEBALL_CAP = {
   density: 1.5, // as the Model to splats toy: 300,000 splats on the high tier
   controls: [{ key: "toss", label: "Toss", type: "pulse", ease: BC.T }],
   action: { key: "toss", label: "Flip and spin" },
+  // Hands-on (lane Hands-on H1): throw it like a flying disc, flat and with
+  // a flick: it spins and glides a little on its brim before it lands soft.
+  hands: { area: 3, view: 0.6, material: "baseball-cap", sound: (hit, vol) => ({ voice: "thud", f: 220, bright: 0.1, decay: 0.4, vol: vol * 0.5 }) }, // prettier-ignore
   credits: [
     {
       label: "Baseball cap",
@@ -1329,11 +1344,45 @@ function rsLace(which, s) {
   });
 }
 
+// The bow holds (shape memory) until a lace is pulled out (lane Hands-on H1).
+const RS_TIED = { keep: 9, undone: false };
+const v3dist = (a, b) => Math.hypot(a[0] - b[0], a[1] - b[1], a[2] - b[2]);
+
 const RUNNING_SHOE = {
   alive: false,
   density: 1.5, // as the Model to splats toy: 300,000 splats on the high tier
   controls: [{ key: "tie", label: "Tie the laces", type: "pulse", ease: RS.T }],
   action: { key: "tie", label: "Untie and tie again" },
+  // Hands-on (lane Hands-on H1): the laces are two ropes, tied in their bow.
+  // Pull a lace end out and the bow comes undone: both laces fall loose and
+  // drape over the shoe. ↺ ties them again.
+  hands: {
+    floor: -0.5,
+    ropes: () =>
+      ["A", "B"].map((key, w) => ({
+        name: "lace" + key,
+        points: RS_SHAPES[key].bow,
+        tokens: RS_SHAPES[key].bow.map((p, i) => w * RS.joints + i),
+        pin: [0],
+        grab: [RS.joints - 1, RS.joints - 2, RS.joints - 3],
+        pick: 0.12,
+        keep: RS_TIED.keep,
+        bend: 0.25,
+        drag: 2,
+        radius: 0.012,
+        avoid: [{ at: [0.05, -0.12, -0.05], r: 0.21 }],
+        update: (strand, dt, soft) => {
+          // Pulled out past this far, the bow lets go (both laces).
+          const n = soft.nodes[strand.first + RS.joints - 1];
+          if (v3dist(n.x, n.home) > 0.22) RS_TIED.undone = true;
+          strand.def.keep = RS_TIED.undone ? 0 : RS_TIED.keep;
+        },
+        reset: (strand) => {
+          RS_TIED.undone = false;
+          strand.def.keep = RS_TIED.keep;
+        },
+      })),
+  },
   credits: [
     {
       label: "Running shoe",
@@ -1502,6 +1551,12 @@ const HOODIE = {
         drag: 3,
         pieces: [{ part: "hood", node: 0, turn: false, spin: HOOD.angle, axis: [1, 0, 0] }],
       },
+      // Lane Hands-on H1: each sleeve swings on its shoulder as one piece:
+      // pull its cuff and let go, and it swings back down to hang.
+      ...[
+        ["sleeveL", HD.shoulderL, [-0.5, -0.78, -0.02]],
+        ["sleeveR", HD.shoulderR, [0.5, -0.78, -0.02]],
+      ].map(([part, top, cuff]) => ({ name: part, points: [top, cuff], grab: [1], pick: 0.3, reach: 1.02, maxPull: 0.7, weight: 1, keep: 2.2, drag: 1.8, pieces: [{ part, from: 0, to: 1 }] })), // prettier-ignore
     ],
   },
   credits: [
