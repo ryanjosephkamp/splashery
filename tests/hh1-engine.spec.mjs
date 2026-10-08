@@ -132,3 +132,61 @@ test("hands.friction: a puck pushed on ice slides on; on the default floor it st
   expect(ice).toBeGreaterThan(0.9);
   expect(floor).toBeLessThan(0.5);
 });
+
+test("a shelf shape with a grab in its shelf entry stretches like the gummy bear", async ({
+  page,
+}) => {
+  await page.goto(APP);
+  await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
+  const s = await page.evaluate(async () => {
+    const { app, player } = window.__splashery;
+    const { findToy } = await import("/src/toys.js");
+    const def = findToy("knot");
+    const had = def.grab;
+    def.grab = { radius: 0.55, max: 0.8 };
+    await app.chooseToy("knot");
+    player.opts.idleDelay = 1e9;
+    const own = player.canGrab();
+    const c = player.stage.toScreen(player.toyInfo.center);
+    player.grabStart(player.toyInfo.center.slice(), c[0], c[1]);
+    player.grabAt(c[0] + 60, c[1] - 20);
+    for (let i = 0; i < 20; i++) player.update(1 / 60);
+    const pulled = Math.hypot(...player.driver.grab.pull) / player.toyInfo.radius;
+    player.grabEnd();
+    for (let i = 0; i < 180; i++) player.update(1 / 60);
+    const back = Math.hypot(...player.driver.grab.pull) / player.toyInfo.radius;
+    def.grab = had;
+    await app.chooseToy("blob");
+    return { own, pulled, back, plain: player.canGrab() };
+  });
+  expect(s.own).toBe(true);
+  expect(s.pulled).toBeGreaterThan(0.1);
+  expect(s.back).toBeLessThan(0.02); // it springs back
+  expect(s.plain).toBe(false); // a shelf shape without one stays as it was
+});
+
+test("hands.soft: a toy squishes on landing as much as its hands block says", async ({ page }) => {
+  const squish = async (hands) => {
+    await open(page, "bouncy-ball", hands);
+    return page.evaluate(() => {
+      const { player } = window.__splashery;
+      const h = player.handsOn;
+      h.ensure();
+      const b = h.body;
+      b.pos[1] += 3 * h.R();
+      h.moved = true;
+      h.world.wake();
+      let peak = 0;
+      for (let t = 0; t < 1; t += 1 / 60) {
+        player.update(1 / 60);
+        peak = Math.max(peak, h.squish?.amp ?? 0);
+      }
+      return { soft: h.soft, peak };
+    });
+  };
+  const firm = await squish({ material: "bouncy-ball", soft: 0.15 });
+  const usual = await squish({ material: "bouncy-ball" });
+  expect(firm.soft).toBeCloseTo(0.15, 3);
+  expect(usual.soft).toBeCloseTo(0.55, 3); // the list's
+  expect(firm.peak).toBeLessThan(usual.peak * 0.5);
+});

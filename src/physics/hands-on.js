@@ -187,7 +187,7 @@ export class HandsOn {
       w.plane([nx, 0, nz], nx * (c[0] - nx * A) + nz * (c[2] - nz * A), { friction: 0.3, restitution: 0.4 }); // prettier-ignore
     w.plane([0, -1, 0], -(floor + Math.max(4.5 * R, hull.top - floor + 2.5 * R)), { restitution: 0.2 }); // prettier-ignore
     const id = info.id;
-    const soft = SOFT[id] ?? 0;
+    const soft = hands?.soft ?? SOFT[id] ?? 0; // (hands.soft: lane Hands-on H1)
     const bounce = BOUNCE[id] ?? 0.25 + 0.2 * soft;
     const h = hull.half;
     const m = 1;
