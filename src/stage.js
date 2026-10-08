@@ -3,7 +3,8 @@
 // the engine directly lives here or in paint.js / loaders.js.
 
 import * as pc from "./pc.js";
-import { MODIFIER, MODIFIER_KIT, MODIFIER_RIG } from "./effects.js";
+import { MODIFIER, MODIFIER_KIT, MODIFIER_KIT_PHOTO, MODIFIER_RIG } from "./effects.js";
+import { photoRender, withPhotoPS } from "./photo-splats.js"; // lane Photo fidelity
 import { kernelChunks, normalizeKernel } from "./kernels.js";
 
 export class NoGPUError extends Error {}
@@ -325,8 +326,9 @@ export class Stage {
   // Lab: `modifier` ({ glsl, wgsl }) replaces a kit toy's work-buffer program
   // (a splat field computed on the GPU every frame, src/packs/lab.js).
   // prettier-ignore
-  setToy({ resource, asset = null, owned = false, transform = null, kit = false, rig = false, modifier = null }) {
+  setToy({ resource, asset = null, owned = false, transform = null, kit = false, rig = false, modifier = null, photo = false }) {
     this.clearToy();
+    if (!photo) this.setPhoto(false); // lane Photo fidelity: only a photo toy keeps it on
     const entity = new pc.Entity("toy");
     if (transform) {
       entity.setLocalPosition(...transform.position);
@@ -359,14 +361,15 @@ export class Stage {
         parts.unlock();
       }
     }
-    entity.gsplat.setWorkBufferModifier(modifier || (kit ? MODIFIER_KIT : rig ? MODIFIER_RIG : MODIFIER)); // prettier-ignore
+    const photoOn = photo && kit && !modifier && !!this.photo; // lane Photo fidelity
+    entity.gsplat.setWorkBufferModifier(modifier || (photoOn ? MODIFIER_KIT_PHOTO : kit ? MODIFIER_KIT : rig ? MODIFIER_RIG : MODIFIER)); // prettier-ignore
     entity.gsplat.workBufferUpdate = pc.WORKBUFFER_UPDATE_ALWAYS;
     // The pattern sampler always needs a texture, even with no pattern on
     // (and kit toys' screen sampler too).
     entity.gsplat.setParameter("uSpPattern", this.blankTexture());
     if (kit) entity.gsplat.setParameter("uSpScreen", this.blankTexture());
     this.app.root.addChild(entity);
-    this.toy = { entity, resource, asset, owned, kit, rig };
+    this.toy = { entity, resource, asset, owned, kit, rig, photo: photoOn };
     this.requestRender();
     return this.toy;
   }
@@ -677,12 +680,77 @@ export class Stage {
   setKernel(name) {
     const want = normalizeKernel(name);
     if (want === (this.kernel || "gaussian")) return;
+    this.kernel = want;
+    this.applyFragmentChunk();
+  }
+
+  // The fragment chunk: the kernel's, with the photo's code while a photo toy shows.
+  applyFragmentChunk() {
     const mat = this.app.scene.gsplat.material;
-    const code = kernelChunks(want);
+    const base = kernelChunks(this.kernel || "gaussian");
+    const code = this.photo ? withPhotoPS(base) : base;
     mat.shaderChunks.glsl.set("gsplatModifyPS", code.glsl);
     mat.shaderChunks.wgsl.set("gsplatModifyPS", code.wgsl);
     mat.update();
-    this.kernel = want;
+    this.requestRender();
+  }
+
+  // Lane Photo fidelity: photo-textured splats (src/photo-splats.js). On, the next kit toy's splats
+  // marked `photo` take their colors from the photo (setPhotoSource); off puts every chunk, the
+  // work buffer's format and the renderer back as they were. Call it before setToy.
+  setPhoto(on) {
+    if (!!on === !!this.photo) return;
+    if (!on) {
+      // the photo toys' entities (shown or buried) stop writing the stream before it goes
+      for (const t of [this.toy, ...this.graveyard]) if (t?.photo) t.entity.gsplat.setWorkBufferModifier(MODIFIER_KIT); // prettier-ignore
+    }
+    this.photo = photoRender(pc, this.app, !!on, this.photo || null);
+    // (the renderer copies the material's parameters when the material is updated)
+    if (on) this.app.scene.gsplat.material.setParameter("uSpPhoto", this.photoTex || this.blankTexture()); // prettier-ignore
+    this.applyFragmentChunk();
+  }
+
+  // The photo (a canvas, an image or a video frame), uploaded with its mipmaps (so a small view of a
+  // large photo doesn't shimmer).
+  setPhotoSource(source) {
+    const w = source.videoWidth || source.width;
+    const h = source.videoHeight || source.height;
+    if (!w || !h) return;
+    if (!this.photoTex || this.photoTex.width !== w || this.photoTex.height !== h) {
+      this.photoTex?.destroy();
+      this.photoTex = new pc.Texture(this.device, {
+        name: "splashery-photo",
+        width: w,
+        height: h,
+        format: pc.PIXELFORMAT_RGBA8,
+        mipmaps: true,
+        minFilter: pc.FILTER_LINEAR_MIPMAP_LINEAR,
+        magFilter: pc.FILTER_LINEAR,
+        addressU: pc.ADDRESS_CLAMP_TO_EDGE,
+        addressV: pc.ADDRESS_CLAMP_TO_EDGE,
+      });
+    }
+    const fresh = this.photoTex.getSource() !== source;
+    this.photoTex.setSource(source);
+    this.photoTex.upload();
+    const mat = this.app.scene.gsplat.material;
+    if (fresh || mat.getParameter("uSpPhoto")?.data !== this.photoTex) {
+      mat.setParameter("uSpPhoto", this.photoTex);
+      mat.update();
+    }
+    this.requestRender();
+  }
+
+  // The frame's mapping (photoUniforms in src/photo-splats.js): the work-buffer pass's map on the
+  // toy; the picture's axes and brightness straight into the device's uniforms (a parameter on the
+  // splat material would reach the renderer's copy of it only through a material update).
+  setPhotoUniforms({ map, tu, tv, k }) {
+    const g = this.toy?.entity.gsplat;
+    if (g) g.setParameter("uSpPhotoMap", map);
+    const scope = this.device.scope;
+    scope.resolve("uSpPhotoTu").setValue(tu);
+    scope.resolve("uSpPhotoTv").setValue(tv);
+    scope.resolve("uSpPhotoK").setValue(k);
     this.requestRender();
   }
 
