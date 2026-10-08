@@ -1,5 +1,5 @@
 // Lane Hands-on H1, Clothing (docs/handoff/HandsH1.md): the sunglasses'
-// arms fold on their hinges and stay, the cap flies like a disc, a pulled
+// arms fold on their hinges and stay, the cap flies off its stand like a disc, a pulled
 // lace undoes the shoe's bow (and ↺ ties it), and the hoodie's sleeves
 // swing back down.
 
@@ -61,16 +61,19 @@ test("sunglasses: an arm folds in on its hinge and stays where it is left", asyn
   expect(s.after.armL).toBeCloseTo(0, 3); // the other arm untouched
 });
 
-test("baseball cap: thrown, it has the cap's own material and lands softly", async ({ page }) => {
+test("baseball cap: lifted off its stand and thrown, it flies on the cap's own material and lands softly", async ({
+  page,
+}) => {
   await open(page, "baseball-cap");
   const s = await page.evaluate(() => {
     const { player } = window.__splashery;
     const h = player.handsOn;
     h.ensure();
-    const b = h.body;
+    const b = h.pieces[0].body;
     const R = h.R();
-    b.pos[1] += 1.5 * R;
-    b.vel = [2.5 * R, 0, 0];
+    h.free(b);
+    b.pos[1] += 0.5 * R;
+    b.vel = [2.5 * R, 0.5 * R, 0];
     b.omega = [0, 10, 0];
     h.moved = true;
     h.world.wake();
@@ -79,11 +82,14 @@ test("baseball cap: thrown, it has the cap's own material and lands softly", asy
       player.update(1 / 60);
       if (h.world.asleep) break;
     }
-    return { lift: h.extras.mat.lift, e: b.restitution, t };
+    const m = h.extras.mats.get(b);
+    return { lift: m?.lift ?? 0, e: b.restitution, t, away: Math.hypot(b.pos[0] - b.home.pos[0], b.pos[2] - b.home.pos[2]) / R }; // prettier-ignore
   });
+  console.log(`cap: ${JSON.stringify(s)}`);
   expect(s.lift).toBeGreaterThan(0); // it glides a little on its brim
   expect(s.e).toBeLessThan(0.2); // a soft landing
   expect(s.t).toBeLessThan(5); // and it comes to rest
+  expect(s.away).toBeGreaterThan(0.5); // off its stand
 });
 
 test("running shoe: a lace end pulled out undoes the bow; ↺ ties it again", async ({ page }) => {
@@ -143,6 +149,6 @@ test("hoodie: a sleeve lifted by its cuff swings back down and settles", async (
     for (let k = 0; k < 240; k++) player.update(1 / 60);
     return { held, end: ang() };
   });
-  expect(s.held).toBeGreaterThan(0.4); // lifted out
+  expect(s.held).toBeGreaterThan(0.2); // lifted out
   expect(s.end).toBeLessThan(0.12); // hanging again
 });

@@ -670,15 +670,35 @@ const hexRgb = (h) => [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16) / 255
 // rim at y -0.37 and its button at y 0.377. It sits on a kit-built wooden stand.
 
 const BC = { T: 3, pivot: [0, -0.05, -0.2], rim: -0.37, base: -1.3 };
+// Hands-on: the cap's outside, about its pivot (lane Hands-on H1): its rim's
+// ring, the brim reaching forward and the crown's top.
+const CAP_POINTS = [
+  ...Array.from({ length: 10 }, (_, i) => [0.43 * Math.cos((i / 10) * 2 * Math.PI), BC.rim - BC.pivot[1], 0.43 * Math.sin((i / 10) * 2 * Math.PI)]), // prettier-ignore
+  [0, BC.rim - BC.pivot[1] + 0.02, 0.8],
+  [0.25, BC.rim - BC.pivot[1] + 0.02, 0.7],
+  [-0.25, BC.rim - BC.pivot[1] + 0.02, 0.7], // prettier-ignore
+  [0, 0.43, 0],
+  [0.25, 0.3, 0],
+  [-0.25, 0.3, 0],
+  [0, 0.3, -0.25],
+];
 
 const BASEBALL_CAP = {
   alive: false,
   density: 1.5, // as the Model to splats toy: 300,000 splats on the high tier
   controls: [{ key: "toss", label: "Toss", type: "pulse", ease: BC.T }],
   action: { key: "toss", label: "Flip and spin" },
-  // Hands-on (lane Hands-on H1): throw it like a flying disc, flat and with
-  // a flick: it spins and glides a little on its brim before it lands soft.
-  hands: { area: 3, view: 0.6, material: "baseball-cap", sound: (hit, vol) => ({ voice: "thud", f: 220, bright: 0.1, decay: 0.4, vol: vol * 0.5 }) }, // prettier-ignore
+  // Hands-on (lane Hands-on H1): lift the cap off its stand and throw it
+  // like a flying disc, flat and with a flick: it spins and glides a little
+  // on its brim before it lands soft. (The stand stays where it is.)
+  hands: {
+    floor: BC.base - 0.03,
+    area: 2.2,
+    place: false,
+    material: "baseball-cap", // (turns on the materials; the piece's own is what flies)
+    pieces: () => [{ part: "cap", pos: BC.pivot, pivot: BC.pivot, points: CAP_POINTS, radius: 0.03, pick: [0.5, 0.42, 0.6], mass: 1, friction: 0.8, restitution: 0.15, damping: 0.05, angDamping: 0.5, material: "baseball-cap" }], // prettier-ignore
+    sound: (hit, vol) => ({ voice: "thud", f: 220, bright: 0.1, decay: 0.4, vol: vol * 0.5 }),
+  },
   credits: [
     {
       label: "Baseball cap",
@@ -1556,7 +1576,7 @@ const HOODIE = {
       ...[
         ["sleeveL", HD.shoulderL, [-0.5, -0.78, -0.02]],
         ["sleeveR", HD.shoulderR, [0.5, -0.78, -0.02]],
-      ].map(([part, top, cuff]) => ({ name: part, points: [top, cuff], grab: [1], pick: 0.3, reach: 1.02, maxPull: 0.7, weight: 1, keep: 2.2, drag: 1.8, pieces: [{ part, from: 0, to: 1 }] })), // prettier-ignore
+      ].map(([part, top, cuff]) => ({ name: part, points: [top, cuff], grab: [1], pick: 0.3, reach: 1.02, maxPull: 0.7, weight: 0.4, keep: 2.2, drag: 2.5, pieces: [{ part, from: 0, to: 1 }] })), // prettier-ignore
     ],
   },
   credits: [
