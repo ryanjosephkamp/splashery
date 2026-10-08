@@ -185,6 +185,9 @@
               <li><a href="#sound-and-light-lab">Sound and light lab</a></li>
               <li><a href="#imaging-lane-imaging">Imaging (lane Imaging)</a></li>
               <li>
+                <a href="#volume-viewer-lane-volume-viewer">Volume viewer (lane Volume viewer)</a>
+              </li>
+              <li>
                 <a href="#molecule-viewer-lane-molecule-viewer"
                   >Molecule viewer (lane Molecule viewer)</a
                 >
@@ -240,6 +243,11 @@
               </li>
               <li><a href="#pdf-lib-1-17-1-lane-pdf-lab">pdf-lib 1.17.1 (lane PDF lab)</a></li>
               <li><a href="#laz-perf-0-0-7-lane-viewers">laz-perf 0.0.7 (lane Viewers)</a></li>
+              <li>
+                <a href="#dicom-parser-1-8-21-lane-volume-viewer"
+                  >dicom-parser 1.8.21 (lane Volume viewer)</a
+                >
+              </li>
               <li>
                 <a href="#webp-codec-from-splat-transform-3-6-1-lane-viewers"
                   >WebP codec from splat-transform 3.6.1 (lane Viewers)</a
@@ -6154,6 +6162,28 @@
               by the toys' recipes.
             </li>
           </ul>
+          <h2 id="volume-viewer-lane-volume-viewer">Volume viewer (lane Volume viewer)</h2>
+          <ul>
+            <li>
+              Gar micro-CT: &quot;MicroCT images of 3 early gar (Lepisosteus osseus) stages between
+              12.7mm and 21.7mm&quot; by Brian Metscher (University of Vienna; the scans used by
+              Konstantinidis et al. 2015),
+              <a href="https://doi.org/10.5281/zenodo.19021581" target="_blank" rel="noopener"
+                >10.5281/zenodo.19021581</a
+              >,
+              <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener"
+                >CC BY 4.0</a
+              >
+              (checked on the live record on October 8, 2026). The 12.8 mm larva (VIMS22685), 502
+              TIFF slices of 4.42 µm voxels, averaged 4 × 4 × 4 to 17.7 µm, cropped, its faint empty
+              background set to 0, and stored as 8-bit NIfTI by <code>tools/vol-gar.mjs</code>.
+            </li>
+            <li>The walnut is the Imaging lane's file (above), shown again as a sample.</li>
+            <li>
+              The test volumes in <code>tests/fixtures/vol/</code> are a phantom made by
+              <code>tools/vol-fixtures.mjs</code>.
+            </li>
+          </ul>
           <h2 id="molecule-viewer-lane-molecule-viewer">Molecule viewer (lane Molecule viewer)</h2>
           <p>
             The Molecule viewer (labs) ships a snapshot of five entries from the Protein Data Bank,
@@ -7659,6 +7689,33 @@ subject to the following conditions:
             <li>
               License: Apache License 2.0 (checked on the npm package and the live repository's
               COPYING on October 5, 2026; the full text is in <code>vendor/laz-perf/LICENSE</code>).
+            </li>
+          </ul>
+          <h3 id="dicom-parser-1-8-21-lane-volume-viewer">
+            dicom-parser 1.8.21 (lane Volume viewer)
+          </h3>
+          <ul>
+            <li>
+              Package: <code>dicom-parser@1.8.21</code> (file:
+              <code>vendor/dicom-parser/dicomParser.min.js</code>, the package's
+              <code>dist/dicomParser.min.js</code>, unchanged, 32 KB; the license is copied to
+              <code>vendor/dicom-parser/LICENSE</code>).
+            </li>
+            <li>
+              Source:
+              <a href="https://github.com/cornerstonejs/dicomParser" target="_blank" rel="noopener"
+                >https://github.com/cornerstonejs/dicomParser</a
+              >
+              (Chris Hafey and the Cornerstone contributors). It parses DICOM files' elements; the
+              volume viewer reads the pixels itself (uncompressed and RLE Lossless).
+            </li>
+            <li>
+              Loaded only when someone opens a DICOM file in the Volume viewer (labs). It makes no
+              network calls.
+            </li>
+            <li>
+              License: MIT (checked on the npm package and the live repository's LICENSE on October
+              8, 2026; the full text is in <code>vendor/dicom-parser/LICENSE</code>).
             </li>
           </ul>
           <h3 id="webp-codec-from-splat-transform-3-6-1-lane-viewers">

@@ -871,24 +871,39 @@ export const RECIPES = {
           also: (a, parts) => {
             BOOK_HAND.a = a;
             // The cover's outside and the spine hide once the cover stands
-            // past upright (their backs face away; the pages lift with it).
+            // past upright (their backs face away).
             const top = 1 - smoothstep(0.6, 0.8, a / Math.PI);
             parts.coverTop = { ...parts.cover, visible: top };
-            parts.spine = { angle: a / 2, visible: top };
-            // Each leaf lies where it lay (as the Open switch left it), but
-            // never above the cover turning shut over it.
+            // (The spine shows only while the book is nearly shut: turned, it
+            // would stand up out of the gutter.)
+            parts.spine = { angle: a / 2, visible: 1 - smoothstep(0.15, 0.3, a / Math.PI) };
+            // The leaves lying on the open cover (as the Open switch left
+            // them) turn with it as one solid block, as a real book's half
+            // does: the top one of them shows, the pile stands in for the
+            // edges of the rest, and they keep their gaps to the cover. The
+            // leaves on the right stay where they lie.
             const turned = (i) => ease3(window01(BOOK_HAND.open, 0.1 + i * 0.05, 0.5 + i * 0.05));
-            const frac = [];
+            const rides = [];
+            for (let i = 0; i < BOOK.leaves; i++) if (turned(i) > 0.9) rides.push(i);
+            const topLeaf = rides.length ? rides[rides.length - 1] : -1;
             for (let i = 0; i < BOOK.leaves; i++) {
-              const full = Math.PI - BOOK_LIFT[i];
-              const ang = Math.min(full * turned(i), (a * full) / Math.PI);
-              frac.push(ang / full);
-              parts["leaf" + i] = { angle: ang };
+              const ride = rides.includes(i);
+              const ang = ride
+                ? Math.max(0, a - BOOK_LIFT[i])
+                : (Math.PI - BOOK_LIFT[i]) * turned(i);
+              parts["leaf" + i] = { angle: ang, visible: ride ? (i === topLeaf ? 1 : 0) : 1 };
             }
-            const landed = (i) => (i < BOOK.leaves ? smoothstep(0.9, 1, frac[i]) : 0);
-            for (let i = 0; i < BOOK.leaves; i++) parts["leaf" + i].visible = 1 - landed(i + 1);
-            parts.coverIn = { ...parts.cover, visible: 1 - landed(0) };
-            parts.pile = { visible: landed(1) };
+            // The pile turns about the spine with the cover (built lying on
+            // the left, where the cover lies open).
+            const P = [0, BOOK.T / 2, 0];
+            const q = quatAxisAngle([0, 0, 1], a - Math.PI);
+            parts.pile = {
+              quat: q,
+              offset: sub(P, quatRotate(q, P)),
+              visible: rides.length > 1 ? 1 : 0,
+            };
+            // (The cover's lining stays, so the solid half never shows its outside.)
+            parts.coverIn = { ...parts.cover, visible: 1 };
           },
         },
       ],
