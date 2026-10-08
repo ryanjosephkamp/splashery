@@ -236,6 +236,51 @@ board with its lane's review.
 - A lane's own extra tests go in `tests/<prefix>.spec.mjs` (for example `tests/e5.spec.mjs`). Don't
   edit the other spec files; a change to one is a shared change for the Operator.
 
+### Running the suite fast
+
+The Integrators' command for the full run in the cloud container (lane Suite speed, October 8,
+2026):
+
+```
+node tools/suite.mjs --gl=llvmpipe --jobs=2
+```
+
+- `tools/suite.mjs` runs every spec file in its own single-worker Playwright process, with a JSON
+  report per file in `.cache/suite/`. **It picks up where it stopped**: the container restarts when
+  a session sits idle for a while, which kills a plain `npx playwright test` run and all its
+  results; after a restart, run the same command again and only the unfinished files run. Start a
+  new run with `--fresh`. It prints (and saves as `.cache/suite/summary.md`) the failures, the
+  slowest files and the slowest tests; `--report` prints that again without running anything.
+- `--gl=llvmpipe` draws WebGL2 with Mesa's llvmpipe (on a virtual display the tool starts) instead
+  of SwiftShader: the same frames, two to three times faster. `--jobs=2` runs two files at once,
+  longest first. Together they took the full run from 5 h 24 min (170 files, one at a time, on
+  SwiftShader) to 2 h 45 min (183 files; lane Suite speed, October 8, 2026), and the Worlds files
+  boot about ten times faster than before. Three at once was faster still but made a timing test
+  fail; keep it at two.
+- `tools/suite.json` holds each file's time (refresh with `--save-times`) and two short lists:
+  `solo`, files that check the wall clock and fail beside another file (they run at the end, one at
+  a time), and `swiftshader`, files that fail on llvmpipe (they run on SwiftShader in a
+  `--gl=llvmpipe` run). The tests themselves never change for speed.
+- **A failure in a fast run.** Add `--recheck` (or run the same command again with it once the run
+  is done): each file that failed runs once more, alone, and the summary lists which ones passed
+  alone. The failures still count and the exit code stays 1; a test that passes alone is a
+  wall-clock check that a busy CPU upset. Put its file on `solo` (or, if it fails only on llvmpipe,
+  on `swiftshader`) in your PR with the evidence, and report the failure as you would any other. A
+  test that fails alone too is a real failure.
+- Same tests, same config, no retries: nothing is skipped or loosened. The default
+  (`npx playwright test`, SwiftShader, headless) is unchanged, and the owner's Mac keeps its own
+  GPU.
+- Long runs: start it in the background, check on it every 30 to 60 minutes, and rerun the command
+  if the container restarted. Don't wait in short polls.
+- Two sessions can share a run: `--shard=1/2` in one and `--shard=2/2` in the other split the files
+  by time.
+- One file: `node tools/suite.mjs --files=kit,taps` (or `npx playwright test tests/kit.spec.mjs` as
+  before). Anything after `--` goes to Playwright (`-- --trace=on`).
+- Screenshots from a fast run look the same but are not byte-for-byte the ones a SwiftShader run
+  writes (llvmpipe rounds a few pixels differently, and effects are caught at slightly different
+  moments). Restore the standard ones as usual (below); a lane's own screenshots can come from
+  either.
+
 ## Screenshots
 
 - CLAUDE.md asks for screenshots at 390×844 and 1440×900. A lane saves its own as
