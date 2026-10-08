@@ -687,7 +687,7 @@ const BASES = {
       const rect = { center: [0.058, 0.03], angle: 0.602, half: [0.5, 0.55] };
       floor(k, { center: rect.center, rect, scale: 0.97, y: -1.11, count: 24000, color: MATERIALS.stone("#2c2b2c") }); // prettier-ignore
       const seat = { center: [-0.01, 0], angle: 0, half: [0.3, 0.42] };
-      floor(k, { center: seat.center, rect: seat, y: -0.27, count: 6000, color: MATERIALS.stone("#2c2b2c") }); // prettier-ignore
+      floor(k, { center: seat.center, rect: seat, y: -0.32, count: 6000, color: MATERIALS.stone("#6a666a") }); // prettier-ignore
     },
   }),
   // The knight's pewter base, closed underneath.
@@ -893,7 +893,7 @@ const PART_EFFECTS = {
   // lifts off its block, turns and sets back down.
   "toy-trex": { label: "Stomp", secs: 2.6, pivot: [0, -0.85, -0.1], regions: [{ at: [0.05, 0.05, -0.13], r: [0.95, 0.89, 0.62], soft: 0.01 }], motion: M.wobble({ base: [0, -0.85, -0.1], r: 0.18, lean: 0.12 }) }, // prettier-ignore
   "monkey-doll": { label: "Rock", secs: 2.6, pivot: [0, -0.86, -0.08], regions: [{ at: [0, 0.05, -0.08], r: [0.76, 0.91, 0.64], soft: 0.01 }], motion: M.wobble({ base: [0, -0.86, -0.08], r: 0.38, lean: 0.14 }) }, // prettier-ignore
-  "alum-crystal": { label: "Lift", secs: 2.4, pivot: [0, -0.4, 0], regions: [{ at: [0, 0.3, -0.02], r: [0.78, 0.66, 0.82], soft: 0.01 }], seat: { regions: [{ at: [0, -0.19, 0], r: [0.45, 0.06, 0.55], color: "#4f4547", tol: 0.2, soft: 0.01, over: true }], away: (e) => bump(e, 0, 2.0) > 0.12 }, motion: (e, info, origin) => lift(turnAbout(qa([0, 1, 0], (vary(info?.tap, 23) < 0.5 ? 1 : -1) * Math.PI * 0.5 * ease(band(e, 0.3, 1.7))), [0, 0, 0], [0, 0, 0]), 0.22 * bump(e, 0, 2.0)) }, // prettier-ignore
+  "alum-crystal": { label: "Lift", secs: 2.4, pivot: [0, -0.4, 0], regions: [{ at: [0, 0.3, -0.02], r: [0.78, 0.66, 0.82], soft: 0.01 }], seat: { regions: [{ at: [0, -0.27, 0], r: [0.45, 0.035, 0.55], color: "#7f777a", tol: 0.2, soft: 0.01, over: true }], away: (e) => bump(e, 0, 2.0) > 0.12 }, motion: (e, info, origin) => lift(turnAbout(qa([0, 1, 0], (vary(info?.tap, 23) < 0.5 ? 1 : -1) * Math.PI * 0.5 * ease(band(e, 0.3, 1.7))), [0, 0, 0], [0, 0, 0]), 0.22 * bump(e, 0, 2.0)) }, // prettier-ignore
 };
 
 // The BMX bicycle, nudged, leans over on its kickstand and rocks back up: the whole bike (frame and
