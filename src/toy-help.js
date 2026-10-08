@@ -104,9 +104,9 @@ export const TOY_HELP = {
       "A real orange, captured from photos and drawn with soft splats. The peel is covered in tiny pockets of oil that give citrus its smell; the bumps you see are those pockets. Oranges are a hybrid of the pomelo and the mandarin and grow on evergreen trees.\n\nTap it and the orange rolls along the table and back, turning as far as it travels. Drag to turn it and look at the dimpled peel and the little dark spot where the stem was.",
   },
   physalis: {
-    howTo: "Tap it to make the lanterns swing; drag to turn it.",
+    howTo: "Tap it to make it sway; drag to turn it.",
     about:
-      "A sprig of physalis, also called Chinese lantern or cape gooseberry, captured from photos and drawn with splats. Its fruit grows inside a papery husk that turns bright orange as it ripens; the husk is the plant's lantern and guards the berry.\n\nTap it and each lantern swings on its own from its stalk, a little out of step with the others. Drag to circle it and look at the thin veined husks and the green leaves above them.",
+      "A sprig of physalis, also called Chinese lantern or cape gooseberry, captured from photos and drawn with splats. Its fruit grows inside a papery husk that turns bright orange as it ripens; the husk is the plant's lantern and guards the berry.\n\nTap it and the stem sways and settles, its lanterns swinging with it. Drag to circle it and look at the thin veined husks and the green leaves above them.",
   },
   "crystal-gem": {
     howTo: "Tap it to turn it round; drag to turn it yourself.",
@@ -154,9 +154,9 @@ export const TOY_HELP = {
       "A plush dog lying on a wooden board, scanned with a handheld Revopoint scanner plus extra photos and drawn with splats. Soft toys are made of fabric stuffed with fiber; the short fuzz that covers them is called pile.\n\nTap it and it hops. Drag to circle it and look at the floppy ears and the brown and white patches.",
   },
   "bmx-bike": {
-    howTo: "Tap it to roll it; drag to turn it.",
+    howTo: "Tap it to nudge it; drag to turn it.",
     about:
-      "A BMX bicycle, captured from photos and drawn with splats. BMX stands for bicycle motocross: small-wheeled bikes built in the 1970s for racing on dirt tracks, then for jumps and tricks. This one is an old-style frame with plastic mag wheels.\n\nTap it and the bicycle rolls forward and back on its rug, its wheels turning as it goes. Drag to circle it and look at the spokes, the chain and the handlebars.",
+      "A BMX bicycle, captured from photos and drawn with splats. BMX stands for bicycle motocross: small-wheeled bikes built in the 1970s for racing on dirt tracks, then for jumps and tricks. This one is an old-style frame with plastic mag wheels.\n\nTap it and the bicycle leans over on its kickstand and rocks back up. Drag to circle it and look at the spokes, the chain and the handlebars.",
   },
   "murex-shell": {
     howTo: "Tap it to turn it round; drag to turn it yourself.",

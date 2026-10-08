@@ -55,32 +55,32 @@ and replace the general wording there where they are more specific.
 **Sounds.** His rule for all of them: if a toy just bounces, give it a subtle bounce sound; no wind,
 stretching, twinkle or clicking layers, and nothing loud or overwhelming.
 
-| Toy                                         | Sound                                                                              |
-| ------------------------------------------- | ---------------------------------------------------------------------------------- |
-| Heart donut, souvenir turtle                | Fine as they are.                                                                  |
-| Knight on a horse                           | "Basically perfect": keep it.                                                      |
-| Sushi boat                                  | Keep the first sound; remove the second little beat.                               |
-| Seated bread loaf                           | It sounds like a zipper: something very subtle instead.                            |
-| Cowboy steak                                | Not the right sound; something fitting and not overwhelming.                       |
-| Stollen                                     | Replace it completely: realistic and quiet.                                        |
-| Orange                                      | Too loud and the wrong sound: pick a different one.                                |
-| Physalis                                    | Subtler and different; no twinkle, no stretching.                                  |
-| Crystal                                     | Far too loud; a new, gentle sound.                                                 |
-| Alum crystal                                | Better, but remove the ding.                                                       |
-| Puffin                                      | Use a real puffin's call (a CC0 or CC BY recording, credited).                     |
-| Toy T-Rex, souvenir elephant                | They sound like wind: a subtle bounce sound instead.                               |
-| Monkey doll                                 | Keep the first sound; remove the clicking; a little bounce.                        |
-| Cave lioness                                | Wind and far too loud: replace it, and a better animation if one can move cleanly. |
-| Dog plush                                   | Sounds like a rubber band: replace it.                                             |
-| BMX bicycle                                 | Remove the bell; a softer opening sound.                                           |
-| Murex shell                                 | Remove the clicking; keep the ding, more subtle.                                   |
-| Sunflower, golden maple, money tree, bonsai | Remove the stretching and the wind.                                                |
-| White roses, mushroom                       | No stretching or clicking; a subtler ding is fine.                                 |
-| Cactus photo 2                              | No clicking; softer notes, like the first cactus.                                  |
-| Crochet Earth                               | No twinkle; the bounce should match the sound it makes when picked up and dropped. |
-| Desk globe                                  | Spin it, with no wind or suction sound.                                            |
-| Cherry blossom                              | The bounce is fine; no twinkle.                                                    |
-| Peonies in a vase                           | No stretching or wind; the vase's sound softer.                                    |
+| Toy                                         | Sound                                                                                                                    |
+| ------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| Heart donut, souvenir turtle                | Fine as they are.                                                                                                        |
+| Knight on a horse                           | "Basically perfect": keep it.                                                                                            |
+| Sushi boat                                  | Keep the first sound; remove the second little beat.                                                                     |
+| Seated bread loaf                           | It sounds like a zipper: something very subtle instead.                                                                  |
+| Cowboy steak                                | Not the right sound; something fitting and not overwhelming.                                                             |
+| Stollen                                     | Replace it completely: realistic and quiet.                                                                              |
+| Orange                                      | Too loud and the wrong sound: pick a different one.                                                                      |
+| Physalis                                    | Subtler and different; no twinkle, no stretching.                                                                        |
+| Crystal                                     | Far too loud; a new, gentle sound.                                                                                       |
+| Alum crystal                                | Better, but remove the ding.                                                                                             |
+| Puffin                                      | Use a real puffin's call (a CC0 or CC BY recording, credited).                                                           |
+| Toy T-Rex, souvenir elephant                | They sound like wind: a subtle bounce sound instead.                                                                     |
+| Monkey doll                                 | Keep the first sound; remove the clicking; a little bounce.                                                              |
+| Cave lioness                                | Wind and far too loud: replace it, and a better animation if one can move cleanly.                                       |
+| Dog plush                                   | Sounds like a rubber band: replace it.                                                                                   |
+| BMX bicycle                                 | Nudged, it leans over on its kickstand and rocks back up (rolling on turning wheels left faint ghost wheels: see Notes). |
+| Murex shell                                 | Remove the clicking; keep the ding, more subtle.                                                                         |
+| Sunflower, golden maple, money tree, bonsai | Remove the stretching and the wind.                                                                                      |
+| White roses, mushroom                       | No stretching or clicking; a subtler ding is fine.                                                                       |
+| Cactus photo 2                              | No clicking; softer notes, like the first cactus.                                                                        |
+| Crochet Earth                               | No twinkle; the bounce should match the sound it makes when picked up and dropped.                                       |
+| Desk globe                                  | Spin it, with no wind or suction sound.                                                                                  |
+| Cherry blossom                              | The bounce is fine; no twinkle.                                                                                          |
+| Peonies in a vase                           | No stretching or wind; the vase's sound softer.                                                                          |
 
 **Bases**, from below (item 1 above), his verdicts:
 
@@ -182,6 +182,9 @@ What main already did for these toys since October 3 (so this lane does not redo
   `tools/pr3-measure.mjs` (a toy's splats in world coordinates, from its SOG converted to PLY with
   `npx splat-transform`), `tools/pr3-under.mjs` (an underside's outline, plane, rectangle and top
   colors), `tools/pr3-clip.mjs` (phone-size MP4 clips).
+- Picking a part by color in a hard rig: a splat whose color only partly matches an "over" region is
+  still won by it, then rounded to "unmoved", so it stays behind (the BMX's ghost wheels). A part
+  cut by color should not move far.
 - A still from below must wait for the sort: render a few frames after moving the camera, or the
   splats are still sorted for the old view and the toy shows through any floor.
 - `kit.cloud({ count })` is scaled by the kit's budget over 160,000; use `share` for an exact number
@@ -193,30 +196,30 @@ What main already did for these toys since October 3 (so this lane does not redo
   its own top at each point (`MATERIALS.mirror`, from `tools/pr3-under.mjs --top`).
 - Effects (all rigid; nothing bends a capture):
 
-  | Toy                         | Tap                                                                                      |
-  | --------------------------- | ---------------------------------------------------------------------------------------- |
-  | Heart donut                 | Tossed: twirls round once and lands (its underside was never captured).                  |
-  | Sushi boat                  | Rocks side to side, as on water.                                                         |
-  | Seeded loaf, stollen        | Lifted and dropped; lands and rocks to rest.                                             |
-  | Cowboy steak                | Flipped over onto its (new) seared underside and back.                                   |
-  | Orange                      | Rolls along the table and back, turning as far as it travels.                            |
-  | Physalis                    | Each lantern swings on its own from its stalk (cut by color, hard-edged), out of step.   |
-  | Crystal, murex shell        | Turns once round.                                                                        |
-  | Alum crystal                | The crystal lifts off its block, turns a quarter turn and sets back down.                |
-  | Puffin                      | Hops round to look at you and back.                                                      |
-  | Toy T. rex, monkey doll     | The figure rocks round on its base (cut from its disc or cloth, hard-edged).             |
-  | Souvenir elephant           | Turns to look at you with two heavy steps.                                               |
-  | Souvenir turtle             | Crawls a little way forward, swaying, and back.                                          |
-  | Cave lioness                | Looks one way, then the other.                                                           |
-  | Dog plush                   | The hop (lane Fix9's, approved).                                                         |
-  | BMX bicycle                 | Rolls forward and back on its rug; each wheel (its dark splats near the hub) turns.      |
-  | Sunflower                   | Nods and settles.                                                                        |
-  | White roses, peonies, money | The vase or pot tips onto its rim, rolls round on it and settles (the tin can's wobble). |
-  | Crochet Earth               | Spins round twice.                                                                       |
-  | Desk globe                  | The ball spins in its stand (the ring and stand stay), slowing.                          |
-  | Mushroom, cactus, maple,    | Lifted a little and set down with a bump (a patch of ground has nothing that can move    |
-  | bonsai, cherry blossom      | cleanly on its own).                                                                     |
-  | Knight on a horse           | The figure rocks back on its base as the horse rears.                                    |
+  | Toy                         | Tap                                                                                                                      |
+  | --------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+  | Heart donut                 | Tossed: twirls round once and lands (its underside was never captured).                                                  |
+  | Sushi boat                  | Rocks side to side, as on water.                                                                                         |
+  | Seeded loaf, stollen        | Lifted and dropped; lands and rocks to rest.                                                                             |
+  | Cowboy steak                | Flipped over onto its (new) seared underside and back.                                                                   |
+  | Orange                      | Rolls along the table and back, turning as far as it travels.                                                            |
+  | Physalis                    | The stem sways from its foot (a lantern cut by color did not tag cleanly).                                               |
+  | Crystal, murex shell        | Turns once round.                                                                                                        |
+  | Alum crystal                | The crystal lifts off its block, turns a quarter turn and sets back down.                                                |
+  | Puffin                      | Hops round to look at you and back.                                                                                      |
+  | Toy T. rex, monkey doll     | The figure rocks round on its base (cut from its disc or cloth, hard-edged).                                             |
+  | Souvenir elephant           | Turns to look at you with two heavy steps.                                                                               |
+  | Souvenir turtle             | Crawls a little way forward, swaying, and back.                                                                          |
+  | Cave lioness                | Looks one way, then the other.                                                                                           |
+  | Dog plush                   | The hop (lane Fix9's, approved).                                                                                         |
+  | BMX bicycle                 | Nudged, it leans over on its kickstand and rocks back up (rolling on turning wheels left faint ghost wheels: see Notes). |
+  | Sunflower                   | Nods and settles.                                                                                                        |
+  | White roses, peonies, money | The vase or pot tips onto its rim, rolls round on it and settles (the tin can's wobble).                                 |
+  | Crochet Earth               | Spins round twice.                                                                                                       |
+  | Desk globe                  | The ball spins in its stand (the ring and stand stay), slowing.                                                          |
+  | Mushroom, cactus, maple,    | Lifted a little and set down with a bump (a patch of ground has nothing that can move                                    |
+  | bonsai, cherry blossom      | cleanly on its own).                                                                                                     |
+  | Knight on a horse           | The figure rocks back on its base as the horse rears.                                                                    |
 
 ## Known issues
 
@@ -232,8 +235,8 @@ What main already did for these toys since October 3 (so this lane does not redo
 - The cone shell's far side was captured poorly (a white smear), so it rocks one way and the other
   rather than turning all the way round.
 - The celestial globe's painted sky is soft: the museum scan's texture is low-resolution.
-- Five toys' cores (stollen, physalis, puffin, elephant, sunflower) change nothing visible at phone
-  size; they stay, as they cost little and fill the thin places at other angles.
+- Four toys' cores (stollen, puffin, elephant, sunflower) change nothing visible at phone size; they
+  stay, as they cost little and fill the thin places at other angles.
 
 ## For the Operator
 

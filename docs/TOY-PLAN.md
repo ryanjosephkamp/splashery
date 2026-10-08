@@ -242,13 +242,12 @@ Proposals below are suggestions; the owner may change them.
   - Improved: Photoreal r3 (October 8, 2026): Rolls along the table and back, turning as far as it
     travels; a kit-built lower peel.
   - Sound: A short sound that suits the object.
-- **Physalis** (`physalis`). Now: tap: Swing (rig). Plan: keep.
+- **Physalis** (`physalis`). Now: tap: Sway (rig). Plan: keep.
   - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
     good.
-  - Effect: Each lantern swings on its own from its stalk, out of step with the others; an orange
-    berry inside each lantern closes the see-through husks.
-  - Improved: Photoreal r3 (October 8, 2026): Each lantern swings on its own from its stalk, out of
-    step with the others; an orange berry inside each lantern closes the see-through husks.
+  - Effect: The stem sways from its foot and settles, its lanterns with it.
+  - Improved: Photoreal r3 (October 8, 2026): The stem sways from its foot and settles, its lanterns
+    with it.
   - Sound: A short sound that suits the object.
 - **Crystal** (`crystal-gem`). Now: tap: Turn (rig). Plan: keep.
   - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
@@ -312,13 +311,12 @@ Proposals below are suggestions; the owner may change them.
   - Effect: A hop (lane Fix9's); a kit-built woven mat underside.
   - Improved: Photoreal r3 (October 8, 2026): A hop (lane Fix9's); a kit-built woven mat underside.
   - Sound: A short sound that suits the object.
-- **BMX bicycle** (`bmx-bike`). Now: tap: Roll (rig). Plan: keep.
+- **BMX bicycle** (`bmx-bike`). Now: tap: Nudge (rig). Plan: keep.
   - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
     good.
-  - Effect: Rolls forward and back on its rug, its wheels turning as it goes; a kit-built rug
-    underside.
-  - Improved: Photoreal r3 (October 8, 2026): Rolls forward and back on its rug, its wheels turning
-    as it goes; a kit-built rug underside.
+  - Effect: Nudged, it leans over on its kickstand and rocks back up; a kit-built rug underside.
+  - Improved: Photoreal r3 (October 8, 2026): Nudged, it leans over on its kickstand and rocks back
+    up; a kit-built rug underside.
   - Sound: A short sound that suits the object.
 - **Murex shell** (`murex-shell`). Now: tap: Turn (rig). Plan: keep.
   - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it

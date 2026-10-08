@@ -751,12 +751,7 @@ const BASES = {
       core(k, [0.0, 0.12, -0.05], [0.42, 0.18, 0.2], "#26324a");
     },
   }),
-  physalis: based({
-    count: 12000,
-    build(k) {
-      PHYSALIS.forEach(({ at, top }, i) => core(k, at, [0.08, 0.08, 0.08], "#e9822e", { grid: 32, part: k.part("b" + i, { pivot: top }) })); // prettier-ignore
-    },
-  }),
+  physalis: based({}),
   // The sunflower: the back of its head, a green disc just behind the petals.
   "sunflower-photo": based({
     count: 12000,
@@ -835,6 +830,7 @@ const EFFECTS = {
     motion: M.drop({ pivot: [0, -0.5, 0], axis: [1, 0, 0], amp: 0.04 }),
   },
   "orange-photo": { label: "Roll", secs: 2.8, motion: M.roll({ center: [-0.057, 0.01, -0.01], R: 0.865, dir: ACROSS, dist: 0.32 }) }, // prettier-ignore
+  physalis: { label: "Sway", secs: 3, motion: M.rock({ pivot: [-0.02, -1.12, 0.12], axis: [0.85, 0, -0.52], amp: 0.1, k: 1.2, w: 5 }) }, // prettier-ignore
   "crystal-gem": {
     label: "Turn",
     secs: 3,
@@ -873,14 +869,6 @@ const EFFECTS = {
   "bonsai-photo": { label: "Drop", secs: 2.2, motion: M.drop({ pivot: [0, -0.9, 0], axis: ACROSS, height: 0.12, amp: 0.02 }) }, // prettier-ignore
   "cherry-blossom-photo": { label: "Drop", secs: 2.2, motion: M.drop({ pivot: [0, -0.28, 0], axis: ACROSS, height: 0.15, amp: 0.03 }) }, // prettier-ignore
 };
-// The physalis's three lanterns (the orange husks, found by color), each hanging from the top of
-// its stalk.
-const PHYSALIS = [
-  [-0.012, -0.747, 0.284],
-  [-0.038, -0.419, 0.317],
-  [-0.051, -0.145, 0.231],
-].map((at) => ({ at, top: [at[0], at[1] + 0.15, at[2] - 0.06] }));
-
 // The desk globe's ball (fitted to its splats), and its axis toward the top pivot.
 const GLOBE = [-0.138, 0.281, 0.051];
 const GLOBE_AXIS = [0.198, 0.979, 0.039];
@@ -897,76 +885,38 @@ const PART_EFFECTS = {
   // lifts off its block, turns and sets back down.
   "toy-trex": { label: "Stomp", secs: 2.6, pivot: [0, -0.85, -0.1], regions: [{ at: [0.05, 0.05, -0.13], r: [0.95, 0.89, 0.62], soft: 0.01 }], motion: M.wobble({ base: [0, -0.85, -0.1], r: 0.18, lean: 0.12 }) }, // prettier-ignore
   "monkey-doll": { label: "Rock", secs: 2.6, pivot: [0, -0.86, -0.08], regions: [{ at: [0, 0.05, -0.08], r: [0.76, 0.91, 0.64], soft: 0.01 }], motion: M.wobble({ base: [0, -0.86, -0.08], r: 0.38, lean: 0.14 }) }, // prettier-ignore
-  "alum-crystal": { label: "Lift", secs: 2.4, pivot: [0, -0.4, 0], regions: [{ at: [0, 0.26, -0.02], r: [0.78, 0.66, 0.82], soft: 0.01 }], motion: (e, info, origin) => lift(turnAbout(qa([0, 1, 0], (vary(info?.tap, 23) < 0.5 ? 1 : -1) * Math.PI * 0.5 * ease(band(e, 0.3, 1.7))), [0, 0, 0], [0, 0, 0]), 0.22 * bump(e, 0, 2.0)) }, // prettier-ignore
+  "alum-crystal": { label: "Lift", secs: 2.4, pivot: [0, -0.4, 0], regions: [{ at: [0, 0.3, -0.02], r: [0.78, 0.66, 0.82], soft: 0.01 }], motion: (e, info, origin) => lift(turnAbout(qa([0, 1, 0], (vary(info?.tap, 23) < 0.5 ? 1 : -1) * Math.PI * 0.5 * ease(band(e, 0.3, 1.7))), [0, 0, 0], [0, 0, 0]), 0.22 * bump(e, 0, 2.0)) }, // prettier-ignore
 };
 
-// The BMX bicycle rolls forward and back on its rug, its wheels turning as far as it travels.
-// Each wheel is the dark splats (tire and black mag spokes) within a ball round its hub; the
-// chrome frame and the wheel's gold rim stripe (the same at every turn) stay with the frame.
+// The BMX bicycle, nudged, leans over on its kickstand and rocks back up: the whole bike (frame and
+// both wheels, everything above its rug) turns as one solid piece about the line through its
+// tires' contact points. (Rolling it on turning wheels was tried: the tires and spokes can only be
+// picked by color, and the splats whose color only partly matches stayed behind as a faint ghost
+// of each wheel.)
 const BIKE_DIR = unit([-0.359, 0, 0.933]);
-const BIKE_AXLE = cross([0, 1, 0], BIKE_DIR);
-const BIKE_R = 0.27;
-const WHEELS = { wf: [-0.27, -0.157, 0.293], wr: [0.08, -0.157, -0.617] };
+// Fitted to the tires' dark splats (tools/pr3-measure.mjs): a tire reaches about 0.35 from its hub.
+const WHEELS = { wf: [-0.285, -0.144, 0.28], wr: [0.072, -0.129, -0.552] };
 function bikeRig(rig) {
-  const secs = 3.2;
+  const secs = 2.6;
   const frame = [-0.1, 0.13, -0.16];
-  const wheel = (at) => ({
-    at,
-    r: [0.3, 0.3, 0.3],
-    soft: 0.01,
-    color: "#141414",
-    tol: 0.32,
-    over: true,
-  });
+  const contact = [(WHEELS.wf[0] + WHEELS.wr[0]) / 2, -0.47, (WHEELS.wf[2] + WHEELS.wr[2]) / 2];
   return {
     ...rig,
     hard: true,
     parts: [
       ...rig.parts,
-      // The frame, and every splat in a wheel's ball that isn't the wheel's dark tire or spokes
-      // (its highlights, hub and gold stripe), so nothing is left behind as the bike rolls.
-      { name: "frame", pivot: frame, regions: [{ at: frame, r: [0.75, 0.57, 0.95], soft: 0.01 }, ...Object.values(WHEELS).map((at) => ({ at, r: [0.285, 0.285, 0.285], soft: 0.01 }))] }, // prettier-ignore
-      { name: "wf", pivot: WHEELS.wf, regions: [wheel(WHEELS.wf)] },
-      { name: "wr", pivot: WHEELS.wr, regions: [wheel(WHEELS.wr)] },
+      { name: "bike", pivot: contact, regions: [{ at: frame, r: [0.75, 0.57, 0.95], soft: 0.01 }, ...Object.values(WHEELS).map((at) => ({ at: [at[0], at[1] + 0.075, at[2]], r: [0.37, 0.37, 0.37], soft: 0.01 }))] }, // prettier-ignore
     ],
-    controls: [pulse("hop", "Roll", secs)],
-    action: { key: "hop", label: "Roll" },
+    controls: [pulse("hop", "Nudge", secs)],
+    action: { key: "hop", label: "Nudge" },
     drive(t, c, out, info) {
       out.parts.under = { visible: 0 };
       const e = since(c, "hop", secs);
       if (e < 0) return;
+      // Toward its kickstand side and back, a damped rock that settles on the stand.
       const sgn = vary(info?.tap, 31) < 0.5 ? 1 : -1;
-      const s = sgn * 0.3 * Math.sin(Math.PI * ease(band(e, 0, 3)));
-      const move = BIKE_DIR.map((v) => v * s);
-      out.parts.frame = { quat: [0, 0, 0, 1], offset: move };
-      const q = qa(BIKE_AXLE, -s / BIKE_R);
-      for (const k of ["wf", "wr"]) out.parts[k] = { quat: q, offset: move };
-    },
-  };
-}
-
-// Nudged, each physalis lantern swings on its own from its stalk, as a pendulum rings down, each
-// a little out of step with the others; the berry inside swings with it.
-function physalisRig(rig) {
-  const secs = 3.2;
-  return {
-    ...rig,
-    hard: true,
-    parts: PHYSALIS.map(({ at, top }, i) => ({ name: "l" + i, pivot: top, regions: [{ at, r: [0.17, 0.17, 0.18], soft: 0.01, color: "#d8562a", tol: 0.34 }] })), // prettier-ignore
-    controls: [pulse("hop", "Swing", secs)],
-    action: { key: "hop", label: "Swing" },
-    drive(t, c, out, info) {
-      const e = since(c, "hop", secs);
-      if (e < 0) return;
-      const sgn = vary(info?.tap, 37) < 0.5 ? 1 : -1;
-      const parts = {};
-      PHYSALIS.forEach((l, i) => {
-        const ang = sgn * 0.6 * Math.exp(-e * (1.1 + 0.2 * i)) * Math.sin(e * (8.5 - 0.9 * i) + 0.2 * i) * band(e, 0, 0.06 + 0.05 * i); // prettier-ignore
-        const q = qa([0.9, 0, 0.44], ang);
-        out.parts["l" + i] = { quat: q, offset: [0, 0, 0] };
-        parts["b" + i] = { quat: q, offset: [0, 0, 0] };
-      });
-      out.addon = { parts };
+      const ang = sgn * 0.16 * Math.exp(-e * 1.6) * Math.sin(e * 6.5) * band(e, 0, 0.06);
+      out.parts.bike = { quat: qa(BIKE_DIR, ang), offset: [0, 0, 0] };
     },
   };
 }
@@ -976,12 +926,10 @@ export const PR3_RIGS = Object.fromEntries(
     id,
     id === "bmx-bike"
       ? bikeRig(rig)
-      : id === "physalis"
-        ? physalisRig(rig)
-        : PART_EFFECTS[id]
-          ? movePart(rig, PART_EFFECTS[id])
-          : EFFECTS[id]
-            ? moveBody(rig, EFFECTS[id])
-            : rig,
+      : PART_EFFECTS[id]
+        ? movePart(rig, PART_EFFECTS[id])
+        : EFFECTS[id]
+          ? moveBody(rig, EFFECTS[id])
+          : rig,
   ]),
 );

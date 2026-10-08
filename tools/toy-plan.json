@@ -2410,9 +2410,9 @@
     "physalis": {
       "v": "keep",
       "owner": "New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.",
-      "effect": "Each lantern swings on its own from its stalk, out of step with the others; an orange berry inside each lantern closes the see-through husks.",
+      "effect": "The stem sways from its foot and settles, its lanterns with it.",
       "sound": "A short sound that suits the object.",
-      "improved": "Photoreal r3 (October 8, 2026): Each lantern swings on its own from its stalk, out of step with the others; an orange berry inside each lantern closes the see-through husks."
+      "improved": "Photoreal r3 (October 8, 2026): The stem sways from its foot and settles, its lanterns with it."
     },
     "crystal-gem": {
       "v": "keep",
@@ -2480,9 +2480,9 @@
     "bmx-bike": {
       "v": "keep",
       "owner": "New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.",
-      "effect": "Rolls forward and back on its rug, its wheels turning as it goes; a kit-built rug underside.",
+      "effect": "Nudged, it leans over on its kickstand and rocks back up; a kit-built rug underside.",
       "sound": "A short sound that suits the object.",
-      "improved": "Photoreal r3 (October 8, 2026): Rolls forward and back on its rug, its wheels turning as it goes; a kit-built rug underside."
+      "improved": "Photoreal r3 (October 8, 2026): Nudged, it leans over on its kickstand and rocks back up; a kit-built rug underside."
     },
     "murex-shell": {
       "v": "keep",
