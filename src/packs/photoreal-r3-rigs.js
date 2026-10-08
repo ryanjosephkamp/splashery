@@ -7,7 +7,7 @@
 // tools/pr3-measure.mjs and tools/pr3-under.mjs (docs/audits/bases-2026-10.md, "Photoreal r2
 // toys").
 
-import { mix, shade } from "../kit.js";
+import { mix, shade, quatAxisAngle, quatRotate, quatMul } from "../kit.js";
 import { evenEllipsoid } from "./even.js";
 import { PR3_BASES as B } from "./photoreal-r3-bases.js";
 
@@ -16,6 +16,27 @@ const clamp = (x, a, b) => Math.min(b, Math.max(a, x));
 const band = (x, a, b) => clamp((x - a) / (b - a), 0, 1);
 const since = (c, key, secs) => (c[key] > 0 ? (1 - c[key]) * secs : -1);
 const pulse = (key, label, ease) => ({ key, label, type: "pulse", ease });
+const ease = (x) => x * x * (3 - 2 * x);
+const bump = (x, a, b) => Math.sin(Math.PI * band(x, a, b));
+// A damped wobble that starts at 0 and rings down.
+const ring = (e, k = 4, w = 14) => (e < 0 ? 0 : Math.exp(-e * k) * Math.sin(e * w));
+const unit = (a) => {
+  const l = Math.hypot(a[0], a[1], a[2]) || 1;
+  return [a[0] / l, a[1] / l, a[2] / l];
+};
+const add = (a, b) => [a[0] + b[0], a[1] + b[1], a[2] + b[2]];
+const sub = (a, b) => [a[0] - b[0], a[1] - b[1], a[2] - b[2]];
+const cross = (a, b) => [
+  a[1] * b[2] - a[2] * b[1],
+  a[2] * b[0] - a[0] * b[2],
+  a[0] * b[1] - a[1] * b[0],
+];
+// Per-tap variety: a small hash of the tap count.
+const vary = (tap, salt = 0) => {
+  let h = ((tap?.n ?? 0) * 374761393 + salt * 668265263) >>> 0;
+  h = Math.imul(h ^ (h >>> 13), 1274126177) >>> 0;
+  return (h % 1000) / 1000;
+};
 
 // The light from the upper left, as the kit toys fake it.
 const LIGHT = [-0.45, 0.8, 0.55];
@@ -48,6 +69,129 @@ const hopDrive = (c, out) => {
   const e = since(c, "hop", HOP_SECS);
   const hop = e < 0 ? null : hopAt(e);
   if (hop) out.body = { offset: [0, hop.h * 0.5, 0], squash: hop.squash };
+};
+
+// ---- Whole-object motions (the effects) ------------------------------------------------------
+// Each returns a rigid transform { quat, offset }: for the whole toy (out.body, which turns about
+// the world origin) or for a part (which turns about its pivot: pass the pivot as `about`). A
+// capture moves only as a solid piece; nothing here bends it.
+
+const qa = (axis, ang) => quatAxisAngle(unit(axis), ang);
+// A turn q about point p, as a transform about `origin` (the world origin for the body, the
+// part's pivot for a part).
+function turnAbout(q, p, origin = [0, 0, 0]) {
+  const r = sub(p, origin);
+  return { quat: q, offset: sub(r, quatRotate(q, r)) };
+}
+const lift = (t, dy) => ({
+  quat: t.quat,
+  offset: add(t.offset, Array.isArray(dy) ? dy : [0, dy, 0]),
+});
+const still = { quat: [0, 0, 0, 1], offset: [0, 0, 0] };
+
+const MOTIONS = {
+  // Tossed up, it turns over once about a level axis through its middle and lands, with a small
+  // bounce (the heart donut).
+  toss:
+    ({ center, axis, height = 0.55, secs = 1.0 }) =>
+    (e) => {
+      const f = band(e, 0, secs);
+      const h = height * 4 * f * (1 - f) + 0.03 * Math.abs(ring(e - secs, 7, 18));
+      return lift(turnAbout(qa(axis, TAU * ease(f)), center), h);
+    },
+  // Flipped over and back, like a steak turned with tongs: lifted, turned half over about its
+  // long axis, laid down on its other side, then turned back.
+  flip:
+    ({ center, axis, height = 0.45 }) =>
+    (e) => {
+      const ang = Math.PI * (ease(band(e, 0.05, 0.85)) + ease(band(e, 1.95, 2.75)));
+      const h =
+        height * (bump(e, 0, 0.9) + bump(e, 1.9, 2.8)) + 0.02 * Math.abs(ring(e - 0.9, 8, 20));
+      return lift(turnAbout(qa(axis, ang), center), h);
+    },
+  // Rocks about a level axis through a point on its underside, ringing down (a boat on water, a
+  // loaf set down).
+  rock:
+    ({ pivot, axis, amp = 0.12, k = 1.6, w = 7, drop = 0 }) =>
+    (e, info) => {
+      const sign = vary(info?.tap, 3) < 0.5 ? 1 : -1;
+      const ang = sign * amp * Math.exp(-e * k) * Math.sin(e * w) * band(e, 0, 0.08);
+      const h = drop ? drop * bump(e, 0, 0.5) : 0;
+      return lift(turnAbout(qa(axis, ang), pivot), h);
+    },
+  // Knocked, it tips onto the rim of its round base and rolls round on it, the lean dying away,
+  // then drops back flat (as the real tin can does): a vase, a pot, a figure on its base.
+  wobble:
+    ({ base, r, lean = 0.16 }) =>
+    (e, info, origin) => {
+      const l = lean * ease(band(e, 0, 0.14)) * Math.exp(-e * 0.9) * (1 - ease(band(e, 1.9, 2.3)));
+      const round = TAU * vary(info?.tap, 7) + e * 7 + e * e * 2.2;
+      const d = [Math.cos(round), 0, Math.sin(round)];
+      const rim = add(base, [r * d[0], 0, r * d[2]]);
+      return turnAbout(qa(cross([0, 1, 0], d), l), rim, origin);
+    },
+  // Turns on an axis through a point (a globe, a crystal shown round, a shell).
+  spin: ({ center, axis = [0, 1, 0], turns = 1, secs = 2.6 }) => (e, info, origin) =>
+    turnAbout(qa(axis, (vary(info?.tap, 5) < 0.5 ? 1 : -1) * TAU * turns * ease(band(e, 0, secs))), center, origin), // prettier-ignore
+  // Rolls along the table and back like a ball (the orange): it turns as far as it travels.
+  roll:
+    ({ center, R, dir = [1, 0, 0], dist = 0.7, secs = 2.6 }) =>
+    (e, info) => {
+      const sgn = vary(info?.tap, 11) < 0.5 ? 1 : -1;
+      const s = sgn * dist * Math.sin(Math.PI * ease(band(e, 0, secs)));
+      const d = unit(dir);
+      return lift(turnAbout(qa(cross([0, 1, 0], d), -s / R), center), [d[0] * s, 0, d[2] * s]);
+    },
+  // Hops twice and turns to look at you, then back (a bird, an elephant).
+  hopTurn:
+    ({ center, turn = 0.6, height = 0.18 }) =>
+    (e, info) => {
+      const sgn = vary(info?.tap, 13) < 0.5 ? 1 : -1;
+      const yaw = sgn * turn * (ease(band(e, 0.05, 0.5)) - ease(band(e, 1.4, 1.9)));
+      const h = height * (bump(e, 0.05, 0.45) + 0.8 * bump(e, 1.45, 1.85));
+      return lift(turnAbout(qa([0, 1, 0], yaw), center), h);
+    },
+  // Rocks back on the back edge of its base and forward again (the knight's horse rears).
+  rear:
+    ({ pivot, axis, amp = 0.28 }) =>
+    (e) => {
+      const ang =
+        amp * ease(band(e, 0, 0.45)) * (1 - ease(band(e, 0.75, 1.15))) -
+        0.03 * ring(e - 1.15, 6, 22);
+      return turnAbout(qa(axis, ang), pivot);
+    },
+  // Looks one way, then the other, then back (the lioness's head).
+  look:
+    ({ pivot, amp = 0.35, nod = 0.08 }) =>
+    (e, info) => {
+      const sgn = vary(info?.tap, 17) < 0.5 ? 1 : -1;
+      const yaw =
+        sgn * amp * (ease(band(e, 0, 0.6)) - 2 * ease(band(e, 0.9, 1.6)) + ease(band(e, 1.9, 2.5)));
+      const q = quatMul(qa([0, 1, 0], yaw), qa([0, 0, 1], -nod * bump(e, 0, 2.5)));
+      return turnAbout(q, pivot);
+    },
+  // Lifted a little and let fall: it lands with a soft thud and rocks to rest (a loaf, a patch of
+  // ground).
+  drop:
+    ({ pivot, axis, height = 0.22, amp = 0.05 }) =>
+    (e, info) => {
+      const up = 0.28;
+      const fall = Math.sqrt((2 * height) / 4.9);
+      const h =
+        e < up ? height * ease(e / up) : Math.max(0, height - 0.5 * 9.8 * 0.5 * (e - up) ** 2);
+      const land = up + fall;
+      const sign = vary(info?.tap, 19) < 0.5 ? 1 : -1;
+      return lift(turnAbout(qa(axis, sign * amp * ring(e - land, 3.5, 13)), pivot), h);
+    },
+  // Walks a few steps forward and back, swaying (the turtle).
+  crawl:
+    ({ heading, dist = 0.18, sway = 0.05 }) =>
+    (e) => {
+      const s = dist * Math.sin(Math.PI * ease(band(e, 0, 2.8)));
+      const yaw = sway * Math.sin(e * 9) * bump(e, 0, 2.8);
+      const d = unit(heading);
+      return lift(turnAbout(qa([0, 1, 0], yaw), [0, 0, 0]), [d[0] * s, 0, d[2] * s]);
+    },
 };
 
 // ---- Kit-built undersides --------------------------------------------------------------------
@@ -369,16 +513,18 @@ const below = (cx, cz, y, R = 3) => [
 
 // A rig for a toy that only needs its base closed: the add-on, the hidden regions, and the hop
 // every capture without a rig has.
-function based({ count, build, hide }) {
+function based({ count, build, hide, motion, secs = 3, label = "Hop" }) {
   if (hide && !hide.length) hide = null;
   return {
-    addon: { count, build },
+    addon: count ? { count, build } : undefined,
     parts: hide ? [{ name: "under", pivot: [0, -1, 0], regions: hide }] : [],
-    controls: [pulse("hop", "Hop", HOP_SECS)],
-    action: { key: "hop", label: "Hop" },
-    drive(t, c, out) {
+    controls: [pulse("hop", label, motion ? secs : HOP_SECS)],
+    action: { key: "hop", label },
+    drive(t, c, out, info) {
       if (hide) out.parts.under = { visible: 0 };
-      hopDrive(c, out);
+      if (!motion) return hopDrive(c, out);
+      const e = since(c, "hop", secs);
+      if (e >= 0) out.body = motion(e, info);
     },
   };
 }
@@ -417,10 +563,31 @@ function vesica(u, L, W, n = 96) {
 }
 const BOAT_U = [0.589, 0.808];
 
+// A toy whose part above its base moves on its own (a figure on a mat, a crystal on its block):
+// the part's regions are hard-edged, so each splat moves wholly with it or not at all.
+function partly({ count, build, hide = [], part, motion, secs = 3, label }) {
+  return {
+    addon: count ? { count, build } : undefined,
+    hard: true,
+    parts: [
+      ...(hide.length ? [{ name: "under", pivot: [0, -1, 0], regions: hide }] : []),
+      { name: "top", pivot: part.pivot, regions: part.regions },
+    ],
+    controls: [pulse("hop", label, secs)],
+    action: { key: "hop", label },
+    drive(t, c, out, info) {
+      if (hide.length) out.parts.under = { visible: 0 };
+      const e = since(c, "hop", secs);
+      if (e >= 0) out.parts.top = motion(e, info, part.pivot);
+    },
+  };
+}
+
 // A toy on a captured mat or patch of ground: one or more floors, and the capture below them
 // hidden (unless a floor says keep: it sits just under the capture's lowest splats instead).
-function grounded(count, floors) {
+function grounded(count, floors, opts = {}) {
   return based({
+    ...opts,
     count,
     hide: floors.flatMap((f) => (f.keep ? [] : below(f.center[0], f.center[1], f.y, f.reach ?? 3))),
     build(k) {
@@ -431,7 +598,7 @@ function grounded(count, floors) {
   });
 }
 
-export const PR3_RIGS = {
+const BASES = {
   // The toy T. rex stands on a lime plastic disc; from below, its fringe smeared green.
   "toy-trex": grounded(30000, [{ center: [-0.05, 0.01], y: -0.885, radii: [0.93], color: MATERIALS.plastic("#b9cf4a") }]), // prettier-ignore
   // The BMX bicycle stands on a round gray rug.
@@ -602,4 +769,123 @@ export const PR3_RIGS = {
       core(k, [-0.01, -0.03, 0.2], [0.24, 0.24, 0.05], "#4a6a2a", { grid: 48 });
     },
   }),
+  // Solid underneath already (the owner's verdicts of October 3, 2026): rigs only for their effects.
+  "heart-donut": based({}),
+  "seeded-loaf": based({}),
+  "crystal-gem": based({}),
+  "turtle-souvenir": based({}),
+  "murex-shell": based({}),
+  "cave-lioness": based({}),
 };
+
+// ---- Effects --------------------------------------------------------------------------------
+// A tap's effect for each toy: a whole-object motion (out.body), or a part above its base that
+// moves on its own (hard-edged, so each splat moves wholly with it or not at all). Toys not
+// listed keep the hop every capture has.
+
+// The view direction at the home camera (yaw 0.55), and the level axis across it: a turn about
+// that axis is seen side on.
+const ACROSS = [Math.cos(0.55), 0, -Math.sin(0.55)];
+
+function moveBody(rig, { motion, secs = 3, label = "Hop" }) {
+  const hidden = rig.parts.some((p) => p.name === "under");
+  return {
+    ...rig,
+    controls: [pulse("hop", label, secs)],
+    action: { key: "hop", label },
+    drive(t, c, out, info) {
+      if (hidden) out.parts.under = { visible: 0 };
+      const e = since(c, "hop", secs);
+      if (e >= 0) out.body = motion(e, info);
+    },
+  };
+}
+function movePart(rig, { pivot, regions, motion, secs = 3, label = "Hop" }) {
+  const hidden = rig.parts.some((p) => p.name === "under");
+  return {
+    ...rig,
+    hard: true,
+    parts: [...rig.parts, { name: "top", pivot, regions }],
+    controls: [pulse("hop", label, secs)],
+    action: { key: "hop", label },
+    drive(t, c, out, info) {
+      if (hidden) out.parts.under = { visible: 0 };
+      const e = since(c, "hop", secs);
+      if (e >= 0) out.parts.top = motion(e, info, pivot);
+    },
+  };
+}
+
+const M = MOTIONS;
+const EFFECTS = {
+  "heart-donut": {
+    label: "Toss",
+    secs: 1.6,
+    motion: M.toss({ center: [0, 0.05, 0], axis: ACROSS }),
+  },
+  "sushi-boat": { label: "Rock", secs: 3.5, motion: M.rock({ pivot: [0.012, -0.1, -0.03], axis: [BOAT_U[0], 0, BOAT_U[1]], amp: 0.13, k: 0.9, w: 5 }) }, // prettier-ignore
+  "seeded-loaf": {
+    label: "Drop",
+    secs: 2.2,
+    motion: M.drop({ pivot: [0, -0.24, 0], axis: [1, 0, 0] }),
+  },
+  steak: { label: "Flip", secs: 3.1, motion: M.flip({ center: [0, 0, 0], axis: [1, 0, 0] }) },
+  stollen: {
+    label: "Drop",
+    secs: 2.2,
+    motion: M.drop({ pivot: [0, -0.5, 0], axis: [1, 0, 0], amp: 0.04 }),
+  },
+  "orange-photo": { label: "Roll", secs: 2.8, motion: M.roll({ center: [-0.057, 0.01, -0.01], R: 0.865, dir: ACROSS, dist: 0.6 }) }, // prettier-ignore
+  "crystal-gem": {
+    label: "Turn",
+    secs: 3,
+    motion: M.spin({ center: [-0.1, 0, -0.05], turns: 1, secs: 2.8 }),
+  },
+  puffin: {
+    label: "Hop",
+    secs: 2.2,
+    motion: M.hopTurn({ center: [0, 0, 0], turn: 0.7, height: 0.16 }),
+  },
+  "elephant-souvenir": { label: "Turn", secs: 2.2, motion: M.hopTurn({ center: [0, 0, 0], turn: 0.8, height: 0.05 }) }, // prettier-ignore
+  "turtle-souvenir": { label: "Crawl", secs: 3, motion: M.crawl({ heading: [1, 0, 0] }) },
+  "cave-lioness": { label: "Look", secs: 2.7, motion: M.look({ pivot: [0.6, -0.9, -0.5] }) },
+  "murex-shell": {
+    label: "Turn",
+    secs: 3,
+    motion: M.spin({ center: [0, 0, 0], turns: 1, secs: 2.8 }),
+  },
+  "sunflower-photo": { label: "Nod", secs: 3, motion: M.rock({ pivot: [0, -1.15, 0.3], axis: [1, 0, 0], amp: 0.07, k: 1.1, w: 5 }) }, // prettier-ignore
+  "white-roses": { label: "Knock", secs: 2.6, motion: M.wobble({ base: [0.065, -0.955, -0.035], r: 0.2, lean: 0.12 }) }, // prettier-ignore
+  peony: { label: "Knock", secs: 2.6, motion: M.wobble({ base: [-0.081, -1.335, -0.112], r: 0.21, lean: 0.1 }) }, // prettier-ignore
+  "money-tree": { label: "Knock", secs: 2.6, motion: M.wobble({ base: [-0.168, -1.1, -0.161], r: 0.33, lean: 0.1 }) }, // prettier-ignore
+  "crochet-earth": {
+    label: "Spin",
+    secs: 3,
+    motion: M.spin({ center: [0, -0.08, 0], turns: 2, secs: 2.8 }),
+  },
+  "knight-horse": { label: "Rear", secs: 1.8, motion: M.rear({ pivot: [-0.5, -0.97, 0.05], axis: [0, 0, 1], amp: 0.25 }) }, // prettier-ignore
+  "mushroom-photo": { label: "Drop", secs: 2.2, motion: M.drop({ pivot: [0, -0.24, 0], axis: ACROSS, height: 0.15, amp: 0.03 }) }, // prettier-ignore
+  "cactus-real": { label: "Drop", secs: 2.2, motion: M.drop({ pivot: [0, -0.87, 0], axis: ACROSS, height: 0.15, amp: 0.03 }) }, // prettier-ignore
+  "maple-tree": { label: "Drop", secs: 2.2, motion: M.drop({ pivot: [0, -0.8, 0], axis: ACROSS, height: 0.12, amp: 0.02 }) }, // prettier-ignore
+  "bonsai-photo": { label: "Drop", secs: 2.2, motion: M.drop({ pivot: [0, -0.9, 0], axis: ACROSS, height: 0.12, amp: 0.02 }) }, // prettier-ignore
+  "cherry-blossom-photo": { label: "Drop", secs: 2.2, motion: M.drop({ pivot: [0, -0.28, 0], axis: ACROSS, height: 0.15, amp: 0.03 }) }, // prettier-ignore
+  "desk-globe": { label: "Drop", secs: 2.2, motion: M.drop({ pivot: [0, -0.74, 0], axis: ACROSS, height: 0.12, amp: 0.02 }) }, // prettier-ignore
+};
+const PART_EFFECTS = {
+  // The toy T. rex rocks on its feet on its disc; the monkey doll on its cloth; the alum crystal
+  // lifts off its block, turns and sets back down.
+  "toy-trex": { label: "Stomp", secs: 2.6, pivot: [0, -0.85, -0.1], regions: [{ at: [0.05, 0.05, -0.13], r: [0.95, 0.89, 0.62], soft: 0.01 }], motion: M.wobble({ base: [0, -0.85, -0.1], r: 0.18, lean: 0.12 }) }, // prettier-ignore
+  "monkey-doll": { label: "Rock", secs: 2.6, pivot: [0, -0.86, -0.08], regions: [{ at: [0, 0.05, -0.08], r: [0.76, 0.91, 0.64], soft: 0.01 }], motion: M.wobble({ base: [0, -0.86, -0.08], r: 0.38, lean: 0.14 }) }, // prettier-ignore
+  "alum-crystal": { label: "Lift", secs: 2.4, pivot: [0, -0.4, 0], regions: [{ at: [0, 0.26, -0.02], r: [0.78, 0.66, 0.82], soft: 0.01 }], motion: (e, info, origin) => lift(turnAbout(qa([0, 1, 0], (vary(info?.tap, 23) < 0.5 ? 1 : -1) * Math.PI * 0.5 * ease(band(e, 0.3, 1.7))), [0, 0, 0], [0, 0, 0]), 0.22 * bump(e, 0, 2.0)) }, // prettier-ignore
+};
+
+export const PR3_RIGS = Object.fromEntries(
+  Object.entries(BASES).map(([id, rig]) => [
+    id,
+    PART_EFFECTS[id]
+      ? movePart(rig, PART_EFFECTS[id])
+      : EFFECTS[id]
+        ? moveBody(rig, EFFECTS[id])
+        : rig,
+  ]),
+);

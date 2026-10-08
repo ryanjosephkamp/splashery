@@ -32,6 +32,8 @@ export const PHOTOREAL_R2_TOYS = [
     label: "Sushi boat",
     category: "scans",
     tags: "photoreal scan captured food sushi fish rice japanese wooden boat",
+    // Lane Photoreal r3: its own home view (framing).
+    camera: { yaw: 0.55, pitch: 0.42, roll: 0, distance: 3.6 },
     kind: "captured",
     labs: true,
     url: "assets/toys/sushi-boat/sushi-boat.sog",
@@ -239,6 +241,8 @@ export const PHOTOREAL_R2_TOYS = [
     label: "Souvenir elephant",
     category: "scans",
     tags: "photoreal scan captured animal elephant souvenir statue figurine thai",
+    // Lane Photoreal r3: its own home view (framing).
+    camera: { yaw: -0.65, pitch: 0.25, roll: 0, distance: 5 },
     kind: "captured",
     labs: true,
     url: "assets/toys/elephant-souvenir/elephant-souvenir.sog",
@@ -277,6 +281,8 @@ export const PHOTOREAL_R2_TOYS = [
     label: "Cave lioness",
     category: "scans",
     tags: "photoreal scan captured animal lion lioness cave museum cat",
+    // Lane Photoreal r3: its own home view (framing).
+    camera: { yaw: 0.55, pitch: 0.2, roll: 0, distance: 6 },
     kind: "captured",
     labs: true,
     url: "assets/toys/cave-lioness/cave-lioness.sog",
@@ -334,6 +340,8 @@ export const PHOTOREAL_R2_TOYS = [
     label: "Murex shell",
     category: "scans",
     tags: "photoreal scan captured shell nature sea snail spines venus comb",
+    // Lane Photoreal r3: its own home view (framing).
+    camera: { yaw: 0.55, pitch: 0.2, roll: 0, distance: 4.1 },
     kind: "captured",
     labs: true,
     url: "assets/toys/murex-shell/murex-shell.sog",
@@ -486,6 +494,8 @@ export const PHOTOREAL_R2_TOYS = [
     label: "Cherry blossom (photo)",
     category: "scans",
     tags: "photoreal scan captured nature tree cherry blossom spring flowers pink real",
+    // Lane Photoreal r3: its own home view (framing).
+    camera: { yaw: 0.55, pitch: 0.3, roll: 0, distance: 3.9 },
     kind: "captured",
     labs: true,
     url: "assets/toys/cherry-blossom-photo/cherry-blossom-photo.sog",

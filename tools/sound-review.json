@@ -3664,6 +3664,118 @@
       "plan": "Space is silent: a soft, low breath as the view flies to the next planet, like the other real-space toys.",
       "candidates": [],
       "round": "2026-10-07"
+    },
+    "sushi-boat": {
+      "status": "ready",
+      "said": "(October 3, 2026, labs review) Keep the first sound; remove the second little beat.",
+      "note": "Keep the first sound; remove the second little beat.",
+      "plan": "Now: the wooden knock only, as the boat rocks; the little second beat is gone (Photoreal r3).",
+      "round": "2026-10-08",
+      "candidates": []
+    },
+    "seeded-loaf": {
+      "status": "ready",
+      "said": "(October 3, 2026, labs review) It sounds like a zipper: something very subtle instead.",
+      "note": "It sounds like a zipper: something very subtle instead.",
+      "plan": "Now: one very soft thud as the loaf lands; no crunch (Photoreal r3).",
+      "round": "2026-10-08",
+      "candidates": []
+    },
+    "steak": {
+      "status": "ready",
+      "said": "(October 3, 2026, labs review) Not the right sound; something fitting and not overwhelming.",
+      "note": "Not the right sound; something fitting and not overwhelming.",
+      "plan": "Now: a quiet, soft slap as the steak lands on each side (it flips over and back); no hiss (Photoreal r3).",
+      "round": "2026-10-08",
+      "candidates": []
+    },
+    "alum-crystal": {
+      "status": "ready",
+      "said": "(October 3, 2026, labs review) Better, but remove the ding.",
+      "note": "Better, but remove the ding.",
+      "plan": "Now: no ding: a soft stony knock as the crystal is set back on its block (Photoreal r3).",
+      "round": "2026-10-08",
+      "candidates": []
+    },
+    "puffin": {
+      "status": "ready",
+      "said": "(October 3, 2026, labs review) Use a real puffin's call.",
+      "note": "Use a real puffin's call.",
+      "plan": "Now: soft landings as it hops (no flutter); a real puffin's call, from a CC0 or CC BY recording, is still to come (Photoreal r3).",
+      "round": "2026-10-08",
+      "candidates": []
+    },
+    "toy-trex": {
+      "status": "ready",
+      "said": "(October 3, 2026, labs review) They sound like wind: a subtle bounce sound instead.",
+      "note": "They sound like wind: a subtle bounce sound instead.",
+      "plan": "Now: a subtle plastic tap as the toy rocks on its feet; no roar or wind (Photoreal r3).",
+      "round": "2026-10-08",
+      "candidates": []
+    },
+    "elephant-souvenir": {
+      "status": "ready",
+      "said": "(October 3, 2026, labs review) They sound like wind: a subtle bounce sound instead.",
+      "note": "They sound like wind: a subtle bounce sound instead.",
+      "plan": "Now: two soft, heavy steps as it turns; no wind (Photoreal r3).",
+      "round": "2026-10-08",
+      "candidates": []
+    },
+    "cave-lioness": {
+      "status": "ready",
+      "said": "(October 3, 2026, labs review) Wind and far too loud: replace it.",
+      "note": "Wind and far too loud: replace it.",
+      "plan": "Now: one quiet, low, soft breath out as she looks round; no wind or roar (Photoreal r3).",
+      "round": "2026-10-08",
+      "candidates": []
+    },
+    "dog-plush": {
+      "status": "ready",
+      "said": "(October 3, 2026, labs review) Sounds like a rubber band: replace it.",
+      "note": "Sounds like a rubber band: replace it.",
+      "plan": "Now: the soft thump of a plush landing, twice; no boing (Photoreal r3).",
+      "round": "2026-10-08",
+      "candidates": []
+    },
+    "bmx-bike": {
+      "status": "ready",
+      "said": "(October 3, 2026, labs review) Remove the bell; a softer opening sound.",
+      "note": "Remove the bell; a softer opening sound.",
+      "plan": "Now: a softer freewheel ticking; no bell (Photoreal r3).",
+      "round": "2026-10-08",
+      "candidates": []
+    },
+    "murex-shell": {
+      "status": "ready",
+      "said": "(October 3, 2026, labs review) Remove the clicking; keep the ding, more subtle.",
+      "note": "Remove the clicking; keep the ding, more subtle.",
+      "plan": "Now: the ding only, quieter and shorter; no clicking (Photoreal r3).",
+      "round": "2026-10-08",
+      "candidates": []
+    },
+    "cactus-real": {
+      "status": "ready",
+      "said": "(October 3, 2026, labs review) No clicking; softer notes, like the first cactus.",
+      "note": "No clicking; softer notes, like the first cactus.",
+      "plan": "Now: three soft plucked notes, like the first cactus's; no clicking (Photoreal r3).",
+      "round": "2026-10-08",
+      "candidates": []
+    },
+    "desk-globe": {
+      "status": "ready",
+      "said": "(October 3, 2026, labs review) Spin it, with no wind or suction sound.",
+      "note": "Spin it, with no wind or suction sound.",
+      "plan": "Now: a soft wooden knock as its log slice lands; no wind or suction (Photoreal r3).",
+      "round": "2026-10-08",
+      "candidates": []
+    },
+    "cherry-blossom-photo": {
+      "status": "ready",
+      "said": "(October 3, 2026, labs review) The bounce is fine; no twinkle.",
+      "note": "The bounce is fine; no twinkle.",
+      "plan": "Now: the bounce's soft flutter only; no twinkle (Photoreal r3).",
+      "round": "2026-10-08",
+      "candidates": []
     }
   }
 }
