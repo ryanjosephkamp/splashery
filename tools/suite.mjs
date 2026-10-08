@@ -18,6 +18,7 @@
 //   node tools/suite.mjs --out=DIR        # keep this run's reports in DIR (default .cache/suite)
 //   node tools/suite.mjs --save-times     # also write each file's time to tools/suite-times.json
 //   node tools/suite.mjs --report         # print the summary of the run in --out, run nothing
+//   node tools/suite.mjs -- --trace=on    # anything after "--" goes to Playwright as it is
 //
 // SPLASHERY_CHROMIUM defaults to /opt/pw-browsers/chromium when that exists (the cloud
 // container). SPLASHERY_PORT is honored as in playwright.config.mjs. The summary (pass and fail
@@ -30,8 +31,12 @@ import http from "node:http";
 import { spawn } from "node:child_process";
 
 const root = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
+// Anything after "--" goes to every Playwright process as it is (e.g. -- --trace=on).
+const dash = process.argv.indexOf("--");
+const PASS = dash >= 0 ? process.argv.slice(dash + 1) : [];
+const OWN = dash >= 0 ? process.argv.slice(0, dash) : process.argv;
 const arg = (name, fallback = null) => {
-  const a = process.argv.find((x) => x === `--${name}` || x.startsWith(`--${name}=`));
+  const a = OWN.find((x) => x === `--${name}` || x.startsWith(`--${name}=`));
   if (!a) return fallback;
   return a.includes("=") ? a.slice(a.indexOf("=") + 1) : true;
 };
@@ -115,7 +120,7 @@ function runFile(f) {
     const pattern = `[\\\\/]${f.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\.spec\\.mjs$`;
     const child = spawn(
       "npx",
-      ["playwright", "test", pattern, "--workers=1", "--reporter=json", `--output=${path.join(OUT, "results", f)}`], // prettier-ignore
+      ["playwright", "test", pattern, "--workers=1", "--reporter=json", `--output=${path.join(OUT, "results", f)}`, ...PASS], // prettier-ignore
       { cwd: root, env: { ...env, PLAYWRIGHT_JSON_OUTPUT_NAME: tmp }, stdio: ["ignore", "pipe", "pipe"] }, // prettier-ignore
     );
     const log = fs.createWriteStream(path.join(OUT, `${f}.log`));
