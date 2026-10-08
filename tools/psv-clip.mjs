@@ -36,8 +36,7 @@ const sway = Number(opt("sway", toy === "photo-3d" ? 0.2 : 0.1));
 const dpr = Number(opt("dpr", 3));
 const label = opt("label", "");
 const base = process.env.SPLASHERY_URL || "http://127.0.0.1:4173/";
-if (!out || !file)
-  throw new Error("Usage: node tools/psv-clip.mjs <out.mp4> --toy=… [--open=<file>] …");
+if (!out) throw new Error("Usage: node tools/psv-clip.mjs <out.mp4> --toy=… [--open=<file>] …");
 
 const browser = await chromium.launch({
   executablePath: process.env.SPLASHERY_CHROMIUM || undefined,
