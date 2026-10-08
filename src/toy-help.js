@@ -1460,7 +1460,7 @@ export const TOY_HELP = {
   mobius: {
     howTo: "Tap to send the rider round. Pick a rider in the Toy tab.",
     about:
-      "A Möbius strip is a loop with a half twist in it. It has only one side and only one edge: a line drawn along its middle comes back to where it started without ever crossing an edge. It is named after August Möbius, who wrote about it in the 1850s. You can make one from a strip of paper and some tape.\n\nTap it and the rider goes along the middle of the band. After one lap it is underneath where it started, and after two it is back on top. Pick a race car, a beach ball, a duck on a bike or an ant in the Toy tab. Pick its colors and glow in the Toy tab too.",
+      "A Möbius strip is a loop with a half twist in it. It has only one side and only one edge: a line drawn along its middle comes back to where it started without ever crossing an edge. It is named after August Möbius, who wrote about it in the 1850s. You can make one from a strip of paper and some tape.\n\nTap it and the rider goes along the middle of the band. After one lap it is underneath where it started, and after two it is back on top. Pick a race car, a beach ball, a duck on a bike, an ant, a toy train, a ladybug or a skateboard in the Toy tab, each with its own sound, and a rider color. Pick the band's colors and glow there too.",
   },
   "klein-bottle": {
     howTo: "Tap to send water through. Set the glow in the Toy tab.",
@@ -1475,7 +1475,7 @@ export const TOY_HELP = {
   hypercube: {
     howTo: "Tap to turn it inside out. Try the 4D turn slider in the Toy tab.",
     about:
-      "A hypercube, or tesseract, is a cube in four dimensions. A square has 4 corners and a cube has 8; a tesseract has 16 corners and 32 edges, and its sides are 8 cubes. We can't see four dimensions, so this toy shows its shadow in our three: a cube inside a cube, with their corners joined.\n\nAt rest it rocks gently in 4D. Tap it to turn it once around through the fourth dimension: the pink inner cube swells out to become the outer one while the blue one folds inside, then it turns on back to where it started. Every edge stays perfectly straight the whole time. The 4D turn slider changes the strength of its gentle resting rotation.",
+      "A hypercube, or tesseract, is a cube in four dimensions. A square has 4 corners and a cube has 8; a tesseract has 16 corners and 32 edges, and its sides are 8 cubes. We can't see four dimensions, so this toy shows its shadow in our three: a cube inside a cube, with their corners joined.\n\nAt rest it rocks gently in 4D. Tap it to turn it once around through the fourth dimension: the pink inner cube swells out to become the outer one while the blue one folds inside, then it turns on back to where it started. Every edge stays perfectly straight the whole time. The 4D turn slider changes the strength of its gentle resting rotation, and Colors picks a theme.",
   },
   "torus-knot": {
     howTo:
@@ -1491,7 +1491,7 @@ export const TOY_HELP = {
   mandelbulb: {
     howTo: "Tap it to turn its discs like the dials of a lock.",
     about:
-      "The Mandelbulb is a 3D fractal, a cousin of the famous flat Mandelbrot set. It is made by repeating one short formula over and over for each point in space and keeping only the points that never fly away. The mathematical fractal has detail on many scales; this toy has a fixed, finite set of points. It was found in 2009 by Daniel White and Paul Nylander.\n\nTap it and its seven slices turn like the dials of a combination lock, neighbors in opposite directions, then back again. Each turns one seventh of a turn, because the bulb looks the same after a seventh of a turn, so it lands on the same picture.",
+      "The Mandelbulb is a 3D fractal, a cousin of the famous flat Mandelbrot set. It is made by repeating one short formula over and over for each point in space and keeping only the points that never fly away. The mathematical fractal has detail on many scales; this toy has a fixed, finite set of points. It was found in 2009 by Daniel White and Paul Nylander.\n\nTap it and its seven slices turn like the dials of a combination lock, neighbors in opposite directions, then back again. Each turns one seventh of a turn, because the bulb looks the same after a seventh of a turn, so it lands on the same picture. Pick the power (power n has n − 1 lobes) or a Julia bulb, which turns whole, in the Toy tab.",
   },
   sierpinski: {
     howTo: "Tap to explode it; tap again to put it back. Pick the level in the Toy tab.",
@@ -1527,12 +1527,47 @@ export const TOY_HELP = {
   "fourier-circles": {
     howTo: "Tap to spin the circles. Type a word or a curve in the Toy tab.",
     about:
-      "Circles turning on circles can draw almost any closed shape, given enough of them. Each circle spins a whole number of times per loop while riding on the rim of the one before, and the tip of the last one traces the drawing. This is a Fourier series, named after Joseph Fourier, who showed in the early 1800s that repeating patterns can be built by adding up simple waves.\n\nTap to spin them and watch the shape drawn again. Few circles draw a wobbly shape and many draw a crisp one: set how many in the Toy tab, pick a heart, a star or a square wave, stack them in 3D, or type a word and each letter gets its own chain of circles.",
+      "Circles turning on circles can draw almost any closed shape, given enough of them. Each circle spins a whole number of times per loop while riding on the rim of the one before, and the tip of the last one traces the drawing. This is a Fourier series, named after Joseph Fourier, who showed in the early 1800s that repeating patterns can be built by adding up simple waves.\n\nTap to spin them and watch the shape drawn again. Few circles draw a wobbly shape and many draw a crisp one: set how many in the Toy tab, pick a heart, a star or a square wave, stack them in 3D, or type words (up to 40 letters) and each letter gets its own chain of circles, five letters at a time.",
   },
   "splat-equation": {
     howTo: "Tap to play time t. Pick a program, or type your own equations, in the Toy tab.",
     about:
       "Every splat has a place and a color. Here you program them with math: each splat gets two numbers, u and v, and your equations x, y and z turn them into its place, while hue (or r, g and b) gives its color. Time t runs from 0 to 2π, so the shape can move.\n\nTap it to play one cycle of t and watch the shape move. Pick a sphere, a torus, a Möbius strip, a seashell, a trefoil knot, a wave, a spiral galaxy or a Klein bottle in the Toy tab, or type your own, such as z = sin(u + t). Under Splats, Solid shows a clean surface, Fine a finer one, and Dots every splat on its own. The Tinkerer's Manual explains the whole language.",
+  },
+  "rossler-attractor": {
+    howTo: "Tap to drop a tracer where you tap. Up to four run at once.",
+    about:
+      'In 1976 the chemist Otto Rössler looked for the simplest flow that could be chaotic. His three equations, dx/dt = −y − z, dy/dt = x + 0.2y and dz/dt = 0.2 + z(x − 5.7), have only one term that is not linear. A point spirals outward on a flat disc until it is flung up and folded back into the middle, again and again, never repeating.\n\nTap to drop a glowing tracer where you tap. It follows the equations live, step by step, and is pulled onto the attractor wherever it starts. Source: O. E. Rössler, "An equation for continuous chaos", Physics Letters A, 1976.',
+  },
+  "thomas-attractor": {
+    howTo: "Tap to drop a tracer where you tap. Up to four run at once.",
+    about:
+      'The biologist René Thomas wrote down this flow in 1999: dx/dt = sin y − bx, dy/dt = sin z − by and dz/dt = sin x − bz. Each of x, y and z pushes the next one round, so the shape looks the same after you swap them in turn. The number b is friction; here b = 0.208186, where the motion is chaotic.\n\nTap to drop a glowing tracer where you tap. It follows the equations live, step by step, and wanders through the loops. Source: R. Thomas, "Deterministic chaos seen in terms of feedback circuits", International Journal of Bifurcation and Chaos, 1999.',
+  },
+  "aizawa-attractor": {
+    howTo: "Tap to drop a tracer where you tap. Up to four run at once.",
+    about:
+      'This flow, known as the Aizawa attractor, spins a point round a ball shape: it circles near the top, slips down the outside and shoots back up a narrow tube through the middle. Its three equations, with six numbers (a = 0.95, b = 0.7, c = 0.6, d = 3.5, e = 0.25, f = 0.1), were studied by Yoji Aizawa and by William Langford.\n\nTap to drop a glowing tracer where you tap. It follows the equations live, step by step, and is pulled onto the ball wherever it starts. Source: W. F. Langford, "Numerical studies of torus bifurcations", 1984.',
+  },
+  "five-cell": {
+    howTo: "Tap to roll it through the fourth dimension. Pick its colors in the Toy tab.",
+    about:
+      "The 5-cell is the simplest shape in four dimensions, the 4D cousin of a triangle and a tetrahedron. It has five corners, each joined to all four others by ten equal edges, and its walls are five tetrahedra. We can only see its shadow: here it is drawn in perspective from a point out along the fourth axis, so corners nearer us in 4D look bigger.\n\nTap it and it rolls a full turn through the fourth dimension and comes home. Source: H. S. M. Coxeter, Regular Polytopes, 1973.",
+  },
+  "sixteen-cell": {
+    howTo: "Tap to roll it through the fourth dimension. Pick its colors in the Toy tab.",
+    about:
+      "The 16-cell is the 4D cousin of the octahedron. Its eight corners sit one step out along each of the four axes, both ways, and each corner is joined to every other except the one opposite: 24 edges, and 16 tetrahedra for walls. Each pair of opposite corners has its own color. It is drawn in perspective from 4D, so corners nearer us in 4D look bigger.\n\nTap it and it rolls a full turn through the fourth dimension and comes home. Source: H. S. M. Coxeter, Regular Polytopes, 1973.",
+  },
+  "twenty-four-cell": {
+    howTo: "Tap to roll it through the fourth dimension. Pick its colors in the Toy tab.",
+    about:
+      "The 24-cell is a regular shape with no cousin among the regular solids of three dimensions: it exists only in 4D. Its 24 corners are every way to put two ±1s and two zeros in four places, joined by 96 edges, with 24 octahedra for walls. The corners split into three sets of eight, each one a 16-cell, shown in three colors. It is drawn in perspective from 4D.\n\nTap it and it rolls a full turn through the fourth dimension and comes home. Source: H. S. M. Coxeter, Regular Polytopes, 1973.",
+  },
+  duoprism: {
+    howTo: "Tap to roll it through the fourth dimension. Pick the two polygons in the Toy tab.",
+    about:
+      "A duoprism pairs two polygons at right angles in four dimensions: every corner of one is matched with every corner of the other. A 3,4-duoprism has 3 × 4 = 12 corners, and its walls are prisms. With two squares it is the hypercube. Each ring of the first polygon has its own color. It is drawn in perspective from 4D.\n\nTap it and it rolls a full turn through the fourth dimension and comes home. Pick each polygon, from a triangle to a hexagon, in the Toy tab. Source: J. H. Conway, H. Burgiel and C. Goodman-Strauss, The Symmetries of Things, 2008.",
   },
   "pythagoras-proof": {
     howTo: "Tap it to slide the triangles and show that a² + b² = c².",
@@ -2357,6 +2392,13 @@ export const TOY_HELP = {
     howTo: "Tap to see it edge on, as from Earth. Pick a system, speed and spacing in the Toy tab.",
     about:
       "Real planets round other stars, from the NASA Exoplanet Archive: TRAPPIST-1, a cool red dwarf 40 light-years away with seven rocky planets, all closer to it than Mercury is to the Sun; TOI-178, whose six planets go round in a chain of near-simple ratios; and 55 Cancri, with a planet whose year is shorter than a day. The inner Solar System is there to compare.\n\nThe orbits' sizes and periods are measured, and the planets move at those rates, sped up. Star and planets are drawn far larger than to scale. Nobody knows these planets' colors, so they show their size: gray-brown for rocky, blue for mid-sized, tan for giants. Tap to see the system edge on, as we see TRAPPIST-1 and TOI-178: their planets were found as they passed in front of their stars.",
+  },
+  // ---- Space r4 (lane Space r4) ----
+  "solar-orbits": {
+    howTo:
+      "Tap to fly to the next planet. Drag the date; set the speed and the scale in the Toy tab.",
+    about:
+      "The Sun, the eight planets, six big moons, four famous comets and 4,000 real asteroids, each where its real orbit puts it on the date you pick, from 1800 to 2050. The orbits come from JPL's published elements, and every body moves by Kepler's laws, faster near the Sun. The asteroids are a random sample of the cataloged ones: the main belt between Mars and Jupiter, and the Trojans that share Jupiter's orbit, 60 degrees ahead and behind.\n\nThe readable scale is not to scale: distances from the Sun are squeezed and the planets drawn hundreds of times larger, so everything fits. Pick the true scale to see how empty space is: the planets shrink to specks. A comet's tail always points away from the Sun; its length is a picture.",
   },
   // ---- Tiny world r2 (lane Tiny world r2) ----
   "dna-to-protein": {

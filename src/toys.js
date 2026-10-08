@@ -1309,6 +1309,19 @@ export const TOYS = [
   },
   // ---- End of pack: space-r2 ----
 
+  // ---- Pack: space-r4 (lane Space r4) ----
+  {
+    id: "solar-orbits",
+    label: "The solar system on real orbits",
+    category: "space",
+    kind: "kit",
+    pack: "space-r4",
+    labs: true,
+    tags: "solar system orbits orrery planets kepler jpl real date asteroid belt asteroids comets halley moons jupiter saturn true scale",
+    camera: { yaw: 0.35, pitch: 0.95, roll: 0, distance: 2.45 },
+  },
+  // ---- End of pack: space-r4 ----
+
   // ---- Pack: tiny ----
   // (entries for src/packs/tiny.js go here)
   {
@@ -2576,6 +2589,78 @@ export const TOYS = [
     pack: "maths",
     tags: "pythagoras theorem proof right triangle square hypotenuse geometry",
     camera: { yaw: 0.2, pitch: 0.3, roll: 0, distance: 3.7 },
+  },
+  // Lane Math r2: three more strange attractors (labs).
+  {
+    id: "rossler-attractor",
+    label: "Rössler attractor",
+    category: "maths",
+    kind: "kit",
+    pack: "maths",
+    labs: true,
+    tags: "rossler roessler chaos strange attractor spiral differential equations tracer",
+    camera: { yaw: 0.35, pitch: 0.35, roll: 0, distance: 4.2 },
+  },
+  {
+    id: "thomas-attractor",
+    label: "Thomas attractor",
+    category: "maths",
+    kind: "kit",
+    pack: "maths",
+    labs: true,
+    tags: "thomas cyclically symmetric chaos strange attractor differential equations tracer",
+    camera: { yaw: 0.5, pitch: 0.4, roll: 0, distance: 4.4 },
+  },
+  {
+    id: "aizawa-attractor",
+    label: "Aizawa attractor",
+    category: "maths",
+    kind: "kit",
+    pack: "maths",
+    labs: true,
+    tags: "aizawa langford chaos strange attractor sphere tube differential equations tracer",
+    camera: { yaw: 0.3, pitch: 0.3, roll: 0, distance: 4.2 },
+  },
+  // Lane Math r2: shapes in four dimensions (labs).
+  {
+    id: "five-cell",
+    label: "5-cell",
+    category: "maths",
+    kind: "kit",
+    pack: "maths",
+    labs: true,
+    tags: "5-cell pentachoron 4-simplex 4d four dimensions polytope projection",
+    camera: { yaw: 0.55, pitch: 0.35, roll: 0, distance: 4.1 },
+  },
+  {
+    id: "sixteen-cell",
+    label: "16-cell",
+    category: "maths",
+    kind: "kit",
+    pack: "maths",
+    labs: true,
+    tags: "16-cell hexadecachoron cross polytope orthoplex 4d four dimensions projection",
+    camera: { yaw: 0.55, pitch: 0.35, roll: 0, distance: 4.1 },
+  },
+  {
+    id: "twenty-four-cell",
+    label: "24-cell",
+    category: "maths",
+    kind: "kit",
+    pack: "maths",
+    labs: true,
+    tags: "24-cell icositetrachoron octaplex 4d four dimensions polytope projection",
+    camera: { yaw: 0.55, pitch: 0.35, roll: 0, distance: 4.1 },
+  },
+  {
+    id: "duoprism",
+    label: "Duoprism",
+    category: "maths",
+    kind: "kit",
+    pack: "maths",
+    labs: true,
+    tags: "duoprism 4d four dimensions polygon prism polytope projection",
+    camera: { yaw: 0.55, pitch: 0.35, roll: 0, distance: 4.1 },
   },
   // Lane Manual: the splat equation toy (its own pack, on the Maths shelf).
   {
