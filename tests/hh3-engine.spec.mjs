@@ -4,6 +4,7 @@
 // a thin toy's splats still takes it with the ✋ switch on.
 
 import { test, expect } from "@playwright/test";
+import { canPlay } from "../src/physics/hands-on.js";
 
 const APP = "/?renderer=webgl2&adapt=off&profile=mid";
 
@@ -99,7 +100,9 @@ async function snapOff(page, a, far) {
   return j;
 }
 
-test.afterEach(async ({ page }) => unpatch(page));
+test.afterEach(async ({ page }) => {
+  if (page.url().startsWith("http")) await unpatch(page);
+});
 
 test("reseat: a snapped-off piece brought back clicks home and holds fast again", async ({
   page,
@@ -212,4 +215,46 @@ test("a forgiving press: off the desk lamp's splats, Hands-on still lifts it", a
   });
   await page.mouse.up();
   expect(lifted).toBeGreaterThan(0.1);
+});
+
+test("a shake with fire: false only reads as info.hands.shake (no tap fires)", async ({ page }) => {
+  await page.goto(APP);
+  await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
+  const r = await page.evaluate(async () => {
+    const { app, player } = window.__splashery;
+    await app.chooseToy("snow-globe");
+    player.opts.idleDelay = 1e9;
+    for (let i = 0; i < 30; i++) player.update(1 / 60);
+    document.getElementById("hands-toggle").click();
+    const hands = player.toyInfo.recipe.hands;
+    const was = hands.shake;
+    hands.shake = { fire: false };
+    const h = player.handsOn;
+    const c = player.stage.toScreen(player.toyInfo.center);
+    h.pressAt(player.toyInfo.center.slice(), c[0], c[1]);
+    h.moveTo(c[0], c[1] - 40);
+    player.update(1 / 60);
+    let felt = 0;
+    let fired = 0;
+    for (let k = 1; k <= 60; k++) {
+      h.moveTo(c[0] + 70 * Math.sin((k / 60) * 4 * Math.PI), c[1] - 40);
+      player.update(1 / 60);
+      felt = Math.max(felt, player.motion.hands?.shake ?? 0);
+      fired = Math.max(fired, player.motion.state.shake ?? 0);
+    }
+    h.release();
+    hands.shake = was;
+    return { felt, fired };
+  });
+  expect(r.felt).toBeGreaterThan(0.3);
+  expect(r.fired).toBe(0);
+});
+
+test("a picture toy stays out of Hands-on unless it asks for joints", () => {
+  const frame = { pictures: {}, turntable: false };
+  expect(canPlay({ recipe: frame })).toBe(false);
+  expect(canPlay({ recipe: { ...frame, hands: { joints: [] } } })).toBe(true);
+  expect(canPlay({ recipe: { ...frame, hands: { joints: [] }, handsOn: false } })).toBe(false);
+  expect(canPlay({ recipe: { turntable: false } })).toBe(false);
+  expect(canPlay({ recipe: {} })).toBe(true);
 });

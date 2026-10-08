@@ -778,9 +778,14 @@ tree's trunk) fires the toy's tap action (or `key`), at most every `gap` seconds
 lag behind the moving toy: `info.hands.slosh` is a sideways offset (recipe units, at most that much)
 for a part (the snow globe's snow; keep the part inside its glass by that margin).
 
+With `fire: false` the shake fires nothing and only `info.hands.shake` reads it (a decorated tree's
+baubles swing harder the harder it is shaken, while its tap still switches the lights; lane Hands-on
+H3).
+
 ```js
 hands: { shake: true },
 hands: { shake: { key: "snow", gap: 0.6 } },
+hands: { shake: { fire: false } },
 drive(t, c, out, info) {
   const s = Math.max(c.shake, info.hands?.shake ?? 0); // the harder the shake, the more snow
 ```
@@ -908,6 +913,10 @@ the `"socket"` cue. ↺ brings it home from wherever it sits.
 { type: "break", part: "cork", at: [0, 0.8, 0], pull: 0.18, give: 0.03, reseat: true },
 { type: "break", part: "cap", at: CAP_MOUTH, pull: 0.2, give: 0.02, reseat: { seats: [{ pos: POSTED, quat: HALF_TURN }] } }, // prettier-ignore
 ```
+
+A picture toy (a recipe with `pictures`, or `turntable: false`) stays out of Hands-on unless its
+`hands` block has `joints` (lane Hands-on H3): then those play, and nothing else (a picture frame
+swings on its nail; its picture is never picked up whole).
 
 **Parents**: `parent` (a joint's name) puts a hinge, slider or dial on another driven part: a desk
 lamp's head on its arm, a clock's hands on a turning dial. Children pose after their parents.
