@@ -320,6 +320,9 @@ export class HandsOn {
         body.restK = p.spring;
       }
       if (p.hinge) body.hinge = { axis: v3.norm(p.hinge), q: body.q.slice() };
+      // Lane Hands-on H1: `fixed: true` is a piece that never moves, a
+      // stand or a wall for the others to land on (no part of its own).
+      if (p.fixed) body.fixedPiece = true;
       body.invMassFree = body.invMass;
       body.invIFree = body.invI.slice();
       if (p.free) continue;
@@ -353,7 +356,7 @@ export class HandsOn {
   }
 
   free(body) {
-    if (!body.pinned) return;
+    if (!body.pinned || body.fixedPiece) return; // (a fixed piece stays: lane Hands-on H1)
     body.pinned = false;
     const def = this.pieces.find((pc) => pc.body === body)?.def;
     if (def?.rest) {
@@ -646,6 +649,7 @@ export class HandsOn {
     let bd = Infinity;
     for (const pc of this.pieces) {
       const b = pc.body;
+      if (b.fixedPiece) continue; // (never picked up: lane Hands-on H1)
       const l = b.toLocal(p);
       const r = pc.def.pick || [b.bound, b.bound, b.bound];
       const d = Math.hypot(l[0] / r[0], l[1] / r[1], l[2] / r[2]);
