@@ -2210,7 +2210,13 @@
       "owner": "Approved on the Splashery Universe page (lane Studio Sound), September 29, 2026.",
       "effect": "A tap bows a square metal plate: every sand grain hops where the plate swings and slides to the still lines, and in about 3.6 s the mode's figure appears; tap again to stir it up.",
       "sound": "The plate's hum with the sand sliding as it settles (no patter of clicks).",
-      "improved": "Live r7 (the owner's report of October 5, 2026): the sand moves live, every grain on every frame. With your audio or the microphone the plate's modes ring as strongly as the sound drives them, so a new note sets the sand off for its figure at once, from where it lies (no new plate of scattered sand), and silence leaves it put; the bow shows only for a tap with no audio open. Live r7 polish: the sharp kernel (each grain a crisp speck), a clean straight rim and a smooth top on the plate, and a bow drawn like a real one (a round stick, a ribbon of hair, a frog and a tip)."
+      "improved": "Live r7 (the owner's report of October 5, 2026): the sand moves live, every grain on every frame. With your audio or the microphone the plate's modes ring as strongly as the sound drives them, so a new note sets the sand off for its figure at once, from where it lies (no new plate of scattered sand), and silence leaves it put; the bow shows only for a tap with no audio open. Live r7 polish: the sharp kernel (each grain a crisp speck), a clean straight rim and a smooth top on the plate, and a bow drawn like a real one (a round stick, a ribbon of hair, a frog and a tip). Live r8 (the owner's walkthrough of October 6, 2026: \"It still looks kind of grainy\"): the stand's base and post in fine discs in rows (they were a random fuzz of specks from the side), the rim's discs smaller and set inside the edges (no soft fringe past the edge, no spike at the corners), a finer top, and each sand grain a little smaller and fully opaque."
+    },
+    "chladni-cell": {
+      "v": "new",
+      "owner": "The owner's walkthrough of October 6, 2026 (\"Could there be a 3D version? ... I don't want it to be BS\"), lane Live r8, October 7, 2026.",
+      "effect": "Sound in a box (labs): a 1 cm glass cell of water and tiny plastic beads over an ultrasound transducer. A tap rings one of the cell's resonant modes and every bead slides down the Gor'kov potential of the acoustic radiation force (polystyrene in water) onto the mode's pressure-nodal surfaces, a 3D Chladni figure, in a few seconds; tap again on a formed figure to swirl the water and start over. Modes of a cube (single and mixed) and of a round flask (shells and cones).",
+      "sound": "The mode's tone, eight octaves down (the real cell rings at about 100 to 370 kHz)."
     },
     "song-landscape": {
       "v": "new",

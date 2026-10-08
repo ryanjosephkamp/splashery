@@ -190,13 +190,15 @@
                 style="background-image: url(&quot;../../../assets/toys/amoeba/thumb.webp&quot;)"
               ></span>
               <iframe
-                src="../../play/?toy=amoeba"
+                src="../../play/?toy=amoeba&sound=on"
                 title="Amoeba, live: drag to turn it"
                 loading="eager"
                 allow="fullscreen"
               ></iframe>
             </div>
-            <figcaption>Drag to turn it; tap to play.</figcaption>
+            <figcaption>
+              Drag to turn it; tap to play. The speaker button mutes the sound.
+            </figcaption>
           </figure>
         </div>
         <section class="toy-section" aria-labelledby="h-about">
@@ -212,6 +214,12 @@
             it oozes back. Tap it and it crawls: a pseudopod pushes out to one side, the grains
             inside stream into it and the cell oozes over; then it pushes out the other way and
             oozes back. Even at rest, its pods stretch a little.
+          </p>
+          <p class="learn-more">
+            Learn more:
+            <a href="https://en.wikipedia.org/wiki/Amoeba" target="_blank" rel="noopener"
+              >Amoeba on Wikipedia</a
+            >
           </p>
         </section>
 
@@ -316,7 +324,8 @@ https://ryanjosephkamp.github.io/splashery/site/toys/amoeba/</textarea
             </button>
           </div>
           <p class="note">
-            Embeds are silent and turn slowly when idle. Every option is in the
+            Embeds are silent and turn slowly when idle; add <code>&amp;sound=on</code> to the
+            iframe's link for the toy's tap sound, with a mute button. Every option is in the
             <a href="../../share/">embed guide</a>.
           </p>
         </section>

@@ -188,13 +188,15 @@
                 style="background-image: url(&quot;../../../assets/toys/mercury/thumb.webp&quot;)"
               ></span>
               <iframe
-                src="../../play/?toy=mercury"
+                src="../../play/?toy=mercury&sound=on"
                 title="Mercury, live: drag to turn it"
                 loading="eager"
                 allow="fullscreen"
               ></iframe>
             </div>
-            <figcaption>Drag to turn it; tap to play.</figcaption>
+            <figcaption>
+              Drag to turn it; tap to play. The speaker button mutes the sound.
+            </figcaption>
           </figure>
         </div>
         <section class="toy-section" aria-labelledby="h-about">
@@ -208,6 +210,12 @@
             shimmers, then cools. The real Mercury turns slowly, and it has almost no air to hold
             heat, so its day side gets hot enough to melt lead, about 430 degrees Celsius, while its
             night side drops to about minus 180 degrees.
+          </p>
+          <p class="learn-more">
+            Learn more:
+            <a href="https://en.wikipedia.org/wiki/Mercury_(planet)" target="_blank" rel="noopener"
+              >Mercury (planet) on Wikipedia</a
+            >
           </p>
         </section>
 
@@ -312,7 +320,8 @@ https://ryanjosephkamp.github.io/splashery/site/toys/mercury/</textarea
             </button>
           </div>
           <p class="note">
-            Embeds are silent and turn slowly when idle. Every option is in the
+            Embeds are silent and turn slowly when idle; add <code>&amp;sound=on</code> to the
+            iframe's link for the toy's tap sound, with a mute button. Every option is in the
             <a href="../../share/">embed guide</a>.
           </p>
         </section>

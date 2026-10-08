@@ -182,13 +182,15 @@
                 style="background-image: url(&quot;../../../assets/toys/owl/thumb.webp&quot;)"
               ></span>
               <iframe
-                src="../../play/?toy=owl"
+                src="../../play/?toy=owl&sound=on"
                 title="Owl, live: drag to turn it"
                 loading="eager"
                 allow="fullscreen"
               ></iframe>
             </div>
-            <figcaption>Drag to turn it; tap to play.</figcaption>
+            <figcaption>
+              Drag to turn it; tap to play. The speaker button mutes the sound.
+            </figcaption>
           </figure>
         </div>
         <section class="toy-section" aria-labelledby="h-about">
@@ -201,6 +203,12 @@
           <p>
             This owl sits on a branch. Tap it and it turns its head far around to look behind it,
             holds there a moment, then turns back to face you.
+          </p>
+          <p class="learn-more">
+            Learn more:
+            <a href="https://en.wikipedia.org/wiki/Owl" target="_blank" rel="noopener"
+              >Owl on Wikipedia</a
+            >
           </p>
         </section>
 
@@ -321,7 +329,8 @@ https://ryanjosephkamp.github.io/splashery/site/toys/owl/</textarea
             </button>
           </div>
           <p class="note">
-            Embeds are silent and turn slowly when idle. Every option is in the
+            Embeds are silent and turn slowly when idle; add <code>&amp;sound=on</code> to the
+            iframe's link for the toy's tap sound, with a mute button. Every option is in the
             <a href="../../share/">embed guide</a>.
           </p>
         </section>

@@ -193,13 +193,15 @@
                 style="background-image: url(&quot;../../../assets/toys/neuron/thumb.webp&quot;)"
               ></span>
               <iframe
-                src="../../play/?toy=neuron"
+                src="../../play/?toy=neuron&sound=on"
                 title="Neuron, live: drag to turn it"
                 loading="eager"
                 allow="fullscreen"
               ></iframe>
             </div>
-            <figcaption>Drag to turn it; tap to play.</figcaption>
+            <figcaption>
+              Drag to turn it; tap to play. The speaker button mutes the sound.
+            </figcaption>
           </figure>
         </div>
         <section class="toy-section" aria-labelledby="h-about">
@@ -213,6 +215,12 @@
             Tap it to fire a signal: a bright spark runs from the cell body down the whole axon and
             bursts into light at the tips. Real nerve signals are tiny electrical pulses, and some
             travel at over 100 meters a second. The human brain has about 86 billion neurons.
+          </p>
+          <p class="learn-more">
+            Learn more:
+            <a href="https://en.wikipedia.org/wiki/Neuron" target="_blank" rel="noopener"
+              >Neuron on Wikipedia</a
+            >
           </p>
         </section>
 
@@ -333,7 +341,8 @@ https://ryanjosephkamp.github.io/splashery/site/toys/neuron/</textarea
             </button>
           </div>
           <p class="note">
-            Embeds are silent and turn slowly when idle. Every option is in the
+            Embeds are silent and turn slowly when idle; add <code>&amp;sound=on</code> to the
+            iframe's link for the toy's tap sound, with a mute button. Every option is in the
             <a href="../../share/">embed guide</a>.
           </p>
         </section>

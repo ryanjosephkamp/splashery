@@ -172,6 +172,45 @@ export class Viewer {
     if (this.player.stage) this.player.applyLook();
   }
 
+  // Sound in an embed (?sound=on): the toy's tap sound plays on a tap, which is
+  // the gesture the browser needs. Loaded only when asked for, so other embeds
+  // stay silent and fetch nothing. The choice is not remembered, and it is
+  // separate from the app's speaker button. Returns the Sound (set .enabled to mute).
+  async enableSound() {
+    const [{ Sound, soundEvents }, { toySound }, { specFor }] = await Promise.all([
+      import("./sound.js"),
+      import("./toy-sounds.js"),
+      import("./voices.js"),
+    ]);
+    const player = this.player;
+    const sound = (this.sound = new Sound());
+    sound.enabled = true;
+    player.setSound(sound);
+    const own = () => (player.scene.toy.kind === "builtin" ? toySound(player.scene.toy.id) : null);
+    const extra = () => {
+      const more = player.toyInfo?.recipe?.sounds;
+      const list = typeof more === "function" ? more(player.scene.toy?.options || {}) : more;
+      return [own(), ...[].concat(list || [])].filter(Boolean);
+    };
+    sound.preload(extra());
+    player.on("toy", () => sound.preload(extra()));
+    player.on("action", (r) => {
+      if (!sound.enabled || r.echo || r.drag) return;
+      if (r.paused) return sound.pauseToy();
+      sound.resumeToy();
+      if (r.resumed) return;
+      const recipe = player.toyInfo?.recipe;
+      if (recipe?.action?.quiet?.includes(r.key)) return;
+      const spec = own() || recipe?.action?.sound || (r.key === "hop" ? "hop" : "pop");
+      const chosen = specFor(spec, r.key === "hop" || r.value > 0.5);
+      const tune = r.pick === null && soundEvents(chosen).some((e) => e.t > 2);
+      if (r.toggle && !(r.value > 0.5)) sound.stopHeld("toy");
+      const held = (r.long || (r.toggle && tune)) && r.pick === null;
+      sound.play(chosen, { key: "toy", pick: r.pick, held });
+    });
+    return sound;
+  }
+
   // Link back to the full app with the same scene.
   openURL() {
     const base = new URL("./", ROOT).href;
