@@ -381,7 +381,11 @@ export async function openClip(file, name, onStatus) {
   }
   if (frames.length < 2) throw new Error("That file has only one picture. Open a GIF or a video that moves."); // prettier-ignore
   const raw = await depthOf(frames, w, h, onStatus, depthSide());
-  return { ...makeClip(name, w, h, frames, normalizeDepths(raw, w, h)), audio, source };
+  // Lane Photo fidelity: a video keeps a muted copy on the clip's clock, whose picture at its own
+  // full size is what the splats show (photoSource); the frames above are the depth's and the
+  // plain splats' colors.
+  const copy = isGif ? null : await keepCopy(file);
+  return { ...makeClip(name, w, h, frames, normalizeDepths(raw, w, h)), audio, source, ...copy };
 }
 
 // A video's first MAX_SECONDS, at clipFps() frames a second, each drawn
@@ -549,6 +553,11 @@ export const LONG_BUDGETS = { low: 24e6, mid: 48e6, high: 96e6, max: 160e6 };
 // (A second, at most: about what a device of the tier works out, so on a
 // phone the depth keeps up with the clip playing.)
 export const LONG_DEPTH_FPS = { low: 1, mid: 2, high: 3, max: 4 };
+// Lane Photo fidelity: a long video's picture is drawn from its playing copy each frame and never
+// held, so it can be as fine as the tier's splat grid (0.8 of its splats, as clipGrid takes): every
+// splat then has a pixel of its own (a short clip keeps CLIP_AREAS, as it holds every frame).
+export const LONG_AREAS = { low: 72000, mid: 168000, high: 240000, max: 320000 };
+const longArea = () => LONG_AREAS[profile()] || LONG_AREAS.mid;
 const LONG_FIRST = 4; // depth pictures worked out before the clip opens
 
 // What a long video of `duration` seconds keeps, at a picture of w by h on
@@ -583,6 +592,17 @@ async function videoLength(file) {
   }
 }
 
+// Lane Photo fidelity: a muted copy of a short video (see openClip), or nothing where it can't play.
+async function keepCopy(file) {
+  const url = URL.createObjectURL(file);
+  try {
+    return { video: await loadedVideo(url), url };
+  } catch {
+    URL.revokeObjectURL(url);
+    return null;
+  }
+}
+
 const loadedVideo = async (url) => {
   const v = document.createElement("video");
   v.muted = true;
@@ -603,7 +623,7 @@ async function openLong(file, name, onStatus, duration) {
   onStatus?.("Opening the video…");
   const url = URL.createObjectURL(file);
   const v = await loadedVideo(url);
-  const { w, h } = sizeFor(v.videoWidth, v.videoHeight, clipArea());
+  const { w, h } = sizeFor(v.videoWidth, v.videoHeight, longArea());
   const plan = longPlan(duration, w, h);
   const fps = clipFps();
   const clip = {
@@ -807,7 +827,7 @@ function syncVideo(clip, playing, t, rate = 1) {
 function closeClip(clip) {
   if (!clip) return;
   closeSound(clip.audio);
-  if (!clip.long) return;
+  if (!clip.video) return; // (lane Photo fidelity: a short video keeps a copy too)
   clip.job?.cancel();
   clip.video.pause();
   clip.video.removeAttribute("src");
@@ -1321,8 +1341,41 @@ function showOriginal(clip) {
   card.sync({ frame: MOVING.frame });
 }
 
+// Lane Photo fidelity: what the photo-textured splats show (src/photo-splats.js): a video's playing
+// copy at its own full size, or, for a GIF or a sample, the frame on show.
+function photoSource() {
+  const clip = MOVING.clip;
+  if (!clip || typeof document === "undefined") return null;
+  if (clip.video) return clip.video.readyState >= 2 ? clip.video : null;
+  const P = (MOVING.photoCanvas ||= document.createElement("canvas"));
+  if (P.width !== clip.w || P.height !== clip.h) {
+    P.width = clip.w;
+    P.height = clip.h;
+  }
+  P.getContext("2d").putImageData(new ImageData(new Uint8ClampedArray(clip.colors[MOVING.frame]), clip.w, clip.h), 0, 0); // prettier-ignore
+  return P;
+}
+let photoUid = 0;
+const photoVersion = () => {
+  const clip = MOVING.clip;
+  if (!clip) return "";
+  clip.photoUid ||= ++photoUid;
+  const v = clip.video;
+  return v ? `${clip.photoUid}|${v.readyState >= 2 ? 1 : 0}|${v.currentTime.toFixed(3)}` : `${clip.photoUid}|${MOVING.frame}`; // prettier-ignore
+};
+
 export const MOVING_PHOTO = {
   alive: (c) => (c.play ?? 1) > 0.5 && !!MOVING.clip,
+  photo: {
+    on: (o) => o.detail !== "splats",
+    rect: () => {
+      const g = MOVING.grid;
+      const h = g ? g.rows / g.cols : 0.5625;
+      return [-1, -h, 1, h];
+    },
+    version: photoVersion,
+    source: photoSource,
+  },
   // r6: a quarter more splats than most, for a finer picture (see the top).
   // Live r7: half as many again, as Photo to 3D takes, so on a high device
   // too the grid is as fine as the clip (640 by 360; it was 600 by 337).
@@ -1350,6 +1403,16 @@ export const MOVING_PHOTO = {
       choices: [
         { id: "off", label: "Off" },
         { id: "on", label: "On: the flat clip in a corner, in step" },
+      ],
+    },
+    {
+      key: "detail",
+      label: "Detail",
+      type: "select",
+      default: "photo",
+      choices: [
+        { id: "photo", label: "Sharp: each splat shows the clip's own pixels" },
+        { id: "splats", label: "One color per splat" },
       ],
     },
     { key: "clipName", label: "Clip name", type: "text", default: "", hidden: true },
@@ -1467,7 +1530,7 @@ export const MOVING_PHOTO = {
       }
     }
     MOVING.frame = frameAt(clip, MOVING.t);
-    if (clip.long) syncVideo(clip, on, MOVING.t, rate); // Live r7
+    if (clip.video) syncVideo(clip, on, MOVING.t, rate); // Live r7 (and lane Photo fidelity: a short video's copy)
     showOriginal(clip);
   },
   build(k, o) {
@@ -1502,7 +1565,7 @@ export const MOVING_PHOTO = {
       for (let i = 0; i < cols; i++) {
         const u = (i + 0.5) / cols;
         const v = (j + 0.5) / rows;
-        items.push({ p: [(u - 0.5) * width, (0.5 - v) * height, full * mean(u, v)], n: [0, 0, 1], size: sizes[j * cols + i] / 0.01, flat: 0.08, opacity: 1, color: "#808080", kind: "relief", params: [u, v, 3, Math.max(0.001, full)], pattern: false }); // prettier-ignore
+        items.push({ p: [(u - 0.5) * width, (0.5 - v) * height, full * mean(u, v)], n: [0, 0, 1], size: sizes[j * cols + i] / 0.01, flat: 0.08, opacity: 1, color: "#808080", kind: "relief", params: [u, v, 3, Math.max(0.001, full)], pattern: false, photo: true }); // prettier-ignore
       }
     // A backing layer at the farthest depth near each place, in the frame's
     // own colors: where a near part stands forward, what it uncovers from
