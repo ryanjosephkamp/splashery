@@ -144,6 +144,33 @@ function core(k, at, r, color, { grid = 64, part, size = 1.2, rot } = {}) {
   });
 }
 
+// The lower part of a ball (below y = cut), on an even spiral of opaque splats facing out, colored
+// by color(x, z, f, noise) (f = how far down, 0 at the cut, 1 at the bottom).
+function cap(k, { center, R, cut, count, color, part }) {
+  const [cx, cy, cz] = center;
+  const t0 = clamp((cut - cy) / R, -1, 1); // the cut's height on the unit ball
+  const share = count / k.count;
+  const area = TAU * R * R * (1 + t0);
+  const size = Math.sqrt(area / count) * 1.1;
+  k.cloud({ share, pattern: false, part }, (rand, i, n) => {
+    const t = -1 + ((i + 0.5) / n) * (1 + t0); // even in height, so even in area
+    const r = Math.sqrt(1 - t * t);
+    const a = i * 2.399963229728653;
+    const nrm = [r * Math.cos(a), t, r * Math.sin(a)];
+    const x = cx + R * nrm[0];
+    const z = cz + R * nrm[2];
+    return {
+      p: [x, cy + R * t, z],
+      n: nrm,
+      flat: 0.2,
+      jitter: 0,
+      opacity: 1,
+      size: size / 0.01,
+      color: color(x, z, (t0 - t) / (1 + t0), k.noise),
+    };
+  });
+}
+
 // Materials for floors, as color(x, z, f, noise): f is how far out the point is (0 at the center,
 // 1 at the edge).
 const fbm = (noise, x, z, s, o = 3) => noise.fbm(x * s, 0.37, z * s, o);
@@ -156,6 +183,55 @@ const MATERIALS = {
   // Molded plastic: an even color, a little darker toward the rim.
   plastic: (col) => (x, z, f, noise) =>
     shade(col, 0.92 - 0.06 * f * f + 0.03 * fbm(noise, x, z, 6)),
+  // The colors of the toy's own top at each point (a grid from tools/pr3-under.mjs --top), a
+  // little darker: an underside that matches the top, as a steak seared on both sides.
+  mirror:
+    (top, dark = 0.8) =>
+    (x, z) => {
+      const a = clamp(Math.floor((x - top.x0) / top.G), 0, top.nx - 1);
+      const c = clamp(Math.floor((z - top.z0) / top.G), 0, top.nz - 1);
+      // The nearest cell that has a color, searching outward a few cells.
+      for (let r = 0; r < 6; r++)
+        for (let dc = -r; dc <= r; dc++)
+          for (let da = -r; da <= r; da++) {
+            if (Math.max(Math.abs(da), Math.abs(dc)) !== r) continue;
+            const aa = a + da;
+            const cc = c + dc;
+            if (aa < 0 || cc < 0 || aa >= top.nx || cc >= top.nz) continue;
+            const h = top.cols.substr((cc * top.nx + aa) * 3, 3);
+            if (h !== "000") return shade("#" + h[0] + h[0] + h[1] + h[1] + h[2] + h[2], dark);
+          }
+      return shade("#4a2416", dark);
+    },
+  // The foot of a glazed pot: glaze, then an unglazed ring it stands on, and a drainage hole.
+  potFoot:
+    (cx, cz, R, glaze, clay = "#c9b8a2") =>
+    (x, z, f, noise) => {
+      const d = Math.hypot(x - cx, z - cz) / R;
+      if (d < 0.13) return shade("#2a221c", 0.7 + 0.2 * d);
+      if (d > 0.72 && d < 0.86) return shade(clay, 0.8 + 0.08 * fbm(noise, x, z, 40, 2));
+      return shade(glaze, 0.86 + 0.04 * fbm(noise, x, z, 9) - 0.08 * band(d, 0.86, 1));
+    },
+  // The thick glass bottom of a vase: pale and cool, brighter in rings where the glass thickens,
+  // with a darker rim.
+  glassFoot:
+    (cx, cz, R, col = "#b9d3d8") =>
+    (x, z, f, noise) => {
+      const d = Math.hypot(x - cx, z - cz) / R;
+      const ring =
+        Math.exp(-(((d - 0.82) / 0.05) ** 2)) + 0.5 * Math.exp(-(((d - 0.3) / 0.08) ** 2));
+      return mix(shade(col, 0.8 - 0.25 * band(d, 0.9, 1) + 0.03 * fbm(noise, x, z, 12)), "#f2fbfc", 0.45 * ring); // prettier-ignore
+    },
+  // Dark stone with pale specks (the alum crystal's block).
+  stone:
+    (col, speck = "#9a9894") =>
+    (x, z, f, noise) => {
+      const n = fbm(noise, x, z, 55, 2);
+      if (n > 0.38) return shade(speck, 0.85);
+      return shade(col, 0.8 + 0.12 * fbm(noise, x, z, 8));
+    },
+  // Cast pewter: gray metal, mottled, a little darker in the hollows.
+  pewter: (col = "#8d9396") => (x, z, f, noise) => shade(col, 0.78 + 0.14 * fbm(noise, x, z, 14) + 0.05 * fbm(noise, x, z, 60, 2)), // prettier-ignore
   // Woven straw, cane or linen: fine crossing threads along x and z.
   weave:
     (col, pitch = 0.035, amount = 0.12) =>
@@ -179,6 +255,24 @@ const MATERIALS = {
       return col;
     };
   },
+  // Orange peel: the orange's color, a little uneven, with its fine pores (small, darker pits
+  // on a jittered grid) and a paler blossom end at the bottom.
+  peel:
+    (col = "#ee8f1c") =>
+    (x, z, f, noise) => {
+      const s = 60;
+      let best = 9;
+      const [gx, gz] = [Math.floor(x * s), Math.floor(z * s)];
+      for (let i = -1; i <= 1; i++)
+        for (let j = -1; j <= 1; j++) {
+          const h = Math.sin((gx + i) * 127.1 + (gz + j) * 311.7) * 43758.5453;
+          const h2 = Math.sin((gx + i) * 269.5 + (gz + j) * 183.3) * 43758.5453;
+          best = Math.min(best, Math.hypot(x * s - (gx + i + h - Math.floor(h)), z * s - (gz + j + h2 - Math.floor(h2)))); // prettier-ignore
+        }
+      const pit = best < 0.22 ? 0.82 : 1;
+      const end = f > 0.93 ? mix(col, "#c9a35a", 0.6 * band(f, 0.93, 1)) : col;
+      return shade(end, pit * (0.86 + 0.08 * fbm(noise, x, z, 6) + 0.04 * fbm(noise, x, z, 25, 2)));
+    },
   // A board of sawn planks along dir: dark gaps between them, each plank its own tint, and grain
   // that wanders.
   planks:
@@ -255,7 +349,7 @@ const MATERIALS = {
     (x, z, f, noise) => {
       const along = x * dir[0] + z * dir[1];
       const across = -x * dir[1] + z * dir[0];
-      const w = across * freq + 2.2 * noise.fbm(along * 2, across * 6, 0.5, 3);
+      const w = across * freq + 1.2 * noise.fbm(along * 0.7, across * 4, 0.5, 3);
       const g = 0.5 + 0.5 * Math.sin(w);
       return shade(mix(a, b, g ** 3), 0.8 + 0.06 * fbm(noise, x, z, 30, 2));
     },
@@ -300,6 +394,29 @@ export function dogMat(k, count) {
   });
 }
 
+const STEAK_Y = -0.1;
+
+// A pointed oval (a boat's footprint): half-length L along the unit direction u, half-width W at
+// the middle, as radii at n angles round its center.
+function vesica(u, L, W, n = 96) {
+  return Array.from({ length: n }, (_, i) => {
+    const a = (i / n) * TAU;
+    const d = [Math.cos(a), Math.sin(a)];
+    const du = d[0] * u[0] + d[1] * u[1];
+    const dv = -d[0] * u[1] + d[1] * u[0];
+    let lo = 0;
+    let hi = L;
+    for (let k = 0; k < 30; k++) {
+      const r = (lo + hi) / 2;
+      const inside = Math.abs(r * dv) <= W * (1 - ((r * du) / L) ** 2);
+      if (inside) lo = r;
+      else hi = r;
+    }
+    return lo;
+  });
+}
+const BOAT_U = [0.589, 0.808];
+
 // A toy on a captured mat or patch of ground: one or more floors, and the capture below them
 // hidden (unless a floor says keep: it sits just under the capture's lowest splats instead).
 function grounded(count, floors) {
@@ -343,4 +460,146 @@ export const PR3_RIGS = {
   ].map(([x, z, r, y]) => ({ center: [x, z], y, radii: [r], color: MATERIALS.earth(), keep: true }))), // prettier-ignore
   // The desk globe stands on a slice of a log: its sawn end, with growth rings, underneath.
   "desk-globe": grounded(40000, [{ center: [-0.2, 0.06], y: -0.74, radii: [0.96], color: MATERIALS.rings(-0.18, 0.04, 0.96) }]), // prettier-ignore
+  // The cowboy steak: the capture saw only its top; under it hang a few loose splats and a fringe
+  // of long, thin needles. The needles fade, the loose splats lower down are hidden, and a
+  // kit-built underside takes their place, seared like the top (its colors at each point, a
+  // little darker, from tools/pr3-under.mjs --top).
+  steak: {
+    keys: [{ long: 0.3 }],
+    fx: [{ name: "needles", select: "key0", origin: [0, 0, 0], mask: { half: [0, -1, 0], at: -0.02 }, color: { fade: true } }], // prettier-ignore
+    addon: {
+      count: 30000,
+      build(k) {
+        floor(k, { ...measured("steak", STEAK_Y, MATERIALS.mirror(B.steak.top, 0.78), 0.97), count: 30000 }); // prettier-ignore
+      },
+    },
+    parts: [{ name: "under", pivot: [0, -1, 0], regions: below(0, 0, STEAK_Y) }],
+    controls: [pulse("hop", "Hop", HOP_SECS)],
+    action: { key: "hop", label: "Hop" },
+    drive(t, c, out) {
+      out.fx.needles = { color: 1 };
+      out.parts.under = { visible: 0 };
+      hopDrive(c, out);
+    },
+  },
+
+  // The sushi boat: its underside was a flat, painted-looking fill. It is hidden, and a kit-built
+  // hull bottom of carved wood, the grain along the boat, takes its place.
+  "sushi-boat": based({
+    count: 26000,
+    hide: below(0.012, -0.03, -0.118),
+    build(k) {
+      const c = [0.012, -0.03];
+      floor(k, {
+        center: c,
+        radii: vesica(BOAT_U, 1.1, 0.3),
+        smooth: 0,
+        // The boat lies rolled a little to one side: its bottom is lower on that side.
+        y: (x, z) => -0.092 + 0.085 * (-(x - c[0]) * BOAT_U[1] + (z - c[1]) * BOAT_U[0]),
+        count: 26000,
+        color: MATERIALS.wood("#a8763f", "#7a5128", BOAT_U, 140),
+      });
+    },
+  }),
+  // The orange: the capture's underside is a blur (the camera never saw it). It is hidden, and a
+  // kit-built lower peel takes its place, pores and all.
+  "orange-photo": based({
+    count: 40000,
+    hide: [{ at: [-0.057, -0.75, -0.01], r: [1.3, 0.36, 1.3], soft: 0.03 }],
+    build(k) {
+      cap(k, { center: [-0.057, 0.01, -0.01], R: 0.865, cut: -0.36, count: 40000, color: MATERIALS.peel() }); // prettier-ignore
+    },
+  }),
+  // The alum crystal's block of dark stone, closed underneath.
+  "alum-crystal": based({
+    count: 24000,
+    hide: below(0.06, 0.03, -1.11),
+    build(k) {
+      const rect = { center: [0.058, 0.03], angle: 0.602, half: [0.5, 0.55] };
+      floor(k, { center: rect.center, rect, scale: 0.97, y: -1.11, count: 24000, color: MATERIALS.stone("#2c2b2c") }); // prettier-ignore
+    },
+  }),
+  // The knight's pewter base, closed underneath.
+  "knight-horse": based({
+    count: 16000,
+    hide: below(-0.08, 0.05, -0.955),
+    build(k) {
+      floor(k, { ...measured("knight-horse", -0.955, MATERIALS.pewter(), 0.95), count: 16000 });
+    },
+  }),
+  // The money tree's glazed pot: its foot, an unglazed ring and a drainage hole.
+  "money-tree": based({
+    count: 16000,
+    hide: below(-0.168, -0.161, -1.1, 0.6),
+    build(k) {
+      floor(k, { center: [-0.168, -0.161], radii: [0.34], y: -1.1, count: 16000, color: MATERIALS.potFoot(-0.168, -0.161, 0.34, "#c2cad6") }); // prettier-ignore
+    },
+  }),
+  // The glass vases of the white roses and the peonies: a thick glass bottom.
+  "white-roses": based({
+    count: 12000,
+    build(k) {
+      floor(k, { center: [0.065, -0.035], radii: [0.21], y: -0.955, count: 12000, color: MATERIALS.glassFoot(0.065, -0.035, 0.21) }); // prettier-ignore
+    },
+  }),
+  peony: based({
+    count: 12000,
+    build(k) {
+      floor(k, { center: [-0.081, -0.112], radii: [0.215], y: -1.335, count: 12000, color: MATERIALS.glassFoot(-0.081, -0.112, 0.215, "#c3d2bf") }); // prettier-ignore
+    },
+  }),
+  // The stollen: a crust-colored floor just inside its underside, which only shows where the
+  // capture is thin.
+  stollen: based({
+    count: 30000,
+    build(k) {
+      floor(k, { ...measured("stollen", -0.38, (x, z, f, noise) => shade("#5b3520", 0.8 + 0.1 * fbm(noise, x, z, 10)), 0.7), count: 30000 }); // prettier-ignore
+    },
+  }),
+  // Solid cores just inside thin captures, which only show where the capture is thin (lane
+  // Sharpness B's fruit cores): the crochet Earth's navy yarn, the puffin's body (white at the
+  // front, black behind), the elephant's body, and the berries in the physalis's lanterns.
+  "crochet-earth": based({
+    count: 30000,
+    build(k) {
+      core(k, [-0.003, -0.08, 0.008], [0.84, 0.81, 0.82], (c) => shade("#1f2748", 0.78 + 0.1 * c.fbm(c.lp[0] * 9, c.lp[1] * 9, c.lp[2] * 9))); // prettier-ignore
+    },
+  }),
+  puffin: based({
+    count: 16000,
+    build(k) {
+      const color = (c) =>
+        c.n[2] > -0.15 ? lit("#e9e7e2", c.n, 0.8, 0.2) : lit("#141414", c.n, 0.8, 0.2);
+      for (const [at, r] of [
+        [[-0.05, -0.36, -0.2], 0.16],
+        [[-0.02, -0.12, 0.04], 0.21],
+        [[0.0, 0.1, 0.2], 0.17],
+      ])
+        core(k, at, [r, r, r], color, { grid: 40 });
+    },
+  }),
+  "elephant-souvenir": based({
+    count: 16000,
+    build(k) {
+      core(k, [0.0, 0.12, -0.05], [0.42, 0.18, 0.2], "#26324a");
+    },
+  }),
+  physalis: based({
+    count: 12000,
+    build(k) {
+      for (const at of [
+        [-0.012, -0.747, 0.284],
+        [-0.038, -0.419, 0.317],
+        [-0.051, -0.145, 0.231],
+      ])
+        core(k, at, [0.08, 0.08, 0.08], "#e9822e", { grid: 32 });
+    },
+  }),
+  // The sunflower: the back of its head, a green disc just behind the petals.
+  "sunflower-photo": based({
+    count: 12000,
+    build(k) {
+      core(k, [-0.01, -0.03, 0.2], [0.24, 0.24, 0.05], "#4a6a2a", { grid: 48 });
+    },
+  }),
 };
