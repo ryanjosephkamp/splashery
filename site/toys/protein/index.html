@@ -193,13 +193,15 @@
                 style="background-image: url(&quot;../../../assets/toys/protein/thumb.webp&quot;)"
               ></span>
               <iframe
-                src="../../play/?toy=protein"
+                src="../../play/?toy=protein&sound=on"
                 title="Protein, live: drag to turn it"
                 loading="eager"
                 allow="fullscreen"
               ></iframe>
             </div>
-            <figcaption>Drag to turn it; tap to play.</figcaption>
+            <figcaption>
+              Drag to turn it; tap to play. The speaker button mutes the sound.
+            </figcaption>
           </figure>
         </div>
         <section class="toy-section" aria-labelledby="h-about">
@@ -216,6 +218,12 @@
             back by themselves; tap again while it is apart and they come back at once. In GFP the
             glowing part lights up while it is open. You can open any PDB or mmCIF file from the
             library in the Toy tab.
+          </p>
+          <p class="learn-more">
+            Learn more:
+            <a href="https://en.wikipedia.org/wiki/Protein" target="_blank" rel="noopener"
+              >Protein on Wikipedia</a
+            >
           </p>
         </section>
 
@@ -349,7 +357,8 @@ https://ryanjosephkamp.github.io/splashery/site/toys/protein/</textarea
             </button>
           </div>
           <p class="note">
-            Embeds are silent and turn slowly when idle. Every option is in the
+            Embeds are silent and turn slowly when idle; add <code>&amp;sound=on</code> to the
+            iframe's link for the toy's tap sound, with a mute button. Every option is in the
             <a href="../../share/">embed guide</a>.
           </p>
         </section>

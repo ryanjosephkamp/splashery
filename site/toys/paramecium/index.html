@@ -190,13 +190,15 @@
                 "
               ></span>
               <iframe
-                src="../../play/?toy=paramecium"
+                src="../../play/?toy=paramecium&sound=on"
                 title="Paramecium, live: drag to turn it"
                 loading="eager"
                 allow="fullscreen"
               ></iframe>
             </div>
-            <figcaption>Drag to turn it; tap to play.</figcaption>
+            <figcaption>
+              Drag to turn it; tap to play. The speaker button mutes the sound.
+            </figcaption>
           </figure>
         </div>
         <section class="toy-section" aria-labelledby="h-about">
@@ -210,6 +212,12 @@
           <p>
             Tap it and its cilia beat hard as it swims a full loop and comes back to where it was. A
             paramecium is just big enough to see with a magnifying glass, as a tiny moving speck.
+          </p>
+          <p class="learn-more">
+            Learn more:
+            <a href="https://en.wikipedia.org/wiki/Paramecium" target="_blank" rel="noopener"
+              >Paramecium on Wikipedia</a
+            >
           </p>
         </section>
 
@@ -330,7 +338,8 @@ https://ryanjosephkamp.github.io/splashery/site/toys/paramecium/</textarea
             </button>
           </div>
           <p class="note">
-            Embeds are silent and turn slowly when idle. Every option is in the
+            Embeds are silent and turn slowly when idle; add <code>&amp;sound=on</code> to the
+            iframe's link for the toy's tap sound, with a mute button. Every option is in the
             <a href="../../share/">embed guide</a>.
           </p>
         </section>
