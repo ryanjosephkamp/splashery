@@ -106,9 +106,9 @@ tools/sound-review.json as "ready". Finish every working turn with "READY:", "WO
 
 ## State
 
-WORKING: Food shelf built and tested on `claude/lane-hands-h2-food` (PR to come with its clips); the
-engine pieces it needed are in draft PR #420 (`claude/lane-hands-h2-engine`, merged into the Food
-branch). Nature is next. (October 8, 2026.)
+WORKING: both shelves are built and tested. Food is draft PR #426 and Nature is draft PR #431; the
+engine pieces they need are in draft PR #420 (merge that first). Clips are rendering and posting to
+Effect review page 2 as hh2-… cards (pancakes, burger and ice cream are up). (October 8, 2026.)
 
 Food, line by line (docs/HANDS-ON-PLAN.md):
 
@@ -127,6 +127,13 @@ Food, line by line (docs/HANDS-ON-PLAN.md):
   (lane Physics); gummy bear (already hands-on); candy cane, pizza, orange (engine demo toys).
 - Cut for now: the avocado's "drop it in either half" (the stone only goes back into its own half;
   see Known issues).
+
+Nature (PR #431): the four trees and the dandelion use the engine's shake (it fires their own tap
+effect); palm coconuts, rose and daisy petals and pinecone scales are break joints; the sunflower's
+head is a sprung hinge carrying its petal tokens; acorn caps are on sockets; the lotus floats on the
+water line; bonsai, willow, tulips, fern, toadstool, bamboo and kelp bend by soft stretch.
+Deviations and cuts are in the PR (rope rigs for willow, kelp and bamboo; rolling acorns; the spore
+puff on a squeeze).
 
 ## Notes
 
