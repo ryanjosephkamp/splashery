@@ -9,8 +9,11 @@ additive "Engine: …" PR merged first). PR title: "Phase Volume viewer: open a 
 volume in 3D". Handoff file: docs/handoff/VolumeViewer.md (create it; start it with this brief, word
 for word, under "## Brief", then keep "## State
 
-WORKING (October 8, 2026, Opus 5.5, high effort): the tool, readers, samples and tests are done on
-`claude/lane-volume-viewer`; clips next. No engine changes were needed (no `-engine` branch).
+READY (October 8, 2026, about 18:45 UTC, Opus 5.5, high effort): the tool, readers, samples, tests
+and clips are done on `claude/lane-volume-viewer`, draft PR #423. No engine changes were needed (no
+`-engine` branch). Five cards are on Effect review page 2 (lane record `VolumeViewer`), waiting for
+the owner's marks: `vol-walnut-cut`, `vol-walnut-presets`, `vol-gar-sweep`, `vol-gar-slice`,
+`vol-gar-mip`.
 
 - [x] 1. Formats: DICOM (a series picked together, a folder with "Open a folder of slices…", a .zip,
      or one multi-frame file; uncompressed and RLE Lossless; implicit, explicit and big-endian VR),
@@ -29,7 +32,7 @@ WORKING (October 8, 2026, Opus 5.5, high effort): the tool, readers, samples and
 - [x] 4. Samples: the CWI walnut (Imaging's file) and a 12.8 mm gar larva (Metscher, Zenodo
      19021581, CC BY 4.0), 1.36 MB as NIfTI.
 - [x] 5. Tests: `tests/vol.spec.mjs` (24), fixtures from `tools/vol-fixtures.mjs`.
-- [ ] Clips on Effect review page 2 (lane record `VolumeViewer`), screenshots.
+- [x] Clips on Effect review page 2 (lane record `VolumeViewer`), screenshots.
 
 ## Notes
 
@@ -53,4 +56,9 @@ WORKING (October 8, 2026, Opus 5.5, high effort): the tool, readers, samples and
 
 ## For the Operator
 
+- Specs run on the branch: `vol` (24), `help`, `taps` (60), `unit`, `smoke`, `img`, `vwr`, `snda`,
+  `sndd`. One smoke test ("dragging the shelf up opens a grid, and picking a toy folds it back")
+  fails, and fails the same way on a clean checkout of main (a toy name cut on the shelf grid).
+- For PACKS.md: pulse controls are not shown in the Toy tab, so a pulse must be the action (Play) or
+  fired by a tap to be reachable.
 - No engine PR: the Imaging lane's `volume` kind and `out.volume` did everything.
