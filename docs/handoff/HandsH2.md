@@ -106,9 +106,10 @@ tools/sound-review.json as "ready". Finish every working turn with "READY:", "WO
 
 ## State
 
-WORKING: both shelves are built and tested. Food is draft PR #426 and Nature is draft PR #431; the
-engine pieces they need are in draft PR #420 (merge that first). Clips are rendering and posting to
-Effect review page 2 as hh2-… cards (pancakes, burger and ice cream are up). (October 8, 2026.)
+READY: Food (draft PR #426) and the engine pieces (draft PR #420, merge first) are done; all 16 Food
+clips are on Effect review page 2 (hh2-…, group Food), at device scale 2 (the Operator's call of
+October 8, 2026). WORKING on Nature (draft PR #431): built and tested, its clips rendering and
+posting under group Nature. (October 8, 2026.)
 
 Food, line by line (docs/HANDS-ON-PLAN.md):
 
@@ -169,6 +170,5 @@ puff on a squeeze).
 
 ## For the Operator
 
-- Clips are at device scale 2, not 3: SwiftShader here takes about 2.7 s a frame at scale 2 and
-  about 6 s (15 s with tests running) at scale 3, about 5 hours for the 16 Food clips. Say if you
-  want them redone at 3.
+- Clips are at device scale 2 (the Operator's answer of October 8, 2026: keep them; redo one at 3
+  only if the owner's mark asks for it).
