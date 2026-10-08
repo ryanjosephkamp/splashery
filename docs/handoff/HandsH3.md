@@ -136,24 +136,22 @@ clips within about six hours.
 
 ## State
 
-READY (Open me): PR #432 and its nine cards (hh3-…, group "Open me") are on Effect review page 2; it
-waits for the owner's marks. Engine PR #430 merges first. Holidays, Medieval and Pictures are built
-on their branches and being tested (October 8, 2026).
+READY (Open me, Holidays, Medieval, Pictures; October 8, 2026): four stacked shelf PRs, each with
+its cards on Effect review page 2 (lane HandsH3), waiting for the owner's marks. Merge in order:
 
-- Engine PR #430 (`claude/lane-hands-h3-engine`, merge first): a forgiving press (the L1 sweep's
-  center misses), `reseat` on a break joint (a cork, a pen's cap clicks back on), a shake that only
-  reads (`fire: false`), picture toys that ask for joints play them, and a fix: a snapped piece
-  starts where it was (bent, at its seat), not at home.
-- Open me (`claude/lane-hands-h3-open-me`): the storybook's cover, the alarm clock's hands, the gift
-  box's lid (and its star), the umbrella's runner (new, with its catch), the desk fan's tilt, the
-  desk lamp's three joints and its light, the telescope's two tubes, the potion bottle's cork and
-  the fountain pen's cap. The chest and the music box were engine B's demo toys; the laptop keeps
-  its own controls.
-- Not built: the water bottle's twist-and-pour and the soda can's shake-and-spray (both labs toys
-  waiting for the Fluids engine's pour; a pour by tipping needs that engine piece, so no private one
-  here).
-- Next: Holidays, then Medieval, Music, Pictures, the first photoreal toys (after agreeing with
-  Photoreal r3), and the Level 1 check of Studio and Lab.
+- Engine PR #430 (`claude/lane-hands-h3-engine`): a forgiving press (the L1 sweep's center misses),
+  `reseat` on a break joint, a shake that only reads (`fire: false`), picture toys that ask for
+  joints play them, and a fix (a snapped piece starts where it was, not at home).
+- Open me #432: storybook, alarm clock, gift box, umbrella (new runner), desk fan, desk lamp,
+  telescope, potion bottle, fountain pen. Nine cards.
+- Holidays #435: jack-o'-lantern, decorated tree, patterned egg, paper lantern. Four cards.
+- Medieval #436: knight's helmet, trebuchet, dragon egg. Three cards.
+- Pictures #437: picture frame (labs). One card.
+
+Waiting: the snowman (needs H2's engine #420, `ride`), the crossbow (needs a tap that releases a
+cocked joint), the water bottle and soda can (the Fluids engine's pour). Next: Music (guitar and
+drum need engine pieces; see For the Operator), then the first photoreal toys after agreeing with
+Photoreal r3, and the Level 1 check of Studio and Lab.
 
 ## Notes
 
@@ -179,3 +177,9 @@ on their branches and being tested (October 8, 2026).
 
 - Please merge engine PR #430 before the Open me PR; the Open me branch carries its commit.
 - The water bottle and the soda can (labs) wait for the Fluids engine's pour.
+- Questions: (1) The crossbow (a tap releasing a cocked string), the guitar (a sound per plucked
+  string) and the drum (a stick to hit with) need engine work: more small engine PRs from this lane,
+  or leave them? (2) The plan's "Level 1 only" picture and Studio toys (your book, the photo album,
+  the picture lab, the Screen, Photo to 3D …) are kept out of Hands-on entirely, so Level 1 doesn't
+  play there; enable it? (3) A toy with joints is no longer tossed whole (as the chest); that now
+  holds for the lamp, egg, helmet and the rest. Acceptable?
