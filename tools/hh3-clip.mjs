@@ -43,7 +43,7 @@ const fps = Number(opt("fps", 20));
 const zoom = Number(opt("zoom", 1));
 const cam = opt("cam", "") ? opt("cam", "").split(",").map(Number) : null;
 const toyOpt = opt("opt", ""); // key=value[,key=value]: the toy's options
-const scale = Number(opt("scale", 3));
+const scale = Number(opt("scale", 3)); // --labs opens the page with the labs switch on
 const W = 390;
 const H = 844;
 
@@ -55,7 +55,7 @@ const browser = await chromium.launch({
 });
 const page = await browser.newPage({ viewport: { width: W, height: H }, deviceScaleFactor: scale, isMobile: true, hasTouch: true }); // prettier-ignore
 page.on("pageerror", (e) => console.error("page error:", e.message));
-await page.goto(`${base}?renderer=webgl2&profile=mid&adapt=off`);
+await page.goto(`${base}?renderer=webgl2&profile=mid&adapt=off${args.includes("--labs") ? "&labs=1" : ""}`); // (--labs: labs toys too)
 await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
 await page.evaluate(
   async ({ id, fps, cam, zoom, toyOpt }) => {
