@@ -40,6 +40,13 @@ export const SPLAT_FLAT = 0.14;
 // FINE_CELLS cells per splat of the budget: the more of the picture is plain, the finer
 // (fineCells). (r1 and before: 2.2 cells per splat, in 2 by 2 blocks, SPLIT_SHARE of them split.)
 export const FINE_CELLS = 6;
+// The small splats are drawn smaller than their cells (single cells 0.55, 2 by 2 blocks 0.8 of
+// their size): neighbors of different colors at the same depth draw in no set order, so where
+// they overlap much, light ones land on dark strokes and the letters look grainy (the owner's
+// review of round 2: "sharper and less grainy"). Measured on the text page, mid: SSIM 0.41 at
+// full size, 0.57 with single cells at 0.55, 0.63 with 2 by 2 blocks at 0.8 too.
+export const SMALL_FILL = 0.55;
+export const PAIR_FILL = 0.8;
 export const BLOCK_BACK = 0.002; // how far behind (picture heights) each level of bigger splat sits
 export const FLAT_VAR = 0.002; // a block's mean squared color difference (r, g, b summed, 0..1) that still counts as plain
 export const LEVELS = 3;
@@ -485,7 +492,7 @@ export function buildPhotoSplats(
     oRgb[k * 3 + 1] = gg / q;
     oRgb[k * 3 + 2] = b / q;
     // a block of sz by sz cells: sz times its cells' mean size (r1: a 2 x 2 block, twice)
-    oSigma[k] = (sz * sg) / q;
+    oSigma[k] = ((sz * sg) / q) * (sz === 1 ? SMALL_FILL : sz === 2 ? PAIR_FILL : 1);
     oBand[k] = band[(y0 + (sz >> 1)) * gx + x0 + (sz >> 1)];
   }
   return {

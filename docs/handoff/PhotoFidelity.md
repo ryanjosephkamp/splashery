@@ -28,6 +28,18 @@ Text screenshot, Photo to 3D, Detail: One color per splat, Splats view, measured
 | high | 0.391 → 0.435       | 4/7 → 6/7      | 79% → 83%        | 534×1160 → 888×1928 |
 | max  | 0.440 → 0.520       | 7/7 → 7/7      | 89% → 93%        | 618×1336 → 944×2048 |
 
+After the owner's review ("sharper and less grainy", October 8, 2026, 14:34 UTC): the small splats
+drawn smaller than their cells (`SMALL_FILL` 0.55 for single cells, `PAIR_FILL` 0.8 for 2 by 2), so
+light and dark neighbors at the same depth overlap less (they draw in no set order; bigger splats,
+1.25 and 1.5, made the grain worse: mid SSIM 0.34 and 0.26):
+
+| tier | SSIM (main → r2 → r2 fix) | 12–16 px lines  | letter gaps kept |
+| ---- | ------------------------- | --------------- | ---------------- |
+| low  | 0.221 → 0.276 → 0.455     | 0/7 → 0/7 → 3/7 | 19% → 42% → 73%  |
+| mid  | 0.362 → 0.410 → 0.632     | 0/7 → 1/7 → 7/7 | 64% → 69% → 94%  |
+| high | 0.391 → 0.435 → 0.699     | 4/7 → 6/7 → 7/7 | 79% → 83% → 98%  |
+| max  | 0.440 → 0.520 → 0.809     | 7/7 → 7/7 → 7/7 | 89% → 93% → 100% |
+
 Building the splats (Node, this machine): the samples take 0.5 to 0.7 s at low (r1: 0.2 to 0.45 s)
 and 1.4 to 1.8 s at max (r1: 0.9 to 1.1 s). The street, forest and still life use 2.9 to 3.8 cells
 per splat (the still life, with its plain wall, 6).
@@ -153,6 +165,10 @@ with measurements within about six hours. Your Operator is session_012GmKRUMZLir
 > Reply with your usual READY/WORKING/BLOCKED line.
 
 ## State
+
+- October 8, 2026, 16:00 UTC: the owner's marks on round 2: the street "good"; the text clip and
+  close-up "fix" ("sharper and less grainy"). Fixed (smaller small splats, Notes), measured, new
+  cards `phf2-text-after-r2` and `phf2-text-still-after-r2` posted.
 
 - October 8, 2026, 13:00 UTC, round 2: the adaptive grid is in, measured, and on Effect review page
   2 (6 cards, `phf2-…`, group `photo-r2`: the text screenshot and the street sample, before and

@@ -193,7 +193,7 @@ async function open(page, renderer = "webgl2") {
 test.describe(() => {
   test.use({ viewport: { width: 390, height: 844 } });
 
-  test("a page of text in a photo stays legible with the photo's own pixels, and much more so than with one color a splat", async ({
+  test("a page of text in a photo stays legible with the photo's own pixels, and at least as well as with one color a splat", async ({
     page,
   }) => {
     test.setTimeout(240_000);
@@ -204,10 +204,11 @@ test.describe(() => {
     expect(sharp.photo).toBe(true);
     expect(sharp.toyPhoto).toBe(true);
     expect(sharp.n).toBeGreaterThan(5000);
-    // (measured October 8, 2026: 0.86 with the photo, 0.35 without; round 2's adaptive grid
-    // brought One color per splat up to 0.64, the photo's own pixels 0.92)
+    // (measured October 8, 2026: 0.86 with the photo, 0.35 without; round 2's adaptive grid and
+    // smaller small splats brought One color per splat up to 0.89, the photo's own pixels 0.93)
     expect(sharp.ncc).toBeGreaterThan(0.8);
-    expect(sharp.ncc).toBeGreaterThan(plain.ncc + 0.2);
+    expect(plain.ncc).toBeGreaterThan(0.75);
+    expect(sharp.ncc).toBeGreaterThan(plain.ncc);
     expect(errors).toEqual([]);
   });
 
