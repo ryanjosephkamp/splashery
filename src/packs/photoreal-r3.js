@@ -67,8 +67,9 @@ const BY = { license: "CC BY 4.0", licenseUrl: "https://creativecommons.org/lice
 const BYNC = { license: "CC BY-NC 4.0", licenseUrl: "https://creativecommons.org/licenses/by-nc/4.0/" }; // prettier-ignore
 
 // A toy made of one baked scan: its credit, its tap (a pulse of secs), its parts (file part ->
-// kit part, made in parts(k)) and drive(e, out, info), e the seconds since the tap.
-function scanToy({ id, credit, label, secs, parts, drive, share = 0.86, extra }) {
+// kit part, made in parts(k)) and drive(e, out, info), e the seconds since the tap (called at rest
+// too, with e = -1, when `always` is set).
+function scanToy({ id, credit, label, secs, parts, drive, share = 0.86, extra, always = false }) {
   return {
     alive: false,
     density: 1.5, // as the Real objects toys: 300,000 splats on the high tier
@@ -80,7 +81,7 @@ function scanToy({ id, credit, label, secs, parts, drive, share = 0.86, extra })
     },
     drive(t, c, out, info) {
       const e = since(c, "tap", secs);
-      if (e >= 0) drive(e, out, info);
+      if (e >= 0 || always) drive(e, out, info);
     },
     build(k) {
       const made = parts ? parts(k) : [k.part("whole", { pivot: [0, 0, 0] })];
@@ -195,6 +196,7 @@ export const RECIPES = {
         },
       });
     },
+    always: true, // its glow copy stays hidden at rest
     drive(e, out) {
       const on = e > 0.15 && e < 3.9;
       const q = qa([0, 1, 0], 0.9 * Math.sin(Math.PI * band(e, 0, 4.2)));

@@ -65,7 +65,7 @@ export const TOY_HELP = {
   "pyrite-cubes": {
     howTo: "Tap it to turn it; drag to turn it yourself.",
     about:
-      "A specimen of pyrite, scanned and drawn with splats. Pyrite is iron sulfide; its brassy shine fooled many prospectors, so it is called fool's gold. Its crystals often grow as little cubes.\n\nTap it and it turns once round.",
+      "A specimen of pyrite, scanned and drawn with splats. Pyrite is iron sulfide; its brassy shine fooled many prospectors, so it is called fool's gold. Its crystals often grow as little cubes, with faces as flat as if they had been cut.\n\nTap it and it turns once round, so the light runs across its faces.",
   },
   "megalodon-tooth": {
     howTo: "Tap it to turn it over; drag to turn it yourself.",
