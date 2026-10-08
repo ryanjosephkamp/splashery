@@ -54,6 +54,9 @@ await page.goto(`${base}?renderer=webgl2&profile=${opt("profile", "mid")}&adapt=
 await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
 await page.evaluate(async (toy) => {
   const { app, player } = window.__splashery;
+  await import("/src/packs/photo-sharp.js")
+    .then((s) => s.setSharpView(toy, "splats"))
+    .catch(() => {}); // Splats, not the Sharp picture view (lane Photo sharp view)
   await app.chooseToy(toy);
   player.opts.idleDelay = 1e9;
   player.idle.weight = 0;

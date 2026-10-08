@@ -299,6 +299,9 @@ for (const tier of TIERS) {
         const { estimateDepth } = await import("/src/packs/photo-3d-depth.js");
         const depth = await estimateDepth(photo);
         m.usePhoto(photo, depth, "Text");
+        await import("/src/packs/photo-sharp.js")
+          .then((s) => s.setSharpView("photo-3d", "splats"))
+          .catch(() => {}); // Splats, not the Sharp picture view (lane Photo sharp view)
         await app.chooseToy("photo-3d");
         await app.setToyOptions({ source: "custom" });
         player.idle.weight = 0;
@@ -356,6 +359,9 @@ for (const tier of TIERS) {
   } else {
     await page.evaluate(async () => {
       const { app } = window.__splashery;
+      await import("/src/packs/photo-sharp.js")
+        .then((s) => s.setSharpView("moving-photo-3d", "splats"))
+        .catch(() => {}); // Splats, not the Sharp picture view (lane Photo sharp view)
       await app.chooseToy("moving-photo-3d");
     });
     await page.waitForTimeout(1500);
