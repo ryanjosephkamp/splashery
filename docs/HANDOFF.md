@@ -10,6 +10,9 @@ A fresh Operator (`session_012GmKRUMZLir2nb27Bo8Cu2`, Opus 5.5) took over at 04:
 one stands by. This section is current. The sections below it are history. The runbook is
 [OPERATOR.md](OPERATOR.md).
 
+**Effort (the owner's call of October 8, 2026):** every worker, lanes and Integrators alike, runs at
+high effort, and so do his Codex tasks. Older lines below that say "the default effort" are history.
+
 **Main** is at `9101fa2f` (Ops #387). Merged October 7:
 
 - #379: Live r7's polish (#333, the steadier splat mirror)
