@@ -90,7 +90,7 @@ Model: Opus 5.5 (default effort). Started October 8, 2026, about 00:00 UTC. Firs
   flag 32). `tests/phf-engine.spec.mjs` passes on that branch alone (5 tests, WebGPU 5 of 5 in a
   repeat run). The broader specs touching its files are in "For the Operator".
 - **Lane PR #406** (`claude/lane-photo-fidelity`, the engine branch merged in):
-  - both toys' Detail option (Sharp by default);
+  - both toys' Detail option (Fine by default);
   - Moving photo's video copy;
   - `LONG_AREAS`;
   - the relief rule for flat pictures (`reliefScale`);
@@ -144,7 +144,7 @@ its own patch, so the parallax is still the splats'.
 
 Setup: the text page's still `still-1.png`, the picture zoomed to fill the 390 px phone width (the
 reading size), 390 by 844 at device scale 3, SwiftShader. "Before" is `main`; "after" is this branch
-with Detail on Sharp. "Lines" are the 12 to 16 px lines whose letters stay separate (80% of their
+with Detail on Fine. "Lines" are the 12 to 16 px lines whose letters stay separate (80% of their
 gaps kept).
 
 | tier | splats  | SSIM before | SSIM after | lines before | lines after | gaps kept before | gaps kept after |
@@ -187,7 +187,7 @@ the letters themselves match.
 
 - A photo with near and far things in it.
 - Up to 2,048 px on the long side is kept (a larger photo is scaled down).
-- With Detail on Sharp, every pixel kept is shown face on, so a phone screenshot's text reads when
+- With Detail on Fine, every pixel kept is shown face on, so a phone screenshot's text reads when
   zoomed in.
 - The depth model sees 518 px across, so thin things take the depth behind them, and a page of text
   stays nearly flat.
@@ -197,7 +197,7 @@ the letters themselves match.
 
 - A steady video with near and far things, scrolled or panned slowly: a fast scroll is blurred in
   the video itself.
-- With Detail on Sharp, the video shows at its own full size (the owner's 1056 by 2178 recording
+- With Detail on Fine, the video shows at its own full size (the owner's 1056 by 2178 recording
   keeps all 2.3 megapixels), paused or playing.
 - A clip up to 8 s keeps 12, 15, 24 or 24 frames a second (low to max) and holds its frames at 60k,
   140k, 200k or 230k pixels for the depth and the plain look.
@@ -210,9 +210,9 @@ the letters themselves match.
 SwiftShader (this container's software GPU) says little about a phone's GPU, so these are relative.
 
 - **The GPU side:** Moving photo's horse sample at 390 by 844, low tier, draws 3.2 frames a second
-  with Detail on Sharp and 4.4 with one color per splat (27% slower). Sampling the photo per
-  fragment with gradients made it 1.8; one mip level per splat, worked out in its vertex, brought it
-  to 3.2. On a phone's GPU the extra cost is one texture read per fragment.
+  with Detail on Fine and 4.4 with one color per splat (27% slower). Sampling the photo per fragment
+  with gradients made it 1.8; one mip level per splat, worked out in its vertex, brought it to 3.2.
+  On a phone's GPU the extra cost is one texture read per fragment.
 - **The CPU side (a long video playing, mid):** with Sharp, a frame's work is 18 ms to draw the
   offsets and 2 ms to upload the video frame (frames every 42 ms here, under load). With one color
   per splat it is 700 to 990 ms (frames every 900 ms here): that path (Live r7's) reads every video
@@ -255,7 +255,7 @@ A portrait frame, single-thread WebAssembly, this container under load: 196 px 1
   lv7-engine, p3d and smd-photo pass, and smoke passes except two tests:
   - "rigs pick splats…" timed out under load and passes alone;
   - "dragging the shelf up opens a grid…" fails the same way on `main` (not this change).
-- The owner's recording: open it in Moving photo to 3D (Detail: Sharp is the default), pause and
+- The owner's recording: open it in Moving photo to 3D (Detail: Fine is the default), pause and
   pinch in. At the opening view a portrait video is only about 145 CSS px wide on a phone, as small
   as its source would be.
 - Naming: next to the Photo sharp view lane's "Sharp picture" view, this lane's Detail choice

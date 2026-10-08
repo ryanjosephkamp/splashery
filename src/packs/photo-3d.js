@@ -398,7 +398,7 @@ const PHOTO_3D = {
       type: "select",
       default: "photo",
       choices: [
-        { id: "photo", label: "Sharp: each splat shows the photo's own pixels" },
+        { id: "photo", label: "Fine: each splat shows the photo's own pixels" },
         { id: "splats", label: "One color per splat" },
       ],
     },

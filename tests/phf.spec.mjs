@@ -1,4 +1,4 @@
-// Lane Photo fidelity: sharper Photo to 3D and Moving photo to 3D. With Detail on Sharp (the
+// Lane Photo fidelity: sharper Photo to 3D and Moving photo to 3D. With Detail on Fine (the
 // default), their splats take their colors from the photo or the video at its own full size
 // (photo-textured splats, src/photo-splats.js); One color per splat is the toys as they were.
 // A long video's picture is as fine as the tier's splat grid (LONG_AREAS).
@@ -38,10 +38,11 @@ async function until(page, check, arg = null, timeout = 120_000) {
   }
 }
 
-test("both toys offer Detail, Sharp by default, so old scenes and links open sharp", () => {
+test("both toys offer Detail, Fine by default, so old scenes and links open sharp", () => {
   const detail = P3D["photo-3d"].options.find((o) => o.key === "detail");
   expect(detail.default).toBe("photo");
   expect(detail.choices.map((c) => c.id)).toEqual(["photo", "splats"]);
+  expect(detail.choices[0].label).toMatch(/^Fine: /); // never a second "Sharp" beside Sharp picture
   expect(P3D["photo-3d"].photo.on({})).toBe(true);
   expect(P3D["photo-3d"].photo.on({ detail: "splats" })).toBe(false);
 });
@@ -69,7 +70,7 @@ test("a long video's picture is as fine as the tier's splat grid, and never smal
 test.describe(() => {
   test.use({ viewport: { width: 390, height: 844 } });
 
-  test("Photo to 3D: Sharp shows the photo itself; One color per splat turns it off", async ({
+  test("Photo to 3D: Fine shows the photo itself; One color per splat turns it off", async ({
     page,
   }) => {
     const errors = await open(page);

@@ -1455,7 +1455,7 @@ export const MOVING_PHOTO = {
       type: "select",
       default: "photo",
       choices: [
-        { id: "photo", label: "Sharp: each splat shows the clip's own pixels" },
+        { id: "photo", label: "Fine: each splat shows the clip's own pixels" },
         { id: "splats", label: "One color per splat" },
       ],
     },
