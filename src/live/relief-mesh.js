@@ -35,11 +35,30 @@ uniform vec4 uTf;     // the recipe's fit: center (xyz), scale
 uniform vec4 uToy;    // the toy's center (toy coordinates)
 uniform vec4 uBodyQ;  // the body's turn (quaternion)
 uniform vec4 uBodyT;  // the body's offset
+uniform vec4 uFrame;  // the dark frame (mode 2): its width across and down (picture units), its z
 varying vec2 vUv;
 varying float vD;
+varying float vEdge;
 vec3 psvRot(vec4 q, vec3 v) { return v + 2.0 * cross(q.xyz, cross(q.xyz, v) + q.w * v); }
+vec4 psvPlace(vec3 p) {
+  p = (p - uTf.xyz) * uTf.w;
+  vec4 q = dot(uBodyQ, uBodyQ) < 1e-8 ? vec4(0.0, 0.0, 0.0, 1.0) : uBodyQ;
+  p = uToy.xyz + psvRot(q, p - uToy.xyz) + uBodyT.xyz;
+  return matrix_viewProjection * matrix_model * vec4(p, 1.0);
+}
 void main(void) {
   float back = uLayer.z;
+  if (back > 1.5) {
+    // the frame: a corner -1 or 2 is that far outside the picture
+    vec2 f = aPosition.xy;
+    f = mix(f, -uFrame.xy, step(f, vec2(-0.5)));
+    f = mix(f, 1.0 + uFrame.xy, step(vec2(1.5), f));
+    gl_Position = psvPlace(vec3((f.x - 0.5) * uGrid.x, (0.5 - f.y) * uGrid.y, uFrame.z));
+    vUv = vec2(0.0);
+    vD = 0.0;
+    vEdge = 0.0;
+    return;
+  }
   // (the backing is a little inside the picture, so it never shows past the edge as the view turns)
   vec2 uv = back > 0.5 ? 0.5 + (aPosition.xy - 0.5) * 0.96 : aPosition.xy;
   vec2 cuv = uv;
@@ -64,13 +83,19 @@ void main(void) {
   if (back > 0.5) z = mix(z + uLift.z, uLift.w, m);
   else z = mix(z, 0.0, m);
   z += (b - 1.5) * uLayer.x;
-  vec3 p = vec3((uv.x - 0.5) * uGrid.x, (0.5 - uv.y) * uGrid.y, z);
-  p = (p - uTf.xyz) * uTf.w;
-  vec4 q = dot(uBodyQ, uBodyQ) < 1e-8 ? vec4(0.0, 0.0, 0.0, 1.0) : uBodyQ;
-  p = uToy.xyz + psvRot(q, p - uToy.xyz) + uBodyT.xyz;
-  gl_Position = matrix_viewProjection * matrix_model * vec4(p, 1.0);
+  gl_Position = psvPlace(vec3((uv.x - 0.5) * uGrid.x, (0.5 - uv.y) * uGrid.y, z));
   vUv = cuv;
   vD = d;
+  // A point beside a depth step (within a cell): every triangle touching it is dropped, so a cut is
+  // a clean band (filled by the backing) instead of scattered triangles left on either side.
+  float e = 0.0;
+  if (back < 0.5) {
+    vec2 cell = 1.0 / uGrid.zw;
+    for (int j = -1; j <= 1; j++)
+      for (int i = -1; i <= 1; i++)
+        e = max(e, abs(textureLod(uDepth, clamp(uv + vec2(float(i), float(j)) * cell, 0.0, 1.0), 0.0).r - d));
+  }
+  vEdge = e > uLayer.y ? 1.0 : 0.0;
 }
 `;
 
@@ -80,8 +105,10 @@ uniform vec4 uGrid;
 uniform vec4 uLayer;
 varying vec2 vUv;
 varying float vD;
+varying float vEdge;
 void main(void) {
   if (uLayer.z < 0.5) {
+    if (vEdge > 0.001) discard;
     vec2 ux = dFdx(vUv);
     vec2 uy = dFdy(vUv);
     float dx = dFdx(vD);
@@ -93,7 +120,8 @@ void main(void) {
       if (abs(gu) / uGrid.z + abs(gv) / uGrid.w > uLayer.y) discard;
     }
   }
-  gl_FragColor = vec4(texture(uColor, vUv).rgb, 1.0);
+  vec3 c = texture(uColor, vUv).rgb;
+  gl_FragColor = vec4(uLayer.z > 1.5 ? vec3(0.133, 0.149, 0.173) : c, 1.0);
 }
 `;
 
@@ -109,14 +137,33 @@ uniform uTf: vec4f;
 uniform uToy: vec4f;
 uniform uBodyQ: vec4f;
 uniform uBodyT: vec4f;
+uniform uFrame: vec4f;
 var uDepth: texture_2d<f32>;
 var uDepthSampler: sampler;
 varying vUv: vec2f;
 varying vD: f32;
+varying vEdge: f32;
 fn psvRot(q: vec4f, v: vec3f) -> vec3f { return v + 2.0 * cross(q.xyz, cross(q.xyz, v) + q.w * v); }
+fn psvPlace(p0: vec3f) -> vec4f {
+  var p = (p0 - uniform.uTf.xyz) * uniform.uTf.w;
+  var q = uniform.uBodyQ;
+  if (dot(q, q) < 1e-8) { q = vec4f(0.0, 0.0, 0.0, 1.0); }
+  p = uniform.uToy.xyz + psvRot(q, p - uniform.uToy.xyz) + uniform.uBodyT.xyz;
+  return uniform.matrix_viewProjection * uniform.matrix_model * vec4f(p, 1.0);
+}
 @vertex fn vertexMain(input: VertexInput) -> VertexOutput {
   var output: VertexOutput;
   let back = uniform.uLayer.z;
+  if (back > 1.5) {
+    var f = input.aPosition.xy;
+    f = mix(f, -uniform.uFrame.xy, step(f, vec2f(-0.5)));
+    f = mix(f, 1.0 + uniform.uFrame.xy, step(vec2f(1.5), f));
+    output.position = psvPlace(vec3f((f.x - 0.5) * uniform.uGrid.x, (0.5 - f.y) * uniform.uGrid.y, uniform.uFrame.z));
+    output.vUv = vec2f(0.0);
+    output.vD = 0.0;
+    output.vEdge = 0.0;
+    return output;
+  }
   var uv = input.aPosition.xy;
   if (back > 0.5) { uv = 0.5 + (uv - 0.5) * 0.96; }
   var cuv = uv;
@@ -145,14 +192,20 @@ fn psvRot(q: vec4f, v: vec3f) -> vec3f { return v + 2.0 * cross(q.xyz, cross(q.x
   var z = uniform.uLift.x * (d - uniform.uLift.y);
   if (back > 0.5) { z = mix(z + uniform.uLift.z, uniform.uLift.w, m); } else { z = mix(z, 0.0, m); }
   z += (b - 1.5) * uniform.uLayer.x;
-  var p = vec3f((uv.x - 0.5) * uniform.uGrid.x, (0.5 - uv.y) * uniform.uGrid.y, z);
-  p = (p - uniform.uTf.xyz) * uniform.uTf.w;
-  var q = uniform.uBodyQ;
-  if (dot(q, q) < 1e-8) { q = vec4f(0.0, 0.0, 0.0, 1.0); }
-  p = uniform.uToy.xyz + psvRot(q, p - uniform.uToy.xyz) + uniform.uBodyT.xyz;
-  output.position = uniform.matrix_viewProjection * uniform.matrix_model * vec4f(p, 1.0);
+  output.position = psvPlace(vec3f((uv.x - 0.5) * uniform.uGrid.x, (0.5 - uv.y) * uniform.uGrid.y, z));
   output.vUv = cuv;
   output.vD = d;
+  var e = 0.0;
+  if (back < 0.5) {
+    let cell = 1.0 / uniform.uGrid.zw;
+    for (var j: i32 = -1; j <= 1; j++) {
+      for (var i: i32 = -1; i <= 1; i++) {
+        let s = clamp(uv + vec2f(f32(i), f32(j)) * cell, vec2f(0.0), vec2f(1.0));
+        e = max(e, abs(textureSampleLevel(uDepth, uDepthSampler, s, 0.0).r - d));
+      }
+    }
+  }
+  output.vEdge = select(0.0, 1.0, e > uniform.uLayer.y);
   return output;
 }
 `;
@@ -164,6 +217,7 @@ var uColor: texture_2d<f32>;
 var uColorSampler: sampler;
 varying vUv: vec2f;
 varying vD: f32;
+varying vEdge: f32;
 @fragment fn fragmentMain(input: FragmentInput) -> FragmentOutput {
   var output: FragmentOutput;
   let ux = dpdx(input.vUv);
@@ -172,6 +226,7 @@ varying vD: f32;
   let dy = dpdy(input.vD);
   let c = textureSample(uColor, uColorSampler, input.vUv);
   if (uniform.uLayer.z < 0.5) {
+    if (input.vEdge > 0.001) { discard; }
     let det = ux.x * uy.y - ux.y * uy.x;
     if (abs(det) > 1e-18) {
       let gu = (dx * uy.y - dy * ux.y) / det;
@@ -179,7 +234,7 @@ varying vD: f32;
       if (abs(gu) / uniform.uGrid.z + abs(gv) / uniform.uGrid.w > uniform.uLayer.y) { discard; }
     }
   }
-  output.color = vec4f(c.rgb, 1.0);
+  output.color = vec4f(select(c.rgb, vec3f(0.133, 0.149, 0.173), uniform.uLayer.z > 1.5), 1.0);
   return output;
 }
 `;
@@ -212,6 +267,29 @@ function gridMesh(device, cols, rows) {
   mesh.setIndices(idx);
   mesh.update(pc.PRIMITIVE_TRIANGLES);
   return { mesh, bytes: pos.byteLength + idx.byteLength };
+}
+
+// A thin dark frame round the picture, as four strips; a corner at -1 or 2 lies the frame's width
+// outside the picture (the shader's mode 2).
+function frameMesh(device) {
+  const quads = [
+    [-1, -1, 2, 0],
+    [-1, 1, 2, 2],
+    [-1, 0, 0, 1],
+    [1, 0, 2, 1],
+  ];
+  const pos = [];
+  const idx = [];
+  for (const [u0, v0, u1, v1] of quads) {
+    const o = pos.length / 3;
+    pos.push(u0, v0, 0, u1, v0, 0, u0, v1, 0, u1, v1, 0);
+    idx.push(o, o + 2, o + 1, o + 1, o + 2, o + 3);
+  }
+  const mesh = new pc.Mesh(device);
+  mesh.setPositions(new Float32Array(pos), 3);
+  mesh.setIndices(new Uint32Array(idx));
+  mesh.update(pc.PRIMITIVE_TRIANGLES);
+  return mesh;
 }
 
 function material() {
@@ -251,9 +329,12 @@ export class ReliefMesh {
     this.node = new pc.GraphNode("psv-relief");
     this.miS = new pc.MeshInstance(this.surface.mesh, this.matS, this.node);
     this.miB = new pc.MeshInstance(this.backing.mesh, this.matB, this.node);
-    for (const mi of [this.miS, this.miB]) mi.cull = false; // (the shader moves its points)
+    this.frame = frameMesh(device);
+    this.matF = material();
+    this.miF = new pc.MeshInstance(this.frame, this.matF, this.node);
+    for (const mi of [this.miS, this.miB, this.miF]) mi.cull = false; // (the shader moves its points)
     this.layer = stage.app.scene.layers.getLayerByName("World");
-    this.layer.addMeshInstances([this.miS, this.miB]);
+    this.layer.addMeshInstances([this.miS, this.miB, this.miF]);
     this.color = null;
     this.depth = null;
     this.colorBytes = 0;
@@ -266,6 +347,7 @@ export class ReliefMesh {
       uToy: [0, 0, 0, 0],
       uBodyQ: [0, 0, 0, 1],
       uBodyT: [0, 0, 0, 0],
+      uFrame: [0, 0, 0, 0],
     };
     this.visible = true;
   }
@@ -304,8 +386,7 @@ export class ReliefMesh {
       this.color.unlock();
       this.colorSrc = null;
     }
-    this.matS.setParameter("uColor", this.color);
-    this.matB.setParameter("uColor", this.color);
+    for (const m of [this.matS, this.matB, this.matF]) m.setParameter("uColor", this.color);
     return true;
   }
 
@@ -332,13 +413,12 @@ export class ReliefMesh {
       for (let i = 0; i < px.length; i++)
         px[i] = Math.max(0, Math.min(255, Math.round(data[i] * 255)));
     this.depth.unlock();
-    this.matS.setParameter("uDepth", this.depth);
-    this.matB.setParameter("uDepth", this.depth);
+    for (const m of [this.matS, this.matB, this.matF]) m.setParameter("uDepth", this.depth);
   }
 
   // The shape and motion (see the uniforms at the top); any subset.
   //   width, height (recipe units); lift, base; backOffset, backFlat; morph [4]; layers; cut;
-  //   reach; fit { center, scale }; toy [3]; bodyQ [4]; bodyT [3]
+  //   reach; fit { center, scale }; toy [3]; bodyQ [4]; bodyT [3]; frame { across, down, z } or null
   set(o) {
     const u = this.u;
     if (o.width !== undefined) u.uGrid[0] = o.width;
@@ -355,9 +435,11 @@ export class ReliefMesh {
     if (o.toy) u.uToy = [o.toy[0], o.toy[1], o.toy[2], 0];
     if (o.bodyQ) u.uBodyQ = o.bodyQ.slice(0, 4);
     if (o.bodyT) u.uBodyT = [o.bodyT[0], o.bodyT[1], o.bodyT[2], 0];
+    if (o.frame !== undefined) u.uFrame = o.frame ? [o.frame.across, o.frame.down, o.frame.z, 1] : [0, 0, 0, 0]; // prettier-ignore
     for (const [m, back] of [
       [this.matS, 0],
       [this.matB, 1],
+      [this.matF, 2],
     ]) {
       for (const k in u) m.setParameter(k, k === "uLayer" ? [u.uLayer[0], u.uLayer[1], back, u.uLayer[3]] : u[k]); // prettier-ignore
     }
@@ -373,6 +455,7 @@ export class ReliefMesh {
     const v = !!on && !!this.color && !!this.depth;
     this.miS.visible = v;
     this.miB.visible = v;
+    this.miF.visible = v && this.u.uFrame[3] > 0;
     this.visible = v;
   }
 
@@ -389,10 +472,12 @@ export class ReliefMesh {
   }
 
   destroy() {
-    this.layer.removeMeshInstances([this.miS, this.miB]);
+    this.layer.removeMeshInstances([this.miS, this.miB, this.miF]);
     this.node.parent?.removeChild(this.node);
     this.surface.mesh.destroy();
     this.backing.mesh.destroy();
+    this.frame.destroy();
+    this.matF.destroy();
     this.color?.destroy();
     this.depth?.destroy();
     this.matS.destroy();

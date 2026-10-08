@@ -26,6 +26,8 @@ const S = {
   video: null, // a muted copy of a short clip's video (its color)
   frame: -1,
   splatsOff: null, // the entity whose splats are switched off
+  ticks: 0, // the stage's updates (counted once the relief has been asked for)
+  droveTick: null, // the update of the last sharpDrive
 };
 
 const player = () => globalThis.window?.__splashery?.player || null;
@@ -107,7 +109,7 @@ export function sharpClip(moving, { width, height, full }) {
 // The end of the toy's drive: the relief follows this frame.
 export function sharpDrive(out) {
   S.out = out;
-  S.droveAt = performance.now();
+  S.droveTick = S.ticks;
   sync();
 }
 
@@ -116,7 +118,8 @@ const wanted = () => {
   const src = S.src;
   // (a toy that stopped calling sharpDrive, as Photo to 3D in the camera's live view, gets its
   // splats back)
-  const fresh = performance.now() - (S.droveAt ?? -1e9) < 600;
+  // (counted in the stage's updates, not in time: a slow device's frame can take most of a second)
+  const fresh = S.ticks - (S.droveTick ?? -1e9) <= 3;
   return !!(src && fresh && pl?.scene?.toy?.id === src.toy && VIEW[src.toy] === "sharp" && pl.stage?.toy); // prettier-ignore
 };
 
@@ -178,7 +181,10 @@ export function sync() {
   }
   if (S.watching !== stage) {
     S.watching = stage;
-    stage.onUpdate(() => S.stage === stage && follow());
+    stage.onUpdate(() => {
+      S.ticks++;
+      if (S.stage === stage) follow();
+    });
   }
   const src = S.src;
   const [cols, rows] = grid(src);
@@ -306,6 +312,7 @@ function shape(m, src, pl) {
       morph: out.morph || [0, 0, 0, 0],
       layers: L / 1.5,
       cut: PHOTO_CUT,
+      frame: null,
     });
   } else {
     m.set({
@@ -319,6 +326,8 @@ function shape(m, src, pl) {
       morph: [0, 0, 0, 0],
       layers: 0,
       cut: CLIP_CUT,
+      // the toy's thin dark frame (its splats hide with the rest): 0.05 wide, behind the picture
+      frame: { across: 0.05 / src.width, down: 0.05 / src.height, z: -0.03 },
     });
   }
 }

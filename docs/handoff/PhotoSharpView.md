@@ -7,7 +7,47 @@ ryanjosephkamp/splashery. Your lane: Photo sharp view (prefix `psv`). Branch:
 `claude/lane-photo-sharp-view` (engine changes on `claude/lane-photo-sharp-view-engine`). PR title:
 "Phase Photo sharp view: full-resolution pictures in 3D". Handoff file:
 docs/handoff/PhotoSharpView.md (create it; start it with this brief, word for word, under "##
-Brief", then keep "## State", "## Notes", "## Known issues" and "## For the Operator" current).
+Brief", then keep "## State", "## Notes", "### Measurements (October 8, 2026)
+
+`tools/psv-legibility.mjs`, the text-scroll still at 10 s, 390 x 844 at device scale 3, mid profile,
+WebGL2, paused with the depth raised. "Apart": the share of 12 to 16 px lines whose letters stay
+apart (ink runs along the x-height band within 70 to 130% of the source's, each line piece aligned
+on its own). SSIM: luminance, on the text lines.
+
+| Toy, view                                    | Picture on screen (px) | Apart: splats → Sharp | SSIM: splats → Sharp |
+| -------------------------------------------- | ---------------------- | --------------------- | -------------------- |
+| Photo to 3D, its own view                    | 463 x 1004             | 3% → 86%              | 0.23 → 0.36          |
+| Photo to 3D, zoomed in fully                 | 1284 x 2783            | 0% → 72%              | 0.40 → 0.43          |
+| Moving photo to 3D (the video), its own view | 435 x 946              | 45% → 100%            | 0.42 → 0.69          |
+| Moving photo to 3D, zoomed in fully          | 1150 x 2496            | 62% → 100%            | 0.38 → 0.50          |
+
+Photo to 3D's Sharp misses come from the relief bending lines (its depth is stronger than the moving
+toy's); the SSIM stays low for the same reason.
+
+### Costs (`tools/psv-cost.mjs`, 390 x 844 at device scale 3)
+
+Frame times are SwiftShader (software rendering in the sandbox), so only the ratio means anything:
+Sharp draws 4 to 5 times faster than the splats (no sorting). Memory: the relief's own count (the
+picture with mipmaps, the depth, the two grids); the splats at about 64 bytes each (an estimate).
+
+| Profile | Toy          | Splats: ms, count, MB | Sharp: ms, grid (cells), triangles, MB |
+| ------- | ------------ | --------------------- | -------------------------------------- |
+| low     | Photo        | 218, 89k, 5.7         | 54, 300 x 200, 132k, 8.4               |
+| low     | Moving photo | 222, 99k, 6.3         | 63, 327 x 184, 131k, 3.7               |
+| mid     | Photo        | 642, 207k, 13.2       | 127, 424 x 283, 252k, 10.8             |
+| mid     | Moving photo | 565, 171k, 10.9       | 133, 462 x 260, 251k, 5.9              |
+| high    | Photo        | 778, 293k, 18.7       | 173, 548 x 365, 412k, 13.9             |
+| high    | Moving photo | 753, 297k, 19.0       | 178, 596 x 335, 410k, 8.8              |
+| max     | Photo        | 929, 388k, 24.8       | 215, 671 x 447, 612k, 17.7             |
+| max     | Moving photo | 764, 297k, 19.0       | 230, 640 x 360, 471k, 10.0             |
+
+What each tier keeps: the color is always the picture at the size the toy keeps it (a photo up to
+2,048 px on its long side, about 16.8 MB with mipmaps at that size; a long video at its own size:
+the owner's 1056 x 2178 recording is about 12.3 MB); the grid follows the tier (`SHARP_CELLS`: 60k,
+120k, 200k, 300k cells) and is never finer than the depth.
+
+## Known issues" and "## For the Operator" current).
+
 Model: Opus 5.5, at the default effort.
 
 ### Brief (written by the Operator on October 8, 2026, from the owner's note)
@@ -105,6 +145,45 @@ Photo to 3D and Moving photo to 3D"; merge it first). Lane PR: see "For the Oper
   directly. A short video gets its own muted copy of the file, kept on the clip's clock. A GIF (and
   the samples' sheets, if their video can't play) uses the clip's own frames.
 
+### Measurements (October 8, 2026)
+
+`tools/psv-legibility.mjs`, the text-scroll still at 10 s, 390 x 844 at device scale 3, mid profile,
+WebGL2, paused with the depth raised. "Apart": the share of 12 to 16 px lines whose letters stay
+apart (ink runs along the x-height band within 70 to 130% of the source's, each line piece aligned
+on its own). SSIM: luminance, on the text lines.
+
+| Toy, view                                    | Picture on screen (px) | Apart: splats → Sharp | SSIM: splats → Sharp |
+| -------------------------------------------- | ---------------------- | --------------------- | -------------------- |
+| Photo to 3D, its own view                    | 463 x 1004             | 3% → 86%              | 0.23 → 0.36          |
+| Photo to 3D, zoomed in fully                 | 1284 x 2783            | 0% → 72%              | 0.40 → 0.43          |
+| Moving photo to 3D (the video), its own view | 435 x 946              | 45% → 100%            | 0.42 → 0.69          |
+| Moving photo to 3D, zoomed in fully          | 1150 x 2496            | 62% → 100%            | 0.38 → 0.50          |
+
+Photo to 3D's Sharp misses come from the relief bending lines (its depth is stronger than the moving
+toy's); the SSIM stays low for the same reason.
+
+### Costs (`tools/psv-cost.mjs`, 390 x 844 at device scale 3)
+
+Frame times are SwiftShader (software rendering in the sandbox), so only the ratio means anything:
+Sharp draws 4 to 5 times faster than the splats (no sorting). Memory: the relief's own count (the
+picture with mipmaps, the depth, the two grids); the splats at about 64 bytes each (an estimate).
+
+| Profile | Toy          | Splats: ms, count, MB | Sharp: ms, grid (cells), triangles, MB |
+| ------- | ------------ | --------------------- | -------------------------------------- |
+| low     | Photo        | 218, 89k, 5.7         | 54, 300 x 200, 132k, 8.4               |
+| low     | Moving photo | 222, 99k, 6.3         | 63, 327 x 184, 131k, 3.7               |
+| mid     | Photo        | 642, 207k, 13.2       | 127, 424 x 283, 252k, 10.8             |
+| mid     | Moving photo | 565, 171k, 10.9       | 133, 462 x 260, 251k, 5.9              |
+| high    | Photo        | 778, 293k, 18.7       | 173, 548 x 365, 412k, 13.9             |
+| high    | Moving photo | 753, 297k, 19.0       | 178, 596 x 335, 410k, 8.8              |
+| max     | Photo        | 929, 388k, 24.8       | 215, 671 x 447, 612k, 17.7             |
+| max     | Moving photo | 764, 297k, 19.0       | 230, 640 x 360, 471k, 10.0             |
+
+What each tier keeps: the color is always the picture at the size the toy keeps it (a photo up to
+2,048 px on its long side, about 16.8 MB with mipmaps at that size; a long video at its own size:
+the owner's 1056 x 2178 recording is about 12.3 MB); the grid follows the tier (`SHARP_CELLS`: 60k,
+120k, 200k, 300k cells) and is never finer than the depth.
+
 ## Known issues
 
 - No antialiasing on the relief's cut edges and outline (the stage has no MSAA): at device scale 3
@@ -115,4 +194,14 @@ Photo to 3D and Moving photo to 3D"; merge it first). Lane PR: see "For the Oper
 
 ## For the Operator
 
-(Filled at READY.)
+- First READY, October 8, 2026. Cards on Effect review page 2 under "Photo sharp view (psv)": text
+  pairs (Photo to 3D clip and still, Moving photo to 3D clip and still) and sample pairs (forest,
+  bunny), each before (splats) and after (Sharp picture).
+- To run the owner's recording: open Moving photo to 3D (labs), open the file, then tap "Sharp
+  picture" in the Toy tab's panel (or `window.__psv.set("moving-photo-3d", "sharp")`).
+  `tools/psv-legibility.mjs` measures any text video laid out like the test material; for another
+  video the clip tool works:
+  `node tools/psv-clip.mjs out.mp4 --toy=moving-photo-3d --open=<file> --view=sharp --from=<s>`.
+  Playwright's Chromium plays no H.264: give it a WebM.
+- Questions for the owner: which view should be the default in each toy, and should the choice be
+  saved in scenes (one new option key) once it is settled?
