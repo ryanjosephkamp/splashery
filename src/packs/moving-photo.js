@@ -787,18 +787,29 @@ function nearAt(D, a, b, f, w, h, out) {
 
 // The long clip's frame at t, as a one-frame clip frameImage can draw: the
 // muted copy's picture now, and the depth there.
-function longFrame(clip, t) {
+function longFrame(clip, t, colorsToo = true) {
   const { w, h } = clip;
   const L = (clip.scratch ||= { c: document.createElement("canvas"), near: new Float32Array(w * h), bytes: new Uint8Array(w * h) }); // prettier-ignore
-  if (L.c.width !== w || L.c.height !== h) {
+  // (Lane Photo fidelity: when its colors aren't read back each frame, the picture is drawn into a
+  // canvas kept on the GPU, a copy instead of a decode into memory; a canvas's kind is fixed when
+  // its context is made, so a change makes a new one.)
+  const reads = !!colorsToo;
+  if (L.c.width !== w || L.c.height !== h || L.reads !== reads) {
+    if (L.reads !== undefined && L.reads !== reads) L.c = document.createElement("canvas");
     L.c.width = w;
     L.c.height = h;
-    L.g = L.c.getContext("2d", { willReadFrequently: true });
+    L.g = L.c.getContext("2d", { willReadFrequently: reads });
     L.g.imageSmoothingQuality = "high";
+    L.reads = reads;
   }
   if (clip.video.readyState >= 2) L.g.drawImage(clip.video, 0, 0, w, h);
-  const colors = L.g.getImageData(0, 0, w, h).data;
-  L.colors = colors; // (the original's card shows it too)
+  // (Lane Photo fidelity: photo-textured splats read the video itself, so its colors aren't read
+  // back here, unless the original's card shows them: the readback was most of a frame's work.)
+  let colors = null;
+  if (colorsToo) {
+    colors = L.g.getImageData(0, 0, w, h).data;
+    L.colors = colors; // (the original's card shows it too)
+  }
   const D = clip.depth;
   const k = Math.max(0, t * D.rate - 0.5);
   const a = Math.min(D.n - 1, Math.floor(k));
@@ -916,10 +927,30 @@ function spans(clip, cols, rows) {
   return SCRATCH.map;
 }
 
-export function frameImage(clip, cols, rows, f, sharpen = SHARPEN, out = null) {
+// Lane Photo fidelity: `colors` false skips the left half's colors (a gray), for photo-textured
+// splats, whose fragments read the clip itself: only the offsets are worked out.
+export function frameImage(clip, cols, rows, f, sharpen = SHARPEN, out = null, colors = true) {
   const W = cols * 2;
   const px = out || new Uint8ClampedArray(W * rows * 4);
   const { x0, x1, xm, y0, y1, ym, same } = spans(clip, cols, rows);
+  if (!colors) {
+    const near = clip.near[f];
+    const mean = clip.mean;
+    for (let j = 0; j < rows; j++) {
+      const row = ym[j] * clip.w;
+      for (let i = 0; i < cols; i++) {
+        const o = (j * W + i) * 4;
+        px[o] = px[o + 1] = px[o + 2] = 128;
+        px[o + 3] = 255;
+        const s2 = row + xm[i];
+        const q = o + cols * 4;
+        px[q] = px[q + 1] = 128;
+        px[q + 2] = 255 * (0.5 + (near[s2] / 255 - mean[s2]) / 2) + 0.5;
+        px[q + 3] = 255;
+      }
+    }
+    return px;
+  }
   const avg = SCRATCH.avg;
   const hs = SCRATCH.hs;
   const col = clip.colors[f];
@@ -1475,8 +1506,10 @@ export const MOVING_PHOTO = {
       const size = cols * 2 * rows * 4;
       if (MOVING.px?.length !== size) MOVING.px = new Uint8ClampedArray(size);
       // (Live r7: a long clip's frame is drawn from its playing copy.)
-      const src = clip.long ? longFrame(clip, MOVING.t) : clip;
-      g.putImageData(new ImageData(frameImage(src, cols, rows, clip.long ? 0 : MOVING.frame, SHARPEN, MOVING.px), cols * 2, rows), 0, 0); // prettier-ignore
+      // (Lane Photo fidelity: with the photo-textured splats only the offsets are needed.)
+      const colors = !MOVING.photoOn || MOVING.original;
+      const src = clip.long ? longFrame(clip, MOVING.t, colors) : clip;
+      g.putImageData(new ImageData(frameImage(src, cols, rows, clip.long ? 0 : MOVING.frame, SHARPEN, MOVING.px, colors), cols * 2, rows), 0, 0); // prettier-ignore
     },
   },
   async prepare(o) {
@@ -1537,6 +1570,7 @@ export const MOVING_PHOTO = {
   },
   build(k, o) {
     MOVING.original = o.original === "on";
+    MOVING.photoOn = o.detail !== "splats"; // lane Photo fidelity
     const clip = MOVING.want;
     if (MOVING.clip !== clip) {
       if (MOVING.clip?.audio) MOVING.clip.audio.track.pause();
