@@ -237,3 +237,38 @@ test("hands.press: a press held still squeezes a whole toy, and it springs back 
   expect(Math.abs(s.end)).toBeLessThan(0.01);
   expect(s.lifted).toBe(false);
 });
+
+test("a fixed piece is never knocked loose or picked up (a stand to land on)", async ({ page }) => {
+  await open(page, "dice", null);
+  const s = await page.evaluate(async () => {
+    const { player } = window.__splashery;
+    const { surfacePoints } = await import("/src/physics/world.js");
+    const box = { type: "box", half: [0.5, 0.5, 0.5] };
+    const points = surfacePoints(box, 2);
+    player.toyInfo.recipe.hands = {
+      floor: -0.5,
+      pieces: () => [
+        { part: "d6a", pos: [-0.64, 0, 0.18], solid: box, points, mass: 1 },
+        { pos: [0.66, 0, -0.22], solid: box, points, fixed: true },
+      ],
+    };
+    const h = player.handsOn;
+    h.attach(player.toyInfo);
+    h.setOn(true);
+    h.ensure();
+    const [a, b] = h.pieces.map((pc) => pc.body);
+    h.free(b); // as a hard knock would
+    const picked = h.pieceAt([0.66, 0, -0.22]);
+    // Dropped onto it from above, the loose die lands on it and stays up there.
+    h.free(a);
+    a.pos = [0.66, 1.6, -0.22];
+    h.moved = true;
+    h.world.wake();
+    for (let t = 0; t < 2; t += 1 / 60) player.update(1 / 60);
+    return { pinned: b.pinned, picked: picked === b, standY: b.pos[1], dieY: a.pos[1] };
+  });
+  expect(s.pinned).toBe(true);
+  expect(s.picked).toBe(false);
+  expect(s.standY).toBeCloseTo(0, 5);
+  expect(s.dieY).toBeGreaterThan(0.9); // resting on top of it
+});
