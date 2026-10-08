@@ -335,13 +335,34 @@
               </p>
               <ul>
                 <li>
-                  <code>options</code>: the recipe's choices, such as
-                  <code
-                    >{ &quot;style&quot;: &quot;love&quot;, &quot;color&quot;: &quot;#c42f3c&quot;
-                    }</code
-                  >. At most 16 keys; values are numbers, <code>true</code>/<code>false</code>,
-                  <code>#rrggbb</code> colours or short lower-case words. The recipe checks their
-                  meaning when it builds, so unknown options are ignored.
+                  <p>
+                    <code>options</code>: the recipe's choices, such as
+                    <code
+                      >{ &quot;style&quot;: &quot;love&quot;, &quot;color&quot;: &quot;#c42f3c&quot;
+                      }</code
+                    >. At most 16 keys; values are numbers, <code>true</code>/<code>false</code>,
+                    <code>#rrggbb</code> colours or short lower-case words. The recipe checks their
+                    meaning when it builds, so unknown options are ignored.
+                  </p>
+                  <ul>
+                    <li>
+                      Photo to 3D and Moving photo to 3D (<code>photo-3d</code>,
+                      <code>moving-photo-3d</code>; added October 8, 2026, lane Photo sharp view
+                      r2): <code>view</code> is <code>&quot;sharp&quot;</code> (Sharp picture: the
+                      picture itself on a 3D relief) or <code>&quot;splats&quot;</code> (Splats). It
+                      is written when someone picks a view, without rebuilding the toy. A scene
+                      without it, such as every scene and link saved before, opens in Sharp picture,
+                      the default. Splats' own look is the recipe option <code>detail</code>:
+                      <code>&quot;photo&quot;</code> (Fine, the default) or
+                      <code>&quot;splats&quot;</code> (One color per splat). See
+                      <a
+                        href="https://github.com/ryanjosephkamp/splashery/blob/main/docs/PHOTO-VIEWS.md"
+                        target="_blank"
+                        rel="noopener"
+                        >PHOTO-VIEWS.md</a
+                      >.
+                    </li>
+                  </ul>
                 </li>
                 <li><code>clay</code>: clay edits, as for generated toys below.</li>
               </ul>
