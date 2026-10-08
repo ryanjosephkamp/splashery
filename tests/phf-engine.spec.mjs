@@ -204,9 +204,10 @@ test.describe(() => {
     expect(sharp.photo).toBe(true);
     expect(sharp.toyPhoto).toBe(true);
     expect(sharp.n).toBeGreaterThan(5000);
-    // (measured October 8, 2026: 0.86 with the photo, 0.35 without)
+    // (measured October 8, 2026: 0.86 with the photo, 0.35 without; round 2's adaptive grid
+    // brought One color per splat up to 0.64, the photo's own pixels 0.92)
     expect(sharp.ncc).toBeGreaterThan(0.8);
-    expect(sharp.ncc).toBeGreaterThan(plain.ncc + 0.3);
+    expect(sharp.ncc).toBeGreaterThan(plain.ncc + 0.2);
     expect(errors).toEqual([]);
   });
 
