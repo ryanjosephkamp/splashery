@@ -7,7 +7,7 @@
 //   node tools/text-scroll-video.mjs                     (once: .cache/text-scroll/)
 //   SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium node tools/psv-legibility.mjs
 //     --toy=photo-3d|moving-photo-3d [--at=10] [--views=splats,sharp] [--profile=mid]
-//     [--out=.cache/psv-legibility] [--renderer=webgl2] [--zoom=home|max]
+//     [--out=.cache/psv-legibility] [--renderer=webgl2] [--zoom=home|max] [--detail=photo|splats]
 //
 // Photo to 3D opens the still at --at seconds as a photo; Moving photo to 3D opens the whole video
 // and pauses at --at seconds. Each view is rendered paused, face-on, at 390 x 844 and device scale
@@ -47,6 +47,9 @@ const renderer = opt("renderer", "webgl2");
 const src = opt("src", ".cache/text-scroll");
 const out = opt("out", ".cache/psv-legibility");
 const zoom = opt("zoom", "home"); // "home" (the toy's own view) or "max" (zoomed in as far as it goes)
+// Splats' Detail (lane Photo fidelity): "photo" (Fine, the default) or "splats" (One color per splat)
+const detail = opt("detail", "");
+const tag = `${zoom}${detail ? `-${detail}` : ""}`;
 const base = process.env.SPLASHERY_URL || "http://127.0.0.1:4173/";
 const W = 390;
 const H = 844;
@@ -101,6 +104,13 @@ async function render() {
     }, at);
   }
   const took = (Date.now() - t0) / 1000;
+  if (detail) {
+    await page.evaluate((d) => window.__splashery.app.setToyOptions({ detail: d }), detail);
+    await page.waitForFunction(() => !window.__splashery.player.loading, null, {
+      timeout: 120_000,
+    });
+    await page.waitForTimeout(1500);
+  }
   await page.keyboard.press("f"); // focus mode: only the toy
   await page.waitForTimeout(800);
   await page.evaluate(() => window.__splashery.app.resetView?.() ?? window.__splashery.player.camera.reset()); // prettier-ignore
@@ -146,7 +156,7 @@ async function render() {
     }, toy);
     const state = await page.evaluate(async () => (await import("/src/packs/photo-sharp.js")).sharpState()); // prettier-ignore
     const png = await page.screenshot({ type: "png" });
-    fs.writeFileSync(path.join(out, `${toy}-${view}-${at}s-${zoom}.png`), png);
+    fs.writeFileSync(path.join(out, `${toy}-${view}-${at}s-${tag}.png`), png);
     shots[view] = { png: PNG.sync.read(png), rect, state };
   }
   await browser.close();
@@ -378,7 +388,16 @@ function measure(shot) {
 }
 
 const { shots, took } = await render();
-const result = { toy, at, zoom, profile, renderer, opened: `${took.toFixed(0)} s`, views: {} };
+const result = {
+  toy,
+  at,
+  zoom,
+  detail: detail || "photo",
+  profile,
+  renderer,
+  opened: `${took.toFixed(0)} s`,
+  views: {},
+};
 for (const view of views) {
   const m = measure(shots[view]);
   const { refPng, ...nums } = m;
@@ -389,8 +408,8 @@ for (const view of views) {
       const v = Math.round(refPng.ref[i]);
       p.data.set([v, v, v, 255], i * 4);
     }
-    fs.writeFileSync(path.join(out, `${toy}-reference-${at}s-${zoom}.png`), PNG.sync.write(p));
+    fs.writeFileSync(path.join(out, `${toy}-reference-${at}s-${tag}.png`), PNG.sync.write(p));
   }
 }
-fs.writeFileSync(path.join(out, `${toy}-${at}s-${zoom}.json`), JSON.stringify(result, null, 1));
+fs.writeFileSync(path.join(out, `${toy}-${at}s-${tag}.json`), JSON.stringify(result, null, 1));
 console.log(JSON.stringify(result, (k, v) => (k === "state" ? undefined : v), 1));
