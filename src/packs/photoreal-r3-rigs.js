@@ -754,12 +754,7 @@ const BASES = {
   physalis: based({
     count: 12000,
     build(k) {
-      for (const at of [
-        [-0.012, -0.747, 0.284],
-        [-0.038, -0.419, 0.317],
-        [-0.051, -0.145, 0.231],
-      ])
-        core(k, at, [0.08, 0.08, 0.08], "#e9822e", { grid: 32 });
+      PHYSALIS.forEach(({ at, top }, i) => core(k, at, [0.08, 0.08, 0.08], "#e9822e", { grid: 32, part: k.part("b" + i, { pivot: top }) })); // prettier-ignore
     },
   }),
   // The sunflower: the back of its head, a green disc just behind the petals.
@@ -870,6 +865,14 @@ const EFFECTS = {
   "bonsai-photo": { label: "Drop", secs: 2.2, motion: M.drop({ pivot: [0, -0.9, 0], axis: ACROSS, height: 0.12, amp: 0.02 }) }, // prettier-ignore
   "cherry-blossom-photo": { label: "Drop", secs: 2.2, motion: M.drop({ pivot: [0, -0.28, 0], axis: ACROSS, height: 0.15, amp: 0.03 }) }, // prettier-ignore
 };
+// The physalis's three lanterns (the orange husks, found by color), each hanging from the top of
+// its stalk.
+const PHYSALIS = [
+  [-0.012, -0.747, 0.284],
+  [-0.038, -0.419, 0.317],
+  [-0.051, -0.145, 0.231],
+].map((at) => ({ at, top: [at[0], at[1] + 0.15, at[2] - 0.06] }));
+
 // The desk globe's ball (fitted to its splats), and its axis toward the top pivot.
 const GLOBE = [-0.138, 0.281, 0.051];
 const GLOBE_AXIS = [0.198, 0.979, 0.039];
@@ -927,15 +930,43 @@ function bikeRig(rig) {
   };
 }
 
+// Nudged, each physalis lantern swings on its own from its stalk, as a pendulum rings down, each
+// a little out of step with the others; the berry inside swings with it.
+function physalisRig(rig) {
+  const secs = 3.2;
+  return {
+    ...rig,
+    hard: true,
+    parts: PHYSALIS.map(({ at, top }, i) => ({ name: "l" + i, pivot: top, regions: [{ at, r: [0.17, 0.17, 0.18], soft: 0.01, color: "#d8562a", tol: 0.34 }] })), // prettier-ignore
+    controls: [pulse("hop", "Swing", secs)],
+    action: { key: "hop", label: "Swing" },
+    drive(t, c, out, info) {
+      const e = since(c, "hop", secs);
+      if (e < 0) return;
+      const sgn = vary(info?.tap, 37) < 0.5 ? 1 : -1;
+      const parts = {};
+      PHYSALIS.forEach((l, i) => {
+        const ang = sgn * 0.42 * Math.exp(-e * (1.1 + 0.2 * i)) * Math.sin(e * (8.5 - 0.9 * i) + 0.2 * i) * band(e, 0, 0.06 + 0.05 * i); // prettier-ignore
+        const q = qa([0.9, 0, 0.44], ang);
+        out.parts["l" + i] = { quat: q, offset: [0, 0, 0] };
+        parts["b" + i] = { quat: q, offset: [0, 0, 0] };
+      });
+      out.addon = { parts };
+    },
+  };
+}
+
 export const PR3_RIGS = Object.fromEntries(
   Object.entries(BASES).map(([id, rig]) => [
     id,
     id === "bmx-bike"
       ? bikeRig(rig)
-      : PART_EFFECTS[id]
-        ? movePart(rig, PART_EFFECTS[id])
-        : EFFECTS[id]
-          ? moveBody(rig, EFFECTS[id])
-          : rig,
+      : id === "physalis"
+        ? physalisRig(rig)
+        : PART_EFFECTS[id]
+          ? movePart(rig, PART_EFFECTS[id])
+          : EFFECTS[id]
+            ? moveBody(rig, EFFECTS[id])
+            : rig,
   ]),
 );

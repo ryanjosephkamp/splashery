@@ -53,9 +53,9 @@ export const TOY_HELP = {
       "A real orange, captured from photos and drawn with soft splats. The peel is covered in tiny pockets of oil that give citrus its smell; the bumps you see are those pockets. Oranges are a hybrid of the pomelo and the mandarin and grow on evergreen trees.\n\nTap it and the orange rolls along the table and back, turning as far as it travels. Drag to turn it and look at the dimpled peel and the little dark spot where the stem was.",
   },
   physalis: {
-    howTo: "Tap it to make it hop; drag to turn it.",
+    howTo: "Tap it to make the lanterns swing; drag to turn it.",
     about:
-      "A sprig of physalis, also called Chinese lantern or cape gooseberry, captured from photos and drawn with splats. Its fruit grows inside a papery husk that turns bright orange as it ripens; the husk is the plant's lantern and guards the berry.\n\nTap it and it hops. Drag to circle it and look at the thin veined husks and the green leaves above them.",
+      "A sprig of physalis, also called Chinese lantern or cape gooseberry, captured from photos and drawn with splats. Its fruit grows inside a papery husk that turns bright orange as it ripens; the husk is the plant's lantern and guards the berry.\n\nTap it and each lantern swings on its own from its stalk, a little out of step with the others. Drag to circle it and look at the thin veined husks and the green leaves above them.",
   },
   "crystal-gem": {
     howTo: "Tap it to turn it round; drag to turn it yourself.",
