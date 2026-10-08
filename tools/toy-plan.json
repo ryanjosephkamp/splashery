@@ -2713,6 +2713,13 @@
       "sound": "An airy rising tone and faint ticks as the scan line crosses, both quiet (Sound D, October 6, 2026: subtler wind and twinkle).",
       "improved": "Viewers: a LAS 1.0 to 1.4 reader (point formats 0 to 10), LAZ through laz-perf (Apache-2.0, loaded only for a .laz), point PLY, XYZ and PTS readers, PLY, LAS 1.2 and XYZ writers, all in a worker. Samples: three USGS 3DEP lidar tiles (public domain): the Palace of Fine Arts, the Golden Gate Bridge's south end, Meteor Crater. Viewers r2 (the owner's \"Please make sharper\" on all three clips, October 5, 2026): points drawn as crisp dots with the Lab's sharper falloff, shaded relief baked into their colors (lit by the slope under each point, darker under canopies), the preview picks one point per small cube instead of a random share (no more holes), and up to the device's full budget. Viewers r3 (the owner's \"the toys could still be sharper\", October 5, 2026): the samples remade with even thinning (one point per small cube, so no holes), slightly finer points, and a dark rim where the ground meets a wall, tree or cliff, so edges read crisply."
     },
+    "volume-viewer": {
+      "v": "keep",
+      "owner": "The owner's Push Plan pick S4, \"For the volume viewer, absolutely\" (October 4, 2026), and his yes to a DICOM reader the same day (lane Volume viewer, October 8, 2026; labs only).",
+      "effect": "A person's own CT, MRI or microscope volume (DICOM series, folder, zip or multi-frame file; NIfTI .nii and .nii.gz; TIFF stacks; raw with a size form) drawn as opaque volume splats spaced to the device's budget, each voxel at its true size. Window and level with presets (bone, soft tissue, full range) or sliders, five color maps and two opacity curves, a cut plane on each axis that a drag moves (with a glowing cut face), a thin-slice view, and the maximum-intensity picture. A tap on the volume steps to the next preset (the toy rebuilds with the new window); the Play button sweeps the cut down through the volume and back (5 s).",
+      "sound": "A soft click like a console's dial, then a short low tone as the new window settles.",
+      "improved": "Volume viewer: new toy (labs). Readers in src/volume/read.js (dicom-parser 1.8.21, MIT, vendored and loaded only for a DICOM file; NIfTI, TIFF and zip read in the page), the view in src/volume/view.js on the Imaging lane's volume kind. Samples: the CWI walnut (CC BY 4.0) and a 12.8 mm gar larva's micro-CT by Brian Metscher (Zenodo 19021581, CC BY 4.0; tools/vol-gar.mjs)."
+    },
     "real-moon": {
       "v": "keep",
       "owner": "The owner's push notes of October 5, 2026 (\"I'd love to see planets, like photoreal, or data from, you know, NASA\"; lane Space r2; labs only).",
