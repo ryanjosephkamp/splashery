@@ -1,0 +1,14 @@
+{
+  "size": [24, 20, 12],
+  "spacing": [0.5, 0.5, 2],
+  "bone": [6, 5, 8],
+  "air": -1000,
+  "soft": 40,
+  "boneHU": 1000,
+  "raw": {
+    "header": 64,
+    "type": "uint16",
+    "little": false,
+    "offset": 1024
+  }
+}
