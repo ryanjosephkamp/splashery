@@ -565,24 +565,12 @@ export class Extras {
 
   // ---- Strings (lane Hands-on H3) ----
 
-  // The finger's line in the recipe's frame, where the toy stood at home
-  // (a guitar picked up and set down elsewhere still plucks where it lies).
-  strumRay(x, y) {
-    const ho = this.ho;
-    const player = this.player;
-    if (ho.mode === "pieces" || !ho.body) return player.recipeRay(x, y);
-    const ray = player.stage.ray(x, y);
-    const b = ho.body;
-    const back = (p) => player.toRecipe(v3.add(b.home.pos, quat.rotate(b.home.q, b.toLocal(p))));
-    const o = back(ray.origin);
-    const d = v3.sub(back(v3.add(ray.origin, ray.dir)), o);
-    return { origin: o, dir: v3.scale(d, 1 / (v3.len(d) || 1)) };
-  }
-
   // Where the finger's line meets the strings' plane, or null.
   strumPoint(x, y) {
     const S = this.strings;
-    const ray = this.strumRay(x, y);
+    // (In the recipe's frame, which follows a toy picked up and set down
+    // elsewhere: it still plucks where it lies.)
+    const ray = this.player.recipeRay(x, y);
     const den = v3.dot(ray.dir, S.n);
     if (Math.abs(den) < 1e-4) return null;
     const t = v3.dot(v3.sub(S.list[0].a, ray.origin), S.n) / den;
