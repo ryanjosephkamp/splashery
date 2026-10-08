@@ -1480,6 +1480,26 @@
     "i": "../assets/toys/crystal-lattice/thumb.webp"
   },
   {
+    "t": "Unit cells",
+    "u": "toys/unit-cells/",
+    "k": "toy",
+    "s": "Atoms",
+    "d": "Tap to step from the unit cell to a block of cells, then to the bonds, and back.",
+    "w": "unit cells atoms atoms crystal lattice unit cell diamond graphite ice copper iron magnesium fcc bcc hcp face-centered body-centered hexagonal close-packed metal bonds thermal motion debye waller chemistry unit-cells",
+    "i": "../assets/toys/unit-cells/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Orbital atlas",
+    "u": "toys/orbital-atlas/",
+    "k": "toy",
+    "s": "Atoms",
+    "d": "Tap to cut the orbital open and see the density inside. Pick any orbital in the Toy tab.",
+    "w": "orbital atlas atoms atoms orbital atlas electron hydrogen wave function quantum s p d f g 4d 5f 5g 6d 7p node phase cut chemistry orbital-atlas",
+    "i": "../assets/toys/orbital-atlas/thumb.webp",
+    "l": 1
+  },
+  {
     "t": "Molecule viewer",
     "u": "toys/molecule-viewer/",
     "k": "toy",
