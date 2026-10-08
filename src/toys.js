@@ -3903,6 +3903,17 @@ export const TOYS = [
     tags: "lidar las laz ply xyz pts point cloud survey usgs 3dep terrain classification intensity measure distance crop thin gis",
     camera: { yaw: 0.6, pitch: 0.55, roll: 0, distance: 2.8 },
   },
+  // ---- Pack: volume-viewer (lane Volume viewer) ----
+  {
+    id: "volume-viewer",
+    label: "Volume viewer",
+    category: "studio",
+    kind: "kit",
+    pack: "volume-viewer",
+    labs: true,
+    tags: "volume viewer ct mri micro-ct microscope scan dicom nifti nii tiff stack raw voxel slice window level bone soft tissue maximum intensity projection mip cut plane walnut gar fish medical imaging",
+    camera: { yaw: 0.35, pitch: 0.2, roll: 0, distance: 3.8 },
+  },
   // ---- Pack: lab (lane Lab) ----
   {
     id: "splat-field",
