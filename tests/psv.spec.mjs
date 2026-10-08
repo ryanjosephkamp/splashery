@@ -145,10 +145,10 @@ test.describe("Photo to 3D", () => {
   test("another toy takes the relief away", async ({ page }) => {
     const errors = await open(page, "photo-3d", test);
     await page.waitForFunction(() => window.__psv.state().on, null, { timeout: 30_000 });
-    // (Moving photo to 3D keeps its own choice: Splats, picked for this test)
-    await page.evaluate(() => window.__psv.set("moving-photo-3d", "splats"));
     await page.evaluate(() => window.__splashery.app.chooseToy("moving-photo-3d"));
     await page.waitForFunction(() => !window.__splashery.player.loading && window.__splashery.player.proc?.ctx?.kit?.data?.moving, null, { timeout: 120_000 }); // prettier-ignore
+    // (Moving photo to 3D in Splats, picked here: no relief at all may stay on screen)
+    await page.evaluate(() => window.__psv.set("moving-photo-3d", "splats"));
     await page.waitForTimeout(500);
     expect((await state(page)).on).toBe(false);
     expect(await splatsOn(page)).toBe(true);
