@@ -80,7 +80,7 @@ colored:
 
 | You want                                                    | Use                                                         |
 | ----------------------------------------------------------- | ----------------------------------------------------------- |
-| To read small text: a screenshot, a screen recording, signs | Sharp picture                                               |
+| To read small text: a screenshot, a screen recording, signs | Sharp picture (or Splats on Fine)                           |
 | The picture exactly as it is, sharp at any zoom             | Sharp picture                                               |
 | A long video played smoothly                                | Sharp picture                                               |
 | Poke, Paint, Magnet or Clay                                 | Splats (the toy switches to them by itself while one is on) |
@@ -100,18 +100,32 @@ times come from SwiftShader, the software renderer in the build sandbox, so only
 the views means anything; a phone's GPU is far faster at both. Splat memory is an estimate (about 64
 bytes a splat: its data, the work buffer and the sort keys). Sharp picture's memory is counted
 exactly: the picture with its mipmaps, the depth and the two grids. The samples are the forest photo
-(1,280 by 853) and the bunny clip (640 by 360). Splats are on Detail Fine.
+(1,280 by 853) and the bunny clip (640 by 360). Splats are on Detail Fine, and their memory leaves
+out Fine's own copy of the picture, about the size of Sharp picture's color.
 
-{{COST}}
+| Tier | Toy          | Splats  | Splats memory | Splats frame | Sharp triangles | Sharp memory | Sharp frame |
+| ---- | ------------ | ------- | ------------- | ------------ | --------------- | ------------ | ----------- |
+| low  | Photo to 3D  | 88,674  | 5.7 MB        | 347 ms       | 132,288         | 8.4 MB       | 85 ms       |
+| low  | Moving photo | 98,893  | 6.3 MB        | 344 ms       | 130,704         | 3.7 MB       | 101 ms      |
+| mid  | Photo to 3D  | 206,849 | 13.2 MB       | 1129 ms      | 252,272         | 10.8 MB      | 187 ms      |
+| mid  | Moving photo | 170,856 | 10.9 MB       | 956 ms       | 250,608         | 5.9 MB       | 214 ms      |
+| high | Photo to 3D  | 292,776 | 18.7 MB       | 1327 ms      | 412,328         | 13.9 MB      | 265 ms      |
+| high | Moving photo | 296,856 | 19 MB         | 1225 ms      | 409,688         | 8.8 MB       | 298 ms      |
+| max  | Photo to 3D  | 387,775 | 24.8 MB       | 1513 ms      | 612,162         | 17.7 MB      | 349 ms      |
+| max  | Moving photo | 296,856 | 19 MB         | 1213 ms      | 471,168         | 10 MB        | 527 ms      |
+
+In short: Sharp picture draws a frame two to six times faster than the splats here (about four times
+on most rows) and, once Fine's copy of the picture is counted, holds less memory. Its triangle count
+is higher than the splat count, but each triangle covers a few pixels, drawn once, with no sorting.
 
 What each tier keeps:
 
 | Tier | Splats (Photo to 3D) | Sharp picture grid (cells) | Sharp picture color                      |
 | ---- | -------------------- | -------------------------- | ---------------------------------------- |
-| low  | 90,000               | up to 60,000               | the picture at the size the toy keeps it |
-| mid  | 210,000              | up to 120,000              | the same                                 |
-| high | 300,000              | up to 200,000              | the same                                 |
-| max  | 400,000              | up to 300,000              | the same                                 |
+| low  | about 90,000         | up to 60,000               | the picture at the size the toy keeps it |
+| mid  | about 210,000        | up to 120,000              | the same                                 |
+| high | about 300,000        | up to 200,000              | the same                                 |
+| max  | about 400,000        | up to 300,000              | the same                                 |
 
 The grid is never finer than the depth. Sharp picture's color is the same on every tier, and its
 size follows the picture:
@@ -138,7 +152,18 @@ the source frame scaled to the same size on screen:
 Measured on October 8, 2026, at the still 10 seconds in. "Own view" is the toy as it opens; "zoomed
 in" is as far as a finger can zoom.
 
-{{LEGIBILITY}}
+| Toy          | Zoom      | Sharp picture         | Splats, Fine          | Splats, One color per splat |
+| ------------ | --------- | --------------------- | --------------------- | --------------------------- |
+| Photo to 3D  | own view  | 93% apart, SSIM 0.61  | 93% apart, SSIM 0.62  | 10% apart, SSIM 0.40        |
+| Photo to 3D  | zoomed in | 92% apart, SSIM 0.51  | 92% apart, SSIM 0.50  | 23% apart, SSIM 0.42        |
+| Moving photo | own view  | 100% apart, SSIM 0.82 | 100% apart, SSIM 0.78 | 59% apart, SSIM 0.42        |
+| Moving photo | zoomed in | 100% apart, SSIM 0.84 | 100% apart, SSIM 0.83 | 86% apart, SSIM 0.49        |
+
+Face on, Sharp picture and Splats on Fine read the same: nearly every line's letters stay apart, and
+their SSIM is within 0.04. The difference between them is the cost above (and how each holds up as
+the view turns, which this measure doesn't cover). One color per splat is the soft view: it loses
+most small letters in Photo to 3D, which keeps fewer splats per pixel of the page than Moving photo
+does.
 
 For the record, the first Splats measured on the same text, before Detail Fine existed, kept 0 to 3%
 of the lines' letters apart in Photo to 3D and 45 to 62% in Moving photo to 3D.
