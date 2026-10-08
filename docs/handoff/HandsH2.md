@@ -106,10 +106,10 @@ tools/sound-review.json as "ready". Finish every working turn with "READY:", "WO
 
 ## State
 
-READY: Food (draft PR #426) and the engine pieces (draft PR #420, merge first) are done; all 16 Food
-clips are on Effect review page 2 (hh2-…, group Food), at device scale 2 (the Operator's call of
-October 8, 2026). WORKING on Nature (draft PR #431): built and tested, its clips rendering and
-posting under group Nature. (October 8, 2026.)
+READY: both shelves. Food is draft PR #426 and Nature is draft PR #431; the engine pieces both need
+are draft PR #420 (merge it first). All 35 clips are on Effect review page 2 (16 under Food, 19
+under Nature), at device scale 2 (the Operator's call of October 8, 2026). The PRs wait for the
+owner's marks. (October 8, 2026.)
 
 Food, line by line (docs/HANDS-ON-PLAN.md):
 
