@@ -883,6 +883,15 @@ const D6_REST = [
   quatMul(quatAxisAngle([0, 1, 0], 0.4), quatFromTo([0, 0, -1], [0, 1, 0])),
   quatMul(quatAxisAngle([0, 1, 0], -0.3), quatFromTo([1, 0, 0], [0, 1, 0])),
 ];
+// Hands-on: the dice as bodies (lane Hands-on H1). The d20's corners (its
+// inradius is how far its face sits below its middle), the d6's rounded cube.
+const ICO_CORNERS = (() => {
+  const out = [];
+  for (const f of ICO) for (const v of f.tri) if (!out.some((u) => len(sub(u, v)) < 1e-6)) out.push(v); // prettier-ignore
+  return out;
+})();
+const D20_IN = ICO[0].g ? len(ICO[0].g) : 0.795;
+const D6_SOLID = { type: "box", half: [0.5, 0.5, 0.5] };
 const D20_REST = quatMul(
   quatAxisAngle([0, 1, 0], 0.5),
   quatFromTo(ICO.find((f) => f.num === 20).n, [0, 1, 0]),
@@ -1771,6 +1780,21 @@ export const RECIPES = {
     ],
     controls: [{ key: "roll", label: "Roll", type: "pulse", ease: 1.8 }],
     action: { key: "roll", label: "Roll" },
+    // Hands-on (lane Hands-on H1): throw them and they tumble, bounce and
+    // land on a real face: each die is its own piece, a rounded cube or the
+    // icosahedron's twelve corners, with a die's bounce and a clatter.
+    hands: {
+      floor: (d, info) => (info.options?.kind === "d20" ? -D20_IN : -0.5),
+      area: 1.9,
+      pieces: (d, info) =>
+        info.options?.kind === "d20"
+          ? [{ part: "d20", pos: [0, 0, 0], quat: D20_REST, points: ICO_CORNERS, pick: [0.85, 0.85, 0.85], mass: 1, friction: 0.5, restitution: 0.45, damping: 0.05, angDamping: 0.3 }] // prettier-ignore
+          : [
+              [-0.64, 0, 0.18],
+              [0.66, 0, -0.22],
+            ].map((pos, i) => ({ part: i ? "d6b" : "d6a", pos, quat: D6_REST[i], solid: D6_SOLID, points: surfacePoints(D6_SOLID, 3), pick: [0.6, 0.6, 0.6], mass: 1, friction: 0.5, restitution: 0.45, damping: 0.05, angDamping: 0.3 })), // prettier-ignore
+      sound: (hit, vol) => ({ voice: "clack", f: hit.other ? 2200 : 1500, decay: 0.5, vol: Math.min(0.9, vol * 1.2) }), // prettier-ignore
+    },
     drive(t, c, out) {
       // Drives both kinds; only the parts that exist move.
       const m = mem(c);
@@ -2685,6 +2709,9 @@ export const RECIPES = {
 
   "paper-plane": {
     alive: true,
+    // Hands-on (lane Hands-on H1): thrown, it glides nose first, dips and
+    // lands, light as paper.
+    hands: { area: 4, view: 0.5, material: "paper-plane", sound: (hit, vol) => ({ voice: "slap", f: 1200, vol: vol * 0.4 }) }, // prettier-ignore
     density: 0.5,
     options: [
       { key: "color", label: "Paper", type: "color", default: "#cfe6f7" },
