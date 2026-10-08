@@ -19,6 +19,7 @@ import { inked } from "./font.js";
 import { evenBox, evenDisc, evenEllipsoid } from "./packs/even.js";
 import { rigPieces } from "./physics/joints.js"; // lane Hands engine B
 import { DOG_FILL } from "./packs/dog-plush-fill.js"; // lane Fix9
+import { PR3_RIGS, dogMat, dogMatHide } from "./packs/photoreal-r3-rigs.js"; // lane Photoreal r3
 
 const TAU = Math.PI * 2;
 const clamp = (x, a, b) => Math.min(b, Math.max(a, x));
@@ -2055,7 +2056,7 @@ export const RIGS = {
   // toward the mat, as in a crease. The fur covers it everywhere else, so it shows only through those gaps.
   "dog-plush": {
     addon: {
-      count: 24000,
+      count: 54000,
       build(k) {
         const { grid: G, x0, mat } = DOG_FILL;
         const cells = DOG_FILL.cells.split(";").map((c) => {
@@ -2066,7 +2067,7 @@ export const RIGS = {
         const acc = [];
         let total = 0;
         for (const c of cells) acc.push((total += c.h + 0.02));
-        k.cloud({ share: 1, pattern: false }, (rand) => {
+        k.cloud({ share: 24000 / 54000, pattern: false }, (rand) => {
           const r = rand() * total;
           let lo = 0;
           let hi = acc.length - 1;
@@ -2087,14 +2088,16 @@ export const RIGS = {
             color: shade(mix(c.col, "#5a3d26", 0.55 * (1 - up)), 0.72 + 0.28 * up),
           };
         });
+        dogMat(k, 30000); // lane Photoreal r3: the mat closed underneath
       },
     },
-    parts: [],
+    parts: [{ name: "under", pivot: [0, -1, 0], regions: dogMatHide() }],
     // Its tap is the hop every capture without a rig has (src/motion.js, hopAt): the plush
     // bounces and settles with a little squash at each landing.
     controls: [pulse("hop", "Hop", DOG_HOP_SECS)],
     action: { key: "hop", label: "Hop" },
     drive(t, c, out) {
+      out.parts.under = { visible: 0 };
       const e = since(c, "hop", DOG_HOP_SECS);
       const hop = e < 0 ? null : dogHop(e);
       if (hop) out.body = { offset: [0, hop.h * 0.5, 0], squash: hop.squash };
@@ -2232,4 +2235,7 @@ export const RIGS = {
       out.fx.night = { color: 0.8, phase: -1.4 + 2.8 * band(e, 0.1, 2.5) };
     },
   },
+
+  // Lane Photoreal r3: the Photoreal r2 captures (src/packs/photoreal-r3-rigs.js).
+  ...PR3_RIGS,
 };

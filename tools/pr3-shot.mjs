@@ -56,12 +56,18 @@ for (const id of ids) {
       const home = { ...cam.home };
       const s = { ...home };
       if (view === "below") s.pitch = -1.45;
+      if (view === "top") s.pitch = 1.45;
       if (view === "side") s.pitch = 0;
       if (view === "close") s.distance = home.distance * 0.6;
       if (view === "back") s.yaw = home.yaw + Math.PI;
       cam.setState(s, { snap: true });
     }, view);
-    await page.waitForTimeout(700);
+    // Render a few frames so the splats are sorted for the new view (the sort runs a frame or two
+    // behind the camera).
+    for (let i = 0; i < 6; i++) {
+      await page.evaluate(() => window.__splashery.player.stage.requestRender());
+      await page.waitForTimeout(300);
+    }
     await page.screenshot({ path: path.join(outDir, `${id}-${view}.png`) });
   }
   console.log(id);
