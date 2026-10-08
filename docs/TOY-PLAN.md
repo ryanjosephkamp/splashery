@@ -10,8 +10,8 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 450 toys. 450 have a tap action today; the other 0 only hop.
-- **keep** (the effect is right: the owner liked it, or C2 finished it): 428.
+- 460 toys. 460 have a tap action today; the other 0 only hop.
+- **keep** (the effect is right: the owner liked it, or C2 finished it): 438.
 - **more** (has an effect; make it clearer or more dramatic): 0.
 - **new** (needs its own effect): 22.
 - Visual fixes: 0 open, 31 done. Touch or drag interaction asked for: 4.
@@ -30,53 +30,54 @@ Proposals below are suggestions; the owner may change them.
   Crystal, Alum crystal, Puffin, Toy T. rex, Monkey doll, Souvenir elephant, Souvenir turtle, Cave
   lioness, Dog plush, BMX bicycle, Murex shell, Sunflower (photo), White roses, Bonsai tree (photo),
   Mushroom (photo), Cactus (photo 2), Crochet Earth, Desk globe, Cherry blossom (photo), Golden
-  maple, Peonies in a vase, Money tree, Knight on a horse, Real rubber duck, Garden gnome, Wooden
-  elephant, Marble bust, Ukulele, Real alarm clock, Vintage camera, Boombox, Real croissant, Carrot
-  cake, Pomegranate, Lantern, Cat statue, Horse statue, Real pencil, Real tin can, Basketball,
-  Soccer ball, American football, Tennis ball, Baseball, Softball, Beach ball, Golf ball, Rugby
-  ball, Volleyball, Water polo ball, Ping-pong ball, Cricket ball, Bowling ball, Pool ball,
-  Pickleball, Dodgeball, Medicine ball, Lacrosse ball, Squash ball, Bouncy ball, Marble, Hockey
-  puck, Shuttlecock, Flying disc, Beating heart, Treasure chest, Sun, Solar system, Mercury, Venus,
-  Earth, Moon, Mars, Jupiter, Saturn, Uranus, Neptune, Tiny planet, Aurora world, Asteroid, Comet,
-  Meteor, Star, Pulsar, Black hole, Star cluster, Ring nebula, Nebula, Spiral galaxy, The real Moon,
-  The real Mars, The real Earth, The real Mercury, The real Venus, Real moons, Pluto, Ceres and
-  Vesta, Stars near the Sun, Real star systems, Real galaxies, Powers of ten, Saturn V, Space Launch
-  System, Space Shuttle, The solar system on real orbits, Virus, Bacteriophage, Bacterium, Red blood
-  cell, Neuron, Astrocyte, Animal cell, DNA, White blood cell, Microglia, Diatom, Pollen grain,
-  Snowflake, Chromosome, Mitochondrion, Paramecium, Amoeba, DNA to protein, Cell division,
-  Apoptosis, Phagocytosis, Electron orbital, Atom, Molecule, Protein, Crystal lattice, Unit cells,
-  Orbital atlas, Molecule viewer, Periodic table, Real elements, Diamond, Ruby, Emerald, Amethyst
-  geode, Sapphire, Quartz cluster, Opal, Brain, Eye, Lungs, Tooth, Kidney, Anatomy atlas, Oak tree,
-  Pine tree, Palm tree, Cherry blossom, Maple tree, Bonsai, Weeping willow, Sunflower, Rose, Tulips,
-  Daisies, Lotus, Toadstool, Fern, Saguaro cactus, Coral reef, Pinecone, Acorns, Succulent, Bamboo,
-  Pebbles, Kelp, Storm cloud, Lava lamp, Snow globe, Ice swan, Tornado, Rainbow, Iceberg, Waterfall,
-  Ocean wave, Ice cream, Watermelon, Jelly, Pancakes, Cupcake, Lollipop, Candy cane, Macarons,
-  Donut, Gummy bear, Pretzel, Croissant, Pizza, Burger, Sushi, Taco, Coffee, Apple, Bananas, Orange,
-  Kiwi, Pineapple, Cherries, Grapes, Avocado, Building bricks, Rubber duck, Newton's cradle, Yo-yo,
-  Puzzle cube, Spring toy, Kite, Chess set, Lorenz attractor, Möbius strip, Klein bottle, Menger
-  sponge, Hypercube, Torus knot, Gyroid, Mandelbulb, Seashell spiral, Graph plotter, Surface
-  plotter, Circle and waves, Fourier circles, Pythagoras proof, Rössler attractor, Thomas attractor,
-  Aizawa attractor, 5-cell, 16-cell, 24-cell, Duoprism, Splat equation, Storybook, Music box,
-  Fountain pen, Water bottle, Soda can, Running shoe, Hoodie, Sunglasses, Baseball cap, Sword in the
-  stone, Heraldic shield, Bow and target, Crown, Wizard's orb, Crystal ball, Jellyfish, School of
-  fish, Pufferfish, Nautilus, Snail, Octopus, Sea urchin, Frog, Snowman, Fireworks, Decorated tree,
-  Paper lantern, Diya, Acoustic guitar, Snare drum, Xylophone, Toy piano, Grand piano, Upright
-  piano, Harpsichord, Electronic keyboard, Hot-air balloon, Sports car, Bus, Jet airliner, Sailboat,
-  Submarine, Bicycle, Eiffel Tower, Washington Monument, Pyramids of Giza, Twisting supertall,
-  Statue of Liberty, White House, Leaning Tower of Pisa, Colosseum, Parthenon, Stonehenge, Big Ben,
-  Taj Mahal, Castle, Pagoda, Windmill, Perceptron, Multilayer perceptron, Neural network,
-  Convolutional network, Recurrent network, Transformer, Looped transformer, Diffusion model,
-  Gradient descent, Gaussian splatting, Word vectors, Sorting machine, Half adder, Turing machine,
-  Difference engine, Enigma machine, Bombe, Picture lab, Your book, Photo album, Picture frame, Song
-  landscape, Chladni plate, Room echo meter, Splat mirror, Model to splats, QR code, Photo to 3D,
-  Moving photo to 3D, Video to 3D, Sound lab, Sound recorder, Splat toolkit, Point clouds, Splat
-  field, Light lab, Thermal ellipsoids, Super-resolution microscope, Galaxy in a box, Cryo-EM map,
-  Contour lab, Terrain in a box, Ripple tank, Light bench, Fluid lab, Grand Canyon, Mount St.
-  Helens, The sea floor, Tides at Bar Harbor, Hurricane, Relief map, Living city, Stork migration,
-  Earthquakes, Airport X-ray scanner, How CT works, Walnut CT scan, MRI of a fruit, Electron
-  microscope, Thermal camera, Screen, Shardball, Longtail, Grain Garden, Page Breaker, Strata,
-  Volley Table, Stone Belt, Soft Landing, Night Owl Pinball, Cast a Shadow, Photo Dash, Note Rider,
-  Data in 3D.
+  maple, Peonies in a vase, Money tree, Knight on a horse, Triceratops skull, Cone shell, Celestial
+  globe, Armillary sphere, Stannern meteorite, Fluorite, Ammonite, Morasko meteorite, Pyrite,
+  Megalodon tooth, Real rubber duck, Garden gnome, Wooden elephant, Marble bust, Ukulele, Real alarm
+  clock, Vintage camera, Boombox, Real croissant, Carrot cake, Pomegranate, Lantern, Cat statue,
+  Horse statue, Real pencil, Real tin can, Basketball, Soccer ball, American football, Tennis ball,
+  Baseball, Softball, Beach ball, Golf ball, Rugby ball, Volleyball, Water polo ball, Ping-pong
+  ball, Cricket ball, Bowling ball, Pool ball, Pickleball, Dodgeball, Medicine ball, Lacrosse ball,
+  Squash ball, Bouncy ball, Marble, Hockey puck, Shuttlecock, Flying disc, Beating heart, Treasure
+  chest, Sun, Solar system, Mercury, Venus, Earth, Moon, Mars, Jupiter, Saturn, Uranus, Neptune,
+  Tiny planet, Aurora world, Asteroid, Comet, Meteor, Star, Pulsar, Black hole, Star cluster, Ring
+  nebula, Nebula, Spiral galaxy, The real Moon, The real Mars, The real Earth, The real Mercury, The
+  real Venus, Real moons, Pluto, Ceres and Vesta, Stars near the Sun, Real star systems, Real
+  galaxies, Powers of ten, Saturn V, Space Launch System, Space Shuttle, The solar system on real
+  orbits, Virus, Bacteriophage, Bacterium, Red blood cell, Neuron, Astrocyte, Animal cell, DNA,
+  White blood cell, Microglia, Diatom, Pollen grain, Snowflake, Chromosome, Mitochondrion,
+  Paramecium, Amoeba, DNA to protein, Cell division, Apoptosis, Phagocytosis, Electron orbital,
+  Atom, Molecule, Protein, Crystal lattice, Unit cells, Orbital atlas, Molecule viewer, Periodic
+  table, Real elements, Diamond, Ruby, Emerald, Amethyst geode, Sapphire, Quartz cluster, Opal,
+  Brain, Eye, Lungs, Tooth, Kidney, Anatomy atlas, Oak tree, Pine tree, Palm tree, Cherry blossom,
+  Maple tree, Bonsai, Weeping willow, Sunflower, Rose, Tulips, Daisies, Lotus, Toadstool, Fern,
+  Saguaro cactus, Coral reef, Pinecone, Acorns, Succulent, Bamboo, Pebbles, Kelp, Storm cloud, Lava
+  lamp, Snow globe, Ice swan, Tornado, Rainbow, Iceberg, Waterfall, Ocean wave, Ice cream,
+  Watermelon, Jelly, Pancakes, Cupcake, Lollipop, Candy cane, Macarons, Donut, Gummy bear, Pretzel,
+  Croissant, Pizza, Burger, Sushi, Taco, Coffee, Apple, Bananas, Orange, Kiwi, Pineapple, Cherries,
+  Grapes, Avocado, Building bricks, Rubber duck, Newton's cradle, Yo-yo, Puzzle cube, Spring toy,
+  Kite, Chess set, Lorenz attractor, Möbius strip, Klein bottle, Menger sponge, Hypercube, Torus
+  knot, Gyroid, Mandelbulb, Seashell spiral, Graph plotter, Surface plotter, Circle and waves,
+  Fourier circles, Pythagoras proof, Rössler attractor, Thomas attractor, Aizawa attractor, 5-cell,
+  16-cell, 24-cell, Duoprism, Splat equation, Storybook, Music box, Fountain pen, Water bottle, Soda
+  can, Running shoe, Hoodie, Sunglasses, Baseball cap, Sword in the stone, Heraldic shield, Bow and
+  target, Crown, Wizard's orb, Crystal ball, Jellyfish, School of fish, Pufferfish, Nautilus, Snail,
+  Octopus, Sea urchin, Frog, Snowman, Fireworks, Decorated tree, Paper lantern, Diya, Acoustic
+  guitar, Snare drum, Xylophone, Toy piano, Grand piano, Upright piano, Harpsichord, Electronic
+  keyboard, Hot-air balloon, Sports car, Bus, Jet airliner, Sailboat, Submarine, Bicycle, Eiffel
+  Tower, Washington Monument, Pyramids of Giza, Twisting supertall, Statue of Liberty, White House,
+  Leaning Tower of Pisa, Colosseum, Parthenon, Stonehenge, Big Ben, Taj Mahal, Castle, Pagoda,
+  Windmill, Perceptron, Multilayer perceptron, Neural network, Convolutional network, Recurrent
+  network, Transformer, Looped transformer, Diffusion model, Gradient descent, Gaussian splatting,
+  Word vectors, Sorting machine, Half adder, Turing machine, Difference engine, Enigma machine,
+  Bombe, Picture lab, Your book, Photo album, Picture frame, Song landscape, Chladni plate, Room
+  echo meter, Splat mirror, Model to splats, QR code, Photo to 3D, Moving photo to 3D, Video to 3D,
+  Sound lab, Sound recorder, Splat toolkit, Point clouds, Splat field, Light lab, Thermal
+  ellipsoids, Super-resolution microscope, Galaxy in a box, Cryo-EM map, Contour lab, Terrain in a
+  box, Ripple tank, Light bench, Fluid lab, Grand Canyon, Mount St. Helens, The sea floor, Tides at
+  Bar Harbor, Hurricane, Relief map, Living city, Stork migration, Earthquakes, Airport X-ray
+  scanner, How CT works, Walnut CT scan, MRI of a fruit, Electron microscope, Thermal camera,
+  Screen, Shardball, Longtail, Grain Garden, Page Breaker, Strata, Volley Table, Stone Belt, Soft
+  Landing, Night Owl Pinball, Cast a Shadow, Photo Dash, Note Rider, Data in 3D.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
@@ -90,7 +91,7 @@ Proposals below are suggestions; the owner may change them.
   Terrain in a box, Data in 3D, Climate records
 - **F, touch and drag interaction.** Gummy bear, Building bricks, Newton's cradle, Puzzle cube.
 
-## Scans (62)
+## Scans (72)
 
 - **Cactus** (`cactus`). Now: tap: Bloom (rig). Plan: keep.
   - Owner: No special effect. Looks fine.
@@ -416,6 +417,71 @@ Proposals below are suggestions; the owner may change them.
   - Improved: Photoreal r3 (October 8, 2026): The figure rocks back on its base as the horse rears,
     then lands; a kit-built pewter underside.
   - Sound: A short sound that suits the object.
+- **Triceratops skull** (`triceratops-skull`). Now: tap: Look (rig). Plan: keep.
+  - Owner: New in Photoreal r3 (October 8, 2026), behind the labs switch until the owner marks it
+    good.
+  - Effect: The skull turns to look at you, then the other way.
+  - Improved: Photoreal r3 (October 8, 2026): The skull turns to look at you, then the other way.
+  - Sound: A short, quiet sound that suits the object.
+- **Cone shell** (`cone-shell`). Now: tap: Turn (rig). Plan: keep.
+  - Owner: New in Photoreal r3 (October 8, 2026), behind the labs switch until the owner marks it
+    good.
+  - Effect: Turns once round on its point.
+  - Improved: Photoreal r3 (October 8, 2026): Turns once round on its point.
+  - Sound: A short, quiet sound that suits the object.
+- **Celestial globe** (`celestial-globe`). Now: tap: Spin the globe. Plan: keep.
+  - Owner: New in Photoreal r3 (October 8, 2026), behind the labs switch until the owner marks it
+    good.
+  - Effect: The ball turns in its rings (its own piece of the model).
+  - Improved: Photoreal r3 (October 8, 2026): The ball turns in its rings (its own piece of the
+    model).
+  - Sound: A short, quiet sound that suits the object.
+- **Armillary sphere** (`armillary-sphere`). Now: tap: Turn the rings. Plan: keep.
+  - Owner: New in Photoreal r3 (October 8, 2026), behind the labs switch until the owner marks it
+    good.
+  - Effect: The inner rings turn inside the frame (their own pieces of the model).
+  - Improved: Photoreal r3 (October 8, 2026): The inner rings turn inside the frame (their own
+    pieces of the model).
+  - Sound: A short, quiet sound that suits the object.
+- **Stannern meteorite** (`stannern-meteorites`). Now: tap: Let them fall. Plan: keep.
+  - Owner: New in Photoreal r3 (October 8, 2026), behind the labs switch until the owner marks it
+    good.
+  - Effect: The five stones are lifted and fall one after another, tumbling a little, and land.
+  - Improved: Photoreal r3 (October 8, 2026): The five stones are lifted and fall one after another,
+    tumbling a little, and land.
+  - Sound: A short, quiet sound that suits the object.
+- **Fluorite** (`fluorite-crystal`). Now: tap: Ultraviolet lamp. Plan: keep.
+  - Owner: New in Photoreal r3 (October 8, 2026), behind the labs switch until the owner marks it
+    good.
+  - Effect: An ultraviolet lamp comes on: the stone glows blue-violet as it turns, then the lamp
+    goes off.
+  - Improved: Photoreal r3 (October 8, 2026): An ultraviolet lamp comes on: the stone glows
+    blue-violet as it turns, then the lamp goes off.
+  - Sound: A short, quiet sound that suits the object.
+- **Ammonite** (`ammonite-agate`). Now: tap: Turn it over. Plan: keep.
+  - Owner: New in Photoreal r3 (October 8, 2026), behind the labs switch until the owner marks it
+    good.
+  - Effect: Turns over to show its other face, and back.
+  - Improved: Photoreal r3 (October 8, 2026): Turns over to show its other face, and back.
+  - Sound: A short, quiet sound that suits the object.
+- **Morasko meteorite** (`morasko-meteorite`). Now: tap: Turn it. Plan: keep.
+  - Owner: New in Photoreal r3 (October 8, 2026), behind the labs switch until the owner marks it
+    good.
+  - Effect: Turns once round, the light running over its pits.
+  - Improved: Photoreal r3 (October 8, 2026): Turns once round, the light running over its pits.
+  - Sound: A short, quiet sound that suits the object.
+- **Pyrite** (`pyrite-cubes`). Now: tap: Turn it. Plan: keep.
+  - Owner: New in Photoreal r3 (October 8, 2026), behind the labs switch until the owner marks it
+    good.
+  - Effect: Turns once round.
+  - Improved: Photoreal r3 (October 8, 2026): Turns once round.
+  - Sound: A short, quiet sound that suits the object.
+- **Megalodon tooth** (`megalodon-tooth`). Now: tap: Turn it over. Plan: keep.
+  - Owner: New in Photoreal r3 (October 8, 2026), behind the labs switch until the owner marks it
+    good.
+  - Effect: Turns over to show its other side, and back.
+  - Improved: Photoreal r3 (October 8, 2026): Turns over to show its other side, and back.
+  - Sound: A short, quiet sound that suits the object.
 - **Real rubber duck** (`rubber-duck-real`). Now: tap: Squeeze (rig). Plan: keep.
   - Owner: Squeeze and quack. It must differ from the other rubber duck.
   - Effect: Squeezes flat and springs back.

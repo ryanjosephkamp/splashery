@@ -21,6 +21,57 @@
 // the toy's recipe and against a real source for every fact.
 
 export const TOY_HELP = {
+  // ---- Photoreal r3 (lane Photoreal r3) ----
+  "triceratops-skull": {
+    howTo: "Tap it to make it look at you; drag to turn it.",
+    about:
+      "A real Triceratops skull from a museum's dinosaur hall, captured from photos and drawn with splats. Triceratops lived about 68 to 66 million years ago, at the very end of the age of dinosaurs. It ate plants, and its three horns and the great bony frill behind its head may have been for defense, for showing off to rivals, or both.\n\nTap it and the skull turns to look at you, then the other way. Drag to circle it and look at the horns, the beak and the frill's scalloped edge.",
+  },
+  "cone-shell": {
+    howTo: "Tap it to turn it round; drag to turn it yourself.",
+    about:
+      "The shell of a textile cone snail, captured from photos and drawn with splats. Cone snails live on tropical reefs and hunt with a tiny harpoon that carries venom; the netted pattern of gold and brown tents grows at the shell's lip, line by line.\n\nTap it and it turns once round on its point. Drag to circle it and follow the pattern.",
+  },
+  "celestial-globe": {
+    howTo: "Tap it to spin the globe; drag to turn it.",
+    about:
+      "A celestial globe from a university museum in Kraków, scanned and drawn with splats. It is a map of the sky, not of the Earth: the stars and the figures of the constellations are painted on a ball, as if you saw the sky from outside. The flat ring round it is the horizon; the brass ring over it is the meridian.\n\nTap it and the ball turns in its rings, as the sky seems to turn overhead each night.",
+  },
+  "armillary-sphere": {
+    howTo: "Tap it to turn the inner rings; drag to turn it.",
+    about:
+      "An armillary sphere made by Franciszek Słupski in 1771, scanned and drawn with splats. Its rings stand for the great circles of the sky: the equator, the tropics, the band the Sun follows through the year, round a small Earth at the middle. Astronomers used such spheres to teach how the sky moves.\n\nTap it and the inner rings turn inside the frame.",
+  },
+  "stannern-meteorites": {
+    howTo: "Tap it to let the stones fall; drag to turn them.",
+    about:
+      "Five stones of the Stannern meteorite, scanned at the Natural History Museum Vienna and drawn with splats. On May 22, 1808, a shower of about two hundred to three hundred stones fell near the town of Stannern (Stonařov) in Moravia. Their thin black crust formed as they burned through the air; inside they are pale rock from the asteroid Vesta.\n\nTap it and the stones are lifted and fall one after another.",
+  },
+  "fluorite-crystal": {
+    howTo: "Tap it to switch on the ultraviolet lamp; drag to turn it.",
+    about:
+      "A specimen of fluorite, scanned and drawn with splats. Fluorite is calcium fluoride and grows in cubes. Under ultraviolet light many fluorite crystals glow blue-violet: the word fluorescence comes from this mineral.\n\nTap it and the lamp comes on: the stone turns slowly in its glow, then the lamp goes off.",
+  },
+  "ammonite-agate": {
+    howTo: "Tap it to turn it over; drag to turn it yourself.",
+    about:
+      "An ammonite, cut in half and polished, scanned and drawn with splats. Ammonites were sea animals with coiled shells divided into chambers, relatives of today's nautilus and squid; they died out with the dinosaurs. In this one the empty chambers filled with quartz and chalcedony over millions of years.\n\nTap it and it turns over to show its other face, then back.",
+  },
+  "morasko-meteorite": {
+    howTo: "Tap it to turn it; drag to turn it yourself.",
+    about:
+      "An iron meteorite from Morasko, near Poznań in Poland, scanned and drawn with splats. Iron meteorites come from the metal cores of broken asteroids. The Morasko irons fell about five thousand years ago, leaving small craters that can still be seen.\n\nTap it and it turns once round, so the light runs over its pitted surface.",
+  },
+  "pyrite-cubes": {
+    howTo: "Tap it to turn it; drag to turn it yourself.",
+    about:
+      "A specimen of pyrite, scanned and drawn with splats. Pyrite is iron sulfide; its brassy shine fooled many prospectors, so it is called fool's gold. Its crystals often grow as little cubes.\n\nTap it and it turns once round.",
+  },
+  "megalodon-tooth": {
+    howTo: "Tap it to turn it over; drag to turn it yourself.",
+    about:
+      "A fossil tooth of the giant shark megalodon (Otodus megalodon), scanned and drawn with splats. Megalodon lived from about 23 to 3.6 million years ago and may have grown to fifteen meters or more. Sharks shed their teeth all their lives, so fossil teeth are much more common than any other part of them.\n\nTap it and it turns over to show its other side, then back.",
+  },
   // ---- Photoreal r2 (lane Photoreal r2) ----
   "heart-donut": {
     howTo: "Tap it to toss it: it flips over once and lands; drag to turn it.",

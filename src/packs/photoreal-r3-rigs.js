@@ -771,6 +771,9 @@ const BASES = {
   "turtle-souvenir": based({}),
   "murex-shell": based({}),
   "cave-lioness": based({}),
+  // Lane Photoreal r3's own captures (src/packs/photoreal-r3.js).
+  "triceratops-skull": based({}),
+  "cone-shell": based({}),
 };
 
 // ---- Effects --------------------------------------------------------------------------------
@@ -876,6 +879,11 @@ const PHYSALIS = [
 // The desk globe's ball (fitted to its splats), and its axis toward the top pivot.
 const GLOBE = [-0.138, 0.281, 0.051];
 const GLOBE_AXIS = [0.198, 0.979, 0.039];
+// New in Photoreal r3: the Triceratops skull turns its head to look at you; the cone shell turns
+// once round on its point.
+EFFECTS["triceratops-skull"] = { label: "Look", secs: 2.7, motion: M.look({ pivot: [0.2, -0.3, 0], amp: 0.45, nod: 0.05 }) }; // prettier-ignore
+EFFECTS["cone-shell"] = { label: "Turn", secs: 3, motion: M.spin({ center: [0, 0, 0], turns: 1, secs: 2.8 }) }; // prettier-ignore
+
 const PART_EFFECTS = {
   // The desk globe spins in its stand: the ball's splats (not the dark meridian ring or stand)
   // turn about the globe's axis, fast at first and slowing.

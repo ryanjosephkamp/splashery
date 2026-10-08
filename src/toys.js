@@ -12,6 +12,7 @@
 
 // Shelf categories, in shelf order. A category only shows once it has toys.
 import { PHOTOREAL_R2_TOYS } from "./packs/photoreal-r2.js";
+import { PHOTOREAL_R3_TOYS } from "./packs/photoreal-r3.js"; // lane Photoreal r3
 
 export const CATEGORIES = [
   { id: "scans", label: "Photoreal" },
@@ -365,6 +366,7 @@ export const TOYS = [
   },
   // ---- Photoreal r2: more captures from SuperSplat (labs) ----
   ...PHOTOREAL_R2_TOYS,
+  ...PHOTOREAL_R3_TOYS,
 
   // ---- Photoreal models (CC0 3D models turned into splats) ----
   {

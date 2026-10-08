@@ -701,6 +701,36 @@
       "splats": 233318,
       "lite": 233318,
       "sh": 1
+    },
+    {
+      "id": "triceratops-skull",
+      "label": "Triceratops skull",
+      "pack": "pr3",
+      "source": "https://d28zzqy0iyovbz.cloudfront.net/811dd9ed/v1/meta.json",
+      "sourceNote": "The SOG the public SuperSplat viewer streams for https://superspl.at/scene/811dd9ed (downloads enabled, CC BY 4.0, by Luke Shea). Checked on its live page October 8, 2026. A museum skull (Burke Museum).",
+      "license": "CC BY 4.0",
+      "author": "Luke Shea",
+      "rotate": [180, 0, 0],
+      "sh": 1,
+      "local": ".cache/pr3/dl/splat/811dd9ed/meta.json",
+      "splats": 544000,
+      "lite": 300000,
+      "crop": [-1.35, -0.84, -1.35, 1.35, 1.35, 1.35]
+    },
+    {
+      "id": "cone-shell",
+      "label": "Cone shell",
+      "pack": "pr3",
+      "source": "https://d28zzqy0iyovbz.cloudfront.net/410c2b24/v1/meta.json",
+      "sourceNote": "The SOG the public SuperSplat viewer streams for https://superspl.at/scene/410c2b24 (downloads enabled, CC BY 4.0, by Alfred Duemlein). Checked on its live page October 8, 2026.",
+      "license": "CC BY 4.0",
+      "author": "Alfred Duemlein",
+      "rotate": [180, 0, 0],
+      "sh": 1,
+      "local": ".cache/pr3/dl/splat/410c2b24/meta.json",
+      "splats": 461100,
+      "lite": 300000,
+      "crop": [-1.35, -0.84, -1.35, 1.35, 0.9, 1.35]
     }
   ],
   "modelSamples": [

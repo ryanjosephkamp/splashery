@@ -105,6 +105,35 @@ export const TOY_SOUNDS = {
     { voice: "bell", at: 0.25, f: 1500, decay: 0.7, vol: 0.5 },
   ],
 
+  // ---- Photoreal r3 (lane Photoreal r3): the new scientific captures ----
+  // A low, soft knock of bone on its stand as the skull turns to look.
+  "triceratops-skull": { voice: "thud", at: 0.05, f: 75, bright: 0.15, decay: 0.5, vol: 0.4 },
+  // A soft porcelain tick as the shell turns on its point.
+  "cone-shell": { voice: "glass", f: 1900, decay: 0.3, vol: 0.35 },
+  // A gentle wooden creak as the globe is set turning in its rings.
+  "celestial-globe": { voice: "hollow", f: 200, decay: 0.7, vol: 0.4 },
+  // A quiet brass ring as the inner rings turn.
+  "armillary-sphere": { voice: "tine", f: 880, decay: 0.8, vol: 0.3 },
+  // Five soft stony thuds as the stones land one after another.
+  "stannern-meteorites": { voice: "stone", at: 0.68, notes: "C3 C3 C3 C3 C3", step: 0.38, f: 220, bright: 0.2, decay: 0.7, vol: 0.45 }, // prettier-ignore
+  // A low, soft hum while the lamp is on.
+  "fluorite-crystal": {
+    voice: "glow",
+    at: 0.15,
+    notes: "A3+E4",
+    decay: 1.6,
+    bright: 0.15,
+    vol: 0.25,
+  },
+  // A stone-on-wood knock as the fossil is laid down on its other face.
+  "ammonite-agate": { voice: "wood", at: 1.05, f: 260, decay: 0.5, vol: 0.45 },
+  // A deep, quiet ring of iron.
+  "morasko-meteorite": { voice: "metal", f: 110, bright: 0.2, decay: 0.8, vol: 0.3 },
+  // A small, bright clink.
+  "pyrite-cubes": { voice: "glass", f: 2400, decay: 0.3, vol: 0.3 },
+  // A dull stone tap as the tooth is laid down on its other side.
+  "megalodon-tooth": { voice: "stone", at: 1.05, f: 320, bright: 0.2, decay: 0.7, vol: 0.4 },
+
   // ---- Scans ------------------------------------------------------------------------
   cactus: [
     { voice: "pluck", notes: "E5 G5 B5 D6", step: 0.09, at: 0.15, decay: 0.35, bright: 0.3 },

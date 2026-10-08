@@ -3013,6 +3013,76 @@
       "effect": "Every hydrogen orbital of n = 1 to 5 (s, p, d, f, g) and 6s, 6p, 6d, 7s, 7p (68), grouped by shell, drawn like the Electron orbital toy's newer orbitals: a boundary surface holding 90% of the electron and a cloud sampled from |ψ|², in the two phase colors. The orbital is turned so its densest vertical plane faces the viewer; the tap cuts it there, the front half lifts up and away, and the back half's cut face shows |ψ|² in that plane, dark at the nodes; then it closes.",
       "sound": "A soft, low whoosh as it is cut and opens, and a quiet low ding as the cut face shows.",
       "improved": "Lattices and orbitals: src/lattice/orbitals.js computes normalized R_nl and real Y_lm for any n, l, m; tests check them against the analytic forms. Evidence in docs/evidence/orbital-atlas.json."
+    },
+    "triceratops-skull": {
+      "v": "keep",
+      "owner": "New in Photoreal r3 (October 8, 2026), behind the labs switch until the owner marks it good.",
+      "effect": "The skull turns to look at you, then the other way.",
+      "sound": "A short, quiet sound that suits the object.",
+      "improved": "Photoreal r3 (October 8, 2026): The skull turns to look at you, then the other way."
+    },
+    "cone-shell": {
+      "v": "keep",
+      "owner": "New in Photoreal r3 (October 8, 2026), behind the labs switch until the owner marks it good.",
+      "effect": "Turns once round on its point.",
+      "sound": "A short, quiet sound that suits the object.",
+      "improved": "Photoreal r3 (October 8, 2026): Turns once round on its point."
+    },
+    "celestial-globe": {
+      "v": "keep",
+      "owner": "New in Photoreal r3 (October 8, 2026), behind the labs switch until the owner marks it good.",
+      "effect": "The ball turns in its rings (its own piece of the model).",
+      "sound": "A short, quiet sound that suits the object.",
+      "improved": "Photoreal r3 (October 8, 2026): The ball turns in its rings (its own piece of the model)."
+    },
+    "armillary-sphere": {
+      "v": "keep",
+      "owner": "New in Photoreal r3 (October 8, 2026), behind the labs switch until the owner marks it good.",
+      "effect": "The inner rings turn inside the frame (their own pieces of the model).",
+      "sound": "A short, quiet sound that suits the object.",
+      "improved": "Photoreal r3 (October 8, 2026): The inner rings turn inside the frame (their own pieces of the model)."
+    },
+    "stannern-meteorites": {
+      "v": "keep",
+      "owner": "New in Photoreal r3 (October 8, 2026), behind the labs switch until the owner marks it good.",
+      "effect": "The five stones are lifted and fall one after another, tumbling a little, and land.",
+      "sound": "A short, quiet sound that suits the object.",
+      "improved": "Photoreal r3 (October 8, 2026): The five stones are lifted and fall one after another, tumbling a little, and land."
+    },
+    "fluorite-crystal": {
+      "v": "keep",
+      "owner": "New in Photoreal r3 (October 8, 2026), behind the labs switch until the owner marks it good.",
+      "effect": "An ultraviolet lamp comes on: the stone glows blue-violet as it turns, then the lamp goes off.",
+      "sound": "A short, quiet sound that suits the object.",
+      "improved": "Photoreal r3 (October 8, 2026): An ultraviolet lamp comes on: the stone glows blue-violet as it turns, then the lamp goes off."
+    },
+    "ammonite-agate": {
+      "v": "keep",
+      "owner": "New in Photoreal r3 (October 8, 2026), behind the labs switch until the owner marks it good.",
+      "effect": "Turns over to show its other face, and back.",
+      "sound": "A short, quiet sound that suits the object.",
+      "improved": "Photoreal r3 (October 8, 2026): Turns over to show its other face, and back."
+    },
+    "morasko-meteorite": {
+      "v": "keep",
+      "owner": "New in Photoreal r3 (October 8, 2026), behind the labs switch until the owner marks it good.",
+      "effect": "Turns once round, the light running over its pits.",
+      "sound": "A short, quiet sound that suits the object.",
+      "improved": "Photoreal r3 (October 8, 2026): Turns once round, the light running over its pits."
+    },
+    "pyrite-cubes": {
+      "v": "keep",
+      "owner": "New in Photoreal r3 (October 8, 2026), behind the labs switch until the owner marks it good.",
+      "effect": "Turns once round.",
+      "sound": "A short, quiet sound that suits the object.",
+      "improved": "Photoreal r3 (October 8, 2026): Turns once round."
+    },
+    "megalodon-tooth": {
+      "v": "keep",
+      "owner": "New in Photoreal r3 (October 8, 2026), behind the labs switch until the owner marks it good.",
+      "effect": "Turns over to show its other side, and back.",
+      "sound": "A short, quiet sound that suits the object.",
+      "improved": "Photoreal r3 (October 8, 2026): Turns over to show its other side, and back."
     }
   }
 }
