@@ -6,6 +6,7 @@
 import { test, expect } from "@playwright/test";
 import { LONG_AREAS, CLIP_AREAS } from "../src/packs/moving-photo.js";
 import { RECIPES as P3D } from "../src/packs/photo-3d.js";
+import { reliefScale, FLAT_KEEP } from "../src/packs/photo-3d-core.js";
 
 const APP = "/?renderer=webgl2&adapt=off&profile=low&labs=1";
 const mp = "/src/packs/moving-photo.js";
@@ -43,6 +44,15 @@ test("both toys offer Detail, Sharp by default, so old scenes and links open sha
   expect(detail.choices.map((c) => c.id)).toEqual(["photo", "splats"]);
   expect(P3D["photo-3d"].photo.on({})).toBe(true);
   expect(P3D["photo-3d"].photo.on({ detail: "splats" })).toBe(false);
+});
+
+test("a flat picture keeps a gentle bend of its relief, a real scene all of it", () => {
+  // The model's depth on our text page spans 0.21 to 0.23 of its nearest; real scenes 0.51 to 1.
+  expect(reliefScale(2.37, 3.09)).toBe(FLAT_KEEP);
+  expect(reliefScale(0.98, 2.02)).toBe(1); // Sintel
+  expect(reliefScale(0, 6.73)).toBe(1); // the street
+  const mid = reliefScale(0.65, 1); // a span of 0.35: halfway
+  expect(mid).toBeCloseTo(FLAT_KEEP + (1 - FLAT_KEEP) / 2, 6);
 });
 
 test("a long video's picture is as fine as the tier's splat grid, and never smaller than a short clip's", async () => {

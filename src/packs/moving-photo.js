@@ -38,7 +38,7 @@
 // the splats sort the way they show (the mirror's flashing, fixed in r3).
 
 import { songTransport } from "./song-record.js";
-import { FILL } from "./photo-3d-core.js";
+import { FILL, reliefScale } from "./photo-3d-core.js";
 
 export const MAX_SECONDS = 8;
 export const CLIP_FPS = { low: 12, mid: 15, high: 24, max: 24 };
@@ -166,7 +166,7 @@ const modelSize = (w, h, side = DEPTH_SIDE) => {
 // A frame's depth as 0 (far) .. 1 (near) at the clip's size: the model's
 // output scaled by its 2nd and 98th percentiles, those eased across
 // neighboring frames so the depth doesn't pump from frame to frame.
-export function normalizeDepths(raw, w, h) {
+export function normalizeDepths(raw, w, h, keepFlat = false) {
   const ranges = raw.map((d) => {
     const s = Float32Array.from(d.d).sort();
     return [s[Math.floor(s.length * 0.02)], s[Math.floor(s.length * 0.98)]];
@@ -183,6 +183,7 @@ export function normalizeDepths(raw, w, h) {
     lo /= n;
     hi /= n;
     const span = Math.max(1e-6, hi - lo);
+    const f = keepFlat ? reliefScale(lo, hi) : 1; // lane Photo fidelity: a flat picture stays flat
     const out = new Float32Array(w * h);
     for (let y = 0; y < h; y++)
       for (let x = 0; x < w; x++) {
@@ -199,7 +200,7 @@ export function normalizeDepths(raw, w, h) {
         const top = d.d[y0 * d.w + x0] * (1 - ax) + d.d[y0 * d.w + x1] * ax;
         const bot = d.d[y1 * d.w + x0] * (1 - ax) + d.d[y1 * d.w + x1] * ax;
         const v = top * (1 - ay) + bot * ay;
-        out[y * w + x] = Math.max(0, Math.min(1, (v - lo) / span));
+        out[y * w + x] = 0.5 + (Math.max(0, Math.min(1, (v - lo) / span)) - 0.5) * f;
       }
     return out;
   });
@@ -385,7 +386,7 @@ export async function openClip(file, name, onStatus) {
   // full size is what the splats show (photoSource); the frames above are the depth's and the
   // plain splats' colors.
   const copy = isGif ? null : await keepCopy(file);
-  return { ...makeClip(name, w, h, frames, normalizeDepths(raw, w, h)), audio, source, ...copy };
+  return { ...makeClip(name, w, h, frames, normalizeDepths(raw, w, h, true)), audio, source, ...copy }; // prettier-ignore
 }
 
 // A video's first MAX_SECONDS, at clipFps() frames a second, each drawn
@@ -740,13 +741,14 @@ function depthBytes(D, m) {
   D.lo = D.lo === null ? lo : D.lo + (lo - D.lo) * 0.3;
   D.hi = D.hi === null ? hi : D.hi + (hi - D.hi) * 0.3;
   const span = Math.max(1e-6, D.hi - D.lo);
+  const f = reliefScale(D.lo, D.hi); // lane Photo fidelity: a flat picture stays flat
   // (The model's own size can differ a little from what was asked.)
   const out = new Float32Array(D.ms.w * D.ms.h);
   for (let y = 0; y < D.ms.h; y++)
     for (let x = 0; x < D.ms.w; x++) {
       const sx = Math.min(m.w - 1, Math.floor(((x + 0.5) / D.ms.w) * m.w));
       const sy = Math.min(m.h - 1, Math.floor(((y + 0.5) / D.ms.h) * m.h));
-      out[y * D.ms.w + x] = Math.max(0, Math.min(1, (m.d[sy * m.w + sx] - D.lo) / span));
+      out[y * D.ms.w + x] = 0.5 + (Math.max(0, Math.min(1, (m.d[sy * m.w + sx] - D.lo) / span)) - 0.5) * f; // prettier-ignore
     }
   const e = sharpenEdges(out, D.ms.w, D.ms.h);
   const b = new Uint8Array(e.length);

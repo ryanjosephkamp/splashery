@@ -464,7 +464,7 @@ const PHOTO_3D = {
     const key = `${src.uid}/${budget}/${o.depth}`;
     let s = P3D.cache.get(key);
     if (!s) {
-      s = buildPhotoSplats(src.photo, src.depth, { count: budget, depth: o.depth ?? 0.5 });
+      s = buildPhotoSplats(src.photo, src.depth, { count: budget, depth: o.depth ?? 0.5, keepFlat: src === P3D.custom }); // prettier-ignore
       P3D.cache.clear();
       P3D.cache.set(key, s);
     }
