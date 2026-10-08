@@ -55,32 +55,32 @@ and replace the general wording there where they are more specific.
 **Sounds.** His rule for all of them: if a toy just bounces, give it a subtle bounce sound; no wind,
 stretching, twinkle or clicking layers, and nothing loud or overwhelming.
 
-| Toy                                         | Sound                                                                                                                    |
-| ------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
-| Heart donut, souvenir turtle                | Fine as they are.                                                                                                        |
-| Knight on a horse                           | "Basically perfect": keep it.                                                                                            |
-| Sushi boat                                  | Keep the first sound; remove the second little beat.                                                                     |
-| Seated bread loaf                           | It sounds like a zipper: something very subtle instead.                                                                  |
-| Cowboy steak                                | Not the right sound; something fitting and not overwhelming.                                                             |
-| Stollen                                     | Replace it completely: realistic and quiet.                                                                              |
-| Orange                                      | Too loud and the wrong sound: pick a different one.                                                                      |
-| Physalis                                    | Subtler and different; no twinkle, no stretching.                                                                        |
-| Crystal                                     | Far too loud; a new, gentle sound.                                                                                       |
-| Alum crystal                                | Better, but remove the ding.                                                                                             |
-| Puffin                                      | Use a real puffin's call (a CC0 or CC BY recording, credited).                                                           |
-| Toy T-Rex, souvenir elephant                | They sound like wind: a subtle bounce sound instead.                                                                     |
-| Monkey doll                                 | Keep the first sound; remove the clicking; a little bounce.                                                              |
-| Cave lioness                                | Wind and far too loud: replace it, and a better animation if one can move cleanly.                                       |
-| Dog plush                                   | Sounds like a rubber band: replace it.                                                                                   |
-| BMX bicycle                                 | Nudged, it leans over on its kickstand and rocks back up (rolling on turning wheels left faint ghost wheels: see Notes). |
-| Murex shell                                 | Remove the clicking; keep the ding, more subtle.                                                                         |
-| Sunflower, golden maple, money tree, bonsai | Remove the stretching and the wind.                                                                                      |
-| White roses, mushroom                       | No stretching or clicking; a subtler ding is fine.                                                                       |
-| Cactus photo 2                              | No clicking; softer notes, like the first cactus.                                                                        |
-| Crochet Earth                               | No twinkle; the bounce should match the sound it makes when picked up and dropped.                                       |
-| Desk globe                                  | Spin it, with no wind or suction sound.                                                                                  |
-| Cherry blossom                              | The bounce is fine; no twinkle.                                                                                          |
-| Peonies in a vase                           | No stretching or wind; the vase's sound softer.                                                                          |
+| Toy                                         | Sound                                                                              |
+| ------------------------------------------- | ---------------------------------------------------------------------------------- |
+| Heart donut, souvenir turtle                | Fine as they are.                                                                  |
+| Knight on a horse                           | "Basically perfect": keep it.                                                      |
+| Sushi boat                                  | Keep the first sound; remove the second little beat.                               |
+| Seated bread loaf                           | It sounds like a zipper: something very subtle instead.                            |
+| Cowboy steak                                | Not the right sound; something fitting and not overwhelming.                       |
+| Stollen                                     | Replace it completely: realistic and quiet.                                        |
+| Orange                                      | Too loud and the wrong sound: pick a different one.                                |
+| Physalis                                    | Subtler and different; no twinkle, no stretching.                                  |
+| Crystal                                     | Far too loud; a new, gentle sound.                                                 |
+| Alum crystal                                | Better, but remove the ding.                                                       |
+| Puffin                                      | Use a real puffin's call (a CC0 or CC BY recording, credited).                     |
+| Toy T-Rex, souvenir elephant                | They sound like wind: a subtle bounce sound instead.                               |
+| Monkey doll                                 | Keep the first sound; remove the clicking; a little bounce.                        |
+| Cave lioness                                | Wind and far too loud: replace it, and a better animation if one can move cleanly. |
+| Dog plush                                   | Sounds like a rubber band: replace it.                                             |
+| BMX bicycle                                 | Remove the bell; a softer opening sound.                                           |
+| Murex shell                                 | Remove the clicking; keep the ding, more subtle.                                   |
+| Sunflower, golden maple, money tree, bonsai | Remove the stretching and the wind.                                                |
+| White roses, mushroom                       | No stretching or clicking; a subtler ding is fine.                                 |
+| Cactus photo 2                              | No clicking; softer notes, like the first cactus.                                  |
+| Crochet Earth                               | No twinkle; the bounce should match the sound it makes when picked up and dropped. |
+| Desk globe                                  | Spin it, with no wind or suction sound.                                            |
+| Cherry blossom                              | The bounce is fine; no twinkle.                                                    |
+| Peonies in a vase                           | No stretching or wind; the vase's sound softer.                                    |
 
 **Bases**, from below (item 1 above), his verdicts:
 
@@ -120,7 +120,41 @@ this file.
 - You run in Claude Code on the owner's Mac, signed in to his second Claude account. Follow
   docs/OPERATING.md, "Local lanes", exactly: your own port (4181), the local test set, messages as
   comments on your PR that start "From the Operator", the "READY:", "WORKING:" or "BLOCKED:" line at
-  the top of "### Brief, October 8, 2026 (cloud)
+  the top of "## State", and clips on page 2 or on `claude/clips-PhotorealR3`.
+- The Operator (a cloud session) runs the lanes; the owner, Ryan, talks only to the Operator and is
+  often away from the Mac. Never ask him anything in the terminal or wait for him: put questions in
+  "State", move on to the next item, and keep going.
+- Model: Opus 5.5 only, at the default effort. If `/model` shows another model, stop and say so in
+  "State". At most one helper at a time, same model.
+- Merging: the Operator merges. Never merge anything. An engine change is its own small, additive
+  "Engine: …" PR on `claude/lane-photoreal-r3-engine`, merged first; toys not using it behave
+  exactly as before.
+- Every new toy is behind the labs switch (`labs: true`). Old `#s=` links and saved scenes keep
+  loading.
+- Every effect follows the effect quality rules in CLAUDE.md (real motion of solid pieces, separate
+  things moving separately, break-apart into real pieces that come back), judged as phone-size
+  clips, and works with the toy upright, on its side and upside down.
+- Licenses, for every asset and dataset (CLAUDE.md, "Ground rules"): read the license on the live
+  source page; record it in CREDITS.md, `tools/assets.json` (or `tools/models.json`) and the toy's
+  in-app credit; `"nc": true` on NC assets; never ND, unlicensed, personal-use or paid. A license
+  not on that list (ODbL, CERN-OHL, government terms, "free with attribution") is a question for the
+  Operator in "State", not a file in the repo. Nothing human (people, faces, human anatomy or human
+  scans) without the owner's yes. No logos or brand names.
+- A static site: data becomes splats at build time (your `tools/pr3-*.mjs`; any new devDependency
+  pinned and listed in LICENSES.md). The page never calls a data service or needs a key, and big
+  files load only when the toy opens. Keep sizes inside the phone budgets.
+- Work through the items in order. Open your draft PR early ("Phase Photoreal r3: …", five sections
+  from CLAUDE.md, naming Opus 5.5), push after each finished item with "State" updated, and run long
+  jobs (clips, tests) in the background.
+- Language: American English in every new text (color, center, gray, license, -ize endings, dates
+  like "October 3, 2026").
+- Read first: CLAUDE.md; docs/OPERATING.md ("Local lanes", "Steps for a lane", "A lane's end");
+  docs/PACKS.md; docs/handoff/PhotorealR2.md, docs/handoff/Photoreal.md and docs/handoff/SharpB.md;
+  docs/audits/bases-2026-10.md; docs/research/PHOTOREAL.md.
+- Before every push: CLAUDE.md, "Before every push", with the local test set. At the end: "A lane's
+  end".
+
+### Brief, October 8, 2026 (cloud)
 
 You are a Splashery worker session, started by the Operator (the coordinating session). Repo:
 ryanjosephkamp/splashery. Your lane: Photoreal r3 (prefix `pr3`). Branch: `claude/lane-photoreal-r3`
@@ -136,23 +170,40 @@ its order: close the Photoreal r2 toys' bases, give them real effects and better
 framing, then up to 10 new photoreal toys, scientific first, under CLAUDE.md's license rules (never
 ND; NC per asset with `"nc": true`). CLAUDE.md's "Shelves" rule applies: no new animals unless a
 photoreal capture, nothing human without the owner's yes. Main has moved a lot since October 3 (read
-docs/HANDOFF.md "Now" and the Photoreal r2 files on main first). Update the handoff's "## State
+docs/HANDOFF.md "Now" and the Photoreal r2 files on main first). Update the handoff's "## State",
+"## Notes", "## Known issues" and "## For the Operator" as you go; leave its brief as it is and add
+this one under it as "### Brief, October 8, 2026 (cloud)".
 
-WORKING (October 8, 2026, about 20:40 UTC; cloud session, Opus 5.5 at high effort). PR #419 (draft).
-Effect review page 2, lane record `PhotorealR3`: 19 "Closed bases" cards, 22 effect cards and 7
-new-toy cards are up; the last 9 clips (the BMX, orange, heart donut, physalis, sunflower, turtle,
-Triceratops skull, cone shell and fluorite, re-rendered after fixes from the first clips) are
-rendering and go up next.
+How this lane runs: exactly as docs/handoff/ScienceR3.md, "How this lane runs", says (read it;
+replace the prefix and lane record with yours). New toys and views go behind the labs switch
+(`labs: true`); the Operator merges labs work after the tests pass (with tools/op-merge.mjs) and
+after the owner marks your cards; changes to toys the public already sees wait for his "good" marks.
+Finish every working turn with "READY:", "WORKING:" or "BLOCKED:"; Splashery has no CI to wait for;
+for a long job, schedule a check-in with send_later instead of going idle. Clips at phone size
+(390x844, device scale 3) go on Effect review page 2
+(https://claude.ai/artifact/BSayVkzQ2FKESesrkrSUMK) as docs/OPERATING.md, "Steps for a lane", says
+(no republish). New sounds go in tools/sound-review.json as "ready" (the owner hears them on the
+Sound Board), not as cards. Before READY, re-read CLAUDE.md's "Effect quality rules" and check each
+clip against them at phone size. About six workers run at once; keep an even pace. Your Operator is
+session_012GmKRUMZLir2nb27Bo8Cu2. Card ids pr3-…. Aim for a first READY with the bases and their
+clips within about six hours.
+
+## State
+
+READY (October 8, 2026, about 22:00 UTC; cloud session, Opus 5.5 at high effort). PR #419 (draft).
+Effect review page 2, lane record `PhotorealR3`: 19 "Closed bases" cards, 28 effect cards and 10
+new-toy cards. Every clip was watched at phone size against CLAUDE.md's effect quality rules.
 
 - Item 1, bases: done. 19 of the 30 r2 toys are visibly closed (cards `pr3-base-…`). Five more got a
   core inside that makes no visible change at phone size (no card); the crystal and the lioness's
   neck are not closed (see "Known issues"); the other five were fine. The "Photoreal r2 toys"
   section of docs/audits/bases-2026-10.md has every verdict.
 - Item 2, effects: every r2 toy but the dog plush (its hop is Fix9's, approved) has a new effect
-  (table in "Notes"; cards `pr3-fx-…`). Watching the first clips led to six fixes: the BMX's wheels
-  no longer leave a ghost behind, the heart donut twirls instead of flipping (its underside was
-  never captured), the orange rolls less far, and the physalis swing, sunflower nod and turtle crawl
-  are clearer.
+  (table in "Notes"; cards `pr3-fx-…`). Watching the first clips led to these fixes: the BMX leans on its kickstand
+  instead of rolling (wheels cut by color left faint ghosts), the heart donut twirls instead of
+  flipping (its underside was never captured), the orange rolls less far, the physalis sways as one
+  plant (its lanterns would not cut cleanly), the alum crystal's cut sits higher, and the sunflower
+  nod and turtle crawl are clearer.
 - Item 3, sounds: the 14 the owner's table names that Sound D had not done are changed, checked with
   `node tools/sound-check.mjs`, and marked "ready" in tools/sound-review.json.
 - Item 4, framing: home views for the sushi boat, cherry blossom and murex shell (closer), the
