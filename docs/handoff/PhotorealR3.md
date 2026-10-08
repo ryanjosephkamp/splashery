@@ -206,6 +206,11 @@ new-toy cards. Every clip was watched at phone size against CLAUDE.md's effect q
   higher, and the sunflower nod and turtle crawl are clearer.
 - Item 3, sounds: the 14 the owner's table names that Sound D had not done are changed, checked with
   `node tools/sound-check.mjs`, and marked "ready" in tools/sound-review.json.
+- Item 6, any pose: every effect is a rigid turn of the toy or of hard-cut parts in its own frame.
+  `node tools/pose-sweep.mjs --only=…` on 12 of the toys (steak, desk globe, alum crystal, BMX,
+  physalis, orange, heart donut, celestial globe, armillary sphere, Stannern, fluorite, Triceratops)
+  measured them on their side and upside down: every error is under 0.1 (the pose test's limit is
+  4).
 - Item 4, framing: home views for the sushi boat, cherry blossom and murex shell (closer), the
   elephant (it faces you) and the cave lioness (whole in frame).
 - Item 5, new toys: ten scientific toys (labs), with credits, help, sounds, plan entries and
@@ -247,30 +252,30 @@ What main already did for these toys since October 3 (so this lane does not redo
   its own top at each point (`MATERIALS.mirror`, from `tools/pr3-under.mjs --top`).
 - Effects (all rigid; nothing bends a capture):
 
-  | Toy                         | Tap                                                                                                                      |
-  | --------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
-  | Heart donut                 | Tossed: twirls round once and lands (its underside was never captured).                                                  |
-  | Sushi boat                  | Rocks side to side, as on water.                                                                                         |
-  | Seeded loaf, stollen        | Lifted and dropped; lands and rocks to rest.                                                                             |
-  | Cowboy steak                | Flipped over onto its (new) seared underside and back.                                                                   |
-  | Orange                      | Rolls along the table and back, turning as far as it travels.                                                            |
-  | Physalis                    | The stem sways from its foot (a lantern cut by color did not tag cleanly).                                               |
-  | Crystal, murex shell        | Turns once round.                                                                                                        |
-  | Alum crystal                | The crystal lifts off its block, turns a quarter turn and sets back down.                                                |
-  | Puffin                      | Hops round to look at you and back.                                                                                      |
-  | Toy T. rex, monkey doll     | The figure rocks round on its base (cut from its disc or cloth, hard-edged).                                             |
-  | Souvenir elephant           | Turns to look at you with two heavy steps.                                                                               |
-  | Souvenir turtle             | Crawls a little way forward, swaying, and back.                                                                          |
-  | Cave lioness                | Looks one way, then the other.                                                                                           |
-  | Dog plush                   | The hop (lane Fix9's, approved).                                                                                         |
-  | BMX bicycle                 | Nudged, it leans over on its kickstand and rocks back up (rolling on turning wheels left faint ghost wheels: see Notes). |
-  | Sunflower                   | Nods and settles.                                                                                                        |
-  | White roses, peonies, money | The vase or pot tips onto its rim, rolls round on it and settles (the tin can's wobble).                                 |
-  | Crochet Earth               | Spins round twice.                                                                                                       |
-  | Desk globe                  | The ball spins in its stand (the ring and stand stay), slowing.                                                          |
-  | Mushroom, cactus, maple,    | Lifted a little and set down with a bump (a patch of ground has nothing that can move                                    |
-  | bonsai, cherry blossom      | cleanly on its own).                                                                                                     |
-  | Knight on a horse           | The figure rocks back on its base as the horse rears.                                                                    |
+  | Toy                         | Tap                                                                                                                                                  |
+  | --------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+  | Heart donut                 | Tossed: twirls round once and lands (its underside was never captured).                                                                              |
+  | Sushi boat                  | Rocks side to side, as on water.                                                                                                                     |
+  | Seeded loaf, stollen        | Lifted and dropped; lands and rocks to rest.                                                                                                         |
+  | Cowboy steak                | Flipped over onto its (new) seared underside and back.                                                                                               |
+  | Orange                      | Rolls along the table and back, turning as far as it travels.                                                                                        |
+  | Physalis                    | The stem sways from its foot (a lantern cut by color did not tag cleanly).                                                                           |
+  | Crystal, murex shell        | Turns once round.                                                                                                                                    |
+  | Alum crystal                | The crystal lifts off its block, turns a quarter turn and sets back down (a stone cap closes the block top; the contact smear hides while it is up). |
+  | Puffin                      | Hops round to look at you and back.                                                                                                                  |
+  | Toy T. rex, monkey doll     | The figure rocks round on its base (cut from its disc or cloth, hard-edged).                                                                         |
+  | Souvenir elephant           | Turns to look at you with two heavy steps.                                                                                                           |
+  | Souvenir turtle             | Crawls a little way forward, swaying, and back.                                                                                                      |
+  | Cave lioness                | Looks one way, then the other.                                                                                                                       |
+  | Dog plush                   | The hop (lane Fix9's, approved).                                                                                                                     |
+  | BMX bicycle                 | Nudged, it leans over on its kickstand and rocks back up (rolling on turning wheels left faint ghost wheels: see Notes).                             |
+  | Sunflower                   | Nods and settles.                                                                                                                                    |
+  | White roses, peonies, money | The vase or pot tips onto its rim, rolls round on it and settles (the tin can's wobble).                                                             |
+  | Crochet Earth               | Spins round twice.                                                                                                                                   |
+  | Desk globe                  | The ball spins in its stand (the ring and stand stay), slowing.                                                                                      |
+  | Mushroom, cactus, maple,    | Lifted a little and set down with a bump (a patch of ground has nothing that can move                                                                |
+  | bonsai, cherry blossom      | cleanly on its own).                                                                                                                                 |
+  | Knight on a horse           | The figure rocks back on its base as the horse rears.                                                                                                |
 
 ## Known issues
 
