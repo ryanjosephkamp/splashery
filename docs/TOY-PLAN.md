@@ -54,25 +54,25 @@ Proposals below are suggestions; the owner may change them.
   and waves, Fourier circles, Pythagoras proof, Rössler attractor, Thomas attractor, Aizawa
   attractor, 5-cell, 16-cell, 24-cell, Duoprism, Splat equation, Storybook, Music box, Fountain pen,
   Water bottle, Soda can, Running shoe, Hoodie, Sunglasses, Baseball cap, Sword in the stone,
-  Heraldic shield, Bow and target, Crown, Wizard's orb, Crystal ball, Jellyfish, School of fish,
-  Pufferfish, Nautilus, Snail, Octopus, Sea urchin, Frog, Snowman, Fireworks, Decorated tree, Paper
-  lantern, Diya, Acoustic guitar, Snare drum, Xylophone, Toy piano, Grand piano, Upright piano,
-  Harpsichord, Electronic keyboard, Hot-air balloon, Sports car, Bus, Jet airliner, Sailboat,
-  Submarine, Bicycle, Eiffel Tower, Washington Monument, Pyramids of Giza, Twisting supertall,
-  Statue of Liberty, White House, Leaning Tower of Pisa, Colosseum, Parthenon, Stonehenge, Big Ben,
-  Taj Mahal, Castle, Pagoda, Windmill, Perceptron, Multilayer perceptron, Neural network,
-  Convolutional network, Recurrent network, Transformer, Looped transformer, Diffusion model,
-  Gradient descent, Gaussian splatting, Word vectors, Sorting machine, Half adder, Turing machine,
-  Difference engine, Enigma machine, Bombe, Picture lab, Your book, Photo album, Picture frame, Song
-  landscape, Chladni plate, Room echo meter, Splat mirror, Model to splats, QR code, Photo to 3D,
-  Moving photo to 3D, Video to 3D, Sound lab, Sound recorder, Splat toolkit, Point clouds, Splat
-  field, Light lab, Thermal ellipsoids, Super-resolution microscope, Galaxy in a box, Cryo-EM map,
-  Contour lab, Terrain in a box, Ripple tank, Light bench, Fluid lab, Grand Canyon, Mount St.
-  Helens, The sea floor, Tides at Bar Harbor, Hurricane, Relief map, Living city, Stork migration,
-  Earthquakes, Airport X-ray scanner, How CT works, Walnut CT scan, MRI of a fruit, Electron
-  microscope, Thermal camera, Screen, Shardball, Longtail, Grain Garden, Page Breaker, Strata,
-  Volley Table, Stone Belt, Soft Landing, Night Owl Pinball, Cast a Shadow, Photo Dash, Note Rider,
-  Data in 3D.
+  Heraldic shield, Bow and target, Trebuchet, Knight's helmet, Crown, Dragon egg, Wizard's orb,
+  Crystal ball, Jellyfish, School of fish, Pufferfish, Nautilus, Snail, Octopus, Sea urchin, Frog,
+  Snowman, Fireworks, Decorated tree, Paper lantern, Diya, Acoustic guitar, Snare drum, Xylophone,
+  Toy piano, Grand piano, Upright piano, Harpsichord, Electronic keyboard, Hot-air balloon, Sports
+  car, Bus, Jet airliner, Sailboat, Submarine, Bicycle, Eiffel Tower, Washington Monument, Pyramids
+  of Giza, Twisting supertall, Statue of Liberty, White House, Leaning Tower of Pisa, Colosseum,
+  Parthenon, Stonehenge, Big Ben, Taj Mahal, Castle, Pagoda, Windmill, Perceptron, Multilayer
+  perceptron, Neural network, Convolutional network, Recurrent network, Transformer, Looped
+  transformer, Diffusion model, Gradient descent, Gaussian splatting, Word vectors, Sorting machine,
+  Half adder, Turing machine, Difference engine, Enigma machine, Bombe, Picture lab, Your book,
+  Photo album, Picture frame, Song landscape, Chladni plate, Room echo meter, Splat mirror, Model to
+  splats, QR code, Photo to 3D, Moving photo to 3D, Video to 3D, Sound lab, Sound recorder, Splat
+  toolkit, Point clouds, Splat field, Light lab, Thermal ellipsoids, Super-resolution microscope,
+  Galaxy in a box, Cryo-EM map, Contour lab, Terrain in a box, Ripple tank, Light bench, Fluid lab,
+  Grand Canyon, Mount St. Helens, The sea floor, Tides at Bar Harbor, Hurricane, Relief map, Living
+  city, Stork migration, Earthquakes, Airport X-ray scanner, How CT works, Walnut CT scan, MRI of a
+  fruit, Electron microscope, Thermal camera, Screen, Shardball, Longtail, Grain Garden, Page
+  Breaker, Strata, Volley Table, Stone Belt, Soft Landing, Night Owl Pinball, Cast a Shadow, Photo
+  Dash, Note Rider, Data in 3D.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
@@ -2487,6 +2487,8 @@ Proposals below are suggestions; the owner may change them.
     fallback.
 - **Trebuchet** (`trebuchet`). Now: tap: Launch. Plan: keep.
   - Owner: Fine.
+  - Improved: Hands-on H3 (October 8, 2026; Hands-on): Free the arm's catch and let go: the weight
+    drops and the sling flings the stone.
   - Sound: The timber beam creaks and strains, then a softer swing (much less wind).
 - **Crossbow** (`crossbow`). Now: tap: Shoot. Plan: keep.
   - Owner: Solid.
@@ -2494,6 +2496,8 @@ Proposals below are suggestions; the owner may change them.
     now (bow-and-target-release.mp3), with the synthesized sound as a fallback.
 - **Knight's helmet** (`knights-helmet`). Now: tap: Open the visor. Plan: keep.
   - Owner: Really neat.
+  - Improved: Hands-on H3 (October 8, 2026; Hands-on): Lift the visor on its hinges; all the way up
+    it stays, lower it drops shut.
   - Sound: Visor clank.
 - **Crown** (`crown`). Now: tap: Light the jewels. Plan: keep.
   - Owner: Needs an effect.
@@ -2506,6 +2510,8 @@ Proposals below are suggestions; the owner may change them.
     synthetic brass; the jewels' pings stay.
 - **Dragon egg** (`dragon-egg`). Now: tap: Hatch. Plan: keep.
   - Owner: Cute and perfect.
+  - Improved: Hands-on H3 (October 8, 2026; Hands-on): Pull the shell pieces off one by one; the
+    baby dragon rises as they go.
   - Sound: Crack and a tiny roar.
 - **Wizard's orb** (`wizards-orb`). Now: tap: Cast. Plan: keep.
   - Owner: Looks really good; develop it further to be more impressive.

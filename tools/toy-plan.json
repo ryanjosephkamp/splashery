@@ -1599,7 +1599,8 @@
     "trebuchet": {
       "v": "keep",
       "owner": "Fine.",
-      "sound": "The timber beam creaks and strains, then a softer swing (much less wind)."
+      "sound": "The timber beam creaks and strains, then a softer swing (much less wind).",
+      "improved": "Hands-on H3 (October 8, 2026; Hands-on): Free the arm's catch and let go: the weight drops and the sling flings the stone."
     },
     "crossbow": {
       "v": "keep",
@@ -1609,7 +1610,8 @@
     "knights-helmet": {
       "v": "keep",
       "owner": "Really neat.",
-      "sound": "Visor clank."
+      "sound": "Visor clank.",
+      "improved": "Hands-on H3 (October 8, 2026; Hands-on): Lift the visor on its hinges; all the way up it stays, lower it drops shut."
     },
     "crown": {
       "v": "keep",
@@ -1621,7 +1623,8 @@
     "dragon-egg": {
       "v": "keep",
       "owner": "Cute and perfect.",
-      "sound": "Crack and a tiny roar."
+      "sound": "Crack and a tiny roar.",
+      "improved": "Hands-on H3 (October 8, 2026; Hands-on): Pull the shell pieces off one by one; the baby dragon rises as they go."
     },
     "wizards-orb": {
       "v": "keep",
