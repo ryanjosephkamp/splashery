@@ -312,7 +312,7 @@ export class HandsOn {
       });
       w.add(body);
       if (p.strike) body.strike = true; // (lane Hands-on H3)
-      if (p.fixed) body.fixed = true; // (lane Hands-on H3: a drum, ground for its sticks)
+      if (p.fixed) body.stays = true; // (lane Hands-on H3: a drum, ground for its sticks)
       this.pieces.push({ body, token: p.token, part: p.part, home: { pos: p.pos.slice(), q: (p.quat || [0, 0, 0, 1]).slice() }, def: p }); // prettier-ignore
       // A piece on a stem (a cherry): pinned to its point, springing back
       // to how it hung.
@@ -358,7 +358,7 @@ export class HandsOn {
   }
 
   free(body) {
-    if (!body.pinned || body.fixed) return; // (`fixed`: never knocked loose; lane Hands-on H3)
+    if (!body.pinned || body.stays) return; // (`fixed`: never knocked loose; lane Hands-on H3)
     body.pinned = false;
     const def = this.pieces.find((pc) => pc.body === body)?.def;
     if (def?.rest) {
