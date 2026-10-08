@@ -112,3 +112,52 @@ test("a flip piece flicked up turns over and lands upside down; set down, it sta
   p = await pose(page, 3);
   expect(p.up).toBeGreaterThan(0.95);
 });
+
+test("a piece's shown pose and the tokens that ride it", async ({ page }) => {
+  await ready(page, "orange");
+  const r = await page.evaluate(() => {
+    const { player } = window.__splashery;
+    const h = player.handsOn;
+    const hands = h.info.recipe.hands;
+    const own = hands.pieces;
+    // The first wedge, shown 0.2 above where it was built, carrying two
+    // other tokens (one hidden).
+    hands.pieces = (d, info) =>
+      own(d, info).map(
+        (p, i) =>
+        i
+          ? p
+          : { ...p, shown: { pos: [p.pos[0], p.pos[1] + 0.2, p.pos[2]] }, ride: [40, { token: 41, visible: 0 }] }, // prettier-ignore
+      );
+    try {
+      h.ensure();
+    } finally {
+      hands.pieces = own;
+    }
+    const pc = h.pieces[0];
+    const b = pc.body;
+    const start = b.pos.slice();
+    h.free(b);
+    b.pos = [b.pos[0] + 0.1, b.pos[1], b.pos[2]];
+    h.moved = true;
+    h.apply();
+    const out = player.motion.handsTokens;
+    const at = (i) => out.find((e) => e.index === i)?.token;
+    return {
+      start,
+      built: pc.built.pos,
+      home: pc.home.pos,
+      own: at(pc.token),
+      a: at(40),
+      b: at(41),
+    };
+  });
+  expect(r.start[1] - r.built[1]).toBeCloseTo(0.2, 6); // it starts where it is shown
+  expect(r.home).toEqual(r.start); // and goes home there
+  expect(r.own.base).toEqual(r.built); // its splats move from where they were built
+  expect(r.own.offset[0]).toBeCloseTo(0.1, 6);
+  expect(r.own.offset[1]).toBeCloseTo(0.2, 6);
+  expect(r.a.offset).toEqual(r.own.offset); // a rider moves with it
+  expect(r.a.visible).toBeUndefined();
+  expect(r.b.visible).toBe(0); // a hidden rider stays hidden
+});

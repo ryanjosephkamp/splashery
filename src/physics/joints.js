@@ -808,10 +808,37 @@ export class Joints {
     for (const j of this.list) {
       if (j.type !== "break" || j.broken || !j.parent) continue;
       if (this.moves(j.parent)) {
+        // Lane Hands-on H2: a piece riding another comes loose when that one
+        // tips past `spill` radians (a scoop off a tipped cone).
+        if (j.d.spill != null && this.tilt(j.parent) > j.d.spill) {
+          this.spill(j);
+          continue;
+        }
         this.glue(j);
         this.pose(j);
       } else if (j.gluedTo && j.parent.body.pinned) this.unglue(j);
     }
+  }
+
+  // Lane Hands-on H2: how far a joint's piece has tipped from how it was
+  // built (radians between its up and its up at home).
+  tilt(j) {
+    const up = quat.rotate(this.full(j).q, [0, 1, 0]);
+    return Math.acos(Math.max(-1, Math.min(1, up[1])));
+  }
+
+  // It comes loose where it is, moving as the piece it rode was.
+  spill(j) {
+    const b = j.body;
+    const pb = j.parent.body;
+    j.broken = true;
+    this.unglue(j);
+    this.hands.free(b);
+    b.invMass = b.invMassFree || 1;
+    b.invI = (b.invIFree || [1, 1, 1]).slice();
+    b.vel = pb.vel.slice();
+    b.omega = pb.omega.slice();
+    this.cue(j, "spill", v3.len(pb.vel) / this.hands.R());
   }
 
   // Parts that ride on a joint without being pieces (`also`): a recipe
