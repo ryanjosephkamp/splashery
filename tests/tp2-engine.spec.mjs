@@ -23,11 +23,19 @@ test("?sound=on plays the tap sound and the button mutes it", async ({ page }) =
   await tapMiddle(page);
   // A first pick is slow without a GPU: wait for the tap to land.
   await expect.poll(() => scheduled(page), { timeout: 30_000 }).toBeGreaterThan(0);
-  const heard = await scheduled(page);
+  // A long tune keeps scheduling notes while it plays, so read the count once the mute has
+  // stopped it, then tap again and wait for that tap to land: nothing more may sound.
   await button.click();
   await expect(button).toHaveAttribute("aria-pressed", "false");
+  await page.waitForTimeout(1000);
+  const heard = await scheduled(page);
+  await page.evaluate(() => {
+    window.__taps = 0;
+    window.__splashery.player.on("action", () => window.__taps++);
+  });
   await tapMiddle(page);
-  await page.waitForTimeout(4000); // the muted tap still lands, and stays silent
+  await expect.poll(() => page.evaluate(() => window.__taps), { timeout: 30_000 }).toBeGreaterThan(0); // prettier-ignore
+  await page.waitForTimeout(1000);
   expect(await scheduled(page)).toBe(heard);
   // The choice is not remembered: the app's own speaker setting stays as it was.
   expect(await page.evaluate(() => localStorage.getItem("splashery.sound"))).toBeNull();
