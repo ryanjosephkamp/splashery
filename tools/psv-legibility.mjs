@@ -72,7 +72,7 @@ async function render() {
   await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
   await page.evaluate((t) => window.__splashery.app.chooseToy(t), toy);
   await page.waitForFunction(() => !window.__splashery.player.loading && window.__splashery.player.proc?.ctx?.kit?.data, null, { timeout: 120_000 }); // prettier-ignore
-  const file = toy === "photo-3d" ? path.join(src, still.file) : path.join(src, "text-scroll.mp4");
+  const file = toy === "photo-3d" ? path.join(src, still.file) : path.join(src, "text-scroll.webm");
   await page.locator("#toy-input-file").setInputFiles(file);
   const t0 = Date.now();
   if (toy === "photo-3d") {
@@ -81,18 +81,19 @@ async function render() {
     await page.waitForFunction(() => window.__splashery.player.motion.state.flat < 0.002, null, { timeout: 60_000 }); // prettier-ignore
   } else {
     await page.evaluate(async () => (window.__mv = (await import("/src/packs/moving-photo.js")).MOVING)); // prettier-ignore
-    await page.waitForFunction(
-      () => {
+    // (a long video's depth is worked out in order: wait until it has passed --at)
+    for (let k = 0; ; k++) {
+      const p = await page.evaluate((t) => {
         const c = window.__mv.clip;
-        return (
-          c?.name === "text-scroll" &&
-          !window.__splashery.player.loading &&
-          (!c.long || c.depth.ready >= c.depth.n)
-        );
-      },
-      null,
-      { timeout: 1_200_000, polling: 2000 },
-    );
+        if (c?.name !== "text-scroll" || window.__splashery.player.loading) return { status: window.__mv.status, long: window.__mv.longStatus, clip: c?.name, loading: !!window.__splashery.player.loading }; // prettier-ignore
+        if (!c.long) return { ready: 1, need: 1 };
+        return { ready: c.depth.ready, need: Math.min(c.depth.n, Math.ceil((t + 1) * c.depth.rate) + 1), n: c.depth.n }; // prettier-ignore
+      }, at);
+      if (p && p.ready >= p.need) break;
+      if (k % 15 === 0) console.log(`waiting for the depth: ${JSON.stringify(p)}`);
+      if (k > 900) throw new Error("The depth never came.");
+      await page.waitForTimeout(2000);
+    }
     await page.evaluate(async (t) => {
       const m = await import("/src/packs/moving-photo.js");
       window.__splashery.app.setControl("play", 0);

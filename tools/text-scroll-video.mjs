@@ -3,7 +3,8 @@
 // reading text in Photo to 3D and Moving photo to 3D. It renders a phone-sized page (1080 by 2340,
 // a 360 by 780 page at device scale 3) of Splashery's own text (docs/ROADMAP.md and README.md as
 // plain HTML: our own words, no third-party content), scrolls it at a normal reading pace and
-// writes an H.264 MP4 at 30 frames a second with ffmpeg (a build tool), plus a few still PNGs and
+// writes an H.264 MP4 at 30 frames a second with ffmpeg (a build tool; and a VP9 WebM copy, which
+// Playwright's Chromium can play), plus a few still PNGs and
 // a JSON file that says where each block of text is on each still.
 //
 //   SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium node tools/text-scroll-video.mjs
@@ -174,6 +175,12 @@ for (let f = 0; f < frames; f++) {
 ff.stdin.end();
 await done;
 await browser.close();
+// A VP9 WebM copy too: Playwright's Chromium plays no H.264, so the tools open this one.
+const webm = path.join(out, "text-scroll.webm");
+await new Promise((res, rej) =>
+  spawn("ffmpeg", ["-y", "-loglevel", "error", "-i", mp4, "-c:v", "libvpx-vp9", "-crf", "24", "-b:v", "0", "-row-mt", "1", "-deadline", "good", "-cpu-used", "4", webm], { stdio: "inherit" }) // prettier-ignore
+    .on("close", (c) => (c ? rej(new Error(`ffmpeg ${c}`)) : res())),
+);
 fs.writeFileSync(path.join(out, "text-scroll.json"), JSON.stringify(meta, null, 1));
 console.log(
   `\nWrote ${mp4} (${(fs.statSync(mp4).size / 1e6).toFixed(1)} MB), ${meta.stills.length} stills.`,
