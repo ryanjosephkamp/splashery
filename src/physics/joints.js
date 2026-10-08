@@ -822,7 +822,7 @@ export class Joints {
     for (const j of this.list) {
       if (!j.d.also || j.v === undefined) continue;
       out ||= {};
-      j.d.also(j.v, out, this.hands.info);
+      j.d.also(j.v, out, this.hands.info, j); // (j: its speed w, held; lane Hands-on H1)
     }
     return out;
   }
