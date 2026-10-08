@@ -2446,6 +2446,18 @@ export const TOYS = [
   },
 
   // ---- Pack: maths ----
+  // ---- Pack: incompressible-shuffle (native pilot) ----
+  {
+    id: "incompressible-shuffle",
+    label: "Incompressible Shuffle",
+    category: "maths",
+    kind: "kit",
+    pack: "incompressible-shuffle",
+    labs: true,
+    tags: "material shear area volume paths solenoidal math OpenAI",
+    camera: { yaw: 0.24, pitch: 0.52, roll: 0, distance: 3.4 },
+  },
+
   {
     id: "lorenz",
     label: "Lorenz attractor",

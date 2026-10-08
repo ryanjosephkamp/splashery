@@ -1,0 +1,127 @@
+{
+  "toy": "incompressible-shuffle",
+  "checked": "2026-10-08",
+  "summary": "Two sampled material sheets exchange places through exact prescribed affine paths. The local formulas, area preservation and native CPU encoding are checked; browser rendering and touch interaction remain unverified. This is not a fluid solver or a verification of the manuscript’s broader claims.",
+  "claims": [
+    {
+      "claim": "Four partial shears preserve planar area and finish at reciprocal stretch.",
+      "how": "The chronological maps are Y(-λ), X(1/λ-1), Y(1), X(λ-1), each evaluated from the original material label. Enabled λ values are 0.5, 1 and 2. Each partial derivative has determinant one.",
+      "where": "src/packs/incompressible-shuffle-core.js",
+      "sources": [
+        {
+          "title": "Finite Instructions and Solenoidal Shear Flows, §3, Lemma 3.1 and Theorem 3.2, pp. 5–9",
+          "publisher": "OpenAI",
+          "url": "https://github.com/openai/math/blob/adc7f1241b42e322a6451854ab7e4b4c146bf78a/preprints/Finite-Instructions-and-Solenoidal-Shear-Flows-September-27-2026/manuscript.pdf",
+          "says": "Four chronological shears produce reciprocal scaling; seven separated smooth pulses realize lifted affine paths."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/shuffle-core.spec.mjs",
+      "note": "The λ=1 endpoint is identity in the plane but its intermediate shear detour remains nonconstant."
+    },
+    {
+      "claim": "The seven stages use smooth separated time pulses.",
+      "how": "Stage j uses S(16t-(2j-1)), where S is the exponential flat-step function. Each active interval is followed by a resting gap; the endpoint never wraps to the start.",
+      "where": "src/packs/incompressible-shuffle-core.js",
+      "sources": [
+        {
+          "title": "Finite Instructions and Solenoidal Shear Flows, §3, Lemma 3.1 and Theorem 3.2, pp. 5–9",
+          "publisher": "OpenAI",
+          "url": "https://github.com/openai/math/blob/adc7f1241b42e322a6451854ab7e4b4c146bf78a/preprints/Finite-Instructions-and-Solenoidal-Shear-Flows-September-27-2026/manuscript.pdf",
+          "says": "Four chronological shears produce reciprocal scaling; seven separated smooth pulses realize lifted affine paths."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/shuffle-core.spec.mjs",
+      "note": "Smoothness follows analytically from the flat exponential formula, not finite-difference evidence."
+    },
+    {
+      "claim": "Both marked material patches retain area 0.04.",
+      "how": "Eight extra native tokens carry the exact corners of two 0.2-by-0.2 material squares. Their edge outlines use two-token interpolation. Tests use signed polygon area, not bounding-box or pixel area.",
+      "where": "src/packs/incompressible-shuffle.js",
+      "sources": [
+        {
+          "title": "Finite Instructions and Solenoidal Shear Flows, §3, Lemma 3.1 and Theorem 3.2, pp. 5–9",
+          "publisher": "OpenAI",
+          "url": "https://github.com/openai/math/blob/adc7f1241b42e322a6451854ab7e4b4c146bf78a/preprints/Finite-Instructions-and-Solenoidal-Shear-Flows-September-27-2026/manuscript.pdf",
+          "says": "Four chronological shears produce reciprocal scaling; seven separated smooth pulses realize lifted affine paths."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/shuffle.spec.mjs",
+      "note": ""
+    },
+    {
+      "claim": "The compact scene satisfies the stated separation and excursion bounds.",
+      "how": "Source centers are (-1.25,0) and (1.25,0), targets exchange centers, source half-width is 0.4, private heights are 1.25 and 2.5, and h=1. Worst target gap is 0.9; all shear offsets stay within 1.2.",
+      "where": "src/packs/incompressible-shuffle-core.js",
+      "sources": [
+        {
+          "title": "Finite Instructions and Solenoidal Shear Flows, §3, Lemma 3.1 and Theorem 3.2, pp. 5–9",
+          "publisher": "OpenAI",
+          "url": "https://github.com/openai/math/blob/adc7f1241b42e322a6451854ab7e4b4c146bf78a/preprints/Finite-Instructions-and-Solenoidal-Shear-Flows-September-27-2026/manuscript.pdf",
+          "says": "Four chronological shears produce reciprocal scaling; seven separated smooth pulses realize lifted affine paths."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/shuffle-core.spec.mjs",
+      "note": "Possible cutoff collars and private-height support bands are documented in the handoff; those fields are not rendered."
+    },
+    {
+      "claim": "Native encoded particle centers represent the affine material paths.",
+      "how": "Each sheet uses four corner tokens. Original labels use the same 10-bit u,v weights as native skin4. Tests decode the native buffer and float32 token offsets after fit, with construction-coordinate tolerance 0.00002.",
+      "where": "src/packs/incompressible-shuffle.js",
+      "sources": [
+        {
+          "title": "Finite Instructions and Solenoidal Shear Flows, §3, Lemma 3.1 and Theorem 3.2, pp. 5–9",
+          "publisher": "OpenAI",
+          "url": "https://github.com/openai/math/blob/adc7f1241b42e322a6451854ab7e4b4c146bf78a/preprints/Finite-Instructions-and-Solenoidal-Shear-Flows-September-27-2026/manuscript.pdf",
+          "says": "Four chronological shears produce reciprocal scaling; seven separated smooth pulses realize lifted affine paths."
+        }
+      ],
+      "verdict": "close",
+      "test": "tests/shuffle.spec.mjs",
+      "note": "This is CPU buffer/transform and packed-uniform verification, not GPU readback. Glyph covariance is drawing support, not transported Gaussian density."
+    },
+    {
+      "claim": "Pinning chooses an actual material sample and shows its complete seven-segment path.",
+      "how": "Inverse current affine maps identify candidate sheets; the nearest existing quantized sample is selected. Native two-token segments connect eight exact stage nodes. Replay resets original labels.",
+      "where": "src/packs/incompressible-shuffle.js",
+      "sources": [
+        {
+          "title": "Finite Instructions and Solenoidal Shear Flows, §3, Lemma 3.1 and Theorem 3.2, pp. 5–9",
+          "publisher": "OpenAI",
+          "url": "https://github.com/openai/math/blob/adc7f1241b42e322a6451854ab7e4b4c146bf78a/preprints/Finite-Instructions-and-Solenoidal-Shear-Flows-September-27-2026/manuscript.pdf",
+          "says": "Four chronological shears produce reciprocal scaling; seven separated smooth pulses realize lifted affine paths."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/shuffle.spec.mjs",
+      "note": "Picking is checked through the native MotionDriver API. Screen-pointer hit testing and visual legibility have not been checked in a browser."
+    },
+    {
+      "claim": "The toy is visually clear and fast on a phone.",
+      "how": "No browser image or physical-device performance measurement was possible in this execution environment.",
+      "where": "src/packs/incompressible-shuffle.js",
+      "sources": [
+        {
+          "title": "Finite Instructions and Solenoidal Shear Flows, §3, Lemma 3.1 and Theorem 3.2, pp. 5–9",
+          "publisher": "OpenAI",
+          "url": "https://github.com/openai/math/blob/adc7f1241b42e322a6451854ab7e4b4c146bf78a/preprints/Finite-Instructions-and-Solenoidal-Shear-Flows-September-27-2026/manuscript.pdf",
+          "says": "Four chronological shears produce reciprocal scaling; seven separated smooth pulses realize lifted affine paths."
+        }
+      ],
+      "verdict": "unverified",
+      "test": "",
+      "note": "Chromium failed before page load because Unix socket creation was restricted. Screenshots, thumbnail, motion clip, GPU readback and phone performance are outstanding."
+    }
+  ],
+  "simplified": [
+    "Only two material sheets and one bounded seven-stage instruction are shown.",
+    "The global divergence-free velocity, compensating lobes, forcing, pressure, energy and viscosity are not evaluated.",
+    "Particle size, opacity, color, covariance and sound are styling; projected density and pixel area are not conserved physical quantities.",
+    "The complete pinned path includes future positions. Replaying resets; scrubbing backward retraces the same prescribed path.",
+    "No computation, halting, global theorem audit or Lean verification is claimed."
+  ],
+  "fixes": []
+}

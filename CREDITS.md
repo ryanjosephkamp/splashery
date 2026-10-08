@@ -1582,3 +1582,19 @@ to the owner, who made them; no third-party work is in them. Checked October 7, 
 - Giant gears (D31): `assets/toys/photo-3d/ai/gears.jpg`.
 - Chess board (D40): `assets/toys/photo-3d/ai/chess.jpg`.
 - City of books (D29): `assets/toys/photo-3d/ai/book-city.jpg`.
+
+## Incompressible Shuffle (native pilot, October 8, 2026)
+
+Original equation-driven geometry and implementation by dot, powered by OpenAI. No manuscript
+figures, images, external datasets, or visual assets were imported.
+
+Construction reference: OpenAI, _Finite Instructions and Solenoidal Shear Flows_, September 27,
+2026, §3, Lemma 3.1 and Theorem 3.2, pp. 5–9.
+[Pinned manuscript](https://github.com/openai/math/blob/adc7f1241b42e322a6451854ab7e4b4c146bf78a/preprints/Finite-Instructions-and-Solenoidal-Shear-Flows-September-27-2026/manuscript.pdf).
+The source repository carries the
+[Apache 2.0 license](https://github.com/openai/math/blob/adc7f1241b42e322a6451854ab7e4b4c146bf78a/LICENSE).
+
+This toy evaluates the construction's local affine material paths. It does not simulate the
+surrounding velocity, forcing, pressure, viscosity, or global cutoff fields and does not claim a
+Lean verification. Splat size, orientation, opacity, and the air-sweep interaction sound are drawing
+and interaction styling, not transported density or physical fluid measurements.
