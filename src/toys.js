@@ -131,6 +131,9 @@ export const TOYS = [
     category: "shapes",
     tags: "jelly noise candy generated",
     kind: "procedural",
+    // Pull and stretch it like the gummy bear; let go and it wobbles back
+    // (lane Hands-on H1).
+    grab: { radius: 0.6, max: 0.8 },
     generator: {
       shape: "blob",
       palette: "candy",
