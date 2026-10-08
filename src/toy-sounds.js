@@ -2773,6 +2773,12 @@ export const TOY_SOUNDS = {
     { voice: "whoosh", f: 380, to: 2.2, decay: 2.4, vol: 0.09 },
     { voice: "sparkle", at: 0.1, f: 4200, n: 6, decay: 2, vol: 0.07 },
   ],
+  // Volume viewer (lane Volume viewer): stepping to the next window preset, a soft click like a
+  // scanner console's dial, and a short low tone as the new window settles.
+  "volume-viewer": [
+    { voice: "switch", f: 2300, vol: 0.5 },
+    { voice: "hum", at: 0.04, f: 220, to: 1.15, decay: 0.45, bright: 0.25, vol: 0.18 },
+  ],
   // Lane Screens: the old TV's click and hum (each style plays its own
   // cues as it switches on: the flat TV's soft tone, the cinema's curtains,
   // the hologram's shimmer).
