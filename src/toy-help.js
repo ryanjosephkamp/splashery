@@ -1843,6 +1843,14 @@ export const TOY_HELP = {
       "A lidar scanner sends out laser pulses and times their echoes, so each echo becomes a point with its place, how strongly it reflected (intensity) and often a class (ground, vegetation, building, water). Millions of points make a point cloud. This toy opens LAS, LAZ (compressed LAS), PLY, XYZ and PTS files and draws every point as a small splat, colored by height, intensity, classification or the file's own colors.\n\nThe samples are real airborne lidar from the U.S. Geological Survey's 3D Elevation Program, which is mapping the whole country: San Francisco's Palace of Fine Arts, the Golden Gate Bridge's south end with Fort Point, and Meteor Crater in Arizona, a hole 1.2 kilometers wide blasted by an iron meteorite about 50,000 years ago. Measure gives the straight distance between two points, the distance along the ground and the rise. Crop and Thin work on every point, and Save writes PLY, LAS or XYZ. Your files stay on your device.",
   },
 
+  // Lane Volume viewer (labs).
+  "volume-viewer": {
+    howTo:
+      "Drag up or down to cut into it; tap for the next window. Open your own scan in the Toy tab.",
+    about:
+      "A CT, MRI or microscope scan is a volume: a stack of slices, each a grid of numbers saying how dense or bright the object is there. Each little block is a voxel. Slices are often farther apart than the pixels in them, so every voxel is placed at its real size.\n\nThe window picks which values show: below it is treated as air, and the colors run from its bottom to its top. Bone shows the densest parts, Soft tissue the range below them, Full range everything but the air (in a medical CT, in Hounsfield units: water 0, air -1000). Tap to step through them, or set your own. Drag to move the cut, or show one thin slice. Maximum intensity shows the brightest value along each line, as radiologists view blood vessels.\n\nOpen your own DICOM, NIfTI, TIFF stack or raw file in the Toy tab; it stays on your device. The samples, a walnut (CWI) and a young gar's head (Brian Metscher), are CC BY 4.0.",
+  },
+
   // ---- Lab (lane Lab) -------------------------------------------------------------------
   "splat-field": {
     howTo: "Tap to send a pulse through it; tap again for another. Pick a Field in the Toy tab.",

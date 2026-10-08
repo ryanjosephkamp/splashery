@@ -6,7 +6,7 @@
 //   SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium node tools/psv-clip.mjs <out.mp4>
 //     --toy=photo-3d|moving-photo-3d [--open=<file>] --view=splats|sharp
 //     [--secs=6] [--fps=15] [--from=6] [--zoom=home|max] [--sway=0.2] [--dpr=3]
-//     [--label="Sharp picture · Opus 5.5"] [--profile=mid] [--focus=0]
+//     [--label="Sharp picture · Opus 5.5"] [--profile=mid] [--focus=0] [--hash=#s=…]
 //
 // The page is 390 x 844 at device scale --dpr, in focus mode (only the toy). Photo to 3D: the photo
 // is opened, its depth raised, and the view sways --sway radians each way over the clip. Moving
@@ -27,7 +27,8 @@ const opt = (name, def) => {
 const [out] = args.filter((a) => !a.startsWith("--"));
 const toy = opt("toy", "photo-3d");
 const file = opt("open", "");
-const view = opt("view", "sharp");
+const view = opt("view", ""); // (none: the view the scene says)
+const hash = opt("hash", ""); // a #s= link to open (its toy and view), instead of choosing the toy
 const secs = Number(opt("secs", 6));
 const fps = Number(opt("fps", 15));
 const from = Number(opt("from", 6));
@@ -45,14 +46,17 @@ const browser = await chromium.launch({
 });
 const page = await browser.newPage({ viewport: { width: 390, height: 844 }, deviceScaleFactor: dpr }); // prettier-ignore
 page.on("pageerror", (e) => console.log("page error:", e.message));
-await page.goto(`${base}?renderer=webgl2&adapt=off&profile=${opt("profile", "mid")}&labs=1`);
+await page.goto(`${base}?renderer=webgl2&adapt=off&profile=${opt("profile", "mid")}&labs=1${hash}`);
 await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
-await page.evaluate(async (t) => {
-  const { app, player } = window.__splashery;
-  await app.chooseToy(t);
-  player.opts.idleDelay = 1e9;
-  player.idle.weight = 0;
-}, toy);
+await page.evaluate(
+  async ([t, linked]) => {
+    const { app, player } = window.__splashery;
+    if (!linked) await app.chooseToy(t);
+    player.opts.idleDelay = 1e9;
+    player.idle.weight = 0;
+  },
+  [toy, !!hash],
+);
 await page.waitForFunction(() => !window.__splashery.player.loading && window.__splashery.player.proc?.ctx?.kit?.data, null, { timeout: 120_000 }); // prettier-ignore
 if (file) await page.locator("#toy-input-file").setInputFiles(file);
 const name = file ? path.basename(file).replace(/\.[^.]+$/, "") : null;
@@ -71,7 +75,7 @@ if (toy === "photo-3d") {
 if (focus) await page.keyboard.press("f");
 await page.evaluate(() => window.__splashery.player.camera.reset());
 if (zoom === "max") await page.evaluate(() => window.__splashery.player.camera.zoomBy(0.001));
-await page.evaluate(([t, v]) => window.__psv.set(t, v), [toy, view]);
+if (view) await page.evaluate(([t, v]) => window.__psv.set(t, v), [toy, view]);
 if (label)
   await page.evaluate((text) => {
     const d = document.createElement("div");

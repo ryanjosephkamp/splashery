@@ -1368,6 +1368,18 @@ the spectrometer's sample picture are made by the page. Their data:
 - The airport X-ray scanner, How CT works and their bags, shell and scanners are built by the toys'
   recipes.
 
+## Volume viewer (lane Volume viewer)
+
+- Gar micro-CT: "MicroCT images of 3 early gar (Lepisosteus osseus) stages between 12.7mm and
+  21.7mm" by Brian Metscher (University of Vienna; the scans used by Konstantinidis et al. 2015),
+  [10.5281/zenodo.19021581](https://doi.org/10.5281/zenodo.19021581),
+  [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) (checked on the live record on October
+  8, 2026). The 12.8 mm larva (VIMS22685), 502 TIFF slices of 4.42 µm voxels, averaged 4 × 4 × 4 to
+  17.7 µm, cropped, its faint empty background set to 0, and stored as 8-bit NIfTI by
+  `tools/vol-gar.mjs`.
+- The walnut is the Imaging lane's file (above), shown again as a sample.
+- The test volumes in `tests/fixtures/vol/` are a phantom made by `tools/vol-fixtures.mjs`.
+
 ## Molecule viewer (lane Molecule viewer)
 
 The Molecule viewer (labs) ships a snapshot of five entries from the Protein Data Bank, fetched from
