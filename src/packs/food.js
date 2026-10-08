@@ -1893,6 +1893,7 @@ export const RECIPES = {
     hands: {
       floor: 0,
       area: 1.6,
+      foot: 0.95,
       center: 0.7,
       pieces: (d) => [
         ...hh2Layers([{ part: "plate", y0: 0, y1: 0.02, r: 1.12, mass: 3, pivot: [0, 0, 0] }]).map(
@@ -3797,7 +3798,8 @@ export const RECIPES = {
     // drop onto what is left.
     hands: {
       floor: 0,
-      area: 1.6,
+      area: 1.9,
+      foot: 0.95,
       center: 0.6,
       pieces: () =>
         hh2Layers([
@@ -6074,6 +6076,7 @@ export const RECIPES = {
     hands: {
       floor: -0.86,
       area: 1.4,
+      foot: 0.95,
       center: 0.6,
       pieces: (d) =>
         hh2Layers(
