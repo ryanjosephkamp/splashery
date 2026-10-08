@@ -20,7 +20,7 @@
 //
 //   python3 -m http.server 4173 --bind 127.0.0.1 &
 //   SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium node tools/phf-measure.mjs
-//     --toy=photo-3d|moving-photo-3d [--tiers=low,mid,high,max] [--still=.cache/text-scroll/still-1.png]
+//     --toy=photo-3d|moving-photo-3d [--tiers=low,mid,high,max] [--still=.cache/text-scroll/still-05s.png]
 //     [--video=.cache/text-scroll/text-scroll.webm] [--rise=0] [--out=.cache/phf-measure] [--label=before]
 //     [--url-extra=&x=1] [--view=fit|home]
 // Writes <out>/<label>-<toy>-<tier>.png (the render) and -crop.png (the picture and the source side
@@ -40,7 +40,7 @@ const TOY = opt("toy", "photo-3d");
 const TIERS = opt("tiers", "low,mid,high,max").split(",");
 const OUT = opt("out", ".cache/phf-measure");
 const LABEL = opt("label", "now");
-const STILL = opt("still", ".cache/text-scroll/still-1.png");
+const STILL = opt("still", ".cache/text-scroll/still-05s.png");
 const VIDEO = opt("video", ".cache/text-scroll/text-scroll.webm");
 const RISE = Number(opt("rise", 0));
 const EXTRA = opt("url-extra", "");
@@ -48,7 +48,9 @@ const VIEW = opt("view", "fit"); // home: as the toy opens; fit: zoomed so the p
 const SCALE = 3;
 fs.mkdirSync(OUT, { recursive: true });
 const base = process.env.SPLASHERY_URL || "http://127.0.0.1:4173/";
-const info = JSON.parse(fs.readFileSync(path.join(path.dirname(STILL), "info.json"), "utf8"));
+const info = JSON.parse(
+  fs.readFileSync(path.join(path.dirname(STILL), "text-scroll.json"), "utf8"),
+);
 const stillInfo = info.stills.find((s) => path.basename(s.file) === path.basename(STILL));
 
 // ---- Images ------------------------------------------------------------------------

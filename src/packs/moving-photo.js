@@ -39,6 +39,7 @@
 
 import { songTransport } from "./song-record.js";
 import { FILL, reliefScale } from "./photo-3d-core.js";
+import { sharpEntry, sharpClip, sharpDrive } from "./photo-sharp.js"; // lane Photo sharp view
 
 export const MAX_SECONDS = 8;
 export const CLIP_FPS = { low: 12, mid: 15, high: 24, max: 24 };
@@ -1479,7 +1480,7 @@ export const MOVING_PHOTO = {
     maxBytes: 200e6,
     fileButton: "Open a GIF or video…",
     note: `Open a GIF or a video. A clip up to ${MAX_SECONDS} seconds is read whole on this device, at its own speed and up to ${CLIP_FPS.high} frames a second (fewer on a phone), and the depth model (about 27 MB, loaded the first time) works out how near each part of every frame is. A longer video plays whole: its depth is worked out a few times a second, in order, and it plays as that goes, with a line saying how long is left (a long video takes a while, longer on a phone). A GIF plays its first ${MAX_SECONDS} seconds. It plays back in 3D, a video with its own sound. Nothing is uploaded. Tap to pause or play.`, // prettier-ignore
-    live: [{ render: () => songTransport(movingTransport) }, { render: () => longControls() }],
+    live: [{ render: () => songTransport(movingTransport) }, { render: () => longControls() }, sharpEntry("moving-photo-3d")], // prettier-ignore
     async read(_text, fileName, file) {
       if (!file) throw new Error("Open a GIF or a video.");
       const clip = await openClip(file, fileName.replace(/\.[^.]+$/, ""), setShown);
@@ -1577,6 +1578,7 @@ export const MOVING_PHOTO = {
     MOVING.frame = frameAt(clip, MOVING.t);
     if (clip.video) syncVideo(clip, on, MOVING.t, rate); // Live r7 (and lane Photo fidelity: a short video's copy)
     showOriginal(clip);
+    sharpDrive(out); // lane Photo sharp view
   },
   build(k, o) {
     MOVING.original = o.original === "on";
@@ -1653,5 +1655,6 @@ export const MOVING_PHOTO = {
     bar(w - f / 2, 0, f, 2 * h);
     k.reach([0, 0, 0.9]);
     k.data = { moving: { cols, rows, n: clip.n } };
+    sharpClip(MOVING, { width, height, full }); // lane Photo sharp view
   },
 };

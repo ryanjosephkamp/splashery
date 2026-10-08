@@ -1,25 +1,23 @@
 #!/usr/bin/env node
-// Lane Photo fidelity (prefix phf): the shared test material for the two photo lanes (Photo
-// fidelity and Sharp view). A phone-sized page of Splashery's own text (README.md and
-// docs/ROADMAP.md, rendered as plain HTML: our own words, no third-party content), scrolled at a
-// normal reading pace and written as an H.264 MP4 at 30 frames a second, plus a few still PNGs of
-// the page. Like the owner's phone screen recording of a feed, but made here, so it can go in a
-// test run. Everything goes under .cache/ (git-ignored), never in the repo. A VP9 WebM of the same
-// frames comes too, for the headless tools (Playwright's Chromium can't decode H.264).
+// Lanes Photo sharp view and Photo fidelity (October 8, 2026): the shared test material for
+// reading text in Photo to 3D and Moving photo to 3D. It renders a phone-sized page (1080 by 2340,
+// a 360 by 780 page at device scale 3) of Splashery's own text (docs/ROADMAP.md and README.md as
+// plain HTML: our own words, no third-party content), scrolls it at a normal reading pace and
+// writes an H.264 MP4 at 30 frames a second with ffmpeg (a build tool; and a VP9 WebM copy, which
+// Playwright's Chromium can play), plus a few still PNGs and
+// a JSON file that says where each block of text is on each still.
 //
 //   SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium node tools/text-scroll-video.mjs
-//     [--out=.cache/text-scroll] [--secs=20] [--fps=30] [--speed=60] [--w=360] [--h=780]
-//     [--scale=3] [--stills=4] [--crf=18]
+//     [--out=.cache/text-scroll] [--secs=20] [--fps=30] [--speed=55] [--stills=0,5,10,15]
 //
-// The page is --w by --h CSS pixels at device scale --scale (1080 by 2340 by default, a phone's
-// screen), body text 16 px. It scrolls --speed CSS pixels a second (60: about a line every
-// 0.4 s, a calm read of a feed). Each frame is a screenshot after setting the scroll position for
-// its time, so the motion is exact however slow the machine. Writes <out>/text-scroll.mp4 (and .webm) and
-// <out>/still-<k>.png (the first frame, then evenly through the clip), and <out>/info.json.
-// ffmpeg is a build tool (installed in the container; listed in LICENSES.md); not shipped.
+// The page mixes three text sizes, 12, 14 and 16 CSS pixels (the sizes the legibility measure
+// counts, tools/psv-legibility.mjs), and headings above them. --speed is in CSS pixels a second
+// (55 is a steady reading pace on a phone). Everything goes under .cache/ (git-ignored): never in
+// the repo. Frames are rendered at fixed scroll positions, one per frame, so the video is the same
+// on every run and on any machine.
 
 import { chromium } from "@playwright/test";
-import { spawn, spawnSync } from "node:child_process";
+import { spawn } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
 
@@ -28,19 +26,18 @@ const opt = (name, def) => {
   const a = args.find((x) => x.startsWith(`--${name}=`));
   return a ? a.slice(name.length + 3) : def;
 };
-const OUT = opt("out", ".cache/text-scroll");
-const SECS = Number(opt("secs", 20));
-const FPS = Number(opt("fps", 30));
-const SPEED = Number(opt("speed", 60));
-const W = Number(opt("w", 360));
-const H = Number(opt("h", 780));
-const SCALE = Number(opt("scale", 3));
-const STILLS = Number(opt("stills", 4));
-const CRF = opt("crf", "18");
-fs.mkdirSync(OUT, { recursive: true });
+const out = opt("out", ".cache/text-scroll");
+const secs = Number(opt("secs", 20));
+const fps = Number(opt("fps", 30));
+const speed = Number(opt("speed", 55));
+const stills = opt("stills", "0,5,10,15").split(",").map(Number);
+const W = 360;
+const H = 780;
+const DPR = 3;
+fs.mkdirSync(out, { recursive: true });
 
-// A small Markdown to HTML: headings, paragraphs, lists, code blocks, tables (as plain rows) and
-// inline code, bold and links (as their text). Enough for our own two documents.
+// A small Markdown reader: headings, paragraphs, lists, code blocks and inline code, links as their
+// words. Enough for our own two documents; anything else shows as plain text.
 const esc = (s) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 const inline = (s) =>
   esc(s)
@@ -48,20 +45,20 @@ const inline = (s) =>
     .replace(/\*\*([^*]+)\*\*/g, "<b>$1</b>")
     .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1");
 function markdown(md) {
-  const out = [];
+  const html = [];
   let para = [];
   let list = null;
   let code = null;
   const flush = () => {
-    if (para.length) out.push(`<p>${inline(para.join(" "))}</p>`);
+    if (para.length) html.push(`<p>${inline(para.join(" "))}</p>`);
     para = [];
-    if (list) out.push(`<ul>${list.map((l) => `<li>${inline(l)}</li>`).join("")}</ul>`);
+    if (list) html.push(`<ul>${list.map((x) => `<li>${inline(x)}</li>`).join("")}</ul>`);
     list = null;
   };
   for (const line of md.split("\n")) {
     if (code) {
       if (line.startsWith("```")) {
-        out.push(`<pre>${esc(code.join("\n"))}</pre>`);
+        html.push(`<pre>${esc(code.join("\n"))}</pre>`);
         code = null;
       } else code.push(line);
       continue;
@@ -74,7 +71,7 @@ function markdown(md) {
     const h = line.match(/^(#{1,4})\s+(.*)/);
     if (h) {
       flush();
-      out.push(`<h${h[1].length}>${inline(h[2])}</h${h[1].length}>`);
+      html.push(`<h${h[1].length}>${inline(h[2])}</h${h[1].length}>`);
       continue;
     }
     const li = line.match(/^\s*[-*]\s+(.*)/) || line.match(/^\s*\d+\.\s+(.*)/);
@@ -83,77 +80,108 @@ function markdown(md) {
       (list ||= []).push(li[1]);
       continue;
     }
-    if (/^\s*\|/.test(line)) {
-      flush();
-      if (/^\s*\|[\s|:-]+\|\s*$/.test(line)) continue;
-      const cells = line
-        .split("|")
-        .slice(1, -1)
-        .map((c) => inline(c.trim()));
-      out.push(`<p class="row">${cells.join(" · ")}</p>`);
-      continue;
-    }
     if (!line.trim()) {
       flush();
       continue;
     }
-    if (list && /^\s+/.test(line)) list[list.length - 1] += ` ${line.trim()}`;
+    if (list) list[list.length - 1] += ` ${line.trim()}`;
     else para.push(line.trim());
   }
   flush();
-  return out.join("\n");
+  return html.join("\n");
 }
 
-const docs = ["README.md", "docs/ROADMAP.md"].map((f) => markdown(fs.readFileSync(f, "utf8")));
-const html = `<!doctype html><html><head><meta charset="utf-8"><style>
-html,body{margin:0;background:#fff;color:#111}
-body{font:16px/1.45 "DejaVu Sans","Liberation Sans",Arial,sans-serif;padding:12px 14px}
-h1{font-size:26px;margin:18px 0 10px}h2{font-size:21px;margin:16px 0 8px}h3,h4{font-size:18px;margin:14px 0 6px}
-p,li{margin:0 0 10px}ul{padding-left:20px;margin:0 0 10px}
-code,pre{font:13px/1.4 "DejaVu Sans Mono",monospace;background:#f2f2f2}
-pre{padding:8px;white-space:pre-wrap;word-break:break-all}
-.row{font-size:14px;color:#333;border-bottom:1px solid #ddd;padding-bottom:6px}
-hr{border:0;border-top:1px solid #ccc}
-.doc{border-bottom:6px solid #e5e5e5;margin-bottom:16px}
-</style></head><body>${docs.map((d) => `<div class="doc">${d}</div>`).join("")}</body></html>`;
+// The two documents, each cut into sections that take turns at 16, 14 and 12 pixels.
+const docs = ["docs/ROADMAP.md", "README.md"].map((f) => fs.readFileSync(f, "utf8"));
+const sizes = [16, 14, 12];
+let n = 0;
+const blocks = docs
+  .flatMap((md) => md.split(/\n(?=## )/))
+  .slice(0, 40)
+  .map((sec) => `<section class="s${sizes[n++ % 3]}">${markdown(sec)}</section>`)
+  .join("\n");
+const page = `<!doctype html><html><head><meta charset="utf-8"><style>
+  html, body { margin: 0; background: #fff; color: #1d1f23; }
+  body { font: 16px/1.45 -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; padding: 18px 16px 2000px; }
+  .s16 { font-size: 16px; } .s14 { font-size: 14px; } .s12 { font-size: 12px; }
+  h1 { font-size: 26px; margin: 0.4em 0; } h2 { font-size: 21px; margin: 0.8em 0 0.3em; }
+  h3 { font-size: 18px; margin: 0.8em 0 0.3em; } h4 { font-size: 1em; }
+  p, li { margin: 0.45em 0; } ul { padding-left: 1.2em; }
+  code, pre { font-family: Menlo, Consolas, monospace; font-size: 0.9em; background: #eef0f3; }
+  pre { padding: 8px; white-space: pre-wrap; }
+</style></head><body>${blocks}</body></html>`;
 
-const browser = await chromium.launch({ executablePath: process.env.SPLASHERY_CHROMIUM || undefined }); // prettier-ignore
-const page = await browser.newPage({ viewport: { width: W, height: H }, deviceScaleFactor: SCALE });
-await page.setContent(html);
-const total = await page.evaluate(() => document.documentElement.scrollHeight);
-const n = Math.round(SECS * FPS);
-const reach = Math.min(total - H, SPEED * SECS);
-if (reach < SPEED * SECS)
-  console.warn(`The page is only ${total} px tall; the scroll stops early.`);
+const browser = await chromium.launch({
+  executablePath: process.env.SPLASHERY_CHROMIUM || undefined,
+});
+const ctx = await browser.newContext({ viewport: { width: W, height: H }, deviceScaleFactor: DPR });
+const tab = await ctx.newPage();
+await tab.setContent(page);
+await tab.evaluate(() => document.fonts?.ready);
+
+// Where each text line is (CSS pixels, page coordinates) and its size: the legibility measure reads
+// the lines on a still from this.
+const lines = await tab.evaluate(() => {
+  const out = [];
+  for (const el of document.querySelectorAll("p, li, h1, h2, h3, h4")) {
+    const size = parseFloat(getComputedStyle(el).fontSize);
+    const range = document.createRange();
+    range.selectNodeContents(el);
+    const rows = new Map();
+    for (const r of range.getClientRects()) {
+      if (r.width < 4 || r.height < 4) continue;
+      const key = Math.round(r.top);
+      const row = rows.get(key) || { x0: Infinity, x1: -Infinity, y0: r.top, y1: r.bottom };
+      row.x0 = Math.min(row.x0, r.left);
+      row.x1 = Math.max(row.x1, r.right);
+      row.y1 = Math.max(row.y1, r.bottom);
+      rows.set(key, row);
+    }
+    for (const r of rows.values())
+      out.push({ size, x0: r.x0, x1: r.x1, y0: r.y0 + scrollY, y1: r.y1 + scrollY });
+  }
+  return out;
+});
+
+const frames = Math.round(secs * fps);
+const mp4 = path.join(out, "text-scroll.mp4");
 const ff = spawn(
   "ffmpeg",
-  ["-y", "-loglevel", "error", "-f", "image2pipe", "-framerate", String(FPS), "-i", "-",
-   "-c:v", "libx264", "-preset", "slow", "-crf", CRF, "-pix_fmt", "yuv420p",
-   "-movflags", "+faststart", path.join(OUT, "text-scroll.mp4")], // prettier-ignore
+  ["-y", "-loglevel", "error", "-f", "image2pipe", "-framerate", String(fps), "-c:v", "png", "-i", "-",
+    "-c:v", "libx264", "-preset", "medium", "-crf", "18", "-pix_fmt", "yuv420p", "-movflags", "+faststart", mp4], // prettier-ignore
   { stdio: ["pipe", "inherit", "inherit"] },
 );
-const done = new Promise((r, j) => ff.on("close", (c) => (c ? j(new Error(`ffmpeg ${c}`)) : r())));
-const stillAt = new Set(Array.from({ length: STILLS }, (_, k) => Math.round((k * (n - 1)) / Math.max(1, STILLS - 1)))); // prettier-ignore
-const stills = [];
-for (let i = 0; i < n; i++) {
-  const y = Math.min(reach, (i / FPS) * SPEED);
-  await page.evaluate((y) => window.scrollTo(0, y), y);
-  const png = await page.screenshot({ type: "png" });
+const done = new Promise((res, rej) =>
+  ff.on("close", (c) => (c ? rej(new Error(`ffmpeg ${c}`)) : res())),
+);
+const meta = { w: W * DPR, h: H * DPR, dpr: DPR, fps, secs, speed, stills: [] };
+for (let f = 0; f < frames; f++) {
+  const t = f / fps;
+  const y = Math.round(t * speed * DPR) / DPR; // whole device pixels, so a still matches its frame
+  await tab.evaluate((y) => window.scrollTo(0, y), y);
+  const png = await tab.screenshot({ type: "png" });
   if (!ff.stdin.write(png)) await new Promise((r) => ff.stdin.once("drain", r));
-  if (stillAt.has(i)) {
-    const file = path.join(OUT, `still-${stills.length}.png`);
-    fs.writeFileSync(file, png);
-    stills.push({ file, frame: i, t: i / FPS, scrollY: y });
+  const at = stills.findIndex((s) => Math.round(s * fps) === f);
+  if (at >= 0) {
+    const file = `still-${String(stills[at]).padStart(2, "0")}s.png`;
+    fs.writeFileSync(path.join(out, file), png);
+    const shown = lines
+      .filter((l) => l.y1 > y && l.y0 < y + H)
+      .map((l) => ({ ...l, y0: l.y0 - y, y1: l.y1 - y }));
+    meta.stills.push({ t: stills[at], frame: f, file, scroll: y, lines: shown });
   }
-  if (i % 60 === 0) process.stdout.write(`frame ${i} of ${n}\r`);
+  if (f % 60 === 0) process.stdout.write(`frame ${f} of ${frames}\r`);
 }
 ff.stdin.end();
 await done;
 await browser.close();
-// The same frames as VP9 WebM: Playwright's Chromium has no H.264 decoder, so the headless tools
-// open this one (a phone opens the MP4).
-const vp9 = spawnSync("ffmpeg", ["-y", "-loglevel", "error", "-i", path.join(OUT, "text-scroll.mp4"), "-c:v", "libvpx-vp9", "-crf", "18", "-b:v", "0", "-row-mt", "1", "-cpu-used", "4", path.join(OUT, "text-scroll.webm")]); // prettier-ignore
-if (vp9.status) throw new Error(String(vp9.stderr));
-const info = { width: W * SCALE, height: H * SCALE, fps: FPS, secs: SECS, speed: SPEED, scale: SCALE, pageHeight: total, stills }; // prettier-ignore
-fs.writeFileSync(path.join(OUT, "info.json"), JSON.stringify(info, null, 2));
-console.log(`\n${path.join(OUT, "text-scroll.mp4")}: ${info.width} by ${info.height}, ${n} frames`);
+// A VP9 WebM copy too: Playwright's Chromium plays no H.264, so the tools open this one.
+const webm = path.join(out, "text-scroll.webm");
+await new Promise((res, rej) =>
+  spawn("ffmpeg", ["-y", "-loglevel", "error", "-i", mp4, "-c:v", "libvpx-vp9", "-crf", "24", "-b:v", "0", "-row-mt", "1", "-deadline", "good", "-cpu-used", "4", webm], { stdio: "inherit" }) // prettier-ignore
+    .on("close", (c) => (c ? rej(new Error(`ffmpeg ${c}`)) : res())),
+);
+fs.writeFileSync(path.join(out, "text-scroll.json"), JSON.stringify(meta, null, 1));
+console.log(
+  `\nWrote ${mp4} (${(fs.statSync(mp4).size / 1e6).toFixed(1)} MB), ${meta.stills.length} stills.`,
+);
