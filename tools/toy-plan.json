@@ -1425,7 +1425,7 @@
       "owner": "Wow, really neat. Maybe twist a little.",
       "effect": "An ant-like dot walks the single side; the band twists.",
       "sound": "No step tune; each rider has its own sound on the ride: a race car's engine, a rolling beach ball, a bicycle with one soft quack, the ant's tiny feet.",
-      "improved": "E3: a tap sends a rider on two laps along the middle of the band: after one lap it is underneath (the band has one side), after two it is back on top where it started, while the band twists a little and untwists (about 5 s). After the owner's review the rider is a choice (the Rider option): a blue race car (the default) with spinning wheels, a rolling beach ball, a duck riding a bicycle (wheels and pedals turning) or the ant."
+      "improved": "E3: a tap sends a rider on two laps along the middle of the band: after one lap it is underneath (the band has one side), after two it is back on top where it started, while the band twists a little and untwists (about 5 s). After the owner's review the rider is a choice (the Rider option): a blue race car (the default) with spinning wheels, a rolling beach ball, a duck riding a bicycle (wheels and pedals turning) or the ant. Math r2 (labs work on the public toy, waiting for the owner's marks): three more riders, a toy train (chuffing steam, spoked wheels turning), a ladybug (light feet and a flutter of wings, her six legs walking) and a skateboard (wheels rolling, a clack on and off), and a Rider color choice for every rider (Its own keeps each rider's colors)."
     },
     "klein-bottle": {
       "v": "keep",
@@ -1446,7 +1446,7 @@
       "owner": "Possibly the favourite and homepage embed (see the Menger sponge).",
       "effect": "Rotates through the fourth dimension, turning inside out.",
       "sound": "No \"vroom\"; a great slow rush as it turns inside out and again as it turns home, over a low chord.",
-      "improved": "E3: a tap turns the tesseract once round through the fourth dimension: the pink inner cube swells out to become the outer one while the blue one folds inside, holds a moment, then turns on back to where it started (about 5 s); at rest it rocks gently in 4D."
+      "improved": "E3: a tap turns the tesseract once round through the fourth dimension: the pink inner cube swells out to become the outer one while the blue one folds inside, holds a moment, then turns on back to where it started (about 5 s); at rest it rocks gently in 4D. Math r2: seven color themes (Colors; Blue and pink is the default and unchanged)."
     },
     "torus-knot": {
       "v": "keep",
@@ -1467,7 +1467,7 @@
       "owner": "Like the Mandeltorus: twisting.",
       "effect": "Morphs through powers (bulb shapes twist and bloom).",
       "sound": "Deep morphing tone.",
-      "improved": "E3: a tap turns the bulb's seven horizontal discs like the dials of a combination lock: neighbours click round in opposite directions, top to bottom, then back the other way, bottom to top; each turns a seventh of a turn (the bulb's own symmetry), so it lands on the same picture (about 4 s). This replaced a twist after the owner's review."
+      "improved": "E3: a tap turns the bulb's seven horizontal discs like the dials of a combination lock: neighbours click round in opposite directions, top to bottom, then back the other way, bottom to top; each turns a seventh of a turn (the bulb's own symmetry), so it lands on the same picture (about 4 s). This replaced a twist after the owner's review. Math r2: a Power option (5 to 12; power n has n − 1-fold symmetry, so the slices turn 1/(n − 1) of a turn) and a Julia bulb (four fixed points c off the axis; with no turning symmetry the whole bulb turns a quarter turn and back)."
     },
     "sierpinski": {
       "v": "keep",
@@ -1505,7 +1505,7 @@
       "owner": "Toy Ideas page (approved, 2026-09-27).",
       "effect": "A chain of spinning circles, each riding on the last, draws a shape with its tip; a Circles option sets how many.",
       "sound": "Each circle hums its own frequency, building into a chord.",
-      "improved": "Math: new toy. A tap spins the chain of circles once round and the tip draws the shape again: a heart, a star or a square wave (drawn out to the right). The Circles option runs from a wobbly 3 to a crisp 60 (5 s). After the owner's review (a 3D version, your own equation or parameters, and spelling a name): a View option stacks the circles in depth (3D); Your words gives each letter or digit its own chain of circles (up to six, on one or two lines; ♥ and ★, and heart and star emoji, draw a heart and a star); and your own closed curve (x = …, y = … or r = …) can be typed too."
+      "improved": "Math: new toy. A tap spins the chain of circles once round and the tip draws the shape again: a heart, a star or a square wave (drawn out to the right). The Circles option runs from a wobbly 3 to a crisp 60 (5 s). After the owner's review (a 3D version, your own equation or parameters, and spelling a name): a View option stacks the circles in depth (3D); Your words gives each letter or digit its own chain of circles (up to six, on one or two lines; ♥ and ★, and heart and star emoji, draw a heart and a star); and your own closed curve (x = …, y = … or r = …) can be typed too. Math r2: longer text, up to 40 letters on up to four lines, drawn five letters at a time (2.6 s for each group of five; the circles of the group drawing show, the writing stays), and lighter, thinner circles behind words in 2D so the writing reads."
     },
     "pythagoras-proof": {
       "v": "keep",
@@ -1513,6 +1513,55 @@
       "effect": "Four copies of a right triangle slide as solid pieces inside a big square, so the empty space changes from a² + b² into c²; then they slide back.",
       "sound": "Wooden slides, and a click as each piece lands.",
       "improved": "Math: new toy. A tap slides the wooden triangles one at a time from two rectangles into the four corners: the empty squares a² and b² fade and the tilted square c² lights up, with a² + b² = c² below; then they slide back (4.5 s). In this classic arrangement the pieces slide without turning, and one stays put."
+    },
+    "rossler-attractor": {
+      "v": "keep",
+      "owner": "The owner's Math notes (BACKLOG.md, Math r2): more dynamical systems beside the Lorenz attractor.",
+      "effect": "A tap drops a new tracer that follows the flow live.",
+      "sound": "A soft drip as the tracer drops, over a low, wide chord in the toy's own key.",
+      "improved": "Math r2: new toy (labs), the Rössler attractor. The glowing path is one long solution of the equations (RK4). A tap drops a bright tracer where you tap (Play: on the path), integrated live with fixed RK4 steps so it moves the same at any frame rate, with a short trail; off the attractor it is pulled onto it. Up to four tracers, each its own color; a fifth replaces the oldest."
+    },
+    "thomas-attractor": {
+      "v": "keep",
+      "owner": "The owner's Math notes (BACKLOG.md, Math r2): more dynamical systems beside the Lorenz attractor.",
+      "effect": "A tap drops a new tracer that follows the flow live.",
+      "sound": "A soft drip as the tracer drops, over a low, wide chord in the toy's own key.",
+      "improved": "Math r2: new toy (labs), the Thomas attractor. The glowing path is one long solution of the equations (RK4). A tap drops a bright tracer where you tap (Play: on the path), integrated live with fixed RK4 steps so it moves the same at any frame rate, with a short trail; off the attractor it is pulled onto it. Up to four tracers, each its own color; a fifth replaces the oldest."
+    },
+    "aizawa-attractor": {
+      "v": "keep",
+      "owner": "The owner's Math notes (BACKLOG.md, Math r2): more dynamical systems beside the Lorenz attractor.",
+      "effect": "A tap drops a new tracer that follows the flow live.",
+      "sound": "A soft drip as the tracer drops, over a low, wide chord in the toy's own key.",
+      "improved": "Math r2: new toy (labs), the Aizawa attractor. The glowing path is one long solution of the equations (RK4). A tap drops a bright tracer where you tap (Play: on the path), integrated live with fixed RK4 steps so it moves the same at any frame rate, with a short trail; off the attractor it is pulled onto it. Up to four tracers, each its own color; a fifth replaces the oldest."
+    },
+    "five-cell": {
+      "v": "keep",
+      "owner": "The owner's Math notes (BACKLOG.md, Math r2): other 4D shapes beside the hypercube, and color themes.",
+      "effect": "Rolls one whole turn through the fourth dimension and comes home.",
+      "sound": "Like the hypercube: a slow rush as it rolls out and again as it rolls home, over a low chord in its own key.",
+      "improved": "Math r2: new toy (labs), the 5-cell. The corners are true 4D points turned in the planes of x and w and of y and w and seen in perspective from 4D; the edges stay straight between them. A tap rolls the shape one whole turn through the fourth dimension (about 5 s) and home. Seven color themes."
+    },
+    "sixteen-cell": {
+      "v": "keep",
+      "owner": "The owner's Math notes (BACKLOG.md, Math r2): other 4D shapes beside the hypercube, and color themes.",
+      "effect": "Rolls one whole turn through the fourth dimension and comes home.",
+      "sound": "Like the hypercube: a slow rush as it rolls out and again as it rolls home, over a low chord in its own key.",
+      "improved": "Math r2: new toy (labs), the 16-cell. The corners are true 4D points turned in the planes of x and w and of y and w and seen in perspective from 4D; the edges stay straight between them. A tap rolls the shape one whole turn through the fourth dimension (about 5 s) and home. Seven color themes."
+    },
+    "twenty-four-cell": {
+      "v": "keep",
+      "owner": "The owner's Math notes (BACKLOG.md, Math r2): other 4D shapes beside the hypercube, and color themes.",
+      "effect": "Rolls one whole turn through the fourth dimension and comes home.",
+      "sound": "Like the hypercube: a slow rush as it rolls out and again as it rolls home, over a low chord in its own key.",
+      "improved": "Math r2: new toy (labs), the 24-cell. The corners are true 4D points turned in the planes of x and w and of y and w and seen in perspective from 4D; the edges stay straight between them. A tap rolls the shape one whole turn through the fourth dimension (about 5 s) and home. Seven color themes."
+    },
+    "duoprism": {
+      "v": "keep",
+      "owner": "The owner's Math notes (BACKLOG.md, Math r2): other 4D shapes beside the hypercube, and color themes.",
+      "effect": "Rolls one whole turn through the fourth dimension and comes home.",
+      "sound": "Like the hypercube: a slow rush as it rolls out and again as it rolls home, over a low chord in its own key.",
+      "improved": "Math r2: new toy (labs), the duoprism (3,4 by default; each polygon 3 to 6 sides). The corners are true 4D points turned in the planes of x and w and of y and w and seen in perspective from 4D; the edges stay straight between them. A tap rolls the shape one whole turn through the fourth dimension (about 5 s) and home. Seven color themes."
     },
     "splat-equation": {
       "v": "keep",
@@ -2747,6 +2796,13 @@
       "effect": "Pluto (New Horizons), Ceres and Vesta (Dawn) on their real elevation maps, so their true shapes show, turning and lit by a movable sun. A tap flies to the next named place (Sputnik Planitia, Wright Mons, Occator, Ahuna Mons, Rheasilvia, Marcia) and back. Space r3: a tap on any spot turns it to face you, rebuilds a dense patch of splats round it from close-up tiles, zooms in smoothly as far as those maps allow, and names what is there (the IAU Gazetteer's named feature, with the source); a second tap or a pinch goes back out. The play button still flies to the named features.",
       "sound": "Space is silent: a soft breath as the view flies in.",
       "improved": "Space r2: new toy (labs), the real-worlds engine with a World choice. Space r3 (the owner's walkthrough of October 6, 2026: sharper, less grainy, and a tap that zooms in and names the place): the globe takes nearly all the splats, each colored by the mean of its map over its footprint (no speckle); 10° close-up tiles (tools/sp3-tiles.mjs) and place names (tools/sp3-places.mjs) load only on a tap."
+    },
+    "solar-orbits": {
+      "v": "keep",
+      "owner": "The Operator's brief of October 7, 2026 (lane Space r4; labs only).",
+      "effect": "The Sun, the eight planets, six large moons, four comets and 4,000 sampled real asteroids on their real Keplerian orbits (JPL elements) for any date from 1800 to 2050: a date slider, a speed from paused to a year a second, a readable scale (labeled, not to scale) and a true scale. A tap flies to the next planet (the system grows about it, turned so its sunlit side shows), and after Neptune back out.",
+      "sound": "Space is silent: a soft breath as the view flies.",
+      "improved": "Space r4: new toy (labs). The asteroids move on the graphics chip by Kepler's equation (src/space/orbit-field.js); the data is a dated snapshot (tools/sp4-orbits.mjs)."
     },
     "star-systems": {
       "v": "keep",

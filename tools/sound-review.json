@@ -1098,7 +1098,7 @@
       "status": "site",
       "said": "For the Mobius strip, I appreciate, I think, the intent of the sound effect that you chose, because it kind of synchronizes with the full traversal of the Mobius strip, of the object that's on it. I'm going to call the rider. Yeah, the object will be called the rider that's on it. Having said that, it's kind of awkward, and I'd almost rather not have the xylophone kind of sound. It's not exactly a xylophone, but it's close. It's like the different tones playing like it does, and instead I'd rather just focus on the sound effect of the rider. So for the race car, it should actually have a race car sound, and we'll get to the race car when we actually hit vehicles and go to the vehicles section here. But the race car should sound kind of like a real race car. For the beach ball, it should sound like a real rolling beach ball, or just like a real rolling ball. For the duck on a bike, which is really cool, by the way, it should sound like a bike. We don't need it to quack, although it would be cool if you could add, like, a little quack. That would be cute. But yeah, you could add, like, a tiny little quack, like a real duck quack, but not overwhelmingly, and it shouldn't happen that often, maybe just once at the beginning or in the middle or something. For the ant, this is one of the only cases where I think that that kind of, like, crawling, almost clicky kind of noise could make sense. But I want there to be, like, a different sound effect depending on what the rider is. … Yeah, just returning to the Mobius strip, like I said, I think that, like having a different sound for the different riders would make sense.",
       "note": "Drop the xylophone-like tones and give each rider its own sound: a real race car, a rolling ball, a bike (with maybe one small real quack) for the duck, and a crawling sound for the ant.",
-      "plan": "Now: no step tune; each rider has its own sound on the ride: a race car's engine, a rolling beach ball, a bicycle with one soft quack, the ant's tiny feet.",
+      "plan": "Now: no step tune; each rider has its own sound on the ride: a race car's engine, a rolling beach ball, a bicycle with one soft quack, the ant's tiny feet. Math r2: three new riders with their own ride sounds (cues from the recipe): the toy train's steam chuffs, the ladybug's light feet and one flutter of her wings, the skateboard's rolling wheels with a clack as it sets off and lands.",
       "candidates": []
     },
     "klein-bottle": {
@@ -2398,6 +2398,55 @@
       "plan": "",
       "candidates": []
     },
+    "rossler-attractor": {
+      "status": "ready",
+      "said": "(Math r2, October 7, 2026) A new toy: its first sound, to hear on the Sound Board.",
+      "note": "New toy (lane Math r2).",
+      "plan": "Now: A soft drip as the tracer drops, over a low, wide chord in the toy's own key.",
+      "candidates": []
+    },
+    "thomas-attractor": {
+      "status": "ready",
+      "said": "(Math r2, October 7, 2026) A new toy: its first sound, to hear on the Sound Board.",
+      "note": "New toy (lane Math r2).",
+      "plan": "Now: A soft drip as the tracer drops, over a low, wide chord in the toy's own key.",
+      "candidates": []
+    },
+    "aizawa-attractor": {
+      "status": "ready",
+      "said": "(Math r2, October 7, 2026) A new toy: its first sound, to hear on the Sound Board.",
+      "note": "New toy (lane Math r2).",
+      "plan": "Now: A soft drip as the tracer drops, over a low, wide chord in the toy's own key.",
+      "candidates": []
+    },
+    "five-cell": {
+      "status": "ready",
+      "said": "(Math r2, October 7, 2026) A new toy: its first sound, to hear on the Sound Board.",
+      "note": "New toy (lane Math r2).",
+      "plan": "Now: Like the hypercube: a slow rush as it rolls out and again as it rolls home, over a low chord in its own key.",
+      "candidates": []
+    },
+    "sixteen-cell": {
+      "status": "ready",
+      "said": "(Math r2, October 7, 2026) A new toy: its first sound, to hear on the Sound Board.",
+      "note": "New toy (lane Math r2).",
+      "plan": "Now: Like the hypercube: a slow rush as it rolls out and again as it rolls home, over a low chord in its own key.",
+      "candidates": []
+    },
+    "twenty-four-cell": {
+      "status": "ready",
+      "said": "(Math r2, October 7, 2026) A new toy: its first sound, to hear on the Sound Board.",
+      "note": "New toy (lane Math r2).",
+      "plan": "Now: Like the hypercube: a slow rush as it rolls out and again as it rolls home, over a low chord in its own key.",
+      "candidates": []
+    },
+    "duoprism": {
+      "status": "ready",
+      "said": "(Math r2, October 7, 2026) A new toy: its first sound, to hear on the Sound Board.",
+      "note": "New toy (lane Math r2).",
+      "plan": "Now: Like the hypercube: a slow rush as it rolls out and again as it rolls home, over a low chord in its own key.",
+      "candidates": []
+    },
     "screen": {
       "status": "site",
       "said": "(September 30, 2026, on the Sound Board) \"On\" sound doesn't need the hum; \"Off\" sound is good.",
@@ -3605,6 +3654,14 @@
       "said": "",
       "note": "A new toy's sound, for the owner to hear.",
       "plan": "New (lane Lattices and orbitals): a soft, low whoosh as the orbital is cut open, and a quiet low ding as its cut face shows.",
+      "candidates": [],
+      "round": "2026-10-07"
+    },
+    "solar-orbits": {
+      "status": "ready",
+      "said": "(New toy, lane Space r4, October 7, 2026.)",
+      "note": "A new labs toy: the solar system on real orbits.",
+      "plan": "Space is silent: a soft, low breath as the view flies to the next planet, like the other real-space toys.",
       "candidates": [],
       "round": "2026-10-07"
     }
