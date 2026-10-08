@@ -341,7 +341,8 @@ A portrait frame, single-thread WebAssembly, this container under load: 196 px 1
   edge-aware depth"). 392 px on 8 depth pictures instead of 196 on 32, at the same wait: the horse
   48% → 12% of edge pixels on the wrong side, the machine 42% → 29%, the bunny 33% → 35%. 294 px on
   all 32 pictures doubles the wait and helps the bunny (26%), the dragon and the bridge. My
-  suggestion: leave the clips as they are in this round.
+  suggestion: leave the clips as they are in this round. The Operator agreed (October 8, 2026, 13:36
+  UTC): the clips keep their depth this round; the measurements stay here for the owner.
 - Round 2 changes two checks in `tests/p3d.spec.mjs` (Photo to 3D's own tests, of the file this lane
   owns): a splat's size may be up to 8 cells across (a plain block), and the flat pose may sit up to
   0.006 behind the plane (the bigger splats). `tests/phf2.spec.mjs` checks that no block bridges a
