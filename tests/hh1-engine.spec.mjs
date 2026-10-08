@@ -164,3 +164,76 @@ test("a shelf shape with a grab in its shelf entry stretches like the gummy bear
   expect(s.back).toBeLessThan(0.02); // it springs back
   expect(s.plain).toBe(false); // a shelf shape without one stays as it was
 });
+
+test("hands.soft: a toy squishes on landing as much as its hands block says", async ({ page }) => {
+  const squish = async (hands) => {
+    await open(page, "bouncy-ball", hands);
+    return page.evaluate(() => {
+      const { player } = window.__splashery;
+      const h = player.handsOn;
+      h.ensure();
+      const b = h.body;
+      b.pos[1] += 3 * h.R();
+      h.moved = true;
+      h.world.wake();
+      let peak = 0;
+      for (let t = 0; t < 1; t += 1 / 60) {
+        player.update(1 / 60);
+        peak = Math.max(peak, h.squish?.amp ?? 0);
+      }
+      return { soft: h.soft, peak };
+    });
+  };
+  const firm = await squish({ material: "bouncy-ball", soft: 0.15 });
+  const usual = await squish({ material: "bouncy-ball" });
+  expect(firm.soft).toBeCloseTo(0.15, 3);
+  expect(usual.soft).toBeCloseTo(0.55, 3); // the list's
+  expect(firm.peak).toBeLessThan(usual.peak * 0.5);
+});
+
+test("hands.floor may be a function of the build", async ({ page }) => {
+  await open(page, "dice", null);
+  const d = await page.evaluate(() => {
+    const { player } = window.__splashery;
+    player.toyInfo.recipe.hands = {
+      floor: (data, info) => (info.options?.kind === "d20" ? -0.8 : -0.5),
+      pieces: () => [{ part: "d6a", pos: [-0.64, 0, 0.18], solid: { type: "box", half: [0.5, 0.5, 0.5] } }], // prettier-ignore
+    };
+    const h = player.handsOn;
+    h.attach(player.toyInfo);
+    h.setOn(true);
+    h.ensure();
+    return h.world.planes[0].d;
+  });
+  expect(d).toBeCloseTo(-0.5, 5);
+});
+
+test("hands.press: a press held still squeezes a whole toy, and it springs back when let go", async ({
+  page,
+}) => {
+  await open(page, "rubber-duck", { press: { amount: 0.3 } });
+  const s = await page.evaluate(() => {
+    const { player } = window.__splashery;
+    const h = player.handsOn;
+    const c = player.stage.toScreen(player.toyInfo.center);
+    h.pressAt(player.toyInfo.center.slice(), c[0], c[1]);
+    const amp = [];
+    for (let i = 0; i < 30; i++) {
+      player.update(1 / 60);
+      amp.push(h.squishAmp());
+    }
+    h.release();
+    let min = Infinity;
+    for (let i = 0; i < 90; i++) {
+      player.update(1 / 60);
+      min = Math.min(min, h.squishAmp());
+      amp.push(h.squishAmp());
+    }
+    return { early: amp[5], held: amp[29], min, end: amp.at(-1), lifted: !!h.hold };
+  });
+  expect(s.early).toBeLessThan(0.01); // a tap's worth of time: nothing yet
+  expect(s.held).toBeCloseTo(0.3, 2); // squeezed while held
+  expect(s.min).toBeLessThan(-0.02); // springs back through rest (a wobble)
+  expect(Math.abs(s.end)).toBeLessThan(0.01);
+  expect(s.lifted).toBe(false);
+});
