@@ -192,7 +192,8 @@ export const RECIPES = {
         parts: [uv],
         color: (c) => {
           const l = 0.3 * c[0] + 0.55 * c[1] + 0.15 * c[2];
-          return mix("#3a2a9a", "#b8a8ff", Math.min(1, l * 1.6));
+          // Fluorescence: a deep blue-violet, brightest where the stone is thickest and lightest.
+          return mix("#1f1478", "#8a74ff", Math.min(1, l * 1.25) ** 1.3);
         },
       });
     },

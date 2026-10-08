@@ -426,8 +426,8 @@ Proposals below are suggestions; the owner may change them.
 - **Cone shell** (`cone-shell`). Now: tap: Turn (rig). Plan: keep.
   - Owner: New in Photoreal r3 (October 8, 2026), behind the labs switch until the owner marks it
     good.
-  - Effect: Turns once round on its point.
-  - Improved: Photoreal r3 (October 8, 2026): Turns once round on its point.
+  - Effect: Turns one way and the other on its point.
+  - Improved: Photoreal r3 (October 8, 2026): Turns one way and the other on its point.
   - Sound: A short, quiet sound that suits the object.
 - **Celestial globe** (`celestial-globe`). Now: tap: Spin the globe. Plan: keep.
   - Owner: New in Photoreal r3 (October 8, 2026), behind the labs switch until the owner marks it

@@ -3024,9 +3024,9 @@
     "cone-shell": {
       "v": "keep",
       "owner": "New in Photoreal r3 (October 8, 2026), behind the labs switch until the owner marks it good.",
-      "effect": "Turns once round on its point.",
+      "effect": "Turns one way and the other on its point.",
       "sound": "A short, quiet sound that suits the object.",
-      "improved": "Photoreal r3 (October 8, 2026): Turns once round on its point."
+      "improved": "Photoreal r3 (October 8, 2026): Turns one way and the other on its point."
     },
     "celestial-globe": {
       "v": "keep",

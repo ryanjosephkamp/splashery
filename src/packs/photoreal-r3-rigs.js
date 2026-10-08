@@ -772,7 +772,8 @@ const BASES = {
   "murex-shell": based({}),
   "cave-lioness": based({}),
   // Lane Photoreal r3's own captures (src/packs/photoreal-r3.js).
-  "triceratops-skull": based({}),
+  // The skull's mounting rod, under the back of its jaw (hidden).
+  "triceratops-skull": based({ hide: [{ at: [-0.15, -0.93, -0.02], r: [0.12, 0.14, 0.12], soft: 0.02 }, { at: [-0.15, -0.8, -0.02], r: [0.09, 0.06, 0.09], soft: 0.02, color: "#3a3631", tol: 0.3 }] }), // prettier-ignore
   "cone-shell": based({}),
 };
 
@@ -884,9 +885,9 @@ const PHYSALIS = [
 const GLOBE = [-0.138, 0.281, 0.051];
 const GLOBE_AXIS = [0.198, 0.979, 0.039];
 // New in Photoreal r3: the Triceratops skull turns its head to look at you; the cone shell turns
-// once round on its point.
+// one way and the other on its point (its far side was never captured well, so not all the way).
 EFFECTS["triceratops-skull"] = { label: "Look", secs: 2.7, motion: M.look({ pivot: [0.2, -0.3, 0], amp: 0.45, nod: 0.05 }) }; // prettier-ignore
-EFFECTS["cone-shell"] = { label: "Turn", secs: 3, motion: M.spin({ center: [0, 0, 0], turns: 1, secs: 2.8 }) }; // prettier-ignore
+EFFECTS["cone-shell"] = { label: "Turn", secs: 2.7, motion: M.look({ pivot: [0, -0.8, 0], amp: 0.55, nod: 0 }) }; // prettier-ignore
 
 const PART_EFFECTS = {
   // The desk globe spins in its stand: the ball's splats (not the dark meridian ring or stand)

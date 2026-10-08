@@ -28,9 +28,9 @@ export const TOY_HELP = {
       "A real Triceratops skull from a museum's dinosaur hall, captured from photos and drawn with splats. Triceratops lived about 68 to 66 million years ago, at the very end of the age of dinosaurs. It ate plants, and its three horns and the great bony frill behind its head may have been for defense, for showing off to rivals, or both.\n\nTap it and the skull turns to look at you, then the other way. Drag to circle it and look at the horns, the beak and the frill's scalloped edge.",
   },
   "cone-shell": {
-    howTo: "Tap it to turn it round; drag to turn it yourself.",
+    howTo: "Tap it to turn it on its point; drag to turn it yourself.",
     about:
-      "The shell of a textile cone snail, captured from photos and drawn with splats. Cone snails live on tropical reefs and hunt with a tiny harpoon that carries venom; the netted pattern of gold and brown tents grows at the shell's lip, line by line.\n\nTap it and it turns once round on its point. Drag to circle it and follow the pattern.",
+      "The shell of a textile cone snail, captured from photos and drawn with splats. Cone snails live on tropical reefs and hunt with a tiny harpoon that carries venom; the netted pattern of gold and brown tents grows at the shell's lip, line by line.\n\nTap it and it turns one way and the other on its point. Drag to circle it and follow the pattern.",
   },
   "celestial-globe": {
     howTo: "Tap it to spin the globe; drag to turn it.",
