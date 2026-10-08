@@ -779,9 +779,10 @@ nose first, and one that hits a piece with `target: true` sticks in it where it 
 picked up again or ↺ Reset (objects only, never people or animals). `stick: false` lets it bounce.
 
 **A flip** (lane Hands-on H2, October 8, 2026): a piece with `flip: true` in its def, let go from a
-quick flick up the screen (faster up than across), is tossed straight up with half a turn about the
-level line across the view, timed to come down upside down where it rose from (a pancake flipped in
-the pan). Let go any other way, it is set down as before.
+quick flick up the screen (faster up than across), is tossed up with half a turn about the level
+line across the view, timed to come down upside down where it hovered before the flick, on whatever
+is under that spot, drawn toward that piece's middle by the recipe's `center` (a pancake flipped
+back onto its stack). Let go any other way, it is set down as before.
 
 `info.hands.on` is whether Hands-on is on. Check the toy's frame time with the pieces running (the
 whole world's step is well under a millisecond for one body, a few for 40 pieces).

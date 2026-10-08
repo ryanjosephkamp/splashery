@@ -728,16 +728,26 @@ export class HandsOn {
     const up = FLIP_UP * R;
     const g = Math.max(1e-6, -this.world.gravity[1]);
     if (b.pos[1] < h.target[1]) b.pos[1] = h.target[1]; // (from where it hovers, as a set-down)
-    // Where it comes down: on whatever is under it (a piece's pick
-    // ellipsoid, or the floor), its underside on top.
+    // It comes down where it was before the flick (the finger's flick up
+    // the screen carries the hovering piece off along the floor), on
+    // whatever is under that spot (a piece's pick ellipsoid, or the
+    // floor), drawn toward that piece's middle as a set-down is.
+    const was = h.trail[0]?.p || b.pos;
+    let at = [was[0], was[2]];
     let ground = this.world.planes[0].d;
+    let onto = null;
     for (const pc of this.pieces) {
       if (pc.body === b) continue;
       const r = pc.def.pick || [pc.body.bound, pc.body.bound, pc.body.bound];
-      const o = [b.pos[0], b.pos[1] + 6 * R, b.pos[2]];
+      const o = [at[0], b.pos[1] + 6 * R, at[1]];
       const d = rayEllipsoid(pc.body, r, { origin: o, dir: [0, -1, 0] });
-      if (d < Infinity) ground = Math.max(ground, o[1] - d);
+      if (d < Infinity && o[1] - d > ground) {
+        ground = o[1] - d;
+        onto = pc.body;
+      }
     }
+    const pull = this.info.recipe.hands.center ?? 0;
+    if (onto) at = at.map((v, i) => v + ((i ? onto.pos[2] : onto.pos[0]) - v) * pull);
     const drop = Math.max(0, b.pos[1] - ground - (def.pick ? def.pick[1] : b.bound));
     const t = (up + Math.sqrt(up * up + 2 * g * drop)) / g; // up, then down onto it
     let axis = v3.cross(this.ray(h.x0, h.y0).dir, [0, 1, 0]);
@@ -745,7 +755,7 @@ export class HandsOn {
     // Half a turn by the time it lands, its spin slowed by angDamping on the way.
     const k = b.angDamping;
     const w = k > 1e-6 ? (Math.PI * k) / (1 - Math.exp(-k * t)) : Math.PI / t;
-    b.vel = [0, up, 0];
+    b.vel = [(at[0] - b.pos[0]) / t, up, (at[1] - b.pos[2]) / t];
     b.omega = v3.scale(axis, w);
     this.extras?.thrown(h); // lane Hands engine A
     this.hold = null;
