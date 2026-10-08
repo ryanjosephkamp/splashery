@@ -81,6 +81,8 @@ const HOLD_UPRIGHT = 1;
 const HOLD_SWING_DAMPING = 1.2;
 const PUSH_MAX = 2; // toy radii per second: the fastest a nudge pushes
 const PICK_LIFT = 0.15;
+const FLIP_PX = 500; // CSS pixels per second up the screen: a flick this fast flips a `flip` piece (lane Hands-on H2)
+const FLIP_UP = 4; // toy radii per second: how fast a flipped piece rises
 
 export class HandsOn {
   // player: the Player (stage, camera, toyInfo, ray, proc).
@@ -402,6 +404,9 @@ export class HandsOn {
     const h = this.hold;
     if (!h) return;
     h.travel = Math.max(h.travel, Math.hypot(x - h.x0, y - h.y0));
+    // Lane Hands-on H2: the finger's recent path on screen, for a flip.
+    (h.screen ||= []).push({ t: this.simTime, x, y });
+    while (h.screen[0].t < this.simTime - 2 * THROW_WINDOW) h.screen.shift();
     const ray = this.ray(x, y);
     if (this.joints?.move(h, ray)) return; // lane Hands engine B: a joint's part follows
     if (h.place) {
@@ -677,6 +682,7 @@ export class HandsOn {
     h.body.damping = Math.max(h.body.damping, AIR_DRAG);
     // A piece being placed is set down, not thrown.
     if (h.place) {
+      if (this.flip(h)) return true; // lane Hands-on H2: a pancake flipped
       this.extras?.thrown(h); // lane Hands engine A
       // Set down from where it hovers at least, so a quick let-go never
       // starts it inside the piece below (it may still be catching up).
@@ -698,6 +704,50 @@ export class HandsOn {
     const ws = v3.len(h.body.omega);
     if (ws > wmax) h.body.omega = v3.scale(h.body.omega, wmax / ws);
     this.extras?.thrown(h); // lane Hands engine A: the material's weight and spin
+    this.hold = null;
+    this.world.wake();
+    return true;
+  }
+
+  // Lane Hands-on H2: a piece whose def says `flip: true`, let go from a
+  // quick flick up the screen (faster up than across), is tossed straight
+  // up with half a turn about the level line across the view, timed to come
+  // down upside down where it rose from: a pancake flipped in the pan.
+  flip(h) {
+    const b = h.body;
+    const def = this.pieces.find((pc) => pc.body === b)?.def;
+    if (!def?.flip || h.travel < NUDGE) return false;
+    const s = h.screen || []; // (its last 2 × THROW_WINDOW; moves come once a frame)
+    if (s.length < 2) return false;
+    const dt = s[s.length - 1].t - s[0].t;
+    if (dt < 1e-6) return false;
+    const vx = (s[s.length - 1].x - s[0].x) / dt;
+    const vy = (s[0].y - s[s.length - 1].y) / dt; // CSS pixels per second, up
+    if (vy < FLIP_PX || vy < Math.abs(vx)) return false;
+    const R = this.R();
+    const up = FLIP_UP * R;
+    const g = Math.max(1e-6, -this.world.gravity[1]);
+    if (b.pos[1] < h.target[1]) b.pos[1] = h.target[1]; // (from where it hovers, as a set-down)
+    // Where it comes down: on whatever is under it (a piece's pick
+    // ellipsoid, or the floor), its underside on top.
+    let ground = this.world.planes[0].d;
+    for (const pc of this.pieces) {
+      if (pc.body === b) continue;
+      const r = pc.def.pick || [pc.body.bound, pc.body.bound, pc.body.bound];
+      const o = [b.pos[0], b.pos[1] + 6 * R, b.pos[2]];
+      const d = rayEllipsoid(pc.body, r, { origin: o, dir: [0, -1, 0] });
+      if (d < Infinity) ground = Math.max(ground, o[1] - d);
+    }
+    const drop = Math.max(0, b.pos[1] - ground - (def.pick ? def.pick[1] : b.bound));
+    const t = (up + Math.sqrt(up * up + 2 * g * drop)) / g; // up, then down onto it
+    let axis = v3.cross(this.ray(h.x0, h.y0).dir, [0, 1, 0]);
+    axis = v3.len(axis) > 1e-9 ? v3.norm(axis) : [1, 0, 0];
+    // Half a turn by the time it lands, its spin slowed by angDamping on the way.
+    const k = b.angDamping;
+    const w = k > 1e-6 ? (Math.PI * k) / (1 - Math.exp(-k * t)) : Math.PI / t;
+    b.vel = [0, up, 0];
+    b.omega = v3.scale(axis, w);
+    this.extras?.thrown(h); // lane Hands engine A
     this.hold = null;
     this.world.wake();
     return true;
