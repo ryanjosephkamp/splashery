@@ -14,6 +14,12 @@ The moving photo keeps its thin dark frame in Sharp picture (a white page needs 
 again after the fix (the table). `smd-moving.spec.mjs` failed three speed tests when run beside clip
 renders; alone, 16 of 16 pass.
 
+- October 8, 2026, 04:00 UTC: the owner marked all 12 psv cards "good" (no notes). Main merged into
+  both branches (it brought the AI-made samples and the on-stage depth slider to the toys; the hooks
+  merged cleanly). After the merge: `tests/psv.spec.mjs` 8 of 8; on the engine branch `p3d`, `live3`
+  and `smd-moving` 36 of 37, the one miss the Speed slider timing test, which passed 3 of 3 on
+  repeat (the engine branch's hook is a no-op).
+
 ### Measurements (October 8, 2026)
 
 `tools/psv-legibility.mjs`, the text-scroll still at 10 s, 390 x 844 at device scale 3, mid profile,
@@ -158,6 +164,12 @@ Photo to 3D and Moving photo to 3D"; merge it first). Lane PR: see "For the Oper
   frame in Sharp picture (a white page needs its edge). Measured again after the fix (the table).
   `smd-moving.spec.mjs` failed three speed tests when run beside clip renders; alone, 16 of 16 pass.
 
+- October 8, 2026, 04:00 UTC: the owner marked all 12 psv cards "good" (no notes). Main merged into
+  both branches (it brought the AI-made samples and the on-stage depth slider to the toys; the hooks
+  merged cleanly). After the merge: `tests/psv.spec.mjs` 8 of 8; on the engine branch `p3d`, `live3`
+  and `smd-moving` 36 of 37, the one miss the Speed slider timing test, which passed 3 of 3 on
+  repeat (the engine branch's hook is a no-op).
+
 ### Measurements (October 8, 2026)
 
 `tools/psv-legibility.mjs`, the text-scroll still at 10 s, 390 x 844 at device scale 3, mid profile,
@@ -217,5 +229,5 @@ the owner's 1056 x 2178 recording is about 12.3 MB); the grid follows the tier (
   video the clip tool works:
   `node tools/psv-clip.mjs out.mp4 --toy=moving-photo-3d --open=<file> --view=sharp --from=<s>`.
   Playwright's Chromium plays no H.264: give it a WebM.
-- Questions for the owner: which view should be the default in each toy, and should the choice be
-  saved in scenes (one new option key) once it is settled?
+- The owner marked every card "good". Still open for the owner: which view should be the default in
+  each toy, and should the choice be saved in scenes (one new option key) once it is settled?
