@@ -7,7 +7,14 @@ ryanjosephkamp/splashery. Your lane: Photo sharp view (prefix `psv`). Branch:
 `claude/lane-photo-sharp-view` (engine changes on `claude/lane-photo-sharp-view-engine`). PR title:
 "Phase Photo sharp view: full-resolution pictures in 3D". Handoff file:
 docs/handoff/PhotoSharpView.md (create it; start it with this brief, word for word, under "##
-Brief", then keep "## State", "## Notes", "### Measurements (October 8, 2026)
+Brief", then keep "## State", "## Notes", "- October 8, 2026, later: speckle fixed (the depth edge
+and the color edge don't line up exactly, so the cut left bits of background color on near things):
+every triangle touching a point beside a depth step is now dropped, a clean band the backing fills.
+The moving photo keeps its thin dark frame in Sharp picture (a white page needs its edge). Measured
+again after the fix (the table). `smd-moving.spec.mjs` failed three speed tests when run beside clip
+renders; alone, 16 of 16 pass.
+
+### Measurements (October 8, 2026)
 
 `tools/psv-legibility.mjs`, the text-scroll still at 10 s, 390 x 844 at device scale 3, mid profile,
 WebGL2, paused with the depth raised. "Apart": the share of 12 to 16 px lines whose letters stay
@@ -19,7 +26,7 @@ on its own). SSIM: luminance, on the text lines.
 | Photo to 3D, its own view                    | 463 x 1004             | 3% → 86%              | 0.23 → 0.36          |
 | Photo to 3D, zoomed in fully                 | 1284 x 2783            | 0% → 72%              | 0.40 → 0.43          |
 | Moving photo to 3D (the video), its own view | 435 x 946              | 45% → 100%            | 0.42 → 0.69          |
-| Moving photo to 3D, zoomed in fully          | 1150 x 2496            | 62% → 100%            | 0.38 → 0.50          |
+| Moving photo to 3D, zoomed in fully          | 1150 x 2496            | 59% → 97%             | 0.38 → 0.50          |
 
 Photo to 3D's Sharp misses come from the relief bending lines (its depth is stronger than the moving
 toy's); the SSIM stays low for the same reason.
@@ -145,6 +152,12 @@ Photo to 3D and Moving photo to 3D"; merge it first). Lane PR: see "For the Oper
   directly. A short video gets its own muted copy of the file, kept on the clip's clock. A GIF (and
   the samples' sheets, if their video can't play) uses the clip's own frames.
 
+- October 8, 2026, later: speckle fixed (the depth edge and the color edge don't line up exactly, so
+  the cut left bits of background color on near things): every triangle touching a point beside a
+  depth step is now dropped, a clean band the backing fills. The moving photo keeps its thin dark
+  frame in Sharp picture (a white page needs its edge). Measured again after the fix (the table).
+  `smd-moving.spec.mjs` failed three speed tests when run beside clip renders; alone, 16 of 16 pass.
+
 ### Measurements (October 8, 2026)
 
 `tools/psv-legibility.mjs`, the text-scroll still at 10 s, 390 x 844 at device scale 3, mid profile,
@@ -157,7 +170,7 @@ on its own). SSIM: luminance, on the text lines.
 | Photo to 3D, its own view                    | 463 x 1004             | 3% → 86%              | 0.23 → 0.36          |
 | Photo to 3D, zoomed in fully                 | 1284 x 2783            | 0% → 72%              | 0.40 → 0.43          |
 | Moving photo to 3D (the video), its own view | 435 x 946              | 45% → 100%            | 0.42 → 0.69          |
-| Moving photo to 3D, zoomed in fully          | 1150 x 2496            | 62% → 100%            | 0.38 → 0.50          |
+| Moving photo to 3D, zoomed in fully          | 1150 x 2496            | 59% → 97%             | 0.38 → 0.50          |
 
 Photo to 3D's Sharp misses come from the relief bending lines (its depth is stronger than the moving
 toy's); the SSIM stays low for the same reason.
@@ -190,7 +203,8 @@ the owner's 1056 x 2178 recording is about 12.3 MB); the grid follows the tier (
   the steps are about a pixel.
 - The depth model gives a flat page (a screen recording) gentle bumps, so lines of text bend a
   little; they stay readable.
-- In Moving photo to 3D the thin dark frame (splats) hides with the splats.
+- Where the depth model's edge sits a little outside a near thing, a thin ribbon of the background
+  rides on it (as with the splats); it is a solid band now, not speckle.
 
 ## For the Operator
 
