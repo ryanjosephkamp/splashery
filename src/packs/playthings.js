@@ -1881,6 +1881,7 @@ export const RECIPES = {
     hands: {
       floor: (d, info) => (info.options?.kind === "d20" ? -D20_IN : -0.5),
       area: 1.9,
+      place: false, // thrown, not set down
       pieces: (d, info) =>
         info.options?.kind === "d20"
           ? [{ part: "d20", pos: [0, 0, 0], quat: D20_REST, points: ICO_CORNERS, pick: [0.85, 0.85, 0.85], mass: 1, friction: 0.5, restitution: 0.45, damping: 0.05, angDamping: 0.3 }] // prettier-ignore
