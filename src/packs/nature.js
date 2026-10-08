@@ -2751,7 +2751,9 @@ export const RECIPES = {
         (d?.plucked || []).map((pt, i) => {
           // A petal: thin and light, so it drifts down slowly, turning.
           const solid = { type: "box", half: [0.05, 0.008, 0.05] };
-          return { token: i, pos: add(pt.base, [0, 0.07, 0]), solid, points: surfacePoints(solid, 1), pick: [0.11, 0.11, 0.11], mass: 0.05, friction: 0.8, restitution: 0, damping: 4.5, angDamping: 1.2 }; // prettier-ignore
+          // (Out from the head's middle along the petal.)
+          const mid = add(pt.base, mul(unit(sub(pt.base, d.heads[0].at)), 0.08));
+          return { token: i, pos: mid, solid, points: surfacePoints(solid, 1), pick: [0.11, 0.11, 0.11], mass: 0.05, friction: 0.8, restitution: 0, damping: 4.5, angDamping: 1.2 }; // prettier-ignore
         }),
       joints: (d) =>
         (d?.plucked || []).map((pt, i) => ({ type: "break", token: i, at: pt.base, pull: 0.1, give: 0.2, sound: (ev, vol) => (ev.kind === "snap" ? { voice: "peel", f: 1900, n: 2, decay: 0.15, vol: 0.3 } : null) })), // prettier-ignore
