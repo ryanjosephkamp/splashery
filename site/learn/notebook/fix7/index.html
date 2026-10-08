@@ -1,0 +1,635 @@
+<!doctype html>
+<html lang="en" data-root="../../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Lane Fix7: Toy fixes from the review of October 2 · Splashery</title>
+    <meta
+      name="description"
+      content="A lane's handoff file from the Splashery project, as it is in the repo: Fix7."
+    />
+    <meta name="robots" content="noindex" />
+    <link
+      rel="canonical"
+      href="https://ryanjosephkamp.github.io/splashery/site/learn/notebook/fix7/"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Splashery" />
+    <meta
+      property="og:title"
+      content="Lane Fix7: Toy fixes from the review of October 2 · Splashery"
+    />
+    <meta
+      property="og:description"
+      content="A lane's handoff file from the Splashery project, as it is in the repo: Fix7."
+    />
+    <meta
+      property="og:url"
+      content="https://ryanjosephkamp.github.io/splashery/site/learn/notebook/fix7/"
+    />
+    <meta
+      property="og:image"
+      content="https://ryanjosephkamp.github.io/splashery/site/assets/og.png"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="A strawberry made of soft 3D splats, beside the word Splashery"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#101010" />
+    <link rel="manifest" href="../../../manifest.webmanifest" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cg opacity='.92'%3E%3Cellipse cx='24' cy='26' rx='14' ry='11' fill='%23ff5fa2'/%3E%3Cellipse cx='40' cy='24' rx='12' ry='13' fill='%237bdff2'/%3E%3Cellipse cx='33' cy='41' rx='15' ry='11' fill='%23ffd166'/%3E%3C/g%3E%3C/svg%3E"
+    />
+    <link rel="apple-touch-icon" href="../../../../assets/app/icon-180.png" />
+    <script>
+      (function () {
+        var d = document.documentElement;
+        d.classList.add("js");
+        try {
+          var t = localStorage.getItem("splashery.site.theme");
+          if (t === "light" || t === "dark") d.dataset.theme = t;
+          var q = new URLSearchParams(location.search).get("labs");
+          if (q === "1") localStorage.setItem("splashery.labs", "1");
+          else if (q === "0") localStorage.removeItem("splashery.labs");
+          if (localStorage.getItem("splashery.labs") === "1") d.classList.add("labs");
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="stylesheet" href="../../../assets/site.css" />
+    <link rel="stylesheet" href="../../../assets/hubs.css" />
+    <link rel="stylesheet" href="../../../assets/outline.css" />
+    <script type="module" src="../../../assets/site.js"></script>
+    <script type="module" src="../../../assets/outline.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to the page</a>
+    <header class="site-header">
+      <div class="bar">
+        <a class="brand" href="../../../" aria-label="Splashery home"
+          ><svg class="logo" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true">
+            <g opacity=".92">
+              <ellipse cx="24" cy="26" rx="14" ry="11" fill="#ff5fa2" />
+              <ellipse cx="40" cy="24" rx="12" ry="13" fill="#7bdff2" />
+              <ellipse cx="33" cy="41" rx="15" ry="11" fill="#ffd166" />
+            </g></svg
+          ><span>Splashery</span></a
+        >
+        <a class="search-link" href="../../../search/" aria-label="Search"
+          ><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+            <circle
+              cx="10.5"
+              cy="10.5"
+              r="6.5"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            />
+            <path
+              d="m15.5 15.5 5 5"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            /></svg
+        ></a>
+        <button type="button" class="menu-button" aria-expanded="false" aria-controls="site-menu">
+          <span class="menu-icon" aria-hidden="true"></span><span class="menu-label">Menu</span>
+        </button>
+        <div class="menu" id="site-menu">
+          <nav aria-label="Site">
+            <ul>
+              <li><a href="../../../">Home</a></li>
+              <li><a href="../../../toys/">Toys</a></li>
+              <li><a href="../../../tools/">Tools</a></li>
+              <li><a href="../../../science/">Science</a></li>
+              <li><a href="../../../studio/">Studio</a></li>
+              <li><a href="../../../learn/" aria-current="page">Learn</a></li>
+              <li><a href="../../../new/">What's new</a></li>
+              <li><a href="../../../about/">About</a></li>
+            </ul>
+          </nav>
+          <form class="search-form" role="search" action="../../../search/" method="get">
+            <label class="visually-hidden" for="site-search">Search toys and pages</label>
+            <input
+              id="site-search"
+              type="search"
+              name="q"
+              placeholder="Search toys"
+              autocomplete="off"
+              enterkeyhint="search"
+            />
+            <button type="submit">Search</button>
+          </form>
+          <button type="button" class="theme-button" aria-label="Color theme: follows your device">
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+              <path d="M12 3a9 9 0 1 0 0 18V3z" fill="currentColor" />
+              <circle
+                cx="12"
+                cy="12"
+                r="8.25"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+              />
+            </svg>
+            <span class="theme-label">Auto</span>
+          </button>
+        </div>
+      </div>
+    </header>
+    <main id="main" tabindex="-1" data-outline>
+      <div class="page-intro">
+        <h1>Lane Fix7: Toy fixes from the review of October 2</h1>
+        <p class="lead">A lane's handoff file, exactly as the project keeps it.</p>
+      </div>
+      <p class="note"><a href="../../../learn/notebook/">Back to the lab notebook</a></p>
+      <nav class="toc" aria-label="On this page">
+        <h2>On this page</h2>
+        <ul>
+          <li>
+            <ul>
+              <li><a href="#brief">Brief</a></li>
+              <li><a href="#state">State</a></li>
+              <li><a href="#notes">Notes</a></li>
+              <li><a href="#known-issues">Known issues</a></li>
+              <li><a href="#for-the-operator">For the Operator</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <section class="md-file" aria-label="Lane Fix7: Toy fixes from the review of October 2">
+        <div class="prose">
+          <p>
+            Prefix <code>fx7</code>. Stacked parts, merged in order:
+            <code>claude/lane-fix7-1</code> (taps and pauses),
+            <code>claude/lane-fix7-2</code> (looks and bugs), and
+            <code>claude/lane-fix7-engine</code> only if something needs player.js, ui.js or kit.js.
+            Lane record &quot;Fix7&quot; on Effect review page 2. How lanes work:
+            <a href="../../../learn/operating/">OPERATING.md</a>.
+          </p>
+          <h2 id="brief">Brief</h2>
+          <p>
+            Written by the Operator on October 2, 2026, from the owner's review of that day, word
+            for word:
+          </p>
+          <p>
+            The owner went through every toy on the preview build on October 2. His review, word for
+            word, is docs/reviews/2026-10-02-mega-review/review.md (on branch
+            <code>claude/operator-mega-review</code> until that Ops PR merges), with three
+            screenshots there: <code>burger-bun.jpg</code>, <code>splat-equation-seam.jpg</code> and
+            <code>thermal-ellipsoids.jpg</code>. Read his words for each item below before you start
+            it. Sounds go to lane Sound C, sharpness and hollow bases to a later Sharpness lane, and
+            hands-on physics (stretching, stacking, picking up) to lane Physics: don't do those
+            here, but if a fix of yours changes what a toy sounds or looks like, say so.
+          </p>
+          <h3 id="part-1-taps-where-you-tap-and-pauses-that-make-sense-claude-lane-fix7-1-first">
+            Part 1: taps where you tap, and pauses that make sense (claude/lane-fix7-1, first)
+          </h3>
+          <ol>
+            <li>
+              <strong>storm-cloud</strong>: lightning strikes straight down from the cloud at the
+              horizontal position of the tap.
+            </li>
+            <li>
+              <strong>shield</strong>: the hit lands where you tap on the shield's face (today it
+              always hits near the top corner).
+            </li>
+            <li>
+              <strong>splat-field</strong> (labs): on the ocean (and any liquid surface), a second
+              tap drops another stone where you tapped and adds its ripples, instead of pausing. A
+              tap that pauses should remain possible some other way, or not at all; say what you
+              chose.
+            </li>
+            <li>
+              <strong>fireworks</strong>: rapid taps launch more fireworks; a tap never pauses the
+              show.
+            </li>
+            <li>
+              <strong>paper-lantern</strong>: touching it again doesn't pause it (for example, it
+              sends another lantern up, or nothing). The diya can stay as it is.
+            </li>
+            <li>
+              <strong>puzzle-cube</strong>: pausing mid-scramble lets the turn in progress finish,
+              then pauses, so the cube is in a turnable state. A move of the person's own then ends
+              the automatic scramble, and the next tap starts a new one from that state. His words:
+              &quot;if you're in the middle of a turn, you really can't make any other moves with
+              the cube.&quot;
+            </li>
+            <li>
+              <strong>gaussian-splatting</strong>, one-splat view: hard to start; you have to tap
+              its exact center. A tap anywhere on the toy starts it. Also check what the one-splat
+              animation shows: if it doesn't map to a real step of training, make it map (for
+              example one splat's position, size, rotation, opacity and color moving by gradient
+              steps toward a target), and say so in its About text.
+            </li>
+            <li>
+              <strong>sunglasses</strong>: a tap on a lens starts the effect (today only the frame
+              does).
+            </li>
+          </ol>
+          <p>
+            Long effects pause on a tap since UI r3 (src/motion.js:116-141, 185-196;
+            <code>pausable: false</code> turns it off for a control, as Fix6 did for the Enigma).
+            Use the existing position-aware tap (the tap point in the toy's own space) rather than
+            new engine code where you can.
+          </p>
+          <h3 id="part-2-looks-and-bugs-claude-lane-fix7-2">
+            Part 2: looks and bugs (claude/lane-fix7-2)
+          </h3>
+          <ol>
+            <li>
+              <strong>marble</strong>: the outer glass is a little too clear. You should see the
+              polished shell as a surface, not fog and no added highlights.
+            </li>
+            <li>
+              <strong>molecule</strong> and <strong>crystal-lattice</strong>: during the shuffle the
+              atoms seem to leave their bonds and the lines tangle. Atoms and their bonds move
+              together as solid pieces (effect quality rule: real motion, parts move as solid
+              pieces).
+            </li>
+            <li>
+              <strong>protein</strong>: after the ribbons are pulled apart, a tap to bring them back
+              waits too long; they start back at once.
+            </li>
+            <li><strong>lungs</strong>: inflate bigger (deflation is fine).</li>
+            <li>
+              <strong>ocean-wave</strong>: a dark strip shows where the wave's pieces separate at
+              the curl; make the curl continuous (he calls this optional).
+            </li>
+            <li>
+              <strong>pancakes</strong>: when the top pancake flips, the syrup stays put as if
+              solid; it moves with its pancake (a drip comes later with the Fluid lab).
+            </li>
+            <li>
+              <strong>candy-cane</strong>: the green bow looks incomplete; add the missing ribbon
+              tail.
+            </li>
+            <li>
+              <strong>burger</strong>: zooming in, the top bun flashes white (burger-bun.jpg; likely
+              the sesame seeds or a highlight popping at close range). And the lettuce has a hole in
+              its middle; real lettuce doesn't.
+            </li>
+            <li>
+              <strong>taco</strong>: beef pokes through the shell's rim; the filling falls
+              unrealistically (pieces should fall and land like real food).
+            </li>
+            <li><strong>apple</strong>: white pixels around the bitten area.</li>
+            <li>
+              <strong>banana</strong>: the nearest banana has the others passing through it at the
+              dark tips; white specks on the skins.
+            </li>
+            <li>
+              <strong>hoodie</strong>: the hood comes apart from the back as it moves, and the
+              shoulders still look like holes.
+            </li>
+            <li>
+              <strong>Clothing flags</strong> (hoodie, baseball-cap, running-shoe, sunglasses):
+              neither the global flag nor the toy's own flag changes them. Cause: every splat they
+              build has <code>pattern:false</code> (<code>addScan</code>,
+              src/packs/real-objects.js:77, and <code>addCloud</code>, :108), so the shader skips
+              the pattern. Let the flag reach the cloth parts (keep the lenses, laces, drawstrings
+              and stand as they are), the way games.js:500-502 sets the pattern projection
+              (PACKS.md:281-287).
+            </li>
+            <li>
+              <strong>splat-equation</strong>: a seam line shows on the torus and the Möbius strip
+              (splat-equation-seam.jpg). The grid samples cell centers (:391) and normals use
+              forward differences (:496, :517-518); find the cause (normals across the wrap, splat
+              sizes or orientation at the seam) and close it for every preset whose u or v wraps.
+            </li>
+            <li>
+              <strong>snowman</strong>: it melts into a flower-like shape; it should slump into a
+              puddle.
+            </li>
+            <li>
+              <strong>your-book</strong>: a page turn started by a tap is a little laggy, while
+              dragging a page by hand is smooth. Make the tapped turn as smooth.
+            </li>
+            <li>
+              <strong>periodic-table</strong>: the lanthanides (57–71) and actinides (89–103) are
+              real tiles in the two rows under the table, but the owner took the &quot;57–71&quot;
+              and &quot;89–103&quot; cells for missing elements. A tap on those marker cells today
+              starts the tour (chemistry.js:369-372). Make a marker tap highlight its row, and add
+              an option &quot;Wide table&quot; that shows the f-block inline (the 32-column form)
+              for anyone who wants it.
+            </li>
+          </ol>
+          <h3 id="clips-and-marks">Clips and marks</h3>
+          <p>
+            Post a clip for every item in your lane record &quot;Fix7&quot; on Effect review page 2,
+            at 390×844, &quot;built by Opus 5.5&quot;. Most of these are public toys: their part
+            merges after the owner marks the cards good.
+          </p>
+          <h2 id="state">State</h2>
+          <p>Model: Opus 5.5 (claude-opus-5-5), default effort, no helpers so far.</p>
+          <p>
+            Part 1 (<code>claude/lane-fix7-1</code>): all eight items built, tested
+            (tests/fx7.spec.mjs) and clipped.
+          </p>
+          <ul>
+            <li>
+              <strong>storm-cloud</strong>: the tapped bolt (bolt3) moves under the tap: to the
+              tapped point's x and z (the tapped point is the front-most splat under the finger, so
+              the bolt stands under the finger from any side). Its own end drift is smaller, so it
+              comes straight down.
+            </li>
+            <li>
+              <strong>shield</strong>: the flash and the sparks move to the tapped point; the sparks
+              turn (at most a radian) to spray away from the middle; the shield rocks about the axis
+              (-y, x) of the hit, so it gives way where it was struck. The Play button still hits
+              the top corner.
+            </li>
+            <li>
+              <strong>splat-field</strong> (labs): the pulse is <code>pausable: false</code>. Each
+              tap adds its own pulse beside the ones still running (up to eight at once): the newest
+              rides on the morph channels as before (the lab test's contract), the older ones on the
+              tokens' uniform (unused by this toy), which the GPU field reads (offset = the tap's
+              place, <code>visible</code> = its progress). The ocean drops another stone where you
+              tap and the rings cross; the galaxy sends another ring; the knot's flow takes each
+              pulse's lap on top of the others (a finished pulse adds a whole lap, the same as none,
+              so nothing jumps). <strong>Pausing: not at all</strong> (the choice the brief asked
+              for): each pulse is 3 s.
+            </li>
+            <li>
+              <strong>fireworks</strong>: <code>pausable: false</code>. Each tap launches its own
+              shell, with its own clock, from a free tube (up to three at once, one per tube; a
+              fourth tap restarts the oldest's tube). Two more rocket parts (15 parts, the limit).
+              The burst now flies out from its middle by its part's scale instead of the shared
+              <code>grow</code> (several bursts of different ages can't share one grow value).
+            </li>
+            <li>
+              <strong>paper-lantern</strong>: <code>pausable: false</code>; a tap mid-swing gives it
+              another push. The swing's size now eases toward the push (it used to jump on the first
+              tap too).
+            </li>
+            <li>
+              <strong>puzzle-cube</strong>: <code>pausable: false</code> (the cube pauses itself).
+              The scramble or solve has its own clock. A tap while it turns sets a hold at the end
+              of the turn in progress, then it pauses with every cubie square; while paused the cube
+              takes drags; a hand move ends the automatic one, and the next tap starts a new
+              scramble or solve from that state. A tap while paused with no hand move carries on.
+              Every turn is now recorded in the history (a solve's turns cancel it as they go), so a
+              solve stopped part way leaves the history right.
+            </li>
+            <li>
+              <strong>gaussian-splatting</strong>, one splat: a low pick alpha (0.012) in this view
+              and a near-clear card (opacity 0.02) over the grid, so a tap anywhere on the toy
+              starts it. The tap now trains the splat: it starts from a guess (moved, turned, the
+              wrong sizes, faint and gray-blue) and 24 gradient steps carry its place, turn, sizes
+              (a morph), and color and opacity (a cross-fade between the guess copy and the target
+              copy) toward the target, a dashed outline, each at its own learning rate, so the steps
+              start big and shrink. About text says so.
+            </li>
+            <li>
+              <strong>sunglasses</strong>: a lens's own splats are too small and faint for the pick
+              pass even at a low alpha; 37 bigger, faint splats (opacity 0.08) over each lens, with
+              <code>pickAlpha: 0.06</code>, make a lens tap start the effect.
+            </li>
+          </ul>
+          <p>
+            Part 2 (<code>claude/lane-fix7-2</code>, stacked on part 1): all seventeen items built
+            and clipped.
+          </p>
+          <ul>
+            <li>
+              <strong>marble</strong>: the glass's faint tint is stronger and uses the
+              <code>rim</code> kind (Fix4's glass): clear face on, denser toward the rim, reflecting
+              a light sky above and a darker floor below. No added highlights.
+            </li>
+            <li>
+              <strong>molecule</strong>, <strong>crystal-lattice</strong>: bonds are skinned (<code
+                >skin</code
+              >
+              kind) between their two atoms' tokens, by how far along the bond each splat is, so a
+              bond stretches with its atoms. The crystal's slabs are mirrored on tokens for this
+              (its atoms stay on their slab parts, keeping the diamond's glint).
+            </li>
+            <li>
+              <strong>protein</strong>: <code>pausable: false</code>; its pull has its own clock per
+              tap. A tap while it is apart (or coming apart) brings it back from where it is over
+              1.4 s; the next tap pulls it apart again.
+            </li>
+            <li>
+              <strong>lungs</strong>: the deep breath's fill goes to -1.7 on its channel (it was
+              -1).
+            </li>
+            <li>
+              <strong>ocean-wave</strong>: the lip's first control points are drawn back to the
+              place on the face where the lip rests (fading over four points), so the lip and the
+              face never part at the curl.
+            </li>
+            <li>
+              <strong>pancakes</strong>: the drips' part over the top pancake rides on its part (a
+              split by height).
+            </li>
+            <li>
+              <strong>candy-cane</strong>: the tails were built with
+              <code>scale: [1, 1, 0.5]</code> about the origin, which also halved their depth and
+              hid the left one behind its cane; they are built round the knot now.
+            </li>
+            <li>
+              <strong>burger</strong>: the bun's inside (<code>core</code>) is crust-colored except
+              on the cut face (pale crumb showed through the crust up close: the white flash); 160
+              real seeds (teardrops of 7 splats) instead of thousands of round streaks. The lettuce
+              starts from its middle (no hole).
+            </li>
+            <li>
+              <strong>taco</strong>: the meat kept off the walls (spread 0.62, smaller splats); the
+              spilled bits drop out of the opened break with a little drift, bounce low and slide to
+              a stop.
+            </li>
+            <li>
+              <strong>apple</strong>: the flesh inside the apple near the bite is left out, and the
+              bitten surface's splats get smaller toward the rim, so no pale specks sit on the skin
+              round the bite.
+            </li>
+            <li>
+              <strong>banana</strong>: the three lie side by side just touching (checked
+              numerically, centerlines and radii); the fruit and the inner peel are their own
+              tokens, mirroring the skin's motion, shown only while a banana is peeled (soft splats
+              always leaked the pale inside through the skin as specks).
+            </li>
+            <li>
+              <strong>hoodie</strong>: the cuffs are gathered shut with a disc of the cuff's cloth
+              (a raised sleeve showed its open cuff as a hole); a band of the hood's back edge stays
+              on the body, so the gap behind the nodding hood shows cloth.
+            </li>
+            <li>
+              <strong>Clothing flags</strong>: <code>addScan</code> takes
+              <code>pattern</code> (true, or by file part); the hoodie's cloth (and its armhole and
+              cuff patches), the cap, the shoe and the sunglasses' frame take flags. Lenses, laces,
+              drawstrings and the stand keep their colors.
+            </li>
+            <li>
+              <strong>splat-equation</strong>: the cause of the seam: the grid made nu × nv points
+              (6,050 for the torus) but the cloud drew only the first n (6,000), so the last u
+              column (where u wraps) was never drawn and the inside showed through. nv is rounded
+              down and the cloud draws every grid point. Fixes every preset with a grid.
+            </li>
+            <li>
+              <strong>snowman</strong>: the puddle is one sheet with a wavering edge, spreading from
+              the middle (the disc's rings of splats looked like spokes, a flower).
+            </li>
+            <li>
+              <strong>your-book</strong>: a tapped turn waited up to 1.5 s for its pages; it waits
+              at most 0.2 s now (a pull never waits), and its curve starts faster (it is shared by
+              the album and the frame's turns).
+            </li>
+            <li>
+              <strong>periodic-table</strong>: a tap on a marker cell fires a new pulse
+              <code>row</code> (pick 0 or 1) that lights a frame round the marker and its row (fades
+              on channels 2 and 3, so no new parts: the toy has 14 of 15). The option &quot;Wide
+              table&quot; (a switch) lays the f-block in its periods, 32 columns
+              (<code>setLayout</code>).
+            </li>
+          </ul>
+          <ul>
+            <li>
+              <strong>enigma-machine</strong> (added by the Operator, October 2, 11:08 UTC): step
+              back. A tap on the rotors' thumb wheels, Backspace, or a new &quot;Step back&quot;
+              pulse control takes the last typed letter and its coded letter off the pad and turns
+              the rotors back to where they stood before it (each key keeps the rotors' place before
+              it in <code>data.hist</code>, since a step can't simply be undone: the double step). A
+              stored or decoded message has nothing to take back. The pad's footnote and the About
+              text say so (the real machine had no delete key). The key taps and the go control are
+              as they were.
+            </li>
+          </ul>
+          <h2 id="notes">Notes</h2>
+          <ul>
+            <li>
+              <code>out.parts[name].visible</code> scales the splats (it multiplies the splat size),
+              it doesn't fade opacity. The one-splat view cross-fades the guess and the target this
+              way (many small splats shrinking reads as fading).
+            </li>
+            <li>
+              The pick pass misses very small faint splats whatever the alpha clip; a few bigger
+              faint splats over a glass surface fix it.
+            </li>
+            <li>
+              A recipe's <code>pickAlpha</code> can be a getter (it is read after the build), so one
+              view of a toy can lower it.
+            </li>
+            <li>
+              A labs GPU field can read <code>uSpTokens</code> (always set) for extra per-tap data,
+              when the toy has no tokens of its own.
+            </li>
+          </ul>
+          <h2 id="known-issues">Known issues</h2>
+          <ul>
+            <li>
+              Sounds: the tap sounds play on every tap as before; fireworks fired quickly play their
+              sound per tap, and the puzzle cube's tap sound plays on a pause tap too. The one-splat
+              view's sound (the pad) is Sound C's (the owner asked for a subtler one).
+            </li>
+            <li>
+              The one-splat view's near-clear card tints the grid square a little on a dark
+              background.
+            </li>
+          </ul>
+          <h2 id="for-the-operator">For the Operator</h2>
+          <ul>
+            <li>No engine changes in part 1 or part 2.</li>
+            <li>
+              The Enigma &quot;step back&quot; question is answered (yes, 11:08 UTC) and built in
+              part 2.
+            </li>
+            <li>
+              Two finished lanes' tests broke on part 2 by a count or a list. At the Operator's
+              request (October 3, 2026, after combo E), part 2 updates them:
+              <code>tests/fix3.spec.mjs</code> now checks that every banana splat rides on one of
+              the pieces each banana lists (14 each: its fruit and inner peel are their own pieces,
+              shown only while peeled), so no crown is left behind;
+              <code>tests/fx4-engine.spec.mjs</code> uses the beach ball in place of the marble
+              among &quot;toys without the rim kind&quot; (the marble's glass now uses it on
+              purpose), and <code>tests/fx7.spec.mjs</code> checks the marble's rim shell.
+            </li>
+            <li>
+              In the full run of part 1, <code>tests/chs-engine.spec.mjs</code> (&quot;a tap that
+              returns options rebuilds the toy…&quot;, the atom toy) failed once while clips
+              rendered alongside; part 1 doesn't touch it. I rerun it alone below.
+            </li>
+            <li>
+              For PACKS.md: <code>visible</code> on a part or token scales its splats (it doesn't
+              fade them); a recipe's <code>pickAlpha</code> can be a getter; a labs GPU field can
+              read <code>uSpTokens</code>; the pick pass misses very small faint splats whatever the
+              alpha clip, and a few bigger faint splats fix it.
+            </li>
+          </ul>
+        </div>
+      </section>
+      <p class="note">
+        This page is built from
+        <a
+          data-source
+          href="https://github.com/ryanjosephkamp/splashery/blob/main/docs/handoff/Fix7.md"
+          target="_blank"
+          rel="noopener"
+          >docs/handoff/Fix7.md</a
+        >
+        each time the site is built, so it always matches them.
+      </p>
+    </main>
+    <footer class="site-footer">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="brand" href="../../../"
+            ><svg class="logo" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true">
+              <g opacity=".92">
+                <ellipse cx="24" cy="26" rx="14" ry="11" fill="#ff5fa2" />
+                <ellipse cx="40" cy="24" rx="12" ry="13" fill="#7bdff2" />
+                <ellipse cx="33" cy="41" rx="15" ry="11" fill="#ffd166" />
+              </g></svg
+            ><span>Splashery</span></a
+          >
+          <p>
+            splats you can play with. Free, in your browser, with nothing to install; files you open
+            stay on your device.
+          </p>
+        </div>
+        <nav aria-label="Explore">
+          <h2>Explore</h2>
+          <ul>
+            <li><a href="../../../">Home</a></li>
+            <li><a href="../../../toys/">Toys</a></li>
+            <li><a href="../../../tools/">Tools</a></li>
+            <li><a href="../../../science/">Science</a></li>
+            <li><a href="../../../studio/">Studio</a></li>
+            <li><a href="../../../learn/">Learn</a></li>
+            <li><a href="../../../new/">What's new</a></li>
+            <li><a href="../../../about/">About</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="More">
+          <h2>More</h2>
+          <ul>
+            <li><a href="../../../../" target="_blank" rel="noopener">The gallery</a></li>
+            <li><a href="../../../search/">Search</a></li>
+            <li><a href="../../../../manual/">The Tinkerer's Manual</a></li>
+            <li>
+              <a href="https://github.com/ryanjosephkamp/splashery" target="_blank" rel="noopener"
+                >Source on GitHub</a
+              >
+            </li>
+            <li><a href="../../../share/">Embed and share</a></li>
+            <li><a href="../../../about/credits/">Credits</a></li>
+            <li><a href="../../../about/contact/">Contact</a></li>
+            <li><a href="../../../about/privacy/">Privacy</a></li>
+            <li><a href="../../../about/terms/">Terms</a></li>
+          </ul>
+        </nav>
+      </div>
+      <p class="fine">
+        Made by <a href="../../../about/contact/">Ryan Kamp</a>. Code under the MIT license; each
+        toy's assets keep their own licenses. Built on the PlayCanvas engine. This is a preview of
+        Splashery's new site; the toys live in
+        <a href="../../../../" target="_blank" rel="noopener">the gallery</a>.
+      </p>
+    </footer>
+  </body>
+</html>

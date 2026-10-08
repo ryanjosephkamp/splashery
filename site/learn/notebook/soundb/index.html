@@ -1,0 +1,613 @@
+<!doctype html>
+<html lang="en" data-root="../../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Lane Sound B: Real sounds, part B · Splashery</title>
+    <meta
+      name="description"
+      content="A lane's handoff file from the Splashery project, as it is in the repo: SoundB."
+    />
+    <meta name="robots" content="noindex" />
+    <link
+      rel="canonical"
+      href="https://ryanjosephkamp.github.io/splashery/site/learn/notebook/soundb/"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Splashery" />
+    <meta property="og:title" content="Lane Sound B: Real sounds, part B · Splashery" />
+    <meta
+      property="og:description"
+      content="A lane's handoff file from the Splashery project, as it is in the repo: SoundB."
+    />
+    <meta
+      property="og:url"
+      content="https://ryanjosephkamp.github.io/splashery/site/learn/notebook/soundb/"
+    />
+    <meta
+      property="og:image"
+      content="https://ryanjosephkamp.github.io/splashery/site/assets/og.png"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="A strawberry made of soft 3D splats, beside the word Splashery"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#101010" />
+    <link rel="manifest" href="../../../manifest.webmanifest" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cg opacity='.92'%3E%3Cellipse cx='24' cy='26' rx='14' ry='11' fill='%23ff5fa2'/%3E%3Cellipse cx='40' cy='24' rx='12' ry='13' fill='%237bdff2'/%3E%3Cellipse cx='33' cy='41' rx='15' ry='11' fill='%23ffd166'/%3E%3C/g%3E%3C/svg%3E"
+    />
+    <link rel="apple-touch-icon" href="../../../../assets/app/icon-180.png" />
+    <script>
+      (function () {
+        var d = document.documentElement;
+        d.classList.add("js");
+        try {
+          var t = localStorage.getItem("splashery.site.theme");
+          if (t === "light" || t === "dark") d.dataset.theme = t;
+          var q = new URLSearchParams(location.search).get("labs");
+          if (q === "1") localStorage.setItem("splashery.labs", "1");
+          else if (q === "0") localStorage.removeItem("splashery.labs");
+          if (localStorage.getItem("splashery.labs") === "1") d.classList.add("labs");
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="stylesheet" href="../../../assets/site.css" />
+    <link rel="stylesheet" href="../../../assets/hubs.css" />
+    <link rel="stylesheet" href="../../../assets/outline.css" />
+    <script type="module" src="../../../assets/site.js"></script>
+    <script type="module" src="../../../assets/outline.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to the page</a>
+    <header class="site-header">
+      <div class="bar">
+        <a class="brand" href="../../../" aria-label="Splashery home"
+          ><svg class="logo" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true">
+            <g opacity=".92">
+              <ellipse cx="24" cy="26" rx="14" ry="11" fill="#ff5fa2" />
+              <ellipse cx="40" cy="24" rx="12" ry="13" fill="#7bdff2" />
+              <ellipse cx="33" cy="41" rx="15" ry="11" fill="#ffd166" />
+            </g></svg
+          ><span>Splashery</span></a
+        >
+        <a class="search-link" href="../../../search/" aria-label="Search"
+          ><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+            <circle
+              cx="10.5"
+              cy="10.5"
+              r="6.5"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            />
+            <path
+              d="m15.5 15.5 5 5"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            /></svg
+        ></a>
+        <button type="button" class="menu-button" aria-expanded="false" aria-controls="site-menu">
+          <span class="menu-icon" aria-hidden="true"></span><span class="menu-label">Menu</span>
+        </button>
+        <div class="menu" id="site-menu">
+          <nav aria-label="Site">
+            <ul>
+              <li><a href="../../../">Home</a></li>
+              <li><a href="../../../toys/">Toys</a></li>
+              <li><a href="../../../tools/">Tools</a></li>
+              <li><a href="../../../science/">Science</a></li>
+              <li><a href="../../../studio/">Studio</a></li>
+              <li><a href="../../../learn/" aria-current="page">Learn</a></li>
+              <li><a href="../../../new/">What's new</a></li>
+              <li><a href="../../../about/">About</a></li>
+            </ul>
+          </nav>
+          <form class="search-form" role="search" action="../../../search/" method="get">
+            <label class="visually-hidden" for="site-search">Search toys and pages</label>
+            <input
+              id="site-search"
+              type="search"
+              name="q"
+              placeholder="Search toys"
+              autocomplete="off"
+              enterkeyhint="search"
+            />
+            <button type="submit">Search</button>
+          </form>
+          <button type="button" class="theme-button" aria-label="Color theme: follows your device">
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+              <path d="M12 3a9 9 0 1 0 0 18V3z" fill="currentColor" />
+              <circle
+                cx="12"
+                cy="12"
+                r="8.25"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+              />
+            </svg>
+            <span class="theme-label">Auto</span>
+          </button>
+        </div>
+      </div>
+    </header>
+    <main id="main" tabindex="-1" data-outline>
+      <div class="page-intro">
+        <h1>Lane Sound B: Real sounds, part B</h1>
+        <p class="lead">A lane's handoff file, exactly as the project keeps it.</p>
+      </div>
+      <p class="note"><a href="../../../learn/notebook/">Back to the lab notebook</a></p>
+      <nav class="toc" aria-label="On this page">
+        <h2>On this page</h2>
+        <ul>
+          <li>
+            <ul>
+              <li><a href="#brief">Brief</a></li>
+              <li><a href="#state">State</a></li>
+              <li><a href="#notes">Notes</a></li>
+              <li><a href="#known-issues">Known issues</a></li>
+              <li><a href="#for-the-operator">For the Operator</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <section class="md-file" aria-label="Lane Sound B: Real sounds, part B">
+        <div class="prose">
+          <p>
+            Prefix <code>sndb</code>. Branch <code>claude/lane-sound-b</code>. PR title &quot;Phase
+            Sound B: real sounds for the other shelves&quot;. How lanes work:
+            <a href="../../../learn/operating/">OPERATING.md</a>.
+          </p>
+          <h2 id="brief">Brief</h2>
+          <p>Written by the Operator on September 30, 2026, from the owner's sound review.</p>
+          <p>
+            The owner reviewed every toy's sound in a long voice-typed notes file (written September
+            28, 2026, filed September 30). Read it word for word in
+            docs/reviews/2026-09-28-sounds/review.md. The clean version per toy is in
+            tools/sound-review.json (<code>status</code> &quot;change&quot; or &quot;keep&quot;,
+            <code>said</code> = his words, <code>note</code>, <code>plan</code>); the rules drawn
+            from it are in docs/PACKS.md, section 7e, &quot;Sound preferences&quot;. All three are
+            on branch claude/operator-sound-review until that Ops PR merges (merge it into your
+            branch if main doesn't have them yet). His summary, in his words: a lot of stuff
+            &quot;sounds robotic and digital when it shouldn't&quot;; there are &quot;overwhelming,
+            like wave or wind sounds, like sounds that sound like sand&quot;; &quot;a lot of the
+            whistles just don't need to be in it. A lot of the clicking doesn't need to be in the
+            sounds&quot;; and &quot;for any kind of, like, real-life object, I'd like for things to
+            have almost, like, ASMR, or just real SFX, right? Like real-life, realistic sound
+            effects. And you are absolutely allowed to find sound packs.&quot;
+          </p>
+          <p>
+            His new process (September 30, 2026): new sounds may go live on the site before he has
+            heard them, and he names any to fix. So you change
+            <code>src/toy-sounds.js</code> directly, not as board candidates. Set each toy you
+            finish to <code>&quot;status&quot;: &quot;site&quot;</code> in tools/sound-review.json,
+            with a one-line <code>plan</code> saying what it is now. Toys he said to keep stay
+            exactly as they are. Toys he didn't mention stay as they are too, except the newer toys
+            your list names below: apply section 7e to those.
+          </p>
+          <p>How to do it well:</p>
+          <ul>
+            <li>
+              <strong>Every toy he asked to change gets a real fix</strong>, judged against his
+              words. Remove what he disliked (clicks, whistles, the &quot;vroom&quot; rise, loud
+              wind, robotic tones, instrument notes on non-instruments), and add what he asked for:
+              the real sound of the thing, synced to what happens on screen.
+            </li>
+            <li>
+              <p>
+                <strong>Synthesis where it can sound real, recorded samples where it can't.</strong>
+                Animal calls, fire, explosions, dice, bowling pins, a pool break, an apple bite,
+                pages turning, a real steam engine or sports car, crowds: these want short recorded
+                samples.
+              </p>
+              <ul>
+                <li>
+                  <strong>Licenses:</strong> CC0 or public domain first; CC BY only when nothing CC0
+                  fits. Never BY-SA, NC or custom &quot;royalty-free&quot; licenses (Pixabay,
+                  Mixkit, Zapsplat, Sonniss, BBC Sound Effects).
+                </li>
+                <li>
+                  <strong>Sources to try:</strong> Freesound with the CC0 filter (check each sound's
+                  own page); Kenney's audio packs (CC0: Casino Audio has dice, Impact Sounds, RPG
+                  Audio); CC0 packs on OpenGameArt; public-domain recordings on Wikimedia Commons
+                  (U.S. government agencies' animal calls); NASA audio.
+                </li>
+                <li>
+                  <strong>Record each one</strong> on its live page and in CREDITS.md and
+                  tools/assets.json (source URL, author, license, date checked), plus the toy's
+                  in-app credit where the toy lists credits.
+                </li>
+                <li>
+                  <strong>Keep samples small:</strong> mono MP3 or M4A (plays on iPhone Safari),
+                  trimmed, normalized to the kit's levels, usually under 40 KB each, under
+                  assets/sounds/.
+                </li>
+                <li>
+                  <strong>Load only on tap</strong>, never on page load. The &quot;embed transfer ≤
+                  30 MB&quot; test stays green.
+                </li>
+                <li>
+                  <strong>If a source blocks automated downloads</strong> (for example, Freesound
+                  needing an API key), say so in your message with the exact steps the owner would
+                  take. Carry on with the other sources in the meantime.
+                </li>
+              </ul>
+            </li>
+            <li>
+              <strong>Levels:</strong> re-measure with
+              <code>node tools/sound-check.mjs</code> (<code>--voices</code> for new voices).
+              Nothing louder or harsher than today's quietest complaints-free toys; ambience under
+              the tap's main sound.
+            </li>
+            <li>
+              <strong>Judge by listening proxies.</strong> You can't hear, so render each changed
+              sound offline (tools/sound-audit.mjs or your own OfflineAudioContext in Chromium).
+              Check the numbers the rules imply: few sharp transients (clicks), no sustained narrow
+              high tone (whistle), no rising pitch sweep (vroom), noise energy well under the main
+              sound (wind), and a peak and loudness in range. Compare before and after. Say plainly
+              in the PR that the owner's ears are the real test.
+            </li>
+            <li>
+              Sound-only changes: don't change any toy's look, motion or tap, except to sync a sound
+              to an existing event. The laptop is locked: change only the sounds the owner named for
+              it, nothing else.
+            </li>
+          </ul>
+          <p>
+            Cards: no clips unless an effect changes. The owner reviews on the Sound Board (the
+            Operator rebuilds and republishes it after your PR merges). In your final message, list
+            every toy you changed with a one-line description of its new sound, so the Operator can
+            tell him what to listen for.
+          </p>
+          <p>
+            Tests in tests/&lt;your prefix&gt;.spec.mjs: every changed toy's sound plays without
+            errors or warnings; no sample is fetched before a tap (watch the network on page load
+            and on opening a toy); each sample file is credited in tools/assets.json and within its
+            size budget; screenshots at 390×844 and 1440×900 of any toy whose Toy tab changed (none
+            expected).
+          </p>
+          <p>
+            Merging: sounds go live without the owner's marks (his call of September 30), so the
+            Operator merges your PR after the Integrator's full run. Keep it mergeable: main moves
+            often, so merge it into your branch before each push.
+          </p>
+          <h3 id="your-part">Your part</h3>
+          <ol>
+            <li>
+              <p>
+                <strong>Start with what synthesis can fix now</strong>, on your shelves: nature,
+                weather (his &quot;weather and fire&quot;), food, toys, objects (his &quot;Open
+                Me&quot;), medieval, animals, maths, computing (his &quot;AI and Computing&quot;),
+                holidays, vehicles and landmarks.
+              </p>
+              <ul>
+                <li>
+                  Remove the clicks, whistles, &quot;vroom&quot; rises, loud wind and robotic tones
+                  he named.
+                </li>
+                <li>
+                  Sync sounds to what happens on screen: daisy petals landing, the gradient-descent
+                  ball's bounces, the starfish's arms, each menorah flame going out.
+                </li>
+                <li>Swap instrument notes on non-instruments for real sound effects.</li>
+                <li>The volcano's flame is his reference for fire: use it for the campfire too.</li>
+              </ul>
+            </li>
+            <li>
+              <p>
+                <strong>When Sound A's engine PR has merged</strong> (the Operator tells you), merge
+                main and use the <code>sample</code> voice where only a recording will do. From his
+                notes:
+              </p>
+              <ul>
+                <li>
+                  rolling dice on a table; a real spinning top; a yo-yo; a real puzzle-cube twist;
+                </li>
+                <li>a spring toy's boing (not a rubber band) and balloons popping;</li>
+                <li>chess pieces on a wooden board, with a good online-chess feel;</li>
+                <li>
+                  a book's pages turning; a real bite of an apple; popcorn popping dry; a hard taco
+                  shell cracking; stretching cheese on the pizza;
+                </li>
+                <li>
+                  real fireworks (the fireworks and the Eiffel Tower); a crowd and horses' hooves
+                  for the Colosseum;
+                </li>
+                <li>
+                  a steam train chugging; a sports car revving; real tractor, helicopter and
+                  propeller-plane engines;
+                </li>
+                <li>a royal trumpet for the crown; bowstrings that aren't instruments;</li>
+                <li>an owl's hoot, a frog's croak and a real fly;</li>
+                <li>
+                  scissors cutting and branches growing for the bonsai; leaves falling; stones for
+                  the pebbles; ice cracking for the iceberg; water moving in the Klein bottle.
+                </li>
+              </ul>
+            </li>
+            <li>
+              <p>
+                <strong>Music where he asked for it</strong>, played on a realistic instrument,
+                never a robotic jingle and never with voices:
+              </p>
+              <ul>
+                <li>
+                  part of &quot;Happy Birthday to You&quot; on the birthday cake (public domain in
+                  the United States since 2016);
+                </li>
+                <li>a bit of a carol such as &quot;Jingle Bells&quot; on the decorated tree;</li>
+                <li>
+                  a calm, respectful melody for the cherry blossom (the traditional &quot;Sakura
+                  Sakura&quot; is public domain);
+                </li>
+                <li>
+                  a gentle Hanukkah melody for the menorah, if it fits (the traditional &quot;Maoz
+                  Tzur&quot; is public domain), with each flame's sound in sync.
+                </li>
+              </ul>
+            </li>
+            <li>
+              <strong>The laptop</strong> (locked): only what he named. Remove the thunk when it
+              closes and the twinkle when it opens; keep the screen-on sound; make the keys sound
+              like a real keyboard. Nothing else about the laptop changes.
+            </li>
+            <li>
+              <strong>The Möbius strip:</strong> a sound per rider (a real race car, a rolling beach
+              ball, a bicycle with a rare, soft duck quack, and the ant's crawl, which he likes).
+              Drop the xylophone-like tones.
+            </li>
+            <li>
+              <p>
+                <strong>The newer toys on your shelves</strong>, added after his notes: apply
+                section 7e to fountain-pen, water-bottle, soda-can, running-shoe, hoodie,
+                sunglasses, baseball-cap, splat-equation, gaussian-splatting, turing-machine,
+                difference-engine, enigma-machine, bombe, fluid-lab, splat-field, picture-lab,
+                your-book, photo-album, picture-frame, screen, song-landscape, chladni-plate,
+                model-splats and photo-3d.
+              </p>
+              <ul>
+                <li>
+                  Many of these are labs toys whose sound comes from their own engines (the Fluids,
+                  Books and Studio code). Change only their entries in src/toy-sounds.js.
+                </li>
+                <li>If a fix needs another lane's code, name it in your message instead.</li>
+                <li>The music shelf he called &quot;pretty much perfect&quot;: leave it.</li>
+              </ul>
+            </li>
+          </ol>
+          <p>
+            Use tools/sound-lint.mjs as soon as Sound A's engine PR lands. Until then, use your own
+            offline renders.
+          </p>
+          <h3 id="you-own">You own</h3>
+          <ul>
+            <li>your shelves' entries in src/toy-sounds.js and tools/sound-review.json;</li>
+            <li>
+              new synth voices in a marked &quot;Sound B&quot; block at the end of src/voices.js;
+            </li>
+            <li>
+              your sample files in assets/sounds/, named
+              <code>&lt;toy id&gt;-&lt;what&gt;.mp3</code>;
+            </li>
+            <li>the CREDITS.md and tools/assets.json lines for them;</li>
+            <li>tests/sndb.spec.mjs and docs/handoff/SoundB.md.</li>
+          </ul>
+          <p>
+            Lane Sound A owns the sample voice and the rest of src/voices.js and src/sound.js. Keep
+            to your own lines, and if a conflict comes, keep both sides.
+          </p>
+          <p>
+            Lanes Fluids r4, Books r4, Science, UI r2, Video 3D, Fix4, Worlds r3, Sound A and the
+            Integrator run at the same time; leave their files alone.
+          </p>
+          <h2 id="state">State</h2>
+          <p>Model: Opus 5.5 (default effort), all of it.</p>
+          <ul>
+            <li>
+              September 30, 2026: started. <code>tools/sound-review.json</code> reached main in #139
+              during the day and was merged in.
+            </li>
+            <li>
+              <strong>Synthesis done</strong> for every toy on the lane's shelves that the owner
+              asked to change (92 toys) and 16 of the newer toys (section 7e; see the Sound Board
+              marks below), each marked <code>&quot;status&quot;: &quot;site&quot;</code> in
+              <code>tools/sound-review.json</code> with a <code>plan</code> starting
+              &quot;Now:&quot;. Toys he said to keep, and toys he didn't mention, are unchanged (the
+              water bottle, the fluid lab, the picture frame, the Chladni plate, the Screen and the
+              Turing, Enigma and Bombe machines already fit 7e).
+            </li>
+            <li>
+              <strong>43 new voices</strong> in the &quot;Sound B&quot; block at the end of
+              <code>src/voices.js</code> (fire, leaves, pages, a bite, brittle cracks, popcorn,
+              dice, steam chuffs, real engines, rotors, creaking wood, scissors, a natural trumpet,
+              bowstrings, water in a bottle, a firework's launch and burst, hooves, a crowd, stones,
+              a top, a yo-yo, a cube twist, a coil spring, a balloon, a fly, a frog, an owl,
+              melting, stretching, peeling, gurgling, swimming, keys, a fan, a cinematic hit, a warm
+              pad, an electric arc, a slow rush, an alarm bell, chess moves, clockwork and sleigh
+              bells), each with a measured level.
+            </li>
+            <li>
+              <strong>Synced cues</strong> (only the cue lines of the packs changed): the daisy's
+              petals land one by one; the pebbles knock as stones; each Möbius rider has its own
+              sound; the puzzle cube's turns, the bricks' landings, the chess moves, the laptop's
+              keys, the banana's peels and the croissant's butter use the new sounds. Timed layers
+              in <code>src/toy-sounds.js</code> follow the starfish's arms, the menorah's candles,
+              the gradient-descent ball's 21 hops and the bonsai's growth, scissors and drop.
+            </li>
+            <li>
+              <strong>The owner's Sound Board marks of September 30</strong> (#143) reached main
+              mid-lane: the six newer toys he approved as they were (fountain pen, running shoe,
+              hoodie, difference engine, song landscape, model splats) are back to main's sounds;
+              the ten he marked get sounds that answer his notes; and six more on these shelves
+              (bombe, Chladni plate, coffee, Screen, supertall, water bottle) are done. 108 toys are
+              now <code>&quot;site&quot;</code> from this lane.
+            </li>
+            <li>
+              <strong>Full suite green</strong> on September 30, 2026 (all 572 tests; one run,
+              finished after a container restart by running the remaining spec files), then main
+              merged in (the audit, Worlds r2, the sound-sources catalog) with the unit, lane and
+              sound checks green again.
+            </li>
+            <li>
+              <strong>28 recordings wired in</strong> (October 1, 2026, once Sound A's engine #141
+              was on main) through the <code>sample</code> voice, each layer keeping its synthesized
+              sound as the <code>fallback</code>: 31 toys (dice, puzzle cube and its turns, balloon
+              dog, storybook, apple, popcorn, taco, fireworks, Eiffel Tower, Colosseum, steam train,
+              sports car, tractor, helicopter, propeller plane, bow and target, crossbow, owl, frog,
+              bonsai, oak, pebbles, iceberg, Klein bottle, spinning top, spring toy, chess set and
+              its moves, wind-up robot, picture lab, your book, photo album). Levels set by
+              rendering each recording against the synth layer it replaces (capped at vol 1.8).
+              <code>tools/sound-lint.mjs --changed</code>: the only clear violations left are what
+              the owner asked for or kept (the tunes, the laptop's screen-on pad, the crown's pings,
+              the monument's chime, the half adder's ding, the Screen's off sound, the sports car's
+              real rev).
+            </li>
+            <li>
+              <strong>Integrator fixes</strong> (October 1, 2026): the recordings' credits moved to
+              the <code>soundSamples</code> key in <code>tools/assets.json</code> (each with its
+              <code>toys</code>) and into <code>src/sound-credits.js</code> for the About tab; the
+              recordings were re-encoded (32 kbps at 32 kHz for sustained sounds, 48 kbps for short
+              hits) so all of <code>assets/sounds/</code> (85 files) is 986,778 bytes, under Sound
+              A's 1 MB budget.
+            </li>
+            <li>
+              <strong>Merged</strong> as #138 into main 6c0c8ac on October 1, 2026, after the
+              Operator's full check of main with #138. The lane's scope is done; the owner hears the
+              new sounds on the Sound Board.
+            </li>
+          </ul>
+          <h2 id="notes">Notes</h2>
+          <ul>
+            <li>
+              Cues: many toys' later sounds are pushed from the pack's
+              <code>drive()</code> (<code>out.cues.push(spec)</code>), not from
+              <code>src/toy-sounds.js</code>. Syncing a sound to an on-screen event means editing
+              only those cue lines in the pack, nothing that changes the look, motion or tap.
+            </li>
+            <li>
+              Listening proxy: a scratch tool opened each toy in headless Chromium, recorded every
+              sound the tap and its cues played (with times), rendered them offline through the
+              app's master chain and measured sharp onsets (clicks), sustained narrow high tones
+              (whistles), rising pitch (vroom), the share of noise energy and the peak and loudness,
+              before and after. Headless frames run slower than real time, so cue times stretch in
+              those renders; the numbers still compare.
+            </li>
+            <li>
+              Samples: Freesound's public search with the CC0 filter works without an API key, and
+              its HQ previews (128 kbps MP3) download without one; each sound's license was read on
+              its own page. Kenney's Casino Audio (CC0, License.txt in the pack) gave the dice. The
+              files were cut and encoded with a local ffmpeg (from the
+              <code>imageio-ffmpeg</code> wheel, not a repo dependency), mono, faded,
+              peak-normalized to -3 dBFS, then re-encoded at 32 kbps (32 kHz) for sustained sounds
+              and 48 kbps for short hits to fit the 1 MB budget.
+            </li>
+            <li>
+              <code>hold</code> (the key's time down) keeps piano tunes (the cake, the tree, the
+              diffusion model, the splatting toy) inside the 5 s limit; <code>decay</code> alone
+              rings too long.
+            </li>
+          </ul>
+          <h2 id="known-issues">Known issues</h2>
+          <ul>
+            <li>
+              The owner's ears are the real test: every new sound was judged from renders and
+              numbers, not heard.
+            </li>
+          </ul>
+          <h2 id="for-the-operator">For the Operator</h2>
+          <ul>
+            <li>
+              The Klein bottle's tap is hard to hit (his note): that's the math pack's pick, not a
+              sound.
+            </li>
+            <li>
+              The balloon dog's pieces ignore the flag color when it pops (his note): the toys
+              pack's code.
+            </li>
+            <li>
+              The &quot;Maoz Tzur&quot; melody for the menorah was left out: the lane couldn't check
+              the tune against a public-domain score, so the menorah has each candle's sound in sync
+              instead. &quot;Sakura Sakura&quot;, &quot;Happy Birthday to You&quot; and &quot;Jingle
+              Bells&quot; are in.
+            </li>
+          </ul>
+        </div>
+      </section>
+      <p class="note">
+        This page is built from
+        <a
+          data-source
+          href="https://github.com/ryanjosephkamp/splashery/blob/main/docs/handoff/SoundB.md"
+          target="_blank"
+          rel="noopener"
+          >docs/handoff/SoundB.md</a
+        >
+        each time the site is built, so it always matches them.
+      </p>
+    </main>
+    <footer class="site-footer">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="brand" href="../../../"
+            ><svg class="logo" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true">
+              <g opacity=".92">
+                <ellipse cx="24" cy="26" rx="14" ry="11" fill="#ff5fa2" />
+                <ellipse cx="40" cy="24" rx="12" ry="13" fill="#7bdff2" />
+                <ellipse cx="33" cy="41" rx="15" ry="11" fill="#ffd166" />
+              </g></svg
+            ><span>Splashery</span></a
+          >
+          <p>
+            splats you can play with. Free, in your browser, with nothing to install; files you open
+            stay on your device.
+          </p>
+        </div>
+        <nav aria-label="Explore">
+          <h2>Explore</h2>
+          <ul>
+            <li><a href="../../../">Home</a></li>
+            <li><a href="../../../toys/">Toys</a></li>
+            <li><a href="../../../tools/">Tools</a></li>
+            <li><a href="../../../science/">Science</a></li>
+            <li><a href="../../../studio/">Studio</a></li>
+            <li><a href="../../../learn/">Learn</a></li>
+            <li><a href="../../../new/">What's new</a></li>
+            <li><a href="../../../about/">About</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="More">
+          <h2>More</h2>
+          <ul>
+            <li><a href="../../../../" target="_blank" rel="noopener">The gallery</a></li>
+            <li><a href="../../../search/">Search</a></li>
+            <li><a href="../../../../manual/">The Tinkerer's Manual</a></li>
+            <li>
+              <a href="https://github.com/ryanjosephkamp/splashery" target="_blank" rel="noopener"
+                >Source on GitHub</a
+              >
+            </li>
+            <li><a href="../../../share/">Embed and share</a></li>
+            <li><a href="../../../about/credits/">Credits</a></li>
+            <li><a href="../../../about/contact/">Contact</a></li>
+            <li><a href="../../../about/privacy/">Privacy</a></li>
+            <li><a href="../../../about/terms/">Terms</a></li>
+          </ul>
+        </nav>
+      </div>
+      <p class="fine">
+        Made by <a href="../../../about/contact/">Ryan Kamp</a>. Code under the MIT license; each
+        toy's assets keep their own licenses. Built on the PlayCanvas engine. This is a preview of
+        Splashery's new site; the toys live in
+        <a href="../../../../" target="_blank" rel="noopener">the gallery</a>.
+      </p>
+    </footer>
+  </body>
+</html>
