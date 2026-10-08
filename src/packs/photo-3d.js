@@ -19,6 +19,7 @@ import {
 } from "./photo-3d-core.js";
 
 export { PHOTO_BUDGETS };
+import { sharpEntry, sharpPhoto, sharpDrive } from "./photo-sharp.js"; // lane Photo sharp view
 
 // ---- Live input (lane Live input): the camera's live view ----------------------------
 // With the camera on, the toy shows what the camera sees, in depth, before
@@ -373,7 +374,7 @@ const PHOTO_3D = {
       return { source: "custom", photoName: p.name };
     },
     // Lane Live input: the camera, and a button that takes the picture.
-    live: [{ kind: "camera", capture: { button: "Take the picture", name: "Camera picture.jpg" }, status: mirrorStatus }], // prettier-ignore
+    live: [{ kind: "camera", capture: { button: "Take the picture", name: "Camera picture.jpg" }, status: mirrorStatus }, sharpEntry("photo-3d")], // prettier-ignore
     shown() {
       if (liveOn()) return "Live: what the camera sees, in depth. Take the picture to keep it."; // lane Live input
       const i = P3D.info;
@@ -411,6 +412,7 @@ const PHOTO_3D = {
     // "Layers" pulls the depth bands apart along the view direction.
     const L = c.layers ?? 0;
     for (let b = 0; b < LAYERS; b++) out.parts[`layer${b}`] = { offset: [0, 0, (b - (LAYERS - 1) / 2) * 0.22 * L] }; // prettier-ignore
+    sharpDrive(out); // lane Photo sharp view
   },
   build(k, o) {
     P3D.original = null;
@@ -492,6 +494,15 @@ const PHOTO_3D = {
       custom: src === P3D.custom,
     };
     k.data = { photo: P3D.info };
+    sharpPhoto({
+      photo: src.photo,
+      depth: s.depth,
+      gx: s.gx,
+      gy: s.gy,
+      aspect: s.aspect,
+      relief: s.stats.relief,
+      uid: src.uid,
+    }); // lane Photo sharp view
   },
 };
 
