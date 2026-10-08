@@ -284,6 +284,17 @@ export class HandsOn {
     };
   }
 
+  // The play area's walls in pieces mode, [x0, x1, z0, z1]: ±`area`, or
+  // lane Hands-on H2's `walls` (toy radii) for a toy on a tray that isn't
+  // square (the croissant's lid stays on its baking tray).
+  walls() {
+    const hands = this.info.recipe.hands;
+    const R = this.R();
+    if (hands.walls) return hands.walls.map((v) => v * R);
+    const A = (hands.area ?? 1.6) * R;
+    return [-A, A, -A, A];
+  }
+
   buildPieces(hands) {
     const info = this.info;
     this.mode = "pieces";
@@ -292,9 +303,9 @@ export class HandsOn {
     const g = (hands.gravity ?? GRAVITY) * R;
     const w = new World({ gravity: [0, -g, 0], substeps: hands.substeps ?? 10, sleepSpeed: 0.02 * R, minHit: 0.35 * R, maxPush: 0.01 * R, maxSpeed: 10 * R }); // prettier-ignore
     w.plane([0, 1, 0], hands.floor ?? 0, { friction: hands.friction ?? 0.9, restitution: 0.15, grip: hands.grip ?? 0 }); // prettier-ignore
-    const A = (hands.area ?? 1.6) * R;
-    for (const [nx, nz] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) // prettier-ignore
-      w.plane([nx, 0, nz], -A, { friction: 0.3, restitution: 0.3 });
+    const [x0, x1, z0, z1] = this.walls();
+    for (const [nx, nz, d] of [[1, 0, x0], [-1, 0, -x1], [0, 1, z0], [0, -1, -z1]]) // prettier-ignore
+      w.plane([nx, 0, nz], d, { friction: 0.3, restitution: 0.3 });
     this.pieces = [];
     for (const p of hands.pieces?.(data, info) || []) {
       // Lane Hands-on H2: `shown` is where the recipe's drive shows the
@@ -434,8 +445,9 @@ export class HandsOn {
     p[1] = Math.min(p[1], fl + 5 * R);
     const lim = this.mode === "pieces" ? (this.info.recipe.hands.area ?? 1.6) * R : 1.6 * R;
     const c = this.body ? this.body.home.pos : [0, 0, 0];
-    p[0] = Math.max(c[0] - lim, Math.min(c[0] + lim, p[0]));
-    p[2] = Math.max(c[2] - lim, Math.min(c[2] + lim, p[2]));
+    const [x0, x1, z0, z1] = this.mode === "pieces" ? this.walls() : [-lim, lim, -lim, lim];
+    p[0] = Math.max(c[0] + x0, Math.min(c[0] + x1, p[0]));
+    p[2] = Math.max(c[2] + z0, Math.min(c[2] + z1, p[2]));
     h.target = p;
     this.world.wake();
   }
@@ -583,10 +595,10 @@ export class HandsOn {
         n = p;
       }
     }
-    const lim = (this.info.recipe.hands.area ?? 1.6) * R;
+    const [x0, x1, z0, z1] = this.walls();
     const tf = ray.dir[1] < -1e-4 ? (fl - ray.origin[1]) / ray.dir[1] : Infinity;
     const pf = tf < Infinity ? v3.add(ray.origin, v3.scale(ray.dir, tf)) : null;
-    const inside = pf && Math.abs(pf[0]) <= lim && Math.abs(pf[2]) <= lim;
+    const inside = pf && pf[0] >= x0 && pf[0] <= x1 && pf[2] >= z0 && pf[2] <= z1;
     let p;
     if (tf < best && inside) {
       p = pf;
@@ -974,8 +986,10 @@ export class HandsOn {
         if (pc.token !== undefined) out.push({ index: pc.token, token });
         // Lane Hands-on H2: other tokens that ride with it (`ride`: an
         // index, or { token, visible }), a banana's skin strips.
-        for (const r of pc.def.ride || [])
+        for (const r of pc.def.ride || []) {
+          if (r.part) continue; // (a riding part: below)
           out.push(typeof r === "number" ? { index: r, token } : { index: r.token, token: { ...token, visible: r.visible ?? 1 } }); // prettier-ignore
+        }
       }
       // Lane Hands engine C: what the ropes, cloth and stretch move.
       const so = this.softParts?.output();
@@ -994,6 +1008,16 @@ export class HandsOn {
         // Lane Hands-on H2: `offHome` is merged in while it is off its place
         // (a candle pulled out of the cake goes out: { visible: 0 }).
         if (pc.def.offHome && !b.pinned) Object.assign(parts[pc.part], pc.def.offHome);
+        // Other parts that ride with it ({ part, pivot, upside }), and what
+        // is merged into them while it lies upside down (a pancake's syrup,
+        // flipped under it, is hidden: { visible: 0 }).
+        const upside = quat.rotate(b.q, [0, 1, 0])[1] < 0;
+        for (const r of pc.def.ride || []) {
+          if (!r.part) continue;
+          const pr = r.pivot || pv;
+          parts[r.part] = { quat: dq, offset: v3.sub(v3.sub(b.pos, pr), quat.rotate(dq, v3.sub(bt.pos, pr))) }; // prettier-ignore
+          if (r.upside && upside) Object.assign(parts[r.part], r.upside);
+        }
       }
       if (this.joints) parts = this.joints.parts(parts); // lane Hands engine B
       if (so) parts = Object.assign(parts || {}, so.parts); // lane Hands engine C
