@@ -675,6 +675,7 @@ export const RECIPES = {
           pull: 0.08,
           give: 0.05,
           knock: 5,
+          place: true,
           spill: 0.5 + 0.35 * (all.length - 1 - i),
           sound: (ev, vol) =>
             ev.kind === "snap" || ev.kind === "spill"
@@ -1227,8 +1228,30 @@ export const RECIPES = {
     ],
     controls: [{ key: "out", label: "Blown out", type: "toggle", default: 0, ease: 0.6 }],
     action: { key: "out", label: "Blow out" },
+    // Hands-on (lane Hands-on H2): pull a candle out of the cake (it goes
+    // out) and push it back in: brought close to its hole, it clicks home,
+    // alight again. Set down on the cake, it lies on the frosting.
+    hands: {
+      floor: -0.5,
+      area: 1.4,
+      pieces: (d) => {
+        if (!d?.candles) return [];
+        const candles = d.candles.map((cd, i) => {
+          const solid = { type: "cylinder", r: 0.035, h: 0.17 };
+          return { part: `flame${i}`, pivot: cd.pos, ride: [cd.token], offHome: { visible: 0 }, pos: cd.pos, solid, points: surfacePoints(solid, 1), pick: [0.08, 0.22, 0.08], mass: 0.1, friction: 0.7, restitution: 0.2 }; // prettier-ignore
+        });
+        // The cake on its stand: never picked up (nothing to take hold of),
+        // there for a candle to lie on.
+        const cake = { pos: [0, 0.35, 0], solid: { type: "cylinder", r: 0.8, h: 0.35 }, points: [], pick: [1e-4, 1e-4, 1e-4], mass: 0 }; // prettier-ignore
+        return [...candles, cake];
+      },
+      joints: (d) => (d?.candles || []).map((_, i) => ({ type: "socket", part: `flame${i}`, snap: 0.25 })), // prettier-ignore
+      sound: (hit, vol) => ({ voice: "click", vol: vol * 0.5 }),
+    },
     drive(t, c, out) {
-      out.parts.flames = { visible: 1 - smoothstep(0, 0.55, c.out) };
+      // (Lane Hands-on H2: each candle's flame is a part of its own.)
+      const alight = { visible: 1 - smoothstep(0, 0.55, c.out) };
+      for (let i = 0; i < 9; i++) out.parts[`flame${i}`] = alight;
       out.parts.smoke = { visible: smoothstep(0.25, 1, c.out) };
     },
     build(k, o) {
@@ -1387,10 +1410,12 @@ export const RECIPES = {
         const r = (R - 0.2) * Math.sqrt(rand());
         return { p: [Math.sin(a) * r, H, Math.cos(a) * r], n: [0, 1, 0] };
       });
-      // Candles, with flames on one part and smoke on another.
-      const flames = k.part("flames");
+      // Candles, with flames on one part and smoke on another. (Lane
+      // Hands-on H2: each candle is a token and its flame a part, so it can
+      // be pulled out alight.)
       const smoke = k.part("smoke");
       const n = clamp(Math.round(o.candles), 1, 9);
+      const candles = [];
       const colours = ["#6ec6ff", "#ffd23f", "#ff7eb6", "#8be38b", "#b28dff"];
       const ch = 0.3;
       for (let i = 0; i < n; i++) {
@@ -1399,7 +1424,11 @@ export const RECIPES = {
         const x = Math.sin(a) * rr;
         const z = Math.cos(a) * rr;
         const stripe = colours[i % colours.length];
+        const flames = k.part(`flame${i}`, { pivot: [x, H + ch / 2, z] });
+        const token = { kind: "token", params: [i, 0] };
+        candles.push({ pos: [x, H + ch / 2, z], token: i });
         k.add(evenCylinder(0.032, 0.032, ch), {
+          ...token,
           even: true,
           opacity: 1,
           jitter: 0.015,
@@ -1417,6 +1446,7 @@ export const RECIPES = {
           opacity: 1,
           jitter: 0.015,
           pos: wick,
+          ...token,
           weight: 3,
           pattern: false,
           color: "#2a211c",
@@ -1446,6 +1476,7 @@ export const RECIPES = {
         }));
       }
       k.reach([0, H + ch + 0.3, 0]);
+      k.data = { candles };
     },
   },
 
@@ -1453,6 +1484,47 @@ export const RECIPES = {
     alive: true,
     controls: [{ key: "pop", label: "Pop", type: "pulse", ease: 1.5 }],
     action: { key: "pop", label: "Pop!" },
+    // Hands-on (lane Hands-on H2): pull the bucket's rim over and it tips
+    // on its bottom edge (past its balance it falls on its side; short of
+    // it, it rocks back): the loose kernels on top spill out over the rim
+    // one after another and bounce on the table (pick one off by hand too).
+    // ↺ stands it up and puts them back.
+    hands: {
+      floor: 0,
+      area: 1.5,
+      pieces: (d) => {
+        if (!d?.pops) return [];
+        // A paper bucket: wider at the top; points round its bottom and rim.
+        const points = [];
+        for (let i = 0; i < 16; i++) {
+          const a = (i / 16) * TAU;
+          points.push([Math.sin(a) * 0.5, -0.4, Math.cos(a) * 0.5], [Math.sin(a) * 0.7, 0.7, Math.cos(a) * 0.7]); // prettier-ignore
+        }
+        // (Its solid stops short of the open top, so nothing rests on a lid
+        // that isn't there.)
+        const bucket = { part: "bucket", pivot: [0, 0.55, 0], pos: [0, 0.4, 0], solid: { type: "cylinder", r: 0.58, h: 0.4 }, points, pick: [0.72, 0.75, 0.72], mass: 1, friction: 0.6, restitution: 0.1 }; // prettier-ignore
+        const kernels = d.pops.map((q, j) => ({ part: `k${j}`, pivot: q.p, pos: q.p, solid: { type: "sphere", r: q.r * 1.1 }, pick: [0.14, 0.14, 0.14], mass: 0.05, friction: 0.5, restitution: 0.5, damping: 0.4, angDamping: 0.6 })); // prettier-ignore
+        return [bucket, ...kernels];
+      },
+      joints: (d) => [
+        // It tips toward the left on the bottom edge there.
+        { type: "hinge", part: "bucket", pivot: [-0.5, 0, 0], axis: [0, 0, 1], min: 0, max: 1.42, com: [0, 0.6, 0], damping: 2, bounce: 0.25, pos: [0, 0.55, 0], pick: [0.72, 0.6, 0.72], sound: (ev, vol) => (ev.kind === "stop" && ev.v > 1 ? { voice: "thud", f: 160, decay: 0.5, vol } : null) }, // prettier-ignore
+        ...(d?.pops || []).map((q, j) => ({
+          type: "break",
+          part: `k${j}`,
+          to: "bucket",
+          at: q.p,
+          pull: 0.08,
+          give: 0.05,
+          knock: 6,
+          // The ones on top and nearest the way it tips go first.
+          spill: 0.45 + 0.04 * j,
+          sound: () => null,
+        })),
+      ],
+      sound: (hit, vol) =>
+        hit.body?.solid?.type === "sphere" ? { voice: "click", vol: Math.min(0.6, 0.15 + vol) } : { voice: "thud", f: 200, decay: 0.3, vol: vol * 0.5 }, // prettier-ignore
+    },
     drive(t, c, out) {
       const p = 1 - c.pop;
       for (let j = 0; j < POPS.length; j++) {
@@ -1473,6 +1545,8 @@ export const RECIPES = {
     },
     build(k) {
       const H = 1.1;
+      // Lane Hands-on H2: the bucket and its heap are a part of their own.
+      const bucket = k.part("bucket", { pivot: [0, H / 2, 0] });
       const R0 = 0.5;
       const R1 = 0.7;
       // The striped paper bucket, with a star badge on the front.
@@ -1486,6 +1560,7 @@ export const RECIPES = {
         return r - edge;
       };
       k.add(evenCylinder(R0, R1, H, "bottom"), {
+        part: bucket,
         even: true,
         opacity: 1,
         jitter: 0.01,
@@ -1514,6 +1589,7 @@ export const RECIPES = {
         },
       });
       k.add(evenTorus(k, R1, 0.02, 120), {
+        part: bucket,
         even: true,
         opacity: 1,
         jitter: 0.01,
@@ -1534,6 +1610,7 @@ export const RECIPES = {
           { grid: 40 },
         ),
         {
+          part: bucket,
           even: true,
           opacity: 1,
           flat: 0.4,
@@ -1572,14 +1649,20 @@ export const RECIPES = {
         const s = 0.08 + k.rand() * 0.02;
         place([Math.sin(a) * r, s * 0.8, Math.cos(a) * r], s);
       }
+      // (The ones in the bucket ride it; the ones spilled round it lie on
+      // the table.)
+      for (const q of kernels) if (q.p[1] > 0.3) q.part = bucket;
       // The highest kernels are parts that pop.
+      const pops = [];
       const order = kernels
         .map((q, i) => ({ i, y: q.p[1] + 0.05 * k.rand() }))
         .sort((a, b) => b.y - a.y);
       for (let j = 0; j < POPS.length; j++) {
         const q = kernels[order[j * 2].i];
         q.part = k.part(`k${j}`, { pivot: q.p });
+        pops.push({ p: q.p, r: q.r });
       }
+      k.data = { pops };
       // Kernels deeper in the heap are in shade.
       for (const q of kernels) {
         const top = heapTop(Math.hypot(q.p[0], q.p[2]));
@@ -2999,6 +3082,10 @@ export const RECIPES = {
   pretzel: {
     controls: [{ key: "twist", label: "Twist", type: "pulse", ease: PRETZEL_SECS }],
     action: { key: "twist", label: "Twist" },
+    // Hands-on (lane Hands-on H2): pull one of its ends (the sides of the
+    // loop) and the soft pretzel stretches after your finger; let go and it
+    // springs back into its twist, wobbling a little.
+    hands: { floor: -0.78, stretch: { radius: 0.55, max: 0.45, hz: 3.2, damping: 0.25, at: (p) => Math.abs(p[0]) > 0.35 } }, // prettier-ignore
     // A tap twists the pretzel like a knot, all in one piece: its two sides
     // wring opposite ways and its loops fold a little towards you. Let go, it
     // springs back a little past its shape into the opposite twist and
@@ -4705,15 +4792,20 @@ export const RECIPES = {
       { key: "stir", label: "Stir", type: "pulse", ease: 3.2 },
     ],
     action: { key: "stir", label: "Stir" },
+    // Hands-on (lane Hands-on H2): drag in the cup to stir: the coffee under
+    // your finger turns after it, the rings near it most, so the latte art
+    // swirls; let go and it coasts and slows.
+    hands: { follow: { center: [0, 0.58, 0] } }, // (the coffee's surface, COFFEE_TOP)
     // A stir spins the coffee twice round and twists the latte art into a
     // swirl (the middle turns further than the edge) that relaxes back as it
     // stops, while a puff of steam curls up.
-    drive(t, c, out) {
+    drive(t, c, out, info) {
       const p = 1 - c.stir;
       const turn = TAU * 2 * easeInOut(p);
       const twist = c.stir > 0 ? 3.2 * Math.sin(Math.PI * smoothstep(0, 0.9, p)) : 0;
+      const stir = coffeeStir(t, info.hands); // lane Hands-on H2 (0 with ✋ off)
       for (let i = 0; i < COFFEE_RINGS; i++)
-        out.parts[`coffee${i}`] = { angle: turn + twist * (1 - (i + 0.5) / COFFEE_RINGS) };
+        out.parts[`coffee${i}`] = { angle: turn + twist * (1 - (i + 0.5) / COFFEE_RINGS) + stir[i] }; // prettier-ignore
       out.parts.puff = {
         visible: c.stir > 0 ? smoothstep(0, 0.1, p) * (1 - smoothstep(0.7, 1, p)) : 0,
       };
@@ -6529,6 +6621,34 @@ export const RECIPES = {
     ],
     controls: [{ key: "pop", label: "Pop the stone", type: "pulse", ease: AVO_SECS }],
     action: { key: "pop", label: "Pop the stone" },
+    // Hands-on (lane Hands-on H2): lift the stone out of its half and put it
+    // back (brought close, it settles into its hollow); pick up the empty
+    // half. ↺ puts everything back.
+    hands: {
+      floor: -0.63,
+      area: 1.3,
+      pieces: (d) => {
+        if (!d) return [];
+        const out = [];
+        // The empty half: points round its dome and the rim of its cut face.
+        const h = d.halves.b;
+        if (h) {
+          const mid = add(h.pos, quatRotate(h.q, [0, 0, -0.12]));
+          const points = [];
+          for (const [y, r] of h.prof)
+            for (let i = 0; i <= 6; i++) {
+              const ph = (i / 6) * Math.PI;
+              points.push([r * Math.cos(ph), y, 0.12 - r * Math.sin(ph)], [r * Math.cos(ph), y, 0.12]); // prettier-ignore
+            }
+          out.push({ part: "b", pivot: h.pivot, pos: mid, quat: h.q, points, solid: { type: "box", half: [0.3, 0.55, 0.12] }, pick: [0.45, 0.6, 0.25], mass: 1, friction: 0.8, restitution: 0.05, angDamping: 2 }); // prettier-ignore
+        }
+        const at = d.stones.a;
+        out.push({ part: "stone", pivot: at, pos: at, solid: { type: "sphere", r: 0.235 }, pick: [0.27, 0.27, 0.27], mass: 0.4, friction: 0.9, restitution: 0.1, damping: 0.5, angDamping: 2 }); // prettier-ignore
+        return out;
+      },
+      joints: () => [{ type: "socket", part: "stone", snap: 0.35 }],
+      sound: (hit, vol) => ({ voice: "thud", f: 300, bright: 0.4, decay: 0.3, vol: vol * 0.6 }),
+    },
     // A tap pops the stone out of its half: it flies over and drops into
     // the empty half with a thock, rocking it, then pops back home and the
     // first half rocks. (With one half, it pops up and drops back in.)
@@ -6643,7 +6763,9 @@ export const RECIPES = {
         const pivot = add(pos, quatRotate(q, [0, pitY, -0.4]));
         const axis = quatRotate(q, [0, 1, 0]);
         const part = k.part(name, { pivot, axis });
-        halves[name] = { pivot, axis, seat: add(pos, quatRotate(q, [0, pitY, 0.02])), q };
+        halves[name] = { pivot, axis, seat: add(pos, quatRotate(q, [0, pitY, 0.02])), q, pos };
+        // (Lane Hands-on H2: its outline, for the empty half's piece.)
+        halves[name].prof = [-0.6, -0.4, -0.2, 0, 0.2, 0.4, 0.6].map((y) => [y, rAt(y)]);
         k.add(revolve(k, pts, null, { grid: 80, arc: [Math.PI / 2, (3 * Math.PI) / 2] }), {
           even: true,
           opacity: 1,
@@ -6881,4 +7003,69 @@ function hh2Layers(list, opts = {}) {
       free: opts.free ?? true,
     };
   });
+}
+
+// The coffee stirred by a finger (lane Hands-on H2): each ring of the latte
+// art turns at its own rate. Where the finger is on the coffee's surface,
+// the rings it crosses are dragged round after it (the nearer, the harder);
+// every ring pulls on its neighbors (the coffee is one liquid) and slows.
+const COFFEE_TOP = 0.58; // the coffee's surface
+const COFFEE_R = 0.55; // its radius there
+const STIR = { t: null, a: null, angle: [], w: [] };
+function coffeeStir(t, hands) {
+  const n = COFFEE_RINGS;
+  if (!hands?.on) {
+    STIR.t = null;
+    STIR.a = null;
+    STIR.angle = new Array(n).fill(0);
+    STIR.w = new Array(n).fill(0);
+    return STIR.angle;
+  }
+  if (STIR.angle.length !== n) {
+    STIR.angle = new Array(n).fill(0);
+    STIR.w = new Array(n).fill(0);
+  }
+  const dt = STIR.t === null ? 0 : clamp(t - STIR.t, 0, 0.1);
+  STIR.t = t;
+  // Where the finger's line meets the coffee's surface.
+  const f = hands.finger;
+  let fa = null;
+  let fr = 0;
+  if (f && Math.abs(f.dir[1]) > 1e-4) {
+    const k = (COFFEE_TOP - f.origin[1]) / f.dir[1];
+    const p = add(f.origin, mul(f.dir, k));
+    fr = Math.hypot(p[0], p[2]) / COFFEE_R;
+    if (k > 0 && fr < 1.05) fa = Math.atan2(p[0], p[2]);
+  }
+  let fw = 0; // the finger's own turn rate about the cup's middle
+  if (fa !== null && STIR.a !== null && dt > 0) {
+    let da = fa - STIR.a;
+    da -= TAU * Math.round(da / TAU);
+    fw = da / dt;
+  }
+  STIR.a = fa;
+  if (dt <= 0) return STIR.angle;
+  const w = STIR.w;
+  for (let i = 0; i < n; i++) {
+    const ri = (i + 0.5) / n;
+    if (fa !== null) {
+      const near = Math.exp(-(((ri - fr) / 0.22) ** 2));
+      w[i] += (fw - w[i]) * (1 - Math.exp(-14 * near * dt));
+    }
+  }
+  // Neighbors share their turn; everything slows (inner rings coast
+  // longest, as the middle of a stirred cup does).
+  const next = w.slice();
+  for (let i = 0; i < n; i++) {
+    const a = w[Math.max(0, i - 1)];
+    const b = w[Math.min(n - 1, i + 1)];
+    next[i] += ((a + b) / 2 - w[i]) * (1 - Math.exp(-6 * dt));
+    next[i] *= Math.exp(-(0.5 + 1.2 * ((i + 0.5) / n)) * dt);
+    next[i] = clamp(next[i], -12, 12);
+  }
+  for (let i = 0; i < n; i++) {
+    w[i] = next[i];
+    STIR.angle[i] = (STIR.angle[i] + w[i] * dt) % (TAU * 50);
+  }
+  return STIR.angle;
 }
