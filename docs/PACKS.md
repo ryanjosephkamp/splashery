@@ -914,6 +914,10 @@ the `"socket"` cue. ↺ brings it home from wherever it sits.
 { type: "break", part: "cap", at: CAP_MOUTH, pull: 0.2, give: 0.02, reseat: { seats: [{ pos: POSTED, quat: HALF_TURN }] } }, // prettier-ignore
 ```
 
+A picture toy (a recipe with `pictures`, or `turntable: false`) stays out of Hands-on unless its
+`hands` block has `joints` (lane Hands-on H3): then those play, and nothing else (a picture frame
+swings on its nail; its picture is never picked up whole).
+
 **Parents**: `parent` (a joint's name) puts a hinge, slider or dial on another driven part: a desk
 lamp's head on its arm, a clock's hands on a turning dial. Children pose after their parents.
 
