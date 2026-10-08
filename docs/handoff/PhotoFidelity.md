@@ -189,6 +189,10 @@ with measurements within about six hours. Your Operator is session_012GmKRUMZLir
 
 ## State
 
+- October 8, 2026, 23:45 UTC: READY to merge. The owner marked `phf2-text-after-r4` and
+  `phf2-text-still-after-r4` "good" (the street was already "good"), so every current round 2 card
+  is good. Main merged in (#438, the Volume viewer); phf2, p3d and phf pass.
+
 - October 8, 2026, 21:30 UTC: the owner marked the r3 text cards "fix" again. r4 (single-cell detail
   from mid up) posted as `phf2-text-after-r4` and `phf2-text-still-after-r4`. Main merged in (#422,
   #427, #428). Since #422 the Splats view is saved in the scene, so the phf tools and tests pick it
