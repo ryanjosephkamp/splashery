@@ -81,7 +81,7 @@ const HOLD_UPRIGHT = 1;
 const HOLD_SWING_DAMPING = 1.2;
 const PUSH_MAX = 2; // toy radii per second: the fastest a nudge pushes
 const PICK_LIFT = 0.15;
-const FLIP_PX = 500; // CSS pixels per second up the screen: a flick this fast flips a `flip` piece (lane Hands-on H2)
+const FLIP_PX = 400; // CSS pixels per second up the screen: a flick this fast flips a `flip` piece (lane Hands-on H2)
 const FLIP_UP = 4; // toy radii per second: how fast a flipped piece rises
 
 export class HandsOn {
@@ -518,6 +518,9 @@ export class HandsOn {
     body.held = true;
     const def = this.pieces.find((pc) => pc.body === body)?.def;
     body.holdQ = place ? yawOnly(body.q) : def?.joint ? null : body.q.slice();
+    // Lane Hands-on H2: a `flip` piece lying upside down is held upside down
+    // (a pancake flipped once stays flipped in the hand).
+    if (place && def?.flip && quat.rotate(body.q, [0, 1, 0])[1] < 0) body.holdQ = quat.mul(body.holdQ, quat.axisAngle([1, 0, 0], Math.PI)); // prettier-ignore
     // A piece being placed stays level; anything else hangs and swings.
     body.holdK = place ? 10 : HOLD_UPRIGHT;
     body.angDampingFree ??= body.angDamping;
@@ -604,7 +607,10 @@ export class HandsOn {
     const below = def?.pick ? def.pick[1] : b.bound;
     // What is right under it there: straight down from above, at its
     // middle and four points round its footprint.
-    const foot = def?.pick ? 0.6 * Math.min(def.pick[0], def.pick[2]) : 0.5 * b.bound;
+    // (Lane Hands-on H2: `hands.foot`, the share of its pick radius looked
+    // under, so a wide piece set beside a stack sits on its edge instead of
+    // being lowered into it.)
+    const foot = def?.pick ? (this.info.recipe.hands.foot ?? 0.6) * Math.min(def.pick[0], def.pick[2]) : 0.5 * b.bound; // prettier-ignore
     // A recipe may snap it onto the piece below (a brick onto the studs).
     const snap = this.info.recipe.hands.snap;
     const under = (at) => {
@@ -959,11 +965,13 @@ export class HandsOn {
       const out = [];
       for (const pc of this.pieces) {
         const b = pc.body;
-        if ((b.pinned && !this.homing) || pc.token === undefined) continue;
-        // (From where its splats were built; lane Hands-on H2's `shown`.)
-        const dq = quat.mul(b.q, quat.conj(pc.built.q));
-        const token = { base: pc.built.pos, offset: v3.sub(b.pos, pc.built.pos), quat: dq };
-        out.push({ index: pc.token, token });
+        if (b.pinned && !this.homing) continue;
+        // (From where its splats were built; lane Hands-on H2's `shown`. A
+        // joint's own piece has no `built`: its home.)
+        const bt = pc.built || pc.home;
+        const dq = quat.mul(b.q, quat.conj(bt.q));
+        const token = { base: bt.pos, offset: v3.sub(b.pos, bt.pos), quat: dq };
+        if (pc.token !== undefined) out.push({ index: pc.token, token });
         // Lane Hands-on H2: other tokens that ride with it (`ride`: an
         // index, or { token, visible }), a banana's skin strips.
         for (const r of pc.def.ride || [])
@@ -978,10 +986,14 @@ export class HandsOn {
       for (const pc of this.pieces) {
         if (!pc.part) continue;
         const b = pc.body;
-        const dq = quat.mul(b.q, quat.conj(pc.built.q));
-        const pv = pc.def.pivot || pc.built.pos;
-        const off = v3.sub(v3.sub(b.pos, pv), quat.rotate(dq, v3.sub(pc.built.pos, pv)));
+        const bt = pc.built || pc.home;
+        const dq = quat.mul(b.q, quat.conj(bt.q));
+        const pv = pc.def.pivot || bt.pos;
+        const off = v3.sub(v3.sub(b.pos, pv), quat.rotate(dq, v3.sub(bt.pos, pv)));
         (parts ||= {})[pc.part] = { quat: dq, offset: off };
+        // Lane Hands-on H2: `offHome` is merged in while it is off its place
+        // (a candle pulled out of the cake goes out: { visible: 0 }).
+        if (pc.def.offHome && !b.pinned) Object.assign(parts[pc.part], pc.def.offHome);
       }
       if (this.joints) parts = this.joints.parts(parts); // lane Hands engine B
       if (so) parts = Object.assign(parts || {}, so.parts); // lane Hands engine C
