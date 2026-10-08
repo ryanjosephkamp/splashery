@@ -6,7 +6,7 @@
 //   SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium node tools/psv-clip.mjs <out.mp4>
 //     --toy=photo-3d|moving-photo-3d [--open=<file>] --view=splats|sharp
 //     [--secs=6] [--fps=15] [--from=6] [--zoom=home|max] [--sway=0.2] [--dpr=3]
-//     [--label="Sharp picture · Opus 5.5"] [--profile=mid]
+//     [--label="Sharp picture · Opus 5.5"] [--profile=mid] [--focus=0]
 //
 // The page is 390 x 844 at device scale --dpr, in focus mode (only the toy). Photo to 3D: the photo
 // is opened, its depth raised, and the view sways --sway radians each way over the clip. Moving
@@ -35,6 +35,7 @@ const zoom = opt("zoom", "home");
 const sway = Number(opt("sway", toy === "photo-3d" ? 0.2 : 0.1));
 const dpr = Number(opt("dpr", 3));
 const label = opt("label", "");
+const focus = opt("focus", "1") !== "0"; // --focus=0 keeps the page around the toy (its status line)
 const base = process.env.SPLASHERY_URL || "http://127.0.0.1:4173/";
 if (!out) throw new Error("Usage: node tools/psv-clip.mjs <out.mp4> --toy=… [--open=<file>] …");
 
@@ -67,7 +68,7 @@ if (toy === "photo-3d") {
   }, name, { timeout: 1_800_000, polling: 2000 }); // prettier-ignore
   await page.evaluate(() => window.__splashery.app.setControl("play", 0));
 }
-await page.keyboard.press("f");
+if (focus) await page.keyboard.press("f");
 await page.evaluate(() => window.__splashery.player.camera.reset());
 if (zoom === "max") await page.evaluate(() => window.__splashery.player.camera.zoomBy(0.001));
 await page.evaluate(([t, v]) => window.__psv.set(t, v), [toy, view]);

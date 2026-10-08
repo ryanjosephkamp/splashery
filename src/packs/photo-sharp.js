@@ -1,19 +1,23 @@
-// Lane Photo sharp view (prefix psv): the "Sharp" view of Photo to 3D and Moving photo to 3D, a
-// choice beside the splats (which stay the default). The picture at its full resolution as a
+// Lane Photo sharp view (prefix psv): the "Sharp picture" view of Photo to 3D and Moving photo to
+// 3D, the default since the owner's call of October 8, 2026 ("Make sharp the default"), with the
+// splats a tap away beside it. The picture at its full resolution as a
 // texture on a relief lifted by the same depth the splats use (src/live/relief-mesh.js), so small
 // text reads as it does in the original.
 //
 // Each toy calls three things (its one small hook): sharpEntry(id) in its input panel's live list
 // (the Splats / Sharp switch), sharpPhoto(...) or sharpClip(...) at the end of its build, and
 // sharpDrive(out) at the end of its drive. The choice lives only while the page is open: nothing
-// new goes into scenes or links (until the owner says otherwise).
+// new goes into scenes or links, so an old scene or link opens in Sharp picture too.
+//
+// Where the splats must stay, they show instead, and the switch and the status line say so: while
+// a tool that works on splats is picked (Poke, Paint, Magnet, Clay), in Hands-on, and while a Look
+// effect is on. Saving the toy as a splat file is unaffected (it reads the splats, not the screen).
 //
 // While Sharp is on, the toy's splats are switched off and the relief moves as they would: the
 // depth slider, the tap (the morph), Layers, the sway, play, pause and scrubbing. A tap on the
-// relief reaches the toy through its tap box. The relief module is loaded the first time someone
-// picks Sharp.
+// relief reaches the toy through its tap box. The relief module loads with the first picture.
 
-const VIEW = { "photo-3d": "splats", "moving-photo-3d": "splats" };
+const VIEW = { "photo-3d": "sharp", "moving-photo-3d": "sharp" };
 const S = {
   src: null, // what the last build showed: { toy, kind, ... }
   mesh: null, // the ReliefMesh, once made
@@ -71,12 +75,14 @@ export function sharpEntry(toy) {
       row.append(a, b);
       const note = document.createElement("p");
       note.className = "note";
-      note.textContent =
-        "Sharp picture: the picture at its full size on a 3D relief, so small text stays readable. Splats: the picture rebuilt from splats. (A test: the choice isn't saved in scenes.)";
       box.append(row, note);
       const paint = () => {
         a.setAttribute("aria-pressed", String(sharpView(toy) === "splats"));
         b.setAttribute("aria-pressed", String(sharpView(toy) === "sharp"));
+        note.textContent =
+          sharpView(toy) === "sharp" && S.yielded
+            ? "Showing the splats while a tool, Hands-on or an effect is on (they work on splats). Sharp picture comes back after."
+            : "Sharp picture: the picture at its full size on a 3D relief, so small text stays readable. Splats: the picture rebuilt from splats.";
       };
       paint();
       LISTENERS.add(paint);
@@ -120,18 +126,36 @@ const wanted = () => {
   // splats back)
   // (counted in the stage's updates, not in time: a slow device's frame can take most of a second)
   const fresh = S.ticks - (S.droveTick ?? -1e9) <= 3;
-  return !!(src && fresh && pl?.scene?.toy?.id === src.toy && VIEW[src.toy] === "sharp" && pl.stage?.toy); // prettier-ignore
+  const on = !!(src && fresh && pl?.scene?.toy?.id === src.toy && VIEW[src.toy] === "sharp" && pl.stage?.toy); // prettier-ignore
+  const yielded = on && splatsNeeded(pl);
+  if (yielded !== S.yielded) {
+    S.yielded = yielded;
+    for (const fn of LISTENERS) fn();
+  }
+  return on && !yielded;
 };
+
+// Where the splats must stay: a tool that works on them (Poke, Paint, Magnet, Clay), Hands-on, a
+// Look effect on.
+function splatsNeeded(pl) {
+  const tool = globalThis.window?.__splashery?.app?.tool;
+  if (tool && tool !== "orbit") return true;
+  if (pl.handsOn?.mode) return true;
+  return Object.values(pl.scene?.effects || {}).some((e) => e?.on);
+}
 
 function splats(on) {
   const ent = player()?.stage?.toy?.entity;
+  const pl = player();
   if (S.splatsOff && (on || S.splatsOff !== ent)) {
     if (S.splatsOff.gsplat) S.splatsOff.gsplat.enabled = true;
     S.splatsOff = null;
+    if (pl) pl.pickDirty = true; // (the pick buffer is drawn again, with the splats)
   }
   if (!on && ent?.gsplat && S.splatsOff !== ent) {
     ent.gsplat.enabled = false;
     S.splatsOff = ent;
+    if (pl) pl.pickDirty = true;
   }
   // A tap on the relief reaches the toy through its tap box (the pick buffer has no splats).
   const data = player()?.motion?.ctx?.kit?.data;

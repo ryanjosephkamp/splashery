@@ -55,9 +55,10 @@ const state = (page) => page.evaluate(() => window.__psv.state());
 const splatsOn = (page) => page.evaluate(() => window.__splashery.player.stage.toy.entity.gsplat.enabled); // prettier-ignore
 
 test.describe("the module", () => {
-  test("the splats are the default, and the relief fits each profile's budget", () => {
-    expect(sharpView("photo-3d")).toBe("splats");
-    expect(sharpView("moving-photo-3d")).toBe("splats");
+  test("Sharp picture is the default, and the relief fits each profile's budget", () => {
+    // (the owner's call of October 8, 2026: "Make sharp the default")
+    expect(sharpView("photo-3d")).toBe("sharp");
+    expect(sharpView("moving-photo-3d")).toBe("sharp");
     expect(SHARP_CELLS.low).toBeLessThan(SHARP_CELLS.mid);
     expect(SHARP_CELLS.max).toBeLessThanOrEqual(300000);
   });
@@ -71,11 +72,23 @@ test.describe("Photo to 3D", () => {
   }) => {
     await page.setViewportSize({ width: 390, height: 844 });
     const errors = await open(page, "photo-3d", test);
-    // The switch is in the Toy tab's panel, Splats pressed.
-    await expect(page.locator("#psv-splats")).toHaveAttribute("aria-pressed", "true");
-    expect((await state(page)).on).toBe(false);
+    // The switch is in the Toy tab's panel, Sharp picture pressed: it opens sharp.
+    await expect(page.locator("#psv-sharp")).toHaveAttribute("aria-pressed", "true");
+    await page.waitForFunction(() => window.__psv.state().on, null, { timeout: 30_000 });
+    expect(await splatsOn(page)).toBe(false);
+    await expect(page.locator("#toy-status")).toContainText("Sharp picture");
+    // A tool that works on splats (Poke) brings them back while it is picked, and says so.
+    await page.evaluate(() => window.__splashery.app.setTool("poke"));
+    await page.waitForFunction(() => !window.__psv.state().on, null, { timeout: 30_000 });
     expect(await splatsOn(page)).toBe(true);
-    // raise the depth, then look at both views
+    await expect(page.locator("#toy-status")).toContainText("splats");
+    await expect(page.locator(".psv-switch .note")).toContainText("Showing the splats");
+    await page.evaluate(() => window.__splashery.app.setTool("orbit"));
+    await page.waitForFunction(() => window.__psv.state().on, null, { timeout: 30_000 });
+    // Splats, then raise the depth and look at both views.
+    await page.evaluate(() => document.querySelector("#psv-splats").click());
+    await page.waitForFunction(() => !window.__psv.state().on, null, { timeout: 30_000 });
+    expect(await splatsOn(page)).toBe(true);
     await page.evaluate(() => window.__splashery.app.act());
     await page.waitForFunction(() => window.__splashery.player.motion.state.flat < 0.01, null, { timeout: 60_000 }); // prettier-ignore
     await page.waitForTimeout(800);
@@ -131,12 +144,13 @@ test.describe("Photo to 3D", () => {
 
   test("another toy takes the relief away", async ({ page }) => {
     const errors = await open(page, "photo-3d", test);
-    await page.evaluate(() => window.__psv.set("photo-3d", "sharp"));
     await page.waitForFunction(() => window.__psv.state().on, null, { timeout: 30_000 });
+    // (Moving photo to 3D keeps its own choice: Splats, picked for this test)
+    await page.evaluate(() => window.__psv.set("moving-photo-3d", "splats"));
     await page.evaluate(() => window.__splashery.app.chooseToy("moving-photo-3d"));
     await page.waitForFunction(() => !window.__splashery.player.loading && window.__splashery.player.proc?.ctx?.kit?.data?.moving, null, { timeout: 120_000 }); // prettier-ignore
     await page.waitForTimeout(500);
-    expect((await state(page)).on).toBe(false); // (Moving photo to 3D keeps its own choice: splats)
+    expect((await state(page)).on).toBe(false);
     expect(await splatsOn(page)).toBe(true);
     expect(errors).toEqual([]);
   });
