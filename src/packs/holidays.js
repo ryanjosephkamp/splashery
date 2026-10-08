@@ -140,7 +140,7 @@ const JACK_LID = { type: "ellipsoid", r: [0.5, 0.13, 0.5] };
 const JACK_BODY = { type: "ellipsoid", r: [1, 0.72, 1] };
 // The patterned egg spun by hand: its turn `a` (from Hands-on), its spin
 // rate `w` and the wobble's lean and heading, stepped by drive().
-const EGG_HAND = { a: null, a0: null, w: 0, lean: 0, head: 0, t: null };
+const EGG_HAND = { a: null, a0: null, w: 0, lean: 0, head: 0, t: null, slot: 0, again: false };
 const EGG_FOOT = [0, -0.75, 0];
 
 // Fireworks: the three launch tubes (x, z, colour), the burst each one
@@ -1242,6 +1242,14 @@ export const RECIPES = {
         const want = s > 0.4 ? 0.13 * clamp(1 - s / 14, 0, 1) : 0.13 * (s / 0.4) ** 2;
         e.lean += (want - e.lean) * Math.min(1, dt * 3);
         e.head += dt * (2.5 + 0.4 * s) * Math.sign(e.w || 1);
+        // Splats sort in the pose they were built in (upright), so a leaning
+        // egg is sorted again as it leans and circles, and on the frame after.
+        const slot = e.lean > 0.004 ? Math.round(e.lean / 0.02) * 1000 + Math.round(e.head / 0.35) : 0; // prettier-ignore
+        if (slot !== e.slot || e.again) {
+          e.again = slot !== e.slot;
+          e.slot = slot;
+          out.resortPose = true;
+        }
       }
       const u = 1 - c.spin;
       const turns = c.spin > 0 ? 2 * (1 - (1 - u) ** 3) : 0;
