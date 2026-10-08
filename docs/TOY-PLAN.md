@@ -10,8 +10,8 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 450 toys. 421 have a tap action today; the other 29 only hop.
-- **keep** (the effect is right: the owner liked it, or C2 finished it): 428.
+- 451 toys. 422 have a tap action today; the other 29 only hop.
+- **keep** (the effect is right: the owner liked it, or C2 finished it): 429.
 - **more** (has an effect; make it clearer or more dramatic): 0.
 - **new** (needs its own effect): 22.
 - Visual fixes: 0 open, 31 done. Touch or drag interaction asked for: 4.
@@ -66,14 +66,14 @@ Proposals below are suggestions; the owner may change them.
   Gradient descent, Gaussian splatting, Word vectors, Sorting machine, Half adder, Turing machine,
   Difference engine, Enigma machine, Bombe, Picture lab, Your book, Photo album, Picture frame, Song
   landscape, Chladni plate, Room echo meter, Splat mirror, Model to splats, QR code, Photo to 3D,
-  Moving photo to 3D, Video to 3D, Sound lab, Sound recorder, Splat toolkit, Point clouds, Splat
-  field, Light lab, Thermal ellipsoids, Super-resolution microscope, Galaxy in a box, Cryo-EM map,
-  Contour lab, Terrain in a box, Ripple tank, Light bench, Fluid lab, Grand Canyon, Mount St.
-  Helens, The sea floor, Tides at Bar Harbor, Hurricane, Relief map, Living city, Stork migration,
-  Earthquakes, Airport X-ray scanner, How CT works, Walnut CT scan, MRI of a fruit, Electron
-  microscope, Thermal camera, Screen, Shardball, Longtail, Grain Garden, Page Breaker, Strata,
-  Volley Table, Stone Belt, Soft Landing, Night Owl Pinball, Cast a Shadow, Photo Dash, Note Rider,
-  Data in 3D.
+  Moving photo to 3D, Video to 3D, Sound lab, Sound recorder, Splat toolkit, Point clouds, Volume
+  viewer, Splat field, Light lab, Thermal ellipsoids, Super-resolution microscope, Galaxy in a box,
+  Cryo-EM map, Contour lab, Terrain in a box, Ripple tank, Light bench, Fluid lab, Grand Canyon,
+  Mount St. Helens, The sea floor, Tides at Bar Harbor, Hurricane, Relief map, Living city, Stork
+  migration, Earthquakes, Airport X-ray scanner, How CT works, Walnut CT scan, MRI of a fruit,
+  Electron microscope, Thermal camera, Screen, Shardball, Longtail, Grain Garden, Page Breaker,
+  Strata, Volley Table, Stone Belt, Soft Landing, Night Owl Pinball, Cast a Shadow, Photo Dash, Note
+  Rider, Data in 3D.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
@@ -3272,7 +3272,7 @@ Proposals below are suggestions; the owner may change them.
     style; sharp sets (even placement in square tiles, walnut, velvet, brass and gold).
   - Sound: Switching on is the click and crackle without the hum; switching off is unchanged.
 
-## Studio (21)
+## Studio (22)
 
 - **Song landscape** (`song-landscape`). Now: tap: Play or pause the song. Plan: new effect (E6).
   - Owner: Approved on the Splashery Universe page (lane Studio Sound), September 29, 2026.
@@ -3527,6 +3527,23 @@ Proposals below are suggestions; the owner may change them.
     cliff, so edges read crisply.
   - Sound: An airy rising tone and faint ticks as the scan line crosses, both quiet (Sound D,
     October 6, 2026: subtler wind and twinkle).
+- **Volume viewer** (`volume-viewer`). Now: tap: Sweep the cut through (tap the volume for the next
+  preset: bone, soft tissue, full range). Plan: keep.
+  - Owner: The owner's Push Plan pick S4, "For the volume viewer, absolutely" (October 4, 2026), and
+    his yes to a DICOM reader the same day (lane Volume viewer, October 8, 2026; labs only).
+  - Effect: A person's own CT, MRI or microscope volume (DICOM series, folder, zip or multi-frame
+    file; NIfTI .nii and .nii.gz; TIFF stacks; raw with a size form) drawn as opaque volume splats
+    spaced to the device's budget, each voxel at its true size. Window and level with presets (bone,
+    soft tissue, full range) or sliders, five color maps and two opacity curves, a cut plane on each
+    axis that a drag moves (with a glowing cut face), a thin-slice view, and the maximum-intensity
+    picture. A tap on the volume steps to the next preset (the toy rebuilds with the new window);
+    the Play button sweeps the cut down through the volume and back (5 s).
+  - Improved: Volume viewer: new toy (labs). Readers in src/volume/read.js (dicom-parser 1.8.21,
+    MIT, vendored and loaded only for a DICOM file; NIfTI, TIFF and zip read in the page), the view
+    in src/volume/view.js on the Imaging lane's volume kind. Samples: the CWI walnut (CC BY 4.0) and
+    a 12.8 mm gar larva's micro-CT by Brian Metscher (Zenodo 19021581, CC BY 4.0;
+    tools/vol-gar.mjs).
+  - Sound: A soft click like a console's dial, then a short low tone as the new window settles.
 - **Data in 3D** (`data-in-3d`). Now: tap: Drop and rise. Plan: new effect (E6).
   - Owner: Push Plan S5 (the owner's yes, October 5, 2026), lane Data and climate.
   - Effect: A CSV or TSV opened on the device becomes a 3D scatter, bars or a surface with axes,

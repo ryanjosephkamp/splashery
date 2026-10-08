@@ -1,9 +1,9 @@
 {
   "note": "Measured by tools/shw-facts.mjs; regenerate after a toy or its pack changes.",
   "shelf": {
-    "toys": 450,
+    "toys": 451,
     "public": 319,
-    "kit": 384
+    "kit": 385
   },
   "depthModelMB": 27.3,
   "toys": {
