@@ -95,6 +95,83 @@ file. The engine files belong to the merged engines; another lane's toys are the
 - Before every push: CLAUDE.md, "Before every push", with the local test set. At the end: "A lane's
   end".
 
+### Brief, October 8, 2026 (cloud)
+
+Written by the Operator on October 8, 2026. You are a Splashery worker session, started by the
+Operator (the coordinating session). Repo: ryanjosephkamp/splashery. Your lane: Hands-on H3 (prefix
+`hh3`; shelves: Open me, Holidays, Medieval, Music, Pictures, and the first photoreal toys).
+Branches: `claude/lane-hands-h3-<shelf>`, one PR per shelf as your brief says (engine changes on
+`claude/lane-hands-h3-engine`, as a small additive "Engine: …" PR merged first). Handoff file:
+docs/handoff/HandsH3.md. Model: Opus 5.5, at high effort (CLAUDE.md).
+
+Your full brief is already in docs/handoff/HandsH3.md (written October 3, 2026, for a local lane on
+the owner's Mac). The owner started it in the cloud instead on October 8, 2026: you run here, not on
+his Mac, so ignore the parts about his Mac, his second account and the local port (use
+`python3 -m http.server 4173 --bind 127.0.0.1` as CLAUDE.md says), and post clips on Effect review
+page 2 rather than a clips branch. Its first check (docs/PACKS.md sections 5f, 5g and 5h) passes:
+the hands-on engines merged October 3 and 4, 2026. Everything else in it stands, in its order. Main
+has moved a lot since October 3 (read docs/HANDOFF.md "Now" first). Hands-on play only adds to a
+toy: with the ✋ switch off every toy plays exactly as before, and these are toys the public sees,
+so each shelf's PR waits for the owner's "good" marks on its cards. The Photoreal r3 lane
+(session_01Aznj6YahjQmLTU2fvubEFx) is working on the photoreal toys' bases, effects and sounds now:
+do the photoreal toys last, and agree with that lane before you touch them. Hands-on H1
+(session_01JtZ5V2pLt28eskQfzptye1) and H2 (session_017WQa4wkRzzBSXhohhuJrSr) run beside you on other
+shelves; engine changes go in small additive engine PRs, so keep yours apart from theirs. Update the
+handoff's "## State", "## Notes", "## Known issues" and "## For the Operator" as you go; leave its
+brief as it is and add this one under it as "### Brief, October 8, 2026 (cloud)".
+
+How this lane runs: exactly as docs/handoff/ScienceR3.md, "How this lane runs", says (read it;
+replace the prefix and lane record with yours). New toys and views go behind the labs switch
+(`labs: true`); the Operator merges labs work after the tests pass (with tools/op-merge.mjs) and
+after the owner marks your cards; changes to toys the public already sees wait for his "good" marks.
+Finish every working turn with "READY:", "WORKING:" or "BLOCKED:"; Splashery has no CI to wait for;
+for a long job, schedule a check-in with send_later instead of going idle. Clips at phone size
+(390x844, device scale 3) go on Effect review page 2
+(https://claude.ai/artifact/BSayVkzQ2FKESesrkrSUMK) as docs/OPERATING.md, "Steps for a lane", says
+(no republish). New sounds go in tools/sound-review.json as "ready" (the owner hears them on the
+Sound Board), not as cards. Before READY, re-read CLAUDE.md's "Effect quality rules" and check each
+clip against them at phone size. About six workers run at once; keep an even pace. Your Operator is
+session_012GmKRUMZLir2nb27Bo8Cu2. Card ids hh3-…. Aim for a first READY with the first shelf and its
+clips within about six hours.
+
 ## State
 
-WORKING: not started yet (October 3, 2026).
+WORKING: Open me shelf built and tested; clips rendering for Effect review page 2 (October 8, 2026).
+
+- Engine PR #430 (`claude/lane-hands-h3-engine`, merge first): a forgiving press (the L1 sweep's
+  center misses) and `reseat` on a break joint (a cork, a pen's cap clicks back on).
+- Open me (`claude/lane-hands-h3-open-me`): the storybook's cover, the alarm clock's hands, the gift
+  box's lid (and its star), the umbrella's runner (new, with its catch), the desk fan's tilt, the
+  desk lamp's three joints and its light, the telescope's two tubes, the potion bottle's cork and
+  the fountain pen's cap. The chest and the music box were engine B's demo toys; the laptop keeps
+  its own controls.
+- Not built: the water bottle's twist-and-pour and the soda can's shake-and-spray (both labs toys
+  waiting for the Fluids engine's pour; a pour by tipping needs that engine piece, so no private one
+  here).
+- Next: Holidays, then Medieval, Music, Pictures, the first photoreal toys (after agreeing with
+  Photoreal r3), and the Level 1 check of Studio and Lab.
+
+## Notes
+
+- A toy with `hands.joints` plays in pieces mode: its parts move, the toy itself stays put (it is no
+  longer tossed whole). This follows the chest and the music box. So "any pose" does not arise for
+  these toys: they never leave their pose.
+- Parts the hands move but that are not pieces (the book's pages, the umbrella's panels, the clock's
+  hour hand, the fan's swing, the lamp's glow and pool) are set from the joint's `also`, reading
+  module state that `drive()` keeps (the Open control, the fan's swing, the light).
+- The gift box's box, the potion's flask and the pen's body are pinned pieces with a tiny `pick`:
+  ground for the loose lid, cork or cap, never picked up.
+- The puff and the star spring run on the toy's clock in `drive()`; tests that read them step it.
+- `tools/hh3-clip.mjs` is `tools/phy-clip.mjs` at device scale 3 (the review's phone size).
+- Tests: `tests/hh3-engine.spec.mjs` (engine) and `tests/hh3-open-me.spec.mjs` (10 tests).
+
+## Known issues
+
+- The book's pages mid-turn look soft (gray, blurred words), as in its own tap animation.
+- The umbrella's ribs have no stretchers (the kit's 15-part limit: 8 panels, the runner, nothing
+  left for 8 stretchers); the runner's travel follows stretchers of a fixed length all the same.
+
+## For the Operator
+
+- Please merge engine PR #430 before the Open me PR; the Open me branch carries its commit.
+- The water bottle and the soda can (labs) wait for the Fluids engine's pour.
