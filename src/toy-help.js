@@ -2039,7 +2039,7 @@ export const TOY_HELP = {
   "jack-o-lantern": {
     howTo: "Tap to lift the lid; tap again to put it back.",
     about:
-      "A jack-o'-lantern is a pumpkin carved with a face and lit from inside by a candle, a symbol of Halloween. The custom comes from Ireland and Britain, where people once carved faces into turnips and potatoes; in North America, the big, soft pumpkin turned out to be much easier to carve.\n\nThis one glows through its carved eyes and grin. Tap to lift the lid off the top, and tap again to put it back. The name comes from an old Irish tale of a man called Stingy Jack, who wandered the night carrying a lantern.",
+      "A jack-o'-lantern is a pumpkin carved with a face and lit from inside by a candle, a symbol of Halloween. The custom comes from Ireland and Britain, where people once carved faces into turnips and potatoes; in North America, the big, soft pumpkin turned out to be much easier to carve.\n\nThis one glows through its carved eyes and grin. Tap to lift the lid off the top, and tap again to put it back. The name comes from an old Irish tale of a man called Stingy Jack, who wandered the night carrying a lantern. With ✋ Hands-on on, lift the lid off by its stem and set it down; bring it back over the hole and it drops into place.",
   },
   snowman: {
     howTo: "Tap to melt it and build it again. Try the Warmth slider in the Toy tab.",
@@ -2054,17 +2054,17 @@ export const TOY_HELP = {
   "decorated-tree": {
     howTo: "Tap to switch the lights on or off.",
     about:
-      "A decorated tree is an evergreen tree, such as a fir or a pine, brought indoors and hung with lights, ornaments and a star on top for the Christmas season. The custom began in Germany about 500 years ago and spread around the world. Evergreens stay green all winter, so they became a sign of life in the darkest time of the year.\n\nThe tree starts with its lights off. Tap to switch them on: they sweep up the tree, stay on and cycle through chasing, rippling and steady patterns, while the star glows. Tap again to switch them off. The first electric tree lights were made in 1882.",
+      "A decorated tree is an evergreen tree, such as a fir or a pine, brought indoors and hung with lights, ornaments and a star on top for the Christmas season. The custom began in Germany about 500 years ago and spread around the world. Evergreens stay green all winter, so they became a sign of life in the darkest time of the year.\n\nThe tree starts with its lights off. Tap to switch them on: they sweep up the tree, stay on and cycle through chasing, rippling and steady patterns, while the star glows. Tap again to switch them off. The first electric tree lights were made in 1882. With ✋ Hands-on on, pick the tree up and shake it: the baubles swing on their hooks, harder the harder you shake, then settle.",
   },
   "patterned-egg": {
     howTo: "Tap it to spin it. Pick a pattern and its colors in the Toy tab.",
     about:
-      "Decorating eggs with bright patterns is a spring tradition in many countries, especially at Easter. In Ukraine and nearby lands, painted eggs called pysanky are made by drawing lines in melted wax, dipping the egg in dye, and repeating with darker colors; the wax keeps each color where it was drawn.\n\nTap it to spin it. Pick a folk, striped, dotted, zigzag, flower or star pattern and its two colors in the Toy tab. Try spinning a real hard-boiled egg: it spins smoothly, while a raw one wobbles and stops, because the runny inside sloshes.",
+      "Decorating eggs with bright patterns is a spring tradition in many countries, especially at Easter. In Ukraine and nearby lands, painted eggs called pysanky are made by drawing lines in melted wax, dipping the egg in dye, and repeating with darker colors; the wax keeps each color where it was drawn.\n\nTap it to spin it. Pick a folk, striped, dotted, zigzag, flower or star pattern and its two colors in the Toy tab. Try spinning a real hard-boiled egg: it spins smoothly, while a raw one wobbles and stops, because the runny inside sloshes. With ✋ Hands-on on, flick it sideways: it spins on its end, slows, and wobbles as it slows until it stops.",
   },
   "paper-lantern": {
     howTo: "Tap it to set it swinging on its string; tap again for another push.",
     about:
-      "A paper lantern is a light made of thin paper stretched over a frame of ribs, glowing from a light inside. In China and many other places, red lanterns stand for luck and happiness, and thousands are hung up for the Lantern Festival, which ends the Lunar New Year celebrations on the first full moon of the year.\n\nTap it and it swings on its string like a pendulum, back and forth, slowing a little on each swing until it hangs still again. Tap while it swings to give it another push. Pick a red, gold, teal or purple lantern in the Toy tab.",
+      "A paper lantern is a light made of thin paper stretched over a frame of ribs, glowing from a light inside. In China and many other places, red lanterns stand for luck and happiness, and thousands are hung up for the Lantern Festival, which ends the Lunar New Year celebrations on the first full moon of the year.\n\nTap it and it swings on its string like a pendulum, back and forth, slowing a little on each swing until it hangs still again. Tap while it swings to give it another push. Pick a red, gold, teal or purple lantern in the Toy tab. With ✋ Hands-on on, push the lantern: it swings on its string like a pendulum and settles hanging straight.",
   },
   diya: {
     howTo: "Tap to light the ring of diyas; tap again to put them out.",

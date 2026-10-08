@@ -1714,7 +1714,8 @@
     "jack-o-lantern": {
       "v": "keep",
       "owner": "Basically perfect.",
-      "sound": "Spooky flicker whoosh."
+      "sound": "Spooky flicker whoosh.",
+      "improved": "Hands-on H3 (October 8, 2026; Hands-on): Lift the lid off by its stem; brought back, it drops into place."
     },
     "snowman": {
       "v": "keep",
@@ -1736,18 +1737,19 @@
       "owner": "Lights only show very briefly; make it more dramatic.",
       "effect": "Lights come on and chase in patterns and stay on; the star glows.",
       "sound": "Jingle Bells on a real glockenspiel with a shake of real sleigh bells, at the same tempo (Sound C, October 2, 2026).",
-      "improved": "C2: a tap switches the lights on in a sweep up the tree, and they stay on, cycling chase, ripple and steady patterns; the star gets a warm halo. A second tap turns them off."
+      "improved": "C2: a tap switches the lights on in a sweep up the tree, and they stay on, cycling chase, ripple and steady patterns; the star gets a warm halo. A second tap turns them off. Hands-on H3 (October 8, 2026; Hands-on): Shake it and the baubles swing on their hooks, then settle."
     },
     "patterned-egg": {
       "v": "keep",
       "owner": "Pretty cool; keep.",
-      "sound": "Painted-shell tap."
+      "sound": "Painted-shell tap.",
+      "improved": "Hands-on H3 (October 8, 2026; Hands-on): Flick it: it spins on its end and wobbles to a stop."
     },
     "paper-lantern": {
       "v": "keep",
       "owner": "Perfect; the physics are really good.",
       "sound": "Paper rustle.",
-      "improved": "Fix7: a tap never pauses it; a tap mid-swing gives it another push, and the swing grows smoothly (no jump)."
+      "improved": "Fix7: a tap never pauses it; a tap mid-swing gives it another push, and the swing grows smoothly (no jump). Hands-on H3 (October 8, 2026; Hands-on): Push it: it swings on its string and settles."
     },
     "diya": {
       "v": "keep",
