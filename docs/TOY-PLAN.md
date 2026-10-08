@@ -10,8 +10,8 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 440 toys. 411 have a tap action today; the other 29 only hop.
-- **keep** (the effect is right: the owner liked it, or C2 finished it): 420.
+- 447 toys. 418 have a tap action today; the other 29 only hop.
+- **keep** (the effect is right: the owner liked it, or C2 finished it): 427.
 - **more** (has an effect; make it clearer or more dramatic): 0.
 - **new** (needs its own effect): 20.
 - Visual fixes: 0 open, 31 done. Touch or drag interaction asked for: 4.
@@ -50,27 +50,28 @@ Proposals below are suggestions; the owner may change them.
   Kiwi, Pineapple, Cherries, Grapes, Avocado, Building bricks, Rubber duck, Newton's cradle, Yo-yo,
   Puzzle cube, Spring toy, Kite, Chess set, Lorenz attractor, Möbius strip, Klein bottle, Menger
   sponge, Hypercube, Torus knot, Gyroid, Mandelbulb, Seashell spiral, Graph plotter, Surface
-  plotter, Circle and waves, Fourier circles, Pythagoras proof, Splat equation, Storybook, Music
-  box, Fountain pen, Water bottle, Soda can, Running shoe, Hoodie, Sunglasses, Baseball cap, Sword
-  in the stone, Heraldic shield, Bow and target, Crown, Wizard's orb, Crystal ball, Jellyfish,
-  School of fish, Pufferfish, Nautilus, Snail, Octopus, Sea urchin, Frog, Snowman, Fireworks,
-  Decorated tree, Paper lantern, Diya, Acoustic guitar, Snare drum, Xylophone, Toy piano, Grand
-  piano, Upright piano, Harpsichord, Electronic keyboard, Hot-air balloon, Sports car, Bus, Jet
-  airliner, Sailboat, Submarine, Bicycle, Eiffel Tower, Washington Monument, Pyramids of Giza,
-  Twisting supertall, Statue of Liberty, White House, Leaning Tower of Pisa, Colosseum, Parthenon,
-  Stonehenge, Big Ben, Taj Mahal, Castle, Pagoda, Windmill, Perceptron, Multilayer perceptron,
-  Neural network, Convolutional network, Recurrent network, Transformer, Looped transformer,
-  Diffusion model, Gradient descent, Gaussian splatting, Word vectors, Sorting machine, Half adder,
-  Turing machine, Difference engine, Enigma machine, Bombe, Picture lab, Your book, Photo album,
-  Picture frame, Song landscape, Chladni plate, Room echo meter, Splat mirror, Model to splats, QR
-  code, Photo to 3D, Moving photo to 3D, Video to 3D, Sound lab, Sound recorder, Splat toolkit,
-  Point clouds, Splat field, Light lab, Thermal ellipsoids, Super-resolution microscope, Galaxy in a
-  box, Cryo-EM map, Contour lab, Terrain in a box, Ripple tank, Light bench, Fluid lab, Grand
-  Canyon, Mount St. Helens, The sea floor, Tides at Bar Harbor, Hurricane, Relief map, Living city,
-  Stork migration, Earthquakes, Airport X-ray scanner, How CT works, Walnut CT scan, MRI of a fruit,
-  Electron microscope, Thermal camera, Screen, Shardball, Longtail, Grain Garden, Page Breaker,
-  Strata, Volley Table, Stone Belt, Soft Landing, Night Owl Pinball, Cast a Shadow, Photo Dash, Note
-  Rider, Data in 3D.
+  plotter, Circle and waves, Fourier circles, Pythagoras proof, Rössler attractor, Thomas attractor,
+  Aizawa attractor, 5-cell, 16-cell, 24-cell, Duoprism, Splat equation, Storybook, Music box,
+  Fountain pen, Water bottle, Soda can, Running shoe, Hoodie, Sunglasses, Baseball cap, Sword in the
+  stone, Heraldic shield, Bow and target, Crown, Wizard's orb, Crystal ball, Jellyfish, School of
+  fish, Pufferfish, Nautilus, Snail, Octopus, Sea urchin, Frog, Snowman, Fireworks, Decorated tree,
+  Paper lantern, Diya, Acoustic guitar, Snare drum, Xylophone, Toy piano, Grand piano, Upright
+  piano, Harpsichord, Electronic keyboard, Hot-air balloon, Sports car, Bus, Jet airliner, Sailboat,
+  Submarine, Bicycle, Eiffel Tower, Washington Monument, Pyramids of Giza, Twisting supertall,
+  Statue of Liberty, White House, Leaning Tower of Pisa, Colosseum, Parthenon, Stonehenge, Big Ben,
+  Taj Mahal, Castle, Pagoda, Windmill, Perceptron, Multilayer perceptron, Neural network,
+  Convolutional network, Recurrent network, Transformer, Looped transformer, Diffusion model,
+  Gradient descent, Gaussian splatting, Word vectors, Sorting machine, Half adder, Turing machine,
+  Difference engine, Enigma machine, Bombe, Picture lab, Your book, Photo album, Picture frame, Song
+  landscape, Chladni plate, Room echo meter, Splat mirror, Model to splats, QR code, Photo to 3D,
+  Moving photo to 3D, Video to 3D, Sound lab, Sound recorder, Splat toolkit, Point clouds, Splat
+  field, Light lab, Thermal ellipsoids, Super-resolution microscope, Galaxy in a box, Cryo-EM map,
+  Contour lab, Terrain in a box, Ripple tank, Light bench, Fluid lab, Grand Canyon, Mount St.
+  Helens, The sea floor, Tides at Bar Harbor, Hurricane, Relief map, Living city, Stork migration,
+  Earthquakes, Airport X-ray scanner, How CT works, Walnut CT scan, MRI of a fruit, Electron
+  microscope, Thermal camera, Screen, Shardball, Longtail, Grain Garden, Page Breaker, Strata,
+  Volley Table, Stone Belt, Soft Landing, Night Owl Pinball, Cast a Shadow, Photo Dash, Note Rider,
+  Data in 3D.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
@@ -2133,7 +2134,7 @@ Proposals below are suggestions; the owner may change them.
     like a good online-chess theme; real CC0 recordings now (chess-set-move.mp3), with the
     synthesized sound as a fallback.
 
-## Maths (17)
+## Maths (24)
 
 - **Lorenz attractor** (`lorenz`). Now: tap: Race along the path. Plan: keep.
   - Owner: Spin a little more or be more dynamic; looks good when still.
@@ -2148,7 +2149,11 @@ Proposals below are suggestions; the owner may change them.
     underneath (the band has one side), after two it is back on top where it started, while the band
     twists a little and untwists (about 5 s). After the owner's review the rider is a choice (the
     Rider option): a blue race car (the default) with spinning wheels, a rolling beach ball, a duck
-    riding a bicycle (wheels and pedals turning) or the ant.
+    riding a bicycle (wheels and pedals turning) or the ant. Math r2 (labs work on the public toy,
+    waiting for the owner's marks): three more riders, a toy train (chuffing steam, spoked wheels
+    turning), a ladybug (light feet and a flutter of wings, her six legs walking) and a skateboard
+    (wheels rolling, a clack on and off), and a Rider color choice for every rider (Its own keeps
+    each rider's colors).
   - Sound: No step tune; each rider has its own sound on the ride: a race car's engine, a rolling
     beach ball, a bicycle with one soft quack, the ant's tiny feet.
 - **Klein bottle** (`klein-bottle`). Now: tap: Send water through. Plan: keep.
@@ -2173,7 +2178,8 @@ Proposals below are suggestions; the owner may change them.
   - Effect: Rotates through the fourth dimension, turning inside out.
   - Improved: E3: a tap turns the tesseract once round through the fourth dimension: the pink inner
     cube swells out to become the outer one while the blue one folds inside, holds a moment, then
-    turns on back to where it started (about 5 s); at rest it rocks gently in 4D.
+    turns on back to where it started (about 5 s); at rest it rocks gently in 4D. Math r2: seven
+    color themes (Colors; Blue and pink is the default and unchanged).
   - Sound: No "vroom"; a great slow rush as it turns inside out and again as it turns home, over a
     low chord.
 - **Torus knot** (`torus-knot`). Now: tap: Pull and let go. Plan: keep.
@@ -2197,7 +2203,10 @@ Proposals below are suggestions; the owner may change them.
   - Improved: E3: a tap turns the bulb's seven horizontal discs like the dials of a combination
     lock: neighbours click round in opposite directions, top to bottom, then back the other way,
     bottom to top; each turns a seventh of a turn (the bulb's own symmetry), so it lands on the same
-    picture (about 4 s). This replaced a twist after the owner's review.
+    picture (about 4 s). This replaced a twist after the owner's review. Math r2: a Power option (5
+    to 12; power n has n − 1-fold symmetry, so the slices turn 1/(n − 1) of a turn) and a Julia bulb
+    (four fixed points c off the axis; with no turning symmetry the whole bulb turns a quarter turn
+    and back).
   - Sound: Deep morphing tone.
 - **Sierpinski tetrahedron** (`sierpinski`). Now: tap: Explode. Plan: keep.
   - Owner: Perfect as is.
@@ -2255,7 +2264,9 @@ Proposals below are suggestions; the owner may change them.
     parameters, and spelling a name): a View option stacks the circles in depth (3D); Your words
     gives each letter or digit its own chain of circles (up to six, on one or two lines; ♥ and ★,
     and heart and star emoji, draw a heart and a star); and your own closed curve (x = …, y = … or r
-    = …) can be typed too.
+    = …) can be typed too. Math r2: longer text, up to 40 letters on up to four lines, drawn five
+    letters at a time (2.6 s for each group of five; the circles of the group drawing show, the
+    writing stays), and lighter, thinner circles behind words in 2D so the writing reads.
   - Sound: Each circle hums its own frequency, building into a chord.
 - **Pythagoras proof** (`pythagoras-proof`). Now: tap: Rearrange. Plan: keep.
   - Owner: Toy Ideas page (approved, 2026-09-27).
@@ -2266,6 +2277,76 @@ Proposals below are suggestions; the owner may change them.
     a² + b² = c² below; then they slide back (4.5 s). In this classic arrangement the pieces slide
     without turning, and one stays put.
   - Sound: Wooden slides, and a click as each piece lands.
+- **Rössler attractor** (`rossler-attractor`). Now: tap: Drop a tracer. Plan: keep.
+  - Owner: The owner's Math notes (BACKLOG.md, Math r2): more dynamical systems beside the Lorenz
+    attractor.
+  - Effect: A tap drops a new tracer that follows the flow live.
+  - Improved: Math r2: new toy (labs), the Rössler attractor. The glowing path is one long solution
+    of the equations (RK4). A tap drops a bright tracer where you tap (Play: on the path),
+    integrated live with fixed RK4 steps so it moves the same at any frame rate, with a short trail;
+    off the attractor it is pulled onto it. Up to four tracers, each its own color; a fifth replaces
+    the oldest.
+  - Sound: A soft drip as the tracer drops, over a low, wide chord in the toy's own key.
+- **Thomas attractor** (`thomas-attractor`). Now: tap: Drop a tracer. Plan: keep.
+  - Owner: The owner's Math notes (BACKLOG.md, Math r2): more dynamical systems beside the Lorenz
+    attractor.
+  - Effect: A tap drops a new tracer that follows the flow live.
+  - Improved: Math r2: new toy (labs), the Thomas attractor. The glowing path is one long solution
+    of the equations (RK4). A tap drops a bright tracer where you tap (Play: on the path),
+    integrated live with fixed RK4 steps so it moves the same at any frame rate, with a short trail;
+    off the attractor it is pulled onto it. Up to four tracers, each its own color; a fifth replaces
+    the oldest.
+  - Sound: A soft drip as the tracer drops, over a low, wide chord in the toy's own key.
+- **Aizawa attractor** (`aizawa-attractor`). Now: tap: Drop a tracer. Plan: keep.
+  - Owner: The owner's Math notes (BACKLOG.md, Math r2): more dynamical systems beside the Lorenz
+    attractor.
+  - Effect: A tap drops a new tracer that follows the flow live.
+  - Improved: Math r2: new toy (labs), the Aizawa attractor. The glowing path is one long solution
+    of the equations (RK4). A tap drops a bright tracer where you tap (Play: on the path),
+    integrated live with fixed RK4 steps so it moves the same at any frame rate, with a short trail;
+    off the attractor it is pulled onto it. Up to four tracers, each its own color; a fifth replaces
+    the oldest.
+  - Sound: A soft drip as the tracer drops, over a low, wide chord in the toy's own key.
+- **5-cell** (`five-cell`). Now: tap: Roll through 4D. Plan: keep.
+  - Owner: The owner's Math notes (BACKLOG.md, Math r2): other 4D shapes beside the hypercube, and
+    color themes.
+  - Effect: Rolls one whole turn through the fourth dimension and comes home.
+  - Improved: Math r2: new toy (labs), the 5-cell. The corners are true 4D points turned in the
+    planes of x and w and of y and w and seen in perspective from 4D; the edges stay straight
+    between them. A tap rolls the shape one whole turn through the fourth dimension (about 5 s) and
+    home. Seven color themes.
+  - Sound: Like the hypercube: a slow rush as it rolls out and again as it rolls home, over a low
+    chord in its own key.
+- **16-cell** (`sixteen-cell`). Now: tap: Roll through 4D. Plan: keep.
+  - Owner: The owner's Math notes (BACKLOG.md, Math r2): other 4D shapes beside the hypercube, and
+    color themes.
+  - Effect: Rolls one whole turn through the fourth dimension and comes home.
+  - Improved: Math r2: new toy (labs), the 16-cell. The corners are true 4D points turned in the
+    planes of x and w and of y and w and seen in perspective from 4D; the edges stay straight
+    between them. A tap rolls the shape one whole turn through the fourth dimension (about 5 s) and
+    home. Seven color themes.
+  - Sound: Like the hypercube: a slow rush as it rolls out and again as it rolls home, over a low
+    chord in its own key.
+- **24-cell** (`twenty-four-cell`). Now: tap: Roll through 4D. Plan: keep.
+  - Owner: The owner's Math notes (BACKLOG.md, Math r2): other 4D shapes beside the hypercube, and
+    color themes.
+  - Effect: Rolls one whole turn through the fourth dimension and comes home.
+  - Improved: Math r2: new toy (labs), the 24-cell. The corners are true 4D points turned in the
+    planes of x and w and of y and w and seen in perspective from 4D; the edges stay straight
+    between them. A tap rolls the shape one whole turn through the fourth dimension (about 5 s) and
+    home. Seven color themes.
+  - Sound: Like the hypercube: a slow rush as it rolls out and again as it rolls home, over a low
+    chord in its own key.
+- **Duoprism** (`duoprism`). Now: tap: Roll through 4D. Plan: keep.
+  - Owner: The owner's Math notes (BACKLOG.md, Math r2): other 4D shapes beside the hypercube, and
+    color themes.
+  - Effect: Rolls one whole turn through the fourth dimension and comes home.
+  - Improved: Math r2: new toy (labs), the duoprism (3,4 by default; each polygon 3 to 6 sides). The
+    corners are true 4D points turned in the planes of x and w and of y and w and seen in
+    perspective from 4D; the edges stay straight between them. A tap rolls the shape one whole turn
+    through the fourth dimension (about 5 s) and home. Seven color themes.
+  - Sound: Like the hypercube: a slow rush as it rolls out and again as it rolls home, over a low
+    chord in its own key.
 - **Splat equation** (`splat-equation`). Now: tap: Play t. Plan: keep.
   - Owner: The owner's notes and the Pages into Splats plan (accepted September 28, 2026): people
     type their own Gaussian splat equations and play with them, with a Tinkerer's Manual that

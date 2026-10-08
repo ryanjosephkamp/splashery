@@ -1,0 +1,44 @@
+{
+  "toy": "duoprism",
+  "checked": "2026-10-07",
+  "summary": "The p,q-duoprism, the product of a p-gon and a q-gon in 4D, with p and q from 3 to 6; all edges one length.",
+  "claims": [
+    {
+      "claim": "A p,q-duoprism has pq corners and 2pq edges; with p = q = 4 it is the tesseract (32 edges).",
+      "how": "polytope() builds the corners from their coordinates and joins every pair at the shortest distance; a test checks the counts, the degrees and that every edge has the same length.",
+      "where": "src/packs/maths.js (polytope)",
+      "sources": [
+        {
+          "title": "Duoprism",
+          "publisher": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Duoprism",
+          "says": "A p,q-duoprism has pq vertices and 2pq edges; it is the set P₁ × P₂ of points (x, y, z, w) with (x, y) in one polygon and (z, w) in the other; the 4,4-duoprism is the tesseract."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/mt2.spec.mjs: the 4D shapes have the right corners, edges and degrees, all edges equal",
+      "note": ""
+    },
+    {
+      "claim": "It turns in four dimensions and is shown in perspective from a point out along the fourth axis.",
+      "how": "Each frame the corners are turned in the planes of x and w and of y and w, then projected by xyz × 2.4 / (2.4 − w); the edges are straight lines between the projected corners.",
+      "where": "src/packs/maths.js (turn4, show4)",
+      "sources": [
+        {
+          "title": "Tesseract (projections)",
+          "publisher": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Tesseract",
+          "says": "A 4D shape can be shown in 3D by perspective projection from a point outside it in the fourth dimension."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/mt2.spec.mjs: the 4D shapes roll a whole turn and end where they rest",
+      "note": ""
+    }
+  ],
+  "simplified": [
+    "Only the corners and edges are drawn; the faces and cells are left out so the inside can be seen.",
+    "The view is a 3D shadow of the 4D shape, so edges can look different lengths and can cross."
+  ],
+  "fixes": []
+}
