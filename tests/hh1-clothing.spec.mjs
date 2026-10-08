@@ -92,6 +92,27 @@ test("baseball cap: lifted off its stand and thrown, it flies on the cap's own m
   expect(s.away).toBeGreaterThan(0.5); // off its stand
 });
 
+test("baseball cap: dropped back over its stand, it lands on the stand, not through it", async ({
+  page,
+}) => {
+  await open(page, "baseball-cap");
+  const s = await page.evaluate(() => {
+    const { player } = window.__splashery;
+    const h = player.handsOn;
+    h.ensure();
+    const b = h.pieces[0].body;
+    const home = b.home.pos.slice();
+    h.free(b);
+    b.pos = [home[0], home[1] + 1.5, home[2]];
+    h.moved = true;
+    h.world.wake();
+    for (let t = 0; t < 3; t += 1 / 60) player.update(1 / 60);
+    return { dy: b.pos[1] - home[1], stand: h.pieces.slice(1).every((pc) => pc.body.pinned) };
+  });
+  expect(s.stand).toBe(true); // the stand stays put
+  expect(s.dy).toBeGreaterThan(-0.1); // resting on the dome, about where it sat
+});
+
 test("running shoe: a lace end pulled out undoes the bow; ↺ ties it again", async ({ page }) => {
   await open(page, "running-shoe");
   const s = await page.evaluate(() => {

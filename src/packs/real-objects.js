@@ -9,6 +9,7 @@
 // tools/models.json.
 
 import { clamp, smoothstep, mix, quatAxisAngle, quatFromTo, quatMul, quatRotate } from "../kit.js";
+import { surfacePoints } from "../physics/world.js"; // lane Hands-on H1
 
 // ---- The baked models ------------------------------------------------------------------------
 
@@ -670,6 +671,11 @@ const hexRgb = (h) => [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16) / 255
 // rim at y -0.37 and its button at y 0.377. It sits on a kit-built wooden stand.
 
 const BC = { T: 3, pivot: [0, -0.05, -0.2], rim: -0.37, base: -1.3 };
+// Hands-on: the walnut stand's dome (filling the crown) and post, fixed (lane Hands-on H1).
+const CAP_STAND = [
+  { type: "ellipsoid", r: [0.44, 0.58, 0.44], at: [0, BC.rim, -0.2] },
+  { type: "cylinder", r: 0.06, h: (BC.rim - BC.base) / 2, at: [0, (BC.rim + BC.base) / 2, -0.2] },
+];
 // Hands-on: the cap's outside, about its pivot (lane Hands-on H1): its rim's
 // ring, the brim reaching forward and the crown's top.
 const CAP_POINTS = [
@@ -696,7 +702,11 @@ const BASEBALL_CAP = {
     area: 2.2,
     place: false,
     material: "baseball-cap", // (turns on the materials; the piece's own is what flies)
-    pieces: () => [{ part: "cap", pos: BC.pivot, pivot: BC.pivot, points: CAP_POINTS, radius: 0.03, pick: [0.5, 0.42, 0.6], mass: 1, friction: 0.8, restitution: 0.15, damping: 0.05, angDamping: 0.5, material: "baseball-cap" }], // prettier-ignore
+    pieces: () => [
+      { part: "cap", pos: BC.pivot, pivot: BC.pivot, points: CAP_POINTS, radius: 0.03, pick: [0.5, 0.42, 0.6], mass: 1, friction: 0.8, restitution: 0.15, damping: 0.05, angDamping: 0.5, material: "baseball-cap" }, // prettier-ignore
+      // The stand stays, for the cap to land on: its dome and its post.
+      ...CAP_STAND.map((solid) => ({ pos: solid.at, solid, points: surfacePoints(solid, 3), fixed: true, friction: 0.8, restitution: 0.15 })), // prettier-ignore
+    ],
     sound: (hit, vol) => ({ voice: "thud", f: 220, bright: 0.1, decay: 0.4, vol: vol * 0.5 }),
   },
   credits: [
