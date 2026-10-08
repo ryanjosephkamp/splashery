@@ -197,6 +197,15 @@ can carry a web address instead, so a link or an embed opens the picture from yo
 (docs/SCENE-SCHEMA.md). For now the toys are behind a labs switch: open the site with `?labs=1` to
 see the **Picture lab** on the "Pictures and pages" shelf (`?labs=0` hides it again).
 
+## Photos and videos in 3D (labs)
+
+**Photo to 3D** and **Moving photo to 3D** turn a photo, a GIF or a video into a 3D relief, with
+depth worked out on your device. Each shows the picture two ways: **Sharp picture** (the default),
+the picture itself at full size on the relief, so small text stays readable, and **Splats**, the
+picture rebuilt from Gaussian splats, which the splat tools and effects work on. A saved scene or
+link remembers the choice. How the two differ, what each costs and how they are built:
+[docs/PHOTO-VIEWS.md](docs/PHOTO-VIEWS.md).
+
 ## The Tinkerer's Manual
 
 [The Tinkerer's Manual](https://ryanjosephkamp.github.io/splashery/manual/) (`manual/`, linked from
