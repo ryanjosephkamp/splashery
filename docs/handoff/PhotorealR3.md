@@ -199,11 +199,11 @@ new-toy cards. Every clip was watched at phone size against CLAUDE.md's effect q
   neck are not closed (see "Known issues"); the other five were fine. The "Photoreal r2 toys"
   section of docs/audits/bases-2026-10.md has every verdict.
 - Item 2, effects: every r2 toy but the dog plush (its hop is Fix9's, approved) has a new effect
-  (table in "Notes"; cards `pr3-fx-…`). Watching the first clips led to these fixes: the BMX leans on its kickstand
-  instead of rolling (wheels cut by color left faint ghosts), the heart donut twirls instead of
-  flipping (its underside was never captured), the orange rolls less far, the physalis sways as one
-  plant (its lanterns would not cut cleanly), the alum crystal's cut sits higher, and the sunflower
-  nod and turtle crawl are clearer.
+  (table in "Notes"; cards `pr3-fx-…`). Watching the first clips led to these fixes: the BMX leans
+  on its kickstand instead of rolling (wheels cut by color left faint ghosts), the heart donut
+  twirls instead of flipping (its underside was never captured), the orange rolls less far, the
+  physalis sways as one plant (its lanterns would not cut cleanly), the alum crystal's cut sits
+  higher, and the sunflower nod and turtle crawl are clearer.
 - Item 3, sounds: the 14 the owner's table names that Sound D had not done are changed, checked with
   `node tools/sound-check.mjs`, and marked "ready" in tools/sound-review.json.
 - Item 4, framing: home views for the sushi boat, cherry blossom and murex shell (closer), the
