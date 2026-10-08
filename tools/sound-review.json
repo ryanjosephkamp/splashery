@@ -1394,18 +1394,50 @@
       "round": "2026-10-02"
     },
     "sunglasses": {
-      "status": "site",
-      "said": "(September 30, 2026, on the Sound Board) Sounds too robotic and tacky.",
+      "status": "ready",
+      "said": "(September 30, 2026, on the Sound Board) Sounds too robotic and tacky. (Hands-on H1, October 8, 2026) New: its Hands-on sound, to hear on the Sound Board. Its tap sound is unchanged.",
       "note": "Sounds too robotic and tacky.",
-      "plan": "Now: each fold is a plastic hinge sliding shut and seating; the lenses darken silently (no electronic clicks or shimmer).",
-      "candidates": []
+      "plan": "Now: in Hands-on, a small hinge click at each stop.",
+      "candidates": [
+        {
+          "id": "hh1",
+          "label": "Hands-on (new)",
+          "sound": [
+            {
+              "voice": "click",
+              "f": 2600,
+              "vol": 0.5
+            },
+            {
+              "voice": "click",
+              "f": 2400,
+              "vol": 0.5,
+              "at": 0.5
+            }
+          ]
+        }
+      ]
     },
     "baseball-cap": {
-      "status": "site",
-      "said": "(September 30, 2026, on the Sound Board) A bit too windy.",
+      "status": "ready",
+      "said": "(September 30, 2026, on the Sound Board) A bit too windy. (Hands-on H1, October 8, 2026) New: its Hands-on sound, to hear on the Sound Board. Its tap sound is unchanged.",
       "note": "A bit too windy.",
-      "plan": "Now: fabric rustles instead of whooshes as it flips; the flick and the soft landings are unchanged.",
-      "candidates": []
+      "plan": "Now: in Hands-on, a soft cloth thud as it lands.",
+      "candidates": [
+        {
+          "id": "hh1",
+          "label": "Hands-on (new)",
+          "sound": [
+            {
+              "voice": "thud",
+              "f": 220,
+              "bright": 0.1,
+              "decay": 0.4,
+              "vol": 0.4
+            }
+          ]
+        }
+      ]
     },
     "splat-equation": {
       "status": "site",
