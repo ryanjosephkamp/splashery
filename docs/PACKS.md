@@ -727,6 +727,24 @@ spins it on the fingertip; the basketball) and `warm: [first, top]` (a squash ba
 throw). Lift and the curve are set to show at Hands-on's slow throws, in the real direction and
 order. Pieces take a material too: `material` in a piece's def.
 
+**Room to roll** (`hands.area`, a whole toy with a material; lane Hands-on H1, October 8, 2026): the
+walls of the play area move out to `area` toy radii from home, as for wheels, so a ball rolls, a
+puck slides and a marble runs on (the view drifts after it). Without it the walls stay where Level 1
+puts them, just past the toy. `hands.view` (0 to 1, 0.8 by default) is how far the view drifts after
+a tossed whole toy: less (a ball's 0.4) lets a roll read as a roll. `hands.friction` sets the
+floor's friction under a whole toy with a material (a hockey puck's ice: 0.04). `hands.soft` (0
+to 1) sets how much a whole toy squishes when it lands, over the list in `hands-on.js` (a
+superball's firm 0.15). A shelf shape (a procedural toy in `src/toys.js`) may take the gummy bear's
+stretch from its shelf entry: `grab: { radius, max }` (the jelly blob). In pieces mode `hands.floor`
+may be a function `(data, info) => height`, for a floor that depends on the build (a d20 sits lower
+than two d6s). `hands.press: { amount, after }` (a whole toy): a press held still for `after`
+seconds (0.15) squeezes it down by `amount` (0.25) and sends `hands.sound` a hit with `press: true`;
+let go, it springs back with a wobble (the rubber duck). A drag still picks it up. A piece with
+`fixed: true` (no part of its own) never moves, is never picked up and is never knocked loose: a
+stand or a wall for the others to land on (the baseball cap's walnut stand). A material's `nose`
+turns it only while it flies, near critically damped, so a shuttlecock flips cork first once and
+lies still where it lands.
+
 **A water line** (`hands.water`): the toy floats on a round pool, bobs and settles; a boat (any
 non-round toy) rocks and rights itself, since each point under water lifts where it is. By default
 the line sits where the toy, at home, floats as it stands (from its density), so nothing moves until
@@ -891,8 +909,10 @@ beats its weight; `spring`, `rest`, `damping`, `bounce` and `gravity` as for a h
 finger turns it as it goes round the axis, and a flick sets it coasting, slowed by `drag` (per
 second, 0.8). `detents` (clicks per turn) click as it passes each one and settle it on one. A dial
 has no weight unless `gravity` is set. `turn(angle, delta, info)` is called on every move and may
-return cues (a music box's notes); `also(angle, parts, info)` adds entries to the parts Hands-on
-sends (a dancer that the crank turns; it works for every joint type, with its value).
+return cues (a music box's notes); `also(angle, parts, info, joint)` adds entries to the parts
+Hands-on sends (a dancer that the crank turns; it works for every joint type, with its value;
+`joint.w` is its speed and `joint.held` whether the finger has it, so a spinning top tilts as it
+slows).
 
 ```js
 { type: "dial", part: "crank", pivot: [0.58, 0.25, 0], axis: [1, 0, 0], detents: 12,
