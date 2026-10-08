@@ -166,6 +166,7 @@ export class Joints {
       j.v = j.homeV;
       j.w = 0;
       j.stuck = !!j.d.stick && Math.abs(j.v) < 1e-6;
+      j.latched = this.atLatch(j); // (lane Hands-on H3)
       this.pose(j);
     }
   }
@@ -485,6 +486,43 @@ export class Joints {
     this.world.wake();
   }
 
+  // ---- Latches and triggers (lane Hands-on H3) ----
+
+  // Whether a joint with `latch` ("max", "min" or a value) sits on it.
+  atLatch(j) {
+    const L = this.latchAt(j);
+    return L !== null && Math.abs(j.v - L) < 1e-3;
+  }
+
+  // Its latch's value, or null.
+  latchAt(j) {
+    const L = j.d.latch;
+    return L === undefined ? null : L === "max" ? j.max : L === "min" ? j.min : L;
+  }
+
+  // A tap on the toy: each latched joint with a `trigger` lets go (a
+  // crossbow's string snaps forward). True when one did.
+  trigger() {
+    let any = false;
+    for (const j of this.list) {
+      if (!j.latched || !j.d.trigger) continue;
+      j.latched = false;
+      j.awake = true;
+      // Off its latch, so it doesn't catch again at once.
+      const away = this.latchAt(j) <= j.min ? 1 : -1;
+      j.v += away * 1e-2;
+      j.w = away * 1;
+      j.moving = true;
+      this.cue(j, "free", 1);
+      any = true;
+    }
+    if (any) {
+      this.hands.moved = true;
+      this.world.wake();
+    }
+    return any;
+  }
+
   // ---- Seats (lane Hands-on H3) ----
 
   // A break with `reseat` (true, or { snap, seats: [{ pos, quat }] }): its
@@ -632,6 +670,14 @@ export class Joints {
     const d = j.d;
     const v0 = j.v;
     const R = this.hands.R();
+    // Caught on its latch (a crossbow's string in its nut): held fast, the
+    // finger can't move it; only its trigger frees it (lane Hands-on H3).
+    if (j.latched) {
+      j.w = 0;
+      j.moving = false;
+      if (this.moves(j.parent)) this.pose(j);
+      return false;
+    }
     if (j.held) {
       let target = j.target ?? j.v;
       if (j.stuck) {
@@ -712,6 +758,18 @@ export class Joints {
       if (speed > 0.5 * R) this.cue(j, "stop", speed / R);
       j.w = j.held ? 0 : -j.w * (d.bounce ?? 0.2);
       if (Math.abs(j.w) * this.reach(j) < 0.3 * R) j.w = 0;
+    }
+    // It catches on its latch as it gets there or passes it (lane Hands-on H3).
+    const L = this.latchAt(j);
+    if (L !== null && (this.atLatch(j) || (v0 - L) * (j.v - L) < 0)) {
+      j.v = L;
+      j.latched = true;
+      j.w = 0;
+      this.cue(j, "latch", 1);
+      this.pose(j);
+      for (const c of j.children) if (this.posed(c)) this.pose(c);
+      j.moving = false;
+      return false;
     }
     // Clicks as it passes each detent.
     if (d.detents) {
@@ -853,6 +911,7 @@ export class Joints {
         j.wig = 0;
         j.moving = false;
         j.stuck = !!j.d.stick && Math.abs(j.v) < 1e-6;
+        j.latched = this.atLatch(j); // (lane Hands-on H3)
         j.awake = false;
         j.homeFrom = undefined;
         j.homeE = undefined;
@@ -1002,6 +1061,7 @@ const DEFAULT_SOUND = {
   snap: (vol) => ({ voice: "crack", vol: Math.max(0.4, vol) }),
   socket: () => ({ voice: "click", vol: 0.5 }),
   free: () => ({ voice: "scrape", vol: 0.4 }),
+  latch: () => ({ voice: "click", vol: 0.5 }), // (lane Hands-on H3)
 };
 
 function depth(j) {
