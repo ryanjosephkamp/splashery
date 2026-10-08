@@ -16,12 +16,13 @@
 // - shake: { key, gap } | true
 // - flee: { radius, push, back, max } | true; follow: true
 // - pieces' own `material`, `projectile: { nose, vane, fr }` and `target`
+// - force: (body, h, ctx) => {} each substep, and watch: true (lane Hands-on H4)
 //
 // src/physics/hands-on.js calls an Extras (made by extrasFor) at a few
 // points: attach, the world built, a press, a move, a let-go, each frame
 // and each hit; the world calls its force once per substep (World.force).
 // What a recipe's drive() reads comes as info.hands (src/motion.js):
-// { on, shake, finger, point, rolled, flee(key, pos) }.
+// { on, shake, finger, point, rolled, flee(key, pos), piece(key) }.
 
 import { quat, v3, surfacePoints } from "./world.js";
 import { materialFor, applyMaterial, airForce, rollForce, throwSpin, driftForce } from "./materials.js"; // prettier-ignore
@@ -328,7 +329,7 @@ export class FleeField {
 
 // ---- The glue to Hands-on -------------------------------------------------
 
-const KEYS = ["material", "water", "air", "well", "wheels", "shake", "flee", "follow"];
+const KEYS = ["material", "water", "air", "well", "wheels", "shake", "flee", "follow", "force", "watch"]; // prettier-ignore
 
 // An Extras for a toy whose hands block asks for any of these pieces (or
 // whose pieces are projectiles, targets or have materials); null else.
@@ -373,6 +374,13 @@ export class Extras {
         if (!self.flee) return { offset: [0, 0, 0], vel: [0, 0, 0] };
         const it = self.flee.get(key, pos);
         return { offset: it.d, vel: it.v };
+      },
+      // Lane Hands-on H4: where a piece is (by its part name or token), in
+      // the recipe's units: { pos, quat (its turn from home), home, off
+      // (picked up or knocked loose), held }; null before the world is built
+      // or for a piece it doesn't have.
+      piece(key) {
+        return self.pieceState(key);
       },
     };
   }
@@ -468,6 +476,7 @@ export class Extras {
       this.air ||
       this.well ||
       this.wheels ||
+      hands.force ||
       ho.pieces.some((p) => p.body.projectile)
     )
       // prettier-ignore
@@ -502,7 +511,30 @@ export class Extras {
       if (this.air) airBuoyancy(b, this.air, h);
       if (this.well) wellForce(b, this.well, h);
       if (this.wheels) wheelForce(b, this.wheels, G, h, touching);
+      // Lane Hands-on H4: the recipe's own push (a flying saucer's beam).
+      if (this.hands.force) this.hands.force(b, h, this.forceCtx(b, G, R));
     }
+  }
+
+  // What a recipe's `hands.force(body, h, ctx)` gets with each body: the
+  // piece it is (its def, part and token; null for a whole toy), the toy's
+  // eased controls, the build's data, gravity and a toy radius, and whether
+  // the body touched anything in the last step.
+  forceCtx(b, G, R) {
+    const ho = this.ho;
+    const w = ho.world;
+    const pc = ho.mode === "pieces" ? ho.pieces.find((p) => p.body === b) || null : null;
+    return { piece: pc, c: this.player.motion?.state || {}, data: this.player.proc?.ctx?.kit?.data, G, R, touching: !!w && b.touchTick >= w.tick - 1 }; // prettier-ignore
+  }
+
+  pieceState(key) {
+    const ho = this.ho;
+    if (!ho.world || ho.mode !== "pieces") return null;
+    const pc = ho.pieces.find((p) => p.part === key || (p.token !== undefined && p.token === key)); // prettier-ignore
+    if (!pc) return null;
+    const b = pc.body;
+    const dq = quat.mul(b.q, quat.conj(pc.home.q));
+    return { pos: b.pos.slice(), quat: dq, home: pc.home.pos.slice(), off: !b.pinned, held: !!b.held }; // prettier-ignore
   }
 
   // ---- The finger ----

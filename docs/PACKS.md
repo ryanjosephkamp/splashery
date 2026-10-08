@@ -803,6 +803,25 @@ drive(t, c, out, info) {
 nose first, and one that hits a piece with `target: true` sticks in it where it hit, until it is
 picked up again or ↺ Reset (objects only, never people or animals). `stick: false` lets it bounce.
 
+**A recipe's own push** (`hands.force`, lane Hands-on H4, October 8, 2026): a function
+`(body, h, ctx)` called once per substep (`h` seconds) for every body (the whole toy, or each
+piece), before the world moves it, to change its `vel` and `omega` (recipe units, or the world's for
+a whole toy): a flying saucer's beam that lifts a cow only while the cow is inside it. `ctx` is
+`{ piece, c, data, G, R, touching }`: the piece (its `def`, `part` and `token`; null for a whole
+toy), the toy's eased controls, the build's `k.data`, gravity and a toy radius, and whether it
+touched anything in the last step. A pinned piece (at home, untouched) has no mass to move: skip it
+(`body.pinned`).
+
+```js
+hands: { pieces: () => [cowPiece], force: (b, h, ctx) => { if (!b.pinned && ctx.c.beam > 0.05 && inBeam(b.pos)) b.vel[1] += ctx.G * h; } }, // prettier-ignore
+```
+
+**Where a piece is** (`info.hands.piece(key)`, lane Hands-on H4): in a pieces-mode toy's `drive`,
+the piece with that part name or token, as `{ pos, quat, home, off, held }` (recipe units; `quat`
+its turn from home; `off` once it has been picked up or knocked loose), or null before the first
+touch. A toy that reads it without any other field asks for `hands.watch: true` (so `info.hands`
+exists): a campfire's flames grow when a log is laid on them.
+
 `info.hands.on` is whether Hands-on is on. Check the toy's frame time with the pieces running (the
 whole world's step is well under a millisecond for one body, a few for 40 pieces).
 

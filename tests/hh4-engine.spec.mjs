@@ -1,0 +1,111 @@
+// Lane Hands-on H4's engine PR (docs/handoff/HandsH4.md): a recipe's own
+// push on its bodies (`hands.force`) and where a piece is, for its drive
+// (`info.hands.piece(key)`; `hands.watch`). Measured in the app on the
+// flying saucer's cow, with a hands block given here.
+
+import { test, expect } from "@playwright/test";
+
+const APP = "/?renderer=webgl2&adapt=off&profile=mid";
+
+// Opens the saucer with a hands block made in the page (functions can't be
+// passed in): `kind` picks the block.
+async function open(page, kind) {
+  await page.goto(APP);
+  await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
+  await page.evaluate(async (kind) => {
+    const { app, player } = window.__splashery;
+    await app.chooseToy("ufo");
+    player.opts.idleDelay = 1e9;
+    const half = [0.42, 0.27, 0.17];
+    const points = [];
+    for (const x of [-1, 1]) for (const y of [-1, 1]) for (const z of [-1, 1]) points.push([x * half[0], y * half[1], z * half[2]]); // prettier-ignore
+    const cow = { part: "cow", pos: [0, -1.45, 0], pivot: [0, -1.45, 0], solid: { type: "box", half }, points, mass: 1, pick: [0.45, 0.32, 0.2] }; // prettier-ignore
+    const calls = (window.__hh4 = { n: 0, ctx: null });
+    const hands = { floor: -2.35, place: false, pieces: () => [cow] };
+    if (kind === "force")
+      hands.force = (b, h, ctx) => {
+        calls.n++;
+        calls.ctx = { part: ctx.piece?.part ?? null, beam: ctx.c.beam, G: ctx.G, R: ctx.R, data: "data" in ctx }; // prettier-ignore
+        if (!b.pinned) b.vel[1] += 1.5 * ctx.G * h; // lifts more than its weight
+      };
+    if (kind === "watch") hands.watch = true;
+    player.toyInfo.recipe.hands = hands;
+    player.handsOn.attach(player.toyInfo);
+  }, kind);
+  await page.click("#hands-toggle");
+}
+
+const frames = (page, n) =>
+  page.evaluate((n) => {
+    const { player } = window.__splashery;
+    for (let i = 0; i < n; i++) player.update(1 / 60);
+  }, n);
+
+// Builds the world and lets the cow go where it hangs (as a knock would).
+const loosen = (page) =>
+  page.evaluate(() => {
+    const h = window.__splashery.player.handsOn;
+    h.ensure();
+    const b = h.pieces[0].body;
+    h.free(b);
+    h.moved = true;
+    h.world.wake();
+    return b.pos[1];
+  });
+
+const cowY = (page) => page.evaluate(() => window.__splashery.player.handsOn.pieces[0].body.pos[1]); // prettier-ignore
+
+test("hands.force: the recipe's push moves a loose piece each substep", async ({ page }) => {
+  await open(page, "force");
+  const y0 = await loosen(page);
+  await frames(page, 30);
+  const y1 = await cowY(page);
+  const ctx = await page.evaluate(() => window.__hh4);
+  expect(ctx.n).toBeGreaterThan(30 * 5); // once per substep, not per frame
+  expect(ctx.ctx.part).toBe("cow");
+  expect(ctx.ctx.beam).toBeGreaterThan(0.5); // the toy's eased controls (the beam is on)
+  expect(ctx.ctx.G / ctx.ctx.R).toBeCloseTo(26, 0);
+  expect(ctx.ctx.data).toBe(true);
+  // 1.5 g up against 1 g down: it rises.
+  expect(y1).toBeGreaterThan(y0 + 0.3);
+});
+
+test("hands.force: without it the same cow falls to the grass", async ({ page }) => {
+  await open(page, "plain");
+  const y0 = await loosen(page);
+  await frames(page, 90);
+  const y1 = await cowY(page);
+  expect(y1).toBeLessThan(y0 - 0.4);
+  expect(y1).toBeGreaterThan(-2.35); // on the floor, not through it
+});
+
+test("info.hands.piece: a drive reads where a piece is", async ({ page }) => {
+  await open(page, "watch");
+  const before = await page.evaluate(() => {
+    const { player } = window.__splashery;
+    return { hands: !!player.motion.hands, piece: player.motion.hands?.piece("cow") };
+  });
+  expect(before.hands).toBe(true);
+  expect(before.piece).toBe(null); // no world yet
+  await loosen(page);
+  await frames(page, 60);
+  const s = await page.evaluate(() => {
+    const { player } = window.__splashery;
+    const p = player.motion.hands.piece("cow");
+    const body = player.handsOn.pieces[0].body.pos;
+    return { p, body, none: player.motion.hands.piece("nothing") };
+  });
+  expect(s.p.off).toBe(true);
+  expect(s.p.held).toBe(false);
+  expect(s.p.home).toEqual([0, -1.45, 0]);
+  expect(s.p.pos[1]).toBeCloseTo(s.body[1], 5);
+  expect(s.p.pos[1]).toBeLessThan(-1.6); // it fell
+  expect(s.p.quat.length).toBe(4);
+  expect(s.none).toBe(null);
+  // ↺ brings it home, pinned again.
+  await page.click("#hands-reset");
+  await frames(page, 60);
+  const back = await page.evaluate(() => window.__splashery.player.motion.hands.piece("cow"));
+  expect(back.off).toBe(false);
+  expect(back.pos[1]).toBeCloseTo(-1.45, 3);
+});
