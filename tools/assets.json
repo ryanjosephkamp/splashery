@@ -3416,6 +3416,19 @@
       "note": "Every second slice of the 501^3 reconstruction (100 µm voxels), read from Walnut1.zip by range requests, averaged in 3 x 3 x 3 blocks to 0.3 mm, cropped to the walnut and stored as 8-bit densities by tools/img-walnut.mjs."
     }
   ],
+  "volumeSamples": [
+    {
+      "id": "gar-12-8mm-microct",
+      "file": "assets/toys/volume-viewer/gar.nii.gz",
+      "toy": "volume-viewer",
+      "name": "MicroCT images of 3 early gar (Lepisosteus osseus) stages between 12.7mm and 21.7mm (VIMS22685, the 12.8 mm larva)",
+      "author": "Brian Metscher (University of Vienna)",
+      "page": "https://doi.org/10.5281/zenodo.19021581",
+      "license": "CC BY 4.0",
+      "checked": "October 8, 2026",
+      "note": "The 502 8-bit TIFF slices (4.42 µm voxels) in VIMS22685_12-8mm.zip, averaged 4 x 4 x 4 to 17.7 µm, cropped to the fish, the faint empty background (below a fifth of the air threshold) set to 0, and stored as 8-bit NIfTI-1 with a display sform by tools/vol-gar.mjs."
+    }
+  ],
   "elementSamples": [
     {
       "id": "element-1",
