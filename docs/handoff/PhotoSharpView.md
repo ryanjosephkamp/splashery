@@ -126,9 +126,10 @@ Photo to 3D and Moving photo to 3D"; merge it first). Sharp picture is the defau
   - `docs/PHOTO-VIEWS.md`: the guide to both views, linked from README.md. Its measurements were
     taken again on main with Detail Fine (`tools/psv-legibility.mjs --detail=`).
   - 17:58 UTC: PR #422 open (draft), head 2be1b2f5. Measured on main: face on, Splats on Fine read
-    text as well as Sharp picture (92 to 100% of lines apart in both); Sharp picture draws frames 2 to
-    6 times faster in SwiftShader. Clip pair `psv2-saved` / `psv2-reopened` on Effect review page 2.
-    psv, psv2, p3d, smd-moving, live3, help and hta pass (one round 1 psv check now allows `view`).
+    text as well as Sharp picture (92 to 100% of lines apart in both); Sharp picture draws frames 2
+    to 6 times faster in SwiftShader. Clip pair `psv2-saved` / `psv2-reopened` on Effect review
+    page 2. psv, psv2, p3d, smd-moving, live3, help and hta pass (one round 1 psv check now allows
+    `view`).
 
 ### Measurements (October 8, 2026)
 
