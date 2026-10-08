@@ -36,6 +36,12 @@ Model: Opus 5.5 (claude-opus-5-5), default effort. Draft PR #393.
 - October 7, 2026, 23:48 UTC: the owner marked all 11 `-r2` cards "good". The PR is ready for the
   Integrator's full run and the Operator's merge (labs).
 
+- October 8, 2026, 05:30 UTC (the Operator's N41): two real failures fixed. `taps.spec` wanted every
+  morph channel back near 0 at rest, and the bonds view rested with channel 0 at 1; it now swaps,
+  unseen, to small balls built at that size once the step settles. `hta.spec` wanted About texts of
+  140 words at most: both toys' texts are trimmed (130 and 129), and the atlas's how-to line is
+  under 95 characters.
+
 ## Notes
 
 - `src/lattice/cells.js` covers:

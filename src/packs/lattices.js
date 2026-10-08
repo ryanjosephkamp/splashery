@@ -154,7 +154,7 @@ function buildUnitCells(k, o) {
   // Parts: the central cell's atoms, three shells of cells around it, the
   // bonds, the cell's outline and the thermal Gaussians.
   const P = {};
-  for (const name of ["cell", "shell1", "shell2", "shell3", "bonds", "edges", "thermal"])
+  for (const name of ["cell", "shell1", "shell2", "shell3", "bonds", "edges", "thermal", "balls"])
     P[name] = k.part(name, { pivot });
   const shellOf = (a) => {
     if (inCell(a.f)) return 0;
@@ -189,6 +189,22 @@ function buildUnitCells(k, o) {
       channel: 0,
       color: (c) => atomColor(col, finish, c.n),
     });
+    // The same atom as a ball 1/SPREAD its size, for the settled bonds view:
+    // the spread-and-shrunk atom ends exactly here, so the swap is unseen,
+    // and the morph channel is back at 0 whenever the toy rests.
+    if (!thermal)
+      k.add(k.sphere(a.r / SPREAD), {
+        pos: a.q,
+        even: true,
+        opacity: 1,
+        jitter: 0.01,
+        flat: 0.2,
+        size: 1.25 / Math.sqrt(SPREAD),
+        weight: (a.el === "H" ? 1.6 : 1) * SPREAD,
+        part: P.balls,
+        pattern: false,
+        color: (c) => atomColor(col, finish, c.n),
+      });
   }
   k.fitMorphs = false;
   // Frame the block (its atoms' outer edges).
@@ -336,6 +352,16 @@ function driveUnitCells(t, c, out, info) {
   out.parts.edges = { scale: L.z, offset, visible: L.edges };
   out.parts.thermal = { scale: L.z, offset, visible: D.thermal ? L.e : 0 };
   out.morph = [L.e, 0, 0, 0];
+  // Settled in the bonds view (at rest, or at the very end of the step into
+  // it): the small balls stand in for the spread atoms, which look the same,
+  // so the morph channel rests at 0 (or, with thermal motion, the atoms
+  // stay gathered away and only their Gaussians show).
+  const settled = cur === "bonds" && (c.step <= 0 || taps === 0 || p >= 0.97);
+  out.parts.balls = { scale: L.z, offset, visible: settled && !D.thermal ? 1 : 0 };
+  if (settled) {
+    for (const name of ["cell", "shell1", "shell2", "shell3"]) out.parts[name] = { ...out.parts[name], visible: 0 }; // prettier-ignore
+    out.morph = [0, 0, 0, 0];
+  }
 }
 
 // ---- Orbital atlas -----------------------------------------------------------------------
