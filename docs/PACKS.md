@@ -735,9 +735,10 @@ a tossed whole toy: less (a ball's 0.4) lets a roll read as a roll. `hands.frict
 floor's friction under a whole toy with a material (a hockey puck's ice: 0.04). `hands.soft` (0
 to 1) sets how much a whole toy squishes when it lands, over the list in `hands-on.js` (a
 superball's firm 0.15). A shelf shape (a procedural toy in `src/toys.js`) may take the gummy bear's
-stretch from its shelf entry: `grab: { radius, max }` (the jelly blob). A material's `nose` turns it
-only while it flies, near critically damped, so a shuttlecock flips cork first once and lies still
-where it lands.
+stretch from its shelf entry: `grab: { radius, max }` (the jelly blob). In pieces mode `hands.floor`
+may be a function `(data, info) => height`, for a floor that depends on the build (a d20 sits lower
+than two d6s). A material's `nose` turns it only while it flies, near critically damped, so a
+shuttlecock flips cork first once and lies still where it lands.
 
 **A water line** (`hands.water`): the toy floats on a round pool, bobs and settles; a boat (any
 non-round toy) rocks and rights itself, since each point under water lifts where it is. By default
