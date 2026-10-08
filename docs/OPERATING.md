@@ -114,9 +114,9 @@ reconciles the worker sessions and brings him finished work.
 3. **Model and effort.** Each worker runs its lane's assigned model (Opus 5.5 or Sonnet 5.5); any
    other model needs the owner's permission first. At every check-in the Operator reads the worker's
    session record, and if it has run on another model (a fallback), the Operator stops it and tells
-   the owner. Effort is the default for now, a trial the owner chose. If either of them thinks it
-   isn't enough, the owner adds `CLAUDE_CODE_EFFORT_LEVEL=xhigh` to the environment's variables, and
-   every new session runs at Extra High. Helpers use the worker's own model.
+   the owner. Effort is high for every worker, lanes and Integrators alike (the owner's call of
+   October 8, 2026). The Operator checks it in the session record too and tells the owner if a
+   worker runs at another level. Helpers use the worker's own model.
 4. **Messages.** A worker never asks the owner. It ends each working turn with a short final
    message: "READY:" (PR link, card ids, test results, anything for the Operator), "WORKING:" (what
    is left) or "BLOCKED:" (exactly what it needs). The Operator reads it from the session record,
