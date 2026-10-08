@@ -9,11 +9,11 @@ additive "Engine: …" PR merged first). PR title: "Phase Volume viewer: open a 
 volume in 3D". Handoff file: docs/handoff/VolumeViewer.md (create it; start it with this brief, word
 for word, under "## Brief", then keep "## State
 
-READY (October 8, 2026, about 18:45 UTC, Opus 5.5, high effort): the tool, readers, samples, tests
-and clips are done on `claude/lane-volume-viewer`, draft PR #423. No engine changes were needed (no
-`-engine` branch). Five cards are on Effect review page 2 (lane record `VolumeViewer`), waiting for
-the owner's marks: `vol-walnut-cut`, `vol-walnut-presets`, `vol-gar-sweep`, `vol-gar-slice`,
-`vol-gar-mip`.
+READY (October 8, 2026, 21:30 UTC: every card marked good; first READY about 18:45 UTC, Opus 5.5,
+high effort): the tool, readers, samples, tests and clips are done on `claude/lane-volume-viewer`,
+draft PR #423. No engine changes were needed (no `-engine` branch). Five cards are on Effect review
+page 2 (lane record `VolumeViewer`), waiting for the owner's marks: `vol-walnut-cut`,
+`vol-walnut-presets`, `vol-gar-sweep`, `vol-gar-slice`, `vol-gar-mip`.
 
 - [x] 1. Formats: DICOM (a series picked together, a folder with "Open a folder of slices…", a .zip,
      or one multi-frame file; uncompressed and RLE Lossless; implicit, explicit and big-endian VR),
@@ -55,6 +55,9 @@ the owner's marks: `vol-walnut-cut`, `vol-walnut-presets`, `vol-gar-sweep`, `vol
   energy (Tenengrad) at phone size, before → after: walnut cut 170 → 198, gar cut 188 → 239, gar
   slice 432 → 778. The walnut is close to its 0.3 mm scan at the phone budget. Cards `-r2` posted
   with `replacedBy` on the old ones.
+- October 8, 2026, 21:25 UTC: the owner marked all three `-r2` cards good. Every current card is
+  good (`vol-walnut-cut-r2`, `vol-walnut-presets`, `vol-gar-sweep-r2`, `vol-gar-slice-r2`,
+  `vol-gar-mip`); PR #423 is ready for the Operator's merge.
 
 ## Known issues
 
