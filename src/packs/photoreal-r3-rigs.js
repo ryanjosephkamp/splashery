@@ -830,7 +830,7 @@ const EFFECTS = {
     motion: M.drop({ pivot: [0, -0.5, 0], axis: [1, 0, 0], amp: 0.04 }),
   },
   "orange-photo": { label: "Roll", secs: 2.8, motion: M.roll({ center: [-0.057, 0.01, -0.01], R: 0.865, dir: ACROSS, dist: 0.32 }) }, // prettier-ignore
-  physalis: { label: "Sway", secs: 3, motion: M.rock({ pivot: [-0.02, -1.12, 0.12], axis: [0.85, 0, -0.52], amp: 0.1, k: 1.2, w: 5 }) }, // prettier-ignore
+  physalis: { label: "Sway", secs: 3, motion: M.rock({ pivot: [-0.02, -1.12, 0.12], axis: [0.52, 0, 0.85], amp: 0.16, k: 1, w: 4.5 }) }, // prettier-ignore
   "crystal-gem": {
     label: "Turn",
     secs: 3,
