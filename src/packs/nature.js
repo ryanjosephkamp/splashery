@@ -1951,7 +1951,7 @@ export const RECIPES = {
           : [],
       joints: (d) =>
         d?.petals
-          ? [{ type: "hinge", part: "head", pivot: d.pivot, axis: unit(cross(d.face, [0, 1, 0])), min: -0.7, max: 0.7, gravity: false, spring: 28, damping: 2.2, bounce: 0.2, pos: add(d.pivot, mul(d.face, 0.05)), pick: [0.36, 0.36, 0.3], sound: () => null }] // prettier-ignore
+          ? [{ type: "hinge", part: "head", pivot: d.pivot, axis: unit(cross(d.face, [0, 1, 0])), min: -0.7, max: 0.7, gravity: false, spring: 28, damping: 4, bounce: 0.2, pos: add(d.pivot, mul(d.face, 0.05)), pick: [0.36, 0.36, 0.3], sound: () => null }] // prettier-ignore
           : [],
     },
     // A tap brings out the sun at the top left: the head turns up to face
@@ -4385,7 +4385,7 @@ export const RECIPES = {
     // brought close to its acorn, it settles home.
     hands: {
       floor: -0.57,
-      area: 1.4,
+      area: 1.1,
       pieces: (d) =>
         (d?.caps || []).map((cp, i) => {
           // The cap: a shallow dome over the acorn's top.
