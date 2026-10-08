@@ -3761,6 +3761,16 @@
     "l": 1
   },
   {
+    "t": "Volume viewer",
+    "u": "toys/volume-viewer/",
+    "k": "toy",
+    "s": "Studio",
+    "d": "Drag up or down to cut into it; tap for the next window. Open your own scan in the Toy tab.",
+    "w": "volume viewer studio studio volume viewer ct mri micro-ct microscope scan dicom nifti nii tiff stack raw voxel slice window level bone soft tissue maximum intensity projection mip cut plane walnut gar fish medical imaging volume-viewer",
+    "i": "../assets/toys/volume-viewer/thumb.webp",
+    "l": 1
+  },
+  {
     "t": "Splat field",
     "u": "toys/splat-field/",
     "k": "toy",
