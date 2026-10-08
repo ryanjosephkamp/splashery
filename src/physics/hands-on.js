@@ -928,7 +928,9 @@ export class HandsOn {
   follow() {
     if (this.mode !== "toy" || (!this.moved && !this.homing)) return null;
     const d = v3.sub(this.body.pos, this.body.home.pos);
-    return [d[0] * 0.8, d[1] * 0.5, d[2] * 0.8];
+    // (A toy may drift the view less, so its roll reads: hands.view.)
+    const k = this.info?.recipe?.hands?.view ?? 0.8;
+    return [d[0] * k, d[1] * 0.5, d[2] * k];
   }
 
   // The squish, as the shader wants it (model space): { axis, amount,

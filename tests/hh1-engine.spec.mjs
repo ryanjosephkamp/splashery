@@ -89,3 +89,22 @@ test("hands.area gives a whole toy room to roll; without it the walls stay close
   expect(wide).toBeLessThan(2.1); // the wall at 3 toy radii (its middle stops a radius short)
   expect(close).toBeLessThan(0.6);
 });
+
+test("hands.view: the view drifts less after a rolling ball, so its roll reads", async ({
+  page,
+}) => {
+  const drift = async (hands) => {
+    await open(page, "tennis-ball", hands);
+    return page.evaluate(() => {
+      const { player } = window.__splashery;
+      const h = player.handsOn;
+      h.ensure();
+      const b = h.body;
+      b.pos[0] += h.R();
+      h.moved = true;
+      return h.follow()[0] / h.R();
+    });
+  };
+  expect(await drift({ material: "tennis-ball", area: 3, view: 0.5 })).toBeCloseTo(0.5, 3);
+  expect(await drift({ material: "tennis-ball", area: 3 })).toBeCloseTo(0.8, 3);
+});
