@@ -50,22 +50,31 @@ for (const id of ids) {
   }, id);
   await page.waitForTimeout(wait);
   for (const view of views) {
-    await page.evaluate((view) => {
-      const { player } = window.__splashery;
-      const cam = player.camera;
-      const home = { ...cam.home };
-      const s = { ...home };
-      if (view === "below") s.pitch = -1.45;
-      if (view === "top") s.pitch = 1.45;
-      if (view === "side") s.pitch = 0;
-      if (view === "close") s.distance = home.distance * 0.6;
-      if (view === "back") s.yaw = home.yaw + Math.PI;
-      if (view === "east") ((s.yaw = Math.PI / 2), (s.pitch = 0.1));
-      cam.setState(s, { snap: true });
-    }, view);
-    // Render a few frames so the splats are sorted for the new view (the sort runs a frame or two
-    // behind the camera).
-    for (let i = 0; i < 6; i++) {
+    // The camera eases there over a few frames, as a drag would, so the splats sort for the new
+    // view as they do on a phone (a snap can leave them sorted for the old one).
+    for (let step = 1; step <= 8; step++) {
+      await page.evaluate(
+        ({ view, f }) => {
+          const { player } = window.__splashery;
+          const cam = player.camera;
+          const home = { ...cam.home };
+          const s = { ...home };
+          if (view === "below") s.pitch = -1.45;
+          if (view === "top") s.pitch = 1.45;
+          if (view === "side") s.pitch = 0;
+          if (view === "close") s.distance = home.distance * 0.6;
+          if (view === "back") s.yaw = home.yaw + Math.PI;
+          if (view === "east") ((s.yaw = Math.PI / 2), (s.pitch = 0.1));
+          const m = { ...home };
+          for (const k of ["yaw", "pitch", "distance"]) m[k] = home[k] + (s[k] - home[k]) * f;
+          cam.setState(m, { snap: true });
+          player.stage.requestRender();
+        },
+        { view, f: step / 8 },
+      );
+      await page.waitForTimeout(250);
+    }
+    for (let i = 0; i < 4; i++) {
       await page.evaluate(() => window.__splashery.player.stage.requestRender());
       await page.waitForTimeout(300);
     }
