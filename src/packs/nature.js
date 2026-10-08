@@ -919,6 +919,9 @@ export const RECIPES = {
     options: [SEASON, SEED],
     controls: [{ key: "shake", label: "Shake", type: "pulse", ease: OAK_SECS }],
     action: { key: "shake", label: "Shake the tree" },
+    // Hands-on (lane Hands-on H2): shake the trunk (a quick back-and-forth
+    // drag on it, or on the tree held up) and the leaves fall and settle.
+    hands: { shake: true },
     // A tap shakes the tree: the crown rocks on its trunk and leaves come
     // loose one after another, each fluttering down on its own swinging
     // path to lie on the grass; then they wither away and fresh leaves open
@@ -1060,6 +1063,18 @@ export const RECIPES = {
     alive: true,
     controls: [{ key: "shake", label: "Shake", type: "pulse", ease: PALM_SECS }],
     action: { key: "shake", label: "Shake down the coconuts" },
+    // Hands-on (lane Hands-on H2): pull a coconut and it snaps off its stalk
+    // into your hand; drop it and it bounces and rolls on the sand.
+    hands: {
+      floor: 0.05, // the sand round the trunk
+      area: 1.4,
+      place: false,
+      pieces: (d) =>
+        (d?.nuts || []).map((n, i) => ({ token: i, pos: n.home, solid: { type: "sphere", r: 0.09 }, pick: [0.12, 0.12, 0.12], mass: 1.4, friction: 0.6, restitution: 0.3, damping: 0.2, angDamping: 0.4 })), // prettier-ignore
+      joints: (d) =>
+        (d?.nuts || []).map((n, i) => ({ type: "break", token: i, at: add(n.home, [0, 0.08, 0]), pull: 0.25, give: 0.15, sound: (ev, vol) => (ev.kind === "snap" ? { voice: "crack", f: 500, decay: 0.3, vol: Math.max(0.4, vol) } : null) })), // prettier-ignore
+      sound: (hit, vol) => ({ voice: "thud", f: 140, bright: 0.2, decay: 0.4, vol: vol * 0.7 }),
+    },
     // A tap shakes the crown and the coconuts drop one after another, thump
     // into the sand, bounce and roll to a stop. Then new green coconuts swell
     // in the crown while the fallen ones are carried off (they shrink away).
@@ -1227,6 +1242,9 @@ export const RECIPES = {
     options: [SEED],
     controls: [{ key: "shake", label: "Shake", type: "pulse", ease: 5.5 }],
     action: { key: "shake", label: "Shake the blossom" },
+    // Hands-on (lane Hands-on H2): shake the trunk and the petals flutter
+    // down.
+    hands: { shake: true },
     // A tap shakes the tree: every blossom drops in a flurry of petals and
     // settles on the grass, then the bare branches bloom again.
     drive(t, c, out) {
@@ -1356,6 +1374,9 @@ export const RECIPES = {
     ],
     controls: [{ key: "gust", label: "Gust", type: "pulse", ease: MAPLE_SECS }],
     action: { key: "gust", label: "Send a gust" },
+    // Hands-on (lane Hands-on H2): shake the trunk and leaves spin down like
+    // real maple leaves.
+    hands: { shake: { key: "gust" } },
     // A tap sends a whirling gust: the crown leans into it, and leaves are
     // torn off and carried round the tree in a widening spiral, tumbling,
     // before they settle in a ring on the grass (the cherry's petals just
@@ -1498,6 +1519,9 @@ export const RECIPES = {
     options: [{ key: "pot", label: "Pot", type: "color", default: "#2e5f80" }],
     controls: [{ key: "trim", label: "Grow and trim", type: "pulse", ease: BONSAI_SECS }],
     action: { key: "trim", label: "Grow a branch, then trim it" },
+    // Hands-on (lane Hands-on H2): pull a branch's foliage and it bends after
+    // your finger; let go and it springs back.
+    hands: { floor: -0.36, stretch: { radius: 0.45, max: 0.3, hz: 4, damping: 0.3, at: (p) => p[1] > 0.45 } }, // prettier-ignore
     // A tap grows a new branch out of the trunk towards you, with a pad of
     // leaves on its end; then a pair of bonsai scissors comes in, opens,
     // and snips it off. The cut piece drops onto the moss and is cleared
@@ -1773,6 +1797,10 @@ export const RECIPES = {
     options: [SEED],
     controls: [{ key: "breeze", label: "Breeze", type: "pulse", ease: WILLOW_SECS }],
     action: { key: "breeze", label: "Send a breeze through" },
+    // Hands-on (lane Hands-on H2): brush the hanging branches and they swing
+    // after your finger, then sway back and forth and settle, slowly, as long
+    // strands do.
+    hands: { floor: -0.17, stretch: { radius: 0.5, max: 0.45, hz: 1.2, damping: 0.1, at: (p) => Math.hypot(p[0], p[2]) > 0.5 } }, // prettier-ignore
     // A tap sends a breeze across the tree from the left: the hanging
     // strands swing away with it a curtain at a time, then swing back and
     // settle, while the crown leans a little. At rest they sway gently (the
@@ -1912,6 +1940,20 @@ export const RECIPES = {
     alive: true,
     controls: [{ key: "sun", label: "Sunshine", type: "pulse", ease: SUN_SECS }],
     action: { key: "sun", label: "Bring out the sun" },
+    // Hands-on (lane Hands-on H2): push the head and it nods on its stem,
+    // its petals with it; let go and it springs back and wobbles.
+    hands: {
+      floor: -0.1,
+      area: 1.3,
+      pieces: (d) =>
+        d?.petals
+          ? [{ part: "head", pivot: d.pivot, pos: add(d.pivot, mul(d.face, 0.05)), ride: d.petals.map((_, i) => i), solid: { type: "sphere", r: 0.3 }, pick: [0.36, 0.36, 0.3] }] // prettier-ignore
+          : [],
+      joints: (d) =>
+        d?.petals
+          ? [{ type: "hinge", part: "head", pivot: d.pivot, axis: unit(cross(d.face, [0, 1, 0])), min: -0.7, max: 0.7, gravity: false, spring: 28, damping: 2.2, bounce: 0.2, pos: add(d.pivot, mul(d.face, 0.05)), pick: [0.36, 0.36, 0.3], sound: () => null }] // prettier-ignore
+          : [],
+    },
     // A tap brings out the sun at the top left: the head turns up to face
     // it and its ray petals spread wide open (each petal a token that
     // turns about its root), then the sun goes in, the head turns back and
@@ -2135,6 +2177,22 @@ export const RECIPES = {
     options: [{ key: "color", label: "Colour", type: "color", default: "#c8102e" }],
     controls: [{ key: "bloom", label: "Bloom", type: "pulse", ease: ROSE_SECS }],
     action: { key: "bloom", label: "Open the bloom" },
+    // Hands-on (lane Hands-on H2): pull the petals off one by one; each drifts down,
+    // turning, and lands on the ground. ↺ puts them back.
+    hands: {
+      floor: 0.03,
+      area: 1.2,
+      place: false,
+      pieces: (d) =>
+        (d?.petals || []).map((pt, i) => {
+          // A petal: thin and light, so it drifts down slowly, turning.
+          const solid = { type: "box", half: [0.05, 0.008, 0.05] };
+          const r = 0.4 * pt.len + 0.04;
+          return { token: i, pos: pt.mid, solid, points: surfacePoints(solid, 1), pick: [r, r, r], mass: 0.05, friction: 0.8, restitution: 0, damping: 4.5, angDamping: 1.2 }; // prettier-ignore
+        }),
+      joints: (d) =>
+        (d?.petals || []).map((pt, i) => ({ type: "break", token: i, at: pt.base, pull: 0.12, give: 0.2, sound: (ev, vol) => (ev.kind === "snap" ? { voice: "peel", f: 1600, n: 3, decay: 0.2, vol: 0.3 } : null) })), // prettier-ignore
+    },
     // A tap opens the bloom further (each petal a token that turns out about
     // its root, the outer ones most), and one outer petal comes loose and
     // flutters down to the grass. Then the bloom closes up again, the fallen
@@ -2218,6 +2276,9 @@ export const RECIPES = {
           // Its outer face (the petal leans out from the axis by about tilt).
           face: unit(sub(mul(out, Math.cos(tilt + 0.3)), mul(A, Math.sin(tilt + 0.3)))),
           front: f > 0.7 ? dot(out, VIEWH) : -2,
+          // (Lane Hands-on H2: its middle, halfway up, and its length.)
+          mid: add(C, quatRotate(Q, [(rho + L * (0.5 * Math.sin(tilt) + bow)) * Math.sin(th), h0 + 0.5 * L * Math.cos(tilt), (rho + L * (0.5 * Math.sin(tilt) + bow)) * Math.cos(th)])), // prettier-ignore
+          len: L,
         });
         k.add(shape, {
           pos: C,
@@ -2337,6 +2398,9 @@ export const RECIPES = {
     alive: true,
     controls: [{ key: "blow", label: "Blow", type: "pulse", ease: 5 }],
     action: { key: "blow", label: "Blow the seeds" },
+    // Hands-on (lane Hands-on H2): swipe back and forth across it and the
+    // seeds come loose and drift away.
+    hands: { shake: { key: "blow" } },
     drive(t, c, out) {
       const s = 1 - c.blow;
       // A gust bends the stalk while the seeds fly.
@@ -2529,6 +2593,9 @@ export const RECIPES = {
     options: [{ key: "color", label: "Colour", type: "color", default: "#d8202e" }],
     controls: [{ key: "open", label: "Open", type: "pulse", ease: TULIP_SECS }],
     action: { key: "open", label: "Open to the sun" },
+    // Hands-on (lane Hands-on H2): push a tulip and it bends on its stem; let
+    // go and it springs back and sways.
+    hands: { floor: -0.1, stretch: { radius: 0.45, max: 0.4, hz: 2.2, damping: 0.14, at: (p) => p[1] > 0.85 } }, // prettier-ignore
     // A tap opens the three tulips wide to the sun, one after another: each
     // petal (a token) turns out about its root and shows the dark stamens
     // and the pale pistil inside; then they close up again.
@@ -2674,6 +2741,21 @@ export const RECIPES = {
     alive: true,
     controls: [{ key: "spin", label: "Spin", type: "pulse", ease: DAISY_SECS }],
     action: { key: "spin", label: "Loves me, loves me not" },
+    // Hands-on (lane Hands-on H2): pull the petals off one by one (loves me, loves
+    // me not); each drifts down to the grass. ↺ puts them back.
+    hands: {
+      floor: 0.04,
+      area: 1.2,
+      place: false,
+      pieces: (d) =>
+        (d?.plucked || []).map((pt, i) => {
+          // A petal: thin and light, so it drifts down slowly, turning.
+          const solid = { type: "box", half: [0.05, 0.008, 0.05] };
+          return { token: i, pos: add(pt.base, [0, 0.07, 0]), solid, points: surfacePoints(solid, 1), pick: [0.11, 0.11, 0.11], mass: 0.05, friction: 0.8, restitution: 0, damping: 4.5, angDamping: 1.2 }; // prettier-ignore
+        }),
+      joints: (d) =>
+        (d?.plucked || []).map((pt, i) => ({ type: "break", token: i, at: pt.base, pull: 0.1, give: 0.2, sound: (ev, vol) => (ev.kind === "snap" ? { voice: "peel", f: 1900, n: 2, decay: 0.15, vol: 0.3 } : null) })), // prettier-ignore
+    },
     // A tap spins the big head like a pinwheel, twice round, and it flings
     // off eight petals one after another ("loves me, loves me not", a tick
     // each), which flutter down to the grass while the small heads bob. It
@@ -2839,6 +2921,9 @@ export const RECIPES = {
     alive: true,
     controls: [{ key: "rise", label: "Rise", type: "pulse", ease: LOTUS_SECS }],
     action: { key: "rise", label: "Rise and open" },
+    // Hands-on (lane Hands-on H2): push the flower down under the water and
+    // let go: it bobs back up and settles.
+    hands: { water: { density: 0.45, color: "#4f8fa6" } },
     // A tap folds the flower into a bud, lifts it out of the water on its
     // stalk (a ring of ripples spreads from it) and opens it wide up in the
     // air, petal by petal layer; then it sinks back onto its pad, open,
@@ -3065,6 +3150,9 @@ export const RECIPES = {
     options: [{ key: "color", label: "Cap", type: "color", default: "#d21f1a" }],
     controls: [{ key: "puff", label: "Puff", type: "pulse", ease: SPORE_SECS }],
     action: { key: "puff", label: "Puff out spores" },
+    // Hands-on (lane Hands-on H2): squeeze the cap and it gives under your
+    // finger, then springs back.
+    hands: { floor: -0.15, stretch: { radius: 0.5, max: 0.22, hz: 4.5, damping: 0.3, at: (p) => p[1] > 0.68 } }, // prettier-ignore
     // A tap bops the big cap: it dips and springs back, and a cloud of
     // glowing spores puffs out from the gills underneath, billows outwards
     // and upwards (each spore on its own path) and fades as it drifts.
@@ -3250,6 +3338,9 @@ export const RECIPES = {
     options: [SEED],
     controls: [{ key: "unfurl", label: "Unfurl", type: "pulse", ease: FERN_SECS }],
     action: { key: "unfurl", label: "Unfurl the fiddleheads" },
+    // Hands-on (lane Hands-on H2): brush the fronds and they bend after your
+    // finger; let go and they spring back and sway.
+    hands: { floor: -0.12, stretch: { radius: 0.5, max: 0.35, hz: 2.6, damping: 0.18, at: (p) => p[1] > 0.12 } }, // prettier-ignore
     // A tap unrolls the two fiddleheads in the middle into two new fronds:
     // each is a chain of six pieces (tokens) that straighten one joint
     // after another from the base out to the tip, and the leaflets on
@@ -4074,6 +4165,21 @@ export const RECIPES = {
     alive: true,
     controls: [{ key: "dry", label: "Open", type: "pulse", ease: CONE_SECS }],
     action: { key: "dry", label: "Open the scales" },
+    // Hands-on (lane Hands-on H2): pull the scales off one by one; each
+    // snaps off at its root and drops. ↺ puts them back.
+    hands: {
+      floor: -0.76,
+      area: 1.2,
+      place: false,
+      pieces: (d) =>
+        (d?.loose || []).map((sc, i) => {
+          const solid = { type: "box", half: [0.07, 0.025, 0.07] };
+          return { token: i, pos: sc.p, solid, points: surfacePoints(solid, 1), pick: [0.1, 0.08, 0.1], mass: 0.1, friction: 0.8, restitution: 0.2, damping: 0.6, angDamping: 1 }; // prettier-ignore
+        }),
+      joints: (d) =>
+        (d?.loose || []).map((sc, i) => ({ type: "break", token: i, at: sc.hinge, pull: 0.15, give: 0.2, sound: (ev, vol) => (ev.kind === "snap" ? { voice: "crack", f: 1400, decay: 0.15, vol: Math.max(0.3, vol) } : null) })), // prettier-ignore
+      sound: (hit, vol) => ({ voice: "wood", f: "E6", decay: 0.2, vol: vol * 0.4 }),
+    },
     // A tap opens the cone as it does in dry weather (every scale tips out
     // from its root) and eight winged seeds slip out and spin down like
     // little propellers. Then the scales on the side facing you break off
@@ -4275,6 +4381,23 @@ export const RECIPES = {
     ],
     controls: [{ key: "sprout", label: "Sprout", type: "pulse", ease: ACORN_SECS }],
     action: { key: "sprout", label: "Pop the caps" },
+    // Hands-on (lane Hands-on H2): pull a cap off and put it back on:
+    // brought close to its acorn, it settles home.
+    hands: {
+      floor: -0.57,
+      area: 1.4,
+      pieces: (d) =>
+        (d?.caps || []).map((cp, i) => {
+          // The cap: a shallow dome over the acorn's top.
+          const r = 0.34 * cp.s;
+          const pos = add(cp.pivot, quatRotate(cp.q, [0, 0.12 * cp.s, 0]));
+          const solid = { type: "ellipsoid", r: [r, 0.45 * r, r] };
+          return { part: `cap${i}`, pivot: cp.pivot, pos, quat: cp.q, solid, points: surfacePoints(solid, 1), pick: [r * 1.1, r * 0.7, r * 1.1], mass: 0.3, friction: 0.7, restitution: 0.2 }; // prettier-ignore
+        }),
+      joints: (d) =>
+        (d?.caps || []).map((_, i) => ({ type: "socket", part: `cap${i}`, snap: 0.3 })),
+      sound: (hit, vol) => ({ voice: "click", vol: vol * 0.6 }),
+    },
     // A tap pops the caps off: each flips up through the air and lands
     // upside down on the leaf, and a green sprout pokes out of the top of
     // each acorn and opens two tiny leaves. Then the sprouts draw back in
@@ -4307,7 +4430,7 @@ export const RECIPES = {
           pivot: at([0, 0.2, 0]),
           axis: quatRotate(q, [1, 0, 0.3]),
         });
-        caps.push({ land: sub(land, at([0, 0.2, 0])) });
+        caps.push({ land: sub(land, at([0, 0.2, 0])), pivot: at([0, 0.2, 0]), q, s }); // (lane Hands-on H2: pivot, q, s)
         k.add(
           k.lathe([
             [0, -0.56],
@@ -4654,6 +4777,9 @@ export const RECIPES = {
     alive: true,
     controls: [{ key: "grow", label: "Grow", type: "pulse", ease: BAMBOO_SECS }],
     action: { key: "grow", label: "Grow new shoots" },
+    // Hands-on (lane Hands-on H2): pull a stalk and it bends after your
+    // finger; let go and it sways back and forth and settles.
+    hands: { floor: -0.1, stretch: { radius: 0.6, max: 0.45, hz: 1.6, damping: 0.09, at: (p) => p[1] > 0.5 } }, // prettier-ignore
     // Three young shoots sit on the ground. A tap makes them shoot up, a
     // section at a time: each new section slides up out of the one below
     // (a hollow knock each), carrying the pointed tip, and a tuft of leaves
@@ -5070,6 +5196,9 @@ export const RECIPES = {
     alive: true,
     controls: [{ key: "nibble", label: "Nibble", type: "pulse", ease: KELP_SECS }],
     action: { key: "nibble", label: "Fish come to nibble" },
+    // Hands-on (lane Hands-on H2): push the fronds and they swing after your
+    // finger, then sway slowly in the water and drift back.
+    hands: { floor: -0.14, stretch: { radius: 0.6, max: 0.5, hz: 0.8, damping: 0.08, at: (p) => p[1] > 0.4 } }, // prettier-ignore
     // A tap brings three little fish swimming in from the left. Each noses
     // up to a blade and takes a few nibbles, and the kelp sways away from
     // them, the nearest stalks first (it bends: four channels, one per band
@@ -5319,6 +5448,9 @@ export const RECIPES = {
     options: [{ key: "snow", label: "Snow", type: "switch", default: false }],
     controls: [{ key: "shake", label: "Shake", type: "pulse", ease: PINE_SECS }],
     action: { key: "shake", label: "Shake off the snow" },
+    // Hands-on (lane Hands-on H2): shake the trunk and the snow slides off
+    // the branches.
+    hands: { shake: true },
     // A tap shakes off a dusting of snow: the tree rocks, the snow on its
     // boughs comes off in clumps that drop to the ground in a puff of powder
     // and melt away there. On a snowless day a quick shower first dusts the
