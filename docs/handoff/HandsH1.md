@@ -57,8 +57,23 @@ file. The engine files belong to the merged engines; another lane's toys are the
   comments on your PR that start "From the Operator", the "READY:", "WORKING:" or "BLOCKED:" line at
   the top of "## State
 
-WORKING: Balls shelf (October 8, 2026, cloud session, Opus 5.5). Engine PR #421 is up (merge it
-first); the Balls PR is stacked on it. Clips next.
+READY (Balls and Shapes), WORKING (Toys and Clothing): October 8, 2026, cloud session, Opus 5.5.
+
+- Engine PR #421 (`claude/lane-hands-h1-engine`): merge first. Its specs pass (the hec-engine timing
+  test failed only while clips loaded the CPU; rerun on a quiet machine).
+- Balls #424 (`claude/lane-hands-h1-balls`): 22 balls; 22 clips posted as `hh1-` cards on Effect
+  review page 2 (lane HandsH1, group Balls). Specs: 39 passed (hh1-balls, hh1-engine, hea-engine,
+  hea). Waits for the owner's marks.
+- Shapes #429 (`claude/lane-hands-h1-shapes`): the jelly blob's stretch; its card `hh1-blob` is
+  posted. Waits for the owner's mark.
+- Toys (`claude/lane-hands-h1-toys`, no PR yet): the rubber duck, spinning top, dice, teddy bear,
+  paper plane, origami crane, balloon dog, soap bubbles and wind-up robot are built and pushed;
+  clips rendering, specs to run. (The yo-yo, kite, spring toy, bricks, Newton's cradle, puzzle cube
+  and chess set are the engine and Physics lanes' and stay as they are.)
+- Clothing (`claude/lane-hands-h1-clothing`, no PR yet): the sunglasses, baseball cap, running shoe
+  and the hoodie's sleeves are built and pushed (the hood is engine C's); clips rendering.
+- The garden gnome (the L1 sweep's finding) is a scan on the photoreal shelf, not one of this lane's
+  shelves, and its fix is in the engine's resting contact; not done here (see "For the Operator").
 
 ## Notes
 
@@ -101,4 +116,10 @@ first); the Balls PR is stacked on it. Clips next.
 
 ## For the Operator
 
-- Merge the engine PR #421 before the Balls PR.
+- Merge the engine PR #421 before the Balls PR (and before Shapes, Toys and Clothing, which are
+  stacked on it).
+- Clips at device scale 3 take about 10 minutes each in this container (two at a time on its 4
+  cores), so a shelf of 20 takes about two hours.
+- The garden gnome's "never rests" finding (docs/audits/hands-l1-sweep-2026-10.md) is a scan outside
+  these shelves whose cause the sweep puts in the engine's resting contact; it needs its own small
+  engine task.
