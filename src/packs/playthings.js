@@ -2829,7 +2829,7 @@ export const RECIPES = {
     alive: true,
     // Hands-on (lane Hands-on H1): thrown, it glides nose first, dips and
     // lands, light as paper.
-    hands: { area: 4, view: 0.5, material: "paper-plane", sound: (hit, vol) => ({ voice: "slap", f: 1200, vol: vol * 0.4 }) }, // prettier-ignore
+    hands: { area: 3, view: 0.6, material: "paper-plane", sound: (hit, vol) => ({ voice: "slap", f: 1200, vol: vol * 0.4 }) }, // prettier-ignore
     density: 0.5,
     options: [
       { key: "color", label: "Paper", type: "color", default: "#cfe6f7" },
