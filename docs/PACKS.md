@@ -778,6 +778,20 @@ drive(t, c, out, info) {
 nose first, and one that hits a piece with `target: true` sticks in it where it hit, until it is
 picked up again or ↺ Reset (objects only, never people or animals). `stick: false` lets it bounce.
 
+Lane Hands-on H2 (October 8, 2026) added four more keys to a piece's def:
+
+- `place: false`: this piece hangs and swings in the hand (as every piece does with
+  `hands.place: false`) while the others are picked and placed level (an ice cream cone you tip).
+- `shown: { pos, quat }`: where the recipe's drive shows the piece at rest, when that isn't where
+  its splats were built (a kiwi's half, built face up and shown closed): the body starts and goes
+  home there, and the piece's splats move from where they were built.
+- `ride: [index | { token, visible }]`: other tokens that move with the piece (a banana's skin
+  strips; `visible: 0` keeps one hidden, its pale inside).
+- `flip: true` (below).
+
+And a break joint takes `spill` (radians): a piece riding another comes loose when that one tips
+past it (scoops off a tipped cone), with the cue `"spill"`.
+
 **A flip** (lane Hands-on H2, October 8, 2026): a piece with `flip: true` in its def, let go from a
 quick flick up the screen (faster up than across), is tossed up with half a turn about the level
 line across the view, timed to come down upside down where it hovered before the flick, on whatever

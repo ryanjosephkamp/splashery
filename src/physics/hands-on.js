@@ -297,9 +297,14 @@ export class HandsOn {
       w.plane([nx, 0, nz], -A, { friction: 0.3, restitution: 0.3 });
     this.pieces = [];
     for (const p of hands.pieces?.(data, info) || []) {
+      // Lane Hands-on H2: `shown` is where the recipe's drive shows the
+      // piece at rest when that isn't where it was built (a kiwi's half,
+      // built face up and shown closed): it starts and goes home there.
+      const at = p.shown?.pos || p.pos;
+      const atQ = p.shown?.quat || p.quat || [0, 0, 0, 1];
       const body = new Body({
-        pos: p.pos,
-        quat: p.quat || [0, 0, 0, 1],
+        pos: at,
+        quat: atQ,
         mass: p.mass ?? 1,
         solid: p.solid,
         points: p.points || [],
@@ -310,7 +315,7 @@ export class HandsOn {
         angDamping: p.angDamping ?? 1.5,
       });
       w.add(body);
-      this.pieces.push({ body, token: p.token, part: p.part, home: { pos: p.pos.slice(), q: (p.quat || [0, 0, 0, 1]).slice() }, def: p }); // prettier-ignore
+      this.pieces.push({ body, token: p.token, part: p.part, home: { pos: at.slice(), q: atQ.slice() }, built: { pos: p.pos.slice(), q: (p.quat || [0, 0, 0, 1]).slice() }, def: p }); // prettier-ignore
       // A piece on a stem (a cherry): pinned to its point, springing back
       // to how it hung.
       if (p.joint)
@@ -500,8 +505,11 @@ export class HandsOn {
     const ray = this.ray(x, y);
     // Pieces are picked and placed: held by the middle, turned level (only
     // their turn about the upright stays), hovering just above whatever is
-    // under the finger, so letting go sets one down on a stack.
-    const place = this.mode === "pieces" && this.info.recipe.hands.place !== false;
+    // under the finger, so letting go sets one down on a stack. (Lane
+    // Hands-on H2: a piece whose def says `place: false` hangs and swings
+    // in the hand instead, as every piece does with `hands.place: false`.)
+    const pdef = this.pieces.find((pc) => pc.body === body)?.def;
+    const place = this.mode === "pieces" && this.info.recipe.hands.place !== false && pdef?.place !== false; // prettier-ignore
     const la = place ? [0, 0, 0] : body.toLocal(hit);
     const at = place ? body.pos.slice() : hit;
     // A little give, so a wall or the floor wins over the finger instead
@@ -952,8 +960,14 @@ export class HandsOn {
       for (const pc of this.pieces) {
         const b = pc.body;
         if ((b.pinned && !this.homing) || pc.token === undefined) continue;
-        const dq = quat.mul(b.q, quat.conj(pc.home.q));
-        out.push({ index: pc.token, token: { base: pc.home.pos, offset: v3.sub(b.pos, pc.home.pos), quat: dq } }); // prettier-ignore
+        // (From where its splats were built; lane Hands-on H2's `shown`.)
+        const dq = quat.mul(b.q, quat.conj(pc.built.q));
+        const token = { base: pc.built.pos, offset: v3.sub(b.pos, pc.built.pos), quat: dq };
+        out.push({ index: pc.token, token });
+        // Lane Hands-on H2: other tokens that ride with it (`ride`: an
+        // index, or { token, visible }), a banana's skin strips.
+        for (const r of pc.def.ride || [])
+          out.push(typeof r === "number" ? { index: r, token } : { index: r.token, token: { ...token, visible: r.visible ?? 1 } }); // prettier-ignore
       }
       // Lane Hands engine C: what the ropes, cloth and stretch move.
       const so = this.softParts?.output();
@@ -964,9 +978,9 @@ export class HandsOn {
       for (const pc of this.pieces) {
         if (!pc.part) continue;
         const b = pc.body;
-        const dq = quat.mul(b.q, quat.conj(pc.home.q));
-        const pv = pc.def.pivot || pc.home.pos;
-        const off = v3.sub(v3.sub(b.pos, pv), quat.rotate(dq, v3.sub(pc.home.pos, pv)));
+        const dq = quat.mul(b.q, quat.conj(pc.built.q));
+        const pv = pc.def.pivot || pc.built.pos;
+        const off = v3.sub(v3.sub(b.pos, pv), quat.rotate(dq, v3.sub(pc.built.pos, pv)));
         (parts ||= {})[pc.part] = { quat: dq, offset: off };
       }
       if (this.joints) parts = this.joints.parts(parts); // lane Hands engine B
