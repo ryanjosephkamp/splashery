@@ -1,6 +1,6 @@
 // Lane Hands-on H1, Clothing (docs/handoff/HandsH1.md): the sunglasses'
 // arms fold on their hinges and stay, the cap flies off its stand like a disc, a pulled
-// lace undoes the shoe's bow (and ↺ ties it), and the hoodie's sleeves
+// lace undoes the shoe's bow and falls outside the shoe (and ↺ ties it), and the hoodie's sleeves
 // swing back down.
 
 import { test, expect } from "@playwright/test";
@@ -133,15 +133,35 @@ test("running shoe: a lace end pulled out undoes the bow; ↺ ties it again", as
     }
     h.release();
     for (let k = 0; k < 120; k++) player.update(1 / 60);
-    const loopA = d(sp.nodes[5]);
-    const loopB = d(sp.nodes[22 + 5]);
+    // How far each lace's loop and tail fell from the bow (the most any of it moved).
+    const loopA = Math.max(...sp.nodes.slice(1, 22).map(d));
+    const loopB = Math.max(...sp.nodes.slice(23, 44).map(d));
+    // Lace inside the shoe: under the scan's own top, in columns 0.1 across.
+    const kit = player.motion.ctx.kit;
+    const T = kit.transform;
+    const pos = kit.buf.pos;
+    const cols = new Map();
+    for (let i = 0; i < kit.count * 0.82; i++) {
+      const [x, y, z] = [0, 1, 2].map((k) => pos[3 * i + k] / T.scale + T.center[k]);
+      const key = `${Math.round(x / 0.1)},${Math.round(z / 0.1)}`;
+      (cols.get(key) || cols.set(key, []).get(key)).push(y);
+    }
+    const top = (x, z) => {
+      const ys = cols.get(`${Math.round(x / 0.1)},${Math.round(z / 0.1)}`);
+      return ys?.length > 30 ? ys.sort((a, b) => a - b)[Math.floor(ys.length * 0.9)] : -Infinity;
+    };
+    // (Below the lacing: on it, the laces lie between the collar's flaps.)
+    const through = sp.nodes.filter(({ x }) => x[1] < Math.min(-0.1, top(x[0], x[2]) - 0.05)).length; // prettier-ignore
+    const low = Math.min(...sp.nodes.map((n) => n.x[1]));
     h.reset();
     for (let k = 0; k < 90; k++) player.update(1 / 60);
-    return { still, loopA, loopB, tied: d(sp.nodes[5]) };
+    return { still, loopA, loopB, through, low, tied: d(sp.nodes[5]) };
   });
   expect(s.still).toBeLessThan(0.005); // the bow holds by itself
-  expect(s.loopA).toBeGreaterThan(0.2); // pulled lace: its loop falls loose
-  expect(s.loopB).toBeGreaterThan(0.2); // and the other lace's too
+  expect(s.loopA).toBeGreaterThan(0.3); // pulled lace: it falls loose
+  expect(s.loopB).toBeGreaterThan(0.3); // and the other lace too
+  expect(s.low).toBeLessThan(-0.4); // down the shoe's side to the floor
+  expect(s.through).toBe(0); // over and outside the shoe, never through it
   expect(s.tied).toBeLessThan(0.01); // ↺ ties it again
 });
 

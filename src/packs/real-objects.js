@@ -1378,6 +1378,47 @@ function rsLace(which, s) {
 const RS_TIED = { keep: 9, undone: false };
 const v3dist = (a, b) => Math.hypot(a[0] - b[0], a[1] - b[1], a[2] - b[2]);
 
+// The shoe's top, every 0.1 along it (x from -0.8 at the toe) and across it (z from -0.3),
+// measured from the scan, the ankle opening filled and the collar flaps left out (lane
+// Hands-on H1).
+const RS_TOP = [
+  [null, -0.22, -0.17, -0.15, -0.13, -0.13, -0.1, -0.03, 0.13, 0.16, 0.15, 0.1, 0.05, 0.01, -0.26, null, null],
+  [-0.19, -0.13, -0.11, -0.11, -0.1, -0.03, 0.03, 0.09, 0.16, 0.16, 0.16, 0.12, 0.05, 0.08, 0.09, -0.03, -0.28],
+  [-0.16, -0.11, -0.1, -0.1, -0.07, -0.01, 0.04, 0.12, 0.16, 0.16, 0.16, 0.1, 0.1, 0.1, 0.13, 0.24, -0.21],
+  [-0.16, -0.11, -0.1, -0.1, -0.08, -0.01, 0.03, 0.11, 0.16, 0.16, 0.16, 0.11, 0.1, 0.12, 0.15, 0.24, -0.2],
+  [-0.23, -0.15, -0.12, -0.11, -0.11, -0.03, 0.02, 0.08, 0.16, 0.16, 0.16, 0.1, 0.06, 0.13, 0.14, 0.03, -0.23],
+  [null, -0.26, -0.2, -0.16, -0.15, -0.15, -0.11, -0.04, 0.14, 0.16, 0.15, 0.1, 0.06, 0.05, -0.03, -0.23, null],
+  [null, null, null, null, -0.32, -0.25, -0.24, -0.22, -0.2, -0.19, null, null, null, null, null, null, null],
+]; // prettier-ignore
+// A shell of spheres just under that top and inside the shoe's sides, so a loose lace drapes
+// over the shoe and down its outside instead of falling through it. A sphere under the tied
+// bow sinks until the bow clears it, so the bow sits as it is.
+const RS_SHELL = (() => {
+  const r = 0.075;
+  const top = (i, j) => RS_TOP[j]?.[i] ?? null;
+  const bow = [...RS_SHAPES.A.bow.slice(1), ...RS_SHAPES.B.bow.slice(1)];
+  const out = [];
+  for (let j = 0; j < RS_TOP.length; j++)
+    for (let i = 0; i < RS_TOP[j].length; i++) {
+      const t = top(i, j);
+      if (t == null) continue;
+      const x = -0.8 + 0.1 * i;
+      const z = -0.3 + 0.1 * j;
+      // A column is filled down to its lowest neighbor's top (the floor at the edge), so the
+      // shoe's sides are covered too.
+      const nb = Math.min(...[[1, 0], [-1, 0], [0, 1], [0, -1]].map(([a, b]) => top(i + a, j + b) ?? -0.5)); // prettier-ignore
+      const low = Math.min(t, Math.max(-0.5, nb) + r) - r;
+      const ys = [];
+      for (let y = t - r; y > low + 0.03; y -= 0.1) ys.push(y);
+      ys.push(low);
+      for (let y of ys) {
+        while (y > -0.5 && bow.some((p) => v3dist(p, [x, y, z]) < r + 0.03)) y -= 0.01;
+        out.push({ at: [x, y, z], r });
+      }
+    }
+  return out;
+})();
+
 const RUNNING_SHOE = {
   alive: false,
   density: 1.5, // as the Model to splats toy: 300,000 splats on the high tier
@@ -1385,7 +1426,7 @@ const RUNNING_SHOE = {
   action: { key: "tie", label: "Untie and tie again" },
   // Hands-on (lane Hands-on H1): the laces are two ropes, tied in their bow.
   // Pull a lace end out and the bow comes undone: both laces fall loose and
-  // drape over the shoe. ↺ ties them again.
+  // drape over the shoe and down its outside (RS_SHELL). ↺ ties them again.
   hands: {
     floor: -0.5,
     ropes: () =>
@@ -1400,12 +1441,22 @@ const RUNNING_SHOE = {
         bend: 0.25,
         drag: 2,
         radius: 0.012,
-        avoid: [{ at: [0.05, -0.12, -0.05], r: 0.21 }],
+        avoid: RS_SHELL,
         update: (strand, dt, soft) => {
           // Pulled out past this far, the bow lets go (both laces).
           const n = soft.nodes[strand.first + RS.joints - 1];
           if (v3dist(n.x, n.home) > 0.22) RS_TIED.undone = true;
           strand.def.keep = RS_TIED.undone ? 0 : RS_TIED.keep;
+          // Only the shell's spheres near this lace, for speed.
+          const lo = [Infinity, Infinity, Infinity];
+          const hi = [-Infinity, -Infinity, -Infinity];
+          for (let i = 0; i < RS.joints; i++)
+            for (let k = 0; k < 3; k++) {
+              const v = soft.nodes[strand.first + i].x[k];
+              lo[k] = Math.min(lo[k], v);
+              hi[k] = Math.max(hi[k], v);
+            }
+          strand.def.avoid = RS_SHELL.filter((sp) => sp.at.every((v, k) => v > lo[k] - 0.2 && v < hi[k] + 0.2)); // prettier-ignore
         },
         reset: (strand) => {
           RS_TIED.undone = false;
