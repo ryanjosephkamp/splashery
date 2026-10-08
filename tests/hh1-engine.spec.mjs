@@ -190,3 +190,50 @@ test("hands.soft: a toy squishes on landing as much as its hands block says", as
   expect(usual.soft).toBeCloseTo(0.55, 3); // the list's
   expect(firm.peak).toBeLessThan(usual.peak * 0.5);
 });
+
+test("hands.floor may be a function of the build", async ({ page }) => {
+  await open(page, "dice", null);
+  const d = await page.evaluate(() => {
+    const { player } = window.__splashery;
+    player.toyInfo.recipe.hands = {
+      floor: (data, info) => (info.options?.kind === "d20" ? -0.8 : -0.5),
+      pieces: () => [{ part: "d6a", pos: [-0.64, 0, 0.18], solid: { type: "box", half: [0.5, 0.5, 0.5] } }], // prettier-ignore
+    };
+    const h = player.handsOn;
+    h.attach(player.toyInfo);
+    h.setOn(true);
+    h.ensure();
+    return h.world.planes[0].d;
+  });
+  expect(d).toBeCloseTo(-0.5, 5);
+});
+
+test("hands.press: a press held still squeezes a whole toy, and it springs back when let go", async ({
+  page,
+}) => {
+  await open(page, "rubber-duck", { press: { amount: 0.3 } });
+  const s = await page.evaluate(() => {
+    const { player } = window.__splashery;
+    const h = player.handsOn;
+    const c = player.stage.toScreen(player.toyInfo.center);
+    h.pressAt(player.toyInfo.center.slice(), c[0], c[1]);
+    const amp = [];
+    for (let i = 0; i < 30; i++) {
+      player.update(1 / 60);
+      amp.push(h.squishAmp());
+    }
+    h.release();
+    let min = Infinity;
+    for (let i = 0; i < 90; i++) {
+      player.update(1 / 60);
+      min = Math.min(min, h.squishAmp());
+      amp.push(h.squishAmp());
+    }
+    return { early: amp[5], held: amp[29], min, end: amp.at(-1), lifted: !!h.hold };
+  });
+  expect(s.early).toBeLessThan(0.01); // a tap's worth of time: nothing yet
+  expect(s.held).toBeCloseTo(0.3, 2); // squeezed while held
+  expect(s.min).toBeLessThan(-0.02); // springs back through rest (a wobble)
+  expect(Math.abs(s.end)).toBeLessThan(0.01);
+  expect(s.lifted).toBe(false);
+});
