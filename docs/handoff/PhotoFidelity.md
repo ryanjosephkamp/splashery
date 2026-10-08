@@ -7,7 +7,47 @@ ryanjosephkamp/splashery. Your lane: Photo fidelity (prefix `phf`). Branch:
 `claude/lane-photo-fidelity` (engine changes on `claude/lane-photo-fidelity-engine`). PR title:
 "Phase Photo fidelity: sharper Photo to 3D and Moving photo to 3D". Handoff file:
 docs/handoff/PhotoFidelity.md (create it; start it with this brief, word for word, under "## Brief",
-then keep "## State", "## Notes", "## Known issues" and "## For the Operator" current). Model: Opus
+then keep "## State", "## Notes", "### Round 2: edge-aware depth for short clips (measured; not in
+the toy)
+
+`guidedDepth` (src/packs/moving-photo.js) enlarges a clip's depth with the frame's colors as the
+guide (a 3 by 3 joint bilateral filter with lookup tables, about 35 to 70 ms per 100,000 pixels
+here). `tools/phf-depth-edges.mjs` compares a clip's depth with the depth model's own at 518 px on
+the same frame, over the depth edges only ("edge": the mean difference in nearness there; "wrong":
+the share more than 0.25 off). Two frames of each sample, r1 (bilinear and sharpenEdges) and r2
+(guidedDepth and sharpenEdges), the model at the toy's size:
+
+| sample  | 196 px: edge r1 → r2 | wrong r1 → r2 | 294 px: wrong r1 → r2 | 392 px: wrong r1 → r2 |
+| ------- | -------------------- | ------------- | --------------------- | --------------------- |
+| bunny   | 0.218 → 0.205        | 35.1% → 33.3% | 14.9% → 14.0%         | 10.9% → 10.8%         |
+| horse   | 0.244 → 0.244        | 40.9% → 40.6% | 41.1% → 40.7%         | 7.5% → 7.0%           |
+| dragon  | 0.307 → 0.302        | 51.0% → 50.3% | 39.6% → 39.7%         | 35.1% → 34.1%         |
+| bridge  | 0.174 → 0.178        | 26.5% → 27.2% | 21.0% → 21.6%         | 18.9% → 18.9%         |
+| machine | 0.242 → 0.242        | 41.4% → 41.4% | 43.1% → 43.0%         | 25.4% → 25.4%         |
+
+The guide moves the edges by at most two points, and the wrong way on the bridge: where the depth is
+wrong, it is wrong in shape (at 196 px the model doesn't see the bunny's ears or the horse at all),
+not in a soft edge an enlarging could sharpen. The model's input size is what counts. So the toy
+doesn't use the guide (it would cost a few seconds more per clip); the tool keeps it.
+
+At about the same wait, more pixels on fewer frames (the frames between blend their neighbors'
+depth), three frames between the depth frames measured, wrong-side share (r1), and the model's time
+here:
+
+| sample  | 196 px × 32 | 294 px × 16 | 392 px × 8 | 294 px × 32 (twice the wait) |
+| ------- | ----------- | ----------- | ---------- | ---------------------------- |
+| bunny   | 33% (8 s)   | 42% (12 s)  | 35% (11 s) | 26% (21 s)                   |
+| horse   | 48% (6 s)   | 44% (13 s)  | 12% (19 s) | 44% (18 s)                   |
+| dragon  | 53% (11 s)  | 46% (13 s)  | 49% (11 s) | 45% (29 s)                   |
+| bridge  | 26% (10 s)  | 17% (12 s)  | 20% (11 s) | 17% (21 s)                   |
+| machine | 42% (13 s)  | 44% (14 s)  | 29% (15 s) | 47% (27 s)                   |
+
+(The horse has 15 frames in all.) No plan wins everywhere at the same wait: fewer, bigger depth
+pictures help the still-ish clips (horse, machine) and hurt the moving bunny. A bigger depth at a
+longer wait is the owner's call (For the Operator).
+
+## Known issues" and "## For the Operator" current). Model: Opus
+
 5.5, at the default effort.
 
 ### Brief (written by the Operator on October 8, 2026, from the owner's note)
