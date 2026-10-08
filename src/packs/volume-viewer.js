@@ -203,6 +203,9 @@ const CUT_DIRS = {
   side: { normal: [1, 0, 0], axis: 0, label: "Side to side" },
 };
 const PRESET_ORDER = PRESETS.map((p) => p.id);
+// How much farther apart the sheets are than the splats within them (src/volume/view.js): the
+// cut face and the slice get the budget (the owner's "Just sharper", October 8, 2026).
+const SHEETS = { cut: 3, slice: 5 };
 
 function cutDrag() {
   return {
@@ -237,12 +240,12 @@ function driveVolume(t, c, out, info) {
   if (d.slice) {
     vol.normal = dir.normal;
     vol.at = -ext + 2 * ext * (at > 0.999 ? 0.5 : at);
-    vol.slab = Math.max(2.2 * d.pitch, d.thin);
+    vol.slab = d.sheet; // one sheet at a time
   } else if (at < 0.999) {
     vol.normal = dir.normal;
     vol.at = -ext + 2 * ext * at;
     vol.glow = [0.05, 0.035, 0.012];
-    vol.glowWidth = 0.6 * d.pitch;
+    vol.glowWidth = 0.6 * d.sheet;
   }
   out.volume = vol;
 }
@@ -257,7 +260,7 @@ function buildViewer(k, o) {
   const mip = o.view === "mip";
   const r = mip
     ? buildMIP(k, V, { lo, hi, axis: CUT_DIRS[cut].axis, colors: o.colors, budget })
-    : buildVolume(k, V, { lo, hi, colors: o.colors, opacity: o.opacity, budget, rand: k.rand });
+    : buildVolume(k, V, { lo, hi, colors: o.colors, opacity: o.opacity, budget, rand: k.rand, sheets: { axis: CUT_DIRS[cut].axis, k: o.slice ? SHEETS.slice : SHEETS.cut, flat: !!o.slice } }); // prettier-ignore
   VV.ext = Math.max(...r.half);
   k.data = {
     key: `${o.source}:${o.source === "custom" ? VV.uid : ""}`,
@@ -265,7 +268,7 @@ function buildViewer(k, o) {
     slice: !!o.slice && !mip,
     half: r.half,
     pitch: r.pitch,
-    thin: Math.max(...V.spacing),
+    sheet: r.sheet ?? r.pitch,
     mip,
   };
   VV.last = { V, lo, hi, n: r.n, pitch: r.pitch, mip, empty: r.n === 0 };

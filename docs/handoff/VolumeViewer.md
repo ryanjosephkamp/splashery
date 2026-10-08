@@ -47,6 +47,15 @@ the owner's marks: `vol-walnut-cut`, `vol-walnut-presets`, `vol-gar-sweep`, `vol
 - The tap rebuilds the toy with the next preset (the colors are baked per window); the cut place is
   kept across presets of the same volume.
 
+- October 8, 2026, about 20:00 UTC, the owner's marks: good: `vol-walnut-presets`, `vol-gar-mip`;
+  "Just sharper": `vol-walnut-cut`, `vol-gar-sweep`, `vol-gar-slice`. Done: inside the volume the
+  lattice keeps only every third layer across the cut axis (every fifth for a thin slice), so the
+  same budget draws the cut face and the slice finer; the outer surface keeps every layer, so the
+  skin stays smooth (the first try, sheets everywhere, showed contour rings on the walnut). Edge
+  energy (Tenengrad) at phone size, before → after: walnut cut 170 → 198, gar cut 188 → 239, gar
+  slice 432 → 778. The walnut is close to its 0.3 mm scan at the phone budget. Cards `-r2` posted
+  with `replacedBy` on the old ones.
+
 ## Known issues
 
 - Compressed DICOM (JPEG, JPEG-LS, JPEG 2000, HTJ2K, Deflate) is refused with a message saying how

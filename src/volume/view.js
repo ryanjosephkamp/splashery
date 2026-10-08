@@ -189,80 +189,111 @@ const NEAR = [[1, 0, 0], [-1, 0, 0], [0, 1, 0], [0, -1, 0], [0, 0, 1], [0, 0, -1
 // window's bottom; h is chosen so they fit the budget. Colored by the densest matter within a
 // voxel, so a surface's partly filled voxels take the color of what they belong to. opacity:
 // "solid" (opaque, with a thin soft edge where a voxel is partly filled) or "layers" (the low end
-// of the window faint, the top opaque).
+// of the window faint, the top opaque). sheets: { axis, k, flat } keeps only every k-th layer of
+// the lattice across a recipe axis (the cut's) inside the volume, where only a cut face shows it:
+// the same budget then draws the cut face about k^(1/3) times finer. Its outer surface keeps every
+// layer (the points with a neighbor outside the window), so the skin stays smooth. flat (a thin
+// slice) keeps the sheets only, each splat flattened to its sheet.
 export function buildVolume(
   k,
   V,
-  { lo, hi, colors = "gray", opacity = "solid", budget, rand = Math.random },
+  { lo, hi, colors = "gray", opacity = "solid", budget, rand = Math.random, sheets = null },
 ) {
-  // prettier-ignore
   const map = (COLORMAPS[colors] || COLORMAPS.gray).map;
   const [sx, sy, sz] = V.spacing;
   let inside = 0;
   for (let i = 0; i < V.data.length; i++) if (V.data[i] > lo) inside++;
   const voxel = Math.cbrt(sx * sy * sz);
   const room = Math.max(1000, budget * 0.92);
-  let h = Math.cbrt((Math.max(1, inside) * sx * sy * sz) / room);
-  h = Math.max(h, voxel * 0.6);
-  const step = [h / sx, h / sy, h / sz];
+  const K = sheets ? Math.max(1, Math.round(sheets.k)) : 1;
+  const across = sheets ? V.view.findIndex((a) => a.axis === sheets.axis) : -1;
   const { to, half } = placer(V);
   const span = hi - lo || 1;
   const edge = span * 0.12;
-  const pts = [];
   const p = [0, 0, 0];
   const jit = 0.18;
-  for (let z = 0; z <= V.nz - 1 + 1e-6; z += step[2])
-    for (let y = 0; y <= V.ny - 1 + 1e-6; y += step[1])
-      for (let x = 0; x <= V.nx - 1 + 1e-6; x += step[0]) {
-        if (pts.length / 6 >= budget) break;
-        // A little jitter breaks up the lattice's lines on a cut face.
-        const px = x + (rand() - 0.5) * jit * step[0];
-        const py = y + (rand() - 0.5) * jit * step[1];
-        const pz = z + (rand() - 0.5) * jit * step[2];
-        const v = sampleAt(V, px, py, pz);
-        if (!(v > lo)) continue;
-        let m = v;
-        const nb = [];
-        for (const [dx, dy, dz] of NEAR) {
-          const w = sampleAt(V, px + dx, py + dy, pz + dz);
-          nb.push(w);
-          if (w > m) m = w;
+  const sample = (h) => {
+    const step = [h / sx, h / sy, h / sz];
+    const pts = [];
+    const idx = [0, 0, 0];
+    for (let z = 0, iz = 0; z <= V.nz - 1 + 1e-6; z += step[2], iz++)
+      for (let y = 0, iy = 0; y <= V.ny - 1 + 1e-6; y += step[1], iy++)
+        for (let x = 0, ix = 0; x <= V.nx - 1 + 1e-6; x += step[0], ix++) {
+          if (pts.length / 7 >= budget * 1.3) return pts;
+          idx[0] = ix;
+          idx[1] = iy;
+          idx[2] = iz;
+          const onSheet = across < 0 || idx[across] % K === 0;
+          if (!onSheet && sheets.flat) continue;
+          // A little jitter breaks up the lattice's lines on a cut face (none across the
+          // sheets, so each sheet stays flat).
+          const px = x + (across === 0 ? 0 : (rand() - 0.5) * jit * step[0]);
+          const py = y + (across === 1 ? 0 : (rand() - 0.5) * jit * step[1]);
+          const pz = z + (across === 2 ? 0 : (rand() - 0.5) * jit * step[2]);
+          const v = sampleAt(V, px, py, pz);
+          if (!(v > lo)) continue;
+          let m = v;
+          let low = Infinity;
+          const nb = [];
+          for (const [dx, dy, dz] of NEAR) {
+            const w = sampleAt(V, px + dx, py + dy, pz + dz);
+            nb.push(w);
+            if (w > m) m = w;
+            if (w < low) low = w;
+          }
+          // Between the sheets, only the outer surface.
+          if (!onSheet && low > lo) continue;
+          // Shading baked from the volume's gradient (its surfaces lit from above and in
+          // front); inside, where the values are even (a cut face), the color is left as it is.
+          const g = [(nb[0] - nb[1]) / (2 * sx), (nb[2] - nb[3]) / (2 * sy), (nb[4] - nb[5]) / (2 * sz)]; // prettier-ignore
+          const gv = [0, 0, 0];
+          for (let a = 0; a < 3; a++) gv[V.view[a].axis] = -V.view[a].sign * g[a];
+          const gl = Math.hypot(gv[0], gv[1], gv[2]);
+          const edgeAmt = smoothstep(0, 0.35, (gl * voxel) / span);
+          const lit = gl > 0 ? Math.max(0, (gv[0] * LIGHT[0] + gv[1] * LIGHT[1] + gv[2] * LIGHT[2]) / gl) : 1; // prettier-ignore
+          const shade = lerp(1, 0.42 + 0.7 * lit, edgeAmt);
+          to(px, py, pz, p);
+          pts.push(p[0], p[1], p[2], v, m, shade, onSheet ? 1 : 0);
         }
-        // Shading baked from the volume's gradient (its surfaces lit from above and in front);
-        // inside, where the values are even (a cut face), the color is left as it is.
-        const g = [(nb[0] - nb[1]) / (2 * sx), (nb[2] - nb[3]) / (2 * sy), (nb[4] - nb[5]) / (2 * sz)]; // prettier-ignore
-        const gv = [0, 0, 0];
-        for (let a = 0; a < 3; a++) gv[V.view[a].axis] = -V.view[a].sign * g[a];
-        const gl = Math.hypot(gv[0], gv[1], gv[2]);
-        const edgeAmt = smoothstep(0, 0.35, (gl * voxel) / span);
-        const lit = gl > 0 ? Math.max(0, (gv[0] * LIGHT[0] + gv[1] * LIGHT[1] + gv[2] * LIGHT[2]) / gl) : 1; // prettier-ignore
-        const shade = lerp(1, 0.42 + 0.7 * lit, edgeAmt);
-        to(px, py, pz, p);
-        pts.push(p[0], p[1], p[2], v, m, shade);
-      }
-  const n = pts.length / 6;
+    return pts;
+  };
+  // The pitch: first as if the sheets held everything, then corrected by the count (the
+  // surface between the sheets adds to it).
+  let h = Math.max(voxel * 0.6, Math.cbrt((Math.max(1, inside) * sx * sy * sz) / (room * K)));
+  let pts = sample(h);
+  for (let pass = 0; pass < 3 && pts.length / 7 > budget; pass++) {
+    h *= Math.cbrt(pts.length / 7 / room) * 1.01;
+    pts = sample(h);
+  }
+  if (pts.length / 7 > budget) pts.length = budget * 7;
+  const n = pts.length / 7;
+  const hn = h * K; // between sheets
   const s = h * 0.68;
+  // Sheet splats reach toward the next sheet (flat ones stay thin); surface splats are round.
+  const sheetScales = [s, s, s];
+  if (sheets) sheetScales[sheets.axis] = sheets.flat ? Math.max(s * 0.35, hn * 0.12) : Math.max(s, hn * 0.55); // prettier-ignore
+  const roundScales = [s, s, s];
   k.cloud({ count: n * (160000 / k.count), jitter: 0 }, (r, i) => {
     if (i >= n) return null;
-    const v = pts[i * 6 + 3];
-    const t = clamp((pts[i * 6 + 4] - lo) / span, 0, 1);
+    const v = pts[i * 7 + 3];
+    const t = clamp((pts[i * 7 + 4] - lo) / span, 0, 1);
     const a =
       opacity === "layers"
         ? 0.1 + 0.9 * smoothstep(0, 0.85, clamp((v - lo) / span, 0, 1)) ** 1.4
         : 0.35 + 0.65 * smoothstep(lo, lo + edge, v);
-    const sh = pts[i * 6 + 5];
+    const sh = pts[i * 7 + 5];
     const col = map(t);
     return {
-      p: [pts[i * 6], pts[i * 6 + 1], pts[i * 6 + 2]],
+      p: [pts[i * 7], pts[i * 7 + 1], pts[i * 7 + 2]],
       color: [Math.min(1, col[0] * sh), Math.min(1, col[1] * sh), Math.min(1, col[2] * sh)],
-      scales: [s, s, s],
+      scales: pts[i * 7 + 6] ? sheetScales : roundScales,
       opacity: a,
       kind: "volume",
       params: [clamp((v - lo) / span, 0.002, 1), 0],
       pattern: false,
     };
   });
-  return { n, pitch: h, half, inside };
+  return { n, pitch: h, sheet: hn, half, inside };
 }
 
 // The maximum-intensity projection along a recipe axis (0 right, 1 up, 2 toward the viewer), drawn
