@@ -54,7 +54,7 @@ test("every ball: its own bounce, room to roll and a landing sound", async ({ pa
   console.log(`balls: ${JSON.stringify(out)}`);
   for (const [id, e] of Object.entries(BALLS)) {
     expect(out[id].e, id).toBeCloseTo(e, 2);
-    expect(out[id].room, id).toBeCloseTo(4, 2);
+    expect(out[id].room, id).toBeCloseTo(3, 2);
     expect(out[id].cue, id).toBe(true);
   }
   // Confirmed masses (hands-on-materials.json): the 16 lb bowling ball, a

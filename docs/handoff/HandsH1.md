@@ -69,13 +69,14 @@ first); the Balls PR is stacked on it. Clips next.
   - A Level 1 toy's walls sit just past it (a ball's middle could move only 0.45 toy radii), so no
     ball could roll, slide or skid: `hands.area` moves them out, as wheels already did.
   - `hands.view` (0.8 by default): the view drifted 0.8 of the way after a tossed toy, so a kicked
-    ball barely moved on screen; the balls use 0.55.
+    ball barely moved on screen; the balls use 0.6 with `area: 3`, so a hard flick stays on a
+    phone's screen.
   - `hands.friction`: `applyMaterial` keeps the floor at least as grippy as 0.7, so a puck (0.04)
     stopped within a quarter of a toy radius; the puck's floor is ice now.
   - `hands.soft`: a whole toy's landing squish over the SOFT list (the bouncy ball's 0.15).
   - A shelf shape (procedural, no recipe) takes the gummy bear's stretch from its shelf entry's
     `grab` (the jelly blob).
-- Balls: 22 balls get `hands: { area: 4, view: 0.55, material, sound }` (and `soft: 0.15` on the
+- Balls: 22 balls get `hands: { area: 3, view: 0.6, material, sound }` (and `soft: 0.15` on the
   bouncy ball, which squashed flat like jelly) (the basketball, beach ball and water polo ball are
   the engine lane's demo toys and stay as they are). Real numbers from
   `tools/hands-on-materials.json`: its confirmed values override the presets (masses and sizes for
