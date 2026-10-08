@@ -110,3 +110,17 @@ test("touch: a toy without it has no Extras (plays exactly as before)", () => {
   expect(x).not.toBeNull();
   expect(motion.hands).toBe(x.about);
 });
+
+test("follow with at: a press there is followed, elsewhere it picks the toy up", () => {
+  const { ho, x } = fakeHands({ follow: { at: (p) => p[1] > 0.3 } });
+  ho.player.toRecipe = (p) => p.slice();
+  ho.player.recipeRay = () => ({ origin: [0, 0, 5], dir: [0, 0, -1] });
+  // On the head: Extras takes the drag, and the finger is there for the drive.
+  expect(x.pressAt([0, 0.5, 0], 10, 10)).toBe(true);
+  expect(x.about.finger).not.toBeNull();
+  x.release();
+  expect(x.about.finger).toBeNull();
+  // On the body: left to Hands-on, which picks the toy up.
+  expect(x.pressAt([0, -0.2, 0], 10, 10)).toBe(false);
+  expect(x.about.finger).toBeNull();
+});
