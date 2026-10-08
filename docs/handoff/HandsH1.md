@@ -55,43 +55,45 @@ file. The engine files belong to the merged engines; another lane's toys are the
 - You run in Claude Code on the owner's Mac, signed in to his second Claude account. Follow
   docs/OPERATING.md, "Local lanes", exactly: your own port (4187), the local test set, messages as
   comments on your PR that start "From the Operator", the "READY:", "WORKING:" or "BLOCKED:" line at
-  the top of "## State", and clips on page 2 or on `claude/clips-HandsH1`.
-- The Operator (a cloud session) runs the lanes; the owner, Ryan, talks only to the Operator and is
-  often away from the Mac. Never ask him anything in the terminal or wait for him: put questions in
-  "State", move on to the next item, and keep going.
-- Model: Opus 5.5 only, at the default effort. If `/model` shows another model, stop and say so in
-  "State". At most one helper at a time, same model.
-- Merging: the Operator merges. Never merge anything. An engine change is its own small, additive
-  "Engine: …" PR on `claude/lane-hands-h1-engine`, merged first; toys not using it behave exactly as
-  before.
-- Hands-on play only adds to a toy: with the ✋ switch off, every toy plays exactly as before, and
-  old `#s=` links and saved scenes keep loading. A change the public sees waits for the owner's
-  marks before it merges.
-- Every effect follows the effect quality rules in CLAUDE.md (real motion of solid pieces, separate
-  things moving separately, break-apart into real pieces that come back), judged as phone-size
-  clips, and works with the toy upright, on its side and upside down.
-- Licenses, for every asset and dataset (CLAUDE.md, "Ground rules"): read the license on the live
-  source page; record it in CREDITS.md, `tools/assets.json` (or `tools/models.json`) and the toy's
-  in-app credit; `"nc": true` on NC assets; never ND, unlicensed, personal-use or paid. A license
-  not on that list (ODbL, CERN-OHL, government terms, "free with attribution") is a question for the
-  Operator in "State", not a file in the repo. Nothing human (people, faces, human anatomy or human
-  scans) without the owner's yes. No logos or brand names.
-- A static site: data becomes splats at build time (your `tools/hh1-*.mjs`; any new devDependency
-  pinned and listed in LICENSES.md). The page never calls a data service or needs a key, and big
-  files load only when the toy opens. Keep sizes inside the phone budgets.
-- Work through the items in order. Open your draft PR early ("Phase Hands-on H1, <shelf>: …", five
-  sections from CLAUDE.md, naming Opus 5.5), push after each finished item with "State" updated, and
-  run long jobs (clips, tests) in the background.
-- Language: American English in every new text (color, center, gray, license, -ize endings, dates
-  like "October 3, 2026").
-- Read first: CLAUDE.md; docs/OPERATING.md ("Local lanes", "Steps for a lane", "A lane's end");
-  docs/HANDS-ON-PLAN.md (your shelves' lines); docs/PACKS.md, sections 5f, 5g and 5h (the engine
-  pieces) and its earlier hands-on section; docs/handoff/Physics.md, HandsEngineA.md,
-  HandsEngineB.md and HandsEngineC.md; docs/audits/hands-l1-sweep-2026-10.md and
-  docs/audits/hands-on-materials-2026-10.md.
-- Before every push: CLAUDE.md, "Before every push", with the local test set. At the end: "A lane's
-  end".
+  the top of "## State
 
-## State
+WORKING: Balls shelf (October 8, 2026, cloud session, Opus 5.5). Engine PR #421 is up (merge it
+first); the Balls PR is stacked on it. Clips next.
 
-WORKING: not started yet (October 3, 2026).
+## Notes
+
+- Engine PR #421 (`claude/lane-hands-h1-engine`), four fixes found while wiring the balls:
+  - A material's `nose` acted on the ground too, so the shuttlecock flipped over and over as it slid
+    and never rested (8 toy radii per second for 2 s after landing). Now it acts only in the air,
+    its pull grows with the speed squared, and its swing is damped near critically.
+  - A Level 1 toy's walls sit just past it (a ball's middle could move only 0.45 toy radii), so no
+    ball could roll, slide or skid: `hands.area` moves them out, as wheels already did.
+  - `hands.view` (0.8 by default): the view drifted 0.8 of the way after a tossed toy, so a kicked
+    ball barely moved on screen; the balls use 0.4.
+  - `hands.friction`: `applyMaterial` keeps the floor at least as grippy as 0.7, so a puck (0.04)
+    stopped within a quarter of a toy radius; the puck's floor is ice now.
+- Balls: 22 balls get `hands: { area: 4, view: 0.4, material, sound }` (the basketball, beach ball
+  and water polo ball are the engine lane's demo toys and stay as they are). Real numbers from
+  `tools/hands-on-materials.json`: its confirmed values override the presets (masses and sizes for
+  most; the pickleball's 0.62 bounce; the shuttlecock's drag coefficient 0.7); its estimates do not.
+  Two presets changed for the effect: the football's grab spin is 0.08 (a grab at one end tumbled it
+  end over end instead of a spiral), and the squash ball starts at 0.25, its first warm value (the
+  preset's 0.3 made the first throw deader than the ball at rest).
+- Landing sounds: each ball's from its own tap's cues (`LANDS` in `src/packs/balls.js`); on the
+  Sound Board as "ready" (`tools/sound-review.json`, candidate `hh1`).
+- `tests/hea-engine.spec.mjs` used the soccer ball as "a toy without these pieces"; it uses the neon
+  knot now (Level 1 only in the plan).
+- Tools: `tools/hh1-measure.mjs` (drop and throw, bounce peaks and rest times),
+  `tools/hh1-probe.mjs` (a snippet in the page with a toy open in Hands-on), `tools/hh1-clip.mjs`
+  (`tools/phy-clip.mjs` at device scale 3, with a drag that starts from where the tossed toy is now,
+  for the volleyball's spike).
+
+## Known issues
+
+- With the camera looking down at the floor from the side, a throw to the right also goes away from
+  the camera, so on a phone a ball's roll shows partly as getting smaller.
+- The walls are invisible: a ball that rolls 3 toy radii stops against one.
+
+## For the Operator
+
+- Merge the engine PR #421 before the Balls PR.

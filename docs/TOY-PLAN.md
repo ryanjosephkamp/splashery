@@ -521,7 +521,8 @@ Proposals below are suggestions; the owner may change them.
   - Effect: Keepy-uppy: three small kicks with spin.
   - Improved: E6a: keepy-uppy: three small kicks from an unseen foot, each with its own spin, the
     last one higher; then it drops and bounces lower and lower (it keeps about 0.78 of its speed)
-    and settles (3.6 s).
+    and settles (3.6 s). Hands-on H1: in Hands-on, kick it with a flick: it bounces, rolls and slows
+    on the ground (0.43 kg, FIFA size 5). It lands with its own sound.
   - Sound: Firm thump.
 - **American football** (`american-football`). Now: tap: Throw a spiral. Plan: keep.
   - Owner: The owner (2026-09-24): some sports balls look grainy rather than realistic; the tennis
@@ -532,7 +533,9 @@ Proposals below are suggestions; the owner may change them.
   - Improved: E1b: a spiral pass: it flies up nose first, spinning fast about its long axis, the
     nose tipping over at the top, and lands with a wobble (2.4 s). Math: the spiral is six whole
     turns, so it lands laces up with no snap back, and the ball is built twice, half a turn apart,
-    so its laces never show through while it is upside down.
+    so its laces never show through while it is upside down. Hands-on H1: in Hands-on, throw it from
+    one end: it spirals about its long axis in the air and takes odd bounces on its points. It lands
+    with its own sound.
   - Sound: Leathery whoosh.
 - **Tennis ball** (`tennis-ball`). Now: tap: Bounce it hard. Plan: keep.
   - Owner: The owner (2026-09-24): some sports balls look grainy rather than realistic; the tennis
@@ -542,7 +545,9 @@ Proposals below are suggestions; the owner may change them.
     also softens the edge), and a clean white seam.
   - Effect: Fast high bounce with the fuzz fluffing out.
   - Improved: E6a: slammed onto the floor, it squashes hard and shoots up high with topspin, the
-    fuzz fluffing out at each hit; each bounce is lower (0.75 of its speed) (1.7 s).
+    fuzz fluffing out at each hit; each bounce is lower (0.75 of its speed) (1.7 s). Hands-on H1: in
+    Hands-on, throw it: a fast, high bounce (about 0.75 of its speed kept, the ITF drop test). It
+    lands with its own sound.
   - Sound: A real tennis ball slammed down, then a real tennis-ball bounce on each bounce, softer
     each time.
 - **Baseball** (`baseball`). Now: tap: Pitch a curveball. Plan: keep.
@@ -550,14 +555,16 @@ Proposals below are suggestions; the owner may change them.
   - Effect: Curveball: it spins hard and swerves.
   - Improved: E6a: a curveball: wound up, then pitched away spinning hard, it breaks down and to the
     side late; the crack of the bat sends it back in a looping arc to its spot, where it takes a
-    dead little bounce. Its highlight stays put while it spins (2.3 s).
+    dead little bounce. Its highlight stays put while it spins (2.3 s). Hands-on H1: in Hands-on,
+    throw it with a sideways flick: the spin curves its path. It lands with its own sound.
   - Sound: The same pitch whoosh, then the crack of a real wooden bat.
 - **Softball** (`softball`). Now: tap: Pitch underhand. Plan: keep.
   - Fixed: C1: smooth yellow leather with a soft sheen and crisp raised red stitches.
   - Effect: Underhand arc and a softer thud.
   - Improved: E6a: an underhand pitch: a swing back and through, then a high, slow arc away with a
     little backspin; it lands with a soft thud and hardly bounces; a softer toss brings it back (3.0
-    s).
+    s). Hands-on H1: in Hands-on, throw it: a heavier (188 g), softer bounce than the baseball. It
+    lands with its own sound.
   - Sound: The same whoosh, then the real dull thump of a heavy ball landing (away and back home).
     Its motion has no bat (an underhand pitch that lands), so the landing is what sounded like a
     hit; a bat crack would need a bat hit in the motion.
@@ -572,19 +579,23 @@ Proposals below are suggestions; the owner may change them.
 - **Golf ball** (`golf-ball`). Now: tap: Chip it. Plan: keep.
   - Effect: Tiny chip hop and a spin-back.
   - Improved: E6a: a chip: it pops up with heavy backspin, lands, checks with a tiny hop, and the
-    backspin grips and pulls it back to its spot (1.7 s).
+    backspin grips and pulls it back to its spot (1.7 s). Hands-on H1: in Hands-on, chip it from low
+    down: it hops, and the backspin pulls it back. It lands with its own sound.
   - Sound: Click of a club.
 - **Rugby ball** (`rugby-ball`). Now: tap: Punt. Plan: keep.
   - Fixed: C1: an even pebbled grip; clean seams.
   - Effect: Tumbles end over end with an odd bounce.
   - Improved: E1b: a punt: it tumbles end over end up and down, lands on a point and takes an
-    awkward bounce before settling (2.6 s).
+    awkward bounce before settling (2.6 s). Hands-on H1: in Hands-on, punt it from low down: it
+    tumbles end over end and bounces unpredictably. It lands with its own sound.
   - Sound: Dull thud.
 - **Volleyball** (`volleyball`). Now: tap: Set and spike. Plan: keep.
   - Fixed: C1: smooth leather panels with a sheen and clean fine seams.
   - Effect: A set then a spike straight down.
   - Improved: E6a: a soft set straight up with no spin, then a spike drives it down hard with
-    topspin; it slams into the floor, kicks up high and bounces out (2.5 s).
+    topspin; it slams into the floor, kicks up high and bounces out (2.5 s). Hands-on H1: in
+    Hands-on, toss it up, then catch it in the air and swipe down to spike it. It lands with its own
+    sound.
   - Sound: Slap.
 - **Water polo ball** (`water-polo-ball`). Now: tap: Toss it in. Plan: keep.
   - Effect: Bobs on an invisible water line with ripples.
@@ -596,20 +607,24 @@ Proposals below are suggestions; the owner may change them.
 - **Ping-pong ball** (`ping-pong-ball`). Now: tap: Drop it. Plan: keep.
   - Effect: Rapid tiny bounces getting faster.
   - Improved: E6a: flicked up, it bounces on and on (it keeps nearly 0.9 of its speed), each bounce
-    lower and quicker, till it buzzes to a stop; a tik for every bounce (1.9 s).
+    lower and quicker, till it buzzes to a stop; a tik for every bounce (1.9 s). Hands-on H1: in
+    Hands-on, lift it and let go: light, rapid bounces (about 0.88 of its speed kept) that speed up
+    to a buzz. It lands with its own sound.
   - Sound: Tik-tik-tik.
 - **Cricket ball** (`cricket-ball`). Now: tap: Seam-up flick. Plan: keep.
   - Fixed: C1: polished red leather with a bright highlight and a raised, lit seam.
   - Effect: Seam-up spin and a skid.
   - Improved: E6a: a seam-up flick: the seam stands upright while the ball spins backwards about it,
     then it comes down level and skids on with its backspin till the spin grips and rolls it home.
-    Its shine stays put while it spins (1.9 s).
+    Its shine stays put while it spins (1.9 s). Hands-on H1: in Hands-on, bowl it down at the
+    ground: it skids off the seam and rolls. It lands with its own sound.
   - Sound: Crisp leather knock.
 - **Bowling ball** (`bowling-ball`). Now: tap: Bowl it. Plan: keep.
   - Effect: Heavy roll with a hook.
   - Improved: E6a: a heavy roll with a hook: it drops onto the lane with a thud, rolls away straight
     and hooks across, the finger holes turning over; the pins crash far off and it rolls back home
-    (3.8 s).
+    (3.8 s). Hands-on H1: in Hands-on, roll it: heavy (6.8 kg) and slow, hooking as it goes. It
+    lands with its own sound.
   - Sound: A real bowling ball rolling down the lane, real pins crashing far off, and the roll back.
 - **Pool ball** (`pool-ball`). Now: tap: Draw shot. Plan: keep.
   - Fixed: E1b: fully opaque polished resin with a sharp window highlight and a soft room
@@ -617,29 +632,35 @@ Proposals below are suggestions; the owner may change them.
   - Effect: Clicks forward and spins with back-spin.
   - Improved: E6a: a draw shot: struck low, it slides forward spinning backwards, stops, and the
     backspin pulls it back till it rolls cleanly home. The window highlight and the room's
-    reflection stay put while the number turns (1.8 s).
+    reflection stay put while the number turns (1.8 s). Hands-on H1: in Hands-on, flick it: it
+    slides, then rolls on far; a low flick draws back. It lands with its own sound.
   - Sound: The real solid tock of a cue tip striking the ball.
 - **Pickleball** (`pickleball`). Now: tap: Pop it up. Plan: keep.
   - Effect: Light pop-up with air whistling through the holes.
   - Improved: E6a: popped up twice off an unseen paddle, the light holed ball slows fast in the air
     and knuckles (it wobbles without much spin), then lands with a hollow click and a small, dead
-    bounce (1.9 s).
+    bounce (1.9 s). Hands-on H1: in Hands-on, toss it: a light (24 g), dull pop (0.62 of its speed
+    kept, as measured). It lands with its own sound.
   - Sound: Its hollow plastic pock, without the whistle.
 - **Dodgeball** (`dodgeball`). Now: tap: Slam it down. Plan: keep.
   - Effect: Squashes hard on a bounce.
   - Improved: E6a: lifted and slammed down, the soft rubber squashes flat and wobbles, bounces up
-    lively and squashes again at each landing (2.2 s).
+    lively and squashes again at each landing (2.2 s). Hands-on H1: in Hands-on, throw it at the
+    ground: it squashes and rebounds. It lands with its own sound.
   - Sound: Rubbery bwong.
 - **Medicine ball** (`medicine-ball`). Now: tap: Heave and drop. Plan: keep.
   - Fixed: C1: matte rubber grip (low bumps, no shine), and a faint rim of light on dark pages.
   - Effect: Barely lifts and lands with a heavy squash.
   - Improved: E6a: heaved up only a little, slowly, it drops with a heavy thud and a big, slow
-    squash, no bounce at all, and a puff of dust spreads out along the floor (1.6 s).
+    squash, no bounce at all, and a puff of dust spreads out along the floor (1.6 s). Hands-on H1:
+    in Hands-on, heave it: very heavy, it lands with a thud and barely bounces. It lands with its
+    own sound.
   - Sound: Heavy thud.
 - **Lacrosse ball** (`lacrosse-ball`). Now: tap: Slam it down. Plan: keep.
   - Effect: Very fast, hard bounces.
   - Improved: E6a: slammed down, the hard rubber ball rockets up and bounces hard and fast, the
-    liveliest ball on the shelf (0.83 of its speed kept) (1.9 s).
+    liveliest ball on the shelf (0.83 of its speed kept) (1.9 s). Hands-on H1: in Hands-on, throw
+    it: hard, fast, lively bounces. It lands with its own sound.
   - Sound: Hard rubber knock.
 - **Squash ball** (`squash-ball`). Now: tap: Warm it up. Plan: keep.
   - Owner: Weird; hard to see on dark.
@@ -647,12 +668,16 @@ Proposals below are suggestions; the owner may change them.
     at the silhouette); invisible on a light page.
   - Effect: Warms up: glows faintly as it bounces faster.
   - Improved: E6a: cold, it is dead: dropped, it hardly bounces. Hit over and over, it warms, glows
-    faintly and bounces higher and faster; let go, it bounces out and cools (2.6 s).
+    faintly and bounces higher and faster; let go, it bounces out and cools (2.6 s). Hands-on H1: in
+    Hands-on, throw it: a dead bounce that gets livelier with each throw, as a squash ball warms. It
+    lands with its own sound.
   - Sound: Dead, low squash thock.
 - **Bouncy ball** (`bouncy-ball`). Now: tap: Throw it down. Plan: keep.
   - Effect: Wild ricochet bounces all over, then home.
   - Improved: E6a: thrown down hard, it ricochets all over the floor, keeping nearly all its speed,
-    its spin flipping at every bounce, then comes home and settles (2.5 s).
+    its spin flipping at every bounce, then comes home and settles (2.5 s). Hands-on H1: in
+    Hands-on, throw it down: it ricochets wildly, losing almost no height. It lands with its own
+    sound.
   - Sound: Springy boing that rises.
 - **Marble** (`marble`). Now: tap: Roll it. Plan: keep.
   - Owner: Super neat.
@@ -660,7 +685,8 @@ Proposals below are suggestions; the owner may change them.
   - Improved: E6a: it rolls round a little circle, turning the way it rolls, and after one lap is
     back exactly as it was; the swirl inside turns as it goes (2.4 s). Fix7: the glass shell reads
     as polished glass: a faint tint that is clear face on and denser toward the rim, reflecting a
-    light sky above and a darker floor below (no added highlights).
+    light sky above and a darker floor below (no added highlights). Hands-on H1: in Hands-on, flick
+    it: it rolls far, and clinks on hard landings. It lands with its own sound.
   - Sound: The same real marble roll, about 6 dB quieter (Sound C, October 2, 2026).
 - **Hockey puck** (`hockey-puck`). Now: tap: Slap shot. Plan: keep.
   - Owner: Underwhelming.
@@ -668,19 +694,24 @@ Proposals below are suggestions; the owner may change them.
   - Effect: Slides and spins flat, throwing up ice sparkle.
   - Improved: E1c: a slap shot. Sparkling ice chips spray from where the stick hit, and the puck
     glides flat across the ice, spinning fast, round a wide loop and back to its spot (3 s).
+    Hands-on H1: in Hands-on, flick it: it slides flat a long way on low friction. It lands with its
+    own sound.
   - Sound: Stick slap and ice scrape.
 - **Shuttlecock** (`shuttlecock`). Now: tap: Hit it. Plan: keep.
   - Owner: Cool.
   - Effect: Flips over and floats down feathers-up.
   - Improved: E1b: hit up: it flips over cork first and flies up spinning, turns over at the top and
-    floats back down cork first, spinning slower as it falls (3 s).
+    floats back down cork first, spinning slower as it falls (3 s). Hands-on H1: in Hands-on, toss
+    it any way up: it flips and falls cork first, then tips onto its side. It lands with its own
+    sound.
   - Sound: Light racket tock.
 - **Flying disc** (`flying-disc`). Now: tap: Throw. Plan: keep.
   - Owner: Looks fine.
   - Fixed: C1: glossy plastic with a highlight and two moulded flight rings.
   - Effect: Spins fast and hovers, tilting.
   - Improved: E1b: thrown: it spins fast and flat, banks into a curve, glides round a loop like a
-    returning throw and settles back (3 s).
+    returning throw and settles back (3 s). Hands-on H1: in Hands-on, throw it from the rim with a
+    flick: it spins, glides and banks before landing. It lands with its own sound.
   - Sound: Whirring whoosh.
 
 ## Anatomy (7)

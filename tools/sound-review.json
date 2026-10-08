@@ -118,25 +118,148 @@
       "candidates": []
     },
     "tennis-ball": {
-      "status": "site",
-      "said": "The tennis ball does not sound like a tennis ball. It sounds more like a ping pong ball right now. If we can make it sound a little bit more like a real tennis ball, I'd appreciate that.",
+      "status": "ready",
+      "said": "The tennis ball does not sound like a tennis ball. It sounds more like a ping pong ball right now. If we can make it sound a little bit more like a real tennis ball, I'd appreciate that. (Hands-on H1, October 8, 2026) New: its landing in Hands-on, to hear on the Sound Board. Its tap sound is unchanged.",
       "note": "It sounds like a ping-pong ball; it should sound like a real tennis ball.",
-      "plan": "A real tennis ball slammed down, then a real tennis-ball bounce on each bounce, softer each time.",
-      "candidates": []
+      "plan": "Now: in Hands-on, a thrown tennis ball lands with its own sound, from its tap's own cues (louder the harder it lands). On the board: three landings, hard to soft.",
+      "candidates": [
+        {
+          "id": "hh1",
+          "label": "Hands-on landings (new)",
+          "sound": [
+            {
+              "voice": "sample",
+              "file": "tennis-ball-bounce.mp3",
+              "pitch": 1,
+              "vol": 0.77,
+              "fallback": {
+                "voice": "pock",
+                "f": 820,
+                "vol": 0.63
+              },
+              "at": 0
+            },
+            {
+              "voice": "sample",
+              "file": "tennis-ball-bounce.mp3",
+              "pitch": 1,
+              "vol": 0.44000000000000006,
+              "fallback": {
+                "voice": "pock",
+                "f": 820,
+                "vol": 0.36000000000000004
+              },
+              "at": 0.45
+            },
+            {
+              "voice": "sample",
+              "file": "tennis-ball-bounce.mp3",
+              "pitch": 1,
+              "vol": 0.22000000000000003,
+              "fallback": {
+                "voice": "pock",
+                "f": 820,
+                "vol": 0.18000000000000002
+              },
+              "at": 0.9
+            }
+          ]
+        }
+      ]
     },
     "baseball": {
-      "status": "site",
-      "said": "The baseball, the sound is nearly perfect, but when it gets hit by the invisible bat or whatever, it doesn't sound like it's being hit by, like, a bat. We can make it sound like it's being hit by a wooden bat.",
+      "status": "ready",
+      "said": "The baseball, the sound is nearly perfect, but when it gets hit by the invisible bat or whatever, it doesn't sound like it's being hit by, like, a bat. We can make it sound like it's being hit by a wooden bat. (Hands-on H1, October 8, 2026) New: its landing in Hands-on, to hear on the Sound Board. Its tap sound is unchanged.",
       "note": "Nearly perfect, but the hit should sound like a wooden bat.",
-      "plan": "The same pitch whoosh, then the crack of a real wooden bat.",
-      "candidates": []
+      "plan": "Now: in Hands-on, a thrown baseball lands with its own sound, from its tap's own cues (louder the harder it lands). On the board: three landings, hard to soft.",
+      "candidates": [
+        {
+          "id": "hh1",
+          "label": "Hands-on landings (new)",
+          "sound": [
+            {
+              "voice": "thud",
+              "f": 150,
+              "bright": 0.5,
+              "decay": 0.6,
+              "vol": 0.7,
+              "at": 0
+            },
+            {
+              "voice": "thud",
+              "f": 150,
+              "bright": 0.5,
+              "decay": 0.6,
+              "vol": 0.4,
+              "at": 0.45
+            },
+            {
+              "voice": "thud",
+              "f": 150,
+              "bright": 0.5,
+              "decay": 0.6,
+              "vol": 0.2,
+              "at": 0.9
+            }
+          ]
+        }
+      ]
     },
     "softball": {
-      "status": "site",
-      "said": "The softball is kind of the same situation as the baseball.",
+      "status": "ready",
+      "said": "The softball is kind of the same situation as the baseball. (Hands-on H1, October 8, 2026) New: its landing in Hands-on, to hear on the Sound Board. Its tap sound is unchanged.",
       "note": "Like the baseball: the hit should sound like a real bat.",
-      "plan": "The same whoosh, then the real dull thump of a heavy ball landing (away and back home). Its motion has no bat (an underhand pitch that lands), so the landing is what sounded like a hit; a bat crack would need a bat hit in the motion.",
-      "candidates": []
+      "plan": "Now: in Hands-on, a thrown softball lands with its own sound, from its tap's own cues (louder the harder it lands). On the board: three landings, hard to soft.",
+      "candidates": [
+        {
+          "id": "hh1",
+          "label": "Hands-on landings (new)",
+          "sound": [
+            {
+              "voice": "sample",
+              "file": "tennis-ball-slam.mp3",
+              "pitch": 0.6,
+              "vol": 0.84,
+              "fallback": {
+                "voice": "thud",
+                "f": 130,
+                "bright": 0.25,
+                "decay": 0.8,
+                "vol": 0.7
+              },
+              "at": 0
+            },
+            {
+              "voice": "sample",
+              "file": "tennis-ball-slam.mp3",
+              "pitch": 0.6,
+              "vol": 0.48,
+              "fallback": {
+                "voice": "thud",
+                "f": 130,
+                "bright": 0.25,
+                "decay": 0.8,
+                "vol": 0.4
+              },
+              "at": 0.45
+            },
+            {
+              "voice": "sample",
+              "file": "tennis-ball-slam.mp3",
+              "pitch": 0.6,
+              "vol": 0.24,
+              "fallback": {
+                "voice": "thud",
+                "f": 130,
+                "bright": 0.25,
+                "decay": 0.8,
+                "vol": 0.2
+              },
+              "at": 0.9
+            }
+          ]
+        }
+      ]
     },
     "beach-ball": {
       "status": "site",
@@ -146,39 +269,185 @@
       "candidates": []
     },
     "golf-ball": {
-      "status": "keep",
-      "said": "The golf ball is okay. I think that it's okay. Yeah, never mind. The golf ball is fine, I think.",
+      "status": "ready",
+      "said": "The golf ball is okay. I think that it's okay. Yeah, never mind. The golf ball is fine, I think. (Hands-on H1, October 8, 2026) New: its landing in Hands-on, to hear on the Sound Board. Its tap sound is unchanged.",
       "note": "It's fine.",
-      "plan": "Keep the current sound.",
-      "candidates": []
+      "plan": "Now: in Hands-on, a thrown golf ball lands with its own sound, from its tap's own cues (louder the harder it lands). On the board: three landings, hard to soft.",
+      "candidates": [
+        {
+          "id": "hh1",
+          "label": "Hands-on landings (new)",
+          "sound": [
+            {
+              "voice": "clack",
+              "f": 3000,
+              "decay": 0.6,
+              "vol": 0.48999999999999994,
+              "at": 0
+            },
+            {
+              "voice": "clack",
+              "f": 3000,
+              "decay": 0.6,
+              "vol": 0.27999999999999997,
+              "at": 0.45
+            },
+            {
+              "voice": "clack",
+              "f": 3000,
+              "decay": 0.6,
+              "vol": 0.13999999999999999,
+              "at": 0.9
+            }
+          ]
+        }
+      ]
     },
     "bowling-ball": {
-      "status": "site",
-      "said": "For the bowling ball, I feel like we can make it sound just a little bit more like a bowling ball rolling on the bowling alley floor, and then when it hits the invisible pins, those need to sound like actual pins falling down. There is a real sound. You could probably find a sound pack that contains that that's realistic. Right now it just sounds a little too much like a toy. Real pins, like bowling alley pins, have a characteristic sound that you can find that's pretty consistent. This is close, but it's not quite right.",
+      "status": "ready",
+      "said": "For the bowling ball, I feel like we can make it sound just a little bit more like a bowling ball rolling on the bowling alley floor, and then when it hits the invisible pins, those need to sound like actual pins falling down. There is a real sound. You could probably find a sound pack that contains that that's realistic. Right now it just sounds a little too much like a toy. Real pins, like bowling alley pins, have a characteristic sound that you can find that's pretty consistent. This is close, but it's not quite right. (Hands-on H1, October 8, 2026) New: its landing in Hands-on, to hear on the Sound Board. Its tap sound is unchanged.",
       "note": "Close, but too toy-like: it should sound like a ball rolling down a real lane and real pins falling.",
-      "plan": "A real bowling ball rolling down the lane, real pins crashing far off, and the roll back.",
-      "candidates": []
+      "plan": "Now: in Hands-on, a thrown bowling ball lands with its own sound, from its tap's own cues (louder the harder it lands). On the board: three landings, hard to soft.",
+      "candidates": [
+        {
+          "id": "hh1",
+          "label": "Hands-on landings (new)",
+          "sound": [
+            {
+              "voice": "thud",
+              "f": 60,
+              "bright": 0.2,
+              "decay": 1.4,
+              "vol": 1,
+              "at": 0
+            },
+            {
+              "voice": "thud",
+              "f": 60,
+              "bright": 0.2,
+              "decay": 1.4,
+              "vol": 0.7,
+              "at": 0.45
+            },
+            {
+              "voice": "thud",
+              "f": 60,
+              "bright": 0.2,
+              "decay": 1.4,
+              "vol": 0.5,
+              "at": 0.9
+            }
+          ]
+        }
+      ]
     },
     "pool-ball": {
-      "status": "site",
-      "said": "The pool ball sounds a little too high-pitched. It almost sounds like the pool ball is hollow or something. It should have the sound that's made when somebody actually hits, like, a pool ball with a pool stick. So it should sound a bit more solid, if that makes any sense. You can also probably find that. It's a pretty characteristic sound.",
+      "status": "ready",
+      "said": "The pool ball sounds a little too high-pitched. It almost sounds like the pool ball is hollow or something. It should have the sound that's made when somebody actually hits, like, a pool ball with a pool stick. So it should sound a bit more solid, if that makes any sense. You can also probably find that. It's a pretty characteristic sound. (Hands-on H1, October 8, 2026) New: its landing in Hands-on, to hear on the Sound Board. Its tap sound is unchanged.",
       "note": "Too high-pitched and hollow; it should sound solid, like a real cue striking a pool ball.",
-      "plan": "The real solid tock of a cue tip striking the ball.",
-      "candidates": []
+      "plan": "Now: in Hands-on, a thrown pool ball lands with its own sound, from its tap's own cues (louder the harder it lands). On the board: three landings, hard to soft.",
+      "candidates": [
+        {
+          "id": "hh1",
+          "label": "Hands-on landings (new)",
+          "sound": [
+            {
+              "voice": "clack",
+              "f": 1800,
+              "decay": 0.7,
+              "vol": 0.7,
+              "at": 0
+            },
+            {
+              "voice": "clack",
+              "f": 1800,
+              "decay": 0.7,
+              "vol": 0.4,
+              "at": 0.45
+            },
+            {
+              "voice": "clack",
+              "f": 1800,
+              "decay": 0.7,
+              "vol": 0.2,
+              "at": 0.9
+            }
+          ]
+        }
+      ]
     },
     "pickleball": {
-      "status": "site",
-      "said": "I've never played pickleball, so I don't know if the whistling sound is realistic. It's kind of annoying. If we could change that, I'd appreciate it, unless it's really realistic. Maybe we could change how the whistle sounds at the very least.",
+      "status": "ready",
+      "said": "I've never played pickleball, so I don't know if the whistling sound is realistic. It's kind of annoying. If we could change that, I'd appreciate it, unless it's really realistic. Maybe we could change how the whistle sounds at the very least. (Hands-on H1, October 8, 2026) New: its landing in Hands-on, to hear on the Sound Board. Its tap sound is unchanged.",
       "note": "The whistling is annoying; change it unless it's truly realistic.",
-      "plan": "Its hollow plastic pock, without the whistle.",
-      "candidates": []
+      "plan": "Now: in Hands-on, a thrown pickleball lands with its own sound, from its tap's own cues (louder the harder it lands). On the board: three landings, hard to soft.",
+      "candidates": [
+        {
+          "id": "hh1",
+          "label": "Hands-on landings (new)",
+          "sound": [
+            {
+              "voice": "pock",
+              "f": 1100,
+              "bright": 0.2,
+              "decay": 0.8,
+              "vol": 0.7,
+              "at": 0
+            },
+            {
+              "voice": "pock",
+              "f": 1100,
+              "bright": 0.2,
+              "decay": 0.8,
+              "vol": 0.4,
+              "at": 0.45
+            },
+            {
+              "voice": "pock",
+              "f": 1100,
+              "bright": 0.2,
+              "decay": 0.8,
+              "vol": 0.2,
+              "at": 0.9
+            }
+          ]
+        }
+      ]
     },
     "marble": {
-      "status": "site",
-      "said": "(October 2, 2026, review) The marble is a little too loud. The sound is close. ... It's just, like, kind of annoyingly loud by default.",
+      "status": "ready",
+      "said": "(October 2, 2026, review) The marble is a little too loud. The sound is close. ... It's just, like, kind of annoyingly loud by default. (Hands-on H1, October 8, 2026) New: its landing in Hands-on, to hear on the Sound Board. Its tap sound is unchanged.",
       "note": "Same sound, quieter by default (or a slightly better real marble recording).",
-      "plan": "Now: The same real marble roll, about 6 dB quieter (Sound C).",
-      "candidates": [],
+      "plan": "Now: in Hands-on, a thrown marble lands with its own sound, from its tap's own cues (louder the harder it lands). On the board: three landings, hard to soft.",
+      "candidates": [
+        {
+          "id": "hh1",
+          "label": "Hands-on landings (new)",
+          "sound": [
+            {
+              "voice": "clack",
+              "f": 2600,
+              "decay": 0.5,
+              "vol": 0.5599999999999999,
+              "at": 0
+            },
+            {
+              "voice": "clack",
+              "f": 2600,
+              "decay": 0.5,
+              "vol": 0.32000000000000006,
+              "at": 0.45
+            },
+            {
+              "voice": "clack",
+              "f": 2600,
+              "decay": 0.5,
+              "vol": 0.16000000000000003,
+              "at": 0.9
+            }
+          ]
+        }
+      ],
       "round": "2026-10-02"
     },
     "solar-system": {
@@ -2631,32 +2900,147 @@
       "candidates": []
     },
     "soccer-ball": {
-      "status": "approved",
-      "said": "",
+      "status": "ready",
+      "said": "(Hands-on H1, October 8, 2026) New: its landing in Hands-on, to hear on the Sound Board. Its tap sound is unchanged.",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
-      "plan": "",
-      "candidates": []
+      "plan": "Now: in Hands-on, a thrown soccer ball lands with its own sound, from its tap's own cues (louder the harder it lands). On the board: three landings, hard to soft.",
+      "candidates": [
+        {
+          "id": "hh1",
+          "label": "Hands-on landings (new)",
+          "sound": [
+            {
+              "voice": "thud",
+              "f": 100,
+              "bright": 0.45,
+              "vol": 0.77,
+              "at": 0
+            },
+            {
+              "voice": "thud",
+              "f": 100,
+              "bright": 0.45,
+              "vol": 0.44000000000000006,
+              "at": 0.45
+            },
+            {
+              "voice": "thud",
+              "f": 100,
+              "bright": 0.45,
+              "vol": 0.22000000000000003,
+              "at": 0.9
+            }
+          ]
+        }
+      ]
     },
     "american-football": {
-      "status": "approved",
-      "said": "",
+      "status": "ready",
+      "said": "(Hands-on H1, October 8, 2026) New: its landing in Hands-on, to hear on the Sound Board. Its tap sound is unchanged.",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
-      "plan": "",
-      "candidates": []
+      "plan": "Now: in Hands-on, a thrown american football lands with its own sound, from its tap's own cues (louder the harder it lands). On the board: three landings, hard to soft.",
+      "candidates": [
+        {
+          "id": "hh1",
+          "label": "Hands-on landings (new)",
+          "sound": [
+            {
+              "voice": "thud",
+              "f": 95,
+              "bright": 0.3,
+              "vol": 0.7,
+              "at": 0
+            },
+            {
+              "voice": "thud",
+              "f": 95,
+              "bright": 0.3,
+              "vol": 0.4,
+              "at": 0.45
+            },
+            {
+              "voice": "thud",
+              "f": 95,
+              "bright": 0.3,
+              "vol": 0.2,
+              "at": 0.9
+            }
+          ]
+        }
+      ]
     },
     "rugby-ball": {
-      "status": "approved",
-      "said": "",
+      "status": "ready",
+      "said": "(Hands-on H1, October 8, 2026) New: its landing in Hands-on, to hear on the Sound Board. Its tap sound is unchanged.",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
-      "plan": "",
-      "candidates": []
+      "plan": "Now: in Hands-on, a thrown rugby ball lands with its own sound, from its tap's own cues (louder the harder it lands). On the board: three landings, hard to soft.",
+      "candidates": [
+        {
+          "id": "hh1",
+          "label": "Hands-on landings (new)",
+          "sound": [
+            {
+              "voice": "thud",
+              "f": 90,
+              "bright": 0.35,
+              "decay": 1,
+              "vol": 0.7,
+              "at": 0
+            },
+            {
+              "voice": "thud",
+              "f": 90,
+              "bright": 0.35,
+              "decay": 1,
+              "vol": 0.4,
+              "at": 0.45
+            },
+            {
+              "voice": "thud",
+              "f": 90,
+              "bright": 0.35,
+              "decay": 1,
+              "vol": 0.2,
+              "at": 0.9
+            }
+          ]
+        }
+      ]
     },
     "volleyball": {
-      "status": "approved",
-      "said": "",
+      "status": "ready",
+      "said": "(Hands-on H1, October 8, 2026) New: its landing in Hands-on, to hear on the Sound Board. Its tap sound is unchanged.",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
-      "plan": "",
-      "candidates": []
+      "plan": "Now: in Hands-on, a thrown volleyball lands with its own sound, from its tap's own cues (louder the harder it lands). On the board: three landings, hard to soft.",
+      "candidates": [
+        {
+          "id": "hh1",
+          "label": "Hands-on landings (new)",
+          "sound": [
+            {
+              "voice": "thud",
+              "f": 120,
+              "bright": 0.5,
+              "vol": 0.7,
+              "at": 0
+            },
+            {
+              "voice": "thud",
+              "f": 120,
+              "bright": 0.5,
+              "vol": 0.4,
+              "at": 0.45
+            },
+            {
+              "voice": "thud",
+              "f": 120,
+              "bright": 0.5,
+              "vol": 0.2,
+              "at": 0.9
+            }
+          ]
+        }
+      ]
     },
     "water-polo-ball": {
       "status": "approved",
@@ -2666,74 +3050,375 @@
       "candidates": []
     },
     "ping-pong-ball": {
-      "status": "approved",
-      "said": "",
+      "status": "ready",
+      "said": "(Hands-on H1, October 8, 2026) New: its landing in Hands-on, to hear on the Sound Board. Its tap sound is unchanged.",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
-      "plan": "",
-      "candidates": []
+      "plan": "Now: in Hands-on, a thrown ping pong ball lands with its own sound, from its tap's own cues (louder the harder it lands). On the board: three landings, hard to soft.",
+      "candidates": [
+        {
+          "id": "hh1",
+          "label": "Hands-on landings (new)",
+          "sound": [
+            {
+              "voice": "pock",
+              "f": 2000,
+              "bright": 0.7,
+              "decay": 0.5,
+              "vol": 1,
+              "at": 0
+            },
+            {
+              "voice": "pock",
+              "f": 2000,
+              "bright": 0.7,
+              "decay": 0.5,
+              "vol": 0.7,
+              "at": 0.45
+            },
+            {
+              "voice": "pock",
+              "f": 2000,
+              "bright": 0.7,
+              "decay": 0.5,
+              "vol": 0.5,
+              "at": 0.9
+            }
+          ]
+        }
+      ]
     },
     "cricket-ball": {
-      "status": "approved",
-      "said": "",
+      "status": "ready",
+      "said": "(Hands-on H1, October 8, 2026) New: its landing in Hands-on, to hear on the Sound Board. Its tap sound is unchanged.",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
-      "plan": "",
-      "candidates": []
+      "plan": "Now: in Hands-on, a thrown cricket ball lands with its own sound, from its tap's own cues (louder the harder it lands). On the board: three landings, hard to soft.",
+      "candidates": [
+        {
+          "id": "hh1",
+          "label": "Hands-on landings (new)",
+          "sound": [
+            {
+              "voice": "thud",
+              "f": 140,
+              "bright": 0.55,
+              "decay": 0.6,
+              "vol": 0.7,
+              "at": 0
+            },
+            {
+              "voice": "thud",
+              "f": 140,
+              "bright": 0.55,
+              "decay": 0.6,
+              "vol": 0.4,
+              "at": 0.45
+            },
+            {
+              "voice": "thud",
+              "f": 140,
+              "bright": 0.55,
+              "decay": 0.6,
+              "vol": 0.2,
+              "at": 0.9
+            }
+          ]
+        }
+      ]
     },
     "dodgeball": {
-      "status": "approved",
-      "said": "",
+      "status": "ready",
+      "said": "(Hands-on H1, October 8, 2026) New: its landing in Hands-on, to hear on the Sound Board. Its tap sound is unchanged.",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
-      "plan": "",
-      "candidates": []
+      "plan": "Now: in Hands-on, a thrown dodgeball lands with its own sound, from its tap's own cues (louder the harder it lands). On the board: three landings, hard to soft.",
+      "candidates": [
+        {
+          "id": "hh1",
+          "label": "Hands-on landings (new)",
+          "sound": [
+            {
+              "voice": "boing",
+              "f": 150,
+              "to": 0.7,
+              "rate": 20,
+              "decay": 0.6,
+              "vol": 0.7,
+              "at": 0
+            },
+            {
+              "voice": "boing",
+              "f": 150,
+              "to": 0.7,
+              "rate": 20,
+              "decay": 0.6,
+              "vol": 0.4,
+              "at": 0.45
+            },
+            {
+              "voice": "boing",
+              "f": 150,
+              "to": 0.7,
+              "rate": 20,
+              "decay": 0.6,
+              "vol": 0.2,
+              "at": 0.9
+            }
+          ]
+        }
+      ]
     },
     "medicine-ball": {
-      "status": "approved",
-      "said": "",
+      "status": "ready",
+      "said": "(Hands-on H1, October 8, 2026) New: its landing in Hands-on, to hear on the Sound Board. Its tap sound is unchanged.",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
-      "plan": "",
-      "candidates": []
+      "plan": "Now: in Hands-on, a thrown medicine ball lands with its own sound, from its tap's own cues (louder the harder it lands). On the board: three landings, hard to soft.",
+      "candidates": [
+        {
+          "id": "hh1",
+          "label": "Hands-on landings (new)",
+          "sound": [
+            {
+              "voice": "thud",
+              "f": 55,
+              "bright": 0.15,
+              "decay": 1.6,
+              "vol": 1,
+              "at": 0
+            },
+            {
+              "voice": "thud",
+              "f": 55,
+              "bright": 0.15,
+              "decay": 1.6,
+              "vol": 0.7,
+              "at": 0.45
+            },
+            {
+              "voice": "thud",
+              "f": 55,
+              "bright": 0.15,
+              "decay": 1.6,
+              "vol": 0.5,
+              "at": 0.9
+            }
+          ]
+        }
+      ]
     },
     "lacrosse-ball": {
-      "status": "approved",
-      "said": "",
+      "status": "ready",
+      "said": "(Hands-on H1, October 8, 2026) New: its landing in Hands-on, to hear on the Sound Board. Its tap sound is unchanged.",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
-      "plan": "",
-      "candidates": []
+      "plan": "Now: in Hands-on, a thrown lacrosse ball lands with its own sound, from its tap's own cues (louder the harder it lands). On the board: three landings, hard to soft.",
+      "candidates": [
+        {
+          "id": "hh1",
+          "label": "Hands-on landings (new)",
+          "sound": [
+            {
+              "voice": "pock",
+              "f": 620,
+              "bright": 0.8,
+              "vol": 0.7,
+              "at": 0
+            },
+            {
+              "voice": "pock",
+              "f": 620,
+              "bright": 0.8,
+              "vol": 0.4,
+              "at": 0.45
+            },
+            {
+              "voice": "pock",
+              "f": 620,
+              "bright": 0.8,
+              "vol": 0.2,
+              "at": 0.9
+            }
+          ]
+        }
+      ]
     },
     "squash-ball": {
-      "status": "approved",
-      "said": "",
+      "status": "ready",
+      "said": "(Hands-on H1, October 8, 2026) New: its landing in Hands-on, to hear on the Sound Board. Its tap sound is unchanged.",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
-      "plan": "",
-      "candidates": []
+      "plan": "Now: in Hands-on, a thrown squash ball lands with its own sound, from its tap's own cues (louder the harder it lands). On the board: three landings, hard to soft.",
+      "candidates": [
+        {
+          "id": "hh1",
+          "label": "Hands-on landings (new)",
+          "sound": [
+            {
+              "voice": "pock",
+              "f": 380,
+              "bright": 0.1,
+              "decay": 1.2,
+              "vol": 0.7,
+              "at": 0
+            },
+            {
+              "voice": "pock",
+              "f": 430,
+              "bright": 0.1,
+              "decay": 1.2,
+              "vol": 0.4,
+              "at": 0.45
+            },
+            {
+              "voice": "pock",
+              "f": 455,
+              "bright": 0.1,
+              "decay": 1.2,
+              "vol": 0.2,
+              "at": 0.9
+            }
+          ]
+        }
+      ]
     },
     "bouncy-ball": {
-      "status": "approved",
-      "said": "",
+      "status": "ready",
+      "said": "(Hands-on H1, October 8, 2026) New: its landing in Hands-on, to hear on the Sound Board. Its tap sound is unchanged.",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
-      "plan": "",
-      "candidates": []
+      "plan": "Now: in Hands-on, a thrown bouncy ball lands with its own sound, from its tap's own cues (louder the harder it lands). On the board: three landings, hard to soft.",
+      "candidates": [
+        {
+          "id": "hh1",
+          "label": "Hands-on landings (new)",
+          "sound": [
+            {
+              "voice": "boing",
+              "f": 300,
+              "to": 2.6,
+              "rate": 16,
+              "decay": 0.5,
+              "vol": 0.7,
+              "at": 0
+            },
+            {
+              "voice": "boing",
+              "f": 300,
+              "to": 2.6,
+              "rate": 16,
+              "decay": 0.5,
+              "vol": 0.4,
+              "at": 0.45
+            },
+            {
+              "voice": "boing",
+              "f": 300,
+              "to": 2.6,
+              "rate": 16,
+              "decay": 0.5,
+              "vol": 0.2,
+              "at": 0.9
+            }
+          ]
+        }
+      ]
     },
     "hockey-puck": {
-      "status": "approved",
-      "said": "",
+      "status": "ready",
+      "said": "(Hands-on H1, October 8, 2026) New: its landing in Hands-on, to hear on the Sound Board. Its tap sound is unchanged.",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
-      "plan": "",
-      "candidates": []
+      "plan": "Now: in Hands-on, a thrown hockey puck lands with its own sound, from its tap's own cues (louder the harder it lands). On the board: three landings, hard to soft.",
+      "candidates": [
+        {
+          "id": "hh1",
+          "label": "Hands-on landings (new)",
+          "sound": [
+            {
+              "voice": "slap",
+              "f": 1500,
+              "vol": 0.5599999999999999,
+              "at": 0
+            },
+            {
+              "voice": "slap",
+              "f": 1500,
+              "vol": 0.32000000000000006,
+              "at": 0.45
+            },
+            {
+              "voice": "slap",
+              "f": 1500,
+              "vol": 0.16000000000000003,
+              "at": 0.9
+            }
+          ]
+        }
+      ]
     },
     "shuttlecock": {
-      "status": "approved",
-      "said": "",
+      "status": "ready",
+      "said": "(Hands-on H1, October 8, 2026) New: its landing in Hands-on, to hear on the Sound Board. Its tap sound is unchanged.",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
-      "plan": "",
-      "candidates": []
+      "plan": "Now: in Hands-on, a thrown shuttlecock lands with its own sound, from its tap's own cues (louder the harder it lands). On the board: three landings, hard to soft.",
+      "candidates": [
+        {
+          "id": "hh1",
+          "label": "Hands-on landings (new)",
+          "sound": [
+            {
+              "voice": "pock",
+              "f": 1500,
+              "bright": 0.6,
+              "decay": 0.5,
+              "vol": 0.35,
+              "at": 0
+            },
+            {
+              "voice": "pock",
+              "f": 1500,
+              "bright": 0.6,
+              "decay": 0.5,
+              "vol": 0.2,
+              "at": 0.45
+            },
+            {
+              "voice": "pock",
+              "f": 1500,
+              "bright": 0.6,
+              "decay": 0.5,
+              "vol": 0.1,
+              "at": 0.9
+            }
+          ]
+        }
+      ]
     },
     "flying-disc": {
-      "status": "approved",
-      "said": "",
+      "status": "ready",
+      "said": "(Hands-on H1, October 8, 2026) New: its landing in Hands-on, to hear on the Sound Board. Its tap sound is unchanged.",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
-      "plan": "",
-      "candidates": []
+      "plan": "Now: in Hands-on, a thrown flying disc lands with its own sound, from its tap's own cues (louder the harder it lands). On the board: three landings, hard to soft.",
+      "candidates": [
+        {
+          "id": "hh1",
+          "label": "Hands-on landings (new)",
+          "sound": [
+            {
+              "voice": "slap",
+              "f": 700,
+              "vol": 0.42,
+              "at": 0
+            },
+            {
+              "voice": "slap",
+              "f": 700,
+              "vol": 0.24,
+              "at": 0.45
+            },
+            {
+              "voice": "slap",
+              "f": 700,
+              "vol": 0.12,
+              "at": 0.9
+            }
+          ]
+        }
+      ]
     },
     "chest": {
       "status": "approved",
