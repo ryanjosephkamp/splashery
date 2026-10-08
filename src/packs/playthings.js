@@ -3224,7 +3224,7 @@ export const RECIPES = {
     hands: {
       floor: -0.77,
       joints: [
-        { type: "dial", part: "key", pivot: ROBOT_KEY, axis: [0, 0, 1], min: 0, max: 6 * Math.PI, spring: 0.6, damping: 2, drag: 0, pos: [0, -0.1, -0.1], pick: [0.4, 0.4, 0.4], also: robotWalk, sound: (ev, vol) => (ev.kind === "stop" ? { voice: "click", vol: 0.4 } : null), turn: (a, da) => (Math.floor(a / 0.6) !== Math.floor((a - da) / 0.6) ? { voice: da > 0 ? "click" : "tick", vol: 0.25 } : null) }, // prettier-ignore
+        { type: "dial", part: "key", pivot: ROBOT_KEY, axis: [0, 0, 1], min: 0, max: 6 * Math.PI, spring: 0.6, damping: 2, drag: 0, pos: [0, -0.1, -0.1], pick: [0.4, 0.4, 0.4], also: robotWalk, sound: (ev, vol) => (ev.kind === "stop" ? { voice: "click", vol: 0.4 } : null), turn: (a, da) => (Math.floor(a / 0.6) !== Math.floor((a - da) / 0.6) ? { voice: "click", f: da > 0 ? 3200 : 2200, vol: da > 0 ? 0.25 : 0.15 } : null) }, // prettier-ignore
       ],
     },
     drive(t, c, out) {

@@ -48,16 +48,17 @@ Proposals below are suggestions; the owner may change them.
   Storm cloud, Lava lamp, Snow globe, Ice swan, Tornado, Rainbow, Iceberg, Waterfall, Ocean wave,
   Ice cream, Watermelon, Jelly, Pancakes, Cupcake, Lollipop, Candy cane, Macarons, Donut, Gummy
   bear, Pretzel, Croissant, Pizza, Burger, Sushi, Taco, Coffee, Apple, Bananas, Orange, Kiwi,
-  Pineapple, Cherries, Grapes, Avocado, Building bricks, Rubber duck, Newton's cradle, Yo-yo, Puzzle
-  cube, Spring toy, Kite, Chess set, Lorenz attractor, Möbius strip, Klein bottle, Menger sponge,
-  Hypercube, Torus knot, Gyroid, Mandelbulb, Seashell spiral, Graph plotter, Surface plotter, Circle
-  and waves, Fourier circles, Pythagoras proof, Rössler attractor, Thomas attractor, Aizawa
-  attractor, 5-cell, 16-cell, 24-cell, Duoprism, Splat equation, Storybook, Music box, Fountain pen,
-  Water bottle, Soda can, Running shoe, Hoodie, Sunglasses, Baseball cap, Sword in the stone,
-  Heraldic shield, Bow and target, Crown, Wizard's orb, Crystal ball, Jellyfish, School of fish,
-  Pufferfish, Nautilus, Snail, Octopus, Sea urchin, Frog, Snowman, Fireworks, Decorated tree, Paper
-  lantern, Diya, Acoustic guitar, Snare drum, Xylophone, Toy piano, Grand piano, Upright piano,
-  Harpsichord, Electronic keyboard, Hot-air balloon, Sports car, Bus, Jet airliner, Sailboat,
+  Pineapple, Cherries, Grapes, Avocado, Building bricks, Rubber duck, Spinning top, Dice, Newton's
+  cradle, Teddy bear, Yo-yo, Puzzle cube, Spring toy, Kite, Paper plane, Origami crane, Balloon dog,
+  Soap bubbles, Wind-up robot, Chess set, Lorenz attractor, Möbius strip, Klein bottle, Menger
+  sponge, Hypercube, Torus knot, Gyroid, Mandelbulb, Seashell spiral, Graph plotter, Surface
+  plotter, Circle and waves, Fourier circles, Pythagoras proof, Rössler attractor, Thomas attractor,
+  Aizawa attractor, 5-cell, 16-cell, 24-cell, Duoprism, Splat equation, Storybook, Music box,
+  Fountain pen, Water bottle, Soda can, Running shoe, Hoodie, Sunglasses, Baseball cap, Sword in the
+  stone, Heraldic shield, Bow and target, Crown, Wizard's orb, Crystal ball, Jellyfish, School of
+  fish, Pufferfish, Nautilus, Snail, Octopus, Sea urchin, Frog, Snowman, Fireworks, Decorated tree,
+  Paper lantern, Diya, Acoustic guitar, Snare drum, Xylophone, Toy piano, Grand piano, Upright
+  piano, Harpsichord, Electronic keyboard, Hot-air balloon, Sports car, Bus, Jet airliner, Sailboat,
   Submarine, Bicycle, Eiffel Tower, Washington Monument, Pyramids of Giza, Twisting supertall,
   Statue of Liberty, White House, Leaning Tower of Pisa, Colosseum, Parthenon, Stonehenge, Big Ben,
   Taj Mahal, Castle, Pagoda, Windmill, Perceptron, Multilayer perceptron, Neural network,
@@ -2080,15 +2081,20 @@ Proposals below are suggestions; the owner may change them.
   - Owner: Effect is OK; it needs a quack.
   - Effect: Keep the effect.
   - Improved: C2: the same squeeze and hop, now with a bob and rock that settles by about 1.8 s. The
-    quack is Phase D.
+    quack is Phase D. Hands-on H1: in Hands-on, press and hold it and it squashes down with a
+    squeak; let go and it springs back with a wobble. Tossed, it is a light, hollow rubber toy.
   - Sound: Rubber duck quack.
 - **Spinning top** (`spinning-top`). Now: tap: Spin it. Plan: keep.
   - Owner: Perfect.
+  - Improved: Hands-on H1: in Hands-on, flick it round to spin it: it stands straight while fast,
+    wobbles wider as it slows and topples onto its side (tip and rim on the floor).
   - Sound: A soft flick as it starts; its spin is a quiet real hum that follows its speed (louder
     and a little higher when fast, gone as it slows), also when a drag spins it (Sound C, October 2,
     2026).
 - **Dice** (`dice`). Now: tap: Roll. Plan: keep.
   - Owner: Maybe my favourite; rolls feel random like real dice. Keep it.
+  - Improved: Hands-on H1: in Hands-on, throw them: each die tumbles, bounces and lands on a real
+    face (two rounded cubes, or the d20's corners), with a clatter.
   - Sound: Two dice thrown on a wooden table, bouncing with quicker, quieter knocks and settling;
     real CC0 recordings now (dice-throw.mp3), with the synthesized sound as a fallback.
 - **Newton's cradle** (`newtons-cradle`). Now: tap: Lift and let go. Plan: keep.
@@ -2103,6 +2109,8 @@ Proposals below are suggestions; the owner may change them.
   - Touch or drag interaction (phase F).
 - **Teddy bear** (`teddy-bear`). Now: tap: Wave hello. Plan: keep.
   - Owner: Cute; fine.
+  - Improved: Hands-on H1: in Hands-on, pick it up by its tummy and swing or toss it: its arms and
+    head swing loosely on it and settle once it lands.
   - Sound: The soft rustle of a plush bear's fabric and stuffing; no creak (Sound C, October 2,
     2026).
 - **Yo-yo** (`yo-yo`). Now: tap: Throw. Plan: keep.
@@ -2138,20 +2146,32 @@ Proposals below are suggestions; the owner may change them.
   - Sound: The same, with the wind dialed back.
 - **Paper plane** (`paper-plane`). Now: tap: Barrel roll. Plan: keep.
   - Owner: Fine.
+  - Improved: Hands-on H1: in Hands-on, lift it and throw it along its nose: it glides, dips and
+    lands (about four times as far as it drops).
   - Sound: The same fold and glide, with the air lower (Sound C, October 2, 2026).
 - **Origami crane** (`origami-crane`). Now: tap: Flap the wings. Plan: keep.
   - Owner: Solid as it is.
+  - Improved: Hands-on H1: in Hands-on, pull its tail up or down and the wings flap, as a real
+    flapping crane's do; let go and the tail springs back, the wings flapping a few times.
   - Sound: Paper flutter.
 - **Balloon dog** (`balloon-dog`). Now: tap: Pop. Plan: keep.
   - Owner: Almost perfect.
+  - Improved: Hands-on H1: in Hands-on, press and hold to squeeze it (it bulges and squeaks, and
+    springs back); light as a balloon, it falls slowly and drifts, and bulges as it lands with a
+    squeak.
   - Sound: A real balloon bursting (no whistle first); real CC0 recordings now
     (balloon-dog-pop.mp3), with the synthesized sound as a fallback.
 - **Soap bubbles** (`soap-bubbles`). Now: tap: Blow bubbles. Plan: keep.
   - Owner: Perfect.
+  - Improved: Hands-on H1: in Hands-on, poke a bubble and it pops at once (the first one your finger
+    touches); a new one comes from the wand on its next round.
   - Sound: A soft breath through the wand, and a soft real pop as each bubble bursts while it's
     blown (Sound C, October 2, 2026).
 - **Wind-up robot** (`robot`). Now: tap: Wind it up. Plan: keep.
   - Owner: Perfect.
+  - Improved: Hands-on H1: in Hands-on, circle a finger round its tummy to turn its key (up to three
+    turns, clicking); let go and the key unwinds as it walks off, rocking from foot to foot with its
+    arms swinging, and slows to a stop.
   - Sound: A few clicks of the winding key, then clockwork whirring as it unwinds and its tin feet
     clanking along; real CC0 recordings now (robot-wind.mp3), with the synthesized sound as a
     fallback.
