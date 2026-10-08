@@ -48,6 +48,9 @@ async function textMatch(page, detail, fixed = true) {
     async ([detail, fixed]) => {
       const { app, player } = window.__splashery;
       const m = await import("/src/packs/photo-3d.js");
+      await import("/src/packs/photo-sharp.js")
+        .then((s) => s.setSharpView("photo-3d", "splats"))
+        .catch(() => {}); // Splats, not the Sharp picture view (lane Photo sharp view)
       const W = 480;
       const H = 720;
       const c = document.createElement("canvas");
