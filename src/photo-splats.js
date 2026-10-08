@@ -25,8 +25,8 @@
 //   - the fragment shader (with the kernel, src/kernels.js) finds the
 //     fragment's offset from the splat's center in pixels from the
 //     derivatives of the quad's own coordinates, and samples the photo
-//     there, with explicit gradients (mipmapped, so a small view doesn't
-//     shimmer).
+//     there, at the mip level its vertex worked out (mipmapped, so a small
+//     view doesn't shimmer).
 // The material's chunks, the stream and the varyings are only in place while
 // such a toy shows; every other toy renders exactly as before. While one
 // shows, the splats draw with the raster renderer (WebGPU's compute renderer
@@ -102,6 +102,7 @@ const GLSL_VS_PROJECT =
   `
 uniform vec4 uSpPhotoTu;
 uniform vec4 uSpPhotoTv;
+uniform vec4 uSpPhotoK;
 void spPhotoProject(vec3 c) {
   vec4 ph = spPhotoUnpack(loadSpPhoto().x);
   setSpPhotoA(vec4(0.0));
@@ -118,8 +119,11 @@ void spPhotoProject(vec3 c) {
   float det = du.x * dv.y - du.y * dv.x;
   if (abs(det) < 1e-9) return;
   // the inverse of the 2 by 2 (pixels per u and v): u and v per pixel
-  setSpPhotoA(vec4(ph.xy, 1.0, 0.0));
-  setSpPhotoM(vec4(dv.y, -du.y, -dv.x, du.x) / det);
+  vec4 m = vec4(dv.y, -du.y, -dv.x, du.x) / det;
+  // the photo's mip level for the splat: its texels per screen pixel (a splat is one scale)
+  float lod = log2(max(max(length(m.xy * uSpPhotoK.yz), length(m.zw * uSpPhotoK.yz)), 1e-4));
+  setSpPhotoA(vec4(ph.xy, 1.0, lod));
+  setSpPhotoM(m);
 }
 `;
 
@@ -129,6 +133,7 @@ void spPhotoProject(vec3 c) {
 const WGSL_VS_MODIFY = `
 uniform uSpPhotoTu: vec4f;
 uniform uSpPhotoTv: vec4f;
+uniform uSpPhotoK: vec4f;
 fn modifySplatCenter(center: ptr<function, vec3f>) {
 }
 fn modifySplatRotationScale(originalCenter: vec3f, modifiedCenter: vec3f, rotation: ptr<function, vec4f>, scale: ptr<function, vec3f>) {
@@ -149,15 +154,19 @@ fn modifySplatColor(center: vec3f, color: ptr<function, vec4f>) {
   let dv = (cv.xy * cc.w - cc.xy * cv.w) / (cc.w * cc.w) * hv;
   let det = du.x * dv.y - du.y * dv.x;
   if (abs(det) < 1e-9) { return; }
-  setSpPhotoA(vec4f(ph.xy, 1.0, 0.0));
-  setSpPhotoM(vec4f(dv.y, -du.y, -dv.x, du.x) / det);
+  let m = vec4f(dv.y, -du.y, -dv.x, du.x) / det;
+  let lod = log2(max(max(length(m.xy * uniform.uSpPhotoK.yz), length(m.zw * uniform.uSpPhotoK.yz)), 1e-4));
+  setSpPhotoA(vec4f(ph.xy, 1.0, lod));
+  setSpPhotoM(m);
 }
 `;
 
 // The fragment: its offset from the splat's center in pixels (the quad's
 // coordinates are 0 at the center and change evenly across it), then the
 // photo there. The derivatives are taken first, for every fragment (WGSL
-// wants them in uniform control flow). uSpPhotoK.x is the brightness.
+// wants them in uniform control flow). It samples at the mip level the vertex
+// worked out for the splat (one level a splat costs less than gradients per
+// fragment). uSpPhotoK: x the brightness, y and z the photo's size in texels.
 export const PHOTO_PS = {
   glsl: `
 uniform sampler2D uSpPhoto;
@@ -172,7 +181,7 @@ void spPhotoColor(vec2 uv, inout vec4 color) {
   vec2 p = vec2(gy.y * uv.x - gy.x * uv.y, gx.x * uv.y - gx.y * uv.x) / det;
   vec4 m = getSpPhotoM();
   vec2 t = a.xy + m.xy * p.x + m.zw * p.y;
-  color.rgb = textureGrad(uSpPhoto, t, m.xy, m.zw).rgb * uSpPhotoK.x;
+  color.rgb = textureLod(uSpPhoto, t, a.w).rgb * uSpPhotoK.x;
 }
 `,
   wgsl: `
@@ -189,7 +198,7 @@ fn spPhotoColor(uv: vec2f, color: ptr<function, vec4f>) {
   let p = vec2f(gy.y * uv.x - gy.x * uv.y, gx.x * uv.y - gx.y * uv.x) / det;
   let m = getSpPhotoM();
   let t = a.xy + m.xy * p.x + m.zw * p.y;
-  let c = textureSampleGrad(uSpPhoto, uSpPhotoSampler, t, m.xy, m.zw).rgb;
+  let c = textureSampleLevel(uSpPhoto, uSpPhotoSampler, t, a.w).rgb;
   *color = vec4f(c * uniform.uSpPhotoK.x, (*color).a);
 }
 `,
@@ -254,8 +263,9 @@ export function photoRender(pc, app, on, state = null) {
 
 // The uniforms for a frame. rect: the picture's corners in the world as they
 // rest ({ x0, x1, y0, y1 }, y1 the top, before the toy's body turn), q: the
-// body's turn (quaternion, x y z w), gain: the brightness.
-export function photoUniforms(rect, q = [0, 0, 0, 1], gain = 1) {
+// body's turn (quaternion, x y z w), gain: the brightness, size: the photo's
+// width and height in texels.
+export function photoUniforms(rect, q = [0, 0, 0, 1], gain = 1, size = [1, 1]) {
   const sx = rect.x1 - rect.x0;
   const sy = rect.y1 - rect.y0;
   const rot = (v) => {
@@ -269,6 +279,6 @@ export function photoUniforms(rect, q = [0, 0, 0, 1], gain = 1) {
     map: [1 / sx, -rect.x0 / sx, -1 / sy, rect.y1 / sy],
     tu: [...rot([sx, 0, 0]), 0],
     tv: [...rot([0, -sy, 0]), 0],
-    k: [gain, 0, 0, 0],
+    k: [gain, size[0], size[1], 0],
   };
 }

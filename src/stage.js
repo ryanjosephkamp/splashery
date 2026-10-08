@@ -705,39 +705,55 @@ export class Stage {
       for (const t of [this.toy, ...this.graveyard]) if (t?.photo) t.entity.gsplat.setWorkBufferModifier(MODIFIER_KIT); // prettier-ignore
     }
     this.photo = photoRender(pc, this.app, !!on, this.photo || null);
-    // (the renderer copies the material's parameters when the material is updated)
-    if (on) this.app.scene.gsplat.material.setParameter("uSpPhoto", this.photoTex || this.blankTexture()); // prettier-ignore
+    // The renderer copies the material's parameters when the material is updated, which also
+    // rebuilds its shaders: so the photo is one texture object, set here, and later only resized
+    // and uploaded (an update mid-way broke a WebGPU frame).
+    if (on) this.app.scene.gsplat.material.setParameter("uSpPhoto", this.photoTexture());
     this.applyFragmentChunk();
   }
 
   // The photo (a canvas, an image or a video frame), uploaded with its mipmaps (so a small view of a
-  // large photo doesn't shimmer).
+  // large photo doesn't shimmer). On WebGPU the engine makes a texture's mipmaps with render passes
+  // on the device's command encoder, so there the upload waits for a microtask (after the frame's
+  // encoding) and its passes are sent at once.
   setPhotoSource(source) {
+    if (!this.device.isWebGPU) return this.uploadPhoto(source);
+    this.photoPending = source;
+    if (this.photoQueued) return;
+    this.photoQueued = true;
+    queueMicrotask(() => {
+      this.photoQueued = false;
+      if (!this.photo) return;
+      this.uploadPhoto(this.photoPending);
+      // The mipmaps' passes are on the device's open command encoder; sent now, so the next frame
+      // starts its own (left there, the frame's work-buffer pass was cut off when it was sent).
+      this.device.submit();
+    });
+  }
+
+  photoTexture() {
+    this.photoTex ||= new pc.Texture(this.device, {
+      name: "splashery-photo",
+      width: 4,
+      height: 4,
+      format: pc.PIXELFORMAT_RGBA8,
+      mipmaps: true,
+      minFilter: pc.FILTER_LINEAR_MIPMAP_LINEAR,
+      magFilter: pc.FILTER_LINEAR,
+      addressU: pc.ADDRESS_CLAMP_TO_EDGE,
+      addressV: pc.ADDRESS_CLAMP_TO_EDGE,
+    });
+    return this.photoTex;
+  }
+
+  uploadPhoto(source) {
     const w = source.videoWidth || source.width;
     const h = source.videoHeight || source.height;
     if (!w || !h) return;
-    if (!this.photoTex || this.photoTex.width !== w || this.photoTex.height !== h) {
-      this.photoTex?.destroy();
-      this.photoTex = new pc.Texture(this.device, {
-        name: "splashery-photo",
-        width: w,
-        height: h,
-        format: pc.PIXELFORMAT_RGBA8,
-        mipmaps: true,
-        minFilter: pc.FILTER_LINEAR_MIPMAP_LINEAR,
-        magFilter: pc.FILTER_LINEAR,
-        addressU: pc.ADDRESS_CLAMP_TO_EDGE,
-        addressV: pc.ADDRESS_CLAMP_TO_EDGE,
-      });
-    }
-    const fresh = this.photoTex.getSource() !== source;
-    this.photoTex.setSource(source);
-    this.photoTex.upload();
-    const mat = this.app.scene.gsplat.material;
-    if (fresh || mat.getParameter("uSpPhoto")?.data !== this.photoTex) {
-      mat.setParameter("uSpPhoto", this.photoTex);
-      mat.update();
-    }
+    const tex = this.photoTexture();
+    if (tex.width !== w || tex.height !== h) tex.resize(w, h);
+    tex.setSource(source);
+    tex.upload();
     this.requestRender();
   }
 
