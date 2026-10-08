@@ -18,6 +18,7 @@ import { quatAxisAngle, quatMul, quatFromTo, quatRotate, mix, shade } from "./ki
 import { inked } from "./font.js";
 import { evenBox, evenDisc, evenEllipsoid } from "./packs/even.js";
 import { rigPieces } from "./physics/joints.js"; // lane Hands engine B
+import { DOG_FILL } from "./packs/dog-plush-fill.js"; // lane Fix9
 
 const TAU = Math.PI * 2;
 const clamp = (x, a, b) => Math.min(b, Math.max(a, x));
@@ -87,6 +88,28 @@ const FLY = (() => {
     B: leg([0.66, -0.13, -0.24], [0.8, -0.42, -0.4], [0.92, -0.7, -0.78], [0.88, -0.03, -0.3]),
   };
 })();
+
+// Lane Fix9: the dog plush's hop, as src/motion.js hops a capture without a rig (its hopAt): a
+// bounce with a peak of 1 that falls by e^2 each landing, with a squash as it lands.
+const DOG_HOP_SECS = 1.45;
+function dogHop(t, e = 0.55, period = 0.62) {
+  let start = 0;
+  let dur = period;
+  let amp = 1;
+  for (let k = 0; k < 8; k++) {
+    if (t < start + dur) {
+      const f = (t - start) / dur;
+      const edge = Math.min(f, 1 - f) * dur;
+      const squash = amp * (0.22 * Math.exp(-((edge / 0.05) ** 2)) - 0.06 * Math.sin(Math.PI * f));
+      return { h: amp * 4 * f * (1 - f), squash };
+    }
+    start += dur;
+    dur *= e;
+    amp *= e * e;
+    if (amp < 0.01) break;
+  }
+  return null;
+}
 
 // ---- Closed bases (lane Sharpness B) ----------------------------------------------------
 // Some captures are thin or open underneath, so from below the far side or
@@ -2022,6 +2045,59 @@ export const RIGS = {
       const drop =
         0.012 * Math.abs(spring(e - 2.3, 6, 40)) * band(e, 2.25, 2.35) * (1 - band(e, 2.45, 2.6));
       out.body = { quat: q, offset: [rim[0] - moved[0], rim[1] - moved[1] + drop, rim[2] - moved[2]] }; // prettier-ignore
+    },
+  },
+
+  // Lane Fix9: the dog plush's hidden core. The capture never saw the plush's underside or the
+  // mat under it, so there were holes right through it where it meets the mat (dark gaps under
+  // its head and paws). A solid core fills the plush from the mat up to its lowest fur, cell by
+  // cell (tools/fx9-dog-fill.mjs), each the color of the fur above it, turning a warm shadow brown
+  // toward the mat, as in a crease. The fur covers it everywhere else, so it shows only through those gaps.
+  "dog-plush": {
+    addon: {
+      count: 24000,
+      build(k) {
+        const { grid: G, x0, mat } = DOG_FILL;
+        const cells = DOG_FILL.cells.split(";").map((c) => {
+          const [a, b, h, hex] = c.split(",");
+          return { x: x0 + Number(a) * G, z: x0 + Number(b) * G, h: Number(h) / 100, col: "#" + hex }; // prettier-ignore
+        });
+        // Each cell gets splats by its height (its column's volume).
+        const acc = [];
+        let total = 0;
+        for (const c of cells) acc.push((total += c.h + 0.02));
+        k.cloud({ share: 1, pattern: false }, (rand) => {
+          const r = rand() * total;
+          let lo = 0;
+          let hi = acc.length - 1;
+          while (lo < hi) {
+            const m = (lo + hi) >> 1;
+            if (acc[m] < r) lo = m + 1;
+            else hi = m;
+          }
+          const c = cells[lo];
+          const y = mat - 0.02 + (c.h + 0.02) * rand();
+          const up = Math.max(0, (y - mat) / Math.max(c.h, 0.01));
+          return {
+            p: [c.x + G * rand(), y, c.z + G * rand()],
+            n: [0, 1, 0],
+            flat: 0,
+            jitter: 0,
+            opacity: 1,
+            color: shade(mix(c.col, "#5a3d26", 0.55 * (1 - up)), 0.72 + 0.28 * up),
+          };
+        });
+      },
+    },
+    parts: [],
+    // Its tap is the hop every capture without a rig has (src/motion.js, hopAt): the plush
+    // bounces and settles with a little squash at each landing.
+    controls: [pulse("hop", "Hop", DOG_HOP_SECS)],
+    action: { key: "hop", label: "Hop" },
+    drive(t, c, out) {
+      const e = since(c, "hop", DOG_HOP_SECS);
+      const hop = e < 0 ? null : dogHop(e);
+      if (hop) out.body = { offset: [0, hop.h * 0.5, 0], squash: hop.squash };
     },
   },
 

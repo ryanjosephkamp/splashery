@@ -1,0 +1,592 @@
+<!doctype html>
+<html lang="en" data-root="../../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Lane Sharpness A: sharper toys from the October 2 review, part A · Splashery</title>
+    <meta
+      name="description"
+      content="A lane's handoff file from the Splashery project, as it is in the repo: SharpA."
+    />
+    <meta name="robots" content="noindex" />
+    <link
+      rel="canonical"
+      href="https://ryanjosephkamp.github.io/splashery/site/learn/notebook/sharpa/"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Splashery" />
+    <meta
+      property="og:title"
+      content="Lane Sharpness A: sharper toys from the October 2 review, part A · Splashery"
+    />
+    <meta
+      property="og:description"
+      content="A lane's handoff file from the Splashery project, as it is in the repo: SharpA."
+    />
+    <meta
+      property="og:url"
+      content="https://ryanjosephkamp.github.io/splashery/site/learn/notebook/sharpa/"
+    />
+    <meta
+      property="og:image"
+      content="https://ryanjosephkamp.github.io/splashery/site/assets/og.png"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="A strawberry made of soft 3D splats, beside the word Splashery"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#101010" />
+    <link rel="manifest" href="../../../manifest.webmanifest" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cg opacity='.92'%3E%3Cellipse cx='24' cy='26' rx='14' ry='11' fill='%23ff5fa2'/%3E%3Cellipse cx='40' cy='24' rx='12' ry='13' fill='%237bdff2'/%3E%3Cellipse cx='33' cy='41' rx='15' ry='11' fill='%23ffd166'/%3E%3C/g%3E%3C/svg%3E"
+    />
+    <link rel="apple-touch-icon" href="../../../../assets/app/icon-180.png" />
+    <script>
+      (function () {
+        var d = document.documentElement;
+        d.classList.add("js");
+        try {
+          var t = localStorage.getItem("splashery.site.theme");
+          if (t === "light" || t === "dark") d.dataset.theme = t;
+          var q = new URLSearchParams(location.search).get("labs");
+          if (q === "1") localStorage.setItem("splashery.labs", "1");
+          else if (q === "0") localStorage.removeItem("splashery.labs");
+          if (localStorage.getItem("splashery.labs") === "1") d.classList.add("labs");
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="stylesheet" href="../../../assets/site.css" />
+    <link rel="stylesheet" href="../../../assets/hubs.css" />
+    <link rel="stylesheet" href="../../../assets/outline.css" />
+    <script type="module" src="../../../assets/site.js"></script>
+    <script type="module" src="../../../assets/outline.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to the page</a>
+    <header class="site-header">
+      <div class="bar">
+        <a class="brand" href="../../../" aria-label="Splashery home"
+          ><svg class="logo" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true">
+            <g opacity=".92">
+              <ellipse cx="24" cy="26" rx="14" ry="11" fill="#ff5fa2" />
+              <ellipse cx="40" cy="24" rx="12" ry="13" fill="#7bdff2" />
+              <ellipse cx="33" cy="41" rx="15" ry="11" fill="#ffd166" />
+            </g></svg
+          ><span>Splashery</span></a
+        >
+        <a class="search-link" href="../../../search/" aria-label="Search"
+          ><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+            <circle
+              cx="10.5"
+              cy="10.5"
+              r="6.5"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            />
+            <path
+              d="m15.5 15.5 5 5"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            /></svg
+        ></a>
+        <button type="button" class="menu-button" aria-expanded="false" aria-controls="site-menu">
+          <span class="menu-icon" aria-hidden="true"></span><span class="menu-label">Menu</span>
+        </button>
+        <div class="menu" id="site-menu">
+          <nav aria-label="Site">
+            <ul>
+              <li><a href="../../../">Home</a></li>
+              <li><a href="../../../toys/">Toys</a></li>
+              <li><a href="../../../tools/">Tools</a></li>
+              <li><a href="../../../science/">Science</a></li>
+              <li><a href="../../../studio/">Studio</a></li>
+              <li><a href="../../../learn/" aria-current="page">Learn</a></li>
+              <li><a href="../../../new/">What's new</a></li>
+              <li><a href="../../../about/">About</a></li>
+            </ul>
+          </nav>
+          <form class="search-form" role="search" action="../../../search/" method="get">
+            <label class="visually-hidden" for="site-search">Search toys and pages</label>
+            <input
+              id="site-search"
+              type="search"
+              name="q"
+              placeholder="Search toys"
+              autocomplete="off"
+              enterkeyhint="search"
+            />
+            <button type="submit">Search</button>
+          </form>
+          <button type="button" class="theme-button" aria-label="Color theme: follows your device">
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+              <path d="M12 3a9 9 0 1 0 0 18V3z" fill="currentColor" />
+              <circle
+                cx="12"
+                cy="12"
+                r="8.25"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+              />
+            </svg>
+            <span class="theme-label">Auto</span>
+          </button>
+        </div>
+      </div>
+    </header>
+    <main id="main" tabindex="-1" data-outline>
+      <div class="page-intro">
+        <h1>Lane Sharpness A: sharper toys from the October 2 review, part A</h1>
+        <p class="lead">A lane's handoff file, exactly as the project keeps it.</p>
+      </div>
+      <p class="note"><a href="../../../learn/notebook/">Back to the lab notebook</a></p>
+      <nav class="toc" aria-label="On this page">
+        <h2>On this page</h2>
+        <ul>
+          <li>
+            <ul>
+              <li><a href="#brief">Brief</a></li>
+              <li><a href="#state">State</a></li>
+              <li><a href="#notes">Notes</a></li>
+              <li><a href="#known-issues">Known issues</a></li>
+              <li><a href="#for-the-operator">For the Operator</a></li>
+              <li><a href="#the-storybook-its-own-pr">The storybook (its own PR)</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <section
+        class="md-file"
+        aria-label="Lane Sharpness A: sharper toys from the October 2 review, part A"
+      >
+        <div class="prose">
+          <p>
+            Prefix <code>sha</code>. Branch <code>claude/lane-sharp-a</code>. PR &quot;Phase
+            Sharpness A: sharper landmarks, vehicles, Medieval, Open me, gems, space and
+            weather&quot;. How lanes work: <a href="../../../learn/operating/">OPERATING.md</a>.
+          </p>
+          <h2 id="brief">Brief</h2>
+          <p>(Written by the Operator on October 2, 2026, from the owner's review of that day)</p>
+          <p>
+            On October 2 the owner went through every toy on the preview build
+            (docs/reviews/2026-10-02-mega-review/review.md, word for word). He keeps saying the same
+            thing about many toys: &quot;a little grainy&quot;, &quot;could be sharper&quot;. He
+            wants every one he named sharp before the team moves on, and he approved this lane
+            (&quot;start now&quot;). Read PACKS.md section 7c (&quot;Sharp kit toys&quot;) and
+            docs/handoff/Sharpness.md and FidelityA.md / FidelityB.md (what worked before) first.
+            The materials rule applies: real-looking materials, no see-through solids, no blur, no
+            speckle. Keep every toy's shape, effect, sound and splat budget per tier; only the look
+            gets sharper.
+          </p>
+          <p>Your toys (his words in brackets; read his full note for each in the review):</p>
+          <ul>
+            <li>
+              Landmarks: eiffel-tower (&quot;a little grainy&quot;), pyramids (&quot;could be a
+              little bit sharper overall… the Sphinx is really not that clear&quot;), leaning-tower
+              (&quot;significantly sharper&quot;), colosseum, parthenon, stonehenge, taj-mahal,
+              castle (&quot;I think it could all actually be a bit sharper&quot;), pagoda, windmill.
+            </li>
+            <li>
+              Vehicles: rocket, helicopter, hot-air-balloon, steam-train, ocean-liner (&quot;a
+              little grainy&quot; each).
+            </li>
+            <li>
+              Medieval: trebuchet, crossbow, knights-helmet (&quot;a little grainy&quot;), crown
+              (&quot;a little bit sharper&quot;).
+            </li>
+            <li>
+              Open me: chest, sword-in-stone, gift-box, laptop (&quot;a little bit sharper&quot;),
+              music-box (its wooden box &quot;sharper, kind of like the wooden … Enigma
+              machine&quot;), book (the storybook's text sharper).
+            </li>
+            <li>Clothing: running-shoe (&quot;a little bit sharper&quot;).</li>
+            <li>Gems: amethyst-geode, sapphire, quartz-cluster.</li>
+            <li>Space: spiral-galaxy (&quot;too grainy, so it's a little too blurry&quot;).</li>
+            <li>
+              Weather: storm-cloud (&quot;a tiny bit sharper&quot;), tornado (&quot;the clouds … and
+              the ground could be a little bit sharper… the whole thing&quot;).
+            </li>
+            <li>Holidays: fireworks (the launch tubes &quot;less grainy&quot;).</li>
+          </ul>
+          <p>
+            Work in this order: landmarks, vehicles, Medieval and Open me, the rest. For each toy, a
+            before/after still pair and a short clip of its tap, at 390×844, in your lane record
+            &quot;SharpA&quot; on Effect review page 2 (&quot;built by Opus 5.5&quot;). Batch cards
+            by shelf so the owner can mark a shelf at once. These are public toys: the PR merges
+            after his good marks, so post cards as each shelf is done rather than all at the end. If
+            a toy is better split into its own small PR to merge sooner, say so.
+          </p>
+          <p>
+            Don't touch these toys' sounds (lane Sound C), Fix7's toys and items (storm-cloud's
+            lightning position, the shield, fireworks' rapid taps: coordinate through the Operator
+            if you need the same recipe; your change is the look only), or hollow bases (Sharpness
+            B, later). Check <code>node tools/check-packs.mjs &lt;pack&gt;</code> stays within
+            budget and frame time on every pack you change.
+          </p>
+          <h3 id="you-own">You own</h3>
+          <ul>
+            <li>
+              The looks of the toys above in their pack files (recipes' shapes, materials, splat
+              placement and sizes), their thumbnails, tests/sha.spec.mjs, your
+              <code>sha-*</code> screenshots and docs/handoff/SharpA.md.
+            </li>
+          </ul>
+          <p>
+            Lanes Sound C, Fix7, Physics, UI r5, Photoreal (research), Fluids, Video 3D, Live input,
+            Science and the Integrators run at the same time; leave their files alone. The laptop is
+            locked.
+          </p>
+          <h2 id="state">State</h2>
+          <p>Model: Opus 5.5 (claude-opus-5-5), default effort.</p>
+          <ul>
+            <li>
+              October 2, 2026: 33 of the 34 toys made sharper (all but the laptop, which is locked:
+              see &quot;For the Operator&quot;). The storybook has since moved to a PR of its own
+              (see October 3). Only the look changed: every toy keeps its shape, tap, sound and
+              splat budget (<code>node tools/check-packs.mjs</code> on every changed pack: all
+              within budget and build time). Lane tests in <code>tests/sha.spec.mjs</code>.
+            </li>
+            <li>
+              Cards on Effect review page 2, lane SharpA, two per toy:
+              <code>sha-&lt;toy id&gt;</code> (a before-and-after still at 390×844 on a 3x phone,
+              cropped to the toy, left before and right after) and
+              <code>sha-&lt;toy id&gt;-tap</code> (the tap after the change, an MP4 at 390×844, 2x,
+              the mid tier). Posted by shelf: Landmarks (10 toys), Vehicles (5), Medieval (4) and
+              Open me (5: the sword in the stone is there), then gems, space, weather, holidays and
+              clothing.
+            </li>
+          </ul>
+          <h3 id="what-changed-by-toy">What changed, by toy</h3>
+          <ul>
+            <li>
+              <strong>Landmarks.</strong> Eiffel Tower: the ironwork laid evenly along every girder
+              (<code>lattice(..., { even })</code>), solid decks and piers, calm gravel and lawn.
+              Pyramids: even, solid faces with stone courses as readable steps (lit treads, darker
+              risers) instead of fine blocks that broke into speckle; a larger Sphinx turned
+              three-quarters to the view (lying lion, paws, raised chest, striped headdress and
+              face); an even desert and dunes. Leaning Tower: even columns (no gray flecks), firmer
+              cornices, belfry and drum (more, smaller splats), calm lawn. Colosseum: clean seating
+              steps with broad, soft weathering, an even arena grid, calmer stone and plaza.
+              Parthenon, Stonehenge, Taj Mahal, castle, pagoda and windmill: every solid even and
+              fully opaque, broad weathering instead of speckle, calm lawns (<code>calmGrass</code>)
+              and even water and ground (<code>water(..., { even })</code>,
+              <code>ground(..., { even })</code>). The Taj's white marble takes slightly larger
+              splats (1.15) so its darker far side doesn't show through as gray veins; the pagoda's
+              roofs are even and solid (the red underside showed through).
+            </li>
+            <li>
+              <strong>Vehicles.</strong> <code>rod()</code> takes <code>even</code> (an even cone).
+              Rocket: a solid white body (its gray core showed through), crisper bands. Helicopter:
+              even boom, fin, tailplane and skids. Balloon: an even envelope. Steam train: every
+              part even and solid, calm ballast. Ocean liner: each deck laid as short blocks end to
+              end (a long, thin even face spaces its splats in a hatch, which broke the windows into
+              blobs), a solid hull, regular lights.
+            </li>
+            <li>
+              <strong>Medieval.</strong> <code>beam()</code> takes <code>even</code> (an even box of
+              calm wood, <code>calmWood</code>). Trebuchet and crossbow even and solid (the
+              crossbow's stock is an even rounded box of walnut). Knight's helmet and crown: a much
+              calmer glint (it read as sparkle grain) and slightly larger splats so the dark inside
+              doesn't show through. Sword in the stone: even rock with broad weathering and soft
+              lichen and moss.
+            </li>
+            <li>
+              <strong>Open me.</strong> Chest: even planks, solid straps (the gems inside showed
+              through the lid). Gift box: even paper, lid and bow. Music box: polished wood like the
+              Enigma machine's case (broad soft grain bands with a sheen, smaller splats for crisp
+              edges). (The storybook: see October 3.)
+            </li>
+            <li>
+              <strong>Clothing.</strong> Running shoe (a scan): exact splat sizes (no random size
+              jitter, which frayed the outline), slightly smaller splats and a calmer fabric (each
+              splat's color blended 45% toward its neighbors'), through new, off-by-default options
+              of <code>addScan()</code>.
+            </li>
+            <li>
+              <strong>Gems.</strong> The polytope takes <code>sampleEven</code> and
+              <code>addGem</code> an <code>interior</code>, <code>core</code> and
+              <code>even</code> option. Sapphire: no inner core, larger splats and a calm glint
+              (white specks and floating blue dots gone). Quartz cluster: solid, even crystals (they
+              were 0.9 opacity) with a calm glint and broader growth lines; a calm rock base
+              (<code>calmRock</code>). Amethyst geode: even, solid shell, agate bands and cavity
+              wall; crystal points laid out evenly (<code>crystalCloud(..., { even: true })</code>)
+              with a calmer glint.
+            </li>
+            <li>
+              <strong>Space.</strong> Spiral galaxy: pinpoint stars (smaller, exact sizes), a smooth
+              disc glow laid out on a sunflower spiral, a smooth glow along each arm under its
+              stars, and finer, darker dust lanes.
+            </li>
+            <li>
+              <strong>Weather.</strong> Storm cloud: even, more solid puffs; finer rain streaks (its
+              lightning, Fix7's item, is untouched). Tornado: the funnel's dust spread evenly in a
+              thinner wall, solid even cloud puffs, and the field as a sunflower spiral of solid
+              splats (it was a random disc with its dark underside showing through).
+            </li>
+            <li>
+              <strong>Holidays.</strong> Fireworks: an even, solid crate with a calm grain, and even
+              tubes with broad paper bands and a dark mouth (the bursts and the rapid taps, Fix7's
+              item, are untouched).
+            </li>
+          </ul>
+          <ul>
+            <li>
+              October 2, 2026, 10:30 UTC: every card posted (64). Full suite with main merged in:
+              436 + 256 + 16 passed; two tests (<code>smoke.spec.mjs:650</code>, a SwiftShader
+              console warning, and <code>chs-engine.spec.mjs:11</code>) failed once in the long run
+              and pass on their own. Pushed; PR #172 ready for the owner's marks. No marks yet; an
+              hourly check-in reads them.
+            </li>
+            <li>
+              October 3, 2026, 00:40 UTC: the owner marked 62 of the 64 cards &quot;good&quot;,
+              every toy but the storybook, which he marked &quot;fix&quot;. At the Operator's
+              request (October 2, 23:46 UTC) the storybook left this PR: its recipe in objects.js,
+              its thumbnail, its tests and its <code>sha-book</code> screenshots are back to main's,
+              so everything left in #172 is marked good. The storybook goes on in its own PR,
+              &quot;Phase Sharpness A: the storybook&quot; (branch
+              <code>claude/lane-sharp-a-book</code>), with its round 2 (cards
+              <code>sha-book-r2</code> and <code>sha-book-tap-r2</code>). Main merged in (to
+              4e55c9f; <code>tools/toy-plan.json</code>: Sound C's sapphire sound kept beside the
+              Sharpness note; TOY-PLAN.md regenerated).
+            </li>
+          </ul>
+          <h2 id="notes">Notes</h2>
+          <ul>
+            <li>
+              <p>What made these toys grainy, beyond the five causes in PACKS.md 7c:</p>
+              <ul>
+                <li>
+                  <strong>The far side or the core showing through.</strong> A light solid over a
+                  darker inside (a core color, the inside of a helmet, an underside) shows the dark
+                  between splats as flecks, even when placed evenly. Fix: a core the same color as
+                  the skin (or none), and splats 1.1 to 1.2 times larger on light materials.
+                </li>
+                <li>
+                  <strong>Glints.</strong> <code>kind: &quot;glint&quot;</code> on many splats reads
+                  as sparkle grain at phone size; 0.01 to 0.06 is enough for a soft shine.
+                </li>
+                <li>
+                  <strong>Fine patterns below a splat's size</strong> (stone courses, mortar, wood
+                  grain at 26 to 90 per unit, noise at 20 to 60 per unit) turn into speckle. Keep
+                  pattern features at two splats or more: steps instead of mortar lines, broad grain
+                  bands, noise at 3 to 10 per unit.
+                </li>
+                <li>
+                  <strong>Long, thin even faces</strong> (a deck 4 units long and 0.28 high) space
+                  their splats in a hatch: lay them as short blocks end to end (the liner) or fold
+                  them (<code>rect()</code> in music.js).
+                </li>
+                <li>
+                  <strong>Random clouds</strong> (lattices, galaxy glow, ground discs) want an even
+                  layout too: stratify by the splat's index (<code>(i + 0.5) / n</code>) or a
+                  sunflower spiral.
+                </li>
+              </ul>
+            </li>
+            <li>
+              The kit's random size jitter on clouds (<code>jitter</code> 0.5) frays outlines; scans
+              and dots read crisper with <code>jitter: 0</code>.
+            </li>
+            <li>
+              <code>evenDisc</code> (a param grid) shows radial moiré on a large flat ground; a
+              sunflower spiral cloud doesn't.
+            </li>
+            <li>
+              Tools (scratchpad, not committed): <code>pair.mjs</code> crops a before and after
+              still to the toy and puts them side by side; <code>phone-clip.mjs</code> renders a tap
+              as an MP4 at 390×844 (2x, mid tier) from lossless frames (a GIF's palette adds its own
+              dither, which hides sharpness); <code>evenify.py</code> adds <code>even</code>,
+              <code>opacity</code> and <code>jitter</code> to a builder's <code>k.add</code> calls
+              and swaps in the even shapes.
+            </li>
+          </ul>
+          <h2 id="known-issues">Known issues</h2>
+          <ul>
+            <li>
+              The running shoe is a scan: its fabric is calmer and its outline crisper, but the
+              collar's fuzzy edge is in the capture (edge-on splats); a sharper bake would need the
+              source rebaked at a higher density for the mid tier, a Real objects job.
+            </li>
+            <li>
+              The Leaning Tower's belfry windows and arcades are still a little soft at phone size
+              (small features at the tier's budget).
+            </li>
+          </ul>
+          <h2 id="for-the-operator">For the Operator</h2>
+          <ul>
+            <li>
+              <strong>The laptop:</strong> the brief lists it (&quot;a little bit sharper&quot;),
+              but the owner has locked it. The Operator confirmed on October 2, 2026 (21:05 UTC):
+              leave it exactly as it is on main. This PR does not change it.
+            </li>
+            <li>
+              Shared helpers changed additively (default off): <code>addScan()</code> in
+              real-objects.js (<code>sizeMul</code>, <code>exact</code>, <code>smooth</code>),
+              <code>polytope().sampleEven</code> and <code>addGem</code> options in gems.js,
+              <code>lattice</code>, <code>water</code> and <code>ground</code>
+              <code>even</code> options in landmarks.js, <code>rod</code>'s <code>even</code> in
+              vehicles.js, <code>beam</code>'s <code>even</code> in medieval.js,
+              <code>crystalCloud</code>'s <code>even</code> in gems.js. Every other toy builds
+              exactly as before.
+            </li>
+            <li>
+              A PACKS.md lesson (section 7c): the notes above (show-through, glints, fine patterns,
+              long thin faces, random clouds).
+            </li>
+            <li>
+              If a toy is better merged sooner, the landmarks are self-contained in landmarks.js and
+              could be a PR of their own.
+            </li>
+            <li>
+              <strong>The storybook</strong> is in its own PR
+              (<code>claude/lane-sharp-a-book</code>); see &quot;The storybook&quot; below.
+            </li>
+          </ul>
+          <h2 id="the-storybook-its-own-pr">The storybook (its own PR)</h2>
+          <p>
+            PR &quot;Phase Sharpness A: the storybook&quot;, branch
+            <code>claude/lane-sharp-a-book</code>, made from #172's head once the book had left it
+            (stacked: until #172 merges, its diff shows #172's changes too). Tests in
+            <code>tests/sha-book.spec.mjs</code>.
+          </p>
+          <ul>
+            <li>
+              Round 1 (October 2, 2026): the words on the two open pages are ink dots laid exactly
+              on the font's pixels (2 × 2 per pixel, like the laptop's keys) instead of random page
+              splats colored as ink.
+            </li>
+            <li>
+              <p>
+                Round 2 (October 3, 2026; cards <code>sha-book-r2</code> and
+                <code>sha-book-tap-r2</code>, the old ones <code>replacedBy</code>), for the owner's
+                &quot;fix&quot; mark on round 1 (the page blended into the book, inside and from
+                outside when closed):
+              </p>
+              <ul>
+                <li>
+                  The cause: splats sort in the pose they were built in (the book closed). The
+                  turned last leaf kept that order, so its paper drew over its own words (gray,
+                  washed out), and the cover's inside drew a dark red frame over the left page (on
+                  main too). <code>drive()</code> now asks for <code>out.resortPose</code> on the
+                  first frame and every hundredth of a turn, and on the frame after (the sort uses
+                  the pose the frame starts with). The build sets <code>k.data</code> for that
+                  state.
+                </li>
+                <li>
+                  Closed: the cover's rim is denser (weight 4, the back cover 2.4), so the page
+                  edges no longer bleed white through it; the page block's edge splats are a little
+                  smaller (size 1, weight 2.4).
+                </li>
+                <li>
+                  The pages seen only mid-turn print their words in a soft gray (they have few,
+                  large splats; black read as blots).
+                </li>
+              </ul>
+            </li>
+            <li>
+              Which way and why: the blending had a clear cause with a small fix in the recipe, so
+              round 2 fixes the book as it is rather than rebuilding it on the Your book (PDF) toy.
+              That rebuild (an original storybook PDF with pictures, more pages, pages that flip)
+              stays the fallback if the owner still finds it blends; it would be a new asset and a
+              new way the toy works.
+            </li>
+          </ul>
+          <h3 id="known-issues-the-storybook">Known issues (the storybook)</h3>
+          <ul>
+            <li>
+              Closing: for about a tenth of a second as the cover lands (about 15 to 25 degrees
+              open), the page corner draws over the cover's lower corner. Held still at those angles
+              it shows too, so it is the sort itself, not a lag: sorted where they stand, the leaves
+              and the right page sort in front of the cover's corner there, while the closed book's
+              order draws it right. Stopping the sorts below a quarter turn, or below 30 degrees,
+              made it last longer (the order from the last sort is worse), so the book sorts all the
+              way down. A fix needs the engine's pose sort (<code>posePass</code> in src/pose.js, or
+              how the container sorts near-touching layers): an Engine PR.
+            </li>
+            <li>
+              A toy has at most 15 parts and the storybook uses all 15, so the right page's words
+              cannot be a part that hides while the leaves close over them (a few dark specks show
+              through the closing leaves for a moment).
+            </li>
+            <li>The leaves seen only mid-turn keep their words as page splats (a soft gray).</li>
+          </ul>
+        </div>
+      </section>
+      <p class="note">
+        This page is built from
+        <a
+          data-source
+          href="https://github.com/ryanjosephkamp/splashery/blob/main/docs/handoff/SharpA.md"
+          target="_blank"
+          rel="noopener"
+          >docs/handoff/SharpA.md</a
+        >
+        each time the site is built, so it always matches them.
+      </p>
+    </main>
+    <footer class="site-footer">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="brand" href="../../../"
+            ><svg class="logo" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true">
+              <g opacity=".92">
+                <ellipse cx="24" cy="26" rx="14" ry="11" fill="#ff5fa2" />
+                <ellipse cx="40" cy="24" rx="12" ry="13" fill="#7bdff2" />
+                <ellipse cx="33" cy="41" rx="15" ry="11" fill="#ffd166" />
+              </g></svg
+            ><span>Splashery</span></a
+          >
+          <p>
+            splats you can play with. Free, in your browser, with nothing to install; files you open
+            stay on your device.
+          </p>
+        </div>
+        <nav aria-label="Explore">
+          <h2>Explore</h2>
+          <ul>
+            <li><a href="../../../">Home</a></li>
+            <li><a href="../../../toys/">Toys</a></li>
+            <li><a href="../../../tools/">Tools</a></li>
+            <li><a href="../../../science/">Science</a></li>
+            <li><a href="../../../studio/">Studio</a></li>
+            <li><a href="../../../learn/">Learn</a></li>
+            <li><a href="../../../new/">What's new</a></li>
+            <li><a href="../../../about/">About</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="More">
+          <h2>More</h2>
+          <ul>
+            <li><a href="../../../../" target="_blank" rel="noopener">The gallery</a></li>
+            <li><a href="../../../search/">Search</a></li>
+            <li><a href="../../../../manual/">The Tinkerer's Manual</a></li>
+            <li>
+              <a href="https://github.com/ryanjosephkamp/splashery" target="_blank" rel="noopener"
+                >Source on GitHub</a
+              >
+            </li>
+            <li><a href="../../../share/">Embed and share</a></li>
+            <li><a href="../../../about/credits/">Credits</a></li>
+            <li><a href="../../../about/contact/">Contact</a></li>
+            <li><a href="../../../about/privacy/">Privacy</a></li>
+            <li><a href="../../../about/terms/">Terms</a></li>
+          </ul>
+        </nav>
+      </div>
+      <p class="fine">
+        Made by <a href="../../../about/contact/">Ryan Kamp</a>. Code under the MIT license; each
+        toy's assets keep their own licenses. Built on the PlayCanvas engine. This is a preview of
+        Splashery's new site; the toys live in
+        <a href="../../../../" target="_blank" rel="noopener">the gallery</a>.
+      </p>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,749 @@
+<!doctype html>
+<html lang="en" data-root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>The scene format · Splashery</title>
+    <meta
+      name="description"
+      content="What a Splashery share link or saved scene holds: the toy, its settings, its camera and its look."
+    />
+    <meta name="robots" content="noindex" />
+    <link
+      rel="canonical"
+      href="https://ryanjosephkamp.github.io/splashery/site/learn/scene-format/"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Splashery" />
+    <meta property="og:title" content="The scene format · Splashery" />
+    <meta
+      property="og:description"
+      content="What a Splashery share link or saved scene holds: the toy, its settings, its camera and its look."
+    />
+    <meta
+      property="og:url"
+      content="https://ryanjosephkamp.github.io/splashery/site/learn/scene-format/"
+    />
+    <meta
+      property="og:image"
+      content="https://ryanjosephkamp.github.io/splashery/site/assets/og.png"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="A strawberry made of soft 3D splats, beside the word Splashery"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#101010" />
+    <link rel="manifest" href="../../manifest.webmanifest" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cg opacity='.92'%3E%3Cellipse cx='24' cy='26' rx='14' ry='11' fill='%23ff5fa2'/%3E%3Cellipse cx='40' cy='24' rx='12' ry='13' fill='%237bdff2'/%3E%3Cellipse cx='33' cy='41' rx='15' ry='11' fill='%23ffd166'/%3E%3C/g%3E%3C/svg%3E"
+    />
+    <link rel="apple-touch-icon" href="../../../assets/app/icon-180.png" />
+    <script>
+      (function () {
+        var d = document.documentElement;
+        d.classList.add("js");
+        try {
+          var t = localStorage.getItem("splashery.site.theme");
+          if (t === "light" || t === "dark") d.dataset.theme = t;
+          var q = new URLSearchParams(location.search).get("labs");
+          if (q === "1") localStorage.setItem("splashery.labs", "1");
+          else if (q === "0") localStorage.removeItem("splashery.labs");
+          if (localStorage.getItem("splashery.labs") === "1") d.classList.add("labs");
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="stylesheet" href="../../assets/site.css" />
+    <link rel="stylesheet" href="../../assets/hubs.css" />
+    <link rel="stylesheet" href="../../assets/outline.css" />
+    <script type="module" src="../../assets/site.js"></script>
+    <script type="module" src="../../assets/outline.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to the page</a>
+    <header class="site-header">
+      <div class="bar">
+        <a class="brand" href="../../" aria-label="Splashery home"
+          ><svg class="logo" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true">
+            <g opacity=".92">
+              <ellipse cx="24" cy="26" rx="14" ry="11" fill="#ff5fa2" />
+              <ellipse cx="40" cy="24" rx="12" ry="13" fill="#7bdff2" />
+              <ellipse cx="33" cy="41" rx="15" ry="11" fill="#ffd166" />
+            </g></svg
+          ><span>Splashery</span></a
+        >
+        <a class="search-link" href="../../search/" aria-label="Search"
+          ><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+            <circle
+              cx="10.5"
+              cy="10.5"
+              r="6.5"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            />
+            <path
+              d="m15.5 15.5 5 5"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            /></svg
+        ></a>
+        <button type="button" class="menu-button" aria-expanded="false" aria-controls="site-menu">
+          <span class="menu-icon" aria-hidden="true"></span><span class="menu-label">Menu</span>
+        </button>
+        <div class="menu" id="site-menu">
+          <nav aria-label="Site">
+            <ul>
+              <li><a href="../../">Home</a></li>
+              <li><a href="../../toys/">Toys</a></li>
+              <li><a href="../../tools/">Tools</a></li>
+              <li><a href="../../science/">Science</a></li>
+              <li><a href="../../studio/">Studio</a></li>
+              <li><a href="../../learn/" aria-current="page">Learn</a></li>
+              <li><a href="../../new/">What's new</a></li>
+              <li><a href="../../about/">About</a></li>
+            </ul>
+          </nav>
+          <form class="search-form" role="search" action="../../search/" method="get">
+            <label class="visually-hidden" for="site-search">Search toys and pages</label>
+            <input
+              id="site-search"
+              type="search"
+              name="q"
+              placeholder="Search toys"
+              autocomplete="off"
+              enterkeyhint="search"
+            />
+            <button type="submit">Search</button>
+          </form>
+          <button type="button" class="theme-button" aria-label="Color theme: follows your device">
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+              <path d="M12 3a9 9 0 1 0 0 18V3z" fill="currentColor" />
+              <circle
+                cx="12"
+                cy="12"
+                r="8.25"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+              />
+            </svg>
+            <span class="theme-label">Auto</span>
+          </button>
+        </div>
+      </div>
+    </header>
+    <main id="main" tabindex="-1" data-outline>
+      <div class="page-intro">
+        <h1>The scene format</h1>
+        <p class="lead">What a shared link or a saved scene holds.</p>
+      </div>
+
+      <nav class="toc" aria-label="On this page">
+        <h2>On this page</h2>
+        <ul>
+          <li>
+            <ul>
+              <li><a href="#shape">Shape</a></li>
+              <li><a href="#fields">Fields</a></li>
+              <li><a href="#links">Links</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <section class="md-file" aria-label="The scene format">
+        <div class="prose">
+          <p>
+            A Splashery scene is one JSON document. <strong>Save JSON</strong> downloads it,
+            <strong>Load JSON</strong> (or dropping the file on the page) restores it, and share
+            links carry the same document compressed into the URL hash. Validation lives in
+            <code>src/state.js</code> (<code>normalizeScene</code>): unknown keys are dropped,
+            numbers are clamped to the ranges below, and anything missing falls back to its default,
+            so hand-edited files are safe to load. Files from Splashery v1 (the planet painter,
+            <code>version: 1</code>) are refused with a message pointing at the v1 branch.
+          </p>
+          <p>
+            Version 3 added <code>pattern</code>, <code>motion</code>, and <code>options</code> and
+            <code>clay</code> on shelf toys. Version 2 files and links load unchanged: they are
+            version 3 scenes with no pattern, the default motion, and no options. Saving always
+            writes version 3.
+          </p>
+          <h2 id="shape">Shape</h2>
+          <details class="long-text">
+            <summary>Show the full text (38 lines)</summary>
+            <pre><code>{
+  &quot;app&quot;: &quot;splashery&quot;,
+  &quot;version&quot;: 3,
+  &quot;createdAt&quot;: &quot;2026-09-22T19:49:30.000Z&quot;,
+  &quot;seed&quot;: 123456,
+  &quot;toy&quot;: { &quot;kind&quot;: &quot;builtin&quot;, &quot;id&quot;: &quot;cactus&quot; },
+  &quot;look&quot;: {
+    &quot;background&quot;: &quot;page&quot;,
+    &quot;theme&quot;: &quot;auto&quot;,
+    &quot;accent&quot;: &quot;auto&quot;,
+    &quot;splatScale&quot;: 1,
+    &quot;exposure&quot;: 1
+  },
+  &quot;effects&quot;: {
+    &quot;poke&quot;: { &quot;on&quot;: false, &quot;strength&quot;: 0.6, &quot;wobble&quot;: 0.5 },
+    &quot;wind&quot;: { &quot;on&quot;: true, &quot;strength&quot;: 0.55, &quot;direction&quot;: 0 },
+    &quot;dissolve&quot;: { &quot;on&quot;: false, &quot;spread&quot;: 0.55, &quot;speed&quot;: 0.5 },
+    &quot;drop&quot;: { &quot;on&quot;: false, &quot;bounce&quot;: 0.45, &quot;scatter&quot;: 0.5 },
+    &quot;magnet&quot;: { &quot;on&quot;: false, &quot;strength&quot;: 0.7, &quot;radius&quot;: 0.45 },
+    &quot;twist&quot;: { &quot;on&quot;: false, &quot;amount&quot;: 0.5, &quot;wobble&quot;: 0.3, &quot;axis&quot;: &quot;y&quot; },
+    &quot;slice&quot;: { &quot;on&quot;: false, &quot;position&quot;: 0, &quot;sweep&quot;: 0.35, &quot;axis&quot;: &quot;x&quot; },
+    &quot;paint&quot;: { &quot;on&quot;: false, &quot;size&quot;: 0.5, &quot;splash&quot;: 0.5, &quot;color&quot;: &quot;#e63b2e&quot; }
+  },
+  &quot;paint&quot;: { &quot;stamps&quot;: [[0.12, 0.3, 0.55, 0.06, &quot;#e63b2e&quot;, 1]] },
+  &quot;camera&quot;: { &quot;yaw&quot;: 0.55, &quot;pitch&quot;: 0.32, &quot;roll&quot;: 0, &quot;distance&quot;: 4.5 },
+  &quot;autoplay&quot;: { &quot;turntable&quot;: true, &quot;effect&quot;: &quot;none&quot; },
+  &quot;pattern&quot;: {
+    &quot;id&quot;: &quot;flag&quot;,
+    &quot;flag&quot;: &quot;fr&quot;,
+    &quot;projection&quot;: &quot;wrap&quot;,
+    &quot;repeats&quot;: 2,
+    &quot;colors&quot;: [&quot;#ffffff&quot;, &quot;#e63b2e&quot;, &quot;#0b4f9c&quot;],
+    &quot;scale&quot;: 0.5,
+    &quot;amount&quot;: 1,
+    &quot;detail&quot;: 0.6
+  },
+  &quot;motion&quot;: { &quot;alive&quot;: true, &quot;move&quot;: &quot;bounce&quot;, &quot;speed&quot;: 0.5, &quot;controls&quot;: { &quot;open&quot;: 1 } }
+}</code></pre>
+          </details>
+          <h2 id="fields">Fields</h2>
+          <div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrolls sideways">
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">Field</th>
+                  <th scope="col">Type</th>
+                  <th scope="col">Meaning</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row"><code>app</code></th>
+                  <td>string</td>
+                  <td>Always <code>&quot;splashery&quot;</code>.</td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>version</code></th>
+                  <td>number</td>
+                  <td>Schema version, <code>3</code> (files with <code>2</code> load too).</td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>createdAt</code></th>
+                  <td>string</td>
+                  <td>ISO time the file was saved (informational).</td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>seed</code></th>
+                  <td>int</td>
+                  <td>
+                    0 to 16,777,215. Seeds every per-splat random choice in the effects, idle pokes
+                    and paint splashes.
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>toy</code></th>
+                  <td>object</td>
+                  <td>Which toy; see below.</td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>look</code></th>
+                  <td>object</td>
+                  <td>Background, theme, accent colour, splat size and exposure.</td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>effects</code></th>
+                  <td>object</td>
+                  <td>Every effect's switch and slider values, whether or not it is on.</td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>paint</code></th>
+                  <td>object</td>
+                  <td>
+                    <code>stamps</code>: the paint, as a list of brush stamps replayed in order (at
+                    most 4,000).
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>camera</code></th>
+                  <td>object</td>
+                  <td>
+                    Orbit pose. <code>distance</code> is in multiples of the toy's radius, so it
+                    fits any toy.
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>autoplay</code></th>
+                  <td>object</td>
+                  <td>
+                    <code>turntable</code> (slow spin when idle) and <code>effect</code>:
+                    <code>none</code>, <code>breeze</code>, <code>pokes</code>,
+                    <code>twist</code> or <code>dissolve</code> when idle.
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>pattern</code></th>
+                  <td>object</td>
+                  <td>A design wrapped around the toy (version 3); see below.</td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>motion</code></th>
+                  <td>object</td>
+                  <td>How the toy moves (version 3); see below.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <h3 id="camera"><code>camera</code></h3>
+          <p>
+            <code
+              >{ &quot;yaw&quot;: 0.55, &quot;pitch&quot;: 0.32, &quot;roll&quot;: 0,
+              &quot;distance&quot;: 4.5 }</code
+            >: the orbit pose, in radians (yaw, pitch between −1.45 and 1.45, roll) and toy radii
+            (distance, 1.25 to 10).
+          </p>
+          <ul>
+            <li>
+              <code>pan</code> (optional; added September 30, 2026, lane UI r2):
+              <code>[x, y, z]</code>, how far the view was moved across the toy (a two-finger drag,
+              or Shift or Option/Alt and a drag), from the toy's center in multiples of its radius,
+              each between −1 and 1. It is left out when the toy is centered, and a scene without it
+              (every scene of version 2 or 3 saved before) shows the toy centered, exactly as
+              before. Reset (↺, R or a double-tap) clears it.
+            </li>
+          </ul>
+          <h3 id="toy"><code>toy</code></h3>
+          <p>One of three kinds:</p>
+          <ul>
+            <li>
+              <p>
+                <code
+                  >{ &quot;kind&quot;: &quot;builtin&quot;, &quot;id&quot;: &quot;cactus&quot;
+                  }</code
+                >: a toy from the shelf (see <code>src/toys.js</code> for every id). The generated
+                shelf toys use the device's default splat count. Toys built from a pack recipe can
+                also carry:
+              </p>
+              <ul>
+                <li>
+                  <code>options</code>: the recipe's choices, such as
+                  <code
+                    >{ &quot;style&quot;: &quot;love&quot;, &quot;color&quot;: &quot;#c42f3c&quot;
+                    }</code
+                  >. At most 16 keys; values are numbers, <code>true</code>/<code>false</code>,
+                  <code>#rrggbb</code> colours or short lower-case words. The recipe checks their
+                  meaning when it builds, so unknown options are ignored.
+                </li>
+                <li><code>clay</code>: clay edits, as for generated toys below.</li>
+              </ul>
+              <ul>
+                <li>
+                  <p>
+                    <code>media</code> (picture toys, such as the Picture lab; added September 28,
+                    2026): what the toy's picture sheets show, instead of the toy's own sample. One
+                    of:
+                  </p>
+                  <ul>
+                    <li>
+                      <code
+                        >{ &quot;url&quot;: &quot;https://example.com/paper.pdf&quot;,
+                        &quot;page&quot;: 3 }</code
+                      >: a web address of a PDF, a picture, a GIF or a video. Only
+                      <code>https://</code> addresses are kept (and <code>http://127.0.0.1</code> or
+                      <code>http://localhost</code>, for the tests). A link or an embed opens the
+                      address again, so the site must allow other sites to read it (CORS).
+                    </li>
+                    <li>
+                      <code
+                        >{ &quot;file&quot;: { &quot;name&quot;: &quot;mine.pdf&quot;,
+                        &quot;bytes&quot;: 123456 }, &quot;page&quot;: 3 }</code
+                      >: a file from the visitor's device. As with splat files, the file itself is
+                      never saved or uploaded, so the scene carries the settings only; whoever opens
+                      it is asked to open the same file, and sees the toy's sample meanwhile.
+                    </li>
+                    <li>
+                      <code
+                        >{ &quot;files&quot;: [{ &quot;name&quot;: &quot;beach.jpg&quot;,
+                        &quot;bytes&quot;: 234567 }, …], &quot;page&quot;: 2 }</code
+                      >
+                      (added September 28, 2026, lane Books): a set of pictures from the visitor's
+                      device, opened together (a photo album, a digital frame), up to 200. Like
+                      <code>file</code>, the scene carries the settings only.
+                    </li>
+                  </ul>
+                  <p>
+                    <code>page</code> is the page showing, counted from 0 (left out on the first
+                    page). Scenes without <code>media</code> load exactly as before.
+                  </p>
+                </li>
+              </ul>
+              <ul>
+                <li>
+                  <code>figures</code> (page toys, such as Your book; added October 5, 2026, lane
+                  Pages r6): the figures an author raised deeper than the toy's own depth, so a page
+                  opens with them at that depth:
+                  <code
+                    >[{ &quot;page&quot;: 3, &quot;box&quot;: [0.1, 0.2, 0.6, 0.55],
+                    &quot;depth&quot;: 2.5 }]</code
+                  >. <code>page</code> counts from 0; <code>box</code> is
+                  <code>[x0, y0, x1, y1]</code> in fractions of the page from its top-left corner;
+                  <code>depth</code> multiplies the toy's own depth, from 1 to 6. At most 64;
+                  anything else is dropped. Scenes without it (every scene saved before) raise every
+                  figure at the toy's own depth, as before.
+                </li>
+              </ul>
+              <p>All four are left out when empty.</p>
+            </li>
+          </ul>
+          <ul>
+            <li>
+              <p>
+                <code
+                  >{ &quot;kind&quot;: &quot;procedural&quot;, &quot;id&quot;: null,
+                  &quot;generator&quot;: {…}, &quot;clay&quot;: […] }</code
+                >: a generated toy.
+              </p>
+              <ul>
+                <li>
+                  <code>generator.shape</code>: <code>sphere</code>, <code>blob</code>,
+                  <code>torus</code>, <code>capsule</code> or <code>knot</code>.
+                </li>
+                <li>
+                  <code>generator.palette</code>: <code>candy</code>, <code>ocean</code>,
+                  <code>meadow</code>, <code>sunset</code>, <code>ink</code>, <code>neon</code>,
+                  <code>planet</code> or <code>frosting</code>.
+                </li>
+                <li><code>generator.seed</code>: 0 to 4,294,967,295.</li>
+                <li>
+                  <code>generator.count</code>: splats, 2,000 to 300,000 (clamped to 120,000 on weak
+                  devices).
+                </li>
+                <li>
+                  <code>generator.sizeJitter</code>, <code>generator.roughness</code>,
+                  <code>generator.colorNoise</code>: 0 to 1.
+                </li>
+                <li>
+                  <code>clay</code>: clay edits replayed in order after generation, each
+                  <code>[&quot;a&quot; | &quot;e&quot;, x, y, z, radius]</code> in the toy's own
+                  coordinates (<code>a</code> adds a lump, <code>e</code> erases everything inside
+                  the sphere). At most 2,000.
+                </li>
+              </ul>
+            </li>
+            <li>
+              <code
+                >{ &quot;kind&quot;: &quot;file&quot;, &quot;file&quot;: { &quot;name&quot;:
+                &quot;my.ply&quot;, &quot;bytes&quot;: 123456 }, &quot;flip&quot;: true }</code
+              >: a splat file from the visitor's computer. Files are never uploaded, so a scene or
+              link with a <code>file</code> toy carries the settings only: whoever opens it is asked
+              to drop the same file in. <code>flip</code> turns the file upside down (most PLY
+              captures need it).
+            </li>
+          </ul>
+          <h3 id="look"><code>look</code></h3>
+          <div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrolls sideways">
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">Key</th>
+                  <th scope="col">Values</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row"><code>background</code></th>
+                  <td>
+                    <code>&quot;page&quot;</code> (the theme's page colour),
+                    <code>&quot;transparent&quot;</code>, or a colour like
+                    <code>&quot;#f4efe6&quot;</code>.
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>theme</code></th>
+                  <td>
+                    <code>&quot;auto&quot;</code> (follow the page or system),
+                    <code>&quot;light&quot;</code> or <code>&quot;dark&quot;</code>.
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>accent</code></th>
+                  <td>
+                    <code>&quot;auto&quot;</code> (the theme's accent) or a colour. Used by the
+                    slice edge and magnet glow.
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>splatScale</code></th>
+                  <td>0.3 to 2.5, multiplies every splat's size.</td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>exposure</code></th>
+                  <td>0.3 to 2.5, multiplies colour.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <h3 id="effects"><code>effects</code></h3>
+          <p>
+            All sliders are 0 to 1 unless noted. Tools (<code>poke</code>, <code>magnet</code>,
+            <code>paint</code>) act where the pointer touches the toy; their <code>on</code> is
+            always <code>false</code> in a file. Ambient effects run by themselves while
+            <code>on</code>. <code>drop</code> and <code>dissolve</code> never run together.
+          </p>
+          <div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrolls sideways">
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">Effect</th>
+                  <th scope="col">Keys</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row"><code>poke</code></th>
+                  <td><code>strength</code>, <code>wobble</code> (how long the ripples ring)</td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>wind</code></th>
+                  <td>
+                    <code>strength</code>, <code>direction</code> (0 to 360 degrees; 0 blows towards
+                    the right edge of the screen)
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>dissolve</code></th>
+                  <td><code>spread</code>, <code>speed</code></td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>drop</code></th>
+                  <td><code>bounce</code>, <code>scatter</code></td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>magnet</code></th>
+                  <td>
+                    <code>strength</code> (-1 to 1: negative scatters, positive attracts),
+                    <code>radius</code>
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>twist</code></th>
+                  <td>
+                    <code>amount</code> (-1 to 1), <code>wobble</code> (0 holds the twist still),
+                    <code>axis</code> (<code>x</code>, <code>y</code> or <code>z</code>)
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>slice</code></th>
+                  <td>
+                    <code>position</code> (-1 to 1), <code>sweep</code> (0 holds the plane still),
+                    <code>axis</code> (<code>x</code>, <code>y</code> or <code>z</code>)
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>paint</code></th>
+                  <td><code>size</code>, <code>splash</code>, <code>color</code> (the brush)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <h3 id="pattern"><code>pattern</code></h3>
+          <div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrolls sideways">
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">Key</th>
+                  <th scope="col">Values</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row"><code>id</code></th>
+                  <td>
+                    <code>none</code>, <code>flag</code>, <code>stripes</code>, <code>bands</code>,
+                    <code>dots</code>, <code>checks</code>, <code>stars</code>, <code>hearts</code>,
+                    <code>zigzag</code>, <code>gradient</code>, <code>rainbow</code> or
+                    <code>marble</code>.
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>flag</code></th>
+                  <td>
+                    For <code>flag</code>: a country code from
+                    <code>assets/flags/flags.json</code> (ISO 3166 alpha-2, plus <code>xk</code> for
+                    Kosovo).
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>projection</code></th>
+                  <td>
+                    <code>wrap</code> (around the toy's up axis), <code>front</code> (straight
+                    through from the front) or <code>globe</code> (latitude and longitude).
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>repeats</code></th>
+                  <td>
+                    1 to 4: how many times the design goes around (not used by <code>front</code>).
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>colors</code></th>
+                  <td>Three colours for the patterns that use them.</td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>scale</code></th>
+                  <td>0 to 1: how big the stripes, dots or checks are.</td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>amount</code></th>
+                  <td>0 to 1: how strongly the pattern covers the toy's own colours.</td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>detail</code></th>
+                  <td>0 to 1: how much of the toy's own light and shade shows through.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            Seams, stitching, flames and similar details that a recipe marks keep their own colours.
+          </p>
+          <h3 id="motion"><code>motion</code></h3>
+          <div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrolls sideways">
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">Key</th>
+                  <th scope="col">Values</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row"><code>alive</code></th>
+                  <td>
+                    <code>true</code> lets a pack toy's own behaviours run (flames flicker, hearts
+                    beat).
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>move</code></th>
+                  <td>
+                    <code>still</code>, <code>bounce</code>, <code>spin</code>,
+                    <code>wobble</code> or <code>float</code>: how the whole toy moves (any toy).
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>speed</code></th>
+                  <td>0 to 1.</td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>controls</code></th>
+                  <td>
+                    A pack toy's control values, 0 to 1 (for example <code>open</code> for the
+                    treasure chest's lid). At most 16 keys.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            Under a system setting for reduced motion, nothing moves by itself until the visitor
+            turns motion on.
+          </p>
+          <h3 id="paint-stamps"><code>paint.stamps</code></h3>
+          <p>
+            Each stamp is <code>[x, y, z, radius, &quot;#rrggbb&quot;, opacity]</code> in the toy's
+            own coordinates. Replaying the stamps in order on the GPU rebuilds the paint, including
+            the droplets and drips a splash leaves.
+          </p>
+          <h2 id="links">Links</h2>
+          <p>
+            Share links are
+            <code>https://ryanjosephkamp.github.io/splashery/#s=&lt;payload&gt;</code>, where the
+            payload is <code>d.</code> followed by the base64url of the deflate-raw-compressed JSON
+            (or <code>j.</code> and plain base64url JSON in browsers without
+            <code>CompressionStream</code>). If a scene is too long for a link (about 12 KB), the
+            paint and then the clay edits are left out and the app says so. The embed player takes
+            the same payload: <code>embed/#s=&lt;payload&gt;</code>.
+          </p>
+        </div>
+      </section>
+      <p class="note">
+        This page is built from
+        <a
+          data-source
+          href="https://github.com/ryanjosephkamp/splashery/blob/main/docs/SCENE-SCHEMA.md"
+          target="_blank"
+          rel="noopener"
+          >docs/SCENE-SCHEMA.md</a
+        >
+        each time the site is built, so it always matches them.
+      </p>
+    </main>
+    <footer class="site-footer">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="brand" href="../../"
+            ><svg class="logo" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true">
+              <g opacity=".92">
+                <ellipse cx="24" cy="26" rx="14" ry="11" fill="#ff5fa2" />
+                <ellipse cx="40" cy="24" rx="12" ry="13" fill="#7bdff2" />
+                <ellipse cx="33" cy="41" rx="15" ry="11" fill="#ffd166" />
+              </g></svg
+            ><span>Splashery</span></a
+          >
+          <p>
+            splats you can play with. Free, in your browser, with nothing to install; files you open
+            stay on your device.
+          </p>
+        </div>
+        <nav aria-label="Explore">
+          <h2>Explore</h2>
+          <ul>
+            <li><a href="../../">Home</a></li>
+            <li><a href="../../toys/">Toys</a></li>
+            <li><a href="../../tools/">Tools</a></li>
+            <li><a href="../../science/">Science</a></li>
+            <li><a href="../../studio/">Studio</a></li>
+            <li><a href="../../learn/">Learn</a></li>
+            <li><a href="../../new/">What's new</a></li>
+            <li><a href="../../about/">About</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="More">
+          <h2>More</h2>
+          <ul>
+            <li><a href="../../../" target="_blank" rel="noopener">The gallery</a></li>
+            <li><a href="../../search/">Search</a></li>
+            <li><a href="../../../manual/">The Tinkerer's Manual</a></li>
+            <li>
+              <a href="https://github.com/ryanjosephkamp/splashery" target="_blank" rel="noopener"
+                >Source on GitHub</a
+              >
+            </li>
+            <li><a href="../../share/">Embed and share</a></li>
+            <li><a href="../../about/credits/">Credits</a></li>
+            <li><a href="../../about/contact/">Contact</a></li>
+            <li><a href="../../about/privacy/">Privacy</a></li>
+            <li><a href="../../about/terms/">Terms</a></li>
+          </ul>
+        </nav>
+      </div>
+      <p class="fine">
+        Made by <a href="../../about/contact/">Ryan Kamp</a>. Code under the MIT license; each toy's
+        assets keep their own licenses. Built on the PlayCanvas engine. This is a preview of
+        Splashery's new site; the toys live in
+        <a href="../../../" target="_blank" rel="noopener">the gallery</a>.
+      </p>
+    </footer>
+  </body>
+</html>

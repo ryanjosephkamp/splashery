@@ -1,0 +1,865 @@
+{
+  "limits": {
+    "fillMin": 0.1,
+    "fillMax": 0.9,
+    "spanMin": 0.45,
+    "edgeMin": 0.02,
+    "motionMin": 0.0015
+  },
+  "toys": [
+    {
+      "id": "ice-cream",
+      "shelf": "food",
+      "pass": true,
+      "fill": 0.133,
+      "span": 0.75,
+      "edge": 0.044,
+      "motion": 0.005,
+      "why": []
+    },
+    {
+      "id": "watermelon",
+      "shelf": "food",
+      "pass": true,
+      "fill": 0.211,
+      "span": 0.646,
+      "edge": 0.042,
+      "motion": 0.041,
+      "why": []
+    },
+    {
+      "id": "birthday-cake",
+      "shelf": "food",
+      "pass": true,
+      "fill": 0.299,
+      "span": 0.708,
+      "edge": 0.038,
+      "motion": 0.003,
+      "why": []
+    },
+    {
+      "id": "popcorn",
+      "shelf": "food",
+      "pass": true,
+      "fill": 0.316,
+      "span": 0.729,
+      "edge": 0.055,
+      "motion": 0.009,
+      "why": []
+    },
+    {
+      "id": "jelly",
+      "shelf": "food",
+      "pass": true,
+      "fill": 0.262,
+      "span": 0.708,
+      "edge": 0.046,
+      "motion": 0.022,
+      "why": []
+    },
+    {
+      "id": "pancakes",
+      "shelf": "food",
+      "pass": true,
+      "fill": 0.261,
+      "span": 0.708,
+      "edge": 0.035,
+      "motion": 0.024,
+      "why": []
+    },
+    {
+      "id": "cupcake",
+      "shelf": "food",
+      "pass": true,
+      "fill": 0.132,
+      "span": 0.583,
+      "edge": 0.038,
+      "motion": 0.002,
+      "why": []
+    },
+    {
+      "id": "lollipop",
+      "shelf": "food",
+      "pass": true,
+      "fill": 0.205,
+      "span": 0.708,
+      "edge": 0.064,
+      "motion": 0.071,
+      "why": []
+    },
+    {
+      "id": "candy-cane",
+      "shelf": "food",
+      "pass": true,
+      "fill": 0.172,
+      "span": 0.75,
+      "edge": 0.074,
+      "motion": 0.024,
+      "why": []
+    },
+    {
+      "id": "macarons",
+      "shelf": "food",
+      "pass": true,
+      "fill": 0.232,
+      "span": 0.615,
+      "edge": 0.042,
+      "motion": 0.038,
+      "why": []
+    },
+    {
+      "id": "donut",
+      "shelf": "food",
+      "pass": true,
+      "fill": 0.212,
+      "span": 0.604,
+      "edge": 0.04,
+      "motion": 0.032,
+      "why": []
+    },
+    {
+      "id": "gummy-bear",
+      "shelf": "food",
+      "pass": true,
+      "fill": 0.253,
+      "span": 0.771,
+      "edge": 0.025,
+      "motion": 0.019,
+      "why": []
+    },
+    {
+      "id": "pretzel",
+      "shelf": "food",
+      "pass": true,
+      "fill": 0.182,
+      "span": 0.677,
+      "edge": 0.051,
+      "motion": 0.015,
+      "why": []
+    },
+    {
+      "id": "croissant",
+      "shelf": "food",
+      "pass": true,
+      "fill": 0.292,
+      "span": 0.823,
+      "edge": 0.032,
+      "motion": 0.012,
+      "why": []
+    },
+    {
+      "id": "pizza",
+      "shelf": "food",
+      "pass": true,
+      "fill": 0.251,
+      "span": 0.667,
+      "edge": 0.048,
+      "motion": 0.002,
+      "why": []
+    },
+    {
+      "id": "burger",
+      "shelf": "food",
+      "pass": true,
+      "fill": 0.341,
+      "span": 0.75,
+      "edge": 0.035,
+      "motion": 0.041,
+      "why": []
+    },
+    {
+      "id": "sushi",
+      "shelf": "food",
+      "pass": true,
+      "fill": 0.206,
+      "span": 0.813,
+      "edge": 0.047,
+      "motion": 0.019,
+      "why": []
+    },
+    {
+      "id": "taco",
+      "shelf": "food",
+      "pass": true,
+      "fill": 0.23,
+      "span": 0.771,
+      "edge": 0.04,
+      "motion": 0.01,
+      "why": []
+    },
+    {
+      "id": "egg",
+      "shelf": "food",
+      "pass": true,
+      "fill": 0.339,
+      "span": 0.771,
+      "edge": 0.037,
+      "motion": 0.007,
+      "why": []
+    },
+    {
+      "id": "coffee",
+      "shelf": "food",
+      "pass": true,
+      "fill": 0.347,
+      "span": 0.771,
+      "edge": 0.031,
+      "motion": 0.025,
+      "why": []
+    },
+    {
+      "id": "apple",
+      "shelf": "food",
+      "pass": true,
+      "fill": 0.354,
+      "span": 0.719,
+      "edge": 0.024,
+      "motion": 0.002,
+      "why": []
+    },
+    {
+      "id": "banana",
+      "shelf": "food",
+      "pass": true,
+      "fill": 0.167,
+      "span": 0.781,
+      "edge": 0.045,
+      "motion": 0.039,
+      "why": []
+    },
+    {
+      "id": "kiwi",
+      "shelf": "food",
+      "pass": true,
+      "fill": 0.195,
+      "span": 0.573,
+      "edge": 0.047,
+      "motion": 0.008,
+      "why": []
+    },
+    {
+      "id": "pineapple",
+      "shelf": "food",
+      "pass": true,
+      "fill": 0.151,
+      "span": 0.625,
+      "edge": 0.059,
+      "motion": 0.021,
+      "why": []
+    },
+    {
+      "id": "cherries",
+      "shelf": "food",
+      "pass": true,
+      "fill": 0.141,
+      "span": 0.688,
+      "edge": 0.039,
+      "motion": 0.024,
+      "why": []
+    },
+    {
+      "id": "avocado",
+      "shelf": "food",
+      "pass": true,
+      "fill": 0.238,
+      "span": 0.604,
+      "edge": 0.035,
+      "motion": 0.015,
+      "why": []
+    },
+    {
+      "id": "basketball",
+      "shelf": "balls",
+      "pass": true,
+      "fill": 0.289,
+      "span": 0.625,
+      "edge": 0.032,
+      "motion": 0.112,
+      "why": []
+    },
+    {
+      "id": "soccer-ball",
+      "shelf": "balls",
+      "pass": true,
+      "fill": 0.258,
+      "span": 0.625,
+      "edge": 0.04,
+      "motion": 0.139,
+      "why": []
+    },
+    {
+      "id": "american-football",
+      "shelf": "balls",
+      "pass": true,
+      "fill": 0.153,
+      "span": 0.552,
+      "edge": 0.025,
+      "motion": 0.029,
+      "why": []
+    },
+    {
+      "id": "tennis-ball",
+      "shelf": "balls",
+      "pass": true,
+      "fill": 0.292,
+      "span": 0.625,
+      "edge": 0.021,
+      "motion": 0.033,
+      "why": []
+    },
+    {
+      "id": "baseball",
+      "shelf": "balls",
+      "pass": true,
+      "fill": 0.293,
+      "span": 0.625,
+      "edge": 0.028,
+      "motion": 0.027,
+      "why": []
+    },
+    {
+      "id": "softball",
+      "shelf": "balls",
+      "pass": true,
+      "fill": 0.293,
+      "span": 0.625,
+      "edge": 0.025,
+      "motion": 0.036,
+      "why": []
+    },
+    {
+      "id": "beach-ball",
+      "shelf": "balls",
+      "pass": true,
+      "fill": 0.294,
+      "span": 0.625,
+      "edge": 0.02,
+      "motion": 0.052,
+      "why": []
+    },
+    {
+      "id": "golf-ball",
+      "shelf": "balls",
+      "pass": false,
+      "fill": 0.295,
+      "span": 0.625,
+      "edge": 0.019,
+      "motion": 0.02,
+      "why": ["edge contrast 0.019 is below 0.02"]
+    },
+    {
+      "id": "rugby-ball",
+      "shelf": "balls",
+      "pass": true,
+      "fill": 0.159,
+      "span": 0.531,
+      "edge": 0.035,
+      "motion": 0.054,
+      "why": []
+    },
+    {
+      "id": "volleyball",
+      "shelf": "balls",
+      "pass": true,
+      "fill": 0.295,
+      "span": 0.625,
+      "edge": 0.03,
+      "motion": 0.079,
+      "why": []
+    },
+    {
+      "id": "water-polo-ball",
+      "shelf": "balls",
+      "pass": true,
+      "fill": 0.293,
+      "span": 0.625,
+      "edge": 0.052,
+      "motion": 0.098,
+      "why": []
+    },
+    {
+      "id": "ping-pong-ball",
+      "shelf": "balls",
+      "pass": false,
+      "fill": 0.295,
+      "span": 0.625,
+      "edge": 0.019,
+      "motion": 0.03,
+      "why": ["edge contrast 0.019 is below 0.02"]
+    },
+    {
+      "id": "cricket-ball",
+      "shelf": "balls",
+      "pass": false,
+      "fill": 0.287,
+      "span": 0.625,
+      "edge": 0.018,
+      "motion": 0.021,
+      "why": ["edge contrast 0.018 is below 0.02"]
+    },
+    {
+      "id": "bowling-ball",
+      "shelf": "balls",
+      "pass": true,
+      "fill": 0.293,
+      "span": 0.625,
+      "edge": 0.063,
+      "motion": 0.074,
+      "why": []
+    },
+    {
+      "id": "pool-ball",
+      "shelf": "balls",
+      "pass": true,
+      "fill": 0.18,
+      "span": 0.583,
+      "edge": 0.028,
+      "motion": 0.023,
+      "why": []
+    },
+    {
+      "id": "pickleball",
+      "shelf": "balls",
+      "pass": true,
+      "fill": 0.295,
+      "span": 0.625,
+      "edge": 0.033,
+      "motion": 0.047,
+      "why": []
+    },
+    {
+      "id": "dodgeball",
+      "shelf": "balls",
+      "pass": false,
+      "fill": 0.293,
+      "span": 0.625,
+      "edge": 0.016,
+      "motion": 0.044,
+      "why": ["edge contrast 0.016 is below 0.02"]
+    },
+    {
+      "id": "medicine-ball",
+      "shelf": "balls",
+      "pass": true,
+      "fill": 0.293,
+      "span": 0.625,
+      "edge": 0.033,
+      "motion": 0.03,
+      "why": []
+    },
+    {
+      "id": "lacrosse-ball",
+      "shelf": "balls",
+      "pass": false,
+      "fill": 0.295,
+      "span": 0.625,
+      "edge": 0.019,
+      "motion": 0.044,
+      "why": ["edge contrast 0.019 is below 0.02"]
+    },
+    {
+      "id": "squash-ball",
+      "shelf": "balls",
+      "pass": false,
+      "fill": 0.293,
+      "span": 0.625,
+      "edge": 0.017,
+      "motion": 0.039,
+      "why": ["edge contrast 0.017 is below 0.02"]
+    },
+    {
+      "id": "bouncy-ball",
+      "shelf": "balls",
+      "pass": true,
+      "fill": 0.294,
+      "span": 0.625,
+      "edge": 0.059,
+      "motion": 0.148,
+      "why": []
+    },
+    {
+      "id": "marble",
+      "shelf": "balls",
+      "pass": true,
+      "fill": 0.293,
+      "span": 0.625,
+      "edge": 0.039,
+      "motion": 0.079,
+      "why": []
+    },
+    {
+      "id": "hockey-puck",
+      "shelf": "balls",
+      "pass": false,
+      "fill": 0.093,
+      "span": 0.479,
+      "edge": 0.01,
+      "motion": 0,
+      "why": [
+        "subject fills only 9% of the frame",
+        "edge contrast 0.01 is below 0.02",
+        "motion 0 is below 0.0015"
+      ]
+    },
+    {
+      "id": "shuttlecock",
+      "shelf": "balls",
+      "pass": true,
+      "fill": 0.191,
+      "span": 0.625,
+      "edge": 0.033,
+      "motion": 0.054,
+      "why": []
+    },
+    {
+      "id": "flying-disc",
+      "shelf": "balls",
+      "pass": true,
+      "fill": 0.112,
+      "span": 0.604,
+      "edge": 0.034,
+      "motion": 0.041,
+      "why": []
+    },
+    {
+      "id": "torus",
+      "shelf": "shapes",
+      "pass": true,
+      "fill": 0.204,
+      "span": 0.604,
+      "edge": 0.029,
+      "motion": 0.032,
+      "why": []
+    },
+    {
+      "id": "blob",
+      "shelf": "shapes",
+      "pass": true,
+      "fill": 0.269,
+      "span": 0.604,
+      "edge": 0.03,
+      "motion": 0.026,
+      "why": []
+    },
+    {
+      "id": "knot",
+      "shelf": "shapes",
+      "pass": true,
+      "fill": 0.197,
+      "span": 0.594,
+      "edge": 0.044,
+      "motion": 0.053,
+      "why": []
+    },
+    {
+      "id": "diamond",
+      "shelf": "gems",
+      "pass": true,
+      "fill": 0.154,
+      "span": 0.604,
+      "edge": 0.035,
+      "motion": 0.005,
+      "why": []
+    },
+    {
+      "id": "ruby",
+      "shelf": "gems",
+      "pass": false,
+      "fill": 0.068,
+      "span": 0.427,
+      "edge": 0.032,
+      "motion": 0.002,
+      "why": ["subject fills only 7% of the frame", "subject spans only 43% of the grid"]
+    },
+    {
+      "id": "emerald",
+      "shelf": "gems",
+      "pass": false,
+      "fill": 0.153,
+      "span": 0.583,
+      "edge": 0.031,
+      "motion": 0.001,
+      "why": ["motion 0.001 is below 0.0015"]
+    },
+    {
+      "id": "amethyst-geode",
+      "shelf": "gems",
+      "pass": true,
+      "fill": 0.153,
+      "span": 0.615,
+      "edge": 0.041,
+      "motion": 0.009,
+      "why": []
+    },
+    {
+      "id": "sapphire",
+      "shelf": "gems",
+      "pass": true,
+      "fill": 0.156,
+      "span": 0.563,
+      "edge": 0.032,
+      "motion": 0.004,
+      "why": []
+    },
+    {
+      "id": "quartz-cluster",
+      "shelf": "gems",
+      "pass": true,
+      "fill": 0.156,
+      "span": 0.521,
+      "edge": 0.038,
+      "motion": 0.002,
+      "why": []
+    },
+    {
+      "id": "opal",
+      "shelf": "gems",
+      "pass": true,
+      "fill": 0.166,
+      "span": 0.615,
+      "edge": 0.031,
+      "motion": 0.002,
+      "why": []
+    },
+    {
+      "id": "pearl",
+      "shelf": "gems",
+      "pass": true,
+      "fill": 0.198,
+      "span": 0.604,
+      "edge": 0.045,
+      "motion": 0.008,
+      "why": []
+    },
+    {
+      "id": "bricks",
+      "shelf": "toys",
+      "pass": true,
+      "fill": 0.193,
+      "span": 0.792,
+      "edge": 0.049,
+      "motion": 0.007,
+      "why": []
+    },
+    {
+      "id": "rubber-duck",
+      "shelf": "toys",
+      "pass": true,
+      "fill": 0.209,
+      "span": 0.583,
+      "edge": 0.031,
+      "motion": 0.011,
+      "why": []
+    },
+    {
+      "id": "spinning-top",
+      "shelf": "toys",
+      "pass": true,
+      "fill": 0.183,
+      "span": 0.667,
+      "edge": 0.048,
+      "motion": 0.072,
+      "why": []
+    },
+    {
+      "id": "dice",
+      "shelf": "toys",
+      "pass": true,
+      "fill": 0.213,
+      "span": 0.708,
+      "edge": 0.04,
+      "motion": 0.033,
+      "why": []
+    },
+    {
+      "id": "newtons-cradle",
+      "shelf": "toys",
+      "pass": true,
+      "fill": 0.237,
+      "span": 0.698,
+      "edge": 0.044,
+      "motion": 0.011,
+      "why": []
+    },
+    {
+      "id": "teddy-bear",
+      "shelf": "toys",
+      "pass": true,
+      "fill": 0.216,
+      "span": 0.688,
+      "edge": 0.036,
+      "motion": 0.009,
+      "why": []
+    },
+    {
+      "id": "yo-yo",
+      "shelf": "toys",
+      "pass": true,
+      "fill": 0.198,
+      "span": 0.75,
+      "edge": 0.047,
+      "motion": 0.045,
+      "why": []
+    },
+    {
+      "id": "puzzle-cube",
+      "shelf": "toys",
+      "pass": true,
+      "fill": 0.246,
+      "span": 0.604,
+      "edge": 0.051,
+      "motion": 0.013,
+      "why": []
+    },
+    {
+      "id": "spring-toy",
+      "shelf": "toys",
+      "pass": true,
+      "fill": 0.174,
+      "span": 0.667,
+      "edge": 0.034,
+      "motion": 0.037,
+      "why": []
+    },
+    {
+      "id": "kite",
+      "shelf": "toys",
+      "pass": true,
+      "fill": 0.114,
+      "span": 0.646,
+      "edge": 0.045,
+      "motion": 0.031,
+      "why": []
+    },
+    {
+      "id": "paper-plane",
+      "shelf": "toys",
+      "pass": true,
+      "fill": 0.102,
+      "span": 0.865,
+      "edge": 0.037,
+      "motion": 0.035,
+      "why": []
+    },
+    {
+      "id": "origami-crane",
+      "shelf": "toys",
+      "pass": false,
+      "fill": 0.071,
+      "span": 0.677,
+      "edge": 0.048,
+      "motion": 0.012,
+      "why": ["subject fills only 7% of the frame"]
+    },
+    {
+      "id": "balloon-dog",
+      "shelf": "toys",
+      "pass": true,
+      "fill": 0.142,
+      "span": 0.688,
+      "edge": 0.051,
+      "motion": 0.013,
+      "why": []
+    },
+    {
+      "id": "robot",
+      "shelf": "toys",
+      "pass": true,
+      "fill": 0.174,
+      "span": 0.708,
+      "edge": 0.045,
+      "motion": 0.013,
+      "why": []
+    },
+    {
+      "id": "chess-set",
+      "shelf": "toys",
+      "pass": false,
+      "fill": 0.331,
+      "span": 0.938,
+      "edge": 0.036,
+      "motion": 0.001,
+      "why": ["motion 0.001 is below 0.0015"]
+    },
+    {
+      "id": "guitar",
+      "shelf": "music",
+      "pass": true,
+      "fill": 0.125,
+      "span": 0.729,
+      "edge": 0.062,
+      "motion": 0.022,
+      "why": []
+    },
+    {
+      "id": "drum",
+      "shelf": "music",
+      "pass": true,
+      "fill": 0.15,
+      "span": 0.573,
+      "edge": 0.044,
+      "motion": 0.005,
+      "why": []
+    },
+    {
+      "id": "xylophone",
+      "shelf": "music",
+      "pass": true,
+      "fill": 0.13,
+      "span": 0.688,
+      "edge": 0.067,
+      "motion": 0.005,
+      "why": []
+    },
+    {
+      "id": "toy-piano",
+      "shelf": "music",
+      "pass": true,
+      "fill": 0.365,
+      "span": 0.792,
+      "edge": 0.042,
+      "motion": 0.002,
+      "why": []
+    },
+    {
+      "id": "grand-piano",
+      "shelf": "music",
+      "pass": false,
+      "fill": 0.124,
+      "span": 0.583,
+      "edge": 0.061,
+      "motion": 0.001,
+      "why": ["motion 0.001 is below 0.0015"]
+    },
+    {
+      "id": "upright-piano",
+      "shelf": "music",
+      "pass": false,
+      "fill": 0.484,
+      "span": 0.792,
+      "edge": 0.028,
+      "motion": 0,
+      "why": ["motion 0 is below 0.0015"]
+    },
+    {
+      "id": "harpsichord",
+      "shelf": "music",
+      "pass": false,
+      "fill": 0.235,
+      "span": 0.708,
+      "edge": 0.046,
+      "motion": 0,
+      "why": ["motion 0 is below 0.0015"]
+    },
+    {
+      "id": "electronic-keyboard",
+      "shelf": "music",
+      "pass": false,
+      "fill": 0.231,
+      "span": 0.927,
+      "edge": 0.043,
+      "motion": 0.001,
+      "why": ["motion 0.001 is below 0.0015"]
+    }
+  ]
+}
