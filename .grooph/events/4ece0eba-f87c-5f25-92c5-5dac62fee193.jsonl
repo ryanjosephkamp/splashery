@@ -795,3 +795,6 @@
 {"v":1,"t":"2026-10-08T18:08:07.361Z","harness":"claude-code","event":"tool","session":"4ece0eba-f87c-5f25-92c5-5dac62fee193","tool":"mcp__github__update_pull_request","cwd":"splashery"}
 {"v":1,"t":"2026-10-08T18:08:14.657Z","harness":"claude-code","event":"turn-end","session":"4ece0eba-f87c-5f25-92c5-5dac62fee193","cwd":"splashery"}
 {"v":1,"t":"2026-10-08T18:08:16.698Z","harness":"claude-code","event":"subagent-stop","session":"4ece0eba-f87c-5f25-92c5-5dac62fee193","agent":"a954bb23e73b35d90"}
+{"v":1,"t":"2026-10-08T18:13:30.882Z","harness":"claude-code","event":"session-end","session":"4ece0eba-f87c-5f25-92c5-5dac62fee193","cwd":"splashery"}
+{"v":1,"t":"2026-10-08T18:34:04.539Z","harness":"claude-code","event":"session-start","session":"4ece0eba-f87c-5f25-92c5-5dac62fee193","cwd":"splashery"}
+{"v":1,"t":"2026-10-08T18:34:04.539Z","harness":"claude-code","event":"turn-start","session":"4ece0eba-f87c-5f25-92c5-5dac62fee193","cwd":"splashery"}
