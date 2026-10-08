@@ -57,23 +57,21 @@ file. The engine files belong to the merged engines; another lane's toys are the
   comments on your PR that start "From the Operator", the "READY:", "WORKING:" or "BLOCKED:" line at
   the top of "## State
 
-READY (Balls and Shapes), WORKING (Toys and Clothing): October 8, 2026, cloud session, Opus 5.5.
+READY: all four shelves (October 8, 2026, cloud session, Opus 5.5). Merge the engine PR first; the
+shelf PRs wait for the owner's marks on their `hh1-` cards (Effect review page 2, lane HandsH1: 36
+cards, grouped Balls, Shapes, Toys and Clothing).
 
-- Engine PR #421 (`claude/lane-hands-h1-engine`): merge first. Its specs pass (the hec-engine timing
-  test failed only while clips loaded the CPU; rerun on a quiet machine).
-- Balls #424 (`claude/lane-hands-h1-balls`): 22 balls; 22 clips posted as `hh1-` cards on Effect
-  review page 2 (lane HandsH1, group Balls). Specs: 39 passed (hh1-balls, hh1-engine, hea-engine,
-  hea). Waits for the owner's marks.
-- Shapes #429 (`claude/lane-hands-h1-shapes`): the jelly blob's stretch; its card `hh1-blob` is
-  posted. Waits for the owner's mark.
-- Toys (`claude/lane-hands-h1-toys`, no PR yet): the rubber duck, spinning top, dice, teddy bear,
-  paper plane, origami crane, balloon dog, soap bubbles and wind-up robot are built and pushed;
-  clips rendering, specs to run. (The yo-yo, kite, spring toy, bricks, Newton's cradle, puzzle cube
-  and chess set are the engine and Physics lanes' and stay as they are.)
-- Clothing (`claude/lane-hands-h1-clothing`, no PR yet): the sunglasses, baseball cap, running shoe
-  and the hoodie's sleeves are built and pushed (the hood is engine C's); clips rendering.
-- The garden gnome (the L1 sweep's finding) is a scan on the photoreal shelf, not one of this lane's
-  shelves, and its fix is in the engine's resting contact; not done here (see "For the Operator").
+- Engine #421 (`claude/lane-hands-h1-engine`), main merged in: its specs pass, the hec-engine timing
+  test included once the CPU was quiet.
+- Balls #424: 22 balls, 22 cards; 39 specs passed (hh1-balls, hh1-engine, hea-engine, hea).
+- Shapes #429: the jelly blob's stretch, 1 card; hh1-shapes passed.
+- Toys #433: the rubber duck, spinning top, dice, teddy bear, paper plane, origami crane, balloon
+  dog, soap bubbles and wind-up robot, 9 cards; hh1-toys, 9 passed. (The yo-yo, kite, spring toy,
+  bricks, Newton's cradle, puzzle cube and chess set are the engine and Physics lanes'.)
+- Clothing #434: the sunglasses, baseball cap, running shoe and hoodie's sleeves, 4 cards;
+  hh1-clothing, 5 passed. (The hood is engine C's.)
+- Not done: the garden gnome (the L1 sweep's finding) is a scan outside these shelves, its cause in
+  the engine's resting contact (see "For the Operator").
 
 ## Notes
 
@@ -91,6 +89,9 @@ READY (Balls and Shapes), WORKING (Toys and Clothing): October 8, 2026, cloud se
   - `hands.soft`: a whole toy's landing squish over the SOFT list (the bouncy ball's 0.15).
   - A shelf shape (procedural, no recipe) takes the gummy bear's stretch from its shelf entry's
     `grab` (the jelly blob).
+  - `hands.floor` as a function of the build (the d20 sits lower); `hands.press` (a held press
+    squeezes a whole toy: the duck, the balloon dog); a joint's `also` gets the joint (the top's
+    lean from its speed); `fixed: true` pieces (the cap's stand).
 - Balls: 22 balls get `hands: { area: 3, view: 0.6, material, sound }` (and `soft: 0.15` on the
   bouncy ball, which squashed flat like jelly) (the basketball, beach ball and water polo ball are
   the engine lane's demo toys and stay as they are). Real numbers from
@@ -109,6 +110,9 @@ READY (Balls and Shapes), WORKING (Toys and Clothing): October 8, 2026, cloud se
   for the volleyball's spike).
 
 ## Known issues
+
+- Toys and Clothing: the teddy bear is picked up by its tummy (held by an arm, the arm swung away
+  from the finger); the robot's key is wound by circling its tummy (the key is on its back).
 
 - With the camera looking down at the floor from the side, a throw to the right also goes away from
   the camera, so on a phone a ball's roll shows partly as getting smaller.
