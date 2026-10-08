@@ -799,6 +799,24 @@ drive(t, c, out, info) {
   const at = vec.add(P, f.offset);
 ```
 
+**The finger, for a drive** (`hands.touch`; lane Hands-on H5, October 8, 2026): `touch: true` tells
+the recipe's `drive()` what the finger does, as `info.hands.pressed` (a finger is down on the toy: a
+press, a push or a hold), `info.hands.held` (the toy, or a piece, is up in the hand) and
+`info.hands.speed` (how fast the whole toy, or the held piece, moves, in toy radii per second), so a
+toy can answer the hand (a pufferfish puffs while you hold it, lungs breathe out while squeezed).
+`info.hands.joint(name)` is a joint's value (an angle or a slide, null without one), and
+`info.hands.piece(i)` where piece i is (`{ pos, quat, home, held }`, recipe units), so a drive can
+follow a part the hand moved (the waves of a point turned round a circle). `touch: { key }` also
+fires that action when a press is held `after` seconds (0.15) or becomes a push or a pick-up (a
+poke), at most every `gap` seconds (0.5); a quick tap is still the toy's own tap. A press still
+picks the toy up as before.
+
+```js
+hands: { touch: { key: "poke" } },
+drive(t, c, out, info) {
+  const squeezed = info.hands?.pressed ? 1 : 0;
+```
+
 **Projectiles and targets** (pieces): a piece with `projectile: { nose: [0, 0, 1], vane: 20 }` flies
 nose first, and one that hits a piece with `target: true` sticks in it where it hit, until it is
 picked up again or ↺ Reset (objects only, never people or animals). `stick: false` lets it bounce.
