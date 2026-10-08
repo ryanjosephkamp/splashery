@@ -185,13 +185,15 @@
                 style="background-image: url(&quot;../../../assets/toys/moon/thumb.webp&quot;)"
               ></span>
               <iframe
-                src="../../play/?toy=moon"
+                src="../../play/?toy=moon&sound=on"
                 title="Moon, live: drag to turn it"
                 loading="eager"
                 allow="fullscreen"
               ></iframe>
             </div>
-            <figcaption>Drag to turn it; tap to play.</figcaption>
+            <figcaption>
+              Drag to turn it; tap to play. The speaker button mutes the sound.
+            </figcaption>
           </figure>
         </div>
         <section class="toy-section" aria-labelledby="h-about">
@@ -205,6 +207,12 @@
             Tap it and a lunar module lands, an astronaut climbs down, bounds over in low-gravity
             hops and plants a flag, which you can pick in the Toy tab. Tap again and the astronaut
             packs up and lifts off. Between 1969 and 1972, twelve astronauts walked on the Moon.
+          </p>
+          <p class="learn-more">
+            Learn more:
+            <a href="https://en.wikipedia.org/wiki/Moon" target="_blank" rel="noopener"
+              >Moon on Wikipedia</a
+            >
           </p>
         </section>
 
@@ -309,7 +317,8 @@ https://ryanjosephkamp.github.io/splashery/site/toys/moon/</textarea
             </button>
           </div>
           <p class="note">
-            Embeds are silent and turn slowly when idle. Every option is in the
+            Embeds are silent and turn slowly when idle; add <code>&amp;sound=on</code> to the
+            iframe's link for the toy's tap sound, with a mute button. Every option is in the
             <a href="../../share/">embed guide</a>.
           </p>
         </section>

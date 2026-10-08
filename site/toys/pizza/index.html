@@ -182,13 +182,15 @@
                 style="background-image: url(&quot;../../../assets/toys/pizza/thumb.webp&quot;)"
               ></span>
               <iframe
-                src="../../play/?toy=pizza"
+                src="../../play/?toy=pizza&sound=on"
                 title="Pizza, live: drag to turn it"
                 loading="eager"
                 allow="fullscreen"
               ></iframe>
             </div>
-            <figcaption>Drag to turn it; tap to play.</figcaption>
+            <figcaption>
+              Drag to turn it; tap to play. The speaker button mutes the sound.
+            </figcaption>
           </figure>
         </div>
         <section class="toy-section" aria-labelledby="h-about">
@@ -205,6 +207,12 @@
             strands. Tap again to put the slice back. Pick pepperoni, margherita, veggie or cheese
             in the Toy tab. With ✋ Hands-on on, drag the slice away yourself: the cheese strings
             sag, stretch and snap, and you can set the slice back.
+          </p>
+          <p class="learn-more">
+            Learn more:
+            <a href="https://en.wikipedia.org/wiki/Pizza" target="_blank" rel="noopener"
+              >Pizza on Wikipedia</a
+            >
           </p>
         </section>
 
@@ -309,7 +317,8 @@ https://ryanjosephkamp.github.io/splashery/site/toys/pizza/</textarea
             </button>
           </div>
           <p class="note">
-            Embeds are silent and turn slowly when idle. Every option is in the
+            Embeds are silent and turn slowly when idle; add <code>&amp;sound=on</code> to the
+            iframe's link for the toy's tap sound, with a mute button. Every option is in the
             <a href="../../share/">embed guide</a>.
           </p>
         </section>

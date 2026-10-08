@@ -170,6 +170,11 @@
               <li><a href="#night-sky-lane-night-sky">Night sky (lane Night sky)</a></li>
               <li><a href="#real-worlds-lane-space-r2">Real worlds (lane Space r2)</a></li>
               <li>
+                <a href="#the-solar-system-on-real-orbits-lane-space-r4"
+                  >The solar system on real orbits (lane Space r4)</a
+                >
+              </li>
+              <li>
                 <a href="#powers-of-ten-lane-powers-of-ten">Powers of ten (lane Powers of ten)</a>
               </li>
               <li>
@@ -188,7 +193,17 @@
               <li><a href="#arcade-lane-arcade">Arcade (lane Arcade)</a></li>
               <li><a href="#national-flags">National flags</a></li>
               <li><a href="#sounds">Sounds</a></li>
+              <li>
+                <a href="#lattices-and-orbitals-lane-lattices-and-orbitals"
+                  >Lattices and orbitals (lane Lattices and orbitals)</a
+                >
+              </li>
               <li><a href="#software">Software</a></li>
+              <li>
+                <a href="#ai-made-studio-samples-dot-samples"
+                  >AI-made Studio samples (Dot samples)</a
+                >
+              </li>
             </ul>
           </li>
           <li>
@@ -5848,6 +5863,53 @@
               Public domain.
             </li>
           </ul>
+          <h2 id="the-solar-system-on-real-orbits-lane-space-r4">
+            The solar system on real orbits (lane Space r4)
+          </h2>
+          <p>
+            All from JPL's Solar System Dynamics group (NASA/JPL; public domain scientific data),
+            checked on the live pages on October 7, 2026, shipped as a dated snapshot
+            (<code>tools/sp4-orbits.mjs</code>); nothing is fetched at run time.
+          </p>
+          <ul>
+            <li>
+              The planets: E. M. Standish's
+              <a
+                href="https://ssd.jpl.nasa.gov/planets/approx_pos.html"
+                target="_blank"
+                rel="noopener"
+                >Keplerian Elements for Approximate Positions of the Major Planets</a
+              >
+              (Table 1, 1800 to 2050), through the night sky's code.
+            </li>
+            <li>
+              The moons: JPL's
+              <a href="https://ssd.jpl.nasa.gov/sats/elem/" target="_blank" rel="noopener"
+                >Planetary Satellite Mean Elements</a
+              >, and Titan's osculating elements from
+              <a href="https://ssd.jpl.nasa.gov/horizons/" target="_blank" rel="noopener"
+                >JPL Horizons</a
+              >.
+            </li>
+            <li>
+              The asteroids and comets: the
+              <a
+                href="https://ssd.jpl.nasa.gov/tools/sbdb_query.html"
+                target="_blank"
+                rel="noopener"
+                >JPL Small-Body Database</a
+              >
+              through its
+              <a href="https://ssd-api.jpl.nasa.gov/" target="_blank" rel="noopener">APIs</a>: a
+              seeded random sample of 4,000 numbered asteroids (plus Ceres, Pallas, Vesta and
+              Hygiea), and 1P/Halley, 2P/Encke, 9P/Tempel 1 and 67P/Churyumov-Gerasimenko.
+            </li>
+            <li>
+              The planets' and moons' colors: small copies of the real worlds' NASA and USGS maps
+              (above).
+            </li>
+            <li>The tests compare positions with values recorded from JPL Horizons.</li>
+          </ul>
           <h2 id="powers-of-ten-lane-powers-of-ten">Powers of ten (lane Powers of ten)</h2>
           <p>
             The Powers of ten zoom (labs) shows each scale with real pictures and real data. Its own
@@ -7018,6 +7080,70 @@
               </tbody>
             </table>
           </div>
+          <h2 id="lattices-and-orbitals-lane-lattices-and-orbitals">
+            Lattices and orbitals (lane Lattices and orbitals)
+          </h2>
+          <p>
+            The Unit cells toy (labs) is computed from published numbers; no files are shipped. The
+            cells and atom positions come from the
+            <a href="https://www.crystallography.net/cod/" target="_blank" rel="noopener"
+              >Crystallography Open Database</a
+            >, whose data are in the public domain (&quot;All data on this site have been placed in
+            the public domain by the contributors&quot;), checked October 7, 2026:
+            <a
+              href="https://www.crystallography.net/cod/9008564.html"
+              target="_blank"
+              rel="noopener"
+              >COD 9008564</a
+            >
+            (diamond),
+            <a
+              href="https://www.crystallography.net/cod/9008468.html"
+              target="_blank"
+              rel="noopener"
+              >COD 9008468</a
+            >
+            (copper),
+            <a
+              href="https://www.crystallography.net/cod/9008536.html"
+              target="_blank"
+              rel="noopener"
+              >COD 9008536</a
+            >
+            (α-iron) and
+            <a
+              href="https://www.crystallography.net/cod/9008506.html"
+              target="_blank"
+              rel="noopener"
+              >COD 9008506</a
+            >
+            (magnesium), all from R. W. G. Wyckoff, Crystal Structures (1963);
+            <a
+              href="https://www.crystallography.net/cod/9011577.html"
+              target="_blank"
+              rel="noopener"
+              >COD 9011577</a
+            >
+            (graphite, P. Trucano and R. Chen, Nature 258, 136–137, 1975);
+            <a
+              href="https://www.crystallography.net/cod/1538173.html"
+              target="_blank"
+              rel="noopener"
+              >COD 1538173</a
+            >
+            (ice Ih, A. Goto, T. Hondoh and S. Mae, J. Chem. Phys. 93, 1412, 1990) and
+            <a
+              href="https://www.crystallography.net/cod/1572227.html"
+              target="_blank"
+              rel="noopener"
+              >COD 1572227</a
+            >
+            (ice Ih's displacements at 81 K, IUCrJ 11, 2024). The Debye–Waller factors of diamond,
+            copper, iron and magnesium at 293 K are from L.-M. Peng, G. Ren, S. L. Dudarev and M. J.
+            Whelan, Acta Crystallographica A 52, 456–470 (1996), and the covalent radii of O and H
+            from B. Cordero et al., Dalton Transactions, 2832–2838 (2008); numbers are facts, quoted
+            with their source. The Orbital atlas computes the hydrogen wave functions itself.
+          </p>
           <h2 id="software">Software</h2>
           <p>
             Splashery is built on the
@@ -7053,6 +7179,53 @@
             check runs in a browser without its own QR reader). &quot;QR Code&quot; is a registered
             trademark of DENSO WAVE INCORPORATED.
           </p>
+          <h2 id="ai-made-studio-samples-dot-samples">AI-made Studio samples (Dot samples)</h2>
+          <p>
+            The owner made 40 pictures with his own AI image tool (the &quot;Dot&quot; prompt pack,
+            D01 to D40). Thirty of them ship as Photo to 3D samples in
+            <code>assets/toys/photo-3d/ai/</code> (a JPEG, 1,280 px wide, and a depth map made by
+            <code>tools/dsm-depth.mjs</code>), under the AI-made sample rules of October 5, 2026: no
+            people, logos or text; labeled AI-made beside them (in the picker, the label and the
+            credit); never real captures or real places, and never used for science, math or
+            engineering toys. The pictures belong to the owner, who made them; no third-party work
+            is in them. Checked October 7, 2026:
+          </p>
+          <ul>
+            <li>Train on a viaduct (D01): <code>assets/toys/photo-3d/ai/train.jpg</code>.</li>
+            <li>Desert oasis (D03): <code>assets/toys/photo-3d/ai/oasis.jpg</code>.</li>
+            <li>Castle on a lake (D04): <code>assets/toys/photo-3d/ai/castle.jpg</code>.</li>
+            <li>Fishing cove (D05): <code>assets/toys/photo-3d/ai/cove.jpg</code>.</li>
+            <li>Toy harbor (D34): <code>assets/toys/photo-3d/ai/harbor.jpg</code>.</li>
+            <li>Paper valley (D36): <code>assets/toys/photo-3d/ai/paper-valley.jpg</code>.</li>
+            <li>Felt farm (D37): <code>assets/toys/photo-3d/ai/farm.jpg</code>.</li>
+            <li>Treehouse village (D02): <code>assets/toys/photo-3d/ai/treehouses.jpg</code>.</li>
+            <li>Long library (D06): <code>assets/toys/photo-3d/ai/library.jpg</code>.</li>
+            <li>Woodworking shop (D07): <code>assets/toys/photo-3d/ai/workshop.jpg</code>.</li>
+            <li>Stone cloister (D08): <code>assets/toys/photo-3d/ai/cloister.jpg</code>.</li>
+            <li>Greenhouse (D10): <code>assets/toys/photo-3d/ai/greenhouse.jpg</code>.</li>
+            <li>Attic (D14): <code>assets/toys/photo-3d/ai/attic.jpg</code>.</li>
+            <li>Bamboo path (D16): <code>assets/toys/photo-3d/ai/bamboo.jpg</code>.</li>
+            <li>Rice terraces (D11): <code>assets/toys/photo-3d/ai/terraces.jpg</code>.</li>
+            <li>Canyon at sunset (D13): <code>assets/toys/photo-3d/ai/canyon.jpg</code>.</li>
+            <li>Stone arch (D17): <code>assets/toys/photo-3d/ai/arch.jpg</code>.</li>
+            <li>
+              Forest and fallen log (D19): <code>assets/toys/photo-3d/ai/fallen-log.jpg</code>.
+            </li>
+            <li>Alpine lake (D20): <code>assets/toys/photo-3d/ai/alpine-lake.jpg</code>.</li>
+            <li>Frozen waterfall (D30): <code>assets/toys/photo-3d/ai/ice-falls.jpg</code>.</li>
+            <li>
+              Floating islands (D32): <code>assets/toys/photo-3d/ai/floating-isles.jpg</code>.
+            </li>
+            <li>Glass wave (D38): <code>assets/toys/photo-3d/ai/wave.jpg</code>.</li>
+            <li>Explorer's desk (D21): <code>assets/toys/photo-3d/ai/explorer-desk.jpg</code>.</li>
+            <li>Watchmaker's bench (D22): <code>assets/toys/photo-3d/ai/watchmaker.jpg</code>.</li>
+            <li>Dragonfly (D26): <code>assets/toys/photo-3d/ai/dragonfly.jpg</code>.</li>
+            <li>Mushrooms (D27): <code>assets/toys/photo-3d/ai/mushrooms.jpg</code>.</li>
+            <li>Fruit market (D28): <code>assets/toys/photo-3d/ai/market.jpg</code>.</li>
+            <li>Giant gears (D31): <code>assets/toys/photo-3d/ai/gears.jpg</code>.</li>
+            <li>Chess board (D40): <code>assets/toys/photo-3d/ai/chess.jpg</code>.</li>
+            <li>City of books (D29): <code>assets/toys/photo-3d/ai/book-city.jpg</code>.</li>
+          </ul>
         </div>
       </section>
       <section class="md-file" aria-label="Third-party licenses">

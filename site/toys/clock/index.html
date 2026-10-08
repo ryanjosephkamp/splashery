@@ -185,13 +185,15 @@
                 style="background-image: url(&quot;../../../assets/toys/clock/thumb.webp&quot;)"
               ></span>
               <iframe
-                src="../../play/?toy=clock&turntable=off"
+                src="../../play/?toy=clock&turntable=off&sound=on"
                 title="Alarm clock, live: drag to turn it"
                 loading="eager"
                 allow="fullscreen"
               ></iframe>
             </div>
-            <figcaption>Drag to look around it; tap to play.</figcaption>
+            <figcaption>
+              Drag to look around it; tap to play. The speaker button mutes the sound.
+            </figcaption>
           </figure>
         </div>
         <section class="toy-section" aria-labelledby="h-about">
@@ -206,6 +208,12 @@
             The hands on this clock show the real time where you are, or in another time zone you
             pick in the Toy tab. Tap it to ring the alarm: the hammer rattles between the bells and
             the whole clock shakes and hops. Pick its color in the Toy tab.
+          </p>
+          <p class="learn-more">
+            Learn more:
+            <a href="https://en.wikipedia.org/wiki/Alarm_clock" target="_blank" rel="noopener"
+              >Alarm clock on Wikipedia</a
+            >
           </p>
         </section>
 
@@ -310,7 +318,8 @@ https://ryanjosephkamp.github.io/splashery/site/toys/clock/</textarea
             </button>
           </div>
           <p class="note">
-            Embeds are silent and turn slowly when idle. Every option is in the
+            Embeds are silent and turn slowly when idle; add <code>&amp;sound=on</code> to the
+            iframe's link for the toy's tap sound, with a mute button. Every option is in the
             <a href="../../share/">embed guide</a>.
           </p>
         </section>

@@ -1417,7 +1417,17 @@ export const MOVING_PHOTO = {
   kernel: "sharp",
   turntable: false,
   options: [
-    { key: "depth", label: "Depth", type: "slider", min: 0, max: 1, step: 0.05, default: 0.6 },
+    // Live r8: also a slider over the stage.
+    {
+      key: "depth",
+      label: "Depth",
+      type: "slider",
+      min: 0,
+      max: 1,
+      step: 0.05,
+      default: 0.6,
+      stage: true,
+    },
     {
       key: "clip",
       label: "Clip",

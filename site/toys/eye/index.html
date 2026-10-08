@@ -182,13 +182,15 @@
                 style="background-image: url(&quot;../../../assets/toys/eye/thumb.webp&quot;)"
               ></span>
               <iframe
-                src="../../play/?toy=eye"
+                src="../../play/?toy=eye&sound=on"
                 title="Eye, live: drag to turn it"
                 loading="eager"
                 allow="fullscreen"
               ></iframe>
             </div>
-            <figcaption>Drag to turn it; tap to play.</figcaption>
+            <figcaption>
+              Drag to turn it; tap to play. The speaker button mutes the sound.
+            </figcaption>
           </figure>
         </div>
         <section class="toy-section" aria-labelledby="h-about">
@@ -203,6 +205,12 @@
             This eye glances around by itself. Tap it and it blinks, turns to look at you and snaps
             its pupil small. The Pupil slider sets how wide the pupil is, and you can pick the iris
             color. People blink about 15 to 20 times a minute, which keeps the eye wet and clean.
+          </p>
+          <p class="learn-more">
+            Learn more:
+            <a href="https://en.wikipedia.org/wiki/Human_eye" target="_blank" rel="noopener"
+              >Human eye on Wikipedia</a
+            >
           </p>
         </section>
 
@@ -307,7 +315,8 @@ https://ryanjosephkamp.github.io/splashery/site/toys/eye/</textarea
             </button>
           </div>
           <p class="note">
-            Embeds are silent and turn slowly when idle. Every option is in the
+            Embeds are silent and turn slowly when idle; add <code>&amp;sound=on</code> to the
+            iframe's link for the toy's tap sound, with a mute button. Every option is in the
             <a href="../../share/">embed guide</a>.
           </p>
         </section>
