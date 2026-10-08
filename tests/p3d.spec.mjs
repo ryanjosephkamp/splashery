@@ -101,7 +101,8 @@ test.describe("the conversion", () => {
     expect(s.stats.bigPieces).toBeGreaterThanOrEqual(2); // cut apart at the jump
     expect(s.stats.cutEdges).toBeGreaterThan(20);
     // the flat pose is one plane, and a deeper Depth setting makes a deeper relief
-    for (let i = 0; i < s.n; i++) expect(s.flat[i * 3 + 2]).toBe(0);
+    // (lane Photo fidelity r2: a bigger splat sits up to 3 BLOCK_BACK behind, so it never draws over detail)
+    for (let i = 0; i < s.n; i++) expect(Math.abs(s.flat[i * 3 + 2])).toBeLessThanOrEqual(0.0061);
     const deep = buildPhotoSplats(photo, depth, { count: 2400, depth: 1 });
     expect(deep.stats.relief).toBeGreaterThan(s.stats.relief);
     // no splat is stretched: every size stays within 1.7 grid cells (times FILL) per cell of its block

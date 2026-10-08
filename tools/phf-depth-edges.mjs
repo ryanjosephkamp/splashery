@@ -65,7 +65,9 @@ for (const id of PLANS.length ? SAMPLES : []) {
       const out = { id, size: [w, h], n, tests, plans: [] };
       for (const [side, count] of plans) {
         const k = Math.min(n, count);
-        const keys = Array.from({ length: k }, (_, i) => Math.round((i * (n - 1)) / Math.max(1, k - 1)));
+        const keys = Array.from({ length: k }, (_, i) =>
+          Math.round((i * (n - 1)) / Math.max(1, k - 1)),
+        );
         const t0 = performance.now();
         const raw = await m.depthOf(keys.map(at), w, h, null, side);
         const secs = (performance.now() - t0) / 1000;
@@ -81,7 +83,10 @@ for (const id of PLANS.length ? SAMPLES : []) {
           const ref = refs[q];
           const r1 = m.sharpenEdges(m.normalizeDepths(blend, w, h)[0], w, h);
           const r2 = m.sharpenEdges(m.normalizeDepths(blend, w, h, false, [at(t)])[0], w, h);
-          for (const [name, dd] of [["r1", r1], ["r2", r2]]) {
+          for (const [name, dd] of [
+            ["r1", r1],
+            ["r2", r2],
+          ]) {
             let e = 0;
             let wrong = 0;
             let edges = 0;
@@ -120,7 +125,11 @@ for (const id of PLANS.length ? [] : SAMPLES) {
       const clip = await m.loadSample(id);
       const { w, h } = clip;
       const pick = Array.from({ length: frames }, (_, k) => Math.round(((k + 0.5) * clip.n) / frames)); // prettier-ignore
-      const sum = { r1: { mae: 0, edge: 0, wrong: 0 }, r2: { mae: 0, edge: 0, wrong: 0 }, edges: 0 };
+      const sum = {
+        r1: { mae: 0, edge: 0, wrong: 0 },
+        r2: { mae: 0, edge: 0, wrong: 0 },
+        edges: 0,
+      };
       const strip = document.createElement("canvas");
       strip.width = w * 4;
       strip.height = h * frames;

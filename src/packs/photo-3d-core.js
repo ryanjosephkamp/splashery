@@ -32,12 +32,16 @@ export const FILL = 1.05; // a splat's size against the distance to its neighbor
 export const CUT = 0.015; // a step in the (0..1) disparity between neighbors that cuts the surface
 export const SPLAT_OPACITY = 1;
 export const SPLAT_FLAT = 0.14;
-// Lane Photo fidelity r2: the adaptive grid. The fine grid holds FINE_CELLS cells per splat of the
-// budget, in blocks of 2^LEVELS by 2^LEVELS cells; each block is one splat, or splits into four,
-// and those again, down to single cells, where the picture has detail (the most color error
-// taken away for each split, first), so a page's plain background takes a few big splats and its
-// letters many small ones. (r1 and before: 2 by 2 blocks, SPLIT_SHARE of them split.)
+// Lane Photo fidelity r2: the adaptive grid. The fine grid is made of blocks of 2^LEVELS by 2^LEVELS
+// cells; a plain block (its colors within FLAT_VAR of their mean) is one splat, a block with
+// detail splits into four, and those again, down to 2 by 2 cells, then to single cells where the
+// split takes away the most color error, until the budget is spent. So a page's plain background
+// takes a few big splats and its letters many small ones. The fine grid holds between 2.2 and
+// FINE_CELLS cells per splat of the budget: the more of the picture is plain, the finer
+// (fineCells). (r1 and before: 2.2 cells per splat, in 2 by 2 blocks, SPLIT_SHARE of them split.)
 export const FINE_CELLS = 6;
+export const BLOCK_BACK = 0.002; // how far behind (picture heights) each level of bigger splat sits
+export const FLAT_VAR = 0.002; // a block's mean squared color difference (r, g, b summed, 0..1) that still counts as plain
 export const LEVELS = 3;
 export const SPLIT_SHARE = 0.28; // (r1's grid; kept for the tools that compare)
 export const SHARPEN = 0.5; // unsharp amount on the grid colors, to make up for the splats' overlap
@@ -367,7 +371,7 @@ export function buildPhotoSplats(
   // when a small picture would lose more than 2% of itself that way.)
   let levels = LEVELS;
   let B = 1 << levels;
-  const nb = Math.min(count, (FINE_CELLS * count) / (B * B));
+  const nb = Math.min(count, (fineCells(photo, count) * count) / (B * B));
   let bx = Math.max(1, Math.round(Math.sqrt(nb * aspect)));
   let by = Math.max(1, Math.round(nb / bx));
   if (B * bx > photo.w || B * by > photo.h) {
@@ -472,7 +476,11 @@ export function buildPhotoSplats(
     const y = 0.5 - (y0 + sz / 2) / gy;
     oRelief[k * 3] = oFlat[k * 3] = x;
     oRelief[k * 3 + 1] = oFlat[k * 3 + 1] = y;
-    oRelief[k * 3 + 2] = zz / q;
+    // a bigger splat sits a hair behind the smaller ones, so it never draws over their detail
+    // (they would sort in any order at the same depth)
+    const back = BLOCK_BACK * Math.log2(sz);
+    oRelief[k * 3 + 2] = zz / q - back;
+    oFlat[k * 3 + 2] = back ? -back : 0;
     oRgb[k * 3] = r / q;
     oRgb[k * 3 + 1] = gg / q;
     oRgb[k * 3 + 2] = b / q;
@@ -504,6 +512,42 @@ export function buildPhotoSplats(
       levels: g.levels, // splats of each size: [1 cell, 2 by 2, 4 by 4, ...]
     },
   };
+}
+
+// Lane Photo fidelity r2: how fine the grid can be for this picture, in cells per splat of the
+// budget. A quick look at the picture (its colors in 2 by 2 cells of the finest grid, in blocks of
+// 2^LEVELS cells) finds the share p that is plain; the detail takes a splat per 2 by 2 cells and
+// the plain a splat per block, and three quarters of the budget goes to that, the rest to single
+// cells where the detail is finest.
+export function fineCells(photo, count) {
+  const aspect = photo.w / photo.h;
+  const half = 1 << (LEVELS - 1);
+  const area = Math.min(photo.w * photo.h, (FINE_CELLS * count) / 4);
+  const pw = Math.max(half, Math.floor(Math.sqrt(area * aspect) / half) * half);
+  const ph = Math.max(half, Math.floor(area / pw / half) * half);
+  const rgb = resampleArea(photo, pw, ph);
+  let plain = 0;
+  let blocks = 0;
+  for (let by = 0; by + half <= ph; by += half)
+    for (let bx = 0; bx + half <= pw; bx += half) {
+      let s = 0;
+      let s2 = 0;
+      const sum = [0, 0, 0];
+      for (let y = by; y < by + half; y++)
+        for (let x = bx; x < bx + half; x++)
+          for (let k = 0; k < 3; k++) {
+            const v = rgb[(y * pw + x) * 3 + k];
+            sum[k] += v;
+            s2 += v * v;
+          }
+      const q = half * half;
+      s = s2 - (sum[0] ** 2 + sum[1] ** 2 + sum[2] ** 2) / q;
+      if (s / q <= FLAT_VAR) plain++;
+      blocks++;
+    }
+  const p = blocks ? plain / blocks : 0;
+  const b2 = 1 << (2 * LEVELS);
+  return clamp(0.75 / ((1 - p) / 4 + p / b2), 2.2, FINE_CELLS);
 }
 
 // Lane Photo fidelity r2: the adaptive grid's choice. The fine grid (gx by gy, both multiples of
@@ -581,8 +625,11 @@ export function adaptiveGrid({ gx, gy, levels, count, rgb, d, m }) {
     let kids = 0;
     for (let dj = 0; dj < 2; dj++)
       for (let di = 0; di < 2; di++) kids += sse(k - 1, 2 * i + di, 2 * j + dj);
-    const near = S[k][(j * nx[k] + i) * 5 + 4] / (1 << (2 * k));
-    return (sse(k, i, j) - kids) * (1 + 0.5 * near);
+    const q = 1 << (2 * k);
+    const near = S[k][(j * nx[k] + i) * 5 + 4] / q;
+    const gain = (sse(k, i, j) - kids) * (1 + 0.5 * near);
+    // a block bigger than 2 by 2 with detail in it splits before any 2 by 2 block does
+    return k >= 2 && sse(k, i, j) / q > FLAT_VAR ? 1e9 + gain : gain;
   };
   // a max-heap of the blocks that could split (level >= 1), keyed by priority
   const off = [0];

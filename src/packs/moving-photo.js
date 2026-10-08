@@ -168,8 +168,9 @@ const modelSize = (w, h, side = DEPTH_SIDE) => {
 // output scaled by its 2nd and 98th percentiles, those eased across
 // neighboring frames so the depth doesn't pump from frame to frame.
 // Lane Photo fidelity r2: with the frames' colors (`frames`, RGBA at w by h),
-// the depth is enlarged edge-aware (guidedDepth): its edges land on the
-// frame's own edges instead of on a soft ramp a few pixels wide.
+// the depth is enlarged edge-aware (guidedDepth). Measured against the
+// model's own depth at 518 (tools/phf-depth-edges.mjs), it moves the edges
+// too little to be worth its time, so the toy doesn't use it; the tool does.
 export function normalizeDepths(raw, w, h, keepFlat = false, frames = null) {
   const ranges = raw.map((d) => {
     const s = Float32Array.from(d.d).sort();
@@ -474,7 +475,7 @@ export async function openClip(file, name, onStatus) {
   // full size is what the splats show (photoSource); the frames above are the depth's and the
   // plain splats' colors.
   const copy = isGif ? null : await keepCopy(file);
-  return { ...makeClip(name, w, h, frames, normalizeDepths(raw, w, h, true, frames)), audio, source, ...copy }; // prettier-ignore
+  return { ...makeClip(name, w, h, frames, normalizeDepths(raw, w, h, true)), audio, source, ...copy }; // prettier-ignore
 }
 
 // A video's first MAX_SECONDS, at clipFps() frames a second, each drawn
