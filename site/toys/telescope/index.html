@@ -185,13 +185,15 @@
                 style="background-image: url(&quot;../../../assets/toys/telescope/thumb.webp&quot;)"
               ></span>
               <iframe
-                src="../../play/?toy=telescope&turntable=off"
+                src="../../play/?toy=telescope&turntable=off&sound=on"
                 title="Telescope, live: drag to turn it"
                 loading="eager"
                 allow="fullscreen"
               ></iframe>
             </div>
-            <figcaption>Drag to look around it; tap to play.</figcaption>
+            <figcaption>
+              Drag to look around it; tap to play. The speaker button mutes the sound.
+            </figcaption>
           </figure>
         </div>
         <section class="toy-section" aria-labelledby="h-about">
@@ -205,6 +207,12 @@
           <p>
             The telescope starts pulled out, on a three-legged stand. Tap to collapse it, sliding
             the tubes together, and tap again to pull it out.
+          </p>
+          <p class="learn-more">
+            Learn more:
+            <a href="https://en.wikipedia.org/wiki/Telescope" target="_blank" rel="noopener"
+              >Telescope on Wikipedia</a
+            >
           </p>
         </section>
 
@@ -309,7 +317,8 @@ https://ryanjosephkamp.github.io/splashery/site/toys/telescope/</textarea
             </button>
           </div>
           <p class="note">
-            Embeds are silent and turn slowly when idle. Every option is in the
+            Embeds are silent and turn slowly when idle; add <code>&amp;sound=on</code> to the
+            iframe's link for the toy's tap sound, with a mute button. Every option is in the
             <a href="../../share/">embed guide</a>.
           </p>
         </section>

@@ -190,13 +190,15 @@
                 style="background-image: url(&quot;../../../assets/toys/menorah/thumb.webp&quot;)"
               ></span>
               <iframe
-                src="../../play/?toy=menorah"
+                src="../../play/?toy=menorah&sound=on"
                 title="Menorah, live: drag to turn it"
                 loading="eager"
                 allow="fullscreen"
               ></iframe>
             </div>
-            <figcaption>Drag to turn it; tap to play.</figcaption>
+            <figcaption>
+              Drag to turn it; tap to play. The speaker button mutes the sound.
+            </figcaption>
           </figure>
         </div>
         <section class="toy-section" aria-labelledby="h-about">
@@ -211,6 +213,12 @@
           <p>
             The menorah starts with every candle lit. Tap to put them out, and tap again to light
             them: the helper candle first, then the others one by one.
+          </p>
+          <p class="learn-more">
+            Learn more:
+            <a href="https://en.wikipedia.org/wiki/Hanukkah_menorah" target="_blank" rel="noopener"
+              >Hanukkah menorah on Wikipedia</a
+            >
           </p>
         </section>
 
@@ -315,7 +323,8 @@ https://ryanjosephkamp.github.io/splashery/site/toys/menorah/</textarea
             </button>
           </div>
           <p class="note">
-            Embeds are silent and turn slowly when idle. Every option is in the
+            Embeds are silent and turn slowly when idle; add <code>&amp;sound=on</code> to the
+            iframe's link for the toy's tap sound, with a mute button. Every option is in the
             <a href="../../share/">embed guide</a>.
           </p>
         </section>
