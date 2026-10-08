@@ -821,7 +821,7 @@ const FOUNTAIN_PEN = {
         give: 0.02,
         reseat: {
           snap: 0.25,
-          seats: [{ pos: [2 * FP.post - FP.capC[0], FP.capC[1], FP.capC[2]], quat: quatAxisAngle([0, 1, 0], Math.PI) }], // prettier-ignore
+          seats: [{ pos: [2 * FP.post - FP.capC[0] - 0.12, FP.capC[1], FP.capC[2]], quat: quatAxisAngle([0, 1, 0], Math.PI) }], // prettier-ignore
         },
         sound: (ev) =>
           ev.kind === "snap"

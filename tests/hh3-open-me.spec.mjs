@@ -362,7 +362,7 @@ test("fountain pen: the cap comes off the nib and posts on the back end, turned 
   await tick(page, 1);
   const c = await joint(page, "cap");
   expect(c.broken).toBe(false); // held fast again, on the back end
-  expect(c.pos[0]).toBeCloseTo(2 * 0.2835 + 0.545, 2);
+  expect(c.pos[0]).toBeCloseTo(2 * 0.2835 + 0.545 - 0.12, 2);
   expect(await events(page)).toEqual(expect.arrayContaining(["snap", "socket"]));
   await reset(page);
   const h = await joint(page, "cap");

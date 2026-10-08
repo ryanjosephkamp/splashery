@@ -136,10 +136,14 @@ clips within about six hours.
 
 ## State
 
-WORKING: Open me shelf built and tested; clips rendering for Effect review page 2 (October 8, 2026).
+READY (Open me): PR #432 and its nine cards (hh3-…, group "Open me") are on Effect review page 2; it
+waits for the owner's marks. Engine PR #430 merges first. Holidays, Medieval and Pictures are built
+on their branches and being tested (October 8, 2026).
 
 - Engine PR #430 (`claude/lane-hands-h3-engine`, merge first): a forgiving press (the L1 sweep's
-  center misses) and `reseat` on a break joint (a cork, a pen's cap clicks back on).
+  center misses), `reseat` on a break joint (a cork, a pen's cap clicks back on), a shake that only
+  reads (`fire: false`), picture toys that ask for joints play them, and a fix: a snapped piece
+  starts where it was (bent, at its seat), not at home.
 - Open me (`claude/lane-hands-h3-open-me`): the storybook's cover, the alarm clock's hands, the gift
   box's lid (and its star), the umbrella's runner (new, with its catch), the desk fan's tilt, the
   desk lamp's three joints and its light, the telescope's two tubes, the potion bottle's cork and
