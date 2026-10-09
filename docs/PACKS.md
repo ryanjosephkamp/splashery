@@ -796,9 +796,14 @@ tree's trunk) fires the toy's tap action (or `key`), at most every `gap` seconds
 lag behind the moving toy: `info.hands.slosh` is a sideways offset (recipe units, at most that much)
 for a part (the snow globe's snow; keep the part inside its glass by that margin).
 
+With `fire: false` the shake fires nothing and only `info.hands.shake` reads it (a decorated tree's
+baubles swing harder the harder it is shaken, while its tap still switches the lights; lane Hands-on
+H3).
+
 ```js
 hands: { shake: true },
 hands: { shake: { key: "snow", gap: 0.6 } },
+hands: { shake: { fire: false } },
 drive(t, c, out, info) {
   const s = Math.max(c.shake, info.hands?.shake ?? 0); // the harder the shake, the more snow
 ```
@@ -849,6 +854,12 @@ quick flick up the screen (faster up than across), is tossed up with half a turn
 line across the view, timed to come down upside down where it hovered before the flick, on whatever
 is under that spot, drawn toward that piece's middle by the recipe's `center` (a pancake flipped
 back onto its stack). Let go any other way, it is set down as before.
+
+**A forgiving press** (lane Hands-on H3; every toy, nothing to ask for): with the ✋ switch on, a
+press where the pick buffer finds no splat (between a desk lamp's arm and its beam, beside a thin
+pen) still takes the toy when the finger's ray crosses it: a piece's `pick` ellipsoid in pieces
+mode, else the toy's box (trimmed to 0.85 of its half sizes, as it stands now). With the switch off,
+such a press turns the view as before.
 
 `info.hands.on` is whether Hands-on is on. Check the toy's frame time with the pieces running (the
 whole world's step is well under a millisecond for one body, a few for 40 pieces).
@@ -939,6 +950,25 @@ off. ↺ mends it.
 ```js
 joints: [{ type: "break", part: "top", to: "low", at: [0.1, 0.4, 0], pull: 0.3, give: 0.15, knock: 4 }],
 ```
+
+**Reseat** (lane Hands-on H3): `reseat: true` on a break lets the piece go back. Once it has been
+taken away, bringing it within `snap` toy radii (0.3) of its place, or pointing the finger at its
+place, glides it in, and it holds fast there again (another pull snaps it off again, with its `snap`
+cue). `reseat: { snap, seats: [{ pos, quat }] }` adds other places it clicks into (its middle and
+turn there, recipe units; `quat` defaults to its own): a pen's cap posted on its end. The click is
+the `"socket"` cue. ↺ brings it home from wherever it sits. `steady: true` holds a piece that has
+just snapped off at its turn, carried where the finger holds it, instead of hanging and swinging
+from the finger (a pen's cap, carried over the pen to its back end, stays clear of the paper;
+`place` instead hovers it over whatever is under the finger).
+
+```js
+{ type: "break", part: "cork", at: [0, 0.8, 0], pull: 0.18, give: 0.03, reseat: true },
+{ type: "break", part: "cap", at: CAP_MOUTH, pull: 0.2, give: 0.02, reseat: { seats: [{ pos: POSTED, quat: HALF_TURN }] } }, // prettier-ignore
+```
+
+A picture toy (a recipe with `pictures`, or `turntable: false`) stays out of Hands-on unless its
+`hands` block has `joints` (lane Hands-on H3): then those play, and nothing else (a picture frame
+swings on its nail; its picture is never picked up whole).
 
 **Parents**: `parent` (a joint's name) puts a hinge, slider or dial on another driven part: a desk
 lamp's head on its arm, a clock's hands on a turning dial. Children pose after their parents.

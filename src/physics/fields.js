@@ -621,6 +621,8 @@ export class Extras {
   fireShake() {
     const player = this.player;
     const s = this.hands.shake;
+    // (`fire: false`: the shake only reads as info.hands.shake; lane Hands-on H3.)
+    if (typeof s === "object" && s.fire === false) return;
     const key = (typeof s === "object" && s.key) || player.toyInfo?.recipe?.action?.key;
     if (!key || !player.motion?.act) return;
     const r = player.motion.act(player.time, null, { key });
