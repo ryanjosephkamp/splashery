@@ -22,7 +22,7 @@
 //   SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium node tools/phf-measure.mjs
 //     --toy=photo-3d|moving-photo-3d [--tiers=low,mid,high,max] [--still=.cache/text-scroll/still-05s.png]
 //     [--video=.cache/text-scroll/text-scroll.webm] [--rise=0] [--out=.cache/phf-measure] [--label=before]
-//     [--url-extra=&x=1] [--view=fit|home]
+//     [--url-extra=&x=1] [--view=fit|home] [--detail=photo|splats]
 // Writes <out>/<label>-<toy>-<tier>.png (the render) and -crop.png (the picture and the source side
 // by side), and prints a JSON line per tier.
 
@@ -44,6 +44,7 @@ const STILL = opt("still", ".cache/text-scroll/still-05s.png");
 const VIDEO = opt("video", ".cache/text-scroll/text-scroll.webm");
 const RISE = Number(opt("rise", 0));
 const EXTRA = opt("url-extra", "");
+const DETAIL = opt("detail", ""); // the Detail option (photo: Fine, splats: One color per splat); unset: the default
 const VIEW = opt("view", "fit"); // home: as the toy opens; fit: zoomed so the picture fills the width
 const SCALE = 3;
 fs.mkdirSync(OUT, { recursive: true });
@@ -291,7 +292,7 @@ for (const tier of TIERS) {
   let corners;
   if (TOY === "photo-3d") {
     corners = await page.evaluate(
-      async ({ still, rise, view }) => {
+      async ({ still, rise, view, detail }) => {
         const { app, player } = window.__splashery;
         const m = await import("/src/packs/photo-3d.js");
         const bytes = new Uint8Array(await (await fetch(still)).arrayBuffer());
@@ -303,7 +304,12 @@ for (const tier of TIERS) {
           .then((s) => s.setSharpView("photo-3d", "splats"))
           .catch(() => {}); // Splats, not the Sharp picture view (lane Photo sharp view)
         await app.chooseToy("photo-3d");
-        await app.setToyOptions({ source: "custom" });
+        (await import("/src/packs/photo-sharp.js")).setSharpView("photo-3d", "splats"); // (before the rebuild)
+        await app.setToyOptions({
+          source: "custom",
+          view: "splats",
+          ...(detail ? { detail } : {}),
+        }); // (the Splats view: a scene saves it, lane Photo sharp view r2)
         player.idle.weight = 0;
         await new Promise((r) => setTimeout(r, 1500));
         player.motion.setControl("flat", 1 - rise, { snap: true });
@@ -354,16 +360,18 @@ for (const tier of TIERS) {
         const pts = [[-a / 2, 0.5, 0], [a / 2, 0.5, 0], [-a / 2, -0.5, 0], [a / 2, -0.5, 0]].map((p) => player.screenPoint(p)).map(([x, y]) => [x + cv.left, y + cv.top]); // prettier-ignore
         return { pts, band: bestBand, info: s, count: player.kit?.count ?? null };
       },
-      { still: "/" + STILL, rise: RISE, view: VIEW },
+      { still: "/" + STILL, rise: RISE, view: VIEW, detail: DETAIL },
     );
   } else {
-    await page.evaluate(async () => {
+    await page.evaluate(async (detail) => {
       const { app } = window.__splashery;
       await import("/src/packs/photo-sharp.js")
         .then((s) => s.setSharpView("moving-photo-3d", "splats"))
         .catch(() => {}); // Splats, not the Sharp picture view (lane Photo sharp view)
       await app.chooseToy("moving-photo-3d");
-    });
+      (await import("/src/packs/photo-sharp.js")).setSharpView("moving-photo-3d", "splats"); // (before the rebuild)
+      await app.setToyOptions({ view: "splats", ...(detail ? { detail } : {}) });
+    }, DETAIL);
     await page.waitForTimeout(1500);
     await page.setInputFiles("#toy-input-file", VIDEO);
     if (process.env.PHF_VERBOSE) console.error("opened the video");
