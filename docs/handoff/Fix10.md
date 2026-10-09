@@ -15,17 +15,20 @@ ryanjosephkamp/splashery.
 - October 9, 2026: started on `claude/lane-fix10` from main 8a53aa5c. Draft PR #467.
 - 1. Volume viewer sound: done (tap: `pageflip` plus a soft `thud`; Play: `action.quiet: ["sweep"]`
      and two `whoom` cues from `driveVolume`, one per pass; drag silent). sound-lint and sound-check
-     pass.
-- 2. Electron microscope: done in code and tests (`targets` per sample, `action.at` picks the
-     nearest ellipse, the zoom state lives in `kit.data.zoom`). Clip rendered and checked.
-- 3. Fruit MRI: done in code and tests (`mriDrag`, the Slice slider, `turntable: false`,
-     `pausable: false`, brighter outline, a ring per slice). Clip rendering.
-- 4. Ripple tank: done in code (`PEBBLE` in optics.js, a shadow part, a sink, a bigger dent; the
-     drip moved to 0.43 s). Clip to render.
-- 5. Night sky: the day ground in code (night density, rows under the skyline); the drag on
-     `claude/lane-fix10-engine` (committed, browser specs to run).
-- 6. Thumbnails: `tools/make-thumbs.mjs` draws at 4x and opens with labs on. 4D thumbnails to
-     render.
+     pass; in tools/sound-review.json as "ready" (no clip: a sound, for the Sound Board).
+- 2. Electron microscope: done (`targets` per sample, `action.at` picks the nearest ellipse, the
+     zoom state in `kit.data.zoom`). Clips `fx10-sem-before`, `fx10-sem` on page 2.
+- 3. Fruit MRI: done (`mriDrag`, the Slice slider, `turntable: false`, `pausable: false`, the camera
+     face-on, a brighter outline, an amber ring per slice). Clips `fx10-mri-before`, `fx10-mri`.
+- 4. Ripple tank: done (`PEBBLE` in optics.js, a shadow part, a sink, a bigger dent; the drip at
+     0.43 s). Clips `fx10-ripple-before`, `fx10-ripple`.
+- 5. Night sky: the day ground at the night's density (overlap 1.45), and every ground splat capped
+     so its edge never crosses the skyline. The drag on `claude/lane-fix10-engine` (committed;
+     browser sky specs to run, then push and open the Engine PR). Clips rendering.
+- 6. Thumbnails: `tools/make-thumbs.mjs` draws at 4x and scales down, labs on; the 5-cell's camera
+     4.1 -> 3.1; five 4D thumbnails re-rendered. Still card `fx10-4d-thumbs`.
+- To do: the sky clips, the engine PR, check-packs, contact sheet, screenshots, the specs of the
+  touched files.
 
 ## Notes", "## Known issues" and "## For the Operator" current.
 
@@ -143,5 +146,10 @@ replace the prefix and lane record with yours).
   the engine fix turns the view with the finger both ways.
 
 ## Known issues
+
+- The night sky at dawn: while the day ground is half faded in, the twilight glow shows through it
+  near the skyline (on main too; thinner now).
+- The MRI's outline sphere, seen face-on, is a faint speckled disc behind the end slices (as
+  before).
 
 ## For the Operator
