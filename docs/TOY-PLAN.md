@@ -55,24 +55,24 @@ Proposals below are suggestions; the owner may change them.
   attractor, 5-cell, 16-cell, 24-cell, Duoprism, Splat equation, Storybook, Music box, Fountain pen,
   Water bottle, Soda can, Running shoe, Hoodie, Sunglasses, Baseball cap, Sword in the stone,
   Heraldic shield, Bow and target, Crown, Wizard's orb, Crystal ball, Jellyfish, School of fish,
-  Pufferfish, Nautilus, Snail, Octopus, Sea urchin, Frog, Snowman, Fireworks, Decorated tree, Paper
-  lantern, Diya, Acoustic guitar, Snare drum, Xylophone, Toy piano, Grand piano, Upright piano,
-  Harpsichord, Electronic keyboard, Hot-air balloon, Sports car, Bus, Jet airliner, Sailboat,
-  Submarine, Bicycle, Eiffel Tower, Washington Monument, Pyramids of Giza, Twisting supertall,
-  Statue of Liberty, White House, Leaning Tower of Pisa, Colosseum, Parthenon, Stonehenge, Big Ben,
-  Taj Mahal, Castle, Pagoda, Windmill, Perceptron, Multilayer perceptron, Neural network,
-  Convolutional network, Recurrent network, Transformer, Looped transformer, Diffusion model,
-  Gradient descent, Gaussian splatting, Word vectors, Sorting machine, Half adder, Turing machine,
-  Difference engine, Enigma machine, Bombe, Picture lab, Your book, Photo album, Picture frame, Song
-  landscape, Chladni plate, Room echo meter, Splat mirror, Model to splats, QR code, Photo to 3D,
-  Moving photo to 3D, Video to 3D, Sound lab, Sound recorder, Splat toolkit, Point clouds, Volume
-  viewer, Splat field, Light lab, Thermal ellipsoids, Super-resolution microscope, Galaxy in a box,
-  Cryo-EM map, Contour lab, Terrain in a box, Ripple tank, Light bench, Fluid lab, Grand Canyon,
-  Mount St. Helens, The sea floor, Tides at Bar Harbor, Hurricane, Relief map, Living city, Stork
-  migration, Earthquakes, Airport X-ray scanner, How CT works, Walnut CT scan, MRI of a fruit,
-  Electron microscope, Thermal camera, Screen, Shardball, Longtail, Grain Garden, Page Breaker,
-  Strata, Volley Table, Stone Belt, Soft Landing, Night Owl Pinball, Cast a Shadow, Photo Dash, Note
-  Rider, Data in 3D.
+  Butterfly, Pufferfish, Nautilus, Ladybug, Snail, Octopus, Starfish, Sea urchin, Frog, Penguin,
+  Owl, Snowman, Fireworks, Decorated tree, Paper lantern, Diya, Acoustic guitar, Snare drum,
+  Xylophone, Toy piano, Grand piano, Upright piano, Harpsichord, Electronic keyboard, Hot-air
+  balloon, Sports car, Bus, Jet airliner, Sailboat, Submarine, Bicycle, Eiffel Tower, Washington
+  Monument, Pyramids of Giza, Twisting supertall, Statue of Liberty, White House, Leaning Tower of
+  Pisa, Colosseum, Parthenon, Stonehenge, Big Ben, Taj Mahal, Castle, Pagoda, Windmill, Perceptron,
+  Multilayer perceptron, Neural network, Convolutional network, Recurrent network, Transformer,
+  Looped transformer, Diffusion model, Gradient descent, Gaussian splatting, Word vectors, Sorting
+  machine, Half adder, Turing machine, Difference engine, Enigma machine, Bombe, Picture lab, Your
+  book, Photo album, Picture frame, Song landscape, Chladni plate, Room echo meter, Splat mirror,
+  Model to splats, QR code, Photo to 3D, Moving photo to 3D, Video to 3D, Sound lab, Sound recorder,
+  Splat toolkit, Point clouds, Volume viewer, Splat field, Light lab, Thermal ellipsoids,
+  Super-resolution microscope, Galaxy in a box, Cryo-EM map, Contour lab, Terrain in a box, Ripple
+  tank, Light bench, Fluid lab, Grand Canyon, Mount St. Helens, The sea floor, Tides at Bar Harbor,
+  Hurricane, Relief map, Living city, Stork migration, Earthquakes, Airport X-ray scanner, How CT
+  works, Walnut CT scan, MRI of a fruit, Electron microscope, Thermal camera, Screen, Shardball,
+  Longtail, Grain Garden, Page Breaker, Strata, Volley Table, Stone Belt, Soft Landing, Night Owl
+  Pinball, Cast a Shadow, Photo Dash, Note Rider, Data in 3D.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
@@ -2526,7 +2526,9 @@ Proposals below are suggestions; the owner may change them.
   - Owner: Not sure what the effect does; make it more apparent.
   - Effect: A strong pulse that jets it upward, trailing glowing tentacles.
   - Improved: C2: one strong stroke squeezes the bell and jets it up about a third of its size,
-    trailing glowing tentacles, then it drifts down (about 3 s).
+    trailing glowing tentacles, then it drifts down (about 3 s). Hands-on H5: with ✋ Hands-on on,
+    drag the bell through the water and the tentacles and oral arms trail behind it like chains
+    (ropes of nodes), then sway back as it hovers where it was let go.
   - Sound: The same two swimming pulses, a little louder (Sound C, October 2, 2026).
 - **School of fish** (`fish-school`). Now: tap: Bait ball. Plan: keep.
   - Owner: Swim around more dynamically, like a swarm.
@@ -2538,12 +2540,17 @@ Proposals below are suggestions; the owner may change them.
   - Sound: Water swishes and bursts, with bubbles.
 - **Butterfly** (`butterfly`). Now: tap: Flutter. Plan: keep.
   - Owner: Perfect.
+  - Improved: Hands-on H5: with ✋ Hands-on on, pick it up and it flutters hard on the finger; let
+    go and it flutters off, rights itself and settles back to hovering at its height near where it
+    was let go.
   - Sound: Delicate flutter.
 - **Pufferfish** (`pufferfish`). Now: tap: Poke. Plan: keep.
   - Owner: Should puff: get big, then small.
   - Effect: Inflates to a big spiky ball, then deflates.
   - Improved: C2: it now rests slim; a tap inflates it to a big spiky ball, holds, then deflates
-    with a sputter (about 4 s).
+    with a sputter (about 4 s). Hands-on H5: with ✋ Hands-on on, a press, a push or a pick-up puffs
+    it up into a spiky ball; it stays puffed while held, and once let go it waits, then slowly
+    deflates with its sputter.
   - Sound: Balloon inflate and a sputter.
 - **Nautilus** (`nautilus`). Now: tap: Hide in the shell. Plan: keep.
   - Owner: Enter and exit its shell.
@@ -2554,6 +2561,8 @@ Proposals below are suggestions; the owner may change them.
   - Sound: A jet of water, the hollow shell, a knock and bubbles.
 - **Ladybug** (`ladybug`). Now: tap: Open the wings. Plan: keep.
   - Owner: Perfect.
+  - Improved: Hands-on H5: with ✋ Hands-on on, each wing case lifts open on its own hinge at the
+    middle of the back, the folded wing under it shows, and let go it swings shut by its weight.
   - Sound: The same wing whirr, about 5 dB quieter (Sound C, October 2, 2026).
 - **Snail** (`snail`). Now: tap: Hide in the shell. Plan: keep.
   - Owner: Perfect, but it disappears too much when hiding; make it more elegant.
@@ -2564,7 +2573,9 @@ Proposals below are suggestions; the owner may change them.
     shortens from its tip into the head), then the head, neck and whole foot, front and tail, are
     drawn in through the shell's opening as solid pieces the shell hides, and the shell settles on
     the ground with nothing soft showing (3.2 s). Coming out, the foot slides out first, then the
-    head, then the stalks unroll.
+    head, then the stalks unroll. Hands-on H5: with ✋ Hands-on on, a poke makes it pull in quickly;
+    picked up by the shell it stays in, rolls back onto its foot when dropped, and a few seconds
+    later slowly comes out (never while on its side).
   - Sound: Wetter and slimier, a squish with a sticky stretch.
 - **Octopus** (`octopus`). Now: tap: Squirt ink. Plan: keep.
   - Owner: Underwhelming; the ink should be much bigger and more dramatic.
@@ -2575,6 +2586,8 @@ Proposals below are suggestions; the owner may change them.
   - Sound: A squirt, then the ink bubbling out as a liquid (no wind).
 - **Starfish** (`starfish`). Now: tap: Wave the arms. Plan: keep.
   - Owner: Fine.
+  - Improved: Hands-on H5: with ✋ Hands-on on, an arm lifts up from its root on a hinge and curls
+    back down slowly when let go.
   - Sound: The pop is kept, and each arm makes a soft wet lift as it rises and a soft pat as it
     settles, one after another.
 - **Sea urchin** (`sea-urchin`). Now: tap: Wave the spines. Plan: keep.
@@ -2589,14 +2602,22 @@ Proposals below are suggestions; the owner may change them.
   - Effect: Tongue shoots out to catch a fly.
   - Improved: E6: a fly buzzes in and hovers; the frog's jaw drops, its tongue shoots out, catches
     the fly and snaps back; the jaw shuts, its eyes sink to push the fly down (frogs swallow with
-    their eyes), and it croaks twice with its throat sac (about 3.5 s).
+    their eyes), and it croaks twice with its throat sac (about 3.5 s). Hands-on H5: with ✋
+    Hands-on on, a press on the frog puts a fly at the fingertip; the frog turns to keep the fly in
+    front of its mouth as it is dragged around, and let go it catches it (jaw, tongue, gulp and
+    croaks).
   - Sound: A real fly's wandering buzz, and real croaks after it eats the fly; real CC0 recordings
     now (frog-fly.mp3, frog-croak.mp3), with the synthesized sound as a fallback.
 - **Penguin** (`penguin`). Now: tap: Flap. Plan: keep.
   - Owner: Perfect and very cute.
+  - Improved: Hands-on H5: with ✋ Hands-on on, pushed, or dropped on its side or upside down, it
+    wobbles with its flippers out for balance and rocks back upright.
   - Sound: Squawk.
 - **Owl** (`owl`). Now: tap: Turn the head. Plan: keep.
   - Owner: Basically perfect.
+  - Improved: Hands-on H5: with ✋ Hands-on on, a press on its head and a finger moved around it
+    turn the head (and tip it) to follow; picked up by the body it is tossed as before and settles
+    back upright on its branch (the L1 sweep found it never came to rest).
   - Sound: A short, natural owl hoot (h'HOO-oo and a soft hoo), about 1 s (Sound C, October 2,
     2026).
 

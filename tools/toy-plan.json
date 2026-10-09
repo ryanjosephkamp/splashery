@@ -1635,7 +1635,7 @@
       "owner": "Not sure what the effect does; make it more apparent.",
       "effect": "A strong pulse that jets it upward, trailing glowing tentacles.",
       "sound": "The same two swimming pulses, a little louder (Sound C, October 2, 2026).",
-      "improved": "C2: one strong stroke squeezes the bell and jets it up about a third of its size, trailing glowing tentacles, then it drifts down (about 3 s)."
+      "improved": "C2: one strong stroke squeezes the bell and jets it up about a third of its size, trailing glowing tentacles, then it drifts down (about 3 s). Hands-on H5: with ✋ Hands-on on, drag the bell through the water and the tentacles and oral arms trail behind it like chains (ropes of nodes), then sway back as it hovers where it was let go."
     },
     "fish-school": {
       "v": "keep",
@@ -1647,14 +1647,15 @@
     "butterfly": {
       "v": "keep",
       "owner": "Perfect.",
-      "sound": "Delicate flutter."
+      "sound": "Delicate flutter.",
+      "improved": "Hands-on H5: with ✋ Hands-on on, pick it up and it flutters hard on the finger; let go and it flutters off, rights itself and settles back to hovering at its height near where it was let go."
     },
     "pufferfish": {
       "v": "keep",
       "owner": "Should puff: get big, then small.",
       "effect": "Inflates to a big spiky ball, then deflates.",
       "sound": "Balloon inflate and a sputter.",
-      "improved": "C2: it now rests slim; a tap inflates it to a big spiky ball, holds, then deflates with a sputter (about 4 s)."
+      "improved": "C2: it now rests slim; a tap inflates it to a big spiky ball, holds, then deflates with a sputter (about 4 s). Hands-on H5: with ✋ Hands-on on, a press, a push or a pick-up puffs it up into a spiky ball; it stays puffed while held, and once let go it waits, then slowly deflates with its sputter."
     },
     "nautilus": {
       "v": "keep",
@@ -1666,14 +1667,15 @@
     "ladybug": {
       "v": "keep",
       "owner": "Perfect.",
-      "sound": "The same wing whirr, about 5 dB quieter (Sound C, October 2, 2026)."
+      "sound": "The same wing whirr, about 5 dB quieter (Sound C, October 2, 2026).",
+      "improved": "Hands-on H5: with ✋ Hands-on on, each wing case lifts open on its own hinge at the middle of the back, the folded wing under it shows, and let go it swings shut by its weight."
     },
     "snail": {
       "v": "keep",
       "owner": "Perfect, but it disappears too much when hiding; make it more elegant.",
       "effect": "Keep hiding in the shell, but keep the shell clearly visible and ease in more gently.",
       "sound": "Wetter and slimier, a squish with a sticky stretch.",
-      "improved": "C2: it hides more gently (2.4 s): eye stalks first, then the head glides under the shell and the foot slides in; the shell stays in view and rocks once. Math (owner: it \"looks weird while and after retracting\"): like a real snail, the eye stalks roll in first (each shortens from its tip into the head), then the head, neck and whole foot, front and tail, are drawn in through the shell's opening as solid pieces the shell hides, and the shell settles on the ground with nothing soft showing (3.2 s). Coming out, the foot slides out first, then the head, then the stalks unroll."
+      "improved": "C2: it hides more gently (2.4 s): eye stalks first, then the head glides under the shell and the foot slides in; the shell stays in view and rocks once. Math (owner: it \"looks weird while and after retracting\"): like a real snail, the eye stalks roll in first (each shortens from its tip into the head), then the head, neck and whole foot, front and tail, are drawn in through the shell's opening as solid pieces the shell hides, and the shell settles on the ground with nothing soft showing (3.2 s). Coming out, the foot slides out first, then the head, then the stalks unroll. Hands-on H5: with ✋ Hands-on on, a poke makes it pull in quickly; picked up by the shell it stays in, rolls back onto its foot when dropped, and a few seconds later slowly comes out (never while on its side)."
     },
     "octopus": {
       "v": "keep",
@@ -1685,7 +1687,8 @@
     "starfish": {
       "v": "keep",
       "owner": "Fine.",
-      "sound": "The pop is kept, and each arm makes a soft wet lift as it rises and a soft pat as it settles, one after another."
+      "sound": "The pop is kept, and each arm makes a soft wet lift as it rises and a soft pat as it settles, one after another.",
+      "improved": "Hands-on H5: with ✋ Hands-on on, an arm lifts up from its root on a hinge and curls back down slowly when let go."
     },
     "sea-urchin": {
       "v": "keep",
@@ -1699,17 +1702,19 @@
       "owner": "Mouth opens and the tongue shoots out.",
       "effect": "Tongue shoots out to catch a fly.",
       "sound": "A real fly's wandering buzz, and real croaks after it eats the fly; real CC0 recordings now (frog-fly.mp3, frog-croak.mp3), with the synthesized sound as a fallback.",
-      "improved": "E6: a fly buzzes in and hovers; the frog's jaw drops, its tongue shoots out, catches the fly and snaps back; the jaw shuts, its eyes sink to push the fly down (frogs swallow with their eyes), and it croaks twice with its throat sac (about 3.5 s)."
+      "improved": "E6: a fly buzzes in and hovers; the frog's jaw drops, its tongue shoots out, catches the fly and snaps back; the jaw shuts, its eyes sink to push the fly down (frogs swallow with their eyes), and it croaks twice with its throat sac (about 3.5 s). Hands-on H5: with ✋ Hands-on on, a press on the frog puts a fly at the fingertip; the frog turns to keep the fly in front of its mouth as it is dragged around, and let go it catches it (jaw, tongue, gulp and croaks)."
     },
     "penguin": {
       "v": "keep",
       "owner": "Perfect and very cute.",
-      "sound": "Squawk."
+      "sound": "Squawk.",
+      "improved": "Hands-on H5: with ✋ Hands-on on, pushed, or dropped on its side or upside down, it wobbles with its flippers out for balance and rocks back upright."
     },
     "owl": {
       "v": "keep",
       "owner": "Basically perfect.",
-      "sound": "A short, natural owl hoot (h'HOO-oo and a soft hoo), about 1 s (Sound C, October 2, 2026)."
+      "sound": "A short, natural owl hoot (h'HOO-oo and a soft hoo), about 1 s (Sound C, October 2, 2026).",
+      "improved": "Hands-on H5: with ✋ Hands-on on, a press on its head and a finger moved around it turn the head (and tip it) to follow; picked up by the body it is tossed as before and settles back upright on its branch (the L1 sweep found it never came to rest)."
     },
     "jack-o-lantern": {
       "v": "keep",
