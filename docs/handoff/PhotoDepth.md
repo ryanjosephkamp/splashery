@@ -16,8 +16,9 @@ ryanjosephkamp/splashery.
 - Handoff file: docs/handoff/PhotoDepth.md. Create it, starting with this brief word for word under
   "## Brief". Then keep "## State
 
-October 9, 2026: first READY. Both PRs are drafts, and the clips are on Effect review page 2 (lane
-record `PhotoDepth`), waiting for the owner's marks.
+October 9, 2026: first READY. Both PRs are drafts. The owner marked all seven clips on Effect review
+page 2 (lane record `PhotoDepth`) "Looks right" the same evening, so nothing is left to fix. #468
+waits for the full run and the merge, and #471 for its merge after it.
 
 - **Engine PR #468** (`claude/lane-photo-depth-engine`): the movable slider (drag, remember, clamp,
   reset, arrow keys, `user-select: none`), focus mode's `--panel-w: 0px` on computers, and the
