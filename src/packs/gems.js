@@ -15,7 +15,14 @@ import {
   quatRotate,
 } from "../kit.js";
 import { evenEllipsoid } from "./even.js";
-import { surfacePoints } from "../physics/world.js"; // lane Hands-on H5
+
+// Lane Hands-on H5: a quartz point's collision points: its base's and its
+// shoulders' corners, and the tip.
+function quartzPoints([w, h]) {
+  const pts = [[0, h, 0]];
+  for (const y of [-h, 0.35 * h]) for (const [a, b] of [[w, w], [w, -w], [-w, w], [-w, -w]]) pts.push([a, y, b]); // prettier-ignore
+  return pts;
+}
 
 const TAU = Math.PI * 2;
 const DEG = Math.PI / 180;
@@ -1031,7 +1038,9 @@ export const RECIPES = {
           pos: x.mid,
           quat: x.quat,
           solid: { type: "box", half: x.half },
-          points: surfacePoints({ type: "box", half: x.half }, 2),
+          // (Its prism's corners and one point at the tip: it can't stand
+          // on its point, it topples.)
+          points: quartzPoints(x.half),
           radius: 0.01,
           pick: x.half.map((v) => v + 0.06),
           mass: 0.5,
