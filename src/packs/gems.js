@@ -1283,10 +1283,14 @@ export const RECIPES = {
           friction: 0.5,
           restitution: 0.35,
           material: { mass: 0.01, r: 0.004, bounce: 0.45, roll: 0.02, friction: 0.5 },
+          // Held where the finger took it, not set down level over the ray.
+          place: false,
         },
+        // The shell under it (lane H1's fixed piece): the pearl rests in it.
+        ...(d?.shell ? [{ fixed: true, pos: [0, 0, 0], points: PEARL_CUP, radius: 0.03 }] : []),
       ],
       joints: (d) => [
-        { type: "socket", part: "pearl", snap: 0.22, armAway: 0.4 },
+        { type: "socket", part: "pearl", snap: 0.3, armAway: 0.4 },
         ...(d?.shell ? [lidHinge(PEARL_HINGE, [-1, 0, 0], PEARL_SWING, [0, 0.2, -0.1], [1, 0.4, 0.85])] : []), // prettier-ignore
       ],
     },
@@ -1696,6 +1700,21 @@ const GEODE_WIDE = 0.2;
 const GEODE_APART = 0.45;
 const geode = { prev: null, rising: false, openedAt: -1e9 };
 const PEARL_SWING = 1.15;
+
+// Lane Hands-on H5: the lower shell's inside, as points the pearl rests on
+// (a cup: set down in it, the pearl rolls to the middle).
+const PEARL_CUP = (() => {
+  const pts = [];
+  for (let iv = 1; iv <= 6; iv++)
+    for (let ia = 0; ia < 24; ia++) {
+      const v = iv / 6;
+      const a = (ia / 24) * 2 * Math.PI;
+      const r = v * (1 + 0.08 * Math.sin(a * 5 + 1) + 0.05 * Math.sin(a * 11));
+      pts.push([r * Math.cos(a) * 1.05, -0.3 * (1 - v * v), r * Math.sin(a) * 0.82]);
+    }
+  pts.push([0, -0.3, 0]);
+  return pts;
+})();
 const PEARL_HINGE = [0, 0.02, -0.72];
 const GEODE_HINGE = [-1.02, 0, 0];
 

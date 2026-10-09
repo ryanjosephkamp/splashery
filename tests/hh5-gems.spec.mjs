@@ -92,16 +92,22 @@ test("amethyst geode: the front half swings shut and open by hand, and stays", a
   if (v < 1.25) expect(p.lidShut.visible).toBe(1);
 });
 
-test("pearl: the pearl lifts out of its shell, and clicks back into its place", async ({
+test("pearl: lifted out, it rests in its shell or on the table, never through the shell; brought back, it clicks in", async ({
   page,
 }) => {
   await ready(page, "pearl");
   const home = (await piece(page, 0)).home;
-  await finger(page, [home, [home[0] + 0.4, home[1] + 0.6, home[2] + 0.3], [1.1, 0.3, 0.7]], { steps: 10 }); // prettier-ignore
+  // Set down in the shell, it rests in the cup (never through it).
+  await finger(page, [home, [home[0] + 0.4, home[1] + 0.7, home[2] + 0.3], [0.55, 0.3, 0.3]], { steps: 10 }); // prettier-ignore
+  await tick(page, 2);
+  const inCup = await piece(page, 0);
+  expect(inCup.pos[1]).toBeGreaterThan(-0.05);
+  expect(Math.hypot(inCup.pos[0], inCup.pos[2] - 0.1)).toBeLessThan(0.45);
+  await finger(page, [inCup.pos, [0.8, 0.8, 0.6], [1.7, 0.3, 0.9]], { steps: 10 }); // prettier-ignore
   await tick(page, 2);
   const out = await piece(page, 0);
   expect(dist(out.pos, out.home)).toBeGreaterThan(0.6);
-  // It lies on the table, as low as a pearl on the floor sits.
+  // Beside the shell it lies on the table, as low as a pearl on the floor sits.
   expect(out.pos[1]).toBeLessThan(0);
   // Brought back near its place: it settles in.
   await finger(page, [out.pos, [0.6, 0.4, 0.5], [home[0] + 0.05, home[1] + 0.05, home[2] + 0.05]], { steps: 10 }); // prettier-ignore
