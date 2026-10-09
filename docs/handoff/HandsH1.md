@@ -86,6 +86,9 @@ cards, grouped Balls, Shapes, Toys and Clothing).
   it bends at the elbow; the upper sleeve stays as it hangs, so the shoulder and armpit stay as
   scanned. The forearm keeps a band of the upper sleeve's cloth, so a bent elbow shows cloth. The
   tap moves each forearm with its sleeve as one piece. (`addScan` takes a `partOf` option for it.)
+- All marked (October 9, 2026, 06:47): `hh1-hoodie-r3` is "good", so every `hh1-` card's latest
+  version is "good" (36 toys: 22 balls, the blob, 9 toys, 4 clothing). All four shelf PRs are ready
+  for the Operator to merge (#424, #429, #433, #434); main (a0b68bc3) is merged into each.
 - Not done: the garden gnome (the L1 sweep's finding) is a scan outside these shelves, its cause in
   the engine's resting contact (see "For the Operator").
 
