@@ -135,3 +135,16 @@ test("crystal ball: lifted off its stand, it rolls on the table; brought back, i
   p = await parts(page);
   expect(p.cap.visible).toBe(0);
 });
+
+// The lane's screenshots, the ✋ switch on (phone and desktop).
+test("screenshots: the pearl, hands-on", async ({ page }) => {
+  for (const [w, h] of [
+    [390, 844],
+    [1440, 900],
+  ]) {
+    await page.setViewportSize({ width: w, height: h });
+    await ready(page, "pearl");
+    await page.waitForTimeout(600);
+    await page.screenshot({ path: `tests/screenshots/hh5-pearl-${w}x${h}.png` });
+  }
+});
