@@ -36,7 +36,7 @@ const SAMPLE = [
   "running-shoe",
   "shield",
   "sea-urchin", // lane Hands-on H5: the jellyfish drags by its bell now (pieces mode), so it is never lifted whole
-  "lorenz",
+  "klein-bottle", // lane Hands-on H5: the Lorenz attractor follows the finger now, so it is never lifted whole
   "neural-network",
   "picture-frame",
   "song-landscape",

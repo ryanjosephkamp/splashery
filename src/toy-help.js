@@ -1475,7 +1475,7 @@ export const TOY_HELP = {
 
   // ---- Math -----------------------------------------------------------------------------
   lorenz: {
-    howTo: "Tap to race along the path. Set the glow in the Toy tab.",
+    howTo: "Tap it to race a spark round. Hands-on: drag the point to a new start; let go.",
     about:
       "In 1963 the scientist Edward Lorenz made a very simple model of moving air: three short equations. He found that its path loops around two centers forever, never repeating and never crossing itself, in a shape like a pair of butterfly wings. This shape is called the Lorenz attractor.\n\nTap it and a bright spark races along the whole path, drawing it again in light that then fades. Two starting points that are almost the same soon follow very different paths. This is called chaos, or the butterfly effect, and it is why weather is so hard to forecast far ahead.",
   },
@@ -1490,7 +1490,7 @@ export const TOY_HELP = {
       "A Klein bottle is a surface with no inside and no outside. Its neck bends around and passes through its own side to join the bottom from within, so an ant crawling on it could reach every part of it without ever crossing an edge. Felix Klein described it in 1882. A true Klein bottle needs four dimensions; in our world its neck has to cut through the wall.\n\nTap it and a surge of glowing water pours in at the base, runs up the body, through the neck and around into the bottom, then fades. Set the glow, or pick the color of the glass, in the Toy tab.",
   },
   "menger-sponge": {
-    howTo: "Tap to close and carve the holes. Pick the level in the Toy tab.",
+    howTo: "Tap to close and carve the holes. Hands-on: pull the small cubes out one by one.",
     about:
       "A Menger sponge is a fractal. Start with a cube and cut it into 27 smaller cubes, like a puzzle cube. Take out the one in the middle and the six at the middle of each face, leaving 20. Then do the same to each of those 20 cubes, and again, forever. Karl Menger described it in 1926.\n\nTap it and every hole is plugged, the smallest first, until it is a plain cube. Then it is carved again: the big cubes slide out of the faces, then the next size down, then the smallest. Pick level 2 or 3 in the Toy tab: level 2 keeps 400 little cubes, and level 3 keeps 8,000.",
   },
@@ -1501,7 +1501,7 @@ export const TOY_HELP = {
   },
   "torus-knot": {
     howTo:
-      "Tap it: the knot pulls loose and springs back. Drag to turn it. Pick a knot in the Toy tab.",
+      "Tap it: the knot pulls loose and springs back. Drag to turn it. Hands-on: pull it to stretch.",
     about:
       "A torus knot is a knot that winds around the surface of a donut shape, called a torus. It goes around the hole a few times one way while it loops through it a few times the other way. The simplest is the trefoil, which winds 2 and 3 times; it is the simplest true knot, one that can never be untied without cutting it.\n\nTap it and the knot is pulled loose, its loops stretching and swirling; then it is let go and springs back past its rest shape and wobbles to a stop, like a spring. Choose winding counts (2, 3), (2, 5), (3, 4), (3, 5) or (2, 7) in the Toy tab: the pair counts turns around the torus's two directions. Colors changes its palette and Glow its brightness.",
   },
@@ -1511,20 +1511,19 @@ export const TOY_HELP = {
       "A gyroid is a curving surface that splits space into two tangled mazes of tunnels that never meet. It has no straight lines and no flat parts, and it repeats forever in every direction. Alan Schoen, a scientist working for NASA, found it in 1970. Nature makes it too: tiny gyroid crystals in some butterfly wings give them their shiny green color.\n\nTap it and it breathes: the surface slides along itself, so one set of tunnels swells while the other narrows, then the other way, and it settles. In the Toy tab, cut it into a cube or a ball.",
   },
   mandelbulb: {
-    howTo: "Tap it to turn its discs like the dials of a lock.",
+    howTo: "Tap to turn the discs. Hands-on: drag round a disc to turn it like a lock's dial.",
     about:
       "The Mandelbulb is a 3D fractal, a cousin of the famous flat Mandelbrot set. It is made by repeating one short formula over and over for each point in space and keeping only the points that never fly away. The mathematical fractal has detail on many scales; this toy has a fixed, finite set of points. It was found in 2009 by Daniel White and Paul Nylander.\n\nTap it and its seven slices turn like the dials of a combination lock, neighbors in opposite directions, then back again. Each turns one seventh of a turn, because the bulb looks the same after a seventh of a turn, so it lands on the same picture. Pick the power (power n has n − 1 lobes) or a Julia bulb, which turns whole, in the Toy tab.",
   },
   sierpinski: {
-    howTo: "Tap to explode it; tap again to put it back. Pick the level in the Toy tab.",
+    howTo: "Tap to explode it. Hands-on: lift the small tetrahedra off and stack them back.",
     about:
-      "A Sierpinski tetrahedron is a fractal pyramid. It is made of four smaller copies of itself, each half as tall, and each of those is made of four smaller ones, and so on. It is the 3D cousin of the Sierpinski triangle, named after the mathematician Wacław Sierpiński, who described the triangle in 1915.\n\nTap it to explode it into its pieces; tap again to put it back together. Pick the level in the Toy tab: each level has four times as many little pyramids, so levels 3, 4 and 5 have 64, 256 and 1,024 respectively.",
+      "A Sierpinski tetrahedron is a fractal pyramid. It is made of four smaller copies of itself, each half as tall, and each of those is made of four smaller ones, and so on. It is the 3D cousin of the Sierpinski triangle, named after the mathematician Wacław Sierpiński, who described the triangle in 1915.\n\nTap it to explode it into its pieces; tap again to put it back together. Pick the level in the Toy tab: each level has four times as many little pyramids, so levels 3, 4 and 5 have 64, 256 and 1,024 respectively. With ✋ Hands-on on, lift the four small tetrahedra off one by one and set them down, then stack them back: brought near its place, each settles in.",
   },
   platonic: {
-    howTo:
-      "Tap to explode it; tap again to put it back. Pick one of the five solids in the Toy tab.",
+    howTo: "Tap to explode it. Hands-on: pull the faces off one by one and fit them back.",
     about:
-      "The Platonic solids are the only five convex polyhedra whose faces are all the same regular shape, meeting in the same way at every corner: the tetrahedron (4 triangles), the cube (6 squares), the octahedron (8 triangles), the dodecahedron (12 pentagons) and the icosahedron (20 triangles). They are named after the Greek thinker Plato, and Euclid proved there can be no others.\n\nIt starts as a dodecahedron. Tap it to explode its faces apart; tap again to put them back. Pick any of the five solids, and its colors, in the Toy tab. Many game dice come in these shapes.",
+      "The Platonic solids are the only five convex polyhedra whose faces are all the same regular shape, meeting in the same way at every corner: the tetrahedron (4 triangles), the cube (6 squares), the octahedron (8 triangles), the dodecahedron (12 pentagons) and the icosahedron (20 triangles). They are named after the Greek thinker Plato, and Euclid proved there can be no others.\n\nIt starts as a dodecahedron. Tap it to explode its faces apart; tap again to put them back. Pick any of the five solids, and its colors, in the Toy tab. Many game dice come in these shapes. With ✋ Hands-on on, pull the faces off one by one and lay them down; bring each back near its place and it fits back in.",
   },
   "seashell-spiral": {
     howTo: "Tap it to hear the sea in the shell.",
@@ -1542,7 +1541,7 @@ export const TOY_HELP = {
       "A surface plot is a graph in 3D. For each point on a flat floor, with its x and y, the equation gives a height z, so the graph becomes a landscape of hills, valleys and saddles. Colors show how high each part is.\n\nTap it and the surface lies flat, then rises out of the sheet and ripples, twists or breathes as a number called a changes. Pick one of 16 famous surfaces in the Toy tab, such as the sombrero, the saddle or Rosenbrock's banana valley, which is used to test computer methods that hunt for the lowest point. Or type your own: z = … with x and y, or with r and θ.",
   },
   "unit-circle": {
-    howTo: "Tap to send the point round. Try 3D, or type your own path, in the Toy tab.",
+    howTo: "Tap to send the point round. Hands-on: drag the point round; the waves follow.",
     about:
       "The unit circle is a circle with a radius of 1. As a point goes around it, turning through an angle called θ, its height is the sine of θ and its left-right place is the cosine. Traced out over time, they make two waves, the same shapes as sound and light waves.\n\nTap it and the point goes once around while its height draws the sine wave and its left-right place draws the cosine wave. For the circle, Euler's formula, e^(iθ) = cos θ + i sin θ, lights up piece by piece. In the Toy tab, try a 3D helix, another path, up to three turns, or type your own: x = …, y = … with t, or r = … with θ.",
   },
@@ -1592,7 +1591,7 @@ export const TOY_HELP = {
       "A duoprism pairs two polygons at right angles in four dimensions: every corner of one is matched with every corner of the other. A 3,4-duoprism has 3 × 4 = 12 corners, and its walls are prisms. With two squares it is the hypercube. Each ring of the first polygon has its own color. It is drawn in perspective from 4D.\n\nTap it and it rolls a full turn through the fourth dimension and comes home. Pick each polygon, from a triangle to a hexagon, in the Toy tab. Source: J. H. Conway, H. Burgiel and C. Goodman-Strauss, The Symmetries of Things, 2008.",
   },
   "pythagoras-proof": {
-    howTo: "Tap it to slide the triangles and show that a² + b² = c².",
+    howTo: "Tap to rearrange. Hands-on: slide the triangles yourself to turn a² + b² into c².",
     about:
       "In a right triangle, the two short sides a and b and the long side c always fit a rule: a² + b² = c². So a square drawn on the long side has the same area as the squares on the two short sides put together. It is named after Pythagoras, a Greek thinker of about 2,500 years ago, though people in Babylon knew it even earlier.\n\nThis is a rearrangement proof. Four copies of the triangle fill a big square, leaving two empty squares, a² and b². Tap it and the triangles slide into the corners, and the empty space becomes one tilted square, c², so a² + b² must equal c². Then they slide back.",
   },
