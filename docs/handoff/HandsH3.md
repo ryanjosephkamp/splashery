@@ -79,30 +79,32 @@ page 2 (lane HandsH3). Merge order:
 
 Built locally, not pushed (they wait for #430, as the Operator asked):
 
-- `claude/lane-hands-h3-engine-2` (worktree splashery-e2): one engine PR for latches and triggers
-  (`latch`, `catch`, `trigger`: a tap lets a cocked joint go), strike pieces (`strike`; hit sounds
-  name both pieces), `fixed` pieces (never knocked loose) and plucked strings (`hands.strings`).
-  `tests/hh3-engine2.spec.mjs`, 3 tests.
-- `claude/lane-hands-h3-music` (worktree splashery-mus, on Pictures plus engine-2): the guitar
-  (pluck each string, its own note), the snare drum (pick up a stick and hit it) and the crossbow
-  (starts cocked; a tap fires; pull the string back until it clicks). `tests/hh3-music.spec.mjs` and
+- `claude/lane-hands-h3-engine-3` (worktree splashery-e2; renamed from engine-2, which is now the
+  sort fix): one engine PR for latches and triggers (`latch`, `catch`, `trigger`: a tap lets a
+  cocked joint go), strike pieces (`strike`; hit sounds name both pieces) and plucked strings
+  (`hands.strings`); it uses H1's `fixed`. `tests/hh3-engine2.spec.mjs`, 3 tests.
+- `claude/lane-hands-h3-music` (worktree splashery-mus, on Pictures plus engine-3): the guitar, the
+  snare drum and the crossbow, all marked good. `tests/hh3-music.spec.mjs` and
   `tests/hh3-crossbow.spec.mjs`, 3 tests.
+- `claude/lane-hands-h3-engine-4` (worktree splashery-l1e, on the engine branch): `handsLevel1` lets
+  a picture or `turntable: false` toy ask for Level 1 (true, or a function that turns ✋ off while
+  the toy is live). `tests/hh3-level1-engine.spec.mjs`, 2 tests.
+- `claude/lane-hands-h3-level1` (worktree splashery-l1, on engine-4): Level 1 for the Picture lab,
+  the Screen (not while capturing), the Room echo meter (not while the mic is on) and the Fluid lab.
+  Left out: Your book and Photo album (every press turns a page), Photo to 3D, Video to 3D and Splat
+  mirror (one-sided captures smear when tossed). `tests/hh3-level1.spec.mjs`, 2 tests. Card
+  hh3-level1 posted.
 
-Waiting: the snowman (needs H2's engine #420, `ride`), the water bottle and soda can (the Fluids
-engine's pour). Next: the first photoreal toys after agreeing with Photoreal r3, then the Level 1 PR
-for the "Level 1 only" picture and Studio toys.
+Open: #455 (Engine: sort a turned kit part with its own turn), on main, to merge after #430; then
+the patterned egg and the storybook are re-rendered (hh3-patterned-egg-r2, hh3-book-r3). Waiting:
+the water bottle and soda can (the Fluids engine's pour). Next: the first photoreal toys after
+agreeing with Photoreal r3.
 
 ## Notes", "## Known issues" and "## For the Operator
 
 - Please merge engine PR #430 before the Open me PR; the Open me branch carries its commit.
 - The water bottle and the soda can (labs) wait for the Fluids engine's pour.
 - The patterned egg's bottom and the storybook's specks (both the owner's "fix" marks) are one
-  engine bug in `src/pose.js`: `Player.resortPose` sorts a turned kit part with the inverse of its
-  turn (Lane Elements' e59431d8, October 6). Measured in the app: the egg re-sorted at a quarter
-  turn draws its back over its front (a hole shows its bottom's inside and the cup) and speckles at
-  an eighth; sorted with the turn itself it is clean at all eight angles. The book's own tap
-  animation: the specks go, and mid-turn the cover shows its outside instead of a page. Lane
-  Elements' "the lifted sample is solid from the side" (tests/rel.spec.mjs) passes either way; only
-  their node test `tests/rel-engine.spec.mjs` asserts the inverse. Proposal: a one-line engine PR
-  that sorts with the turn itself and updates that test. Waiting for the Operator's yes; the owner's
-  other idea for the book (a "your book" PDF storybook) is the fallback.
+  engine bug in `src/pose.js` (the sort used the inverse of a part's turn, from e59431d8). The fix
+  is #455; please merge it after #430. If the book is still not good enough, the owner's fallback is
+  a "your book" PDF storybook.
