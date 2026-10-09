@@ -158,3 +158,48 @@ test("upright with rest: a toy back near upright on the floor settles and sleeps
   expect(b.settled).toBeFalsy();
   expect(b.invMass).toBeGreaterThan(0);
 });
+
+test("a piece's when: it is picked up only while when(data) holds", async () => {
+  const { HandsOn } = await import("../src/physics/hands-on.js");
+  const data = { cur: 0 };
+  const ho = new HandsOn({ proc: { ctx: { kit: { data } } } });
+  const organ = new Body({ pos: [0, 1, 0], solid: { type: "sphere", r: 0.1 }, mass: 1 });
+  ho.pieces = [{ body: organ, part: "heart", home: { pos: [0, 1, 0], q: [0, 0, 0, 1] }, def: { pick: [0.1, 0.1, 0.1], when: (d) => d.cur === 3 } }]; // prettier-ignore
+  expect(ho.pieceAt([0, 1.05, 0])).toBeNull();
+  data.cur = 3;
+  expect(ho.pieceAt([0, 1.05, 0])).toBe(organ);
+});
+
+test("socket armAway: armed only once the piece and the finger's line have left its place", async () => {
+  const { Joints } = await import("../src/physics/joints.js");
+  const J = Object.create(Joints.prototype);
+  J.hands = { R: () => 1 };
+  const j = { d: { type: "socket", snap: 0.1, armAway: 0.3 }, pc: { home: { pos: [0, 0, 0] } }, armed: false }; // prettier-ignore
+  const h = { body: { pos: [0.5, 0, 0] } };
+  // The piece is away, but the finger still points at its place.
+  J.nearSocket(j, h, { origin: [0, 0, 5], dir: [0, 0, -1] });
+  expect(j.armed).toBe(false);
+  // The finger's line moves off too: armed.
+  J.nearSocket(j, h, { origin: [0.5, 0, 5], dir: [0, 0, -1] });
+  expect(j.armed).toBe(true);
+});
+
+test("a piece's home spring: pulled off and let go, it springs back to its place with a wobble", async () => {
+  const { HandsOn } = await import("../src/physics/hands-on.js");
+  const hands = { gravity: 0, pieces: () => [{ token: 0, pos: [0, 0, 0], home: { k: 80, damping: 6 }, pick: [0.1, 0.1, 0.1] }] }; // prettier-ignore
+  const player = { proc: { ctx: { kit: { data: {} } } }, motion: { ctx: { transform: { scale: 1 } } }, stage: {} }; // prettier-ignore
+  const ho = new HandsOn(player);
+  ho.info = { radius: 1, recipe: { hands } };
+  const w = ho.buildPieces(hands);
+  const a = ho.pieces[0].body;
+  ho.free(a);
+  a.pos = [0, 0, -0.3];
+  w.wake();
+  let crossed = false;
+  for (let i = 0; i < 240; i++) {
+    w.step(1 / 60);
+    if (a.pos[2] > 0.005) crossed = true;
+  }
+  expect(crossed).toBe(true);
+  expect(Math.hypot(...a.pos)).toBeLessThan(0.01);
+});

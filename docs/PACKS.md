@@ -727,6 +727,24 @@ spins it on the fingertip; the basketball) and `warm: [first, top]` (a squash ba
 throw). Lift and the curve are set to show at Hands-on's slow throws, in the real direction and
 order. Pieces take a material too: `material` in a piece's def.
 
+**Room to roll** (`hands.area`, a whole toy with a material; lane Hands-on H1, October 8, 2026): the
+walls of the play area move out to `area` toy radii from home, as for wheels, so a ball rolls, a
+puck slides and a marble runs on (the view drifts after it). Without it the walls stay where Level 1
+puts them, just past the toy. `hands.view` (0 to 1, 0.8 by default) is how far the view drifts after
+a tossed whole toy: less (a ball's 0.4) lets a roll read as a roll. `hands.friction` sets the
+floor's friction under a whole toy with a material (a hockey puck's ice: 0.04). `hands.soft` (0
+to 1) sets how much a whole toy squishes when it lands, over the list in `hands-on.js` (a
+superball's firm 0.15). A shelf shape (a procedural toy in `src/toys.js`) may take the gummy bear's
+stretch from its shelf entry: `grab: { radius, max }` (the jelly blob). In pieces mode `hands.floor`
+may be a function `(data, info) => height`, for a floor that depends on the build (a d20 sits lower
+than two d6s). `hands.press: { amount, after }` (a whole toy): a press held still for `after`
+seconds (0.15) squeezes it down by `amount` (0.25) and sends `hands.sound` a hit with `press: true`;
+let go, it springs back with a wobble (the rubber duck). A drag still picks it up. A piece with
+`fixed: true` (no part of its own) never moves, is never picked up and is never knocked loose: a
+stand or a wall for the others to land on (the baseball cap's walnut stand). A material's `nose`
+turns it only while it flies, near critically damped, so a shuttlecock flips cork first once and
+lies still where it lands.
+
 **A water line** (`hands.water`): the toy floats on a round pool, bobs and settles; a boat (any
 non-round toy) rocks and rights itself, since each point under water lifts where it is. By default
 the line sits where the toy, at home, floats as it stands (from its density), so nothing moves until
@@ -825,6 +843,43 @@ drive(t, c, out, info) {
 nose first, and one that hits a piece with `target: true` sticks in it where it hit, until it is
 picked up again or ↺ Reset (objects only, never people or animals). `stick: false` lets it bounce.
 
+A piece's `home: { k, damping }` (lane Hands-on H5; per second squared, per second) puts it on a
+spring to where it was built, place and turn: let go, it springs back with a wobble instead of
+falling (an atom of a molecule, pulled off and let go).
+
+A piece's `when: (data) => bool` (lane Hands-on H5; `data` the build's `k.data`) says whether it can
+be picked up now: an anatomy atlas's organs only while its organs layer shows (its drive keeps the
+shown layer in `data`).
+
+Lane Hands-on H2 (October 8, 2026) added these keys to a piece's def:
+
+- `place: false`: this piece hangs and swings in the hand (as every piece does with
+  `hands.place: false`) while the others are picked and placed level (an ice cream cone you tip).
+- `shown: { pos, quat }`: where the recipe's drive shows the piece at rest, when that isn't where
+  its splats were built (a kiwi's half, built face up and shown closed): the body starts and goes
+  home there, and the piece's splats move from where they were built.
+- `ride: [index | { token, visible }]`: other tokens that move with the piece (a banana's skin
+  strips; `visible: 0` keeps one hidden, its pale inside).
+- `offHome: { … }`: entries merged into the piece's part while it is off its place (a candle pulled
+  out of the cake goes out: `{ visible: 0 }`).
+- `flip: true` (below).
+
+And `hands.foot` (0.6): how far out from its middle, as a share of its pick radius, a held piece
+looks for what is under it; 0.95 lets a wide piece (a burger's bun) set down beside a stack sit on
+its edge instead of being lowered into it.
+
+`info.hands.moved` is whether anything is off home (or on its way back), so a drive can show what
+Hands-on uncovered (the cut face of the kiwi half left behind). And a break joint takes `spill`
+(radians): a piece riding another comes loose when that one tips past it (scoops off a tipped cone),
+with the cue `"spill"`; and `place: true`: snapped off, it is held as a picked piece is (by its
+middle, level, hovering over whatever is under the finger), not hanging from where it was grabbed.
+
+**A flip** (lane Hands-on H2, October 8, 2026): a piece with `flip: true` in its def, let go from a
+quick flick up the screen (faster up than across), is tossed up with half a turn about the level
+line across the view, timed to come down upside down where it hovered before the flick, on whatever
+is under that spot, drawn toward that piece's middle by the recipe's `center` (a pancake flipped
+back onto its stack). Let go any other way, it is set down as before.
+
 `info.hands.on` is whether Hands-on is on. Check the toy's frame time with the pieces running (the
 whole world's step is well under a millisecond for one body, a few for 40 pieces).
 
@@ -884,8 +939,10 @@ beats its weight; `spring`, `rest`, `damping`, `bounce` and `gravity` as for a h
 finger turns it as it goes round the axis, and a flick sets it coasting, slowed by `drag` (per
 second, 0.8). `detents` (clicks per turn) click as it passes each one and settle it on one. A dial
 has no weight unless `gravity` is set. `turn(angle, delta, info)` is called on every move and may
-return cues (a music box's notes); `also(angle, parts, info)` adds entries to the parts Hands-on
-sends (a dancer that the crank turns; it works for every joint type, with its value).
+return cues (a music box's notes); `also(angle, parts, info, joint)` adds entries to the parts
+Hands-on sends (a dancer that the crank turns; it works for every joint type, with its value;
+`joint.w` is its speed and `joint.held` whether the finger has it, so a spinning top tilts as it
+slows).
 
 ```js
 { type: "dial", part: "crank", pivot: [0.58, 0.25, 0], axis: [1, 0, 0], detents: 12,
@@ -902,6 +959,10 @@ place, or pointing the finger at its place, glides it home and locks it there.
 pieces: (d) => d.wedges.map((w) => ({ token: w.token, pos: w.mid, quat: w.q, solid: WEDGE, points: surfacePoints(WEDGE, 1), pick: [0.3, 0.4, 0.3] })),
 joints: (d) => d.wedges.map((w) => ({ type: "socket", token: w.token, snap: 0.35 })),
 ```
+
+`armAway` (toy radii; lane Hands-on H5): it clicks back only once both the piece and the finger's
+line have been that far from its place (small pieces packed close, an atlas's organs, would
+otherwise click straight back as they are lifted out).
 
 **Break**: a piece held fast at `at` to the ground, or to another piece (`to`, a part, a token or a
 joint's name), until the finger pulls it `pull` toy radii (0.35): it bends as a whole about `at`, up
