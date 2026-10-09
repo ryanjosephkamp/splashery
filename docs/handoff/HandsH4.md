@@ -73,8 +73,21 @@ page 2 rather than a clips branch. Its first check (docs/PACKS.md sections 5f, 5
 the hands-on engines merged October 3 and 4, 2026. Everything else in it stands, in its order. Main
 has moved a lot since October 3 (read docs/HANDOFF.md "Now" first). Hands-on play only adds to a
 toy: with the ✋ switch off every toy plays exactly as before, and these are toys the public sees,
-so each shelf's PR waits for the owner's "good" marks on its cards. Update the handoff's "## State",
-"## Notes", "## Known issues" and "## For the Operator" as you go; leave its brief as it is and add
+so each shelf's PR waits for the owner's "good" marks on its cards. Update the handoff's "## State
+
+WORKING: all five shelves built, tested and in draft PRs; the Vehicles cards are on Effect review
+page 2; the other shelves' clips are rendering (October 9, 2026).
+
+- Engine PR #439 (`claude/lane-hands-h4-engine`): `hands.force` (a recipe's own push, each substep,
+  with `ctx.free()`), `info.hands.piece(key)` (by part, token or `name`) with `hands.watch`,
+  `info.hands.moved` (as H2's #420 adds it, the same lines), `hands.carry` (pieces carried
+  together), and a whole toy that floats (water or air) can be pushed below where it stands.
+- Shelf PRs, stacked in this order (each on the one before): Vehicles #440, Landmarks #442, Space
+  #443, Weather & fire #444, Tiny world #445. Every line of the plan for these shelves is built but
+  the bicycle's pedals (below). The comet's L1 sweep finding is fixed (it comes to rest).
+
+## Notes", "## Known issues" and "## For the Operator" as you go; leave its brief as it is and add
+
 this one under it as "### Brief, October 8, 2026 (cloud)".
 
 How this lane runs: exactly as docs/handoff/ScienceR3.md, "How this lane runs", says (read it;
@@ -129,7 +142,14 @@ Landmarks.
 - `upright` alone can't hold up a tall thin toy against its weight at k 60 (the bicycle fell); k 300
   with damping 20 holds it.
 - Clips: `tools/hh4-clip.mjs` (H3's clip tool), scripts in `tools/hh4-clips/`, device scale 2 (about
-  4.5 minutes a clip).
+  4.5 minutes a clip). The clip tool reads the working tree: don't switch branches while it renders.
+- A build with no `k.data` gives `hands.joints(d)` an undefined `d`: the toys whose joints or drive
+  share state now set `k.data = { ...k.data, h4: {} }` in their build.
+- A toy whose drive reads `info.hands` needs an Extras: `hands.watch: true` when it has no other
+  field (joints alone don't make one).
+- Pieces' parts: once anything has moved, every part piece shows its body's pose, even pinned ones.
+  So the solar system's planets are named bodies (no part) that the drive draws from
+  `info.hands.piece(name)`, and they keep orbiting under `hands.force`.
 
 ## Known issues
 
