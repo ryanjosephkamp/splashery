@@ -244,6 +244,19 @@ subject to the following conditions:
 - License: Apache License 2.0 (checked on the npm package and the live repository's COPYING on
   October 5, 2026; the full text is in `vendor/laz-perf/LICENSE`).
 
+## dicom-parser 1.8.21 (lane Volume viewer)
+
+- Package: `dicom-parser@1.8.21` (file: `vendor/dicom-parser/dicomParser.min.js`, the package's
+  `dist/dicomParser.min.js`, unchanged, 32 KB; the license is copied to
+  `vendor/dicom-parser/LICENSE`).
+- Source: https://github.com/cornerstonejs/dicomParser (Chris Hafey and the Cornerstone
+  contributors). It parses DICOM files' elements; the volume viewer reads the pixels itself
+  (uncompressed and RLE Lossless).
+- Loaded only when someone opens a DICOM file in the Volume viewer (labs). It makes no network
+  calls.
+- License: MIT (checked on the npm package and the live repository's LICENSE on October 8, 2026; the
+  full text is in `vendor/dicom-parser/LICENSE`).
+
 ## WebP codec from splat-transform 3.6.1 (lane Viewers)
 
 - Files: `vendor/webp/webp.mjs` and `vendor/webp/webp.wasm`, copied unchanged from
