@@ -1612,7 +1612,8 @@
     "crossbow": {
       "v": "keep",
       "owner": "Solid.",
-      "sound": "No click; the string's real thump, then the bolt hitting as before; real CC0 recordings now (bow-and-target-release.mp3), with the synthesized sound as a fallback."
+      "sound": "No click; the string's real thump, then the bolt hitting as before; real CC0 recordings now (bow-and-target-release.mp3), with the synthesized sound as a fallback.",
+      "improved": "Hands-on H3 (October 9, 2026; Hands-on): it starts cocked; a tap pulls the trigger and the bolt flies; pull the string back until it clicks onto the catch and a new bolt loads."
     },
     "knights-helmet": {
       "v": "keep",
@@ -1779,14 +1780,14 @@
       "owner": "Looks fine; add the music.",
       "effect": "Keep the strum; strings vibrate visibly.",
       "sound": "A real strummed chord progression (synth plucks).",
-      "improved": "C2: the strum rocks the guitar about 13 degrees with a small hop, the strings bend and vibrate one after another, and rings of light pulse out of the soundhole. Music is Phase D. Fix6: smooth lacquered wood (the top, sunburst, back, ribs and neck placed evenly with no color noise or fine grain), a clean three-ring rosette, and thin strings drawn as clean lines."
+      "improved": "C2: the strum rocks the guitar about 13 degrees with a small hop, the strings bend and vibrate one after another, and rings of light pulse out of the soundhole. Music is Phase D. Fix6: smooth lacquered wood (the top, sunburst, back, ribs and neck placed evenly with no color noise or fine grain), a clean three-ring rosette, and thin strings drawn as clean lines. Hands-on H3 (October 9, 2026; Hands-on): drag across the strings to pluck each one, with its own open note (E, A, D, G, B, E), and it vibrates."
     },
     "drum": {
       "v": "keep",
       "owner": "Could be more dramatic. Fast taps could play longer and faster rolls.",
       "effect": "Sticks play a roll; fast repeated taps make faster, longer rolls.",
       "sound": "Snare hits with rattle.",
-      "improved": "C2: the sticks play a roll; taps within 0.9 s of each other step up through four speeds and make the roll longer (up to 3 s after the last tap)."
+      "improved": "C2: the sticks play a roll; taps within 0.9 s of each other step up through four speeds and make the roll longer (up to 3 s after the last tap). Hands-on H3 (October 9, 2026; Hands-on): pick up a stick and hit the drum: the head cracks and ripples, the rim clicks, the shell knocks."
     },
     "xylophone": {
       "v": "keep",

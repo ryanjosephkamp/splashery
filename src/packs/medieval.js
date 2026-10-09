@@ -337,6 +337,14 @@ const XBOW = (() => {
   };
 })();
 
+// Lane Hands-on H3: the crossbow worked by hand. The left half of the string
+// is a hinge (0: drawn back to the latch, as built; X.left.angle: let go,
+// straight across), the right half follows. `prev` is the last value, `t`
+// the toy's clock (from drive), `fly` when the bolt flew, `back` when the
+// string was last cocked (a new bolt appears), `trig` when the trigger
+// was pulled.
+const XBOW_HAND = { prev: null, t: 0, fly: null, back: -1e9, trig: null };
+
 // Remembers which way a toggle is moving (per player: `c` is the player's
 // own control state), so a reset can look different from the action.
 const motionMemo = new WeakMap();
@@ -1281,7 +1289,73 @@ export const RECIPES = {
     alive: true,
     controls: [{ key: "shoot", label: "Shoot", type: "pulse", ease: 2.6 }],
     action: { key: "shoot", label: "Shoot" },
+    // Hands-on (lane Hands-on H3): it starts cocked, the string caught on
+    // its latch. A tap pulls the trigger: the string snaps forward with a
+    // twang and the bolt flies off along its groove. Pull the string back
+    // to the latch and it clicks, cocked again, and a new bolt lies in the
+    // groove.
+    hands: {
+      joints: [
+        {
+          type: "hinge",
+          part: "stringL",
+          pivot: quatRotate(XBOW.q, XBOW.tipL),
+          axis: XBOW.left.axis,
+          min: 0,
+          max: XBOW.left.angle,
+          gravity: false,
+          spring: 260,
+          rest: XBOW.left.angle,
+          damping: 6,
+          bounce: 0.25,
+          latch: "min",
+          catch: 0.08,
+          trigger: true,
+          pos: quatRotate(XBOW.q, vec.mul(vec.add(XBOW.tipL, XBOW.latch), 0.5)),
+          pick: [0.26, 0.12, 0.26],
+          sound: (ev, vol) => {
+            if (ev.kind === "latch") return { voice: "click", f: 1400, decay: 0.06, vol: 0.7 };
+            if (ev.kind === "free") return { voice: "sample", file: "bow-and-target-release.mp3", at: 0, pitch: 0.85, vol: 0.9, fallback: { voice: "bowstring", f: 130 } }; // prettier-ignore
+            return ev.kind === "stop" ? { voice: "bowstring", f: 150, vol: Math.min(0.6, vol * 0.4) } : undefined; // prettier-ignore
+          },
+          also: (v, parts) => {
+            const X = XBOW;
+            const H = XBOW_HAND;
+            const r = v / X.left.angle;
+            parts.stringR = { quat: quatAxisAngle(X.right.axis, X.right.angle * r) };
+            // Let go from the latch: the bolt flies, the trigger kicks.
+            if (!H.fly && H.prev !== null && H.prev < 0.02 && v > 0.04) {
+              H.fly = H.t;
+              H.trig = H.t;
+            }
+            // Drawn back onto the latch: cocked, with a new bolt.
+            if (H.fly !== null && v < 1e-3) {
+              H.fly = null;
+              H.back = H.t;
+            }
+            H.prev = v;
+            if (H.fly === null) {
+              const f = smoothstep(0, 0.35, H.t - H.back);
+              parts.bolt = { offset: vec.mul(X.fwd, -0.04 * (1 - f)), visible: f };
+            } else {
+              const tau = Math.max(0, H.t - H.fly);
+              parts.bolt = {
+                offset: vec.mul(X.fwd, 6 * tau),
+                visible: 1 - smoothstep(0.3, 0.5, tau),
+              };
+            }
+            const k = H.trig === null ? 1 : (H.t - H.trig) / 0.25;
+            parts.trigger = { angle: k < 1 ? 0.35 * Math.sin(k * Math.PI) : 0 };
+          },
+        },
+      ],
+    },
     drive(t, c, out) {
+      // By hand: the toy's clock, for the bolt's flight (lane Hands-on H3).
+      // (A new clock, the toy opened again: a fresh start.)
+      if (t < XBOW_HAND.t)
+        Object.assign(XBOW_HAND, { prev: null, fly: null, back: -1e9, trig: null });
+      XBOW_HAND.t = t;
       const X = XBOW;
       const u = 1 - c.shoot;
       let rel = 0;

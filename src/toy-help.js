@@ -1356,7 +1356,7 @@ export const TOY_HELP = {
   crossbow: {
     howTo: "Tap it to shoot a bolt; the string snaps and a new bolt loads.",
     about:
-      "A crossbow is a short, strong bow fixed crosswise on a wooden stock. The drawn string is held back by a catch, so it can wait until the trigger lets it go. It shoots short, thick arrows called bolts. Crossbows were used in China more than 2,000 years ago and later all over medieval Europe, and today people shoot them at targets as a sport.\n\nTap it: the trigger lets the string go, the string snaps forward with a buzz and the bolt flies off along its groove. Then the string is drawn back and a new bolt appears.",
+      "A crossbow is a short, strong bow fixed crosswise on a wooden stock. The drawn string is held back by a catch, so it can wait until the trigger lets it go. It shoots short, thick arrows called bolts. Crossbows were used in China more than 2,000 years ago and later all over medieval Europe, and today people shoot them at targets as a sport.\n\nTap it: the trigger lets the string go, the string snaps forward with a buzz and the bolt flies off along its groove. Then the string is drawn back and a new bolt appears. With ✋ Hands-on on, it starts cocked: tap it to pull the trigger and the bolt flies, then pull the string back until it clicks onto the catch, and a new bolt lies in the groove.",
   },
   "knights-helmet": {
     howTo: "Tap to open the visor; tap again to close it.",
@@ -2089,12 +2089,12 @@ export const TOY_HELP = {
   guitar: {
     howTo: "Tap it to strum a few chords.",
     about:
-      "An acoustic guitar has six strings stretched over a hollow wooden body. Plucking a string makes it vibrate, and the body and the round soundhole make the sound bigger and warmer. Pressing a string down against the metal frets on the neck makes it shorter, and a shorter string plays a higher note.\n\nTap it to strum: the guitar rocks with the stroke, the strings bend and shake one after another, and rings of light pulse out of the soundhole as it plays four chords. Pick a sunburst, natural or cherry finish in the Toy tab. The six strings are usually tuned, from lowest to highest, to E, A, D, G, B and E.",
+      "An acoustic guitar has six strings stretched over a hollow wooden body. Plucking a string makes it vibrate, and the body and the round soundhole make the sound bigger and warmer. Pressing a string down against the metal frets on the neck makes it shorter, and a shorter string plays a higher note.\n\nTap it to strum: the guitar rocks with the stroke, the strings bend and shake one after another, and rings of light pulse out of the soundhole as it plays four chords. Pick a sunburst, natural or cherry finish in the Toy tab. The six strings are usually tuned, from lowest to highest, to E, A, D, G, B and E. With ✋ Hands-on on, drag across the strings: each one you cross is plucked, plays its own note and vibrates.",
   },
   drum: {
     howTo: "Tap it for a drum roll; tap again quickly for a faster, longer roll.",
     about:
-      "A snare drum is a shallow drum with a skin, called a head, stretched across each side. Under the bottom head runs a set of thin metal wires, the snares, which rattle against it every time the top is hit, giving the drum its crisp, buzzing crack. A drum roll is many fast strokes, played one stick after the other so quickly that they blur into one sound.\n\nTap it and the sticks play a roll. Tap again quickly, and each tap steps the roll up to a faster speed and makes it last longer, through four speeds in all. Pick the color of the shell in the Toy tab.",
+      "A snare drum is a shallow drum with a skin, called a head, stretched across each side. Under the bottom head runs a set of thin metal wires, the snares, which rattle against it every time the top is hit, giving the drum its crisp, buzzing crack. A drum roll is many fast strokes, played one stick after the other so quickly that they blur into one sound.\n\nTap it and the sticks play a roll. Tap again quickly, and each tap steps the roll up to a faster speed and makes it last longer, through four speeds in all. Pick the color of the shell in the Toy tab. With ✋ Hands-on on, pick up a stick and hit the drum: the head cracks and ripples, the rim clicks and the shell knocks; reset puts the sticks back.",
   },
   xylophone: {
     howTo:
