@@ -6,7 +6,7 @@
 //
 //   python3 -m http.server 4173 --bind 127.0.0.1 &
 //   pip install imageio-ffmpeg
-//   SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium node tools/hh5-clip.mjs <out-dir> <name> <toy id> <script.json> [--fps=20] [--zoom=1] [--cam=yaw,pitch] [--scale=3]
+//   SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium [SPLASHERY_GL=llvmpipe xvfb-run -a] node tools/hh5-clip.mjs <out-dir> <name> <toy id> <script.json> [--fps=20] [--zoom=1] [--cam=yaw,pitch] [--scale=3]
 //
 // The clock is stepped by hand, so the clip plays at real speed however
 // slow the renderer is. The script is a JSON list of steps:
@@ -48,9 +48,13 @@ const H = 844;
 
 fs.mkdirSync(outDir, { recursive: true });
 const tmp = fs.mkdtempSync(path.join(outDir, `.${name}-`));
+// SPLASHERY_GL=llvmpipe (under xvfb-run): Mesa's llvmpipe draws the frames
+// two to three times faster than SwiftShader (docs/OPERATING.md).
+const llvmpipe = process.env.SPLASHERY_GL === "llvmpipe";
 const browser = await chromium.launch({
   executablePath: process.env.SPLASHERY_CHROMIUM || undefined,
-  args: ["--use-angle=swiftshader", "--enable-unsafe-swiftshader", "--ignore-gpu-blocklist", "--enable-webgl"], // prettier-ignore
+  headless: !llvmpipe,
+  args: [...(llvmpipe ? ["--use-gl=angle", "--use-angle=gl", "--hide-scrollbars"] : ["--use-angle=swiftshader"]), "--enable-unsafe-swiftshader", "--ignore-gpu-blocklist", "--enable-webgl"], // prettier-ignore
 });
 const page = await browser.newPage({ viewport: { width: W, height: H }, deviceScaleFactor: scale, isMobile: true, hasTouch: true }); // prettier-ignore
 page.on("pageerror", (e) => console.error("page error:", e.message));
