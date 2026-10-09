@@ -81,6 +81,8 @@ const HOLD_UPRIGHT = 1;
 const HOLD_SWING_DAMPING = 1.2;
 const PUSH_MAX = 2; // toy radii per second: the fastest a nudge pushes
 const PICK_LIFT = 0.15;
+const FLIP_PX = 400; // CSS pixels per second up the screen: a flick this fast flips a `flip` piece (lane Hands-on H2)
+const FLIP_UP = 4; // toy radii per second: how fast a flipped piece rises
 
 export class HandsOn {
   // player: the Player (stage, camera, toyInfo, ray, proc).
@@ -187,7 +189,7 @@ export class HandsOn {
       w.plane([nx, 0, nz], nx * (c[0] - nx * A) + nz * (c[2] - nz * A), { friction: 0.3, restitution: 0.4 }); // prettier-ignore
     w.plane([0, -1, 0], -(floor + Math.max(4.5 * R, hull.top - floor + 2.5 * R)), { restitution: 0.2 }); // prettier-ignore
     const id = info.id;
-    const soft = SOFT[id] ?? 0;
+    const soft = hands?.soft ?? SOFT[id] ?? 0; // (hands.soft: lane Hands-on H1)
     const bounce = BOUNCE[id] ?? 0.25 + 0.2 * soft;
     const h = hull.half;
     const m = 1;
@@ -289,15 +291,22 @@ export class HandsOn {
     const data = this.player.proc?.ctx?.kit?.data;
     const g = (hands.gravity ?? GRAVITY) * R;
     const w = new World({ gravity: [0, -g, 0], substeps: hands.substeps ?? 10, sleepSpeed: 0.02 * R, minHit: 0.35 * R, maxPush: 0.01 * R, maxSpeed: 10 * R }); // prettier-ignore
-    w.plane([0, 1, 0], hands.floor ?? 0, { friction: hands.friction ?? 0.9, restitution: 0.15, grip: hands.grip ?? 0 }); // prettier-ignore
+    // (A floor may depend on the build: a d20 sits lower than two d6s; lane Hands-on H1.)
+    const floor = typeof hands.floor === "function" ? hands.floor(data, info) : hands.floor;
+    w.plane([0, 1, 0], floor ?? 0, { friction: hands.friction ?? 0.9, restitution: 0.15, grip: hands.grip ?? 0 }); // prettier-ignore
     const A = (hands.area ?? 1.6) * R;
     for (const [nx, nz] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) // prettier-ignore
       w.plane([nx, 0, nz], -A, { friction: 0.3, restitution: 0.3 });
     this.pieces = [];
     for (const p of hands.pieces?.(data, info) || []) {
+      // Lane Hands-on H2: `shown` is where the recipe's drive shows the
+      // piece at rest when that isn't where it was built (a kiwi's half,
+      // built face up and shown closed): it starts and goes home there.
+      const at = p.shown?.pos || p.pos;
+      const atQ = p.shown?.quat || p.quat || [0, 0, 0, 1];
       const body = new Body({
-        pos: p.pos,
-        quat: p.quat || [0, 0, 0, 1],
+        pos: at,
+        quat: atQ,
         mass: p.mass ?? 1,
         solid: p.solid,
         points: p.points || [],
@@ -308,7 +317,7 @@ export class HandsOn {
         angDamping: p.angDamping ?? 1.5,
       });
       w.add(body);
-      this.pieces.push({ body, token: p.token, part: p.part, home: { pos: p.pos.slice(), q: (p.quat || [0, 0, 0, 1]).slice() }, def: p }); // prettier-ignore
+      this.pieces.push({ body, token: p.token, part: p.part, home: { pos: at.slice(), q: atQ.slice() }, built: { pos: p.pos.slice(), q: (p.quat || [0, 0, 0, 1]).slice() }, def: p }); // prettier-ignore
       // A piece on a stem (a cherry): pinned to its point, springing back
       // to how it hung.
       if (p.joint)
@@ -318,6 +327,9 @@ export class HandsOn {
         body.restK = p.spring;
       }
       if (p.hinge) body.hinge = { axis: v3.norm(p.hinge), q: body.q.slice() };
+      // Lane Hands-on H1: `fixed: true` is a piece that never moves, a
+      // stand or a wall for the others to land on (no part of its own).
+      if (p.fixed) body.fixedPiece = true;
       body.invMassFree = body.invMass;
       body.invIFree = body.invI.slice();
       if (p.free) continue;
@@ -351,7 +363,7 @@ export class HandsOn {
   }
 
   free(body) {
-    if (!body.pinned) return;
+    if (!body.pinned || body.fixedPiece) return; // (a fixed piece stays: lane Hands-on H1)
     body.pinned = false;
     const def = this.pieces.find((pc) => pc.body === body)?.def;
     if (def?.rest) {
@@ -374,7 +386,7 @@ export class HandsOn {
   pressAt(hit, x, y) {
     if (!this.canGrab() || !hit) return false;
     if (this.extras?.pressAt(hit, x, y)) return true; // lane Hands engine A: a toy that flees the finger
-    this.press = { hit: hit.slice(), x, y };
+    this.press = { hit: hit.slice(), x, y, t: this.time };
     return true;
   }
 
@@ -402,6 +414,9 @@ export class HandsOn {
     const h = this.hold;
     if (!h) return;
     h.travel = Math.max(h.travel, Math.hypot(x - h.x0, y - h.y0));
+    // Lane Hands-on H2: the finger's recent path on screen, for a flip.
+    (h.screen ||= []).push({ t: this.simTime, x, y });
+    while (h.screen[0].t < this.simTime - 2 * THROW_WINDOW) h.screen.shift();
     const ray = this.ray(x, y);
     if (this.joints?.move(h, ray)) return; // lane Hands engine B: a joint's part follows
     if (h.place) {
@@ -478,6 +493,7 @@ export class HandsOn {
 
   pickUp(hit, x, y) {
     const w = this.ensure();
+    this.unsqueeze(); // lane Hands-on H1
     this.homing = null;
     let body = this.body;
     if (this.mode === "pieces") {
@@ -495,8 +511,11 @@ export class HandsOn {
     const ray = this.ray(x, y);
     // Pieces are picked and placed: held by the middle, turned level (only
     // their turn about the upright stays), hovering just above whatever is
-    // under the finger, so letting go sets one down on a stack.
-    const place = this.mode === "pieces" && this.info.recipe.hands.place !== false;
+    // under the finger, so letting go sets one down on a stack. (Lane
+    // Hands-on H2: a piece whose def says `place: false` hangs and swings
+    // in the hand instead, as every piece does with `hands.place: false`.)
+    const pdef = this.pieces.find((pc) => pc.body === body)?.def;
+    const place = this.mode === "pieces" && this.info.recipe.hands.place !== false && pdef?.place !== false; // prettier-ignore
     const la = place ? [0, 0, 0] : body.toLocal(hit);
     const at = place ? body.pos.slice() : hit;
     // A little give, so a wall or the floor wins over the finger instead
@@ -505,6 +524,9 @@ export class HandsOn {
     body.held = true;
     const def = this.pieces.find((pc) => pc.body === body)?.def;
     body.holdQ = place ? yawOnly(body.q) : def?.joint ? null : body.q.slice();
+    // Lane Hands-on H2: a `flip` piece lying upside down is held upside down
+    // (a pancake flipped once stays flipped in the hand).
+    if (place && def?.flip && quat.rotate(body.q, [0, 1, 0])[1] < 0) body.holdQ = quat.mul(body.holdQ, quat.axisAngle([1, 0, 0], Math.PI)); // prettier-ignore
     // A piece being placed stays level; anything else hangs and swings.
     body.holdK = place ? 10 : HOLD_UPRIGHT;
     body.angDampingFree ??= body.angDamping;
@@ -594,7 +616,10 @@ export class HandsOn {
     const below = def?.pick ? def.pick[1] : b.bound;
     // What is right under it there: straight down from above, at its
     // middle and four points round its footprint.
-    const foot = def?.pick ? 0.6 * Math.min(def.pick[0], def.pick[2]) : 0.5 * b.bound;
+    // (Lane Hands-on H2: `hands.foot`, the share of its pick radius looked
+    // under, so a wide piece set beside a stack sits on its edge instead of
+    // being lowered into it.)
+    const foot = def?.pick ? (this.info.recipe.hands.foot ?? 0.6) * Math.min(def.pick[0], def.pick[2]) : 0.5 * b.bound; // prettier-ignore
     // A recipe may snap it onto the piece below (a brick onto the studs).
     const snap = this.info.recipe.hands.snap;
     const under = (at) => {
@@ -646,6 +671,7 @@ export class HandsOn {
     let bd = Infinity;
     for (const pc of this.pieces) {
       const b = pc.body;
+      if (b.fixedPiece) continue; // (never picked up: lane Hands-on H1)
       const l = b.toLocal(p);
       const r = pc.def.pick || [b.bound, b.bound, b.bound];
       const d = Math.hypot(l[0] / r[0], l[1] / r[1], l[2] / r[2]);
@@ -657,9 +683,36 @@ export class HandsOn {
     return bd < 1.6 ? best : null;
   }
 
+  // Lane Hands-on H1: `hands.press` ({ amount, after }): a press held
+  // still on a whole toy for `after` seconds (0.15) squeezes it down by
+  // `amount` (0.25) and plays its sound (a hit with `press: true`); let go,
+  // it springs back with the landing squish's wobble. A drag still picks it
+  // up as before.
+  pressStep() {
+    const pd = this.info?.recipe?.hands?.press;
+    const pr = this.press;
+    if (!pd || !pr || this.hold || pr.push || pr.local || pr.squeezed) return;
+    if (this.time - pr.t < (pd.after ?? 0.15)) return;
+    this.ensure();
+    if (this.mode !== "toy") return;
+    pr.squeezed = true;
+    const b = this.body;
+    this.squish = { amp: pd.amount ?? 0.25, t0: this.time, axis: [0, 1, 0], point: [b.pos[0], this.world.planes[0].d, b.pos[2]], held: true }; // prettier-ignore
+    this.moved = true;
+    this.sounds.push({ speed: 3, soft: this.soft ?? 0, piece: false, press: true });
+  }
+
+  // The squeeze let go: it springs back.
+  unsqueeze() {
+    if (!this.squish?.held) return;
+    this.squish.held = false;
+    this.squish.t0 = this.time;
+  }
+
   // Lets go: whatever it was holding flies on with the finger's speed.
   release() {
     if (this.extras?.release()) return true; // lane Hands engine A
+    this.unsqueeze(); // lane Hands-on H1
     const h = this.hold;
     this.press = null;
     if (!h) return false;
@@ -680,6 +733,7 @@ export class HandsOn {
     h.body.damping = Math.max(h.body.damping, AIR_DRAG);
     // A piece being placed is set down, not thrown.
     if (h.place) {
+      if (this.flip(h)) return true; // lane Hands-on H2: a pancake flipped
       this.extras?.thrown(h); // lane Hands engine A
       // Set down from where it hovers at least, so a quick let-go never
       // starts it inside the piece below (it may still be catching up).
@@ -701,6 +755,60 @@ export class HandsOn {
     const ws = v3.len(h.body.omega);
     if (ws > wmax) h.body.omega = v3.scale(h.body.omega, wmax / ws);
     this.extras?.thrown(h); // lane Hands engine A: the material's weight and spin
+    this.hold = null;
+    this.world.wake();
+    return true;
+  }
+
+  // Lane Hands-on H2: a piece whose def says `flip: true`, let go from a
+  // quick flick up the screen (faster up than across), is tossed straight
+  // up with half a turn about the level line across the view, timed to come
+  // down upside down where it rose from: a pancake flipped in the pan.
+  flip(h) {
+    const b = h.body;
+    const def = this.pieces.find((pc) => pc.body === b)?.def;
+    if (!def?.flip || h.travel < NUDGE) return false;
+    const s = h.screen || []; // (its last 2 × THROW_WINDOW; moves come once a frame)
+    if (s.length < 2) return false;
+    const dt = s[s.length - 1].t - s[0].t;
+    if (dt < 1e-6) return false;
+    const vx = (s[s.length - 1].x - s[0].x) / dt;
+    const vy = (s[0].y - s[s.length - 1].y) / dt; // CSS pixels per second, up
+    if (vy < FLIP_PX || vy < Math.abs(vx)) return false;
+    const R = this.R();
+    const up = FLIP_UP * R;
+    const g = Math.max(1e-6, -this.world.gravity[1]);
+    if (b.pos[1] < h.target[1]) b.pos[1] = h.target[1]; // (from where it hovers, as a set-down)
+    // It comes down where it was before the flick (the finger's flick up
+    // the screen carries the hovering piece off along the floor), on
+    // whatever is under that spot (a piece's pick ellipsoid, or the
+    // floor), drawn toward that piece's middle as a set-down is.
+    const was = h.trail[0]?.p || b.pos;
+    let at = [was[0], was[2]];
+    let ground = this.world.planes[0].d;
+    let onto = null;
+    for (const pc of this.pieces) {
+      if (pc.body === b) continue;
+      const r = pc.def.pick || [pc.body.bound, pc.body.bound, pc.body.bound];
+      const o = [at[0], b.pos[1] + 6 * R, at[1]];
+      const d = rayEllipsoid(pc.body, r, { origin: o, dir: [0, -1, 0] });
+      if (d < Infinity && o[1] - d > ground) {
+        ground = o[1] - d;
+        onto = pc.body;
+      }
+    }
+    const pull = this.info.recipe.hands.center ?? 0;
+    if (onto) at = at.map((v, i) => v + ((i ? onto.pos[2] : onto.pos[0]) - v) * pull);
+    const drop = Math.max(0, b.pos[1] - ground - (def.pick ? def.pick[1] : b.bound));
+    const t = (up + Math.sqrt(up * up + 2 * g * drop)) / g; // up, then down onto it
+    let axis = v3.cross(this.ray(h.x0, h.y0).dir, [0, 1, 0]);
+    axis = v3.len(axis) > 1e-9 ? v3.norm(axis) : [1, 0, 0];
+    // Half a turn by the time it lands, its spin slowed by angDamping on the way.
+    const k = b.angDamping;
+    const w = k > 1e-6 ? (Math.PI * k) / (1 - Math.exp(-k * t)) : Math.PI / t;
+    b.vel = [(at[0] - b.pos[0]) / t, up, (at[1] - b.pos[2]) / t];
+    b.omega = v3.scale(axis, w);
+    this.extras?.thrown(h); // lane Hands engine A
     this.hold = null;
     this.world.wake();
     return true;
@@ -752,6 +860,7 @@ export class HandsOn {
   step(dt) {
     this.time += dt;
     const extra = this.extras?.step(dt) || false; // lane Hands engine A
+    this.pressStep(); // lane Hands-on H1: a held press squeezes the toy
     const w = this.world;
     if (!w) return extra;
     let busy = extra;
@@ -818,7 +927,8 @@ export class HandsOn {
     if (this.squish) {
       const s = this.squish;
       const t = this.time - s.t0;
-      if (t > 1.2) this.squish = null;
+      if (s.held) busy = true;
+      else if (t > 1.2) this.squish = null;
       else busy = true;
     }
     this.apply();
@@ -870,6 +980,7 @@ export class HandsOn {
     const s = this.squish;
     if (!s) return 0;
     const t = this.time - s.t0;
+    if (s.held) return s.amp * Math.min(1, t / 0.08); // squeezed, while the finger stays
     return s.amp * Math.exp(-4.5 * t) * Math.cos(12 * t);
   }
 
@@ -894,9 +1005,17 @@ export class HandsOn {
       const out = [];
       for (const pc of this.pieces) {
         const b = pc.body;
-        if ((b.pinned && !this.homing) || pc.token === undefined) continue;
-        const dq = quat.mul(b.q, quat.conj(pc.home.q));
-        out.push({ index: pc.token, token: { base: pc.home.pos, offset: v3.sub(b.pos, pc.home.pos), quat: dq } }); // prettier-ignore
+        if (b.pinned && !this.homing) continue;
+        // (From where its splats were built; lane Hands-on H2's `shown`. A
+        // joint's own piece has no `built`: its home.)
+        const bt = pc.built || pc.home;
+        const dq = quat.mul(b.q, quat.conj(bt.q));
+        const token = { base: bt.pos, offset: v3.sub(b.pos, bt.pos), quat: dq };
+        if (pc.token !== undefined) out.push({ index: pc.token, token });
+        // Lane Hands-on H2: other tokens that ride with it (`ride`: an
+        // index, or { token, visible }), a banana's skin strips.
+        for (const r of pc.def.ride || [])
+          out.push(typeof r === "number" ? { index: r, token } : { index: r.token, token: { ...token, visible: r.visible ?? 1 } }); // prettier-ignore
       }
       // Lane Hands engine C: what the ropes, cloth and stretch move.
       const so = this.softParts?.output();
@@ -907,10 +1026,14 @@ export class HandsOn {
       for (const pc of this.pieces) {
         if (!pc.part) continue;
         const b = pc.body;
-        const dq = quat.mul(b.q, quat.conj(pc.home.q));
-        const pv = pc.def.pivot || pc.home.pos;
-        const off = v3.sub(v3.sub(b.pos, pv), quat.rotate(dq, v3.sub(pc.home.pos, pv)));
+        const bt = pc.built || pc.home;
+        const dq = quat.mul(b.q, quat.conj(bt.q));
+        const pv = pc.def.pivot || bt.pos;
+        const off = v3.sub(v3.sub(b.pos, pv), quat.rotate(dq, v3.sub(bt.pos, pv)));
         (parts ||= {})[pc.part] = { quat: dq, offset: off };
+        // Lane Hands-on H2: `offHome` is merged in while it is off its place
+        // (a candle pulled out of the cake goes out: { visible: 0 }).
+        if (pc.def.offHome && !b.pinned) Object.assign(parts[pc.part], pc.def.offHome);
       }
       if (this.joints) parts = this.joints.parts(parts); // lane Hands engine B
       if (so) parts = Object.assign(parts || {}, so.parts); // lane Hands engine C
@@ -931,7 +1054,9 @@ export class HandsOn {
   follow() {
     if (this.mode !== "toy" || (!this.moved && !this.homing)) return null;
     const d = v3.sub(this.body.pos, this.body.home.pos);
-    return [d[0] * 0.8, d[1] * 0.5, d[2] * 0.8];
+    // (A toy may drift the view less, so its roll reads: hands.view.)
+    const k = this.info?.recipe?.hands?.view ?? 0.8;
+    return [d[0] * k, d[1] * 0.5, d[2] * k];
   }
 
   // The squish, as the shader wants it (model space): { axis, amount,
