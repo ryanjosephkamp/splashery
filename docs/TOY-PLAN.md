@@ -1681,7 +1681,9 @@ Proposals below are suggestions; the owner may change them.
     on the empty board starts a tour of all 118 elements (about 2 s each, the tile lit; by atomic
     number or shuffled), and any tap stops it. Fix7: a tap on the 57-71 or 89-103 cell lights its
     row of lanthanides or actinides (3.5 s); a Wide table option shows the f-block in its periods
-    (32 columns).
+    (32 columns). Hands-on H5: with ✋ Hands-on on, the shown element's tile pulls out of its slot
+    with a click, is carried level, lands on the table under the board, and brought back to its slot
+    glides in and holds fast (tap another tile first to choose which).
   - Sound: The atom's whoosh much quieter, and a faint, soft tick for each proton and neutron as it
     packs into the nucleus, in sync (Sound C, October 2, 2026).
 - **Real elements** (`real-elements`). Now: tap: Lift or lower the sample. Plan: keep.
