@@ -102,3 +102,72 @@ for (const toy of ["photo-3d", "moving-photo-3d"]) {
     }
   });
 }
+
+// The owner's report of October 9, 2026: "Moving photo to 3D doesn't loop properly when the
+// video/GIF ends. It just gets stuck at the end of the clip and plays like the last 0.5 seconds over
+// and over again." A frame that came after the sound's last 20 ms found it ended and sent it back to
+// the last time shown, a moment before the end, over and over. Each clip plays past its end at least
+// twice, at normal speed and at the Speed slider's top (1.75 times), in the default view (Sharp
+// picture): the shown time wraps to the start each time, and the frames after it are the clip's
+// first ones, not its last half second.
+const LOOPS = [
+  { name: "a short video with sound", file: "tests/fixtures/psv3/sound.webm", sound: true },
+  { name: "a short video without sound", file: "tests/fixtures/psv3/silent.webm" },
+  { name: "a GIF", file: "assets/toys/screen/horse.gif" },
+];
+
+for (const clip of LOOPS) {
+  for (const speed of [0.5, 1]) {
+    test(`Moving photo to 3D loops ${clip.name}${speed === 1 ? " at 1.75 times" : ""}`, async ({
+      page,
+    }) => {
+      test.setTimeout(300_000);
+      const errors = await ready(page);
+      await page.evaluate(() => window.__splashery.app.chooseToy("moving-photo-3d"));
+      await built(page, "moving-photo-3d");
+      await page.evaluate(async () => (window.__mv = (await import("/src/packs/moving-photo.js")).MOVING)); // prettier-ignore
+      await page.setInputFiles("#toy-input-file", clip.file);
+      const name = clip.file
+        .split("/")
+        .pop()
+        .replace(/\.[^.]+$/, "");
+      await page.waitForFunction((n) => window.__mv.clip?.name === n && !window.__splashery.player.loading, name, { timeout: 120_000, polling: 250 }); // prettier-ignore
+      const r = await page.evaluate(async (speed) => {
+        const { app } = window.__splashery;
+        const m = await import("/src/packs/moving-photo.js");
+        const M = window.__mv;
+        const c = M.clip;
+        app.setMotion({ speed });
+        app.setControl("play", 1);
+        const rate = m.speedRate(speed);
+        const rows = [];
+        const end = performance.now() + ((2.7 * c.duration) / rate) * 1000;
+        while (performance.now() < end) {
+          await new Promise((res) => requestAnimationFrame(res));
+          rows.push({ t: M.t, f: M.frame, at: performance.now() });
+        }
+        return { rows, duration: c.duration, n: c.n, rate, sound: !!c.audio, start: m.frameAt(c, 0.5 * rate) }; // prettier-ignore
+      }, speed);
+      expect(r.sound).toBe(!!clip.sound || clip.file.endsWith(".webm"));
+      // Each wrap: the time drops from near the end to near the start.
+      const wraps = [];
+      for (let i = 1; i < r.rows.length; i++)
+        if (r.rows[i].t < r.rows[i - 1].t - r.duration / 2) wraps.push(i);
+      expect(wraps.length, JSON.stringify(r.rows.map((x) => +x.t.toFixed(2)))).toBeGreaterThanOrEqual(2); // prettier-ignore
+      for (const i of wraps) {
+        expect(r.rows[i].t).toBeLessThan(0.5 * r.rate);
+        expect(r.rows[i].f).toBeLessThanOrEqual(r.start);
+      }
+      // Never more than half a second (of real time) inside the clip's last half second.
+      let stay = 0;
+      let from = null;
+      for (const x of r.rows) {
+        if (x.t > r.duration - 0.5 * r.rate) from ??= x.at;
+        else from = null;
+        if (from !== null) stay = Math.max(stay, x.at - from);
+      }
+      expect(stay).toBeLessThan(1000);
+      expect(errors).toEqual([]);
+    });
+  }
+}
