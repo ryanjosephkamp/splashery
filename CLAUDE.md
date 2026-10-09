@@ -105,6 +105,8 @@ coordinates. [docs/OPERATING.md](docs/OPERATING.md) has the rules. In short:
   toward, catalog, -ize endings, and dates like "September 27, 2026". Code identifiers, file names
   and anything stored in links or saved scenes stay as they are. Don't rewrite older British text on
   the side: one sweep does that before the blog post.
+- The serial (Oxford) comma in every new public-facing text: "a, b, and c" and "d, e, or f" (the
+  owner's call of October 9, 2026). Older text gets it in the same sweep as American English.
 - Secrets: `HF_TOKEN` (a Hugging Face read token) is for build-time tools only. Never print it,
   commit it, or put it in logs, PRs or files. To check it, test that it is set
   (`[ -n "$HF_TOKEN" ]`), or call the whoami API and print only the account name and token role.
