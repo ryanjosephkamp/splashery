@@ -250,7 +250,7 @@
       "owner": "Interesting; no idea for an effect. The original shapes are really good-looking.",
       "effect": "Splits into three small blobs that merge back.",
       "sound": "Gloopy wobble.",
-      "improved": "E1: splits into three smaller blobs that wobble apart, then merge back with a jelly bounce (2.8 s). Hands engine C (Hands-on): drag it to stretch it toward the finger; let go and it wobbles back. Hands-on H1: pull and stretch it like the gummy bear (a drag on it, with the ✋ switch on); let go and it wobbles back."
+      "improved": "E1: splits into three smaller blobs that wobble apart, then merge back with a jelly bounce (2.8 s). Hands engine C (Hands-on): drag it to stretch it toward the finger; let go and it wobbles back."
     },
     "donut": {
       "v": "keep",

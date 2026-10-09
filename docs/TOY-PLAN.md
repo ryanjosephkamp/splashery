@@ -492,8 +492,7 @@ Proposals below are suggestions; the owner may change them.
   - Effect: Splits into three small blobs that merge back.
   - Improved: E1: splits into three smaller blobs that wobble apart, then merge back with a jelly
     bounce (2.8 s). Hands engine C (Hands-on): drag it to stretch it toward the finger; let go and
-    it wobbles back. Hands-on H1: pull and stretch it like the gummy bear (a drag on it, with the ✋
-    switch on); let go and it wobbles back.
+    it wobbles back.
   - Sound: Gloopy wobble.
 - **Neon knot** (`knot`). Now: tap: Contort (rig). Plan: keep.
   - Effect: The neon flows along the knot and it ties tighter, then relaxes.
