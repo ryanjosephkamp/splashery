@@ -1081,15 +1081,20 @@ export class HandsOn {
       // (Lane Hands-on H2: `hands.resort`, seconds, for a toy whose pieces
       // turn fast in front of its own splats, a sunflower's nodding head.)
       const every = this.info.recipe.hands.resort ?? 0.25;
-      if (out.length && (this.time - this.lastResort > every || (asleep && !this.restSorted))) {
+      // (Lane Hands-on H2: pieces that are parts are sorted too, by the
+      // player's part pass: a flipped pancake drew in its old order, the
+      // one under it showing through it.)
+      const moving =
+        out.length > 0 || (!!(this.moved || this.homing) && !!player.motion.handsParts);
+      if (moving && (this.time - this.lastResort > every || (asleep && !this.restSorted))) {
         this.lastResort = this.time;
         this.restSorted = asleep;
         player.motion.handsResort = true;
       }
       // (Lane Hands-on H2: once more when the last moved piece is home, so
       // a slice clicked back in isn't drawn in the order it had outside.)
-      if (!out.length && this.hadOut) player.motion.handsResort = true;
-      this.hadOut = out.length > 0;
+      if (!moving && this.hadOut) player.motion.handsResort = true;
+      this.hadOut = moving;
       if (!asleep) this.restSorted = false;
     }
   }
