@@ -1816,7 +1816,8 @@ function driveEnigma(t, c, out, info) {
   }
   ["rotorL", "rotorM", "rotorR"].forEach((nm, i) => (out.parts[nm] = { angle: pos[i] * EN.step }));
   // The lamp's glow and the turned rotors are sorted again where they are.
-  const key = pose ? `${pose.lamp}:${pos.map((v) => Math.round(v * 4)).join(",")}` : `rest:${data.rest}`; // prettier-ignore
+  // (At rest too, while a hand turns them: lane Hands-on H5.)
+  const key = `${pose ? pose.lamp : "rest"}:${pos.map((v) => Math.round(v * 4)).join(",")}`;
   out.resort = key !== m.sortKey;
   out.resortPose = out.resort;
   m.sortKey = key;
