@@ -58,10 +58,12 @@ const SAMPLE = [
 // Lane Hands-on H4: the solar system and the campfire play in pieces mode on purpose (each planet
 // is its own piece, picked off its orbit and let go to orbit again; the campfire has a spare log to
 // lay on the fire, and a fire isn't picked up), so a press on the sun or the fire lifts no whole toy.
+// So does the bacterium (a press on it takes its two halves, to pull it apart and divide it).
 const KNOWN = {
   "picture-frame": ["unavailable"],
   "solar-system": ["whole-pickup"],
   campfire: ["whole-pickup"],
+  bacterium: ["whole-pickup"],
 };
 const selected = ALL ? TOYS : SAMPLE.map((id) => TOYS.find((t) => t.id === id));
 
