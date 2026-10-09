@@ -106,7 +106,7 @@ What the first three Hands-on lanes learned today (October 8, 2026), so you don'
 
 ## State
 
-WORKING (October 9, 2026, 07:00 UTC): the owner marked 28 of the 34 cards good. The ones that needed
+WORKING (October 9, 2026, 07:00 UTC): the owner marked 28 of the 33 cards good. The ones that needed
 work are fixed and their new clips are posted as `-r2` cards (each old card points to it): the bus's
 wheels now sit outside its sides, the tractor's mudguards clear its tires (both change the toy's
 look a little with ✋ off too; new thumbnails), the castle's clip raises the drawbridge again, the
