@@ -964,8 +964,8 @@ joints: (d) => d.wedges.map((w) => ({ type: "socket", token: w.token, snap: 0.35
 line have been that far from its place (small pieces packed close, an atlas's organs, would
 otherwise click straight back as they are lifted out).
 
-A hinge's, slider's or dial's `limits: (info) => [min, max]` (lane Hands-on H5) narrows its stops as
-the toy stands now (`info.hands.joint(name)` reads the others), never past where the part already
+A hinge's, slider's or dial's `limits: (at) => [min, max]` (lane Hands-on H5) narrows its stops as
+the toy stands now (`at.joint(name)` reads another joint's value), never past where the part already
 is: a part another blocks, as a Pythagoras triangle that can't slide through its neighbor until that
 one has moved.
 
