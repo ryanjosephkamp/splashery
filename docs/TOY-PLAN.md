@@ -991,7 +991,8 @@ Proposals below are suggestions; the owner may change them.
     dot (a transit) and a pearly eclipse corona flares; then it tips back and the planets swing on
     round their orbits to where they would have been, spread out again (7 s). The orbits are spaced,
     and the planets sized, so that no two planets touch, at rest or in the row. Mercury is lit from
-    the Sun and turns as it orbits.
+    the Sun and turns as it orbits. Hands-on H4: in Hands-on, drag a planet off its orbit and let
+    go: the Sun's pull swings it back round into its orbit while the others orbit on.
   - Sound: No synth chord: a soft whoosh as the planets swing into line, a warm flare as the corona
     shows, and a whoosh as they swing on.
 - **Mercury** (`mercury`). Now: tap: Spin in the sunlight. Plan: keep.
@@ -1010,7 +1011,8 @@ Proposals below are suggestions; the owner may change them.
   - Effect: Night side lights up with city lights as it turns; clouds move.
   - Improved: E2: a tap turns it through one day with the Sun to the left: night falls over the
     right half, the Earth turns once, city lights come on as the land turns into the dark and go out
-    at dawn, then the night lifts (6.4 s). The clouds are painted on the globe now.
+    at dawn, then the night lifts (6.4 s). The clouds are painted on the globe now. Hands-on H4: in
+    Hands-on, flick it round to spin it on its tilted axis; it slows back to still.
   - Sound: The same ocean wash (a little softer) and chime, with the wind turned right down (softer,
     shorter and quieter).
 - **Moon** (`moon`). Now: tap: Land or leave. Plan: keep.
@@ -1071,7 +1073,9 @@ Proposals below are suggestions; the owner may change them.
   - Effect: Cracks and breaks into pieces that drift apart, then pull back together.
   - Improved: E2: a tap cracks it (glowing cracks flash), it falls apart into 18 pieces that drift
     off tumbling, each on its own path, with a puff of dust; the broken faces are paler fresh rock;
-    then gravity pulls the rubble back together and it settles (5.4 s).
+    then gravity pulls the rubble back together and it settles (5.4 s). Hands-on H4: in Hands-on,
+    pull its chunks off one by one; let go and each drifts back to its place in the rubble pile (no
+    floor out in space).
   - Sound: A rock crack and a muffled boom, real rocks crumbling apart, a soft grinding as the
     rubble comes back, and the stone settling.
 - **Comet** (`comet`). Now: tap: Swing past the Sun. Plan: keep.
@@ -1081,7 +1085,8 @@ Proposals below are suggestions; the owner may change them.
   - Effect: Tail flares longer and brighter as it swings by.
   - Improved: E2: a tap swings it past the Sun: jets of gas burst from the sunward side of the
     nucleus, the coma swells, and both tails flare longer and brighter as they swing round, then
-    fade back (4.8 s).
+    fade back (4.8 s). Hands-on H4: tossed in Hands-on, it now lands, rocks and comes to rest (the
+    L1 sweep found it never did).
   - Sound: A real burning torch roaring as the jets and tails flare, fading as they die back.
 - **Meteor** (`meteor`). Now: tap: Streak in and burst. Plan: keep.
   - Owner: Much cooler than the comet.
@@ -1105,7 +1110,8 @@ Proposals below are suggestions; the owner may change them.
   - Effect: Beams sweep faster and faster with strobing flashes.
   - Improved: E2: each time a beam sweeps past the viewer the star flashes, like a lighthouse. A tap
     spins it up to a blur, the flashes coming faster into a strobe, each with a tick, then it winds
-    down (5.4 s).
+    down (5.4 s). Hands-on H4: in Hands-on, flick the star round to spin it up: the beams sweep
+    faster and the flashes come quicker, then it slows.
   - Sound: A deep boom and rumble as it spins up, and a deep pulse with each flash instead of a
     tick.
 - **Black hole** (`black-hole`). Now: tap: Feed it a star. Plan: keep.
@@ -1113,7 +1119,9 @@ Proposals below are suggestions; the owner may change them.
   - Effect: A small star falls in, gets stretched into a spiral and swallowed; the disk flares.
   - Improved: E2: a tap sends a small star falling in: it spirals closer, faster, is stretched into
     a streak and leaves a stream of its gas along its path; it plunges in, the disk and photon ring
-    flare, and the stream swirls down after it (6.6 s).
+    flare, and the stream swirls down after it (6.6 s). Hands-on H4: in Hands-on, a small star waits
+    out on the right; drag it near the hole and let go: it falls round, stretches into a streak, is
+    swallowed, and the disk and ring flare.
   - Sound: A deep growing roar as the star spirals in, a rushing whoosh, a huge low boom as it
     plunges, and the gas swirling down after it.
 - **Star cluster** (`star-cluster`). Now: tap: Breathe in and out. Plan: keep.
