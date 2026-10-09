@@ -4158,7 +4158,7 @@ export const TOYS = [
     pack: "imaging",
     labs: true,
     tags: "mri magnetic resonance imaging scan slices kiwi orange fruit seeds segments t2 imaging",
-    camera: { yaw: 0.35, pitch: 0.15, roll: 0, distance: 3.0 },
+    camera: { yaw: 0, pitch: 0, roll: 0, distance: 3.0 }, // Fix10: face-on to the slices
   },
   {
     id: "electron-microscope",

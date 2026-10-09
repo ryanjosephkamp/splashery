@@ -10,7 +10,25 @@ ryanjosephkamp/splashery.
   That one is a small, additive "Engine: …" PR, merged first.
 - PR title: "Phase Fix10: the walkthrough's science fixes".
 - Handoff file: docs/handoff/Fix10.md. Create it, starting with this brief word for word under "##
-  Brief". Then keep "## State", "## Notes", "## Known issues" and "## For the Operator" current.
+  Brief". Then keep "## State
+
+- October 9, 2026: started on `claude/lane-fix10` from main 8a53aa5c. Draft PR #467.
+- 1. Volume viewer sound: done (tap: `pageflip` plus a soft `thud`; Play: `action.quiet: ["sweep"]`
+     and two `whoom` cues from `driveVolume`, one per pass; drag silent). sound-lint and sound-check
+     pass.
+- 2. Electron microscope: done in code and tests (`targets` per sample, `action.at` picks the
+     nearest ellipse, the zoom state lives in `kit.data.zoom`). Clip rendered and checked.
+- 3. Fruit MRI: done in code and tests (`mriDrag`, the Slice slider, `turntable: false`,
+     `pausable: false`, brighter outline, a ring per slice). Clip rendering.
+- 4. Ripple tank: done in code (`PEBBLE` in optics.js, a shadow part, a sink, a bigger dent; the
+     drip moved to 0.43 s). Clip to render.
+- 5. Night sky: the day ground in code (night density, rows under the skyline); the drag on
+     `claude/lane-fix10-engine` (committed, browser specs to run).
+- 6. Thumbnails: `tools/make-thumbs.mjs` draws at 4x and opens with labs on. 4D thumbnails to
+     render.
+
+## Notes", "## Known issues" and "## For the Operator" current.
+
 - Model: Opus 5.5, at high effort (CLAUDE.md).
 
 ### Brief (written by the Operator on October 9, 2026, from the owner's walkthrough)
@@ -117,6 +135,12 @@ replace the prefix and lane record with yours).
 - 2 to 6: to do.
 
 ## Notes
+
+- `tools/fx10-clip.mjs` records phone-sized MP4 clips with the camera free (effect-clip holds it, so
+  the microscope's view glides would not show). Before clips come from a worktree of main served on
+  port 4174 (`SPLASHERY_URL`).
+- From inside, the old drag moved the stars against the finger sideways (and with it vertically);
+  the engine fix turns the view with the finger both ways.
 
 ## Known issues
 

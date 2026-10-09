@@ -1487,7 +1487,8 @@ function buildMRI(k, fruit, vision = "gray") {
     const p = fruit === "orange" ? vec.mul(d, MRI.orange.r) : [d[0] * MRI.kiwi.b, d[1] * MRI.kiwi.b, d[2] * MRI.kiwi.a]; // prettier-ignore
     return { p, color: "#a8d4f5", opacity: 0.11, n: d, pattern: false };
   });
-  // Fix10: a thin contour ring round each slice, shown with its slice, so the slice's edge reads.
+  // Fix10: a thin contour ring round each slice, shown with its slice, so the slice's edge reads
+  // (pale amber in gray, apart from the outline's blue).
   const ring = [];
   for (let i = 0; i < S; i++) {
     const z = -half + (i + 0.5) * gap;
@@ -1497,7 +1498,7 @@ function buildMRI(k, fruit, vision = "gray") {
     for (let j = 0; j < m; j++) ring.push(z, R, (2 * Math.PI * j) / m);
   }
   const nr = ring.length / 3;
-  const ringColor = visionColor(vision, 0.92).map((v, i) => (vision === "gray" ? [0.62, 0.84, 1][i] : v)); // prettier-ignore
+  const ringColor = visionColor(vision, 0.92).map((v, i) => (vision === "gray" ? [1, 0.84, 0.42][i] : v)); // prettier-ignore
   k.cloud({ count: nr * (160000 / k.count), jitter: 0 }, (r, i) => {
     if (i >= nr) return null;
     const [z, R, a] = [ring[i * 3], ring[i * 3 + 1], ring[i * 3 + 2]];
