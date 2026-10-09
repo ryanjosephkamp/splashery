@@ -25,6 +25,13 @@
 //     pad: ["left", "right", "fire"],    // the on-screen pad (touch)
 //     controls: { keys, mouse, touch, pad, short },
 //     slots: { high, mid, low },         // splats the layer holds
+//     look: { yaw, pitch, zoom, keys },  // Arcade r3: in 3D, two fingers (or the
+//                                        // right mouse button) turn the view up
+//                                        // to yaw and pitch radians each way, a
+//                                        // pinch or the wheel zooms within zoom
+//                                        // ([nearest, farthest] distance factors);
+//                                        // keys: Q and E turn it too
+//     tapFire: false,                    // a tap in play is not a fire press
 //     create(api) -> game,               // may be async (load more code)
 //   }
 //
@@ -36,6 +43,10 @@
 //   game.stats()                         { score, lives, level, ... }
 //   game.status()                        { over, won, title, lines }
 //   game.onView?(to)                     the switch was pressed (to: 0 or 1)
+//
+// api.lookBy(dx, dy) turns the look (in stage widths, as a drag) for a game
+// that reads a one-finger drag as looking; api.look() is the look now
+// ({ yaw, pitch, zoom }, already scaled by the view's blend).
 
 import { ArcadeLayer, Sprites, Points, kitModel, makeModel, recolor, stepPieces } from "./layer.js";
 import * as Q from "./layer.js";
@@ -54,7 +65,11 @@ export class ArcadeRuntime {
   constructor(player, recipe, options, ctx) {
     this.player = player;
     this.recipe = recipe;
-    this.def = recipe.arcade;
+    // (Arcade r3: a game's pad, its labels and its controls card may depend
+    // on its options: a function of them)
+    const def = { ...recipe.arcade };
+    for (const k of ["pad", "padLabels", "controls"]) if (typeof def[k] === "function") def[k] = def[k](options || {}); // prettier-ignore
+    this.def = def;
     this.options = options || {};
     this.ctx = ctx;
     const stage = player.stage;
@@ -94,6 +109,8 @@ export class ArcadeRuntime {
     this.choice = this.def.choices?.[0]?.id ?? null;
     this.hud.setChoice(this.choice);
     this.input = new Input(this.hud.surface);
+    this.look = { yaw: 0, pitch: 0, zoom: 0 };
+    this.input.wheelZoom = !!this.def.look;
     this.input.onPress = (a) => {
       if (a === "fire" && this.mode !== "play") this.wake();
     };
@@ -170,6 +187,8 @@ export class ArcadeRuntime {
       pose: () => (this.cam ? orbitPose(this.cam) : null),
       fitDistance,
       best: () => this.best,
+      lookBy: (dx, dy) => this.lookBy(dx, dy),
+      look: () => ({ yaw: this.look.yaw * this.view, pitch: this.look.pitch * this.view, zoom: Math.exp(this.look.zoom * this.view) }), // prettier-ignore
     };
     this.game = await this.def.create(api);
     if (this.dead) return;
@@ -353,6 +372,37 @@ export class ArcadeRuntime {
     return { origin: p.position, dir: d.map((v) => v / l) };
   }
 
+  // Arcade r3: turns the 3D view a little (a drag of dx, dy stage widths).
+  lookBy(dx, dy) {
+    const L = this.def.look;
+    if (!L || this.viewTo < 0.5) return;
+    const l = this.look;
+    l.yaw = clampV(l.yaw - dx * 2.6, -(L.yaw ?? 0.6), L.yaw ?? 0.6);
+    l.pitch = clampV(l.pitch + dy * 2.2, -(L.pitch ?? 0.3), L.pitch ?? 0.3);
+  }
+
+  // The look's gestures and keys, once a frame; back to straight in 2D.
+  stepLook(dt) {
+    const L = this.def.look;
+    const g = this.input.takeLook();
+    if (!L) return;
+    const l = this.look;
+    if (this.viewTo < 0.5) {
+      const k = Math.min(1, dt * 4);
+      l.yaw -= l.yaw * k;
+      l.pitch -= l.pitch * k;
+      l.zoom -= l.zoom * k;
+      return;
+    }
+    this.lookBy(g.turn[0], g.turn[1]);
+    if (L.keys && this.mode === "play") {
+      const k = (this.input.isHeld("turnR") ? 1 : 0) - (this.input.isHeld("turnL") ? 1 : 0);
+      if (k) this.lookBy((k * dt) / 2.6, 0);
+    }
+    const [zn, zf] = L.zoom || [0.75, 1.3];
+    l.zoom = clampV(l.zoom + g.zoom, Math.log(zn), Math.log(zf));
+  }
+
   sound(spec) {
     if (this.player.frozen || !spec) return;
     this.player.emit("cue", [spec]);
@@ -373,11 +423,14 @@ export class ArcadeRuntime {
       pressed.add(a);
       if (a === "fire" && this.mode !== "play") this.wake();
     }
-    // A tap starts the game; in play it is a fire press (a launch).
+    // A tap starts the game; in play it is a fire press (a launch), unless
+    // the game reads its taps itself (def.tapFire false: Strata turns the
+    // stone under a tap).
     if (this.input.takeTaps()) {
       if (this.mode !== "play") this.wake();
-      else pressed.add("fire");
+      else if (this.def.tapFire !== false) pressed.add("fire");
     }
+    this.stepLook(Math.min(dt, 0.1));
     // The switch: a smooth blend that the game reads.
     const sdt = Math.min(dt, 0.1);
     if (this.viewT !== this.viewTo) {
@@ -465,6 +518,12 @@ export class ArcadeRuntime {
       ...w,
       target: w.target || [0, 0, 0],
     };
+    // Arcade r3: the player's look-around, on top of the game's own camera.
+    if (this.def.look) {
+      want.yaw += this.look.yaw * this.view;
+      want.pitch += this.look.pitch * this.view;
+      want.distance *= Math.exp(this.look.zoom * this.view);
+    }
     const c = this.cam;
     if (!c || dt <= 0) this.cam = { ...want, target: want.target.slice() };
     else {
@@ -529,6 +588,10 @@ export function viewTangents(aspect, fov = 38) {
 export function fitDistance(w, h, aspect, margin = 1.04, fov = 38) {
   const [tx, ty] = viewTangents(aspect, fov);
   return Math.max(h / 2 / ty, w / 2 / tx) * margin;
+}
+
+function clampV(v, lo, hi) {
+  return v < lo ? lo : v > hi ? hi : v;
 }
 
 export function smooth(t) {

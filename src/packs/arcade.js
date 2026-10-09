@@ -204,13 +204,13 @@ export const RECIPES = {
         key: "style",
         label: "Style",
         type: "select",
-        default: "flat",
+        default: "dome", // Arcade r3: the owner's "the dome is the default"
         choices: [
           { id: "flat", label: "Flat board" },
           { id: "dome", label: "Dome" },
         ],
       },
-      VIEW,
+      { ...VIEW, default: "3d" },
       { key: "level", label: "Level", type: "slider", min: 1, max: 5, step: 1, default: 1 },
     ],
     controls: PLAY,
@@ -221,7 +221,7 @@ export const RECIPES = {
     },
     arcade: {
       title: "Shardball",
-      goal: "Keep the ball in play and break every brick.",
+      goal: "Catch the ball and send it back to break every brick. In the dome, don't let it touch the ground.",
       stats: [
         { key: "score", label: "Score" },
         { key: "lives", label: "Balls", icon: "●" },
@@ -232,12 +232,16 @@ export const RECIPES = {
       pad: ["left", "right", "up", "down", "fire"],
       padLabels: { fire: "Launch" },
       controls: {
-        keys: "← → (or A, D) move the paddle; in the dome, ↑ ↓ (W, S) too. Space launches the ball.",
-        mouse: "Move the mouse to steer the paddle; click to launch.",
-        touch: "Drag to steer the paddle; tap to launch. Or use the pad.",
-        pad: "Stick or D-pad to steer; A launches.",
-        short: "← → steer · Space launch · V for 3D",
+        keys: "← → (or A, D) move the paddle; in the dome, ↑ ↓ (W, S) too. The paddle catches the ball: Space launches it. Q and E turn the dome.",
+        mouse:
+          "Move the mouse to steer the paddle; click to launch. In the dome, drag the dome to turn it; scroll to zoom.",
+        touch:
+          "Drag on the ground to steer the paddle; tap to launch. In the dome, drag the dome itself to turn it, and pinch to zoom. Or use the pad.",
+        pad: "Stick or D-pad to steer; A launches; LB and RB turn the dome.",
+        short: "← → steer · Space launch · Q E turn · V for 2D",
       },
+      // Arcade r3: turn and zoom a little in the dome (the owner's walkthrough)
+      look: { yaw: 0.75, pitch: 0.3, zoom: [0.75, 1.3], keys: true },
       slots: { high: 100000, mid: 80000, low: 50000 }, // crisp bricks
       create: async (api) => (await import("./arcade-shardball.js")).createShardball(api),
     },
@@ -435,14 +439,14 @@ export const RECIPES = {
         key: "well",
         label: "Well",
         type: "select",
-        default: "deep",
+        default: "slot", // Arcade r3: the classic flat game first, in 2D
         choices: [
+          { id: "slot", label: "Classic (10 by 20)" },
           { id: "deep", label: "Deep (4 by 4)" },
           { id: "wide", label: "Wide (5 by 5)" },
-          { id: "slot", label: "Flat slot (one deep)" },
         ],
       },
-      { ...VIEW, default: "3d" },
+      VIEW,
     ],
     controls: PLAY,
     action: { key: "go", label: "Play or pause" },
@@ -461,14 +465,29 @@ export const RECIPES = {
       ],
       best: "score",
       views: true,
-      pad: ["left", "right", "up", "down", "alt", "turnL", "fire"],
-      padLabels: { alt: "⟳", turnL: "⤾", fire: "▼" },
-      controls: {
-        keys: "Arrows (or W, A, S, D) move the stone across the well; X turns it, Q and E tip it; Space drops it.",
-        touch: "Swipe to move it, swipe up to turn it; or use the pad.",
-        pad: "D-pad moves; B turns; LB and RB tip; A drops.",
-        short: "Arrows move · X turn · Q E tip · Space drop",
-      },
+      // Arcade r3: the classic slot's pad is ◀ ▶ ▼ and a big ⟳ Turn by the
+      // right thumb (the owner couldn't find how to turn a stone); a tap on
+      // the stone turns it too, and a tap beside it moves it.
+      pad: (o) => (o.well && o.well !== "slot" ? ["left", "right", "up", "down", "alt", "turnL", "fire"] : ["left", "down", "right", "fire", "alt"]), // prettier-ignore
+      padLabels: (o) => (o.well && o.well !== "slot" ? { alt: "⟳", turnL: "⤾", fire: "▼" } : { alt: "⟳ Turn", fire: "Drop" }), // prettier-ignore
+      tapFire: false,
+      controls: (o) =>
+        o.well && o.well !== "slot"
+          ? {
+              keys: "Arrows (or W, A, S, D) move the stone across the well; X (or Z) turns it, Q and E tip it; Space drops it.",
+              touch:
+                "Tap the stone to turn it; swipe to move it, swipe up to turn it; or use the pad.",
+              pad: "D-pad moves; B turns; LB and RB tip; A drops.",
+              short: "Arrows move · X turn · Q E tip · Space drop",
+            }
+          : {
+              keys: "← → (or A, D) move the stone; ↑, X or Z turns it; ↓ (S) drops it faster; Space drops it at once.",
+              mouse: "Click the stone to turn it; click beside it to move it that way.",
+              touch:
+                "Tap the stone (or ⟳ Turn) to turn it; tap beside it to move it; swipe down to drop it.",
+              pad: "D-pad moves; B turns; A drops.",
+              short: "← → move · ↑ or X turn · Space drop",
+            },
       slots: { high: 150000, mid: 120000, low: 60000 }, // crisp stones
       create: async (api) => (await import("./arcade-strata.js")).createStrata(api),
     },

@@ -38,7 +38,9 @@ const FLAT_SHAPES = [
 const WELLS = {
   deep: { w: 4, d: 4, h: 12 },
   wide: { w: 5, d: 5, h: 11 },
-  slot: { w: 8, d: 1, h: 14 },
+  // Arcade r3 (the owner: start in 2D, like the classic falling-blocks
+  // game, and maybe taller): the flat slot is the classic's 10 by 20.
+  slot: { w: 10, d: 1, h: 20 },
 };
 
 const hex = (h) => [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16) / 255);
@@ -60,7 +62,7 @@ class Strata {
   constructor(api) {
     this.api = api;
     this.q = api.q;
-    this.wellKind = WELLS[api.options.well] ? api.options.well : "deep";
+    this.wellKind = WELLS[api.options.well] ? api.options.well : "slot";
     const W = WELLS[this.wellKind];
     this.W = W.w;
     this.D = W.d;
@@ -68,31 +70,31 @@ class Strata {
     this.shapes = this.D === 1 ? FLAT_SHAPES : SHAPES;
     this.cube = Math.min(1.7 / this.W, 1.9 / this.H, 1.7 / Math.max(1, this.D));
     this.cube = Math.min(this.cube, 2.0 / this.H);
+    if (this.D === 1) this.cube = 0.1; // the classic slot: 1 by 2 units
     this.rand = api.rand;
     const low = api.profile === "low";
     const { recolor } = api;
     const c = this.cube;
     // Crisp grids (src/packs/arcade-crisp.js): each stone a clean block.
-    const fine = c / (low ? 5 : 7);
+    // (Arcade r3, "much sharper": a finer edge band, no grain on the faces,
+    // and a clear dark bevel round each face)
+    const fine = c / (low ? 7 : 14);
     const opt = { fine, coarse: c / (low ? 2 : 2.5) };
     const h = (c * 0.94) / 2;
     // A carved stone: a block with a lit top, darker sides and a darker
-    // chamfer along its edges.
-    const stone = crispModel(
-      (k) =>
-        k.box(c * 0.94, c * 0.94, c * 0.94, {
-          color: (p, n) => {
-            let edge = 0;
-            for (let i = 0; i < 3; i++)
-              if (Math.abs(n[i]) < 0.5) edge = Math.max(edge, Math.abs(p[i]) / h);
-            const f = (0.72 + 0.22 * n[1] + 0.08 * n[2] + 0.04 * n[0]) * (edge > 0.82 ? 0.84 : 1);
-            const g = Math.sin(p[0] * 131 + p[1] * 71) * Math.sin(p[2] * 97 - p[1] * 53);
-            const grain = 1 + 0.035 * g;
-            return [f * grain, f * grain, f * grain];
-          },
-        }),
-      opt,
-    );
+    // bevel along its edges.
+    const stone = crispModel((k) => {
+      k.box(c * 0.94, c * 0.94, c * 0.94, {
+        color: (p, n) => {
+          let edge = 0;
+          for (let i = 0; i < 3; i++)
+            if (Math.abs(n[i]) < 0.5) edge = Math.max(edge, Math.abs(p[i]) / h);
+          const f = 0.74 + 0.22 * n[1] + 0.08 * n[2] + 0.04 * n[0];
+          const g = edge > 0.86 ? 0.58 : edge > 0.7 ? 1.1 : 1;
+          return [f * g, f * g, f * g];
+        },
+      });
+    }, opt);
     this.models = this.shapes.map((s) => {
       const col = hex(s.color);
       return recolor(stone, (v) => [v[0] * col[0], v[1] * col[1], v[2] * col[2], 1]);
@@ -106,6 +108,16 @@ class Strata {
     };
     this.wellModel = crispModel(
       (k) => {
+        if (this.D === 1) {
+          // Arcade r3: the classic slot's walls are two solid stone columns
+          // and a sill, so the well reads clean (a wire frame seen straight
+          // on drew doubled lines and corner specks).
+          const t = c * 0.35;
+          const side = (x) => k.box(t, Hy + t, c * 1.1, { pos: [x, -t / 2, 0], faces: "xXYZ", color: (p, n) => { const f = 0.5 + 0.12 * n[2] + 0.1 * n[1]; return [0.42 * f / 0.5, 0.4 * f / 0.5, 0.38 * f / 0.5]; } }); // prettier-ignore
+          side(-Wx / 2 - t / 2 - c * 0.02);
+          side(Wx / 2 + t / 2 + c * 0.02);
+          return;
+        }
         const wall = (sx, sy, sz, pos) => k.box(sx, sy, sz, { pos, color: wallColor });
         // the four corner posts and the rim
         for (const x of [-Wx / 2, Wx / 2])
@@ -116,7 +128,10 @@ class Strata {
       { fine: e / 2, coarse: c / 2 },
     );
     this.floorModel = crispModel(
-      (k) => k.box(Wx, e, Dz, { pos: [0, -Hy / 2 - e / 2, 0], color: [0.5, 0.47, 0.43] }),
+      (k) =>
+        this.D === 1
+          ? k.box(Wx + c * 0.74, c * 0.35, c * 1.1, { pos: [0, -Hy / 2 - c * 0.175 - c * 0.02, 0], faces: "xXYZ", color: (p, n) => [0.36, 0.34, 0.32].map((v) => v * (1 + 0.2 * n[1] + 0.15 * n[2])) }) // prettier-ignore
+          : k.box(Wx, e, Dz, { pos: [0, -Hy / 2 - e / 2, 0], color: [0.5, 0.47, 0.43] }),
       { fine, coarse: c / 2 },
     );
     // The slabs' joints: lines on the floor, a sprite of their own.
@@ -141,11 +156,12 @@ class Strata {
     const S = this.api.sprites;
     S.clear();
     this.well = S.add(this.wellModel);
+    if (this.D === 1) this.well.sortBias = [0, 0, -0.05];
     // The floor sorts below its joints, and both below the stones on them.
     this.floor = S.add(this.floorModel);
     this.floor.sortBias = [0, -0.2, 0];
-    this.joints = S.add(this.jointModel);
-    this.joints.sortBias = [0, -0.1, 0];
+    this.joints = this.D === 1 ? null : S.add(this.jointModel);
+    if (this.joints) this.joints.sortBias = [0, -0.1, 0];
     this.grid = new Array(this.W * this.D * this.H).fill(null); // sprite per cell
     this.shards = [];
     this.score = 0;
@@ -252,6 +268,9 @@ class Strata {
         if (st && this.tryMove(p.cubes, st[0], 0, st[1])) this.api.sound({ voice: "click", f: 1500, vol: 0.1 }); // prettier-ignore
       }
     }
+    // Arcade r3: a tap on the stone turns it; in the slot, a tap beside it
+    // moves it one step that way.
+    for (const t of ctl.input.takeTapPoints?.() || []) this.tapAt(t.x, t.y);
     const sw = ctl.input.takeSwipe?.();
     if (sw) {
       if (sw === "down" && this.D === 1) this.hardDrop();
@@ -270,6 +289,29 @@ class Strata {
       this.dropT = 0;
       if (!this.tryMove(p.cubes, 0, -1, 0)) this.land();
     }
+  }
+
+  // The stone's cube nearest a tap's ray (null if none is within a cube
+  // and a half), and the tap's side of the stone (-1 or 1, across).
+  tapAt(x, y) {
+    const p = this.piece;
+    const ray = this.api.ray?.(x, y);
+    if (!ray || !p?.sprites?.[0]) return;
+    let best = Infinity;
+    let side = 0;
+    for (const s of p.sprites) {
+      const d = s.pos.map((v, i) => v - ray.origin[i]);
+      const t = d[0] * ray.dir[0] + d[1] * ray.dir[1] + d[2] * ray.dir[2];
+      const off = d.map((v, i) => v - ray.dir[i] * t);
+      const dist = Math.hypot(...off);
+      if (dist < best) {
+        best = dist;
+        side = off[0] > 0 ? -1 : 1; // the tap is on the other side of the offset
+      }
+    }
+    if (best < this.cube * 1.5) this.turn("y");
+    else if (this.D === 1 && this.tryMove(p.cubes, side, 0, 0))
+      this.api.sound({ voice: "click", f: 1500, vol: 0.1 });
   }
 
   hardDrop() {
@@ -341,7 +383,9 @@ class Strata {
   }
 
   stepShards(dt) {
-    for (const sh of this.shards) sh.busy = this.api.stepPieces(sh.sprite, dt, { gravity: 3.2, floor: sh.floor, bounce: 0.25, fadeOut: 0.45 }); // prettier-ignore
+    // (in the slot the rubble stays between the walls)
+    const sides = this.D === 1 ? [-this.W * this.cube * 0.5, this.W * this.cube * 0.5] : undefined;
+    for (const sh of this.shards) sh.busy = this.api.stepPieces(sh.sprite, dt, { gravity: 3.2, floor: sh.floor, sides, bounce: 0.25, fadeOut: 0.45 }); // prettier-ignore
     for (const sh of this.shards.filter((x) => !x.busy)) this.api.sprites.remove(sh.sprite);
     this.shards = this.shards.filter((x) => x.busy);
   }
@@ -418,17 +462,23 @@ class Strata {
   camera(view, aspect) {
     const c = this.cube;
     const [Wx, Hy, Dz] = [this.W * c, this.H * c, this.D * c];
-    // 2D: the side view, straight in from the front.
-    const d2 = this.api.fitDistance(Wx + 0.5, Hy + 0.8, aspect);
+    // 2D: the side view, straight in from the front (the classic slot
+    // framed tall, above the thumbs' pad).
+    const slot = this.D === 1;
+    // (a narrow view from farther off: nearly flat, as the classic is, so
+    // the stones show their faces only, not their tops and bottoms)
+    const fov2 = slot ? 16 : 38;
+    const d2 = slot ? this.api.fitDistance(Wx + 0.25, Hy + 0.75, aspect, 1.04, fov2) : this.api.fitDistance(Wx + 0.5, Hy + 0.8, aspect); // prettier-ignore
     // 3D: down into the well from above its rim, turned a little (Q and E
     // turn the stones, so the view keeps still).
     this.camYaw = lerp(0, 0.6, view);
-    const d3 = this.api.fitDistance(Math.max(Wx, Dz) * 2.4, Hy * 1.6, aspect);
+    const d3 = slot ? this.api.fitDistance(Wx * 1.7, Hy * 1.2, aspect) : this.api.fitDistance(Math.max(Wx, Dz) * 2.4, Hy * 1.6, aspect); // prettier-ignore
     return {
-      target: [0, lerp(0.08, -Hy * 0.12, view), 0],
+      target: [0, lerp(slot ? -0.17 : 0.08, -Hy * 0.12, view), 0],
       yaw: this.camYaw,
       pitch: lerp(0, this.D === 1 ? 0.35 : 0.92, view),
       distance: lerp(d2, d3, view),
+      fov: lerp(fov2, 38, view),
     };
   }
 

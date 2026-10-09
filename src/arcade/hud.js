@@ -54,6 +54,7 @@ body.app .arc-root[data-playmode="false"] .arc-pad-side { margin-right: 48px; }
 @media (max-width: 420px) { .arc-pad > .arc-pad-util .arc-btn { min-width: 40px; padding: 0 8px; } .arc-pad > .arc-pad-util .arc-btn.arc-view { min-width: 48px; } }
 .arc-pad-dir { grid-template-columns: repeat(3, 54px); grid-template-rows: repeat(2, 54px); }
 .arc-pad-row { grid-auto-flow: column; }
+.arc-pad-col { grid-auto-flow: row; justify-items: center; }
 .arc-key { width: 54px; height: 54px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.28); background: rgba(12, 14, 20, 0.5);
   color: #fff; font: 800 20px/1 ui-sans-serif, system-ui, sans-serif; touch-action: none; }
 .arc-key.arc-down { background: rgba(90, 130, 240, 0.75); }
@@ -231,7 +232,10 @@ export class Hud {
       for (const d of dirs) left.appendChild(make(d, ARROWS[d]));
     }
     const right = document.createElement("div");
-    right.className = "arc-pad-group arc-pad-row";
+    // (Arcade r3: two action buttons beside a row of three arrows stand one
+    // over the other, so they fit a phone: Strata's Drop over ⟳ Turn)
+    const stack = acts.length === 2 && dirs.length >= 3 && dirs.length + acts.length <= 5;
+    right.className = `arc-pad-group ${stack ? "arc-pad-col" : "arc-pad-row"}`;
     const names = this.game.padLabels || {};
     for (const a of acts) {
       const label = names[a] || (a === "fire" ? "●" : a);
@@ -287,6 +291,12 @@ export class Hud {
       ["Mouse", c.mouse],
       ["Touch", c.touch],
       ["Controller", c.pad],
+      [
+        "3D view",
+        this.game.look &&
+          (c.look ||
+            `Drag with two fingers (or the right mouse button) to look around; pinch or scroll to zoom${this.game.look.keys ? "; Q and E turn the view" : ""}.`),
+      ],
       [
         "Always",
         "P pauses · R starts again · V switches 2D and 3D · Esc leaves the whole-page view",
