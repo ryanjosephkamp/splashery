@@ -414,7 +414,8 @@ const frames = (page, n) =>
   }, n);
 
 test("in the app: a toy without these pieces has no extras", async ({ page }) => {
-  await open(page, "soccer-ball", null);
+  // (The neon knot: the soccer ball has its own material since lane Hands-on H1.)
+  await open(page, "knot", null);
   const s = await page.evaluate(() => {
     const { player } = window.__splashery;
     return { extras: player.handsOn.extras ?? null, hands: player.motion.hands ?? null };

@@ -267,6 +267,51 @@
     border: 1px dashed var(--fix);
     color: var(--fix);
   }
+  .pics {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .pics:empty {
+    display: none;
+  }
+  .pic {
+    position: relative;
+    width: 72px;
+    height: 72px;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    background: var(--stage);
+  }
+  .pic a,
+  .pic img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .pic button {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    width: 26px;
+    height: 26px;
+    padding: 0;
+    border-radius: 999px;
+    border: 0;
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    font: 600 15px/26px var(--body);
+    cursor: pointer;
+  }
+  .pic.busy {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 12px;
+  }
   .saved {
     font-size: 12px;
     color: var(--muted);
@@ -337,6 +382,7 @@
       lane". "Just sharper" sends it straight to the lane as needing work, with the note that
       everything else looks right and only the sharpness needs work. A "Needs work" mark reaches the
       lane only when you send it with its note; until then the clip stays under "Not marked yet".
+      With a note open, "Add a picture" attaches screenshots; they go to the lane with the note.
     </p>
     <p>
       Page 1 filled its storage on September 30, 2026, so new clips come here. Clips from before
@@ -372,7 +418,9 @@
   //   lanes/<lane id>   { title, note, order, finished, groups: [{ id, title, note }] }
   //   cards/<card id>   { lane, group, order, name, said, now, asset | clip, video,
   //                       replacedBy, at }
-  //   verdicts/<card id> { verdict: "good" | "fix" | "", note, at, sharper }   (your marks)
+  //   verdicts/<card id> { verdict: "good" | "fix" | "", note, at, sharper, images }   (your marks)
+  // images (the owner's request of October 9, 2026): the asset ids of the screenshots he attached
+  // to the note, served at /_blob/<id>. They are shrunk to JPEG in the browser before upload.
   // "Just sharper" (the owner's request of October 7, 2026) stores verdict "fix" with
   // sharper: true and the SHARPER note below in one tap, so lanes read it like any other fix.
   const SHARPER =
@@ -383,7 +431,7 @@
     lanes: document.getElementById("lanes"),
   };
   const marks = {};
-  // Notes being written, not sent yet (card id -> { note, fix }; fix: the draft turns the mark
+  // Notes being written, not sent yet (card id -> { note, fix, images }; fix: the draft turns the mark
   // into "Needs work" when sent). A "Needs work" mark is stored only when
   // its note is sent, so a lane never sees a "fix" without the owner's note (October 3, 2026).
   // Drafts survive a reload in this browser (localStorage), and never reach the database.
@@ -391,7 +439,8 @@
   const DRAFTS = "effect-review-2-drafts";
   try {
     for (const [id, d] of Object.entries(JSON.parse(localStorage.getItem(DRAFTS) || "{}")))
-      if (d && typeof d.note === "string") pending[id] = { note: d.note, fix: !!d.fix };
+      if (d && typeof d.note === "string")
+        pending[id] = { note: d.note, fix: !!d.fix, images: ids(d.images) };
   } catch {}
   const keepDrafts = () => {
     try {
@@ -400,6 +449,11 @@
   };
   const cards = {};
   const lanes = {};
+  // Pictures: the assets namespace (null where this view can't upload), and how many pictures each
+  // card is still uploading.
+  let assets = null;
+  const uploading = {};
+  const IMAGE_TYPES = ["image/png", "image/jpeg", "image/webp", "image/gif"];
   // Each clip's last shown height, so the page doesn't jump when a clip unloads or reloads.
   const clipHeights = new Map();
   const lazyMedia =
@@ -445,6 +499,11 @@
       /[&<>"']/g,
       (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c],
     );
+  function ids(v) {
+    return Array.isArray(v)
+      ? v.filter((x) => typeof x === "string" && /^[0-9a-f]{32}$/.test(x))
+      : [];
+  }
   const num = (v, d) => (Number.isFinite(v) ? v : d);
   const byOrder = (a, b) =>
     num(a.order, 1e9) - num(b.order, 1e9) || String(a.id).localeCompare(String(b.id));
@@ -498,13 +557,96 @@
           <button type="button" data-v="sharper" aria-pressed="${m.verdict === "fix" && !!m.sharper && !isDraft}">Just sharper</button>
         </div>
         <textarea id="note-${esc(t.id)}" data-note placeholder="What should change? The lane sees this when you send it." aria-label="Note on ${esc(t.name)}" ${isDraft || ((m.verdict === "fix" || m.note) && !m.sharper) ? "" : "hidden"}>${esc(isDraft ? draft.note : m.note || "")}</textarea>
+        <div class="pics">${pics(t.id, isDraft ? draft.images : m.sharper ? [] : m.images, isDraft)}</div>
         <div class="send" ${isDraft ? "" : "hidden"}>
-          <button type="button" data-send ${String(draft?.note ?? "").trim() || !newFix ? "" : "disabled"}>${newFix ? "Send to the lane" : "Save note"}</button>
+          <button type="button" data-send ${(String(draft?.note ?? "").trim() || !newFix) && !uploading[t.id] ? "" : "disabled"}>${newFix ? "Send to the lane" : "Save note"}</button>
+          ${assets ? '<button type="button" data-add>Add a picture</button>' : ""}
           <button type="button" data-cancel>${newFix ? "Cancel" : "Undo changes"}</button>
         </div>
         <div class="saved" data-saved></div>
       </div>
     </article>`;
+  }
+
+  // A card's pictures: links to the full size; in a draft, each has a remove button.
+  function pics(id, list, editable) {
+    const shown = ids(list)
+      .map(
+        (a, i) =>
+          `<div class="pic"><a href="/_blob/${a}" target="_blank" rel="noopener"><img src="/_blob/${a}" alt="Picture ${i + 1} on this note" loading="lazy" /></a>${
+            editable
+              ? `<button type="button" data-unpic="${a}" aria-label="Remove picture ${i + 1}">×</button>`
+              : ""
+          }</div>`,
+      )
+      .join("");
+    const busy = editable ? '<div class="pic busy">Adding…</div>'.repeat(uploading[id] || 0) : "";
+    return shown + busy;
+  }
+
+  // Shrink a picture to a JPEG at most 2000 pixels on its long side (screenshots stay readable, and
+  // the page's 1 GB of storage lasts). A GIF, or a picture the browser can't redraw, goes as it is.
+  async function shrink(file) {
+    if (file.type === "image/gif") return file;
+    try {
+      const bmp = await createImageBitmap(file);
+      const k = Math.min(1, 2000 / Math.max(bmp.width, bmp.height));
+      const c = document.createElement("canvas");
+      c.width = Math.max(1, Math.round(bmp.width * k));
+      c.height = Math.max(1, Math.round(bmp.height * k));
+      const g = c.getContext("2d");
+      g.fillStyle = "#fff";
+      g.fillRect(0, 0, c.width, c.height);
+      g.drawImage(bmp, 0, 0, c.width, c.height);
+      bmp.close?.();
+      const out = await new Promise((r) => c.toBlob(r, "image/jpeg", 0.85));
+      if (out && (out.size < file.size || !IMAGE_TYPES.includes(file.type))) return out;
+    } catch {}
+    return IMAGE_TYPES.includes(file.type) ? file : null;
+  }
+
+  const UPLOAD_ERRORS = {
+    too_large: "That picture is too big (20 MB at most).",
+    unsupported_type: "That kind of file can't be added. Try a PNG or JPEG screenshot.",
+    quota_or_state: "This page's storage is full. Tell Claude so it opens a new page.",
+    rate_limited: "Too many pictures at once. Wait a moment and try again.",
+    upstream_auth: "Sign in to claude.ai again, then try once more.",
+  };
+
+  async function addPictures(id, files) {
+    const say = (text) => {
+      const el = els.list.querySelector(`.toy[data-id="${CSS.escape(id)}"] [data-saved]`);
+      if (el) el.textContent = text;
+    };
+    for (const file of files) {
+      if (!pending[id]) return;
+      uploading[id] = (uploading[id] || 0) + 1;
+      render();
+      let problem = "";
+      try {
+        const blob = await shrink(file);
+        if (!blob) problem = UPLOAD_ERRORS.unsupported_type;
+        else {
+          const r = await assets.upload(blob);
+          if (pending[id]) {
+            pending[id].images = [...ids(pending[id].images), r.id];
+            keepDrafts();
+          } else assets.delete(r.id).catch(() => {});
+        }
+      } catch (e) {
+        problem =
+          UPLOAD_ERRORS[e?.code] || "The picture could not be added. Try again in a moment.";
+      }
+      uploading[id] -= 1;
+      render();
+      if (problem) say(problem);
+    }
+  }
+
+  // A picture taken off a note is deleted, unless a sent note still shows it.
+  function dropPicture(id, a) {
+    if (ids(marks[id]?.images).includes(a)) return;
+    assets?.delete(a).catch(() => {});
   }
 
   function laneList() {
@@ -634,9 +776,13 @@
       if (saved) saved.textContent = "Write your note first.";
       return;
     }
+    if (uploading[id]) return;
+    const images = ids(pending[id]?.images);
+    for (const a of ids(marks[id]?.images))
+      if (!images.includes(a)) assets?.delete(a).catch(() => {});
     delete pending[id];
     keepDrafts();
-    save(id, { verdict, note: text, sharper: false }, el);
+    save(id, { verdict, note: text, sharper: false, images }, el);
     render();
   }
 
@@ -645,7 +791,21 @@
     if (!el) return;
     const id = el.dataset.id;
     if (e.target.closest("button[data-send]")) return send(id, el);
+    if (e.target.closest("button[data-add]")) {
+      document.activeElement?.blur?.();
+      picker.dataset.id = id;
+      picker.value = "";
+      return picker.click();
+    }
+    const un = e.target.closest("button[data-unpic]");
+    if (un && pending[id]) {
+      pending[id].images = ids(pending[id].images).filter((a) => a !== un.dataset.unpic);
+      dropPicture(id, un.dataset.unpic);
+      keepDrafts();
+      return render();
+    }
     if (e.target.closest("button[data-cancel]")) {
+      for (const a of ids(pending[id]?.images)) dropPicture(id, a);
       delete pending[id];
       keepDrafts();
       return render();
@@ -657,8 +817,8 @@
       delete pending[id];
       keepDrafts();
       if (marks[id]?.verdict === "fix" && marks[id]?.sharper)
-        save(id, { verdict: "", note: "", sharper: false }, el);
-      else save(id, { verdict: "fix", note: SHARPER, sharper: true }, el);
+        save(id, { verdict: "", note: "", sharper: false, images: [] }, el);
+      else save(id, { verdict: "fix", note: SHARPER, sharper: true, images: [] }, el);
       return render();
     }
     if (b.dataset.v === "fix" && (marks[id]?.verdict !== "fix" || marks[id]?.sharper)) {
@@ -666,6 +826,7 @@
       pending[id] = {
         note: pending[id]?.note ?? (marks[id]?.sharper ? "" : marks[id]?.note) ?? "",
         fix: true,
+        images: pending[id]?.images ?? (marks[id]?.sharper ? [] : ids(marks[id]?.images)),
       };
       keepDrafts();
       render();
@@ -675,7 +836,11 @@
     const v = marks[id]?.verdict === b.dataset.v ? "" : b.dataset.v;
     delete pending[id];
     keepDrafts();
-    save(id, marks[id]?.sharper ? { verdict: v, sharper: false, note: "" } : { verdict: v }, el);
+    save(
+      id,
+      marks[id]?.sharper ? { verdict: v, sharper: false, note: "", images: [] } : { verdict: v },
+      el,
+    );
     render();
   });
 
@@ -684,7 +849,11 @@
     if (!ta) return;
     const el = ta.closest(".toy");
     const id = el.dataset.id;
-    pending[id] = { note: ta.value, fix: pending[id]?.fix || false };
+    pending[id] = {
+      note: ta.value,
+      fix: pending[id]?.fix || false,
+      images: pending[id]?.images ?? ids(marks[id]?.images),
+    };
     keepDrafts();
     // Show the send row without re-rendering (the note keeps its cursor).
     const row = el.querySelector(".send");
@@ -693,7 +862,7 @@
       const newFix = pending[id].fix || !marks[id]?.verdict;
       const btn = row.querySelector("button[data-send]");
       btn.textContent = newFix ? "Send to the lane" : "Save note";
-      btn.disabled = newFix && !ta.value.trim();
+      btn.disabled = (newFix && !ta.value.trim()) || !!uploading[id];
       row.querySelector("button[data-cancel]").textContent = newFix ? "Cancel" : "Undo changes";
     }
     const saved = el.querySelector("[data-saved]");
@@ -732,6 +901,18 @@
     }
   });
 
+  // One file picker for every card; "Add a picture" points it at its card.
+  const picker = document.createElement("input");
+  picker.type = "file";
+  picker.accept = "image/*";
+  picker.multiple = true;
+  picker.hidden = true;
+  document.body.append(picker);
+  picker.addEventListener("change", () => {
+    const id = picker.dataset.id;
+    if (id && picker.files?.length) addPictures(id, [...picker.files]);
+  });
+
   render();
 
   (async () => {
@@ -760,5 +941,12 @@
     watch("lanes", lanes, true);
     watch("verdicts", marks, false);
     watch("cards", cards, true);
+    // Only a viewer who can edit the page can upload (the owner); others see the pictures only.
+    try {
+      assets = (await window.claude.use("assets")) || null;
+    } catch {
+      assets = null;
+    }
+    if (assets) render();
   })();
 </script>
