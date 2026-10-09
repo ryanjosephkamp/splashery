@@ -295,6 +295,23 @@ export class HandsOn {
     return [-A, A, -A, A];
   }
 
+  // The walls a held piece's middle stays within: with `walls`, far
+  // enough in that all of it does (by its `pick` box, as it is turned).
+  inWalls(b) {
+    const w = this.walls();
+    const pc = this.info.recipe.hands.walls && this.pieces.find((p) => p.body === b);
+    if (!pc?.def.pick) return w;
+    const [px, py, pz] = pc.def.pick;
+    const ax = quat.rotate(b.q, [1, 0, 0]);
+    const ay = quat.rotate(b.q, [0, 1, 0]);
+    const az = quat.rotate(b.q, [0, 0, 1]);
+    const ex = Math.abs(ax[0]) * px + Math.abs(ay[0]) * py + Math.abs(az[0]) * pz;
+    const ez = Math.abs(ax[2]) * px + Math.abs(ay[2]) * py + Math.abs(az[2]) * pz;
+    const fit = (lo, hi, e) =>
+      hi - lo > 2 * e ? [lo + e, hi - e] : [(lo + hi) / 2, (lo + hi) / 2];
+    return [...fit(w[0], w[1], ex), ...fit(w[2], w[3], ez)];
+  }
+
   buildPieces(hands) {
     const info = this.info;
     this.mode = "pieces";
@@ -595,7 +612,7 @@ export class HandsOn {
         n = p;
       }
     }
-    const [x0, x1, z0, z1] = this.walls();
+    const [x0, x1, z0, z1] = this.inWalls(b);
     const tf = ray.dir[1] < -1e-4 ? (fl - ray.origin[1]) / ray.dir[1] : Infinity;
     const pf = tf < Infinity ? v3.add(ray.origin, v3.scale(ray.dir, tf)) : null;
     const inside = pf && pf[0] >= x0 && pf[0] <= x1 && pf[2] >= z0 && pf[2] <= z1;
