@@ -58,7 +58,44 @@ file. The engine files belong to the merged engines; another lane's toys are the
 - You run in Claude Code on the owner's Mac, signed in to his second Claude account. Follow
   docs/OPERATING.md, "Local lanes", exactly: your own port (4191), the local test set, messages as
   comments on your PR that start "From the Operator", the "READY:", "WORKING:" or "BLOCKED:" line at
-  the top of "### Brief, October 8, 2026 (cloud)
+  the top of "## State", and clips on page 2 or on `claude/clips-HandsH5`.
+- The Operator (a cloud session) runs the lanes; the owner, Ryan, talks only to the Operator and is
+  often away from the Mac. Never ask him anything in the terminal or wait for him: put questions in
+  "State", move on to the next item, and keep going.
+- Model: Opus 5.5 only, at the default effort. If `/model` shows another model, stop and say so in
+  "State". At most one helper at a time, same model.
+- Merging: the Operator merges. Never merge anything. An engine change is its own small, additive
+  "Engine: …" PR on `claude/lane-hands-h5-engine`, merged first; toys not using it behave exactly as
+  before.
+- Hands-on play only adds to a toy: with the ✋ switch off, every toy plays exactly as before, and
+  old `#s=` links and saved scenes keep loading. A change the public sees waits for the owner's
+  marks before it merges.
+- Every effect follows the effect quality rules in CLAUDE.md (real motion of solid pieces, separate
+  things moving separately, break-apart into real pieces that come back), judged as phone-size
+  clips, and works with the toy upright, on its side and upside down.
+- Licenses, for every asset and dataset (CLAUDE.md, "Ground rules"): read the license on the live
+  source page; record it in CREDITS.md, `tools/assets.json` (or `tools/models.json`) and the toy's
+  in-app credit; `"nc": true` on NC assets; never ND, unlicensed, personal-use or paid. A license
+  not on that list (ODbL, CERN-OHL, government terms, "free with attribution") is a question for the
+  Operator in "State", not a file in the repo. Nothing human (people, faces, human anatomy or human
+  scans) without the owner's yes. No logos or brand names.
+- A static site: data becomes splats at build time (your `tools/hh5-*.mjs`; any new devDependency
+  pinned and listed in LICENSES.md). The page never calls a data service or needs a key, and big
+  files load only when the toy opens. Keep sizes inside the phone budgets.
+- Work through the items in order. Open your draft PR early ("Phase Hands-on H5, <shelf>: …", five
+  sections from CLAUDE.md, naming Opus 5.5), push after each finished item with "State" updated, and
+  run long jobs (clips, tests) in the background.
+- Language: American English in every new text (color, center, gray, license, -ize endings, dates
+  like "October 3, 2026").
+- Read first: CLAUDE.md; docs/OPERATING.md ("Local lanes", "Steps for a lane", "A lane's end");
+  docs/HANDS-ON-PLAN.md (your shelves' lines); docs/PACKS.md, sections 5f, 5g and 5h (the engine
+  pieces) and its earlier hands-on section; docs/handoff/Physics.md, HandsEngineA.md,
+  HandsEngineB.md and HandsEngineC.md; docs/audits/hands-l1-sweep-2026-10.md and
+  docs/audits/hands-on-materials-2026-10.md.
+- Before every push: CLAUDE.md, "Before every push", with the local test set. At the end: "A lane's
+  end".
+
+### Brief, October 8, 2026 (cloud)
 
 Written by the Operator on October 8, 2026, for this cloud session (word for word):
 
@@ -103,21 +140,24 @@ Written by the Operator on October 8, 2026, for this cloud session (word for wor
 
 ## State
 
-WORKING (October 9, 2026, about 01:30 UTC). Model: Opus 5.5 (claude-opus-5-5), high effort.
+READY (October 9, 2026, about 05:00 UTC). Model: Opus 5.5 (claude-opus-5-5), high effort. Every
+shelf is built; one draft PR each, stacked on the engine PR, with clips on Effect review page 2.
 
 - **Engine** (`claude/lane-hands-h5-engine`, draft PR #441): `hands.touch` (info.hands.pressed,
   held, speed, joint(name), piece(i); `touch: { key }` pokes), `follow`/`flee` `at(p)`, upright's
   `rest` (the owl's settle), a piece's `when(data)`, a socket's `armAway`, a piece's `home` spring.
-  Each opt-in; `tests/hh5-engine.spec.mjs`.
-- **Animals** (`claude/lane-hands-h5-animals`): all nine lines built (jellyfish, butterfly,
-  pufferfish, ladybug, snail, starfish, frog, penguin, owl) and the owl's settle fixed;
-  `tests/hh5-animals.spec.mjs` (9 tests) passes. Clips rendering; cards and PR next.
-- **Body** (`claude/lane-hands-h5-body`): eye, lungs and the anatomy atlas's organs;
-  `tests/hh5-body.spec.mjs` passes. Clips and PR after Animals.
-- **Atoms** (`claude/lane-hands-h5-atoms`): molecule, protein and crystal lattice;
-  `tests/hh5-atoms.spec.mjs` passes. The periodic table waits for lane H3's engine PR (#430: a
-  `turntable: false` toy plays its joints).
-- **Gems, Math, AI and computing**: not started. The quartz cluster waits for H3's reseat (#430).
+  Each opt-in; `tests/hh5-engine.spec.mjs`. Main (with H1's and H2's engines) merged in.
+- **Animals** (PR #446): jellyfish, butterfly, pufferfish, ladybug, snail, starfish, frog, penguin,
+  owl, and the owl's settle fixed.
+- **Body** (PR #448): eye, lungs, the anatomy atlas's organs.
+- **Atoms** (PR #451): molecule, protein, crystal lattice. The periodic table waits for lane H3's
+  engine PR (#430: a `turntable: false` toy plays its joints).
+- **Gems** (PR #452): amethyst geode, pearl, crystal ball. The quartz cluster waits for H3's reseat
+  (#430).
+- **Math** (PR #453): Lorenz attractor, Menger sponge, torus knot, Mandelbulb, Sierpinski
+  tetrahedron, Platonic solids, circle and waves, Pythagoras proof.
+- **AI and computing** (PR #454): perceptron, multilayer perceptron, gradient descent, sorting
+  machine, half adder, Turing machine, difference engine, Enigma machine.
 
 ## Notes
 
@@ -126,6 +166,10 @@ WORKING (October 9, 2026, about 01:30 UTC). Model: Opus 5.5 (claude-opus-5-5), h
 - The Level 1 sample in `tests/hl1.spec.mjs` takes the sea urchin for the jellyfish (pieces mode
   now), as earlier lanes did for the mushroom and the soda can.
 - `tests/an.spec.mjs` counts the atlas's organs in their eight new parts.
+- Three poses: each whole toy (Level 1) changed is tested upright, on its side and upside down. A
+  toy in pieces mode or one that follows the finger isn't tossed whole, so its pieces are tested as
+  they are.
+- `tests/hl1.spec.mjs` takes the Klein bottle for the Lorenz attractor (it follows the finger now).
 
 ## Known issues
 
@@ -135,7 +179,15 @@ WORKING (October 9, 2026, about 01:30 UTC). Model: Opus 5.5 (claude-opus-5-5), h
   otherwise leave them leaning or creeping), so a push tips the penguin only a little.
 - With a hands-on rope, the jellyfish's tentacles lose their faint twinkle (they are skin splats
   now), as the octopus's arms did.
+- The Enigma's rotor letters look garbled when a rotor is set far from A, with the ✋ switch off too
+  (the toy's rotor build); a hand turning a rotor shows it more often.
+- The geode's front half swings on its hinge rather than lifting off (its halves open like a book,
+  built twice so they sort right).
+- Sliding the Pythagoras triangles, one can pass over another for a moment on the way.
 
 ## For the Operator
 
-- Engine PR #441 first; then one PR per shelf, stacked on it.
+- Engine PR #441 first; then one PR per shelf, stacked on it, each waiting for the owner's marks.
+- The periodic table and the quartz cluster follow once H3's #430 merges.
+- The Enigma's garbled rotor letters (above) are in the toy's own build; a fix belongs to its lane
+  (Computing), not Hands-on.
