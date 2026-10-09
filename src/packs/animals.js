@@ -2629,7 +2629,7 @@ export const RECIPES = {
       let tip = 0;
       const f = info?.hands?.finger;
       if (f && info.hands.point) {
-        const at = vec.sub(vec.sub(info.hands.point, vec.mul(f.dir, 1.6)), OWL_HEAD);
+        const at = vec.sub(vec.sub(info.hands.point, vec.mul(f.dir, 0.8)), OWL_HEAD);
         yaw = clamp(Math.atan2(at[0], at[2]), -2.1, 2.1);
         tip = clamp(Math.atan2(at[1], Math.hypot(at[0], at[2])), -0.45, 0.5);
       }
