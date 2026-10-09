@@ -918,7 +918,10 @@ lamp's head on its arm, a clock's hands on a turning dial. Children pose after t
 
 **Upright** (Level 1, a whole toy): `hands: { upright: { k: 40, damping: 3 } }` turns a tipped toy
 back upright (its tilt only; its turn about the vertical stays), so it rocks and rights itself as a
-sailboat or a roly-poly penguin does.
+sailboat or a roly-poly penguin does. With `rest` (radians; lane Hands-on H5) it settles once it is
+back within that of upright, on the floor and nearly still, and holds there until the finger touches
+it again: a toy on a round base (an owl gripping its round branch) would otherwise creep on and
+never come to rest: `hands: { upright: { k: 90, damping: 6, rest: 0.15 } }`.
 
 **Scan rigs**: `rigPieces(rig, names, opts)` (from `src/physics/joints.js`) turns a scan rig's
 hard-edged parts (src/rigs.js) into loose pieces, one body each, shaped as the part's first region
