@@ -25,7 +25,14 @@ async function ready(page, id) {
   await page.waitForTimeout(800);
   if (!(await page.evaluate(() => window.__splashery.player.handsOn.on)))
     await page.click("#hands-toggle");
-  await page.evaluate(() => window.__splashery.player.handsOn.ensure());
+  // The clock stops: only tick() steps it, so a loaded machine sees the
+  // same frames.
+  await page.evaluate(() => {
+    const { player } = window.__splashery;
+    player.handsOn.ensure();
+    player.tickFixed ||= player.update.bind(player);
+    player.update = () => {};
+  });
   await tick(page, 0.1);
 }
 
@@ -33,12 +40,17 @@ const tick = (page, secs) =>
   page.evaluate(
     (n) => {
       const { player } = window.__splashery;
-      for (let i = 0; i < n; i++) player.update(1 / 60);
+      for (let i = 0; i < n; i++) player.tickFixed(1 / 60);
     },
     Math.round(secs * 60),
   );
 
-async function drag(page, points, { steps = 20, dt = 1 / 30 } = {}) {
+// A finger drag through recipe points: a real press (the app picks what
+// is under it and hands it to Hands-on), then the moves straight to
+// Hands-on, the clock stepped dt per move (on a loaded machine the
+// browser's own moves come late and in bunches). `hold` pauses before the
+// finger lets go (a still finger sets a piece down).
+async function drag(page, points, { steps = 20, dt = 1 / 30, hold = 0 } = {}) {
   const px = await page.evaluate((pts) => {
     const { player } = window.__splashery;
     const r = player.stage.canvas.getBoundingClientRect();
@@ -49,13 +61,28 @@ async function drag(page, points, { steps = 20, dt = 1 / 30 } = {}) {
   }, points);
   await page.mouse.move(...px[0]);
   await page.mouse.down();
-  for (let k = 1; k < px.length; k++)
-    for (let i = 1; i <= steps; i++) {
-      const f = i / steps;
-      const [a, b] = [px[k - 1], px[k]];
-      await page.mouse.move(a[0] + (b[0] - a[0]) * f, a[1] + (b[1] - a[1]) * f);
-      await tick(page, dt);
-    }
+  await page.waitForFunction(() => {
+    const ho = window.__splashery.player.handsOn;
+    return !!(ho.press || ho.hold || ho.extras?.strum);
+  });
+  await page.evaluate(
+    ({ px, steps, dt, hold }) => {
+      const { player } = window.__splashery;
+      const ho = player.handsOn;
+      const r = player.stage.canvas.getBoundingClientRect();
+      const n = Math.max(1, Math.round(dt * 60));
+      for (let k = 1; k < px.length; k++)
+        for (let i = 1; i <= steps; i++) {
+          const f = i / steps;
+          const [a, b] = [px[k - 1], px[k]];
+          ho.moveTo(a[0] + (b[0] - a[0]) * f - r.left, a[1] + (b[1] - a[1]) * f - r.top);
+          for (let j = 0; j < n; j++) player.tickFixed(1 / 60);
+        }
+      for (let j = 0; j < Math.round(hold * 60); j++) player.tickFixed(1 / 60);
+      ho.release();
+    },
+    { px, steps, dt, hold },
+  );
   await page.mouse.up();
 }
 
@@ -98,18 +125,18 @@ test("drum: a stick picked up and brought down on the head cracks, and on the ri
   page,
 }) => {
   await ready(page, "drum");
-  // Stick 0, by its middle: up, then down hard so its tip meets the head.
-  const mid = [0.535, 0.475, 0.27];
-  await drag(page, [mid, [0.55, 0.85, 0.3]], { steps: 12 });
-  // (It drops when let go; pick it up again where it lies.)
-  await tick(page, 1);
-  const lie = await page.evaluate(() => {
-    const ho = window.__splashery.player.handsOn;
-    return ho.pieces[0].body.pos.slice();
-  });
+  // Stick 0, by its middle, carried in over the head: a held stick strikes,
+  // so it cracks the head on its way.
   await page.evaluate(() => (window.__heard = []));
-  await drag(page, [lie, [lie[0] - 0.2, 0.9, lie[2]], [0.45, 0.3, 0.2]], { steps: 10, dt: 1 / 60 });
-  await tick(page, 0.3);
+  await drag(
+    page,
+    [
+      [0.535, 0.475, 0.27],
+      [0.15, 0.47, 0.1],
+    ],
+    { steps: 12, hold: 0.4 },
+  );
+  await tick(page, 1);
   const voices = (await heard(page)).map((s) => s.voice);
   expect(voices).toContain("snare");
   // The stick moved off its rest; the drum stayed put.
