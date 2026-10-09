@@ -1959,7 +1959,9 @@ function busBuild(k, o) {
     ["rear", W.rear],
   ]) {
     const part = k.part(name, { pivot: w, axis: [0, 0, 1] });
-    for (const z of [-0.47, 0.47])
+    // (Outside the body's sides, not through them: the owner's note of
+    // October 9, 2026.)
+    for (const z of [-0.6, 0.6])
       wheel(k, [w[0], w[1], z], 0.3, 0.22, {
         part,
         rim: "#3b3c40",
@@ -3009,7 +3011,8 @@ function tractorBuild(k, o) {
     const guard = k.param(
       (u, v) => {
         const a = Math.PI * (0.05 + 0.9 * u);
-        const R = TRACTOR.rr + 0.08;
+        // Clear of the tyre's tread (the owner's note of October 9, 2026).
+        const R = TRACTOR.rr + 0.13;
         return [
           TRACTOR.rear[0] + Math.cos(a) * R,
           TRACTOR.rear[1] + Math.sin(a) * R,
@@ -3019,10 +3022,11 @@ function tractorBuild(k, o) {
       { grid: 32, flip: s < 0 },
     );
     k.add(guard, {
+      even: true,
       opacity: 1,
       jitter: 0.015,
       ...P,
-      weight: 1.2,
+      weight: 1.8,
       color: (c) => lit(col, c),
     });
   }
