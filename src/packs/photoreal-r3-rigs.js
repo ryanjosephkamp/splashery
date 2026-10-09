@@ -920,13 +920,32 @@ const WHEELS = { wf: [-0.285, -0.144, 0.28], wr: [0.072, -0.129, -0.552] };
 // plain black foam sleeve, kit-built, covers each pad just over its letters. Each pad's axis is its
 // letters' long direction and its center their centroid, as they wrap both sides
 // (tools/pr3-measure.mjs). The same name in orange and dark red on the chrome down tube is hidden
-// by its colors within a box round it (BIKE_DECAL).
+// by its colors within a box round it, and so are the pads' letters (BIKE_DECAL).
 const BIKE_PADS = [
-  { at: [-0.101, 0.178, -0.058], axis: unit([0.301, -0.231, -0.925]), half: 0.115, r: 0.036 },
-  { at: [-0.114, 0.482, 0.242], axis: unit([0.912, -0.125, 0.39]), half: 0.16, r: 0.034 },
+  { at: [-0.101, 0.166, -0.058], axis: unit([0.301, -0.231, -0.925]), half: 0.12, r: 0.044 },
+  { at: [-0.114, 0.482, 0.242], axis: unit([0.912, -0.125, 0.39]), half: 0.16, r: 0.04 },
 ];
 const BIKE_DECAL = [{ at: [-0.159, 0.076, 0.067], r: [0.07, 0.1, 0.19], color: "#b37a35", tol: 0.4, soft: 0.01, over: true }, { at: [-0.159, 0.076, 0.067], r: [0.07, 0.1, 0.19], color: "#8a2a1a", tol: 0.3, soft: 0.01, over: true }]; // prettier-ignore
-function bikePads(k, count) {
+// The pads' own letters, hidden as well, so none shows past a sleeve as the bike leans.
+for (const [at, r] of [
+  [
+    [-0.105, 0.172, -0.055],
+    [0.07, 0.055, 0.11],
+  ],
+  [
+    [-0.17, 0.484, 0.22],
+    [0.13, 0.045, 0.08],
+  ],
+])
+  for (const [color, tol] of [
+    ["#a8503a", 0.42],
+    ["#8a2a1a", 0.32],
+    ["#5a1a14", 0.25],
+  ])
+    BIKE_DECAL.push({ at, r, color, tol, soft: 0.01, over: true });
+function bikePads(k, count, pivot) {
+  // Their own part in the add-on, turned with the bike (the add-on is not the capture's rig).
+  const part = k.part("pads", { pivot });
   const per = Math.round(count / BIKE_PADS.length);
   for (const pad of BIKE_PADS) {
     const a = pad.axis;
@@ -936,7 +955,7 @@ function bikePads(k, count) {
     const around = Math.max(12, Math.round(Math.sqrt((per * TAU * pad.r) / len)));
     const along = Math.ceil(per / around);
     const size = Math.sqrt((TAU * pad.r * len) / per) * 1.1;
-    k.cloud({ share: per / k.count, pattern: false }, (_r, i) => {
+    k.cloud({ share: per / k.count, pattern: false, part }, (_r, i) => {
       const row = Math.floor(i / around);
       const th = ((i % around) + 0.5 * (row % 2)) * (TAU / around);
       const t = -pad.half + ((row + 0.5) / along) * len;
@@ -964,7 +983,7 @@ function bikeRig(rig) {
       count: rig.addon.count + padCount,
       build(k) {
         rig.addon.build(k);
-        bikePads(k, padCount);
+        bikePads(k, padCount, contact);
       },
     },
     hard: true,
@@ -983,7 +1002,9 @@ function bikeRig(rig) {
       // Toward its kickstand side and back, a damped rock that settles on the stand.
       const sgn = vary(info?.tap, 31) < 0.5 ? 1 : -1;
       const ang = sgn * 0.16 * Math.exp(-e * 1.6) * Math.sin(e * 6.5) * band(e, 0, 0.06);
-      out.parts.bike = { quat: qa(BIKE_DIR, ang), offset: [0, 0, 0] };
+      const turn = { quat: qa(BIKE_DIR, ang), offset: [0, 0, 0] };
+      out.parts.bike = turn;
+      out.addon = { parts: { pads: turn } };
     },
   };
 }
