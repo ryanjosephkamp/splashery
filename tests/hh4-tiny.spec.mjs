@@ -157,7 +157,7 @@ test("dna: pulled apart near the top it unzips as far as pulled, and zips back",
   const a = await joint(page);
   expect(a.v).toBeGreaterThan(0.3);
   const u = await page.evaluate(() => window.__splashery.player.motion.ctx.kit.data.h4.u);
-  expect(u).toBeCloseTo(a.v / 0.9, 1);
+  expect(u).toBeCloseTo(a.v / 0.6, 1);
   await tick(page, 240);
   expect((await joint(page)).v).toBeLessThan(0.01); // zipped back
 });

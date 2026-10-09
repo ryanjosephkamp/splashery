@@ -295,8 +295,8 @@ function dnaJoints(d) {
   if (!d) return [];
   const top = quatRotate(DNA.tilt, [0, DNA.height * 0.38, 0]);
   return [
-    grip({ name: "unzip", axis: [1, 0, 0], max: 0.9, spring: 10, damping: 2.6, pos: top, pick: [0.75, 0.55, 0.75], also: (v, parts) => {
-      const u = v / 0.9;
+    grip({ name: "unzip", axis: [1, 0, 0], max: 0.6, spring: 6, damping: 2.2, pos: top, pick: [0.75, 0.55, 0.75], also: (v, parts) => {
+      const u = v / 0.6;
       d.h4 = { ...d.h4, u };
       Object.assign(parts, dnaParts(d.h4?.twist ?? 0, u));
     } }), // prettier-ignore
