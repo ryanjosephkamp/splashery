@@ -45,11 +45,6 @@ const MUSIC_CLICKS = 12;
 // sort in the pose they were built in, so a turned dancer would draw her
 // back (and her turntable's underside) over her front and seem to tip back.
 const MUSIC_HAND = { a: null, lid: 0, slot: null, again: false };
-// Lane Hands-on H3: the storybook's cover by hand. `open` is the Open
-// control as drive() last saw it; `a` the cover's angle by hand (null until
-// moved), so drive() sorts the pages again as the cover turns.
-const BOOK_HAND = { open: 1, a: null };
-const BOOK_LIFT = [0, 0, 0, 0, 0, 0, 0, 0.012, 0.03, 0.06];
 // Lane Hands-on H3: the alarm clock set by hand. `a0` and `h0` are the
 // minute and hour hands' angles when the minute hand was taken (its dial's
 // start), so the hour hand follows through the clock's gears.
@@ -846,71 +841,8 @@ export const RECIPES = {
     options: [{ key: "color", label: "Cover", type: "color", default: "#7a2432" }],
     controls: [{ key: "open", label: "Open", type: "toggle", default: 1, ease: 2 }],
     action: { key: "open", label: "Open or close" },
-    // Hands-on (lane Hands-on H3): pull the cover open or shut on its
-    // spine. Past upright it falls open, short of it it drops shut. The
-    // pages lying on the open cover go with it as it shuts and come back
-    // with it; a book shut by the Open switch opens to its first page.
-    hands: {
-      joints: [
-        {
-          type: "hinge",
-          part: "cover",
-          pivot: [0, BOOK.T / 2, 0],
-          axis: [0, 0, 1],
-          min: 0,
-          max: Math.PI,
-          bounce: 0.08,
-          damping: 2.5,
-          start: (c) => Math.PI * ease3(window01(c.open, 0, 0.42)),
-          pos: [BOOK.W / 2, BOOK.T, 0],
-          pick: [0.56, 0.14, 0.74],
-          sound: (ev, vol) =>
-            ev.v < 1
-              ? { voice: "slap", f: 140, decay: 0.25, vol: vol * 0.7 }
-              : { voice: "pageflip", vol: vol * 0.6 },
-          also: (a, parts) => {
-            BOOK_HAND.a = a;
-            // The cover's outside and the spine hide once the cover stands
-            // past upright (their backs face away).
-            const top = 1 - smoothstep(0.6, 0.8, a / Math.PI);
-            parts.coverTop = { ...parts.cover, visible: top };
-            // (The spine shows only while the book is nearly shut: turned, it
-            // would stand up out of the gutter.)
-            parts.spine = { angle: a / 2, visible: 1 - smoothstep(0.15, 0.3, a / Math.PI) };
-            // The leaves lying on the open cover (as the Open switch left
-            // them) turn with it as one solid block, as a real book's half
-            // does: the top one of them shows, the pile stands in for the
-            // edges of the rest, and they keep their gaps to the cover. The
-            // leaves on the right stay where they lie.
-            const turned = (i) => ease3(window01(BOOK_HAND.open, 0.1 + i * 0.05, 0.5 + i * 0.05));
-            const rides = [];
-            for (let i = 0; i < BOOK.leaves; i++) if (turned(i) > 0.9) rides.push(i);
-            const topLeaf = rides.length ? rides[rides.length - 1] : -1;
-            for (let i = 0; i < BOOK.leaves; i++) {
-              const ride = rides.includes(i);
-              const ang = ride
-                ? Math.max(0, a - BOOK_LIFT[i])
-                : (Math.PI - BOOK_LIFT[i]) * turned(i);
-              parts["leaf" + i] = { angle: ang, visible: ride ? (i === topLeaf ? 1 : 0) : 1 };
-            }
-            // The pile turns about the spine with the cover (built lying on
-            // the left, where the cover lies open).
-            const P = [0, BOOK.T / 2, 0];
-            const q = quatAxisAngle([0, 0, 1], a - Math.PI);
-            parts.pile = {
-              quat: q,
-              offset: sub(P, quatRotate(q, P)),
-              visible: rides.length > 1 ? 1 : 0,
-            };
-            // (The cover's lining stays, so the solid half never shows its outside.)
-            parts.coverIn = { ...parts.cover, visible: 1 };
-          },
-        },
-      ],
-    },
     drive(t, c, out, info) {
       const o = c.open;
-      BOOK_HAND.open = o;
       // Splats sort in the pose they were built in (the book closed), so a
       // turned leaf would draw its paper over its words, and the turned
       // cover and leaves over the pages they lie on. They are sorted where
@@ -918,15 +850,13 @@ export const RECIPES = {
       // again on the frame after (the sort uses the pose the frame starts
       // with) (lane Sharpness A).
       const d = info?.data;
-      // (Turned by hand, as the cover goes: lane Hands-on H3.)
-      const hand = BOOK_HAND.a === null ? 0 : 1000 + Math.round(BOOK_HAND.a / 0.03);
-      const slot = Math.round(o * 100) + 1000 * hand;
+      const slot = Math.round(o * 100);
       if (d && (slot !== d.sortSlot || d.sortAgain)) {
         d.sortAgain = slot !== d.sortSlot;
         d.sortSlot = slot;
         out.resortPose = true;
       }
-      const lift = BOOK_LIFT;
+      const lift = [0, 0, 0, 0, 0, 0, 0, 0.012, 0.03, 0.06];
       const cover = Math.PI * ease3(window01(o, 0, 0.42));
       out.parts.cover = { angle: cover };
       out.parts.coverTop = { angle: cover, visible: 1 - smoothstep(0.3, 0.4, o) };
