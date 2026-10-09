@@ -821,6 +821,35 @@ drive(t, c, out, info) {
 nose first, and one that hits a piece with `target: true` sticks in it where it hit, until it is
 picked up again or ↺ Reset (objects only, never people or animals). `stick: false` lets it bounce.
 
+Lane Hands-on H2 (October 8, 2026) added these keys to a piece's def:
+
+- `place: false`: this piece hangs and swings in the hand (as every piece does with
+  `hands.place: false`) while the others are picked and placed level (an ice cream cone you tip).
+- `shown: { pos, quat }`: where the recipe's drive shows the piece at rest, when that isn't where
+  its splats were built (a kiwi's half, built face up and shown closed): the body starts and goes
+  home there, and the piece's splats move from where they were built.
+- `ride: [index | { token, visible }]`: other tokens that move with the piece (a banana's skin
+  strips; `visible: 0` keeps one hidden, its pale inside).
+- `offHome: { … }`: entries merged into the piece's part while it is off its place (a candle pulled
+  out of the cake goes out: `{ visible: 0 }`).
+- `flip: true` (below).
+
+And `hands.foot` (0.6): how far out from its middle, as a share of its pick radius, a held piece
+looks for what is under it; 0.95 lets a wide piece (a burger's bun) set down beside a stack sit on
+its edge instead of being lowered into it.
+
+`info.hands.moved` is whether anything is off home (or on its way back), so a drive can show what
+Hands-on uncovered (the cut face of the kiwi half left behind). And a break joint takes `spill`
+(radians): a piece riding another comes loose when that one tips past it (scoops off a tipped cone),
+with the cue `"spill"`; and `place: true`: snapped off, it is held as a picked piece is (by its
+middle, level, hovering over whatever is under the finger), not hanging from where it was grabbed.
+
+**A flip** (lane Hands-on H2, October 8, 2026): a piece with `flip: true` in its def, let go from a
+quick flick up the screen (faster up than across), is tossed up with half a turn about the level
+line across the view, timed to come down upside down where it hovered before the flick, on whatever
+is under that spot, drawn toward that piece's middle by the recipe's `center` (a pancake flipped
+back onto its stack). Let go any other way, it is set down as before.
+
 `info.hands.on` is whether Hands-on is on. Check the toy's frame time with the pieces running (the
 whole world's step is well under a millisecond for one body, a few for 40 pieces).
 
