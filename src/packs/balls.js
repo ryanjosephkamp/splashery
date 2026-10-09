@@ -1526,6 +1526,37 @@ const MARBLE = (() => {
   ];
 })();
 
+// ---- Hands-on landings (lane Hands-on H1) -------------------------------------------
+// Each ball lands in Hands-on with its own sound, from its own tap's cues: a
+// hit is { speed (toy radii per second), body }, vol (0.12 to 0.8) how hard.
+const LANDS = {
+  "soccer-ball": (v) => ({ voice: "thud", f: 100, bright: 0.45, vol: v * 1.1 }),
+  "american-football": (v) => ({ voice: "thud", f: 95, bright: 0.3, vol: v }),
+  "tennis-ball": (v) => POCK(820, v),
+  baseball: (v) => ({ voice: "thud", f: 150, bright: 0.5, decay: 0.6, vol: v }),
+  softball: (v) => THUD_SOFT(v),
+  "golf-ball": (v) => ({ voice: "clack", f: 3000, decay: 0.6, vol: v * 0.7 }),
+  "rugby-ball": (v) => ({ voice: "thud", f: 90, bright: 0.35, decay: 1, vol: v }),
+  volleyball: (v) => ({ voice: "thud", f: 120, bright: 0.5, vol: v }),
+  "ping-pong-ball": (v) => ({ voice: "pock", f: 2000, bright: 0.7, decay: 0.5, vol: 0.3 + v }),
+  "cricket-ball": (v) => ({ voice: "thud", f: 140, bright: 0.55, decay: 0.6, vol: v }),
+  "bowling-ball": (v) => ({ voice: "thud", f: 60, bright: 0.2, decay: 1.4, vol: 0.3 + v }),
+  "pool-ball": (v) => ({ voice: "clack", f: 1800, decay: 0.7, vol: v }),
+  pickleball: (v) => ({ voice: "pock", f: 1100, bright: 0.2, decay: 0.8, vol: v }),
+  dodgeball: (v) => BWONG(v),
+  "medicine-ball": (v) => ({ voice: "thud", f: 55, bright: 0.15, decay: 1.6, vol: 0.3 + v }),
+  "lacrosse-ball": (v) => ({ voice: "pock", f: 620, bright: 0.8, vol: v }),
+  "bouncy-ball": (v) => ({ voice: "boing", f: 300, to: 2.6, rate: 16, decay: 0.5, vol: v }),
+  // The marble's clink on a hard landing; a soft one rolls on quietly.
+  marble: (v, hit) => (hit.speed > 1 ? { voice: "clack", f: 2600, decay: 0.5, vol: v * 0.8 } : null), // prettier-ignore
+  "hockey-puck": (v) => ({ voice: "slap", f: 1500, vol: v * 0.8 }),
+  shuttlecock: (v) => ({ voice: "pock", f: 1500, bright: 0.6, decay: 0.5, vol: v * 0.5 }),
+  "flying-disc": (v) => ({ voice: "slap", f: 700, vol: v * 0.6 }),
+};
+// The squash ball's thock brightens as it warms (its bounce grows each throw).
+LANDS["squash-ball"] = (v, hit) => THOCK(Math.round(((hit.body?.restitution ?? 0.25) - 0.25) * 40), v); // prettier-ignore
+const land = (id) => (hit, vol) => LANDS[id](vol, hit);
+
 export const RECIPES = {
   basketball: {
     // A few more splats (as far as the device allows) for the robot hand, so
@@ -1559,6 +1590,8 @@ export const RECIPES = {
   },
 
   "soccer-ball": {
+    // Hands-on (lane Hands-on H1): its own material and landing sound.
+    hands: { area: 3, view: 0.6, material: "soccer-ball", sound: land("soccer-ball") },
     options: [
       { key: "panels", label: "Panels", type: "color", default: "#151515" },
       { key: "base", label: "Base", type: "color", default: "#f4f4f2" },
@@ -1595,6 +1628,13 @@ export const RECIPES = {
   },
 
   "american-football": {
+    // Hands-on (lane Hands-on H1): its own material and landing sound.
+    hands: {
+      area: 3,
+      view: 0.6,
+      material: { preset: "american-football", mass: 0.411, r: 0.141, spin: 0.08 },
+      sound: land("american-football"),
+    },
     // Twice the splats (as far as the device allows): it is built twice.
     density: 2,
     options: [{ key: "color", label: "Leather", type: "color", default: "#7a3b1a" }],
@@ -1682,6 +1722,13 @@ export const RECIPES = {
   },
 
   "tennis-ball": {
+    // Hands-on (lane Hands-on H1): its own material and landing sound.
+    hands: {
+      area: 3,
+      view: 0.6,
+      material: { preset: "tennis-ball", mass: 0.0577 },
+      sound: land("tennis-ball"),
+    },
     options: [{ key: "color", label: "Felt", type: "color", default: "#cfe23b" }],
     // Slammed onto the floor: it squashes hard and shoots up high with
     // topspin, the felt's fuzz fluffing out at each hit, then bounces lower
@@ -1742,6 +1789,13 @@ export const RECIPES = {
   },
 
   baseball: {
+    // Hands-on (lane Hands-on H1): its own material and landing sound.
+    hands: {
+      area: 3,
+      view: 0.6,
+      material: { preset: "baseball", r: 0.0369 },
+      sound: land("baseball"),
+    },
     // Twice the splats (as far as the device allows): the unlit copy and the
     // light for its spin (glossSpin) take a share, and the ball at rest keeps
     // its own.
@@ -1756,6 +1810,13 @@ export const RECIPES = {
   },
 
   softball: {
+    // Hands-on (lane Hands-on H1): its own material and landing sound.
+    hands: {
+      area: 3,
+      view: 0.6,
+      material: { preset: "softball", mass: 0.188 },
+      sound: land("softball"),
+    },
     // Twice the splats (as far as the device allows): the unlit copy and the
     // light for its spin (glossSpin) take a share, and the ball at rest keeps
     // its own.
@@ -1800,6 +1861,8 @@ export const RECIPES = {
   },
 
   "golf-ball": {
+    // Hands-on (lane Hands-on H1): its own material and landing sound.
+    hands: { area: 3, view: 0.6, material: "golf-ball", sound: land("golf-ball") },
     // A chip: it pops up with heavy backspin, lands, checks with a tiny hop,
     // and the backspin grips and pulls it back to its spot.
     ...throwBall("chip", "Chip it", 28, GOLF),
@@ -1859,6 +1922,13 @@ export const RECIPES = {
   },
 
   "rugby-ball": {
+    // Hands-on (lane Hands-on H1): its own material and landing sound.
+    hands: {
+      area: 3,
+      view: 0.6,
+      material: { preset: "rugby-ball", mass: 0.435, r: 0.145 },
+      sound: land("rugby-ball"),
+    },
     options: [{ key: "color", label: "Bands", type: "color", default: "#1d4e89" }],
     // A punt: it tumbles end over end up and down, then lands on a point and
     // takes an awkward, lopsided bounce before settling.
@@ -1903,6 +1973,8 @@ export const RECIPES = {
   },
 
   volleyball: {
+    // Hands-on (lane Hands-on H1): its own material and landing sound.
+    hands: { area: 3, view: 0.6, material: "volleyball", sound: land("volleyball") },
     options: [
       { key: "c1", label: "Colour 1", type: "color", default: "#f7c948" },
       { key: "c2", label: "Colour 2", type: "color", default: "#1f4e9c" },
@@ -1986,6 +2058,8 @@ export const RECIPES = {
   },
 
   "ping-pong-ball": {
+    // Hands-on (lane Hands-on H1): its own material and landing sound.
+    hands: { area: 3, view: 0.6, material: "ping-pong-ball", sound: land("ping-pong-ball") },
     // Flicked up, it bounces on and on, each bounce lower and quicker, till
     // it buzzes to a stop.
     ...throwBall("flick", "Drop it", PP_G, PINGPONG),
@@ -2011,6 +2085,13 @@ export const RECIPES = {
   },
 
   "cricket-ball": {
+    // Hands-on (lane Hands-on H1): its own material and landing sound.
+    hands: {
+      area: 3,
+      view: 0.6,
+      material: { preset: "cricket-ball", mass: 0.159 },
+      sound: land("cricket-ball"),
+    },
     // Twice the splats (as far as the device allows): the unlit copy and the
     // light for its spin (glossSpin) take a share, and the ball at rest keeps
     // its own.
@@ -2048,6 +2129,13 @@ export const RECIPES = {
   },
 
   "bowling-ball": {
+    // Hands-on (lane Hands-on H1): its own material and landing sound.
+    hands: {
+      area: 3,
+      view: 0.6,
+      material: { preset: "bowling-ball", mass: 6.8 },
+      sound: land("bowling-ball"),
+    },
     options: [
       { key: "c1", label: "Colour 1", type: "color", default: "#3a1f78" },
       { key: "c2", label: "Colour 2", type: "color", default: "#d946ef" },
@@ -2079,6 +2167,13 @@ export const RECIPES = {
   },
 
   "pool-ball": {
+    // Hands-on (lane Hands-on H1): its own material and landing sound.
+    hands: {
+      area: 3,
+      view: 0.6,
+      material: { preset: "pool-ball", mass: 0.163 },
+      sound: land("pool-ball"),
+    },
     // Twice the splats (as far as the device allows): the unlit copy and the
     // light for its spin (glossSpin) take a share, and the ball at rest keeps
     // its own.
@@ -2129,6 +2224,13 @@ export const RECIPES = {
   },
 
   pickleball: {
+    // Hands-on (lane Hands-on H1): its own material and landing sound.
+    hands: {
+      area: 3,
+      view: 0.6,
+      material: { preset: "pickleball", mass: 0.0243, bounce: 0.62 },
+      sound: land("pickleball"),
+    },
     options: [{ key: "color", label: "Colour", type: "color", default: "#dce83a" }],
     // Popped up twice, the light holed ball slows fast in the air and
     // knuckles, then lands with a hollow click and a small, dead bounce.
@@ -2157,6 +2259,13 @@ export const RECIPES = {
   },
 
   dodgeball: {
+    // Hands-on (lane Hands-on H1): its own material and landing sound.
+    hands: {
+      area: 3,
+      view: 0.6,
+      material: { preset: "dodgeball", mass: 0.14, r: 0.089 },
+      sound: land("dodgeball"),
+    },
     options: [{ key: "color", label: "Colour", type: "color", default: "#d7263d" }],
     // Lifted and slammed down: the soft rubber squashes flat and wobbles,
     // and it bounces up lively, squashing again.
@@ -2167,6 +2276,8 @@ export const RECIPES = {
   },
 
   "medicine-ball": {
+    // Hands-on (lane Hands-on H1): its own material and landing sound.
+    hands: { area: 3, view: 0.6, material: "medicine-ball", sound: land("medicine-ball") },
     // Heaved up only a little, slowly, it drops with a thud and a big, slow
     // squash, no bounce at all, and a puff of dust.
     ...throwBall("heave", "Heave and drop", MB_G, MEDICINE, {
@@ -2209,6 +2320,8 @@ export const RECIPES = {
   },
 
   "lacrosse-ball": {
+    // Hands-on (lane Hands-on H1): its own material and landing sound.
+    hands: { area: 3, view: 0.6, material: "lacrosse-ball", sound: land("lacrosse-ball") },
     options: [{ key: "color", label: "Colour", type: "color", default: "#f4f3ef" }],
     // Slammed down, the hard rubber ball rockets up and bounces hard and
     // fast, the liveliest ball on the shelf.
@@ -2219,6 +2332,13 @@ export const RECIPES = {
   },
 
   "squash-ball": {
+    // Hands-on (lane Hands-on H1): its own material and landing sound.
+    hands: {
+      area: 3,
+      view: 0.6,
+      material: { preset: "squash-ball", bounce: 0.25 },
+      sound: land("squash-ball"),
+    },
     // Cold, it is dead: dropped, it hardly bounces. Hit over and over, it
     // warms, glows faintly and bounces higher and faster; let go, it bounces
     // out and cools.
@@ -2250,6 +2370,8 @@ export const RECIPES = {
   },
 
   "bouncy-ball": {
+    // Hands-on (lane Hands-on H1): its own material and landing sound.
+    hands: { area: 3, view: 0.6, soft: 0.15, material: "bouncy-ball", sound: land("bouncy-ball") },
     options: [
       { key: "c1", label: "Colour 1", type: "color", default: "#ff2e88" },
       { key: "c2", label: "Colour 2", type: "color", default: "#27e1c1" },
@@ -2264,6 +2386,8 @@ export const RECIPES = {
   },
 
   marble: {
+    // Hands-on (lane Hands-on H1): its own material and landing sound.
+    hands: { area: 3, view: 0.6, material: "marble", sound: land("marble") },
     // The glass's fins need numbers to read as one clean edge (lane Fix4).
     density: 2,
     options: [{ key: "color", label: "Swirl", type: "color", default: "#1e88e5" }],
@@ -2391,6 +2515,14 @@ export const RECIPES = {
   },
 
   "hockey-puck": {
+    // Hands-on (lane Hands-on H1): its own material and landing sound.
+    hands: {
+      area: 3,
+      view: 0.6,
+      friction: 0.04,
+      material: { preset: "hockey-puck", mass: 0.163 },
+      sound: land("hockey-puck"),
+    },
     density: 2,
     // A slap shot: ice chips spray from the stick, and the puck glides flat
     // across the ice, spinning fast, runs round a wide loop as it slows and
@@ -2473,6 +2605,13 @@ export const RECIPES = {
   },
 
   shuttlecock: {
+    // Hands-on (lane Hands-on H1): its own material and landing sound.
+    hands: {
+      area: 3,
+      view: 0.6,
+      material: { preset: "shuttlecock", cd: 0.7 },
+      sound: land("shuttlecock"),
+    },
     // Hit up: it flips over cork first and flies up spinning, turns over at
     // the top and floats back down cork first, spinning slower as it falls.
     ...throwPulse("hit", "Hit it", 3),
@@ -2541,6 +2680,8 @@ export const RECIPES = {
   },
 
   "flying-disc": {
+    // Hands-on (lane Hands-on H1): its own material and landing sound.
+    hands: { area: 3, view: 0.6, material: "flying-disc", sound: land("flying-disc") },
     options: [{ key: "color", label: "Colour", type: "color", default: "#ff5a36" }],
     // A throw: it spins fast and flat, banks into a curve, glides round a
     // loop like a returning throw and settles back, still spinning down.

@@ -157,8 +157,8 @@
     "newtons-cradle": {
       "kind": "kit",
       "recipeFile": "src/packs/playthings.js",
-      "recipeKB": 112,
-      "recipeGzipKB": 33.5,
+      "recipeKB": 123.6,
+      "recipeGzipKB": 37.3,
       "sharedBy": 15
     },
     "gaussian-splatting": {
@@ -178,8 +178,8 @@
     "neural-network": {
       "kind": "kit",
       "recipeFile": "src/packs/computing.js",
-      "recipeKB": 165.5,
-      "recipeGzipKB": 50.1,
+      "recipeKB": 177.5,
+      "recipeGzipKB": 53.9,
       "sharedBy": 12
     },
     "qr-code": {

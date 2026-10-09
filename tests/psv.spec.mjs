@@ -134,8 +134,7 @@ test.describe("Photo to 3D", () => {
     expect(options.every((k) => known.includes(k))).toBe(true);
     // Back to the splats.
     await page.evaluate(() => document.querySelector("#psv-splats").click());
-    await page.waitForTimeout(300);
-    expect((await state(page)).on).toBe(false);
+    await page.waitForFunction(() => !window.__psv.state().on, null, { timeout: 30_000 }); // (at the next update)
     expect(await splatsOn(page)).toBe(true);
     expect(await page.evaluate(() => !!window.__splashery.player.motion.ctx.kit.data.tapBox)).toBe(false); // prettier-ignore
     expect(errors).toEqual([]);
@@ -148,8 +147,8 @@ test.describe("Photo to 3D", () => {
     await page.waitForFunction(() => !window.__splashery.player.loading && window.__splashery.player.proc?.ctx?.kit?.data?.moving, null, { timeout: 120_000 }); // prettier-ignore
     // (Moving photo to 3D in Splats, picked here: no relief at all may stay on screen)
     await page.evaluate(() => window.__psv.set("moving-photo-3d", "splats"));
-    await page.waitForTimeout(500);
-    expect((await state(page)).on).toBe(false);
+    // (the splats come back at the next update, and the relief goes then: r3)
+    await page.waitForFunction(() => !window.__psv.state().on, null, { timeout: 30_000 });
     expect(await splatsOn(page)).toBe(true);
     expect(errors).toEqual([]);
   });
@@ -187,8 +186,7 @@ test.describe("Moving photo to 3D", () => {
     });
     expect(Math.abs(t - 3.2)).toBeLessThan(0.1);
     await page.evaluate(() => window.__psv.set("moving-photo-3d", "splats"));
-    await page.waitForTimeout(300);
-    expect((await state(page)).on).toBe(false);
+    await page.waitForFunction(() => !window.__psv.state().on, null, { timeout: 30_000 }); // (at the next update)
     expect(await splatsOn(page)).toBe(true);
     await expect(page.locator("#toy-status")).toContainText("splats");
     expect(errors).toEqual([]);
