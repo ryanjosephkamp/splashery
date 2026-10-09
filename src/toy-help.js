@@ -797,14 +797,14 @@ export const TOY_HELP = {
       "The brain is the body's control center. Its wrinkled outer layer, the cortex, is folded so that a lot of it fits inside the skull, and it is split into lobes that do different jobs: the back handles seeing, the sides hearing and memory, the top touch, and the front moving, planning and deciding. It works by sending tiny electrical signals between about 86 billion nerve cells.\n\nTap it to spark a thought: light races along the folds of the lobe you tapped, then through the others, and every lobe flashes at once. The Sparks slider sets how many sparks twinkle over it, and the Toy tab can color it by lobe or plain pink.",
   },
   eye: {
-    howTo: "Tap it to blink. Try the Pupil slider in the Toy tab.",
+    howTo: "Tap it to blink. Hands-on: drag on the eyeball and it rolls to look where you pull.",
     about:
-      "The eye is how we see. Light goes in through the pupil, the black hole in the middle, and a lens focuses it onto the retina at the back, which sends a picture to the brain. The colored ring around the pupil is the iris: its muscles make the pupil smaller in bright light and bigger in the dark.\n\nThis eye glances around by itself. Tap it and it blinks, turns to look at you and snaps its pupil small. The Pupil slider sets how wide the pupil is, and you can pick the iris color. People blink about 15 to 20 times a minute, which keeps the eye wet and clean.",
+      "The eye is how we see. Light goes in through the pupil, the black hole in the middle, and a lens focuses it onto the retina at the back, which sends a picture to the brain. The colored ring around the pupil is the iris: its muscles make the pupil smaller in bright light and bigger in the dark.\n\nThis eye glances around by itself. Tap it and it blinks, turns to look at you and snaps its pupil small. The Pupil slider sets how wide the pupil is, and you can pick the iris color. People blink about 15 to 20 times a minute, which keeps the eye wet and clean. With ✋ Hands-on on, drag on the eyeball and it rolls in its socket to look where you pull; let go and it glances about again.",
   },
   lungs: {
-    howTo: "Tap for a deep breath. Try the Breath slider in the Toy tab.",
+    howTo: "Tap for a deep breath. Hands-on: squeeze them and they breathe out; let go to refill.",
     about:
-      "The lungs are two spongy organs in the chest that bring air into the body. Air comes down the windpipe, splits into two tubes and branches into smaller and smaller airways that end in millions of tiny air sacs, where oxygen passes into the blood and carbon dioxide passes out.\n\nThese lungs breathe gently by themselves. Tap for a deep breath: both lungs swell out big, hold, then empty further than usual and settle back into their rhythm. The Breath slider sets how deeply they breathe at rest. An adult at rest takes about 12 to 20 breaths a minute.",
+      "The lungs are two spongy organs in the chest that bring air into the body. Air comes down the windpipe, splits into two tubes and branches into smaller and smaller airways that end in millions of tiny air sacs, where oxygen passes into the blood and carbon dioxide passes out.\n\nThese lungs breathe gently by themselves. Tap for a deep breath: both lungs swell out big, hold, then empty further than usual and settle back into their rhythm. The Breath slider sets how deeply they breathe at rest. An adult at rest takes about 12 to 20 breaths a minute. With ✋ Hands-on on, press and hold them (or pick them up) and they breathe out; let go and they fill again, a little past rest, then breathe gently on.",
   },
   tooth: {
     howTo: "Tap it to polish it until it sparkles.",
@@ -817,9 +817,9 @@ export const TOY_HELP = {
       "The kidneys are two bean-shaped organs, each about the size of a fist, tucked in the back just below the ribs. They clean the blood: they filter out waste and extra water, which leave the body as urine, and send the clean blood back.\n\nTap it to pump three pulses of blood through: each comes in along the artery as light, spreads through the kidney as it swells a little, leaves along the vein, and a drop runs down the ureter, the tube to the bladder. Together, the kidneys filter all the body's blood many times a day.",
   },
   "anatomy-atlas": {
-    howTo: "Tap to peel off a layer; after the organs, tap to put them all back. Try Labels.",
+    howTo: "Tap to peel off a layer. Hands-on: at the organs, lift each one out and put it back.",
     about:
-      "An anatomy atlas shows the body in layers, the way a medical textbook does. Under the skin lie the muscles that move us, red with pale tendons at their ends; under them is the skeleton, which in an adult has about 206 bones; and inside are the organs: the brain, lungs, heart, liver, stomach, intestines and kidneys.\n\nTap to peel the outer layer: the skin opens along its seams, then the muscles and the bones lift off group by group. After the organs, a tap puts every layer back. Pick a Layer in the Toy tab to go straight to one, and switch on Labels to list the parts beside the body; the part you tap is highlighted.",
+      "An anatomy atlas shows the body in layers, the way a medical textbook does. Under the skin lie the muscles that move us, red with pale tendons at their ends; under them is the skeleton, which in an adult has about 206 bones; and inside are the organs: the brain, lungs, heart, liver, stomach, intestines and kidneys.\n\nTap to peel the outer layer: the skin opens along its seams, then the muscles and the bones lift off group by group. After the organs, a tap puts every layer back. Pick a Layer in the Toy tab to go straight to one, and switch on Labels to list the parts beside the body; the part you tap is highlighted. With ✋ Hands-on on, once the organs show, lift each one out and set it down, then bring it back near its place and it clicks in, like a puzzle; the next tap sends them all home.",
   },
 
   // ---- Nature ---------------------------------------------------------------------------
