@@ -809,20 +809,23 @@ picked up again or ↺ Reset (objects only, never people or animals). `stick: fa
 `(body, h, ctx)` called once per substep (`h` seconds) for every body (the whole toy, or each
 piece), before the world moves it, to change its `vel` and `omega` (recipe units, or the world's for
 a whole toy): a flying saucer's beam that lifts a cow only while the cow is inside it. `ctx` is
-`{ piece, c, data, G, R, touching }`: the piece (its `def`, `part` and `token`; null for a whole
-toy), the toy's eased controls, the build's `k.data`, gravity and a toy radius, and whether it
-touched anything in the last step. A pinned piece (at home, untouched) has no mass to move: skip it
-(`body.pinned`).
+`{ piece, c, data, G, R, touching, free }`: the piece (its `def`, `part` and `token`; null for a
+whole toy), the toy's eased controls, the build's `k.data`, gravity and a toy radius, whether it
+touched anything in the last step, and `free()`, which lets a piece resting at home go. A pinned
+piece (at home, untouched) has no mass to move: skip it (`body.pinned`), or `free()` it first
+(planets that keep orbiting).
 
 ```js
 hands: { pieces: () => [cowPiece], force: (b, h, ctx) => { if (!b.pinned && ctx.c.beam > 0.05 && inBeam(b.pos)) b.vel[1] += ctx.G * h; } }, // prettier-ignore
 ```
 
 **Where a piece is** (`info.hands.piece(key)`, lane Hands-on H4): in a pieces-mode toy's `drive`,
-the piece with that part name or token, as `{ pos, quat, home, off, held }` (recipe units; `quat`
-its turn from home; `off` once it has been picked up or knocked loose), or null before the first
-touch. A toy that reads it without any other field asks for `hands.watch: true` (so `info.hands`
-exists): a campfire's flames grow when a log is laid on them.
+the piece with that part name, token or `name` (a piece with no part or token of its own, drawn by
+the drive: a body a part follows), as `{ pos, quat, home, off, held }` (recipe units; `quat` its
+turn from home; `off` once it has been picked up or knocked loose), or null before the first touch.
+A toy that reads it without any other field asks for `hands.watch: true` (so `info.hands` exists): a
+campfire's flames grow when a log is laid on them. `info.hands.moved` (as lane Hands-on H2 adds it)
+is whether anything is off home or on its way back.
 
 **Carried together** (`hands.carry`, lane Hands-on H4): `{ key: [keys] }` (part names or tokens):
 while the piece `key` is held, the listed pieces come loose and go with it as they were built beside
