@@ -408,6 +408,8 @@ export class Extras {
     if (ho.mode === "toy" && this.mat) {
       applyMaterial(ho.body, this.mat, floor);
       this.mats.set(ho.body, this.mat);
+      // The floor's own friction, when the recipe says (ice for a puck).
+      if (hands.friction != null) floor.friction = hands.friction;
     }
     if (ho.mode === "pieces")
       for (const pc of ho.pieces) {
@@ -475,6 +477,12 @@ export class Extras {
       const A = (wh.area ?? 2.4) * R;
       const c = b.home.pos;
       for (const p of w.planes) if (Math.abs(p.n[1]) < 0.5) p.d = v3.dot(p.n, c) - A;
+    } else if (hands.area != null && ho.mode === "toy") {
+      // Room for a whole toy to roll or slide (a ball, a puck): the walls
+      // move out to `area` toy radii from home, as for wheels.
+      const A = hands.area * R;
+      const c = ho.body.home.pos;
+      for (const p of w.planes) if (Math.abs(p.n[1]) < 0.5) p.d = v3.dot(p.n, c) - A;
     }
     if (
       this.mats.size ||
@@ -511,7 +519,7 @@ export class Extras {
       if (m) {
         // (Drag, lift and spin in the air, not under water.)
         const wet = this.water && b.pos[1] - b.bound < this.water.level;
-        if (!wet) airForce(b, m, G, R, h);
+        if (!wet) airForce(b, m, G, R, h, touching);
         if (!wet && !touching) driftForce(b, m, G, h);
         if (touching && m.roll != null) rollForce(b, m, G, h);
       }
