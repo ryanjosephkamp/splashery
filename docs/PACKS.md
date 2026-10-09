@@ -727,6 +727,24 @@ spins it on the fingertip; the basketball) and `warm: [first, top]` (a squash ba
 throw). Lift and the curve are set to show at Hands-on's slow throws, in the real direction and
 order. Pieces take a material too: `material` in a piece's def.
 
+**Room to roll** (`hands.area`, a whole toy with a material; lane Hands-on H1, October 8, 2026): the
+walls of the play area move out to `area` toy radii from home, as for wheels, so a ball rolls, a
+puck slides and a marble runs on (the view drifts after it). Without it the walls stay where Level 1
+puts them, just past the toy. `hands.view` (0 to 1, 0.8 by default) is how far the view drifts after
+a tossed whole toy: less (a ball's 0.4) lets a roll read as a roll. `hands.friction` sets the
+floor's friction under a whole toy with a material (a hockey puck's ice: 0.04). `hands.soft` (0
+to 1) sets how much a whole toy squishes when it lands, over the list in `hands-on.js` (a
+superball's firm 0.15). A shelf shape (a procedural toy in `src/toys.js`) may take the gummy bear's
+stretch from its shelf entry: `grab: { radius, max }` (the jelly blob). In pieces mode `hands.floor`
+may be a function `(data, info) => height`, for a floor that depends on the build (a d20 sits lower
+than two d6s). `hands.press: { amount, after }` (a whole toy): a press held still for `after`
+seconds (0.15) squeezes it down by `amount` (0.25) and sends `hands.sound` a hit with `press: true`;
+let go, it springs back with a wobble (the rubber duck). A drag still picks it up. A piece with
+`fixed: true` (no part of its own) never moves, is never picked up and is never knocked loose: a
+stand or a wall for the others to land on (the baseball cap's walnut stand). A material's `nose`
+turns it only while it flies, near critically damped, so a shuttlecock flips cork first once and
+lies still where it lands.
+
 **A water line** (`hands.water`): the toy floats on a round pool, bobs and settles; a boat (any
 non-round toy) rocks and rights itself, since each point under water lifts where it is. By default
 the line sits where the toy, at home, floats as it stands (from its density), so nothing moves until
@@ -818,21 +836,22 @@ Lane Hands-on H2 (October 8, 2026) added these keys to a piece's def:
 - `offHome: { … }`: entries merged into the piece's part while it is off its place (a candle pulled
   out of the cake goes out: `{ visible: 0 }`).
 - `flip: true` (below).
-- `mass: 0`: a fixed piece. It is never picked up, and its `pick` shape is something to set other
-  pieces down on (the croissant's bottom half, the egg's cup and toast soldiers): a held piece
-  passes through anything it doesn't hover over.
 
 And `hands.foot` (0.6): how far out from its middle, as a share of its pick radius, a held piece
 looks for what is under it; 0.95 lets a wide piece (a burger's bun) set down beside a stack sit on
 its edge instead of being lowered into it. And `hands.walls` (`[x0, x1, z0, z1]`, toy radii) in
 place of the square `area`, for a play area that isn't square: the croissant's lid stays on its
-baking tray.
+baking tray. `hands.resort` (seconds, 0.25) is how often moving pieces are sorted again; less for a
+piece that turns fast in front of the toy's own splats (the sunflower's nodding head).
 
 `info.hands.moved` is whether anything is off home (or on its way back), so a drive can show what
-Hands-on uncovered (the cut face of the kiwi half left behind). And a break joint takes `spill`
-(radians): a piece riding another comes loose when that one tips past it (scoops off a tipped cone),
-with the cue `"spill"`; and `place: true`: snapped off, it is held as a picked piece is (by its
-middle, level, hovering over whatever is under the finger), not hanging from where it was grabbed.
+Hands-on uncovered (the cut face of the kiwi half left behind). `info.hands.piece(name)` (a part's
+name or a token's index) gives that piece's `{ pos, vel, home, held, pinned }`, or null, so a drive
+can answer where it is (a lotus dropped in its pond splashes where it lands). And a break joint
+takes `spill` (radians): a piece riding another comes loose when that one tips past it (scoops off a
+tipped cone), with the cue `"spill"`; and `place: true`: snapped off, it is held as a picked piece
+is (by its middle, level, hovering over whatever is under the finger), not hanging from where it was
+grabbed.
 
 **A flip** (lane Hands-on H2, October 8, 2026): a piece with `flip: true` in its def, let go from a
 quick flick up the screen (faster up than across), is tossed up with half a turn about the level
@@ -899,8 +918,10 @@ beats its weight; `spring`, `rest`, `damping`, `bounce` and `gravity` as for a h
 finger turns it as it goes round the axis, and a flick sets it coasting, slowed by `drag` (per
 second, 0.8). `detents` (clicks per turn) click as it passes each one and settle it on one. A dial
 has no weight unless `gravity` is set. `turn(angle, delta, info)` is called on every move and may
-return cues (a music box's notes); `also(angle, parts, info)` adds entries to the parts Hands-on
-sends (a dancer that the crank turns; it works for every joint type, with its value).
+return cues (a music box's notes); `also(angle, parts, info, joint)` adds entries to the parts
+Hands-on sends (a dancer that the crank turns; it works for every joint type, with its value;
+`joint.w` is its speed and `joint.held` whether the finger has it, so a spinning top tilts as it
+slows).
 
 ```js
 { type: "dial", part: "crank", pivot: [0.58, 0.25, 0], axis: [1, 0, 0], detents: 12,

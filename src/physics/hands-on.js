@@ -189,7 +189,7 @@ export class HandsOn {
       w.plane([nx, 0, nz], nx * (c[0] - nx * A) + nz * (c[2] - nz * A), { friction: 0.3, restitution: 0.4 }); // prettier-ignore
     w.plane([0, -1, 0], -(floor + Math.max(4.5 * R, hull.top - floor + 2.5 * R)), { restitution: 0.2 }); // prettier-ignore
     const id = info.id;
-    const soft = SOFT[id] ?? 0;
+    const soft = hands?.soft ?? SOFT[id] ?? 0; // (hands.soft: lane Hands-on H1)
     const bounce = BOUNCE[id] ?? 0.25 + 0.2 * soft;
     const h = hull.half;
     const m = 1;
@@ -319,7 +319,9 @@ export class HandsOn {
     const data = this.player.proc?.ctx?.kit?.data;
     const g = (hands.gravity ?? GRAVITY) * R;
     const w = new World({ gravity: [0, -g, 0], substeps: hands.substeps ?? 10, sleepSpeed: 0.02 * R, minHit: 0.35 * R, maxPush: 0.01 * R, maxSpeed: 10 * R }); // prettier-ignore
-    w.plane([0, 1, 0], hands.floor ?? 0, { friction: hands.friction ?? 0.9, restitution: 0.15, grip: hands.grip ?? 0 }); // prettier-ignore
+    // (A floor may depend on the build: a d20 sits lower than two d6s; lane Hands-on H1.)
+    const floor = typeof hands.floor === "function" ? hands.floor(data, info) : hands.floor;
+    w.plane([0, 1, 0], floor ?? 0, { friction: hands.friction ?? 0.9, restitution: 0.15, grip: hands.grip ?? 0 }); // prettier-ignore
     const [x0, x1, z0, z1] = this.walls();
     for (const [nx, nz, d] of [[1, 0, x0], [-1, 0, -x1], [0, 1, z0], [0, -1, -z1]]) // prettier-ignore
       w.plane([nx, 0, nz], d, { friction: 0.3, restitution: 0.3 });
@@ -353,6 +355,9 @@ export class HandsOn {
         body.restK = p.spring;
       }
       if (p.hinge) body.hinge = { axis: v3.norm(p.hinge), q: body.q.slice() };
+      // Lane Hands-on H1: `fixed: true` is a piece that never moves, a
+      // stand or a wall for the others to land on (no part of its own).
+      if (p.fixed) body.fixedPiece = true;
       body.invMassFree = body.invMass;
       body.invIFree = body.invI.slice();
       if (p.free) continue;
@@ -386,7 +391,7 @@ export class HandsOn {
   }
 
   free(body) {
-    if (!body.pinned) return;
+    if (!body.pinned || body.fixedPiece) return; // (a fixed piece stays: lane Hands-on H1)
     body.pinned = false;
     const def = this.pieces.find((pc) => pc.body === body)?.def;
     if (def?.rest) {
@@ -409,7 +414,7 @@ export class HandsOn {
   pressAt(hit, x, y) {
     if (!this.canGrab() || !hit) return false;
     if (this.extras?.pressAt(hit, x, y)) return true; // lane Hands engine A: a toy that flees the finger
-    this.press = { hit: hit.slice(), x, y };
+    this.press = { hit: hit.slice(), x, y, t: this.time };
     return true;
   }
 
@@ -517,6 +522,7 @@ export class HandsOn {
 
   pickUp(hit, x, y) {
     const w = this.ensure();
+    this.unsqueeze(); // lane Hands-on H1
     this.homing = null;
     let body = this.body;
     if (this.mode === "pieces") {
@@ -690,10 +696,8 @@ export class HandsOn {
     let best = null;
     let bd = Infinity;
     for (const pc of this.pieces) {
-      // (A fixed piece, mass 0, is never picked up: it is there for others
-      // to be set down on, by its `pick` shape. Lane Hands-on H2.)
-      if (pc.def.mass === 0) continue;
       const b = pc.body;
+      if (b.fixedPiece) continue; // (never picked up: lane Hands-on H1)
       const l = b.toLocal(p);
       const r = pc.def.pick || [b.bound, b.bound, b.bound];
       const d = Math.hypot(l[0] / r[0], l[1] / r[1], l[2] / r[2]);
@@ -705,9 +709,36 @@ export class HandsOn {
     return bd < 1.6 ? best : null;
   }
 
+  // Lane Hands-on H1: `hands.press` ({ amount, after }): a press held
+  // still on a whole toy for `after` seconds (0.15) squeezes it down by
+  // `amount` (0.25) and plays its sound (a hit with `press: true`); let go,
+  // it springs back with the landing squish's wobble. A drag still picks it
+  // up as before.
+  pressStep() {
+    const pd = this.info?.recipe?.hands?.press;
+    const pr = this.press;
+    if (!pd || !pr || this.hold || pr.push || pr.local || pr.squeezed) return;
+    if (this.time - pr.t < (pd.after ?? 0.15)) return;
+    this.ensure();
+    if (this.mode !== "toy") return;
+    pr.squeezed = true;
+    const b = this.body;
+    this.squish = { amp: pd.amount ?? 0.25, t0: this.time, axis: [0, 1, 0], point: [b.pos[0], this.world.planes[0].d, b.pos[2]], held: true }; // prettier-ignore
+    this.moved = true;
+    this.sounds.push({ speed: 3, soft: this.soft ?? 0, piece: false, press: true });
+  }
+
+  // The squeeze let go: it springs back.
+  unsqueeze() {
+    if (!this.squish?.held) return;
+    this.squish.held = false;
+    this.squish.t0 = this.time;
+  }
+
   // Lets go: whatever it was holding flies on with the finger's speed.
   release() {
     if (this.extras?.release()) return true; // lane Hands engine A
+    this.unsqueeze(); // lane Hands-on H1
     const h = this.hold;
     this.press = null;
     if (!h) return false;
@@ -855,6 +886,7 @@ export class HandsOn {
   step(dt) {
     this.time += dt;
     const extra = this.extras?.step(dt) || false; // lane Hands engine A
+    this.pressStep(); // lane Hands-on H1: a held press squeezes the toy
     const w = this.world;
     if (!w) return extra;
     let busy = extra;
@@ -921,7 +953,8 @@ export class HandsOn {
     if (this.squish) {
       const s = this.squish;
       const t = this.time - s.t0;
-      if (t > 1.2) this.squish = null;
+      if (s.held) busy = true;
+      else if (t > 1.2) this.squish = null;
       else busy = true;
     }
     this.apply();
@@ -973,6 +1006,7 @@ export class HandsOn {
     const s = this.squish;
     if (!s) return 0;
     const t = this.time - s.t0;
+    if (s.held) return s.amp * Math.min(1, t / 0.08); // squeezed, while the finger stays
     return s.amp * Math.exp(-4.5 * t) * Math.cos(12 * t);
   }
 
@@ -1044,7 +1078,10 @@ export class HandsOn {
       player.motion.handsParts = this.moved || this.homing || so ? parts : null;
       // Sort the moved pieces again now and then (and once they rest).
       const asleep = this.world.asleep;
-      if (out.length && (this.time - this.lastResort > 0.25 || (asleep && !this.restSorted))) {
+      // (Lane Hands-on H2: `hands.resort`, seconds, for a toy whose pieces
+      // turn fast in front of its own splats, a sunflower's nodding head.)
+      const every = this.info.recipe.hands.resort ?? 0.25;
+      if (out.length && (this.time - this.lastResort > every || (asleep && !this.restSorted))) {
         this.lastResort = this.time;
         this.restSorted = asleep;
         player.motion.handsResort = true;
@@ -1062,7 +1099,9 @@ export class HandsOn {
   follow() {
     if (this.mode !== "toy" || (!this.moved && !this.homing)) return null;
     const d = v3.sub(this.body.pos, this.body.home.pos);
-    return [d[0] * 0.8, d[1] * 0.5, d[2] * 0.8];
+    // (A toy may drift the view less, so its roll reads: hands.view.)
+    const k = this.info?.recipe?.hands?.view ?? 0.8;
+    return [d[0] * k, d[1] * 0.5, d[2] * k];
   }
 
   // The squish, as the shader wants it (model space): { axis, amount,
