@@ -149,7 +149,7 @@ export class SoftParts {
     const R = this.host.R();
     this.R = R;
     this.gravity = (hands.gravity ?? 26) * R;
-    this.floor = hands.floor ?? 0;
+    this.floor = (typeof hands.floor === "function" ? hands.floor(data, info) : hands.floor) ?? 0;
     for (const def of hands.ropes?.(data, info) || []) this.addStrand("rope", def);
     for (const def of hands.cloth?.(data, info) || []) this.addStrand("cloth", def);
     const st = typeof hands.stretch === "function" ? hands.stretch(data, info) : hands.stretch;
