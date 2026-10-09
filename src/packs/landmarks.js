@@ -4448,6 +4448,7 @@ const MILL = { hub: null, axis: unit([Math.sin(0.55), 0.12, Math.cos(0.55)]) };
 MILL.hub = add([0, 2.12, 0], mul(MILL.axis, 0.52));
 
 function windmillBuild(k) {
+  k.data = { ...k.data, h4: {} }; // lane Hands-on H4: what the drive shows, for Hands-on
   const thatch = "#6f6556";
   const wood = "#5a3b24";
   // A grassy mound with rows of tulips.
