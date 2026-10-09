@@ -321,8 +321,10 @@ What main already did for these toys since October 3 (so this lane does not redo
 - The cave lioness's neck, where the capture ends, is not closed: the cut is not a clean plane in
   the capture, and a flat cap looked pasted on.
 - The puffin's real call (a CC0 or CC BY recording) is still to come; soft landings for now.
-- The BMX bicycle's frame and handlebar pad show decal lettering that looks like a brand name (from
-  Photoreal r2): see "For the Operator".
+- The BMX's brand name is covered (October 9, the Operator's call): plain black kit-built sleeves
+  over the top-tube and crossbar pads, and the down tube's decal hidden by its colors. Left: a small
+  broken mark where that decal was (no longer readable), and tiny lettering on the saddle and the
+  tire sidewalls, legible only up close.
 - The Triceratops skull's museum mounting rod is mostly hidden; a short stub stays under the jaw (it
   can't be told from the jaw's dark shadows by position or color).
 - The cone shell's far side was captured poorly (a white smear), so it rocks one way and the other
@@ -340,6 +342,6 @@ What main already did for these toys since October 3 (so this lane does not redo
   owner wants them sharper, he could download the eight originals himself (each is CC0 or CC BY,
   downloads on) and put them on the Mac or in a Hugging Face dataset; the bake would then use them
   unchanged.
-- The BMX bicycle (Photoreal r2, labs) shows decal lettering on its frame and handlebar pad that
-  looks like a brand name. CLAUDE.md says no logos or brand names; painting it out (a kit-built
-  cover in the frame's chrome) is easy if you want it. Not done yet.
+- The BMX's brand name is covered (done October 9; card `pr3-fx-bmx-bike-r2`). The pads got plain
+  black foam sleeves rather than chrome, as the pads are foam over the tube. The saddle and the tire
+  sidewalls carry tiny lettering, readable only up close; say if you want those covered too.
