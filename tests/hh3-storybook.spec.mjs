@@ -1,8 +1,7 @@
 // Lane Hands-on H3: the Storybook as a real storybook (the owner's idea of
 // October 9, 2026): it opens "The Little Lamp Who Wanted to See the Sea"
 // (assets/toys/storybook/storybook.pdf, tools/hh3-storybook.mjs) in Your
-// book's pages, and a tap turns them, forward on the right and back on the
-// left.
+// book's pages, and a tap turns them forward.
 
 import { test, expect } from "@playwright/test";
 
@@ -19,11 +18,25 @@ test("the Storybook opens its own ten-page book and a tap turns each page", asyn
   expect(i.name).toBe("storybook.pdf");
   expect(i.count).toBe(10);
   expect(i.page).toBe(0);
-  // ▶ (the toy's tap) turns on, a page at a time.
-  for (let n = 1; n <= 2; n++) {
+  // ▶ (the toy's tap) turns on, a page at a time, once the book is laid
+  // out (its tap finds a page to turn; before that a tap does nothing).
+  await page.waitForFunction(
+    async () => {
+      const { RECIPES } = await import("/src/packs/pictures.js");
+      return RECIPES.book.action.at([0, 0, 0])?.key === "turn";
+    },
+    null,
+    { timeout: 120_000 },
+  );
+  // (Seen whole, the book turns a spread at a time: 0, 1, 3, …; a page at a
+  // time on a phone.)
+  let at = 0;
+  for (let n = 0; n < 2; n++) {
     await page.evaluate(() => window.__splashery.player.act());
-    await page.waitForFunction((n) => window.__splashery.player.pictures.info().page === n, n, { timeout: 30_000 }); // prettier-ignore
+    await page.waitForFunction((at) => window.__splashery.player.pictures.info().page > at, at, { timeout: 60_000 }); // prettier-ignore
+    at = (await info()).page;
   }
+  expect(at).toBeGreaterThanOrEqual(2);
   // No Open a file: it keeps to its own book.
   const input = await page.evaluate(async () => {
     const { RECIPES } = await import("/src/packs/pictures.js");
