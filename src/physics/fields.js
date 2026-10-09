@@ -21,7 +21,7 @@
 // points: attach, the world built, a press, a move, a let-go, each frame
 // and each hit; the world calls its force once per substep (World.force).
 // What a recipe's drive() reads comes as info.hands (src/motion.js):
-// { on, shake, finger, point, rolled, flee(key, pos) }.
+// { on, shake, finger, point, rolled, moved, piece(name), flee(key, pos) }.
 
 import { quat, v3, surfacePoints } from "./world.js";
 import { materialFor, applyMaterial, airForce, rollForce, throwSpin, driftForce } from "./materials.js"; // prettier-ignore
@@ -373,6 +373,15 @@ export class Extras {
       // so a drive can show what Hands-on uncovered (a kiwi half's face).
       get moved() {
         return !!(self.ho.moved || self.ho.homing);
+      },
+      // Lane Hands-on H2: where a piece (by its part's name or token
+      // index) is now, how fast it moves, and whether it is held (a lotus
+      // dropped in its pond splashes where it lands).
+      piece(name) {
+        const pc = self.ho.pieces?.find((p) => p.part === name || p.token === name);
+        if (!pc) return null;
+        const b = pc.body;
+        return { pos: b.pos.slice(), vel: b.vel.slice(), home: pc.home.pos.slice(), held: !!b.held, pinned: !!b.pinned }; // prettier-ignore
       },
       flee(key, pos) {
         if (!self.flee) return { offset: [0, 0, 0], vel: [0, 0, 0] };
