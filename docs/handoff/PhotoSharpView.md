@@ -144,9 +144,11 @@ Photo to 3D and Moving photo to 3D"; merge it first). Sharp picture is the defau
     in the middle of the draw: making it uploads it on unit 0, where `uSubDrawData` (an
     unsigned-integer sampler) had just been bound. Only the first stand-in in a page does this, so
     the error showed in about one run in three.
-  - The fix, in `splats()` (`src/packs/photo-sharp.js`): only the toy's own entity gets its splats
-    back, and never while the player is building; a replaced entity is let go (the rebuild destroys
-    it). No engine change.
+  - The fix, in `src/packs/photo-sharp.js`: the splats come back at the stage's next update
+    (`wake`), only for the toy's own entity and never while the player is building; a replaced
+    entity is let go (the rebuild destroys it). A first version guarded only the build, and the
+    merged phf-engine test (Splats picked with the switch, then the options changed at once) still
+    hit the error: the same race from the other side, now covered too. No engine change.
   - `tests/psv3.spec.mjs`: both photo toys, Detail Fine and One color per splat, Sharp picture to
     Splats and back through rebuilds, with a frame's sync forced just before the swap. It fails on
     main (4 of 4: the old toy's splats are on at the swap) and passes with the fix (8 of 8). Lane
