@@ -1049,6 +1049,10 @@ export class HandsOn {
         this.restSorted = asleep;
         player.motion.handsResort = true;
       }
+      // (Lane Hands-on H2: once more when the last moved piece is home, so
+      // a slice clicked back in isn't drawn in the order it had outside.)
+      if (!out.length && this.hadOut) player.motion.handsResort = true;
+      this.hadOut = out.length > 0;
       if (!asleep) this.restSorted = false;
     }
   }
