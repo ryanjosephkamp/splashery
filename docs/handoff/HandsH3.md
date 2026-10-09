@@ -68,10 +68,12 @@ page 2 (lane HandsH3). Merge order:
   joints play them, and a fix (a snapped piece starts where it was, not at home).
 - Open me #432: storybook, alarm clock, gift box, umbrella (new runner), desk fan, desk lamp,
   telescope, potion bottle, fountain pen. Nine cards; seven good. The book was redone (card
-  hh3-book-r2, not yet marked). The pen's cap is now its full length, so it never sinks into the
-  paper (the owner's note; card hh3-fountain-pen-r2).
+  hh3-book-r2, marked fix again: the specks are the same engine sort bug as the egg's). The pen's
+  cap is now its full length, so it never sinks into the paper (the owner's note; card
+  hh3-fountain-pen-r2).
 - Holidays #435: jack-o'-lantern, decorated tree, patterned egg, paper lantern. Three good; the
-  egg's "bottom doesn't spin properly" is an engine sort bug (For the Operator).
+  egg's "bottom doesn't spin properly" is an engine sort bug (For the Operator). The snowman can now
+  follow (H2's `ride` is in main).
 - Medieval #436: knight's helmet, trebuchet, dragon egg. All good.
 - Pictures #437: picture frame (labs). Good.
 
@@ -94,12 +96,13 @@ for the "Level 1 only" picture and Studio toys.
 
 - Please merge engine PR #430 before the Open me PR; the Open me branch carries its commit.
 - The water bottle and the soda can (labs) wait for the Fluids engine's pour.
-- The patterned egg's bottom (the owner's "fix"): an engine bug in `src/pose.js`, not in the egg.
-  The egg turns as a kit part; `Player.resortPose` sorts a turned part with the inverse of its turn
-  (Lane Elements' e59431d8, October 6). For the egg, the inverse is wrong. Re-sorted at a quarter
-  turn, its back draws over its front (a hole shows the inside of its bottom and the cup), and at an
-  eighth it speckles. Sorted with the turn itself, it is clean at every angle (measured at eight
-  angles in the app, with and without the fix). The toy's own tap spin on main shows the same hole.
-  Lane Elements measured the opposite on Real elements' lifted sample, so the right sense may differ
-  by toy. Not fixed here, since the line is theirs: who should settle it? An engine PR could pick
-  the sense per toy once the cause is known.
+- The patterned egg's bottom and the storybook's specks (both the owner's "fix" marks) are one
+  engine bug in `src/pose.js`: `Player.resortPose` sorts a turned kit part with the inverse of its
+  turn (Lane Elements' e59431d8, October 6). Measured in the app: the egg re-sorted at a quarter
+  turn draws its back over its front (a hole shows its bottom's inside and the cup) and speckles at
+  an eighth; sorted with the turn itself it is clean at all eight angles. The book's own tap
+  animation: the specks go, and mid-turn the cover shows its outside instead of a page. Lane
+  Elements' "the lifted sample is solid from the side" (tests/rel.spec.mjs) passes either way; only
+  their node test `tests/rel-engine.spec.mjs` asserts the inverse. Proposal: a one-line engine PR
+  that sorts with the turn itself and updates that test. Waiting for the Operator's yes; the owner's
+  other idea for the book (a "your book" PDF storybook) is the fallback.
