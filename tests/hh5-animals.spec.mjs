@@ -353,3 +353,16 @@ test("starfish: an arm bends up from its root and curls back slowly", async ({ p
   await tick(page, 2.6);
   expect(await joint()).toBeLessThan(0.1);
 });
+
+// The lane's screenshots, the ✋ switch on (phone and desktop).
+test("screenshots: the owl, hands-on", async ({ page }) => {
+  for (const [w, h] of [
+    [390, 844],
+    [1440, 900],
+  ]) {
+    await page.setViewportSize({ width: w, height: h });
+    await ready(page, "owl");
+    await page.waitForTimeout(600);
+    await page.screenshot({ path: `tests/screenshots/hh5-owl-${w}x${h}.png` });
+  }
+});
