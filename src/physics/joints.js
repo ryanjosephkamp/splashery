@@ -762,7 +762,9 @@ export class Joints {
     }
     // It catches on its latch as it gets there or passes it (lane Hands-on H3).
     const L = this.latchAt(j);
-    if (L !== null && (this.atLatch(j) || (v0 - L) * (j.v - L) < 0)) {
+    // (`catch`: within that of it, it catches: a finger seldom lands it
+    // exactly on its latch.)
+    if (L !== null && (Math.abs(j.v - L) < (d.catch ?? 1e-3) || (v0 - L) * (j.v - L) < 0)) {
       j.v = L;
       j.latched = true;
       j.w = 0;
