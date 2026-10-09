@@ -291,3 +291,46 @@ test("screenshots: the difference-engine, hands-on", async ({ page }) => {
     await page.screenshot({ path: `tests/screenshots/hh5-difference-engine-${w}x${h}.png` });
   }
 });
+
+// Lays a Level 1 toy down as it might land: tipped by `angle` about x
+// (π/2 on its side, π upside down), and lets it come to rest there.
+const lay = async (page, angle) => {
+  await page.evaluate((angle) => {
+    const ho = window.__splashery.player.handsOn;
+    const b = ho.body;
+    if (b.settled) ho.joints.unsettle(b);
+    b.q = [Math.sin(angle / 2), 0, 0, Math.cos(angle / 2)];
+    b.vel = [0, 0, 0];
+    b.omega = [0, 0, 0];
+    ho.moved = true;
+    ho.world.wake();
+  }, angle);
+  await tick(page, 1.5);
+};
+
+test("perceptron: on its side and upside down, a tap on an input lamp still flips it", async ({
+  page,
+}) => {
+  for (const angle of [Math.PI / 2, Math.PI]) {
+    await ready(page, "perceptron");
+    await lay(page, angle);
+    await tapAt(page, [-0.98, 0.5, 0.04]);
+    await tick(page, 0.1);
+    expect((await out(page, "parts")).in0.visible, `pose ${angle}`).toBe(1);
+    await tapAt(page, [-0.98, -0.5, 0.04]);
+    await tick(page, 0.1);
+    expect((await out(page, "morph"))[2]).toBe(1);
+  }
+});
+
+test("multilayer perceptron: on its side and upside down, a tap on an input still flips it", async ({
+  page,
+}) => {
+  for (const angle of [Math.PI / 2, Math.PI]) {
+    await ready(page, "multilayer-perceptron");
+    await lay(page, angle);
+    await tapAt(page, [-1.07, 0.38, 0.04]);
+    await tick(page, 0.1);
+    expect((await out(page, "parts")).out.visible, `pose ${angle}`).toBe(1);
+  }
+});
