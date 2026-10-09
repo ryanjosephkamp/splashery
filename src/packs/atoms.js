@@ -1891,7 +1891,8 @@ export const RECIPES = {
     hands: {
       gravity: 0,
       place: false,
-      floor: -20,
+      // (Under the molecule: a held atom is kept within five toy radii of it.)
+      floor: (d) => -1.3 * Math.max(1, ...(d?.tokens || []).map((tk) => len(tk.base))),
       area: 3,
       touch: true,
       pieces: (d) =>
@@ -2279,7 +2280,8 @@ export const RECIPES = {
     hands: {
       gravity: 0,
       place: false,
-      floor: -200,
+      // (Under the protein: a held piece is kept within five toy radii of it.)
+      floor: (d) => -1.2 * (d?.spread ?? 20),
       area: 3,
       touch: true,
       pieces: (d) =>
