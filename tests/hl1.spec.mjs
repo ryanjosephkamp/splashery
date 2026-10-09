@@ -55,11 +55,13 @@ const SAMPLE = [
 // The picture shelf explicitly disables Hands-on on the audited main.
 // This exact capability gap is tracked, not counted as successful Level 1.
 // All mode has no exceptions; delete this entry when the lane fixes it.
-// Lane Hands-on H4: the solar system plays in pieces mode on purpose (each planet is its own piece,
-// picked off its orbit and let go to orbit again), so a press on the sun lifts no whole toy.
+// Lane Hands-on H4: the solar system and the campfire play in pieces mode on purpose (each planet
+// is its own piece, picked off its orbit and let go to orbit again; the campfire has a spare log to
+// lay on the fire, and a fire isn't picked up), so a press on the sun or the fire lifts no whole toy.
 const KNOWN = {
   "picture-frame": ["unavailable"],
   "solar-system": ["whole-pickup"],
+  campfire: ["whole-pickup"],
 };
 const selected = ALL ? TOYS : SAMPLE.map((id) => TOYS.find((t) => t.id === id));
 

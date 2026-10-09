@@ -32,11 +32,11 @@ Proposals below are suggestions; the owner may change them.
   Tennis ball, Baseball, Softball, Beach ball, Golf ball, Rugby ball, Volleyball, Water polo ball,
   Ping-pong ball, Cricket ball, Bowling ball, Pool ball, Pickleball, Dodgeball, Medicine ball,
   Lacrosse ball, Squash ball, Bouncy ball, Marble, Hockey puck, Shuttlecock, Flying disc, Beating
-  heart, Treasure chest, Sun, Solar system, Mercury, Venus, Earth, Moon, Mars, Jupiter, Saturn,
-  Uranus, Neptune, Tiny planet, Aurora world, Asteroid, Comet, Meteor, Star, Pulsar, Black hole,
-  Star cluster, Ring nebula, Nebula, Spiral galaxy, The real Moon, The real Mars, The real Earth,
-  The real Mercury, The real Venus, Real moons, Pluto, Ceres and Vesta, Stars near the Sun, Real
-  star systems, Real galaxies, Powers of ten, Saturn V, Space Launch System, Space Shuttle, The
+  heart, Campfire, Treasure chest, Sun, Solar system, Mercury, Venus, Earth, Moon, Mars, Jupiter,
+  Saturn, Uranus, Neptune, Tiny planet, Aurora world, Asteroid, Comet, Meteor, Star, Pulsar, Black
+  hole, Star cluster, Ring nebula, Nebula, Spiral galaxy, The real Moon, The real Mars, The real
+  Earth, The real Mercury, The real Venus, Real moons, Pluto, Ceres and Vesta, Stars near the Sun,
+  Real star systems, Real galaxies, Powers of ten, Saturn V, Space Launch System, Space Shuttle, The
   solar system on real orbits, Virus, Bacteriophage, Bacterium, Red blood cell, Neuron, Astrocyte,
   Animal cell, DNA, White blood cell, Microglia, Diatom, Pollen grain, Snowflake, Chromosome,
   Mitochondrion, Paramecium, Amoeba, DNA to protein, Cell division, Apoptosis, Phagocytosis,
@@ -784,6 +784,8 @@ Proposals below are suggestions; the owner may change them.
 
 - **Campfire** (`campfire`). Now: tap: Stoke the fire. Plan: keep.
   - Owner: Basically perfect.
+  - Improved: Hands-on H4: in Hands-on, a spare log lies by the ring of stones; pick it up and lay
+    it on the fire: the flames grow, with a crackle.
   - Sound: The volcano's kind of fire, a low flickering rush with a few soft pops of wood (no
     clicks).
 - **Storm cloud** (`storm-cloud`). Now: tap: Thunder. Plan: keep.
@@ -800,7 +802,8 @@ Proposals below are suggestions; the owner may change them.
     gold for the classic lamp) and the liquid brightens, then it all eases back (about 4.5 s). The
     glow also shows with motion off. After the owner's review: a Colour set (Pick below, Ocean,
     Violet, Lime, Sunset, Midnight), Blobs (2 to 12), Blob size and Blob shape (mixed, round, tall),
-    and Flow and Glow sliders.
+    and Flow and Glow sliders. Hands-on H4: in Hands-on, pick the lamp up and tip it: the wax blobs
+    slide over to the glass's upper side, lagging and wobbling, and slide back when it stands again.
   - Sound: Only the gloops and bubbles (the rising hum is gone).
 - **Snow globe** (`snow-globe`). Now: tap: Shake the globe. Plan: keep.
   - Owner: Basically perfect.
@@ -845,7 +848,8 @@ Proposals below are suggestions; the owner may change them.
   - Improved: E4: a tap cracks a chunk off the berg's front shoulder, showing pale fresh broken
     faces; it tips into the sea with a crown of spray and a ring of ripples, floats and bobs while
     the berg bobs and rocks, then melts away as one piece as the berg's chunk grows back in place
-    (about 6 s).
+    (about 6 s). Hands-on H4: in Hands-on, push the berg down and it bobs back up; pull the chunk
+    off its shoulder and it falls into the sea and floats, mostly under.
   - Sound: Real ice breaking, a deep crack with its groan and splinters (no crackle of clicks), then
     the splash; real CC0 recordings now (iceberg-crack.mp3), with the synthesized sound as a
     fallback.
