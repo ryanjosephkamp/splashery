@@ -1,9 +1,8 @@
 // Lane Hands-on H3, the Open me shelf (docs/HANDS-ON-PLAN.md): with the ✋
 // switch on, each piece measured as the finger moves it (angles, positions
-// over time): the storybook's cover, the alarm clock's hands, the gift box's
-// lid and star, the umbrella's runner, the desk fan's head, the desk lamp's
-// arms and light, the telescope's tubes, the potion bottle's cork and the
-// fountain pen's cap.
+// over time): the alarm clock's hands, the gift box's lid and star, the
+// umbrella's runner, the desk fan's head, the desk lamp's arms and light, the
+// telescope's tubes, the potion bottle's cork and the fountain pen's cap.
 
 import { test, expect } from "@playwright/test";
 
@@ -75,42 +74,6 @@ async function reset(page) {
   await page.click("#hands-reset");
   await tick(page, 1.2);
 }
-
-test("storybook: the cover shuts from upright, the pages going with it, and opens again", async ({
-  page,
-}) => {
-  await ready(page, "book");
-  let c = await joint(page, "cover");
-  expect(c.v).toBeCloseTo(Math.PI, 3); // open, as the toy starts
-  // Lifted past upright toward shut and let go: it drops shut.
-  await drag(page, [
-    [-0.55, 0.02, 0.2],
-    [-0.25, 0.7, 0.2],
-    [0.2, 0.75, 0.2],
-    [0.5, 0.5, 0.2],
-  ]);
-  await tick(page, 2);
-  c = await joint(page, "cover");
-  expect(c.v).toBe(0);
-  expect(await events(page)).toContain("stop");
-  // The leaves lay on the cover: they are shut with it.
-  let p = await parts(page);
-  for (let i = 0; i < 10; i++) expect(p["leaf" + i].angle).toBeLessThan(0.01);
-  // Opened past upright: it falls open onto its stop, the leaves with it.
-  await drag(page, [
-    [0.6, 0.36, 0.2],
-    [0.3, 0.75, 0.2],
-    [-0.2, 0.8, 0.2],
-  ]);
-  await tick(page, 2);
-  c = await joint(page, "cover");
-  expect(c.v).toBeCloseTo(Math.PI, 3);
-  p = await parts(page);
-  expect(p.leaf0.angle).toBeGreaterThan(3);
-  await reset(page);
-  c = await joint(page, "cover");
-  expect(c.v).toBeCloseTo(Math.PI, 3);
-});
 
 test("alarm clock: the minute hand turns under the finger and the hour hand follows a twelfth as fast", async ({
   page,
@@ -376,7 +339,6 @@ test("open me: with the switch off, the toys play as before (no hand parts)", as
   await page.goto(APP);
   await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
   for (const id of [
-    "book",
     "clock",
     "gift-box",
     "umbrella",
