@@ -95,15 +95,6 @@ function scanToy({ id, credit, label, secs, parts, drive, share = 0.86, extra, a
   };
 }
 
-// Turns once round about a vertical axis through a point, with a slight lean toward you as it
-// goes, so the light runs across its faces.
-const turnRound =
-  (center, turns = 1, secs = 2.8, lean = 0.12) =>
-  (e, out, info) => {
-    const sgn = vary(info?.tap, 3) < 0.5 ? 1 : -1;
-    const q = quatMul(qa([1, 0, 0], lean * Math.sin(Math.PI * band(e, 0, secs))), qa([0, 1, 0], sgn * TAU * turns * ease(band(e, 0, secs)))); // prettier-ignore
-    out.parts.whole = about(q, center, center);
-  };
 // Turns half way round to show its other face, holds, and turns back.
 const showBack =
   (center, axis = [0, 1, 0]) =>
@@ -219,17 +210,17 @@ export const RECIPES = {
   }),
   "morasko-meteorite": scanToy({
     id: "morasko-meteorite",
-    label: "Turn it",
-    secs: 3,
+    label: "Turn it over",
+    secs: 3.5,
     credit: { label: "Morasko meteorite", title: "“Morasko” iron meteorite", source: "https://sketchfab.com/3d-models/morasko-iron-meteorite-37fd0d100a3246f2892ece5f8d178c06", author: VMM, ...CC0 }, // prettier-ignore
-    drive: turnRound([0, 0, 0]),
+    drive: showBack([0, 0, 0]),
   }),
   "pyrite-cubes": scanToy({
     id: "pyrite-cubes",
-    label: "Turn it",
-    secs: 3,
+    label: "Turn it over",
+    secs: 3.5,
     credit: { label: "Pyrite", title: "Pyrite", source: "https://sketchfab.com/3d-models/pyrite-0b7c6e8e32144b72806ed31cb49b4145", author: DAAL, ...CC0 }, // prettier-ignore
-    drive: turnRound([0, 0, 0]),
+    drive: showBack([0, 0, 0]),
   }),
   "megalodon-tooth": scanToy({
     id: "megalodon-tooth",

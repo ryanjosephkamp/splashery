@@ -353,7 +353,7 @@
       "lite": 139001,
       "keepFrame": true,
       "local": ".cache/pr3/defuzz/steak.ply",
-      "localNote": "Lane Photoreal r3: the source without the faint haze round its outline (node tools/pr3-defuzz.mjs steak --needle=4; the owner's note of October 9, 2026).",
+      "localNote": "Lane Photoreal r3: the source without the faint haze round its outline (node tools/pr3-defuzz.mjs steak --needle=2.5 --faint=0.45; the owner's note of October 9, 2026).",
       "sh": 1
     },
     {

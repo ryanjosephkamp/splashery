@@ -4,7 +4,7 @@
 // a PLY, in the source's own frame, for the entry's "local" field (tools/pr3-prepare.mjs then
 // prepares it exactly as before).
 //
-//   node tools/pr3-defuzz.mjs <id> [--voxel=80] [--grow=1] [--faint=0.3] [--needle=0]
+//   node tools/pr3-defuzz.mjs <id> [--voxel=80] [--grow=1] [--faint=0.3] [--needle=0] [--big=0]
 //
 // It keeps every splat that is at least `faint` opaque, and a fainter one only when it lies in or
 // next to the solid body (voxels of 1/voxel of the capture's radius holding a splat over 0.5
@@ -28,6 +28,7 @@ const voxels = opt("voxel", 80);
 const grow = opt("grow", 1);
 const faint = opt("faint", 0.3);
 const needle = opt("needle", 0);
+const big = opt("big", 0);
 const toy = JSON.parse(fs.readFileSync(path.join(root, "tools/assets.json"), "utf8")).toys.find((t) => t.id === id); // prettier-ignore
 if (!toy) throw new Error(`No entry ${id} in tools/assets.json`);
 
@@ -73,10 +74,12 @@ const isNeedle = (i) => {
   const s = sc.map((k) => Math.exp(data[i * P + k])).sort((a, b) => b - a);
   return s[0] > needle * s[1] && s[0] > size;
 };
+// Blobs: splats over `big` voxels across, the soft smudges on a capture's surface.
+const isBig = (i) => big && Math.max(...sc.map((k) => Math.exp(data[i * P + k]))) > big * size;
 const keep = [];
 let needles = 0;
 for (let i = 0; i < n; i++) {
-  if (isNeedle(i)) needles++;
+  if (isNeedle(i) || isBig(i)) needles++;
   else if (sig(i) >= faint || solid.has(key(i))) keep.push(i);
 }
 
@@ -85,4 +88,4 @@ keep.forEach((i, j) => rows.set(data.subarray(i * P, i * P + P), j * P));
 const file = path.join(work, `${id}.ply`);
 const top = Buffer.from(head.replace(/element vertex \d+/, `element vertex ${keep.length}`), "latin1"); // prettier-ignore
 fs.writeFileSync(file, Buffer.concat([top, Buffer.from(rows.buffer)]));
-console.log(`${id}: kept ${keep.length} of ${n} splats (${needles} needles, ${n - keep.length - needles} faint ones outside the body, voxel ${size.toFixed(4)}) -> ${path.relative(root, file)}`); // prettier-ignore
+console.log(`${id}: kept ${keep.length} of ${n} splats (${needles} needles or blobs, ${n - keep.length - needles} faint ones outside the body, voxel ${size.toFixed(4)}) -> ${path.relative(root, file)}`); // prettier-ignore

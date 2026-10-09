@@ -463,16 +463,16 @@ Proposals below are suggestions; the owner may change them.
   - Effect: Turns over to show its other face, and back.
   - Improved: Photoreal r3 (October 8, 2026): Turns over to show its other face, and back.
   - Sound: A short, quiet sound that suits the object.
-- **Morasko meteorite** (`morasko-meteorite`). Now: tap: Turn it. Plan: keep.
+- **Morasko meteorite** (`morasko-meteorite`). Now: tap: Turn it over. Plan: keep.
   - Owner: New in Photoreal r3 (October 8, 2026), behind the labs switch until the owner marks it
     good.
-  - Effect: Turns once round, the light running over its pits.
+  - Effect: Turns half way round to show its other side, the light running over its pits, and back.
   - Improved: Photoreal r3 (October 8, 2026): Turns once round, the light running over its pits.
   - Sound: A short, quiet sound that suits the object.
-- **Pyrite** (`pyrite-cubes`). Now: tap: Turn it. Plan: keep.
+- **Pyrite** (`pyrite-cubes`). Now: tap: Turn it over. Plan: keep.
   - Owner: New in Photoreal r3 (October 8, 2026), behind the labs switch until the owner marks it
     good.
-  - Effect: Turns once round.
+  - Effect: Turns half way round to show its other side, and back.
   - Improved: Photoreal r3 (October 8, 2026): Turns once round.
   - Sound: A short, quiet sound that suits the object.
 - **Megalodon tooth** (`megalodon-tooth`). Now: tap: Turn it over. Plan: keep.

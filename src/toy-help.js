@@ -58,14 +58,14 @@ export const TOY_HELP = {
       "An ammonite, cut in half and polished, scanned and drawn with splats. Ammonites were sea animals with coiled shells divided into chambers, relatives of today's nautilus and squid; they died out with the dinosaurs. In this one the empty chambers filled with quartz and chalcedony over millions of years.\n\nTap it and it turns over to show its other face, then back.",
   },
   "morasko-meteorite": {
-    howTo: "Tap it to turn it; drag to turn it yourself.",
+    howTo: "Tap it to turn it over; drag to turn it yourself.",
     about:
-      "An iron meteorite from Morasko, near Poznań in Poland, scanned and drawn with splats. Iron meteorites come from the metal cores of broken asteroids. The Morasko irons fell about five thousand years ago, leaving small craters that can still be seen.\n\nTap it and it turns once round, so the light runs over its pitted surface.",
+      "An iron meteorite from Morasko, near Poznań in Poland, scanned and drawn with splats. Iron meteorites come from the metal cores of broken asteroids. The Morasko irons fell about five thousand years ago, leaving small craters that can still be seen.\n\nTap it and it turns half way round to show its other side, so the light runs over its pitted surface, then turns back.",
   },
   "pyrite-cubes": {
-    howTo: "Tap it to turn it; drag to turn it yourself.",
+    howTo: "Tap it to turn it over; drag to turn it yourself.",
     about:
-      "A specimen of pyrite, scanned and drawn with splats. Pyrite is iron sulfide; its brassy shine fooled many prospectors, so it is called fool's gold. Its crystals often grow as little cubes, with faces as flat as if they had been cut.\n\nTap it and it turns once round, so the light runs across its faces.",
+      "A specimen of pyrite, scanned and drawn with splats. Pyrite is iron sulfide; its brassy shine fooled many prospectors, so it is called fool's gold. Its crystals often grow as little cubes, with faces as flat as if they had been cut.\n\nTap it and it turns half way round to show its other side, so the light runs across its faces, then turns back.",
   },
   "megalodon-tooth": {
     howTo: "Tap it to turn it over; drag to turn it yourself.",

@@ -3087,14 +3087,14 @@
     "morasko-meteorite": {
       "v": "keep",
       "owner": "New in Photoreal r3 (October 8, 2026), behind the labs switch until the owner marks it good.",
-      "effect": "Turns once round, the light running over its pits.",
+      "effect": "Turns half way round to show its other side, the light running over its pits, and back.",
       "sound": "A short, quiet sound that suits the object.",
       "improved": "Photoreal r3 (October 8, 2026): Turns once round, the light running over its pits."
     },
     "pyrite-cubes": {
       "v": "keep",
       "owner": "New in Photoreal r3 (October 8, 2026), behind the labs switch until the owner marks it good.",
-      "effect": "Turns once round.",
+      "effect": "Turns half way round to show its other side, and back.",
       "sound": "A short, quiet sound that suits the object.",
       "improved": "Photoreal r3 (October 8, 2026): Turns once round."
     },
