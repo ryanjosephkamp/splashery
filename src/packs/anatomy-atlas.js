@@ -1515,4 +1515,4 @@ function mem(c) {
 }
 
 // For tests and tools.
-export const ATLAS = { LAYERS, LABELS, PIECES, LABEL_LIST, bodyPrims, fieldAt };
+export const ATLAS = { LAYERS, LABELS, PIECES, LABEL_LIST, ORGAN_PIECES, bodyPrims, fieldAt };
