@@ -1952,7 +1952,7 @@
       "owner": "Make it twist or glow.",
       "effect": "The tower twists further and its lights run upward.",
       "sound": "The lift's low whir as the floors wring round and a soft low bell each time the light reaches the top (no rising tone or bright dings).",
-      "improved": "E6: the floors wring round further in twelve rigid bands (the top turns most) while a ring of light runs up the glass, then they unwind with a little sway as a second ring runs up (4 s)."
+      "improved": "E6: the floors wring round further in twelve rigid bands (the top turns most) while a ring of light runs up the glass, then they unwind with a little sway as a second ring runs up (4 s). Hands-on H4: in Hands-on, drag the top round to twist the tower, each band of floors by its height; let go and it springs back with a sway."
     },
     "lighthouse": {
       "v": "keep",
@@ -1979,7 +1979,7 @@
       "owner": "Lean further and things fall off, like Galileo dropping objects.",
       "effect": "Two balls of different sizes drop from the top and land together.",
       "sound": "The tower grinds, then two thuds at the same moment.",
-      "improved": "E6: Galileo's drop: the tower leans a little further, a big iron ball and a small bronze one roll off the top ledge and fall side by side, landing at the same moment with puffs of dust; they bounce, settle and fade, and the tower eases back (about 4 s). Sharpness A (October 2, 2026): sharper look (even, solid splats and calmer textures)."
+      "improved": "E6: Galileo's drop: the tower leans a little further, a big iron ball and a small bronze one roll off the top ledge and fall side by side, landing at the same moment with puffs of dust; they bounce, settle and fade, and the tower eases back (about 4 s). Sharpness A (October 2, 2026): sharper look (even, solid splats and calmer textures). Hands-on H4: in Hands-on, the two balls lie on the lawn; pick up either and the other comes with it, side by side; lift them as high as you like and let go: they fall together and land together."
     },
     "colosseum": {
       "v": "keep",
@@ -2000,14 +2000,14 @@
       "owner": "No idea.",
       "effect": "Solstice sunrise: the sun rises through the stones and lights them gold.",
       "sound": "A low drone and a bell as the stones light.",
-      "improved": "E6: solstice sunrise: the sun comes up over the far bank, framed by the great trilithon, a golden beam shines through the stones along the monument's axis, and the stones glow gold; then it fades back (about 5 s). Sharpness A (October 2, 2026): sharper look (even, solid splats and calmer textures)."
+      "improved": "E6: solstice sunrise: the sun comes up over the far bank, framed by the great trilithon, a golden beam shines through the stones along the monument's axis, and the stones glow gold; then it fades back (about 5 s). Sharpness A (October 2, 2026): sharper look (even, solid splats and calmer textures). Hands-on H4: in Hands-on, lift the lintels off their uprights (and the fallen great lintel) and stack them on the grass or on each other; a stone set down off center topples."
     },
     "big-ben": {
       "v": "keep",
       "owner": "No visible effect; make it pronounced or pick something better.",
       "effect": "Hands spin to the hour, the clock face glows and the bell swings.",
       "sound": "Big Ben chimes (Westminster quarters, simplified).",
-      "improved": "C2: the hands spin round and land back on the real time, all four dials glow and a bell swings in the now open belfry (4 s)."
+      "improved": "C2: the hands spin round and land back on the real time, all four dials glow and a bell swings in the now open belfry (4 s). Hands-on H4: in Hands-on, drag the minute hand round the front dial; the hour hand follows, all four dials agree, and passing the hour swings the bell with its strike."
     },
     "taj-mahal": {
       "v": "keep",
@@ -2021,21 +2021,21 @@
       "owner": "Pretty good but underwhelming. Knights come out when the drawbridge opens.",
       "effect": "The drawbridge drops and tiny knights march out with a banner.",
       "sound": "Chain rattle and a trumpet.",
-      "improved": "C2: the drawbridge now starts up. A tap lowers it and five small knights march out, the leader with a banner; a second tap marches them back in and raises it. Sharpness A (October 2, 2026): sharper look (even, solid splats and calmer textures)."
+      "improved": "C2: the drawbridge now starts up. A tap lowers it and five small knights march out, the leader with a banner; a second tap marches them back in and raises it. Sharpness A (October 2, 2026): sharper look (even, solid splats and calmer textures). Hands-on H4: in Hands-on, drag the drawbridge down and up on its hinge; its chains hold it where it is let go."
     },
     "pagoda": {
       "v": "keep",
       "owner": "Not sure what the effect is.",
       "effect": "Wind chimes swing on every roof tier and lanterns light up.",
       "sound": "Wind chimes.",
-      "improved": "C2: wind chimes at every roof corner swing, one tier after another, and two stone lanterns by the path light up, with the doors glowing (4 s). Sharpness A (October 2, 2026): sharper look (even, solid splats and calmer textures)."
+      "improved": "C2: wind chimes at every roof corner swing, one tier after another, and two stone lanterns by the path light up, with the doors glowing (4 s). Sharpness A (October 2, 2026): sharper look (even, solid splats and calmer textures). Hands-on H4: in Hands-on, push a roof's wind chimes: they swing back and forth, ringing as they pass where they hang, and settle."
     },
     "windmill": {
       "v": "keep",
       "owner": "Pretty good, but move a little faster.",
       "effect": "Faster sails; the gust spins them up hard.",
       "sound": "Creaking sails and wind.",
-      "improved": "C2: the sails turn faster at rest, and a gust spins them up hard for three extra turns (4 s). Sharpness A (October 2, 2026): sharper look (even, solid splats and calmer textures)."
+      "improved": "C2: the sails turn faster at rest, and a gust spins them up hard for three extra turns (4 s). Sharpness A (October 2, 2026): sharper look (even, solid splats and calmer textures). Hands-on H4: in Hands-on, flick the sails round to spin them; they coast to a stop."
     },
     "perceptron": {
       "v": "keep",

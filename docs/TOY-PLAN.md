@@ -2970,7 +2970,8 @@ Proposals below are suggestions; the owner may change them.
   - Effect: The tower twists further and its lights run upward.
   - Improved: E6: the floors wring round further in twelve rigid bands (the top turns most) while a
     ring of light runs up the glass, then they unwind with a little sway as a second ring runs up (4
-    s).
+    s). Hands-on H4: in Hands-on, drag the top round to twist the tower, each band of floors by its
+    height; let go and it springs back with a sway.
   - Sound: The lift's low whir as the floors wring round and a soft low bell each time the light
     reaches the top (no rising tone or bright dings).
 - **Lighthouse** (`lighthouse`). Now: tap: Light on or off. Plan: keep.
@@ -2998,7 +2999,9 @@ Proposals below are suggestions; the owner may change them.
   - Improved: E6: Galileo's drop: the tower leans a little further, a big iron ball and a small
     bronze one roll off the top ledge and fall side by side, landing at the same moment with puffs
     of dust; they bounce, settle and fade, and the tower eases back (about 4 s). Sharpness A
-    (October 2, 2026): sharper look (even, solid splats and calmer textures).
+    (October 2, 2026): sharper look (even, solid splats and calmer textures). Hands-on H4: in
+    Hands-on, the two balls lie on the lawn; pick up either and the other comes with it, side by
+    side; lift them as high as you like and let go: they fall together and land together.
   - Sound: The tower grinds, then two thuds at the same moment.
 - **Colosseum** (`colosseum`). Now: tap: A chariot race. Plan: keep.
   - Owner: Gladiators fighting inside?
@@ -3024,13 +3027,17 @@ Proposals below are suggestions; the owner may change them.
   - Improved: E6: solstice sunrise: the sun comes up over the far bank, framed by the great
     trilithon, a golden beam shines through the stones along the monument's axis, and the stones
     glow gold; then it fades back (about 5 s). Sharpness A (October 2, 2026): sharper look (even,
-    solid splats and calmer textures).
+    solid splats and calmer textures). Hands-on H4: in Hands-on, lift the lintels off their uprights
+    (and the fallen great lintel) and stack them on the grass or on each other; a stone set down off
+    center topples.
   - Sound: A low drone and a bell as the stones light.
 - **Big Ben** (`big-ben`). Now: tap: Chime the bell. Plan: keep.
   - Owner: No visible effect; make it pronounced or pick something better.
   - Effect: Hands spin to the hour, the clock face glows and the bell swings.
   - Improved: C2: the hands spin round and land back on the real time, all four dials glow and a
-    bell swings in the now open belfry (4 s).
+    bell swings in the now open belfry (4 s). Hands-on H4: in Hands-on, drag the minute hand round
+    the front dial; the hour hand follows, all four dials agree, and passing the hour swings the
+    bell with its strike.
   - Sound: Big Ben chimes (Westminster quarters, simplified).
 - **Taj Mahal** (`taj-mahal`). Now: tap: Moonlight. Plan: keep.
   - Owner: Looks good; needs an effect.
@@ -3045,20 +3052,23 @@ Proposals below are suggestions; the owner may change them.
   - Effect: The drawbridge drops and tiny knights march out with a banner.
   - Improved: C2: the drawbridge now starts up. A tap lowers it and five small knights march out,
     the leader with a banner; a second tap marches them back in and raises it. Sharpness A (October
-    2, 2026): sharper look (even, solid splats and calmer textures).
+    2, 2026): sharper look (even, solid splats and calmer textures). Hands-on H4: in Hands-on, drag
+    the drawbridge down and up on its hinge; its chains hold it where it is let go.
   - Sound: Chain rattle and a trumpet.
 - **Pagoda** (`pagoda`). Now: tap: Ring the bells. Plan: keep.
   - Owner: Not sure what the effect is.
   - Effect: Wind chimes swing on every roof tier and lanterns light up.
   - Improved: C2: wind chimes at every roof corner swing, one tier after another, and two stone
     lanterns by the path light up, with the doors glowing (4 s). Sharpness A (October 2, 2026):
-    sharper look (even, solid splats and calmer textures).
+    sharper look (even, solid splats and calmer textures). Hands-on H4: in Hands-on, push a roof's
+    wind chimes: they swing back and forth, ringing as they pass where they hang, and settle.
   - Sound: Wind chimes.
 - **Windmill** (`windmill`). Now: tap: A gust of wind. Plan: keep.
   - Owner: Pretty good, but move a little faster.
   - Effect: Faster sails; the gust spins them up hard.
   - Improved: C2: the sails turn faster at rest, and a gust spins them up hard for three extra turns
     (4 s). Sharpness A (October 2, 2026): sharper look (even, solid splats and calmer textures).
+    Hands-on H4: in Hands-on, flick the sails round to spin them; they coast to a stop.
   - Sound: Creaking sails and wind.
 
 ## Computing (17)
