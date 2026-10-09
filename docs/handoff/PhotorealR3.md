@@ -190,6 +190,16 @@ clips within about six hours.
 
 ## State
 
+WORKING (October 9, 2026, about 16:30 UTC; Opus 5.5 at high effort): the owner's second marks (six
+`-r2` cards). Pushed: the knight's base hides the bits of hoof just over its floor (card
+`pr3-base-knight-horse-r3`); the monkey doll's legs and hands rock with it (a wide, flat region just
+above its cloth); the steak loses more needles and the drips under it (its underside raised to y
+-0.04); the Morasko iron and the pyrite turn half way round and back, since a full turn of a lumpy
+stone seen from above looked as if it reversed halfway (a mark on its top swings right on the near
+side and left on the far side). The desk globe's blurry spots are the capture's own: its ball is
+built from those big soft splats, and dropping them shredded it. The orange is as before (its skin
+is the faint shell). Clips for the monkey, steak, Morasko and pyrite are rendering.
+
 READY (October 9, 2026, about 12:00 UTC; Opus 5.5 at high effort; main a0b68bc3): the owner's "fix"
 marks of October 9 (18 cards), all answered with a replacement card (`…-r2`) or a reason:
 
