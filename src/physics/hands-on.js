@@ -284,6 +284,34 @@ export class HandsOn {
     };
   }
 
+  // The play area's walls in pieces mode, [x0, x1, z0, z1]: ±`area`, or
+  // lane Hands-on H2's `walls` (toy radii) for a toy on a tray that isn't
+  // square (the croissant's lid stays on its baking tray).
+  walls() {
+    const hands = this.info.recipe.hands;
+    const R = this.R();
+    if (hands.walls) return hands.walls.map((v) => v * R);
+    const A = (hands.area ?? 1.6) * R;
+    return [-A, A, -A, A];
+  }
+
+  // The walls a held piece's middle stays within: with `walls`, far
+  // enough in that all of it does (by its `pick` box, as it is turned).
+  inWalls(b) {
+    const w = this.walls();
+    const pc = this.info.recipe.hands.walls && this.pieces.find((p) => p.body === b);
+    if (!pc?.def.pick) return w;
+    const [px, py, pz] = pc.def.pick;
+    const ax = quat.rotate(b.q, [1, 0, 0]);
+    const ay = quat.rotate(b.q, [0, 1, 0]);
+    const az = quat.rotate(b.q, [0, 0, 1]);
+    const ex = Math.abs(ax[0]) * px + Math.abs(ay[0]) * py + Math.abs(az[0]) * pz;
+    const ez = Math.abs(ax[2]) * px + Math.abs(ay[2]) * py + Math.abs(az[2]) * pz;
+    const fit = (lo, hi, e) =>
+      hi - lo > 2 * e ? [lo + e, hi - e] : [(lo + hi) / 2, (lo + hi) / 2];
+    return [...fit(w[0], w[1], ex), ...fit(w[2], w[3], ez)];
+  }
+
   buildPieces(hands) {
     const info = this.info;
     this.mode = "pieces";
@@ -294,9 +322,9 @@ export class HandsOn {
     // (A floor may depend on the build: a d20 sits lower than two d6s; lane Hands-on H1.)
     const floor = typeof hands.floor === "function" ? hands.floor(data, info) : hands.floor;
     w.plane([0, 1, 0], floor ?? 0, { friction: hands.friction ?? 0.9, restitution: 0.15, grip: hands.grip ?? 0 }); // prettier-ignore
-    const A = (hands.area ?? 1.6) * R;
-    for (const [nx, nz] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) // prettier-ignore
-      w.plane([nx, 0, nz], -A, { friction: 0.3, restitution: 0.3 });
+    const [x0, x1, z0, z1] = this.walls();
+    for (const [nx, nz, d] of [[1, 0, x0], [-1, 0, -x1], [0, 1, z0], [0, -1, -z1]]) // prettier-ignore
+      w.plane([nx, 0, nz], d, { friction: 0.3, restitution: 0.3 });
     this.pieces = [];
     for (const p of hands.pieces?.(data, info) || []) {
       // Lane Hands-on H2: `shown` is where the recipe's drive shows the
@@ -439,8 +467,9 @@ export class HandsOn {
     p[1] = Math.min(p[1], fl + 5 * R);
     const lim = this.mode === "pieces" ? (this.info.recipe.hands.area ?? 1.6) * R : 1.6 * R;
     const c = this.body ? this.body.home.pos : [0, 0, 0];
-    p[0] = Math.max(c[0] - lim, Math.min(c[0] + lim, p[0]));
-    p[2] = Math.max(c[2] - lim, Math.min(c[2] + lim, p[2]));
+    const [x0, x1, z0, z1] = this.mode === "pieces" ? this.walls() : [-lim, lim, -lim, lim];
+    p[0] = Math.max(c[0] + x0, Math.min(c[0] + x1, p[0]));
+    p[2] = Math.max(c[2] + z0, Math.min(c[2] + z1, p[2]));
     h.target = p;
     this.world.wake();
   }
@@ -589,10 +618,10 @@ export class HandsOn {
         n = p;
       }
     }
-    const lim = (this.info.recipe.hands.area ?? 1.6) * R;
+    const [x0, x1, z0, z1] = this.inWalls(b);
     const tf = ray.dir[1] < -1e-4 ? (fl - ray.origin[1]) / ray.dir[1] : Infinity;
     const pf = tf < Infinity ? v3.add(ray.origin, v3.scale(ray.dir, tf)) : null;
-    const inside = pf && Math.abs(pf[0]) <= lim && Math.abs(pf[2]) <= lim;
+    const inside = pf && pf[0] >= x0 && pf[0] <= x1 && pf[2] >= z0 && pf[2] <= z1;
     let p;
     if (tf < best && inside) {
       p = pf;
@@ -606,7 +635,7 @@ export class HandsOn {
       const dd = v3.dot(d, d) || 1;
       const t = -((ray.origin[0] - c[0]) * d[0] + (ray.origin[2] - c[2]) * d[2]) / dd;
       p = v3.add(ray.origin, v3.scale(ray.dir, t));
-      h.target = [Math.max(-lim, Math.min(lim, p[0])), Math.max(fl + 0.1 * R, Math.min(fl + 5 * R, p[1])), Math.max(-lim, Math.min(lim, p[2]))]; // prettier-ignore
+      h.target = [Math.max(x0, Math.min(x1, p[0])), Math.max(fl + 0.1 * R, Math.min(fl + 5 * R, p[1])), Math.max(z0, Math.min(z1, p[2]))]; // prettier-ignore
       return;
     }
     const def = this.pieces.find((pc) => pc.body === b)?.def;
@@ -657,7 +686,7 @@ export class HandsOn {
     }
     top = u.y;
     const y = top + below + (this.info.recipe.hands.lift ?? 0.06 * R);
-    h.target = [Math.max(-lim, Math.min(lim, p[0])), Math.min(fl + 5 * R, y), Math.max(-lim, Math.min(lim, p[2]))]; // prettier-ignore
+    h.target = [Math.max(x0, Math.min(x1, p[0])), Math.min(fl + 5 * R, y), Math.max(z0, Math.min(z1, p[2]))]; // prettier-ignore
   }
 
   // The piece under a point: the one whose shape (the piece's `pick`
@@ -1011,8 +1040,10 @@ export class HandsOn {
         if (pc.token !== undefined) out.push({ index: pc.token, token });
         // Lane Hands-on H2: other tokens that ride with it (`ride`: an
         // index, or { token, visible }), a banana's skin strips.
-        for (const r of pc.def.ride || [])
+        for (const r of pc.def.ride || []) {
+          if (r.part) continue; // (a riding part: below)
           out.push(typeof r === "number" ? { index: r, token } : { index: r.token, token: { ...token, visible: r.visible ?? 1 } }); // prettier-ignore
+        }
       }
       // Lane Hands engine C: what the ropes, cloth and stretch move.
       const so = this.softParts?.output();
@@ -1031,17 +1062,34 @@ export class HandsOn {
         // Lane Hands-on H2: `offHome` is merged in while it is off its place
         // (a candle pulled out of the cake goes out: { visible: 0 }).
         if (pc.def.offHome && !b.pinned) Object.assign(parts[pc.part], pc.def.offHome);
+        // Other parts that ride with it ({ part, pivot, upside }), and what
+        // is merged into them while it lies upside down (a pancake's syrup,
+        // flipped under it, is hidden: { visible: 0 }).
+        const upside = quat.rotate(b.q, [0, 1, 0])[1] < 0;
+        for (const r of pc.def.ride || []) {
+          if (!r.part) continue;
+          const pr = r.pivot || pv;
+          parts[r.part] = { quat: dq, offset: v3.sub(v3.sub(b.pos, pr), quat.rotate(dq, v3.sub(bt.pos, pr))) }; // prettier-ignore
+          if (r.upside && upside) Object.assign(parts[r.part], r.upside);
+        }
       }
       if (this.joints) parts = this.joints.parts(parts); // lane Hands engine B
       if (so) parts = Object.assign(parts || {}, so.parts); // lane Hands engine C
       player.motion.handsParts = this.moved || this.homing || so ? parts : null;
       // Sort the moved pieces again now and then (and once they rest).
       const asleep = this.world.asleep;
-      if (out.length && (this.time - this.lastResort > 0.25 || (asleep && !this.restSorted))) {
+      // (Lane Hands-on H2: `hands.resort`, seconds, for a toy whose pieces
+      // turn fast in front of its own splats, a sunflower's nodding head.)
+      const every = this.info.recipe.hands.resort ?? 0.25;
+      if (out.length && (this.time - this.lastResort > every || (asleep && !this.restSorted))) {
         this.lastResort = this.time;
         this.restSorted = asleep;
         player.motion.handsResort = true;
       }
+      // (Lane Hands-on H2: once more when the last moved piece is home, so
+      // a slice clicked back in isn't drawn in the order it had outside.)
+      if (!out.length && this.hadOut) player.motion.handsResort = true;
+      this.hadOut = out.length > 0;
       if (!asleep) this.restSorted = false;
     }
   }
