@@ -190,8 +190,8 @@ clips within about six hours.
 
 ## State
 
-WORKING (October 9, 2026, about 10:30 UTC; Opus 5.5 at high effort): the owner's "fix" marks of
-October 9 (18 cards). Done so far, all pushed:
+READY (October 9, 2026, about 12:00 UTC; Opus 5.5 at high effort; main a0b68bc3): the owner's "fix"
+marks of October 9 (18 cards), all answered with a replacement card (`…-r2`) or a reason:
 
 - Sharper (the eight baked scans): Lane Sharpness A's options (exact sizes, splats 0.85 the size, a
   calmer texture); the fluorite's stone gets 0.6 of the budget, its glow copy 0.3. The ceiling is
@@ -210,7 +210,10 @@ October 9 (18 cards). Done so far, all pushed:
   (trimming it opens a hole into the shell).
 - The alum crystal: the owner's note ("basically perfect", blur round the base) was on the lifting
   clip, already replaced by the turn (`pr3-fx-alum-crystal-r2`), which keeps a faint ring.
-- Rendering now: 13 clips for the replacement cards.
+- 17 replacement cards are up (4 bases, 13 clips: the eight baked scans, the T. rex, monkey, desk
+  globe, steak and cone shell). The orange and the alum crystal have no new card (see above).
+- Tests after the fixes: unit, pr2, help, fx9 43 of 43; taps for photoreal-r3, real-objects and
+  photo-3d 3 of 3.
 
 Earlier: READY (October 9, 2026, about 04:00 UTC; main a0b68bc3 merged). PR #419 (draft). Effect
 review page 2, lane record `PhotorealR3`: 19 "Closed bases" cards, 28 effect cards and 10 new-toy
