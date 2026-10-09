@@ -508,6 +508,7 @@ export class Joints {
     for (const j of this.list) {
       if (!j.latched || !j.d.trigger) continue;
       j.latched = false;
+      j.letGo = true;
       j.awake = true;
       // Off its latch, so it doesn't catch again at once.
       const away = this.latchAt(j) <= j.min ? 1 : -1;
@@ -764,7 +765,10 @@ export class Joints {
     const L = this.latchAt(j);
     // (`catch`: within that of it, it catches: a finger seldom lands it
     // exactly on its latch.)
-    if (L !== null && (Math.abs(j.v - L) < (d.catch ?? 1e-3) || (v0 - L) * (j.v - L) < 0)) {
+    // (Just let go by its trigger, it must leave that first.)
+    const near = L !== null && Math.abs(j.v - L) < (d.catch ?? 1e-3);
+    if (j.letGo && !near) j.letGo = false;
+    if (L !== null && !j.letGo && (near || (v0 - L) * (j.v - L) < 0)) {
       j.v = L;
       j.latched = true;
       j.w = 0;
@@ -915,6 +919,7 @@ export class Joints {
         j.moving = false;
         j.stuck = !!j.d.stick && Math.abs(j.v) < 1e-6;
         j.latched = this.atLatch(j); // (lane Hands-on H3)
+        j.letGo = false;
         j.awake = false;
         j.homeFrom = undefined;
         j.homeE = undefined;
