@@ -48,6 +48,8 @@ function mem(c) {
 
 // Lane Hands-on H5: the lungs squeezed (a long breath out) and let go (a
 // breath in).
+const LUNG_SQUEEZE = 1.15; // how far a squeeze empties them (channel 0)
+const LUNG_GASP = 0.9; // seconds of the breath in after a squeeze
 const LUNG_OUT_SOUND = [{ voice: "breath", f: 700, to: 0.6, decay: 1.2, vol: 0.6 }];
 const LUNG_IN_SOUND = [{ voice: "breath", f: 600, to: 1.4, decay: 1.4, vol: 0.6 }];
 
@@ -937,20 +939,24 @@ export const RECIPES = {
       const idle = -(0.035 + 0.12 * c.breath) * Math.sin(t * 1.3);
       const calm = 1 - bump(s, 0, 0.5, LUNG_BREATH - 0.9, LUNG_BREATH);
       let m0 = idle * calm + lungDeep(s);
-      // The squeeze, out over about a second; the refill after it, a
-      // spring that overshoots once (a deep breath in) and settles.
+      // The squeeze, all the way out over about a second; let go, a deep
+      // gasp in (well past rest, as a tap's deep breath fills them), then
+      // back to rest.
       const m = mem(c);
       const dt = Math.min(0.1, Math.max(0, t - (m.t ?? t)));
       m.t = t;
-      const goal = info?.hands?.pressed ? 0.9 : 0;
       m.sq ??= 0;
-      m.v ??= 0;
-      if (goal) {
-        m.sq += (goal - m.sq) * (1 - Math.exp(-2.6 * dt));
-        m.v = 0;
-      } else {
-        m.v += (-26 * m.sq - 5 * m.v) * dt;
-        m.sq += m.v * dt;
+      if (info?.hands?.pressed) {
+        m.sq += (LUNG_SQUEEZE - m.sq) * (1 - Math.exp(-2.4 * dt));
+        m.rel = null;
+      } else if (m.down) {
+        m.rel = t;
+        m.from = m.sq;
+      }
+      if (m.rel !== null && m.rel !== undefined) {
+        const u = t - m.rel;
+        m.sq = u < LUNG_GASP ? m.from + (LUNG_IN * 0.85 - m.from) * ease(u / LUNG_GASP) : LUNG_IN * 0.85 * (1 - ease(Math.min(1, (u - LUNG_GASP) / 1.8))); // prettier-ignore
+        if (u > LUNG_GASP + 1.8) m.rel = null;
       }
       if (info?.hands?.pressed && !m.down) out.cues.push(LUNG_OUT_SOUND);
       if (!info?.hands?.pressed && m.down) out.cues.push(LUNG_IN_SOUND);
