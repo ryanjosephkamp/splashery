@@ -951,11 +951,12 @@ dial catch there as it reaches or passes it (a crossbow's string drawn back into
 fast, the finger can't move it, and its weight doesn't pull it off. With `trigger: true`, a tap on
 the toy (or the Play button) with ✋ on lets it go instead of the toy's own tap: it springs back by
 its `spring`, or falls by its weight. The catch is the `"latch"` cue and the release `"free"`;
-`player.act()` returns `{ key: "trigger" }` for a tap that pulled it. ↺ brings it home (caught only
-if home is its latch).
+`player.act()` returns `{ key: "trigger" }` for a tap that pulled it. `catch` (default 0.001, in the
+joint's own units) is how near the finger must bring it for it to catch. ↺ brings it home (caught
+only if home is its latch).
 
 ```js
-{ type: "slider", part: "string", axis: [0, 0, -1], min: 0, max: 0.4, spring: 60, latch: "max", trigger: true },
+{ type: "slider", part: "string", axis: [0, 0, -1], min: 0, max: 0.4, spring: 60, latch: "max", catch: 0.03, trigger: true },
 ```
 
 **Parents**: `parent` (a joint's name) puts a hinge, slider or dial on another driven part: a desk
