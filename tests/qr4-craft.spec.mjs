@@ -95,10 +95,9 @@ test.describe("Other barcodes", () => {
       // The paper is the big splats far behind; everything dark is ink.
       const ink = splats.filter((s) => s.p[2] === 0 && s.color[0] < 0.2);
       expect(ink.length, o.kind).toBeGreaterThan(100);
-      for (const s of ink) {
-        expect(Math.abs(s.p[0]) + s.scales[0], `${o.kind} x`).toBeLessThanOrEqual(PW);
-        expect(Math.abs(s.p[1]) + s.scales[1], `${o.kind} y`).toBeLessThanOrEqual(PH - 0.5);
-      }
+      const outX = ink.filter((s) => Math.abs(s.p[0]) + s.scales[0] > PW).length;
+      const outY = ink.filter((s) => Math.abs(s.p[1]) + s.scales[1] > PH - 0.5).length;
+      expect([outX, outY], o.kind).toEqual([0, 0]);
     }
   });
 
