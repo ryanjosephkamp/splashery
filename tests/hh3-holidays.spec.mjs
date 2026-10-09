@@ -180,3 +180,58 @@ test("paper lantern: pushed, it swings on its string and settles", async ({ page
   await tick(page, 20);
   expect(Math.abs((await joint(page, "lantern")).v)).toBeLessThan(0.03);
 });
+
+test("snowman: the head lifts off with its face and hat, and stacks back up", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await ready(page, "snowman");
+  const balls = () =>
+    page.evaluate(() => window.__splashery.player.handsOn.pieces.map((p) => p.body.pos.slice()));
+  // Stacked at rest: nothing slumps.
+  await tick(page, 1);
+  let b = await balls();
+  expect(b[1][1]).toBeCloseTo(0.3, 2);
+  expect(b[2][1]).toBeCloseTo(0.85, 2);
+  // The head, down onto the ground beside it.
+  await drag(page, [
+    [0, 0.85, 0.2],
+    [0.3, 1.4, 0.3],
+    [1.0, 0.6, 0.4],
+    [1.0, -0.6, 0.4],
+  ]);
+  await tick(page, 1);
+  b = await balls();
+  expect(b[2][1]).toBeLessThan(-0.6); // on the ground (its body's half height above it)
+  expect(b[1][1]).toBeCloseTo(0.3, 2); // the middle stays
+  // Its face and hat ride it (tokens 0 to 6, 10 and 14); the middle's
+  // buttons, arms and scarf stay put.
+  const tok = await page.evaluate(() => {
+    const t = window.__splashery.player.motion.handsTokens || [];
+    const at = (i) => t.find((x) => x.index === i)?.token.offset ?? null;
+    return { hat: at(14), nose: at(10), scarf: at(13) };
+  });
+  const off = [b[2][0], b[2][1] - 0.85, b[2][2]];
+  for (let i = 0; i < 3; i++) expect(tok.hat[i]).toBeCloseTo(off[i], 2);
+  for (let i = 0; i < 3; i++) expect(tok.nose[i]).toBeCloseTo(off[i], 2);
+  for (const v of tok.scarf || [0, 0, 0]) expect(Math.abs(v)).toBeLessThan(1e-3);
+  // Back on top: it stays stacked.
+  // (Held still a moment over it, then let go: set down, not tossed.)
+  // (By its top: lying behind the bottom ball, its middle may be hidden.)
+  const grip = [b[2][0] + 0.05, b[2][1] + 0.18, b[2][2] + 0.1];
+  await drag(page, [grip, [grip[0], 1.2, grip[2]], [0, 1.4, 0]], { hold: true });
+  // Aimed: the finger points at the middle ball's top (a held piece hovers
+  // over whatever is under the finger), as a person lines it up.
+  const [fx, fy] = await page.evaluate(() => {
+    const { player } = window.__splashery;
+    const r = player.stage.canvas.getBoundingClientRect();
+    const s = player.screenPoint([0, 0.66, 0.05]);
+    return [r.left + s[0], r.top + s[1]];
+  });
+  await page.mouse.move(fx, fy, { steps: 8 });
+  await tick(page, 0.6);
+  await tick(page, 0.4);
+  await page.mouse.up();
+  await tick(page, 2);
+  b = await balls();
+  expect(b[2][1]).toBeCloseTo(0.85, 2);
+  expect(Math.hypot(b[2][0], b[2][2])).toBeLessThan(0.3);
+});

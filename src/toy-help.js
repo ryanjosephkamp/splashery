@@ -2052,7 +2052,7 @@ export const TOY_HELP = {
   snowman: {
     howTo: "Tap to melt it and build it again. Try the Warmth slider in the Toy tab.",
     about:
-      "A snowman is built from big balls of snow rolled across the ground, stacked up and given a face of coal, a carrot nose, stick arms, a scarf and a hat. Snow packs best when it is just at the melting point and a little wet, so the flakes stick together. Fresh snow is mostly air, which is why it is so light and fluffy.\n\nTap it and it melts: the snowballs shrink, the head first, drips fall, and the hat, nose, coals, arms and scarf drop off one by one, and the meltwater spreads into a puddle around it. Then it builds itself again from the bottom up. The Warmth slider in the Toy tab melts it the same way.",
+      "A snowman is built from big balls of snow rolled across the ground, stacked up and given a face of coal, a carrot nose, stick arms, a scarf and a hat. Snow packs best when it is just at the melting point and a little wet, so the flakes stick together. Fresh snow is mostly air, which is why it is so light and fluffy.\n\nTap it and it melts: the snowballs shrink, the head first, drips fall, and the hat, nose, coals, arms and scarf drop off one by one, and the meltwater spreads into a puddle around it. Then it builds itself again from the bottom up. The Warmth slider in the Toy tab melts it the same way. With ✋ Hands-on on, lift the head or the middle ball off, set it down anywhere and stack them back up: each ball keeps its own coal, nose, arms, scarf or hat.",
   },
   fireworks: {
     howTo: "Tap it to launch a firework; tap quickly for a few at once.",
