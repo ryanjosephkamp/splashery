@@ -2100,7 +2100,7 @@ export const RECIPES = {
     // Hands-on (lane Hands-on H5): pull the knot with a finger: the tube
     // stretches after it like a stiff spring and, let go, springs back with
     // a few wobbles.
-    hands: { floor: -1.2, stretch: { radius: 0.55, max: 0.6, hz: 3.2, damping: 0.2 } },
+    hands: { floor: -1.2, stretch: { radius: 0.28, max: 0.55, hz: 3.2, damping: 0.2 } },
     // A tap pulls the knot into a looser, swirled shape (its lobes stretch
     // out and turn), then lets go: it springs back past its rest shape into
     // a tight one and wobbles to a stop, like a stretched spring. The knot is
@@ -2434,6 +2434,8 @@ export const RECIPES = {
     hands: {
       floor: (d) => d?.floor ?? -1,
       area: 1.6,
+      // (A face set down on the solid rests there; the rest stay put.)
+      knock: false,
       pieces: (d) =>
         (d?.groups || []).map((g) => ({
           part: g.part,
@@ -5150,6 +5152,13 @@ const pySlide = (tri, e) =>
   e < 0 || tri.go < 0
     ? 0
     : easeInOut(band(e, tri.go, tri.go + PY_SLIDE)) - easeInOut(band(e, tri.back, tri.back + PY_SLIDE)); // prettier-ignore
+// Lane Hands-on H5: how far (along its way) triangle i may slide now.
+const pyLen = (i) => Math.hypot(...PY_TRIS[i].move) * PY_U;
+const pyAt = (i, at) => (at.joint(`tri${i}`) ?? 0) / pyLen(i);
+function pyLimits(i, at) {
+  if (i === 2) return [0, pyAt(0, at) > 0.97 && pyAt(1, at) > 0.97 ? pyLen(2) : 0];
+  return [pyAt(2, at) > 0.005 ? pyLen(i) : 0, pyLen(i)];
+}
 const PY_THICK = 0.07;
 const PY_CUES = [];
 const PY_SORTS = [];
@@ -5197,6 +5206,10 @@ Object.assign(RECIPES, {
               damping: 8,
               bounce: 0.05,
               pick: [0.42, 0.42, 0.2],
+              // Solid wood: the blue triangle crosses the other two's
+              // places, so it slides only once both are in their corners,
+              // and they stay in while it is out.
+              limits: (at) => pyLimits(i, at),
               // (Shown where a tap's slide has it.)
               start: (c) => pySlide(tri, since(c, "prove", 4.5)) * L,
               sound: (ev) => (ev.kind === "stop" ? { voice: "click", vol: 0.5 } : null),

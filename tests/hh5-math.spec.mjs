@@ -219,6 +219,23 @@ test("pythagoras proof: the triangles slide by hand, and c² lights once all thr
   await ready(page, "pythagoras-proof");
   const D = await page.evaluate(() => window.__splashery.player.handsOn.joints.state());
   expect(D.length).toBe(3);
+  // Solid pieces: the blue one (tri2) crosses the others' places, so
+  // pulled first it doesn't move.
+  const slide = async (name, f = 1.2) => {
+    const st = (await joints(page)).find((x) => x.name === name);
+    const ax = await page.evaluate((n) => {
+      const jj = window.__splashery.player.handsOn.joints.byName.get(n);
+      return { axis: jj.axis, max: jj.max };
+    }, name);
+    const at = st.home.map((v, k) => v + ax.axis[k] * st.v);
+    // (Held at the end a moment, as a finger is, then let go.)
+    await finger(page, [at, at.map((v, k) => v + ax.axis[k] * ax.max * f)], { steps: 10, up: false }); // prettier-ignore
+    await tick(page, 0.4);
+    await letGo(page);
+    await tick(page, 0.3);
+    return (await joints(page)).find((x) => x.name === name).v;
+  };
+  expect(await slide("tri2")).toBeLessThan(0.01);
   for (const j of D) {
     const name = j.name;
     const st = (await joints(page)).find((x) => x.name === name);
@@ -228,8 +245,10 @@ test("pythagoras proof: the triangles slide by hand, and c² lights once all thr
       return { axis: jj.axis, max: jj.max };
     }, name);
     const to = st.home.map((v, k) => v + ax.axis[k] * (ax.max + 0.2));
-    await finger(page, [st.home, st.home.map((v, k) => v + ax.axis[k] * ax.max * 0.5), to], { steps: 8 }); // prettier-ignore
-    await tick(page, 0.5);
+    await finger(page, [st.home, st.home.map((v, k) => v + ax.axis[k] * ax.max * 0.5), to], { steps: 8, up: false }); // prettier-ignore
+    await tick(page, 0.4);
+    await letGo(page);
+    await tick(page, 0.3);
     const now = (await joints(page)).find((x) => x.name === name);
     expect(now.v).toBeGreaterThan(ax.max * 0.9);
     if (name !== D[D.length - 1].name) expect((await out(page, "morph"))[2]).toBeLessThan(0.5);
@@ -237,6 +256,9 @@ test("pythagoras proof: the triangles slide by hand, and c² lights once all thr
   const m = await out(page, "morph");
   expect(m[1]).toBe(1);
   expect(m[2]).toBe(1);
+  // With the blue one out, the orange one can't slide back through it.
+  const full = (await joints(page)).find((x) => x.name === "tri0").v;
+  expect(await slide("tri0", -1.2)).toBeGreaterThan(full - 0.01);
 });
 
 // The lane's screenshots, the ✋ switch on (phone and desktop).
