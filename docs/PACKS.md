@@ -911,7 +911,11 @@ sends (a dancer that the crank turns; it works for every joint type, with its va
 
 **Socket**: a loose piece (in `hands.pieces`, or made here with `solid`) that clicks back into the
 place it was built in: once it has been taken out, bringing it within `snap` toy radii (0.3) of its
-place, or pointing the finger at its place, glides it home and locks it there.
+place, or pointing the finger at its place, glides it home and locks it there. `out` (a vector, in
+recipe units) is its doorway, the way it comes out and goes in when other things fit round it (a
+melon's slice, straight up out of its slot): taken from its place it slides along `out`, held as
+built, and is free past its end; let go before that, it slides back in; and brought back, it glides
+to the doorway's mouth and then straight in.
 
 ```js
 pieces: (d) => d.wedges.map((w) => ({ token: w.token, pos: w.mid, quat: w.q, solid: WEDGE, points: surfacePoints(WEDGE, 1), pick: [0.3, 0.4, 0.3] })),
