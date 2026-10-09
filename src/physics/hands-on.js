@@ -974,7 +974,10 @@ export class HandsOn {
     const speed = hit.speed / R;
     // A free piece that hits a pinned one knocks it loose.
     // (Not by the piece in the hand: it brushes past others as it goes.)
-    if (this.mode === "pieces" && !hit.body?.held && !hit.other?.held) {
+    // Lane Hands-on H5: `hands.knock: false`: pieces leave their places only
+    // when picked (a solid's faces: one set down doesn't knock the rest off).
+    const knock = this.info?.recipe?.hands?.knock !== false;
+    if (knock && this.mode === "pieces" && !hit.body?.held && !hit.other?.held) {
       if (hit.other?.pinned && speed > 2.5) this.free(hit.other);
       if (hit.body?.pinned && speed > 2.5) this.free(hit.body);
     }
