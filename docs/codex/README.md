@@ -43,6 +43,8 @@ merges.
 | 29-flaky-root-causes.md           | Why the intermittent tests fail, with reproductions            | report only                           | no            |
 | 30-docs-cleanup.md                | README, schema and pack docs checked against the code          | small doc fixes, report               | no            |
 | 31-credits-consistency.md         | Credits, licenses and assets checked against each other        | a script, report                      | no            |
+| 32-moving-photo-stability.md      | A steadier Moving photo to 3D, measured before and after       | `moving-photo.js`, a helper, tests    | no            |
+| 33-program-gallery.md             | Sixty splat programs for a gallery, with tests and thumbnails  | a data file, tests, thumbnails        | yes           |
 
 The Codex cloud environment is set up with `tools/codex-setup.sh`; [SETUP.md](SETUP.md) has the
 steps for creating it and fixing a failed setup.
