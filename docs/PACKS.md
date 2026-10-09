@@ -790,7 +790,8 @@ hands: { wheels: { axle: [0, 0, 1], r: 0.17, parts: ["front", "rear"] } },
 `axle` (recipe axis), `r` (the wheels' radius, recipe units), `parts` (the wheel parts, turned about
 their own axis), `sign` (-1 turns them the other way), `grip` (14), `roll` (0.015), `yaw` (6) and
 `area` (how far it may roll, toy radii, 2.4). `info.hands.rolled` is the angle rolled, for parts
-that turn with the wheels (a steam train's rods).
+that turn with the wheels (a steam train's rods). `lift: true` (lane Hands-on H4): a drag that
+starts straight up the screen picks the toy up instead, as any toy is (a bus you roll or lift).
 
 **Shake detection** (`hands.shake`): a quick back-and-forth drag on the toy (holding it, or on a
 tree's trunk) fires the toy's tap action (or `key`), at most every `gap` seconds; `info.hands.shake`

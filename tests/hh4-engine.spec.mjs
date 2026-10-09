@@ -212,3 +212,44 @@ test("hands.carry: a held piece carries the other; let go, both fall and land to
   expect(r.land1).not.toBe(null);
   expect(Math.abs(r.land0 - r.land1)).toBeLessThanOrEqual(3); // within a few frames
 });
+
+test("wheels.lift: a drag up the screen lifts the toy; along, it rolls", async ({ page }) => {
+  await page.goto(APP);
+  await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
+  const drag = (dx, dy, lift) =>
+    page.evaluate(
+      async ({ dx, dy, lift }) => {
+        const { app, player } = window.__splashery;
+        await app.chooseToy("bus");
+        player.opts.idleDelay = 1e9;
+        player.toyInfo.recipe.hands = { wheels: { axle: [0, 0, 1], r: 0.3, parts: ["front", "rear"], lift } }; // prettier-ignore
+        const h = player.handsOn;
+        h.attach(player.toyInfo);
+        h.setOn(true);
+        const tick = (n) => {
+          for (let i = 0; i < n; i++) player.update(1 / 60);
+        };
+        tick(5);
+        const c = player.toyInfo.center.slice();
+        const s = player.stage.toScreen(c);
+        h.pressAt(c, s[0], s[1]);
+        for (let k = 1; k <= 20; k++) {
+          h.moveTo(s[0] + (dx * k) / 20, s[1] + (dy * k) / 20);
+          tick(2);
+        }
+        const held = !!h.hold && h.mode === "toy";
+        const b = h.body;
+        const up = (b.pos[1] - b.home.pos[1]) / player.toyInfo.radius;
+        h.release();
+        return { held, up };
+      },
+      { dx, dy, lift },
+    );
+  const lifted = await drag(0, -80, true);
+  expect(lifted.held).toBe(true);
+  expect(lifted.up).toBeGreaterThan(0.1);
+  const rolled = await drag(80, 0, true);
+  expect(rolled.held).toBe(false); // along the screen it is pushed, as before
+  const plain = await drag(0, -80, false);
+  expect(plain.held).toBe(false); // without lift, wheels never lift
+});
