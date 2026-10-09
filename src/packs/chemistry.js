@@ -8,6 +8,7 @@
 import { mix, shade, quatFromTo, quatAxisAngle } from "../kit.js";
 import { BITMAP } from "../font.js";
 import { ELEMENT_LIST, elementOf, fillOrder, packNucleus } from "../chem/atom-model.js";
+import { surfacePoints } from "../physics/world.js"; // lane Hands-on H5
 
 const TAU = Math.PI * 2;
 
@@ -472,6 +473,35 @@ export const RECIPES = {
         licenseUrl: "https://www.ncbi.nlm.nih.gov/home/about/policies/",
       },
     ],
+    // Hands-on (lane Hands-on H5): pull the shown element's tile out of
+    // its slot (it comes free with a click and is carried level), set it
+    // down, and bring it back to its slot: it glides in and holds fast
+    // again. (Tap another tile first to pick which one.)
+    hands: {
+      // (The table the board stands on, under its bottom edge.)
+      floor: () => BOARD_LO[1],
+      area: 1.2,
+      pieces: (d) =>
+        d?.tileAt
+          ? [
+              {
+                part: "tile",
+                pos: [d.tileAt[0], d.tileAt[1], DEPTH / 2],
+                solid: { type: "box", half: [TILE / 2, TILE / 2, DEPTH / 2] },
+                points: surfacePoints({ type: "box", half: [TILE / 2, TILE / 2, DEPTH / 2] }, 2),
+                radius: 0.01,
+                pick: [TILE / 2 + 0.05, TILE / 2 + 0.05, DEPTH],
+                mass: 1,
+                friction: 0.6,
+                restitution: 0.2,
+              },
+            ]
+          : [],
+      joints: (d) =>
+        d?.tileAt
+          ? [{ type: "break", part: "tile", at: [d.tileAt[0], d.tileAt[1], 0], pull: 0.035, give: 0.006, reseat: { snap: 0.06 }, steady: true }] // prettier-ignore
+          : [],
+    },
     // Points for the clip tool and the tests: an element's tile, the atom.
     tileAt: (symbol) => {
       const t = TILE_OF.get(symbol);
@@ -898,6 +928,7 @@ export const RECIPES = {
         electrons: Z,
         shellCounts: counts.slice(),
         home: sub([home.pos[0], home.pos[1], DEPTH], ATOM_AT),
+        tileAt: [home.pos[0], home.pos[1], DEPTH], // (lane Hands-on H5)
         shells: L.shellR,
         shellStarts,
         jumpShell,
