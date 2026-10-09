@@ -915,21 +915,69 @@ const PART_EFFECTS = {
 const BIKE_DIR = unit([-0.359, 0, 0.933]);
 // Fitted to the tires' dark splats (tools/pr3-measure.mjs): a tire reaches about 0.35 from its hub.
 const WHEELS = { wf: [-0.285, -0.144, 0.28], wr: [0.072, -0.129, -0.552] };
+// The pads on its top tube and handlebar crossbar carried a brand name in red-to-yellow letters,
+// printed on both sides (CLAUDE.md: no brand names; the Operator's call of October 9, 2026): a
+// plain black foam sleeve, kit-built, covers each pad just over its letters. Each pad's axis is its
+// letters' long direction and its center their centroid, as they wrap both sides
+// (tools/pr3-measure.mjs). The same name in orange and dark red on the chrome down tube is hidden
+// by its colors within a box round it (BIKE_DECAL).
+const BIKE_PADS = [
+  { at: [-0.101, 0.178, -0.058], axis: unit([0.301, -0.231, -0.925]), half: 0.115, r: 0.036 },
+  { at: [-0.114, 0.482, 0.242], axis: unit([0.912, -0.125, 0.39]), half: 0.16, r: 0.034 },
+];
+const BIKE_DECAL = [{ at: [-0.159, 0.076, 0.067], r: [0.07, 0.1, 0.19], color: "#b37a35", tol: 0.4, soft: 0.01, over: true }, { at: [-0.159, 0.076, 0.067], r: [0.07, 0.1, 0.19], color: "#8a2a1a", tol: 0.3, soft: 0.01, over: true }]; // prettier-ignore
+function bikePads(k, count) {
+  const per = Math.round(count / BIKE_PADS.length);
+  for (const pad of BIKE_PADS) {
+    const a = pad.axis;
+    const u = unit(cross(a, Math.abs(a[1]) < 0.9 ? [0, 1, 0] : [1, 0, 0]));
+    const v = cross(a, u);
+    const len = 2 * pad.half;
+    const around = Math.max(12, Math.round(Math.sqrt((per * TAU * pad.r) / len)));
+    const along = Math.ceil(per / around);
+    const size = Math.sqrt((TAU * pad.r * len) / per) * 1.1;
+    k.cloud({ share: per / k.count, pattern: false }, (_r, i) => {
+      const row = Math.floor(i / around);
+      const th = ((i % around) + 0.5 * (row % 2)) * (TAU / around);
+      const t = -pad.half + ((row + 0.5) / along) * len;
+      const n = [0, 1, 2].map((j) => Math.cos(th) * u[j] + Math.sin(th) * v[j]);
+      return {
+        p: [0, 1, 2].map((j) => pad.at[j] + a[j] * t + n[j] * pad.r),
+        n,
+        flat: 0.5,
+        jitter: 0,
+        opacity: 1,
+        size: size / 0.01,
+        color: shade("#161616", 0.92 + 0.08 * k.noise.fbm(t * 60, th * 3, 0.3, 2)),
+      };
+    });
+  }
+}
 function bikeRig(rig) {
   const secs = 2.6;
   const frame = [-0.1, 0.13, -0.16];
   const contact = [(WHEELS.wf[0] + WHEELS.wr[0]) / 2, -0.47, (WHEELS.wf[2] + WHEELS.wr[2]) / 2];
+  const padCount = 8000;
   return {
     ...rig,
+    addon: {
+      count: rig.addon.count + padCount,
+      build(k) {
+        rig.addon.build(k);
+        bikePads(k, padCount);
+      },
+    },
     hard: true,
     parts: [
       ...rig.parts,
+      { name: "decal", pivot: contact, regions: BIKE_DECAL },
       { name: "bike", pivot: contact, regions: [{ at: frame, r: [0.75, 0.57, 0.95], soft: 0.01 }, ...Object.values(WHEELS).map((at) => ({ at: [at[0], at[1] + 0.075, at[2]], r: [0.37, 0.37, 0.37], soft: 0.01 }))] }, // prettier-ignore
     ],
     controls: [pulse("hop", "Nudge", secs)],
     action: { key: "hop", label: "Nudge" },
     drive(t, c, out, info) {
       out.parts.under = { visible: 0 };
+      out.parts.decal = { visible: 0 };
       const e = since(c, "hop", secs);
       if (e < 0) return;
       // Toward its kickstand side and back, a damped rock that settles on the stand.
