@@ -629,13 +629,15 @@ export class Joints {
       if (j.type === "dial") j.w *= Math.exp(-(d.drag ?? 0.8) * dt);
       j.v += j.w * dt;
     }
-    // The stops. Lane Hands-on H5: `limits(info)` may narrow them as the
-    // toy stands now ([min, max] within the joint's own; a piece another
-    // blocks: a triangle that can't slide through its neighbor).
+    // The stops. Lane Hands-on H5: `limits(at)` may narrow them as the
+    // toy stands now ([min, max] within the joint's own; `at.joint(name)`
+    // reads another's value; a piece another blocks: a triangle that can't
+    // slide through its neighbor).
     let lo = j.min;
     let hi = j.max;
     if (d.limits) {
-      const [a, b] = d.limits(this.hands.info) || [];
+      const at = { joint: (n) => this.byName.get(n)?.v ?? null };
+      const [a, b] = d.limits(at) || [];
       // (Never past where it already was: a narrowed stop holds it there.)
       if (a !== undefined) lo = Math.max(lo, Math.min(a, v0));
       if (b !== undefined) hi = Math.min(hi, Math.max(b, v0));
