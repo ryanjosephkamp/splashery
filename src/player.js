@@ -308,6 +308,9 @@ export class Player {
       info.label = preset ? preset.label : shelf ? `${shelf.label}, edited` : "Your toy";
       info.kind = "procedural";
       info.generator = generator;
+      // A shelf shape may take a stretch like the gummy bear's (its shelf
+      // entry's `grab`; lane Hands-on H1).
+      if (preset?.grab) info.recipe = { grab: preset.grab };
       if (look) {
         info.options = { look: look.id };
         info.optionDefs = [lookOption(preset)];
