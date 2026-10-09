@@ -2857,12 +2857,79 @@ function tractorBuild(k, o) {
       },
     });
   };
+  // The big rear tires (the owner's notes of October 9, 2026: real ones):
+  // a squared-off tire whose chevron lugs stand out of its tread as solid
+  // bars, so they turn with the wheel instead of shimmering as paint, round
+  // a deep dished rim.
+  const rearTyre = (w, part) => {
+    const R = TRACTOR.rr;
+    const W = 0.19; // half its width
+    const lugH = 0.055;
+    const H = 0.125; // half its depth, rim to tread
+    const Rc = R - lugH - H;
+    // How much lug is at (u round, z across, t round the section).
+    const lug = (u, z, t) => {
+      const out = smoothstep(0.35, 0.7, Math.cos(t));
+      const f = (u * 24 + 0.55 * Math.abs(z / W) + (z < 0 ? 0.5 : 0)) % 1;
+      return out * smoothstep(0, 0.05, f) * smoothstep(0.5, 0.45, f) * smoothstep(0.08, 0.2, Math.abs(z / W)); // prettier-ignore
+    };
+    const sp = (x, p) => Math.sign(x) * Math.pow(Math.abs(x), p);
+    const tyre = k.param(
+      (u, v) => {
+        const a = TAU * u;
+        const t = TAU * v;
+        const z = W * sp(Math.sin(t), 0.35);
+        const rr = Rc + H * sp(Math.cos(t), 0.35) + lugH * lug(u, z, t);
+        return [rr * Math.cos(a), rr * Math.sin(a), z];
+      },
+      { grid: 192, thick: 0.03 },
+    );
+    k.add(tyre, {
+      even: true,
+      opacity: 1,
+      jitter: 0.008,
+      part,
+      pos: w,
+      flat: 0.3,
+      weight: 2.2,
+      pattern: false,
+      color: (c) => {
+        const t = TAU * c.v;
+        const z = W * sp(Math.sin(t), 0.35);
+        const l = lug(c.u, z, t);
+        return lit(mix("#1c1c1e", "#2f2f32", l), c);
+      },
+    });
+    // The rim: a dished cream disc on each side, its hub and its bolts.
+    k.add(evenCylinder(Rc - H * 0.55, Rc - H * 0.55, 2 * W * 0.92), {
+      even: true,
+      opacity: 1,
+      jitter: 0.01,
+      part,
+      pos: w,
+      rot: [90, 0, 0],
+      flat: 0.2,
+      pattern: false,
+      color: (c) => {
+        // The same cream as the front rims (unlit, as theirs).
+        if (c.s.side) return "#9a927f";
+        const rr = c.s.radial;
+        if (rr < 0.26) return shade("#e9dfc4", 0.8);
+        const bolt = Math.abs(rr - 0.42) < 0.05 && (c.u * 8) % 1 < 0.22;
+        const ring = Math.abs(rr - 0.78) < 0.04;
+        return shade("#e9dfc4", bolt ? 0.6 : ring ? 0.8 : 0.95 - 0.1 * rr);
+      },
+    });
+  };
   for (const [name, w, r, wid, zz] of [
     ["rear", TRACTOR.rear, TRACTOR.rr, 0.38, 0.58],
     ["front", TRACTOR.front, TRACTOR.fr, 0.2, 0.44],
   ]) {
     const part = k.part(name, { pivot: w, axis: [0, 0, 1] });
-    for (const z of [-zz, zz]) chevronTyre([w[0], w[1], z], r, wid, part);
+    for (const z of [-zz, zz]) {
+      if (name === "rear") rearTyre([w[0], w[1], z], part);
+      else chevronTyre([w[0], w[1], z], r, wid, part);
+    }
   }
   // Chassis, bonnet and grille.
   k.add(evenBox(1.9, 0.26, 0.44), {
@@ -3006,47 +3073,39 @@ function tractorBuild(k, o) {
     color: "#1e1e20",
   });
   rod(k, [-0.3, 1.45, 0], [-0.08, 1.1, 0], 0.02, { weight: 3, color: "#1e1e20" });
-  // Mudguards over the big wheels.
+  // Fenders over the big wheels: a curved top close over the tread (clear
+  // of the lugs), a lip turned down on the outside and a wall on the inside,
+  // so they read as one pressed steel piece and the tire's top never shows
+  // in the cab (the owner's notes of October 9, 2026).
+  const FR = TRACTOR.rr + 0.06;
+  const arc = (u) => Math.PI * (0.1 + 0.8 * u);
+  const at = (a, R, z) => [TRACTOR.rear[0] + Math.cos(a) * R, TRACTOR.rear[1] + Math.sin(a) * R, z];
+  const steel = { even: true, opacity: 1, jitter: 0.01, ...P, pattern: false };
   for (const s of [-1, 1]) {
-    const guard = k.param(
-      (u, v) => {
-        const a = Math.PI * (0.05 + 0.9 * u);
-        // Clear of the tyre's tread (the owner's note of October 9, 2026).
-        const R = TRACTOR.rr + 0.13;
-        return [
-          TRACTOR.rear[0] + Math.cos(a) * R,
-          TRACTOR.rear[1] + Math.sin(a) * R,
-          s * (0.36 + 0.44 * v),
-        ];
+    k.add(
+      k.param((u, v) => at(arc(u), FR, s * (0.35 + 0.47 * v)), { grid: 48, flip: s < 0 }),
+      {
+        ...steel,
+        weight: 2,
+        color: (c) => lit(col, c),
       },
-      { grid: 32, flip: s < 0 },
     );
-    k.add(guard, {
-      even: true,
-      opacity: 1,
-      jitter: 0.015,
-      ...P,
-      weight: 1.8,
-      color: (c) => lit(col, c),
-    });
-    // Its inner wall, so the tire's top never shows in the cab (the
-    // owner's second note of October 9, 2026).
-    const wall = k.param(
-      (u, v) => {
-        const a = Math.PI * (0.05 + 0.9 * u);
-        const R = 0.3 + (TRACTOR.rr + 0.13 - 0.3) * v;
-        return [TRACTOR.rear[0] + Math.cos(a) * R, TRACTOR.rear[1] + Math.sin(a) * R, s * 0.36];
+    k.add(
+      k.param((u, v) => at(arc(u), FR - 0.09 * v, s * 0.82), { grid: 48, flip: s < 0 }),
+      {
+        ...steel,
+        weight: 1.4,
+        color: (c) => lit(shade(col, 0.92), c),
       },
-      { grid: 32, flip: s > 0 },
     );
-    k.add(wall, {
-      even: true,
-      opacity: 1,
-      jitter: 0.015,
-      ...P,
-      weight: 1.2,
-      color: (c) => lit(shade(col, 0.85), c),
-    });
+    k.add(
+      k.param((u, v) => at(arc(u), 0.3 + (FR - 0.3) * v, s * 0.35), { grid: 40, flip: s > 0 }),
+      {
+        ...steel,
+        weight: 1.2,
+        color: (c) => lit(shade(col, 0.85), c),
+      },
+    );
   }
   shadow(k, 0.004, 1.45, 0.95);
 }
@@ -3518,7 +3577,8 @@ export const RECIPES = {
     controls: [{ key: "beep", label: "Stop", type: "pulse", ease: 4.5 }],
     action: { key: "beep", label: "Stop for passengers" },
     // Hands-on (lane Hands-on H4): push it and it rolls on its turning wheels.
-    hands: { wheels: { axle: [0, 0, 1], r: 0.3, parts: ["front", "rear"] } },
+    // (`lift`: a drag straight up picks it up, as at Level 1.)
+    hands: { wheels: { axle: [0, 0, 1], r: 0.3, parts: ["front", "rear"], lift: true } },
     drive(t, c, out) {
       // A bus stop: the lights flash, the stop arm swings out and the doors
       // open; then everything folds away again.
