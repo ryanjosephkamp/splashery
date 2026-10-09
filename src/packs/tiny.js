@@ -300,13 +300,46 @@ function dnaJoints(d) {
   return [
     grip({ name: "unzip", axis: [1, 0, 0], max: DNA.pull, spring: 6, damping: 2.2, pos: top, pick: [0.75, 0.55, 0.75], also: (v, parts) => {
       const u = v / DNA.pull;
-      d.h4 = { ...d.h4, u };
-      const live = d.h4?.twist ?? 0;
-      const face = Math.round(live / Math.PI) * Math.PI - live;
-      const twist = live + face * smoothstep(0, 0.35, u);
-      Object.assign(parts, dnaParts(twist, u, DNA.open * DNA.peel));
+      const h = (d.h4 = { ...d.h4, u });
+      Object.assign(parts, dnaParts(dnaTurn(h, u), u, DNA.open * DNA.peel));
     } }), // prettier-ignore
   ];
+}
+
+// The DNA's turn while the hand has it (lane Hands-on H4): as a pull opens
+// it, the helix turns (at most a quarter turn) so the fork opens across the
+// view, and while it is open it stops spinning. That turn is kept when it
+// zips back (the strands stay on their sides: the owner's note of October
+// 9, 2026), and the helix spins on from there. `h` is the build's shared
+// state (`twist`, the drive's own turn); returns the turn to draw.
+function dnaTurn(h, u) {
+  const live = h.twist ?? 0;
+  let last = h.last ?? live;
+  h.last = live;
+  h.off ??= 0;
+  if (!h.pulling && u > 0.05) {
+    const at = live + h.off;
+    h.pulling = true;
+    h.goal = Math.round(at / Math.PI) * Math.PI - at;
+    h.prog = 0;
+    last = live;
+  }
+  if (h.pulling) {
+    h.prog = Math.max(h.prog, smoothstep(0, 0.35, u));
+    h.off -= (live - last) * smoothstep(0, 0.25, u); // open, it doesn't spin
+    if (u < 0.005) {
+      h.off += h.goal * h.prog;
+      h.pulling = false;
+      h.goal = 0;
+      h.prog = 0;
+    }
+  }
+  return dnaHandsTwist(h);
+}
+
+// The drive's turn plus what the hand has turned it (above).
+function dnaHandsTwist(h) {
+  return (h.twist ?? 0) + (h.off ?? 0) + (h.goal ?? 0) * (h.prog ?? 0);
 }
 
 // The chromosome's sister chromatids pulled apart at the waist (the tap's
@@ -1560,7 +1593,7 @@ export const RECIPES = {
       const d = info.data;
       if (d) d.h4 = { ...d.h4, twist: t * 0.35 };
       if (info.hands?.moved && d?.h4?.u !== undefined) u = Math.max(u, d.h4.u);
-      Object.assign(out.parts, dnaParts(t * 0.35, u));
+      Object.assign(out.parts, dnaParts(d ? dnaHandsTwist(d.h4) : t * 0.35, u));
       out.grow = u * 1.05;
     },
     build(k, o) {
