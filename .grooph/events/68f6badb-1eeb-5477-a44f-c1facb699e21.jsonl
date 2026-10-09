@@ -1,0 +1,3 @@
+{"v":1,"t":"2026-10-09T20:06:23.421Z","harness":"claude-code","event":"session-start","session":"68f6badb-1eeb-5477-a44f-c1facb699e21","cwd":"splashery"}
+{"v":1,"t":"2026-10-09T20:06:23.576Z","harness":"claude-code","event":"turn-start","session":"68f6badb-1eeb-5477-a44f-c1facb699e21","cwd":"splashery"}
+{"v":1,"t":"2026-10-09T20:06:28.263Z","harness":"claude-code","event":"tool","session":"68f6badb-1eeb-5477-a44f-c1facb699e21","tool":"Bash","cwd":"splashery"}
