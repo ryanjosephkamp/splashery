@@ -110,7 +110,7 @@ test("pearl: the pearl lifts out of its shell, and clicks back into its place", 
   expect(dist(back.pos, back.home)).toBeLessThan(0.01);
 });
 
-test("crystal ball: lifted off its stand, it rolls on the table; brought back, it settles in its cup", async ({
+test("crystal ball: lifted off its stand, it rolls off the stand's base onto the table; brought back, it settles in its cup", async ({
   page,
 }) => {
   await ready(page, "crystal-ball");
@@ -128,6 +128,8 @@ test("crystal ball: lifted off its stand, it rolls on the table; brought back, i
   // On the table (its radius above the floor), off its stand.
   expect(rest.pos[1]).toBeLessThan(0.2);
   expect(dist(rest.pos, rest.home)).toBeGreaterThan(0.6);
+  // Clear of the stand's base (a fixed piece): never sunk into it.
+  expect(Math.hypot(rest.pos[0], rest.pos[2])).toBeGreaterThan(1.7);
   await finger(page, [rest.pos, [0.5, 1.3, 0.3], [home[0] + 0.1, home[1] + 0.2, home[2] + 0.1]], { steps: 10 }); // prettier-ignore
   await tick(page, 1.5);
   const back = await piece(page, 0);

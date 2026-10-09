@@ -1405,7 +1405,7 @@ export const RECIPES = {
     // bring it back over the stand and it settles into its cup.
     hands: {
       floor: -1,
-      area: 1.7,
+      area: 2.4,
       touch: true,
       pieces: () => [
         {
@@ -1419,6 +1419,9 @@ export const RECIPES = {
           restitution: 0.1,
           material: { mass: 1.5, r: 0.05, bounce: 0.15, roll: 0.012, friction: 0.6 },
         },
+        // The stand's base (lane Hands-on H1's fixed piece), up to just under
+        // the ball: set down beside it, the ball rests against it.
+        { fixed: true, pos: [0, -0.9, 0], solid: { type: "ellipsoid", r: [0.8, 0.24, 0.8] } },
       ],
       joints: () => [{ type: "socket", part: "ball", snap: 0.35, armAway: 0.6 }],
     },
