@@ -800,6 +800,12 @@ function fpPen(s) {
 // paper: the owner's note of October 8, 2026.)
 const FP_CAP = { type: "ellipsoid", r: [0.48, 0.07, 0.07] };
 const FP_BODY = { type: "box", half: [0.97, 0.06, 0.06] };
+// The cap's place by hand, coarsely (null at home), and whether it moved
+// enough to sort the splats again: splats sort in the pose they were built
+// in, so a cap set down on the paper in front of the pen sorted as if still
+// on the nib, and the paper drew over it (the owner's note: the cap went
+// under the paper).
+const FP_HAND = { key: null, resort: false };
 
 const FOUNTAIN_PEN = {
   alive: false,
@@ -823,6 +829,12 @@ const FOUNTAIN_PEN = {
         give: 0.02,
         // (Held as it was pulled off, never hanging down past the paper.)
         steady: true,
+        also: (v, parts) => {
+          const p = parts.cap;
+          const key = p ? [...(p.offset || []).map((x) => Math.round(x / 0.03)), ...(p.quat || []).map((x) => Math.round(x * 10))].join() : null; // prettier-ignore
+          if (key !== FP_HAND.key) FP_HAND.resort = true;
+          FP_HAND.key = key;
+        },
         reseat: {
           snap: 0.25,
           seats: [{ pos: [2 * FP.post - FP.capC[0] - 0.12, FP.capC[1], FP.capC[2]], quat: quatAxisAngle([0, 1, 0], Math.PI) }], // prettier-ignore
@@ -881,6 +893,11 @@ const FOUNTAIN_PEN = {
     const dry = seg(s, 2.25, 3.3) * (1 - back);
     out.morph = [wet * 1.02, dry * 1.02, 0, 0];
     sortWhileMoving(out, info, s, on && s < FP.T, 0.06);
+    // By hand: sorted again as the cap moves (lane Hands-on H3).
+    if (FP_HAND.resort) {
+      out.resortPose = true;
+      FP_HAND.resort = false;
+    }
   },
   build(k) {
     const scan = SCANS.get("fountain-pen");
