@@ -295,6 +295,23 @@ export class HandsOn {
     return [-A, A, -A, A];
   }
 
+  // The walls a held piece's middle stays within: with `walls`, far
+  // enough in that all of it does (by its `pick` box, as it is turned).
+  inWalls(b) {
+    const w = this.walls();
+    const pc = this.info.recipe.hands.walls && this.pieces.find((p) => p.body === b);
+    if (!pc?.def.pick) return w;
+    const [px, py, pz] = pc.def.pick;
+    const ax = quat.rotate(b.q, [1, 0, 0]);
+    const ay = quat.rotate(b.q, [0, 1, 0]);
+    const az = quat.rotate(b.q, [0, 0, 1]);
+    const ex = Math.abs(ax[0]) * px + Math.abs(ay[0]) * py + Math.abs(az[0]) * pz;
+    const ez = Math.abs(ax[2]) * px + Math.abs(ay[2]) * py + Math.abs(az[2]) * pz;
+    const fit = (lo, hi, e) =>
+      hi - lo > 2 * e ? [lo + e, hi - e] : [(lo + hi) / 2, (lo + hi) / 2];
+    return [...fit(w[0], w[1], ex), ...fit(w[2], w[3], ez)];
+  }
+
   buildPieces(hands) {
     const info = this.info;
     this.mode = "pieces";
@@ -595,7 +612,7 @@ export class HandsOn {
         n = p;
       }
     }
-    const [x0, x1, z0, z1] = this.walls();
+    const [x0, x1, z0, z1] = this.inWalls(b);
     const tf = ray.dir[1] < -1e-4 ? (fl - ray.origin[1]) / ray.dir[1] : Infinity;
     const pf = tf < Infinity ? v3.add(ray.origin, v3.scale(ray.dir, tf)) : null;
     const inside = pf && pf[0] >= x0 && pf[0] <= x1 && pf[2] >= z0 && pf[2] <= z1;
@@ -612,7 +629,7 @@ export class HandsOn {
       const dd = v3.dot(d, d) || 1;
       const t = -((ray.origin[0] - c[0]) * d[0] + (ray.origin[2] - c[2]) * d[2]) / dd;
       p = v3.add(ray.origin, v3.scale(ray.dir, t));
-      h.target = [Math.max(-lim, Math.min(lim, p[0])), Math.max(fl + 0.1 * R, Math.min(fl + 5 * R, p[1])), Math.max(-lim, Math.min(lim, p[2]))]; // prettier-ignore
+      h.target = [Math.max(x0, Math.min(x1, p[0])), Math.max(fl + 0.1 * R, Math.min(fl + 5 * R, p[1])), Math.max(z0, Math.min(z1, p[2]))]; // prettier-ignore
       return;
     }
     const def = this.pieces.find((pc) => pc.body === b)?.def;
@@ -663,7 +680,7 @@ export class HandsOn {
     }
     top = u.y;
     const y = top + below + (this.info.recipe.hands.lift ?? 0.06 * R);
-    h.target = [Math.max(-lim, Math.min(lim, p[0])), Math.min(fl + 5 * R, y), Math.max(-lim, Math.min(lim, p[2]))]; // prettier-ignore
+    h.target = [Math.max(x0, Math.min(x1, p[0])), Math.min(fl + 5 * R, y), Math.max(z0, Math.min(z1, p[2]))]; // prettier-ignore
   }
 
   // The piece under a point: the one whose shape (the piece's `pick`
@@ -673,6 +690,9 @@ export class HandsOn {
     let best = null;
     let bd = Infinity;
     for (const pc of this.pieces) {
+      // (A fixed piece, mass 0, is never picked up: it is there for others
+      // to be set down on, by its `pick` shape. Lane Hands-on H2.)
+      if (pc.def.mass === 0) continue;
       const b = pc.body;
       const l = b.toLocal(p);
       const r = pc.def.pick || [b.bound, b.bound, b.bound];
@@ -1029,6 +1049,10 @@ export class HandsOn {
         this.restSorted = asleep;
         player.motion.handsResort = true;
       }
+      // (Lane Hands-on H2: once more when the last moved piece is home, so
+      // a slice clicked back in isn't drawn in the order it had outside.)
+      if (!out.length && this.hadOut) player.motion.handsResort = true;
+      this.hadOut = out.length > 0;
       if (!asleep) this.restSorted = false;
     }
   }

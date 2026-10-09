@@ -818,6 +818,9 @@ Lane Hands-on H2 (October 8, 2026) added these keys to a piece's def:
 - `offHome: { … }`: entries merged into the piece's part while it is off its place (a candle pulled
   out of the cake goes out: `{ visible: 0 }`).
 - `flip: true` (below).
+- `mass: 0`: a fixed piece. It is never picked up, and its `pick` shape is something to set other
+  pieces down on (the croissant's bottom half, the egg's cup and toast soldiers): a held piece
+  passes through anything it doesn't hover over.
 
 And `hands.foot` (0.6): how far out from its middle, as a share of its pick radius, a held piece
 looks for what is under it; 0.95 lets a wide piece (a burger's bun) set down beside a stack sit on
@@ -908,7 +911,11 @@ sends (a dancer that the crank turns; it works for every joint type, with its va
 
 **Socket**: a loose piece (in `hands.pieces`, or made here with `solid`) that clicks back into the
 place it was built in: once it has been taken out, bringing it within `snap` toy radii (0.3) of its
-place, or pointing the finger at its place, glides it home and locks it there.
+place, or pointing the finger at its place, glides it home and locks it there. `out` (a vector, in
+recipe units) is its doorway, the way it comes out and goes in when other things fit round it (a
+melon's slice, straight up out of its slot): taken from its place it slides along `out`, held as
+built, and is free past its end; let go before that, it slides back in; and brought back, it glides
+to the doorway's mouth and then straight in.
 
 ```js
 pieces: (d) => d.wedges.map((w) => ({ token: w.token, pos: w.mid, quat: w.q, solid: WEDGE, points: surfacePoints(WEDGE, 1), pick: [0.3, 0.4, 0.3] })),
