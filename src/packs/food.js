@@ -899,7 +899,9 @@ export const RECIPES = {
         }
         return out;
       },
-      joints: (d) => (d?.slices || []).map((_, i) => ({ type: "socket", token: i, snap: 0.3 })),
+      // Each slice comes out of its slot, and goes back in, straight up
+      // (never through the melon: the owner's mark).
+      joints: (d) => (d?.slices || []).map((sl, i) => ({ type: "socket", token: i, snap: 0.3, out: [0, 2 * sl.r + 0.08, 0] })), // prettier-ignore
       sound: (hit, vol) => ({ voice: "squish", pitch: 1.1, decay: 0.3, vol: vol * 0.6 }),
     },
     // A tap brings down a big knife: it chops the whole melon five times,
@@ -1911,6 +1913,10 @@ export const RECIPES = {
             mass: 0.6,
             flip: true,
           })),
+        ).map((p) =>
+          // Its syrup and butter ride it, hidden while it lies upside down
+          // (under it): the owner's mark (they showed through it).
+          p.part === "top" ? { ...p, ride: [{ part: "syrup", upside: { visible: 0 } }] } : p,
         ),
       ],
       sound: (hit, vol) => ({ voice: "squish", pitch: 1.2, decay: 0.2, vol: vol * 0.5 }),
@@ -1923,6 +1929,7 @@ export const RECIPES = {
         offset: [0, 0.6 * lift, 0],
         quat: quatAxisAngle([1, 0, 0.25], TAU * easeInOut(s < 1 ? s : 0)),
       };
+      out.parts.syrup = out.parts.top; // (lane Hands-on H2: its syrup and butter)
     },
     build(k, o) {
       const n = clamp(Math.round(o.count), 2, 7);
@@ -1970,6 +1977,8 @@ export const RECIPES = {
         [0, T / 2],
       ];
       const top = k.part("top", { pivot: [0, 0.02 + (n - 0.5) * T * 0.93, 0], axis: [1, 0, 0] });
+      // (Lane Hands-on H2: its butter and syrup, moved with it.)
+      const syrupPart = k.part("syrup", { pivot: [0, 0.02 + (n - 0.5) * T * 0.93, 0], axis: [1, 0, 0] }); // prettier-ignore
       // Lane Hands-on H2: each pancake under the top one is a part of its
       // own (still, until Hands-on lifts it), so it can be picked up.
       const cakeY = (i) => 0.02 + (i + 0.5) * T * 0.93;
@@ -2029,7 +2038,7 @@ export const RECIPES = {
         jitter: 0.008,
         pos: [0.04, topY + 0.045, -0.02],
         rot: [3, 28, -4],
-        part: top,
+        part: syrupPart,
         flat: 0.25,
         weight: 2,
         pattern: false,
@@ -2067,7 +2076,7 @@ export const RECIPES = {
         {
           even: true,
           jitter: 0.015,
-          part: top,
+          part: syrupPart,
           flat: 0.2,
           opacity: 0.92,
           pattern: false,
@@ -2108,7 +2117,7 @@ export const RECIPES = {
             // (Lane Hands-on H2: on the pancake it runs down.)
             part: (c) =>
               c.p[1] > topY - T
-                ? top
+                ? syrupPart
                 : under[clamp(Math.floor((c.p[1] - 0.02) / (T * 0.93)), 0, n - 2)],
             kind: "grow",
             params: (c) => [0.05 + 0.9 * (c.t ?? 0) * (d.L / 0.73), 0],
@@ -3195,7 +3204,9 @@ export const RECIPES = {
     // back; brought close to its place, it settles home.
     hands: {
       floor: -0.33, // the baking paper
-      area: 1.3,
+      // The baking tray's edges (toy radii), so the lid can't be dragged off
+      // it and through its rim: the owner's mark.
+      walls: [-1, 1, -0.74, 0.56],
       pieces: () => [
         {
           part: "lid",
@@ -3208,6 +3219,8 @@ export const RECIPES = {
           friction: 0.9,
           restitution: 0.05,
         },
+        // Its bottom half, fixed, for the lid to lie on (not through it).
+        ...hh2Fixed([{ pos: [0, -0.18, 0.14], solid: { type: "box", half: [0.85, 0.15, 0.34] } }]),
       ],
       joints: () => [{ type: "socket", part: "lid", snap: 0.35 }],
       sound: (hit, vol) => ({ voice: "thud", f: 170, bright: 0.2, decay: 0.4, vol: vol * 0.5 }),
@@ -4577,14 +4590,15 @@ export const RECIPES = {
     hands: {
       floor: -0.97,
       area: 1.3,
+      foot: 0.95, // (it finds the narrow toast soldiers under its rim)
       pieces: () => {
         // A shell dome: points round its rim and over its top, so it sits on
         // its rim or rocks on its dome.
         const points = [];
-        for (let i = 0; i < 4; i++)
-          for (let j = 0; j < 10; j++) {
-            const th = (i / 3) * (Math.PI / 2);
-            const ph = (j / 10) * TAU;
+        for (let i = 0; i < 6; i++)
+          for (let j = 0; j < 16; j++) {
+            const th = (i / 5) * (Math.PI / 2);
+            const ph = (j / 16) * TAU;
             points.push([0.41 * Math.sin(th) * Math.cos(ph), 0.4 * Math.cos(th) - 0.2, 0.41 * Math.sin(th) * Math.sin(ph)]); // prettier-ignore
           }
         return [
@@ -4599,6 +4613,14 @@ export const RECIPES = {
             friction: 0.7,
             restitution: 0.15,
           },
+          // The egg in its cup and the two toast soldiers, fixed, so the cap
+          // lies on them and never passes through them: the owner's mark.
+          ...hh2Fixed([
+            { pos: [0, 0.12, 0], solid: { type: "cylinder", r: 0.44, h: 0.17 } },
+            { pos: [0, -0.27, 0], solid: { type: "cylinder", r: 0.54, h: 0.23 } },
+            { pos: [0, -0.9, 0], solid: { type: "cylinder", r: 0.44, h: 0.07 } },
+            ...[0, 1].map((i) => ({ pos: [0.8 + i * 0.28, -0.56 + i * 0.02, 0.2 - i * 0.25], quat: quatEuler(0, 20 + i * 15, -16 + i * 7), solid: { type: "box", half: [0.11, 0.43, 0.1] } })), // prettier-ignore
+          ]),
         ];
       },
       joints: () => [{ type: "socket", part: "cap", snap: 0.35 }],
@@ -5322,8 +5344,11 @@ export const RECIPES = {
           return {
             token: bn.body,
             // Its peel strips ride with it; its pale insides stay hidden.
+            // (A solid core shows only while it is off the bunch, so the
+            // thin skin doesn't look see-through on its own: the owner's mark.)
             ride: [
               ...bn.strips.flatMap((st) => [st.a, st.b]),
+              { token: bn.core, visible: 1 },
               ...[bn.fruit, ...bn.strips.flatMap((st) => [st.ia, st.ib])].map((t) => ({ token: t, visible: 0 })), // prettier-ignore
             ],
             pos: mid,
@@ -5371,6 +5396,7 @@ export const RECIPES = {
         // (lane Fix7: at rest they glinted through the skin as specks).
         const open = on && s > bn.t0 - 0.02 && s < 3.6 ? 1 : 0;
         out.tokens[bn.fruit] = { ...out.tokens[bn.body], visible: open };
+        out.tokens[bn.core] = { visible: 0 };
         bn.strips.forEach((st, j) => {
           const t0 = bn.t0 + 0.12 * j;
           const fa = on ? easeOut(band(s, t0, t0 + 0.5)) * (1 - close) : 0;
@@ -5499,6 +5525,23 @@ export const RECIPES = {
           pattern: false,
           color: fruitColor,
         });
+        // (Lane Hands-on H2: a solid core and a cap on the broken neck,
+        // shown only once the banana is pulled off its bunch.)
+        const core = tok++;
+        k.add(
+          k.param((u, v) => around(0.02 + v * 0.95, u * TAU, rad(0.02 + v * 0.95) * 0.86).p, {
+            grid: 56,
+            normal: (u, v) => around(0.02 + v * 0.95, u * TAU, 1).d,
+          }),
+          { ...piece(core), flat: 0.3, weight: 1.4, pattern: false, color: (c) => lit(c, "#d9b52e", 0.8, 0.2) }, // prettier-ignore
+        );
+        k.add(
+          k.param((u, v) => around(0.02, u * TAU, rad(0.02) * 0.86 * v).p, {
+            grid: 12,
+            normal: () => mul(shape.frame(0).t, -1),
+          }),
+          { ...piece(core), flat: 0.3, weight: 2, color: (c) => lit(c, "#b9c47a") },
+        );
         const strips = [];
         for (let j = 0; j < 3; j++) {
           const a0 = (j / 3) * TAU + 0.35;
@@ -5551,7 +5594,7 @@ export const RECIPES = {
         }
         // (Lane Hands-on H2: points along its middle, for its piece.)
         const line = [0.08, 0.3, 0.5, 0.7, 0.92].map((t) => toW(arc(t)));
-        list.push({ body, fruit: inside, neck: toW(arc(0)), strips, line, ...moves[i] });
+        list.push({ body, fruit: inside, core, neck: toW(arc(0)), strips, line, ...moves[i] });
         k.reach(add(toW(arc(1)), [0, 0.3, 0]));
         k.reach(add(toW(arc(0.9)), [0, -0.45, moves[i].away[2]]));
       });
@@ -6986,6 +7029,16 @@ const POPS = [];
 // token), a flat cylinder from `y0` to `y1` of radius `r`, turned about its
 // part's pivot. They start free, so lifting one out of the middle lets the
 // ones above it drop onto what is left.
+// Fixed pieces (lane Hands-on H2): what a held piece is set down on and
+// never passes through (an egg's cup, toast soldiers). Never picked up.
+function hh2Fixed(list) {
+  return list.map((f) => {
+    const so = f.solid;
+    const pick = so.type === "box" ? so.half : so.type === "cylinder" ? [so.r, so.h, so.r] : so.r;
+    return { ...f, points: surfacePoints(so, 1), pick, mass: 0 };
+  });
+}
+
 function hh2Layers(list, opts = {}) {
   return list.map((L) => {
     const h = (L.y1 - L.y0) / 2;

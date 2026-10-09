@@ -318,10 +318,11 @@ test("bananas: one pulled bends at its neck, then breaks off whole with its skin
   const js = await joints(page);
   expect(js.filter((j) => j.broken).length).toBe(1);
   const toks = await page.evaluate(() => window.__splashery.player.motion.handsTokens);
-  // Its body and its six skin strips move together; its pale insides stay hidden.
+  // Its body, its six skin strips and its solid core move together; its pale
+  // insides stay hidden.
   const moved = toks.filter((t) => t.token.visible !== 0);
   const hidden = toks.filter((t) => t.token.visible === 0);
-  expect(moved.length).toBe(7);
+  expect(moved.length).toBe(8);
   expect(hidden.length).toBe(7);
   for (const t of moved) expect(t.token.offset).toEqual(moved[0].token.offset);
   await reset(page);
