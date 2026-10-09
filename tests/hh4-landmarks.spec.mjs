@@ -138,7 +138,8 @@ test("leaning tower: the two balls, lifted together and let go, land together", 
     for (let i = 0; i < 200 && land.includes(null); i++) {
       tick(1);
       [b0, b1].forEach((b, j) => {
-        if (land[j] === null && b.pos[1] - b.solid.r < 0.02 + 0.01) land[j] = i;
+        // (Landed: its fall turned into a bounce.)
+        if (land[j] === null && b.vel[1] > 0 && b.pos[1] < 0.5) land[j] = i;
       });
     }
     tick(120);
