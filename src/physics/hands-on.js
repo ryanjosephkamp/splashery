@@ -690,6 +690,9 @@ export class HandsOn {
     let best = null;
     let bd = Infinity;
     for (const pc of this.pieces) {
+      // (A fixed piece, mass 0, is never picked up: it is there for others
+      // to be set down on, by its `pick` shape. Lane Hands-on H2.)
+      if (pc.def.mass === 0) continue;
       const b = pc.body;
       const l = b.toLocal(p);
       const r = pc.def.pick || [b.bound, b.bound, b.bound];
