@@ -2911,12 +2911,13 @@ function tractorBuild(k, o) {
       flat: 0.2,
       pattern: false,
       color: (c) => {
-        if (c.s.side) return lit("#cfc6aa", c);
+        // The same cream as the front rims (unlit, as theirs).
+        if (c.s.side) return "#9a927f";
         const rr = c.s.radial;
-        if (rr < 0.26) return lit("#bdb497", c);
+        if (rr < 0.26) return shade("#e9dfc4", 0.8);
         const bolt = Math.abs(rr - 0.42) < 0.05 && (c.u * 8) % 1 < 0.22;
         const ring = Math.abs(rr - 0.78) < 0.04;
-        return lit(shade("#e9dfc4", bolt ? 0.62 : ring ? 0.82 : 0.97 - 0.12 * rr), c);
+        return shade("#e9dfc4", bolt ? 0.6 : ring ? 0.8 : 0.95 - 0.1 * rr);
       },
     });
   };
