@@ -1457,7 +1457,7 @@
     "u": "toys/molecule/",
     "k": "toy",
     "s": "Atoms",
-    "d": "Tap it to heat it up. Pick a molecule, or type your own, in the Toy tab.",
+    "d": "Tap it to heat it up. Hands-on: pull an atom; its bonds stretch and it springs back.",
     "w": "molecule atoms atoms ball stick water caffeine benzene methane ethanol buckyball chemistry smiles formula mol sdf molecule",
     "i": "../assets/toys/molecule/thumb.webp"
   },
@@ -1466,7 +1466,7 @@
     "u": "toys/protein/",
     "k": "toy",
     "s": "Atoms",
-    "d": "Tap it to pull it apart. Pick a protein, or open your own file, in the Toy tab.",
+    "d": "Tap to pull it apart. Hands-on: pull a helix out of the fold; let go and it folds back.",
     "w": "protein atoms atoms protein pdb ribbon helix strand ubiquitin insulin gfp hemoglobin biology chemistry protein",
     "i": "../assets/toys/protein/thumb.webp"
   },
@@ -1475,7 +1475,7 @@
     "u": "toys/crystal-lattice/",
     "k": "toy",
     "s": "Atoms",
-    "d": "Tap to send a wave through it. Pick one of eleven crystals in the Toy tab.",
+    "d": "Tap to send a wave through it. Hands-on: push a slice up or down; it springs back.",
     "w": "crystal lattice atoms atoms salt diamond graphite ice crystal structure atoms chemistry crystal-lattice",
     "i": "../assets/toys/crystal-lattice/thumb.webp"
   },
@@ -1560,7 +1560,7 @@
     "u": "toys/amethyst-geode/",
     "k": "toy",
     "s": "Gems",
-    "d": "Tap to close the geode; tap again to open it.",
+    "d": "Tap to open or close it. Hands-on: swing the front half open or shut by hand.",
     "w": "amethyst geode gems gems gem crystal purple rock cave open quartz mineral amethyst-geode",
     "i": "../assets/toys/amethyst-geode/thumb.webp"
   },
@@ -1596,7 +1596,7 @@
     "u": "toys/pearl/",
     "k": "toy",
     "s": "Gems",
-    "d": "Tap to close the oyster; tap again to open it.",
+    "d": "Tap to open or close the oyster. Hands-on: lift the pearl out, then put it back.",
     "w": "pearl gems gems gem jewel oyster shell lustre sea open pearl",
     "i": "../assets/toys/pearl/thumb.webp"
   },
@@ -1614,7 +1614,7 @@
     "u": "toys/eye/",
     "k": "toy",
     "s": "Body",
-    "d": "Tap it to blink. Try the Pupil slider in the Toy tab.",
+    "d": "Tap it to blink. Hands-on: drag on the eyeball and it rolls to look where you pull.",
     "w": "eye body body organ body eyeball iris pupil see vision look eye",
     "i": "../assets/toys/eye/thumb.webp"
   },
@@ -1623,7 +1623,7 @@
     "u": "toys/lungs/",
     "k": "toy",
     "s": "Body",
-    "d": "Tap for a deep breath. Try the Breath slider in the Toy tab.",
+    "d": "Tap for a deep breath. Hands-on: squeeze them and they breathe out; let go to refill.",
     "w": "lungs body body organ body breathe air trachea bronchi respiration lungs",
     "i": "../assets/toys/lungs/thumb.webp"
   },
@@ -1650,7 +1650,7 @@
     "u": "toys/anatomy-atlas/",
     "k": "toy",
     "s": "Body",
-    "d": "Tap to peel off a layer; after the organs, tap to put them all back. Try Labels.",
+    "d": "Tap to peel off a layer. Hands-on: at the organs, lift each one out and put it back.",
     "w": "anatomy atlas body body body human anatomy atlas layers peel skin muscles skeleton bones organs labels anatomy-atlas",
     "i": "../assets/toys/anatomy-atlas/thumb.webp",
     "l": 1
@@ -2831,7 +2831,7 @@
     "u": "toys/crystal-ball/",
     "k": "toy",
     "s": "Medieval",
-    "d": "Tap it to swirl the mist and raise a glowing sign.",
+    "d": "Tap to gaze into it. Hands-on: lift the ball off its stand, roll it, set it back.",
     "w": "crystal ball medieval medieval glass orb magic mist fortune stand swirl crystal-ball",
     "i": "../assets/toys/crystal-ball/thumb.webp"
   },
@@ -2840,7 +2840,7 @@
     "u": "toys/jellyfish/",
     "k": "toy",
     "s": "Animals",
-    "d": "Tap it to make it swim: one strong stroke jets it upward.",
+    "d": "Tap it to make it swim. Hands-on: drag the bell and the tentacles trail behind it.",
     "w": "jellyfish animals animals sea ocean jelly tentacles glow pulse moon nettle jellyfish",
     "i": "../assets/toys/jellyfish/thumb.webp"
   },
@@ -2858,7 +2858,7 @@
     "u": "toys/butterfly/",
     "k": "toy",
     "s": "Animals",
-    "d": "Tap it to make it flutter faster.",
+    "d": "Tap it to make it flutter faster. Hands-on: pick it up and let it flutter off.",
     "w": "butterfly animals animals insect wings flutter monarch morpho swallowtail bug butterfly",
     "i": "../assets/toys/butterfly/thumb.webp"
   },
@@ -2867,7 +2867,7 @@
     "u": "toys/pufferfish/",
     "k": "toy",
     "s": "Animals",
-    "d": "Tap it to poke it. Try the Puff slider in the Toy tab.",
+    "d": "Tap it to poke it. Hands-on: hold it and it puffs up; let go and it slowly deflates.",
     "w": "pufferfish animals animals sea ocean blowfish puff spines inflate fish pufferfish",
     "i": "../assets/toys/pufferfish/thumb.webp"
   },
@@ -2885,7 +2885,7 @@
     "u": "toys/ladybug/",
     "k": "toy",
     "s": "Animals",
-    "d": "Tap to open the wings; tap again to close them.",
+    "d": "Tap to open the wings. Hands-on: lift a wing case open on its hinge.",
     "w": "ladybug animals animals ladybird insect beetle bug spots wings fly ladybug",
     "i": "../assets/toys/ladybug/thumb.webp"
   },
@@ -2894,7 +2894,7 @@
     "u": "toys/snail/",
     "k": "toy",
     "s": "Animals",
-    "d": "Tap to make it hide in its shell; tap again to bring it out.",
+    "d": "Tap to make it hide in its shell. Hands-on: poke it and it hides; lift it by the shell.",
     "w": "snail animals animals garden shell spiral slow slime hide snail",
     "i": "../assets/toys/snail/thumb.webp"
   },
@@ -2912,7 +2912,7 @@
     "u": "toys/starfish/",
     "k": "toy",
     "s": "Animals",
-    "d": "Tap it to wave its arms.",
+    "d": "Tap it to wave its arms. Hands-on: lift an arm and it curls back down slowly.",
     "w": "starfish animals animals sea star ocean beach arms starfish",
     "i": "../assets/toys/starfish/thumb.webp"
   },
@@ -2930,7 +2930,7 @@
     "u": "toys/frog/",
     "k": "toy",
     "s": "Animals",
-    "d": "Tap it: a fly buzzes in and the frog catches it with its tongue.",
+    "d": "Tap it to catch a fly. Hands-on: press on it and drag the fly around; let go to feed it.",
     "w": "frog animals animals pond amphibian toad hop green frog",
     "i": "../assets/toys/frog/thumb.webp"
   },
@@ -2939,7 +2939,7 @@
     "u": "toys/penguin/",
     "k": "toy",
     "s": "Animals",
-    "d": "Tap it to flap its flippers.",
+    "d": "Tap it to flap its flippers. Hands-on: push it or drop it and it rocks back upright.",
     "w": "penguin animals animals bird ice antarctic flippers waddle penguin",
     "i": "../assets/toys/penguin/thumb.webp"
   },
@@ -2948,7 +2948,7 @@
     "u": "toys/owl/",
     "k": "toy",
     "s": "Animals",
-    "d": "Tap it and it turns its head to look behind.",
+    "d": "Tap it to turn its head. Hands-on: press on its head and move around; it watches you.",
     "w": "owl animals animals bird night hoot feathers branch wise owl",
     "i": "../assets/toys/owl/thumb.webp"
   },
@@ -3371,7 +3371,7 @@
     "u": "toys/perceptron/",
     "k": "toy",
     "s": "AI and computing",
-    "d": "Tap it to watch it try an example, get it wrong, and learn.",
+    "d": "Tap it to try an example. Hands-on: tap an input lamp to switch it; the output updates.",
     "w": "perceptron ai and computing ai and computing neuron neural network learning weights threshold ai machine learning perceptron",
     "i": "../assets/toys/perceptron/thumb.webp"
   },
@@ -3380,7 +3380,7 @@
     "u": "toys/multilayer-perceptron/",
     "k": "toy",
     "s": "AI and computing",
-    "d": "Tap it to try all four inputs and fill in the XOR truth table.",
+    "d": "Tap it to try all four inputs. Hands-on: tap each input to flip it; XOR answers.",
     "w": "multilayer perceptron ai and computing ai and computing mlp xor hidden layer perceptron logic neural network ai machine learning multilayer-perceptron",
     "i": "../assets/toys/multilayer-perceptron/thumb.webp"
   },
@@ -3443,7 +3443,7 @@
     "u": "toys/gradient-descent/",
     "k": "toy",
     "s": "AI and computing",
-    "d": "Tap it to roll the ball downhill. Try the Learning rate in the Toy tab.",
+    "d": "Tap it to roll downhill. Hands-on: drop the ball anywhere; it rolls into a valley.",
     "w": "gradient descent ai and computing ai and computing loss landscape optimization learning rate momentum valley ball ai machine learning gradient-descent",
     "i": "../assets/toys/gradient-descent/thumb.webp"
   },
@@ -3471,7 +3471,7 @@
     "u": "toys/sorting-machine/",
     "k": "toy",
     "s": "AI and computing",
-    "d": "Tap it to sort the bars. Pick one of eight ways to sort, and how to watch it, in the Toy tab.",
+    "d": "Tap it to sort. Hands-on: pick a piece up and drop it on another place to swap them.",
     "w": "sorting machine ai and computing ai and computing sort algorithm bubble sort quicksort merge sort bars swaps computer science sorting-machine",
     "i": "../assets/toys/sorting-machine/thumb.webp"
   },
@@ -3480,7 +3480,7 @@
     "u": "toys/half-adder/",
     "k": "toy",
     "s": "AI and computing",
-    "d": "Tap it to add 1 + 1 in binary: the answer is 10.",
+    "d": "Tap it to add 1 + 1. Hands-on: flip each lever by hand; the lamps show the sum.",
     "w": "half adder ai and computing ai and computing logic gates xor and binary addition circuit bits carry computer half-adder",
     "i": "../assets/toys/half-adder/thumb.webp"
   },
@@ -3489,7 +3489,7 @@
     "u": "toys/turing-machine/",
     "k": "toy",
     "s": "AI and computing",
-    "d": "Tap it to run the program on the tape. Type your own number in the Toy tab.",
+    "d": "Tap it to run the program. Hands-on: slide the tape by hand; tap a tile to flip it.",
     "w": "turing machine ai and computing ai and computing alan turing tape head state binary add one busy beaver program rules computer science turing-machine",
     "i": "../assets/toys/turing-machine/thumb.webp"
   },
@@ -3498,7 +3498,7 @@
     "u": "toys/difference-engine/",
     "k": "toy",
     "s": "AI and computing",
-    "d": "Tap to turn the crank once; tap again to keep cranking. Type your own polynomial in the Toy tab.",
+    "d": "Tap it to turn the crank. Hands-on: circle round the crank to turn it yourself.",
     "w": "difference engine ai and computing ai and computing charles babbage method of differences polynomial wheels crank carry brass calculator mechanical difference-engine",
     "i": "../assets/toys/difference-engine/thumb.webp"
   },
@@ -3507,7 +3507,7 @@
     "u": "toys/enigma-machine/",
     "k": "toy",
     "s": "AI and computing",
-    "d": "Tap the keys or type to code letters; tap the machine to decode. Set the rotors in the Toy tab.",
+    "d": "Tap the keys to type in code. Hands-on: drag a rotor up or down to set it.",
     "w": "enigma machine ai and computing ai and computing cipher code secret message rotors plugboard lamps keyboard cryptography bletchley park turing history enigma-machine",
     "i": "../assets/toys/enigma-machine/thumb.webp"
   },

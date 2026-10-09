@@ -15,6 +15,7 @@ test("a part's quarter turn sorts its splats the way the shader draws them", () 
   const anim = new Float32Array([1, 0, 0, 0]);
   const out = new Float32Array(3);
   expect(posePass(pos, anim, 1, out, leaf, parts)).toBe(1);
-  // The splat at +x sorts at +z (toward the camera), where the shader draws it.
-  [0, 0, 1].forEach((v, i) => expect(out[i]).toBeCloseTo(v, 5));
+  // The splat at +x sorts at -z, where the shader draws it (spQuatRotate: a quarter turn about
+  // +Y takes +x to -z; lane Hands-on H3 corrected this from +z, October 9, 2026).
+  [0, 0, -1].forEach((v, i) => expect(out[i]).toBeCloseTo(v, 5));
 });
