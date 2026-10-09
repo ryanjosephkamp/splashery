@@ -145,6 +145,7 @@ export class Joints {
       j.min = d.min ?? (d.type === "dial" ? -Infinity : 0);
       j.max = d.max ?? (d.type === "dial" ? Infinity : d.type === "hinge" ? Math.PI / 2 : 0.5);
       j.stuck = !!d.stick;
+      j.latched = this.atLatch(j); // (lane Hands-on H3: built on its latch)
       j.body.pinned = false; // posed, so always shown where it is
     }
     if (d.type === "socket") j.armed = false;
