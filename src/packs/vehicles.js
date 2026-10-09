@@ -549,6 +549,7 @@ function rocketBuild(k, o) {
 const HELI = { rotor: [0.05, 1.86, 0], tail: [-2.3, 1.42, 0.075], centre: [0, 1, 0] };
 
 function helicopterBuild(k, o) {
+  k.data = { ...k.data, h4: {} }; // lane Hands-on H4: what the drive shows, for Hands-on
   const col = o.color;
   // A helipad.
   k.add(evenCylinder(1.55, 1.55, 0.06), {
@@ -901,6 +902,7 @@ const TRAIN = {
 };
 
 function trainBuild(k, o) {
+  k.data = { ...k.data, h4: {} }; // lane Hands-on H4: what the drive shows, for Hands-on
   const col = o.color;
   const black = "#1d1e21";
   const brass = "#d6ad4c";
@@ -1310,6 +1312,7 @@ function hull(k, { L, B, D, bow, stern, boxy = 0.28, sheer = 0.06, rise = 0.35 }
 }
 
 function linerBuild(k, o) {
+  k.data = { ...k.data, h4: {} }; // lane Hands-on H4: what the drive shows, for Hands-on
   const { L, B, D } = LINER;
   const ship = k.part("ship", { pivot: LINER.centre });
   const S = { part: ship, flat: 0.2 };
@@ -1973,6 +1976,7 @@ function busBuild(k, o) {
 const PLANE = { prop: [1.2, 0, 0] };
 
 function planeBuild(k, o) {
+  k.data = { ...k.data, h4: {} }; // lane Hands-on H4: what the drive shows, for Hands-on
   const col = o.color;
   const wing = o.wings;
   const wood = "#6b4a2b";
