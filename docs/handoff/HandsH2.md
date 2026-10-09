@@ -106,10 +106,27 @@ tools/sound-review.json as "ready". Finish every working turn with "READY:", "WO
 
 ## State
 
-READY: both shelves. Food is draft PR #426 and Nature is draft PR #431; the engine pieces both need
-are draft PR #420 (merge it first). All 35 clips are on Effect review page 2 (16 under Food, 19
-under Nature), at device scale 2 (the Operator's call of October 8, 2026). The PRs wait for the
-owner's marks. (October 8, 2026.)
+READY: both shelves, round 2. The owner marked all 35 clips on October 8, 2026: 25 good, 10 to fix.
+All 10 fixes are built, pushed and posted on Effect review page 2 as `hh2-<toy>-r2` (each old card
+has `replacedBy`): banana, croissant, egg, pancakes and watermelon in Food (PR #426); bamboo, daisy,
+dandelion, lotus and sunflower in Nature (PR #431). Engine PR #420 is in main; the engine pieces the
+fixes needed are the new draft PR #450 (`claude/lane-hands-h2-engine-2`; merge it first). The
+shelves wait for the owner's marks on the r2 cards. (October 9, 2026.)
+
+Round 2, what changed:
+
+- Bananas: a banana pulled off has a solid core and a closed neck (it looked see-through alone).
+- Croissant: the lid stays on the tray (`hands.walls`) and lies on the bottom half (a fixed piece).
+- Boiled egg: the cup, the egg and the toast soldiers are fixed pieces; the cap never passes through
+  them. The clip is filmed a little farther out.
+- Pancakes: the top one's syrup and butter are a part riding it, hidden while it lies flipped.
+- Watermelon: a slice comes out of its slot straight up and goes back in the same way (a socket's
+  `out`).
+- Bamboo: critically damped, so it bends and comes straight back with no wobble.
+- Daisies and dandelion: soft gray shading so petals and seed tufts read on white.
+- Sunflower: nods from the middle of its stem (a `neck` part rides the head).
+- Lotus: the flower is its own floating piece; lifting it ripples the pond, dropping it splashes a
+  crown of drops where it lands.
 
 Food, line by line (docs/HANDS-ON-PLAN.md):
 
@@ -162,8 +179,10 @@ puff on a squeeze).
   not hold it (it rolls out over the low side); a socket with several seats would need an engine
   piece. The empty seat of the first half shows flat flesh (it was never built hollow; changing it
   would change the toy with ✋ off).
-- Pancakes: a flipped top pancake lands with its syrup and butter under it; the butter shows faintly
-  through it at phone size.
+- Egg: held over the narrow gap between the two toast soldiers, the cap can wedge between them
+  (place mode looks under a held piece at five spots, and a soldier can fall between them).
+- Lotus: the rings of ripples spread from the flower's place, wherever it lands; the splash itself
+  is where it lands. A drop that bounces back up high can splash a second time.
 - Coffee: ↺ doesn't unstir the art (stirring isn't a piece); turning ✋ off resets it.
 - A wide piece set down right beside a stack (the burger's bun) can topple off its edge and nudge
   the light layers; that is the physics, and it reads as such.
@@ -172,3 +191,7 @@ puff on a squeeze).
 
 - Clips are at device scale 2 (the Operator's answer of October 8, 2026: keep them; redo one at 3
   only if the owner's mark asks for it).
+- Engine PR #450 holds the engine pieces for round 2 (merge before #426 and #431). History on the
+  merged engine branch couldn't be rewritten, so it is a new branch, main with the old one merged
+  in. Lane H1's `fixed: true` replaced my own fixed piece.
+- The daisy and dandelion fixes change how they look with ✋ off too (the owner asked for it).
