@@ -1394,10 +1394,10 @@
       "round": "2026-10-02"
     },
     "sunglasses": {
-      "status": "ready",
-      "said": "(September 30, 2026, on the Sound Board) Sounds too robotic and tacky. (Hands-on H1, October 8, 2026) New: its Hands-on sound, to hear on the Sound Board. Its tap sound is unchanged.",
+      "status": "site",
+      "said": "(September 30, 2026, on the Sound Board) Sounds too robotic and tacky.",
       "note": "Sounds too robotic and tacky.",
-      "plan": "Now: in Hands-on, a small hinge click at each stop.",
+      "plan": "Now: each fold is a plastic hinge sliding shut and seating; the lenses darken silently (no electronic clicks or shimmer). In Hands-on (lane Hands-on H1), a small hinge click at each stop (the candidate below).",
       "candidates": [
         {
           "id": "hh1",
@@ -1419,10 +1419,10 @@
       ]
     },
     "baseball-cap": {
-      "status": "ready",
-      "said": "(September 30, 2026, on the Sound Board) A bit too windy. (Hands-on H1, October 8, 2026) New: its Hands-on sound, to hear on the Sound Board. Its tap sound is unchanged.",
+      "status": "site",
+      "said": "(September 30, 2026, on the Sound Board) A bit too windy.",
       "note": "A bit too windy.",
-      "plan": "Now: in Hands-on, a soft cloth thud as it lands.",
+      "plan": "Now: fabric rustles instead of whooshes as it flips; the flick and the soft landings are unchanged. In Hands-on (lane Hands-on H1), a soft cloth thud as it lands (the candidate below).",
       "candidates": [
         {
           "id": "hh1",
