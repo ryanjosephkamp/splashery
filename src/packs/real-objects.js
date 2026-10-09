@@ -1602,6 +1602,18 @@ HOOD.angle = (strand, soft) => {
   return Math.max(HOOD.min, Math.min(HOOD.max, now - rest));
 };
 
+// Keeps a sleeve's cuff from swinging in past its hanging line, seen from the front (lane
+// Hands-on H1).
+function hdSleeveOut(a, b, side) {
+  const rest = Math.atan2(b.home[0] - a.home[0], a.home[1] - b.home[1]);
+  const d = [b.x[0] - a.x[0], b.x[1] - a.x[1]];
+  if (side * (Math.atan2(d[0], -d[1]) - rest) >= 0) return;
+  const r = Math.hypot(d[0], d[1]);
+  b.x = [a.x[0] + r * Math.sin(rest), a.x[1] - r * Math.cos(rest), b.x[2]];
+  b.p = b.x.slice();
+  b.v = [0, 0, b.v[2]];
+}
+
 // A damped swing that starts at `a` and dies away by the end.
 const swing = (s, a, amp, w = 11, k = 2.2) =>
   s < a ? 0 : amp * Math.sin(w * (s - a)) * Math.exp(-k * (s - a)) * (1 - smoothstep(3.9, 4.45, s));
@@ -1629,12 +1641,16 @@ const HOODIE = {
         drag: 3,
         pieces: [{ part: "hood", node: 0, turn: false, spin: HOOD.angle, axis: [1, 0, 0] }],
       },
-      // Lane Hands-on H1: each sleeve swings on its shoulder as one piece:
-      // pull its cuff and let go, and it swings back down to hang.
+      // Lane Hands-on H1: each sleeve swings as one piece: pull its cuff and
+      // let go, and it swings back down to hang. It turns about its armpit,
+      // not its shoulder, so a lifted sleeve stays joined under the arm (its
+      // top tucks into the shoulder, as the cloth gathers there), and it
+      // lifts only as far as an empty sleeve would.
+      // It never swings in past where it hangs (the body is there).
       ...[
-        ["sleeveL", HD.shoulderL, [-0.5, -0.78, -0.02]],
-        ["sleeveR", HD.shoulderR, [0.5, -0.78, -0.02]],
-      ].map(([part, top, cuff]) => ({ name: part, points: [top, cuff], grab: [1], pick: 0.3, reach: 1.02, maxPull: 0.7, weight: 0.4, keep: 2.2, drag: 2.5, pieces: [{ part, from: 0, to: 1 }] })), // prettier-ignore
+        ["sleeveL", [-0.27, -0.06, -0.06], [-0.5, -0.78, -0.02], -1],
+        ["sleeveR", [0.27, -0.06, -0.06], [0.5, -0.78, -0.02], 1],
+      ].map(([part, top, cuff, side]) => ({ name: part, points: [top, cuff], grab: [1], pick: 0.3, reach: 1.02, maxPull: 0.3, weight: 0, keep: 5, drag: 2, pieces: [{ part, from: 0, to: 1 }], update: (strand, dt, soft) => hdSleeveOut(soft.nodes[strand.first], soft.nodes[strand.first + 1], side) })), // prettier-ignore
     ],
   },
   credits: [
