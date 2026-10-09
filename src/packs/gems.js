@@ -1417,7 +1417,9 @@ export const RECIPES = {
           mass: 2,
           friction: 0.6,
           restitution: 0.1,
-          material: { mass: 1.5, r: 0.05, bounce: 0.15, roll: 0.012, friction: 0.6 },
+          material: { mass: 1.5, r: 0.05, bounce: 0.15, roll: 0.04, friction: 0.6 },
+          // Held where the finger took it, not set down level over the ray.
+          place: false,
         },
         // The stand's base (lane Hands-on H1's fixed piece), up to just under
         // the ball: set down beside it, the ball rests against it.
