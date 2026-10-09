@@ -4538,6 +4538,53 @@
       "plan": "Space is silent: a soft, low breath as the view flies to the next planet, like the other real-space toys.",
       "candidates": [],
       "round": "2026-10-07"
+    },
+    "volume-viewer": {
+      "status": "ready",
+      "said": "(The walkthrough of October 9, 2026, triage Fix10) The volume viewer's sound is wrong: no click and no rising \"vroom\".",
+      "note": "No click and no rising hum.",
+      "plan": "Now in the site (lane Fix10): a tap slides a film onto a lightbox (a papery slip and a soft settle); Play has its own dark, soft rush for each pass of the cut; the drag is silent. On the board: the tap, then Play's two rushes.",
+      "candidates": [
+        {
+          "id": "fx10-tap",
+          "label": "Tap: film on a lightbox (new)",
+          "sound": [
+            {
+              "voice": "pageflip",
+              "f": 1100,
+              "decay": 0.8,
+              "vol": 0.55
+            },
+            {
+              "voice": "thud",
+              "at": 0.36,
+              "f": 160,
+              "decay": 0.6,
+              "bright": 0.15,
+              "vol": 0.12
+            }
+          ]
+        },
+        {
+          "id": "fx10-play",
+          "label": "Play: the cut's two passes (new)",
+          "sound": [
+            {
+              "voice": "whoom",
+              "f": 260,
+              "decay": 1.6,
+              "vol": 0.32
+            },
+            {
+              "voice": "whoom",
+              "at": 2.5,
+              "f": 220,
+              "decay": 1.5,
+              "vol": 0.26
+            }
+          ]
+        }
+      ]
     }
   }
 }
