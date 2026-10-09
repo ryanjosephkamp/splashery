@@ -1009,7 +1009,8 @@
     },
     {
       "id": "dot-train",
-      "file": "assets/toys/photo-3d/ai/train.jpg", "usedBy": ["photo-dash"],
+      "file": "assets/toys/photo-3d/ai/train.jpg",
+      "usedBy": ["photo-dash"],
       "depth": "assets/toys/photo-3d/ai/train.depth",
       "toy": "photo-3d",
       "name": "Train on a viaduct, an AI-made picture",
@@ -1023,7 +1024,8 @@
     },
     {
       "id": "dot-oasis",
-      "file": "assets/toys/photo-3d/ai/oasis.jpg", "usedBy": ["photo-dash"],
+      "file": "assets/toys/photo-3d/ai/oasis.jpg",
+      "usedBy": ["photo-dash"],
       "depth": "assets/toys/photo-3d/ai/oasis.depth",
       "toy": "photo-3d",
       "name": "Desert oasis, an AI-made picture",
@@ -1037,7 +1039,8 @@
     },
     {
       "id": "dot-castle",
-      "file": "assets/toys/photo-3d/ai/castle.jpg", "usedBy": ["photo-dash"],
+      "file": "assets/toys/photo-3d/ai/castle.jpg",
+      "usedBy": ["photo-dash"],
       "depth": "assets/toys/photo-3d/ai/castle.depth",
       "toy": "photo-3d",
       "name": "Castle on a lake, an AI-made picture",
@@ -1051,7 +1054,8 @@
     },
     {
       "id": "dot-cove",
-      "file": "assets/toys/photo-3d/ai/cove.jpg", "usedBy": ["photo-dash"],
+      "file": "assets/toys/photo-3d/ai/cove.jpg",
+      "usedBy": ["photo-dash"],
       "depth": "assets/toys/photo-3d/ai/cove.depth",
       "toy": "photo-3d",
       "name": "Fishing cove, an AI-made picture",
@@ -1079,7 +1083,8 @@
     },
     {
       "id": "dot-paper-valley",
-      "file": "assets/toys/photo-3d/ai/paper-valley.jpg", "usedBy": ["photo-dash"],
+      "file": "assets/toys/photo-3d/ai/paper-valley.jpg",
+      "usedBy": ["photo-dash"],
       "depth": "assets/toys/photo-3d/ai/paper-valley.depth",
       "toy": "photo-3d",
       "name": "Paper valley, an AI-made picture",
@@ -1093,7 +1098,8 @@
     },
     {
       "id": "dot-farm",
-      "file": "assets/toys/photo-3d/ai/farm.jpg", "usedBy": ["photo-dash"],
+      "file": "assets/toys/photo-3d/ai/farm.jpg",
+      "usedBy": ["photo-dash"],
       "depth": "assets/toys/photo-3d/ai/farm.depth",
       "toy": "photo-3d",
       "name": "Felt farm, an AI-made picture",
@@ -1205,7 +1211,8 @@
     },
     {
       "id": "dot-terraces",
-      "file": "assets/toys/photo-3d/ai/terraces.jpg", "usedBy": ["photo-dash"],
+      "file": "assets/toys/photo-3d/ai/terraces.jpg",
+      "usedBy": ["photo-dash"],
       "depth": "assets/toys/photo-3d/ai/terraces.depth",
       "toy": "photo-3d",
       "name": "Rice terraces, an AI-made picture",
@@ -1219,7 +1226,8 @@
     },
     {
       "id": "dot-canyon",
-      "file": "assets/toys/photo-3d/ai/canyon.jpg", "usedBy": ["photo-dash"],
+      "file": "assets/toys/photo-3d/ai/canyon.jpg",
+      "usedBy": ["photo-dash"],
       "depth": "assets/toys/photo-3d/ai/canyon.depth",
       "toy": "photo-3d",
       "name": "Canyon at sunset, an AI-made picture",
@@ -1261,7 +1269,8 @@
     },
     {
       "id": "dot-alpine-lake",
-      "file": "assets/toys/photo-3d/ai/alpine-lake.jpg", "usedBy": ["photo-dash"],
+      "file": "assets/toys/photo-3d/ai/alpine-lake.jpg",
+      "usedBy": ["photo-dash"],
       "depth": "assets/toys/photo-3d/ai/alpine-lake.depth",
       "toy": "photo-3d",
       "name": "Alpine lake, an AI-made picture",
@@ -1289,7 +1298,8 @@
     },
     {
       "id": "dot-floating-isles",
-      "file": "assets/toys/photo-3d/ai/floating-isles.jpg", "usedBy": ["photo-dash"],
+      "file": "assets/toys/photo-3d/ai/floating-isles.jpg",
+      "usedBy": ["photo-dash"],
       "depth": "assets/toys/photo-3d/ai/floating-isles.depth",
       "toy": "photo-3d",
       "name": "Floating islands, an AI-made picture",
