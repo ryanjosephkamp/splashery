@@ -9,6 +9,7 @@
 // makes such a frame certain: it runs the relief's sync just before the swap.
 
 import { test, expect } from "@playwright/test";
+import { MOVING, MOVING_PHOTO, speedRate } from "../src/packs/moving-photo.js";
 
 const APP = "/?renderer=webgl2&adapt=off&profile=mid&labs=1";
 const GL_ERROR = /GL_INVALID|glDraw|sampler type/i;
@@ -171,3 +172,97 @@ for (const clip of LOOPS) {
     });
   }
 }
+
+// The same, made certain: Moving photo to 3D's own drive on a device drawing 30 frames a second,
+// against a media element that takes 60 ms to seek and stops at its end (paused and ended), as a
+// browser's does. On main, a clip whose frames step over the sound's last 20 ms stays a moment before
+// its end for good (the owner's "last 0.5 seconds over and over": the video copy follows that time).
+function fakeTrack(duration, seek) {
+  let ct = 0;
+  let until = -1;
+  let now = 0;
+  const el = {
+    paused: true,
+    ended: false,
+    playbackRate: 1,
+    duration,
+    get currentTime() {
+      return ct;
+    },
+    set currentTime(v) {
+      ct = Math.min(duration, Math.max(0, v));
+      el.ended = false;
+      until = now + seek;
+    },
+  };
+  return {
+    el,
+    blocked: false,
+    anchor: null,
+    get duration() {
+      return duration;
+    },
+    get playing() {
+      return !el.paused && !el.ended;
+    },
+    time: () => ct,
+    play() {
+      if (el.ended) el.currentTime = 0;
+      el.paused = false;
+    },
+    pause() {
+      el.paused = true;
+    },
+    route() {},
+    step(dt) {
+      now += dt;
+      if (el.paused || el.ended || now < until) return;
+      ct += dt * el.playbackRate;
+      if (ct >= duration) {
+        ct = duration;
+        el.ended = el.paused = true;
+      }
+    },
+  };
+}
+
+for (const speed of [0.5, 1])
+  for (const duration of [2.52, 2.53])
+    test(`a clip of ${duration} s with sound loops on a device drawing 30 frames a second${speed === 1 ? ", at 1.75 times" : ""}`, () => {
+      const saved = { window: globalThis.window, clip: MOVING.clip, t: MOVING.t };
+      const n = 60;
+      const tr = fakeTrack(duration, 0.06);
+      // (the player as far as the drive asks: the speed, and the silent clock it reads)
+      globalThis.window = { __splashery: { player: { scene: { motion: { speed } } } }, __clipT: 0 };
+      try {
+        MOVING.clip = { duration, n, delays: Array(n).fill((duration * 1000) / n), audio: { track: tr }, video: null }; // prettier-ignore
+        MOVING.t = 0;
+        MOVING.anchor = null;
+        tr.play();
+        const rate = speedRate(speed);
+        const P = 1 / 30;
+        const ts = [];
+        for (let time = 0; time < (3.2 * duration) / rate; time += P) {
+          tr.step(P);
+          globalThis.window.__clipT = time;
+          MOVING_PHOTO.drive(time, { play: 1 }, {}, { time });
+          ts.push(MOVING.t);
+        }
+        const wraps = [];
+        for (let i = 1; i < ts.length; i++) if (ts[i] < ts[i - 1] - duration / 2) wraps.push(i);
+        expect(wraps.length, ts.slice(-8).map((x) => x.toFixed(3)).join(" ")).toBeGreaterThanOrEqual(2); // prettier-ignore
+        for (const i of wraps) expect(ts[i]).toBeLessThan(0.15 * rate);
+        // and it keeps moving: never more than half a second of frames on one time
+        let same = 0;
+        let most = 0;
+        for (let i = 1; i < ts.length; i++) {
+          same = ts[i] === ts[i - 1] ? same + 1 : 0;
+          most = Math.max(most, same);
+        }
+        expect(most * P).toBeLessThan(0.5);
+      } finally {
+        globalThis.window = saved.window;
+        MOVING.clip = saved.clip;
+        MOVING.t = saved.t;
+      }
+    });
