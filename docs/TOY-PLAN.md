@@ -2945,7 +2945,9 @@ Proposals below are suggestions; the owner may change them.
     gauge fills to under the threshold and the lamp flashes red. The two live wires thicken (it
     learns), the pulses go again, the gauge passes the threshold and the lamp snaps on gold (4 s).
     Owner's review: a 3D version too, so a View option adds a 3D model that floats in space (no
-    stand, after the third review): glass bulbs, wires, a glass gauge and an output bulb.
+    stand, after the third review): glass bulbs, wires, a glass gauge and an output bulb. Hands-on
+    H5: with ✋ Hands-on on, a tap on an input lamp switches it, and the sum, the gauge and the
+    output lamp answer at once with the learned weights; a tap elsewhere runs the example.
   - Sound: A blip for each input, a click as the lamp decides, a rising tone when it learns.
 - **Multilayer perceptron** (`multilayer-perceptron`). Now: tap: Try all four inputs. Plan: keep.
   - Owner: Owner's review of the perceptron (September 27, 2026): add 2D poster and 3D multilayer
@@ -2957,7 +2959,8 @@ Proposals below are suggestions; the owner may change them.
     blue (adding) and red (subtracting) wires to the OR and NAND neurons, the ones that fire send
     pulses to the AND neuron, the output lamp lights for 01 and 10 only, and each answer is written
     into the truth table (5 s). A View option picks the poster or a 3D model, which floats in space
-    (no stand).
+    (no stand). Hands-on H5: with ✋ Hands-on on, a tap on an input lamp flips it, and the OR and
+    NAND neurons and the output show XOR at once, the truth table marking the row.
   - Sound: A blip for each input, a ding when the answer is 1, a knock when it is 0.
 - **Neural network** (`neural-network`). Now: tap: Forward and back. Plan: keep.
   - Owner: Approved on the Toy Ideas page (lane AI).
@@ -3038,7 +3041,8 @@ Proposals below are suggestions; the owner may change them.
     s).
   - Improved: AI: the ball takes 21 hops of gradient descent with momentum, leaving a trail of dots;
     just right, it overshoots and settles in the valley; too low, it creeps; too high, it bounces
-    wall to wall (4.5 s).
+    wall to wall (4.5 s). Hands-on H5: with ✋ Hands-on on, the ball comes to the finger on the
+    landscape; let go, it rolls by the slope, overshoots a little and settles in the nearest valley.
   - Sound: A soft tap as the ball lands each of its 21 hops down, in sync, and one as it lands home
     (the falling tone and whoosh are gone).
 - **Gaussian splatting** (`gaussian-splatting`). Now: tap: Train, or play the view. Plan: keep.
@@ -3075,7 +3079,9 @@ Proposals below are suggestions; the owner may change them.
     Shell and heap sort added). Computing r2: each algorithm sounds its comparisons and swaps in its
     own voice; a View option shows the same steps as crates by size, a 3D ring of colored pucks
     sorted by hue, or the classic dots; every step is checked against reference code
-    (tests/cmp2-sort.spec.mjs).
+    (tests/cmp2-sort.spec.mjs). Hands-on H5: with ✋ Hands-on on, a piece picked up and dropped on
+    another place swaps with the one there (it glides across), the counter counts the swaps, and a
+    chime rings when they are in order.
   - Sound: Each algorithm has its own voice (lane Computing r2): every comparison plays the two
     compared bars' notes softly, every swap the moving bar's note, each timed to its step; then the
     sorted bars play their scale.
@@ -3085,7 +3091,9 @@ Proposals below are suggestions; the owner may change them.
     gate, whose shapes glow as they fire, and the sum and carry lamps show 1 + 1 = 10 in binary (3.5
     s).
   - Improved: AI: both switches flip to 1, light fills the wires into the XOR and AND gates; the XOR
-    flashes and gives 0, the AND lights the carry lamp, and 1+1=10 shows (3.5 s).
+    flashes and gives 0, the AND lights the carry lamp, and 1+1=10 shows (3.5 s). Hands-on H5: with
+    ✋ Hands-on on, each lever flips by hand on its hinge, and the lamps, gates and digits show the
+    sum and carry of the two bits at once.
   - Sound: The buzz near the end is gone; the rest is unchanged.
 - **Turing machine** (`turing-machine`). Now: tap: Run the program. Plan: keep.
   - Owner: Approved on the Toy Ideas page (lane Machines A).
