@@ -32,7 +32,33 @@ export const FILL = 1.05; // a splat's size against the distance to its neighbor
 export const CUT = 0.015; // a step in the (0..1) disparity between neighbors that cuts the surface
 export const SPLAT_OPACITY = 1;
 export const SPLAT_FLAT = 0.14;
-export const SPLIT_SHARE = 0.28; // the share of 2 x 2 blocks that are drawn as four fine splats
+// Lane Photo fidelity r2: the adaptive grid. The fine grid is made of blocks of 2^LEVELS by 2^LEVELS
+// cells; a plain block (its colors within FLAT_VAR of their mean) is one splat, a block with
+// detail splits into four, and those again, down to 2 by 2 cells, then to single cells where the
+// split takes away the most color error, until the budget is spent. So a page's plain background
+// takes a few big splats and its letters many small ones. The fine grid holds between 2.2 and
+// FINE_CELLS cells per splat of the budget: the more of the picture is plain, the finer
+// (fineCells). (r1 and before: 2.2 cells per splat, in 2 by 2 blocks, SPLIT_SHARE of them split.)
+export const FINE_CELLS = 6;
+// The small splats are drawn smaller than their cells (single cells 0.45, 2 by 2 blocks 0.6 of
+// their size): neighbors of different colors at the same depth draw in no set order, so where
+// they overlap much, light ones land on dark strokes and the letters look grainy (the owner's
+// reviews of round 2: "sharper and less grainy"). Measured on the text page, mid (SSIM): 0.41 at
+// full size, 0.63 at 0.55 and 0.8, 0.72 at 0.45 and 0.6; 0.71 at 0.35 and 0.6. Less color
+// sharpening (SHARPEN) measured worse.
+export const SMALL_FILL = 0.45;
+export const PAIR_FILL = 0.6;
+export const BLOCK_BACK = 0.002; // how far behind (picture heights) each level of bigger splat sits
+export const FLAT_VAR = 0.002; // a block's mean squared color difference (r, g, b summed, 0..1) that still counts as plain
+// Detail drawn in single cells only (no 2 by 2 splats where the picture has detail; the owner's
+// third "sharper, less grainy"): from DETAIL_MIN splats up. Below it (the low tier) the budget
+// can't cover every detail cell, and 2 by 2 splats read better (measured: low 0.54 with them, 0.50
+// without; mid 0.72 → 0.76, high 0.78 → 0.81, max 0.86 → 0.85).
+export const DETAIL_CELLS = true;
+export const DETAIL_MIN = 150000;
+const detailCells = (count) => DETAIL_CELLS && count >= DETAIL_MIN;
+export const LEVELS = 3;
+export const SPLIT_SHARE = 0.28; // (r1's grid; kept for the tools that compare)
 export const SHARPEN = 0.5; // unsharp amount on the grid colors, to make up for the splats' overlap
 const MIN_PIECE = 0.0006; // a piece of surface smaller than this share of the picture joins its neighbor
 
@@ -354,18 +380,24 @@ export function buildPhotoSplats(
   // The fine grid: a block of 2 x 2 fine cells is drawn as one splat, or as four where there is detail
   // (SPLIT_SHARE of the blocks), so the splats are spent where they show: on detail, on near things and
   // along depth edges. The fine grid is never finer than the photo itself.
-  const nb = count / (1 + 3 * SPLIT_SHARE);
-  let bx = Math.max(2, Math.round(Math.sqrt(nb * aspect)));
-  let by = Math.max(2, Math.round(nb / bx));
-  let gx = 2 * bx;
-  let gy = 2 * by;
-  if (gx > photo.w || gy > photo.h) {
-    const f = Math.min(photo.w / gx, photo.h / gy);
-    bx = Math.max(2, Math.floor(bx * f));
-    by = Math.max(2, Math.floor(by * f));
-    gx = 2 * bx;
-    gy = 2 * by;
+  // (r2: blocks of B by B fine cells, FINE_CELLS fine cells per splat of the budget, never more top
+  // blocks than the budget. Where that is finer than the photo, the grid is the photo's own pixels,
+  // less the few at its right and bottom edges that don't make up a whole block; fewer levels
+  // when a small picture would lose more than 2% of itself that way.)
+  let levels = LEVELS;
+  let B = 1 << levels;
+  const nb = Math.min(count, (fineCells(photo, count) * count) / (B * B));
+  let bx = Math.max(1, Math.round(Math.sqrt(nb * aspect)));
+  let by = Math.max(1, Math.round(nb / bx));
+  if (B * bx > photo.w || B * by > photo.h) {
+    const keep = (L) => (Math.floor(photo.w / (1 << L)) * Math.floor(photo.h / (1 << L)) * (1 << (2 * L))) / (photo.w * photo.h); // prettier-ignore
+    while (levels > 1 && keep(levels) < 0.98) levels--;
+    B = 1 << levels;
+    bx = Math.max(1, Math.floor(photo.w / B));
+    by = Math.max(1, Math.floor(photo.h / B));
   }
+  const gx = B * bx;
+  const gy = B * by;
   const rgb = sharpen(resampleArea(photo, gx, gy), gx, gy);
   const { w: dw, h: dh } = depthMap;
   const guideLo = resampleArea(photo, dw, dh);
@@ -397,20 +429,8 @@ export function buildPhotoSplats(
   const R = 0.08 + 0.7 * clamp(depth, 0, 1);
   const cell = 1 / gy;
   const n = gx * gy;
-  const relief = new Float32Array(n * 3);
-  const flat = new Float32Array(n * 3);
   const z = new Float32Array(n);
-  for (let j = 0; j < gy; j++)
-    for (let i = 0; i < gx; i++) {
-      const c = j * gx + i;
-      const x = ((i + 0.5) / gx - 0.5) * aspect;
-      const y = 0.5 - (j + 0.5) / gy;
-      z[c] = R * (d[c] - 0.5);
-      relief[c * 3] = flat[c * 3] = x;
-      relief[c * 3 + 1] = flat[c * 3 + 1] = y;
-      relief[c * 3 + 2] = z[c];
-      flat[c * 3 + 2] = 0;
-    }
+  for (let c = 0; c < n; c++) z[c] = R * (d[c] - 0.5);
   // Sizes: FILL times the mean distance to the neighbors on the same surface (a cell with
   // none takes a plain cell's size), never more than 1.7 cells so a steep slope stays sharp.
   const sigma = new Float32Array(n);
@@ -441,94 +461,58 @@ export function buildPhotoSplats(
     }
     return e;
   })();
-  // Which blocks are split: those with a depth edge in them first, then by detail (the photo's own
-  // color range in the block, and how near it is), as many as the budget leaves room for.
-  const nBlocks = bx * by;
-  const room = Math.max(0, Math.min(nBlocks, Math.floor((count - nBlocks) / 3)));
-  const score = new Float32Array(nBlocks);
-  for (let bj = 0; bj < by; bj++)
-    for (let bi = 0; bi < bx; bi++) {
-      const c0 = 2 * bj * gx + 2 * bi;
-      const cs = [c0, c0 + 1, c0 + gx, c0 + gx + 1];
-      let range = 0;
-      for (let k = 0; k < 3; k++) {
-        let lo = 1;
-        let hi = 0;
-        for (const c of cs) {
-          lo = Math.min(lo, rgb[c * 3 + k]);
-          hi = Math.max(hi, rgb[c * 3 + k]);
-        }
-        range = Math.max(range, hi - lo);
-      }
-      const forced =
-        !(
-          linkedRight(m, c0) &&
-          linkedRight(m, c0 + gx) &&
-          linkedDown(m, c0) &&
-          linkedDown(m, c0 + 1)
-        ) ||
-        cs.some((c) => {
-          // prettier-ignore
-          const i = c % gx;
-          const j = (c - i) / gx;
-          return (i > 0 && !linkedRight(m, c - 1)) || (i + 1 < gx && !linkedRight(m, c)) || (j > 0 && !linkedDown(m, c - gx)) || (j + 1 < gy && !linkedDown(m, c)); // prettier-ignore
-        });
-      const near = (d[cs[0]] + d[cs[1]] + d[cs[2]] + d[cs[3]]) / 4;
-      score[bj * bx + bi] = range + 0.3 * near + (forced ? 10 : 0);
-    }
-  const order = Array.from({ length: nBlocks }, (_, i) => i).sort((a, b) => score[b] - score[a] || a - b); // prettier-ignore
-  const split = new Uint8Array(nBlocks);
-  for (let i = 0; i < room; i++) split[order[i]] = 1;
-  const cap = nBlocks + 3 * room;
-  const oRelief = new Float32Array(cap * 3);
-  const oFlat = new Float32Array(cap * 3);
-  const oSigma = new Float32Array(cap);
-  const oRgb = new Float32Array(cap * 3);
-  const oBand = new Uint8Array(cap);
-  let no = 0;
-  const put = (cs, sig) => {
-    const q = cs.length;
-    let x = 0;
-    let y = 0;
+  const g = adaptiveGrid({ gx, gy, levels, count, rgb, d, m });
+  const no = g.n;
+  const oRelief = new Float32Array(no * 3);
+  const oFlat = new Float32Array(no * 3);
+  const oSigma = new Float32Array(no);
+  const oRgb = new Float32Array(no * 3);
+  const oBand = new Uint8Array(no);
+  for (let k = 0; k < no; k++) {
+    const x0 = g.x[k];
+    const y0 = g.y[k];
+    const sz = g.size[k];
     let zz = 0;
+    let sg = 0;
     let r = 0;
-    let g = 0;
+    let gg = 0;
     let b = 0;
-    for (const c of cs) {
-      x += relief[c * 3];
-      y += relief[c * 3 + 1];
-      zz += relief[c * 3 + 2];
-      r += rgb[c * 3];
-      g += rgb[c * 3 + 1];
-      b += rgb[c * 3 + 2];
-    }
-    oRelief.set([x / q, y / q, zz / q], no * 3);
-    oFlat.set([x / q, y / q, 0], no * 3);
-    oRgb.set([r / q, g / q, b / q], no * 3);
-    oSigma[no] = sig;
-    oBand[no] = band[cs[0]];
-    no++;
-  };
-  let splitBlocks = 0;
-  for (let bj = 0; bj < by; bj++)
-    for (let bi = 0; bi < bx; bi++) {
-      const c0 = 2 * bj * gx + 2 * bi;
-      const cs = [c0, c0 + 1, c0 + gx, c0 + gx + 1];
-      if (split[bj * bx + bi]) {
-        for (const c of cs) put([c], sigma[c]);
-        splitBlocks++;
-      } else put(cs, (2 * (sigma[cs[0]] + sigma[cs[1]] + sigma[cs[2]] + sigma[cs[3]])) / 4);
-    }
+    for (let j = y0; j < y0 + sz; j++)
+      for (let i = x0; i < x0 + sz; i++) {
+        const c = j * gx + i;
+        zz += z[c];
+        sg += sigma[c];
+        r += rgb[c * 3];
+        gg += rgb[c * 3 + 1];
+        b += rgb[c * 3 + 2];
+      }
+    const q = sz * sz;
+    const x = ((x0 + sz / 2) / gx - 0.5) * aspect;
+    const y = 0.5 - (y0 + sz / 2) / gy;
+    oRelief[k * 3] = oFlat[k * 3] = x;
+    oRelief[k * 3 + 1] = oFlat[k * 3 + 1] = y;
+    // a bigger splat sits a hair behind the smaller ones, so it never draws over their detail
+    // (they would sort in any order at the same depth)
+    const back = BLOCK_BACK * Math.log2(sz);
+    oRelief[k * 3 + 2] = zz / q - back;
+    oFlat[k * 3 + 2] = back ? -back : 0;
+    oRgb[k * 3] = r / q;
+    oRgb[k * 3 + 1] = gg / q;
+    oRgb[k * 3 + 2] = b / q;
+    // a block of sz by sz cells: sz times its cells' mean size (r1: a 2 x 2 block, twice)
+    oSigma[k] = ((sz * sg) / q) * (sz === 1 ? SMALL_FILL : sz === 2 ? PAIR_FILL : 1);
+    oBand[k] = band[(y0 + (sz >> 1)) * gx + x0 + (sz >> 1)];
+  }
   return {
     n: no,
     gx,
     gy,
     aspect,
-    relief: oRelief.slice(0, no * 3),
-    flat: oFlat.slice(0, no * 3),
-    sigma: oSigma.slice(0, no),
-    rgb: oRgb.slice(0, no * 3),
-    band: oBand.slice(0, no),
+    relief: oRelief,
+    flat: oFlat,
+    sigma: oSigma,
+    rgb: oRgb,
+    band: oBand,
     depth: d,
     gap: 0.16 * R + 0.06, // how far apart "Layers" pulls the depth bands, in picture heights
     stats: {
@@ -538,8 +522,211 @@ export function buildPhotoSplats(
       relief: R,
       flatness,
       joined: joined.moved,
-      blocks: nBlocks,
-      splitBlocks,
+      blocks: bx * by,
+      splitBlocks: g.split[levels] || 0,
+      levels: g.levels, // splats of each size: [1 cell, 2 by 2, 4 by 4, ...]
     },
   };
+}
+
+// Lane Photo fidelity r2: how fine the grid can be for this picture, in cells per splat of the
+// budget. A quick look at the picture (its colors in 2 by 2 cells of the finest grid, in blocks of
+// 2^LEVELS cells) finds the share p that is plain; the detail takes a splat per 2 by 2 cells and
+// the plain a splat per block, and three quarters of the budget goes to that, the rest to single
+// cells where the detail is finest.
+export function fineCells(photo, count) {
+  const aspect = photo.w / photo.h;
+  const half = 1 << (LEVELS - 1);
+  const area = Math.min(photo.w * photo.h, (FINE_CELLS * count) / 4);
+  const pw = Math.max(half, Math.floor(Math.sqrt(area * aspect) / half) * half);
+  const ph = Math.max(half, Math.floor(area / pw / half) * half);
+  const rgb = resampleArea(photo, pw, ph);
+  let plain = 0;
+  let blocks = 0;
+  for (let by = 0; by + half <= ph; by += half)
+    for (let bx = 0; bx + half <= pw; bx += half) {
+      let s = 0;
+      let s2 = 0;
+      const sum = [0, 0, 0];
+      for (let y = by; y < by + half; y++)
+        for (let x = bx; x < bx + half; x++)
+          for (let k = 0; k < 3; k++) {
+            const v = rgb[(y * pw + x) * 3 + k];
+            sum[k] += v;
+            s2 += v * v;
+          }
+      const q = half * half;
+      s = s2 - (sum[0] ** 2 + sum[1] ** 2 + sum[2] ** 2) / q;
+      if (s / q <= FLAT_VAR) plain++;
+      blocks++;
+    }
+  const p = blocks ? plain / blocks : 0;
+  const b2 = 1 << (2 * LEVELS);
+  return clamp(detailCells(count) ? 0.85 / (1 - p + p / b2) : 0.75 / ((1 - p) / 4 + p / b2), 2.2, FINE_CELLS); // prettier-ignore
+}
+
+// Lane Photo fidelity r2: the adaptive grid's choice. The fine grid (gx by gy, both multiples of
+// 2^levels) starts as blocks of 2^levels cells a side, one splat each; a block splits into its four
+// quarters, three splats more, in order of how much color error (the sum of squared differences
+// from each splat's mean color) the split takes away, nearer things a little first, until the
+// budget (`count` splats) is spent. A block with a depth cut inside it splits first, down to
+// cells that have none, so no splat bridges a cut. Returns the splats as blocks: { n, x, y, size
+// (in cells), split (blocks split, per level), levels (splats per size) }.
+export function adaptiveGrid({ gx, gy, levels, count, rgb, d, m }) {
+  const cellsOnly = detailCells(count);
+  // per level k (1..levels): each block's sums of r, g, b, squares and nearness (level 0: the cells)
+  const nx = [gx];
+  const ny = [gy];
+  const S = [null];
+  for (let k = 1; k <= levels; k++) {
+    nx.push(nx[k - 1] >> 1);
+    ny.push(ny[k - 1] >> 1);
+    const a = new Float64Array(nx[k] * ny[k] * 5);
+    for (let j = 0; j < ny[k]; j++)
+      for (let i = 0; i < nx[k]; i++) {
+        const o = (j * nx[k] + i) * 5;
+        for (let dj = 0; dj < 2; dj++)
+          for (let di = 0; di < 2; di++) {
+            const ci = 2 * i + di;
+            const cj = 2 * j + dj;
+            if (k === 1) {
+              const c = cj * gx + ci;
+              const r = rgb[c * 3];
+              const g = rgb[c * 3 + 1];
+              const b = rgb[c * 3 + 2];
+              a[o] += r;
+              a[o + 1] += g;
+              a[o + 2] += b;
+              a[o + 3] += r * r + g * g + b * b;
+              a[o + 4] += d[c];
+            } else {
+              const p = (cj * nx[k - 1] + ci) * 5;
+              for (let t = 0; t < 5; t++) a[o + t] += S[k - 1][p + t];
+            }
+          }
+      }
+    S.push(a);
+  }
+  // the color error of a block left whole (level 0, a cell: none)
+  const sse = (k, i, j) => {
+    if (k === 0) return 0;
+    const a = S[k];
+    const o = (j * nx[k] + i) * 5;
+    const q = 1 << (2 * k);
+    return Math.max(0, a[o + 3] - (a[o] * a[o] + a[o + 1] * a[o + 1] + a[o + 2] * a[o + 2]) / q);
+  };
+  // whether a depth cut runs inside a block: summed-area tables of the cells cut from their right
+  // and lower neighbors
+  const W = gx + 1;
+  const cr = new Int32Array(W * (gy + 1));
+  const cd = new Int32Array(W * (gy + 1));
+  for (let j = 0; j < gy; j++)
+    for (let i = 0; i < gx; i++) {
+      const c = j * gx + i;
+      const o = (j + 1) * W + i + 1;
+      const r = i + 1 < gx && !(m[c] & 1) ? 1 : 0;
+      const dn = j + 1 < gy && !(m[c] & 2) ? 1 : 0;
+      cr[o] = r + cr[o - 1] + cr[o - W] - cr[o - W - 1];
+      cd[o] = dn + cd[o - 1] + cd[o - W] - cd[o - W - 1];
+    }
+  const box = (t, x0, y0, x1, y1) => (x1 <= x0 || y1 <= y0 ? 0 : t[y1 * W + x1] - t[y0 * W + x1] - t[y1 * W + x0] + t[y0 * W + x0]); // prettier-ignore
+  const cutInside = (k, i, j) => {
+    const sz = 1 << k;
+    const x0 = i * sz;
+    const y0 = j * sz;
+    return box(cr, x0, y0, x0 + sz - 1, y0 + sz) + box(cd, x0, y0, x0 + sz, y0 + sz - 1) > 0;
+  };
+  const priority = (k, i, j) => {
+    if (cutInside(k, i, j)) return Infinity;
+    let kids = 0;
+    for (let dj = 0; dj < 2; dj++)
+      for (let di = 0; di < 2; di++) kids += sse(k - 1, 2 * i + di, 2 * j + dj);
+    const q = 1 << (2 * k);
+    const near = S[k][(j * nx[k] + i) * 5 + 4] / q;
+    const gain = (sse(k, i, j) - kids) * (1 + 0.5 * near);
+    // a block bigger than 2 by 2 with detail in it splits before any 2 by 2 block does
+    if (sse(k, i, j) / q <= FLAT_VAR) return gain;
+    return k >= 2 ? 2e9 + gain : cellsOnly ? 1e9 + gain : gain;
+  };
+  // a max-heap of the blocks that could split (level >= 1), keyed by priority
+  const off = [0];
+  for (let k = 1; k <= levels; k++) off.push(off[k - 1] + (k === 1 ? 0 : nx[k - 1] * ny[k - 1]));
+  const total = off[levels] + nx[levels] * ny[levels];
+  const hk = new Float64Array(total);
+  const hv = new Int32Array(total);
+  let hn = 0;
+  const push = (key, v) => {
+    let i = hn++;
+    while (i > 0) {
+      const p = (i - 1) >> 1;
+      if (hk[p] >= key) break;
+      hk[i] = hk[p];
+      hv[i] = hv[p];
+      i = p;
+    }
+    hk[i] = key;
+    hv[i] = v;
+  };
+  const pop = () => {
+    const v = hv[0];
+    const key = hk[--hn];
+    const val = hv[hn];
+    let i = 0;
+    for (;;) {
+      let c = 2 * i + 1;
+      if (c >= hn) break;
+      if (c + 1 < hn && hk[c + 1] > hk[c]) c++;
+      if (hk[c] <= key) break;
+      hk[i] = hk[c];
+      hv[i] = hv[c];
+      i = c;
+    }
+    hk[i] = key;
+    hv[i] = val;
+    return v;
+  };
+  const idOf = (k, i, j) => off[k] + j * nx[k] + i;
+  const fromId = (id) => {
+    let k = levels;
+    while (k > 1 && id < off[k]) k--;
+    const r = id - off[k];
+    return [k, r % nx[k], Math.floor(r / nx[k])];
+  };
+  const isSplit = new Uint8Array(total);
+  for (let j = 0; j < ny[levels]; j++)
+    for (let i = 0; i < nx[levels]; i++) push(priority(levels, i, j), idOf(levels, i, j));
+  let n = nx[levels] * ny[levels];
+  const split = new Array(levels + 1).fill(0);
+  while (hn > 0 && n + 3 <= count) {
+    const id = pop();
+    const [k, i, j] = fromId(id);
+    isSplit[id] = 1;
+    split[k]++;
+    n += 3;
+    if (k > 1)
+      for (let dj = 0; dj < 2; dj++)
+        for (let di = 0; di < 2; di++)
+          push(priority(k - 1, 2 * i + di, 2 * j + dj), idOf(k - 1, 2 * i + di, 2 * j + dj));
+  }
+  // the splats: the blocks not split, walked from the top
+  const x = new Int32Array(n);
+  const y = new Int32Array(n);
+  const size = new Int32Array(n);
+  const per = new Array(levels + 1).fill(0);
+  let o = 0;
+  const walk = (k, i, j) => {
+    if (k > 0 && isSplit[idOf(k, i, j)]) {
+      for (let dj = 0; dj < 2; dj++)
+        for (let di = 0; di < 2; di++) walk(k - 1, 2 * i + di, 2 * j + dj);
+      return;
+    }
+    const sz = 1 << k;
+    x[o] = i * sz;
+    y[o] = j * sz;
+    size[o] = sz;
+    per[k]++;
+    o++;
+  };
+  for (let j = 0; j < ny[levels]; j++) for (let i = 0; i < nx[levels]; i++) walk(levels, i, j);
+  return { n: o, x, y, size, split, levels: per };
 }
