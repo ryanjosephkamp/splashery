@@ -147,3 +147,15 @@
 {"v":1,"t":"2026-10-09T21:07:30.624Z","harness":"claude-code","event":"tool","session":"71d7976c-6b1b-58e2-8a9f-e3ca7b1f9eab","tool":"Bash","cwd":"splashery"}
 {"v":1,"t":"2026-10-09T21:07:39.237Z","harness":"claude-code","event":"tool","session":"71d7976c-6b1b-58e2-8a9f-e3ca7b1f9eab","tool":"Bash","cwd":"splashery"}
 {"v":1,"t":"2026-10-09T21:07:43.724Z","harness":"claude-code","event":"turn-end","session":"71d7976c-6b1b-58e2-8a9f-e3ca7b1f9eab","cwd":"splashery"}
+{"v":1,"t":"2026-10-09T21:07:56.171Z","harness":"claude-code","event":"session-end","session":"71d7976c-6b1b-58e2-8a9f-e3ca7b1f9eab","cwd":"splashery"}
+{"v":1,"t":"2026-10-09T21:08:14.873Z","harness":"claude-code","event":"session-start","session":"71d7976c-6b1b-58e2-8a9f-e3ca7b1f9eab","cwd":"splashery"}
+{"v":1,"t":"2026-10-09T21:08:14.957Z","harness":"claude-code","event":"turn-start","session":"71d7976c-6b1b-58e2-8a9f-e3ca7b1f9eab","cwd":"splashery"}
+{"v":1,"t":"2026-10-09T21:08:26.117Z","harness":"claude-code","event":"tool","session":"71d7976c-6b1b-58e2-8a9f-e3ca7b1f9eab","tool":"Bash","cwd":"splashery"}
+{"v":1,"t":"2026-10-09T21:08:42.792Z","harness":"claude-code","event":"tool","session":"71d7976c-6b1b-58e2-8a9f-e3ca7b1f9eab","tool":"Bash","cwd":"splashery"}
+{"v":1,"t":"2026-10-09T21:08:58.618Z","harness":"claude-code","event":"tool","session":"71d7976c-6b1b-58e2-8a9f-e3ca7b1f9eab","tool":"Bash","cwd":"splashery"}
+{"v":1,"t":"2026-10-09T21:09:05.381Z","harness":"claude-code","event":"tool","session":"71d7976c-6b1b-58e2-8a9f-e3ca7b1f9eab","tool":"Bash","cwd":"splashery"}
+{"v":1,"t":"2026-10-09T21:09:11.428Z","harness":"claude-code","event":"tool","session":"71d7976c-6b1b-58e2-8a9f-e3ca7b1f9eab","tool":"Bash","cwd":"splashery"}
+{"v":1,"t":"2026-10-09T21:09:21.994Z","harness":"claude-code","event":"tool","session":"71d7976c-6b1b-58e2-8a9f-e3ca7b1f9eab","tool":"Artifact","cwd":"splashery"}
+{"v":1,"t":"2026-10-09T21:09:23.337Z","harness":"claude-code","event":"tool","session":"71d7976c-6b1b-58e2-8a9f-e3ca7b1f9eab","tool":"ToolSearch","cwd":"splashery"}
+{"v":1,"t":"2026-10-09T21:09:36.587Z","harness":"claude-code","event":"tool","session":"71d7976c-6b1b-58e2-8a9f-e3ca7b1f9eab","tool":"ArtifactData","cwd":"splashery"}
+{"v":1,"t":"2026-10-09T21:09:41.378Z","harness":"claude-code","event":"turn-end","session":"71d7976c-6b1b-58e2-8a9f-e3ca7b1f9eab","cwd":"splashery"}
