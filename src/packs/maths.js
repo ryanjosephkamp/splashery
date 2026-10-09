@@ -16,6 +16,7 @@ import {
   quatRotate,
 } from "../kit.js";
 import { evenBox, evenCylinder } from "./even.js";
+import { surfacePoints } from "../physics/world.js"; // lane Hands-on H5
 
 const TAU = Math.PI * 2;
 const PHI = (1 + Math.sqrt(5)) / 2;
@@ -296,6 +297,70 @@ function lorenzTrack() {
 // How far behind the spark (as a fraction of the path) each tail blob runs.
 const LORENZ_SPARKS = [0, 0.004, 0.008, 0.012, 0.016];
 
+// Lane Hands-on H5: a new start for the Lorenz flow. While a finger is on
+// the toy the glowing point sits at it; let go, it flows on from there by
+// the same equations (time `LORENZ_RATE` per second), drawing its path as
+// a trail of LORENZ_BEADS glowing beads (tokens), and it falls onto the
+// same butterfly-shaped attractor from wherever it started.
+const LORENZ_BEADS = 40;
+const LORENZ_BEAD_AT = [0, 0, 0]; // where the beads are built
+const LORENZ_RATE = 0.55;
+const LORENZ_RUN = 9; // seconds it flows, before its trail fades
+const LORENZ_HANDS = new WeakMap();
+const lorenzStep = (p, dt) => {
+  // In the toy's units (x, (z − 24), y) / 18, as lorenzPath() draws it.
+  const f = ([X, Y, Z]) => {
+    const [x, y, z] = [18 * X, 18 * Z, 18 * Y + 24];
+    const d = [10 * (y - x), x * (28 - z) - y, x * y - (8 / 3) * z];
+    return [d[0] / 18, d[2] / 18, d[1] / 18];
+  };
+  const k1 = f(p);
+  const k2 = f(add(p, mul(k1, dt / 2)));
+  const k3 = f(add(p, mul(k2, dt / 2)));
+  const k4 = f(add(p, mul(k3, dt)));
+  return add(p, mul(add(add(k1, mul(k2, 2)), add(mul(k3, 2), k4)), dt / 6));
+};
+function lorenzHands(c, t, info) {
+  const m = LORENZ_HANDS.get(c) || { t, head: null, trail: [], run: null };
+  LORENZ_HANDS.set(c, m);
+  const dt = clamp(t - m.t, 0, 0.1);
+  m.t = t;
+  const f = info?.hands?.finger;
+  if (f && info.hands.point) {
+    m.head = info.hands.point.map((v) => clamp(v, -1.6, 1.6));
+    m.trail = [m.head];
+    m.run = 0;
+    m.held = true;
+    return m;
+  }
+  m.held = false;
+  if (m.run === null) return m;
+  m.run += dt;
+  if (m.run > LORENZ_RUN + 1.2) {
+    m.run = null;
+    m.head = null;
+    m.trail = [];
+    return m;
+  }
+  if (m.run < LORENZ_RUN) {
+    // Small steps (the flow is fast near the wings), a bead's worth at a
+    // time onto the trail.
+    let left = dt * LORENZ_RATE;
+    while (left > 1e-9) {
+      const h = Math.min(0.004, left);
+      m.head = lorenzStep(m.head, h);
+      left -= h;
+      m.since = (m.since ?? 0) + h;
+      if (m.since >= 0.02) {
+        m.since = 0;
+        m.trail.unshift(m.head);
+        if (m.trail.length > LORENZ_BEADS * 3) m.trail.pop();
+      }
+    }
+  }
+  return m;
+}
+
 function torusKnot(p, q, n = 1600) {
   const pts = [];
   for (let i = 0; i < n; i++) {
@@ -413,11 +478,21 @@ const CUBE_DIRS = [
   [0, 0, -1],
 ];
 
+// Lane Hands-on H5: the twenty cubes of a Menger sponge's first level, as
+// pieces: their place in the 3 x 3 x 3 and their middles (the sponge spans
+// −0.5 to 0.5).
+const MENGER_BLOCKS = [];
+for (let i = 0; i < 3; i++)
+  for (let j = 0; j < 3; j++)
+    for (let l = 0; l < 3; l++)
+      if ((i === 1) + (j === 1) + (l === 1) < 2)
+        MENGER_BLOCKS.push({ ijk: [i, j, l], c: [i, j, l].map((x) => (x + 0.5) / 3 - 0.5) });
+
 // Exposed faces of the solid cells of `grid` (a cube of side 1 about the
 // origin) that `want(i, j, k, f)` keeps, sampled evenly. `shade` is the grid
 // the occlusion is read from (the filled cells around the one in front of a
 // face). Samples carry the face (0..5) and that occlusion.
-function cellFaces(grid, want, shade = grid) {
+function cellFaces(grid, want, shade = grid, rims = grid) {
   const { n, at } = grid;
   const faces = [];
   for (let i = 0; i < n; i++)
@@ -449,8 +524,9 @@ function cellFaces(grid, want, shade = grid) {
           ].forEach(([ax, sgn], b) => {
             const e = [0, 0, 0];
             e[ax] = sgn;
-            const on = at(i + e[0], j + e[1], k + e[2]);
-            if (!on || at(i + e[0] + d[0], j + e[1] + d[1], k + e[2] + d[2])) rim |= 1 << b;
+            // (`rims`: the grid whose surface the edges are found on.)
+            const on = rims.at(i + e[0], j + e[1], k + e[2]);
+            if (!on || rims.at(i + e[0] + d[0], j + e[1] + d[1], k + e[2] + d[2])) rim |= 1 << b;
           });
           faces.push(i, j, k, f, occl, rim);
         });
@@ -862,6 +938,16 @@ const tessTurn = (v, a) => {
 // Directions the four corner copies move when the tetrahedron explodes.
 const SIER = sierpinski(1);
 const SIER_DIRS = SIER.corners.map((v) => unit(sub(v, SIER.centre)));
+// Lane Hands-on H5: the four half-size tetrahedra as pieces: their middles
+// and corners (about the middle).
+const SIER_PIECES = SIER.corners.map((v) => {
+  const corners = SIER.corners.map((w) => mul(add(v, w), 0.5));
+  const c = mul(
+    corners.reduce((a, w) => add(a, w), [0, 0, 0]),
+    0.25,
+  );
+  return { c, corners: corners.map((w) => sub(w, c)) };
+});
 
 // Faces grouped (at most 15) for exploding solids: the icosahedron's 20
 // faces go in pairs of neighbours.
@@ -1402,9 +1488,14 @@ export const RECIPES = {
       { key: "race", label: "Race", type: "pulse", ease: 4.2 },
     ],
     action: { key: "race", label: "Race along the path" },
+    // Hands-on (lane Hands-on H5): press on it and drag: the glowing point
+    // follows the finger; let go and it flows on from that new start by the
+    // Lorenz equations, drawing its path in glowing beads, and falls onto
+    // the same butterfly wings from wherever it began.
+    hands: { follow: { center: [0, 0, 0] } },
     // A tap sends a bright spark racing round the attractor; it draws the
     // path afresh in white-gold light behind it, which then fades.
-    drive(t, c, out) {
+    drive(t, c, out, info) {
       const p = c.race > 0 ? 1 - c.race : 1;
       const on = c.race > 0 ? 1 : 0;
       const s = clamp(p / 0.7, 0, 1);
@@ -1415,6 +1506,19 @@ export const RECIPES = {
           visible: on * smoothstep(0, 0.03, p) * (1 - smoothstep(0.72, 0.8, p)),
         };
       });
+      // Hands-on: the point at the finger, and the new path it draws.
+      const H = lorenzHands(c, t, info);
+      const tokens = [];
+      const fade = H.run === null ? 0 : 1 - smoothstep(LORENZ_RUN, LORENZ_RUN + 1.2, H.run);
+      for (let i = 0; i < LORENZ_BEADS; i++) {
+        const at = H.trail[i * 3];
+        tokens.push(at ? { offset: sub(at, LORENZ_BEAD_AT), visible: fade * (1 - (0.6 * i) / LORENZ_BEADS) } : { visible: 0 }); // prettier-ignore
+      }
+      out.tokens = tokens;
+      if (H.head && fade > 0) {
+        out.parts.spark0 = { offset: sub(H.head, path.at(0)), visible: fade };
+        if (!on) for (let i = 1; i < LORENZ_SPARKS.length; i++) out.parts[`spark${i}`].visible = 0;
+      }
       out.grow = on * s * 1.08;
       out.parts.trace = { visible: on * (1 - smoothstep(0.78, 1, p)) };
       out.glow = [1, 0.92, 0.72, 0.3 + 1.5 * c.glow];
@@ -1460,6 +1564,21 @@ export const RECIPES = {
           };
         });
       });
+      // Lane Hands-on H5: the beads of a new path (tokens; hidden until the
+      // glowing point is dragged to a new start and let go).
+      for (let i = 0; i < LORENZ_BEADS; i++) {
+        const f = 1 - (0.5 * i) / LORENZ_BEADS;
+        k.cloud({ count: 60, size: 1.1 * f, pattern: false }, (rand, j, n) => {
+          const halo = j < n * 0.4;
+          return {
+            p: add(LORENZ_BEAD_AT, mul(unit([rand() - 0.5, rand() - 0.5, rand() - 0.5]), (halo ? 0.05 : 0.022) * Math.cbrt(rand()))), // prettier-ignore
+            color: halo ? "#ffd98a" : "#fffbe8",
+            opacity: halo ? 0.35 : 1,
+            kind: "token",
+            params: [i, 0],
+          };
+        });
+      }
       k.add(polyTube(pts, 0.022), {
         part: k.part("trace"),
         share: 0.08,
@@ -1763,6 +1882,26 @@ export const RECIPES = {
     ],
     controls: [{ key: "carve", label: "Carve", type: "pulse", ease: 3.9 }],
     action: { key: "carve", label: "Close and carve the holes" },
+    // Hands-on (lane Hands-on H5): pull the small cubes out one by one: each
+    // of the twenty cubes the sponge is made of (each a smaller sponge,
+    // solid on every side) holds fast, then snaps out into your hand; drop
+    // it and it lands and tumbles. ↺ puts them all back.
+    hands: {
+      floor: -0.5,
+      area: 1.4,
+      pieces: () =>
+        MENGER_BLOCKS.map((b, i) => ({
+          token: i,
+          pos: b.c,
+          solid: { type: "box", half: [1 / 6, 1 / 6, 1 / 6] },
+          points: surfacePoints({ type: "box", half: [1 / 6, 1 / 6, 1 / 6] }, 2),
+          pick: [0.19, 0.19, 0.19],
+          mass: 0.4,
+          friction: 0.7,
+          restitution: 0.1,
+        })),
+      joints: () => MENGER_BLOCKS.map((b, i) => ({ type: "break", token: i, at: b.c, pull: 0.22, give: 0.05 })), // prettier-ignore
+    },
     // A tap plugs every hole with a solid cube (the smallest first), so the
     // sponge closes into a plain cube; then it is carved again as the
     // fractal is made: the six big plugs slide out of the faces, then the
@@ -1789,21 +1928,39 @@ export const RECIPES = {
     build(k, o) {
       const L = o.level === "2" ? 2 : 3;
       const whole = mengerGrid(L);
-      k.add(
-        cellFaces(whole, () => true),
-        {
+      // Lane Hands-on H5: each of the twenty cubes of the first level is a
+      // token, a solid piece closed on every side: its faces against its
+      // neighbors (hidden until it is pulled out) are thinner.
+      const m = whole.n / 3;
+      MENGER_BLOCKS.forEach((b, t) => {
+        const inB = (i, j, l) => Math.floor(i / m) === b.ijk[0] && Math.floor(j / m) === b.ijk[1] && Math.floor(l / m) === b.ijk[2]; // prettier-ignore
+        const mine = { n: whole.n, at: (i, j, l) => (inB(i, j, l) ? whole.at(i, j, l) : 0) };
+        const opts = (inner) => ({
           even: true,
           opacity: 1,
           jitter: 0.01,
           size: 1.08,
           flat: 0.12,
+          weight: inner ? 0.8 : 1,
+          kind: "token",
+          params: [t, 0],
           color: (c) => {
             const col = mengerLook(c.p, c.s.face, c.s.occl);
             // Smaller splats along the holes' edges keep them crisp.
             return c.s.edge < 0.18 ? { c: col, size: 0.72 } : col;
           },
-        },
-      );
+        });
+        // Faces on the sponge's own surface, then those against a neighbor.
+        const against = (i, j, l, f) => {
+          const d = CUBE_DIRS[f];
+          return !!whole.at(i + d[0], j + d[1], l + d[2]);
+        };
+        k.add(
+          cellFaces(mine, (i, j, l, f) => !against(i, j, l, f), whole, whole),
+          opts(false),
+        );
+        k.add(cellFaces(mine, against, whole), opts(true));
+      });
       // The plugs (clear at rest): big ones for level 1, one part per face
       // direction for levels 1 and 2, and the smallest only fade.
       const look = (c) => mengerLook(c.s.at, c.s.face, c.s.occl);
@@ -1930,6 +2087,10 @@ export const RECIPES = {
       { key: "twang", label: "Twang", type: "pulse", ease: 4.3 },
     ],
     action: { key: "twang", label: "Pull and let go" },
+    // Hands-on (lane Hands-on H5): pull the knot with a finger: the tube
+    // stretches after it like a stiff spring and, let go, springs back with
+    // a few wobbles.
+    hands: { floor: -1.2, stretch: { radius: 0.55, max: 0.6, hz: 3.2, damping: 0.2 } },
     // A tap pulls the knot into a looser, swirled shape (its lobes stretch
     // out and turn), then lets go: it springs back past its rest shape into
     // a tight one and wobbles to a stop, like a stretched spring. The knot is
@@ -2082,6 +2243,35 @@ export const RECIPES = {
     ],
     controls: [{ key: "twist", label: "Turn", type: "pulse", ease: 4.2 }],
     action: { key: "twist", label: "Turn the discs" },
+    // Hands-on (lane Hands-on H5): turn each disc by dragging round it, like
+    // the dial of a lock: it clicks a seventh of a turn at a time (where the
+    // bulb looks the same again) and coasts on a flick. (A Julia bulb off
+    // its axis has no such symmetry, so its discs stay put.)
+    hands: {
+      joints: (d) =>
+        d?.solid
+          ? []
+          : Array.from({ length: BULB_BANDS }, (_, i) => {
+              const y = -BULB_Y + ((i + 0.5) / BULB_BANDS) * 2 * BULB_Y;
+              const step = d?.step ?? BULB_STEP;
+              return {
+                type: "dial",
+                part: "b" + i,
+                pivot: [0, 0, 0],
+                axis: [0, 1, 0],
+                detents: Math.round(TAU / step),
+                drag: 1.6,
+                pos: [0, y, 0],
+                pick: [1.15, BULB_Y / BULB_BANDS, 1.15],
+                // Shown a little way off its nearest click at most (the
+                // picture repeats every click; splats sort as built).
+                also: (a, parts) => {
+                  const w = a - step * Math.round(a / step);
+                  parts["b" + i] = { quat: quatAxisAngle([0, 1, 0], w) };
+                },
+              };
+            }),
+    },
     // A tap turns the bulb's discs like the dials of a combination lock:
     // stacked horizontal slices click round, neighbours in opposite
     // directions, top to bottom, then back the other way, bottom to top.
@@ -2153,6 +2343,26 @@ export const RECIPES = {
     ],
     controls: [{ key: "open", label: "Explode", type: "toggle", default: 0, ease: 1.2 }],
     action: { key: "open", label: "Explode" },
+    // Hands-on (lane Hands-on H5): lift the four small tetrahedra off one by
+    // one (the top first), set them down, and stack them back: brought near
+    // its place, each settles in.
+    hands: {
+      floor: 0,
+      area: 1.6,
+      pieces: () =>
+        SIER_PIECES.map((p, i) => ({
+          part: "g" + i,
+          pos: p.c,
+          pivot: SIER.centre,
+          points: p.corners,
+          radius: 0.01,
+          pick: [0.45, 0.4, 0.45],
+          mass: 1,
+          friction: 0.8,
+          restitution: 0.05,
+        })),
+      joints: () => SIER_PIECES.map((_, i) => ({ type: "socket", part: "g" + i, snap: 0.2, armAway: 0.35 })), // prettier-ignore
+    },
     drive(t, c, out) {
       const e = easeInOut(c.open);
       SIER_DIRS.forEach((d, i) => {
@@ -2207,6 +2417,26 @@ export const RECIPES = {
     ],
     controls: [{ key: "open", label: "Explode", type: "toggle", default: 0, ease: 1 }],
     action: { key: "open", label: "Explode" },
+    // Hands-on (lane Hands-on H5): pull the faces off one by one (the
+    // icosahedron's in pairs) and lay them down; bring each back near its
+    // place and it fits back in.
+    hands: {
+      floor: (d) => d?.floor ?? -1,
+      area: 1.6,
+      pieces: (d) =>
+        (d?.groups || []).map((g) => ({
+          part: g.part,
+          pos: g.c,
+          pivot: [0, 0, 0],
+          points: g.pts,
+          radius: 0.012,
+          pick: [g.r, g.r, g.r],
+          mass: 0.3,
+          friction: 0.8,
+          restitution: 0.05,
+        })),
+      joints: (d) => (d?.groups || []).map((g) => ({ type: "socket", part: g.part, snap: 0.22, armAway: 0.35 })), // prettier-ignore
+    },
     drive(t, c, out) {
       const e = easeInOut(c.open);
       for (const kind of SOLID_KINDS)
@@ -2218,6 +2448,24 @@ export const RECIPES = {
       const { faces, groups } = SOLIDS[o.solid] || SOLIDS.dodecahedron;
       const pal = PALETTES[o.colors] || PALETTES.ocean;
       const rim = 0.035 * (o.solid === "dodecahedron" || o.solid === "icosahedron" ? 0.8 : 1);
+      // Lane Hands-on H5: each group of faces as a piece (its middle, its
+      // corners about it and its reach), and the floor under the solid.
+      const byGroup = new Map();
+      faces.forEach((f, i) => {
+        const g = byGroup.get(groups[i]) || { part: o.solid + groups[i], all: [] };
+        g.all.push(...f.pts);
+        byGroup.set(groups[i], g);
+      });
+      const pieces = [...byGroup.values()].map((g) => {
+        const c = mul(
+          g.all.reduce((a, p) => add(a, p), [0, 0, 0]),
+          1 / g.all.length,
+        );
+        const pts = g.all.map((p) => sub(p, c));
+        return { part: g.part, c, pts, r: Math.max(0.2, ...pts.map((p) => len(p))) };
+      });
+      const floor = Math.min(...faces.flatMap((f) => f.pts.map((p) => p[1])));
+      k.data = { groups: pieces, floor };
       faces.forEach((f, i) => {
         const part = k.part(o.solid + groups[i], { pivot: [0, 0, 0] });
         const tint = ramp(pal.slice(1), (i * 0.618 + 0.1) % 1);
@@ -3652,6 +3900,45 @@ const UC3_WALL = UC3_R + 0.14;
 const UC3_Q = quatMul(quatAxisAngle([1, 0, 0], 0.32), quatAxisAngle([0, 1, 0], 0.75));
 const uc3 = (p) => quatRotate(UC3_Q, [p[0], p[1] - 0.05, p[2] + UC3_D / 2]);
 
+// Lane Hands-on H5: the unit circle's point turned by hand. While a finger
+// is down, θ follows its angle round the circle's middle (unwound, from 0 up
+// to the end); let go, θ runs on to the end at the tap's pace, then the toy
+// rests as after a tap. Null when the hand isn't turning it.
+const UC_HANDS = new WeakMap();
+function ucHands(c, t, info, d, end) {
+  const m = UC_HANDS.get(c) || { t, th: null, last: null };
+  UC_HANDS.set(c, m);
+  const dt = clamp(t - m.t, 0, 0.1);
+  m.t = t;
+  const p = info?.hands?.finger && info.hands.point;
+  if (p) {
+    // Into the circle's own plane (in 3D, undo its turn).
+    const mid = d.place.mid;
+    let q = sub(p, mid);
+    if (d.three) q = quatRotate([-UC3_Q[0], -UC3_Q[1], -UC3_Q[2], UC3_Q[3]], q);
+    const a = Math.atan2(q[1], q[0]);
+    if (m.th === null || m.last === null) {
+      m.th = m.th ?? 0;
+      m.base = a - (m.th % TAU);
+    } else {
+      let da = a - m.last;
+      da -= TAU * Math.round(da / TAU);
+      m.th = clamp(m.th + da, 0, end);
+    }
+    m.last = a;
+    return m;
+  }
+  m.last = null;
+  if (m.th === null) return null;
+  // Let go: on round to the end (about 0.6 turns a second), then rest.
+  m.th += dt * TAU * 0.6;
+  if (m.th >= end) {
+    m.th = null;
+    return null;
+  }
+  return m;
+}
+
 // A path as a ribbon lying in a plane with normal N (or, for a path in
 // space, facing N), sampled by length: samples carry f, the fraction along.
 function ribbon3(fn, n, width, N) {
@@ -3712,6 +3999,11 @@ Object.assign(RECIPES, {
     input: UC_INPUT,
     controls: [{ key: "turn", label: "Turn", type: "pulse", ease: 5 }],
     action: { key: "turn", label: "Go round" },
+    // Hands-on (lane Hands-on H5): press on the toy and drag round the
+    // circle: the point follows the finger round (as many turns as the Turns
+    // option), the waves drawing out behind their heads as you go; let go and
+    // it goes on round to the end at its own pace.
+    hands: { follow: { center: UC_C } },
     // A tap sends the point round the path (the Turns option: once to three
     // times), its radius sweeping with it; its height draws the sine wave
     // and its left-right place the cosine wave, and for the circle
@@ -3726,11 +4018,20 @@ Object.assign(RECIPES, {
       if (!d) return;
       const T = 5;
       const e = since(c, "turn", T);
-      const on = e >= 0;
-      const f = on ? easeInOut(band(e, 0.3, 4.1)) : 0;
+      let on = e >= 0;
+      let f = on ? easeInOut(band(e, 0.3, 4.1)) : 0;
       const end = TAU * d.turns;
+      let running = on && e < 4.15;
+      // Hands-on: the finger's angle round the circle's middle, unwound
+      // (turn after turn) from where it went down; let go, it runs on to
+      // the end.
+      const H = ucHands(c, t, info, d, end);
+      if (H) {
+        on = true;
+        f = H.th / end;
+        running = H.th < end;
+      }
       const th = end * f;
-      const running = on && e < 4.15;
       // The heads ride the waves; at rest they wait at the far end (where
       // the turns leave them).
       const hth = on ? th : end;
@@ -3743,7 +4044,7 @@ Object.assign(RECIPES, {
         { offset: d.three ? sub(P.c(hth), P.c(end)) : [0, 0, 0] },
       ];
       // Channel 0 wipes and redraws the waves; channel 3 lights the terms.
-      out.morph = [running && f < 1 ? 1.002 - f : 0, 0, 0, on ? band(e, 0.35, 3.2) * (1 - band(e, 4.3, 4.95)) : 0]; // prettier-ignore
+      out.morph = [running && f < 1 ? 1.002 - f : 0, 0, 0, on && !H ? band(e, 0.35, 3.2) * (1 - band(e, 4.3, 4.95)) : 0]; // prettier-ignore
       // In 3D the heads travel in depth: sorted again as they go.
       if (d.three) {
         const m = mem(c);
@@ -4822,6 +5123,11 @@ const PY_TRIS = [
   { R: [0, PY_S], A: [PY_A, PY_S], B: [0, PY_A], move: [0, 0], go: -1, back: -1, col: "#5cb85c" }, // prettier-ignore
 ];
 const PY_SLIDE = 0.45;
+// How far along its way (0..1) a tap's slide has a triangle at time e.
+const pySlide = (tri, e) =>
+  e < 0 || tri.go < 0
+    ? 0
+    : easeInOut(band(e, tri.go, tri.go + PY_SLIDE)) - easeInOut(band(e, tri.back, tri.back + PY_SLIDE)); // prettier-ignore
 const PY_THICK = 0.07;
 const PY_CUES = [];
 const PY_SORTS = [];
@@ -4842,19 +5148,53 @@ Object.assign(RECIPES, {
     alive: true,
     controls: [{ key: "prove", label: "Prove", type: "pulse", ease: 4.5 }],
     action: { key: "prove", label: "Rearrange" },
+    // Hands-on (lane Hands-on H5): slide the three triangles yourself, each
+    // along its own way into its corner (where it clicks against the frame)
+    // and back; once all three are in, the tilted square c² lights up with
+    // a² + b² = c², where a² and b² were.
+    hands: {
+      touch: true,
+      floor: -0.1,
+      joints: () =>
+        PY_TRIS.flatMap((tri, i) => {
+          if (tri.go < 0) return [];
+          const L = Math.hypot(...tri.move) * PY_U;
+          const mid = pyP((tri.R[0] + tri.A[0] + tri.B[0]) / 3, (tri.R[1] + tri.A[1] + tri.B[1]) / 3, PY_THICK / 2); // prettier-ignore
+          return [
+            {
+              type: "slider",
+              token: i,
+              name: `tri${i}`,
+              pos: mid,
+              pivot: mid,
+              axis: [tri.move[0], tri.move[1], 0].map((v) => v / Math.hypot(...tri.move)),
+              min: 0,
+              max: L,
+              gravity: false,
+              friction: 30,
+              damping: 8,
+              bounce: 0.05,
+              pick: [0.42, 0.42, 0.2],
+              // (Shown where a tap's slide has it.)
+              start: (c) => pySlide(tri, since(c, "prove", 4.5)) * L,
+              sound: (ev) => (ev.kind === "stop" ? { voice: "click", vol: 0.5 } : null),
+            },
+          ];
+        }),
+    },
     // A tap slides the triangles one at a time, as solid wooden pieces
     // lifted a little off the board, from the two rectangles into the four
     // corners: the empty squares a² and b² fade and the tilted square c²
     // lights up in their place, with a² + b² = c² below; then they slide
     // back (4.5 s). Each landing clicks.
-    drive(t, c, out) {
+    drive(t, c, out, info) {
       const T = 4.5;
       const e = since(c, "prove", T);
       const on = e >= 0;
       const tokens = [];
       PY_TRIS.forEach((tri, i) => {
         let m = 0;
-        if (on && tri.go >= 0) m = easeInOut(band(e, tri.go, tri.go + PY_SLIDE)) - easeInOut(band(e, tri.back, tri.back + PY_SLIDE)); // prettier-ignore
+        if (on && tri.go >= 0) m = pySlide(tri, e);
         const lift = on && tri.go >= 0 ? 0.07 * (Math.sin(Math.PI * band(e, tri.go, tri.go + PY_SLIDE)) + Math.sin(Math.PI * band(e, tri.back, tri.back + PY_SLIDE))) : 0; // prettier-ignore
         tokens[i] = { offset: [tri.move[0] * PY_U * m, tri.move[1] * PY_U * m, lift] };
       });
@@ -4868,6 +5208,17 @@ Object.assign(RECIPES, {
       if (!on && was >= 0) out.resort = true;
       // Channel 1 clears a² and b²; channel 2 shows c² and the equation.
       out.morph = [0, on ? band(e, 0.3, 0.6) * (1 - band(e, 4.0, 4.35)) : 0, on ? band(e, 1.75, 2.05) * (1 - band(e, 2.75, 2.95)) : 0, 0]; // prettier-ignore
+      // Hands-on: slid by hand, a² and b² clear as the triangles leave, and
+      // c² lights once all three are in their corners.
+      const slid = PY_TRIS.filter((tri) => tri.go >= 0).map((tri) => {
+        const v = info?.hands?.joint(`tri${PY_TRIS.indexOf(tri)}`);
+        return v === null || v === undefined ? null : v / (Math.hypot(...tri.move) * PY_U);
+      });
+      if (!on && slid.every((v) => v !== null) && slid.some((v) => v > 0.01)) {
+        const all = Math.min(...slid);
+        out.morph[1] = band(Math.max(...slid), 0, 0.3);
+        out.morph[2] = band(all, 0.8, 0.9);
+      }
       cuesAt(c, e, PY_CUES, out);
     },
     build(k) {

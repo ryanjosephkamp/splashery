@@ -50,29 +50,29 @@ Proposals below are suggestions; the owner may change them.
   bear, Pretzel, Croissant, Pizza, Burger, Sushi, Taco, Coffee, Apple, Bananas, Orange, Kiwi,
   Pineapple, Cherries, Grapes, Avocado, Building bricks, Rubber duck, Newton's cradle, Yo-yo, Puzzle
   cube, Spring toy, Kite, Chess set, Lorenz attractor, Möbius strip, Klein bottle, Menger sponge,
-  Hypercube, Torus knot, Gyroid, Mandelbulb, Seashell spiral, Graph plotter, Surface plotter, Circle
-  and waves, Fourier circles, Pythagoras proof, Rössler attractor, Thomas attractor, Aizawa
-  attractor, 5-cell, 16-cell, 24-cell, Duoprism, Splat equation, Storybook, Music box, Fountain pen,
-  Water bottle, Soda can, Running shoe, Hoodie, Sunglasses, Baseball cap, Sword in the stone,
-  Heraldic shield, Bow and target, Crown, Wizard's orb, Crystal ball, Jellyfish, School of fish,
-  Pufferfish, Nautilus, Snail, Octopus, Sea urchin, Frog, Snowman, Fireworks, Decorated tree, Paper
-  lantern, Diya, Acoustic guitar, Snare drum, Xylophone, Toy piano, Grand piano, Upright piano,
-  Harpsichord, Electronic keyboard, Hot-air balloon, Sports car, Bus, Jet airliner, Sailboat,
-  Submarine, Bicycle, Eiffel Tower, Washington Monument, Pyramids of Giza, Twisting supertall,
-  Statue of Liberty, White House, Leaning Tower of Pisa, Colosseum, Parthenon, Stonehenge, Big Ben,
-  Taj Mahal, Castle, Pagoda, Windmill, Perceptron, Multilayer perceptron, Neural network,
-  Convolutional network, Recurrent network, Transformer, Looped transformer, Diffusion model,
-  Gradient descent, Gaussian splatting, Word vectors, Sorting machine, Half adder, Turing machine,
-  Difference engine, Enigma machine, Bombe, Picture lab, Your book, Photo album, Picture frame, Song
-  landscape, Chladni plate, Room echo meter, Splat mirror, Model to splats, QR code, Photo to 3D,
-  Moving photo to 3D, Video to 3D, Sound lab, Sound recorder, Splat toolkit, Point clouds, Volume
-  viewer, Splat field, Light lab, Thermal ellipsoids, Super-resolution microscope, Galaxy in a box,
-  Cryo-EM map, Contour lab, Terrain in a box, Ripple tank, Light bench, Fluid lab, Grand Canyon,
-  Mount St. Helens, The sea floor, Tides at Bar Harbor, Hurricane, Relief map, Living city, Stork
-  migration, Earthquakes, Airport X-ray scanner, How CT works, Walnut CT scan, MRI of a fruit,
-  Electron microscope, Thermal camera, Screen, Shardball, Longtail, Grain Garden, Page Breaker,
-  Strata, Volley Table, Stone Belt, Soft Landing, Night Owl Pinball, Cast a Shadow, Photo Dash, Note
-  Rider, Data in 3D.
+  Hypercube, Torus knot, Gyroid, Mandelbulb, Sierpinski tetrahedron, Platonic solids, Seashell
+  spiral, Graph plotter, Surface plotter, Circle and waves, Fourier circles, Pythagoras proof,
+  Rössler attractor, Thomas attractor, Aizawa attractor, 5-cell, 16-cell, 24-cell, Duoprism, Splat
+  equation, Storybook, Music box, Fountain pen, Water bottle, Soda can, Running shoe, Hoodie,
+  Sunglasses, Baseball cap, Sword in the stone, Heraldic shield, Bow and target, Crown, Wizard's
+  orb, Crystal ball, Jellyfish, School of fish, Pufferfish, Nautilus, Snail, Octopus, Sea urchin,
+  Frog, Snowman, Fireworks, Decorated tree, Paper lantern, Diya, Acoustic guitar, Snare drum,
+  Xylophone, Toy piano, Grand piano, Upright piano, Harpsichord, Electronic keyboard, Hot-air
+  balloon, Sports car, Bus, Jet airliner, Sailboat, Submarine, Bicycle, Eiffel Tower, Washington
+  Monument, Pyramids of Giza, Twisting supertall, Statue of Liberty, White House, Leaning Tower of
+  Pisa, Colosseum, Parthenon, Stonehenge, Big Ben, Taj Mahal, Castle, Pagoda, Windmill, Perceptron,
+  Multilayer perceptron, Neural network, Convolutional network, Recurrent network, Transformer,
+  Looped transformer, Diffusion model, Gradient descent, Gaussian splatting, Word vectors, Sorting
+  machine, Half adder, Turing machine, Difference engine, Enigma machine, Bombe, Picture lab, Your
+  book, Photo album, Picture frame, Song landscape, Chladni plate, Room echo meter, Splat mirror,
+  Model to splats, QR code, Photo to 3D, Moving photo to 3D, Video to 3D, Sound lab, Sound recorder,
+  Splat toolkit, Point clouds, Volume viewer, Splat field, Light lab, Thermal ellipsoids,
+  Super-resolution microscope, Galaxy in a box, Cryo-EM map, Contour lab, Terrain in a box, Ripple
+  tank, Light bench, Fluid lab, Grand Canyon, Mount St. Helens, The sea floor, Tides at Bar Harbor,
+  Hurricane, Relief map, Living city, Stork migration, Earthquakes, Airport X-ray scanner, How CT
+  works, Walnut CT scan, MRI of a fruit, Electron microscope, Thermal camera, Screen, Shardball,
+  Longtail, Grain Garden, Page Breaker, Strata, Volley Table, Stone Belt, Soft Landing, Night Owl
+  Pinball, Cast a Shadow, Photo Dash, Note Rider, Data in 3D.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
@@ -2180,7 +2180,9 @@ Proposals below are suggestions; the owner may change them.
   - Owner: Spin a little more or be more dynamic; looks good when still.
   - Effect: A glowing point races along the trail, drawing a new path.
   - Improved: C2: a new tap action sends a bright spark racing along the whole path, drawing it
-    again in light that then fades (about 3 s).
+    again in light that then fades (about 3 s). Hands-on H5: with ✋ Hands-on on, the glowing point
+    follows the finger; let go, it flows on from that new start by the Lorenz equations, drawing its
+    path in forty glowing beads, and falls onto the same attractor from wherever it began.
   - Sound: Something epic, a deep hit, a dark slow rush and a wide low chord (no whistling howl).
 - **Möbius strip** (`mobius`). Now: tap: Send it round. Plan: keep.
   - Owner: Wow, really neat. Maybe twist a little.
@@ -2211,7 +2213,9 @@ Proposals below are suggestions; the owner may change them.
   - Improved: E3: a tap plugs every hole with a solid cube, smallest first, closing the sponge into
     a plain cube; then it is carved again level by level: the six big cubes slide out of the faces,
     then the next size down, then the smallest, each fading as it leaves (about 4 s). (Built instead
-    of a zoom, which blurred.)
+    of a zoom, which blurred.) Hands-on H5: with ✋ Hands-on on, each of the twenty level-one cubes
+    (each a smaller sponge, now closed on every side) holds fast and snaps out under a pull, lands
+    and tumbles; Reset mends them.
   - Sound: Descending recursive blips.
 - **Hypercube** (`hypercube`). Now: tap: Turn inside out. Plan: keep.
   - Owner: Possibly the favourite and homepage embed (see the Menger sponge).
@@ -2227,7 +2231,8 @@ Proposals below are suggestions; the owner may change them.
   - Effect: Contorts through different knot shapes.
   - Improved: E3: a tap pulls the knot loose (its lobes stretch out and swirl) and lets go: it
     springs back past rest into a tight knot and wobbles to a stop like a plucked spring (about 4
-    s).
+    s). Hands-on H5: with ✋ Hands-on on, a pull stretches the tube after the finger like a stiff
+    spring (soft stretch); let go, it springs back with a few wobbles.
   - Sound: It strains as it is pulled and lets go with a real thump and swish (no banjo or guitar
     notes).
 - **Gyroid** (`gyroid`). Now: tap: Breathe in and out. Plan: keep.
@@ -2246,13 +2251,19 @@ Proposals below are suggestions; the owner may change them.
     picture (about 4 s). This replaced a twist after the owner's review. Math r2: a Power option (5
     to 12; power n has n − 1-fold symmetry, so the slices turn 1/(n − 1) of a turn) and a Julia bulb
     (four fixed points c off the axis; with no turning symmetry the whole bulb turns a quarter turn
-    and back).
+    and back). Hands-on H5: with ✋ Hands-on on, each disc turns by dragging round it like a lock's
+    dial, clicking a seventh of a turn at a time where the bulb looks the same again (shown never
+    more than a few degrees off its built pose); a Julia bulb off its axis keeps its discs still.
   - Sound: Deep morphing tone.
 - **Sierpinski tetrahedron** (`sierpinski`). Now: tap: Explode. Plan: keep.
   - Owner: Perfect as is.
+  - Improved: Hands-on H5: with ✋ Hands-on on, the four half-size tetrahedra lift off, set down and
+    stack back, each settling into its place when brought near it.
   - Sound: Stacked triangle chimes.
 - **Platonic solids** (`platonic`). Now: tap: Explode. Plan: keep.
   - Owner: Perfect.
+  - Improved: Hands-on H5: with ✋ Hands-on on, the faces (the icosahedron's in pairs) pull off, lie
+    down, and fit back into their places when brought near them.
   - Sound: Five-note chime.
 - **Seashell spiral** (`seashell-spiral`). Now: tap: Hear the sea. Plan: keep.
   - Owner: Something to do with hearing the ocean in a seashell.
@@ -2291,7 +2302,9 @@ Proposals below are suggestions; the owner may change them.
     parameters): a View option adds a 3D helix (the point runs back along e^(iθ) while its shadows
     draw the cosine wave on the floor and the sine wave on a side wall); a Path option picks the
     circle, an ellipse, a figure eight, a cardioid, a rose or your own typed path (x = …, y = … or r
-    = …); and a Turns option runs it one to three times.
+    = …); and a Turns option runs it one to three times. Hands-on H5: with ✋ Hands-on on, a press
+    and a drag round the circle turn the point by hand (unwound, turn after turn), the waves drawing
+    out behind their heads; let go, it goes on round to the end.
   - Sound: Warmer, a soft low chord that swells with the turn and a gentle rush a quarter turn later
     (one option to try).
 - **Fourier circles** (`fourier-circles`). Now: tap: Spin the circles. Plan: keep.
@@ -2315,7 +2328,9 @@ Proposals below are suggestions; the owner may change them.
   - Improved: Math: new toy. A tap slides the wooden triangles one at a time from two rectangles
     into the four corners: the empty squares a² and b² fade and the tilted square c² lights up, with
     a² + b² = c² below; then they slide back (4.5 s). In this classic arrangement the pieces slide
-    without turning, and one stays put.
+    without turning, and one stays put. Hands-on H5: with ✋ Hands-on on, the three moving triangles
+    slide by hand along their own ways into their corners (clicking at the frame); a² and b² clear
+    as they leave, and c² lights with a² + b² = c² once all three are in.
   - Sound: Wooden slides, and a click as each piece lands.
 - **Rössler attractor** (`rossler-attractor`). Now: tap: Drop a tracer. Plan: keep.
   - Owner: The owner's Math notes (BACKLOG.md, Math r2): more dynamical systems beside the Lorenz
