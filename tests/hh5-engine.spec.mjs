@@ -184,37 +184,17 @@ test("socket armAway: armed only once the piece and the finger's line have left 
   expect(j.armed).toBe(true);
 });
 
-test("a piece's home spring and links: pulled, an atom drags its neighbor; let go, both spring home", async () => {
+test("a piece's home spring: pulled off and let go, it springs back to its place with a wobble", async () => {
   const { HandsOn } = await import("../src/physics/hands-on.js");
-  const hands = {
-    gravity: 0,
-    pieces: () => [
-      { token: 0, pos: [0, 0, 0], free: true, home: { k: 80, damping: 6 }, pick: [0.1, 0.1, 0.1] },
-      {
-        token: 1,
-        pos: [0.5, 0, 0],
-        free: true,
-        home: { k: 80, damping: 6 },
-        pick: [0.1, 0.1, 0.1],
-      },
-    ],
-    links: () => [{ a: 0, b: 1, compliance: 2e-3 }],
-  };
+  const hands = { gravity: 0, pieces: () => [{ token: 0, pos: [0, 0, 0], home: { k: 80, damping: 6 }, pick: [0.1, 0.1, 0.1] }] }; // prettier-ignore
   const player = { proc: { ctx: { kit: { data: {} } } }, motion: { ctx: { transform: { scale: 1 } } }, stage: {} }; // prettier-ignore
   const ho = new HandsOn(player);
   ho.info = { radius: 1, recipe: { hands } };
   const w = ho.buildPieces(hands);
-  const [a, b] = ho.pieces.map((p) => p.body);
-  // Pulled out sideways (as a finger would hold it), atom a drags b along.
-  a.held = true;
-  for (let i = 0; i < 30; i++) {
-    a.pos = [0, 0, -0.3 * Math.min(1, i / 10)];
-    a.vel = [0, 0, 0];
-    w.step(1 / 60);
-  }
-  expect(b.pos[2]).toBeLessThan(-0.02);
-  // Let go: both come back to where they were built, with a wobble.
-  a.held = false;
+  const a = ho.pieces[0].body;
+  ho.free(a);
+  a.pos = [0, 0, -0.3];
+  w.wake();
   let crossed = false;
   for (let i = 0; i < 240; i++) {
     w.step(1 / 60);
@@ -222,5 +202,4 @@ test("a piece's home spring and links: pulled, an atom drags its neighbor; let g
   }
   expect(crossed).toBe(true);
   expect(Math.hypot(...a.pos)).toBeLessThan(0.01);
-  expect(Math.hypot(b.pos[0] - 0.5, b.pos[1], b.pos[2])).toBeLessThan(0.01);
 });

@@ -827,10 +827,7 @@ picked up again or ↺ Reset (objects only, never people or animals). `stick: fa
 
 A piece's `home: { k, damping }` (lane Hands-on H5; per second squared, per second) puts it on a
 spring to where it was built, place and turn: let go, it springs back with a wobble instead of
-falling (an atom of a molecule; give such pieces `free: true` and the toy `gravity: 0`).
-`hands.links: (data, info) => [{ a, b, compliance }]` joins pieces a and b (their indices) by a
-springy link at their length as built (compliance 0.001 is stiff, larger is softer): pull one atom
-and its bonded neighbors follow a little.
+falling (an atom of a molecule, pulled off and let go).
 
 A piece's `when: (data) => bool` (lane Hands-on H5; `data` the build's `k.data`) says whether it can
 be picked up now: an anatomy atlas's organs only while its organs layer shows (its drive keeps the
