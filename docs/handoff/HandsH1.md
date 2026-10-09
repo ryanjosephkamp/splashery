@@ -89,6 +89,13 @@ cards, grouped Balls, Shapes, Toys and Clothing).
 - All marked (October 9, 2026, 06:47): `hh1-hoodie-r3` is "good", so every `hh1-` card's latest
   version is "good" (36 toys: 22 balls, the blob, 9 toys, 4 clothing). All four shelf PRs are ready
   for the Operator to merge (#424, #429, #433, #434); main (a0b68bc3) is merged into each.
+- Batch fixes (October 9, 2026, 13:00; the Operator's merge batch failed four checks):
+  - Shapes: the blob's shelf-entry grab is gone. It replaced the blob's recipe, which broke engine
+    C's rig stretch (hec), hid its Split button (smoke) and made it a grab toy (hh1-engine). The
+    blob's Hands-on line was already engine C's; Shapes now adds only its test.
+  - Sound review: dice, balloon dog, robot, sunglasses and baseball cap stay "site", with the
+    Hands-on sound added to their plan and kept as a candidate (sndb). Marble, paper plane and teddy
+    bear keep Sound C's tap notes (sndc).
 - Not done: the garden gnome (the L1 sweep's finding) is a scan outside these shelves, its cause in
   the engine's resting contact (see "For the Operator").
 
