@@ -821,6 +821,8 @@ const FOUNTAIN_PEN = {
         at: [FP.capC[0] + 0.24, FP.capC[1], FP.capC[2]],
         pull: 0.14,
         give: 0.02,
+        // (Held as it was pulled off, never hanging down past the paper.)
+        steady: true,
         reseat: {
           snap: 0.25,
           seats: [{ pos: [2 * FP.post - FP.capC[0] - 0.12, FP.capC[1], FP.capC[2]], quat: quatAxisAngle([0, 1, 0], Math.PI) }], // prettier-ignore
