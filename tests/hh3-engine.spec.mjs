@@ -53,15 +53,27 @@ const unpatch = (page) =>
     if (hands?.joints?.orig) hands.joints = hands.joints.orig;
   });
 
+// Steps the toy n/60 s. (First one animation frame: the browser hands a
+// page its mouse moves with its frames, so a move just sent is handled
+// before the toy steps, however slow the machine is.)
 const tick = (page, secs) =>
   page.evaluate(
-    (n) => {
+    async (n) => {
+      await new Promise((ok) => requestAnimationFrame(() => ok()));
       const { player } = window.__splashery;
       const step = player.tickFixed || player.update.bind(player);
       for (let i = 0; i < n; i++) step(1 / 60);
     },
     Math.round(secs * 60),
   );
+
+// After a press: waits until Hands-on has taken it (the app picks first,
+// which takes longer on a loaded machine; moves before that are ignored).
+const taken = (page) =>
+  page.waitForFunction(() => {
+    const ho = window.__splashery.player.handsOn;
+    return !!(ho.press || ho.hold);
+  });
 
 const screen = (page, pts) =>
   page.evaluate((pts) => {
@@ -78,6 +90,7 @@ async function drag(page, points, { steps = 20, hold = false, held = false } = {
   if (!held) {
     await page.mouse.move(...px[0]);
     await page.mouse.down();
+    await taken(page);
   }
   for (let k = 1; k < px.length; k++)
     for (let i = 1; i <= steps; i++) {
@@ -167,6 +180,7 @@ test("reseat: a second seat takes it, and ↺ brings it home from there", async 
   const [pg, pa] = await screen(page, [g, away]);
   await page.mouse.move(...pg);
   await page.mouse.down();
+  await taken(page);
   let at = null;
   for (let i = 1; i <= 30 && !at; i++) {
     await page.mouse.move(pg[0] + ((pa[0] - pg[0]) * i) / 30, pg[1] + ((pa[1] - pg[1]) * i) / 30);
@@ -270,6 +284,7 @@ test("a forgiving press: off the desk lamp's splats, Hands-on still lifts it", a
   // A drag from there picks the lamp up.
   await page.mouse.move(at.left + at.x, at.top + at.y);
   await page.mouse.down();
+  await taken(page);
   for (let i = 1; i <= 20; i++) {
     await page.mouse.move(at.left + at.x, at.top + at.y - 6 * i);
     await tick(page, 1 / 30);
