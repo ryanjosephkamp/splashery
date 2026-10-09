@@ -1133,10 +1133,10 @@
       "round": "2026-10-02"
     },
     "dice": {
-      "status": "ready",
-      "said": "The dice should sound like somebody rolling dice in a casino. Like if you throw dice down and roll them on the ground or on the table or something, there is actually a characteristic sound of that. This is not it. This is kind of like a plinking, twinkling sound that's not realistic. (Hands-on H1, October 8, 2026) New: its Hands-on sound, to hear on the Sound Board. Its tap sound is unchanged.",
+      "status": "site",
+      "said": "The dice should sound like somebody rolling dice in a casino. Like if you throw dice down and roll them on the ground or on the table or something, there is actually a characteristic sound of that. This is not it. This is kind of like a plinking, twinkling sound that's not realistic.",
       "note": "It's a plinking, twinkling sound; it should sound like real dice thrown on a table.",
-      "plan": "Now: in Hands-on, each die clacks as it lands, a brighter clack when two dice knock.",
+      "plan": "Now: two dice thrown on a wooden table, bouncing with quicker, quieter knocks and settling; real CC0 recordings now (dice-throw.mp3), with the synthesized sound as a fallback. In Hands-on (lane Hands-on H1), each die clacks as it lands, a brighter clack when two dice knock (the candidate below).",
       "candidates": [
         {
           "id": "hh1",
@@ -1273,10 +1273,10 @@
       ]
     },
     "balloon-dog": {
-      "status": "ready",
-      "said": "The balloon dog doesn't really sound like balloons popping. It has, like, a whistle at the beginning, which shouldn't be there. And then when it pops, it's close, but it's not exactly like a balloon popping. You can definitely find a sound pack or something with balloons popping and use those. (Hands-on H1, October 8, 2026) New: its Hands-on sound, to hear on the Sound Board. Its tap sound is unchanged.",
+      "status": "site",
+      "said": "The balloon dog doesn't really sound like balloons popping. It has, like, a whistle at the beginning, which shouldn't be there. And then when it pops, it's close, but it's not exactly like a balloon popping. You can definitely find a sound pack or something with balloons popping and use those.",
       "note": "Remove the whistle at the start, and the pop should be a real balloon pop.",
-      "plan": "Now: in Hands-on, a long rubbery squeak when squeezed, a short one as it lands.",
+      "plan": "Now: a real balloon bursting (no whistle first); real CC0 recordings now (balloon-dog-pop.mp3), with the synthesized sound as a fallback. In Hands-on (lane Hands-on H1), a long rubbery squeak when squeezed, a short one as it lands (the candidate below).",
       "candidates": [
         {
           "id": "hh1",
@@ -1308,10 +1308,10 @@
       "round": "2026-10-02"
     },
     "robot": {
-      "status": "ready",
-      "said": "The wind-up robot is kind of awkward. It should sound more realistic. You can probably find a sound pack for that. (Hands-on H1, October 8, 2026) New: its Hands-on sound, to hear on the Sound Board. Its tap sound is unchanged.",
+      "status": "site",
+      "said": "The wind-up robot is kind of awkward. It should sound more realistic. You can probably find a sound pack for that.",
       "note": "Awkward; it should sound like a real wind-up toy.",
-      "plan": "Now: in Hands-on, the key clicks as it is wound and ticks as it unwinds.",
+      "plan": "Now: a few clicks of the winding key, then clockwork whirring as it unwinds and its tin feet clanking along; real CC0 recordings now (robot-wind.mp3), with the synthesized sound as a fallback. In Hands-on (lane Hands-on H1), the key clicks as it is wound and ticks as it unwinds (the candidate below).",
       "candidates": [
         {
           "id": "hh1",
