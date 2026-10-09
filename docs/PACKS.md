@@ -818,6 +818,9 @@ Lane Hands-on H2 (October 8, 2026) added these keys to a piece's def:
 - `offHome: { … }`: entries merged into the piece's part while it is off its place (a candle pulled
   out of the cake goes out: `{ visible: 0 }`).
 - `flip: true` (below).
+- `mass: 0`: a fixed piece. It is never picked up, and its `pick` shape is something to set other
+  pieces down on (the croissant's bottom half, the egg's cup and toast soldiers): a held piece
+  passes through anything it doesn't hover over.
 
 And `hands.foot` (0.6): how far out from its middle, as a share of its pick radius, a held piece
 looks for what is under it; 0.95 lets a wide piece (a burger's bun) set down beside a stack sit on
