@@ -505,7 +505,8 @@ export class Joints {
   nearSocket(j, h, ray) {
     const R = this.hands.R();
     const snap = (j.d.snap ?? 0.3) * R;
-    const away = v3.len(v3.sub(h.body.pos, j.pc.home.pos));
+    let away = v3.len(v3.sub(h.body.pos, j.pc.home.pos));
+    if (j.d.out) away = Math.min(away, v3.len(v3.sub(h.body.pos, v3.add(j.pc.home.pos, j.d.out)))); // (away from its doorway's mouth too) // prettier-ignore
     if (!j.armed) {
       if (away > snap * 1.5) j.armed = true;
       return;
