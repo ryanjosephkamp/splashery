@@ -290,15 +290,21 @@ function bacteriumJoints(d) {
 }
 
 // The DNA's strands pulled apart near the top: how far the finger pulls
-// sideways sets how far it is unzipped.
+// sideways sets how far it is unzipped. As it opens, the helix turns (at
+// most a quarter turn) so the fork opens across the view, left and right,
+// and its strands peel wider than the tap's (the owner's notes of October 9,
+// 2026: he couldn't see it unzip).
 function dnaJoints(d) {
   if (!d) return [];
   const top = quatRotate(DNA.tilt, [0, DNA.height * 0.38, 0]);
   return [
-    grip({ name: "unzip", axis: [1, 0, 0], max: 0.6, spring: 6, damping: 2.2, pos: top, pick: [0.75, 0.55, 0.75], also: (v, parts) => {
-      const u = v / 0.6;
+    grip({ name: "unzip", axis: [1, 0, 0], max: DNA.pull, spring: 6, damping: 2.2, pos: top, pick: [0.75, 0.55, 0.75], also: (v, parts) => {
+      const u = v / DNA.pull;
       d.h4 = { ...d.h4, u };
-      Object.assign(parts, dnaParts(d.h4?.twist ?? 0, u));
+      const live = d.h4?.twist ?? 0;
+      const face = Math.round(live / Math.PI) * Math.PI - live;
+      const twist = live + face * smoothstep(0, 0.35, u);
+      Object.assign(parts, dnaParts(twist, u, DNA.open * DNA.peel));
     } }), // prettier-ignore
   ];
 }
@@ -2929,6 +2935,10 @@ const DNA = (() => {
     y0: -height / 2 + 0.12,
     axis: quatRotate(tilt, [0, 1, 0]),
     open: 0.13,
+    // Hands-on: how far the finger pulls to open it fully, and how much
+    // wider its strands peel than the tap's.
+    pull: 0.45,
+    peel: 1.7,
   };
 })();
 
@@ -2949,7 +2959,7 @@ function dnaSide(s) {
 
 // Rigid transforms of the segments of one strand, unzipped by u, in the helix
 // frame: [{ pivot, quat, offset }].
-function dnaChain(s, u) {
+function dnaChain(s, u, open = DNA.open) {
   const axis = cross([0, 1, 0], dnaSide(s));
   const out = [];
   let prevQ = [0, 0, 0, 1];
@@ -2959,7 +2969,7 @@ function dnaChain(s, u) {
     const pivot = dnaStrand(s, dnaBound(j));
     // Where this joint has been carried by the segments below it.
     const moved = j === 0 ? pivot : add(prevMoved, quatRotate(prevQ, sub(pivot, prevPivot)));
-    const q = quatAxisAngle(axis, u * DNA.open * (j + 1));
+    const q = quatAxisAngle(axis, u * open * (j + 1));
     out.push({ pivot, quat: q, offset: sub(moved, pivot) });
     prevQ = q;
     prevPivot = pivot;
@@ -2981,13 +2991,13 @@ function dnaTip(s) {
 }
 
 // Part transforms for a twist angle and an unzip amount, in recipe coordinates.
-function dnaParts(twist, u) {
+function dnaParts(twist, u, open = DNA.open) {
   const T = DNA.tilt;
   const Ti = [-T[0], -T[1], -T[2], T[3]];
   const R = quatMul(T, quatMul(quatAxisAngle([0, 1, 0], twist), Ti));
   const parts = { lower: { quat: R } };
   for (const s of ["a", "b"]) {
-    dnaChain(s, u).forEach((seg, j) => {
+    dnaChain(s, u, open).forEach((seg, j) => {
       const pw = quatRotate(T, seg.pivot);
       const qw = quatMul(T, quatMul(seg.quat, Ti));
       const ow = quatRotate(T, seg.offset);
