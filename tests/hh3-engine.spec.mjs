@@ -35,6 +35,15 @@ async function handsOn(page) {
   await page.waitForTimeout(800);
   if (!(await page.evaluate(() => window.__splashery.player.handsOn.on)))
     await page.click("#hands-toggle");
+  // A fixed clock: from here the page's own frames no longer step the toy
+  // (on a loaded machine they come late and long, and step the physics
+  // between the test's moves); only tick() does, 1/60 s at a time.
+  await page.evaluate(() => {
+    const { player } = window.__splashery;
+    if (player.tickFixed) return;
+    player.tickFixed = player.update.bind(player);
+    player.update = () => {};
+  });
 }
 
 // Puts the candy cane's joints back as they were (the recipe is shared).
@@ -44,14 +53,27 @@ const unpatch = (page) =>
     if (hands?.joints?.orig) hands.joints = hands.joints.orig;
   });
 
+// Steps the toy n/60 s. (First one animation frame: the browser hands a
+// page its mouse moves with its frames, so a move just sent is handled
+// before the toy steps, however slow the machine is.)
 const tick = (page, secs) =>
   page.evaluate(
-    (n) => {
+    async (n) => {
+      await new Promise((ok) => requestAnimationFrame(() => ok()));
       const { player } = window.__splashery;
-      for (let i = 0; i < n; i++) player.update(1 / 60);
+      const step = player.tickFixed || player.update.bind(player);
+      for (let i = 0; i < n; i++) step(1 / 60);
     },
     Math.round(secs * 60),
   );
+
+// After a press: waits until Hands-on has taken it (the app picks first,
+// which takes longer on a loaded machine; moves before that are ignored).
+const taken = (page) =>
+  page.waitForFunction(() => {
+    const ho = window.__splashery.player.handsOn;
+    return !!(ho.press || ho.hold);
+  });
 
 const screen = (page, pts) =>
   page.evaluate((pts) => {
@@ -63,21 +85,34 @@ const screen = (page, pts) =>
     });
   }, pts);
 
+// The finger, straight through Hands-on (press, moves, let go), stepped on
+// the fixed clock in the page: what the engine does, without the browser's
+// input timing (on a loaded machine its moves come late and in bunches).
+// Points are recipe points; each move is one place on screen.
 async function drag(page, points, { steps = 20, hold = false, held = false } = {}) {
-  const px = await screen(page, points);
-  if (!held) {
-    await page.mouse.move(...px[0]);
-    await page.mouse.down();
-  }
-  for (let k = 1; k < px.length; k++)
-    for (let i = 1; i <= steps; i++) {
-      const f = i / steps;
-      const [a, b] = [px[k - 1], px[k]];
-      await page.mouse.move(a[0] + (b[0] - a[0]) * f, a[1] + (b[1] - a[1]) * f);
-      await tick(page, 1 / 30);
-    }
-  if (!hold) await page.mouse.up();
+  await page.evaluate(
+    ({ points, steps, hold, held }) => {
+      const { player } = window.__splashery;
+      const ho = player.handsOn;
+      const step = player.tickFixed || player.update.bind(player);
+      const px = points.map((p) => player.screenPoint(p));
+      if (!held) ho.pressAt(player.fromRecipe(points[0]), px[0][0], px[0][1]);
+      for (let k = 1; k < px.length; k++)
+        for (let i = 1; i <= steps; i++) {
+          const f = i / steps;
+          const [a, b] = [px[k - 1], px[k]];
+          ho.moveTo(a[0] + (b[0] - a[0]) * f, a[1] + (b[1] - a[1]) * f);
+          step(1 / 60);
+          step(1 / 60);
+        }
+      if (!hold) ho.release();
+    },
+    { points, steps, hold, held },
+  );
 }
+
+// Lets go (after a drag with `hold`).
+const up = (page) => page.evaluate(() => window.__splashery.player.handsOn.release());
 
 const joints = (page) => page.evaluate(() => window.__splashery.player.handsOn.joints?.state());
 const events = (page) =>
@@ -114,7 +149,7 @@ test("reseat: a snapped-off piece brought back clicks home and holds fast again"
   const j = await snapOff(page, a, far);
   // Brought back to where it broke off: it glides in and locks.
   await drag(page, [far, a], { held: true, steps: 30 });
-  await page.mouse.up();
+  await up(page);
   await tick(page, 1);
   let now = (await joints(page)).find((x) => x.name === j.name);
   expect(now.broken).toBe(false);
@@ -129,7 +164,7 @@ test("reseat: a snapped-off piece brought back clicks home and holds fast again"
   for (let i = 0; i < 3; i++) expect(now.pos[i]).toBeCloseTo(now.home[i], 4);
   // A hard pull snaps it off again.
   await snapOff(page, a, far);
-  await page.mouse.up();
+  await up(page);
 });
 
 test("reseat: a second seat takes it, and ↺ brings it home from there", async ({ page }) => {
@@ -142,7 +177,7 @@ test("reseat: a second seat takes it, and ↺ brings it home from there", async 
   // (Low, so the finger's ray never points at its home on the way.)
   const over = [far[0], seat.pos[1], seat.pos[2] + 0.3];
   await drag(page, [far, over, seat.pos], { held: true, steps: 30 });
-  await page.mouse.up();
+  await up(page);
   await tick(page, 1);
   let now = (await joints(page)).find((x) => x.name === j.name);
   expect(now.broken).toBe(false);
@@ -154,13 +189,10 @@ test("reseat: a second seat takes it, and ↺ brings it home from there", async 
   // Pulled off the seat again, it starts from there (not from home).
   const g = a.map((v, i) => v + seat.pos[i] - now.home[i]); // the same grip, at the seat
   const away = [g[0] - 0.9, g[1] + 0.2, g[2] + 0.3];
-  const [pg, pa] = await screen(page, [g, away]);
-  await page.mouse.move(...pg);
-  await page.mouse.down();
   let at = null;
   for (let i = 1; i <= 30 && !at; i++) {
-    await page.mouse.move(pg[0] + ((pa[0] - pg[0]) * i) / 30, pg[1] + ((pa[1] - pg[1]) * i) / 30);
-    await tick(page, 1 / 60);
+    const p = g.map((v, k) => v + ((away[k] - v) * i) / 30);
+    await drag(page, i === 1 ? [g, p] : [p, p], { steps: 1, hold: true, held: i > 1 });
     now = (await joints(page)).find((x) => x.name === j.name);
     if (now.broken) at = now.pos;
   }
@@ -168,7 +200,7 @@ test("reseat: a second seat takes it, and ↺ brings it home from there", async 
   // (The frame it snaps, it is still by the seat.)
   expect(Math.hypot(...at.map((v, i) => v - seat.pos[i]))).toBeLessThan(0.3);
   await drag(page, [away, over, seat.pos], { held: true, steps: 20 });
-  await page.mouse.up();
+  await up(page);
   await tick(page, 1);
   now = (await joints(page)).find((x) => x.name === j.name);
   for (let i = 0; i < 3; i++) expect(now.pos[i]).toBeCloseTo(seat.pos[i], 4);
@@ -205,7 +237,7 @@ async function heldTurn(page, steady) {
   }, j.name);
   await tick(page, 1.5);
   const q1 = await q(j.name);
-  await page.mouse.up();
+  await up(page);
   const d = Math.abs(q0.reduce((s, v, i) => s + v * q1[i], 0));
   return 2 * Math.acos(Math.min(1, d));
 }
@@ -260,6 +292,7 @@ test("a forgiving press: off the desk lamp's splats, Hands-on still lifts it", a
   // A drag from there picks the lamp up.
   await page.mouse.move(at.left + at.x, at.top + at.y);
   await page.mouse.down();
+  await taken(page);
   for (let i = 1; i <= 20; i++) {
     await page.mouse.move(at.left + at.x, at.top + at.y - 6 * i);
     await tick(page, 1 / 30);
