@@ -35,6 +35,15 @@ async function handsOn(page) {
   await page.waitForTimeout(800);
   if (!(await page.evaluate(() => window.__splashery.player.handsOn.on)))
     await page.click("#hands-toggle");
+  // A fixed clock: from here the page's own frames no longer step the toy
+  // (on a loaded machine they come late and long, and step the physics
+  // between the test's moves); only tick() does, 1/60 s at a time.
+  await page.evaluate(() => {
+    const { player } = window.__splashery;
+    if (player.tickFixed) return;
+    player.tickFixed = player.update.bind(player);
+    player.update = () => {};
+  });
 }
 
 // Puts the candy cane's joints back as they were (the recipe is shared).
@@ -48,7 +57,8 @@ const tick = (page, secs) =>
   page.evaluate(
     (n) => {
       const { player } = window.__splashery;
-      for (let i = 0; i < n; i++) player.update(1 / 60);
+      const step = player.tickFixed || player.update.bind(player);
+      for (let i = 0; i < n; i++) step(1 / 60);
     },
     Math.round(secs * 60),
   );
