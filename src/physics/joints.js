@@ -629,9 +629,21 @@ export class Joints {
       if (j.type === "dial") j.w *= Math.exp(-(d.drag ?? 0.8) * dt);
       j.v += j.w * dt;
     }
-    // The stops.
-    if (j.v < j.min || j.v > j.max) {
-      const lim = j.v < j.min ? j.min : j.max;
+    // The stops. Lane Hands-on H5: `limits(at)` may narrow them as the
+    // toy stands now ([min, max] within the joint's own; `at.joint(name)`
+    // reads another's value; a piece another blocks: a triangle that can't
+    // slide through its neighbor).
+    let lo = j.min;
+    let hi = j.max;
+    if (d.limits) {
+      const at = { joint: (n) => this.byName.get(n)?.v ?? null };
+      const [a, b] = d.limits(at) || [];
+      // (Never past where it already was: a narrowed stop holds it there.)
+      if (a !== undefined) lo = Math.max(lo, Math.min(a, v0));
+      if (b !== undefined) hi = Math.min(hi, Math.max(b, v0));
+    }
+    if (j.v < lo || j.v > hi) {
+      const lim = j.v < lo ? lo : hi;
       const speed = Math.abs(j.w) * this.reach(j);
       j.v = lim;
       if (speed > 0.5 * R) this.cue(j, "stop", speed / R);
