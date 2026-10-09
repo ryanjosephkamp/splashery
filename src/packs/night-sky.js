@@ -689,14 +689,38 @@ function buildSky(k, o) {
   };
   const nightGround = (alt) => mix([0.03, 0.033, 0.04], [0.012, 0.014, 0.018], clamp(-alt / 30, 0, 1)); // prettier-ignore
   const dayGround = (alt) => mix([0.2, 0.24, 0.17], [0.1, 0.12, 0.08], clamp(-alt / 30, 0, 1));
-  // The daylight ground comes in over a short stretch of the dawn, and its splats overlap more:
-  // while it is half faded in, uneven overlap shows as mottling.
+  // Fix10 (the walkthrough of October 9, 2026: the day was blurry, the night excellent): the
+  // band just under the skyline as rows that follow the hills, each splat smaller the nearer the
+  // skyline it sits, so no soft edge crosses it.
+  const underSkyline = (rr, color, extra = {}) => {
+    for (const dh of [0.55, 0.85, 1.25, 1.8, 2.5]) {
+      const sg = 0.36 * dh;
+      const stepAz = sg * 0.75;
+      for (let a = (k.rand() * stepAz) % 360; a < 360; a += stepAz) {
+        const alt = skyline(a) - dh + (k.rand() - 0.5) * sg * 0.3;
+        const e = [Math.cos(alt * D2R) * Math.sin(a * D2R), Math.cos(alt * D2R) * Math.cos(a * D2R), Math.sin(alt * D2R)]; // prettier-ignore
+        push(
+          sheetSplat(
+            sc(e).map((v) => v * rr),
+            sg * D2R * rr,
+            color(alt),
+            1,
+            extra,
+          ),
+        );
+      }
+    }
+  };
+  // The daylight ground comes in over a short stretch of the dawn. (Its splats once overlapped
+  // more, against mottling while half faded in; Fix10: the night's density and size instead,
+  // its fade kept short.)
   const dayFade = { kind: FADE, params: [0.55, -0.3], channel: 0 };
   groundLayer(Math.round(N * 0.07), -14, 4, R.ground, nightGround);
   groundLayer(Math.round(N * 0.03), -90, -13, R.ground, nightGround);
   ridge(R.ground - 0.001, nightGround);
-  groundLayer(Math.round(N * 0.035), -14, 4, R.ground - 0.003, dayGround, dayFade, 0.05, 1.7);
+  groundLayer(Math.round(N * 0.07), -14, 4, R.ground - 0.003, dayGround, dayFade, 2.9, 1.2);
   groundLayer(Math.round(N * 0.012), -90, -13, R.ground - 0.003, dayGround, dayFade, 0.05, 1.7);
+  underSkyline(R.ground - 0.0035, dayGround, dayFade);
   ridge(R.ground - 0.004, dayGround, dayFade);
 
   // N, E, S and W on the horizon, in the kit's bitmap font.

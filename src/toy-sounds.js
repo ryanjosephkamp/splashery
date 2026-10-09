@@ -2903,9 +2903,10 @@ export const TOY_SOUNDS = {
   // ---- Ripple tank (lane Optics) ------------------------------------------------------
   // The pebble's plop as it lands (it falls for 0.3 s), and the soft lap of
   // its rings.
+  // Fix10: on the bigger pebble's landing, 0.45 s after the tap.
   "ripple-tank": [
-    { voice: "drip", f: 640, n: 1, at: 0.3, vol: 0.8 },
-    { voice: "wave", f: 420, decay: 1.2, at: 0.36, vol: 0.16 },
+    { voice: "drip", f: 560, n: 1, at: 0.43, vol: 0.8 },
+    { voice: "wave", f: 420, decay: 1.2, at: 0.49, vol: 0.16 },
   ],
   // ---- Light bench (lane Optics) ------------------------------------------------------
   // A tap changes the light: the lamp's switch clicks.

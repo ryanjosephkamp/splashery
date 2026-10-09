@@ -1477,40 +1477,100 @@ function buildMRI(k, fruit, vision = "gray") {
       pattern: false,
     };
   });
-  // A faint outline of the whole fruit, so the slice's place reads.
+  // A faint outline of the whole fruit, so the slice's place reads. (Fix10: brighter, as the owner
+  // found it hard to see on the dark background.)
   k.cloud({ share: 0.04, jitter: 0, size: 0.55 }, (rand) => {
     const u = rand() * 2 - 1;
     const a = rand() * 2 * Math.PI;
     const w = Math.sqrt(1 - u * u);
     const d = [w * Math.cos(a), w * Math.sin(a), u];
     const p = fruit === "orange" ? vec.mul(d, MRI.orange.r) : [d[0] * MRI.kiwi.b, d[1] * MRI.kiwi.b, d[2] * MRI.kiwi.a]; // prettier-ignore
-    return { p, color: "#7fb3d9", opacity: 0.04, n: d, pattern: false };
+    return { p, color: "#a8d4f5", opacity: 0.11, n: d, pattern: false };
   });
-  return { S, gap, half };
+  // Fix10: a thin contour ring round each slice, shown with its slice, so the slice's edge reads.
+  const ring = [];
+  for (let i = 0; i < S; i++) {
+    const z = -half + (i + 0.5) * gap;
+    const t = z / half;
+    const R = across * Math.sqrt(Math.max(0, 1 - t * t)) * 1.04 + q * 0.5;
+    const m = Math.max(24, Math.ceil((2 * Math.PI * R) / (q * 0.5)));
+    for (let j = 0; j < m; j++) ring.push(z, R, (2 * Math.PI * j) / m);
+  }
+  const nr = ring.length / 3;
+  const ringColor = visionColor(vision, 0.92).map((v, i) => (vision === "gray" ? [0.62, 0.84, 1][i] : v)); // prettier-ignore
+  k.cloud({ count: nr * (160000 / k.count), jitter: 0 }, (r, i) => {
+    if (i >= nr) return null;
+    const [z, R, a] = [ring[i * 3], ring[i * 3 + 1], ring[i * 3 + 2]];
+    return {
+      p: [R * Math.cos(a), R * Math.sin(a), z],
+      color: ringColor,
+      scales: [q * 0.42, q * 0.42, gap * 0.12],
+      opacity: 1,
+      kind: "volume",
+      params: [0.92, 0],
+      pattern: false,
+    };
+  });
+  return { S, gap, half, across };
 }
 
 const mriScroll = cutState();
 mriScroll.at = 0.5;
 CUTS["fruit-mri"] = mriScroll;
 
+// Fix10: the slices' drag. One drag over the fruit's height runs through every slice, and a drag
+// always beats the Play sweep: it takes over from the slice on show, and the sweep stops.
+function mriDrag(cut) {
+  return {
+    at: () => true,
+    plane: "view",
+    start(p) {
+      cut.at = cut.shown ?? cut.at;
+      cut.grab = { y: p[1], at: cut.at };
+      cut.held = true; // the sweep under way (or paused) lets go
+    },
+    move(p) {
+      if (!cut.grab) return;
+      const gain = 1 / (2 * (cut.data?.across || 1));
+      cut.at = clamp(cut.grab.at + (p[1] - cut.grab.y) * gain, 0, 1);
+    },
+    end() {
+      cut.grab = null;
+    },
+  };
+}
+
 function driveMRI(t, c, out, info) {
   const data = info.data;
   if (!data) return;
-  if (mriScroll.data !== data) {
-    mriScroll.data = data;
-    mriScroll.at = 0.5;
+  const cut = mriScroll;
+  if (cut.data !== data) {
+    cut.data = data;
+    cut.at = 0.5;
+    cut.sliderN = info.slider?.n ?? 0;
+  }
+  // Fix10: the Slice slider over the stage sets the slice too, and stops a sweep.
+  const sl = info.slider;
+  if (sl && String(sl.id).startsWith("slice") && sl.n !== cut.sliderN) {
+    cut.sliderN = sl.n;
+    cut.at = clamp(sl.value, 0, 1);
+    cut.held = true;
   }
   // A tap plays through every slice, from the front to the back, and comes
-  // back to the slice it left.
-  let f = mriScroll.at;
-  if (c.play > 0) {
+  // back to the slice it left. (A new tap starts it afresh, even after a drag.)
+  if (c.play > (cut.playWas ?? 0) + 0.5) cut.held = false;
+  cut.playWas = c.play;
+  let f = cut.at;
+  if (c.play > 0 && !cut.held) {
     const p = 1 - c.play;
     const sweep = p < 0.15 ? f + (1 - f) * ease(p / 0.15) : p < 0.85 ? 1 - ease((p - 0.15) / 0.7) : f * ease((p - 0.85) / 0.15); // prettier-ignore
     f = sweep;
   }
+  cut.shown = f;
   const i = Math.round(f * (data.S - 1));
   const z = -data.half + (i + 0.5) * data.gap;
   out.volume = { normal: [0, 0, 1], at: z, slab: data.gap * 0.9 };
+  out.slider = { id: `slice ${i + 1}`, label: `Slice ${i + 1} of ${data.S}`, value: f };
 }
 
 // ---- Electron microscope -----------------------------------------------------------------
@@ -1638,18 +1698,18 @@ function semSpecimen(name, noise) {
     spiky([-1.25, -0.45, 0.2], 0.2, 40, 0.06, 0.03, 0.05);
     spiky([1.35, -0.3, 0.2], 0.2, 40, 0.06, 0.03, 0.05);
     spiky([-1.1, 1.05, 0.2], 0.2, 40, 0.06, 0.03, 0.04);
+    // Fix10: every grain is a target, each with its two zoom steps (the spiky grain's first, as
+    // before).
+    const small = (x, y) => target([x, y], [0.27, 0.27], 0, [[x, y, 0.2], 0.75], [[x + 0.06, y + 0.06, 0.4], 0.32]); // prettier-ignore
     return {
       parts,
-      steps: [
-        null,
-        [
-          [-0.55, 0.32, 0.42],
-          [1.3, 1.3],
-        ],
-        [
-          [-0.5, 0.38, 0.8],
-          [0.62, 0.62],
-        ],
+      targets: [
+        target([-0.55, 0.32], [0.56, 0.56], 0, [[-0.55, 0.32, 0.42], 1.3], [[-0.5, 0.38, 0.8], 0.62]), // prettier-ignore
+        target([0.85, 0.55], [0.64, 0.36], 0, [[0.85, 0.55, 0.3], 1.5], [[0.95, 0.6, 0.6], 0.55]), // the lily
+        target([0.1, -0.71], [0.74, 0.33], 0, [[0.1, -0.71, 0.3], 1.7], [[0.38, -0.71, 0.55], 0.6]), // the pine and its sacs
+        small(-1.25, -0.45),
+        small(1.35, -0.3),
+        small(-1.1, 1.05),
       ],
     };
   }
@@ -1712,18 +1772,13 @@ function semSpecimen(name, noise) {
         return { p, n: edge ? vec.unit([-Math.sin(rot) * Math.sign(v), Math.cos(rot) * Math.sign(v), 1]) : [0, 0, 1], extra: raphe ? -0.45 : stria ? -0.25 : 0.03 }; // prettier-ignore
       },
     });
+    // Fix10: the centric (its steps as before) and the pennate are each a target.
+    const along = (d) => [P[0] + d * Math.cos(0.5), P[1] + d * Math.sin(0.5), 0.12];
     return {
       parts,
-      steps: [
-        null,
-        [
-          [C[0], C[1], H],
-          [2.1, 2.1],
-        ],
-        [
-          [C[0] + 0.3, C[1] + 0.2, H],
-          [0.7, 0.7],
-        ],
+      targets: [
+        target([C[0], C[1]], [R, R], 0, [[C[0], C[1], H], 2.1], [[C[0] + 0.3, C[1] + 0.2, H], 0.7]), // prettier-ignore
+        target([P[0], P[1]], [0.87, 0.28], 0.5, [along(0), 1.9], [along(0.3), 0.55]),
       ],
     };
   }
@@ -1804,18 +1859,29 @@ function semSpecimen(name, noise) {
   });
   return {
     parts,
-    steps: [
-      null,
-      [
-        [0.95, 0.0, 0.13],
-        [1.3, 1.3],
-      ],
-      [
-        [0.75, 0.12, 0.13],
-        [0.5, 0.5],
-      ],
-    ],
+    targets: [target([0, 0], [1.65, 1.65], 0, [[0.95, 0.0, 0.13], 1.3], [[0.75, 0.12, 0.13], 0.5])],
   };
+}
+
+// Fix10: a thing to zoom on: its ellipse in the x-y plane (center, radii, turn) and its two zoom
+// steps, each [center, size].
+function target(c, r, rot, ...steps) {
+  return { c, r, rot, steps: steps.map(([at, size]) => [at, [size, size]]) };
+}
+
+// The target nearest a point, measured in each one's own ellipse.
+function nearestTarget(targets, p) {
+  let best = 0;
+  let bestD = Infinity;
+  targets.forEach((t, i) => {
+    const dx = p[0] - t.c[0];
+    const dy = p[1] - t.c[1];
+    const ca = Math.cos(t.rot);
+    const sa = Math.sin(t.rot);
+    const d = Math.hypot((dx * ca + dy * sa) / t.r[0], (-dx * sa + dy * ca) / t.r[1]);
+    if (d < bestD) [best, bestD] = [i, d];
+  });
+  return best;
 }
 
 // A seeded random number generator for build-time choices.
@@ -1844,18 +1910,32 @@ function buildSEM(k, name, vision = "gray") {
       },
     );
   }
-  return { steps: spec.steps };
+  SEM.targets = spec.targets;
+  // (`steps`: the first target's, whole field first.)
+  return { targets: spec.targets, steps: [null, ...spec.targets[0].steps], zoom: { target: 0, step: 0, n: null } }; // prettier-ignore
 }
+
+// Fix10: the targets of the sample on show, for the tap's pick.
+const SEM = { targets: null };
 
 function driveSEM(t, c, out, info) {
   const data = info.data;
   if (!data) return;
-  // Each tap goes one zoom step further (whole field, one grain, its
-  // surface), then back out; the view glides there.
-  const n = info.tap?.n ?? 0;
-  const step = n % 3;
-  const st = data.steps[step];
-  out.view = st ? { key: `sem${n % 3}`, center: st[0], size: st[1] } : { key: "sem0" };
+  // Each tap goes one zoom step further (whole field, one object, its surface), then back out;
+  // the view glides there. Fix10: a tap on another object starts that object's zoom.
+  const z = data.zoom;
+  const tap = info.tap;
+  // (A rebuild, for another sample, starts on the whole field, whatever taps came before.)
+  if (z.n === null) z.n = tap?.n ?? 0;
+  if (tap && tap.n !== z.n) {
+    z.n = tap.n;
+    const pick = Number.isInteger(tap.pick) && data.targets[tap.pick] ? tap.pick : z.target;
+    if (pick !== z.target && z.step > 0) [z.target, z.step] = [pick, 1];
+    else [z.target, z.step] = [pick, (z.step + 1) % 3];
+  }
+  const st = z.step ? data.targets[z.target].steps[z.step - 1] : null;
+  const key = z.target ? `sem${z.step}t${z.target}` : `sem${z.step}`;
+  out.view = st ? { key, center: st[0], size: st[1] } : { key: "sem0" };
 }
 
 // ---- Thermal camera ----------------------------------------------------------------------
@@ -2197,10 +2277,13 @@ export const RECIPES = {
       },
       visionOption(),
     ],
-    controls: [{ key: "play", label: "Play the slices", type: "pulse", ease: 6 }],
+    // Fix10: the slice stays face-on, and a tap during the sweep starts it again (no pause that
+    // holds the slice).
+    turntable: false,
+    controls: [{ key: "play", label: "Play the slices", type: "pulse", ease: 6, pausable: false }],
     action: { key: "play", label: "Play through the slices" },
-    note: "Drag up or down to scroll through the slices.",
-    drag: cutDrag(mriScroll, (p) => p[1]),
+    note: "Drag up or down on the fruit, or move the Slice slider, to step through the slices.",
+    drag: mriDrag(mriScroll),
     drive: driveMRI,
     build(k, o) {
       k.data = buildMRI(k, o.fruit, o.vision);
@@ -2225,7 +2308,14 @@ export const RECIPES = {
       visionOption(),
     ],
     controls: [{ key: "zoom", label: "Zoom", type: "pulse", ease: 1.2 }],
-    action: { key: "zoom", label: "Zoom in a step (the third goes back out)" },
+    action: {
+      key: "zoom",
+      label: "Zoom in a step on the object you tap (the third tap goes back out)",
+      // Fix10: a tap picks the nearest object.
+      at(point) {
+        return SEM.targets ? { key: "zoom", pick: nearestTarget(SEM.targets, point) } : null;
+      },
+    },
     // The zoom steps glide the view (out.view); a double-tap does nothing
     // of its own.
     focus: () => false,

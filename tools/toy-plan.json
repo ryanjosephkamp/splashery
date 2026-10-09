@@ -2626,16 +2626,16 @@
     "fruit-mri": {
       "v": "keep",
       "owner": "The owner's imaging idea of October 3, 2026: MRI of a fruit (lane Imaging; labs only).",
-      "effect": "A kiwi's or an orange's MRI, kit-built as 26 thin slices across the fruit (fine in each slice, like a scanner's), T2-weighted gray with a little scanner noise, inside a faint outline of the whole fruit. One slice shows at a time (a slab of the engine's cutting plane); a drag scrolls through them and the tap plays through all of them, front to back, and comes back.",
+      "effect": "A kiwi's or an orange's MRI, kit-built as 26 thin slices across the fruit (fine in each slice, like a scanner's), T2-weighted gray with a little scanner noise, inside a faint outline of the whole fruit. One slice shows at a time (a slab of the engine's cutting plane); a drag scrolls through them and the tap plays through all of them, front to back, and comes back. Fix10: the fruit holds still and face-on; one drag over its height runs through every slice, a Slice slider over the stage does the same, and a drag or the slider always takes over from the play; a brighter outline and a thin ring round each slice.",
       "sound": "An MRI scanner's knocking as it steps through the slices.",
-      "improved": "Imaging: new toy. Imaging r2: sharper and less grainy (finer slices, lighter noise); a Vision option (gray, night vision, infrared). Polish (r3): finer splats."
+      "improved": "Imaging: new toy. Imaging r2: sharper and less grainy (finer slices, lighter noise); a Vision option (gray, night vision, infrared). Polish (r3): finer splats. Fix10 (the walkthrough of October 9, 2026): the slice control (no lock-up, a Slice slider, no turning), a brighter outline and slice rings."
     },
     "electron-microscope": {
       "v": "keep",
       "owner": "The owner's imaging idea of October 3, 2026: an electron microscope with pollen, a diatom and a snowflake (lane Imaging; labs only).",
-      "effect": "Kit-built pollen grains (spiny, netted and winged), diatoms (a centric one with rings of pores and a pennate one) or a rimed snowflake on carbon tape, shaded as a scanning electron microscope sees them: gray, bright edges, a shadow away from the detector, a little grain. Each tap glides the view face-on to the next zoom step (the field, one grain or arm, its surface); the third goes back out.",
+      "effect": "Kit-built pollen grains (spiny, netted and winged), diatoms (a centric one with rings of pores and a pennate one) or a rimed snowflake on carbon tape, shaded as a scanning electron microscope sees them: gray, bright edges, a shadow away from the detector, a little grain. Each tap glides the view face-on to the next zoom step (the field, one grain or arm, its surface); the third goes back out. Fix10: a tap picks the object under it (each pollen grain, the centric or the pennate diatom), so a tap on another object starts that one's zoom.",
       "sound": "The stage motor's two soft steps and a low vacuum hum.",
-      "improved": "Imaging: new toy. Imaging r2: sharper (the labs sharp kernel, twice the splats, finer splats); a Vision option (gray, night vision, infrared). Polish (r3): finer splats."
+      "improved": "Imaging: new toy. Imaging r2: sharper (the labs sharp kernel, twice the splats, finer splats); a Vision option (gray, night vision, infrared). Polish (r3): finer splats. Fix10 (the walkthrough of October 9, 2026): zoom on any object, each with its own two steps."
     },
     "thermal-camera": {
       "v": "keep",
