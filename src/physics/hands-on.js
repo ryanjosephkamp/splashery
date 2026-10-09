@@ -15,7 +15,9 @@
 // mass, friction, restitution }], floor (y), area (half width), grip,
 // gravity (in toy radii per second squared), sound(hit) => cue | null }.
 // `handsOn: true | false` on a recipe starts the switch on, or keeps the
-// toy out of Hands-on (a picture toy). Pure JavaScript, no DOM.
+// toy out of Hands-on (a picture toy). `handsLevel1: true | (info) => bool`
+// lets a picture toy or a still toy (turntable: false) play Level 1 (lane
+// Hands-on H3). Pure JavaScript, no DOM.
 
 import { World, Body, boundOf, quat, v3 } from "./world.js";
 import { extrasFor } from "./fields.js"; // lane Hands engine A
@@ -61,7 +63,13 @@ export function canPlay(info) {
   // (A picture toy that asks for joints plays them: a picture frame swings
   // on its nail; lane Hands-on H3.)
   if (r?.hands?.joints) return true;
-  if (r?.pictures || r?.turntable === false) return false;
+  // (A picture toy or a still one, turntable: false, that asks for Level 1
+  // plays it: picked up, tossed and set down whole. `handsLevel1` may be a
+  // function of the toy's info, false while the toy is a live tool someone
+  // is working in (a converter with a file open, the Screen capturing);
+  // lane Hands-on H3.)
+  const l1 = typeof r?.handsLevel1 === "function" ? !!r.handsLevel1(info) : !!r?.handsLevel1;
+  if (r?.pictures || r?.turntable === false) return l1;
   return true;
 }
 
@@ -110,6 +118,7 @@ export class HandsOn {
 
   // A new toy: everything back to how it was built.
   attach(info) {
+    this.available = undefined; // (lane Hands-on H3)
     this.clear();
     this.info = info;
     this.on = canPlay(info) && (ownHands(info?.recipe) || info?.recipe?.handsOn === true);
@@ -909,6 +918,17 @@ export class HandsOn {
   // while anything moves.
   step(dt) {
     this.time += dt;
+    // A toy that asks for Level 1 only while it isn't a live tool (lane
+    // Hands-on H3): when it becomes one (a file opened), the switch goes off
+    // and the toy glides home; either way the app is told, to show or hide ✋.
+    if (this.info) {
+      const can = canPlay(this.info);
+      if (this.available !== undefined && can !== this.available) {
+        if (!can && this.on) this.setOn(false);
+        this.player.emit?.("hands-available", can);
+      }
+      this.available = can;
+    }
     const extra = this.extras?.step(dt) || false; // lane Hands engine A
     this.pressStep(); // lane Hands-on H1: a held press squeezes the toy
     const w = this.world;
