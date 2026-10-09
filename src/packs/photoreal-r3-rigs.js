@@ -223,22 +223,34 @@ function outline(radii, smooth = 1, max = Infinity) {
 // spiral (an even grid of rings shows a ripple), in two layers a hair apart, the upper one turned
 // so its splats fall in the lower one's gaps (one layer lets the toy above show through). The
 // color is a function of the point (x, z) and the kit's noise.
-function floor(k, { center, y, radii, rect, scale = 1, smooth = 1, max, count, color, part }) {
+// thick: three layers of slightly larger splats instead of two, for a floor nothing shows through
+// (the owner's notes of October 9, 2026).
+function floor(
+  k,
+  { center, y, radii, rect, scale = 1, smooth = 1, max, count, color, part, thick = false },
+) {
   const [cx, cz] = center;
   const r = radii && outline(radii, smooth, max);
   const area = rect
     ? 4 * rect.half[0] * rect.half[1] * scale * scale
     : radii.reduce((s, v) => s + v * v, 0) * (Math.PI / radii.length) * scale * scale;
-  const half = Math.round(count / 2);
-  const size = Math.sqrt(area / half) * 1.05;
+  const layers = thick
+    ? [
+        [0, 0],
+        [0.008, 1.3],
+        [0.016, 2.6],
+      ]
+    : [
+        [0, 0],
+        [0.01, 1.3],
+      ];
+  const half = Math.round(count / layers.length);
+  const size = Math.sqrt(area / half) * (thick ? 1.3 : 1.05);
   // A rectangle (a board or a mat) on a grid of cells, one splat in each.
   const cols = rect ? Math.max(1, Math.round(Math.sqrt((half * rect.half[0]) / rect.half[1]))) : 0;
   const rows = rect ? Math.ceil(half / cols) : 0;
   const [ca, sa] = rect ? [Math.cos(rect.angle), Math.sin(rect.angle)] : [1, 0];
-  for (const [dy, turn] of [
-    [0, 0],
-    [0.01, 1.3],
-  ])
+  for (const [dy, turn] of layers)
     k.cloud({ share: half / k.count, pattern: false, part }, (rand, i, n) => {
       let x;
       let z;
@@ -589,7 +601,7 @@ function grounded(count, floors, opts = {}) {
   return based({
     ...opts,
     count,
-    hide: floors.flatMap((f) => (f.keep ? [] : below(f.center[0], f.center[1], f.y, f.reach ?? 3))),
+    hide: floors.flatMap((f) => (f.keep ? [] : below(f.center[0], f.center[1], f.y + (f.lift ?? 0), f.reach ?? 3))), // prettier-ignore
     build(k) {
       const size = (f) => (f.rect ? (4 / Math.PI) * f.rect.half[0] * f.rect.half[1] : Math.max(...f.radii) ** 2) * (f.scale ?? 1) ** 2; // prettier-ignore
       const area = floors.reduce((s, f) => s + size(f), 0);
@@ -600,10 +612,10 @@ function grounded(count, floors, opts = {}) {
 
 const BASES = {
   // The toy T. rex stands on a lime plastic disc; from below, its fringe smeared green.
-  "toy-trex": grounded(30000, [{ center: [-0.05, 0.01], y: -0.885, radii: [0.93], color: MATERIALS.plastic("#b9cf4a") }]), // prettier-ignore
+  "toy-trex": grounded(45000, [{ center: [-0.05, 0.01], y: -0.885, radii: [0.93], color: MATERIALS.plastic("#b9cf4a"), thick: true }]), // prettier-ignore
   // The BMX bicycle stands on a round gray rug.
-  "bmx-bike": grounded(40000, [
-    measured("bmx-bike", -0.49, MATERIALS.cloth("#a9a6a2", 0.08), 0.95),
+  "bmx-bike": grounded(48000, [
+    { ...measured("bmx-bike", -0.49, MATERIALS.cloth("#a9a6a2", 0.08), 1.06), thick: true },
   ]),
   // The monkey doll sits on a cream linen cloth.
   "monkey-doll": grounded(40000, [measured("monkey-doll", -0.915, MATERIALS.weave("#ddd4c6", 0.014, 0.05))]), // prettier-ignore
@@ -617,14 +629,15 @@ const BASES = {
   "maple-tree": grounded(44000, [measured("maple-tree", -0.8, MATERIALS.earth(), 0.96)]),
   // The bonsai stands on a board of planks.
   "bonsai-photo": grounded(44000, [{ center: [0.23, -0.24], rect: { center: [0.23, -0.24], angle: 0.849, half: [1, 0.66] }, scale: 0.97, y: -0.9, color: MATERIALS.planks("#bcae9b", "#8c7c69", [0.66, 0.75]) }]), // prettier-ignore
-  // The cherry trees stand on five round patches of earth.
-  "cherry-blossom-photo": grounded(44000, [
+  // The cherry trees stand on five round patches of earth. Under the three small ones the capture's
+  // underside lay just under the floor and showed through, so it is hidden a little above it.
+  "cherry-blossom-photo": grounded(60000, [
     [0.164, 0.741, 0.29, -0.23],
     [-0.495, 0.047, 0.4, -0.335],
     [0.397, -0.098, 0.5, -0.27],
     [-0.71, -0.686, 0.17, -0.282],
     [0.004, -0.711, 0.31, -0.295],
-  ].map(([x, z, r, y]) => ({ center: [x, z], y, radii: [r], color: MATERIALS.earth(), keep: true }))), // prettier-ignore
+  ].map(([x, z, r, y]) => ({ center: [x, z], y, radii: [r], color: MATERIALS.earth(), keep: r > 0.35, reach: r * 1.8, lift: 0.025, thick: true }))), // prettier-ignore
   // The desk globe stands on a slice of a log: its sawn end, with growth rings, underneath.
   "desk-globe": grounded(40000, [{ center: [-0.2, 0.06], y: -0.74, radii: [0.96], color: MATERIALS.rings(-0.18, 0.04, 0.96) }]), // prettier-ignore
   // The cowboy steak: the capture saw only its top; under it hang a few loose splats and a fringe
@@ -688,10 +701,10 @@ const BASES = {
   }),
   // The knight's pewter base, closed underneath.
   "knight-horse": based({
-    count: 16000,
+    count: 24000,
     hide: below(-0.08, 0.05, -0.955),
     build(k) {
-      floor(k, { ...measured("knight-horse", -0.955, MATERIALS.pewter(), 0.95), count: 16000 });
+      floor(k, { ...measured("knight-horse", -0.955, MATERIALS.pewter(), 1.12), count: 24000, thick: true }); // prettier-ignore
     },
   }),
   // The money tree's glazed pot: its foot, an unglazed ring and a drainage hole.
@@ -881,11 +894,12 @@ const PART_EFFECTS = {
   // The desk globe spins in its stand: the ball's splats (not the dark meridian ring or stand)
   // turn about the globe's axis, fast at first and slowing.
   "desk-globe": { label: "Spin", secs: 3.4, pivot: GLOBE, regions: [{ at: GLOBE, r: [0.5, 0.5, 0.5], soft: 0.01, notColor: "#151515", tol: 0.22 }], motion: (e, info, origin) => turnAbout(qa(GLOBE_AXIS, (vary(info?.tap, 29) < 0.5 ? 1 : -1) * TAU * 1.6 * (1 - (1 - band(e, 0, 3.2)) ** 2)), GLOBE, origin) }, // prettier-ignore
-  // The toy T. rex rocks on its feet on its disc; the monkey doll on its cloth; the alum crystal
+  // The toy T. rex rocks on its feet on its disc (its raised head has a region of its own); the monkey
+  // doll on its cloth (and its left ear); the alum crystal
   // is turned a quarter turn on its block, barely lifted (lifted higher, the gap shows the capture's
   // smeared contact under it, which no cut or cap closed cleanly).
-  "toy-trex": { label: "Stomp", secs: 2.6, pivot: [0, -0.85, -0.1], regions: [{ at: [0.05, 0.05, -0.13], r: [0.95, 0.89, 0.62], soft: 0.01 }], motion: M.wobble({ base: [0, -0.85, -0.1], r: 0.18, lean: 0.12 }) }, // prettier-ignore
-  "monkey-doll": { label: "Rock", secs: 2.6, pivot: [0, -0.86, -0.08], regions: [{ at: [0, 0.05, -0.08], r: [0.76, 0.91, 0.64], soft: 0.01 }], motion: M.wobble({ base: [0, -0.86, -0.08], r: 0.38, lean: 0.14 }) }, // prettier-ignore
+  "toy-trex": { label: "Stomp", secs: 2.6, pivot: [0, -0.85, -0.1], regions: [{ at: [0.05, 0.05, -0.13], r: [0.95, 0.89, 0.62], soft: 0.01 }, { at: [-0.59, 0.78, -0.4], r: [0.24, 0.26, 0.26], soft: 0.01 }], motion: M.wobble({ base: [0, -0.85, -0.1], r: 0.18, lean: 0.12 }) }, // prettier-ignore
+  "monkey-doll": { label: "Rock", secs: 2.6, pivot: [0, -0.86, -0.08], regions: [{ at: [0, 0.05, -0.08], r: [0.76, 0.91, 0.64], soft: 0.01 }, { at: [-0.65, 0.45, 0.06], r: [0.13, 0.15, 0.13], soft: 0.01 }], motion: M.wobble({ base: [0, -0.86, -0.08], r: 0.38, lean: 0.14 }) }, // prettier-ignore
   "alum-crystal": { label: "Turn", secs: 2.4, pivot: [0, -0.4, 0], regions: [{ at: [0, 0.3, -0.02], r: [0.78, 0.66, 0.82], soft: 0.01 }], motion: (e, info, origin) => lift(turnAbout(qa([0, 1, 0], (vary(info?.tap, 23) < 0.5 ? 1 : -1) * Math.PI * 0.5 * ease(band(e, 0.3, 1.7))), [0, 0, 0], [0, 0, 0]), 0.035 * bump(e, 0, 2.0)) }, // prettier-ignore
 };
 
