@@ -3994,7 +3994,9 @@ Proposals below are suggestions; the owner may change them.
     3D.
   - Improved: Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/). Arcade r2
     (October 7, 2026): a new brick-breaking sound, 2D/3D and play/pause at the thumbs on a phone,
-    and Launch for Go.
+    and Launch for Go. Arcade r3 (October 9, 2026): the Dome in 3D is the default; the paddle
+    catches and holds the ball; in the Dome the ground takes the ball; drag on the dome to turn the
+    view, pinch to zoom; sharper.
   - Sound: Knocks off the paddle and the rails, a marimba note (one per row, on a pentatonic scale)
     and a dry crumble for a glazed brick, a low knock and a gritty crumble for stone, a thud for a
     lost ball, a rising chime for a new level.
@@ -4005,7 +4007,7 @@ Proposals below are suggestions; the owner may change them.
     Space-shelf planet, or rolls a strip into a ring; tunnels come out on the far side.
   - Improved: Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/). Arcade r2
     (October 7, 2026): sharper solid tiles; a tap beside the head steers it; in 3D a drag turns the
-    world.
+    world. Arcade r3 (October 9, 2026): crisper tiles with thin clean grout.
   - Sound: A soft tick as it crawls, a pop for each berry (higher as it grows), a hollow tone
     through a tunnel, a thud when it runs into itself.
 - **Grain Garden** (`grain-garden`). Now: tap: Play or pause. Plan: keep.
@@ -4014,6 +4016,7 @@ Proposals below are suggestions; the owner may change them.
     stone, and they pile, flow, burn and grow. The 3D switch tips the box round so its depth shows.
   - Improved: Arcade: new sandbox on the Arcade shelf (labs), on the game kit (src/arcade/). Arcade
     r2 (October 7, 2026): the ✕ leaves the whole-page view on a phone (its materials covered it).
+    Arcade r3 (October 9, 2026): look around and zoom in 3D; framed closer with finer grains.
   - Sound: A patter as sand pours, drips for water and oil, a crackle for fire, a sizzle when water
     puts it out, a pop when a seed sprouts.
 - **Page Breaker** (`page-breaker`). Now: tap: Play or pause. Plan: keep.
@@ -4029,7 +4032,9 @@ Proposals below are suggestions; the owner may change them.
   - Effect: Falling stones in a deep well you look down into: our own stone shapes (a tripod, two
     screws, a plus, a slab), moved and turned as they fall; a full layer crumbles into rubble that
     falls and fades, and the stones above drop in. 2D is the side view.
-  - Improved: Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/).
+  - Improved: Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/). Arcade r3
+    (October 9, 2026): starts in 2D in a classic well, ten wide and twenty deep; a ⟳ Turn button, a
+    tap on the stone and ↑, X or Z turn it; much sharper stones.
   - Sound: A soft click as a stone moves, a wooden knock when it turns, a stony thud when it lands,
     a crunch and rumble when a layer crumbles.
 - **Volley Table** (`volley-table`). Now: tap: Play or pause. Plan: keep.
@@ -4044,7 +4049,9 @@ Proposals below are suggestions; the owner may change them.
   - Effect: Blast drifting, tumbling rocks shaped like real asteroids (NASA's public-domain models):
     big ones split into two smaller ones and small ones into dust, with chips flying each time. The
     3D switch drops the camera in behind the ship.
-  - Improved: Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/).
+  - Improved: Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/). Arcade r3
+    (October 9, 2026): much sharper: pin-point stars, finer rock surfaces, a closer field on a
+    phone.
   - Sound: A short zap for each shot, a crack and rumble for a big rock, a crunch for a small one,
     an engine rumble while thrusting.
 - **Soft Landing** (`soft-landing`). Now: tap: Play or pause. Plan: keep.
@@ -4054,7 +4061,9 @@ Proposals below are suggestions; the owner may change them.
     of Tranquility on the Moon; Gale, Jezero, Valles Marineris and Olympus Mons on Mars): slow,
     upright and level, or it breaks apart into real pieces. 2D is a true slice through the ground;
     the 3D switch shows the whole patch around it.
-  - Improved: Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/).
+  - Improved: Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/). Arcade r3
+    (October 9, 2026): sharper: a clean cut through the ground in 2D with a crisp skyline, finer
+    ground in 3D, pin-point stars.
   - Sound: An engine rumble while thrusting, a soft thud and a three-note chime on touchdown, a
     crack and clatter on a crash.
 - **Night Owl Pinball** (`night-owl-pinball`). Now: tap: Play or pause. Plan: keep.
@@ -4071,16 +4080,20 @@ Proposals below are suggestions; the owner may change them.
   - Effect: A shadow puzzle: turn a carved block between a lamp and a wall until its shadow (each
     piece casting its own dark splat) fills the outline of a picture; the block is carved to cast a
     different picture from the side. 2D shows only the wall; 3D shows the lamp and the block too.
-  - Improved: Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/).
+  - Improved: Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/). Arcade r3
+    (October 9, 2026): in 3D, two fingers (or the right mouse button) look around the block and its
+    shadow, and a pinch or the wheel zooms.
   - Sound: A soft rising tine as the shadow gets closer, a four-note chime when it matches.
 - **Photo Dash** (`photo-dash`). Now: tap: Play or pause. Plan: keep.
   - Owner: New in lane Arcade (October 5, 2026): the owner's games brief, G8 (labs only).
   - Effect: A run across your own photo: the line where its sky meets its ground becomes the track,
     and a glass marble rolls along it, faster each lap; tap to jump the gaps and catch the sparks.
     The 3D switch raises the photo into a relief by its brightness, and the marble rolls on it.
-  - Improved: Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/).
-  - Sound: A springy boing for each jump, a glassy tick on landing, a sparkle for each spark, a
-    rising three-note chime each lap.
+  - Improved: Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/). Arcade r3
+    (October 9, 2026): the photo stays still and sharp, cut to the screen; a new sample photo each
+    level; pick the ball; a row of crisp planks; a two-note coin sound.
+  - Sound: A springy boing for each jump, a landing sound for each ball (a glassy tick, a steel
+    ring, a hollow thump, a pock), two quick bright notes for each spark, a rising chime each level.
 - **Note Rider** (`note-rider`). Now: tap: Play or pause. Plan: keep.
   - Owner: New in lane Arcade (October 5, 2026): the owner's games brief, G10 (labs only).
   - Effect: A song's melody comes down a three-lane track as glowing notes, low to high by pitch;
@@ -4090,5 +4103,9 @@ Proposals below are suggestions; the owner may change them.
   - Improved: Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/). Arcade r2
     (October 7, 2026): ♪ Your song opens a MIDI file from the game itself (the file opened in the
     Toy tab used to be dropped for Ode to Joy), or a recording: a note finder (Basic Pitch) charts
-    its tune on the device, and each caught note plays its slice of the recording.
-  - Sound: Each caught note plays on the grand piano at its own pitch; a missed note is silent.
+    its tune on the device, and each caught note plays its slice of the recording. Arcade r3
+    (October 9, 2026): each note lasts its own length (no more ringing on); seven instruments to
+    pick in the game, guitar among them.
+  - Sound: Each caught note plays at its own pitch and for its own length on the instrument picked
+    in the game (piano, guitar, steel guitar, harp, organ, synth, or vibes); a missed note is
+    silent.
