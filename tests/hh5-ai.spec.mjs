@@ -278,3 +278,16 @@ test("turing machine: the tape slides by hand onto a whole tile, and a tap flips
   await tick(page, 0.2);
   expect((await tape())[0] ?? 0).toBe(was ? 0 : 1);
 });
+
+// The lane's screenshots, the ✋ switch on (phone and desktop).
+test("screenshots: the difference-engine, hands-on", async ({ page }) => {
+  for (const [w, h] of [
+    [390, 844],
+    [1440, 900],
+  ]) {
+    await page.setViewportSize({ width: w, height: h });
+    await ready(page, "difference-engine");
+    await page.waitForTimeout(600);
+    await page.screenshot({ path: `tests/screenshots/hh5-difference-engine-${w}x${h}.png` });
+  }
+});
