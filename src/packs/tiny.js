@@ -314,7 +314,7 @@ function chromosomeJoints(d) {
 
 // The white blood cell's catch: where the bacterium waits, and the cell's
 // pull on it once it is let go near: drawn to the cup's mouth, then in.
-const wbcBug = () => add(mul(WBC.E, 1.75), mul(WBC.side, 0.15));
+const wbcBug = () => add(mul(WBC.E, 1.3), mul(WBC.side, 0.12));
 function wbcChase(b, h, ctx) {
   if (b.held || b.pinned) return;
   const { E, F } = WBC;
