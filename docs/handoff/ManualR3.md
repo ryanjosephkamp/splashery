@@ -101,7 +101,7 @@ Done, by plan part:
    after "In three dimensions"; the colors sentence; the aliases paragraph as a "Flexibility" list
    (the alternative names including `colour` and `n`, the ranges, capitals, and `#` notes); the
    grammar's introduction.
-2. **Definitions**, where each first appears and in the glossary (now 22 terms): the kit, the weight
+2. **Definitions**, where each first appears and in the glossary (now 21 terms): the kit, the weight
    field and the positive widths, the quadratic form (with a two-dimensional example), affine, tilt
    (and rotation; "Tilt lock" stays the camera control), smoothstep (linked), the grammar's notation
    and "atom", and u and v as the coordinates of a flat sheet (parametric-surface parameters, not a
@@ -141,7 +141,7 @@ Also: the serial comma through the manual's lists, and the updated date (October
   surface answered "too many requests", so it was not opened); [10] is docs/PACKS.md.
 - The demo placeholders are `aside.demo-placeholder[data-demo="…"]`, hidden by `@media print`.
 - Tests: `tests/man3.spec.mjs` (new), `tests/st2.spec.mjs` (one new test), `tests/man2.spec.mjs`
-  (the glossary count, 14 to 22: the only expectation changed).
+  (the glossary count, 14 to 21: the only expectation changed).
 
 ## Known issues
 

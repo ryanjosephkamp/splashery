@@ -613,6 +613,10 @@ pre.prompt {
   .demo-placeholder {
     display: none;
   }
+  h2.coming {
+    break-before: auto;
+    margin-top: 1em;
+  }
   .diagram.wide svg {
     width: 4.7in;
     max-width: 100%;

@@ -12,7 +12,7 @@ test("the newcomer material is there and every contents link has a target", asyn
   for (const label of ["Three ways", "Representation", "The twelve"]) {
     await expect(page.locator(`figure svg[aria-label^='${label}']`)).toHaveCount(1);
   }
-  await expect(page.locator("dl.glossary dt")).toHaveCount(22); // Manual r3 added eight terms
+  await expect(page.locator("dl.glossary dt")).toHaveCount(21); // Manual r3 added seven terms
   await expect(page.locator("ul.reading a[href^='https://']")).toHaveCount(6);
   const hrefs = await page.locator("nav.toc a").evaluateAll((as) => as.map((a) => a.getAttribute("href"))); // prettier-ignore
   for (const h of hrefs) await expect(page.locator(h)).toHaveCount(1);

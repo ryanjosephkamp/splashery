@@ -50,7 +50,7 @@ test("the definitions, the notes and the opening-line context are there", () => 
   for (const w of [
     "weight field", "positive widths", "quadratic form", "affine", "smoothstep", "Tilt lock",
     "Splashery's toy-building library", "the coordinates of a flat sheet", "not a substitution",
-    "An atom is", "the Sharp view", "if you type only a new",
+    "An atom is", "Sharp view", "if you type only a new",
   ]) // prettier-ignore
     expect(flat.toLowerCase(), w).toContain(w.toLowerCase());
   const whys = [...html.matchAll(/<div class="why">\s*<p><b>(Why [^<]*)</g)].map((m) => m[1]);
@@ -89,7 +89,7 @@ test("every demo placeholder exists, names what it will show, and is hidden in p
   for (const d of DEMOS) await expect(page.locator(`aside[data-demo="${d}"]`)).toBeHidden();
 });
 
-test("every link in the manual opens in a new tab, and the level map stops at Level 5", async ({
+test("every link in the manual opens in a new tab, and the level map shows ten levels, with 6 to 10 as placeholders", async ({
   page,
 }) => {
   await page.goto("/manual/");
@@ -103,9 +103,9 @@ test("every link in the manual opens in a new tab, and the level map stops at Le
   // The cover link and "Back" are among them.
   await expect(page.locator(".cover a[href='../']")).toHaveAttribute("target", "_blank");
   const levels = page.locator("#level-map ol > li");
-  await expect(levels).toHaveCount(5);
-  await expect(page.locator("#level-map")).toContainText("More levels are coming.");
-  await expect(page.locator("#level-map")).not.toContainText("Level 6");
+  await expect(levels).toHaveCount(10);
+  for (const id of ["moving", "data", "photo3d", "codes", "make"]) await expect(page.locator(`h2#${id}.coming`)).toHaveCount(1); // prettier-ignore
+  await expect(page.locator("#level-map")).toContainText("next round");
 });
 
 test("the References section is numbered, and every citation leads to an entry", async ({
