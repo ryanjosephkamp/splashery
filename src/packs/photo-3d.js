@@ -356,6 +356,9 @@ const PHOTO_3D = {
   // on the relief at phone size (2.72 to 2.36 px, 3.45 to 2.78 px zoomed in).
   kernel: "sharp",
   turntable: false,
+  // Hands-on Level 1 (lane Hands-on H3): picked up, tossed and set down whole, except
+  // while it is your live camera or your own photo (the samples can be tossed).
+  handsLevel1: () => !liveOn() && !P3D.info?.custom,
   options: [
     {
       key: "source",
