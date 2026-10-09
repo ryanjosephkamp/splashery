@@ -1903,11 +1903,139 @@
       "candidates": []
     },
     "photo-3d": {
-      "status": "site",
-      "said": "(September 30, 2026, on the Sound Board) Doesn't need to sound like wind. No whoosh necessary.",
+      "status": "ready",
+      "said": "(September 30, 2026, on the Sound Board) Doesn't need to sound like wind. No whoosh necessary. (October 9, 2026, walkthrough) Choose the depth sound on Photo to 3D: a few built-in choices with no wind or whoosh, plus use my own sound.",
       "note": "Doesn't need to sound like wind. No whoosh necessary.",
-      "plan": "Now: the photo's paper lifting as the depth comes up and settling as it lies flat (no wind, no whoosh).",
-      "candidates": []
+      "plan": "Now: a Sound choice in the Toy tab (lane Photo depth): Paper (as it is), a soft chime, pop-up layers (four plucks as the layers rise, and down as they settle), a water drop, none, or your own sound (kept on the device). On the board: the three new ones, rising then settling 3 s later.",
+      "candidates": [
+        {
+          "id": "pdp-chime",
+          "label": "Soft chime (new)",
+          "sound": [
+            {
+              "voice": "bell",
+              "f": 784,
+              "bright": 0.25,
+              "decay": 1.4,
+              "vol": 0.22,
+              "at": 0
+            },
+            {
+              "voice": "bell",
+              "at": 0.55,
+              "f": 1175,
+              "bright": 0.2,
+              "decay": 1.6,
+              "vol": 0.16
+            },
+            {
+              "voice": "bell",
+              "f": 1175,
+              "bright": 0.2,
+              "decay": 1.2,
+              "vol": 0.16,
+              "at": 3
+            },
+            {
+              "voice": "bell",
+              "at": 3.55,
+              "f": 784,
+              "bright": 0.25,
+              "decay": 1.6,
+              "vol": 0.2
+            }
+          ]
+        },
+        {
+          "id": "pdp-layers",
+          "label": "Pop-up layers (new)",
+          "sound": [
+            {
+              "voice": "harp",
+              "at": 0.42,
+              "f": 392,
+              "vol": 0.32
+            },
+            {
+              "voice": "harp",
+              "at": 0.78,
+              "f": 494,
+              "vol": 0.32
+            },
+            {
+              "voice": "harp",
+              "at": 1.12,
+              "f": 587,
+              "vol": 0.32
+            },
+            {
+              "voice": "harp",
+              "at": 1.46,
+              "f": 784,
+              "vol": 0.32
+            },
+            {
+              "voice": "harp",
+              "at": 3.42,
+              "f": 784,
+              "vol": 0.28
+            },
+            {
+              "voice": "harp",
+              "at": 3.7800000000000002,
+              "f": 587,
+              "vol": 0.28
+            },
+            {
+              "voice": "harp",
+              "at": 4.12,
+              "f": 494,
+              "vol": 0.28
+            },
+            {
+              "voice": "harp",
+              "at": 4.46,
+              "f": 392,
+              "vol": 0.28
+            }
+          ]
+        },
+        {
+          "id": "pdp-drop",
+          "label": "Water drop (new)",
+          "sound": [
+            {
+              "voice": "drip",
+              "f": 820,
+              "n": 1,
+              "vol": 0.5,
+              "at": 0
+            },
+            {
+              "voice": "drip",
+              "at": 1.5,
+              "f": 1150,
+              "n": 1,
+              "vol": 0.22
+            },
+            {
+              "voice": "drip",
+              "f": 1050,
+              "n": 1,
+              "vol": 0.45,
+              "at": 3
+            },
+            {
+              "voice": "drip",
+              "at": 4.3,
+              "f": 720,
+              "n": 1,
+              "vol": 0.2
+            }
+          ]
+        }
+      ],
+      "round": "2026-10-09"
     },
     "splat-field": {
       "status": "site",

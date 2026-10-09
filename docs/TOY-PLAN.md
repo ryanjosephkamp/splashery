@@ -3528,9 +3528,12 @@ Proposals below are suggestions; the owner may change them.
   - Improved: Photo to 3D: Depth Anything V2 Small (Apache-2.0, quantized, 27 MB) on ONNX Runtime
     Web (MIT), both loaded only when a photo is opened; an even grid of splats sized to their
     neighbors on the same surface, cut at depth jumps; three CC0 samples (a forest path, a cobbled
-    street, a still life).
+    street, a still life). Lane Photo depth: the depth rises and settles cleanly in the Sharp
+    picture (each piece of surface moves as one layer, as the splats do, and the backing stays
+    behind it at every moment of the tap).
   - Sound: The photo's paper lifting as the depth comes up and settling as it lies flat (no wind, no
-    whoosh).
+    whoosh). Lane Photo depth: a Sound choice in the Toy tab (paper, a soft chime, pop-up layers, a
+    water drop, none, or your own sound file, kept on the device).
 - **Moving photo to 3D** (`moving-photo-3d`). Now: tap: Play or pause the clip. Plan: keep.
   - Owner: The owner's idea in his review of October 2, 2026 (lane Live input r3; labs only): a GIF
     or video played back in 3D, like the live camera.
