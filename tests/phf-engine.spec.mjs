@@ -110,7 +110,11 @@ async function textMatch(page, detail, fixed = true) {
         R.photo.on = (o) => !window.__phfPage?.plain && (on ? on(o) : true);
       }
       await app.chooseToy("photo-3d");
-      await app.setToyOptions({ source: "custom", detail });
+      // The Splats view, picked before the rebuild below (a scene saves it since lane Photo sharp
+      // view r2). (A rebuild while Sharp picture shows, then Splats, draws the splats with a WebGL
+      // error on main since #422: reported to the Operator, docs/handoff/PhotoFidelity.md.)
+      (await import("/src/packs/photo-sharp.js")).setSharpView("photo-3d", "splats");
+      await app.setToyOptions({ source: "custom", detail, view: "splats" });
       player.idle.weight = 0;
       player.motion.setControl("flat", 1, { snap: true });
       const st = player.stage;
@@ -193,7 +197,7 @@ async function open(page, renderer = "webgl2") {
 test.describe(() => {
   test.use({ viewport: { width: 390, height: 844 } });
 
-  test("a page of text in a photo stays legible with the photo's own pixels, and much more so than with one color a splat", async ({
+  test("a page of text in a photo stays legible with the photo's own pixels, and at least as well as with one color a splat", async ({
     page,
   }) => {
     test.setTimeout(240_000);
@@ -204,9 +208,11 @@ test.describe(() => {
     expect(sharp.photo).toBe(true);
     expect(sharp.toyPhoto).toBe(true);
     expect(sharp.n).toBeGreaterThan(5000);
-    // (measured October 8, 2026: 0.86 with the photo, 0.35 without)
+    // (measured October 8, 2026: 0.86 with the photo, 0.35 without; round 2's adaptive grid and
+    // smaller small splats brought One color per splat up to 0.89, the photo's own pixels 0.93)
     expect(sharp.ncc).toBeGreaterThan(0.8);
-    expect(sharp.ncc).toBeGreaterThan(plain.ncc + 0.3);
+    expect(plain.ncc).toBeGreaterThan(0.75);
+    expect(sharp.ncc).toBeGreaterThan(plain.ncc);
     expect(errors).toEqual([]);
   });
 
