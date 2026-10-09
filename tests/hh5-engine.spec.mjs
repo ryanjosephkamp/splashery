@@ -124,3 +124,37 @@ test("follow with at: a press there is followed, elsewhere it picks the toy up",
   expect(x.pressAt([0, -0.2, 0], 10, 10)).toBe(false);
   expect(x.about.finger).toBeNull();
 });
+
+test("upright with rest: a toy back near upright on the floor settles and sleeps; a touch frees it", async () => {
+  const { World, Body, quat } = await import("../src/physics/world.js");
+  const { makeJoints } = await import("../src/physics/joints.js");
+  // A log lying across the floor (it rolls on its round side), its weight a
+  // little behind its middle, as an owl on its branch: never still by itself.
+  const w = new World({ gravity: [0, -26, 0], substeps: 8, sleepSpeed: 0.03, minHit: 0.6 });
+  w.plane([0, 1, 0], -0.2, { friction: 0.7, restitution: 0.3 });
+  const pts = Array.from({ length: 24 }, (_, i) => {
+    const a = (i / 12) * Math.PI * 2;
+    return [i < 12 ? -0.8 : 0.8, 0.2 * Math.cos(a), 0.2 * Math.sin(a)];
+  });
+  const b = w.add(new Body({ pos: [0, 0, 0], points: pts, mass: 1, inertia: [0.02, 0.2, 0.2] }));
+  b.home = { pos: [0, 0, 0], q: [0, 0, 0, 1] };
+  b.goHome = () => {};
+  const hands = { mode: "toy", body: b, press: null, R: () => 1, info: { recipe: { hands: { upright: { k: 60, damping: 5, rest: 0.15 } } } }, player: {} }; // prettier-ignore
+  const J = makeJoints(hands, w);
+  // Tipped back, rolling.
+  b.q = quat.axisAngle([1, 0, 0], 0.5);
+  b.omega = [2, 0, 0];
+  for (let i = 0; i < 360; i++) {
+    w.step(1 / 60);
+    J.step(1 / 60);
+  }
+  expect(b.settled).toBeTruthy();
+  expect(w.asleep).toBe(true);
+  // A finger on it frees it again.
+  hands.press = {};
+  w.wake();
+  w.step(1 / 60);
+  J.step(1 / 60);
+  expect(b.settled).toBeFalsy();
+  expect(b.invMass).toBeGreaterThan(0);
+});

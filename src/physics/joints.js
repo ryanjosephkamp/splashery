@@ -96,7 +96,13 @@ export class Joints {
     this.byName = new Map();
     this.time = 0;
     if (hands.mode === "toy") {
-      this.upright = def.upright ? { k: def.upright.k ?? def.upright, damping: def.upright.damping ?? 3 } : null; // prettier-ignore
+      this.upright = def.upright
+        ? {
+            k: def.upright.k ?? def.upright,
+            damping: def.upright.damping ?? 3,
+            rest: def.upright.rest ?? 0,
+          }
+        : null; // prettier-ignore (rest: lane Hands-on H5)
       return;
     }
     const data = hands.player.proc?.ctx?.kit?.data;
@@ -673,11 +679,29 @@ export class Joints {
   // its turn about the upright stays), rocking as it goes.
   rightStep(dt) {
     const b = this.hands.body;
+    if (b?.settled && (b.held || this.hands.press)) this.unsettle(b); // lane Hands-on H5
     if (!b || b.held) return false;
     const u = quat.rotate(quat.mul(b.q, quat.conj(b.home.q)), [0, 1, 0]);
     const ax = v3.cross(u, [0, 1, 0]);
     const s = v3.len(ax);
     const ang = Math.atan2(s, u[1]);
+    // Lane Hands-on H5: `rest` (radians): back within it of upright, on the
+    // floor and nearly still, it settles and holds there until the finger
+    // touches it again (a toy on a round base, an owl gripping its branch,
+    // would otherwise creep on and never come to rest).
+    const rest = this.upright.rest;
+    if (b.settled) return false;
+    if (rest && ang < rest && b.touchTick >= this.world.tick - 1) {
+      const R = this.hands.R();
+      if (v3.len(b.vel) < 0.3 * R && v3.len(b.omega) < 1) {
+        b.settled = { invMass: b.invMass, invI: b.invI.slice() };
+        b.invMass = 0;
+        b.invI = [0, 0, 0];
+        b.vel = [0, 0, 0];
+        b.omega = [0, 0, 0];
+        return false;
+      }
+    }
     if (ang < 0.01 && v3.len(b.omega) < 0.05) return false;
     const n = s > 1e-9 ? v3.scale(ax, 1 / s) : [0, 0, 0];
     const k = this.upright.k;
@@ -688,6 +712,13 @@ export class Joints {
     this.world.wake();
     this.hands.moved = true;
     return true;
+  }
+
+  // Lane Hands-on H5: a settled toy (upright's `rest`) comes loose again.
+  unsettle(b) {
+    b.invMass = b.settled.invMass;
+    b.invI = b.settled.invI;
+    b.settled = null;
   }
 
   // ---- ↺ ----
