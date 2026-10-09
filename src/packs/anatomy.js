@@ -46,6 +46,13 @@ function mem(c) {
   return m;
 }
 
+// Lane Hands-on H5: the lungs squeezed (a long breath out) and let go (a
+// breath in).
+const LUNG_SQUEEZE = 1.15; // how far a squeeze empties them (channel 0)
+const LUNG_GASP = 0.9; // seconds of the breath in after a squeeze
+const LUNG_OUT_SOUND = [{ voice: "breath", f: 700, to: 0.6, decay: 1.2, vol: 0.6 }];
+const LUNG_IN_SOUND = [{ voice: "breath", f: 600, to: 1.4, decay: 1.4, vol: 0.6 }];
+
 // Fake lighting for the organs below (splats are unlit).
 const LIGHT = unit([-0.45, 0.8, 0.45]);
 const VIEW = unit([0.5, 0.3, 0.82]);
@@ -654,9 +661,32 @@ export const RECIPES = {
     // By itself the eye glances from place to place, with quick jumps and
     // still moments between them. A tap makes it blink, stare at you and
     // snap its pupil small before it goes back to looking round.
-    drive(t, c, out) {
+    // Hands-on (lane Hands-on H5): drag on the eyeball and it rolls in its
+    // socket to look where you pull; let go and it glances about again.
+    hands: { follow: { center: [0, 0, 0] } },
+    drive(t, c, out, info) {
       const p = c.light > 0 ? 1 - c.light : 1;
-      const look = eyeGlance(t);
+      let look = eyeGlance(t);
+      // The finger: the eye turns to a point in front of it, toward the
+      // finger (which is on the glass, between the eye and the viewer), as
+      // far as an eye turns in its socket (about 45 degrees).
+      const m = mem(c);
+      const f = info?.hands?.finger;
+      const goal = f && info.hands.point ? 1 : 0;
+      const dt = Math.min(0.1, Math.max(0, t - (m.t ?? t)));
+      m.t = t;
+      m.pull = (m.pull ?? 0) + (goal - (m.pull ?? 0)) * (1 - Math.exp(-(goal ? 10 : 3) * dt));
+      if (goal) {
+        const at = sub(info.hands.point, mul(f.dir, 0.8));
+        const yaw = Math.max(-0.8, Math.min(0.8, Math.atan2(at[0], at[2])));
+        const pitch = Math.max(-0.6, Math.min(0.6, Math.atan2(at[1], Math.hypot(at[0], at[2]))));
+        // (Eased toward the finger, so the eye rolls rather than jumps.)
+        m.yaw = m.yaw === undefined ? yaw : m.yaw + (yaw - m.yaw) * (1 - Math.exp(-14 * dt));
+        m.pitch = m.pitch === undefined ? pitch : m.pitch + (pitch - m.pitch) * (1 - Math.exp(-14 * dt)); // prettier-ignore
+      }
+      if (m.pull > 1e-3 && m.yaw !== undefined)
+        look = [look[0] + (m.yaw - look[0]) * m.pull, look[1] + (m.pitch - look[1]) * m.pull];
+      if (!goal && m.pull < 1e-3) m.yaw = m.pitch = undefined;
       const stare = smoothstep(0.04, 0.12, p) * (1 - smoothstep(0.72, 0.95, p));
       const yaw = look[0] + (EYE_VIEWER[0] - look[0]) * stare;
       const pitch = look[1] + (EYE_VIEWER[1] - look[1]) * stare;
@@ -899,12 +929,43 @@ export const RECIPES = {
     // The lungs breathe gently by themselves. A tap takes a deep breath: they
     // fill out sideways and down (the airways stay put), hold, then empty
     // further than usual and settle back to the gentle rhythm.
-    drive(t, c, out) {
+    // Hands-on (lane Hands-on H5): squeeze them (press and hold, or pick
+    // them up) and they breathe out; let go and they fill again, a little
+    // past rest, then settle back to breathing gently.
+    hands: { touch: true },
+    drive(t, c, out, info) {
       const s = progress(c.deep) * LUNG_BREATH;
       // Channel 0 empties the lungs at 1; below 0 it fills them past rest.
       const idle = -(0.035 + 0.12 * c.breath) * Math.sin(t * 1.3);
       const calm = 1 - bump(s, 0, 0.5, LUNG_BREATH - 0.9, LUNG_BREATH);
-      out.morph = [idle * calm + lungDeep(s), 0, 0, 0];
+      let m0 = idle * calm + lungDeep(s);
+      // The squeeze, all the way out over about a second; let go, a deep
+      // gasp in (well past rest, as a tap's deep breath fills them), then
+      // back to rest.
+      const m = mem(c);
+      const dt = Math.min(0.1, Math.max(0, t - (m.t ?? t)));
+      m.t = t;
+      m.sq ??= 0;
+      if (info?.hands?.pressed) {
+        m.sq += (LUNG_SQUEEZE - m.sq) * (1 - Math.exp(-2.4 * dt));
+        m.rel = null;
+      } else if (m.down) {
+        m.rel = t;
+        m.from = m.sq;
+      }
+      if (m.rel !== null && m.rel !== undefined) {
+        const u = t - m.rel;
+        m.sq = u < LUNG_GASP ? m.from + (LUNG_IN * 0.85 - m.from) * ease(u / LUNG_GASP) : LUNG_IN * 0.85 * (1 - ease(Math.min(1, (u - LUNG_GASP) / 1.8))); // prettier-ignore
+        if (u > LUNG_GASP + 1.8) m.rel = null;
+      }
+      if (info?.hands?.pressed && !m.down) out.cues.push(LUNG_OUT_SOUND);
+      if (!info?.hands?.pressed && m.down) out.cues.push(LUNG_IN_SOUND);
+      m.down = !!info?.hands?.pressed;
+      // (Squeezed, the breath is held out; as it fills, the gentle rhythm
+      // comes back in.)
+      const held = Math.min(1, Math.abs(m.sq) * 4);
+      m0 = m0 * (1 - held) + m.sq;
+      out.morph = [m0, 0, 0, 0];
     },
     build(k, o) {
       const pink = o.color;

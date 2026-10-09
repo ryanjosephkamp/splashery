@@ -376,6 +376,10 @@ const PERC = {
   theta: 1,
   max: 1.6,
 };
+// Where the inputs sit now (lane Hands-on H5: for a tap's flip) and how far
+// in front of the board.
+let PERC_AT = [];
+let PERC_Z = 0.04;
 // Where the inputs and the sum node sit, on the poster and in the 3D model.
 const PERC2D = {
   P: [
@@ -395,6 +399,39 @@ const PERC3D = {
 };
 const percRadius = (w) => 0.012 + 0.036 * w;
 const percLevel = (w) => w.reduce((s, x, i) => s + x * PERC.inputs[i], 0) / PERC.max;
+
+// Lane Hands-on H5: inputs flipped by hand. With the ✋ switch on (as the
+// drive last saw it), a tap on an input lamp (within 0.25 of it, recipe
+// units) flips that input instead of starting the toy's run; the drive
+// keeps the inputs and shows the answer at once.
+const FLIP = { on: false };
+function flipAt(p, P, lift = 0) {
+  if (!FLIP.on || !p) return null;
+  let best = -1;
+  let bd = 0.25;
+  P.forEach((q, i) => {
+    const d = len(sub(p, add(q, [0, 0, lift])));
+    if (d < bd) [bd, best] = [d, i];
+  });
+  return best < 0 ? null : { key: "flip", pick: best };
+}
+// The inputs as the hand has set them (null: never touched), flipped once
+// per new tap on a lamp.
+const FLIPS = new WeakMap();
+function flips(c, info, n, out) {
+  FLIP.on = !!info?.hands?.on;
+  const m = FLIPS.get(c) || { x: null, n: 0 };
+  FLIPS.set(c, m);
+  const tap = info?.tap;
+  if (tap && tap.key === "flip" && tap.n !== m.n && FLIP.on) {
+    m.n = tap.n;
+    m.x ||= Array(n).fill(0);
+    m.x[tap.pick] = m.x[tap.pick] ? 0 : 1;
+    out.cues.push({ voice: "click", vol: 0.5 });
+  }
+  if (tap && tap.key !== "flip") m.x = null; // the toy's own run takes over
+  return FLIP.on ? m.x : null;
+}
 
 // The neural network: three layers (3, 4 and 2 neurons), its weights and a
 // real forward pass (sigmoid), so each neuron glows as bright as it fires.
@@ -841,6 +878,70 @@ function diffStep(s) {
 // Gradient descent: a hilly loss landscape (a slope down to a deep valley,
 // with a trough across it) and the steps of gradient descent with momentum
 // from a hillside, for three learning rates. Each step is a hop of the ball.
+// Lane Hands-on H5: the gradient-descent ball by hand. While a finger is
+// down the ball sits on the surface where the finger's line meets it (or
+// above its middle when the line misses); let go, it rolls: pulled down the
+// slope (gravity along the surface's gradient), slowed by rolling, bounced
+// back by the landscape's edges, until it rests in a valley.
+const GD_HANDS = new WeakMap();
+const gdMem = (c) => {
+  let m = GD_HANDS.get(c);
+  if (!m) GD_HANDS.set(c, (m = { t: null, p: null, v: [0, 0], rest: 0 }));
+  return m;
+};
+function gdHands(c, t, info, running) {
+  const m = gdMem(c);
+  const dt = clamp(t - (m.t ?? t), 0, 0.05);
+  m.t = t;
+  const { f, grad, H, R } = GD;
+  const surf = (x, z) => [x, f(x, z) * H + R, z];
+  if (running) {
+    m.p = null;
+    return null;
+  }
+  const ray = info?.hands?.finger;
+  if (ray) {
+    // March along the finger's line to where it first dips under the surface.
+    let hit = null;
+    let prev = null;
+    for (let i = 0; i <= 400 && !hit; i++) {
+      const q = add(ray.origin, mul(ray.dir, i * 0.02));
+      const below = q[1] < f(clamp(q[0], -1, 1), clamp(q[2], -1, 1)) * H && Math.abs(q[0]) <= 1 && Math.abs(q[2]) <= 1; // prettier-ignore
+      if (below && prev) hit = prev;
+      prev = q;
+    }
+    const at = hit || info.hands.point;
+    const x = clamp(at[0], -0.95, 0.95);
+    const z = clamp(at[2], -0.95, 0.95);
+    m.p = [x, z];
+    m.v = [0, 0];
+    m.rest = 0;
+    m.held = true;
+    // Held a little above the surface, as if picked up.
+    return add(surf(x, z), [0, 0.06, 0]);
+  }
+  if (!m.p) return null;
+  m.held = false;
+  // Rolling: small steps.
+  const n = Math.max(1, Math.ceil(dt / 0.004));
+  const h = dt / n;
+  for (let i = 0; i < n; i++) {
+    const [gx, gz] = grad(m.p[0], m.p[1]);
+    m.v[0] += (-2.2 * gx - 0.9 * m.v[0]) * h;
+    m.v[1] += (-2.2 * gz - 0.9 * m.v[1]) * h;
+    // (Rolling friction holds it once it is slow on a gentle slope.)
+    if (Math.hypot(...m.v) < 0.03 && 2.2 * Math.hypot(gx, gz) < 0.12) m.v = [0, 0];
+    m.p[0] += m.v[0] * h;
+    m.p[1] += m.v[1] * h;
+    for (const k of [0, 1])
+      if (Math.abs(m.p[k]) > 0.95) {
+        m.p[k] = Math.sign(m.p[k]) * 0.95;
+        m.v[k] *= -0.3;
+      }
+  }
+  return surf(m.p[0], m.p[1]);
+}
+
 const GD = (() => {
   const h = (x) => 0.5 * (x - 0.3) ** 2 - 0.3 * Math.exp(-((x - 0.3) ** 2) / 0.04) + 0.05 * Math.sin(5 * x); // prettier-ignore
   const f = (x, z) => h(x) + 0.7 * z * z;
@@ -868,7 +969,7 @@ const GD = (() => {
     }
     paths[key] = pts;
   }
-  return { f, H, R, paths, t0: 0.3, dt: 0.165 };
+  return { f, grad, H, R, paths, t0: 0.3, dt: 0.165 };
 })();
 
 // Word vectors: real word embeddings (GloVe, 50 dimensions, built into
@@ -1189,6 +1290,79 @@ const SORT_VOICES = {
 };
 const sortNote = (v, up = 0) => `${"CDEFGABC"[v]}${4 + up + (v === 7 ? 1 : 0)}`;
 
+// Lane Hands-on H5: the sorting machine's pieces by hand. A press takes the
+// piece nearest the finger, which rides at the finger, lifted; let go over
+// another place and the two swap, the other gliding across. `order` (which
+// value is in each place) stays until a tap sorts the machine's way.
+const SORT_HANDS = new WeakMap();
+const sortMem = (c) => {
+  let m = SORT_HANDS.get(c);
+  if (!m) SORT_HANDS.set(c, (m = { order: null, swaps: 0, held: -1, t: null, glide: null }));
+  return m;
+};
+function sortHands(c, t, info, view, sorted, running) {
+  const m = sortMem(c);
+  const dt = clamp(t - (m.t ?? t), 0, 0.1);
+  m.t = t;
+  if (running) {
+    m.order = null;
+    m.swaps = 0;
+    return null;
+  }
+  const f = info?.hands?.finger;
+  // The place whose piece is nearest the finger's line (a little up from
+  // its foot), and the point on that line nearest a place.
+  const near = (ray, q) => {
+    const t = Math.max(0, dot(sub(q, ray.origin), ray.dir));
+    return add(ray.origin, mul(ray.dir, t));
+  };
+  const placeOf = (ray) => {
+    let best = 0;
+    let bd = Infinity;
+    for (let j = 0; j < 8; j++) {
+      const q = add(view.at(m.order[j], j), [0, 0.12, 0]);
+      const d = len(sub(q, near(ray, q)));
+      if (d < bd) [bd, best] = [d, j];
+    }
+    return best;
+  };
+  let cue = null;
+  if (f) {
+    m.order ||= SORT.start.slice();
+    if (m.held < 0) m.held = placeOf(f);
+    m.ray = f;
+    m.finger = near(f, view.at(m.order[m.held], m.held));
+  } else if (m.held >= 0) {
+    // Let go: over another place, they swap.
+    const j = placeOf(m.ray);
+    const i = m.held;
+    if (j !== i) {
+      const [a, b] = [m.order[i], m.order[j]];
+      m.order[i] = b;
+      m.order[j] = a;
+      m.swaps++;
+      m.glide = { v: b, from: j, to: i, f: 0 };
+      cue = { voice: "wood", f: 330 + 40 * b, vol: 0.6 };
+      if (m.order.every((v, k) => v === sorted[k])) cue = [cue, { voice: "bell", at: 0.25, f: "C6", decay: 1.2, vol: 0.5 }]; // prettier-ignore
+    }
+    m.held = -1;
+  }
+  if (!m.order) return null;
+  if (m.glide) {
+    m.glide.f += dt / 0.35;
+    if (m.glide.f >= 1) m.glide = null;
+  }
+  const at = [];
+  for (let j = 0; j < 8; j++) {
+    const v = m.order[j];
+    if (j === m.held && m.finger) at[v] = add(m.finger, [0, 0.12, 0.25]);
+    else if (m.glide && m.glide.v === v)
+      at[v] = view.swap(v, m.glide.from, m.glide.to, ease(m.glide.f));
+    else at[v] = view.at(v, j);
+  }
+  return { at, swaps: m.swaps, cue };
+}
+
 const SORT = (() => {
   const start = [5, 2, 7, 0, 6, 3, 1, 4];
   const runs = {};
@@ -1475,6 +1649,11 @@ const SORT_BUILD = {
 
 // The half adder: switches A and B, wires to an XOR gate (the sum) and an
 // AND gate (the carry), and a lamp for each. 1 + 1 = 10 in binary.
+// Lane Hands-on H5: the half adder's last levers set by hand (for a click
+// as the answer changes).
+const HA_MEM = new WeakMap();
+const haMem = (c) => HA_MEM.get(c) || (HA_MEM.set(c, {}), HA_MEM.get(c));
+
 const HA = (() => {
   const A = [-1.02, 0.45, 0];
   const B = [-1.02, -0.45, 0];
@@ -2220,6 +2399,9 @@ const xorCase = (x) => {
   const h = XOR.hidden.map((n) => xorFire(n, x));
   return { h, y: xorFire(XOR.out, h) };
 };
+// Where the inputs sit now (lane Hands-on H5: for a tap's flip).
+let XOR_P = [];
+let XOR_Z = 0.04;
 // Where things sit, on the poster and in the 3D model.
 const XOR_AT = {
   poster: {
@@ -2631,8 +2813,20 @@ export const RECIPES = {
     // Twice the splats, so the 3D models' labels and edges read crisp.
     density: 2,
     options: [VIEW_OPTION],
-    controls: [{ key: "go", label: "Try", type: "pulse", ease: 4 }],
-    action: { key: "go", label: "Try an example" },
+    // (flip: lane Hands-on H5, an input flipped by hand.)
+    controls: [
+      { key: "go", label: "Try", type: "pulse", ease: 4 },
+      { key: "flip", label: "Flip", type: "pulse", ease: 0.3 },
+    ],
+    action: {
+      key: "go",
+      label: "Try an example",
+      quiet: ["flip"],
+      // Hands-on (lane Hands-on H5): a tap on an input lamp switches it;
+      // the sum, the gauge and the output lamp show the answer at once.
+      at: (p) => flipAt(p, PERC_AT, PERC_Z) ?? "go",
+    },
+    hands: { touch: true },
     // Three inputs (1, 0, 1) send pulses along wires as thick as their
     // weights; the sum fills the gauge but stays under the threshold, so the
     // lamp flashes red. The two live wires thicken (it learns), the pulses
@@ -2642,6 +2836,19 @@ export const RECIPES = {
       const on = s >= 0;
       const model = info.data?.view === "model";
       const { P, node } = model ? PERC3D : PERC2D;
+      PERC_AT = P;
+      PERC_Z = model ? 0 : 0.04;
+      // Hands-on: inputs set by hand show their answer, with the learned
+      // weights (no pulses, no run).
+      const x = flips(c, info, 3, out);
+      if (x && !on) {
+        P.forEach((_, i) => (out.parts["in" + i] = { visible: x[i] }));
+        out.tokens = P.map(() => ({ visible: 0 }));
+        const sum = PERC.after.reduce((a, w, i) => a + w * x[i], 0);
+        out.grow = Math.min(1, sum / PERC.max);
+        out.morph = [1, 0, sum >= PERC.theta ? 1 : 0, 0];
+        return;
+      }
       out.tokens = [];
       // Two rounds of pulses: at 0.3 s and at 2.1 s, 0.7 s along the wires.
       const travel = (x) => (x > 0 && x < 1 ? ease(x) : -1);
@@ -2770,8 +2977,21 @@ export const RECIPES = {
     // Twice the splats, so the 3D models' labels and edges read crisp.
     density: 2,
     options: [VIEW_OPTION],
-    controls: [{ key: "go", label: "Run", type: "pulse", ease: 5 }],
-    action: { key: "go", label: "Try all four inputs" },
+    // (flip: lane Hands-on H5, an input flipped by hand.)
+    controls: [
+      { key: "go", label: "Run", type: "pulse", ease: 5 },
+      { key: "flip", label: "Flip", type: "pulse", ease: 0.3 },
+    ],
+    action: {
+      key: "go",
+      label: "Try all four inputs",
+      quiet: ["flip"],
+      // Hands-on (lane Hands-on H5): a tap on an input lamp flips it; the
+      // OR and NAND neurons and the output show XOR at once, and the truth
+      // table marks the row.
+      at: (p) => flipAt(p, XOR_P, XOR_Z) ?? "go",
+    },
+    hands: { touch: true },
     // XOR, one input pair at a time (00, 01, 10, 11): the inputs light,
     // pulses run to the OR and NAND neurons, the ones that fire send pulses
     // on to the AND neuron, and the output lamp lights for 01 and 10 only;
@@ -2780,6 +3000,23 @@ export const RECIPES = {
       const s = since(c.go, 5);
       const on = s >= 0;
       const A = info.data?.view === "model" ? XOR_AT.model : XOR_AT.poster;
+      XOR_P = A.P;
+      XOR_Z = info.data?.view === "model" ? 0 : 0.04;
+      // Hands-on: inputs set by hand show XOR's answer at once.
+      const hx = flips(c, info, 2, out);
+      if (hx && !on) {
+        const { h, y } = xorCase(hx);
+        hx.forEach((xi, i) => (out.parts["in" + i] = { visible: xi }));
+        h.forEach((hv, hh) => (out.parts["h" + hh] = { visible: hv ? 1 : 0 }));
+        out.parts.out = { visible: y ? 1 : 0 };
+        const S = info.data?.view === "model" ? XOR_TABLE_3D : 1;
+        const row = 2 * hx[0] + hx[1];
+        out.tokens = [];
+        for (let j = 0; j < 6; j++) out.tokens[j] = { visible: 0 };
+        out.tokens[6] = { offset: [0, -row * 0.2 * S, 0], visible: 1 };
+        for (let r = 0; r < 4; r++) out.tokens[7 + r] = { visible: r === row ? 1 : 0 };
+        return;
+      }
       const k = on ? Math.floor((s - XOR.t0) / XOR.dt) : -1;
       const u = on ? (s - XOR.t0 - k * XOR.dt) / XOR.dt : 0;
       const live = on && k >= 0 && k < 4;
@@ -3765,6 +4002,11 @@ export const RECIPES = {
     ],
     controls: [{ key: "go", label: "Descend", type: "pulse", ease: 4.5 }],
     action: { key: "go", label: "Roll downhill" },
+    // Hands-on (lane Hands-on H5): press on the landscape and the ball comes
+    // to your finger, sitting on the surface where you point; let go and it
+    // rolls downhill by the slope, overshoots a little and settles in the
+    // nearest valley (not always the deepest one).
+    hands: { follow: { center: [0, 0, 0] } },
     // The ball takes 21 steps of gradient descent, each a hop downhill,
     // leaving a trail of dots: just right, it overshoots the valley and
     // settles in it; too low, it creeps; too high, it bounces from wall to
@@ -3773,6 +4015,20 @@ export const RECIPES = {
       const s = since(c.go, 4.5);
       const on = s >= 0;
       const pts = info.data?.path || GD.paths.good;
+      // Hands-on: the ball at the finger, or rolling from where it was let
+      // go (a tap starts the toy's own descent again).
+      const B = gdHands(c, t, info, on);
+      if (B) {
+        out.tokens = [{ offset: sub(B, pts[0]), visible: 1 }];
+        out.morph = [0];
+        const m = gdMem(c);
+        const step = Math.floor(t * 4);
+        if (step !== m.sortStep) {
+          out.resort = true;
+          m.sortStep = step;
+        }
+        return;
+      }
       const N = pts.length - 1;
       const k = on ? (s - GD.t0) / GD.dt : -1;
       let p = pts[0];
@@ -4051,6 +4307,11 @@ export const RECIPES = {
     controls: [{ key: "go", label: "Sort", type: "pulse", ease: 5 }],
     // The sound is the sort's own (cues, below), so the tap itself is quiet.
     action: { key: "go", label: "Sort the bars", quiet: ["go"] },
+    // Hands-on (lane Hands-on H5): pick a piece up and drop it on another
+    // place: the two swap (the one there glides over), the counter counts
+    // your swaps, and a chime rings when they are in order. A tap sorts them
+    // the machine's way again.
+    hands: { follow: { center: [0, 0.4, 0] } },
     // The pieces sort themselves, each swap or move a solid piece gliding to
     // its new place, and the counter counts them; then they shuffle back.
     // Each comparison and each swap sounds (sortCues), a little ahead, each
@@ -4070,6 +4331,25 @@ export const RECIPES = {
       const to = i > 0 ? list[i - 1] : SORT.start;
       const back = on ? ease(band(s, 4.3, 4.9)) : 0;
       const sorted = list[n - 1];
+      // Hands-on: the pieces as the hand has swapped them.
+      const H = sortHands(c, t, info, view, sorted, on);
+      if (H) {
+        out.tokens = [];
+        for (let v = 0; v < 8; v++) {
+          const home = view.at(v, SORT.start.indexOf(v));
+          out.tokens[v] = { offset: sub(H.at[v], home), visible: 1 };
+        }
+        showDigit(out.tokens, 8, H.swaps >= 10 ? Math.floor(H.swaps / 10) % 10 : -1);
+        showDigit(out.tokens, 15, H.swaps % 10);
+        if (H.cue) out.cues.push(H.cue);
+        const m = sortMem(c);
+        const step = Math.floor(t * 5);
+        if (step !== m.sortStep) {
+          out.resort = true;
+          m.sortStep = step;
+        }
+        return;
+      }
       out.tokens = [];
       for (let v = 0; v < 8; v++) {
         const slot = SORT.start.indexOf(v);
@@ -4116,12 +4396,57 @@ export const RECIPES = {
   "half-adder": {
     controls: [{ key: "go", label: "Add", type: "pulse", ease: 3.5 }],
     action: { key: "go", label: "Add 1 + 1" },
+    // Hands-on (lane Hands-on H5): flip each lever by hand (it clicks against
+    // its stops); the light runs into the gates and the lamps show the sum
+    // and the carry of the two bits at once: 0 + 1 = 1, 1 + 1 = 10.
+    hands: {
+      touch: true,
+      joints: () =>
+        [HA.A, HA.B].map((p, i) => ({
+          type: "hinge",
+          part: i ? "leverB" : "leverA",
+          pivot: [p[0], p[1] - 0.06, 0.05],
+          axis: [0, 0, -1],
+          min: 0,
+          max: 1,
+          gravity: false,
+          damping: 7,
+          bounce: 0.2,
+          pos: [p[0] - 0.03, p[1] + 0.06, 0.05],
+          pick: [0.13, 0.16, 0.1],
+          start: (c) => {
+            const s = since(c.go, 3.5);
+            return s < 0 ? 0 : ease(band(s, i ? 0.35 : 0.1, i ? 0.5 : 0.25)) * (1 - ease(band(s, i ? 2.95 : 2.85, i ? 3.1 : 3.0))); // prettier-ignore
+          },
+        })),
+    },
     // Both switches flip to 1; light runs along the wires into the XOR and
     // AND gates, which glow as they fire; the XOR gives 0 (the sum lamp
     // stays dark), the AND gives 1 and lights the carry lamp: 1 + 1 = 10.
-    drive(t, c, out) {
+    drive(t, c, out, info) {
       const s = since(c.go, 3.5);
       const on = s >= 0;
+      // Hands-on: the levers as the hand has set them, added at once.
+      const va = info?.hands?.joint("leverA");
+      const vb = info?.hands?.joint("leverB");
+      if (!on && va !== null && va !== undefined && (va > 0.02 || vb > 0.02)) {
+        const a = va > 0.5 ? 1 : 0;
+        const b = vb > 0.5 ? 1 : 0;
+        const sum = a ^ b;
+        const carry = a & b;
+        out.parts.lampA = { visible: a };
+        out.parts.lampB = { visible: b };
+        out.parts.sumLamp = { visible: sum };
+        out.parts.carryLamp = { visible: carry };
+        out.parts.equation = { visible: carry };
+        out.tokens = [{ visible: 1 - a }, { visible: a }, { visible: 1 - b }, { visible: b }, { visible: 1 - carry }, { visible: carry }]; // prettier-ignore
+        const m = haMem(c);
+        const key = `${a}${b}`;
+        if (m.key !== undefined && m.key !== key) out.cues.push({ voice: "click", vol: 0.5 });
+        m.key = key;
+        out.morph = [a || b ? 1 : 0, carry, sum, carry];
+        return;
+      }
       const off = on ? band(s, 2.85, 3.0) : 1;
       const flipA = on ? ease(band(s, 0.1, 0.25)) * (1 - ease(band(s, 2.85, 3.0))) : 0;
       const flipB = on ? ease(band(s, 0.35, 0.5)) * (1 - ease(band(s, 2.95, 3.1))) : 0;

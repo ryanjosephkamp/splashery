@@ -1413,7 +1413,10 @@ function buildProtein(k, s, scheme) {
       r.pts.reduce((acc, pt) => add(acc, pt.p), [0, 0, 0]),
       1 / r.pts.length,
     );
-    tokens.push({ base, kind: r.kind });
+    // (r: how far it reaches from its middle, where a finger finds it in
+    // Hands-on; chain: which chain, for the neighbors it tugs.)
+    const reach = Math.max(...r.pts.map((pt) => len(sub(pt.p, base))));
+    tokens.push({ base, kind: r.kind, chain: r.chain, r: Math.max(2, 0.75 * reach) });
     for (const piece of r.parts || [r]) ribbonRun(k, piece, id, scheme);
   });
   // The bound small molecules.
@@ -1424,7 +1427,7 @@ function buildProtein(k, s, scheme) {
       lig.atoms.reduce((acc, a) => add(acc, a.p), [0, 0, 0]),
       1 / lig.atoms.length,
     );
-    tokens.push({ base, kind: "L", name: lig.name });
+    tokens.push({ base, kind: "L", name: lig.name, chain: -1, r: 2.5 });
     ligandTokens.push({ lig, id });
     const atoms = lig.atoms.map((a) => ({
       el: a.el,
@@ -1882,6 +1885,25 @@ export const RECIPES = {
     ],
     controls: [{ key: "heat", label: "Heat", type: "pulse", ease: 4.4 }],
     action: { key: "heat", label: "Heat it up" },
+    // Hands-on (lane Hands-on H5): grab an atom and pull it: its bonds
+    // stretch after it like springs and its neighbors are tugged along a
+    // little; let go and it springs back and the molecule wobbles to rest.
+    hands: {
+      gravity: 0,
+      place: false,
+      // (Under the molecule: a held atom is kept within five toy radii of it.)
+      floor: (d) => -1.3 * Math.max(1, ...(d?.tokens || []).map((tk) => len(tk.base))),
+      area: 3,
+      touch: true,
+      pieces: (d) =>
+        (d?.tokens || []).map((tk, i) => ({
+          token: i,
+          pos: tk.base,
+          pick: [tk.r, tk.r, tk.r],
+          mass: Math.max(0.2, tk.mass / 12),
+          home: { k: 70, damping: 3.2 },
+        })),
+    },
     // The atoms always jiggle a little on their bonds. A tap heats the
     // molecule: every bond stretches and squeezes hard at its own pace
     // (light hydrogens swing furthest), then it cools and calms. Each atom
@@ -1904,6 +1926,23 @@ export const RECIPES = {
       if (D.breathe) {
         const r = amp * 0.07 * Math.sin(TAU * 1.6 * t);
         D.tokens.forEach((tk, i) => (disp[i] = add(disp[i], mul(tk.dir, r * len(tk.base)))));
+      }
+      // Hands-on: an atom pulled off its place tugs its bonded neighbors
+      // after it (each about a third of the way; the pulled one goes where
+      // the hand puts it).
+      const pc = info.hands?.piece;
+      if (pc) {
+        const off = D.tokens.map((_, i) => {
+          const q = pc(i);
+          return q ? sub(q.pos, q.home) : null;
+        });
+        for (const b of D.bonds) {
+          const [oa, ob] = [off[b.a], off[b.b]];
+          const ma = D.tokens[b.a].mass;
+          const mb = D.tokens[b.b].mass;
+          if (oa && len(oa) > 1e-4) disp[b.b] = add(disp[b.b], mul(oa, (0.35 * ma) / (ma + mb)));
+          if (ob && len(ob) > 1e-4) disp[b.a] = add(disp[b.a], mul(ob, (0.35 * mb) / (ma + mb)));
+        }
       }
       out.tokens = D.tokens.map((tk, i) => ({ base: tk.base, offset: disp[i] }));
     },
@@ -1951,12 +1990,22 @@ export const RECIPES = {
           : atoms.map((a, i) => i);
       const n = Math.max(...tokenOf) + 1;
       const MASS = new Proxy({ H: 1, C: 12, N: 14, O: 16 }, { get: (m, el) => m[el] ?? 2 * (element(el)?.z ?? 6) }); // prettier-ignore
-      const tokens = Array.from({ length: n }, () => ({ base: [0, 0, 0], mass: 0, count: 0 }));
+      const tokens = Array.from({ length: n }, () => ({
+        base: [0, 0, 0],
+        mass: 0,
+        count: 0,
+        r: 0,
+      }));
       atoms.forEach((a, i) => {
         const tk = tokens[tokenOf[i]];
         tk.base = add(tk.base, a.p);
         tk.mass += MASS[a.el] ?? 12;
         tk.count++;
+      });
+      // (How far from its middle a finger finds it: lane Hands-on H5.)
+      atoms.forEach((a, i) => {
+        const tk = tokens[tokenOf[i]];
+        tk.r = Math.max(tk.r, 1.15 * (a.r ?? CPK[a.el]?.r ?? 0.35), (tk.count > 1 ? 0.6 : 0) * len(sub(a.p, mul(tk.base, 1 / tk.count)))); // prettier-ignore
       });
       for (const tk of tokens) {
         tk.base = mul(tk.base, 1 / tk.count);
@@ -2033,6 +2082,33 @@ export const RECIPES = {
     ],
     controls: [{ key: "wave", label: "Wave", type: "pulse", ease: 3.8 }],
     action: { key: "wave", label: "Send a wave through" },
+    // Hands-on (lane Hands-on H5): push a slice of the crystal up or down:
+    // it slides along its plane with its neighbors following less and less
+    // (the lattice shears, bonds stretching between slices), and let go it
+    // springs back, ringing a little. Each slice has an unseen handle on a
+    // spring (a slider on a token no splat uses); the drive spreads its
+    // push across the slices.
+    hands: {
+      touch: true,
+      floor: -3,
+      joints: (d) =>
+        (d?.slabCenters || []).map((at, i) => ({
+          type: "slider",
+          token: 20 + i,
+          name: `shear${i}`,
+          pos: at,
+          pivot: at,
+          axis: d.up,
+          min: -0.32,
+          max: 0.32,
+          gravity: false,
+          spring: 160,
+          damping: 3.5,
+          bounce: 0.1,
+          pick: [1.6, 1.6, 1.6],
+          sound: () => null,
+        })),
+    },
     // A tap sends a wave of vibration (a phonon) through the crystal: a
     // ripple runs across it from left to right, each slice of atoms rising
     // and falling in turn with its bonds, and leaves it still again.
@@ -2042,10 +2118,14 @@ export const RECIPES = {
       const p = progress(c.wave);
       const on = c.wave > 0 ? 1 : 0;
       const front = -1.6 + 3.3 * band(p, 0, 0.92);
+      // Hands-on: each slice's handle pushes it and, less and less, the
+      // slices beside it.
+      const pushed = D.slabs.map((_, i) => info.hands?.joint(`shear${i}`) ?? 0);
+      const shear = (j) => pushed.reduce((acc, v, i) => acc + v * Math.exp(-(((j - i) / 2.6) ** 2)), 0); // prettier-ignore
       D.slabs.forEach((sk, i) => {
         const x = sk - front;
         const y = on * 0.13 * Math.exp(-(x * x) / (2 * 0.3 * 0.3)) * Math.sin(x * 7);
-        out.parts[`slab${i}`] = { offset: mul(D.up, y) };
+        out.parts[`slab${i}`] = { offset: mul(D.up, y + shear(i)) };
       });
       // The bonds between slabs stretch between them (their two ends ride on
       // these tokens, lane Fix7).
@@ -2104,6 +2184,8 @@ export const RECIPES = {
       k.data = {
         up,
         slabs: slabs.map((_, i) => ((lo + ((i + 0.5) / SLABS) * (hi - lo)) / (hi - lo)) * 2),
+        // Each slice's middle (lane Hands-on H5: where its handle is).
+        slabCenters: slabs.map((_, i) => mul(right, lo + ((i + 0.5) / SLABS) * (hi - lo))),
       };
       ballStick(k, lat.atoms, lat.bonds, {
         bondR: lat.bondR,
@@ -2192,6 +2274,25 @@ export const RECIPES = {
     // Lane Fix7: a tap while it is apart brings it back at once (not a pause).
     controls: [{ key: "apart", label: "Pull apart", type: "pulse", ease: PROTEIN_SECS, pausable: false }], // prettier-ignore
     action: { key: "apart", label: "Pull it apart" },
+    // Hands-on (lane Hands-on H5): pull a helix, a strand or a loop out of
+    // the fold; the pieces next to it along the chain are tugged after it a
+    // little, and let go it glides back into its place.
+    hands: {
+      gravity: 0,
+      place: false,
+      // (Under the protein: a held piece is kept within five toy radii of it.)
+      floor: (d) => -1.2 * (d?.spread ?? 20),
+      area: 3,
+      touch: true,
+      pieces: (d) =>
+        (d?.tokens || []).map((tk, i) => ({
+          token: i,
+          pos: tk.base,
+          pick: [tk.r, tk.r, tk.r],
+          mass: 1,
+          home: { k: 22, damping: 7.5 },
+        })),
+    },
     // A tap pulls the protein apart into its pieces: every helix, strand
     // and loop (and each bound molecule) moves straight out from the middle,
     // turning a little, so you can see what it is made of, then they all
@@ -2212,6 +2313,21 @@ export const RECIPES = {
         };
       });
       if (D.glow) out.parts.glow = { visible: 1.3 * e };
+      // Hands-on: a piece pulled out of the fold tugs its neighbors along
+      // the chain (a third of the way) after it.
+      const pc = info.hands?.piece;
+      if (pc) {
+        const off = D.tokens.map((_, i) => {
+          const q = pc(i);
+          return q && len(sub(q.pos, q.home)) > 1e-3 ? sub(q.pos, q.home) : null;
+        });
+        D.tokens.forEach((tk, i) => {
+          for (const j of [i - 1, i + 1]) {
+            if (!off[j] || D.tokens[j].chain !== tk.chain || tk.chain < 0) continue;
+            out.tokens[i].offset = add(out.tokens[i].offset, mul(off[j], 0.3));
+          }
+        });
+      }
     },
     build(k, o) {
       let s = null;
