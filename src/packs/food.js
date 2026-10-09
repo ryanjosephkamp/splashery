@@ -884,6 +884,7 @@ export const RECIPES = {
     hands: {
       floor: -0.92,
       area: 1.6,
+      foot: 0.95, // (a carried slice stays above the melon while any of it is over the melon)
       pieces: (d) => {
         if (!d) return [];
         // Each round slice: a short cylinder along the melon's length.
@@ -891,6 +892,11 @@ export const RECIPES = {
           const solid = { type: "cylinder", r: sl.r, h: sl.half };
           return { token: i, pos: sl.mid, quat: quatMul(sl.q, quatAxisAngle([0, 0, 1], Math.PI / 2)), solid, points: surfacePoints(solid, 1), pick: [sl.r, sl.half + 0.04, sl.r], mass: 1, friction: 0.9, restitution: 0.05 }; // prettier-ignore
         });
+        // The whole melon's shape, a fixed piece that never collides: a
+        // slice carried over or beside it hovers above it, never in it (the
+        // owner's mark of round 2).
+        const m = d.melon;
+        if (m) out.push({ pos: m.pos, quat: m.q, solid: null, points: [], pick: [m.A, m.B, m.B], mass: 0, fixed: true }); // prettier-ignore
         const w = d.wedge;
         if (w) {
           const half = [w.R * Math.sin(w.span / 2), w.R / 2, w.T / 2];
@@ -968,6 +974,7 @@ export const RECIPES = {
       let hinge = [0, 0, 1];
       let axis = [1, 0, 0];
       let wedgeAt = null;
+      let melonAt = null;
       const whole = (pos, yaw) => {
         const A = 1.2;
         const B = 0.92;
@@ -976,6 +983,7 @@ export const RECIPES = {
         const local = (p) => quatRotate(qi, sub(p, pos));
         hinge = quatRotate(q, [0, 0, 1]);
         axis = quatRotate(q, [1, 0, 0]);
+        melonAt = { pos, q, A, B }; // (lane Hands-on H2: the whole melon's shape)
         const n = 6;
         const xs = [];
         for (let i = 0; i <= n; i++) xs.push(-A + (2 * A * i) / n);
@@ -1205,7 +1213,7 @@ export const RECIPES = {
         whole([-0.45, 0, -0.6], WM_YAW);
         wedge([0.72, -0.92 + 0.78, 0.6], 30, 0.78, 0.26);
       }
-      k.data = { slices, knives, hinge, axis, wedge: wedgeAt };
+      k.data = { slices, knives, hinge, axis, wedge: wedgeAt, melon: melonAt };
     },
   },
 
@@ -5529,18 +5537,28 @@ export const RECIPES = {
         // shown only once the banana is pulled off its bunch.)
         const core = tok++;
         k.add(
-          k.param((u, v) => around(0.02 + v * 0.95, u * TAU, rad(0.02 + v * 0.95) * 0.86).p, {
-            grid: 56,
-            normal: (u, v) => around(0.02 + v * 0.95, u * TAU, 1).d,
+          k.param((u, v) => around(v * 0.995, u * TAU, rad(v * 0.995) * 0.9).p, {
+            grid: 64,
+            normal: (u, v) => around(v * 0.995, u * TAU, 1).d,
           }),
-          { ...piece(core), flat: 0.3, weight: 1.4, pattern: false, color: (c) => lit(c, "#d9b52e", 0.8, 0.2) }, // prettier-ignore
+          // (End to end and colored as the skin is, so looking in at the
+          // broken neck or the tip shows a solid banana: round 2 still looked
+          // see-through there, the owner's mark.)
+          { ...piece(core), flat: 0.3, weight: 1.6, pattern: false, color: (c) => skinAt(c, c.v * 0.995, c.u * TAU) }, // prettier-ignore
         );
         k.add(
-          k.param((u, v) => around(0.02, u * TAU, rad(0.02) * 0.86 * v).p, {
+          k.param((u, v) => around(0.995, u * TAU, rad(0.995) * 0.86 * v).p, {
+            grid: 10,
+            normal: () => shape.frame(1).t,
+          }),
+          { ...piece(core), flat: 0.3, weight: 2, color: (c) => lit(c, "#3a2716") },
+        );
+        k.add(
+          k.param((u, v) => around(0.002, u * TAU, rad(0.002) * v).p, {
             grid: 12,
             normal: () => mul(shape.frame(0).t, -1),
           }),
-          { ...piece(core), flat: 0.3, weight: 2, color: (c) => lit(c, "#b9c47a") },
+          { ...piece(core), flat: 0.3, weight: 2, color: (c) => lit(c, "#6b5a2a") },
         );
         const strips = [];
         for (let j = 0; j < 3; j++) {
