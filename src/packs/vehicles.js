@@ -3029,6 +3029,24 @@ function tractorBuild(k, o) {
       weight: 1.8,
       color: (c) => lit(col, c),
     });
+    // Its inner wall, so the tire's top never shows in the cab (the
+    // owner's second note of October 9, 2026).
+    const wall = k.param(
+      (u, v) => {
+        const a = Math.PI * (0.05 + 0.9 * u);
+        const R = 0.3 + (TRACTOR.rr + 0.13 - 0.3) * v;
+        return [TRACTOR.rear[0] + Math.cos(a) * R, TRACTOR.rear[1] + Math.sin(a) * R, s * 0.36];
+      },
+      { grid: 32, flip: s > 0 },
+    );
+    k.add(wall, {
+      even: true,
+      opacity: 1,
+      jitter: 0.015,
+      ...P,
+      weight: 1.2,
+      color: (c) => lit(shade(col, 0.85), c),
+    });
   }
   shadow(k, 0.004, 1.45, 0.95);
 }
