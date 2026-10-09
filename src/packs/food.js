@@ -7035,7 +7035,7 @@ function hh2Fixed(list) {
   return list.map((f) => {
     const so = f.solid;
     const pick = so.type === "box" ? so.half : so.type === "cylinder" ? [so.r, so.h, so.r] : so.r;
-    return { ...f, points: surfacePoints(so, 1), pick, mass: 0 };
+    return { ...f, points: surfacePoints(so, 1), pick, mass: 0, fixed: true }; // (lane H1's fixed piece)
   });
 }
 
