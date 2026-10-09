@@ -824,6 +824,15 @@ its turn from home; `off` once it has been picked up or knocked loose), or null 
 touch. A toy that reads it without any other field asks for `hands.watch: true` (so `info.hands`
 exists): a campfire's flames grow when a log is laid on them.
 
+**Carried together** (`hands.carry`, lane Hands-on H4): `{ key: [keys] }` (part names or tokens):
+while the piece `key` is held, the listed pieces come loose and go with it as they were built beside
+it; let go, they fly on with its speed, then each falls, bounces and settles on its own (Galileo's
+two balls, dropped from one hand, land together).
+
+```js
+hands: { place: false, pieces: () => [bigBall, smallBall], carry: { ball0: ["ball1"], ball1: ["ball0"] } }, // prettier-ignore
+```
+
 `info.hands.on` is whether Hands-on is on. Check the toy's frame time with the pieces running (the
 whole world's step is well under a millisecond for one body, a few for 40 pieces).
 
