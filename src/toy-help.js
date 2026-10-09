@@ -1478,7 +1478,8 @@ export const TOY_HELP = {
       "A hypercube, or tesseract, is a cube in four dimensions. A square has 4 corners and a cube has 8; a tesseract has 16 corners and 32 edges, and its sides are 8 cubes. We can't see four dimensions, so this toy shows its shadow in our three: a cube inside a cube, with their corners joined.\n\nAt rest it rocks gently in 4D. Tap it to turn it once around through the fourth dimension: the pink inner cube swells out to become the outer one while the blue one folds inside, then it turns on back to where it started. Every edge stays perfectly straight the whole time. The 4D turn slider changes the strength of its gentle resting rotation, and Colors picks a theme.",
   },
   "torus-knot": {
-    howTo: "Tap to pull and let go. Hands-on: pull the knot; it stretches and springs back.",
+    howTo:
+      "Tap it: the knot pulls loose and springs back. Drag to turn it. Hands-on: pull it to stretch it.",
     about:
       "A torus knot is a knot that winds around the surface of a donut shape, called a torus. It goes around the hole a few times one way while it loops through it a few times the other way. The simplest is the trefoil, which winds 2 and 3 times; it is the simplest true knot, one that can never be untied without cutting it.\n\nTap it and the knot is pulled loose, its loops stretching and swirling; then it is let go and springs back past its rest shape and wobbles to a stop, like a spring. Choose winding counts (2, 3), (2, 5), (3, 4), (3, 5) or (2, 7) in the Toy tab: the pair counts turns around the torus's two directions. Colors changes its palette and Glow its brightness. With ✋ Hands-on on, pull the knot with your finger: it stretches after it like a stiff spring and, let go, springs back with a few wobbles.",
   },
