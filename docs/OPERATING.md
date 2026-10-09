@@ -311,8 +311,12 @@ clips and cards at the same time without republishing it. The collections (the s
   else "(No note; plan: …)" with the plan's effect), `now` what the tap does now in plain words with
   its length, `asset` the uploaded clip's id, `at` the date (YYYY-MM-DD). Older cards use `clip` (a
   file published with the page, such as `e4/oak.gif`) instead of `asset`.
-- `verdicts/<card id>`: the owner's marks, `{ verdict: "good" | "fix" | "", note, at, sharper }`
-  (`sharper: true` marks a "Just sharper" fix on page 2, below). Only the owner writes these.
+- `verdicts/<card id>`: the owner's marks,
+  `{ verdict: "good" | "fix" | "", note, at, sharper, images }` (`sharper: true` marks a "Just
+  sharper" fix on page 2, below). Only the owner writes these. On page 2, `images` (since October
+  9, 2026) lists the asset ids of screenshots the owner attached to the note, shrunk to JPEG at most
+  2000 pixels long; a lane reads each one with the Artifact tool's `read` (`url` the page, `path`
+  the id) and looks at it before fixing the card.
 
 Card ids are `<prefix>-<toy id>`, with a variant after it (`e5-cherries-pair`). A clip redone after
 the owner's note gets the old card's id plus `-r2` (then `-r3`), in the old card's lane. A card's

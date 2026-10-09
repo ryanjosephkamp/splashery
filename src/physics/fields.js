@@ -328,7 +328,7 @@ export class FleeField {
 
 // ---- The glue to Hands-on -------------------------------------------------
 
-const KEYS = ["material", "water", "air", "well", "wheels", "shake", "flee", "follow"];
+const KEYS = ["material", "water", "air", "well", "wheels", "shake", "flee", "follow", "touch"]; // (touch: lane Hands-on H5)
 
 // An Extras for a toy whose hands block asks for any of these pieces (or
 // whose pieces are projectiles, targets or have materials); null else.
@@ -387,6 +387,30 @@ export class Extras {
         if (!self.flee) return { offset: [0, 0, 0], vel: [0, 0, 0] };
         const it = self.flee.get(key, pos);
         return { offset: it.d, vel: it.v };
+      },
+      // Lane Hands-on H5 (`hands.touch`): the finger, for a drive. `pressed`
+      // while a finger is down on the toy (a press, a push or a hold), `held`
+      // while it (or a piece) is up in the hand, `speed` how fast the whole
+      // toy (or the held piece) moves, in toy radii per second, `joint(name)`
+      // a joint's value (null without one) and `piece(i)` where piece i is
+      // ({ pos, quat, home, held }, recipe units in pieces mode).
+      pressed: false,
+      get held() {
+        return !!self.ho.hold;
+      },
+      get speed() {
+        const ho = self.ho;
+        const b = ho.hold?.body || (ho.mode === "toy" ? ho.body : null);
+        return b && ho.world ? v3.len(b.vel) / ho.R() : 0;
+      },
+      joint(name) {
+        const j = self.ho.joints?.byName?.get(name);
+        return j && Number.isFinite(j.v) ? j.v : null;
+      },
+      piece(i) {
+        const pc = self.ho.pieces?.[i];
+        if (!pc || !self.ho.world) return null;
+        return { pos: pc.body.pos.slice(), quat: pc.body.q.slice(), home: pc.home.pos.slice(), held: !!pc.body.held }; // prettier-ignore
       },
     };
   }
@@ -533,7 +557,12 @@ export class Extras {
   pressAt(hit, x, y) {
     this.samples = [{ t: this.ho.time, x, y }];
     this.spin = null;
+    if (this.hands.touch) this.touched(); // lane Hands-on H5
     if (!this.flee) return false;
+    // Lane Hands-on H5: `at(p)` (recipe units) limits where a press is
+    // followed (an owl's head); a press elsewhere picks the toy up as usual.
+    const fo = this.hands.flee || this.hands.follow;
+    if (typeof fo === "object" && fo.at && !fo.at(this.player.toRecipe(hit))) return false;
     this.fingerDown = true;
     this.fingerAt(x, y);
     return true;
@@ -560,6 +589,7 @@ export class Extras {
   // Lets go; true when the drag was ours.
   release() {
     this.shake?.end();
+    this.about.pressed = false; // lane Hands-on H5
     if (this.flee && this.fingerDown) {
       this.fingerDown = false;
       this.flee.ray = null;
@@ -627,9 +657,36 @@ export class Extras {
     p.invI = [0, 0, 0];
   }
 
+  // Lane Hands-on H5: a press on a toy with `hands.touch` (info.hands.pressed).
+  // With `key`, a press held `after` seconds (0.15), or one that becomes a
+  // push or a pick-up, fires that action too (a poke), at most every `gap`
+  // seconds (0.5); a quick tap is left to the toy's own tap.
+  touched() {
+    this.about.pressed = true;
+    this.touchT = this.ho.time;
+    this.touchFired = false;
+  }
+
+  touchStep() {
+    const t = this.hands.touch;
+    const ho = this.ho;
+    if (!this.about.pressed || this.touchFired || typeof t !== "object" || !t.key) return;
+    if (ho.time - this.touchT < (t.after ?? 0.15) && !ho.hold && !ho.press?.local) return;
+    this.touchFired = true;
+    if (ho.time - (this.lastTouch ?? -Infinity) < (t.gap ?? 0.5)) return;
+    this.lastTouch = ho.time;
+    const player = this.player;
+    if (!player.motion?.act) return;
+    const r = player.motion.act(player.time, null, { key: t.key });
+    player.stage?.requestRender?.();
+    player.emit?.("action", r);
+  }
+
   fireShake() {
     const player = this.player;
     const s = this.hands.shake;
+    // (`fire: false`: the shake only reads as info.hands.shake; lane Hands-on H3.)
+    if (typeof s === "object" && s.fire === false) return;
     const key = (typeof s === "object" && s.key) || player.toyInfo?.recipe?.action?.key;
     if (!key || !player.motion?.act) return;
     const r = player.motion.act(player.time, null, { key });
@@ -652,6 +709,10 @@ export class Extras {
     if (this.flee) {
       if (this.flee.step(dt)) busy = true;
       if (this.fingerDown) busy = true;
+    }
+    if (ab.pressed) {
+      this.touchStep(); // lane Hands-on H5
+      busy = true;
     }
     // A water toy shows its water line as soon as Hands-on is on.
     if (this.hands.water) {

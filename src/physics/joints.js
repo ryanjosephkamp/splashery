@@ -10,7 +10,9 @@
 // - socket: a loose piece clicks back into its place when brought close
 //   (an orange's wedge, a gift box's lid).
 // - break: a piece holds fast until pulled hard, then snaps off; ↺ Reset
-//   mends it (a candy cane's top, a grape, a petal).
+//   mends it (a candy cane's top, a grape, a petal). With `reseat`, a
+//   broken piece brought back clicks into its place, or another seat, and
+//   holds fast there again (a cork, a pen's cap; lane Hands-on H3).
 // - hands.upright: a whole toy (Level 1) rights itself after a tip (a
 //   sailboat, a roly-poly penguin).
 //
@@ -96,7 +98,13 @@ export class Joints {
     this.byName = new Map();
     this.time = 0;
     if (hands.mode === "toy") {
-      this.upright = def.upright ? { k: def.upright.k ?? def.upright, damping: def.upright.damping ?? 3 } : null; // prettier-ignore
+      this.upright = def.upright
+        ? {
+            k: def.upright.k ?? def.upright,
+            damping: def.upright.damping ?? 3,
+            rest: def.upright.rest ?? 0,
+          }
+        : null; // prettier-ignore (rest: lane Hands-on H5)
       return;
     }
     const data = hands.player.proc?.ctx?.kit?.data;
@@ -210,10 +218,10 @@ export class Joints {
   // moves and its own).
   full(j) {
     if (j.type === "piece" || (j.type === "break" && !j.broken) || j.type === "socket") {
-      if (j.type === "break" && !j.broken && j.parent) {
-        return tfMul(this.full(j.parent), j.tug || tf());
-      }
-      if (j.type === "break" && !j.broken) return j.tug || tf();
+      // (A reseated piece holds fast at its seat: lane Hands-on H3.)
+      const own = j.seatT ? tfMul(j.seatT, j.tug || tf()) : j.tug || tf();
+      if (j.type === "break" && !j.broken && j.parent) return tfMul(this.full(j.parent), own);
+      if (j.type === "break" && !j.broken) return own;
       const b = j.body;
       const dq = quat.mul(b.q, quat.conj(j.pc.home.q));
       return tf(dq, v3.sub(b.pos, quat.rotate(dq, j.pc.home.pos)));
@@ -297,6 +305,7 @@ export class Joints {
         if (this.door(sj, h, ray)) return true; // lane Hands-on H2: still sliding out
         this.nearSocket(sj, h, ray);
       }
+      if (sj?.type === "break" && sj.broken && sj.d.reseat) this.nearSeat(sj, h, ray);
       return false;
     }
     if (j.type === "break") {
@@ -345,7 +354,8 @@ export class Joints {
   // whole, about where it is fixed, and snaps off when pulled far enough.
   tugTo(j, h, ray) {
     const R = this.hands.R();
-    const T0 = j.parent ? this.full(j.parent) : tf();
+    let T0 = j.parent ? this.full(j.parent) : tf();
+    if (j.seatT) T0 = tfMul(T0, j.seatT); // reseated elsewhere (lane Hands-on H3)
     const at = tfApply(T0, j.at);
     const grab = tfApply(T0, h.local);
     // The finger's point, on the plane facing the view through the grab.
@@ -377,8 +387,9 @@ export class Joints {
   // It snaps off: a loose body now, held by the finger the usual way.
   snap(j, h, f, dir, ray) {
     const hands = this.hands;
-    j.broken = true;
+    // (Its pose before it is marked broken: bent, and at its seat; lane Hands-on H3.)
     const T = this.full(j);
+    j.broken = true;
     j.tug = null;
     const b = j.body;
     // Its pose as it was when it snapped (bent), then free.
@@ -391,15 +402,22 @@ export class Joints {
     b.invMass = b.invMassFree || 1;
     b.invI = (b.invIFree || [1, 1, 1]).slice();
     j.held = null;
+    j.armed = false; // (with `reseat`: it clicks back only once taken away)
+    b.seated = false;
     this.cue(j, "snap", 1.5);
     // The finger holds it where it grabbed it, as a pick-up does.
     const at = tfApply(T, h.local);
     const w = this.world;
     const joint = w.joint(b, b.toLocal(at), null, at, { compliance: 2e-6, damping: 0 });
     b.held = true;
-    b.holdQ = null;
+    // (`steady`: held at its turn, as a piece picked up is, not hanging and
+    // swinging from the finger, and carried where the finger holds it (not
+    // hovering, as `place` is): a pen's cap carried over its pen to the back
+    // end stays clear of the paper and of its place; lane Hands-on H3.)
+    b.holdQ = j.d.steady ? b.q.slice() : null;
+    if (j.d.steady) b.holdK = 80; // (firm: the finger holds it off its middle)
     b.angDampingFree ??= b.angDamping;
-    b.angDamping = 1.2;
+    b.angDamping = j.d.steady ? 7 : 1.2;
     hands.hold = { body: b, joint, place: false, plane: { point: at.slice(), normal: dir.slice() }, target: f.slice(), follow: at.slice(), followV: [0, 0, 0], trail: [], x0: h.x0, y0: h.y0, travel: h.travel, minY: -Infinity, raise: 0 }; // prettier-ignore
     // Lane Hands-on H2: `place: true` holds it as a picked piece is held
     // instead: by its middle, level, hovering over whatever is under the
@@ -429,6 +447,12 @@ export class Joints {
       ) {
         this.dropHold(h);
         this.glide(sj);
+        return true;
+      }
+      const seat = sj?.type === "break" && sj.broken && sj.armed ? this.seatNear(sj, h.body.pos, null) : -1; // prettier-ignore
+      if (seat >= 0) {
+        this.dropHold(h);
+        this.glideSeat(sj, seat);
         return true;
       }
       return false;
@@ -508,6 +532,17 @@ export class Joints {
     let away = v3.len(v3.sub(h.body.pos, j.pc.home.pos));
     if (j.d.out) away = Math.min(away, v3.len(v3.sub(h.body.pos, v3.add(j.pc.home.pos, j.d.out)))); // (away from its doorway's mouth too) // prettier-ignore
     if (!j.armed) {
+      // Lane Hands-on H5: `armAway` (toy radii): armed only once both the
+      // piece and the finger's line are that far from its place (small
+      // pieces packed close, an atlas's organs, would click straight back).
+      const far = j.d.armAway;
+      if (far !== undefined) {
+        const home = j.pc.home.pos;
+        const t = ray ? Math.max(0, v3.dot(v3.sub(home, ray.origin), ray.dir)) : 0;
+        const aim = ray ? v3.len(v3.sub(v3.add(ray.origin, v3.scale(ray.dir, t)), home)) : Infinity; // prettier-ignore
+        if (away > far * R && aim > far * R) j.armed = true;
+        return;
+      }
       if (away > snap * 1.5) j.armed = true;
       return;
     }
@@ -539,6 +574,94 @@ export class Joints {
     this.world.wake();
   }
 
+  // ---- Seats (lane Hands-on H3) ----
+
+  // A break with `reseat` (true, or { snap, seats: [{ pos, quat }] }): its
+  // places, home first, each the piece's middle and turn there.
+  seats(j) {
+    const home = { pos: j.pc.home.pos, quat: j.pc.home.q };
+    const more = typeof j.d.reseat === "object" ? j.d.reseat.seats || [] : [];
+    return [home, ...more.map((s) => ({ pos: s.pos, quat: s.quat || home.quat }))];
+  }
+
+  // The seat a piece at `pos` (or the finger's ray) is near enough to click
+  // into, or -1.
+  seatNear(j, pos, ray) {
+    const R = this.hands.R();
+    const snap = ((typeof j.d.reseat === "object" && j.d.reseat.snap) || 0.3) * R;
+    let best = -1;
+    let bd = snap;
+    this.seats(j).forEach((s, i) => {
+      let d = v3.len(v3.sub(pos, s.pos));
+      if (ray) {
+        const t = Math.max(0, v3.dot(v3.sub(s.pos, ray.origin), ray.dir));
+        d = Math.min(d, v3.len(v3.sub(v3.add(ray.origin, v3.scale(ray.dir, t)), s.pos)));
+      }
+      if (d < bd) {
+        bd = d;
+        best = i;
+      }
+    });
+    return best;
+  }
+
+  nearSeat(j, h, ray) {
+    const R = this.hands.R();
+    const snap = ((typeof j.d.reseat === "object" && j.d.reseat.snap) || 0.3) * R;
+    if (!j.armed) {
+      const away = Math.min(...this.seats(j).map((s) => v3.len(v3.sub(h.body.pos, s.pos))));
+      if (away > snap * 1.5) j.armed = true;
+      return;
+    }
+    const seat = this.seatNear(j, h.body.pos, ray);
+    if (seat >= 0) {
+      this.dropHold(h);
+      this.glideSeat(j, seat);
+    }
+  }
+
+  glideSeat(j, seat) {
+    const b = j.body;
+    b.vel = [0, 0, 0];
+    b.omega = [0, 0, 0];
+    j.gliding = { t0: this.time, pos: b.pos.slice(), q: b.q.slice(), seat };
+    j.armed = false;
+    this.world.wake();
+  }
+
+  // Gliding into a seat; there it holds fast again, as unbroken.
+  seatStep(j) {
+    const G = j.gliding;
+    const b = j.body;
+    const s = this.seats(j)[G.seat];
+    const f = Math.min(1, (this.time - G.t0) / GLIDE);
+    const e = f * f * (3 - 2 * f);
+    b.pos = G.pos.map((v, i) => v + (s.pos[i] - v) * e);
+    b.q = quat.slerp(G.q, s.quat, e);
+    b.vel = [0, 0, 0];
+    b.omega = [0, 0, 0];
+    b.prevPos = b.pos.slice();
+    b.prevQ = b.q.slice();
+    if (f < 1) return true;
+    const home = j.pc.home;
+    if (G.seat === 0) {
+      b.goHome();
+      j.seatT = null;
+    } else {
+      const q = quat.norm(quat.mul(s.quat, quat.conj(home.q)));
+      j.seatT = tf(q, v3.sub(s.pos, quat.rotate(q, home.pos)));
+    }
+    b.seated = G.seat > 0;
+    this.pin(j);
+    j.broken = false;
+    j.tug = tf();
+    j.springBack = null;
+    j.gliding = null;
+    this.pose(j);
+    this.cue(j, "socket", 1);
+    return true;
+  }
+
   // ---- Each step ----
 
   // One fixed step (seconds) before the world's. Returns true while
@@ -555,6 +678,10 @@ export class Joints {
         continue;
       }
       if (j.type === "break") {
+        if (j.gliding) {
+          busy = this.seatStep(j) || busy;
+          continue;
+        }
         const back = !!j.springBack;
         if (back) {
           const f = Math.min(1, (this.time - j.springBack.t0) / 0.18);
@@ -666,9 +793,21 @@ export class Joints {
       if (j.type === "dial") j.w *= Math.exp(-(d.drag ?? 0.8) * dt);
       j.v += j.w * dt;
     }
-    // The stops.
-    if (j.v < j.min || j.v > j.max) {
-      const lim = j.v < j.min ? j.min : j.max;
+    // The stops. Lane Hands-on H5: `limits(at)` may narrow them as the
+    // toy stands now ([min, max] within the joint's own; `at.joint(name)`
+    // reads another's value; a piece another blocks: a triangle that can't
+    // slide through its neighbor).
+    let lo = j.min;
+    let hi = j.max;
+    if (d.limits) {
+      const at = { joint: (n) => this.byName.get(n)?.v ?? null };
+      const [a, b] = d.limits(at) || [];
+      // (Never past where it already was: a narrowed stop holds it there.)
+      if (a !== undefined) lo = Math.max(lo, Math.min(a, v0));
+      if (b !== undefined) hi = Math.min(hi, Math.max(b, v0));
+    }
+    if (j.v < lo || j.v > hi) {
+      const lim = j.v < lo ? lo : hi;
       const speed = Math.abs(j.w) * this.reach(j);
       j.v = lim;
       if (speed > 0.5 * R) this.cue(j, "stop", speed / R);
@@ -750,11 +889,29 @@ export class Joints {
   // its turn about the upright stays), rocking as it goes.
   rightStep(dt) {
     const b = this.hands.body;
+    if (b?.settled && (b.held || this.hands.press)) this.unsettle(b); // lane Hands-on H5
     if (!b || b.held) return false;
     const u = quat.rotate(quat.mul(b.q, quat.conj(b.home.q)), [0, 1, 0]);
     const ax = v3.cross(u, [0, 1, 0]);
     const s = v3.len(ax);
     const ang = Math.atan2(s, u[1]);
+    // Lane Hands-on H5: `rest` (radians): back within it of upright, on the
+    // floor and nearly still, it settles and holds there until the finger
+    // touches it again (a toy on a round base, an owl gripping its branch,
+    // would otherwise creep on and never come to rest).
+    const rest = this.upright.rest;
+    if (b.settled) return false;
+    if (rest && ang < rest && b.touchTick >= this.world.tick - 1) {
+      const R = this.hands.R();
+      if (v3.len(b.vel) < 0.3 * R && v3.len(b.omega) < 1) {
+        b.settled = { invMass: b.invMass, invI: b.invI.slice() };
+        b.invMass = 0;
+        b.invI = [0, 0, 0];
+        b.vel = [0, 0, 0];
+        b.omega = [0, 0, 0];
+        return false;
+      }
+    }
     if (ang < 0.01 && v3.len(b.omega) < 0.05) return false;
     const n = s > 1e-9 ? v3.scale(ax, 1 / s) : [0, 0, 0];
     const k = this.upright.k;
@@ -765,6 +922,13 @@ export class Joints {
     this.world.wake();
     this.hands.moved = true;
     return true;
+  }
+
+  // Lane Hands-on H5: a settled toy (upright's `rest`) comes loose again.
+  unsettle(b) {
+    b.invMass = b.settled.invMass;
+    b.invI = b.settled.invI;
+    b.settled = null;
   }
 
   // ---- ↺ ----
@@ -786,6 +950,15 @@ export class Joints {
       j.wig = 0;
       this.pose(j);
       return true;
+    }
+    if (j.type === "break" && !j.broken && j.seatT) {
+      // Reseated elsewhere: it goes home from where it sat (lane Hands-on H3).
+      const from = this.hands.homing?.from.find((f) => f.b === b);
+      if (from) {
+        b.pos = from.pos.map((v, i) => v + (j.pc.home.pos[i] - v) * e);
+        b.q = quat.slerp(from.q, j.pc.home.q, e);
+        return true;
+      }
     }
     if (j.type === "break" && !j.broken) {
       j.tug = j.tug ? tf(quat.slerp(j.tug.q, ID, e), v3.scale(j.tug.t, 1 - e)) : tf();
@@ -829,6 +1002,10 @@ export class Joints {
         j.broken = false;
         j.tug = tf();
         j.springBack = null;
+        j.seatT = null; // (lane Hands-on H3)
+        j.gliding = null;
+        j.armed = false;
+        j.body.seated = false;
       }
       if (j.type === "socket") {
         j.gliding = null;
