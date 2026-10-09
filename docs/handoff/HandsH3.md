@@ -77,34 +77,21 @@ page 2 (lane HandsH3). Merge order:
 - Medieval #436: knight's helmet, trebuchet, dragon egg. All good.
 - Pictures #437: picture frame (labs). Good.
 
-Built locally, not pushed (they wait for #430, as the Operator asked):
+Open PRs (October 9, 2026; #430 and #455 merged): engine #459 (latches and triggers, strike pieces,
+plucked strings) and #460 (`handsLevel1`); shelves #432 Open me, #435 Holidays, #436 Medieval, #437
+Pictures, #464 Music (on #459 and the shelves) and #463 Level 1 (on #460). Every branch has main
+merged in. Level 1 is on for the Picture lab, the Screen (not while capturing), the Room echo meter
+(not while the mic is on) and the Fluid lab. Left out: Your book and Photo album (every press turns
+a page), Photo to 3D, Video to 3D and Splat mirror (one-sided captures smear when tossed).
 
-- `claude/lane-hands-h3-engine-3` (worktree splashery-e2; renamed from engine-2, which is now the
-  sort fix): one engine PR for latches and triggers (`latch`, `catch`, `trigger`: a tap lets a
-  cocked joint go), strike pieces (`strike`; hit sounds name both pieces) and plucked strings
-  (`hands.strings`); it uses H1's `fixed`. `tests/hh3-engine2.spec.mjs`, 3 tests.
-- `claude/lane-hands-h3-music` (worktree splashery-mus, on Pictures plus engine-3): the guitar, the
-  snare drum and the crossbow, all marked good. `tests/hh3-music.spec.mjs` and
-  `tests/hh3-crossbow.spec.mjs`, 3 tests.
-- `claude/lane-hands-h3-engine-4` (worktree splashery-l1e, on the engine branch): `handsLevel1` lets
-  a picture or `turntable: false` toy ask for Level 1 (true, or a function that turns ✋ off while
-  the toy is live). `tests/hh3-level1-engine.spec.mjs`, 2 tests.
-- `claude/lane-hands-h3-level1` (worktree splashery-l1, on engine-4): Level 1 for the Picture lab,
-  the Screen (not while capturing), the Room echo meter (not while the mic is on) and the Fluid lab.
-  Left out: Your book and Photo album (every press turns a page), Photo to 3D, Video to 3D and Splat
-  mirror (one-sided captures smear when tossed). `tests/hh3-level1.spec.mjs`, 2 tests. Card
-  hh3-level1 posted.
-
-Open: #455 (Engine: sort a turned kit part with its own turn), on main, to merge after #430; then
-the patterned egg and the storybook are re-rendered (hh3-patterned-egg-r2, hh3-book-r3). Waiting:
-the water bottle and soda can (the Fluids engine's pour). Next: the first photoreal toys after
-agreeing with Photoreal r3.
+Cards after #455: hh3-patterned-egg-r2 (the bottom is solid now) and hh3-book-r3 (the specks are
+gone, but the turning pages' edges still look soft). Waiting: the water bottle and soda can (the
+Fluids engine's pour). Next: the first photoreal toys after agreeing with Photoreal r3.
 
 ## Notes", "## Known issues" and "## For the Operator
 
 - Please merge engine PR #430 before the Open me PR; the Open me branch carries its commit.
 - The water bottle and the soda can (labs) wait for the Fluids engine's pour.
-- The patterned egg's bottom and the storybook's specks (both the owner's "fix" marks) are one
-  engine bug in `src/pose.js` (the sort used the inverse of a part's turn, from e59431d8). The fix
-  is #455; please merge it after #430. If the book is still not good enough, the owner's fallback is
-  a "your book" PDF storybook.
+- The storybook: the owner's fallback, if hh3-book-r3 doesn't pass, is a short storybook PDF opened
+  in the Your book toy. That rebuilds the toy (its recipe, a new PDF asset), which is more than this
+  lane's `hands` blocks: please say whether this lane should do it.
