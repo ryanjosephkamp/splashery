@@ -238,3 +238,16 @@ test("pythagoras proof: the triangles slide by hand, and c² lights once all thr
   expect(m[1]).toBe(1);
   expect(m[2]).toBe(1);
 });
+
+// The lane's screenshots, the ✋ switch on (phone and desktop).
+test("screenshots: the menger-sponge, hands-on", async ({ page }) => {
+  for (const [w, h] of [
+    [390, 844],
+    [1440, 900],
+  ]) {
+    await page.setViewportSize({ width: w, height: h });
+    await ready(page, "menger-sponge");
+    await page.waitForTimeout(600);
+    await page.screenshot({ path: `tests/screenshots/hh5-menger-sponge-${w}x${h}.png` });
+  }
+});
