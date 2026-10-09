@@ -54,6 +54,7 @@ export class OrbitCamera {
     this.ramp = 0;
     this.dragging = false;
     this.viewportHeight = 800;
+    this.viewportWidth = 0; // lane Fix10: CSS pixels, when known (0: as tall as wide)
     this.shake = { last: 0, flips: 0, sign: 0, time: 0 };
     this.onShake = null;
   }
@@ -133,13 +134,24 @@ export class OrbitCamera {
       return;
     }
     if (this.zoomTaker) return;
-    const k = (TAU * 1.4) / Math.max(200, this.viewportHeight);
+    let k = (TAU * 1.4) / Math.max(200, this.viewportHeight);
+    // Lane Fix10: from inside, the view turns with the finger, so the star under it stays under
+    // it: a pixel turns as much as a pixel spans at the middle of the view (the field of view
+    // spans the narrower side), and a sideways drag turns further when the view looks up.
+    let kYaw = k;
+    if (this.inside) {
+      const fov = this.pose().fov * (Math.PI / 180);
+      const narrow = Math.max(200, Math.min(this.viewportWidth || Infinity, this.viewportHeight));
+      k = (2 * Math.tan(fov / 2)) / narrow;
+      // (Negative: looking out, a sideways drag turns the view the other way from the orbit's.)
+      kYaw = -k / Math.max(0.35, Math.cos(this.cur.pitch));
+    }
     const c = Math.cos(-this.cur.roll);
     const s = Math.sin(-this.cur.roll);
     // Locked, a sideways drag spins the toy and nothing tilts it.
     const rx = this.tiltLock ? dx : dx * c - dy * s;
     const ry = this.tiltLock ? 0 : dx * s + dy * c;
-    const dYaw = -rx * k;
+    const dYaw = -rx * kYaw;
     const dPitch = ry * k;
     this.tgt.yaw += dYaw;
     this.tgt.pitch = this.clampPitch(this.tgt.pitch + dPitch);
@@ -274,7 +286,7 @@ export class OrbitCamera {
       if (coast) {
         this.tgt.yaw += this.vel.yaw * dt;
         this.tgt.pitch = this.clampPitch(this.tgt.pitch + this.vel.pitch * dt);
-        const f = Math.exp(-dt / 0.22);
+        const f = Math.exp(-dt / (this.inside ? 0.1 : 0.22)); // Fix10: a short coast from inside
         this.vel.yaw *= f;
         this.vel.pitch *= f;
       } else {
