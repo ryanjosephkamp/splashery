@@ -58,11 +58,12 @@ await page.evaluate(async (toy) => {
     .then((s) => s.setSharpView(toy, "splats"))
     .catch(() => {}); // Splats, not the Sharp picture view (lane Photo sharp view)
   await app.chooseToy(toy);
+  (await import("/src/packs/photo-sharp.js")).setSharpView(toy, "splats"); // (before any rebuild)
   player.opts.idleDelay = 1e9;
   player.idle.weight = 0;
 }, toy);
 await page.waitForFunction(() => document.getElementById("progress").hidden, null, { timeout: 180_000 }); // prettier-ignore
-if (Object.keys(options).length) await page.evaluate((o) => window.__splashery.app.setToyOptions(o), options); // prettier-ignore
+await page.evaluate((o) => window.__splashery.app.setToyOptions({ view: "splats", ...o }), options); // (the Splats view, saved in the scene since lane Photo sharp view r2) // prettier-ignore
 if (file) {
   const name = path.basename(file).replace(/\.[^.]+$/, "");
   await page.setInputFiles("#toy-input-file", file);
