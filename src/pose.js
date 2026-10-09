@@ -70,12 +70,11 @@ export function posePass(pos, anim, count, out, leaf, parts, relief = null) {
     }
     if (part > 0) {
       const o = part * 12;
-      // Lane Elements: sorted with the inverse of the part's turn. The kit shader's part turn
-      // shows on screen as the inverse of this formula applied with the stored quaternion
-      // (measured: a part turned 45 degrees about x, about y or about a slanted axis drew its far
-      // side over its near side until the sort used the inverse, which matches a depth-correct
-      // drawing). A half turn, the only one sorted so far, is its own inverse.
-      const [qx, qy, qz, qw] = [-parts[o], -parts[o + 1], -parts[o + 2], parts[o + 3]];
+      // Sorted where the kit shader draws it: its own turn, as spQuatRotate (src/effects.js) applies
+      // it. (Lane Hands-on H3, October 9, 2026: the inverse, from e59431d8, drew a turning egg's
+      // back over its front at a quarter turn and a book's cover over its pages; with its own turn
+      // both are clean at every angle, and Real elements' lifted sample stays solid from the side.)
+      const [qx, qy, qz, qw] = [parts[o], parts[o + 1], parts[o + 2], parts[o + 3]];
       const g = 1 + parts[o + 7];
       const px = (x - parts[o + 4]) * g;
       const py = (y - parts[o + 5]) * g;
