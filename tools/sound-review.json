@@ -418,7 +418,7 @@
       "status": "ready",
       "said": "(October 2, 2026, review) The marble is a little too loud. The sound is close. ... It's just, like, kind of annoyingly loud by default. (Hands-on H1, October 8, 2026) New: its landing in Hands-on, to hear on the Sound Board. Its tap sound is unchanged.",
       "note": "Same sound, quieter by default (or a slightly better real marble recording).",
-      "plan": "Now: in Hands-on, a thrown marble lands with its own sound, from its tap's own cues (louder the harder it lands). On the board: three landings, hard to soft.",
+      "plan": "Now: in Hands-on, a thrown marble lands with its own sound, from its tap's own cues (louder the harder it lands). On the board: three landings, hard to soft. The tap keeps the same real marble roll, about 6 dB quieter (Sound C).",
       "candidates": [
         {
           "id": "hh1",
@@ -1184,7 +1184,7 @@
       "status": "ready",
       "said": "(October 2, 2026, review) it kind of sounds like wood is stretching or something when it moves ... maybe, like, a wind or the sand kind of sound would make sense, but very subtly (Hands-on H1, October 8, 2026) New: its Hands-on sound, to hear on the Sound Board. Its tap sound is unchanged.",
       "note": "Sounds like wood stretching; make it a subtle soft, plush sound.",
-      "plan": "Now: in Hands-on, a soft, plush thud as it lands.",
+      "plan": "Now: in Hands-on, a soft, plush thud as it lands. The tap keeps the soft rustle of a plush bear's fabric and stuffing; no creak (Sound C).",
       "candidates": [
         {
           "id": "hh1",
@@ -1235,7 +1235,7 @@
       "status": "ready",
       "said": "(October 2, 2026, review) the sound is almost perfect. It's just a little bit too loud. (Hands-on H1, October 8, 2026) New: its Hands-on sound, to hear on the Sound Board. Its tap sound is unchanged.",
       "note": "The wind a little too loud.",
-      "plan": "Now: in Hands-on, a light paper slap as it lands.",
+      "plan": "Now: in Hands-on, a light paper slap as it lands. The tap keeps the same fold and glide, with the air lower (Sound C).",
       "candidates": [
         {
           "id": "hh1",
