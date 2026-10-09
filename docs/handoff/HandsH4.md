@@ -73,25 +73,8 @@ page 2 rather than a clips branch. Its first check (docs/PACKS.md sections 5f, 5
 the hands-on engines merged October 3 and 4, 2026. Everything else in it stands, in its order. Main
 has moved a lot since October 3 (read docs/HANDOFF.md "Now" first). Hands-on play only adds to a
 toy: with the ✋ switch off every toy plays exactly as before, and these are toys the public sees,
-so each shelf's PR waits for the owner's "good" marks on its cards. Update the handoff's "## State
-
-WORKING (October 9, 2026, 06:30 UTC): the owner marked 28 of the 34 cards good. Five needed work,
-all fixed and their clips re-rendering as `-r2` cards: the bus's wheels now sit outside its sides,
-the tractor's mudguards clear its tyres (both change the toy's look a little with ✋ off too; new
-thumbnails), the castle's clip raises the drawbridge again, the DNA unzips fully with a shorter pull
-and zips back slowly, and Galileo's two balls stay level side by side while lifted (an engine fix in
-#439). Main (#420, #421) is merged into every H4 branch.
-
-- Engine PR #439 (`claude/lane-hands-h4-engine`): `hands.force` (a recipe's own push, each substep,
-  with `ctx.free()`), `info.hands.piece(key)` (by part, token or `name`) with `hands.watch`,
-  `info.hands.moved` (as H2's #420 adds it, the same lines), `hands.carry` (pieces carried
-  together), and a whole toy that floats (water or air) can be pushed below where it stands.
-- Shelf PRs, stacked in this order (each on the one before): Vehicles #440, Landmarks #442, Space
-  #443, Weather & fire #444, Tiny world #445. Every line of the plan for these shelves is built but
-  the bicycle's pedals (below). The comet's L1 sweep finding is fixed (it comes to rest).
-
-## Notes", "## Known issues" and "## For the Operator" as you go; leave its brief as it is and add
-
+so each shelf's PR waits for the owner's "good" marks on its cards. Update the handoff's "## State",
+"## Notes", "## Known issues" and "## For the Operator" as you go; leave its brief as it is and add
 this one under it as "### Brief, October 8, 2026 (cloud)".
 
 How this lane runs: exactly as docs/handoff/ScienceR3.md, "How this lane runs", says (read it;
@@ -123,14 +106,20 @@ What the first three Hands-on lanes learned today (October 8, 2026), so you don'
 
 ## State
 
-WORKING: Vehicles shelf built and tested; its clips are rendering (October 9, 2026). Next:
-Landmarks.
+WORKING (October 9, 2026, 07:00 UTC): the owner marked 28 of the 34 cards good. The ones that needed
+work are fixed and their new clips are posted as `-r2` cards (each old card points to it): the bus's
+wheels now sit outside its sides, the tractor's mudguards clear its tires (both change the toy's
+look a little with ✋ off too; new thumbnails), the castle's clip raises the drawbridge again, the
+DNA unzips fully with a shorter pull and zips back slowly, and Galileo's two balls stay level side
+by side while lifted (an engine fix in #439).
 
-- Engine PR #439 (`claude/lane-hands-h4-engine`): `hands.force` (a recipe's own push on its bodies,
-  each substep), `info.hands.piece(key)` with `hands.watch`, and a whole toy that floats (water or
-  air) can be pushed below where it stands.
-- Vehicles (`claude/lane-hands-h4-vehicles`, stacked on the engine branch): every line of the plan
-  but the bicycle's pedals (below).
+- Engine PR #439 (`claude/lane-hands-h4-engine`): `hands.force` (a recipe's own push, each substep,
+  with `ctx.free()`), `info.hands.piece(key)` (by part, token or `name`) with `hands.watch`,
+  `info.hands.moved` (as H2's #420 adds it, the same lines), `hands.carry` (pieces carried
+  together), and a whole toy that floats (water or air) can be pushed below where it stands.
+- Shelf PRs, stacked in this order (each on the one before): Vehicles #440, Landmarks #442, Space
+  #443, Weather & fire #444, Tiny world #445. Every line of the plan for these shelves is built but
+  the bicycle's pedals (below). The comet's L1 sweep finding is fixed (it comes to rest).
 
 ## Notes
 
