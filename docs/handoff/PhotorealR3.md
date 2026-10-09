@@ -190,10 +190,31 @@ clips within about six hours.
 
 ## State
 
-READY (October 9, 2026, about 04:00 UTC; cloud session, Opus 5.5 at high effort; main a0b68bc3
-merged). PR #419 (draft). Effect review page 2, lane record `PhotorealR3`: 19 "Closed bases" cards,
-28 effect cards and 10 new-toy cards. Every clip was watched at phone size against CLAUDE.md's
-effect quality rules.
+WORKING (October 9, 2026, about 10:30 UTC; Opus 5.5 at high effort): the owner's "fix" marks of
+October 9 (18 cards). Done so far, all pushed:
+
+- Sharper (the eight baked scans): Lane Sharpness A's options (exact sizes, splats 0.85 the size, a
+  calmer texture); the fluorite's stone gets 0.6 of the budget, its glow copy 0.3. The ceiling is
+  the source: every Objaverse copy carries 1024 x 1024 textures, and the budget is capped at 300,000
+  splats (high tier), so these are only a little sharper. A real step up needs the originals' full
+  textures, which Sketchfab gives only to a signed-in account (a token): see "For the Operator".
+- Outlines: the steak and the desk globe lose their needles and outline haze
+  (`tools/pr3-defuzz.mjs`, prepared in the original's frame). The orange can't: its dimpled skin is
+  itself the faint outer shell, and every cleanup (haze, needles, a tighter sphere) took the skin.
+  The globe's ball keeps the capture's own blur.
+- Bases: thicker floors under the T. rex, knight, BMX and cherry trees; the knight's and BMX's are
+  wider; under the BMX and the three small cherry patches the capture just under the floor is
+  hidden. New cards `pr3-base-…-r2`.
+- The T. rex's head and the monkey's ear move with them (regions of their own).
+- The cone shell loses the gray smear under its tip; its white top is the capture's washed-out spire
+  (trimming it opens a hole into the shell).
+- The alum crystal: the owner's note ("basically perfect", blur round the base) was on the lifting
+  clip, already replaced by the turn (`pr3-fx-alum-crystal-r2`), which keeps a faint ring.
+- Rendering now: 13 clips for the replacement cards.
+
+Earlier: READY (October 9, 2026, about 04:00 UTC; main a0b68bc3 merged). PR #419 (draft). Effect
+review page 2, lane record `PhotorealR3`: 19 "Closed bases" cards, 28 effect cards and 10 new-toy
+cards.
 
 - Item 1, bases: done. 19 of the 30 r2 toys are visibly closed (cards `pr3-base-…`). Five more got a
   core inside that makes no visible change at phone size (no card); the crystal and the lioness's
@@ -252,6 +273,14 @@ What main already did for these toys since October 3 (so this lane does not redo
   hair of the floor across it). Materials are procedural (earth, gravel, planks, sawn log rings,
   woven linen, glaze, glass, stone, pewter, orange peel); the steak's underside takes the colors of
   its own top at each point (`MATERIALS.mirror`, from `tools/pr3-under.mjs --top`).
+- `splat-transform`'s y axis points down in `tools/pr3-prepare.mjs`'s crop box:
+  `[x, -top, z, X, -bottom, Z]` (the cone shell's crop was set by trial).
+- `tools/pr3-defuzz.mjs <id> [--needle=4] [--faint=0.3]` writes a capture's source without its
+  needles (and faint haze outside the body) for the entry's `"local"`; `"keepFrame": true` keeps the
+  original's centering and scale, so the rig keeps its coordinates. It helps captures with a solid
+  body (the steak, the globe); it harms ones whose surface is a faint shell (the orange).
+- `floor({ thick: true })` (three layers of larger splats) for a floor nothing shows through, and
+  `lift` on a grounded floor hides the capture a little above the floor as well.
 - Effects (all rigid; nothing bends a capture):
 
   | Toy                         | Tap                                                                                                                                                                 |
@@ -281,6 +310,9 @@ What main already did for these toys since October 3 (so this lane does not redo
 
 ## Known issues
 
+- The orange's outline keeps its soft fuzz, and the cone shell its white top (both in the capture;
+  see "State").
+- The eight baked scans are only a little sharper (1024 x 1024 source textures).
 - The crystal's base is not closed: clear quartz is see-through by nature, and a kit-built base
   inside it would show through as a blob.
 - The cave lioness's neck, where the capture ends, is not closed: the cut is not a clean plane in
@@ -300,6 +332,11 @@ What main already did for these toys since October 3 (so this lane does not redo
 
 ## For the Operator
 
+- Sharper baked scans: the Objaverse copies of the eight Sketchfab scans carry 1024 x 1024 textures.
+  Their originals are larger, but Sketchfab's download API needs a signed-in account's token. If the
+  owner wants them sharper, he could download the eight originals himself (each is CC0 or CC BY,
+  downloads on) and put them on the Mac or in a Hugging Face dataset; the bake would then use them
+  unchanged.
 - The BMX bicycle (Photoreal r2, labs) shows decal lettering on its frame and handlebar pad that
   looks like a brand name. CLAUDE.md says no logos or brand names; painting it out (a kit-built
   cover in the frame's chrome) is easy if you want it. Not done yet.
