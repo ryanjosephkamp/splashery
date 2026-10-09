@@ -14,6 +14,7 @@ import {
   quatEuler,
   quatMul,
   quatRotate,
+  quatFromTo,
 } from "../kit.js";
 import { evenBox, evenCylinder } from "./even.js";
 import { surfacePoints } from "../physics/world.js"; // lane Hands-on H5
@@ -946,7 +947,16 @@ const SIER_PIECES = SIER.corners.map((v) => {
     corners.reduce((a, w) => add(a, w), [0, 0, 0]),
     0.25,
   );
-  return { c, corners: corners.map((w) => sub(w, c)) };
+  const at = corners.map((w) => sub(w, c));
+  // Lane Hands-on H5: collision points on its corners, edges and faces,
+  // round a solid core, so one tetrahedron rests on another and never
+  // passes through it.
+  const edges = [];
+  const facesC = [];
+  for (let i = 0; i < 4; i++)
+    for (let j = i + 1; j < 4; j++) edges.push(mul(add(at[i], at[j]), 0.5));
+  for (let i = 0; i < 4; i++) facesC.push(mul(at.filter((_, j) => j !== i).reduce((a, w) => add(a, w), [0, 0, 0]), 1 / 3)); // prettier-ignore
+  return { c, corners: at, points: [...at, ...edges, ...facesC], core: 0.55 * len(at[0]) };
 });
 
 // Faces grouped (at most 15) for exploding solids: the icosahedron's 20
@@ -2354,7 +2364,8 @@ export const RECIPES = {
           part: "g" + i,
           pos: p.c,
           pivot: SIER.centre,
-          points: p.corners,
+          points: p.points,
+          solid: { type: "sphere", r: p.core },
           radius: 0.01,
           pick: [0.45, 0.4, 0.45],
           mass: 1,
@@ -2428,7 +2439,9 @@ export const RECIPES = {
           part: g.part,
           pos: g.c,
           pivot: [0, 0, 0],
+          quat: g.q,
           points: g.pts,
+          solid: { type: "box", half: g.half },
           radius: 0.012,
           pick: [g.r, g.r, g.r],
           mass: 0.3,
@@ -2452,8 +2465,9 @@ export const RECIPES = {
       // corners about it and its reach), and the floor under the solid.
       const byGroup = new Map();
       faces.forEach((f, i) => {
-        const g = byGroup.get(groups[i]) || { part: o.solid + groups[i], all: [] };
+        const g = byGroup.get(groups[i]) || { part: o.solid + groups[i], all: [], ns: [] };
         g.all.push(...f.pts);
+        g.ns.push(f.n);
         byGroup.set(groups[i], g);
       });
       const pieces = [...byGroup.values()].map((g) => {
@@ -2461,8 +2475,16 @@ export const RECIPES = {
           g.all.reduce((a, p) => add(a, p), [0, 0, 0]),
           1 / g.all.length,
         );
-        const pts = g.all.map((p) => sub(p, c));
-        return { part: g.part, c, pts, r: Math.max(0.2, ...pts.map((p) => len(p))) };
+        // Lane Hands-on H5: the piece turned to lie in its face (z along
+        // its normal), with a thin plate for a solid, so a face set down
+        // on another rests on it instead of passing through.
+        const n = unit(g.ns.reduce((a, v) => add(a, v), [0, 0, 0]));
+        const q = quatFromTo([0, 0, 1], n);
+        const qi = [-q[0], -q[1], -q[2], q[3]];
+        const pts = g.all.map((p) => quatRotate(qi, sub(p, c)));
+        // (Within its edges, so it clears its neighbors in place.)
+        const half = [0, 1, 2].map((k) => (k === 2 ? Math.max(...pts.map((p) => Math.abs(p[k]))) + 0.025 : 0.75 * Math.max(...pts.map((p) => Math.abs(p[k]))))); // prettier-ignore
+        return { part: g.part, c, q, pts, half, r: Math.max(0.2, ...pts.map((p) => len(p))) };
       });
       const floor = Math.min(...faces.flatMap((f) => f.pts.map((p) => p[1])));
       k.data = { groups: pieces, floor };
