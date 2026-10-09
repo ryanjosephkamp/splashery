@@ -2938,7 +2938,7 @@ const DNA = (() => {
     // Hands-on: how far the finger pulls to open it fully, and how much
     // wider its strands peel than the tap's.
     pull: 0.45,
-    peel: 1.7,
+    peel: 1.2,
   };
 })();
 
