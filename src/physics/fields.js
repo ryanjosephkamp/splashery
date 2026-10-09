@@ -16,7 +16,8 @@
 // - shake: { key, gap } | true
 // - flee: { radius, push, back, max } | true; follow: true
 // - pieces' own `material`, `projectile: { nose, vane, fr }` and `target`
-// - force: (body, h, ctx) => {} each substep, and watch: true (lane Hands-on H4)
+// - force: (body, h, ctx) => {} each substep, watch: true, and carry:
+//   { key: [keys] } (lane Hands-on H4)
 //
 // src/physics/hands-on.js calls an Extras (made by extrasFor) at a few
 // points: attach, the world built, a press, a move, a let-go, each frame
@@ -329,7 +330,7 @@ export class FleeField {
 
 // ---- The glue to Hands-on -------------------------------------------------
 
-const KEYS = ["material", "water", "air", "well", "wheels", "shake", "flee", "follow", "force", "watch"]; // prettier-ignore
+const KEYS = ["material", "water", "air", "well", "wheels", "shake", "flee", "follow", "force", "watch", "carry"]; // prettier-ignore
 
 // An Extras for a toy whose hands block asks for any of these pieces (or
 // whose pieces are projectiles, targets or have materials); null else.
@@ -477,6 +478,7 @@ export class Extras {
       this.well ||
       this.wheels ||
       hands.force ||
+      hands.carry ||
       ho.pieces.some((p) => p.body.projectile)
     )
       // prettier-ignore
@@ -489,6 +491,7 @@ export class Extras {
     const bodies = ho.mode === "toy" ? [ho.body] : ho.pieces.map((p) => p.body);
     const G = this.G;
     const R = ho.R();
+    if (this.hands.carry) this.carryStep();
     for (const b of bodies) {
       if (b.stuck) {
         if (b.held) {
@@ -525,6 +528,34 @@ export class Extras {
     const w = ho.world;
     const pc = ho.mode === "pieces" ? ho.pieces.find((p) => p.body === b) || null : null;
     return { piece: pc, c: this.player.motion?.state || {}, data: this.player.proc?.ctx?.kit?.data, G, R, touching: !!w && b.touchTick >= w.tick - 1 }; // prettier-ignore
+  }
+
+  // Lane Hands-on H4: `hands.carry` ({ key: [keys] }, by part name or
+  // token): while the piece `key` is held, the others come loose and go with
+  // it as they were built beside it (Galileo's two balls in one hand); let
+  // go, they fly on with its speed and then each goes its own way.
+  carryStep() {
+    const ho = this.ho;
+    const find = (k) => ho.pieces.find((p) => p.part === k || (p.token !== undefined && p.token === k)); // prettier-ignore
+    for (const [key, list] of Object.entries(this.hands.carry)) {
+      const pc = find(isNaN(key) ? key : Number(key)) || find(key);
+      if (!pc?.body.held) continue;
+      const b = pc.body;
+      const dq = quat.mul(b.q, quat.conj(pc.home.q));
+      for (const k2 of list) {
+        const o = find(k2);
+        if (!o || o === pc || o.body.held) continue;
+        const b2 = o.body;
+        if (b2.pinned) ho.free(b2);
+        b2.pos = v3.add(b.pos, quat.rotate(dq, v3.sub(o.home.pos, pc.home.pos)));
+        b2.q = quat.norm(quat.mul(dq, o.home.q));
+        b2.prevPos = b2.pos.slice();
+        b2.prevQ = b2.q.slice();
+        b2.vel = b.vel.slice();
+        b2.omega = b.omega.slice();
+        b2.carriedBy = b;
+      }
+    }
   }
 
   pieceState(key) {
@@ -593,6 +624,14 @@ export class Extras {
   // A thrown body: the material's weight, spin and drag.
   thrown(h) {
     const b = h.body;
+    // What it carried flies on with it (lane Hands-on H4).
+    if (this.hands.carry)
+      for (const pc of this.ho.pieces)
+        if (pc.body.carriedBy === b) {
+          pc.body.vel = b.vel.slice();
+          pc.body.omega = b.omega.slice();
+          pc.body.carriedBy = null;
+        }
     const m = this.mats?.get(b);
     if (!m) return;
     b.damping = 0.02;

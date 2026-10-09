@@ -147,3 +147,57 @@ test("a floating toy can be pushed down below where it stands; others can't", as
   const solid = await pushDown(false);
   expect(solid.down).toBeLessThan(0.05); // not into its floor
 });
+
+test("hands.carry: a held piece carries the other; let go, both fall and land together", async ({
+  page,
+}) => {
+  await page.goto(APP);
+  await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
+  const r = await page.evaluate(async () => {
+    const { app, player } = window.__splashery;
+    await app.chooseToy("leaning-tower");
+    player.opts.idleDelay = 1e9;
+    const ball = (part, pos, r, mass) => ({ part, pos, pivot: pos, solid: { type: "sphere", r }, mass, restitution: 0.1, pick: [r * 1.4, r * 1.4, r * 1.4] }); // prettier-ignore
+    player.toyInfo.recipe.hands = {
+      floor: 0,
+      place: false,
+      area: 1.2,
+      pieces: () => [ball("ball0", [0.9, 0.1, 0.3], 0.1, 3.4), ball("ball1", [0.9, 0.066, 0.6], 0.066, 1)], // prettier-ignore
+      carry: { ball0: ["ball1"] },
+    };
+    const h = player.handsOn;
+    h.attach(player.toyInfo);
+    h.setOn(true);
+    const tick = (n) => {
+      for (let i = 0; i < n; i++) player.update(1 / 60);
+    };
+    tick(3);
+    h.ensure();
+    const [b0, b1] = h.pieces.map((p) => p.body);
+    const s = player.screenPoint(b0.pos);
+    h.pressAt(player.fromRecipe(b0.pos), s[0], s[1]);
+    for (let k = 1; k <= 40; k++) {
+      h.moveTo(s[0], s[1] - 6 * k);
+      tick(2);
+    }
+    tick(30); // held still, up high
+    const gap = Math.hypot(...b1.pos.map((v, i) => v - b0.pos[i]));
+    const up = [b0.pos[1], b1.pos[1]];
+    h.release();
+    let land0 = null;
+    let land1 = null;
+    for (let i = 0; i < 180 && (land0 === null || land1 === null); i++) {
+      tick(1);
+      if (land0 === null && b0.pos[1] < 0.1 + 0.01) land0 = i;
+      if (land1 === null && b1.pos[1] < 0.066 + 0.01) land1 = i;
+    }
+    return { gap, up, land0, land1, free: !b1.pinned };
+  });
+  expect(r.up[0]).toBeGreaterThan(0.6); // lifted
+  expect(r.up[1]).toBeGreaterThan(0.5); // and the other with it
+  expect(r.gap).toBeCloseTo(Math.hypot(0.034, 0.3), 1); // side by side as built
+  expect(r.free).toBe(true);
+  expect(r.land0).not.toBe(null);
+  expect(r.land1).not.toBe(null);
+  expect(Math.abs(r.land0 - r.land1)).toBeLessThanOrEqual(3); // within a few frames
+});
