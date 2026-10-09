@@ -9,6 +9,7 @@
 // tools/models.json.
 
 import { clamp, smoothstep, mix, quatAxisAngle, quatFromTo, quatMul, quatRotate } from "../kit.js";
+import { surfacePoints } from "../physics/world.js"; // lane Hands-on H1
 
 // ---- The baked models ------------------------------------------------------------------------
 
@@ -73,7 +74,8 @@ const BASE = 0.01;
 // Lane Sharpness A's options (off unless a toy asks): `sizeMul` scales every splat, `exact` keeps
 // each splat's own size (no random size jitter, which frays the outline), and `smooth` (0..1)
 // blends each splat's color toward the mean of its neighbors within `cell` model units, to calm a
-// scan's speckled texture.
+// scan's speckled texture. `partOf(filePart, i)` may pick a splat's kit part itself (lane Hands-on
+// H1: a sleeve cut at its elbow).
 export function addScan(
   k,
   scan,
@@ -87,6 +89,7 @@ export function addScan(
     exact = false,
     smooth = 0,
     cell = 0.012,
+    partOf,
   } = {},
 ) {
   k.data = k.data || {}; // sortWhileMoving keeps its state here
@@ -132,7 +135,7 @@ export function addScan(
       flat: 0.14,
       color: c,
       opacity: 1,
-      part: parts[fp] ?? 0,
+      part: (partOf && partOf(fp, i)) ?? parts[fp] ?? 0,
       pattern: typeof pattern === "function" ? !!pattern(fp) : pattern,
     };
   });
@@ -553,6 +556,18 @@ const SUNGLASSES = {
   pickAlpha: 0.06,
   controls: [{ key: "flip", label: "Fold and flip", type: "pulse", ease: SG.T }],
   action: { key: "flip", label: "Fold, flip and darken" },
+  // Hands-on (lane Hands-on H1): fold each arm in on its hinge, and out
+  // again; an arm stays where it is left, as a real one does, and stops at
+  // open and at folded. (The frame keeps its resting turn: a locked hinge the
+  // arms ride on.)
+  hands: {
+    floor: -0.3,
+    joints: [
+      { type: "hinge", part: "front", name: "front", pivot: SG.center, axis: [0, 1, 0], min: SG.rest, max: SG.rest, start: () => SG.rest, gravity: false, pos: [0, 0, 0.62], pick: [0.001, 0.001, 0.001] }, // prettier-ignore
+      { type: "hinge", part: "armR", parent: "front", pivot: SG.hingeR, axis: [0, 1, 0], min: 0, max: 1.53, gravity: false, friction: 6, bounce: 0.1, pos: [0.52, 0, 0.1], pick: [0.12, 0.12, 0.45], sound: (ev, vol) => ({ voice: "click", f: 2600, vol: 0.3 + 0.3 * vol }) }, // prettier-ignore
+      { type: "hinge", part: "armL", parent: "front", pivot: SG.hingeL, axis: [0, 1, 0], min: -1.36, max: 0, gravity: false, friction: 6, bounce: 0.1, pos: [-0.52, 0, 0.1], pick: [0.12, 0.12, 0.45], sound: (ev, vol) => ({ voice: "click", f: 2400, vol: 0.3 + 0.3 * vol }) }, // prettier-ignore
+    ],
+  },
   credits: [
     {
       label: "Sunglasses",
@@ -658,12 +673,44 @@ const hexRgb = (h) => [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16) / 255
 // rim at y -0.37 and its button at y 0.377. It sits on a kit-built wooden stand.
 
 const BC = { T: 3, pivot: [0, -0.05, -0.2], rim: -0.37, base: -1.3 };
+// Hands-on: the walnut stand's dome (filling the crown) and post, fixed (lane Hands-on H1).
+const CAP_STAND = [
+  { type: "ellipsoid", r: [0.44, 0.58, 0.44], at: [0, BC.rim, -0.2] },
+  { type: "cylinder", r: 0.06, h: (BC.rim - BC.base) / 2, at: [0, (BC.rim + BC.base) / 2, -0.2] },
+];
+// Hands-on: the cap's outside, about its pivot (lane Hands-on H1): its rim's
+// ring, the brim reaching forward and the crown's top.
+const CAP_POINTS = [
+  ...Array.from({ length: 10 }, (_, i) => [0.43 * Math.cos((i / 10) * 2 * Math.PI), BC.rim - BC.pivot[1], 0.43 * Math.sin((i / 10) * 2 * Math.PI)]), // prettier-ignore
+  [0, BC.rim - BC.pivot[1] + 0.02, 0.8],
+  [0.25, BC.rim - BC.pivot[1] + 0.02, 0.7],
+  [-0.25, BC.rim - BC.pivot[1] + 0.02, 0.7], // prettier-ignore
+  [0, 0.43, 0],
+  [0.25, 0.3, 0],
+  [-0.25, 0.3, 0],
+  [0, 0.3, -0.25],
+];
 
 const BASEBALL_CAP = {
   alive: false,
   density: 1.5, // as the Model to splats toy: 300,000 splats on the high tier
   controls: [{ key: "toss", label: "Toss", type: "pulse", ease: BC.T }],
   action: { key: "toss", label: "Flip and spin" },
+  // Hands-on (lane Hands-on H1): lift the cap off its stand and throw it
+  // like a flying disc, flat and with a flick: it spins and glides a little
+  // on its brim before it lands soft. (The stand stays where it is.)
+  hands: {
+    floor: BC.base - 0.03,
+    area: 2.2,
+    place: false,
+    material: "baseball-cap", // (turns on the materials; the piece's own is what flies)
+    pieces: () => [
+      { part: "cap", pos: BC.pivot, pivot: BC.pivot, points: CAP_POINTS, radius: 0.03, pick: [0.5, 0.42, 0.6], mass: 1, friction: 0.8, restitution: 0.15, damping: 0.05, angDamping: 0.5, material: "baseball-cap" }, // prettier-ignore
+      // The stand stays, for the cap to land on: its dome and its post.
+      ...CAP_STAND.map((solid) => ({ pos: solid.at, solid, points: surfacePoints(solid, 3), fixed: true, friction: 0.8, restitution: 0.15 })), // prettier-ignore
+    ],
+    sound: (hit, vol) => ({ voice: "thud", f: 220, bright: 0.1, decay: 0.4, vol: vol * 0.5 }),
+  },
   credits: [
     {
       label: "Baseball cap",
@@ -1329,11 +1376,93 @@ function rsLace(which, s) {
   });
 }
 
+// The bow holds (shape memory) until a lace is pulled out (lane Hands-on H1).
+const RS_TIED = { keep: 9, undone: false };
+const v3dist = (a, b) => Math.hypot(a[0] - b[0], a[1] - b[1], a[2] - b[2]);
+
+// The shoe's top, every 0.1 along it (x from -0.8 at the toe) and across it (z from -0.3),
+// measured from the scan, the ankle opening filled and the collar flaps left out (lane
+// Hands-on H1).
+const RS_TOP = [
+  [null, -0.22, -0.17, -0.15, -0.13, -0.13, -0.1, -0.03, 0.13, 0.16, 0.15, 0.1, 0.05, 0.01, -0.26, null, null],
+  [-0.19, -0.13, -0.11, -0.11, -0.1, -0.03, 0.03, 0.09, 0.16, 0.16, 0.16, 0.12, 0.05, 0.08, 0.09, -0.03, -0.28],
+  [-0.16, -0.11, -0.1, -0.1, -0.07, -0.01, 0.04, 0.12, 0.16, 0.16, 0.16, 0.1, 0.1, 0.1, 0.13, 0.24, -0.21],
+  [-0.16, -0.11, -0.1, -0.1, -0.08, -0.01, 0.03, 0.11, 0.16, 0.16, 0.16, 0.11, 0.1, 0.12, 0.15, 0.24, -0.2],
+  [-0.23, -0.15, -0.12, -0.11, -0.11, -0.03, 0.02, 0.08, 0.16, 0.16, 0.16, 0.1, 0.06, 0.13, 0.14, 0.03, -0.23],
+  [null, -0.26, -0.2, -0.16, -0.15, -0.15, -0.11, -0.04, 0.14, 0.16, 0.15, 0.1, 0.06, 0.05, -0.03, -0.23, null],
+  [null, null, null, null, -0.32, -0.25, -0.24, -0.22, -0.2, -0.19, null, null, null, null, null, null, null],
+]; // prettier-ignore
+// A shell of spheres just under that top and inside the shoe's sides, so a loose lace drapes
+// over the shoe and down its outside instead of falling through it.
+const RS_SHELL = (() => {
+  const r = 0.075;
+  const top = (i, j) => RS_TOP[j]?.[i] ?? null;
+  const out = [];
+  for (let j = 0; j < RS_TOP.length; j++)
+    for (let i = 0; i < RS_TOP[j].length; i++) {
+      const t = top(i, j);
+      if (t == null) continue;
+      const x = -0.8 + 0.1 * i;
+      const z = -0.3 + 0.1 * j;
+      // A column is filled down to its lowest neighbor's top (the floor at the edge), so the
+      // shoe's sides are covered too.
+      const nb = Math.min(...[[1, 0], [-1, 0], [0, 1], [0, -1]].map(([a, b]) => top(i + a, j + b) ?? -0.5)); // prettier-ignore
+      const low = Math.min(t, Math.max(-0.5, nb) + r) - r;
+      // The top sphere stands a little proud of the measured top, so a lace lying across the
+      // lacing clears the eyelet tabs and the tongue between them.
+      const ys = [];
+      for (let y = t + 0.015 - r; y > low + 0.03; y -= 0.1) ys.push(y);
+      ys.push(low);
+      for (const y of ys) out.push({ at: [x, y, z], r });
+    }
+  return out;
+})();
+
 const RUNNING_SHOE = {
   alive: false,
   density: 1.5, // as the Model to splats toy: 300,000 splats on the high tier
   controls: [{ key: "tie", label: "Tie the laces", type: "pulse", ease: RS.T }],
   action: { key: "tie", label: "Untie and tie again" },
+  // Hands-on (lane Hands-on H1): the laces are two ropes, tied in their bow.
+  // Pull a lace end out and the bow comes undone: both laces fall loose and
+  // drape over the shoe and down its outside (RS_SHELL). ↺ ties them again.
+  hands: {
+    floor: -0.5,
+    ropes: () =>
+      ["A", "B"].map((key, w) => ({
+        name: "lace" + key,
+        points: RS_SHAPES[key].bow,
+        tokens: RS_SHAPES[key].bow.map((p, i) => w * RS.joints + i),
+        pin: [0],
+        grab: [RS.joints - 1, RS.joints - 2, RS.joints - 3],
+        pick: 0.12,
+        keep: RS_TIED.keep,
+        bend: 0.25,
+        drag: 2,
+        radius: 0.012,
+        avoid: RS_SHELL,
+        update: (strand, dt, soft) => {
+          // Pulled out past this far, the bow lets go (both laces).
+          const n = soft.nodes[strand.first + RS.joints - 1];
+          if (v3dist(n.x, n.home) > 0.22) RS_TIED.undone = true;
+          strand.def.keep = RS_TIED.undone ? 0 : RS_TIED.keep;
+          // Only the shell's spheres near this lace, for speed.
+          const lo = [Infinity, Infinity, Infinity];
+          const hi = [-Infinity, -Infinity, -Infinity];
+          for (let i = 0; i < RS.joints; i++)
+            for (let k = 0; k < 3; k++) {
+              const v = soft.nodes[strand.first + i].x[k];
+              lo[k] = Math.min(lo[k], v);
+              hi[k] = Math.max(hi[k], v);
+            }
+          strand.def.avoid = RS_SHELL.filter((sp) => sp.at.every((v, k) => v > lo[k] - 0.2 && v < hi[k] + 0.2)); // prettier-ignore
+        },
+        reset: (strand) => {
+          RS_TIED.undone = false;
+          strand.def.keep = RS_TIED.keep;
+        },
+      })),
+  },
   credits: [
     {
       label: "Running shoe",
@@ -1452,6 +1581,11 @@ const HD = {
   armpit: -0.1, // the lowest point of an armhole
   shoulderL: [-0.36, 0.17, -0.06],
   shoulderR: [0.36, 0.17, -0.06],
+  // Lane Hands-on H1: each sleeve is cut at its elbow (the middle of the sleeve there), and the
+  // forearm keeps a band of the upper sleeve's cloth above the cut, so a bent elbow shows cloth.
+  elbowL: [-0.36, -0.3, -0.06],
+  elbowR: [0.36, -0.3, -0.06],
+  elbowBand: 0.08,
   // Where each sleeve points when crossed (the left one over the right).
   crossL: [0.47, 0.28, 0.84],
   crossR: [-0.45, 0.05, 0.89],
@@ -1474,6 +1608,18 @@ HOOD.angle = (strand, soft) => {
   const rest = Math.atan2(HOOD.crown[2] - HD.neck[2], HOOD.crown[1] - HD.neck[1]);
   return Math.max(HOOD.min, Math.min(HOOD.max, now - rest));
 };
+
+// Keeps a sleeve's cuff from swinging in past its hanging line, seen from the front (lane
+// Hands-on H1).
+function hdSleeveOut(a, b, side) {
+  const rest = Math.atan2(b.home[0] - a.home[0], a.home[1] - b.home[1]);
+  const d = [b.x[0] - a.x[0], b.x[1] - a.x[1]];
+  if (side * (Math.atan2(d[0], -d[1]) - rest) >= 0) return;
+  const r = Math.hypot(d[0], d[1]);
+  b.x = [a.x[0] + r * Math.sin(rest), a.x[1] - r * Math.cos(rest), b.x[2]];
+  b.p = b.x.slice();
+  b.v = [0, 0, b.v[2]];
+}
 
 // A damped swing that starts at `a` and dies away by the end.
 const swing = (s, a, amp, w = 11, k = 2.2) =>
@@ -1502,6 +1648,15 @@ const HOODIE = {
         drag: 3,
         pieces: [{ part: "hood", node: 0, turn: false, spin: HOOD.angle, axis: [1, 0, 0] }],
       },
+      // Lane Hands-on H1: lift a sleeve by its cuff and it bends at the
+      // elbow, as an empty sleeve does; the upper sleeve stays as it hangs,
+      // joined at the shoulder and under the arm. Let go and the forearm
+      // swings back down. It never swings in past where it hangs (the body
+      // is there).
+      ...[
+        ["forearmL", HD.elbowL, [-0.5, -0.78, -0.02], -1],
+        ["forearmR", HD.elbowR, [0.5, -0.78, -0.02], 1],
+      ].map(([part, top, cuff, side]) => ({ name: part, points: [top, cuff], pin: [0], grab: [1], pick: 0.3, reach: 1.02, maxPull: 0.35, weight: 0, keep: 5, drag: 2, pieces: [{ part, from: 0, to: 1 }], update: (strand, dt, soft) => hdSleeveOut(soft.nodes[strand.first], soft.nodes[strand.first + 1], side) })), // prettier-ignore
     ],
   },
   credits: [
@@ -1537,6 +1692,16 @@ const HOODIE = {
     };
     out.parts.sleeveL = { quat: quatMul(quatAxisAngle([0, 0, 1], sway), toward(HD.crossL, inL)) };
     out.parts.sleeveR = { quat: quatMul(quatAxisAngle([0, 0, 1], -sway), toward(HD.crossR, inR)) };
+    // Each forearm moves with its sleeve as one piece (turned about the shoulder, not the elbow).
+    for (const [f, sl, S, E] of [
+      ["forearmL", "sleeveL", HD.shoulderL, HD.elbowL],
+      ["forearmR", "sleeveR", HD.shoulderR, HD.elbowR],
+    ]) {
+      const q = out.parts[sl].quat;
+      const d = [S[0] - E[0], S[1] - E[1], S[2] - E[2]];
+      const r = quatRotate(q, d);
+      out.parts[f] = { quat: q, offset: [d[0] - r[0], d[1] - r[1], d[2] - r[2]] };
+    }
     // The drawstrings swing, kicked by the hood and again by the sleeves.
     const kick = (ph) => swing(s, 0.05, 0.55, 10, 2.4) + swing(s, 1.2, 0.3 * ph, 9, 2) + swing(s, 2.95, 0.3, 9, 2); // prettier-ignore
     out.parts.stringL = { quat: quatMul(quatAxisAngle([0, 0, 1], kick(1)), quatAxisAngle([1, 0, 0], -0.6 * kick(0.6))) }; // prettier-ignore
@@ -1548,10 +1713,37 @@ const HOODIE = {
     const hood = k.part("hood", { pivot: HD.neck, axis: [1, 0, 0] });
     const sleeveL = k.part("sleeveL", { pivot: HD.shoulderL });
     const sleeveR = k.part("sleeveR", { pivot: HD.shoulderR });
+    const forearmL = k.part("forearmL", { pivot: HD.elbowL });
+    const forearmR = k.part("forearmR", { pivot: HD.elbowR });
+    const forearmOf = (fp) => (fp === 2 ? forearmL : fp === 3 ? forearmR : null);
     const stringL = k.part("stringL", { pivot: HD.strings[0].top });
     const stringR = k.part("stringR", { pivot: HD.strings[1].top });
     // The cloth takes flag colors (lane Fix7); the drawstrings keep theirs.
-    addScan(k, scan, { share: 0.86, parts: [0, hood, sleeveL, sleeveR], keep: (fp) => fp < 4, pattern: true }); // prettier-ignore
+    const elbowY = HD.elbowR[1];
+    addScan(k, scan, { share: 0.86, parts: [0, hood, sleeveL, sleeveR], keep: (fp) => fp < 4, pattern: true, partOf: (fp, i) => (scan.pos[i * 3 + 1] < elbowY ? forearmOf(fp) : null) }); // prettier-ignore
+    // The band above each elbow, again on the forearm (lane Hands-on H1): at rest it lies on the
+    // upper sleeve's own splats; with the elbow bent it covers the opened side of the cut.
+    {
+      const m = Math.min(scan.n, Math.max(1000, Math.floor(k.count * 0.86)));
+      const grow = Math.sqrt(scan.n / m);
+      const band = [];
+      for (let i = 0; i < m; i++) {
+        const y = scan.pos[i * 3 + 1];
+        if (forearmOf(scan.part[i]) && y >= elbowY && y < elbowY + HD.elbowBand) band.push(i);
+      }
+      addCloud(k, band.length, (j) => {
+        const i = band[j];
+        return {
+          p: [scan.pos[i * 3], scan.pos[i * 3 + 1], scan.pos[i * 3 + 2]],
+          n: [scan.nrm[i * 3], scan.nrm[i * 3 + 1], scan.nrm[i * 3 + 2]],
+          size: scan.sig[i] * grow,
+          flat: 0.14,
+          color: [scan.rgb[i * 3], scan.rgb[i * 3 + 1], scan.rgb[i * 3 + 2]],
+          part: forearmOf(scan.part[i]),
+          pattern: true,
+        };
+      });
+    }
     // The armholes: each is closed with fabric that follows the opening's own outline (the
     // sleeve's splats that touch the body, above the armpit, laid flat on the plane that fits
     // them best), one patch on the body and one on the sleeve's top, so a raised sleeve shows
@@ -1661,8 +1853,8 @@ const HOODIE = {
     // cuff's own cloth closes it, a little inside the rim, darker toward the
     // middle and creased where the rib gathers.
     for (const [fp, sleeve] of [
-      [2, sleeveL],
-      [3, sleeveR],
+      [2, forearmL],
+      [3, forearmR],
     ]) {
       const ids = [];
       for (let i = 0; i < scan.n; i++) if (scan.part[i] === fp) ids.push(i);
