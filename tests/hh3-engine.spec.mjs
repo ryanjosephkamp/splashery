@@ -251,12 +251,14 @@ test("without steady, a piece snapped off swings from the finger", async ({ page
   expect(await heldTurn(page, false)).toBeGreaterThan(1);
 });
 
-test("a forgiving press: off the desk lamp's splats, Hands-on still lifts it", async ({ page }) => {
+test("a forgiving press: off the lava lamp's splats, Hands-on still lifts it", async ({ page }) => {
   await page.goto(APP);
   await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
   await page.evaluate(async () => {
     const { app, player } = window.__splashery;
-    await app.chooseToy("lamp");
+    // (The lava lamp: one of the L1 sweep's center misses, picked up whole.
+    // The desk lamp, its first test, now plays its joints piece by piece.)
+    await app.chooseToy("lava-lamp");
     player.opts.idleDelay = 1e9;
   });
   await page.waitForTimeout(800);
@@ -289,7 +291,7 @@ test("a forgiving press: off the desk lamp's splats, Hands-on still lifts it", a
   await page.click("#hands-toggle");
   const p = await page.evaluate(({ x, y }) => window.__splashery.player.handsOn.nearPress(x, y), at); // prettier-ignore
   expect(p).toBeTruthy();
-  // A drag from there picks the lamp up.
+  // A drag from there picks the lava lamp up.
   await page.mouse.move(at.left + at.x, at.top + at.y);
   await page.mouse.down();
   await taken(page);
