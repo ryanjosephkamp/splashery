@@ -318,6 +318,16 @@ export class HandsOn {
         body.restK = p.spring;
       }
       if (p.hinge) body.hinge = { axis: v3.norm(p.hinge), q: body.q.slice() };
+      // Lane Hands-on H5: `home: { k, damping }`: let go, it springs back to
+      // where it was built, place and turn (an atom on its molecule).
+      if (p.home) {
+        body.restPos = body.pos.slice();
+        body.restPosK = p.home.k ?? 60;
+        body.restPosD = p.home.damping ?? 4;
+        body.restQ = body.q.slice();
+        body.restK = p.home.k ?? 60;
+        body.restD = p.home.damping ?? 4;
+      }
       body.invMassFree = body.invMass;
       body.invIFree = body.invI.slice();
       if (p.free) continue;
@@ -332,6 +342,14 @@ export class HandsOn {
       }
       body.invMass = 0;
       body.invI = [0, 0, 0];
+    }
+    // Lane Hands-on H5: `hands.links(data, info) => [{ a, b, compliance }]`:
+    // springy links between pieces a and b (indices), at their length as
+    // built (a molecule's bonds: pull one atom and its neighbors follow).
+    for (const l of hands.links?.(data, info) || []) {
+      const A = this.pieces[l.a]?.body;
+      const B = this.pieces[l.b]?.body;
+      if (A && B) w.joint(A, [0, 0, 0], B, [0, 0, 0], { length: v3.len(v3.sub(A.pos, B.pos)), compliance: l.compliance ?? 1e-3, damping: l.damping ?? 0 }); // prettier-ignore
     }
     // Pairs that overlapped when one of them came loose pass through each
     // other until they have come apart (a heap built for looks has stones
