@@ -42,8 +42,8 @@ Proposals below are suggestions; the owner may change them.
   Mitochondrion, Paramecium, Amoeba, DNA to protein, Cell division, Apoptosis, Phagocytosis,
   Electron orbital, Atom, Molecule, Protein, Crystal lattice, Unit cells, Orbital atlas, Molecule
   viewer, Periodic table, Real elements, Diamond, Ruby, Emerald, Amethyst geode, Sapphire, Quartz
-  cluster, Opal, Brain, Eye, Lungs, Tooth, Kidney, Anatomy atlas, Oak tree, Pine tree, Palm tree,
-  Cherry blossom, Maple tree, Bonsai, Weeping willow, Sunflower, Rose, Tulips, Daisies, Lotus,
+  cluster, Opal, Pearl, Brain, Eye, Lungs, Tooth, Kidney, Anatomy atlas, Oak tree, Pine tree, Palm
+  tree, Cherry blossom, Maple tree, Bonsai, Weeping willow, Sunflower, Rose, Tulips, Daisies, Lotus,
   Toadstool, Fern, Saguaro cactus, Coral reef, Pinecone, Acorns, Succulent, Bamboo, Pebbles, Kelp,
   Storm cloud, Lava lamp, Snow globe, Ice swan, Tornado, Rainbow, Iceberg, Waterfall, Ocean wave,
   Ice cream, Watermelon, Jelly, Pancakes, Cupcake, Lollipop, Candy cane, Macarons, Donut, Gummy
@@ -1711,7 +1711,9 @@ Proposals below are suggestions; the owner may change them.
   - Effect: The geode opens wider and the crystals glow violet.
   - Improved: C2: each time it opens, the halves swing wider and the crystals glow violet with
     twinkling tips, then settle (about 4 s). Sharpness A (October 2, 2026): sharper look (even,
-    solid splats and calmer textures).
+    solid splats and calmer textures). Hands-on H5: with ✋ Hands-on on, the front half swings open
+    or shut by hand on its hinge (the toy's own design: hinged, not lifted off) and stays where it
+    is left; shut, the halves fit together.
   - Sound: Stone crack and a chime.
 - **Sapphire** (`sapphire`). Now: tap: Catch the star. Plan: keep.
   - Effect: A star shimmer (asterism) glides across it.
@@ -1734,6 +1736,8 @@ Proposals below are suggestions; the owner may change them.
   - Sound: A softer, duller real tap and the stone rocking gently on the table (no synth shimmer).
 - **Pearl** (`pearl`). Now: tap: Open or close. Plan: keep.
   - Owner: Really cool.
+  - Improved: Hands-on H5: with ✋ Hands-on on, the oyster's lid pries open or shut by hand on its
+    hinge, and the pearl lifts out, rolls, and settles back into its place when brought near it.
   - Sound: Soft round clink.
 
 ## Nature (23)
@@ -2588,7 +2592,9 @@ Proposals below are suggestions; the owner may change them.
   - Owner: Hard to tell what the effect is; make it clearer and more dramatic.
   - Effect: Mist swirls hard and a glowing shape appears inside, then fades.
   - Improved: C2: the mist whips round and thins, and a glowing sign rises out of it and fades: a
-    star, a moon or a heart in turn (about 3.5 s).
+    star, a moon or a heart in turn (about 3.5 s). Hands-on H5: with ✋ Hands-on on, the ball lifts
+    off its stand, sets down or rolls on the table (heavy glass) with its mist inside, and settles
+    back into its cup when brought over the stand.
   - Sound: A soft misty whoosh and a real crystal glass ringing as the sign rises (no theremin).
 
 ## Animals (13)
