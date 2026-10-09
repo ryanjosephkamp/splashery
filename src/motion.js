@@ -372,6 +372,7 @@ export class MotionDriver {
       drive.addon = { ...drive.addon, parts: { ...drive.addon?.parts, ...this.handsAddon } }; // lane Hands engine B
     if (this.handsResort) {
       drive.resort = true;
+      drive.resortPose = true; // (parts too: lane Hands-on H2)
       this.handsResort = false;
     }
     this.taps = []; // UI r4
