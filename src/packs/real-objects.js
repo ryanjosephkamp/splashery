@@ -1391,12 +1391,10 @@ const RS_TOP = [
   [null, null, null, null, -0.32, -0.25, -0.24, -0.22, -0.2, -0.19, null, null, null, null, null, null, null],
 ]; // prettier-ignore
 // A shell of spheres just under that top and inside the shoe's sides, so a loose lace drapes
-// over the shoe and down its outside instead of falling through it. A sphere under the tied
-// bow sinks until the bow clears it, so the bow sits as it is.
+// over the shoe and down its outside instead of falling through it.
 const RS_SHELL = (() => {
   const r = 0.075;
   const top = (i, j) => RS_TOP[j]?.[i] ?? null;
-  const bow = [...RS_SHAPES.A.bow.slice(1), ...RS_SHAPES.B.bow.slice(1)];
   const out = [];
   for (let j = 0; j < RS_TOP.length; j++)
     for (let i = 0; i < RS_TOP[j].length; i++) {
@@ -1408,13 +1406,12 @@ const RS_SHELL = (() => {
       // shoe's sides are covered too.
       const nb = Math.min(...[[1, 0], [-1, 0], [0, 1], [0, -1]].map(([a, b]) => top(i + a, j + b) ?? -0.5)); // prettier-ignore
       const low = Math.min(t, Math.max(-0.5, nb) + r) - r;
+      // The top sphere stands a little proud of the measured top, so a lace lying across the
+      // lacing clears the eyelet tabs and the tongue between them.
       const ys = [];
-      for (let y = t - r; y > low + 0.03; y -= 0.1) ys.push(y);
+      for (let y = t + 0.015 - r; y > low + 0.03; y -= 0.1) ys.push(y);
       ys.push(low);
-      for (let y of ys) {
-        while (y > -0.5 && bow.some((p) => v3dist(p, [x, y, z]) < r + 0.03)) y -= 0.01;
-        out.push({ at: [x, y, z], r });
-      }
+      for (const y of ys) out.push({ at: [x, y, z], r });
     }
   return out;
 })();
