@@ -190,8 +190,14 @@ clips within about six hours.
 
 ## State
 
-READY (October 9, 2026, about 17:30 UTC; Opus 5.5 at high effort): the owner's second marks (six
-`-r2` cards). Pushed: the knight's base hides the bits of hoof just over its floor (card
+READY (October 9, 2026, 21:35 UTC; Opus 5.5 at high effort): every card on PR #419 is settled. The
+owner's call of October 9 (via the Operator): the desk globe and the photo orange ship as they are,
+at their captures' limit (the globe's blurry spots and the orange's soft outline are in the captures
+themselves). #419 joins merge batch 3, after batch 2 (#470) lands; then this lane merges main, runs
+its tests and taps, and pushes.
+
+Earlier: READY (October 9, 2026, about 17:30 UTC; Opus 5.5 at high effort): the owner's second marks
+(six `-r2` cards). Pushed: the knight's base hides the bits of hoof just over its floor (card
 `pr3-base-knight-horse-r3`); the monkey doll's legs and hands rock with it (a wide, flat region just
 above its cloth); the steak loses more needles and the drips under it (its underside raised to y
 -0.04); the Morasko iron and the pyrite turn half way round and back, since a full turn of a lumpy
@@ -325,8 +331,9 @@ What main already did for these toys since October 3 (so this lane does not redo
 
 ## Known issues
 
-- The orange's outline keeps its soft fuzz, and the cone shell its white top (both in the capture;
-  see "State").
+- The orange's outline keeps its soft fuzz and the desk globe's ball its blurry spots: both at their
+  captures' limit, shipped as they are by the owner's call of October 9. The cone shell's white top
+  is in its capture too.
 - The eight baked scans are only a little sharper (1024 x 1024 source textures).
 - The crystal's base is not closed: clear quartz is see-through by nature, and a kit-built base
   inside it would show through as a blob.
