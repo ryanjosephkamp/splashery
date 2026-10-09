@@ -279,7 +279,10 @@ if (mode === "sound") {
   // the Toy tab open on the Sound choice
   await page.evaluate(() => {
     window.__splashery.app.sound.enabled = false; // (the clip's sound is the rendered one)
-    document.querySelector("[data-tab='toy'], #tab-toy")?.click();
+    // (on a phone the panel opens as a sheet: "More", then the Toy tab)
+    const more = document.getElementById("sheet-toggle");
+    if (more?.offsetParent && more.getAttribute("aria-expanded") !== "true") more.click();
+    document.getElementById("tab-play")?.click();
   });
   await page.waitForTimeout(800);
   await page.evaluate(() => document.querySelector(".pdp-sound")?.scrollIntoView({ block: "center" })); // prettier-ignore

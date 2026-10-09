@@ -14,7 +14,25 @@ ryanjosephkamp/splashery.
 - PR title: "Phase Photo depth: a clean depth animation in the Sharp view, a movable depth slider
   and the depth sound".
 - Handoff file: docs/handoff/PhotoDepth.md. Create it, starting with this brief word for word under
-  "## Brief". Then keep "## State", "## Notes", "## Known issues" and "## For the Operator" current.
+  "## Brief". Then keep "## State
+
+October 9, 2026: first READY. Both PRs are drafts, and the clips are on Effect review page 2 (lane
+record `PhotoDepth`), waiting for the owner's marks.
+
+- **Engine PR #468** (`claude/lane-photo-depth-engine`): the movable slider (drag, remember, clamp,
+  reset, arrow keys, `user-select: none`), focus mode's `--panel-w: 0px` on computers, and the
+  recipe hook `toySound(options)` in `src/app.js` and `src/viewer.js`. Ready for the full run, then
+  merge.
+- **Lane PR #471** (`claude/lane-photo-depth`, built on #468): fixes A and B in the Sharp picture,
+  the splats' backing, the Sound choice, tests, and the clip tool (`tools/pdp-clip.mjs`).
+- **Tests run (72):** pdp, pdp-engine, psv, psv2, psv3, p3d, phf, phf2, and phf-engine all pass. 64
+  ran in one go before a container restart, and the other 8, with pdp again after the border change,
+  ran afterward. lv8-dial and lv8 pass on the engine branch. The full suite is for the Integrator.
+- **Clips (cards `pdp-…`):** the portrait and Wildflowers before and after, the slider on a phone
+  and in full screen on a computer, and the sound choice (with sound).
+
+## Notes", "## Known issues" and "## For the Operator" current.
+
 - Model: Opus 5.5, at high effort (CLAUDE.md).
 
 ### Brief (written by the Operator on October 9, 2026, from the owner's walkthrough)
@@ -145,11 +163,29 @@ replace the prefix and lane record with yours).
   front of it now rides channel 3, the last to rise. Either way it stays behind at every moment
   (worst gap +0.004 on the portrait).
 - Moving photo to 3D's relief is unchanged: no pieces texture, and the old path in the shader.
+- **The border.** Within 3% of the picture's edge (and two to six cells of it), the layers blend by
+  depth as before and nothing is cut between layers. The backing is inset 2%, so a cut there would
+  leave a hole. `pdpDeep` in both shaders, and `surfacePoint` in relief-height.js mirrors it.
+- **The Sound choice.** It is the toy option `sound`, written straight into the scene (no rebuild),
+  as the view switch is. Your own sound is an object URL in `SAMPLES.data` (`src/voices.js`) under a
+  new key each time. `tools/pdp-clip.mjs sound` renders the sounds offline into the clip.
+- **The browser test** (`pdp.spec.mjs`, "frozen mid-tap") draws the backing in magenta
+  (`window.__psv.tint`) and freezes the tap with `motion.setControl("flat", v, { snap: true })`.
 
 ## Known issues
 
-- None yet.
+- **Ragged holes along a photo's edges mid-tap** (forest, Wildflowers): cut bands near the border
+  where no backing lies behind. They are the same on main (checked frame for frame), so they come
+  from earlier work, not this lane. A fix would extend the backing to the edge or stop the depth cut
+  near it. Left for a later round unless the owner asks.
+- The browser test's mid-tap check couldn't be run against the old code, which has no magenta hook.
+  The pure test does check the old formula fails on the portrait.
+- WebGPU: the WGSL copy is written to match the GLSL, but the tests run on WebGL2 only.
+- The new sounds are synthesized (bell, harp, drip). I haven't listened to them here. The owner
+  hears them on the Sound Board and in the clip.
 
 ## For the Operator
 
-- Nothing yet.
+- Merge #468 first (a full run), then #471 after the owner's marks (labs).
+- TOY-PLAN.md was regenerated on the lane branch. Regenerate it again after merging, as usual.
+- The Sound Board page needs `tools/upkeep.mjs` after the merge, so the three "ready" sounds show.
