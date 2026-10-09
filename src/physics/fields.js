@@ -636,9 +636,17 @@ export class Extras {
       this.fingerAt(x, y);
       return true;
     }
-    // Wheels: a drag on the toy pushes it along (never lifts it).
+    // Wheels: a drag on the toy pushes it along (never lifts it). With
+    // `lift` (lane Hands-on H4), a drag that starts straight up the screen
+    // picks it up instead, as any toy is.
     const pr = this.ho.press;
     if (this.hands.wheels && pr && !this.ho.hold && this.ho.mode !== "pieces") {
+      if (this.hands.wheels.lift) {
+        const dx = x - pr.x;
+        const dy = pr.y - y;
+        if (pr.up === undefined && Math.hypot(dx, dy) >= 7) pr.up = dy > 1.2 * Math.abs(dx);
+        if (pr.up) return false;
+      }
       this.ho.pushTo(pr, x, y);
       return true;
     }
