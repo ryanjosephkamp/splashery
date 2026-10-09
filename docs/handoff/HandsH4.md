@@ -75,9 +75,12 @@ has moved a lot since October 3 (read docs/HANDOFF.md "Now" first). Hands-on pla
 toy: with the ✋ switch off every toy plays exactly as before, and these are toys the public sees,
 so each shelf's PR waits for the owner's "good" marks on its cards. Update the handoff's "## State
 
-READY: all five shelves built, tested and in draft PRs, and all 34 cards are on Effect review page 2
-(lane record `HandsH4`), waiting for the owner's marks (October 9, 2026). Main (with H1's and H2's
-engine PRs, #420 and #421) is merged into every H4 branch; all H4 specs pass after it.
+WORKING (October 9, 2026, 06:30 UTC): the owner marked 28 of the 34 cards good. Five needed work,
+all fixed and their clips re-rendering as `-r2` cards: the bus's wheels now sit outside its sides,
+the tractor's mudguards clear its tyres (both change the toy's look a little with ✋ off too; new
+thumbnails), the castle's clip raises the drawbridge again, the DNA unzips fully with a shorter pull
+and zips back slowly, and Galileo's two balls stay level side by side while lifted (an engine fix in
+#439). Main (#420, #421) is merged into every H4 branch.
 
 - Engine PR #439 (`claude/lane-hands-h4-engine`): `hands.force` (a recipe's own push, each substep,
   with `ctx.free()`), `info.hands.piece(key)` (by part, token or `name`) with `hands.watch`,
