@@ -172,6 +172,9 @@ Photo to 3D and Moving photo to 3D"; merge it first). Sharp picture is the defau
     a second against a media element that takes 60 ms to seek and stops at its end: on main 3 of its
     4 cases stay a moment before the end for good, and with the fix all 4 wrap. Clip `psv3-loop`
     (the bunny sample in Sharp picture, three loops) is on Effect review page 2.
+  - Run on the branch (main a0b68bc39 merged in): psv, psv2 and psv3 30 of 30; p3d, phf-engine,
+    live3 and smd-moving 42 of 42 (phf-engine 15 of 15 in a three-times run). The round 1 psv checks
+    now wait for the switch to Splats, which completes at the next update.
 
 ### Measurements (October 8, 2026)
 
