@@ -159,3 +159,16 @@ test("crystal lattice: a slice pushed along its plane shears the lattice and rin
   await tick(page, 3);
   expect(Math.abs(await lift(g))).toBeLessThan(0.01);
 });
+
+// The lane's screenshots, the ✋ switch on (phone and desktop).
+test("screenshots: the crystal-lattice, hands-on", async ({ page }) => {
+  for (const [w, h] of [
+    [390, 844],
+    [1440, 900],
+  ]) {
+    await page.setViewportSize({ width: w, height: h });
+    await ready(page, "crystal-lattice");
+    await page.waitForTimeout(600);
+    await page.screenshot({ path: `tests/screenshots/hh5-crystal-lattice-${w}x${h}.png` });
+  }
+});
