@@ -76,6 +76,11 @@ cards, grouped Balls, Shapes, Toys and Clothing).
   and inside its sides; the test checks the laces against the scan itself), and the robot's clip is
   re-rendered from behind, wound by circling its key, so the key's turn shows. Main merged into all
   five branches the same evening; each lane spec passes.
+- Second round (October 9, 2026, 00:38): the robot from behind is "good". Two more fix notes, both
+  done and re-posted: the shoe's lace still dipped into the eyelet tabs (`hh1-running-shoe-r3`: the
+  shell no longer sinks under the tied bow and stands a little proud of the shoe's top), and the
+  hoodie's armpit pulled apart (`hh1-hoodie-r2`: a sleeve now turns about its armpit, lifts at most
+  about 0.4 rad and never swings in past where it hangs).
 - Not done: the garden gnome (the L1 sweep's finding) is a scan outside these shelves, its cause in
   the engine's resting contact (see "For the Operator").
 
