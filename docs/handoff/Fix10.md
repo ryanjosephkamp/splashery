@@ -156,6 +156,9 @@ replace the prefix and lane record with yours).
 
 ## For the Operator
 
+- October 9, 2026, 23:47 UTC: the owner marked all nine Fix10 cards "good" on Effect review page 2.
+  Nothing is open on the lane's side; #475 then #467 are ready to merge after the full run.
+
 - Merge #475 (Engine) first, then #467 after the owner's marks (labs toys; the hypercube's thumbnail
   is a public toy's).
 - `tests/smoke.spec.mjs` "dragging the shelf up opens a grid…" fails on main too: one toy name is
