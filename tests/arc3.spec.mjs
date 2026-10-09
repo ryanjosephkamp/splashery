@@ -33,7 +33,7 @@ const run = (page, secs) =>
 const read = (page, fn, arg) => page.evaluate(fn, arg);
 
 // One game step with these presses (the game's own clock).
-const STEP = `(g, pressed = []) => g.step(1 / 120, { input: window.__arc.input.frame(), pressed: new Set(pressed), view: window.__arc.view, demo: false })`; // prettier-ignore
+const STEP = `(g, pressed = []) => g.step(1 / 120, { input: window.__arc.input.frame(), pressed: new Set(pressed), view: window.__arc.view, demo: false, choice: window.__arc.choice })`; // prettier-ignore
 
 test("Shardball: the dome in 3D is the default; the ground takes the ball", async ({ page }) => {
   await open(page, "shardball");
@@ -178,6 +178,94 @@ test("Strata starts in 2D in the classic 10 by 20 slot", async ({ page }) => {
     return { W: g.W, D: g.D, H: g.H, view: window.__arc.viewTo };
   });
   expect(r).toEqual({ W: 10, D: 1, H: 20, view: 0 });
+});
+
+test("Photo Dash: the photo stays still and fills the stage; each level brings another sample photo, credited", async ({
+  page,
+}) => {
+  await open(page, "photo-dash");
+  await page.evaluate(() => window.__arc.wake());
+  await run(page, 1);
+  const a = await read(page, () => {
+    const g = window.__arc.game;
+    return { photo: g.photoId, credit: document.querySelector(".arc-caption").textContent, cam: { ...window.__arc.cam, target: window.__arc.cam.target.slice() }, W: g.W, aspect: window.__arc.aspect() }; // prettier-ignore
+  });
+  expect(a.photo).toBe("alpine-lake");
+  expect(a.credit).toContain("AI-made");
+  expect(a.W / 2).toBeCloseTo(a.aspect, 1); // cut to the stage's shape
+  // the camera doesn't follow the ball
+  await run(page, 1.5);
+  const cam2 = await read(page, () => window.__arc.cam.target.slice());
+  expect(Math.abs(cam2[0] - a.cam.target[0])).toBeLessThan(1e-3);
+  // A level later (once the next photo has loaded), another photo.
+  await page.waitForFunction(() => window.__arc.game.next?.ready, null, { timeout: 30_000 });
+  await page.evaluate(() => window.__arc.game.nextLevel());
+  await run(page, 0.2);
+  const b = await read(page, () => ({ photo: window.__arc.game.photoId, credit: document.querySelector(".arc-caption").textContent, planks: window.__arc.game.planks.length })); // prettier-ignore
+  expect(b.photo).not.toBe(a.photo);
+  expect(b.credit).toMatch(/^Photo: /);
+  expect(b.planks).toBeGreaterThan(5);
+});
+
+test("Photo Dash: the player picks the ball, and a beach ball floats higher than a steel one", async ({
+  page,
+}) => {
+  await open(page, "photo-dash");
+  await page.evaluate(() => window.__arc.wake());
+  const air = async (id) =>
+    read(
+      page,
+      ([id, STEP]) => {
+        const step = eval(STEP);
+        const a = window.__arc;
+        a.choose(id);
+        const g = a.game;
+        step(g);
+        const m = g.marble;
+        m.ground = true;
+        m.x = -g.W / 2 + 0.12;
+        step(g, ["fire"]);
+        let t = 0;
+        while (!m.ground && t < 3) {
+          step(g);
+          t += 1 / 120;
+        }
+        return { ball: g.ballId, t };
+      },
+      [id, STEP],
+    );
+  const beach = await air("beach");
+  const steel = await air("steel");
+  expect(beach.ball).toBe("beach");
+  expect(steel.ball).toBe("steel");
+  expect(beach.t).toBeGreaterThan(steel.t);
+});
+
+test("Note Rider: a caught note lasts its own length, on the instrument the player picks", async ({
+  page,
+}) => {
+  await open(page, "note-rider");
+  const r = await read(page, async () => {
+    const { INSTRUMENTS } = await import("/src/packs/arcade-song.js");
+    const short = INSTRUMENTS.piano.spec(440, 0.8, 0.25);
+    const long = INSTRUMENTS.piano.spec(440, 0.8, 1.5);
+    const g1 = INSTRUMENTS.guitar.spec(440, 0.8, 0.25);
+    const g2 = INSTRUMENTS.guitar.spec(440, 0.8, 1.5);
+    const a = window.__arc;
+    const cues = [];
+    a.player.on("cue", (s) => cues.push(s[0]));
+    a.wake();
+    a.autopilot = true;
+    a.choose("guitar");
+    for (let i = 0; i < 60 * 8 && !cues.some((c) => c.voice === "nylon"); i++) a.frame(1 / 60), a.pose(1 / 60); // prettier-ignore
+    return { short, long, g1, g2, voices: [...new Set(cues.map((c) => c.voice))], choices: [...document.querySelectorAll(".arc-choice")].map((b) => b.textContent) }; // prettier-ignore
+  });
+  expect(r.short.voice).toBe("grand");
+  expect(r.short.hold).toBeCloseTo(0.25, 5); // the key lifts when the note ends
+  expect(r.long.hold).toBeCloseTo(1.5, 5);
+  expect(r.g1.decay).toBeLessThan(r.g2.decay); // a short pluck fades sooner
+  expect(r.choices).toEqual(expect.arrayContaining(["Piano", "Guitar", "Harp", "Organ"]));
+  expect(r.voices).toContain("nylon");
 });
 
 test.describe("on a phone", () => {

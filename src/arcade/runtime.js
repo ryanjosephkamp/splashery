@@ -106,7 +106,10 @@ export class ArcadeRuntime {
     });
     this.hud.setView(this.viewTo > 0.5);
     this.hud.setPaused(true);
-    this.choice = this.def.choices?.[0]?.id ?? null;
+    // (Arcade r3: def.choiceKey names the option that holds the choice, so
+    // it starts as saved: Photo Dash's ball)
+    const saved = this.def.choiceKey ? this.options[this.def.choiceKey] : null;
+    this.choice = this.def.choices?.some((c) => c.id === saved) ? saved : (this.def.choices?.[0]?.id ?? null); // prettier-ignore
     this.hud.setChoice(this.choice);
     this.input = new Input(this.hud.surface);
     this.look = { yaw: 0, pitch: 0, zoom: 0 };
@@ -222,6 +225,10 @@ export class ArcadeRuntime {
     if (!this.game) return;
     if (this.mode === "over" || this.mode === "attract") this.game.reset();
     this.mode = "play";
+    if (this.def.look && this.viewTo > 0.5 && !this.lookHinted) {
+      this.lookHinted = true;
+      this.lookHintUntil = this.time + 3;
+    }
     this.input.clear();
     this.acc = 0;
   }
@@ -264,6 +271,11 @@ export class ArcadeRuntime {
     this.game?.onView?.(this.viewTo);
     this.hud.setView(this.viewTo > 0.5);
     this.sound({ voice: "switch", f: this.viewTo ? 3000 : 2400, vol: 0.6 });
+    // Arcade r3: the first slide into 3D says how to look around.
+    if (this.def.look && this.viewTo > 0.5 && !this.lookHinted) {
+      this.lookHinted = true;
+      this.lookHintUntil = this.time + 3;
+    }
   }
 
   // A file of the person's own (def.file: Note Rider's song), read by the
@@ -488,6 +500,7 @@ export class ArcadeRuntime {
     const bk = this.def.best || "score";
     if (this.def.best !== false) list.push({ key: "best", label: "Best", value: Math.max(this.best, this.mode === "play" ? s[bk] || 0 : 0) }); // prettier-ignore
     this.hud.setStats(list);
+    this.hud.setCaption(this.game.caption?.() || "");
     this.hud.setPaused(this.mode !== "play");
     const tap = this.input.lastDevice === "touch" ? "Tap" : "Click or press Space";
     if (this.fileMsg) this.hud.setMessage(this.fileMsg);
@@ -500,7 +513,9 @@ export class ArcadeRuntime {
       this.hud.setMessage({ title: st.title || (st.won ? "You won!" : "Game over"), lines: [...(st.lines || []), this.newBest ? "A new best on this device!" : "", `${tap} to play again`].filter(Boolean) }); // prettier-ignore
     } else {
       const st = this.game.status();
-      this.hud.setMessage(st.banner || null);
+      const touch = this.input.lastDevice === "touch";
+      const hint = this.time < (this.lookHintUntil ?? 0) && this.viewTo > 0.5 ? { title: "Look around", lines: [this.def.controls?.lookHint || (touch ? "Two fingers turn the view; pinch to zoom" : "Drag with the right mouse button to turn the view; scroll to zoom")] } : null; // prettier-ignore
+      this.hud.setMessage(st.banner || hint);
     }
   }
 

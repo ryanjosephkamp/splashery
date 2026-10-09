@@ -58,8 +58,8 @@ replace the prefix and lane record with yours).
 - **Ending turns:** finish every working turn with "READY:", "WORKING:" or "BLOCKED:". Splashery has
   no CI to wait for. For a long job, schedule a check-in with send_later instead of going idle.
 - **Clips:** phone size (390x844; device scale 2 is fine). They go on Effect review page 2
-  (https://claude.ai/artifact/BSayVkzQ2FKESesrkrSUMK) as docs/OPERATING.md, "Steps for a lane",
-  says (no republish).
+  (https://claude.ai/artifact/BSayVkzQ2FKESesrkrSUMK) as docs/OPERATING.md, "Steps for a lane", says
+  (no republish).
 - **Marks with pictures:** the owner's marks may carry `images`, screenshots he attached. Read each
   with the Artifact tool's `read` (url the page, path the asset id) before you fix that card.
 - **Before READY:** re-read CLAUDE.md's "Effect quality rules" and check each clip against them at
@@ -74,9 +74,42 @@ Lane details: branch `claude/lane-arcade-r3` (engine changes on `claude/lane-arc
 
 ## State
 
-(October 9, 2026; built by Opus 5.5.) Started.
+(October 9, 2026; built by Opus 5.5.) Draft PR #474 (`claude/lane-arcade-r3`). No engine PR: every
+change is in the game kit (`src/arcade/`) and the Arcade packs.
+
+- Shardball: done, clips posted (`arc3-shardball`, with `arc3-shardball-before`).
+- Strata: done, clips posted (`arc3-strata`, with `arc3-strata-before`).
+- Photo Dash: built (still photo cut to the stage, a new sample photo each level, ball choice, crisp
+  planks, a new coin sound); clip rendering.
+- Stone Belt, Soft Landing, Longtail: sharper builds in progress.
+- Cast a Shadow, Grain Garden: look around and zoom in 3D (the kit's `look`), Grain Garden framed
+  closer with finer grains.
+- Note Rider: notes last their own length; seven instruments to pick in the game.
 
 ## Notes
+
+- The kit's `look` block (src/arcade/runtime.js header): in 3D, two fingers (or the right mouse
+  button) turn the view up to `yaw` and `pitch` radians each way, a pinch or the wheel zooms within
+  `zoom`, Q and E turn it when `keys` is set, and `api.lookBy(dx, dy)` lets a game read a one-finger
+  drag as looking (Shardball: a drag that starts on the dome, not on the ground). It eases back to
+  straight in 2D. The first slide into 3D (or the first game that starts in 3D) shows a "Look
+  around" hint for three seconds.
+- Other kit additions: `tapFire: false` (a tap in play isn't a fire press; Strata reads its taps),
+  `pad`, `padLabels` and `controls` may be functions of the options, `choiceKey` (the option that
+  holds a game's choice, so it starts as saved), `game.caption()` (small print on the stage: Photo
+  Dash's photo credit), two action buttons beside three arrows stand one over the other, and Z turns
+  too.
+- Shardball: the catch and the ground apply to Shardball only (`this.r3`, false in Page Breaker,
+  which extends the class). The dome's ground is at the dish's foot (y −0.82); the ball that touches
+  it lies there 0.7 s, then a ball is lost. A caught ball goes on its own after 3 s.
+- Strata: the classic slot is 10 by 20 stones of 0.1 units, seen through a 16° view from far off
+  (nearly flat), between solid stone columns. A tap within a stone and a half of the falling stone
+  turns it; further off, in the slot, it moves it one step toward the tap.
+- Photo Dash: the photo is cut to the stage's shape and rebuilt when the stage changes shape by more
+  than 6% (entering play mode, turning a phone). Its splats: 76% of the tier's slots for the part
+  that shows. The next sample loads during each level and swaps in at the level's end.
+- Tools: `tools/arc-clip.mjs` gained `look:dx;dy`, `pad:<action>` and `choose:<id>` and taps a
+  game's `tapTarget()` with `head:`.
 
 ## Known issues
 

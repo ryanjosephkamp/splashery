@@ -199,6 +199,15 @@ for (const s of SCRIPT) {
       [dx, dy],
     );
     await fingerUp();
+  } else if (cmd === "choose") {
+    // Arcade r3: "choose:id" taps that choice button (Photo Dash's ball).
+    await run((id) => {
+      const b = document.querySelector(`.arc-choice[data-id="${id}"]`);
+      const r = b?.getBoundingClientRect();
+      if (r) window.__arcFinger((r.left + r.width / 2) / innerWidth, (r.top + r.height / 2) / innerHeight); // prettier-ignore
+      window.__splashery.player.arcade.choose(id);
+    }, arg);
+    await fingerUp();
   } else if (cmd === "pad") {
     // Arcade r3: "pad:alt" presses that button of the on-screen pad, as a
     // thumb does (a key press would hide the pad: keys mean a keyboard).

@@ -80,6 +80,12 @@ body.app .arc-root[data-playmode="false"] .arc-choices { top: 148px; }
 .arc-choice i { width: 16px; height: 16px; border-radius: 50%; display: inline-block; border: 1px solid rgba(255,255,255,0.5); }
 .arc-choice[aria-pressed="true"] { background: rgba(70, 110, 220, 0.9); border-color: #cfe0ff; }
 .arc-hint { display: none; }
+.arc-caption { position: absolute; left: 10px; bottom: 10px; max-width: min(70%, 420px); padding: 3px 9px; border-radius: 8px; font-weight: 500; font-size: 11px;
+  line-height: 1.3; background: rgba(12, 14, 20, 0.58); pointer-events: none; }
+.arc-caption:empty { display: none; }
+/* (Arcade r3: on a phone the chips take two rows; the choices go under them) */
+@media (max-width: 600px) { .arc-root[data-playmode="true"] .arc-choices { top: 100px; } }
+.arc-root[data-touch="true"] .arc-caption { bottom: 96px; }
 .arc-root[data-touch="false"] .arc-pad { display: none; }
 .arc-root[data-playmode="false"] .arc-exit { display: none; }
 body.app .arc-root[data-playmode="false"] .arc-top { top: 64px; }
@@ -135,7 +141,8 @@ export class Hud {
       <div class="arc-help" hidden></div>
       <div class="arc-choices" hidden></div>
       <div class="arc-pad"></div>
-      <div class="arc-hint"></div>`;
+      <div class="arc-hint"></div>
+      <div class="arc-caption"></div>`;
     canvas.after(el);
     this.el = el;
     this.surface = el.querySelector(".arc-surface");
@@ -145,6 +152,7 @@ export class Hud {
     this.viewBtn = el.querySelector(".arc-view");
     this.pauseBtn = el.querySelector(".arc-pause");
     this.hintEl = el.querySelector(".arc-hint");
+    this.captionEl = el.querySelector(".arc-caption");
     this.viewBtn.hidden = !game.views;
     const click = (sel, fn) =>
       el.querySelector(sel).addEventListener("click", (e) => {
@@ -356,6 +364,11 @@ export class Hud {
       const v = s.icon && Number.isInteger(s.value) && s.value <= 8 ? s.icon.repeat(Math.max(0, s.value)) || "–" : s.value; // prettier-ignore
       chip.innerHTML = `${esc(s.label)}<b>${esc(String(v))}</b>`;
     }
+  }
+
+  // Arcade r3: a line of small print on the stage (a photo's credit).
+  setCaption(text) {
+    if (this.captionEl.textContent !== text) this.captionEl.textContent = text;
   }
 
   // msg: null, or { title, lines: [] }

@@ -239,6 +239,7 @@ export const RECIPES = {
           "Drag on the ground to steer the paddle; tap to launch. In the dome, drag the dome itself to turn it, and pinch to zoom. Or use the pad.",
         pad: "Stick or D-pad to steer; A launches; LB and RB turn the dome.",
         short: "← → steer · Space launch · Q E turn · V for 2D",
+        lookHint: "Drag the dome to turn it; pinch or scroll to zoom",
       },
       // Arcade r3: turn and zoom a little in the dome (the owner's walkthrough)
       look: { yaw: 0.75, pitch: 0.3, zoom: [0.75, 1.3], keys: true },
@@ -342,6 +343,8 @@ export const RECIPES = {
         keys: "Q and E turn the box in 3D.",
         short: "Hold to pour · V tips it into 3D",
       },
+      // Arcade r3: look around the box and zoom a little in 3D (one finger pours)
+      look: { yaw: 0.7, pitch: 0.45, zoom: [0.6, 1.3] },
       slots: { high: 130000, mid: 90000, low: 28000 }, // a grain is 2 × 2 small splats
       create: async (api) => (await import("./arcade-grains.js")).createGrains(api),
     },
@@ -623,6 +626,7 @@ export const RECIPES = {
       title: "Soft Landing",
       background: "#05060a",
       goal: "Land on real ground: slow, upright and on a level spot. The green lights mark flat ones.",
+      slots: { high: 90000, mid: 75000, low: 40000 }, // (r3: finer ground and its clean cut)
       stats: [
         { key: "score", label: "Score" },
         { key: "lives", label: "Landers", icon: "▲" },
@@ -707,6 +711,8 @@ export const RECIPES = {
         pad: "Stick to turn; LB and RB roll.",
         short: "Drag or arrows turn it · V shows the block itself",
       },
+      // Arcade r3: see the block and its shadow from other angles, and zoom
+      look: { yaw: 0.8, pitch: 0.45, zoom: [0.6, 1.3] },
       slots: { high: 120000, mid: 90000, low: 50000 }, // crisp pieces
       create: async (api) => (await import("./arcade-shadows.js")).createShadows(api),
     },
@@ -716,7 +722,22 @@ export const RECIPES = {
     density: 0.05,
     kernel: "sharp", // the sharper splat edge (labs)
     render: SHARP,
-    options: [VIEW, { key: "source", label: "Source", type: "text", default: "", hidden: true }],
+    options: [
+      VIEW,
+      {
+        key: "ball",
+        label: "Ball",
+        type: "select",
+        default: "marble",
+        choices: [
+          { id: "marble", label: "Glass marble" },
+          { id: "steel", label: "Steel ball" },
+          { id: "beach", label: "Beach ball" },
+          { id: "tennis", label: "Tennis ball" },
+        ],
+      },
+      { key: "source", label: "Source", type: "text", default: "", hidden: true },
+    ],
     controls: PLAY,
     action: { key: "go", label: "Play or pause" },
     drive() {}, // the game moves on its own layer; the toy's still picture stays still
@@ -738,24 +759,50 @@ export const RECIPES = {
       },
       shown: () => "",
     },
+    // Arcade r3: the samples (a new one at random after each level), each
+    // credited on the stage too while it shows.
     credits: [
       {
         label: "Photo Dash",
-        title: "Tulip field (the sample photo)",
+        title: "Tulip field (a sample photo)",
         source: "https://www.flickr.com/photos/14674348@N04/13825345834",
         author: "DennisM2",
         license: "CC0 1.0",
         licenseUrl: "https://creativecommons.org/publicdomain/zero/1.0/",
       },
+      {
+        label: "Photo Dash",
+        title: "Wildflowers in foreground (a sample photo)",
+        source: "https://commons.wikimedia.org/wiki/File:Wildflowers_in_foreground.JPG",
+        author: "PookieFugglestein",
+        license: "CC0 1.0",
+        licenseUrl: "https://creativecommons.org/publicdomain/zero/1.0/",
+      },
+      {
+        label: "Photo Dash",
+        title:
+          "Alpine lake, Castle on a lake, Canyon at sunset, Rice terraces, Paper valley, Felt farm, Fishing cove, Desert oasis, Train on a viaduct and Floating islands: AI-made pictures (the Studio's samples)",
+        source: "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+        author: "Ryan, the owner of Splashery (made with an AI image tool)",
+        license: "AI-made by the owner",
+      },
     ],
     arcade: {
       title: "Photo Dash",
-      goal: "Roll the marble along your photo's skyline. Jump the gaps; catch the sparks.",
+      goal: "Roll the ball along the photo's skyline. Jump the gaps; catch the sparks. Each level brings a new photo.",
       stats: [
         { key: "score", label: "Score" },
-        { key: "lives", label: "Marbles", icon: "●" },
-        { key: "lap", label: "Lap" },
+        { key: "lives", label: "Balls", icon: "●" },
+        { key: "lap", label: "Level" },
       ],
+      // Arcade r3: the player picks the ball
+      choices: [
+        { id: "marble", label: "Marble", color: "#3a73e6" },
+        { id: "steel", label: "Steel", color: "#b9bec6" },
+        { id: "beach", label: "Beach ball", color: "#e8453c" },
+        { id: "tennis", label: "Tennis", color: "#cfe23a" },
+      ],
+      choiceKey: "ball",
       best: "score",
       views: true,
       pad: ["fire"],
@@ -767,7 +814,7 @@ export const RECIPES = {
         pad: "A jumps.",
         short: "Space or tap to jump · V raises the photo into 3D",
       },
-      slots: { high: 140000, mid: 100000, low: 50000 }, // a finer photo
+      slots: { high: 160000, mid: 120000, low: 50000 }, // a finer photo (r3: the part that shows)
       // a dark wall behind the photo, so its ends (the 3D relief's edge)
       // read as a print on a wall, not a cut into a blank page
       background: "#1f232b",
@@ -794,6 +841,21 @@ export const RECIPES = {
         ],
       },
       VIEW,
+      {
+        key: "instrument",
+        label: "Instrument",
+        type: "select",
+        default: "piano",
+        choices: [
+          { id: "piano", label: "Piano" },
+          { id: "guitar", label: "Guitar" },
+          { id: "steel", label: "Steel guitar" },
+          { id: "harp", label: "Harp" },
+          { id: "organ", label: "Organ" },
+          { id: "synth", label: "Synth" },
+          { id: "vibes", label: "Vibes" },
+        ],
+      },
     ],
     controls: PLAY,
     action: { key: "go", label: "Play or pause" },
@@ -833,6 +895,18 @@ export const RECIPES = {
         title: "Open a MIDI file of your own (it stays on this device)",
       },
       goal: "Steer into each note's lane as it arrives: every note you catch plays. Catch them all to play the tune.",
+      // Arcade r3: pick the instrument the caught notes play on, as rhythm
+      // games do (a recording plays its own slices instead)
+      choices: [
+        { id: "piano", label: "Piano", color: "#f4f1e8" },
+        { id: "guitar", label: "Guitar", color: "#c98a4b" },
+        { id: "steel", label: "Steel guitar", color: "#d9dde3" },
+        { id: "harp", label: "Harp", color: "#e9c46a" },
+        { id: "organ", label: "Organ", color: "#9b5de5" },
+        { id: "synth", label: "Synth", color: "#3a86ff" },
+        { id: "vibes", label: "Vibes", color: "#7bdff2" },
+      ],
+      choiceKey: "instrument",
       stats: [
         { key: "score", label: "Score" },
         { key: "caught", label: "Notes" },
