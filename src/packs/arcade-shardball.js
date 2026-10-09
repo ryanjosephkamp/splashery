@@ -679,6 +679,12 @@ export class Shardball {
     br.alive = false;
     this.score += KINDS[br.kind].points;
     const s = br.sprite;
+    if (!s) {
+      // (a brick the layer had no room for: it breaks without pieces)
+      this.api.sound(this.breakSound(br));
+      if (!this.bricks.some((x) => x.alive)) this.nextLevel();
+      return;
+    }
     const dome = this.style === "dome" && this.view > 0.5;
     const vel = dome ? [0, 0, 0] : [this.ball.v[0] * 0.15, 0.4, 0.6 * this.view];
     // world-space hit point: in the flat style's tipped view the board is turned
@@ -876,6 +882,8 @@ export class Shardball {
       this.shadow.pos = [b.p[0], this.r3 ? GROUND_Y + 0.004 : DOME_PADDLE_Y + 0.02, b.p[2]];
       this.shadow.quat = [0, 0, 0, 1];
       this.shadow.fade = this.mode3d && !b.stuck ? clamp(view * 2 - 1, 0, 1) : 0;
+      // (r3: only on the ground; past its edge it would hang in the air)
+      if (this.r3 && Math.hypot(b.p[0], b.p[2]) > GROUND_R - BALL_R) this.shadow.fade = 0;
       if (this.floor) this.floor.fade = clamp(view * 1.5 - 0.5, 0, 1);
     }
     b.sprite.fade = this.over ? 0 : 1;

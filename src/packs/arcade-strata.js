@@ -314,6 +314,12 @@ class Strata {
       this.api.sound({ voice: "click", f: 1500, vol: 0.1 });
   }
 
+  // Where the falling stone is (for the clips' taps: tools/arc-clip.mjs).
+  tapTarget() {
+    const p = this.piece;
+    return (p?.sprites?.[1] || p?.sprites?.[0])?.pos || null;
+  }
+
   hardDrop() {
     const p = this.piece;
     let n = 0;

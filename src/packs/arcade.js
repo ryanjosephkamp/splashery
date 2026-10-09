@@ -242,7 +242,7 @@ export const RECIPES = {
       },
       // Arcade r3: turn and zoom a little in the dome (the owner's walkthrough)
       look: { yaw: 0.75, pitch: 0.3, zoom: [0.75, 1.3], keys: true },
-      slots: { high: 100000, mid: 80000, low: 50000 }, // crisp bricks
+      slots: { high: 100000, mid: 80000, low: 70000 }, // crisp bricks (and, since r3, the dome's ground)
       create: async (api) => (await import("./arcade-shardball.js")).createShardball(api),
     },
   },
