@@ -1165,9 +1165,12 @@ class App {
     }
     st.busy = true;
     player.pickDirty = true;
-    const hit = await player.pickAt(x, y);
+    let hit = await player.pickAt(x, y);
     st.busy = false;
     if (this.toolState !== st) return;
+    // Lane Hands-on H3: with Hands-on on, a press just off a thin toy's
+    // splats still takes it (null when Hands-on is off).
+    if (!hit && st.tool === "grab") hit = player.handsOn.nearPress(x, y);
     if (!hit) {
       this.toOrbit();
       return;
