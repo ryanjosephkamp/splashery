@@ -35,6 +35,7 @@ const S = {
   video: null, // a muted copy of a short clip's video (its color)
   frame: -1,
   splatsOff: null, // the entity whose splats are switched off
+  wake: false, // its splats come back at the next update (wake)
   ticks: 0, // the stage's updates (counted once the relief has been asked for)
   droveTick: null, // the update of the last sharpDrive
 };
@@ -168,11 +169,9 @@ function splatsNeeded(pl) {
 function splats(on) {
   const ent = player()?.stage?.toy?.entity;
   const pl = player();
-  if (S.splatsOff && (on || S.splatsOff !== ent)) {
-    if (S.splatsOff.gsplat) S.splatsOff.gsplat.enabled = true;
-    S.splatsOff = null;
-    if (pl) pl.pickDirty = true; // (the pick buffer is drawn again, with the splats)
-  }
+  // The splats come back at the stage's next update (wake), not here: see there.
+  if (S.splatsOff && S.splatsOff !== ent) S.splatsOff = null;
+  S.wake = on && !!S.splatsOff;
   if (!on && ent?.gsplat && S.splatsOff !== ent) {
     ent.gsplat.enabled = false;
     S.splatsOff = ent;
@@ -188,6 +187,31 @@ function splats(on) {
     data.tapBox = tapBox();
     data.psvTap = true;
   }
+}
+
+// The splats back, at the start of a frame: only the toy's own entity, and never during a build (it
+// waits, and a rebuild lets it go). An entity turned back on just before a rebuild destroys it (as
+// when Splats is picked and the options change at once, or a frame lands between the build and the
+// stage's swap) keeps a frame or two in the splats' work-buffer pass after its paint texture is gone;
+// that pass then finds no paint texture, and PlayCanvas makes its stand-in texture in the middle of
+// the draw, which leaves an RGBA8 texture where the pass reads its unsigned-integer sub-draw data
+// ("glDrawElementsInstanced: Mismatch between texture format and sampler type").
+function wake() {
+  const pl = player();
+  const ent = pl?.stage?.toy?.entity;
+  if (!S.splatsOff || S.splatsOff !== ent) {
+    S.splatsOff = null;
+    S.wake = false;
+    S.mesh?.show(false);
+    return;
+  }
+  if (pl.loading) return;
+  S.wake = false;
+  if (ent.gsplat) ent.gsplat.enabled = true;
+  S.splatsOff = null;
+  S.mesh?.show(false);
+  pl.pickDirty = true; // (the pick buffer is drawn again, with the splats)
+  pl.stage.requestRender();
 }
 
 function tapBox() {
@@ -215,9 +239,10 @@ function status(on) {
 }
 
 function hide() {
-  if (S.mesh) S.mesh.show(false);
   status(false);
   splats(true);
+  // (the relief stays until the splats are back, at the next update, so no frame shows neither)
+  if (S.mesh && !S.wake) S.mesh.show(false);
   if (S.video && !S.video.paused) S.video.pause();
 }
 
@@ -244,6 +269,7 @@ export function sync() {
     S.watching = stage;
     stage.onUpdate(() => {
       S.ticks++;
+      if (S.wake) wake();
       if (S.stage === stage) follow();
     });
   }

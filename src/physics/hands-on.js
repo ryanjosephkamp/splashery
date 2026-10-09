@@ -58,6 +58,9 @@ export function ownHands(recipe) {
 export function canPlay(info) {
   const r = info?.recipe;
   if (!info || r?.handsOn === false) return false;
+  // (A picture toy that asks for joints plays them: a picture frame swings
+  // on its nail; lane Hands-on H3.)
+  if (r?.hands?.joints) return true;
   if (r?.pictures || r?.turntable === false) return false;
   return true;
 }
@@ -398,6 +401,56 @@ export class HandsOn {
     if (this.extras?.pressAt(hit, x, y)) return true; // lane Hands engine A: a toy that flees the finger
     this.press = { hit: hit.slice(), x, y, t: this.time };
     return true;
+  }
+
+  // Lane Hands-on H3: a forgiving press. Where the pick buffer finds no
+  // splat under the finger (between a desk lamp's arm and its beam, beside
+  // a thin pen), the press still takes the toy when the finger's ray
+  // crosses its body: in pieces mode a piece's `pick` ellipsoid (the
+  // nearest along the ray), else the toy's box (trimmed to 0.85 of its
+  // half sizes, as it stands now). A world point, or null.
+  nearPress(x, y) {
+    if (!this.canGrab() || !this.info) return null;
+    const hands = this.info.recipe?.hands;
+    const pieces = !!(hands?.pieces || hands?.joints);
+    if (pieces) {
+      this.ensure();
+      if (this.mode !== "pieces") return null;
+      const ray = this.ray(x, y);
+      let best = Infinity;
+      for (const pc of this.pieces) {
+        const b = pc.body;
+        const r = pc.def.pick || [b.bound, b.bound, b.bound];
+        const t = rayEllipsoid(b, r, ray);
+        if (t < best) best = t;
+      }
+      if (!Number.isFinite(best)) return null;
+      return this.player.fromRecipe(v3.add(ray.origin, v3.scale(ray.dir, best)));
+    }
+    if (!this.info.center || !this.info.half) return null;
+    const ray = this.player.stage.ray(x, y);
+    const b = this.world && this.mode === "toy" ? this.body : null;
+    const dq = b ? quat.mul(b.q, quat.conj(b.home.q)) : [0, 0, 0, 1];
+    const toHome = (p) => (b ? v3.add(b.home.pos, quat.rotate(quat.conj(dq), v3.sub(p, b.pos))) : p); // prettier-ignore
+    const o = toHome(ray.origin);
+    const d = quat.rotate(quat.conj(dq), ray.dir);
+    const c = this.info.center;
+    const half = this.info.half.map((v) => 0.85 * v);
+    let t0 = 0;
+    let t1 = Infinity;
+    for (let i = 0; i < 3; i++) {
+      if (Math.abs(d[i]) < 1e-12) {
+        if (Math.abs(o[i] - c[i]) > half[i]) return null;
+        continue;
+      }
+      const a = (c[i] - half[i] - o[i]) / d[i];
+      const e = (c[i] + half[i] - o[i]) / d[i];
+      t0 = Math.max(t0, Math.min(a, e));
+      t1 = Math.min(t1, Math.max(a, e));
+    }
+    if (t0 > t1) return null;
+    const p = v3.add(o, v3.scale(d, t0));
+    return b ? v3.add(b.pos, quat.rotate(dq, v3.sub(p, b.home.pos))) : p;
   }
 
   // The finger moved (screen x, y). The first move past a few pixels picks
@@ -1019,7 +1072,9 @@ export class HandsOn {
       const out = [];
       for (const pc of this.pieces) {
         const b = pc.body;
-        if (b.pinned && !this.homing) continue;
+        // (A reseated piece is pinned in its seat and still shown there: lane
+        // Hands-on H3.)
+        if (b.pinned && !b.seated && !this.homing) continue;
         // (From where its splats were built; lane Hands-on H2's `shown`. A
         // joint's own piece has no `built`: its home.)
         const bt = pc.built || pc.home;

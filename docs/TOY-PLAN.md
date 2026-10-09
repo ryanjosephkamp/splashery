@@ -42,37 +42,39 @@ Proposals below are suggestions; the owner may change them.
   Mitochondrion, Paramecium, Amoeba, DNA to protein, Cell division, Apoptosis, Phagocytosis,
   Electron orbital, Atom, Molecule, Protein, Crystal lattice, Unit cells, Orbital atlas, Molecule
   viewer, Periodic table, Real elements, Diamond, Ruby, Emerald, Amethyst geode, Sapphire, Quartz
-  cluster, Opal, Brain, Eye, Lungs, Tooth, Kidney, Anatomy atlas, Oak tree, Pine tree, Palm tree,
-  Cherry blossom, Maple tree, Bonsai, Weeping willow, Sunflower, Rose, Tulips, Daisies, Lotus,
+  cluster, Opal, Pearl, Brain, Eye, Lungs, Tooth, Kidney, Anatomy atlas, Oak tree, Pine tree, Palm
+  tree, Cherry blossom, Maple tree, Bonsai, Weeping willow, Sunflower, Rose, Tulips, Daisies, Lotus,
   Toadstool, Fern, Saguaro cactus, Coral reef, Pinecone, Acorns, Succulent, Bamboo, Pebbles, Kelp,
   Storm cloud, Lava lamp, Snow globe, Ice swan, Tornado, Rainbow, Iceberg, Waterfall, Ocean wave,
   Ice cream, Watermelon, Jelly, Pancakes, Cupcake, Lollipop, Candy cane, Macarons, Donut, Gummy
   bear, Pretzel, Croissant, Pizza, Burger, Sushi, Taco, Coffee, Apple, Bananas, Orange, Kiwi,
-  Pineapple, Cherries, Grapes, Avocado, Building bricks, Rubber duck, Newton's cradle, Yo-yo, Puzzle
-  cube, Spring toy, Kite, Chess set, Lorenz attractor, Möbius strip, Klein bottle, Menger sponge,
-  Hypercube, Torus knot, Gyroid, Mandelbulb, Sierpinski tetrahedron, Platonic solids, Seashell
-  spiral, Graph plotter, Surface plotter, Circle and waves, Fourier circles, Pythagoras proof,
-  Rössler attractor, Thomas attractor, Aizawa attractor, 5-cell, 16-cell, 24-cell, Duoprism, Splat
-  equation, Storybook, Music box, Fountain pen, Water bottle, Soda can, Running shoe, Hoodie,
+  Pineapple, Cherries, Grapes, Avocado, Building bricks, Rubber duck, Spinning top, Dice, Newton's
+  cradle, Teddy bear, Yo-yo, Puzzle cube, Spring toy, Kite, Paper plane, Origami crane, Balloon dog,
+  Soap bubbles, Wind-up robot, Chess set, Lorenz attractor, Möbius strip, Klein bottle, Menger
+  sponge, Hypercube, Torus knot, Gyroid, Mandelbulb, Sierpinski tetrahedron, Platonic solids,
+  Seashell spiral, Graph plotter, Surface plotter, Circle and waves, Fourier circles, Pythagoras
+  proof, Rössler attractor, Thomas attractor, Aizawa attractor, 5-cell, 16-cell, 24-cell, Duoprism,
+  Splat equation, Storybook, Music box, Fountain pen, Water bottle, Soda can, Running shoe, Hoodie,
   Sunglasses, Baseball cap, Sword in the stone, Heraldic shield, Bow and target, Crown, Wizard's
-  orb, Crystal ball, Jellyfish, School of fish, Pufferfish, Nautilus, Snail, Octopus, Sea urchin,
-  Frog, Snowman, Fireworks, Decorated tree, Paper lantern, Diya, Acoustic guitar, Snare drum,
-  Xylophone, Toy piano, Grand piano, Upright piano, Harpsichord, Electronic keyboard, Hot-air
-  balloon, Sports car, Bus, Jet airliner, Sailboat, Submarine, Bicycle, Eiffel Tower, Washington
-  Monument, Pyramids of Giza, Twisting supertall, Statue of Liberty, White House, Leaning Tower of
-  Pisa, Colosseum, Parthenon, Stonehenge, Big Ben, Taj Mahal, Castle, Pagoda, Windmill, Perceptron,
-  Multilayer perceptron, Neural network, Convolutional network, Recurrent network, Transformer,
-  Looped transformer, Diffusion model, Gradient descent, Gaussian splatting, Word vectors, Sorting
-  machine, Half adder, Turing machine, Difference engine, Enigma machine, Bombe, Picture lab, Your
-  book, Photo album, Picture frame, Song landscape, Chladni plate, Room echo meter, Splat mirror,
-  Model to splats, QR code, Photo to 3D, Moving photo to 3D, Video to 3D, Sound lab, Sound recorder,
-  Splat toolkit, Point clouds, Volume viewer, Splat field, Light lab, Thermal ellipsoids,
-  Super-resolution microscope, Galaxy in a box, Cryo-EM map, Contour lab, Terrain in a box, Ripple
-  tank, Light bench, Fluid lab, Grand Canyon, Mount St. Helens, The sea floor, Tides at Bar Harbor,
-  Hurricane, Relief map, Living city, Stork migration, Earthquakes, Airport X-ray scanner, How CT
-  works, Walnut CT scan, MRI of a fruit, Electron microscope, Thermal camera, Screen, Shardball,
-  Longtail, Grain Garden, Page Breaker, Strata, Volley Table, Stone Belt, Soft Landing, Night Owl
-  Pinball, Cast a Shadow, Photo Dash, Note Rider, Data in 3D.
+  orb, Crystal ball, Jellyfish, School of fish, Butterfly, Pufferfish, Nautilus, Ladybug, Snail,
+  Octopus, Starfish, Sea urchin, Frog, Penguin, Owl, Snowman, Fireworks, Decorated tree, Paper
+  lantern, Diya, Acoustic guitar, Snare drum, Xylophone, Toy piano, Grand piano, Upright piano,
+  Harpsichord, Electronic keyboard, Hot-air balloon, Sports car, Bus, Jet airliner, Sailboat,
+  Submarine, Bicycle, Eiffel Tower, Washington Monument, Pyramids of Giza, Twisting supertall,
+  Statue of Liberty, White House, Leaning Tower of Pisa, Colosseum, Parthenon, Stonehenge, Big Ben,
+  Taj Mahal, Castle, Pagoda, Windmill, Perceptron, Multilayer perceptron, Neural network,
+  Convolutional network, Recurrent network, Transformer, Looped transformer, Diffusion model,
+  Gradient descent, Gaussian splatting, Word vectors, Sorting machine, Half adder, Turing machine,
+  Difference engine, Enigma machine, Bombe, Picture lab, Your book, Photo album, Picture frame, Song
+  landscape, Chladni plate, Room echo meter, Splat mirror, Model to splats, QR code, Photo to 3D,
+  Moving photo to 3D, Video to 3D, Sound lab, Sound recorder, Splat toolkit, Point clouds, Volume
+  viewer, Splat field, Light lab, Thermal ellipsoids, Super-resolution microscope, Galaxy in a box,
+  Cryo-EM map, Contour lab, Terrain in a box, Ripple tank, Light bench, Fluid lab, Grand Canyon,
+  Mount St. Helens, The sea floor, Tides at Bar Harbor, Hurricane, Relief map, Living city, Stork
+  migration, Earthquakes, Airport X-ray scanner, How CT works, Walnut CT scan, MRI of a fruit,
+  Electron microscope, Thermal camera, Screen, Shardball, Longtail, Grain Garden, Page Breaker,
+  Strata, Volley Table, Stone Belt, Soft Landing, Night Owl Pinball, Cast a Shadow, Photo Dash, Note
+  Rider, Data in 3D.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
@@ -521,7 +523,8 @@ Proposals below are suggestions; the owner may change them.
   - Effect: Keepy-uppy: three small kicks with spin.
   - Improved: E6a: keepy-uppy: three small kicks from an unseen foot, each with its own spin, the
     last one higher; then it drops and bounces lower and lower (it keeps about 0.78 of its speed)
-    and settles (3.6 s).
+    and settles (3.6 s). Hands-on H1: in Hands-on, kick it with a flick: it bounces, rolls and slows
+    on the ground (0.43 kg, FIFA size 5). It lands with its own sound.
   - Sound: Firm thump.
 - **American football** (`american-football`). Now: tap: Throw a spiral. Plan: keep.
   - Owner: The owner (2026-09-24): some sports balls look grainy rather than realistic; the tennis
@@ -532,7 +535,9 @@ Proposals below are suggestions; the owner may change them.
   - Improved: E1b: a spiral pass: it flies up nose first, spinning fast about its long axis, the
     nose tipping over at the top, and lands with a wobble (2.4 s). Math: the spiral is six whole
     turns, so it lands laces up with no snap back, and the ball is built twice, half a turn apart,
-    so its laces never show through while it is upside down.
+    so its laces never show through while it is upside down. Hands-on H1: in Hands-on, throw it from
+    one end: it spirals about its long axis in the air and takes odd bounces on its points. It lands
+    with its own sound.
   - Sound: Leathery whoosh.
 - **Tennis ball** (`tennis-ball`). Now: tap: Bounce it hard. Plan: keep.
   - Owner: The owner (2026-09-24): some sports balls look grainy rather than realistic; the tennis
@@ -542,7 +547,9 @@ Proposals below are suggestions; the owner may change them.
     also softens the edge), and a clean white seam.
   - Effect: Fast high bounce with the fuzz fluffing out.
   - Improved: E6a: slammed onto the floor, it squashes hard and shoots up high with topspin, the
-    fuzz fluffing out at each hit; each bounce is lower (0.75 of its speed) (1.7 s).
+    fuzz fluffing out at each hit; each bounce is lower (0.75 of its speed) (1.7 s). Hands-on H1: in
+    Hands-on, throw it: a fast, high bounce (about 0.75 of its speed kept, the ITF drop test). It
+    lands with its own sound.
   - Sound: A real tennis ball slammed down, then a real tennis-ball bounce on each bounce, softer
     each time.
 - **Baseball** (`baseball`). Now: tap: Pitch a curveball. Plan: keep.
@@ -550,14 +557,16 @@ Proposals below are suggestions; the owner may change them.
   - Effect: Curveball: it spins hard and swerves.
   - Improved: E6a: a curveball: wound up, then pitched away spinning hard, it breaks down and to the
     side late; the crack of the bat sends it back in a looping arc to its spot, where it takes a
-    dead little bounce. Its highlight stays put while it spins (2.3 s).
+    dead little bounce. Its highlight stays put while it spins (2.3 s). Hands-on H1: in Hands-on,
+    throw it with a sideways flick: the spin curves its path. It lands with its own sound.
   - Sound: The same pitch whoosh, then the crack of a real wooden bat.
 - **Softball** (`softball`). Now: tap: Pitch underhand. Plan: keep.
   - Fixed: C1: smooth yellow leather with a soft sheen and crisp raised red stitches.
   - Effect: Underhand arc and a softer thud.
   - Improved: E6a: an underhand pitch: a swing back and through, then a high, slow arc away with a
     little backspin; it lands with a soft thud and hardly bounces; a softer toss brings it back (3.0
-    s).
+    s). Hands-on H1: in Hands-on, throw it: a heavier (188 g), softer bounce than the baseball. It
+    lands with its own sound.
   - Sound: The same whoosh, then the real dull thump of a heavy ball landing (away and back home).
     Its motion has no bat (an underhand pitch that lands), so the landing is what sounded like a
     hit; a bat crack would need a bat hit in the motion.
@@ -572,19 +581,23 @@ Proposals below are suggestions; the owner may change them.
 - **Golf ball** (`golf-ball`). Now: tap: Chip it. Plan: keep.
   - Effect: Tiny chip hop and a spin-back.
   - Improved: E6a: a chip: it pops up with heavy backspin, lands, checks with a tiny hop, and the
-    backspin grips and pulls it back to its spot (1.7 s).
+    backspin grips and pulls it back to its spot (1.7 s). Hands-on H1: in Hands-on, chip it from low
+    down: it hops, and the backspin pulls it back. It lands with its own sound.
   - Sound: Click of a club.
 - **Rugby ball** (`rugby-ball`). Now: tap: Punt. Plan: keep.
   - Fixed: C1: an even pebbled grip; clean seams.
   - Effect: Tumbles end over end with an odd bounce.
   - Improved: E1b: a punt: it tumbles end over end up and down, lands on a point and takes an
-    awkward bounce before settling (2.6 s).
+    awkward bounce before settling (2.6 s). Hands-on H1: in Hands-on, punt it from low down: it
+    tumbles end over end and bounces unpredictably. It lands with its own sound.
   - Sound: Dull thud.
 - **Volleyball** (`volleyball`). Now: tap: Set and spike. Plan: keep.
   - Fixed: C1: smooth leather panels with a sheen and clean fine seams.
   - Effect: A set then a spike straight down.
   - Improved: E6a: a soft set straight up with no spin, then a spike drives it down hard with
-    topspin; it slams into the floor, kicks up high and bounces out (2.5 s).
+    topspin; it slams into the floor, kicks up high and bounces out (2.5 s). Hands-on H1: in
+    Hands-on, toss it up, then catch it in the air and swipe down to spike it. It lands with its own
+    sound.
   - Sound: Slap.
 - **Water polo ball** (`water-polo-ball`). Now: tap: Toss it in. Plan: keep.
   - Effect: Bobs on an invisible water line with ripples.
@@ -596,20 +609,24 @@ Proposals below are suggestions; the owner may change them.
 - **Ping-pong ball** (`ping-pong-ball`). Now: tap: Drop it. Plan: keep.
   - Effect: Rapid tiny bounces getting faster.
   - Improved: E6a: flicked up, it bounces on and on (it keeps nearly 0.9 of its speed), each bounce
-    lower and quicker, till it buzzes to a stop; a tik for every bounce (1.9 s).
+    lower and quicker, till it buzzes to a stop; a tik for every bounce (1.9 s). Hands-on H1: in
+    Hands-on, lift it and let go: light, rapid bounces (about 0.88 of its speed kept) that speed up
+    to a buzz. It lands with its own sound.
   - Sound: Tik-tik-tik.
 - **Cricket ball** (`cricket-ball`). Now: tap: Seam-up flick. Plan: keep.
   - Fixed: C1: polished red leather with a bright highlight and a raised, lit seam.
   - Effect: Seam-up spin and a skid.
   - Improved: E6a: a seam-up flick: the seam stands upright while the ball spins backwards about it,
     then it comes down level and skids on with its backspin till the spin grips and rolls it home.
-    Its shine stays put while it spins (1.9 s).
+    Its shine stays put while it spins (1.9 s). Hands-on H1: in Hands-on, bowl it down at the
+    ground: it skids off the seam and rolls. It lands with its own sound.
   - Sound: Crisp leather knock.
 - **Bowling ball** (`bowling-ball`). Now: tap: Bowl it. Plan: keep.
   - Effect: Heavy roll with a hook.
   - Improved: E6a: a heavy roll with a hook: it drops onto the lane with a thud, rolls away straight
     and hooks across, the finger holes turning over; the pins crash far off and it rolls back home
-    (3.8 s).
+    (3.8 s). Hands-on H1: in Hands-on, roll it: heavy (6.8 kg) and slow, hooking as it goes. It
+    lands with its own sound.
   - Sound: A real bowling ball rolling down the lane, real pins crashing far off, and the roll back.
 - **Pool ball** (`pool-ball`). Now: tap: Draw shot. Plan: keep.
   - Fixed: E1b: fully opaque polished resin with a sharp window highlight and a soft room
@@ -617,29 +634,35 @@ Proposals below are suggestions; the owner may change them.
   - Effect: Clicks forward and spins with back-spin.
   - Improved: E6a: a draw shot: struck low, it slides forward spinning backwards, stops, and the
     backspin pulls it back till it rolls cleanly home. The window highlight and the room's
-    reflection stay put while the number turns (1.8 s).
+    reflection stay put while the number turns (1.8 s). Hands-on H1: in Hands-on, flick it: it
+    slides, then rolls on far; a low flick draws back. It lands with its own sound.
   - Sound: The real solid tock of a cue tip striking the ball.
 - **Pickleball** (`pickleball`). Now: tap: Pop it up. Plan: keep.
   - Effect: Light pop-up with air whistling through the holes.
   - Improved: E6a: popped up twice off an unseen paddle, the light holed ball slows fast in the air
     and knuckles (it wobbles without much spin), then lands with a hollow click and a small, dead
-    bounce (1.9 s).
+    bounce (1.9 s). Hands-on H1: in Hands-on, toss it: a light (24 g), dull pop (0.62 of its speed
+    kept, as measured). It lands with its own sound.
   - Sound: Its hollow plastic pock, without the whistle.
 - **Dodgeball** (`dodgeball`). Now: tap: Slam it down. Plan: keep.
   - Effect: Squashes hard on a bounce.
   - Improved: E6a: lifted and slammed down, the soft rubber squashes flat and wobbles, bounces up
-    lively and squashes again at each landing (2.2 s).
+    lively and squashes again at each landing (2.2 s). Hands-on H1: in Hands-on, throw it at the
+    ground: it squashes and rebounds. It lands with its own sound.
   - Sound: Rubbery bwong.
 - **Medicine ball** (`medicine-ball`). Now: tap: Heave and drop. Plan: keep.
   - Fixed: C1: matte rubber grip (low bumps, no shine), and a faint rim of light on dark pages.
   - Effect: Barely lifts and lands with a heavy squash.
   - Improved: E6a: heaved up only a little, slowly, it drops with a heavy thud and a big, slow
-    squash, no bounce at all, and a puff of dust spreads out along the floor (1.6 s).
+    squash, no bounce at all, and a puff of dust spreads out along the floor (1.6 s). Hands-on H1:
+    in Hands-on, heave it: very heavy, it lands with a thud and barely bounces. It lands with its
+    own sound.
   - Sound: Heavy thud.
 - **Lacrosse ball** (`lacrosse-ball`). Now: tap: Slam it down. Plan: keep.
   - Effect: Very fast, hard bounces.
   - Improved: E6a: slammed down, the hard rubber ball rockets up and bounces hard and fast, the
-    liveliest ball on the shelf (0.83 of its speed kept) (1.9 s).
+    liveliest ball on the shelf (0.83 of its speed kept) (1.9 s). Hands-on H1: in Hands-on, throw
+    it: hard, fast, lively bounces. It lands with its own sound.
   - Sound: Hard rubber knock.
 - **Squash ball** (`squash-ball`). Now: tap: Warm it up. Plan: keep.
   - Owner: Weird; hard to see on dark.
@@ -647,12 +670,16 @@ Proposals below are suggestions; the owner may change them.
     at the silhouette); invisible on a light page.
   - Effect: Warms up: glows faintly as it bounces faster.
   - Improved: E6a: cold, it is dead: dropped, it hardly bounces. Hit over and over, it warms, glows
-    faintly and bounces higher and faster; let go, it bounces out and cools (2.6 s).
+    faintly and bounces higher and faster; let go, it bounces out and cools (2.6 s). Hands-on H1: in
+    Hands-on, throw it: a dead bounce that gets livelier with each throw, as a squash ball warms. It
+    lands with its own sound.
   - Sound: Dead, low squash thock.
 - **Bouncy ball** (`bouncy-ball`). Now: tap: Throw it down. Plan: keep.
   - Effect: Wild ricochet bounces all over, then home.
   - Improved: E6a: thrown down hard, it ricochets all over the floor, keeping nearly all its speed,
-    its spin flipping at every bounce, then comes home and settles (2.5 s).
+    its spin flipping at every bounce, then comes home and settles (2.5 s). Hands-on H1: in
+    Hands-on, throw it down: it ricochets wildly, losing almost no height. It lands with its own
+    sound.
   - Sound: Springy boing that rises.
 - **Marble** (`marble`). Now: tap: Roll it. Plan: keep.
   - Owner: Super neat.
@@ -660,7 +687,8 @@ Proposals below are suggestions; the owner may change them.
   - Improved: E6a: it rolls round a little circle, turning the way it rolls, and after one lap is
     back exactly as it was; the swirl inside turns as it goes (2.4 s). Fix7: the glass shell reads
     as polished glass: a faint tint that is clear face on and denser toward the rim, reflecting a
-    light sky above and a darker floor below (no added highlights).
+    light sky above and a darker floor below (no added highlights). Hands-on H1: in Hands-on, flick
+    it: it rolls far, and clinks on hard landings. It lands with its own sound.
   - Sound: The same real marble roll, about 6 dB quieter (Sound C, October 2, 2026).
 - **Hockey puck** (`hockey-puck`). Now: tap: Slap shot. Plan: keep.
   - Owner: Underwhelming.
@@ -668,19 +696,24 @@ Proposals below are suggestions; the owner may change them.
   - Effect: Slides and spins flat, throwing up ice sparkle.
   - Improved: E1c: a slap shot. Sparkling ice chips spray from where the stick hit, and the puck
     glides flat across the ice, spinning fast, round a wide loop and back to its spot (3 s).
+    Hands-on H1: in Hands-on, flick it: it slides flat a long way on low friction. It lands with its
+    own sound.
   - Sound: Stick slap and ice scrape.
 - **Shuttlecock** (`shuttlecock`). Now: tap: Hit it. Plan: keep.
   - Owner: Cool.
   - Effect: Flips over and floats down feathers-up.
   - Improved: E1b: hit up: it flips over cork first and flies up spinning, turns over at the top and
-    floats back down cork first, spinning slower as it falls (3 s).
+    floats back down cork first, spinning slower as it falls (3 s). Hands-on H1: in Hands-on, toss
+    it any way up: it flips and falls cork first, then tips onto its side. It lands with its own
+    sound.
   - Sound: Light racket tock.
 - **Flying disc** (`flying-disc`). Now: tap: Throw. Plan: keep.
   - Owner: Looks fine.
   - Fixed: C1: glossy plastic with a highlight and two moulded flight rings.
   - Effect: Spins fast and hovers, tilting.
   - Improved: E1b: thrown: it spins fast and flat, banks into a curve, glides round a loop like a
-    returning throw and settles back (3 s).
+    returning throw and settles back (3 s). Hands-on H1: in Hands-on, throw it from the rim with a
+    flick: it spins, glides and banks before landing. It lands with its own sound.
   - Sound: Whirring whoosh.
 
 ## Anatomy (7)
@@ -706,7 +739,9 @@ Proposals below are suggestions; the owner may change them.
     different tap animation.
   - Effect: Idle: the eye looks around. Tap: it blinks, looks at you and the pupil snaps small.
   - Improved: C2: it glances around by itself. A tap blinks (new lids), turns it to look at you and
-    snaps the pupil small (about 2.5 s).
+    snaps the pupil small (about 2.5 s). Hands-on H5: with ✋ Hands-on on, a drag on the eyeball
+    rolls it in its socket to look where the finger pulls (about 45 degrees each way); let go and it
+    glances about again.
   - Sound: A soft, small click as the lids close, and a fainter one as they open.
 - **Lungs** (`lungs`). Now: tap: Take a deep breath. Plan: keep.
   - Owner: Expand and contract like lungs.
@@ -714,7 +749,9 @@ Proposals below are suggestions; the owner may change them.
   - Improved: E3: a tap takes a deep breath: both lungs swell out sideways, forwards and down (the
     airways stay put), hold, then empty past rest and settle back into gentle breathing (about 5 s).
     After the owner's review the breath is about twice as big. Fix7: the deep breath fills the lungs
-    about 70% further out than before.
+    about 70% further out than before. Hands-on H5: with ✋ Hands-on on, squeezing them (a held
+    press, or picking them up) breathes them out; let go and they fill again, a little past rest,
+    then breathe gently on.
   - Sound: A real person's slow deep breath in, then out.
 - **Tooth** (`tooth`). Now: tap: Polish. Plan: keep.
   - Owner: Looks good; no idea for an effect.
@@ -738,7 +775,9 @@ Proposals below are suggestions; the owner may change them.
   - Improved: Anatomy: a kit-built body (smoothly joined primitives, so the skin has no seams but
     its cut lines), 13 skin pieces, 19 muscle groups and 16 bones or bone groups as tokens, and our
     brain, lungs, heart and kidney recipes placed inside with a kit-built liver, stomach and
-    intestines.
+    intestines. Hands-on H5: with ✋ Hands-on on, once the organs show, each organ (brain, lungs,
+    heart, liver, stomach, intestines and the two kidneys, each now a part of its own) lifts out and
+    sets down, and clicks back into its place when brought near; the next tap sends them all home.
   - Sound: A soft paper-and-cloth slide for each peel, and a low chime as the layers settle back.
 
 ## Weather (13)
@@ -1535,7 +1574,10 @@ Proposals below are suggestions; the owner may change them.
     names one, or any SMILES string, or open a MOL, SDF, XYZ or PDB file; it is built in 3D (SMILES
     are embedded with a small force field) and heats up the same way. Fix7: each bond stretches and
     squeezes between its two atoms (its splats follow both atoms, by how far along the bond they
-    are), so an atom never leaves its bond when it is heated.
+    are), so an atom never leaves its bond when it is heated. Hands-on H5: with ✋ Hands-on on, an
+    atom grabbed and pulled stretches its bonds after it (they already stretch between atoms) and
+    tugs its bonded neighbors about a third of the way; let go, it springs back to its place (a
+    spring home) and the molecule wobbles to rest.
   - Sound: Soft little ticks of the atoms jostling as it heats, thinning out as it settles; no wind,
     no building blocks (Sound C, October 2, 2026).
 - **Protein** (`protein`). Now: tap: Pull it apart. Plan: keep.
@@ -1547,7 +1589,9 @@ Proposals below are suggestions; the owner may change them.
     rainbow start to end, by chain or by structure. Open any PDB or mmCIF file. A tap pulls it apart
     into its pieces, turning a little, and puts it back (5 s); in GFP the chromophore glows green
     while the barrel is open. Fix7: a tap while it is apart brings the pieces back at once (1.4 s),
-    instead of pausing; the next tap pulls it apart again.
+    instead of pausing; the next tap pulls it apart again. Hands-on H5: with ✋ Hands-on on, a
+    helix, strand or loop pulled out of the fold tugs its neighbors along the chain after it, and
+    let go it glides back into its place.
   - Sound: A real tearing apart as it separates, with a whoosh, then a pressing-together and a soft
     thud as it reassembles (no building blocks).
 - **Crystal lattice** (`crystal-lattice`). Now: tap: Send a wave through. Plan: keep.
@@ -1555,7 +1599,9 @@ Proposals below are suggestions; the owner may change them.
   - Improved: E2: a tap sends a wave of vibration (a phonon) through the crystal: a ripple runs
     across it from left to right, each slice of atoms rising and falling in turn with its bonds (3.8
     s). Fix7: the bonds between slices stretch and bend with the wave (their two ends follow their
-    slices), so atoms never leave their bonds.
+    slices), so atoms never leave their bonds. Hands-on H5: with ✋ Hands-on on, a slice pushed up
+    or down along its plane takes its neighbors less and less with it (a shear, bonds stretching
+    between slices), and let go it springs back, ringing a little.
   - Sound: One cleaner, softer metallic chime with a faint glassy ring, no rattle after (Sound C,
     October 2, 2026).
 - **Unit cells** (`unit-cells`). Now: tap: Next view: cell, block, bonds. Plan: new effect (E2).
@@ -1665,7 +1711,9 @@ Proposals below are suggestions; the owner may change them.
   - Effect: The geode opens wider and the crystals glow violet.
   - Improved: C2: each time it opens, the halves swing wider and the crystals glow violet with
     twinkling tips, then settle (about 4 s). Sharpness A (October 2, 2026): sharper look (even,
-    solid splats and calmer textures).
+    solid splats and calmer textures). Hands-on H5: with ✋ Hands-on on, the front half swings open
+    or shut by hand on its hinge (the toy's own design: hinged, not lifted off) and stays where it
+    is left; shut, the halves fit together.
   - Sound: Stone crack and a chime.
 - **Sapphire** (`sapphire`). Now: tap: Catch the star. Plan: keep.
   - Effect: A star shimmer (asterism) glides across it.
@@ -1688,6 +1736,8 @@ Proposals below are suggestions; the owner may change them.
   - Sound: A softer, duller real tap and the stone rocking gently on the table (no synth shimmer).
 - **Pearl** (`pearl`). Now: tap: Open or close. Plan: keep.
   - Owner: Really cool.
+  - Improved: Hands-on H5: with ✋ Hands-on on, the oyster's lid pries open or shut by hand on its
+    hinge, and the pearl lifts out, rolls, and settles back into its place when brought near it.
   - Sound: Soft round clink.
 
 ## Nature (23)
@@ -2080,15 +2130,20 @@ Proposals below are suggestions; the owner may change them.
   - Owner: Effect is OK; it needs a quack.
   - Effect: Keep the effect.
   - Improved: C2: the same squeeze and hop, now with a bob and rock that settles by about 1.8 s. The
-    quack is Phase D.
+    quack is Phase D. Hands-on H1: in Hands-on, press and hold it and it squashes down with a
+    squeak; let go and it springs back with a wobble. Tossed, it is a light, hollow rubber toy.
   - Sound: Rubber duck quack.
 - **Spinning top** (`spinning-top`). Now: tap: Spin it. Plan: keep.
   - Owner: Perfect.
+  - Improved: Hands-on H1: in Hands-on, flick it round to spin it: it stands straight while fast,
+    wobbles wider as it slows and topples onto its side (tip and rim on the floor).
   - Sound: A soft flick as it starts; its spin is a quiet real hum that follows its speed (louder
     and a little higher when fast, gone as it slows), also when a drag spins it (Sound C, October 2,
     2026).
 - **Dice** (`dice`). Now: tap: Roll. Plan: keep.
   - Owner: Maybe my favourite; rolls feel random like real dice. Keep it.
+  - Improved: Hands-on H1: in Hands-on, throw them: each die tumbles, bounces and lands on a real
+    face (two rounded cubes, or the d20's corners), with a clatter.
   - Sound: Two dice thrown on a wooden table, bouncing with quicker, quieter knocks and settling;
     real CC0 recordings now (dice-throw.mp3), with the synthesized sound as a fallback.
 - **Newton's cradle** (`newtons-cradle`). Now: tap: Lift and let go. Plan: keep.
@@ -2103,6 +2158,8 @@ Proposals below are suggestions; the owner may change them.
   - Touch or drag interaction (phase F).
 - **Teddy bear** (`teddy-bear`). Now: tap: Wave hello. Plan: keep.
   - Owner: Cute; fine.
+  - Improved: Hands-on H1: in Hands-on, pick it up by its tummy and swing or toss it: its arms and
+    head swing loosely on it and settle once it lands.
   - Sound: The soft rustle of a plush bear's fabric and stuffing; no creak (Sound C, October 2,
     2026).
 - **Yo-yo** (`yo-yo`). Now: tap: Throw. Plan: keep.
@@ -2138,20 +2195,32 @@ Proposals below are suggestions; the owner may change them.
   - Sound: The same, with the wind dialed back.
 - **Paper plane** (`paper-plane`). Now: tap: Barrel roll. Plan: keep.
   - Owner: Fine.
+  - Improved: Hands-on H1: in Hands-on, lift it and throw it along its nose: it glides, dips and
+    lands (about four times as far as it drops).
   - Sound: The same fold and glide, with the air lower (Sound C, October 2, 2026).
 - **Origami crane** (`origami-crane`). Now: tap: Flap the wings. Plan: keep.
   - Owner: Solid as it is.
+  - Improved: Hands-on H1: in Hands-on, pull its tail up or down and the wings flap, as a real
+    flapping crane's do; let go and the tail springs back, the wings flapping a few times.
   - Sound: Paper flutter.
 - **Balloon dog** (`balloon-dog`). Now: tap: Pop. Plan: keep.
   - Owner: Almost perfect.
+  - Improved: Hands-on H1: in Hands-on, press and hold to squeeze it (it bulges and squeaks, and
+    springs back); light as a balloon, it falls slowly and drifts, and bulges as it lands with a
+    squeak.
   - Sound: A real balloon bursting (no whistle first); real CC0 recordings now
     (balloon-dog-pop.mp3), with the synthesized sound as a fallback.
 - **Soap bubbles** (`soap-bubbles`). Now: tap: Blow bubbles. Plan: keep.
   - Owner: Perfect.
+  - Improved: Hands-on H1: in Hands-on, poke a bubble and it pops at once (the first one your finger
+    touches); a new one comes from the wand on its next round.
   - Sound: A soft breath through the wand, and a soft real pop as each bubble bursts while it's
     blown (Sound C, October 2, 2026).
 - **Wind-up robot** (`robot`). Now: tap: Wind it up. Plan: keep.
   - Owner: Perfect.
+  - Improved: Hands-on H1: in Hands-on, circle a finger round its tummy to turn its key (up to three
+    turns, clicking); let go and the key unwinds as it walks off, rocking from foot to foot with its
+    arms swinging, and slows to a stop.
   - Sound: A few clicks of the winding key, then clockwork whirring as it unwinds and its tin feet
     clanking along; real CC0 recordings now (robot-wind.mp3), with the synthesized sound as a
     fallback.
@@ -2433,7 +2502,8 @@ Proposals below are suggestions; the owner may change them.
     and cross over the tongue, tie back into a bow, and the shoe taps its toe twice (4 s). Round 2:
     denser scan, thinner braided laces. Sharpness A (October 2, 2026): exact splat sizes for a
     crisper outline and a calmer fabric texture. Fix7: flag colors reach the shoe (its laces keep
-    theirs).
+    theirs). Hands-on H1: in Hands-on, the laces are two ropes tied in their bow: pull a lace end
+    out and the bow comes undone, both laces falling loose over the shoe; ↺ ties them again.
   - Sound: Laces zipping through the eyelets, a soft tug, two toe taps.
 - **Hoodie** (`hoodie`). Now: tap: Hood flip and cross the sleeves. Plan: keep.
   - Owner: From the owner's approved ideas on the Toy Ideas page (lane Real objects, September 29,
@@ -2448,7 +2518,9 @@ Proposals below are suggestions; the owner may change them.
     and settle (4.5 s). Round 2: attached hood and shoulders, sleeves clear of the body. Fix7: a
     band of cloth fills the gap behind the hood as it nods, and the cuffs are gathered shut, so a
     raised sleeve shows cloth, not a hole; flag colors reach the cloth. Hands engine C (Hands-on):
-    pull the hood; it flops like cloth and springs back up.
+    pull the hood; it flops like cloth and springs back up. Hands-on H1: in Hands-on, lift a sleeve
+    by its cuff and let go: it swings back down on its shoulder and settles (the hood flops as
+    before).
   - Sound: The fabric's soft brushes and the zip, with much less wind (Sound C, October 2, 2026).
 - **Sunglasses** (`sunglasses`). Now: tap: Fold, flip and darken. Plan: keep.
   - Owner: From the owner's approved ideas on the Toy Ideas page (lane Real objects, September 29,
@@ -2461,7 +2533,8 @@ Proposals below are suggestions; the owner may change them.
     head over heels to face you, the lenses darken from the rim inward to deep gray, then clear as
     the arms unfold (3.5 s). Round 2: denser model, arms kept behind the lenses. Fix7: a tap on a
     lens starts the effect too (faint pick splats over the glass). Fix7: flag colors reach the frame
-    (the lenses keep theirs).
+    (the lenses keep theirs). Hands-on H1: in Hands-on, fold each arm in on its hinge and out again:
+    an arm stays where it is left, stopping at open and at folded with a click.
   - Sound: Each fold is a plastic hinge sliding shut and seating; the lenses darken silently (no
     electronic clicks or shimmer).
 - **Baseball cap** (`baseball-cap`). Now: tap: Flip and spin. Plan: keep.
@@ -2473,7 +2546,9 @@ Proposals below are suggestions; the owner may change them.
   - Improved: Real objects: a detailed CC BY model of a gray six-panel cap on a kit-built walnut
     stand. It flips up off the stand, spins flat three and a half turns round a small loop like a
     flying disc, lands brim backward, then hops and turns round the right way (3 s). Round 2:
-    denser, sharper model. Fix7: flag colors reach the cap (its stand keeps its walnut).
+    denser, sharper model. Fix7: flag colors reach the cap (its stand keeps its walnut). Hands-on
+    H1: in Hands-on, throw it flat with a flick, like a flying disc: it spins and glides a little on
+    its brim, then lands soft.
   - Sound: Fabric rustles instead of whooshes as it flips; the flick and the soft landings are
     unchanged.
 
@@ -2532,7 +2607,9 @@ Proposals below are suggestions; the owner may change them.
   - Owner: Hard to tell what the effect is; make it clearer and more dramatic.
   - Effect: Mist swirls hard and a glowing shape appears inside, then fades.
   - Improved: C2: the mist whips round and thins, and a glowing sign rises out of it and fades: a
-    star, a moon or a heart in turn (about 3.5 s).
+    star, a moon or a heart in turn (about 3.5 s). Hands-on H5: with ✋ Hands-on on, the ball lifts
+    off its stand, sets down or rolls on the table (heavy glass) with its mist inside, and settles
+    back into its cup when brought over the stand.
   - Sound: A soft misty whoosh and a real crystal glass ringing as the sign rises (no theremin).
 
 ## Animals (13)
@@ -2541,7 +2618,9 @@ Proposals below are suggestions; the owner may change them.
   - Owner: Not sure what the effect does; make it more apparent.
   - Effect: A strong pulse that jets it upward, trailing glowing tentacles.
   - Improved: C2: one strong stroke squeezes the bell and jets it up about a third of its size,
-    trailing glowing tentacles, then it drifts down (about 3 s).
+    trailing glowing tentacles, then it drifts down (about 3 s). Hands-on H5: with ✋ Hands-on on,
+    drag the bell through the water and the tentacles and oral arms trail behind it like chains
+    (ropes of nodes), then sway back as it hovers where it was let go.
   - Sound: The same two swimming pulses, a little louder (Sound C, October 2, 2026).
 - **School of fish** (`fish-school`). Now: tap: Bait ball. Plan: keep.
   - Owner: Swim around more dynamically, like a swarm.
@@ -2553,12 +2632,17 @@ Proposals below are suggestions; the owner may change them.
   - Sound: Water swishes and bursts, with bubbles.
 - **Butterfly** (`butterfly`). Now: tap: Flutter. Plan: keep.
   - Owner: Perfect.
+  - Improved: Hands-on H5: with ✋ Hands-on on, pick it up and it flutters hard on the finger; let
+    go and it flutters off, rights itself and settles back to hovering at its height near where it
+    was let go.
   - Sound: Delicate flutter.
 - **Pufferfish** (`pufferfish`). Now: tap: Poke. Plan: keep.
   - Owner: Should puff: get big, then small.
   - Effect: Inflates to a big spiky ball, then deflates.
   - Improved: C2: it now rests slim; a tap inflates it to a big spiky ball, holds, then deflates
-    with a sputter (about 4 s).
+    with a sputter (about 4 s). Hands-on H5: with ✋ Hands-on on, a press, a push or a pick-up puffs
+    it up into a spiky ball; it stays puffed while held, and once let go it waits, then slowly
+    deflates with its sputter.
   - Sound: Balloon inflate and a sputter.
 - **Nautilus** (`nautilus`). Now: tap: Hide in the shell. Plan: keep.
   - Owner: Enter and exit its shell.
@@ -2569,6 +2653,9 @@ Proposals below are suggestions; the owner may change them.
   - Sound: A jet of water, the hollow shell, a knock and bubbles.
 - **Ladybug** (`ladybug`). Now: tap: Open the wings. Plan: keep.
   - Owner: Perfect.
+  - Improved: Hands-on H5: with ✋ Hands-on on, each wing case lifts open on its own hinge at the
+    middle of the back (the wing under it stays folded away; the owner's review: no wing poking
+    through the case), and let go it swings shut by its weight.
   - Sound: The same wing whirr, about 5 dB quieter (Sound C, October 2, 2026).
 - **Snail** (`snail`). Now: tap: Hide in the shell. Plan: keep.
   - Owner: Perfect, but it disappears too much when hiding; make it more elegant.
@@ -2579,7 +2666,9 @@ Proposals below are suggestions; the owner may change them.
     shortens from its tip into the head), then the head, neck and whole foot, front and tail, are
     drawn in through the shell's opening as solid pieces the shell hides, and the shell settles on
     the ground with nothing soft showing (3.2 s). Coming out, the foot slides out first, then the
-    head, then the stalks unroll.
+    head, then the stalks unroll. Hands-on H5: with ✋ Hands-on on, a poke makes it pull in quickly;
+    picked up by the shell it stays in, rolls back onto its foot when dropped, and a few seconds
+    later slowly comes out (never while on its side).
   - Sound: Wetter and slimier, a squish with a sticky stretch.
 - **Octopus** (`octopus`). Now: tap: Squirt ink. Plan: keep.
   - Owner: Underwhelming; the ink should be much bigger and more dramatic.
@@ -2590,6 +2679,8 @@ Proposals below are suggestions; the owner may change them.
   - Sound: A squirt, then the ink bubbling out as a liquid (no wind).
 - **Starfish** (`starfish`). Now: tap: Wave the arms. Plan: keep.
   - Owner: Fine.
+  - Improved: Hands-on H5: with ✋ Hands-on on, an arm lifts up from its root on a hinge and curls
+    back down slowly when let go.
   - Sound: The pop is kept, and each arm makes a soft wet lift as it rises and a soft pat as it
     settles, one after another.
 - **Sea urchin** (`sea-urchin`). Now: tap: Wave the spines. Plan: keep.
@@ -2604,14 +2695,22 @@ Proposals below are suggestions; the owner may change them.
   - Effect: Tongue shoots out to catch a fly.
   - Improved: E6: a fly buzzes in and hovers; the frog's jaw drops, its tongue shoots out, catches
     the fly and snaps back; the jaw shuts, its eyes sink to push the fly down (frogs swallow with
-    their eyes), and it croaks twice with its throat sac (about 3.5 s).
+    their eyes), and it croaks twice with its throat sac (about 3.5 s). Hands-on H5: with ✋
+    Hands-on on, a press on the frog puts a fly at the fingertip; the frog turns to keep the fly in
+    front of its mouth as it is dragged around, and let go it catches it (jaw, tongue, gulp and
+    croaks).
   - Sound: A real fly's wandering buzz, and real croaks after it eats the fly; real CC0 recordings
     now (frog-fly.mp3, frog-croak.mp3), with the synthesized sound as a fallback.
 - **Penguin** (`penguin`). Now: tap: Flap. Plan: keep.
   - Owner: Perfect and very cute.
+  - Improved: Hands-on H5: with ✋ Hands-on on, pushed, or dropped on its side or upside down, it
+    wobbles with its flippers out for balance and rocks back upright.
   - Sound: Squawk.
 - **Owl** (`owl`). Now: tap: Turn the head. Plan: keep.
   - Owner: Basically perfect.
+  - Improved: Hands-on H5: with ✋ Hands-on on, a press on its head and a finger moved around it
+    turn the head (and tip it) to follow; picked up by the body it is tossed as before and settles
+    back upright on its branch (the L1 sweep found it never came to rest).
   - Sound: A short, natural owl hoot (h'HOO-oo and a soft hoo), about 1 s (Sound C, October 2,
     2026).
 
@@ -2960,7 +3059,9 @@ Proposals below are suggestions; the owner may change them.
     gauge fills to under the threshold and the lamp flashes red. The two live wires thicken (it
     learns), the pulses go again, the gauge passes the threshold and the lamp snaps on gold (4 s).
     Owner's review: a 3D version too, so a View option adds a 3D model that floats in space (no
-    stand, after the third review): glass bulbs, wires, a glass gauge and an output bulb.
+    stand, after the third review): glass bulbs, wires, a glass gauge and an output bulb. Hands-on
+    H5: with ✋ Hands-on on, a tap on an input lamp switches it, and the sum, the gauge and the
+    output lamp answer at once with the learned weights; a tap elsewhere runs the example.
   - Sound: A blip for each input, a click as the lamp decides, a rising tone when it learns.
 - **Multilayer perceptron** (`multilayer-perceptron`). Now: tap: Try all four inputs. Plan: keep.
   - Owner: Owner's review of the perceptron (September 27, 2026): add 2D poster and 3D multilayer
@@ -2972,7 +3073,8 @@ Proposals below are suggestions; the owner may change them.
     blue (adding) and red (subtracting) wires to the OR and NAND neurons, the ones that fire send
     pulses to the AND neuron, the output lamp lights for 01 and 10 only, and each answer is written
     into the truth table (5 s). A View option picks the poster or a 3D model, which floats in space
-    (no stand).
+    (no stand). Hands-on H5: with ✋ Hands-on on, a tap on an input lamp flips it, and the OR and
+    NAND neurons and the output show XOR at once, the truth table marking the row.
   - Sound: A blip for each input, a ding when the answer is 1, a knock when it is 0.
 - **Neural network** (`neural-network`). Now: tap: Forward and back. Plan: keep.
   - Owner: Approved on the Toy Ideas page (lane AI).
@@ -3053,7 +3155,8 @@ Proposals below are suggestions; the owner may change them.
     s).
   - Improved: AI: the ball takes 21 hops of gradient descent with momentum, leaving a trail of dots;
     just right, it overshoots and settles in the valley; too low, it creeps; too high, it bounces
-    wall to wall (4.5 s).
+    wall to wall (4.5 s). Hands-on H5: with ✋ Hands-on on, the ball comes to the finger on the
+    landscape; let go, it rolls by the slope, overshoots a little and settles in the nearest valley.
   - Sound: A soft tap as the ball lands each of its 21 hops down, in sync, and one as it lands home
     (the falling tone and whoosh are gone).
 - **Gaussian splatting** (`gaussian-splatting`). Now: tap: Train, or play the view. Plan: keep.
@@ -3090,7 +3193,9 @@ Proposals below are suggestions; the owner may change them.
     Shell and heap sort added). Computing r2: each algorithm sounds its comparisons and swaps in its
     own voice; a View option shows the same steps as crates by size, a 3D ring of colored pucks
     sorted by hue, or the classic dots; every step is checked against reference code
-    (tests/cmp2-sort.spec.mjs).
+    (tests/cmp2-sort.spec.mjs). Hands-on H5: with ✋ Hands-on on, a piece picked up and dropped on
+    another place swaps with the one there (it glides across), the counter counts the swaps, and a
+    chime rings when they are in order.
   - Sound: Each algorithm has its own voice (lane Computing r2): every comparison plays the two
     compared bars' notes softly, every swap the moving bar's note, each timed to its step; then the
     sorted bars play their scale.
@@ -3100,7 +3205,9 @@ Proposals below are suggestions; the owner may change them.
     gate, whose shapes glow as they fire, and the sum and carry lamps show 1 + 1 = 10 in binary (3.5
     s).
   - Improved: AI: both switches flip to 1, light fills the wires into the XOR and AND gates; the XOR
-    flashes and gives 0, the AND lights the carry lamp, and 1+1=10 shows (3.5 s).
+    flashes and gives 0, the AND lights the carry lamp, and 1+1=10 shows (3.5 s). Hands-on H5: with
+    ✋ Hands-on on, each lever flips by hand on its hinge, and the lamps, gates and digits show the
+    sum and carry of the two bits at once.
   - Sound: The buzz near the end is gone; the rest is unchanged.
 - **Turing machine** (`turing-machine`). Now: tap: Run the program. Plan: keep.
   - Owner: Approved on the Toy Ideas page (lane Machines A).
@@ -3110,7 +3217,9 @@ Proposals below are suggestions; the owner may change them.
   - Improved: Machines A: 17 tile slots (each a solid tile that flips edge-on and back), the rule
     card's row lit, a state lamp, a step counter and turning reels; programs Add one (each tap adds
     one more, so it counts up), Busy beaver 2 and 3 states; your own binary number in the Toy tab
-    (about 4.5 s for 1011).
+    (about 4.5 s for 1011). Hands-on H5: with ✋ Hands-on on, the tape slides by hand (a press on
+    it; elsewhere the machine lifts as before) and settles on a whole tile, so the head reads a new
+    cell; a tap on a tile flips its bit.
   - Sound: A relay click as the head reads, a wooden clack as each tile flips, a short whir as the
     tape slides, and a bell at the halt.
 - **Difference engine** (`difference-engine`). Now: tap: Turn the crank. Plan: keep.
@@ -3121,7 +3230,9 @@ Proposals below are suggestions; the owner may change them.
   - Improved: Machines A: X, P(X), Δ1, Δ2 and Δ3 columns of figure wheels (each a solid wheel read
     through a window), two-phase addition staggered as in Babbage's design, carry levers that set
     and knock back, the crank and a bell; each tap queues one more turn (4 s); your own polynomial
-    up to x³ and start value in the Toy tab.
+    up to x³ and start value in the Toy tab. Hands-on H5: with ✋ Hands-on on, circling round the
+    crank turns it (measured as seen, from any side): each full turn of the hand is one turn of the
+    engine at the hand's pace, wheels, carries and bell included, with a ratchet.
   - Sound: The ratchet of the crank, a brass click for each wheel step, a sharper snap for each
     carry, and a small bell when a new result is ready.
 - **Enigma machine** (`enigma-machine`). Now: tap: Type the message. Plan: keep.
@@ -3140,7 +3251,9 @@ Proposals below are suggestions; the owner may change them.
     set it like a real Enigma I in the Toy tab (three of rotors I to V in any order, reflector B or
     C, rings, start letters, up to ten plugboard pairs), the setting shown on the pad, the rotor
     plates and the cables; a Barbarossa, 1941, preset decodes a real message; proof in
-    tests/cmp2-enigma.spec.mjs.
+    tests/cmp2-enigma.spec.mjs. Hands-on H5: with ✋ Hands-on on, each rotor turns by dragging up or
+    down on it, clicking letter by letter, and where it is left becomes where the rotors stand and
+    where the next message starts.
   - Sound: Heavy key clacks, the ratchet of the rotors stepping, and a faint click as each lamp
     lights.
 - **Bombe** (`bombe`). Now: tap: Start the search. Plan: keep.

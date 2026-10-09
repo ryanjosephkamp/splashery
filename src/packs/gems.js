@@ -817,6 +817,9 @@ export const RECIPES = {
     options: [{ key: "color", label: "Crystals", type: "color", default: "#8e44c9" }],
     controls: [{ key: "open", label: "Open", type: "toggle", default: 1, ease: 1.4 }],
     action: { key: "open", label: "Open or close" },
+    // Hands-on (lane Hands-on H5): swing the front half open or shut by hand
+    // on its hinge; it stays where you leave it, and shut, the halves fit.
+    hands: { joints: () => [lidHinge(GEODE_HINGE, [0, -1, 0], GEODE_SWING, [0.1, 0, 0.55], [0.9, 1.05, 0.6])] }, // prettier-ignore
     // Splats are depth-sorted in the pose they are built in, so the front half
     // is built twice, shut and lying open, and whichever copy is nearer its
     // current pose is shown as it swings.
@@ -845,7 +848,7 @@ export const RECIPES = {
         (1 + 0.07 * k.noise.fbm(d[0] * 2 + 7, d[1] * 2, d[2] * 2, 3)) *
         (d[1] < -0.6 ? 0.96 : 1);
       const cav = (phi) => 0.62 + 0.06 * k.noise(Math.cos(phi) * 2, Math.sin(phi) * 2, 3);
-      const hinge = [-R * 1.02, 0, 0];
+      const hinge = GEODE_HINGE;
       const lidShut = k.part("lidShut", { pivot: hinge, axis: [0, 1, 0] });
       const lidOpen = k.part("lidOpen", { pivot: hinge, axis: [0, 1, 0] });
       // The violet light that fills the two halves as it opens.
@@ -1263,6 +1266,34 @@ export const RECIPES = {
     ],
     controls: [{ key: "open", label: "Open", type: "toggle", default: 1, ease: 1.2 }],
     action: { key: "open", label: "Open or close" },
+    // Hands-on (lane Hands-on H5): pry the lid open (or shut) on its hinge;
+    // lift the pearl out, roll it about, and bring it back near its place in
+    // the shell, where it settles in.
+    hands: {
+      floor: -0.35,
+      area: 1.5,
+      pieces: (d) => [
+        {
+          part: "pearl",
+          pos: d?.pearlAt || [0, -0.02, 0.1],
+          pivot: d?.pearlAt || [0, -0.02, 0.1],
+          solid: { type: "sphere", r: d?.pearlR ?? 0.31 },
+          pick: [1, 1, 1].map((v) => v * (d?.pearlR ?? 0.31) * 1.2),
+          mass: 0.4,
+          friction: 0.5,
+          restitution: 0.35,
+          material: { mass: 0.01, r: 0.004, bounce: 0.45, roll: 0.02, friction: 0.5 },
+          // Held where the finger took it, not set down level over the ray.
+          place: false,
+        },
+        // The shell under it (lane H1's fixed piece): the pearl rests in it.
+        ...(d?.shell ? [{ fixed: true, pos: [0, 0, 0], points: PEARL_CUP, radius: 0.03 }] : []),
+      ],
+      joints: (d) => [
+        { type: "socket", part: "pearl", snap: 0.3, armAway: 0.4 },
+        ...(d?.shell ? [lidHinge(PEARL_HINGE, [-1, 0, 0], PEARL_SWING, [0, 0.2, -0.1], [1, 0.4, 0.85])] : []), // prettier-ignore
+      ],
+    },
     // Like the geode, the lid is built twice (shut and open, since splats sort
     // in their built pose) and the copy nearer its current pose is shown.
     drive(t, c, out) {
@@ -1275,10 +1306,12 @@ export const RECIPES = {
       const pearlCol = o.color;
       const pearlAt = o.shell ? [0, -0.02, 0.1] : [0, 0, 0];
       const pr = o.shell ? 0.31 : 1;
+      k.data = { pearlAt, pearlR: pr, shell: !!o.shell };
       k.add(k.sphere(pr), {
         even: true,
         opacity: 1,
         jitter: 0.015,
+        part: k.part("pearl", { pivot: pearlAt }),
         pos: pearlAt,
         flat: 0.15,
         weight: o.shell ? 2 : 1,
@@ -1303,7 +1336,7 @@ export const RECIPES = {
       });
       if (!o.shell) return;
       // An oyster: a rough cupped lower shell and a hinged lid, pearly inside.
-      const hinge = [0, 0.02, -0.72];
+      const hinge = PEARL_HINGE;
       const lidShut = k.part("lidShut", { pivot: hinge, axis: [1, 0, 0] });
       const lidOpen = k.part("lidOpen", { pivot: hinge, axis: [1, 0, 0] });
       const openQ = quatAxisAngle([1, 0, 0], -PEARL_SWING);
@@ -1371,6 +1404,33 @@ export const RECIPES = {
       { key: "gaze", label: "Gaze", type: "pulse", ease: 3.6 },
     ],
     action: { key: "gaze", label: "Gaze into the ball" },
+    // Hands-on (lane Hands-on H5): lift the ball off its stand and set it
+    // down or roll it on the table (heavy glass: it rolls, barely bounces);
+    // bring it back over the stand and it settles into its cup.
+    hands: {
+      floor: -1,
+      area: 2.4,
+      touch: true,
+      pieces: () => [
+        {
+          part: "ball",
+          pos: [0, 0.35, 0],
+          pivot: [0, 0.35, 0],
+          solid: { type: "sphere", r: 1 },
+          pick: [1.05, 1.05, 1.05],
+          mass: 2,
+          friction: 0.6,
+          restitution: 0.1,
+          material: { mass: 1.5, r: 0.05, bounce: 0.15, roll: 0.04, friction: 0.6 },
+          // Held where the finger took it, not set down level over the ray.
+          place: false,
+        },
+        // The stand's base (lane Hands-on H1's fixed piece), up to just under
+        // the ball: set down beside it, the ball rests against it.
+        { fixed: true, pos: [0, -0.9, 0], solid: { type: "ellipsoid", r: [0.8, 0.24, 0.8] } },
+      ],
+      joints: () => [{ type: "socket", part: "ball", snap: 0.35, armAway: 0.6 }],
+    },
     // A tap whips the mist round, and a glowing sign (a star, a moon or a
     // heart, in turn) rises out of it, turns once and fades.
     drive(t, c, out, info) {
@@ -1392,15 +1452,29 @@ export const RECIPES = {
       });
       out.amount = 0.4 + 1.2 * c.swirl + 1.5 * c.gaze;
       out.glow = [0.9, 0.6, 1, 1.4 * c.gaze];
+      // Hands-on: the mist and the signs go wherever the ball is (the
+      // glass, its motes and the cap under it are the ball's own part);
+      // the cap shows once it is off its stand.
+      const b = info.hands?.piece(0);
+      const off = b ? b.pos.map((v, i) => v - b.home[i]) : [0, 0, 0];
+      const moved = Math.hypot(...off) > 1e-3;
+      if (moved) {
+        out.parts.mist.offset = off;
+        for (const name of BALL_SIGNS) out.parts[name].offset = out.parts[name].offset.map((v, i) => v + off[i]); // prettier-ignore
+      }
+      out.parts.cap = moved ? { quat: b.quat, offset: off, visible: 1 } : { visible: 0 };
     },
     build(k, o) {
       const R = 1;
       const cy = 0.35;
       const mist = o.color;
-      // The glass: nearly clear, bright at the rim, with a window highlight.
+      // The glass: nearly clear, bright at the rim, with a window highlight
+      // (with its motes, one solid piece in Hands-on).
+      const ball = k.part("ball", { pivot: [0, cy, 0] });
       k.add(k.sphere(R), {
         even: true,
         jitter: 0.015,
+        part: ball,
         pos: [0, cy, 0],
         flat: 0.1,
         opacity: 0.22,
@@ -1416,9 +1490,24 @@ export const RECIPES = {
           return keep(mix(col, "#ffffff", hl));
         },
       });
+      // Hands-on: the bottom of the glass, hidden in the cup, shows once
+      // the ball is lifted off its stand.
+      const cap = k.part("cap", { pivot: [0, cy, 0] });
+      k.add(k.sphere(R), {
+        even: true,
+        jitter: 0.015,
+        part: cap,
+        pos: [0, cy, 0],
+        flat: 0.1,
+        opacity: 0.22,
+        share: 0.01,
+        pattern: false,
+        color: (c) => (c.ln[1] < -0.82 ? keep(mix(shade("#b8c8e8", 0.9), "#ffffff", 0.3)) : null),
+      });
       k.add(k.sphere(R * 1.002), {
         even: true,
         jitter: 0.015,
+        part: ball,
         pos: [0, cy, 0],
         share: 0.02,
         opacity: 0.9,
@@ -1510,6 +1599,7 @@ export const RECIPES = {
         const p = mul(randDir(rand), 0.85 * Math.cbrt(rand()));
         return {
           p: add(p, [0, cy, 0]),
+          part: ball,
           color: mix(mist, "#ffffff", 0.6),
           opacity: 0.9,
           kind: "pulse",
@@ -1518,6 +1608,7 @@ export const RECIPES = {
       });
       k.cloud({ share: 0.004, size: 0.9, pattern: false }, (rand) => ({
         p: add(mul(randDir(rand), 0.85 * Math.cbrt(rand())), [0, cy, 0]),
+        part: ball,
         color: "#fff6d6",
         opacity: 1,
         kind: "twinkle",
@@ -1609,3 +1700,48 @@ const GEODE_WIDE = 0.2;
 const GEODE_APART = 0.45;
 const geode = { prev: null, rising: false, openedAt: -1e9 };
 const PEARL_SWING = 1.15;
+
+// Lane Hands-on H5: the lower shell's inside, as points the pearl rests on
+// (a cup: set down in it, the pearl rolls to the middle).
+const PEARL_CUP = (() => {
+  const pts = [];
+  for (let iv = 1; iv <= 6; iv++)
+    for (let ia = 0; ia < 24; ia++) {
+      const v = iv / 6;
+      const a = (ia / 24) * 2 * Math.PI;
+      const r = v * (1 + 0.08 * Math.sin(a * 5 + 1) + 0.05 * Math.sin(a * 11));
+      pts.push([r * Math.cos(a) * 1.05, -0.3 * (1 - v * v), r * Math.sin(a) * 0.82]);
+    }
+  pts.push([0, -0.3, 0]);
+  return pts;
+})();
+const PEARL_HINGE = [0, 0.02, -0.72];
+const GEODE_HINGE = [-1.02, 0, 0];
+
+// Lane Hands-on H5: a lid built twice (shut, and lying open: splats sort in
+// their built pose) on a hinge the hand swings. The joint turns the shut
+// copy about `axis` from 0 to `swing` (open); the open copy follows, and
+// whichever is nearer its built pose shows, as the toy's own drive does.
+// It stays where it is left (no weight, no spring).
+function lidHinge(pivot, axis, swing, pos, pick) {
+  const back = axis.map((v) => -v);
+  return {
+    type: "hinge",
+    part: "lidShut",
+    pivot,
+    axis,
+    min: 0,
+    max: swing,
+    gravity: false,
+    damping: 6,
+    bounce: 0.1,
+    pos,
+    pick,
+    start: (c) => swing * (c.open * c.open * (3 - 2 * c.open)),
+    also: (v, parts) => {
+      const open = v >= swing / 2 ? 1 : 0;
+      parts.lidShut = { ...parts.lidShut, visible: 1 - open };
+      parts.lidOpen = { quat: quatAxisAngle(back, swing - v), visible: open };
+    },
+  };
+}
