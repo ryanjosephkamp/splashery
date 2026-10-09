@@ -1658,7 +1658,12 @@ export const MOVING_PHOTO = {
       }
       // (Smd: a sound that ran out before the loop was drawn, as on a device that draws few frames a
       // second, starts again with the picture's loop; it used to stay silent from then on.)
-      if (tr && !tr.blocked) {
+      // (Lane Photo sharp view r3: only where it has something left to play. A frame that came after
+      // the sound's last 20 ms found it ended, and sent it back to the last time shown, a moment
+      // before its end; it ended again, and the clip played its last moment over and over, never
+      // reaching its loop: the owner's report of October 9, 2026. Past that point the silent clock
+      // runs on to the loop, and the sound starts again there.)
+      if (tr && !tr.blocked && MOVING.t < (tr.duration || Infinity) - 0.05) {
         tr.el.currentTime = MOVING.t;
         tr.play(MOVING.sound);
       }
