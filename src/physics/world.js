@@ -534,6 +534,11 @@ export class World {
         const ax = sn > 1e-9 ? [dq[0] / sn, dq[1] / sn, dq[2] / sn] : [0, 0, 0];
         for (let i = 0; i < 3; i++) b.omega[i] += (b.restK * ang * ax[i] - (b.restD ?? 2) * b.omega[i]) * h; // prettier-ignore
       }
+      // Lane Hands-on H5: a body on a spring to its rest place (an atom
+      // pulled off its molecule): restPosK per second squared, restPosD per
+      // second.
+      if (b.restPos && !b.held)
+        for (let i = 0; i < 3; i++) b.vel[i] += (b.restPosK * (b.restPos[i] - b.pos[i]) - (b.restPosD ?? 2) * b.vel[i]) * h; // prettier-ignore
       const ld = Math.exp(-b.damping * h);
       const ad = Math.exp(-b.angDamping * h);
       for (let i = 0; i < 3; i++) {

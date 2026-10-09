@@ -183,3 +183,23 @@ test("socket armAway: armed only once the piece and the finger's line have left 
   J.nearSocket(j, h, { origin: [0.5, 0, 5], dir: [0, 0, -1] });
   expect(j.armed).toBe(true);
 });
+
+test("a piece's home spring: pulled off and let go, it springs back to its place with a wobble", async () => {
+  const { HandsOn } = await import("../src/physics/hands-on.js");
+  const hands = { gravity: 0, pieces: () => [{ token: 0, pos: [0, 0, 0], home: { k: 80, damping: 6 }, pick: [0.1, 0.1, 0.1] }] }; // prettier-ignore
+  const player = { proc: { ctx: { kit: { data: {} } } }, motion: { ctx: { transform: { scale: 1 } } }, stage: {} }; // prettier-ignore
+  const ho = new HandsOn(player);
+  ho.info = { radius: 1, recipe: { hands } };
+  const w = ho.buildPieces(hands);
+  const a = ho.pieces[0].body;
+  ho.free(a);
+  a.pos = [0, 0, -0.3];
+  w.wake();
+  let crossed = false;
+  for (let i = 0; i < 240; i++) {
+    w.step(1 / 60);
+    if (a.pos[2] > 0.005) crossed = true;
+  }
+  expect(crossed).toBe(true);
+  expect(Math.hypot(...a.pos)).toBeLessThan(0.01);
+});
