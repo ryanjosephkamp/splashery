@@ -1,0 +1,192 @@
+{
+  "browser": "154.0.8037.98",
+  "errors": [],
+  "exports": [
+    {
+      "toy": "grapes",
+      "color": false,
+      "fps": 10,
+      "frameCount": 40,
+      "changedTextTransitions": 34,
+      "gif": {
+        "width": 593,
+        "height": 620,
+        "delays": [
+          100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100,
+          100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100,
+          100, 100, 100, 100
+        ],
+        "durationMs": 4000
+      },
+      "video": {
+        "mime": "video/mp4;codecs=avc1.42001f",
+        "ext": "mp4",
+        "width": 594,
+        "height": 620,
+        "requestedSeconds": 4,
+        "framesSubmitted": 40,
+        "wallMs": 4005.8000000715256,
+        "cleanup": {
+          "stoppedTracks": true,
+          "recorderInactive": true
+        }
+      },
+      "wallMs": 5100
+    },
+    {
+      "toy": "grapes",
+      "color": true,
+      "fps": 10,
+      "frameCount": 40,
+      "changedTextTransitions": 34,
+      "gif": {
+        "width": 593,
+        "height": 620,
+        "delays": [
+          100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100,
+          100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100,
+          100, 100, 100, 100
+        ],
+        "durationMs": 4000
+      },
+      "video": {
+        "mime": "video/mp4;codecs=avc1.42001f",
+        "ext": "mp4",
+        "width": 594,
+        "height": 620,
+        "requestedSeconds": 4,
+        "framesSubmitted": 40,
+        "wallMs": 4005.7000000476837,
+        "cleanup": {
+          "stoppedTracks": true,
+          "recorderInactive": true
+        }
+      },
+      "wallMs": 5385
+    },
+    {
+      "toy": "orange",
+      "color": false,
+      "fps": 10,
+      "frameCount": 40,
+      "changedTextTransitions": 24,
+      "gif": {
+        "width": 593,
+        "height": 620,
+        "delays": [
+          100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100,
+          100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100,
+          100, 100, 100, 100
+        ],
+        "durationMs": 4000
+      },
+      "video": {
+        "mime": "video/mp4;codecs=avc1.42001f",
+        "ext": "mp4",
+        "width": 594,
+        "height": 620,
+        "requestedSeconds": 4,
+        "framesSubmitted": 40,
+        "wallMs": 4005.5,
+        "cleanup": {
+          "stoppedTracks": true,
+          "recorderInactive": true
+        }
+      },
+      "wallMs": 4882
+    },
+    {
+      "toy": "orange",
+      "color": true,
+      "fps": 10,
+      "frameCount": 40,
+      "changedTextTransitions": 24,
+      "gif": {
+        "width": 593,
+        "height": 620,
+        "delays": [
+          100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100,
+          100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100,
+          100, 100, 100, 100
+        ],
+        "durationMs": 4000
+      },
+      "video": {
+        "mime": "video/mp4;codecs=avc1.42001f",
+        "ext": "mp4",
+        "width": 594,
+        "height": 620,
+        "requestedSeconds": 4,
+        "framesSubmitted": 40,
+        "wallMs": 4003.100000023842,
+        "cleanup": {
+          "stoppedTracks": true,
+          "recorderInactive": true
+        }
+      },
+      "wallMs": 5563
+    },
+    {
+      "toy": "strawberry",
+      "color": false,
+      "fps": 10,
+      "frameCount": 40,
+      "changedTextTransitions": 21,
+      "gif": {
+        "width": 593,
+        "height": 676,
+        "delays": [
+          100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100,
+          100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100,
+          100, 100, 100, 100
+        ],
+        "durationMs": 4000
+      },
+      "video": {
+        "mime": "video/mp4;codecs=avc1.42001f",
+        "ext": "mp4",
+        "width": 594,
+        "height": 676,
+        "requestedSeconds": 4,
+        "framesSubmitted": 40,
+        "wallMs": 4013.399999976158,
+        "cleanup": {
+          "stoppedTracks": true,
+          "recorderInactive": true
+        }
+      },
+      "wallMs": 5563
+    },
+    {
+      "toy": "strawberry",
+      "color": true,
+      "fps": 10,
+      "frameCount": 40,
+      "changedTextTransitions": 21,
+      "gif": {
+        "width": 593,
+        "height": 676,
+        "delays": [
+          100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100,
+          100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100,
+          100, 100, 100, 100
+        ],
+        "durationMs": 4000
+      },
+      "video": {
+        "mime": "video/mp4;codecs=avc1.42001f",
+        "ext": "mp4",
+        "width": 594,
+        "height": 676,
+        "requestedSeconds": 4,
+        "framesSubmitted": 40,
+        "wallMs": 4008.0999999046326,
+        "cleanup": {
+          "stoppedTracks": true,
+          "recorderInactive": true
+        }
+      },
+      "wallMs": 5521
+    }
+  ]
+}

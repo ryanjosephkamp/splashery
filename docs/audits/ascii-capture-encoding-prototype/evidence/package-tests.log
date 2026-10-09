@@ -1,0 +1,21 @@
+(node:19023) [DEP0205] DeprecationWarning: `module.register()` is deprecated. Use `module.registerHooks()` instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+
+Running 8 tests using 1 worker
+
+(node:19025) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:19025) [DEP0205] DeprecationWarning: `module.register()` is deprecated. Use `module.registerHooks()` instead.
+(node:19025) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+  ✓  1 docs/audits/ascii-capture-encoding-prototype/verify.spec.mjs:24:1 › pure converter retains brightness endpoints, transparency and input bytes (4ms)
+  ✓  2 docs/audits/ascii-capture-encoding-prototype/verify.spec.mjs:47:1 › GIF cumulative timing stays within half a centisecond at all supported rates (196ms)
+  ✓  3 docs/audits/ascii-capture-encoding-prototype/verify.spec.mjs:59:1 › offline HTML exports actual selected GIF settings and retains source attribution (1.7s)
+  ✓  4 docs/audits/ascii-capture-encoding-prototype/verify.spec.mjs:103:1 › GIF and video cancellation release work and leave no downloadable result (789ms)
+  ✓  5 docs/audits/ascii-capture-encoding-prototype/verify.spec.mjs:140:1 › browser video is decodable, moves, and stops its capture tracks (5.4s)
+  ✓  6 docs/audits/ascii-capture-encoding-prototype/verify.spec.mjs:178:1 › owned live page restores capture controls after cancellation and callback failure (1.4s)
+  ✓  7 docs/audits/ascii-capture-encoding-prototype/verify.spec.mjs:228:1 › import rejects remote frames and oversized PNG dimensions before decoding (398ms)
+  ✓  8 docs/audits/ascii-capture-encoding-prototype/verify.spec.mjs:262:1 › phone and desktop layouts fit with a color animation (1.1s)
+
+  8 passed (13.0s)

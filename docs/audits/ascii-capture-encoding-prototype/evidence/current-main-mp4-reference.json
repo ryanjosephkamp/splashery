@@ -1,0 +1,74 @@
+[
+  {
+    "path": "grapes/96-color",
+    "stream": {
+      "codec_name": "h264",
+      "width": 594,
+      "height": 620,
+      "r_frame_rate": "10/1",
+      "duration": "4.000000",
+      "nb_read_frames": "40"
+    },
+    "metadataRetained": true
+  },
+  {
+    "path": "grapes/96-mono",
+    "stream": {
+      "codec_name": "h264",
+      "width": 594,
+      "height": 620,
+      "r_frame_rate": "10/1",
+      "duration": "4.000000",
+      "nb_read_frames": "40"
+    },
+    "metadataRetained": true
+  },
+  {
+    "path": "orange/96-color",
+    "stream": {
+      "codec_name": "h264",
+      "width": 594,
+      "height": 620,
+      "r_frame_rate": "10/1",
+      "duration": "4.000000",
+      "nb_read_frames": "40"
+    },
+    "metadataRetained": true
+  },
+  {
+    "path": "orange/96-mono",
+    "stream": {
+      "codec_name": "h264",
+      "width": 594,
+      "height": 620,
+      "r_frame_rate": "10/1",
+      "duration": "4.000000",
+      "nb_read_frames": "40"
+    },
+    "metadataRetained": true
+  },
+  {
+    "path": "strawberry/96-color",
+    "stream": {
+      "codec_name": "h264",
+      "width": 594,
+      "height": 676,
+      "r_frame_rate": "10/1",
+      "duration": "4.000000",
+      "nb_read_frames": "40"
+    },
+    "metadataRetained": true
+  },
+  {
+    "path": "strawberry/96-mono",
+    "stream": {
+      "codec_name": "h264",
+      "width": 594,
+      "height": 676,
+      "r_frame_rate": "10/1",
+      "duration": "4.000000",
+      "nb_read_frames": "40"
+    },
+    "metadataRetained": true
+  }
+]
