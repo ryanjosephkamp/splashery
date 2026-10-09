@@ -3022,7 +3022,9 @@ Proposals below are suggestions; the owner may change them.
     gauge fills to under the threshold and the lamp flashes red. The two live wires thicken (it
     learns), the pulses go again, the gauge passes the threshold and the lamp snaps on gold (4 s).
     Owner's review: a 3D version too, so a View option adds a 3D model that floats in space (no
-    stand, after the third review): glass bulbs, wires, a glass gauge and an output bulb.
+    stand, after the third review): glass bulbs, wires, a glass gauge and an output bulb. Hands-on
+    H5: with ✋ Hands-on on, a tap on an input lamp switches it, and the sum, the gauge and the
+    output lamp answer at once with the learned weights; a tap elsewhere runs the example.
   - Sound: A blip for each input, a click as the lamp decides, a rising tone when it learns.
 - **Multilayer perceptron** (`multilayer-perceptron`). Now: tap: Try all four inputs. Plan: keep.
   - Owner: Owner's review of the perceptron (September 27, 2026): add 2D poster and 3D multilayer
@@ -3034,7 +3036,8 @@ Proposals below are suggestions; the owner may change them.
     blue (adding) and red (subtracting) wires to the OR and NAND neurons, the ones that fire send
     pulses to the AND neuron, the output lamp lights for 01 and 10 only, and each answer is written
     into the truth table (5 s). A View option picks the poster or a 3D model, which floats in space
-    (no stand).
+    (no stand). Hands-on H5: with ✋ Hands-on on, a tap on an input lamp flips it, and the OR and
+    NAND neurons and the output show XOR at once, the truth table marking the row.
   - Sound: A blip for each input, a ding when the answer is 1, a knock when it is 0.
 - **Neural network** (`neural-network`). Now: tap: Forward and back. Plan: keep.
   - Owner: Approved on the Toy Ideas page (lane AI).
@@ -3115,7 +3118,8 @@ Proposals below are suggestions; the owner may change them.
     s).
   - Improved: AI: the ball takes 21 hops of gradient descent with momentum, leaving a trail of dots;
     just right, it overshoots and settles in the valley; too low, it creeps; too high, it bounces
-    wall to wall (4.5 s).
+    wall to wall (4.5 s). Hands-on H5: with ✋ Hands-on on, the ball comes to the finger on the
+    landscape; let go, it rolls by the slope, overshoots a little and settles in the nearest valley.
   - Sound: A soft tap as the ball lands each of its 21 hops down, in sync, and one as it lands home
     (the falling tone and whoosh are gone).
 - **Gaussian splatting** (`gaussian-splatting`). Now: tap: Train, or play the view. Plan: keep.
@@ -3152,7 +3156,9 @@ Proposals below are suggestions; the owner may change them.
     Shell and heap sort added). Computing r2: each algorithm sounds its comparisons and swaps in its
     own voice; a View option shows the same steps as crates by size, a 3D ring of colored pucks
     sorted by hue, or the classic dots; every step is checked against reference code
-    (tests/cmp2-sort.spec.mjs).
+    (tests/cmp2-sort.spec.mjs). Hands-on H5: with ✋ Hands-on on, a piece picked up and dropped on
+    another place swaps with the one there (it glides across), the counter counts the swaps, and a
+    chime rings when they are in order.
   - Sound: Each algorithm has its own voice (lane Computing r2): every comparison plays the two
     compared bars' notes softly, every swap the moving bar's note, each timed to its step; then the
     sorted bars play their scale.
@@ -3162,7 +3168,9 @@ Proposals below are suggestions; the owner may change them.
     gate, whose shapes glow as they fire, and the sum and carry lamps show 1 + 1 = 10 in binary (3.5
     s).
   - Improved: AI: both switches flip to 1, light fills the wires into the XOR and AND gates; the XOR
-    flashes and gives 0, the AND lights the carry lamp, and 1+1=10 shows (3.5 s).
+    flashes and gives 0, the AND lights the carry lamp, and 1+1=10 shows (3.5 s). Hands-on H5: with
+    ✋ Hands-on on, each lever flips by hand on its hinge, and the lamps, gates and digits show the
+    sum and carry of the two bits at once.
   - Sound: The buzz near the end is gone; the rest is unchanged.
 - **Turing machine** (`turing-machine`). Now: tap: Run the program. Plan: keep.
   - Owner: Approved on the Toy Ideas page (lane Machines A).
@@ -3172,7 +3180,9 @@ Proposals below are suggestions; the owner may change them.
   - Improved: Machines A: 17 tile slots (each a solid tile that flips edge-on and back), the rule
     card's row lit, a state lamp, a step counter and turning reels; programs Add one (each tap adds
     one more, so it counts up), Busy beaver 2 and 3 states; your own binary number in the Toy tab
-    (about 4.5 s for 1011).
+    (about 4.5 s for 1011). Hands-on H5: with ✋ Hands-on on, the tape slides by hand (a press on
+    it; elsewhere the machine lifts as before) and settles on a whole tile, so the head reads a new
+    cell; a tap on a tile flips its bit.
   - Sound: A relay click as the head reads, a wooden clack as each tile flips, a short whir as the
     tape slides, and a bell at the halt.
 - **Difference engine** (`difference-engine`). Now: tap: Turn the crank. Plan: keep.
@@ -3183,7 +3193,9 @@ Proposals below are suggestions; the owner may change them.
   - Improved: Machines A: X, P(X), Δ1, Δ2 and Δ3 columns of figure wheels (each a solid wheel read
     through a window), two-phase addition staggered as in Babbage's design, carry levers that set
     and knock back, the crank and a bell; each tap queues one more turn (4 s); your own polynomial
-    up to x³ and start value in the Toy tab.
+    up to x³ and start value in the Toy tab. Hands-on H5: with ✋ Hands-on on, circling round the
+    crank turns it (measured as seen, from any side): each full turn of the hand is one turn of the
+    engine at the hand's pace, wheels, carries and bell included, with a ratchet.
   - Sound: The ratchet of the crank, a brass click for each wheel step, a sharper snap for each
     carry, and a small bell when a new result is ready.
 - **Enigma machine** (`enigma-machine`). Now: tap: Type the message. Plan: keep.
@@ -3202,7 +3214,9 @@ Proposals below are suggestions; the owner may change them.
     set it like a real Enigma I in the Toy tab (three of rotors I to V in any order, reflector B or
     C, rings, start letters, up to ten plugboard pairs), the setting shown on the pad, the rotor
     plates and the cables; a Barbarossa, 1941, preset decodes a real message; proof in
-    tests/cmp2-enigma.spec.mjs.
+    tests/cmp2-enigma.spec.mjs. Hands-on H5: with ✋ Hands-on on, each rotor turns by dragging up or
+    down on it, clicking letter by letter, and where it is left becomes where the rotors stand and
+    where the next message starts.
   - Sound: Heavy key clacks, the ratchet of the rotors stepping, and a faint click as each lamp
     lights.
 - **Bombe** (`bombe`). Now: tap: Start the search. Plan: keep.
