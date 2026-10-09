@@ -555,7 +555,10 @@ export class Extras {
       const pc = find(isNaN(key) ? key : Number(key)) || find(key);
       if (!pc?.body.held) continue;
       const b = pc.body;
-      const dq = quat.mul(b.q, quat.conj(pc.home.q));
+      // Only its turn about the upright: they stay side by side, level,
+      // however the held one swings in the hand.
+      const f = quat.rotate(quat.mul(b.q, quat.conj(pc.home.q)), [1, 0, 0]);
+      const dq = quat.axisAngle([0, 1, 0], Math.atan2(-f[2], f[0]));
       for (const k2 of list) {
         const o = find(k2);
         if (!o || o === pc || o.body.held) continue;
@@ -566,7 +569,7 @@ export class Extras {
         b2.prevPos = b2.pos.slice();
         b2.prevQ = b2.q.slice();
         b2.vel = b.vel.slice();
-        b2.omega = b.omega.slice();
+        b2.omega = [0, 0, 0];
         b2.carriedBy = b;
       }
     }
@@ -643,7 +646,7 @@ export class Extras {
       for (const pc of this.ho.pieces)
         if (pc.body.carriedBy === b) {
           pc.body.vel = b.vel.slice();
-          pc.body.omega = b.omega.slice();
+          pc.body.damping = b.damping; // the same air on both
           pc.body.carriedBy = null;
         }
     const m = this.mats?.get(b);
