@@ -1060,18 +1060,32 @@ function placed(k, { at, scale, quat = [0, 0, 0, 1], part, weight = 1, mirror = 
 
 const defaults = (r) => Object.fromEntries((r.options || []).map((o) => [o.key, o.default]));
 
-function buildOrgans(k, part, noteFor) {
+// Lane Hands-on H5: each organ is a part of its own, a solid piece that
+// lifts out in Hands-on and clicks back into its place (ORGAN_PIECES: its
+// part, label, middle and rough size, meters).
+const ORGAN_PIECES = [
+  { part: "brain", label: "Brain", at: [0, 1.708, -0.01], r: [0.06, 0.05, 0.07], mass: 1.4 },
+  { part: "lungs", label: "Lungs", at: [0, 1.25, -0.008], r: [0.14, 0.12, 0.06], mass: 1 },
+  { part: "heart", label: "Heart", at: [0.016, 1.215, 0.035], r: [0.05, 0.06, 0.045], mass: 0.3 },
+  { part: "liver", label: "Liver", at: [-0.035, 1.112, 0.02], r: [0.09, 0.055, 0.07], mass: 1.5 },
+  { part: "stomach", label: "Stomach", at: [0.04, 1.08, 0.028], r: [0.045, 0.055, 0.035], mass: 0.4 }, // prettier-ignore
+  { part: "intestines", label: "Intestines", at: [0, 0.935, 0.042], r: [0.105, 0.072, 0.035], mass: 2 }, // prettier-ignore
+  { part: "kidneyR", label: "Kidneys", at: [-0.066, 1.03, -0.05], r: [0.025, 0.04, 0.02], mass: 0.15 }, // prettier-ignore
+  { part: "kidneyL", label: "Kidneys", at: [0.066, 1.045, -0.05], r: [0.025, 0.04, 0.02], mass: 0.15 }, // prettier-ignore
+];
+
+function buildOrgans(k, partOf, noteFor) {
   const organ = (id, label, place, opts = {}) => {
     const r = ORGANS[id];
     const o = { ...defaults(r), ...opts };
-    r.build(placed(k, { ...place, part, note: noteFor(label) }), o);
+    r.build(placed(k, { ...place, part: partOf(place.piece || id), note: noteFor(label) }), o);
   };
   organ("brain", "Brain", { at: [0, 1.708, -0.01], scale: 0.058, quat: quatAxisAngle([0, 1, 0], -Math.PI / 2) }, { colors: "plain" }); // prettier-ignore
   organ("lungs", "Lungs", { at: [0, 1.24, -0.008], scale: 0.135, weight: 1.2 });
   organ("heart", "Heart", { at: [0.016, 1.215, 0.035], scale: 0.058, weight: 1.6 });
   for (const s of [-1, 1])
-    organ("kidney", "Kidneys", { at: [s * 0.066, s < 0 ? 1.03 : 1.045, -0.05], scale: 0.042, mirror: s < 0, weight: 1.5 }); // prettier-ignore
-  const opt = (label, extra) => ({ part, even: true, opacity: 1, jitter: 0.012, flat: 0.3, weight: 1.4, ...extra, color: noteFor(label)(extra.color) }); // prettier-ignore
+    organ("kidney", "Kidneys", { at: [s * 0.066, s < 0 ? 1.03 : 1.045, -0.05], scale: 0.042, mirror: s < 0, weight: 1.5, piece: s < 0 ? "kidneyR" : "kidneyL" }); // prettier-ignore
+  const opt = (label, extra) => ({ part: partOf(label.toLowerCase()), even: true, opacity: 1, jitter: 0.012, flat: 0.3, weight: 1.4, ...extra, color: noteFor(label)(extra.color) }); // prettier-ignore
   // Liver: a wedge under the right ribs, with the green gallbladder beneath.
   const liver = (u, v) => {
     const th = v * Math.PI;
@@ -1165,6 +1179,27 @@ export const RECIPES = {
       key: "peel",
       label: "Peel a layer",
     },
+    // Hands-on (lane Hands-on H5): once the organs show, lift each one out
+    // and put it back, like a clinical anatomy puzzle: brought near its
+    // place, it clicks back in. A tap (the next peel) sends them all home.
+    hands: {
+      floor: 0,
+      area: 0.75,
+      pieces: () =>
+        ORGAN_PIECES.map((o) => ({
+          part: o.part,
+          pos: o.at,
+          pivot: o.at,
+          solid: { type: "ellipsoid", r: o.r },
+          pick: o.r.map((v) => v * 1.15),
+          mass: o.mass,
+          friction: 0.9,
+          restitution: 0.05,
+          when: (d) => !!d?.open,
+        })),
+      joints: () =>
+        ORGAN_PIECES.map((o) => ({ type: "socket", part: o.part, snap: 0.12, armAway: 0.3 })),
+    },
     drive(t, c, out, info) {
       const d = info.data;
       if (!d) return;
@@ -1211,6 +1246,9 @@ export const RECIPES = {
         }
       }
       LAYERS.forEach((id, L) => (out.parts[id] = { visible: show[L] }));
+      for (const o of ORGAN_PIECES) out.parts[o.part] = { visible: show[3] };
+      // (Hands-on lifts the organs out only while they lie open.)
+      d.open = !moving && cur === 3;
       out.tokens = tokens;
       // Sort again as the pieces fly (docs/PACKS.md 7b, rule 12 and 13).
       const m = mem(c);
@@ -1342,11 +1380,16 @@ export const RECIPES = {
         seen(tok, labelOfTok[tok], c);
         return typeof colorFn === "function" ? colorFn(c) : lit(colorFn, c.n);
       });
-      buildOrgans(k, parts.organs, (label) => (colorFn) => (c) => {
-        const col = typeof colorFn === "function" ? colorFn(c) : (colorFn ?? "#cccccc");
-        if (col !== null) seen(-1, labelIndex(label), c);
-        return col;
-      });
+      const organParts = Object.fromEntries(ORGAN_PIECES.map((o) => [o.part, k.part(o.part, { pivot: o.at })])); // prettier-ignore
+      buildOrgans(
+        k,
+        (id) => organParts[id],
+        (label) => (colorFn) => (c) => {
+          const col = typeof colorFn === "function" ? colorFn(c) : (colorFn ?? "#cccccc");
+          if (col !== null) seen(-1, labelIndex(label), c);
+          return col;
+        },
+      );
 
       k.data = { layer0, acc, labelPts, motion: null };
       // The pieces' motions are set once the splats exist (their centers).
@@ -1472,4 +1515,4 @@ function mem(c) {
 }
 
 // For tests and tools.
-export const ATLAS = { LAYERS, LABELS, PIECES, LABEL_LIST, bodyPrims, fieldAt };
+export const ATLAS = { LAYERS, LABELS, PIECES, LABEL_LIST, ORGAN_PIECES, bodyPrims, fieldAt };

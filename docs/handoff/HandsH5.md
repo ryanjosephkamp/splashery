@@ -95,6 +95,102 @@ file. The engine files belong to the merged engines; another lane's toys are the
 - Before every push: CLAUDE.md, "Before every push", with the local test set. At the end: "A lane's
   end".
 
+### Brief, October 8, 2026 (cloud)
+
+Written by the Operator on October 8, 2026, for this cloud session (word for word):
+
+> Your full brief is already in docs/handoff/HandsH5.md (written October 3, 2026, for a local lane
+> on the owner's Mac). The owner started it in the cloud instead on October 8, 2026: you run here,
+> not on his Mac, so ignore the parts about his Mac, his second account and the local port (use
+> `python3 -m http.server 4173 --bind 127.0.0.1` as CLAUDE.md says), and post clips on Effect review
+> page 2 rather than a clips branch. Its first check (docs/PACKS.md sections 5f, 5g and 5h) passes:
+> the hands-on engines merged October 3 and 4, 2026. Everything else in it stands, in its order.
+> Main has moved a lot since October 3 (read docs/HANDOFF.md "Now" first). Hands-on play only adds
+> to a toy: with the ✋ switch off every toy plays exactly as before, and these are toys the public
+> sees, so each shelf's PR waits for the owner's "good" marks on its cards. Update the handoff's "##
+> State", "## Notes", "## Known issues" and "## For the Operator" as you go; leave its brief as it
+> is and add this one under it as "### Brief, October 8, 2026 (cloud)".
+>
+> How this lane runs: exactly as docs/handoff/ScienceR3.md, "How this lane runs", says (read it;
+> replace the prefix and lane record with yours). New toys and views go behind the labs switch
+> (`labs: true`); the Operator merges labs work after the tests pass (with tools/op-merge.mjs) and
+> after the owner marks your cards; changes to toys the public already sees wait for his "good"
+> marks. Finish every working turn with "READY:", "WORKING:" or "BLOCKED:"; Splashery has no CI to
+> wait for; for a long job, schedule a check-in with send_later instead of going idle. Clips at
+> phone size (390x844, device scale 3) go on Effect review page 2
+> (https://claude.ai/artifact/BSayVkzQ2FKESesrkrSUMK) as docs/OPERATING.md, "Steps for a lane", says
+> (no republish). New sounds go in tools/sound-review.json as "ready" (the owner hears them on the
+> Sound Board), not as cards. Before READY, re-read CLAUDE.md's "Effect quality rules" and check
+> each clip against them at phone size. About six workers run at once; keep an even pace. Your
+> Operator is session_012GmKRUMZLir2nb27Bo8Cu2. Card ids hh5-…. Aim for a first READY with the first
+> shelf and its clips within about six hours.
+>
+> What the first three Hands-on lanes learned today (October 8, 2026), so you don't repeat it:
+>
+> - Engine conflicts: H1's and H2's engine PRs (#421, #420) are being merged into main tonight, and
+>   H3's (#430) after them; all three touch `src/physics/hands-on.js` and docs/PACKS.md. Read those
+>   PRs before you add engine pieces, reuse what they add, and keep your own engine PR small and
+>   additive. When main moves, merge it into your branches (never rebase).
+> - A toy with `hands.joints` plays in pieces mode (its parts move; the toy isn't tossed whole), as
+>   the chest and music box do. Say so in each shelf PR's Deviations.
+> - Clips: SwiftShader here is slow (about 6 s a frame at device scale 3). Device scale 2 at 390x844
+>   is acceptable for these clips; redo one at 3 only if the owner's mark asks.
+> - One PR per shelf, stacked on your engine branch, each with its cards on Effect review page 2, as
+>   H1 to H3 did.
+
 ## State
 
-WORKING: not started yet (October 3, 2026).
+READY (October 9, 2026, about 06:35 UTC). Every current hh5 card is marked "good" by the owner (34
+cards, among them the eight `-r2` fixes of his first marks: frog, ladybug, lungs, pearl, Platonic
+solids, Pythagoras proof, Sierpinski tetrahedron, torus knot). The engine gained `limits(at)` and
+`hands.knock: false` for those fixes. All seven PRs wait only for the Operator's merge (engine #441
+first).
+
+- **Engine** (`claude/lane-hands-h5-engine`, draft PR #441): `hands.touch` (info.hands.pressed,
+  held, speed, joint(name), piece(i); `touch: { key }` pokes), `follow`/`flee` `at(p)`, upright's
+  `rest` (the owl's settle), a piece's `when(data)`, a socket's `armAway`, a piece's `home` spring.
+  Each opt-in; `tests/hh5-engine.spec.mjs`. Main (with H1's and H2's engines) merged in.
+- **Animals** (PR #446): jellyfish, butterfly, pufferfish, ladybug, snail, starfish, frog, penguin,
+  owl, and the owl's settle fixed.
+- **Body** (PR #448): eye, lungs, the anatomy atlas's organs.
+- **Atoms** (PR #451): molecule, protein, crystal lattice. The periodic table waits for lane H3's
+  engine PR (#430: a `turntable: false` toy plays its joints).
+- **Gems** (PR #452): amethyst geode, pearl, crystal ball. The quartz cluster waits for H3's reseat
+  (#430).
+- **Math** (PR #453): Lorenz attractor, Menger sponge, torus knot, Mandelbulb, Sierpinski
+  tetrahedron, Platonic solids, circle and waves, Pythagoras proof.
+- **AI and computing** (PR #454): perceptron, multilayer perceptron, gradient descent, sorting
+  machine, half adder, Turing machine, difference engine, Enigma machine.
+
+## Notes
+
+- Clips: `tools/hh5-clip.mjs` (lane H2's tool) with `SPLASHERY_GL=llvmpipe xvfb-run -a` renders
+  390x844 at device scale 2 at about 1 s a frame here, against 6 to 13 s with SwiftShader.
+- The Level 1 sample in `tests/hl1.spec.mjs` takes the sea urchin for the jellyfish (pieces mode
+  now), as earlier lanes did for the mushroom and the soda can.
+- `tests/an.spec.mjs` counts the atlas's organs in their eight new parts.
+- Three poses: each whole toy (Level 1) changed is tested upright, on its side and upside down. A
+  toy in pieces mode or one that follows the finger isn't tossed whole, so its pieces are tested as
+  they are.
+- `tests/hl1.spec.mjs` takes the Klein bottle for the Lorenz attractor (it follows the finger now).
+
+## Known issues
+
+- The frog turns at most about 35 degrees toward its fly: the splats are sorted for the frog as it
+  sits, and a bigger turn of the whole toy showed it speckled.
+- The penguin's and snail's upright springs are stiff (their bases, as their splats give them, would
+  otherwise leave them leaning or creeping), so a push tips the penguin only a little.
+- With a hands-on rope, the jellyfish's tentacles lose their faint twinkle (they are skin splats
+  now), as the octopus's arms did.
+- The Enigma's rotor letters look garbled when a rotor is set far from A, with the ✋ switch off too
+  (the toy's rotor build); a hand turning a rotor shows it more often.
+- The geode's front half swings on its hinge rather than lifting off (its halves open like a book,
+  built twice so they sort right).
+- Sliding the Pythagoras triangles, one can pass over another for a moment on the way.
+
+## For the Operator
+
+- Engine PR #441 first; then one PR per shelf, stacked on it, each waiting for the owner's marks.
+- The periodic table and the quartz cluster follow once H3's #430 merges.
+- The Enigma's garbled rotor letters (above) are in the toy's own build; a fix belongs to its lane
+  (Computing), not Hands-on.
