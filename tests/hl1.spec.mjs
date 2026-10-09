@@ -30,7 +30,7 @@ const SAMPLE = [
   "heart",
   "oak",
   "campfire",
-  "cupcake",
+  "lollipop", // lane Hands-on H2: the cupcake's cherry lifts off now (pieces mode), so it is never lifted whole
   "teddy-bear",
   "soda-can", // lane Hands engine B: the chest's lid is a hinge now (pieces mode), so it no longer lifts whole
   "running-shoe",
@@ -46,7 +46,7 @@ const SAMPLE = [
   "drum",
   "bus",
   "eiffel-tower",
-  "watermelon",
+  "taco", // lane Hands-on H2: the watermelon's slices come out now (pieces mode), so it is never lifted whole
   "beach-ball",
   "waterfall",
   "solar-system",
