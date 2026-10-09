@@ -1584,6 +1584,14 @@ const ANDROMEDA_TILT = faceCamera(-31 * DEG, -34 * DEG, 0.55, 0.9);
 
 const EARTH_AXIS = quatRotate(EARTH_TILT, [0, 1, 0]);
 
+// The Earth turned by hand: one quarter shell shows at a time (as the tap's
+// day turns it), and the core ball inside hides while it turns (it would
+// draw over the turned surface).
+function earthSpin(a, parts) {
+  spinQuarters({ parts }, "globe", a, -1);
+  parts.core = { visible: 0 };
+}
+
 // The black hole's pull on the star (no floor in space): gravity toward the
 // middle, falling with distance squared, and a little drag (the gas of the
 // disk), so an orbit winds down into a spiral. Inside the horizon it is
@@ -1980,7 +1988,7 @@ export const RECIPES = {
     // axis; it slows back to (all but) still, its daily turn.
     hands: {
       joints: [
-        { type: "dial", part: "globe", pivot: [0, 0, 0], axis: EARTH_AXIS, drag: 0.6, pos: [0, 0, 0], pick: [1.05, 1.05, 1.05], also: (a, parts) => spinQuarters({ parts }, "globe", a, -1) }, // prettier-ignore
+        { type: "dial", part: "globe", pivot: [0, 0, 0], axis: EARTH_AXIS, drag: 0.6, pos: [0, 0, 0], pick: [1.05, 1.05, 1.05], also: (a, parts) => earthSpin(a, parts) }, // prettier-ignore
       ],
     },
     // A tap turns it through one day with the Sun off to the left: night
