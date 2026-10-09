@@ -615,7 +615,11 @@ const BASES = {
   "toy-trex": grounded(45000, [{ center: [-0.05, 0.01], y: -0.885, radii: [0.93], color: MATERIALS.plastic("#b9cf4a"), thick: true }]), // prettier-ignore
   // The BMX bicycle stands on a round gray rug.
   "bmx-bike": grounded(48000, [
-    { ...measured("bmx-bike", -0.49, MATERIALS.cloth("#a9a6a2", 0.08), 1.06), thick: true },
+    {
+      ...measured("bmx-bike", -0.49, MATERIALS.cloth("#a9a6a2", 0.08), 1.06),
+      thick: true,
+      lift: 0.02,
+    },
   ]),
   // The monkey doll sits on a cream linen cloth.
   "monkey-doll": grounded(40000, [measured("monkey-doll", -0.915, MATERIALS.weave("#ddd4c6", 0.014, 0.05))]), // prettier-ignore
