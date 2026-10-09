@@ -134,7 +134,10 @@ await page.evaluate(
 let n = 0;
 const shoot = async () => {
   await page.evaluate(() => window.__clip.frame());
-  await page.screenshot({ path: path.join(tmp, `f${String(n++).padStart(5, "0")}.png`) });
+  await page.screenshot({
+    path: path.join(tmp, `f${String(n++).padStart(5, "0")}.png`),
+    timeout: 180_000,
+  }); // (a big book draws slowly)
 };
 const step = 1 / fps;
 await shoot();
