@@ -330,7 +330,8 @@ export class FleeField {
 
 // ---- The glue to Hands-on -------------------------------------------------
 
-const KEYS = ["material", "water", "air", "well", "wheels", "shake", "flee", "follow", "force", "watch", "carry"]; // prettier-ignore
+// (touch: lane Hands-on H5; force, watch and carry: lane Hands-on H4)
+const KEYS = ["material", "water", "air", "well", "wheels", "shake", "flee", "follow", "touch", "force", "watch", "carry"]; // prettier-ignore
 
 // An Extras for a toy whose hands block asks for any of these pieces (or
 // whose pieces are projectiles, targets or have materials); null else.
@@ -381,10 +382,26 @@ export class Extras {
         const it = self.flee.get(key, pos);
         return { offset: it.d, vel: it.v };
       },
-      // Lane Hands-on H4: where a piece is (by its part name or token), in
-      // the recipe's units: { pos, quat (its turn from home), home, off
-      // (picked up or knocked loose), held }; null before the world is built
-      // or for a piece it doesn't have.
+      // Lane Hands-on H5 (`hands.touch`): the finger, for a drive. `pressed`
+      // while a finger is down on the toy (a press, a push or a hold), `held`
+      // while it (or a piece) is up in the hand, `speed` how fast the whole
+      // toy (or the held piece) moves, in toy radii per second, `joint(name)`
+      // a joint's value (null without one) and `piece(i)` where piece i is.
+      pressed: false,
+      get held() {
+        return !!self.ho.hold;
+      },
+      get speed() {
+        const ho = self.ho;
+        const b = ho.hold?.body || (ho.mode === "toy" ? ho.body : null);
+        return b && ho.world ? v3.len(b.vel) / ho.R() : 0;
+      },
+      joint(name) {
+        const j = self.ho.joints?.byName?.get(name);
+        return j && Number.isFinite(j.v) ? j.v : null;
+      },
+      // Where a piece is, by its number (lane Hands-on H5) or by its part
+      // name, token or `name` (lane Hands-on H4): see pieceState().
       piece(key) {
         return self.pieceState(key);
       },
@@ -575,14 +592,21 @@ export class Extras {
     }
   }
 
+  // Where a piece is, for a drive (info.hands.piece): by its number in
+  // `hands.pieces` (lane Hands-on H5), or by its part name, token or `name`
+  // (lane Hands-on H4; a piece with no part of its own, drawn by the drive).
+  // { pos, vel, quat (its turn in the world), turn (its turn from home),
+  // home, held, pinned (resting at home), off (picked up or knocked loose,
+  // = !pinned) }, recipe units in pieces mode; null before the world is
+  // built or for a piece it doesn't have.
   pieceState(key) {
     const ho = this.ho;
-    if (!ho.world || ho.mode !== "pieces") return null;
-    const pc = ho.pieces.find((p) => p.part === key || p.def?.name === key || (p.token !== undefined && p.token === key)); // prettier-ignore
+    if (!ho.world || !ho.pieces) return null;
+    const pc = typeof key === "number" ? ho.pieces[key] : ho.pieces.find((p) => p.part === key || p.def?.name === key || (p.token !== undefined && p.token === key)); // prettier-ignore
     if (!pc) return null;
     const b = pc.body;
-    const dq = quat.mul(b.q, quat.conj(pc.home.q));
-    return { pos: b.pos.slice(), quat: dq, home: pc.home.pos.slice(), off: !b.pinned, held: !!b.held }; // prettier-ignore
+    const turn = quat.mul(b.q, quat.conj(pc.home.q));
+    return { pos: b.pos.slice(), vel: b.vel.slice(), quat: b.q.slice(), turn, home: pc.home.pos.slice(), held: !!b.held, pinned: !!b.pinned, off: !b.pinned }; // prettier-ignore
   }
 
   // ---- The finger ----
@@ -591,7 +615,12 @@ export class Extras {
   pressAt(hit, x, y) {
     this.samples = [{ t: this.ho.time, x, y }];
     this.spin = null;
+    if (this.hands.touch) this.touched(); // lane Hands-on H5
     if (!this.flee) return false;
+    // Lane Hands-on H5: `at(p)` (recipe units) limits where a press is
+    // followed (an owl's head); a press elsewhere picks the toy up as usual.
+    const fo = this.hands.flee || this.hands.follow;
+    if (typeof fo === "object" && fo.at && !fo.at(this.player.toRecipe(hit))) return false;
     this.fingerDown = true;
     this.fingerAt(x, y);
     return true;
@@ -618,6 +647,7 @@ export class Extras {
   // Lets go; true when the drag was ours.
   release() {
     this.shake?.end();
+    this.about.pressed = false; // lane Hands-on H5
     if (this.flee && this.fingerDown) {
       this.fingerDown = false;
       this.flee.ray = null;
@@ -693,9 +723,36 @@ export class Extras {
     p.invI = [0, 0, 0];
   }
 
+  // Lane Hands-on H5: a press on a toy with `hands.touch` (info.hands.pressed).
+  // With `key`, a press held `after` seconds (0.15), or one that becomes a
+  // push or a pick-up, fires that action too (a poke), at most every `gap`
+  // seconds (0.5); a quick tap is left to the toy's own tap.
+  touched() {
+    this.about.pressed = true;
+    this.touchT = this.ho.time;
+    this.touchFired = false;
+  }
+
+  touchStep() {
+    const t = this.hands.touch;
+    const ho = this.ho;
+    if (!this.about.pressed || this.touchFired || typeof t !== "object" || !t.key) return;
+    if (ho.time - this.touchT < (t.after ?? 0.15) && !ho.hold && !ho.press?.local) return;
+    this.touchFired = true;
+    if (ho.time - (this.lastTouch ?? -Infinity) < (t.gap ?? 0.5)) return;
+    this.lastTouch = ho.time;
+    const player = this.player;
+    if (!player.motion?.act) return;
+    const r = player.motion.act(player.time, null, { key: t.key });
+    player.stage?.requestRender?.();
+    player.emit?.("action", r);
+  }
+
   fireShake() {
     const player = this.player;
     const s = this.hands.shake;
+    // (`fire: false`: the shake only reads as info.hands.shake; lane Hands-on H3.)
+    if (typeof s === "object" && s.fire === false) return;
     const key = (typeof s === "object" && s.key) || player.toyInfo?.recipe?.action?.key;
     if (!key || !player.motion?.act) return;
     const r = player.motion.act(player.time, null, { key });
@@ -718,6 +775,10 @@ export class Extras {
     if (this.flee) {
       if (this.flee.step(dt)) busy = true;
       if (this.fingerDown) busy = true;
+    }
+    if (ab.pressed) {
+      this.touchStep(); // lane Hands-on H5
+      busy = true;
     }
     // A water toy shows its water line as soon as Hands-on is on.
     if (this.hands.water) {
