@@ -822,9 +822,39 @@ drive(t, c, out, info) {
   const at = vec.add(P, f.offset);
 ```
 
+`at: (p) => bool` (lane Hands-on H5) limits where a press is followed or fled (`p` the press, in
+recipe units): a press elsewhere picks the toy up as usual (an owl follows a press on its head and
+is tossed by its body).
+
+**The finger, for a drive** (`hands.touch`; lane Hands-on H5, October 8, 2026): `touch: true` tells
+the recipe's `drive()` what the finger does, as `info.hands.pressed` (a finger is down on the toy: a
+press, a push or a hold), `info.hands.held` (the toy, or a piece, is up in the hand) and
+`info.hands.speed` (how fast the whole toy, or the held piece, moves, in toy radii per second), so a
+toy can answer the hand (a pufferfish puffs while you hold it, lungs breathe out while squeezed).
+`info.hands.joint(name)` is a joint's value (an angle or a slide, null without one), and
+`info.hands.piece(i)` where piece i is (`{ pos, quat, home, held }`, recipe units), so a drive can
+follow a part the hand moved (the waves of a point turned round a circle). `touch: { key }` also
+fires that action when a press is held `after` seconds (0.15) or becomes a push or a pick-up (a
+poke), at most every `gap` seconds (0.5); a quick tap is still the toy's own tap. A press still
+picks the toy up as before.
+
+```js
+hands: { touch: { key: "poke" } },
+drive(t, c, out, info) {
+  const squeezed = info.hands?.pressed ? 1 : 0;
+```
+
 **Projectiles and targets** (pieces): a piece with `projectile: { nose: [0, 0, 1], vane: 20 }` flies
 nose first, and one that hits a piece with `target: true` sticks in it where it hit, until it is
 picked up again or ↺ Reset (objects only, never people or animals). `stick: false` lets it bounce.
+
+A piece's `home: { k, damping }` (lane Hands-on H5; per second squared, per second) puts it on a
+spring to where it was built, place and turn: let go, it springs back with a wobble instead of
+falling (an atom of a molecule, pulled off and let go).
+
+A piece's `when: (data) => bool` (lane Hands-on H5; `data` the build's `k.data`) says whether it can
+be picked up now: an anatomy atlas's organs only while its organs layer shows (its drive keeps the
+shown layer in `data`).
 
 Lane Hands-on H2 (October 8, 2026) added these keys to a piece's def:
 
@@ -941,6 +971,18 @@ pieces: (d) => d.wedges.map((w) => ({ token: w.token, pos: w.mid, quat: w.q, sol
 joints: (d) => d.wedges.map((w) => ({ type: "socket", token: w.token, snap: 0.35 })),
 ```
 
+`armAway` (toy radii; lane Hands-on H5): it clicks back only once both the piece and the finger's
+line have been that far from its place (small pieces packed close, an atlas's organs, would
+otherwise click straight back as they are lifted out).
+
+`hands.knock: false` (lane Hands-on H5): a pinned piece leaves its place only when picked, never
+knocked loose by another (a Platonic solid's faces: one set down on the rest doesn't topple them).
+
+A hinge's, slider's or dial's `limits: (at) => [min, max]` (lane Hands-on H5) narrows its stops as
+the toy stands now (`at.joint(name)` reads another joint's value), never past where the part already
+is: a part another blocks, as a Pythagoras triangle that can't slide through its neighbor until that
+one has moved.
+
 **Break**: a piece held fast at `at` to the ground, or to another piece (`to`, a part, a token or a
 joint's name), until the finger pulls it `pull` toy radii (0.35): it bends as a whole about `at`, up
 to `give` radians (0.12), then snaps off into the hand. On a loose piece it rides along with that
@@ -975,7 +1017,10 @@ lamp's head on its arm, a clock's hands on a turning dial. Children pose after t
 
 **Upright** (Level 1, a whole toy): `hands: { upright: { k: 40, damping: 3 } }` turns a tipped toy
 back upright (its tilt only; its turn about the vertical stays), so it rocks and rights itself as a
-sailboat or a roly-poly penguin does.
+sailboat or a roly-poly penguin does. With `rest` (radians; lane Hands-on H5) it settles once it is
+back within that of upright, on the floor and nearly still, and holds there until the finger touches
+it again: a toy on a round base (an owl gripping its round branch) would otherwise creep on and
+never come to rest: `hands: { upright: { k: 90, damping: 6, rest: 0.15 } }`.
 
 **Scan rigs**: `rigPieces(rig, names, opts)` (from `src/physics/joints.js`) turns a scan rig's
 hard-edged parts (src/rigs.js) into loose pieces, one body each, shaped as the part's first region
