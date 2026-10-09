@@ -826,7 +826,8 @@ And `hands.foot` (0.6): how far out from its middle, as a share of its pick radi
 looks for what is under it; 0.95 lets a wide piece (a burger's bun) set down beside a stack sit on
 its edge instead of being lowered into it. And `hands.walls` (`[x0, x1, z0, z1]`, toy radii) in
 place of the square `area`, for a play area that isn't square: the croissant's lid stays on its
-baking tray.
+baking tray. `hands.resort` (seconds, 0.25) is how often moving pieces are sorted again; less for a
+piece that turns fast in front of the toy's own splats (the sunflower's nodding head).
 
 `info.hands.moved` is whether anything is off home (or on its way back), so a drive can show what
 Hands-on uncovered (the cut face of the kiwi half left behind). `info.hands.piece(name)` (a part's

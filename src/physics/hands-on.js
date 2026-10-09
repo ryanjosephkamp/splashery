@@ -1044,7 +1044,10 @@ export class HandsOn {
       player.motion.handsParts = this.moved || this.homing || so ? parts : null;
       // Sort the moved pieces again now and then (and once they rest).
       const asleep = this.world.asleep;
-      if (out.length && (this.time - this.lastResort > 0.25 || (asleep && !this.restSorted))) {
+      // (Lane Hands-on H2: `hands.resort`, seconds, for a toy whose pieces
+      // turn fast in front of its own splats, a sunflower's nodding head.)
+      const every = this.info.recipe.hands.resort ?? 0.25;
+      if (out.length && (this.time - this.lastResort > every || (asleep && !this.restSorted))) {
         this.lastResort = this.time;
         this.restSorted = asleep;
         player.motion.handsResort = true;
