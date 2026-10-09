@@ -140,11 +140,11 @@ Written by the Operator on October 8, 2026, for this cloud session (word for wor
 
 ## State
 
-READY (October 9, 2026, about 06:00 UTC). The owner's first marks (22 cards): 14 good, 8 to fix; all
-8 fixed and posted as `-r2` cards (frog, ladybug, lungs, pearl, Platonic solids, Pythagoras proof,
-Sierpinski tetrahedron, torus knot). The engine gained `limits(at)` and `hands.knock: false` for
-them. Model: Opus 5.5 (claude-opus-5-5), high effort. Every shelf is built; one draft PR each,
-stacked on the engine PR, with clips on Effect review page 2.
+READY (October 9, 2026, about 06:40 UTC). Every current hh5 card is marked "good" by the owner (41
+cards, among them the eight `-r2` fixes of his first marks: frog, ladybug, lungs, pearl, Platonic
+solids, Pythagoras proof, Sierpinski tetrahedron, torus knot). The engine gained `limits(at)` and
+`hands.knock: false` for those fixes. All seven PRs wait only for the Operator's merge (engine #441
+first).
 
 - **Engine** (`claude/lane-hands-h5-engine`, draft PR #441): `hands.touch` (info.hands.pressed,
   held, speed, joint(name), piece(i); `touch: { key }` pokes), `follow`/`flee` `at(p)`, upright's
