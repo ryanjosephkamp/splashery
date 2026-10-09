@@ -864,20 +864,29 @@ Lane Hands-on H2 (October 8, 2026) added these keys to a piece's def:
   its splats were built (a kiwi's half, built face up and shown closed): the body starts and goes
   home there, and the piece's splats move from where they were built.
 - `ride: [index | { token, visible }]`: other tokens that move with the piece (a banana's skin
-  strips; `visible: 0` keeps one hidden, its pale inside).
+  strips; `visible: 0` keeps one hidden, its pale inside). A part piece can carry other parts too:
+  `{ part, pivot, upside }` moves that part with it (about `pivot`, the piece's own by default), and
+  merges `upside` into it while the piece lies upside down (a flipped pancake's syrup and butter,
+  now under it: `{ visible: 0 }`). The drive moves it with the piece the rest of the time.
 - `offHome: { … }`: entries merged into the piece's part while it is off its place (a candle pulled
   out of the cake goes out: `{ visible: 0 }`).
 - `flip: true` (below).
 
 And `hands.foot` (0.6): how far out from its middle, as a share of its pick radius, a held piece
 looks for what is under it; 0.95 lets a wide piece (a burger's bun) set down beside a stack sit on
-its edge instead of being lowered into it.
+its edge instead of being lowered into it. And `hands.walls` (`[x0, x1, z0, z1]`, toy radii) in
+place of the square `area`, for a play area that isn't square: the croissant's lid stays on its
+baking tray. `hands.resort` (seconds, 0.25) is how often moving pieces are sorted again; less for a
+piece that turns fast in front of the toy's own splats (the sunflower's nodding head).
 
 `info.hands.moved` is whether anything is off home (or on its way back), so a drive can show what
-Hands-on uncovered (the cut face of the kiwi half left behind). And a break joint takes `spill`
-(radians): a piece riding another comes loose when that one tips past it (scoops off a tipped cone),
-with the cue `"spill"`; and `place: true`: snapped off, it is held as a picked piece is (by its
-middle, level, hovering over whatever is under the finger), not hanging from where it was grabbed.
+Hands-on uncovered (the cut face of the kiwi half left behind). `info.hands.piece(name)` (a part's
+name, a string; a number is a piece's index, as above) also gives the piece's `vel` and `pinned`, so
+a drive can answer where it is and how it moves (a lotus dropped in its pond splashes where it
+lands). And a break joint takes `spill` (radians): a piece riding another comes loose when that one
+tips past it (scoops off a tipped cone), with the cue `"spill"`; and `place: true`: snapped off, it
+is held as a picked piece is (by its middle, level, hovering over whatever is under the finger), not
+hanging from where it was grabbed.
 
 **A flip** (lane Hands-on H2, October 8, 2026): a piece with `flip: true` in its def, let go from a
 quick flick up the screen (faster up than across), is tossed up with half a turn about the level
@@ -964,7 +973,11 @@ slows).
 
 **Socket**: a loose piece (in `hands.pieces`, or made here with `solid`) that clicks back into the
 place it was built in: once it has been taken out, bringing it within `snap` toy radii (0.3) of its
-place, or pointing the finger at its place, glides it home and locks it there.
+place, or pointing the finger at its place, glides it home and locks it there. `out` (a vector, in
+recipe units) is its doorway, the way it comes out and goes in when other things fit round it (a
+melon's slice, straight up out of its slot): taken from its place it slides along `out`, held as
+built, and is free past its end; let go before that, it slides back in; and brought back, it glides
+to the doorway's mouth and then straight in.
 
 ```js
 pieces: (d) => d.wedges.map((w) => ({ token: w.token, pos: w.mid, quat: w.q, solid: WEDGE, points: surfacePoints(WEDGE, 1), pick: [0.3, 0.4, 0.3] })),
