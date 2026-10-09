@@ -2470,7 +2470,8 @@ Proposals below are suggestions; the owner may change them.
     and cross over the tongue, tie back into a bow, and the shoe taps its toe twice (4 s). Round 2:
     denser scan, thinner braided laces. Sharpness A (October 2, 2026): exact splat sizes for a
     crisper outline and a calmer fabric texture. Fix7: flag colors reach the shoe (its laces keep
-    theirs).
+    theirs). Hands-on H1: in Hands-on, the laces are two ropes tied in their bow: pull a lace end
+    out and the bow comes undone, both laces falling loose over the shoe; ↺ ties them again.
   - Sound: Laces zipping through the eyelets, a soft tug, two toe taps.
 - **Hoodie** (`hoodie`). Now: tap: Hood flip and cross the sleeves. Plan: keep.
   - Owner: From the owner's approved ideas on the Toy Ideas page (lane Real objects, September 29,
@@ -2485,7 +2486,9 @@ Proposals below are suggestions; the owner may change them.
     and settle (4.5 s). Round 2: attached hood and shoulders, sleeves clear of the body. Fix7: a
     band of cloth fills the gap behind the hood as it nods, and the cuffs are gathered shut, so a
     raised sleeve shows cloth, not a hole; flag colors reach the cloth. Hands engine C (Hands-on):
-    pull the hood; it flops like cloth and springs back up.
+    pull the hood; it flops like cloth and springs back up. Hands-on H1: in Hands-on, lift a sleeve
+    by its cuff and let go: it swings back down on its shoulder and settles (the hood flops as
+    before).
   - Sound: The fabric's soft brushes and the zip, with much less wind (Sound C, October 2, 2026).
 - **Sunglasses** (`sunglasses`). Now: tap: Fold, flip and darken. Plan: keep.
   - Owner: From the owner's approved ideas on the Toy Ideas page (lane Real objects, September 29,
@@ -2498,7 +2501,8 @@ Proposals below are suggestions; the owner may change them.
     head over heels to face you, the lenses darken from the rim inward to deep gray, then clear as
     the arms unfold (3.5 s). Round 2: denser model, arms kept behind the lenses. Fix7: a tap on a
     lens starts the effect too (faint pick splats over the glass). Fix7: flag colors reach the frame
-    (the lenses keep theirs).
+    (the lenses keep theirs). Hands-on H1: in Hands-on, fold each arm in on its hinge and out again:
+    an arm stays where it is left, stopping at open and at folded with a click.
   - Sound: Each fold is a plastic hinge sliding shut and seating; the lenses darken silently (no
     electronic clicks or shimmer).
 - **Baseball cap** (`baseball-cap`). Now: tap: Flip and spin. Plan: keep.
@@ -2510,7 +2514,9 @@ Proposals below are suggestions; the owner may change them.
   - Improved: Real objects: a detailed CC BY model of a gray six-panel cap on a kit-built walnut
     stand. It flips up off the stand, spins flat three and a half turns round a small loop like a
     flying disc, lands brim backward, then hops and turns round the right way (3 s). Round 2:
-    denser, sharper model. Fix7: flag colors reach the cap (its stand keeps its walnut).
+    denser, sharper model. Fix7: flag colors reach the cap (its stand keeps its walnut). Hands-on
+    H1: in Hands-on, throw it flat with a flick, like a flying disc: it spins and glides a little on
+    its brim, then lands soft.
   - Sound: Fabric rustles instead of whooshes as it flips; the flick and the soft landings are
     unchanged.
 
