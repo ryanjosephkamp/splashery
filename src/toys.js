@@ -2652,7 +2652,8 @@ export const TOYS = [
     pack: "maths",
     labs: true,
     tags: "5-cell pentachoron 4-simplex 4d four dimensions polytope projection",
-    camera: { yaw: 0.55, pitch: 0.35, roll: 0, distance: 4.1 },
+    // Fix10: closer than the other 4D shapes, as its rest pose is smaller.
+    camera: { yaw: 0.55, pitch: 0.35, roll: 0, distance: 3.1 },
   },
   {
     id: "sixteen-cell",
