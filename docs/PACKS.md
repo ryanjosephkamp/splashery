@@ -745,7 +745,9 @@ radius, toy radii, 3.2), `color`. With pieces, `level` is in recipe units and ev
 **Buoyancy in air** (`hands.air`): a hot-air balloon that settles where it hovers, floats back up
 when pulled down and sinks back when pushed up, its basket under it:
 `hands: { air: { hover: 0, spring: 0.3, drag: 3.2, floor: 1.5, upright: 6 } }` (or `air: true`).
-`hover` is toy radii from home; `floor` lowers the floor so it can be pulled down.
+`hover` is toy radii from home; `floor` lowers the floor so it can be pulled down. A whole toy that
+floats (on `water` or in `air`) can be pushed below where it stands; any other toy can't be pressed
+into its floor (lane Hands-on H4).
 
 **A gravity well** (`hands.well`): a pull toward a point instead of the floor. The floor goes
 (`floor: true` keeps it) and the air with it, so a piece thrown sideways orbits.

@@ -109,3 +109,41 @@ test("info.hands.piece: a drive reads where a piece is", async ({ page }) => {
   expect(back.off).toBe(false);
   expect(back.pos[1]).toBeCloseTo(-1.45, 3);
 });
+
+test("a floating toy can be pushed down below where it stands; others can't", async ({ page }) => {
+  await page.goto(APP);
+  await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
+  const pushDown = (water) =>
+    page.evaluate(async (water) => {
+      const { app, player } = window.__splashery;
+      await app.chooseToy("submarine");
+      player.opts.idleDelay = 1e9;
+      player.toyInfo.recipe.hands = water ? { water: { density: 0.62 } } : {};
+      const h = player.handsOn;
+      h.attach(player.toyInfo);
+      h.setOn(true);
+      const tick = (n) => {
+        for (let i = 0; i < n; i++) player.update(1 / 60);
+      };
+      tick(5);
+      const c = player.toyInfo.center.slice();
+      const s = player.stage.toScreen(c);
+      h.pressAt(c, s[0], s[1]);
+      for (let k = 1; k <= 30; k++) {
+        h.moveTo(s[0], s[1] + (150 * k) / 30);
+        tick(2);
+      }
+      tick(20);
+      const b = h.body;
+      const down = (b.home.pos[1] - b.pos[1]) / player.toyInfo.radius;
+      h.release();
+      tick(120);
+      const after = (b.home.pos[1] - b.pos[1]) / player.toyInfo.radius;
+      return { down, after };
+    }, water);
+  const floats = await pushDown(true);
+  expect(floats.down).toBeGreaterThan(0.25); // held well under its line
+  expect(Math.abs(floats.after)).toBeLessThan(0.15); // and bobbed back up
+  const solid = await pushDown(false);
+  expect(solid.down).toBeLessThan(0.05); // not into its floor
+});
