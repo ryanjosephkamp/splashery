@@ -106,12 +106,12 @@ What the first three Hands-on lanes learned today (October 8, 2026), so you don'
 
 ## State
 
-WORKING (October 9, 2026, 07:00 UTC): the owner marked 28 of the 33 cards good. The ones that needed
-work are fixed and their new clips are posted as `-r2` cards (each old card points to it): the bus's
-wheels now sit outside its sides, the tractor's mudguards clear its tires (both change the toy's
-look a little with ✋ off too; new thumbnails), the castle's clip raises the drawbridge again, the
-DNA unzips fully with a shorter pull and zips back slowly, and Galileo's two balls stay level side
-by side while lifted (an engine fix in #439).
+WORKING (October 9, 2026, 08:00 UTC): the owner's marks on the redone clips: the bus, castle and
+Galileo's balls (`-r2`) are good. Two needed another round, now posted as `-r3` cards: the tractor's
+rear mudguards have inner walls (the far tire's top no longer shows in the cab), and the DNA clip
+had pressed in the gap between the strands, so the finger turned the view and nothing unzipped (the
+test presses the toy directly, so it never showed). The clip now takes a strand; the helix turns to
+face you as it opens, and its strands peel a little wider than the tap's.
 
 - Engine PR #439 (`claude/lane-hands-h4-engine`): `hands.force` (a recipe's own push, each substep,
   with `ctx.free()`), `info.hands.piece(key)` (by part, token or `name`) with `hands.watch`,
@@ -156,3 +156,5 @@ by side while lifted (an engine fix in #439).
 - The bicycle's "drag the pedals to turn them" needs a dial on a whole toy (Level 1 with wheels); no
   engine piece does that. Skipped; the bicycle rolls and stays upright.
 - Merge #439 (engine) before the shelf PRs.
+- A clip's `from3` press must land on the toy's splats (the app picks what is under the finger):
+  between the DNA's strands the press missed and the drag orbited the view.
