@@ -167,7 +167,11 @@ const modelSize = (w, h, side = DEPTH_SIDE) => {
 // A frame's depth as 0 (far) .. 1 (near) at the clip's size: the model's
 // output scaled by its 2nd and 98th percentiles, those eased across
 // neighboring frames so the depth doesn't pump from frame to frame.
-export function normalizeDepths(raw, w, h, keepFlat = false) {
+// Lane Photo fidelity r2: with the frames' colors (`frames`, RGBA at w by h),
+// the depth is enlarged edge-aware (guidedDepth). Measured against the
+// model's own depth at 518 (tools/phf-depth-edges.mjs), it moves the edges
+// too little to be worth its time, so the toy doesn't use it; the tool does.
+export function normalizeDepths(raw, w, h, keepFlat = false, frames = null) {
   const ranges = raw.map((d) => {
     const s = Float32Array.from(d.d).sort();
     return [s[Math.floor(s.length * 0.02)], s[Math.floor(s.length * 0.98)]];
@@ -185,6 +189,12 @@ export function normalizeDepths(raw, w, h, keepFlat = false) {
     hi /= n;
     const span = Math.max(1e-6, hi - lo);
     const f = keepFlat ? reliefScale(lo, hi) : 1; // lane Photo fidelity: a flat picture stays flat
+    if (frames?.[i]) {
+      const dn = new Float32Array(d.w * d.h);
+      for (let k = 0; k < dn.length; k++)
+        dn[k] = 0.5 + (Math.max(0, Math.min(1, (d.d[k] - lo) / span)) - 0.5) * f;
+      return guidedDepth(dn, d.w, d.h, frames[i].data, w, h);
+    }
     const out = new Float32Array(w * h);
     for (let y = 0; y < h; y++)
       for (let x = 0; x < w; x++) {
@@ -205,6 +215,84 @@ export function normalizeDepths(raw, w, h, keepFlat = false) {
       }
     return out;
   });
+}
+
+// Lane Photo fidelity r2: the depth (dw by dh, 0..1) enlarged to the frame (w by h) with the
+// frame's colors as the guide (a joint bilateral filter, as Photo to 3D's upsampleDepth): each
+// pixel takes the depths of the 3 by 3 depth cells around it, weighted by how near they lie and by
+// how alike the frame's color there (averaged over the cell) is to the pixel's own, so a near
+// thing's outline in the depth snaps to its outline in the picture. Where no cell's color is near
+// the pixel's, it falls back to the plain depth. Tables stand in for the exponentials:
+// a frame takes a few milliseconds per 100,000 pixels.
+const GUIDE_SIGMA = 0.09; // how alike two colors (0..1, summed squares of r, g, b) must be
+const GUIDE_LUT = 1024;
+const GUIDE_MAX = 0.25; // a color difference (squared) beyond this weighs nothing
+const rangeLut = (() => {
+  const t = new Float32Array(GUIDE_LUT + 1);
+  for (let i = 0; i <= GUIDE_LUT; i++)
+    t[i] = i === GUIDE_LUT ? 0 : Math.exp(-((i / GUIDE_LUT) * GUIDE_MAX) / (2 * GUIDE_SIGMA * GUIDE_SIGMA)); // prettier-ignore
+  return t;
+})();
+export function guidedDepth(dn, dw, dh, rgba, w, h) {
+  // the frame's colors averaged over each depth cell (0..1)
+  const lo = shrink(rgba, w, h, dw, dh);
+  const gl = new Float32Array(dw * dh * 3);
+  for (let k = 0; k < dw * dh; k++) {
+    gl[k * 3] = lo[k * 4] / 255;
+    gl[k * 3 + 1] = lo[k * 4 + 1] / 255;
+    gl[k * 3 + 2] = lo[k * 4 + 2] / 255;
+  }
+  const out = new Float32Array(w * h);
+  const sp = 1 / (2 * 0.8 * 0.8);
+  const scale = GUIDE_LUT / GUIDE_MAX;
+  // the 3 by 3 depth cells around the nearest one, and their distance weights along each axis
+  const ex = new Float32Array(3);
+  const ey = new Float32Array(3);
+  const cx = new Int32Array(3);
+  const cy = new Int32Array(3);
+  for (let y = 0; y < h; y++) {
+    const v = ((y + 0.5) * dh) / h - 0.5;
+    const jc = Math.round(v);
+    for (let a = 0; a < 3; a++) {
+      const jj = jc - 1 + a;
+      cy[a] = (jj < 0 ? 0 : jj >= dh ? dh - 1 : jj) * dw;
+      ey[a] = Math.exp(-((v - jj) ** 2) * sp);
+    }
+    for (let x = 0; x < w; x++) {
+      const u = ((x + 0.5) * dw) / w - 0.5;
+      const ic = Math.round(u);
+      for (let a = 0; a < 3; a++) {
+        const ii = ic - 1 + a;
+        cx[a] = ii < 0 ? 0 : ii >= dw ? dw - 1 : ii;
+        ex[a] = Math.exp(-((u - ii) ** 2) * sp);
+      }
+      const o = (y * w + x) * 4;
+      const r = rgba[o] / 255;
+      const g = rgba[o + 1] / 255;
+      const b = rgba[o + 2] / 255;
+      let sum = 0;
+      let wsum = 0;
+      let plain = 0;
+      let psum = 0;
+      for (let bj = 0; bj < 3; bj++)
+        for (let a = 0; a < 3; a++) {
+          const c = cy[bj] + cx[a];
+          const dr = gl[c * 3] - r;
+          const dg = gl[c * 3 + 1] - g;
+          const db = gl[c * 3 + 2] - b;
+          const q = (dr * dr + dg * dg + db * db) * scale;
+          const s = ex[a] * ey[bj];
+          const ws = s * rangeLut[q >= GUIDE_LUT ? GUIDE_LUT : q | 0];
+          sum += ws * dn[c];
+          wsum += ws;
+          plain += s * dn[c];
+          psum += s;
+        }
+      // where no cell's color is near the pixel's: the plain (distance-weighted) depth
+      out[y * w + x] = wsum > 1e-3 * psum ? sum / wsum : plain / psum;
+    }
+  }
+  return out;
 }
 
 // The packed depths of a clip's frames (the sample's file): a count, then
