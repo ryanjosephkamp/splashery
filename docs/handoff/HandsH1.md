@@ -81,6 +81,11 @@ cards, grouped Balls, Shapes, Toys and Clothing).
   shell no longer sinks under the tied bow and stands a little proud of the shoe's top), and the
   hoodie's armpit pulled apart (`hh1-hoodie-r2`: a sleeve now turns about its armpit, lifts at most
   about 0.4 rad and never swings in past where it hangs).
+- Third round (October 9, 2026, 03:27): the shoe's r3 is "good". The hoodie's r2 got "Shoulder
+  doesn't look right now": each sleeve is now cut at its elbow (`hh1-hoodie-r3`). Lifted by the cuff
+  it bends at the elbow; the upper sleeve stays as it hangs, so the shoulder and armpit stay as
+  scanned. The forearm keeps a band of the upper sleeve's cloth, so a bent elbow shows cloth. The
+  tap moves each forearm with its sleeve as one piece. (`addScan` takes a `partOf` option for it.)
 - Not done: the garden gnome (the L1 sweep's finding) is a scan outside these shelves, its cause in
   the engine's resting contact (see "For the Operator").
 
