@@ -190,9 +190,10 @@ clips within about six hours.
 
 ## State
 
-READY (October 8, 2026, about 22:00 UTC; cloud session, Opus 5.5 at high effort). PR #419 (draft).
-Effect review page 2, lane record `PhotorealR3`: 19 "Closed bases" cards, 28 effect cards and 10
-new-toy cards. Every clip was watched at phone size against CLAUDE.md's effect quality rules.
+READY (October 9, 2026, about 04:00 UTC; cloud session, Opus 5.5 at high effort; main a0b68bc3
+merged). PR #419 (draft). Effect review page 2, lane record `PhotorealR3`: 19 "Closed bases" cards,
+28 effect cards and 10 new-toy cards. Every clip was watched at phone size against CLAUDE.md's
+effect quality rules.
 
 - Item 1, bases: done. 19 of the 30 r2 toys are visibly closed (cards `pr3-base-…`). Five more got a
   core inside that makes no visible change at phone size (no card); the crystal and the lioness's
@@ -291,6 +292,8 @@ What main already did for these toys since October 3 (so this lane does not redo
   can't be told from the jaw's dark shadows by position or color).
 - The cone shell's far side was captured poorly (a white smear), so it rocks one way and the other
   rather than turning all the way round.
+- The alum crystal's block top keeps a faint ring and a pale speck where the crystal sat (the
+  capture's contact); it shows only as the crystal turns.
 - The celestial globe's painted sky is soft: the museum scan's texture is low-resolution.
 - Four toys' cores (stollen, puffin, elephant, sunflower) change nothing visible at phone size; they
   stay, as they cost little and fill the thin places at other angles.
