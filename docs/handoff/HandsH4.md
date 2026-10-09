@@ -106,6 +106,13 @@ What the first three Hands-on lanes learned today (October 8, 2026), so you don'
 
 ## State
 
+Main (October 9, 2026, with #457: H3's and H5's engines) is merged into every H4 branch. The engine
+merge keeps both sides: H5's `touch` key beside `force`, `watch` and `carry`, and one
+`info.hands.piece()` (a number is H5's piece index, a string H4's part name, token or `name`), with
+every field either reads. H2's #450 adds its own `piece(name)` on the same lines; it can take this
+one (its fields are all here). 87 hands engine specs: 86 pass, and the one fail is hec's "soft parts
+are cheap" timing under a loaded full run (0.5 ms alone, 3 of 3); the hh4 specs and taps pass (96).
+
 WORKING (October 9, 2026, 08:00 UTC): the owner's marks on the redone clips: the bus, castle and
 Galileo's balls (`-r2`) are good. Two needed another round, now posted as `-r3` cards: the tractor's
 rear mudguards have inner walls (the far tire's top no longer shows in the cab), and the DNA clip
