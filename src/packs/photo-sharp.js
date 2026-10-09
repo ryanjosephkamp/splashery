@@ -202,13 +202,16 @@ function wake() {
   if (!S.splatsOff || S.splatsOff !== ent) {
     S.splatsOff = null;
     S.wake = false;
+    S.mesh?.show(false);
     return;
   }
   if (pl.loading) return;
   S.wake = false;
   if (ent.gsplat) ent.gsplat.enabled = true;
   S.splatsOff = null;
+  S.mesh?.show(false);
   pl.pickDirty = true; // (the pick buffer is drawn again, with the splats)
+  pl.stage.requestRender();
 }
 
 function tapBox() {
@@ -236,9 +239,10 @@ function status(on) {
 }
 
 function hide() {
-  if (S.mesh) S.mesh.show(false);
   status(false);
   splats(true);
+  // (the relief stays until the splats are back, at the next update, so no frame shows neither)
+  if (S.mesh && !S.wake) S.mesh.show(false);
   if (S.video && !S.video.paused) S.video.pause();
 }
 
