@@ -15,7 +15,7 @@ const SAMPLE = [
   "marble-bust",
   "cookie",
   "heart-donut",
-  "mushroom", // lane Hands engine C: the jelly blob stretches in Hands-on, so it is never lifted whole
+  "succulent", // lane Hands-on H2: the toadstool (once the jelly's stand-in) stretches now (pieces mode), so it is never lifted whole
   "knot",
   "basketball",
   "bowling-ball",
