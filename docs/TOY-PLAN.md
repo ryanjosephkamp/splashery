@@ -1492,9 +1492,9 @@ Proposals below are suggestions; the owner may change them.
 - **Chromosome** (`chromosome`). Now: tap: Pull apart. Plan: keep.
   - Owner: Something like mitosis or meiosis.
   - Effect: The sister chromatids pull apart at the centromere, then rejoin.
-  - Improved: E3: anaphase: spindle fibres reach in from two bright poles to the kinetochores and
+  - Improved: E3: anaphase: spindle fibers reach in from two bright poles to the kinetochores and
     pull the sister chromatids apart, each led by its centromere with its arms trailing; then they
-    come back together and the fibres let go (4.6 s). Hands-on H4: in Hands-on, pull the two sister
+    come back together and the fibers let go (4.6 s). Hands-on H4: in Hands-on, pull the two sister
     chromatids apart at the waist; let go and they spring back together.
   - Sound: A soft sticky tear as the chromatids pull apart, and a soft squish as they come back
     together (no string, no clacks).
