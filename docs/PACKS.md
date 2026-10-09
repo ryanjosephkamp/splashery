@@ -763,7 +763,9 @@ radius, toy radii, 3.2), `color`. With pieces, `level` is in recipe units and ev
 **Buoyancy in air** (`hands.air`): a hot-air balloon that settles where it hovers, floats back up
 when pulled down and sinks back when pushed up, its basket under it:
 `hands: { air: { hover: 0, spring: 0.3, drag: 3.2, floor: 1.5, upright: 6 } }` (or `air: true`).
-`hover` is toy radii from home; `floor` lowers the floor so it can be pulled down.
+`hover` is toy radii from home; `floor` lowers the floor so it can be pulled down. A whole toy that
+floats (on `water` or in `air`) can be pushed below where it stands; any other toy can't be pressed
+into its floor (lane Hands-on H4).
 
 **A gravity well** (`hands.well`): a pull toward a point instead of the floor. The floor goes
 (`floor: true` keeps it) and the air with it, so a piece thrown sideways orbits.
@@ -788,7 +790,8 @@ hands: { wheels: { axle: [0, 0, 1], r: 0.17, parts: ["front", "rear"] } },
 `axle` (recipe axis), `r` (the wheels' radius, recipe units), `parts` (the wheel parts, turned about
 their own axis), `sign` (-1 turns them the other way), `grip` (14), `roll` (0.015), `yaw` (6) and
 `area` (how far it may roll, toy radii, 2.4). `info.hands.rolled` is the angle rolled, for parts
-that turn with the wheels (a steam train's rods).
+that turn with the wheels (a steam train's rods). `lift: true` (lane Hands-on H4): a drag that
+starts straight up the screen picks the toy up instead, as any toy is (a bus you roll or lift).
 
 **Shake detection** (`hands.shake`): a quick back-and-forth drag on the toy (holding it, or on a
 tree's trunk) fires the toy's tap action (or `key`), at most every `gap` seconds; `info.hands.shake`
@@ -832,11 +835,11 @@ press, a push or a hold), `info.hands.held` (the toy, or a piece, is up in the h
 `info.hands.speed` (how fast the whole toy, or the held piece, moves, in toy radii per second), so a
 toy can answer the hand (a pufferfish puffs while you hold it, lungs breathe out while squeezed).
 `info.hands.joint(name)` is a joint's value (an angle or a slide, null without one), and
-`info.hands.piece(i)` where piece i is (`{ pos, quat, home, held }`, recipe units), so a drive can
-follow a part the hand moved (the waves of a point turned round a circle). `touch: { key }` also
-fires that action when a press is held `after` seconds (0.15) or becomes a push or a pick-up (a
-poke), at most every `gap` seconds (0.5); a quick tap is still the toy's own tap. A press still
-picks the toy up as before.
+`info.hands.piece(i)` where piece i is (recipe units; its fields under "Where a piece is" below), so
+a drive can follow a part the hand moved (the waves of a point turned round a circle).
+`touch: { key }` also fires that action when a press is held `after` seconds (0.15) or becomes a
+push or a pick-up (a poke), at most every `gap` seconds (0.5); a quick tap is still the toy's own
+tap. A press still picks the toy up as before.
 
 ```js
 hands: { touch: { key: "poke" } },
@@ -893,6 +896,38 @@ quick flick up the screen (faster up than across), is tossed up with half a turn
 line across the view, timed to come down upside down where it hovered before the flick, on whatever
 is under that spot, drawn toward that piece's middle by the recipe's `center` (a pancake flipped
 back onto its stack). Let go any other way, it is set down as before.
+
+**A recipe's own push** (`hands.force`, lane Hands-on H4, October 8, 2026): a function
+`(body, h, ctx)` called once per substep (`h` seconds) for every body (the whole toy, or each
+piece), before the world moves it, to change its `vel` and `omega` (recipe units, or the world's for
+a whole toy): a flying saucer's beam that lifts a cow only while the cow is inside it. `ctx` is
+`{ piece, c, data, G, R, touching, free }`: the piece (its `def`, `part` and `token`; null for a
+whole toy), the toy's eased controls, the build's `k.data`, gravity and a toy radius, whether it
+touched anything in the last step, and `free()`, which lets a piece resting at home go. A pinned
+piece (at home, untouched) has no mass to move: skip it (`body.pinned`), or `free()` it first
+(planets that keep orbiting).
+
+```js
+hands: { pieces: () => [cowPiece], force: (b, h, ctx) => { if (!b.pinned && ctx.c.beam > 0.05 && inBeam(b.pos)) b.vel[1] += ctx.G * h; } }, // prettier-ignore
+```
+
+**Where a piece is** (`info.hands.piece(key)`, lanes Hands-on H2, H4 and H5): in a pieces-mode toy's
+`drive`, the piece by its number in `hands.pieces` (H5), or by its part name, token or `name` (H4; a
+piece with no part or token of its own, drawn by the drive: a body a part follows), as
+`{ pos, vel, quat, turn, home, held, pinned, off }` (recipe units; `quat` its turn in the world,
+`turn` its turn from home; `pinned` while it rests at home, `off` once it has been picked up or
+knocked loose), or null before the first touch. A toy that reads it without any other field asks for
+`hands.watch: true` (so `info.hands` exists): a campfire's flames grow when a log is laid on them.
+`info.hands.moved` (as lane Hands-on H2 adds it) is whether anything is off home or on its way back.
+
+**Carried together** (`hands.carry`, lane Hands-on H4): `{ key: [keys] }` (part names or tokens):
+while the piece `key` is held, the listed pieces come loose and go with it as they were built beside
+it; let go, they fly on with its speed, then each falls, bounces and settles on its own (Galileo's
+two balls, dropped from one hand, land together).
+
+```js
+hands: { place: false, pieces: () => [bigBall, smallBall], carry: { ball0: ["ball1"], ball1: ["ball0"] } }, // prettier-ignore
+```
 
 **A forgiving press** (lane Hands-on H3; every toy, nothing to ask for): with the ✋ switch on, a
 press where the pick buffer finds no splat (between a desk lamp's arm and its beam, beside a thin
