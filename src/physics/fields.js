@@ -374,15 +374,6 @@ export class Extras {
       get moved() {
         return !!(self.ho.moved || self.ho.homing);
       },
-      // Lane Hands-on H2: where a piece (by its part's name or token
-      // index) is now, how fast it moves, and whether it is held (a lotus
-      // dropped in its pond splashes where it lands).
-      piece(name) {
-        const pc = self.ho.pieces?.find((p) => p.part === name || p.token === name);
-        if (!pc) return null;
-        const b = pc.body;
-        return { pos: b.pos.slice(), vel: b.vel.slice(), home: pc.home.pos.slice(), held: !!b.held, pinned: !!b.pinned }; // prettier-ignore
-      },
       flee(key, pos) {
         if (!self.flee) return { offset: [0, 0, 0], vel: [0, 0, 0] };
         const it = self.flee.get(key, pos);
@@ -407,10 +398,14 @@ export class Extras {
         const j = self.ho.joints?.byName?.get(name);
         return j && Number.isFinite(j.v) ? j.v : null;
       },
+      // (Lane Hands-on H2: or by its part's name, a string, and also how
+      // fast it moves and whether it rests in its place: a lotus dropped in
+      // its pond splashes where it lands.)
       piece(i) {
-        const pc = self.ho.pieces?.[i];
+        const pcs = self.ho.pieces;
+        const pc = typeof i === "string" ? pcs?.find((p) => p.part === i) : pcs?.[i];
         if (!pc || !self.ho.world) return null;
-        return { pos: pc.body.pos.slice(), quat: pc.body.q.slice(), home: pc.home.pos.slice(), held: !!pc.body.held }; // prettier-ignore
+        return { pos: pc.body.pos.slice(), quat: pc.body.q.slice(), vel: pc.body.vel.slice(), home: pc.home.pos.slice(), held: !!pc.body.held, pinned: !!pc.body.pinned }; // prettier-ignore
       },
     };
   }
