@@ -520,6 +520,10 @@ The Picture lab (a labs toy) opens with two samples:
 
 Files and web addresses people open in the Picture lab are read in their browser and never uploaded.
 
+The storybook "The Little Lamp Who Wanted to See the Sea" (`assets/toys/storybook/storybook.pdf`,
+lane Hands-on H3): our own story and drawings, written for Splashery and printed with Chromium by
+`tools/hh3-storybook.mjs`.
+
 Your book opens with the Tinkerer's Manual (`manual/tinkerers-manual.pdf`, lane Manual). The photo
 album and the picture frame (labs toys, lane Books) open with these photos, each
 [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) on Flickr (checked on the live pages

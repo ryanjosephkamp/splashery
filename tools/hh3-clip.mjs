@@ -23,6 +23,7 @@
 //   { "tap": [dx, dy] }                     a tap there
 //   { "tap3": [x, y, z] }                   a tap on a recipe point
 //   { "toy": "id" }                         opens another toy (one clip, several toys)
+//   { "media": "assets/x.pdf", "load": 4 }   opens that file in the toy (Open a file)
 // Writes <out-dir>/<name>.mp4 and <name>-strip.png (8 frames).
 
 import { chromium } from "@playwright/test";
@@ -139,7 +140,16 @@ const step = 1 / fps;
 await shoot();
 for (const s of script) {
   if (s.wait) for (let t = 0; t < s.wait - 1e-6; t += step) await shoot();
-  else if (s.toy) {
+  else if (s.media) {
+    // Opens a file (a path on the server) in the toy, as Open a file does,
+    // and waits for it in real time (the clip's clock stands still).
+    await page.evaluate(async (url) => {
+      const blob = await (await fetch(url)).blob();
+      const file = new File([blob], url.split("/").pop(), { type: blob.type });
+      await window.__splashery.app.openMedia(file);
+    }, s.media);
+    await page.waitForTimeout((s.load ?? 4) * 1000);
+  } else if (s.toy) {
     await page.evaluate(async (id) => {
       const { app, player } = window.__splashery;
       await app.chooseToy(id);
