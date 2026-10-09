@@ -23,7 +23,7 @@
 // points: attach, the world built, a press, a move, a let-go, each frame
 // and each hit; the world calls its force once per substep (World.force).
 // What a recipe's drive() reads comes as info.hands (src/motion.js):
-// { on, shake, finger, point, rolled, flee(key, pos), piece(key) }.
+// { on, shake, finger, point, rolled, moved, flee(key, pos), piece(key) }.
 
 import { quat, v3, surfacePoints } from "./world.js";
 import { materialFor, applyMaterial, airForce, rollForce, throwSpin, driftForce } from "./materials.js"; // prettier-ignore
@@ -400,8 +400,9 @@ export class Extras {
         const j = self.ho.joints?.byName?.get(name);
         return j && Number.isFinite(j.v) ? j.v : null;
       },
-      // Where a piece is, by its number (lane Hands-on H5) or by its part
-      // name, token or `name` (lane Hands-on H4): see pieceState().
+      // Where a piece is, by its number (lane Hands-on H5), its part name
+      // (lane Hands-on H2), token or `name` (lane Hands-on H4): see
+      // pieceState().
       piece(key) {
         return self.pieceState(key);
       },
