@@ -706,7 +706,9 @@ Proposals below are suggestions; the owner may change them.
     different tap animation.
   - Effect: Idle: the eye looks around. Tap: it blinks, looks at you and the pupil snaps small.
   - Improved: C2: it glances around by itself. A tap blinks (new lids), turns it to look at you and
-    snaps the pupil small (about 2.5 s).
+    snaps the pupil small (about 2.5 s). Hands-on H5: with ✋ Hands-on on, a drag on the eyeball
+    rolls it in its socket to look where the finger pulls (about 45 degrees each way); let go and it
+    glances about again.
   - Sound: A soft, small click as the lids close, and a fainter one as they open.
 - **Lungs** (`lungs`). Now: tap: Take a deep breath. Plan: keep.
   - Owner: Expand and contract like lungs.
@@ -714,7 +716,9 @@ Proposals below are suggestions; the owner may change them.
   - Improved: E3: a tap takes a deep breath: both lungs swell out sideways, forwards and down (the
     airways stay put), hold, then empty past rest and settle back into gentle breathing (about 5 s).
     After the owner's review the breath is about twice as big. Fix7: the deep breath fills the lungs
-    about 70% further out than before.
+    about 70% further out than before. Hands-on H5: with ✋ Hands-on on, squeezing them (a held
+    press, or picking them up) breathes them out; let go and they fill again, a little past rest,
+    then breathe gently on.
   - Sound: A real person's slow deep breath in, then out.
 - **Tooth** (`tooth`). Now: tap: Polish. Plan: keep.
   - Owner: Looks good; no idea for an effect.
@@ -738,7 +742,9 @@ Proposals below are suggestions; the owner may change them.
   - Improved: Anatomy: a kit-built body (smoothly joined primitives, so the skin has no seams but
     its cut lines), 13 skin pieces, 19 muscle groups and 16 bones or bone groups as tokens, and our
     brain, lungs, heart and kidney recipes placed inside with a kit-built liver, stomach and
-    intestines.
+    intestines. Hands-on H5: with ✋ Hands-on on, once the organs show, each organ (brain, lungs,
+    heart, liver, stomach, intestines and the two kidneys, each now a part of its own) lifts out and
+    sets down, and clicks back into its place when brought near; the next tap sends them all home.
   - Sound: A soft paper-and-cloth slide for each peel, and a low chime as the layers settle back.
 
 ## Weather (13)
