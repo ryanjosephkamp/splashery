@@ -10,29 +10,29 @@
     "grapes": {
       "kind": "kit",
       "recipeFile": "src/packs/food.js",
-      "recipeKB": 231.2,
-      "recipeGzipKB": 63.2,
+      "recipeKB": 261.8,
+      "recipeGzipKB": 71.8,
       "sharedBy": 27
     },
     "orange": {
       "kind": "kit",
       "recipeFile": "src/packs/food.js",
-      "recipeKB": 231.2,
-      "recipeGzipKB": 63.2,
+      "recipeKB": 261.8,
+      "recipeGzipKB": 71.8,
       "sharedBy": 27
     },
     "watermelon": {
       "kind": "kit",
       "recipeFile": "src/packs/food.js",
-      "recipeKB": 231.2,
-      "recipeGzipKB": 63.2,
+      "recipeKB": 261.8,
+      "recipeGzipKB": 71.8,
       "sharedBy": 27
     },
     "pizza": {
       "kind": "kit",
       "recipeFile": "src/packs/food.js",
-      "recipeKB": 231.2,
-      "recipeGzipKB": 63.2,
+      "recipeKB": 261.8,
+      "recipeGzipKB": 71.8,
       "sharedBy": 27
     },
     "grand-piano": {
@@ -150,8 +150,8 @@
     "fourier-circles": {
       "kind": "kit",
       "recipeFile": "src/packs/maths.js",
-      "recipeKB": 203,
-      "recipeGzipKB": 59.9,
+      "recipeKB": 219,
+      "recipeGzipKB": 65.1,
       "sharedBy": 23
     },
     "newtons-cradle": {

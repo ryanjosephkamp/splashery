@@ -43,38 +43,39 @@ Proposals below are suggestions; the owner may change them.
   Electron orbital, Atom, Molecule, Protein, Crystal lattice, Unit cells, Orbital atlas, Molecule
   viewer, Periodic table, Real elements, Diamond, Ruby, Emerald, Amethyst geode, Sapphire, Quartz
   cluster, Opal, Pearl, Brain, Eye, Lungs, Tooth, Kidney, Anatomy atlas, Oak tree, Pine tree, Palm
-  tree, Cherry blossom, Maple tree, Bonsai, Weeping willow, Sunflower, Rose, Tulips, Daisies, Lotus,
-  Toadstool, Fern, Saguaro cactus, Coral reef, Pinecone, Acorns, Succulent, Bamboo, Pebbles, Kelp,
-  Storm cloud, Lava lamp, Snow globe, Ice swan, Tornado, Rainbow, Iceberg, Waterfall, Ocean wave,
-  Ice cream, Watermelon, Birthday cake, Popcorn, Jelly, Pancakes, Cupcake, Lollipop, Candy cane,
-  Macarons, Donut, Gummy bear, Pretzel, Croissant, Pizza, Burger, Sushi, Taco, Boiled egg, Coffee,
-  Apple, Bananas, Orange, Kiwi, Pineapple, Cherries, Grapes, Avocado, Building bricks, Rubber duck,
-  Spinning top, Dice, Newton's cradle, Teddy bear, Yo-yo, Puzzle cube, Spring toy, Kite, Paper
-  plane, Origami crane, Balloon dog, Soap bubbles, Wind-up robot, Chess set, Lorenz attractor,
-  Möbius strip, Klein bottle, Menger sponge, Hypercube, Torus knot, Gyroid, Mandelbulb, Seashell
-  spiral, Graph plotter, Surface plotter, Circle and waves, Fourier circles, Pythagoras proof,
-  Rössler attractor, Thomas attractor, Aizawa attractor, 5-cell, 16-cell, 24-cell, Duoprism, Splat
-  equation, Storybook, Music box, Fountain pen, Water bottle, Soda can, Running shoe, Hoodie,
-  Sunglasses, Baseball cap, Sword in the stone, Heraldic shield, Bow and target, Crown, Wizard's
-  orb, Crystal ball, Jellyfish, School of fish, Butterfly, Pufferfish, Nautilus, Ladybug, Snail,
-  Octopus, Starfish, Sea urchin, Frog, Penguin, Owl, Snowman, Fireworks, Decorated tree, Paper
-  lantern, Diya, Acoustic guitar, Snare drum, Xylophone, Toy piano, Grand piano, Upright piano,
-  Harpsichord, Electronic keyboard, Hot-air balloon, Sports car, Bus, Jet airliner, Sailboat,
-  Submarine, Bicycle, Eiffel Tower, Washington Monument, Pyramids of Giza, Twisting supertall,
-  Statue of Liberty, White House, Leaning Tower of Pisa, Colosseum, Parthenon, Stonehenge, Big Ben,
-  Taj Mahal, Castle, Pagoda, Windmill, Perceptron, Multilayer perceptron, Neural network,
-  Convolutional network, Recurrent network, Transformer, Looped transformer, Diffusion model,
-  Gradient descent, Gaussian splatting, Word vectors, Sorting machine, Half adder, Turing machine,
-  Difference engine, Enigma machine, Bombe, Picture lab, Your book, Photo album, Picture frame, Song
-  landscape, Chladni plate, Room echo meter, Splat mirror, Model to splats, QR code, Photo to 3D,
-  Moving photo to 3D, Video to 3D, Sound lab, Sound recorder, Splat toolkit, Point clouds, Volume
-  viewer, Splat field, Light lab, Thermal ellipsoids, Super-resolution microscope, Galaxy in a box,
-  Cryo-EM map, Contour lab, Terrain in a box, Ripple tank, Light bench, Fluid lab, Grand Canyon,
-  Mount St. Helens, The sea floor, Tides at Bar Harbor, Hurricane, Relief map, Living city, Stork
-  migration, Earthquakes, Airport X-ray scanner, How CT works, Walnut CT scan, MRI of a fruit,
-  Electron microscope, Thermal camera, Screen, Shardball, Longtail, Grain Garden, Page Breaker,
-  Strata, Volley Table, Stone Belt, Soft Landing, Night Owl Pinball, Cast a Shadow, Photo Dash, Note
-  Rider, Data in 3D.
+  tree, Cherry blossom, Maple tree, Bonsai, Weeping willow, Sunflower, Rose, Dandelion, Tulips,
+  Daisies, Lotus, Toadstool, Fern, Saguaro cactus, Coral reef, Pinecone, Acorns, Succulent, Bamboo,
+  Pebbles, Kelp, Storm cloud, Lava lamp, Snow globe, Ice swan, Tornado, Rainbow, Iceberg, Waterfall,
+  Ocean wave, Ice cream, Watermelon, Birthday cake, Popcorn, Jelly, Pancakes, Cupcake, Lollipop,
+  Candy cane, Macarons, Donut, Gummy bear, Pretzel, Croissant, Pizza, Burger, Sushi, Taco, Boiled
+  egg, Coffee, Apple, Bananas, Orange, Kiwi, Pineapple, Cherries, Grapes, Avocado, Building bricks,
+  Rubber duck, Spinning top, Dice, Newton's cradle, Teddy bear, Yo-yo, Puzzle cube, Spring toy,
+  Kite, Paper plane, Origami crane, Balloon dog, Soap bubbles, Wind-up robot, Chess set, Lorenz
+  attractor, Möbius strip, Klein bottle, Menger sponge, Hypercube, Torus knot, Gyroid, Mandelbulb,
+  Sierpinski tetrahedron, Platonic solids, Seashell spiral, Graph plotter, Surface plotter, Circle
+  and waves, Fourier circles, Pythagoras proof, Rössler attractor, Thomas attractor, Aizawa
+  attractor, 5-cell, 16-cell, 24-cell, Duoprism, Splat equation, Storybook, Music box, Fountain pen,
+  Water bottle, Soda can, Running shoe, Hoodie, Sunglasses, Baseball cap, Sword in the stone,
+  Heraldic shield, Bow and target, Crown, Wizard's orb, Crystal ball, Jellyfish, School of fish,
+  Butterfly, Pufferfish, Nautilus, Ladybug, Snail, Octopus, Starfish, Sea urchin, Frog, Penguin,
+  Owl, Snowman, Fireworks, Decorated tree, Paper lantern, Diya, Acoustic guitar, Snare drum,
+  Xylophone, Toy piano, Grand piano, Upright piano, Harpsichord, Electronic keyboard, Helicopter,
+  Hot-air balloon, Steam train, Ocean liner, Sports car, Bus, Propeller plane, Jet airliner,
+  Sailboat, Submarine, Bicycle, Tractor, Flying saucer, Eiffel Tower, Washington Monument, Pyramids
+  of Giza, Twisting supertall, Statue of Liberty, White House, Leaning Tower of Pisa, Colosseum,
+  Parthenon, Stonehenge, Big Ben, Taj Mahal, Castle, Pagoda, Windmill, Perceptron, Multilayer
+  perceptron, Neural network, Convolutional network, Recurrent network, Transformer, Looped
+  transformer, Diffusion model, Gradient descent, Gaussian splatting, Word vectors, Sorting machine,
+  Half adder, Turing machine, Difference engine, Enigma machine, Bombe, Picture lab, Your book,
+  Photo album, Picture frame, Song landscape, Chladni plate, Room echo meter, Splat mirror, Model to
+  splats, QR code, Photo to 3D, Moving photo to 3D, Video to 3D, Sound lab, Sound recorder, Splat
+  toolkit, Point clouds, Volume viewer, Splat field, Light lab, Thermal ellipsoids, Super-resolution
+  microscope, Galaxy in a box, Cryo-EM map, Contour lab, Terrain in a box, Ripple tank, Light bench,
+  Fluid lab, Grand Canyon, Mount St. Helens, The sea floor, Tides at Bar Harbor, Hurricane, Relief
+  map, Living city, Stork migration, Earthquakes, Airport X-ray scanner, How CT works, Walnut CT
+  scan, MRI of a fruit, Electron microscope, Thermal camera, Screen, Shardball, Longtail, Grain
+  Garden, Page Breaker, Strata, Volley Table, Stone Belt, Soft Landing, Night Owl Pinball, Cast a
+  Shadow, Photo Dash, Note Rider, Data in 3D.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
@@ -1774,7 +1775,8 @@ Proposals below are suggestions; the owner may change them.
   - Improved: E4: a tap shakes the tree: the crown rocks on its trunk and forty leaves come loose
     one after another, each fluttering down on its own swinging path to lie on the grass; then they
     wither and fresh leaves open in their places (about 6.5 s). In winter a few dead brown leaves
-    still cling to the twigs, and those fall.
+    still cling to the twigs, and those fall. Hands-on H2 (Hands-on): Shake the trunk (a quick
+    back-and-forth drag on it) and the leaves fall and settle on the ground.
   - Sound: A leafy rustle as the crown rocks, then soft rustles as the loose leaves land
     (synthesized; no flutter or patter); real CC0 recordings now (oak-leaves.mp3), with the
     synthesized sound as a fallback.
@@ -1785,7 +1787,8 @@ Proposals below are suggestions; the owner may change them.
   - Improved: E4: a tap shakes off a dusting of snow: the tree rocks and the snow on its boughs
     drops a pair of tiers at a time, from the top down, in a puff of powder, lies on the ground and
     melts (about 5 s). On a snowless day a quick shower dusts the boughs first; with Snow on, fresh
-    snow settles on them again afterwards.
+    snow settles on them again afterwards. Hands-on H2 (Hands-on): Shake the trunk and the snow
+    slides off the branches.
   - Sound: The needles rustle as it rocks, with a soft jingle of sleigh bells; the snow's hiss and
     thump stay (no chime).
 - **Palm tree** (`palm`). Now: tap: Shake down the coconuts. Plan: keep.
@@ -1794,12 +1797,15 @@ Proposals below are suggestions; the owner may change them.
   - Improved: E4: a tap shakes the crown and the five coconuts (now hanging in a bunch you can see)
     drop one after another, thump into the sand, bounce twice and roll to a stop, each with its own
     bonk; new coconuts swell in the crown while the fallen ones are carried off (about 5.5 s).
+    Hands-on H2 (Hands-on): Pull a coconut and it snaps off into your hand; drop it and it bounces
+    and rolls on the sand; reset puts them back.
   - Sound: Two coconut bonks.
 - **Cherry blossom** (`cherry-blossom`). Now: tap: Shake the blossom. Plan: keep.
   - Owner: Really cool already. Maybe all the blossoms fall off when touched.
   - Effect: All the petals fall in a flurry, then it blooms again.
   - Improved: C2: a new tap action shakes the tree: the petals fall in a heavy flurry, the branches
-    go bare, then it blooms again (about 4.5 s).
+    go bare, then it blooms again (about 4.5 s). Hands-on H2 (Hands-on): Shake the trunk and the
+    petals flutter down.
   - Sound: The opening of the traditional "Sakura Sakura" on a plucked koto-like string, over a
     faint rustle of petals (no wind).
 - **Maple tree** (`maple`). Now: tap: Send a gust. Plan: keep.
@@ -1808,6 +1814,7 @@ Proposals below are suggestions; the owner may change them.
   - Improved: E4: a tap sends a whirling gust: the crown leans into it and forty leaves are torn off
     and carried round the tree in a widening spiral, tumbling, before they settle in a ring on the
     grass (the cherry's petals just drift down); then they wither and fresh leaves open (about 7 s).
+    Hands-on H2 (Hands-on): Shake the trunk and the leaves spin down like real maple leaves.
   - Sound: A soft gust and the leaves rustling as they swirl and land (no crunching clicks, much
     less wind).
 - **Bonsai** (`bonsai`). Now: tap: Grow a branch, then trim it. Plan: keep.
@@ -1815,7 +1822,8 @@ Proposals below are suggestions; the owner may change them.
   - Effect: Grows a new branch, then the scissors snip it back.
   - Improved: E4: a tap grows a new branch out of the trunk with a pad of leaves on its end; bonsai
     scissors slide in, open and snip it off at the cut, the piece tips onto the moss and is cleared
-    away, and the stub heals over (about 5 s).
+    away, and the stub heals over (about 5 s). Hands-on H2 (Hands-on): Pull a branch's foliage and
+    it bends after your finger; let go and it springs back.
   - Sound: The branch creaks and its leaves rustle as it grows, the scissors open and snip, and the
     cut piece drops onto the moss; real CC0 recordings now (bonsai-snip.mp3), with the synthesized
     sound as a fallback.
@@ -1824,55 +1832,69 @@ Proposals below are suggestions; the owner may change them.
   - Effect: The long branches sway in a wave like a breeze passing.
   - Improved: E4: a tap sends a breeze across the tree from the left: the hanging strands swing away
     with it a curtain at a time (they bend, most at their tips), swing back and settle, and the
-    crown leans a little (about 5.5 s). The strands also sway gently at rest.
+    crown leans a little (about 5.5 s). The strands also sway gently at rest. Hands-on H2
+    (Hands-on): Brush the hanging branches and they swing after your finger, then sway and settle.
   - Sound: The same breath of wind, quieter, with the strands rustling.
 - **Sunflower** (`sunflower`). Now: tap: Bring out the sun. Plan: keep.
   - Effect: The head turns to face the sun and petals open wide.
   - Improved: E4: a tap brings out the sun at the top left: the head turns up to face it and all 48
     ray petals spread wide open, each turning about its root; then the sun goes in, the head turns
-    back and the petals lift again (about 5.5 s). The head nods gently at rest.
+    back and the petals lift again (about 5.5 s). The head nods gently at rest. Hands-on H2
+    (Hands-on): Push the head and it nods on its stem, petals and all; let go and it springs back
+    and wobbles.
   - Sound: A warm low swell as the sun comes out (no bouncing tone) and the petals rustling open.
 - **Rose** (`rose`). Now: tap: Open the bloom. Plan: keep.
   - Effect: Blooms open further, a petal drops.
   - Improved: E4: a tap opens the bloom further (every petal turns out about its root, the outer
     ones most) and the outer petal facing you comes loose and flutters down to lie on the grass; the
     bloom closes up again, the fallen petal withers and a new one fills its place (about 5.5 s).
+    Hands-on H2 (Hands-on): Pull the petals off one by one; each drifts down, turning, and lands on
+    the ground; reset puts them back.
   - Sound: As before, plus the daisy's soft tap when the loose petal lands on the grass (Sound C,
     October 2, 2026).
 - **Dandelion** (`dandelion`). Now: tap: Blow the seeds. Plan: keep.
   - Owner: Really cool effect; keep it.
+  - Improved: Hands-on H2 (Hands-on): Swipe back and forth across it and the seeds come loose and
+    drift away.
   - Sound: Puff of breath.
 - **Tulips** (`tulip`). Now: tap: Open to the sun. Plan: keep.
   - Effect: Petals open wide to the sun, then close.
   - Improved: E4: a tap opens the three tulips wide to the sun one after another: each of the
     eighteen petals turns out about its root and shows the dark stamens and the pale pistil inside;
-    then they close up again (about 5 s).
+    then they close up again (about 5 s). Hands-on H2 (Hands-on): Push a tulip and it bends on its
+    stem; let go and it springs back and sways.
   - Sound: Gentle pluck.
 - **Daisies** (`daisy`). Now: tap: Loves me, loves me not. Plan: keep.
   - Effect: Petals spin like a pinwheel (loves me, loves me not).
   - Improved: E4: a tap spins the big head like a pinwheel, twice round (loves me, loves me not),
     and it flings off eight petals one after another, a tick each, which flutter down to the grass
     while the small heads bob; it slows to a stop, the fallen petals wither and new ones fill the
-    gaps (about 5.5 s).
+    gaps (about 5.5 s). Hands-on H2 (Hands-on): Pull the petals off one by one (loves me, loves me
+    not); each drifts down to the grass; reset puts them back.
   - Sound: Each petal's soft tap now lands with it: scheduled for the landing itself, so it stays in
     sync at any frame rate (Sound C, October 2, 2026).
 - **Lotus** (`lotus`). Now: tap: Rise and open. Plan: keep.
   - Effect: The flower rises and opens on the water with ripples.
   - Improved: E4: a tap folds the flower into a bud, lifts it out of the water on its stalk with a
     ring of light spreading over the water, and opens it wide up in the air, the outer petals first;
-    then it sinks back onto its pad, open, with a second ring (about 6.5 s).
+    then it sinks back onto its pad, open, with a second ring (about 6.5 s). Hands-on H2 (Hands-on):
+    Lift the flower off its leaf (the pond stays, and rings of ripples run out over it) and drop it
+    back in: it splashes, dips under and bobs back up.
   - Sound: Water drop and a bell.
 - **Toadstool** (`mushroom`). Now: tap: Puff out spores. Plan: keep.
   - Effect: Puffs a cloud of glowing spores.
   - Improved: E4: a tap bops the big cap: it dips and springs back, and a cloud of glowing spores
     puffs out from the gills and billows up and out, each spore on its own path, fading as it drifts
-    (about 4 s).
+    (about 4 s). Hands-on H2 (Hands-on): Squeeze the cap and it gives under your finger, then
+    springs back.
   - Sound: Soft puff.
 - **Fern** (`fern`). Now: tap: Unfurl the fiddleheads. Plan: keep.
   - Effect: The fronds unroll from fiddleheads.
   - Improved: E4: a tap unrolls the two fiddleheads in the middle into two new fronds: each is a
     chain of six pieces that straighten one joint after another from the base to the tip, their
     leaflets spreading as they open; they hold, then roll back up into fiddleheads (about 5.5 s).
+    Hands-on H2 (Hands-on): Brush the fronds and they bend after your finger; let go and they spring
+    back and sway.
   - Sound: A soft leafy rustle and a gentle stem creak as each frond unrolls, and again as they roll
     back up (no sandy flutter).
 - **Saguaro cactus** (`saguaro`). Now: tap: Spines out, then a look inside. Plan: keep.
@@ -1897,14 +1919,16 @@ Proposals below are suggestions; the owner may change them.
     off"): a tap opens the cone as in dry weather and six winged seeds spin down; then the 42 scales
     facing you break off one after another from the bottom up, tumble and land flat in a pile round
     the base, leaving the bare core with the stubs where they grew; they fly back up into place, top
-    first, and the cone closes (about 7 s).
+    first, and the cone closes (about 7 s). Hands-on H2 (Hands-on): Pull the scales off one by one;
+    each snaps off at its root and drops; reset puts them back.
   - Sound: Woody creak.
 - **Acorns** (`acorn`). Now: tap: Pop the caps. Plan: keep.
   - Owner: Should do something.
   - Effect: The caps pop off and a sprout pokes out.
   - Improved: E4: a tap pops the caps off: each flips through the air and lands upside down on the
     leaf, and a green sprout pokes out of each acorn and opens two tiny oak leaves; then the sprouts
-    draw back in and the caps hop home (about 5 s).
+    draw back in and the caps hop home (about 5 s). Hands-on H2 (Hands-on): Pull a cap off and put
+    it back on: brought close to its acorn, it settles home.
   - Sound: Tiny pop.
 - **Succulent** (`succulent`). Now: tap: Open and flower. Plan: keep.
   - Owner: Pick something.
@@ -1919,6 +1943,8 @@ Proposals below are suggestions; the owner may change them.
   - Improved: E4: three young shoots sit on the ground. A tap makes them shoot up a section at a
     time, each new section sliding up out of the one below with a hollow knock, carrying the
     sheathed tip, and a tuft of leaves opens at the top; later they sink back down (about 5.5 s).
+    Hands-on H2 (Hands-on): Pull a stalk and it bends after your finger; let go and it sways back
+    and forth and settles.
   - Sound: Hollow wooden knocks.
 - **Pebbles** (`rocks`). Now: tap: Tumble and stack. Plan: keep.
   - Owner: Should fall or drop.
@@ -1936,6 +1962,8 @@ Proposals below are suggestions; the owner may change them.
   - Improved: E4: a tap brings three little fish swimming in from the left; each noses up to a blade
     and takes a few nibbles, and the kelp sways away from them, the nearest stalks first, then
     swings back as the fish swim off to the right (about 5.5 s). The kelp also sways gently at rest.
+    Hands-on H2 (Hands-on): Push the fronds and they swing after your finger, then sway slowly in
+    the water and drift back.
   - Sound: Underwater bubbles.
 
 ## Food (28)
@@ -2303,7 +2331,9 @@ Proposals below are suggestions; the owner may change them.
   - Owner: Spin a little more or be more dynamic; looks good when still.
   - Effect: A glowing point races along the trail, drawing a new path.
   - Improved: C2: a new tap action sends a bright spark racing along the whole path, drawing it
-    again in light that then fades (about 3 s).
+    again in light that then fades (about 3 s). Hands-on H5: with ✋ Hands-on on, the glowing point
+    follows the finger; let go, it flows on from that new start by the Lorenz equations, drawing its
+    path in forty glowing beads, and falls onto the same attractor from wherever it began.
   - Sound: Something epic, a deep hit, a dark slow rush and a wide low chord (no whistling howl).
 - **Möbius strip** (`mobius`). Now: tap: Send it round. Plan: keep.
   - Owner: Wow, really neat. Maybe twist a little.
@@ -2334,7 +2364,9 @@ Proposals below are suggestions; the owner may change them.
   - Improved: E3: a tap plugs every hole with a solid cube, smallest first, closing the sponge into
     a plain cube; then it is carved again level by level: the six big cubes slide out of the faces,
     then the next size down, then the smallest, each fading as it leaves (about 4 s). (Built instead
-    of a zoom, which blurred.)
+    of a zoom, which blurred.) Hands-on H5: with ✋ Hands-on on, each of the twenty level-one cubes
+    (each a smaller sponge, now closed on every side) holds fast and snaps out under a pull, lands
+    and tumbles; Reset mends them.
   - Sound: Descending recursive blips.
 - **Hypercube** (`hypercube`). Now: tap: Turn inside out. Plan: keep.
   - Owner: Possibly the favourite and homepage embed (see the Menger sponge).
@@ -2350,7 +2382,8 @@ Proposals below are suggestions; the owner may change them.
   - Effect: Contorts through different knot shapes.
   - Improved: E3: a tap pulls the knot loose (its lobes stretch out and swirl) and lets go: it
     springs back past rest into a tight knot and wobbles to a stop like a plucked spring (about 4
-    s).
+    s). Hands-on H5: with ✋ Hands-on on, a pull stretches the tube after the finger like a stiff
+    spring (soft stretch); let go, it springs back with a few wobbles.
   - Sound: It strains as it is pulled and lets go with a real thump and swish (no banjo or guitar
     notes).
 - **Gyroid** (`gyroid`). Now: tap: Breathe in and out. Plan: keep.
@@ -2369,13 +2402,19 @@ Proposals below are suggestions; the owner may change them.
     picture (about 4 s). This replaced a twist after the owner's review. Math r2: a Power option (5
     to 12; power n has n − 1-fold symmetry, so the slices turn 1/(n − 1) of a turn) and a Julia bulb
     (four fixed points c off the axis; with no turning symmetry the whole bulb turns a quarter turn
-    and back).
+    and back). Hands-on H5: with ✋ Hands-on on, each disc turns by dragging round it like a lock's
+    dial, clicking a seventh of a turn at a time where the bulb looks the same again (shown never
+    more than a few degrees off its built pose); a Julia bulb off its axis keeps its discs still.
   - Sound: Deep morphing tone.
 - **Sierpinski tetrahedron** (`sierpinski`). Now: tap: Explode. Plan: keep.
   - Owner: Perfect as is.
+  - Improved: Hands-on H5: with ✋ Hands-on on, the four half-size tetrahedra lift off, set down and
+    stack back, each settling into its place when brought near it.
   - Sound: Stacked triangle chimes.
 - **Platonic solids** (`platonic`). Now: tap: Explode. Plan: keep.
   - Owner: Perfect.
+  - Improved: Hands-on H5: with ✋ Hands-on on, the faces (the icosahedron's in pairs) pull off, lie
+    down, and fit back into their places when brought near them.
   - Sound: Five-note chime.
 - **Seashell spiral** (`seashell-spiral`). Now: tap: Hear the sea. Plan: keep.
   - Owner: Something to do with hearing the ocean in a seashell.
@@ -2414,7 +2453,9 @@ Proposals below are suggestions; the owner may change them.
     parameters): a View option adds a 3D helix (the point runs back along e^(iθ) while its shadows
     draw the cosine wave on the floor and the sine wave on a side wall); a Path option picks the
     circle, an ellipse, a figure eight, a cardioid, a rose or your own typed path (x = …, y = … or r
-    = …); and a Turns option runs it one to three times.
+    = …); and a Turns option runs it one to three times. Hands-on H5: with ✋ Hands-on on, a press
+    and a drag round the circle turn the point by hand (unwound, turn after turn), the waves drawing
+    out behind their heads; let go, it goes on round to the end.
   - Sound: Warmer, a soft low chord that swells with the turn and a gentle rush a quarter turn later
     (one option to try).
 - **Fourier circles** (`fourier-circles`). Now: tap: Spin the circles. Plan: keep.
@@ -2438,7 +2479,9 @@ Proposals below are suggestions; the owner may change them.
   - Improved: Math: new toy. A tap slides the wooden triangles one at a time from two rectangles
     into the four corners: the empty squares a² and b² fade and the tilted square c² lights up, with
     a² + b² = c² below; then they slide back (4.5 s). In this classic arrangement the pieces slide
-    without turning, and one stays put.
+    without turning, and one stays put. Hands-on H5: with ✋ Hands-on on, the three moving triangles
+    slide by hand along their own ways into their corners (clicking at the frame); a² and b² clear
+    as they leave, and c² lights with a² + b² = c² once all three are in.
   - Sound: Wooden slides, and a click as each piece lands.
 - **Rössler attractor** (`rossler-attractor`). Now: tap: Drop a tracer. Plan: keep.
   - Owner: The owner's Math notes (BACKLOG.md, Math r2): more dynamical systems beside the Lorenz
@@ -2896,6 +2939,8 @@ Proposals below are suggestions; the owner may change them.
   - Sound: The flickering roar of the exhaust over a deep rumble.
 - **Helicopter** (`helicopter`). Now: tap: Take off or land. Plan: keep.
   - Owner: Basically perfect.
+  - Improved: Hands-on H4: in Hands-on, flick the main rotor (or the tail rotor) round to spin it;
+    it coasts down to a stop. The helicopter stays on its pad.
   - Sound: Real rotor blades chopping; landing, the chop slowing as it fades (Sound C, October 2,
     2026).
 - **Hot-air balloon** (`hot-air-balloon`). Now: tap: Fire the burner. Plan: keep.
@@ -2903,14 +2948,20 @@ Proposals below are suggestions; the owner may change them.
   - Effect: Burner roars, the envelope swells and it rises higher.
   - Improved: C2: the burner roars a big flame, the envelope swells and glows warm, and the balloon
     climbs well up, then drifts back down (4 s). Sharpness A (October 2, 2026): sharper look (even,
-    solid splats and calmer textures).
+    solid splats and calmer textures). Hands-on H4: in Hands-on, pull it down by the basket and let
+    go: the hot air floats it back up to where it hovered, basket under it.
   - Sound: Burner roar.
 - **Steam train** (`steam-train`). Now: tap: Blow the whistle. Plan: keep.
   - Owner: Basically perfect.
+  - Improved: Hands-on H4: in Hands-on, push the engine along its rails (more track shows at both
+    ends): it rolls on, its wheels and coupling rods turning with the distance, until it slows or
+    meets a buffer stop.
   - Sound: A real steam locomotive chuffing, fading with its steam; no bell, horn or whistle (Sound
     C, October 2, 2026).
 - **Ocean liner** (`ocean-liner`). Now: tap: Sound the horn. Plan: keep.
   - Owner: Almost perfect.
+  - Improved: Hands-on H4: in Hands-on, push the ship down into the sea and let go: it bobs back up,
+    pitching a little, and settles.
   - Sound: Deep ship horn.
 - **Sports car** (`sports-car`). Now: tap: Rev the engine. Plan: keep.
   - Owner: Looks really good.
@@ -2924,10 +2975,11 @@ Proposals below are suggestions; the owner may change them.
   - Effect: Stop sign swings out, lights flash, doors open.
   - Improved: C2: the school bus stops: warning lights flash, the stop sign swings out and the doors
     open onto a lit doorway (4.5 s). The double-decker flashes its hazard lights and opens a middle
-    door.
+    door. Hands-on H4: in Hands-on, push it and it rolls on its turning wheels.
   - Sound: Horn beep and door hiss.
 - **Propeller plane** (`propeller-plane`). Now: tap: Loop the loop. Plan: keep.
   - Owner: Unbelievable; perfect.
+  - Improved: Hands-on H4: in Hands-on, flick the propeller round to spin it; it coasts to a stop.
   - Sound: A real piston engine with the propeller's beat; real CC0 recordings now
     (propeller-plane-engine.mp3), with the synthesized sound as a fallback.
 - **Jet airliner** (`jet`). Now: tap: Climb and bank. Plan: keep.
@@ -2940,27 +2992,34 @@ Proposals below are suggestions; the owner may change them.
   - Owner: Pretty good; a bit more dramatic.
   - Effect: A big gust heels it over with spray.
   - Improved: C2: a gust heels it over twice as far with spray at the bow and stern, then it rocks
-    back upright (3.5 s).
+    back upright (3.5 s). Hands-on H4: in Hands-on, push the mast over: she heels on her keel and
+    rocks back upright when let go.
   - Sound: Wind and water spray.
 - **Submarine** (`submarine`). Now: tap: Dive and surface. Plan: keep.
   - Owner: Underwhelming that only the periscope appears and disappears.
   - Effect: Dives with bubbles, then surfaces and raises the periscope.
   - Improved: C2: a tap dives it: the periscope drops, bubbles rush from the hull and it sinks, then
-    it surfaces and raises the periscope (5 s).
+    it surfaces and raises the periscope (5 s). Hands-on H4: in Hands-on, she floats on a water
+    line; push her under and let go, and she bobs back up to the surface, upright.
   - Sound: Sonar ping.
 - **Bicycle** (`bicycle`). Now: tap: Ring the bell. Plan: keep.
   - Owner: Not sure what the effect is; make it more dramatic.
   - Effect: Pedals spin, the wheels turn and the bell rings clearly.
   - Improved: C2: the bell shakes with flashing ring lines, and the wheels add five fast turns and
-    the pedals two (2.5 s).
+    the pedals two (2.5 s). Hands-on H4: in Hands-on, push it and it rolls on its wheels, upright.
+    (Turning the pedals by hand waits for an engine piece.)
   - Sound: A real bicycle bell's ding-ding (Sound C, October 2, 2026).
 - **Tractor** (`tractor`). Now: tap: Chug chug. Plan: keep.
   - Owner: Perfect.
   - Fixed: C1: a light wisp of exhaust; the cab glass is clear instead of static.
+  - Improved: Hands-on H4: in Hands-on, push it and it rolls on its big wheels; the small front
+    wheels turn faster.
   - Sound: A slow diesel's putt-putt with its clatter; real CC0 recordings now (tractor-engine.mp3),
     with the synthesized sound as a fallback.
 - **Flying saucer** (`ufo`). Now: tap: Beam on or off. Plan: keep.
   - Owner: Maybe my favourite; really cool.
+  - Improved: Hands-on H4: in Hands-on, pick the cow up and set it on the grass; drag it under the
+    beam and it floats up to the saucer, turning slowly; switch the beam off and it drops.
   - Sound: A deep pulsing hum and a heavy rush as it lifts (no whistling theremin).
 
 ## Landmarks (16)
