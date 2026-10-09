@@ -275,8 +275,11 @@ function frogHands(c, t, info) {
   const f = info?.hands?.finger;
   let caught = false;
   if (f && info.hands.point) {
-    // A little in front of the frog's middle, toward the finger.
-    const p = vec.sub(info.hands.point, vec.mul(f.dir, 0.25));
+    // Under the finger and in front of the frog: from where the finger
+    // points, out along its line toward the viewer until clear of the frog
+    // (never round the back of it, where the frog would hide it).
+    let p = vec.sub(info.hands.point, vec.mul(f.dir, 0.25));
+    for (let i = 0; i < 40 && Math.hypot(p[0], p[2]) < 0.75 && p[1] < 0.75; i++) p = vec.sub(p, vec.mul(f.dir, 0.05)); // prettier-ignore
     const r = Math.hypot(p[0], p[2]);
     const want = clamp(r, 0.55, 1.05);
     const dir = r > 1e-6 ? [p[0] / r, 0, p[2] / r] : [0, 0, 1];
@@ -302,6 +305,16 @@ function frogHands(c, t, info) {
   } else if (!m.fly) m.goal = 0;
   m.yaw += (m.goal - m.yaw) * (1 - Math.exp(-(m.fly ? 7 : m.s !== null ? 10 : 2.5) * dt));
   return { yaw: Math.abs(m.yaw) > 1e-4 ? m.yaw : 0, fly: m.fly, from: m.from, s: m.s, caught };
+}
+
+// Lane Hands-on H5: the fly's splats sorted again where it now is, each
+// time it has moved a little (an eighth of a toy radius).
+function frogResort(c, at, out) {
+  const m = FROG_HANDS.get(c);
+  if (!m) return;
+  const key = at.map((v) => Math.round(v * 8)).join(",");
+  if (key !== m.sortKey) out.resortPose = true;
+  m.sortKey = key;
 }
 
 // The sounds of a Hands-on catch, poke or hide (as the toys' own taps',
@@ -1344,7 +1357,7 @@ export const RECIPES = {
     controls: [{ key: "fly", label: "Wings", type: "toggle", default: 0, ease: 0.8 }],
     action: { key: "fly", label: "Open the wings" },
     // Hands-on (lane Hands-on H5): lift each wing case open on its hinge
-    // at the middle of the back; the folded wing under it shows, and let go
+    // at the middle of the back (its wing stays folded away), and let go
     // the case swings shut by its own weight.
     hands: {
       touch: true,
@@ -1371,10 +1384,10 @@ export const RECIPES = {
       out.parts.shellR = { angle: 1.15 * o };
       out.parts.shellL = { angle: -1.15 * o };
       const buzz = band(c.fly, 0.5, 1) * 0.3 * Math.sin(t * 24);
-      // (Each wing shows as its case opens, by hand too.)
-      const open = (n) => Math.max(o, (info?.hands?.joint(n) ?? 0) / 1.15);
-      out.parts.wingR = { angle: buzz, visible: band(open("shellR"), 0.35, 0.8) };
-      out.parts.wingL = { angle: -buzz, visible: band(open("shellL"), 0.35, 0.8) };
+      out.parts.wingR = { angle: buzz, visible: band(o, 0.35, 0.8) };
+      out.parts.wingL = { angle: -buzz, visible: band(o, 0.35, 0.8) };
+      // (Lifted by hand, a case shows no wing: the hind wings stay folded
+      // away under it, and spread only to fly.)
     },
     build(k) {
       const A = 0.5;
@@ -2296,6 +2309,10 @@ export const RECIPES = {
         out.parts.fly = { offset: vec.sub(vec.add(at, buzz), FROG.flyBuilt), quat: quatAxisAngle([0, 1, 0], 0.4 * Math.sin(t * 9)), visible: 1 }; // prettier-ignore
         out.parts.eyes = { offset: [0, 0, 0] };
         out.parts.sac = { scale: 0.2, visible: 0 };
+        // The fly is built inside the head (where it is swallowed), so its
+        // splats sort behind the frog's face: sorted again where it hovers,
+        // so it draws in front of the frog.
+        frogResort(c, at, out);
         return;
       }
       const from = H.from ? vec.sub(H.from, FROG.catch) : FROG.from;
@@ -2323,6 +2340,9 @@ export const RECIPES = {
         quat: quatAxisAngle([0, 1, 0], 0.4 * Math.sin(s * 9)),
         visible: on && s < 1.58 ? 1 : 0,
       };
+      // (Caught after a hand let it go: sorted as it flies in, then once
+      // more, in the mouth.)
+      if (H.s !== null && s < 1.7) frogResort(c, s < 1.58 ? fp : [0, 0, 0], out);
       out.parts.eyes = { offset: [0, -0.065 * (on ? band(s, 1.8, 2.0) * (1 - band(s, 2.2, 2.45)) : 0), 0] }; // prettier-ignore
       const croak = (a) => Math.sin(Math.PI * band(s, a, a + 0.36));
       const sac = on ? Math.max(croak(2.55), croak(3.05)) : 0;

@@ -2562,7 +2562,8 @@ Proposals below are suggestions; the owner may change them.
 - **Ladybug** (`ladybug`). Now: tap: Open the wings. Plan: keep.
   - Owner: Perfect.
   - Improved: Hands-on H5: with ✋ Hands-on on, each wing case lifts open on its own hinge at the
-    middle of the back, the folded wing under it shows, and let go it swings shut by its weight.
+    middle of the back (the wing under it stays folded away; the owner's review: no wing poking
+    through the case), and let go it swings shut by its weight.
   - Sound: The same wing whirr, about 5 dB quieter (Sound C, October 2, 2026).
 - **Snail** (`snail`). Now: tap: Hide in the shell. Plan: keep.
   - Owner: Perfect, but it disappears too much when hiding; make it more elegant.

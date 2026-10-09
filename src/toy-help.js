@@ -1413,7 +1413,7 @@ export const TOY_HELP = {
   ladybug: {
     howTo: "Tap to open the wings. Hands-on: lift a wing case open on its hinge.",
     about:
-      "A ladybug is a small, round beetle. Its red, spotted back is really a pair of hard wing cases, and under them, thin flying wings lie folded up. Its bright colors warn birds that it tastes bad. Gardeners love ladybugs, because they eat the tiny aphids that harm plants.\n\nTap it to open the wings: the red wing cases lift and spread, and the thin wings unfold beneath them, ready to fly. Tap again to fold them away. Counting its spots will not tell you how old a ladybug is: the number depends on the kind of ladybug. With ✋ Hands-on on, lift each red wing case open on its hinge to see the folded wing under it; let go and it swings shut.",
+      "A ladybug is a small, round beetle. Its red, spotted back is really a pair of hard wing cases, and under them, thin flying wings lie folded up. Its bright colors warn birds that it tastes bad. Gardeners love ladybugs, because they eat the tiny aphids that harm plants.\n\nTap it to open the wings: the red wing cases lift and spread, and the thin wings unfold beneath them, ready to fly. Tap again to fold them away. Counting its spots will not tell you how old a ladybug is: the number depends on the kind of ladybug. With ✋ Hands-on on, lift each red wing case open on its hinge (its wing stays folded away beneath); let go and it swings shut.",
   },
   snail: {
     howTo:

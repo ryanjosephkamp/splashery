@@ -307,7 +307,31 @@ test("frog: it turns to the fly on the finger, and catches it when let go", asyn
   expect(Math.abs(yawOf((await shown(page, "body"))?.quat ?? [0, 0, 0, 1]))).toBeLessThan(0.1);
 });
 
-test("ladybug: a wing case lifts open on its hinge, shows the wing, and swings shut", async ({
+test("frog: a finger over the frog's own head keeps the fly in front of the frog, never behind it", async ({
+  page,
+}) => {
+  await ready(page, "frog");
+  await finger(
+    page,
+    [
+      [0.3, 0.3, 0.6],
+      [0, 0.75, 0.2],
+      [0, 0.8, -0.1],
+    ],
+    { up: false },
+  );
+  await tick(page, 0.5);
+  const p = await page.evaluate(() => {
+    const { player } = window.__splashery;
+    return player.motion.out.parts.fly.offset;
+  });
+  // The fly's place (built at z 0.45, its offset added): in front (+z).
+  expect(p[2] + 0.45).toBeGreaterThan(0.2);
+  expect((await shown(page, "parts")).fly.visible).toBe(1);
+  await letGo(page);
+});
+
+test("ladybug: a wing case lifts open on its hinge, its wing stays folded away under it, and it swings shut", async ({
   page,
 }) => {
   await ready(page, "ladybug");
@@ -324,11 +348,14 @@ test("ladybug: a wing case lifts open on its hinge, shows the wing, and swings s
   await tick(page, 0.3);
   expect(await joint("shellR")).toBeGreaterThan(0.6);
   expect(await joint("shellL")).toBeLessThan(0.05);
-  expect((await shown(page, "parts")).wingR.visible).toBeGreaterThan(0.5);
+  // The spread (flying) wing doesn't poke out through the lifted case.
+  let p = await shown(page, "parts");
+  expect(p.wingR.visible).toBe(0);
   await letGo(page);
   await tick(page, 2);
   expect(await joint("shellR")).toBeLessThan(0.05);
-  expect((await shown(page, "parts")).wingR.visible).toBe(0);
+  p = await shown(page, "parts");
+  expect(p.wingR.visible).toBe(0);
 });
 
 test("starfish: an arm bends up from its root and curls back slowly", async ({ page }) => {
