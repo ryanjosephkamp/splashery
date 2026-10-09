@@ -796,7 +796,9 @@ function fpPen(s) {
 
 // Lane Hands-on H3: the pen's cap by hand, as a loose piece (an ellipsoid
 // about its middle), and the pen lying under it as ground.
-const FP_CAP = { type: "ellipsoid", r: [0.25, 0.075, 0.075] };
+// (Its full length, end to end, so a cap that tumbles never sinks into the
+// paper: the owner's note of October 8, 2026.)
+const FP_CAP = { type: "ellipsoid", r: [0.48, 0.07, 0.07] };
 const FP_BODY = { type: "box", half: [0.97, 0.06, 0.06] };
 
 const FOUNTAIN_PEN = {
