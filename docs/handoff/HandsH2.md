@@ -106,6 +106,11 @@ tools/sound-review.json as "ready". Finish every working turn with "READY:", "WO
 
 ## State
 
+READY: both shelves are marked good. As of October 9, 2026, 06:45 UTC, the owner's marks on Effect
+review page 2 are "good" for all 35 toys (Food: 13 good in round 1, croissant and egg in round 2,
+banana, pancakes and watermelon in round 3; Nature: 14 in round 1, the other 5 in round 2). Merge
+order: engine PR #450 first, then Food #426 and Nature #431. All three are mergeable with main.
+
 Round 3 (October 9, 2026): croissant and egg r2 are good; banana, pancakes and watermelon are fixed
 again and posted as `hh2-<toy>-r3` (the core runs end to end in the skin's colors; moved part pieces
 are sorted again in the engine, #450; the whole melon is a fixed shape a carried slice hovers
