@@ -74,7 +74,8 @@ const BASE = 0.01;
 // Lane Sharpness A's options (off unless a toy asks): `sizeMul` scales every splat, `exact` keeps
 // each splat's own size (no random size jitter, which frays the outline), and `smooth` (0..1)
 // blends each splat's color toward the mean of its neighbors within `cell` model units, to calm a
-// scan's speckled texture.
+// scan's speckled texture. `partOf(filePart, i)` may pick a splat's kit part itself (lane Hands-on
+// H1: a sleeve cut at its elbow).
 export function addScan(
   k,
   scan,
@@ -88,6 +89,7 @@ export function addScan(
     exact = false,
     smooth = 0,
     cell = 0.012,
+    partOf,
   } = {},
 ) {
   k.data = k.data || {}; // sortWhileMoving keeps its state here
@@ -133,7 +135,7 @@ export function addScan(
       flat: 0.14,
       color: c,
       opacity: 1,
-      part: parts[fp] ?? 0,
+      part: (partOf && partOf(fp, i)) ?? parts[fp] ?? 0,
       pattern: typeof pattern === "function" ? !!pattern(fp) : pattern,
     };
   });
@@ -1579,6 +1581,11 @@ const HD = {
   armpit: -0.1, // the lowest point of an armhole
   shoulderL: [-0.36, 0.17, -0.06],
   shoulderR: [0.36, 0.17, -0.06],
+  // Lane Hands-on H1: each sleeve is cut at its elbow (the middle of the sleeve there), and the
+  // forearm keeps a band of the upper sleeve's cloth above the cut, so a bent elbow shows cloth.
+  elbowL: [-0.36, -0.3, -0.06],
+  elbowR: [0.36, -0.3, -0.06],
+  elbowBand: 0.08,
   // Where each sleeve points when crossed (the left one over the right).
   crossL: [0.47, 0.28, 0.84],
   crossR: [-0.45, 0.05, 0.89],
@@ -1641,16 +1648,15 @@ const HOODIE = {
         drag: 3,
         pieces: [{ part: "hood", node: 0, turn: false, spin: HOOD.angle, axis: [1, 0, 0] }],
       },
-      // Lane Hands-on H1: each sleeve swings as one piece: pull its cuff and
-      // let go, and it swings back down to hang. It turns about its armpit,
-      // not its shoulder, so a lifted sleeve stays joined under the arm (its
-      // top tucks into the shoulder, as the cloth gathers there), and it
-      // lifts only as far as an empty sleeve would.
-      // It never swings in past where it hangs (the body is there).
+      // Lane Hands-on H1: lift a sleeve by its cuff and it bends at the
+      // elbow, as an empty sleeve does; the upper sleeve stays as it hangs,
+      // joined at the shoulder and under the arm. Let go and the forearm
+      // swings back down. It never swings in past where it hangs (the body
+      // is there).
       ...[
-        ["sleeveL", [-0.27, -0.06, -0.06], [-0.5, -0.78, -0.02], -1],
-        ["sleeveR", [0.27, -0.06, -0.06], [0.5, -0.78, -0.02], 1],
-      ].map(([part, top, cuff, side]) => ({ name: part, points: [top, cuff], grab: [1], pick: 0.3, reach: 1.02, maxPull: 0.3, weight: 0, keep: 5, drag: 2, pieces: [{ part, from: 0, to: 1 }], update: (strand, dt, soft) => hdSleeveOut(soft.nodes[strand.first], soft.nodes[strand.first + 1], side) })), // prettier-ignore
+        ["forearmL", HD.elbowL, [-0.5, -0.78, -0.02], -1],
+        ["forearmR", HD.elbowR, [0.5, -0.78, -0.02], 1],
+      ].map(([part, top, cuff, side]) => ({ name: part, points: [top, cuff], pin: [0], grab: [1], pick: 0.3, reach: 1.02, maxPull: 0.35, weight: 0, keep: 5, drag: 2, pieces: [{ part, from: 0, to: 1 }], update: (strand, dt, soft) => hdSleeveOut(soft.nodes[strand.first], soft.nodes[strand.first + 1], side) })), // prettier-ignore
     ],
   },
   credits: [
@@ -1686,6 +1692,16 @@ const HOODIE = {
     };
     out.parts.sleeveL = { quat: quatMul(quatAxisAngle([0, 0, 1], sway), toward(HD.crossL, inL)) };
     out.parts.sleeveR = { quat: quatMul(quatAxisAngle([0, 0, 1], -sway), toward(HD.crossR, inR)) };
+    // Each forearm moves with its sleeve as one piece (turned about the shoulder, not the elbow).
+    for (const [f, sl, S, E] of [
+      ["forearmL", "sleeveL", HD.shoulderL, HD.elbowL],
+      ["forearmR", "sleeveR", HD.shoulderR, HD.elbowR],
+    ]) {
+      const q = out.parts[sl].quat;
+      const d = [S[0] - E[0], S[1] - E[1], S[2] - E[2]];
+      const r = quatRotate(q, d);
+      out.parts[f] = { quat: q, offset: [d[0] - r[0], d[1] - r[1], d[2] - r[2]] };
+    }
     // The drawstrings swing, kicked by the hood and again by the sleeves.
     const kick = (ph) => swing(s, 0.05, 0.55, 10, 2.4) + swing(s, 1.2, 0.3 * ph, 9, 2) + swing(s, 2.95, 0.3, 9, 2); // prettier-ignore
     out.parts.stringL = { quat: quatMul(quatAxisAngle([0, 0, 1], kick(1)), quatAxisAngle([1, 0, 0], -0.6 * kick(0.6))) }; // prettier-ignore
@@ -1697,10 +1713,37 @@ const HOODIE = {
     const hood = k.part("hood", { pivot: HD.neck, axis: [1, 0, 0] });
     const sleeveL = k.part("sleeveL", { pivot: HD.shoulderL });
     const sleeveR = k.part("sleeveR", { pivot: HD.shoulderR });
+    const forearmL = k.part("forearmL", { pivot: HD.elbowL });
+    const forearmR = k.part("forearmR", { pivot: HD.elbowR });
+    const forearmOf = (fp) => (fp === 2 ? forearmL : fp === 3 ? forearmR : null);
     const stringL = k.part("stringL", { pivot: HD.strings[0].top });
     const stringR = k.part("stringR", { pivot: HD.strings[1].top });
     // The cloth takes flag colors (lane Fix7); the drawstrings keep theirs.
-    addScan(k, scan, { share: 0.86, parts: [0, hood, sleeveL, sleeveR], keep: (fp) => fp < 4, pattern: true }); // prettier-ignore
+    const elbowY = HD.elbowR[1];
+    addScan(k, scan, { share: 0.86, parts: [0, hood, sleeveL, sleeveR], keep: (fp) => fp < 4, pattern: true, partOf: (fp, i) => (scan.pos[i * 3 + 1] < elbowY ? forearmOf(fp) : null) }); // prettier-ignore
+    // The band above each elbow, again on the forearm (lane Hands-on H1): at rest it lies on the
+    // upper sleeve's own splats; with the elbow bent it covers the opened side of the cut.
+    {
+      const m = Math.min(scan.n, Math.max(1000, Math.floor(k.count * 0.86)));
+      const grow = Math.sqrt(scan.n / m);
+      const band = [];
+      for (let i = 0; i < m; i++) {
+        const y = scan.pos[i * 3 + 1];
+        if (forearmOf(scan.part[i]) && y >= elbowY && y < elbowY + HD.elbowBand) band.push(i);
+      }
+      addCloud(k, band.length, (j) => {
+        const i = band[j];
+        return {
+          p: [scan.pos[i * 3], scan.pos[i * 3 + 1], scan.pos[i * 3 + 2]],
+          n: [scan.nrm[i * 3], scan.nrm[i * 3 + 1], scan.nrm[i * 3 + 2]],
+          size: scan.sig[i] * grow,
+          flat: 0.14,
+          color: [scan.rgb[i * 3], scan.rgb[i * 3 + 1], scan.rgb[i * 3 + 2]],
+          part: forearmOf(scan.part[i]),
+          pattern: true,
+        };
+      });
+    }
     // The armholes: each is closed with fabric that follows the opening's own outline (the
     // sleeve's splats that touch the body, above the armpit, laid flat on the plane that fits
     // them best), one patch on the body and one on the sleeve's top, so a raised sleeve shows
@@ -1810,8 +1853,8 @@ const HOODIE = {
     // cuff's own cloth closes it, a little inside the rim, darker toward the
     // middle and creased where the rib gathers.
     for (const [fp, sleeve] of [
-      [2, sleeveL],
-      [3, sleeveR],
+      [2, forearmL],
+      [3, forearmR],
     ]) {
       const ids = [];
       for (let i = 0; i < scan.n; i++) if (scan.part[i] === fp) ids.push(i);

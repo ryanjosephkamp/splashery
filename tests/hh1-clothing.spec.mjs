@@ -1,7 +1,7 @@
 // Lane Hands-on H1, Clothing (docs/handoff/HandsH1.md): the sunglasses'
 // arms fold on their hinges and stay, the cap flies off its stand like a disc, a pulled
 // lace undoes the shoe's bow and falls outside the shoe (and ↺ ties it), and the hoodie's sleeves
-// swing back down.
+// bend at the elbow and swing back down.
 
 import { test, expect } from "@playwright/test";
 
@@ -165,19 +165,21 @@ test("running shoe: a lace end pulled out undoes the bow; ↺ ties it again", as
   expect(s.tied).toBeLessThan(0.01); // ↺ ties it again
 });
 
-test("hoodie: a sleeve lifted by its cuff swings back down and settles", async ({ page }) => {
+test("hoodie: a sleeve lifted by its cuff bends at the elbow, swings back down and settles", async ({
+  page,
+}) => {
   await open(page, "hoodie");
   const s = await page.evaluate(() => {
     const { player } = window.__splashery;
     const h = player.handsOn;
     h.ensure();
     const sp = h.softParts;
-    const st = sp.strands.find((x) => x.name === "sleeveR");
+    const st = sp.strands.find((x) => x.name === "forearmR");
     const cuff = sp.nodes[st.first + 1];
     const P = cuff.x.slice();
     const s0 = player.screenPoint(P);
     const ang = () => {
-      const q = player.motion.handsParts?.sleeveR?.quat;
+      const q = player.motion.handsParts?.forearmR?.quat;
       return q ? 2 * Math.acos(Math.min(1, Math.abs(q[3]))) : 0;
     };
     h.pressAt(player.fromRecipe(P), s0[0], s0[1]);
@@ -186,10 +188,12 @@ test("hoodie: a sleeve lifted by its cuff swings back down and settles", async (
       player.update(1 / 60);
     }
     const held = ang();
+    const upper = player.motion.handsParts?.sleeveR;
     h.release();
     for (let k = 0; k < 240; k++) player.update(1 / 60);
-    return { held, end: ang() };
+    return { held, upper: !!upper, end: ang() };
   });
   expect(s.held).toBeGreaterThan(0.2); // lifted out
+  expect(s.upper).toBe(false); // the upper sleeve stays as it hangs, joined at shoulder and armpit
   expect(s.end).toBeLessThan(0.12); // hanging again
 });
