@@ -74,17 +74,18 @@ Lane details: branch `claude/lane-arcade-r3` (engine changes on `claude/lane-arc
 
 ## State
 
-(October 9, 2026; built by Opus 5.5.) Draft PR #474 (`claude/lane-arcade-r3`). No engine PR: every
-change is in the game kit (`src/arcade/`) and the Arcade packs.
+(October 9, 2026; built by Opus 5.5.) Draft PR #474 (`claude/lane-arcade-r3`), every item of the
+brief built. No engine PR: every change is in the game kit (`src/arcade/`, used only by the Arcade
+games) and the Arcade packs.
 
-- Shardball: done, clips posted (`arc3-shardball`, with `arc3-shardball-before`).
-- Strata: done, clips posted (`arc3-strata`, with `arc3-strata-before`).
-- Photo Dash: built (still photo cut to the stage, a new sample photo each level, ball choice, crisp
-  planks, a new coin sound); clip rendering.
-- Stone Belt, Soft Landing, Longtail: sharper builds in progress.
-- Cast a Shadow, Grain Garden: look around and zoom in 3D (the kit's `look`), Grain Garden framed
-  closer with finer grains.
-- Note Rider: notes last their own length; seven instruments to pick in the game.
+- Clips on Effect review page 2 (lane record `ArcadeR3`), each game before (main) and after, at
+  phone size with real play: `arc3-shardball`, `arc3-strata`, `arc3-photo-dash`, `arc3-stone-belt`,
+  `arc3-soft-landing`, `arc3-longtail`, `arc3-cast-a-shadow`, `arc3-grain-garden` and
+  `arc3-note-rider` (with `-before` cards). Waiting for the owner's marks.
+- Sounds: Photo Dash (the coin) and Note Rider (seven instruments) are "ready" in
+  `tools/sound-review.json`.
+- Tests: `tests/arc3.spec.mjs` (9) and the older Arcade specs pass (37 in all); the full suite is
+  for the Integrator.
 
 ## Notes
 
@@ -113,4 +114,16 @@ change is in the game kit (`src/arcade/`) and the Arcade packs.
 
 ## Known issues
 
+- The catch applies to Shardball's flat board too (the owner's note said "the platform"); one line
+  limits it to the Dome if he prefers.
+- In Note Rider the instrument buttons sit over the top of the track on a phone.
+- Effect review page 2 plays clips muted, so the new sounds are for the Sound Board.
+- The software renderer is slow with Photo Dash's 100,000-splat photo (about 0.85 s a frame); a real
+  phone's GPU draws it far faster, but it was not measured on one.
+
 ## For the Operator
+
+- Merge: #474 alone (no engine PR), after the Integrator's full run and the owner's marks.
+- Three older tests in `tests/arc.spec.mjs` were updated for the owner's new defaults (Shardball's
+  Dome in 3D, the catch, Strata's 10-wide slot).
+- The Sound Board: Photo Dash and Note Rider have new "ready" entries.
