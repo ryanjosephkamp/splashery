@@ -14,6 +14,7 @@ import {
   quatRotate,
 } from "../kit.js";
 import { evenBox, evenCylinder, evenEllipsoid, evenRoundBox, evenTorus, evenTube } from "./even.js";
+import { surfacePoints } from "../physics/world.js"; // lane Hands-on H4
 
 const TAU = Math.PI * 2;
 const add = (a, b) => [a[0] + b[0], a[1] + b[1], a[2] + b[2]];
@@ -984,9 +985,13 @@ function trainBuild(k, o) {
         color: "#8d9096",
       });
   }
+  // Lane Hands-on H4: the engine and tender are one part (they run along
+  // the rails in Hands-on; as built, it stands where it always has).
+  const loco = k.part("loco", { pivot: [0, 0, 0] });
+  const addL = (g, opts) => k.add(g, { part: loco, ...opts });
   // Running board and buffer beam.
   const deck = 0.8;
-  k.add(evenBox(3.45, 0.08, 1.02), {
+  addL(evenBox(3.45, 0.08, 1.02), {
     even: true,
     opacity: 1,
     jitter: 0.012,
@@ -994,7 +999,7 @@ function trainBuild(k, o) {
     ...P,
     color: (c) => (c.s.face === 4 || c.s.face === 5 ? lit(red, c) : lit(black, c)),
   });
-  k.add(evenBox(0.12, 0.26, 1.08), {
+  addL(evenBox(0.12, 0.26, 1.08), {
     even: true,
     opacity: 1,
     jitter: 0.012,
@@ -1003,7 +1008,7 @@ function trainBuild(k, o) {
     color: (c) => lit(red, c),
   });
   for (const z of [-0.34, 0.34]) {
-    k.add(evenCylinder(0.05, 0.05, 0.14), {
+    addL(evenCylinder(0.05, 0.05, 0.14), {
       even: true,
       opacity: 1,
       jitter: 0.012,
@@ -1011,7 +1016,7 @@ function trainBuild(k, o) {
       rot: [0, 0, 90],
       color: "#2b2b2b",
     });
-    k.add(evenCylinder(0.09, 0.09, 0.03), {
+    addL(evenCylinder(0.09, 0.09, 0.03), {
       even: true,
       opacity: 1,
       jitter: 0.012,
@@ -1022,7 +1027,7 @@ function trainBuild(k, o) {
   }
   // Cylinders beside the pony truck.
   for (const z of [-1, 1])
-    k.add(evenCylinder(0.16, 0.16, 0.5), {
+    addL(evenCylinder(0.16, 0.16, 0.5), {
       even: true,
       opacity: 1,
       jitter: 0.012,
@@ -1033,7 +1038,7 @@ function trainBuild(k, o) {
     });
   // The boiler.
   const by = 1.22;
-  k.add(evenCylinder(0.42, 0.42, 2.0), {
+  addL(evenCylinder(0.42, 0.42, 2.0), {
     even: true,
     opacity: 1,
     jitter: 0.012,
@@ -1048,7 +1053,7 @@ function trainBuild(k, o) {
       return lit(band ? brass : col, c);
     },
   });
-  k.add(evenCylinder(0.44, 0.44, 0.38), {
+  addL(evenCylinder(0.44, 0.44, 0.38), {
     even: true,
     opacity: 1,
     jitter: 0.012,
@@ -1064,7 +1069,7 @@ function trainBuild(k, o) {
       return lit(black, c);
     },
   });
-  k.add(k.sphere(0.07), {
+  addL(k.sphere(0.07), {
     even: true,
     opacity: 1,
     jitter: 0.012,
@@ -1073,7 +1078,7 @@ function trainBuild(k, o) {
     weight: 3,
     color: "#fff4c8",
   });
-  k.add(evenCylinder(0.08, 0.08, 0.1), {
+  addL(evenCylinder(0.08, 0.08, 0.1), {
     even: true,
     opacity: 1,
     jitter: 0.012,
@@ -1082,7 +1087,7 @@ function trainBuild(k, o) {
     color: "#2b2b2b",
   });
   // Chimney, dome and whistle.
-  k.add(
+  addL(
     k.lathe(
       [
         [0.14, 0],
@@ -1102,7 +1107,7 @@ function trainBuild(k, o) {
       color: (c) => lit(c.p[1] > by + 0.8 ? "#b87333" : black, c),
     },
   );
-  k.add(k.sphere(0.2), {
+  addL(k.sphere(0.2), {
     even: true,
     opacity: 1,
     jitter: 0.012,
@@ -1110,7 +1115,7 @@ function trainBuild(k, o) {
     scale: [1, 0.8, 1],
     color: (c) => lit(brass, c),
   });
-  k.add(evenCylinder(0.035, 0.035, 0.2), {
+  addL(evenCylinder(0.035, 0.035, 0.2), {
     even: true,
     opacity: 1,
     jitter: 0.012,
@@ -1120,7 +1125,7 @@ function trainBuild(k, o) {
   // The cab.
   const cx0 = -1.15;
   const cx1 = -0.1;
-  k.add(evenBox(cx1 - cx0, 1.05, 1.0), {
+  addL(evenBox(cx1 - cx0, 1.05, 1.0), {
     even: true,
     opacity: 1,
     jitter: 0.012,
@@ -1140,7 +1145,7 @@ function trainBuild(k, o) {
       return lit(col, c);
     },
   });
-  k.add(
+  addL(
     k.param(
       (u, v) => {
         const x = cx0 - 0.1 + (cx1 - cx0 + 0.18) * u;
@@ -1154,7 +1159,7 @@ function trainBuild(k, o) {
   // The tender with its coal.
   const tx0 = -2.95;
   const tx1 = -1.25;
-  k.add(evenBox(tx1 - tx0, 0.7, 1.0), {
+  addL(evenBox(tx1 - tx0, 0.7, 1.0), {
     even: true,
     opacity: 1,
     jitter: 0.012,
@@ -1170,7 +1175,7 @@ function trainBuild(k, o) {
       return lit(col, c);
     },
   });
-  k.add(evenBox(tx1 - tx0 + 0.04, 0.08, 1.04), {
+  addL(evenBox(tx1 - tx0 + 0.04, 0.08, 1.04), {
     even: true,
     opacity: 1,
     jitter: 0.012,
@@ -1178,7 +1183,7 @@ function trainBuild(k, o) {
     ...P,
     color: (c) => lit(black, c),
   });
-  k.add(evenEllipsoid(k, (tx1 - tx0) / 2 - 0.05, 0.2, 0.46), {
+  addL(evenEllipsoid(k, (tx1 - tx0) / 2 - 0.05, 0.2, 0.46), {
     even: true,
     opacity: 1,
     jitter: 0.012,
@@ -1191,6 +1196,7 @@ function trainBuild(k, o) {
   });
   // Smoke puffs from the chimney trail back as the train runs.
   plume(k, [2.1, by + 0.95, 0], [-1.7, 1.1, 0], {
+    part: loco,
     share: 0.04,
     spread: 0.1,
     grow: 3.2,
@@ -1211,7 +1217,50 @@ function trainBuild(k, o) {
     height: 0.35,
     part: steam,
   });
+  trainRunway(k, railTop);
   k.reach([0.6, 3.1, 0]);
+}
+
+// Lane Hands-on H4: more track at both ends, with buffer stops, shown only
+// while Hands-on is on (the engine runs along it). Left out of the fit, so
+// the toy is framed as before.
+const RUNWAY = { min: -1.3, max: 1.3, ends: [-5.0, 4.2] };
+function trainRunway(k, railTop) {
+  const ext = k.part("runway", { pivot: [0, 0, 0] });
+  const R = { part: ext, fit: false, even: true, opacity: 1, jitter: 0.012, flat: 0.2, pattern: false }; // prettier-ignore
+  for (const [x0, x1] of [
+    [RUNWAY.ends[0], -3.6],
+    [2.8, RUNWAY.ends[1]],
+  ]) {
+    const L = x1 - x0;
+    const xm = (x0 + x1) / 2;
+    k.add(evenBox(L, 0.08, 1.35), {
+      ...R,
+      pos: [xm, -0.04, 0],
+      color: (c) => lit(shade("#8a847a", 0.93 + 0.12 * c.noise(c.p[0] * 12, 0, c.p[2] * 12)), c),
+    });
+    for (const z of [-TRAIN.side + 0.08, TRAIN.side - 0.08])
+      k.add(evenBox(L, 0.06, 0.05), {
+        ...R,
+        pos: [xm, 0.08, z],
+        weight: 1.5,
+        color: (c) => lit(c.n[1] > 0.5 ? "#c9ccd1" : "#6b6258", c),
+      });
+    // Buffer stop at the far end.
+    const xe = x0 < 0 ? x0 + 0.12 : x1 - 0.12;
+    k.add(evenBox(0.14, 0.34, 1.0), { ...R, pos: [xe, railTop + 0.2, 0], color: (c) => lit("#5d4128", c) }); // prettier-ignore
+    for (const z of [-0.34, 0.34])
+      k.add(evenCylinder(0.07, 0.07, 0.12), {
+        ...R,
+        pos: [xe + (x0 < 0 ? 0.12 : -0.12), railTop + 0.34, z],
+        rot: [0, 0, 90],
+        color: (c) => lit("#b3261e", c),
+      });
+  }
+  for (let x = -3.5 - 0.28; x >= RUNWAY.ends[0] + 0.1; x -= 0.28)
+    k.add(evenBox(0.14, 0.05, 1.12), { ...R, pos: [x, 0.025, 0], color: (c) => lit("#5d4128", c) }); // prettier-ignore
+  for (let x = -3.5 + 0.28 * 23; x <= RUNWAY.ends[1] - 0.1; x += 0.28)
+    k.add(evenBox(0.14, 0.05, 1.12), { ...R, pos: [x, 0.025, 0], color: (c) => lit("#5d4128", c) }); // prettier-ignore
 }
 
 // ---- Ocean liner ----------------------------------------------------------------------
@@ -3173,6 +3222,70 @@ function ufoBuild(k) {
   rod(k, [-0.25, -1.4, 0], [-0.34, -1.58, 0], 0.012, { ...C, color: "#1d1d1d" });
 }
 
+// ---- Hands-on (lane Hands-on H4) -------------------------------------------------------
+
+// A rotor turned by hand rides the helicopter as the drive last showed it
+// (on its pad, or hovering).
+function heliRide(d, parts, name, a) {
+  const h = d?.h4;
+  if (!h) return;
+  const pv = name === "rotor" ? HELI.rotor : HELI.tail;
+  const ax = name === "rotor" ? [0, 1, 0] : [0, 0, 1];
+  parts[name] = carried(pv, h.tq, HELI.centre, h.lift, quatAxisAngle(ax, a));
+}
+
+// The engine rolled `v` along its rails: every axle with it, each turned by
+// the distance over its own radius, and the coupling rods on the cranks.
+function trainRide(d, parts, v) {
+  const a = -v / TRAIN.driverR;
+  TRAIN.drivers.forEach((x, i) => (parts[`driver${i}`] = { angle: a, offset: [v, 0, 0] }));
+  parts.pony = { angle: -v / TRAIN.ponyR, offset: [v, 0, 0] };
+  TRAIN.tender.forEach((x, i) => (parts[`tender${i}`] = { angle: -v / TRAIN.tenderR, offset: [v, 0, 0] })); // prettier-ignore
+  const r = TRAIN.crank;
+  parts.rods = { offset: [v + r * Math.cos(a) - r, r * Math.sin(a), 0] };
+  parts.steam = { offset: [v, 0, 0], visible: d?.h4?.steam ?? 0 };
+  parts.runway = { visible: 1 };
+}
+
+// The liner pushed down `v`: it pitches a little with the push (bow down),
+// and the horn's steam rides it.
+function linerRide(d, parts, v) {
+  const q = quatAxisAngle([0, 0, 1], 0.12 * v);
+  const ship = carried(LINER.centre, q, LINER.centre, [0, v, 0]);
+  parts.ship = ship;
+  parts.horn = { ...carried(LINER.horn, q, LINER.centre, [0, v, 0]), visible: d?.h4?.horn ?? 0 };
+}
+
+// The flying saucer's beam: a loose cow inside the cone of light (while the
+// beam is on) is held up against its weight and drawn up to where it hangs
+// as built, toward the beam's middle, turning slowly. Outside it falls.
+const UFO_GROUND = -2.35;
+function ufoBeam(b, h, ctx) {
+  if (!ctx.piece || b.held || b.pinned) return;
+  const [x, y, z] = b.pos;
+  const r = Math.hypot(x, z);
+  // The patch of grass is round: past its edge the cow is turned back in
+  // (the play area's walls are square).
+  if (r > 1.2) {
+    const k = (24 * (r - 1.2)) / r;
+    b.vel[0] -= k * x * h;
+    b.vel[2] -= k * z * h;
+  }
+  const on = ctx.c.beam ?? 0;
+  if (on < 0.05) return;
+  const t = clamp((y + 0.32) / (UFO_GROUND + 0.32), 0, 1);
+  const rad = 0.36 + 0.7 * t;
+  const k = on * smoothstep(rad, 0.75 * rad, r);
+  if (k <= 0) return;
+  const lift = ctx.G + 9 * (-1.45 - y) - 2.6 * b.vel[1];
+  b.vel[1] += k * lift * h;
+  b.vel[0] += k * (-2.5 * x - 1.8 * b.vel[0]) * h;
+  b.vel[2] += k * (-2.5 * z - 1.8 * b.vel[2]) * h;
+  b.omega[0] *= 1 - k * 3 * h;
+  b.omega[2] *= 1 - k * 3 * h;
+  b.omega[1] += k * (0.5 - b.omega[1]) * 2 * h;
+}
+
 // ---- Recipes ----------------------------------------------------------------------------
 
 export const RECIPES = {
@@ -3214,7 +3327,16 @@ export const RECIPES = {
     options: [{ key: "color", label: "Colour", type: "color", default: "#e8452c" }],
     controls: [{ key: "fly", label: "Fly", type: "toggle", default: 0, ease: 2.4 }],
     action: { key: "fly", label: "Take off or land" },
-    drive(t, c, out) {
+    // Hands-on (lane Hands-on H4): flick the main rotor or the tail rotor to
+    // spin it; it coasts to a stop. (It plays in pieces mode: the rotors
+    // turn, the helicopter stays on its pad.)
+    hands: {
+      joints: (d) => [
+        { type: "dial", part: "rotor", pivot: HELI.rotor, axis: [0, 1, 0], drag: 0.3, pos: HELI.rotor, pick: [1.7, 0.16, 1.7], start: () => d?.h4?.rotor ?? 0, also: (a, parts) => heliRide(d, parts, "rotor", a) }, // prettier-ignore
+        { type: "dial", part: "tailRotor", pivot: HELI.tail, axis: [0, 0, 1], drag: 0.6, pos: HELI.tail, pick: [0.1, 0.36, 0.36], start: () => d?.h4?.tail ?? 0, also: (a, parts) => heliRide(d, parts, "tailRotor", a) }, // prettier-ignore
+      ],
+    },
+    drive(t, c, out, info) {
       const f = easeInOut(c.fly);
       const bob = 0.04 * Math.sin(t * 1.9) * f;
       const lift = [0, 1.1 * f + bob, 0];
@@ -3234,6 +3356,7 @@ export const RECIPES = {
         lift,
         quatAxisAngle([0, 0, 1], -t * 17),
       );
+      if (info.data) info.data.h4 = { rotor: (-t * 11) % TAU, tail: (-t * 17) % TAU, tq, lift };
     },
     build: helicopterBuild,
   },
@@ -3256,6 +3379,9 @@ export const RECIPES = {
     ],
     controls: [{ key: "burn", label: "Burner", type: "pulse", ease: 4 }],
     action: { key: "burn", label: "Fire the burner" },
+    // Hands-on (lane Hands-on H4): pull it down by the basket and let go; the
+    // hot air floats it back up to where it hovers, basket under it.
+    hands: { air: { hover: 0, spring: 0.35, drag: 2.6, floor: 1.2, upright: 5 } },
     drive(t, c, out) {
       // The burner roars at once, the envelope swells with hot air, and the
       // balloon climbs, then drifts back down as it cools.
@@ -3279,7 +3405,15 @@ export const RECIPES = {
     options: [{ key: "color", label: "Colour", type: "color", default: "#1f6b43" }],
     controls: [{ key: "toot", label: "Whistle", type: "pulse", ease: 2 }],
     action: { key: "toot", label: "Blow the whistle" },
-    drive(t, c, out) {
+    // Hands-on (lane Hands-on H4): push the engine along its rails; it rolls
+    // on, its wheels and coupling rods turning as it goes, until it slows or
+    // meets a buffer stop. More track shows at both ends while ✋ is on.
+    hands: {
+      joints: (d) => [
+        { type: "slider", part: "loco", pivot: [0, 0, 0], axis: [1, 0, 0], min: RUNWAY.min, max: RUNWAY.max, damping: 0.35, gravity: false, bounce: 0.25, pos: [-0.25, 1.0, 0], pick: [2.8, 1.0, 0.62], also: (v, parts) => trainRide(d, parts, v) }, // prettier-ignore
+      ],
+    },
+    drive(t, c, out, info) {
       const w = t * 2.2;
       const a = -(w + burst(c.toot, 2));
       TRAIN.drivers.forEach((x, i) => (out.parts[`driver${i}`] = { angle: a }));
@@ -3289,6 +3423,8 @@ export const RECIPES = {
       const r = TRAIN.crank;
       out.parts.rods = { offset: [r * Math.cos(a) - r, r * Math.sin(a), 0] };
       out.parts.steam = { visible: c.toot > 0.02 ? smoothstep(0, 0.25, c.toot) : 0 };
+      out.parts.runway = { visible: info.hands?.on ? 1 : 0 };
+      if (info.data) info.data.h4 = { steam: out.parts.steam.visible, toot: c.toot };
       out.amount = 1 + 1.2 * c.toot;
     },
     build: trainBuild,
@@ -3299,11 +3435,19 @@ export const RECIPES = {
     options: [{ key: "funnel", label: "Funnels", type: "color", default: "#c0392b" }],
     controls: [{ key: "horn", label: "Horn", type: "pulse", ease: 2.5 }],
     action: { key: "horn", label: "Sound the horn" },
-    drive(t, c, out) {
+    // Hands-on (lane Hands-on H4): push the ship down into the sea and let
+    // go: it bobs back up, pitching a little as it goes, and settles.
+    hands: {
+      joints: (d) => [
+        { type: "slider", part: "ship", pivot: LINER.centre, axis: [0, 1, 0], min: -0.42, max: 0.2, spring: 26, damping: 2.2, gravity: false, bounce: 0.2, pos: [0, 0.4, 0], pick: [3.0, 0.9, 0.6], also: (v, parts) => linerRide(d, parts, v) }, // prettier-ignore
+      ],
+    },
+    drive(t, c, out, info) {
       const tq = tilt(0.025 * Math.sin(t * 0.9), 0.012 * Math.sin(t * 0.63 + 1));
       out.parts.ship = carried(LINER.centre, tq, LINER.centre, [0, 0.015 * Math.sin(t * 1.1), 0]);
       const h = carried(LINER.horn, tq, LINER.centre);
       out.parts.horn = { ...h, visible: c.horn > 0.02 ? smoothstep(0, 0.2, c.horn) : 0 };
+      if (info.data) info.data.h4 = { horn: out.parts.horn.visible };
       out.amount = 1 + 0.8 * c.horn;
     },
     build: linerBuild,
@@ -3347,6 +3491,8 @@ export const RECIPES = {
     ],
     controls: [{ key: "beep", label: "Stop", type: "pulse", ease: 4.5 }],
     action: { key: "beep", label: "Stop for passengers" },
+    // Hands-on (lane Hands-on H4): push it and it rolls on its turning wheels.
+    hands: { wheels: { axle: [0, 0, 1], r: 0.3, parts: ["front", "rear"] } },
     drive(t, c, out) {
       // A bus stop: the lights flash, the stop arm swings out and the doors
       // open; then everything folds away again.
@@ -3375,8 +3521,16 @@ export const RECIPES = {
     ],
     controls: [{ key: "loop", label: "Loop", type: "pulse", ease: 3 }],
     action: { key: "loop", label: "Loop the loop" },
-    drive(t, c, out) {
+    // Hands-on (lane Hands-on H4): flick the propeller to spin it; it coasts
+    // to a stop. (Pieces mode: the propeller turns, the plane stays put.)
+    hands: {
+      joints: (d) => [
+        { type: "dial", part: "prop", pivot: PLANE.prop, axis: [1, 0, 0], drag: 0.5, pos: PLANE.prop, pick: [0.14, 0.5, 0.5], start: () => d?.h4?.prop ?? 0 }, // prettier-ignore
+      ],
+    },
+    drive(t, c, out, info) {
       out.parts.prop = { angle: t * 20 + burst(c.loop, 4) };
+      if (info.data) info.data.h4 = { prop: out.parts.prop.angle % TAU };
       const th = c.loop > 0.001 ? TAU * smoothstep(0, 1, 1 - c.loop) : 0;
       const R = 0.45;
       out.body = {
@@ -3419,6 +3573,13 @@ export const RECIPES = {
     ],
     controls: [{ key: "gust", label: "Gust", type: "pulse", ease: 3.5 }],
     action: { key: "gust", label: "A gust of wind" },
+    // Hands-on (lane Hands-on H4): push the mast over; she heels on her keel
+    // and rocks back upright when let go, the spray riding with her.
+    hands: {
+      joints: [
+        { type: "hinge", part: "boat", pivot: [0, -0.3, 0], axis: [1, 0, 0], min: -1.0, max: 1.0, spring: 16, damping: 1.2, gravity: false, bounce: 0.2, pos: [0, 1.2, 0], pick: [1.5, 2.0, 0.7], also: (a, parts) => (parts.spray = { visible: 0 }) }, // prettier-ignore
+      ],
+    },
     drive(t, c, out) {
       // The gust heels her right over at once, throws up spray, and she
       // rocks back upright as it passes.
@@ -3438,6 +3599,10 @@ export const RECIPES = {
     options: [{ key: "color", label: "Colour", type: "color", default: "#f5c21b" }],
     controls: [{ key: "dive", label: "Dive", type: "pulse", ease: 5 }],
     action: { key: "dive", label: "Dive and surface" },
+    // Hands-on (lane Hands-on H4): she floats on a water line; push her under
+    // and let go, and she bobs back up to the surface, kept upright by her
+    // keel (a round hull alone would roll over).
+    hands: { water: { density: 0.62, drag: 5, depth: 2.2, color: "#2f7fa8" }, upright: { k: 200, damping: 14 } }, // prettier-ignore
     drive(t, c, out) {
       // Periscope down, nose down and a rush of bubbles; she dives, then
       // noses back up to the surface and raises the periscope again.
@@ -3464,6 +3629,12 @@ export const RECIPES = {
     options: [{ key: "color", label: "Frame", type: "color", default: "#1e88e5" }],
     controls: [{ key: "ring", label: "Bell", type: "pulse", ease: 2.5 }],
     action: { key: "ring", label: "Ring the bell" },
+    // Hands-on (lane Hands-on H4): push it and it rolls on its wheels, held
+    // upright as a rider would.
+    hands: {
+      wheels: { axle: [0, 0, 1], r: 0.66, parts: ["front", "rear"] },
+      upright: { k: 300, damping: 20 },
+    },
     drive(t, c, out, info) {
       // Ring-ring: the bell shakes and rings out, and the rider pedals hard
       // (whole turns, so the wheels end where they would have been).
@@ -3486,9 +3657,14 @@ export const RECIPES = {
     options: [{ key: "color", label: "Colour", type: "color", default: "#c8322b" }],
     controls: [{ key: "chug", label: "Chug", type: "pulse", ease: 2 }],
     action: { key: "chug", label: "Chug chug" },
+    // Hands-on (lane Hands-on H4): push it and it rolls on its big wheels;
+    // the small front wheels turn faster, as on the real thing.
+    hands: { wheels: { axle: [0, 0, 1], r: TRACTOR.rr, parts: [] } },
     drive(t, c, out, info) {
-      out.parts.rear = { angle: -(t * 1.2 + burst(c.chug, 1)) };
-      out.parts.front = { angle: -((t * 1.2 * TRACTOR.rr) / TRACTOR.fr + burst(c.chug, 2)) };
+      // (In Hands-on the wheels turn by the distance rolled.)
+      const roll = info.hands?.on ? info.hands.rolled : t * 1.2;
+      out.parts.rear = { angle: -(roll + burst(c.chug, 1)) };
+      out.parts.front = { angle: -((roll * TRACTOR.rr) / TRACTOR.fr + burst(c.chug, 2)) };
       out.body = { squash: 0.03 * Math.sin(info.time * 18) * c.chug };
       out.amount = 1 + 1.6 * c.chug;
     },
@@ -3499,6 +3675,16 @@ export const RECIPES = {
     alive: true,
     controls: [{ key: "beam", label: "Beam", type: "toggle", default: 1, ease: 1.6 }],
     action: { key: "beam", label: "Beam on or off" },
+    // Hands-on (lane Hands-on H4): pick the cow up and set it on the grass;
+    // drag it under the beam and it floats up to the saucer; switch the beam
+    // off and it drops.
+    hands: {
+      floor: -2.35,
+      area: 0.9,
+      place: false,
+      pieces: () => [{ part: "cow", pos: [0, -1.45, 0], pivot: [0, -1.45, 0], solid: { type: "box", half: [0.42, 0.27, 0.17] }, points: surfacePoints({ type: "box", half: [0.42, 0.27, 0.17] }, 2), mass: 1, friction: 0.8, pick: [0.45, 0.32, 0.2] }], // prettier-ignore
+      force: ufoBeam,
+    },
     drive(t, c, out) {
       const b = easeInOut(c.beam);
       const bob = [0, 0.05 * Math.sin(t * 1.3), 0];

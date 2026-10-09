@@ -56,43 +56,90 @@ file. The engine files belong to the merged engines; another lane's toys are the
 - You run in Claude Code on the owner's Mac, signed in to his second Claude account. Follow
   docs/OPERATING.md, "Local lanes", exactly: your own port (4190), the local test set, messages as
   comments on your PR that start "From the Operator", the "READY:", "WORKING:" or "BLOCKED:" line at
-  the top of "## State", and clips on page 2 or on `claude/clips-HandsH4`.
-- The Operator (a cloud session) runs the lanes; the owner, Ryan, talks only to the Operator and is
-  often away from the Mac. Never ask him anything in the terminal or wait for him: put questions in
-  "State", move on to the next item, and keep going.
-- Model: Opus 5.5 only, at the default effort. If `/model` shows another model, stop and say so in
-  "State". At most one helper at a time, same model.
-- Merging: the Operator merges. Never merge anything. An engine change is its own small, additive
-  "Engine: …" PR on `claude/lane-hands-h4-engine`, merged first; toys not using it behave exactly as
-  before.
-- Hands-on play only adds to a toy: with the ✋ switch off, every toy plays exactly as before, and
-  old `#s=` links and saved scenes keep loading. A change the public sees waits for the owner's
-  marks before it merges.
-- Every effect follows the effect quality rules in CLAUDE.md (real motion of solid pieces, separate
-  things moving separately, break-apart into real pieces that come back), judged as phone-size
-  clips, and works with the toy upright, on its side and upside down.
-- Licenses, for every asset and dataset (CLAUDE.md, "Ground rules"): read the license on the live
-  source page; record it in CREDITS.md, `tools/assets.json` (or `tools/models.json`) and the toy's
-  in-app credit; `"nc": true` on NC assets; never ND, unlicensed, personal-use or paid. A license
-  not on that list (ODbL, CERN-OHL, government terms, "free with attribution") is a question for the
-  Operator in "State", not a file in the repo. Nothing human (people, faces, human anatomy or human
-  scans) without the owner's yes. No logos or brand names.
-- A static site: data becomes splats at build time (your `tools/hh4-*.mjs`; any new devDependency
-  pinned and listed in LICENSES.md). The page never calls a data service or needs a key, and big
-  files load only when the toy opens. Keep sizes inside the phone budgets.
-- Work through the items in order. Open your draft PR early ("Phase Hands-on H4, <shelf>: …", five
-  sections from CLAUDE.md, naming Opus 5.5), push after each finished item with "State" updated, and
-  run long jobs (clips, tests) in the background.
-- Language: American English in every new text (color, center, gray, license, -ize endings, dates
-  like "October 3, 2026").
-- Read first: CLAUDE.md; docs/OPERATING.md ("Local lanes", "Steps for a lane", "A lane's end");
-  docs/HANDS-ON-PLAN.md (your shelves' lines); docs/PACKS.md, sections 5f, 5g and 5h (the engine
-  pieces) and its earlier hands-on section; docs/handoff/Physics.md, HandsEngineA.md,
-  HandsEngineB.md and HandsEngineC.md; docs/audits/hands-l1-sweep-2026-10.md and
-  docs/audits/hands-on-materials-2026-10.md.
-- Before every push: CLAUDE.md, "Before every push", with the local test set. At the end: "A lane's
-  end".
+  the top of "### Brief, October 8, 2026 (cloud)
+
+Written by the Operator on October 8, 2026. You are a Splashery worker session, started by the
+Operator (the coordinating session). Repo: ryanjosephkamp/splashery. Your lane: Hands-on H4 (prefix
+`hh4`; shelves: Vehicles, Landmarks, Space, Weather & fire and Tiny world). Branches:
+`claude/lane-hands-h4-<shelf>`, one PR per shelf as your brief says (engine changes on
+`claude/lane-hands-h4-engine`, as a small additive "Engine: …" PR merged first). Handoff file:
+docs/handoff/HandsH4.md. Model: Opus 5.5, at high effort (CLAUDE.md).
+
+Your full brief is already in docs/handoff/HandsH4.md (written October 3, 2026, for a local lane on
+the owner's Mac). The owner started it in the cloud instead on October 8, 2026: you run here, not on
+his Mac, so ignore the parts about his Mac, his second account and the local port (use
+`python3 -m http.server 4173 --bind 127.0.0.1` as CLAUDE.md says), and post clips on Effect review
+page 2 rather than a clips branch. Its first check (docs/PACKS.md sections 5f, 5g and 5h) passes:
+the hands-on engines merged October 3 and 4, 2026. Everything else in it stands, in its order. Main
+has moved a lot since October 3 (read docs/HANDOFF.md "Now" first). Hands-on play only adds to a
+toy: with the ✋ switch off every toy plays exactly as before, and these are toys the public sees,
+so each shelf's PR waits for the owner's "good" marks on its cards. Update the handoff's "## State",
+"## Notes", "## Known issues" and "## For the Operator" as you go; leave its brief as it is and add
+this one under it as "### Brief, October 8, 2026 (cloud)".
+
+How this lane runs: exactly as docs/handoff/ScienceR3.md, "How this lane runs", says (read it;
+replace the prefix and lane record with yours). New toys and views go behind the labs switch
+(`labs: true`); the Operator merges labs work after the tests pass (with tools/op-merge.mjs) and
+after the owner marks your cards; changes to toys the public already sees wait for his "good" marks.
+Finish every working turn with "READY:", "WORKING:" or "BLOCKED:"; Splashery has no CI to wait for;
+for a long job, schedule a check-in with send_later instead of going idle. Clips at phone size
+(390x844, device scale 3) go on Effect review page 2
+(https://claude.ai/artifact/BSayVkzQ2FKESesrkrSUMK) as docs/OPERATING.md, "Steps for a lane", says
+(no republish). New sounds go in tools/sound-review.json as "ready" (the owner hears them on the
+Sound Board), not as cards. Before READY, re-read CLAUDE.md's "Effect quality rules" and check each
+clip against them at phone size. About six workers run at once; keep an even pace. Your Operator is
+session_012GmKRUMZLir2nb27Bo8Cu2. Card ids hh4-…. Aim for a first READY with the first shelf and its
+clips within about six hours.
+
+What the first three Hands-on lanes learned today (October 8, 2026), so you don't repeat it:
+
+- Engine conflicts: H1's and H2's engine PRs (#421, #420) are being merged into main tonight, and
+  H3's (#430) after them; all three touch `src/physics/hands-on.js` and docs/PACKS.md. Read those
+  PRs before you add engine pieces, reuse what they add, and keep your own engine PR small and
+  additive. When main moves, merge it into your branches (never rebase).
+- A toy with `hands.joints` plays in pieces mode (its parts move; the toy isn't tossed whole), as
+  the chest and music box do. Say so in each shelf PR's Deviations.
+- Clips: SwiftShader here is slow (about 6 s a frame at device scale 3). Device scale 2 at 390x844
+  is acceptable for these clips; redo one at 3 only if the owner's mark asks.
+- One PR per shelf, stacked on your engine branch, each with its cards on Effect review page 2, as
+  H1 to H3 did.
 
 ## State
 
-WORKING: not started yet (October 3, 2026).
+WORKING: Vehicles shelf built and tested; its clips are rendering (October 9, 2026). Next:
+Landmarks.
+
+- Engine PR #439 (`claude/lane-hands-h4-engine`): `hands.force` (a recipe's own push on its bodies,
+  each substep), `info.hands.piece(key)` with `hands.watch`, and a whole toy that floats (water or
+  air) can be pushed below where it stands.
+- Vehicles (`claude/lane-hands-h4-vehicles`, stacked on the engine branch): every line of the plan
+  but the bicycle's pedals (below).
+
+## Notes
+
+- Joints and Level 1 don't mix: a toy with `hands.joints` plays in pieces mode. So the helicopter's
+  and plane's rotors are dials (the craft stays put), the train is a slider on its rails, the liner
+  a vertical slider (bob, with a little pitch) and the sailboat a hinge about her keel. The toys
+  that keep Level 1 (balloon, submarine, bus, tractor, bicycle) use fields (air, water, wheels).
+- The liner and sailboat carry their own sea patch in their build, so a whole-toy water line would
+  float the sea with them (and their hull for Level 1 would be the sea's). Hence the joints.
+- The train's track is too short to run on (0.3 ahead, 0.65 behind), so more track with buffer stops
+  shows at both ends while ✋ is on (`runway`, a part left out of the fit, hidden with ✋ off).
+- A round hull (the submarine) has no righting moment on water: it needs `upright`.
+- `upright` alone can't hold up a tall thin toy against its weight at k 60 (the bicycle fell); k 300
+  with damping 20 holds it.
+- Clips: `tools/hh4-clip.mjs` (H3's clip tool), scripts in `tools/hh4-clips/`, device scale 2 (about
+  4.5 minutes a clip).
+
+## Known issues
+
+- The bicycle's world never quite sleeps in Hands-on (it rests tilted about 0.04 rad on its stand,
+  and `upright` keeps nudging it).
+- The flying saucer: the cow's piece is built where it hangs in the beam; if the beam is off when
+  the cow is first picked up, it starts from up in the beam (its home), not from the grass.
+
+## For the Operator
+
+- The bicycle's "drag the pedals to turn them" needs a dial on a whole toy (Level 1 with wheels); no
+  engine piece does that. Skipped; the bicycle rolls and stays upright.
+- Merge #439 (engine) before the shelf PRs.

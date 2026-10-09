@@ -1825,24 +1825,27 @@
     "helicopter": {
       "v": "keep",
       "owner": "Basically perfect.",
-      "sound": "Real rotor blades chopping; landing, the chop slowing as it fades (Sound C, October 2, 2026)."
+      "sound": "Real rotor blades chopping; landing, the chop slowing as it fades (Sound C, October 2, 2026).",
+      "improved": "Hands-on H4: in Hands-on, flick the main rotor (or the tail rotor) round to spin it; it coasts down to a stop. The helicopter stays on its pad."
     },
     "hot-air-balloon": {
       "v": "keep",
       "owner": "Could be more dramatic; maybe inflate more.",
       "effect": "Burner roars, the envelope swells and it rises higher.",
       "sound": "Burner roar.",
-      "improved": "C2: the burner roars a big flame, the envelope swells and glows warm, and the balloon climbs well up, then drifts back down (4 s). Sharpness A (October 2, 2026): sharper look (even, solid splats and calmer textures)."
+      "improved": "C2: the burner roars a big flame, the envelope swells and glows warm, and the balloon climbs well up, then drifts back down (4 s). Sharpness A (October 2, 2026): sharper look (even, solid splats and calmer textures). Hands-on H4: in Hands-on, pull it down by the basket and let go: the hot air floats it back up to where it hovered, basket under it."
     },
     "steam-train": {
       "v": "keep",
       "owner": "Basically perfect.",
-      "sound": "A real steam locomotive chuffing, fading with its steam; no bell, horn or whistle (Sound C, October 2, 2026)."
+      "sound": "A real steam locomotive chuffing, fading with its steam; no bell, horn or whistle (Sound C, October 2, 2026).",
+      "improved": "Hands-on H4: in Hands-on, push the engine along its rails (more track shows at both ends): it rolls on, its wheels and coupling rods turning with the distance, until it slows or meets a buffer stop."
     },
     "ocean-liner": {
       "v": "keep",
       "owner": "Almost perfect.",
-      "sound": "Deep ship horn."
+      "sound": "Deep ship horn.",
+      "improved": "Hands-on H4: in Hands-on, push the ship down into the sea and let go: it bobs back up, pitching a little, and settles."
     },
     "sports-car": {
       "v": "keep",
@@ -1856,12 +1859,13 @@
       "owner": "Not sure what the effect is.",
       "effect": "Stop sign swings out, lights flash, doors open.",
       "sound": "Horn beep and door hiss.",
-      "improved": "C2: the school bus stops: warning lights flash, the stop sign swings out and the doors open onto a lit doorway (4.5 s). The double-decker flashes its hazard lights and opens a middle door."
+      "improved": "C2: the school bus stops: warning lights flash, the stop sign swings out and the doors open onto a lit doorway (4.5 s). The double-decker flashes its hazard lights and opens a middle door. Hands-on H4: in Hands-on, push it and it rolls on its turning wheels."
     },
     "propeller-plane": {
       "v": "keep",
       "owner": "Unbelievable; perfect.",
-      "sound": "A real piston engine with the propeller's beat; real CC0 recordings now (propeller-plane-engine.mp3), with the synthesized sound as a fallback."
+      "sound": "A real piston engine with the propeller's beat; real CC0 recordings now (propeller-plane-engine.mp3), with the synthesized sound as a fallback.",
+      "improved": "Hands-on H4: in Hands-on, flick the propeller round to spin it; it coasts to a stop."
     },
     "jet": {
       "v": "keep",
@@ -1875,32 +1879,34 @@
       "owner": "Pretty good; a bit more dramatic.",
       "effect": "A big gust heels it over with spray.",
       "sound": "Wind and water spray.",
-      "improved": "C2: a gust heels it over twice as far with spray at the bow and stern, then it rocks back upright (3.5 s)."
+      "improved": "C2: a gust heels it over twice as far with spray at the bow and stern, then it rocks back upright (3.5 s). Hands-on H4: in Hands-on, push the mast over: she heels on her keel and rocks back upright when let go."
     },
     "submarine": {
       "v": "keep",
       "owner": "Underwhelming that only the periscope appears and disappears.",
       "effect": "Dives with bubbles, then surfaces and raises the periscope.",
       "sound": "Sonar ping.",
-      "improved": "C2: a tap dives it: the periscope drops, bubbles rush from the hull and it sinks, then it surfaces and raises the periscope (5 s)."
+      "improved": "C2: a tap dives it: the periscope drops, bubbles rush from the hull and it sinks, then it surfaces and raises the periscope (5 s). Hands-on H4: in Hands-on, she floats on a water line; push her under and let go, and she bobs back up to the surface, upright."
     },
     "bicycle": {
       "v": "keep",
       "owner": "Not sure what the effect is; make it more dramatic.",
       "effect": "Pedals spin, the wheels turn and the bell rings clearly.",
       "sound": "A real bicycle bell's ding-ding (Sound C, October 2, 2026).",
-      "improved": "C2: the bell shakes with flashing ring lines, and the wheels add five fast turns and the pedals two (2.5 s)."
+      "improved": "C2: the bell shakes with flashing ring lines, and the wheels add five fast turns and the pedals two (2.5 s). Hands-on H4: in Hands-on, push it and it rolls on its wheels, upright. (Turning the pedals by hand waits for an engine piece.)"
     },
     "tractor": {
       "v": "keep",
       "fixed": "C1: a light wisp of exhaust; the cab glass is clear instead of static.",
       "owner": "Perfect.",
-      "sound": "A slow diesel's putt-putt with its clatter; real CC0 recordings now (tractor-engine.mp3), with the synthesized sound as a fallback."
+      "sound": "A slow diesel's putt-putt with its clatter; real CC0 recordings now (tractor-engine.mp3), with the synthesized sound as a fallback.",
+      "improved": "Hands-on H4: in Hands-on, push it and it rolls on its big wheels; the small front wheels turn faster."
     },
     "ufo": {
       "v": "keep",
       "owner": "Maybe my favourite; really cool.",
-      "sound": "A deep pulsing hum and a heavy rush as it lifts (no whistling theremin)."
+      "sound": "A deep pulsing hum and a heavy rush as it lifts (no whistling theremin).",
+      "improved": "Hands-on H4: in Hands-on, pick the cow up and set it on the grass; drag it under the beam and it floats up to the saucer, turning slowly; switch the beam off and it drops."
     },
     "eiffel-tower": {
       "v": "keep",

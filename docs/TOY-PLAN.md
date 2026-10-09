@@ -57,22 +57,22 @@ Proposals below are suggestions; the owner may change them.
   Heraldic shield, Bow and target, Crown, Wizard's orb, Crystal ball, Jellyfish, School of fish,
   Pufferfish, Nautilus, Snail, Octopus, Sea urchin, Frog, Snowman, Fireworks, Decorated tree, Paper
   lantern, Diya, Acoustic guitar, Snare drum, Xylophone, Toy piano, Grand piano, Upright piano,
-  Harpsichord, Electronic keyboard, Hot-air balloon, Sports car, Bus, Jet airliner, Sailboat,
-  Submarine, Bicycle, Eiffel Tower, Washington Monument, Pyramids of Giza, Twisting supertall,
-  Statue of Liberty, White House, Leaning Tower of Pisa, Colosseum, Parthenon, Stonehenge, Big Ben,
-  Taj Mahal, Castle, Pagoda, Windmill, Perceptron, Multilayer perceptron, Neural network,
-  Convolutional network, Recurrent network, Transformer, Looped transformer, Diffusion model,
-  Gradient descent, Gaussian splatting, Word vectors, Sorting machine, Half adder, Turing machine,
-  Difference engine, Enigma machine, Bombe, Picture lab, Your book, Photo album, Picture frame, Song
-  landscape, Chladni plate, Room echo meter, Splat mirror, Model to splats, QR code, Photo to 3D,
-  Moving photo to 3D, Video to 3D, Sound lab, Sound recorder, Splat toolkit, Point clouds, Volume
-  viewer, Splat field, Light lab, Thermal ellipsoids, Super-resolution microscope, Galaxy in a box,
-  Cryo-EM map, Contour lab, Terrain in a box, Ripple tank, Light bench, Fluid lab, Grand Canyon,
-  Mount St. Helens, The sea floor, Tides at Bar Harbor, Hurricane, Relief map, Living city, Stork
-  migration, Earthquakes, Airport X-ray scanner, How CT works, Walnut CT scan, MRI of a fruit,
-  Electron microscope, Thermal camera, Screen, Shardball, Longtail, Grain Garden, Page Breaker,
-  Strata, Volley Table, Stone Belt, Soft Landing, Night Owl Pinball, Cast a Shadow, Photo Dash, Note
-  Rider, Data in 3D.
+  Harpsichord, Electronic keyboard, Helicopter, Hot-air balloon, Steam train, Ocean liner, Sports
+  car, Bus, Propeller plane, Jet airliner, Sailboat, Submarine, Bicycle, Tractor, Flying saucer,
+  Eiffel Tower, Washington Monument, Pyramids of Giza, Twisting supertall, Statue of Liberty, White
+  House, Leaning Tower of Pisa, Colosseum, Parthenon, Stonehenge, Big Ben, Taj Mahal, Castle,
+  Pagoda, Windmill, Perceptron, Multilayer perceptron, Neural network, Convolutional network,
+  Recurrent network, Transformer, Looped transformer, Diffusion model, Gradient descent, Gaussian
+  splatting, Word vectors, Sorting machine, Half adder, Turing machine, Difference engine, Enigma
+  machine, Bombe, Picture lab, Your book, Photo album, Picture frame, Song landscape, Chladni plate,
+  Room echo meter, Splat mirror, Model to splats, QR code, Photo to 3D, Moving photo to 3D, Video to
+  3D, Sound lab, Sound recorder, Splat toolkit, Point clouds, Volume viewer, Splat field, Light lab,
+  Thermal ellipsoids, Super-resolution microscope, Galaxy in a box, Cryo-EM map, Contour lab,
+  Terrain in a box, Ripple tank, Light bench, Fluid lab, Grand Canyon, Mount St. Helens, The sea
+  floor, Tides at Bar Harbor, Hurricane, Relief map, Living city, Stork migration, Earthquakes,
+  Airport X-ray scanner, How CT works, Walnut CT scan, MRI of a fruit, Electron microscope, Thermal
+  camera, Screen, Shardball, Longtail, Grain Garden, Page Breaker, Strata, Volley Table, Stone Belt,
+  Soft Landing, Night Owl Pinball, Cast a Shadow, Photo Dash, Note Rider, Data in 3D.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
@@ -2743,6 +2743,8 @@ Proposals below are suggestions; the owner may change them.
   - Sound: The flickering roar of the exhaust over a deep rumble.
 - **Helicopter** (`helicopter`). Now: tap: Take off or land. Plan: keep.
   - Owner: Basically perfect.
+  - Improved: Hands-on H4: in Hands-on, flick the main rotor (or the tail rotor) round to spin it;
+    it coasts down to a stop. The helicopter stays on its pad.
   - Sound: Real rotor blades chopping; landing, the chop slowing as it fades (Sound C, October 2,
     2026).
 - **Hot-air balloon** (`hot-air-balloon`). Now: tap: Fire the burner. Plan: keep.
@@ -2750,14 +2752,20 @@ Proposals below are suggestions; the owner may change them.
   - Effect: Burner roars, the envelope swells and it rises higher.
   - Improved: C2: the burner roars a big flame, the envelope swells and glows warm, and the balloon
     climbs well up, then drifts back down (4 s). Sharpness A (October 2, 2026): sharper look (even,
-    solid splats and calmer textures).
+    solid splats and calmer textures). Hands-on H4: in Hands-on, pull it down by the basket and let
+    go: the hot air floats it back up to where it hovered, basket under it.
   - Sound: Burner roar.
 - **Steam train** (`steam-train`). Now: tap: Blow the whistle. Plan: keep.
   - Owner: Basically perfect.
+  - Improved: Hands-on H4: in Hands-on, push the engine along its rails (more track shows at both
+    ends): it rolls on, its wheels and coupling rods turning with the distance, until it slows or
+    meets a buffer stop.
   - Sound: A real steam locomotive chuffing, fading with its steam; no bell, horn or whistle (Sound
     C, October 2, 2026).
 - **Ocean liner** (`ocean-liner`). Now: tap: Sound the horn. Plan: keep.
   - Owner: Almost perfect.
+  - Improved: Hands-on H4: in Hands-on, push the ship down into the sea and let go: it bobs back up,
+    pitching a little, and settles.
   - Sound: Deep ship horn.
 - **Sports car** (`sports-car`). Now: tap: Rev the engine. Plan: keep.
   - Owner: Looks really good.
@@ -2771,10 +2779,11 @@ Proposals below are suggestions; the owner may change them.
   - Effect: Stop sign swings out, lights flash, doors open.
   - Improved: C2: the school bus stops: warning lights flash, the stop sign swings out and the doors
     open onto a lit doorway (4.5 s). The double-decker flashes its hazard lights and opens a middle
-    door.
+    door. Hands-on H4: in Hands-on, push it and it rolls on its turning wheels.
   - Sound: Horn beep and door hiss.
 - **Propeller plane** (`propeller-plane`). Now: tap: Loop the loop. Plan: keep.
   - Owner: Unbelievable; perfect.
+  - Improved: Hands-on H4: in Hands-on, flick the propeller round to spin it; it coasts to a stop.
   - Sound: A real piston engine with the propeller's beat; real CC0 recordings now
     (propeller-plane-engine.mp3), with the synthesized sound as a fallback.
 - **Jet airliner** (`jet`). Now: tap: Climb and bank. Plan: keep.
@@ -2787,27 +2796,34 @@ Proposals below are suggestions; the owner may change them.
   - Owner: Pretty good; a bit more dramatic.
   - Effect: A big gust heels it over with spray.
   - Improved: C2: a gust heels it over twice as far with spray at the bow and stern, then it rocks
-    back upright (3.5 s).
+    back upright (3.5 s). Hands-on H4: in Hands-on, push the mast over: she heels on her keel and
+    rocks back upright when let go.
   - Sound: Wind and water spray.
 - **Submarine** (`submarine`). Now: tap: Dive and surface. Plan: keep.
   - Owner: Underwhelming that only the periscope appears and disappears.
   - Effect: Dives with bubbles, then surfaces and raises the periscope.
   - Improved: C2: a tap dives it: the periscope drops, bubbles rush from the hull and it sinks, then
-    it surfaces and raises the periscope (5 s).
+    it surfaces and raises the periscope (5 s). Hands-on H4: in Hands-on, she floats on a water
+    line; push her under and let go, and she bobs back up to the surface, upright.
   - Sound: Sonar ping.
 - **Bicycle** (`bicycle`). Now: tap: Ring the bell. Plan: keep.
   - Owner: Not sure what the effect is; make it more dramatic.
   - Effect: Pedals spin, the wheels turn and the bell rings clearly.
   - Improved: C2: the bell shakes with flashing ring lines, and the wheels add five fast turns and
-    the pedals two (2.5 s).
+    the pedals two (2.5 s). Hands-on H4: in Hands-on, push it and it rolls on its wheels, upright.
+    (Turning the pedals by hand waits for an engine piece.)
   - Sound: A real bicycle bell's ding-ding (Sound C, October 2, 2026).
 - **Tractor** (`tractor`). Now: tap: Chug chug. Plan: keep.
   - Owner: Perfect.
   - Fixed: C1: a light wisp of exhaust; the cab glass is clear instead of static.
+  - Improved: Hands-on H4: in Hands-on, push it and it rolls on its big wheels; the small front
+    wheels turn faster.
   - Sound: A slow diesel's putt-putt with its clatter; real CC0 recordings now (tractor-engine.mp3),
     with the synthesized sound as a fallback.
 - **Flying saucer** (`ufo`). Now: tap: Beam on or off. Plan: keep.
   - Owner: Maybe my favourite; really cool.
+  - Improved: Hands-on H4: in Hands-on, pick the cow up and set it on the grass; drag it under the
+    beam and it floats up to the saucer, turning slowly; switch the beam off and it drops.
   - Sound: A deep pulsing hum and a heavy rush as it lifts (no whistling theremin).
 
 ## Landmarks (16)
