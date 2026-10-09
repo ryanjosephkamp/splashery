@@ -829,10 +829,13 @@ place of the square `area`, for a play area that isn't square: the croissant's l
 baking tray.
 
 `info.hands.moved` is whether anything is off home (or on its way back), so a drive can show what
-Hands-on uncovered (the cut face of the kiwi half left behind). And a break joint takes `spill`
-(radians): a piece riding another comes loose when that one tips past it (scoops off a tipped cone),
-with the cue `"spill"`; and `place: true`: snapped off, it is held as a picked piece is (by its
-middle, level, hovering over whatever is under the finger), not hanging from where it was grabbed.
+Hands-on uncovered (the cut face of the kiwi half left behind). `info.hands.piece(name)` (a part's
+name or a token's index) gives that piece's `{ pos, vel, home, held, pinned }`, or null, so a drive
+can answer where it is (a lotus dropped in its pond splashes where it lands). And a break joint
+takes `spill` (radians): a piece riding another comes loose when that one tips past it (scoops off a
+tipped cone), with the cue `"spill"`; and `place: true`: snapped off, it is held as a picked piece
+is (by its middle, level, hovering over whatever is under the finger), not hanging from where it was
+grabbed.
 
 **A flip** (lane Hands-on H2, October 8, 2026): a piece with `flip: true` in its def, let go from a
 quick flick up the screen (faster up than across), is tossed up with half a turn about the level
