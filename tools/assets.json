@@ -736,7 +736,8 @@
       "local": ".cache/pr3/dl/splat/410c2b24/meta.json",
       "splats": 461100,
       "lite": 300000,
-      "crop": [-1.35, -0.78, -1.35, 1.35, 0.9, 1.35]
+      "crop": [-1.35, -0.78, -1.35, 1.35, 0.84, 1.35],
+      "cropNote": "Lane Photoreal r3: splat-transform's y points down here, so -0.78 trims the top and 0.84 the gray smear under the tip (October 9, 2026)."
     }
   ],
   "modelSamples": [
