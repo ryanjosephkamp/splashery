@@ -956,7 +956,10 @@ taken away, bringing it within `snap` toy radii (0.3) of its place, or pointing 
 place, glides it in, and it holds fast there again (another pull snaps it off again, with its `snap`
 cue). `reseat: { snap, seats: [{ pos, quat }] }` adds other places it clicks into (its middle and
 turn there, recipe units; `quat` defaults to its own): a pen's cap posted on its end. The click is
-the `"socket"` cue. ↺ brings it home from wherever it sits.
+the `"socket"` cue. ↺ brings it home from wherever it sits. `steady: true` holds a piece that has
+just snapped off at its turn, carried where the finger holds it, instead of hanging and swinging
+from the finger (a pen's cap, carried over the pen to its back end, stays clear of the paper;
+`place` instead hovers it over whatever is under the finger).
 
 ```js
 { type: "break", part: "cork", at: [0, 0.8, 0], pull: 0.18, give: 0.03, reseat: true },

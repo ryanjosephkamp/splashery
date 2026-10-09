@@ -185,6 +185,40 @@ test("reseat: a second seat takes it, and ↺ brings it home from there", async 
   expect(now.broken).toBe(false);
 });
 
+// A piece snapped off, held still for 1.5 s more: how far it has turned
+// from its turn at home.
+async function heldTurn(page, steady) {
+  await ready(page, "candy-cane", null, { steady, reseat: false });
+  await handsOn(page);
+  const a = await caneTop(page);
+  const far = [a[0] + 0.9, a[1] + 0.7, a[2] + 0.3];
+  const j = await snapOff(page, a, far);
+  const q = (n) =>
+    page.evaluate((n) => {
+      const jj = window.__splashery.player.handsOn.joints.list.find((x) => x.name === n);
+      return jj.body.q.slice();
+    }, n);
+  // (From its turn at home: it snaps barely bent, then hangs, unless steady.)
+  const q0 = await page.evaluate((n) => {
+    const jj = window.__splashery.player.handsOn.joints.list.find((x) => x.name === n);
+    return jj.pc.home.q.slice();
+  }, j.name);
+  await tick(page, 1.5);
+  const q1 = await q(j.name);
+  await page.mouse.up();
+  const d = Math.abs(q0.reduce((s, v, i) => s + v * q1[i], 0));
+  return 2 * Math.acos(Math.min(1, d));
+}
+
+test("steady: a piece snapped off is held at its turn, not swinging", async ({ page }) => {
+  // (About its bend when it snapped, 0.2 rad.)
+  expect(await heldTurn(page, true)).toBeLessThan(0.4);
+});
+
+test("without steady, a piece snapped off swings from the finger", async ({ page }) => {
+  expect(await heldTurn(page, false)).toBeGreaterThan(1);
+});
+
 test("a forgiving press: off the desk lamp's splats, Hands-on still lifts it", async ({ page }) => {
   await page.goto(APP);
   await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
