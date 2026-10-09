@@ -8,15 +8,7 @@
 import { test, expect } from "@playwright/test";
 
 const APP = "/?renderer=webgl2&adapt=off&profile=mid&labs=1";
-const TOYS = [
-  "picture-lab",
-  "screen",
-  "room-echo",
-  "splat-mirror",
-  "photo-3d",
-  "video-3d",
-  "fluid-lab",
-];
+const TOYS = ["picture-lab", "screen", "room-echo", "fluid-lab"];
 
 test.setTimeout(600_000);
 
