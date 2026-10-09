@@ -1,7 +1,9 @@
 // Lane Hands-on H3, Level 1 for the Hands-on Plan's "Level 1 only" picture,
 // Studio and Lab toys that Hands-on used to leave alone (picture toys and
 // still toys): with the âœ‹ switch on, each is picked up whole. The book and
-// the photo album stay out (every press on them pulls a page).
+// the photo album stay out (every press on them pulls a page), and so do
+// the captures seen from one side (Photo to 3D, Video to 3D, the splat
+// mirror: tossed, their unseen sides show as smears).
 
 import { test, expect } from "@playwright/test";
 
@@ -56,10 +58,10 @@ test("each 'Level 1 only' picture, Studio and Lab toy is picked up whole with âœ
   }
 });
 
-test("the book and the photo album stay out: their pages pull as before", async ({ page }) => {
+test("the book, the photo album and the one-sided captures stay out", async ({ page }) => {
   await page.goto(APP);
   await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
-  for (const id of ["your-book", "photo-album"]) {
+  for (const id of ["your-book", "photo-album", "photo-3d", "video-3d", "splat-mirror"]) {
     const shown = await page.evaluate(async (id) => {
       const { app } = window.__splashery;
       await app.chooseToy(id);

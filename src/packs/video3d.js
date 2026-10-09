@@ -228,9 +228,6 @@ function showOriginal(flight) {
 const VIDEO_3D = {
   density: 1.6,
   turntable: false,
-  // Hands-on Level 1 (lane Hands-on H3): picked up, tossed and set down whole, except
-  // while it shows your own video (the samples can be tossed).
-  handsLevel1: () => !V3D.info?.custom,
   // The Lab lane's sharper falloff (labs only, docs/lab/KERNELS.md): trained splats read crisper
   // with it, edge sharpness +20% to +63% on the samples' flights (docs/lab/VIDEO3D.md).
   kernel: "sharp",
