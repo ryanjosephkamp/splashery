@@ -1443,9 +1443,9 @@ function buildMRI(k, fruit, vision = "gray") {
   const across = fruit === "orange" ? MRI.orange.r : MRI.kiwi.b;
   const S = MRI.slices;
   const gap = (2 * half) / S;
-  // In-plane pitch from the budget (about 85% of it on the slices).
+  // In-plane pitch from the budget (about 82% of it on the slices; Fix10: room for the rings).
   const area = Math.PI * across * across * 0.62; // the slices' mean area
-  const q = Math.sqrt((S * area) / (k.count * 0.85));
+  const q = Math.sqrt((S * area) / (k.count * 0.82));
   const noise = (x, y, z) => k.noise(x, y, z);
   const grain = (x, y, z) => k.noise(x * 61, y * 61, z * 61);
   const pts = [];
