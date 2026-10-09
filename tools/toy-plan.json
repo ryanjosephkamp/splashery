@@ -488,7 +488,8 @@
     "campfire": {
       "v": "keep",
       "owner": "Basically perfect.",
-      "sound": "The volcano's kind of fire, a low flickering rush with a few soft pops of wood (no clicks)."
+      "sound": "The volcano's kind of fire, a low flickering rush with a few soft pops of wood (no clicks).",
+      "improved": "Hands-on H4: in Hands-on, a spare log lies by the ring of stones; pick it up and lay it on the fire: the flames grow, with a crackle."
     },
     "storm-cloud": {
       "v": "keep",
@@ -502,7 +503,7 @@
       "owner": "Moves really well. On tap: blobs move faster, light up or change colours.",
       "effect": "Blobs speed up, glow and shift colour for a few seconds.",
       "sound": "Only the gloops and bubbles (the rising hum is gone).",
-      "improved": "E4: a tap heats the lamp: the wax blobs speed up to about three and a half times, smoothly with no jump, the wax glows and shifts through its colour set's glow (orange, magenta, gold for the classic lamp) and the liquid brightens, then it all eases back (about 4.5 s). The glow also shows with motion off. After the owner's review: a Colour set (Pick below, Ocean, Violet, Lime, Sunset, Midnight), Blobs (2 to 12), Blob size and Blob shape (mixed, round, tall), and Flow and Glow sliders."
+      "improved": "E4: a tap heats the lamp: the wax blobs speed up to about three and a half times, smoothly with no jump, the wax glows and shifts through its colour set's glow (orange, magenta, gold for the classic lamp) and the liquid brightens, then it all eases back (about 4.5 s). The glow also shows with motion off. After the owner's review: a Colour set (Pick below, Ocean, Violet, Lime, Sunset, Midnight), Blobs (2 to 12), Blob size and Blob shape (mixed, round, tall), and Flow and Glow sliders. Hands-on H4: in Hands-on, pick the lamp up and tip it: the wax blobs slide over to the glass's upper side, lagging and wobbling, and slide back when it stands again."
     },
     "snow-globe": {
       "v": "keep",
@@ -545,7 +546,7 @@
       "v": "keep",
       "effect": "A chunk calves off and splashes; the berg bobs.",
       "sound": "Real ice breaking, a deep crack with its groan and splinters (no crackle of clicks), then the splash; real CC0 recordings now (iceberg-crack.mp3), with the synthesized sound as a fallback.",
-      "improved": "E4: a tap cracks a chunk off the berg's front shoulder, showing pale fresh broken faces; it tips into the sea with a crown of spray and a ring of ripples, floats and bobs while the berg bobs and rocks, then melts away as one piece as the berg's chunk grows back in place (about 6 s)."
+      "improved": "E4: a tap cracks a chunk off the berg's front shoulder, showing pale fresh broken faces; it tips into the sea with a crown of spray and a ring of ripples, floats and bobs while the berg bobs and rocks, then melts away as one piece as the berg's chunk grows back in place (about 6 s). Hands-on H4: in Hands-on, push the berg down and it bobs back up; pull the chunk off its shoulder and it falls into the sea and floats, mostly under."
     },
     "waterfall": {
       "v": "keep",
