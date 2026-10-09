@@ -165,7 +165,9 @@ export function surfacePoint(
   const rd = Math.min(Math.min(u, 1 - u) * cols, Math.min(v, 1 - v) * rows);
   const pb = band[Math.min(gy - 1, Math.floor(v * gy)) * gx + Math.min(gx - 1, Math.floor(u * gx))];
   let b = pb;
-  if (rd < 6) {
+  const edge = Math.min(u, 1 - u, v, 1 - v);
+  const deep = smooth(2, 6, rd) * smooth(0.02, 0.03, edge);
+  if (deep < 1) {
     let s = 0;
     const st = 0.02;
     for (let j = -2; j <= 2; j++)
@@ -176,7 +178,7 @@ export function surfacePoint(
       }
     const w = smooth(2, 6, rd);
     d = (s / 25) * (1 - w) + d * w;
-    b = Math.min(3, Math.max(0, d * 4 - 0.5)) * (1 - w) + pb * w;
+    b = Math.min(3, Math.max(0, d * 4 - 0.5)) * (1 - deep) + pb * deep;
   }
   const i0 = Math.min(Math.floor(b), 2);
   const f = b - i0;

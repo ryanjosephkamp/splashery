@@ -38,7 +38,7 @@ function grids(s) {
 function sharpGap(s, { old = false } = {}) {
   const { cols, rows, bc, br } = grids(s);
   const bytes = H.depthBytes(s.depth);
-  const field = H.backingField(bytes, s.cellBand, s.gx, s.gy, { cols: bc, rows: br, reach: 0.11, rim: 6 / rows, base: 0.5 }); // prettier-ignore
+  const field = H.backingField(bytes, s.cellBand, s.gx, s.gy, { cols: bc, rows: br, reach: 0.11, rim: Math.max(6 / rows, 0.03 * Math.max(1, cols / rows)), base: 0.5 }); // prettier-ignore
   let worst = Infinity;
   for (const layers of [0, 0.22 / 1.5])
     for (let r = 0.1; r <= 0.901; r += 0.1) {

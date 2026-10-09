@@ -72,6 +72,14 @@ float psvRim(vec2 uv, float d) {
   if (rd >= 6.0) return d;
   return mix(psvSoft(uv), d, smoothstep(2.0, 6.0, rd));
 }
+// Lane Photo depth: how fully a point takes its piece's layer (1 from six cells and 3% of the picture
+// in from the border; 0 within two cells): nearer the border the layers blend by depth, as before,
+// so nothing is cut where no backing lies behind (it is inset 2%) and the outline stays straight.
+float pdpDeep(vec2 uv) {
+  vec2 r = min(uv, 1.0 - uv);
+  vec2 c = r * uGrid.zw;
+  return smoothstep(2.0, 6.0, min(c.x, c.y)) * smoothstep(0.02, 0.03, min(r.x, r.y));
+}
 void main(void) {
   float back = uLayer.z;
   if (back > 1.5) {
@@ -122,8 +130,7 @@ void main(void) {
       // Lane Photo depth: the layer of this point's piece of surface (one for the whole piece, as
       // the splats have), eased into the old blend by depth within six cells of the border.
       pb = floor(textureLod(uBand, uv, 0.0).r * 3.0 + 0.5);
-      vec2 r = min(uv, 1.0 - uv) * uGrid.zw;
-      b = mix(clamp(dz * 4.0 - 0.5, 0.0, 3.0), pb, smoothstep(2.0, 6.0, min(r.x, r.y)));
+      b = mix(clamp(dz * 4.0 - 0.5, 0.0, 3.0), pb, pdpDeep(uv));
     }
     float i0 = min(floor(b), 2.0);
     float f = b - i0;
@@ -149,7 +156,7 @@ void main(void) {
       for (int i = -1; i <= 1; i++) {
         vec2 s = clamp(uv + vec2(float(i), float(j)) * cell, 0.0, 1.0);
         e = max(e, abs(textureLod(uDepth, s, 0.0).r - d));
-        if (pieces && abs(floor(textureLod(uBand, s, 0.0).r * 3.0 + 0.5) - pb) > 0.5) e = 1.0;
+        if (pieces && pdpDeep(uv) > 0.999 && abs(floor(textureLod(uBand, s, 0.0).r * 3.0 + 0.5) - pb) > 0.5) e = 1.0;
       }
   }
   vEdge = e > uLayer.y ? 1.0 : 0.0;
@@ -233,6 +240,11 @@ fn psvRim(uv: vec2f, d: f32) -> f32 {
   if (rd >= 6.0) { return d; }
   return mix(psvSoft(uv), d, smoothstep(2.0, 6.0, rd));
 }
+fn pdpDeep(uv: vec2f) -> f32 {
+  let r = min(uv, 1.0 - uv);
+  let c = r * uniform.uGrid.zw;
+  return smoothstep(2.0, 6.0, min(c.x, c.y)) * smoothstep(0.02, 0.03, min(r.x, r.y));
+}
 @vertex fn vertexMain(input: VertexInput) -> VertexOutput {
   var output: VertexOutput;
   let back = uniform.uLayer.z;
@@ -284,8 +296,7 @@ fn psvRim(uv: vec2f, d: f32) -> f32 {
     if (back > 0.5) { b = 0.0; }
     if (back < 0.5 && pieces) {
       pb = floor(textureSampleLevel(uBand, uBandSampler, uv, 0.0).r * 3.0 + 0.5);
-      let r = min(uv, 1.0 - uv) * uniform.uGrid.zw;
-      b = mix(clamp(dz * 4.0 - 0.5, 0.0, 3.0), pb, smoothstep(2.0, 6.0, min(r.x, r.y)));
+      b = mix(clamp(dz * 4.0 - 0.5, 0.0, 3.0), pb, pdpDeep(uv));
     }
     let i0 = min(floor(b), 2.0);
     let f = b - i0;
@@ -307,7 +318,7 @@ fn psvRim(uv: vec2f, d: f32) -> f32 {
       for (var i: i32 = -1; i <= 1; i++) {
         let s = clamp(uv + vec2f(f32(i), f32(j)) * cell, vec2f(0.0), vec2f(1.0));
         e = max(e, abs(textureSampleLevel(uDepth, uDepthSampler, s, 0.0).r - d));
-        if (pieces && abs(floor(textureSampleLevel(uBand, uBandSampler, s, 0.0).r * 3.0 + 0.5) - pb) > 0.5) { e = 1.0; }
+        if (pieces && pdpDeep(uv) > 0.999 && abs(floor(textureSampleLevel(uBand, uBandSampler, s, 0.0).r * 3.0 + 0.5) - pb) > 0.5) { e = 1.0; }
       }
     }
   }
@@ -527,7 +538,8 @@ export class ReliefMesh {
         cols: this.backCols,
         rows: this.backRows,
         reach: this.u.uLayer[3],
-        rim: 6 / this.rows,
+        // (the border band where layers blend: six cells, and at least 3% of the picture)
+        rim: Math.max(6 / this.rows, 0.03 * Math.max(1, this.cols / this.rows)),
         base,
       });
       this.field = field;
