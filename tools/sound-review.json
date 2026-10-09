@@ -25,7 +25,7 @@
     },
     "mandeltorus": {
       "status": "site",
-      "said": "The mandalorian is a little too robotic sounding. … And quite frankly, we could make the Mandel torus have something kind of similar in terms of the sound effect.",
+      "said": "The mandalorian is a little too robotic sounding. \u2026 And quite frankly, we could make the Mandel torus have something kind of similar in terms of the sound effect.",
       "note": "It sounds too robotic; he'd like something similar to the Mandelbulb's sound, which he loves.",
       "plan": "Like the Mandelbulb: a low drone with a ratchet as the rings start to turn, and again as they lock back.",
       "candidates": []
@@ -53,7 +53,7 @@
     },
     "alarm-clock": {
       "status": "site",
-      "said": "The alarm clock within the photo real category could sound a little bit more like a real alarm clock. This currently sounds almost like a wooden instrument. I don't know how to describe it, but it doesn't sound very much like an alarm clock. … The alarm clock here in the Open Me category, kind of like the other alarm clock in the Photo Real category, if I'm not mistaken, should sound more realistic.",
+      "said": "The alarm clock within the photo real category could sound a little bit more like a real alarm clock. This currently sounds almost like a wooden instrument. I don't know how to describe it, but it doesn't sound very much like an alarm clock. \u2026 The alarm clock here in the Open Me category, kind of like the other alarm clock in the Photo Real category, if I'm not mistaken, should sound more realistic.",
       "note": "It sounds like a wooden instrument, not an alarm clock; it should sound like a real one.",
       "plan": "A real mechanical twin-bell alarm ringing while the clock rattles (2.3 s).",
       "candidates": []
@@ -773,7 +773,7 @@
     },
     "ruby": {
       "status": "site",
-      "said": "The ruby should have a different sound effect. Maybe for the ones that I mention, or just for all of the ones here that I don't tell you are, like, basically perfect, perhaps you could find, like, what a real gem of this type sounds like if somebody were to, like, hit on it or tap it or something like that. I don't know if they have a characteristic sound. … Maybe see if you can find something better for the ruby.",
+      "said": "The ruby should have a different sound effect. Maybe for the ones that I mention, or just for all of the ones here that I don't tell you are, like, basically perfect, perhaps you could find, like, what a real gem of this type sounds like if somebody were to, like, hit on it or tap it or something like that. I don't know if they have a characteristic sound. \u2026 Maybe see if you can find something better for the ruby.",
       "note": "It needs a different sound: ideally what a real ruby sounds like when tapped.",
       "plan": "A lower real glassy tap and a warm low glow as it lights red.",
       "candidates": []
@@ -817,7 +817,7 @@
     },
     "opal": {
       "status": "site",
-      "said": "Maybe for the ones that I mention, or just for all of the ones here that I don't tell you are, like, basically perfect, perhaps you could find, like, what a real gem of this type sounds like if somebody were to, like, hit on it or tap it or something like that. I don't know if they have a characteristic sound. … The opal definitely needs work. It sounds, like, robotic or something. You need to find something for that.",
+      "said": "Maybe for the ones that I mention, or just for all of the ones here that I don't tell you are, like, basically perfect, perhaps you could find, like, what a real gem of this type sounds like if somebody were to, like, hit on it or tap it or something like that. I don't know if they have a characteristic sound. \u2026 The opal definitely needs work. It sounds, like, robotic or something. You need to find something for that.",
       "note": "It definitely needs work: it sounds robotic.",
       "plan": "A softer, duller real tap and the stone rocking gently on the table (no synth shimmer).",
       "candidates": []
@@ -831,7 +831,7 @@
     },
     "crystal-ball": {
       "status": "site",
-      "said": "… also the sound for this is, like, too robotic. I don't really like it. We should change it.",
+      "said": "\u2026 also the sound for this is, like, too robotic. I don't really like it. We should change it.",
       "note": "It sounds too robotic; change it.",
       "plan": "A soft misty whoosh and a real crystal glass ringing as the sign rises (no theremin).",
       "candidates": []
@@ -925,7 +925,7 @@
     },
     "sunflower": {
       "status": "site",
-      "said": "For the sun— I'm sorry, the sunflower. When the sun appears, it kind of, like, has a bouncing noise. Maybe we can make that a little bit different, but it's pretty much perfect otherwise.",
+      "said": "For the sun\u2014 I'm sorry, the sunflower. When the sun appears, it kind of, like, has a bouncing noise. Maybe we can make that a little bit different, but it's pretty much perfect otherwise.",
       "note": "Pretty much perfect, but the bouncing noise when the sun appears should change.",
       "plan": "Now: a warm low swell as the sun comes out (no bouncing tone) and the petals rustling open.",
       "candidates": []
@@ -954,7 +954,7 @@
     },
     "campfire": {
       "status": "site",
-      "said": "The campfire is okay. It just clicks too much. Maybe we can remove the clicking and then make the flames have a little bit more sound. … the flame sound could be something that we use almost exactly for the campfire. So, like the flame sound of the volcano is pretty good for the campfire, maybe with slight changes, because they do a very similar sort of thing.",
+      "said": "The campfire is okay. It just clicks too much. Maybe we can remove the clicking and then make the flames have a little bit more sound. \u2026 the flame sound could be something that we use almost exactly for the campfire. So, like the flame sound of the volcano is pretty good for the campfire, maybe with slight changes, because they do a very similar sort of thing.",
       "note": "Okay, but it clicks too much: remove the clicking and give the flames more sound (the volcano's flame sound would suit).",
       "plan": "Now: the volcano's kind of fire, a low flickering rush with a few soft pops of wood (no clicks).",
       "candidates": []
@@ -1026,8 +1026,8 @@
     },
     "jelly": {
       "status": "site",
-      "said": "The jelly is okay. I feel like it could sound a little bit less cliché, if that makes any sense.",
-      "note": "Okay, but a little cliché.",
+      "said": "The jelly is okay. I feel like it could sound a little bit less clich\u00e9, if that makes any sense.",
+      "note": "Okay, but a little clich\u00e9.",
       "plan": "Now: a wet, heavy wobble instead of a cartoon boing.",
       "candidates": []
     },
@@ -1133,11 +1133,45 @@
       "round": "2026-10-02"
     },
     "dice": {
-      "status": "site",
-      "said": "The dice should sound like somebody rolling dice in a casino. Like if you throw dice down and roll them on the ground or on the table or something, there is actually a characteristic sound of that. This is not it. This is kind of like a plinking, twinkling sound that's not realistic.",
+      "status": "ready",
+      "said": "The dice should sound like somebody rolling dice in a casino. Like if you throw dice down and roll them on the ground or on the table or something, there is actually a characteristic sound of that. This is not it. This is kind of like a plinking, twinkling sound that's not realistic. (Hands-on H1, October 8, 2026) New: its Hands-on sound, to hear on the Sound Board. Its tap sound is unchanged.",
       "note": "It's a plinking, twinkling sound; it should sound like real dice thrown on a table.",
-      "plan": "Now: two dice thrown on a wooden table, bouncing with quicker, quieter knocks and settling; real CC0 recordings now (dice-throw.mp3), with the synthesized sound as a fallback.",
-      "candidates": []
+      "plan": "Now: in Hands-on, each die clacks as it lands, a brighter clack when two dice knock.",
+      "candidates": [
+        {
+          "id": "hh1",
+          "label": "Hands-on (new)",
+          "sound": [
+            {
+              "voice": "clack",
+              "f": 1500,
+              "decay": 0.5,
+              "vol": 0.8
+            },
+            {
+              "voice": "clack",
+              "f": 1500,
+              "decay": 0.5,
+              "vol": 0.5,
+              "at": 0.25
+            },
+            {
+              "voice": "clack",
+              "f": 2200,
+              "decay": 0.5,
+              "vol": 0.5,
+              "at": 0.4
+            },
+            {
+              "voice": "clack",
+              "f": 1500,
+              "decay": 0.5,
+              "vol": 0.25,
+              "at": 0.55
+            }
+          ]
+        }
+      ]
     },
     "newtons-cradle": {
       "status": "keep",
@@ -1147,11 +1181,25 @@
       "candidates": []
     },
     "teddy-bear": {
-      "status": "site",
-      "said": "(October 2, 2026, review) it kind of sounds like wood is stretching or something when it moves ... maybe, like, a wind or the sand kind of sound would make sense, but very subtly",
+      "status": "ready",
+      "said": "(October 2, 2026, review) it kind of sounds like wood is stretching or something when it moves ... maybe, like, a wind or the sand kind of sound would make sense, but very subtly (Hands-on H1, October 8, 2026) New: its Hands-on sound, to hear on the Sound Board. Its tap sound is unchanged.",
       "note": "Sounds like wood stretching; make it a subtle soft, plush sound.",
-      "plan": "Now: The soft rustle of a plush bear's fabric and stuffing; no creak (Sound C).",
-      "candidates": [],
+      "plan": "Now: in Hands-on, a soft, plush thud as it lands.",
+      "candidates": [
+        {
+          "id": "hh1",
+          "label": "Hands-on (new)",
+          "sound": [
+            {
+              "voice": "thud",
+              "f": 140,
+              "bright": 0.1,
+              "decay": 0.6,
+              "vol": 0.5
+            }
+          ]
+        }
+      ],
       "round": "2026-10-02"
     },
     "yo-yo": {
@@ -1163,7 +1211,7 @@
     },
     "puzzle-cube": {
       "status": "site",
-      "said": "I appreciate the sound that you're using for the puzzle cube, but there actually is a sound that you can hopefully find for, like, a typical Rubik's cube. … This is really neat. I love how it is here. But there is a certain sound. This is kind of like almost... Again, I really appreciate the sound here, because it's like when you move it in different directions, or just... I don't know, sometimes the sounds are different. I'm not sure exactly why or how. But I think that the sounds could be just a little bit less like a toy and more like real SFX, almost like ASMR. Not exactly ASMR, but just, like, a little bit more realistic. I don't know how to explain that. You can maybe find, like, a Rubik's cube sound. Sorry to make that so vague.",
+      "said": "I appreciate the sound that you're using for the puzzle cube, but there actually is a sound that you can hopefully find for, like, a typical Rubik's cube. \u2026 This is really neat. I love how it is here. But there is a certain sound. This is kind of like almost... Again, I really appreciate the sound here, because it's like when you move it in different directions, or just... I don't know, sometimes the sounds are different. I'm not sure exactly why or how. But I think that the sounds could be just a little bit less like a toy and more like real SFX, almost like ASMR. Not exactly ASMR, but just, like, a little bit more realistic. I don't know how to explain that. You can maybe find, like, a Rubik's cube sound. Sorry to make that so vague.",
       "note": "He likes it, but it should sound less like a toy and more like a real puzzle cube turning, almost ASMR-like.",
       "plan": "Now: each turn a plastic slide over the ridges and a soft clack as the layer seats; real CC0 recordings now (puzzle-cube-turn.mp3), with the synthesized sound as a fallback.",
       "candidates": []
@@ -1184,26 +1232,72 @@
       "candidates": []
     },
     "paper-plane": {
-      "status": "site",
-      "said": "(October 2, 2026, review) the sound is almost perfect. It's just a little bit too loud.",
+      "status": "ready",
+      "said": "(October 2, 2026, review) the sound is almost perfect. It's just a little bit too loud. (Hands-on H1, October 8, 2026) New: its Hands-on sound, to hear on the Sound Board. Its tap sound is unchanged.",
       "note": "The wind a little too loud.",
-      "plan": "Now: The same fold and glide, with the air lower (Sound C).",
-      "candidates": [],
+      "plan": "Now: in Hands-on, a light paper slap as it lands.",
+      "candidates": [
+        {
+          "id": "hh1",
+          "label": "Hands-on (new)",
+          "sound": [
+            {
+              "voice": "slap",
+              "f": 1200,
+              "vol": 0.3
+            }
+          ]
+        }
+      ],
       "round": "2026-10-02"
     },
     "origami-crane": {
-      "status": "keep",
-      "said": "The origami crane is fine.",
+      "status": "ready",
+      "said": "The origami crane is fine. (Hands-on H1, October 8, 2026) New: its Hands-on sound, to hear on the Sound Board. Its tap sound is unchanged.",
       "note": "It's fine.",
-      "plan": "Keep the current sound.",
-      "candidates": []
+      "plan": "Now: in Hands-on, a soft paper flutter as the tail hits its stops.",
+      "candidates": [
+        {
+          "id": "hh1",
+          "label": "Hands-on (new)",
+          "sound": [
+            {
+              "voice": "flutter",
+              "f": 1800,
+              "rate": 30,
+              "decay": 0.5,
+              "vol": 0.35
+            }
+          ]
+        }
+      ]
     },
     "balloon-dog": {
-      "status": "site",
-      "said": "The balloon dog doesn't really sound like balloons popping. It has, like, a whistle at the beginning, which shouldn't be there. And then when it pops, it's close, but it's not exactly like a balloon popping. You can definitely find a sound pack or something with balloons popping and use those.",
+      "status": "ready",
+      "said": "The balloon dog doesn't really sound like balloons popping. It has, like, a whistle at the beginning, which shouldn't be there. And then when it pops, it's close, but it's not exactly like a balloon popping. You can definitely find a sound pack or something with balloons popping and use those. (Hands-on H1, October 8, 2026) New: its Hands-on sound, to hear on the Sound Board. Its tap sound is unchanged.",
       "note": "Remove the whistle at the start, and the pop should be a real balloon pop.",
-      "plan": "Now: a real balloon bursting (no whistle first); real CC0 recordings now (balloon-dog-pop.mp3), with the synthesized sound as a fallback.",
-      "candidates": []
+      "plan": "Now: in Hands-on, a long rubbery squeak when squeezed, a short one as it lands.",
+      "candidates": [
+        {
+          "id": "hh1",
+          "label": "Hands-on (new)",
+          "sound": [
+            {
+              "voice": "squeak",
+              "f": 700,
+              "to": 1.5,
+              "decay": 2.2,
+              "vol": 0.8
+            },
+            {
+              "voice": "squeak",
+              "f": 1100,
+              "vol": 0.3,
+              "at": 0.8
+            }
+          ]
+        }
+      ]
     },
     "soap-bubbles": {
       "status": "site",
@@ -1214,11 +1308,53 @@
       "round": "2026-10-02"
     },
     "robot": {
-      "status": "site",
-      "said": "The wind-up robot is kind of awkward. It should sound more realistic. You can probably find a sound pack for that.",
+      "status": "ready",
+      "said": "The wind-up robot is kind of awkward. It should sound more realistic. You can probably find a sound pack for that. (Hands-on H1, October 8, 2026) New: its Hands-on sound, to hear on the Sound Board. Its tap sound is unchanged.",
       "note": "Awkward; it should sound like a real wind-up toy.",
-      "plan": "Now: a few clicks of the winding key, then clockwork whirring as it unwinds and its tin feet clanking along; real CC0 recordings now (robot-wind.mp3), with the synthesized sound as a fallback.",
-      "candidates": []
+      "plan": "Now: in Hands-on, the key clicks as it is wound and ticks as it unwinds.",
+      "candidates": [
+        {
+          "id": "hh1",
+          "label": "Hands-on (new)",
+          "sound": [
+            {
+              "voice": "click",
+              "vol": 0.25,
+              "f": 3200
+            },
+            {
+              "voice": "click",
+              "vol": 0.25,
+              "at": 0.15,
+              "f": 3200
+            },
+            {
+              "voice": "click",
+              "vol": 0.25,
+              "at": 0.3,
+              "f": 3200
+            },
+            {
+              "voice": "click",
+              "vol": 0.15,
+              "at": 0.7,
+              "f": 2200
+            },
+            {
+              "voice": "click",
+              "vol": 0.15,
+              "at": 0.85,
+              "f": 2200
+            },
+            {
+              "voice": "click",
+              "vol": 0.15,
+              "at": 1,
+              "f": 2200
+            }
+          ]
+        }
+      ]
     },
     "chess-set": {
       "status": "site",
@@ -1236,7 +1372,7 @@
     },
     "laptop": {
       "status": "site",
-      "said": "The laptop is basically perfect. You know, clicking sounds fine. The sound when the screen turns on is fine. I feel like we could remove the thunk kind of sound that happens when you click on, like, the outside or somewhere of the keyboard. So if you don't click on the mouse, you don't click on the trackpad. If you click on some other part, and let's say that the keyboard— or I'm sorry, the laptop— closes, it makes like a thunk or a thumping noise. We could probably remove that, and then when the laptop opens, it makes almost like a sprinkling, twinkling kind of noise, and then it has, like, that screen turn on sound. I like the sound that it makes when the screen turns on, but I don't like that twinkling noise that it makes when the laptop opens. We can just remove the twinkling noise. Additionally, for the laptop, the keys don't sound that realistic. … You could probably find some realistic on-screen or, like, physical keyboard sound packs or something that would be suitable here.",
+      "said": "The laptop is basically perfect. You know, clicking sounds fine. The sound when the screen turns on is fine. I feel like we could remove the thunk kind of sound that happens when you click on, like, the outside or somewhere of the keyboard. So if you don't click on the mouse, you don't click on the trackpad. If you click on some other part, and let's say that the keyboard\u2014 or I'm sorry, the laptop\u2014 closes, it makes like a thunk or a thumping noise. We could probably remove that, and then when the laptop opens, it makes almost like a sprinkling, twinkling kind of noise, and then it has, like, that screen turn on sound. I like the sound that it makes when the screen turns on, but I don't like that twinkling noise that it makes when the laptop opens. We can just remove the twinkling noise. Additionally, for the laptop, the keys don't sound that realistic. \u2026 You could probably find some realistic on-screen or, like, physical keyboard sound packs or something that would be suitable here.",
       "note": "Basically perfect: keep the clicks and the screen-on sound, but remove the thunk when it closes and the twinkle when it opens, and make the keys sound more realistic.",
       "plan": "Now: opening keeps only the screen-on sound (no twinkle), closing has no thunk, and the keys sound like a real keyboard (a tick and a thock).",
       "candidates": []
@@ -1292,15 +1428,15 @@
     },
     "crown": {
       "status": "site",
-      "said": "The crown is very close to being perfect, but the trumpet sound— I think it's, like, a trumpet sound— is a bit too robotic. If we could find, like, a real kind of, like, royal trumpet sound, that would make more sense to me.",
+      "said": "The crown is very close to being perfect, but the trumpet sound\u2014 I think it's, like, a trumpet sound\u2014 is a bit too robotic. If we could find, like, a real kind of, like, royal trumpet sound, that would make more sense to me.",
       "note": "Very close, but the trumpet is too robotic; it should be a real royal trumpet.",
       "plan": "Now: the fanfare on a natural trumpet (a lip scoop, breath and late vibrato) instead of synthetic brass; the jewels' pings stay.",
       "candidates": []
     },
     "wizards-orb": {
       "status": "site",
-      "said": "The wizard's orb is kind of weird. Like the wind sound is a little odd. The twinkling sound is a little bit cliché. Maybe we could find something else.",
-      "note": "The wind is odd and the twinkling cliché; find something else.",
+      "said": "The wizard's orb is kind of weird. Like the wind sound is a little odd. The twinkling sound is a little bit clich\u00e9. Maybe we could find something else.",
+      "note": "The wind is odd and the twinkling clich\u00e9; find something else.",
       "plan": "Now: a deep, slow hum of power swelling in the glass (no wind or twinkles).",
       "candidates": []
     },
@@ -1358,21 +1494,21 @@
     },
     "lorenz": {
       "status": "site",
-      "said": "All right. Next is the Lorenz attractor. No offense, but this is kind of like one of my least favorite sounds here. It's almost like a weird whistle howl kind of thing. Let's try to use something that's more... I don't know what the right word would be, I'm sorry. It's hard for me to... more like epic, if that makes any sense. Because this is a really cool mathematical thing. It's really cool. … But in terms of the sound, this needs to be changed.",
+      "said": "All right. Next is the Lorenz attractor. No offense, but this is kind of like one of my least favorite sounds here. It's almost like a weird whistle howl kind of thing. Let's try to use something that's more... I don't know what the right word would be, I'm sorry. It's hard for me to... more like epic, if that makes any sense. Because this is a really cool mathematical thing. It's really cool. \u2026 But in terms of the sound, this needs to be changed.",
       "note": "One of his least favorite sounds (a weird whistling howl); it should sound more epic.",
       "plan": "Now: something epic, a deep hit, a dark slow rush and a wide low chord (no whistling howl).",
       "candidates": []
     },
     "mobius": {
       "status": "site",
-      "said": "For the Mobius strip, I appreciate, I think, the intent of the sound effect that you chose, because it kind of synchronizes with the full traversal of the Mobius strip, of the object that's on it. I'm going to call the rider. Yeah, the object will be called the rider that's on it. Having said that, it's kind of awkward, and I'd almost rather not have the xylophone kind of sound. It's not exactly a xylophone, but it's close. It's like the different tones playing like it does, and instead I'd rather just focus on the sound effect of the rider. So for the race car, it should actually have a race car sound, and we'll get to the race car when we actually hit vehicles and go to the vehicles section here. But the race car should sound kind of like a real race car. For the beach ball, it should sound like a real rolling beach ball, or just like a real rolling ball. For the duck on a bike, which is really cool, by the way, it should sound like a bike. We don't need it to quack, although it would be cool if you could add, like, a little quack. That would be cute. But yeah, you could add, like, a tiny little quack, like a real duck quack, but not overwhelmingly, and it shouldn't happen that often, maybe just once at the beginning or in the middle or something. For the ant, this is one of the only cases where I think that that kind of, like, crawling, almost clicky kind of noise could make sense. But I want there to be, like, a different sound effect depending on what the rider is. … Yeah, just returning to the Mobius strip, like I said, I think that, like having a different sound for the different riders would make sense.",
+      "said": "For the Mobius strip, I appreciate, I think, the intent of the sound effect that you chose, because it kind of synchronizes with the full traversal of the Mobius strip, of the object that's on it. I'm going to call the rider. Yeah, the object will be called the rider that's on it. Having said that, it's kind of awkward, and I'd almost rather not have the xylophone kind of sound. It's not exactly a xylophone, but it's close. It's like the different tones playing like it does, and instead I'd rather just focus on the sound effect of the rider. So for the race car, it should actually have a race car sound, and we'll get to the race car when we actually hit vehicles and go to the vehicles section here. But the race car should sound kind of like a real race car. For the beach ball, it should sound like a real rolling beach ball, or just like a real rolling ball. For the duck on a bike, which is really cool, by the way, it should sound like a bike. We don't need it to quack, although it would be cool if you could add, like, a little quack. That would be cute. But yeah, you could add, like, a tiny little quack, like a real duck quack, but not overwhelmingly, and it shouldn't happen that often, maybe just once at the beginning or in the middle or something. For the ant, this is one of the only cases where I think that that kind of, like, crawling, almost clicky kind of noise could make sense. But I want there to be, like, a different sound effect depending on what the rider is. \u2026 Yeah, just returning to the Mobius strip, like I said, I think that, like having a different sound for the different riders would make sense.",
       "note": "Drop the xylophone-like tones and give each rider its own sound: a real race car, a rolling ball, a bike (with maybe one small real quack) for the duck, and a crawling sound for the ant.",
       "plan": "Now: no step tune; each rider has its own sound on the ride: a race car's engine, a rolling beach ball, a bicycle with one soft quack, the ant's tiny feet. Math r2: three new riders with their own ride sounds (cues from the recipe): the toy train's steam chuffs, the ladybug's light feet and one flutter of her wings, the skateboard's rolling wheels with a clack as it sets off and lands.",
       "candidates": []
     },
     "klein-bottle": {
       "status": "site",
-      "said": "The other part of this is the sound effect. So it sounds like bubbles, and then it sounds like wind, or like a waterfall. Let's change this so it actually sounds like water moving in a bottle. You can probably find a sound pack for that. … and then we need to make the sound more like water or liquid in a bottle.",
+      "said": "The other part of this is the sound effect. So it sounds like bubbles, and then it sounds like wind, or like a waterfall. Let's change this so it actually sounds like water moving in a bottle. You can probably find a sound pack for that. \u2026 and then we need to make the sound more like water or liquid in a bottle.",
       "note": "It sounds like bubbles, then wind or a waterfall; it should sound like water moving in a bottle.",
       "plan": "Now: water moving in a bottle, sloshing and glugging (no bubbles or waterfall); real CC0 recordings now (klein-bottle-slosh.mp3), with the synthesized sound as a fallback.",
       "candidates": []
@@ -1421,7 +1557,7 @@
     },
     "fourier-circles": {
       "status": "keep",
-      "said": "Now for the Fourier circles. I actually like this. It's kind of robotic, but I don't dislike how the sound is …",
+      "said": "Now for the Fourier circles. I actually like this. It's kind of robotic, but I don't dislike how the sound is \u2026",
       "note": "He likes it, even if it's a little robotic.",
       "plan": "Keep the current sound.",
       "candidates": []
@@ -1435,14 +1571,14 @@
     },
     "neural-network": {
       "status": "site",
-      "said": "The neural network, I feel like we can make the sounds a lot cooler. I mean, this is a very cool— it's actually one of my favorite toys here, but it sounds too much like a child's toy. Like it's just like a almost like a xylophone kind of, like chime thing. We could have it be more exciting or intense.",
+      "said": "The neural network, I feel like we can make the sounds a lot cooler. I mean, this is a very cool\u2014 it's actually one of my favorite toys here, but it sounds too much like a child's toy. Like it's just like a almost like a xylophone kind of, like chime thing. We could have it be more exciting or intense.",
       "note": "One of his favorite toys, but it sounds like a child's xylophone; make it cooler, more exciting or intense.",
       "plan": "Now: more intense, an electric surge as each layer lights over a dark chord, a deep hit at the answer and crackling current as the pulses run back.",
       "candidates": []
     },
     "cnn": {
       "status": "approved",
-      "said": "… the noise that takes place basically during the processing is the same noise. Like the sounds are the same for all three of the options: for the 2D poster, the 3D model, and the 3D draw digit. That's really cool. I appreciate that. I like how it's kind of synchronized such that people can understand what each part is. … Anyways, the sounds are fine. I think, yeah, I think that they're okay for this one.",
+      "said": "\u2026 the noise that takes place basically during the processing is the same noise. Like the sounds are the same for all three of the options: for the 2D poster, the 3D model, and the 3D draw digit. That's really cool. I appreciate that. I like how it's kind of synchronized such that people can understand what each part is. \u2026 Anyways, the sounds are fine. I think, yeah, I think that they're okay for this one.",
       "note": "The sounds are fine, and he likes that they match across the poster, the 3D model and the draw-a-digit view.",
       "plan": "Keep the current sounds, the same across all three views.",
       "candidates": []
@@ -1456,14 +1592,14 @@
     },
     "transformer": {
       "status": "site",
-      "said": "The transformer is not terrible. The sounds are a little more robotic. So, like the kind of like— I'll put it this way. There are four different distinct sounds that I detect that it plays, okay? The first two maybe we could change. They're kind of like a robotic sound. Maybe we could change those.",
+      "said": "The transformer is not terrible. The sounds are a little more robotic. So, like the kind of like\u2014 I'll put it this way. There are four different distinct sounds that I detect that it plays, okay? The first two maybe we could change. They're kind of like a robotic sound. Maybe we could change those.",
       "note": "Not terrible; of its four sounds, the first two are robotic and should change.",
       "plan": "Now: the first two sounds are warm swells of current instead of electronic shimmers; the last two are unchanged.",
       "candidates": []
     },
     "looped-transformer": {
       "status": "approved",
-      "said": "For the looped transformer, I actually really like the sounds here. Those are pretty awesome. … The sounds are fine, though.",
+      "said": "For the looped transformer, I actually really like the sounds here. Those are pretty awesome. \u2026 The sounds are fine, though.",
       "note": "He really likes the sounds.",
       "plan": "Keep the current sounds.",
       "candidates": []
@@ -1498,7 +1634,7 @@
     },
     "half-adder": {
       "status": "site",
-      "said": "And for the half outer, this is pretty much fine, … Also, there's kind of, like, a buzzing noise, like a fly or a bee or something. It's, like, the second-to-last noise that it makes. We can remove that entirely.",
+      "said": "And for the half outer, this is pretty much fine, \u2026 Also, there's kind of, like, a buzzing noise, like a fly or a bee or something. It's, like, the second-to-last noise that it makes. We can remove that entirely.",
       "note": "Pretty much fine; remove the fly-like buzz near the end.",
       "plan": "Now: the buzz near the end is gone; the rest is unchanged.",
       "candidates": []
@@ -1621,7 +1757,7 @@
     },
     "white-house": {
       "status": "site",
-      "said": "I think that the White House is fine, but I think that—I could be wrong—but, like, the clicking is supposed to correspond to the lights of the windows lighting up, but the clicking goes on even after the lights have all lit up. Maybe we can remove the clicking and do something different. Just nothing, obviously, disrespectful or overwhelming.",
+      "said": "I think that the White House is fine, but I think that\u2014I could be wrong\u2014but, like, the clicking is supposed to correspond to the lights of the windows lighting up, but the clicking goes on even after the lights have all lit up. Maybe we can remove the clicking and do something different. Just nothing, obviously, disrespectful or overwhelming.",
       "note": "Fine, but the clicking goes on after the lights are all lit; remove it and do something different, respectful and not overwhelming.",
       "plan": "Now: the spray's splash and a soft, steady rush of water falling back (no patter of clicks).",
       "candidates": []
@@ -3718,11 +3854,32 @@
       "candidates": []
     },
     "rubber-duck": {
-      "status": "approved",
-      "said": "",
+      "status": "ready",
+      "said": "(Hands-on H1, October 8, 2026) New: its Hands-on sound, to hear on the Sound Board. Its tap sound is unchanged.",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
-      "plan": "",
-      "candidates": []
+      "plan": "Now: in Hands-on, a held press squeezes it with a rubber squeak; a landing squeaks softly.",
+      "candidates": [
+        {
+          "id": "hh1",
+          "label": "Hands-on (new)",
+          "sound": [
+            {
+              "voice": "squeak",
+              "f": 1500,
+              "to": 1.3,
+              "decay": 1.6,
+              "vol": 0.8
+            },
+            {
+              "voice": "squeak",
+              "f": 1100,
+              "decay": 0.8,
+              "vol": 0.3,
+              "at": 0.6
+            }
+          ]
+        }
+      ]
     },
     "menger-sponge": {
       "status": "approved",

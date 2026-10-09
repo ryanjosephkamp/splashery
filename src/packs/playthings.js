@@ -883,6 +883,80 @@ const D6_REST = [
   quatMul(quatAxisAngle([0, 1, 0], 0.4), quatFromTo([0, 0, -1], [0, 1, 0])),
   quatMul(quatAxisAngle([0, 1, 0], -0.3), quatFromTo([1, 0, 0], [0, 1, 0])),
 ];
+// Hands-on: the dice as bodies (lane Hands-on H1). The d20's corners (its
+// inradius is how far its face sits below its middle), the d6's rounded cube.
+const ICO_CORNERS = (() => {
+  const out = [];
+  for (const f of ICO) for (const v of f.tri) if (!out.some((u) => len(sub(u, v)) < 1e-6)) out.push(v); // prettier-ignore
+  return out;
+})();
+const D20_IN = ICO[0].g ? len(ICO[0].g) : 0.795;
+const D6_SOLID = { type: "box", half: [0.5, 0.5, 0.5] };
+// The wind-up robot (lane Hands-on H1): its key turns about ROBOT_KEY; as it
+// unwinds (the joint's speed below zero, not held), it walks forward a
+// stride for every turn, rocking and swinging its arms. ↺ turns the key
+// home with no speed of its own: it walks back to where it stood.
+const ROBOT_KEY = [0, -0.1, -0.34];
+const WALK = { walked: 0, a: 0 };
+function robotWalk(a, parts, info, j) {
+  const da = WALK.a - a;
+  const w = j?.w ?? 0;
+  if (!j?.held && w < -0.05 && da > 0) WALK.walked += da;
+  else if (!j?.held && Math.abs(w) < 1e-6 && da > 1e-6 && a > 1e-6)
+    WALK.walked *= Math.max(0, a / WALK.a); // homing: back it goes
+  WALK.a = a;
+  const run = smoothstep(0.2, 2, -w); // walking while it unwinds
+  const phase = WALK.walked * 2.2;
+  const fwd = WALK.walked * 0.045;
+  const rock = 0.08 * run * Math.sin(phase);
+  const W = quatAxisAngle([0, 0, 1], rock);
+  const Wp = [0, -0.765, 0]; // rocks on its feet
+  const Wo = [0, 0.03 * run * Math.abs(Math.sin(phase)), fwd];
+  // A part about pivot pv, turned by S, carried by the walk: offset so that
+  // p -> W (S (p - pv) + pv - Wp) + Wp + Wo.
+  const carry = (pv, S) => ({ quat: quatMul(W, S), offset: add(sub(add(quatRotate(W, sub(pv, Wp)), Wp), pv), Wo) }); // prettier-ignore
+  parts.walker = carry([0, 0, 0], [0, 0, 0, 1]);
+  const swing = 0.5 * run * Math.sin(phase);
+  parts.armR = carry([0.41, 0.04, 0], quatAxisAngle([1, 0, 0], swing));
+  parts.armL = carry([-0.41, 0.04, 0], quatAxisAngle([1, 0, 0], -swing));
+  parts.key = carry(ROBOT_KEY, quatAxisAngle([0, 0, 1], a));
+}
+// The origami crane's tail turns about where it meets the body (lane Hands-on H1).
+const CRANE_TAIL = [-0.2, -0.12, 0];
+// Hands-on: the teddy bear's body as one piece (lane Hands-on H1): the floor
+// under its feet, and points on its outside (feet, seat, back, head, ears).
+const TEDDY_FLOOR = -0.53;
+const TEDDY_POINTS = [
+  [0.22, -0.5, 0.2], [-0.22, -0.5, 0.2], [0.22, -0.4, 0.44], [-0.22, -0.4, 0.44],
+  [0, -0.44, 0], [0, -0.3, -0.34], [0.4, 0, 0], [-0.4, 0, 0], [0, 0.2, 0.36],
+  [0, 1.05, 0.02], [0.3, 0.97, -0.02], [-0.3, 0.97, -0.02], [0, 0.7, 0.36], [0, 0.7, -0.33],
+]; // prettier-ignore
+// Hands-on: the spinning top's tilt as its spin dies (lane Hands-on H1). While
+// the finger has it, it stands straight; let go, it keeps upright while fast,
+// wobbles wider (precessing as it turns) below about 9 radians a second, and
+// below about 2 it leans over to rest on its side: tip and rim on the floor,
+// 0.7 radians over (its rim is 0.63 out and 0.53 up from its tip).
+const TOP_FALL = Math.atan2(0.53, 0.63);
+const SPIN = { peak: 0, held: false, a: 0 };
+function topTilt(a, parts, info, j) {
+  const w = Math.abs(j?.w ?? 0);
+  // ↺ turns it home with no speed of its own: it stands back up.
+  if (w < 1e-6 && Math.abs(a - SPIN.a) > 1e-5) SPIN.peak = 0;
+  SPIN.a = a;
+  if (j?.held) {
+    if (!SPIN.held) SPIN.peak = 0;
+    SPIN.peak = Math.max(SPIN.peak, w);
+  } else SPIN.peak = Math.max(SPIN.peak, w);
+  SPIN.held = !!j?.held;
+  const spun = SPIN.peak > 3 && !SPIN.held;
+  const wobble = spun ? 0.03 + 0.2 * smoothstep(9, 2.5, w) : 0;
+  const fall = spun ? smoothstep(2.4, 0.4, w) : 0;
+  const tilt = Math.min(TOP_FALL, wobble + (TOP_FALL - wobble) * fall);
+  const prec = 0.35 * a; // the lean circles as it turns
+  const axis = [Math.cos(prec), 0, Math.sin(prec)];
+  parts.top = { quat: quatMul(quatAxisAngle(axis, tilt), quatAxisAngle([0, 1, 0], a)) };
+}
+
 const D20_REST = quatMul(
   quatAxisAngle([0, 1, 0], 0.5),
   quatFromTo(ICO.find((f) => f.num === 20).n, [0, 1, 0]),
@@ -1542,6 +1616,27 @@ export const RECIPES = {
 
   "rubber-duck": {
     alive: true,
+    // Hands-on (lane Hands-on H1): press and hold it and it squashes down
+    // with a squeak; let go and it springs back with a wobble. Tossed, it is
+    // a light, hollow rubber toy (estimates: 50 g, 9 cm).
+    hands: {
+      area: 3,
+      view: 0.55,
+      press: { amount: 0.28 },
+      material: {
+        mass: 0.05,
+        r: 0.045,
+        bounce: 0.45,
+        friction: 0.8,
+        roll: 0.2,
+        cd: 0.8,
+        spin: 0.4,
+      },
+      sound: (hit, vol) =>
+        hit.press
+          ? { voice: "squeak", f: 1500, to: 1.3, decay: 1.6, vol: 0.8 }
+          : { voice: "squeak", f: 1100, decay: 0.8, vol: vol * 0.5 },
+    },
     options: [{ key: "color", label: "Colour", type: "color", default: "#ffd21f" }],
     controls: [{ key: "squeak", label: "Squeak", type: "pulse", ease: 1.8 }],
     action: { key: "squeak", label: "Squeak" },
@@ -1649,6 +1744,15 @@ export const RECIPES = {
     controls: [{ key: "whip", label: "Spin", type: "pulse", ease: 3 }],
     action: { key: "whip", label: "Spin it" },
     sounds: [{ voice: "sample", file: TOP_LOOP }], // Sound C: the hum (topHum)
+    // Hands-on (lane Hands-on H1): flick it round to spin it. It stands up
+    // straight while it spins fast, wobbles wider as it slows, and topples
+    // onto its side (tip and rim on the floor) when it stops.
+    hands: {
+      floor: 0,
+      joints: [
+        { type: "dial", part: "top", pivot: [0, 0, 0], axis: [0, 1, 0], pos: [0, 0.4, 0], pick: [0.7, 0.45, 0.7], drag: 0.45, also: topTilt, sound: () => null }, // prettier-ignore
+      ],
+    },
     drive(t, c, out, info) {
       const m = mem(c);
       topHum(m, info, 9 + 26 * c.whip);
@@ -1771,6 +1875,22 @@ export const RECIPES = {
     ],
     controls: [{ key: "roll", label: "Roll", type: "pulse", ease: 1.8 }],
     action: { key: "roll", label: "Roll" },
+    // Hands-on (lane Hands-on H1): throw them and they tumble, bounce and
+    // land on a real face: each die is its own piece, a rounded cube or the
+    // icosahedron's twelve corners, with a die's bounce and a clatter.
+    hands: {
+      floor: (d, info) => (info.options?.kind === "d20" ? -D20_IN : -0.5),
+      area: 1.9,
+      place: false, // thrown, not set down
+      pieces: (d, info) =>
+        info.options?.kind === "d20"
+          ? [{ part: "d20", pos: [0, 0, 0], quat: D20_REST, points: ICO_CORNERS, pick: [0.85, 0.85, 0.85], mass: 1, friction: 0.5, restitution: 0.45, damping: 0.05, angDamping: 0.3 }] // prettier-ignore
+          : [
+              [-0.64, 0, 0.18],
+              [0.66, 0, -0.22],
+            ].map((pos, i) => ({ part: i ? "d6b" : "d6a", pos, quat: D6_REST[i], solid: D6_SOLID, points: surfacePoints(D6_SOLID, 3), pick: [0.6, 0.6, 0.6], mass: 1, friction: 0.5, restitution: 0.45, damping: 0.05, angDamping: 0.3 })), // prettier-ignore
+      sound: (hit, vol) => ({ voice: "clack", f: hit.other ? 2200 : 1500, decay: 0.5, vol: Math.min(0.9, vol * 1.2) }), // prettier-ignore
+    },
     drive(t, c, out) {
       // Drives both kinds; only the parts that exist move.
       const m = mem(c);
@@ -2082,6 +2202,22 @@ export const RECIPES = {
   "teddy-bear": {
     alive: true,
     options: [{ key: "color", label: "Fur", type: "color", default: "#b5793f" }],
+    // Hands-on (lane Hands-on H1): pick it up by its tummy and swing or toss
+    // it: the body moves as one piece and the arms and head swing loosely on
+    // it, each from its own joint, and settle back once it lands.
+    hands: {
+      floor: TEDDY_FLOOR,
+      area: 1.6,
+      place: false,
+      pieces: () => [
+        { part: "torso", pos: [0, 0, 0], pivot: [0, 0, 0], solid: { type: "ellipsoid", r: [0.42, 0.47, 0.37] }, points: TEDDY_POINTS, radius: 0.03, pick: [0.45, 0.5, 0.4], mass: 1, friction: 0.9, restitution: 0.08, damping: 0.4, angDamping: 2 }, // prettier-ignore
+      ],
+      ropes: () => [
+        ...[1, -1].map((s) => ({ points: [[s * 0.33, 0.3, 0.04], [s * 0.55, -0.14, 0.12]], attach: { piece: 0, nodes: [0] }, keep: 3, bend: 0.1, drag: 3.5, grab: false, pieces: [{ part: s > 0 ? "armR" : "armL", from: 0, to: 1 }] })), // prettier-ignore
+        { points: [[0, 0.42, 0], [0, 0.98, 0.02]], attach: { piece: 0, nodes: [0] }, keep: 8, weight: 0.3, bend: 0.1, drag: 4, grab: false, pieces: [{ part: "head", from: 0, to: 1 }] }, // prettier-ignore
+      ],
+      sound: (hit, vol) => ({ voice: "thud", f: 140, bright: 0.1, decay: 0.6, vol: vol * 0.6 }),
+    },
     controls: [{ key: "wave", label: "Wave", type: "pulse", ease: 2.2 }],
     action: { key: "wave", label: "Wave hello" },
     drive(t, c, out) {
@@ -2112,11 +2248,14 @@ export const RECIPES = {
         core: shade(fur, 0.8),
       };
       const plush = (a, b, c, amt, grid = 64) => evenFuzz(evenEllipsoid(k, a, b, c, grid), amt);
+      // The body and legs as one part (Hands-on moves it; lane Hands-on H1).
+      const torso = k.part("torso", { pivot: [0, 0, 0] });
       const head = k.part("head", { pivot: [0, 0.42, 0], axis: [0, 0, 1] });
       const armR = k.part("armR", { pivot: [0.33, 0.3, 0.04], axis: [0, 0, 1] });
       const armL = k.part("armL", { pivot: [-0.33, 0.3, 0.04], axis: [0, 0, 1] });
       // Body with a lighter tummy.
       k.add(plush(0.42, 0.47, 0.37, 0.014), {
+        part: torso,
         ...soft,
         pos: [0, 0, 0],
         color: (c) => {
@@ -2192,6 +2331,7 @@ export const RECIPES = {
       // A ribbon bow.
       for (const s of [-1, 1])
         k.add(evenEllipsoid(k, 0.1, 0.065, 0.03, 32), {
+          part: torso,
           even: true,
           opacity: 1,
           jitter: 0.01,
@@ -2203,6 +2343,7 @@ export const RECIPES = {
           color: (c) => lit("#d62839", c.n, { spec: 0.4 }),
         });
       k.add(evenEllipsoid(k, 0.04, 0.04, 0.04, 24), {
+        part: torso,
         even: true,
         opacity: 1,
         jitter: 0.01,
@@ -2227,6 +2368,7 @@ export const RECIPES = {
       // Legs with foot pads.
       for (const s of [-1, 1])
         k.add(plush(0.15, 0.15, 0.27, 0.012, 48), {
+          part: torso,
           ...soft,
           pos: [s * 0.22, -0.38, 0.2],
           rot: [0, s * 10, 0],
@@ -2685,6 +2827,9 @@ export const RECIPES = {
 
   "paper-plane": {
     alive: true,
+    // Hands-on (lane Hands-on H1): thrown, it glides nose first, dips and
+    // lands, light as paper.
+    hands: { area: 3, view: 0.6, material: "paper-plane", sound: (hit, vol) => ({ voice: "slap", f: 1200, vol: vol * 0.4 }) }, // prettier-ignore
     density: 0.5,
     options: [
       { key: "color", label: "Paper", type: "color", default: "#cfe6f7" },
@@ -2756,6 +2901,15 @@ export const RECIPES = {
     options: [{ key: "color", label: "Paper", type: "color", default: "#e2474f" }],
     controls: [{ key: "flap", label: "Flap", type: "pulse", ease: 1.8 }],
     action: { key: "flap", label: "Flap the wings" },
+    // Hands-on (lane Hands-on H1): pull its tail up or down and the wings
+    // flap, as a real flapping crane's do; let go and the tail springs back,
+    // the wings flapping a few times as it settles.
+    hands: {
+      floor: -0.2,
+      joints: [
+        { type: "hinge", part: "tail", pivot: CRANE_TAIL, axis: [0, 0, 1], min: -0.4, max: 0.35, gravity: false, spring: 90, damping: 3.5, bounce: 0.3, pos: [-0.45, 0.14, 0], pick: [0.26, 0.3, 0.14], also: (a, parts) => { parts.wingR = { angle: 2.2 * a }; parts.wingL = { angle: -2.2 * a }; }, sound: (ev, vol) => ({ voice: "flutter", f: 1800, rate: 30, decay: 0.5, vol: 0.15 + 0.3 * vol }) }, // prettier-ignore
+      ],
+    },
     drive(t, c, out) {
       const f = c.flap;
       const a = 0.1 * Math.sin(t * 1.6) + f * 0.55 * Math.sin((1 - f) * 22);
@@ -2767,6 +2921,7 @@ export const RECIPES = {
       const paper = o.color;
       const wingR = k.part("wingR", { pivot: [0, 0.05, 0], axis: [1, 0, 0] });
       const wingL = k.part("wingL", { pivot: [0, 0.05, 0], axis: [1, 0, 0] });
+      const tail = k.part("tail", { pivot: CRANE_TAIL, axis: [0, 0, 1] }); // (Hands-on's hinge)
       const tri = (a, b, cc, out, part = 0) => {
         const sh = triShape(a, b, cc);
         const n0 = sh.sample(() => 0.4).n;
@@ -2804,7 +2959,7 @@ export const RECIPES = {
         // Tail.
         const Tb = [-0.16, -0.17, 0];
         const Ts = [-0.3, -0.03, s * 0.028];
-        tri(Tb, Ts, [-0.68, 0.41, 0], out);
+        tri(Tb, Ts, [-0.68, 0.41, 0], out, tail);
         // Wings, each with a soft crease.
         const Wf = [0.15, 0.05, 0];
         const Wb = [-0.22, 0.05, 0];
@@ -2820,6 +2975,17 @@ export const RECIPES = {
   },
   "balloon-dog": {
     options: [{ key: "color", label: "Balloon", type: "color", default: "#ff4f8b" }],
+    // Hands-on (lane Hands-on H1): press and hold to squeeze it (it bulges
+    // and squeaks, and springs back when let go); light as a balloon, it
+    // falls slowly and drifts, and bulges as it lands with a rubbery squeak.
+    // (Estimates from tools/hands-on-materials.json: 15 g, 30 cm long.)
+    hands: {
+      area: 3,
+      view: 0.55,
+      press: { amount: 0.22 },
+      material: { mass: 0.015, r: 0.15, bounce: 0.5, friction: 0.7, roll: 0.15, cd: 0.6, spin: 0.4, spinDecay: 0.5, drift: 0.05 }, // prettier-ignore
+      sound: (hit, vol) => hit.press ? { voice: "squeak", f: 700, to: 1.5, decay: 2.2, vol: 0.8 } : { voice: "squeak", f: 900 + 300 * Math.min(1, hit.speed / 4), vol: vol * 0.7 }, // prettier-ignore
+    },
     controls: [{ key: "pop", label: "Pop", type: "pulse", ease: 2.6 }],
     action: { key: "pop", label: "Pop" },
     drive(t, c, out) {
@@ -2916,10 +3082,33 @@ export const RECIPES = {
     controls: [{ key: "blow", label: "Blow", type: "pulse", ease: 2.5 }],
     action: { key: "blow", label: "Blow bubbles" },
     sounds: [{ voice: "sample", file: "soap-bubbles-pops.mp3" }], // Sound C: the pops
-    drive(t, c, out) {
+    // Hands-on (lane Hands-on H1): poke a bubble and it pops (the finger is
+    // a line through the scene; a bubble it passes through bursts at once,
+    // and a new one comes from the wand on its next round).
+    hands: { follow: true },
+    drive(t, c, out, info) {
       const m = mem(c);
       const tau = integrate(m, "tau", t, 0.07 + 0.35 * c.blow);
       const pops = [];
+      const finger = info?.hands?.on ? info.hands.finger : null;
+      // The bubble the finger touches first (the nearest along its line):
+      // once as it presses, then only as it moves on (a held finger doesn't
+      // pop the bubbles behind).
+      const moved = finger && (!m.finger || len(sub(finger.dir, m.finger)) > 1e-4);
+      m.finger = finger ? finger.dir.slice() : null;
+      let poke = -1;
+      let near = Infinity;
+      if (moved)
+        BUBBLES.forEach((b, i) => {
+          const s = (tau * b.speed + b.s0) % 1;
+          if (m["popped" + i] != null || s < 0.05 || s > 0.94) return;
+          const d = sub(bubbleAt(b, s), finger.origin);
+          const along = dot(d, finger.dir);
+          if (len(sub(d, mul(finger.dir, along))) < b.r * 1.05 && along < near) {
+            near = along;
+            poke = i;
+          }
+        });
       BUBBLES.forEach((b, i) => {
         const s = (tau * b.speed + b.s0) % 1;
         // Sound C (his note of October 2): while it's blown, each bubble
@@ -2928,9 +3117,17 @@ export const RECIPES = {
         m["s" + i] = s;
         if (c.blow > 0.05 && was < 0.95 && s >= 0.95) pops.push(bubblePop(i));
         const p = bubbleAt(b, s);
+        // Poked: it bursts (gone in a twentieth of a second) until it comes
+        // round from the wand again.
+        if (s < was) m["popped" + i] = null;
+        if (i === poke) {
+          m["popped" + i] = t;
+          pops.push(bubblePop(i));
+        }
+        const gone = m["popped" + i] == null ? 1 : 1 - clamp((t - m["popped" + i]) / 0.05, 0, 1);
         out.parts["b" + i] = {
           offset: sub(p, b.rest),
-          visible: smoothstep(0, 0.05, s) * (1 - smoothstep(0.94, 1, s)),
+          visible: smoothstep(0, 0.05, s) * (1 - smoothstep(0.94, 1, s)) * gone,
         };
       });
       if (pops.length) out.cues.push(pops);
@@ -3021,6 +3218,16 @@ export const RECIPES = {
     options: [{ key: "color", label: "Colour", type: "color", default: "#4f9fdc" }],
     controls: [{ key: "wind", label: "Wind up", type: "pulse", ease: 3 }],
     action: { key: "wind", label: "Wind it up" },
+    // Hands-on (lane Hands-on H1): turn its key round to wind it (up to
+    // three turns); let go and the key unwinds as it walks off, rocking from
+    // foot to foot with its arms swinging, and slows to a stop as the spring
+    // runs down.
+    hands: {
+      floor: -0.77,
+      joints: [
+        { type: "dial", part: "key", pivot: ROBOT_KEY, axis: [0, 0, 1], min: 0, max: 6 * Math.PI, spring: 0.6, damping: 2, drag: 0, pos: [0, -0.1, -0.1], pick: [0.4, 0.4, 0.4], also: robotWalk, sound: (ev, vol) => (ev.kind === "stop" ? { voice: "click", vol: 0.4 } : null), turn: (a, da) => (Math.floor(a / 0.6) !== Math.floor((a - da) / 0.6) ? { voice: "click", f: da > 0 ? 3200 : 2200, vol: da > 0 ? 0.25 : 0.15 } : null) }, // prettier-ignore
+      ],
+    },
     drive(t, c, out) {
       const m = mem(c);
       const w = c.wind;
@@ -3038,6 +3245,9 @@ export const RECIPES = {
     },
     build(k, o) {
       const body = o.color;
+      // All of it but its arms and key, as one part that walks (Hands-on;
+      // lane Hands-on H1).
+      const walker = k.part("walker", { pivot: [0, 0, 0] });
       const metal = "#c5cbd3";
       const red = "#e5483a";
       const tin =
@@ -3072,6 +3282,7 @@ export const RECIPES = {
           : lit(metal, c.n, { amb: 0.75, dif: 0.3, spec: 0.3 });
       };
       k.add(roundBox(0.72, 0.62, 0.46, 0.07), {
+        part: walker,
         even: true,
         opacity: 1,
         jitter: 0.015,
@@ -3091,6 +3302,7 @@ export const RECIPES = {
       });
       // Head, eyes, mouth grille, ear bolts and antenna.
       k.add(roundBox(0.5, 0.36, 0.4, 0.07), {
+        part: walker,
         even: true,
         opacity: 1,
         jitter: 0.015,
@@ -3107,6 +3319,7 @@ export const RECIPES = {
         },
       });
       k.add(evenCylinder(0.09, 0.09, 0.08, false), {
+        part: walker,
         even: true,
         opacity: 1,
         jitter: 0.015,
@@ -3116,6 +3329,7 @@ export const RECIPES = {
       });
       for (const s of [-1, 1]) {
         k.add(evenCylinder(0.09, 0.09, 0.03), {
+          part: walker,
           even: true,
           opacity: 1,
           jitter: 0.015,
@@ -3133,6 +3347,7 @@ export const RECIPES = {
           },
         });
         k.add(evenCylinder(0.05, 0.05, 0.06), {
+          part: walker,
           even: true,
           opacity: 1,
           jitter: 0.015,
@@ -3144,6 +3359,7 @@ export const RECIPES = {
         });
       }
       k.add(evenCylinder(0.013, 0.013, 0.2, false), {
+        part: walker,
         even: true,
         opacity: 1,
         jitter: 0.015,
@@ -3153,6 +3369,7 @@ export const RECIPES = {
         color: tin(metal),
       });
       k.add(k.sphere(0.05), {
+        part: walker,
         even: true,
         opacity: 1,
         jitter: 0.015,
@@ -3203,6 +3420,7 @@ export const RECIPES = {
       // Legs and feet.
       for (const s of [-1, 1]) {
         k.add(roundBox(0.18, 0.24, 0.22, 0.04), {
+          part: walker,
           even: true,
           opacity: 1,
           jitter: 0.015,
@@ -3212,6 +3430,7 @@ export const RECIPES = {
         });
         // (Soles closed underneath, lane Sharpness B: they were open boxes.)
         k.add(roundBox(0.24, 0.09, 0.34, 0.035), {
+          part: walker,
           even: true,
           opacity: 1,
           jitter: 0.015,
@@ -3222,6 +3441,7 @@ export const RECIPES = {
       }
       // The wind-up key on the back.
       k.add(evenCylinder(0.022, 0.022, 0.1), {
+        part: walker,
         even: true,
         opacity: 1,
         jitter: 0.015,
