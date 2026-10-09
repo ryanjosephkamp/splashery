@@ -89,6 +89,17 @@ test.describe("new tabs and toy pages", () => {
     expect(bad.slice(0, 10)).toEqual([]);
   });
 
+  test("the Tinkerer's Manual opens every link in a new tab too", () => {
+    const html = fs.readFileSync(path.resolve("manual/index.html"), "utf8");
+    const bad = [];
+    for (const m of html.matchAll(/<a\s([^>]*?)>/g)) {
+      const href = /\bhref="([^"]*)"/.exec(m[1])?.[1];
+      if (!href || href.startsWith("#")) continue;
+      if (!(/target="_blank"/.test(m[1]) && /rel="[^"]*noopener/.test(m[1]))) bad.push(href.slice(0, 60)); // prettier-ignore
+    }
+    expect(bad).toEqual([]);
+  });
+
   test("the Tools hub's cards go to the toy's page, and Open in Splashery opens the app in a new tab", async ({
     page,
   }) => {
