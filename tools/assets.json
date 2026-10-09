@@ -351,6 +351,9 @@
       "rotate": [180, 0, 0],
       "splats": 139001,
       "lite": 139001,
+      "keepFrame": true,
+      "local": ".cache/pr3/defuzz/steak.ply",
+      "localNote": "Lane Photoreal r3: the source without the faint haze round its outline (node tools/pr3-defuzz.mjs steak --needle=4; the owner's note of October 9, 2026).",
       "sh": 1
     },
     {
@@ -631,6 +634,9 @@
       "author": "ilk",
       "nc": true,
       "rotate": [180, 0, 0],
+      "keepFrame": true,
+      "local": ".cache/pr3/defuzz/desk-globe.ply",
+      "localNote": "Lane Photoreal r3: the source without the long needle splats streaking off its plate's rim (node tools/pr3-defuzz.mjs desk-globe --faint=0 --needle=5; the owner's note of October 9, 2026).",
       "sh": 1,
       "splats": 313696,
       "lite": 300000

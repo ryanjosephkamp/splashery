@@ -73,7 +73,8 @@ function robustBounds(ply) {
 const fmt = (n) => `${(n / 1024 / 1024).toFixed(2)} MB`;
 
 for (const toy of manifest.toys) {
-  if (toy.pack !== "pr3") continue;
+  // Named ids may come from Photoreal r2 too: this lane re-prepares some r2 captures (their outlines).
+  if (toy.pack !== "pr3" && !only.includes(toy.id)) continue;
   if (only.length && !only.includes(toy.id)) continue;
   const work = path.join(root, ".cache/prep", toy.id);
   const out = path.join(root, "assets/toys", toy.id);
@@ -92,7 +93,7 @@ for (const toy of manifest.toys) {
   const rot = path.join(work, "rotated.ply");
   const sh = String(toy.sh || 0);
   st([
-    ...(toy.lod !== undefined ? ["-L", String(toy.lod)] : []),
+    ...(toy.lod !== undefined && !local ? ["-L", String(toy.lod)] : []),
     src,
     "-r",
     toy.rotate.join(","),
@@ -101,7 +102,15 @@ for (const toy of manifest.toys) {
     "-N",
     rot,
   ]);
-  const b = robustBounds(readPly(rot));
+  // A cleaned copy ("local" from tools/pr3-defuzz.mjs) keeps the original's frame: its bounds
+  // come from the original source, so the toy keeps its size and place (and its rig its
+  // coordinates).
+  let frame = rot;
+  if (local && toy.keepFrame) {
+    frame = path.join(work, "rotated-source.ply");
+    st([...(toy.lod !== undefined ? ["-L", String(toy.lod)] : []), toy.source, "-r", toy.rotate.join(","), "-H", "0", "-N", frame]); // prettier-ignore
+  }
+  const b = robustBounds(readPly(frame));
   const scale = 0.9 / Math.max(...b.half);
   console.log(
     `   centre ${b.center.map((v) => v.toFixed(3))}, half ${b.half.map((v) => v.toFixed(3))}, scale ${scale.toFixed(4)}`,

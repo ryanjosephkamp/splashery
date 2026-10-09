@@ -66,6 +66,10 @@ const CC0 = {
 const BY = { license: "CC BY 4.0", licenseUrl: "https://creativecommons.org/licenses/by/4.0/" };
 const BYNC = { license: "CC BY-NC 4.0", licenseUrl: "https://creativecommons.org/licenses/by-nc/4.0/" }; // prettier-ignore
 
+// Lane Sharpness A's options for every baked scan here (the owner's "sharper" marks of October 9,
+// 2026): exact splat sizes for a crisp outline, slightly smaller splats, and a calmer texture.
+const SHARP = { exact: true, sizeMul: 0.85, smooth: 0.35 };
+
 // A toy made of one baked scan: its credit, its tap (a pulse of secs), its parts (file part ->
 // kit part, made in parts(k)) and drive(e, out, info), e the seconds since the tap (called at rest
 // too, with e = -1, when `always` is set).
@@ -85,7 +89,7 @@ function scanToy({ id, credit, label, secs, parts, drive, share = 0.86, extra, a
     },
     build(k) {
       const made = parts ? parts(k) : [k.part("whole", { pivot: [0, 0, 0] })];
-      addScan(k, SCANS.get(id), { share, parts: made });
+      addScan(k, SCANS.get(id), { share, parts: made, ...SHARP });
       extra?.(k);
     },
   };
@@ -181,14 +185,15 @@ export const RECIPES = {
     id: "fluorite-crystal",
     label: "Ultraviolet lamp",
     secs: 4.2,
-    share: 0.45,
+    share: 0.6,
     credit: { label: "Fluorite", title: "Mineral: Fluorite", source: "https://sketchfab.com/3d-models/mineral-fluorite-5ed87d4487be495aac0a86632eb3880c", author: DAAL, ...CC0 }, // prettier-ignore
     parts: (k) => [k.part("whole", { pivot: [0, 0, 0] })],
     extra(k) {
       // The same stone again, in its glow under the lamp (hidden until it is on).
       const uv = k.part("uv", { pivot: [0, 0, 0] });
       addScan(k, SCANS.get("fluorite-crystal"), {
-        share: 0.45,
+        ...SHARP,
+        share: 0.3,
         parts: [uv],
         color: (c) => {
           const l = 0.3 * c[0] + 0.55 * c[1] + 0.15 * c[2];
