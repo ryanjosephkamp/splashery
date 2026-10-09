@@ -691,3 +691,4 @@
 {"v":1,"t":"2026-10-09T05:57:30.177Z","harness":"claude-code","event":"tool","session":"1952af3b-0593-5383-997e-fc8f0f200498","tool":"Bash","cwd":"splashery"}
 {"v":1,"t":"2026-10-09T05:57:43.112Z","harness":"claude-code","event":"tool","session":"1952af3b-0593-5383-997e-fc8f0f200498","tool":"Bash","cwd":"splashery"}
 {"v":1,"t":"2026-10-09T06:07:56.210Z","harness":"claude-code","event":"tool","session":"1952af3b-0593-5383-997e-fc8f0f200498","tool":"Bash","cwd":"splashery"}
+{"v":1,"t":"2026-10-09T06:08:04.182Z","harness":"claude-code","event":"turn-end","session":"1952af3b-0593-5383-997e-fc8f0f200498","cwd":"splashery"}
