@@ -540,8 +540,6 @@ export function dogMat(k, count) {
   });
 }
 
-// The color of the stone cap on the alum crystal's block (the block top's gray).
-const ALUM_CAP = "#6a666a";
 const STEAK_Y = -0.1;
 
 // A pointed oval (a boat's footprint): half-length L along the unit direction u, half-width W at
@@ -679,18 +677,13 @@ const BASES = {
       cap(k, { center: [-0.057, 0.01, -0.01], R: 0.865, cut: -0.36, count: 40000, color: MATERIALS.peel() }); // prettier-ignore
     },
   }),
-  // The alum crystal's block of dark stone, closed underneath. Its top, where the crystal sits, is
-  // closed too: the capture there is a dent and a gray layer of smear that show when the crystal is
-  // lifted off, so that layer is hidden (a flat slab) and a plain stone cap sits just above it. The
-  // crystal's part leaves the cap behind by its color (ALUM_CAP).
+  // The alum crystal's block of dark stone, closed underneath.
   "alum-crystal": based({
-    count: 30000,
-    hide: [...below(0.06, 0.03, -1.11), { at: [-0.01, -0.29, 0], r: [0.42, 0.035, 0.52], soft: 0.01, over: true }], // prettier-ignore
+    count: 24000,
+    hide: below(0.06, 0.03, -1.11),
     build(k) {
       const rect = { center: [0.058, 0.03], angle: 0.602, half: [0.5, 0.55] };
       floor(k, { center: rect.center, rect, scale: 0.97, y: -1.11, count: 24000, color: MATERIALS.stone("#2c2b2c") }); // prettier-ignore
-      const cap = { center: [-0.01, 0], angle: 0, half: [0.28, 0.4] };
-      floor(k, { center: cap.center, rect: cap, y: -0.25, count: 6000, color: (x, z, f, noise) => shade(ALUM_CAP, 0.96 + 0.04 * fbm(noise, x, z, 40)) }); // prettier-ignore
     },
   }),
   // The knight's pewter base, closed underneath.
@@ -889,10 +882,11 @@ const PART_EFFECTS = {
   // turn about the globe's axis, fast at first and slowing.
   "desk-globe": { label: "Spin", secs: 3.4, pivot: GLOBE, regions: [{ at: GLOBE, r: [0.5, 0.5, 0.5], soft: 0.01, notColor: "#151515", tol: 0.22 }], motion: (e, info, origin) => turnAbout(qa(GLOBE_AXIS, (vary(info?.tap, 29) < 0.5 ? 1 : -1) * TAU * 1.6 * (1 - (1 - band(e, 0, 3.2)) ** 2)), GLOBE, origin) }, // prettier-ignore
   // The toy T. rex rocks on its feet on its disc; the monkey doll on its cloth; the alum crystal
-  // lifts off its block, turns and sets back down.
+  // is turned a quarter turn on its block, barely lifted (lifted higher, the gap shows the capture's
+  // smeared contact under it, which no cut or cap closed cleanly).
   "toy-trex": { label: "Stomp", secs: 2.6, pivot: [0, -0.85, -0.1], regions: [{ at: [0.05, 0.05, -0.13], r: [0.95, 0.89, 0.62], soft: 0.01 }], motion: M.wobble({ base: [0, -0.85, -0.1], r: 0.18, lean: 0.12 }) }, // prettier-ignore
   "monkey-doll": { label: "Rock", secs: 2.6, pivot: [0, -0.86, -0.08], regions: [{ at: [0, 0.05, -0.08], r: [0.76, 0.91, 0.64], soft: 0.01 }], motion: M.wobble({ base: [0, -0.86, -0.08], r: 0.38, lean: 0.14 }) }, // prettier-ignore
-  "alum-crystal": { label: "Lift", secs: 2.4, pivot: [0, -0.4, 0], regions: [{ at: [0, 0.3, -0.02], r: [0.78, 0.66, 0.82], notColor: ALUM_CAP, tol: 0.12, soft: 0.01 }], motion: (e, info, origin) => lift(turnAbout(qa([0, 1, 0], (vary(info?.tap, 23) < 0.5 ? 1 : -1) * Math.PI * 0.5 * ease(band(e, 0.3, 1.7))), [0, 0, 0], [0, 0, 0]), 0.22 * bump(e, 0, 2.0)) }, // prettier-ignore
+  "alum-crystal": { label: "Turn", secs: 2.4, pivot: [0, -0.4, 0], regions: [{ at: [0, 0.3, -0.02], r: [0.78, 0.66, 0.82], soft: 0.01 }], motion: (e, info, origin) => lift(turnAbout(qa([0, 1, 0], (vary(info?.tap, 23) < 0.5 ? 1 : -1) * Math.PI * 0.5 * ease(band(e, 0.3, 1.7))), [0, 0, 0], [0, 0, 0]), 0.035 * bump(e, 0, 2.0)) }, // prettier-ignore
 };
 
 // The BMX bicycle, nudged, leans over on its kickstand and rocks back up: the whole bike (frame and

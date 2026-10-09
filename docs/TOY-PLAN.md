@@ -255,11 +255,10 @@ Proposals below are suggestions; the owner may change them.
   - Effect: Turns once round, so the glints move across its faces.
   - Improved: Photoreal r3 (October 8, 2026): Turns once round, so the glints move across its faces.
   - Sound: A short sound that suits the object.
-- **Alum crystal** (`alum-crystal`). Now: tap: Lift (rig). Plan: keep.
+- **Alum crystal** (`alum-crystal`). Now: tap: Turn (rig). Plan: keep.
   - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
     good.
-  - Effect: The crystal lifts off its block, turns a quarter turn and sets back down; a kit-built
-    block underside.
+  - Effect: The crystal is turned a quarter turn on its block; a kit-built block underside.
   - Improved: Photoreal r3 (October 8, 2026): The crystal lifts off its block, turns a quarter turn
     and sets back down; a kit-built block underside.
   - Sound: A short sound that suits the object.

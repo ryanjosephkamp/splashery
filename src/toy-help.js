@@ -114,9 +114,9 @@ export const TOY_HELP = {
       "A cluster of clear crystals, captured from photos and drawn with splats. A crystal forms when atoms stack in a repeating pattern, usually while a mineral-rich liquid cools or dries slowly. Slow growth gives sharp faces that bend and bounce light.\n\nTap it and the crystal turns once round, so the glints move across its faces. Drag to turn it: the glints move across the faces because this capture keeps a little view-dependent shine.",
   },
   "alum-crystal": {
-    howTo: "Tap it to lift the crystal off its block; drag to turn it.",
+    howTo: "Tap it to turn the crystal on its block; drag to turn it yourself.",
     about:
-      "A pink block of alum, captured from photos and drawn with splats. Alum is a mineral salt that people have used for centuries to clear muddy water, to fix dye in cloth and, as a crystal stick, to stop small shaving nicks from bleeding.\n\nTap it and the crystal is lifted off its block, turned a quarter of the way round and set back down. Drag around it to see the frosted, uneven faces and the dark stand it sits on.",
+      "A pink block of alum, captured from photos and drawn with splats. Alum is a mineral salt that people have used for centuries to clear muddy water, to fix dye in cloth and, as a crystal stick, to stop small shaving nicks from bleeding.\n\nTap it and the crystal is turned a quarter of the way round on its block. Drag around it to see the frosted, uneven faces and the dark stand it sits on.",
   },
   puffin: {
     howTo: "Tap it to make it hop round; drag to turn it.",

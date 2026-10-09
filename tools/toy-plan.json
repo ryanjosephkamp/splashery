@@ -2424,7 +2424,7 @@
     "alum-crystal": {
       "v": "keep",
       "owner": "New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.",
-      "effect": "The crystal lifts off its block, turns a quarter turn and sets back down; a kit-built block underside.",
+      "effect": "The crystal is turned a quarter turn on its block; a kit-built block underside.",
       "sound": "A short sound that suits the object.",
       "improved": "Photoreal r3 (October 8, 2026): The crystal lifts off its block, turns a quarter turn and sets back down; a kit-built block underside."
     },
