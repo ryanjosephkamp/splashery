@@ -114,10 +114,14 @@ replace the prefix and lane record with yours).
 
 ## Known issues
 
-- None yet.
+- Picture QR builds 0.3 to 1 s slower: the build reads its own layout with jsQR while it steps the
+  nudge up (measured in Node; longer on SwiftShader).
+- While a capture runs, the stage shows a still of the last frame (a few frames on a phone, 2 to 3 s
+  on SwiftShader).
 
 ## For the Operator
 
-- Engine PR: ready for the full run once opened. Of the specs I ran with it (shp, qr, qr3, pic, pdf,
-  qr4-flash, and more running), `vw` fails on fetching an outside site (a network limit in this
-  container) and `qrs-toys` failed once under load; rerunning alone.
+- Engine PR #472 (`claude/lane-qr-r4-engine`): 116 of 119 passed in the 17 spec files I ran with it.
+  `vw` ×2 fails fetching an outside site (this container's network); `qrs-toys:37` failed once under
+  load. Both are being rerun alone on main and on the engine branch.
+- The container restarted once mid-lane; nothing was lost (work committed since).
