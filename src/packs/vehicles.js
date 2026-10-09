@@ -3577,7 +3577,8 @@ export const RECIPES = {
     controls: [{ key: "beep", label: "Stop", type: "pulse", ease: 4.5 }],
     action: { key: "beep", label: "Stop for passengers" },
     // Hands-on (lane Hands-on H4): push it and it rolls on its turning wheels.
-    hands: { wheels: { axle: [0, 0, 1], r: 0.3, parts: ["front", "rear"] } },
+    // (`lift`: a drag straight up picks it up, as at Level 1.)
+    hands: { wheels: { axle: [0, 0, 1], r: 0.3, parts: ["front", "rear"], lift: true } },
     drive(t, c, out) {
       // A bus stop: the lights flash, the stop arm swings out and the doors
       // open; then everything folds away again.
