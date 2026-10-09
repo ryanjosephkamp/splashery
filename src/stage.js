@@ -125,7 +125,7 @@ export class Stage {
       if (this.captureWaiters.length) {
         const waiters = this.captureWaiters;
         this.captureWaiters = [];
-        for (const w of waiters) w(this.copyCanvas(w.width, w.height));
+        for (const w of waiters) w(w.bare ? null : this.copyCanvas(w.width, w.height));
       }
     });
 
@@ -917,6 +917,46 @@ export class Stage {
     });
   }
 
+  // Engine (QR r4): a still of the current frame over the canvas while an
+  // export renders at a fixed size, so the stretched square never shows.
+  // Calls nest; the last uncover removes the still after the canvas has
+  // drawn a few frames at its own size again.
+  async cover() {
+    this.coverDepth = (this.coverDepth || 0) + 1;
+    if (this.coverDepth > 1 || this.fixedSize) return;
+    const shot = await this.captureFrame();
+    if (!this.coverDepth || this.coverEl) return;
+    const r = this.canvas.getBoundingClientRect();
+    shot.className = "stage-cover";
+    shot.setAttribute("aria-hidden", "true");
+    Object.assign(shot.style, {
+      position: "fixed",
+      left: `${r.left}px`,
+      top: `${r.top}px`,
+      width: `${r.width}px`,
+      height: `${r.height}px`,
+      pointerEvents: "none",
+      zIndex: getComputedStyle(this.canvas).zIndex,
+    });
+    this.canvas.after(shot);
+    this.coverEl = shot;
+  }
+
+  async uncover(frames = 3) {
+    if (!this.coverDepth) return;
+    if (--this.coverDepth > 0) return;
+    for (let i = 0; i < frames && !this.coverDepth; i++) {
+      await new Promise((resolve) => {
+        resolve.bare = true;
+        this.captureWaiters.push(resolve);
+        this.requestRender();
+      });
+    }
+    if (this.coverDepth) return;
+    this.coverEl?.remove();
+    this.coverEl = null;
+  }
+
   copyCanvas(width, height) {
     const src = this.canvas;
     const out = document.createElement("canvas");
@@ -929,6 +969,7 @@ export class Stage {
 
   destroy() {
     clearTimeout(this.restoreTimer);
+    this.coverEl?.remove();
     this.resizeObserver.disconnect();
     this.clearToy();
     this.buryToys(true);
