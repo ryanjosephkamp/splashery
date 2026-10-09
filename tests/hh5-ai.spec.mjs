@@ -192,3 +192,89 @@ test("half adder: the levers flip by hand and the lamps add the bits", async ({ 
   expect(p.carryLamp.visible).toBe(1);
   expect(p.equation.visible).toBe(1);
 });
+
+const kitData = (page, keys) =>
+  page.evaluate((keys) => {
+    const d = window.__splashery.player.proc.ctx.kit.data;
+    return JSON.parse(JSON.stringify(Object.fromEntries(keys.map((k) => [k, d[k]]))));
+  }, keys);
+
+test("difference engine: a turn and a bit round the crank by hand turns the engine once", async ({
+  page,
+}) => {
+  await ready(page, "difference-engine");
+  const before = (await kitData(page, ["st"])).st;
+  // Circles on the screen round the crank's hub, each way in turn (its
+  // ratchet takes only one).
+  for (const sgn of [-1, 1])
+    await page.evaluate((sgn) => {
+      const { player } = window.__splashery;
+      const ho = player.handsOn;
+      const [cx, cy] = player.screenPoint([1.16, 0.15, 0]);
+      const at = (a) => [cx + 40 * Math.cos(a), cy - 40 * Math.sin(a)];
+      const start = at(Math.PI / 2);
+      ho.pressAt(player.fromRecipe([1.18, 0.35, 0]), ...start);
+      player.update(1 / 30);
+      for (let i = 1; i <= 40; i++) {
+        ho.moveTo(...at(Math.PI / 2 + (sgn * i * 2.6 * Math.PI) / 40));
+        player.update(1 / 30);
+      }
+      ho.release();
+      for (let i = 0; i < 20; i++) player.update(1 / 60);
+    }, sgn);
+  const after = (await kitData(page, ["st"])).st;
+  expect(JSON.stringify(after)).not.toBe(JSON.stringify(before));
+  // Exactly one turn: the value went up by its first difference once.
+  expect(after.v).toBe(before.v + before.d1);
+});
+
+test("enigma: a rotor turned by hand clicks onto a letter, and the next message starts there", async ({
+  page,
+}) => {
+  await ready(page, "enigma-machine");
+  const before = (await kitData(page, ["start"])).start;
+  const x = -0.3;
+  await finger(
+    page,
+    [
+      [x, 0.02, -0.5],
+      [x, -0.12, -0.56],
+      [x, -0.24, -0.68],
+    ],
+    { steps: 6 },
+  );
+  await tick(page, 1.5);
+  const after = (await kitData(page, ["start", "rest"])).start;
+  expect(after[0]).not.toBe(before[0]);
+  expect(after[1]).toBe(before[1]);
+  // The rotor stands on its letter.
+  const a = (await out(page, "parts")).rotorL.angle;
+  const step = (2 * Math.PI) / 26;
+  expect(Math.abs(a - after[0] * step)).toBeLessThan(0.02);
+});
+
+test("turing machine: the tape slides by hand onto a whole tile, and a tap flips a tile", async ({
+  page,
+}) => {
+  await ready(page, "turing-machine");
+  const tape = async () => (await kitData(page, ["tape"])).tape;
+  const before = await tape();
+  // Two tiles to the right.
+  await finger(
+    page,
+    [
+      [0, 0, 0],
+      [0.16, 0, 0],
+      [0.32, 0, 0],
+    ],
+    { steps: 8 },
+  );
+  await tick(page, 1);
+  const after = await tape();
+  for (const [cell, bit] of Object.entries(before)) expect(after[Number(cell) + 2] ?? 0).toBe(bit);
+  // A tap on the tile under the head flips it.
+  const was = after[0] ?? 0;
+  await tapAt(page, [0, 0, 0.03]);
+  await tick(page, 0.2);
+  expect((await tape())[0] ?? 0).toBe(was ? 0 : 1);
+});

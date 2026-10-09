@@ -3103,7 +3103,9 @@ Proposals below are suggestions; the owner may change them.
   - Improved: Machines A: 17 tile slots (each a solid tile that flips edge-on and back), the rule
     card's row lit, a state lamp, a step counter and turning reels; programs Add one (each tap adds
     one more, so it counts up), Busy beaver 2 and 3 states; your own binary number in the Toy tab
-    (about 4.5 s for 1011).
+    (about 4.5 s for 1011). Hands-on H5: with ✋ Hands-on on, the tape slides by hand (a press on
+    it; elsewhere the machine lifts as before) and settles on a whole tile, so the head reads a new
+    cell; a tap on a tile flips its bit.
   - Sound: A relay click as the head reads, a wooden clack as each tile flips, a short whir as the
     tape slides, and a bell at the halt.
 - **Difference engine** (`difference-engine`). Now: tap: Turn the crank. Plan: keep.
@@ -3114,7 +3116,9 @@ Proposals below are suggestions; the owner may change them.
   - Improved: Machines A: X, P(X), Δ1, Δ2 and Δ3 columns of figure wheels (each a solid wheel read
     through a window), two-phase addition staggered as in Babbage's design, carry levers that set
     and knock back, the crank and a bell; each tap queues one more turn (4 s); your own polynomial
-    up to x³ and start value in the Toy tab.
+    up to x³ and start value in the Toy tab. Hands-on H5: with ✋ Hands-on on, circling round the
+    crank turns it (measured as seen, from any side): each full turn of the hand is one turn of the
+    engine at the hand's pace, wheels, carries and bell included, with a ratchet.
   - Sound: The ratchet of the crank, a brass click for each wheel step, a sharper snap for each
     carry, and a small bell when a new result is ready.
 - **Enigma machine** (`enigma-machine`). Now: tap: Type the message. Plan: keep.
@@ -3133,7 +3137,9 @@ Proposals below are suggestions; the owner may change them.
     set it like a real Enigma I in the Toy tab (three of rotors I to V in any order, reflector B or
     C, rings, start letters, up to ten plugboard pairs), the setting shown on the pad, the rotor
     plates and the cables; a Barbarossa, 1941, preset decodes a real message; proof in
-    tests/cmp2-enigma.spec.mjs.
+    tests/cmp2-enigma.spec.mjs. Hands-on H5: with ✋ Hands-on on, each rotor turns by dragging up or
+    down on it, clicking letter by letter, and where it is left becomes where the rotors stand and
+    where the next message starts.
   - Sound: Heavy key clacks, the ratchet of the rotors stepping, and a faint click as each lamp
     lights.
 - **Bombe** (`bombe`). Now: tap: Start the search. Plan: keep.

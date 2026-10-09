@@ -638,12 +638,69 @@ function buildTuring(k, o) {
   sevenSeg(k, [cx + cw / 2 - 0.13, ctop - 0.11, -0.18], 0.12, 41, "#b0301c");
 }
 
+// Lane Hands-on H5: the Turing machine's tape by hand. TM_HANDS.on is
+// whether ✋ is on (for a tap's flip); `slide` is how far the hand has the
+// tape along (in cells, the head's place as a run's pose has it).
+const TM_HANDS = { on: false };
+function tmHands(data, info, t, running) {
+  const m = data.m;
+  TM_HANDS.on = !!info?.hands?.on;
+  // A tap on a tile flips its bit.
+  const tap = info?.tap;
+  if (tap?.key === "flip" && tap.n !== m.flipN && TM_HANDS.on && !running) {
+    m.flipN = tap.n;
+    if (!data.prog.blank) {
+      data.tape = { ...data.tape, [tap.pick]: data.tape[tap.pick] ? 0 : 1 };
+      m.flipCue = true;
+    }
+  }
+  const dt = clamp(t - (m.ht ?? t), 0, 0.1);
+  m.ht = t;
+  if (running) {
+    m.slide = null;
+    return null;
+  }
+  const f = info?.hands?.finger;
+  if (f) {
+    // Where the finger's line meets the tape's plane (z = 0).
+    const k = Math.abs(f.dir[2]) > 1e-4 ? -f.origin[2] / f.dir[2] : 0;
+    const x = f.origin[0] + f.dir[0] * k;
+    if (m.x0 === undefined || m.x0 === null) {
+      m.x0 = x;
+      m.from = m.slide ?? 0;
+    }
+    m.slide = m.from - (x - m.x0) / TM.pitch;
+    m.snap = null;
+    return m.slide;
+  }
+  m.x0 = null;
+  if (m.slide === null || m.slide === undefined) return null;
+  // Let go: it settles on the nearest whole tile, then the tape is shifted
+  // so the head reads that cell.
+  const n = Math.round(m.slide);
+  m.slide += (n - m.slide) * (1 - Math.exp(-14 * dt));
+  if (Math.abs(m.slide - n) < 0.01) {
+    const tape = {};
+    for (const [cell, bit] of Object.entries(data.tape)) tape[Number(cell) - n] = bit;
+    data.tape = tape;
+    m.slide = null;
+    m.slideCue = true;
+    return 0;
+  }
+  return m.slide;
+}
+
 function driveTuring(t, c, out, info) {
   const data = info?.data;
   if (!data) return;
   const E = TM.E;
   const s = since(c.go, E);
   const m = data.m;
+  const slid = tmHands(data, info, t, s >= 0 || !!data.run);
+  if (m.flipCue || m.slideCue) {
+    out.cues.push({ voice: m.flipCue ? "clack" : "click", f: m.flipCue ? 520 : 2400, decay: 0.3, vol: 0.5 }); // prettier-ignore
+    m.flipCue = m.slideCue = false;
+  }
   // A new tap starts a run from the tape as it rests; a tap during a run
   // finishes the old one first.
   if (s >= 0 && (m.lastS === undefined || m.lastS < 0 || s < m.lastS)) {
@@ -655,6 +712,7 @@ function driveTuring(t, c, out, info) {
   if (s < 0 && data.run) tmCommit(data);
   m.lastS = s;
   const pose = tmPose(data, data.run ? s : -1);
+  if (slid !== null && slid !== undefined) pose.P = slid;
   // The tiles: each slot shows the cell that is in its stretch of the tape.
   out.tokens = [];
   for (let j = 0; j < TM.slots; j++) {
@@ -1041,11 +1099,82 @@ function deShowEq(eq) {
     .slice(0, 28);
 }
 
+// Lane Hands-on H5: where the crank turns (as built: x 0.98 + 0.1, one
+// pitch up), and the share of a turn of the engine a crank angle makes (the
+// inverse of the turn's own crank, TAU * ease((s − 0.05) / 3.65)).
+const DE_CRANK = [1.08, 0.02 + 0.13, 0];
+// (The crank's arm turns at this x, the middle of what a finger circles.)
+const DE_HUB = [1.16, 0.02 + 0.13, 0];
+function deTimeOf(q) {
+  let lo = 0;
+  let hi = 1;
+  for (let i = 0; i < 24; i++) {
+    const mid = (lo + hi) / 2;
+    if (ease(mid) < q) lo = mid;
+    else hi = mid;
+  }
+  return 0.05 + 3.65 * lo;
+}
+
+// The crank's turn by hand (radians, forward; null before any): the
+// finger's angle round the crank's hub as seen along the view, unwound, in
+// the crank's forward sense (it turns about −x).
+function deCrankHand(m, info) {
+  const f = info?.hands?.finger;
+  if (!f) {
+    m.lastA = null;
+    return m.crankAng ?? null;
+  }
+  const d = f.dir;
+  const t = d[0] * (DE_HUB[0] - f.origin[0]) + d[1] * (DE_HUB[1] - f.origin[1]) + d[2] * (DE_HUB[2] - f.origin[2]); // prettier-ignore
+  const r = [0, 1, 2].map((i) => f.origin[i] + d[i] * t - DE_HUB[i]);
+  const u = [-d[2], 0, d[0]]; // right on screen (d × up)
+  const v = [u[1] * d[2] - u[2] * d[1], u[2] * d[0] - u[0] * d[2], u[0] * d[1] - u[1] * d[0]]; // up
+  const ru = r[0] * u[0] + r[2] * u[2];
+  const rv = r[0] * v[0] + r[1] * v[1] + r[2] * v[2];
+  if (Math.hypot(ru, rv) < 0.03) return m.crankAng ?? null; // (too near the hub to say)
+  const a = Math.atan2(rv, ru);
+  m.crankAng ??= 0;
+  if (m.lastA !== null && m.lastA !== undefined) {
+    let da = a - m.lastA;
+    da -= TAU * Math.round(da / TAU);
+    // Counterclockwise as seen is the crank's turn about the view; about −x
+    // that is forward when the view looks along +x, else backward.
+    m.crankAng += da * Math.sign(-d[0] || 1) * -1;
+  }
+  m.lastA = a;
+  return m.crankAng;
+}
+
 function driveDifference(t, c, out, info) {
   const data = info?.data;
   if (!data) return;
   const m = data.m;
   const go = c.go ?? 0;
+  // Hands-on: the crank turned by hand drives a turn of its own (a ratchet:
+  // never back), unless a tap's turn is running.
+  const hv = deCrankHand(m, info);
+  if (hv !== null && hv !== undefined && !(data.turn && !data.turn.hand)) {
+    m.handBase ??= 0;
+    if (hv < m.handBase) m.handBase = hv;
+    const q = (hv - m.handBase) / TAU;
+    if (q > 1e-3 && !data.turn) {
+      data.turn = deTurn(data.st);
+      data.turn.hand = true;
+      m.cue = -1;
+    }
+    // (Sent home by ↺ or a tap before a turn was through: none.)
+    if (data.turn?.hand && q <= 1e-3) data.turn = null;
+    if (data.turn?.hand) {
+      if (q >= 1) {
+        data.st = data.turn.next;
+        data.turn = null;
+        m.handBase += TAU;
+      } else data.clock = deTimeOf(q);
+      // (Shown below as a tap's turn is, at that time.)
+      m.handS = data.turn ? data.clock : -1;
+    }
+  }
   // Each tap queues a turn; the engine turns them one after another. A tap
   // is a new tap number, or the pulse jumping back up.
   const n = info.tap?.n;
@@ -1061,7 +1190,8 @@ function driveDifference(t, c, out, info) {
     m.cue = -1;
   }
   let s = -1;
-  if (data.turn) {
+  if (data.turn?.hand) s = m.handS;
+  else if (data.turn) {
     data.clock += dt;
     s = data.clock;
     // The last frames of the tap: finish every queued turn.
@@ -1663,7 +1793,27 @@ function driveEnigma(t, c, out, info) {
   const g0 = enLampPos("A");
   const lampAt = pose && pose.lamp >= 0 ? enLampPos(AZ[pose.lamp]) : g0;
   out.tokens[26] = { offset: [lampAt[0] - g0[0], 0, lampAt[2] - g0[2]], visible: pose && pose.lamp >= 0 ? 1 : 0 }; // prettier-ignore
-  const pos = pose ? pose.rotors : data.rest;
+  let pos = pose ? pose.rotors : data.rest;
+  // Hands-on: rotors turned by hand show the turn; settled on a letter,
+  // it becomes where the rotors stand and where the next message starts.
+  const hv = [0, 1, 2].map((i) => info?.hands?.joint?.(`rotor${i}`));
+  if (hv.some((v) => v !== null && v !== undefined)) {
+    m.vc ||= [0, 0, 0];
+    const turn = [0, 0, 0];
+    hv.forEach((v, i) => {
+      if (v === null || v === undefined) return;
+      const d = v - m.vc[i];
+      const steps = Math.round(d / EN.step);
+      if (steps && Math.abs(d - steps * EN.step) < 0.01 && !data.run && !data.key) {
+        const w = (p) => (((p + steps) % 26) + 26) % 26;
+        data.start = data.start.map((p, j) => (j === i ? w(p) : p));
+        data.rest = data.rest.map((p, j) => (j === i ? w(p) : p));
+        m.vc[i] += steps * EN.step;
+        out.cues.push({ voice: "click", f: 3000, decay: 0.2, vol: 0.3 });
+      } else turn[i] = d / EN.step;
+    });
+    pos = (pose ? pose.rotors : data.rest).map((p, i) => p + turn[i]);
+  }
   ["rotorL", "rotorM", "rotorR"].forEach((nm, i) => (out.parts[nm] = { angle: pos[i] * EN.step }));
   // The lamp's glow and the turned rotors are sorted again where they are.
   const key = pose ? `${pose.lamp}:${pos.map((v) => Math.round(v * 4)).join(",")}` : `rest:${data.rest}`; // prettier-ignore
@@ -2030,8 +2180,26 @@ export const RECIPES = {
       },
       shown: () => TM_SHOWN.label,
     },
-    controls: [{ key: "go", label: "Run", type: "pulse", ease: TM.E }],
-    action: { key: "go", label: "Run the program" },
+    // (flip: lane Hands-on H5, a tile flipped by hand.)
+    controls: [
+      { key: "go", label: "Run", type: "pulse", ease: TM.E },
+      { key: "flip", label: "Flip", type: "pulse", ease: 0.3 },
+    ],
+    action: {
+      key: "go",
+      label: "Run the program",
+      quiet: ["flip"],
+      // Hands-on (lane Hands-on H5): a tap on a tile flips it, 0 to 1 and
+      // back (a tap elsewhere runs the program).
+      at: (p) => (TM_HANDS.on && p && Math.abs(p[1]) < TM.h / 2 + 0.03 && Math.abs(p[2]) < 0.08 && Math.abs(p[0]) < 1.45 ? { key: "flip", pick: Math.round(p[0] / TM.pitch) } : "go"), // prettier-ignore
+    },
+    // Hands-on (lane Hands-on H5): drag the tape along by hand; let go and it
+    // settles on a whole tile, so the head reads a new cell. Pressed
+    // anywhere else, the machine is picked up as before.
+    hands: {
+      touch: true,
+      follow: { center: [0, 0, 0], at: (p) => Math.abs(p[1]) < TM.h / 2 + 0.03 && Math.abs(p[2]) < 0.08 && Math.abs(p[0]) < 1.45 }, // prettier-ignore
+    },
     drive: driveTuring,
     build: buildTuring,
   },
@@ -2051,6 +2219,15 @@ export const RECIPES = {
     },
     controls: [{ key: "go", label: "Turn the crank", type: "pulse", ease: DE.E }],
     action: { key: "go", label: "Turn the crank" },
+    // Hands-on (lane Hands-on H5): turn the crank by circling round it with
+    // a finger (as you see it, from any side): each full turn of your hand
+    // is one turn of the engine, at your pace (the wheels click round,
+    // carries snap, the bell rings); its ratchet never lets it turn back.
+    // Pressed anywhere else, the engine is picked up as before.
+    hands: {
+      touch: true,
+      follow: { center: DE_CRANK, at: (p) => Math.hypot(p[0] - DE_CRANK[0] - 0.1, p[1] - DE_CRANK[1], p[2] - DE_CRANK[2]) < 0.34 }, // prettier-ignore
+    },
     drive: driveDifference,
     build: buildDifference,
   },
@@ -2137,6 +2314,26 @@ export const RECIPES = {
       height: EN_PAD.h,
       version: () => `${EN_PAD.live?.line || ""}|${(EN_PAD.live?.view || []).join("|")}`,
       draw: (g) => enDrawPad(g, EN_PAD.live?.view || ["", "", ""], EN_PAD.live?.line || ""),
+    },
+    // Hands-on (lane Hands-on H5): set the rotors by hand, as an operator
+    // did from the day's key sheet: drag up or down on a rotor's ring and it
+    // turns, clicking letter by letter; where you leave it is where the
+    // next message starts. (Each rotor has an unseen handle on a dial, a
+    // token no splat uses; the drive turns the rotor with it.)
+    hands: {
+      touch: true,
+      joints: () =>
+        EN_ROTOR_X.map((x, i) => ({
+          type: "dial",
+          token: 30 + i,
+          name: `rotor${i}`,
+          pivot: [x, EN_ROTOR_C[1], EN_ROTOR_C[2]],
+          axis: [1, 0, 0],
+          detents: 26,
+          drag: 2.5,
+          pos: [x, EN_ROTOR_C[1], EN_ROTOR_C[2] + EN.rotorR],
+          pick: [0.085, EN.rotorR, 0.12],
+        })),
     },
     drive: driveEnigma,
     build: buildEnigma,
