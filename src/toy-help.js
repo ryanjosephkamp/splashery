@@ -771,9 +771,10 @@ export const TOY_HELP = {
       "A sapphire is the mineral corundum, the same as ruby, but colored blue by iron and titanium. Sapphires come in many colors, from yellow to pink, but blue is the best known. They are very hard, so they last a long time in rings.\n\nSome sapphires show a star of six rays, because tiny needles of another mineral inside reflect the light. The star is called an asterism, and it moves as the stone or the light moves. Tap it to catch the star: its rays spread out from a bright center, it glides across the top, and the rays draw back in at the far side.",
   },
   "quartz-cluster": {
-    howTo: "Tap it to light the crystal points one by one.",
+    howTo:
+      "Tap it to light the crystal points one by one. Hands-on: snap a point off, put it back.",
     about:
-      "Quartz is one of the most common minerals in the Earth's crust, made of silicon and oxygen. Its crystals grow as six-sided columns with pointed tips, often many together in a cluster like this one. Clear quartz is also called rock crystal.\n\nTap it and the ten points light up one by one, from left to right, each glowing from inside with a glint at its tip and a rising chime. A tiny sliver of quartz shakes at a very steady beat when electricity runs through it, so it keeps time in many watches and clocks.",
+      "Quartz is one of the most common minerals in the Earth's crust, made of silicon and oxygen. Its crystals grow as six-sided columns with pointed tips, often many together in a cluster like this one. Clear quartz is also called rock crystal.\n\nTap it and the ten points light up one by one, from left to right, each glowing from inside with a glint at its tip and a rising chime. A tiny sliver of quartz shakes at a very steady beat when electricity runs through it, so it keeps time in many watches and clocks. With ✋ Hands-on on, snap one of the big points off the rock, then bring it back to its place: it clicks in again.",
   },
   opal: {
     howTo: "Tap it to tilt it and roll flashes of color across it. Pick an opal in the Toy tab.",
