@@ -73,7 +73,7 @@ Proposals below are suggestions; the owner may change them.
   Hurricane, Relief map, Living city, Stork migration, Earthquakes, Airport X-ray scanner, How CT
   works, Walnut CT scan, MRI of a fruit, Electron microscope, Thermal camera, Screen, Shardball,
   Longtail, Grain Garden, Page Breaker, Strata, Volley Table, Stone Belt, Soft Landing, Night Owl
-  Pinball, Cast a Shadow, Photo Dash, Note Rider, Data in 3D.
+  Pinball, Cast a Shadow, Photo Dash, Note Rider, Night sky, Data in 3D.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
@@ -1371,6 +1371,9 @@ Proposals below are suggestions; the owner may change them.
     ball lit from the Sun's side, so its real phase) and the planets placed by JPL's formulas. The
     sky turns with time; daylight and twilight fade the stars out faintest first. A tap names a star
     or planet with a ring around it and a few facts beside the stage.
+  - Improved: Fix10 (the walkthrough of October 9, 2026): a sharp skyline by day (the day ground at
+    the night's density, and no ground splat's edge crosses the skyline), and a drag that turns with
+    the finger (an engine change: from inside, a drag turns as far as it spans on screen).
   - Sound: One soft, low tine and a faint breath as the ring marks it.
 
 ## Tiny (22)
@@ -2422,7 +2425,8 @@ Proposals below are suggestions; the owner may change them.
   - Improved: Math r2: new toy (labs), the 5-cell. The corners are true 4D points turned in the
     planes of x and w and of y and w and seen in perspective from 4D; the edges stay straight
     between them. A tap rolls the shape one whole turn through the fourth dimension (about 5 s) and
-    home. Seven color themes.
+    home. Seven color themes. Fix10: a thumbnail drawn at four times the size (its thin edges showed
+    only in part) and a closer camera, so it looks as big as the other 4D shapes.
   - Sound: Like the hypercube: a slow rush as it rolls out and again as it rolls home, over a low
     chord in its own key.
 - **16-cell** (`sixteen-cell`). Now: tap: Roll through 4D. Plan: keep.
@@ -3630,7 +3634,9 @@ Proposals below are suggestions; the owner may change them.
     in src/volume/view.js on the Imaging lane's volume kind. Samples: the CWI walnut (CC BY 4.0) and
     a 12.8 mm gar larva's micro-CT by Brian Metscher (Zenodo 19021581, CC BY 4.0;
     tools/vol-gar.mjs).
-  - Sound: A soft click like a console's dial, then a short low tone as the new window settles.
+  - Sound: Fix10 (the walkthrough of October 9, 2026: no click and no rising hum): a tap sounds like
+    a film slid onto a lightbox, a papery slip and a soft settle. Play has its own dark, soft rush
+    for each pass of the cut, down and back up. The drag is silent.
 - **Data in 3D** (`data-in-3d`). Now: tap: Drop and rise. Plan: new effect (E6).
   - Owner: Push Plan S5 (the owner's yes, October 5, 2026), lane Data and climate.
   - Effect: A CSV or TSV opened on the device becomes a 3D scatter, bars or a surface with axes,
@@ -3802,10 +3808,13 @@ Proposals below are suggestions; the owner may change them.
     equation, lit so the crests catch the light: a plane wave through two slits (bright fringes on
     dotted lines where d·sin θ = m·λ), one slit, one or two dippers, or still water. The tap drops a
     pebble where it lands: it falls in and rings spread, bounce off the barrier and die in the
-    beaches. Bars on the back wall graph the waves' strength.
+    beaches. Bars on the back wall graph the waves' strength. Fix10 (the walkthrough of October 9,
+    2026: the pebble was hard to see): a 2.4 cm pale stone falls 10 cm in 0.45 s, its shadow on the
+    water tightening under it; it sinks for a moment as it lands, with a dent to match its size.
   - Improved: Optics: new toy (labs). Finite differences at a Courant number of 0.5, absorbing
     beaches; tests check the fringes against d·sin θ = m·λ, the single slit's spreading, the wave
-    speed and the beaches (docs/evidence/ripple-tank.json).
+    speed and the beaches (docs/evidence/ripple-tank.json). Fix10: the bigger, paler pebble with its
+    shadow, sink and dent; its drip moved to the landing.
   - Sound: The pebble's plop as it lands, and the soft lap of its rings.
 - **Light bench** (`light-bench`). Now: tap: Change the light. Plan: keep.
   - Owner: Push Plan S9 (yes), October 5, 2026: a light bench with rays traced through real glass
@@ -3955,20 +3964,27 @@ Proposals below are suggestions; the owner may change them.
     slice, like a scanner's), T2-weighted gray with a little scanner noise, inside a faint outline
     of the whole fruit. One slice shows at a time (a slab of the engine's cutting plane); a drag
     scrolls through them and the tap plays through all of them, front to back, and comes back.
+    Fix10: the fruit holds still and face-on; one drag over its height runs through every slice, a
+    Slice slider over the stage does the same, and a drag or the slider always takes over from the
+    play; a brighter outline and a thin ring round each slice.
   - Improved: Imaging: new toy. Imaging r2: sharper and less grainy (finer slices, lighter noise); a
-    Vision option (gray, night vision, infrared). Polish (r3): finer splats.
+    Vision option (gray, night vision, infrared). Polish (r3): finer splats. Fix10 (the walkthrough
+    of October 9, 2026): the slice control (no lock-up, a Slice slider, no turning), a brighter
+    outline and slice rings.
   - Sound: An MRI scanner's knocking as it steps through the slices.
-- **Electron microscope** (`electron-microscope`). Now: tap: Zoom in a step (the third goes back
-  out). Plan: keep.
+- **Electron microscope** (`electron-microscope`). Now: tap: Zoom in a step on the object you tap
+  (the third tap goes back out). Plan: keep.
   - Owner: The owner's imaging idea of October 3, 2026: an electron microscope with pollen, a diatom
     and a snowflake (lane Imaging; labs only).
   - Effect: Kit-built pollen grains (spiny, netted and winged), diatoms (a centric one with rings of
     pores and a pennate one) or a rimed snowflake on carbon tape, shaded as a scanning electron
     microscope sees them: gray, bright edges, a shadow away from the detector, a little grain. Each
     tap glides the view face-on to the next zoom step (the field, one grain or arm, its surface);
-    the third goes back out.
+    the third goes back out. Fix10: a tap picks the object under it (each pollen grain, the centric
+    or the pennate diatom), so a tap on another object starts that one's zoom.
   - Improved: Imaging: new toy. Imaging r2: sharper (the labs sharp kernel, twice the splats, finer
-    splats); a Vision option (gray, night vision, infrared). Polish (r3): finer splats.
+    splats); a Vision option (gray, night vision, infrared). Polish (r3): finer splats. Fix10 (the
+    walkthrough of October 9, 2026): zoom on any object, each with its own two steps.
   - Sound: The stage motor's two soft steps and a low vacuum hum.
 - **Thermal camera** (`thermal-camera`). Now: tap: Thermal camera on or off. Plan: keep.
   - Owner: The owner's imaging idea of October 3, 2026: a thermal camera with a cup of hot tea

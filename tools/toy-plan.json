@@ -1549,7 +1549,7 @@
       "owner": "The owner's Math notes (BACKLOG.md, Math r2): other 4D shapes beside the hypercube, and color themes.",
       "effect": "Rolls one whole turn through the fourth dimension and comes home.",
       "sound": "Like the hypercube: a slow rush as it rolls out and again as it rolls home, over a low chord in its own key.",
-      "improved": "Math r2: new toy (labs), the 5-cell. The corners are true 4D points turned in the planes of x and w and of y and w and seen in perspective from 4D; the edges stay straight between them. A tap rolls the shape one whole turn through the fourth dimension (about 5 s) and home. Seven color themes."
+      "improved": "Math r2: new toy (labs), the 5-cell. The corners are true 4D points turned in the planes of x and w and of y and w and seen in perspective from 4D; the edges stay straight between them. A tap rolls the shape one whole turn through the fourth dimension (about 5 s) and home. Seven color themes. Fix10: a thumbnail drawn at four times the size (its thin edges showed only in part) and a closer camera, so it looks as big as the other 4D shapes."
     },
     "sixteen-cell": {
       "v": "keep",
@@ -2683,7 +2683,8 @@
       "v": "new",
       "owner": "Push Plan S15 (the owner's yes, October 4, 2026), lane Night sky, October 5, 2026.",
       "effect": "The sky over a place and time, seen from the ground: about 5,000 stars to magnitude 6 (HYG) sized by brightness and colored by temperature, constellation lines, the Sun, the Moon (a ball lit from the Sun's side, so its real phase) and the planets placed by JPL's formulas. The sky turns with time; daylight and twilight fade the stars out faintest first. A tap names a star or planet with a ring around it and a few facts beside the stage.",
-      "sound": "One soft, low tine and a faint breath as the ring marks it."
+      "sound": "One soft, low tine and a faint breath as the ring marks it.",
+      "improved": "Fix10 (the walkthrough of October 9, 2026): a sharp skyline by day (the day ground at the night's density, and no ground splat's edge crosses the skyline), and a drag that turns with the finger (an engine change: from inside, a drag turns as far as it spans on screen)."
     },
     "cryoem-map": {
       "v": "new",
@@ -2898,9 +2899,9 @@
     "ripple-tank": {
       "v": "keep",
       "owner": "Push Plan S9 (yes), October 5, 2026: a ripple tank with a real wave equation (lane Optics; labs only).",
-      "effect": "A water surface of splats, one per cell of a 216 × 216 grid solving the 2D wave equation, lit so the crests catch the light: a plane wave through two slits (bright fringes on dotted lines where d·sin θ = m·λ), one slit, one or two dippers, or still water. The tap drops a pebble where it lands: it falls in and rings spread, bounce off the barrier and die in the beaches. Bars on the back wall graph the waves' strength.",
+      "effect": "A water surface of splats, one per cell of a 216 × 216 grid solving the 2D wave equation, lit so the crests catch the light: a plane wave through two slits (bright fringes on dotted lines where d·sin θ = m·λ), one slit, one or two dippers, or still water. The tap drops a pebble where it lands: it falls in and rings spread, bounce off the barrier and die in the beaches. Bars on the back wall graph the waves' strength. Fix10 (the walkthrough of October 9, 2026: the pebble was hard to see): a 2.4 cm pale stone falls 10 cm in 0.45 s, its shadow on the water tightening under it; it sinks for a moment as it lands, with a dent to match its size.",
       "sound": "The pebble's plop as it lands, and the soft lap of its rings.",
-      "improved": "Optics: new toy (labs). Finite differences at a Courant number of 0.5, absorbing beaches; tests check the fringes against d·sin θ = m·λ, the single slit's spreading, the wave speed and the beaches (docs/evidence/ripple-tank.json)."
+      "improved": "Optics: new toy (labs). Finite differences at a Courant number of 0.5, absorbing beaches; tests check the fringes against d·sin θ = m·λ, the single slit's spreading, the wave speed and the beaches (docs/evidence/ripple-tank.json). Fix10: the bigger, paler pebble with its shadow, sink and dent; its drip moved to the landing."
     },
     "light-bench": {
       "v": "keep",

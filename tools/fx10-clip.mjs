@@ -14,6 +14,7 @@
 //   { "look": [[x, y], [x, y]], "secs": 0.8 }   a drag on the view, in screen fractions
 //   { "slider": ["name", value], "secs": 1 }    moves the slider over the stage (out.slider) to value
 //   { "control": ["key", value] }                sets a control
+//   { "sky": { city, time, speed } }              sets the night sky's place and time
 // Writes <out-dir>/<name>.mp4 and, with --strip, <name>-strip.png.
 
 import { chromium } from "@playwright/test";
@@ -116,7 +117,15 @@ const { count, strip } = await page.evaluate(
         finger = null;
       } else if (s.act) player.act();
       else if (s.control) player.motion.setControl(...s.control);
-      else if (s.slider) {
+      else if (s.sky) {
+        // The night sky's place and time (its panel's own setter), then a moment to redraw.
+        await window.__splashery.sky.set(s.sky);
+        await new Promise((r) => setTimeout(r, 6000));
+        for (let i = 0; i < 4; i++) {
+          pending = 0.5;
+          await stage.captureFrame();
+        }
+      } else if (s.slider) {
         // The slider over the stage (a drive's out.slider), moved to `to` (0 to 1).
         const [, to] = s.slider;
         const from = player.motion.out?.slider?.value ?? 0;
