@@ -140,7 +140,7 @@ Written by the Operator on October 8, 2026, for this cloud session (word for wor
 
 ## State
 
-READY (October 9, 2026, about 06:35 UTC). Every current hh5 card is marked "good" by the owner (41
+READY (October 9, 2026, about 06:35 UTC). Every current hh5 card is marked "good" by the owner (34
 cards, among them the eight `-r2` fixes of his first marks: frog, ladybug, lungs, pearl, Platonic
 solids, Pythagoras proof, Sierpinski tetrahedron, torus knot). The engine gained `limits(at)` and
 `hands.knock: false` for those fixes. All seven PRs wait only for the Operator's merge (engine #441
