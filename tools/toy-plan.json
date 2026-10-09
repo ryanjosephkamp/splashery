@@ -997,96 +997,97 @@
       "owner": "Shake it and leaves come out.",
       "effect": "Shakes and leaves flutter down.",
       "sound": "A leafy rustle as the crown rocks, then soft rustles as the loose leaves land (synthesized; no flutter or patter); real CC0 recordings now (oak-leaves.mp3), with the synthesized sound as a fallback.",
-      "improved": "E4: a tap shakes the tree: the crown rocks on its trunk and forty leaves come loose one after another, each fluttering down on its own swinging path to lie on the grass; then they wither and fresh leaves open in their places (about 6.5 s). In winter a few dead brown leaves still cling to the twigs, and those fall."
+      "improved": "E4: a tap shakes the tree: the crown rocks on its trunk and forty leaves come loose one after another, each fluttering down on its own swinging path to lie on the grass; then they wither and fresh leaves open in their places (about 6.5 s). In winter a few dead brown leaves still cling to the twigs, and those fall. Hands-on H2 (Hands-on): Shake the trunk (a quick back-and-forth drag on it) and the leaves fall and settle on the ground."
     },
     "pine": {
       "v": "keep",
       "owner": "Christmas lights and a star appear.",
       "effect": "Shakes off a dusting of snow (approved instead of lights, which the decorated tree already has).",
       "sound": "The needles rustle as it rocks, with a soft jingle of sleigh bells; the snow's hiss and thump stay (no chime).",
-      "improved": "E4: a tap shakes off a dusting of snow: the tree rocks and the snow on its boughs drops a pair of tiers at a time, from the top down, in a puff of powder, lies on the ground and melts (about 5 s). On a snowless day a quick shower dusts the boughs first; with Snow on, fresh snow settles on them again afterwards."
+      "improved": "E4: a tap shakes off a dusting of snow: the tree rocks and the snow on its boughs drops a pair of tiers at a time, from the top down, in a puff of powder, lies on the ground and melts (about 5 s). On a snowless day a quick shower dusts the boughs first; with Snow on, fresh snow settles on them again afterwards. Hands-on H2 (Hands-on): Shake the trunk and the snow slides off the branches."
     },
     "palm": {
       "v": "keep",
       "owner": "Tap it and the coconuts fall.",
       "effect": "The coconuts fall and bounce, then regrow.",
       "sound": "Two coconut bonks.",
-      "improved": "E4: a tap shakes the crown and the five coconuts (now hanging in a bunch you can see) drop one after another, thump into the sand, bounce twice and roll to a stop, each with its own bonk; new coconuts swell in the crown while the fallen ones are carried off (about 5.5 s)."
+      "improved": "E4: a tap shakes the crown and the five coconuts (now hanging in a bunch you can see) drop one after another, thump into the sand, bounce twice and roll to a stop, each with its own bonk; new coconuts swell in the crown while the fallen ones are carried off (about 5.5 s). Hands-on H2 (Hands-on): Pull a coconut and it snaps off into your hand; drop it and it bounces and rolls on the sand; reset puts them back."
     },
     "cherry-blossom": {
       "v": "keep",
       "owner": "Really cool already. Maybe all the blossoms fall off when touched.",
       "effect": "All the petals fall in a flurry, then it blooms again.",
       "sound": "The opening of the traditional \"Sakura Sakura\" on a plucked koto-like string, over a faint rustle of petals (no wind).",
-      "improved": "C2: a new tap action shakes the tree: the petals fall in a heavy flurry, the branches go bare, then it blooms again (about 4.5 s)."
+      "improved": "C2: a new tap action shakes the tree: the petals fall in a heavy flurry, the branches go bare, then it blooms again (about 4.5 s). Hands-on H2 (Hands-on): Shake the trunk and the petals flutter down."
     },
     "maple": {
       "v": "keep",
       "owner": "Same kind of thing as the cherry blossom.",
       "effect": "Leaves swirl down in a spiral gust (different from the cherry's gentle fall).",
       "sound": "A soft gust and the leaves rustling as they swirl and land (no crunching clicks, much less wind).",
-      "improved": "E4: a tap sends a whirling gust: the crown leans into it and forty leaves are torn off and carried round the tree in a widening spiral, tumbling, before they settle in a ring on the grass (the cherry's petals just drift down); then they wither and fresh leaves open (about 7 s)."
+      "improved": "E4: a tap sends a whirling gust: the crown leans into it and forty leaves are torn off and carried round the tree in a widening spiral, tumbling, before they settle in a ring on the grass (the cherry's petals just drift down); then they wither and fresh leaves open (about 7 s). Hands-on H2 (Hands-on): Shake the trunk and the leaves spin down like real maple leaves."
     },
     "bonsai": {
       "v": "keep",
       "owner": "Maybe shrink or grow.",
       "effect": "Grows a new branch, then the scissors snip it back.",
       "sound": "The branch creaks and its leaves rustle as it grows, the scissors open and snip, and the cut piece drops onto the moss; real CC0 recordings now (bonsai-snip.mp3), with the synthesized sound as a fallback.",
-      "improved": "E4: a tap grows a new branch out of the trunk with a pad of leaves on its end; bonsai scissors slide in, open and snip it off at the cut, the piece tips onto the moss and is cleared away, and the stub heals over (about 5 s)."
+      "improved": "E4: a tap grows a new branch out of the trunk with a pad of leaves on its end; bonsai scissors slide in, open and snip it off at the cut, the piece tips onto the moss and is cleared away, and the stub heals over (about 5 s). Hands-on H2 (Hands-on): Pull a branch's foliage and it bends after your finger; let go and it springs back."
     },
     "willow": {
       "v": "keep",
       "owner": "Pick anything.",
       "effect": "The long branches sway in a wave like a breeze passing.",
       "sound": "The same breath of wind, quieter, with the strands rustling.",
-      "improved": "E4: a tap sends a breeze across the tree from the left: the hanging strands swing away with it a curtain at a time (they bend, most at their tips), swing back and settle, and the crown leans a little (about 5.5 s). The strands also sway gently at rest."
+      "improved": "E4: a tap sends a breeze across the tree from the left: the hanging strands swing away with it a curtain at a time (they bend, most at their tips), swing back and settle, and the crown leans a little (about 5.5 s). The strands also sway gently at rest. Hands-on H2 (Hands-on): Brush the hanging branches and they swing after your finger, then sway and settle."
     },
     "sunflower": {
       "v": "keep",
       "effect": "The head turns to face the sun and petals open wide.",
       "sound": "A warm low swell as the sun comes out (no bouncing tone) and the petals rustling open.",
-      "improved": "E4: a tap brings out the sun at the top left: the head turns up to face it and all 48 ray petals spread wide open, each turning about its root; then the sun goes in, the head turns back and the petals lift again (about 5.5 s). The head nods gently at rest."
+      "improved": "E4: a tap brings out the sun at the top left: the head turns up to face it and all 48 ray petals spread wide open, each turning about its root; then the sun goes in, the head turns back and the petals lift again (about 5.5 s). The head nods gently at rest. Hands-on H2 (Hands-on): Push the head and it nods on its stem, petals and all; let go and it springs back and wobbles."
     },
     "rose": {
       "v": "keep",
       "effect": "Blooms open further, a petal drops.",
       "sound": "As before, plus the daisy's soft tap when the loose petal lands on the grass (Sound C, October 2, 2026).",
-      "improved": "E4: a tap opens the bloom further (every petal turns out about its root, the outer ones most) and the outer petal facing you comes loose and flutters down to lie on the grass; the bloom closes up again, the fallen petal withers and a new one fills its place (about 5.5 s)."
+      "improved": "E4: a tap opens the bloom further (every petal turns out about its root, the outer ones most) and the outer petal facing you comes loose and flutters down to lie on the grass; the bloom closes up again, the fallen petal withers and a new one fills its place (about 5.5 s). Hands-on H2 (Hands-on): Pull the petals off one by one; each drifts down, turning, and lands on the ground; reset puts them back."
     },
     "dandelion": {
       "v": "keep",
       "owner": "Really cool effect; keep it.",
-      "sound": "Puff of breath."
+      "sound": "Puff of breath.",
+      "improved": "Hands-on H2 (Hands-on): Swipe back and forth across it and the seeds come loose and drift away."
     },
     "tulip": {
       "v": "keep",
       "effect": "Petals open wide to the sun, then close.",
       "sound": "Gentle pluck.",
-      "improved": "E4: a tap opens the three tulips wide to the sun one after another: each of the eighteen petals turns out about its root and shows the dark stamens and the pale pistil inside; then they close up again (about 5 s)."
+      "improved": "E4: a tap opens the three tulips wide to the sun one after another: each of the eighteen petals turns out about its root and shows the dark stamens and the pale pistil inside; then they close up again (about 5 s). Hands-on H2 (Hands-on): Push a tulip and it bends on its stem; let go and it springs back and sways."
     },
     "daisy": {
       "v": "keep",
       "effect": "Petals spin like a pinwheel (loves me, loves me not).",
       "sound": "Each petal's soft tap now lands with it: scheduled for the landing itself, so it stays in sync at any frame rate (Sound C, October 2, 2026).",
-      "improved": "E4: a tap spins the big head like a pinwheel, twice round (loves me, loves me not), and it flings off eight petals one after another, a tick each, which flutter down to the grass while the small heads bob; it slows to a stop, the fallen petals wither and new ones fill the gaps (about 5.5 s)."
+      "improved": "E4: a tap spins the big head like a pinwheel, twice round (loves me, loves me not), and it flings off eight petals one after another, a tick each, which flutter down to the grass while the small heads bob; it slows to a stop, the fallen petals wither and new ones fill the gaps (about 5.5 s). Hands-on H2 (Hands-on): Pull the petals off one by one (loves me, loves me not); each drifts down to the grass; reset puts them back."
     },
     "lotus": {
       "v": "keep",
       "effect": "The flower rises and opens on the water with ripples.",
       "sound": "Water drop and a bell.",
-      "improved": "E4: a tap folds the flower into a bud, lifts it out of the water on its stalk with a ring of light spreading over the water, and opens it wide up in the air, the outer petals first; then it sinks back onto its pad, open, with a second ring (about 6.5 s)."
+      "improved": "E4: a tap folds the flower into a bud, lifts it out of the water on its stalk with a ring of light spreading over the water, and opens it wide up in the air, the outer petals first; then it sinks back onto its pad, open, with a second ring (about 6.5 s). Hands-on H2 (Hands-on): Lift the flower off its leaf (the pond stays, and rings of ripples run out over it) and drop it back in: it splashes, dips under and bobs back up."
     },
     "mushroom": {
       "v": "keep",
       "effect": "Puffs a cloud of glowing spores.",
       "sound": "Soft puff.",
-      "improved": "E4: a tap bops the big cap: it dips and springs back, and a cloud of glowing spores puffs out from the gills and billows up and out, each spore on its own path, fading as it drifts (about 4 s)."
+      "improved": "E4: a tap bops the big cap: it dips and springs back, and a cloud of glowing spores puffs out from the gills and billows up and out, each spore on its own path, fading as it drifts (about 4 s). Hands-on H2 (Hands-on): Squeeze the cap and it gives under your finger, then springs back."
     },
     "fern": {
       "v": "keep",
       "effect": "The fronds unroll from fiddleheads.",
       "sound": "A soft leafy rustle and a gentle stem creak as each frond unrolls, and again as they roll back up (no sandy flutter).",
-      "improved": "E4: a tap unrolls the two fiddleheads in the middle into two new fronds: each is a chain of six pieces that straighten one joint after another from the base to the tip, their leaflets spreading as they open; they hold, then roll back up into fiddleheads (about 5.5 s)."
+      "improved": "E4: a tap unrolls the two fiddleheads in the middle into two new fronds: each is a chain of six pieces that straighten one joint after another from the base to the tip, their leaflets spreading as they open; they hold, then roll back up into fiddleheads (about 5.5 s). Hands-on H2 (Hands-on): Brush the fronds and they bend after your finger; let go and they spring back and sway."
     },
     "saguaro": {
       "v": "keep",
@@ -1107,14 +1108,14 @@
       "owner": "Good-looking but underwhelming; break apart.",
       "effect": "The scales open wide (as in dry weather) and seeds drift out.",
       "sound": "Woody creak.",
-      "improved": "E4, redone after the owner's review (\"the actual pieces of the pinecone must fall off\"): a tap opens the cone as in dry weather and six winged seeds spin down; then the 42 scales facing you break off one after another from the bottom up, tumble and land flat in a pile round the base, leaving the bare core with the stubs where they grew; they fly back up into place, top first, and the cone closes (about 7 s)."
+      "improved": "E4, redone after the owner's review (\"the actual pieces of the pinecone must fall off\"): a tap opens the cone as in dry weather and six winged seeds spin down; then the 42 scales facing you break off one after another from the bottom up, tumble and land flat in a pile round the base, leaving the bare core with the stubs where they grew; they fly back up into place, top first, and the cone closes (about 7 s). Hands-on H2 (Hands-on): Pull the scales off one by one; each snaps off at its root and drops; reset puts them back."
     },
     "acorn": {
       "v": "keep",
       "owner": "Should do something.",
       "effect": "The caps pop off and a sprout pokes out.",
       "sound": "Tiny pop.",
-      "improved": "E4: a tap pops the caps off: each flips through the air and lands upside down on the leaf, and a green sprout pokes out of each acorn and opens two tiny oak leaves; then the sprouts draw back in and the caps hop home (about 5 s)."
+      "improved": "E4: a tap pops the caps off: each flips through the air and lands upside down on the leaf, and a green sprout pokes out of each acorn and opens two tiny oak leaves; then the sprouts draw back in and the caps hop home (about 5 s). Hands-on H2 (Hands-on): Pull a cap off and put it back on: brought close to its acorn, it settles home."
     },
     "succulent": {
       "v": "keep",
@@ -1128,7 +1129,7 @@
       "owner": "Maybe it grows.",
       "effect": "Shoots grow tall very fast, segment by segment.",
       "sound": "Hollow wooden knocks.",
-      "improved": "E4: three young shoots sit on the ground. A tap makes them shoot up a section at a time, each new section sliding up out of the one below with a hollow knock, carrying the sheathed tip, and a tuft of leaves opens at the top; later they sink back down (about 5.5 s)."
+      "improved": "E4: three young shoots sit on the ground. A tap makes them shoot up a section at a time, each new section sliding up out of the one below with a hollow knock, carrying the sheathed tip, and a tuft of leaves opens at the top; later they sink back down (about 5.5 s). Hands-on H2 (Hands-on): Pull a stalk and it bends after your finger; let go and it sways back and forth and settles."
     },
     "rocks": {
       "v": "keep",
@@ -1142,7 +1143,7 @@
       "owner": "Maybe fish eat it; pick something.",
       "effect": "Fish swim in and nibble; the kelp sways away.",
       "sound": "Underwater bubbles.",
-      "improved": "E4: a tap brings three little fish swimming in from the left; each noses up to a blade and takes a few nibbles, and the kelp sways away from them, the nearest stalks first, then swings back as the fish swim off to the right (about 5.5 s). The kelp also sways gently at rest."
+      "improved": "E4: a tap brings three little fish swimming in from the left; each noses up to a blade and takes a few nibbles, and the kelp sways away from them, the nearest stalks first, then swings back as the fish swim off to the right (about 5.5 s). The kelp also sways gently at rest. Hands-on H2 (Hands-on): Push the fronds and they swing after your finger, then sway slowly in the water and drift back."
     },
     "ice-cream": {
       "v": "keep",
