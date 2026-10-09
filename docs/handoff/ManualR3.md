@@ -92,7 +92,11 @@ Model: Sonnet 5.5 (claude-sonnet-5-5), high effort. Lane record `ManualR3` on Ef
 
 October 9, 2026: parts 1 to 6 of the plan are written in `manual/index.html` and
 `manual/manual.css`; the PDF is reprinted at the end of the round (see "For the Operator" for the
-page count). Draft PR: see the Operator's list.
+page count). Draft PR #469. The PDF is 52 pages (was 44). The Operator's update of October 9 (20:15
+UTC) is in: the level map and the contents show all ten levels, and Levels 6 to 10 are headings with
+a "Coming in the next round" note each. "What else Splashery does now" stays in place; fitting it
+into the new levels is for the next round. Cards `man3-…` and the lane record `ManualR3` are on
+Effect review page 2.
 
 Done, by plan part:
 
@@ -112,7 +116,7 @@ Done, by plan part:
 4. **Corrections**: the grammar now has `[ ]` and `{ }` and arcsin, arccos, and arctan, with the
    real rule for a bare input; "Any field you leave out" rewritten; the cover's opening line gets
    the Sharp view note.
-5. **Structure**: a level map (Levels 1 to 5, and "More levels are coming."); a numbered References
+5. **Structure**: a level map (Levels 1 to 10; 6 to 10 are placeholders); a numbered References
    section (10 entries, cited where used; Further reading unchanged); every link opens in a new tab;
    Figures 2 and 3 redrawn 440 units wide (were 360) and shown up to 560 px wide on the web; "Run it
    yourself" has a prompt for a coding assistant.
