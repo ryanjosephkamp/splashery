@@ -1408,13 +1408,17 @@ Proposals below are suggestions; the owner may change them.
   - Improved: E3: binary fission: the rod pinches in at the middle as a new wall closes across it,
     its DNA and ribosomes split between the halves, and the two daughter cells come apart with a
     little hinge (the front one without flagella); then they slide back together and merge (5 s).
+    Hands-on H4: in Hands-on, pull its two ends apart: it stretches and pinches in at the middle;
+    past the pinch it parts into two daughter cells, and let go early it snaps back whole.
   - Sound: Wet pop.
 - **Red blood cell** (`red-blood-cell`). Now: tap: Sickle and relax. Plan: keep.
   - Owner: Maybe turn into a sickle cell, if that is realistic.
   - Effect: Deforms into a sickle shape (as in sickle-cell disease at low oxygen), then relaxes back
     to a disc.
   - Improved: E3: sickling at low oxygen: the soft disc stretches and curls into a stiff crescent
-    with pointed ends, holds, then relaxes back into a disc with a little wobble (4 s).
+    with pointed ends, holds, then relaxes back into a disc with a little wobble (4 s). Hands-on H4:
+    in Hands-on, pinch and bend the soft disc; let go and it springs back to its round shape with a
+    wobble.
   - Sound: A soft, gel-like squish as it stretches into a crescent, and a soft wobble as it relaxes
     (no squeaks).
 - **Neuron** (`neuron`). Now: tap: Fire a signal. Plan: keep.
@@ -1443,7 +1447,8 @@ Proposals below are suggestions; the owner may change them.
   - Owner: Unzip even further, then zip back up. Almost perfect otherwise.
   - Effect: Unzips all the way, bases light up in pairs, then zips back.
   - Improved: C2: a tap unzips it almost to the foot, the bases light up in pairs as the fork
-    passes, then it zips back up (about 5.5 s).
+    passes, then it zips back up (about 5.5 s). Hands-on H4: in Hands-on, pull the two strands apart
+    near the top: they unzip pair by pair as far as you pull; let go and they zip back.
   - Sound: The real zipper timed to the strands: a quick zip as they fly open, a slower one as they
     close up (3.45 s) (Sound C, October 2, 2026).
 - **White blood cell** (`white-blood-cell`). Now: tap: Catch a bacterium. Plan: keep.
@@ -1451,7 +1456,9 @@ Proposals below are suggestions; the owner may change them.
   - Effect: Chases and engulfs a small bacterium (phagocytosis).
   - Improved: E3: phagocytosis: a bacterium swims in from the side, the cell leans out and reaches a
     cup of membrane round it, draws it inside and closes over it; granules gather on it and it glows
-    and shrinks away as it is digested (5.6 s).
+    and shrinks away as it is digested (5.6 s). Hands-on H4: in Hands-on, a bacterium waits beside
+    the cell; drag it near and let go: the cell leans after it, reaches a cup round it, pulls it in
+    and digests it.
   - Sound: A soft squishy membrane reaching out (no flutter clicks), the same gulp as it swallows,
     and a quieter fizz as it digests.
 - **Microglia** (`microglia`). Now: tap: Reach and sweep. Plan: keep.
@@ -1463,7 +1470,8 @@ Proposals below are suggestions; the owner may change them.
   - Effect: The glass shell glints and splits into two halves.
   - Improved: E3: a glint of light runs across the glass, then the shell parts into its two halves,
     opening like a clam from its far edge to show the golden chloroplasts inside, and closes again
-    (4.4 s).
+    (4.4 s). Hands-on H4: in Hands-on, lift the glass lid off its base like a pillbox's; bring it
+    back near and it clicks into place.
   - Sound: Glassy tink.
 - **Tardigrade** (`tardigrade`). Now: tap: Wiggle. Plan: keep.
   - Owner: Looks great; the effect is awesome.
@@ -1485,7 +1493,8 @@ Proposals below are suggestions; the owner may change them.
   - Effect: The sister chromatids pull apart at the centromere, then rejoin.
   - Improved: E3: anaphase: spindle fibres reach in from two bright poles to the kinetochores and
     pull the sister chromatids apart, each led by its centromere with its arms trailing; then they
-    come back together and the fibres let go (4.6 s).
+    come back together and the fibres let go (4.6 s). Hands-on H4: in Hands-on, pull the two sister
+    chromatids apart at the waist; let go and they spring back together.
   - Sound: A soft sticky tear as the chromatids pull apart, and a soft squish as they come back
     together (no string, no clacks).
 - **Mitochondrion** (`mitochondrion`). Now: tap: Make energy. Plan: keep.

@@ -176,6 +176,33 @@ for (const s of script) {
     for (let i = 0; i < 4; i++) await shoot();
     await page.evaluate(() => (window.__clip.finger = null));
   } else if (s.drag || s.to3) {
+    // Lane Hands-on H4: `fromPart: [name, [x, y, z]]` presses on a recipe
+    // point of a part where the drive shows it now (a turning sail).
+    if (s.fromPart)
+      s.from3 = await page.evaluate(([name, p]) => {
+        const m = window.__splashery.player.motion;
+        const i = (m.ctx?.parts || []).findIndex((d) => d.name === name);
+        const tf = m.ctx?.transform || { center: [0, 0, 0], scale: 1 };
+        const u = m.partsData;
+        if (i < 0 || !u) return p;
+        const o = i * 12;
+        const q = [u[o], u[o + 1], u[o + 2], u[o + 3]];
+        const pv = [u[o + 4], u[o + 5], u[o + 6]];
+        const off = [u[o + 8], u[o + 9], u[o + 10]];
+        const f = p.map((v, k) => (v - tf.center[k]) * tf.scale - pv[k]);
+        // f rotated by q (v' = v + 2w(q x v) + 2 q x (q x v))
+        const c1 = [
+          q[1] * f[2] - q[2] * f[1],
+          q[2] * f[0] - q[0] * f[2],
+          q[0] * f[1] - q[1] * f[0],
+        ];
+        const c2 = [
+          q[1] * c1[2] - q[2] * c1[1],
+          q[2] * c1[0] - q[0] * c1[2],
+          q[0] * c1[1] - q[1] * c1[0],
+        ];
+        return f.map((v, k) => (v + 2 * q[3] * c1[k] + 2 * c2[k] + pv[k] + off[k]) / tf.scale + tf.center[k]); // prettier-ignore
+      }, s.fromPart);
     const o = await page.evaluate((f) => (f ? window.__clip.screenOf(f) : window.__clip.middle()), s.from3 || null); // prettier-ignore
     const from = s.from ? [o[0] + s.from[0], o[1] + s.from[1]] : o;
     // `to3`: the drag's points as recipe points (where the finger aims).

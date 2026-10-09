@@ -106,14 +106,40 @@ What the first three Hands-on lanes learned today (October 8, 2026), so you don'
 
 ## State
 
-WORKING: Vehicles shelf built and tested; its clips are rendering (October 9, 2026). Next:
-Landmarks.
+READY (October 9, 2026, 18:40 UTC): the owner marked `hh4-tractor-r4` and `hh4-dna-r4` good, so
+every H4 card is good (33 toys). All six PRs (#439, #440, #442, #443, #444, #445) are ready for the
+Operator's batches; main (#457) and H2's #450 are merged in.
 
-- Engine PR #439 (`claude/lane-hands-h4-engine`): `hands.force` (a recipe's own push on its bodies,
-  each substep), `info.hands.piece(key)` with `hands.watch`, and a whole toy that floats (water or
-  air) can be pushed below where it stands.
-- Vehicles (`claude/lane-hands-h4-vehicles`, stacked on the engine branch): every line of the plan
-  but the bicycle's pedals (below).
+READY (October 9, 2026, 16:30 UTC): H2's #450 is merged into the engine (my `pieceState` version of
+`info.hands.piece()` kept; it covers H2's part-name lookup and fields), and the engine into each
+shelf branch (not up the stack, so the tractor's new wheels stay on vehicles). The owner's r3 notes
+are answered by `-r4` cards: the tractor's rear wheels remade (solid chevron lugs, a cream dished
+rim, one-piece fenders; the front wheels as they were; new thumbnail), and the DNA keeps the turn it
+takes to face you (its strands no longer swap sides as it zips back) and stops spinning while held
+open. Specs: hh2-engine, hh2-nature, hh2-food and hh4-engine with H2's shelves (23), vehicles with
+taps (74), the hh4 specs with taps on tiny (96), all passing.
+
+Main (October 9, 2026, with #457: H3's and H5's engines) is merged into every H4 branch. The engine
+merge keeps both sides: H5's `touch` key beside `force`, `watch` and `carry`, and one
+`info.hands.piece()` (a number is H5's piece index, a string H4's part name, token or `name`), with
+every field either reads. H2's #450 adds its own `piece(name)` on the same lines; it can take this
+one (its fields are all here). 87 hands engine specs: 86 pass, and the one fail is hec's "soft parts
+are cheap" timing under a loaded full run (0.5 ms alone, 3 of 3); the hh4 specs and taps pass (96).
+
+WORKING (October 9, 2026, 08:00 UTC): the owner's marks on the redone clips: the bus, castle and
+Galileo's balls (`-r2`) are good. Two needed another round, now posted as `-r3` cards: the tractor's
+rear mudguards have inner walls (the far tire's top no longer shows in the cab), and the DNA clip
+had pressed in the gap between the strands, so the finger turned the view and nothing unzipped (the
+test presses the toy directly, so it never showed). The clip now takes a strand; the helix turns to
+face you as it opens, and its strands peel a little wider than the tap's.
+
+- Engine PR #439 (`claude/lane-hands-h4-engine`): `hands.force` (a recipe's own push, each substep,
+  with `ctx.free()`), `info.hands.piece(key)` (by part, token or `name`) with `hands.watch`,
+  `info.hands.moved` (as H2's #420 adds it, the same lines), `hands.carry` (pieces carried
+  together), and a whole toy that floats (water or air) can be pushed below where it stands.
+- Shelf PRs, stacked in this order (each on the one before): Vehicles #440, Landmarks #442, Space
+  #443, Weather & fire #444, Tiny world #445. Every line of the plan for these shelves is built but
+  the bicycle's pedals (below). The comet's L1 sweep finding is fixed (it comes to rest).
 
 ## Notes
 
@@ -129,7 +155,14 @@ Landmarks.
 - `upright` alone can't hold up a tall thin toy against its weight at k 60 (the bicycle fell); k 300
   with damping 20 holds it.
 - Clips: `tools/hh4-clip.mjs` (H3's clip tool), scripts in `tools/hh4-clips/`, device scale 2 (about
-  4.5 minutes a clip).
+  4.5 minutes a clip). The clip tool reads the working tree: don't switch branches while it renders.
+- A build with no `k.data` gives `hands.joints(d)` an undefined `d`: the toys whose joints or drive
+  share state now set `k.data = { ...k.data, h4: {} }` in their build.
+- A toy whose drive reads `info.hands` needs an Extras: `hands.watch: true` when it has no other
+  field (joints alone don't make one).
+- Pieces' parts: once anything has moved, every part piece shows its body's pose, even pinned ones.
+  So the solar system's planets are named bodies (no part) that the drive draws from
+  `info.hands.piece(name)`, and they keep orbiting under `hands.force`.
 
 ## Known issues
 
@@ -143,3 +176,5 @@ Landmarks.
 - The bicycle's "drag the pedals to turn them" needs a dial on a whole toy (Level 1 with wheels); no
   engine piece does that. Skipped; the bicycle rolls and stays upright.
 - Merge #439 (engine) before the shelf PRs.
+- A clip's `from3` press must land on the toy's splats (the app picks what is under the finger):
+  between the DNA's strands the press missed and the drag orbited the view.
