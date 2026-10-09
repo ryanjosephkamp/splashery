@@ -58,128 +58,48 @@ file. The engine files belong to the merged engines; another lane's toys are the
 - You run in Claude Code on the owner's Mac, signed in to his second Claude account. Follow
   docs/OPERATING.md, "Local lanes", exactly: your own port (4189), the local test set, messages as
   comments on your PR that start "From the Operator", the "READY:", "WORKING:" or "BLOCKED:" line at
-  the top of "## State", and clips on page 2 or on `claude/clips-HandsH3`.
-- The Operator (a cloud session) runs the lanes; the owner, Ryan, talks only to the Operator and is
-  often away from the Mac. Never ask him anything in the terminal or wait for him: put questions in
-  "State", move on to the next item, and keep going.
-- Model: Opus 5.5 only, at the default effort. If `/model` shows another model, stop and say so in
-  "State". At most one helper at a time, same model.
-- Merging: the Operator merges. Never merge anything. An engine change is its own small, additive
-  "Engine: …" PR on `claude/lane-hands-h3-engine`, merged first; toys not using it behave exactly as
-  before.
-- Hands-on play only adds to a toy: with the ✋ switch off, every toy plays exactly as before, and
-  old `#s=` links and saved scenes keep loading. A change the public sees waits for the owner's
-  marks before it merges.
-- Every effect follows the effect quality rules in CLAUDE.md (real motion of solid pieces, separate
-  things moving separately, break-apart into real pieces that come back), judged as phone-size
-  clips, and works with the toy upright, on its side and upside down.
-- Licenses, for every asset and dataset (CLAUDE.md, "Ground rules"): read the license on the live
-  source page; record it in CREDITS.md, `tools/assets.json` (or `tools/models.json`) and the toy's
-  in-app credit; `"nc": true` on NC assets; never ND, unlicensed, personal-use or paid. A license
-  not on that list (ODbL, CERN-OHL, government terms, "free with attribution") is a question for the
-  Operator in "State", not a file in the repo. Nothing human (people, faces, human anatomy or human
-  scans) without the owner's yes. No logos or brand names.
-- A static site: data becomes splats at build time (your `tools/hh3-*.mjs`; any new devDependency
-  pinned and listed in LICENSES.md). The page never calls a data service or needs a key, and big
-  files load only when the toy opens. Keep sizes inside the phone budgets.
-- Work through the items in order. Open your draft PR early ("Phase Hands-on H3, <shelf>: …", five
-  sections from CLAUDE.md, naming Opus 5.5), push after each finished item with "State" updated, and
-  run long jobs (clips, tests) in the background.
-- Language: American English in every new text (color, center, gray, license, -ize endings, dates
-  like "October 3, 2026").
-- Read first: CLAUDE.md; docs/OPERATING.md ("Local lanes", "Steps for a lane", "A lane's end");
-  docs/HANDS-ON-PLAN.md (your shelves' lines); docs/PACKS.md, sections 5f, 5g and 5h (the engine
-  pieces) and its earlier hands-on section; docs/handoff/Physics.md, HandsEngineA.md,
-  HandsEngineB.md and HandsEngineC.md; docs/audits/hands-l1-sweep-2026-10.md and
-  docs/audits/hands-on-materials-2026-10.md.
-- Before every push: CLAUDE.md, "Before every push", with the local test set. At the end: "A lane's
-  end".
+  the top of "## State
 
-### Brief, October 8, 2026 (cloud)
-
-Written by the Operator on October 8, 2026. You are a Splashery worker session, started by the
-Operator (the coordinating session). Repo: ryanjosephkamp/splashery. Your lane: Hands-on H3 (prefix
-`hh3`; shelves: Open me, Holidays, Medieval, Music, Pictures, and the first photoreal toys).
-Branches: `claude/lane-hands-h3-<shelf>`, one PR per shelf as your brief says (engine changes on
-`claude/lane-hands-h3-engine`, as a small additive "Engine: …" PR merged first). Handoff file:
-docs/handoff/HandsH3.md. Model: Opus 5.5, at high effort (CLAUDE.md).
-
-Your full brief is already in docs/handoff/HandsH3.md (written October 3, 2026, for a local lane on
-the owner's Mac). The owner started it in the cloud instead on October 8, 2026: you run here, not on
-his Mac, so ignore the parts about his Mac, his second account and the local port (use
-`python3 -m http.server 4173 --bind 127.0.0.1` as CLAUDE.md says), and post clips on Effect review
-page 2 rather than a clips branch. Its first check (docs/PACKS.md sections 5f, 5g and 5h) passes:
-the hands-on engines merged October 3 and 4, 2026. Everything else in it stands, in its order. Main
-has moved a lot since October 3 (read docs/HANDOFF.md "Now" first). Hands-on play only adds to a
-toy: with the ✋ switch off every toy plays exactly as before, and these are toys the public sees,
-so each shelf's PR waits for the owner's "good" marks on its cards. The Photoreal r3 lane
-(session_01Aznj6YahjQmLTU2fvubEFx) is working on the photoreal toys' bases, effects and sounds now:
-do the photoreal toys last, and agree with that lane before you touch them. Hands-on H1
-(session_01JtZ5V2pLt28eskQfzptye1) and H2 (session_017WQa4wkRzzBSXhohhuJrSr) run beside you on other
-shelves; engine changes go in small additive engine PRs, so keep yours apart from theirs. Update the
-handoff's "## State", "## Notes", "## Known issues" and "## For the Operator" as you go; leave its
-brief as it is and add this one under it as "### Brief, October 8, 2026 (cloud)".
-
-How this lane runs: exactly as docs/handoff/ScienceR3.md, "How this lane runs", says (read it;
-replace the prefix and lane record with yours). New toys and views go behind the labs switch
-(`labs: true`); the Operator merges labs work after the tests pass (with tools/op-merge.mjs) and
-after the owner marks your cards; changes to toys the public already sees wait for his "good" marks.
-Finish every working turn with "READY:", "WORKING:" or "BLOCKED:"; Splashery has no CI to wait for;
-for a long job, schedule a check-in with send_later instead of going idle. Clips at phone size
-(390x844, device scale 3) go on Effect review page 2
-(https://claude.ai/artifact/BSayVkzQ2FKESesrkrSUMK) as docs/OPERATING.md, "Steps for a lane", says
-(no republish). New sounds go in tools/sound-review.json as "ready" (the owner hears them on the
-Sound Board), not as cards. Before READY, re-read CLAUDE.md's "Effect quality rules" and check each
-clip against them at phone size. About six workers run at once; keep an even pace. Your Operator is
-session_012GmKRUMZLir2nb27Bo8Cu2. Card ids hh3-…. Aim for a first READY with the first shelf and its
-clips within about six hours.
-
-## State
-
-READY (Open me, Holidays, Medieval, Pictures; October 8, 2026): four stacked shelf PRs, each with
-its cards on Effect review page 2 (lane HandsH3), waiting for the owner's marks. Merge in order:
+WORKING (October 9, 2026). Four stacked shelf PRs are open, each with its cards on Effect review
+page 2 (lane HandsH3). Merge order:
 
 - Engine PR #430 (`claude/lane-hands-h3-engine`): a forgiving press (the L1 sweep's center misses),
   `reseat` on a break joint, a shake that only reads (`fire: false`), picture toys that ask for
   joints play them, and a fix (a snapped piece starts where it was, not at home).
 - Open me #432: storybook, alarm clock, gift box, umbrella (new runner), desk fan, desk lamp,
-  telescope, potion bottle, fountain pen. Nine cards.
-- Holidays #435: jack-o'-lantern, decorated tree, patterned egg, paper lantern. Four cards.
-- Medieval #436: knight's helmet, trebuchet, dragon egg. Three cards.
-- Pictures #437: picture frame (labs). One card.
+  telescope, potion bottle, fountain pen. Nine cards; seven good. The book was redone (card
+  hh3-book-r2, not yet marked). The pen's cap is now its full length, so it never sinks into the
+  paper (the owner's note; card hh3-fountain-pen-r2).
+- Holidays #435: jack-o'-lantern, decorated tree, patterned egg, paper lantern. Three good; the
+  egg's "bottom doesn't spin properly" is an engine sort bug (For the Operator).
+- Medieval #436: knight's helmet, trebuchet, dragon egg. All good.
+- Pictures #437: picture frame (labs). Good.
 
-Waiting: the snowman (needs H2's engine #420, `ride`), the crossbow (needs a tap that releases a
-cocked joint), the water bottle and soda can (the Fluids engine's pour). Next: Music (guitar and
-drum need engine pieces; see For the Operator), then the first photoreal toys after agreeing with
-Photoreal r3, and the Level 1 check of Studio and Lab.
+Built locally, not pushed (they wait for #430, as the Operator asked):
 
-## Notes
+- `claude/lane-hands-h3-engine-2` (worktree splashery-e2): one engine PR for latches and triggers
+  (`latch`, `catch`, `trigger`: a tap lets a cocked joint go), strike pieces (`strike`; hit sounds
+  name both pieces), `fixed` pieces (never knocked loose) and plucked strings (`hands.strings`).
+  `tests/hh3-engine2.spec.mjs`, 3 tests.
+- `claude/lane-hands-h3-music` (worktree splashery-mus, on Pictures plus engine-2): the guitar
+  (pluck each string, its own note), the snare drum (pick up a stick and hit it) and the crossbow
+  (starts cocked; a tap fires; pull the string back until it clicks). `tests/hh3-music.spec.mjs` and
+  `tests/hh3-crossbow.spec.mjs`, 3 tests.
 
-- A toy with `hands.joints` plays in pieces mode: its parts move, the toy itself stays put (it is no
-  longer tossed whole). This follows the chest and the music box. So "any pose" does not arise for
-  these toys: they never leave their pose.
-- Parts the hands move but that are not pieces (the book's pages, the umbrella's panels, the clock's
-  hour hand, the fan's swing, the lamp's glow and pool) are set from the joint's `also`, reading
-  module state that `drive()` keeps (the Open control, the fan's swing, the light).
-- The gift box's box, the potion's flask and the pen's body are pinned pieces with a tiny `pick`:
-  ground for the loose lid, cork or cap, never picked up.
-- The puff and the star spring run on the toy's clock in `drive()`; tests that read them step it.
-- `tools/hh3-clip.mjs` is `tools/phy-clip.mjs` at device scale 3 (the review's phone size).
-- Tests: `tests/hh3-engine.spec.mjs` (engine) and `tests/hh3-open-me.spec.mjs` (10 tests).
+Waiting: the snowman (needs H2's engine #420, `ride`), the water bottle and soda can (the Fluids
+engine's pour). Next: the first photoreal toys after agreeing with Photoreal r3, then the Level 1 PR
+for the "Level 1 only" picture and Studio toys.
 
-## Known issues
-
-- The book's pages mid-turn look soft (gray, blurred words), as in its own tap animation.
-- The umbrella's ribs have no stretchers (the kit's 15-part limit: 8 panels, the runner, nothing
-  left for 8 stretchers); the runner's travel follows stretchers of a fixed length all the same.
-
-## For the Operator
+## Notes", "## Known issues" and "## For the Operator
 
 - Please merge engine PR #430 before the Open me PR; the Open me branch carries its commit.
 - The water bottle and the soda can (labs) wait for the Fluids engine's pour.
-- Questions: (1) The crossbow (a tap releasing a cocked string), the guitar (a sound per plucked
-  string) and the drum (a stick to hit with) need engine work: more small engine PRs from this lane,
-  or leave them? (2) The plan's "Level 1 only" picture and Studio toys (your book, the photo album,
-  the picture lab, the Screen, Photo to 3D …) are kept out of Hands-on entirely, so Level 1 doesn't
-  play there; enable it? (3) A toy with joints is no longer tossed whole (as the chest); that now
-  holds for the lamp, egg, helmet and the rest. Acceptable?
+- The patterned egg's bottom (the owner's "fix"): an engine bug in `src/pose.js`, not in the egg.
+  The egg turns as a kit part; `Player.resortPose` sorts a turned part with the inverse of its turn
+  (Lane Elements' e59431d8, October 6). For the egg, the inverse is wrong. Re-sorted at a quarter
+  turn, its back draws over its front (a hole shows the inside of its bottom and the cup), and at an
+  eighth it speckles. Sorted with the turn itself, it is clean at every angle (measured at eight
+  angles in the app, with and without the fix). The toy's own tap spin on main shows the same hole.
+  Lane Elements measured the opposite on Real elements' lifted sample, so the right sense may differ
+  by toy. Not fixed here, since the line is theirs: who should settle it? An engine PR could pick
+  the sense per toy once the cause is known.
