@@ -106,6 +106,15 @@ What the first three Hands-on lanes learned today (October 8, 2026), so you don'
 
 ## State
 
+READY (October 9, 2026, 16:30 UTC): H2's #450 is merged into the engine (my `pieceState` version of
+`info.hands.piece()` kept; it covers H2's part-name lookup and fields), and the engine into each
+shelf branch (not up the stack, so the tractor's new wheels stay on vehicles). The owner's r3 notes
+are answered by `-r4` cards: the tractor's rear wheels remade (solid chevron lugs, a cream dished
+rim, one-piece fenders; the front wheels as they were; new thumbnail), and the DNA keeps the turn it
+takes to face you (its strands no longer swap sides as it zips back) and stops spinning while held
+open. Specs: hh2-engine, hh2-nature, hh2-food and hh4-engine with H2's shelves (23), vehicles with
+taps (74), the hh4 specs with taps on tiny (96), all passing.
+
 Main (October 9, 2026, with #457: H3's and H5's engines) is merged into every H4 branch. The engine
 merge keeps both sides: H5's `touch` key beside `force`, `watch` and `carry`, and one
 `info.hands.piece()` (a number is H5's piece index, a string H4's part name, token or `name`), with
