@@ -2641,6 +2641,8 @@ Proposals below are suggestions; the owner may change them.
     puddle; then it builds itself again: the balls grow back from the bottom up and each piece hops
     back to its place (about 6 s). The Warmth slider melts it the same way. Fix7: it melts into a
     real puddle of meltwater with a wavering edge (it was a spoked disc that looked like a flower).
+    Hands-on H3 (October 9, 2026; Hands-on): lift the head or the middle ball off, set it down and
+    stack them back up; each ball takes its own decorations.
   - Sound: Drips, then a crunch of snow and a twinkle as it rebuilds.
 - **Fireworks** (`fireworks`). Now: tap: Launch. Plan: keep.
   - Owner: Outstanding. Make each launch different (like the dice), and the burst match the colour
