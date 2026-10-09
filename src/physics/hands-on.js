@@ -84,6 +84,7 @@ const HOLD_UPRIGHT = 1;
 const HOLD_SWING_DAMPING = 1.2;
 const PUSH_MAX = 2; // toy radii per second: the fastest a nudge pushes
 const PICK_LIFT = 0.15;
+const FLIP_HOLD = 0.5; // seconds a finger may rest after its flick before letting go (lane Hands-on H2)
 const FLIP_PX = 400; // CSS pixels per second up the screen: a flick this fast flips a `flip` piece (lane Hands-on H2)
 const FLIP_UP = 4; // toy radii per second: how fast a flipped piece rises
 
@@ -506,8 +507,14 @@ export class HandsOn {
     if (!h) return;
     h.travel = Math.max(h.travel, Math.hypot(x - h.x0, y - h.y0));
     // Lane Hands-on H2: the finger's recent path on screen, for a flip.
-    (h.screen ||= []).push({ t: this.simTime, x, y });
-    while (h.screen[0].t < this.simTime - 2 * THROW_WINDOW) h.screen.shift();
+    // (Only moves that move: a finger that stops after a flick keeps the
+    // flick it made, however long the next event takes to come.)
+    const sc = (h.screen ||= []);
+    const last = sc[sc.length - 1];
+    if (!last || Math.hypot(x - last.x, y - last.y) > 1) {
+      sc.push({ t: this.simTime, x, y });
+      while (sc[0].t < this.simTime - 2 * THROW_WINDOW) sc.shift();
+    }
     const ray = this.ray(x, y);
     if (this.joints?.move(h, ray)) return; // lane Hands engine B: a joint's part follows
     if (h.place) {
@@ -861,8 +868,10 @@ export class HandsOn {
     const b = h.body;
     const def = this.pieces.find((pc) => pc.body === b)?.def;
     if (!def?.flip || h.travel < NUDGE) return false;
-    const s = h.screen || []; // (its last 2 × THROW_WINDOW; moves come once a frame)
+    const s = h.screen || []; // (its last 2 × THROW_WINDOW of moves; they come once a frame)
     if (s.length < 2) return false;
+    // A flick is let go of as it ends, not after a long hold.
+    if (this.simTime - s[s.length - 1].t > FLIP_HOLD) return false;
     const dt = s[s.length - 1].t - s[0].t;
     if (dt < 1e-6) return false;
     const vx = (s[s.length - 1].x - s[0].x) / dt;
