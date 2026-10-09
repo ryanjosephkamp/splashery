@@ -3069,10 +3069,14 @@ body.focus #pop-toggle {
 .stage-dial {
   cursor: grab;
   touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .stage-dial-show {
   touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .stage-dial.dragging,
