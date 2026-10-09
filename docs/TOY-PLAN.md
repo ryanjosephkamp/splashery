@@ -889,8 +889,6 @@ Proposals below are suggestions; the owner may change them.
     the font's pixels. Round 2 (October 3, 2026): the turned leaves are sorted where they lie, so
     the left page's paper no longer covers its words and the cover's inside no longer shows through;
     a solid cover rim, cleaner page edges, and soft gray words on the pages seen only mid-turn.
-    Hands-on H3 (October 8, 2026; Hands-on): Pull the cover open or shut on its spine; the pages
-    lying on it go with it.
   - Sound: Real paper pages turning (no wind); real CC0 recordings now (book-page.mp3), with the
     synthesized sound as a fallback.
 - **Laptop** (`laptop`). Now: tap: Open or close. Plan: keep.

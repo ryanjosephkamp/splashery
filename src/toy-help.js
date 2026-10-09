@@ -1245,7 +1245,7 @@ export const TOY_HELP = {
   book: {
     howTo: "Tap to close the book; tap again to open it.",
     about:
-      "A storybook is a book of stories, with pages of words and often pictures. A book like this, with pages sewn together along one edge between two hard covers, is a way of keeping writing that people have used for about two thousand years. Printing with movable metal type, which made books much cheaper, began in Europe in the 1450s.\n\nThe book starts open. Tap to close it: the pages turn over one by one and the cover shuts. Tap again to open it. Pick the color of the cover in the Toy tab. With ✋ Hands-on on, pull the cover open or shut on its spine yourself: past upright it falls open, short of it it drops shut, and the pages lying on it go with it.",
+      "A storybook is a book of stories, with pages of words and often pictures. A book like this, with pages sewn together along one edge between two hard covers, is a way of keeping writing that people have used for about two thousand years. Printing with movable metal type, which made books much cheaper, began in Europe in the 1450s.\n\nThe book starts open. Tap to close it: the pages turn over one by one and the cover shuts. Tap again to open it. Pick the color of the cover in the Toy tab.",
   },
   laptop: {
     howTo:
