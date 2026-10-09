@@ -106,6 +106,11 @@ tools/sound-review.json as "ready". Finish every working turn with "READY:", "WO
 
 ## State
 
+Round 3 (October 9, 2026): croissant and egg r2 are good; banana, pancakes and watermelon are fixed
+again and posted as `hh2-<toy>-r3` (the core runs end to end in the skin's colors; moved part pieces
+are sorted again in the engine, #450; the whole melon is a fixed shape a carried slice hovers
+above). The five Nature r2 cards are not marked yet.
+
 READY: both shelves, round 2. The owner marked all 35 clips on October 8, 2026: 25 good, 10 to fix.
 All 10 fixes are built, pushed and posted on Effect review page 2 as `hh2-<toy>-r2` (each old card
 has `replacedBy`): banana, croissant, egg, pancakes and watermelon in Food (PR #426); bamboo, daisy,
