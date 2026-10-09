@@ -437,10 +437,19 @@ class Dash {
     const b = BALLS[this.ballId];
     const speed = this.speed();
     let jump = ctl.pressed.has("fire") || ctl.pressed.has("up");
-    if (ctl.demo) {
-      // the attract mode jumps just before each gap
-      const ahead = m.x + speed * 0.12 + b.r;
-      jump = m.ground && this.inGap(ahead) && !this.inGap(m.x);
+    if (ctl.demo && m.ground) {
+      // the attract mode jumps so that its jump clears the next gap
+      const i = this.plankAt(m.x);
+      let g0 = i + 1;
+      while (g0 < this.nPlanks && !this.gone.has(g0)) g0++;
+      if (g0 < this.nPlanks) {
+        let g1 = g0;
+        while (this.gone.has(g1)) g1++;
+        const gs = -this.W / 2 + g0 * this.plankL;
+        const ge = -this.W / 2 + g1 * this.plankL;
+        const air = ((2 * b.jump) / b.g) * speed;
+        jump = gs - m.x < Math.max(0.01, (air - (ge - gs)) * 0.45);
+      }
     }
     if (jump && m.ground) {
       m.vy = b.jump;
@@ -598,7 +607,7 @@ class Dash {
     const d2 = this.api.fitDistance(this.W, H, aspect, 1.0);
     return {
       target: [0, lerp(0, 0.05, view), lerp(0, RELIEF * 0.5, view)],
-      yaw: lerp(0, -0.22, view),
+      yaw: lerp(0, -0.14, view),
       pitch: lerp(0, 0.26, view),
       // (a little closer in 3D, so the turned photo still fills the stage)
       distance: lerp(d2, d2 * 0.88, view),
