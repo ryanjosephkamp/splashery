@@ -12,23 +12,23 @@ ryanjosephkamp/splashery.
 - Handoff file: docs/handoff/Fix10.md. Create it, starting with this brief word for word under "##
   Brief". Then keep "## State
 
-- October 9, 2026: started on `claude/lane-fix10` from main 8a53aa5c. Draft PR #467.
-- 1. Volume viewer sound: done (tap: `pageflip` plus a soft `thud`; Play: `action.quiet: ["sweep"]`
-     and two `whoom` cues from `driveVolume`, one per pass; drag silent). sound-lint and sound-check
-     pass; in tools/sound-review.json as "ready" (no clip: a sound, for the Sound Board).
-- 2. Electron microscope: done (`targets` per sample, `action.at` picks the nearest ellipse, the
-     zoom state in `kit.data.zoom`). Clips `fx10-sem-before`, `fx10-sem` on page 2.
-- 3. Fruit MRI: done (`mriDrag`, the Slice slider, `turntable: false`, `pausable: false`, the camera
-     face-on, a brighter outline, an amber ring per slice). Clips `fx10-mri-before`, `fx10-mri`.
-- 4. Ripple tank: done (`PEBBLE` in optics.js, a shadow part, a sink, a bigger dent; the drip at
-     0.43 s). Clips `fx10-ripple-before`, `fx10-ripple`.
-- 5. Night sky: the day ground at the night's density (overlap 1.45), and every ground splat capped
-     so its edge never crosses the skyline. The drag on `claude/lane-fix10-engine` (committed;
-     browser sky specs to run, then push and open the Engine PR). Clips rendering.
-- 6. Thumbnails: `tools/make-thumbs.mjs` draws at 4x and scales down, labs on; the 5-cell's camera
-     4.1 -> 3.1; five 4D thumbnails re-rendered. Still card `fx10-4d-thumbs`.
-- To do: the sky clips, the engine PR, check-packs, contact sheet, screenshots, the specs of the
-  touched files.
+- October 9, 2026: READY for the owner's marks. Draft PR #467 (`claude/lane-fix10`) and the engine
+  PR #475 (`claude/lane-fix10-engine`, merges first). Nine cards in the Fix10 section of Effect
+  review page 2.
+- 1. Volume viewer sound: tap `pageflip` plus a soft `thud`; Play `action.quiet: ["sweep"]` and two
+     `whoom` cues, one per pass; drag silent. In tools/sound-review.json as "ready".
+- 2. Electron microscope: zoom on any object (`targets`, `action.at`, `kit.data.zoom`).
+- 3. Fruit MRI: `mriDrag`, the Slice slider, no turning, face-on camera, `pausable: false`, brighter
+     outline, an amber ring per slice.
+- 4. Ripple tank: `PEBBLE` (2.4 cm pale stone from 10 cm in 0.45 s, a shadow, a sink, a bigger
+     dent); the drip at 0.43 s.
+- 5. Night sky: the day ground at the night's density, every ground splat capped at the skyline; the
+     drag in the engine PR.
+- 6. Thumbnails at 4x with labs on; the 5-cell's camera 4.1 -> 3.1; the 4D shapes' and the MRI's
+     thumbnails re-rendered.
+- Tests: tests/fx10.spec.mjs plus the touched files' specs (252 run, 251 passed; the one failure,
+  smoke's shelf-grid name check, fails on main too). Engine branch: sky-engine and sky specs, 14
+  passed.
 
 ## Notes", "## Known issues" and "## For the Operator" current.
 
@@ -147,9 +147,17 @@ replace the prefix and lane record with yours).
 
 ## Known issues
 
+- The volume viewer's build is over the 1.5 s check (on main too; this lane does not touch it).
+
 - The night sky at dawn: while the day ground is half faded in, the twilight glow shows through it
   near the skyline (on main too; thinner now).
 - The MRI's outline sphere, seen face-on, is a faint speckled disc behind the end slices (as
   before).
 
 ## For the Operator
+
+- Merge #475 (Engine) first, then #467 after the owner's marks (labs toys; the hypercube's thumbnail
+  is a public toy's).
+- `tests/smoke.spec.mjs` "dragging the shelf up opens a grid…" fails on main too: one toy name is
+  cut on the phone shelf (`expect(cut).toBe(0)`, received 1). Not this lane's.
+- `node tools/check-packs.mjs volume-viewer` reports the build as too slow (1.7 s) on main too.
