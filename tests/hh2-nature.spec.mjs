@@ -217,12 +217,25 @@ test("acorn: a cap pulled off goes back on its acorn", async ({ page }) => {
   expect(p.pinned).toBe(true);
 });
 
-test("lotus: lifted and dropped in the pond, it dips under and bobs back to its water line", async ({
+test("lotus: lifted alone (the pond stays), dropped in, it splashes, dips under and bobs back", async ({
   page,
 }) => {
   await ready(page, "lotus");
   const y = () => page.evaluate(() => window.__splashery.player.handsOn.state().bodies[0].pos[1]);
   const y0 = await y();
+  // The flower is a piece of its own: the pond and its pads stay put.
+  expect(await page.evaluate(() => window.__splashery.player.handsOn.mode)).toBe("pieces");
+  // (Watch the drive's splash part: the most it shows.)
+  await page.evaluate(() => {
+    const r = window.__splashery.player.motion.recipe;
+    const drive = r.drive;
+    window.__splash = 0;
+    window.__unwatch = () => (r.drive = drive);
+    r.drive = function (t, c, out, info) {
+      drive.call(this, t, c, out, info);
+      window.__splash = Math.max(window.__splash, out.parts.splash?.visible ?? 0);
+    };
+  });
   await drag(
     page,
     [
@@ -239,7 +252,9 @@ test("lotus: lifted and dropped in the pond, it dips under and bobs back to its 
     await tick(page, 0.05);
     low = Math.min(low, await y());
   }
+  const splash = await page.evaluate(() => (window.__unwatch(), window.__splash));
   expect(low).toBeLessThan(y0 - 0.02); // it dips under
+  expect(splash).toBeGreaterThan(0.5); // and the crown of drops splashes up
   await tick(page, 5);
   expect(Math.abs((await y()) - y0)).toBeLessThan(0.05); // and floats where it was
 });

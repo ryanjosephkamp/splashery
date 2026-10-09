@@ -1801,7 +1801,8 @@ Proposals below are suggestions; the owner may change them.
   - Improved: E4: a tap folds the flower into a bud, lifts it out of the water on its stalk with a
     ring of light spreading over the water, and opens it wide up in the air, the outer petals first;
     then it sinks back onto its pad, open, with a second ring (about 6.5 s). Hands-on H2 (Hands-on):
-    Push the flower down under the water and let go: it bobs back up and settles.
+    Lift the flower off its leaf (the pond stays, and rings of ripples run out over it) and drop it
+    back in: it splashes, dips under and bobs back up.
   - Sound: Water drop and a bell.
 - **Toadstool** (`mushroom`). Now: tap: Puff out spores. Plan: keep.
   - Effect: Puffs a cloud of glowing spores.

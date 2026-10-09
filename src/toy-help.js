@@ -887,9 +887,9 @@ export const TOY_HELP = {
   },
   lotus: {
     howTo:
-      "Tap it to lift the flower out of the water and open it. Hands-on: push it under; it bobs up.",
+      "Tap it to lift the flower out of the water and open it. Hands-on: lift it, drop it in: splash.",
     about:
-      "The lotus is a water plant that roots in the mud at the bottom of ponds and holds its big round leaves and flowers above the water. Its leaves are covered in tiny waxy bumps, so water rolls off in beads and carries the dirt away with it. Lotus seeds can last a very long time: one more than 1,000 years old has sprouted.\n\nTap it and the flower folds into a bud, rises out of the water on its stalk as a ring of ripples spreads, and opens wide in the air, the outer petals first. Then it sinks back onto its leaf, still open. With ✋ Hands-on on, push the flower down under the water and let go: it bobs back up and settles.",
+      "The lotus is a water plant that roots in the mud at the bottom of ponds and holds its big round leaves and flowers above the water. Its leaves are covered in tiny waxy bumps, so water rolls off in beads and carries the dirt away with it. Lotus seeds can last a very long time: one more than 1,000 years old has sprouted.\n\nTap it and the flower folds into a bud, rises out of the water on its stalk as a ring of ripples spreads, and opens wide in the air, the outer petals first. Then it sinks back onto its leaf, still open. With ✋ Hands-on on, lift the flower off its leaf (rings of ripples run out over the pond) and drop it back in: it splashes, dips under and bobs back up.",
   },
   mushroom: {
     howTo:

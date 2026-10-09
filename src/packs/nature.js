@@ -60,6 +60,59 @@ const SAGUARO_OUT = [-0.2, 0.02, 0.38];
 // fiddlehead (the first stands its stalk upright).
 const FERN_CURL = [0.33, -1.1, -1.4, -1.6, -1.8, -2.0];
 const LOTUS_RISE = 0.42;
+// Lane Hands-on H2: the pond's water line for Hands-on (`level` and the
+// surface's `size` in toy radii; `at` in recipe units).
+const LOTUS_WATER = { level: 0.008, size: 0.98, at: 0.007 };
+const LOTUS = { lifted: false, armed: false, y: null, ring: null, splash: null, at: [0, 0] };
+
+// The flower lifted out of the pond starts a ring of ripples; dropped in
+// fast, a ring and a crown of drops where it lands (lane Hands-on H2).
+function lotusSplash(t, hands, out) {
+  const hp = hands?.on ? hands.piece?.("bloom") : null;
+  if (!hp) {
+    LOTUS.lifted = false;
+    LOTUS.armed = false;
+    LOTUS.y = null;
+    LOTUS.ring = null;
+    LOTUS.splash = null;
+    out.parts.splash = { visible: 0 };
+    return { ring: null };
+  }
+  const y = hp.pos[1];
+  if (!LOTUS.lifted && hp.held && y > hp.home[1] + 0.06) {
+    LOTUS.lifted = true;
+    LOTUS.ring = t;
+  }
+  const line = LOTUS_WATER.at + 0.05;
+  if (y > line + 0.15) LOTUS.armed = true; // (lifted clear: a bob never splashes again)
+  if (
+    LOTUS.armed &&
+    LOTUS.y != null &&
+    LOTUS.y > line &&
+    y <= line &&
+    hp.vel[1] < -0.4 &&
+    !hp.held
+  ) {
+    LOTUS.armed = false;
+    LOTUS.lifted = false;
+    LOTUS.ring = t;
+    LOTUS.splash = t;
+    LOTUS.at = [hp.pos[0], hp.pos[2]];
+    out.cues.push({ voice: "drip", f: 480, n: 3, vol: Math.min(1, 0.4 - 0.25 * hp.vel[1]) });
+  }
+  LOTUS.y = y;
+  const f = LOTUS.splash == null ? 1 : (t - LOTUS.splash) / 0.8;
+  if (f >= 0 && f < 1) {
+    const rise = Math.sin(Math.PI * Math.min(1, f * 1.2));
+    out.parts.splash = {
+      offset: [LOTUS.at[0], 0.06 * rise - 0.04 * f, LOTUS.at[1]],
+      scale: 0.4 + 1.3 * Math.sqrt(f),
+      visible: 1 - f * f,
+    };
+  } else out.parts.splash = { visible: 0 };
+  const g = LOTUS.ring == null ? 9 : t - LOTUS.ring;
+  return { ring: g < 1.6 ? 1.4 * (g / 1.6) : null };
+}
 // The breeze through the willow: its direction (to the right on screen and a
 // little towards the camera) and how far a strand bends per unit of drop.
 const WIND = [0.9985, 0, 0.0555];
@@ -1945,13 +1998,14 @@ export const RECIPES = {
     hands: {
       floor: -0.1,
       area: 1.3,
+      resort: 0.1, // (the nodding head is sorted more often while it moves)
       pieces: (d) =>
         d?.petals
-          ? [{ part: "head", pivot: d.pivot, pos: add(d.pivot, mul(d.face, 0.05)), ride: d.petals.map((_, i) => i), solid: { type: "sphere", r: 0.3 }, pick: [0.36, 0.36, 0.3] }] // prettier-ignore
+          ? [{ part: "head", pivot: d.pivot, pos: add(d.pivot, mul(d.face, 0.05)), ride: [...d.petals.map((_, i) => i), { part: "neck", pivot: d.nod }], solid: { type: "sphere", r: 0.3 }, pick: [0.36, 0.36, 0.3] }] // prettier-ignore
           : [],
       joints: (d) =>
         d?.petals
-          ? [{ type: "hinge", part: "head", pivot: d.pivot, axis: unit(cross(d.face, [0, 1, 0])), min: -0.7, max: 0.7, gravity: false, spring: 28, damping: 4, bounce: 0.2, pos: add(d.pivot, mul(d.face, 0.05)), pick: [0.36, 0.36, 0.3], sound: () => null }] // prettier-ignore
+          ? [{ type: "hinge", part: "head", pivot: d.nod, axis: unit(cross(d.face, [0, 1, 0])), min: -0.45, max: 0.45, gravity: false, spring: 28, damping: 4, bounce: 0.2, pos: add(d.pivot, mul(d.face, 0.05)), pick: [0.36, 0.36, 0.3], sound: () => null }] // prettier-ignore
           : [],
     },
     // A tap brings out the sun at the top left: the head turns up to face
@@ -2095,14 +2149,27 @@ export const RECIPES = {
         back,
       ];
       const stem = spline(stemPts);
-      k.add(
-        k.tube(stem, (t) => 0.04 * (1 - 0.3 * t), { samples: 64, grid: 20 }),
-        {
-          flat: 0.3,
-          jitter: 0.1,
-          color: (c) => lit(mix("#4a7a26", "#6a9a36", c.fbm(c.p[0] * 30, c.p[1] * 8, 0)), c.n, 0.4),
-        },
-      );
+      // (Lane Hands-on H2: the upper half of the stem is its neck, a part
+      // that Hands-on swings with the head as it nods from there, so the
+      // head never swings back through its stem: the owner's mark. At rest
+      // and in the tap effect it stays put, as before.)
+      const NECK = 0.55;
+      const neck = k.part("neck", { pivot: stem(NECK) });
+      for (const [t0, t1, own] of [
+        [0, NECK, {}],
+        [NECK, 1, { part: neck }],
+      ]) {
+        k.add(
+          k.tube((t) => stem(t0 + t * (t1 - t0)), (t) => 0.04 * (1 - 0.3 * (t0 + t * (t1 - t0))), { samples: Math.round(64 * (t1 - t0)) + 4, grid: 20 }), // prettier-ignore
+          {
+            flat: 0.3,
+            jitter: 0.1,
+            ...own,
+            color: (c) =>
+              lit(mix("#4a7a26", "#6a9a36", c.fbm(c.p[0] * 30, c.p[1] * 8, 0)), c.n, 0.4),
+          },
+        );
+      }
       const leaf = (L) =>
         blade(k, {
           L,
@@ -2120,8 +2187,10 @@ export const RECIPES = {
         const at = stem(t);
         const d = [Math.sin(az), 0, Math.cos(az)];
         const tip = add(at, [d[0] * 0.08, 0.02, d[2] * 0.08]);
+        const onNeck = t > NECK ? { part: neck } : {}; // (lane Hands-on H2)
         k.add(k.tube(spline([at, tip]), 0.012, { samples: 8, grid: 6 }), {
           ...SW,
+          ...onNeck,
           color: "#5a8a30",
         });
         k.add(leaf(L), {
@@ -2129,6 +2198,7 @@ export const RECIPES = {
           rot: [-62, (az * 180) / Math.PI, 0],
           flat: 0.25,
           ...SW,
+          ...onNeck,
           color: (c) => {
             const mid = Math.abs(c.u - 0.5) < 0.025;
             const vein = Math.abs(Math.sin((c.v * 7 + Math.abs(c.u - 0.5) * 5) * Math.PI)) < 0.12;
@@ -2168,7 +2238,7 @@ export const RECIPES = {
           opacity: ray ? 0.95 : 0.3,
         };
       });
-      k.data = { pivot, face: F, toSun: unit(sub(sunAt, H)), petals };
+      k.data = { pivot, nod: stem(NECK), face: F, toSun: unit(sub(sunAt, H)), petals };
     },
   },
 
@@ -2486,8 +2556,8 @@ export const RECIPES = {
             p: add(H, mul(d, s)),
             dir: d,
             stretch: 3,
-            color: "#f2efe6",
-            opacity: 0.8,
+            color: "#d8d0bc", // (a little darker, so it reads on white: the owner's mark)
+            opacity: 0.9,
             part,
             ...SW,
           };
@@ -2519,8 +2589,10 @@ export const RECIPES = {
           p: add(add(H, mul(d, R1)), mul(hair, along)),
           dir: hair,
           stretch: 2.5,
-          color: mix("#ffffff", "#e8e4da", r() * 0.5),
-          opacity: 0.55 + 0.35 * r(),
+          // Silvery, grayer toward each hair's end, so the tufts' outlines
+          // read on a white page (the owner's mark).
+          color: mix("#f6f4ee", "#9c998f", (along / 0.075) * 0.65 + 0.15 * r()),
+          opacity: 0.65 + 0.3 * r(),
           part,
           ...SW,
         };
@@ -2885,6 +2957,11 @@ export const RECIPES = {
             color: (c) => {
               let col = mix("#f2eee8", "#ffffff", c.v);
               if (c.v > 0.85) col = mix(col, "#f2b8c8", (0.4 * (c.v - 0.85)) / 0.15);
+              // A soft gray, deeper toward the edges, and a greener base, so
+              // each petal reads on a white page (the owner's mark).
+              const across = Math.abs(c.u - 0.5) * 2;
+              col = mix(col, "#d4d1dc", 0.5 + 0.3 * smoothstep(0.2, 1, across));
+              col = mix(col, "#c9cfae", 0.45 * (1 - smoothstep(0, 0.3, c.v)));
               return lit(col, c.n, 0.35);
             },
           });
@@ -2923,9 +3000,34 @@ export const RECIPES = {
     alive: true,
     controls: [{ key: "rise", label: "Rise", type: "pulse", ease: LOTUS_SECS }],
     action: { key: "rise", label: "Rise and open" },
-    // Hands-on (lane Hands-on H2): push the flower down under the water and
-    // let go: it bobs back up and settles.
-    hands: { water: { density: 0.45, color: "#4f8fa6" } },
+    // Hands-on (lane Hands-on H2): lift the flower off its pad (the pond
+    // stays; rings of ripples run out over it) and drop it back in: it dips
+    // under, splashes and bobs back up. The owner's mark: the pond came up
+    // with it, and nothing splashed.
+    hands: {
+      floor: -0.3,
+      walls: [-1, 1, -1, 1], // (the pond's edge; a held flower stays over the pond)
+      water: { level: LOTUS_WATER.level, size: LOTUS_WATER.size, density: 0.2, depth: 0.4, color: "#4f8fa6" }, // prettier-ignore
+      pieces: (d) => {
+        if (!d?.C) return [];
+        const C = d.C;
+        const solid = { type: "cylinder", r: 0.3, h: 0.05 };
+        return [
+          {
+            part: "bloom",
+            pivot: C,
+            pos: add(C, [0, 0.03, 0]),
+            ride: [{ part: "stamens", pivot: add(C, [0, 0.12, 0]) }, ...d.petals.map((_, i) => i)],
+            solid,
+            points: surfacePoints(solid, 1),
+            pick: [0.45, 0.3, 0.45],
+            mass: 0.5,
+            friction: 0.6,
+            restitution: 0.1,
+          },
+        ];
+      },
+    },
     // A tap folds the flower into a bud, lifts it out of the water on its
     // stalk (a ring of ripples spreads from it) and opens it wide up in the
     // air, petal by petal layer; then it sinks back onto its pad, open,
@@ -2957,6 +3059,10 @@ export const RECIPES = {
       let ripple = -0.3;
       if (on && s > 0.5 && s < 2.6) ripple = 1.4 * band(s, 0.5, 2.6);
       if (on && s > 5.0) ripple = 1.4 * band(s, 5.0, 6.4);
+      // (Lane Hands-on H2: the flower lifted out sends rings out over the
+      // pond; dropped back in, a crown of drops splashes up where it lands.)
+      const wet = lotusSplash(t, info.hands, out);
+      if (wet.ring != null) ripple = wet.ring;
       out.morph = [1 - up, ripple, 0, 0];
       out.glow = [0.85, 1, 1, 0.55];
       crossing(c, "lotus", on ? s : 0, [5.2], () => out.cues.push({ voice: "drip", f: 650, n: 1 }));
@@ -3113,7 +3219,21 @@ export const RECIPES = {
         to: (c) => [c.p[0], 0.02 + (c.p[1] - 0.02) * 0.02, c.p[2]],
         color: (c) => lit(mix("#4f7a2a", "#6a9a3a", c.rand()), c.n, 0.4),
       });
-      k.data = { petals };
+      // (Lane Hands-on H2: a crown of drops, hidden until the flower is
+      // dropped into the pond; built round the middle, moved where it lands.)
+      const splash = k.part("splash", { pivot: [0, LOTUS_WATER.at, 0] });
+      k.cloud({ share: 0.012, size: 0.7, pattern: false }, (r) => {
+        const a = r() * TAU;
+        const up = r();
+        const rr = 0.06 + 0.05 * up + 0.03 * r();
+        return {
+          p: [Math.sin(a) * rr, LOTUS_WATER.at + 0.02 + 0.16 * up * up, Math.cos(a) * rr],
+          color: mix("#e8f6f8", "#9fd0dc", r() * 0.6),
+          opacity: 0.9,
+          part: splash,
+        };
+      });
+      k.data = { petals, C };
       // A closed bud on its own stalk.
       const bud = [-0.45, 0.42, 0.2];
       k.add(
@@ -4781,7 +4901,9 @@ export const RECIPES = {
     action: { key: "grow", label: "Grow new shoots" },
     // Hands-on (lane Hands-on H2): pull a stalk and it bends after your
     // finger; let go and it sways back and forth and settles.
-    hands: { floor: -0.1, stretch: { radius: 0.6, max: 0.45, hz: 1.6, damping: 0.09, at: (p) => p[1] > 0.5 } }, // prettier-ignore
+    // (Bamboo is hard: it bends a little and comes straight back, with no
+    // wobble, critically damped. The owner's mark.)
+    hands: { floor: -0.1, stretch: { radius: 0.6, max: 0.3, hz: 2.2, damping: 1, at: (p) => p[1] > 0.5 } }, // prettier-ignore
     // Three young shoots sit on the ground. A tap makes them shoot up, a
     // section at a time: each new section slides up out of the one below
     // (a hollow knock each), carrying the pointed tip, and a tuft of leaves
