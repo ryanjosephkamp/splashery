@@ -626,7 +626,10 @@ export class HandsOn {
     // The held point follows the finger on a critically damped spring
     // (`follow`, `followV`); `trail` is the finger's recent path, for the
     // let-go's speed; `travel` how far (CSS pixels) the finger went.
-    const minY = this.mode === "toy" ? hit[1] - (body.pos[1] - body.home.pos[1]) : -Infinity;
+    // (A toy that floats, on water or in air, can be pushed down below where
+    // it stands: lane Hands-on H4.)
+    const floats = this.extras?.water || this.extras?.air;
+    const minY = this.mode === "toy" && !floats ? hit[1] - (body.pos[1] - body.home.pos[1]) : -Infinity; // prettier-ignore
     this.hold = { body, joint, place, plane: { point: hit.slice(), normal: ray.dir.slice() }, target: at.slice(), follow: at.slice(), followV: [0, 0, 0], trail: [], x0: x, y0: y, travel: 0, minY, raise: this.mode === "toy" ? PICK_LIFT * this.R() : 0 }; // prettier-ignore
     if (place) {
       // Lifted first, then it follows the finger.
