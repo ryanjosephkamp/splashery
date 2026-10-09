@@ -400,9 +400,13 @@ export class Joints {
     const w = this.world;
     const joint = w.joint(b, b.toLocal(at), null, at, { compliance: 2e-6, damping: 0 });
     b.held = true;
-    b.holdQ = null;
+    // (`steady`: held at its turn, as a piece picked up is, not hanging and
+    // swinging from the finger: a pen's cap stays clear of the paper; lane
+    // Hands-on H3.)
+    b.holdQ = j.d.steady ? b.q.slice() : null;
+    if (j.d.steady) b.holdK = 80; // (firm: the finger holds it off its middle)
     b.angDampingFree ??= b.angDamping;
-    b.angDamping = 1.2;
+    b.angDamping = j.d.steady ? 7 : 1.2;
     hands.hold = { body: b, joint, place: false, plane: { point: at.slice(), normal: dir.slice() }, target: f.slice(), follow: at.slice(), followV: [0, 0, 0], trail: [], x0: h.x0, y0: h.y0, travel: h.travel, minY: -Infinity, raise: 0 }; // prettier-ignore
     w.wake();
   }
