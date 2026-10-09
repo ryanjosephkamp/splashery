@@ -21,8 +21,14 @@ async function ready(page, id) {
   if (!(await page.evaluate(() => window.__splashery.player.handsOn.on)))
     await page.click("#hands-toggle");
   // (Hands-on builds its world on the first touch: build it now, to read
-  // the joints before any drag.)
-  await page.evaluate(() => window.__splashery.player.handsOn.ensure());
+  // the joints before any drag.) The clock stops: only tick() steps it, so
+  // a loaded machine sees the same frames.
+  await page.evaluate(() => {
+    const { player } = window.__splashery;
+    player.handsOn.ensure();
+    player.tickFixed ||= player.update.bind(player);
+    player.update = () => {};
+  });
   await tick(page, 0.1);
 }
 
@@ -31,33 +37,32 @@ const tick = (page, secs) =>
   page.evaluate(
     (n) => {
       const { player } = window.__splashery;
-      for (let i = 0; i < n; i++) player.update(1 / 60);
+      for (let i = 0; i < n; i++) player.tickFixed(1 / 60);
     },
     Math.round(secs * 60),
   );
 
-// A finger drag through recipe points (each a place on screen).
+// A finger drag through recipe points, straight to Hands-on (as the app
+// hands it a press and its moves), two clock steps per move.
 async function drag(page, points, { steps = 20, hold = false, held = false } = {}) {
-  const px = await page.evaluate((pts) => {
-    const { player } = window.__splashery;
-    const r = player.stage.canvas.getBoundingClientRect();
-    return pts.map((p) => {
-      const s = player.screenPoint(p);
-      return [r.left + s[0], r.top + s[1]];
-    });
-  }, points);
-  if (!held) {
-    await page.mouse.move(...px[0]);
-    await page.mouse.down();
-  }
-  for (let k = 1; k < px.length; k++)
-    for (let i = 1; i <= steps; i++) {
-      const f = i / steps;
-      const [a, b] = [px[k - 1], px[k]];
-      await page.mouse.move(a[0] + (b[0] - a[0]) * f, a[1] + (b[1] - a[1]) * f);
-      await tick(page, 1 / 30);
-    }
-  if (!hold) await page.mouse.up();
+  await page.evaluate(
+    ({ points, steps, hold, held }) => {
+      const { player } = window.__splashery;
+      const ho = player.handsOn;
+      const px = points.map((p) => player.screenPoint(p));
+      if (!held) ho.pressAt(player.fromRecipe(points[0]), px[0][0], px[0][1]);
+      for (let k = 1; k < px.length; k++)
+        for (let i = 1; i <= steps; i++) {
+          const f = i / steps;
+          const [a, b] = [px[k - 1], px[k]];
+          ho.moveTo(a[0] + (b[0] - a[0]) * f, a[1] + (b[1] - a[1]) * f);
+          player.tickFixed(1 / 60);
+          player.tickFixed(1 / 60);
+        }
+      if (!hold) ho.release();
+    },
+    { points, steps, hold, held },
+  );
 }
 
 const joints = (page) => page.evaluate(() => window.__splashery.player.handsOn.joints?.state());
@@ -304,25 +309,23 @@ test("potion bottle: the cork holds, pops out with a puff, and squeaks back in",
   let c = await joint(page, "cork");
   expect(c.broken).toBe(false);
   // Pulled out: it pops, with a puff (seen while the finger pulls).
-  const px = await page.evaluate(() => {
+  const puff = await page.evaluate(() => {
     const { player } = window.__splashery;
-    const r = player.stage.canvas.getBoundingClientRect();
-    return [
+    const ho = player.handsOn;
+    const [p0, p1] = [
       [0, 0.9, 0.05],
       [0, 1.35, 0.05],
-    ].map((p) => {
-      const s = player.screenPoint(p);
-      return [r.left + s[0], r.top + s[1]];
-    });
+    ].map((p) => player.screenPoint(p));
+    ho.pressAt(player.fromRecipe([0, 0.9, 0.05]), p0[0], p0[1]);
+    let puff = 0;
+    for (let i = 1; i <= 20; i++) {
+      ho.moveTo(p0[0], p0[1] + ((p1[1] - p0[1]) * i) / 20);
+      player.tickFixed(1 / 60);
+      player.tickFixed(1 / 60);
+      puff = Math.max(puff, player.motion.out?.parts?.puff?.visible ?? 0);
+    }
+    return puff;
   });
-  await page.mouse.move(...px[0]);
-  await page.mouse.down();
-  let puff = 0;
-  for (let i = 1; i <= 20; i++) {
-    await page.mouse.move(px[0][0], px[0][1] + ((px[1][1] - px[0][1]) * i) / 20);
-    await tick(page, 1 / 30);
-    puff = Math.max(puff, await page.evaluate(() => window.__splashery.player.motion.out?.parts?.puff?.visible ?? 0)); // prettier-ignore
-  }
   expect(await events(page)).toContain("snap");
   expect(puff).toBeGreaterThan(0.5);
   // Carried away, then brought back to the neck.

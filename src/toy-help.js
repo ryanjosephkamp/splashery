@@ -707,12 +707,13 @@ export const TOY_HELP = {
       "Everything around you is made of atoms. Each one has a tiny heavy center, the nucleus, made of protons and (in almost every atom) neutrons, with electrons around it. The number of protons decides which element it is: carbon has 6, oxygen 8 and gold 79. Pick any of the 118 elements in the Toy tab.\n\nThis model draws the electrons in rings called shells, an idea of Niels Bohr's from 1913; pick the Cloud style for a truer picture, or Every nucleon to see all its protons and neutrons. Tap it and the electrons whirl faster until each shell blurs into a glowing ring, then slow down. The nucleus is tens of thousands of times smaller than the whole atom, which is mostly empty space.",
   },
   molecule: {
-    howTo: "Tap it to heat it up. Pick a molecule, or type your own, in the Toy tab.",
+    howTo: "Tap it to heat it up. Hands-on: pull an atom; its bonds stretch and it springs back.",
     about:
       "A molecule is a group of atoms held together by chemical bonds. This one is a ball-and-stick model: each ball is an atom, colored by its element (carbon dark gray, hydrogen white, oxygen red, nitrogen blue), and each stick is a bond.\n\nIt starts as caffeine, C8H10N4O2, the stimulant in coffee and tea; the Toy tab has sugars, medicines, vitamins and DNA too. The atoms always jiggle a little on their bonds, as real ones do; tap it to heat it up and they shake hard, the light hydrogens furthest, each bond stretching and squeezing with its atoms, then it cools. In the Toy tab, pick another molecule, or type a name, a formula or a SMILES string (a way of writing a molecule on one line) to build your own.",
   },
   protein: {
-    howTo: "Tap it to pull it apart. Pick a protein, or open your own file, in the Toy tab.",
+    howTo:
+      "Tap to pull it apart. Hands-on: pull a helix out of the fold; let go and it folds back.",
     about:
       "Proteins are the tiny machines of living things. Each is a long chain of building blocks called amino acids that folds up into its own shape: coils called helices, flat strands and loops. Hemoglobin carries oxygen in the blood, insulin helps control sugar, and a jellyfish protein, GFP, glows green.\n\nThese are real shapes from the Protein Data Bank, a free library of well over 200,000 structures that scientists share. Tap it to pull it apart into its pieces, and they come back by themselves; tap again while it is apart and they come back at once. In GFP the glowing part lights up while it is open. You can open any PDB or mmCIF file from the library in the Toy tab.",
   },
@@ -731,7 +732,7 @@ export const TOY_HELP = {
   },
 
   "crystal-lattice": {
-    howTo: "Tap to send a wave through it. Pick one of eleven crystals in the Toy tab.",
+    howTo: "Tap to send a wave through it. Hands-on: push a slice up or down; it springs back.",
     about:
       "In a crystal, atoms are lined up in a pattern that repeats over and over, like tiles on a floor. In table salt, sodium and chlorine take turns in rows of little cubes. Diamond and graphite are both pure carbon: in diamond each atom holds on to four others, which makes it very hard, while graphite's flat sheets slide apart, which is why a pencil writes.\n\nTap it to send a wave through it: a ripple runs across, each slice of atoms rising and falling in turn, the bonds between them stretching and bending. Sound and heat travel through solids as waves like this. In ice, the water molecules spread out into an open pattern, so ice floats on water. Metals, quartz and graphene are in the Toy tab too.",
   },
@@ -760,9 +761,9 @@ export const TOY_HELP = {
       "An emerald is a green form of the mineral beryl, colored by tiny amounts of chromium or vanadium. Most emeralds have little specks and cracks inside them, and jewelers often cut them in rows of long, flat steps. That shape is so common for emeralds that it is called the emerald cut.\n\nA step cut works like a hall of mirrors. Tap it and green light races around the edges of the steps, each one a moment behind the one outside it, so the light spirals in to the flat top, the table. Some of the finest emeralds come from Colombia.",
   },
   "amethyst-geode": {
-    howTo: "Tap to close the geode; tap again to open it.",
+    howTo: "Tap to open or close it. Hands-on: swing the front half open or shut by hand.",
     about:
-      "A geode is a rock with a hollow inside, lined with crystals. Over a very long time, water full of dissolved minerals seeped into the hollow, and the crystals slowly grew inward from the walls. Amethyst is purple quartz; its color comes from a little iron in the crystal.\n\nThe geode starts open. Tap it to close it; tap again and it opens, its halves swing wider, and the crystals glow violet with twinkling tips, then settle. Some amethyst geodes from Brazil and Uruguay are taller than a person.",
+      "A geode is a rock with a hollow inside, lined with crystals. Over a very long time, water full of dissolved minerals seeped into the hollow, and the crystals slowly grew inward from the walls. Amethyst is purple quartz; its color comes from a little iron in the crystal.\n\nThe geode starts open. Tap it to close it; tap again and it opens, its halves swing wider, and the crystals glow violet with twinkling tips, then settle. Some amethyst geodes from Brazil and Uruguay are taller than a person. With ✋ Hands-on on, swing the front half open or shut by hand on its hinge; it stays where you leave it, and shut, the two halves fit together.",
   },
   sapphire: {
     howTo: "Tap it to catch the six-rayed star gliding across it.",
@@ -780,9 +781,9 @@ export const TOY_HELP = {
       "Opal is made of tiny balls of silica, the stuff of quartz and sand, with a little water between them. In precious opal the balls are packed in neat rows, and light passing through them splits into flashes of color that change as the stone moves. This is called play of color. Fire opal is named for its orange body. Opal is cut into a smooth dome called a cabochon, not into facets.\n\nTap it and it rocks in the light while patches of color roll across it, changing as they go. In the Toy tab, pick a white, black or fire opal. Most of the world's opal comes from Australia.",
   },
   pearl: {
-    howTo: "Tap to close the oyster; tap again to open it.",
+    howTo: "Tap to open or close the oyster. Hands-on: lift the pearl out, then put it back.",
     about:
-      "A pearl is a gem made by a living animal. When an irritant, usually a scrap of the animal's own tissue or a bead put in by a pearl farmer, ends up inside an oyster or mussel, the animal coats it with layer after layer of nacre, or mother-of-pearl, the same shiny stuff that lines its shell. The thin layers give a pearl its soft glow, called luster.\n\nThis oyster starts open, with its pearl inside. Tap it to close the shell; tap again to open it. A pearl can take years to grow, and most pearls sold today are grown on pearl farms.",
+      "A pearl is a gem made by a living animal. When an irritant, usually a scrap of the animal's own tissue or a bead put in by a pearl farmer, ends up inside an oyster or mussel, the animal coats it with layer after layer of nacre, or mother-of-pearl, the same shiny stuff that lines its shell. The thin layers give a pearl its soft glow, called luster.\n\nThis oyster starts open, with its pearl inside. Tap it to close the shell; tap again to open it. A pearl can take years to grow, and most pearls sold today are grown on pearl farms. With ✋ Hands-on on, pry the lid open or shut by hand, lift the pearl out and roll it about, then bring it back near its place in the shell and it settles in.",
   },
 
   // ---- Body -----------------------------------------------------------------------------
@@ -797,14 +798,14 @@ export const TOY_HELP = {
       "The brain is the body's control center. Its wrinkled outer layer, the cortex, is folded so that a lot of it fits inside the skull, and it is split into lobes that do different jobs: the back handles seeing, the sides hearing and memory, the top touch, and the front moving, planning and deciding. It works by sending tiny electrical signals between about 86 billion nerve cells.\n\nTap it to spark a thought: light races along the folds of the lobe you tapped, then through the others, and every lobe flashes at once. The Sparks slider sets how many sparks twinkle over it, and the Toy tab can color it by lobe or plain pink.",
   },
   eye: {
-    howTo: "Tap it to blink. Try the Pupil slider in the Toy tab.",
+    howTo: "Tap it to blink. Hands-on: drag on the eyeball and it rolls to look where you pull.",
     about:
-      "The eye is how we see. Light goes in through the pupil, the black hole in the middle, and a lens focuses it onto the retina at the back, which sends a picture to the brain. The colored ring around the pupil is the iris: its muscles make the pupil smaller in bright light and bigger in the dark.\n\nThis eye glances around by itself. Tap it and it blinks, turns to look at you and snaps its pupil small. The Pupil slider sets how wide the pupil is, and you can pick the iris color. People blink about 15 to 20 times a minute, which keeps the eye wet and clean.",
+      "The eye is how we see. Light goes in through the pupil, the black hole in the middle, and a lens focuses it onto the retina at the back, which sends a picture to the brain. The colored ring around the pupil is the iris: its muscles make the pupil smaller in bright light and bigger in the dark.\n\nThis eye glances around by itself. Tap it and it blinks, turns to look at you and snaps its pupil small. The Pupil slider sets how wide the pupil is, and you can pick the iris color. People blink about 15 to 20 times a minute, which keeps the eye wet and clean. With ✋ Hands-on on, drag on the eyeball and it rolls in its socket to look where you pull; let go and it glances about again.",
   },
   lungs: {
-    howTo: "Tap for a deep breath. Try the Breath slider in the Toy tab.",
+    howTo: "Tap for a deep breath. Hands-on: squeeze them and they breathe out; let go to refill.",
     about:
-      "The lungs are two spongy organs in the chest that bring air into the body. Air comes down the windpipe, splits into two tubes and branches into smaller and smaller airways that end in millions of tiny air sacs, where oxygen passes into the blood and carbon dioxide passes out.\n\nThese lungs breathe gently by themselves. Tap for a deep breath: both lungs swell out big, hold, then empty further than usual and settle back into their rhythm. The Breath slider sets how deeply they breathe at rest. An adult at rest takes about 12 to 20 breaths a minute.",
+      "The lungs are two spongy organs in the chest that bring air into the body. Air comes down the windpipe, splits into two tubes and branches into smaller and smaller airways that end in millions of tiny air sacs, where oxygen passes into the blood and carbon dioxide passes out.\n\nThese lungs breathe gently by themselves. Tap for a deep breath: both lungs swell out big, hold, then empty further than usual and settle back into their rhythm. The Breath slider sets how deeply they breathe at rest. An adult at rest takes about 12 to 20 breaths a minute. With ✋ Hands-on on, press and hold them (or pick them up) and they breathe out; let go and they fill again, a little past rest, then breathe gently on.",
   },
   tooth: {
     howTo: "Tap it to polish it until it sparkles.",
@@ -817,7 +818,7 @@ export const TOY_HELP = {
       "The kidneys are two bean-shaped organs, each about the size of a fist, tucked in the back just below the ribs. They clean the blood: they filter out waste and extra water, which leave the body as urine, and send the clean blood back.\n\nTap it to pump three pulses of blood through: each comes in along the artery as light, spreads through the kidney as it swells a little, leaves along the vein, and a drop runs down the ureter, the tube to the bladder. Together, the kidneys filter all the body's blood many times a day.",
   },
   "anatomy-atlas": {
-    howTo: "Tap to peel off a layer; after the organs, tap to put them all back. Try Labels.",
+    howTo: "Tap to peel off a layer. Hands-on: at the organs, lift each one out and put it back.",
     about:
       "An anatomy atlas shows the body in layers, the way a medical textbook does. Under the skin lie the muscles that move us, red with pale tendons at their ends; under them is the skeleton, which in an adult has about 206 bones; and inside are the organs: the brain, lungs, heart, liver, stomach, intestines and kidneys.\n\nTap to peel the outer layer: the skin opens along its seams, then the muscles and the bones lift off group by group. After the organs, a tap puts every layer back. Pick a Layer in the Toy tab to go straight to one, and switch on Labels to list the parts beside the body; the part you tap is highlighted.",
   },
@@ -1379,16 +1380,16 @@ export const TOY_HELP = {
       "A wizard's orb is a glass ball from stories of magic, where a wizard gazes into it to see faraway places or the future. This one sits on a stand, with glowing magic swirling inside. Runes, the letters of old alphabets once used in northern Europe, are often carved on magic things in stories.\n\nTap it to cast a spell: a flash of light fills the glass, the swirl spins up, sparks spiral out in five arms, and a ring of runes rises and circles the orb before it fades. Pick the color of the magic in the Toy tab.",
   },
   "crystal-ball": {
-    howTo: "Tap it to swirl the mist and raise a glowing sign.",
+    howTo: "Tap to gaze into it. Hands-on: lift the ball off its stand, roll it, set it back.",
     about:
-      "A crystal ball is a ball of clear glass or quartz. In old stories, fortune tellers gaze into one to see visions of what is to come. A real clear ball also works like a lens: look through it and you see the room behind it, small and upside down.\n\nThis one is filled with glowing mist. Tap it and the mist whips around and thins, and a glowing sign rises out of it, turns once and fades: a star, a moon or a heart in turn. Pick the color of the mist in the Toy tab. Sparkle adjusts the sparkling effect in the ball.",
+      "A crystal ball is a ball of clear glass or quartz. In old stories, fortune tellers gaze into one to see visions of what is to come. A real clear ball also works like a lens: look through it and you see the room behind it, small and upside down.\n\nThis one is filled with glowing mist. Tap it and the mist whips around and thins, and a glowing sign rises out of it, turns once and fades: a star, a moon or a heart in turn. Pick the color of the mist in the Toy tab. Sparkle adjusts the sparkling effect in the ball. With ✋ Hands-on on, lift the ball off its stand and set it down or roll it on the table, its mist swirling inside; bring it back over the stand and it settles into its cup.",
   },
 
   // ---- Animals --------------------------------------------------------------------------
   jellyfish: {
-    howTo: "Tap it to make it swim: one strong stroke jets it upward.",
+    howTo: "Tap it to make it swim. Hands-on: drag the bell and the tentacles trail behind it.",
     about:
-      "A jellyfish is a soft sea animal with no brain, no heart and no bones; its body is mostly water. It swims by squeezing its bell-shaped body, which pushes water out behind it, and it trails long tentacles armed with tiny stingers to catch its food. Jellyfish have drifted in the oceans for more than 500 million years.\n\nTap it and one strong stroke squeezes the bell and jets it up, trailing its glowing tentacles, then it drifts slowly back down. Pick a moon jelly, a sea nettle or a blue one in the Toy tab.",
+      "A jellyfish is a soft sea animal with no brain, no heart and no bones; its body is mostly water. It swims by squeezing its bell-shaped body, which pushes water out behind it, and it trails long tentacles armed with tiny stingers to catch its food. Jellyfish have drifted in the oceans for more than 500 million years.\n\nTap it and one strong stroke squeezes the bell and jets it up, trailing its glowing tentacles, then it drifts slowly back down. Pick a moon jelly, a sea nettle or a blue one in the Toy tab. With ✋ Hands-on on, drag the bell through the water: the tentacles and frilly arms trail behind it like chains, then sway back as it hovers where you let go.",
   },
   "fish-school": {
     howTo: "Tap it for a bait ball. Hands-on: drag through the school and the fish dart away.",
@@ -1396,14 +1397,14 @@ export const TOY_HELP = {
       "A school is a big group of fish swimming together, all turning at once. Each fish keeps pace with its neighbors by watching them and by feeling the water move along a line of special sense organs down its sides. Being one of many makes it much harder for a hunter to pick out any single fish.\n\nThese 48 fish each swim on their own. Tap it and the school tightens into a spinning bait ball, the shape small fish make when a hunter comes near, then bursts outward in every direction and swims back into place. Pick silver or tropical fish in the Toy tab.",
   },
   butterfly: {
-    howTo: "Tap it to make it flutter faster.",
+    howTo: "Tap it to make it flutter faster. Hands-on: pick it up and let it flutter off.",
     about:
-      "A butterfly is an insect with four large wings covered in tiny, overlapping scales, and the scales make its colors and patterns. Every butterfly starts life as a caterpillar, which sheds its skin to become a pupa, called a chrysalis, before emerging as a butterfly. Some colors, like the shining blue of the blue morpho, come from the shape of the scales, not from any paint-like color in them.\n\nIt flaps its wings slowly all the time. Tap it to flutter, beating its wings faster and wider for a moment. Pick a monarch, a blue morpho, a swallowtail or a rose butterfly in the Toy tab.",
+      "A butterfly is an insect with four large wings covered in tiny, overlapping scales, and the scales make its colors and patterns. Every butterfly starts life as a caterpillar, which sheds its skin to become a pupa, called a chrysalis, before emerging as a butterfly. Some colors, like the shining blue of the blue morpho, come from the shape of the scales, not from any paint-like color in them.\n\nIt flaps its wings slowly all the time. Tap it to flutter, beating its wings faster and wider for a moment. Pick a monarch, a blue morpho, a swallowtail or a rose butterfly in the Toy tab. With ✋ Hands-on on, pick it up and it flutters hard on your finger; let go and it flutters off and settles back to hovering near where you left it.",
   },
   pufferfish: {
-    howTo: "Tap it to poke it. Try the Puff slider in the Toy tab.",
+    howTo: "Tap it to poke it. Hands-on: hold it and it puffs up; let go and it slowly deflates.",
     about:
-      "A pufferfish is a slow swimmer with a clever defense: when it is frightened, it gulps water and swells up into a ball several times its normal size, and in many kinds, spines stand out all over it. That makes it very hard for a hungry fish to swallow. Many pufferfish are also poisonous to eat.\n\nThis one rests slim. Tap it to poke it: it puffs up into a big, spiky ball, holds it, then lets the water out with a sputter and shrinks back. Try the Puff slider in the Toy tab too.",
+      "A pufferfish is a slow swimmer with a clever defense: when it is frightened, it gulps water and swells up into a ball several times its normal size, and in many kinds, spines stand out all over it. That makes it very hard for a hungry fish to swallow. Many pufferfish are also poisonous to eat.\n\nThis one rests slim. Tap it to poke it: it puffs up into a big, spiky ball, holds it, then lets the water out with a sputter and shrinks back. Try the Puff slider in the Toy tab too. With ✋ Hands-on on, press on it or pick it up and it puffs up into a spiky ball and stays puffed while you hold it; let go and it waits, then slowly lets the water out.",
   },
   nautilus: {
     howTo: "Tap it to startle it: it hides its tentacles, then peeks out again.",
@@ -1411,14 +1412,15 @@ export const TOY_HELP = {
       "A nautilus is a sea animal related to the octopus and the squid, but it lives in a coiled, striped shell. Inside, the shell is split into chambers: the nautilus lives in the biggest, newest one and fills the older ones with gas and a little water to float up or sink down. It has up to 90 small tentacles and swims by squirting water. Animals like it have lived in the sea for about 500 million years.\n\nTap it and, startled, it jets back a little and pulls its tentacles in behind its hood. It waits, peeks out halfway, then slowly reaches out again.",
   },
   ladybug: {
-    howTo: "Tap to open the wings; tap again to close them.",
+    howTo: "Tap to open the wings. Hands-on: lift a wing case open on its hinge.",
     about:
-      "A ladybug is a small, round beetle. Its red, spotted back is really a pair of hard wing cases, and under them, thin flying wings lie folded up. Its bright colors warn birds that it tastes bad. Gardeners love ladybugs, because they eat the tiny aphids that harm plants.\n\nTap it to open the wings: the red wing cases lift and spread, and the thin wings unfold beneath them, ready to fly. Tap again to fold them away. Counting its spots will not tell you how old a ladybug is: the number depends on the kind of ladybug.",
+      "A ladybug is a small, round beetle. Its red, spotted back is really a pair of hard wing cases, and under them, thin flying wings lie folded up. Its bright colors warn birds that it tastes bad. Gardeners love ladybugs, because they eat the tiny aphids that harm plants.\n\nTap it to open the wings: the red wing cases lift and spread, and the thin wings unfold beneath them, ready to fly. Tap again to fold them away. Counting its spots will not tell you how old a ladybug is: the number depends on the kind of ladybug. With ✋ Hands-on on, lift each red wing case open on its hinge (its wing stays folded away beneath); let go and it swings shut.",
   },
   snail: {
-    howTo: "Tap to make it hide in its shell; tap again to bring it out.",
+    howTo:
+      "Tap to make it hide in its shell. Hands-on: poke it and it hides; lift it by the shell.",
     about:
-      "A snail carries its home on its back: a coiled shell it can pull its whole body into. It glides along on one long, muscular foot over a thin layer of slime, and its eyes sit at the tips of its two long upper tentacles. In dry weather, a snail can seal its shell with a layer of dried slime and wait for rain.\n\nTap it and it hides, as a real snail does: the eye stalks roll in first, then the head and the foot are drawn in through the shell's opening, and the shell settles on the ground. Tap again and it slides back out, the eye stalks unrolling last.",
+      "A snail carries its home on its back: a coiled shell it can pull its whole body into. It glides along on one long, muscular foot over a thin layer of slime, and its eyes sit at the tips of its two long upper tentacles. In dry weather, a snail can seal its shell with a layer of dried slime and wait for rain.\n\nTap it and it hides, as a real snail does: the eye stalks roll in first, then the head and the foot are drawn in through the shell's opening, and the shell settles on the ground. Tap again and it slides back out, the eye stalks unrolling last. With ✋ Hands-on on, poke it and it pulls in quickly; pick it up by the shell and drop it, and once it is back on its foot it slowly comes out again.",
   },
   octopus: {
     howTo: "Tap it to squirt ink.",
@@ -1426,9 +1428,9 @@ export const TOY_HELP = {
       "An octopus is a soft-bodied sea animal with eight arms lined with suckers. It has three hearts and blue blood, no bones at all, and it can change the color of its skin in a split second to hide or to signal.\n\nWhen something scares it, an octopus squirts a cloud of dark ink and jets away behind it. Tap this one and it does just that: the ink billows out while it shoots up and away with its arms streaming, then it drifts back as the ink thins. You can pick its color in the Toy tab. With ✋ Hands-on on, drag its body and the arms trail behind and curl back; pull an arm and let it go.",
   },
   starfish: {
-    howTo: "Tap it to wave its arms.",
+    howTo: "Tap it to wave its arms. Hands-on: lift an arm and it curls back down slowly.",
     about:
-      "A starfish, or sea star, is not a fish at all but a relative of the sea urchin. It has no brain. Seawater pumped through canals in its body works the hundreds of tiny tube feet under each arm, which let it creep along and grip rocks, and at the tip of each arm is a simple eye. Many kinds can regrow a lost arm.\n\nTap it and its five arms lift and curl in turn, like a slow wave, then settle back. Pick an orange, red, purple or blue starfish in the Toy tab.",
+      "A starfish, or sea star, is not a fish at all but a relative of the sea urchin. It has no brain. Seawater pumped through canals in its body works the hundreds of tiny tube feet under each arm, which let it creep along and grip rocks, and at the tip of each arm is a simple eye. Many kinds can regrow a lost arm.\n\nTap it and its five arms lift and curl in turn, like a slow wave, then settle back. Pick an orange, red, purple or blue starfish in the Toy tab. With ✋ Hands-on on, lift an arm and it bends up from its root; let go and it curls back down slowly, as a real starfish's arm does.",
   },
   "sea-urchin": {
     howTo: "Tap it: its spines sweep in waves and it creeps along.",
@@ -1436,19 +1438,20 @@ export const TOY_HELP = {
       "A sea urchin is a round, spiny sea animal, a relative of the starfish. Its spines protect it, and between them it has long, thin tube feet with suckers that it uses to walk and to hold on. Its mouth is underneath, with five strong teeth for scraping seaweed off rocks.\n\nTap it and its spines sweep around it in waves, each tilting on its base, while pink tube feet reach out, and it creeps a little way to the side and back. Pick a purple, black, red or green urchin in the Toy tab.",
   },
   frog: {
-    howTo: "Tap it: a fly buzzes in and the frog catches it with its tongue.",
+    howTo:
+      "Tap it to catch a fly. Hands-on: press on it and drag the fly around; let go to feed it.",
     about:
-      "A frog is an amphibian: many species start as tadpoles in water, then grow legs and lungs, though others develop directly into small frogs. It catches insects with a long, sticky tongue that flips out of its mouth in a flash. To swallow, a frog pulls its big eyes down into its head, and they help push the food down its throat.\n\nTap it: a fly buzzes in and hovers, the frog's tongue shoots out, catches it and snaps back, its eyes sink to swallow, and it croaks twice with a puff of its throat. Pick a green, red, blue or yellow frog in the Toy tab.",
+      "A frog is an amphibian: many species start as tadpoles in water, then grow legs and lungs, though others develop directly into small frogs. It catches insects with a long, sticky tongue that flips out of its mouth in a flash. To swallow, a frog pulls its big eyes down into its head, and they help push the food down its throat.\n\nTap it: a fly buzzes in and hovers, the frog's tongue shoots out, catches it and snaps back, its eyes sink to swallow, and it croaks twice with a puff of its throat. Pick a green, red, blue or yellow frog in the Toy tab. With ✋ Hands-on on, press on the frog and a fly buzzes at your fingertip: drag it around and the frog turns to keep it in front, and let go and it catches the fly.",
   },
   penguin: {
-    howTo: "Tap it to flap its flippers.",
+    howTo: "Tap it to flap its flippers. Hands-on: push it or drop it and it rocks back upright.",
     about:
-      "A penguin is a bird that cannot fly, but it is a superb swimmer: its wings are stiff, strong flippers that it uses to fly through the water. Almost all penguins live in the southern half of the world. The largest, the emperor penguin, stands about 1.1 meters (3.7 feet) tall.\n\nTap it and it flaps its flippers up and down. Its colors help it hide in the sea: from above, its black back blends with the dark water below, and from below, its white front blends with the bright surface.",
+      "A penguin is a bird that cannot fly, but it is a superb swimmer: its wings are stiff, strong flippers that it uses to fly through the water. Almost all penguins live in the southern half of the world. The largest, the emperor penguin, stands about 1.1 meters (3.7 feet) tall.\n\nTap it and it flaps its flippers up and down. Its colors help it hide in the sea: from above, its black back blends with the dark water below, and from below, its white front blends with the bright surface. With ✋ Hands-on on, push it or pick it up and drop it: it wobbles with its flippers out for balance and rocks back upright.",
   },
   owl: {
-    howTo: "Tap it and it turns its head to look behind.",
+    howTo: "Tap it to turn its head. Hands-on: press on its head and move around; it watches you.",
     about:
-      "Owls are birds that mostly hunt at night. Their big eyes cannot move in their sockets, so an owl turns its whole head instead, as far as about 270 degrees, three-quarters of the way around. Soft, fringed edges on its feathers let it fly almost without a sound.\n\nThis owl sits on a branch. Tap it and it turns its head far around to look behind it, holds there a moment, then turns back to face you.",
+      "Owls are birds that mostly hunt at night. Their big eyes cannot move in their sockets, so an owl turns its whole head instead, as far as about 270 degrees, three-quarters of the way around. Soft, fringed edges on its feathers let it fly almost without a sound.\n\nThis owl sits on a branch. Tap it and it turns its head far around to look behind it, holds there a moment, then turns back to face you. With ✋ Hands-on on, press on its head and move your finger around: the owl turns its head to follow it. Pick it up by the body to toss it, and it settles back on its branch.",
   },
 
   // ---- Math -----------------------------------------------------------------------------
@@ -1577,14 +1580,15 @@ export const TOY_HELP = {
 
   // ---- AI and computing ----------------------------------------------------------------
   perceptron: {
-    howTo: "Tap it to watch it try an example, get it wrong, and learn.",
+    howTo:
+      "Tap it to try an example. Hands-on: tap an input lamp to switch it; the output updates.",
     about:
-      "A perceptron is the simplest artificial neuron, described by Frank Rosenblatt in 1958. It takes a few inputs, multiplies each by a weight (how much that input counts), and adds them up. If the sum passes a threshold, it fires: its answer is 1, otherwise 0. It learns by nudging its weights each time it gets an answer wrong.\n\nTap it: inputs X1 and X3 light up and send pulses along wires as thick as their weights. The sum fills the gauge but stays under the threshold line, so the lamp flashes red. The two live wires thicken, the pulses go again, the gauge passes the line and the lamp lights gold. Pick the flat poster or a 3D model in the Toy tab. This repeats a scripted learning example; it does not keep training on your taps.",
+      "A perceptron is the simplest artificial neuron, described by Frank Rosenblatt in 1958. It takes a few inputs, multiplies each by a weight (how much that input counts), and adds them up. If the sum passes a threshold, it fires: its answer is 1, otherwise 0. It learns by nudging its weights each time it gets an answer wrong.\n\nTap it: inputs X1 and X3 light up and send pulses along wires as thick as their weights. The sum fills the gauge but stays under the threshold line, so the lamp flashes red. The two live wires thicken, the pulses go again, the gauge passes the line and the lamp lights gold. Pick the flat poster or a 3D model in the Toy tab. This repeats a scripted learning example; it does not keep training on your taps. With ✋ Hands-on on, tap an input lamp to switch it on or off: the sum, the gauge and the output lamp show the perceptron's answer at once, with its learned weights.",
   },
   "multilayer-perceptron": {
-    howTo: "Tap it to try all four inputs and fill in the XOR truth table.",
+    howTo: "Tap it to try all four inputs. Hands-on: tap each input to flip it; XOR answers.",
     about:
-      "One perceptron can only split its inputs with a single straight line, so it cannot learn XOR, “exclusive or”, which is 1 when exactly one of two inputs is 1. Put neurons in layers and it can. Here an OR neuron and a NAND (“not both”) neuron feed an AND neuron, and together they give XOR. Blue wires add to a neuron's sum and red wires subtract.\n\nTap it and it tries the inputs 00, 01, 10 and 11 in turn, lighting each neuron that fires, and fills in the truth table: 0, 1, 1, 0. Pick the poster or a 3D model in the Toy tab.",
+      "One perceptron can only split its inputs with a single straight line, so it cannot learn XOR, “exclusive or”, which is 1 when exactly one of two inputs is 1. Put neurons in layers and it can. Here an OR neuron and a NAND (“not both”) neuron feed an AND neuron, and together they give XOR. Blue wires add to a neuron's sum and red wires subtract.\n\nTap it and it tries the inputs 00, 01, 10 and 11 in turn, lighting each neuron that fires, and fills in the truth table: 0, 1, 1, 0. Pick the poster or a 3D model in the Toy tab. With ✋ Hands-on on, tap each input lamp to flip it: the OR and NAND neurons and the output show XOR's answer at once, and the truth table marks the row.",
   },
   "neural-network": {
     howTo: "Tap it to send signals forward, then learn backward. Set its size in the Toy tab.",
@@ -1618,9 +1622,9 @@ export const TOY_HELP = {
       "A diffusion model makes pictures out of noise. It is trained by taking real pictures, adding random noise to them a little at a time until only specks are left, and learning to undo each step. To make a new picture, it starts from pure noise and takes a little away at each of many steps, until a clear picture appears.\n\nTap it: a cloud of random specks clears in ten steps into a rubber duck while the STEP counter runs down from 50 to 0, then the noise washes back over it. Pick the poster or a 3D model in the Toy tab.",
   },
   "gradient-descent": {
-    howTo: "Tap it to roll the ball downhill. Try the Learning rate in the Toy tab.",
+    howTo: "Tap it to roll downhill. Hands-on: drop the ball anywhere; it rolls into a valley.",
     about:
-      "Gradient descent is how most neural networks learn. Picture the network's error as a hilly landscape: the lower the ground, the better its answers. At each step, it works out the gradient, which points toward the steepest increase, and steps in the opposite direction. The learning rate sets how big each step is, and momentum lets it keep some speed from step to step.\n\nTap it: the ball takes 21 hopping steps downhill, leaving a trail of dots, overshoots the valley and settles in it. In the Toy tab, set the Learning rate: too low, and it creeps down the slope; too high, and it bounces from wall to wall; just right, and it settles. This prepared path illustrates the three settings; descent is not guaranteed to find the lowest valley of every landscape.",
+      "Gradient descent is how most neural networks learn. Picture the network's error as a hilly landscape: the lower the ground, the better its answers. At each step, it works out the gradient, which points toward the steepest increase, and steps in the opposite direction. The learning rate sets how big each step is, and momentum lets it keep some speed from step to step.\n\nTap it: the ball takes 21 hopping steps downhill, leaving a trail of dots, overshoots the valley and settles in it. In the Toy tab, set the Learning rate: too low, and it creeps down the slope; too high, and it bounces from wall to wall; just right, and it settles. This prepared path illustrates the three settings; descent is not guaranteed to find the lowest valley of every landscape. With ✋ Hands-on on, press on the landscape and the ball comes to your finger; let go and it rolls downhill by the slope, overshoots a little and settles in the nearest valley, which is not always the deepest one.",
   },
   "gaussian-splatting": {
     howTo: "Tap it: random splats learn the photo. Pick another View in the Toy tab.",
@@ -1633,31 +1637,28 @@ export const TOY_HELP = {
       "Word vectors turn each word into a list of numbers, a point in a space with many directions, so that words used in similar ways land near each other. These have 50 numbers per word, learned from a huge amount of text. Directions in the space can carry meaning: the step from man to woman is much like the step from king to queen.\n\nTap it: an arrow runs out to KING, the step from MAN to WOMAN is added on from there, and it lands right next to QUEEN, which lights up. Type your own A − B + C in the Toy tab, with any of 24,000 common words, and it finds the nearest of the 10,000 most common words, with the runner-up in gray. A text file containing A − B + C works too. These relationships are approximate and can reflect biases in the training text.",
   },
   "sorting-machine": {
-    howTo:
-      "Tap it to sort the bars. Pick one of eight ways to sort, and how to watch it, in the Toy tab.",
+    howTo: "Tap it to sort. Hands-on: pick a piece up and drop it on another place to swap them.",
     about:
-      "A sorting algorithm is a step-by-step recipe a computer follows to put things in order. Bubble sort keeps swapping neighbors that are the wrong way around; quicksort picks one item and splits the rest into smaller and bigger piles; merge sort sorts small groups, then merges them. On a long list, some need far fewer steps than others.\n\nTap it: eight bars sort themselves, each gliding to its new place, while a counter counts the swaps, or moves for merge sort; then they shuffle back. Pick one of eight algorithms in the Toy tab. Listen too: each comparison plays the two bars' notes softly, each swap the moving bar's note, every algorithm on its own instrument, so you hear how it works. The View option shows the same steps as crates of different sizes, a ring of colored pucks that sorts into a color wheel, or the classic dots. The steps come from each algorithm's real code, checked step by step against separate reference code.",
+      "A sorting algorithm is a step-by-step recipe a computer follows to put things in order. Bubble sort keeps swapping neighbors that are the wrong way around; quicksort picks one item and splits the rest into smaller and bigger piles; merge sort sorts small groups, then merges them. On a long list, some need far fewer steps than others.\n\nTap it: eight bars sort themselves, each gliding to its new place, while a counter counts the swaps, or moves for merge sort; then they shuffle back. Pick one of eight algorithms in the Toy tab. Listen too: each comparison plays the two bars' notes softly, each swap the moving bar's note, every algorithm on its own instrument, so you hear how it works. The View option shows the same steps as crates of different sizes, a ring of colored pucks that sorts into a color wheel, or the classic dots. The steps come from each algorithm's real code, checked step by step against separate reference code. With ✋ Hands-on on, drop a piece on another place and the two swap.",
   },
   "half-adder": {
-    howTo: "Tap it to add 1 + 1 in binary: the answer is 10.",
+    howTo: "Tap it to add 1 + 1. Hands-on: flip each lever by hand; the lamps show the sum.",
     about:
-      "A half adder adds two bits, each 0 or 1. Its XOR gate gives the sum bit: 1 when exactly one input is 1. Its AND gate gives the carry: 1 when both inputs are 1. With carry written first, 0 + 0 gives 00, 0 + 1 and 1 + 0 give 01, and 1 + 1 gives 10.\n\nTap to watch the fixed 1 + 1 example. Both switches flip to 1, light travels through the gates, and only the carry lamp lights: binary 10 means two. Then the switches reset. There is no incoming carry on a half adder. Two half adders plus an OR gate can make a full adder, which also accepts that carry; chaining full adders adds longer binary numbers.",
+      "A half adder adds two bits, each 0 or 1. Its XOR gate gives the sum bit: 1 when exactly one input is 1. Its AND gate gives the carry: 1 when both inputs are 1. With carry written first, 0 + 0 gives 00, 0 + 1 and 1 + 0 give 01, and 1 + 1 gives 10.\n\nTap to watch the fixed 1 + 1 example. Both switches flip to 1, light travels through the gates, and only the carry lamp lights: binary 10 means two. Then the switches reset. There is no incoming carry on a half adder. Two half adders plus an OR gate can make a full adder, which also accepts that carry; chaining full adders adds longer binary numbers. With ✋ Hands-on on, flip each lever by hand: the lamps show the sum and the carry of the two bits at once, so 0 + 1 = 1 and 1 + 1 = 10.",
   },
   // ---- Machines that compute (lane Machines A) ----
   "turing-machine": {
-    howTo: "Tap it to run the program on the tape. Type your own number in the Toy tab.",
+    howTo: "Tap it to run the program. Hands-on: slide the tape by hand; tap a tile to flip it.",
     about:
-      "In 1936 the mathematician Alan Turing imagined the simplest possible computer: a long tape of squares, a head that reads and writes one square at a time, and a short table of rules. Each rule says: in this state, reading this symbol, write this, move left or right, and switch to that state. Anything a modern computer can work out, a machine like this can too, given enough tape and time.\n\nTap it: the head reads a tile, flips it to write, and the tape slides, following the lit row of the rule card, until the machine halts with a bell. Add one turns 1011 into 1100 as the carry ripples left; tap again to count on. The busy beavers write as many 1s as a machine of their size can and still halt.",
+      "In 1936 the mathematician Alan Turing imagined the simplest possible computer: a long tape of squares, a head that reads and writes one square at a time, and a short table of rules. Each rule says: in this state, reading this symbol, write this, move left or right, and switch to that state. Anything a modern computer can work out, a machine like this can too, given enough tape and time.\n\nTap it: the head reads a tile, flips it to write, and the tape slides, following the lit row of the rule card, until the machine halts with a bell. Add one turns 1011 into 1100 as the carry ripples left; tap again to count on. The busy beavers write as many 1s as a machine of their size can and still halt. With ✋ Hands-on on, drag the tape along by hand and it settles on a whole tile, so the head reads a new cell; tap a tile to flip it from 0 to 1 and back.",
   },
   "difference-engine": {
-    howTo:
-      "Tap to turn the crank once; tap again to keep cranking. Type your own polynomial in the Toy tab.",
+    howTo: "Tap it to turn the crank. Hands-on: circle round the crank to turn it yourself.",
     about:
-      "Charles Babbage designed Difference Engine No. 2 in the 1840s to make mathematical tables. Its calculating section was built from his drawings in London in 1991. It uses finite differences: for squares 1, 4, 9, 16, the gaps are 3, 5, 7, and their gaps are always 2. Repeated addition can therefore find the next square without multiplying.\n\nTap to turn the crank once; tap again for another value. Wheels turn and carries ripple between digits while each difference adds into its neighbor. The starting example is x². In the Toy tab, choose the starting x and type a polynomial in x or n, up to degree three, that gives whole numbers, such as x³ or n(n + 1)/2. The toy has five-digit columns, so values wrap at 100,000; it is a small working illustration, not the full historical engine.",
+      "Charles Babbage designed Difference Engine No. 2 in the 1840s to make mathematical tables. Its calculating section was built from his drawings in London in 1991. It uses finite differences: for squares 1, 4, 9, 16, the gaps are 3, 5, 7, and their gaps are always 2. Repeated addition can therefore find the next square without multiplying.\n\nTap to turn the crank once; tap again for another value. Wheels turn and carries ripple between digits while each difference adds into its neighbor. The starting example is x². In the Toy tab, choose the starting x and type a polynomial in x or n, up to degree three, that gives whole numbers, such as x³ or n(n + 1)/2. The toy has five-digit columns, so values wrap at 100,000; it is a small working illustration, not the full historical engine. With ✋ Hands-on on, circle round the crank with your finger: each full turn of your hand is one turn of the engine, at your pace, and its ratchet never lets it turn back.",
   },
   "enigma-machine": {
-    howTo:
-      "Tap the keys or type to code letters; tap the machine to decode. Set the rotors in the Toy tab.",
+    howTo: "Tap the keys to type in code. Hands-on: drag a rotor up or down to set it.",
     about:
       "The Enigma was a cipher machine German forces used to keep radio messages secret in World War II. Each key press steps the rotors, including an occasional double step, and a current runs through the plugboard, three wired rotors and a reflector, lighting a different letter. Because the rotors keep turning, the same letter comes out differently each time. Polish mathematicians first broke it in 1932.\n\nTap a key, or type: the rotors step (with the middle rotor's real double step) and the coded letter lights and goes on the pad. Tap the machine off the keys to decode, or to type the stored message. Tap the pad for a clean sheet; tap the rotors, or press Backspace, to take a letter back. On a keyboard, hold Shift for P and R. Set it in the Toy tab as from a key sheet: three of five rotors, reflector B or C, rings, start letters and up to ten plugboard pairs, shown on the pad. Or pick Barbarossa, 1941, and decode a real German Army message with its published key.",
   },

@@ -35,7 +35,7 @@ const SAMPLE = [
   "soda-can", // lane Hands engine B: the chest's lid is a hinge now (pieces mode), so it no longer lifts whole
   "running-shoe",
   "shield",
-  "jellyfish",
+  "sea-urchin", // lane Hands-on H5: the jellyfish drags by its bell now (pieces mode), so it is never lifted whole
   "lorenz",
   "neural-network",
   "picture-frame",

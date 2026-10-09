@@ -130,6 +130,51 @@ Photo to 3D and Moving photo to 3D"; merge it first). Sharp picture is the defau
     to 6 times faster in SwiftShader. Clip pair `psv2-saved` / `psv2-reopened` on Effect review
     page 2. psv, psv2, p3d, smd-moving, live3, help and hta pass (one round 1 psv check now allows
     `view`).
+- October 9, 2026, round 3 (branch `claude/lane-photo-sharp-view-3`, PR "Phase Photo sharp view r3:
+  no WebGL error from Sharp picture to Splats, and clips loop at their end"; Opus 5.5, high effort),
+  on lane Photo fidelity's report (its handoff, "For the Operator"): a rebuild from Sharp picture to
+  Splats drew the splats' work-buffer pass with "glDrawElementsInstanced: Mismatch between texture
+  format and sampler type".
+  - The cause, traced with a WebGL hook that checks every unsigned sampler at each instanced draw:
+    the build reads the saved view (`fromScene`), and a frame that lands before the stage swaps in
+    the new toy ran `sync`, saw Splats and turned the old toy's splats back on. The swap then
+    destroyed that entity, and with it its paint texture (PlayCanvas clears every uniform that
+    pointed at a destroyed texture), but the just-enabled placement still had a frame or two in the
+    work-buffer pass. That pass found `paintColor` empty, and PlayCanvas made its stand-in texture
+    in the middle of the draw: making it uploads it on unit 0, where `uSubDrawData` (an
+    unsigned-integer sampler) had just been bound. Only the first stand-in in a page does this, so
+    the error showed in about one run in three.
+  - The fix, in `src/packs/photo-sharp.js`: the splats come back at the stage's next update
+    (`wake`), only for the toy's own entity and never while the player is building; a replaced
+    entity is let go (the rebuild destroys it). A first version guarded only the build, and the
+    merged phf-engine test (Splats picked with the switch, then the options changed at once) still
+    hit the error: the same race from the other side, now covered too. No engine change.
+  - `tests/psv3.spec.mjs`: both photo toys, Detail Fine and One color per splat, Sharp picture to
+    Splats and back through rebuilds, with a frame's sync forced just before the swap. It fails on
+    main (4 of 4: the old toy's splats are on at the swap) and passes with the fix (8 of 8). Lane
+    Photo fidelity's own flow showed the WebGL error in about 1 run in 3 on main, 0 of 12 with the
+    fix.
+  - Second item, from the owner (October 9, 2026, about 03:35 UTC): "Moving photo to 3D doesn't loop
+    properly when the video/GIF ends. It just gets stuck at the end of the clip and plays like the
+    last 0.5 seconds over and over again." The cause, in the drive of `src/packs/moving-photo.js`:
+    with a sound track (any video, with or without sound), the clip wrapped only on a frame that
+    caught the sound in its last 20 ms. A frame that came later found the sound ended, and the
+    silent clock sent the sound back to the last time shown, a moment before its end; while it
+    sought there it still read as playing, so the next frame took its time again, and the cycle
+    repeated for good, the video copy (and Sharp picture's live picture) pulled back to that time
+    each time it ran ahead. The fix: the silent clock sends the sound back only where it has
+    something left to play, else it runs on to the loop and the sound starts again there.
+  - Tests in `tests/psv3.spec.mjs`: a short video with sound, one without and a GIF
+    (`tests/fixtures/psv3/`, and the horse GIF) each play past their end at least twice, at 1 and
+    1.75 times (the Speed slider's top; 2 times is out of its range), and the time must wrap to the
+    start each time with the first frames after it. These pass on main too: the sandbox draws too
+    few frames a second to hit the bug. So a second test runs the drive itself in Node at 30 frames
+    a second against a media element that takes 60 ms to seek and stops at its end: on main 3 of its
+    4 cases stay a moment before the end for good, and with the fix all 4 wrap. Clip `psv3-loop`
+    (the bunny sample in Sharp picture, three loops) is on Effect review page 2.
+  - Run on the branch (main a0b68bc39 merged in): psv, psv2 and psv3 30 of 30; p3d, phf-engine,
+    live3 and smd-moving 42 of 42 (phf-engine 15 of 15 in a three-times run). The round 1 psv checks
+    now wait for the switch to Splats, which completes at the next update.
 
 ### Measurements (October 8, 2026)
 
