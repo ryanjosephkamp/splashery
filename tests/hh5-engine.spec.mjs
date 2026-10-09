@@ -158,3 +158,14 @@ test("upright with rest: a toy back near upright on the floor settles and sleeps
   expect(b.settled).toBeFalsy();
   expect(b.invMass).toBeGreaterThan(0);
 });
+
+test("a piece's when: it is picked up only while when(data) holds", async () => {
+  const { HandsOn } = await import("../src/physics/hands-on.js");
+  const data = { cur: 0 };
+  const ho = new HandsOn({ proc: { ctx: { kit: { data } } } });
+  const organ = new Body({ pos: [0, 1, 0], solid: { type: "sphere", r: 0.1 }, mass: 1 });
+  ho.pieces = [{ body: organ, part: "heart", home: { pos: [0, 1, 0], q: [0, 0, 0, 1] }, def: { pick: [0.1, 0.1, 0.1], when: (d) => d.cur === 3 } }]; // prettier-ignore
+  expect(ho.pieceAt([0, 1.05, 0])).toBeNull();
+  data.cur = 3;
+  expect(ho.pieceAt([0, 1.05, 0])).toBe(organ);
+});

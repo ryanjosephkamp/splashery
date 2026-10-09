@@ -825,6 +825,10 @@ drive(t, c, out, info) {
 nose first, and one that hits a piece with `target: true` sticks in it where it hit, until it is
 picked up again or ↺ Reset (objects only, never people or animals). `stick: false` lets it bounce.
 
+A piece's `when: (data) => bool` (lane Hands-on H5; `data` the build's `k.data`) says whether it can
+be picked up now: an anatomy atlas's organs only while its organs layer shows (its drive keeps the
+shown layer in `data`).
+
 `info.hands.on` is whether Hands-on is on. Check the toy's frame time with the pieces running (the
 whole world's step is well under a millisecond for one body, a few for 40 pieces).
 

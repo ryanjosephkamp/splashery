@@ -641,8 +641,12 @@ export class HandsOn {
   pieceAt(p) {
     let best = null;
     let bd = Infinity;
+    const data = this.player.proc?.ctx?.kit?.data;
     for (const pc of this.pieces) {
       const b = pc.body;
+      // Lane Hands-on H5: `when(data)` false: not to be picked up now (an
+      // atlas's organs while its skin is on).
+      if (pc.def.when && !pc.def.when(data)) continue;
       const l = b.toLocal(p);
       const r = pc.def.pick || [b.bound, b.bound, b.bound];
       const d = Math.hypot(l[0] / r[0], l[1] / r[1], l[2] / r[2]);
