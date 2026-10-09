@@ -760,9 +760,9 @@ export const TOY_HELP = {
       "An emerald is a green form of the mineral beryl, colored by tiny amounts of chromium or vanadium. Most emeralds have little specks and cracks inside them, and jewelers often cut them in rows of long, flat steps. That shape is so common for emeralds that it is called the emerald cut.\n\nA step cut works like a hall of mirrors. Tap it and green light races around the edges of the steps, each one a moment behind the one outside it, so the light spirals in to the flat top, the table. Some of the finest emeralds come from Colombia.",
   },
   "amethyst-geode": {
-    howTo: "Tap to close the geode; tap again to open it.",
+    howTo: "Tap to open or close it. Hands-on: swing the front half open or shut by hand.",
     about:
-      "A geode is a rock with a hollow inside, lined with crystals. Over a very long time, water full of dissolved minerals seeped into the hollow, and the crystals slowly grew inward from the walls. Amethyst is purple quartz; its color comes from a little iron in the crystal.\n\nThe geode starts open. Tap it to close it; tap again and it opens, its halves swing wider, and the crystals glow violet with twinkling tips, then settle. Some amethyst geodes from Brazil and Uruguay are taller than a person.",
+      "A geode is a rock with a hollow inside, lined with crystals. Over a very long time, water full of dissolved minerals seeped into the hollow, and the crystals slowly grew inward from the walls. Amethyst is purple quartz; its color comes from a little iron in the crystal.\n\nThe geode starts open. Tap it to close it; tap again and it opens, its halves swing wider, and the crystals glow violet with twinkling tips, then settle. Some amethyst geodes from Brazil and Uruguay are taller than a person. With ✋ Hands-on on, swing the front half open or shut by hand on its hinge; it stays where you leave it, and shut, the two halves fit together.",
   },
   sapphire: {
     howTo: "Tap it to catch the six-rayed star gliding across it.",
@@ -780,9 +780,9 @@ export const TOY_HELP = {
       "Opal is made of tiny balls of silica, the stuff of quartz and sand, with a little water between them. In precious opal the balls are packed in neat rows, and light passing through them splits into flashes of color that change as the stone moves. This is called play of color. Fire opal is named for its orange body. Opal is cut into a smooth dome called a cabochon, not into facets.\n\nTap it and it rocks in the light while patches of color roll across it, changing as they go. In the Toy tab, pick a white, black or fire opal. Most of the world's opal comes from Australia.",
   },
   pearl: {
-    howTo: "Tap to close the oyster; tap again to open it.",
+    howTo: "Tap to open or close the oyster. Hands-on: lift the pearl out, then put it back.",
     about:
-      "A pearl is a gem made by a living animal. When an irritant, usually a scrap of the animal's own tissue or a bead put in by a pearl farmer, ends up inside an oyster or mussel, the animal coats it with layer after layer of nacre, or mother-of-pearl, the same shiny stuff that lines its shell. The thin layers give a pearl its soft glow, called luster.\n\nThis oyster starts open, with its pearl inside. Tap it to close the shell; tap again to open it. A pearl can take years to grow, and most pearls sold today are grown on pearl farms.",
+      "A pearl is a gem made by a living animal. When an irritant, usually a scrap of the animal's own tissue or a bead put in by a pearl farmer, ends up inside an oyster or mussel, the animal coats it with layer after layer of nacre, or mother-of-pearl, the same shiny stuff that lines its shell. The thin layers give a pearl its soft glow, called luster.\n\nThis oyster starts open, with its pearl inside. Tap it to close the shell; tap again to open it. A pearl can take years to grow, and most pearls sold today are grown on pearl farms. With ✋ Hands-on on, pry the lid open or shut by hand, lift the pearl out and roll it about, then bring it back near its place in the shell and it settles in.",
   },
 
   // ---- Body -----------------------------------------------------------------------------
@@ -1379,9 +1379,9 @@ export const TOY_HELP = {
       "A wizard's orb is a glass ball from stories of magic, where a wizard gazes into it to see faraway places or the future. This one sits on a stand, with glowing magic swirling inside. Runes, the letters of old alphabets once used in northern Europe, are often carved on magic things in stories.\n\nTap it to cast a spell: a flash of light fills the glass, the swirl spins up, sparks spiral out in five arms, and a ring of runes rises and circles the orb before it fades. Pick the color of the magic in the Toy tab.",
   },
   "crystal-ball": {
-    howTo: "Tap it to swirl the mist and raise a glowing sign.",
+    howTo: "Tap to gaze into it. Hands-on: lift the ball off its stand, roll it, set it back.",
     about:
-      "A crystal ball is a ball of clear glass or quartz. In old stories, fortune tellers gaze into one to see visions of what is to come. A real clear ball also works like a lens: look through it and you see the room behind it, small and upside down.\n\nThis one is filled with glowing mist. Tap it and the mist whips around and thins, and a glowing sign rises out of it, turns once and fades: a star, a moon or a heart in turn. Pick the color of the mist in the Toy tab. Sparkle adjusts the sparkling effect in the ball.",
+      "A crystal ball is a ball of clear glass or quartz. In old stories, fortune tellers gaze into one to see visions of what is to come. A real clear ball also works like a lens: look through it and you see the room behind it, small and upside down.\n\nThis one is filled with glowing mist. Tap it and the mist whips around and thins, and a glowing sign rises out of it, turns once and fades: a star, a moon or a heart in turn. Pick the color of the mist in the Toy tab. Sparkle adjusts the sparkling effect in the ball. With ✋ Hands-on on, lift the ball off its stand and set it down or roll it on the table, its mist swirling inside; bring it back over the stand and it settles into its cup.",
   },
 
   // ---- Animals --------------------------------------------------------------------------

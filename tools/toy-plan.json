@@ -959,7 +959,7 @@
       "owner": "Really cool.",
       "effect": "The geode opens wider and the crystals glow violet.",
       "sound": "Stone crack and a chime.",
-      "improved": "C2: each time it opens, the halves swing wider and the crystals glow violet with twinkling tips, then settle (about 4 s). Sharpness A (October 2, 2026): sharper look (even, solid splats and calmer textures)."
+      "improved": "C2: each time it opens, the halves swing wider and the crystals glow violet with twinkling tips, then settle (about 4 s). Sharpness A (October 2, 2026): sharper look (even, solid splats and calmer textures). Hands-on H5: with ✋ Hands-on on, the front half swings open or shut by hand on its hinge (the toy's own design: hinged, not lifted off) and stays where it is left; shut, the halves fit together."
     },
     "sapphire": {
       "v": "keep",
@@ -982,14 +982,15 @@
     "pearl": {
       "v": "keep",
       "owner": "Really cool.",
-      "sound": "Soft round clink."
+      "sound": "Soft round clink.",
+      "improved": "Hands-on H5: with ✋ Hands-on on, the oyster's lid pries open or shut by hand on its hinge, and the pearl lifts out, rolls, and settles back into its place when brought near it."
     },
     "crystal-ball": {
       "v": "keep",
       "owner": "Hard to tell what the effect is; make it clearer and more dramatic.",
       "effect": "Mist swirls hard and a glowing shape appears inside, then fades.",
       "sound": "A soft misty whoosh and a real crystal glass ringing as the sign rises (no theremin).",
-      "improved": "C2: the mist whips round and thins, and a glowing sign rises out of it and fades: a star, a moon or a heart in turn (about 3.5 s)."
+      "improved": "C2: the mist whips round and thins, and a glowing sign rises out of it and fades: a star, a moon or a heart in turn (about 3.5 s). Hands-on H5: with ✋ Hands-on on, the ball lifts off its stand, sets down or rolls on the table (heavy glass) with its mist inside, and settles back into its cup when brought over the stand."
     },
     "oak": {
       "v": "keep",
