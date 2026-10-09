@@ -418,7 +418,7 @@
       "status": "ready",
       "said": "(October 2, 2026, review) The marble is a little too loud. The sound is close. ... It's just, like, kind of annoyingly loud by default. (Hands-on H1, October 8, 2026) New: its landing in Hands-on, to hear on the Sound Board. Its tap sound is unchanged.",
       "note": "Same sound, quieter by default (or a slightly better real marble recording).",
-      "plan": "Now: in Hands-on, a thrown marble lands with its own sound, from its tap's own cues (louder the harder it lands). On the board: three landings, hard to soft.",
+      "plan": "Now: in Hands-on, a thrown marble lands with its own sound, from its tap's own cues (louder the harder it lands). On the board: three landings, hard to soft. The tap keeps the same real marble roll, about 6 dB quieter (Sound C).",
       "candidates": [
         {
           "id": "hh1",
