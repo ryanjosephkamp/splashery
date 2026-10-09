@@ -1366,6 +1366,30 @@ hands: { material: { mass: 0.3, r: 0.1, bounce: 0.6, cd: 0.47, roll: 0.05 } },</
             direction and order. Pieces take a material too: <code>material</code> in a piece's def.
           </p>
           <p>
+            <strong>Room to roll</strong> (<code>hands.area</code>, a whole toy with a material;
+            lane Hands-on H1, October 8, 2026): the walls of the play area move out to
+            <code>area</code> toy radii from home, as for wheels, so a ball rolls, a puck slides and
+            a marble runs on (the view drifts after it). Without it the walls stay where Level 1
+            puts them, just past the toy. <code>hands.view</code> (0 to 1, 0.8 by default) is how
+            far the view drifts after a tossed whole toy: less (a ball's 0.4) lets a roll read as a
+            roll. <code>hands.friction</code> sets the floor's friction under a whole toy with a
+            material (a hockey puck's ice: 0.04). <code>hands.soft</code> (0 to 1) sets how much a
+            whole toy squishes when it lands, over the list in <code>hands-on.js</code> (a
+            superball's firm 0.15). A shelf shape (a procedural toy in <code>src/toys.js</code>) may
+            take the gummy bear's stretch from its shelf entry:
+            <code>grab: { radius, max }</code> (the jelly blob). In pieces mode
+            <code>hands.floor</code> may be a function <code>(data, info) =&gt; height</code>, for a
+            floor that depends on the build (a d20 sits lower than two d6s).
+            <code>hands.press: { amount, after }</code> (a whole toy): a press held still for
+            <code>after</code> seconds (0.15) squeezes it down by <code>amount</code> (0.25) and
+            sends <code>hands.sound</code> a hit with <code>press: true</code>; let go, it springs
+            back with a wobble (the rubber duck). A drag still picks it up. A piece with
+            <code>fixed: true</code> (no part of its own) never moves, is never picked up and is
+            never knocked loose: a stand or a wall for the others to land on (the baseball cap's
+            walnut stand). A material's <code>nose</code> turns it only while it flies, near
+            critically damped, so a shuttlecock flips cork first once and lies still where it lands.
+          </p>
+          <p>
             <strong>A water line</strong> (<code>hands.water</code>): the toy floats on a round
             pool, bobs and settles; a boat (any non-round toy) rocks and rights itself, since each
             point under water lifts where it is. By default the line sits where the toy, at home,
@@ -1453,6 +1477,51 @@ drive(t, c, out, info) {
             hits a piece with <code>target: true</code> sticks in it where it hit, until it is
             picked up again or ↺ Reset (objects only, never people or animals).
             <code>stick: false</code> lets it bounce.
+          </p>
+          <p>Lane Hands-on H2 (October 8, 2026) added these keys to a piece's def:</p>
+          <ul>
+            <li>
+              <code>place: false</code>: this piece hangs and swings in the hand (as every piece
+              does with <code>hands.place: false</code>) while the others are picked and placed
+              level (an ice cream cone you tip).
+            </li>
+            <li>
+              <code>shown: { pos, quat }</code>: where the recipe's drive shows the piece at rest,
+              when that isn't where its splats were built (a kiwi's half, built face up and shown
+              closed): the body starts and goes home there, and the piece's splats move from where
+              they were built.
+            </li>
+            <li>
+              <code>ride: [index | { token, visible }]</code>: other tokens that move with the piece
+              (a banana's skin strips; <code>visible: 0</code> keeps one hidden, its pale inside).
+            </li>
+            <li>
+              <code>offHome: { … }</code>: entries merged into the piece's part while it is off its
+              place (a candle pulled out of the cake goes out: <code>{ visible: 0 }</code>).
+            </li>
+            <li><code>flip: true</code> (below).</li>
+          </ul>
+          <p>
+            And <code>hands.foot</code> (0.6): how far out from its middle, as a share of its pick
+            radius, a held piece looks for what is under it; 0.95 lets a wide piece (a burger's bun)
+            set down beside a stack sit on its edge instead of being lowered into it.
+          </p>
+          <p>
+            <code>info.hands.moved</code> is whether anything is off home (or on its way back), so a
+            drive can show what Hands-on uncovered (the cut face of the kiwi half left behind). And
+            a break joint takes <code>spill</code> (radians): a piece riding another comes loose
+            when that one tips past it (scoops off a tipped cone), with the cue
+            <code>&quot;spill&quot;</code>; and <code>place: true</code>: snapped off, it is held as
+            a picked piece is (by its middle, level, hovering over whatever is under the finger),
+            not hanging from where it was grabbed.
+          </p>
+          <p>
+            <strong>A flip</strong> (lane Hands-on H2, October 8, 2026): a piece with
+            <code>flip: true</code> in its def, let go from a quick flick up the screen (faster up
+            than across), is tossed up with half a turn about the level line across the view, timed
+            to come down upside down where it hovered before the flick, on whatever is under that
+            spot, drawn toward that piece's middle by the recipe's <code>center</code> (a pancake
+            flipped back onto its stack). Let go any other way, it is set down as before.
           </p>
           <p>
             <code>info.hands.on</code> is whether Hands-on is on. Check the toy's frame time with
@@ -1547,9 +1616,10 @@ drive(t, c, out, info) {
             second, 0.8). <code>detents</code> (clicks per turn) click as it passes each one and
             settle it on one. A dial has no weight unless <code>gravity</code> is set.
             <code>turn(angle, delta, info)</code> is called on every move and may return cues (a
-            music box's notes); <code>also(angle, parts, info)</code> adds entries to the parts
-            Hands-on sends (a dancer that the crank turns; it works for every joint type, with its
-            value).
+            music box's notes); <code>also(angle, parts, info, joint)</code> adds entries to the
+            parts Hands-on sends (a dancer that the crank turns; it works for every joint type, with
+            its value; <code>joint.w</code> is its speed and <code>joint.held</code> whether the
+            finger has it, so a spinning top tilts as it slows).
           </p>
           <pre><code>{ type: &quot;dial&quot;, part: &quot;crank&quot;, pivot: [0.58, 0.25, 0], axis: [1, 0, 0], detents: 12,
   pos: [0.62, 0.25, 0.1], pick: [0.1, 0.18, 0.18],
