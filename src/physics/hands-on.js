@@ -56,6 +56,12 @@ export function ownHands(recipe) {
   return !!(recipe?.drag || recipe?.grab);
 }
 
+// Whether a recipe asks for Level 1 though it's a picture toy or a still one
+// (lane Hands-on H3), live or not.
+export function asksLevel1(recipe) {
+  return !!recipe?.handsLevel1;
+}
+
 // Whether a toy plays in Hands-on at all (a picture toy keeps its pages).
 export function canPlay(info) {
   const r = info?.recipe;
@@ -121,7 +127,10 @@ export class HandsOn {
     this.available = undefined; // (lane Hands-on H3)
     this.clear();
     this.info = info;
-    this.on = canPlay(info) && (ownHands(info?.recipe) || info?.recipe?.handsOn === true);
+    // (A toy with its own drags that also asks for Level 1, a book whose
+    // pages pull over, starts with the switch off: its pages pull either way.)
+    const l1own = ownHands(info?.recipe) && asksLevel1(info?.recipe);
+    this.on = canPlay(info) && !l1own && (ownHands(info?.recipe) || info?.recipe?.handsOn === true);
     this.extras?.dispose(); // lane Hands engine A: materials and fields
     this.extras = extrasFor(this, info);
   }
@@ -173,12 +182,14 @@ export class HandsOn {
   // Whether a toy's own drags work (the laptop's trackpad, the gummy
   // bear's stretch): with the switch on, or on a toy Hands-on leaves alone.
   ownDrags() {
-    return this.on || !canPlay(this.info);
+    return this.on || !canPlay(this.info) || (this.own && asksLevel1(this.info?.recipe));
   }
 
-  // True while a drag on the toy should pick it (or a piece) up.
+  // True while a drag on the toy should pick it (or a piece) up. (On a toy
+  // with its own drags that asks for Level 1, a press its own drag doesn't
+  // take, off the book's pages: see pressAt; lane Hands-on H3.)
   canGrab() {
-    return this.on && !this.own && canPlay(this.info);
+    return this.on && (!this.own || asksLevel1(this.info?.recipe)) && canPlay(this.info);
   }
 
   // ---- The world ----
@@ -397,6 +408,8 @@ export class HandsOn {
   // when it is something Hands-on picks up (the drag is then ours).
   pressAt(hit, x, y) {
     if (!this.canGrab() || !hit) return false;
+    // (Where the toy's own drag takes the press, a page, it pulls the page.)
+    if (this.own && this.info.recipe.drag?.at?.(this.player.toRecipe(hit))) return false;
     if (this.extras?.pressAt(hit, x, y)) return true; // lane Hands engine A: a toy that flees the finger
     this.press = { hit: hit.slice(), x, y, t: this.time };
     return true;
