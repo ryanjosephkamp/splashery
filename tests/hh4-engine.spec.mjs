@@ -28,7 +28,12 @@ async function open(page, kind) {
         calls.ctx = { part: ctx.piece?.part ?? null, beam: ctx.c.beam, G: ctx.G, R: ctx.R, data: "data" in ctx }; // prettier-ignore
         if (!b.pinned) b.vel[1] += 1.5 * ctx.G * h; // lifts more than its weight
       };
-    if (kind === "watch") hands.watch = true;
+    if (kind === "watch") {
+      hands.watch = true;
+      // A body with no part or token: a drive reads it by its name.
+      const ghost = { name: "ghost", pos: [0.9, -1.9, 0], solid: { type: "sphere", r: 0.1 }, points: [[0, -0.1, 0]] }; // prettier-ignore
+      hands.pieces = () => [cow, ghost];
+    }
     player.toyInfo.recipe.hands = hands;
     player.handsOn.attach(player.toyInfo);
   }, kind);
@@ -102,6 +107,12 @@ test("info.hands.piece: a drive reads where a piece is", async ({ page }) => {
   expect(s.p.pos[1]).toBeLessThan(-1.6); // it fell
   expect(s.p.quat.length).toBe(4);
   expect(s.none).toBe(null);
+  const extra = await page.evaluate(() => {
+    const hands = window.__splashery.player.motion.hands;
+    return { ghost: hands.piece("ghost"), moved: hands.moved };
+  });
+  expect(extra.ghost.home).toEqual([0.9, -1.9, 0]);
+  expect(extra.moved).toBe(true);
   // ↺ brings it home, pinned again.
   await page.click("#hands-reset");
   await frames(page, 60);

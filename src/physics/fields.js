@@ -371,6 +371,11 @@ export class Extras {
       point: null,
       rolled: 0,
       slosh: [0, 0, 0],
+      // Lane Hands-on H2: whether anything is off home (or on its way back),
+      // so a drive can show what Hands-on uncovered (a kiwi half's face).
+      get moved() {
+        return !!(self.ho.moved || self.ho.homing);
+      },
       flee(key, pos) {
         if (!self.flee) return { offset: [0, 0, 0], vel: [0, 0, 0] };
         const it = self.flee.get(key, pos);
@@ -521,13 +526,14 @@ export class Extras {
 
   // What a recipe's `hands.force(body, h, ctx)` gets with each body: the
   // piece it is (its def, part and token; null for a whole toy), the toy's
-  // eased controls, the build's data, gravity and a toy radius, and whether
-  // the body touched anything in the last step.
+  // eased controls, the build's data, gravity and a toy radius, whether
+  // the body touched anything in the last step, and free() to let a piece
+  // that is resting at home go.
   forceCtx(b, G, R) {
     const ho = this.ho;
     const w = ho.world;
     const pc = ho.mode === "pieces" ? ho.pieces.find((p) => p.body === b) || null : null;
-    return { piece: pc, c: this.player.motion?.state || {}, data: this.player.proc?.ctx?.kit?.data, G, R, touching: !!w && b.touchTick >= w.tick - 1 }; // prettier-ignore
+    return { piece: pc, c: this.player.motion?.state || {}, data: this.player.proc?.ctx?.kit?.data, G, R, touching: !!w && b.touchTick >= w.tick - 1, free: () => ho.free(b) }; // prettier-ignore
   }
 
   // Lane Hands-on H4: `hands.carry` ({ key: [keys] }, by part name or
@@ -561,7 +567,7 @@ export class Extras {
   pieceState(key) {
     const ho = this.ho;
     if (!ho.world || ho.mode !== "pieces") return null;
-    const pc = ho.pieces.find((p) => p.part === key || (p.token !== undefined && p.token === key)); // prettier-ignore
+    const pc = ho.pieces.find((p) => p.part === key || p.def?.name === key || (p.token !== undefined && p.token === key)); // prettier-ignore
     if (!pc) return null;
     const b = pc.body;
     const dq = quat.mul(b.q, quat.conj(pc.home.q));
