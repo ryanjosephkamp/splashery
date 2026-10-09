@@ -121,7 +121,12 @@ replace the prefix and lane record with yours).
 
 ## For the Operator
 
-- Engine PR #472 (`claude/lane-qr-r4-engine`): 116 of 119 passed in the 17 spec files I ran with it.
-  `vw` ×2 fails fetching an outside site (this container's network); `qrs-toys:37` failed once under
-  load. Both are being rerun alone on main and on the engine branch.
-- The container restarted once mid-lane; nothing was lost (work committed since).
+- Engine PR #472: of the 17 spec files run with it, 116 of 119 tests passed. The 3 failures
+  (`qrs-toys:37`, `vw:70`, `vw:103`) fail the same way on main, run alone (noted on the PR).
+- Lane PR #476: the 6 QR spec files pass (29 of 29); the QR code toy is pixel-identical to main in
+  four styles (Classic, Dots, Gems, Neon) and builds byte-identical splats.
+- Clips: 24 on Effect review page 2, lane record `QRr4`, cards `qr4-…` (12 before/after pairs). The
+  clip tool doesn't fire the barcodes' or Picture QR's tap (on main too), so the tap clips show the
+  look, not the scan line or the tile turn.
+- Question for the owner, on the Picture QR cards: the after is a true halftone; if it reads less
+  like the photo to him than the before at phone size, the nudge's default can come down.
