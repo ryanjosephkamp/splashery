@@ -50,22 +50,27 @@ async function draw(page, n = 20) {
 
 // One rebuild with these options, a frame's sync landing between the build and the swap. Returns
 // whether the old toy's splats were on at the swap (the swap destroys them).
-async function rebuild(page, toy, options) {
-  const on = await page.evaluate(async (o) => {
-    const { app, player } = window.__splashery;
-    const sharp = await import("/src/packs/photo-sharp.js");
-    const st = player.stage;
-    const setToy = st.setToy;
-    let on = null;
-    st.setToy = function (...a) {
-      st.setToy = setToy;
-      sharp.sync();
-      on = st.toy?.entity?.gsplat?.enabled ?? null;
-      return setToy.apply(this, a);
-    };
-    await app.setToyOptions(o);
-    return on;
-  }, options);
+async function rebuild(page, toy, options, pick = false) {
+  const on = await page.evaluate(
+    async ([o, pick, toy]) => {
+      const { app, player } = window.__splashery;
+      const sharp = await import("/src/packs/photo-sharp.js");
+      const st = player.stage;
+      const setToy = st.setToy;
+      let on = null;
+      st.setToy = function (...a) {
+        st.setToy = setToy;
+        sharp.sync();
+        on = st.toy?.entity?.gsplat?.enabled ?? null;
+        return setToy.apply(this, a);
+      };
+      // (Splats picked with the switch, and the options changed at once: lane Photo fidelity's test)
+      if (pick) sharp.setSharpView(toy, "splats");
+      await app.setToyOptions(o);
+      return on;
+    },
+    [options, pick, toy],
+  );
   await built(page, toy);
   return on;
 }
@@ -101,6 +106,25 @@ for (const toy of ["photo-3d", "moving-photo-3d"]) {
         expect(errors).toEqual([]);
       });
     }
+  });
+}
+
+// Splats picked with the switch, then the options changed at once (lane Photo fidelity's own test
+// does this): the old toy's splats still stay off to the swap.
+for (const toy of ["photo-3d", "moving-photo-3d"]) {
+  test(`${toy}: Splats picked and a rebuild at once draw with no WebGL error`, async ({ page }) => {
+    test.setTimeout(300_000);
+    const errors = await ready(page);
+    await page.evaluate((t) => window.__splashery.app.chooseToy(t), toy);
+    await built(page, toy);
+    await page.waitForFunction(() => window.__psv.state().splatsOff, null, { timeout: 60_000 });
+    expect(await rebuild(page, toy, { detail: "splats" }, true)).toBe(false);
+    await draw(page);
+    const s = await page.evaluate(() => ({ ...window.__psv.state(), gsplat: window.__splashery.player.stage.toy.entity.gsplat.enabled })); // prettier-ignore
+    expect(s.on).toBe(false);
+    expect(s.splatsOff).toBe(false);
+    expect(s.gsplat).toBe(true);
+    expect(errors).toEqual([]);
   });
 }
 
