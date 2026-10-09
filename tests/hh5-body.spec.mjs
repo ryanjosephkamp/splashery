@@ -210,3 +210,16 @@ test("anatomy atlas: the organs lift out only once they show, and click back int
   hb = await heartBody();
   expect(Math.hypot(...hb.pos.map((v, i) => v - hb.home[i]))).toBeLessThan(0.01);
 });
+
+// The lane's screenshots, the ✋ switch on (phone and desktop).
+test("screenshots: the lungs, hands-on", async ({ page }) => {
+  for (const [w, h] of [
+    [390, 844],
+    [1440, 900],
+  ]) {
+    await page.setViewportSize({ width: w, height: h });
+    await ready(page, "lungs");
+    await page.waitForTimeout(600);
+    await page.screenshot({ path: `tests/screenshots/hh5-lungs-${w}x${h}.png` });
+  }
+});
