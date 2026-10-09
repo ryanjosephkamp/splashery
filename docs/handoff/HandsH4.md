@@ -106,6 +106,10 @@ What the first three Hands-on lanes learned today (October 8, 2026), so you don'
 
 ## State
 
+READY (October 9, 2026, 18:40 UTC): the owner marked `hh4-tractor-r4` and `hh4-dna-r4` good, so
+every H4 card is good (33 toys). All six PRs (#439, #440, #442, #443, #444, #445) are ready for the
+Operator's batches; main (#457) and H2's #450 are merged in.
+
 READY (October 9, 2026, 16:30 UTC): H2's #450 is merged into the engine (my `pieceState` version of
 `info.hands.piece()` kept; it covers H2's part-name lookup and fields), and the engine into each
 shelf branch (not up the stack, so the tractor's new wheels stay on vehicles). The owner's r3 notes
