@@ -126,6 +126,16 @@ function hashInt(n) {
 // The snowman stands on the ground at SNOW.ground; its melt and rebuild
 // take SNOW.secs.
 const SNOW = { ground: -0.97, secs: 6.2 };
+// Lane Hands-on H3: the snowman's balls by hand. Each body is a squat
+// cylinder inside its ball (flat where the balls press together, as packed
+// snowballs do), so one set back on another stays stacked; their half
+// heights add up to the gaps between the balls' middles (0.72 and 0.55).
+// Each ball carries its own decorations (tokens: the build's order).
+const SNOW_HAND = [
+  { solid: { type: "cylinder", r: 0.42, h: 0.36 } },
+  { solid: { type: "cylinder", r: 0.31, h: 0.36 }, ride: [7, 8, 9, 11, 12, 13] }, // buttons, arms, scarf
+  { solid: { type: "cylinder", r: 0.22, h: 0.19 }, ride: [0, 1, 2, 3, 4, 5, 6, 10, 14] }, // eyes, mouth, nose, hat
+];
 // Seconds since a pulse fired, as 0..1 (1 at rest).
 const progress = (v) => (v > 0 ? 1 - v : 1);
 
@@ -357,6 +367,22 @@ export const RECIPES = {
       { key: "thaw", label: "Thaw", type: "pulse", ease: SNOW.secs },
     ],
     action: { key: "thaw", label: "Melt and rebuild" },
+    // Hands-on (lane Hands-on H3): lift the head off, or the middle ball,
+    // set them down anywhere and stack them back up. Each ball takes its own
+    // decorations with it (the head its face and hat, the middle its
+    // buttons, arms and scarf); the bottom ball stays put. ↺ rebuilds it.
+    hands: {
+      floor: SNOW.ground,
+      area: 1.5,
+      pieces: (d) =>
+        (d?.balls || []).map((b, i) => {
+          const H = SNOW_HAND[i];
+          const pos = [0, b.y, 0];
+          if (i === 0) return { pos, solid: H.solid, fixed: true, pick: [1e-3, 1e-3, 1e-3] };
+          return { part: `ball${i}`, pos, pivot: pos, solid: H.solid, points: surfacePoints(H.solid, 1), pick: [b.r, b.r, b.r], mass: i === 1 ? 1 : 0.5, friction: 0.9, restitution: 0.05, free: true, ride: H.ride }; // prettier-ignore
+        }),
+      sound: (hit, vol) => ({ voice: "thud", f: 140, decay: 0.12, vol: vol * 0.6 }),
+    },
     drive(t, c, out, info) {
       // It melts as solid pieces, not a squash: the three snowballs shrink
       // (the head fastest), drips fall, and the hat, nose, coals, arms and
