@@ -350,6 +350,16 @@ export class HandsOn {
         body.restK = p.spring;
       }
       if (p.hinge) body.hinge = { axis: v3.norm(p.hinge), q: body.q.slice() };
+      // Lane Hands-on H5: `home: { k, damping }`: let go, it springs back to
+      // where it was built, place and turn (an atom on its molecule).
+      if (p.home) {
+        body.restPos = body.pos.slice();
+        body.restPosK = p.home.k ?? 60;
+        body.restPosD = p.home.damping ?? 4;
+        body.restQ = body.q.slice();
+        body.restK = p.home.k ?? 60;
+        body.restD = p.home.damping ?? 4;
+      }
       // Lane Hands-on H1: `fixed: true` is a piece that never moves, a
       // stand or a wall for the others to land on (no part of its own).
       if (p.fixed) body.fixedPiece = true;
@@ -741,8 +751,12 @@ export class HandsOn {
   pieceAt(p) {
     let best = null;
     let bd = Infinity;
+    const data = this.player.proc?.ctx?.kit?.data;
     for (const pc of this.pieces) {
       const b = pc.body;
+      // Lane Hands-on H5: `when(data)` false: not to be picked up now (an
+      // atlas's organs while its skin is on).
+      if (pc.def.when && !pc.def.when(data)) continue;
       if (b.fixedPiece) continue; // (never picked up: lane Hands-on H1)
       const l = b.toLocal(p);
       const r = pc.def.pick || [b.bound, b.bound, b.bound];
@@ -1046,7 +1060,10 @@ export class HandsOn {
     const speed = hit.speed / R;
     // A free piece that hits a pinned one knocks it loose.
     // (Not by the piece in the hand: it brushes past others as it goes.)
-    if (this.mode === "pieces" && !hit.body?.held && !hit.other?.held) {
+    // Lane Hands-on H5: `hands.knock: false`: pieces leave their places only
+    // when picked (a solid's faces: one set down doesn't knock the rest off).
+    const knock = this.info?.recipe?.hands?.knock !== false;
+    if (knock && this.mode === "pieces" && !hit.body?.held && !hit.other?.held) {
       if (hit.other?.pinned && speed > 2.5) this.free(hit.other);
       if (hit.body?.pinned && speed > 2.5) this.free(hit.body);
     }

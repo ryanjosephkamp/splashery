@@ -291,18 +291,27 @@ test("a forgiving press: off the lava lamp's splats, Hands-on still lifts it", a
   await page.click("#hands-toggle");
   const p = await page.evaluate(({ x, y }) => window.__splashery.player.handsOn.nearPress(x, y), at); // prettier-ignore
   expect(p).toBeTruthy();
-  // A drag from there picks the lava lamp up.
+  // A real press there is taken by Hands-on (the app's hook: a pick that
+  // finds nothing, then nearPress)...
   await page.mouse.move(at.left + at.x, at.top + at.y);
   await page.mouse.down();
   await taken(page);
-  for (let i = 1; i <= 20; i++) {
-    await page.mouse.move(at.left + at.x, at.top + at.y - 6 * i);
-    await tick(page, 1 / 30);
-  }
-  const lifted = await page.evaluate(() => {
-    const b = window.__splashery.player.handsOn.body;
+  // ...and lifts the lava lamp as the finger moves up: the moves go straight
+  // to Hands-on, stepped on the fixed clock (on a loaded machine the
+  // browser's own moves come late and in bunches).
+  const lifted = await page.evaluate(({ x, y }) => {
+    const { player } = window.__splashery;
+    const ho = player.handsOn;
+    player.tickFixed ||= player.update.bind(player);
+    player.update = () => {};
+    for (let i = 1; i <= 20; i++) {
+      ho.moveTo(x, y - 6 * i);
+      player.tickFixed(1 / 60);
+      player.tickFixed(1 / 60);
+    }
+    const b = ho.body;
     return b ? b.pos[1] - b.home.pos[1] : 0;
-  });
+  }, at);
   await page.mouse.up();
   expect(lifted).toBeGreaterThan(0.1);
 });

@@ -1452,8 +1452,14 @@ hands: { pieces: star, well: { at: [0, 0, 0], pull: 2, capture: 0.12 } }, // a b
             <code>info.hands.slosh</code> is a sideways offset (recipe units, at most that much) for
             a part (the snow globe's snow; keep the part inside its glass by that margin).
           </p>
+          <p>
+            With <code>fire: false</code> the shake fires nothing and only
+            <code>info.hands.shake</code> reads it (a decorated tree's baubles swing harder the
+            harder it is shaken, while its tap still switches the lights; lane Hands-on H3).
+          </p>
           <pre><code>hands: { shake: true },
 hands: { shake: { key: &quot;snow&quot;, gap: 0.6 } },
+hands: { shake: { fire: false } },
 drive(t, c, out, info) {
   const s = Math.max(c.shake, info.hands?.shake ?? 0); // the harder the shake, the more snow</code></pre>
           <p>
@@ -1472,11 +1478,46 @@ drive(t, c, out, info) {
   const f = info.hands?.flee(i, P) ?? NONE; // P: where fish i swims now
   const at = vec.add(P, f.offset);</code></pre>
           <p>
+            <code>at: (p) =&gt; bool</code> (lane Hands-on H5) limits where a press is followed or
+            fled (<code>p</code> the press, in recipe units): a press elsewhere picks the toy up as
+            usual (an owl follows a press on its head and is tossed by its body).
+          </p>
+          <p>
+            <strong>The finger, for a drive</strong> (<code>hands.touch</code>; lane Hands-on H5,
+            October 8, 2026): <code>touch: true</code> tells the recipe's <code>drive()</code> what
+            the finger does, as <code>info.hands.pressed</code> (a finger is down on the toy: a
+            press, a push or a hold), <code>info.hands.held</code> (the toy, or a piece, is up in
+            the hand) and <code>info.hands.speed</code> (how fast the whole toy, or the held piece,
+            moves, in toy radii per second), so a toy can answer the hand (a pufferfish puffs while
+            you hold it, lungs breathe out while squeezed). <code>info.hands.joint(name)</code> is a
+            joint's value (an angle or a slide, null without one), and
+            <code>info.hands.piece(i)</code> where piece i is (<code>{ pos, quat, home, held }</code
+            >, recipe units), so a drive can follow a part the hand moved (the waves of a point
+            turned round a circle). <code>touch: { key }</code> also fires that action when a press
+            is held <code>after</code> seconds (0.15) or becomes a push or a pick-up (a poke), at
+            most every <code>gap</code> seconds (0.5); a quick tap is still the toy's own tap. A
+            press still picks the toy up as before.
+          </p>
+          <pre><code>hands: { touch: { key: &quot;poke&quot; } },
+drive(t, c, out, info) {
+  const squeezed = info.hands?.pressed ? 1 : 0;</code></pre>
+          <p>
             <strong>Projectiles and targets</strong> (pieces): a piece with
             <code>projectile: { nose: [0, 0, 1], vane: 20 }</code> flies nose first, and one that
             hits a piece with <code>target: true</code> sticks in it where it hit, until it is
             picked up again or ↺ Reset (objects only, never people or animals).
             <code>stick: false</code> lets it bounce.
+          </p>
+          <p>
+            A piece's <code>home: { k, damping }</code> (lane Hands-on H5; per second squared, per
+            second) puts it on a spring to where it was built, place and turn: let go, it springs
+            back with a wobble instead of falling (an atom of a molecule, pulled off and let go).
+          </p>
+          <p>
+            A piece's <code>when: (data) =&gt; bool</code> (lane Hands-on H5; <code>data</code> the
+            build's <code>k.data</code>) says whether it can be picked up now: an anatomy atlas's
+            organs only while its organs layer shows (its drive keeps the shown layer in
+            <code>data</code>).
           </p>
           <p>Lane Hands-on H2 (October 8, 2026) added these keys to a piece's def:</p>
           <ul>
@@ -1522,6 +1563,14 @@ drive(t, c, out, info) {
             to come down upside down where it hovered before the flick, on whatever is under that
             spot, drawn toward that piece's middle by the recipe's <code>center</code> (a pancake
             flipped back onto its stack). Let go any other way, it is set down as before.
+          </p>
+          <p>
+            <strong>A forgiving press</strong> (lane Hands-on H3; every toy, nothing to ask for):
+            with the ✋ switch on, a press where the pick buffer finds no splat (between a desk
+            lamp's arm and its beam, beside a thin pen) still takes the toy when the finger's ray
+            crosses it: a piece's <code>pick</code> ellipsoid in pieces mode, else the toy's box
+            (trimmed to 0.85 of its half sizes, as it stands now). With the switch off, such a press
+            turns the view as before.
           </p>
           <p>
             <code>info.hands.on</code> is whether Hands-on is on. Check the toy's frame time with
@@ -1634,6 +1683,22 @@ drive(t, c, out, info) {
           <pre><code>pieces: (d) =&gt; d.wedges.map((w) =&gt; ({ token: w.token, pos: w.mid, quat: w.q, solid: WEDGE, points: surfacePoints(WEDGE, 1), pick: [0.3, 0.4, 0.3] })),
 joints: (d) =&gt; d.wedges.map((w) =&gt; ({ type: &quot;socket&quot;, token: w.token, snap: 0.35 })),</code></pre>
           <p>
+            <code>armAway</code> (toy radii; lane Hands-on H5): it clicks back only once both the
+            piece and the finger's line have been that far from its place (small pieces packed
+            close, an atlas's organs, would otherwise click straight back as they are lifted out).
+          </p>
+          <p>
+            <code>hands.knock: false</code> (lane Hands-on H5): a pinned piece leaves its place only
+            when picked, never knocked loose by another (a Platonic solid's faces: one set down on
+            the rest doesn't topple them).
+          </p>
+          <p>
+            A hinge's, slider's or dial's <code>limits: (at) =&gt; [min, max]</code> (lane Hands-on
+            H5) narrows its stops as the toy stands now (<code>at.joint(name)</code> reads another
+            joint's value), never past where the part already is: a part another blocks, as a
+            Pythagoras triangle that can't slide through its neighbor until that one has moved.
+          </p>
+          <p>
             <strong>Break</strong>: a piece held fast at <code>at</code> to the ground, or to
             another piece (<code>to</code>, a part, a token or a joint's name), until the finger
             pulls it <code>pull</code> toy radii (0.35): it bends as a whole about <code>at</code>,
@@ -1643,6 +1708,28 @@ joints: (d) =&gt; d.wedges.map((w) =&gt; ({ type: &quot;socket&quot;, token: w.t
           </p>
           <pre><code>joints: [{ type: &quot;break&quot;, part: &quot;top&quot;, to: &quot;low&quot;, at: [0.1, 0.4, 0], pull: 0.3, give: 0.15, knock: 4 }],</code></pre>
           <p>
+            <strong>Reseat</strong> (lane Hands-on H3): <code>reseat: true</code> on a break lets
+            the piece go back. Once it has been taken away, bringing it within <code>snap</code> toy
+            radii (0.3) of its place, or pointing the finger at its place, glides it in, and it
+            holds fast there again (another pull snaps it off again, with its
+            <code>snap</code> cue). <code>reseat: { snap, seats: [{ pos, quat }] }</code> adds other
+            places it clicks into (its middle and turn there, recipe units;
+            <code>quat</code> defaults to its own): a pen's cap posted on its end. The click is the
+            <code>&quot;socket&quot;</code> cue. ↺ brings it home from wherever it sits.
+            <code>steady: true</code> holds a piece that has just snapped off at its turn, carried
+            where the finger holds it, instead of hanging and swinging from the finger (a pen's cap,
+            carried over the pen to its back end, stays clear of the paper;
+            <code>place</code> instead hovers it over whatever is under the finger).
+          </p>
+          <pre><code>{ type: &quot;break&quot;, part: &quot;cork&quot;, at: [0, 0.8, 0], pull: 0.18, give: 0.03, reseat: true },
+{ type: &quot;break&quot;, part: &quot;cap&quot;, at: CAP_MOUTH, pull: 0.2, give: 0.02, reseat: { seats: [{ pos: POSTED, quat: HALF_TURN }] } }, // prettier-ignore</code></pre>
+          <p>
+            A picture toy (a recipe with <code>pictures</code>, or <code>turntable: false</code>)
+            stays out of Hands-on unless its <code>hands</code> block has <code>joints</code> (lane
+            Hands-on H3): then those play, and nothing else (a picture frame swings on its nail; its
+            picture is never picked up whole).
+          </p>
+          <p>
             <strong>Parents</strong>: <code>parent</code> (a joint's name) puts a hinge, slider or
             dial on another driven part: a desk lamp's head on its arm, a clock's hands on a turning
             dial. Children pose after their parents.
@@ -1651,7 +1738,11 @@ joints: (d) =&gt; d.wedges.map((w) =&gt; ({ type: &quot;socket&quot;, token: w.t
             <strong>Upright</strong> (Level 1, a whole toy):
             <code>hands: { upright: { k: 40, damping: 3 } }</code> turns a tipped toy back upright
             (its tilt only; its turn about the vertical stays), so it rocks and rights itself as a
-            sailboat or a roly-poly penguin does.
+            sailboat or a roly-poly penguin does. With <code>rest</code> (radians; lane Hands-on H5)
+            it settles once it is back within that of upright, on the floor and nearly still, and
+            holds there until the finger touches it again: a toy on a round base (an owl gripping
+            its round branch) would otherwise creep on and never come to rest:
+            <code>hands: { upright: { k: 90, damping: 6, rest: 0.15 } }</code>.
           </p>
           <p>
             <strong>Scan rigs</strong>: <code>rigPieces(rig, names, opts)</code> (from
