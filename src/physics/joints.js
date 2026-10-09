@@ -460,6 +460,17 @@ export class Joints {
     const snap = (j.d.snap ?? 0.3) * R;
     const away = v3.len(v3.sub(h.body.pos, j.pc.home.pos));
     if (!j.armed) {
+      // Lane Hands-on H5: `armAway` (toy radii): armed only once both the
+      // piece and the finger's line are that far from its place (small
+      // pieces packed close, an atlas's organs, would click straight back).
+      const far = j.d.armAway;
+      if (far !== undefined) {
+        const home = j.pc.home.pos;
+        const t = ray ? Math.max(0, v3.dot(v3.sub(home, ray.origin), ray.dir)) : 0;
+        const aim = ray ? v3.len(v3.sub(v3.add(ray.origin, v3.scale(ray.dir, t)), home)) : Infinity; // prettier-ignore
+        if (away > far * R && aim > far * R) j.armed = true;
+        return;
+      }
       if (away > snap * 1.5) j.armed = true;
       return;
     }

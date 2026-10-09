@@ -907,6 +907,10 @@ pieces: (d) => d.wedges.map((w) => ({ token: w.token, pos: w.mid, quat: w.q, sol
 joints: (d) => d.wedges.map((w) => ({ type: "socket", token: w.token, snap: 0.35 })),
 ```
 
+`armAway` (toy radii; lane Hands-on H5): it clicks back only once both the piece and the finger's
+line have been that far from its place (small pieces packed close, an atlas's organs, would
+otherwise click straight back as they are lifted out).
+
 **Break**: a piece held fast at `at` to the ground, or to another piece (`to`, a part, a token or a
 joint's name), until the finger pulls it `pull` toy radii (0.35): it bends as a whole about `at`, up
 to `give` radians (0.12), then snaps off into the hand. On a loose piece it rides along with that

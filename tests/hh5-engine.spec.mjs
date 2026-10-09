@@ -169,3 +169,17 @@ test("a piece's when: it is picked up only while when(data) holds", async () => 
   data.cur = 3;
   expect(ho.pieceAt([0, 1.05, 0])).toBe(organ);
 });
+
+test("socket armAway: armed only once the piece and the finger's line have left its place", async () => {
+  const { Joints } = await import("../src/physics/joints.js");
+  const J = Object.create(Joints.prototype);
+  J.hands = { R: () => 1 };
+  const j = { d: { type: "socket", snap: 0.1, armAway: 0.3 }, pc: { home: { pos: [0, 0, 0] } }, armed: false }; // prettier-ignore
+  const h = { body: { pos: [0.5, 0, 0] } };
+  // The piece is away, but the finger still points at its place.
+  J.nearSocket(j, h, { origin: [0, 0, 5], dir: [0, 0, -1] });
+  expect(j.armed).toBe(false);
+  // The finger's line moves off too: armed.
+  J.nearSocket(j, h, { origin: [0.5, 0, 5], dir: [0, 0, -1] });
+  expect(j.armed).toBe(true);
+});
