@@ -707,14 +707,15 @@ export const TOY_HELP = {
       "Everything around you is made of atoms. Each one has a tiny heavy center, the nucleus, made of protons and (in almost every atom) neutrons, with electrons around it. The number of protons decides which element it is: carbon has 6, oxygen 8 and gold 79. Pick any of the 118 elements in the Toy tab.\n\nThis model draws the electrons in rings called shells, an idea of Niels Bohr's from 1913; pick the Cloud style for a truer picture, or Every nucleon to see all its protons and neutrons. Tap it and the electrons whirl faster until each shell blurs into a glowing ring, then slow down. The nucleus is tens of thousands of times smaller than the whole atom, which is mostly empty space.",
   },
   molecule: {
-    howTo: "Tap it to heat it up. Pick a molecule, or type your own, in the Toy tab.",
+    howTo: "Tap it to heat it up. Hands-on: pull an atom; its bonds stretch and it springs back.",
     about:
-      "A molecule is a group of atoms held together by chemical bonds. This one is a ball-and-stick model: each ball is an atom, colored by its element (carbon dark gray, hydrogen white, oxygen red, nitrogen blue), and each stick is a bond.\n\nIt starts as caffeine, C8H10N4O2, the stimulant in coffee and tea; the Toy tab has sugars, medicines, vitamins and DNA too. The atoms always jiggle a little on their bonds, as real ones do; tap it to heat it up and they shake hard, the light hydrogens furthest, each bond stretching and squeezing with its atoms, then it cools. In the Toy tab, pick another molecule, or type a name, a formula or a SMILES string (a way of writing a molecule on one line) to build your own.",
+      "A molecule is a group of atoms held together by chemical bonds. This one is a ball-and-stick model: each ball is an atom, colored by its element (carbon dark gray, hydrogen white, oxygen red, nitrogen blue), and each stick is a bond.\n\nIt starts as caffeine, C8H10N4O2, the stimulant in coffee and tea; the Toy tab has sugars, medicines, vitamins and DNA too. The atoms always jiggle a little on their bonds, as real ones do; tap it to heat it up and they shake hard, the light hydrogens furthest, each bond stretching and squeezing with its atoms, then it cools. In the Toy tab, pick another molecule, or type a name, a formula or a SMILES string (a way of writing a molecule on one line) to build your own. With ✋ Hands-on on, grab an atom and pull: its bonds stretch after it like springs and its neighbors are tugged along; let go and it springs back and the molecule wobbles to rest.",
   },
   protein: {
-    howTo: "Tap it to pull it apart. Pick a protein, or open your own file, in the Toy tab.",
+    howTo:
+      "Tap to pull it apart. Hands-on: pull a helix out of the fold; let go and it folds back.",
     about:
-      "Proteins are the tiny machines of living things. Each is a long chain of building blocks called amino acids that folds up into its own shape: coils called helices, flat strands and loops. Hemoglobin carries oxygen in the blood, insulin helps control sugar, and a jellyfish protein, GFP, glows green.\n\nThese are real shapes from the Protein Data Bank, a free library of well over 200,000 structures that scientists share. Tap it to pull it apart into its pieces, and they come back by themselves; tap again while it is apart and they come back at once. In GFP the glowing part lights up while it is open. You can open any PDB or mmCIF file from the library in the Toy tab.",
+      "Proteins are the tiny machines of living things. Each is a long chain of building blocks called amino acids that folds up into its own shape: coils called helices, flat strands and loops. Hemoglobin carries oxygen in the blood, insulin helps control sugar, and a jellyfish protein, GFP, glows green.\n\nThese are real shapes from the Protein Data Bank, a free library of well over 200,000 structures that scientists share. Tap it to pull it apart into its pieces, and they come back by themselves; tap again while it is apart and they come back at once. In GFP the glowing part lights up while it is open. You can open any PDB or mmCIF file from the library in the Toy tab. With ✋ Hands-on on, pull a helix, a strand or a loop out of the fold: the pieces next to it along the chain are tugged after it, and let go it glides back into place.",
   },
   "periodic-table": {
     howTo:
@@ -731,9 +732,9 @@ export const TOY_HELP = {
   },
 
   "crystal-lattice": {
-    howTo: "Tap to send a wave through it. Pick one of eleven crystals in the Toy tab.",
+    howTo: "Tap to send a wave through it. Hands-on: push a slice up or down; it springs back.",
     about:
-      "In a crystal, atoms are lined up in a pattern that repeats over and over, like tiles on a floor. In table salt, sodium and chlorine take turns in rows of little cubes. Diamond and graphite are both pure carbon: in diamond each atom holds on to four others, which makes it very hard, while graphite's flat sheets slide apart, which is why a pencil writes.\n\nTap it to send a wave through it: a ripple runs across, each slice of atoms rising and falling in turn, the bonds between them stretching and bending. Sound and heat travel through solids as waves like this. In ice, the water molecules spread out into an open pattern, so ice floats on water. Metals, quartz and graphene are in the Toy tab too.",
+      "In a crystal, atoms are lined up in a pattern that repeats over and over, like tiles on a floor. In table salt, sodium and chlorine take turns in rows of little cubes. Diamond and graphite are both pure carbon: in diamond each atom holds on to four others, which makes it very hard, while graphite's flat sheets slide apart, which is why a pencil writes.\n\nTap it to send a wave through it: a ripple runs across, each slice of atoms rising and falling in turn, the bonds between them stretching and bending. Sound and heat travel through solids as waves like this. In ice, the water molecules spread out into an open pattern, so ice floats on water. Metals, quartz and graphene are in the Toy tab too. With ✋ Hands-on on, push a slice of the crystal up or down: its neighbors follow less and less, so the lattice shears, and let go it springs back, ringing a little.",
   },
 
   // Lane Molecule viewer (labs).

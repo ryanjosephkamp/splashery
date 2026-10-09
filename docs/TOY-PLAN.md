@@ -1574,7 +1574,10 @@ Proposals below are suggestions; the owner may change them.
     names one, or any SMILES string, or open a MOL, SDF, XYZ or PDB file; it is built in 3D (SMILES
     are embedded with a small force field) and heats up the same way. Fix7: each bond stretches and
     squeezes between its two atoms (its splats follow both atoms, by how far along the bond they
-    are), so an atom never leaves its bond when it is heated.
+    are), so an atom never leaves its bond when it is heated. Hands-on H5: with ✋ Hands-on on, an
+    atom grabbed and pulled stretches its bonds after it (they already stretch between atoms) and
+    tugs its bonded neighbors about a third of the way; let go, it springs back to its place (a
+    spring home) and the molecule wobbles to rest.
   - Sound: Soft little ticks of the atoms jostling as it heats, thinning out as it settles; no wind,
     no building blocks (Sound C, October 2, 2026).
 - **Protein** (`protein`). Now: tap: Pull it apart. Plan: keep.
@@ -1586,7 +1589,9 @@ Proposals below are suggestions; the owner may change them.
     rainbow start to end, by chain or by structure. Open any PDB or mmCIF file. A tap pulls it apart
     into its pieces, turning a little, and puts it back (5 s); in GFP the chromophore glows green
     while the barrel is open. Fix7: a tap while it is apart brings the pieces back at once (1.4 s),
-    instead of pausing; the next tap pulls it apart again.
+    instead of pausing; the next tap pulls it apart again. Hands-on H5: with ✋ Hands-on on, a
+    helix, strand or loop pulled out of the fold tugs its neighbors along the chain after it, and
+    let go it glides back into its place.
   - Sound: A real tearing apart as it separates, with a whoosh, then a pressing-together and a soft
     thud as it reassembles (no building blocks).
 - **Crystal lattice** (`crystal-lattice`). Now: tap: Send a wave through. Plan: keep.
@@ -1594,7 +1599,9 @@ Proposals below are suggestions; the owner may change them.
   - Improved: E2: a tap sends a wave of vibration (a phonon) through the crystal: a ripple runs
     across it from left to right, each slice of atoms rising and falling in turn with its bonds (3.8
     s). Fix7: the bonds between slices stretch and bend with the wave (their two ends follow their
-    slices), so atoms never leave their bonds.
+    slices), so atoms never leave their bonds. Hands-on H5: with ✋ Hands-on on, a slice pushed up
+    or down along its plane takes its neighbors less and less with it (a shear, bonds stretching
+    between slices), and let go it springs back, ringing a little.
   - Sound: One cleaner, softer metallic chime with a faint glassy ring, no rattle after (Sound C,
     October 2, 2026).
 - **Unit cells** (`unit-cells`). Now: tap: Next view: cell, block, bonds. Plan: new effect (E2).
