@@ -130,6 +130,28 @@ Photo to 3D and Moving photo to 3D"; merge it first). Sharp picture is the defau
     to 6 times faster in SwiftShader. Clip pair `psv2-saved` / `psv2-reopened` on Effect review
     page 2. psv, psv2, p3d, smd-moving, live3, help and hta pass (one round 1 psv check now allows
     `view`).
+- October 9, 2026, round 3 (branch `claude/lane-photo-sharp-view-3`, PR "Phase Photo sharp view r3:
+  no WebGL error from Sharp picture to Splats through a rebuild"; Opus 5.5, high effort), on lane
+  Photo fidelity's report (its handoff, "For the Operator"): a rebuild from Sharp picture to Splats
+  drew the splats' work-buffer pass with "glDrawElementsInstanced: Mismatch between texture format
+  and sampler type".
+  - The cause, traced with a WebGL hook that checks every unsigned sampler at each instanced draw:
+    the build reads the saved view (`fromScene`), and a frame that lands before the stage swaps in
+    the new toy ran `sync`, saw Splats and turned the old toy's splats back on. The swap then
+    destroyed that entity, and with it its paint texture (PlayCanvas clears every uniform that
+    pointed at a destroyed texture), but the just-enabled placement still had a frame or two in the
+    work-buffer pass. That pass found `paintColor` empty, and PlayCanvas made its stand-in texture
+    in the middle of the draw: making it uploads it on unit 0, where `uSubDrawData` (an
+    unsigned-integer sampler) had just been bound. Only the first stand-in in a page does this, so
+    the error showed in about one run in three.
+  - The fix, in `splats()` (`src/packs/photo-sharp.js`): only the toy's own entity gets its splats
+    back, and never while the player is building; a replaced entity is let go (the rebuild destroys
+    it). No engine change.
+  - `tests/psv3.spec.mjs`: both photo toys, Detail Fine and One color per splat, Sharp picture to
+    Splats and back through rebuilds, with a frame's sync forced just before the swap. It fails on
+    main (4 of 4: the old toy's splats are on at the swap) and passes with the fix (8 of 8). Lane
+    Photo fidelity's own flow showed the WebGL error in about 1 run in 3 on main, 0 of 12 with the
+    fix.
 
 ### Measurements (October 8, 2026)
 

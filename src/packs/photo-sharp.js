@@ -168,7 +168,14 @@ function splatsNeeded(pl) {
 function splats(on) {
   const ent = player()?.stage?.toy?.entity;
   const pl = player();
-  if (S.splatsOff && (on || S.splatsOff !== ent)) {
+  // Only the toy's own entity gets its splats back, and never during a build. An entity turned back
+  // on just before the rebuild destroys it keeps a frame or two in the splats' work-buffer pass after
+  // its paint texture is gone; that pass then finds no paint texture, and PlayCanvas makes its stand-in
+  // texture in the middle of the draw, which leaves an RGBA8 texture where the pass reads its
+  // unsigned-integer sub-draw data ("glDrawElementsInstanced: Mismatch between texture format and
+  // sampler type"). A replaced entity is simply let go: the rebuild destroys it.
+  if (S.splatsOff && S.splatsOff !== ent) S.splatsOff = null;
+  if (S.splatsOff && on && !pl?.loading) {
     if (S.splatsOff.gsplat) S.splatsOff.gsplat.enabled = true;
     S.splatsOff = null;
     if (pl) pl.pickDirty = true; // (the pick buffer is drawn again, with the splats)
