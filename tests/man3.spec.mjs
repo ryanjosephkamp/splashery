@@ -53,10 +53,14 @@ test("the definitions, the notes and the opening-line context are there", () => 
     "An atom is", "Sharp view", "if you type only a new",
   ]) // prettier-ignore
     expect(flat.toLowerCase(), w).toContain(w.toLowerCase());
-  const whys = [...html.matchAll(/<div class="why">\s*<p><b>(Why [^<]*)</g)].map((m) => m[1]);
+  const whys = [...html.matchAll(/<details class="fold why"[^>]*>\s*<summary>([^<]*)</g)].map(
+    (m) => m[1],
+  );
   for (const w of ["splat budgets", "One color per splat", "Fifteen parts", "Twelve fields", "120-character", "Twelve moments", "Twelve bits", "two clocks"]) // prettier-ignore
     expect(whys.join("|").toLowerCase(), w).toContain(w.toLowerCase());
-  expect(whys.length).toBe(8);
+  // The three new questions are folds too.
+  for (const w of ["different parts", "different fields", "each moment a part"]) expect(whys.join("|"), w).toContain(w); // prettier-ignore
+  expect(whys.length).toBe(11);
 });
 
 test("the grammar names the brackets and arcsin, arccos, arctan, and the bare-input rule", () => {
@@ -68,9 +72,8 @@ test("the grammar names the brackets and arcsin, arccos, arctan, and the bare-in
 });
 
 const DEMOS = [
-  "gaussian-3d", "splat-numbers", "bell-1d-to-3d", "covariance-validity", "covariance-build",
-  "projection", "sort-blend", "windmill-parts", "uv-torus", "program-fields",
-  "order-of-operations", "grammar-railroad", "t-clock",
+  "gaussian-3d", "splat-numbers", "bell-1d-to-3d", "projection", "sort-blend", "windmill-parts",
+  "uv-torus", "program-fields", "grammar-railroad",
 ]; // prettier-ignore
 
 test("every demo placeholder exists, names what it will show, and is hidden in print", async ({

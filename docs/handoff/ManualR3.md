@@ -147,6 +147,53 @@ Also: the serial comma through the manual's lists, and the updated date (October
 - Tests: `tests/man3.spec.mjs` (new), `tests/st2.spec.mjs` (one new test), `tests/man2.spec.mjs`
   (the glossary count, 14 to 21: the only expectation changed).
 
+## Part 2 (October 10, 2026): the answers page, the demos, a lighter layout, the gallery
+
+Brief: the Operator's message of October 10, 2026 (part 2 of this lane). Branch
+`claude/lane-manual-r3-2`, made from `claude/lane-manual-r3`; its own draft PR, "Phase Manual r3,
+part 2: the answers page in the manual, the demos and a lighter layout". Model: Sonnet 5.5. The
+Operator's update of October 9 (ten levels in the level map) was already in part 1.
+
+State:
+
+1. **The answers page, in the manual's own voice.** The eight "Why this number?" notes are folds
+   that say whether each number is our choice, a format limit, or both, and what changes if it is
+   chosen differently; three new questions (different parts, different fields, why each moment is a
+   part and what else could work); the splat budgets' evidence table (six of the 14 toys of
+   `docs/lab/SHARPNESS.md`, and what it did not test); "What Splashery can do that other splat tools
+   can't" (with the scene link's three facts); "Open questions" (planned in the Kit lab, and open);
+   the concrete rules for skipped points and mistakes.
+2. **Demos** (web only; the PDF prints a still and a link): the covariance (Σ and its ellipse), the
+   reader that groups an expression, the moments (u around the ring, the 12 moments, the dip), and a
+   new smoothstep demo. The code is `manual/demos.js` (drawing) and `manual/demo-math.js` (the math,
+   testable). Stills for print: `manual/img/demo-*.png`.
+3. **Lighter layout.** `details.fold` for definitions, derivations, notes, and long tables (closed
+   by default; a link into one opens it; print opens all); glossary pop-ups (`span.term[data-g]`,
+   from the glossary); "Open all the folds" and "Close all the folds". One CSS class and one script:
+   `manual/fold.js`. To change what folds, change the class on the element.
+4. **The gallery (Codex task 33, PR #478).** Merged into this branch with its commit; reviewed and
+   fixed (below); wired into Level 4 as "Sixty more programs" by `manual/build-gallery.mjs` (run it
+   after the gallery JSON changes, then prettier).
+
+Gallery review (by a helper on the same model; I checked the result): about 30 of the 60 programs
+needed changes. Most of the weak look came from a stale-fields bug in Codex's thumbnail tool (the
+toy keeps any field a program leaves out from the previous program), so the tool now sets all 12
+fields for every program. About 15 programs were really weak (plain discs and cones, flat sheets, a
+degenerate gyroid, an orange "blue-green sphere"); two were wrong (the Boy surface formula, and a
+"Hopf link" that was not a link) and were replaced (pseudosphere, Hopf link). All 60 read and
+compile; all 43 distinct source links return 200. Quality verdict on Luna's work: **usable with
+fixes** (details in the PR).
+
+Notes:
+
+- Facts checked against the code, and what I dropped: see the PR's "Numbers checked" list. Dropped
+  because I could not verify them in the code: "about 235 of 224 uniform values", "PlayCanvas 2.22.3
+  turns off view-dependent color for generated toys", and the origin story of the 120,000 and
+  300,000 tops.
+- Nothing from the owner's private notes is quoted anywhere (a test checks the manual for "the
+  owner" and similar).
+- The field length stays at 120 (the Kit lab makes the 240 change in the toy).
+
 ## Known issues
 
 - The PDF's figure text for Figures 2 and 3 is smaller relative to the page than on the web, because
