@@ -368,6 +368,10 @@ test.describe("the toy in the browser", () => {
   }) => {
     const errors = [];
     page.on("pageerror", (e) => errors.push(e.message));
+    // A model is in once the Toy tab is drawn again for it (the app's onToy, after the build): its
+    // input panel's line names it. Until then a message shown in the old panel would be replaced
+    // (Fix11: under load the panel came back after the next file's message, hiding it).
+    const shown = (name) => expect(page.locator("#toy-input .input-shown")).toContainText(`${name}:`, { timeout: 60_000 }); // prettier-ignore
     await page.goto(APP);
     await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
     await page.evaluate(() => window.__splashery.app.chooseToy("model-splats"));
@@ -383,20 +387,27 @@ test.describe("the toy in the browser", () => {
     // Your own model: a binary STL, then a GLB with a texture.
     await page.locator("#toy-input-file").setInputFiles(path.join(FIX, "cube-binary.stl"));
     await page.waitForFunction(() => window.__splashery.player.proc?.ctx?.kit?.data?.model?.name === "cube-binary", null, { timeout: 60_000 }); // prettier-ignore
+    await shown("cube-binary");
     const stl = await page.evaluate(() => window.__splashery.player.proc.ctx.kit.data.model);
     expect(stl.triangles).toBe(12);
     expect(stl.up).toBe("z");
     await page.locator("#toy-input-file").setInputFiles(path.join(FIX, "quad.glb"));
     await page.waitForFunction(() => window.__splashery.player.proc?.ctx?.kit?.data?.model?.name === "quad", null, { timeout: 60_000 }); // prettier-ignore
+    await shown("quad");
     // The wireframe view.
     await page.evaluate(() => window.__splashery.app.setToyOptions({ show: "wire" }));
     await page.waitForFunction(() => window.__splashery.player.proc?.ctx?.kit?.data?.model?.wire === true, null, { timeout: 60_000 }); // prettier-ignore
+    await expect(page.locator("#toy-input .input-shown")).toContainText("edges drawn as", {
+      timeout: 60_000,
+    });
     // Several files at once: a .gltf with its .bin, and an .obj with its .mtl (picked mtl first).
     await expect(page.locator("#toy-input-file")).toHaveAttribute("multiple", "");
     await page.locator("#toy-input-file").setInputFiles([path.join(FIX, "quad-loose.gltf"), path.join(FIX, "quad-loose.bin")]); // prettier-ignore
     await page.waitForFunction(() => window.__splashery.player.proc?.ctx?.kit?.data?.model?.name === "quad-loose", null, { timeout: 60_000 }); // prettier-ignore
+    await shown("quad-loose");
     await page.locator("#toy-input-file").setInputFiles([path.join(FIX, "pyramid.mtl"), path.join(FIX, "pyramid.obj")]); // prettier-ignore
     await page.waitForFunction(() => window.__splashery.player.proc?.ctx?.kit?.data?.model?.name === "pyramid", null, { timeout: 60_000 }); // prettier-ignore
+    await shown("pyramid");
     const pyr = await page.evaluate(() => window.__splashery.player.proc.ctx.kit.data.model);
     expect(pyr.triangles).toBe(6);
     expect(pyr.notes.join(" ")).not.toContain("pyramid.mtl"); // its colors came with it
