@@ -75,6 +75,9 @@ four hours.
 
 ## State
 
+October 10, 2026, 05:40 UTC (Opus 5.5): the owner marked all three cards "good" (05:06 UTC). Nothing
+left to fix; PR #488 waits on the Integrators' full run and the Operator's merge.
+
 October 10, 2026 (Opus 5.5, high effort): first round built; see "For the Operator" for the PR.
 
 - **Your audio and the microphone** (`src/packs/chladni-3d.js`, all in the toy's own file; studio.js
