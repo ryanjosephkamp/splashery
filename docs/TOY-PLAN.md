@@ -57,23 +57,23 @@ Proposals below are suggestions; the owner may change them.
   attractor, 5-cell, 16-cell, 24-cell, Duoprism, Splat equation, Storybook, Music box, Alarm clock,
   Gift box, Umbrella, Desk fan, Desk lamp, Potion bottle, Telescope, Fountain pen, Water bottle,
   Soda can, Running shoe, Hoodie, Sunglasses, Baseball cap, Sword in the stone, Heraldic shield, Bow
-  and target, Trebuchet, Knight's helmet, Crown, Dragon egg, Wizard's orb, Crystal ball, Jellyfish,
-  School of fish, Butterfly, Pufferfish, Nautilus, Ladybug, Snail, Octopus, Starfish, Sea urchin,
-  Frog, Penguin, Owl, Jack-o'-lantern, Snowman, Fireworks, Decorated tree, Patterned egg, Paper
-  lantern, Diya, Acoustic guitar, Snare drum, Xylophone, Toy piano, Grand piano, Upright piano,
-  Harpsichord, Electronic keyboard, Helicopter, Hot-air balloon, Steam train, Ocean liner, Sports
-  car, Bus, Propeller plane, Jet airliner, Sailboat, Submarine, Bicycle, Tractor, Flying saucer,
-  Eiffel Tower, Washington Monument, Pyramids of Giza, Twisting supertall, Statue of Liberty, White
-  House, Leaning Tower of Pisa, Colosseum, Parthenon, Stonehenge, Big Ben, Taj Mahal, Castle,
-  Pagoda, Windmill, Perceptron, Multilayer perceptron, Neural network, Convolutional network,
-  Recurrent network, Transformer, Looped transformer, Diffusion model, Gradient descent, Gaussian
-  splatting, Word vectors, Sorting machine, Half adder, Turing machine, Difference engine, Enigma
-  machine, Bombe, Picture lab, Your book, Photo album, Picture frame, Song landscape, Chladni plate,
-  Room echo meter, Splat mirror, Model to splats, QR code, Photo to 3D, Moving photo to 3D, Video to
-  3D, Sound lab, Sound recorder, Splat toolkit, Point clouds, Volume viewer, Splat field, Light lab,
-  Thermal ellipsoids, Super-resolution microscope, Galaxy in a box, Cryo-EM map, Contour lab,
-  Terrain in a box, Ripple tank, Light bench, Fluid lab, Grand Canyon, Mount St. Helens, The sea
-  floor, Tides at Bar Harbor, Hurricane, Relief map, Living city, Stork migration, Earthquakes,
+  and target, Trebuchet, Crossbow, Knight's helmet, Crown, Dragon egg, Wizard's orb, Crystal ball,
+  Jellyfish, School of fish, Butterfly, Pufferfish, Nautilus, Ladybug, Snail, Octopus, Starfish, Sea
+  urchin, Frog, Penguin, Owl, Jack-o'-lantern, Snowman, Fireworks, Decorated tree, Patterned egg,
+  Paper lantern, Diya, Acoustic guitar, Snare drum, Xylophone, Toy piano, Grand piano, Upright
+  piano, Harpsichord, Electronic keyboard, Helicopter, Hot-air balloon, Steam train, Ocean liner,
+  Sports car, Bus, Propeller plane, Jet airliner, Sailboat, Submarine, Bicycle, Tractor, Flying
+  saucer, Eiffel Tower, Washington Monument, Pyramids of Giza, Twisting supertall, Statue of
+  Liberty, White House, Leaning Tower of Pisa, Colosseum, Parthenon, Stonehenge, Big Ben, Taj Mahal,
+  Castle, Pagoda, Windmill, Perceptron, Multilayer perceptron, Neural network, Convolutional
+  network, Recurrent network, Transformer, Looped transformer, Diffusion model, Gradient descent,
+  Gaussian splatting, Word vectors, Sorting machine, Half adder, Turing machine, Difference engine,
+  Enigma machine, Bombe, Picture lab, Your book, Photo album, Picture frame, Song landscape, Chladni
+  plate, Room echo meter, Splat mirror, Model to splats, QR code, Photo to 3D, Moving photo to 3D,
+  Video to 3D, Sound lab, Sound recorder, Splat toolkit, Point clouds, Volume viewer, Splat field,
+  Light lab, Thermal ellipsoids, Super-resolution microscope, Galaxy in a box, Cryo-EM map, Contour
+  lab, Terrain in a box, Ripple tank, Light bench, Fluid lab, Grand Canyon, Mount St. Helens, The
+  sea floor, Tides at Bar Harbor, Hurricane, Relief map, Living city, Stork migration, Earthquakes,
   Airport X-ray scanner, How CT works, Walnut CT scan, MRI of a fruit, Electron microscope, Thermal
   camera, Screen, Shardball, Longtail, Grain Garden, Page Breaker, Strata, Volley Table, Stone Belt,
   Soft Landing, Night Owl Pinball, Cast a Shadow, Photo Dash, Note Rider, Data in 3D.
@@ -2680,6 +2680,8 @@ Proposals below are suggestions; the owner may change them.
   - Sound: The timber beam creaks and strains, then a softer swing (much less wind).
 - **Crossbow** (`crossbow`). Now: tap: Shoot. Plan: keep.
   - Owner: Solid.
+  - Improved: Hands-on H3 (October 9, 2026; Hands-on): it starts cocked; a tap pulls the trigger and
+    the bolt flies; pull the string back until it clicks onto the catch and a new bolt loads.
   - Sound: No click; the string's real thump, then the bolt hitting as before; real CC0 recordings
     now (bow-and-target-release.mp3), with the synthesized sound as a fallback.
 - **Knight's helmet** (`knights-helmet`). Now: tap: Open the visor. Plan: keep.
@@ -2891,12 +2893,16 @@ Proposals below are suggestions; the owner may change them.
     vibrate one after another, and rings of light pulse out of the soundhole. Music is Phase D.
     Fix6: smooth lacquered wood (the top, sunburst, back, ribs and neck placed evenly with no color
     noise or fine grain), a clean three-ring rosette, and thin strings drawn as clean lines.
+    Hands-on H3 (October 9, 2026; Hands-on): drag across the strings to pluck each one, with its own
+    open note (E, A, D, G, B, E), and it vibrates.
   - Sound: A real strummed chord progression (synth plucks).
 - **Snare drum** (`drum`). Now: tap: Play a roll. Plan: keep.
   - Owner: Could be more dramatic. Fast taps could play longer and faster rolls.
   - Effect: Sticks play a roll; fast repeated taps make faster, longer rolls.
   - Improved: C2: the sticks play a roll; taps within 0.9 s of each other step up through four
-    speeds and make the roll longer (up to 3 s after the last tap).
+    speeds and make the roll longer (up to 3 s after the last tap). Hands-on H3 (October 9, 2026;
+    Hands-on): pick up a stick and hit the drum: the head cracks and ripples, the rim clicks, the
+    shell knocks.
   - Sound: Snare hits with rattle.
 - **Xylophone** (`xylophone`). Now: tap: Play a scale. Plan: keep.
   - Owner: Incredible; basically perfect.
