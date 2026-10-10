@@ -31,7 +31,7 @@ const SAMPLE = [
   "oak",
   "campfire",
   "lollipop", // lane Hands-on H2: the cupcake's cherry lifts off now (pieces mode), so it is never lifted whole
-  "teddy-bear",
+  "rubber-duck", // Fix11: the teddy bear is a body piece with its arms and head on ropes now (#433, lane Hands-on H1, pieces mode), so it is never lifted whole
   "soda-can", // lane Hands engine B: the chest's lid is a hinge now (pieces mode), so it no longer lifts whole
   "running-shoe",
   "shield",
@@ -62,12 +62,16 @@ const SAMPLE = [
 // Lane Hands-on H3: the picture frame swings on its nail now (pieces mode), so it is never lifted
 // whole either. So does the drum (its sticks are pieces, the drum stays put to be hit); every
 // other music toy has its own controls (keys, mallet, strings), so the drum stays the shelf's sample.
+// Fix11: the running shoe's laces are ropes now (#434, lane Hands-on H1: pull a lace end to untie
+// it), and so is every other clothing toy (the hoodie's sleeves, the sunglasses' arms, the cap), so
+// no clothing toy lifts whole; the shoe stays the shelf's sample.
 const KNOWN = {
   "picture-frame": ["whole-pickup"],
   "solar-system": ["whole-pickup"],
   campfire: ["whole-pickup"],
   bacterium: ["whole-pickup"],
   drum: ["whole-pickup"],
+  "running-shoe": ["whole-pickup"],
 };
 const selected = ALL ? TOYS : SAMPLE.map((id) => TOYS.find((t) => t.id === id));
 
