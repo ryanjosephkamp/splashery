@@ -43,7 +43,7 @@ const SAMPLE = [
   "splat-field",
   "galaxy-box",
   "diya", // lane Hands-on H3: the snowman comes apart now (pieces mode), so it is never lifted whole
-  "drum",
+  "xylophone", // lane Hands-on H3: the drum's sticks are pieces now (the drum stays put), so it is never lifted whole
   "bus",
   "eiffel-tower",
   "taco", // lane Hands-on H2: the watermelon's slices come out now (pieces mode), so it is never lifted whole
