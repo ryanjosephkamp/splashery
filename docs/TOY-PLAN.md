@@ -75,14 +75,15 @@ Proposals below are suggestions; the owner may change them.
   network, Recurrent network, Transformer, Looped transformer, Diffusion model, Gradient descent,
   Gaussian splatting, Word vectors, Sorting machine, Half adder, Turing machine, Difference engine,
   Enigma machine, Bombe, Picture lab, Your book, Photo album, Picture frame, Song landscape, Chladni
-  plate, Room echo meter, Splat mirror, Model to splats, QR code, Photo to 3D, Moving photo to 3D,
-  Video to 3D, Sound lab, Sound recorder, Splat toolkit, Point clouds, Volume viewer, Splat field,
-  Light lab, Thermal ellipsoids, Super-resolution microscope, Galaxy in a box, Cryo-EM map, Contour
-  lab, Terrain in a box, Ripple tank, Light bench, Fluid lab, Grand Canyon, Mount St. Helens, The
-  sea floor, Tides at Bar Harbor, Hurricane, Relief map, Living city, Stork migration, Earthquakes,
-  Airport X-ray scanner, How CT works, Walnut CT scan, MRI of a fruit, Electron microscope, Thermal
-  camera, Screen, Shardball, Longtail, Grain Garden, Page Breaker, Strata, Volley Table, Stone Belt,
-  Soft Landing, Night Owl Pinball, Cast a Shadow, Photo Dash, Note Rider, Night sky, Data in 3D.
+  plate, Sound in a box, Room echo meter, Splat mirror, Model to splats, QR code, Photo to 3D,
+  Moving photo to 3D, Video to 3D, Sound lab, Sound recorder, Splat toolkit, Point clouds, Volume
+  viewer, Splat field, Light lab, Thermal ellipsoids, Super-resolution microscope, Galaxy in a box,
+  Cryo-EM map, Contour lab, Terrain in a box, Ripple tank, Light bench, Fluid lab, Grand Canyon,
+  Mount St. Helens, The sea floor, Tides at Bar Harbor, Hurricane, Relief map, Living city, Stork
+  migration, Earthquakes, Airport X-ray scanner, How CT works, Walnut CT scan, MRI of a fruit,
+  Electron microscope, Thermal camera, Screen, Shardball, Longtail, Grain Garden, Page Breaker,
+  Strata, Volley Table, Stone Belt, Soft Landing, Night Owl Pinball, Cast a Shadow, Photo Dash, Note
+  Rider, Night sky, Data in 3D.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
@@ -3700,6 +3701,15 @@ Proposals below are suggestions; the owner may change them.
     pressure-nodal surfaces, a 3D Chladni figure, in a few seconds; tap again on a formed figure to
     swirl the water and start over. Modes of a cube (single and mixed) and of a round flask (shells
     and cones).
+  - Improved: Live r9 (the owner's ask of October 10, 2026): the box plays your audio and hears the
+    microphone (after a tap), as the Chladni plate does. Each moment's strongest pitch is moved by
+    octaves into the cell's range and scaled up 256 times to its ultrasound modes, which keep their
+    real ratios (√(l² + m² + n²) for the cube, ka for the flask); each mode rings by a resonance
+    curve and the beads slide down the mix of their Gor'kov potentials (U = Σ aₘ² Uₘ), so a held
+    note settles a crisp figure, a new note moves the beads on from where they lie, and silence
+    holds them. Six more modes fill the ladder between the toy's own (cube 0, 1, 0, 0, 2, 0 and 0,
+    2, 2 mixed; a flask's disc, one shell, and a disc and a shell). Switch on the sound still rings
+    the chosen mode.
   - Sound: The mode's tone, eight octaves down (the real cell rings at about 100 to 370 kHz).
 - **Room echo meter** (`room-echo`). Now: tap: Clap in the sample room. Plan: keep.
   - Owner: The owner's approval of lane Live input ("live input go", September 30, 2026; labs only).

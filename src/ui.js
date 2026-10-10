@@ -153,6 +153,10 @@ export function createUI(app) {
     lookBgColor: $("look-bg-color"),
     lookTheme: $("look-theme"),
     lookDetail: $("look-detail"),
+    lookSplats: $("look-splats"), // lane Kit lab
+    lookSplatsValue: $("look-splats-value"),
+    lookSplatsRow: $("look-splats-row"),
+    lookSplatsNote: $("look-splats-note"),
     lookAccent: $("look-accent"),
     lookAccentColor: $("look-accent-color"),
     lookSize: $("look-size"),
@@ -2128,6 +2132,13 @@ export function createUI(app) {
   for (const b of els.lookDetail.querySelectorAll("button")) {
     b.addEventListener("click", () => app.setDetail(b.dataset.detail));
   }
+  // Lane Kit lab: the Detail slider, labs only. The label follows the drag;
+  // the toy rebuilds when the finger lets go.
+  els.lookSplatsRow.hidden = els.lookSplatsNote.hidden = !labsOn();
+  els.lookSplats.addEventListener("input", () => {
+    els.lookSplatsValue.value = splatsLabel(Number(els.lookSplats.value));
+  });
+  els.lookSplats.addEventListener("change", () => app.setSplats(Number(els.lookSplats.value)));
   for (const e of IDLE_EFFECTS) els.autoEffect.add(new Option(e.label, e.id));
   // Reset everything: a second tap within a few seconds confirms.
   let resetArmed = null;
@@ -3211,10 +3222,15 @@ export function createUI(app) {
       }
       document.documentElement.dataset.theme = resolvedTheme;
     },
-    setDetail(detail) {
+    setDetail(detail, splats = null) {
       for (const b of els.lookDetail.querySelectorAll("button")) {
-        b.setAttribute("aria-pressed", String(b.dataset.detail === detail));
+        b.setAttribute("aria-pressed", String(!splats && b.dataset.detail === detail));
       }
+      // Lane Kit lab: the slider shows its own count, or the tier's.
+      const tier = app.player?.profile;
+      const n = splats || PROFILES[tier]?.defaultCount || 140000;
+      els.lookSplats.value = String(n);
+      els.lookSplatsValue.value = splatsLabel(n, splats ? null : tier);
     },
     setAutoplay(a, reducedMotion) {
       els.autoTurntable.checked = a.turntable;
@@ -3480,4 +3496,11 @@ export function createUI(app) {
     },
   };
   return ui;
+}
+
+// Lane Kit lab: the Detail slider's label, "140k" (or "140k · mid" while the
+// tier, not the slider, sets the count).
+function splatsLabel(n, tier = null) {
+  const k = `${Math.round(n / 1000)}k`;
+  return tier ? `${k} · ${tier}` : k;
 }

@@ -7,13 +7,15 @@
 // Each splat has its own (u, v): a grid over the two ranges (or scattered
 // at random with spread = random), and the equations place it and color
 // it. The equations are read by lane Math's safe reader (src/equation.js):
-// no eval, no Function, 120 characters per field, so a link that carries
-// them can only ever do arithmetic.
+// no eval, no Function, 240 characters per field (120 until lane Kit lab,
+// October 2026; the plotters keep 120), so a link that carries them can
+// only ever do arithmetic.
 //
 // Time moves the shape the way the graph and surface plotters bend with a
 // (docs/handoff/Math.md, "Curves that bend in real time"): the program is
-// built at twelve times t across one cycle (0 to 2π), copy j morphs exactly
-// into copy j + 1 on channel 1, and drive() shows the copy for the moment.
+// built at twelve times t across one cycle (0 to 2π; up to fifteen with the
+// Moments choice), copy j morphs exactly into copy j + 1 on channel 1, and
+// drive() shows the copy for the moment.
 // Each copy is built in its own pose, so it also sorts right there.
 //
 // The reader knows the variables x, y, t, r and θ, not u and v, so u and v
@@ -21,10 +23,16 @@
 // a typed y or θ is turned away first), and its messages are translated
 // back.
 
-import { compile, asciiEquation, EquationError, MAX_LENGTH } from "../equation.js";
+import { compile, asciiEquation, EquationError } from "../equation.js";
 
 const TAU = Math.PI * 2;
-const KNOTS = 12; // copies across one cycle of t (parts, so at most 14)
+// Lane Kit lab: the longest field (the owner's call; docs/lab/EQUATION-FIELDS.md).
+export const FIELD_MAX = 240;
+const KNOTS = 12; // copies across one cycle of t (parts, so at most 15)
+// Lane Kit lab: the Moments choice, 12 to 15 copies (15 is the kit's parts
+// limit). 12 stays the default, so old links build as before.
+export const MOMENTS = [12, 13, 14, 15];
+const momentsOf = (o) => (MOMENTS.includes(Number(o.moments)) ? Number(o.moments) : KNOTS);
 const COUNT_MIN = 100;
 const COUNT_MAX = 10000;
 const PLAY_SECS = 4;
@@ -162,7 +170,7 @@ function translate(err) {
 export function readExpr(text, allowed = ["u", "v", "t"]) {
   const src = String(text ?? "").trim();
   if (!src) throw new EquationError("it is empty.");
-  if (src.length > MAX_LENGTH) throw new EquationError(`it is over ${MAX_LENGTH} characters.`);
+  if (src.length > FIELD_MAX) throw new EquationError(`it is over ${FIELD_MAX} characters.`);
   const low = asciiEquation(src).toLowerCase();
   const stray = /theta/.test(low) ? "θ" : /[xy]/.test(low.replace(/exp|max/g, "")) ? /y/.test(low) ? "y" : "x" : null; // prettier-ignore
   if (stray) {
@@ -173,7 +181,7 @@ export function readExpr(text, allowed = ["u", "v", "t"]) {
   const names = allowed.map((n) => (n === "u" ? "θ" : n === "v" ? "y" : n));
   let c;
   try {
-    c = compile(mapped, names);
+    c = compile(mapped, names, { maxLength: FIELD_MAX });
   } catch (err) {
     if (!(err instanceof EquationError)) throw err;
     const e = new EquationError("x");
@@ -426,6 +434,14 @@ export const RECIPES = {
         ],
       },
       { key: "shade", label: "Light and shade", type: "switch", default: true },
+      // Lane Kit lab: how many moments of t the toy keeps (docs/lab/MOMENTS.md).
+      {
+        key: "moments",
+        label: "Moments of t",
+        type: "select",
+        default: String(KNOTS),
+        choices: MOMENTS.map((n) => ({ id: String(n), label: String(n) })),
+      },
       // Your own program, field by field (set from the panel, not shown).
       ...FIELDS.map((name) => ({ key: name, label: name, type: "text", default: "", hidden: true })), // prettier-ignore
     ],
@@ -436,7 +452,7 @@ export const RECIPES = {
     ],
     action: { key: "play", label: "Play t" },
     // A tap plays one cycle of t (0 to 2π, 4 s): the shape moves through
-    // its twelve copies, each morphing into the next. A program without t
+    // its twelve (to fifteen) copies, each morphing into the next. A program without t
     // clears and draws its splats again in order, one by one (3.4 s).
     drive(t, c, out, info) {
       const g = info?.data?.equation;
@@ -465,7 +481,7 @@ export const RECIPES = {
       const { label, fields, prog } = programFor(o);
       NOW.label = `${label}: ${programText(fields)}`;
       NOW.fields = fields;
-      const copies = prog.usesT ? KNOTS : 1;
+      const copies = prog.usesT ? momentsOf(o) : 1;
       k.data = { equation: { copies } };
       const budget = Math.floor((k.count * 0.98) / copies);
       const n0 = Math.max(1, Math.min(prog.count, budget));

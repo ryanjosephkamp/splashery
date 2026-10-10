@@ -74,9 +74,11 @@ Lane details: branch `claude/lane-arcade-r3` (engine changes on `claude/lane-arc
 
 ## State
 
-(October 9, 2026; built by Opus 5.5.) Draft PR #474 (`claude/lane-arcade-r3`), every item of the
-brief built. No engine PR: every change is in the game kit (`src/arcade/`, used only by the Arcade
-games) and the Arcade packs.
+**Merged (October 10, 2026).** PR #474 (`claude/lane-arcade-r3`, built by Opus 5.5) went into main
+with batch 5 (#496, at ad961bec), with the About-length fix (5000924b: Shardball's and Note Rider's
+About texts within 180 words, for `tests/help.spec.mjs`). Every Arcade r3 card is marked good. No
+engine PR: every change is in the game kit (`src/arcade/`, used only by the Arcade games) and the
+Arcade packs. Nothing is left open in this round.
 
 - Clips on Effect review page 2 (lane record `ArcadeR3`), each game before (main) and after, at
   phone size with real play: `arc3-shardball`, `arc3-strata`, `arc3-photo-dash`, `arc3-stone-belt`,
@@ -92,8 +94,8 @@ games) and the Arcade packs.
 - October 10: main merged in (no conflicts); the Arcade specs pass (38).
 - Sounds: Photo Dash (the coin) and Note Rider (seven instruments) are "ready" in
   `tools/sound-review.json`.
-- Tests: `tests/arc3.spec.mjs` (9) and the older Arcade specs pass (37 in all); the full suite is
-  for the Integrator.
+- Tests: `tests/arc3.spec.mjs` (10) and the older Arcade specs pass (38 in all); batch 5's full
+  suite passed before the merge.
 
 ## Notes
 
