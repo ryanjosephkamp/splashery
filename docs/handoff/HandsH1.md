@@ -57,9 +57,15 @@ file. The engine files belong to the merged engines; another lane's toys are the
   comments on your PR that start "From the Operator", the "READY:", "WORKING:" or "BLOCKED:" line at
   the top of "## State
 
-READY: all four shelves (October 8, 2026, cloud session, Opus 5.5). Merge the engine PR first; the
-shelf PRs wait for the owner's marks on their `hh1-` cards (Effect review page 2, lane HandsH1: 36
-cards, grouped Balls, Shapes, Toys and Clothing).
+## State
+
+READY: the lane is done and merged (October 9, 2026, cloud session, Opus 5.5). The Operator's batch
+#457 (main 7f435756) merged all four shelves (Balls #424, Shapes #429, Toys #433, Clothing #434)
+with the batch fixes, and the engine work of #421 (already in main through Ops #447, so #421 was
+closed). Every `hh1-` card's latest clip is marked "good" (Effect review page 2, lane HandsH1: 36
+toys, grouped Balls, Shapes, Toys and Clothing). Nothing is open: no PR, check-in or watch.
+
+The rounds, oldest first:
 
 - Engine #421 (`claude/lane-hands-h1-engine`), main merged in: its specs pass, the hec-engine timing
   test included once the CPU was quiet.
@@ -137,23 +143,25 @@ cards, grouped Balls, Shapes, Toys and Clothing).
 
 ## Known issues
 
-- Toys and Clothing: the teddy bear is picked up by its tummy (held by an arm, the arm swung away
-  from the finger); the robot's key is wound by a finger circling its tummy or, from behind, its
-  key.
-
-- Running shoe: the laces' shell checks them against about 260 spheres while they move (sleeps when
-  still), about 1.5 ms a frame more in the test browser; the laces sit up to about 1 cm off the
-  shoe's sides.
-- With the camera looking down at the floor from the side, a throw to the right also goes away from
-  the camera, so on a phone a ball's roll shows partly as getting smaller.
-- The walls are invisible: a ball that rolls 3 toy radii stops against one.
+- Teddy bear: picked up by its tummy (held by an arm, the arm swung away from the finger).
+- Wind-up robot: wound by a finger circling its tummy or, from behind, its key.
+- Jelly blob: its Hands-on stretch is engine C's rig stretch; the `hh1-blob` clip showed the
+  shelf-entry grab that the batch fix removed (engine C's `hec-blob` clip is also "good").
+- Running shoe: the laces' shell checks them against about 260 spheres while they move (it sleeps
+  when they are still), about 1.5 ms a frame more in the test browser; the laces sit up to about 1
+  cm off the shoe's sides.
+- Hoodie: the elbow is a hard cut; bent far, its outer side shows the two parts overlapping as a
+  crease.
+- Balls: with the camera looking down at the floor from the side, a throw to the right also goes
+  away from the camera, so on a phone a ball's roll shows partly as getting smaller. The walls are
+  invisible: a ball that rolls 3 toy radii stops against one.
 
 ## For the Operator
 
-- Merge the engine PR #421 before the Balls PR (and before Shapes, Toys and Clothing, which are
-  stacked on it).
 - Clips at device scale 3 take about 10 minutes each in this container (two at a time on its 4
   cores), so a shelf of 20 takes about two hours.
 - The garden gnome's "never rests" finding (docs/audits/hands-l1-sweep-2026-10.md) is a scan outside
   these shelves whose cause the sweep puts in the engine's resting contact; it needs its own small
   engine task.
+- `addScan` (src/packs/real-objects.js) now takes `partOf(filePart, i)` to place a scan's splats on
+  a part of their own (the hoodie's forearms); other toys are unchanged.

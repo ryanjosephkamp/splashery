@@ -15,7 +15,9 @@
 // mass, friction, restitution }], floor (y), area (half width), grip,
 // gravity (in toy radii per second squared), sound(hit) => cue | null }.
 // `handsOn: true | false` on a recipe starts the switch on, or keeps the
-// toy out of Hands-on (a picture toy). Pure JavaScript, no DOM.
+// toy out of Hands-on (a picture toy). `handsLevel1: true | (info) => bool`
+// lets a picture toy or a still toy (turntable: false) play Level 1 (lane
+// Hands-on H3). Pure JavaScript, no DOM.
 
 import { World, Body, boundOf, quat, v3 } from "./world.js";
 import { extrasFor } from "./fields.js"; // lane Hands engine A
@@ -54,6 +56,12 @@ export function ownHands(recipe) {
   return !!(recipe?.drag || recipe?.grab);
 }
 
+// Whether a recipe asks for Level 1 though it's a picture toy or a still one
+// (lane Hands-on H3), live or not.
+export function asksLevel1(recipe) {
+  return !!recipe?.handsLevel1;
+}
+
 // Whether a toy plays in Hands-on at all (a picture toy keeps its pages).
 export function canPlay(info) {
   const r = info?.recipe;
@@ -61,7 +69,13 @@ export function canPlay(info) {
   // (A picture toy that asks for joints plays them: a picture frame swings
   // on its nail; lane Hands-on H3.)
   if (r?.hands?.joints) return true;
-  if (r?.pictures || r?.turntable === false) return false;
+  // (A picture toy or a still one, turntable: false, that asks for Level 1
+  // plays it: picked up, tossed and set down whole. `handsLevel1` may be a
+  // function of the toy's info, false while the toy is a live tool someone
+  // is working in (a converter with a file open, the Screen capturing);
+  // lane Hands-on H3.)
+  const l1 = typeof r?.handsLevel1 === "function" ? !!r.handsLevel1(info) : !!r?.handsLevel1;
+  if (r?.pictures || r?.turntable === false) return l1;
   return true;
 }
 
@@ -84,6 +98,7 @@ const HOLD_UPRIGHT = 1;
 const HOLD_SWING_DAMPING = 1.2;
 const PUSH_MAX = 2; // toy radii per second: the fastest a nudge pushes
 const PICK_LIFT = 0.15;
+const FLIP_HOLD = 0.5; // seconds a finger may rest after its flick before letting go (lane Hands-on H2)
 const FLIP_PX = 400; // CSS pixels per second up the screen: a flick this fast flips a `flip` piece (lane Hands-on H2)
 const FLIP_UP = 4; // toy radii per second: how fast a flipped piece rises
 
@@ -110,9 +125,13 @@ export class HandsOn {
 
   // A new toy: everything back to how it was built.
   attach(info) {
+    this.available = undefined; // (lane Hands-on H3)
     this.clear();
     this.info = info;
-    this.on = canPlay(info) && (ownHands(info?.recipe) || info?.recipe?.handsOn === true);
+    // (A toy with its own drags that also asks for Level 1, a book whose
+    // pages pull over, starts with the switch off: its pages pull either way.)
+    const l1own = ownHands(info?.recipe) && asksLevel1(info?.recipe);
+    this.on = canPlay(info) && !l1own && (ownHands(info?.recipe) || info?.recipe?.handsOn === true);
     this.extras?.dispose(); // lane Hands engine A: materials and fields
     this.extras = extrasFor(this, info);
   }
@@ -164,12 +183,14 @@ export class HandsOn {
   // Whether a toy's own drags work (the laptop's trackpad, the gummy
   // bear's stretch): with the switch on, or on a toy Hands-on leaves alone.
   ownDrags() {
-    return this.on || !canPlay(this.info);
+    return this.on || !canPlay(this.info) || (this.own && asksLevel1(this.info?.recipe));
   }
 
-  // True while a drag on the toy should pick it (or a piece) up.
+  // True while a drag on the toy should pick it (or a piece) up. (On a toy
+  // with its own drags that asks for Level 1, a press its own drag doesn't
+  // take, off the book's pages: see pressAt; lane Hands-on H3.)
   canGrab() {
-    return this.on && !this.own && canPlay(this.info);
+    return this.on && (!this.own || asksLevel1(this.info?.recipe)) && canPlay(this.info);
   }
 
   // ---- The world ----
@@ -287,6 +308,34 @@ export class HandsOn {
     };
   }
 
+  // The play area's walls in pieces mode, [x0, x1, z0, z1]: ±`area`, or
+  // lane Hands-on H2's `walls` (toy radii) for a toy on a tray that isn't
+  // square (the croissant's lid stays on its baking tray).
+  walls() {
+    const hands = this.info.recipe.hands;
+    const R = this.R();
+    if (hands.walls) return hands.walls.map((v) => v * R);
+    const A = (hands.area ?? 1.6) * R;
+    return [-A, A, -A, A];
+  }
+
+  // The walls a held piece's middle stays within: with `walls`, far
+  // enough in that all of it does (by its `pick` box, as it is turned).
+  inWalls(b) {
+    const w = this.walls();
+    const pc = this.info.recipe.hands.walls && this.pieces.find((p) => p.body === b);
+    if (!pc?.def.pick) return w;
+    const [px, py, pz] = pc.def.pick;
+    const ax = quat.rotate(b.q, [1, 0, 0]);
+    const ay = quat.rotate(b.q, [0, 1, 0]);
+    const az = quat.rotate(b.q, [0, 0, 1]);
+    const ex = Math.abs(ax[0]) * px + Math.abs(ay[0]) * py + Math.abs(az[0]) * pz;
+    const ez = Math.abs(ax[2]) * px + Math.abs(ay[2]) * py + Math.abs(az[2]) * pz;
+    const fit = (lo, hi, e) =>
+      hi - lo > 2 * e ? [lo + e, hi - e] : [(lo + hi) / 2, (lo + hi) / 2];
+    return [...fit(w[0], w[1], ex), ...fit(w[2], w[3], ez)];
+  }
+
   buildPieces(hands) {
     const info = this.info;
     this.mode = "pieces";
@@ -297,9 +346,9 @@ export class HandsOn {
     // (A floor may depend on the build: a d20 sits lower than two d6s; lane Hands-on H1.)
     const floor = typeof hands.floor === "function" ? hands.floor(data, info) : hands.floor;
     w.plane([0, 1, 0], floor ?? 0, { friction: hands.friction ?? 0.9, restitution: 0.15, grip: hands.grip ?? 0 }); // prettier-ignore
-    const A = (hands.area ?? 1.6) * R;
-    for (const [nx, nz] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) // prettier-ignore
-      w.plane([nx, 0, nz], -A, { friction: 0.3, restitution: 0.3 });
+    const [x0, x1, z0, z1] = this.walls();
+    for (const [nx, nz, d] of [[1, 0, x0], [-1, 0, -x1], [0, 1, z0], [0, -1, -z1]]) // prettier-ignore
+      w.plane([nx, 0, nz], d, { friction: 0.3, restitution: 0.3 });
     this.pieces = [];
     for (const p of hands.pieces?.(data, info) || []) {
       // Lane Hands-on H2: `shown` is where the recipe's drive shows the
@@ -320,6 +369,7 @@ export class HandsOn {
         angDamping: p.angDamping ?? 1.5,
       });
       w.add(body);
+      if (p.strike) body.strike = true; // (lane Hands-on H3)
       this.pieces.push({ body, token: p.token, part: p.part, home: { pos: at.slice(), q: atQ.slice() }, built: { pos: p.pos.slice(), q: (p.quat || [0, 0, 0, 1]).slice() }, def: p }); // prettier-ignore
       // A piece on a stem (a cherry): pinned to its point, springing back
       // to how it hung.
@@ -364,8 +414,10 @@ export class HandsOn {
     this.passing = new Set();
     const key = (a, b) => (a.id < b.id ? `${a.id}:${b.id}` : `${b.id}:${a.id}`);
     this.pairKey = key;
+    // (A held piece passes through the others, unless it strikes: a drumstick
+    // in the hand hits the drum; lane Hands-on H3.)
     w.pairs = (a, b) =>
-      !(a.pinned && b.pinned) && !a.held && !b.held && !this.passing.has(key(a, b));
+      !(a.pinned && b.pinned) && (!a.held || a.strike) && (!b.held || b.strike) && !this.passing.has(key(a, b)); // prettier-ignore
     this.mode = "pieces";
     this.world = w;
     this.extras?.build(w); // lane Hands engine A
@@ -398,6 +450,8 @@ export class HandsOn {
   // when it is something Hands-on picks up (the drag is then ours).
   pressAt(hit, x, y) {
     if (!this.canGrab() || !hit) return false;
+    // (Where the toy's own drag takes the press, a page, it pulls the page.)
+    if (this.own && this.info.recipe.drag?.at?.(this.player.toRecipe(hit))) return false;
     if (this.extras?.pressAt(hit, x, y)) return true; // lane Hands engine A: a toy that flees the finger
     this.press = { hit: hit.slice(), x, y, t: this.time };
     return true;
@@ -478,8 +532,14 @@ export class HandsOn {
     if (!h) return;
     h.travel = Math.max(h.travel, Math.hypot(x - h.x0, y - h.y0));
     // Lane Hands-on H2: the finger's recent path on screen, for a flip.
-    (h.screen ||= []).push({ t: this.simTime, x, y });
-    while (h.screen[0].t < this.simTime - 2 * THROW_WINDOW) h.screen.shift();
+    // (Only moves that move: a finger that stops after a flick keeps the
+    // flick it made, however long the next event takes to come.)
+    const sc = (h.screen ||= []);
+    const last = sc[sc.length - 1];
+    if (!last || Math.hypot(x - last.x, y - last.y) > 1) {
+      sc.push({ t: this.simTime, x, y });
+      while (sc[0].t < this.simTime - 2 * THROW_WINDOW) sc.shift();
+    }
     const ray = this.ray(x, y);
     if (this.joints?.move(h, ray)) return; // lane Hands engine B: a joint's part follows
     if (h.place) {
@@ -502,8 +562,9 @@ export class HandsOn {
     p[1] = Math.min(p[1], fl + 5 * R);
     const lim = this.mode === "pieces" ? (this.info.recipe.hands.area ?? 1.6) * R : 1.6 * R;
     const c = this.body ? this.body.home.pos : [0, 0, 0];
-    p[0] = Math.max(c[0] - lim, Math.min(c[0] + lim, p[0]));
-    p[2] = Math.max(c[2] - lim, Math.min(c[2] + lim, p[2]));
+    const [x0, x1, z0, z1] = this.mode === "pieces" ? this.walls() : [-lim, lim, -lim, lim];
+    p[0] = Math.max(c[0] + x0, Math.min(c[0] + x1, p[0]));
+    p[2] = Math.max(c[2] + z0, Math.min(c[2] + z1, p[2]));
     h.target = p;
     this.world.wake();
   }
@@ -597,7 +658,10 @@ export class HandsOn {
     // The held point follows the finger on a critically damped spring
     // (`follow`, `followV`); `trail` is the finger's recent path, for the
     // let-go's speed; `travel` how far (CSS pixels) the finger went.
-    const minY = this.mode === "toy" ? hit[1] - (body.pos[1] - body.home.pos[1]) : -Infinity;
+    // (A toy that floats, on water or in air, can be pushed down below where
+    // it stands: lane Hands-on H4.)
+    const floats = this.extras?.water || this.extras?.air;
+    const minY = this.mode === "toy" && !floats ? hit[1] - (body.pos[1] - body.home.pos[1]) : -Infinity; // prettier-ignore
     this.hold = { body, joint, place, plane: { point: hit.slice(), normal: ray.dir.slice() }, target: at.slice(), follow: at.slice(), followV: [0, 0, 0], trail: [], x0: x, y0: y, travel: 0, minY, raise: this.mode === "toy" ? PICK_LIFT * this.R() : 0 }; // prettier-ignore
     if (place) {
       // Lifted first, then it follows the finger.
@@ -652,10 +716,10 @@ export class HandsOn {
         n = p;
       }
     }
-    const lim = (this.info.recipe.hands.area ?? 1.6) * R;
+    const [x0, x1, z0, z1] = this.inWalls(b);
     const tf = ray.dir[1] < -1e-4 ? (fl - ray.origin[1]) / ray.dir[1] : Infinity;
     const pf = tf < Infinity ? v3.add(ray.origin, v3.scale(ray.dir, tf)) : null;
-    const inside = pf && Math.abs(pf[0]) <= lim && Math.abs(pf[2]) <= lim;
+    const inside = pf && pf[0] >= x0 && pf[0] <= x1 && pf[2] >= z0 && pf[2] <= z1;
     let p;
     if (tf < best && inside) {
       p = pf;
@@ -669,7 +733,7 @@ export class HandsOn {
       const dd = v3.dot(d, d) || 1;
       const t = -((ray.origin[0] - c[0]) * d[0] + (ray.origin[2] - c[2]) * d[2]) / dd;
       p = v3.add(ray.origin, v3.scale(ray.dir, t));
-      h.target = [Math.max(-lim, Math.min(lim, p[0])), Math.max(fl + 0.1 * R, Math.min(fl + 5 * R, p[1])), Math.max(-lim, Math.min(lim, p[2]))]; // prettier-ignore
+      h.target = [Math.max(x0, Math.min(x1, p[0])), Math.max(fl + 0.1 * R, Math.min(fl + 5 * R, p[1])), Math.max(z0, Math.min(z1, p[2]))]; // prettier-ignore
       return;
     }
     const def = this.pieces.find((pc) => pc.body === b)?.def;
@@ -720,7 +784,7 @@ export class HandsOn {
     }
     top = u.y;
     const y = top + below + (this.info.recipe.hands.lift ?? 0.06 * R);
-    h.target = [Math.max(-lim, Math.min(lim, p[0])), Math.min(fl + 5 * R, y), Math.max(-lim, Math.min(lim, p[2]))]; // prettier-ignore
+    h.target = [Math.max(x0, Math.min(x1, p[0])), Math.min(fl + 5 * R, y), Math.max(z0, Math.min(z1, p[2]))]; // prettier-ignore
   }
 
   // The piece under a point: the one whose shape (the piece's `pick`
@@ -832,8 +896,10 @@ export class HandsOn {
     const b = h.body;
     const def = this.pieces.find((pc) => pc.body === b)?.def;
     if (!def?.flip || h.travel < NUDGE) return false;
-    const s = h.screen || []; // (its last 2 × THROW_WINDOW; moves come once a frame)
+    const s = h.screen || []; // (its last 2 × THROW_WINDOW of moves; they come once a frame)
     if (s.length < 2) return false;
+    // A flick is let go of as it ends, not after a long hold.
+    if (this.simTime - s[s.length - 1].t > FLIP_HOLD) return false;
     const dt = s[s.length - 1].t - s[0].t;
     if (dt < 1e-6) return false;
     const vx = (s[s.length - 1].x - s[0].x) / dt;
@@ -905,6 +971,12 @@ export class HandsOn {
     return !!this.hold;
   }
 
+  // A tap on the toy: a latched joint with a `trigger` lets go (lane
+  // Hands-on H3). True when one did.
+  trigger() {
+    return !!this.joints?.trigger();
+  }
+
   // ↺: everything glides home.
   reset() {
     this.press = null;
@@ -923,6 +995,17 @@ export class HandsOn {
   // while anything moves.
   step(dt) {
     this.time += dt;
+    // A toy that asks for Level 1 only while it isn't a live tool (lane
+    // Hands-on H3): when it becomes one (a file opened), the switch goes off
+    // and the toy glides home; either way the app is told, to show or hide ✋.
+    if (this.info) {
+      const can = canPlay(this.info);
+      if (this.available !== undefined && can !== this.available) {
+        if (!can && this.on) this.setOn(false);
+        this.player.emit?.("hands-available", can);
+      }
+      this.available = can;
+    }
     const extra = this.extras?.step(dt) || false; // lane Hands engine A
     this.pressStep(); // lane Hands-on H1: a held press squeezes the toy
     const w = this.world;
@@ -1040,7 +1123,17 @@ export class HandsOn {
         this.squish = { amp, t0: this.time, axis: hit.n.slice(), point: hit.point.slice() };
       }
     }
-    this.sounds.push({ speed, soft: this.soft ?? 0, piece: this.mode === "pieces", body: hit.body }); // prettier-ignore
+    // (What it hit and where, for a recipe's sound: lane Hands-on H3.)
+    // `name` and `against` are the two pieces' names (their `name`, part or
+    // token), so a drum's stick on its skin can sound the drum.
+    this.sounds.push({ speed, soft: this.soft ?? 0, piece: this.mode === "pieces", body: hit.body, other: hit.other, name: this.nameOf(hit.body), against: this.nameOf(hit.other), point: hit.point?.slice() }); // prettier-ignore
+  }
+
+  // A piece's name, for sounds (lane Hands-on H3): null for the floor.
+  nameOf(body) {
+    if (!body) return null;
+    const p = this.pieces.find((q) => q.body === body);
+    return p ? (p.def?.name ?? p.part ?? p.token ?? null) : null;
   }
 
   squishAmp() {
@@ -1083,8 +1176,10 @@ export class HandsOn {
         if (pc.token !== undefined) out.push({ index: pc.token, token });
         // Lane Hands-on H2: other tokens that ride with it (`ride`: an
         // index, or { token, visible }), a banana's skin strips.
-        for (const r of pc.def.ride || [])
+        for (const r of pc.def.ride || []) {
+          if (r.part) continue; // (a riding part: below)
           out.push(typeof r === "number" ? { index: r, token } : { index: r.token, token: { ...token, visible: r.visible ?? 1 } }); // prettier-ignore
+        }
       }
       // Lane Hands engine C: what the ropes, cloth and stretch move.
       const so = this.softParts?.output();
@@ -1103,17 +1198,39 @@ export class HandsOn {
         // Lane Hands-on H2: `offHome` is merged in while it is off its place
         // (a candle pulled out of the cake goes out: { visible: 0 }).
         if (pc.def.offHome && !b.pinned) Object.assign(parts[pc.part], pc.def.offHome);
+        // Other parts that ride with it ({ part, pivot, upside }), and what
+        // is merged into them while it lies upside down (a pancake's syrup,
+        // flipped under it, is hidden: { visible: 0 }).
+        const upside = quat.rotate(b.q, [0, 1, 0])[1] < 0;
+        for (const r of pc.def.ride || []) {
+          if (!r.part) continue;
+          const pr = r.pivot || pv;
+          parts[r.part] = { quat: dq, offset: v3.sub(v3.sub(b.pos, pr), quat.rotate(dq, v3.sub(bt.pos, pr))) }; // prettier-ignore
+          if (r.upside && upside) Object.assign(parts[r.part], r.upside);
+        }
       }
       if (this.joints) parts = this.joints.parts(parts); // lane Hands engine B
       if (so) parts = Object.assign(parts || {}, so.parts); // lane Hands engine C
       player.motion.handsParts = this.moved || this.homing || so ? parts : null;
       // Sort the moved pieces again now and then (and once they rest).
       const asleep = this.world.asleep;
-      if (out.length && (this.time - this.lastResort > 0.25 || (asleep && !this.restSorted))) {
+      // (Lane Hands-on H2: `hands.resort`, seconds, for a toy whose pieces
+      // turn fast in front of its own splats, a sunflower's nodding head.)
+      const every = this.info.recipe.hands.resort ?? 0.25;
+      // (Lane Hands-on H2: pieces that are parts are sorted too, by the
+      // player's part pass: a flipped pancake drew in its old order, the
+      // one under it showing through it.)
+      const moving =
+        out.length > 0 || (!!(this.moved || this.homing) && !!player.motion.handsParts);
+      if (moving && (this.time - this.lastResort > every || (asleep && !this.restSorted))) {
         this.lastResort = this.time;
         this.restSorted = asleep;
         player.motion.handsResort = true;
       }
+      // (Lane Hands-on H2: once more when the last moved piece is home, so
+      // a slice clicked back in isn't drawn in the order it had outside.)
+      if (!moving && this.hadOut) player.motion.handsResort = true;
+      this.hadOut = moving;
       if (!asleep) this.restSorted = false;
     }
   }

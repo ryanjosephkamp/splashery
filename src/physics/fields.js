@@ -14,14 +14,18 @@
 // - well: { at: [x, y, z], pull, soft, capture, floor }
 // - wheels: { axle: [x, y, z], r, parts: [names], sign, grip, roll }
 // - shake: { key, gap } | true
+// - strings: { list: [{ a, b, name }], reach, normal } (lane Hands-on H3)
 // - flee: { radius, push, back, max } | true; follow: true
 // - pieces' own `material`, `projectile: { nose, vane, fr }` and `target`
+// - force: (body, h, ctx) => {} each substep, watch: true, and carry:
+//   { key: [keys] } (lane Hands-on H4)
 //
 // src/physics/hands-on.js calls an Extras (made by extrasFor) at a few
 // points: attach, the world built, a press, a move, a let-go, each frame
 // and each hit; the world calls its force once per substep (World.force).
 // What a recipe's drive() reads comes as info.hands (src/motion.js):
-// { on, shake, finger, point, rolled, flee(key, pos) }.
+// { on, shake, finger, point, rolled, moved, flee(key, pos), piece(key),
+// plucked }.
 
 import { quat, v3, surfacePoints } from "./world.js";
 import { materialFor, applyMaterial, airForce, rollForce, throwSpin, driftForce } from "./materials.js"; // prettier-ignore
@@ -328,7 +332,9 @@ export class FleeField {
 
 // ---- The glue to Hands-on -------------------------------------------------
 
-const KEYS = ["material", "water", "air", "well", "wheels", "shake", "flee", "follow", "touch"]; // (touch: lane Hands-on H5)
+// (touch: lane Hands-on H5; force, watch and carry: lane Hands-on H4;
+// strings: lane Hands-on H3)
+const KEYS = ["material", "water", "air", "well", "wheels", "shake", "flee", "follow", "touch", "force", "watch", "carry", "strings"]; // prettier-ignore
 
 // An Extras for a toy whose hands block asks for any of these pieces (or
 // whose pieces are projectiles, targets or have materials); null else.
@@ -360,6 +366,10 @@ export class Extras {
     this.water = null;
     this.view = null; // the water's surface (./water-view.js)
     this.throws = 0;
+    // Strings plucked by a drag across them (lane Hands-on H3).
+    this.strings = hands.strings ? stringsOf(hands.strings) : null;
+    this.strum = null; // a drag across the strings: { last } (the finger's point on them)
+    this.pluckT = this.strings ? this.strings.list.map(() => -Infinity) : null;
     // What a recipe's drive() reads, as info.hands.
     const self = this;
     this.about = {
@@ -369,6 +379,7 @@ export class Extras {
       point: null,
       rolled: 0,
       slosh: [0, 0, 0],
+      plucked: this.strings ? this.strings.list.map(() => Infinity) : [], // seconds since each string was plucked
       // Lane Hands-on H2: whether anything is off home (or on its way back),
       // so a drive can show what Hands-on uncovered (a kiwi half's face).
       get moved() {
@@ -383,8 +394,7 @@ export class Extras {
       // while a finger is down on the toy (a press, a push or a hold), `held`
       // while it (or a piece) is up in the hand, `speed` how fast the whole
       // toy (or the held piece) moves, in toy radii per second, `joint(name)`
-      // a joint's value (null without one) and `piece(i)` where piece i is
-      // ({ pos, quat, home, held }, recipe units in pieces mode).
+      // a joint's value (null without one) and `piece(i)` where piece i is.
       pressed: false,
       get held() {
         return !!self.ho.hold;
@@ -398,10 +408,11 @@ export class Extras {
         const j = self.ho.joints?.byName?.get(name);
         return j && Number.isFinite(j.v) ? j.v : null;
       },
-      piece(i) {
-        const pc = self.ho.pieces?.[i];
-        if (!pc || !self.ho.world) return null;
-        return { pos: pc.body.pos.slice(), quat: pc.body.q.slice(), home: pc.home.pos.slice(), held: !!pc.body.held }; // prettier-ignore
+      // Where a piece is, by its number (lane Hands-on H5), its part name
+      // (lane Hands-on H2), token or `name` (lane Hands-on H4): see
+      // pieceState().
+      piece(key) {
+        return self.pieceState(key);
       },
     };
   }
@@ -505,6 +516,8 @@ export class Extras {
       this.air ||
       this.well ||
       this.wheels ||
+      hands.force ||
+      hands.carry ||
       ho.pieces.some((p) => p.body.projectile)
     )
       // prettier-ignore
@@ -517,6 +530,7 @@ export class Extras {
     const bodies = ho.mode === "toy" ? [ho.body] : ho.pieces.map((p) => p.body);
     const G = this.G;
     const R = ho.R();
+    if (this.hands.carry) this.carryStep();
     for (const b of bodies) {
       if (b.stuck) {
         if (b.held) {
@@ -539,7 +553,69 @@ export class Extras {
       if (this.air) airBuoyancy(b, this.air, h);
       if (this.well) wellForce(b, this.well, h);
       if (this.wheels) wheelForce(b, this.wheels, G, h, touching);
+      // Lane Hands-on H4: the recipe's own push (a flying saucer's beam).
+      if (this.hands.force) this.hands.force(b, h, this.forceCtx(b, G, R));
     }
+  }
+
+  // What a recipe's `hands.force(body, h, ctx)` gets with each body: the
+  // piece it is (its def, part and token; null for a whole toy), the toy's
+  // eased controls, the build's data, gravity and a toy radius, whether
+  // the body touched anything in the last step, and free() to let a piece
+  // that is resting at home go.
+  forceCtx(b, G, R) {
+    const ho = this.ho;
+    const w = ho.world;
+    const pc = ho.mode === "pieces" ? ho.pieces.find((p) => p.body === b) || null : null;
+    return { piece: pc, c: this.player.motion?.state || {}, data: this.player.proc?.ctx?.kit?.data, G, R, touching: !!w && b.touchTick >= w.tick - 1, free: () => ho.free(b) }; // prettier-ignore
+  }
+
+  // Lane Hands-on H4: `hands.carry` ({ key: [keys] }, by part name or
+  // token): while the piece `key` is held, the others come loose and go with
+  // it as they were built beside it (Galileo's two balls in one hand); let
+  // go, they fly on with its speed and then each goes its own way.
+  carryStep() {
+    const ho = this.ho;
+    const find = (k) => ho.pieces.find((p) => p.part === k || (p.token !== undefined && p.token === k)); // prettier-ignore
+    for (const [key, list] of Object.entries(this.hands.carry)) {
+      const pc = find(isNaN(key) ? key : Number(key)) || find(key);
+      if (!pc?.body.held) continue;
+      const b = pc.body;
+      // Only its turn about the upright: they stay side by side, level,
+      // however the held one swings in the hand.
+      const f = quat.rotate(quat.mul(b.q, quat.conj(pc.home.q)), [1, 0, 0]);
+      const dq = quat.axisAngle([0, 1, 0], Math.atan2(-f[2], f[0]));
+      for (const k2 of list) {
+        const o = find(k2);
+        if (!o || o === pc || o.body.held) continue;
+        const b2 = o.body;
+        if (b2.pinned) ho.free(b2);
+        b2.pos = v3.add(b.pos, quat.rotate(dq, v3.sub(o.home.pos, pc.home.pos)));
+        b2.q = quat.norm(quat.mul(dq, o.home.q));
+        b2.prevPos = b2.pos.slice();
+        b2.prevQ = b2.q.slice();
+        b2.vel = b.vel.slice();
+        b2.omega = [0, 0, 0];
+        b2.carriedBy = b;
+      }
+    }
+  }
+
+  // Where a piece is, for a drive (info.hands.piece): by its number in
+  // `hands.pieces` (lane Hands-on H5), or by its part name, token or `name`
+  // (lane Hands-on H4; a piece with no part of its own, drawn by the drive).
+  // { pos, vel, quat (its turn in the world), turn (its turn from home),
+  // home, held, pinned (resting at home), off (picked up or knocked loose,
+  // = !pinned) }, recipe units in pieces mode; null before the world is
+  // built or for a piece it doesn't have.
+  pieceState(key) {
+    const ho = this.ho;
+    if (!ho.world || !ho.pieces) return null;
+    const pc = typeof key === "number" ? ho.pieces[key] : ho.pieces.find((p) => p.part === key || p.def?.name === key || (p.token !== undefined && p.token === key)); // prettier-ignore
+    if (!pc) return null;
+    const b = pc.body;
+    const turn = quat.mul(b.q, quat.conj(pc.home.q));
+    return { pos: b.pos.slice(), vel: b.vel.slice(), quat: b.q.slice(), turn, home: pc.home.pos.slice(), held: !!b.held, pinned: !!b.pinned, off: !b.pinned }; // prettier-ignore
   }
 
   // ---- The finger ----
@@ -549,6 +625,7 @@ export class Extras {
     this.samples = [{ t: this.ho.time, x, y }];
     this.spin = null;
     if (this.hands.touch) this.touched(); // lane Hands-on H5
+    if (this.strings && this.strumAt(x, y)) return true;
     if (!this.flee) return false;
     // Lane Hands-on H5: `at(p)` (recipe units) limits where a press is
     // followed (an owl's head); a press elsewhere picks the toy up as usual.
@@ -561,6 +638,10 @@ export class Extras {
 
   moveTo(x, y) {
     const t = this.ho.time;
+    if (this.strum) {
+      this.strumTo(x, y);
+      return true;
+    }
     this.samples.push({ t, x, y });
     while (this.samples.length > 2 && this.samples[0].t < t - 0.2) this.samples.shift();
     if (this.shake && this.shake.add(t, x, y)) this.fireShake();
@@ -568,9 +649,17 @@ export class Extras {
       this.fingerAt(x, y);
       return true;
     }
-    // Wheels: a drag on the toy pushes it along (never lifts it).
+    // Wheels: a drag on the toy pushes it along (never lifts it). With
+    // `lift` (lane Hands-on H4), a drag that starts straight up the screen
+    // picks it up instead, as any toy is.
     const pr = this.ho.press;
     if (this.hands.wheels && pr && !this.ho.hold && this.ho.mode !== "pieces") {
+      if (this.hands.wheels.lift) {
+        const dx = x - pr.x;
+        const dy = pr.y - y;
+        if (pr.up === undefined && Math.hypot(dx, dy) >= 7) pr.up = dy > 1.2 * Math.abs(dx);
+        if (pr.up) return false;
+      }
       this.ho.pushTo(pr, x, y);
       return true;
     }
@@ -579,6 +668,10 @@ export class Extras {
 
   // Lets go; true when the drag was ours.
   release() {
+    if (this.strum) {
+      this.strum = null;
+      return true;
+    }
     this.shake?.end();
     this.about.pressed = false; // lane Hands-on H5
     if (this.flee && this.fingerDown) {
@@ -589,6 +682,63 @@ export class Extras {
       return true;
     }
     return false;
+  }
+
+  // ---- Strings (lane Hands-on H3) ----
+
+  // Where the finger's line meets the strings' plane, or null.
+  strumPoint(x, y) {
+    const S = this.strings;
+    // (In the recipe's frame, which follows a toy picked up and set down
+    // elsewhere: it still plucks where it lies.)
+    const ray = this.player.recipeRay(x, y);
+    const den = v3.dot(ray.dir, S.n);
+    if (Math.abs(den) < 1e-4) return null;
+    const t = v3.dot(v3.sub(S.list[0].a, ray.origin), S.n) / den;
+    return t < 0 ? null : v3.add(ray.origin, v3.scale(ray.dir, t));
+  }
+
+  // A press within reach of a string starts a strum (the toy isn't picked
+  // up); anywhere else on the toy picks it up as before.
+  strumAt(x, y) {
+    if (this.ho.mode === "toy") this.ho.ensure();
+    const p = this.strumPoint(x, y);
+    if (!p) return false;
+    const S = this.strings;
+    const near = S.list.some((s) => {
+      const q = v3.sub(p, s.a);
+      const al = v3.dot(q, s.u) / s.L;
+      return al > -0.02 && al < 1.02 && Math.abs(v3.dot(q, s.m)) < S.reach;
+    });
+    if (!near) return false;
+    this.strum = { last: p, t: this.ho.time };
+    return true;
+  }
+
+  // The finger moves on: each string it crossed (within its length) is
+  // plucked, sounding by the recipe's hands.sound(hit) with hit.pluck its
+  // index, and info.hands.plucked[i] starts again from 0.
+  strumTo(x, y) {
+    const p = this.strumPoint(x, y);
+    if (!p) return;
+    const st = this.strum;
+    const t = this.ho.time;
+    const p0 = st.last;
+    const speed = v3.len(v3.sub(p, p0)) / Math.max(1 / 120, t - st.t) / this.ho.R();
+    this.strings.list.forEach((s, i) => {
+      const s0 = v3.dot(v3.sub(p0, s.a), s.m);
+      const s1 = v3.dot(v3.sub(p, s.a), s.m);
+      if (s0 === s1 || Math.sign(s0) === Math.sign(s1)) return;
+      const q = v3.add(p0, v3.scale(v3.sub(p, p0), s0 / (s0 - s1)));
+      const al = v3.dot(v3.sub(q, s.a), s.u) / s.L;
+      if (al < -0.02 || al > 1.02) return;
+      this.pluckT[i] = t;
+      this.about.plucked[i] = 0;
+      this.ho.sounds.push({ speed, soft: 0, piece: false, pluck: i, name: s.name ?? null, point: q }); // prettier-ignore
+    });
+    st.last = p;
+    st.t = t;
+    this.player.stage?.requestRender();
   }
 
   fingerAt(x, y) {
@@ -604,6 +754,14 @@ export class Extras {
   // A thrown body: the material's weight, spin and drag.
   thrown(h) {
     const b = h.body;
+    // What it carried flies on with it (lane Hands-on H4).
+    if (this.hands.carry)
+      for (const pc of this.ho.pieces)
+        if (pc.body.carriedBy === b) {
+          pc.body.vel = b.vel.slice();
+          pc.body.damping = b.damping; // the same air on both
+          pc.body.carriedBy = null;
+        }
     const m = this.mats?.get(b);
     if (!m) return;
     b.damping = 0.02;
@@ -696,6 +854,14 @@ export class Extras {
     if (this.shake) {
       ab.shake = this.shake.decay(ho.time);
       if (ab.shake > 0.01) busy = true;
+    }
+    if (this.strings) {
+      this.pluckT.forEach((t0, i) => {
+        const age = ho.time - t0;
+        ab.plucked[i] = age;
+        if (age < 4) busy = true;
+      });
+      if (this.strum) busy = true;
     }
     if (this.flee) {
       if (this.flee.step(dt)) busy = true;
@@ -913,4 +1079,22 @@ function longAxis(b) {
     }
   }
   return quat.rotate(b.q, ax);
+}
+
+// A hands block's strings, ready to pluck (lane Hands-on H3): each string's
+// way along (u, its length L) and across it in their plane (m).
+function stringsOf(spec) {
+  const list0 = Array.isArray(spec) ? spec : spec.list;
+  const a0 = list0[0];
+  const z = list0[list0.length - 1];
+  let n = spec.normal || v3.cross(v3.sub(a0.b, a0.a), v3.sub(z.a, a0.a));
+  n = v3.scale(n, 1 / (v3.len(n) || 1));
+  const list = list0.map((s) => {
+    const d = v3.sub(s.b, s.a);
+    const L = v3.len(d) || 1;
+    const u = v3.scale(d, 1 / L);
+    const m = v3.cross(n, u);
+    return { ...s, u, L, m: v3.scale(m, 1 / (v3.len(m) || 1)) };
+  });
+  return { list, n, reach: spec.reach ?? 0.05 };
 }

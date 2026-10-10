@@ -21,6 +21,164 @@ import { DOT_SAMPLES } from "./dot-samples.js"; // lane Dot samples: the AI-made
 
 export { PHOTO_BUDGETS };
 import { sharpEntry, sharpPhoto, sharpDrive } from "./photo-sharp.js"; // lane Photo sharp view
+import { SAMPLES as SOUND_FILES, specFor } from "../voices.js"; // lane Photo depth
+
+// ---- The depth sound (lane Photo depth) ---------------------------------------------
+// The owner's walkthrough of October 9, 2026: pick the tap's sound in the Toy tab. Paper (the
+// sound since Sound B), a soft chime, pop-up layers (a pluck as each layer rises, a step higher
+// each, and down again as they settle), a water drop, none, or your own sound. No wind and no
+// whoosh (his note on the Sound Board). The choice is the toy option `sound`, saved with the scene
+// and its link. Your own sound stays in this page's memory: it is played from an object URL, and
+// never uploaded or put in the scene, the link or storage; a scene that says "custom" without it
+// (opened again, or on another device) plays Paper.
+// (the plucks land as each layer's rise is about half done: layerMorph over the 3.2 s ease)
+const PLUCKS = [0.42, 0.78, 1.12, 1.46];
+export const DEPTH_SOUNDS = [
+  { id: "paper", label: "Paper", spec: null }, // (src/toy-sounds.js, "photo-3d")
+  {
+    id: "chime",
+    label: "Soft chime",
+    spec: {
+      on: [
+        { voice: "bell", f: 784, bright: 0.25, decay: 1.4, vol: 0.22 },
+        { voice: "bell", at: 0.55, f: 1175, bright: 0.2, decay: 1.6, vol: 0.16 },
+      ],
+      off: [
+        { voice: "bell", f: 1175, bright: 0.2, decay: 1.2, vol: 0.16 },
+        { voice: "bell", at: 0.55, f: 784, bright: 0.25, decay: 1.6, vol: 0.2 },
+      ],
+    },
+  },
+  {
+    id: "layers",
+    label: "Pop-up layers",
+    spec: {
+      on: [392, 494, 587, 784].map((f, i) => ({ voice: "harp", at: PLUCKS[i], f, vol: 0.32 })),
+      off: [784, 587, 494, 392].map((f, i) => ({ voice: "harp", at: PLUCKS[i], f, vol: 0.28 })),
+    },
+  },
+  {
+    id: "drop",
+    label: "Water drop",
+    spec: {
+      on: [
+        { voice: "drip", f: 820, n: 1, vol: 0.5 },
+        { voice: "drip", at: 1.5, f: 1150, n: 1, vol: 0.22 },
+      ],
+      off: [
+        { voice: "drip", f: 1050, n: 1, vol: 0.45 },
+        { voice: "drip", at: 1.3, f: 720, n: 1, vol: 0.2 },
+      ],
+    },
+  },
+  { id: "none", label: "None", spec: [] },
+];
+const OWN = { key: null, url: null, name: "", n: 0 };
+const ownSpec = () => ({ voice: "sample", file: OWN.key, vol: 0.8, len: 6 });
+
+// The tap's sound for the toy's options (src/app.js asks; null is Paper, the toy's own).
+export function depthSound(o = {}) {
+  if (o.sound === "custom") return OWN.key ? ownSpec() : null;
+  return DEPTH_SOUNDS.find((x) => x.id === o.sound)?.spec ?? null;
+}
+
+const soundPick = () => {
+  const t = globalThis.window?.__splashery?.player?.scene?.toy;
+  const v = t?.id === "photo-3d" ? t.options?.sound : null;
+  return v === "custom" && !OWN.key ? "paper" : v || "paper";
+};
+
+// Picks the sound: into the scene's options (so a saved scene and its link keep it; the toy isn't
+// rebuilt), and plays it once so it is heard.
+function setDepthSound(id) {
+  const w = globalThis.window?.__splashery;
+  const t = w?.player?.scene?.toy;
+  if (!t || t.id !== "photo-3d") return;
+  t.options = { ...(t.options || {}), sound: id };
+  const spec = depthSound(t.options);
+  const sound = w.app?.sound;
+  if (sound?.enabled && spec) sound.play(specFor(spec, true), { key: "toy" });
+  for (const fn of SOUND_LISTENERS) fn();
+}
+const SOUND_LISTENERS = new Set();
+
+// Your own sound: kept in memory as an object URL for the sample voice (never uploaded or stored).
+function useOwnSound(file) {
+  if (OWN.url) URL.revokeObjectURL(OWN.url);
+  if (OWN.key) delete SOUND_FILES.data[OWN.key];
+  OWN.key = `pdp-own-${++OWN.n}`; // (a new name each time, so the decoded copy is the new file's)
+  OWN.url = URL.createObjectURL(file);
+  OWN.name = file.name || "Your sound";
+  SOUND_FILES.data[OWN.key] = OWN.url;
+  setDepthSound("custom");
+}
+
+// The choice, for the toy's input panel (`input.live`).
+function soundEntry() {
+  return {
+    render() {
+      const box = document.createElement("div");
+      box.className = "pdp-sound";
+      const title = document.createElement("p");
+      title.className = "note";
+      title.textContent = "Sound of the depth rising and settling:";
+      const row = document.createElement("div");
+      row.className = "button-row";
+      row.setAttribute("role", "group");
+      row.setAttribute("aria-label", "Sound");
+      const chips = [];
+      for (const x of DEPTH_SOUNDS) {
+        const b = document.createElement("button");
+        b.type = "button";
+        b.className = "chip";
+        b.id = `pdp-sound-${x.id}`;
+        b.textContent = x.label;
+        b.addEventListener("click", () => setDepthSound(x.id));
+        chips.push([x.id, b]);
+        row.append(b);
+      }
+      const own = document.createElement("button");
+      own.type = "button";
+      own.className = "chip";
+      own.id = "pdp-sound-custom";
+      own.textContent = "Use my own sound…";
+      const input = document.createElement("input");
+      input.type = "file";
+      input.accept = "audio/*,.mp3,.m4a,.wav,.ogg,.aac,.flac";
+      input.hidden = true;
+      input.id = "pdp-sound-file";
+      own.addEventListener("click", () => input.click());
+      input.addEventListener("change", () => {
+        if (input.files?.[0]) useOwnSound(input.files[0]);
+        input.value = "";
+      });
+      row.append(own, input);
+      chips.push(["custom", own]);
+      const note = document.createElement("p");
+      note.className = "note";
+      box.append(title, row, note);
+      const paint = () => {
+        const v = soundPick();
+        for (const [id, b] of chips) b.setAttribute("aria-pressed", String(v === id));
+        note.textContent =
+          v === "custom"
+            ? `Your sound: ${OWN.name}. It stays on this device, in this page only: it isn't uploaded or saved with the scene or its link.`
+            : "Your own sound stays on this device: it isn't uploaded or saved with the scene or its link.";
+      };
+      paint();
+      SOUND_LISTENERS.add(paint);
+      const gone = new MutationObserver(() => {
+        if (!box.isConnected) {
+          SOUND_LISTENERS.delete(paint);
+          gone.disconnect();
+        }
+      });
+      requestAnimationFrame(() => box.parentNode && gone.observe(document.body, { childList: true, subtree: true })); // prettier-ignore
+      return box;
+    },
+  };
+}
+// ---- End of the depth sound -----------------------------------------------------------
 
 // ---- Live input (lane Live input): the camera's live view ----------------------------
 // With the camera on, the toy shows what the camera sees, in depth, before
@@ -122,6 +280,7 @@ export function backingOf(s, rows = 56, reach = Math.round(rows * 0.22)) {
   }
   const pos = new Float32Array(cols * rows * 3);
   const rgb = new Float32Array(cols * rows * 3);
+  const channel = new Uint8Array(cols * rows);
   let n = 0;
   for (let j = 0; j < rows; j++)
     for (let i = 0; i < cols; i++) {
@@ -149,9 +308,15 @@ export function backingOf(s, rows = 56, reach = Math.round(rows * 0.22)) {
         n * 3,
       );
       rgb.set(col.subarray(from * 3, from * 3 + 3), n * 3);
+      // Lane Photo depth: which tap channel it moves with, so it stays behind the surface at every
+      // moment of the rise and the flatten, not only at their ends. Behind the flat picture (all
+      // its surface within reach is at least as far back as `best`), it rises with the first
+      // layer, as before: nothing near it stays further back than that. In front of it (all its
+      // surface near), it rises with the last layer: nothing near it rises later.
+      channel[n] = best > 0 ? LAYERS - 1 : 0;
       n++;
     }
-  return { n, pos, rgb, size };
+  return { n, pos, rgb, size, channel };
 }
 
 // Studio media: "Show the original": the flat photo in a corner card (src/compare.js, loaded only when
@@ -403,6 +568,8 @@ const PHOTO_3D = {
       ],
     },
     { key: "photoName", label: "Photo name", type: "text", default: "", hidden: true },
+    // Lane Photo depth: the tap's sound, picked in the input panel (soundEntry).
+    { key: "sound", label: "Sound", type: "text", default: "paper", hidden: true },
   ],
   controls: [
     // "Flat" is on at first (the picture lies flat); the tap switches it off and the depth rises.
@@ -410,6 +577,8 @@ const PHOTO_3D = {
     { key: "layers", label: "Layers", type: "toggle", default: 0, ease: 1 },
   ],
   action: { key: "flat", label: "Raise or flatten the depth" },
+  toySound: depthSound, // lane Photo depth: the Sound choice (src/app.js, ownSound)
+  sounds: (o) => (o.sound === "custom" && OWN.key ? [ownSpec()] : []),
   input: {
     title: "Your own photo",
     accept:
@@ -426,7 +595,7 @@ const PHOTO_3D = {
       return { source: "custom", photoName: p.name };
     },
     // Lane Live input: the camera, and a button that takes the picture.
-    live: [{ kind: "camera", capture: { button: "Take the picture", name: "Camera picture.jpg" }, status: mirrorStatus }, sharpEntry("photo-3d")], // prettier-ignore
+    live: [{ kind: "camera", capture: { button: "Take the picture", name: "Camera picture.jpg" }, status: mirrorStatus }, sharpEntry("photo-3d"), soundEntry()], // prettier-ignore
     shown() {
       if (liveOn()) return "Live: what the camera sees, in depth. Take the picture to keep it."; // lane Live input
       const i = P3D.info;
@@ -525,7 +694,7 @@ const PHOTO_3D = {
       return {
         p: [back.pos[i * 3], back.pos[i * 3 + 1], back.pos[i * 3 + 2]],
         to: [back.pos[i * 3], back.pos[i * 3 + 1], -0.01],
-        channel: 0,
+        channel: back.channel[i], // (lane Photo depth: see backingOf)
         part: parts[0],
         n: [0, 0, 1],
         size: back.size * unit,
@@ -551,6 +720,7 @@ const PHOTO_3D = {
     sharpPhoto({
       photo: src.photo,
       depth: s.depth,
+      band: s.cellBand, // lane Photo depth
       gx: s.gx,
       gy: s.gy,
       aspect: s.aspect,
