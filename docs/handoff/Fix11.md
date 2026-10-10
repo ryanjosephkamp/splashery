@@ -97,7 +97,17 @@ dragon), `phf-engine:260` and `fl7:95` (the same race as `:49`) failed; `cmp2-en
 
 The twelve, one by one (root cause, fix, the run that shows it green):
 
-1. `smoke:1504`: in progress (below, "Notes").
+1. `smoke:1504`: **a real defect in the phone shelf (with some fonts).** "Leaning Tower of Pisa"
+   needs three lines in a 64 px phone card with this container's sans-serif (Inter), and the 2-line
+   clamp cut it; main fails this way here back to October 3. The Operator's call (October 10, 19:42
+   UTC): keep the name, fix the card. Fix ("Engine:", `src/ui.js`): a name that still needs a third
+   line steps its font down from 10.5 px (10, 9.5, 9 px at the least); the card keeps its size,
+   every other name is untouched, and the fit is measured again for the grid (wider cards, where the
+   name fits at full size). Screenshots `tests/screenshots/fx11-shelf-row-390x844.png`,
+   `…-grid-390x844.png`, `…-row-320x844.png`, `…-grid-320x844.png`: no public name cut at either
+   width. Three labs names still need three lines at 9 px in the row ("Cherry blossom (photo)", "The
+   solar system on real orbits", "Super-resolution microscope"; they fit in the 390 px grid): see
+   "For the Operator".
 2. `qrs-toys:37`: **the test read it the wrong way.** The toy's code is right: the canvas shows
    exactly the encoder's 21 × 21 modules (sampled module by module: 0 differences), and jsQR reads
    it once the page's own words are out of the picture. The test screenshots the canvas element, and
@@ -159,8 +169,15 @@ Flaky:
   solo slot ever has) the sound itself plays slow (the audio element's `currentTime` gains 0.118 s
   in 0.179 s), and the picture follows the sound, as designed: a few runs still miss by 3 to 5%
   there.
-- `phf-engine:260`: **a real bug** (WebGPU validation errors in the console; the test is right to
-  fail). In progress: see "Notes".
+- `phf-engine:260`: **a real bug** (WebGPU validation errors in the console; the test was right to
+  fail). A stack taken at the failing frame: the engine makes its 1 × 1 fallback texture for an
+  unset sampler on first use (`built-in-texture-pink`), here inside the photo toy's work-buffer
+  pass; uploading it calls `device.submit()`, which finished the command encoder with the pass still
+  open, so the frame's command buffer was invalid. Fix ("Engine:", `src/stage.js`): on WebGPU a
+  submit asked for inside a render pass waits for the frame's own (the upload still goes through the
+  queue); and the photo texture is uploaded when it is made, not at its first use. Under heavy load
+  (three CPU-bound processes beside it, 12 repeats of the file): before, 2 to 3 failures in 60
+  (`.cache/fx11-p2`, `-p6`, `-p7`); after, no command-buffer errors in 60 (`.cache/fx11-p10`).
 
 ## Notes
 
@@ -168,16 +185,11 @@ Flaky:
   a 64 px card (scrollHeight 36 against 24), so the 2-line clamp cuts it. It fails the same on main
   back to October 5 in this container (fonts: Inter is the system sans-serif here).
 
-- `phf-engine:260`: the failing frame's console shows
-  `Command buffer recording ended before [RenderPassEncoder "G_-PassEncoder RT:GsplatWorkBuffer-MRT-0"] was ended`:
-  something submitted the device's command encoder while the photo variant's work-buffer pass was
-  open. The engine submits mid-call when it uploads a canvas or image texture (`uploadExternalImage`
-  calls `device.submit()`), and a texture first used inside a pass uploads there. The photo texture
-  was made at `setPhoto` and uploaded only by the microtask `setPhotoSource` queues; it is now
-  uploaded when made (an "Engine:" change in `src/stage.js`), which cut the failures (2 of 8 to 1 of
-  8 under heavy load) but not to zero: a stack of the mid-pass submit is being taken.
-
 ## Known issues
+
+- `phf-engine:260` failed once in 12 under the heavy extra load with a different check: the text's
+  correlation came out -0.10 (0.8 needed), with no console error. It had come out NaN once before
+  the engine fix too (`.cache/fx11-p2`), so it isn't from the fix; the suite runs the file alone.
 
 - `phf-engine:219` failed once in 40 under heavy load with a WebGL error on leaving the photo toy
   (`GL_INVALID_OPERATION: glDrawElementsInstanced: Mismatch between texture format and sampler type`).
@@ -185,4 +197,8 @@ Flaky:
 
 ## For the Operator
 
-- Nothing yet.
+- Merge the "Engine:" PR #502 first (`claude/lane-fix11-engine`: the phone card's name fit and the
+  two WebGPU changes); #501 has it merged in.
+- Three labs names still need a third line in the phone row at 9 px (above). Going smaller than 9 px
+  or giving those cards a third line would change the row's look; shorter shelf names (their lanes')
+  would fit. Your call.
