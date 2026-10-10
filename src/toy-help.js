@@ -50,7 +50,7 @@ export const TOY_HELP = {
   "fluorite-crystal": {
     howTo: "Tap it to switch on the ultraviolet lamp; drag to turn it.",
     about:
-      "A specimen of fluorite, scanned and drawn with splats. Fluorite is calcium fluoride and grows in cubes. Under ultraviolet light many fluorite crystals glow blue-violet: the word fluorescence comes from this mineral.\n\nTap it and the lamp comes on: the stone turns slowly in its glow, then the lamp goes off.",
+      "A specimen of fluorite, scanned and drawn with splats. Fluorite is calcium fluoride and grows in cubes. Under ultraviolet light many fluorite crystals glow blue-violet: the word fluorescence comes from this mineral.\n\nTap it and the lamp comes on: the stone turns slowly in its glow, then the lamp goes off. Drag to turn it and look for the cubes that grew into one another as the crystal formed.",
   },
   "ammonite-agate": {
     howTo: "Tap it to turn it over; drag to turn it yourself.",
