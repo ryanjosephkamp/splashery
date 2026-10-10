@@ -2438,6 +2438,7 @@ const ALBUM_BOXES = (W, H) => ({
 // pull turns each page. It keeps to its own book (no Open a file).
 const STORY_RECIPE = {
   ...BOOK_RECIPE,
+  tiltLock: false, // (the Storybook's own default: it opens with the tilt free, UI r5)
   pictures: { ...BOOK_RECIPE.pictures, sample: () => "assets/toys/storybook/storybook.pdf" },
   input: undefined,
 };
