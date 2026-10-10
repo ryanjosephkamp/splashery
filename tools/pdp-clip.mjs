@@ -14,6 +14,9 @@
 //           (drawn at half size), going into full screen and out.
 //   sound   the Sound choice in the Toy tab, each choice picked in turn, with its sound in the
 //           clip (rendered offline through the voices, as the site plays them).
+//   moving  Moving photo to 3D: a sample clip (--clip=sample|horse|dragon|bridge|machine) stepped
+//           frame by frame at its real speed from --from for --secs, seen from a fixed turn
+//           (--yaw=0.45), in --view=sharp|splats (for judging how steady its depth is).
 // Common: --label="…" (a tag in the corner), --fps=15, --dpr=2, --profile=mid. SPLASHERY_URL
 // points it at another server (a checkout of main, for the "before" clips).
 
@@ -316,6 +319,60 @@ if (mode === "sound") {
   }
   await enc.end();
   fs.rmSync(wavFile, { force: true });
+}
+
+if (mode === "moving") {
+  // Moving photo to 3D: a sample clip (--clip=sample|horse|dragon|bridge|machine), paused and
+  // stepped to each frame at its real speed (--from, --secs), seen from a fixed turn (--yaw) so
+  // the relief's steadiness shows, in --view (sharp or splats).
+  const clipId = opt("clip", "sample");
+  await page.evaluate(async () => {
+    const { app, player } = window.__splashery;
+    await app.chooseToy("moving-photo-3d");
+    player.opts.idleDelay = 1e9;
+    player.idle.weight = 0;
+  });
+  await ready();
+  await page.evaluate((clip) => window.__splashery.app.setToyOptions({ clip }), clipId);
+  await page.evaluate(async () => (window.__mv = (await import("/src/packs/moving-photo.js")).MOVING)); // prettier-ignore
+  await page.waitForFunction((id) => {
+    const c = window.__mv.clip;
+    return c && c.sample === id && !window.__splashery.player.loading;
+  }, clipId, { timeout: 600_000, polling: 1000 }); // prettier-ignore
+  await page.evaluate(() => window.__splashery.app.setControl("play", 0));
+  await page.evaluate((v) => window.__psv?.set("moving-photo-3d", v), opt("view", "sharp"));
+  await page.keyboard.press("f");
+  await page.evaluate(() => window.__splashery.player.camera.reset());
+  await page.waitForTimeout(2500);
+  await tag(label);
+  const enc = encoder(out);
+  const from = Number(opt("from", 0));
+  const secs = Number(opt("secs", 5));
+  const yaw = Number(opt("yaw", 0.45));
+  const n = Math.round(secs * fps);
+  for (let k = 0; k < n; k++) {
+    await page.evaluate(
+      async ([yaw, t]) => {
+        const pl = window.__splashery.player;
+        pl.camera.tgt.yaw = pl.camera.cur.yaw = yaw;
+        const m = await import("/src/packs/moving-photo.js");
+        m.movingTransport.seek(t);
+        // (the Sharp view's muted copy of the video goes to t on the next drive; wait for it)
+        const v = window.__psv?.state().video ? { get currentTime() { return window.__psv.state().videoTime; } } : null; // prettier-ignore
+        const until = performance.now() + 4000;
+        for (;;) {
+          pl.stage.requestRender();
+          await new Promise((r) => requestAnimationFrame(r));
+          if (!v || Math.abs(v.currentTime - t) < 0.06 || performance.now() > until) break;
+        }
+        for (let i = 0; i < 3; i++) await new Promise((r) => requestAnimationFrame(r));
+      },
+      [yaw, (from + k / fps) % (await page.evaluate(() => window.__mv.clip.duration))],
+    );
+    await enc.frame();
+    if (k % 15 === 0) process.stdout.write(`frame ${k} of ${n}\r`);
+  }
+  await enc.end();
 }
 
 await browser.close();
