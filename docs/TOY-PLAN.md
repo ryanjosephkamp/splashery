@@ -1014,7 +1014,7 @@ Proposals below are suggestions; the owner may change them.
   - Improved: Hands engine B (Hands-on): Lift the lid on its hinge by hand: let go past upright and
     it stays open; lower, it drops shut with a thud.
   - Sound: Creak and a treasure chime.
-- **Storybook** (`book`). Now: tap: Open or close. Plan: keep.
+- **Storybook** (`book`). Now: tap: Turn the page. Plan: keep.
   - Owner: Blurry; try to make it more detailed so the writing looks like something.
   - Fixed: C1: readable words from a 5x7 bitmap font, more and smaller splats on the two open pages,
     a crisper cover, and no red strip (the cover's inside drew over the pages). E1b: the outside is
@@ -1024,6 +1024,9 @@ Proposals below are suggestions; the owner may change them.
     the font's pixels. Round 2 (October 3, 2026): the turned leaves are sorted where they lie, so
     the left page's paper no longer covers its words and the cover's inside no longer shows through;
     a solid cover rim, cleaner page edges, and soft gray words on the pages seen only mid-turn.
+    Hands-on H3 (October 9, 2026; the owner's idea): a real storybook with pages, The Little Lamp
+    Who Wanted to See the Sea (our own words and drawings, tools/hh3-storybook.mjs), read as Your
+    book reads a PDF: tap or pull to turn each page.
   - Sound: Real paper pages turning (no wind); real CC0 recordings now (book-page.mp3), with the
     synthesized sound as a fallback.
 - **Laptop** (`laptop`). Now: tap: Open or close. Plan: keep.

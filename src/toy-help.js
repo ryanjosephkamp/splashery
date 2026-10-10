@@ -1314,9 +1314,9 @@ export const TOY_HELP = {
       "A treasure chest is a strong wooden box with metal bands, a heavy lid and a lock, made to keep coins, jewels and other precious things safe. Long ago, before banks were common, people kept their valuables in chests like this, and ships carried money and goods in them.\n\nTap it to open the lid and see the heap of gold coins and bright jewels inside, and tap again to close it. Pick the color of the wood in the Toy tab. With ✋ Hands-on on, lift the lid on its hinge yourself: let go past upright and it stays open; lower, it drops shut with a thud.",
   },
   book: {
-    howTo: "Tap to close the book; tap again to open it.",
+    howTo: "Tap the right page to turn on, the left to go back, or pull a page over by its edge.",
     about:
-      "A storybook is a book of stories, with pages of words and often pictures. A book like this, with pages sewn together along one edge between two hard covers, is a way of keeping writing that people have used for about two thousand years. Printing with movable metal type, which made books much cheaper, began in Europe in the 1450s.\n\nThe book starts open. Tap to close it: the pages turn over one by one and the cover shuts. Tap again to open it. Pick the color of the cover in the Toy tab.",
+      "A storybook is a book of stories, with pages of words and often pictures. A book like this, with pages sewn together along one edge between two hard covers, is a way of keeping writing that people have used for about two thousand years. Printing with movable metal type, which made books much cheaper, began in Europe in the 1450s.\n\nThis one is a real little storybook, made for Splashery: The Little Lamp Who Wanted to See the Sea, ten pages about a desk lamp that hops off to see the sea. Tap the right page to turn it, the left to go back, or pull a page over by its edge. Double-tap a page to fill the screen with it. Pick a style in the Toy tab.",
   },
   laptop: {
     howTo:

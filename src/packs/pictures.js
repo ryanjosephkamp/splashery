@@ -2432,6 +2432,16 @@ const ALBUM_BOXES = (W, H) => ({
   r: { c: [W * 0.735, 0], s: [W * 0.45, H * 0.86] },
 });
 
+// Lane Hands-on H3: the Storybook (the owner's idea of October 9, 2026): a
+// real storybook with pages, "The Little Lamp Who Wanted to See the Sea"
+// (tools/hh3-storybook.mjs), read as Your book reads a PDF: a tap or a
+// pull turns each page. It keeps to its own book (no Open a file).
+const STORY_RECIPE = {
+  ...BOOK_RECIPE,
+  pictures: { ...BOOK_RECIPE.pictures, sample: () => "assets/toys/storybook/storybook.pdf" },
+  input: undefined,
+};
+
 const ALBUM_RECIPE = {
   kernel: "sharp", // polish: crisper text and edges (labs; src/kernels.js)
   turntable: false,
@@ -3005,6 +3015,7 @@ export const RECIPES = {
     },
   },
   "your-book": BOOK_RECIPE,
+  book: STORY_RECIPE, // lane Hands-on H3
   "photo-album": ALBUM_RECIPE,
   "picture-frame": FRAME_RECIPE,
 };
