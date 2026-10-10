@@ -271,6 +271,7 @@ export class Joints {
     if (j.type === "socket") {
       j.armed = false; // it clicks back only once it has been taken out
       j.gliding = null;
+      j.inDoor = !!(j.d.out && body.pinned); // lane Hands-on H2: taken from its place
       return false;
     }
     if (j.type === "break" && j.broken) return false;
@@ -302,7 +303,10 @@ export class Joints {
     if (!j) {
       // A loose piece near its socket clicks in as the finger brings it.
       const sj = this.joint(h.body);
-      if (sj?.type === "socket") this.nearSocket(sj, h, ray);
+      if (sj?.type === "socket") {
+        if (this.door(sj, h, ray)) return true; // lane Hands-on H2: still sliding out
+        this.nearSocket(sj, h, ray);
+      }
       if (sj?.type === "break" && sj.broken && sj.d.reseat) this.nearSeat(sj, h, ray);
       return false;
     }
@@ -438,7 +442,11 @@ export class Joints {
     const j = h.ctl;
     if (!j) {
       const sj = this.joint(h.body);
-      if (sj?.type === "socket" && sj.armed && this.socketNear(sj, h.body.pos, null)) {
+      // (Let go while still in its doorway, it slides back in.)
+      if (
+        sj?.type === "socket" &&
+        (sj.inDoor || (sj.armed && this.socketNear(sj, h.body.pos, null)))
+      ) {
         this.dropHold(h);
         this.glide(sj);
         return true;
@@ -478,20 +486,53 @@ export class Joints {
   socketNear(j, pos, ray) {
     const R = this.hands.R();
     const snap = (j.d.snap ?? 0.3) * R;
-    const home = j.pc.home.pos;
-    let d = v3.len(v3.sub(pos, home));
-    if (ray) {
-      // Or the finger points at its place.
-      const t = Math.max(0, v3.dot(v3.sub(home, ray.origin), ray.dir));
-      d = Math.min(d, v3.len(v3.sub(v3.add(ray.origin, v3.scale(ray.dir, t)), home)));
+    let d = Infinity;
+    // Its place, or (lane Hands-on H2) the mouth of its doorway.
+    for (const home of j.d.out
+      ? [j.pc.home.pos, v3.add(j.pc.home.pos, j.d.out)]
+      : [j.pc.home.pos]) {
+      d = Math.min(d, v3.len(v3.sub(pos, home)));
+      if (ray) {
+        // Or the finger points at its place.
+        const t = Math.max(0, v3.dot(v3.sub(home, ray.origin), ray.dir));
+        d = Math.min(d, v3.len(v3.sub(v3.add(ray.origin, v3.scale(ray.dir, t)), home)));
+      }
     }
     return d < snap;
+  }
+
+  // Lane Hands-on H2: a socket's `out` (recipe units) is the way its piece
+  // comes out and goes in (a melon's slice, straight up out of its slot).
+  // Taken from its place, the piece slides along it, held as built, to
+  // where the finger points along that line; past its end, it is free.
+  // Returns true while it is still in the doorway.
+  door(j, h, ray) {
+    if (!j.inDoor) return false;
+    const home = j.pc.home.pos;
+    const L = v3.len(j.d.out);
+    const u = v3.scale(j.d.out, 1 / L);
+    // The point on the doorway's line nearest the finger's ray.
+    const w0 = v3.sub(home, ray.origin);
+    const b = v3.dot(u, ray.dir);
+    const c = v3.dot(ray.dir, ray.dir);
+    const den = c - b * b;
+    const s = den > 1e-6 ? (b * v3.dot(ray.dir, w0) - c * v3.dot(u, w0)) / den : 0;
+    if (s >= L) {
+      j.inDoor = false;
+      h.body.holdQ = yawOnly(j.pc.home.q);
+      return false;
+    }
+    h.target = v3.add(home, v3.scale(u, Math.max(0, s)));
+    h.body.holdQ = j.pc.home.q.slice();
+    this.world.wake();
+    return true;
   }
 
   nearSocket(j, h, ray) {
     const R = this.hands.R();
     const snap = (j.d.snap ?? 0.3) * R;
-    const away = v3.len(v3.sub(h.body.pos, j.pc.home.pos));
+    let away = v3.len(v3.sub(h.body.pos, j.pc.home.pos));
+    if (j.d.out) away = Math.min(away, v3.len(v3.sub(h.body.pos, v3.add(j.pc.home.pos, j.d.out)))); // (away from its doorway's mouth too) // prettier-ignore
     if (!j.armed) {
       // Lane Hands-on H5: `armAway` (toy radii): armed only once both the
       // piece and the finger's line are that far from its place (small
@@ -518,6 +559,19 @@ export class Joints {
     b.vel = [0, 0, 0];
     b.omega = [0, 0, 0];
     j.gliding = { t0: this.time, pos: b.pos.slice(), q: b.q.slice() };
+    j.inDoor = false;
+    // (Lane Hands-on H2: through its doorway, the mouth first unless it is
+    // already in it.)
+    if (j.d.out) {
+      const R = this.hands.R();
+      const home = j.pc.home.pos;
+      const L = v3.len(j.d.out);
+      const u = v3.scale(j.d.out, 1 / L);
+      const rel = v3.sub(b.pos, home);
+      const s = v3.dot(rel, u);
+      const inside = v3.len(v3.sub(rel, v3.scale(u, s))) < 0.1 * R;
+      j.gliding.door = v3.add(home, v3.scale(u, inside ? Math.max(0, Math.min(L, s)) : L));
+    }
     j.armed = false;
     this.world.wake();
   }
@@ -857,10 +911,20 @@ export class Joints {
   glideStep(j) {
     const G = j.gliding;
     const b = j.body;
-    const f = Math.min(1, (this.time - G.t0) / GLIDE);
-    const e = f * f * (3 - 2 * f);
-    b.pos = G.pos.map((v, i) => v + (j.pc.home.pos[i] - v) * e);
-    b.q = quat.slerp(G.q, j.pc.home.q, e);
+    const f = Math.min(1, (this.time - G.t0) / (G.door ? 2 * GLIDE : GLIDE));
+    const ease = (x) => x * x * (3 - 2 * x);
+    if (G.door) {
+      // To the mouth of its doorway, turning as built, then straight in.
+      const e = ease(Math.min(1, 2 * f));
+      const e2 = ease(Math.max(0, 2 * f - 1));
+      const at = G.pos.map((v, i) => v + (G.door[i] - v) * e);
+      b.pos = at.map((v, i) => v + (j.pc.home.pos[i] - v) * e2);
+      b.q = quat.slerp(G.q, j.pc.home.q, e);
+    } else {
+      const e = ease(f);
+      b.pos = G.pos.map((v, i) => v + (j.pc.home.pos[i] - v) * e);
+      b.q = quat.slerp(G.q, j.pc.home.q, e);
+    }
     b.vel = [0, 0, 0];
     b.omega = [0, 0, 0];
     b.prevPos = b.pos.slice();
@@ -1175,4 +1239,12 @@ function depth(j) {
   let n = 0;
   for (let p = j.parent; p && n < 16; p = p.parent) n++;
   return n;
+}
+
+// A rotation's turn about the upright alone (as Hands-on holds a piece it
+// carries; lane Hands-on H2's doorways hand the piece on so).
+function yawOnly(q) {
+  const f = quat.rotate(q, [1, 0, 0]);
+  const a = Math.atan2(-f[2], f[0]);
+  return quat.axisAngle([0, 1, 0], a);
 }

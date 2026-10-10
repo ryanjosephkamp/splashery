@@ -1413,7 +1413,9 @@ hands: { water: { density: 0.35, level: -0.2, drag: 8, size: 3.5 } },</code></pr
               >hands: { air: { hover: 0, spring: 0.3, drag: 3.2, floor: 1.5, upright: 6 } }</code
             >
             (or <code>air: true</code>). <code>hover</code> is toy radii from home;
-            <code>floor</code> lowers the floor so it can be pulled down.
+            <code>floor</code> lowers the floor so it can be pulled down. A whole toy that floats
+            (on <code>water</code> or in <code>air</code>) can be pushed below where it stands; any
+            other toy can't be pressed into its floor (lane Hands-on H4).
           </p>
           <p>
             <strong>A gravity well</strong> (<code>hands.well</code>): a pull toward a point instead
@@ -1441,7 +1443,8 @@ hands: { pieces: star, well: { at: [0, 0, 0], pull: 2, capture: 0.12 } }, // a b
             turns them the other way), <code>grip</code> (14), <code>roll</code> (0.015),
             <code>yaw</code> (6) and <code>area</code> (how far it may roll, toy radii, 2.4).
             <code>info.hands.rolled</code> is the angle rolled, for parts that turn with the wheels
-            (a steam train's rods).
+            (a steam train's rods). <code>lift: true</code> (lane Hands-on H4): a drag that starts
+            straight up the screen picks the toy up instead, as any toy is (a bus you roll or lift).
           </p>
           <p>
             <strong>Shake detection</strong> (<code>hands.shake</code>): a quick back-and-forth drag
@@ -1491,12 +1494,12 @@ drive(t, c, out, info) {
             moves, in toy radii per second), so a toy can answer the hand (a pufferfish puffs while
             you hold it, lungs breathe out while squeezed). <code>info.hands.joint(name)</code> is a
             joint's value (an angle or a slide, null without one), and
-            <code>info.hands.piece(i)</code> where piece i is (<code>{ pos, quat, home, held }</code
-            >, recipe units), so a drive can follow a part the hand moved (the waves of a point
-            turned round a circle). <code>touch: { key }</code> also fires that action when a press
-            is held <code>after</code> seconds (0.15) or becomes a push or a pick-up (a poke), at
-            most every <code>gap</code> seconds (0.5); a quick tap is still the toy's own tap. A
-            press still picks the toy up as before.
+            <code>info.hands.piece(i)</code> where piece i is (recipe units; its fields under
+            &quot;Where a piece is&quot; below), so a drive can follow a part the hand moved (the
+            waves of a point turned round a circle). <code>touch: { key }</code> also fires that
+            action when a press is held <code>after</code> seconds (0.15) or becomes a push or a
+            pick-up (a poke), at most every <code>gap</code> seconds (0.5); a quick tap is still the
+            toy's own tap. A press still picks the toy up as before.
           </p>
           <pre><code>hands: { touch: { key: &quot;poke&quot; } },
 drive(t, c, out, info) {
@@ -1534,7 +1537,12 @@ drive(t, c, out, info) {
             </li>
             <li>
               <code>ride: [index | { token, visible }]</code>: other tokens that move with the piece
-              (a banana's skin strips; <code>visible: 0</code> keeps one hidden, its pale inside).
+              (a banana's skin strips; <code>visible: 0</code> keeps one hidden, its pale inside). A
+              part piece can carry other parts too: <code>{ part, pivot, upside }</code> moves that
+              part with it (about <code>pivot</code>, the piece's own by default), and merges
+              <code>upside</code> into it while the piece lies upside down (a flipped pancake's
+              syrup and butter, now under it: <code>{ visible: 0 }</code>). The drive moves it with
+              the piece the rest of the time.
             </li>
             <li>
               <code>offHome: { … }</code>: entries merged into the piece's part while it is off its
@@ -1545,13 +1553,21 @@ drive(t, c, out, info) {
           <p>
             And <code>hands.foot</code> (0.6): how far out from its middle, as a share of its pick
             radius, a held piece looks for what is under it; 0.95 lets a wide piece (a burger's bun)
-            set down beside a stack sit on its edge instead of being lowered into it.
+            set down beside a stack sit on its edge instead of being lowered into it. And
+            <code>hands.walls</code> (<code>[x0, x1, z0, z1]</code>, toy radii) in place of the
+            square <code>area</code>, for a play area that isn't square: the croissant's lid stays
+            on its baking tray. <code>hands.resort</code> (seconds, 0.25) is how often moving pieces
+            are sorted again; less for a piece that turns fast in front of the toy's own splats (the
+            sunflower's nodding head).
           </p>
           <p>
             <code>info.hands.moved</code> is whether anything is off home (or on its way back), so a
-            drive can show what Hands-on uncovered (the cut face of the kiwi half left behind). And
-            a break joint takes <code>spill</code> (radians): a piece riding another comes loose
-            when that one tips past it (scoops off a tipped cone), with the cue
+            drive can show what Hands-on uncovered (the cut face of the kiwi half left behind).
+            <code>info.hands.piece(name)</code> (a part's name, a string; a number is a piece's
+            index, as above) also gives the piece's <code>vel</code> and <code>pinned</code>, so a
+            drive can answer where it is and how it moves (a lotus dropped in its pond splashes
+            where it lands). And a break joint takes <code>spill</code> (radians): a piece riding
+            another comes loose when that one tips past it (scoops off a tipped cone), with the cue
             <code>&quot;spill&quot;</code>; and <code>place: true</code>: snapped off, it is held as
             a picked piece is (by its middle, level, hovering over whatever is under the finger),
             not hanging from where it was grabbed.
@@ -1564,6 +1580,44 @@ drive(t, c, out, info) {
             spot, drawn toward that piece's middle by the recipe's <code>center</code> (a pancake
             flipped back onto its stack). Let go any other way, it is set down as before.
           </p>
+          <p>
+            <strong>A recipe's own push</strong> (<code>hands.force</code>, lane Hands-on H4,
+            October 8, 2026): a function <code>(body, h, ctx)</code> called once per substep (<code
+              >h</code
+            >
+            seconds) for every body (the whole toy, or each piece), before the world moves it, to
+            change its <code>vel</code> and <code>omega</code> (recipe units, or the world's for a
+            whole toy): a flying saucer's beam that lifts a cow only while the cow is inside it.
+            <code>ctx</code> is <code>{ piece, c, data, G, R, touching, free }</code>: the piece
+            (its <code>def</code>, <code>part</code> and <code>token</code>; null for a whole toy),
+            the toy's eased controls, the build's <code>k.data</code>, gravity and a toy radius,
+            whether it touched anything in the last step, and <code>free()</code>, which lets a
+            piece resting at home go. A pinned piece (at home, untouched) has no mass to move: skip
+            it (<code>body.pinned</code>), or <code>free()</code> it first (planets that keep
+            orbiting).
+          </p>
+          <pre><code>hands: { pieces: () =&gt; [cowPiece], force: (b, h, ctx) =&gt; { if (!b.pinned &amp;&amp; ctx.c.beam &gt; 0.05 &amp;&amp; inBeam(b.pos)) b.vel[1] += ctx.G * h; } }, // prettier-ignore</code></pre>
+          <p>
+            <strong>Where a piece is</strong> (<code>info.hands.piece(key)</code>, lanes Hands-on
+            H2, H4 and H5): in a pieces-mode toy's <code>drive</code>, the piece by its number in
+            <code>hands.pieces</code> (H5), or by its part name, token or <code>name</code> (H4; a
+            piece with no part or token of its own, drawn by the drive: a body a part follows), as
+            <code>{ pos, vel, quat, turn, home, held, pinned, off }</code> (recipe units;
+            <code>quat</code> its turn in the world, <code>turn</code> its turn from home;
+            <code>pinned</code> while it rests at home, <code>off</code> once it has been picked up
+            or knocked loose), or null before the first touch. A toy that reads it without any other
+            field asks for <code>hands.watch: true</code> (so <code>info.hands</code> exists): a
+            campfire's flames grow when a log is laid on them. <code>info.hands.moved</code> (as
+            lane Hands-on H2 adds it) is whether anything is off home or on its way back.
+          </p>
+          <p>
+            <strong>Carried together</strong> (<code>hands.carry</code>, lane Hands-on H4):
+            <code>{ key: [keys] }</code> (part names or tokens): while the piece <code>key</code> is
+            held, the listed pieces come loose and go with it as they were built beside it; let go,
+            they fly on with its speed, then each falls, bounces and settles on its own (Galileo's
+            two balls, dropped from one hand, land together).
+          </p>
+          <pre><code>hands: { place: false, pieces: () =&gt; [bigBall, smallBall], carry: { ball0: [&quot;ball1&quot;], ball1: [&quot;ball0&quot;] } }, // prettier-ignore</code></pre>
           <p>
             <strong>A forgiving press</strong> (lane Hands-on H3; every toy, nothing to ask for):
             with the ✋ switch on, a press where the pick buffer finds no splat (between a desk
@@ -1678,7 +1732,12 @@ drive(t, c, out, info) {
             <strong>Socket</strong>: a loose piece (in <code>hands.pieces</code>, or made here with
             <code>solid</code>) that clicks back into the place it was built in: once it has been
             taken out, bringing it within <code>snap</code> toy radii (0.3) of its place, or
-            pointing the finger at its place, glides it home and locks it there.
+            pointing the finger at its place, glides it home and locks it there. <code>out</code> (a
+            vector, in recipe units) is its doorway, the way it comes out and goes in when other
+            things fit round it (a melon's slice, straight up out of its slot): taken from its place
+            it slides along <code>out</code>, held as built, and is free past its end; let go before
+            that, it slides back in; and brought back, it glides to the doorway's mouth and then
+            straight in.
           </p>
           <pre><code>pieces: (d) =&gt; d.wedges.map((w) =&gt; ({ token: w.token, pos: w.mid, quat: w.q, solid: WEDGE, points: surfacePoints(WEDGE, 1), pick: [0.3, 0.4, 0.3] })),
 joints: (d) =&gt; d.wedges.map((w) =&gt; ({ type: &quot;socket&quot;, token: w.token, snap: 0.35 })),</code></pre>

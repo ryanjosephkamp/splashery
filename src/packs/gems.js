@@ -16,6 +16,14 @@ import {
 } from "../kit.js";
 import { evenEllipsoid } from "./even.js";
 
+// Lane Hands-on H5: a quartz point's collision points: its base's and its
+// shoulders' corners, and the tip.
+function quartzPoints([w, h]) {
+  const pts = [[0, h, 0]];
+  for (const y of [-h, 0.35 * h]) for (const [a, b] of [[w, w], [w, -w], [-w, w], [-w, -w]]) pts.push([a, y, b]); // prettier-ignore
+  return pts;
+}
+
 const TAU = Math.PI * 2;
 const DEG = Math.PI / 180;
 
@@ -1019,10 +1027,44 @@ export const RECIPES = {
     options: [{ key: "color", label: "Tint", type: "color", default: "#cfd8ee" }],
     controls: [{ key: "light", label: "Light up", type: "pulse", ease: 4.4 }],
     action: { key: "light", label: "Light the points" },
+    // Hands-on (lane Hands-on H5): snap one of the five big crystal points
+    // off the rock (it comes free with a crack), set it down, and bring it
+    // back to its place: it glides in and holds fast again. ↺ mends the rest.
+    hands: {
+      floor: -0.95,
+      pieces: (d) => [
+        ...(d?.xtals || []).map((x) => ({
+          part: x.part,
+          pos: x.mid,
+          quat: x.quat,
+          solid: { type: "box", half: x.half },
+          // (Its prism's corners and one point at the tip: it can't stand
+          // on its point, it topples.)
+          points: quartzPoints(x.half),
+          radius: 0.01,
+          pick: x.half.map((v) => v + 0.06),
+          mass: 0.5,
+          friction: 0.6,
+          restitution: 0.25,
+        })),
+        // The rock they grow from (lane H1's fixed piece).
+        { fixed: true, pos: [0, -0.62, 0], solid: { type: "ellipsoid", r: [1.05, 0.36, 0.9] } },
+      ],
+      joints: (d) =>
+        (d?.xtals || []).map((x) => ({
+          type: "break",
+          part: x.part,
+          at: x.base,
+          pull: 0.12,
+          give: 0.03,
+          reseat: { snap: 0.2 },
+          sound: (ev) => (ev.kind === "snap" ? { voice: "crack", f: 3200, bright: 0.9, decay: 0.5 } : undefined), // prettier-ignore
+        })),
+    },
     // A tap lights the crystals one by one from left to right, each glowing
     // from within with a star of light at its point, as a chime rings for
     // each; they fade in turn.
-    drive(t, c, out) {
+    drive(t, c, out, info) {
       const p = progress(c.light);
       const on = c.light > 0 ? 1 : 0;
       for (let i = 0; i < 10; i++) {
@@ -1031,6 +1073,13 @@ export const RECIPES = {
           visible: on * 1.3 * bump(p, t0, t0 + 0.035, t0 + 0.12, t0 + 0.34),
         };
       }
+      // Hands-on: a point snapped off doesn't glow where it grew.
+      const xs = info?.data?.xtals || [];
+      xs.forEach((x, j) => {
+        const pc = info?.hands?.piece?.(j);
+        if (pc && Math.hypot(...pc.pos.map((v, k) => v - pc.home[k])) > 0.02)
+          out.parts[x.glow] = { visible: 0 };
+      });
     },
     build(k, o) {
       const tint = o.color;
@@ -1065,6 +1114,9 @@ export const RECIPES = {
       // The crystals light up from left to right (drive's point0 is the
       // leftmost).
       const order = list.map((c, i) => i).sort((a, b) => list[a][0] - list[b][0]);
+      // Lane Hands-on H5: the five biggest points each on a part of their
+      // own, to snap off by hand (a toy has at most 15 parts).
+      const xtals = [];
       list.forEach(([x, L, w, rz, rx], i) => {
         const planes = crystalPoint(w, L, w * 1.6, k.rand() * 0.5);
         const shape = polytope(planes);
@@ -1113,7 +1165,13 @@ export const RECIPES = {
             opacity: 0.95,
           };
         });
+        const xpart = i < 5 ? k.part(`xtal${i}`, { pivot: pos }) : undefined;
+        if (xpart !== undefined) {
+          const q = quatEuler(...rot);
+          xtals.push({ part: `xtal${i}`, glow: `point${order.indexOf(i)}`, base: pos, quat: q, mid: add(pos, quatRotate(q, [0, L / 2, 0])), half: [w, L / 2, w] }); // prettier-ignore
+        }
         k.add(shape, {
+          part: xpart,
           pos,
           rot,
           flat: 0.12,
@@ -1137,6 +1195,7 @@ export const RECIPES = {
           },
         });
       });
+      k.data = { xtals };
     },
   },
 
