@@ -32,10 +32,18 @@
 // the plate's (n, m) and (m, n) do, and their mix gives curved surfaces. A
 // round flask of radius a: φ = j_l(kr) P_l(cos θ), with k set by the wall
 // (j_l′(ka) = 0), ringing at f = c k / 2π. Water: c = 1497 m/s; the cell is
-// 1 cm across, so its modes ring at about 100 to 370 kHz, far too high to hear: the
+// 1 cm across, so its modes ring at about 75 to 370 kHz, far too high to hear: the
 // toy plays each mode eight octaves down.
 
 import { mix, shade, clamp } from "../kit.js";
+// Lane Live r9: the box plays your audio, or hears the microphone (after a
+// tap), as the Chladni plate does (studio.js), with the plate's own pieces.
+import { live as liveIn, stop as liveStop } from "../live/live.js";
+import { noteOf } from "../live/analysis.js";
+import { Track, SongAnalysis } from "./song-stream.js";
+import { HOP as FRAME, F as FIELD, FIELDS } from "./song-analysis.js";
+import { songTransport } from "./song-record.js";
+import { bands } from "./studio-audio.js";
 
 const C_WATER = 1497; // m/s
 const SIDE = 0.01; // m: the cell is 1 cm across
@@ -73,6 +81,80 @@ export function cellLabel(mode) {
 }
 export function heardFreq(mode) {
   return cellFreq(mode) / 2 ** OCTAVES_DOWN;
+}
+
+// ---- Lane Live r9: music and the microphone ring the cell's modes -------------------
+// The owner's ask (October 10, 2026): the box takes music and other audio
+// and changes in real time, as the Chladni plate does. The real cell rings
+// at ultrasound and music is audible, so the music's pitch is scaled up to
+// the cell's ultrasound modes: moved by octaves into the cell's range (as
+// the plate folds a pitch into its own), then multiplied by SCALE (2⁸, the
+// same eight octaves the toy plays each mode down by). Which mode a pitch
+// rings follows the cell's real frequencies, f ∝ √(l² + m² + n²) for the
+// cube and f ∝ ka for the flask.
+export const SCALE = 2 ** OCTAVES_DOWN;
+
+// The ladder of modes the sound can ring, one per frequency: the toy's own
+// modes and a few more of each shape, so the pitches between have a mode
+// near them. The cube's lone modes (0, 1, 0) and (0, 2, 0) stand along the
+// transducer's axis (the ones a transducer under the cell drives most);
+// (0, 2, 2) mixes its three permutations as the toy's mixed modes do. The
+// flask's l = 1 modes have ka at the zeros of j1′ (2.0816, 5.9404), the
+// l = 0 one at the first zero of j0′ (4.4934).
+export const LADDER_MODES = [
+  { id: "cube-010", shape: "cube", terms: [[0, 1, 0, 1]], name: "Cube 0, 1, 0" },
+  { id: "cube-020", shape: "cube", terms: [[0, 2, 0, 1]], name: "Cube 0, 2, 0" },
+  { id: "cube-022", shape: "cube", terms: [[0, 2, 2, 1], [2, 0, 2, 1], [2, 2, 0, 1]], name: "Cube 0, 2, 2 mixed" }, // prettier-ignore
+  { id: "flask-1-1", shape: "flask", l: 1, ka: 2.0816, name: "Flask, a disc" },
+  { id: "flask-0-1", shape: "flask", l: 0, ka: 4.4934, name: "Flask, one shell" },
+  { id: "flask-1-2", shape: "flask", l: 1, ka: 5.9404, name: "Flask, a disc and a shell" },
+];
+const LADDERS = new Map();
+export function ladder(shape) {
+  if (!LADDERS.has(shape))
+    LADDERS.set(shape, [...CELL_MODES, ...LADDER_MODES].filter((m) => m.shape === shape).sort((a, b) => cellFreq(a) - cellFreq(b))); // prettier-ignore
+  return LADDERS.get(shape);
+}
+
+// The cell's range as heard (its modes SCALE times lower), a little wider
+// than the ladder (more than an octave, so folding always lands in it).
+export function heardRange(shape) {
+  const l = ladder(shape);
+  return [heardFreq(l[0]) / 2 ** (1 / 8), heardFreq(l[l.length - 1]) * 2 ** (1 / 8)];
+}
+// A heard pitch moved by octaves into the cell's range.
+export function foldCell(hz, shape) {
+  const [lo, hi] = heardRange(shape);
+  let x = hz;
+  while (x >= hi) x /= 2;
+  while (x < lo) x *= 2;
+  return x;
+}
+
+// The resonance curve, as the plate's (half strength CELL_WIDTH cents off a
+// mode). Narrower than the plate's 150 cents: the cube's modes lie closer
+// together (√8 and 3 only 102 cents apart), and a wide curve rang two at
+// once on every note.
+export const CELL_WIDTH = 100;
+
+// What a heard pitch (Hz) at a loudness (0..1) asks of the cell: every mode
+// of the shape rings by its resonance to the pitch scaled up to ultrasound,
+// the nearest at the sound's full loudness and the others as their curve
+// says relative to it (so a note between two modes rings both, and a note
+// on one rings that one). Returns [{ mode, a }] and the scaled pitch.
+export function cellDrive(hz, loud, shape) {
+  const f = foldCell(hz, shape) * SCALE;
+  const resp = ladder(shape).map((mode) => {
+    const x = (1200 * Math.log2(f / cellFreq(mode))) / CELL_WIDTH;
+    return { mode, r: 1 / (1 + x * x) };
+  });
+  const top = Math.max(...resp.map((q) => q.r));
+  const out = [];
+  for (const { mode, r } of resp) {
+    const a = (loud * r) / top;
+    if (a > 0.1) out.push({ mode, a }); // (a weaker one adds under 1% to the mix)
+  }
+  return { modes: out, ultra: f };
 }
 
 // Spherical Bessel functions j0, j1, j2.
@@ -150,6 +232,19 @@ export function potentialGrid(mode) {
   return { U, grad, max, N, h };
 }
 
+// Lane Live r9: each mode's grid is worked out once (its slope only, which
+// is all the beads need), the first time the sound rings it.
+const GRIDS = new Map();
+export function gridFor(mode) {
+  const key = mode.id || JSON.stringify(mode);
+  let g = GRIDS.get(key);
+  if (!g) {
+    const { grad, max, N, h } = potentialGrid(mode);
+    GRIDS.set(key, (g = { grad, max, N, h }));
+  }
+  return g;
+}
+
 function sample(grid, x, y, z, out) {
   const { grad, N, h } = grid;
   const fx = clamp((x + 1) / h, 0, N - 1.0001);
@@ -184,8 +279,10 @@ export class Beads {
     this.mode = mode;
     this.rand = rand;
     this.P = new Float32Array(n * 3);
-    this.grid = potentialGrid(mode);
+    this.grid = gridFor(mode);
     this.moving = false;
+    this.steps = 0;
+    this.memo = new Map(); // per mode: its largest swing and its share near φ = 0 at random
     this.scatter();
   }
 
@@ -212,13 +309,29 @@ export class Beads {
   // One frame: dt seconds with the sound at strength a (0..1; the force
   // goes with its square), and `stir` (0..1) a swirl of the water, as a
   // shaken cell. Returns whether any bead moved.
+  //
+  // Lane Live r9: `a` may instead be a live mix of the cell's modes,
+  // [{ mode, a }], each as strong as the sound drives it. Modes ringing at
+  // different frequencies don't interfere over a cycle, so the Gor'kov
+  // potential of the mix is the sum of each mode's, weighted by its
+  // strength squared: U = Σ aₘ² Uₘ (the plate's E = Σ aₘ² wₘ², in 3D). Each
+  // mode's U is scaled to its own steepest slope, so every mode at full
+  // strength moves the beads as fast as the toy's single mode does.
   step(dt, a, stir = 0) {
-    if (dt <= 0 || (a < 1e-3 && stir <= 0)) return (this.moving = false);
-    const { P, grid } = this;
+    const drive = typeof a === "number" ? [{ mode: this.mode, a }] : a;
+    const live = [];
+    for (const d of drive)
+      if (d.a >= 1e-3) {
+        const grid = d.mode === this.mode ? this.grid : gridFor(d.mode);
+        live.push({ grid, w: ((d.a * d.a) / grid.max) * (2 / SETTLE_SECS) });
+      }
+    if (dt <= 0 || (!live.length && stir <= 0)) return (this.moving = false);
+    this.steps++;
+    const { P } = this;
     const g = [0, 0, 0];
+    const gm = [0, 0, 0];
     // The slide: velocity −μ ∇U, scaled so the steepest place moves a
     // bead about a tenth of the cell in SETTLE_SECS / 10.
-    const mu = ((a * a) / grid.max) * (2 / SETTLE_SECS);
     const sub = Math.max(1, Math.ceil(dt / 0.02));
     const h = dt / sub;
     let moved = 0;
@@ -228,10 +341,16 @@ export class Beads {
         let x = P[o];
         let y = P[o + 1];
         let z = P[o + 2];
-        sample(grid, x, y, z, g);
-        let dx = -mu * g[0] * h;
-        let dy = -mu * g[1] * h;
-        let dz = -mu * g[2] * h;
+        g[0] = g[1] = g[2] = 0;
+        for (const { grid, w } of live) {
+          sample(grid, x, y, z, gm);
+          g[0] += w * gm[0];
+          g[1] += w * gm[1];
+          g[2] += w * gm[2];
+        }
+        let dx = -g[0] * h;
+        let dy = -g[1] * h;
+        let dz = -g[2] * h;
         if (stir > 0) {
           // A swirl about the upright axis and a stir up and down.
           const r = this.rand;
@@ -271,33 +390,34 @@ export class Beads {
 
   // How settled the beads are on the mode's nodal surfaces, 0 (scattered)
   // to 1: the share of beads within a hair of φ = 0 (|φ| under 4% of its
-  // largest swing), rescaled from its share for scattered beads.
-  settled() {
-    const { P, mode } = this;
+  // largest swing), rescaled from its share for scattered beads. Live r9:
+  // on any mode of the cell's shape (the one the sound leads with).
+  settled(mode = this.mode) {
+    const { P } = this;
+    const { swing, base } = this.measure(mode);
     let near = 0;
-    const tol = 0.04 * this.swing();
+    const tol = 0.04 * swing;
     for (let i = 0; i < this.n; i += 3)
       if (Math.abs(modeShape(mode, P[i * 3], P[i * 3 + 1], P[i * 3 + 2])) < tol) near++;
     const share = near / Math.ceil(this.n / 3);
-    const base = this.baseShare();
     return clamp((share - base) / (0.95 - base), 0, 1);
   }
 
-  swing() {
-    if (this._swing) return this._swing;
-    let m = 0;
+  // A mode's largest swing in the cell, and the share of scattered beads
+  // within 4% of it of φ = 0 (once per mode).
+  measure(mode) {
+    const key = mode.id || mode;
+    let m = this.memo.get(key);
+    if (m) return m;
+    let swing = 0;
     for (let i = 0; i < 4000; i++) {
       const x = this.rand() * 2 - 1;
       const y = this.rand() * 2 - 1;
       const z = this.rand() * 2 - 1;
-      if (this.inside(x, y, z)) m = Math.max(m, Math.abs(modeShape(this.mode, x, y, z)));
+      if (this.inside(x, y, z)) swing = Math.max(swing, Math.abs(modeShape(mode, x, y, z)));
     }
-    return (this._swing = m || 1);
-  }
-
-  baseShare() {
-    if (this._base !== undefined) return this._base;
-    const tol = 0.04 * this.swing();
+    swing = swing || 1;
+    const tol = 0.04 * swing;
     let near = 0;
     let all = 0;
     for (let i = 0; i < 6000; i++) {
@@ -306,9 +426,10 @@ export class Beads {
       const z = this.rand() * 2 - 1;
       if (!this.inside(x, y, z)) continue;
       all++;
-      if (Math.abs(modeShape(this.mode, x, y, z)) < tol) near++;
+      if (Math.abs(modeShape(mode, x, y, z)) < tol) near++;
     }
-    return (this._base = near / Math.max(1, all));
+    this.memo.set(key, (m = { swing, base: near / Math.max(1, all) }));
+    return m;
   }
 }
 
@@ -323,7 +444,7 @@ const BEAD_A = "#c8701f";
 const BEAD_B = "#eba443"; // a tap rings the transducer this long
 const STIR_SECS = 1.0; // and first swirls a settled cell this long
 
-const CELL = { beads: null, cols: 1, rows: 1, home: null, tone: null, img: null, version: 0, last: null, taps: 0, ringUntil: 0, stirUntil: 0, amp: 0, sorted: -1, unsorted: false, p: 0, frames: 0 }; // prettier-ignore
+const CELL = { beads: null, cols: 1, rows: 1, home: null, tone: null, img: null, version: 0, last: null, taps: 0, ringUntil: 0, stirUntil: 0, amp: 0, sorted: -1, unsorted: false, p: 0, frames: 0, amps: new Map(), lead: null, heard: null }; // prettier-ignore
 
 // For the tests: the beads and how settled they are.
 export const cellState = () => ({
@@ -333,6 +454,200 @@ export const cellState = () => ({
   settled: CELL.beads ? CELL.beads.settled() : 0,
   ringing: CELL.amp,
 });
+
+// ---- Lane Live r9: your audio and the microphone ---------------------------------------
+// As the plate (studio.js, Live input r4 and r7): a song or any sound file
+// plays from the file itself (song-stream.js Track) and is measured in the
+// Song landscape's worker (song-analysis.js: pitch and loudness every
+// 40 ms); the microphone, once someone taps for it, gives its pitch and
+// loudness live (src/live/). Each moment's strongest pitch rings the cell's
+// modes (cellDrive) and the beads move on from where they lie; silence and
+// a paused song leave them put. Nothing is uploaded, saved or stored.
+const BOX = { song: null, an: null, sound: null, now: null };
+const BAND_HZ = bands(12).centers; // the analysis' bands (song-analysis.js NF)
+const clamp01 = (v) => clamp(v, 0, 1);
+
+// The modes' strengths follow the sound within about 80 ms (the plate's
+// followDrive), so the beads answer a new note at once and stop with it.
+function follow(want, dt) {
+  const k = 1 - Math.exp(-dt / 0.08);
+  const seen = new Set();
+  for (const w of want) {
+    seen.add(w.mode.id);
+    const was = CELL.amps.get(w.mode.id) ?? { mode: w.mode, a: 0 };
+    was.a += (w.a - was.a) * k;
+    CELL.amps.set(w.mode.id, was);
+  }
+  for (const [key, v] of CELL.amps) {
+    if (seen.has(key)) continue;
+    v.a -= v.a * k;
+    if (v.a < 1e-3) CELL.amps.delete(key);
+  }
+  return [...CELL.amps.values()];
+}
+
+// For the tests and the clip tool.
+export const cellAudioState = () => ({
+  name: BOX.song?.name ?? null,
+  playing: !!BOX.song?.track?.playing,
+  pos: BOX.song ? BOX.song.track.time() : 0,
+  measured: BOX.an?.progress ?? 0,
+  track: BOX.song?.track ?? null,
+  heard: CELL.heard,
+  lead: CELL.lead?.id ?? null,
+  amps: Object.fromEntries([...CELL.amps].map(([k, v]) => [k, v.a])),
+  steps: CELL.beads?.steps ?? 0,
+  at: CELL.beads ? Array.from(CELL.beads.P.subarray(0, 150)) : [],
+  p: CELL.p,
+});
+
+// Frame i's strongest pitch (Hz) and loudness (dBFS): the voiced pitch
+// where there is one, else the loudest band (as the plate's strongest()).
+function strongest(i) {
+  const f = BOX.an?.features;
+  if (!f || i < 0 || i >= f.n || !f.done[i]) return null;
+  const nfi = FIELDS.length;
+  const db = f.feat[i * nfi + FIELD.rms];
+  let hz = f.feat[i * nfi + FIELD.f0];
+  if (!(hz > 0)) {
+    let top = -Infinity;
+    for (let b = 0; b < f.nf; b++) {
+      const v = f.bands[i * f.nf + b];
+      if (v > top) {
+        top = v;
+        hz = BAND_HZ[b];
+      }
+    }
+  }
+  return hz > 0 ? { hz, db } : null;
+}
+
+// What the sound asks of the cell now ([{ mode, a }]), from the
+// microphone or the open audio.
+function heardDrive(shape, sung) {
+  let s = null;
+  if (sung) {
+    const pitch = liveIn.mic?.pitch;
+    const loud = clamp01((liveIn.mic?.db ?? -120) / 30 + 1.8); // −54 dBFS nothing, −24 full
+    if (pitch && loud > 0) s = { hz: pitch.hz, loud };
+  } else {
+    const t = BOX.song.track;
+    if (t.playing) {
+      const i = Math.floor(t.time() / FRAME);
+      BOX.an?.focus(i);
+      const f = strongest(i);
+      if (f) s = { hz: f.hz, loud: clamp01((f.db + 54) / 30) };
+    }
+  }
+  if (!s) {
+    if (CELL.heard) CELL.heard = { ...CELL.heard, loud: 0 };
+    return [];
+  }
+  const { modes, ultra } = cellDrive(s.hz, s.loud, shape);
+  const lead = modes.reduce((b, d) => (!b || d.a > b.a ? d : b), null);
+  CELL.heard = { hz: s.hz, note: noteOf(s.hz).name, ultra, loud: s.loud, lead: lead?.mode.id ?? null }; // prettier-ignore
+  return modes;
+}
+
+function closeCellAudio() {
+  const s = BOX.song;
+  if (s) {
+    s.track.close();
+    URL.revokeObjectURL(s.url);
+  }
+  BOX.an?.close();
+  BOX.song = null;
+  BOX.an = null;
+}
+
+async function openCellAudio(file, fileName) {
+  if (!file) throw new Error("Open a sound file.");
+  if (liveIn.on("mic")) liveStop("mic");
+  closeCellAudio();
+  const url = URL.createObjectURL(file);
+  const track = new Track(url);
+  let duration;
+  try {
+    duration = await track.ready;
+  } catch (err) {
+    track.close();
+    URL.revokeObjectURL(url);
+    throw err;
+  }
+  const an = new SongAnalysis();
+  an.start(file, 44100).catch((err) => (an.error = err?.message || String(err)));
+  BOX.song = { name: fileName.replace(/\.[^.]+$/, ""), url, track, duration };
+  BOX.an = an;
+  track.play(BOX.sound);
+  return {};
+}
+
+function cellShown() {
+  const s = BOX.song;
+  if (!s) return "";
+  const an = BOX.an;
+  const left =
+    an && !an.finished ? ` Listening through it: ${Math.round(an.progress * 100)}%.` : "";
+  return `${s.name} (${Math.round(s.duration)} s).${left}`;
+}
+
+const kHz = (f) => `${Math.round(f / 1000)} kHz`;
+function cellStatus() {
+  if (!liveIn.on("mic")) return "";
+  const h = CELL.heard;
+  if (!h || !(h.loud > 0)) return "Sing or play a steady note, low or high.";
+  const lead = ladder(CELL.beads?.mode?.shape ?? "cube").find((m) => m.id === h.lead);
+  return `You: ${h.note} (${Math.round(h.hz)} Hz), scaled up to ${kHz(h.ultra)} in the cell. ${lead ? `${lead.name} rings (${kHz(cellFreq(lead))}).` : ""}`; // prettier-ignore
+}
+
+const cellTransport = {
+  prefix: "cell",
+  state() {
+    const s = BOX.song;
+    return {
+      hidden: !s,
+      pos: s ? s.track.time() : 0,
+      length: s?.duration || 0,
+      playing: !!s?.track?.playing,
+      mic: liveIn.on("mic"),
+      live: false,
+      recorded: 0,
+      recording: 0,
+    };
+  },
+  toStart() {
+    const t = BOX.song?.track;
+    if (!t) return;
+    t.el.currentTime = 0;
+    t.anchor = null;
+    if (!t.playing) t.play(BOX.sound);
+    liveIn.wake?.();
+  },
+  toggle() {
+    const t = BOX.song?.track;
+    if (!t) return;
+    if (t.playing) t.pause();
+    else t.play(BOX.sound);
+    liveIn.wake?.();
+  },
+  seek(sec) {
+    const t = BOX.song?.track;
+    if (!t) return;
+    t.el.currentTime = Math.max(0, Math.min(t.duration || 0, sec));
+    t.anchor = null;
+    liveIn.wake?.();
+  },
+  close() {
+    closeCellAudio();
+    liveIn.wake?.();
+  },
+  // Another toy: the audio stops (a rebuild of the cell keeps it playing).
+  gone() {
+    setTimeout(() => {
+      if (globalThis.window?.__splashery?.player?.scene?.toy?.id !== "chladni-cell") BOX.song?.track?.pause(); // prettier-ignore
+    }, 300);
+  },
+};
 
 const cellScreen = {
   get width() {
@@ -391,7 +706,7 @@ function rod(list, a, b, { step, size, color, n }) {
 
 export const CHLADNI_CELL = {
   tiltLock: false,
-  alive: () => !!CELL.beads?.moving || CELL.amp > 1e-3 || CELL.ringUntil > (CELL.last ?? 0),
+  alive: () => !!CELL.beads?.moving || CELL.amp > 1e-3 || CELL.ringUntil > (CELL.last ?? 0) || liveIn.on("mic") || !!BOX.song?.track?.playing || CELL.amps.size > 0, // prettier-ignore
   screen: cellScreen,
   density: 1.5,
   kernel: "sharp",
@@ -405,29 +720,83 @@ export const CHLADNI_CELL = {
     },
   ],
   controls: [{ key: "ring", label: "Switch on the sound", type: "toggle", default: 0, ease: RING_SECS }], // prettier-ignore
-  action: { key: "ring", label: "Switch on the sound", quiet: ["ring"] },
+  action: {
+    key: "ring",
+    label: "Switch on the sound",
+    quiet: ["ring"],
+    // Live r9: with your audio open, a tap plays or pauses it (inside the
+    // tap itself, as a phone wants), as on the plate.
+    onAct() {
+      const t = BOX.song?.track;
+      if (!t || liveIn.on("mic")) return;
+      if (t.playing) t.pause();
+      else t.play(BOX.sound);
+    },
+  },
+  // Live r9: sing or play to the box, or open your own audio.
+  input: {
+    title: "Play or sing to the box",
+    accept: "audio/*,.mp3,.wav,.ogg,.m4a,.flac,.aac,.opus",
+    binary: true,
+    maxBytes: 400e6, // as the plate: it plays from the file
+    fileButton: "Open your own audio…",
+    async read(_text, fileName, file) {
+      return openCellAudio(file, fileName);
+    },
+    shown: () => cellShown(),
+    live: [
+      { render: () => songTransport(cellTransport) },
+      { kind: "mic", rebuild: false, status: cellStatus },
+    ],
+    note: "Open a song or any sound file, or tap “Use my microphone” and sing or play. The real cell rings at ultrasound, so the music's pitch is scaled up to the cell's ultrasound modes: moved by octaves into the cell's range, then 256 times higher (eight octaves). The mode nearest it rings, and the beads set off for its surfaces at once, from where they are; a held note settles them, a new note moves them on, and silence leaves them where they are. The Mode choice picks the cube or the flask. The file stays on your device.",
+  },
   drive(t, c, out, info) {
     const mode = info?.data?.cell;
     if (!mode || !CELL.beads) return;
+    if (info?.sound) BOX.sound = info.sound; // for a tap's onAct
     const time = info.time ?? t;
     const dt = CELL.last === null ? 0 : Math.min(0.1, Math.max(0, time - CELL.last));
     CELL.last = time;
+    // Live r9: the microphone, while it is on, or else your audio, while it
+    // is open, rings the cell; then a tap plays or pauses the audio and
+    // never rings the cell's own mode.
+    const sung = liveIn.on("mic");
+    if (sung && BOX.song?.track?.playing) BOX.song.track.pause();
+    const heard = sung || !!BOX.song;
     const n = info.tap?.n ?? 0;
     if (n < CELL.taps) CELL.taps = 0;
     if (n > CELL.taps) {
       CELL.taps = n;
       // A tap rings the cell; on a formed figure it first swirls the water.
-      if (CELL.p > 0.6) CELL.stirUntil = time + STIR_SECS;
-      CELL.ringUntil = time + RING_SECS;
-      for (const q of cue(mode)) out.cues.push(q);
+      if (!heard) {
+        if (CELL.p > 0.6) CELL.stirUntil = time + STIR_SECS;
+        CELL.ringUntil = time + RING_SECS;
+        for (const q of cue(mode)) out.cues.push(q);
+      }
     }
+    if (heard) CELL.ringUntil = CELL.stirUntil = 0;
     const ringing = time < CELL.ringUntil;
     const stirring = time < CELL.stirUntil;
     // The sound comes up and dies away within about a tenth of a second.
     CELL.amp += ((ringing ? 1 : 0) - CELL.amp) * (1 - Math.exp(-dt / 0.1));
     if (CELL.amp < 1e-3) CELL.amp = 0;
     const stir = stirring ? Math.min(1, (CELL.stirUntil - time) / 0.3) : 0;
-    if (CELL.beads.step(dt, stirring ? 0 : CELL.amp, stir)) {
+    let drive = stirring ? 0 : CELL.amp;
+    if (heard) {
+      // The ladder's grids, one a frame (about 20 ms each), so a new note
+      // finds its mode's ready.
+      const cold = ladder(mode.shape).find((m) => !GRIDS.has(m.id));
+      if (cold) gridFor(cold);
+    }
+    if (heard || CELL.amps.size) {
+      // The heard mix: a paused song or silence stops the beads at once.
+      const playing = sung || !!BOX.song?.track?.playing;
+      const mix = follow(heard && playing ? heardDrive(mode.shape, sung) : [], playing ? dt : 1);
+      drive = CELL.amp > 1e-3 ? [{ mode, a: CELL.amp }, ...mix] : mix;
+      const lead = mix.reduce((b, d) => (!b || d.a > b.a ? d : b), null);
+      if (lead && lead.a > 0.05) CELL.lead = lead.mode;
+    }
+    if (CELL.beads.step(dt, drive, stir)) {
       CELL.version++;
       if (time - CELL.sorted > 0.15) {
         CELL.sorted = time;
@@ -438,11 +807,13 @@ export const CHLADNI_CELL = {
       CELL.unsorted = false;
       out.resortPose = true;
     }
-    if (CELL.frames++ % 10 === 0 || !CELL.beads.moving) CELL.p = CELL.beads.settled();
+    if (CELL.frames++ % 10 === 0 || !CELL.beads.moving)
+      CELL.p = CELL.beads.settled(CELL.lead && CELL.amps.size ? CELL.lead : mode);
   },
   build(k, o) {
     const mode = cellMode(o.mode);
-    Object.assign(CELL, { last: null, ringUntil: 0, stirUntil: 0, amp: 0, sorted: -1, unsorted: true, p: 0, frames: 0 }); // prettier-ignore
+    Object.assign(CELL, { last: null, ringUntil: 0, stirUntil: 0, amp: 0, sorted: -1, unsorted: true, p: 0, frames: 0, lead: null }); // prettier-ignore
+    CELL.amps.clear();
     const H = HALF;
     const frame = [];
     const metal = "#59616b";
