@@ -140,39 +140,53 @@ Written by the Operator on October 8, 2026, for this cloud session (word for wor
 
 ## State
 
-READY (October 9, 2026, about 06:35 UTC). Every current hh5 card is marked "good" by the owner (34
-cards, among them the eight `-r2` fixes of his first marks: frog, ladybug, lungs, pearl, Platonic
-solids, Pythagoras proof, Sierpinski tetrahedron, torus knot). The engine gained `limits(at)` and
-`hands.knock: false` for those fixes. All seven PRs wait only for the Operator's merge (engine #441
-first).
+READY (October 10, 2026, about 01:55 UTC). The lane's work is done: every PR is merged. It picks up
+again only if the owner sends new marks. Every hh5 card is marked "good" (36 cards: the first 34,
+among them the eight `-r2` fixes of his first marks, plus the periodic table and the quartz
+cluster).
 
-- **Engine** (`claude/lane-hands-h5-engine`, draft PR #441): `hands.touch` (info.hands.pressed,
-  held, speed, joint(name), piece(i); `touch: { key }` pokes), `follow`/`flee` `at(p)`, upright's
-  `rest` (the owl's settle), a piece's `when(data)`, a socket's `armAway`, a piece's `home` spring.
-  Each opt-in; `tests/hh5-engine.spec.mjs`. Main (with H1's and H2's engines) merged in.
-- **Animals** (PR #446): jellyfish, butterfly, pufferfish, ladybug, snail, starfish, frog, penguin,
-  owl, and the owl's settle fixed.
-- **Body** (PR #448): eye, lungs, the anatomy atlas's organs.
-- **Atoms** (PR #451): molecule, protein, crystal lattice. The periodic table waits for lane H3's
-  engine PR (#430: a `turntable: false` toy plays its joints).
-- **Gems** (PR #452): amethyst geode, pearl, crystal ball. The quartz cluster waits for H3's reseat
-  (#430).
-- **Math** (PR #453): Lorenz attractor, Menger sponge, torus knot, Mandelbulb, Sierpinski
-  tetrahedron, Platonic solids, circle and waves, Pythagoras proof.
-- **AI and computing** (PR #454): perceptron, multilayer perceptron, gradient descent, sorting
-  machine, half adder, Turing machine, difference engine, Enigma machine.
+- **Batch 1** (#457, into main 7f4357565 on October 9): engine #441, Animals #446, Body #448, Atoms
+  #451, Gems #452, AI and computing #454.
+- **Batch 2** (#470, into main 9122a66df on October 10): Math #453, Atoms 2 #461 (the periodic
+  table) and Gems 2 #462 (the quartz cluster).
+
+What each shelf built:
+
+- **Engine** (#441): `hands.touch` (info.hands.pressed, held, speed, joint(name), piece(i);
+  `touch: { key }` pokes), `follow`/`flee` `at(p)`, upright's `rest` (the owl's settle), a piece's
+  `when(data)`, a socket's `armAway`, a piece's `home` spring, a driven joint's `limits(at)`
+  (`at.joint(name)` reads another joint) and `hands.knock: false`. Each opt-in;
+  `tests/hh5-engine.spec.mjs`.
+- **Animals**: jellyfish, butterfly, pufferfish, ladybug, snail, starfish, frog, penguin, owl, and
+  the owl's settle fixed.
+- **Body**: eye, lungs, the anatomy atlas's organs.
+- **Atoms**: molecule, protein, crystal lattice; then the periodic table (pull a tile out of the
+  board; it clicks back in, with H3's `reseat` and `steady`).
+- **Gems**: amethyst geode, pearl, crystal ball; then the quartz cluster (snap one of its five
+  biggest points off and put it back, H3's `reseat`).
+- **Math**: Lorenz attractor, Menger sponge, torus knot, Mandelbulb, Sierpinski tetrahedron,
+  Platonic solids, circle and waves, Pythagoras proof.
+- **AI and computing**: perceptron, multilayer perceptron, gradient descent, sorting machine, half
+  adder, Turing machine, difference engine, Enigma machine.
 
 ## Notes
 
 - Clips: `tools/hh5-clip.mjs` (lane H2's tool) with `SPLASHERY_GL=llvmpipe xvfb-run -a` renders
   390x844 at device scale 2 at about 1 s a frame here, against 6 to 13 s with SwiftShader.
 - The Level 1 sample in `tests/hl1.spec.mjs` takes the sea urchin for the jellyfish (pieces mode
-  now), as earlier lanes did for the mushroom and the soda can.
+  now) and the Klein bottle for the Lorenz attractor (it follows the finger now), as earlier lanes
+  did for the mushroom and the soda can. The Math merge kept both lines.
 - `tests/an.spec.mjs` counts the atlas's organs in their eight new parts.
 - Three poses: each whole toy (Level 1) changed is tested upright, on its side and upside down. A
   toy in pieces mode or one that follows the finger isn't tossed whole, so its pieces are tested as
   they are.
-- `tests/hl1.spec.mjs` takes the Klein bottle for the Lorenz attractor (it follows the finger now).
+- `tests/hta.spec.mjs` holds the About texts of its shelves (Atoms, Gems, Anatomy, Math among them)
+  to 60 to 140 words in two paragraphs and the how-to lines to 95 characters. Several hh5 toys keep
+  main's About wording for that reason, and the periodic table's help is unchanged.
+- A periodic-table tile's pull and snap are in toy units (the board is about 9 across), so they are
+  small numbers (pull 0.035, snap 0.06); the tile needs its own floor (`hands.floor`) and points.
+- The quartz crystals' collision points taper to the tip (`quartzPoints`), so a dropped point lies
+  on its side instead of standing on its tip.
 
 ## Known issues
 
@@ -187,10 +201,25 @@ first).
 - The geode's front half swings on its hinge rather than lifting off (its halves open like a book,
   built twice so they sort right).
 - Sliding the Pythagoras triangles, one can pass over another for a moment on the way.
+- On main (7f4357565 and 8a53aa5c3), `tests/hl1.spec.mjs`'s Level 1 check fails for the teddy bear
+  and the running shoe ("whole-pickup (expected no gaps)"). It isn't from this lane.
 
 ## For the Operator
 
-- Engine PR #441 first; then one PR per shelf, stacked on it, each waiting for the owner's marks.
-- The periodic table and the quartz cluster follow once H3's #430 merges.
+- Every PR of the lane is merged (batches 1 and 2); nothing is left unless the owner sends new
+  marks.
+- The Enigma's rotor letters look garbled when a rotor is set far from A, with the ✋ switch off too
+  (the toy's rotor build); a hand turning a rotor shows it more often.
+- The geode's front half swings on its hinge rather than lifting off (its halves open like a book,
+  built twice so they sort right).
+- Sliding the Pythagoras triangles, one can pass over another for a moment on the way.
+- On main (7f4357565 and 8a53aa5c3), `tests/hl1.spec.mjs`'s Level 1 check fails for the teddy bear
+  and the running shoe ("whole-pickup (expected no gaps)"). It isn't from this lane.
+
+## For the Operator
+
+- Batch 2 (#470) carries the lane's last three PRs (#453, #461, #462); once it lands, nothing is
+  left unless the owner sends new marks.
 - The Enigma's garbled rotor letters (above) are in the toy's own build; a fix belongs to its lane
   (Computing), not Hands-on.
+- The hl1 teddy bear and running shoe failure (above) belongs to whichever lane changed those toys.
