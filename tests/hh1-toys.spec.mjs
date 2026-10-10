@@ -188,7 +188,11 @@ test("origami crane: pulling its tail flaps the wings, and they flap on as it sp
     const h = player.handsOn;
     // The view eases in on the clock's frames first (how far it has come
     // depends on how loaded the machine is), so it settles here, and the
-    // tail is pulled up to a point on the toy, not by screen pixels.
+    // tail is pulled up to a point on the toy, not by screen pixels. The
+    // turntable stays off (Fix11): those two seconds of clock start it (it
+    // waits 2.5 s without a touch), and it turned the crane under the pull
+    // by an amount that depended on the machine's load.
+    player.camera.turntable = false;
     for (let i = 0; i < 120; i++) player.update(1 / 60);
     const p = [-0.45, 0.14, 0];
     const sp = player.screenPoint(p);
