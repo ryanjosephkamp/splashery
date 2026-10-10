@@ -1,8 +1,9 @@
 // Photoreal r2 (lane Photoreal r2): a second round of photoreal captures, one SOG pair each
 // (assets/toys/<id>/<id>.sog and -lite.sog, made by tools/pr2-prepare.mjs from the sources in
 // tools/assets.json). Metadata only: the toys are captured scans, so there is no toy code. All of
-// them are behind the labs switch until the owner marks them good. A tap hops them (no part of a
-// capture moves cleanly), and each has its own sound in src/toy-sounds.js.
+// them are behind the labs switch until the owner marks them good. Each has its own sound in
+// src/toy-sounds.js. Lane Photoreal r3 gave them their rigs (src/packs/photoreal-r3-rigs.js): closed
+// bases and their tap effects.
 //
 // Three captures are NonCommercial (CC BY-NC or CC BY-NC-SA, the owner's call of October 3, 2026):
 // they carry `"nc": true` in tools/assets.json, and `node tools/nc-assets.mjs` lists them.
@@ -32,6 +33,8 @@ export const PHOTOREAL_R2_TOYS = [
     label: "Sushi boat",
     category: "scans",
     tags: "photoreal scan captured food sushi fish rice japanese wooden boat",
+    // Lane Photoreal r3: its own home view (framing).
+    camera: { yaw: 0.55, pitch: 0.42, roll: 0, distance: 3.6 },
     kind: "captured",
     labs: true,
     url: "assets/toys/sushi-boat/sushi-boat.sog",
@@ -239,6 +242,8 @@ export const PHOTOREAL_R2_TOYS = [
     label: "Souvenir elephant",
     category: "scans",
     tags: "photoreal scan captured animal elephant souvenir statue figurine thai",
+    // Lane Photoreal r3: its own home view (framing).
+    camera: { yaw: -0.65, pitch: 0.25, roll: 0, distance: 5 },
     kind: "captured",
     labs: true,
     url: "assets/toys/elephant-souvenir/elephant-souvenir.sog",
@@ -277,6 +282,8 @@ export const PHOTOREAL_R2_TOYS = [
     label: "Cave lioness",
     category: "scans",
     tags: "photoreal scan captured animal lion lioness cave museum cat",
+    // Lane Photoreal r3: its own home view (framing).
+    camera: { yaw: 0.55, pitch: 0.2, roll: 0, distance: 6 },
     kind: "captured",
     labs: true,
     url: "assets/toys/cave-lioness/cave-lioness.sog",
@@ -334,6 +341,8 @@ export const PHOTOREAL_R2_TOYS = [
     label: "Murex shell",
     category: "scans",
     tags: "photoreal scan captured shell nature sea snail spines venus comb",
+    // Lane Photoreal r3: its own home view (framing).
+    camera: { yaw: 0.55, pitch: 0.2, roll: 0, distance: 4.1 },
     kind: "captured",
     labs: true,
     url: "assets/toys/murex-shell/murex-shell.sog",
@@ -486,6 +495,8 @@ export const PHOTOREAL_R2_TOYS = [
     label: "Cherry blossom (photo)",
     category: "scans",
     tags: "photoreal scan captured nature tree cherry blossom spring flowers pink real",
+    // Lane Photoreal r3: its own home view (framing).
+    camera: { yaw: 0.55, pitch: 0.3, roll: 0, distance: 3.9 },
     kind: "captured",
     labs: true,
     url: "assets/toys/cherry-blossom-photo/cherry-blossom-photo.sog",

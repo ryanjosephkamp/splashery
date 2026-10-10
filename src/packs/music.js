@@ -14,6 +14,7 @@ import {
 } from "../kit.js";
 import { evenCylinder, evenTorus, evenTube } from "./even.js";
 import { glissando, newTaps } from "./glissando.js"; // lane UI r4
+import { surfacePoints } from "../physics/world.js"; // lane Hands-on H3
 
 const TAU = Math.PI * 2;
 const LIGHT = vec.unit([0.3, 0.8, 0.55]);
@@ -95,6 +96,18 @@ function group(k, pos = [0, 0, 0], rot = [0, 0, 0]) {
 
 const line = (a, b) => (t) => vec.add(a, vec.mul(vec.sub(b, a), t));
 
+// The guitar's six strings, low E to high E, each from the bridge to the
+// nut, where its build puts them (its group's place and turn): for Hands-on
+// plucks (lane Hands-on H3). OPEN is each one's open note.
+const GUITAR_G = { pos: [0.1, -0.05, 0], q: quatEuler(-12, 0, 38) };
+const GUITAR_STRINGS = [0, 1, 2, 3, 4, 5].map((i) => {
+  const f = (i - 2.5) / 2.5;
+  const z = 0.22 / 2 + 0.03;
+  const at = (p) => vec.add(GUITAR_G.pos, quatRotate(GUITAR_G.q, p));
+  return { a: at([f * 0.075, -0.575, z]), b: at([f * 0.042, 1.36, z]), name: `s${i}` };
+});
+const GUITAR_OPEN = ["E2", "A2", "D3", "G3", "B3", "E4"];
+
 // Per-toy memory for drive(): keyed by the control state object, which is
 // new each time a toy loads.
 const MEM = new WeakMap();
@@ -125,6 +138,29 @@ const STICKS = [
   { butt: [-0.9, 0.66, 0.46], tip: [-0.14, 0.34, 0.02], delay: 0.18 },
 ];
 const stickAxis = (s) => vec.unit(vec.cross(vec.sub(s.tip, s.butt), [0, 1, 0]));
+
+// Hands-on (lane Hands-on H3): each stick a loose piece, its body an
+// ellipsoid along it (turned from +Z to butt-to-tip), and the drum, ground
+// for them. DRUM_HAND is when a stick last struck the head, and how hard,
+// for the head's ripple (wall clock, as the sound plays).
+const DRUM = { R: 0.7, H: 0.42 };
+const DRUM_HAND = { t: -1e9, vol: 0 };
+const DRUM_SHELL = { type: "cylinder", r: DRUM.R + 0.03, h: DRUM.H / 2 + 0.02 };
+const stickPiece = (s, i) => {
+  const d = vec.sub(s.tip, s.butt);
+  const L = Math.hypot(...d);
+  const u = vec.mul(d, 1 / L);
+  const ax = vec.cross([0, 0, 1], u);
+  const quat = quatAxisAngle(vec.unit(ax), Math.acos(clamp(u[2], -1, 1)));
+  const solid = { type: "ellipsoid", r: [0.03, 0.03, L / 2 + 0.01] };
+  return { name: "stick", part: `stick${i}`, pos: vec.mul(vec.add(s.butt, s.tip), 0.5), quat, pivot: s.butt, solid, points: surfacePoints(solid, 1), pick: [0.09, 0.09, L / 2 + 0.03], mass: 0.15, friction: 0.6, restitution: 0.45, strike: true }; // prettier-ignore
+};
+// Where a stick met the drum: its head, its rim, or its side.
+function drumSpot(p) {
+  const r = Math.hypot(p[0], p[2]);
+  if (p[1] > DRUM.H / 2 - 0.02 && r < DRUM.R - 0.05) return "head";
+  return p[1] > DRUM.H / 2 - 0.06 ? "rim" : "side";
+}
 
 // Where the xylophone's mallet head is (so a quick second tap swings on
 // from there instead of jumping home first).
@@ -355,16 +391,31 @@ export const RECIPES = {
     ],
     controls: [{ key: "strum", label: "Strum", type: "pulse", ease: 3 }],
     action: { key: "strum", label: "Strum" },
-    drive(t, c, out) {
+    // Hands-on (lane Hands-on H3): drag across the strings and each one the
+    // finger crosses is plucked, sounding its own open note, and vibrates.
+    // A press off the strings picks the guitar up.
+    hands: {
+      strings: { list: GUITAR_STRINGS, reach: 0.05 },
+      sound: (hit, vol) =>
+        hit.pluck !== undefined
+          ? { voice: "pluck", notes: GUITAR_OPEN[hit.pluck], bright: 0.55, decay: 1.6, vol: 0.35 + 0.5 * Math.min(1, vol * 2) } // prettier-ignore
+          : undefined,
+    },
+    drive(t, c, out, info) {
       // A down-strum: each string is plucked a moment after the one above
       // and vibrates, bending at its middle and blurring wider, dying away
       // over about three seconds. The guitar rocks, hops and settles, and
       // rings of sound pulse out of the soundhole one after another.
       const e = (1 - c.strum) * 3;
       const on = c.strum > 0;
+      // (A string plucked by a finger in Hands-on vibrates the same way,
+      // from when it was plucked.)
+      const plucked = info?.hands?.plucked;
       for (let i = 0; i < 6; i++) {
-        const el = e - 0.035 * i;
-        const env = on && el > 0 ? Math.exp(-el * 0.8) * band(el, 0, 0.03) : 0;
+        let el = on ? e - 0.035 * i : -1;
+        const pl = plucked?.[i] ?? Infinity;
+        if (pl < 4 && (el < 0 || pl < el)) el = pl;
+        const env = el > 0 ? Math.exp(-el * 0.8) * band(el, 0, 0.03) : 0;
         const a = 0.15 * env * Math.cos(TAU * (4.5 + i * 0.6) * el);
         out.parts[`s${i}a`] = { angle: a, visible: 1 + 1.6 * env };
         out.parts[`s${i}b`] = { angle: -a, visible: 1 + 1.6 * env };
@@ -610,6 +661,32 @@ export const RECIPES = {
     options: [{ key: "shell", label: "Shell", type: "color", default: "#c8202e" }],
     controls: [{ key: "hit", label: "Hit", type: "pulse", ease: 3.2 }],
     action: { key: "hit", label: "Play a roll" },
+    // Hands-on (lane Hands-on H3): pick up a stick and hit the drum. On the
+    // head it cracks like a snare (harder hits louder) and the head ripples;
+    // on the rim, a sharp click; on the shell, a knock. Sticks clatter where
+    // they fall. ↺ (or a tap, which plays a roll) puts them back.
+    hands: {
+      floor: -DRUM.H / 2,
+      area: 1.4,
+      pieces: () => [
+        ...STICKS.map(stickPiece),
+        { name: "drum", pos: [0, 0, 0], solid: DRUM_SHELL, pick: [1e-3, 1e-3, 1e-3], fixed: true }, // prettier-ignore
+      ],
+      sound: (hit, vol) => {
+        const drum = hit.name === "drum" || hit.against === "drum";
+        const stick = hit.name === "stick" || hit.against === "stick";
+        if (!stick) return undefined;
+        if (!drum) return { voice: "wood", f: 900, decay: 0.12, vol: vol * 0.6 };
+        const spot = drumSpot(hit.point || [0, 0, 0]);
+        if (spot === "head") {
+          DRUM_HAND.t = performance.now();
+          DRUM_HAND.vol = Math.min(1, 0.3 + vol * 1.4);
+          return { voice: "snare", notes: "C4", bright: 0.6, vol: Math.min(1, 0.35 + vol * 1.2) };
+        }
+        if (spot === "rim") return { voice: "click", vol: Math.min(0.9, 0.3 + vol) };
+        return { voice: "wood", f: 420, decay: 0.2, vol: vol * 0.8 };
+      },
+    },
     drive(t, c, out) {
       // A roll: the sticks strike in turn. A tap during a roll speeds it up
       // (four speeds) and makes it last longer; a pause starts over slowly.
@@ -634,12 +711,14 @@ export const RECIPES = {
         out.parts[`stick${i}`] = { angle: env * (-0.1 + (R.lift + 0.1) * up) };
       });
       const hitNow = Math.exp(-fract(P) * 5);
-      out.amount = 1.2 * env;
-      out.body = { squash: 0.03 * env * hitNow };
+      // (A stick's hit by hand ripples the head too, dying away.)
+      const age = (performance.now() - DRUM_HAND.t) / 1000;
+      const hand = age < 3 ? DRUM_HAND.vol * Math.exp(-age * 2.2) : 0;
+      out.amount = Math.max(1.2 * env, 1.2 * hand);
+      out.body = { squash: 0.03 * Math.max(env * hitNow, hand * Math.exp(-age * 12)) };
     },
     build(k, o) {
-      const R = 0.7;
-      const H = 0.42;
+      const { R, H } = DRUM;
       const shellCol = o.shell;
       k.add(evenCylinder(R, R, H, false), {
         even: true,

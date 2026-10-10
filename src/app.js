@@ -182,6 +182,9 @@ class App {
     // loading overlay: the toy stays on screen and its tap sound plays at once (lane Fix6).
     player.rebuild = (options) => this.setToyOptions(options, { quiet: Infinity });
     // Lane Physics: a toy or piece tossed in Hands-on lands with a sound.
+    // Lane Hands-on H3: a toy that stops (or starts) being able to play
+    // Hands-on, a converter with a file open, shows or hides ✋ at once.
+    player.on("hands-available", () => this.showHands());
     player.on("frame", () => {
       const hits = player.handsOn.takeSounds();
       if (hits.length) this.handsSounds(hits);
@@ -862,7 +865,16 @@ class App {
   preloadSounds() {
     const toy = this.player?.scene.toy;
     if (!this.sound.enabled || toy?.kind !== "builtin") return;
-    this.sound.preload([toySound(toy.id), ...this.recipeSounds()]);
+    this.sound.preload([this.ownSound(toy), ...this.recipeSounds()]);
+  }
+
+  // Lane Photo depth: a built-in toy's tap sound. Its recipe may pick it from its options
+  // (`toySound(options)`, as Photo to 3D's Sound choice does; [] is silence); anything else, and
+  // every recipe without the hook, has its sound from src/toy-sounds.js as before.
+  ownSound(toy) {
+    if (toy?.kind !== "builtin") return null;
+    const pick = this.player?.toyInfo?.recipe?.toySound?.(toy.options || {});
+    return pick !== undefined && pick !== null ? pick : toySound(toy.id);
   }
 
   // Sound C: the specs a kit recipe's `sounds` lists (the recorded samples
@@ -887,7 +899,7 @@ class App {
       this.ui.setMotion(player.scene.motion, player.motion.targets);
       return;
     }
-    const own = toy.kind === "builtin" ? toySound(toy.id) : null;
+    const own = this.ownSound(toy);
     // UI r3: a tap on a long effect that is running pauses its sound too, and
     // the next one resumes it from the same place.
     if (r.paused || r.resumed) {
@@ -1273,7 +1285,7 @@ class App {
       // A real stretch plays the toy's sound as it springs back.
       const stretched = this.player.grabEnd();
       const toy = this.player.scene.toy;
-      const spec = toy.kind === "builtin" ? toySound(toy.id) : null;
+      const spec = this.ownSound(toy);
       if (stretched > 0.15 && spec) this.sound.play(specFor(spec, true), { key: "toy" });
       // Lane Physics: a stretchy toy may wobble as it springs back (the jelly).
       const wobble = this.player.toyInfo?.recipe?.grab?.wobble;
@@ -1642,8 +1654,11 @@ class App {
   }
 
   // Runs fn with a fixed-size, frozen player and restores it afterwards.
-  async withCapture(size, fn) {
+  // label: a short message shown over the stage meanwhile (Stage.cover).
+  async withCapture(size, fn, { label = "" } = {}) {
     const player = this.player;
+    // Engine (QR r4): the fixed size and the export camera stay off screen.
+    await player.stage.cover({ label });
     const base = { cam: player.camera.getState(), time: player.time, idle: player.idle.weight };
     const look = player.scene.look;
     const fx = player.scene.effects;
@@ -1663,6 +1678,7 @@ class App {
       player.idle.weight = base.idle;
       player.applyLook();
       player.resume();
+      player.stage.uncover();
     }
   }
 
@@ -1725,6 +1741,19 @@ class App {
 
   // Lane PDF lab: Save as PDF (labs). Its dialog and pdf-lib load only when
   // someone opens it (src/pdf-export/).
+  // Lane QR r4 part 2 (labs): the scene's link as a QR code, in a dialog
+  // (src/qr/share.js, loaded when someone opens it).
+  async openShareQR() {
+    if (this.busy) return;
+    try {
+      const { openShareQR } = await import("./qr/share.js");
+      return await openShareQR(this);
+    } catch (err) {
+      console.info(err);
+      this.ui.toast("The QR code couldn't load. Try again in a moment.", 5000);
+    }
+  }
+
   async openPdfExport() {
     if (this.busy) return;
     try {

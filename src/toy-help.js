@@ -21,81 +21,132 @@
 // the toy's recipe and against a real source for every fact.
 
 export const TOY_HELP = {
+  // ---- Photoreal r3 (lane Photoreal r3) ----
+  "triceratops-skull": {
+    howTo: "Tap it to make it look at you; drag to turn it.",
+    about:
+      "A real Triceratops skull from a museum's dinosaur hall, captured from photos and drawn with splats. Triceratops lived about 68 to 66 million years ago, at the very end of the age of dinosaurs. It ate plants, and its three horns and the great bony frill behind its head may have been for defense, for showing off to rivals, or both.\n\nTap it and the skull turns to look at you, then the other way. Drag to circle it and look at the horns, the beak and the frill's scalloped edge.",
+  },
+  "cone-shell": {
+    howTo: "Tap it to turn it on its point; drag to turn it yourself.",
+    about:
+      "The shell of a textile cone snail, captured from photos and drawn with splats. Cone snails live on tropical reefs and hunt with a tiny harpoon that carries venom; the netted pattern of gold and brown tents grows at the shell's lip, line by line.\n\nTap it and it turns one way and the other on its point. Drag to circle it and follow the pattern.",
+  },
+  "celestial-globe": {
+    howTo: "Tap it to spin the globe; drag to turn it.",
+    about:
+      "A celestial globe from a university museum in Kraków, scanned and drawn with splats. It is a map of the sky, not of the Earth: the stars and the figures of the constellations are painted on a ball, as if you saw the sky from outside. The flat ring round it is the horizon; the brass ring over it is the meridian.\n\nTap it and the ball turns in its rings, as the sky seems to turn overhead each night.",
+  },
+  "armillary-sphere": {
+    howTo: "Tap it to turn the inner rings; drag to turn it.",
+    about:
+      "An armillary sphere made by Franciszek Słupski in 1771, scanned and drawn with splats. Its rings stand for the great circles of the sky: the equator, the tropics, the band the Sun follows through the year, round a small Earth at the middle. Astronomers used such spheres to teach how the sky moves.\n\nTap it and the inner rings turn inside the frame.",
+  },
+  "stannern-meteorites": {
+    howTo: "Tap it to let the stones fall; drag to turn them.",
+    about:
+      "Five stones of the Stannern meteorite, scanned at the Natural History Museum Vienna and drawn with splats. On May 22, 1808, a shower of about two hundred to three hundred stones fell near the town of Stannern (Stonařov) in Moravia. Their thin black crust formed as they burned through the air; inside they are pale rock from the asteroid Vesta.\n\nTap it and the stones are lifted and fall one after another.",
+  },
+  "fluorite-crystal": {
+    howTo: "Tap it to switch on the ultraviolet lamp; drag to turn it.",
+    about:
+      "A specimen of fluorite, scanned and drawn with splats. Fluorite is calcium fluoride and grows in cubes. Under ultraviolet light many fluorite crystals glow blue-violet: the word fluorescence comes from this mineral.\n\nTap it and the lamp comes on: the stone turns slowly in its glow, then the lamp goes off. Drag to turn it and look for the cubes that grew into one another as the crystal formed.",
+  },
+  "ammonite-agate": {
+    howTo: "Tap it to turn it over; drag to turn it yourself.",
+    about:
+      "An ammonite, cut in half and polished, scanned and drawn with splats. Ammonites were sea animals with coiled shells divided into chambers, relatives of today's nautilus and squid; they died out with the dinosaurs. In this one the empty chambers filled with quartz and chalcedony over millions of years.\n\nTap it and it turns over to show its other face, then back.",
+  },
+  "morasko-meteorite": {
+    howTo: "Tap it to turn it over; drag to turn it yourself.",
+    about:
+      "An iron meteorite from Morasko, near Poznań in Poland, scanned and drawn with splats. Iron meteorites come from the metal cores of broken asteroids. The Morasko irons fell about five thousand years ago, leaving small craters that can still be seen.\n\nTap it and it turns half way round to show its other side, so the light runs over its pitted surface, then turns back.",
+  },
+  "pyrite-cubes": {
+    howTo: "Tap it to turn it over; drag to turn it yourself.",
+    about:
+      "A specimen of pyrite, scanned and drawn with splats. Pyrite is iron sulfide; its brassy shine fooled many prospectors, so it is called fool's gold. Its crystals often grow as little cubes, with faces as flat as if they had been cut.\n\nTap it and it turns half way round to show its other side, so the light runs across its faces, then turns back.",
+  },
+  "megalodon-tooth": {
+    howTo: "Tap it to turn it over; drag to turn it yourself.",
+    about:
+      "A fossil tooth of the giant shark megalodon (Otodus megalodon), scanned and drawn with splats. Megalodon lived from about 23 to 3.6 million years ago and may have grown to fifteen meters or more. Sharks shed their teeth all their lives, so fossil teeth are much more common than any other part of them.\n\nTap it and it turns over to show its other side, then back.",
+  },
   // ---- Photoreal r2 (lane Photoreal r2) ----
   "heart-donut": {
-    howTo: "Tap it to make it hop; drag to turn it.",
+    howTo: "Tap it to toss it: it twirls round once and lands; drag to turn it.",
     about:
-      "A real heart-shaped donut with a white glaze, captured from 411 photos on a turntable and drawn with about a quarter of a million soft splats. A donut is a ring or heart of dough fried in oil, so its crust browns and its crumb puffs.\n\nTap it and it hops. Drag to turn it and see the glossy glaze, the golden fried sides and the pale ring where the dough rose in the fryer.",
+      "A real heart-shaped donut with a white glaze, captured from 411 photos on a turntable and drawn with about a quarter of a million soft splats. A donut is a ring or heart of dough fried in oil, so its crust browns and its crumb puffs.\n\nTap it and it is tossed up, twirls round once in the air and lands. Drag to turn it and see the glossy glaze, the golden fried sides and the pale ring where the dough rose in the fryer.",
   },
   "sushi-boat": {
-    howTo: "Tap it to make it hop; drag to turn it.",
+    howTo: "Tap it to rock the boat; drag to turn it.",
     about:
-      "A wooden serving boat of sushi, captured from photos and drawn with splats. Sushi is vinegared rice served with fish, egg or vegetables; the word names the rice, not the raw fish. A boat-shaped tray is a classic way to serve a shared plate.\n\nTap it and it hops. Drag to circle it and look at the rolls, the slices of fish and the grain of the wood.",
+      "A wooden serving boat of sushi, captured from photos and drawn with splats. Sushi is vinegared rice served with fish, egg or vegetables; the word names the rice, not the raw fish. A boat-shaped tray is a classic way to serve a shared plate.\n\nTap it and the boat rocks from side to side, as if on water, and settles. Drag to circle it and look at the rolls, the slices of fish and the grain of the wood.",
   },
   "seeded-loaf": {
-    howTo: "Tap it to make it hop; drag to turn it.",
+    howTo: "Tap it to drop it; drag to turn it.",
     about:
-      "A loaf of seeded bread, captured from many photos and drawn with soft splats. Bread is flour and water, risen with yeast, whose gas puffs up the dough before the oven sets it into a crust. The seeds on top are baked on and crunch when you bite.\n\nTap it and it hops. Drag around the loaf to see the golden crust and the scatter of seeds.",
+      "A loaf of seeded bread, captured from many photos and drawn with soft splats. Bread is flour and water, risen with yeast, whose gas puffs up the dough before the oven sets it into a crust. The seeds on top are baked on and crunch when you bite.\n\nTap it and the loaf is lifted a little and dropped: it lands with a soft thud and rocks to rest. Drag around the loaf to see the golden crust and the scatter of seeds.",
   },
   steak: {
-    howTo: "Tap it to make it hop; drag to turn it.",
+    howTo: "Tap it to flip it over and back; drag to turn it.",
     about:
-      "A grilled cowboy steak, a thick rib cut with the bone left in, captured from photos and drawn with splats. Grilling browns the surface through the Maillard reaction, where heat joins sugars and proteins into new flavors and a dark crust.\n\nTap it and it hops. Drag to turn it and look at the char marks, the fat along the edge and the juicy texture.",
+      "A grilled cowboy steak, a thick rib cut with the bone left in, captured from photos and drawn with splats. Grilling browns the surface through the Maillard reaction, where heat joins sugars and proteins into new flavors and a dark crust.\n\nTap it and the steak is flipped over, like with tongs, onto its other seared side, then flipped back. Drag to turn it and look at the char marks, the fat along the edge and the juicy texture.",
   },
   stollen: {
-    howTo: "Tap it to make it hop; drag to turn it.",
+    howTo: "Tap it to drop it; drag to turn it.",
     about:
-      "A stollen, the German Christmas bread full of dried fruit and nuts and rolled in butter and powdered sugar. This one was captured from photos and is drawn with splats. Bakers have made stollen since the 1400s, and its folded shape is said to recall a swaddled baby.\n\nTap it and it hops. Drag to circle the loaf and look at the sugar crust and the cut face.",
+      "A stollen, the German Christmas bread full of dried fruit and nuts and rolled in butter and powdered sugar. This one was captured from photos and is drawn with splats. Bakers have made stollen since the 1400s, and its folded shape is said to recall a swaddled baby.\n\nTap it and the stollen is lifted a little and dropped, and settles. Drag to circle the loaf and look at the sugar crust and the cut face.",
   },
   "orange-photo": {
-    howTo: "Tap it to make it hop; drag to turn it.",
+    howTo: "Tap it to roll it; drag to turn it.",
     about:
-      "A real orange, captured from photos and drawn with soft splats. The peel is covered in tiny pockets of oil that give citrus its smell; the bumps you see are those pockets. Oranges are a hybrid of the pomelo and the mandarin and grow on evergreen trees.\n\nTap it and it hops. Drag to turn it and look at the dimpled peel and the little dark spot where the stem was.",
+      "A real orange, captured from photos and drawn with soft splats. The peel is covered in tiny pockets of oil that give citrus its smell; the bumps you see are those pockets. Oranges are a hybrid of the pomelo and the mandarin and grow on evergreen trees.\n\nTap it and the orange rolls along the table and back, turning as far as it travels. Drag to turn it and look at the dimpled peel and the little dark spot where the stem was.",
   },
   physalis: {
-    howTo: "Tap it to make it hop; drag to turn it.",
+    howTo: "Tap it to make it sway; drag to turn it.",
     about:
-      "A sprig of physalis, also called Chinese lantern or cape gooseberry, captured from photos and drawn with splats. Its fruit grows inside a papery husk that turns bright orange as it ripens; the husk is the plant's lantern and guards the berry.\n\nTap it and it hops. Drag to circle it and look at the thin veined husks and the green leaves above them.",
+      "A sprig of physalis, also called Chinese lantern or cape gooseberry, captured from photos and drawn with splats. Its fruit grows inside a papery husk that turns bright orange as it ripens; the husk is the plant's lantern and guards the berry.\n\nTap it and the stem sways and settles, its lanterns swinging with it. Drag to circle it and look at the thin veined husks and the green leaves above them.",
   },
   "crystal-gem": {
-    howTo: "Tap it to make it hop; drag to turn it.",
+    howTo: "Tap it to turn it round; drag to turn it yourself.",
     about:
-      "A cluster of clear crystals, captured from photos and drawn with splats. A crystal forms when atoms stack in a repeating pattern, usually while a mineral-rich liquid cools or dries slowly. Slow growth gives sharp faces that bend and bounce light.\n\nTap it and it hops. Drag to turn it: the glints move across the faces because this capture keeps a little view-dependent shine.",
+      "A cluster of clear crystals, captured from photos and drawn with splats. A crystal forms when atoms stack in a repeating pattern, usually while a mineral-rich liquid cools or dries slowly. Slow growth gives sharp faces that bend and bounce light.\n\nTap it and the crystal turns once round, so the glints move across its faces. Drag to turn it: the glints move across the faces because this capture keeps a little view-dependent shine.",
   },
   "alum-crystal": {
-    howTo: "Tap it to make it hop; drag to turn it.",
+    howTo: "Tap it to turn the crystal on its block; drag to turn it yourself.",
     about:
-      "A pink block of alum, captured from photos and drawn with splats. Alum is a mineral salt that people have used for centuries to clear muddy water, to fix dye in cloth and, as a crystal stick, to stop small shaving nicks from bleeding.\n\nTap it and it hops. Drag around it to see the frosted, uneven faces and the dark stand it sits on.",
+      "A pink block of alum, captured from photos and drawn with splats. Alum is a mineral salt that people have used for centuries to clear muddy water, to fix dye in cloth and, as a crystal stick, to stop small shaving nicks from bleeding.\n\nTap it and the crystal is turned a quarter of the way round on its block. Drag around it to see the frosted, uneven faces and the dark stand it sits on.",
   },
   puffin: {
-    howTo: "Tap it to make it hop; drag to turn it.",
+    howTo: "Tap it to make it hop round; drag to turn it.",
     about:
-      "A puffin, captured from photos and drawn with splats. Puffins are small seabirds of the North Atlantic that nest in burrows on cliff tops. In summer their beaks glow orange, and they flap up to four hundred times a minute to fly and use their wings to swim underwater.\n\nTap it and it hops. Drag to circle it and look at the striped beak, the white face and the orange feet.",
+      "A puffin, captured from photos and drawn with splats. Puffins are small seabirds of the North Atlantic that nest in burrows on cliff tops. In summer their beaks glow orange, and they flap up to four hundred times a minute to fly and use their wings to swim underwater.\n\nTap it and the puffin hops round to look at you, then hops back. Drag to circle it and look at the striped beak, the white face and the orange feet.",
   },
   "toy-trex": {
-    howTo: "Tap it to make it hop; drag to turn it.",
+    howTo: "Tap it to rock it on its feet; drag to turn it.",
     about:
-      "A rubber toy Tyrannosaurus rex on a green base, captured from photos and drawn with splats. Real T. rex lived about 68 million years ago and had a bite strong enough to crush bone, but their arms were tiny. Scientists now think they were covered in scaly skin, perhaps with a few feathers.\n\nTap it and it hops. Drag to circle it and look at the painted stripes.",
+      "A rubber toy Tyrannosaurus rex on a green base, captured from photos and drawn with splats. Real T. rex lived about 68 million years ago and had a bite strong enough to crush bone, but their arms were tiny. Scientists now think they were covered in scaly skin, perhaps with a few feathers.\n\nTap it and the toy rocks on its feet on its disc, round and round, and settles. Drag to circle it and look at the painted stripes.",
   },
   "monkey-doll": {
-    howTo: "Tap it to make it hop; drag to turn it.",
+    howTo: "Tap it to rock it; drag to turn it.",
     about:
-      "A plush monkey in a striped sweater, captured from photos and drawn with soft splats. Fuzzy fabric is hard to scan because each loop of yarn casts its own tiny shadow, so the doll is a good test of how well splats can show soft materials.\n\nTap it and it hops. Drag to circle it and look at the nap of the fur, the stitched face and the curled tail.",
+      "A plush monkey in a striped sweater, captured from photos and drawn with soft splats. Fuzzy fabric is hard to scan because each loop of yarn casts its own tiny shadow, so the doll is a good test of how well splats can show soft materials.\n\nTap it and the monkey rocks on its cloth, round and round, and settles. Drag to circle it and look at the nap of the fur, the stitched face and the curled tail.",
   },
   "elephant-souvenir": {
-    howTo: "Tap it to make it hop; drag to turn it.",
+    howTo: "Tap it to make it turn; drag to turn it.",
     about:
-      "A souvenir elephant figure with a gold blanket on its back, captured from photos and drawn with splats. Elephants are the largest land animals; the trunk is a nose and an upper lip joined in one muscular tool with about forty thousand muscle bundles.\n\nTap it and it hops. Drag to circle it and look at the raised trunk, the white tusks and the patterned golden cloth.",
+      "A souvenir elephant figure with a gold blanket on its back, captured from photos and drawn with splats. Elephants are the largest land animals; the trunk is a nose and an upper lip joined in one muscular tool with about forty thousand muscle bundles.\n\nTap it and the elephant turns to look at you with two heavy steps, then turns back. Drag to circle it and look at the raised trunk, the white tusks and the patterned golden cloth.",
   },
   "turtle-souvenir": {
-    howTo: "Tap it to make it hop; drag to turn it.",
+    howTo: "Tap it to make it crawl; drag to turn it.",
     about:
-      "A souvenir sea turtle, captured from photos and drawn with splats. Sea turtles have flippers instead of feet and cannot pull their heads into their shells. Mother turtles come back to the beach where they hatched to lay their eggs, sometimes after decades at sea.\n\nTap it and it hops. Drag to circle it and look at the shell plates and the flippers.",
+      "A souvenir sea turtle, captured from photos and drawn with splats. Sea turtles have flippers instead of feet and cannot pull their heads into their shells. Mother turtles come back to the beach where they hatched to lay their eggs, sometimes after decades at sea.\n\nTap it and the turtle crawls a little way forward, swaying, and back. Drag to circle it and look at the shell plates and the flippers.",
   },
   "cave-lioness": {
-    howTo: "Tap it to make it hop; drag to turn it.",
+    howTo: "Tap her to make her look round; drag to turn her.",
     about:
-      "The head and shoulders of a lioness of the extinct cave lion kind, captured from photos of a life-size model and drawn with splats. Cave lions lived in Europe and Asia in the Ice Age and were larger than lions today. Cave paintings show them without manes.\n\nTap it and it hops. Drag to circle it and look at the whiskers, the fur and the watching eyes.",
+      "The head and shoulders of a lioness of the extinct cave lion kind, captured from photos of a life-size model and drawn with splats. Cave lions lived in Europe and Asia in the Ice Age and were larger than lions today. Cave paintings show them without manes.\n\nTap her and she looks one way, then the other, then back. Drag to circle it and look at the whiskers, the fur and the watching eyes.",
   },
   "dog-plush": {
     howTo: "Tap it to make it hop; drag to turn it.",
@@ -103,74 +154,74 @@ export const TOY_HELP = {
       "A plush dog lying on a wooden board, scanned with a handheld Revopoint scanner plus extra photos and drawn with splats. Soft toys are made of fabric stuffed with fiber; the short fuzz that covers them is called pile.\n\nTap it and it hops. Drag to circle it and look at the floppy ears and the brown and white patches.",
   },
   "bmx-bike": {
-    howTo: "Tap it to make it hop; drag to turn it.",
+    howTo: "Tap it to nudge it; drag to turn it.",
     about:
-      "A BMX bicycle, captured from photos and drawn with splats. BMX stands for bicycle motocross: small-wheeled bikes built in the 1970s for racing on dirt tracks, then for jumps and tricks. This one is an old-style frame with plastic mag wheels.\n\nTap it and it hops. Drag to circle it and look at the spokes, the chain and the handlebars.",
+      "A BMX bicycle, captured from photos and drawn with splats. BMX stands for bicycle motocross: small-wheeled bikes built in the 1970s for racing on dirt tracks, then for jumps and tricks. This one is an old-style frame with plastic mag wheels.\n\nTap it and the bicycle leans over on its kickstand and rocks back up. Drag to circle it and look at the spokes, the chain and the handlebars.",
   },
   "murex-shell": {
-    howTo: "Tap it to make it hop; drag to turn it.",
+    howTo: "Tap it to turn it round; drag to turn it yourself.",
     about:
-      "A murex shell, captured from photos and drawn with splats. This shape is the Venus comb murex, a sea snail whose long spines guard it from crabs and fish. The shell is made of calcium carbonate that the snail builds, a little at a time, from the sea water.\n\nTap it and it hops. Drag to turn it and look at the fine, comb-like spines.",
+      "A murex shell, captured from photos and drawn with splats. This shape is the Venus comb murex, a sea snail whose long spines guard it from crabs and fish. The shell is made of calcium carbonate that the snail builds, a little at a time, from the sea water.\n\nTap it and the shell turns once round, showing its spines from every side. Drag to turn it and look at the fine, comb-like spines.",
   },
   "sunflower-photo": {
-    howTo: "Tap it to make it hop; drag to turn it.",
+    howTo: "Tap it to make it nod; drag to turn it.",
     about:
-      "A real sunflower, captured from photos and drawn with splats. The big yellow head is made of hundreds of small flowers; the dark center ones turn into seeds in a spiral pattern. Young sunflowers follow the sun across the sky, then stop and face east.\n\nTap it and it hops. Drag to circle it and look at the petals, the seed disc and the green stem.",
+      "A real sunflower, captured from photos and drawn with splats. The big yellow head is made of hundreds of small flowers; the dark center ones turn into seeds in a spiral pattern. Young sunflowers follow the sun across the sky, then stop and face east.\n\nTap it and the sunflower nods and settles. Drag to circle it and look at the petals, the seed disc and the green stem.",
   },
   "white-roses": {
-    howTo: "Tap it to make it hop; drag to turn it.",
+    howTo: "Tap the vase to knock it; drag to turn it.",
     about:
-      "Two white roses in a glass bottle, captured from photos and drawn with splats. Roses have been grown in gardens for thousands of years. Their stems carry prickles, not true thorns, and a white rose gets its color from having no pigment in its petals.\n\nTap it and it hops. Drag to circle it and look at the folded petals and the clear glass.",
+      "Two white roses in a glass bottle, captured from photos and drawn with splats. Roses have been grown in gardens for thousands of years. Their stems carry prickles, not true thorns, and a white rose gets its color from having no pigment in its petals.\n\nTap it and the vase tips onto the rim of its base, rolls round on it and settles. Drag to circle it and look at the folded petals and the clear glass.",
   },
   "bonsai-photo": {
-    howTo: "Tap it to make it hop; drag to turn it.",
+    howTo: "Tap it to drop it; drag to turn it.",
     about:
-      "A real bonsai, captured from photos and drawn with splats. Bonsai is the Japanese art of growing a tree in a shallow pot and shaping it with careful pruning and wire so that it looks like an old tree in the wild. Some bonsai are kept for hundreds of years.\n\nTap it and it hops. Drag to circle it and look at the trunk, the moss and the tiny leaves.",
+      "A real bonsai, captured from photos and drawn with splats. Bonsai is the Japanese art of growing a tree in a shallow pot and shaping it with careful pruning and wire so that it looks like an old tree in the wild. Some bonsai are kept for hundreds of years.\n\nTap it and the board is lifted a little and set down with a bump. Drag to circle it and look at the trunk, the moss and the tiny leaves.",
   },
   "mushroom-photo": {
-    howTo: "Tap it to make it hop; drag to turn it.",
+    howTo: "Tap it to drop it; drag to turn it.",
     about:
-      "A small mushroom on the forest floor, captured from photos and drawn with splats. What you see is only the fruiting body; most of a fungus is a web of thin threads called mycelium that spreads through soil and wood and feeds on dead leaves.\n\nTap it and it hops. Drag to circle it and look at the orange cap, the wood chips and the green seedlings around it.",
+      "A small mushroom on the forest floor, captured from photos and drawn with splats. What you see is only the fruiting body; most of a fungus is a web of thin threads called mycelium that spreads through soil and wood and feeds on dead leaves.\n\nTap it and the patch of forest floor is lifted a little and set down with a bump. Drag to circle it and look at the orange cap, the wood chips and the green seedlings around it.",
   },
   "cactus-real": {
-    howTo: "Tap it to make it hop; drag to turn it.",
+    howTo: "Tap it to drop it; drag to turn it.",
     about:
-      "A round cactus, captured from photos and drawn with thousands of splats. Cactus spines are leaves that dried into needles; they shade the plant and cool it, catch dew and keep animals from eating it. The ribbed stem stores water and swells when it rains.\n\nTap it and it hops. Drag to circle it and look at the pattern of spines.",
+      "A round cactus, captured from photos and drawn with thousands of splats. Cactus spines are leaves that dried into needles; they shade the plant and cool it, catch dew and keep animals from eating it. The ribbed stem stores water and swells when it rains.\n\nTap it and the cactus in its gravel is lifted a little and set down with a bump. Drag to circle it and look at the pattern of spines.",
   },
   "crochet-earth": {
-    howTo: "Tap it to make it hop; drag to turn it.",
+    howTo: "Tap it to spin it; drag to turn it.",
     about:
-      "A crocheted Earth, captured from photos and drawn with splats. Crochet makes cloth from one long loop-pulled thread and a hook. Here the yarn colors draw blue oceans, green and cream land and white ice, so each stitch is one tiny pixel of the planet.\n\nTap it and it hops. Drag to turn it and look for the continents among the stitches.",
+      "A crocheted Earth, captured from photos and drawn with splats. Crochet makes cloth from one long loop-pulled thread and a hook. Here the yarn colors draw blue oceans, green and cream land and white ice, so each stitch is one tiny pixel of the planet.\n\nTap it and the Earth spins round twice, like the other planets, and stops. Drag to turn it and look for the continents among the stitches.",
   },
   "desk-globe": {
-    howTo: "Tap it to make it hop; drag to turn it.",
+    howTo: "Tap it to spin the globe; drag to turn it.",
     about:
-      "A desk globe on a wooden base, captured from photos and drawn with splats. A globe is the only map of Earth with no stretching: every country has the right shape and size next to its neighbors. Its axis is tilted about 23 degrees, like the real planet.\n\nTap it and it hops. Drag to circle it and look at the tilted blue ball, the black stand and the wood.",
+      "A desk globe on a wooden base, captured from photos and drawn with splats. A globe is the only map of Earth with no stretching: every country has the right shape and size next to its neighbors. Its axis is tilted about 23 degrees, like the real planet.\n\nTap it and the globe spins in its stand, fast at first, then slowing. Drag to circle it and look at the tilted blue ball, the black stand and the wood.",
   },
   "cherry-blossom-photo": {
-    howTo: "Tap it to make it hop; drag to turn it.",
+    howTo: "Tap it to drop it; drag to turn it.",
     about:
-      "A few cherry trees in bloom, captured from drone photos and drawn with splats. Cherry blossoms last only about a week, which is why people in Japan gather under them for hanami, the custom of watching the flowers. The petals fall like pale snow.\n\nTap it and it hops. Drag to circle the trees and look at the soft clouds of blossom and the grass beneath.",
+      "A few cherry trees in bloom, captured from drone photos and drawn with splats. Cherry blossoms last only about a week, which is why people in Japan gather under them for hanami, the custom of watching the flowers. The petals fall like pale snow.\n\nTap it and the trees on their patches of grass are lifted a little and set down with a bump. Drag to circle the trees and look at the soft clouds of blossom and the grass beneath.",
   },
   "maple-tree": {
-    howTo: "Tap it to make it hop; drag to turn it.",
+    howTo: "Tap it to drop it; drag to turn it.",
     about:
-      "A small golden maple in a garden, captured from photos and drawn with splats. In autumn a tree stops making green chlorophyll and the yellow and orange pigments that were hidden all summer show through. Japanese maples are bred for such bright leaves.\n\nTap it and it hops. Drag to circle it and look at the layered branches and the plants around its roots.",
+      "A small golden maple in a garden, captured from photos and drawn with splats. In autumn a tree stops making green chlorophyll and the yellow and orange pigments that were hidden all summer show through. Japanese maples are bred for such bright leaves.\n\nTap it and the raised bed is lifted a little and set down with a bump. Drag to circle it and look at the layered branches and the plants around its roots.",
   },
   peony: {
-    howTo: "Tap it to make it hop; drag to turn it.",
+    howTo: "Tap the vase to knock it; drag to turn it.",
     about:
-      "A vase of pink peonies, captured from photos and drawn with splats. Peonies are garden plants with big, layered, sweet-smelling flowers. A peony plant can live and bloom for a hundred years. Ants often visit the buds for the sugary drops they make.\n\nTap it and it hops. Drag to circle the vase and look at the ruffled petals, the stems and the clear glass.",
+      "A vase of pink peonies, captured from photos and drawn with splats. Peonies are garden plants with big, layered, sweet-smelling flowers. A peony plant can live and bloom for a hundred years. Ants often visit the buds for the sugary drops they make.\n\nTap it and the vase tips onto the rim of its base, rolls round on it and settles. Drag to circle the vase and look at the ruffled petals, the stems and the clear glass.",
   },
   "money-tree": {
-    howTo: "Tap it to make it hop; drag to turn it.",
+    howTo: "Tap the pot to knock it; drag to turn it.",
     about:
-      "A money tree in a white pot, captured from photos and drawn with splats. Pachira is a houseplant from the wetlands of Central and South America. Its trunks are often braided when young, and in several countries it is kept as a symbol of good luck.\n\nTap it and it hops. Drag to circle it and look at the glossy leaves, the trunk and the soil.",
+      "A money tree in a white pot, captured from photos and drawn with splats. Pachira is a houseplant from the wetlands of Central and South America. Its trunks are often braided when young, and in several countries it is kept as a symbol of good luck.\n\nTap it and the pot tips onto the rim of its foot, rolls round on it and settles. Drag to circle it and look at the glossy leaves, the trunk and the soil.",
   },
   "knight-horse": {
-    howTo: "Tap it to make it hop; drag to turn it.",
+    howTo: "Tap it to make the horse rear; drag to turn it.",
     about:
-      "A painted miniature of a knight on an armored horse, captured from photos and drawn with splats. Medieval knights wore plate armor made of steel pieces that were shaped to fit each person, and horses had cloth covers called caparisons over their own armor.\n\nTap it and it hops. Drag to circle it and look at the raised sword, the shield and the horse's cloth.",
+      "A painted miniature of a knight on an armored horse, captured from photos and drawn with splats. Medieval knights wore plate armor made of steel pieces that were shaped to fit each person, and horses had cloth covers called caparisons over their own armor.\n\nTap it and the figure rocks back on its base as the horse rears, then lands. Drag to circle it and look at the raised sword, the shield and the horse's cloth.",
   },
 
   // ---- Photoreal ----------------------------------------------------------------------
@@ -1263,9 +1314,9 @@ export const TOY_HELP = {
       "A treasure chest is a strong wooden box with metal bands, a heavy lid and a lock, made to keep coins, jewels and other precious things safe. Long ago, before banks were common, people kept their valuables in chests like this, and ships carried money and goods in them.\n\nTap it to open the lid and see the heap of gold coins and bright jewels inside, and tap again to close it. Pick the color of the wood in the Toy tab. With ✋ Hands-on on, lift the lid on its hinge yourself: let go past upright and it stays open; lower, it drops shut with a thud.",
   },
   book: {
-    howTo: "Tap to close the book; tap again to open it.",
+    howTo: "Tap the right page to turn on, the left to go back, or pull a page over by its edge.",
     about:
-      "A storybook is a book of stories, with pages of words and often pictures. A book like this, with pages sewn together along one edge between two hard covers, is a way of keeping writing that people have used for about two thousand years. Printing with movable metal type, which made books much cheaper, began in Europe in the 1450s.\n\nThe book starts open. Tap to close it: the pages turn over one by one and the cover shuts. Tap again to open it. Pick the color of the cover in the Toy tab.",
+      "A storybook is a book of stories, with pages of words and often pictures. A book like this, with pages sewn together along one edge between two hard covers, is a way of keeping writing that people have used for about two thousand years. Printing with movable metal type, which made books much cheaper, began in Europe in the 1450s.\n\nThis one is a real little storybook, made for Splashery: The Little Lamp Who Wanted to See the Sea, ten pages about a desk lamp that hops off to see the sea. Tap the right page to turn it, the left to go back, or pull a page over by its edge. Double-tap a page to fill the screen with it. Pick a style in the Toy tab.",
   },
   laptop: {
     howTo:
@@ -1282,44 +1333,44 @@ export const TOY_HELP = {
   clock: {
     howTo: "Tap it to ring the alarm.",
     about:
-      "A wind-up alarm clock has two metal bells on top and a little hammer between them. At the set time a spring inside lets the hammer go, and it strikes the two bells back and forth very fast, loud enough to wake a sleeper. Before alarm clocks were common, some people were paid to go around town tapping on windows to wake others up.\n\nThe hands on this clock show the real time where you are, or in another time zone you pick in the Toy tab. Tap it to ring the alarm: the hammer rattles between the bells and the whole clock shakes and hops. Pick its color in the Toy tab.",
+      "A wind-up alarm clock has two metal bells on top and a little hammer between them. At the set time a spring inside lets the hammer go, and it strikes the two bells back and forth very fast, loud enough to wake a sleeper. Before alarm clocks were common, some people were paid to go around town tapping on windows to wake others up.\n\nThe hands on this clock show the real time where you are, or in another time zone you pick in the Toy tab. Tap it to ring the alarm: the hammer rattles between the bells and the whole clock shakes and hops. Pick its color in the Toy tab. With ✋ Hands-on on, drag around the face to set the time: the minute hand clicks round under your finger and the hour hand follows through the gears, a twelfth as fast.",
   },
   "gift-box": {
     howTo: "Tap to open the present; tap again to close it.",
     about:
-      "A gift box is a present wrapped in bright paper and tied with a ribbon and a bow. People give wrapped presents for birthdays, holidays and other happy days, and the fun is not knowing what is inside until it is opened.\n\nTap it to open the present: the lid with its bow pops up and tips back, a golden star rises out of the box, and a burst of confetti fills the air. Tap again to close it. Pick the colors of the paper and the ribbon in the Toy tab.",
+      "A gift box is a present wrapped in bright paper and tied with a ribbon and a bow. People give wrapped presents for birthdays, holidays and other happy days, and the fun is not knowing what is inside until it is opened.\n\nTap it to open the present: the lid with its bow pops up and tips back, a golden star rises out of the box, and a burst of confetti fills the air. Tap again to close it. Pick the colors of the paper and the ribbon in the Toy tab. With ✋ Hands-on on, lift the lid off yourself and the star springs up out of the box; set the lid back on and it clicks into place.",
   },
   umbrella: {
     howTo: "Tap to close the umbrella; tap again to open it.",
     about:
-      "An umbrella is a folding shade of cloth stretched over thin metal ribs, held up on a stick. When it opens, a sliding ring pushes little struts that spread the ribs out, and the cloth pulls tight to keep off the rain or the sun. People in ancient Egypt, China and Greece used umbrellas as sunshades thousands of years ago.\n\nThe umbrella starts open. Tap to close it, folding the ribs down along the stick, and tap again to open it. Pick a rainbow, striped or plain canopy and its color in the Toy tab.",
+      "An umbrella is a folding shade of cloth stretched over thin metal ribs, held up on a stick. When it opens, a sliding ring pushes little struts that spread the ribs out, and the cloth pulls tight to keep off the rain or the sun. People in ancient Egypt, China and Greece used umbrellas as sunshades thousands of years ago.\n\nThe umbrella starts open. Tap to close it, folding the ribs down along the stick, and tap again to open it. Pick a rainbow, striped or plain canopy and its color in the Toy tab. With ✋ Hands-on on, slide the runner, the sleeve on the stick under the canopy, down to fold the umbrella and up to open it; at the top it clicks into its catch.",
   },
   "desk-fan": {
     howTo: "Tap to switch it off or on. Turn its swing on or off in the Toy tab.",
     about:
-      "A desk fan cools you by moving air: its angled blades push air forward as they spin, and moving air carries heat and sweat away from your skin faster. A fan does not make the air colder; it only makes you feel cooler.\n\nThis fan starts on, spinning and swinging slowly from side to side. Tap it to switch it off, and the blades slow to a stop; tap again to switch it on. In the Toy tab, turn the swing on or off and pick its color.",
+      "A desk fan cools you by moving air: its angled blades push air forward as they spin, and moving air carries heat and sweat away from your skin faster. A fan does not make the air colder; it only makes you feel cooler.\n\nThis fan starts on, spinning and swinging slowly from side to side. Tap it to switch it off, and the blades slow to a stop; tap again to switch it on. In the Toy tab, turn the swing on or off and pick its color. With ✋ Hands-on on, push the fan's head up or down to tilt it on its stiff hinge; it stays where you leave it.",
   },
   lamp: {
     howTo: "Tap to switch the light off or on.",
     about:
-      "A desk lamp has a jointed arm that bends, so you can point its shade right where you need light, over a book or a drawing. The shade stops the light from shining in your eyes and sends it down onto the desk.\n\nThe lamp starts on, with a warm glow under the shade. Tap it to switch the light off, and tap again to switch it on. Pick its color in the Toy tab.",
+      "A desk lamp has a jointed arm that bends, so you can point its shade right where you need light, over a book or a drawing. The shade stops the light from shining in your eyes and sends it down onto the desk.\n\nThe lamp starts on, with a warm glow under the shade. Tap it to switch the light off, and tap again to switch it on. Pick its color in the Toy tab. With ✋ Hands-on on, bend the arm at its joints and turn the shade to point the light: the pool of light moves across the desk.",
   },
   "potion-bottle": {
     howTo: "Tap it to pop the cork.",
     about:
-      "A potion is a magic drink from fairy tales and wizard stories, said to make you fly, shrink or fall asleep. This one sits in a round glass flask with a long neck and a cork, the kind that chemists really use: the round bottom is strong and heats evenly.\n\nBubbles rise through the potion all the time. Tap it to pop the cork: it shoots up with a puff of glittering sparkles, then drops back into the neck. Pick the color of the potion in the Toy tab.",
+      "A potion is a magic drink from fairy tales and wizard stories, said to make you fly, shrink or fall asleep. This one sits in a round glass flask with a long neck and a cork, the kind that chemists really use: the round bottom is strong and heats evenly.\n\nBubbles rise through the potion all the time. Tap it to pop the cork: it shoots up with a puff of glittering sparkles, then drops back into the neck. Pick the color of the potion in the Toy tab. With ✋ Hands-on on, pull the cork out yourself: it holds, then pops with a puff of sparkles. Push it back onto the neck and it squeaks in.",
   },
   telescope: {
     howTo: "Tap to collapse it; tap again to pull it out.",
     about:
-      "A telescope uses lenses or mirrors to make faraway things look nearer and bigger. This is a sliding spyglass, the kind sailors carried: its tubes slide inside one another, so it folds up short and pulls out long, with a big lens at the far end that gathers light. Galileo Galilei used a small telescope in 1610 to see the moons of Jupiter.\n\nThe telescope starts pulled out, on a three-legged stand. Tap to collapse it, sliding the tubes together, and tap again to pull it out.",
+      "A telescope uses lenses or mirrors to make faraway things look nearer and bigger. This is a sliding spyglass, the kind sailors carried: its tubes slide inside one another, so it folds up short and pulls out long, with a big lens at the far end that gathers light. Galileo Galilei used a small telescope in 1610 to see the moons of Jupiter.\n\nThe telescope starts pulled out, on a three-legged stand. Tap to collapse it, sliding the tubes together, and tap again to pull it out. With ✋ Hands-on on, pull the tubes out and push them back in by hand, one inside the other.",
   },
 
   // ---- Real objects (lane Real objects) -------------------------------------------------
   "fountain-pen": {
     howTo: "Tap it to uncap the pen and write a swirl in wet blue ink.",
     about:
-      "A fountain pen carries its own ink inside. The ink runs from the barrel through a thin channel called the feed to a split metal nib, and the slit draws it down to the paper by capillary action, the same pull that lets a paper towel soak up water.\n\nThis one is made from a detailed 3D model of a real green pen. Tap it and the cap slides off and clicks onto the back end, the nib writes a looping swirl that shines while it is wet and dries darker, and the cap goes back on.",
+      "A fountain pen carries its own ink inside. The ink runs from the barrel through a thin channel called the feed to a split metal nib, and the slit draws it down to the paper by capillary action, the same pull that lets a paper towel soak up water.\n\nThis one is made from a detailed 3D model of a real green pen. Tap it and the cap slides off and clicks onto the back end, the nib writes a looping swirl that shines while it is wet and dries darker, and the cap goes back on. With ✋ Hands-on on, pull the cap off the nib yourself and push it onto the back end, where it clicks on turned around, the way people post a cap while they write.",
   },
   "water-bottle": {
     howTo: "Tap it to unscrew the cap and pour water into the glass.",
@@ -1372,17 +1423,17 @@ export const TOY_HELP = {
   trebuchet: {
     howTo: "Tap it to launch: the weight drops and the long arm flings a stone.",
     about:
-      "A trebuchet is a giant throwing machine from the Middle Ages. A long wooden arm swings on an axle, with a heavy weight on its short end and a sling on its long end. When the weight falls, the long end whips up and over, the sling swings out and lets go, and the stone flies a long way. Carpenters built them from great timbers, and the biggest could throw a stone as heavy as a person.\n\nTap it to launch: the weight drops, the arm swings up and the stone sails off, then the arm comes back down, ready for the next one. Today people build trebuchets for fun, to throw pumpkins in contests.",
+      "A trebuchet is a giant throwing machine from the Middle Ages. A long wooden arm swings on an axle, with a heavy weight on its short end and a sling on its long end. When the weight falls, the long end whips up and over, the sling swings out and lets go, and the stone flies a long way. Carpenters built them from great timbers, and the biggest could throw a stone as heavy as a person.\n\nTap it to launch: the weight drops, the arm swings up and the stone sails off, then the arm comes back down, ready for the next one. Today people build trebuchets for fun, to throw pumpkins in contests. With ✋ Hands-on on, pull the long end of the arm down a little to free its catch, then let go: the counterweight drops, the arm whips up and the sling flings the stone.",
   },
   crossbow: {
     howTo: "Tap it to shoot a bolt; the string snaps and a new bolt loads.",
     about:
-      "A crossbow is a short, strong bow fixed crosswise on a wooden stock. The drawn string is held back by a catch, so it can wait until the trigger lets it go. It shoots short, thick arrows called bolts. Crossbows were used in China more than 2,000 years ago and later all over medieval Europe, and today people shoot them at targets as a sport.\n\nTap it: the trigger lets the string go, the string snaps forward with a buzz and the bolt flies off along its groove. Then the string is drawn back and a new bolt appears.",
+      "A crossbow is a short, strong bow fixed crosswise on a wooden stock. The drawn string is held back by a catch, so it can wait until the trigger lets it go. It shoots short, thick arrows called bolts. Crossbows were used in China more than 2,000 years ago and later all over medieval Europe, and today people shoot them at targets as a sport.\n\nTap it: the trigger lets the string go, the string snaps forward with a buzz and the bolt flies off along its groove. Then the string is drawn back and a new bolt appears. With ✋ Hands-on on, it starts cocked: tap it to pull the trigger and the bolt flies, then pull the string back until it clicks onto the catch, and a new bolt lies in the groove.",
   },
   "knights-helmet": {
     howTo: "Tap to open the visor; tap again to close it.",
     about:
-      "A knight's helmet was made of steel, hammered into shape by a skilled craftsman called an armorer. The front piece, the visor, has narrow slits and holes to see and breathe through, and it swings up on pivots at the sides so the knight could show their face. Plumes of colored feathers on top made the knight easy to spot at a tournament.\n\nTap it to open the visor, and tap again to close it. Pick the color of the plume in the Toy tab. A full suit of steel plate armor weighed about 20 to 25 kilograms (45 to 55 pounds).",
+      "A knight's helmet was made of steel, hammered into shape by a skilled craftsman called an armorer. The front piece, the visor, has narrow slits and holes to see and breathe through, and it swings up on pivots at the sides so the knight could show their face. Plumes of colored feathers on top made the knight easy to spot at a tournament.\n\nTap it to open the visor, and tap again to close it. Pick the color of the plume in the Toy tab. A full suit of steel plate armor weighed about 20 to 25 kilograms (45 to 55 pounds). With ✋ Hands-on on, lift the visor on its hinges yourself: raised all the way it stays up; let go lower and it drops shut with a clank.",
   },
   crown: {
     howTo: "Tap it: it rises and its jewels light up one by one.",
@@ -1392,7 +1443,7 @@ export const TOY_HELP = {
   "dragon-egg": {
     howTo: "Tap to hatch the egg; tap again to go back.",
     about:
-      "Dragons are creatures of legend, told of all over the world. In many European tales they are winged, fire-breathing beasts that guard treasure; in Chinese stories they are wise, long, snake-like beings that bring rain and good luck. In stories, a dragon hatches from an egg, just as lizards and snakes do.\n\nTap it to hatch the egg: cracks run across the scaly shell, it breaks open and a baby dragon peeks out in a burst of golden sparkles. Tap again to go back. Pick an emerald, ruby, sapphire or gold egg in the Toy tab.",
+      "Dragons are creatures of legend, told of all over the world. In many European tales they are winged, fire-breathing beasts that guard treasure; in Chinese stories they are wise, long, snake-like beings that bring rain and good luck. In stories, a dragon hatches from an egg, just as lizards and snakes do.\n\nTap it to hatch the egg: cracks run across the scaly shell, it breaks open and a baby dragon peeks out in a burst of golden sparkles. Tap again to go back. Pick an emerald, ruby, sapphire or gold egg in the Toy tab. With ✋ Hands-on on, pull the shell pieces off one by one: each snaps off and falls, and the baby dragon rises a little more with each piece gone.",
   },
   "wizards-orb": {
     howTo: "Tap it to cast a spell: sparks spiral out and runes circle the orb.",
@@ -1710,7 +1761,7 @@ export const TOY_HELP = {
     howTo:
       "Tap the frame to set it swinging on its nail. Open your own photo, GIF or video in the Toy tab.",
     about:
-      "A picture frame protects a photo and sets it apart from the wall. Many hang from a single nail on a wire stretched across the back, so the frame can tilt a little either way until it hangs straight.\n\nTap it and the frame swings on its wire like a pendulum, back and forth, smaller each time, until it settles. Double-tap it to fill the screen with the photo, and again to step back. Pick a wood, gold, modern or digital frame in the Toy tab; the digital frame fades from one photo to the next, in order or at random. Open a photo, a GIF or a video of your own (a GIF or a video plays on a loop), or several photos for the digital frame. Your files stay on your device.",
+      "A picture frame protects a photo and sets it apart from the wall. Many hang from a single nail on a wire stretched across the back, so the frame can tilt a little either way until it hangs straight.\n\nTap it and the frame swings on its wire like a pendulum, back and forth, smaller each time, until it settles. Double-tap it to fill the screen with the photo, and again to step back. Pick a wood, gold, modern or digital frame in the Toy tab; the digital frame fades from one photo to the next, in order or at random. Open a photo, a GIF or a video of your own (a GIF or a video plays on a loop), or several photos for the digital frame. Your files stay on your device. With ✋ Hands-on on, push the frame: it swings on its nail and settles hanging level.",
   },
   screen: {
     howTo:
@@ -1771,7 +1822,7 @@ export const TOY_HELP = {
   "qr-picture": {
     howTo: "Pick a picture or open your own, then tap to turn the tiles over.",
     about:
-      "A QR code reader decides each module from a sample at its center, so the rest of a module can carry a picture. Here every module keeps its bit in a dot at its middle, and the picture fills the rest, darkened in dark modules and lightened in light ones. The eyes, the timing lines and the format information stay plain, so a reader still finds the code.\n\nThe toy measures the contrast and reads its own code at phone size and smaller. If it won't scan, Make it scan finds the closest version that does: more contrast, a bigger center dot or a higher error correction level. Your picture never leaves your device.",
+      "A QR code reader decides each module from a sample at its center, so the rest of a module can carry a picture. Here every module keeps its bit in a dot at its middle, and the rest is a halftone of the picture: small dark and light dots, spread by error diffusion so they average out to the picture's tones. Only where a module would read wrong do a few of its dots take its color. The eyes, the timing lines, and the format information stay plain, so a reader still finds the code.\n\nThe toy picks the mask that fits the picture best, reads its own code at phone size and smaller, and nudges a few more dots until it scans. A bigger code size shows more detail. If it still won't scan, Make it scan finds the closest version that does: more contrast, a bigger center dot, or a higher error correction level. Your picture never leaves your device.",
   },
   "qr-build": {
     howTo: "Pick dominoes, marbles or tiles in the Toy tab, then tap to build the code.",
@@ -1833,7 +1884,7 @@ export const TOY_HELP = {
     howTo:
       "Tap to lift the picture's depth, then tap to lay it flat. Pick or open a photo in the Toy tab.",
     about:
-      "A depth model guesses relative depth from a single photo; it does not measure distances in meters. This toy runs the model on your device and lifts the picture to its guessed depth, like a shallow sculpted relief when you turn the view. It shows the photo itself on that relief (Sharp picture), so even small text reads; Splats rebuilds it from splats instead.\n\nWhere depth jumps, such as a leaf in front of a tree, the toy separates the surface into layers to reduce smearing. Tap to raise them and sway; tap again to flatten them. Layers pulls them farther apart, and Depth sets the relief's strength. Choose a sample photo or open your own in the Toy tab. Show the original puts the flat photo in a corner, so you can see what the depth did. JPEG, PNG and WebP work; HEIC works where the browser supports it. The model, about 27 MB, loads the first time and can take longer on a phone. Your photo is processed locally.",
+      "A depth model guesses relative depth from a single photo; it does not measure distances in meters. This toy runs the model on your device and lifts the picture to its guessed depth, like a shallow sculpted relief when you turn the view. Sharp picture shows the photo itself on that relief, so even small text reads; Splats rebuilds it from splats.\n\nWhere depth jumps, such as a leaf in front of a tree, the surface splits into layers to reduce smearing. Tap to raise them as it sways, and again to flatten them. Layers pulls them apart, and Depth sets the relief's strength. Show the original puts the flat photo in a corner. Sound picks the tap's sound: paper, a soft chime, pop-up layers, a water drop, none, or your own sound file, kept on your device. Open a JPEG, PNG or WebP photo (HEIC where the browser supports it) in the Toy tab, or pick a sample. The model, about 27 MB, loads the first time and is slower on a phone. Your photo is processed locally.",
   },
 
   "video-3d": {
@@ -1947,15 +1998,16 @@ export const TOY_HELP = {
       "A CT scanner (computed tomography) turns an X-ray tube and a curved row of detectors around the object, taking hundreds of views from every side. A computer works back from those views to how dense the object is at every point of a thin slice. Moving the object through the ring, slice after slice, gives a whole volume.\n\nHere the shell is a chambered nautilus, built for the toy. As the ring passes, the shell turns into its CT volume: bright where the shell is dense, empty where there is air. Drag up or down to cut into the volume and see the chambers and the walls between them. Real scans of a nautilus show the same spiral.\n\nChoose another toy to put in the scanner in the Toy tab. Its CT volume is worked out from its shape: a dense skin around a softer, even inside, since the toy has no real inside to measure.",
   },
   "fruit-mri": {
-    howTo: "Drag up or down to scroll through the slices. Tap to play through them all.",
+    howTo:
+      "Drag on the fruit or move the Slice slider to step through the slices. Tap to play them all; a drag stops it.",
     about:
-      "An MRI scanner (magnetic resonance imaging) uses no X-rays. A strong magnet lines up the hydrogen nuclei in the water of the fruit, radio pulses tip them over, and the radio signal they give back as they relax is turned into a picture, one thin slice at a time. In this T2-weighted look, watery tissue is bright, while seeds, skin and air are dark.\n\nThe kiwi and the orange here are built for the toy to look like real MRI slices: the kiwi's ring of black seeds in its bright locules around a pale core, the orange's segments with thin walls between them and its peel. Choose the fruit and the vision (the realistic gray, night vision or infrared) in the Toy tab. The faint outline shows where the slice is.",
+      "An MRI scanner (magnetic resonance imaging) uses no X-rays. A strong magnet lines up the hydrogen nuclei in the water of the fruit, radio pulses tip them over, and the radio signal they give back as they relax is turned into a picture, one thin slice at a time. In this T2-weighted look, watery tissue is bright, while seeds, skin and air are dark.\n\nThe kiwi and the orange here are built for the toy to look like real MRI slices: the kiwi's ring of black seeds in its bright locules around a pale core, the orange's segments with thin walls between them and its peel. Choose the fruit and the vision (the realistic gray, night vision or infrared) in the Toy tab. The faint outline of the whole fruit and the thin ring round each slice show where the slice is.",
   },
   "electron-microscope": {
     howTo:
-      "Tap to zoom in a step; the third tap goes back out. Choose the sample and the vision in the Toy tab.",
+      "Tap a grain or shell to zoom in, again to look closer; a third tap goes back out. Tap another to zoom on it.",
     about:
-      "A scanning electron microscope sweeps a fine beam of electrons across a sample in a vacuum. Where the beam hits, the surface gives off low-energy electrons, and a detector counts them, point by point, into a gray picture. More escape where the beam meets the surface at a slant, so edges and spines glow, and the side facing away from the detector falls into shadow. It can show things far smaller than light can: pollen grains a few hundredths of a millimeter across, the rows of tiny pores in a diatom's glass shell, or the frozen droplets on a snowflake (snow is imaged cold, in a special stage).\n\nThe samples here are built for the toy in a microscope's grays. Tap to zoom in from the whole field to one grain or crystal, then to its surface. Vision in the Toy tab recolors the picture: the realistic gray, a night-vision scope's green, or an infrared camera's colors (for fun: an electron microscope sees no color).",
+      "A scanning electron microscope sweeps a fine beam of electrons across a sample in a vacuum. Where the beam hits, the surface gives off low-energy electrons, and a detector counts them, point by point, into a gray picture. More escape where the beam meets the surface at a slant, so edges and spines glow, and the side facing away from the detector falls into shadow. It can show things far smaller than light can: pollen grains a few hundredths of a millimeter across, the rows of tiny pores in a diatom's glass shell, or the frozen droplets on a snowflake (snow is imaged cold, in a special stage).\n\nThe samples here are built for the toy in a microscope's grays. Tap any grain, shell, or crystal to zoom in from the whole field to it, then to its surface. Vision in the Toy tab recolors the picture: the realistic gray, a night-vision scope's green, or an infrared camera's colors (for fun: an electron microscope sees no color).",
   },
   "thermal-camera": {
     howTo: "Tap to switch the thermal camera on or off, and watch the tea cool.",
@@ -1986,9 +2038,9 @@ export const TOY_HELP = {
   // ---- Arcade (lane Arcade) ------------------------------------------------------------
   shardball: {
     howTo:
-      "Tap or press Space to play. Steer with the mouse, a finger or the arrow keys; press 3D for the 3D view.",
+      "Tap to play. Steer the dish with a finger, the mouse or the arrows; it catches the ball. Tap to launch.",
     about:
-      "A ball, a paddle and a wall of bricks. Keep the ball in play and break every brick: where it meets the paddle sets its angle, glazed bricks break at one hit and stone bricks crack first and break at the second. Each brick that breaks falls apart into real pieces that tumble, bounce and fade.\n\nThe 3D button (or V) slides the game into 3D and back. Flat board tips the same board back into a table you look along, and play goes on. Dome takes the paddle down to the bottom of an invisible sphere and spreads the bricks over a dome around and above it; the ball then bounces in three dimensions, with a gentle pull down toward the paddle, and its shadow shows where it will land. Pick a Style and a starting Level in the Toy tab. ⛶ Play fills the whole page; P pauses, R starts again, Esc leaves. The best score stays on this device.",
+      "A ball, a dish and a dome of bricks. Break every brick: glazed ones break at one hit, and stone ones crack first and break at the second. Each brick that breaks falls apart into real pieces that tumble, bounce and fade.\n\nThe game opens in the Dome, in 3D: the dish sits on the ground at the bottom of an invisible sphere, under a dome of bricks, and the ball bounces in three dimensions, its shadow showing where it will land. The dish catches the ball and holds it where it lands; tap or press Space to send it back (where it sits sets its angle), or it goes on its own after three seconds. A ball that touches the ground is lost. Drag on the dome, or with two fingers, to turn the view; pinch or scroll to zoom.\n\nThe 2D button slides it all onto a flat board. Flat board, in the Toy tab, is the classic board, which 3D tips back into a table. \u26f6 Play fills the page; P pauses, R starts again.",
   },
 
   longtail: {
@@ -2012,9 +2064,9 @@ export const TOY_HELP = {
 
   strata: {
     howTo:
-      "Tap or press Space to play. Arrows move the falling stone, X turns it, Q and E tip it, Space drops it.",
+      "Tap the falling stone (or ⟳ Turn, ↑ or X) to turn it; tap beside it or use ← → to move it. Space drops it.",
     about:
-      "Stones of our own shapes fall down a square well: a tripod, two screws, a plus, a slab and more, most of them shapes that only work in 3D. Move each one across the well and turn it as it falls; when a whole layer of the well is full, it crumbles into rubble that falls away, and every stone above drops into its place. The more layers at once, the more points; every four layers the stones fall faster.\n\n3D looks down into the well from above its rim; 2D is the side view, straight in from the front. Pick a Well in the Toy tab: deep, wide, or a flat slot one stone deep that plays like a flat game. P pauses, R starts again.",
+      "Stones of our own shapes fall down a well between stone walls, ten wide and twenty deep. Move each one across and turn it as it falls (tap it, press ⟳ Turn, ↑ or X); when a whole row is full, it crumbles into rubble that falls away, and every stone above drops into its place. The more rows at once, the more points; every four rows the stones fall faster.\n\nThe 3D button turns the well so its depth shows. Pick the well with the buttons at the top: Classic, or a 3D well (deep or wide), a real square box you look down into, with stones that only work in 3D (a tripod, two screws, a plus) and room to put one behind or in front of another. There, ⟳ Turn, ⤾ Tip and ⤿ Roll turn the stone three ways, an outline shows where it will land, and two fingers look round the well. P pauses, R starts again.",
   },
   "volley-table": {
     howTo:
@@ -2051,28 +2103,29 @@ export const TOY_HELP = {
   },
 
   "photo-dash": {
-    howTo: "Tap or press Space to jump. Open your own photo in the Toy tab to run across it.",
+    howTo:
+      "Tap or press Space to jump. Pick a ball at the top; open your own photo in the Toy tab to run across it.",
     about:
-      "Your photo becomes the landscape. Down each column of the picture, the strongest change from light to dark marks where its sky meets its ground, and that line, smoothed, is the track. A glass marble rolls along it by itself, a little faster each lap; tap or press Space to jump the gaps, and catch the sparks on the way. The 3D button raises the photo into a relief, its bright parts nearer and its dark parts deeper, and the marble keeps rolling on it. The photo is read on this device and never leaves it.",
+      "A photo becomes the landscape. Down each column of the picture, the strongest change from light to dark marks where its sky meets its ground, and that line, smoothed, is the track: a row of wooden planks. Your ball rolls along it by itself, a little faster each level; tap or press Space to jump the gaps, and catch the sparks on the way. Pick the ball: a glass marble, a steel ball, a floaty beach ball or a bouncy tennis ball. Each level brings another of the site's sample photos (real photos, or AI-made pictures by Splashery's owner, labeled as such), unless you opened your own. The 3D button raises the photo into a relief, its bright parts nearer and its dark parts deeper, and the marble keeps rolling on it. The photo is read on this device and never leaves it.",
   },
 
   "note-rider": {
     howTo:
       "Steer into each note's lane as it arrives (arrows, a swipe or a finger). ♪ Your song opens MIDI or audio.",
     about:
-      "A song comes down the track as glowing notes: its melody, the highest note at each moment, with the low notes in the low lane and the high notes in the high one. Steer the sled into each note's lane as the note arrives and it plays, so catching every note plays the whole tune; a missed note stays silent. The built-in tunes are Ode to Joy, Twinkle, Twinkle, Little Star and Frère Jacques, or open your own with ♪ Your song: a MIDI file, or a recording, whose tune a note finder hears on this device, each caught note then playing its own slice of the recording. In 2D, on a phone held upright, the notes fall down three lanes side by side to their pads, the low lane on the left (on a wide screen the lanes are stacked by pitch and the notes slide in from the right); the 3D button turns it into a road coming toward you. The file is read on this device and never leaves it.",
+      "A song comes down the track as glowing notes: its melody, low notes in the low lane and high notes in the high one. Steer the sled into each note's lane as the note arrives and it plays for its own length, so catching every note plays the whole tune; a missed note stays silent. Pick the instrument at the top: piano, guitar, steel guitar, harp, organ, synth, or vibes.\n\nThe built-in tunes are Ode to Joy, Twinkle, Twinkle, Little Star and Fr\u00e8re Jacques. Or open your own with \u266a Your song: a MIDI file, or a recording, whose tune a note finder hears on this device; each caught note then plays its own slice of the recording. In 2D on a phone held upright, the notes fall down three lanes side by side; on a wide screen they slide in from the right. The 3D button turns the track into a road coming toward you. The file is read on this device and never leaves it.",
   },
 
   // ---- Holidays -------------------------------------------------------------------------
   "jack-o-lantern": {
     howTo: "Tap to lift the lid; tap again to put it back.",
     about:
-      "A jack-o'-lantern is a pumpkin carved with a face and lit from inside by a candle, a symbol of Halloween. The custom comes from Ireland and Britain, where people once carved faces into turnips and potatoes; in North America, the big, soft pumpkin turned out to be much easier to carve.\n\nThis one glows through its carved eyes and grin. Tap to lift the lid off the top, and tap again to put it back. The name comes from an old Irish tale of a man called Stingy Jack, who wandered the night carrying a lantern.",
+      "A jack-o'-lantern is a pumpkin carved with a face and lit from inside by a candle, a symbol of Halloween. The custom comes from Ireland and Britain, where people once carved faces into turnips and potatoes; in North America, the big, soft pumpkin turned out to be much easier to carve.\n\nThis one glows through its carved eyes and grin. Tap to lift the lid off the top, and tap again to put it back. The name comes from an old Irish tale of a man called Stingy Jack, who wandered the night carrying a lantern. With ✋ Hands-on on, lift the lid off by its stem and set it down; bring it back over the hole and it drops into place.",
   },
   snowman: {
     howTo: "Tap to melt it and build it again. Try the Warmth slider in the Toy tab.",
     about:
-      "A snowman is built from big balls of snow rolled across the ground, stacked up and given a face of coal, a carrot nose, stick arms, a scarf and a hat. Snow packs best when it is just at the melting point and a little wet, so the flakes stick together. Fresh snow is mostly air, which is why it is so light and fluffy.\n\nTap it and it melts: the snowballs shrink, the head first, drips fall, and the hat, nose, coals, arms and scarf drop off one by one, and the meltwater spreads into a puddle around it. Then it builds itself again from the bottom up. The Warmth slider in the Toy tab melts it the same way.",
+      "A snowman is built from big balls of snow rolled across the ground, stacked up and given a face of coal, a carrot nose, stick arms, a scarf and a hat. Snow packs best when it is just at the melting point and a little wet, so the flakes stick together. Fresh snow is mostly air, which is why it is so light and fluffy.\n\nTap it and it melts: the snowballs shrink, the head first, drips fall, and the hat, nose, coals, arms and scarf drop off one by one, and the meltwater spreads into a puddle around it. Then it builds itself again from the bottom up. The Warmth slider in the Toy tab melts it the same way. With ✋ Hands-on on, lift the head or the middle ball off, set it down anywhere and stack them back up: each ball keeps its own coal, nose, arms, scarf or hat.",
   },
   fireworks: {
     howTo: "Tap it to launch a firework; tap quickly for a few at once.",
@@ -2082,17 +2135,17 @@ export const TOY_HELP = {
   "decorated-tree": {
     howTo: "Tap to switch the lights on or off.",
     about:
-      "A decorated tree is an evergreen tree, such as a fir or a pine, brought indoors and hung with lights, ornaments and a star on top for the Christmas season. The custom began in Germany about 500 years ago and spread around the world. Evergreens stay green all winter, so they became a sign of life in the darkest time of the year.\n\nThe tree starts with its lights off. Tap to switch them on: they sweep up the tree, stay on and cycle through chasing, rippling and steady patterns, while the star glows. Tap again to switch them off. The first electric tree lights were made in 1882.",
+      "A decorated tree is an evergreen tree, such as a fir or a pine, brought indoors and hung with lights, ornaments and a star on top for the Christmas season. The custom began in Germany about 500 years ago and spread around the world. Evergreens stay green all winter, so they became a sign of life in the darkest time of the year.\n\nThe tree starts with its lights off. Tap to switch them on: they sweep up the tree, stay on and cycle through chasing, rippling and steady patterns, while the star glows. Tap again to switch them off. The first electric tree lights were made in 1882. With ✋ Hands-on on, pick the tree up and shake it: the baubles swing on their hooks, harder the harder you shake, then settle.",
   },
   "patterned-egg": {
     howTo: "Tap it to spin it. Pick a pattern and its colors in the Toy tab.",
     about:
-      "Decorating eggs with bright patterns is a spring tradition in many countries, especially at Easter. In Ukraine and nearby lands, painted eggs called pysanky are made by drawing lines in melted wax, dipping the egg in dye, and repeating with darker colors; the wax keeps each color where it was drawn.\n\nTap it to spin it. Pick a folk, striped, dotted, zigzag, flower or star pattern and its two colors in the Toy tab. Try spinning a real hard-boiled egg: it spins smoothly, while a raw one wobbles and stops, because the runny inside sloshes.",
+      "Decorating eggs with bright patterns is a spring tradition in many countries, especially at Easter. In Ukraine and nearby lands, painted eggs called pysanky are made by drawing lines in melted wax, dipping the egg in dye, and repeating with darker colors; the wax keeps each color where it was drawn.\n\nTap it to spin it. Pick a folk, striped, dotted, zigzag, flower or star pattern and its two colors in the Toy tab. Try spinning a real hard-boiled egg: it spins smoothly, while a raw one wobbles and stops, because the runny inside sloshes. With ✋ Hands-on on, flick it sideways: it spins on its end, slows, and wobbles as it slows until it stops.",
   },
   "paper-lantern": {
     howTo: "Tap it to set it swinging on its string; tap again for another push.",
     about:
-      "A paper lantern is a light made of thin paper stretched over a frame of ribs, glowing from a light inside. In China and many other places, red lanterns stand for luck and happiness, and thousands are hung up for the Lantern Festival, which ends the Lunar New Year celebrations on the first full moon of the year.\n\nTap it and it swings on its string like a pendulum, back and forth, slowing a little on each swing until it hangs still again. Tap while it swings to give it another push. Pick a red, gold, teal or purple lantern in the Toy tab.",
+      "A paper lantern is a light made of thin paper stretched over a frame of ribs, glowing from a light inside. In China and many other places, red lanterns stand for luck and happiness, and thousands are hung up for the Lantern Festival, which ends the Lunar New Year celebrations on the first full moon of the year.\n\nTap it and it swings on its string like a pendulum, back and forth, slowing a little on each swing until it hangs still again. Tap while it swings to give it another push. Pick a red, gold, teal or purple lantern in the Toy tab. With ✋ Hands-on on, push the lantern: it swings on its string like a pendulum and settles hanging straight.",
   },
   diya: {
     howTo: "Tap to light the ring of diyas; tap again to put them out.",
@@ -2109,12 +2162,12 @@ export const TOY_HELP = {
   guitar: {
     howTo: "Tap it to strum a few chords.",
     about:
-      "An acoustic guitar has six strings stretched over a hollow wooden body. Plucking a string makes it vibrate, and the body and the round soundhole make the sound bigger and warmer. Pressing a string down against the metal frets on the neck makes it shorter, and a shorter string plays a higher note.\n\nTap it to strum: the guitar rocks with the stroke, the strings bend and shake one after another, and rings of light pulse out of the soundhole as it plays four chords. Pick a sunburst, natural or cherry finish in the Toy tab. The six strings are usually tuned, from lowest to highest, to E, A, D, G, B and E.",
+      "An acoustic guitar has six strings stretched over a hollow wooden body. Plucking a string makes it vibrate, and the body and the round soundhole make the sound bigger and warmer. Pressing a string down against the metal frets on the neck makes it shorter, and a shorter string plays a higher note.\n\nTap it to strum: the guitar rocks with the stroke, the strings bend and shake one after another, and rings of light pulse out of the soundhole as it plays four chords. Pick a sunburst, natural or cherry finish in the Toy tab. The six strings are usually tuned, from lowest to highest, to E, A, D, G, B and E. With ✋ Hands-on on, drag across the strings: each one you cross is plucked, plays its own note and vibrates.",
   },
   drum: {
     howTo: "Tap it for a drum roll; tap again quickly for a faster, longer roll.",
     about:
-      "A snare drum is a shallow drum with a skin, called a head, stretched across each side. Under the bottom head runs a set of thin metal wires, the snares, which rattle against it every time the top is hit, giving the drum its crisp, buzzing crack. A drum roll is many fast strokes, played one stick after the other so quickly that they blur into one sound.\n\nTap it and the sticks play a roll. Tap again quickly, and each tap steps the roll up to a faster speed and makes it last longer, through four speeds in all. Pick the color of the shell in the Toy tab.",
+      "A snare drum is a shallow drum with a skin, called a head, stretched across each side. Under the bottom head runs a set of thin metal wires, the snares, which rattle against it every time the top is hit, giving the drum its crisp, buzzing crack. A drum roll is many fast strokes, played one stick after the other so quickly that they blur into one sound.\n\nTap it and the sticks play a roll. Tap again quickly, and each tap steps the roll up to a faster speed and makes it last longer, through four speeds in all. Pick the color of the shell in the Toy tab. With ✋ Hands-on on, pick up a stick and hit the drum: the head cracks and ripples, the rim clicks and the shell knocks; reset puts the sticks back.",
   },
   xylophone: {
     howTo:

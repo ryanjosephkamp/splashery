@@ -106,6 +106,14 @@ What the first three Hands-on lanes learned today (October 8, 2026), so you don'
 
 ## State
 
+DONE (October 10, 2026): all six H4 PRs are merged into main with batch 2 (#470, at 9122a66d): the
+engine (#439) and the Vehicles (#440), Landmarks (#442), Space (#443), Weather & fire (#444) and
+Tiny world (#445) shelves. Every H4 card is marked good (33 toys). Batch 2 also brought
+`wheels.lift` (a drag straight up lifts the bus, so it keeps a whole pickup at Level 1), hl1's
+expected `whole-pickup` gaps for the solar system, the campfire and the bacterium (pieces mode on
+purpose), and hh3-engine's forgiving-press test polling for a gap by the lava lamp's middle (up to
+15 s; the Operator's leave). Nothing is open; what is left is under "For the Operator".
+
 READY (October 9, 2026, 18:40 UTC): the owner marked `hh4-tractor-r4` and `hh4-dna-r4` good, so
 every H4 card is good (33 toys). All six PRs (#439, #440, #442, #443, #444, #445) are ready for the
 Operator's batches; main (#457) and H2's #450 are merged in.
@@ -175,6 +183,6 @@ face you as it opens, and its strands peel a little wider than the tap's.
 
 - The bicycle's "drag the pedals to turn them" needs a dial on a whole toy (Level 1 with wheels); no
   engine piece does that. Skipped; the bicycle rolls and stays upright.
-- Merge #439 (engine) before the shelf PRs.
 - A clip's `from3` press must land on the toy's splats (the app picks what is under the finger):
-  between the DNA's strands the press missed and the drag orbited the view.
+  between the DNA's strands the press missed and the drag orbited the view. (H3's forgiving press,
+  now on main, takes such a press with ✋ on.)

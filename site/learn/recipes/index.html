@@ -1619,6 +1619,19 @@ drive(t, c, out, info) {
           </p>
           <pre><code>hands: { place: false, pieces: () =&gt; [bigBall, smallBall], carry: { ball0: [&quot;ball1&quot;], ball1: [&quot;ball0&quot;] } }, // prettier-ignore</code></pre>
           <p>
+            <strong>Level 1 for picture and still toys</strong> (<code>handsLevel1</code>, lane
+            Hands-on H3): a picture toy, or a still one (<code>turntable: false</code>), stays out
+            of Hands-on unless it asks: <code>handsLevel1: true</code> lets it be picked up, tossed
+            and set down whole. A function of the toy's info says when: false while the toy is a
+            live tool someone is working in (the Screen showing your screen, a converter showing
+            your own file), and the switch then goes off by itself and ✋ hides until it's no longer
+            live. A toy with its own drags (<code>recipe.drag</code>) that asks keeps them: the
+            switch starts off, a press where <code>drag.at</code> takes it still goes to its drag,
+            and only a press off it picks the toy up.
+          </p>
+          <pre><code>handsLevel1: true,
+handsLevel1: () =&gt; !live.on(&quot;screen&quot;),</code></pre>
+          <p>
             <strong>A forgiving press</strong> (lane Hands-on H3; every toy, nothing to ask for):
             with the ✋ switch on, a press where the pick buffer finds no splat (between a desk
             lamp's arm and its beam, beside a thin pen) still takes the toy when the finger's ray
@@ -1626,6 +1639,34 @@ drive(t, c, out, info) {
             (trimmed to 0.85 of its half sizes, as it stands now). With the switch off, such a press
             turns the view as before.
           </p>
+          <p>
+            <strong>Strike pieces</strong> (lane Hands-on H3): a piece in the hand passes through
+            the others, unless it has <code>strike: true</code> (a drum's stick): then it hits them,
+            so a held stick knocks the drum's head. Each hit that reaches
+            <code>hands.sound(hit, vol)</code> names both pieces (<code>hit.name</code>,
+            <code>hit.against</code>: each piece's <code>name</code>, else its part or token; null
+            for the floor) and where they met (<code>hit.point</code>), so the stick on the head can
+            sound the drum and the stick on the rim a click. (The drum under its sticks is a
+            <code>fixed: true</code> piece, lane Hands-on H1's, so it stays ground for them.)
+          </p>
+          <pre><code>pieces: () =&gt; [{ name: &quot;stick&quot;, strike: true, pos, solid, pick }, { name: &quot;drum&quot;, fixed: true, ... }],
+sound: (hit, vol) =&gt; (hit.name === &quot;stick&quot; &amp;&amp; hit.against === &quot;head&quot; ? { voice: &quot;snare&quot;, vol } : undefined), // prettier-ignore</code></pre>
+          <p>
+            <strong>Strings</strong> (<code>hands.strings</code>, lane Hands-on H3): a press within
+            <code>reach</code> (recipe units, 0.05) of a string doesn't pick the toy up; dragging
+            across the strings plucks each one the finger crosses (within its length), in turn. Each
+            pluck reaches <code>hands.sound(hit, vol)</code> with <code>hit.pluck</code> the
+            string's index (and <code>hit.name</code>), so each string sounds its own note, and
+            <code>info.hands.plucked[i]</code> is the seconds since string <code>i</code> was last
+            plucked (Infinity before), for the string to vibrate. Each string is its two ends
+            (<code>a</code>, <code>b</code>, recipe units); they lie in one plane (give
+            <code>normal</code> for a single string). A press elsewhere on the toy picks it up as
+            before.
+          </p>
+          <pre><code>hands: {
+  strings: { list: STRINGS.map((s, i) =&gt; ({ a: s.bridge, b: s.nut, name: `s${i}` })), reach: 0.04 },
+  sound: (hit, vol) =&gt; (hit.pluck !== undefined ? { voice: &quot;pluck&quot;, notes: OPEN[hit.pluck], vol } : undefined), // prettier-ignore
+},</code></pre>
           <p>
             <code>info.hands.on</code> is whether Hands-on is on. Check the toy's frame time with
             the pieces running (the whole world's step is well under a millisecond for one body, a
@@ -1788,6 +1829,20 @@ joints: (d) =&gt; d.wedges.map((w) =&gt; ({ type: &quot;socket&quot;, token: w.t
             Hands-on H3): then those play, and nothing else (a picture frame swings on its nail; its
             picture is never picked up whole).
           </p>
+          <p>
+            <strong>Latches and triggers</strong> (lane Hands-on H3):
+            <code>latch: &quot;max&quot; | &quot;min&quot; | value</code> makes a hinge, slider or
+            dial catch there as it reaches or passes it (a crossbow's string drawn back into its
+            nut): it holds fast, the finger can't move it, and its weight doesn't pull it off. With
+            <code>trigger: true</code>, a tap on the toy (or the Play button) with ✋ on lets it go
+            instead of the toy's own tap: it springs back by its <code>spring</code>, or falls by
+            its weight. The catch is the <code>&quot;latch&quot;</code> cue and the release
+            <code>&quot;free&quot;</code>; <code>player.act()</code> returns
+            <code>{ key: &quot;trigger&quot; }</code> for a tap that pulled it.
+            <code>catch</code> (default 0.001, in the joint's own units) is how near the finger must
+            bring it for it to catch. ↺ brings it home (caught only if home is its latch).
+          </p>
+          <pre><code>{ type: &quot;slider&quot;, part: &quot;string&quot;, axis: [0, 0, -1], min: 0, max: 0.4, spring: 60, latch: &quot;max&quot;, catch: 0.03, trigger: true },</code></pre>
           <p>
             <strong>Parents</strong>: <code>parent</code> (a joint's name) puts a hinge, slider or
             dial on another driven part: a desk lamp's head on its arm, a clock's hands on a turning

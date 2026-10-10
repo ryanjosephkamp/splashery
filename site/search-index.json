@@ -175,7 +175,7 @@
     "u": "toys/heart-donut/",
     "k": "toy",
     "s": "Photoreal",
-    "d": "Tap it to make it hop; drag to turn it.",
+    "d": "Tap it to toss it: it twirls round once and lands; drag to turn it.",
     "w": "heart donut photoreal photoreal photoreal scan captured food pastry doughnut sweet dessert glaze heart-donut",
     "i": "../assets/toys/heart-donut/thumb.webp",
     "l": 1
@@ -185,7 +185,7 @@
     "u": "toys/sushi-boat/",
     "k": "toy",
     "s": "Photoreal",
-    "d": "Tap it to make it hop; drag to turn it.",
+    "d": "Tap it to rock the boat; drag to turn it.",
     "w": "sushi boat photoreal photoreal photoreal scan captured food sushi fish rice japanese wooden boat sushi-boat",
     "i": "../assets/toys/sushi-boat/thumb.webp",
     "l": 1
@@ -195,7 +195,7 @@
     "u": "toys/seeded-loaf/",
     "k": "toy",
     "s": "Photoreal",
-    "d": "Tap it to make it hop; drag to turn it.",
+    "d": "Tap it to drop it; drag to turn it.",
     "w": "seeded bread loaf photoreal photoreal photoreal scan captured food bread bakery loaf seeds seeded-loaf",
     "i": "../assets/toys/seeded-loaf/thumb.webp",
     "l": 1
@@ -205,7 +205,7 @@
     "u": "toys/steak/",
     "k": "toy",
     "s": "Photoreal",
-    "d": "Tap it to make it hop; drag to turn it.",
+    "d": "Tap it to flip it over and back; drag to turn it.",
     "w": "cowboy steak photoreal photoreal photoreal scan captured food steak meat grilled beef steak",
     "i": "../assets/toys/steak/thumb.webp",
     "l": 1
@@ -215,7 +215,7 @@
     "u": "toys/stollen/",
     "k": "toy",
     "s": "Photoreal",
-    "d": "Tap it to make it hop; drag to turn it.",
+    "d": "Tap it to drop it; drag to turn it.",
     "w": "stollen photoreal photoreal photoreal scan captured food bread christmas german sweet fruit powdered sugar stollen",
     "i": "../assets/toys/stollen/thumb.webp",
     "l": 1
@@ -225,7 +225,7 @@
     "u": "toys/orange-photo/",
     "k": "toy",
     "s": "Photoreal",
-    "d": "Tap it to make it hop; drag to turn it.",
+    "d": "Tap it to roll it; drag to turn it.",
     "w": "orange (photo) photoreal photoreal photoreal scan captured food fruit citrus orange peel real orange-photo",
     "i": "../assets/toys/orange-photo/thumb.webp",
     "l": 1
@@ -235,7 +235,7 @@
     "u": "toys/physalis/",
     "k": "toy",
     "s": "Photoreal",
-    "d": "Tap it to make it hop; drag to turn it.",
+    "d": "Tap it to make it sway; drag to turn it.",
     "w": "physalis photoreal photoreal photoreal scan captured plant fruit lantern husk cape gooseberry physalis",
     "i": "../assets/toys/physalis/thumb.webp",
     "l": 1
@@ -245,7 +245,7 @@
     "u": "toys/crystal-gem/",
     "k": "toy",
     "s": "Photoreal",
-    "d": "Tap it to make it hop; drag to turn it.",
+    "d": "Tap it to turn it round; drag to turn it yourself.",
     "w": "crystal photoreal photoreal photoreal scan captured gem crystal quartz mineral clear shiny crystal-gem",
     "i": "../assets/toys/crystal-gem/thumb.webp",
     "l": 1
@@ -255,7 +255,7 @@
     "u": "toys/alum-crystal/",
     "k": "toy",
     "s": "Photoreal",
-    "d": "Tap it to make it hop; drag to turn it.",
+    "d": "Tap it to turn the crystal on its block; drag to turn it yourself.",
     "w": "alum crystal photoreal photoreal photoreal scan captured gem crystal alum mineral pink salt deodorant alum-crystal",
     "i": "../assets/toys/alum-crystal/thumb.webp",
     "l": 1
@@ -265,7 +265,7 @@
     "u": "toys/puffin/",
     "k": "toy",
     "s": "Photoreal",
-    "d": "Tap it to make it hop; drag to turn it.",
+    "d": "Tap it to make it hop round; drag to turn it.",
     "w": "puffin photoreal photoreal photoreal scan captured animal bird puffin seabird figurine puffin",
     "i": "../assets/toys/puffin/thumb.webp",
     "l": 1
@@ -275,7 +275,7 @@
     "u": "toys/toy-trex/",
     "k": "toy",
     "s": "Photoreal",
-    "d": "Tap it to make it hop; drag to turn it.",
+    "d": "Tap it to rock it on its feet; drag to turn it.",
     "w": "toy t. rex photoreal photoreal photoreal scan captured toy dinosaur trex rubber figure toy-trex",
     "i": "../assets/toys/toy-trex/thumb.webp",
     "l": 1
@@ -285,7 +285,7 @@
     "u": "toys/monkey-doll/",
     "k": "toy",
     "s": "Photoreal",
-    "d": "Tap it to make it hop; drag to turn it.",
+    "d": "Tap it to rock it; drag to turn it.",
     "w": "monkey doll photoreal photoreal photoreal scan captured toy plush monkey doll soft stuffed monkey-doll",
     "i": "../assets/toys/monkey-doll/thumb.webp",
     "l": 1
@@ -295,7 +295,7 @@
     "u": "toys/elephant-souvenir/",
     "k": "toy",
     "s": "Photoreal",
-    "d": "Tap it to make it hop; drag to turn it.",
+    "d": "Tap it to make it turn; drag to turn it.",
     "w": "souvenir elephant photoreal photoreal photoreal scan captured animal elephant souvenir statue figurine thai elephant-souvenir",
     "i": "../assets/toys/elephant-souvenir/thumb.webp",
     "l": 1
@@ -305,7 +305,7 @@
     "u": "toys/turtle-souvenir/",
     "k": "toy",
     "s": "Photoreal",
-    "d": "Tap it to make it hop; drag to turn it.",
+    "d": "Tap it to make it crawl; drag to turn it.",
     "w": "souvenir turtle photoreal photoreal photoreal scan captured animal turtle sea souvenir statue figurine turtle-souvenir",
     "i": "../assets/toys/turtle-souvenir/thumb.webp",
     "l": 1
@@ -315,7 +315,7 @@
     "u": "toys/cave-lioness/",
     "k": "toy",
     "s": "Photoreal",
-    "d": "Tap it to make it hop; drag to turn it.",
+    "d": "Tap her to make her look round; drag to turn her.",
     "w": "cave lioness photoreal photoreal photoreal scan captured animal lion lioness cave museum cat cave-lioness",
     "i": "../assets/toys/cave-lioness/thumb.webp",
     "l": 1
@@ -335,7 +335,7 @@
     "u": "toys/bmx-bike/",
     "k": "toy",
     "s": "Photoreal",
-    "d": "Tap it to make it hop; drag to turn it.",
+    "d": "Tap it to nudge it; drag to turn it.",
     "w": "bmx bicycle photoreal photoreal photoreal scan captured vehicle bicycle bike bmx wheels bmx-bike",
     "i": "../assets/toys/bmx-bike/thumb.webp",
     "l": 1
@@ -345,7 +345,7 @@
     "u": "toys/murex-shell/",
     "k": "toy",
     "s": "Photoreal",
-    "d": "Tap it to make it hop; drag to turn it.",
+    "d": "Tap it to turn it round; drag to turn it yourself.",
     "w": "murex shell photoreal photoreal photoreal scan captured shell nature sea snail spines venus comb murex-shell",
     "i": "../assets/toys/murex-shell/thumb.webp",
     "l": 1
@@ -355,7 +355,7 @@
     "u": "toys/sunflower-photo/",
     "k": "toy",
     "s": "Photoreal",
-    "d": "Tap it to make it hop; drag to turn it.",
+    "d": "Tap it to make it nod; drag to turn it.",
     "w": "sunflower (photo) photoreal photoreal photoreal scan captured plant flower sunflower yellow seeds real sunflower-photo",
     "i": "../assets/toys/sunflower-photo/thumb.webp",
     "l": 1
@@ -365,7 +365,7 @@
     "u": "toys/white-roses/",
     "k": "toy",
     "s": "Photoreal",
-    "d": "Tap it to make it hop; drag to turn it.",
+    "d": "Tap the vase to knock it; drag to turn it.",
     "w": "white roses photoreal photoreal photoreal scan captured plant flower roses vase white bouquet white-roses",
     "i": "../assets/toys/white-roses/thumb.webp",
     "l": 1
@@ -375,7 +375,7 @@
     "u": "toys/bonsai-photo/",
     "k": "toy",
     "s": "Photoreal",
-    "d": "Tap it to make it hop; drag to turn it.",
+    "d": "Tap it to drop it; drag to turn it.",
     "w": "bonsai tree (photo) photoreal photoreal photoreal scan captured plant tree bonsai garden japanese real bonsai-photo",
     "i": "../assets/toys/bonsai-photo/thumb.webp",
     "l": 1
@@ -385,7 +385,7 @@
     "u": "toys/mushroom-photo/",
     "k": "toy",
     "s": "Photoreal",
-    "d": "Tap it to make it hop; drag to turn it.",
+    "d": "Tap it to drop it; drag to turn it.",
     "w": "mushroom (photo) photoreal photoreal photoreal scan captured nature mushroom fungus forest floor real mushroom-photo",
     "i": "../assets/toys/mushroom-photo/thumb.webp",
     "l": 1
@@ -395,7 +395,7 @@
     "u": "toys/cactus-real/",
     "k": "toy",
     "s": "Photoreal",
-    "d": "Tap it to make it hop; drag to turn it.",
+    "d": "Tap it to drop it; drag to turn it.",
     "w": "cactus (photo 2) photoreal photoreal photoreal scan captured plant cactus succulent spines real desert cactus-real",
     "i": "../assets/toys/cactus-real/thumb.webp",
     "l": 1
@@ -405,7 +405,7 @@
     "u": "toys/crochet-earth/",
     "k": "toy",
     "s": "Photoreal",
-    "d": "Tap it to make it hop; drag to turn it.",
+    "d": "Tap it to spin it; drag to turn it.",
     "w": "crochet earth photoreal photoreal photoreal scan captured space earth planet crochet craft world globe crochet-earth",
     "i": "../assets/toys/crochet-earth/thumb.webp",
     "l": 1
@@ -415,7 +415,7 @@
     "u": "toys/desk-globe/",
     "k": "toy",
     "s": "Photoreal",
-    "d": "Tap it to make it hop; drag to turn it.",
+    "d": "Tap it to spin the globe; drag to turn it.",
     "w": "desk globe photoreal photoreal photoreal scan captured space earth globe map geography school desk desk-globe",
     "i": "../assets/toys/desk-globe/thumb.webp",
     "l": 1
@@ -425,7 +425,7 @@
     "u": "toys/cherry-blossom-photo/",
     "k": "toy",
     "s": "Photoreal",
-    "d": "Tap it to make it hop; drag to turn it.",
+    "d": "Tap it to drop it; drag to turn it.",
     "w": "cherry blossom (photo) photoreal photoreal photoreal scan captured nature tree cherry blossom spring flowers pink real cherry-blossom-photo",
     "i": "../assets/toys/cherry-blossom-photo/thumb.webp",
     "l": 1
@@ -435,7 +435,7 @@
     "u": "toys/maple-tree/",
     "k": "toy",
     "s": "Photoreal",
-    "d": "Tap it to make it hop; drag to turn it.",
+    "d": "Tap it to drop it; drag to turn it.",
     "w": "golden maple photoreal photoreal photoreal scan captured nature tree maple autumn garden shrub real maple-tree",
     "i": "../assets/toys/maple-tree/thumb.webp",
     "l": 1
@@ -445,7 +445,7 @@
     "u": "toys/peony/",
     "k": "toy",
     "s": "Photoreal",
-    "d": "Tap it to make it hop; drag to turn it.",
+    "d": "Tap the vase to knock it; drag to turn it.",
     "w": "peonies in a vase photoreal photoreal photoreal scan captured plant flower peony vase pink bouquet peony",
     "i": "../assets/toys/peony/thumb.webp",
     "l": 1
@@ -455,7 +455,7 @@
     "u": "toys/money-tree/",
     "k": "toy",
     "s": "Photoreal",
-    "d": "Tap it to make it hop; drag to turn it.",
+    "d": "Tap the pot to knock it; drag to turn it.",
     "w": "money tree photoreal photoreal photoreal scan captured plant houseplant pachira pot tree green money-tree",
     "i": "../assets/toys/money-tree/thumb.webp",
     "l": 1
@@ -465,9 +465,109 @@
     "u": "toys/knight-horse/",
     "k": "toy",
     "s": "Photoreal",
-    "d": "Tap it to make it hop; drag to turn it.",
+    "d": "Tap it to make the horse rear; drag to turn it.",
     "w": "knight on a horse photoreal photoreal photoreal scan captured toy knight horse medieval figure miniature sword armor knight-horse",
     "i": "../assets/toys/knight-horse/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Triceratops skull",
+    "u": "toys/triceratops-skull/",
+    "k": "toy",
+    "s": "Photoreal",
+    "d": "Tap it to make it look at you; drag to turn it.",
+    "w": "triceratops skull photoreal photoreal photoreal scan captured science fossil dinosaur triceratops skull horns frill museum triceratops-skull",
+    "i": "../assets/toys/triceratops-skull/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Cone shell",
+    "u": "toys/cone-shell/",
+    "k": "toy",
+    "s": "Photoreal",
+    "d": "Tap it to turn it on its point; drag to turn it yourself.",
+    "w": "cone shell photoreal photoreal photoreal scan captured science shell sea snail cone mollusk pattern cone-shell",
+    "i": "../assets/toys/cone-shell/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Celestial globe",
+    "u": "toys/celestial-globe/",
+    "k": "toy",
+    "s": "Photoreal",
+    "d": "Tap it to spin the globe; drag to turn it.",
+    "w": "celestial globe photoreal photoreal photoreal scan science astronomy globe stars constellations instrument historical museum celestial-globe",
+    "i": "../assets/toys/celestial-globe/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Armillary sphere",
+    "u": "toys/armillary-sphere/",
+    "k": "toy",
+    "s": "Photoreal",
+    "d": "Tap it to turn the inner rings; drag to turn it.",
+    "w": "armillary sphere photoreal photoreal photoreal scan science astronomy armillary sphere rings instrument historical museum armillary-sphere",
+    "i": "../assets/toys/armillary-sphere/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Stannern meteorite",
+    "u": "toys/stannern-meteorites/",
+    "k": "toy",
+    "s": "Photoreal",
+    "d": "Tap it to let the stones fall; drag to turn them.",
+    "w": "stannern meteorite photoreal photoreal photoreal scan science space meteorite stones fall 1808 museum stannern-meteorites",
+    "i": "../assets/toys/stannern-meteorites/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Fluorite",
+    "u": "toys/fluorite-crystal/",
+    "k": "toy",
+    "s": "Photoreal",
+    "d": "Tap it to switch on the ultraviolet lamp; drag to turn it.",
+    "w": "fluorite photoreal photoreal photoreal scan science mineral crystal fluorite purple ultraviolet glow fluorescence fluorite-crystal",
+    "i": "../assets/toys/fluorite-crystal/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Ammonite",
+    "u": "toys/ammonite-agate/",
+    "k": "toy",
+    "s": "Photoreal",
+    "d": "Tap it to turn it over; drag to turn it yourself.",
+    "w": "ammonite photoreal photoreal photoreal scan science fossil ammonite quartz chalcedony agate chambers museum ammonite-agate",
+    "i": "../assets/toys/ammonite-agate/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Morasko meteorite",
+    "u": "toys/morasko-meteorite/",
+    "k": "toy",
+    "s": "Photoreal",
+    "d": "Tap it to turn it over; drag to turn it yourself.",
+    "w": "morasko meteorite photoreal photoreal photoreal scan science space meteorite iron museum morasko-meteorite",
+    "i": "../assets/toys/morasko-meteorite/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Pyrite",
+    "u": "toys/pyrite-cubes/",
+    "k": "toy",
+    "s": "Photoreal",
+    "d": "Tap it to turn it over; drag to turn it yourself.",
+    "w": "pyrite photoreal photoreal photoreal scan science mineral pyrite fools gold crystal cubes pyrite-cubes",
+    "i": "../assets/toys/pyrite-cubes/thumb.webp",
+    "l": 1
+  },
+  {
+    "t": "Megalodon tooth",
+    "u": "toys/megalodon-tooth/",
+    "k": "toy",
+    "s": "Photoreal",
+    "d": "Tap it to turn it over; drag to turn it yourself.",
+    "w": "megalodon tooth photoreal photoreal photoreal scan science fossil shark tooth megalodon museum megalodon-tooth",
+    "i": "../assets/toys/megalodon-tooth/thumb.webp",
     "l": 1
   },
   {
@@ -2595,7 +2695,7 @@
     "u": "toys/book/",
     "k": "toy",
     "s": "Open me",
-    "d": "Tap to close the book; tap again to open it.",
+    "d": "Tap the right page to turn on, the left to go back, or pull a page over by its edge.",
     "w": "storybook open me open me book pages read story hardcover open close flip book",
     "i": "../assets/toys/book/thumb.webp"
   },
@@ -4005,7 +4105,7 @@
     "u": "toys/fruit-mri/",
     "k": "toy",
     "s": "Imaging",
-    "d": "Drag up or down to scroll through the slices. Tap to play through them all.",
+    "d": "Drag on the fruit or move the Slice slider to step through the slices. Tap to play them all; a drag stops it.",
     "w": "mri of a fruit imaging imaging mri magnetic resonance imaging scan slices kiwi orange fruit seeds segments t2 imaging fruit-mri",
     "i": "../assets/toys/fruit-mri/thumb.webp",
     "l": 1
@@ -4015,7 +4115,7 @@
     "u": "toys/electron-microscope/",
     "k": "toy",
     "s": "Imaging",
-    "d": "Tap to zoom in a step; the third tap goes back out. Choose the sample and the vision in the Toy tab.",
+    "d": "Tap a grain or shell to zoom in, again to look closer; a third tap goes back out. Tap another to zoom on it.",
     "w": "electron microscope imaging imaging sem scanning electron microscope micrograph pollen diatom snowflake rime zoom magnification imaging electron-microscope",
     "i": "../assets/toys/electron-microscope/thumb.webp",
     "l": 1
@@ -4045,7 +4145,7 @@
     "u": "toys/shardball/",
     "k": "toy",
     "s": "Arcade",
-    "d": "Tap or press Space to play. Steer with the mouse, a finger or the arrow keys; press 3D for the 3D view.",
+    "d": "Tap to play. Steer the dish with a finger, the mouse or the arrows; it catches the ball. Tap to launch.",
     "w": "shardball arcade arcade game arcade brick breaker paddle ball bricks shatter dome 3d play shardball",
     "i": "../assets/toys/shardball/thumb.webp",
     "l": 1
@@ -4085,7 +4185,7 @@
     "u": "toys/strata/",
     "k": "toy",
     "s": "Arcade",
-    "d": "Tap or press Space to play. Arrows move the falling stone, X turns it, Q and E tip it, Space drops it.",
+    "d": "Tap the falling stone (or ⟳ Turn, ↑ or X) to turn it; tap beside it or use ← → to move it. Space drops it.",
     "w": "strata arcade arcade game arcade falling stones blocks well layers stack puzzle crumble 3d strata",
     "i": "../assets/toys/strata/thumb.webp",
     "l": 1
@@ -4145,7 +4245,7 @@
     "u": "toys/photo-dash/",
     "k": "toy",
     "s": "Arcade",
-    "d": "Tap or press Space to jump. Open your own photo in the Toy tab to run across it.",
+    "d": "Tap or press Space to jump. Pick a ball at the top; open your own photo in the Toy tab to run across it.",
     "w": "photo dash arcade arcade game arcade runner run jump marble your own photo skyline relief 3d photo-dash",
     "i": "../assets/toys/photo-dash/thumb.webp",
     "l": 1

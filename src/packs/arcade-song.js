@@ -54,6 +54,21 @@ const LANE_COLORS = ["#ff7a59", "#ffd166", "#7bdff2"];
 // its own (the low lane on the left), and every track model is the same
 // on both sides of its middle, so the mirror never shows.
 const ROAD = [-0.5, 0.5, 0.5, 0.5];
+// Arcade r3 (the owner: "notes ring on too long, like a held sustain
+// pedal"; add guitar and other instruments, chosen in the game): each
+// instrument plays a caught note for that note's own length. Keyboards
+// lift their key (the damper falls) when the note ends; a plucked string
+// fades over about the note's length.
+const pluckDecay = (d) => clamp(0.25 + d * 0.95, 0.22, 1.6);
+export const INSTRUMENTS = {
+  piano: { label: "Piano", color: "#f4f1e8", spec: (f, v, d) => ({ voice: "grand", f, vol: 0.5 + 0.4 * v, hold: clamp(d, 0.08, 2.5) }) }, // prettier-ignore
+  guitar: { label: "Guitar", color: "#c98a4b", spec: (f, v, d) => ({ voice: "nylon", f, vol: 0.55 + 0.4 * v, decay: pluckDecay(d) }) }, // prettier-ignore
+  steel: { label: "Steel guitar", color: "#d9dde3", spec: (f, v, d) => ({ voice: "pluck", f, vol: 0.5 + 0.35 * v, bright: 0.65, decay: pluckDecay(d) }) }, // prettier-ignore
+  harp: { label: "Harp", color: "#e9c46a", spec: (f, v, d) => ({ voice: "harp", f, vol: 0.55 + 0.4 * v, decay: pluckDecay(d) * 0.7 }) }, // prettier-ignore
+  organ: { label: "Organ", color: "#9b5de5", spec: (f, v, d) => ({ voice: "organ", f, vol: 0.35 + 0.25 * v, hold: clamp(d, 0.08, 2.5) }) }, // prettier-ignore
+  synth: { label: "Synth", color: "#3a86ff", spec: (f, v, d) => ({ voice: "synth", f, vol: 0.35 + 0.25 * v, hold: clamp(d, 0.08, 2.5) }) }, // prettier-ignore
+  vibes: { label: "Vibes", color: "#7bdff2", spec: (f, v, d) => ({ voice: "vibes", f, vol: 0.5 + 0.4 * v, hold: clamp(d, 0.1, 2.5) }) }, // prettier-ignore
+};
 const lerp = (a, b, t) => a + (b - a) * t;
 const clamp = (v, lo, hi) => (v < lo ? lo : v > hi ? hi : v);
 
@@ -219,7 +234,7 @@ class NoteRider {
         // A recording (src/packs/arcade-listen.js): the note plays its own
         // slice of it, on time; else the note itself, on the grand piano.
         if (this.song.audio) this.api.sound({ voice: "sample", file: this.song.audio, from: n.t, len: n.slice ?? n.d, at: Math.max(0, dtn), vol: 1 }); // prettier-ignore
-        else this.api.sound({ voice: "grand", f: 440 * 2 ** ((n.n - 69) / 12), vol: 0.5 + 0.4 * n.v, decay: Math.min(2, 0.4 + n.d) }); // prettier-ignore
+        else this.api.sound((INSTRUMENTS[ctl.choice] || INSTRUMENTS.piano).spec(440 * 2 ** ((n.n - 69) / 12), n.v, n.d)); // prettier-ignore
         // its lane's pad presses down for as long as the note is held
         this.pads[n.lane].press = Math.max(0.12, Math.min(0.6, n.d));
         this.bursts.push({ lane: n.lane, age: 0, sprite: null });
