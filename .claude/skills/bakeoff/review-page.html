@@ -1,0 +1,1049 @@
+<title>Splashery Bake-off Review</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,750&display=swap"
+/>
+<style>
+  :root {
+    --page: #f3f4f7;
+    --panel: #ffffff;
+    --ink: #14171c;
+    --muted: #5a6270;
+    --line: rgba(24, 40, 72, 0.13);
+    --stage: #111111;
+    --accent: #0b5fd0;
+    --accent-ink: #ffffff;
+    --good: #1b7a45;
+    --good-soft: #dff3e7;
+    --fix: #a4570b;
+    --fix-soft: #fcebd6;
+    --display: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+    --body: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --page: #101216;
+      --panel: #191c22;
+      --ink: #eef0f4;
+      --muted: #a0a8b6;
+      --line: rgba(190, 205, 235, 0.15);
+      --accent: #8db8ff;
+      --accent-ink: #0c1626;
+      --good: #7bdca4;
+      --good-soft: #173826;
+      --fix: #ffc27a;
+      --fix-soft: #3b2912;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --page: #101216;
+    --panel: #191c22;
+    --ink: #eef0f4;
+    --muted: #a0a8b6;
+    --line: rgba(190, 205, 235, 0.15);
+    --accent: #8db8ff;
+    --accent-ink: #0c1626;
+    --good: #7bdca4;
+    --good-soft: #173826;
+    --fix: #ffc27a;
+    --fix-soft: #3b2912;
+  }
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    background: var(--page);
+    color: var(--ink);
+    font: 15px/1.5 var(--body);
+  }
+  .wrap {
+    max-width: 1040px;
+    margin: 0 auto;
+    padding-inline: 16px;
+    padding-block: 22px 64px;
+  }
+  header h1 {
+    font: 750 clamp(28px, 6vw, 40px) / 1.05 var(--display);
+    margin: 0 0 8px;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+  header p {
+    margin: 0 0 8px;
+    max-width: 64ch;
+    color: var(--muted);
+  }
+  .bar {
+    position: sticky;
+    top: env(safe-area-inset-top, 0px);
+    z-index: 5;
+    margin: 18px -16px 0;
+    padding: 10px 16px;
+    background: var(--page);
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+  }
+  .bar button {
+    font: 600 13px/1 var(--body);
+    color: var(--ink);
+    background: transparent;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 8px 12px;
+    cursor: pointer;
+  }
+  .bar button[aria-pressed="true"] {
+    background: var(--ink);
+    color: var(--page);
+    border-color: var(--ink);
+  }
+  .count {
+    margin-left: auto;
+    font-size: 13px;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+  }
+  h2 {
+    font: 750 22px/1.2 var(--display);
+    margin: 30px 0 4px;
+  }
+  .part-note {
+    margin: 0 0 12px;
+    color: var(--muted);
+    font-size: 14px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 14px;
+  }
+  .toy {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  /* The clip box takes each clip's own shape (square, landscape or a tall 390x844 phone clip), capped
+     at about three quarters of the screen's height, where the clip letterboxes instead. Never give
+     .clip a fixed aspect-ratio: a clip taller than the box then spills over the text and buttons
+     below it. */
+  .clip {
+    background: var(--stage);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 120px;
+    overflow: hidden;
+  }
+  .clip img,
+  .clip video {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: min(76vh, 760px);
+    object-fit: contain;
+  }
+  .body {
+    padding: 12px 14px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+  }
+  .toy h3 {
+    margin: 0;
+    font: 650 17px/1.25 var(--body);
+    display: flex;
+    gap: 8px;
+    align-items: baseline;
+    flex-wrap: wrap;
+  }
+  .state {
+    font: 600 11px/1 var(--body);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 4px 7px;
+    border-radius: 6px;
+  }
+  .state.good {
+    background: var(--good-soft);
+    color: var(--good);
+  }
+  .state.fix {
+    background: var(--fix-soft);
+    color: var(--fix);
+  }
+  dl {
+    margin: 0;
+    display: grid;
+    gap: 4px;
+    font-size: 14px;
+  }
+  dt {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--muted);
+  }
+  dd {
+    margin: 0 0 4px;
+  }
+  dd.said {
+    font-style: italic;
+  }
+  .marks {
+    margin-top: auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .marks button {
+    font: 600 13px/1 var(--body);
+    color: var(--ink);
+    background: transparent;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 9px 13px;
+    cursor: pointer;
+  }
+  .marks button[data-v="good"][aria-pressed="true"] {
+    background: var(--good-soft);
+    border-color: var(--good);
+    color: var(--good);
+  }
+  .marks button[data-v="fix"][aria-pressed="true"] {
+    background: var(--fix-soft);
+    border-color: var(--fix);
+    color: var(--fix);
+  }
+  .guide {
+    margin: 0 0 14px;
+    padding: 10px 14px;
+    border-left: 3px solid var(--accent);
+    background: var(--panel);
+    border-radius: 0 10px 10px 0;
+    font-size: 14px;
+    max-width: 75ch;
+  }
+  .guide b {
+    font-weight: 650;
+  }
+  .guide > :first-child {
+    margin-top: 0;
+  }
+  .guide > :last-child {
+    margin-bottom: 0;
+  }
+  .guide ul,
+  .guide ol {
+    padding-left: 20px;
+  }
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 8px;
+  }
+  .tags button {
+    font: 500 12px/1 var(--body);
+    color: var(--muted);
+    background: transparent;
+    border: 1px dashed var(--line);
+    border-radius: 999px;
+    padding: 7px 10px;
+    cursor: pointer;
+  }
+  .tags button[aria-pressed="true"] {
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    background: color-mix(in srgb, var(--accent) 12%, transparent);
+  }
+  .tags button:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+  textarea {
+    width: 100%;
+    min-height: 64px;
+    resize: vertical;
+    font: inherit;
+    color: var(--ink);
+    background: var(--page);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 8px 10px;
+  }
+  .send {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    align-items: center;
+  }
+  .send button {
+    font: 600 13px/1 var(--body);
+    border-radius: 999px;
+    padding: 9px 13px;
+    cursor: pointer;
+    border: 1px solid var(--line);
+    background: transparent;
+    color: var(--ink);
+  }
+  .send button[data-send] {
+    background: var(--fix);
+    border-color: var(--fix);
+    color: var(--panel);
+  }
+  .send button[data-send]:disabled {
+    opacity: 0.45;
+    cursor: default;
+  }
+  .state.draft {
+    background: transparent;
+    border: 1px dashed var(--fix);
+    color: var(--fix);
+  }
+  .pics {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .pics:empty {
+    display: none;
+  }
+  .pic {
+    position: relative;
+    width: 72px;
+    height: 72px;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    background: var(--stage);
+  }
+  .pic a,
+  .pic img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .pic button {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    width: 26px;
+    height: 26px;
+    padding: 0;
+    border-radius: 999px;
+    border: 0;
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    font: 600 15px/26px var(--body);
+    cursor: pointer;
+  }
+  .pic.busy {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 12px;
+  }
+  .saved {
+    font-size: 12px;
+    color: var(--muted);
+    min-height: 1em;
+  }
+  button:focus-visible,
+  textarea:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+  footer {
+    margin-top: 28px;
+    color: var(--muted);
+    font-size: 13px;
+    max-width: 64ch;
+  }
+  .lanes {
+    display: flex;
+    gap: 6px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    margin: 0 -16px;
+    padding: 8px 16px 0;
+    flex-basis: 100%;
+  }
+  .lanes:empty {
+    display: none;
+  }
+  .lanes button {
+    flex: none;
+  }
+  .lane-head {
+    margin: 34px 0 2px;
+    display: flex;
+    gap: 10px;
+    align-items: baseline;
+    flex-wrap: wrap;
+  }
+  .lane-head h2 {
+    margin: 0;
+  }
+  .lane-tag {
+    font: 600 11px/1 var(--body);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 4px 7px;
+  }
+  h3.group {
+    font: 650 16px/1.3 var(--body);
+    margin: 20px 0 2px;
+  }
+  .msg {
+    margin: 28px 0;
+    color: var(--muted);
+    max-width: 60ch;
+  }
+</style>
+
+<div class="wrap">
+  <header>
+    <h1>Splashery bake-off, blind review</h1>
+    <p>
+      Several coders did the same tasks, each working alone from the same instructions. Each card is
+      one entry, named by a code, so you can't tell who made it. The judges already ran the tests
+      and checks (their findings are under each clip). Your part is what tests can't judge: how it
+      looks and moves, and whether it reads as right to a person.
+    </p>
+    <p>
+      <b>How to mark:</b> tapping the tags that fit is enough (several at once is fine, and they
+      save straight away). A note is welcome too. "Looks right" and "Needs work" are optional
+      ("Needs work" asks for a short note). Each task has a short "What to look for" box. You don't
+      need to be an expert: a plain "this looks off" is useful.
+    </p>
+    <p>
+      <b>Fair comparison:</b> every entry in a task was recorded the same way (same renderer, same
+      phone size, same moment), so clips can look softer than on your screen, but equally so.
+      Compare entries with each other, not with the live site. The models stay hidden until you've
+      marked every card. Nothing here touches the real site.
+    </p>
+  </header>
+
+  <div class="bar" role="group" aria-label="Show">
+    <button type="button" data-f="all" aria-pressed="true">All</button>
+    <button type="button" data-f="open" aria-pressed="false">Not marked yet</button>
+    <button type="button" data-f="fix" aria-pressed="false">Needs work</button>
+    <span class="count" id="count" aria-live="polite"></span>
+    <div class="lanes" id="lanes" role="group" aria-label="Tasks"></div>
+  </div>
+
+  <main id="list"><p class="msg">Loading the clips…</p></main>
+
+  <footer id="status">
+    Clips are rendered in a headless browser at phone size, so colors and sharpness can look a
+    little softer than on a real screen. A note you have started but not saved stays in this browser
+    until you save it or cancel it.
+  </footer>
+</div>
+
+<script>
+  // Everything on this page comes from its database, so the Operator can add tasks and cards
+  // without republishing it (.claude/skills/bakeoff/SKILL.md in the splashery repo):
+  //   lanes/<task id>     { title, note, order, finished, guide, tags,
+  //                         groups: [{ id, title, note }] }
+  //   cards/<card id>     { lane, group, order, name, said, now, asset | clip, video,
+  //                         replacedBy, at }
+  //   verdicts/<card id>  { verdict: "good" | "fix" | "", tags: [string], note, at, images }
+  //                       (the owner's marks; nobody else writes them)
+  // lanes.guide: the "What to look for" box, an HTML string of simple markup (b, i, em, strong, br,
+  //   code, p, ul, ol, li; anything else is dropped). lanes.tags: this task's tag buttons, an array
+  //   of strings. Without them a task shows the defaults below. "Best in this task" and "Can't
+  //   judge from this" are added to every task.
+  // images: the asset ids of the screenshots the owner attached to a note, served at /_blob/<id>.
+  //   They are shrunk to JPEG in the browser before upload.
+  const DEFAULT_GUIDE =
+    "<b>What to look for:</b> how the entries compare with each other. Tap the tags that fit, and add a note if something looks off.";
+  const DEFAULT_TAGS = ["Looks right", "Looks off", "Sharp", "Blurry or grainy"];
+  const TAGS_COMMON = ["Best in this task", "Can't judge from this"];
+  const ALLOWED_MARKUP = new Set(["B", "STRONG", "I", "EM", "BR", "CODE", "P", "UL", "OL", "LI"]);
+  const DROPPED_MARKUP = new Set([
+    "SCRIPT",
+    "STYLE",
+    "TEMPLATE",
+    "IFRAME",
+    "OBJECT",
+    "EMBED",
+    "NOSCRIPT",
+  ]);
+  const laneTags = (lane) => {
+    const own = Array.isArray(lanes[lane]?.tags)
+      ? lanes[lane].tags.filter((x) => typeof x === "string" && x.trim())
+      : [];
+    return [...new Set([...(own.length ? own : DEFAULT_TAGS), ...TAGS_COMMON])];
+  };
+  // A lane's guide is simple markup written by the Operator; keep only the allowed tags and no
+  // attributes, so the database can never put a script or a link on this page.
+  function cleanGuide(html) {
+    const doc = new DOMParser().parseFromString(`<body>${String(html ?? "")}</body>`, "text/html");
+    const walk = (node) => {
+      for (const child of [...node.childNodes]) {
+        if (child.nodeType === 3) continue;
+        if (child.nodeType !== 1 || DROPPED_MARKUP.has(child.tagName)) child.remove();
+        else if (!ALLOWED_MARKUP.has(child.tagName)) {
+          walk(child);
+          child.replaceWith(...child.childNodes);
+        } else {
+          for (const a of [...child.attributes]) child.removeAttribute(a.name);
+          walk(child);
+        }
+      }
+    };
+    walk(doc.body);
+    return doc.body.innerHTML.trim();
+  }
+  const guideFor = (lane) => cleanGuide(lanes[lane]?.guide) || DEFAULT_GUIDE;
+  const tagList = (m) =>
+    Array.isArray(m?.tags) ? m.tags.filter((x) => typeof x === "string") : [];
+  const isMarked = (m) => !!(m?.verdict || tagList(m).length || String(m?.note || "").trim());
+  const els = {
+    list: document.getElementById("list"),
+    count: document.getElementById("count"),
+    lanes: document.getElementById("lanes"),
+  };
+  const marks = {};
+  // Notes being written, not sent yet (card id -> { note, fix, images }; fix: the draft turns the mark
+  // into "Needs work" when sent). A "Needs work" mark is stored only when
+  // its note is sent, so a "fix" never lacks the owner's note.
+  // Drafts survive a reload in this browser (localStorage), and never reach the database.
+  const pending = {};
+  const DRAFTS = "bakeoff-review-drafts";
+  try {
+    for (const [id, d] of Object.entries(JSON.parse(localStorage.getItem(DRAFTS) || "{}")))
+      if (d && typeof d.note === "string")
+        pending[id] = { note: d.note, fix: !!d.fix, images: ids(d.images) };
+  } catch {}
+  const keepDrafts = () => {
+    try {
+      localStorage.setItem(DRAFTS, JSON.stringify(pending));
+    } catch {}
+  };
+  const cards = {};
+  const lanes = {};
+  // Pictures: the assets namespace (null where this view can't upload), and how many pictures each
+  // card is still uploading.
+  let assets = null;
+  const uploading = {};
+  const IMAGE_TYPES = ["image/png", "image/jpeg", "image/webp", "image/gif"];
+  // Each clip's last shown height, so the page doesn't jump when a clip unloads or reloads.
+  const clipHeights = new Map();
+  const lazyMedia =
+    "IntersectionObserver" in window
+      ? new IntersectionObserver(
+          (entries) => {
+            for (const e of entries) {
+              const m = e.target;
+              if (e.isIntersecting) {
+                if (!m.getAttribute("src")) m.setAttribute("src", m.dataset.src);
+                if (m.tagName === "VIDEO") m.play?.().catch(() => {});
+              } else if (m.tagName === "VIDEO" && m.getAttribute("src")) {
+                m.pause();
+                m.removeAttribute("src");
+                m.load();
+              }
+            }
+          },
+          { rootMargin: "500px 0px" },
+        )
+      : null;
+  function watchMedia() {
+    for (const m of els.list.querySelectorAll("[data-src]")) {
+      const remember = () => {
+        if (m.clientHeight > 40) {
+          clipHeights.set(m.dataset.src, m.clientHeight);
+          m.parentElement.style.minHeight = m.clientHeight + "px";
+        }
+      };
+      m.addEventListener(m.tagName === "VIDEO" ? "loadeddata" : "load", remember);
+      if (lazyMedia) lazyMedia.observe(m);
+      else m.setAttribute("src", m.dataset.src);
+    }
+  }
+  let filter = "all";
+  let laneFilter = "all";
+  let showFinished = false;
+  let db = null;
+  let loaded = false;
+
+  const esc = (s) =>
+    String(s ?? "").replace(
+      /[&<>"']/g,
+      (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c],
+    );
+  function ids(v) {
+    return Array.isArray(v)
+      ? v.filter((x) => typeof x === "string" && /^[0-9a-f]{32}$/.test(x))
+      : [];
+  }
+  const num = (v, d) => (Number.isFinite(v) ? v : d);
+  const byOrder = (a, b) =>
+    num(a.order, 1e9) - num(b.order, 1e9) || String(a.id).localeCompare(String(b.id));
+
+  // An uploaded clip is served at /_blob/<id>; older clips are files
+  // published with the page (e4/oak.gif).
+  function clipSrc(t) {
+    if (typeof t.asset === "string" && /^[0-9a-f]{32}$/.test(t.asset)) return "/_blob/" + t.asset;
+    if (
+      typeof t.clip === "string" &&
+      /^[\w./-]+\.(gif|png|webp|jpg|mp4|webm)$/i.test(t.clip) &&
+      !t.clip.includes("..")
+    )
+      return t.clip;
+    return "";
+  }
+
+  function card(t) {
+    const m = marks[t.id] || {};
+    const draft = pending[t.id];
+    const isDraft = draft !== undefined;
+    const newFix = isDraft && (draft.fix || !m.verdict);
+    const state = newFix
+      ? '<span class="state draft">Not sent yet</span>'
+      : m.verdict === "good"
+        ? '<span class="state good">Looks right</span>'
+        : m.verdict === "fix"
+          ? '<span class="state fix">Needs work</span>'
+          : "";
+    const src = clipSrc(t);
+    const alt = `${esc(t.name)}: ${esc(t.now)}`;
+    // Clips load and play only near the screen (lazyMedia below): 170-odd videos playing at once
+    // froze phones.
+    const media = !src
+      ? '<p class="msg">Nothing to watch on this card. The checks in the text below are the evidence.</p>'
+      : t.video || /\.(mp4|webm)$/i.test(src)
+        ? `<video data-src="${esc(src)}" muted loop playsinline preload="none" aria-label="${alt}"></video>`
+        : `<img data-src="${esc(src)}" alt="${alt}" width="360" height="360" />`;
+    const h = clipHeights.get(src);
+    return `<article class="toy" data-id="${esc(t.id)}">
+      <div class="clip"${h ? ` style="min-height:${h}px"` : ""}>${media}</div>
+      <div class="body">
+        <h3>${esc(t.name)} ${state}</h3>
+        <dl>
+          <dt>The task</dt><dd class="said">${esc(t.said)}</dd>
+          <dt>This entry, and the checks</dt><dd>${esc(t.now)}</dd>
+        </dl>
+        <div class="marks" role="group" aria-label="Your verdict on ${esc(t.name)}">
+          <button type="button" data-v="good" aria-pressed="${m.verdict === "good"}">Looks right</button>
+          <button type="button" data-v="fix" aria-pressed="${m.verdict === "fix" || newFix}">Needs work</button>
+        </div>
+        <div class="tags" role="group" aria-label="Tags for ${esc(t.name)}">${laneTags(
+          String(t.lane || "other"),
+        )
+          .map(
+            (g) =>
+              `<button type="button" data-tag="${esc(g)}" aria-pressed="${tagList(m).includes(g)}">${esc(g)}</button>`,
+          )
+          .join("")}</div>
+        <textarea id="note-${esc(t.id)}" data-note placeholder="A note, if you like: what you noticed, good or bad" aria-label="Note on ${esc(t.name)}">${esc(isDraft ? draft.note : m.note || "")}</textarea>
+        <div class="pics">${pics(t.id, isDraft ? draft.images : m.images, isDraft)}</div>
+        <div class="send" ${isDraft ? "" : "hidden"}>
+          <button type="button" data-send ${(String(draft?.note ?? "").trim() || !newFix) && !uploading[t.id] ? "" : "disabled"}>${newFix ? "Save" : "Save note"}</button>
+          ${assets ? '<button type="button" data-add>Add a picture</button>' : ""}
+          <button type="button" data-cancel>${newFix ? "Cancel" : "Undo changes"}</button>
+        </div>
+        <div class="saved" data-saved></div>
+      </div>
+    </article>`;
+  }
+
+  // A card's pictures: links to the full size; in a draft, each has a remove button.
+  function pics(id, list, editable) {
+    const shown = ids(list)
+      .map(
+        (a, i) =>
+          `<div class="pic"><a href="/_blob/${a}" target="_blank" rel="noopener"><img src="/_blob/${a}" alt="Picture ${i + 1} on this note" loading="lazy" /></a>${
+            editable
+              ? `<button type="button" data-unpic="${a}" aria-label="Remove picture ${i + 1}">×</button>`
+              : ""
+          }</div>`,
+      )
+      .join("");
+    const busy = editable ? '<div class="pic busy">Adding…</div>'.repeat(uploading[id] || 0) : "";
+    return shown + busy;
+  }
+
+  // Shrink a picture to a JPEG at most 2000 pixels on its long side (screenshots stay readable, and
+  // the page's 1 GB of storage lasts). A GIF, or a picture the browser can't redraw, goes as it is.
+  async function shrink(file) {
+    if (file.type === "image/gif") return file;
+    try {
+      const bmp = await createImageBitmap(file);
+      const k = Math.min(1, 2000 / Math.max(bmp.width, bmp.height));
+      const c = document.createElement("canvas");
+      c.width = Math.max(1, Math.round(bmp.width * k));
+      c.height = Math.max(1, Math.round(bmp.height * k));
+      const g = c.getContext("2d");
+      g.fillStyle = "#fff";
+      g.fillRect(0, 0, c.width, c.height);
+      g.drawImage(bmp, 0, 0, c.width, c.height);
+      bmp.close?.();
+      const out = await new Promise((r) => c.toBlob(r, "image/jpeg", 0.85));
+      if (out && (out.size < file.size || !IMAGE_TYPES.includes(file.type))) return out;
+    } catch {}
+    return IMAGE_TYPES.includes(file.type) ? file : null;
+  }
+
+  const UPLOAD_ERRORS = {
+    too_large: "That picture is too big (20 MB at most).",
+    unsupported_type: "That kind of file can't be added. Try a PNG or JPEG screenshot.",
+    quota_or_state: "This page's storage is full. Tell the Operator so it opens a new page.",
+    rate_limited: "Too many pictures at once. Wait a moment and try again.",
+    upstream_auth: "Sign in to claude.ai again, then try once more.",
+  };
+
+  async function addPictures(id, files) {
+    const say = (text) => {
+      const el = els.list.querySelector(`.toy[data-id="${CSS.escape(id)}"] [data-saved]`);
+      if (el) el.textContent = text;
+    };
+    for (const file of files) {
+      if (!pending[id]) return;
+      uploading[id] = (uploading[id] || 0) + 1;
+      render();
+      let problem = "";
+      try {
+        const blob = await shrink(file);
+        if (!blob) problem = UPLOAD_ERRORS.unsupported_type;
+        else {
+          const r = await assets.upload(blob);
+          if (pending[id]) {
+            pending[id].images = [...ids(pending[id].images), r.id];
+            keepDrafts();
+          } else assets.delete(r.id).catch(() => {});
+        }
+      } catch (e) {
+        problem =
+          UPLOAD_ERRORS[e?.code] || "The picture could not be added. Try again in a moment.";
+      }
+      uploading[id] -= 1;
+      render();
+      if (problem) say(problem);
+    }
+  }
+
+  // A picture taken off a note is deleted, unless a sent note still shows it.
+  function dropPicture(id, a) {
+    if (ids(marks[id]?.images).includes(a)) return;
+    assets?.delete(a).catch(() => {});
+  }
+
+  function laneList() {
+    const ids = new Set(Object.values(cards).map((c) => String(c.lane || "other")));
+    return [...ids]
+      .map((id) => ({
+        id,
+        order: lanes[id]?.order,
+        title: lanes[id]?.title || id,
+        lane: lanes[id] || {},
+      }))
+      .sort(byOrder);
+  }
+
+  // The cards a view shows: current clips (not replaced by a newer one) in
+  // lanes that are open, or all lanes when finished ones are shown.
+  function current() {
+    return Object.values(cards).filter((t) => {
+      if (t.replacedBy && cards[t.replacedBy]) return false;
+      const lane = lanes[String(t.lane || "other")];
+      if (lane?.finished && !showFinished) return false;
+      if (laneFilter !== "all" && String(t.lane || "other") !== laneFilter) return false;
+      return true;
+    });
+  }
+
+  function visible(t) {
+    const v = marks[t.id]?.verdict;
+    if (filter === "open") return !isMarked(marks[t.id]);
+    if (filter === "fix") return v === "fix";
+    return true;
+  }
+
+  function renderLanes() {
+    const list = laneList();
+    const finished = list.filter((l) => l.lane.finished).length;
+    if (list.length < 2 && !finished) {
+      els.lanes.innerHTML = "";
+      return;
+    }
+    const chip = (id, label) =>
+      `<button type="button" data-lane="${esc(id)}" aria-pressed="${laneFilter === id}">${esc(label)}</button>`;
+    els.lanes.innerHTML =
+      chip("all", "All tasks") +
+      list
+        .filter((l) => showFinished || !l.lane.finished)
+        .map((l) => chip(l.id, l.title))
+        .join("") +
+      (finished
+        ? `<button type="button" data-finished aria-pressed="${showFinished}">Finished tasks (${finished})</button>`
+        : "");
+  }
+
+  function render() {
+    // Keep a note being typed from being replaced mid-edit.
+    const active = document.activeElement;
+    if (active?.matches?.("textarea[data-note]")) return updateCount();
+    renderLanes();
+    if (!loaded) return updateCount();
+    const shown = current();
+    const html = laneList()
+      .map((l) => {
+        const items = shown
+          .filter((t) => String(t.lane || "other") === l.id && visible(t))
+          .sort(byOrder);
+        if (!items.length) return "";
+        const groups = Array.isArray(l.lane.groups) ? l.lane.groups : [];
+        const known = new Set(groups.map((g) => g.id));
+        const parts = [
+          ...groups.map((g) => ({ g, items: items.filter((t) => t.group === g.id) })),
+          { g: null, items: items.filter((t) => !known.has(t.group)) },
+        ].filter((p) => p.items.length);
+        const tag = l.lane.finished ? '<span class="lane-tag">Finished</span>' : "";
+        return `<section>
+          <div class="lane-head"><h2>${esc(l.title)}</h2>${tag}</div>
+          ${l.lane.note ? `<p class="part-note">${esc(l.lane.note)}</p>` : ""}
+          <div class="guide">${guideFor(l.id)}</div>
+          ${parts
+            .map(
+              (
+                p,
+              ) => `${p.g ? `<h3 class="group">${esc(p.g.title)}</h3>${p.g.note ? `<p class="part-note">${esc(p.g.note)}</p>` : ""}` : parts.length > 1 ? '<h3 class="group">More</h3>' : ""}
+          <div class="grid">${p.items.map(card).join("")}</div>`,
+            )
+            .join("")}
+        </section>`;
+      })
+      .join("");
+    lazyMedia?.disconnect();
+    els.list.innerHTML =
+      html ||
+      `<p class="msg">${Object.keys(cards).length ? "Nothing here with this filter." : "No cards yet. The Operator is still adding them."}</p>`;
+    watchMedia();
+    updateCount();
+  }
+
+  function updateCount() {
+    if (!loaded) {
+      els.count.textContent = "";
+      return;
+    }
+    const all = current();
+    const done = all.filter((t) => isMarked(marks[t.id])).length;
+    const fix = all.filter((t) => marks[t.id]?.verdict === "fix").length;
+    els.count.textContent = `${done} of ${all.length} marked` + (fix ? `, ${fix} need work` : "");
+  }
+
+  async function save(id, patch, el) {
+    marks[id] = { ...(marks[id] || {}), ...patch, at: new Date().toISOString().slice(0, 10) };
+    const saved = el?.querySelector("[data-saved]");
+    if (!db) {
+      if (saved) saved.textContent = "Not saved: this view cannot store marks.";
+      return;
+    }
+    try {
+      await db.doc(`verdicts/${id}`).set(marks[id]);
+      if (saved) saved.textContent = "Saved";
+    } catch (e) {
+      if (saved) saved.textContent = "Could not save. Try again in a moment.";
+    }
+  }
+
+  function send(id, el) {
+    const text = String(pending[id]?.note ?? "").trim();
+    const verdict = pending[id]?.fix ? "fix" : marks[id]?.verdict || "";
+    if (verdict === "fix" && !text && !tagList(marks[id]).length) {
+      const saved = el?.querySelector("[data-saved]");
+      if (saved) saved.textContent = "Write your note first.";
+      return;
+    }
+    if (uploading[id]) return;
+    const images = ids(pending[id]?.images);
+    for (const a of ids(marks[id]?.images))
+      if (!images.includes(a)) assets?.delete(a).catch(() => {});
+    delete pending[id];
+    keepDrafts();
+    save(id, { verdict, note: text, images }, el);
+    render();
+  }
+
+  els.list.addEventListener("click", (e) => {
+    const el = e.target.closest(".toy");
+    if (!el) return;
+    const id = el.dataset.id;
+    if (e.target.closest("button[data-send]")) return send(id, el);
+    if (e.target.closest("button[data-add]")) {
+      document.activeElement?.blur?.();
+      picker.dataset.id = id;
+      picker.value = "";
+      return picker.click();
+    }
+    const un = e.target.closest("button[data-unpic]");
+    if (un && pending[id]) {
+      pending[id].images = ids(pending[id].images).filter((a) => a !== un.dataset.unpic);
+      dropPicture(id, un.dataset.unpic);
+      keepDrafts();
+      return render();
+    }
+    if (e.target.closest("button[data-cancel]")) {
+      for (const a of ids(pending[id]?.images)) dropPicture(id, a);
+      delete pending[id];
+      keepDrafts();
+      return render();
+    }
+    const tb = e.target.closest(".tags button[data-tag]");
+    if (tb) {
+      const g = tb.dataset.tag;
+      const now = tagList(marks[id]);
+      const next = now.includes(g) ? now.filter((x) => x !== g) : [...now, g];
+      tb.setAttribute("aria-pressed", String(next.includes(g)));
+      save(id, { tags: next }, el);
+      updateCount();
+      return;
+    }
+    const b = e.target.closest(".marks button");
+    if (!b) return;
+    if (b.dataset.v === "fix" && marks[id]?.verdict !== "fix") {
+      // Open the note first; "Needs work" is stored only when its note is saved.
+      pending[id] = {
+        note: pending[id]?.note ?? marks[id]?.note ?? "",
+        fix: true,
+        images: pending[id]?.images ?? ids(marks[id]?.images),
+      };
+      keepDrafts();
+      render();
+      document.getElementById(`note-${id}`)?.focus();
+      return;
+    }
+    const v = marks[id]?.verdict === b.dataset.v ? "" : b.dataset.v;
+    delete pending[id];
+    keepDrafts();
+    save(id, { verdict: v }, el);
+    render();
+  });
+
+  els.list.addEventListener("input", (e) => {
+    const ta = e.target.closest("textarea[data-note]");
+    if (!ta) return;
+    const el = ta.closest(".toy");
+    const id = el.dataset.id;
+    pending[id] = {
+      note: ta.value,
+      fix: pending[id]?.fix || false,
+      images: pending[id]?.images ?? ids(marks[id]?.images),
+    };
+    keepDrafts();
+    // Show the send row without re-rendering (the note keeps its cursor).
+    const row = el.querySelector(".send");
+    if (row) {
+      row.hidden = false;
+      const newFix = pending[id].fix || !marks[id]?.verdict;
+      const btn = row.querySelector("button[data-send]");
+      btn.textContent = newFix ? "Save" : "Save note";
+      btn.disabled = (newFix && !ta.value.trim()) || !!uploading[id];
+      row.querySelector("button[data-cancel]").textContent = newFix ? "Cancel" : "Undo changes";
+    }
+    const saved = el.querySelector("[data-saved]");
+    if (saved) saved.textContent = "";
+  });
+  els.list.addEventListener("keydown", (e) => {
+    const ta = e.target.closest?.("textarea[data-note]");
+    if (ta && e.key === "Enter" && (e.metaKey || e.ctrlKey)) {
+      e.preventDefault();
+      const el = ta.closest(".toy");
+      send(el.dataset.id, el);
+    }
+  });
+  els.list.addEventListener("focusout", (e) => {
+    if (e.target.matches?.("textarea[data-note]")) setTimeout(render, 0);
+  });
+
+  document.querySelector(".bar").addEventListener("click", (e) => {
+    const f = e.target.closest("button[data-f]");
+    if (f) {
+      filter = f.dataset.f;
+      document
+        .querySelectorAll(".bar button[data-f]")
+        .forEach((x) => x.setAttribute("aria-pressed", x === f));
+      return render();
+    }
+    const l = e.target.closest("button[data-lane]");
+    if (l) {
+      laneFilter = l.dataset.lane;
+      return render();
+    }
+    if (e.target.closest("button[data-finished]")) {
+      showFinished = !showFinished;
+      if (!showFinished && lanes[laneFilter]?.finished) laneFilter = "all";
+      return render();
+    }
+  });
+
+  // One file picker for every card; "Add a picture" points it at its card.
+  const picker = document.createElement("input");
+  picker.type = "file";
+  picker.accept = "image/*";
+  picker.multiple = true;
+  picker.hidden = true;
+  document.body.append(picker);
+  picker.addEventListener("change", () => {
+    const id = picker.dataset.id;
+    if (id && picker.files?.length) addPictures(id, [...picker.files]);
+  });
+
+  render();
+
+  (async () => {
+    db = (await window.claude?.use?.("db")) || null;
+    if (!db) {
+      els.list.innerHTML =
+        '<p class="msg">This view cannot load the clips. Open the page from its link while signed in to claude.ai.</p>';
+      return;
+    }
+    // Marks are kept as they are stored; lanes and cards also carry their id.
+    const watch = (name, into, withId) =>
+      db.collection(name).onSnapshot(
+        (snap) => {
+          for (const k of Object.keys(into)) delete into[k];
+          for (const d of snap.docs)
+            into[d.id] = withId ? { ...d.data(), id: d.id } : { ...d.data() };
+          if (name === "cards") loaded = true;
+          render();
+        },
+        () => {
+          if (name === "cards")
+            els.list.innerHTML =
+              '<p class="msg">The clips could not be loaded. Reload the page to try again.</p>';
+        },
+      );
+    watch("lanes", lanes, true);
+    watch("verdicts", marks, false);
+    watch("cards", cards, true);
+    // Only a viewer who can edit the page can upload (the owner); others see the pictures only.
+    try {
+      assets = (await window.claude.use("assets")) || null;
+    } catch {
+      assets = null;
+    }
+    if (assets) render();
+  })();
+</script>
