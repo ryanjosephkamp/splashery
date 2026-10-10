@@ -11,7 +11,8 @@ const tick = (page, secs) =>
   page.evaluate(
     (n) => {
       const { player } = window.__splashery;
-      for (let i = 0; i < n; i++) player.update(1 / 60);
+      const step = player.tickFixed || player.update.bind(player);
+      for (let i = 0; i < n; i++) step(1 / 60);
     },
     Math.round(secs * 60),
   );
@@ -36,7 +37,14 @@ test("crossbow: a tap lets the string go and the bolt fly; drawn back, it clicks
   });
   await page.waitForTimeout(800);
   await page.click("#hands-toggle");
-  await page.evaluate(() => window.__splashery.player.handsOn.ensure());
+  // The clock stops: only tick() steps it, so a loaded machine sees the
+  // same frames.
+  await page.evaluate(() => {
+    const { player } = window.__splashery;
+    player.handsOn.ensure();
+    player.tickFixed ||= player.update.bind(player);
+    player.update = () => {};
+  });
   await tick(page, 0.1);
   let s = await state(page);
   expect(s.latched).toBe(true);
@@ -73,16 +81,24 @@ test("crossbow: a tap lets the string go and the bolt fly; drawn back, it clicks
     };
     return [at(now), at(mid)];
   });
+  // (A real press; the moves go straight to Hands-on, two clock steps each.)
   await page.mouse.move(...px[0]);
   await page.mouse.down();
-  for (let i = 1; i <= 25; i++) {
-    const f = Math.min(1, (i / 20) * 1.1);
-    await page.mouse.move(
-      px[0][0] + (px[1][0] - px[0][0]) * f,
-      px[0][1] + (px[1][1] - px[0][1]) * f,
-    );
-    await tick(page, 1 / 30);
-  }
+  await page.waitForFunction(() => {
+    const ho = window.__splashery.player.handsOn;
+    return !!(ho.press || ho.hold);
+  });
+  await page.evaluate((px) => {
+    const { player } = window.__splashery;
+    const r = player.stage.canvas.getBoundingClientRect();
+    for (let i = 1; i <= 25; i++) {
+      const f = Math.min(1, (i / 20) * 1.1);
+      player.handsOn.moveTo(px[0][0] + (px[1][0] - px[0][0]) * f - r.left, px[0][1] + (px[1][1] - px[0][1]) * f - r.top); // prettier-ignore
+      player.tickFixed(1 / 60);
+      player.tickFixed(1 / 60);
+    }
+    player.handsOn.release();
+  }, px);
   await page.mouse.up();
   await tick(page, 0.6);
   s = await state(page);
