@@ -857,11 +857,15 @@
             <li>
               <code>verdicts/&lt;card id&gt;</code>: the owner's marks,
               <code
-                >{ verdict: &quot;good&quot; | &quot;fix&quot; | &quot;&quot;, note, at, sharper
-                }</code
+                >{ verdict: &quot;good&quot; | &quot;fix&quot; | &quot;&quot;, note, at, sharper,
+                images }</code
               >
               (<code>sharper: true</code> marks a &quot;Just sharper&quot; fix on page 2, below).
-              Only the owner writes these.
+              Only the owner writes these. On page 2, <code>images</code> (since October 9, 2026)
+              lists the asset ids of screenshots the owner attached to the note, shrunk to JPEG at
+              most 2000 pixels long; a lane reads each one with the Artifact tool's
+              <code>read</code> (<code>url</code> the page, <code>path</code> the id) and looks at
+              it before fixing the card.
             </li>
           </ul>
           <p>
