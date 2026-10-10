@@ -182,6 +182,9 @@ class App {
     // loading overlay: the toy stays on screen and its tap sound plays at once (lane Fix6).
     player.rebuild = (options) => this.setToyOptions(options, { quiet: Infinity });
     // Lane Physics: a toy or piece tossed in Hands-on lands with a sound.
+    // Lane Hands-on H3: a toy that stops (or starts) being able to play
+    // Hands-on, a converter with a file open, shows or hides ✋ at once.
+    player.on("hands-available", () => this.showHands());
     player.on("frame", () => {
       const hits = player.handsOn.takeSounds();
       if (hits.length) this.handsSounds(hits);

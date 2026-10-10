@@ -2,8 +2,19 @@
 // snowman that melts, fireworks, a decorated tree, a patterned egg, a paper
 // lantern, a diya and a menorah.
 
-import { mix, shade, smoothstep, clamp, spline, quatAxisAngle, quatMul, vec } from "../kit.js";
+import {
+  mix,
+  shade,
+  smoothstep,
+  clamp,
+  spline,
+  quatAxisAngle,
+  quatMul,
+  quatRotate,
+  vec,
+} from "../kit.js";
 import { evenCylinder, evenRoundBox, evenTorus } from "./even.js";
+import { surfacePoints } from "../physics/world.js"; // lane Hands-on H3
 
 const TAU = Math.PI * 2;
 const LIGHT = vec.unit([0.3, 0.8, 0.55]);
@@ -115,10 +126,32 @@ function hashInt(n) {
 // The snowman stands on the ground at SNOW.ground; its melt and rebuild
 // take SNOW.secs.
 const SNOW = { ground: -0.97, secs: 6.2 };
+// Lane Hands-on H3: the snowman's balls by hand. Each body is a squat
+// cylinder inside its ball (flat where the balls press together, as packed
+// snowballs do), so one set back on another stays stacked; their half
+// heights add up to the gaps between the balls' middles (0.72 and 0.55).
+// Each ball carries its own decorations (tokens: the build's order).
+const SNOW_HAND = [
+  { solid: { type: "cylinder", r: 0.42, h: 0.36 } },
+  { solid: { type: "cylinder", r: 0.31, h: 0.36 }, ride: [7, 8, 9, 11, 12, 13] }, // buttons, arms, scarf
+  { solid: { type: "cylinder", r: 0.22, h: 0.19 }, ride: [0, 1, 2, 3, 4, 5, 6, 10, 14] }, // eyes, mouth, nose, hat
+];
 // Seconds since a pulse fired, as 0..1 (1 at rest).
 const progress = (v) => (v > 0 ? 1 - v : 1);
 
 const DIYAS = 8;
+
+// Lane Hands-on H3: the decorated tree's baubles on their hooks, each a
+// token swinging about its hook. `amp` is how hard they swing now (it
+// follows the shake and dies away), `t` drive()'s last time.
+const TREE_HAND = { amp: 0, t: null };
+// The jack-o'-lantern's lid as a loose piece, and the pumpkin under it.
+const JACK_LID = { type: "ellipsoid", r: [0.5, 0.13, 0.5] };
+const JACK_BODY = { type: "ellipsoid", r: [1, 0.72, 1] };
+// The patterned egg spun by hand: its turn `a` (from Hands-on), its spin
+// rate `w` and the wobble's lean and heading, stepped by drive().
+const EGG_HAND = { a: null, a0: null, w: 0, lean: 0, head: 0, t: null, slot: 0, again: false };
+const EGG_FOOT = [0, -0.75, 0];
 
 // Fireworks: the three launch tubes (x, z, colour), the burst each one
 // makes (centre, radius and colours) and the shell types.
@@ -152,6 +185,21 @@ export const RECIPES = {
     alive: true,
     controls: [{ key: "lid", label: "Lid", type: "toggle", default: 0, ease: 0.9 }],
     action: { key: "lid", label: "Lift the lid" },
+    // Hands-on (lane Hands-on H3): lift the lid off by its stem and set it
+    // down anywhere; brought back over the hole (or pointed at it), it drops
+    // into place with a soft knock. The pumpkin stays put.
+    hands: {
+      floor: -0.78,
+      pieces: () => [
+        { part: "lid", pos: [0, 0.7, 0], pivot: [0, Math.sin(0.95) * 0.78 * 0.95, -Math.cos(0.95) * 0.95], solid: JACK_LID, points: surfacePoints(JACK_LID, 1), pick: [0.5, 0.34, 0.5], mass: 0.3, friction: 0.8, restitution: 0.15 }, // prettier-ignore
+        // The pumpkin: ground for the lid, never picked up.
+        { pos: [0, -0.06, 0], solid: JACK_BODY, pick: [1e-3, 1e-3, 1e-3] },
+      ],
+      joints: [
+        { type: "socket", part: "lid", snap: 0.3, sound: () => ({ voice: "hollow", f: 110, decay: 0.25, vol: 0.55 }) }, // prettier-ignore
+      ],
+      sound: (hit, vol) => ({ voice: "hollow", f: 90, decay: 0.2, vol: vol * 0.7 }),
+    },
     drive(t, c, out) {
       out.parts.lid = { angle: -1.1 * easeInOut(c.lid), offset: [0, 0.12 * easeInOut(c.lid), 0] };
       out.amount = 0.9;
@@ -319,6 +367,22 @@ export const RECIPES = {
       { key: "thaw", label: "Thaw", type: "pulse", ease: SNOW.secs },
     ],
     action: { key: "thaw", label: "Melt and rebuild" },
+    // Hands-on (lane Hands-on H3): lift the head off, or the middle ball,
+    // set them down anywhere and stack them back up. Each ball takes its own
+    // decorations with it (the head its face and hat, the middle its
+    // buttons, arms and scarf); the bottom ball stays put. ↺ rebuilds it.
+    hands: {
+      floor: SNOW.ground,
+      area: 1.5,
+      pieces: (d) =>
+        (d?.balls || []).map((b, i) => {
+          const H = SNOW_HAND[i];
+          const pos = [0, b.y, 0];
+          if (i === 0) return { pos, solid: H.solid, fixed: true, pick: [1e-3, 1e-3, 1e-3] };
+          return { part: `ball${i}`, pos, pivot: pos, solid: H.solid, points: surfacePoints(H.solid, 1), pick: [b.r, b.r, b.r], mass: i === 1 ? 1 : 0.5, friction: 0.9, restitution: 0.05, free: true, ride: H.ride }; // prettier-ignore
+        }),
+      sound: (hit, vol) => ({ voice: "thud", f: 140, decay: 0.12, vol: vol * 0.6 }),
+    },
     drive(t, c, out, info) {
       // It melts as solid pieces, not a squash: the three snowballs shrink
       // (the head fastest), drips fall, and the hat, nose, coals, arms and
@@ -859,7 +923,25 @@ export const RECIPES = {
     alive: true,
     controls: [{ key: "lights", label: "Lights", type: "toggle", default: 0, ease: 1.8 }],
     action: { key: "lights", label: "Lights on or off" },
-    drive(t, c, out) {
+    // Hands-on (lane Hands-on H3): pick the tree up and shake it, and the
+    // baubles swing on their hooks, each at its own pace, harder the harder
+    // the shake, then settle. (The shake doesn't switch the lights.)
+    hands: { shake: { fire: false } },
+    drive(t, c, out, info) {
+      const d = info?.data;
+      const h = TREE_HAND;
+      const dt = h.t === null ? 0 : clamp(t - h.t, 0, 0.1);
+      h.t = t;
+      h.amp = Math.max(h.amp * Math.exp(-dt / 1.1), 0.75 * (info?.hands?.shake ?? 0));
+      if (h.amp < 0.003) h.amp = 0;
+      if (d?.baubles && (h.amp > 0 || h.swung)) {
+        h.swung = h.amp > 0;
+        out.tokens = d.baubles.map((b) => ({
+          base: b.hook,
+          offset: [0, 0, 0],
+          quat: quatAxisAngle(b.axis, h.amp * Math.sin(b.w * t + b.phase)),
+        }));
+      }
       // The lights switch on in a sweep up the tree and stay on, playing
       // three patterns in turn: a chase, a slow ripple and all steady. The
       // star glows while they are on.
@@ -972,7 +1054,11 @@ export const RECIPES = {
         ),
         { weight: 2.2, pattern: false, kind: "glint", params: [0.5, 0], color: (c) => gold(c) },
       );
-      // Baubles.
+      // Baubles, each a token that swings on its hook in Hands-on (lane
+      // Hands-on H3): where it hangs from, the level line it swings about and
+      // its pace (a short hook swings fast).
+      const baubles = [];
+      k.data = { baubles };
       const bauble = ["#d8262e", "#f2c230", "#2f6fd8", "#c8ccd4", "#b83ad8"];
       for (let i = 0; i < 26; i++) {
         const y = -0.5 + (i / 26) * 1.15 + (k.rand() - 0.5) * 0.06;
@@ -981,10 +1067,20 @@ export const RECIPES = {
         if (r < 0.1) continue;
         const col = bauble[i % bauble.length];
         const s = 0.045 + 0.02 * k.rand();
+        const pos = [Math.sin(phi) * r, y - s * 0.6, Math.cos(phi) * r];
+        const a = k.rand() * TAU;
+        baubles.push({
+          hook: [pos[0], pos[1] + s * 1.6, pos[2]],
+          axis: [Math.cos(a), 0, Math.sin(a)],
+          w: Math.sqrt(9.8 / (s * 1.6 + 0.05)) * 0.55,
+          phase: k.rand() * TAU,
+        });
         k.add(k.sphere(s), {
-          pos: [Math.sin(phi) * r, y - s * 0.6, Math.cos(phi) * r],
+          pos,
           weight: 3,
           pattern: false,
+          kind: "token",
+          params: [baubles.length - 1, 0],
           color: (c) => lit(c, col, 0.45, 0.9),
         });
       }
@@ -1133,7 +1229,54 @@ export const RECIPES = {
     ],
     controls: [{ key: "spin", label: "Spin", type: "pulse", ease: 2.6 }],
     action: { key: "spin", label: "Spin" },
+    // Hands-on (lane Hands-on H3): flick it sideways and it spins on its end,
+    // slowing, and as it slows it wobbles (its top leans and circles) until
+    // it stops upright.
+    hands: {
+      joints: [
+        {
+          type: "dial",
+          part: "egg",
+          pivot: [0, 0, 0],
+          axis: [0, 1, 0],
+          drag: 0.45,
+          pos: [0, 0.1, 0],
+          pick: [0.62, 0.86, 0.62],
+          also: (a, parts) => {
+            EGG_HAND.a = a;
+            const lean = EGG_HAND.lean;
+            const ax = [Math.cos(EGG_HAND.head), 0, Math.sin(EGG_HAND.head)];
+            const q = quatMul(quatAxisAngle(ax, lean), quatAxisAngle([0, 1, 0], a));
+            // Turned about its foot, which stays on the table.
+            const r = vec.sub([0, 0, 0], EGG_FOOT);
+            const moved = vec.add(EGG_FOOT, quatRotate(q, r));
+            parts.egg = { quat: q, offset: moved };
+          },
+        },
+      ],
+    },
     drive(t, c, out) {
+      // By hand: the spin rate from the turn, and the wobble it leaves.
+      const e = EGG_HAND;
+      const dt = e.t === null ? 0 : clamp(t - e.t, 0, 0.1);
+      e.t = t;
+      if (e.a !== null && dt > 0) {
+        const w = e.a0 === null ? 0 : (e.a - e.a0) / dt;
+        e.w += (w - e.w) * Math.min(1, dt * 10);
+        e.a0 = e.a;
+        const s = Math.abs(e.w);
+        const want = s > 0.4 ? 0.13 * clamp(1 - s / 14, 0, 1) : 0.13 * (s / 0.4) ** 2;
+        e.lean += (want - e.lean) * Math.min(1, dt * 3);
+        e.head += dt * (2.5 + 0.4 * s) * Math.sign(e.w || 1);
+        // Splats sort in the pose they were built in (upright), so a leaning
+        // egg is sorted again as it leans and circles, and on the frame after.
+        const slot = e.lean > 0.004 ? Math.round(e.lean / 0.02) * 1000 + Math.round(e.head / 0.35) : 0; // prettier-ignore
+        if (slot !== e.slot || e.again) {
+          e.again = slot !== e.slot;
+          e.slot = slot;
+          out.resortPose = true;
+        }
+      }
       const u = 1 - c.spin;
       const turns = c.spin > 0 ? 2 * (1 - (1 - u) ** 3) : 0;
       out.parts.egg = { angle: turns * TAU };
@@ -1257,6 +1400,26 @@ export const RECIPES = {
     // A tap never pauses it (lane Fix7): another tap gives it another push.
     controls: [{ key: "swing", label: "Swing", type: "pulse", ease: 4, pausable: false }],
     action: { key: "swing", label: "Swing" },
+    // Hands-on (lane Hands-on H3): push the lantern and it swings on its
+    // string, a slow pendulum that dies away and settles hanging straight.
+    hands: {
+      joints: [
+        {
+          type: "hinge",
+          part: "lantern",
+          pivot: [0, 1.02, 0],
+          axis: [0, 0, 1],
+          min: -1.1,
+          max: 1.1,
+          damping: 0.35,
+          bounce: 0.3,
+          com: [0, 0.05, 0],
+          pos: [0, 0.05, 0],
+          pick: [0.92, 0.72, 0.92],
+          sound: () => null,
+        },
+      ],
+    },
     drive(t, c, out) {
       // The swing's size eases toward the push, so a tap (the first or one
       // mid-swing) never makes the lantern jump.

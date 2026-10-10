@@ -421,6 +421,9 @@ export const RECIPES = {
   screen: {
     // A screen keeps still and faces you (walk the view round it by hand).
     turntable: false,
+    // Hands-on Level 1 (lane Hands-on H3): picked up, tossed and set down whole, except
+    // while it shows your screen live.
+    handsLevel1: () => !live.on("screen"),
     tiltLock: true, // a drag only spins it left and right (lane Viewer)
     alive: true,
     // Its own splats are the set (sharp at every tier: lane Screens r2);
