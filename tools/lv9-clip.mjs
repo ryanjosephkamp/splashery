@@ -9,7 +9,7 @@
 // time, so --tone there is best one long note. No tap on the cell.
 //
 //   python3 -m http.server 4173 --bind 127.0.0.1 &
-//   SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium node tools/lv9-clip.mjs <out-dir> --tone=415.3:6,880:6 [--mic] [--w=390] [--h=844] [--dpr=2] [--secs=12] [--fps=12] [--pitch=0.2] [--sweep=1] [--opt=key=value] [--name=x] chladni-cell
+//   SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium node tools/lv9-clip.mjs <out-dir> (--tone=415.3:6,880:6 [--mic] | --tune=ode) [--w=390] [--h=844] [--dpr=2] [--secs=12] [--fps=12] [--pitch=0.2] [--sweep=1] [--opt=key=value] [--name=x] chladni-cell
 
 import { chromium } from "@playwright/test";
 import fs from "node:fs";
@@ -41,7 +41,11 @@ const tone = opt("tone", "")
   .split(",")
   .filter(Boolean)
   .map((p) => p.split(":").map(Number));
-if (!tone.length) throw new Error("Give --tone=hz:secs,...");
+// Part 2: --tune=<id> plays one of the toy's built-in tunes instead (its
+// button in the Toy tab).
+const tuneId = opt("tune", "");
+if (!tone.length && !tuneId) throw new Error("Give --tone=hz:secs,... or --tune=id");
+if (!tone.length) tone.push([440, 1]);
 
 // The melody as a 16-bit mono WAV (tests/lv9.spec.mjs's toneWav).
 const RATE = 48000;
@@ -93,6 +97,14 @@ const page = await browser.newPage({ viewport: { width: 1000, height: 700 }, dev
 page.on("pageerror", (e) => console.error("page error:", e.message));
 await page.goto(`${base}?labs=1&renderer=webgl2&profile=mid&adapt=off`);
 await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
+// Polls an async check in the page (page.waitForFunction passes one at once).
+async function until(fn, timeout = 180_000) {
+  const end = Date.now() + timeout;
+  while (!(await page.evaluate(fn))) {
+    if (Date.now() > end) throw new Error(`Timed out waiting for ${fn}`);
+    await page.waitForTimeout(150);
+  }
+}
 for (const spec of ids) {
   const [id, own] = spec.split(":");
   const secs = own ? Number(own) : secsAll;
@@ -107,13 +119,28 @@ for (const spec of ids) {
     },
     { id, toyOpt },
   );
-  await page.waitForFunction(async () => document.getElementById("progress").hidden && (await import("/src/packs/chladni-3d.js")).cellState().n > 0, null, { timeout: 180_000 }); // prettier-ignore
+  await until(async () => document.getElementById("progress").hidden && (await import("/src/packs/chladni-3d.js")).cellState().n > 0); // prettier-ignore
   if (mic) {
     await page.evaluate(() => document.getElementById("live-mic").click());
   } else {
-    await page.setInputFiles("#toy-input-file", wav);
-    await page.waitForFunction(async () => { const a = (await import("/src/packs/chladni-3d.js")).cellAudioState(); return a.name && a.measured >= 1; }, null, { timeout: 180_000 }); // prettier-ignore
-    await page.waitForFunction(async () => document.getElementById("progress").hidden, null, { timeout: 180_000 }); // prettier-ignore
+    if (tuneId)
+      await page.evaluate((id) => document.getElementById(`cell-tune-${id}`).click(), tuneId); // prettier-ignore
+    else await page.setInputFiles("#toy-input-file", wav);
+    // The track is taken over as soon as it opens (silent, its clock held
+    // before the clip), so the beads stay as built until the clip starts.
+    await page.evaluate(async () => {
+      const box = await import("/src/packs/chladni-3d.js");
+      window.__clipClock = -1e3;
+      for (let k = 0; k < 3000 && !box.cellAudioState().track; k++) await new Promise((r) => setTimeout(r, 5)); // prettier-ignore
+      const track = box.cellAudioState().track;
+      if (!track) return;
+      track.pause();
+      track.time = () => window.__clipClock;
+      Object.defineProperty(track, "playing", { get: () => true });
+      window.__clipTrack = track;
+    });
+    await until(async () => { const a = (await import("/src/packs/chladni-3d.js")).cellAudioState(); return a.name && a.measured >= 1; }); // prettier-ignore
+    await until(() => document.getElementById("progress").hidden);
   }
   const { bytes, strip, heardLog } = await page.evaluate(
     async ({ id, W, H, lowPitch, sweep, secs, fps, before, bg, stripN }) => {
@@ -130,8 +157,9 @@ for (const spec of ids) {
         const track = box.cellAudioState().track;
         if (!track || tracks.has(track)) return;
         tracks.add(track);
+        if (track === window.__clipTrack) return; // (taken over already)
         track.pause();
-        track.time = () => clock;
+        track.time = () => window.__clipClock;
         Object.defineProperty(track, "playing", { get: () => true });
       };
       takeTrack();
@@ -177,6 +205,7 @@ for (const spec of ids) {
       const frame = async () => {
         pending = step;
         clock += step;
+        window.__clipClock = clock;
         takeTrack();
         if (Math.abs(clock * 2 - Math.round(clock * 2)) < step / 2) {
           const a = box.cellAudioState();
@@ -194,9 +223,9 @@ for (const spec of ids) {
         gif.writeFrame(applyPalette(rgba, palette, "rgb565"), W, H, { palette, delay, repeat: 0 }); // prettier-ignore
       };
       // The lead-in frames (silence: the beads scattered as built).
-      clock = -1e3;
+      clock = window.__clipClock = -1e3;
       for (let t = 0; t < before; t += step) await frame();
-      clock = 0;
+      clock = window.__clipClock = 0;
       for (let t = 0; t < secs - 1e-6; t += step) await frame();
       gif.finish();
       stage.setFixedSize(null);

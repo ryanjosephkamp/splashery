@@ -558,6 +558,7 @@ function closeCellAudio() {
   BOX.an?.close();
   BOX.song = null;
   BOX.an = null;
+  CELL.heard = null; // (part 2: what it last heard goes with it)
 }
 
 async function openCellAudio(file, fileName) {
@@ -588,7 +589,8 @@ function cellShown() {
   const an = BOX.an;
   const left =
     an && !an.finished ? ` Listening through it: ${Math.round(an.progress * 100)}%.` : "";
-  return `${s.name} (${Math.round(s.duration)} s).${left}`;
+  const who = s.tune ? `: ${s.tune.credit}` : "";
+  return `${s.name}${who} (${Math.round(s.duration)} s).${left}`;
 }
 
 const kHz = (f) => `${Math.round(f / 1000)} kHz`;
@@ -704,6 +706,147 @@ function rod(list, a, b, { step, size, color, n }) {
   }
 }
 
+// ---- Lane Live r9 part 2: built-in tunes -----------------------------------------------
+// The owner's walkthrough of October 10, 2026: tunes to choose from beside
+// "Open your own audio…". Each is made in the page (a few sine harmonics per
+// note, written into a WAV in memory; no recordings) and opened like your
+// own file, so it plays through the same path: the Song landscape's worker
+// measures it, its strongest pitch rings the cell's modes, and the beads
+// move with it note by note. Notes are [name or [names], beats].
+export const TUNES = [
+  {
+    id: "scale",
+    name: "Rising scale",
+    credit: "a D major scale over two octaves, D4 to A5 (made here)",
+    beat: 0.9,
+    notes: [["D4", 1], ["E4", 1], ["F#4", 1], ["G4", 1], ["A4", 1], ["B4", 1], ["C#5", 1], ["D5", 1], ["E5", 1], ["F#5", 1], ["G5", 1], ["A5", 2.5]], // prettier-ignore
+  },
+  {
+    id: "arpeggio",
+    name: "Broken chord",
+    credit: "an E major chord, one note at a time, up and down (made here)",
+    beat: 0.85,
+    notes: [["E4", 1], ["G#4", 1], ["B4", 1], ["E5", 1], ["G#5", 1.5], ["E5", 1], ["B4", 1], ["G#4", 1], ["E4", 2.5]], // prettier-ignore
+  },
+  {
+    id: "two-voices",
+    name: "Two voices",
+    credit:
+      "two-note chords a fifth apart, the lower voice stepping down (made here); a fifth is heard an octave below its lower note, and that pitch rings the cell: three nodal planes, then two, then one",
+    beat: 0.8,
+    notes: [[["B4", "F#5"], 4], [["G#4", "D#5"], 4], [["D4", "A4"], 5]], // prettier-ignore
+  },
+  {
+    id: "ode",
+    name: "Ode to Joy",
+    credit: "Ludwig van Beethoven, from the Ninth Symphony (1824); public domain",
+    beat: 0.55,
+    notes: [["C#5", 1], ["C#5", 1], ["D5", 1], ["E5", 1], ["E5", 1], ["D5", 1], ["C#5", 1], ["B4", 1], ["A4", 1], ["A4", 1], ["B4", 1], ["C#5", 1], ["C#5", 1.5], ["B4", 0.5], ["B4", 3]], // prettier-ignore
+  },
+  {
+    id: "twinkle",
+    name: "Twinkle, Twinkle, Little Star",
+    credit: "traditional: the French tune “Ah! vous dirai-je, maman” (1761); public domain",
+    beat: 0.6,
+    notes: [["A4", 1], ["A4", 1], ["E5", 1], ["E5", 1], ["F#5", 1], ["F#5", 1], ["E5", 2], ["D5", 1], ["D5", 1], ["C#5", 1], ["C#5", 1], ["B4", 1], ["B4", 1], ["A4", 3]], // prettier-ignore
+  },
+];
+
+const NOTE_STEPS = { C: -9, D: -7, E: -5, F: -4, G: -2, A: 0, B: 2 };
+// A note's frequency (equal temperament, A4 = 440 Hz): "C#5", "Bb3".
+export function noteHz(name) {
+  const m = /^([A-G])([#b]?)(-?\d)$/.exec(name);
+  if (!m) throw new Error(`Not a note: ${name}`);
+  const step = NOTE_STEPS[m[1]] + (m[2] === "#" ? 1 : m[2] === "b" ? -1 : 0) + 12 * (Number(m[3]) - 4); // prettier-ignore
+  return 440 * 2 ** (step / 12);
+}
+
+// A tune's sound: mono samples at `rate`. Each note a soft organ-like tone
+// (the fundamental and two quieter harmonics, a gentle vibrato), rising in
+// 15 ms and fading over the note, with a short gap so repeated notes part.
+export function tuneSamples(tune, rate = 44100) {
+  const total = tune.notes.reduce((a, [, b]) => a + b * tune.beat, 0) + 0.3;
+  const out = new Float32Array(Math.round(total * rate));
+  let at = 0;
+  for (const [n, beats] of tune.notes) {
+    const hzs = (Array.isArray(n) ? n : [n]).map(noteHz);
+    const d = beats * tune.beat;
+    const len = Math.round(d * rate);
+    const sound = Math.max(0.05, d - 0.04);
+    const ph = hzs.map(() => 0);
+    const gain = 0.32 / Math.sqrt(hzs.length);
+    for (let i = 0; i < len; i++) {
+      const t = i / rate;
+      if (t >= sound) break;
+      const env = Math.min(1, t / 0.015, (sound - t) / 0.03) * (0.65 + 0.35 * Math.exp(-t / 0.6));
+      const vib = 2 ** ((6 * Math.sin(2 * Math.PI * 5 * t)) / 1200);
+      let v = 0;
+      for (let k = 0; k < hzs.length; k++) {
+        ph[k] += (2 * Math.PI * hzs[k] * vib) / rate;
+        v += Math.sin(ph[k]) + 0.3 * Math.sin(2 * ph[k]) + 0.1 * Math.sin(3 * ph[k]);
+      }
+      out[at + i] = gain * env * v;
+    }
+    at += len;
+  }
+  return out;
+}
+
+// The samples as a 16-bit mono WAV file's bytes.
+export function wavBytes(samples, rate = 44100) {
+  const n = samples.length;
+  const b = new DataView(new ArrayBuffer(44 + n * 2));
+  const text = (o, s) => [...s].forEach((c, i) => b.setUint8(o + i, c.charCodeAt(0)));
+  text(0, "RIFF");
+  b.setUint32(4, 36 + n * 2, true);
+  text(8, "WAVEfmt ");
+  b.setUint32(16, 16, true);
+  b.setUint16(20, 1, true);
+  b.setUint16(22, 1, true);
+  b.setUint32(24, rate, true);
+  b.setUint32(28, rate * 2, true);
+  b.setUint16(32, 2, true);
+  b.setUint16(34, 16, true);
+  text(36, "data");
+  b.setUint32(40, n * 2, true);
+  for (let i = 0; i < n; i++) b.setInt16(44 + i * 2, Math.round(clamp(samples[i], -1, 1) * 32767), true); // prettier-ignore
+  return new Uint8Array(b.buffer);
+}
+
+// Plays a built-in tune: made into a WAV in memory and opened as your own
+// file would be (nothing is stored or sent).
+export async function playTune(id) {
+  const tune = TUNES.find((t) => t.id === id);
+  if (!tune) throw new Error(`No tune ${id}`);
+  const file = new File([wavBytes(tuneSamples(tune))], `${tune.name}.wav`, { type: "audio/wav" });
+  await openCellAudio(file, file.name);
+  BOX.song.tune = tune;
+  globalThis.window?.__splashery?.app?.ui?.refreshInputShown?.();
+}
+
+// The Toy tab's row of tunes.
+function tuneRow() {
+  const box = document.createElement("div");
+  box.id = "cell-tunes";
+  const label = document.createElement("p");
+  label.className = "note";
+  label.textContent = "Or play a tune (made in the page, no recordings):";
+  const row = document.createElement("div");
+  row.className = "button-row";
+  for (const t of TUNES) {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.id = `cell-tune-${t.id}`;
+    b.textContent = t.name;
+    b.addEventListener("click", () => {
+      playTune(t.id).catch((err) => (label.textContent = err?.message || String(err)));
+    });
+    row.append(b);
+  }
+  box.append(label, row);
+  return box;
+}
+
 export const CHLADNI_CELL = {
   tiltLock: false,
   alive: () => !!CELL.beads?.moving || CELL.amp > 1e-3 || CELL.ringUntil > (CELL.last ?? 0) || liveIn.on("mic") || !!BOX.song?.track?.playing || CELL.amps.size > 0, // prettier-ignore
@@ -745,6 +888,7 @@ export const CHLADNI_CELL = {
     },
     shown: () => cellShown(),
     live: [
+      { render: () => tuneRow() }, // Live r9 part 2
       { render: () => songTransport(cellTransport) },
       { kind: "mic", rebuild: false, status: cellStatus },
     ],
@@ -808,7 +952,7 @@ export const CHLADNI_CELL = {
       out.resortPose = true;
     }
     if (CELL.frames++ % 10 === 0 || !CELL.beads.moving)
-      CELL.p = CELL.beads.settled(CELL.lead && CELL.amps.size ? CELL.lead : mode);
+      CELL.p = CELL.beads.settled(CELL.lead && (CELL.amps.size || heard) ? CELL.lead : mode); // (part 2: and while paused)
   },
   build(k, o) {
     const mode = cellMode(o.mode);

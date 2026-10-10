@@ -147,8 +147,14 @@ const MELODY = [
   [0, 4],
 ];
 
-const cellReady = (page) =>
-  page.waitForFunction(async (m) => window.__splashery.player.scene.toy.id === "chladni-cell" && document.getElementById("progress").hidden && (await import(m)).cellState().n > 0, BOX, { timeout: 120_000 }); // prettier-ignore
+// (Part 2: polled here; page.waitForFunction passes an async check at once.)
+async function cellReady(page) {
+  for (let k = 0; k < 800; k++) {
+    if (await page.evaluate(async (m) => window.__splashery.player.scene.toy.id === "chladni-cell" && document.getElementById("progress").hidden && (await import(m)).cellState().n > 0, BOX)) return; // prettier-ignore
+    await page.waitForTimeout(150);
+  }
+  throw new Error("Sound in a box never finished building");
+}
 const audio = (page) => page.evaluate(async (m) => (await import(m)).cellAudioState(), BOX);
 
 async function logFrames(page) {
