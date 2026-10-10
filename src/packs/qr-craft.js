@@ -7,8 +7,8 @@
 //               picture.js, lane QR r4). The toy measures the contrast
 //               and reads the code with jsQR at phone size and smaller, and
 //               offers the closest version that scans when one doesn't.
-//               A tap turns every tile over in a wave: its back is the plain
-//               code.
+//               A tap sends a ripple out from the tap: each tile lifts and
+//               falls with its own picture colors (lane QR r5).
 //   qr-build    QR from real things: dominoes that topple into place, marbles
 //               that roll into their modules, tiles that flip over
 //               (src/qr-craft/pieces.js). A tap plays the build from the
@@ -482,10 +482,10 @@ const PICTURE = {
     { key: "style", label: "Picture style", type: "select", default: "color", choices: PIC_STYLES.map((s) => ({ id: s.id, label: s.label })) }, // prettier-ignore
     { key: "size", label: "Code size", type: "select", default: "more", choices: SIZES_UP.map((s) => ({ id: s.id, label: s.label })) }, // prettier-ignore
   ],
-  controls: [{ key: "turn", label: "Turn the tiles over", type: "pulse", ease: 3.6 }],
+  controls: [{ key: "turn", label: "Send a ripple", type: "pulse", ease: 3.6 }],
   action: {
     key: "turn",
-    label: "Turn the tiles over",
+    label: "Send a ripple",
     at(point) {
       const fit = PIC.kit?.transform;
       // The tap point in code units (the wave starts there).

@@ -23,6 +23,11 @@
 // Regions: "all", "corner" (the lower right, away from the finders),
 // "center", "finder" (the upper left finder) and "edge" (a band along the
 // bottom).
+// Lane QR r5: a damage may also carry `at` ([x, y], code units from the
+// code's center), the place the person tapped. A sticker or a smudge then
+// lands there, a tear starts from the corner or the edge nearest it, and a
+// burn spreads from the corner nearest it (tearFrom, burnFrom). Without
+// `at`, each goes where its region says, as before.
 
 import { hexRGB } from "./splats.js";
 
@@ -92,6 +97,22 @@ const inBox = (b, x, y) => x >= b[0] && x <= b[2] && y >= b[1] && y <= b[3];
 // The corner a tear or a burn starts from: the finder's (upper left) when
 // the region is "finder", else the lower right.
 const cornerOf = (region, size) => (region === "finder" ? [-size / 2, size / 2] : [size / 2, -size / 2]); // prettier-ignore
+const sgn = (v) => (v < 0 ? -1 : 1);
+// Lane QR r5: where a tapped burn starts: the code's corner nearest the tap.
+export const burnFrom = (at, size) => [(sgn(at[0]) * size) / 2, (sgn(at[1]) * size) / 2];
+// Where a tapped tear starts: the corner nearest the tap when the tap is
+// toward a corner, else the middle of the nearest edge at the tap, as
+// { corner: [x, y] } or { edge: [nx, ny] (the edge's outward side), along }.
+export function tearFrom(at, size) {
+  const e = size / 2;
+  const u = Math.min(1, Math.abs(at[0]) / e);
+  const v = Math.min(1, Math.abs(at[1]) / e);
+  if (Math.min(u, v) > 0.45) return { corner: burnFrom(at, size) };
+  if (u >= v) return { edge: [sgn(at[0]), 0], along: Math.max(-e, Math.min(e, at[1])) };
+  return { edge: [0, sgn(at[1])], along: Math.max(-e, Math.min(e, at[0])) };
+}
+// A tap point kept on the code.
+const onCode = (at, size) => at.map((v) => Math.max(-size / 2, Math.min(size / 2, v)));
 
 // Geometry: where a point of the flat code goes under the damages that move
 // the plate (curve, tilt) and the modules (time). p in code units.
@@ -213,8 +234,9 @@ export function applyDamage(splats, damages, { size, width = size + 8 }) {
       case "sticker": {
         // A square label, its side up to 60% of the code, over the region.
         const side = a * 0.6 * size;
-        const cx = (box[0] + box[2]) / 2 + (r() - 0.5) * 0.2 * (box[2] - box[0]);
-        const cy = (box[1] + box[3]) / 2 + (r() - 0.5) * 0.2 * (box[3] - box[1]);
+        let cx = (box[0] + box[2]) / 2 + (r() - 0.5) * 0.2 * (box[2] - box[0]);
+        let cy = (box[1] + box[3]) / 2 + (r() - 0.5) * 0.2 * (box[3] - box[1]);
+        if (d.at) [cx, cy] = onCode(d.at, size); // where the person tapped
         const per = 2;
         const nx = Math.max(1, Math.round(side * per));
         const sp = side / nx;
@@ -231,7 +253,10 @@ export function applyDamage(splats, damages, { size, width = size + 8 }) {
       }
       case "tear":
       case "burn": {
-        const [kx, ky] = cornerOf(d.region, size);
+        // Lane QR r5: a tapped tear starts from the corner or the edge
+        // nearest the tap, a tapped burn from the nearest corner.
+        const from = d.at ? (d.kind === "tear" ? tearFrom(d.at, size) : { corner: burnFrom(d.at, size) }) : { corner: cornerOf(d.region, size) }; // prettier-ignore
+        const [kx, ky] = from.corner || [0, 0];
         // The quiet zone's corner goes with it.
         const qx = kx + Math.sign(kx) * 4;
         const qy = ky + Math.sign(ky) * 4;
@@ -239,8 +264,16 @@ export function applyDamage(splats, damages, { size, width = size + 8 }) {
         const keep = [];
         const off = [];
         for (const s of list) {
-          const dx = Math.abs(s.p[0] - qx);
-          const dy = Math.abs(s.p[1] - qy);
+          let dx = Math.abs(s.p[0] - qx);
+          let dy = Math.abs(s.p[1] - qy);
+          if (from.edge) {
+            // From an edge: across it (from the quiet zone's outer edge) and
+            // along it (from the tap), so the same ragged notch as a
+            // corner's, its point inward.
+            const [nx, ny] = from.edge;
+            dx = size / 2 + 4 - (s.p[0] * nx + s.p[1] * ny);
+            dy = Math.abs((ny ? s.p[0] : s.p[1]) - from.along);
+          }
           if (d.kind === "tear") {
             // A ragged diagonal edge.
             const edge =
@@ -266,8 +299,9 @@ export function applyDamage(splats, damages, { size, width = size + 8 }) {
         break;
       }
       case "smudge": {
-        const cx = (box[0] + box[2]) / 2 + (r() - 0.5) * 0.3 * (box[2] - box[0]);
-        const cy = (box[1] + box[3]) / 2 + (r() - 0.5) * 0.3 * (box[3] - box[1]);
+        let cx = (box[0] + box[2]) / 2 + (r() - 0.5) * 0.3 * (box[2] - box[0]);
+        let cy = (box[1] + box[3]) / 2 + (r() - 0.5) * 0.3 * (box[3] - box[1]);
+        if (d.at) [cx, cy] = onCode(d.at, size); // where the person tapped
         const rx = a * 0.42 * size;
         const ry = a * 0.24 * size;
         const ang = r() * Math.PI;

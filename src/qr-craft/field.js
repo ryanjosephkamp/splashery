@@ -8,9 +8,10 @@
 //        4 a marble (extra: its turn)            5 a flip tile (extra: its turn)
 //
 // Picture QR (pictureModifier): uSpMorph x the tap's progress (0..1), zw the
-// tap point (code units). Each tile turns over once about its own vertical
-// axis, in a wave out from the tap: its back is the plain code (dark or
-// light), then it comes round to the picture again.
+// tap point (code units). Each tile lifts and falls in a ripple out from the
+// tap, tipping toward the tap as it rises and away as it falls, and keeps its
+// own picture colors all the way (lane QR r5: it used to turn over and show
+// the plain code, which turned the picture black inside the wave).
 //
 // Build a code (buildModifier): uSpMorph x the build's progress (0: the
 // pieces at their start, 1: the finished code), y the piece count's turns.
@@ -113,18 +114,19 @@ export function pictureModifier(o, fit) {
 void modifySplatCenter(inout vec3 center) {
   vec4 an = loadSplatAnim();
   if (an.z < 0.5) return;
-  float kind = qcMod(an.w, 16.0);
   vec3 piv = qcPivot(an.z - 1.0);
   vec3 u = center / QS + QC;
   float far = length(piv.xy - uSpMorph.zw) / (QN * 1.42);
   float s = qcInOut((uSpMorph.x - 0.6 * far) / 0.4);
   if (s <= 0.0 || s >= 1.0) return;
-  float th = 6.2831853 * s;
-  vec4 q = qcAxis(vec3(0.0, 1.0, 0.0), th);
-  u = piv + qcRot(q, u - piv) + vec3(0.0, 0.0, 0.7 * sin(3.1415927 * s));
-  float c = cos(th);
-  if (c < 0.0) qcBack = kind > 1.5 ? 1.0 : 0.0;
-  qcShade = 0.82 + 0.18 * abs(c);
+  // Lane QR r5: the tile lifts and falls with its own picture colors,
+  // tipping toward the tap as it rises and away as it falls, like a ripple.
+  vec2 dir = piv.xy - uSpMorph.zw;
+  dir = length(dir) > 1e-3 ? normalize(dir) : vec2(1.0, 0.0);
+  float tip = 1.4 * cos(3.1415927 * s) * sin(3.1415927 * s);
+  vec4 q = qcAxis(vec3(-dir.y, dir.x, 0.0), -tip);
+  u = piv + qcRot(q, u - piv) + vec3(0.0, 0.0, 1.2 * sin(3.1415927 * s));
+  qcShade = 1.0 + 0.3 * tip;
   qcQ = q;
   center = (u - QC) * QS;
 }
@@ -133,18 +135,17 @@ void modifySplatCenter(inout vec3 center) {
 fn modifySplatCenter(center: ptr<function, vec3f>) {
   let an = loadSplatAnim();
   if (an.z < 0.5) { return; }
-  let kind = qcMod(an.w, 16.0);
   let piv = qcPivot(an.z - 1.0);
   var u = *center / QS + QC;
   let far = length(piv.xy - uniform.uSpMorph.zw) / (QN * 1.42);
   let s = qcInOut((uniform.uSpMorph.x - 0.6 * far) / 0.4);
   if (s <= 0.0 || s >= 1.0) { return; }
-  let th = 6.2831853 * s;
-  let q = qcAxis(vec3f(0.0, 1.0, 0.0), th);
-  u = piv + qcRot(q, u - piv) + vec3f(0.0, 0.0, 0.7 * sin(3.1415927 * s));
-  let c = cos(th);
-  if (c < 0.0) { qcBack = select(0.0, 1.0, kind > 1.5); }
-  qcShade = 0.82 + 0.18 * abs(c);
+  var dir = piv.xy - uniform.uSpMorph.zw;
+  dir = select(vec2f(1.0, 0.0), normalize(dir), length(dir) > 1e-3);
+  let tip = 1.4 * cos(3.1415927 * s) * sin(3.1415927 * s);
+  let q = qcAxis(vec3f(-dir.y, dir.x, 0.0), -tip);
+  u = piv + qcRot(q, u - piv) + vec3f(0.0, 0.0, 1.2 * sin(3.1415927 * s));
+  qcShade = 1.0 + 0.3 * tip;
   qcQ = q;
   *center = (u - QC) * QS;
 }

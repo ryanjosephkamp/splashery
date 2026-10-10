@@ -5235,6 +5235,82 @@
           ]
         }
       ]
+    },
+    "qr-anatomy": {
+      "status": "ready",
+      "said": "(The walkthrough of October 10, 2026, triage QR r5) How a QR code works: the wind is too loud; make it quieter.",
+      "note": "The wind under the tap, quieter.",
+      "plan": "Now in the site (lane QR r5): the same light wooden knock as a part lifts, with the soft breath under it at about a third of its old level (0.07 to 0.025).",
+      "candidates": [
+        {
+          "id": "qr5-anatomy",
+          "label": "Tap: knock, quieter wind (new)",
+          "sound": [
+            {
+              "voice": "wood",
+              "f": 820,
+              "decay": 0.18,
+              "vol": 0.16
+            },
+            {
+              "voice": "breath",
+              "f": 1100,
+              "to": 0.8,
+              "decay": 0.5,
+              "vol": 0.025
+            }
+          ]
+        }
+      ]
+    },
+    "qr-three": {
+      "status": "ready",
+      "said": "(The walkthrough of October 10, 2026, triage QR r5) Three QR codes in one: the whoosh when the codes separate is too loud; make it quieter.",
+      "note": "The whoosh as the codes come apart, quieter.",
+      "plan": "Now in the site (lane QR r5): the whoosh as the three codes slide apart at a third of its old level (0.12 to 0.04); the soft knock as they come back together stays.",
+      "candidates": [
+        {
+          "id": "qr5-three",
+          "label": "Tap: quieter whoosh, knock back (new)",
+          "sound": [
+            {
+              "voice": "breath",
+              "f": 900,
+              "to": 1.1,
+              "decay": 1.1,
+              "vol": 0.04
+            },
+            {
+              "voice": "wood",
+              "at": 2.6,
+              "f": 660,
+              "decay": 0.15,
+              "vol": 0.12
+            }
+          ]
+        }
+      ]
+    },
+    "barcodes": {
+      "status": "ready",
+      "said": "(The walkthrough of October 10, 2026, triage QR r5) Other barcodes: drop the note that plays at the end.",
+      "note": "No note at the end.",
+      "plan": "Now in the site (lane QR r5): only the soft breath as the scanner's line sweeps; the note of a read at the end is gone.",
+      "candidates": [
+        {
+          "id": "qr5-barcodes",
+          "label": "Tap: the sweep, no note (new)",
+          "sound": [
+            {
+              "voice": "breath",
+              "f": 900,
+              "to": 1.05,
+              "decay": 1.2,
+              "vol": 0.025
+            }
+          ]
+        }
+      ]
     }
   }
 }
