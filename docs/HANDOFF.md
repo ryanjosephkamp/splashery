@@ -6,11 +6,11 @@ work is in [OPERATING.md](OPERATING.md).
 
 ## Now (October 10, 2026, about 23:45 UTC)
 
-The Operator is changing hands on October 10, 2026: `session_012GmKRUMZLir2nb27Bo8Cu2` (Opus 5.5,
-since October 7) hands over to a fresh Opus 5.5 session at the owner's go, by
-`.claude/skills/operator-handover/SKILL.md`. The new Operator puts its own session id here in its
-first Ops PR. This section is current. The sections below it are history. The runbook is
-[OPERATOR.md](OPERATOR.md).
+The Operator is `session_01A4ChKuJQqgoCrWAzQMpD4R` (Opus 5.5), since October 10, 2026, 23:48 UTC. It
+took over from `session_012GmKRUMZLir2nb27Bo8Cu2` (Opus 5.5, October 7 to 10) by
+`.claude/skills/operator-handover/SKILL.md`; its own handover is due by October 12, 2026, or sooner
+at about 400k tokens of context. This section is current. The sections below it are history. The
+runbook is [OPERATOR.md](OPERATOR.md).
 
 **Effort (the owner's call of October 8, 2026):** every worker, lanes and Integrators alike, runs at
 high effort, and so do his Codex tasks. A session's effort is set in the Claude app; a message can't
