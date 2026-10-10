@@ -115,19 +115,26 @@ for (const spec of ids) {
     await page.waitForFunction(async () => { const a = (await import("/src/packs/chladni-3d.js")).cellAudioState(); return a.name && a.measured >= 1; }, null, { timeout: 180_000 }); // prettier-ignore
     await page.waitForFunction(async () => document.getElementById("progress").hidden, null, { timeout: 180_000 }); // prettier-ignore
   }
-  const { bytes, strip } = await page.evaluate(
+  const { bytes, strip, heardLog } = await page.evaluate(
     async ({ id, W, H, lowPitch, sweep, secs, fps, before, bg, stripN }) => {
       const { app, player } = window.__splashery;
       const { GIFEncoder, quantize, applyPalette } = await import("gifenc");
       // The open audio on the clip's clock: silent, and heard frame by frame.
       const box = await import("/src/packs/chladni-3d.js");
-      const track = box.cellAudioState().track;
       let clock = 0;
-      if (track) {
+      const heardLog = [];
+      // (The toy may open its track again after a rebuild: each new one is
+      // taken over too.)
+      const tracks = new Set();
+      const takeTrack = () => {
+        const track = box.cellAudioState().track;
+        if (!track || tracks.has(track)) return;
+        tracks.add(track);
         track.pause();
         track.time = () => clock;
         Object.defineProperty(track, "playing", { get: () => true });
-      }
+      };
+      takeTrack();
       app.setLook({ background: bg });
       player.opts.idleDelay = 1e9;
       player.idle.weight = 0;
@@ -170,6 +177,11 @@ for (const spec of ids) {
       const frame = async () => {
         pending = step;
         clock += step;
+        takeTrack();
+        if (Math.abs(clock * 2 - Math.round(clock * 2)) < step / 2) {
+          const a = box.cellAudioState();
+          heardLog.push(`${clock.toFixed(1)}s t=${player.time.toFixed(2)} steps=${a.steps} pos=${a.pos.toFixed(2)} ${a.heard?.note ?? "-"} ${a.heard?.hz?.toFixed?.(0) ?? ""} lead ${a.lead} ${Object.entries(a.amps).map(([k, v]) => `${k}=${v.toFixed(2)}`).join(" ")}`); // prettier-ignore
+        }
         home();
         await stage.captureFrame();
         pending = 0;
@@ -206,7 +218,8 @@ for (const spec of ids) {
         });
         strip = out.toDataURL("image/png");
       }
-      return { bytes: Array.from(gif.bytes()), strip };
+      heardLog.push(`tracks taken over: ${tracks.size}`);
+      return { bytes: Array.from(gif.bytes()), strip, heardLog };
     },
     {
       id,
@@ -224,6 +237,7 @@ for (const spec of ids) {
   const out = path.join(outDir, `${name || id}.gif`);
   fs.writeFileSync(out, Buffer.from(bytes));
   if (strip) fs.writeFileSync(path.join(outDir, `${name || id}-strip.png`), Buffer.from(strip.split(",")[1], "base64")); // prettier-ignore
+  if (args.includes("--log")) console.log(heardLog.join("\n"));
   console.log(`${id}: ${out} (${(bytes.length / 1024).toFixed(0)} KB)`);
 }
 await browser.close();

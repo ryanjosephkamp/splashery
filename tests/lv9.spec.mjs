@@ -280,3 +280,28 @@ test.describe("Sound in a box, played to", () => {
     }
   });
 });
+
+// ---- Screenshots (lv9-*.png) -------------------------------------------------------------
+
+test.describe("screenshots", () => {
+  test.describe.configure({ timeout: 300_000 });
+  for (const [w, h] of [
+    [390, 844],
+    [1440, 900],
+  ])
+    test(`Sound in a box playing a melody at ${w}×${h}`, async ({ page }) => {
+      await page.setViewportSize({ width: w, height: h });
+      await page.goto(APP);
+      await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
+      await page.evaluate(() => window.__splashery.app.chooseToy("chladni-cell"));
+      await cellReady(page);
+      await page.setInputFiles("#toy-input-file", toneWav(path.join(DIR, `shot-${w}.wav`), [[415.3, 60]])); // prettier-ignore
+      for (let k = 0; k < 240; k++) {
+        const a = await audio(page);
+        if (a.lead === "cube-110" && a.p > 0.6) break;
+        await page.waitForTimeout(250);
+      }
+      expect((await audio(page)).p).toBeGreaterThan(0.6);
+      await page.screenshot({ path: `tests/screenshots/lv9-cell-audio-${w}x${h}.png` });
+    });
+});

@@ -103,6 +103,12 @@ October 10, 2026 (Opus 5.5, high effort): first round built; see "For the Operat
   microphone). Clips: `tools/lv9-clip.mjs` (the real worker's measurements, on the clip's stepped
   clock).
 
+- Cards on Effect review page 2 (lane record `LiveR9`, group "Sound in a box, played to"):
+  `lv9-cell-held`, `lv9-cell-melody`, `lv9-cell-mic` (GIFs at 390×844, real speed), each naming Opus
+  5.5. Waiting for the owner's marks.
+- Screenshots `tests/screenshots/lv9-cell-audio-390x844.png` and `…-1440x900.png` (from the lv9
+  spec). Thumbnails and the contact sheet are unchanged: the toy's resting look is as before.
+
 ## Notes
 
 - Why the narrower resonance width (100 cents, the plate's is 150): the cube's modes at √8 and 3 are
@@ -121,6 +127,13 @@ October 10, 2026 (Opus 5.5, high effort): first round built; see "For the Operat
 - `strongest()` (a frame's voiced pitch or loudest band) is a 15-line copy of studio.js's, not an
   import: studio.js imports chladni-3d.js, and importing back would make a cycle that breaks when
   chladni-3d.js loads first (the Node tests).
+
+- The clip tool takes over the toy's Track on every frame (its clock is the clip's): a first try
+  read the track once, before the toy held it, so the song ran on the wall clock and the clips
+  played two to three times too fast.
+- Physics seen in the clips: on a held note the beads first gather on the nodal surfaces, then drift
+  along them toward where the water's velocity swings most (the Gor'kov potential's second term,
+  −(3/2) f2 |∇φ|²/k²). That's real, and it was there in Live r8 too.
 
 ## Known issues
 
