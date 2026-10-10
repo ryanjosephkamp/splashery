@@ -20,7 +20,14 @@ async function ready(page, id) {
     await page.click("#hands-toggle");
   // (Hands-on builds its world on the first touch: build it now, to read
   // the joints before any drag.)
-  await page.evaluate(() => window.__splashery.player.handsOn.ensure());
+  // The clock stops: only tick() steps it, so a loaded machine sees the
+  // same frames.
+  await page.evaluate(() => {
+    const { player } = window.__splashery;
+    player.handsOn.ensure();
+    player.tickFixed ||= player.update.bind(player);
+    player.update = () => {};
+  });
   await tick(page, 0.1);
 }
 
@@ -29,14 +36,33 @@ const tick = (page, secs) =>
   page.evaluate(
     (n) => {
       const { player } = window.__splashery;
-      for (let i = 0; i < n; i++) player.update(1 / 60);
+      const step = player.tickFixed || player.update.bind(player);
+      for (let i = 0; i < n; i++) step(1 / 60);
     },
     Math.round(secs * 60),
   );
 
-// A finger drag through recipe points (each a place on screen).
+// A finger drag through recipe points (each a place on screen): a real
+// press (the app picks what is under it and hands it to Hands-on), then the
+// moves straight to Hands-on, two clock steps per move (on a loaded machine
+// the browser's own moves come late and in bunches).
 async function drag(page, points, { steps = 20, hold = false, held = false } = {}) {
-  const px = await page.evaluate((pts) => {
+  const px = await screen(page, points);
+  if (!held) {
+    await page.mouse.move(...px[0]);
+    await page.mouse.down();
+    await page.waitForFunction(() => {
+      const ho = window.__splashery.player.handsOn;
+      return !!(ho.press || ho.hold);
+    });
+  }
+  await moves(page, px, steps);
+  if (!hold) await up(page);
+}
+
+// Page points of recipe points.
+const screen = (page, points) =>
+  page.evaluate((pts) => {
     const { player } = window.__splashery;
     const r = player.stage.canvas.getBoundingClientRect();
     return pts.map((p) => {
@@ -44,18 +70,32 @@ async function drag(page, points, { steps = 20, hold = false, held = false } = {
       return [r.left + s[0], r.top + s[1]];
     });
   }, points);
-  if (!held) {
-    await page.mouse.move(...px[0]);
-    await page.mouse.down();
-  }
-  for (let k = 1; k < px.length; k++)
-    for (let i = 1; i <= steps; i++) {
-      const f = i / steps;
-      const [a, b] = [px[k - 1], px[k]];
-      await page.mouse.move(a[0] + (b[0] - a[0]) * f, a[1] + (b[1] - a[1]) * f);
-      await tick(page, 1 / 30);
-    }
-  if (!hold) await page.mouse.up();
+
+// The finger along page points, straight to Hands-on.
+const moves = (page, px, steps) =>
+  page.evaluate(
+    ({ px, steps }) => {
+      const { player } = window.__splashery;
+      const r = player.stage.canvas.getBoundingClientRect();
+      for (let k = 1; k < px.length; k++)
+        for (let i = 1; i <= steps; i++) {
+          const f = i / steps;
+          const [a, b] = [px[k - 1], px[k]];
+          player.handsOn.moveTo(
+            a[0] + (b[0] - a[0]) * f - r.left,
+            a[1] + (b[1] - a[1]) * f - r.top,
+          );
+          player.tickFixed(1 / 60);
+          player.tickFixed(1 / 60);
+        }
+    },
+    { px, steps },
+  );
+
+// Lets go.
+async function up(page) {
+  await page.evaluate(() => window.__splashery.player.handsOn.release());
+  await page.mouse.up();
 }
 
 const joints = (page) => page.evaluate(() => window.__splashery.player.handsOn.joints?.state());
@@ -220,16 +260,13 @@ test("snowman: the head lifts off with its face and hat, and stacks back up", as
   await drag(page, [grip, [grip[0], 1.2, grip[2]], [0, 1.4, 0]], { hold: true });
   // Aimed: the finger points at the middle ball's top (a held piece hovers
   // over whatever is under the finger), as a person lines it up.
-  const [fx, fy] = await page.evaluate(() => {
-    const { player } = window.__splashery;
-    const r = player.stage.canvas.getBoundingClientRect();
-    const s = player.screenPoint([0, 0.66, 0.05]);
-    return [r.left + s[0], r.top + s[1]];
-  });
-  await page.mouse.move(fx, fy, { steps: 8 });
-  await tick(page, 0.6);
-  await tick(page, 0.4);
-  await page.mouse.up();
+  const [from, aim] = await screen(page, [
+    [0, 1.4, 0],
+    [0, 0.66, 0.05],
+  ]);
+  await moves(page, [from, aim], 8);
+  await tick(page, 1);
+  await up(page);
   await tick(page, 2);
   b = await balls();
   expect(b[2][1]).toBeCloseTo(0.85, 2);
