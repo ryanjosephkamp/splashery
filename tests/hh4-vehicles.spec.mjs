@@ -18,21 +18,38 @@ async function open(page, id) {
   }, id);
   await page.waitForTimeout(500);
   await page.click("#hands-toggle");
+  // A still view and only the test's clock (Fix11): the drags below are worked out in screen
+  // points, and the view was still easing in from the shelf (how far depended on the machine's
+  // load), so the same drag left the cow in a different place; the page's own frames (a real dt
+  // each) also stepped the world between the test's steps.
+  await page.evaluate(() => {
+    const { player } = window.__splashery;
+    player.camera.turntable = false;
+    player.camera.setState(player.camera.getState(), { snap: true });
+    player.setPaused(true);
+  });
   await tick(page, 5);
 }
 
+// The page's own frames stay paused (open); the test's steps run the clock.
+const STEP = `(player, n) => { player.paused = false; try { for (let i = 0; i < n; i++) player.update(1 / 60); } finally { player.paused = true; } }`; // prettier-ignore
+
 // Steps the clock by hand (SwiftShader draws slowly).
 const tick = (page, n) =>
-  page.evaluate((n) => {
-    const { player } = window.__splashery;
-    for (let i = 0; i < n; i++) player.update(1 / 60);
-  }, n);
+  page.evaluate(
+    ([n, STEP]) => {
+      const { player } = window.__splashery;
+      eval(STEP)(player, n);
+    },
+    [n, STEP],
+  );
 
 // A finger drag through recipe points, two frames a move.
 const drag = (page, pts, steps = 6) =>
   page.evaluate(
-    ({ pts, steps }) => {
+    ({ pts, steps, STEP }) => {
       const { player } = window.__splashery;
+      const step = eval(STEP);
       const h = player.handsOn;
       const s = pts.map((p) => player.screenPoint(p));
       h.pressAt(player.fromRecipe(pts[0]), s[0][0], s[0][1]);
@@ -40,25 +57,26 @@ const drag = (page, pts, steps = 6) =>
         for (let i = 1; i <= steps; i++) {
           const f = i / steps;
           h.moveTo(s[k - 1][0] + (s[k][0] - s[k - 1][0]) * f, s[k - 1][1] + (s[k][1] - s[k - 1][1]) * f); // prettier-ignore
-          for (let j = 0; j < 2; j++) player.update(1 / 60);
+          step(player, 2);
         }
       h.release();
     },
-    { pts, steps },
+    { pts, steps, STEP },
   );
 
 // A whole toy pressed at its middle and dragged on screen by (dx, dy).
 const shove = (page, dx, dy) =>
   page.evaluate(
-    ({ dx, dy }) => {
+    ({ dx, dy, STEP }) => {
       const { player } = window.__splashery;
+      const step = eval(STEP);
       const h = player.handsOn;
       const c = player.toyInfo.center.slice();
       const s = player.stage.toScreen(c);
       h.pressAt(c, s[0], s[1]);
       for (let k = 1; k <= 30; k++) {
         h.moveTo(s[0] + (dx * k) / 30, s[1] + (dy * k) / 30);
-        for (let j = 0; j < 2; j++) player.update(1 / 60);
+        step(player, 2);
       }
       const b = h.body;
       const R = player.toyInfo.radius;
@@ -66,7 +84,7 @@ const shove = (page, dx, dy) =>
       h.release();
       return { held, R };
     },
-    { dx, dy },
+    { dx, dy, STEP },
   );
 
 const joint = (page, i = 0) =>
@@ -267,7 +285,7 @@ test("flying saucer: off the beam the cow stands on the grass; under it, it floa
       [0.8, -1.6, 0.6],
       [1.35, -1.95, 0.2],
     ],
-    8,
+    16, // (slowly enough that the cow keeps up with the finger: at 8 a move it trailed to 0.92)
   );
   await tick(page, 180);
   const a = await cow();
