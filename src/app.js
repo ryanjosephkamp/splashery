@@ -1729,6 +1729,19 @@ class App {
 
   // Lane PDF lab: Save as PDF (labs). Its dialog and pdf-lib load only when
   // someone opens it (src/pdf-export/).
+  // Lane QR r4 part 2 (labs): the scene's link as a QR code, in a dialog
+  // (src/qr/share.js, loaded when someone opens it).
+  async openShareQR() {
+    if (this.busy) return;
+    try {
+      const { openShareQR } = await import("./qr/share.js");
+      return await openShareQR(this);
+    } catch (err) {
+      console.info(err);
+      this.ui.toast("The QR code couldn't load. Try again in a moment.", 5000);
+    }
+  }
+
   async openPdfExport() {
     if (this.busy) return;
     try {
