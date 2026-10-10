@@ -144,6 +144,32 @@ test("crystal ball: lifted off its stand, it rolls off the stand's base onto the
   expect(p.cap.visible).toBe(0);
 });
 
+test("quartz cluster: a big point snaps off the rock, rests, and clicks back into its place", async ({
+  page,
+}) => {
+  await ready(page, "quartz-cluster");
+  const x = await page.evaluate(() => window.__splashery.player.proc.ctx.kit.data.xtals[0]);
+  const state = () => page.evaluate(() => window.__splashery.player.handsOn.joints.state()[0]);
+  const tip = x.mid.map((v, i) => v + (i === 1 ? x.half[1] * 0.6 : 0));
+  await finger(page, [tip, [tip[0] + 0.3, tip[1] + 0.4, tip[2] + 0.3], [1.3, 0.3, 0.5]], { up: false }); // prettier-ignore
+  await tick(page, 0.3);
+  await letGo(page);
+  await tick(page, 1.5);
+  const off = await state();
+  expect(off.broken).toBe(true);
+  expect(Math.hypot(...off.pos.map((v, i) => v - off.home[i]))).toBeGreaterThan(0.4);
+  // The others stay on the rock.
+  const others = await page.evaluate(() => window.__splashery.player.handsOn.joints.state().slice(1).map((j) => j.broken)); // prettier-ignore
+  expect(others.every((b) => !b)).toBe(true);
+  await finger(page, [off.pos, [0.5, 1.2, 0.3], x.mid.map((v, i) => v + (i === 1 ? 0.05 : 0))], { up: false }); // prettier-ignore
+  await tick(page, 0.6);
+  await letGo(page);
+  await tick(page, 1.5);
+  const back = await state();
+  expect(back.broken).toBe(false);
+  expect(Math.hypot(...back.pos.map((v, i) => v - back.home[i]))).toBeLessThan(0.01);
+});
+
 // The lane's screenshots, the ✋ switch on (phone and desktop).
 test("screenshots: the pearl, hands-on", async ({ page }) => {
   for (const [w, h] of [
