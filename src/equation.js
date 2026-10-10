@@ -335,10 +335,12 @@ function unknownVar(name, allowed) {
 }
 
 // Reads one expression over the allowed variables. Returns
-// { f(values) -> number, used: Set of the names it reads }.
-export function compile(text, allowed = ["x", "a", "b"]) {
+// { f(values) -> number, used: Set of the names it reads }. A caller may
+// allow longer text (lane Kit lab: the splat equation toy's 240 characters);
+// the depth and piece guards stay as they are.
+export function compile(text, allowed = ["x", "a", "b"], { maxLength = MAX_LENGTH } = {}) {
   const src = normalize(text);
-  if (src.length > MAX_LENGTH) throw new EquationError(`it is over ${MAX_LENGTH} characters.`);
+  if (src.length > maxLength) throw new EquationError(`it is over ${maxLength} characters.`);
   const tokens = tokenize(src);
   if (!tokens.length) throw new EquationError(`there is nothing to draw. ${HINT}`);
   return parse(tokens, allowed);

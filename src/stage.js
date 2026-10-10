@@ -3,7 +3,13 @@
 // the engine directly lives here or in paint.js / loaders.js.
 
 import * as pc from "./pc.js";
-import { MODIFIER, MODIFIER_KIT, MODIFIER_KIT_PHOTO, MODIFIER_RIG } from "./effects.js";
+import {
+  MODIFIER,
+  MODIFIER_KIT,
+  MODIFIER_KIT_PHOTO,
+  MODIFIER_KIT_GLOSS,
+  MODIFIER_RIG,
+} from "./effects.js";
 import { photoRender, withPhotoPS } from "./photo-splats.js"; // lane Photo fidelity
 import { kernelChunks, normalizeKernel } from "./kernels.js";
 
@@ -325,8 +331,10 @@ export class Stage {
   // a captured toy with moving parts (a splatPart stream, see src/rig.js).
   // Lab: `modifier` ({ glsl, wgsl }) replaces a kit toy's work-buffer program
   // (a splat field computed on the GPU every frame, src/packs/lab.js).
+  // Lane Kit lab: `gloss` ({ strength, sharpness }, labs only) gives a kit
+  // toy a highlight that moves with the view (MODIFIER_KIT_GLOSS).
   // prettier-ignore
-  setToy({ resource, asset = null, owned = false, transform = null, kit = false, rig = false, modifier = null, photo = false }) {
+  setToy({ resource, asset = null, owned = false, transform = null, kit = false, rig = false, modifier = null, photo = false, gloss = null }) {
     this.clearToy();
     if (!photo) this.setPhoto(false); // lane Photo fidelity: only a photo toy keeps it on
     const entity = new pc.Entity("toy");
@@ -362,14 +370,16 @@ export class Stage {
       }
     }
     const photoOn = photo && kit && !modifier && !!this.photo; // lane Photo fidelity
-    entity.gsplat.setWorkBufferModifier(modifier || (photoOn ? MODIFIER_KIT_PHOTO : kit ? MODIFIER_KIT : rig ? MODIFIER_RIG : MODIFIER)); // prettier-ignore
+    const glossOn = !!gloss && kit && !modifier && !photoOn; // lane Kit lab
+    entity.gsplat.setWorkBufferModifier(modifier || (photoOn ? MODIFIER_KIT_PHOTO : glossOn ? MODIFIER_KIT_GLOSS : kit ? MODIFIER_KIT : rig ? MODIFIER_RIG : MODIFIER)); // prettier-ignore
+    if (glossOn) entity.gsplat.setParameter("uSpGloss", [gloss.strength, gloss.sharpness, 0, 0]);
     entity.gsplat.workBufferUpdate = pc.WORKBUFFER_UPDATE_ALWAYS;
     // The pattern sampler always needs a texture, even with no pattern on
     // (and kit toys' screen sampler too).
     entity.gsplat.setParameter("uSpPattern", this.blankTexture());
     if (kit) entity.gsplat.setParameter("uSpScreen", this.blankTexture());
     this.app.root.addChild(entity);
-    this.toy = { entity, resource, asset, owned, kit, rig, photo: photoOn };
+    this.toy = { entity, resource, asset, owned, kit, rig, photo: photoOn, gloss: glossOn };
     this.requestRender();
     return this.toy;
   }

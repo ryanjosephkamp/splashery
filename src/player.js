@@ -82,6 +82,57 @@ export function saveDetail(detail) {
   }
 }
 
+// Lane Kit lab: the Detail slider (labs only). It sets a kit toy's splat
+// count directly, from 60,000 to 400,000; the tier nearest to it (by its
+// usual count) still decides everything else (the canvas's pixel cap, light
+// scan files on Low, the fluid and picture budgets). Like Detail it lives in
+// this browser only, never in scenes or links, and it is read only while labs
+// is on. Picking Auto, High or Max clears it.
+export const SPLATS_RANGE = Object.freeze({ min: 60000, max: 400000, step: 10000 });
+const SPLATS_KEY = "splashery.splats";
+
+export function readSplats() {
+  try {
+    const v = Number(localStorage.getItem(SPLATS_KEY));
+    return v >= SPLATS_RANGE.min && v <= SPLATS_RANGE.max ? v : null;
+  } catch {
+    return null;
+  }
+}
+
+export function saveSplats(n) {
+  try {
+    if (n == null) localStorage.removeItem(SPLATS_KEY);
+    else localStorage.setItem(SPLATS_KEY, String(n));
+  } catch {
+    // As for Detail: the choice then lasts for this page only.
+  }
+}
+
+// The tier whose usual splat count is nearest to n.
+export function nearestTier(n) {
+  let best = TIERS[0];
+  for (const t of TIERS)
+    if (Math.abs(PROFILES[t].defaultCount - n) < Math.abs(PROFILES[best].defaultCount - n))
+      best = t;
+  return best;
+}
+
+// Lane Kit lab: a kit toy's gloss (labs only): the recipe's `gloss`
+// ({ strength, sharpness }), or ?gloss= for any kit toy: 1 for the usual
+// gloss, a strength (0.6), a strength and a sharpness (0.6,120), or 0 for
+// none. docs/lab/GLOSS.md.
+export const GLOSS_DEFAULT = Object.freeze({ strength: 0.45, sharpness: 40 });
+export function pickGloss(params, recipe = null) {
+  const q = params?.get?.("gloss");
+  const base = { ...GLOSS_DEFAULT, ...recipe };
+  if (q == null || q === "") return recipe ? base : null;
+  if (q === "1") return base;
+  const [a, b] = q.split(",").map(Number);
+  if (!(a > 0)) return null;
+  return { strength: Math.min(2, a), sharpness: b >= 1 && b <= 1000 ? b : base.sharpness };
+}
+
 // ?profile= forces a tier (the old weak and strong still work).
 export function forcedProfile() {
   const v = new URLSearchParams(location.search).get("profile");
@@ -118,13 +169,16 @@ export class Player {
     this.canvas = canvas;
     this.opts = opts;
     this.detail = readDetail();
-    this.profile = opts.profile || detectProfile(this.detail);
+    // Lane Kit lab: the Detail slider's count, or null (labs only).
+    this.splats = labsOn() ? readSplats() : null;
+    const slid = this.splats && !opts.profile && !forcedProfile() ? nearestTier(this.splats) : null;
+    this.profile = opts.profile || slid || detectProfile(this.detail);
     // Only an automatic tier steps down when frames are slow; ?adapt=off
     // keeps both the tier and the resolution fixed (tests and tools).
     this.adaptive = new URLSearchParams(location.search).get("adapt") !== "off";
     // ?rig=show tints each part of a scan rig (for placing its regions).
     this.rigDebug = new URLSearchParams(location.search).get("rig") === "show";
-    this.autoTier = !opts.profile && !forcedProfile() && this.detail === "auto";
+    this.autoTier = !opts.profile && !forcedProfile() && this.detail === "auto" && !this.splats;
     this.reducedMotion = opts.reducedMotion ?? prefersReducedMotion();
     this.scene = createScene();
     this.time = 0;
@@ -195,9 +249,41 @@ export class Player {
   setDetail(detail) {
     this.detail = DETAILS.includes(detail) ? detail : "auto";
     saveDetail(this.detail);
+    // Lane Kit lab: a Detail button clears the slider.
+    const slid = !!this.splats;
+    if (slid) {
+      this.splats = null;
+      saveSplats(null);
+    }
     const forced = !!this.opts.profile || !!forcedProfile();
     this.autoTier = !forced && this.detail === "auto";
-    return forced ? false : this.setProfile(detectProfile(this.detail));
+    return forced ? slid : this.setProfile(detectProfile(this.detail)) || slid;
+  }
+
+  // Lane Kit lab: the Detail slider (labs only). Sets the splat count (null
+  // clears it) and moves to the nearest tier. Returns true when the toy
+  // should be rebuilt.
+  setSplats(n) {
+    const v = n == null ? null : Math.round(Number(n));
+    const next = v >= SPLATS_RANGE.min && v <= SPLATS_RANGE.max ? v : null;
+    if (next === this.splats) return false;
+    this.splats = next;
+    saveSplats(next);
+    const forced = !!this.opts.profile || !!forcedProfile();
+    this.autoTier = !forced && this.detail === "auto" && !next;
+    if (!forced) this.setProfile(next ? nearestTier(next) : detectProfile(this.detail));
+    return true;
+  }
+
+  // A kit toy's splat count: the tier's usual count times the recipe's
+  // density, up to the tier's most. With the Detail slider (lane Kit lab)
+  // the slider's count stands in for the usual count, and the most grows
+  // with it in the same ratio.
+  splatBudget(density = 1) {
+    const prof = PROFILES[this.profile];
+    if (!this.splats) return Math.round(Math.min(prof.maxCount, prof.defaultCount * density));
+    const most = Math.max(prof.maxCount, Math.round((this.splats * prof.maxCount) / prof.defaultCount)); // prettier-ignore
+    return Math.round(Math.min(most, this.splats * density));
   }
 
   setProfile(tier) {
@@ -290,7 +376,7 @@ export class Player {
       const look = preset ? pickLook(preset, toy.options) : null;
       const generator = normalizeGenerator(
         preset
-          ? { ...preset.generator, ...look?.generator, count: PROFILES[this.profile].defaultCount }
+          ? { ...preset.generator, ...look?.generator, count: this.splatBudget() }
           : toy.generator,
         this.profile,
       );
@@ -496,8 +582,7 @@ export class Player {
     if (token !== this.loadToken) return null;
     const recipe = mod.RECIPES?.[def.id];
     if (!recipe) throw new Error(`${def.label} is missing from its pack.`);
-    const prof = PROFILES[this.profile];
-    const count = Math.round(Math.min(prof.maxCount, prof.defaultCount * (recipe.density ?? 1)));
+    const count = this.splatBudget(recipe.density ?? 1);
     const options = resolveOptions(recipe, toy.options);
     // A recipe may read a data file first (the protein toy's structure).
     if (recipe.prepare) {
@@ -539,7 +624,8 @@ export class Player {
     const photo =
       !!recipe.photo && !modifier && (recipe.photo.on ? !!recipe.photo.on(options) : true);
     if (photo) this.stage.setPhoto(true);
-    this.stage.setToy({ resource: container, owned: true, kit: true, modifier, photo });
+    const gloss = labsOn() ? pickGloss(new URLSearchParams(location.search), recipe.gloss) : null; // lane Kit lab
+    this.stage.setToy({ resource: container, owned: true, kit: true, modifier, photo, gloss });
     this.photo = photo ? { recipe, version: null } : null;
     this.proc = { ctx, container, clay: clay.slice(), kit: true };
     this.motion.setToy(recipe, ctx, this.scene.motion?.controls || {});

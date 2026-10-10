@@ -816,6 +816,23 @@
                   <button type="button" data-detail="max" aria-pressed="false">Max</button>
                 </div>
               </div>
+              <label class="row" id="look-splats-row" hidden>
+                <span>Splats</span>
+                <input
+                  id="look-splats"
+                  type="range"
+                  min="60000"
+                  max="400000"
+                  step="10000"
+                  value="140000"
+                  aria-describedby="look-splats-note"
+                />
+                <output id="look-splats-value" for="look-splats">140k</output>
+              </label>
+              <p class="note" id="look-splats-note" hidden>
+                Labs: the slider sets a toy's splats directly, from 60,000 to 400,000. The nearest
+                tier sets the rest. Auto, High, or Max puts the tiers back.
+              </p>
               <p class="note">
                 Detail stays on this device and is never part of a link. High and Max draw more
                 splats at sharper resolution, which can be slow on phones.
