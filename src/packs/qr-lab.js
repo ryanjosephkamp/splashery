@@ -1192,8 +1192,9 @@ const THREE = {
     for (let per = 6; per >= 2; per--) {
       all = [];
       // Token 0: the square, every module in its own color.
+      // (Its sheet a LAYER behind its tiles too, so it never ties with them.)
       for (const sp of codeSplats(ones, N, { per, fg: FG, bg: BG, key }))
-        all.push({ ...sp, color: sp.mod >= 0 ? [r.colors[sp.mod * 3], r.colors[sp.mod * 3 + 1], r.colors[sp.mod * 3 + 2]] : sp.color, kind: "token", params: [0, 0], pattern: false }); // prettier-ignore
+        all.push({ ...sp, p: sp.mod >= 0 ? sp.p : [sp.p[0], sp.p[1], -LAYER], color: sp.mod >= 0 ? [r.colors[sp.mod * 3], r.colors[sp.mod * 3 + 1], r.colors[sp.mod * 3 + 2]] : sp.color, kind: "token", params: [0, 0], pattern: false }); // prettier-ignore
       // Tokens 1–3: each channel's code, in its own color on white. Lane QR
       // r5: splats sort in the pose they were built in, at a depth the sorter
       // splits into steps, so a white card only 0.03 behind its modules tied
