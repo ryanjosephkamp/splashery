@@ -13,8 +13,10 @@ import {
   quatAxisAngle,
   quatRotate,
   quatMul,
+  quatEuler,
 } from "../kit.js";
 import { evenBox, evenCylinder, evenDisc, evenEllipsoid, evenRoundBox, evenTorus } from "./even.js";
+import { surfacePoints } from "../physics/world.js"; // lane Hands-on H4
 
 const TAU = Math.PI * 2;
 const DEG = 180 / Math.PI;
@@ -3037,6 +3039,14 @@ function stonehengeBuild(k) {
   const missing = new Set([3, 8, 9, 13, 17, 18, 21, 26]);
   const lintels = new Set([27, 28, 29, 0, 1, 2, 5, 11, 15]);
   const step = TAU / n;
+  // Lane Hands-on H4: every lintel is a part of its own, and k.data.stones
+  // says where it lies, so Hands-on can lift it off and stack it.
+  const stones = [];
+  const lintelPart = (pos, rot, size) => {
+    const name = `stone${stones.length}`;
+    stones.push({ part: name, pos, rot, size });
+    return k.part(name, { pivot: pos });
+  };
   const h0 = 0.44;
   for (let i = 0; i < n; i++) {
     const a = face + i * step - step * 0.5;
@@ -3049,12 +3059,15 @@ function stonehengeBuild(k) {
     if (lintels.has(i) && !missing.has((i + 1) % n)) {
       const am = a + step / 2;
       const p = [Math.sin(am) * R, h0 + 0.035, Math.cos(am) * R];
-      k.add(evenRoundBox(0.1, 0.075, 2 * R * Math.sin(step / 2) + 0.04, 0.02), {
+      const size = [0.1, 0.075, 2 * R * Math.sin(step / 2) + 0.04];
+      const rot = [0, (am - Math.PI / 2) * DEG, 0];
+      k.add(evenRoundBox(...size, 0.02), {
+        part: lintelPart(p, rot, size),
         even: true,
         opacity: 1,
         jitter: 0.012,
         pos: p,
-        rot: [0, (am - Math.PI / 2) * DEG, 0],
+        rot,
         flat: 0.25,
         ...sunlit,
         color: (c) => rock(c),
@@ -3090,23 +3103,29 @@ function stonehengeBuild(k) {
       });
     }
     if (great) {
+      const pos = add(c0, [0.05, 0.05, 0.25]);
+      const rot = [0, (a - Math.PI / 2) * DEG + 25, 0];
       k.add(evenRoundBox(0.62, 0.1, 0.14, 0.03), {
+        part: lintelPart(pos, rot, [0.62, 0.1, 0.14]),
         even: true,
         opacity: 1,
         jitter: 0.012,
-        pos: add(c0, [0.05, 0.05, 0.25]),
-        rot: [0, (a - Math.PI / 2) * DEG + 25, 0],
+        pos,
+        rot,
         flat: 0.25,
         ...sunlit,
         color: (c) => rock(c),
       });
     } else {
+      const pos = add(c0, [0, h + 0.02, 0]);
+      const rot = [0, (a - Math.PI / 2) * DEG, 0];
       k.add(evenRoundBox(0.14, 0.1, 0.64, 0.03), {
+        part: lintelPart(pos, rot, [0.14, 0.1, 0.64]),
         even: true,
         opacity: 1,
         jitter: 0.012,
-        pos: add(c0, [0, h + 0.02, 0]),
-        rot: [0, (a - Math.PI / 2) * DEG, 0],
+        pos,
+        rot,
         flat: 0.25,
         ...sunlit,
         color: (c) => rock(c),
@@ -3137,6 +3156,7 @@ function stonehengeBuild(k) {
   // The sun, built high over the far bank (it rises there, fading in by
   // channel 0), and its beam shining through the great trilithon along the
   // axis to the heel stone (channel 2).
+  k.data = { ...k.data, stones };
   const sun = k.part("sun", { pivot: HENGE.sun });
   k.add(k.sphere(0.2), {
     part: sun,
@@ -3449,6 +3469,7 @@ function benBuild(k) {
     weight: 3,
     color: gold,
   });
+  k.data = { ...k.data, ben: {} }; // lane Hands-on H4: the bell's last strike
 }
 
 // ---- Taj Mahal ---------------------------------------------------------------------------------
@@ -4418,6 +4439,7 @@ function pagodaBuild(k, o) {
       color: "#ffcf73",
     });
   }
+  k.data = { ...k.data, bells }; // lane Hands-on H4: where each roof's chimes hang
 }
 
 // ---- Windmill ----------------------------------------------------------------------------------
@@ -4426,6 +4448,7 @@ const MILL = { hub: null, axis: unit([Math.sin(0.55), 0.12, Math.cos(0.55)]) };
 MILL.hub = add([0, 2.12, 0], mul(MILL.axis, 0.52));
 
 function windmillBuild(k) {
+  k.data = { ...k.data, h4: {} }; // lane Hands-on H4: what the drive shows, for Hands-on
   const thatch = "#6f6556";
   const wood = "#5a3b24";
   // A grassy mound with rows of tulips.
@@ -4602,6 +4625,88 @@ const band = (x, a, b) => clamp((x - a) / (b - a), 0, 1);
 // Seconds since a pulse fired, as 0..1 (1 at rest).
 const progress = (v) => (v > 0 ? 1 - v : 1);
 
+// ---- Hands-on (lane Hands-on H4) -------------------------------------------------------
+
+// A Stonehenge lintel as a loose stone: a box of its size, turned as built.
+const henge = {
+  piece({ part, pos, rot, size }) {
+    const half = size.map((v) => v / 2);
+    const solid = { type: "box", half };
+    return { part, pos, pivot: pos, quat: quatEuler(...rot), solid, points: surfacePoints(solid, 2), mass: size[0] * size[1] * size[2] * 40, friction: 0.9, restitution: 0, pick: [half[0] + 0.04, half[1] + 0.01, half[2] + 0.04] }; // prettier-ignore
+  },
+};
+
+// The supertall twisted by its top band (angle a): every band turns by its
+// height, as the drive's twist does.
+function supertallTwist(a, parts) {
+  const top = (ST.bands - 0.5) / ST.bands;
+  for (let i = 0; i < ST.bands; i++) {
+    const v = (i + 0.5) / ST.bands;
+    parts[`floor${i}`] = { quat: quatAxisAngle([0, 1, 0], (a * v) / top) };
+  }
+}
+
+// Big Ben's hands at the real time (the minute and hour angles the drive
+// shows).
+function benTime() {
+  const d = new Date();
+  const m = d.getMinutes() + d.getSeconds() / 60;
+  const h = (d.getHours() % 12) + m / 60;
+  return { m: (-TAU * m) / 60, h: (-TAU * h) / 12 };
+}
+
+// The minute hand turned by hand to `a`: passing an hour (12 at the top)
+// swings the bell and strikes it.
+function benTurn(d, a, da) {
+  const turns = (x) => Math.floor(x / TAU);
+  if (!d || turns(a) === turns(a - da)) return null;
+  d.h4 = { ...d.h4, bellAt: d.h4?.time ?? 0 };
+  return { voice: "bell", f: "E3", decay: 1.3, vol: 0.7 };
+}
+
+// All four dials show the minute hand's time (the hour hand a twelfth as
+// fast), and the bell swings after a strike.
+function benHands(d, a, parts) {
+  const real = benTime();
+  const h = real.h + (a - real.m) / 12;
+  for (let j = 0; j < 4; j++) {
+    parts[`minute${j}`] = { angle: a };
+    parts[`hour${j}`] = { angle: h };
+  }
+  const since = (d?.h4?.time ?? 0) - (d?.h4?.bellAt ?? -99);
+  const swing = since >= 0 && since < 4 ? Math.sin(TAU * 0.8 * since) * Math.exp(-1.1 * since) : 0;
+  parts.bell = { angle: 0.6 * swing };
+}
+
+// One spring-hung swing per roof: its four chimes swing round and back
+// together (as the drive's breeze swings them), ringing each time they
+// pass where they hang.
+function pagodaChimes(d) {
+  const tiers = new Map();
+  for (const { tier, p } of d?.bells || []) {
+    const t = tiers.get(tier) || { y: p[1], r: 0 };
+    t.r = Math.max(t.r, Math.hypot(p[0], p[2]));
+    tiers.set(tier, t);
+  }
+  return [...tiers].map(([tier, t]) => ({
+    type: "dial",
+    part: `chime${tier}`,
+    pivot: [0, t.y, 0],
+    axis: [0, 1, 0],
+    min: -0.07,
+    max: 0.07,
+    spring: 200,
+    damping: 1.2,
+    gravity: false,
+    bounce: 0.6,
+    pos: [0, t.y - 0.09, 0],
+    pick: [t.r + 0.12, 0.12, t.r + 0.12],
+    drag: 0.4,
+    // They ring each time they swing back through where they hang.
+    turn: (a, da) => (Math.sign(a) !== Math.sign(a - da) && Math.abs(da) > 0.002 ? { voice: "chimes", f: 1320 + 90 * tier, n: 3, decay: 0.9, vol: Math.min(0.6, 0.15 + 20 * Math.abs(da)) } : null), // prettier-ignore
+  }));
+}
+
 export const RECIPES = {
   "eiffel-tower": {
     controls: [{ key: "show", label: "Light show", type: "pulse", ease: EIF_SECS }],
@@ -4691,6 +4796,14 @@ export const RECIPES = {
     options: [{ key: "glass", label: "Glass", type: "color", default: "#4f86ad" }],
     controls: [{ key: "twist", label: "Twist", type: "pulse", ease: ST.secs }],
     action: { key: "twist", label: "Twist and light up" },
+    // Hands-on (lane Hands-on H4): drag the top round to twist the tower,
+    // each band of floors by its height; let go and it springs back with a
+    // sway.
+    hands: {
+      joints: [
+        { type: "hinge", part: `floor${ST.bands - 1}`, pivot: [0, ST.y0 + ST.H, 0], axis: [0, 1, 0], min: -1.4, max: 1.4, spring: 22, damping: 1.6, gravity: false, bounce: 0.3, pos: [0, ST.y0 + ST.H * 0.75, 0], pick: [0.45, ST.H * 0.3, 0.45], also: (a, parts) => supertallTwist(a, parts) }, // prettier-ignore
+      ],
+    },
     drive(t, c, out) {
       // The floors wring round further, each band by its height (the top
       // turns most), while a ring of light runs up the glass; then they
@@ -4772,7 +4885,23 @@ export const RECIPES = {
       { key: "drop", label: "Drop", type: "pulse", ease: PISA_SECS },
     ],
     action: { key: "drop", label: "Drop two balls" },
-    drive(t, c, out) {
+    // Hands-on (lane Hands-on H4): the two balls lie on the lawn. Pick up
+    // either and the other comes with it, side by side; lift them as high
+    // as you like and let go: they fall together and land together.
+    hands: {
+      floor: 0.02,
+      place: false,
+      area: 1.1,
+      pieces: () =>
+        PISA_BALLS.map(([, , r], i) => {
+          const land = pisaLedge(i, 0.35 * PISA.max + 0.07);
+          const at = [land[0], 0.02 + r, land[2]];
+          return { part: `ball${i}`, pos: at, pivot: at, solid: { type: "sphere", r }, mass: i ? 1 : 3.4, restitution: i ? 0.3 : 0.2, friction: 0.6, pick: [r * 1.8, r * 1.8, r * 1.8] }; // prettier-ignore
+        }),
+      carry: { ball0: ["ball1"], ball1: ["ball0"] },
+      sound: (hit) => (hit.speed > 0.6 ? { voice: "thud", f: hit.body?.solid?.r > 0.08 ? 75 : 140, bright: 0.25, vol: Math.min(0.8, hit.speed / 5) } : null), // prettier-ignore
+    },
+    drive(t, c, out, info) {
       // Galileo's experiment: the tower leans a little further, two balls
       // (a big iron one and a small bronze one) roll off the top ledge and
       // fall side by side, landing at the same moment with a puff of dust.
@@ -4803,6 +4932,8 @@ export const RECIPES = {
           offset: sub(p, home),
           visible: on ? easeOut(band(s, 0.15, 0.45)) * (1 - band(s, 3.4, 4.0)) : 0,
         };
+        // In Hands-on they wait on the lawn to be picked up.
+        if (!on && info.hands?.on) out.parts[`ball${i}`] = { visible: 1 };
         const puff = on ? band(s, T1, T1 + 0.9) : 0;
         out.parts[`dust${i}`] = {
           offset: sub([from[0], 0.03, from[2]], [built[0], 0.03, built[2]]),
@@ -4898,6 +5029,17 @@ export const RECIPES = {
   stonehenge: {
     controls: [{ key: "dawn", label: "Solstice", type: "pulse", ease: HENGE.secs }],
     action: { key: "dawn", label: "Solstice sunrise" },
+    // Hands-on (lane Hands-on H4): lift the lintels (and the fallen great
+    // lintel) off and stack them on the grass or on each other; a stack set
+    // down off center topples.
+    hands: {
+      floor: 0,
+      area: 1.25,
+      center: 0.7,
+      lift: 0.03,
+      pieces: (d) => (d?.stones || []).map((st) => henge.piece(st)),
+      sound: (hit) => (hit.speed > 0.5 ? { voice: "thud", f: 90, bright: 0.2, vol: Math.min(0.8, hit.speed / 4) } : null), // prettier-ignore
+    },
     drive(t, c, out) {
       // Solstice sunrise: the sun comes up over the far bank, framed by the
       // great trilithon, a golden beam shines through the stones along the
@@ -4921,13 +5063,22 @@ export const RECIPES = {
     alive: true,
     controls: [{ key: "chime", label: "Chime", type: "pulse", ease: 4 }],
     action: { key: "chime", label: "Chime the bell" },
-    drive(t, c, out) {
+    // Hands-on (lane Hands-on H4): drag the minute hand round the front dial;
+    // the hour hand follows (one turn in twelve), all four dials agree, and
+    // passing the hour swings the bell with its strike.
+    hands: {
+      joints: (d) => [
+        { type: "dial", part: "minute0", pivot: [0, BEN.dial, BEN.half + 0.02], axis: [0, 0, 1], coast: false, pos: [0, BEN.dial, BEN.half + 0.03], pick: [BEN.r, BEN.r, 0.12], start: () => benTime().m, turn: (a, da) => benTurn(d, a, da), also: (a, parts) => benHands(d, a, parts) }, // prettier-ignore
+      ],
+    },
+    drive(t, c, out, info) {
       // The hands show the real time (a clock may read the date in drive).
       // A chime spins them round in whole turns (so they land back on the
       // time), lights the dials and swings the bell.
       const d = new Date();
       const m = d.getMinutes() + d.getSeconds() / 60;
       const h = (d.getHours() % 12) + m / 60;
+      if (info.data) info.data.h4 = { ...info.data.h4, time: info.time };
       const p = c.chime > 0.001 ? 1 - c.chime : 1;
       const spin = smoothstep(0, 0.6, p);
       for (let j = 0; j < 4; j++) {
@@ -4970,6 +5121,14 @@ export const RECIPES = {
     options: [{ key: "roof", label: "Roofs", type: "color", default: "#2f5d9e" }],
     controls: [{ key: "raise", label: "Drawbridge up", type: "toggle", default: 1, ease: 3.4 }],
     action: { key: "raise", label: "Raise or lower the drawbridge" },
+    // Hands-on (lane Hands-on H4): drag the drawbridge down and up on its
+    // hinge; its chains hold it wherever it is let go, and it thuds at the
+    // top and on the bank.
+    hands: {
+      joints: [
+        { type: "hinge", part: "bridge", pivot: CASTLE.gate, axis: [1, 0, 0], min: -1.45, max: 0, friction: 160, bounce: 0.1, start: (c) => -1.45 * easeInOut(clamp((c.raise - 0.52) / 0.48, 0, 1)), pos: add(CASTLE.gate, [0, 0, 0.42]), pick: [0.2, 0.12, 0.44], sound: (ev, vol) => ({ voice: "wood", f: 130, decay: 0.8, vol }) }, // prettier-ignore
+      ],
+    },
     drive(t, c, out) {
       // Lowering: the bridge drops first, then the knights march out and
       // stand guard. Raising: they march back in before the bridge goes up.
@@ -4989,6 +5148,11 @@ export const RECIPES = {
     options: [{ key: "color", label: "Timber", type: "color", default: "#c8372d" }],
     controls: [{ key: "chime", label: "Bells", type: "pulse", ease: 4 }],
     action: { key: "chime", label: "Ring the bells" },
+    // Hands-on (lane Hands-on H4): push a roof's wind chimes: they swing out
+    // and back, ringing as they knock their stops, and settle.
+    hands: {
+      joints: (d) => pagodaChimes(d),
+    },
     drive(t, c, out, info) {
       // A breeze: the chimes on every roof swing (each roof a beat behind
       // the one below), and the doors and lanterns light up.
@@ -5011,12 +5175,20 @@ export const RECIPES = {
     alive: true,
     controls: [{ key: "gust", label: "Gust", type: "pulse", ease: 4 }],
     action: { key: "gust", label: "A gust of wind" },
-    drive(t, c, out) {
+    // Hands-on (lane Hands-on H4): flick the sails round to spin them; they
+    // coast to a stop.
+    hands: {
+      joints: (d) => [
+        { type: "dial", part: "sails", pivot: MILL.hub, axis: MILL.axis, drag: 0.45, pos: MILL.hub, pick: [1.45, 1.45, 1.45], start: () => d?.h4?.sails ?? 0, sound: () => null }, // prettier-ignore
+      ],
+    },
+    drive(t, c, out, info) {
       // The sails turn briskly; a gust hits them at once and spins them up
       // hard for three extra turns, easing off as it passes.
       const p = 1 - c.gust;
       const g = 1 - Math.pow(1 - p, 3);
       out.parts.sails = { angle: t * 1.5 + 3 * TAU * g };
+      if (info.data) info.data.h4 = { sails: out.parts.sails.angle % TAU };
     },
     build: windmillBuild,
   },
