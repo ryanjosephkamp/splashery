@@ -732,7 +732,8 @@ export class Stage {
   }
 
   photoTexture() {
-    this.photoTex ||= new pc.Texture(this.device, {
+    if (this.photoTex) return this.photoTex;
+    this.photoTex = new pc.Texture(this.device, {
       name: "splashery-photo",
       width: 4,
       height: 4,
@@ -743,6 +744,11 @@ export class Stage {
       addressU: pc.ADDRESS_CLAMP_TO_EDGE,
       addressV: pc.ADDRESS_CLAMP_TO_EDGE,
     });
+    // Fix11: made on the GPU now, outside any frame. Left for its first use, a frame that drew the
+    // photo toy before the photo's own upload (setPhotoSource waits for a microtask) made it inside
+    // the work-buffer pass, and on WebGPU its mipmaps' passes broke that frame's command buffer.
+    this.photoTex.upload();
+    if (this.device.isWebGPU) this.device.submit();
     return this.photoTex;
   }
 
