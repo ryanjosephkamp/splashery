@@ -42,7 +42,7 @@ const SAMPLE = [
   "song-landscape",
   "splat-field",
   "galaxy-box",
-  "snowman",
+  "diya", // lane Hands-on H3: the snowman comes apart now (pieces mode), so it is never lifted whole
   "drum",
   "bus",
   "eiffel-tower",
