@@ -22,13 +22,19 @@ Operator does the handover:
 - moves the routines;
 - stands by for a day without acting unless asked.
 
+The steps, the new Operator's first prompt and the readback are in
+`.claude/skills/operator-handover/SKILL.md`. The daily digest reports the Operator's age, context
+size and compactions every morning (the owner's request of October 10, 2026), so a handover that's
+due shows there.
+
 Keep context small in the meantime. Hand big reads (a transcript, a full export, a long run log) to
 a helper agent on Sonnet and keep only its summary.
 
-## Each check-in (about hourly)
+## Each check-in (about every 90 minutes)
 
-1. **Re-arm first.** `send_later` 45 to 60 minutes out. Its message lists every open item, so the
-   next check-in can start cold.
+1. **Re-arm first.** `send_later` about 90 minutes out when only waiting, sooner when something is
+   due (PR events and finished background runs wake the Operator on their own). Its message lists
+   every open item, so the next check-in can start cold.
 2. **Integrator results.** Fetch them:
    `git fetch origin +refs/heads/claude/integrator-results:refs/remotes/origin/claude/integrator-results`.
    Then read the newest `runs/*.md`. The first line starts "READY: RESULT".
@@ -99,6 +105,10 @@ The steps, in a scratch worktree:
 - Use `SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium npx playwright test <files> --reporter=line`.
   Never run `playwright install`.
 - One test server runs on port 4173. Kill a stale one with `pkill -f "[h]ttp.server 4173"`.
+- Run the full suite in its own worktree, `/home/user/wt-suite` (`git worktree add`, with
+  `node_modules` linked from the main checkout), never in the checkout the session starts in. The
+  cloud stop hook checks that checkout at every turn's end, and the screenshots a run rewrites there
+  cost a wasted turn each time (October 10, 2026).
 - Runs longer than a few minutes go in the background with a long timeout (up to two hours). The
   default background limit is 30 minutes.
 - Afterward, put the screenshots back with `git checkout -- tests/screenshots/`.
@@ -170,7 +180,8 @@ publishes it for him, and he marks the sounds there.
 
 All are on the owner's account:
 
-- **Daily digest:** 7:54 a.m. ET, fresh Sonnet session, read only.
+- **Daily digest:** 7:54 a.m. ET, fresh Sonnet session, read only. Since October 10, 2026 it also
+  reports the Operator's health (age, context, compactions) and says when a handover is due.
 - **Site patrol:** 7:21 a.m. ET, fresh Sonnet session, read only.
 - **Backup kit:** 8:07 a.m. and 8:07 p.m. ET, fires into the Operator session. It exports the review
   pages and zips the private state for the owner.
@@ -188,3 +199,8 @@ the private page.
 - A test that only fails under load is still a bug. Reproduce it with `--repeat-each` or a CPU
   throttle (`Emulation.setCPUThrottlingRate` through CDP), then fix the cause, not the limit.
 - Keep the owner's messages short: what changed, what he needs to do, step by step.
+- Keep trigger prompts short: every create or update echoes the whole prompt back into the
+  Operator's context.
+- Keep blind reviews blind everywhere the owner can read: messages, check-in prompts (they show in
+  the transcript when they fire) and first prompts. A key goes only in the handover page's `sealed/`
+  folder and the Operator's scratchpad.
