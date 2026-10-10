@@ -2270,8 +2270,8 @@
       "v": "keep",
       "owner": "Approved on the Splashery Universe page (\"photo yes\", September 29, 2026; lane Photo to 3D; labs only).",
       "effect": "Your photo rebuilt as splats in 3D by an on-device depth model: each splat takes the photo's color at its place and sits at its depth, and the surface is cut where the depth jumps, so a near object stands as its own layer. The picture starts flat; the tap raises its depth layer by layer while the toy sways (about 3 s), and a second tap lays it flat. Depth sets how deep the relief is; Layers pulls the depth bands apart.",
-      "sound": "The photo's paper lifting as the depth comes up and settling as it lies flat (no wind, no whoosh).",
-      "improved": "Photo to 3D: Depth Anything V2 Small (Apache-2.0, quantized, 27 MB) on ONNX Runtime Web (MIT), both loaded only when a photo is opened; an even grid of splats sized to their neighbors on the same surface, cut at depth jumps; three CC0 samples (a forest path, a cobbled street, a still life)."
+      "sound": "The photo's paper lifting as the depth comes up and settling as it lies flat (no wind, no whoosh). Lane Photo depth: a Sound choice in the Toy tab (paper, a soft chime, pop-up layers, a water drop, none, or your own sound file, kept on the device).",
+      "improved": "Photo to 3D: Depth Anything V2 Small (Apache-2.0, quantized, 27 MB) on ONNX Runtime Web (MIT), both loaded only when a photo is opened; an even grid of splats sized to their neighbors on the same surface, cut at depth jumps; three CC0 samples (a forest path, a cobbled street, a still life). Lane Photo depth: the depth rises and settles cleanly in the Sharp picture (each piece of surface moves as one layer, as the splats do, and the backing stays behind it at every moment of the tap)."
     },
     "room-echo": {
       "v": "keep",
