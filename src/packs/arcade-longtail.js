@@ -374,17 +374,21 @@ class Longtail {
         // Arcade r2 ("sharper"): a tile fills its whole cell, its rim row
         // a solid dark grout line, so nothing shows through between tiles
         // (the far faces did, as streaks); and finer splats.
-        const step = Math.min(w, h) / (low ? 5 : 8);
+        // Arcade r3 ("sharper, especially in 2D"): a true crisp grid now,
+        // fine rows along the edges and coarse ones in the middle, so the
+        // grout is a thin clean line (the rim row) instead of a soft band
+        // drawn across uniform splats, for the same splats a tile.
+        const m = Math.min(w, h);
         const t = crispModel(
           (c) =>
             c.rect(w, h, {
               color: (p) => {
                 const edge = Math.max(Math.abs(p[0]) / (w / 2), Math.abs(p[1]) / (h / 2));
-                const f = edge > 0.88 ? 0.66 : edge > 0.7 ? 0.93 : 1.0;
+                const f = edge > 0.9 ? 0.6 : edge > 0.78 ? 0.92 : 1.0;
                 return [f, f, f];
               },
             }),
-          { fine: step, coarse: step },
+          { fine: m / (low ? 8 : 14), coarse: m / 3 },
         );
         tiles.set(key, t);
       }

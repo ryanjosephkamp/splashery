@@ -2,8 +2,9 @@
 //
 //   qr-picture  Picture QR: a photo woven into a QR code as a halftone. Each
 //               module's center keeps its bit; the rest of it carries the
-//               picture, pushed toward dark or light as far as the contrast
-//               asks (src/qr-craft/picture.js). The toy measures the contrast
+//               picture as dark and light dots by error diffusion, with a
+//               nudge only where a module would misread (src/qr-craft/
+//               picture.js, lane QR r4). The toy measures the contrast
 //               and reads the code with jsQR at phone size and smaller, and
 //               offers the closest version that scans when one doesn't.
 //               A tap turns every tile over in a wave: its back is the plain
@@ -37,12 +38,15 @@ import {
   measure,
   closestScanning,
   tidy,
+  gray,
+  SIZES_UP,
 } from "../qr-craft/picture.js";
 import { SAMPLES, sampleById } from "../qr-craft/samples.js";
 import { pictureModifier, buildModifier, scanModifier } from "../qr-craft/field.js";
 import { code128, ean13, upcA, barSpans, guardModules } from "../qr-craft/barcodes.js";
 import { inkedLine } from "../qr-craft/glyphs.js";
 import { encodeQR } from "../qr/encode.js";
+import { TUNE, painter, moduleGrid } from "../qr/crisp.js";
 import {
   MATERIALS,
   materialById,
@@ -129,21 +133,25 @@ async function onStage(kit) {
 }
 
 // Renders the toy front on as a square canvas of `size` pixels, still.
-async function renderFront(kit, half, size, margin = 1) {
+async function renderFront(kit, half, size, margin = 1, label = "") {
   const a = app();
   await onStage(kit);
-  return a.withCapture([size, size], async () => {
-    const pose = frontPose(half, margin, kit.transform);
-    // A first frame starts the splat sort for this view; the second is the
-    // picture (as the QR code toy does).
-    await a.player.renderAt(a.player.time, pose);
-    await new Promise((r) => setTimeout(r, 80));
-    const shot = await a.player.renderAt(a.player.time, pose);
-    const c = document.createElement("canvas");
-    c.width = c.height = size;
-    c.getContext("2d").drawImage(shot, 0, 0, size, size);
-    return c;
-  });
+  return a.withCapture(
+    [size, size],
+    async () => {
+      const pose = frontPose(half, margin, kit.transform);
+      // A first frame starts the splat sort for this view; the second is the
+      // picture (as the QR code toy does).
+      await a.player.renderAt(a.player.time, pose);
+      await new Promise((r) => setTimeout(r, 80));
+      const shot = await a.player.renderAt(a.player.time, pose);
+      const c = document.createElement("canvas");
+      c.width = c.height = size;
+      c.getContext("2d").drawImage(shot, 0, 0, size, size);
+      return c;
+    },
+    { label },
+  );
 }
 // A canvas shrunk to `w` pixels wide (smoothed, as a camera averages).
 function shrink(canvas, w) {
@@ -222,62 +230,113 @@ async function loadPicture(id) {
 }
 const pictureNow = (o) => (o.picture === "own" ? PIC.own : PIC.pictures.get(sampleById(o.picture)?.id || SAMPLES[0].id)); // prettier-ignore
 
-// The woven code as splats: the light sheet (with the quiet zone) behind;
-// each module a tile of its cells. A module of one color (the plain
-// patterns, the center dots' block) is one patch; picture cells are each a
-// small patch of their own.
+// The woven code as splats. Lane QR r4: the cells are one seamless grid now
+// (as the QR code toy's sheet is): a single even lattice over the whole code,
+// each splat in the color of the cell it sits in, so no seam (a missing row
+// of splats, where the white behind showed through) falls at a module's or a
+// cell's edge. Dark splats stand a tiny constant step in front of light ones,
+// so where they overlap at a cell's edge the two never tie (a tie flickered
+// as the splats were sorted). The quiet zone is a plain sheet just behind,
+// and a light underlay further back shows behind a tile while it turns.
+// Each splat moves with its module's tile.
+const LEAD = 0.004; // the dark splats' step forward (modules)
 function pictureSplats(w, budget) {
   const N = w.code.size;
   const { k, G, cells } = w;
   const H = N / 2 + QUIET;
   const make = (fine) => {
     const out = [];
-    // The sheet behind, white, with the quiet zone.
+    // The underlay, well behind (a turning tile swings through z < 0).
     patch(out, -H, -H, H, H, -0.6, 0.34, BG, [0, 0]);
-    const cs = 1 / k; // a cell's width (modules)
-    for (let r = 0; r < N; r++)
-      for (let c = 0; c < N; c++) {
-        const m = r * N + c;
-        const params = [1 + m, w.code.dark[m] ? 2 : 1];
-        const x0 = c - N / 2;
-        const y1 = N / 2 - r;
-        // One color over the whole module?
-        let same = true;
-        const q0 = (r * k * G + c * k) * 3;
-        for (let v = 0; v < k && same; v++)
-          for (let u = 0; u < k; u++) {
-            const q = ((r * k + v) * G + c * k + u) * 3;
-            if (
-              cells[q] !== cells[q0] ||
-              cells[q + 1] !== cells[q0 + 1] ||
-              cells[q + 2] !== cells[q0 + 2]
-            ) {
-              same = false;
-              break;
-            }
-          }
-        if (same) {
-          patch(out, x0, y1 - 1, x0 + 1, y1, 0, 0.17, [cells[q0], cells[q0 + 1], cells[q0 + 2]], params); // prettier-ignore
-          continue;
-        }
-        for (let v = 0; v < k; v++)
-          for (let u = 0; u < k; u++) {
-            const q = ((r * k + v) * G + c * k + u) * 3;
-            const col = [cells[q], cells[q + 1], cells[q + 2]];
-            const cx0 = x0 + u * cs;
-            const cy1 = y1 - v * cs;
-            patch(out, cx0, cy1 - cs, cx0 + cs, cy1, 0, cs / fine, col, params);
-          }
+    // The quiet zone: a sheet just behind the code, around it.
+    const qs = 0.34;
+    const n = Math.round((2 * H) / qs);
+    const st = (2 * H) / n;
+    const sc0 = [0.6 * st, 0.6 * st, 0.004];
+    for (let j = 0; j < n; j++)
+      for (let i = 0; i < n; i++) {
+        const x = -H + (i + 0.5) * st;
+        const y = -H + (j + 0.5) * st;
+        if (Math.abs(x) < N / 2 - 0.3 && Math.abs(y) < N / 2 - 0.3) continue;
+        out.push({ p: [x, y, -0.02], scales: sc0, quat: [0, 0, 0, 1], color: BG, opacity: 1, params: [0, 0], pattern: false }); // prettier-ignore
       }
+    // The code: one lattice of `fine` splats a cell each way, two staggered
+    // layers (the second fills the low spots between the first's points).
+    const M = G * fine;
+    const s0 = N / M;
+    const sc = [0.55 * s0, 0.55 * s0, 0.004];
+    // Dark splats a little tighter: their soft edges lie in front of the
+    // light cells next to them, and at the full size every dark dot grew.
+    const scd = [0.48 * s0, 0.48 * s0, 0.004];
+    for (let layer = 0; layer < 2; layer++)
+      for (let j = 0; j < M - layer; j++)
+        for (let i = 0; i < M - layer; i++) {
+          const x = -N / 2 + (i + 0.5 + layer * 0.5) * s0;
+          const y = N / 2 - (j + 0.5 + layer * 0.5) * s0;
+          const at = (px, py) => {
+            const cx = Math.max(0, Math.min(G - 1, Math.floor((px + N / 2) * k)));
+            const cy = Math.max(0, Math.min(G - 1, Math.floor((N / 2 - py) * k)));
+            const q = (cy * G + cx) * 3;
+            return { cx, cy, col: [cells[q], cells[q + 1], cells[q + 2]] };
+          };
+          const { cx, cy } = at(x, y);
+          let { col } = at(x, y);
+          // A dark splat in front sits wholly inside dark cells (one on a
+          // cell's edge would paint dark over the light cell next to it, and
+          // every dark dot would grow): on an edge with a light cell, the
+          // splat takes the light cell's color.
+          if (gray(col) < 0.5)
+            for (const [dx, dy] of [
+              [-1, -1],
+              [1, -1],
+              [-1, 1],
+              [1, 1],
+            ]) {
+              // prettier-ignore
+              const n = at(x + dx * 0.45 * s0, y + dy * 0.45 * s0).col;
+              if (gray(n) >= 0.5) {
+                col = n;
+                break;
+              }
+            }
+          const m = Math.floor(cy / k) * N + Math.floor(cx / k);
+          const dk = gray(col) < 0.5;
+          out.push({ p: [x, y, dk ? LEAD : 0], scales: dk ? scd : sc, quat: [0, 0, 0, 1], color: col, opacity: 1, params: [1 + m, w.code.dark[m] ? 2 : 1], pattern: false }); // prettier-ignore
+        }
     return out;
   };
-  let splats = make(2);
-  if (splats.length > budget) splats = make(1);
+  let splats = null;
+  for (const fine of [3, 2, 1]) {
+    splats = make(fine);
+    if (splats.length <= budget) break;
+  }
   return { splats, half: H };
 }
 
+const optionsKey = (o) => JSON.stringify(tidy(o || {})) + (o?.picture ?? "");
+
 // Reads the woven layout at phone size and smaller (picture.js), then the
 // stage's own picture.
+// Lane QR r4 (the owner's note of October 9, 2026): the code is scanned
+// before it is shown. From the build until its check is done, a still of the
+// stage stays up with "Please wait. Scanning code…" on it (Stage.cover);
+// thirty seconds at most, whatever happens.
+const SCANNING = "Please wait. Scanning code…";
+function hold() {
+  const stage = app()?.player?.stage;
+  if (typeof window === "undefined" || PIC.noAuto || !stage?.cover || PIC.holding) return;
+  PIC.holding = stage;
+  stage.cover({ label: SCANNING });
+  clearTimeout(PIC.holdTimer);
+  PIC.holdTimer = setTimeout(release, 30000);
+}
+function release() {
+  clearTimeout(PIC.holdTimer);
+  const stage = PIC.holding;
+  PIC.holding = null;
+  stage?.uncover();
+}
+
 async function checkPicture() {
   const w = PIC.woven;
   if (!w) return null;
@@ -289,7 +348,8 @@ async function checkPicture() {
   try {
     const kit = PIC.kit;
     const half = w.code.size / 2 + QUIET;
-    const big = await renderFront(kit, half, 720);
+    const big = await renderFront(kit, half, 720, 1, SCANNING);
+    // A newer build's own check takes over (and lifts the still).
     if (kit !== PIC.kit) return PIC.check;
     const total = w.code.size + 2 * QUIET + 2; // the picture spans the margin too
     const at = (ppm) => {
@@ -299,19 +359,35 @@ async function checkPicture() {
     PIC.lastShot = big;
     const want = w.code.text;
     PIC.check.stage = [8, 4].map((ppm) => ({ ppm, text: at(ppm), ok: at(ppm) === want }));
+    // Lane QR r4: when the layout reads but the stage doesn't, the nudge
+    // steps up (a rebuild) until it does, three steps at most.
+    if (
+      PIC.check.ok &&
+      !PIC.check.stage.every((s) => s.ok) &&
+      (PIC.extra || 0) < 0.12 &&
+      !PIC.noAuto
+    ) {
+      PIC.extra = (PIC.extra || 0) + 0.04;
+      PIC.extraFor = optionsKey(PIC.options);
+      // The still stays up through the rebuild; its check lifts it.
+      app()?.player?.switchTo({ options: { ...PIC.options } });
+      PIC.panel?.refresh();
+      return PIC.check;
+    }
   } catch (err) {
     PIC.check.stageError = err.message;
   }
+  release();
   PIC.panel?.refresh();
   return PIC.check;
 }
 let checkTimer = 0;
 function scheduleCheck(ms = 500) {
   clearTimeout(checkTimer);
-  if (PIC.noAuto) return;
+  if (PIC.noAuto) return release();
   checkTimer = setTimeout(() => {
     const a = app();
-    if (a?.player?.toyInfo?.id !== "qr-picture") return;
+    if (a?.player?.toyInfo?.id !== "qr-picture") return release();
     if (a.busy) return scheduleCheck(300);
     checkPicture();
   }, ms);
@@ -360,7 +436,7 @@ function picturePanel() {
     row(make, png),
     out,
     row(scan),
-    note("Each module's middle keeps its bit, dark or light, because a camera reads every module at its center; the rest of the module carries the picture, darkened in dark modules and lightened in light ones as far as the contrast asks. The eyes, the timing lines and the format information stay plain. Your picture is read on this device and never leaves it."), // prettier-ignore
+    note("Each module's middle keeps its bit, dark or light, because a camera reads every module at its center. The rest of the module carries the picture as a halftone: small dark and light dots that average out to the picture's tones. Where a module would read wrong, a few of its dots take its color; the contrast sets how clearly every module reads. The eyes, the timing lines, and the format information stay plain. Your picture is read on this device and never leaves it."), // prettier-ignore
   );
   PIC.panel = {
     refresh() {
@@ -391,7 +467,9 @@ function picturePanel() {
 }
 
 const PICTURE = {
-  alive: true,
+  // Lane QR r4: redrawn only while the tiles turn (always, the splats were
+  // sorted again every frame, and the white sheet's corners flickered).
+  alive: (c) => c.turn > 0,
   turntable: false,
   kernel: "sharp",
   density: 2,
@@ -402,6 +480,7 @@ const PICTURE = {
     { key: "center", label: "Center dot", type: "select", default: "small", choices: CENTERS.map((c) => ({ id: c.id, label: c.label })) }, // prettier-ignore
     { key: "level", label: "Error correction", type: "select", default: "H", choices: LEVELS.map((l) => ({ id: l, label: { L: "L: 7% can be lost", M: "M: 15%", Q: "Q: 25%", H: "H: 30%" }[l] })) }, // prettier-ignore
     { key: "style", label: "Picture style", type: "select", default: "color", choices: PIC_STYLES.map((s) => ({ id: s.id, label: s.label })) }, // prettier-ignore
+    { key: "size", label: "Code size", type: "select", default: "more", choices: SIZES_UP.map((s) => ({ id: s.id, label: s.label })) }, // prettier-ignore
   ],
   controls: [{ key: "turn", label: "Turn the tiles over", type: "pulse", ease: 3.6 }],
   action: {
@@ -426,6 +505,7 @@ const PICTURE = {
     async read(_text, fileName, file) {
       if (!file) throw new Error("Open a picture.");
       PIC.own = await decodePicture(file);
+      PIC.extra = 0;
       PIC.ownName = fileName || "your picture";
       return { picture: "own" };
     },
@@ -434,6 +514,8 @@ const PICTURE = {
   async prepare(o) {
     if (o.picture === "own" && !PIC.own) return;
     if (typeof document === "undefined") return;
+    // Lane QR r4: the build steps the nudge up until the code reads (jsQR).
+    await loadJsQR().catch(() => null);
     await loadPicture(o.picture === "own" ? "own" : sampleById(o.picture)?.id || SAMPLES[0].id);
   },
   drive(t, c, out) {
@@ -450,11 +532,14 @@ const PICTURE = {
     if (o.picture === "own" && !PIC.own) PIC.error = "Your own picture isn't on this device any more (a link can't carry it). Open it again, or pick a sample."; // prettier-ignore
     if (!pic && typeof document === "undefined") pic = null;
     let w;
+    // The stage's step up holds for these options only.
+    if (PIC.extraFor !== optionsKey({ ...o, ...t })) PIC.extra = 0;
+    const extra = PIC.extra || 0;
     try {
-      w = makeWoven(pic, t);
+      w = makeWoven(pic, { ...t, extra }, jsqr ? readRGBA : null);
     } catch (err) {
       PIC.error = err.message;
-      w = makeWoven(pic, { ...t, text: DEFAULT_TEXT });
+      w = makeWoven(pic, { ...t, text: DEFAULT_TEXT, extra }, jsqr ? readRGBA : null);
     }
     PIC.woven = w;
     PIC.options = { ...o, ...t };
@@ -466,17 +551,22 @@ const PICTURE = {
     k.cloud({ share: Math.min(1, splats.length / k.count), jitter: 0, pattern: false }, (rand, i) => splats[i] || null); // prettier-ignore
     k.data = { size: w.code.size, version: w.code.version };
     PIC.kit = k;
+    hold();
     Promise.resolve().then(() => PIC.panel?.refresh());
-    scheduleCheck(700);
+    scheduleCheck(PIC.holding ? 200 : 700);
   },
-  credits: SAMPLES.map((s) => ({
-    label: "Picture QR",
-    title: `${s.label} (a sample picture)`,
-    source: s.page,
-    author: s.author,
-    license: "CC0 1.0",
-    licenseUrl: "https://creativecommons.org/publicdomain/zero/1.0/",
-  })),
+  credits: SAMPLES.map((s) =>
+    s.ai
+      ? { label: "Picture QR", title: `${s.label}: an AI-made sample picture (${s.prompt})`, source: s.page, author: s.author, license: "AI-made by the owner" } // prettier-ignore
+      : {
+          label: "Picture QR",
+          title: `${s.label} (a sample picture)`,
+          source: s.page,
+          author: s.author,
+          license: "CC0 1.0",
+          licenseUrl: "https://creativecommons.org/publicdomain/zero/1.0/",
+        },
+  ),
 };
 
 // ======================================================================================
@@ -700,7 +790,7 @@ export function symbolFor(o, Z = globalThis.ZXing) {
 const BC = { sym: null, options: null, kit: null, check: null, panel: null, half: 10 };
 
 // The symbol as splats, in modules, centered: { splats, half, height }.
-function barcodeSplats(S) {
+export function barcodeSplats(S) {
   const out = [];
   // A rectangle of splats, its lattice sx across and sy along.
   const rect = (x0, y0, x1, y1, z, sx, sy, color, params, sig = 0.55) => {
@@ -730,7 +820,9 @@ function barcodeSplats(S) {
     const n = sym.modules;
     const h = sym.kind === "code128" ? Math.max(30, Math.round(n * 0.22)) : 60;
     const guard = guardModules(sym);
-    const textH = sym.kind === "code128" ? 0 : 7;
+    // Lane QR r4: Code 128's line of text gets room on the label too (it
+    // hung off the bottom of the paper).
+    const textH = 7;
     W = n + sym.quiet[0] + sym.quiet[1];
     H = h + textH + 6;
     const x0 = -n / 2 + (sym.quiet[0] - sym.quiet[1]) / 2;
@@ -770,11 +862,22 @@ function barcodeSplats(S) {
     H = m.rows + 2 * q;
     const x0 = -m.cols / 2;
     const y1 = m.rows / 2;
-    // Each module its own piece (it lifts with its column), but drawn as
-    // runs along the row with the same lattice, so no seam shows.
+    // Lane QR r4: drawn as the QR code toy draws its modules (src/qr/
+    // crisp.js): each dark module a crisp cell reaching into its dark
+    // neighbors, so a run of modules is one even, seamless area with hard
+    // edges. Each module is still its own piece (it lifts with its column).
+    const dark = (r, c) => r >= 0 && c >= 0 && r < m.rows && c < m.cols && m.dark[r * m.cols + c] === 1; // prettier-ignore
+    const cx = (c) => x0 + c + 0.5;
+    const cy = (r) => y1 - r - 0.5;
+    const scale = TUNE.finest;
+    const { crisp } = painter(out, { scale });
+    const grid = moduleGrid({ dark, cx, cy, pad: TUNE.rings.reduce((a, b) => a + b, 0) * scale + 0.03 }); // prettier-ignore
     for (let r = 0; r < m.rows; r++)
-      for (let c = 0; c < m.cols; c++)
-        if (m.dark[r * m.cols + c]) rect(x0 + c, y1 - r - 1, x0 + c + 1, y1 - r, 0, 0.2, 0.2, INK, piece(x0 + c + 0.5)); // prettier-ignore
+      for (let c = 0; c < m.cols; c++) {
+        if (!dark(r, c)) continue;
+        const [xa, ya, xb, yb] = grid.cell(r, c);
+        crisp({ x0: xa, y0: ya, x1: xb, y1: yb, open: grid.openOf(r, c), notches: grid.notchesOf(r, c), z: 0, color: INK, params: piece(cx(c)) }); // prettier-ignore
+      }
   }
   // The paper behind, with the quiet zones.
   const PW = W / 2 + 1.5;

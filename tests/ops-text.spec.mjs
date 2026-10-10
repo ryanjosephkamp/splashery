@@ -54,10 +54,12 @@ test.describe("a PDF's words in the Toy tab", () => {
     await expect(words).toHaveAttribute("aria-label", "Words on page 1");
     await expect(words).toHaveAttribute("tabindex", "0");
     await expect(words).toContainText("The Tinkerer's Manual");
-    await expect(words).toContainText("Every toy in Splashery is made of Gaussian splats");
-    // Lines join into paragraphs, and the contents list keeps its items.
-    await expect(words.locator("p", { hasText: /^Contents$/ })).toHaveCount(1);
-    await expect(words.locator("p", { hasText: /^1\. Level 1: What a splat is$/ })).toHaveCount(1);
+    await expect(words).toContainText("is made of Gaussian splats");
+    // Lines join into paragraphs, and a list keeps its items (page 1 now ends with the level map).
+    await expect(words.locator("p", { hasText: /^The level map$/ })).toHaveCount(1);
+    await expect(
+      words.locator("p", { hasText: /^\d+\. Level 1 One splat: what a splat is/ }),
+    ).toHaveCount(1);
     // Selectable, like any text on a page.
     expect(await words.evaluate((el) => getComputedStyle(el).userSelect)).toBe("text");
 
@@ -65,7 +67,7 @@ test.describe("a PDF's words in the Toy tab", () => {
     await page.click("#toy-media-next");
     await expect(words).toHaveAttribute("aria-label", "Words on page 2");
     await expect(words).toContainText("What a splat is");
-    await expect(words).not.toContainText("Every toy in Splashery is made of Gaussian splats");
+    await expect(words).not.toContainText("is made of Gaussian splats");
     expect(await page.evaluate(() => window.__splashery.player.pictures.page)).toBe(1);
 
     // Copy puts the page's words on the clipboard.
@@ -74,7 +76,7 @@ test.describe("a PDF's words in the Toy tab", () => {
     await copy.click();
     await expect(copy).toHaveText("Copied");
     const clip = await page.evaluate(() => navigator.clipboard.readText());
-    expect(clip).toContain("A splat is a small cloud of color floating in space.");
+    expect(clip).toContain("Levels 6 to 10 are coming in the next round."); // page 2 now holds the end of the level map and the contents
     expect(clip).toContain("\n\n"); // paragraphs apart
     await expect(copy).toHaveText("Copy", { timeout: 5000 });
 

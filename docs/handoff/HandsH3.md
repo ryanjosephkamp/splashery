@@ -97,4 +97,47 @@ file. The engine files belong to the merged engines; another lane's toys are the
 
 ## State
 
-WORKING: not started yet (October 3, 2026).
+READY (October 10, 2026): the lane's work is merged. Every card is marked good by the owner.
+
+Merged into main (batch 4, #490, f177bf68), with the earlier engine PRs #430 (a forgiving press,
+`reseat`, a shake that only reads) and #455 (a turned kit part sorted with its own turn: the egg's
+and the book's specks):
+
+- Engines: #459 (latches and triggers, strike pieces, plucked strings) and #460 (`handsLevel1`: a
+  picture or still toy that asks plays Level 1).
+- Open me #432: alarm clock, gift box, umbrella (a new runner), desk fan, desk lamp, telescope,
+  potion bottle, fountain pen.
+- Holidays #435: jack-o'-lantern, decorated tree, patterned egg, paper lantern, snowman.
+- Medieval #436: knight's helmet, trebuchet, dragon egg. Pictures #437: the picture frame.
+- Music #464: the guitar's strings, the drum's sticks, the crossbow (latch and trigger).
+- Level 1 #463: the Picture lab, the Screen (not while capturing), the Room echo meter (not while
+  the mic is on) and the Fluid lab. Left out: Your book and the Photo album (every press turns a
+  page), Photo to 3D, Video to 3D and the Splat mirror (one-sided captures smear when tossed).
+- Storybook #477 (the owner's idea): "The Little Lamp Who Wanted to See the Sea", ten pages of our
+  own words and drawings (`tools/hh3-storybook.mjs`), read with Your book's pages. The built book's
+  recipe stays in `src/packs/objects.js`, unused, for the owner's comparison (card hh3-book-r3);
+  switching back is the `pack:` line in `src/toys.js`.
+
+Open: #494, a test-only fix for H1's origami crane (`tests/hh1-toys.spec.mjs`), and this handoff.
+
+Not done, and why:
+
+- The water bottle and the soda can (labs): they wait for the Fluids engine's pour.
+- The first photoreal toys (basket, croissant, pomegranate): to be agreed with Photoreal r3 first;
+  not started.
+
+## Notes
+
+- The lane's tests step a fixed clock: a real press (the app's own pick hands it to Hands-on), then
+  the moves straight to Hands-on, two fixed steps per move, so a loaded machine sees the same
+  frames. Run them with `SPLASHERY_PORT=<port>`; the Playwright config reads that, not a URL.
+- `tests/hl1.spec.mjs` samples the menorah for Holidays (the snowman comes apart; the diya misses
+  its middle) and keeps the drum for Music with a known `whole-pickup` gap (every other music toy
+  has its own controls); the picture frame's known gap is `whole-pickup` now.
+- Clips: `tools/hh3-clip.mjs` (390 by 844 at device scale 3; steps `wait`, `button`, `from3`/`to3`,
+  `drag`, `tap`, `toy`, `media`). A big book draws slowly on SwiftShader: its screenshot waits up to
+  three minutes.
+
+## For the Operator
+
+- Nothing waiting on the lane. #494 merges whenever convenient.

@@ -1,9 +1,9 @@
 {
   "note": "Measured by tools/shw-facts.mjs; regenerate after a toy or its pack changes.",
   "shelf": {
-    "toys": 451,
+    "toys": 461,
     "public": 319,
-    "kit": 385
+    "kit": 393
   },
   "depthModelMB": 27.3,
   "toys": {
@@ -45,23 +45,23 @@
     "guitar": {
       "kind": "kit",
       "recipeFile": "src/packs/music.js",
-      "recipeKB": 43.1,
-      "recipeGzipKB": 13.5,
+      "recipeKB": 47.2,
+      "recipeGzipKB": 15,
       "sharedBy": 4
     },
     "xylophone": {
       "kind": "kit",
       "recipeFile": "src/packs/music.js",
-      "recipeKB": 43.1,
-      "recipeGzipKB": 13.5,
+      "recipeKB": 47.2,
+      "recipeGzipKB": 15,
       "sharedBy": 4
     },
     "music-box": {
       "kind": "kit",
       "recipeFile": "src/packs/objects.js",
-      "recipeKB": 92.1,
-      "recipeGzipKB": 25.3,
-      "sharedBy": 11
+      "recipeKB": 106.4,
+      "recipeGzipKB": 29.1,
+      "sharedBy": 10
     },
     "real-moon": {
       "kind": "kit",
@@ -101,23 +101,23 @@
     "photo-3d": {
       "kind": "kit",
       "recipeFile": "src/packs/photo-3d.js",
-      "recipeKB": 21.6,
-      "recipeGzipKB": 7.7,
+      "recipeKB": 28.8,
+      "recipeGzipKB": 10.1,
       "sharedBy": 1
     },
     "moving-photo-3d": {
       "kind": "kit",
       "recipeFile": "src/packs/live.js",
-      "recipeKB": 19.7,
-      "recipeGzipKB": 7.4,
+      "recipeKB": 19.9,
+      "recipeGzipKB": 7.5,
       "sharedBy": 3
     },
     "your-book": {
       "kind": "kit",
       "recipeFile": "src/packs/pictures.js",
-      "recipeKB": 127.4,
-      "recipeGzipKB": 40.9,
-      "sharedBy": 4
+      "recipeKB": 128.7,
+      "recipeGzipKB": 41.4,
+      "sharedBy": 5
     },
     "model-splats": {
       "kind": "kit",
@@ -143,8 +143,8 @@
     "ripple-tank": {
       "kind": "kit",
       "recipeFile": "src/packs/optics.js",
-      "recipeKB": 42.2,
-      "recipeGzipKB": 14,
+      "recipeKB": 43.5,
+      "recipeGzipKB": 14.5,
       "sharedBy": 2
     },
     "fourier-circles": {
@@ -185,8 +185,8 @@
     "qr-code": {
       "kind": "kit",
       "recipeFile": "src/packs/qr.js",
-      "recipeKB": 47.5,
-      "recipeGzipKB": 15.3,
+      "recipeKB": 48.6,
+      "recipeGzipKB": 15.7,
       "sharedBy": 1
     },
     "splat-field": {

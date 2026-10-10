@@ -108,62 +108,266 @@ export function plainModules(code) {
   return plain;
 }
 
+// Lane QR r4: the weave is a real halftone QR code now (Chu, Chang, Lee,
+// Lee and Mitra's method, simplified). Before, every picture cell was pushed
+// toward its module's color, so the random pattern of the modules outweighed
+// the photo. Now:
+//
+// - Each module is k × k cells (3 × 3 by default), the middle carrying the
+//   bit. The finders, separators, timing, alignment and format information
+//   stay plain.
+// - Error diffusion (Floyd–Steinberg, serpentine) runs over the whole grid.
+//   The forced cells (the plain modules and the middles) keep their color and
+//   pass their error on to the free cells next to them, so the picture's
+//   tones come out right around them too. Free cells are dark or light: black
+//   or white in the black-and-white style, the picture's own color darkened
+//   or lightened in the color style (a color halftone).
+// - Nothing pushes a module toward its color as such. A reliability nudge
+//   turns free cells to the module's color only where a module would misread:
+//   where a camera, a little out of focus, would see it on the wrong side of
+//   the middle gray by less than `margin`. The contrast sets the margin, and
+//   the toy steps it up until the scan check passes (makeWoven with `read`).
+// - The mask is the one of the eight whose modules agree best with the
+//   picture, and a larger version (more modules) gives more detail.
+
+// The gray the free cells take in the color style: a dark cell's color is the
+// picture's, darkened to at most DARK; a light one's lightened to at least
+// LIGHT.
+const DARK = 0.25;
+const LIGHT = 0.78;
+// A forced cell's gray in the color style: as dark as the ink, as light as
+// the paper nearly.
+const FORCED_DARK = 0.1;
+const FORCED_LIGHT = 0.9;
+// Shifts a color's gray to `to` by adding the same amount to each channel
+// (which keeps its colorfulness, where scaling toward black or white washes
+// it out), then darkens or lightens what the clamping left.
+function shiftTo(c, to) {
+  const d = to - gray(c);
+  const s = [clamp01(c[0] + d), clamp01(c[1] + d), clamp01(c[2] + d)];
+  return d < 0 ? toDark(s, to) : toLight(s, to);
+}
+
+// How much each of a module's k × k cells counts in what a camera sees at
+// the module's center: a Gaussian blur of SIGMA modules (more than the
+// check's blur of a fifth of a module: the pixels, and a camera's own
+// softness), normalized over the module.
+const SIGMA = 0.28;
+const erf = (x) => {
+  // Abramowitz and Stegun 7.1.26.
+  const t = 1 / (1 + 0.3275911 * Math.abs(x));
+  const y = 1 - ((((1.061405429 * t - 1.453152027) * t + 1.421413741) * t - 0.284496736) * t + 0.254829592) * t * Math.exp(-x * x); // prettier-ignore
+  return x < 0 ? -y : y;
+};
+export function cellWeights(k, sigma = SIGMA) {
+  const one = [];
+  const cdf = (x) => 0.5 * (1 + erf(x / (sigma * Math.SQRT2)));
+  for (let i = 0; i < k; i++) one.push(cdf((i + 1) / k - 0.5) - cdf(i / k - 0.5));
+  const w = new Float32Array(k * k);
+  let sum = 0;
+  for (let v = 0; v < k; v++) for (let u = 0; u < k; u++) sum += w[v * k + u] = one[u] * one[v];
+  for (let i = 0; i < k * k; i++) w[i] /= sum;
+  return w;
+}
+
+// The margin a module is kept from the middle gray at contrast a: none at 0
+// (the picture as it is, only the middles), 0.1 at the default 0.5, and on
+// up to the plain code at 1.
+export const marginAt = (a) => (a <= 0 ? -1 : a <= 0.6 ? 0.2 * a : 0.12 + 0.38 * Math.min(1, (a - 0.6) / 0.4)); // prettier-ignore
+
+// The mask whose modules agree best with the picture: the least, over the
+// data modules, of how far the picture's gray is from each module's color.
+export function fitMask(text, level, pic, { min = 1 } = {}) {
+  let best = null;
+  for (let mask = 0; mask < 8; mask++) {
+    const code = encodeQR(text, level, { boost: false, mask, min });
+    if (!pic) return code;
+    const N = code.size;
+    const src = squareSample(pic, N);
+    const plain = plainModules(code);
+    let cost = 0;
+    for (let i = 0; i < N * N; i++) {
+      if (plain[i]) continue;
+      const g = gray([src[i * 3], src[i * 3 + 1], src[i * 3 + 2]]);
+      cost += Math.abs(g - (code.dark[i] ? 0 : 1));
+    }
+    if (!best || cost < best.cost) best = { code, cost };
+  }
+  return best.code;
+}
+
 // The woven code: { code, k, c, G, cells: Float32Array(G * G * 3), plain,
-// center (per cell, 1 where it keeps the bit) }. G = size × k (the quiet zone
-// is plain light, not in the grid). o: { contrast (0..1), center, style }.
+// center (per cell, 1 where it keeps the bit), forced (per cell, 1 for a
+// middle or plain cell, 2 for a nudged one) }. G = size × k (the quiet zone
+// is plain light, not in the grid). o: { contrast (0..1), center, style,
+// margin (overrides the contrast's) }.
 export function weave(code, pic, o = {}) {
   const N = code.size;
   const { k, c } = centerById(o.center);
   const G = N * k;
   const a = o.contrast ?? 0.5;
-  const lim = limits(a);
+  const margin = o.margin ?? marginAt(a);
   const plain = plainModules(code);
   const src = pic ? squareSample(pic, G) : null;
-  const cells = new Float32Array(G * G * 3);
-  const center = new Uint8Array(G * G);
-  const lo = (k - c) / 2;
   const bw = o.style === "bw";
-  // For dithering: the gray each cell aims at, and the error carried on.
-  const err = bw ? new Float32Array(G * G) : null;
+  const lo = (k - c) / 2;
+  const center = new Uint8Array(G * G);
+  // forced: 0 free, 1 a middle or plain cell, 2 nudged; fdark: its color.
+  const forced = new Uint8Array(G * G);
+  const fdark = new Uint8Array(G * G);
   for (let y = 0; y < G; y++)
     for (let x = 0; x < G; x++) {
-      const r = Math.floor(y / k);
-      const col = Math.floor(x / k);
-      const m = r * N + col;
-      const dark = code.dark[m] === 1;
-      const u = x - col * k;
-      const v = y - r * k;
+      const m = Math.floor(y / k) * N + Math.floor(x / k);
+      const u = x % k;
+      const v = y % k;
       const mid = u >= lo && u < lo + c && v >= lo && v < lo + c;
-      const q = (y * G + x) * 3;
-      let out;
-      if (plain[m] || !src || mid) {
-        out = dark ? FG : BG;
-        if (mid) center[y * G + x] = 1;
-      } else {
-        const p = [src[q], src[q + 1], src[q + 2]];
-        out = dark ? toDark(p, lim.dark) : toLight(p, lim.light);
-        if (bw) {
-          // Floyd–Steinberg on the gray, kept inside the module's limits.
-          const want = clamp01(gray(out) + err[y * G + x]);
+      if (mid) center[y * G + x] = 1;
+      if (mid || plain[m] || !src) {
+        forced[y * G + x] = 1;
+        fdark[y * G + x] = code.dark[m];
+      }
+    }
+  const cells = new Float32Array(G * G * 3);
+  const target = new Float32Array(G * G);
+  // A forced cell's color. Lane QR r4 (the owner's note of October 9, 2026,
+  // "a little bit easier to see the image"): in the color style a middle or
+  // nudged cell keeps the picture's own hue, made as dark as the code's ink
+  // or as light as its paper, so the dots carry the picture's color too; the
+  // plain patterns stay ink and paper.
+  const forcedColor = (j) => {
+    const m = Math.floor(Math.floor(j / G) / k) * N + Math.floor((j % G) / k);
+    const ink = fdark[j] === 1;
+    if (bw || !src || plain[m]) return ink ? FG : BG;
+    const p = [src[j * 3], src[j * 3 + 1], src[j * 3 + 2]];
+    return shiftTo(p, ink ? FORCED_DARK : FORCED_LIGHT);
+  };
+  if (src) for (let i = 0; i < G * G; i++) target[i] = gray([src[i * 3], src[i * 3 + 1], src[i * 3 + 2]]); // prettier-ignore
+  const dither = () => {
+    const err = new Float32Array(G * G);
+    for (let y = 0; y < G; y++) {
+      const dir = y % 2 ? -1 : 1;
+      for (let i = 0; i < G; i++) {
+        const x = dir > 0 ? i : G - 1 - i;
+        const j = y * G + x;
+        const want = Math.min(1.5, Math.max(-0.5, target[j] + err[j]));
+        const q = j * 3;
+        let col;
+        if (forced[j]) col = forcedColor(j);
+        else {
           const ink = want < 0.5;
-          out = ink ? FG : BG;
-          const e = want - (ink ? gray(FG) : gray(BG));
-          const spread = (dx, dy, w) => {
-            const X = x + dx;
-            const Y = y + dy;
-            if (X >= 0 && X < G && Y < G) err[Y * G + X] += e * w;
-          };
-          spread(1, 0, 7 / 16);
-          spread(-1, 1, 3 / 16);
-          spread(0, 1, 5 / 16);
-          spread(1, 1, 1 / 16);
+          if (bw) col = ink ? FG : BG;
+          else {
+            const p = [src[q], src[q + 1], src[q + 2]];
+            col = ink ? (gray(p) <= DARK ? p : shiftTo(p, DARK)) : gray(p) >= LIGHT ? p : shiftTo(p, LIGHT); // prettier-ignore
+          }
+        }
+        cells[q] = col[0];
+        cells[q + 1] = col[1];
+        cells[q + 2] = col[2];
+        if (!src) continue;
+        // The error goes on to the free cells not yet visited (Floyd–
+        // Steinberg's weights, shared among those that are free).
+        const e = want - gray(col);
+        const next = [[dir, 0, 7], [-dir, 1, 3], [0, 1, 5], [dir, 1, 1]]; // prettier-ignore
+        let wsum = 0;
+        for (const [dx, dy, w] of next) {
+          const X = x + dx;
+          const Y = y + dy;
+          if (X >= 0 && X < G && Y < G && !forced[Y * G + X]) wsum += w;
+        }
+        if (!wsum) continue;
+        for (const [dx, dy, w] of next) {
+          const X = x + dx;
+          const Y = y + dy;
+          if (X >= 0 && X < G && Y < G && !forced[Y * G + X]) err[Y * G + X] += (e * w) / wsum;
         }
       }
-      cells[q] = out[0];
-      cells[q + 1] = out[1];
-      cells[q + 2] = out[2];
     }
-  return { code, k, c, G, cells, plain, center, contrast: a, style: bw ? "bw" : "color" };
+  };
+  dither();
+  // The nudge: where a module would read too close to the middle gray (or
+  // on the wrong side of it), turn its free cells to its color, the ones that
+  // count most and stray least from the picture first, until it doesn't.
+  // The diffusion runs again after each round, so the cells around carry the
+  // tone; a last round fixes any module the rerun moved.
+  const W = cellWeights(k);
+  // Readers set each part of the picture against its own surroundings (jsQR
+  // takes the mean of about 5 × 5 modules around it), so a module is read
+  // against the middle gray and the mean gray of the modules around it, half
+  // and half.
+  const R = 2;
+  const localThreshold = () => {
+    const mg = new Float32Array(N * N);
+    for (let y = 0; y < G; y++)
+      for (let x = 0; x < G; x++) {
+        const j = y * G + x;
+        mg[Math.floor(y / k) * N + Math.floor(x / k)] += gray([cells[j * 3], cells[j * 3 + 1], cells[j * 3 + 2]]) / (k * k); // prettier-ignore
+      }
+    const t = new Float32Array(N * N);
+    for (let r = 0; r < N; r++)
+      for (let c2 = 0; c2 < N; c2++) {
+        let sum = 0;
+        let n = 0;
+        for (let dr = -R; dr <= R; dr++)
+          for (let dc = -R; dc <= R; dc++) {
+            const rr = r + dr;
+            const cc = c2 + dc;
+            if (rr < 0 || cc < 0 || rr >= N || cc >= N) {
+              sum += 1; // the quiet zone
+              n++;
+              continue;
+            }
+            sum += mg[rr * N + cc];
+            n++;
+          }
+        t[r * N + c2] = 0.5 * (0.5 + sum / n);
+      }
+    return t;
+  };
+  let nudged = 0;
+  if (src && margin > -1) {
+    for (let round = 0; round < 4; round++) {
+      let changed = 0;
+      const thr = localThreshold();
+      for (let m = 0; m < N * N; m++) {
+        if (plain[m]) continue;
+        const r = Math.floor(m / N);
+        const col = m % N;
+        const dark = code.dark[m] === 1;
+        const list = [];
+        let seen = 0;
+        for (let v = 0; v < k; v++)
+          for (let u = 0; u < k; u++) {
+            const j = (r * k + v) * G + col * k + u;
+            const g = gray([cells[j * 3], cells[j * 3 + 1], cells[j * 3 + 2]]);
+            seen += W[v * k + u] * g;
+            if (!forced[j]) list.push({ j, w: W[v * k + u], g, off: Math.abs(target[j] - (dark ? 0 : 1)) }); // prettier-ignore
+          }
+        const short = () => (dark ? seen - (thr[m] - margin) : thr[m] + margin - seen);
+        if (short() <= 0) continue;
+        // The cells that move the reading most for the least change in look.
+        const to = dark ? FORCED_DARK : FORCED_LIGHT;
+        const score = (p) => (p.w * Math.abs(p.g - to)) / (0.05 + p.off);
+        list.sort((p, q) => score(q) - score(p));
+        for (const it of list) {
+          if (short() <= 0) break;
+          forced[it.j] = 2;
+          fdark[it.j] = dark ? 1 : 0;
+          const q = it.j * 3;
+          const cc = forcedColor(it.j);
+          seen += it.w * (gray(cc) - it.g);
+          cells[q] = cc[0];
+          cells[q + 1] = cc[1];
+          cells[q + 2] = cc[2];
+          changed++;
+        }
+      }
+      nudged += changed;
+      if (!changed) break;
+      if (round < 3) dither();
+    }
+  }
+  return { code, k, c, G, cells, plain, center, forced, nudged, margin, contrast: a, style: bw ? "bw" : "color" }; // prettier-ignore
 }
 
 // The measured contrast of a woven code: the mean color of its dark modules'
@@ -288,6 +492,8 @@ export const SIZES = [
   { id: "small", label: "smaller", ppm: 4, blur: 0.2 },
 ];
 
+const STRICT = [...SIZES, { ppm: 8, blur: 0.3 }, { ppm: 4, blur: 0.3 }];
+
 // Reads a woven code at each size with `read(rgba, w, h) => text | null`
 // (jsQR). Returns { ok, sizes: [{ id, label, ppm, text, ok }] }.
 export function checkWoven(w, read) {
@@ -300,6 +506,14 @@ export function checkWoven(w, read) {
   return { ok: sizes.every((s) => s.ok), sizes };
 }
 
+// How much bigger than the smallest version that fits: "fit" (as small as
+// it fits), "more" and "most" (more modules, so more detail).
+export const SIZES_UP = [
+  { id: "fit", label: "As small as it fits", up: 0 },
+  { id: "more", label: "Bigger (more detail)", up: 4 },
+  { id: "most", label: "Biggest (most detail)", up: 8 },
+];
+
 // The options a picture code is made with, tidied.
 export function tidy(o = {}) {
   return {
@@ -308,14 +522,35 @@ export function tidy(o = {}) {
     contrast: Number.isFinite(+o.contrast) ? clamp01(+o.contrast) : 0.5,
     center: centerById(o.center).id,
     style: o.style === "bw" ? "bw" : "color",
+    size: SIZES_UP.some((s) => s.id === o.size) ? o.size : "fit",
   };
 }
 
-// Encodes and weaves. boost: false keeps the level asked for.
-export function makeWoven(pic, o) {
+// Encodes (the mask that fits the picture best) and weaves. boost: false
+// keeps the level asked for. With `read` (jsQR), the nudge's margin steps up
+// from the contrast's until the woven code reads at both of the check's
+// sizes, and a little more out of focus (at most to the plain code). extra:
+// a step more to start from (the toy's, when its stage didn't read).
+export function makeWoven(pic, o, read = null) {
   const t = tidy(o);
-  const code = encodeQR(t.text, t.level, { boost: false });
-  return weave(code, pic, t);
+  const smallest = encodeQR(t.text, t.level, { boost: false }).version;
+  const up = SIZES_UP.find((s) => s.id === t.size).up;
+  const code = fitMask(t.text, t.level, pic, { min: Math.min(40, smallest + up) });
+  let margin = o.margin ?? marginAt(t.contrast) + (o.extra || 0);
+  let w = weave(code, pic, { ...t, margin });
+  if (!read || !pic) return w;
+  // A little stricter than the check (a softer focus too), so the splats on
+  // the stage, which a camera sees a little differently, read as well.
+  const reads = (x) =>
+    STRICT.every((s) => {
+      const img = rasterize(x, s.ppm, { blur: s.blur });
+      return read(img.data, img.width, img.height) === x.code.text;
+    });
+  for (let step = 0; step < 16 && !reads(w) && margin < 0.5; step++) {
+    margin = margin < 0 ? 0.02 : Math.min(0.5, margin + 0.02);
+    w = weave(code, pic, { ...t, margin });
+  }
+  return w;
 }
 
 // The closest version that scans: the options asked for first, then a little

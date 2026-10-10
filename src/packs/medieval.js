@@ -26,6 +26,7 @@ import {
   evenTube,
 } from "./even.js";
 import { World, Body } from "../physics/world.js"; // lane Physics
+import { surfacePoints as hebPoints } from "../physics/world.js"; // lane Hands-on H3
 
 const TAU = Math.PI * 2;
 const DEG = Math.PI / 180;
@@ -285,6 +286,29 @@ const TREB = (() => {
   return { axle, dl, tip, hinge, stone, rel, tRel, angle };
 })();
 
+// Lane Hands-on H3: the trebuchet worked by hand. drive() keeps the arm's
+// turn rate `w` and its clock `t`; the stone rides the sling until the arm
+// swings past the release angle, then flies (`fly`: where, how fast, when).
+const TREB_HAND = { a: null, a0: null, w: 0, t: 0, fly: null };
+const TREB_G = 6; // recipe units per second squared, as the tap's arc
+
+// The dragon egg's shell pieces by hand: each piece's middle and its crack
+// (where it breaks off), as built; the lower egg is ground for them.
+const DRAGON_EGG = (() => {
+  const yc = 0.05;
+  const H = 0.68;
+  const r = (y) => {
+    const t = clamp((y - yc) / H, -1, 1);
+    return 0.5 * Math.sqrt(Math.max(0, 1 - t * t)) * (1 - 0.14 * t);
+  };
+  const at = (u, y) => [Math.sin(u * TAU) * r(y), y, Math.cos(u * TAU) * r(y)];
+  const shells = [0, 1, 2].map((i) => {
+    const u = (i + 0.5) / 3;
+    return { mid: vec.mul(at(u, 0.42), 0.8), crack: at(u, 0.18), quat: quatAxisAngle([0, 1, 0], u * TAU) }; // prettier-ignore
+  });
+  return { shells, floor: yc - H, shell: { type: "ellipsoid", r: [0.24, 0.24, 0.1] } };
+})();
+
 // The crossbow is built along +Z, then turned to point left of the viewer.
 const XBOW = (() => {
   const q = quatEuler(-4, -22, 0);
@@ -312,6 +336,14 @@ const XBOW = (() => {
     side: quatRotate(q, [1, 0, 0]),
   };
 })();
+
+// Lane Hands-on H3: the crossbow worked by hand. The left half of the string
+// is a hinge (0: drawn back to the latch, as built; X.left.angle: let go,
+// straight across), the right half follows. `prev` is the last value, `t`
+// the toy's clock (from drive), `fly` when the bolt flew, `back` when the
+// string was last cocked (a new bolt appears), `trig` when the trigger
+// was pulled.
+const XBOW_HAND = { prev: null, t: 0, fly: null, back: -1e9, trig: null };
 
 // Remembers which way a toggle is moving (per player: `c` is the player's
 // own control state), so a reset can look different from the action.
@@ -1020,7 +1052,64 @@ export const RECIPES = {
     alive: true,
     controls: [{ key: "launch", label: "Launch", type: "pulse", ease: 4.2 }],
     action: { key: "launch", label: "Launch" },
+    // Hands-on (lane Hands-on H3): pull the arm's long end down a little to
+    // free its catch, then let go: the counterweight drops, the arm whips up
+    // and the sling lets the stone fly at its release angle, as fast as the
+    // arm threw it; the arm swings to and fro and settles hanging.
+    hands: {
+      joints: [
+        {
+          type: "hinge",
+          part: "arm",
+          pivot: TREB.axle,
+          axis: [0, 0, 1],
+          min: -3.3,
+          max: 0.15,
+          stick: 0.05,
+          stickWay: 1,
+          damping: 0.7,
+          bounce: 0.2,
+          com: TREB.hinge,
+          pos: vec.add(TREB.axle, vec.mul(TREB.dl, 0.75)),
+          pick: [0.32, 0.32, 0.25],
+          sound: (ev, vol) =>
+            ev.kind === "free"
+              ? { voice: "click", f: 900, decay: 0.08, vol: 0.6 }
+              : { voice: "wood", f: 160, decay: 0.3, vol: vol * 0.7 },
+          also: (a, parts) => {
+            const T = TREB;
+            const H = TREB_HAND;
+            H.a = a;
+            const q = quatAxisAngle([0, 0, 1], a);
+            const swing = (p) => vec.sub(vec.add(T.axle, quatRotate(q, vec.sub(p, T.axle))), p);
+            parts.weight = { offset: swing(T.hinge), quat: quatAxisAngle([0, 0, 1], clamp(-0.05 * H.w, -0.4, 0.4)) }; // prettier-ignore
+            // The sling lets go once the arm passes the release angle.
+            if (!H.fly && a < T.rel && H.w < 0) {
+              const r = vec.sub(vec.add(T.axle, quatRotate(q, vec.sub(T.stone, T.axle))), T.axle);
+              H.fly = { from: vec.add(T.axle, r), v: vec.add(vec.mul([-r[1], r[0], 0], H.w), [0, 0, -0.4 * Math.abs(H.w) * 0.2]), t0: H.t }; // prettier-ignore
+            }
+            if (H.fly && a > -0.05 && Math.abs(H.w) < 0.05) H.fly = null; // home again (↺)
+            if (!H.fly) parts.stone = { offset: swing(T.stone), visible: 1 };
+            else {
+              const tau = H.t - H.fly.t0;
+              const p = vec.add(H.fly.from, vec.mul(H.fly.v, tau));
+              p[1] = Math.max(0.08, p[1] - 0.5 * TREB_G * tau * tau);
+              parts.stone = { offset: vec.sub(p, T.stone), visible: 1 - smoothstep(0.6, 1.1, tau) };
+            }
+          },
+        },
+      ],
+    },
     drive(t, c, out) {
+      // By hand: the arm's turn rate, on the toy's clock (lane Hands-on H3).
+      const H = TREB_HAND;
+      const dt = clamp(t - H.t, 0, 0.1);
+      H.t = t;
+      if (H.a !== null && dt > 0) {
+        const w = H.a0 === null ? 0 : (H.a - H.a0) / dt;
+        H.w += (w - H.w) * Math.min(1, dt * 20);
+        H.a0 = H.a;
+      }
       const T = TREB;
       const u = 1 - c.launch;
       const th = T.angle(u);
@@ -1200,7 +1289,73 @@ export const RECIPES = {
     alive: true,
     controls: [{ key: "shoot", label: "Shoot", type: "pulse", ease: 2.6 }],
     action: { key: "shoot", label: "Shoot" },
+    // Hands-on (lane Hands-on H3): it starts cocked, the string caught on
+    // its latch. A tap pulls the trigger: the string snaps forward with a
+    // twang and the bolt flies off along its groove. Pull the string back
+    // to the latch and it clicks, cocked again, and a new bolt lies in the
+    // groove.
+    hands: {
+      joints: [
+        {
+          type: "hinge",
+          part: "stringL",
+          pivot: quatRotate(XBOW.q, XBOW.tipL),
+          axis: XBOW.left.axis,
+          min: 0,
+          max: XBOW.left.angle,
+          gravity: false,
+          spring: 260,
+          rest: XBOW.left.angle,
+          damping: 6,
+          bounce: 0.25,
+          latch: "min",
+          catch: 0.08,
+          trigger: true,
+          pos: quatRotate(XBOW.q, vec.mul(vec.add(XBOW.tipL, XBOW.latch), 0.5)),
+          pick: [0.26, 0.12, 0.26],
+          sound: (ev, vol) => {
+            if (ev.kind === "latch") return { voice: "click", f: 1400, decay: 0.06, vol: 0.7 };
+            if (ev.kind === "free") return { voice: "sample", file: "bow-and-target-release.mp3", at: 0, pitch: 0.85, vol: 0.9, fallback: { voice: "bowstring", f: 130 } }; // prettier-ignore
+            return ev.kind === "stop" ? { voice: "bowstring", f: 150, vol: Math.min(0.6, vol * 0.4) } : undefined; // prettier-ignore
+          },
+          also: (v, parts) => {
+            const X = XBOW;
+            const H = XBOW_HAND;
+            const r = v / X.left.angle;
+            parts.stringR = { quat: quatAxisAngle(X.right.axis, X.right.angle * r) };
+            // Let go from the latch: the bolt flies, the trigger kicks.
+            if (!H.fly && H.prev !== null && H.prev < 0.02 && v > 0.04) {
+              H.fly = H.t;
+              H.trig = H.t;
+            }
+            // Drawn back onto the latch: cocked, with a new bolt.
+            if (H.fly !== null && v < 1e-3) {
+              H.fly = null;
+              H.back = H.t;
+            }
+            H.prev = v;
+            if (H.fly === null) {
+              const f = smoothstep(0, 0.35, H.t - H.back);
+              parts.bolt = { offset: vec.mul(X.fwd, -0.04 * (1 - f)), visible: f };
+            } else {
+              const tau = Math.max(0, H.t - H.fly);
+              parts.bolt = {
+                offset: vec.mul(X.fwd, 6 * tau),
+                visible: 1 - smoothstep(0.3, 0.5, tau),
+              };
+            }
+            const k = H.trig === null ? 1 : (H.t - H.trig) / 0.25;
+            parts.trigger = { angle: k < 1 ? 0.35 * Math.sin(k * Math.PI) : 0 };
+          },
+        },
+      ],
+    },
     drive(t, c, out) {
+      // By hand: the toy's clock, for the bolt's flight (lane Hands-on H3).
+      // (A new clock, the toy opened again: a fresh start.)
+      if (t < XBOW_HAND.t)
+        Object.assign(XBOW_HAND, { prev: null, fly: null, back: -1e9, trig: null });
+      XBOW_HAND.t = t;
       const X = XBOW;
       const u = 1 - c.shoot;
       let rel = 0;
@@ -1402,6 +1557,31 @@ export const RECIPES = {
     options: [{ key: "plume", label: "Plume", type: "color", default: "#c8262e" }],
     controls: [{ key: "visor", label: "Visor", type: "toggle", default: 0, ease: 0.9 }],
     action: { key: "visor", label: "Open the visor" },
+    // Hands-on (lane Hands-on H3): lift the visor on its side hinges. Raised
+    // all the way it stays up, held by its stiff hinges; let go lower and its
+    // weight brings it down shut with a clank.
+    hands: {
+      joints: [
+        {
+          type: "hinge",
+          part: "visor",
+          pivot: [0, 0.1, 0],
+          axis: [-1, 0, 0],
+          min: 0,
+          max: 1.5,
+          friction: 30,
+          bounce: 0.12,
+          start: (c) => 1.5 * easeInOut(c.visor),
+          com: [0, -0.1, 0.6],
+          pos: [0, -0.1, 0.58],
+          pick: [0.5, 0.42, 0.3],
+          sound: (ev, vol) =>
+            ev.v < 0.5
+              ? { voice: "metal", f: 380, decay: 0.35, vol: vol * 0.8 }
+              : { voice: "metal", f: 560, decay: 0.2, vol: vol * 0.5 },
+        },
+      ],
+    },
     drive(t, c, out) {
       out.parts.visor = { angle: -1.5 * easeInOut(c.visor) };
       out.amount = 0.8;
@@ -1828,6 +2008,38 @@ export const RECIPES = {
     ],
     controls: [{ key: "hatch", label: "Hatch", type: "toggle", default: 0, ease: 1.8 }],
     action: { key: "hatch", label: "Hatch" },
+    // Hands-on (lane Hands-on H3): pull the shell pieces off one by one. Each
+    // bends out on its crack, then snaps off and falls; the baby dragon rises
+    // a little more with each piece gone, until it peeks out. ↺ mends the egg.
+    hands: {
+      floor: DRAGON_EGG.floor,
+      pieces: () => [
+        ...DRAGON_EGG.shells.map((sh, i) => ({ part: `shell${i}`, pos: sh.mid, quat: sh.quat, pivot: sh.crack, solid: DRAGON_EGG.shell, points: hebPoints(DRAGON_EGG.shell, 1), pick: [0.28, 0.3, 0.28], mass: 0.15, friction: 0.7, restitution: 0.25 })), // prettier-ignore
+        // The lower egg: ground for the pieces, never picked up.
+        { pos: [0, 0.05, 0], solid: { type: "ellipsoid", r: [0.47, 0.66, 0.47] }, pick: [1e-3, 1e-3, 1e-3] }, // prettier-ignore
+      ],
+      joints: DRAGON_EGG.shells.map((sh, i) => ({
+        type: "break",
+        part: `shell${i}`,
+        at: sh.crack,
+        pull: 0.3,
+        give: 0.3,
+        sound: (ev) => (ev.kind === "snap" ? { voice: "crack", f: 2400, bright: 0.7, decay: 0.3 } : undefined), // prettier-ignore
+        also:
+          i === 0
+            ? (v, parts) => {
+                let gone = 0;
+                for (let k = 0; k < 3; k++) {
+                  const o = parts[`shell${k}`]?.offset;
+                  gone += o ? smoothstep(0.08, 0.4, Math.hypot(...o)) : 0;
+                }
+                const up = easeInOut(clamp(gone / 2.2, 0, 1));
+                parts.dragon = { offset: [0, 0.2 * up, 0], visible: smoothstep(0.05, 0.4, gone) };
+              }
+            : undefined,
+      })),
+      sound: (hit, vol) => ({ voice: "clack", f: 1300, decay: 0.08, vol: vol * 0.5 }),
+    },
     drive(t, c, out) {
       const o = easeInOut(c.hatch);
       for (let i = 0; i < 3; i++) out.parts[`shell${i}`] = { angle: 1.75 * o };
