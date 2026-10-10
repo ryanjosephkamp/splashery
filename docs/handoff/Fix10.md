@@ -12,9 +12,10 @@ ryanjosephkamp/splashery.
 - Handoff file: docs/handoff/Fix10.md. Create it, starting with this brief word for word under "##
   Brief". Then keep "## State
 
-- October 9, 2026: READY for the owner's marks. Draft PR #467 (`claude/lane-fix10`) and the engine
-  PR #475 (`claude/lane-fix10-engine`, merges first). Nine cards in the Fix10 section of Effect
-  review page 2.
+- October 10, 2026: **merged; the lane is done.** The owner marked all nine Fix10 cards "good"
+  (October 9). Batch 3 (#485) merged both PRs into main at 6332bcf5: the engine PR #475 (the night
+  sky's drag) and the lane PR #467, with the how-to fix e5cedb37 (the fruit MRI's and the electron
+  microscope's lines within the 110-character limit of tests/help.spec.mjs).
 - 1. Volume viewer sound: tap `pageflip` plus a soft `thud`; Play `action.quiet: ["sweep"]` and two
      `whoom` cues, one per pass; drag silent. In tools/sound-review.json as "ready".
 - 2. Electron microscope: zoom on any object (`targets`, `action.at`, `kit.data.zoom`).
@@ -155,6 +156,9 @@ replace the prefix and lane record with yours).
   before).
 
 ## For the Operator
+
+- Merged in batch 3 (#485, 6332bcf5). The Fix10 section of Effect review page 2 can be set to
+  `finished: true`. The open items below are not this lane's and stay for the Operator.
 
 - October 9, 2026, 23:47 UTC: the owner marked all nine Fix10 cards "good" on Effect review page 2.
   Nothing is open on the lane's side; #475 then #467 are ready to merge after the full run.
