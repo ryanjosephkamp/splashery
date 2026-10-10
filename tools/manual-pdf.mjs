@@ -35,6 +35,8 @@ await page.evaluate(
   () =>
   Promise.all([...document.images].map((i) => (i.complete ? null : new Promise((r) => (i.onload = i.onerror = r))))), // prettier-ignore
 );
+// The PDF prints every fold open (the web version starts them closed).
+await page.evaluate(() => document.querySelectorAll("details").forEach((d) => (d.open = true)));
 const footer = `<div style="width:100%;font:9px sans-serif;color:#666;padding:0 0.75in;display:flex;justify-content:space-between"><span>The Tinkerer's Manual</span><span><span class="pageNumber"></span> of <span class="totalPages"></span></span></div>`; // prettier-ignore
 const pdf = await page.pdf({
   format: "Letter",
