@@ -2432,6 +2432,17 @@ const ALBUM_BOXES = (W, H) => ({
   r: { c: [W * 0.735, 0], s: [W * 0.45, H * 0.86] },
 });
 
+// Lane Hands-on H3: the Storybook (the owner's idea of October 9, 2026): a
+// real storybook with pages, "The Little Lamp Who Wanted to See the Sea"
+// (tools/hh3-storybook.mjs), read as Your book reads a PDF: a tap or a
+// pull turns each page. It keeps to its own book (no Open a file).
+const STORY_RECIPE = {
+  ...BOOK_RECIPE,
+  tiltLock: false, // (the Storybook's own default: it opens with the tilt free, UI r5)
+  pictures: { ...BOOK_RECIPE.pictures, sample: () => "assets/toys/storybook/storybook.pdf" },
+  input: undefined,
+};
+
 const ALBUM_RECIPE = {
   kernel: "sharp", // polish: crisper text and edges (labs; src/kernels.js)
   turntable: false,
@@ -2680,6 +2691,27 @@ const FRAME_RECIPE = {
   ],
   controls: [{ key: "swing", label: "Swing", type: "pulse", ease: FRAME_SWING }],
   action: { key: "swing", label: "Swing the frame" },
+  // Hands-on (lane Hands-on H3): push the frame and it swings on its nail,
+  // a pendulum that dies away and settles hanging level. (Its picture is
+  // never picked up whole.)
+  hands: {
+    joints: () => [
+      {
+        type: "hinge",
+        part: "frame",
+        pivot: [0, FRAME.nailY, 0.02],
+        axis: [0, 0, 1],
+        min: -0.6,
+        max: 0.6,
+        damping: 0.45,
+        bounce: 0.3,
+        com: [0, 0, 0.02],
+        pos: [0, 0, 0.03],
+        pick: [FRAME.X, FRAME.Y, 0.12],
+        sound: () => null,
+      },
+    ],
+  },
   focus: (p) => focusToggle(FRAME, p),
   pictures: {
     sample: (o) =>
@@ -2767,6 +2799,7 @@ const FRAME_RECIPE = {
     const X = ow + fw;
     const Y = oh + fw;
     const nailY = Y + 0.3;
+    Object.assign(FRAME, { X, Y, nailY }); // (for Hands-on's hinge; lane Hands-on H3)
     const fp = k.part("frame", { pivot: [0, nailY, 0.02], axis: [0, 0, 1] });
     // Room for the swing.
     for (const sx of [-1, 1]) k.reach([sx * (X + 0.25), -Y - 0.1, 0]);
@@ -2884,6 +2917,8 @@ export const RECIPES = {
     // A flat sheet that shows whatever you open, and nothing else. It keeps
     // still (no turntable), facing you.
     turntable: false,
+    // Hands-on Level 1 (lane Hands-on H3): picked up, tossed and set down whole.
+    handsLevel1: true,
     tiltLock: true, // a drag only spins it left and right (lane Viewer)
     // Few splats of its own (the card); the picture's are the sheet's.
     density: 0.3, // (r3: enough for the card's edges to stay sharp)
@@ -2981,6 +3016,7 @@ export const RECIPES = {
     },
   },
   "your-book": BOOK_RECIPE,
+  book: STORY_RECIPE, // lane Hands-on H3
   "photo-album": ALBUM_RECIPE,
   "picture-frame": FRAME_RECIPE,
 };

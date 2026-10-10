@@ -3064,11 +3064,48 @@ body.focus #pop-toggle {
   cursor: pointer;
 }
 
+/* Lane Photo depth: dragged by its frame or its name; once moved, src/ui.js places it (left, top)
+   and the media queries below leave it there. */
+.stage-dial {
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.stage-dial-show {
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.stage-dial.dragging,
+.stage-dial-show.dragging {
+  cursor: grabbing;
+}
+
+.stage-dial-label {
+  padding: 2px 4px;
+  border-radius: 6px;
+}
+
+.stage-dial-label:focus-visible {
+  outline: 2px solid var(--accent, currentColor);
+}
+
+/* Focus mode on a computer hides the panel, so nothing keeps room for it: the stage's buttons, the
+   slider over the stage and the toy's own slider move with the full-screen stage. */
+@media (min-width: 761px) {
+  body.focus {
+    --panel-w: 0px;
+  }
+}
+
 @media (max-width: 760px) {
   /* On a phone: the right edge, below the toy's name and well above the
      stage's own buttons, clear of a face in the middle. */
-  .stage-dial,
-  .stage-dial-show {
+  .stage-dial:not(.placed),
+  .stage-dial-show:not(.placed) {
     right: 8px;
     top: 132px;
     transform: none;

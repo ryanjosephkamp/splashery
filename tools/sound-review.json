@@ -1903,11 +1903,139 @@
       "candidates": []
     },
     "photo-3d": {
-      "status": "site",
-      "said": "(September 30, 2026, on the Sound Board) Doesn't need to sound like wind. No whoosh necessary.",
+      "status": "ready",
+      "said": "(September 30, 2026, on the Sound Board) Doesn't need to sound like wind. No whoosh necessary. (October 9, 2026, walkthrough) Choose the depth sound on Photo to 3D: a few built-in choices with no wind or whoosh, plus use my own sound.",
       "note": "Doesn't need to sound like wind. No whoosh necessary.",
-      "plan": "Now: the photo's paper lifting as the depth comes up and settling as it lies flat (no wind, no whoosh).",
-      "candidates": []
+      "plan": "Now: a Sound choice in the Toy tab (lane Photo depth): Paper (as it is), a soft chime, pop-up layers (four plucks as the layers rise, and down as they settle), a water drop, none, or your own sound (kept on the device). On the board: the three new ones, rising then settling 3 s later.",
+      "candidates": [
+        {
+          "id": "pdp-chime",
+          "label": "Soft chime (new)",
+          "sound": [
+            {
+              "voice": "bell",
+              "f": 784,
+              "bright": 0.25,
+              "decay": 1.4,
+              "vol": 0.22,
+              "at": 0
+            },
+            {
+              "voice": "bell",
+              "at": 0.55,
+              "f": 1175,
+              "bright": 0.2,
+              "decay": 1.6,
+              "vol": 0.16
+            },
+            {
+              "voice": "bell",
+              "f": 1175,
+              "bright": 0.2,
+              "decay": 1.2,
+              "vol": 0.16,
+              "at": 3
+            },
+            {
+              "voice": "bell",
+              "at": 3.55,
+              "f": 784,
+              "bright": 0.25,
+              "decay": 1.6,
+              "vol": 0.2
+            }
+          ]
+        },
+        {
+          "id": "pdp-layers",
+          "label": "Pop-up layers (new)",
+          "sound": [
+            {
+              "voice": "harp",
+              "at": 0.42,
+              "f": 392,
+              "vol": 0.32
+            },
+            {
+              "voice": "harp",
+              "at": 0.78,
+              "f": 494,
+              "vol": 0.32
+            },
+            {
+              "voice": "harp",
+              "at": 1.12,
+              "f": 587,
+              "vol": 0.32
+            },
+            {
+              "voice": "harp",
+              "at": 1.46,
+              "f": 784,
+              "vol": 0.32
+            },
+            {
+              "voice": "harp",
+              "at": 3.42,
+              "f": 784,
+              "vol": 0.28
+            },
+            {
+              "voice": "harp",
+              "at": 3.7800000000000002,
+              "f": 587,
+              "vol": 0.28
+            },
+            {
+              "voice": "harp",
+              "at": 4.12,
+              "f": 494,
+              "vol": 0.28
+            },
+            {
+              "voice": "harp",
+              "at": 4.46,
+              "f": 392,
+              "vol": 0.28
+            }
+          ]
+        },
+        {
+          "id": "pdp-drop",
+          "label": "Water drop (new)",
+          "sound": [
+            {
+              "voice": "drip",
+              "f": 820,
+              "n": 1,
+              "vol": 0.5,
+              "at": 0
+            },
+            {
+              "voice": "drip",
+              "at": 1.5,
+              "f": 1150,
+              "n": 1,
+              "vol": 0.22
+            },
+            {
+              "voice": "drip",
+              "f": 1050,
+              "n": 1,
+              "vol": 0.45,
+              "at": 3
+            },
+            {
+              "voice": "drip",
+              "at": 4.3,
+              "f": 720,
+              "n": 1,
+              "vol": 0.2
+            }
+          ]
+        }
+      ],
+      "round": "2026-10-09"
     },
     "splat-field": {
       "status": "site",
@@ -4538,6 +4666,245 @@
       "plan": "Space is silent: a soft, low breath as the view flies to the next planet, like the other real-space toys.",
       "candidates": [],
       "round": "2026-10-07"
+    },
+    "sushi-boat": {
+      "status": "ready",
+      "said": "(October 3, 2026, labs review) Keep the first sound; remove the second little beat.",
+      "note": "Keep the first sound; remove the second little beat.",
+      "plan": "Now: the wooden knock only, as the boat rocks; the little second beat is gone (Photoreal r3).",
+      "round": "2026-10-08",
+      "candidates": []
+    },
+    "seeded-loaf": {
+      "status": "ready",
+      "said": "(October 3, 2026, labs review) It sounds like a zipper: something very subtle instead.",
+      "note": "It sounds like a zipper: something very subtle instead.",
+      "plan": "Now: one very soft thud as the loaf lands; no crunch (Photoreal r3).",
+      "round": "2026-10-08",
+      "candidates": []
+    },
+    "steak": {
+      "status": "ready",
+      "said": "(October 3, 2026, labs review) Not the right sound; something fitting and not overwhelming.",
+      "note": "Not the right sound; something fitting and not overwhelming.",
+      "plan": "Now: a quiet, soft slap as the steak lands on each side (it flips over and back); no hiss (Photoreal r3).",
+      "round": "2026-10-08",
+      "candidates": []
+    },
+    "alum-crystal": {
+      "status": "ready",
+      "said": "(October 3, 2026, labs review) Better, but remove the ding.",
+      "note": "Better, but remove the ding.",
+      "plan": "Now: no ding: a soft stony knock as the crystal is set back on its block (Photoreal r3).",
+      "round": "2026-10-08",
+      "candidates": []
+    },
+    "puffin": {
+      "status": "ready",
+      "said": "(October 3, 2026, labs review) Use a real puffin's call.",
+      "note": "Use a real puffin's call.",
+      "plan": "Now: soft landings as it hops (no flutter); a real puffin's call, from a CC0 or CC BY recording, is still to come (Photoreal r3).",
+      "round": "2026-10-08",
+      "candidates": []
+    },
+    "toy-trex": {
+      "status": "ready",
+      "said": "(October 3, 2026, labs review) They sound like wind: a subtle bounce sound instead.",
+      "note": "They sound like wind: a subtle bounce sound instead.",
+      "plan": "Now: a subtle plastic tap as the toy rocks on its feet; no roar or wind (Photoreal r3).",
+      "round": "2026-10-08",
+      "candidates": []
+    },
+    "elephant-souvenir": {
+      "status": "ready",
+      "said": "(October 3, 2026, labs review) They sound like wind: a subtle bounce sound instead.",
+      "note": "They sound like wind: a subtle bounce sound instead.",
+      "plan": "Now: two soft, heavy steps as it turns; no wind (Photoreal r3).",
+      "round": "2026-10-08",
+      "candidates": []
+    },
+    "cave-lioness": {
+      "status": "ready",
+      "said": "(October 3, 2026, labs review) Wind and far too loud: replace it.",
+      "note": "Wind and far too loud: replace it.",
+      "plan": "Now: one quiet, low, soft breath out as she looks round; no wind or roar (Photoreal r3).",
+      "round": "2026-10-08",
+      "candidates": []
+    },
+    "dog-plush": {
+      "status": "ready",
+      "said": "(October 3, 2026, labs review) Sounds like a rubber band: replace it.",
+      "note": "Sounds like a rubber band: replace it.",
+      "plan": "Now: the soft thump of a plush landing, twice; no boing (Photoreal r3).",
+      "round": "2026-10-08",
+      "candidates": []
+    },
+    "bmx-bike": {
+      "status": "ready",
+      "said": "(October 3, 2026, labs review) Remove the bell; a softer opening sound.",
+      "note": "Remove the bell; a softer opening sound.",
+      "plan": "Now: a soft, dull knock as it leans on its kickstand, and a lighter one as it rocks back; no bell (Photoreal r3).",
+      "round": "2026-10-08",
+      "candidates": []
+    },
+    "murex-shell": {
+      "status": "ready",
+      "said": "(October 3, 2026, labs review) Remove the clicking; keep the ding, more subtle.",
+      "note": "Remove the clicking; keep the ding, more subtle.",
+      "plan": "Now: the ding only, quieter and shorter; no clicking (Photoreal r3).",
+      "round": "2026-10-08",
+      "candidates": []
+    },
+    "cactus-real": {
+      "status": "ready",
+      "said": "(October 3, 2026, labs review) No clicking; softer notes, like the first cactus.",
+      "note": "No clicking; softer notes, like the first cactus.",
+      "plan": "Now: one soft plucked note, like the first cactus's; no clicking (Photoreal r3; a single note, as the sound lint keeps tunes to the music shelf).",
+      "round": "2026-10-08",
+      "candidates": []
+    },
+    "desk-globe": {
+      "status": "ready",
+      "said": "(October 3, 2026, labs review) Spin it, with no wind or suction sound.",
+      "note": "Spin it, with no wind or suction sound.",
+      "plan": "Now: the globe spins in its stand, with one soft, hollow knock as it is flicked round; no wind or suction (Photoreal r3).",
+      "round": "2026-10-08",
+      "candidates": []
+    },
+    "cherry-blossom-photo": {
+      "status": "ready",
+      "said": "(October 3, 2026, labs review) The bounce is fine; no twinkle.",
+      "note": "The bounce is fine; no twinkle.",
+      "plan": "Now: the bounce's soft flutter only; no twinkle (Photoreal r3).",
+      "round": "2026-10-08",
+      "candidates": []
+    },
+    "triceratops-skull": {
+      "status": "ready",
+      "said": "(Photoreal r3, October 8, 2026) A new toy: its first sound, to hear on the Sound Board.",
+      "note": "New toy (lane Photoreal r3).",
+      "plan": "Now: A low, soft knock of bone as the skull turns to look.",
+      "round": "2026-10-08",
+      "candidates": []
+    },
+    "cone-shell": {
+      "status": "ready",
+      "said": "(Photoreal r3, October 8, 2026) A new toy: its first sound, to hear on the Sound Board.",
+      "note": "New toy (lane Photoreal r3).",
+      "plan": "Now: A soft porcelain tick as the shell turns.",
+      "round": "2026-10-08",
+      "candidates": []
+    },
+    "celestial-globe": {
+      "status": "ready",
+      "said": "(Photoreal r3, October 8, 2026) A new toy: its first sound, to hear on the Sound Board.",
+      "note": "New toy (lane Photoreal r3).",
+      "plan": "Now: A gentle wooden creak as the globe is set turning.",
+      "round": "2026-10-08",
+      "candidates": []
+    },
+    "armillary-sphere": {
+      "status": "ready",
+      "said": "(Photoreal r3, October 8, 2026) A new toy: its first sound, to hear on the Sound Board.",
+      "note": "New toy (lane Photoreal r3).",
+      "plan": "Now: A quiet brass ring as the inner rings turn.",
+      "round": "2026-10-08",
+      "candidates": []
+    },
+    "stannern-meteorites": {
+      "status": "ready",
+      "said": "(Photoreal r3, October 8, 2026) A new toy: its first sound, to hear on the Sound Board.",
+      "note": "New toy (lane Photoreal r3).",
+      "plan": "Now: Five soft stony thuds as the stones land, one after another.",
+      "round": "2026-10-08",
+      "candidates": []
+    },
+    "fluorite-crystal": {
+      "status": "ready",
+      "said": "(Photoreal r3, October 8, 2026) A new toy: its first sound, to hear on the Sound Board.",
+      "note": "New toy (lane Photoreal r3).",
+      "plan": "Now: A low, soft hum while the lamp is on.",
+      "round": "2026-10-08",
+      "candidates": []
+    },
+    "ammonite-agate": {
+      "status": "ready",
+      "said": "(Photoreal r3, October 8, 2026) A new toy: its first sound, to hear on the Sound Board.",
+      "note": "New toy (lane Photoreal r3).",
+      "plan": "Now: A stone-on-wood knock as the fossil is laid on its other face.",
+      "round": "2026-10-08",
+      "candidates": []
+    },
+    "morasko-meteorite": {
+      "status": "ready",
+      "said": "(Photoreal r3, October 8, 2026) A new toy: its first sound, to hear on the Sound Board.",
+      "note": "New toy (lane Photoreal r3).",
+      "plan": "Now: A deep, quiet ring of iron.",
+      "round": "2026-10-08",
+      "candidates": []
+    },
+    "pyrite-cubes": {
+      "status": "ready",
+      "said": "(Photoreal r3, October 8, 2026) A new toy: its first sound, to hear on the Sound Board.",
+      "note": "New toy (lane Photoreal r3).",
+      "plan": "Now: A small, bright clink.",
+      "round": "2026-10-08",
+      "candidates": []
+    },
+    "megalodon-tooth": {
+      "status": "ready",
+      "said": "(Photoreal r3, October 8, 2026) A new toy: its first sound, to hear on the Sound Board.",
+      "note": "New toy (lane Photoreal r3).",
+      "plan": "Now: A dull stone tap as the tooth is laid on its other side.",
+      "round": "2026-10-08",
+      "candidates": []
+    },
+    "volume-viewer": {
+      "status": "ready",
+      "said": "(The walkthrough of October 9, 2026, triage Fix10) The volume viewer's sound is wrong: no click and no rising \"vroom\".",
+      "note": "No click and no rising hum.",
+      "plan": "Now in the site (lane Fix10): a tap slides a film onto a lightbox (a papery slip and a soft settle); Play has its own dark, soft rush for each pass of the cut; the drag is silent. On the board: the tap, then Play's two rushes.",
+      "candidates": [
+        {
+          "id": "fx10-tap",
+          "label": "Tap: film on a lightbox (new)",
+          "sound": [
+            {
+              "voice": "pageflip",
+              "f": 1100,
+              "decay": 0.8,
+              "vol": 0.55
+            },
+            {
+              "voice": "thud",
+              "at": 0.36,
+              "f": 160,
+              "decay": 0.6,
+              "bright": 0.15,
+              "vol": 0.12
+            }
+          ]
+        },
+        {
+          "id": "fx10-play",
+          "label": "Play: the cut's two passes (new)",
+          "sound": [
+            {
+              "voice": "whoom",
+              "f": 260,
+              "decay": 1.6,
+              "vol": 0.32
+            },
+            {
+              "voice": "whoom",
+              "at": 2.5,
+              "f": 220,
+              "decay": 1.5,
+              "vol": 0.26
+            }
+          ]
+        }
+      ]
     },
     "photo-dash": {
       "status": "ready",
