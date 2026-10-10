@@ -81,7 +81,14 @@ games) and the Arcade packs.
 - Clips on Effect review page 2 (lane record `ArcadeR3`), each game before (main) and after, at
   phone size with real play: `arc3-shardball`, `arc3-strata`, `arc3-photo-dash`, `arc3-stone-belt`,
   `arc3-soft-landing`, `arc3-longtail`, `arc3-cast-a-shadow`, `arc3-grain-garden` and
-  `arc3-note-rider` (with `-before` cards). Waiting for the owner's marks.
+  `arc3-note-rider` (with `-before` cards).
+- The owner's marks (October 9): every card "good" but Strata's: "nearly perfect", but keep the
+  classic as one version and add a copy that's a real 3D box with depth, 3D only. Done: a row of
+  buttons in the game picks Classic, 3D well or Wide 3D well (a new game in that well; the kit's
+  `choiceRebuild`); the 3D wells are 3D only (`views`, `forceView`), with ⟳ Turn, ⤾ Tip, ⤿ Roll and
+  Drop in a 2 × 2 block, an outline where the stone will land (a frame of thin bars in its color),
+  and a look round the well with two fingers (the arrows follow the view). Card `arc3-strata-r2`,
+  waiting for his mark.
 - Sounds: Photo Dash (the coin) and Note Rider (seven instruments) are "ready" in
   `tools/sound-review.json`.
 - Tests: `tests/arc3.spec.mjs` (9) and the older Arcade specs pass (37 in all); the full suite is
@@ -95,6 +102,10 @@ games) and the Arcade packs.
   drag as looking (Shardball: a drag that starts on the dome, not on the ground). It eases back to
   straight in 2D. The first slide into 3D (or the first game that starts in 3D) shows a "Look
   around" hint for three seconds.
+- Choices that need a new game (`choiceRebuild`): the runtime rebuilds the toy with the option and
+  hands over (`ArcadeRuntime.handoff`, at most 8 s old): the new game starts at once, in the
+  whole-page view if the old one was in it. `views`, `look` and `forceView` may be functions of the
+  options too.
 - Other kit additions: `tapFire: false` (a tap in play isn't a fire press; Strata reads its taps),
   `pad`, `padLabels` and `controls` may be functions of the options, `choiceKey` (the option that
   holds a game's choice, so it starts as saved), `game.caption()` (small print on the stage: Photo
