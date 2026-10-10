@@ -451,9 +451,9 @@ test.describe("Level 4's sixty more programs", () => {
       const href = await page.locator(`#g-${e.id} a.button`).getAttribute("href");
       await page.goto(`/?renderer=webgl2&profile=weak&labs=1${href.slice(href.indexOf("#s="))}`);
       await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
-      await expect(page.locator("#toy-status")).toHaveText(/^Your program/, { timeout: 180_000 });
-      const typed = await page.evaluate(() => window.__splashery.app.scene?.toy?.options ?? null);
-      if (typed) expect(typed.x, e.id).toBeTruthy();
+      await expect(page.locator("#toy-status")).toHaveText(/^Splat equation/, { timeout: 180_000 });
+      // The Program picker shows "Your own": the link carried a typed program, not a preset.
+      await expect(page.locator("select", { hasText: "Your own (below)" }).first()).toHaveValue("custom"); // prettier-ignore
     }
   });
 });
