@@ -1423,7 +1423,7 @@ export const TOY_HELP = {
   trebuchet: {
     howTo: "Tap it to launch: the weight drops and the long arm flings a stone.",
     about:
-      "A trebuchet is a giant throwing machine from the Middle Ages. A long wooden arm swings on an axle, with a heavy weight on its short end and a sling on its long end. When the weight falls, the long end whips up and over, the sling swings out and lets go, and the stone flies a long way. Carpenters built them from great timbers, and the biggest could throw a stone as heavy as a person.\n\nTap it to launch: the weight drops, the arm swings up and the stone sails off, then the arm comes back down, ready for the next one. Today people build trebuchets for fun, to throw pumpkins in contests.",
+      "A trebuchet is a giant throwing machine from the Middle Ages. A long wooden arm swings on an axle, with a heavy weight on its short end and a sling on its long end. When the weight falls, the long end whips up and over, the sling swings out and lets go, and the stone flies a long way. Carpenters built them from great timbers, and the biggest could throw a stone as heavy as a person.\n\nTap it to launch: the weight drops, the arm swings up and the stone sails off, then the arm comes back down, ready for the next one. Today people build trebuchets for fun, to throw pumpkins in contests. With ✋ Hands-on on, pull the long end of the arm down a little to free its catch, then let go: the counterweight drops, the arm whips up and the sling flings the stone.",
   },
   crossbow: {
     howTo: "Tap it to shoot a bolt; the string snaps and a new bolt loads.",
@@ -1433,7 +1433,7 @@ export const TOY_HELP = {
   "knights-helmet": {
     howTo: "Tap to open the visor; tap again to close it.",
     about:
-      "A knight's helmet was made of steel, hammered into shape by a skilled craftsman called an armorer. The front piece, the visor, has narrow slits and holes to see and breathe through, and it swings up on pivots at the sides so the knight could show their face. Plumes of colored feathers on top made the knight easy to spot at a tournament.\n\nTap it to open the visor, and tap again to close it. Pick the color of the plume in the Toy tab. A full suit of steel plate armor weighed about 20 to 25 kilograms (45 to 55 pounds).",
+      "A knight's helmet was made of steel, hammered into shape by a skilled craftsman called an armorer. The front piece, the visor, has narrow slits and holes to see and breathe through, and it swings up on pivots at the sides so the knight could show their face. Plumes of colored feathers on top made the knight easy to spot at a tournament.\n\nTap it to open the visor, and tap again to close it. Pick the color of the plume in the Toy tab. A full suit of steel plate armor weighed about 20 to 25 kilograms (45 to 55 pounds). With ✋ Hands-on on, lift the visor on its hinges yourself: raised all the way it stays up; let go lower and it drops shut with a clank.",
   },
   crown: {
     howTo: "Tap it: it rises and its jewels light up one by one.",
@@ -1443,7 +1443,7 @@ export const TOY_HELP = {
   "dragon-egg": {
     howTo: "Tap to hatch the egg; tap again to go back.",
     about:
-      "Dragons are creatures of legend, told of all over the world. In many European tales they are winged, fire-breathing beasts that guard treasure; in Chinese stories they are wise, long, snake-like beings that bring rain and good luck. In stories, a dragon hatches from an egg, just as lizards and snakes do.\n\nTap it to hatch the egg: cracks run across the scaly shell, it breaks open and a baby dragon peeks out in a burst of golden sparkles. Tap again to go back. Pick an emerald, ruby, sapphire or gold egg in the Toy tab.",
+      "Dragons are creatures of legend, told of all over the world. In many European tales they are winged, fire-breathing beasts that guard treasure; in Chinese stories they are wise, long, snake-like beings that bring rain and good luck. In stories, a dragon hatches from an egg, just as lizards and snakes do.\n\nTap it to hatch the egg: cracks run across the scaly shell, it breaks open and a baby dragon peeks out in a burst of golden sparkles. Tap again to go back. Pick an emerald, ruby, sapphire or gold egg in the Toy tab. With ✋ Hands-on on, pull the shell pieces off one by one: each snaps off and falls, and the baby dragon rises a little more with each piece gone.",
   },
   "wizards-orb": {
     howTo: "Tap it to cast a spell: sparks spiral out and runes circle the orb.",
