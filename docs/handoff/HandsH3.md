@@ -77,21 +77,24 @@ page 2 (lane HandsH3). Merge order:
 - Medieval #436: knight's helmet, trebuchet, dragon egg. All good.
 - Pictures #437: picture frame (labs). Good.
 
-Open PRs (October 9, 2026; #430 and #455 merged): engine #459 (latches and triggers, strike pieces,
-plucked strings) and #460 (`handsLevel1`); shelves #432 Open me, #435 Holidays, #436 Medieval, #437
-Pictures, #464 Music (on #459 and the shelves) and #463 Level 1 (on #460). Every branch has main
-merged in. Level 1 is on for the Picture lab, the Screen (not while capturing), the Room echo meter
-(not while the mic is on) and the Fluid lab. Left out: Your book and Photo album (every press turns
-a page), Photo to 3D, Video to 3D and Splat mirror (one-sided captures smear when tossed).
+Open PRs (October 9, 2026, evening; #430 and #455 merged): engine #459 (latches and triggers, strike
+pieces, plucked strings) and #460 (`handsLevel1`); shelves #432 Open me (the Storybook taken out),
+#435 Holidays, #436 Medieval, #437 Pictures, #464 Music (on #459 and the shelves) and #463 Level 1
+(on #460); and #477 Storybook. Every card on the shelves is marked good. They wait for batch 3: when
+batch 2 lands, merge main into each and report the heads in merge order.
 
-Cards after #455: hh3-patterned-egg-r2 (the bottom is solid now) and hh3-book-r3 (the specks are
-gone, but the turning pages' edges still look soft). Waiting: the water bottle and soda can (the
-Fluids engine's pour). Next: the first photoreal toys after agreeing with Photoreal r3.
+#477 is the owner's idea for the Storybook: "The Little Lamp Who Wanted to See the Sea", ten pages
+of our own words and drawings (`tools/hh3-storybook.mjs`), read with Your book's pages; card
+hh3-book-r5. The built book's recipe stays in `src/packs/objects.js`, unused, for his comparison
+(hh3-book-r3); switching back is the `pack:` line in `src/toys.js`.
+
+The shelf tests step a fixed clock and hand their moves straight to Hands-on, so a loaded machine
+sees the same frames. Run them with `SPLASHERY_PORT=<port>` (the config reads that, not a URL).
+Waiting: the water bottle and soda can (the Fluids engine's pour). Next: the first photoreal toys
+after agreeing with Photoreal r3.
 
 ## Notes", "## Known issues" and "## For the Operator
 
 - Please merge engine PR #430 before the Open me PR; the Open me branch carries its commit.
 - The water bottle and the soda can (labs) wait for the Fluids engine's pour.
-- The storybook: the owner's fallback, if hh3-book-r3 doesn't pass, is a short storybook PDF opened
-  in the Your book toy. That rebuilds the toy (its recipe, a new PDF asset), which is more than this
-  lane's `hands` blocks: please say whether this lane should do it.
+- #477 (the Storybook) is a public toy's change: it waits for the owner's mark on hh3-book-r5.
