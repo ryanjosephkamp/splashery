@@ -929,6 +929,19 @@ two balls, dropped from one hand, land together).
 hands: { place: false, pieces: () => [bigBall, smallBall], carry: { ball0: ["ball1"], ball1: ["ball0"] } }, // prettier-ignore
 ```
 
+**Level 1 for picture and still toys** (`handsLevel1`, lane Hands-on H3): a picture toy, or a still
+one (`turntable: false`), stays out of Hands-on unless it asks: `handsLevel1: true` lets it be
+picked up, tossed and set down whole. A function of the toy's info says when: false while the toy is
+a live tool someone is working in (the Screen showing your screen, a converter showing your own
+file), and the switch then goes off by itself and ✋ hides until it's no longer live. A toy with its
+own drags (`recipe.drag`) that asks keeps them: the switch starts off, a press where `drag.at` takes
+it still goes to its drag, and only a press off it picks the toy up.
+
+```js
+handsLevel1: true,
+handsLevel1: () => !live.on("screen"),
+```
+
 **A forgiving press** (lane Hands-on H3; every toy, nothing to ask for): with the ✋ switch on, a
 press where the pick buffer finds no splat (between a desk lamp's arm and its beam, beside a thin
 pen) still takes the toy when the finger's ray crosses it: a piece's `pick` ellipsoid in pieces
