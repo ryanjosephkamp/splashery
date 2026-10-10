@@ -1482,6 +1482,7 @@ export class Player {
     const moving = this.frozen ? false : this.camera.update(dt);
     const pose = this.arcade?.pose(this.frozen ? 0 : dt) || this.camera.pose(); // Arcade
     this.camera.viewportHeight = this.canvas.clientHeight || 600;
+    this.camera.viewportWidth = this.canvas.clientWidth || 0; // lane Fix10
     this.stage.setCameraPose(pose);
     const key =
       pose.position.map((v) => v.toFixed(4)).join(",") +

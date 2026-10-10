@@ -64,6 +64,7 @@ export function createUI(app) {
     toySliderLabel: $("toy-slider-label"),
     toySliderInput: $("toy-slider-input"),
     stageDial: $("stage-dial"), // Live r8
+    stage: $("stage"), // (lane Photo depth: the slider is placed over it)
     stageDialInput: $("stage-dial-input"),
     stageDialLabel: $("stage-dial-label"),
     stageDialHide: $("stage-dial-hide"),
@@ -2768,10 +2769,138 @@ export function createUI(app) {
     setDialHidden(true);
     els.stageDialShow.focus();
   });
-  els.stageDialShow.addEventListener("click", () => {
+  els.stageDialShow.addEventListener("click", (e) => {
+    if (dialDrag.moved) return e.preventDefault(); // (the end of a drag, not a tap)
     setDialHidden(false);
     els.stageDialInput.focus();
   });
+
+  // Lane Photo depth: the slider (and its small button when hidden) can be dragged anywhere over the
+  // stage, by its frame or its name (not the range itself). One place for both, kept as the center's
+  // share of the stage's width and height, so it stays put when the stage changes size (full screen,
+  // the desktop panel folded, a turned phone) and is clamped inside it. Remembered on this device,
+  // one place for phones and one for wider screens. A double-click or Home puts it back; with its
+  // name (or the small button) focused, the arrow keys move it.
+  const POS_KEY = "splashery.stageDialPos";
+  const layout = () => (matchMedia("(max-width: 760px)").matches ? "phone" : "wide");
+  let dialPos = {};
+  try {
+    dialPos = JSON.parse(localStorage.getItem(POS_KEY) || "{}") || {};
+  } catch {
+    // No storage (or a bad entry): it starts at its usual place.
+  }
+  const dialDrag = { moved: false };
+  function saveDialPos() {
+    try {
+      localStorage.setItem(POS_KEY, JSON.stringify(dialPos));
+    } catch {
+      // No storage: it stays where it was put for this visit.
+    }
+  }
+  // Puts both the slider and its button at the remembered place (or their usual one).
+  function placeDial() {
+    const at = dialPos[layout()];
+    const stage = els.stage.getBoundingClientRect();
+    for (const el of [els.stageDial, els.stageDialShow]) {
+      if (!at || !stage.width) {
+        el.style.left = el.style.top = el.style.right = el.style.transform = "";
+        el.classList.remove("placed");
+        continue;
+      }
+      el.classList.add("placed");
+      el.style.right = "auto";
+      el.style.transform = "none";
+      if (el.hidden) continue; // (measured when it shows)
+      const w = el.offsetWidth;
+      const h = el.offsetHeight;
+      const m = 4;
+      const cx = stage.left + at[0] * stage.width;
+      const cy = stage.top + at[1] * stage.height;
+      const x = Math.min(stage.right - w - m, Math.max(stage.left + m, cx - w / 2));
+      const y = Math.min(stage.bottom - h - m, Math.max(stage.top + m, cy - h / 2));
+      el.style.left = `${Math.round(x)}px`;
+      el.style.top = `${Math.round(y)}px`;
+    }
+  }
+  // Moves the place so the element's center lands at (x, y) on screen, clamped inside the stage.
+  function moveDialTo(el, x, y) {
+    const stage = els.stage.getBoundingClientRect();
+    if (!stage.width || !stage.height) return;
+    const hw = el.offsetWidth / 2 + 4;
+    const hh = el.offsetHeight / 2 + 4;
+    x = Math.min(stage.right - hw, Math.max(stage.left + hw, x));
+    y = Math.min(stage.bottom - hh, Math.max(stage.top + hh, y));
+    dialPos[layout()] = [
+      +((x - stage.left) / stage.width).toFixed(4),
+      +((y - stage.top) / stage.height).toFixed(4),
+    ];
+    placeDial();
+  }
+  function resetDial() {
+    delete dialPos[layout()];
+    saveDialPos();
+    placeDial();
+  }
+  function dragDial(el) {
+    el.addEventListener("pointerdown", (e) => {
+      if (e.button !== 0 || e.target.closest("input, #stage-dial-hide")) return;
+      const r = el.getBoundingClientRect();
+      const dx = e.clientX - (r.left + r.width / 2);
+      const dy = e.clientY - (r.top + r.height / 2);
+      const x0 = e.clientX;
+      const y0 = e.clientY;
+      dialDrag.moved = false;
+      let live = false;
+      const move = (ev) => {
+        if (!live && Math.hypot(ev.clientX - x0, ev.clientY - y0) < 6) return;
+        if (!live) {
+          live = true;
+          dialDrag.moved = true;
+          el.classList.add("dragging");
+        }
+        ev.preventDefault();
+        moveDialTo(el, ev.clientX - dx, ev.clientY - dy);
+      };
+      const up = () => {
+        removeEventListener("pointermove", move);
+        removeEventListener("pointerup", up);
+        removeEventListener("pointercancel", up);
+        el.classList.remove("dragging");
+        if (live) saveDialPos();
+        // (the click that ends a drag is let through once, then taps work again)
+        setTimeout(() => (dialDrag.moved = false), 0);
+      };
+      addEventListener("pointermove", move, { passive: false });
+      addEventListener("pointerup", up);
+      addEventListener("pointercancel", up);
+    });
+    el.addEventListener("dblclick", (e) => {
+      if (!e.target.closest("input, #stage-dial-hide")) resetDial();
+    });
+  }
+  dragDial(els.stageDial);
+  dragDial(els.stageDialShow);
+  for (const el of [els.stageDialLabel, els.stageDialShow])
+    el.addEventListener("keydown", (e) => {
+      const box = el === els.stageDialShow ? el : els.stageDial;
+      if (e.key === "Home") {
+        e.preventDefault();
+        return resetDial();
+      }
+      const step = e.shiftKey ? 40 : 10;
+      const d = { ArrowLeft: [-step, 0], ArrowRight: [step, 0], ArrowUp: [0, -step], ArrowDown: [0, step] }[e.key]; // prettier-ignore
+      if (!d) return;
+      e.preventDefault();
+      const r = box.getBoundingClientRect();
+      moveDialTo(box, r.left + r.width / 2 + d[0], r.top + r.height / 2 + d[1]);
+      saveDialPos();
+    });
+  // (the stage changes size with full screen, focus mode, the panel and a turned phone)
+  if (typeof ResizeObserver !== "undefined") new ResizeObserver(() => placeDial()).observe(els.stage); // prettier-ignore
+  addEventListener("resize", () => placeDial());
+  new MutationObserver(() => placeDial()).observe(els.stageDial, { attributes: true, attributeFilter: ["hidden"] }); // prettier-ignore
+  new MutationObserver(() => placeDial()).observe(els.stageDialShow, { attributes: true, attributeFilter: ["hidden"] }); // prettier-ignore
+  placeDial();
 
   // ---- Toy help (lane Help) ---------------------------------------------------------
   // A short how-to-play line when a new toy opens (picked from the shelf,
