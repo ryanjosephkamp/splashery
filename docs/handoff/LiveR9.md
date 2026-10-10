@@ -95,15 +95,19 @@ keep it honest, each tune named and credited. Branch `claude/lane-live-r9-2`, PR
   the transport; the "shown" line names the playing tune and its source.
   - Rising scale: D major, D4 to A5, which climbs through all eight cube modes in order.
   - Broken chord: E major, up and down.
-  - Two voices: chords a fifth apart. A first try with sixths rang the wrong modes: the worker heard
-    each sixth at its virtual pitch (B4 + G♯5, a 5:3 ratio, is heard as E3), which is real pitch
-    perception. A fifth (3:2) is heard an octave below its lower note, which folds onto the lower
-    note's mode, so the credit says "a chord is heard at its lower note's pitch".
+  - Two voices: chords a fifth apart, the lower voice going D4, G♯4, B4, G♯4, D4. A first try with
+    sixths rang the wrong modes: the worker heard each sixth at its virtual pitch (B4 + G♯5, a 5:3
+    ratio, is heard as E3), which is real pitch perception. A fifth (3:2) is heard an octave below
+    its lower note; that pitch folds onto the lower note's mode only while it lies below the cell's
+    range, so the lower voice stays under about 536 Hz (an E5 + B5 was heard as E4 and rang cube 0,
+    1, 0). The credit says how a fifth is heard.
   - Ode to Joy: Ludwig van Beethoven, from the Ninth Symphony (1824), public domain.
   - Twinkle, Twinkle, Little Star: traditional, the French tune "Ah! vous dirai-je, maman" (1761),
     public domain.
 - Tests: `tests/lv9-2.spec.mjs` (the tunes' notes, credits and modes in Node; each tune played in
   the browser rings its notes' modes and the beads settle; screenshots `lv9-2-tunes-*`).
+- The clip tool takes over a tune's track as soon as it opens: it played in real time while the
+  worker measured it, so the beads had moved before the first frame.
 - Found on the way: `page.waitForFunction` with an async check passes at once (it doesn't wait for
   the promise's result). Part 1's `cellReady` in `tests/lv9.spec.mjs` and `tools/lv9-clip.mjs` used
   it; both now poll. Part 1's tests passed anyway, because the loops after those waits did the real

@@ -3711,9 +3711,9 @@ Proposals below are suggestions; the owner may change them.
     2, 2 mixed; a flask's disc, one shell, and a disc and a shell). Switch on the sound still rings
     the chosen mode. Live r9 part 2 (the owner's walkthrough of October 10, 2026): five built-in
     tunes made in the page (no recordings): a rising scale through all eight cube modes, a broken
-    chord, two voices in fifths, Ode to Joy (Beethoven, 1824) and Twinkle, Twinkle, Little Star
-    (traditional, 1761), each named and credited in the Toy tab and played through the same path as
-    an opened file.
+    chord, two voices in fifths (a fifth is heard an octave below its lower note), Ode to Joy
+    (Beethoven, 1824) and Twinkle, Twinkle, Little Star (traditional, 1761), each named and credited
+    in the Toy tab and played through the same path as an opened file.
   - Sound: The mode's tone, eight octaves down (the real cell rings at about 100 to 370 kHz).
 - **Room echo meter** (`room-echo`). Now: tap: Clap in the sample room. Plan: keep.
   - Owner: The owner's approval of lane Live input ("live input go", September 30, 2026; labs only).

@@ -126,6 +126,19 @@ for (const spec of ids) {
     if (tuneId)
       await page.evaluate((id) => document.getElementById(`cell-tune-${id}`).click(), tuneId); // prettier-ignore
     else await page.setInputFiles("#toy-input-file", wav);
+    // The track is taken over as soon as it opens (silent, its clock held
+    // before the clip), so the beads stay as built until the clip starts.
+    await page.evaluate(async () => {
+      const box = await import("/src/packs/chladni-3d.js");
+      window.__clipClock = -1e3;
+      for (let k = 0; k < 3000 && !box.cellAudioState().track; k++) await new Promise((r) => setTimeout(r, 5)); // prettier-ignore
+      const track = box.cellAudioState().track;
+      if (!track) return;
+      track.pause();
+      track.time = () => window.__clipClock;
+      Object.defineProperty(track, "playing", { get: () => true });
+      window.__clipTrack = track;
+    });
     await until(async () => { const a = (await import("/src/packs/chladni-3d.js")).cellAudioState(); return a.name && a.measured >= 1; }); // prettier-ignore
     await until(() => document.getElementById("progress").hidden);
   }
@@ -144,8 +157,9 @@ for (const spec of ids) {
         const track = box.cellAudioState().track;
         if (!track || tracks.has(track)) return;
         tracks.add(track);
+        if (track === window.__clipTrack) return; // (taken over already)
         track.pause();
-        track.time = () => clock;
+        track.time = () => window.__clipClock;
         Object.defineProperty(track, "playing", { get: () => true });
       };
       takeTrack();
@@ -191,6 +205,7 @@ for (const spec of ids) {
       const frame = async () => {
         pending = step;
         clock += step;
+        window.__clipClock = clock;
         takeTrack();
         if (Math.abs(clock * 2 - Math.round(clock * 2)) < step / 2) {
           const a = box.cellAudioState();
@@ -208,9 +223,9 @@ for (const spec of ids) {
         gif.writeFrame(applyPalette(rgba, palette, "rgb565"), W, H, { palette, delay, repeat: 0 }); // prettier-ignore
       };
       // The lead-in frames (silence: the beads scattered as built).
-      clock = -1e3;
+      clock = window.__clipClock = -1e3;
       for (let t = 0; t < before; t += step) await frame();
-      clock = 0;
+      clock = window.__clipClock = 0;
       for (let t = 0; t < secs - 1e-6; t += step) await frame();
       gif.finish();
       stage.setFixedSize(null);
