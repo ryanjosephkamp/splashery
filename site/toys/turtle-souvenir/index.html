@@ -6,7 +6,7 @@
     <title>Souvenir turtle · Splashery</title>
     <meta
       name="description"
-      content="Souvenir turtle, a Splashery toy made of 3D Gaussian splats: Tap it to make it hop; drag to turn it."
+      content="Souvenir turtle, a Splashery toy made of 3D Gaussian splats: Tap it to make it crawl; drag to turn it."
     />
     <meta name="robots" content="noindex" />
     <link
@@ -18,7 +18,7 @@
     <meta property="og:title" content="Souvenir turtle · Splashery" />
     <meta
       property="og:description"
-      content="Souvenir turtle, a Splashery toy made of 3D Gaussian splats: Tap it to make it hop; drag to turn it."
+      content="Souvenir turtle, a Splashery toy made of 3D Gaussian splats: Tap it to make it crawl; drag to turn it."
     />
     <meta
       property="og:url"
@@ -153,11 +153,11 @@
         <div class="toy-hero">
           <div class="toy-head">
             <h1>Souvenir turtle <span class="badge">labs</span></h1>
-            <p class="lead how-to">Tap it to make it hop; drag to turn it.</p>
+            <p class="lead how-to">Tap it to make it crawl; drag to turn it.</p>
             <dl class="does">
               <div>
                 <dt>Tap</dt>
-                <dd>A hop.</dd>
+                <dd>Crawls a little way forward, swaying, and back.</dd>
               </div>
               <div>
                 <dt>Sound</dt>
@@ -217,13 +217,22 @@
             sea.
           </p>
           <p>
-            Tap it and it hops. Drag to circle it and look at the shell plates and the flippers.
+            Tap it and the turtle crawls a little way forward, swaying, and back. Drag to circle it
+            and look at the shell plates and the flippers.
           </p>
         </section>
 
         <section class="toy-section" aria-labelledby="h-credits">
           <h2 id="h-credits">Sources and credits</h2>
-          <p>A real object, captured from photos and drawn with 3D Gaussian splats.</p>
+          <p>
+            A real object, captured from photos and drawn with 3D Gaussian splats. Its recipe is in
+            <a
+              href="https://github.com/ryanjosephkamp/splashery/blob/main/src/rigs.js"
+              target="_blank"
+              rel="noopener"
+              ><code>src/rigs.js</code></a
+            >.
+          </p>
           <ul class="toy-credits">
             <li>
               <b>Scan</b>:
@@ -424,6 +433,18 @@ https://ryanjosephkamp.github.io/splashery/site/toys/turtle-souvenir/</textarea
                 /><span class="toy-name">Cluster fly</span></a
               >
             </li>
+            <li class="toy-card" data-labs>
+              <a href="../../toys/cone-shell/"
+                ><img
+                  src="../../../assets/toys/cone-shell/thumb.webp"
+                  alt=""
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                /><span class="toy-name">Cone shell <span class="badge">labs</span></span></a
+              >
+            </li>
             <li class="toy-card">
               <a href="../../toys/garden-gnome/"
                 ><img
@@ -434,18 +455,6 @@ https://ryanjosephkamp.github.io/splashery/site/toys/turtle-souvenir/</textarea
                   loading="lazy"
                   decoding="async"
                 /><span class="toy-name">Garden gnome</span></a
-              >
-            </li>
-            <li class="toy-card">
-              <a href="../../toys/bee/"
-                ><img
-                  src="../../../assets/toys/bee/thumb.webp"
-                  alt=""
-                  width="96"
-                  height="96"
-                  loading="lazy"
-                  decoding="async"
-                /><span class="toy-name">Honeybee</span></a
               >
             </li>
           </ul>
