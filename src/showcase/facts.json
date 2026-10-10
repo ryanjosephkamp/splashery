@@ -171,8 +171,8 @@
     "splat-equation": {
       "kind": "kit",
       "recipeFile": "src/packs/splat-equation.js",
-      "recipeKB": 22.2,
-      "recipeGzipKB": 7.9,
+      "recipeKB": 23,
+      "recipeGzipKB": 8.2,
       "sharedBy": 1
     },
     "neural-network": {
