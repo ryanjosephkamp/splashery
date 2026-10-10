@@ -1578,7 +1578,7 @@
     "u": "toys/quartz-cluster/",
     "k": "toy",
     "s": "Gems",
-    "d": "Tap it to light the crystal points one by one.",
+    "d": "Tap it to light the crystal points one by one. Hands-on: snap a point off, put it back.",
     "w": "quartz cluster gems gems crystal points rock clear mineral quartz-cluster",
     "i": "../assets/toys/quartz-cluster/thumb.webp"
   },
@@ -1660,7 +1660,7 @@
     "u": "toys/oak/",
     "k": "toy",
     "s": "Nature",
-    "d": "Tap it to shake down its leaves. Pick a season in the Toy tab.",
+    "d": "Tap it to shake down its leaves. Hands-on: shake the trunk and the leaves fall.",
     "w": "oak tree nature nature tree plant leaves branches forest acorn season autumn winter oak",
     "i": "../assets/toys/oak/thumb.webp"
   },
@@ -1669,7 +1669,7 @@
     "u": "toys/pine/",
     "k": "toy",
     "s": "Nature",
-    "d": "Tap it to shake the snow off. Turn on Snow in the Toy tab for a snowy day.",
+    "d": "Tap it to shake the snow off. Hands-on: shake the trunk and the snow slides off.",
     "w": "pine tree nature nature tree plant conifer evergreen fir spruce forest needles snow christmas pine",
     "i": "../assets/toys/pine/thumb.webp"
   },
@@ -1678,7 +1678,7 @@
     "u": "toys/palm/",
     "k": "toy",
     "s": "Nature",
-    "d": "Tap it to shake down the coconuts.",
+    "d": "Tap it to shake down the coconuts. Hands-on: pull a coconut off and drop it.",
     "w": "palm tree nature nature tree plant tropical beach island coconut fronds palm",
     "i": "../assets/toys/palm/thumb.webp"
   },
@@ -1687,7 +1687,7 @@
     "u": "toys/cherry-blossom/",
     "k": "toy",
     "s": "Nature",
-    "d": "Tap it to shake down the blossom and watch it bloom again.",
+    "d": "Tap it to shake down the blossom. Hands-on: shake the trunk; petals flutter down.",
     "w": "cherry blossom nature nature tree plant sakura pink flowers spring petals japan cherry-blossom",
     "i": "../assets/toys/cherry-blossom/thumb.webp"
   },
@@ -1696,7 +1696,7 @@
     "u": "toys/maple/",
     "k": "toy",
     "s": "Nature",
-    "d": "Tap it to send a gust whirling through. Pick the leaf color in the Toy tab.",
+    "d": "Tap it to send a gust through. Hands-on: shake the trunk and the leaves spin down.",
     "w": "maple tree nature nature tree plant autumn fall leaves red orange maple",
     "i": "../assets/toys/maple/thumb.webp"
   },
@@ -1705,7 +1705,7 @@
     "u": "toys/bonsai/",
     "k": "toy",
     "s": "Nature",
-    "d": "Tap it to grow a new branch, then trim it.",
+    "d": "Tap it to grow a new branch, then trim it. Hands-on: pull a branch; it springs back.",
     "w": "bonsai nature nature tree plant miniature pot japan zen bonsai",
     "i": "../assets/toys/bonsai/thumb.webp"
   },
@@ -1714,7 +1714,7 @@
     "u": "toys/willow/",
     "k": "toy",
     "s": "Nature",
-    "d": "Tap it to send a breeze through the hanging branches.",
+    "d": "Tap it to send a breeze through the hanging branches. Hands-on: brush the hanging branches.",
     "w": "weeping willow nature nature tree plant weeping drooping river willow",
     "i": "../assets/toys/willow/thumb.webp"
   },
@@ -1723,7 +1723,7 @@
     "u": "toys/sunflower/",
     "k": "toy",
     "s": "Nature",
-    "d": "Tap it to bring out the sun and watch the flower turn to face it.",
+    "d": "Tap it to bring out the sun. Hands-on: push the head and it nods on its stem.",
     "w": "sunflower nature nature flower plant summer yellow seeds petals sunflower",
     "i": "../assets/toys/sunflower/thumb.webp"
   },
@@ -1732,7 +1732,7 @@
     "u": "toys/rose/",
     "k": "toy",
     "s": "Nature",
-    "d": "Tap it to open the bloom. Pick its color in the Toy tab.",
+    "d": "Tap it to open the bloom. Hands-on: pull the petals off one by one.",
     "w": "rose nature nature flower plant red love petals thorns valentine rose",
     "i": "../assets/toys/rose/thumb.webp"
   },
@@ -1741,7 +1741,7 @@
     "u": "toys/dandelion/",
     "k": "toy",
     "s": "Nature",
-    "d": "Tap it to blow the seeds away.",
+    "d": "Tap it to blow the seeds away. Hands-on: swipe back and forth across it.",
     "w": "dandelion nature nature flower plant seeds blow wish clock weed dandelion",
     "i": "../assets/toys/dandelion/thumb.webp"
   },
@@ -1750,7 +1750,7 @@
     "u": "toys/tulip/",
     "k": "toy",
     "s": "Nature",
-    "d": "Tap it to open the tulips to the sun. Pick their color in the Toy tab.",
+    "d": "Tap it to open the tulips to the sun. Hands-on: push a tulip; it sways back.",
     "w": "tulips nature nature flower plant spring bulb petals holland tulip",
     "i": "../assets/toys/tulip/thumb.webp"
   },
@@ -1759,7 +1759,7 @@
     "u": "toys/daisy/",
     "k": "toy",
     "s": "Nature",
-    "d": "Tap it to spin the big daisy: loves me, loves me not.",
+    "d": "Tap it to spin the big daisy: loves me, loves me not. Hands-on: pull the petals off one by one.",
     "w": "daisies nature nature flower plant white petals meadow spring daisy",
     "i": "../assets/toys/daisy/thumb.webp"
   },
@@ -1768,7 +1768,7 @@
     "u": "toys/lotus/",
     "k": "toy",
     "s": "Nature",
-    "d": "Tap it to lift the flower out of the water and open it.",
+    "d": "Tap it to lift the flower out of the water and open it. Hands-on: lift it, drop it in: splash.",
     "w": "lotus nature nature flower plant water lily pad pond pink lotus",
     "i": "../assets/toys/lotus/thumb.webp"
   },
@@ -1777,7 +1777,7 @@
     "u": "toys/mushroom/",
     "k": "toy",
     "s": "Nature",
-    "d": "Tap the big cap to puff out a cloud of spores.",
+    "d": "Tap the big cap to puff out a cloud of spores. Hands-on: squeeze the cap; it springs back.",
     "w": "toadstool nature nature fungus fly agaric red spots forest fairy mushroom",
     "i": "../assets/toys/mushroom/thumb.webp"
   },
@@ -1786,7 +1786,7 @@
     "u": "toys/fern/",
     "k": "toy",
     "s": "Nature",
-    "d": "Tap it to unroll the fiddleheads into new fronds.",
+    "d": "Tap it to unroll the fiddleheads into new fronds. Hands-on: brush the fronds; they sway back.",
     "w": "fern nature nature plant frond forest fiddlehead green fern",
     "i": "../assets/toys/fern/thumb.webp"
   },
@@ -1813,7 +1813,7 @@
     "u": "toys/pinecone/",
     "k": "toy",
     "s": "Nature",
-    "d": "Tap it to open the scales and drop them, then put it back together.",
+    "d": "Tap it to open the scales and drop them. Hands-on: pull the scales off one by one.",
     "w": "pinecone nature nature pine cone seed scales forest tree pinecone",
     "i": "../assets/toys/pinecone/thumb.webp"
   },
@@ -1822,7 +1822,7 @@
     "u": "toys/acorn/",
     "k": "toy",
     "s": "Nature",
-    "d": "Tap it to pop the caps and sprout the acorns.",
+    "d": "Tap it to pop the caps and sprout the acorns. Hands-on: pull a cap off and put it back.",
     "w": "acorns nature nature oak nut seed leaf autumn squirrel acorn",
     "i": "../assets/toys/acorn/thumb.webp"
   },
@@ -1840,7 +1840,7 @@
     "u": "toys/bamboo/",
     "k": "toy",
     "s": "Nature",
-    "d": "Tap it to make the new shoots grow up tall.",
+    "d": "Tap it to make the new shoots grow up tall. Hands-on: pull a stalk; it sways back.",
     "w": "bamboo nature nature plant grass stalks panda asia green bamboo",
     "i": "../assets/toys/bamboo/thumb.webp"
   },
@@ -1858,7 +1858,7 @@
     "u": "toys/kelp/",
     "k": "toy",
     "s": "Nature",
-    "d": "Tap it to bring fish in to nibble the kelp.",
+    "d": "Tap it to bring fish in to nibble the kelp. Hands-on: push the fronds; they sway back.",
     "w": "kelp nature nature seaweed sea ocean underwater forest algae kelp",
     "i": "../assets/toys/kelp/thumb.webp"
   },
@@ -1975,7 +1975,7 @@
     "u": "toys/ice-cream/",
     "k": "toy",
     "s": "Food",
-    "d": "Tap to melt it and refreeze it. Pick scoops and flavors in the Toy tab.",
+    "d": "Tap to melt it and refreeze it. Hands-on: lift the scoops off, or tip the cone to spill them.",
     "w": "ice cream food food cone scoop gelato waffle melt sprinkles cherry sweet dessert ice-cream",
     "i": "../assets/toys/ice-cream/thumb.webp"
   },
@@ -1984,7 +1984,7 @@
     "u": "toys/watermelon/",
     "k": "toy",
     "s": "Food",
-    "d": "Tap it to chop it into slices that fan open.",
+    "d": "Tap it to chop it into slices that fan open. Hands-on: pick up a slice and fit it back.",
     "w": "watermelon food food fruit melon wedge slice seeds summer picnic watermelon",
     "i": "../assets/toys/watermelon/thumb.webp"
   },
@@ -1993,7 +1993,7 @@
     "u": "toys/birthday-cake/",
     "k": "toy",
     "s": "Food",
-    "d": "Tap to blow out the candles; tap again to light them. Choose how many in the Toy tab.",
+    "d": "Tap to blow out the candles; tap again to light them. Hands-on: pull a candle out, push it in.",
     "w": "birthday cake food food party candles flames blow out frosting sprinkles layers sweet dessert birthday-cake",
     "i": "../assets/toys/birthday-cake/thumb.webp"
   },
@@ -2002,7 +2002,7 @@
     "u": "toys/popcorn/",
     "k": "toy",
     "s": "Food",
-    "d": "Tap it to pop more kernels up out of the bucket.",
+    "d": "Tap it to pop more kernels up out of the bucket. Hands-on: pull the rim over to tip the bucket.",
     "w": "popcorn food food cinema movie snack bucket pop kernels butter popcorn",
     "i": "../assets/toys/popcorn/thumb.webp"
   },
@@ -2020,7 +2020,7 @@
     "u": "toys/pancakes/",
     "k": "toy",
     "s": "Food",
-    "d": "Tap to flip the top pancake. Set the stack and the syrup in the Toy tab.",
+    "d": "Tap to flip the top pancake. Hands-on: lift them off one by one; flick one up to flip it.",
     "w": "pancakes food food breakfast stack syrup butter flip hotcakes pancakes",
     "i": "../assets/toys/pancakes/thumb.webp"
   },
@@ -2029,7 +2029,7 @@
     "u": "toys/cupcake/",
     "k": "toy",
     "s": "Food",
-    "d": "Tap it to flick the cherry up; it plops back down.",
+    "d": "Tap it to flick the cherry up. Hands-on: lift the cherry off, or push the soft frosting.",
     "w": "cupcake food food fairy cake muffin frosting swirl sprinkles cherry sweet cupcake",
     "i": "../assets/toys/cupcake/thumb.webp"
   },
@@ -2083,7 +2083,7 @@
     "u": "toys/pretzel/",
     "k": "toy",
     "s": "Food",
-    "d": "Tap it to twist it like a knot and let it spring back.",
+    "d": "Tap it to twist it like a knot and let it spring back. Hands-on: pull one side to stretch it.",
     "w": "pretzel food food bread knot salt baked snack bakery pretzel",
     "i": "../assets/toys/pretzel/thumb.webp"
   },
@@ -2092,7 +2092,7 @@
     "u": "toys/croissant/",
     "k": "toy",
     "s": "Food",
-    "d": "Tap it to slice it open and melt a pat of butter inside.",
+    "d": "Tap it to slice it open and melt a pat of butter inside. Hands-on: lift the top off like a lid.",
     "w": "croissant food food pastry bakery breakfast french flaky butter croissant",
     "i": "../assets/toys/croissant/thumb.webp"
   },
@@ -2110,7 +2110,7 @@
     "u": "toys/burger/",
     "k": "toy",
     "s": "Food",
-    "d": "Tap to spread out the layers; tap again to stack them up.",
+    "d": "Tap to spread out the layers. Hands-on: lift the layers off and stack them in any order.",
     "w": "burger food food hamburger cheeseburger bun sesame lettuce tomato cheese patty burger",
     "i": "../assets/toys/burger/thumb.webp"
   },
@@ -2137,7 +2137,7 @@
     "u": "toys/egg/",
     "k": "toy",
     "s": "Food",
-    "d": "Tap to crack it open; tap again to go back.",
+    "d": "Tap to crack it open; tap again to go back. Hands-on: lift the cracked cap off.",
     "w": "boiled egg food food breakfast egg cup yolk toast soldiers crack egg",
     "i": "../assets/toys/egg/thumb.webp"
   },
@@ -2146,7 +2146,7 @@
     "u": "toys/coffee/",
     "k": "toy",
     "s": "Food",
-    "d": "Tap it to stir. Pick the latte art and the steam in the Toy tab.",
+    "d": "Tap it to stir. Hands-on: drag round in the cup to stir it yourself.",
     "w": "coffee food food latte cappuccino cup saucer drink steam cafe art coffee",
     "i": "../assets/toys/coffee/thumb.webp"
   },
@@ -2164,7 +2164,7 @@
     "u": "toys/banana/",
     "k": "toy",
     "s": "Food",
-    "d": "Tap it to pull the bananas apart and peel all three.",
+    "d": "Tap it to pull the bananas apart and peel all three. Hands-on: pull a banana off the bunch.",
     "w": "bananas food food fruit bunch yellow tropical banana",
     "i": "../assets/toys/banana/thumb.webp"
   },
@@ -2182,7 +2182,7 @@
     "u": "toys/kiwi/",
     "k": "toy",
     "s": "Food",
-    "d": "Tap it to cut it open and show the green inside.",
+    "d": "Tap it to cut it open and show the green inside. Hands-on: pull the halves apart and back.",
     "w": "kiwi food food fruit kiwifruit green seeds half fuzzy kiwi",
     "i": "../assets/toys/kiwi/thumb.webp"
   },
@@ -2191,7 +2191,7 @@
     "u": "toys/pineapple/",
     "k": "toy",
     "s": "Food",
-    "d": "Tap it to slice it into rings.",
+    "d": "Tap it to slice it into rings. Hands-on: lift the rings off and stack them.",
     "w": "pineapple food food fruit tropical crown leaves spiky pineapple",
     "i": "../assets/toys/pineapple/thumb.webp"
   },
@@ -2209,7 +2209,7 @@
     "u": "toys/grapes/",
     "k": "toy",
     "s": "Food",
-    "d": "Tap it: grapes drop off the bunch, bounce and hop back.",
+    "d": "Tap it: grapes drop off, bounce and hop back. Hands-on: pull a grape off; it drops and rolls.",
     "w": "grapes food food fruit bunch vine purple green leaf grapes",
     "i": "../assets/toys/grapes/thumb.webp"
   },
@@ -2218,7 +2218,7 @@
     "u": "toys/avocado/",
     "k": "toy",
     "s": "Food",
-    "d": "Tap it to pop the stone into the other half and back.",
+    "d": "Tap it to pop the stone into the other half. Hands-on: lift the stone out and put it back.",
     "w": "avocado food food fruit halves stone pit green guacamole avocado",
     "i": "../assets/toys/avocado/thumb.webp"
   },
@@ -2371,7 +2371,7 @@
     "u": "toys/lorenz/",
     "k": "toy",
     "s": "Math",
-    "d": "Tap to race along the path. Set the glow in the Toy tab.",
+    "d": "Tap it to race a spark round. Hands-on: drag the point to a new start; let go.",
     "w": "lorenz attractor math maths chaos butterfly strange attractor curve differential equations lorenz",
     "i": "../assets/toys/lorenz/thumb.webp"
   },
@@ -2398,7 +2398,7 @@
     "u": "toys/menger-sponge/",
     "k": "toy",
     "s": "Math",
-    "d": "Tap to close and carve the holes. Pick the level in the Toy tab.",
+    "d": "Tap to close and carve the holes. Hands-on: pull the small cubes out one by one.",
     "w": "menger sponge math maths fractal cube holes sponge recursive menger-sponge",
     "i": "../assets/toys/menger-sponge/thumb.webp"
   },
@@ -2416,7 +2416,7 @@
     "u": "toys/torus-knot/",
     "k": "toy",
     "s": "Math",
-    "d": "Tap it: the knot pulls loose and springs back. Drag to turn it. Pick a knot in the Toy tab.",
+    "d": "Tap it: the knot pulls loose and springs back. Drag to turn it. Hands-on: pull it to stretch.",
     "w": "torus knot math maths knot trefoil topology tube curve torus-knot",
     "i": "../assets/toys/torus-knot/thumb.webp"
   },
@@ -2434,7 +2434,7 @@
     "u": "toys/mandelbulb/",
     "k": "toy",
     "s": "Math",
-    "d": "Tap it to turn its discs like the dials of a lock.",
+    "d": "Tap to turn the discs. Hands-on: drag round a disc to turn it like a lock's dial.",
     "w": "mandelbulb math maths fractal 3d mandelbrot bulb mandelbulb",
     "i": "../assets/toys/mandelbulb/thumb.webp"
   },
@@ -2443,7 +2443,7 @@
     "u": "toys/sierpinski/",
     "k": "toy",
     "s": "Math",
-    "d": "Tap to explode it; tap again to put it back. Pick the level in the Toy tab.",
+    "d": "Tap to explode it. Hands-on: lift the small tetrahedra off and stack them back.",
     "w": "sierpinski tetrahedron math maths fractal triangle pyramid tetrix recursive sierpinski",
     "i": "../assets/toys/sierpinski/thumb.webp"
   },
@@ -2452,7 +2452,7 @@
     "u": "toys/platonic/",
     "k": "toy",
     "s": "Math",
-    "d": "Tap to explode it; tap again to put it back. Pick one of the five solids in the Toy tab.",
+    "d": "Tap to explode it. Hands-on: pull the faces off one by one and fit them back.",
     "w": "platonic solids math maths polyhedron tetrahedron cube octahedron dodecahedron icosahedron geometry platonic",
     "i": "../assets/toys/platonic/thumb.webp"
   },
@@ -2488,7 +2488,7 @@
     "u": "toys/unit-circle/",
     "k": "toy",
     "s": "Math",
-    "d": "Tap to send the point round. Try 3D, or type your own path, in the Toy tab.",
+    "d": "Tap to send the point round. Hands-on: drag the point round; the waves follow.",
     "w": "circle and waves math maths unit circle sine cosine wave trigonometry euler formula angle radian unit-circle",
     "i": "../assets/toys/unit-circle/thumb.webp"
   },
@@ -2506,7 +2506,7 @@
     "u": "toys/pythagoras-proof/",
     "k": "toy",
     "s": "Math",
-    "d": "Tap it to slide the triangles and show that a² + b² = c².",
+    "d": "Tap to rearrange. Hands-on: slide the triangles yourself to turn a² + b² into c².",
     "w": "pythagoras proof math maths pythagoras theorem proof right triangle square hypotenuse geometry pythagoras-proof",
     "i": "../assets/toys/pythagoras-proof/thumb.webp"
   },
