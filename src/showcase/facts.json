@@ -115,7 +115,7 @@
     "your-book": {
       "kind": "kit",
       "recipeFile": "src/packs/pictures.js",
-      "recipeKB": 128.6,
+      "recipeKB": 128.7,
       "recipeGzipKB": 41.4,
       "sharedBy": 5
     },
@@ -185,8 +185,8 @@
     "qr-code": {
       "kind": "kit",
       "recipeFile": "src/packs/qr.js",
-      "recipeKB": 47.5,
-      "recipeGzipKB": 15.3,
+      "recipeKB": 48.6,
+      "recipeGzipKB": 15.7,
       "sharedBy": 1
     },
     "splat-field": {
