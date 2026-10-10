@@ -1336,6 +1336,12 @@ export class Player {
   // The toy's tap action (open the lid, blow out the candles), or a hop.
   // `world` is where a tap on the toy landed (null from the Play button).
   act(world = null) {
+    // Lane Hands-on H3: a tap with a joint cocked on its latch (a crossbow's
+    // string) pulls the trigger instead of the toy's own tap.
+    if (this.handsOn.mode === "pieces" && this.handsOn.trigger()) {
+      this.stage.requestRender();
+      return { key: "trigger" };
+    }
     // Lane Physics: pieces moved in Hands-on go home before the toy's tap.
     if (this.handsOn.mode === "pieces") this.handsOn.reset();
     const r = this.motion.act(this.time, world ? this.toRecipe(world) : null);

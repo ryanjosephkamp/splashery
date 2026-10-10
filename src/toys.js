@@ -2705,9 +2705,9 @@ export const TOYS = [
     label: "Storybook",
     category: "objects",
     kind: "kit",
-    pack: "objects",
+    pack: "pictures", // lane Hands-on H3: a real storybook, read as Your book reads a PDF
     tags: "book pages read story hardcover open close flip",
-    camera: { yaw: 0.25, pitch: 0.78, roll: 0, distance: 3.9 },
+    camera: { yaw: 0.12, pitch: 0.12, roll: 0, distance: 2.6 }, // (as Your book's)
     tilt: "free", // UI r5: no tilt lock (the owner's review of October 2, 2026)
   },
   {
