@@ -62,3 +62,10 @@ it, neither built:
    costs no more than the same toy frozen ([FIELDS.md](FIELDS.md), "Typed programs"), so it could
    start there, behind labs. The reader would need to hand back its tree (today it returns
    JavaScript closures).
+
+## Recommendation
+
+**Keep the Moments choice as a labs option, and keep 12 as the default.** At 15 the dip falls from
+3.4% to 2.2%, but on the phone the difference is about a pixel and a half on the sphere's edge, and
+a program that fits costs 25% more memory. If smoother turning shapes matter, the keyframe texture
+above is the change that pays: it removes the dip without dividing the splats between copies.

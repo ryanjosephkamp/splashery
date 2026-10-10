@@ -65,3 +65,11 @@ Cards on Effect review page 2 (lane Kit lab, "Gloss that moves with the view"), 
 A toy opts in with one line in its recipe (`gloss: { strength, sharpness }`), still behind labs
 until he decides otherwise. The painted shine on the marble and the pool ball would then come out in
 the same change, so the toy doesn't show two.
+
+## Recommendation
+
+**Keep it as a labs option for now; it is a candidate for a default on two toys.** On the marble and
+the pool ball the moving highlight reads at once and costs no memory. It should become their default
+only after a check on a real phone and with their painted shine taken out in the same change. On the
+chess set it is too faint to be worth it at the full board: leave it off there. Don't give it to
+every kit toy: matte things (fur, fabric, food) shouldn't shine.

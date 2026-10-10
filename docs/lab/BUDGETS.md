@@ -147,7 +147,7 @@ blends every splat each frame. Expect the cost on a phone to grow with the count
 
 ## Recommendation
 
-Keep the tiers. The data supports each number in its place:
+**Keep the tiers; change no number now.** The data supports each number in its place:
 
 - **Mid at 140,000 is the knee.** It takes most of the edge and shape gain over 60k, and every step
   above it buys a few hundredths of a pixel of edge for 18 to 60% more shimmer.

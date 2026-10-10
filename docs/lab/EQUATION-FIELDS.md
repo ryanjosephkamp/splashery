@@ -47,3 +47,10 @@ tests/klab.spec.mjs round-trips a link with 240-character fields.
 Each field is evaluated for every point at every moment (13 times with t). A 240-character field is
 up to twice the work of a 120-character one, so a build with every field at its longest can take
 about twice as long. The presets are all under 120 characters and build as before.
+
+## Recommendation
+
+**Make it the toy's default (it already is, in this change).** The owner approved 240 characters as
+a real change, not an experiment. It costs about 500 more characters in the longest possible link,
+and nothing for programs that stay short. The plotters keep 120 until someone needs longer equations
+there.
