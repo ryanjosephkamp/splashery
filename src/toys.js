@@ -12,6 +12,7 @@
 
 // Shelf categories, in shelf order. A category only shows once it has toys.
 import { PHOTOREAL_R2_TOYS } from "./packs/photoreal-r2.js";
+import { PHOTOREAL_R3_TOYS } from "./packs/photoreal-r3.js"; // lane Photoreal r3
 
 export const CATEGORIES = [
   { id: "scans", label: "Photoreal" },
@@ -365,6 +366,7 @@ export const TOYS = [
   },
   // ---- Photoreal r2: more captures from SuperSplat (labs) ----
   ...PHOTOREAL_R2_TOYS,
+  ...PHOTOREAL_R3_TOYS,
 
   // ---- Photoreal models (CC0 3D models turned into splats) ----
   {
@@ -2652,7 +2654,8 @@ export const TOYS = [
     pack: "maths",
     labs: true,
     tags: "5-cell pentachoron 4-simplex 4d four dimensions polytope projection",
-    camera: { yaw: 0.55, pitch: 0.35, roll: 0, distance: 4.1 },
+    // Fix10: closer than the other 4D shapes, as its rest pose is smaller.
+    camera: { yaw: 0.55, pitch: 0.35, roll: 0, distance: 3.1 },
   },
   {
     id: "sixteen-cell",
@@ -4158,7 +4161,7 @@ export const TOYS = [
     pack: "imaging",
     labs: true,
     tags: "mri magnetic resonance imaging scan slices kiwi orange fruit seeds segments t2 imaging",
-    camera: { yaw: 0.35, pitch: 0.15, roll: 0, distance: 3.0 },
+    camera: { yaw: 0, pitch: 0, roll: 0, distance: 3.0 }, // Fix10: face-on to the slices
   },
   {
     id: "electron-microscope",
