@@ -82,16 +82,9 @@ export const TOY_SOUNDS = {
   "bonsai-photo": { voice: "wood", at: 0.25, f: 520, decay: 0.4, vol: 0.5 },
   // Sound D (the walkthrough of October 6, 2026): the soft pop, no clicking.
   "mushroom-photo": { voice: "pop", f: 420, decay: 0.6 },
-  // Photoreal r3: no clicking; softer notes, like the first cactus's.
-  "cactus-real": {
-    voice: "pluck",
-    at: 0.55,
-    notes: "E5 G5 B5",
-    step: 0.09,
-    decay: 0.3,
-    bright: 0.3,
-    vol: 0.55,
-  },
+  // Photoreal r3: no clicking; one soft plucked note, like the first cactus's (a single note, not a
+  // tune: the sound lint keeps tunes to the music shelf).
+  "cactus-real": { voice: "pluck", at: 0.55, notes: "E5", decay: 0.35, bright: 0.3, vol: 0.55 },
   // Sound D (the walkthrough of October 6, 2026): the soft boing, no twinkle.
   "crochet-earth": { voice: "boing", f: 300, decay: 0.7, vol: 0.6 },
   // Photoreal r3: no wind or suction: one soft, hollow knock as the globe is flicked round.

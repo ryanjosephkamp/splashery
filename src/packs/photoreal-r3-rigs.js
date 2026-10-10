@@ -941,7 +941,6 @@ for (const [at, r] of [
   for (const [color, tol] of [
     ["#a8503a", 0.42],
     ["#8a2a1a", 0.32],
-    ["#5a1a14", 0.25],
   ])
     BIKE_DECAL.push({ at, r, color, tol, soft: 0.01, over: true });
 function bikePads(k, count, pivot) {
