@@ -2695,7 +2695,7 @@
     "u": "toys/book/",
     "k": "toy",
     "s": "Open me",
-    "d": "Tap to close the book; tap again to open it.",
+    "d": "Tap the right page to turn on, the left to go back, or pull a page over by its edge.",
     "w": "storybook open me open me book pages read story hardcover open close flip book",
     "i": "../assets/toys/book/thumb.webp"
   },
@@ -4105,7 +4105,7 @@
     "u": "toys/fruit-mri/",
     "k": "toy",
     "s": "Imaging",
-    "d": "Drag up or down on the fruit, or move the Slice slider, to step through the slices one at a time. Tap to play through them all; a drag stops the play.",
+    "d": "Drag on the fruit or move the Slice slider to step through the slices. Tap to play them all; a drag stops it.",
     "w": "mri of a fruit imaging imaging mri magnetic resonance imaging scan slices kiwi orange fruit seeds segments t2 imaging fruit-mri",
     "i": "../assets/toys/fruit-mri/thumb.webp",
     "l": 1
@@ -4115,7 +4115,7 @@
     "u": "toys/electron-microscope/",
     "k": "toy",
     "s": "Imaging",
-    "d": "Tap a grain or a shell to zoom in on it, and tap it again to look closer; the third tap goes back out. A tap on another one zooms in on that one. Choose the sample and the vision in the Toy tab.",
+    "d": "Tap a grain or shell to zoom in, again to look closer; a third tap goes back out. Tap another to zoom on it.",
     "w": "electron microscope imaging imaging sem scanning electron microscope micrograph pollen diatom snowflake rime zoom magnification imaging electron-microscope",
     "i": "../assets/toys/electron-microscope/thumb.webp",
     "l": 1

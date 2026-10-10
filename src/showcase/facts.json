@@ -45,23 +45,23 @@
     "guitar": {
       "kind": "kit",
       "recipeFile": "src/packs/music.js",
-      "recipeKB": 43.1,
-      "recipeGzipKB": 13.5,
+      "recipeKB": 47.2,
+      "recipeGzipKB": 15,
       "sharedBy": 4
     },
     "xylophone": {
       "kind": "kit",
       "recipeFile": "src/packs/music.js",
-      "recipeKB": 43.1,
-      "recipeGzipKB": 13.5,
+      "recipeKB": 47.2,
+      "recipeGzipKB": 15,
       "sharedBy": 4
     },
     "music-box": {
       "kind": "kit",
       "recipeFile": "src/packs/objects.js",
-      "recipeKB": 92.1,
-      "recipeGzipKB": 25.3,
-      "sharedBy": 11
+      "recipeKB": 106.4,
+      "recipeGzipKB": 29.1,
+      "sharedBy": 10
     },
     "real-moon": {
       "kind": "kit",
@@ -108,16 +108,16 @@
     "moving-photo-3d": {
       "kind": "kit",
       "recipeFile": "src/packs/live.js",
-      "recipeKB": 19.7,
-      "recipeGzipKB": 7.4,
+      "recipeKB": 19.9,
+      "recipeGzipKB": 7.5,
       "sharedBy": 3
     },
     "your-book": {
       "kind": "kit",
       "recipeFile": "src/packs/pictures.js",
-      "recipeKB": 127.4,
-      "recipeGzipKB": 40.9,
-      "sharedBy": 4
+      "recipeKB": 128.6,
+      "recipeGzipKB": 41.4,
+      "sharedBy": 5
     },
     "model-splats": {
       "kind": "kit",
