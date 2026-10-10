@@ -11,8 +11,8 @@ one-sentence description, and links to the shape reference when one applies.
   meet. ([source](https://en.wikipedia.org/wiki/M%C3%B6bius_strip))
 - **Figure-eight Klein bottle** (Classic surfaces): This immersed Klein bottle crosses itself where
   its neck passes through the body. ([source](https://en.wikipedia.org/wiki/Klein_bottle))
-- **Boy surface** (Classic surfaces): A parametrized Boy surface folds a projective plane into a
-  smooth immersed form. ([source](https://en.wikipedia.org/wiki/Boy%27s_surface))
+- **Pseudosphere** (Classic surfaces): Two tractrix horns meet at a sharp rim: a surface that curves
+  the opposite way from a sphere. ([source](https://en.wikipedia.org/wiki/Pseudosphere))
 - **Enneper surface** (Classic surfaces): A simple polynomial surface curls into three spreading
   lobes. ([source](https://en.wikipedia.org/wiki/Enneper_surface))
 - **Catenoid** (Classic surfaces): A catenoid pinches between two wide circular rims.
@@ -43,8 +43,9 @@ one-sentence description, and links to the shape reference when one applies.
   attractor but is only a parametric look-alike.
 - **Five-petal flower** (Curves as tubes or beads): Five broad petals rise from a shallow cup around
   a small center. ([source](https://en.wikipedia.org/wiki/Flower))
-- **Sunflower seed spiral** (Nature-like shapes): Seeds follow the Fibonacci angle and spread
-  outward across a flat disk. ([source](https://en.wikipedia.org/wiki/Phyllotaxis))
+- **Sunflower-style spiral** (Nature-like shapes): A face-on disk shades from dark seeds to a golden
+  rim, with Fibonacci-style spiral arms drawn in the color.
+  ([source](https://en.wikipedia.org/wiki/Phyllotaxis))
 - **Nautilus coil** (Nature-like shapes): A widening spiral tube evokes a nautilus shell with a
   visible open center. ([source](https://en.wikipedia.org/wiki/Nautilus))
 - **Jellyfish bell** (Nature-like shapes): A dome-like bell pulses as its rim widens and narrows
@@ -73,8 +74,8 @@ one-sentence description, and links to the shape reference when one applies.
   center. ([source](https://en.wikipedia.org/wiki/Parametric_equation))
 - **Opening flower** (Things in motion): Petals lift and flatten in a smooth repeating bloom.
   ([source](https://en.wikipedia.org/wiki/Flower))
-- **Sphere to cube-like form** (Things in motion): A periodic blend shifts a round surface toward a
-  softly squared silhouette. ([source](https://en.wikipedia.org/wiki/Sphere))
+- **Breathing bumpy sphere** (Things in motion): Four-fold bumps grow and shrink across a round
+  surface as its color follows each bump. ([source](https://en.wikipedia.org/wiki/Sphere))
 - **Twisting ribbon** (Things in motion): A narrow ribbon rotates its cross-section through one full
   turn each cycle. ([source](<https://en.wikipedia.org/wiki/Ribbon_(mathematics)>))
 - **Pulsing star** (Things in motion): Five radial points breathe in and out with the beat of a sine
@@ -105,12 +106,12 @@ one-sentence description, and links to the shape reference when one applies.
   colors. ([source](https://en.wikipedia.org/wiki/Wave))
 - **Thermal spiral** (Math showpieces): Warm colors gather near the core and cool colors trail along
   the spiral arms. ([source](https://en.wikipedia.org/wiki/Spiral))
-- **Hopf link sample** (Math showpieces): A sampled family of linked circles shows the shape of Hopf
-  fibers after projection. ([source](https://en.wikipedia.org/wiki/Hopf_fibration))
+- **Hopf link** (Math showpieces): Two circles pass through each other once, the simplest link,
+  drawn as two dotted rings in different colors. ([source](https://en.wikipedia.org/wiki/Hopf_link))
 - **Fourier epicycle curve** (Math showpieces): Three rotating harmonics add into one closed curve
   with a small bead radius. ([source](https://en.wikipedia.org/wiki/Fourier_series))
-- **Superquadric** (Math showpieces): Fractional powers round the corners of a box-like
-  superquadric. ([source](https://en.wikipedia.org/wiki/Superquadrics))
+- **Superquadric** (Math showpieces): Fourth-power rounding turns a sphere into a soft box with six
+  flattened faces. ([source](https://en.wikipedia.org/wiki/Superquadrics))
 - **Riemann branch look** (Math showpieces): A square-root branch surface spirals through two sheets
   around its branch point. ([source](https://en.wikipedia.org/wiki/Riemann_surface))
 - **Monkey saddle** (Math showpieces): A cubic height field has three valleys meeting at one central
@@ -120,23 +121,22 @@ one-sentence description, and links to the shape reference when one applies.
   ([source](https://en.wikipedia.org/wiki/Spherical_harmonics))
 - **Lemniscate tube** (Math showpieces): A tube wraps around a sideways figure eight with a subtle
   vertical wave. ([source](https://en.wikipedia.org/wiki/Lemniscate_of_Bernoulli))
-- **Gyroid-like sheet** (Math showpieces): A periodic height graph borrows the repeating rhythm of a
-  gyroid while staying open. ([source](https://en.wikipedia.org/wiki/Gyroid))
+- **Gyroid slice** (Math showpieces): A height graph of one slice of the gyroid function rises and
+  falls in a repeating pattern of hills and valleys.
+  ([source](https://en.wikipedia.org/wiki/Gyroid))
 - **Torus knot family** (Math showpieces): A (2,3) torus knot winds twice around the ring and three
   times around its tube. ([source](https://en.wikipedia.org/wiki/Torus_knot))
 
 ## Hardest programs to write
 
-- **Boy surface:** its compact parametrization has a denominator that needs to stay away from zero
-  across the chosen parameter rectangle; dense sampling found finite values.
 - **Dini surface:** its logarithm and tangent are singular at the parameter boundaries, so the v
   range starts and ends inside the valid interval.
-- **Hopf link sample:** stereographic projection makes the linked fiber family visible, but the
-  denominator needs a fixed offset from zero throughout the sample.
+- **Hopf link:** one program has to draw two separate rings, so a floor of v picks the ring and the
+  splats are scattered at random along each one.
 - **Riemann branch look:** the square root stays real by keeping u positive, while v spans two turns
   to show both sheets.
-- **Superquadric:** the signed fractional-power look needs to preserve each coordinate sign while
-  avoiding negative bases to fractional exponents.
+- **Superquadric:** fractional powers of a sign-changing cosine are singular at their zeros, so the
+  box comes from a smooth fourth-power rounding instead.
 
 ## Limits that shaped the gallery
 
@@ -151,9 +151,22 @@ detailed motion, or denser geometry, though each would increase authoring or ren
 
 - **Dini surface:** the logarithmic spiral makes a recognizable, elegant open surface from a compact
   formula.
-- **Boy surface:** an unusual classic surface that remains finite over a useful full parameter
-  range.
-- **Hopf link sample:** a compact projection gives a striking family of linked fibers.
+- **Pseudosphere:** two smooth tractrix horns and a sharp rim read at a glance.
+- **Hopf link:** two linked rings in different colors show what "linked" means.
 - **Riemann branch look:** two sheets and a branch spiral make a complex-number idea visible in
   three dimensions.
 - **Five-petal flower:** the shallow cup and five radial petals read clearly at small size.
+
+## Review of October 10, 2026
+
+A second pass viewed all 60 thumbnails and fixed the weak ones.
+
+- The thumbnail tool now gives every field a value for each program. The toy keeps any field a
+  program leaves out from the one before it, so a random spread and the old colors had leaked into
+  later thumbnails and made many surfaces look speckled or the wrong color.
+- Surfaces got larger splats and counts near 10,000 so their grids no longer show gaps or moire.
+- Replaced: Boy surface became the Pseudosphere (its compact formula was wrong and read as a
+  starfish), and the Hopf link sample became a true Hopf link of two rings.
+- Rebuilt: the double helix (it was a plain cylinder), Lorenz-like look-alike (zoomed in),
+  sunflower, jellyfish, pinecone, lily pad, twisting ribbon, pulsing star, bumpy sphere, gyroid
+  slice, superquadric, saddles, and sheets.

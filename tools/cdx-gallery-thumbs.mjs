@@ -55,10 +55,32 @@ try {
     const data = await page.evaluate(
       async ({ fields }) => {
         const { app, player } = window.__splashery;
-        await app.setToyOptions({ preset: "custom", ...fields }, { quiet: Infinity });
+        // Fields left out keep what was showing (the toy's own rule), so give every
+        // field a value: a blank one falls back to the default (grid spread, no r, g, b).
+        const all = {};
+        for (const name of [
+          "x",
+          "y",
+          "z",
+          "u",
+          "v",
+          "hue",
+          "r",
+          "g",
+          "b",
+          "size",
+          "count",
+          "spread",
+        ])
+          all[name] = fields[name] || "";
+        await app.setToyOptions({ preset: "custom", ...all }, { quiet: Infinity });
         player.stage.setFixedSize([1024, 1024]);
-        player.camera.cur = { ...player.camera.home };
-        player.camera.tgt = { ...player.camera.home };
+        // The home view fills the frame edge to edge; step back a little so a shape that
+        // reaches past the toy's fitted radius (a box's corners, a tall saddle) is not cut off.
+        const view = { ...player.camera.home };
+        view.distance *= 1.18;
+        player.camera.cur = { ...view };
+        player.camera.tgt = { ...view };
         for (let i = 0; i < 6; i++) await player.stage.captureFrame();
         const frame = await player.stage.captureFrame();
         const small = document.createElement("canvas");
