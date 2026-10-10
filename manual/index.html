@@ -16,7 +16,7 @@
     <main data-outline>
       <!-- ---- Cover ---- -->
       <section class="cover">
-        <p class="kicker">Splashery · Updated October 4, 2026</p>
+        <p class="kicker">Splashery · Updated October 9, 2026</p>
         <h1>The Tinkerer's Manual</h1>
         <p class="lead">
           How to program Gaussian splats: what one splat is, how the toys are built, and a small
@@ -30,39 +30,104 @@
           <img src="img/gallery-galaxy.jpg" alt="A spiral galaxy made of splats" />
         </div>
         <p>
-          Every toy in <a href="https://ryanjosephkamp.github.io/splashery/">Splashery</a> is made
-          of Gaussian splats: tens of thousands of soft, colored blobs that blend into a
+          Every toy in the
+          <a href="https://ryanjosephkamp.github.io/splashery/" target="_blank" rel="noopener"
+            >Splashery Playground</a
+          >
+          is made of Gaussian splats: tens of thousands of soft, colored blobs that blend into a
           solid-looking thing. This manual is for anyone who knows some math and wants to make
           splats do what they say. It goes level by level. You can stop after any level and still
           have something to play with.
         </p>
+        <p>
+          One note on that opening line. The photo toys (Photo to 3D and Moving photo to 3D) open in
+          a <b>Sharp view</b>, a second way to see the same photo: the picture at its full
+          resolution on a relief lifted by the same depth, so small text stays readable. They are
+          still splats. The Splats / Sharp switch in the toy's panel brings the splats back. (The
+          Studio toys are behind the labs switch; see "What else Splashery does now".)
+        </p>
+        <div class="levelmap" id="level-map">
+          <strong>The level map</strong>
+          <p>A ladder, from one splat toward making your own. Each rung stands on the one below.</p>
+          <ol>
+            <li>
+              <a href="#splat"><b>Level 1</b> One splat</a>: what a splat is, and the math of one.
+            </li>
+            <li>
+              <a href="#toy"><b>Level 2</b> A toy</a>: shapes, parts, and a recipe you can run.
+            </li>
+            <li>
+              <a href="#language"><b>Level 3</b> Your own shapes</a>: splat equations, written as
+              math.
+            </li>
+            <li>
+              <a href="#gallery"><b>Level 4</b> Programs to copy</a>: a gallery to change.
+            </li>
+            <li>
+              <a href="#pictures"><b>Level 5</b> Pictures and input</a>: pages, photos, screens, and
+              what you type.
+            </li>
+            <li>
+              <a href="#moving"><b>Level 6</b> Moving things</a>: hands-on play, joints, and
+              physics.
+            </li>
+            <li>
+              <a href="#data"><b>Level 7</b> Real data as splats</a>: science, imaging, maps, and
+              the night sky.
+            </li>
+            <li>
+              <a href="#photo3d"><b>Level 8</b> Photos and video into 3D</a>: depth, the Sharp view,
+              and splats.
+            </li>
+            <li>
+              <a href="#codes"><b>Level 9</b> Codes and pages</a>: QR codes, barcodes, PDFs, and
+              books.
+            </li>
+            <li>
+              <a href="#make"><b>Level 10</b> Make your own</a>: Code a toy, the Studio, and the
+              program gallery.
+            </li>
+          </ol>
+          <p class="more-levels">Levels 6 to 10 are coming in the next round.</p>
+        </div>
         <nav class="toc" aria-label="Contents">
           <strong>Contents</strong>
           <ol>
+            <li><a href="#level-map">The level map</a></li>
             <li><a href="#splat">Level 1: What a splat is</a></li>
             <li><a href="#toy">Level 2: How a toy is built</a></li>
             <li><a href="#language">Level 3: The splat equation language</a></li>
             <li><a href="#gallery">Level 4: A gallery of programs</a></li>
-            <li><a href="#pictures">Level 5: Pictures, screens and your own input</a></li>
+            <li><a href="#pictures">Level 5: Pictures, screens, and your own input</a></li>
+            <li><a href="#moving">Level 6: Moving things (coming)</a></li>
+            <li><a href="#data">Level 7: Real data as splats (coming)</a></li>
+            <li><a href="#photo3d">Level 8: Photos and video into 3D (coming)</a></li>
+            <li><a href="#codes">Level 9: Codes and pages (coming)</a></li>
+            <li><a href="#make">Level 10: Make your own (coming)</a></li>
             <li><a href="#more">What else Splashery does now</a></li>
             <li><a href="#later">What comes later: Code a toy</a></li>
             <li><a href="#glossary">Glossary</a></li>
             <li><a href="#reading">Further reading</a></li>
+            <li><a href="#references">References</a></li>
             <li><a href="#card">Quick reference</a></li>
           </ol>
         </nav>
         <p class="no-print">
-          <a href="tinkerers-manual.pdf">Download this manual as a PDF</a> ·
-          <a href="../">Back to Splashery</a>
+          <a href="tinkerers-manual.pdf" target="_blank" rel="noopener"
+            >Download this manual as a PDF</a
+          >
+          ·
+          <a href="../" target="_blank" rel="noopener">Back to the Splashery Playground</a>
         </p>
       </section>
 
       <!-- ---- Level 1 ---- -->
       <h2 id="splat"><span class="level">Level 1</span>What a splat is</h2>
       <p>
-        A <b>splat</b> is a small cloud of color floating in space. Up close it looks like a soft
-        ellipse, bright in the middle and fading at the edges. On its own it is nothing much. Put
-        thousands side by side and they melt into surfaces: a torus, a seashell, a cat.
+        A <b>splat</b> is a small cloud of color floating in space. Up close, it looks like a soft
+        ellipse, bright in the middle and fading at the edges. On its own, it is nothing much. Put
+        thousands side by side, however, and they melt into surfaces: a torus, a seashell, a cat –
+        practically any object imaginable can be built from splats!
       </p>
       <figure>
         <div class="shots">
@@ -93,19 +158,25 @@
           weight <var>G</var> is 1 at the center and falls off with distance measured in units of
           those widths. To draw one, the renderer flattens the field into an elliptical patch on the
           screen, gives it a color, and blends its opacity over the patches behind it. A splat is
-          not a surface of triangles and not a rigid little ball. Here <var>G</var> peaks at 1, so
+          neither a surface of triangles nor a rigid little ball. Here <var>G</var> peaks at 1, so
           it is a weight, not a probability density (which would be scaled to add up to 1).
+        </p>
+        <p>
+          <b>Two terms.</b> A <b>weight field</b> is a number at every point in space: 1 at the
+          center, and falling off the farther you go. The three <b>positive widths</b> are the
+          splat's sizes along its own three axes. They must be above zero, because a width of zero
+          would make the formula below divide by zero.
         </p>
         <p><b>Three ways splats come to exist</b> (Figure 1). Do not mix them up:</p>
         <ul>
           <li>
             <b>A recipe's placed splats.</b> A toy's recipe places them by rule: points sampled on
-            the kit's shapes, each given a size, a rotation and a color. Nothing is fitted to
-            photos.
+            the shapes of <b>the kit</b> (Splashery's toy-building library, Level 2), each given a
+            size, a rotation, and a color. Nothing is fitted to photos.
           </li>
           <li>
             <b>A trained capture.</b> A splat file made by other software from many photos of a real
-            thing, then opened here (<code>.ply</code>, <code>.sog</code>, <code>.splat</code> or
+            thing, then opened here (<code>.ply</code>, <code>.sog</code>, <code>.splat</code>, or
             <code>.spz</code>). The page shows these; it does not train them.
           </li>
           <li>
@@ -115,6 +186,14 @@
           </li>
         </ul>
       </div>
+      <aside class="demo-placeholder" data-demo="gaussian-3d">
+        <p class="demo-tag">Demo coming · web only</p>
+        <p><b>A 3D Gaussian, shown instead of told</b></p>
+        <p>
+          A turnable splat on screen. Drag to look at it from any side, and watch the equal-weight
+          shells around its center as nested ellipsoids.
+        </p>
+      </aside>
       <!-- Figure 1 (three ways). Sources: recipe splats src/kit.js:1078-1112 (sizes, rotation,
            color per sampled point) and src/player.js:502-506 (buildRecipe on load); capture files
            src/app.js:1372 (ply, sog, splat, spz) and src/player.js:413-426; one-photo fit
@@ -200,22 +279,70 @@
           </tbody>
         </table>
       </div>
+      <aside class="demo-placeholder" data-demo="splat-numbers">
+        <p class="demo-tag">Demo coming · web only</p>
+        <p><b>The numbers in one splat</b></p>
+        <p>
+          One splat on screen with a control for each number: center, three sizes, rotation, color,
+          and opacity. Move a control and see only that number change.
+        </p>
+      </aside>
       <p>
         That is 14 numbers per splat. A kit toy starts with a budget of 60,000 splats at the Low
-        tier, 140,000 at Mid, 200,000 at High and 280,000 at Max. Recipes can raise that budget, up
-        to 400,000 at Max. Auto picks Low, Mid or High; Max is a viewer choice. Many splat files
+        tier, 140,000 at Mid, 200,000 at High, and 280,000 at Max. Recipes can raise that budget, up
+        to 400,000 at Max. Auto picks Low, Mid, or High; Max is a viewer choice. Many splat files
         also let a splat's color change a little with the direction you look from; the toys you
         build here use one color per splat.
       </p>
+      <div class="why">
+        <p><b>Why these numbers? The splat budgets, and what Auto does.</b></p>
+        <p>
+          Each tier is a splat count that a device of that class can draw smoothly. <b>Auto</b>
+          reads the device to pick one: Low for 2 GB of memory or less, or two cores or fewer; Mid
+          for a touch-screen device whose shorter side is under 820 pixels, or 4 GB of memory or
+          less, or four cores or fewer; High for the rest. It never picks Max. That is a choice you
+          make in Detail, along with High. Auto also steps down while you play: when frames take
+          longer than about 24 milliseconds, it first lowers the screen resolution, and if frames at
+          the lowest resolution still average over 40 milliseconds for 30 frames in a row, it drops
+          one tier. More splats help a toy's shape, not its grain (the speckled, rough-edged look of
+          splats): in the lab's measurements, the High tier's extra splats made no toy sharper,
+          because each splat got smaller.
+        </p>
+        <p class="where">
+          Where it lives: <code>PROFILES</code> in <code>src/generators.js</code>;
+          <code>detectProfile</code> in <code>src/player.js</code>; <code>timeFrame</code> in
+          <code>src/stage.js</code>.
+        </p>
+      </div>
+      <div class="why">
+        <p><b>Why this number? One color per splat.</b></p>
+        <p>
+          A captured file can store how each splat's color changes with the direction you look from
+          (spherical harmonics), because training sees every splat from many angles. A kit splat is
+          placed by a recipe, so there are no photos to learn that change from. The kit keeps one
+          color per splat, and the harmonics of a trained file are dropped when it is used as a kit
+          part.
+        </p>
+        <p class="where">
+          Where it lives: <code>src/packs/fidelity.js</code> (its opening comment) and
+          <code>src/kit.js</code>.
+        </p>
+      </div>
 
       <h3>The Gaussian: a bell in three dimensions</h3>
       <p>
         The "Gaussian" in Gaussian splat is the bell curve, named after the mathematician Carl
-        Friedrich Gauss. In one dimension, a bell centered at <var>μ</var> with width <var>σ</var>
+        Friedrich Gauss. In one data dimension, a bell centered at <var>μ</var> with width
+        <var>σ</var>
         (sigma, the standard deviation) is
       </p>
       <p class="math">
         <var>G</var>(<var>x</var>) = exp(−(<var>x</var> − <var>μ</var>)² / 2<var>σ</var>²)
+      </p>
+      <p>
+        The data here are one-dimensional: one number, <var>x</var>, goes in, and one number,
+        <var>G</var>, comes out. The drawing below needs two dimensions to show them, one for
+        <var>x</var> and one for <var>G</var>.
       </p>
       <figure class="diagram">
         <svg
@@ -291,9 +418,9 @@
         </figcaption>
       </figure>
       <p>
-        In three dimensions the width becomes a 3-by-3 matrix <var>Σ</var> (capital sigma), called
-        the <b>covariance</b>, and the squared distance becomes a quadratic form. For a point
-        <var>p</var> in space, the splat's strength there is
+        In three dimensions, the width becomes a 3-by-3 matrix <var>Σ</var> (capital sigma), called
+        the <b>covariance</b> [<a href="#ref-4">4</a>], and the squared distance becomes a quadratic
+        form. For a point <var>p</var> in space, the splat's strength there is
       </p>
       <p class="math">
         <var>G</var>(<var>p</var>) = exp(−½ (<var>p</var> − <var>μ</var>)<sup>T</sup> <var>Σ</var
@@ -303,6 +430,30 @@
         Where <var>G</var> is the same value, you are on the same "shell" around the center, and
         those shells are ellipsoids: stretched and turned spheres.
       </p>
+      <aside class="demo-placeholder" data-demo="bell-1d-to-3d">
+        <p class="demo-tag">Demo coming · web only</p>
+        <p><b>The 1D bell growing into the 3D bell</b></p>
+        <p>
+          Start from the bell curve above, add a second dimension, then a third. Pick a point
+          <var>p</var> and read off <var>G</var>(<var>p</var>), the strength there.
+        </p>
+      </aside>
+      <div class="tip" id="quadratic-form">
+        <p>
+          <b>Two words in that formula.</b> The inverse <var>Σ</var><sup>−1</sup> is the matrix that
+          undoes <var>Σ</var>. And a <b>quadratic form</b> is an expression where every term has two
+          factors of the input, like <var>a</var><var>d</var><sub>1</sub>² + 2<var>b</var
+          ><var>d</var><sub>1</sub><var>d</var><sub>2</sub> + <var>c</var><var>d</var><sub>2</sub>².
+          In two dimensions, with <var>d</var> = (<var>d</var><sub>1</sub>, <var>d</var
+          ><sub>2</sub>) = <var>p</var> − <var>μ</var>, and <var>Σ</var><sup>−1</sup> with 4 and 1
+          on its diagonal (and zeros elsewhere), the form <var>d</var><sup>T</sup> <var>Σ</var
+          ><sup>−1</sup> <var>d</var> is 4<var>d</var><sub>1</sub>² + <var>d</var><sub>2</sub>².
+          Setting it equal to 1 draws an ellipse that reaches ½ along the first axis and 1 along the
+          second. A quadratic form is what turns a point's offset from the center into one number
+          for how far out it is, measured in the splat's own widths. In three dimensions, the same
+          idea draws an ellipsoid [<a href="#ref-5">5</a>].
+        </p>
+      </div>
       <div class="approx">
         <p>
           <b>Approximation: the drawn bell is finite.</b> The ideal <var>G</var> never reaches zero.
@@ -331,11 +482,20 @@
       <p>
         and <var>R</var> is the rotation matrix of the quaternion <var>q</var>. Read it right to
         left, as a recipe for a shape: start with a round ball of size 1, stretch it by <var>s</var
-        ><sub>1</sub>, <var>s</var><sub>2</sub> and <var>s</var><sub>3</sub> along <var>x</var>,
-        <var>y</var> and <var>z</var>, then turn it by <var>R</var>. Any sizes above zero and any
+        ><sub>1</sub>, <var>s</var><sub>2</sub>, and <var>s</var><sub>3</sub> along <var>x</var>,
+        <var>y</var>, and <var>z</var>, then turn it by <var>R</var>. Any sizes above zero and any
         rotation give a valid covariance, which is exactly what you want when a computer is nudging
         millions of numbers.
       </p>
+      <aside class="demo-placeholder" data-demo="covariance-validity">
+        <p class="demo-tag">Demo coming · web only</p>
+        <p><b>A valid and an invalid covariance</b></p>
+        <p>
+          Two matrices side by side. For a valid one, the bell falls off in every direction. For one
+          that is not positive definite, the weight grows along some direction, and the demo shows
+          where.
+        </p>
+      </aside>
       <figure class="diagram">
         <svg
           viewBox="0 0 540 170"
@@ -377,10 +537,18 @@
           stretched along its own axes, then turned.
         </figcaption>
       </figure>
+      <aside class="demo-placeholder" data-demo="covariance-build">
+        <p class="demo-tag">Demo coming · web only</p>
+        <p><b>The covariance built from sizes and a rotation</b></p>
+        <p>
+          The figure above, made interactive: drag the two sizes and the turn, and watch the ellipse
+          and the nine numbers of <var>Σ</var> change together.
+        </p>
+      </aside>
       <div class="tip">
         <p>
           <b>A worked example.</b> Take sizes 0.3, 0.1 and 0.1, turned 30° about the
-          <var>z</var> axis. Then <var>S</var><var>S</var><sup>T</sup> has 0.09, 0.01 and 0.01 on
+          <var>z</var> axis. Then <var>S</var><var>S</var><sup>T</sup> has 0.09, 0.01, and 0.01 on
           its diagonal, and multiplying out <var>R</var> <var>S</var><var>S</var><sup>T</sup>
           <var>R</var><sup>T</sup> gives
         </p>
@@ -393,7 +561,10 @@
         </p>
         <p>
           The top-left number is 0.09 cos²30° + 0.01 sin²30° = 0.07, and the ones beside it are
-          (0.09 − 0.01) sin 30° cos 30° ≈ 0.035. Those off-diagonal numbers are the tilt.
+          (0.09 − 0.01) sin 30° cos 30° ≈ 0.035. Those off-diagonal numbers are the <b>tilt</b>:
+          they are zero when the splat's axes line up with <var>x</var>, <var>y</var>, and
+          <var>z</var>, and not zero when they do not. (In this manual, <b>rotation</b> means a
+          splat's own turn, and "Tilt lock" is the name of the camera control in Level 5.)
         </p>
       </div>
 
@@ -403,7 +574,10 @@
         turns the covariance into the camera's view, with the camera's rotation <var>W</var>. The
         perspective of a camera is not a straight-line map, but close to one point it nearly is, and
         its best straight-line stand-in there is a matrix <var>J</var> (the Jacobian of the
-        projection). Then the splat's covariance on the screen is
+        projection). Such a stand-in is called <b>affine</b>: a straight-line map plus a shift [<a
+          href="#ref-6"
+          >6</a
+        >]. Then the splat's covariance on the screen is
       </p>
       <p class="math">
         <var>Σ′</var> = <var>J</var> <var>W</var> <var>Σ</var> <var>W</var><sup>T</sup> <var>J</var
@@ -413,14 +587,22 @@
         keeping only its top-left 2-by-2 block. That 2-by-2 matrix is a flat bell on the screen: an
         ellipse. Its eigenvectors are the directions of the ellipse's axes, and the square roots of
         its eigenvalues are how far it spreads along them. This trick comes from EWA splatting
-        (Zwicker, Pfister, van Baar and Gross, 2001).
+        (Zwicker, Pfister, van Baar, and Gross, 2001) [<a href="#ref-2">2</a>].
       </p>
+      <aside class="demo-placeholder" data-demo="projection">
+        <p class="demo-tag">Demo coming · web only</p>
+        <p><b>From 3D to the screen</b></p>
+        <p>
+          One ellipsoid and a camera you can move. See the straight-line stand-in at the center, and
+          the elliptical footprint it makes on the screen.
+        </p>
+      </aside>
       <div class="approx">
         <p>
-          <b>Approximation: affine around the center.</b> <var>J</var> is exact only at the splat's
-          center, where the straight-line stand-in touches the true perspective map. Across the rest
-          of the splat the real map bends away from it, so the ellipse is the first-order answer,
-          not an exact image of the 3D bell.
+          <b>Approximation: affine around the center.</b> An affine map is a straight-line map plus
+          a shift. <var>J</var> is exact only at the splat's center, where the straight-line
+          stand-in touches the true perspective map. Across the rest of the splat the real map bends
+          away from it, so the ellipse is the first-order answer, not an exact image of the 3D bell.
         </p>
       </div>
 
@@ -444,10 +626,11 @@
         >)
       </p>
       <p>
-        Each splat shows as much as the splats in front of it let through. This is how the 2023
-        paper that started the craze, "3D Gaussian Splatting for Real-Time Radiance Field Rendering"
-        (Kerbl, Kopanas, Leimkühler and Drettakis), draws its scenes, and it is how Splashery draws
-        every toy.
+        Each splat shows as much as the splats in front of it let through. This "over" operation is
+        from computer graphics' classic paper on compositing [<a href="#ref-3">3</a>]. It is how the
+        2023 paper that started the craze, "3D Gaussian Splatting for Real-Time Radiance Field
+        Rendering" (Kerbl, Kopanas, Leimkühler, and Drettakis) [<a href="#ref-1">1</a>], draws its
+        scenes, and it is how Splashery draws every toy.
       </p>
       <figure class="diagram">
         <svg
@@ -513,6 +696,14 @@
           Splats are painted from the back to the front, each one laid over the ones behind it.
         </figcaption>
       </figure>
+      <aside class="demo-placeholder" data-demo="sort-blend">
+        <p class="demo-tag">Demo coming · web only</p>
+        <p><b>Sorting and blending, back to front</b></p>
+        <p>
+          Three, or more overlapping splats, drawn in order one at a time. Switch the order and see
+          the pixel's color change, then watch the transmittance shrink.
+        </p>
+      </aside>
       <div class="tip">
         <p>
           <b>Why the order matters in the toys.</b> By default, Splashery sorts the splats in the
@@ -549,60 +740,60 @@
            and :16-18, and the same falloff in src/kernels.js:29-31 (spGauss, A = |uv|^2 on the unit
            quad, 0 at the edge); projection and blend are the manual's own formulas above; sorting by
            the center's depth is stated in the paragraph above and docs/PACKS.md:480. -->
-      <figure class="diagram">
+      <figure class="diagram wide">
         <svg
-          viewBox="0 0 360 470"
-          width="360"
-          height="470"
+          viewBox="0 0 440 628"
+          width="440"
+          height="628"
           role="img"
           aria-label="Representation, projection, blend. One: nested ellipses around a center, where the weight is 1 at the center, 0.61 at one sigma and 0.14 at two sigma, and the drawn bell stops at about 2.8 sigma. Two: the ellipsoid is flattened to an ellipse on the screen by a straight-line stand-in at its center. Three: a far splat is drawn first and a near splat over it."
         >
-          <text class="sv-title" x="8" y="18">1 · Representation: a bell in space</text>
-          <g transform="rotate(-25 90 82)">
-            <ellipse class="sv-soft" cx="90" cy="82" rx="57" ry="28" />
-            <ellipse class="sv-line" cx="90" cy="82" rx="40" ry="20" />
-            <ellipse class="sv-line" cx="90" cy="82" rx="20" ry="10" />
+          <text class="sv-title" x="10" y="24">1 · Representation: a bell in space</text>
+          <g transform="rotate(-25 100 106)">
+            <ellipse class="sv-soft" cx="100" cy="106" rx="68" ry="34" />
+            <ellipse class="sv-line" cx="100" cy="106" rx="48" ry="24" />
+            <ellipse class="sv-line" cx="100" cy="106" rx="24" ry="12" />
           </g>
-          <circle class="sv-dot" cx="90" cy="82" r="3" />
-          <text x="170" y="52">• center μ: G = 1</text>
-          <text x="170" y="72">inner ring, 1σ: G ≈ 0.61</text>
-          <text x="170" y="92">outer ring, 2σ: G ≈ 0.14</text>
-          <text x="170" y="112">dashed, ≈ 2.8σ: where the</text>
-          <text x="170" y="127">drawn bell stops (G ≈ 0.02)</text>
-          <text class="sv-muted" x="8" y="148">axes s₁ s₂ s₃, turned by the rotation q</text>
+          <circle class="sv-dot" cx="100" cy="106" r="3" />
+          <text x="214" y="70">• center μ: G = 1</text>
+          <text x="214" y="96">inner ring, 1σ: G ≈ 0.61</text>
+          <text x="214" y="122">outer ring, 2σ: G ≈ 0.14</text>
+          <text x="214" y="148">dashed, ≈ 2.8σ: where the</text>
+          <text x="214" y="166">drawn bell stops (G ≈ 0.02)</text>
+          <text class="sv-muted" x="10" y="196">axes s₁ s₂ s₃, turned by the rotation q</text>
 
-          <path class="sv-line" d="M180 156 V174 M172 168 L180 176 L188 168" />
+          <path class="sv-line" d="M220 210 V234 M212 226 L220 236 L228 226" />
 
-          <text class="sv-title" x="8" y="196">2 · Projection: onto the screen</text>
-          <g transform="rotate(-25 66 252)">
-            <ellipse class="sv-line" cx="66" cy="252" rx="40" ry="20" />
+          <text class="sv-title" x="10" y="268">2 · Projection: onto the screen</text>
+          <g transform="rotate(-25 74 346)">
+            <ellipse class="sv-line" cx="74" cy="346" rx="48" ry="24" />
           </g>
-          <text class="sv-muted" x="66" y="290" text-anchor="middle">3D ellipsoid, Σ</text>
-          <path class="sv-line" d="M112 252 H156 M148 246 L156 252 L148 258" />
-          <text class="sv-muted" x="138" y="276" text-anchor="middle">J W Σ Wᵀ Jᵀ</text>
-          <rect class="sv-box" x="170" y="212" width="170" height="76" rx="6" />
-          <g transform="rotate(-18 255 250)">
-            <ellipse class="sv-acc" cx="255" cy="250" rx="44" ry="17" />
+          <text class="sv-muted" x="74" y="398" text-anchor="middle">3D ellipsoid, Σ</text>
+          <path class="sv-line" d="M138 346 H190 M182 340 L190 346 L182 352" />
+          <text class="sv-muted" x="164" y="330" text-anchor="middle">J W Σ Wᵀ Jᵀ</text>
+          <rect class="sv-box" x="214" y="298" width="216" height="96" rx="6" />
+          <g transform="rotate(-18 322 346)">
+            <ellipse class="sv-acc" cx="322" cy="346" rx="58" ry="22" />
           </g>
-          <text class="sv-muted" x="255" y="304" text-anchor="middle">
+          <text class="sv-muted" x="322" y="414" text-anchor="middle">
             elliptical footprint, 2×2 Σ′
           </text>
-          <text class="sv-muted" x="8" y="322">
+          <text class="sv-muted" x="10" y="444">
             J is a straight-line stand-in that is exact only at the center
           </text>
 
-          <path class="sv-line" d="M180 330 V346 M172 340 L180 348 L188 340" />
+          <path class="sv-line" d="M220 458 V480 M212 472 L220 482 L228 472" />
 
-          <text class="sv-title" x="8" y="368">3 · Blend: back to front</text>
-          <rect class="sv-box" x="8" y="378" width="344" height="84" rx="6" />
-          <ellipse class="sv-acc" cx="90" cy="428" rx="46" ry="26" />
-          <ellipse class="sv-warm" cx="132" cy="424" rx="40" ry="24" />
-          <text x="20" y="396">far: 1st</text>
-          <text x="112" y="396">near: 2nd</text>
-          <text x="196" y="400">C ← a·c + (1 − a)·C</text>
-          <text class="sv-muted" x="196" y="420">order: by center depth;</text>
-          <text class="sv-muted" x="196" y="436">what is left of the</text>
-          <text class="sv-muted" x="196" y="452">background: transmittance</text>
+          <text class="sv-title" x="10" y="514">3 · Blend: back to front</text>
+          <rect class="sv-box" x="10" y="526" width="420" height="94" rx="6" />
+          <ellipse class="sv-acc" cx="70" cy="574" rx="44" ry="20" />
+          <ellipse class="sv-warm" cx="108" cy="570" rx="38" ry="18" />
+          <text x="24" y="546">far: 1st</text>
+          <text x="100" y="546">near: 2nd</text>
+          <text x="214" y="548">C ← a·c + (1 − a)·C</text>
+          <text class="sv-muted" x="214" y="566">order: by center depth;</text>
+          <text class="sv-muted" x="214" y="582">what is left of the</text>
+          <text class="sv-muted" x="214" y="598">background: transmittance</text>
         </svg>
         <figcaption>
           Figure 2. From a splat to a pixel. <b>1</b> The ideal bell has equal-weight shells; the
@@ -618,16 +809,24 @@
         Nobody places Splashery's splats by hand. Most toys are <b>recipes</b>: short programs that
         describe a toy with a kit of shapes, and the kit fills them with splats when you open the
         toy. A recipe is a few kilobytes of code instead of megabytes of splats, and because every
-        random choice comes from a seed, it builds the same splats with the same seed, options and
+        random choice comes from a seed, it builds the same splats with the same seed, options, and
         budget.
+      </p>
+      <p>
+        The <b>kit</b> is Splashery's toy-building library. A recipe names shapes, colors, and
+        moving parts; the kit fills them with splats in the browser, spreading the budget evenly by
+        area. A <b>kit toy</b> is built this way. A scan or capture is loaded from a file instead.
       </p>
       <p>
         Recipes are written in JavaScript. This level is a tour, so you can read one; the complete
         guide is
-        <a href="https://github.com/ryanjosephkamp/splashery/blob/main/docs/PACKS.md"
+        <a
+          href="https://github.com/ryanjosephkamp/splashery/blob/main/docs/PACKS.md"
+          target="_blank"
+          rel="noopener"
           >docs/PACKS.md</a
         >
-        in the source code.
+        in the source code [<a href="#ref-10">10</a>].
       </p>
 
       <h3>Two places a toy lives</h3>
@@ -644,8 +843,13 @@
 }</code></pre>
       <p>
         A recipe has six basic parts, all optional except <code>build</code> (Level 5 adds
-        <code>pictures</code>, <code>input</code> and <code>tiltLock</code>, and
-        <a href="https://github.com/ryanjosephkamp/splashery/blob/main/docs/PACKS.md">PACKS.md</a>
+        <code>pictures</code>, <code>input</code>, and <code>tiltLock</code>, and
+        <a
+          href="https://github.com/ryanjosephkamp/splashery/blob/main/docs/PACKS.md"
+          target="_blank"
+          rel="noopener"
+          >PACKS.md</a
+        >
         has more, such as <code>grab</code> and <code>drag</code> for touch play):
       </p>
       <div class="table-wrap">
@@ -697,7 +901,7 @@
         <code>k.roundedBox(w, h, d)</code>, <code>k.cylinder(r, h)</code>,
         <code>k.cone(r0, r1, h)</code>, <code>k.torus(R, r)</code>, <code>k.disc(r)</code>,
         <code>k.lathe(profile)</code> (a vase or a bottle, turned around an axis),
-        <code>k.tube(curve, radius)</code> (a stem, an arm, a knot) and
+        <code>k.tube(curve, radius)</code> (a stem, an arm, a knot),
         <code>k.param((u, v) =&gt; [x, y, z])</code>, any surface you can write in two variables
         (the same idea as Level 3; here <var>u</var> and <var>v</var> each run from 0 to 1), and
         <code>k.radial((dir) =&gt; r)</code>, a blobby surface given by its distance from the middle
@@ -707,18 +911,19 @@
       <p>
         The kit shares the splats out between the shapes by their surface area, so the toy is evenly
         dense; <code>weight</code> gives a small shape more (or <code>share</code> a fixed fraction
-        of all the splats). For free-form splats, like stars, sparks and crumbs,
+        of all the splats). For free-form splats, like stars, sparks, and crumbs,
         <code>k.cloud</code> places them one by one. After <code>build</code>, the kit centers the
         toy and scales it to fit the view, so you can model in any units.
       </p>
 
       <h3>Colors from functions</h3>
       <p>
-        A color can be a fixed one (<code>"#9c3b2c"</code>, or <code>[r, g, b]</code> with each from
-        0 to 1; there are no color names) or a function that the kit asks for every splat. It gets
-        the splat's place <code>c.p</code>, its surface direction <code>c.n</code>, its surface
-        coordinates <code>c.u</code> and <code>c.v</code>, and a random number and noise that come
-        from the seed. Return <code>null</code> to leave a hole:
+        A color can be a fixed quantity or vector (<code>"#9c3b2c"</code>, or
+        <code>[r, g, b]</code> with each from 0 to 1; there are no color names), or it can be a
+        function that the kit calls for every splat. The function gets the splat's place
+        <code>c.p</code>, its surface direction <code>c.n</code>, its surface coordinates
+        <code>c.u</code> and <code>c.v</code>, and a random number and noise that come from the
+        seed. Return <code>null</code> to leave a hole:
       </p>
       <pre><code>color: (c) =&gt; (c.p[1] &gt; 0.5 ? "#ffffff" : "#3a7d44"), // snow above, grass below</code></pre>
 
@@ -730,6 +935,19 @@
         <code>offset</code> (a drawer that slides), a <code>scale</code>, or <code>visible</code>. A
         toy may have up to 15 parts. The treasure chest's lid is a part on a hinge.
       </p>
+      <div class="why">
+        <p><b>Why this number? Fifteen parts.</b></p>
+        <p>
+          Every splat carries the number of the part it belongs to, and that number gets only 4 bits
+          of a packed value, because the same value also holds two flags for the shader. Four bits
+          count 16 things. Number 0 is the body, which every toy has, so 15 parts are left to name.
+          Asking for a sixteenth stops the build with a message.
+        </p>
+        <p class="where">
+          Where it lives: <code>part</code> in <code>src/kit.js</code>; the part number in the
+          shader code of <code>src/effects.js</code>.
+        </p>
+      </div>
       <figure>
         <div class="shots two">
           <div>
@@ -748,7 +966,7 @@
         Some motion is too fine for parts: a flame that flickers, snow that falls, grass that sways.
         A <b>behavior</b> moves each splat on its own on the graphics card:
         <code>kind: "flame"</code>, <code>"twinkle"</code>, <code>"sway"</code>,
-        <code>"orbit"</code>, <code>"fall"</code>, <code>"wave"</code> and more. <b>Morphs</b> give
+        <code>"orbit"</code>, <code>"fall"</code>, <code>"wave"</code>, and more. <b>Morphs</b> give
         each splat a second place, <code>to: (c) =&gt; [x, y, z]</code>, and slide it there as one
         of four channels goes from 0 to 1. The Splat equation toy's motion is made of morphs.
       </p>
@@ -822,24 +1040,36 @@ export const RECIPES = {
         function of height), a smaller cone for the cap, and a part called "sails" with a hub and
         four boxes, each turned a quarter turn more than the last. <code>drive</code> turns the
         sails part: steadily with the wind, plus one extra turn while the gust pulse runs, eased
-        with the smoothstep curve 3<var>g</var>² − 2<var>g</var>³ so it starts and ends gently. A
-        full extra turn lands the sails where they would have been anyway, so nothing jumps when the
-        gust ends.
+        with the <b>smoothstep</b> curve 3<var>g</var>² − 2<var>g</var>³ (an S-shaped ramp that
+        rises from 0 to 1 and is flat at both ends [<a href="#ref-7">7</a>]) so it starts and ends
+        gently. A full extra turn lands the sails where they would have been anyway, so nothing
+        jumps when the gust ends.
       </p>
+      <aside class="demo-placeholder" data-demo="windmill-parts">
+        <p class="demo-tag">Demo coming · web only</p>
+        <p><b>Where each part of a recipe shows on the windmill</b></p>
+        <p>
+          The windmill recipe beside the toy. Point at a line of the recipe, such as the cap or the
+          sails part, and the matching splats light up on the windmill.
+        </p>
+      </aside>
       <h3 id="run-it">Run it yourself</h3>
       <p>
         You can run the windmill on your own computer in five steps. You need a copy of the
         Splashery source (download it from
-        <a href="https://github.com/ryanjosephkamp/splashery">GitHub</a>) and Python 3.
+        <a href="https://github.com/ryanjosephkamp/splashery" target="_blank" rel="noopener"
+          >GitHub</a
+        >) and Python 3.
       </p>
       <ol>
         <li>
           <b>Save the recipe as a pack.</b> Copy the module above into
           <code>src/packs/little-windmill.js</code>, or copy
-          <a href="example-recipe.js">manual/example-recipe.js</a>. Change its first line to
-          <code>import { mix } from "../kit.js";</code>. A pack lives in <code>src/packs/</code>, so
-          the kit is one folder up. (The copy in <code>manual/</code> says
-          <code>../src/kit.js</code> because it sits beside <code>src/</code>, not in it.)
+          <a href="example-recipe.js" target="_blank" rel="noopener">manual/example-recipe.js</a>.
+          Change its first line to <code>import { mix } from "../kit.js";</code>. A pack lives in
+          <code>src/packs/</code>, so the kit is one folder up. (The copy in
+          <code>manual/</code> says <code>../src/kit.js</code> because it sits beside
+          <code>src/</code>, not in it.)
         </li>
         <li>
           <b>Add its catalog entry.</b> In <code>src/toys.js</code>, find the line
@@ -868,6 +1098,21 @@ export const RECIPES = {
           the sails spin one extra turn, easing in and out, and end where they would have been.
         </li>
       </ol>
+      <p>
+        <b>The same steps, as a prompt.</b> If you work with a coding assistant, paste this into it,
+        from inside your copy of the source folder:
+      </p>
+      <pre
+        class="prompt"
+      ><code>In this copy of the Splashery source, please do exactly these steps and nothing else:
+1. Create src/packs/little-windmill.js as a copy of manual/example-recipe.js, but change its
+   first line to: import { mix } from "../kit.js";
+2. In src/toys.js, right after the line "export const TOYS = [", add this entry:
+   { id: "little-windmill", label: "Little windmill", category: "objects", kind: "kit",
+     pack: "little-windmill" },
+3. Start a local server in the source folder: python3 -m http.server 8000 --bind 127.0.0.1
+4. Tell me to open http://127.0.0.1:8000/embed/index.html?toy=little-windmill and what to
+   expect: the sails turn by themselves, and a tap spins them one extra turn.</code></pre>
       <div class="approx">
         <p>
           The Splat equation toy's text box takes equations (Level 3), not JavaScript recipes. A
@@ -892,10 +1137,13 @@ export const RECIPES = {
       <h3>The idea: every splat gets its own u and v</h3>
       <p>
         The toy lays out its splats on a grid of two numbers, <var>u</var> and <var>v</var>, each
-        running over a range you choose. Your equations turn each splat's (<var>u</var>,
-        <var>v</var>) into a place in space, (<var>x</var>, <var>y</var>, <var>z</var>). If
-        <var>u</var> goes around a circle and <var>v</var> around a smaller circle, the grid wraps
-        into a torus:
+        running over a range you choose. Think of them as the coordinates of a flat sheet of points,
+        laid out before the equations bend it into shape. They are the parameters of a parametric
+        surface [<a href="#ref-9">9</a>], not a substitution: nothing is replaced by <var>u</var> or
+        <var>v</var>; each splat simply has its own pair. Your equations turn each splat's
+        (<var>u</var>, <var>v</var>) into a place in space, (<var>x</var>, <var>y</var>,
+        <var>z</var>). If <var>u</var> goes around a circle and <var>v</var> around a smaller
+        circle, the grid wraps into a torus:
       </p>
       <pre><code>x = (2 + cos v)·cos u
 y = sin v
@@ -993,12 +1241,21 @@ v = 0 .. 2pi</code></pre>
           carry every dot to its place on the torus.
         </figcaption>
       </figure>
+      <aside class="demo-placeholder" data-demo="uv-torus">
+        <p class="demo-tag">Demo coming · web only</p>
+        <p><b>The (u, v) grid turning into the torus, dot by dot</b></p>
+        <p>
+          The grid of dots above, carried one dot at a time to its place on the torus, with the
+          dot's <var>u</var> and <var>v</var> shown as it goes.
+        </p>
+      </aside>
 
       <h3>The fields</h3>
       <p>
         A program is a list of <b>fields</b>, each written <code>name = value</code>. You can type
-        one field or several, split by <code>;</code> (a text file can put one on each line). Any
-        field you leave out keeps what is showing.
+        one field or several, split by <code>;</code> (a text file can put one on each line). You do
+        not have to retype everything. A field you leave out keeps what is already showing: if you
+        type only a new <code>hue</code>, the shape stays and only the color changes.
       </p>
       <div class="table-wrap">
         <table>
@@ -1013,7 +1270,7 @@ v = 0 .. 2pi</code></pre>
             <tr>
               <td><code>x</code>, <code>y</code>, <code>z</code></td>
               <td>
-                Where each splat goes, as equations in <var>u</var>, <var>v</var> and <var>t</var>.
+                Where each splat goes, as equations in <var>u</var>, <var>v</var>, and <var>t</var>.
                 <var>y</var> points up.
               </td>
               <td>Needed</td>
@@ -1040,7 +1297,7 @@ v = 0 .. 2pi</code></pre>
             <tr>
               <td><code>r</code>, <code>g</code>, <code>b</code></td>
               <td>
-                Color as red, green and blue, each from 0 to 1. Setting any of them turns
+                Color as red, green, and blue, each from 0 to 1. Setting any of them turns
                 <var>hue</var> off; setting <var>hue</var> turns them off.
               </td>
               <td>0.5 each (gray)</td>
@@ -1048,8 +1305,8 @@ v = 0 .. 2pi</code></pre>
             <tr>
               <td><code>size</code></td>
               <td>
-                How big each splat is, in the same units as <var>x</var>, <var>y</var> and
-                <var>z</var>: about the σ of its bell. It may use <var>u</var>, <var>v</var> and
+                How big each splat is, in the same units as <var>x</var>, <var>y</var>, and
+                <var>z</var>: about the σ of its bell. It may use <var>u</var>, <var>v</var>, and
                 <var>t</var>.
               </td>
               <td><code>0.05</code></td>
@@ -1070,13 +1327,51 @@ v = 0 .. 2pi</code></pre>
           </tbody>
         </table>
       </div>
-      <p>
-        You can also write <code>color</code> for <code>hue</code>, <code>red</code>,
-        <code>green</code> and <code>blue</code> for <code>r</code>, <code>g</code> and
-        <code>b</code>, <code>splats</code> for <code>count</code>, <code>x(u,v,t)</code> for
-        <code>x</code>, and add notes after a <code>#</code>. Names can be in capitals or not. A
-        range can be written <code>0 .. 2pi</code>, <code>0 to 2pi</code> or <code>0, 2pi</code>.
-      </p>
+      <aside class="demo-placeholder" data-demo="program-fields">
+        <p class="demo-tag">Demo coming · web only</p>
+        <p><b>The fields of a program, labeled on the toy</b></p>
+        <p>
+          A small simulator: change one field, such as <code>hue</code>, <code>size</code>, or
+          <code>count</code>, and see on the toy exactly what that field controls and what it leaves
+          alone.
+        </p>
+      </aside>
+      <div class="why">
+        <p><b>Why this number? Twelve fields.</b></p>
+        <p>
+          The toy's program is saved in its link as options, and a link keeps at most 16 option keys
+          per toy. The twelve fields, plus the program picker, the splat style (Solid, Fine, or
+          Dots), and the Light and shade switch, come to 15. A thirteenth field would not leave room
+          to spare.
+        </p>
+        <p class="where">
+          Where it lives: <code>normalizeOptions</code> in <code>src/state.js</code>;
+          <code>FIELDS</code> in <code>src/packs/splat-equation.js</code>.
+        </p>
+      </div>
+      <h4>Flexibility</h4>
+      <p>The reader is forgiving about how you write a program:</p>
+      <ul>
+        <li>
+          <b>Alternative names.</b> <code>color</code> for <code>hue</code>; <code>red</code>,
+          <code>green</code>, and <code>blue</code> for <code>r</code>, <code>g</code>, and
+          <code>b</code>; <code>splats</code> for <code>count</code>; <code>x(u,v,t)</code> for
+          <code>x</code> (and likewise <code>y(u,v,t)</code> and <code>z(u,v,t)</code>); also
+          <code>colour</code> and <code>n</code>, which the code accepts.
+        </li>
+        <li>
+          <b>Three ways to write a range.</b> <code>0 .. 2pi</code>, <code>0 to 2pi</code>, or
+          <code>0, 2pi</code>. (Three dots, <code>0 ... 2pi</code>, work like two.)
+        </li>
+        <li>
+          <b>Capitals do not matter.</b> Names are not case-sensitive: <code>Hue</code> is
+          <code>hue</code>.
+        </li>
+        <li>
+          <b>Notes.</b> Anything after a <code>#</code> on a line is a note, and the reader skips
+          it.
+        </li>
+      </ul>
 
       <h3>Expressions</h3>
       <p>
@@ -1086,24 +1381,31 @@ v = 0 .. 2pi</code></pre>
       <ul>
         <li><b>Numbers</b>: <code>2</code>, <code>0.5</code>, <code>.25</code>.</li>
         <li>
-          <b>Variables</b>: <var>u</var>, <var>v</var> and <var>t</var>. Range ends and the count
+          <b>Variables</b>: <var>u</var>, <var>v</var>, and <var>t</var>. Range ends and the count
           are numbers only.
         </li>
         <li><b>Constants</b>: <code>pi</code> (or π) and <code>e</code>.</li>
         <li>
           <b>Operators</b>: <code>+ − × ÷ ^</code>, written <code>+ - * / ^</code> (and
           <code>**</code>, <code>·</code>, <code>²</code>, <code>³</code>), with brackets
-          <code>( )</code> and <code>|u|</code> for absolute value.
+          <code>( )</code>, <code>[ ]</code>, and <code>{ }</code> (the reader treats all three
+          kinds alike), and <code>|u|</code> for absolute value.
         </li>
         <li>
           <b>Functions</b>: <code>sin cos tan asin acos atan sinh cosh tanh exp log</code> (natural;
-          <code>ln</code> too) <code>log10 sqrt</code> (or √) <code>abs floor</code>, and
-          <code>min</code> and <code>max</code> of two or more values.
+          <code>ln</code> too), <code>log10 sqrt</code> (or √), <code>abs floor</code>, and
+          <code>min</code> and <code>max</code> of two or more values. The inverse trig functions
+          also go by <code>arcsin</code>, <code>arccos</code>, and <code>arctan</code>.
         </li>
         <li>
-          <b>Shortcuts</b>: <code>2u</code> means 2 × <var>u</var>, <code>3sin(u)</code> and
-          <code>(u + 1)(v − 1)</code> multiply, and a function can skip its brackets on a simple
-          product: <code>sin 2u</code>, <code>cos v</code>.
+          <b>Shortcuts</b>: <code>2u</code> means 2 × <var>u</var>, and <code>3sin(u)</code> and
+          <code>(u + 1)(v − 1)</code> multiply. A function can also skip its brackets when its input
+          is a short product: a run of numbers, names, and bracketed groups, each with an optional
+          power. The input stops at the next function or at a plus or minus. So
+          <code>sin 2u</code> is sin(2<var>u</var>), <code>sin u cos u</code> is sin(<var>u</var>) ×
+          cos(<var>u</var>), and <code>sin u^2</code> is sin(<var>u</var>²), not (sin
+          <var>u</var>)². A minus sign cannot start a bare input (write <code>sin(-u)</code>), and
+          <code>min</code> and <code>max</code> always need brackets.
         </li>
       </ul>
       <p>
@@ -1111,8 +1413,52 @@ v = 0 .. 2pi</code></pre>
         <code>2^3^2</code> is 2<sup>9</sup>, and <code>-u^2</code> is −(<var>u</var>²). Each field
         can be up to 120 characters long.
       </p>
+      <aside class="demo-placeholder" data-demo="order-of-operations">
+        <p class="demo-tag">Demo coming · web only</p>
+        <p><b>The order of operations, as a tree</b></p>
+        <p>
+          Type an expression and see it drawn as a tree, with powers at the bottom, then × and ÷,
+          then + and −, so you can see which part is worked out first.
+        </p>
+      </aside>
+      <div class="why">
+        <p><b>Why this number? The 120-character limit.</b></p>
+        <p>
+          It is our choice, not a rule of math. A program lives in the toy's link, and a link holds
+          up to 12 fields, so a limit keeps links short enough to paste into a message. The longest
+          field of the toy's own programs is 53 characters, so 120 leaves room to grow.
+        </p>
+        <p class="where">
+          Where it lives: <code>MAX_LENGTH</code> in <code>src/equation.js</code>.
+        </p>
+      </div>
       <h4>The grammar</h4>
-      <p>For the curious, here is the core grammar. Words in quotes are typed as they are.</p>
+      <p>Here is the core grammar. Note: words in quotes must be typed exactly as written below.</p>
+      <p>
+        A grammar is a short list of rules for what counts as a valid program. Its notation follows
+        EBNF, a standard way to write such rules [<a href="#ref-8">8</a>]:
+      </p>
+      <ul>
+        <li>
+          <code>=</code> means "is made of": the name on the left is built from the pattern on the
+          right.
+        </li>
+        <li>
+          <code>|</code> means "or". (<code>"|"</code> in quotes is the absolute-value sign you
+          type.)
+        </li>
+        <li><code>{ }</code> means "repeat what is inside any number of times, including none".</li>
+        <li><code>[ ]</code> means "optional": what is inside may be there or not.</li>
+        <li>
+          Quotes mark text you type exactly. Plain parentheses group choices together. Words with no
+          quotes, such as <code>sum</code>, are names of other rules. A note in parentheses at the
+          end of a line is only a comment.
+        </li>
+        <li>
+          An <b>atom</b> is the smallest piece of an expression that can stand on its own: a number,
+          a name, a function with its input, or something in brackets.
+        </li>
+      </ul>
       <pre><code>program    = field "=" value { ( ";" | new line ) field "=" value }
 field      = "x" | "y" | "z" | "u" | "v" | "hue" | "r" | "g" | "b"
            | "size" | "count" | "spread"
@@ -1126,8 +1472,23 @@ signed     = { "-" | "+" } power
 power      = atom [ "^" signed ]
 atom       = number | "u" | "v" | "t" | "pi" | "e"
            | function "(" sum { "," sum } ")"
-           | function atom { atom }      (sin 2u)
-           | "(" sum ")" | "|" sum "|"</code></pre>
+           | function bare               (sin 2u, sin u cos u, sin u^2)
+           | bracket | "|" sum "|"
+bracket    = "(" sum ")" | "[" sum "]" | "{" sum "}"
+bare       = piece { piece }             (stops at the next function)
+piece      = ( number | "u" | "v" | "t" | "pi" | "e" | bracket ) [ "^" signed ]
+function   = "sin" | "cos" | "tan" | "asin" | "acos" | "atan"
+           | "arcsin" | "arccos" | "arctan" | "sinh" | "cosh" | "tanh"
+           | "exp" | "log" | "ln" | "log10" | "sqrt" | "abs" | "floor"
+           | "min" | "max"               (min and max need the brackets)</code></pre>
+      <aside class="demo-placeholder" data-demo="grammar-railroad">
+        <p class="demo-tag">Demo coming · web only</p>
+        <p><b>The grammar as a railroad diagram</b></p>
+        <p>
+          The same rules drawn as tracks. Follow a line from the left to the right, taking any
+          branch, and everything you can trace is a valid program.
+        </p>
+      </aside>
 
       <h3>Time</h3>
       <p>
@@ -1136,21 +1497,57 @@ atom       = number | "u" | "v" | "t" | "pi" | "e"
         it moves: <code>u + t</code> turns a shape, <code>sin(t)</code> breathes, and
         <code>sin(3u − t)</code> sends a wave around.
       </p>
+      <div class="why">
+        <p><b>Why this number? The two clocks.</b></p>
+        <p>
+          There are two clocks. The math clock, <var>t</var>, runs from 0 to 2π, one full circle, so
+          that <code>sin</code> and <code>cos</code> of it loop. The wall clock is real time: a play
+          of <var>t</var> lasts about 4 seconds, whatever 0 to 2π means to the math.
+        </p>
+        <p class="where">
+          Where it lives: <code>PLAY_SECS</code> in <code>src/packs/splat-equation.js</code>.
+        </p>
+      </div>
       <p>
-        Behind the scenes, the toy builds your shape at 12 moments, <var>t</var> = 0, π/6, 2π/6 and
+        Behind the scenes, the toy builds your shape at 12 moments, <var>t</var> = 0, π/6, 2π/6, and
         so on, and each copy slides every splat in a straight line to its place in the next copy (a
         morph, Level 2), so every splat is at its computed place at those 12 moments (up to the
         packing error described below) and slides in a straight line in between. A shape that turns
         dips very slightly inward between moments, about 3 percent.
       </p>
+      <div class="why">
+        <p><b>Why this number? Twelve moments.</b></p>
+        <p>
+          Twelve copies of 10,000 points (the most <code>count</code> allows) make 120,000 splats,
+          the Low tier's largest budget, so even the weakest device can hold the biggest program.
+          (The kit keeps 2 percent in reserve, so on that device each copy is cut to 9,800 points.)
+          Each moment is its own part (Level 2), and 12 parts plus the body fit in the limit of 15.
+        </p>
+        <p class="where">
+          Where it lives: <code>KNOTS</code> in <code>src/packs/splat-equation.js</code>.
+        </p>
+      </div>
+      <div class="why">
+        <p><b>Why this number? Twelve bits.</b></p>
+        <p>
+          A moment's target place for each splat is stored as three whole numbers, one per axis,
+          each of 12 bits: 4,096 steps across a range of ±2 toy units. These are real binary digits,
+          not a figure of speech. Two 12-bit numbers make 24 bits, which is exactly what a 32-bit
+          floating-point number can hold without rounding, so one float carries two axes.
+        </p>
+        <p class="where">
+          Where it lives: <code>encodeMorphs</code> in <code>src/kit.js</code>;
+          <code>MORPH_RANGE</code> in <code>src/effects.js</code>.
+        </p>
+      </div>
       <div class="approx">
         <p>
           <b>Approximations in time.</b> The shape is sampled at 12 moments, not solved for every
           <var>t</var>. Only each splat's <em>position</em> slides toward the next copy, and that
           target is packed into 12 bits per axis over a fixed range, so tiny errors are possible.
-          Its color, size and tilt are built separately for each copy, so they can step at a copy
-          boundary instead of blending. The "count" you type is the number of points sampled for
-          each copy, not the total number of splats in the toy (Figure 3).
+          Its color, size, and rotation are built separately for each copy, so they can step at a
+          copy boundary instead of blending. The "count" you type is the number of points sampled
+          for each copy, not the total number of splats in the toy (Figure 3).
         </p>
       </div>
       <!-- Figure 3 sources: 12 copies, one visible at a time: src/packs/splat-equation.js:27 (KNOTS),
@@ -1161,64 +1558,72 @@ atom       = number | "u" | "v" | "t" | "pi" | "e"
            min(count, budget) :471; Fine :475 (up to 4x count within the budget); grid nu x nv with nv
            rounded down :387-393; points with no value or far off are dropped :495 and :505; morph
            targets packed in 12 bits per axis src/kit.js:944-960. -->
-      <figure class="diagram">
+      <figure class="diagram wide">
         <svg
-          viewBox="0 0 360 452"
-          width="360"
-          height="452"
+          viewBox="0 0 440 528"
+          width="440"
+          height="528"
           role="img"
           aria-label="The twelve copies and the detail budget. Twelve copies of the shape sit around a cycle of t; one is visible and slides toward the next. Below, the budget narrows in steps: the toy budget by device, the budget per copy, the points in each copy, the grid, and dropped points."
         >
-          <text class="sv-title" x="8" y="18">One cycle of t = 12 stored copies</text>
-          <g transform="translate(0 10)">
-            <circle class="sv-box" cx="110.0" cy="42.0" r="7" />
-            <circle class="sv-box" cx="141.0" cy="50.3" r="7" />
-            <circle class="sv-box" cx="163.7" cy="73.0" r="7" />
-            <circle class="sv-on" cx="172.0" cy="104.0" r="9" />
-            <circle class="sv-box" cx="163.7" cy="135.0" r="7" />
-            <circle class="sv-box" cx="141.0" cy="157.7" r="7" />
-            <circle class="sv-box" cx="110.0" cy="166.0" r="7" />
-            <circle class="sv-box" cx="79.0" cy="157.7" r="7" />
-            <circle class="sv-box" cx="56.3" cy="135.0" r="7" />
-            <circle class="sv-box" cx="48.0" cy="104.0" r="7" />
-            <circle class="sv-box" cx="56.3" cy="73.0" r="7" />
-            <circle class="sv-box" cx="79.0" cy="50.3" r="7" />
-            <text class="sv-muted" x="110.0" y="24.0" text-anchor="middle">0</text>
-            <text class="sv-muted" x="194.0" y="108.0" text-anchor="middle">j</text>
-            <text class="sv-muted" x="182.7" y="150.0" text-anchor="middle">j+1</text>
-            <path class="sv-line" d="M182.5 112.7 A73 73 0 0 1 176.5 134.0" />
-            <text class="sv-muted" x="110" y="108" text-anchor="middle">t: 0 → 2π</text>
+          <text class="sv-title" x="10" y="22">One cycle of t = 12 stored copies</text>
+          <g>
+            <circle class="sv-box" cx="130.0" cy="48.0" r="8" />
+            <circle class="sv-box" cx="173.0" cy="59.5" r="8" />
+            <circle class="sv-box" cx="204.5" cy="91.0" r="8" />
+            <circle class="sv-on" cx="216.0" cy="134.0" r="12" />
+            <circle class="sv-box" cx="204.5" cy="177.0" r="8" />
+            <circle class="sv-box" cx="173.0" cy="208.5" r="8" />
+            <circle class="sv-box" cx="130.0" cy="220.0" r="8" />
+            <circle class="sv-box" cx="87.0" cy="208.5" r="8" />
+            <circle class="sv-box" cx="55.5" cy="177.0" r="8" />
+            <circle class="sv-box" cx="44.0" cy="134.0" r="8" />
+            <circle class="sv-box" cx="55.5" cy="91.0" r="8" />
+            <circle class="sv-box" cx="87.0" cy="59.5" r="8" />
+            <text class="sv-muted" x="130" y="30.0" text-anchor="middle">0</text>
+            <text class="sv-muted" x="252" y="128" text-anchor="middle">j</text>
+            <text class="sv-muted" x="244.5" y="199.0" text-anchor="middle">j+1</text>
+            <path class="sv-line" d="M237.2 147.2 A108 108 0 0 1 229.4 176.2" />
+            <text class="sv-muted" x="130" y="138" text-anchor="middle">t: 0 → 2π</text>
           </g>
-          <text x="214" y="70">Twelve copies, built at</text>
-          <text x="214" y="86">t = 0, 2π/12, 4π/12, …</text>
-          <text x="214" y="112">Copy j shows and slides</text>
-          <text x="214" y="128">toward copy j + 1.</text>
-          <text x="214" y="154">The other eleven are</text>
-          <text x="214" y="170">stored but hidden.</text>
+          <text x="290" y="86">Twelve copies, built at</text>
+          <text x="290" y="104">t = 0, 2π/12, 4π/12, …</text>
+          <text x="290" y="136">Copy j shows and slides</text>
+          <text x="290" y="154">toward copy j + 1.</text>
+          <text x="290" y="186">The other eleven are</text>
+          <text x="290" y="204">stored but hidden.</text>
 
-          <text class="sv-title" x="8" y="238">Where the splats go (the detail budget)</text>
-          <rect class="sv-box" x="8" y="246" width="344" height="44" rx="6" />
-          <text x="16" y="264">toy budget by device tier: Low 120,000 ·</text>
-          <text x="16" y="281">Mid 240,000 · High 300,000 · Max 400,000</text>
-          <rect class="sv-box" x="8" y="298" width="344" height="30" rx="6" />
-          <text x="16" y="317">per copy: ⌊0.98 × toy budget ÷ 12⌋ (Low 9,800 … Max 32,666)</text>
-          <rect class="sv-box" x="8" y="336" width="344" height="30" rx="6" />
-          <text x="16" y="355">points per copy: the smaller of count and that budget</text>
-          <rect class="sv-box" x="8" y="374" width="344" height="30" rx="6" />
-          <text x="16" y="393">Fine: up to 4 × count, still within the budget</text>
-          <rect class="sv-box" x="8" y="412" width="344" height="30" rx="6" />
-          <text x="16" y="431">grid rounds down; points with no value are dropped</text>
+          <text class="sv-title" x="10" y="270">Where the splats go (the detail budget)</text>
+          <rect class="sv-box" x="10" y="282" width="420" height="50" rx="6" />
+          <text x="20" y="303">toy budget by device tier: Low 120,000 ·</text>
+          <text x="20" y="322">Mid 240,000 · High 300,000 · Max 400,000</text>
+          <rect class="sv-box" x="10" y="342" width="420" height="34" rx="6" />
+          <text x="20" y="364">per copy: ⌊0.98 × toy budget ÷ 12⌋ (Low 9,800 … Max 32,666)</text>
+          <rect class="sv-box" x="10" y="386" width="420" height="34" rx="6" />
+          <text x="20" y="408">points per copy: the smaller of count and that budget</text>
+          <rect class="sv-box" x="10" y="430" width="420" height="34" rx="6" />
+          <text x="20" y="452">Fine: up to 4 × count, still within the budget</text>
+          <rect class="sv-box" x="10" y="474" width="420" height="34" rx="6" />
+          <text x="20" y="496">grid rounds down; points with no value are dropped</text>
         </svg>
         <figcaption>
           Figure 3. A program with <var>t</var> is stored as 12 copies, so the number of splats in
           memory is about 12 times the points in one copy. The device's tier sets the budget at the
-          top; your count, the Fine setting and the grid can only lower the points per copy.
+          top; your count, the Fine setting, and the grid can only lower the points per copy.
         </figcaption>
       </figure>
+      <aside class="demo-placeholder" data-demo="t-clock">
+        <p class="demo-tag">Demo coming · web only</p>
+        <p><b>The t slider, looping, and the 12 moments</b></p>
+        <p>
+          Figure 3 made interactive: a looping t slider, the twelve stored copies lighting one at a
+          time, and the splats sliding from one copy to the next.
+        </p>
+      </aside>
       <div class="tip">
         <p>
           <b>Make it loop.</b> Because <var>t</var> ends at 2π, a shape made of <code>sin(t)</code>,
-          <code>cos(t)</code> and angles like <code>u + t</code> ends exactly where it began. A
+          <code>cos(t)</code>, and angles like <code>u + t</code> ends exactly where it began. A
           shape with plain <code>t</code> in it (like <code>y = t</code>) jumps back at the end.
           <code>sin(t/2)</code> goes out and back once; <code>sin(2t)</code> twice.
         </p>
@@ -1263,10 +1668,10 @@ atom       = number | "u" | "v" | "t" | "pi" | "e"
       <h3>Why it is safe</h3>
       <p>
         The reader never runs what you type. It breaks the text into numbers, the letters
-        <var>u</var>, <var>v</var> and <var>t</var>, the names in the lists above and the signs, and
-        builds a small tree of arithmetic from them. There is no way to name anything else, so the
-        worst a program can do is draw a strange shape. Your program lives in the toy's link ("Copy
-        link" in the Share tab), so you can send it to anyone.
+        <var>u</var>, <var>v</var>, and <var>t</var>, the names in the lists above and the signs,
+        and builds a small tree of arithmetic from them. There is no way to name anything else, so
+        the worst a program can do is draw a strange shape. Your program lives in the toy's link
+        ("Copy link" in the Share tab), so you can send it to anyone.
       </p>
 
       <!-- ---- Level 4 ---- -->
@@ -1433,7 +1838,7 @@ count = 6000</code></pre>
             <h4>Spiral galaxy</h4>
             <p>
               Two arms from floor(v) (0 or 1, half a turn apart), scattered at random, turning once.
-              Colors from r, g and b.
+              Colors from r, g, and b.
             </p>
             <pre><code>x = u^1.5 cos(pi floor(v) + 5u + 1.2(v - floor(v)) - t)
 y = 0.06(1 - u)sin(91v + 37u)
@@ -1551,7 +1956,7 @@ count = 4000</code></pre>
           <div class="body">
             <h4>Rainbow ribbon</h4>
             <p>
-              Color from r, g and b: three cosines about a third of a turn apart make a rainbow
+              Color from r, g, and b: three cosines about a third of a turn apart make a rainbow
               along u.
             </p>
             <pre><code>x = u
@@ -1579,7 +1984,7 @@ count = 4000</code></pre>
             <h4>Firework</h4>
             <p>
               Splats scattered at random over a sphere (v is the height, from −1 to 1) fly out,
-              droop and come back.
+              droop, and come back.
             </p>
             <pre><code>x = (0.2 + sin(t/2))sqrt(1 - v^2)cos(u)
 y = (0.2 + sin(t/2))v - 0.35sin(t/2)^2
@@ -1657,11 +2062,11 @@ count = 4000</code></pre>
       </div>
 
       <!-- ---- Level 5 ---- -->
-      <h2 id="pictures"><span class="level">Level 5</span>Pictures, screens and your own input</h2>
+      <h2 id="pictures"><span class="level">Level 5</span>Pictures, screens, and your own input</h2>
       <p>
         The toys in Level 2 are built from shapes. Some toys show something that is not a shape: a
         page of a PDF, a photo, a GIF, a video, or something you type or draw. Three additions to a
-        recipe make them: <b>picture sheets</b>, an <b>input panel</b> and a few
+        recipe make them: <b>picture sheets</b>, an <b>input panel</b>, and a few
         <b>view settings</b>. They are still Gaussian splats, all the way down. The toys on the
         Pictures and pages shelf are being tried out, so they are on the shelf only when Splashery
         is opened with <code>?labs=1</code>.
@@ -1717,14 +2122,14 @@ count = 4000</code></pre>
         </li>
         <li>
           <code>info.data.pictures</code> is the toy's view of the media: <code>page</code>,
-          <code>count</code>, <code>kind</code>, <code>name</code>, <code>playing</code> and the
-          functions <code>next()</code>, <code>prev()</code>, <code>go(n)</code> and
+          <code>count</code>, <code>kind</code>, <code>name</code>, <code>playing</code>, and the
+          functions <code>next()</code>, <code>prev()</code>, <code>go(n)</code>, and
           <code>togglePlay()</code>.
         </li>
       </ul>
       <p>
         A whole picture toy, in a few lines. Its <code>input</code> gives the Toy tab a button that
-        opens a photo, a GIF or a video; the rest of the toy is a card and four wooden bars:
+        opens a photo, a GIF, or a video; the rest of the toy is a card and four wooden bars:
       </p>
       <pre><code>import { smoothstep } from "../src/kit.js";
 
@@ -1933,23 +2338,23 @@ export const RECIPES = {
       </p>
       <p>
         The <b>Screen</b> shows a video or a GIF on a screen in one of four styles: an old TV, a
-        flat TV, a cinema with curtains and a hologram. Its picture is one sheet with
-        <code>method: "screen"</code>; the knobs, the curtains and the glass are ordinary kit parts.
-        A tap switches it on, and then plays and pauses; the speaker button in the top bar turns the
-        sound on. You can open your own video or GIF.
+        flat TV, a cinema with curtains, and a hologram. Its picture is one sheet with
+        <code>method: "screen"</code>; the knobs, the curtains, and the glass are ordinary kit
+        parts. A tap switches it on, and then plays and pauses; the speaker button in the top bar
+        turns the sound on. You can open your own video or GIF.
       </p>
       <p>
         The <b>Gaussian splatting</b> toy lets you watch how a photo becomes splats. Its
         <b>Training</b> view fits 2,400 flat (two-dimensional) Gaussians to a photo (a strawberry,
         or your own), by gradient descent in a background worker: the splats start as random specks
-        and, step by step, they slide, stretch and change color until together they are the picture.
-        The fit uses front-to-back blending, equivalent to the renderer's back-to-front blending,
-        with the renderer's finite bell, so what you see is the real fit. <b>One splat</b> lets you
-        set the sizes, the opacity and the color of a Gaussian illustrated by a cloud of small
-        splats and turn it (Level 1's numbers); <b>Many splats</b> builds a small rubber duck from
-        kit shapes and then shrinks every splat to a dot, so you see the splats that make it; and
-        <b>Sorting</b> shows the splats of a ball appearing one by one, in the back-to-front order a
-        camera draws them.
+        and, step by step, they slide, stretch, and change color until together they are the
+        picture. The fit uses front-to-back blending, equivalent to the renderer's back-to-front
+        blending, with the renderer's finite bell, so what you see is the real fit.
+        <b>One splat</b> lets you set the sizes, the opacity, and the color of a Gaussian
+        illustrated by a cloud of small splats and turn it (Level 1's numbers);
+        <b>Many splats</b> builds a small rubber duck from kit shapes and then shrinks every splat
+        to a dot, so you see the splats that make it; and <b>Sorting</b> shows the splats of a ball
+        appearing one by one, in the back-to-front order a camera draws them.
       </p>
       <figure>
         <div class="shots two">
@@ -1985,7 +2390,7 @@ export const RECIPES = {
         <figcaption>
           The One splat view: a Gaussian illustrated by small splats, with its three sizes drawn as
           axes (Level 1's
-          <var>s</var><sub>1</sub>, <var>s</var><sub>2</sub> and <var>s</var><sub>3</sub>).
+          <var>s</var><sub>1</sub>, <var>s</var><sub>2</sub>, and <var>s</var><sub>3</sub>).
         </figcaption>
       </figure>
 
@@ -2000,7 +2405,7 @@ export const RECIPES = {
           src="img/ui-top-bar.jpg"
           width="226"
           height="46"
-          alt="The top bar: Reset view, Tilt lock (pressed), Turntable, help and sound buttons"
+          alt="The top bar: Reset view, Tilt lock (pressed), Turntable, help, and sound buttons"
         />
       </figure>
       <ul>
@@ -2011,10 +2416,11 @@ export const RECIPES = {
         </li>
         <li>
           <b>Tilt lock</b> (the padlock) makes a drag turn a toy only left and right, so a flat toy
-          such as a page, a photo or a screen stays facing you. Zooming, panning and pinching still
-          work. Your choice is remembered for that toy for the rest of your visit. In a recipe, it
-          is the flag <code>tiltLock: true</code>, and every toy on the Pictures and pages shelf
-          sets it. A link keeps the camera it was saved with, and the lock then holds that tilt.
+          such as a page, a photo, or a screen stays facing you. Zooming, panning, and pinching
+          still work. Your choice is remembered for that toy for the rest of your visit. In a
+          recipe, it is the flag <code>tiltLock: true</code>, and every toy on the Pictures and
+          pages shelf sets it. A link keeps the camera it was saved with, and the lock then holds
+          that tilt.
         </li>
         <li>
           <b>Turntable</b> (the record player) switches the slow turn that a toy does when nobody is
@@ -2029,6 +2435,31 @@ export const RECIPES = {
         are looking at. A two-finger drag moves the toy across the screen instead of turning it, as
         do Shift or Option/Alt and a drag on a computer; ↺ or R puts it back in the middle. A
         double-tap does too unless the toy uses it for page focus.
+      </p>
+
+      <h2 id="moving" class="coming"><span class="level">Level 6</span>Moving things</h2>
+      <p class="coming-note">
+        This level will cover hands-on play, joints, and physics. <b>Coming in the next round.</b>
+      </p>
+      <h2 id="data" class="coming"><span class="level">Level 7</span>Real data as splats</h2>
+      <p class="coming-note">
+        This level will cover science, imaging, maps, and the night sky.
+        <b>Coming in the next round.</b>
+      </p>
+      <h2 id="photo3d" class="coming">
+        <span class="level">Level 8</span>Photos and video into 3D
+      </h2>
+      <p class="coming-note">
+        This level will cover depth, the Sharp view, and splats. <b>Coming in the next round.</b>
+      </p>
+      <h2 id="codes" class="coming"><span class="level">Level 9</span>Codes and pages</h2>
+      <p class="coming-note">
+        This level will cover QR codes, barcodes, PDFs, and books. <b>Coming in the next round.</b>
+      </p>
+      <h2 id="make" class="coming"><span class="level">Level 10</span>Make your own</h2>
+      <p class="coming-note">
+        This level will cover Code a toy, the Studio, and the program gallery.
+        <b>Coming in the next round.</b>
       </p>
 
       <!-- ---- What else Splashery does now ---- -->
@@ -2055,7 +2486,7 @@ export const RECIPES = {
       <h3>Hands-on physics</h3>
       <p>
         With the ✋ switch on, a drag picks up whatever is under your finger and a quick let-go
-        tosses it. It lands, bounces and settles on the floor under the toy, inside an invisible
+        tosses it. It lands, bounces, and settles on the floor under the toy, inside an invisible
         play area, and soft toys squish when they land. The ↺ button sends everything home. Every
         toy plays this way, scans included, as one rigid body; a recipe's <code>hands</code> block
         can instead make its pieces separate bodies, so a toy can have its own interactions. This is
@@ -2064,8 +2495,8 @@ export const RECIPES = {
 
       <h3>The QR code toy</h3>
       <p>
-        The QR code toy makes a code from a link, plain text, a Wi-Fi network, a contact card or an
-        email, and builds it from splats. Its motions (assemble, flip, burst and return, and an
+        The QR code toy makes a code from a link, plain text, a Wi-Fi network, a contact card, or an
+        email, and builds it from splats. Its motions (assemble, flip, burst, and return, and an
         "alive" color wave) move each piece as a solid tile, and the alive wave keeps the gray
         values a reader sees unchanged, so each frame still scans. A "Scan view" turns the code flat
         to the camera, and after every change the toy renders that view and reads it back, to check
@@ -2076,7 +2507,7 @@ export const RECIPES = {
 
       <h3>Captures and file formats</h3>
       <p>
-        The viewer opens <code>.ply</code>, <code>.sog</code>, <code>.splat</code> and
+        The viewer opens <code>.ply</code>, <code>.sog</code>, <code>.splat</code>, and
         <code>.spz</code> files (version 4 SPZ files, which need a decoder Splashery does not ship,
         are refused with a message). Files can carry spherical harmonics, the view-dependent color
         the kit's splats do not use. The Scans shelf holds captures with their licenses and credits.
@@ -2084,9 +2515,9 @@ export const RECIPES = {
         spherical harmonics on the full file. Many of the newer captures are behind the labs switch.
       </p>
 
-      <h3>Camera, microphone and screen</h3>
+      <h3>Camera, microphone, and screen</h3>
       <p>
-        A toy can read the microphone, the camera or a shared screen, but only after you tap a
+        A toy can read the microphone, the camera, or a shared screen, but only after you tap a
         button for it. Nothing is requested before that tap. While a source is on, a small "Live"
         pill with a Stop button shows at the top of the page, and the sound or pictures stay on your
         device: nothing is recorded or sent. Two examples are the room echo meter (clap, and it
@@ -2095,7 +2526,7 @@ export const RECIPES = {
         switch.
       </p>
 
-      <h3>Books, albums and frames</h3>
+      <h3>Books, albums, and frames</h3>
       <p>
         Your book turns the pages of a PDF as paper: a page is a leaf with a front and a back, the
         engine can re-sort the splats of a turning page where it stands, and a turn waits until the
@@ -2119,38 +2550,38 @@ export const RECIPES = {
         The Model to splats toy opens a glTF or GLB file, an OBJ with its MTL, or an STL file and
         turns it into splats on your device: flat discs on the surface, more of them where there is
         detail, each sized to its neighbors so the surface closes, and colored from the model's
-        texture, vertex colors or material. A toy's input can take several files at once, for a glTF
-        with its <code>.bin</code> and textures. This toy is behind the labs switch.
+        texture, vertex colors, or material. A toy's input can take several files at once, for a
+        glTF with its <code>.bin</code> and textures. This toy is behind the labs switch.
       </p>
 
       <h3>Worlds</h3>
       <p>
         A world is a small place you walk around in, built on your device from recipes and a seed.
-        It has a start screen, a list of places, collision, a character and a camera that follows.
-        In splats mode everything you see is splats. In hybrid mode the ground, water, sky and signs
-        are lit models, and only the props and the near grass stay splats, so "everything is splats"
-        holds for the toys but not for every part of every world. Worlds are behind the labs switch
-        (<code>worlds/?labs=1</code>).
+        It has a start screen, a list of places, collision, a character, and a camera that follows.
+        In splats mode everything you see is splats. In hybrid mode the ground, water, sky, and
+        signs are lit models, and only the props and the near grass stay splats, so "everything is
+        splats" holds for the toys but not for every part of every world. Worlds are behind the labs
+        switch (<code>worlds/?labs=1</code>).
       </p>
 
-      <h3>Fluids, songs and smooth bodies</h3>
+      <h3>Fluids, songs, and smooth bodies</h3>
       <p>
         A recipe can declare a liquid, a gas or a flame with <code>k.fluid</code>. It is simulated
         while the toy is open and drawn as its own splats, one per particle, and the engine loads
-        only when such a toy opens. A keyboard toy can play songs from its own list, a MIDI file or
-        a tune pasted as ABC notation, with every key, hammer and string moving as a solid piece.
+        only when such a toy opens. A keyboard toy can play songs from its own list, a MIDI file, or
+        a tune pasted as ABC notation, with every key, hammer, and string moving as a solid piece.
         Recipes can also join shapes into one smooth body and place one toy's recipe inside
-        another's (the anatomy atlas does both). The Fluid lab, the bottle toys and the anatomy
+        another's (the anatomy atlas does both). The Fluid lab, the bottle toys, and the anatomy
         atlas are behind the labs switch.
       </p>
 
-      <h3>Solid, Fine and Dots, and the detail you see</h3>
+      <h3>Solid, Fine, and Dots, and the detail you see</h3>
       <p>
         The Splat equation toy has three looks. <b>Solid</b> lays a surface's splats flat along it
         so they close into a clean shape, <b>Fine</b> uses up to four times as many smaller splats
         within the device's budget, and <b>Dots</b> shows each splat you programmed as its own round
         dot. The toy also asks for the sharper labs kernel. Beyond that toy, the viewer's Detail
-        setting (Auto, High or Max) lives in your browser only, never in a link, and on every toy
+        setting (Auto, High, or Max) lives in your browser only, never in a link, and on every toy
         the canvas resolution drops while you drag if frames are slow. Those two are not behind the
         labs switch; the toy and the sharper kernel are.
       </p>
@@ -2167,7 +2598,7 @@ export const RECIPES = {
       <h2 id="later">What comes later: Code a toy</h2>
       <p>
         The splat equation language can place and color splats, but it can't give a toy parts,
-        controls or a tap of its own. For that you need a full recipe (Level 2). Splashery's plan
+        controls, or a tap of its own. For that you need a full recipe (Level 2). Splashery's plan
         includes a <b>Toy Workshop</b> where you will be able to write one: a <b>Code a toy</b>
         editor that builds and shows your recipe as you type.
       </p>
@@ -2182,7 +2613,8 @@ export const RECIPES = {
       <p>
         Until then, everything in Level 2 is in the source code, which is open under the MIT
         license:
-        <a href="https://github.com/ryanjosephkamp/splashery">github.com/ryanjosephkamp/splashery</a
+        <a href="https://github.com/ryanjosephkamp/splashery" target="_blank" rel="noopener"
+          >github.com/ryanjosephkamp/splashery</a
         >.
       </p>
 
@@ -2199,6 +2631,12 @@ export const RECIPES = {
           A smooth weight that falls off exponentially with the squared distance from a center,
           measured in units of the widths. In this manual it peaks at 1.
         </dd>
+        <dt id="g-field">Weight field, positive widths</dt>
+        <dd>
+          A weight field is a number at every point in space: 1 at the center, falling off with
+          distance. The three widths are a splat's sizes along its own axes; they must be above
+          zero.
+        </dd>
         <dt id="g-mean">Mean, center <var>μ</var></dt>
         <dd>The position where the bell has its largest weight.</dd>
         <dt id="g-width">Standard deviation, axis width <var>s</var></dt>
@@ -2212,6 +2650,20 @@ export const RECIPES = {
           <var>Σ</var> = <var>R</var> <var>S</var> <var>S</var><sup>T</sup> <var>R</var
           ><sup>T</sup>. Terms off the diagonal mean the axes are tilted.
         </dd>
+        <dt id="g-quadratic">Quadratic form</dt>
+        <dd>
+          An expression in which every term has two factors of the input. In two dimensions,
+          <var>a</var><var>d</var><sub>1</sub>² + 2<var>b</var><var>d</var><sub>1</sub><var>d</var
+          ><sub>2</sub> + <var>c</var><var>d</var><sub>2</sub>². With 4 and 1 on the diagonal it is
+          4<var>d</var><sub>1</sub>² + <var>d</var><sub>2</sub>², and setting it to 1 draws an
+          ellipse. The exponent of a Gaussian holds one [<a href="#ref-5">5</a>].
+        </dd>
+        <dt id="g-tilt">Tilt, rotation</dt>
+        <dd>
+          Tilt is the off-diagonal terms of <var>Σ</var>: zero when a splat's axes line up with
+          <var>x</var>, <var>y</var>, and <var>z</var>. Rotation is a splat's own turn. "Tilt lock"
+          is a different thing: the camera control in Level 5.
+        </dd>
         <dt id="g-aniso">Anisotropic, isotropic</dt>
         <dd>
           Different widths along the axes, or equal widths in every direction. A plain kit splat is
@@ -2221,6 +2673,11 @@ export const RECIPES = {
         <dd>
           Four numbers that describe a rotation. They only describe a rotation when their length is
           1, so a reader scales them to length 1 first.
+        </dd>
+        <dt id="g-affine">Affine</dt>
+        <dd>
+          A straight-line map plus a shift, <var>p</var> ↦ <var>A</var><var>p</var> + <var>b</var>.
+          Straight lines stay straight [<a href="#ref-6">6</a>].
         </dd>
         <dt id="g-footprint">Footprint</dt>
         <dd>The patch of the screen where one splat can add any color.</dd>
@@ -2249,12 +2706,31 @@ export const RECIPES = {
           A recipe is a program that makes splats. A capture is a file of splats fitted to
           photographs of a real thing.
         </dd>
+        <dt id="g-kit">Kit, kit toy</dt>
+        <dd>
+          The kit is Splashery's toy-building library. A recipe names shapes, colors, and moving
+          parts, and the kit fills them with splats in the browser, spreading the budget evenly by
+          area. A kit toy is built this way; a scan or capture is loaded from a file.
+        </dd>
+        <dt id="g-smoothstep">Smoothstep</dt>
+        <dd>
+          The curve 3<var>g</var>² − 2<var>g</var>³, an S-shaped ramp from 0 to 1 that is flat at
+          both ends, used to start and stop a motion gently [<a href="#ref-7">7</a>].
+        </dd>
+        <dt id="g-grammar">Grammar, atom</dt>
+        <dd>
+          A grammar is a list of rules for what counts as a valid program. In it, <code>=</code> is
+          "is made of", <code>|</code> is "or", <code>{ }</code> repeats, <code>[ ]</code> is
+          optional, and quotes mark text typed exactly. An atom is the smallest piece of an
+          expression that can stand alone [<a href="#ref-8">8</a>].
+        </dd>
         <dt id="g-uvt">u, v, t, morph</dt>
         <dd>
-          <var>u</var> and <var>v</var> are the two parameters each splat gets in the equation
-          language. <var>t</var> is time: 0 to 2π in the equation language, and the toy's running
-          time in a recipe's <code>drive</code>. A morph is a splat sliding from its own place to a
-          target place.
+          <var>u</var> and <var>v</var> are the coordinates of the flat sheet of points that each
+          splat gets a place on, before the equations bend it into shape. They are parameters of a
+          parametric surface, not a substitution [<a href="#ref-9">9</a>]. <var>t</var> is time: 0
+          to 2π in the equation language, and the toy's running time in a recipe's
+          <code>drive</code>. A morph is a splat sliding from its own place to a target place.
         </dd>
         <dt id="g-kernel">Kernel</dt>
         <dd>
@@ -2266,34 +2742,46 @@ export const RECIPES = {
       <!-- ---- Further reading ---- -->
       <h2 id="reading">Further reading</h2>
       <p>
-        Five sources, each opened and checked on October 4, 2026. Authors, titles, venues and years
-        are as the source's own page gives them.
+        Five sources, each opened, and checked on October 4, 2026. Authors, titles, venues, and
+        years are as the source's own page gives them.
       </p>
       <ul class="reading">
         <li>
-          Bernhard Kerbl, Georgios Kopanas, Thomas Leimkühler and George Drettakis.
+          Bernhard Kerbl, Georgios Kopanas, Thomas Leimkühler, and George Drettakis.
           <b>3D Gaussian Splatting for Real-Time Radiance Field Rendering.</b> SIGGRAPH 2023 (ACM
           Transactions on Graphics).
-          <a href="https://repo-sam.inria.fr/fungraph/3d-gaussian-splatting/">Project page</a> ·
-          <a href="https://arxiv.org/pdf/2308.04079">Paper</a>. The starting point.
+          <a
+            href="https://repo-sam.inria.fr/fungraph/3d-gaussian-splatting/"
+            target="_blank"
+            rel="noopener"
+            >Project page</a
+          >
+          · <a href="https://arxiv.org/pdf/2308.04079" target="_blank" rel="noopener">Paper</a>. The
+          starting point.
         </li>
         <li>
-          Matthias Zwicker, Hanspeter Pfister, Jeroen van Baar and Markus Gross.
+          Matthias Zwicker, Hanspeter Pfister, Jeroen van Baar, and Markus Gross.
           <b>EWA Volume Splatting.</b> Proceedings of IEEE Visualization 2001.
-          <a href="https://www.cs.umd.edu/~zwicker/publications/EWAVolumeSplatting-VIS01.pdf"
+          <a
+            href="https://www.cs.umd.edu/~zwicker/publications/EWAVolumeSplatting-VIS01.pdf"
+            target="_blank"
+            rel="noopener"
             >Paper</a
           >. The footprint step in Level 1.
         </li>
         <li>
-          Zehao Yu, Anpei Chen, Binbin Huang, Torsten Sattler and Andreas Geiger.
+          Zehao Yu, Anpei Chen, Binbin Huang, Torsten Sattler, and Andreas Geiger.
           <b>Mip-Splatting: Alias-free 3D Gaussian Splatting.</b> CVPR 2024 (Oral, Best Student
-          Paper). <a href="https://niujinshuchong.github.io/mip-splatting/">Project page</a>.
+          Paper).
+          <a href="https://niujinshuchong.github.io/mip-splatting/" target="_blank" rel="noopener"
+            >Project page</a
+          >.
         </li>
         <li>
-          Binbin Huang, Zehao Yu, Anpei Chen, Andreas Geiger and Shenghua Gao.
+          Binbin Huang, Zehao Yu, Anpei Chen, Andreas Geiger, and Shenghua Gao.
           <b>2D Gaussian Splatting for Geometrically Accurate Radiance Fields.</b> SIGGRAPH 2024.
-          <a href="https://surfsplatting.github.io/">Project page</a>. A different method from
-          Splashery's flat one-photo fit.
+          <a href="https://surfsplatting.github.io/" target="_blank" rel="noopener">Project page</a
+          >. A different method from Splashery's flat one-photo fit.
         </li>
         <li>
           Antoine Guédon and Vincent Lepetit.
@@ -2301,9 +2789,99 @@ export const RECIPES = {
             >SuGaR: Surface-Aligned Gaussian Splatting for Efficient 3D Mesh Reconstruction and
             High-Quality Mesh Rendering.</b
           >
-          CVPR 2024. <a href="https://anttwo.github.io/sugar/">Project page</a>.
+          CVPR 2024.
+          <a href="https://anttwo.github.io/sugar/" target="_blank" rel="noopener">Project page</a>.
         </li>
       </ul>
+
+      <!-- ---- References ---- -->
+      <h2 id="references">References</h2>
+      <p>
+        Numbered sources, cited in the text by their number in square brackets. Each entry gives the
+        authors, the title, where it appeared, the year, and a link. "Further reading" above lists
+        more papers on splats.
+      </p>
+      <ol class="refs">
+        <li id="ref-1">
+          Kerbl, B., Kopanas, G., Leimkühler, T., and Drettakis, G. "3D Gaussian Splatting for
+          Real-Time Radiance Field Rendering." <i>ACM Transactions on Graphics</i> (SIGGRAPH), 2023.
+          <a href="https://arxiv.org/pdf/2308.04079" target="_blank" rel="noopener"
+            >arxiv.org/pdf/2308.04079</a
+          >
+        </li>
+        <li id="ref-2">
+          Zwicker, M., Pfister, H., van Baar, J., and Gross, M. "EWA Volume Splatting."
+          <i>Proceedings of IEEE Visualization</i>, 2001.
+          <a
+            href="https://www.cs.umd.edu/~zwicker/publications/EWAVolumeSplatting-VIS01.pdf"
+            target="_blank"
+            rel="noopener"
+            >cs.umd.edu/~zwicker/publications/EWAVolumeSplatting-VIS01.pdf</a
+          >
+        </li>
+        <li id="ref-3">
+          Porter, T., and Duff, T. "Compositing Digital Images." <i>Computer Graphics</i>
+          (SIGGRAPH) 18(3), 1984, pp. 253–259.
+          <a href="https://doi.org/10.1145/964965.808606" target="_blank" rel="noopener"
+            >doi.org/10.1145/964965.808606</a
+          >
+        </li>
+        <li id="ref-4">
+          "Multivariate normal distribution." <i>Wikipedia</i>, the free encyclopedia.
+          <a
+            href="https://en.wikipedia.org/wiki/Multivariate_normal_distribution"
+            target="_blank"
+            rel="noopener"
+            >en.wikipedia.org/wiki/Multivariate_normal_distribution</a
+          >
+        </li>
+        <li id="ref-5">
+          "Quadratic form." <i>Wikipedia</i>, the free encyclopedia.
+          <a href="https://en.wikipedia.org/wiki/Quadratic_form" target="_blank" rel="noopener"
+            >en.wikipedia.org/wiki/Quadratic_form</a
+          >
+        </li>
+        <li id="ref-6">
+          "Affine transformation." <i>Wikipedia</i>, the free encyclopedia.
+          <a
+            href="https://en.wikipedia.org/wiki/Affine_transformation"
+            target="_blank"
+            rel="noopener"
+            >en.wikipedia.org/wiki/Affine_transformation</a
+          >
+        </li>
+        <li id="ref-7">
+          "Smoothstep." <i>Wikipedia</i>, the free encyclopedia.
+          <a href="https://en.wikipedia.org/wiki/Smoothstep" target="_blank" rel="noopener"
+            >en.wikipedia.org/wiki/Smoothstep</a
+          >
+        </li>
+        <li id="ref-8">
+          "Extended Backus–Naur form." <i>Wikipedia</i>, the free encyclopedia.
+          <a
+            href="https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form"
+            target="_blank"
+            rel="noopener"
+            >en.wikipedia.org/wiki/Extended_Backus–Naur_form</a
+          >
+        </li>
+        <li id="ref-9">
+          "Parametric surface." <i>Wikipedia</i>, the free encyclopedia.
+          <a href="https://en.wikipedia.org/wiki/Parametric_surface" target="_blank" rel="noopener"
+            >en.wikipedia.org/wiki/Parametric_surface</a
+          >
+        </li>
+        <li id="ref-10">
+          Kamp, R. J. "Writing toys for Splashery packs" (<code>docs/PACKS.md</code>).
+          <i>Splashery</i> source code, 2026.
+          <a
+            href="https://github.com/ryanjosephkamp/splashery/blob/main/docs/PACKS.md"
+            target="_blank"
+            rel="noopener"
+            >github.com/ryanjosephkamp/splashery/blob/main/docs/PACKS.md</a
+          >
+        </li>
+      </ol>
 
       <!-- ---- Quick reference ---- -->
       <h2 id="card">Quick reference</h2>
@@ -2328,9 +2906,9 @@ size = 0.05                            # about the bell's σ
 count = 4000                           # 100 to 10,000
 spread = grid                          # or random</code></pre>
       <p>
-        <b>Functions</b>: sin, cos, tan, asin, acos, atan, sinh, cosh, tanh, exp, log (ln), log10,
-        sqrt, abs, floor, min, max. <b>Constants</b>: pi, e. <b>Time</b>: <var>t</var> runs from 0
-        to 2π per tap. At most 120 characters a field.
+        <b>Functions</b>: sin, cos, tan, asin (arcsin), acos (arccos), atan (arctan), sinh, cosh,
+        tanh, exp, log (ln), log10, sqrt, abs, floor, min, max. <b>Constants</b>: pi, e.
+        <b>Time</b>: <var>t</var> runs from 0 to 2π per tap. At most 120 characters a field.
       </p>
       <h3>A picture toy</h3>
       <pre><code>pictures: { sample: () =&gt; "assets/…", accept: ["pdf", "image", "gif", "video"] },
@@ -2345,7 +2923,7 @@ drive(t, c, out, info) {
 
       <footer>
         <p>
-          The Tinkerer's Manual, first published September 28, 2026 and updated October 4, 2026.
+          The Tinkerer's Manual, first published September 28, 2026 and updated October 9, 2026.
           Part of
           <a href="https://ryanjosephkamp.github.io/splashery/" target="_blank" rel="noopener"
             >Splashery</a
