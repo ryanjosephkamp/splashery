@@ -47,6 +47,7 @@ pop.hidden = true;
 document.body.append(pop);
 let current = null;
 let pinned = false;
+let quiet = false; // Escape gives the word back its focus without opening the pop-up again
 
 function glossaryEntry(id) {
   const dt = document.getElementById(id);
@@ -91,7 +92,7 @@ for (const term of document.querySelectorAll(".term[data-g]")) {
     if (!pinned) hide();
   });
   term.addEventListener("focus", () => {
-    if (!pinned) show(term, false);
+    if (!pinned && !quiet) show(term, false);
   });
   term.addEventListener("blur", () => {
     if (!pinned) hide();
@@ -113,7 +114,9 @@ addEventListener("keydown", (e) => {
   if (e.key === "Escape" && !pop.hidden) {
     const t = current;
     hide();
+    quiet = true;
     t?.focus({ preventScroll: true });
+    quiet = false;
   }
 });
 document.addEventListener("pointerdown", (e) => {

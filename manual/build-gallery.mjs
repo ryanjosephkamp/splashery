@@ -3,7 +3,7 @@
 // description, its source, the program itself (folded), and a "Run it" link that opens the Splat
 // equation toy with that program, in a new tab. Run it again after the gallery file changes:
 //
-//   node manual/build-gallery.mjs
+//   node manual/build-gallery.mjs && npx prettier --write manual/index.html
 //
 // It replaces everything between the two GALLERY markers in index.html.
 
@@ -57,7 +57,7 @@ function card(entry) {
     ? `<a href="${esc(entry.source)}" target="_blank" rel="noopener">About the shape</a>`
     : "";
   return `          <article class="card" id="g-${esc(entry.id)}">
-            <img src="../assets/gallery/${esc(entry.id)}.webp" alt="${esc(entry.title)}, made of splats" loading="lazy" width="256" height="256" />
+            <img src="../assets/gallery/${esc(entry.id)}.webp" alt="${esc(entry.title)}, made of splats" width="256" height="256" />
             <div class="body">
               <h5>${esc(entry.title)}</h5>
               <p>${esc(entry.about)}</p>
@@ -71,10 +71,14 @@ function card(entry) {
 }
 
 const groups = [...new Set(entries.map((e) => e.group))];
-let out = "      <!-- GALLERY:START (written by manual/build-gallery.mjs; do not edit by hand) -->\n";
+let out =
+  "      <!-- GALLERY:START (written by manual/build-gallery.mjs; do not edit by hand) -->\n";
 for (const g of groups) {
   const list = entries.filter((e) => e.group === g);
-  const slug = g.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+  const slug = g
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
   out += `      <details class="fold gallery-group" id="gallery-${slug}">
         <summary>${esc(g)} (${list.length} programs)</summary>
         <div class="gallery gallery-grid">
@@ -88,5 +92,8 @@ const html = fs.readFileSync(indexUrl, "utf8");
 const a = html.indexOf("      <!-- GALLERY:START");
 const b = html.indexOf("      <!-- GALLERY:END -->\n");
 if (a < 0 || b < 0) throw new Error("The GALLERY markers are not in index.html yet.");
-fs.writeFileSync(indexUrl, html.slice(0, a) + out + html.slice(b + "      <!-- GALLERY:END -->\n".length));
+fs.writeFileSync(
+  indexUrl,
+  html.slice(0, a) + out + html.slice(b + "      <!-- GALLERY:END -->\n".length),
+);
 console.log(`${entries.length} programs in ${groups.length} groups written.`);

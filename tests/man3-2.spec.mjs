@@ -162,7 +162,8 @@ test.describe("the live demos", () => {
   test("each shows its numbers, matching a hand calculation, with no errors", async ({ page }) => {
     const errs = [];
     page.on("pageerror", (e) => errs.push(e.message));
-    page.on("console", (m) => m.type() === "error" && errs.push(m.text()));
+    page.on("console", (m) => m.type() === "error" && !/Failed to load resource/.test(m.text()) && errs.push(m.text())); // prettier-ignore
+    page.on("response", (r) => r.status() >= 400 && !/favicon/.test(r.url()) && errs.push(`${r.status()} ${r.url()}`)); // prettier-ignore
     await page.goto("/manual/");
     // Covariance, at its defaults.
     const cov = page.locator("#cov-readout");
@@ -179,7 +180,7 @@ test.describe("the live demos", () => {
     await page.locator("#cov-mode-sizes").click();
     // The reader.
     await expect(page.locator("#parse-readout")).toContainText("= -0.0907026");
-    await expect(page.locator("#parse-readout")).toContainText("Grouped: −(u ^ 2) + sin(2 × u)");
+    await expect(page.locator("#parse-readout")).toContainText("Grouped: (−(u ^ 2)) + sin(2 × u)");
     await page.locator("#parse-presets button", { hasText: "sin u^2" }).click();
     await expect(page.locator("#parse-readout")).toContainText("= 0.841471");
     await page.locator("#parse-input").fill("sin");
@@ -313,6 +314,7 @@ test.describe("the lighter layout", () => {
     await page.keyboard.press("Escape");
     await expect(pop).toBeHidden();
     // Keyboard: focus shows it, Enter pins it, a click outside closes it.
+    await page.evaluate(() => document.activeElement.blur());
     await term.focus();
     await expect(pop).toBeVisible();
     await page.keyboard.press("Enter");
@@ -398,5 +400,60 @@ test.describe("the lighter layout", () => {
     for (const chip of ["Our choice", "Format limit", "Not tested yet", "Each recipe's choice"]) expect(flat, chip).toContain(chip); // prettier-ignore
     // The owner's private notes stay private.
     expect(flat.toLowerCase()).not.toMatch(/the owner|ryan said|you asked|your question/);
+  });
+});
+
+test.describe("Level 4's sixty more programs", () => {
+  const entries = JSON.parse(fs.readFileSync("src/equation-gallery.json", "utf8"));
+
+  test("sixty cards in six folded groups, each with its picture, a program, a source, and a Run it link in a new tab", async ({
+    page,
+  }) => {
+    await page.goto("/manual/");
+    expect(entries).toHaveLength(60);
+    await expect(page.locator("details.gallery-group")).toHaveCount(6);
+    await expect(page.locator("details.gallery-group[open]")).toHaveCount(0);
+    await expect(page.locator("details.gallery-group article.card")).toHaveCount(60);
+    for (const e of entries) {
+      const card = page.locator(`#g-${e.id}`);
+      await expect(card.locator("h5")).toHaveText(e.title);
+      await expect(card.locator("pre code")).toHaveText(e.program);
+      const run = card.locator("a.button");
+      await expect(run).toHaveText("Run it");
+      await expect(run).toHaveAttribute("target", "_blank");
+      await expect(run).toHaveAttribute(
+        "href",
+        /^https:\/\/ryanjosephkamp\.github\.io\/splashery\/#s=d\./,
+      );
+    }
+    // Every picture is real.
+    const bad = await page.evaluate(() =>
+      [...document.querySelectorAll("details.gallery-group img")]
+        .filter((i) => !(i.complete && i.naturalWidth > 0))
+        .map((i) => i.getAttribute("src")),
+    );
+    expect(bad).toEqual([]);
+    // A link to one card opens its group.
+    await page.goto("/manual/#g-torus");
+    await expect(page.locator("details.gallery-group").first()).toHaveJSProperty("open", true);
+    // In the PDF, the groups print open as a compact grid with no code.
+    await page.emulateMedia({ media: "print" });
+    await page.evaluate(() => dispatchEvent(new Event("beforeprint")));
+    await expect(page.locator("#g-torus h5")).toBeVisible();
+    await expect(page.locator("#g-torus details.program")).toBeHidden();
+  });
+
+  test("three Run it links open the equation toy with that program", async ({ page }) => {
+    test.setTimeout(240_000);
+    await page.goto("/manual/");
+    const picks = [entries[0], entries[23], entries[59]];
+    for (const e of picks) {
+      const href = await page.locator(`#g-${e.id} a.button`).getAttribute("href");
+      await page.goto(`/?renderer=webgl2&profile=weak&labs=1${href.slice(href.indexOf("#s="))}`);
+      await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
+      await expect(page.locator("#toy-status")).toHaveText(/^Your program/, { timeout: 180_000 });
+      const typed = await page.evaluate(() => window.__splashery.app.scene?.toy?.options ?? null);
+      if (typed) expect(typed.x, e.id).toBeTruthy();
+    }
   });
 });

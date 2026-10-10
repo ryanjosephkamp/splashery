@@ -2523,6 +2523,2228 @@ count = 4000</code></pre>
           </div>
         </article>
       </div>
+      <h3 id="gallery-60">Sixty more programs</h3>
+      <p>
+        A second gallery, in six groups of ten, written and then checked by hand: each program
+        reads, builds, and looks like its title. A few are honest look-alikes or samples of a named
+        system, and say so; none is a full solution of the system it names. Each card has the
+        picture, one line about the shape, the program (folded), and a <b>Run it</b> link that opens
+        the Splat equation toy with that program, in a new tab. Every program fits the toy's own
+        limits: 12 fields, 120 characters each, and at most 10,000 points.
+      </p>
+      <!-- GALLERY:START (written by manual/build-gallery.mjs; do not edit by hand) -->
+      <details class="fold gallery-group" id="gallery-classic-surfaces">
+        <summary>Classic surfaces (10 programs)</summary>
+        <div class="gallery gallery-grid">
+          <article class="card" id="g-sphere">
+            <img
+              src="../assets/gallery/sphere.webp"
+              alt="Spun sphere, made of splats"
+              width="256"
+              height="256"
+            />
+            <div class="body">
+              <h5>Spun sphere</h5>
+              <p>
+                A sphere turns once around its vertical axis while its latitude stripes stay in
+                place.
+              </p>
+              <details class="fold program">
+                <summary>Show the program</summary>
+                <pre><code>x = sin(v)cos(u+t)
+y = cos(v)
+z = sin(v)sin(u+t)
+u = 0 .. 2pi
+v = 0 .. pi
+hue = u/(2pi)
+size = 0.04
+count = 6000</code></pre>
+              </details>
+              <p class="card-links">
+                <a
+                  class="button"
+                  href="https://ryanjosephkamp.github.io/splashery/#s=d.dVPZbtswEPyVYPLioIxLn2351m9on1rkgaLWNmNaZHn4SKB_L5aSjSBBDMPUyrPH7AxfoUOAQgpOpx3FCwSOFJP1HdRCwETSmdqfGQpzOV8_zuTjTP6WUtXvVEr5BwKJqIVaLGfL5Uwg-wvUK_a2a6HQFOuy7SBg27FTfqR_RWduIuADPyTOCJEScStTUvYHCJw5w3aT44PxaVK-5AcIXBjh0-TIwcsNwb8jokBB3k2nd_NgmdE1rNGuEBTK18k8WAZHKEBgOxzNcCT7wig5lUsIGF86nmstpeQ_QyTNZND3As77PU_faLPfRl8q66C3BIG8owPX0SV7CGhjqBYa47qMX0Y7gpoJ0Dn4VCIHvQBtNmTysBi_Jz5ZlY12iQRSjtRt8w5KTtcCJ980XEVOV73Aqa7-U_xqJdDaSKZKoGTPYUreHT90GZkOOSlUnYcebfThHbrxpTN1iCWjjc6Z4hV_0NuOxf10qm8CUbe2pKFAL5BPNr3P0IdBCzldvWW9ENBnm6BwQS-QnDXvuQSf7EhYIJ2IQk1c3TLPnBm07T5MWc1QOw4XZQyMd57dc0_rRTOn6oZbfsr6EBLU36dewOgDRc2vL_p0XWew2dRS8-8C0TtXJ2ttyrqukVfARglO1wuVS-yyroRzLHR1CBQ639EwPG-8Y3C9bPW9wMbp0d0h-uer7DhFHdj_FEizz2YjIx4a95v6gbixE7iXzXLzw-CpiuuuO7lKMhNoKWvrqidZcj90eoV29ngb--D5GSlb5_DWVdy_y9E7Nn3f9_8B"
+                  target="_blank"
+                  rel="noopener"
+                  >Run it</a
+                >
+                <a href="https://en.wikipedia.org/wiki/Sphere" target="_blank" rel="noopener"
+                  >About the shape</a
+                >
+              </p>
+            </div>
+          </article>
+          <article class="card" id="g-torus">
+            <img
+              src="../assets/gallery/torus.webp"
+              alt="Rainbow torus, made of splats"
+              width="256"
+              height="256"
+            />
+            <div class="body">
+              <h5>Rainbow torus</h5>
+              <p>A round tube wraps around a ring as its colors follow the small circle.</p>
+              <details class="fold program">
+                <summary>Show the program</summary>
+                <pre><code>x = (2+0.55cos(v))cos(u)
+y = 0.55sin(v)
+z = (2+0.55cos(v))sin(u)
+u = 0 .. 2pi
+v = 0 .. 2pi
+hue = v/(2pi)
+size = 0.05
+count = 7000</code></pre>
+              </details>
+              <p class="card-links">
+                <a
+                  class="button"
+                  href="https://ryanjosephkamp.github.io/splashery/#s=d.dVPbbhshEP2V6OTFUScuvmzS8tZvaJ9a5QGzY5saLxRYXxLtv1fD2lGbKKuVYGBuZ87hBSZGaOToTd5yOoNw4JRd6KAXBJvYFG6_FWjM1fzhfqbuZ-qHUrr-U6XUTxAycwu9WM6WyxmhhDP0C3aua6Gx6p0vrgPBtZdK5Z7_9KZIEUKIsskSERNnllK2zyXsQThBYzL_pKZNY0OeHO7uZOnvQDhDQ86z6yYHOXh-5ytX1bcX35vp9GYenSD839z2DI3D58k8OvFO0ABhMy6rccnumWtF1YBgQ99Jo49KKbmMiY2gwzAQfAg7gbMydrdJoa9jiGbDIJQt7yWP6UsAwVjLNdHFrtP5bo1n6BmBTzHkPokxEHi9ZlvGSYUdyyo0rY3PTMglcbcpW2g1fSAcw2olWdS0GQjHysWH_k1DaF1iWznRahAz5-AP76pckI4xOVbixxptCvGN9yr0na1NLMXbmlI4Xf33ZtMJ2x929UhIpnV9HhMMhHJ0-W2E2Y9cqGnzL-oFwZxchsYZAyF7Z99iiSG7C2BCPjLHGti8Rp4kMhrXveuyiqFWHF_OxbDBB1HPLT8sVnOuaniNz8XsY4b-9TQQrNlzMnJ8NsfrOKMrtqaafyGk4H3trHW5mDpGGYEIJXpTX1jpU1dMBVxSz1eFQKMLHY_Ny8Q7ca6vr54T1t5c1B1T-H2lHcdkouifIxvR2eyCSJrG7bp-oFd0hFu1Wq6_WjxVcv11JldKZoSWi3G-alIoD2OlFxjvDq9t74PskYvzHv-qSup3JQUvoh-G4S8"
+                  target="_blank"
+                  rel="noopener"
+                  >Run it</a
+                >
+                <a href="https://en.wikipedia.org/wiki/Torus" target="_blank" rel="noopener"
+                  >About the shape</a
+                >
+              </p>
+            </div>
+          </article>
+          <article class="card" id="g-mobius-ribbon">
+            <img
+              src="../assets/gallery/mobius-ribbon.webp"
+              alt="Möbius ribbon, made of splats"
+              width="256"
+              height="256"
+            />
+            <div class="body">
+              <h5>Möbius ribbon</h5>
+              <p>A narrow band turns through one half twist before its edges meet.</p>
+              <details class="fold program">
+                <summary>Show the program</summary>
+                <pre><code>x = (1+vcos(u/2))cos(u)
+y = vsin(u/2)
+z = (1+vcos(u/2))sin(u)
+u = 0 .. 2pi
+v = -0.32 .. 0.32
+hue = u/(2pi)
+size = 0.035
+count = 5000</code></pre>
+              </details>
+              <p class="card-links">
+                <a
+                  class="button"
+                  href="https://ryanjosephkamp.github.io/splashery/#s=d.dVPLbtswEPyVYHJJUFqhZDttees3tKcWOVDU2mZNiyxJ-ZFA_14sZRuBgwgC-NrX7My-QYcAhRScThuKJwjsKSbre6i5gImkM3U_MhQa2TzPajmr5S8pVfkrKeVvCCSiDmq-qBeLWiD7E9QbtrbvoNAO1mXbQ8B250x5Rv8GnTmJgA-8SewRIiXiVGZI2e8gcITCQ_1lb3x6GJ6ax8eyeYTACQr7ZPtyDYHXW8vyxi8DFORdVd01wTI8KMxkNW_4ilcIbAaCwvD00ATLLhEKEFhPSzstyb6ylazkfAkB44eea11KKfk1RNIMEOMo4LzfMqJWm-06-qF0Iug1QSBvaMeB9JA9BLQxVAKdz6VBP412BFUL0DH4NEQ-jAK0WpHJU7P8lnhlplbaJRJIOVK_zhsoWT0LHHzbchRZLUeBQ6HjU_vlUqCzkUyhRcmRjyl5t_-Q5Yx08kmhcD_l6KIPN9atH3pTiliwtdE5U7zY7_S6Z8I_reqrQNSdHdIUYBTIB5tuPfRu4kJWy_eo5wL6aBMUThgFkrPmFkvwyZ4BC6QDUSiOy6vnkT2Dtv2HKosaSsZpeM4H451n-dzT87xtqKjh6p-y3oUE9edlFDB6R1Hz9UkfLu0MNpsSqvkmEL1zpbLOpqxLG7kFLJTgdBmyPMQ-6wI4x4EuCoFC73uaiueO92xcBrDcC6ycPss7RP_3QjsOUQceAAqkWWf1GREXjftV-SCu6ATuZbtYfTd4KeS6S08ulNQCHWVtXdEkU-6nTG_Qzu6vZe8875GydQ7vVcX5-xy9Y9GP4_gf"
+                  target="_blank"
+                  rel="noopener"
+                  >Run it</a
+                >
+                <a
+                  href="https://en.wikipedia.org/wiki/M%C3%B6bius_strip"
+                  target="_blank"
+                  rel="noopener"
+                  >About the shape</a
+                >
+              </p>
+            </div>
+          </article>
+          <article class="card" id="g-klein-figure-eight">
+            <img
+              src="../assets/gallery/klein-figure-eight.webp"
+              alt="Figure-eight Klein bottle, made of splats"
+              width="256"
+              height="256"
+            />
+            <div class="body">
+              <h5>Figure-eight Klein bottle</h5>
+              <p>
+                This immersed Klein bottle crosses itself where its neck passes through the body.
+              </p>
+              <details class="fold program">
+                <summary>Show the program</summary>
+                <pre><code>x = (2+cos(u/2)sin(v)-sin(u/2)sin(2v))cos(u)
+y = sin(u/2)sin(v)+cos(u/2)sin(2v)
+z = (2+cos(u/2)sin(v)-sin(u/2)sin(2v))sin(u)
+u = 0 .. 2pi
+v = 0 .. 2pi
+hue = v/(2pi)
+size = 0.055
+count = 8000</code></pre>
+              </details>
+              <p class="card-links">
+                <a
+                  class="button"
+                  href="https://ryanjosephkamp.github.io/splashery/#s=d.jVPLbtswEPyVYHKxUdqhZTtNees3tKcWOVDU2mZNiyxJyXYC_XuxlB3kgQAVBJBLzr5mh8_QIUAhBafTjuIZAj3FZH0LtRQwkXSm5nuGQiWr-9lCzhbyp5Sq_HMp5S8IJKIGarlarFYLgezPUM_Y27aBQt1Zl20LAdtcMuUZ_e105iQCPvAmsUeIlIhTmS5lf4DACQqT6ovxadLdVdNk20k_nfFyNat-Oi3XUwicOcGry376xrXqGfT0XzGLzfAOCvJmPr-pgmV23pq7jqDQ302qYBkdoQCB7bjU45LsE6PkXK7XEDC-a7nLBykl34ZImqnBMAg47_fMRa3Nfht9VzgMeksQyDs6cCDdZQ8BbQyVQBe7UPvDaEdQCwE6BZ-6yMYgQJsNmTzS7PfEK894o10igZQjtdu8g5Lze4Gjr2uOIufrQeBYBvkpfr0WaGwkUwaq5MBmSt71H7JcOh19UiiqGXM00Yd36Np3rSlFrBhtdM4Ur_iD3rYslU-r-ioQdWO7NAYYBPLRpvce-jDOQs7Xr7teCuiTTVA4YxBIzpr3vQSf7KVhgXQkCsVx_eJ5Ys-gbfuhyqKGknF8dhfDeOdZPrd0v6wrKmp48U9ZH0KC-v04CBh9oKj5-KyPVzqDzaaEqh4EoneuVNbYlHWhkSlgoQSny_PMXWyzLg3n2NFVIVBofUtj8cx4y-DydMu5wMbpi7xD9H-uY8cx6sAPgAJp1tni0hEXjdtN-SBeuhO4lfVq883gsQzXXTm5jmQh0FDW1hVN8sj9mOkZ2tn-peyD5z1Sts7htao4f5ujdyz6YRj-AQ"
+                  target="_blank"
+                  rel="noopener"
+                  >Run it</a
+                >
+                <a href="https://en.wikipedia.org/wiki/Klein_bottle" target="_blank" rel="noopener"
+                  >About the shape</a
+                >
+              </p>
+            </div>
+          </article>
+          <article class="card" id="g-boy-surface">
+            <img
+              src="../assets/gallery/boy-surface.webp"
+              alt="Boy surface, made of splats"
+              width="256"
+              height="256"
+            />
+            <div class="body">
+              <h5>Boy surface</h5>
+              <p>
+                A parametrized Boy surface folds a projective plane into a smooth immersed form.
+              </p>
+              <details class="fold program">
+                <summary>Show the program</summary>
+                <pre><code>x = (sqrt(2)cos(u)cos(v)^2+cos(2u)sin(v))/(2-sqrt(2)sin(3u)sin(2v))
+y = (sqrt(2)sin(u)cos(v)^2-sin(2u)sin(v))/(2-sqrt(2)sin(3u)sin(2v))
+z = 3cos(v)^2/(2-sqrt(2)sin(3u)sin(2v))
+u = 0 .. 2pi
+v = 0 .. pi
+hue = v/pi
+size = 0.035
+count = 8000</code></pre>
+              </details>
+              <p class="card-links">
+                <a
+                  class="button"
+                  href="https://ryanjosephkamp.github.io/splashery/#s=d.jVNdb9sgFP0r1elLopGUOEnX8bbfsD1t6iSCbxIWYijgfLTyf58udrKqVadZluHi-3nO4QU6BCik4HTaUjxD4EAxWd9AzQVMJJ2p_pqhUMnqfjKTk5n8LqUq71RK-QMCiaiGmi9mi8VMIPsz1At2tqmhsGqty7aBgK2HSnlCT63OXETAB94kjgiREnEp06bs9xA4QWGUnmIeVWPj06gt38P4V_WJN1U7TrYZHcbju1E1Gfz4ZN7_qA7jMQTOr7Lw8d8sk-L1f1meoTC_BP7Ts4WCvJlOb6pgGdCLWaxtS1A43BUjQgECm35Z9Uuyz-wip3K-hIDxbcOgPEgp-W-IpBlJdJ2A837H0K202W2ibwvkQW8IAnlLe06k2-whoI2hkmiwCxPfjHYENROgU_CpjWx0ArRek8k9K35HvLIk1tolEkg5UrPJWyg5vRc4-tWKs8jpshM4Ft4_9F8uBWobyRT-lezYTMm7w7sqw6R9TApFZH2NOvrwxnvl28aUJhbsbXTOFC_-e71pWFkfdvVZIOratqlP0Anko01vI_S-50JOl6-nngvok01QOKMTSM6at7MEn-wwsEA6EoUSuLxGnjgyaNu867KooVTsb-lgGO88y-eW7ueriooarvEp631IUD8fOwGj9xQ1H5_18QJnsNmUVNWDQPTOlc5qm7IuMDIELJTgdLnNuY1N1mXgHFu6KAQKjW-ob54Rb9i53PRyLrB2epB3iP73hXYcow58ASiQZp3Nhom4adyuywNxnU7gVq4W6y8Gj4Vcd8HkQslMoKasrSuaZMp9X-kF2tnDte295z1Sts7htaq4fpOjdyz6ruv-AA"
+                  target="_blank"
+                  rel="noopener"
+                  >Run it</a
+                >
+                <a
+                  href="https://en.wikipedia.org/wiki/Boy%27s_surface"
+                  target="_blank"
+                  rel="noopener"
+                  >About the shape</a
+                >
+              </p>
+            </div>
+          </article>
+          <article class="card" id="g-enneper-surface">
+            <img
+              src="../assets/gallery/enneper-surface.webp"
+              alt="Enneper surface, made of splats"
+              width="256"
+              height="256"
+            />
+            <div class="body">
+              <h5>Enneper surface</h5>
+              <p>A simple polynomial surface curls into three spreading lobes.</p>
+              <details class="fold program">
+                <summary>Show the program</summary>
+                <pre><code>x = u-u^3/3+uv^2
+y = v-v^3/3+vu^2
+z = u^2-v^2
+u = -1.7 .. 1.7
+v = -1.7 .. 1.7
+hue = 0.55+0.1sin(4u)
+size = 0.035
+count = 8000</code></pre>
+              </details>
+              <p class="card-links">
+                <a
+                  class="button"
+                  href="https://ryanjosephkamp.github.io/splashery/#s=d.dVPZbtswEPyVYPLSIrRK2VaS8q3f0D61SABKWtusaZHl4SOB_r1YyjaCBBEEUFztNTuzr9DeQyF6q-OGwgkCewrRuAFqIdAF0on6HwkKczm_n9VyVstfUqryVlLK3xCIRD3UYlkvl7VAcieoV2zN0EOhzcYmM0DA9OdKaUb_sk5cRMB5_ogc4QNF4lJdjsntIHCEQp7l58W3xV3eP88hcILCfrYvpn0uphf2ep7PJocMhVldPdxU1U1dPTCiD5ZNJijIqmnuZFVHM3xZ5q8QCFCAwHo62umI5mXylosGAp3LAzf5KKXkvz6QZmQYRwHr3JahtLrbroPLZQRerwkCaUM7TqRzchDQXUcl0fleJvOz05agagE6ehdz4MsoQKsVdWmaktsSn0zRSttIAjEFGtZpAyWre4GDa1vOIqtmFDgUHj71bxqB3gTqCh9KjnyN0dn9hypnpFNM9IX0qUYfnH_n3bo8dKWJJXt3OiUKF_-dXg_M9KddPQgE3ZscpwSjQDqY-D5C7yYuZNW8Rb0Q0EcToXDCKBCt6d5j8S6aM2CBeCDyJbC5Rh450mszfOiyqKFUnLbmfOmcdSyfW7pftHMqarjGx6R3PkL9eRoFOr2joNl80ofLOL1JXUk1fxQIztrSWW9i0mWMPAIWire6bFfKYUi6AE4h00UhUBjcQFPzPPGBncvmFbvAyuqzvH1wfy-04xC05wUgT5p1Vp8RcdO4XZUH4opO4Fa2y9X3Dk-FXHuZyYWSWqCnpI0tmmTK3VTpFdqa_bXtneNvxGSsxVtVcf0hBWdZ9OM4_gc"
+                  target="_blank"
+                  rel="noopener"
+                  >Run it</a
+                >
+                <a
+                  href="https://en.wikipedia.org/wiki/Enneper_surface"
+                  target="_blank"
+                  rel="noopener"
+                  >About the shape</a
+                >
+              </p>
+            </div>
+          </article>
+          <article class="card" id="g-catenoid">
+            <img
+              src="../assets/gallery/catenoid.webp"
+              alt="Catenoid, made of splats"
+              width="256"
+              height="256"
+            />
+            <div class="body">
+              <h5>Catenoid</h5>
+              <p>A catenoid pinches between two wide circular rims.</p>
+              <details class="fold program">
+                <summary>Show the program</summary>
+                <pre><code>x = 0.45cosh(v)cos(u)
+y = 0.45v
+z = 0.45cosh(v)sin(u)
+u = 0 .. 2pi
+v = -1.6 .. 1.6
+hue = 0.55+0.1v
+size = 0.035
+count = 7000</code></pre>
+              </details>
+              <p class="card-links">
+                <a
+                  class="button"
+                  href="https://ryanjosephkamp.github.io/splashery/#s=d.dVPLbtswEPyVYHJJUFqgbMtpees3tKcWOVDU2mZNiyxJ-ZFA_14sZRtpgggCKK72NTuzr9AhQCEFp9OW4hkCB4rJ-h5qIWAi6Uzd9wyFuZyvZrWc1fKnlKq8lZTyFwQSUQe1WNbLZS2Q_RnqFTvbd1BoB-uy7SFgu0ulPKO_g85cRMAH_kgcESIl4lJmSNnvIXCCgqyWjfFp-3B4ND49DI8QOF_sBwi8_O-TbD_5DGy_q6q7ebAMCwqzulqxpa5WENgOVEKb5ousak4VoQCBzXS005Hsy-QnFw0EjB967vFJSsl_QyTNwDCOAs77HSNptdltoh_KBILeEATylvacSA_ZQ0AbQyXR5V4G88NoR1C1AJ2CT0PkyyhA6zWZPA3J74hPZmitXSKBlCP1m7yFktVK4OjblrPIqhkFjoWGT_2bRqCzkUyhQ8mRryl5d_hQ5YJ0ikmhcD7V6KIP77xbP_SmNLFkb6Nzpnj13-tNz0R_2tWTQNSdHdKUYBTIR5veR-j9xIWsmreoFwL6ZBMUzhgFkrPmPZbgk70AFkhHolACm1vkiSODtv2HLosaSsVpaS4X451n-dzTatHOqajhFp-y3ocE9ft5FDB6T1Gz-ayP13EGm01JNf8qEL1zpbPOpqzLGHkELJTgdFmuPMQ-6wI4x4GuCoFC73uamueJ9-xcFq_YBdZOX-Qdov9zpR3HqAMvAAXSrLP6goibxv26PBA3dAL3sl2uvxk8F3LddSZXSmqBjrK2rmiSKfdTpVdoZw-3tveev5GydQ5vVcX1-xy9Y9GP4_gP"
+                  target="_blank"
+                  rel="noopener"
+                  >Run it</a
+                >
+                <a href="https://en.wikipedia.org/wiki/Catenoid" target="_blank" rel="noopener"
+                  >About the shape</a
+                >
+              </p>
+            </div>
+          </article>
+          <article class="card" id="g-helicoid">
+            <img
+              src="../assets/gallery/helicoid.webp"
+              alt="Helicoid, made of splats"
+              width="256"
+              height="256"
+            />
+            <div class="body">
+              <h5>Helicoid</h5>
+              <p>A ruled helicoid spirals upward like a ramp with no outer rim.</p>
+              <details class="fold program">
+                <summary>Show the program</summary>
+                <pre><code>x = vcos(u)
+y = vsin(u)
+z = 0.18u
+u = -3pi .. 3pi
+v = -1 .. 1
+hue = 0.55+0.12sin(u)
+size = 0.035
+count = 7000</code></pre>
+              </details>
+              <p class="card-links">
+                <a
+                  class="button"
+                  href="https://ryanjosephkamp.github.io/splashery/#s=d.dVPLbtswEPyVYHJp0bVB-ZGkvPUb2lOLHGhqbbOmRZak_Eigfy-Wso0gQQQB1FL7mtnZV5gYoZGjN3nL6QzCgVN2oYOeE2xiU7j9UaAxU7OHSaMmjfqllK7vVCn1G4TM3ELPF81i0RBKOEO_Yue6Fhqr3vniOhBce6lUJvyvN0WKEEKUjywRMXFmKWX7XMIehBM0DjbkL_1XEM5iZdeN1gs01LR56kHooTGZR3c3nd7NoxMUctOI3YCw7bl6L5ff1LSZ3XIkaICwGY_VeGT3Mnqr-RIEG_pOmnpUSsnfmNgIEgwDwYewk9ZXxu42KfQVcjQbBqFseS-JTF8CCMZarokudmXipzWeoRsCn2LIfRJjIPB6zbaMrIQdyykjWRufmZBL4m5TttBq-kA4htVKsqjpciAcK--f-i-XhNYltpV_rQYxcw7-8KHKBekYk2Md8lijTSG-816FvrO1iYV4W1MKp6v_3mw6meynXT0Skmldn8cEA6EcXX4fYfbjLNR0-Rb1nGBOLkPjjIGQvbPvscSQ3QUwIR-ZYw1c3iJPEhmN6z50WdVQK45bcjFs8EHkc88P89WMqxpu8bmYfczQf54HgjV7Tkauz-Z4pTO6Ymuq2RMhBe9rZ63LxVQahQIRSvSmblPpU1dMBVxSz1eFQKMLHY_NC-OdONdNq_eEtTcXeccU_l7HjmMyURaAIxvRWXNBJE3jfl0f0A0d4V6tFuvvFs91uP7KyXUkDaHlYpyvmpSRh7HSK4x3h1vb-yDfyMV5j7eqkvpdScGL6Idh-A8"
+                  target="_blank"
+                  rel="noopener"
+                  >Run it</a
+                >
+                <a href="https://en.wikipedia.org/wiki/Helicoid" target="_blank" rel="noopener"
+                  >About the shape</a
+                >
+              </p>
+            </div>
+          </article>
+          <article class="card" id="g-dini-surface">
+            <img
+              src="../assets/gallery/dini-surface.webp"
+              alt="Dini surface, made of splats"
+              width="256"
+              height="256"
+            />
+            <div class="body">
+              <h5>Dini surface</h5>
+              <p>Dini’s surface twists a trumpet shape into a tight spiral.</p>
+              <details class="fold program">
+                <summary>Show the program</summary>
+                <pre><code>x = 0.65cos(u)sin(v)
+y = 0.65sin(u)sin(v)
+z = 0.65(cos(v)+log(tan(v/2)))+0.12u
+u = 0 .. 4pi
+v = 0.18 .. 2.95
+hue = u/(4pi)
+size = 0.03
+count = 8000</code></pre>
+              </details>
+              <p class="card-links">
+                <a
+                  class="button"
+                  href="https://ryanjosephkamp.github.io/splashery/#s=d.dVPbbtswDP2V4vQlwVRXzm2t3_YN29OGPigyk2hRLE2XXFr43wfKTlC0qGFAJs1D8pBHb1Deo0H0VsUdhQsEjhSicR2auYAOpBK1PxIazORs9VDLh1r-krIpbyWl_A2BSNSimS_qxaIWSO6C5g1707VosM7GJtNBwLRjpfRA_7JKXETAef6IjPCBInEpnWNyBwic0UBWq6V2cZKn0XST4xQCl9HNjnfu19E94fDj9Jt120lS3eT4OJtOp99kVc8yBDKH3VXV3cIb5ltQ9RN7ZtXzEgK7TGiQHycLbzhxQAMIbIdjPRzRvFKByjkEtMsdt_4kpeSfPpBivuh7Aevcngmuld5vg8tlMF5tCQJpRwfOo3JyEFBaU0k02mVeP7WyhKYWoLN3MQc2egHabEinYXZuT3zy4jbKRhKIKVC3TTs0sloJnNx6zVlktewFTmU7X8YvlwKtCaTLlhrZsxmjs8dPVUamAyb6IoWhRhuc_xC9drnTpYkFR2uVEoVr_EFtO97_l119FwiqNTkOCXqBdDLxI0Idhl3Iavme9VxAnU1Egwt6gWiN_sjFu2hGwgLxROQLcHlDnhnplek-dVnEUCoOd2k0tLOO1XNPq_l6RkUNN3xM6uAjmj8vvYBWBwqK3Rd1uo7Tm6RLqtmTQHDWls5aE5MqY-QRsFC8VeXOpRy6pArhFDJdFYIGnetoaJ4n3nFwuY_FL7CxalS3D-7vde04BeVZ_-RJsc7qkRE3jftNeSBu7ATu5XqxedZ4Kcu115lcV1ILtJSUsUWTvHI3VHqDsuZ4a_vg-BsxGWvxXlVcv0vBWRZ93_f_AQ"
+                  target="_blank"
+                  rel="noopener"
+                  >Run it</a
+                >
+                <a
+                  href="https://en.wikipedia.org/wiki/Dini%27s_surface"
+                  target="_blank"
+                  rel="noopener"
+                  >About the shape</a
+                >
+              </p>
+            </div>
+          </article>
+          <article class="card" id="g-shell-growth">
+            <img
+              src="../assets/gallery/shell-growth.webp"
+              alt="Shell growth, made of splats"
+              width="256"
+              height="256"
+            />
+            <div class="body">
+              <h5>Shell growth</h5>
+              <p>A logarithmic tube grows wider as it winds away from its narrow tip.</p>
+              <details class="fold program">
+                <summary>Show the program</summary>
+                <pre><code>x = exp(0.12u)(1+0.35cos(v))cos(u)
+y = exp(0.12u)(1+0.35cos(v))sin(u)
+z = exp(0.12u)(0.35sin(v))
+u = 0 .. 6pi
+v = 0 .. 2pi
+hue = u/(6pi)
+size = 0.025+0.008u
+count = 9000</code></pre>
+              </details>
+              <p class="card-links">
+                <a
+                  class="button"
+                  href="https://ryanjosephkamp.github.io/splashery/#s=d.fVPZbtswEPyVYPISI4xK-WrCt35D-9QiDzS1dljTIsvDRwL9e7GUHaQJUsMAtdLsMbPDF-gQoJCC0-mJ4gkCe4rJ-h5qJmAi6UzdtwyFqZwu71p518ofUqr6b6SUPyGQiDqo2bydz1uB7E9QL9javoPCqliXbQ8B25075Tv6U3TmJgI-8EPijBApEbcyJWW_g8ARCnQMN7Jpp2Vy097KZrYwPt3sJxM-ygQCp_-Aku1H0PO_IIbwt_2EPxYoyKumuVoGywpcwmkNnwpBoXy5WQbL6AgFCGzGYzUeyT4zSjZyurhlYe4LBIwvPRN6kFIyKETSrAKGQcB5v2XaK222m-hLlSvoDUEgP9GO6-mSPQS0MVQLneOq4nejHUG1gon5VCIHgwCt12TyqKjfEp-8zrV2iQRSjtRv8hOUbJYCB79acRXZLAaBQ93Zp_jFQqCzkUzdnZIDhyl5t__Q5cx0zEmhGmTs0UUf3qFXvvSmDjFntNE5U7zgd3rTsys-neqrQNSdLWksMAjkg03vM_Ru3IVsFm9ZzwT00SYonDAIJGfNey7BJ3smLJAORKEmLl4zj5wZtO0_TFlNUTuON-wcGO88u-ialrPVlKobXvNT1ruQoH49DgJG7yhqfn3Sh4ucwWZTS03vBaJ3rk7W2ZR1lZElYKMEp-tNzCX2WVfCORa6OAQKve9pHJ4V7xlcb2l9L7B2-uzyEP3vy9pxiDrwPaBAmn3Wnhnx0Lhe1x_EKzuBa7marx8MHuty3UWTy0pagY6ytq56klfux04v0M7uX8feeX5GytY5vHUV9-9z9I5NPwzDXw"
+                  target="_blank"
+                  rel="noopener"
+                  >Run it</a
+                >
+                <a href="https://en.wikipedia.org/wiki/Seashell" target="_blank" rel="noopener"
+                  >About the shape</a
+                >
+              </p>
+            </div>
+          </article>
+        </div>
+      </details>
+      <details class="fold gallery-group" id="gallery-curves-as-tubes-or-beads">
+        <summary>Curves as tubes or beads (10 programs)</summary>
+        <div class="gallery gallery-grid">
+          <article class="card" id="g-lissajous-knot">
+            <img
+              src="../assets/gallery/lissajous-knot.webp"
+              alt="Lissajous knot, made of splats"
+              width="256"
+              height="256"
+            />
+            <div class="body">
+              <h5>Lissajous knot</h5>
+              <p>Three harmonics trace a closed, crossing space curve with a fine bead tube.</p>
+              <details class="fold program">
+                <summary>Show the program</summary>
+                <pre><code>x = sin(3u+t)+0.16cos(7u)
+y = 0.12cos(2u)
+z = cos(4u+t)+0.16sin(7u)
+u = 0 .. 2pi
+v = 0 .. 1
+hue = u/(2pi)
+size = 0.045
+count = 3200</code></pre>
+              </details>
+              <p class="card-links">
+                <a
+                  class="button"
+                  href="https://ryanjosephkamp.github.io/splashery/#s=d.dVPLbtswEPyVYHJxEEal5Eda3voN7alFDjS1tlnTIstHHCfQvxdL2UaRIIIAitTO7s7O8A06BCik4HTaUTxB4Jlisn6AmguYSDpT_z1DoZPd6qGVD638KaWqbyOl_AWBRNRDzRftYtEKZH-CesPeDj0U1sW6bAcI2P5cKT_Q36IzFxHwgT8SI0KkRFzKlJT9AQIvjLDDbF7u8929bNqV8Wn2WO4gcIKCbNqOT7p68spQn2aLazRjp-jC0TdNc9MFyyQv2xYCu0JQKF9mXbAcG6EAge20rKcl2VeqFeViCQHjy8Ctzjsp-W-IpJkfxlHAeb9nQmtt9tvoSx1E0FuCQN7RgRPpkj0EtDFUE533dT4_jHYE1QrQS_CpRN6MArTZkMnTrPyeeGWhNtolEkg50rDNOyjZrASOfr3mLLJZjgLHqsan8culQG8jmaqKkiNvU_Lu-UOVM9MJk0KVfqrRRx_eRa99GUxtYsHRRudM8RJ_0NuB9f60q0eBqHtb0pRgFMhHm94j9GHSQjbL_1nPBfSLTVA4YRRIzpr3XIJP9kxYIB2JQgUur8gXRgZthw9dVjfUitPdOW-Md57tc0ur-bqj6oYrPmV9CAnq99MoYPSBoubjkz5exhlsNjVV91UgeudqZ71NWdcx8gjYKMHpesdyiUPWlXCOhS4OgcLgB5qa54kPHFzvXz0X2Dh9tneI_s9FdhyjDnwBKJBmn7VnRtw0bjf1gbiyE7iV68Xmm8FTFdddZnKRpBXoKWvrqidZcj9VeoN29vna9sHzN1K2zuF_V3H9IUfv2PTjOP4D"
+                  target="_blank"
+                  rel="noopener"
+                  >Run it</a
+                >
+                <a
+                  href="https://en.wikipedia.org/wiki/Lissajous_curve"
+                  target="_blank"
+                  rel="noopener"
+                  >About the shape</a
+                >
+              </p>
+            </div>
+          </article>
+          <article class="card" id="g-trefoil-tube">
+            <img
+              src="../assets/gallery/trefoil-tube.webp"
+              alt="Trefoil tube, made of splats"
+              width="256"
+              height="256"
+            />
+            <div class="body">
+              <h5>Trefoil tube</h5>
+              <p>A tube follows the classic three-crossing trefoil knot and rotates in place.</p>
+              <details class="fold program">
+                <summary>Show the program</summary>
+                <pre><code>x = (sin(u)+2sin(2u))cos(t)-sin(3u)sin(t)
+y = cos(u)-2cos(2u)
+z = -(sin(u)+2sin(2u))sin(t)-sin(3u)cos(t)
+u = 0 .. 2pi
+v = 0 .. 1
+hue = u/(2pi)
+size = 0.08
+count = 3000</code></pre>
+              </details>
+              <p class="card-links">
+                <a
+                  class="button"
+                  href="https://ryanjosephkamp.github.io/splashery/#s=d.dVPbbhoxEP2V6OQFVEPNAmnqt35D-9QqD8Y7gItZu74ESLT_Xo2XRVGirFaaHe-cuZw5foUOAQopOJ32FC8QeKaYrO-glgImks7U_shQaGTzMFvI2UL-klLVdy6l_A2BRNRCLVeL1WohkP0F6hUH27VQ2BTrsu0gYNtrpTyjf0VnLiLgA38kRoRIibiUKSn7IwTOUJgk203K9EvDtinTqfFpkqczdpdlyiZPIXBhoE-TMp01bJvCpy9QmH1IMYDGFENCCBQoyLv5_K4JlpkY3QUE9oWgUL5OmmA5NkIBArvBbAaT7AtHybl8hIDxpeNxllJK_hkiaeYAfS_gvD_w0BttDrvoSyUr6B1BIO_pyHl0yR4C2hiqia5-5fCn0Y6gFgJ0Dj6VyE4vQNstmTzw6Q_Elpe51S6RQMqRul3eQ8n5g8DJbzacRc7XvcCpbuzT-PVaoLWRTN2ckj27KXn3_KHKddIBk0KVx1CjjT68i9740pnaxIqjjc6Z4hh_1LuONfFpV98Eom5tSUOCXiCfbHqP0MdhF3K-fjv1UkCfbYLCBb1Acta8nyX4ZK8DC6QTUajA9Q15ZmTQtvvQZRVDrTjcr6tjvPOsnnt6WG4aqmq44VPWx5Cg_jz1AkYfKWo-vujTSGew2dRUzaNA9M7Vzlqbsq40MgUslOB0vYe5xC7rOnCOhUaFQKHzHQ3NM-MdB9c7Ws8Ftk5f1R2i_zuuHaeoA-ufAmnW2eI6ETeN-219IG7TCdzLzWr73eCpLteNnIwrWQi0lLV1VZO8cj9UeoV29vnW9tHzN1K2zuGtqrh-l6N3LPq-7_8D"
+                  target="_blank"
+                  rel="noopener"
+                  >Run it</a
+                >
+                <a href="https://en.wikipedia.org/wiki/Trefoil_knot" target="_blank" rel="noopener"
+                  >About the shape</a
+                >
+              </p>
+            </div>
+          </article>
+          <article class="card" id="g-cinquefoil">
+            <img
+              src="../assets/gallery/cinquefoil.webp"
+              alt="Cinquefoil knot, made of splats"
+              width="256"
+              height="256"
+            />
+            <div class="body">
+              <h5>Cinquefoil knot</h5>
+              <p>Five over-and-under crossings wind around a torus in this thicker knot.</p>
+              <details class="fold program">
+                <summary>Show the program</summary>
+                <pre><code>x = (2+0.35cos(5u))cos(2u+t)
+y = 0.35sin(5u)
+z = (2+0.35cos(5u))sin(2u+t)
+u = 0 .. 2pi
+v = 0 .. 1
+hue = u/(2pi)
+size = 0.055
+count = 3500</code></pre>
+              </details>
+              <p class="card-links">
+                <a
+                  class="button"
+                  href="https://ryanjosephkamp.github.io/splashery/#s=d.dVPbbtswDP2V4vSlRdVMduJu09u-YXva0AdFZhItiqXp0iQt_O8D5bgoWtQwIFHiIXnIoxfoEKCQgtNpR_EMgSeKyfoBailgIulM_Y8MhVa2D_eNvG_kLylV_RdSyt8QSEQ91HLVrFaNQPZnqBfs7dBDYV2sy3aAgO0vmfI9_Ss6cxIBH3iTGBEiJeJUpqTsDxA4QeGmvZOLZWd8uunK7S2vbbnLtxA4Q4Hvkh34DgLPHwF8OQMKA64Wi6s2WKY6mw0EdoWgUL7ctMGyb4QCBLbTsp6WZJ-pJpVdBwHjy8AFLzsp-TZE0swS4yjgvN8zrbU2-230pbYj6C1BIO_owIF0yR4C2hiqgS527dJPox1BNQJ0Cj6VyMYoQJsNmTx1zO-JVx7XRrtEAilHGrZ5ByUXDwJHv15zFLnoRoFjncmn_l0n0NtIps5GyZHNlLx7-pDlwnTCpFAFMOXoow_vvNe-DKYWsWJvo3OmOPsf9HbgqX9a1VeBqHtb0hRgFMhHm94j9GGahVx0b1kvBfTJJiicMQokZ817LsEneyEskI5EoQK7V-SJkUHb4UOVVQ014_SCLobxzrN8rulhuW6pquEVn7I-hAT153EUMPpAUfPxWR_ndgabTQ3VfhOI3rlaWW9T1rWN3AIWSnC6vrRc4pB1JZxjoVkhUBj8QFPx3PGBnesrrOcCG6cv8g7R_53HjmPUgR8ABdKss-bCiIvG9aZ-EK_sBK7lerX5bvBYh-vmnswjaQR6ytq6qkkeuZ8yvUA7-_Ra9sHzHilb5_BWVZx_yNE7Fv04jv8B"
+                  target="_blank"
+                  rel="noopener"
+                  >Run it</a
+                >
+                <a href="https://en.wikipedia.org/wiki/Torus_knot" target="_blank" rel="noopener"
+                  >About the shape</a
+                >
+              </p>
+            </div>
+          </article>
+          <article class="card" id="g-rose-curve">
+            <img
+              src="../assets/gallery/rose-curve.webp"
+              alt="Rose curve beads, made of splats"
+              width="256"
+              height="256"
+            />
+            <div class="body">
+              <h5>Rose curve beads</h5>
+              <p>A six-petal planar rose becomes a dotted three-dimensional curve.</p>
+              <details class="fold program">
+                <summary>Show the program</summary>
+                <pre><code>x = cos(6u)cos(u)
+y = 0.15sin(3u)
+z = cos(6u)sin(u)
+u = 0 .. 2pi
+v = 0 .. 1
+hue = u/(2pi)
+size = 0.04
+count = 3000</code></pre>
+              </details>
+              <p class="card-links">
+                <a
+                  class="button"
+                  href="https://ryanjosephkamp.github.io/splashery/#s=d.dVPLbtswEPyVYHJJgI1L-dWWt35De2qRAyWtbda0yPIR2wn078VSdlokiCCA2tW-Zmf4AhMCNFJwJu04nkF44pisH6AXhC6yydx_y9CYq_n6oVEPjfqhlK7vTCn1E4TE3EMvls1y2RCyP0O_YG-HHhptsS7bAQTbXzrlB_5TTJYmBB_kI0lGiJxYWnUlZX8A4SSGT3frci9HuQfhDA01a1bJDneL6nn-FyXO6isSdTOb3cyDFVBXswFhVxga5dPdPFiJjdAAYTsd7XQk-8y1k1qC0PkyyGQLpZT8DJGNwME4Epz3e5m_Nd1-G32puIPZMgh5xwepY0r2IJiu41roYtd1fO-MY-iGwKfgU4lijATebLjL02r8nuUUXjbGJSakHHnY5h20mq0JR9-2UkXNViPhWJf_YfxqReht5K6SoNUoZkrePb3rckE65aRQmZ569NGHN9GtL0NXh1hKdGdy5niNP5jtIPR-ONVnQjS9LWkqMBLy0aa3GeYwcaFmq_9RLwjmZBM0zhgJydnuLZbgk70AJqQjc6iJq9fMk2QGY4d3U1Yx1I7TVbkYnXde1HPL60U756qG1_yUzSEk6F-PI6EzB45G3GdzvK4z2NzVUvMvhOidq5P1NmVT1ygrEKEEZ-qVyiUO2VTAORa-KgQagx94Gl42PkhwvW7VT9g4c1F3iP73lXYcowmifw5sRGfNBZEMjdtNfUCv6Ai3ql1uvnZ4rOS6606ulDSEnrOxrmpSKPdTpxcYZ59exz54-UbK1jn8ryrpP-TonYh-HMe_"
+                  target="_blank"
+                  rel="noopener"
+                  >Run it</a
+                >
+                <a
+                  href="https://en.wikipedia.org/wiki/Rose_(mathematics)"
+                  target="_blank"
+                  rel="noopener"
+                  >About the shape</a
+                >
+              </p>
+            </div>
+          </article>
+          <article class="card" id="g-figure-eight-knot">
+            <img
+              src="../assets/gallery/figure-eight-knot.webp"
+              alt="Figure-eight knot, made of splats"
+              width="256"
+              height="256"
+            />
+            <div class="body">
+              <h5>Figure-eight knot</h5>
+              <p>This closed bead tube traces the simplest knot that is not a torus knot.</p>
+              <details class="fold program">
+                <summary>Show the program</summary>
+                <pre><code>x = (2+cos(2u))cos(3u+t)
+y = sin(2u)
+z = (2+cos(2u))sin(3u+t)
+u = 0 .. 2pi
+v = 0 .. 1
+hue = u/(2pi)
+size = 0.05
+count = 3500</code></pre>
+              </details>
+              <p class="card-links">
+                <a
+                  class="button"
+                  href="https://ryanjosephkamp.github.io/splashery/#s=d.dVPLbtswEPyVYHJJEMalZDttees3tKcWOVDU2mZNiywfsZ1A_14sZQVtgggCyCX3NTvDF-gQoJCC02lH8QyBJ4rJ-gFqKWAi6Uz9twyFVrYP9428b-QPKVX9F1LKnxBIRD3UctWsVo1A9meoF-zt0EOhK9ZlO0DA9pdK-Z7-FJ25iIAPvEkcESIl4lKmpOwPEDhB4aa9Mz7dtOX2ltdlucu3EDhzMjvwOQSe_3fki9mxQEFeLRZXbbAMbzYbCOwKQaF8ummDZd8IBQhsp6WblmSf2Usu5BoCxpeBe1yupeTLEEkzMIyjgPN-z0g6bfbb6EudQNBbgkDe0YHz6JI9BLQxVBNd7DqY70Y7gmoE6BR8KpGNUYA2GzJ5GpLfE6_M0Ea7RAIpRxq2eQclFw8CR991nEUu1qPAsdLwof96LdDbSKbSoeTIZkrePb2rckE6xaRQOZ9q9NGHN96dL4OpTazY2-icKc7-B70dmOgPu_osEHVvS5oSjAL5aNPbCH2YuJCL9b-olwL6ZBMUzhgFkrPmLZbgk70AFkhHolAD16-RJ44M2g7vuqxiqBWnR3MxjHee1XNND8uupaqG1_iU9SEkqF-Po4DRB4qaj8_6OI8z2GxqqvaLQPTO1c56m7KuY-QRsFCC0_Vx5RKHrCvgHAvNCoHC4AeamueJD-xcH149F9g4fVF3iP73TDuOUQfWPwXSrLPmgoibxvWmfhCv6ASuZbfafDV4rOS6eSYzJY1AT1lbVzXJlPup0gu0s0-vbR8875GydQ7_qorrDzl6x6Ifx_Ev"
+                  target="_blank"
+                  rel="noopener"
+                  >Run it</a
+                >
+                <a
+                  href="https://en.wikipedia.org/wiki/Figure-eight_knot"
+                  target="_blank"
+                  rel="noopener"
+                  >About the shape</a
+                >
+              </p>
+            </div>
+          </article>
+          <article class="card" id="g-double-helix">
+            <img
+              src="../assets/gallery/double-helix.webp"
+              alt="Double helix, made of splats"
+              width="256"
+              height="256"
+            />
+            <div class="body">
+              <h5>Double helix</h5>
+              <p>Two spiral strands wind together around a long axis.</p>
+              <details class="fold program">
+                <summary>Show the program</summary>
+                <pre><code>x = cos(u+pi floor(2v))
+y = 3v-1.5
+z = sin(u+pi floor(2v))
+u = 0 .. 2pi
+v = 0 .. 1
+hue = v
+size = 0.055
+count = 5000</code></pre>
+              </details>
+              <p class="card-links">
+                <a
+                  class="button"
+                  href="https://ryanjosephkamp.github.io/splashery/#s=d.dVPLbtswEPyVYHJJ0LVA-ZG2vPUb2lOLHChpbbOmRZak_Eigfy-Wso0iaQwD1Eq7Ozs7w1eYEKCRgjNpy_EMwoFjsr6HXhDayCZz9y1DY67mT7NazWr1Qyld_pVS6icIibmDXizr5bImZH-GfsXO9h00msG6bHsQbHdByjP-M5gsIAQf5CFJRYicWKDaIWW_B-EkgU8Pw6dg79bO-_gwPzw-gnCGxuIwq6sVCC_S2Pb_SRugoe6q6m4erHC7hjUI24GhcQAhQgOEzXQ005Hsi3xXlVoJRuuHXmZbKaXka4hshBDGkeC83wmDxrS7TfRDYR7MhkHIW95LIzNkD4JpWy6NLnFZyPfWOIauCXwKPg1RgpHA6zW3eVqO37GcoszauMSElCP3m7yFVtUT4eibRrqoajUSjmX9H-avVoTORm6LDFqNEqbk3eEdyoXpVJNC0XrC6KIPb7IbP_RtGWIp2a3JmeM1f282vQj84VSfCdF0dkhTg5GQjza9rTD7SQtVrf5lvSCYk03QOGMkJGfbt1yCT_ZCmJCOzKEUrm6VJ6kMxvbvpixuKIjTZbkErXde7HPPT4tmzsUNt_qUzT4k6F_PI6E1e45GXp_N8brOYHNbWs2_EKJ3rkzW2ZRNWaOsQIwSnCmXKg-xz6YQznHgq0Og0fuep-Fl470klwtX3hPWzlzsHaL_fZUdx2iCXAAObMRn9YWRDI37dfmBbuwI96pZrr-2eC7iuutOrpLUhI6zsa54UiT3E9IrjLOH29h7L89I2TqHf10l-H2O3onpx3H8Cw"
+                  target="_blank"
+                  rel="noopener"
+                  >Run it</a
+                >
+                <a href="https://en.wikipedia.org/wiki/DNA" target="_blank" rel="noopener"
+                  >About the shape</a
+                >
+              </p>
+            </div>
+          </article>
+          <article class="card" id="g-slinky">
+            <img
+              src="../assets/gallery/slinky.webp"
+              alt="Slinky coil, made of splats"
+              width="256"
+              height="256"
+            />
+            <div class="body">
+              <h5>Slinky coil</h5>
+              <p>A spring winds upward in eight turns with a narrow tube around its wire.</p>
+              <details class="fold program">
+                <summary>Show the program</summary>
+                <pre><code>x = (1+0.08v)cos(u)
+y = 0.1u+0.08vcos(u/8)
+z = (1+0.08v)sin(u)
+u = 0 .. 16pi
+v = -1 .. 1
+hue = u/(16pi)
+size = 0.035
+count = 5000</code></pre>
+              </details>
+              <p class="card-links">
+                <a
+                  class="button"
+                  href="https://ryanjosephkamp.github.io/splashery/#s=d.dVPJbtswEP2V4uWSoLRCeWvKW7-hPbXIgabGNmtaZLl4SaB_L4ayjSBBBAEkh7O9eY-v0CFAIQWn05biGQIHisn6HmomYCLpTN2PDIWpnC4nrZy08peUqv6NlPI3BBJRBzWbt_N5K5D9GeoVO9t3UFgV67LtIWC7S6U8oX9FZy4i4ANvEkeESIm4lCkp-z0ETlC4b7_KRj4dHoxP9-UBAmcoyKYto72aH5_44uWte7L96F7Y_UvTfGmXwTJAKEzaaoDAthAUyuM937J7hAIENuOyGpdkX6hWlbMFBIwvPTe6kFLybYikGR2GQcB5v2M4K212m-hLHUPQG4JA3tKeE-mSPQS0MVQTXc51Oj-NdgTVCtAp-FQiHwYBWq_J5HFSfke8Mk1r7RIJpByp3-QtlGyWAke_WnEW2SwGgWPl4lP_xUKgs5FM5UTJgY8peXf4UOWCdIxJoRI_1uiiD--8V770pjYxZ2-jc6Z49d_rTc9sf9rVN4GoO1vSmGAQyEeb3kfo_ciFbBZvUc8E9MkmKJwxCCRnzXsswSd7ASyQjkShBi5ukSeODNr2H7qsaqgVx5dzORjvPMvnjpaz1ZSqGm7xKet9SFB_ngcBo_cUNZvP-ngdZ7DZ1FTTJ4HonauddTZlXcfII2ChBKfrC8sl9llXwDkWuioECr3vaWyeJ96zc3191S6wdvoi7xD93yvtOEYd-AFQIM06ay-IuGncresHcUMncCdX8_V3g-dKrrvO5EpJK9BR1tZVTTLlfqz0Cu3s4db23vMeKVvn8FZVXL_P0TsW_TAM_wE"
+                  target="_blank"
+                  rel="noopener"
+                  >Run it</a
+                >
+                <a href="https://en.wikipedia.org/wiki/Helix" target="_blank" rel="noopener"
+                  >About the shape</a
+                >
+              </p>
+            </div>
+          </article>
+          <article class="card" id="g-lorenz-lookalike">
+            <img
+              src="../assets/gallery/lorenz-lookalike.webp"
+              alt="Lorenz-like look-alike, made of splats"
+              width="256"
+              height="256"
+            />
+            <div class="body">
+              <h5>Lorenz-like look-alike</h5>
+              <p>This butterfly loop is a Lorenz-like look-alike, not a Lorenz-system solution.</p>
+              <details class="fold program">
+                <summary>Show the program</summary>
+                <pre><code>x = sin(3u)+0.3sin(9u)
+y = cos(2u)
+z = sin(4u)
+u = 0 .. 2pi
+v = 0 .. 1
+hue = u/(2pi)
+size = 0.05
+count = 3000</code></pre>
+              </details>
+              <p class="card-links">
+                <a
+                  class="button"
+                  href="https://ryanjosephkamp.github.io/splashery/#s=d.dVPLbtswEPyVYHJJUEal_Egb3voN7alFDhS1tlnTIstHbCfQvxdLyUGQIIIAcqVZ7s7s8AU6BCik4HTaUTxD4Ilisn6AWgqYSDpT_yNDYSEX93etvGvlLylVfRsp5W8IJKIearlqV6tWIPsz1Av2duih0BXrsh0gYPu5Ur6jf0VnLiLgA28SZ4RIibiUKSn7AwROnGGHm2W5_SKbJW8fyi0Ezozy6WZRo-cZtqpRgYK8apqrRbDM5xK2ENgVgkL5erMIlrERChDYTks3Lck-M0o2cg0B48vATS2llPwzRNLMBOMo4Lzfc-udNvtt9KVSDnpLEMg7OvA5umQPAW0M1YPmuCrx02hHUK0AnYJPJXIwCtBmQyZPqvg98coj2WiXSCDlSMM276Bkcy9w9F3Hp8hmPQocq-6f4tdrgd5GMlV_JUcOU_Lu6UOVmemUk0Id8lSjjz68Q3e-DKY2sWK00TlTvOAPejvwZD_t6ptA1L0taTpgFMhHm95n6MM0C9ms37JeCuiTTVA4YxRIzpr3XIJPdiYskI5EoSauXzNPnBm0HT50Wc1QK063ZA6Md57dc033y25B1Q2v-SnrQ0hQfx5HAaMPFDV_PuvjRc5gs6lHLb4LRO9c7ay3KesqI0vARglO19uUSxyyroRzLHRxCBQGP9DUPCs-MLjetPpdYOP07O4Q_d_L2HGMOrD_KZBmn7UzI24a15v6QLyyE7iW3WrzYPBYh-sumlxG0gr0lLV11ZM8cj9VeoF29um17YPnPVK2zuGtq7j-kKN3bPpxHP8D"
+                  target="_blank"
+                  rel="noopener"
+                  >Run it</a
+                >
+              </p>
+            </div>
+          </article>
+          <article class="card" id="g-rossler-lookalike">
+            <img
+              src="../assets/gallery/rossler-lookalike.webp"
+              alt="Rössler-like look-alike, made of splats"
+              width="256"
+              height="256"
+            />
+            <div class="body">
+              <h5>Rössler-like look-alike</h5>
+              <p>
+                A looping spiral suggests a Rössler attractor but is only a parametric look-alike.
+              </p>
+              <details class="fold program">
+                <summary>Show the program</summary>
+                <pre><code>x = cos(u)+0.35cos(7u)
+y = sin(u)+0.35sin(7u)
+z = 0.45sin(3u)
+u = 0 .. 2pi
+v = 0 .. 1
+hue = u/(2pi)
+size = 0.045
+count = 3000</code></pre>
+              </details>
+              <p class="card-links">
+                <a
+                  class="button"
+                  href="https://ryanjosephkamp.github.io/splashery/#s=d.dVPLbtswEPyVYHJJUEal_Eha3voN7alFDhS1tlnTIstHbCfQvxdLWUGQIIIAcsl9zc7wBToEKKTgdNpRPEPgiWKyfoBaCphIOlP_I0NhIRf3d628a-UvKVX9Gynlbwgkoh5quWpXq1Yg-zPUC_Z26KHQFeuyHSBg-0ulfEf_is5cRMAH3iSOCJEScSlTUvYHCJzY8Omm3H6RzXLN24dyC4Ezp7LDfMHb6eIZCrJZ1ZNlPSl8ctU0V4tgGd5sthDYFYJC-XqzCJZ9IxQgsJ2WblqSfaaaVa7WEDC-DNzkUkrJtyGSZmQYRwHn_Z6hdNrst9GXOoKgtwSBvKMDJ9IlewhoY6gmuth1Mj-NdgTVCtAp-FQiG6MAbTZk8jQlvydemaKNdokEUo40bPMOSjb3AkffdZxFNutR4Fh5-NR_vRbobSRT-VByZDMl754-VLkgnWJSqKRPNfrowzvvzpfB1CZW7G10zhRn_4PeDsz0p109CETd25KmBKNAPtr0PkIfJi5ks36LeimgTzZB4YxRIDlr3mMJPtkLYIF0JAo1cP0aeeLIoO3wocuqhlpxejUXw3jnWT7XdL_sFlTV8Bqfsj6EBPXncRQw-kBR8_FZH-dxBptNTbX4JhC9c7Wz3qas6xh5BCyU4HR9XbnEIesKOMdCs0KgMPiBpuZ54gM715dXzwU2Tl_kHaL_O9OOY9SBHwAF0qyz9oKIm8b1pn4Qr-gErmW32nw3eKzkunkmMyWtQE9ZW1c1yZT7qdILtLNPr20fPO-RsnUOb1XF9YccvWPRj-P4Hw"
+                  target="_blank"
+                  rel="noopener"
+                  >Run it</a
+                >
+              </p>
+            </div>
+          </article>
+          <article class="card" id="g-five-petal-flower">
+            <img
+              src="../assets/gallery/five-petal-flower.webp"
+              alt="Five-petal flower, made of splats"
+              width="256"
+              height="256"
+            />
+            <div class="body">
+              <h5>Five-petal flower</h5>
+              <p>Five broad petals rise from a shallow cup around a small center.</p>
+              <details class="fold program">
+                <summary>Show the program</summary>
+                <pre><code>x = v(0.55+0.45cos(5u))cos(u)
+y = 0.5v^2+0.1cos(5u)
+z = v(0.55+0.45cos(5u))sin(u)
+u = 0 .. 2pi
+v = 0 .. 1
+hue = 0.9-0.12v
+size = 0.035
+count = 6000</code></pre>
+              </details>
+              <p class="card-links">
+                <a
+                  class="button"
+                  href="https://ryanjosephkamp.github.io/splashery/#s=d.dVNdb9swDPwrxfWlRVlDTuJs9dt-w_a0oQMUmUm0KpYmyflo4f8-UE6Kol2DADJtHsnjnV6gQ0CLFJxOW44nEPYck_U92jnBRNaZu28ZLWZqtryv1X2tfijVln-llPoJQmLu0M4X9WJRE7I_oX3Bk-07tFgN1mXbg2C7c6d8z38HnaUJwQd5SIIIkRNLKzOk7HcgHNFif6OqprlT1aIxPt00w-2tnMMtCCe0UFWz_z27U1V9_gzC8_9xyfYTbhDcVVVdzYIVypewBmE7cKn6cK-qerYHIaIFCJvpWE1Hss9Tnpo3IBg_9DL6UiklX0NkLXwxjgTn_ZMQXGnztIl-KIsJesMg5C3vpJAesgdBG8Ol0Dku-_putGO0NYGPwachSjASeL1mk6fd-SeWU4Rba5eYkHLkfpO3aFW1JBz8aiVVVNWMhENR59P8piF0NrIpKrVqlDAl7_YfupyZTpgUihWmHl304V32yg-9KUMsJNvonDle8nd604v-n071hRB1Z4c0FRgJ-WDTe4TeTVqoqnnLek7QR5vQ4oSRkJw177kEn-yZMCEdmEMBNq_IoyCDtv2HKYsbSsfpLp0D450X-1zzcr6acXHDKz5lvQsJ7a_HkWD0jqOW1yd9uKwz2GxKqdlXQvTOlck6m7Iua5QViFGC0-XO5SH2WRfCOQ58cQha9L7naXjZeC_J5T6W94S102d7h-j_XGTHIeogF4ADa_FZfWYkQ-N6XX6gV3aEa7VarB8MHou47rKTiyQ1oeOsrSueFMn91OkF2tn969g7L89I2TqHt66S_n2O3onpx3H8Bw"
+                  target="_blank"
+                  rel="noopener"
+                  >Run it</a
+                >
+                <a href="https://en.wikipedia.org/wiki/Flower" target="_blank" rel="noopener"
+                  >About the shape</a
+                >
+              </p>
+            </div>
+          </article>
+        </div>
+      </details>
+      <details class="fold gallery-group" id="gallery-nature-like-shapes">
+        <summary>Nature-like shapes (10 programs)</summary>
+        <div class="gallery gallery-grid">
+          <article class="card" id="g-sunflower-head">
+            <img
+              src="../assets/gallery/sunflower-head.webp"
+              alt="Sunflower seed spiral, made of splats"
+              width="256"
+              height="256"
+            />
+            <div class="body">
+              <h5>Sunflower seed spiral</h5>
+              <p>Seeds follow the Fibonacci angle and spread outward across a flat disk.</p>
+              <details class="fold program">
+                <summary>Show the program</summary>
+                <pre><code>x = sqrt(u)cos(2pi v+2.4u)
+y = 0.06sin(2pi v+2.4u)
+z = sqrt(u)sin(2pi v+2.4u)
+u = 0.002 .. 1
+v = 0 .. 1
+hue = 0.12+0.06u
+size = 0.025
+count = 8000
+spread = random</code></pre>
+              </details>
+              <p class="card-links">
+                <a
+                  class="button"
+                  href="https://ryanjosephkamp.github.io/splashery/#s=d.dVPbbtswDP2V4vSlRVVDdi7r_LZv2J429EGRmUSLbKm65NLC_z5QTroiRQ0DEiUekoc8eoPyHi2itypuKZwgsKcQjRvQzgR0IJWo-5HQopHN8rGWj7X8JWVb_kpK-RsCkahDO5vX83ktkNwJ7Rt2ZujQYpWNTWaAgOnOmdIjvWSVOImA87yJjPCBInEqnWNyPQSOjHgJ6S7faxfvGm9u9g9NNc_3EDihhazkMprh6ub1P-zzZZ5gsrmpqpuaCfPBxdhmKvd188CxMwQCWkBgMy2raYnmdXKUzQIC2uWBK3-SUvKtD6SYblBD53qMo4B1bscsV0rvNsHl0h2vNgSBtKWew6mcHASU1lTCne3StJ9aWUJbC9DRu5gDG6MArdek09RAtyNeeXprZSMJxBRo2KQtWlktBQ5uteIoslqMAocyoi_9FwuBzgTSZVStHNmM0dn9pyxnvhMm-qKHKUcXnL_yXrk86FLEnL21SonCxb9Xm4FF8GVV3wSC6kyOU4BRIB1MvEaofpqIrBYfWc8E1NFEtDhhFIjW6Gsu3kVzJiwQD0S-ABfvyCMjvTLDpyqLJkrG6UGdDe2sYxHd0nK2aqio4R0fk-p9RPvneRTQqqeg-PikDpd2epN0CdU8CQRnbamsMzGp0kZuAQvFW1UeXsphSKoQTiHTRSFoMbiBpuK54wM7l0dZzgXWVp1F7oP7exk7DkF5fgbkSbHO6jMjLhq36_JBvLMTuJWr-fq7xnMZrr305DKSWqCjpIwtmuSRuynTG5Q1-_eye8d7xGSsxUdVcf4hBWdZ9OM4_gM"
+                  target="_blank"
+                  rel="noopener"
+                  >Run it</a
+                >
+                <a href="https://en.wikipedia.org/wiki/Phyllotaxis" target="_blank" rel="noopener"
+                  >About the shape</a
+                >
+              </p>
+            </div>
+          </article>
+          <article class="card" id="g-nautilus">
+            <img
+              src="../assets/gallery/nautilus.webp"
+              alt="Nautilus coil, made of splats"
+              width="256"
+              height="256"
+            />
+            <div class="body">
+              <h5>Nautilus coil</h5>
+              <p>A widening spiral tube evokes a nautilus shell with a visible open center.</p>
+              <details class="fold program">
+                <summary>Show the program</summary>
+                <pre><code>x = exp(0.13u)(1+0.3cos(v))cos(u)
+y = 0.3exp(0.13u)sin(v)
+z = exp(0.13u)(1+0.3cos(v))sin(u)
+u = 0 .. 5pi
+v = 0 .. 2pi
+hue = 0.04+0.12u/(5pi)
+size = 0.022+0.006u
+count = 9000</code></pre>
+              </details>
+              <p class="card-links">
+                <a
+                  class="button"
+                  href="https://ryanjosephkamp.github.io/splashery/#s=d.dVPLbtswEPyVYHKxEUal_GqjW7-hPbXIgabWNmtaZPnwI4H-vVhKdoMEMQRQK-_s7swOX6G8R4PorYo7ChcIHClE4zo0cwEdSCVqvyc0mMnZ6rGWj7X8KWVTnkpK-QsCkahFM1_Ui0UtkNwFzSv2pmvRYJ2NTaaDgGnHTumR_maVuImA8_wSGeEDReJWOsfkDhA4owGd_URW9TxPJ_WDrObaxclxOuUjTyFwQQNZzf-nRdNNjvzPy-dozinozOi7qrpbesPkr-GshLtMpbpcPMiqnuUvk6U3DAtoAIHtcKyHI5qXMX02e2BxVhkC2uWOST1JKTnJB1KsBPpewDq3Z-prpffb4HKRzKstQSDt6MD1VE4OAkprKoXGuCj5QytLaGrBRF3MgYNegDYb0mlQ1e2JT17pRtlIAjEF6rZph0ZWK4GTW6-5iqyWvcCp7O3T_OVSoDWBdNlfI3sOY3T2-KHLyHTARF9MMvRog_Pvstcud7oMseBsrVKicM0_qG3Hzvh0qq8CQbUmx6FAL5BOJr5HqMOwC1kt37KeC6iziWhwQS8QrdHvuXgXzUhYIJ6IfAEub8gzI70y3YcpiylKx-GWjYF21rGL7mk1X8-ouOGGj0kdfETz-7kX0OpAQfHnizpd5fQm6VJq9k0gOGvLZK2JSRUZWQI2ireq3MaUQ5dUIZxCpqtD0KBzHQ3Ds-IdJ5ebWr4LbKwaXe6D-3NdO05Beb4H5Emxz-qREQ-N-035QdzYCdzL9WLzpPFclmuvmlxXUgu0lJSxxZO8cjd0eoWy5ngb--D4HTEZa_HWVdy_S8FZNn3f9_8A"
+                  target="_blank"
+                  rel="noopener"
+                  >Run it</a
+                >
+                <a href="https://en.wikipedia.org/wiki/Nautilus" target="_blank" rel="noopener"
+                  >About the shape</a
+                >
+              </p>
+            </div>
+          </article>
+          <article class="card" id="g-jellyfish-bell">
+            <img
+              src="../assets/gallery/jellyfish-bell.webp"
+              alt="Jellyfish bell, made of splats"
+              width="256"
+              height="256"
+            />
+            <div class="body">
+              <h5>Jellyfish bell</h5>
+              <p>A dome-like bell pulses as its rim widens and narrows once each cycle.</p>
+              <details class="fold program">
+                <summary>Show the program</summary>
+                <pre><code>x = (0.7+0.1sin(t))sin(v)cos(u)
+y = (0.7+0.1sin(t))cos(v)-0.2
+z = (0.7+0.1sin(t))sin(v)sin(u)
+u = 0 .. 2pi
+v = 0 .. pi/2
+hue = 0.52+0.08cos(v)
+size = 0.035
+count = 6500</code></pre>
+              </details>
+              <p class="card-links">
+                <a
+                  class="button"
+                  href="https://ryanjosephkamp.github.io/splashery/#s=d.dVPLbtswEPyVYHKJEVqlbMtJees3tKcWOdDU2mZNiyxJ-ZFA_14sZRtBggiCqCX3NbPDN-gQoJCC02lL8QyBA8VkfQc1FzCRdKb2R4bCTM6W01pOa_lLSlXeSkr5GwKJqIWaL-rFohbI_gz1hp3tWiiseuuy7SBg20ulPKV_vc5cRMAH_kkcESIl4lKmT9nvIXCCwoOsnh5lVSfbPeTJhJfDxPj00E8gcP7swWeHyVRWMwi8fpWBvyVDDwV5V1V3s2AZ_tUM9hsn2PbEO1Uze5SVfB6TQyBCAQKbcVmNS7Kvo7ecNxAwvu8Yz7KRkk9DJM0kYBgEnPc7Rr3SZreJvi9sBb0hCOQt7TmR7rOHgDaGSqKLXUj8abQjqFqATsGnPrIxCNB6TSaPhPod8crTXGuXSCDlSN0mb6FktRQ4-tWKs8iqGQSOZWRf-jeNQGsjmTI6JQc2U_Lu8KnKBekYk0LRx1ijjT588F75vjOliQV7G50zxav_Xm86FsWXXT0JRN3aPo0JBoF8tOljhN6Ps5BV8x71XECfbILCGYNActZ8xBJ8shfAAulIFEpgc4s8cWTQtvvUZVFDqThesIthvPMsn3tazlczKmq4xaes9yFB_XkZBIzeU9S8fdbHK53BZlNSzZ4FoneudNbalHWhkSlgoQSny0XMfeyyLoBz7OmqECh0vqOxeWa8Y-dyScu-wNrpi7xD9H-vY8cx6sAXgAJp1ll9QcRN435dHogbOoF7uVqsvxu8lOG6KyfXkdQCLWVtXdEkj9yPld6gnT3c2t57_kfK1jm8VxXX73L0jkU_DMN_"
+                  target="_blank"
+                  rel="noopener"
+                  >Run it</a
+                >
+                <a href="https://en.wikipedia.org/wiki/Jellyfish" target="_blank" rel="noopener"
+                  >About the shape</a
+                >
+              </p>
+            </div>
+          </article>
+          <article class="card" id="g-coral-fan">
+            <img
+              src="../assets/gallery/coral-fan.webp"
+              alt="Coral fan, made of splats"
+              width="256"
+              height="256"
+            />
+            <div class="body">
+              <h5>Coral fan</h5>
+              <p>Branching sine ribs spread across a fan-shaped sheet.</p>
+              <details class="fold program">
+                <summary>Show the program</summary>
+                <pre><code>x = vcos(u)
+y = 0.16sin(9u+2v)
+z = vsin(u)
+u = -1.3 .. 1.3
+v = 0 .. 1.8
+hue = 0.03+0.08sin(9u+2v)
+size = 0.025
+count = 7000</code></pre>
+              </details>
+              <p class="card-links">
+                <a
+                  class="button"
+                  href="https://ryanjosephkamp.github.io/splashery/#s=d.dVPLbtswEPyVYHJJEVqg_ErCW7-hPbXIgaLWNmtaZEnKjwT692IpOUgTRBBALbWv2Zl9hQ4BCik4nXYULxA4UkzWd1ALARNJZ2q_ZyjM5Xw9q-Wslj-lVOWtpJS_IJCIWqjFsl4ua4HsL1Cv2NuuhULTW5dtBwHbTpXyjP72OnMRAR_4I3FEiJSIS5k-ZX-AwBkKR-PTXf8NAhcoyKpeJ9vdPfX38yNfvrAL3xSXHgqzulrcVNVNXS0YDgeN5iMEdj2VLHJxLyv5-F-qCAUIbMejGY9kX6aI-QoCxvcdt_ggpeS_IZJmXBgGAef9noE02uy30fdlAEFvCQJ5RwdOpPvsIaCNoZJosstcfhjtCKoWoHPwqY9sDAK02ZDJ44z8nvhkgjbaJRJIOVK3zTsoWa0FTr5pOIusVoPAqbDwpf9qJdDaSKawoeTAZkreHT9VmZCOMSkUyscabfThg3fj-86UJpbsbXTOFK_-B73tmOcvu3oQiLq1fRoTDAL5ZNPHCH0YuZDV6j3qhYA-2wSFCwaB5Kz5iCX4ZCfAAulEFErg6i3yzJFB2-5Tl0UNpeK4M5NhvPMsn1taL5o5FTW8xaesDyFB_X4eBIw-UNR8fdGn6ziDzaakmj8KRO9c6ay1KesyRh4BCyU4XXYr97HLugDOsaerQqDQ-Y7G5nniHTuXvSv3AhunJ3mH6P9caccp6sALQIE066yeEHHTuN2UB-INncCtbJabJ4PnQq67zuRKSS3QUtbWFU0y5X6s9Art7PGt7YPnb6RsncN7VXH9LkfvWPTDMPwD"
+                  target="_blank"
+                  rel="noopener"
+                  >Run it</a
+                >
+                <a href="https://en.wikipedia.org/wiki/Coral" target="_blank" rel="noopener"
+                  >About the shape</a
+                >
+              </p>
+            </div>
+          </article>
+          <article class="card" id="g-pinecone-scales">
+            <img
+              src="../assets/gallery/pinecone-scales.webp"
+              alt="Pinecone spiral, made of splats"
+              width="256"
+              height="256"
+            />
+            <div class="body">
+              <h5>Pinecone spiral</h5>
+              <p>Scales follow a Fibonacci angle and taper toward the top of the cone.</p>
+              <details class="fold program">
+                <summary>Show the program</summary>
+                <pre><code>x = (0.9-0.65v)cos(2pi u+2.4v)
+y = 1.8v
+z = (0.9-0.65v)sin(2pi u+2.4v)
+u = 0 .. 1
+v = 0 .. 1
+hue = 0.08+0.05v
+size = 0.035
+count = 7000
+spread = random</code></pre>
+              </details>
+              <p class="card-links">
+                <a
+                  class="button"
+                  href="https://ryanjosephkamp.github.io/splashery/#s=d.dVPLbtswEPyVYHJJUFqg_ErCW7-hPbXIgabWNmtKZEnKjwT692Ip20gdRBBArrSv2Zl9hw4BCik4nbYUTxDYU0zWd1AzARNJZ2q-ZyhM5XQ5qeWklj-lVOWtpJS_IJCIGqjZvJ7Pa4HsT1Dv2NmugcKqty7bDgK2OVfKE_rb68xFBHzgS-KIECkRlzJ9yr6FwBEKD7J6mchqudg_Gp8epsHe9d-m1Xz_CIETFOrqeQ-Bt_99k-1ufHsoyLuquqsZ5Udj2xOblXz-Jiu54GwRChDYjMdqPJJ9OzvOFhAwvu-43ScpJf8NkTRjjLprfIthEHDe7xjaSpvdJvq-jCToDUEgb6nldLrPHgLaGCrpznaZ1A-jHUHVAnQMPvWRjUGA1msyeZya3xGfTNlau0QCKUfqNnkLJaulwMGvVpxFVotB4FB4-dJ_sRBobCRT-FFyYDMl7_afqpzxjjEpFBGMNZrow433yvedKU3M2dvonCle_Fu96Zj5L7t6Eoi6sX0aEwwC-WDTbYRuR0ZktfiIeiagjzZB4YRBIDlrbrEEn-wZsEA6EIUSuLhGHjkyaNt96rJoolQct-hsGO88i-ielrPVlIoarvEp6zYkqN-vg4DRLUXNn0_6cBlnsNmUVNNngeidK501NmVdxsgjYKEEp8u25T52WRfAOfZ0UQgUOt_R2DxPvGPnsonlu8Da6bPIQ_R_LrTjEHXgNaBAmnVWnxFx07hflwfiik7gXq7m6xeD10Kuu8zkQkkt0FDW1hVNMuV-rPQO7ez-2nbr-Y6UrXP4qCqu3-XoHYt-GIZ_"
+                  target="_blank"
+                  rel="noopener"
+                  >Run it</a
+                >
+                <a href="https://en.wikipedia.org/wiki/Phyllotaxis" target="_blank" rel="noopener"
+                  >About the shape</a
+                >
+              </p>
+            </div>
+          </article>
+          <article class="card" id="g-sea-anemone">
+            <img
+              src="../assets/gallery/sea-anemone.webp"
+              alt="Sea anemone, made of splats"
+              width="256"
+              height="256"
+            />
+            <div class="body">
+              <h5>Sea anemone</h5>
+              <p>Curled arms rise from a low base like a ring of waving tentacles.</p>
+              <details class="fold program">
+                <summary>Show the program</summary>
+                <pre><code>x = (0.25+0.55v)cos(u+0.3sin(3u))
+y = v(1+0.18sin(5u))
+z = (0.25+0.55v)sin(u+0.3sin(3u))
+u = 0 .. 2pi
+v = 0 .. 1
+hue = 0.82+0.08sin(5u)
+size = 0.03
+count = 6000</code></pre>
+              </details>
+              <p class="card-links">
+                <a
+                  class="button"
+                  href="https://ryanjosephkamp.github.io/splashery/#s=d.dVPbbtswDP2V4vQlRVRDTuKs09u-YXva0AdFZhItiqVJci4t_O8D5SQoUtQwIFHiIXnIo3foEKCQgtNpS_EMgQPFZH0HNRcwkXSm9keGwkzOls-1fK7lLylV-Ssp5W8IJKIWar6oF4taIPsz1Dt2tmuhsOqty7aDgG0vmfIz_et15iQCPvAmMSJESsSpTJ-y30PgBIWJrGbNVFZNc3gyPk36qazmyXaTef_0BIEzFA6Teiqr-oWPm_H47Q7KV_fQHgryoaoeZsEy86tZQ2DbE5vVy2wqK3mNDIEIBQhsxmU1Lsm-je5yDgHj-455LKWUfBkiaSaPYRBw3u-Y7Uqb3Sb6vnQp6A1BIG9pz3F0nz0EtDFUAl3s0ryfRjuCqgXoFHzqIxuDAK3XZPLYSL8jXnmKa-0SCaQcqdvkLZSslgJHv1pxFFk1g8CxjOpL_6YRaG0kU0am5MBmSt4dPmW5MB0xKRRdjDna6MOd98r3nSlFLNjb6JwpXv33etOxGL6s6ptA1K3t0xhgEMhHm-4Rej_OQlbNR9ZzAX2yCQpnDALJWXPPJfhkL4QF0pEoFGBzQ54YGbTtPlVZxFAyjg_rYhjvPKvnkZbz1YyKGm74lPU-JKg_r4OA0XuKmo_P-nhtZ7DZlFCzF4HonSuVtTZlXdrILWChBKfLA8x97LIuhHPs6aoQKHS-o7F47njHzuVxlnOBtdMXdYfo_17HjmPUgfVPgTTrrL4w4qLxuC4fxI2dwKNcLdbfDV7LcN21J9eR1AItZW1d0SSP3I-Z3qGdPdzK3nveI2XrHD6qivN3OXrHoh-G4T8"
+                  target="_blank"
+                  rel="noopener"
+                  >Run it</a
+                >
+                <a href="https://en.wikipedia.org/wiki/Sea_anemone" target="_blank" rel="noopener"
+                  >About the shape</a
+                >
+              </p>
+            </div>
+          </article>
+          <article class="card" id="g-fern-frond">
+            <img
+              src="../assets/gallery/fern-frond.webp"
+              alt="Fern frond, made of splats"
+              width="256"
+              height="256"
+            />
+            <div class="body">
+              <h5>Fern frond</h5>
+              <p>A central stem and repeated leaflets make a simple fern-like frond.</p>
+              <details class="fold program">
+                <summary>Show the program</summary>
+                <pre><code>x = u
+y = 0.08sin(7piu)
+z = v(0.15+0.65abs(sin(7piu)))
+u = -1 .. 1
+v = 0 .. 1
+hue = 0.28+0.12v
+size = 0.025
+count = 6500</code></pre>
+              </details>
+              <p class="card-links">
+                <a
+                  class="button"
+                  href="https://ryanjosephkamp.github.io/splashery/#s=d.dVPLbtswEPyVYHJJEFqgbMtJees3tKcWOVDU2mZNiyxJ-ZFA_14sZRtFgggCyCX3NTvDd-gQoJCC02lL8QyBA8VkfQ-1EDCRdKbue4bCXM5Xs1rOavlTSlX-Skr5CwKJqINaLOvlshbI_gz1jp3tOyi0g3XZ9hCw3aVSntHfQWcuIuADbxJHhEiJuJQZUvZ7CJygMEDgDAVZyZdk-4fnYIdHCLxB4fAgq7p5ktWq0W16uF0_ssMAhVl9V1V3NcPiFFdjO1DJOH95klU9P0AgQgECm2lppyXZt8lRzhsIGD_03N-qkZJvQyTNoDCOAs77HaNotdltoh8K-qA3BIG8pT0n0kP2ENDGUEl0sctQfhjtCKoWoFPwaYhsjAK0XpPJ04D8jnhldtbaJRJIOVK_yVsoWa0Ejr5tOYusmlHgWCj40r9pBDobyRQqlBzZTMm7w6cqF6RTTAqF76lGF3344N36oTeliSV7G50zxav_Xm96JvnLrp4Fou7skKYEo0A-2vQxQu8nLmTV_I96IaBPNkHhjFEgOWs-Ygk-2QtggXQkCiWwuUWeODJo23_qsqihVJwezMUw3nmWzz2tFu2cihpu8SnrfUhQv19HAaP3FDUfn_XxOs5gsymp5i8C0TtXOutsyrqMkUfAQglOl4eVh9hnXQDnONBVIVDofU9T8zzxnp3LoyvnAmunL_IO0f-50o5j1IEfAAXSrLP6goibxv26fBA3dAL3sl2uvxm8FnLddSZXSmqBjrK2rmiSKfdTpXdoZw-3tvee90jZOof_VcX1-xy9Y9GP4_gP"
+                  target="_blank"
+                  rel="noopener"
+                  >Run it</a
+                >
+                <a href="https://en.wikipedia.org/wiki/Fern" target="_blank" rel="noopener"
+                  >About the shape</a
+                >
+              </p>
+            </div>
+          </article>
+          <article class="card" id="g-dahlia">
+            <img
+              src="../assets/gallery/dahlia.webp"
+              alt="Dahlia bloom, made of splats"
+              width="256"
+              height="256"
+            />
+            <div class="body">
+              <h5>Dahlia bloom</h5>
+              <p>Layered radial petals alternate in height to form a dense dahlia-like flower.</p>
+              <details class="fold program">
+                <summary>Show the program</summary>
+                <pre><code>x = v(0.4+0.6abs(cos(12u)))cos(u)
+y = 0.25sin(12u)*v
+z = v(0.4+0.6abs(cos(12u)))sin(u)
+u = 0 .. 2pi
+v = 0 .. 1
+hue = 0.88+0.1cos(12u)
+size = 0.025
+count = 8000</code></pre>
+              </details>
+              <p class="card-links">
+                <a
+                  class="button"
+                  href="https://ryanjosephkamp.github.io/splashery/#s=d.dVPBbtswDP2V4vXSrqwhu0nW-bZv2E4bepBlJtGiWJokJ00L__tAOSmGFjUMSJT4SD7y6RU6BLRIwem05XgC4cAxWT-gfSCYyDpz_z2jRaOa1X2t7mv1U6m2_JVS6hcIiblH-7CoF4uakP0J7St2dujRohuty3YAwfbnTPme_446SxKCD7JJggiRE0sqM6bs9yA8o8XhRlWLO1WtdJdujE83dTPe3t7KbrwF4YQWqmqWyQ7l6ssBhJfPgeJXgKMAr6rqqglWeF_MGoTtyCXs4-OdquoLGISIFiBs5qWbl2RfZnfVLEEwfhyExqNSSm5DZC3cMU0E5_1OyHba7DbRj6VJQW8YhLzlvQTSY_YgaGO4BDrbpXc_jHaMtibwc_BpjGJMBF6v2eS5j37HssoQ19olJqQcedjkLVpVrQhH33USRVXLiXAsk_rUf7kk9DayKRNr1SRmSt4dPmQ5M50xKRRZzDn66MM7786PgylFLMTb6Jw5Xvz3ejOIFj6t6ish6t6OaQ4wEfLRpvcIvZ9noarl_6wfCPrZJrQ4YSIkZ817LsEneyZMSEfmUIDLN-SzIIO2w4cqixpKxvldnQ3jnRf5XPPqoWu4qOENn7Leh4T299NEMHrPUcvxSR8v7Qw2mxKqeSRE71yprLcp69JGaYEIJThd3l8e45B1IZzjyBeFoMXgB56Ll44P4lzeZjknrJ0-yztE_-cydhyjDvIAOLAWndVnRlI0rtflA72xI1yrbrH-ZvBUhusuPbmMpCb0nLV1RZMycj9neoV29vBW9t7LHilb5_C_qiT_kKN3Ivppmv4B"
+                  target="_blank"
+                  rel="noopener"
+                  >Run it</a
+                >
+                <a href="https://en.wikipedia.org/wiki/Flower" target="_blank" rel="noopener"
+                  >About the shape</a
+                >
+              </p>
+            </div>
+          </article>
+          <article class="card" id="g-sea-fan">
+            <img
+              src="../assets/gallery/sea-fan.webp"
+              alt="Sea fan branches, made of splats"
+              width="256"
+              height="256"
+            />
+            <div class="body">
+              <h5>Sea fan branches</h5>
+              <p>A flat branching fan uses nested waves to suggest coral growth.</p>
+              <details class="fold program">
+                <summary>Show the program</summary>
+                <pre><code>x = vcos(u)
+y = 0.12sin(11u)
+z = vsin(u)
+u = -1.5 .. 1.5
+v = 0 .. 1.5
+hue = 0.48+0.1sin(11u)
+size = 0.028
+count = 6500</code></pre>
+              </details>
+              <p class="card-links">
+                <a
+                  class="button"
+                  href="https://ryanjosephkamp.github.io/splashery/#s=d.dVPLbtswEPyVYHJJUVqgbMtJees3tKcWOVDU2mZNiyxJ-ZFA_14sZbtBgggCqKX2NTuzr9AhQCEFp9OW4hkCB4rJ-h5qIWAi6Uzd9wyFuZyvZrWc1fKnlKq8lZTyFwQSUQe1WNbLZS2Q_RnqFTvbd1BoB-uy7SFgu0ulPKO_g85cRMAH_kgcESIl4lJmSNnvIXCCwsH49DB8gcAZCrKq58n2D3Vdrl7Yge1iDVCY1VVzV1V3ddUwGA75b24HKjmWT19lVb_JE6EAgc10tNOR7MvkLudPEDB-6Lm7VSMl_w2RNEPCOAo473eModVmt4l-KNiD3hAE8pb2nEgP2UNAG0Ml0cUuI_lhtCOoWoBOwachsjEK0HpNJk_j8Tvik7lZa5dIIOVI_SZvoWS1Ejj6tuUssmpGgWMh4FP_phHobCRTiFByZDMl7w4fqlyQTjEpFLanGl304Z1364felCaW7G10zhSv_nu96ZniT7t6FIi6s0OaEowC-WjT-wi9n7iQVfMW9UJAn2yCwhmjQHLWvMcSfLIXwALpSBRKYHOLPHFk0Lb_0GVRQ6k4rcvFMN55ls89rRbtnIoabvEp631IUL-fRwGj9xQ1X5_18TrOYLMpqeZPAtE7VzrrbMq6jJFHwEIJTpe1ykPssy6AcxzoqhAo9L6nqXmeeM_OZeXKvcDa6Yu8Q_R_rrTjGHXgBaBAmnVWXxBx07hflwfihk7gXrbL9TeD50Kuu87kSkkt0FHW1hVNMuV-qvQK7ezh1vbe8zdSts7hraq4fp-jdyz6cRz_AQ"
+                  target="_blank"
+                  rel="noopener"
+                  >Run it</a
+                >
+                <a href="https://en.wikipedia.org/wiki/Sea_fan" target="_blank" rel="noopener"
+                  >About the shape</a
+                >
+              </p>
+            </div>
+          </article>
+          <article class="card" id="g-lily-pad">
+            <img
+              src="../assets/gallery/lily-pad.webp"
+              alt="Lily pad, made of splats"
+              width="256"
+              height="256"
+            />
+            <div class="body">
+              <h5>Lily pad</h5>
+              <p>A scalloped circular leaf floats on a softly raised surface.</p>
+              <details class="fold program">
+                <summary>Show the program</summary>
+                <pre><code>x = vcos(u)
+y = 0.08sin(12u)*v
+z = vsin(u)
+u = 0 .. 2pi
+v = 0 .. 1
+hue = 0.28+0.08v
+size = 0.035
+count = 5500</code></pre>
+              </details>
+              <p class="card-links">
+                <a
+                  class="button"
+                  href="https://ryanjosephkamp.github.io/splashery/#s=d.dVPLbtswEPyVYHJJ2o1B2Vaa6tZvaE8tcqCotc2aFlmS8iOB_r1YyjaCBBEEUEvta2ZnX6FDQIMUnE4bjicQ9hyT9T2aBcFE1pm7HxkN5mr--FCph0r9Uqop70wp9RuExNyhWSyr5bIiZH9C84qt7Ts0aAfrsu1BsN25Un7gf4POUoTgg3wkiQiRE0spM6TsdyAc0WBvfLob7kE4oYGaqadk-7tqPtx_2YPwIi5yU1wGcbmZzW7mwQqWi1mBsBm4JJg_fZUsEhzRAIT1dLTTkezL5KgWNQjGD700VddKyd8QWQsSjCPBeb-V1ltttuvohwI56DWDkDe8k0R6yB4EbQyXRGe7MPHTaMdoKgIfg09DFGMk8GrFJk-s-C3LKSNZaZeYkHLkfp03aNTskXDwbStZ1KweCYfC-6f-dU3obGRT-G_UKGZK3u0_VDkjnWJSKEOeanTRh3ferR96U5pYirfROXO8-O_0upfJftrVN0LUnR3SlGAk5INN7yP0bpqFmtVvUS8I-mgTGpwwEpKz5j2W4JM9AyakA3MogfU18iiRQdv-Q5dFDaXitCVnw3jnRT63_Lho51zUcI1PWe9CQvPneSQYveOo5fqkDxc6g82mpJo_EaJ3rnTW2ZR1oVEoEKEEp8s25SH2WRfAOQ58UQga9L7nqXlhvBfnsmnlnrBy-izvEP3fy9hxiDrIAnBgLTqrzoikadyuygO6oiPcqna5-m7wXIbrLpxcRlIROs7auqJJGbmfKr1CO7u_tr3z8o2UrXN4qyqp3-fonYh-HMf_"
+                  target="_blank"
+                  rel="noopener"
+                  >Run it</a
+                >
+                <a href="https://en.wikipedia.org/wiki/Water_lily" target="_blank" rel="noopener"
+                  >About the shape</a
+                >
+              </p>
+            </div>
+          </article>
+        </div>
+      </details>
+      <details class="fold gallery-group" id="gallery-things-in-motion">
+        <summary>Things in motion (10 programs)</summary>
+        <div class="gallery gallery-grid">
+          <article class="card" id="g-traveling-wave">
+            <img
+              src="../assets/gallery/traveling-wave.webp"
+              alt="Traveling wave, made of splats"
+              width="256"
+              height="256"
+            />
+            <div class="body">
+              <h5>Traveling wave</h5>
+              <p>
+                Concentric ripples travel across a square sheet without breaking at the cycle seam.
+              </p>
+              <details class="fold program">
+                <summary>Show the program</summary>
+                <pre><code>x = u
+y = 0.38sin(2sqrt(u^2+v^2)-t)
+z = v
+u = -3 .. 3
+v = -3 .. 3
+hue = 0.58-0.08sin(2sqrt(u^2+v^2)-t)
+size = 0.04
+count = 7000</code></pre>
+              </details>
+              <p class="card-links">
+                <a
+                  class="button"
+                  href="https://ryanjosephkamp.github.io/splashery/#s=d.dVPZbtswEPyVYPKSoGuBvpKUb_2G9qlFAlDU2mZNiwwPHwn07wUpO0gTxBBArbyzu7MzfIXyHhLRWxU3HE4g7DlE43rIOUEHVom7HwkSMzG7m0zFZCp-CSHr0wghfoMQmTvI-WK6WEwJyZ0gX7E1fQeJNhubTA-C6c6d0oSfs0qlCcH58hILwgeOXFrpHJPbgXCERAbhBAnRzB-i6W9m8Tmkm_w0-7Z_mt1O0i0IL5DYg5AhMZlfNc3VvDD5L9pkrlWWDxPRiC9LBUiAsB6PdjyieRnBYgGCdrkvY94LIcqfPrAq3DAMBOvctpBpld6ug8t1CV6tGYS04V2po3JyICituRY6x3U3P7WyDDkl8NG7mEMJBgKvVqzTuCe35XIWkVbKRibEFLhfpw2kaO4IB9e2pYpolgPhUJX4Mn-5JHQmsK6KSDGUMEZn95-6nJmOmOir7GOPLjj_Ibt1udd1iEXJ1iolDpf8nVr3Resvp7onBNWZHMcCAyEdTPyIULtRC9Es37OeE9TRREicMBCiNfojF--iORMmxAOzr8DlG_JYkF6Z_tOU1Qy143hvzoF21hX3XPPdvJ1xdcMbPia18xHyz-NA0GrHQZXPJ3W4rNObpGup2QMhOGvrZJ2JSdU1lhUUo3ir6v1KOfRJVcIpZL44BBK963kcvmy8L8n17tXvhJVVZ3f74P5eZMchKF_8z55V8dn0zKgMjetV_YHe2BGuRbtYfdd4rOLay04ukkwJHSdlbPVkkdyNnV6hrNm_jb1z5R0xGWvx3lWlf5-Cs8X0wzD8Aw"
+                  target="_blank"
+                  rel="noopener"
+                  >Run it</a
+                >
+                <a href="https://en.wikipedia.org/wiki/Wave" target="_blank" rel="noopener"
+                  >About the shape</a
+                >
+              </p>
+            </div>
+          </article>
+          <article class="card" id="g-breathing-torus">
+            <img
+              src="../assets/gallery/breathing-torus.webp"
+              alt="Breathing torus, made of splats"
+              width="256"
+              height="256"
+            />
+            <div class="body">
+              <h5>Breathing torus</h5>
+              <p>The major and minor radii expand together and return once per cycle.</p>
+              <details class="fold program">
+                <summary>Show the program</summary>
+                <pre><code>x = (1.7+0.45cos(v))(1+0.12sin(t))cos(u)
+y = 0.45(1+0.12sin(t))sin(v)
+z = (1.7+0.45cos(v))(1+0.12sin(t))sin(u)
+u = 0 .. 2pi
+v = 0 .. 2pi
+hue = v/(2pi)
+size = 0.045
+count = 6500</code></pre>
+              </details>
+              <p class="card-links">
+                <a
+                  class="button"
+                  href="https://ryanjosephkamp.github.io/splashery/#s=d.hVPLbtswEPyVYHKxEUalbMtpees3tKcWOdDU2mZNiyxJ-ZFA_14sZQd5IKhhYLXkvmZ2-AwdAhRScDptKZ4hcKCYrO-g5gImks7Ufs9QmMnZ8r6W97X8KaUq_0pK-QsCiaiFmi_qxaIWyP4M9Yyd7VoorHrrsu0gYNtLp3xPf3uduYmAD_yROCNESsStTJ-y30PgBIVJXT3cyWrRGJ8mh-l0Ut_Jqp4l203ydMqH_RQCZyhw1NtrNge-fvpvJTalUs-VbqrqZhYs8_HW3fYEhcOXySxYjo5QgMBmNKvRJPtEZR65aCBgfN8xrmUjJd-GSJrJwDAIOO93jH6lzW4TfV9YC3pDEMhb2nMh3WcPAW0MlUIXv5D5w2hHULUAnYJPfWRnEKD1mkweifU7YstbXWuXSCDlSN0mb6FktRQ4-tWKq8iqGQSOZXWfxjeNQGsjmbJCJQd2U_Lu8KHLBemYk0LRydijjT68i175vjNliAVHG50zxWv8Xm86FsenUz0IRN3aPo0FBoF8tOl9ht6Pu5BV8xr1XECfbILCGYNActa8xxJ8shfAAulIFEpi85J54sygbfdhyqKG0nF8aBfHeOdZPre0nK9mVNTwkp-y3ocE9ftxEDB6T1Hz8Vkfr3QGm00pNfsqEL1zZbLWpqwLjUwBCyU4XR5k7mOXdQGcY09XhUCh8x2NwzPjHQeXx1rOBdZOX-Qdov9zXTuOUQd-ABRIs87qCyIeGrfr8oN4QSdwK1eL9TeDx7Jcd-XkupJaoKWsrSua5JX7sdMztLOHl7H3nr-RsnUOr1XF_bscvWPRD8PwDw"
+                  target="_blank"
+                  rel="noopener"
+                  >Run it</a
+                >
+                <a href="https://en.wikipedia.org/wiki/Torus" target="_blank" rel="noopener"
+                  >About the shape</a
+                >
+              </p>
+            </div>
+          </article>
+          <article class="card" id="g-rotating-saddle">
+            <img
+              src="../assets/gallery/rotating-saddle.webp"
+              alt="Rotating saddle, made of splats"
+              width="256"
+              height="256"
+            />
+            <div class="body">
+              <h5>Rotating saddle</h5>
+              <p>A saddle ripple rotates smoothly over a square patch.</p>
+              <details class="fold program">
+                <summary>Show the program</summary>
+                <pre><code>x = u
+y = 0.22(u^2-v^2)cos(t)+0.2uvsin(t)
+z = v
+u = -1.6 .. 1.6
+v = -1.6 .. 1.6
+hue = 0.6+0.08sin(t)
+size = 0.035
+count = 6500</code></pre>
+              </details>
+              <p class="card-links">
+                <a
+                  class="button"
+                  href="https://ryanjosephkamp.github.io/splashery/#s=d.dVPLbtswEPyVYHJJkLVAyY-mvPUb2lOLBKCotc2aFlmSsuME-veClG0ECSIIoJba1-zMvkF5D4norYpbDicQDhyicT3knKADq8TdjwSJRjSrWS1mtfglhCxvJYT4DUJk7iDni3qxqAnJnSDfsDN9B4l2MDaZHgTTnSulGf8bVMpFCM7nj5gjfODIuZQeYnJ7EF4gMYBwgoSomuZueG5mh-fmXrt4l-4fRNUMh2j6u3QPwiskDiAMkJjV1eqmqm7qapUxfbrZDlxyrh5EJR6vKQIkQNhMRzsd0bxOzmK-BEG7oc9drpZC5L8-sMrQMI4E69wuY2mV3m2CG8oMvNowCGnL-5xIDcmBoLTmkuhsl9H81MoyZE3gF-_iELIxEni9Zp2mMbkd5zNztFY2MiGmwP0mbSFFtSIcXdvmLKJajoRjIeJL_-WS0JnAuhAixZjNGJ09fKpyRjrFRF9Yn2p0wfkP3q0bel2aWGRvrVLicPHfq02fqf6yq2-EoDozxCnBSEhHEz9GqP3EhaiW71HPCerFREicMBKiNfojFu-iOQMmxCOzL4HLa-RLjvTK9J-6LGooFae1ORvaWZflc8uredtwUcM1Pia19xHyz9NI0GrPQeXrkzpexulN0iVV80gIztrSWWdiUmWMeQRZKN6qsl5pCH1SBXAKA18UAone9Tw1nyfeZ-eyeuWesLbqLG8f3N8L7TgG5fMCsGeVdVafEeWmcbsuD-iKjnAr2sX6u8ZTIddeZnKhpCZ0nJSxRZOZcjdVeoOy5nBte-_yN2Iy1uK9qnL9PgVns-jHcfwP"
+                  target="_blank"
+                  rel="noopener"
+                  >Run it</a
+                >
+                <a
+                  href="https://en.wikipedia.org/wiki/Saddle_surface"
+                  target="_blank"
+                  rel="noopener"
+                  >About the shape</a
+                >
+              </p>
+            </div>
+          </article>
+          <article class="card" id="g-orbiting-rings">
+            <img
+              src="../assets/gallery/orbiting-rings.webp"
+              alt="Orbiting rings, made of splats"
+              width="256"
+              height="256"
+            />
+            <div class="body">
+              <h5>Orbiting rings</h5>
+              <p>Three circular bands revolve at different speeds around the center.</p>
+              <details class="fold program">
+                <summary>Show the program</summary>
+                <pre><code>x = cos(u+t)+0.35cos(3u-t)
+y = 0.35sin(3u-t)
+z = sin(u+t)
+u = 0 .. 2pi
+v = 0 .. 1
+hue = u/(2pi)
+size = 0.045
+count = 4500</code></pre>
+              </details>
+              <p class="card-links">
+                <a
+                  class="button"
+                  href="https://ryanjosephkamp.github.io/splashery/#s=d.dVPLbtswEPyVYHJJENqlbCttees3tKcWOVDU2mZNiywfsZ1A_14sZRtBgggCqKV2OTs7w1foEKCQgtNpS_EEgWeKyfoBailgIulM_Y8MhYVcPM4aOWvkLylVfedSyt8QSEQ91HLVrFaNQPYnqFfs7NBDoSvWZTtAwPZnpDyjf0VnBhHwgT8SV4RIiRjKlJT9HgJHDny6Kw_5_kHOly0HyzLL9xA4QYH3kh2uey8MYYdaAIHCKTfz-c0iWKZ2CRsIbAtBoXy5WwTLuREKENhMSzctyb5QhZGrFgLGl4EbXLVS8t8QSTMrjKOA837HNDptdpvoS6Uf9IYgkLe054N0yR4C2hiqB53jOpWfRjuCagToGHwqkYNRgNZrMnmakN8RryzPWrtEAilHGjZ5CyXnjwIH33V8ipy3o8ChavBpftsK9DaSqVooOXKYknfPH1DOTKeaFKrgE0YffXiX3fkymNrEirONzpniJX-vNwOr_GlXXwWi7m1J0wGjQD7Y9L5C7yct5Lx9y3opoI82QeGEUSA5a95zCT7ZM2GBdCAKtbC9Vh65Mmg7fOiyuqEiTjfmHBjvPNvnlh6X3YKqG671Ket9SFB_nkYBo_cUNW-f9OEyzmCzqUctvglE71ztrLcp6zpGHgEbJThdb1Yucci6Es6x0MUhUBj8QFPzPPGBk-utq_sCa6fP9g7R_73IjkPUgS8ABdLss-bMiJvG7bo-EFd2AreyW62_GzxVcd1lJhdJGoGesrauepIl9xPSK7Szz9e2956_kbJ1Dm9dxfhDjt6x6cdx_A8"
+                  target="_blank"
+                  rel="noopener"
+                  >Run it</a
+                >
+                <a
+                  href="https://en.wikipedia.org/wiki/Parametric_equation"
+                  target="_blank"
+                  rel="noopener"
+                  >About the shape</a
+                >
+              </p>
+            </div>
+          </article>
+          <article class="card" id="g-flower-bloom">
+            <img
+              src="../assets/gallery/flower-bloom.webp"
+              alt="Opening flower, made of splats"
+              width="256"
+              height="256"
+            />
+            <div class="body">
+              <h5>Opening flower</h5>
+              <p>Petals lift and flatten in a smooth repeating bloom.</p>
+              <details class="fold program">
+                <summary>Show the program</summary>
+                <pre><code>x = v(0.55+0.45cos(5u))cos(u)
+y = (0.12+0.45(1+sin(t))/2)v^2
+z = v(0.55+0.45cos(5u))sin(u)
+u = 0 .. 2pi
+v = 0 .. 1
+hue = 0.9-0.1v
+size = 0.03
+count = 6000</code></pre>
+              </details>
+              <p class="card-links">
+                <a
+                  class="button"
+                  href="https://ryanjosephkamp.github.io/splashery/#s=d.dVPRbtswDPyV4fqSYKwnJ3G36W3fsD1t2ABFZlKtiqVJctKs8L8PlJOi6DbDgESJ5PHI0xNMjNDI0Zt8z-kMwpFTdmGAXhNsYlO4_1SgsVKru9tW3bbqi1K6_o1S6isImbmHXm_azaYllHCGfsKDG3pobEfnixtAcP0Fqdzyr9EUASGEKJssETFxZoGyYy7hAMIjNI4L1XTdW9VsOhvyohuXS1nHJQhnaCxU067q9aJ9m92wKMvlu9Xy-GMFwu9_JxC3mmCEhnrTNG9W0Qn3q9mCcD-ymM3HW9W0RxASNEDYz8t2XrL7PbupNQg2jIMwuFNKyWVMbIQ2pongQ3gQnltjH_YpjLU_0ewZhHLPB8ljxhJAMNZyTXSxa9s-W-MZuiXwYwx5TGJMBN7t2Ja5heGBZZX57YzPTMgl8bAv99CquSOcwnYrWVTTTYRTHdJ__buO0LvEtg5Lq0nMnIM__oVyYTrH5FgVMWP0KcRX3tswDrYWsRFva0rhdPU_mP0gMvhvVe8JyfRuzHOCiVBOLr-OMId5FqrpXrJeE8yjy9A4YyJk7-xrLjFkdyFMyCfmWAO758hHiYzGDX9VWcVQEecndTFs8EHUc8N36-2Kqxqe43Mxh5ihv32fCNYcOBk5PpvTtZ3RFVtTrT4QUvC-Vta7XExto7RAhBK9qU-vjGkophIuaeSrQqAxhIHn4qXjgzjXZ1nPCTtvLuqOKfy8jh2nZKLonyMb0Vl7YSRF42ZXP9AzO8KN2m52Hy2-1-H6a0-uI2kJPRfjfNWkjDzMSE8w3h2fyz4E2SMX5z1eqkrwh5KCF9FP0_QH"
+                  target="_blank"
+                  rel="noopener"
+                  >Run it</a
+                >
+                <a href="https://en.wikipedia.org/wiki/Flower" target="_blank" rel="noopener"
+                  >About the shape</a
+                >
+              </p>
+            </div>
+          </article>
+          <article class="card" id="g-morphing-sphere">
+            <img
+              src="../assets/gallery/morphing-sphere.webp"
+              alt="Sphere to cube-like form, made of splats"
+              width="256"
+              height="256"
+            />
+            <div class="body">
+              <h5>Sphere to cube-like form</h5>
+              <p>A periodic blend shifts a round surface toward a softly squared silhouette.</p>
+              <details class="fold program">
+                <summary>Show the program</summary>
+                <pre><code>x = sin(v)cos(u)*(1+0.12cos(4u)cos(4v)sin(t))
+y = cos(v)*(1+0.12cos(4u)cos(4v)sin(t))
+z = sin(v)sin(u)*(1+0.12cos(4u)cos(4v)sin(t))
+u = 0 .. 2pi
+v = 0 .. pi
+hue = 0.58+0.1sin(t)
+size = 0.035
+count = 7000</code></pre>
+              </details>
+              <p class="card-links">
+                <a
+                  class="button"
+                  href="https://ryanjosephkamp.github.io/splashery/#s=d.hVPLbtswEPyVYnKx241A-ZGkuvUb2lOLHGhqbbOmRZak7DiB_r1YyjaCBEEEQeRSO_uYHb5Ah4AGKTidthxPIBw4Jus7NHOCiawztz8yGszU7O62Vre1-qVUU95KKfUbhMTcopkv6sWiJmR_QvOCne1aNFj11mXbgWDbc6Z8y_96nSUJwQfZJEGEyIkllelT9nsQngRhu8lhanya9NOvk_qbquqZWIu-HC4OU_HI0ykIJwH7NDl86vl8jSzfzyP3aKC-VNWXWbBC0sUs1rZnsavlg8QYQSBENABhMy6rcUn2eXRW8yUIxvedtHyvlJK_IbIWnjAMBOf9TohZabPbRN8XQoPeMAh5y3sJpPvsQdDGcAl0tgvPP412jKYm8FPwqY9iDARer9nkkXO_Y1ll4GvtEhNSjtxt8haNqu4IR79aSRRVLQfCsUz1Q__lktDayKZMt1GDmCl5d3iX5dzpiEmhSGjM0UYf3nivfN-ZUsRCvI3OmePFf683nejmw6ruCVG3tk9jgIGQjza9Rej9OAtVLV93PSfoJ5vQ4ISBkJw1b3sJPtlzw4R0ZA4FuLwinwQZtO3eVVnUUDKOd_BsGO-8yOeG7-arGRc1XPEp631IaP48DgSj9xy1HJ_08UJnsNmUULMHQvTOlcpam7IuNAoFIpTgdLmruY9d1qXhHHu-KAQNOt_xWLww3olzucflnLB2-izvEP3fy9hxjDrIBeDAWnRWnzuSonGzLg_o2h3hRq0W6-8Gj2W47sLJZSQ1oeWsrSualJH7MdMLtLOHa9l7L3ukbJ3Da1VJ_i5H70T0wzD8Bw"
+                  target="_blank"
+                  rel="noopener"
+                  >Run it</a
+                >
+                <a href="https://en.wikipedia.org/wiki/Sphere" target="_blank" rel="noopener"
+                  >About the shape</a
+                >
+              </p>
+            </div>
+          </article>
+          <article class="card" id="g-twisting-ribbon">
+            <img
+              src="../assets/gallery/twisting-ribbon.webp"
+              alt="Twisting ribbon, made of splats"
+              width="256"
+              height="256"
+            />
+            <div class="body">
+              <h5>Twisting ribbon</h5>
+              <p>A narrow ribbon rotates its cross-section through one full turn each cycle.</p>
+              <details class="fold program">
+                <summary>Show the program</summary>
+                <pre><code>x = u
+y = 0.32vcos(t)
+z = 0.32vsin(t)
+u = -2 .. 2
+v = -1 .. 1
+hue = 0.55+0.15v
+size = 0.035
+count = 6000</code></pre>
+              </details>
+              <p class="card-links">
+                <a
+                  class="button"
+                  href="https://ryanjosephkamp.github.io/splashery/#s=d.dVPLbtswEPyVYHJp0bVA2Vba8tZvaE8tcqCptc2GFlmSsuME-vdiKTsIEkQQQC21j5nd2WeYGKGRozd5z-kMwpFTdmGAXhFsYlO4_1GgsVTLu0WrFq36pZSub6OU-g1CZu6hV-t2vW4JJZyhn_Hghh4am9H54gYQXH-pVBb8bzRFihBClI8sETFxZillx1zCAYRHaIwgnKGhmtXyaEP-VD6D8HS9yW6Yb0ZoLJY3TXOzFBZitWK1IOxHrv5d90U1bXcEIUEDhN18bOYju6fZUa06EGwYB8Fzp5SSvzGxERKYJoIP4UFQb4x92KUwVrbR7BiEsueDJDJjCSAYa7kmuti1CT-t8QzdEvgxhjwmMSYCb7dsy9yQ8MByyjS2xmcm5JJ42JU9tGruCKew2UgW1XQT4VRb_qF_1xF6l9jW1ms1iZlz8Md3VS5M55gc63znGn0K8Y33JoyDrSDW4m1NKZyu_gezG2SoH6L6Skimd2OeE0yEcnL5bYQ5zLNQTfea9YpgHl2GxhkTIXtn33KJIbsLYUI-Mcca2L1EPkpkNG54h7KqoVacF-Ri2OCDyOeW71abJVc1vMTnYg4xQ_-5nwjWHDgZuT6b07Wd0RVbUy2_EVLwviLrXS6mtlFaIEKJ3tRFKmMaiqmESxr5qhBoDGHgGbx0fBDnumT1nrD15iLvmMLf69hxSibKAnBkIzprL4wENG639QG9sCPcqs16-93ivg7XX3tyHUlL6LkY56smZeRhrvQM493xBfYhyDdycd7jtaqk_lBS8CL6aZr-Aw"
+                  target="_blank"
+                  rel="noopener"
+                  >Run it</a
+                >
+                <a
+                  href="https://en.wikipedia.org/wiki/Ribbon_(mathematics)"
+                  target="_blank"
+                  rel="noopener"
+                  >About the shape</a
+                >
+              </p>
+            </div>
+          </article>
+          <article class="card" id="g-pulsing-star">
+            <img
+              src="../assets/gallery/pulsing-star.webp"
+              alt="Pulsing star, made of splats"
+              width="256"
+              height="256"
+            />
+            <div class="body">
+              <h5>Pulsing star</h5>
+              <p>Five radial points breathe in and out with the beat of a sine wave.</p>
+              <details class="fold program">
+                <summary>Show the program</summary>
+                <pre><code>x = (0.7+0.16sin(t))(0.65+0.35cos(5u))cos(u)
+y = 0.12sin(5u)
+z = (0.7+0.16sin(t))(0.65+0.35cos(5u))sin(u)
+u = 0 .. 2pi
+v = 0 .. 1
+hue = 0.08+0.06sin(t)
+size = 0.04
+count = 6000</code></pre>
+              </details>
+              <p class="card-links">
+                <a
+                  class="button"
+                  href="https://ryanjosephkamp.github.io/splashery/#s=d.jVPBbtswDP2V4vWSoKohJ3Ha6bZv2E4belBkJtGiWJokN0kL__tA2SmKFgVmGJAokY_k49MrdAhQSMHptKd4gcAzxWR9B7UUMJF0pvZ7hsJCLtb3tbyv5U8pVfkrKeUvCCSiFmq5qlerWiD7C9QrDrZrobDprcu2g4Btp0z5nv72OnMSAR94kzgiRErEqUyfsj9C4AyFmawe7mRVr5PtZnk-n8lq3dzJatkYn2ZNP5_z2s8hcIGCrOoFezbl5OW_APiiuPcMcFNVN4tgmYqrWUNg31OBl493spITGAQiFCCwG5fNuCT7MnmvIGB833FfayklX4ZImsnAMAg47w_c_Uabwy76vrAW9I4gkPd0ZBzdZw8BbQwVoMkuZP4w2hFULUDn4FMf2RgEaLslk0di_YF45alutUskkHKkbpf3ULJaC5z8ZsMosmoGgVMZ3Zf-TSPQ2kimjFDJgc2UvHv-lGXqdIxJoehkzNFGHz54b3zfmVLEir2Nzpni1f-odx2L48uqHgSibm2fRoBBIJ9s-hihj-MsZNW873opoM82QeGCQSA5az72EnyyU8MC6UQUSmDzFnnmyKBt96nKIoaScXxok2G886yeW1ovNwsqaniLT1kfQ4L6_TQIGH2kqPn4ok9XOoPNpkAtHgWid65U1tqUdaGRKWChBKfLg8x97LIuDefY01UhUOh8R2PxzHjHzuWxlnOBrdOTukP0f65jxynqwPqnQJp1Vk8dcdG43ZYP4q07gVu5WW2_GTyV4borJ9eR1AItZW1d0SSP3I-ZXqGdfX4r--h5j5Stc3ivKs7f5egdi34Yhn8"
+                  target="_blank"
+                  rel="noopener"
+                  >Run it</a
+                >
+                <a href="https://en.wikipedia.org/wiki/Star_polygon" target="_blank" rel="noopener"
+                  >About the shape</a
+                >
+              </p>
+            </div>
+          </article>
+          <article class="card" id="g-wobbling-helix">
+            <img
+              src="../assets/gallery/wobbling-helix.webp"
+              alt="Wobbling helix, made of splats"
+              width="256"
+              height="256"
+            />
+            <div class="body">
+              <h5>Wobbling helix</h5>
+              <p>A helix sways side to side and returns to its starting pose each cycle.</p>
+              <details class="fold program">
+                <summary>Show the program</summary>
+                <pre><code>x = cos(u+t)
+y = 0.12u
+z = sin(u+t)+0.2sin(t)
+u = 0 .. 8pi
+v = 0 .. 1
+hue = u/(8pi)
+size = 0.04
+count = 5000</code></pre>
+              </details>
+              <p class="card-links">
+                <a
+                  class="button"
+                  href="https://ryanjosephkamp.github.io/splashery/#s=d.dVPLbtswEPyVYHJJkY1K-ZGmuvUb2lOLHGhqbbOmRZaP2E6gfy-WsoMgQQQB5JL7mtnhC3QI6JCC02nL8QTCE8dk_YBuTjCRdeb-R0aHmZrd37XqrlW_lOrq3yilfoOQmHt080W7WLSE7E_oXrCzQ48Oq2JdtgMItj9Xynf8r-gsRQg-yCZJRIicWEqZkrLfg3AUw6ebcpu_gHBCB9W0swLCsySzQ726Vc1M9tWpiNNV01w9BCtwLmYLwrYwOpSvNw_Bim9EBxA207KalmSfuRZSCxCML4P0tFRKyWWIrAUIxpHgvN9J5yttdpvoS0Uc9IZByFveSx5dsgdBG8M10dmuRPw02jG6lsDH4FOJYowEXq_Z5IkUv2NZZSJr7RITUo48bPIWnWruCQe_WkkW1SxHwqHS_qn_cknobWRT6e_UKGZK3j19qHJGOsWkUGc81eijD--8V74MpjaxEG-jc-Z48d_rzSCD_bSrb4Soe1vSlGAk5INN7yP0fpqFapZvUc8J-mgTOpwwEpKz5j2W4JM9AyakA3OogcvXyKNEBm2HD11WMdSK0yM5G8Y7L-q55vv5asZVDa_xKet9SOj-PI4Eo_cctRyf9OFCZ7DZ1FSzB0L0ztXOepuyrjQKBSKU4HR9TLnEIesKOMfCF4Wgw-AHnpoXxgdxrg-tnhPWTp_VHaL_exk7DlEH0T8H1qKz9oxImsb1un6gV3SEa7VarL8bPNbhugsnl5G0hJ6ztq5qUkbup0ov0M4-vba997JHytY5vFWV1B9y9E5EP47jfw"
+                  target="_blank"
+                  rel="noopener"
+                  >Run it</a
+                >
+                <a href="https://en.wikipedia.org/wiki/Helix" target="_blank" rel="noopener"
+                  >About the shape</a
+                >
+              </p>
+            </div>
+          </article>
+          <article class="card" id="g-standing-wave">
+            <img
+              src="../assets/gallery/standing-wave.webp"
+              alt="Standing wave, made of splats"
+              width="256"
+              height="256"
+            />
+            <div class="body">
+              <h5>Standing wave</h5>
+              <p>A rectangular sheet ripples in place with a standing two-axis wave.</p>
+              <details class="fold program">
+                <summary>Show the program</summary>
+                <pre><code>x = u
+y = 0.35sin(2u)sin(2v)cos(t)
+z = v
+u = -2 .. 2
+v = -2 .. 2
+hue = 0.62+0.12sin(2u)sin(2v)
+size = 0.035
+count = 6500</code></pre>
+              </details>
+              <p class="card-links">
+                <a
+                  class="button"
+                  href="https://ryanjosephkamp.github.io/splashery/#s=d.dVPJbtswEP2V4OWSoGOBkpe2vPUb2lOLHChqbLOmRZakvCTQvxekbCMLIgggR5rtzXvzAuU9JKK3Km45nEE4cIjG9ZBzgg6sEnc_EiQa0axmtZjV4pcQsryVEOI3CJG5g5wv6sWiJiR3hnzBzvQdJNrB2GR6EEx3qZRm_G9QKRchOJ8vMUf4wJFzKT3E5PYgnCAxgHCGhKjmy2j6h2Z4LMfhUbv4kB5BeIbEAYQBErPmrqrumgzkjbUduCRZNV9EVTdvM4EQIAHCZjra6YjmeYoS8yUI2g197m-1FCL_9YFVBoVxJFjndhlFq_RuE9xQ0Hu1YRDSlvc5kRqSA0FpzSXRxS5D-amVZciawCfv4hCyMRJ4vWadpgG5Heczs7NWNjIhpsD9Jm0hRbUiHF3b5iyiWo6EY6HgU__lktCZwLpQIcWYzRidPXyockE6xURf-J5qdMH5d96tG3pdmlhkb61S4nD136tNn0n-tKuvhKA6M8QpwUhIRxPfR6j9xIWolq9RzwnqZCIkzhgJ0Rr9Hot30VwAE-KR2ZfA5S3ylCO9Mv2HLosaSsVpYS6GdtZl-dzzat42XNRwi49J7X2E_PM0ErTac1D581kdr-P0JumSqvlGCM7a0llnYlJljHkEWSjeqrJYaQh9UgVwCgNfFQKJ3vU8NZ8n3mfnsnTlO2Ft1UXePri_V9pxDMrnBWDPKuusviDKTeN-XR7QDR3hXrSL9XeNp0Kuvc7kSklN6DgpY4smM-VuqvQCZc3h1vbe5TtiMtbitapy_T4FZ7Pox3H8Dw"
+                  target="_blank"
+                  rel="noopener"
+                  >Run it</a
+                >
+                <a href="https://en.wikipedia.org/wiki/Standing_wave" target="_blank" rel="noopener"
+                  >About the shape</a
+                >
+              </p>
+            </div>
+          </article>
+        </div>
+      </details>
+      <details class="fold gallery-group" id="gallery-color-play">
+        <summary>Color play (10 programs)</summary>
+        <div class="gallery gallery-grid">
+          <article class="card" id="g-height-hue">
+            <img
+              src="../assets/gallery/height-hue.webp"
+              alt="Height hue bands, made of splats"
+              width="256"
+              height="256"
+            />
+            <div class="body">
+              <h5>Height hue bands</h5>
+              <p>A ridged surface assigns a full rainbow cycle to its height.</p>
+              <details class="fold program">
+                <summary>Show the program</summary>
+                <pre><code>x = u
+y = 0.3sin(4u+3v)
+z = v
+u = -2 .. 2
+v = -2 .. 2
+hue = (sin(4u+3v)+1)/2
+size = 0.04
+count = 6000</code></pre>
+              </details>
+              <p class="card-links">
+                <a
+                  class="button"
+                  href="https://ryanjosephkamp.github.io/splashery/#s=d.dVPLbtswEPyVYHJJkLVL-dWWt35De2qRAyWtbda0yJKUHwn078VSdpomiGGAWml3Z3Z2-AwTAjRScCZtOZ5BOHBM1nfQc0IT2WRuv2VozNRsNanUpFI_lNLlP1VK_QQhMbfQ80W1WFSE7M_Qz9jZroVG3VuXbQeCbS9IecJ_epMFhOCDPCSpCJETC1TTp-z3IJyg0YNwhoaazpPt7hb9w_xwD8ITNA4g9NCYzG6m05uZsP8v2vYMjbt_dQ_V_Sf5EKEBwmY86vFI9okLkFqA0Pi-EzIrpZR8DJGNTIBhIDjvd0K5Ns1uE31fRg1mwyDkLe-lj-mzB8E0DZdGl7go8L0xjqErAp-CT32UYCDwes1NHtXwO5ZTVrE2LjEh5cjdJm-h1XRFOPq6li5quhwIx6L3h_nLJaG1kZuiu1aDhCl5d3iHcpl0rEmhLHfEaKMPb7Jr33dNIbGQ7MbkzPGavzebTjb6IavPhGha26exwUDIR5veVpj9uAs1Xb6eek4wJ5ugccZASM42b2cJPtnLwIR0ZA6lcPlSeZLKYGz3jmUxQ0Ecb8claLzz4p5bXs3rGRc3vNSnbPYhQf96HAiN2XM08vpsjlc5g81NaTX7QojeucKstSmbIqNIIEYJzpRblPvYZVMGzrHnq0Og0fmOR_KieCfJ5YaV94S1Mxd3h-h_X9eOYzRB_M-BjfisukwkpHG7Lj_Qy3SEW1Uv1l8bPJbluqsm15VUhJazsa54UlbuR6RnGGcPL7T3Xp6RsnUOr10l-F2O3onph2H4Cw"
+                  target="_blank"
+                  rel="noopener"
+                  >Run it</a
+                >
+                <a href="https://en.wikipedia.org/wiki/Wave" target="_blank" rel="noopener"
+                  >About the shape</a
+                >
+              </p>
+            </div>
+          </article>
+          <article class="card" id="g-angle-hue">
+            <img
+              src="../assets/gallery/angle-hue.webp"
+              alt="Angle around the torus, made of splats"
+              width="256"
+              height="256"
+            />
+            <div class="body">
+              <h5>Angle around the torus</h5>
+              <p>Hue sweeps around the large ring while a second color band follows the tube.</p>
+              <details class="fold program">
+                <summary>Show the program</summary>
+                <pre><code>x = (1.5+0.4cos(v))cos(u)
+y = 0.4sin(v)
+z = (1.5+0.4cos(v))sin(u)
+u = 0 .. 2pi
+v = 0 .. 2pi
+hue = u/(2pi)
+size = 0.04
+count = 6500</code></pre>
+              </details>
+              <p class="card-links">
+                <a
+                  class="button"
+                  href="https://ryanjosephkamp.github.io/splashery/#s=d.dVPLbtswEPyVYHJxUEalbNltees3tKcWOVDU2mZNiyxJ-ZFA_14sZRtpghgGqJVmH7MzfIEOAQopOJ22FM8QOFBM1vdQCwETSWfqvmcozOV89VjLx1r-lFKVfyWl_AWBRNRBLZq6aWqB7M9QL9jZvoNCO1iXbQ8B21065Uf6O-jMTQR84IfEGSFSIm5lhpT9HgInKMzqavlJVo3xaXZ4eOBjeIDAGQqyapLtZweOn99j-VvBDoy9q6q7ebBM8f9wOxAUhs-zebCMjlCAwGY62ulI9plKR9lAwPih50lXSyn5Y4ikmR7GUcB5v2M-rTa7TfRD2UPQG4JA3tKe6-ghewhoY6gUusRlPT-MdgRVC9Ap-DREDkYBWq_J5GlVfkd8sk5r7RIJpByp3-QtlKxWAkfftlxFVstR4FjE-BC_XAp0NpIpoig5cpiSd4d3XS5Mp5wUivJTjy768Abd-qE3ZYiG0UbnTPGK3-tNz3J_ONUXgag7O6SpwCiQjza9zdD7SQtZLV-zXgjok01QOGMUSM6at1yCT_ZCWCAdiUJJXN4yT5wZtO3fTVnMUDpOV-cSGO88u-eeVot2TsUNt_yU9T4kqN9Po4DRe4qaX5_18brOYLMppeZfBaJ3rkzW2ZR1WSOvgI0SnC5XLA-xz7oQznGgq0Og0PuepuF54z2Dy_Ur7wXWTl_cHaL_c5Udx6gD-58CafZZfWHEQ-N-XX4QN3YC97Jt1t8Mnoq47rqTqyS1QEdZW1c8yZL7qdMLtLOH29h7z89I2TqH167i_n2O3rHpx3H8Bw"
+                  target="_blank"
+                  rel="noopener"
+                  >Run it</a
+                >
+                <a href="https://en.wikipedia.org/wiki/Torus" target="_blank" rel="noopener"
+                  >About the shape</a
+                >
+              </p>
+            </div>
+          </article>
+          <article class="card" id="g-curvature-bands">
+            <img
+              src="../assets/gallery/curvature-bands.webp"
+              alt="Curvature-like bands, made of splats"
+              width="256"
+              height="256"
+            />
+            <div class="body">
+              <h5>Curvature-like bands</h5>
+              <p>
+                Nested sine ridges color a saddle with a pattern that suggests changing curvature.
+              </p>
+              <details class="fold program">
+                <summary>Show the program</summary>
+                <pre><code>x = u
+y = 0.15(u^2-v^2)
+z = v
+u = -2 .. 2
+v = -2 .. 2
+hue = 0.5+0.2sin(3u)cos(3v)
+size = 0.035
+count = 6500</code></pre>
+              </details>
+              <p class="card-links">
+                <a
+                  class="button"
+                  href="https://ryanjosephkamp.github.io/splashery/#s=d.dVNdb9swDPwrxfWlxRhDduJs09t-w_a0oQUUmUm0KJYmyflo4f8-SE6CrkMDAzIdHnk8nl6hvIdE9FbFLYczCAcO0bgeck7QgVXi7luCRCOa5awWs1r8EEKWpxJC_AQhMneQ80W9WNSE5M6Qr9iZvoPEajA2mR4E0106pRn_GVTKTQjO55eYET5w5NxKDzG5PQgnSAwgnCEhqrp9GJ6b2eG5eQThBRIHEAZIzJq7qrprMvt_ou3ABdl-ElUTTf8wHx61iw_zQ64QIAHCZjpW0xHNy4QR8xYE7YY-U1q2QuR_fWCV58A4Eqxzu0x8pfRuE9xQBvZqwyCkLe9zITUkB4LSmkuhS1x0-K6VZciawCfv4hByMBJ4vWadJk3cjvOZF7JWNjIhpsD9Jm0hRbUkHN1qlauIqh0Jx6L6h_ltS-hMYF3Ul2LMYYzOHv7rcpl0wkRfVjz16ILz77JXbuh1IbHI2VqlxOGav1ebPu_1Q1afCUF1ZohTgZGQjia-R6j9tAtRtW-nnhPUyURInDESojX6_SzeRXMZmBCPzL4A2xvylJFemf4_lsUNpeN0Ry6BdtZl-9zzcr5quLjhho9J7X2E_PU0ErTac1D581kdr3J6k3Qp1XwhBGdtYdaZmFSRMUuQjeKtKncpDaFPqgycwsBXh0Cidz1P5LPifU4u96x8J6ytutjbB_f7unYcg_L5ArBnlX1WXybKpHG_Lj_QbTrCvVgt1l81nspy7VWT60pqQsdJGVs8mVfupk6vUNYcbrT3Lr8jJmMt3roq9-9TcDabfhzHvw"
+                  target="_blank"
+                  rel="noopener"
+                  >Run it</a
+                >
+                <a href="https://en.wikipedia.org/wiki/Curvature" target="_blank" rel="noopener"
+                  >About the shape</a
+                >
+              </p>
+            </div>
+          </article>
+          <article class="card" id="g-rgb-sunset">
+            <img
+              src="../assets/gallery/rgb-sunset.webp"
+              alt="RGB sunset gradient, made of splats"
+              width="256"
+              height="256"
+            />
+            <div class="body">
+              <h5>RGB sunset gradient</h5>
+              <p>
+                Red rises with height, green follows the horizontal angle, and blue fills the
+                valleys.
+              </p>
+              <details class="fold program">
+                <summary>Show the program</summary>
+                <pre><code>x = cos(u)(1+0.2v)
+y = v
+z = sin(u)(1+0.2v)
+u = 0 .. 2pi
+v = -1 .. 1
+r = 0.55+0.35v
+g = 0.5+0.4sin(u)
+b = 0.55-0.3v
+size = 0.04
+count = 6000</code></pre>
+              </details>
+              <p class="card-links">
+                <a
+                  class="button"
+                  href="https://ryanjosephkamp.github.io/splashery/#s=d.dVPLbtswEPyVYHJJkLVA-dWWt35De2qRAy2tbda0yJKUHwn078VStpEmiCBAXGpfszP7ChMCNFJwJm05nkE4cEzWd9AzQhPZZG6_Z2hM1XQ5qdWkVj-V0uWtlFK_QEjMLfRsXs_nNSH7M_QrdrZrobHqrcu2A8G2l0p5wn97k6UIwQc5JIkIkRNLqaZP2e9BOInh00P_-FA_qWp6eAThDI0DCC-Sznb__-yhoe6q6m4arICBxqQWuwZh2zM0QIjiVS0WT6qaLSTXZrx4UtV8TAnC6uI0UdVMfJJ94XKl5iA0vu-k16VSSn6GyEYAYhgIzvudIFqZZreJvi-TCGbDIOQt7yWP6bMHwTQNl0QXuwzoR2McQ9cEPgWf-ijGQOD1mps8DsvvWL7C1Nq4xISUI3ebvIVW1ZJw9KuVZFHVYiAcCx2f-i8WhNZGbgotWg1ipuTd4UOVC9IxJoXC_VijjT688175vmtKE3PxbkzOHK_-e7PphPBPu_pCiKa1fRoTDIR8tOl9hNmPXKhq8Rb1jGBONkHjjIGQnG3eYwk-2QtgQjoyhxK4uEWeJDIY233osoihVByX52I03nlR1z0vZ6spFzXc4lM2-5Cgfz8PhMbsORq5PpvjdZzB5qakmn4lRO9c6ay1KZsyRhmBCCU4U5Ys97HLpgDOseerQqDR-Y7H5mXinTiXBSz3hLUzm3EXQvR_rrTjGE2Q_eDARnRWXxBJ07hflwd0Q0e4V6v5-luD50Kuu87kSklNaDkb64omhXI_VnqFcfZwa3vv5YyUrXN4qyqp3-XonYh-GIZ_"
+                  target="_blank"
+                  rel="noopener"
+                  >Run it</a
+                >
+                <a
+                  href="https://en.wikipedia.org/wiki/RGB_color_model"
+                  target="_blank"
+                  rel="noopener"
+                  >About the shape</a
+                >
+              </p>
+            </div>
+          </article>
+          <article class="card" id="g-rainbow-shell">
+            <img
+              src="../assets/gallery/rainbow-shell.webp"
+              alt="Rainbow shell, made of splats"
+              width="256"
+              height="256"
+            />
+            <div class="body">
+              <h5>Rainbow shell</h5>
+              <p>A growing shell carries a rainbow gradient from its narrow tip to its wide lip.</p>
+              <details class="fold program">
+                <summary>Show the program</summary>
+                <pre><code>x = exp(0.1u)cos(u)(1+0.25cos(v))
+y = exp(0.1u)0.25sin(v)
+z = exp(0.1u)sin(u)(1+0.25cos(v))
+u = 0 .. 6pi
+v = 0 .. 2pi
+hue = u/(6pi)
+size = 0.025
+count = 8500</code></pre>
+              </details>
+              <p class="card-links">
+                <a
+                  class="button"
+                  href="https://ryanjosephkamp.github.io/splashery/#s=d.dVPbjtowEP2V6uwLqN7UAUK3fus3tE-t9sE4A7iY2LUdLrvKv1fjAEK73SiSPZ7rmTnzCh0CFFJwOm0pniFwoJis76DmAiaSztR-z1CYydnysZaPtfwppSp_JaX8BYFE1ELNF_ViUQtkf4Z6xc52LRRWvXXZdhCw7SVTfqS_vc6cRMAHviT2CJEScSrTp-z3EDhBgU5hIqu6nxqfJv10Un-W1axh4TCdQuB8b8OqZLvJgTUv9xp-_Y93DwX5qao-LYNl8FdxVsRtT1Dov0yWwbJ1hAIENuOxGo9kX9hKVnLWQMD4vmMQT42UrA2RNCPHMAg473cMdaXNbhN9X1oU9IYgkLe050C6zx4C2hgqgS5y6dwPox1B1YKB-dRHFgYBWq_J5LGLfkd88gjX2iUSSDlSt8lbKFktBY5-teIosmoGgWOZ04f2TSPQ2kimzEvJgcWUvDu8y3JBOvqkUEgx5mijD2-sV77vTCliwdZG50zxar_Xm46Z8GFVXwWibm2fxgCDQD7a9NZD78dZyKq5Rz0X0CeboHDGIJCcNW-xBJ_sBbBAOhKF4tjcPE_sGbTt3lVZ2FAyjlt1EYx3nunzQMv5akaFDTf_lPU-JKjfz4OA0XuKmp_P-nhtZ7DZlFCzJ4HonSuVtTZlXdrILWCiBKfL9uU-dlkXwDn2dGUIFDrf0Vg8d7xj47KZ5V1g7fSF3iH6P9ex4xh14AWgQJp5Vl8QcdF4WJcP4oZO4EGuFutvBs9luO7ak-tIaoGWsraucJJH7sdMr9DOHm5l7z3fkbJ1Dves4vxdjt4x6Ydh-Ac"
+                  target="_blank"
+                  rel="noopener"
+                  >Run it</a
+                >
+                <a href="https://en.wikipedia.org/wiki/Seashell" target="_blank" rel="noopener"
+                  >About the shape</a
+                >
+              </p>
+            </div>
+          </article>
+          <article class="card" id="g-blue-green-sphere">
+            <img
+              src="../assets/gallery/blue-green-sphere.webp"
+              alt="Blue-green sphere, made of splats"
+              width="256"
+              height="256"
+            />
+            <div class="body">
+              <h5>Blue-green sphere</h5>
+              <p>An RGB gradient moves from deep blue at the bottom to green at the top.</p>
+              <details class="fold program">
+                <summary>Show the program</summary>
+                <pre><code>x = sin(v)cos(u)
+y = cos(v)
+z = sin(v)sin(u)
+u = 0 .. 2pi
+v = 0 .. pi
+r = 0.15+0.25sin(v)
+g = 0.25+0.65(1+cos(v))/2
+b = 0.55+0.4(1-cos(v))/2
+size = 0.035
+count = 6500</code></pre>
+              </details>
+              <p class="card-links">
+                <a
+                  class="button"
+                  href="https://ryanjosephkamp.github.io/splashery/#s=d.dVPbctowEP2VzMkLmSxUBkxbv_Ub2qd28iDkBVSEpUoyhGT8752VgckkEw9jvPc9u2dfoUNAgxScTjuOZxCOHJP1HZoFwUTWmdsfGQ3mar6aVmpaqV9KNeU3U0r9BiExt2gWy2q5rAjZn9G8Ym-7Fg3WvXXZdiDY9lIpT_lfr7MUIfggH0kiQuTEUsr0KfsDCM8SYbvJ8cH4NOkfQDiL3afJUYSXm13exd6jgbqbze7mwQqaq1ikXc9oAEIU9ayqH9VsXo8ZQNgW7Vy0q3pSPY51Hr7MQVgXWy225aSavjUl-8LFqhY1CMb3naBY1UqJNUTWAh3DQHDe7wXrWpv9Nvq-zCjoLYOQd3yQRLrPHgRtDJdEF7mM7qfRjtFUBH4OPvVRhIHAmw2bPI7R71n-ZYcb7RITUo7cbfMOjZqtCCe_XksWNasHwqks6lP_uia0NrIpC2vUIGJK3h0_VLkgHWNSKKwYa7TRh3fea993pjSxFG-jc-Z49T_obSdU-LSrr4SoW9unMcFAyCeb3kfow7gLNavfol4Q9LNNaHDGQEjOmvdYgk_2ApiQTsyhBNa3yGeJDNp2H7osbCgVx7O6CMY7L7S759ViPefChlt8yvoQEpo_TwPB6ANHLeqzPl3HGWw2JdX8GyF650pnrU1ZlzHKCIQowelyfrmPXdYFcI49XxmCBp3veGxeJt6JcznNoidsnN6ORxKi_3tdO05RBzkcDqyFZ9UFkTSN-015QDd0hHu1Xm6-GzyV5brrTK4rqQgtZ21d4aSs3I-VXqGdPd7aPnj5RsrWObxlldTvcvROSD8Mw38"
+                  target="_blank"
+                  rel="noopener"
+                  >Run it</a
+                >
+                <a href="https://en.wikipedia.org/wiki/Sphere" target="_blank" rel="noopener"
+                  >About the shape</a
+                >
+              </p>
+            </div>
+          </article>
+          <article class="card" id="g-striped-klein">
+            <img
+              src="../assets/gallery/striped-klein.webp"
+              alt="Klein bottle color flow, made of splats"
+              width="256"
+              height="256"
+            />
+            <div class="body">
+              <h5>Klein bottle color flow</h5>
+              <p>
+                Alternating bands run around the immersed bottle and make its crossing easy to see.
+              </p>
+              <details class="fold program">
+                <summary>Show the program</summary>
+                <pre><code>x = (2+cos(u/2)sin(v)-sin(u/2)sin(2v))cos(u)
+y = sin(u/2)sin(v)+cos(u/2)sin(2v)
+z = (2+cos(u/2)sin(v)-sin(u/2)sin(2v))sin(u)
+u = 0 .. 2pi
+v = 0 .. 2pi
+hue = 0.5+0.25sin(4v)
+size = 0.04
+count = 8000</code></pre>
+              </details>
+              <p class="card-links">
+                <a
+                  class="button"
+                  href="https://ryanjosephkamp.github.io/splashery/#s=d.jVPbbtswDP2V4vSlQRVPcZKu09u-YXva0AdZZhItiqVJci4t_O8D5SToBQVmGJAokTzk4dELdAhQSMHptKF4gsCeYrK-g5oLmEg6U_s9Q6GW9cN0Jqcz-VNKVf5KSvkLAomohZovZovFTCD7E9QLtrZrodD01mXbQcC2Z6Q8pb-9zgwi4ANvEkeESIkYyvQp-x0EjlC4q--NT3f9l3qSbHe3n0x5uZj1fjIp1xMInBjg1eV-8ia03rPT83_lLDa791CQN1V1UwfL7Lw1Nz3xQbW8l1W95KBFAYlQgMB6XJpxSfZ59JYLCBjfd9zso5SSL0MkzQxhGASc91umpNFmu46-L1QGvSYI5A3tOI_us4eANoZKorNdGP5htCOomQAdg099ZGMQoNWKTB7Z9lvilUe90i6RQMqRunXeQMnqQeDgm4azyGo5CBzKPD_1Xy4FWhvJlLkqObCZknf7DyjnTseYFIp4Row2-vDOu_F9Z0oRC_Y2OmeKF_-dXnesmE-r-ioQdWv7NCYYBPLBpvcRejfOQlbL113PBfTRJiicMAgkZ837XoJP9tywQDoQhRK4vEYeOTJo232osoihII6v72wY7zyr55Ye5k1NRQ3X-JT1LiSo30-DgNE7ipqPT_pwoTPYbEqq-lEgeudKZa1NWRcamQIWSnC6vNLcxy7r0nCOPV0UAoXOdzQWz4x37FxecDkXWDl9VneI_s9l7DhEHVj_FEizzmbnjrho3K7KB3HtTuBWNovVN4OnMlx34eQykplAS1lbVzTJI_cj0gu0s_tr2TvPe6RsncNrVTF-l6N3LPphGP4B"
+                  target="_blank"
+                  rel="noopener"
+                  >Run it</a
+                >
+                <a href="https://en.wikipedia.org/wiki/Klein_bottle" target="_blank" rel="noopener"
+                  >About the shape</a
+                >
+              </p>
+            </div>
+          </article>
+          <article class="card" id="g-plasma-rgb">
+            <img
+              src="../assets/gallery/plasma-rgb.webp"
+              alt="Plasma RGB sheet, made of splats"
+              width="256"
+              height="256"
+            />
+            <div class="body">
+              <h5>Plasma RGB sheet</h5>
+              <p>Three offset waves make a smooth red, green, and blue color field.</p>
+              <details class="fold program">
+                <summary>Show the program</summary>
+                <pre><code>x = u
+y = 0.15sin(u+v)
+z = v
+u = -2pi .. 2pi
+v = -2pi .. 2pi
+r = 0.5+0.45sin(u)
+g = 0.5+0.45sin(v+2)
+b = 0.5+0.45sin(u+v+4)
+size = 0.035
+count = 7000</code></pre>
+              </details>
+              <p class="card-links">
+                <a
+                  class="button"
+                  href="https://ryanjosephkamp.github.io/splashery/#s=d.dVPLbtswEPyVYHJpYVqgbCtpees3tKcWOVDU2mZNiyxJ-ZFA_14sZRuBgwgCJC73NTuzb9AhQCEFp9OW4hkCB4rJ-h5qKWAi6UzdjwyFhVw8zWs5r-UvKVV5Kynlbwgkog5quapXq1og-zPUG3a276DQDtZl20PAdpdKeU7_Bp25iIAP_JM4IkRKxKXMkLLfQ-AEhQECZyjIqm6S7b8Ms8NXCLxC4QCBAQrzRbAPVfWwCJYBfLBsB4ICBGLJ08xktZpycabNnfEwW7C5vfedHWYrvkj2lcqdXDYQMH7ouelnKSXfhkiakWIcBZz3O4bWarPbRD-UkQS9IQjkLe05kR6yh4A2hkqiy7lM6qfRjqBqAToFn4bIh1GA1msyeZqa3xF_mbK1dokEUo7Ub_IWSlZPAkfftpxFVs0ocCy8fOrfNAKdjWQKP0qOfEzJu8OHKhekU0wKRQRTjS76cOfd-qE3pYkVexudM8Wr_15vemb-066eBaLu7JCmBKNAPtp0H6H3Exeyat6jXgrok01QOGMUSM6aeyzBJ3sBLJCORKEENrfIE0cGbfsPXRY1lIrTFl0OxjvPcnukp2W7oKKGW3zKeh8S1J-XUcDoPUXN5rM-XscZbDYl1eKbQPTOlc46m7IuY-QRsFCC02Xb8hD7rAvgHAe6KgQKve9pap4n3rNz2cRiF1g7vZmWI0T_90o7jlEHXhgKpFln9QURN43HdXkgbugEHmW7Wn83eCnkuutMrpTUAh1lbV3RJFPup0pv0M4ebm3vPf8jZesc3quK6_c5eseiH8fxPw"
+                  target="_blank"
+                  rel="noopener"
+                  >Run it</a
+                >
+                <a
+                  href="https://en.wikipedia.org/wiki/RGB_color_model"
+                  target="_blank"
+                  rel="noopener"
+                  >About the shape</a
+                >
+              </p>
+            </div>
+          </article>
+          <article class="card" id="g-longitude-stripes">
+            <img
+              src="../assets/gallery/longitude-stripes.webp"
+              alt="Longitude stripes, made of splats"
+              width="256"
+              height="256"
+            />
+            <div class="body">
+              <h5>Longitude stripes</h5>
+              <p>A sphere is divided into twelve clean color wedges by its longitude.</p>
+              <details class="fold program">
+                <summary>Show the program</summary>
+                <pre><code>x = sin(v)cos(u)
+y = cos(v)
+z = sin(v)sin(u)
+u = 0 .. 2pi
+v = 0 .. pi
+hue = floor(12u/(2pi))/12
+size = 0.035
+count = 7000</code></pre>
+              </details>
+              <p class="card-links">
+                <a
+                  class="button"
+                  href="https://ryanjosephkamp.github.io/splashery/#s=d.dVPLbtswEPyVYHKxAcahZDtpees3tKcWOVDUymZNiyxJ-ZFA_14sZRtBggiCyBX3NTvDN-gQoJCC02lL8QyBA8VkfQ-1FDCRdKb2R4ZCLeunh0o-VPKXlKq8CynlbwgkohZquapWq0og-zPUG3a2b6HQDNZl20PAtpdK-YH-DTpzEQEfeJM4IkRKxKXMkLLfQ-DEEbafHebGp9kwh8CZz32aHdh4vZ3zt5wPUJB3i8VdHSyjuZrF2g4Ehc55H2dVPTzO6mDn88eqhkCEAgQ209JMS7KvHCEXcrmGgPFDzw0-Syn5NETSjArjKOC83zGMRpvdJvqhwA96QxDIW9pzIj1kDwFtDJVEF7tM5afRjqAqAToFn4bIxihAXUcmTxPyO-KV6em0SySQcqR-k7dQcvEkcPRNw1nkYj0KHAsHX_qv1wKtjWQKF0qObKbk3eFTlQvSKSaFQvhUo40-fPBu_NCb0sSKvY3OmeLVf683PbP8ZVfPAlG3dkhTglEgH236GKH3ExdysX6PeimgTzZB4YxRIDlrPmIJPtkLYIF0JAolcH2LPHFk0Lb_1GVRQ6k43ZiLYbzzLJ97elo2NRU13OJT1vuQoP68jAJG7ylq_n3Wx-s4g82mpKq_CUTvXOmstSnrMkYeAQslOF1uVh5in3UBnONAV4VAofc9Tc3zxHt2Lreu_BfonL7IO0T_90o7jlEHvgAUSLPOqgsibhr3XXkgbugE7mWz6r4bvBRy3XUmV0oqgZaytq5okin3U6U3aGcPt7b3nvdI2TqH96ri-n2O3rHox3H8Dw"
+                  target="_blank"
+                  rel="noopener"
+                  >Run it</a
+                >
+                <a href="https://en.wikipedia.org/wiki/Sphere" target="_blank" rel="noopener"
+                  >About the shape</a
+                >
+              </p>
+            </div>
+          </article>
+          <article class="card" id="g-rainbow-wave">
+            <img
+              src="../assets/gallery/rainbow-wave.webp"
+              alt="Rainbow wave, made of splats"
+              width="256"
+              height="256"
+            />
+            <div class="body">
+              <h5>Rainbow wave</h5>
+              <p>A moving ripple shifts both the sheet height and its rainbow colors.</p>
+              <details class="fold program">
+                <summary>Show the program</summary>
+                <pre><code>x = u
+y = 0.35sin(2u+v-t)
+z = v
+u = -3 .. 3
+v = -3 .. 3
+hue = 0.5+0.2sin(2u+v-t)
+size = 0.04
+count = 7000</code></pre>
+              </details>
+              <p class="card-links">
+                <a
+                  class="button"
+                  href="https://ryanjosephkamp.github.io/splashery/#s=d.dVPLbtswEPyVYHJpkbVAv5KWt35De2qRA02tbda0yJKUHwn078VSdpAHYgigVt7ZnZ0dPsPECI0cvclbTmcQDpyyCx30nGATm8LtjwKNmZrdT6ZqMlW_lNL1aZRSv0HIzC30fDFdLKaEEs7Qz9i5roXGqne-uA4E1146lQn_602RJoQQ5SULIibOLK1sn0vYg3CCRg_CGRqqmS-z677M-rvDpHwF4QkaBxB6aEzmN01zMxf-b6JtzxW7vFPN7C08QQOEzXisxiO7pxGgFiDY0HdC6EEpJX_GxEamwDAQfAg7ob0ydrdJoa_jRrNhEMqW91LH9CWAYKzlWugSVxV-WuMZekrgUwy5TxIMBF6v2ZZRkbBjOWUda-MzE3JJ3G3KFlo194RjWK2kimqWA-FYNf80f7kktC6xrdprNUiYc_CHD10uk46YHOuCxx5tCvFd9ir0na0kFpJtTSmcrvl7s-lkq5-yeiAk07o-jwUGQjm6_B5h9uMuVLN8PfWcYE4uQ-OMgZC9s-9niSG7y8CEfGSOFbh8QZ4EGY3rPrCsZqgdxxtyCWzwQdxzy_fz1YyrG17wuZh9zNB_HgeCNXtORj6fzfEqZ3TF1lKzb4QUvK_MWpeLqTKKBGKU6E29SaVPXTF14JJ6vjoEGl3oeCQvineSXG9Z_U5Ye3Nxd0zh73XtOCYTxf8c2YjPppeJhDRu1_UHepmOcKtWi_V3i8e6XH_V5LqSKaHlYpyvnpSVh7HTM4x3hxfa-yDvyMV5j9eukv5dScGL6Ydh-A8"
+                  target="_blank"
+                  rel="noopener"
+                  >Run it</a
+                >
+                <a href="https://en.wikipedia.org/wiki/Wave" target="_blank" rel="noopener"
+                  >About the shape</a
+                >
+              </p>
+            </div>
+          </article>
+        </div>
+      </details>
+      <details class="fold gallery-group" id="gallery-math-showpieces">
+        <summary>Math showpieces (10 programs)</summary>
+        <div class="gallery gallery-grid">
+          <article class="card" id="g-thermal-spiral">
+            <img
+              src="../assets/gallery/thermal-spiral.webp"
+              alt="Thermal spiral, made of splats"
+              width="256"
+              height="256"
+            />
+            <div class="body">
+              <h5>Thermal spiral</h5>
+              <p>Warm colors gather near the core and cool colors trail along the spiral arms.</p>
+              <details class="fold program">
+                <summary>Show the program</summary>
+                <pre><code>x = u cos(v+5u)
+y = 0.12sin(13v+4u)
+z = u sin(v+5u)
+u = 0.02 .. 1
+v = 0 .. 2
+hue = 0.02+0.55u
+size = 0.018
+count = 9000
+spread = random</code></pre>
+              </details>
+              <p class="card-links">
+                <a
+                  class="button"
+                  href="https://ryanjosephkamp.github.io/splashery/#s=d.dVPbbtwgEP2V6OQlVYiF95ImvPUb2qdWecB4dpcuNhTwXhL536vB3lWUKJYlGJjbmXN4gw4BCik4nXYUzxA4UEzW91BLARNJZ2p_ZCgs5OLxoZYPtfwlpSp_JaX8DYFE1EItV_VqVQtkf4Z6w972LRSawbpsewjYdq6UH-jfoDMXEfCBN4kjQqREXMoMKfsOAicoDDfGp7vD_Xr4BoEzFGRVL5Lt7-rl4X5VTl-LH59d_IbiJxc3VXVTMyq22VhAYDfQfH0vq_V6gECEAgS209JMS7Kvs2P9BAHjh57be5ZS8m2IpBlT1H3rO4yjgPN-z1Aabfbb6IcygqC3BIG8o47T6SF7CGhjqKSb7TKZn0Y7gqoF6BR8GiIbowBtNmTyNCW_J16Zoo12iQRSjtRv8w5KVo8CR980nEVW61HgWHj40n-9FmhtJFP4UHJkMyXvDp-qzHinmBQK6VONNvrwwbvxQ29KEyv2Njpnihf_Tm97ZvrLrr4LRN3aIU0JRoF8tOljhO4mRmS1fo96KaBPNkHhjFEgOWs-Ygk-2RmwQDoShRK4vkaeODJo23_qsmiiVJxezWwY7zyL6JYel82Cihqu8SnrLiSoPy-jgNEdRc3HZ328jDPYbEqqxZNA9M6Vzlqbsi5j5BGwUILT5XXlIfZZF8A5DnRRCBR639PUPE-8Z-fy8sq5wMbpWeQh-r8X2nGMOvAzoECadVbPiLhp3G7KB3FFJ3Arm9Xm2eClkOsuM7lQUgu0lLV1RZNMuZ8qvUE7e7i23XneI2XrHN6riuv3OXrHoh_H8T8"
+                  target="_blank"
+                  rel="noopener"
+                  >Run it</a
+                >
+                <a href="https://en.wikipedia.org/wiki/Spiral" target="_blank" rel="noopener"
+                  >About the shape</a
+                >
+              </p>
+            </div>
+          </article>
+          <article class="card" id="g-hopf-link-sample">
+            <img
+              src="../assets/gallery/hopf-link-sample.webp"
+              alt="Hopf link sample, made of splats"
+              width="256"
+              height="256"
+            />
+            <div class="body">
+              <h5>Hopf link sample</h5>
+              <p>
+                A sampled family of linked circles shows the shape of Hopf fibers after projection.
+              </p>
+              <details class="fold program">
+                <summary>Show the program</summary>
+                <pre><code>x = 0.707cos(u)/(1-0.707cos(u+v))
+y = 0.707sin(u)/(1-0.707cos(u+v))
+z = 0.707sin(u+v)/(1-0.707cos(u+v))
+u = 0 .. 2pi
+v = 0 .. 2pi
+hue = v/(2pi)
+size = 0.035
+count = 7000</code></pre>
+              </details>
+              <p class="card-links">
+                <a
+                  class="button"
+                  href="https://ryanjosephkamp.github.io/splashery/#s=d.dVPLbtswEPyVYHJJENqh_Ihb3voN7alFDhS1tlnTIktSfiTQvxdL2W7iNIYAauXZx8wOX6FDgEIKTqc1xSMEdhST9S3UVMBE0pmabxkKEzl5GlVyVMkfUqryjKWUPyGQiBqo6ayazSqB7I9Qr9jYtoFC3VmXbQsB25w65RH96XTmJgI-8EvijBApEbcyXcp-C4EDFOR4IRfGp7vu_vGuGv0LH3b39xA4njHJtp9hXt5hHnb_R3WMuhmPbybBshDvw3VHUNg93k2CZXSEAgRWw1EPR7IvVHrJ6RwCxnctE1pIKfnfEEmzCuh7Aef9hmnX2mxW0XdFrqBXBIG8pi0X0l32ENDGUCl0iouK3412BFUJ0CH41EUOegFaLsnkQVG_IT55nUvtEgmkHKld5TWUHD8J7H1dcxU5nvcC-7KzT_HzuUBjI5myOyV7DlPybvehy4npkJNCMcjQo4k-XKFr37WmDDFjtNE5Uzzjt3rVsis-nWohEHVjuzQU6AXy3qbrDL0ddiHH87espwL6YBMUjugFkrPmmkvwyZ4IC6Q9USiJ80vmgTODtu2HKYsbSsfhhp0C451n-9zS07SeUHHDJT9lvQ0J6tdzL2D0lqLmz0e9P8sZbDal1OSLQPTOlckam7IuMrIEbJTgdLmJuYtt1oVwjh2dHQKF1rc0DM-Ktwwut7R8F1g6fbJ3iP73ee3YRx34AlAgzT6rTox4aNwuyw_iwk7gVtaz5VeD57Jcd9bkvJJKoKGsrSue5JX7odMrtLO7y9hbz-9I2TqHt67i_m2O3rHp-77_Cw"
+                  target="_blank"
+                  rel="noopener"
+                  >Run it</a
+                >
+                <a
+                  href="https://en.wikipedia.org/wiki/Hopf_fibration"
+                  target="_blank"
+                  rel="noopener"
+                  >About the shape</a
+                >
+              </p>
+            </div>
+          </article>
+          <article class="card" id="g-fourier-epicycle">
+            <img
+              src="../assets/gallery/fourier-epicycle.webp"
+              alt="Fourier epicycle curve, made of splats"
+              width="256"
+              height="256"
+            />
+            <div class="body">
+              <h5>Fourier epicycle curve</h5>
+              <p>Three rotating harmonics add into one closed curve with a small bead radius.</p>
+              <details class="fold program">
+                <summary>Show the program</summary>
+                <pre><code>x = cos(u)+0.45cos(3u)+0.2cos(5u)
+y = 0.18sin(7u)
+z = sin(u)+0.45sin(3u)+0.2sin(5u)
+u = 0 .. 2pi
+v = 0 .. 1
+hue = u/(2pi)
+size = 0.04
+count = 3500</code></pre>
+              </details>
+              <p class="card-links">
+                <a
+                  class="button"
+                  href="https://ryanjosephkamp.github.io/splashery/#s=d.dVPBbtswDP2V4vXSYqonJ3Hb6bZv2E4bepBlJtGiWJokN0kL__tA2S6GFg0MiFT4SD7y6RU6BCik4HTaU7xA4Jlisr6HWguYSDpT9z1DYSVX93e1vKvlTylV-Sop5S8IJKIOar2pN5taIPsL1CsOtu-g0A7WZdtDwHZzpXxHfweduYiAD2wkRoRIibiUGVL2Rwic2fHpZrj9IqtNw-a62Cs2m-EWAhcoyKp-TLa_eSg3L1zH9guKzRnF5oQaGHVVVVerYJn04tYQ2A8EheHrzSpYjo1QgMBuOtrpSPaFSmW5gYDxQ8-drxsp-c8QSTNdjKOA8_7A_FptDrvohzKXoHcEgbynI-fRQ_YQ0MZQSTT7ZVw_jHYEVQvQOfg0RHZGAdpuyeRpdP5AfPLettolEkg5Ur_LeyhZ3QucfNtyFlk1o8CpLOfT-KYR6GwkU5ak5MhuSt49f6gyM50wKRQlTDW66MO76NYPvSlNbDja6JwpLvFHvet5_Z929SAQdWeHNCUYBfLJpvcIfZx2Iavmf9ZrAX22CQoXjALJWfOeS_DJzoQF0okoFGDzhjwzMmjbf-iyiKFUnJ7S7BjvPKvnmu7X7YqKGt7wKetjSFC_n0YBo48UNV9f9GkZZ7DZlFSrR4HonSuddTZlXcbII2ChBKfLk8tD7LMuhHMcaFEIFHrf09Q8T7zn4PIcy73A1ulZ3SH6P8vacYo6sP4pkGad1TMjbhrX2_KDeGMncC3bzfabwVNZrltmsqykFugoa-uKJnnlfqr0Cu3s81vbR882UrbO4X9Vcf0-R-9Y9OM4_gM"
+                  target="_blank"
+                  rel="noopener"
+                  >Run it</a
+                >
+                <a
+                  href="https://en.wikipedia.org/wiki/Fourier_series"
+                  target="_blank"
+                  rel="noopener"
+                  >About the shape</a
+                >
+              </p>
+            </div>
+          </article>
+          <article class="card" id="g-superquadric">
+            <img
+              src="../assets/gallery/superquadric.webp"
+              alt="Superquadric, made of splats"
+              width="256"
+              height="256"
+            />
+            <div class="body">
+              <h5>Superquadric</h5>
+              <p>Fractional powers round the corners of a box-like superquadric.</p>
+              <details class="fold program">
+                <summary>Show the program</summary>
+                <pre><code>x = cos(u)abs(cos(u))^0.6abs(cos(v))^0.6
+y = sin(v)abs(sin(v))^0.6
+z = sin(u)abs(sin(u))^0.6abs(cos(v))^0.6
+u = 0 .. 2pi
+v = 0 .. pi
+hue = v/pi
+size = 0.035
+count = 7000</code></pre>
+              </details>
+              <p class="card-links">
+                <a
+                  class="button"
+                  href="https://ryanjosephkamp.github.io/splashery/#s=d.dVPbbtwgFPyVaPKSSMRlr2l56ze0T61SCeOzu3RZQwHvJZH_vTrYXkUbxbIEA-c6Z3iDDgEKKTiddhQvEDhSTNa3UAsBE0lnar5nKMzlfP00k08z-VNKVf5KSvkLAomogVosZ8vlTCD7C9Qb9rZtoFB31mXbQsA2Y6b8RP86nTmJgA-8SewRIiXiVKZL2R8gcGbg00P3qOv0MOwe_8hqPcHjACFw4eC2fTgW02E33b2Od9317tMwHRTkXVXdzYNlMiZY0K4jKBy_FBChAIHtsNTDkuwrm8hKLlYQML5ruaFnKSXfhkiaWUDfCzjv99x2rc1-G31X6Ap6SxDIOzpwIN1lDwFtDJVAIy4s_jDaEdRMgM7Bpy4y6AVosyGTB0b9nnjlcW60SySQcqR2m3dQsloLnHxdcxRZrXqBU5nZp_arlUBjI5kyOyV7hil5d_yQZex08EmhCGTI0UQfbqxr37WmFLFka6NzpjjZH_S2ZVV8WtWzQNSN7dIQoBfIJ5tuPfRhmIWsVu-7Xgjos01QuKAXSM6a216CT3ZsWCCdiEJxXF09z-wZtG0_VFnUUDIOL2wExjvP8rmn9aKeU1HD1T9lfQgJ6vdLL2D0gaLm44s-TXQGm00JNf8qEL1zpbLGpqwLjUwBCyU4XV5i7mKbdWk4x44mhUCh9S0NxTPjLRuXV1rOBTZOj_IO0f-dxo5T1IEfAAXSrLPZ2BEXjftN-SCu3Qncy3q5-WbwUobrJk6mkcwEGsrauqJJHrkfMr1BO3u8ln3wvEfK1jm8VxXnb3P0jkXf9_1_"
+                  target="_blank"
+                  rel="noopener"
+                  >Run it</a
+                >
+                <a href="https://en.wikipedia.org/wiki/Superquadrics" target="_blank" rel="noopener"
+                  >About the shape</a
+                >
+              </p>
+            </div>
+          </article>
+          <article class="card" id="g-riemann-branch">
+            <img
+              src="../assets/gallery/riemann-branch.webp"
+              alt="Riemann branch look, made of splats"
+              width="256"
+              height="256"
+            />
+            <div class="body">
+              <h5>Riemann branch look</h5>
+              <p>
+                A square-root branch surface spirals through two sheets around its branch point.
+              </p>
+              <details class="fold program">
+                <summary>Show the program</summary>
+                <pre><code>x = sqrt(u)cos(v/2)
+y = sqrt(u)sin(v/2)
+z = 0.12v
+u = 0.03 .. 1
+v = 0 .. 4pi
+hue = v/(4pi)
+size = 0.03
+count = 7000</code></pre>
+              </details>
+              <p class="card-links">
+                <a
+                  class="button"
+                  href="https://ryanjosephkamp.github.io/splashery/#s=d.dVPbbtswDP2V4vSlBdhUzqXd_LZv2J429EGWmUSLYqmSnEsL__tA2emKFg0MSGR4SB7y6BU6BNRIwem05XgG4cAxWd-hXhBMZJ25_ZFRY67mD3eVuqvUL6Xq8s2UUr9BSMwt6sWyWi4rQvZn1K_Y2a5Fjaa3LtsOBNtOlfIdP_c6SxGCD3JJggiRE0sp06fs9yCcBPEc801_a3y6OdzPb0E4__cm2128L6ihZtX8AEJf7mpxNZtdVcJJbDGWwYKw7Rk1Dvc3y2AFGlEDhM14NOOR7AtPaUAwvu-ktUellPwZImvhg2EgOO93QqDRZreJvi_Eg94wCHnLe8mj--xB0MZwSTTZZR4_jXaMuiLwKfjURzEGAq_XbPI4G79jOWUxa-0SE1KO3G3yFrWaPRCOvmkki5qtBsKxTP_L-NWK0NrIpmyhVoOYKXl3-FRlYjpiUiirHmu00YcP0Y3vO1OaWEq00TlzvMTv9aaT_X7Z1SMh6tb2aUwwEPLRpo8IvR93oWar96wXBH2yCTXOGAjJWfORS_DJToQJ6cgcCnD1hjwJMmjbfeqyiKFUHN_KZBjvvKjnmh8WzZyLGt7wKet9SKj_PA0Eo_cctbjP-ngZZ7DZlFTzb4TonSudtTZlXcYoIxChBKfLm8p97LIuhHPs-aIQ1Oh8x2PzMvFOgst7K37C2ulJ3SH6v5e14xh1EP1zYC06qyZG0jSu1-UHemNHuFbNcv3d4Kks111mcllJRWg5a-uKJmXlfqz0Cu3s4a3tvZc7UrbO4b2qpH6Xo3ci-mEY_gE"
+                  target="_blank"
+                  rel="noopener"
+                  >Run it</a
+                >
+                <a
+                  href="https://en.wikipedia.org/wiki/Riemann_surface"
+                  target="_blank"
+                  rel="noopener"
+                  >About the shape</a
+                >
+              </p>
+            </div>
+          </article>
+          <article class="card" id="g-saddle-monkey">
+            <img
+              src="../assets/gallery/saddle-monkey.webp"
+              alt="Monkey saddle, made of splats"
+              width="256"
+              height="256"
+            />
+            <div class="body">
+              <h5>Monkey saddle</h5>
+              <p>A cubic height field has three valleys meeting at one central saddle point.</p>
+              <details class="fold program">
+                <summary>Show the program</summary>
+                <pre><code>x = u
+y = u^3-3uv^2
+z = v
+u = -1.3 .. 1.3
+v = -1.3 .. 1.3
+hue = 0.55+0.1sin(3u)
+size = 0.035
+count = 6500</code></pre>
+              </details>
+              <p class="card-links">
+                <a
+                  class="button"
+                  href="https://ryanjosephkamp.github.io/splashery/#s=d.dVPLbtswEPyVYHJp0bVAWZbb8tZvaE8tEoCi1jZrWmRJyo8E-veClB0ECSIIoEjtY2Z2-AzlPSSityruOFxAOHKIxg2QDUEHVon7HwkSS7FcL2qxqMUvIWR5KyHEbxAicw_ZrOrVqiYkd4F8xt4MPSS60dhkBhBMf-2UFvxvVCk3ITifP2LO8IEj51Z6jMkdQDhDYgThktfHZtGMx8clCE-QOIIwQmJRV81dVd3VVZPRvzvZjQwJUbXtF1HV0QyfmvEzCAESIGznpZuXaJ7maNG0IGg3DhnQuhUi__WBVWaBaSJY5_YZdqf0fhvcWOh6tWUQ0o4PuZAakwNBac2l0HVfVPiplWXImsBn7-IY8mYi8GbDOs2KuD3nNY9jo2xkQkyBh23aQYpqTTi5rstVRNVOhFPR_MP4tiX0JrAu2ksx5W2Mzh7fdbkynXOiLwOee_TB-TfRnRsHXUCscrRWKXG4xR_UdshT_RDVV0JQvRnjXGAipJOJbzPUYZ6FqNrXrBuCOpsIiQsmQrRGv-XiXTRXwoR4YvYlsX3JPOdMr8zwDmVxQ-k435DrRjvrsn3ued10Sy5ueMmPSR18hPzzMBG0OnBQ-fiiTjc5vUm6lFp-IwRnbUHWm5hUkTFLkI3irSo3KY1hSKoQTmHkm0MgMbiBZ_BZ8SEHl1tWzgkbq6729sH9vY0dp6B8vgDsWWWf1VdGGTTuN-UBvbAj3Itutfmu8VCGa2-a3EZSE3pOytjiyTxyN3d6hrLm-AL74PI3YjLW4rWrcv8hBWez6adp-g8"
+                  target="_blank"
+                  rel="noopener"
+                  >Run it</a
+                >
+                <a href="https://en.wikipedia.org/wiki/Monkey_saddle" target="_blank" rel="noopener"
+                  >About the shape</a
+                >
+              </p>
+            </div>
+          </article>
+          <article class="card" id="g-spherical-harmonic">
+            <img
+              src="../assets/gallery/spherical-harmonic.webp"
+              alt="Spherical harmonic lobes, made of splats"
+              width="256"
+              height="256"
+            />
+            <div class="body">
+              <h5>Spherical harmonic lobes</h5>
+              <p>
+                A spherical-harmonic-like radial formula gives the sphere four raised and lowered
+                lobes.
+              </p>
+              <details class="fold program">
+                <summary>Show the program</summary>
+                <pre><code>x = (1+0.3sin(v)^2cos(4u))sin(v)cos(u)
+y = (1+0.3sin(v)^2cos(4u))cos(v)
+z = (1+0.3sin(v)^2cos(4u))sin(v)sin(u)
+u = 0 .. 2pi
+v = 0 .. pi
+hue = 0.55+0.15cos(4u)
+size = 0.035
+count = 7000</code></pre>
+              </details>
+              <p class="card-links">
+                <a
+                  class="button"
+                  href="https://ryanjosephkamp.github.io/splashery/#s=d.hVNdb9sgFP0r1elLo1ILJ3G78bbfsD1t6iSCbxIWYhjgfLTyf58udqKqVTXLMhx8P889vEKHAIUUnE5bimcIHCgm6zuohYCJpDO13zIU5nL--FDLh1r-kFKVt5JS_oRAImqhFst6uawFsj9DvWJnuxYKq966bDsI2HbKlB_ob68zJxHwgTeJPUKkRJzK9Cn7PQROULir72W1SLa7O8x-z41Pd8t-Nhsxo34GgfOnhrwe2OTlP7H4W2L1UJA3VXUzD5b5uMCCtj0xrprmXlZ1M4WAQIQCBDbjshqXZF9Gc7loIGB833F_T1JK_hsiaSYFwyDgvN8xCyttdpvo-8Je0BuCQN7SngPpPnsIaGOoBJpwIfW70Y6gagE6BZ_6yGAQoPWaTB4J9jvilae71i6RQMqRuk3eQsnqUeDoVyuOIqtmEDiWEX5q3zQCrY1kyiiVHBim5N3hQ5ap09EnhaKXMUcbfXhnvfJ9Z0oRS7Y2OmeKF_u93nQskk-rehKIurV9GgMMAvlo03sPvR9nIavmbdcLAX2yCQpnDALJWfO-l-CTnRoWSEeiUBybq-eJPYO23YcqixpKxvHCTcB451k-t_S4WM2pqOHqn7LehwT163kQMHpPUfPxWR8vdAabTQk1_yIQvXOlstamrAuNTAELJThdLmbuY5d1aTjHni4KgULnOxqLZ8Y7Ni6XtpwLrJ2e5B2i_3MZO45RB74AFEizzuqpIy4at-vyQFy7E7iVq-X6q8FzGa67cHIZSS3QUtbWFU3yyP2Y6RXa2cO17L3nPVK2zuGtqjh_l6N3LPphGP4B"
+                  target="_blank"
+                  rel="noopener"
+                  >Run it</a
+                >
+                <a
+                  href="https://en.wikipedia.org/wiki/Spherical_harmonics"
+                  target="_blank"
+                  rel="noopener"
+                  >About the shape</a
+                >
+              </p>
+            </div>
+          </article>
+          <article class="card" id="g-lemniscate-surface">
+            <img
+              src="../assets/gallery/lemniscate-surface.webp"
+              alt="Lemniscate tube, made of splats"
+              width="256"
+              height="256"
+            />
+            <div class="body">
+              <h5>Lemniscate tube</h5>
+              <p>A tube wraps around a sideways figure eight with a subtle vertical wave.</p>
+              <details class="fold program">
+                <summary>Show the program</summary>
+                <pre><code>x = cos(u)/(1+sin(u)^2)
+y = 0.16sin(3u)
+z = sin(u)cos(u)/(1+sin(u)^2)
+u = 0 .. 2pi
+v = 0 .. 1
+hue = u/(2pi)
+size = 0.05
+count = 3000</code></pre>
+              </details>
+              <p class="card-links">
+                <a
+                  class="button"
+                  href="https://ryanjosephkamp.github.io/splashery/#s=d.dVPZbtswEPyVYPLioIxD-WrLt35D-9QiBShqbbOmRZZHbCfQvxdL2UaQNIIAald7zc7wBToEKKTgdNpSPEHgiWKyvoeaC5hIOlP3LUNhJmer-0beN_KHlKq-UynlTwgkog5qvmgWi0Yg-xPUC3a276DQFuuy7SFgu3OnfE9_i87cRMAH_kicESIl4lampOz3EDiy4dOk3D1Mmk_J9pNy93t2B4ETFOS0WbFvXtjzzNVrxP8zCmfcTKc3s2AZ5sVsILAtBIXyMJkFy7ERChDYjEc7Hsk-U-0qlxAwvvQ861xKyT9DJM0AMQwCzvsdI2q12W2iL3UTQW8IAnlLe66jS_YQ0MZQLXS264K-G-0IqhGgY_CpRDYGAVqvyeRxWX5HfDJTa-0SCaQcqd_kLZScrgQOvm25ipwuB4FDpePD-OVSoLORTKVFyYHNlLx7etfljHTMSaFyP_boog9voltfelOHWHC00TlTvMTv9aZnwj-c6rNA1J0taSwwCOSDTW8z9H7kQk6Xr1HPBfTRJiicMAgkZ81bLMEnewYskA5EoSYur5lHzgza9u-mrGKoHcfLczaMd57Vc0ureTujqoZrfsp6HxLUr8dBwOg9Rc3ukz5c1hlsNrXU7ItA9M7VyTqbsq5r5BWwUILT9ZLlEvusK-AcC10UAoXe9zQOzxvvObhewOoXWDt9VneI_s-FdhyiDqx_CqRZZ80ZEQ-N23V9IK7oBG5lu1h_NXis5LrLTi6UNAIdZW1d1SRT7sdOL9DOPl3H3nv-RsrWObxWFffvc_SORT8Mwz8"
+                  target="_blank"
+                  rel="noopener"
+                  >Run it</a
+                >
+                <a
+                  href="https://en.wikipedia.org/wiki/Lemniscate_of_Bernoulli"
+                  target="_blank"
+                  rel="noopener"
+                  >About the shape</a
+                >
+              </p>
+            </div>
+          </article>
+          <article class="card" id="g-gyroid-look">
+            <img
+              src="../assets/gallery/gyroid-look.webp"
+              alt="Gyroid-like sheet, made of splats"
+              width="256"
+              height="256"
+            />
+            <div class="body">
+              <h5>Gyroid-like sheet</h5>
+              <p>
+                A periodic height graph borrows the repeating rhythm of a gyroid while staying open.
+              </p>
+              <details class="fold program">
+                <summary>Show the program</summary>
+                <pre><code>x = u
+y = 0.2(sin(u)cos(v)+sin(v)cos(u))
+z = v
+u = -pi .. pi
+v = -pi .. pi
+hue = 0.55+0.15sin(u+v)
+size = 0.035
+count = 7000</code></pre>
+              </details>
+              <p class="card-links">
+                <a
+                  class="button"
+                  href="https://ryanjosephkamp.github.io/splashery/#s=d.dVPLbtswEPyVYHKJEVqgbCtpees3tKcWOVDU2mZNiyxJ-ZFA_14sZRtBgggCyJX2NTuzb9AhQCEFp9OW4hkCB4rJ-h5qKWAi6UzdjwyFhVw8zWs5r-UvKVV5Kynlbwgkog5quapXq1og-zPUG3a276DQDtZl20PAdpdKeU7_Bp25iIAPfEkcESIl4lJmSNnvIXCCwgCBMxRktXhItn8YZsanh8PskY1DMYbZDAKvUDhAYIDCPNi7qroLlgF9sLcDlXRN8yiruik5Hw-cIUIBApvpaKcj2dfJXy4bCBg_9Nzjs5SS_4ZImoFhHAWc9ztG0mqz20Q_lAkEvSEI5C3tOZEesoeANoZKootdBvPTaEdQtQCdgk9DZGMUoPWaTJ6G5HfEJzO01i6RQMqR-k3eQsnqSeDo25azyKoZBY6Fhi_9m0ags5FMoUPJkc2UvDt8qnJBOsWkUDifanTRhw_erR96U5pYsbfROVO8-u_1pmeiv-zqWSDqzg5pSjAK5KNNHyP0fuJCVs171EsBfbIJCmeMAslZ8xFL8MleAAukI1Eogc0t8sSRQdv-U5dFDaXitDQXw3jnWT739LRsF1TUcItPWe9DgvrzMgoYvaeo-fNZH6_jDDabkmrxTSB650pnnU1ZlzHyCFgowemyXHmIfdYFcI4DXRUChd73NDXPE-_ZuSxe-S6wdvoi7xD93yvtOEYdeAEokGad1RdE3DTu1-WBuKETuJftav3d4KWQ664zuVJSC3SUtXVFk0y5nyq9QTt7uLW993xHytY5vFcV1-9z9I5FP47jfw"
+                  target="_blank"
+                  rel="noopener"
+                  >Run it</a
+                >
+                <a href="https://en.wikipedia.org/wiki/Gyroid" target="_blank" rel="noopener"
+                  >About the shape</a
+                >
+              </p>
+            </div>
+          </article>
+          <article class="card" id="g-torus-knot-family">
+            <img
+              src="../assets/gallery/torus-knot-family.webp"
+              alt="Torus knot family, made of splats"
+              width="256"
+              height="256"
+            />
+            <div class="body">
+              <h5>Torus knot family</h5>
+              <p>A (2,3) torus knot winds twice around the ring and three times around its tube.</p>
+              <details class="fold program">
+                <summary>Show the program</summary>
+                <pre><code>x = (1+0.35cos(3u))cos(2u)
+y = 0.35sin(3u)
+z = (1+0.35cos(3u))sin(2u)
+u = 0 .. 2pi
+v = 0 .. 1
+hue = u/(2pi)
+size = 0.05
+count = 3500</code></pre>
+              </details>
+              <p class="card-links">
+                <a
+                  class="button"
+                  href="https://ryanjosephkamp.github.io/splashery/#s=d.dVPLbtswEPyVYHJJ0I1L2Vba8tZvaE8tcqCptc2aFlmSiu0E-vdiKdsoEkQQQC65r9kZvsLECI0cvclbTicQnjllF3roBcEmNoW77wUaczV_fGjUQ6N-KqXrP1NK_QIhM3fQi2WzXDaEEk7Qr9i5voPGanC-uB4E150rlQf-O5giRQghyiZLREycWUrZIZewB-EIjbvmk5otWhvy3WK4v5d1PtyDcIKG3GTXyw0IL-_d5XJyH8T9Zja7mUcnMC9mA8J2YGgMn-_m0YlvggYIm2lZTUt2L1xLqhYEG4Zeel20SsllTGwEIMaR4EPYCaKVsbtNCkOdRDQbBqFseS95zFACCMZaronOdh3QD2s8QzcEPsaQhyTGSOD1mm2ZhhV2LKswtTY-MyGXxP2mbKHV7JFwCKuVZFGzdiQcKh0f-rctoXOJbaVFq1HMnIN_flfljHSKybFyP9XoUohvvFdh6G1tYine1pTC6eK_N5teCP-wqy-EZDo35CnBSCgHl99GmP3EhZq1_6NeEMzRZWicMBKyd_YtlhiyOwMm5ANzrIHtNfIokdG4_l2XVQy14vR4zoYNPoh6bvlxsZpzVcM1Phezjxn699NIsGbPycjxyRwu44yu2Jpq_pWQgve1s87lYuoYZQQilOhNfWRlSH0xFXBJA18UAo0-9Dw1LxPvxbk-wHpOWHtzVndM4c-FdhySiaJ_jmxEZ80ZkTSN23X9QFd0hFu1Wq6_WTxVcv1lJhdKGkLHxThfNSmUh6nSK4x3z9e290H2yMV5j_9VJfX7koIX0Y_j-A8"
+                  target="_blank"
+                  rel="noopener"
+                  >Run it</a
+                >
+                <a href="https://en.wikipedia.org/wiki/Torus_knot" target="_blank" rel="noopener"
+                  >About the shape</a
+                >
+              </p>
+            </div>
+          </article>
+        </div>
+      </details>
+      <!-- GALLERY:END -->
       <div class="tip">
         <p>
           <b>Things to try.</b> Change a number and see what moves. Swap <code>cos</code> and
