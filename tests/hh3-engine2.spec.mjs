@@ -142,9 +142,13 @@ test("strings: a drag across the guitar's strings plucks each one, in turn", asy
   });
   await handsOn(page);
   // From just outside the low string to just past the high one, across
-  // their middles.
+  // their middles. The view holds still first (Fix11): the turntable starts
+  // after 2.5 s without a touch, and on a busy machine it turned the guitar
+  // under the drag, so the finger ended short of the high string.
   const px = await page.evaluate(() => {
     const { player } = window.__splashery;
+    player.camera.turntable = false;
+    player.camera.setState(player.camera.getState(), { snap: true });
     const L = window.__strings;
     const mid = (s, f) => s.a.map((v, i) => v + (s.b[i] - v) * f);
     const p0 = mid(L[0], 0.25);
