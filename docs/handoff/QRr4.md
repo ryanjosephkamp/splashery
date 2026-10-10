@@ -90,6 +90,12 @@ replace the prefix and lane record with yours).
 
 ## State
 
+**Merged, October 10, 2026.** Both parts are on main in batch 5 (#496, main at ad961bec): the engine
+PRs #472 (the stage cover) and #487 (the Share tab's "QR code" button, labs), and the lane PRs #476
+(no size flash, the halftone Picture QR, crisp barcodes) and #489 (the scene as a QR code, behind
+labs). The owner marked every qr4 card good, `qr4-2-share-qr` too. The lane is done unless the owner
+asks for more.
+
 - Engine (`claude/lane-qr-r4-engine`): `Stage.cover()` / `uncover()` put a still of the current
   frame over the canvas while `app.withCapture` renders at a fixed size; `withCapture` covers first
   and uncovers last. tests/qr4-flash.spec.mjs fails without it (reproduced) and passes with it.
@@ -172,10 +178,11 @@ Branches `claude/lane-qr-r4-engine-2` (PR #487: the labs "QR code" button in the
 
 ## For the Operator
 
-- Engine PR #472: now two commits (the cover, and its label). Of the specs run with it, the only
-  failures (`qrs-toys:37`, `vw:70`, `vw:103`) fail the same way on main.
-- Lane PR #476: the 10 QR spec files pass except `qrs-toys:37` (fails on main too).
-- Please confirm with the owner: AI-made pictures as Picture QR samples. CLAUDE.md's rule names
-  Photo to 3D, Video to 3D and Moving photo to 3D; Picture QR is a Studio toy too, and the owner
-  offered to make AI pictures for it. If not, the four come out in one line
+- All four PRs merged in batch 5 (#496). Before it, with main f177bf68 merged in, every QR spec
+  passed: qr4-craft, qr4-flash, qr4-scan and the qrc specs (24), qr4-flash on the engine branch (2),
+  qr4-2 (3) and qr4-2-engine (2). `qrc-picture`'s browser test fails now and then and passes on a
+  rerun.
+- Still open: please confirm with the owner: AI-made pictures as Picture QR samples. CLAUDE.md's
+  rule names Photo to 3D, Video to 3D and Moving photo to 3D; Picture QR is a Studio toy too, and
+  the owner offered to make AI pictures for it. If not, the four come out in one line
   (src/qr-craft/samples.js).
