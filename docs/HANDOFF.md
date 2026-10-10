@@ -18,7 +18,7 @@ change it.
 (`tools/suite.mjs --gl=llvmpipe --jobs=2 --recheck`), the lanes fix what the batch broke, and the
 batch merges as one PR.
 
-**Main** is at `ad961bec` (batch 5, #496). Merged October 9 and 10:
+**Main** is at batch 6 (#500). Merged October 9 and 10:
 
 - #457: Hands-on H1 and H5 (the Enigma, clothing, the handoffs) and Photo sharp view r3
 - #466: the October 9 walkthrough and manual reviews, triaged into lanes
@@ -31,20 +31,18 @@ batch merges as one PR.
 - #496: QR r4 (no size flash, the halftone Picture QR, crisp barcodes) and part 2 (a scene as a QR
   code, labs), Arcade r3, both parts of Manual r3 (with Codex task 33's program gallery), the crane
   test's fix and six handoffs
-
-**In the batch now:** #500 (batch 6): Kit lab (#484 engine, #486) and Live r9 (#488), all labs, plus
-the Manual r3, Arcade r3 and QR r4 handoffs. Its full suite is running.
+- #500: Kit lab (#484 engine, #486) and Live r9 (#488), all labs, plus three lanes' handoffs
 
 **Lanes running** (rows, sessions and files in WORKSTREAMS.md):
 
 - **Fix11** (Opus): the seven tests that fail on main and the five flaky ones.
-- Live r9 and Kit lab are READY and wait only on batch 6.
 
-**Open with the owner:** the blind Codex bake-off review (32 cards; the models stay hidden until
-every card is marked); Codex task 32 (#479), held for his in-depth review.
+**Open with the owner:** the blind bake-off's second round (the owner runs GPT-6.1 Sol's eight
+entries in Codex; then all 40 entries get new codes on a new blind page, and the models stay hidden
+until he has marked them all); Codex task 32 (#479), held for his in-depth review.
 
-**Next for the Operator:** merge batch 6, then Fix11; the photoreal landmarks lane only where a
-real, cleanly licensed capture exists (docs/audits/photoreal-media-sources-2026-10.md, "Landmarks
+**Next for the Operator:** merge Fix11 after its full suite; the photoreal landmarks lane only where
+a real, cleanly licensed capture exists (docs/audits/photoreal-media-sources-2026-10.md, "Landmarks
 shelf match and honest gaps"); the X-ray car stays on hold (no complete real capture). Pace: about
 three to four workers until the weekly reset.
 
