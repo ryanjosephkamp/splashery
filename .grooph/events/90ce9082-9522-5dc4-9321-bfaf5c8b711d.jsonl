@@ -144,3 +144,10 @@
 {"v":1,"t":"2026-10-10T22:05:58.721Z","harness":"claude-code","event":"session-end","session":"90ce9082-9522-5dc4-9321-bfaf5c8b711d","cwd":"splashery"}
 {"v":1,"t":"2026-10-10T23:02:01.551Z","harness":"claude-code","event":"turn-start","session":"90ce9082-9522-5dc4-9321-bfaf5c8b711d","cwd":"splashery"}
 {"v":1,"t":"2026-10-10T23:02:01.552Z","harness":"claude-code","event":"session-start","session":"90ce9082-9522-5dc4-9321-bfaf5c8b711d","cwd":"splashery"}
+{"v":1,"t":"2026-10-10T23:02:05.695Z","harness":"claude-code","event":"tool","session":"90ce9082-9522-5dc4-9321-bfaf5c8b711d","tool":"ReadNotifications","cwd":"splashery"}
+{"v":1,"t":"2026-10-10T23:02:13.947Z","harness":"claude-code","event":"tool","session":"90ce9082-9522-5dc4-9321-bfaf5c8b711d","tool":"ArtifactData","cwd":"splashery"}
+{"v":1,"t":"2026-10-10T23:02:15.801Z","harness":"claude-code","event":"tool","session":"90ce9082-9522-5dc4-9321-bfaf5c8b711d","tool":"Bash","cwd":"splashery"}
+{"v":1,"t":"2026-10-10T23:02:22.747Z","harness":"claude-code","event":"tool","session":"90ce9082-9522-5dc4-9321-bfaf5c8b711d","tool":"ArtifactData","cwd":"splashery"}
+{"v":1,"t":"2026-10-10T23:02:23.706Z","harness":"claude-code","event":"tool","session":"90ce9082-9522-5dc4-9321-bfaf5c8b711d","tool":"Bash","cwd":"splashery"}
+{"v":1,"t":"2026-10-10T23:02:28.248Z","harness":"claude-code","event":"tool","session":"90ce9082-9522-5dc4-9321-bfaf5c8b711d","tool":"mcp__bf7c680d-5fdc-5ef4-b4a0-abadb619bf0a__send_later","cwd":"splashery"}
+{"v":1,"t":"2026-10-10T23:02:32.414Z","harness":"claude-code","event":"turn-end","session":"90ce9082-9522-5dc4-9321-bfaf5c8b711d","cwd":"splashery"}
