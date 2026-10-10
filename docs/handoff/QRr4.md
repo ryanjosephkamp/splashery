@@ -98,6 +98,21 @@ replace the prefix and lane record with yours).
   test in tests/qr4-craft.spec.mjs). Data Matrix and Aztec draw with it. Code 128 has room for its
   text. Picture QR's weave is a real halftone (picture.js) and its splats one seamless grid.
 
+## Round 2 (the owner's marks of October 9, 2026)
+
+19 of 24 cards good. Fixed, posted as `…-r2` cards (the old ones replaced):
+
+- QR code toy and Picture QR scan their code before it shows: from the build until the automatic
+  check is done, a still of the stage stays up with "Please wait. Scanning code…" on it (engine:
+  `Stage.cover({ label })`, `withCapture(size, fn, { label })`, in #472; toys: `hold()` and
+  `release()` in qr.js and qr-craft.js, 20 and 30 s at most). tests/qr4-scan.spec.mjs.
+- Picture QR clearer: in the color style the forced dots (centers, nudged cells) keep the photo's
+  hue at gray 0.1 or 0.9; the plain patterns stay ink and paper. "Bigger" is the default size.
+- New first samples: four of the owner's AI-made Dot pictures (Felt farm, the default; Glass wave;
+  Mushrooms; Stone arch), labeled AI-made in the picker and the credit; CREDITS.md notes it.
+- tests/qrc-picture.spec.mjs (lane QR craft's) and qr4-craft now check a center's bit by its gray in
+  the color style.
+
 ## Notes
 
 - Picture QR's nudge reads each module as a camera would: the module's 3 × 3 cells weighted by a
@@ -121,12 +136,10 @@ replace the prefix and lane record with yours).
 
 ## For the Operator
 
-- Engine PR #472: of the 17 spec files run with it, 116 of 119 tests passed. The 3 failures
-  (`qrs-toys:37`, `vw:70`, `vw:103`) fail the same way on main, run alone (noted on the PR).
-- Lane PR #476: the 6 QR spec files pass (29 of 29); the QR code toy is pixel-identical to main in
-  four styles (Classic, Dots, Gems, Neon) and builds byte-identical splats.
-- Clips: 24 on Effect review page 2, lane record `QRr4`, cards `qr4-…` (12 before/after pairs). The
-  clip tool doesn't fire the barcodes' or Picture QR's tap (on main too), so the tap clips show the
-  look, not the scan line or the tile turn.
-- Question for the owner, on the Picture QR cards: the after is a true halftone; if it reads less
-  like the photo to him than the before at phone size, the nudge's default can come down.
+- Engine PR #472: now two commits (the cover, and its label). Of the specs run with it, the only
+  failures (`qrs-toys:37`, `vw:70`, `vw:103`) fail the same way on main.
+- Lane PR #476: the 10 QR spec files pass except `qrs-toys:37` (fails on main too).
+- Please confirm with the owner: AI-made pictures as Picture QR samples. CLAUDE.md's rule names
+  Photo to 3D, Video to 3D and Moving photo to 3D; Picture QR is a Studio toy too, and the owner
+  offered to make AI pictures for it. If not, the four come out in one line
+  (src/qr-craft/samples.js).
