@@ -161,6 +161,32 @@ test("crystal lattice: a slice pushed along its plane shears the lattice and rin
 });
 
 // The lane's screenshots, the ✋ switch on (phone and desktop).
+test("periodic table: the shown tile pulls out of its slot, lands on the table, and clicks back in", async ({
+  page,
+}) => {
+  await ready(page, "periodic-table");
+  const T = await page.evaluate(() => window.__splashery.player.proc.ctx.kit.data.tileAt);
+  const state = () => page.evaluate(() => window.__splashery.player.handsOn.joints.state()[0]);
+  expect((await state()).broken).toBe(false);
+  // Pulled out toward the viewer and down: it comes free and falls to the
+  // table under the board.
+  await finger(page, [T, [T[0], T[1], T[2] + 0.6], [T[0] + 0.5, T[1] - 0.5, T[2] + 1.2]], { up: false }); // prettier-ignore
+  await tick(page, 0.3);
+  await letGo(page);
+  await tick(page, 1.5);
+  const out = await state();
+  expect(out.broken).toBe(true);
+  expect(out.pos[1]).toBeLessThan(T[1] - 2);
+  // Brought back to its slot: it glides in and holds fast.
+  await finger(page, [out.pos, [T[0], T[1], T[2] + 0.5], [T[0], T[1], T[2] + 0.05]], { up: false }); // prettier-ignore
+  await tick(page, 0.6);
+  await letGo(page);
+  await tick(page, 1.5);
+  const back = await state();
+  expect(back.broken).toBe(false);
+  expect(Math.hypot(...back.pos.map((v, i) => v - back.home[i]))).toBeLessThan(0.01);
+});
+
 test("screenshots: the crystal-lattice, hands-on", async ({ page }) => {
   for (const [w, h] of [
     [390, 844],
