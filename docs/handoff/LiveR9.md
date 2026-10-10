@@ -106,6 +106,9 @@ keep it honest, each tune named and credited. Branch `claude/lane-live-r9-2`, PR
   - Ode to Joy: Ludwig van Beethoven, from the Ninth Symphony (1824), public domain.
   - Twinkle, Twinkle, Little Star: traditional, the French tune "Ah! vous dirai-je, maman" (1761),
     public domain.
+- PR #505 (`claude/lane-live-r9-2`). Cards on Effect review page 2, group "Built-in tunes":
+  `lv9-2-scale`, `lv9-2-two-voices`, `lv9-2-ode`, `lv9-2-twinkle` (GIFs at 390×844, real speed, each
+  naming Opus 5.5), waiting for the owner's marks.
 - Tests: `tests/lv9-2.spec.mjs` (the tunes' notes, credits and modes in Node; each tune played in
   the browser rings its notes' modes and the beads settle; screenshots `lv9-2-tunes-*`).
 - The clip tool takes over a tune's track as soon as it opens: it played in real time while the
