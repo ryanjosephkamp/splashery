@@ -200,26 +200,30 @@ function snapScanView() {
 }
 
 // Renders the scan view as a square picture of `size` pixels, still.
-async function renderScan(app, size) {
+async function renderScan(app, size, label = "") {
   const player = app.player;
-  return app.withCapture([size, size], async () => {
-    QR.still = true;
-    try {
-      // Lane QR r3: a first frame starts the splat sort for this view (it
-      // finishes on a worker a frame or more later); the second is the
-      // picture. Right after a build, the first frame of the finer edges
-      // was drawn before any sort, gray and hatched.
-      await player.renderAt(player.time, scanPose());
-      await new Promise((r) => setTimeout(r, 80));
-      const shot = await player.renderAt(player.time, scanPose());
-      const out = document.createElement("canvas");
-      out.width = out.height = size;
-      out.getContext("2d").drawImage(shot, 0, 0, size, size);
-      return out;
-    } finally {
-      QR.still = false;
-    }
-  });
+  return app.withCapture(
+    [size, size],
+    async () => {
+      QR.still = true;
+      try {
+        // Lane QR r3: a first frame starts the splat sort for this view (it
+        // finishes on a worker a frame or more later); the second is the
+        // picture. Right after a build, the first frame of the finer edges
+        // was drawn before any sort, gray and hatched.
+        await player.renderAt(player.time, scanPose());
+        await new Promise((r) => setTimeout(r, 80));
+        const shot = await player.renderAt(player.time, scanPose());
+        const out = document.createElement("canvas");
+        out.width = out.height = size;
+        out.getContext("2d").drawImage(shot, 0, 0, size, size);
+        return out;
+      } finally {
+        QR.still = false;
+      }
+    },
+    { label },
+  );
 }
 
 const idle = (app) => {
@@ -249,16 +253,40 @@ export async function checkScan() {
 // code before it).
 const showing = (app) => !!QR.kit && app?.player?.proc?.ctx?.kit === QR.kit;
 
+// Lane QR r4 (the owner's note of October 9, 2026): the code is scanned
+// before it is shown. From the build until its automatic check is done, a
+// still of the stage stays up (the old view) with "Please wait. Scanning
+// code…" on it (Stage.cover); the new code shows once it has been read.
+// Twenty seconds at most, whatever happens.
+export const SCANNING = "Please wait. Scanning code…";
+function hold() {
+  const stage = globalThis.__splashery?.app?.player?.stage;
+  if (typeof window === "undefined" || QR.noAuto || !stage?.cover || QR.holding) return;
+  QR.holding = stage;
+  stage.cover({ label: SCANNING });
+  clearTimeout(QR.holdTimer);
+  QR.holdTimer = setTimeout(release, 20000);
+}
+function release() {
+  clearTimeout(QR.holdTimer);
+  const stage = QR.holding;
+  QR.holding = null;
+  stage?.uncover();
+}
+
 async function runCheck() {
   const app = globalThis.__splashery?.app;
   if (!app?.player || !QR.code) return QR.check;
   for (let i = 0; i < 120 && !showing(app); i++) await new Promise((r) => setTimeout(r, 50));
-  if (!showing(app)) return (QR.check = { ok: false, read: null, text: QR.code.text, error: "The code wasn't on the stage yet." }); // prettier-ignore
+  if (!showing(app)) {
+    release();
+    return (QR.check = { ok: false, read: null, text: QR.code.text, error: "The code wasn't on the stage yet." }); // prettier-ignore
+  }
   await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
   QR.checking = true;
   refreshPanel();
   try {
-    const canvas = await renderScan(app, 720);
+    const canvas = await renderScan(app, 720, SCANNING);
     QR.lastShot = canvas; // for the hook (the lab can see what was read)
     const r = await readCode(canvas);
     const want = QR.code.text;
@@ -269,6 +297,7 @@ async function runCheck() {
     QR.check = { ok: false, read: null, text: QR.code?.text, error: err.message, stack: err.stack };
   } finally {
     QR.checking = false;
+    release();
   }
   refreshPanel();
   return QR.check;
@@ -278,15 +307,17 @@ async function runCheck() {
 function scheduleCheck() {
   clearTimeout(QR.timer);
   QR.check = null;
-  if (typeof window === "undefined" || QR.noAuto) return;
+  if (typeof window === "undefined" || QR.noAuto) return release();
   let tries = 0;
   const go = () => {
     const app = globalThis.__splashery?.app;
     const ready = app?.player?.toyInfo?.id === "qr-code" && document.body.dataset.ready === "true";
     if (ready && showing(app) && idle(app) && !app.busy) return checkScan();
     if (++tries < 40) QR.timer = setTimeout(go, 250);
+    else release();
   };
-  QR.timer = setTimeout(go, 600);
+  // Behind the still, the code needs no time to settle on screen.
+  QR.timer = setTimeout(go, QR.holding ? 150 : 600);
 }
 
 // ---- Exports ------------------------------------------------------------------------------
@@ -934,8 +965,9 @@ export const RECIPES = {
       // (transform) when the scan view needs it.
       QR.kit = k;
       // The check starts once the new code is on the stage (the player's
-      // "toy" event, below).
+      // "toy" event, below); until it is done, the stage shows a still.
       QR.check = null;
+      hold();
       Promise.resolve().then(refreshPanel);
     },
   },
@@ -954,7 +986,10 @@ if (typeof window !== "undefined" && window.__splashery) {
   // After each build of this toy, once it shows: the automatic check.
   window.__splashery.player?.on?.("toy", (info) => {
     if (info?.id === "qr-code") scheduleCheck();
-    else clearTimeout(QR.timer);
+    else {
+      clearTimeout(QR.timer);
+      release();
+    }
   });
   window.__splashery.qr = {
     async set(partial = {}) {

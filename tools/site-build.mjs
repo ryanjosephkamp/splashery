@@ -405,7 +405,7 @@ ${shelfSections(page.shelves, up)}`;
 function changelog(count) {
   let raw = "";
   try {
-    raw = execSync('git log --merges --format="%cs%x1f%s%x1f%b%x1e" -n 600 HEAD', {
+    raw = execSync('git log --merges --format="%cs%x1f%s%x1f%b%x1e" -n 5000 HEAD', {
       cwd: root,
       encoding: "utf8",
       maxBuffer: 64 * 1024 * 1024,

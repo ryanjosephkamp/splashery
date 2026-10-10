@@ -77,7 +77,9 @@ test("Shardball: the ball bounces off the paddle, and a broken brick shatters in
 test("Shardball: the paddle sets the bounce angle; a stone brick takes two hits", async ({
   page,
 }) => {
-  await open(page, "shardball", { level: 2 });
+  // (Arcade r3: the dome in 3D is the default now, and the paddle catches
+  // the ball: the angle is set where it sits when it is launched)
+  await open(page, "shardball", { style: "flat", view: "2d", level: 2 });
   const r = await read(page, () => {
     const g = window.__arc.game;
     window.__arc.wake();
@@ -86,6 +88,8 @@ test("Shardball: the paddle sets the bounce angle; a stone brick takes two hits"
     g.ball.p = [g.paddle.x + 0.12, -0.7, 0];
     g.ball.v = [0, -1.2, 0];
     for (let i = 0; i < 40; i++) g.step(1 / 120, { input: window.__arc.input.frame(), pressed: new Set(), view: 0, demo: false }); // prettier-ignore
+    g.step(1 / 120, { input: window.__arc.input.frame(), pressed: new Set(["fire"]), view: 0, demo: false }); // prettier-ignore
+    for (let i = 0; i < 10; i++) g.step(1 / 120, { input: window.__arc.input.frame(), pressed: new Set(), view: 0, demo: false }); // prettier-ignore
     const right = g.ball.v.slice();
     const stone = g.bricks.find((b) => b.kind === "stone");
     g.hitBrick(stone, [stone.x, stone.y, 0]);
@@ -102,7 +106,7 @@ test("Shardball: the paddle sets the bounce angle; a stone brick takes two hits"
 test("Shardball's dome: in 3D the bricks spread over a dome above the dish, and the ball moves in three dimensions", async ({
   page,
 }) => {
-  await open(page, "shardball", { style: "dome" });
+  await open(page, "shardball", { style: "dome", view: "2d" });
   await page.evaluate(() => {
     window.__arc.wake();
     window.__arc.autopilot = true;
@@ -273,7 +277,7 @@ test("Strata: a full layer crumbles into pieces and the stones above drop into i
     return { layers: g.layers, shards: g.shards.length, fell: above.cell[1], score: g.score };
   });
   expect(r.layers).toBe(1);
-  expect(r.shards).toBe(8); // every stone of the layer breaks
+  expect(r.shards).toBe(10); // every stone of the layer breaks (Arcade r3: the slot is 10 wide)
   expect(r.fell).toBe(0); // the stone above dropped a layer
   expect(r.score).toBeGreaterThan(100);
 });

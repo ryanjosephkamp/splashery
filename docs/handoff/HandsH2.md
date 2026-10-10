@@ -106,10 +106,17 @@ tools/sound-review.json as "ready". Finish every working turn with "READY:", "WO
 
 ## State
 
-READY: both shelves are marked good. As of October 9, 2026, 06:45 UTC, the owner's marks on Effect
-review page 2 are "good" for all 35 toys (Food: 13 good in round 1, croissant and egg in round 2,
-banana, pancakes and watermelon in round 3; Nature: 14 in round 1, the other 5 in round 2). Merge
-order: engine PR #450 first, then Food #426 and Nature #431. All three are mergeable with main.
+READY: done. The lane is finished and merged (October 10, 2026, batch 2, #470, main at 9122a66d):
+the engine pieces (#450), Food (#426) and Nature (#431). The owner marked all 35 toys "good" on
+Effect review page 2 (Food: 13 in round 1, croissant and egg in round 2, banana, pancakes and
+watermelon in round 3; Nature: 14 in round 1, the other 5 in round 2). Nothing of the lane is
+waiting on a mark or a merge.
+
+Batch 2 fixes (October 9, 2026): a flick is measured over the moves that moved, so a late still
+event can't erase it (the pancake flip under llvmpipe); `info.hands.piece()` takes an index (lane
+H5) or a part's name (this lane); `tests/fix3.spec.mjs` counts the banana's core (15 pieces); the
+Level 1 sample (`tests/hl1.spec.mjs`) takes the lollipop, the taco and the succulent for the
+cupcake, the watermelon and the toadstool, which play in pieces mode now.
 
 Round 3 (October 9, 2026): croissant and egg r2 are good; banana, pancakes and watermelon are fixed
 again and posted as `hh2-<toy>-r3` (the core runs end to end in the skin's colors; moved part pieces

@@ -54,6 +54,9 @@ body.app .arc-root[data-playmode="false"] .arc-pad-side { margin-right: 48px; }
 @media (max-width: 420px) { .arc-pad > .arc-pad-util .arc-btn { min-width: 40px; padding: 0 8px; } .arc-pad > .arc-pad-util .arc-btn.arc-view { min-width: 48px; } }
 .arc-pad-dir { grid-template-columns: repeat(3, 54px); grid-template-rows: repeat(2, 54px); }
 .arc-pad-row { grid-auto-flow: column; }
+.arc-pad-col { grid-auto-flow: row; justify-items: center; }
+.arc-pad-grid2 { grid-template-columns: repeat(2, auto); }
+.arc-pad-grid2 .arc-key.arc-fire, .arc-pad-many .arc-pad-grid2 .arc-key.arc-fire { width: 70px; height: 52px; border-radius: 26px; font-size: 13px; }
 .arc-key { width: 54px; height: 54px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.28); background: rgba(12, 14, 20, 0.5);
   color: #fff; font: 800 20px/1 ui-sans-serif, system-ui, sans-serif; touch-action: none; }
 .arc-key.arc-down { background: rgba(90, 130, 240, 0.75); }
@@ -79,6 +82,12 @@ body.app .arc-root[data-playmode="false"] .arc-choices { top: 148px; }
 .arc-choice i { width: 16px; height: 16px; border-radius: 50%; display: inline-block; border: 1px solid rgba(255,255,255,0.5); }
 .arc-choice[aria-pressed="true"] { background: rgba(70, 110, 220, 0.9); border-color: #cfe0ff; }
 .arc-hint { display: none; }
+.arc-caption { position: absolute; left: 10px; bottom: 10px; max-width: min(70%, 420px); padding: 3px 9px; border-radius: 8px; font-weight: 500; font-size: 11px;
+  line-height: 1.3; background: rgba(12, 14, 20, 0.58); pointer-events: none; }
+.arc-caption:empty { display: none; }
+/* (Arcade r3: on a phone the chips take two rows; the choices go under them) */
+@media (max-width: 600px) { .arc-root[data-playmode="true"] .arc-choices { top: 100px; } }
+.arc-root[data-touch="true"] .arc-caption { bottom: 96px; }
 .arc-root[data-touch="false"] .arc-pad { display: none; }
 .arc-root[data-playmode="false"] .arc-exit { display: none; }
 body.app .arc-root[data-playmode="false"] .arc-top { top: 64px; }
@@ -134,7 +143,8 @@ export class Hud {
       <div class="arc-help" hidden></div>
       <div class="arc-choices" hidden></div>
       <div class="arc-pad"></div>
-      <div class="arc-hint"></div>`;
+      <div class="arc-hint"></div>
+      <div class="arc-caption"></div>`;
     canvas.after(el);
     this.el = el;
     this.surface = el.querySelector(".arc-surface");
@@ -144,6 +154,7 @@ export class Hud {
     this.viewBtn = el.querySelector(".arc-view");
     this.pauseBtn = el.querySelector(".arc-pause");
     this.hintEl = el.querySelector(".arc-hint");
+    this.captionEl = el.querySelector(".arc-caption");
     this.viewBtn.hidden = !game.views;
     const click = (sel, fn) =>
       el.querySelector(sel).addEventListener("click", (e) => {
@@ -231,7 +242,11 @@ export class Hud {
       for (const d of dirs) left.appendChild(make(d, ARROWS[d]));
     }
     const right = document.createElement("div");
-    right.className = "arc-pad-group arc-pad-row";
+    // (Arcade r3: two action buttons beside a row of three arrows stand one
+    // over the other, so they fit a phone: Strata's Drop over ⟳ Turn)
+    const stack = acts.length === 2 && dirs.length >= 3 && dirs.length + acts.length <= 5;
+    // (and four of them, Strata's 3D turns and drop, make a 2 × 2 block)
+    right.className = `arc-pad-group ${stack ? "arc-pad-col" : acts.length === 4 ? "arc-pad-grid2" : "arc-pad-row"}`;
     const names = this.game.padLabels || {};
     for (const a of acts) {
       const label = names[a] || (a === "fire" ? "●" : a);
@@ -287,6 +302,12 @@ export class Hud {
       ["Mouse", c.mouse],
       ["Touch", c.touch],
       ["Controller", c.pad],
+      [
+        "3D view",
+        this.game.look &&
+          (c.look ||
+            `Drag with two fingers (or the right mouse button) to look around; pinch or scroll to zoom${this.game.look.keys ? "; Q and E turn the view" : ""}.`),
+      ],
       [
         "Always",
         "P pauses · R starts again · V switches 2D and 3D · Esc leaves the whole-page view",
@@ -346,6 +367,11 @@ export class Hud {
       const v = s.icon && Number.isInteger(s.value) && s.value <= 8 ? s.icon.repeat(Math.max(0, s.value)) || "–" : s.value; // prettier-ignore
       chip.innerHTML = `${esc(s.label)}<b>${esc(String(v))}</b>`;
     }
+  }
+
+  // Arcade r3: a line of small print on the stage (a photo's credit).
+  setCaption(text) {
+    if (this.captionEl.textContent !== text) this.captionEl.textContent = text;
   }
 
   // msg: null, or { title, lines: [] }

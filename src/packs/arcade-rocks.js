@@ -14,9 +14,11 @@ import { crispModel } from "./arcade-crisp.js";
 
 const SIZES = [
   // (more points since the owner's "please make sharper": smaller splats)
+  // (Arcade r3, "much sharper": every point of each shape on the big and
+  // middle rocks, and smaller splats; see the constructor)
   { r: 0.2, pts: 5000, points: 20, splat: 0.022 },
-  { r: 0.12, pts: 2400, points: 50, splat: 0.017 },
-  { r: 0.065, pts: 1000, points: 100, splat: 0.012 },
+  { r: 0.12, pts: 4000, points: 50, splat: 0.017 },
+  { r: 0.065, pts: 1800, points: 100, splat: 0.012 },
 ];
 const SHOT_SPEED = 2.2;
 const SHOT_LIFE = 0.75;
@@ -89,7 +91,9 @@ class StoneBelt {
         const total = n + inner[0].n + inner[1].n;
         const m = makeModel(total);
         const t = tints[si % tints.length];
-        const s0 = sz.splat * Math.sqrt(1600 / Math.max(1, n)) * (sz.r / 0.2) * 0.9;
+        // (r3: 0.78 of the old size: a crisper edge round each rock, still
+        // a closed surface)
+        const s0 = sz.splat * Math.sqrt(1600 / Math.max(1, n)) * (sz.r / 0.2) * 0.78;
         let j = 0;
         const put = (count, k, size, dark) => {
           const step = sh.n / count;
@@ -104,7 +108,7 @@ class StoneBelt {
             // Lit from one side; hollows (normals turned from the middle) darker.
             const l = Math.max(0, dot3(nn, L));
             const hollow = clamp(dot3(nn, norm3(p)), 0, 1);
-            const g = 0.88 + 0.24 * hash(i * 7.1 + si);
+            const g = 0.94 + 0.12 * hash(i * 7.1 + si); // (r3: half the speckle)
             const f = dark ? 0.32 * g : (0.35 + 0.75 * l) * (0.65 + 0.35 * hollow) * g;
             m.color.set([t[0] * f, t[1] * f, t[2] * f, 1], j * 4);
             m.scale.set([size, size, size * 0.3], j * 3);
@@ -140,11 +144,25 @@ class StoneBelt {
       { count: low ? 90 : 200 },
     );
     this.shot = crispModel((c) => c.sphere(0.012, { step: 0.004, color: [0.7, 1, 0.9] }));
-    this.stars = kitModel(
-      (k) =>
-        k.cloud({ share: 1 }, (rand) => ({ p: [(rand() - 0.5) * 6, (rand() - 0.5) * 6, -0.6 - rand() * 0.8], color: rand() < 0.5 ? "#e8eeff" : "#fff6e6", opacity: 0.4 + 0.6 * rand(), size: 0.35 + 0.5 * rand() })), // prettier-ignore
-      { count: low ? 600 : 1400 },
-    );
+    // The stars: (Arcade r3) pin-sharp points, each a single small round
+    // splat (the kit's cloud sized them from its budget: soft blobs).
+    {
+      const n = low ? 700 : 1600;
+      const m = makeModel(n);
+      let seed = 7;
+      const rand = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+      for (let i = 0; i < n; i++) {
+        const z = -0.6 - rand() * 0.8;
+        m.pos.set([(rand() - 0.5) * 6, (rand() - 0.5) * 6, z], i * 3);
+        const b = 0.45 + 0.55 * Math.pow(rand(), 2.2);
+        const warm = rand() < 0.5;
+        m.color.set([b * (warm ? 1 : 0.9), b * 0.95, b * (warm ? 0.88 : 1), 1], i * 4);
+        const s = (0.0028 + 0.0032 * rand() * b) * (1 + (-0.6 - z) * 0.5);
+        m.scale.set([s, s, s], i * 3);
+        m.rot.set([0, 0, 0, 1], i * 4);
+      }
+      this.stars = m;
+    }
   }
 
   reset() {
@@ -153,7 +171,8 @@ class StoneBelt {
     const a = this.api.aspect();
     // (a tall field a little smaller than before, so the ship and the rocks
     // are bigger on a phone)
-    [this.W, this.H] = a < 1 ? [1.6, 2.4] : [3.0, 2.0];
+    // (r3: smaller still on a phone, so everything shows bigger)
+    [this.W, this.H] = a < 1 ? [1.42, 2.15] : [3.0, 2.0];
     this.starSprite = S.add(this.stars);
     this.rocks = [];
     this.shots = [];

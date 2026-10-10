@@ -186,11 +186,16 @@ test("origami crane: pulling its tail flaps the wings, and they flap on as it sp
   const s = await page.evaluate(() => {
     const { player } = window.__splashery;
     const h = player.handsOn;
+    // The view eases in on the clock's frames first (how far it has come
+    // depends on how loaded the machine is), so it settles here, and the
+    // tail is pulled up to a point on the toy, not by screen pixels.
+    for (let i = 0; i < 120; i++) player.update(1 / 60);
     const p = [-0.45, 0.14, 0];
     const sp = player.screenPoint(p);
+    const to = player.screenPoint([p[0], p[1] + 0.45, p[2]]);
     h.pressAt(player.fromRecipe(p), sp[0], sp[1]);
     for (let k = 1; k <= 12; k++) {
-      h.moveTo(sp[0], sp[1] - 4 * k);
+      h.moveTo(sp[0] + ((to[0] - sp[0]) * k) / 12, sp[1] + ((to[1] - sp[1]) * k) / 12);
       player.update(1 / 60);
     }
     const held = player.motion.handsParts.wingR.angle;

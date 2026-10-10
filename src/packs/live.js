@@ -178,6 +178,9 @@ const ROOM_ECHO = {
   alive: () => live.on("mic") || ECHO.start !== null,
   density: 1,
   turntable: false,
+  // Hands-on Level 1 (lane Hands-on H3): picked up, tossed and set down whole, except
+  // while it listens to your room.
+  handsLevel1: () => !live.on("mic"),
   controls: [{ key: "clap", label: "Clap in the sample room", type: "pulse", ease: 3.2 }],
   action: { key: "clap", label: "Clap in the sample room", quiet: ["clap"] },
   input: {
