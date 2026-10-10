@@ -2667,13 +2667,13 @@ z = (2+cos(u/2)sin(v)-sin(u/2)sin(2v))sin(u)
 u = 0 .. 2pi
 v = 0 .. 2pi
 hue = v/(2pi)
-size = 0.055
-count = 8000</code></pre>
+size = 0.07
+count = 10000</code></pre>
               </details>
               <p class="card-links">
                 <a
                   class="button"
-                  href="https://ryanjosephkamp.github.io/splashery/#s=d.jVPLbtswEPyVYHKxUdqhZTtNees3tKcWOVDU2mZNiyxJyXYC_XuxlB3kgQAVBJBLzr5mh8_QIUAhBafTjuIZAj3FZH0LtRQwkXSm5nuGQiWr-9lCzhbyp5Sq_HMp5S8IJKIGarlarFYLgezPUM_Y27aBQt1Zl20LAdtcMuUZ_e105iQCPvAmsUeIlIhTmS5lf4DACQqT6ovxadLdVdNk20k_nfFyNat-Oi3XUwicOcGry376xrXqGfT0XzGLzfAOCvJmPr-pgmV23pq7jqDQ302qYBkdoQCB7bjU45LsE6PkXK7XEDC-a7nLBykl34ZImqnBMAg47_fMRa3Nfht9VzgMeksQyDs6cCDdZQ8BbQyVQBe7UPvDaEdQCwE6BZ-6yMYgQJsNmTzS7PfEK894o10igZQjtdu8g5Lze4Gjr2uOIufrQeBYBvkpfr0WaGwkUwaq5MBmSt71H7JcOh19UiiqGXM00Yd36Np3rSlFrBhtdM4Ur_iD3rYslU-r-ioQdWO7NAYYBPLRpvce-jDOQs7Xr7teCuiTTVA4YxBIzpr3vQSf7KVhgXQkCsVx_eJ5Ys-gbfuhyqKGknF8dhfDeOdZPrd0v6wrKmp48U9ZH0KC-v04CBh9oKj5-KyPVzqDzaaEqh4EoneuVNbYlHWhkSlgoQSny_PMXWyzLg3n2NFVIVBofUtj8cx4y-DydMu5wMbpi7xD9H-uY8cx6sAPgAJp1tni0hEXjdtN-SBeuhO4lfVq883gsQzXXTm5jmQh0FDW1hVN8sj9mOkZ2tn-peyD5z1Sts7htao4f5ujdyz6YRj-AQ"
+                  href="https://ryanjosephkamp.github.io/splashery/#s=d.jVPLbtswEPyVYHKxUdqhZDtpees3tKcWOVDU2mZNiyxJ-ZFA_14sZQd5IEAFAeSSs6_Z4TN0CFBIwem0pXiGwIFisr6DWgiYSDpT-z1DoZb1_aySs0r-lFKVfy6l_AWBRNRCLZbVclkJZH-GesbOdi0Umt66bDsI2PaSKc_ob68zJxHwgTeJPUKkRJzK9Cn7PQROUJjUX4xPk_6unibbTQ7TGS9Xsz5Mp-V6CoEzJ3h1eZi-ca0PDHr6r5jFZngPBXkzn9_UwTI7b81tT1A43E3qYBkdoQCBzbg045LsE6PkXD5AwPi-4yYrKaXk2xBJMzUYBgHn_Y65aLTZbaLvC4dBbwgCeUt7DqT77CGgjaES6WIXan8Y7QiqEqBT8KmPbAwCtF6TySPNfke88ozX2iUSSDlSt8lbKDm_Fzj6puEocr4aBI5lkJ_iVyuB1kYyZaBKDmym5N3hQ5ZLp6NPCkU1Y442-vAO3fi-M6WIJaONzpniFb_Xm46l8mlVDwJRt7ZPY4BBIB9teu-h9-Mw5Hz1uuuFgD7ZBIUzBoHkrHnfS_DJXhoWSEeiUBxXL54n9gzadh-qLGooGcdndzGMd57lc0v3i6amooYX_5T1PiSo34-DgNF7ipqPz_p4pTPYbEqo-qtA9M6Vylqbsi40MgUslOB0eZ65j13WpeEce7oqBAqd72gsnhnvGFyebjkXWDt9kXeI_s917DhGHfgBUCDNOqsuHXHRuF2XD-KlO4Fb2SzX3wwey3DdlZPrSCqBlrK2rmiSR-7HTM_Qzh5eyt573iNl6xxeq4rzdzl6x6IfhuEf"
                   target="_blank"
                   rel="noopener"
                   >Run it</a
@@ -2684,41 +2684,39 @@ count = 8000</code></pre>
               </p>
             </div>
           </article>
-          <article class="card" id="g-boy-surface">
+          <article class="card" id="g-pseudosphere">
             <img
-              src="../assets/gallery/boy-surface.webp"
-              alt="Boy surface, made of splats"
+              src="../assets/gallery/pseudosphere.webp"
+              alt="Pseudosphere, made of splats"
               width="256"
               height="256"
             />
             <div class="body">
-              <h5>Boy surface</h5>
+              <h5>Pseudosphere</h5>
               <p>
-                A parametrized Boy surface folds a projective plane into a smooth immersed form.
+                Two tractrix horns meet at a sharp rim: a surface that curves the opposite way from
+                a sphere.
               </p>
               <details class="fold program">
                 <summary>Show the program</summary>
-                <pre><code>x = (sqrt(2)cos(u)cos(v)^2+cos(2u)sin(v))/(2-sqrt(2)sin(3u)sin(2v))
-y = (sqrt(2)sin(u)cos(v)^2-sin(2u)sin(v))/(2-sqrt(2)sin(3u)sin(2v))
-z = 3cos(v)^2/(2-sqrt(2)sin(3u)sin(2v))
+                <pre><code>x = cos(u)/cosh(v)
+y = 1.2(v-tanh(v))
+z = sin(u)/cosh(v)
 u = 0 .. 2pi
-v = 0 .. pi
-hue = v/pi
-size = 0.035
-count = 8000</code></pre>
+v = -2.6 .. 2.6
+hue = 0.55+0.2v/2.6
+size = 0.05
+count = 10000</code></pre>
               </details>
               <p class="card-links">
                 <a
                   class="button"
-                  href="https://ryanjosephkamp.github.io/splashery/#s=d.jVNdb9sgFP0r1elLopGUOEnX8bbfsD1t6iSCbxIWYijgfLTyf58udrKqVadZluHi-3nO4QU6BCik4HTaUjxD4EAxWd9AzQVMJJ2p_pqhUMnqfjKTk5n8LqUq71RK-QMCiaiGmi9mi8VMIPsz1At2tqmhsGqty7aBgK2HSnlCT63OXETAB94kjgiREnEp06bs9xA4QWGUnmIeVWPj06gt38P4V_WJN1U7TrYZHcbju1E1Gfz4ZN7_qA7jMQTOr7Lw8d8sk-L1f1meoTC_BP7Ts4WCvJlOb6pgGdCLWaxtS1A43BUjQgECm35Z9Uuyz-wip3K-hIDxbcOgPEgp-W-IpBlJdJ2A837H0K202W2ibwvkQW8IAnlLe06k2-whoI2hkmiwCxPfjHYENROgU_CpjWx0ArRek8k9K35HvLIk1tolEkg5UrPJWyg5vRc4-tWKs8jpshM4Ft4_9F8uBWobyRT-lezYTMm7w7sqw6R9TApFZH2NOvrwxnvl28aUJhbsbXTOFC_-e71pWFkfdvVZIOratqlP0Anko01vI_S-50JOl6-nngvok01QOKMTSM6at7MEn-wwsEA6EoUSuLxGnjgyaNu867KooVTsb-lgGO88y-eW7ueriooarvEp631IUD8fOwGj9xQ1H5_18QJnsNmUVNWDQPTOlc5qm7IuMDIELJTgdLnNuY1N1mXgHFu6KAQKjW-ob54Rb9i53PRyLrB2epB3iP73hXYcow58ASiQZp3Nhom4adyuywNxnU7gVq4W6y8Gj4Vcd8HkQslMoKasrSuaZMp9X-kF2tnDte295z1Sts7htaq4fpOjdyz6ruv-AA"
+                  href="https://ryanjosephkamp.github.io/splashery/#s=d.dVPLbtswEPyVYHJJUFqhZMttees3tKcWOdDU2mZNiyxJ-ZFA_14sZRttgggCqF3ta3aGr9AhQCEFp9OW4hkCB4rJ-h5qLmAi6UzdtwyFRjbLWS1ntfwhpSpvJaX8CYFE1EHNF_ViUQtkf4Z6xc72HRRWg3XZ9hCw3aVTntGfQWduIuADfyTOCJEScSszpOz3EDix4dPD8PhkfNo-HB4hcIZCXTUPh1nWPfvY-cK1bf9_5AAFeVdVd02wjAwKs6ZaFk-1hMB2IA6p2vaTrJrD0-SNUIDAZjpW05HsyxQrWwgYP_Q8aS2llPw3RNKMD-Mo4LzfMaCVNrtN9ENZRNAbgkDe0p4L6SF7CGhjqFS62GU_3412BFUL0Cn4NEQ2RgFar8nkaVd-R3wyUWvtEgmkHKnf5C2UrJYCR79acRVZtaPAsbDxYXzbCnQ2kimsKDmymZJ3h3ddLkinnBQK9VOPLvrwJnrlh96UIRYcbXTOFK_xe73pme8Pp_osEHVnhzQVGAXy0aa3GXo_kSGr9l_UcwF9sgkKZ4wCyVnzFkvwyV4AC6QjUSiJ7S3zxJlB2_7dlEUNpeN0dy6G8c6zfO5pOV81VNRwy09Z70OC-vU8Chi9p6jZfdbH6zqDzaaUar4IRO9cmayzKeuyRl4BCyU4Xe5YHmKfdQGc40BXhUCh9z1Nw_PGew4u96_4BdZOX-Qdov99pR3HqANfAAqkWWf1BREPjft1eSBu6ATu5Wqx_mrwXMh1151cKakFOsrauqJJptxPnV6hnT3cxt57_kbK1jn8qyru3-foHYt-HMe_"
                   target="_blank"
                   rel="noopener"
                   >Run it</a
                 >
-                <a
-                  href="https://en.wikipedia.org/wiki/Boy%27s_surface"
-                  target="_blank"
-                  rel="noopener"
+                <a href="https://en.wikipedia.org/wiki/Pseudosphere" target="_blank" rel="noopener"
                   >About the shape</a
                 >
               </p>
@@ -2739,16 +2737,16 @@ count = 8000</code></pre>
                 <pre><code>x = u-u^3/3+uv^2
 y = v-v^3/3+vu^2
 z = u^2-v^2
-u = -1.7 .. 1.7
-v = -1.7 .. 1.7
+u = -1.6 .. 1.6
+v = -1.6 .. 1.6
 hue = 0.55+0.1sin(4u)
-size = 0.035
-count = 8000</code></pre>
+size = 0.07
+count = 10000</code></pre>
               </details>
               <p class="card-links">
                 <a
                   class="button"
-                  href="https://ryanjosephkamp.github.io/splashery/#s=d.dVPZbtswEPyVYPLSIrRK2VaS8q3f0D61SABKWtusaZHl4SOB_r1YyjaCBBEEUFztNTuzr9DeQyF6q-OGwgkCewrRuAFqIdAF0on6HwkKczm_n9VyVstfUqryVlLK3xCIRD3UYlkvl7VAcieoV2zN0EOhzcYmM0DA9OdKaUb_sk5cRMB5_ogc4QNF4lJdjsntIHCEQp7l58W3xV3eP88hcILCfrYvpn0uphf2ep7PJocMhVldPdxU1U1dPTCiD5ZNJijIqmnuZFVHM3xZ5q8QCFCAwHo62umI5mXylosGAp3LAzf5KKXkvz6QZmQYRwHr3JahtLrbroPLZQRerwkCaUM7TqRzchDQXUcl0fleJvOz05agagE6ehdz4MsoQKsVdWmaktsSn0zRSttIAjEFGtZpAyWre4GDa1vOIqtmFDgUHj71bxqB3gTqCh9KjnyN0dn9hypnpFNM9IX0qUYfnH_n3bo8dKWJJXt3OiUKF_-dXg_M9KddPQgE3ZscpwSjQDqY-D5C7yYuZNW8Rb0Q0EcToXDCKBCt6d5j8S6aM2CBeCDyJbC5Rh450mszfOiyqKFUnLbmfOmcdSyfW7pftHMqarjGx6R3PkL9eRoFOr2joNl80ofLOL1JXUk1fxQIztrSWW9i0mWMPAIWire6bFfKYUi6AE4h00UhUBjcQFPzPPGBncvmFbvAyuqzvH1wfy-04xC05wUgT5p1Vp8RcdO4XZUH4opO4Fa2y9X3Dk-FXHuZyYWSWqCnpI0tmmTK3VTpFdqa_bXtneNvxGSsxVtVcf0hBWdZ9OM4_gc"
+                  href="https://ryanjosephkamp.github.io/splashery/#s=d.dVPZbtswEPyVYPLSorRK-UrLt35D-9QiAWhqbbOmRZaHjwT692Ip2wgSRBBAcbXX7My-QIcAhRScTluKZwgcKCbre6iZgImkM3U_MhSmcrqctHLSyl9Sqvo2UsrfEEhEHdRs3s7nrUD2Z6gX7GzfQWFVrMu2h4DtLpXyhP4VnbmIgA_8kTgiRErEpUxJ2e8hcIJCmZSn2dfZl3J4mkLgDIXD5FBNh1JNz-z1NJ2MDgUKk7ZZ3jXNXdssGdE7y7YQFGSzWHyRTZts_2lePkMgQgECm_FYjUeyz6O3fICA8aXnHlsppeS_IZJmZBgGAef9jqGstNltoi91BEFvCAJ5S3tOpEv2ENDGUM10udfJ_DTaEVQrQKfgU4l8GQRovSaTxyn5HfHJFK21SySQcqR-k7dQslkKHP1qxVlksxgEjpWHD_0XC4HORjKVDyUHvqbk3eFdlQvSMSaFSvpYo4s-vPFe-dKb2sScvY3OmeLVf683PTP9YVcPAlF3tqQxwSCQjza9jdD7kQzZLF6jngnok01QOGMQSM6at1iCT_YCWCAdiUINXNwiTxwZtO3fdVnVUCuOW3O5GO88y-eelrPVlKoabvEp631IUH8eBwGj9xQ1m8_6eB1nsNnUVNNvAtE7VzvrbMq6jpFHwEIJTtftyiX2WVfAORa6KgQKve9pbJ4n3rNz3bxqF1g7fZF3iP7vlXYcow68ABRIs87aCyJuGvfr-kDc0Ancy9V8_d3gsZLrrjO5UtIKdJS1dVWTTLkfK71AO3u4tb33_I2UrXN4rSqu3-foHYt-GIb_"
                   target="_blank"
                   rel="noopener"
                   >Run it</a
@@ -2888,13 +2886,13 @@ z = exp(0.12u)(0.35sin(v))
 u = 0 .. 6pi
 v = 0 .. 2pi
 hue = u/(6pi)
-size = 0.025+0.008u
-count = 9000</code></pre>
+size = 0.04+0.01u
+count = 10000</code></pre>
               </details>
               <p class="card-links">
                 <a
                   class="button"
-                  href="https://ryanjosephkamp.github.io/splashery/#s=d.fVPZbtswEPyVYPISI4xK-WrCt35D-9QiDzS1dljTIsvDRwL9e7GUHaQJUsMAtdLsMbPDF-gQoJCC0-mJ4gkCe4rJ-h5qJmAi6UzdtwyFqZwu71p518ofUqr6b6SUPyGQiDqo2bydz1uB7E9QL9javoPCqliXbQ8B25075Tv6U3TmJgI-8EPijBApEbcyJWW_g8ARCnQMN7Jpp2Vy097KZrYwPt3sJxM-ygQCp_-Aku1H0PO_IIbwt_2EPxYoyKumuVoGywpcwmkNnwpBoXy5WQbL6AgFCGzGYzUeyT4zSjZyurhlYe4LBIwvPRN6kFIyKETSrAKGQcB5v2XaK222m-hLlSvoDUEgP9GO6-mSPQS0MVQLneOq4nejHUG1gon5VCIHgwCt12TyqKjfEp-8zrV2iQRSjtRv8hOUbJYCB79acRXZLAaBQ93Zp_jFQqCzkUzdnZIDhyl5t__Q5cx0zEmhGmTs0UUf3qFXvvSmDjFntNE5U7zgd3rTsys-neqrQNSdLWksMAjkg03vM_Ru3IVsFm9ZzwT00SYonDAIJGfNey7BJ3smLJAORKEmLl4zj5wZtO0_TFlNUTuON-wcGO88u-ialrPVlKobXvNT1ruQoH49DgJG7yhqfn3Sh4ucwWZTS03vBaJ3rk7W2ZR1lZElYKMEp-tNzCX2WVfCORa6OAQKve9pHJ4V7xlcb2l9L7B2-uzyEP3vy9pxiDrwPaBAmn3Wnhnx0Lhe1x_EKzuBa7marx8MHuty3UWTy0pagY6ytq56klfux04v0M7uX8feeX5GytY5vHUV9-9z9I5NPwzDXw"
+                  href="https://ryanjosephkamp.github.io/splashery/#s=d.fVPZbtswEPyVYPISI4xK-WrLt35D-9QiDzS1ttnQIsvDRwL9e7GUbaQJUsMAtdLsMbPDF-gQoJCC02lL8QSBPcVkfQ81EzCRdKbuW4bCVE6XD618aOUPKVX9N1LKnxBIRB3UbN7O561A9ieoFzzZvoPCqliXbQ8B25075Qf6U3TmJgI-8EPijBApEbcyJWW_g8ARCnQMd7Jpp2Vy197LZrYwPt3tJxM-ygQCp_-Aku1H0PO_IIbwt_2EPxYoyJumuVkGywpcwmkNt4WgUD7dLYNldIQCBDbjsRqPZJ8ZJRs5v5eNbAsEjC8902mllJIxIZJmETAMAs77J2a90uZpE32pagW9IQjkLe24nC7ZQ0AbQ7XSOa4ifjfaEVQrmJdPJXIwCNB6TSaPgvon4pO3udYukUDKkfpN3kLJZilw8KsVV5HNYhA41JV9iF8sBDobydTVKTlwmJJ3-3ddzkzHnBSqP8YeXfThDXrlS2_qEHNGG50zxQt-pzc9m-LDqT4LRN3ZksYCg0A-2PQ2Q-_GZchm8Zr1TEAfbYLCCYNActa85RJ8smfCAulAFGri4pp55Mygbf9uyuqJ2nG8YOfAeOfZRLe0nK2mVN1wzU9Z70KC-vU4CBi9o6j59UkfLnIGm00tNf0iEL1zdbLOpqyrjCwBGyU4XS9iLrHPuhLOsdDFIVDofU_j8Kx4z-B6Set7gbXTZ5OH6H9f1o5D1IGvAQXS7LP2zIiHxu26_iCu7ARu5Wq-_mrwWJfrLppcVtIKdJS1ddWTvHI_dnqBdnZ_HXvn-RkpW-fw2lXcv8_ROzb9MAx_AQ"
                   target="_blank"
                   rel="noopener"
                   >Run it</a
@@ -3106,19 +3104,20 @@ count = 3500</code></pre>
               <p>Two spiral strands wind together around a long axis.</p>
               <details class="fold program">
                 <summary>Show the program</summary>
-                <pre><code>x = cos(u+pi floor(2v))
-y = 3v-1.5
-z = sin(u+pi floor(2v))
+                <pre><code>x = 1.1cos(3u+pi floor(2v))
+y = 1.4(u/pi-1)
+z = 1.1sin(3u+pi floor(2v))
 u = 0 .. 2pi
 v = 0 .. 1
-hue = v
-size = 0.055
-count = 5000</code></pre>
+hue = 0.02+0.3floor(2v)+0.1u/(2pi)
+size = 0.09
+count = 10000
+spread = random</code></pre>
               </details>
               <p class="card-links">
                 <a
                   class="button"
-                  href="https://ryanjosephkamp.github.io/splashery/#s=d.dVPLbtswEPyVYHJJ0LVA-ZG2vPUb2lOLHChpbbOmRZak_Eigfy-Wso0iaQwD1Eq7Ozs7w1eYEKCRgjNpy_EMwoFjsr6HXhDayCZz9y1DY67mT7NazWr1Qyld_pVS6icIibmDXizr5bImZH-GfsXO9h00msG6bHsQbHdByjP-M5gsIAQf5CFJRYicWKDaIWW_B-EkgU8Pw6dg79bO-_gwPzw-gnCGxuIwq6sVCC_S2Pb_SRugoe6q6m4erHC7hjUI24GhcQAhQgOEzXQ005Hsi3xXlVoJRuuHXmZbKaXka4hshBDGkeC83wmDxrS7TfRDYR7MhkHIW95LIzNkD4JpWy6NLnFZyPfWOIauCXwKPg1RgpHA6zW3eVqO37GcoszauMSElCP3m7yFVtUT4eibRrqoajUSjmX9H-avVoTORm6LDFqNEqbk3eEdyoXpVJNC0XrC6KIPb7IbP_RtGWIp2a3JmeM1f282vQj84VSfCdF0dkhTg5GQjza9rTD7SQtVrf5lvSCYk03QOGMkJGfbt1yCT_ZCmJCOzKEUrm6VJ6kMxvbvpixuKIjTZbkErXde7HPPT4tmzsUNt_qUzT4k6F_PI6E1e45GXp_N8brOYHNbWs2_EKJ3rkzW2ZRNWaOsQIwSnCmXKg-xz6YQznHgq0Og0fuep-Fl470klwtX3hPWzlzsHaL_fZUdx2iCXAAObMRn9YWRDI37dfmBbuwI96pZrr-2eC7iuutOrpLUhI6zsa54UiT3E9IrjLOH29h7L89I2TqHf10l-H2O3onpx3H8Cw"
+                  href="https://ryanjosephkamp.github.io/splashery/#s=d.dVPBbtswDP2V4vWSooorO0m3-rZv2E4bepBlJtEiW5okJ00L__tA2QmGdjUMSJT4SD7y6Q3Ke9SI3qq4p3CGwJFCNK5HvRLQgVSi9ltCjUpWj8tSLkv5Q8o6_4WU8icEIlGLerUu1-tSILkz6jccTN-iRjMYm0wPAdPOmdKS_gwqcRIB53kTGeEDReJUeojJdRB4QY2yKLWLi9Vw783N1joXFtXx7g4C53y7XgwP3ixLPnmd_KPp_-c_oIa8KYqbyhsmejFLCOwHYrOQ1b0sVlfYvSzK4WFRecMBAmpAYDctzbRE8zpDnyCg3dAzhVJKKfnWB1JMPKi-dR3GUcA6d2C-jdKHXXBD7pNXO4JA2lPH4dSQHASU1pTjzXZu33etLKEuBejFuzgENkYB2m5Jp6mV7kC88hy3ykYSiClQv0t71LJ4FDi5puEostiMAqc8rE_9NxuB1gTSeWi1HNmM0dnjhywz3wkTfVbGlKMNzr_zbtzQ61zEmr21SonCxb9Tu57l8GlVXwSCas0QpwCjQDqZ-B6humkkstj8y3oloF5MRI0zRoFojX7PxbtoZsIC8UTkM3BzRb4w0ivTf6gyayJnnJ7WbGhnHYvolh5XTUVZDVd8TKrzEfWv51FAq46C4uOzOl3a6U3SOVT1VSA4a3NlrYlJ5TZyC1go3qr8BNMQ-qQy4RQGuigENXrX01Q8d7xn5_w887nA1qpZ5D6435ex4xSU52dAnhTrrJwZcdG43eYP4spO4FY26-2TxnMerr305DKSUqClpIzNmuSRuynTG5Q1x2vZneM9YjLW4l9Vcf4-BWdZ9OM4_gU"
                   target="_blank"
                   rel="noopener"
                   >Run it</a
@@ -3176,19 +3175,19 @@ count = 5000</code></pre>
               <p>This butterfly loop is a Lorenz-like look-alike, not a Lorenz-system solution.</p>
               <details class="fold program">
                 <summary>Show the program</summary>
-                <pre><code>x = sin(3u)+0.3sin(9u)
-y = cos(2u)
-z = sin(4u)
+                <pre><code>x = 2.4sin(u)
+y = 1.5sin(2u)+0.25sin(6u)
+z = 1.1cos(u)+0.3cos(3u)
 u = 0 .. 2pi
 v = 0 .. 1
 hue = u/(2pi)
-size = 0.05
-count = 3000</code></pre>
+size = 0.07
+count = 4000</code></pre>
               </details>
               <p class="card-links">
                 <a
                   class="button"
-                  href="https://ryanjosephkamp.github.io/splashery/#s=d.dVPLbtswEPyVYHJJUEal_Egb3voN7alFDhS1tlnTIstHbCfQvxdLyUGQIIIAcqVZ7s7s8AU6BCik4HTaUTxD4Ilisn6AWgqYSDpT_yNDYSEX93etvGvlLylVfRsp5W8IJKIearlqV6tWIPsz1Av2duih0BXrsh0gYPu5Ur6jf0VnLiLgA28SZ4RIibiUKSn7AwROnGGHm2W5_SKbJW8fyi0Ezozy6WZRo-cZtqpRgYK8apqrRbDM5xK2ENgVgkL5erMIlrERChDYTks3Lck-M0o2cg0B48vATS2llPwzRNLMBOMo4Lzfc-udNvtt9KVSDnpLEMg7OvA5umQPAW0M1YPmuCrx02hHUK0AnYJPJXIwCtBmQyZPqvg98coj2WiXSCDlSMM276Bkcy9w9F3Hp8hmPQocq-6f4tdrgd5GMlV_JUcOU_Lu6UOVmemUk0Id8lSjjz68Q3e-DKY2sWK00TlTvOAPejvwZD_t6ptA1L0taTpgFMhHm95n6MM0C9ms37JeCuiTTVA4YxRIzpr3XIJPdiYskI5EoSauXzNPnBm0HT50Wc1QK063ZA6Md57dc033y25B1Q2v-SnrQ0hQfx5HAaMPFDV_PuvjRc5gs6lHLb4LRO9c7ay3KesqI0vARglO19uUSxyyroRzLHRxCBQGP9DUPCs-MLjetPpdYOP07O4Q_d_L2HGMOrD_KZBmn7UzI24a15v6QLyyE7iW3WrzYPBYh-sumlxG0gr0lLV11ZM8cj9VeoF29um17YPnPVK2zuGtq7j-kKN3bPpxHP8D"
+                  href="https://ryanjosephkamp.github.io/splashery/#s=d.dVPLbtswEPyVYHJJUEal5Eda3voN7alFDjS1tlnTIstHbCfQvxdL2UaQIIYBcrXP2Rm-QocAhRScTluKJwg8U0zWD1AzARNJZ-p_ZCh0sls-tPKhlb-kVPXfSCl_QyAR9VCzeTuftwLZn6BesbNDD4VVsS7bAQK2P3fKD_Sv6MxNBHzgS-KMECkRtzIlZb-HwJH7NvNkh7tyD4ETFNpmwXZX7r_Ipqv3ZXW-VGdrfLqrvhnfZtVVoCBvmuamC5YhXswWAttCUChf77pgOTZCAQKb6VhNR7IvHCUb-QgB48vAc86llOwMkTSDwzgKOO93jGalzW4TfalbCHpDEMhb2nMdXbKHgDaGaqGzXZfz02hHUK0AHYNPJbIxCtB6TSZPi_I74pNZWmuXSCDlSMMmb6FksxQ4-NWKq8hmMQocKhWfxi8WAr2NZColSo5spuTd84cuZ6RTTgqV96lHH314F73yZTB1iDlHG50zxUv8Xm8GJvvTqR4Fou5tSVOBUSAfbHqfofcTF7JZvEU9E9BHm6BwwiiQnDXvsQSf7BmwQDoQhZq4uGYeOTNoO3yYsoqhdpweztkw3nlWzy0tZ6uOqhqu-SnrfUhQf55GAaP3FDV_PunDZZ3BZlNLdd8EoneuTtbblHVdI6-AhRKcrg8slzhkXQHnWOiiECgMfqBpeN74wMH18dXvAmunz-oO0f-90I5D1IH1T4E066w9I-KhcbuuP4grOoFbuZqvvxs8VXLdZScXSlqBnrK2rmqSKfdTp1doZ5-vY-8935GydQ5vVcX9hxy9Y9GP4_gf"
                   target="_blank"
                   rel="noopener"
                   >Run it</a
@@ -3273,29 +3272,33 @@ count = 6000</code></pre>
           <article class="card" id="g-sunflower-head">
             <img
               src="../assets/gallery/sunflower-head.webp"
-              alt="Sunflower seed spiral, made of splats"
+              alt="Sunflower-style spiral, made of splats"
               width="256"
               height="256"
             />
             <div class="body">
-              <h5>Sunflower seed spiral</h5>
-              <p>Seeds follow the Fibonacci angle and spread outward across a flat disk.</p>
+              <h5>Sunflower-style spiral</h5>
+              <p>
+                A face-on disk shades from dark seeds to a golden rim, with Fibonacci-style spiral
+                arms drawn in the color.
+              </p>
               <details class="fold program">
                 <summary>Show the program</summary>
-                <pre><code>x = sqrt(u)cos(2pi v+2.4u)
-y = 0.06sin(2pi v+2.4u)
-z = sqrt(u)sin(2pi v+2.4u)
+                <pre><code>x = 1.8sqrt(u)cos(2pi v)
+y = 1.8sqrt(u)sin(2pi v)
+z = 0.25(1-u)
 u = 0.002 .. 1
 v = 0 .. 1
-hue = 0.12+0.06u
-size = 0.025
-count = 8000
-spread = random</code></pre>
+r = 0.3+0.7sqrt(u)(0.75+0.25sin(26pi v-24sqrt(u)))
+g = 0.15+0.6sqrt(u)(0.75+0.25sin(26pi v-24sqrt(u)))
+b = 0.02+0.1u
+size = 0.04
+count = 10000</code></pre>
               </details>
               <p class="card-links">
                 <a
                   class="button"
-                  href="https://ryanjosephkamp.github.io/splashery/#s=d.dVPbbtswDP2V4vSlRVVDdi7r_LZv2J429EGRmUSLbKm65NLC_z5QTroiRQ0DEiUekoc8eoPyHi2itypuKZwgsKcQjRvQzgR0IJWo-5HQopHN8rGWj7X8JWVb_kpK-RsCkahDO5vX83ktkNwJ7Rt2ZujQYpWNTWaAgOnOmdIjvWSVOImA87yJjPCBInEqnWNyPQSOjHgJ6S7faxfvGm9u9g9NNc_3EDihhazkMprh6ub1P-zzZZ5gsrmpqpuaCfPBxdhmKvd188CxMwQCWkBgMy2raYnmdXKUzQIC2uWBK3-SUvKtD6SYblBD53qMo4B1bscsV0rvNsHl0h2vNgSBtKWew6mcHASU1lTCne3StJ9aWUJbC9DRu5gDG6MArdek09RAtyNeeXprZSMJxBRo2KQtWlktBQ5uteIoslqMAocyoi_9FwuBzgTSZVStHNmM0dn9pyxnvhMm-qKHKUcXnL_yXrk86FLEnL21SonCxb9Xm4FF8GVV3wSC6kyOU4BRIB1MvEaofpqIrBYfWc8E1NFEtDhhFIjW6Gsu3kVzJiwQD0S-ABfvyCMjvTLDpyqLJkrG6UGdDe2sYxHd0nK2aqio4R0fk-p9RPvneRTQqqeg-PikDpd2epN0CdU8CQRnbamsMzGp0kZuAQvFW1UeXsphSKoQTiHTRSFoMbiBpuK54wM7l0dZzgXWVp1F7oP7exk7DkF5fgbkSbHO6jMjLhq36_JBvLMTuJWr-fq7xnMZrr305DKSWqCjpIwtmuSRuynTG5Q1-_eye8d7xGSsxUdVcf4hBWdZ9OM4_gM"
+                  href="https://ryanjosephkamp.github.io/splashery/#s=d.jVPLbtswEPyVYHJxEFqg5EdS3foN7alFDhS1tlnTIkNSfiTQvxdLyWmbIEAFAdKSO_uYnX2F8h41orcq7ihcIHCkEI3rUC8EdCCVqP2aUKOS1Xpeynkpv0tZ57eQUv6AQCRqUS-W5XJZCiR3Qf2Kvela1Gh6Y5PpIGDaKVOa03OvEicRcJ5_IiN8oEicSvcxuQMEzqhRFo_xOaRZf6ddnFXe3BzvIHD55yqa7s_VC2rIolrNynnPdp9tKauborgpuUU-uBq7nlADAiG7Le5l8TBFncniYXXPoXL8NSeYV8vp9o5jbzOoZK_1_6OasaLqXhZlzwSaFxqPlhDQru-YhlJKKfnWB1JMHoZBwDq3Z7Yapffb4PrMsldbgkDa0YEDqT45CCitKUea7Ez-N60soS4F6Oxd7AMbgwBtNqTTOAi3J_6yCjbKRhKIKVC3TTvUslgLnFzTcBRZrAaBUx71p_6rlUBrAuk88loObMbo7PFDlqnTERN91tWYow3Ov_NuXN_pXMSSvbVKicLV_6C2HYvp06oeBIJqTR_HAINAOpn4HqEO4zBksfq764WAOpuIGhcMAtEa_b4X76KZGhaIJyKfgas35JmRXpnuQ5VZDTnjuJiToZ11LNJbWi-airIa3vAxqYOPqH8-DQJaHSgoPr6o05VOb5LOoapHgeCszZW1JiaVaWQKWCjeqrzAqQ9dUrnhFHq6KgQ1OtfRWDwz3rFzXu58LrCxajuulA_u13XsOAXlec3Ik2KdlVNHXDRuN_mBeOtO4FY2y80Xjac8XHvl5DqSUqClpIzNmuSRuzHTK5Q1x7eyD47_EZOxFn-rivN3KTjLoh-G4Tc"
                   target="_blank"
                   rel="noopener"
                   >Run it</a
@@ -3324,13 +3327,13 @@ z = exp(0.13u)(1+0.3cos(v))sin(u)
 u = 0 .. 5pi
 v = 0 .. 2pi
 hue = 0.04+0.12u/(5pi)
-size = 0.022+0.006u
-count = 9000</code></pre>
+size = 0.035+0.008u
+count = 10000</code></pre>
               </details>
               <p class="card-links">
                 <a
                   class="button"
-                  href="https://ryanjosephkamp.github.io/splashery/#s=d.dVPLbtswEPyVYHKxEUal_GqjW7-hPbXIgabWNmtaZPnwI4H-vVhKdoMEMQRQK-_s7swOX6G8R4PorYo7ChcIHClE4zo0cwEdSCVqvyc0mMnZ6rGWj7X8KWVTnkpK-QsCkahFM1_Ui0UtkNwFzSv2pmvRYJ2NTaaDgGnHTumR_maVuImA8_wSGeEDReJWOsfkDhA4owGd_URW9TxPJ_WDrObaxclxOuUjTyFwQQNZzf-nRdNNjvzPy-dozinozOi7qrpbesPkr-GshLtMpbpcPMiqnuUvk6U3DAtoAIHtcKyHI5qXMX02e2BxVhkC2uWOST1JKTnJB1KsBPpewDq3Z-prpffb4HKRzKstQSDt6MD1VE4OAkprKoXGuCj5QytLaGrBRF3MgYNegDYb0mlQ1e2JT17pRtlIAjEF6rZph0ZWK4GTW6-5iqyWvcCp7O3T_OVSoDWBdNlfI3sOY3T2-KHLyHTARF9MMvRog_Pvstcud7oMseBsrVKicM0_qG3Hzvh0qq8CQbUmx6FAL5BOJr5HqMOwC1kt37KeC6iziWhwQS8QrdHvuXgXzUhYIJ6IfAEub8gzI70y3YcpiylKx-GWjYF21rGL7mk1X8-ouOGGj0kdfETz-7kX0OpAQfHnizpd5fQm6VJq9k0gOGvLZK2JSRUZWQI2ireq3MaUQ5dUIZxCpqtD0KBzHQ3Ds-IdJ5ebWr4LbKwaXe6D-3NdO05Beb4H5Emxz-qREQ-N-035QdzYCdzL9WLzpPFclmuvmlxXUgu0lJSxxZO8cjd0eoWy5ngb--D4HTEZa_HWVdy_S8FZNn3f9_8A"
+                  href="https://ryanjosephkamp.github.io/splashery/#s=d.dVPLbtswEPyVYHKxEUalbCtNdes3tKcWOVDU2mZNiywffiTQvxdL2WmQIIYAauWd3Z3Z4QuU92gRvVVxS-EMgQOFaNyAdimgA6lE_feEFgu5eLiv5X0tf0rZlqeSUv6CQCTq0S5X9WpVCyR3RvuCnRl6tOiysckMEDD9pVO6p79ZJW4i4Dy_REb4QJG4lc4xuT0ETmhBJz-TVb3M81l9J6uldnF2mM_5yHMInNFCVsv_adEMswP_8_w5mnMKOjP6pqpuGm-Y_DVclHCbqVSXqztZ1Yv8ZdZ4w7CAFhDYTEc3HdE8X9KXzR2L85ghoF0emFQtpZSc5QMplgLjKGCd2zH3TundJrhcNPNqQxBIW9pzQZWTg4DSmkqlS1yk_KGVJbS1YKYu5sDBKEDrNek0yep2xCfvdK1sJIGYAg2btEUrqweBo-s6riKrZhQ4lsV9mt80Ar0JpMsCWzlyGKOzhw9dLkwnTPTFJVOPPjj_LrtzedBliBVna5UShWv-Xm0GtsanU30VCKo3OU4FRoF0NPE9Qu2nZciqect6KaBOJqLFGaNAtEa_5-JdNBfCAvFI5AuweUWeGOmVGT5MWVxROk7X7BJoZx3b6JYelt2Cihte8TGpvY9ofz-NAlrtKSj-fFbHq5zeJF1KLR4FgrO2TNabmFSRkSVgo3irynVMOQxJFcIpZLo6BC0GN9A0PCs-cHK5quW7wNqqi819cH-ua8cxKM8XgTwp9ll9YcRD43ZdfhCv7ARuZbdaf9N4Ksu1V02uK6kFekrK2OJJXrmbOr1AWXN4HXvv-B0xGWvx1lXcf0jBWTb9OI7_AA"
                   target="_blank"
                   rel="noopener"
                   >Run it</a
@@ -3353,19 +3356,19 @@ count = 9000</code></pre>
               <p>A dome-like bell pulses as its rim widens and narrows once each cycle.</p>
               <details class="fold program">
                 <summary>Show the program</summary>
-                <pre><code>x = (0.7+0.1sin(t))sin(v)cos(u)
-y = (0.7+0.1sin(t))cos(v)-0.2
-z = (0.7+0.1sin(t))sin(v)sin(u)
+                <pre><code>x = (0.9+0.12sin(t))sin(v)(1+0.1cos(8u)sin(v)^6)cos(u)
+y = 0.9cos(v)-0.2
+z = (0.9+0.12sin(t))sin(v)(1+0.1cos(8u)sin(v)^6)sin(u)
 u = 0 .. 2pi
-v = 0 .. pi/2
-hue = 0.52+0.08cos(v)
-size = 0.035
-count = 6500</code></pre>
+v = 0 .. 0.6pi
+hue = 0.82+0.05cos(8u)-0.1v
+size = 0.05
+count = 10000</code></pre>
               </details>
               <p class="card-links">
                 <a
                   class="button"
-                  href="https://ryanjosephkamp.github.io/splashery/#s=d.dVPLbtswEPyVYHKJEVqlbMtJees3tKcWOdDU2mZNiyxJ-ZFA_14sZRtBggiCqCX3NbPDN-gQoJCC02lL8QyBA8VkfQc1FzCRdKb2R4bCTM6W01pOa_lLSlXeSkr5GwKJqIWaL-rFohbI_gz1hp3tWiiseuuy7SBg20ulPKV_vc5cRMAH_kkcESIl4lKmT9nvIXCCwoOsnh5lVSfbPeTJhJfDxPj00E8gcP7swWeHyVRWMwi8fpWBvyVDDwV5V1V3s2AZ_tUM9hsn2PbEO1Uze5SVfB6TQyBCAQKbcVmNS7Kvo7ecNxAwvu8Yz7KRkk9DJM0kYBgEnPc7Rr3SZreJvi9sBb0hCOQt7TmR7rOHgDaGSqKLXUj8abQjqFqATsGnPrIxCNB6TSaPhPod8crTXGuXSCDlSN0mb6FktRQ4-tWKs8iqGQSOZWRf-jeNQGsjmTI6JQc2U_Lu8KnKBekYk0LRx1ijjT588F75vjOliQV7G50zxav_Xm86FsWXXT0JRN3aPo0JBoF8tOljhN6Ps5BV8x71XECfbILCGYNActZ8xBJ8shfAAulIFEpgc4s8cWTQtvvUZVFDqThesIthvPMsn3tazlczKmq4xaes9yFB_XkZBIzeU9S8fdbHK53BZlNSzZ4FoneudNbalHWhkSlgoQSny0XMfeyyLoBz7OmqECh0vqOxeWa8Y-dyScu-wNrpi7xD9H-vY8cx6sAXgAJp1ll9QcRN435dHogbOoF7uVqsvxu8lOG6KyfXkdQCLWVtXdEkj9yPld6gnT3c2t57_kfK1jm8VxXX73L0jkU_DMN_"
+                  href="https://ryanjosephkamp.github.io/splashery/#s=d.lVPbbtswDP2V4vQlQRVDdi5r_bZv2J42dIAsM4kWxdIkOZcW_veBslMMLfqwwIBEhuQhD49eobxHjeitinsKVwicKETjOtRLAR1IJWq_JtSoZLVZlHJRyu9S1vkrpJQ_IBCJWtTLVblalQLJXVG_4mC6FjWa3thkOgiYdkJKC_rTq8QgAs7zJXKGDxSJoXQfkztC4IIaM1k8PciirKLpZmk-5-M0n5Xs0y7OHvvJ9WszZ7ufQ-CKGrJ4Yvs0X8iigsDLfxbjSy7Wc7G7orirvGGCbqYsNtmx7ynDPVYPspDrqc5CFuUJAgE1ILAbj2Y8onkZc-QaAtr1Hc9dSikl_-sDKWYLwyBgnTswPY3Sh11wfabVqx1BIO3pyIVUnxwElNaUK012ZvubVpZQlwJ08S72gY1BgLZb0mlk3h2IT177VtlIAjEF6nZpj1oWG4GzaxquIov1IHDOu_00fr0WaE0gnXdcy4HNGJ09fUCZJh1zos9CGjHa4Py76Mb1nc5NrDhaq5Qo3OKPatexej7t6otAUK3p41hgEEhnE99nqOO4DFms_516KaAuJqLGFYNAtEa_n8W7aKaBBeKZyOfE9VvmhTO9Mt2HLrMaMuL4EidDO-tYPve0WTYVZTW85cekjj6i_vk8CGh1pKDYfVXnG53eJJ1LVY8CwVmbO2tNTCrTyBSwULxV-cWmPnRJ5YFT6OmmENToXEdj88x4x8H5NWe_wNaqSd4-uN-3teMclOcHQJ4U66ycJuKmcb_NP4i36QTuZbPaPmk85-XaGye3lZQCLSVlbNYkr9yNSK9Q1pze2j46viMmYy3-VRXjdyk4y6IfhuEv"
                   target="_blank"
                   rel="noopener"
                   >Run it</a
@@ -3423,20 +3426,19 @@ count = 7000</code></pre>
               <p>Scales follow a Fibonacci angle and taper toward the top of the cone.</p>
               <details class="fold program">
                 <summary>Show the program</summary>
-                <pre><code>x = (0.9-0.65v)cos(2pi u+2.4v)
+                <pre><code>x = (0.9-0.65v)(1+0.09sin(16pi u+25v)sin(26pi u-25v))cos(2pi u+2.4v)
 y = 1.8v
-z = (0.9-0.65v)sin(2pi u+2.4v)
+z = (0.9-0.65v)(1+0.09sin(16pi u+25v)sin(26pi u-25v))sin(2pi u+2.4v)
 u = 0 .. 1
 v = 0 .. 1
-hue = 0.08+0.05v
-size = 0.035
-count = 7000
-spread = random</code></pre>
+hue = 0.07+0.05v+0.025sin(16pi u+25v)sin(26pi u-25v)
+size = 0.045
+count = 10000</code></pre>
               </details>
               <p class="card-links">
                 <a
                   class="button"
-                  href="https://ryanjosephkamp.github.io/splashery/#s=d.dVPLbtswEPyVYHJJUFqg_ErCW7-hPbXIgabWNmtKZEnKjwT692Ip20gdRBBArrSv2Zl9hw4BCik4nbYUTxDYU0zWd1AzARNJZ2q-ZyhM5XQ5qeWklj-lVOWtpJS_IJCIGqjZvJ7Pa4HsT1Dv2NmugcKqty7bDgK2OVfKE_rb68xFBHzgS-KIECkRlzJ9yr6FwBEKD7J6mchqudg_Gp8epsHe9d-m1Xz_CIETFOrqeQ-Bt_99k-1ufHsoyLuquqsZ5Udj2xOblXz-Jiu54GwRChDYjMdqPJJ9OzvOFhAwvu-43ScpJf8NkTRjjLprfIthEHDe7xjaSpvdJvq-jCToDUEgb6nldLrPHgLaGCrpznaZ1A-jHUHVAnQMPvWRjUGA1msyeZya3xGfTNlau0QCKUfqNnkLJaulwMGvVpxFVotB4FB4-dJ_sRBobCRT-FFyYDMl7_afqpzxjjEpFBGMNZrow433yvedKU3M2dvonCle_Fu96Zj5L7t6Eoi6sX0aEwwC-WDTbYRuR0ZktfiIeiagjzZB4YRBIDlrbrEEn-wZsEA6EIUSuLhGHjkyaNt96rJoolQct-hsGO88i-ielrPVlIoarvEp6zYkqN-vg4DRLUXNn0_6cBlnsNmUVNNngeidK501NmVdxsgjYKEEp8u25T52WRfAOfZ0UQgUOt_R2DxPvGPnsonlu8Da6bPIQ_R_LrTjEHXgNaBAmnVWnxFx07hflwfiik7gXq7m6xeD10Kuu8zkQkkt0FDW1hVNMuV-rPQO7ez-2nbr-Y6UrXP4qCqu3-XoHYt-GIZ_"
+                  href="https://ryanjosephkamp.github.io/splashery/#s=d.nVPLbtswEPyVYHKxUVqgHMtJeOs3tKcWOdDU2mZNiyxJ-ZFA_14sZQdpgvRQQRA54j5nhy_QIUAhBafTluIZAgeKyfoO6k7ARNKZ2q8ZCnM5X85qOavldylVeSsp5Q8IJKIW6m5RLxa1QPZnqBfsbNdCYdVbl20HAdteMuUZ_e515iQCPvAmsUeIlIhTmT5lv4fACQoTWT3OZLVsDtNJ_UVW8jHZblIvg73pv8ybw5ThvMAZw6nxaTIfT6vFYQqBMxTq6uEAgef_iVjwXxF7KMibqrqpmbG3YNsTw0rec-TmwN958-8EEIhQgMBmXFbjkuzzJdiigYDxfcf01FJKycchkmZSMQwCzvsds7jSZreJvi_sB70hCOQt7TmS7rOHgDaGSqQLLkP5ZrQjqFqATsGnPjIYBGi9JpPHAfkd8crqWGuXSCDlSN0mb6FktRQ4-tWKo8iqGQSORQKf2jeNQGsjmSIFJQeGKXl3-JDl0unok0LR25ijjT68s175vjOliAVbG50zxav9Xm86FtmnVd0LRN3aPo0BBoF8tOm9h96Pw5BV87brOwF9sgkKZwwCyVnzvpfgk700LJCORKE4Nq-eJ_YM2nYfqixyKBnHC3sBxjvP-rml5d1qTkUNr_4p631IUD-fBgGj9xQ1_z7r45XOYLMpoeYPAtE7Vyprbcq60MgUsFCC0-Vi5z52WZeGc-zpqhAodL6jsXhmvGPjcunLf4G10xd9h-h_XceOY9SBbwAF0qyz-tIRF43bdXkgXrsTuJWrxfrR4KkM1105uY6kFmgpa-uKJnnkfsz0Au3s4bXsvec9UrbO4a2qOH-Xo3cs-mEY_gA"
                   target="_blank"
                   rel="noopener"
                   >Run it</a
@@ -3599,19 +3601,19 @@ count = 6500</code></pre>
               <p>A scalloped circular leaf floats on a softly raised surface.</p>
               <details class="fold program">
                 <summary>Show the program</summary>
-                <pre><code>x = vcos(u)
-y = 0.08sin(12u)*v
-z = vsin(u)
-u = 0 .. 2pi
-v = 0 .. 1
-hue = 0.28+0.08v
-size = 0.035
-count = 5500</code></pre>
+                <pre><code>x = v(1+0.04cos(24u))cos(u)
+y = 0.3v^3+0.12v
+z = v(1+0.04cos(24u))sin(u)
+u = 0.3 .. 2pi
+v = 0 .. 1.2
+hue = 0.3+0.04cos(14u)-0.05v
+size = 0.06
+count = 10000</code></pre>
               </details>
               <p class="card-links">
                 <a
                   class="button"
-                  href="https://ryanjosephkamp.github.io/splashery/#s=d.dVPLbtswEPyVYHJJ2o1B2Vaa6tZvaE8tcqCotc2aFlmS8iOB_r1YyjaCBBEEUEvta2ZnX6FDQIMUnE4bjicQ9hyT9T2aBcFE1pm7HxkN5mr--FCph0r9Uqop70wp9RuExNyhWSyr5bIiZH9C84qt7Ts0aAfrsu1BsN25Un7gf4POUoTgg3wkiQiRE0spM6TsdyAc0WBvfLob7kE4oYGaqadk-7tqPtx_2YPwIi5yU1wGcbmZzW7mwQqWi1mBsBm4JJg_fZUsEhzRAIT1dLTTkezL5KgWNQjGD700VddKyd8QWQsSjCPBeb-V1ltttuvohwI56DWDkDe8k0R6yB4EbQyXRGe7MPHTaMdoKgIfg09DFGMk8GrFJk-s-C3LKSNZaZeYkHLkfp03aNTskXDwbStZ1KweCYfC-6f-dU3obGRT-G_UKGZK3u0_VDkjnWJSKEOeanTRh3ferR96U5pYirfROXO8-O_0upfJftrVN0LUnR3SlGAk5INN7yP0bpqFmtVvUS8I-mgTGpwwEpKz5j2W4JM9AyakA3MogfU18iiRQdv-Q5dFDaXitCVnw3jnRT63_Lho51zUcI1PWe9CQvPneSQYveOo5fqkDxc6g82mpJo_EaJ3rnTW2ZR1oVEoEKEEp8s25SH2WRfAOQ58UQga9L7nqXlhvBfnsmnlnrBy-izvEP3fy9hxiDrIAnBgLTqrzoikadyuygO6oiPcqna5-m7wXIbrLpxcRlIROs7auqJJGbmfKr1CO7u_tr3z8o2UrXN4qyqp3-fonYh-HMf_"
+                  href="https://ryanjosephkamp.github.io/splashery/#s=d.dVPRbtswDPyV4vrSoIohO0626W3fsD1t6ABFZhItiqVJctK08L8PlJNgaNfAgESFR_LI4yt0CFBIwem0o3iGwJFisr6HWgiYSDpT9zVDoZHNal7LeS2_S6nKV0kpf0AgEXVQi7Zu21og-zPUK_a276CwHqzLtoeA7S6Z8pz-DDpzEgEf-JIYESIl4lRmSNkfIPAMheND_Sgr2RqfHpp2mM34MswgcIaCrBbHX4tHWdXNEQIv_wMk20-AYQLcVdVdEyxz5Qc266qBwG6gyeOGr9thNpeVXHLwCAUIbKdjPR3JvkwguYKA8UPPDGoppeR_QyTNvDGOAs77PRNda7PfRj-UBgW9JQjkHR04kB6yh4A2hkqki1369s1oR1C1AD0Hn4bIxihAmw2ZPPXQ74lPHuBGu0QCKUfqt3kHJauVwMmv1xxFVstR4FSm9KH_cinQ2UimTEvJkc2UvDu-y3JhOmFSKJKYcnTRhzfeaz_0phTRsrfROVO8-h_0tmcdfFjVJ4GoOzukKcAokE82vUXowzQMWS3_Zb0Q0M82QeGMUSA5a95yCT7ZC2GBdCIKBbi8IZ8ZGbTt31VZ1FAyTjt1MYx3nuVzT6vFuqGihhs-ZX0ICern0yhg9IGi5uezPl3bGWw2JVTzWSB650plnU1ZlzZyC1gowemye3mIfdaFcI4DXRUChd73NBXPHe_ZuexleRfYOH2Rd4j-93XsOEUdeAEokGad1RdGXDTuN-UHcWMncC_X7eaLwVMZrrv25DqSWqCjrK0rmuSR-ynTK7Szx1vZB893pGydw7-q4vx9jt6x6Mdx_As"
                   target="_blank"
                   rel="noopener"
                   >Run it</a
@@ -3644,16 +3646,16 @@ count = 5500</code></pre>
                 <pre><code>x = u
 y = 0.38sin(2sqrt(u^2+v^2)-t)
 z = v
-u = -3 .. 3
-v = -3 .. 3
+u = -2.8 .. 2.8
+v = -2.8 .. 2.8
 hue = 0.58-0.08sin(2sqrt(u^2+v^2)-t)
-size = 0.04
-count = 7000</code></pre>
+size = 0.09
+count = 10000</code></pre>
               </details>
               <p class="card-links">
                 <a
                   class="button"
-                  href="https://ryanjosephkamp.github.io/splashery/#s=d.dVPZbtswEPyVYPKSoGuBvpKUb_2G9qlFAlDU2mZNiwwPHwn07wUpO0gTxBBArbyzu7MzfIXyHhLRWxU3HE4g7DlE43rIOUEHVom7HwkSMzG7m0zFZCp-CSHr0wghfoMQmTvI-WK6WEwJyZ0gX7E1fQeJNhubTA-C6c6d0oSfs0qlCcH58hILwgeOXFrpHJPbgXCERAbhBAnRzB-i6W9m8Tmkm_w0-7Z_mt1O0i0IL5DYg5AhMZlfNc3VvDD5L9pkrlWWDxPRiC9LBUiAsB6PdjyieRnBYgGCdrkvY94LIcqfPrAq3DAMBOvctpBpld6ug8t1CV6tGYS04V2po3JyICituRY6x3U3P7WyDDkl8NG7mEMJBgKvVqzTuCe35XIWkVbKRibEFLhfpw2kaO4IB9e2pYpolgPhUJX4Mn-5JHQmsK6KSDGUMEZn95-6nJmOmOir7GOPLjj_Ibt1udd1iEXJ1iolDpf8nVr3Resvp7onBNWZHMcCAyEdTPyIULtRC9Es37OeE9TRREicMBCiNfojF--iORMmxAOzr8DlG_JYkF6Z_tOU1Qy143hvzoF21hX3XPPdvJ1xdcMbPia18xHyz-NA0GrHQZXPJ3W4rNObpGup2QMhOGvrZJ2JSdU1lhUUo3ir6v1KOfRJVcIpZL44BBK963kcvmy8L8n17tXvhJVVZ3f74P5eZMchKF_8z55V8dn0zKgMjetV_YHe2BGuRbtYfdd4rOLay04ukkwJHSdlbPVkkdyNnV6hrNm_jb1z5R0xGWvx3lWlf5-Cs8X0wzD8Aw"
+                  href="https://ryanjosephkamp.github.io/splashery/#s=d.dVPLbtswEPyVYHJJ0LVAyXbq8NZvaE8tEoCi1jZrWmRIyo8E-veClB0UCSIIoJba1-zMvkF5D4norYpbDmcQDhyicT3knKADq8TdjwSJRjQPs1rMavFLCFneSgjxG4TI3EHOF_ViUROSO0O-YWf6DhLtYGwyPQimu1RKM34ZVMpFCM7nj5gjfODIuZQeYnJ7EE6QGEA4Q0JU81U0_V0TX0K6G56bb4fn5n6W7kF4hcQBhAESs6Za3VTVTVOtMppPN9uBS7blaiYq8WXKAAkQNtPRTkc0r1OweARBu6HP7dZCCJH_-sAqg8Q4Eqxzu4yqVXq3CW4o0_BqwyCkLe9zIjUkB4LSmkumi12G9FMry5A1gU_exSFkYyTwes06TQNzO85nZmutbGRCTIH7TdpCiuqBcHRtm7OIajkSjoWSL_2XS0JnAutCjRRjNmN09vCpygXpFBN94X-q0QXnP3i3buh1aWKRvbVKicPVf682fSb9y66-E4LqzBCnBCMhHU38GKH2ExmiWv6Pek5QJxMhccZIiNboj1i8i-YCmBCPzL4ELt8jTznSK9N_6rKooVScFuhiaGddls8tP8zbhosa3uNjUnsfIf88jQSt9hxUvj6r43Wc3iRdUjUrQnDWls46E5MqY8wjyELxVpVFS0PokyqAUxj4qhBI9K7nqfk88T47lyUs94S1VRd5--D-XmnHMSifF4A9q6yz-oIoN43bdXlA7-gIt6JdrB81ngq59jqTKyU1oeOkjC2azJS7qdIblDWH97b3Ln8jJmMt_ldVrt-n4GwW_TiO_wA"
                   target="_blank"
                   rel="noopener"
                   >Run it</a
@@ -3716,14 +3718,14 @@ y = 0.22(u^2-v^2)cos(t)+0.2uvsin(t)
 z = v
 u = -1.6 .. 1.6
 v = -1.6 .. 1.6
-hue = 0.6+0.08sin(t)
-size = 0.035
-count = 6500</code></pre>
+hue = 0.6+1.2(0.22(u^2-v^2)cos(t)+0.2uvsin(t))
+size = 0.06
+count = 10000</code></pre>
               </details>
               <p class="card-links">
                 <a
                   class="button"
-                  href="https://ryanjosephkamp.github.io/splashery/#s=d.dVPLbtswEPyVYHJJkLVAyY-mvPUb2lOLBKCotc2aFlmSsuME-veClG0ECSIIoJba1-zMvkF5D4norYpbDicQDhyicT3knKADq8TdjwSJRjSrWS1mtfglhCxvJYT4DUJk7iDni3qxqAnJnSDfsDN9B4l2MDaZHgTTnSulGf8bVMpFCM7nj5gjfODIuZQeYnJ7EF4gMYBwgoSomuZueG5mh-fmXrt4l-4fRNUMh2j6u3QPwiskDiAMkJjV1eqmqm7qapUxfbrZDlxyrh5EJR6vKQIkQNhMRzsd0bxOzmK-BEG7oc9drpZC5L8-sMrQMI4E69wuY2mV3m2CG8oMvNowCGnL-5xIDcmBoLTmkuhsl9H81MoyZE3gF-_iELIxEni9Zp2mMbkd5zNztFY2MiGmwP0mbSFFtSIcXdvmLKJajoRjIeJL_-WS0JnAuhAixZjNGJ09fKpyRjrFRF9Yn2p0wfkP3q0bel2aWGRvrVLicPHfq02fqf6yq2-EoDozxCnBSEhHEz9GqP3EhaiW71HPCerFREicMBKiNfojFu-iOQMmxCOzL4HLa-RLjvTK9J-6LGooFae1ORvaWZflc8uredtwUcM1Pia19xHyz9NI0GrPQeXrkzpexulN0iVV80gIztrSWWdiUmWMeQRZKN6qsl5pCH1SBXAKA18UAone9Tw1nyfeZ-eyeuWesLbqLG8f3N8L7TgG5fMCsGeVdVafEeWmcbsuD-iKjnAr2sX6u8ZTIddeZnKhpCZ0nJSxRZOZcjdVeoOy5nBte-_yN2Iy1uK9qnL9PgVns-jHcfwP"
+                  href="https://ryanjosephkamp.github.io/splashery/#s=d.hVPbbtswDP2V4vQlRRVDdi7b9LZv2J42tIAiM4kWxdIkOZcW_veBchIULYoZBmTK5CEPefgKHQIUUnA6bSmeIXCgmKzvoGYCJpLO1H7PUGhks5zWclrLn1Kq8lZSyl8QSEQt1Gxez-e1QPZnqFfsbNdCYdVbl20HAdteMuUp_e115iQCPvBH4ogQKRGnMn3Kfg-BExR6CJyhIKummfTPzfTw3DwYnyb54VFWTX9ItpvkBwi8QOEAgR4K07pa3lXVXV0tmdOHm21PBXP5WFfN5D_YDB6hAIHNeKzGI9mXEUYypvF9x-XXUkrJf0MkzaQxDALO-x2zXGmz20Tfl-4EvSEI5C3tGUj32UNAG0MF6WKXpv0w2hFULUCn4FMf2RgEaL0mk8cG-h3xydNba5dIIOVI3SZvoWS1FDj61YpRZLUYBI5lRJ_6LxYCrY1kyqiUHNhMybvDhywXpmNMCkUPY442-vDOe-X7zpQi5uxtdM4Ur_57velYBJ9W9UUg6tb2aQQYBPLRpvcRej8OQ1aLt6xnAvpkExTOGASSs-Y9l-CTvRAWSEeiUAIXt8gTRwZtuw9VFjWUjONCXQzjnWf53NNytmqoqOEWn7LehwT1-2kQMHpPUfP1WR-v7Qw2mwLVfBWI3rlSWWtT1qWN3AIWSnC6LF7uY5d1IZxjT1eFQKHzHY3Fc8c7di5LWe4F1k5f5B2i_3MdO45RB14ACqRZZ_WFEReN-3V5IG7sBO7lar7-ZvBUhuuuPbmOpBZoKWvriiZ55H7M9Art7OFW9t7zN1K2zuGtqjh_l6N3LPphGP4B"
                   target="_blank"
                   rel="noopener"
                   >Run it</a
@@ -3813,28 +3815,31 @@ count = 6000</code></pre>
           <article class="card" id="g-morphing-sphere">
             <img
               src="../assets/gallery/morphing-sphere.webp"
-              alt="Sphere to cube-like form, made of splats"
+              alt="Breathing bumpy sphere, made of splats"
               width="256"
               height="256"
             />
             <div class="body">
-              <h5>Sphere to cube-like form</h5>
-              <p>A periodic blend shifts a round surface toward a softly squared silhouette.</p>
+              <h5>Breathing bumpy sphere</h5>
+              <p>
+                Four-fold bumps grow and shrink across a round surface as its color follows each
+                bump.
+              </p>
               <details class="fold program">
                 <summary>Show the program</summary>
-                <pre><code>x = sin(v)cos(u)*(1+0.12cos(4u)cos(4v)sin(t))
-y = cos(v)*(1+0.12cos(4u)cos(4v)sin(t))
-z = sin(v)sin(u)*(1+0.12cos(4u)cos(4v)sin(t))
+                <pre><code>x = sin(v)cos(u)(1+0.2cos(4u)cos(4v)sin(t+1.2))
+y = cos(v)(1+0.2cos(4u)cos(4v)sin(t+1.2))
+z = sin(v)sin(u)(1+0.2cos(4u)cos(4v)sin(t+1.2))
 u = 0 .. 2pi
 v = 0 .. pi
-hue = 0.58+0.1sin(t)
-size = 0.035
-count = 7000</code></pre>
+hue = 0.6+0.5cos(4u)cos(4v)sin(t+1.2)
+size = 0.05
+count = 10000</code></pre>
               </details>
               <p class="card-links">
                 <a
                   class="button"
-                  href="https://ryanjosephkamp.github.io/splashery/#s=d.hVPLbtswEPyVYnKx241A-ZGkuvUb2lOLHGhqbbOmRZak7DiB_r1YyjaCBEEEQeRSO_uYHb5Ah4AGKTidthxPIBw4Jus7NHOCiawztz8yGszU7O62Vre1-qVUU95KKfUbhMTcopkv6sWiJmR_QvOCne1aNFj11mXbgWDbc6Z8y_96nSUJwQfZJEGEyIkllelT9nsQngRhu8lhanya9NOvk_qbquqZWIu-HC4OU_HI0ykIJwH7NDl86vl8jSzfzyP3aKC-VNWXWbBC0sUs1rZnsavlg8QYQSBENABhMy6rcUn2eXRW8yUIxvedtHyvlJK_IbIWnjAMBOf9TohZabPbRN8XQoPeMAh5y3sJpPvsQdDGcAl0tgvPP412jKYm8FPwqY9iDARer9nkkXO_Y1ll4GvtEhNSjtxt8haNqu4IR79aSRRVLQfCsUz1Q__lktDayKZMt1GDmCl5d3iX5dzpiEmhSGjM0UYf3nivfN-ZUsRCvI3OmePFf683nejmw6ruCVG3tk9jgIGQjza9Rej9OAtVLV93PSfoJ5vQ4ISBkJw1b3sJPtlzw4R0ZA4FuLwinwQZtO3eVVnUUDKOd_BsGO-8yOeG7-arGRc1XPEp631IaP48DgSj9xy1HJ_08UJnsNmUULMHQvTOlcpam7IuNAoFIpTgdLmruY9d1qXhHHu-KAQNOt_xWLww3olzucflnLB2-izvEP3fy9hxjDrIBeDAWnRWnzuSonGzLg_o2h3hRq0W6-8Gj2W47sLJZSQ1oeWsrSualJH7MdMLtLOHa9l7L3ukbJ3Da1VJ_i5H70T0wzD8Bw"
+                  href="https://ryanjosephkamp.github.io/splashery/#s=d.jVPLbtswEPyVYHKxkY1AObbb6tZvaE8tcqCptc2aFlmS8iOB_r1YyjaKBAEiCCKX2tnH7PAVOgQ0SMHptOV4BuHAMVnfoXkimMg6c_s9o8FMzZaPtXqs1U-lmvJWSqlfICTmFs3TvJ7Pa0L2ZzSv2NmuRYNVb122HQi2vWTKj_y311mSEHyQTRJEiJxYUpk-Zb8H4SQI200OU-PTpJ9O6gdVzWQ_78vR_DCV__mhrmbTKQhngfs0OXzC9-UWXb6fid6jgbqrqrtZsELV1SzWtmexq-WDqhYfRQEhogEIm3FZjUuyLyNaLUAwvu-EiFoppeRviKyFPgwDwXm_E75W2uw20feF56A3DELe8l4C6T57ELQxXCJd7EL_D6Mdo6kJfAo-9VGMgcDrNZs8jsLvWFbRwVq7xISUI3ebvEWjqiXh6FcriaKqxUA4lmF_6L9YEFob2ZShN2oQMyXvDu-yXDodMSkUZY052ujDG--V7ztTipiLt9E5c7z67_WmEzl9WNUXQtSt7dMYYCDko01vEXo_DkNVi_-7fiLok01ocMZASM6at70En-ylYUI6MocCXNyQJ0EGbbt3VRY1lIzj1bwYxjsv8rnn5dNqxkUNN3zKeh8Smt_PA8HoPUctx2d9vNIZbDYl1OwrIXrnSmWtTVkXGoUCEUpwulzh3Mcu69Jwjj1fFYIGne94LF4Y78S5XO9yTlg7fZF3iP7Pdew4Rh3kAnBgLTqrLx1J0bhflwd0645wr1bz9TeD5zJcd-XkOpKa0HLW1hVNysj9mOkV2tnDrey9lz1Sts7hf1VJ_i5H70T0wzD8Aw"
                   target="_blank"
                   rel="noopener"
                   >Run it</a
@@ -3858,18 +3863,18 @@ count = 7000</code></pre>
               <details class="fold program">
                 <summary>Show the program</summary>
                 <pre><code>x = u
-y = 0.32vcos(t)
-z = 0.32vsin(t)
-u = -2 .. 2
+y = 1.1vcos(2u+t)
+z = 1.1vsin(2u+t)
+u = -2.4 .. 2.4
 v = -1 .. 1
-hue = 0.55+0.15v
-size = 0.035
-count = 6000</code></pre>
+hue = 0.5+0.25v+0.1u
+size = 0.06
+count = 10000</code></pre>
               </details>
               <p class="card-links">
                 <a
                   class="button"
-                  href="https://ryanjosephkamp.github.io/splashery/#s=d.dVPLbtswEPyVYHJp0bVA2Vba8tZvaE8tcqCptc2GFlmSsuME-vdiKTsIEkQQQC21j5nd2WeYGKGRozd5z-kMwpFTdmGAXhFsYlO4_1GgsVTLu0WrFq36pZSub6OU-g1CZu6hV-t2vW4JJZyhn_Hghh4am9H54gYQXH-pVBb8bzRFihBClI8sETFxZillx1zCAYRHaIwgnKGhmtXyaEP-VD6D8HS9yW6Yb0ZoLJY3TXOzFBZitWK1IOxHrv5d90U1bXcEIUEDhN18bOYju6fZUa06EGwYB8Fzp5SSvzGxERKYJoIP4UFQb4x92KUwVrbR7BiEsueDJDJjCSAYa7kmuti1CT-t8QzdEvgxhjwmMSYCb7dsy9yQ8MByyjS2xmcm5JJ42JU9tGruCKew2UgW1XQT4VRb_qF_1xF6l9jW1ms1iZlz8Md3VS5M55gc63znGn0K8Y33JoyDrSDW4m1NKZyu_gezG2SoH6L6Skimd2OeE0yEcnL5bYQ5zLNQTfea9YpgHl2GxhkTIXtn33KJIbsLYUI-Mcca2L1EPkpkNG54h7KqoVacF-Ri2OCDyOeW71abJVc1vMTnYg4xQ_-5nwjWHDgZuT6b07Wd0RVbUy2_EVLwviLrXS6mtlFaIEKJ3tRFKmMaiqmESxr5qhBoDGHgGbx0fBDnumT1nrD15iLvmMLf69hxSibKAnBkIzprL4wENG639QG9sCPcqs16-93ivg7XX3tyHUlL6LkY56smZeRhrvQM493xBfYhyDdycd7jtaqk_lBS8CL6aZr-Aw"
+                  href="https://ryanjosephkamp.github.io/splashery/#s=d.dVPLbtswEPyVYHJpEVqg5Edb3voN7alFDhS1tlnTIktSfiTQvxdLyUaRIIIAalf7mp3hK3QIUEjB6bSneIXAiWKyvodaCphIOlP3PUOhkc1mUctFLX9KqcpbSSl_QSARdVDLVb1a1QLZX6FecbB9B4V2sC7bHgK2mzvlBf0ddOYmAj7wR-KMECkRtzJDyv4IgQsUBghcoVBX9cn49KkZnvJnCLzMvmT7u2-AwqKpVg9V9dBUK0bDnprtGgL7gaAgq_WTrJr16UlWNZePUIDAbjra6Uj2ZQqWGwgYP_Q8Wi2llPw3RNIMCOMo4Lw_MIJWm8Mu-qEgD3pHEMh7OnIhPWQPAW0MlUqzXRbyw2hHULUAXYJPQ2RjFKDtlkyeluMPxCczs9UukUDKkfpd3kPJaiNw9m3LVWS1HgXOZf0fxq_XAp2NZAoNSo5spuTd6V2XGemUk0LheurRRR_eRLd-6E0ZYsXRRudM8RZ_1LueCf5wqi8CUXd2SFOBUSCfbXqboY8TGbJa_496KaAvNkHhilEgOWveYgk-2RmwQDoThZK4vmdeODNo27-bsqihdJwuy2wY7zzL55E2y7ahooZ7fsr6GBLU7-dRwOgjRc3uqz7f1hlsNqVU81UgeufKZJ1NWZc18gpYKMHpcqnyEPusC-AcB7opBAq972kanjfec3C5cMUvsHV6lneI_s-NdpyjDnwBKJBmndUzIh4aj9vyQNzRCTzKdrX9ZvBcyHW3ndwoqQU6ytq6okmm3E-dXqGdPd3HPnr-RsrWOfyvKu7f5-gdi34cx38"
                   target="_blank"
                   rel="noopener"
                   >Run it</a
@@ -3895,19 +3900,19 @@ count = 6000</code></pre>
               <p>Five radial points breathe in and out with the beat of a sine wave.</p>
               <details class="fold program">
                 <summary>Show the program</summary>
-                <pre><code>x = (0.7+0.16sin(t))(0.65+0.35cos(5u))cos(u)
-y = 0.12sin(5u)
-z = (0.7+0.16sin(t))(0.65+0.35cos(5u))sin(u)
+                <pre><code>x = 1.8v(0.65+0.16sin(t))(0.45+0.55(1-abs(sin(2.5u))))cos(u)
+y = 1.8v(0.65+0.16sin(t))(0.45+0.55(1-abs(sin(2.5u))))sin(u)
+z = 0.3(1-v)
 u = 0 .. 2pi
 v = 0 .. 1
-hue = 0.08+0.06sin(t)
-size = 0.04
-count = 6000</code></pre>
+hue = 0.1+0.08v+0.04sin(t)
+size = 0.05
+count = 10000</code></pre>
               </details>
               <p class="card-links">
                 <a
                   class="button"
-                  href="https://ryanjosephkamp.github.io/splashery/#s=d.jVPBbtswDP2V4vWSoKohJ3Ha6bZv2E4belBkJtGiWJokN0kL__tA2SmKFgVmGJAokY_k49MrdAhQSMHptKd4gcAzxWR9B7UUMJF0pvZ7hsJCLtb3tbyv5U8pVfkrKeUvCCSiFmq5qlerWiD7C9QrDrZrobDprcu2g4Btp0z5nv72OnMSAR94kzgiRErEqUyfsj9C4AyFmawe7mRVr5PtZnk-n8lq3dzJatkYn2ZNP5_z2s8hcIGCrOoFezbl5OW_APiiuPcMcFNVN4tgmYqrWUNg31OBl493spITGAQiFCCwG5fNuCT7MnmvIGB833FfayklX4ZImsnAMAg47w_c_Uabwy76vrAW9I4gkPd0ZBzdZw8BbQwVoMkuZP4w2hFULUDn4FMf2RgEaLslk0di_YF45alutUskkHKkbpf3ULJaC5z8ZsMosmoGgVMZ3Zf-TSPQ2kimjFDJgc2UvHv-lGXqdIxJoehkzNFGHz54b3zfmVLEir2Nzpni1f-odx2L48uqHgSibm2fRoBBIJ9s-hihj-MsZNW873opoM82QeGCQSA5az72EnyyU8MC6UQUSmDzFnnmyKBt96nKIoaScXxok2G886yeW1ovNwsqaniLT1kfQ4L6_TQIGH2kqPn4ok9XOoPNpkAtHgWid65U1tqUdaGRKWChBKfLg8x97LIuDefY01UhUOh8R2PxzHjHzuWxlnOBrdOTukP0f65jxynqwPqnQJp1Vk8dcdG43ZYP4q07gVu5WW2_GTyV4borJ9eR1AItZW1d0SSP3I-ZXqGdfX4r--h5j5Stc3ivKs7f5egdi34Yhn8"
+                  href="https://ryanjosephkamp.github.io/splashery/#s=d.nVPLbtswEPyVYHKxEVqgbMtNees3tKcWOVDU2mFDiyxJ-ZFA_14sZRtFglwqCCKX2tnH7PANOgQopOB0eqZ4hsCBYrK-h1oJmEg6U_ctQ2Epl5tFLRe1_CGlKm8lpfwJgUTUQa3W9XpdC2R_hnrDi-07KLSDddn2ELDdJVNe0J9BZ04i4ANvEiNCpEScygwp-z0ETlCoq8fDTFab5kFW9SbZfpbn85ms1nzQNLN6ods04_Nl1Qzz-XxufJoNcwic_wvO-wJ_hYKsVrN6cWBzYPOuqu6WwTJPV7OGwPNAxbl-kJV8PPB3PeWCQIQCBHbT0k5Lsq8TRDYQMH7oufNaSin5b4ikmS-Mo4Dz_oUJarV52UU_FGKD3hEE8jPtOZAesoeANoZKpItd-P5utCOoWoBOwachsjEK0HZLJk_c-xfilQe_1S6RQMqR-l1-hpLVRuDo25ajyKoZBY5lup_6N41AZyOZMmUlRzZT8u7wIcul0wmTQpHSlKOLPrzzbv3Qm1LEmr2Nzpni1X-vdz3r59OqvghE3dkhTQFGgXy06T1C76dhyKr5t-uVgD7ZBIUzRoHkrHnfS_DJXhoWSEeiUIDNDXliZNC2_1BlUUPJON3Fi2G88yyfe9qs2iUVNdzwKet9SFC_nkYBo_cUNR-f9fFKZ7DZlFDLR4HonSuVdTZlXWhkClgowelyZ_MQ-6xLwzkOdFUIFHrf01Q8M96zc7nP5Vxg6_RF3iH639ex4xh14AtAgTTrrL50xEXjflseiFt3AveyXW-_GjyV4borJ9eR1AIdZW1d0SSP3E-Z3qCdPdzK3nveI2XrHP5VFefvc_SORT-O418"
                   target="_blank"
                   rel="noopener"
                   >Run it</a
@@ -3971,13 +3976,13 @@ z = v
 u = -2 .. 2
 v = -2 .. 2
 hue = 0.62+0.12sin(2u)sin(2v)
-size = 0.035
-count = 6500</code></pre>
+size = 0.065
+count = 10000</code></pre>
               </details>
               <p class="card-links">
                 <a
                   class="button"
-                  href="https://ryanjosephkamp.github.io/splashery/#s=d.dVPJbtswEP2V4OWSoGOBkpe2vPUb2lOLHChqbLOmRZakvCTQvxekbCMLIgggR5rtzXvzAuU9JKK3Km45nEE4cIjG9ZBzgg6sEnc_EiQa0axmtZjV4pcQsryVEOI3CJG5g5wv6sWiJiR3hnzBzvQdJNrB2GR6EEx3qZRm_G9QKRchOJ8vMUf4wJFzKT3E5PYgnCAxgHCGhKjmy2j6h2Z4LMfhUbv4kB5BeIbEAYQBErPmrqrumgzkjbUduCRZNV9EVTdvM4EQIAHCZjra6YjmeYoS8yUI2g197m-1FCL_9YFVBoVxJFjndhlFq_RuE9xQ0Hu1YRDSlvc5kRqSA0FpzSXRxS5D-amVZciawCfv4hCyMRJ4vWadpgG5Heczs7NWNjIhpsD9Jm0hRbUiHF3b5iyiWo6EY6HgU__lktCZwLpQIcWYzRidPXyockE6xURf-J5qdMH5d96tG3pdmlhkb61S4nD136tNn0n-tKuvhKA6M8QpwUhIRxPfR6j9xIWolq9RzwnqZCIkzhgJ0Rr9Hot30VwAE-KR2ZfA5S3ylCO9Mv2HLosaSsVpYS6GdtZl-dzzat42XNRwi49J7X2E_PM0ErTac1D581kdr-P0JumSqvlGCM7a0llnYlJljHkEWSjeqrJYaQh9UgVwCgNfFQKJ3vU8NZ8n3mfnsnTlO2Ft1UXePri_V9pxDMrnBWDPKuusviDKTeN-XR7QDR3hXrSL9XeNp0Kuvc7kSklN6DgpY4smM-VuqvQCZc3h1vbe5TtiMtbitapy_T4FZ7Pox3H8Dw"
+                  href="https://ryanjosephkamp.github.io/splashery/#s=d.dVPJbtswEP2V4OWSoGOBkpe2vPUb2lOLHChqbLOmRZakvCTQvxekbCMLIgggR5rtzXvzAuU9JKK3Km45nEE4cIjG9ZBzgg6sEnc_EiQa0axmtZjV4pcQsryVEOI3CJG5g5wv6sWiJiR3hnzBzvQdJNrB2GR6EEx3qZRm_G9QKRchOJ8vMUf4wJFzKT3E5PYgnCAxgHCGhKjmy2j6h2Z4LMfhUbv4kB5BeIbEAYQBErPmrqrumgzkjbUduCRZNV9EVTdvM4EQIAHCZjra6YjmeYoSqyUI2g197q8WQoj82wdWGRXGkWCd22UYrdK7TXBDge_VhkFIW97nTGpIDgSlNZdMF7tM5adWliFrAp-8i0PIxkjg9Zp1mibkdpzPTM9a2ciEmAL3m7SFFNWKcHRtm7OIajkSjoWDT_2XS0JnAuvChRRjNmN09vChygXpFBN9IXyq0QXn33m3buh1aWKRvbVKicPVf682fWb5066-EoLqzBCnBCMhHU18H6H2ExmiWr5GPSeok4mQOGMkRGv0eyzeRXMBTIhHZl8Cl7fIU470yvQfuixyKBWnjbkY2lmX9XPPq3nbcFHDLT4mtfcR8s_TSNBqz0Hlz2d1vI7Tm6RLquYbIThrS2ediUmVMeYRZKF4q8pmpSH0SRXAKQx8VQgketfz1HyeeJ-dy9aV74S1VRd9--D-XmnHMSifN4A9q6yz-oIoN437dXlAN3SEe9Eu1t81ngq59jqTKyU1oeOkjC2azJS7qdILlDWHW9t7l--IyViL16rK9fsUnM2iH8fxPw"
                   target="_blank"
                   rel="noopener"
                   >Run it</a
@@ -4161,13 +4166,13 @@ z = exp(0.1u)sin(u)(1+0.25cos(v))
 u = 0 .. 6pi
 v = 0 .. 2pi
 hue = u/(6pi)
-size = 0.025
-count = 8500</code></pre>
+size = 0.04+0.01u
+count = 10000</code></pre>
               </details>
               <p class="card-links">
                 <a
                   class="button"
-                  href="https://ryanjosephkamp.github.io/splashery/#s=d.dVPbjtowEP2V6uwLqN7UAUK3fus3tE-t9sE4A7iY2LUdLrvKv1fjAEK73SiSPZ7rmTnzCh0CFFJwOm0pniFwoJis76DmAiaSztR-z1CYydnysZaPtfwppSp_JaX8BYFE1ELNF_ViUQtkf4Z6xc52LRRWvXXZdhCw7SVTfqS_vc6cRMAHviT2CJEScSrTp-z3EDhBgU5hIqu6nxqfJv10Un-W1axh4TCdQuB8b8OqZLvJgTUv9xp-_Y93DwX5qao-LYNl8FdxVsRtT1Dov0yWwbJ1hAIENuOxGo9kX9hKVnLWQMD4vmMQT42UrA2RNCPHMAg473cMdaXNbhN9X1oU9IYgkLe050C6zx4C2hgqgS5y6dwPox1B1YKB-dRHFgYBWq_J5LGLfkd88gjX2iUSSDlSt8lbKFktBY5-teIosmoGgWOZ04f2TSPQ2kimzEvJgcWUvDu8y3JBOvqkUEgx5mijD2-sV77vTCliwdZG50zxar_Xm46Z8GFVXwWibm2fxgCDQD7a9NZD78dZyKq5Rz0X0CeboHDGIJCcNW-xBJ_sBbBAOhKF4tjcPE_sGbTt3lVZ2FAyjlt1EYx3nunzQMv5akaFDTf_lPU-JKjfz4OA0XuKmp_P-nhtZ7DZlFCzJ4HonSuVtTZlXdrILWCiBKfL9uU-dlkXwDn2dGUIFDrf0Vg8d7xj47KZ5V1g7fSF3iH6P9ex4xh14AWgQJp5Vl8QcdF4WJcP4oZO4EGuFutvBs9luO7ak-tIaoGWsraucJJH7sdMr9DOHm5l7z3fkbJ1Dves4vxdjt4x6Ydh-Ac"
+                  href="https://ryanjosephkamp.github.io/splashery/#s=d.dVPLbtswEPyVYHJxUEalHNttees3tKcWOVDU2mZDiywfdpxA_14sZRtG0ggCyCVnH7M7fIUOAQopOJ22FI8Q2FNM1g9QDwImks7Uf89QmMv56r6V9638KaWqfyOl_AWBRNRDPSzaxaIVyP4I9YonO_RQ6Ip12Q4QsP0pU76nv0VnTiLgA28Se4RIiTiVKSn7HQSeoUDPYSabttwZn2blbtZ-ks18ycb-7g4Cx2sMXyU7zPZ883J9w6f_8S5QkDdNc7MKlsmfzXk1t4WgUD7PVsEyOkIBAptp6aYl2RdGyUYuPslGtgUCxpeBmbRSSsmYEEkzf4yjgPP-iQl32jxtoi-1UUFvCAJ5SzsOp0v2ENDGUI10smv_fhjtCKoVTM-nEtkYBWi9JpOnXvon4pUHudYukUDKkYZN3kLJZiVw8F3HUWSzHAUOdVof4pdLgd5GMnVqSo5spuTd_l2WE9PJJ4UqjSlHH314g-58GUwtYsFoo3OmeMbv9GZgPXxY1ReBqHtb0hRgFMgHm9566N00DNksr1k_COhnm6BwxCiQnDVvuQSf7ImwQDoQheq4vHg-s2fQdnhXZdVEzTi9rZNhvPMsoltaPXRzqmq4-KesdyFB_X4cBYzeUdR8fNSHczuDzaaGmn8ViN65WllvU9a1jdwCFkpwur7BXOKQdSWcY6GzQqAw-IGm4rnjA4Pr-6znAmunTyIP0f85jx2HqAM_AwqkWWftiREXjdt1_SAu7ARuZbdYfzN4rMN1556cR9IK9JS1dVWTPHI_ZXqFdnZ_KXvneY-UrXO4VhXnH3L0jkU_juM_"
                   target="_blank"
                   rel="noopener"
                   >Run it</a
@@ -4195,16 +4200,16 @@ y = cos(v)
 z = sin(v)sin(u)
 u = 0 .. 2pi
 v = 0 .. pi
-r = 0.15+0.25sin(v)
-g = 0.25+0.65(1+cos(v))/2
-b = 0.55+0.4(1-cos(v))/2
-size = 0.035
-count = 6500</code></pre>
+r = 0.05
+g = 0.1+0.85(1+cos(v))/2
+b = 0.15+0.8(1-cos(v))/2
+size = 0.05
+count = 10000</code></pre>
               </details>
               <p class="card-links">
                 <a
                   class="button"
-                  href="https://ryanjosephkamp.github.io/splashery/#s=d.dVPbctowEP2VzMkLmSxUBkxbv_Ub2qd28iDkBVSEpUoyhGT8752VgckkEw9jvPc9u2dfoUNAgxScTjuOZxCOHJP1HZoFwUTWmdsfGQ3mar6aVmpaqV9KNeU3U0r9BiExt2gWy2q5rAjZn9G8Ym-7Fg3WvXXZdiDY9lIpT_lfr7MUIfggH0kiQuTEUsr0KfsDCM8SYbvJ8cH4NOkfQDiL3afJUYSXm13exd6jgbqbze7mwQqaq1ikXc9oAEIU9ayqH9VsXo8ZQNgW7Vy0q3pSPY51Hr7MQVgXWy225aSavjUl-8LFqhY1CMb3naBY1UqJNUTWAh3DQHDe7wXrWpv9Nvq-zCjoLYOQd3yQRLrPHgRtDJdEF7mM7qfRjtFUBH4OPvVRhIHAmw2bPI7R71n-ZYcb7RITUo7cbfMOjZqtCCe_XksWNasHwqks6lP_uia0NrIpC2vUIGJK3h0_VLkgHWNSKKwYa7TRh3fea993pjSxFG-jc-Z49T_obSdU-LSrr4SoW9unMcFAyCeb3kfow7gLNavfol4Q9LNNaHDGQEjOmvdYgk_2ApiQTsyhBNa3yGeJDNp2H7osbCgVx7O6CMY7L7S759ViPefChlt8yvoQEpo_TwPB6ANHLeqzPl3HGWw2JdX8GyF650pnrU1ZlzHKCIQowelyfrmPXdYFcI49XxmCBp3veGxeJt6JcznNoidsnN6ORxKi_3tdO05RBzkcDqyFZ9UFkTSN-015QDd0hHu1Xm6-GzyV5brrTK4rqQgtZ21d4aSs3I-VXqGdPd7aPnj5RsrWObxlldTvcvROSD8Mw38"
+                  href="https://ryanjosephkamp.github.io/splashery/#s=d.dVPLbtswEPyVYHJxEFqlHCtNees3tKcWOVDU2mZNiyxJ-ZFA_14sZbtBggiCxOU-Z3f2FToEKKTgdNpQPEFgTzFZ30M9CJhIOlP3PUNhIReP81rOa_lTSlXeSkr5CwKJqIN6WNbLZS2Q_QnqFVvbd1BoB-uy7SFgu3OmPKe_g86cRMAHPiT2CJEScSozpOx3EDiyh-1n-zvj02y4g8CJ9T7N9iy8XPX8LfoBCvKmqm4WwTKai1ikzUBQgEDk60o2EFiXY30vq6dmVt9Pse--LCDQTqqGdbN6_laV7Av9j2H80HPhtZRSsjZE0gwX4yjgvN8yvlab7Tr6ofQl6DVBIG9ox4H0kD0EtDFUIp3l0q4fRjuCqgXoGHwaIgujAK1WZPLUOr8l_vPcVtolEkg5Ur_OGyhZPQocfNtyFFk1o8ChDOdT-6YR6GwkU4ak5MhiSt7tP2Q5I518UihMmHJ00Yd31q0felOKWLK10TlTvNjv9Lrn8X9a1VeBqDs7pCnAKJAPNr330LtpGLJq3qJ-ENBHm6BwwiiQnDXvsQSf7BmwQDoQheLYXD2P7Bm07T9UWdhQMk6rdBaMd56pdkuPD-2CChuu_inrXUhQv59HAaN3FDVfn_Th0s5gsymhFk8C0TtXKutsyrq0kVvARAlOl5XLQ-yzLoBzHOjCECj0vqepeO54z8ZlHcu9wMrp9bQYIfo_l7HjEHXgZaFAmnlWnxFx0bhdlQfiik7gVrbL1TeD5zJcd-nJZSS1QEdZW1c4ySP3U6ZXaGf317J3ns9I2TqHt6zi_H2O3jHpx3H8Bw"
                   target="_blank"
                   rel="noopener"
                   >Run it</a
@@ -4235,13 +4240,13 @@ z = (2+cos(u/2)sin(v)-sin(u/2)sin(2v))sin(u)
 u = 0 .. 2pi
 v = 0 .. 2pi
 hue = 0.5+0.25sin(4v)
-size = 0.04
-count = 8000</code></pre>
+size = 0.07
+count = 10000</code></pre>
               </details>
               <p class="card-links">
                 <a
                   class="button"
-                  href="https://ryanjosephkamp.github.io/splashery/#s=d.jVPbbtswDP2V4vSlQRVPcZKu09u-YXva0AdZZhItiqVJci4t_O8D5SToBQVmGJAokTzk4dELdAhQSMHptKF4gsCeYrK-g5oLmEg6U_s9Q6GW9cN0Jqcz-VNKVf5KSvkLAomohZovZovFTCD7E9QLtrZrodD01mXbQcC2Z6Q8pb-9zgwi4ANvEkeESIkYyvQp-x0EjlC4q--NT3f9l3qSbHe3n0x5uZj1fjIp1xMInBjg1eV-8ia03rPT83_lLDa791CQN1V1UwfL7Lw1Nz3xQbW8l1W95KBFAYlQgMB6XJpxSfZ59JYLCBjfd9zso5SSL0MkzQxhGASc91umpNFmu46-L1QGvSYI5A3tOI_us4eANoZKorNdGP5htCOomQAdg099ZGMQoNWKTB7Z9lvilUe90i6RQMqRunXeQMnqQeDgm4azyGo5CBzKPD_1Xy4FWhvJlLkqObCZknf7DyjnTseYFIp4Row2-vDOu_F9Z0oRC_Y2OmeKF_-dXnesmE-r-ioQdWv7NCYYBPLBpvcRejfOQlbL113PBfTRJiicMAgkZ837XoJP9tywQDoQhRK4vEYeOTJo232osoihII6v72wY7zyr55Ye5k1NRQ3X-JT1LiSo30-DgNE7ipqPT_pwoTPYbEqq-lEgeudKZa1NWRcamQIWSnC6vNLcxy7r0nCOPV0UAoXOdzQWz4x37FxecDkXWDl9VneI_s9l7DhEHVj_FEizzmbnjrho3K7KB3HtTuBWNovVN4OnMlx34eQykplAS1lbVzTJI_cj0gu0s_tr2TvPe6RsncNrVTF-l6N3LPphGP4B"
+                  href="https://ryanjosephkamp.github.io/splashery/#s=d.jVPbbtswDP2V4vSlQRVPdpJ209u-YXva0AdFZhItiqVJci4t_O8D5SToBQVmGJAokTzk4dELdAhQSMHptKF4gsCeYrK-g5oJmEg6U_s9Q6GRzcO0ltNa_pRSlb-SUv6CQCJqoWbzej6vBbI_Qb1ga7sWCsveumw7CNj2jJSn9LfXmUEEfOBN4ogQKRFDmT5lv4PAEQp3zb3x6a7_0kyS7e72kykvF7PZTyblegKBEwO8utxP3oQ2e3Z6_q-cxWb3HgrypqpummCZnbfmpic-qBb3smoWHDQvIBEKEFiPy3Jckn0eveUjBIzvO262llJKvg2RNFOEYRBw3m-Zk6U223X0feEy6DVBIG9ox4l0nz0EtDFUMp3tQvEPox1B1QJ0DD71kY1BgFYrMnmk22-JV571SrtEAilH6tZ5AyWrB4GDXy45i6wWg8ChDPRT_8VCoLWRTBmskgObKXm3_4By7nSMSaGoZ8Roow_vvJe-70wpYs7eRudM8eK_0-uOJfNpVY8CUbe2T2OCQSAfbHofoXfjMGS1eN31TEAfbYLCCYNActa87yX4ZM8NC6QDUSiBi2vkkSODtt2HKosaCuL4_M6G8c6zfG7pYbZsqKjhGp-y3oUE9ftpEDB6R1Hz8UkfLnQGm01J1XwViN65UllrU9aFRqaAhRKcLs8097HLujScY08XhUCh8x2NxTPjHTuXJ1zOBVZOn-Udov9zGTsOUQd-ABRIs87qc0dcNG5X5YO4didwK5fz1TeDpzJcd-HkMpJaoKWsrSua5JH7EekF2tn9teyd5z1Sts7htaoYv8vROxb9MAz_AA"
                   target="_blank"
                   rel="noopener"
                   >Run it</a
@@ -4265,20 +4270,20 @@ count = 8000</code></pre>
               <details class="fold program">
                 <summary>Show the program</summary>
                 <pre><code>x = u
-y = 0.15sin(u+v)
+y = 0.15sin(1.5u+1.5v)
 z = v
-u = -2pi .. 2pi
-v = -2pi .. 2pi
-r = 0.5+0.45sin(u)
-g = 0.5+0.45sin(v+2)
-b = 0.5+0.45sin(u+v+4)
-size = 0.035
-count = 7000</code></pre>
+u = -3 .. 3
+v = -3 .. 3
+r = 0.5+0.45sin(1.5u)
+g = 0.5+0.45sin(1.5v+2)
+b = 0.5+0.45sin(1.5u+1.5v+4)
+size = 0.09
+count = 10000</code></pre>
               </details>
               <p class="card-links">
                 <a
                   class="button"
-                  href="https://ryanjosephkamp.github.io/splashery/#s=d.dVPLbtswEPyVYHJpYVqgbCtpees3tKcWOVDU2mZNiyxJ-ZFA_14sZRuBgwgCJC73NTuzb9AhQCEFp9OW4hkCB4rJ-h5qKWAi6UzdjwyFhVw8zWs5r-UvKVV5Kynlbwgkog5quapXq1og-zPUG3a276DQDtZl20PAdpdKeU7_Bp25iIAP_JM4IkRKxKXMkLLfQ-AEhQECZyjIqm6S7b8Ms8NXCLxC4QCBAQrzRbAPVfWwCJYBfLBsB4ICBGLJ08xktZpycabNnfEwW7C5vfedHWYrvkj2lcqdXDYQMH7ouelnKSXfhkiakWIcBZz3O4bWarPbRD-UkQS9IQjkLe05kR6yh4A2hkqiy7lM6qfRjqBqAToFn4bIh1GA1msyeZqa3xF_mbK1dokEUo7Ub_IWSlZPAkfftpxFVs0ocCy8fOrfNAKdjWQKP0qOfEzJu8OHKhekU0wKRQRTjS76cOfd-qE3pYkVexudM8Wr_15vemb-066eBaLu7JCmBKNAPtp0H6H3Exeyat6jXgrok01QOGMUSM6aeyzBJ3sBLJCORKEENrfIE0cGbfsPXRY1lIrTFl0OxjvPcnukp2W7oKKGW3zKeh8S1J-XUcDoPUXN5rM-XscZbDYl1eKbQPTOlc46m7IuY-QRsFCC02Xb8hD7rAvgHAe6KgQKve9pap4n3rNz2cRiF1g7vZmWI0T_90o7jlEHXhgKpFln9QURN43HdXkgbugEHmW7Wn83eCnkuutMrpTUAh1lbV3RJFPup0pv0M4ebm3vPf8jZesc3quK6_c5eseiH8fxPw"
+                  href="https://ryanjosephkamp.github.io/splashery/#s=d.dVPbbtswDP2V4vRlQxRDTuJu1du-YXva0AdZZhItiqVJci4t_O8D5STo2tUwYFMieXjIwxfoEKCQgtNpS_EMgQPFZH0PtRQwkXSm7luGwkIuHua1nNfyh5SqvJWU8icEElEHtVzVq1UtkP0Z6gU723dQaAfrsu0hYLsLUp7Tn0FnBhHwgX8SR4RIiRjKDCn7PQROUBggcIaCrOom2f5TXTXDrK6aw2cIPEPhAIEBCvPlXVXdLZnCP9Z2IChAIJYszUxWq1smTrJ5f36YLfim_U9EwZ6t-DrZZyoe8hECxg89V19LKSXfhkiaOWMcBZz3OybZarPbRD-U5gS9IQjkLe05kR6yh4A2hkqmi1169t1oR1C1AJ2CT0NkYxSg9ZpMnvrnd8RfHt5au0QCKUfqN3kLJasHgaNvW84iq2YUOJYJfejfNAKdjWTKpJQc2UzJu8M7lAvTKSaFIocJo4s-vPFu_dCbUsSKvY3OmeLVf683PWvgw6q-CETd2SFNCUaBfLTpbYTeT8OQVfOa9VJAn2yCwhmjQHLWvOUSfLIXwgLpSBRKYHOLPHFk0LZ_V2VRQ0Gc9uliGO88S--eHpbtgooabvEp631IUL-eRgGj9xQ1H5_18drOYLMpqRZfBaJ3rlTW2ZR1aSO3gIUSnC57l4fYZ10I5zjQVSFQ6H1PU_Hc8Z6dy06Wc4G105tpUUL0v69jxzHqwMtDgTTrrL4w4qJxvy4PxI2dwL1sV-tHg6cyXHftyXUktUBHWVtXNMkj9xPSC7Szh1vZe8__SNk6h9eqYvw-R-9Y9OM4_gU"
                   target="_blank"
                   rel="noopener"
                   >Run it</a
@@ -4406,38 +4411,37 @@ spread = random</code></pre>
           <article class="card" id="g-hopf-link-sample">
             <img
               src="../assets/gallery/hopf-link-sample.webp"
-              alt="Hopf link sample, made of splats"
+              alt="Hopf link, made of splats"
               width="256"
               height="256"
             />
             <div class="body">
-              <h5>Hopf link sample</h5>
+              <h5>Hopf link</h5>
               <p>
-                A sampled family of linked circles shows the shape of Hopf fibers after projection.
+                Two circles pass through each other once, the simplest link, drawn as two dotted
+                rings in different colors.
               </p>
               <details class="fold program">
                 <summary>Show the program</summary>
-                <pre><code>x = 0.707cos(u)/(1-0.707cos(u+v))
-y = 0.707sin(u)/(1-0.707cos(u+v))
-z = 0.707sin(u+v)/(1-0.707cos(u+v))
+                <pre><code>x = 1.6(1-floor(2v))cos(u)+floor(2v)(1.6cos(u)+1.6)-0.8
+y = 1.6(1-floor(2v))sin(u)
+z = 1.6floor(2v)sin(u)
 u = 0 .. 2pi
-v = 0 .. 2pi
-hue = v/(2pi)
-size = 0.035
-count = 7000</code></pre>
+v = 0 .. 1
+hue = 0.02+0.55floor(2v)+0.1u/(2pi)
+size = 0.14
+count = 10000
+spread = random</code></pre>
               </details>
               <p class="card-links">
                 <a
                   class="button"
-                  href="https://ryanjosephkamp.github.io/splashery/#s=d.dVPLbtswEPyVYHJJENqh_Ihb3voN7alFDhS1tlnTIktSfiTQvxdL2W7iNIYAauXZx8wOX6FDgEIKTqc1xSMEdhST9S3UVMBE0pmabxkKEzl5GlVyVMkfUqryjKWUPyGQiBqo6ayazSqB7I9Qr9jYtoFC3VmXbQsB25w65RH96XTmJgI-8EvijBApEbcyXcp-C4EDFOR4IRfGp7vu_vGuGv0LH3b39xA4njHJtp9hXt5hHnb_R3WMuhmPbybBshDvw3VHUNg93k2CZXSEAgRWw1EPR7IvVHrJ6RwCxnctE1pIKfnfEEmzCuh7Aef9hmnX2mxW0XdFrqBXBIG8pi0X0l32ENDGUCl0iouK3412BFUJ0CH41EUOegFaLsnkQVG_IT55nUvtEgmkHKld5TWUHD8J7H1dcxU5nvcC-7KzT_HzuUBjI5myOyV7DlPybvehy4npkJNCMcjQo4k-XKFr37WmDDFjtNE5Uzzjt3rVsis-nWohEHVjuzQU6AXy3qbrDL0ddiHH87espwL6YBMUjugFkrPmmkvwyZ4IC6Q9USiJ80vmgTODtu2HKYsbSsfhhp0C451n-9zS07SeUHHDJT9lvQ0J6tdzL2D0lqLmz0e9P8sZbDal1OSLQPTOlckam7IuMrIEbJTgdLmJuYtt1oVwjh2dHQKF1rc0DM-Ktwwut7R8F1g6fbJ3iP73ee3YRx34AlAgzT6rTox4aNwuyw_iwk7gVtaz5VeD57Jcd9bkvJJKoKGsrSue5JX7odMrtLO7y9hbz-9I2TqHt67i_m2O3rHp-77_Cw"
+                  href="https://ryanjosephkamp.github.io/splashery/#s=d.dVPLbtswEPyVYHKxEVqlFNtNdes3tKcWOdDU2mZNiSxJ-ZFA_14sZQtB0ggCyCV39jE7fIXyHjWityruKVwgcKQQjetQPwroQCpR8z2hRiWr9aKUi1L-lLLOfyGl_AWBSNSgflyWy2UpkNwF9SsOpmtQY9Mbm0wHAdNcM6UF_e1V4iQCzvMmMsIHisSpdB-TayFwRo2yWM_KxdY6F2bVcT7XLs76-cN0MCuL9fWsLNbzhSyeIHD5DzKabtbPIfAyXk4300WPGvKuKO4qb5iKm1lCYN8Tm4WsHmSxWk3gB1mU_ZdZ5Q1HCKgBgd24bMYlmpcRWy4hoF3fcZellFLyrQ-kmJugusa1GAYB69yBKdkofdgF12cqvdoRBNKeWg6n-uQgoLSmHO9qZ4Z_aGUJdSlAZ-9iH9gYBGi7JZ1Gtt2BeOVRb5WNJBBToG6X9qhlsRY4uc2Go8hiNQic8jw_9V-tBBoTSOe51nJgM0Znjx-yXPsdMdFn8Yw5muD8O--N6zudi1iyt1YpUbj5t2rXsWI-reqrQFCN6eMYYBBIJxPfI1Q7jkQWq7ddPwqos4moccEgEK3R73vxLpprwwLxROQzcDUhz4z0ynQfqsyayBnH13c1tLOORXRP68dNRVkNEz4m1fqI-vfzIKBVS0Hx8UWdbnR6k3QOVT0JBGdtrqwxMalMI1PAQvFW5Vea-tAllRtOoaebQlCjcx2NxTPjHTvnF5zPBbZWXUXug_tzGztOQXl-BuRJsc7Ka0dcNO63-YOYuhO4l5vl9pvGcx6uvXFyG0kp0FBSxmZN8sjdmOkVyprjVHbreI-YjLV4qyrO36XgLIt-GIZ_"
                   target="_blank"
                   rel="noopener"
                   >Run it</a
                 >
-                <a
-                  href="https://en.wikipedia.org/wiki/Hopf_fibration"
-                  target="_blank"
-                  rel="noopener"
+                <a href="https://en.wikipedia.org/wiki/Hopf_link" target="_blank" rel="noopener"
                   >About the shape</a
                 >
               </p>
@@ -4490,22 +4494,22 @@ count = 3500</code></pre>
             />
             <div class="body">
               <h5>Superquadric</h5>
-              <p>Fractional powers round the corners of a box-like superquadric.</p>
+              <p>Fourth-power rounding turns a sphere into a soft box with six flattened faces.</p>
               <details class="fold program">
                 <summary>Show the program</summary>
-                <pre><code>x = cos(u)abs(cos(u))^0.6abs(cos(v))^0.6
-y = sin(v)abs(sin(v))^0.6
-z = sin(u)abs(sin(u))^0.6abs(cos(v))^0.6
+                <pre><code>x = 1.6cos(u)cos(v)/((cos(u)^4+sin(u)^4)^0.25(cos(v)^4+sin(v)^4)^0.25)
+y = 1.6sin(v)/(cos(v)^4+sin(v)^4)^0.25
+z = 1.6sin(u)cos(v)/((cos(u)^4+sin(u)^4)^0.25(cos(v)^4+sin(v)^4)^0.25)
 u = 0 .. 2pi
-v = 0 .. pi
-hue = v/pi
-size = 0.035
-count = 7000</code></pre>
+v = -pi/2 .. pi/2
+hue = 0.5+0.3v/pi+0.1sin(u)
+size = 0.06
+count = 10000</code></pre>
               </details>
               <p class="card-links">
                 <a
                   class="button"
-                  href="https://ryanjosephkamp.github.io/splashery/#s=d.dVPbbtwgFPyVaPKSSMRlr2l56ze0T61SCeOzu3RZQwHvJZH_vTrYXkUbxbIEA-c6Z3iDDgEKKTiddhQvEDhSTNa3UAsBE0lnar5nKMzlfP00k08z-VNKVf5KSvkLAomogVosZ8vlTCD7C9Qb9rZtoFB31mXbQsA2Y6b8RP86nTmJgA-8SewRIiXiVKZL2R8gcGbg00P3qOv0MOwe_8hqPcHjACFw4eC2fTgW02E33b2Od9317tMwHRTkXVXdzYNlMiZY0K4jKBy_FBChAIHtsNTDkuwrm8hKLlYQML5ruaFnKSXfhkiaWUDfCzjv99x2rc1-G31X6Ap6SxDIOzpwIN1lDwFtDJVAIy4s_jDaEdRMgM7Bpy4y6AVosyGTB0b9nnjlcW60SySQcqR2m3dQsloLnHxdcxRZrXqBU5nZp_arlUBjI5kyOyV7hil5d_yQZex08EmhCGTI0UQfbqxr37WmFLFka6NzpjjZH_S2ZVV8WtWzQNSN7dIQoBfIJ5tuPfRhmIWsVu-7Xgjos01QuKAXSM6a216CT3ZsWCCdiEJxXF09z-wZtG0_VFnUUDIOL2wExjvP8rmn9aKeU1HD1T9lfQgJ6vdLL2D0gaLm44s-TXQGm00JNf8qEL1zpbLGpqwLjUwBCyU4XV5i7mKbdWk4x44mhUCh9S0NxTPjLRuXV1rOBTZOj_IO0f-dxo5T1IEfAAXSrLPZ2BEXjftN-SCu3Qncy3q5-WbwUobrJk6mkcwEGsrauqJJHrkfMr1BO3u8ln3wvEfK1jm8VxXnb3P0jkXf9_1_"
+                  href="https://ryanjosephkamp.github.io/splashery/#s=d.pVTbbtswDP2V4fSlRVlXzm2b3vYN29OGDVBkJtWqWJokJ80K__tAOcmKDn2aYVgiRfLwcuRnmBihkaM3-YHTEYQ9p-xCDz0n2MSmcPepQGOmZqu7Vt216otSur6NUuorCJm5g54v2sWiJZRwhH7Go-s7aKwH54vrQXDdCanc8a_BFAEhhCibLB4xcWaBskMuYQfCEzTaZmVDvh5u5Lu_ub--nsQfi9vs-rq5-aGa2fJ6Mjjp9xf9DQjHKdB0cP-WJQi__xr-H-IADfWuad7NopOuQuMuuvuZqGQF4WFgMWqWt6qZ7--ju1VNOyGAkKABwnZa1tOS3e_JR61AsGHopV-tUkrJaUxspMsYR4IP4VHaujb2cZvCUMcRzZZBKA-8k0BmKAEEYy3XSCe5TumzNZ6hWwI_xZCHJMJI4M2GbZkmFh5ZVqHLxvjMhFwS99vyAK2aFeEQ1muJoprlSDhUTrxpv1wSOpfYVm5oNYqYc_D7f1BOlU4-OVYCThhdCvGV9ToMva1JLMTamlI4ne13ZtsL697M6j0hmc4NeQowEsrB5dceZjcNQzXLl1XPCebJZWgcMRKyd_Z1LTFkdyqYkA_MsTouL55P4hmN6__JsrKhIk43-CTY4IPQ54pX8_WMKxsu_rmYXczQ376PBGt2nIyoj-Zwbmd0xdZQsw-EFLyvmXUuF1PbKC0QokRv6k0vQ-qLqQWXNPCZIdDoQ89T8tLxXozrX6DqCRtvTvSOKfw8jx2HZKJcAI5shGftqSJJGleb-oAu1RGu1Hqx-WjxvQ7Xn3tyHklL6LgY5ysnZeRhQnqG8W5_SXsXZI9cnPd4ySrB70sKXkg_juMf"
                   target="_blank"
                   rel="noopener"
                   >Run it</a
@@ -4569,18 +4573,18 @@ count = 7000</code></pre>
               <details class="fold program">
                 <summary>Show the program</summary>
                 <pre><code>x = u
-y = u^3-3uv^2
+y = 0.12(u^3-3uv^2)
 z = v
-u = -1.3 .. 1.3
-v = -1.3 .. 1.3
-hue = 0.55+0.1sin(3u)
-size = 0.035
-count = 6500</code></pre>
+u = -1.2 .. 1.2
+v = -1.2 .. 1.2
+hue = 0.55+0.1sin(3u)+0.2(u^3-3uv^2)
+size = 0.05
+count = 10000</code></pre>
               </details>
               <p class="card-links">
                 <a
                   class="button"
-                  href="https://ryanjosephkamp.github.io/splashery/#s=d.dVPLbtswEPyVYHJp0bVAWZbb8tZvaE8tEoCi1jZrWmRJyo8E-veClB0ECSIIoEjtY2Z2-AzlPSSityruOFxAOHKIxg2QDUEHVon7HwkSS7FcL2qxqMUvIWR5KyHEbxAicw_ZrOrVqiYkd4F8xt4MPSS60dhkBhBMf-2UFvxvVCk3ITifP2LO8IEj51Z6jMkdQDhDYgThktfHZtGMx8clCE-QOIIwQmJRV81dVd3VVZPRvzvZjQwJUbXtF1HV0QyfmvEzCAESIGznpZuXaJ7maNG0IGg3DhnQuhUi__WBVWaBaSJY5_YZdqf0fhvcWOh6tWUQ0o4PuZAakwNBac2l0HVfVPiplWXImsBn7-IY8mYi8GbDOs2KuD3nNY9jo2xkQkyBh23aQYpqTTi5rstVRNVOhFPR_MP4tiX0JrAu2ksx5W2Mzh7fdbkynXOiLwOee_TB-TfRnRsHXUCscrRWKXG4xR_UdshT_RDVV0JQvRnjXGAipJOJbzPUYZ6FqNrXrBuCOpsIiQsmQrRGv-XiXTRXwoR4YvYlsX3JPOdMr8zwDmVxQ-k435DrRjvrsn3ued10Sy5ueMmPSR18hPzzMBG0OnBQ-fiiTjc5vUm6lFp-IwRnbUHWm5hUkTFLkI3irSo3KY1hSKoQTmHkm0MgMbiBZ_BZ8SEHl1tWzgkbq6729sH9vY0dp6B8vgDsWWWf1VdGGTTuN-UBvbAj3Itutfmu8VCGa2-a3EZSE3pOytjiyTxyN3d6hrLm-AL74PI3YjLW4rWrcv8hBWez6adp-g8"
+                  href="https://ryanjosephkamp.github.io/splashery/#s=d.dVPZbtswEPyVYPKSIGuBsq205Vu_oX1qkQCUtLZZ0yLLw0cC_XtByjYKBxEEUEvtNTuz71DOQSI4o8KG_QmEPfug7QC5IHSeVeT-e4TEXMyfZ7WY1eKnELK8lRDiFwiBuYdcLOvlsiZEe4J8x1YPPSTapE3UAwi6P1eKM_6bVMxFCNblj5AjnOfAuVSXQrQ7EI6QSCCcICGqev6QXhezRdq_zh9BeIPEHoQEiVldze-q6q6u5hnDh5tN4pKjaZ5EVQc9PCzS45OoblJ6SICwno52OoJ-m4JFA0Jn05CbrIUQIv91nlWGhnEkGGu3GUuruu3a21Rm4NSaQYgb3uVEKkULguo6LpnOdhnNj04ZhqwJfHQ2JJ-NkcCrFXdxGpPdcj4zRytlAhNC9Dys4wZSVM-Eg23bnEVUzUg4FCI-9W8aQq89d4UQKcZshmDN_kOVM9IpJrjC-lSj99bdeLc2DV1pYpm9OxUj-4v_Tq2HTPWnXX0heNXrFKYEIyEedLiNULuJDFE1_6NeENRRB0icMBKC0d0tFmeDPgMmhAOzK4HNNfKYI53Sw4cuixpKxWltzkZnjc3yuefnRTvnooZrfIhq5wLk75eR0Kkde5WvT-pwGafTsSup5l8J3hpTOut1iKqMMY8gC8UZVdYrJj9EVQBHn_iiEEgMduCp-TzxITuX1Sv3hJVRZ3k7b_9caMfBK5cXgB2rrLP6jCg3jftVeUBXdIR70S5X3zq8FHLNZSYXSmpCz1FpUzSZKbdTpXcoo_fXtnc2fyNEbQz-V1WuP0RvTRb9OI7_AA"
                   target="_blank"
                   rel="noopener"
                   >Run it</a
@@ -4673,30 +4677,31 @@ count = 3000</code></pre>
           <article class="card" id="g-gyroid-look">
             <img
               src="../assets/gallery/gyroid-look.webp"
-              alt="Gyroid-like sheet, made of splats"
+              alt="Gyroid slice, made of splats"
               width="256"
               height="256"
             />
             <div class="body">
-              <h5>Gyroid-like sheet</h5>
+              <h5>Gyroid slice</h5>
               <p>
-                A periodic height graph borrows the repeating rhythm of a gyroid while staying open.
+                A height graph of one slice of the gyroid function rises and falls in a repeating
+                pattern of hills and valleys.
               </p>
               <details class="fold program">
                 <summary>Show the program</summary>
                 <pre><code>x = u
-y = 0.2(sin(u)cos(v)+sin(v)cos(u))
+y = 0.5(sin(u)cos(v)+0.36sin(v)+0.93cos(u))
 z = v
-u = -pi .. pi
-v = -pi .. pi
-hue = 0.55+0.15sin(u+v)
-size = 0.035
-count = 7000</code></pre>
+u = -1.5pi .. 1.5pi
+v = -1.5pi .. 1.5pi
+hue = 0.55+0.3(sin(u)cos(v)+0.36sin(v)+0.93cos(u))
+size = 0.11
+count = 10000</code></pre>
               </details>
               <p class="card-links">
                 <a
                   class="button"
-                  href="https://ryanjosephkamp.github.io/splashery/#s=d.dVPLbtswEPyVYHKJEVqgbCtpees3tKcWOVDU2mZNiyxJ-ZFA_14sZRtBgggCyJX2NTuzb9AhQCEFp9OW4hkCB4rJ-h5qKWAi6UzdjwyFhVw8zWs5r-UvKVV5Kynlbwgkog5quapXq1og-zPUG3a276DQDtZl20PAdpdKeU7_Bp25iIAPfEkcESIl4lJmSNnvIXCCwgCBMxRktXhItn8YZsanh8PskY1DMYbZDAKvUDhAYIDCPNi7qroLlgF9sLcDlXRN8yiruik5Hw-cIUIBApvpaKcj2dfJXy4bCBg_9Nzjs5SS_4ZImoFhHAWc9ztG0mqz20Q_lAkEvSEI5C3tOZEesoeANoZKootdBvPTaEdQtQCdgk9DZGMUoPWaTJ6G5HfEJzO01i6RQMqR-k3eQsnqSeDo25azyKoZBY6Fhi_9m0ags5FMoUPJkc2UvDt8qnJBOsWkUDifanTRhw_erR96U5pYsbfROVO8-u_1pmeiv-zqWSDqzg5pSjAK5KNNHyP0fuJCVs171EsBfbIJCmeMAslZ8xFL8MleAAukI1Eogc0t8sSRQdv-U5dFDaXitDQXw3jnWT739LRsF1TUcItPWe9DgvrzMgoYvaeo-fNZH6_jDDabkmrxTSB650pnnU1ZlzHyCFgowemyXHmIfdYFcI4DXRUChd73NDXPE-_ZuSxe-S6wdvoi7xD93yvtOEYdeAEokGad1RdE3DTu1-WBuKETuJftav3d4KWQ664zuVJSC3SUtXVFk0y5nyq9QTt7uLW993xHytY5vFcV1-9z9I5FP47jfw"
+                  href="https://ryanjosephkamp.github.io/splashery/#s=d.jVPbbtswDP2V4vSlwRRDTuJu1du-YXva0AdZZhItiqVJci4t_O8D5SQY2hVYYEASQ_LwkIev0CFAIQWn05biGQIHisn6HmopYCLpTN3XDIWFXDzOazmv5XcpVfkqKeUPCCSiDmq5qlerWiD7M9QrdrbvoNAO1mXbQ8B2F6Q8p9-Dzgwi4ANfEkeESIkYygwp-z0ETlAYIHCGgqyah2T7h2FmfHo4zD7JavnIhnJ9WrJ1mM0g8AKFAwQGKMzrqgn2rqruyoX5_dO6HWjCaDjvfwJFKEBgMx3tdCT7MqWqawgYP_RMqZZSSv43RNLcCIyjgPN-x8xbbXab6IfSsaA3BIG8pT0n0kP2ENDGUMl0eZdGfjPaEVQtQKfg0xD5MQrQek0mT031O-KTJ7rWLpFAypH6Td5CyepR4OjblrPIqhkFjmVsH_o3jUBnI5kyPiVHfqbk3eEdyoXpFJNC0ciE0UUf3ni3fuhNKWLF3kbnTPHqv9ebnoXxYVWfBaLu7JCmBKNAPtr0NkLvp2HIqvmb9VJAn2yCwhmjQHLWvOUSfLIXwgLpSBRKYHOLPHFk0LZ_V2VRQ0GcluzyMN55ls89PS7bBRU13OJT1vuQoH4-jwJG7ylqNp_18drOYLMpqRZfBKJ3rlTW2ZR1aSO3gIUSnC7LmIfYZ10I5zjQVSFQ6H1PU_Hc8Z6dy6IWu8Da6Yu8Q_S_rmPHMerAC0CBNOusvjDionG_Lj-IGzuBe9mu1k8Gz2W47tqT60hqgY6ytq5okkfuJ6RXaGcPt7L3nu9I2TqHv1XF-H2O3rHox3H8Aw"
                   target="_blank"
                   rel="noopener"
                   >Run it</a

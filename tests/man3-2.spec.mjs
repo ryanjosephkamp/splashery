@@ -447,8 +447,9 @@ test.describe("Level 4's sixty more programs", () => {
     test.setTimeout(240_000);
     await page.goto("/manual/");
     const picks = [entries[0], entries[23], entries[59]];
-    for (const e of picks) {
-      const href = await page.locator(`#g-${e.id} a.button`).getAttribute("href");
+    const hrefs = [];
+    for (const e of picks) hrefs.push(await page.locator(`#g-${e.id} a.button`).getAttribute("href")); // prettier-ignore
+    for (const href of hrefs) {
       await page.goto(`/?renderer=webgl2&profile=weak&labs=1${href.slice(href.indexOf("#s="))}`);
       await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
       await expect(page.locator("#toy-status")).toHaveText(/^Splat equation/, { timeout: 180_000 });
