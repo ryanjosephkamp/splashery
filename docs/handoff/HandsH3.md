@@ -58,43 +58,43 @@ file. The engine files belong to the merged engines; another lane's toys are the
 - You run in Claude Code on the owner's Mac, signed in to his second Claude account. Follow
   docs/OPERATING.md, "Local lanes", exactly: your own port (4189), the local test set, messages as
   comments on your PR that start "From the Operator", the "READY:", "WORKING:" or "BLOCKED:" line at
-  the top of "## State", and clips on page 2 or on `claude/clips-HandsH3`.
-- The Operator (a cloud session) runs the lanes; the owner, Ryan, talks only to the Operator and is
-  often away from the Mac. Never ask him anything in the terminal or wait for him: put questions in
-  "State", move on to the next item, and keep going.
-- Model: Opus 5.5 only, at the default effort. If `/model` shows another model, stop and say so in
-  "State". At most one helper at a time, same model.
-- Merging: the Operator merges. Never merge anything. An engine change is its own small, additive
-  "Engine: …" PR on `claude/lane-hands-h3-engine`, merged first; toys not using it behave exactly as
-  before.
-- Hands-on play only adds to a toy: with the ✋ switch off, every toy plays exactly as before, and
-  old `#s=` links and saved scenes keep loading. A change the public sees waits for the owner's
-  marks before it merges.
-- Every effect follows the effect quality rules in CLAUDE.md (real motion of solid pieces, separate
-  things moving separately, break-apart into real pieces that come back), judged as phone-size
-  clips, and works with the toy upright, on its side and upside down.
-- Licenses, for every asset and dataset (CLAUDE.md, "Ground rules"): read the license on the live
-  source page; record it in CREDITS.md, `tools/assets.json` (or `tools/models.json`) and the toy's
-  in-app credit; `"nc": true` on NC assets; never ND, unlicensed, personal-use or paid. A license
-  not on that list (ODbL, CERN-OHL, government terms, "free with attribution") is a question for the
-  Operator in "State", not a file in the repo. Nothing human (people, faces, human anatomy or human
-  scans) without the owner's yes. No logos or brand names.
-- A static site: data becomes splats at build time (your `tools/hh3-*.mjs`; any new devDependency
-  pinned and listed in LICENSES.md). The page never calls a data service or needs a key, and big
-  files load only when the toy opens. Keep sizes inside the phone budgets.
-- Work through the items in order. Open your draft PR early ("Phase Hands-on H3, <shelf>: …", five
-  sections from CLAUDE.md, naming Opus 5.5), push after each finished item with "State" updated, and
-  run long jobs (clips, tests) in the background.
-- Language: American English in every new text (color, center, gray, license, -ize endings, dates
-  like "October 3, 2026").
-- Read first: CLAUDE.md; docs/OPERATING.md ("Local lanes", "Steps for a lane", "A lane's end");
-  docs/HANDS-ON-PLAN.md (your shelves' lines); docs/PACKS.md, sections 5f, 5g and 5h (the engine
-  pieces) and its earlier hands-on section; docs/handoff/Physics.md, HandsEngineA.md,
-  HandsEngineB.md and HandsEngineC.md; docs/audits/hands-l1-sweep-2026-10.md and
-  docs/audits/hands-on-materials-2026-10.md.
-- Before every push: CLAUDE.md, "Before every push", with the local test set. At the end: "A lane's
-  end".
+  the top of "## State
 
-## State
+WORKING (October 9, 2026). Four stacked shelf PRs are open, each with its cards on Effect review
+page 2 (lane HandsH3). Merge order:
 
-WORKING: not started yet (October 3, 2026).
+- Engine PR #430 (`claude/lane-hands-h3-engine`): a forgiving press (the L1 sweep's center misses),
+  `reseat` on a break joint, a shake that only reads (`fire: false`), picture toys that ask for
+  joints play them, and a fix (a snapped piece starts where it was, not at home).
+- Open me #432: storybook, alarm clock, gift box, umbrella (new runner), desk fan, desk lamp,
+  telescope, potion bottle, fountain pen. Nine cards; seven good. The book was redone (card
+  hh3-book-r2, marked fix again: the specks are the same engine sort bug as the egg's). The pen's
+  cap is now its full length, so it never sinks into the paper (the owner's note; card
+  hh3-fountain-pen-r2).
+- Holidays #435: jack-o'-lantern, decorated tree, patterned egg, paper lantern. Three good; the
+  egg's "bottom doesn't spin properly" is an engine sort bug (For the Operator). The snowman can now
+  follow (H2's `ride` is in main).
+- Medieval #436: knight's helmet, trebuchet, dragon egg. All good.
+- Pictures #437: picture frame (labs). Good.
+
+Open PRs (October 9, 2026, evening; #430 and #455 merged): engine #459 (latches and triggers, strike
+pieces, plucked strings) and #460 (`handsLevel1`); shelves #432 Open me (the Storybook taken out),
+#435 Holidays, #436 Medieval, #437 Pictures, #464 Music (on #459 and the shelves) and #463 Level 1
+(on #460); and #477 Storybook. Every card on the shelves is marked good. They wait for batch 3: when
+batch 2 lands, merge main into each and report the heads in merge order.
+
+#477 is the owner's idea for the Storybook: "The Little Lamp Who Wanted to See the Sea", ten pages
+of our own words and drawings (`tools/hh3-storybook.mjs`), read with Your book's pages; card
+hh3-book-r5. The built book's recipe stays in `src/packs/objects.js`, unused, for his comparison
+(hh3-book-r3); switching back is the `pack:` line in `src/toys.js`.
+
+The shelf tests step a fixed clock and hand their moves straight to Hands-on, so a loaded machine
+sees the same frames. Run them with `SPLASHERY_PORT=<port>` (the config reads that, not a URL).
+Waiting: the water bottle and soda can (the Fluids engine's pour). Next: the first photoreal toys
+after agreeing with Photoreal r3.
+
+## Notes", "## Known issues" and "## For the Operator
+
+- Please merge engine PR #430 before the Open me PR; the Open me branch carries its commit.
+- The water bottle and the soda can (labs) wait for the Fluids engine's pour.
+- #477 (the Storybook) is a public toy's change: it waits for the owner's mark on hh3-book-r5.
