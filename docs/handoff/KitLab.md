@@ -105,6 +105,13 @@ Model: Opus 5.5 (claude-opus-5-5), high effort. Branches: `claude/lane-kit-lab` 
   - 4: 240-character fields in the splat equation toy (docs/lab/EQUATION-FIELDS.md); the plotters
     keep 120.
 
+- October 10, 2026, 03:49 UTC: the owner marked all five cards good (klab-detail-slider, the three
+  gloss cards, klab-moments). The Operator says these are provisional: he wants a more in-depth
+  review once all the tests are done. Each experiment now has a write-up with a recommendation
+  (docs/lab/BUDGETS.md, DETAIL-SLIDER.md, GLOSS.md, MOMENTS.md, EQUATION-FIELDS.md).
+- Specs (smoke, shp, man, math, klab, klab-engine): 90 passed. Two smoke tests failed: one from CPU
+  load, which passes when rerun alone, and the shelf-grid test, which also fails on main.
+
 ## Notes
 
 - Engine PR contents: the Detail slider (src/player.js `setSplats`, `splatBudget`, `nearestTier`;
