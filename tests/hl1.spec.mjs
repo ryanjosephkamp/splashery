@@ -15,7 +15,7 @@ const SAMPLE = [
   "marble-bust",
   "cookie",
   "heart-donut",
-  "mushroom", // lane Hands engine C: the jelly blob stretches in Hands-on, so it is never lifted whole
+  "succulent", // lane Hands-on H2: the toadstool (once the jelly's stand-in) stretches now (pieces mode), so it is never lifted whole
   "knot",
   "basketball",
   "bowling-ball",
@@ -30,13 +30,13 @@ const SAMPLE = [
   "heart",
   "oak",
   "campfire",
-  "cupcake",
+  "lollipop", // lane Hands-on H2: the cupcake's cherry lifts off now (pieces mode), so it is never lifted whole
   "teddy-bear",
   "soda-can", // lane Hands engine B: the chest's lid is a hinge now (pieces mode), so it no longer lifts whole
   "running-shoe",
   "shield",
   "sea-urchin", // lane Hands-on H5: the jellyfish drags by its bell now (pieces mode), so it is never lifted whole
-  "lorenz",
+  "klein-bottle", // lane Hands-on H5: the Lorenz attractor follows the finger now, so it is never lifted whole
   "neural-network",
   "picture-frame",
   "song-landscape",
@@ -46,7 +46,7 @@ const SAMPLE = [
   "drum",
   "bus",
   "eiffel-tower",
-  "watermelon",
+  "taco", // lane Hands-on H2: the watermelon's slices come out now (pieces mode), so it is never lifted whole
   "beach-ball",
   "waterfall",
   "solar-system",
@@ -55,7 +55,16 @@ const SAMPLE = [
 // The picture shelf explicitly disables Hands-on on the audited main.
 // This exact capability gap is tracked, not counted as successful Level 1.
 // All mode has no exceptions; delete this entry when the lane fixes it.
-const KNOWN = { "picture-frame": ["unavailable"] };
+// Lane Hands-on H4: the solar system and the campfire play in pieces mode on purpose (each planet
+// is its own piece, picked off its orbit and let go to orbit again; the campfire has a spare log to
+// lay on the fire, and a fire isn't picked up), so a press on the sun or the fire lifts no whole toy.
+// So does the bacterium (a press on it takes its two halves, to pull it apart and divide it).
+const KNOWN = {
+  "picture-frame": ["unavailable"],
+  "solar-system": ["whole-pickup"],
+  campfire: ["whole-pickup"],
+  bacterium: ["whole-pickup"],
+};
 const selected = ALL ? TOYS : SAMPLE.map((id) => TOYS.find((t) => t.id === id));
 
 test("the Level 1 sample covers every shelf and material family", () => {
