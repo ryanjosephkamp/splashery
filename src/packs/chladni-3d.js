@@ -732,9 +732,9 @@ export const TUNES = [
     id: "two-voices",
     name: "Two voices",
     credit:
-      "two-note chords a fifth apart, the lower voice moving (made here); a fifth is heard an octave below its lower note, and that pitch rings the cell",
+      "two-note chords a fifth apart, the lower voice stepping down (made here); a fifth is heard an octave below its lower note, and that pitch rings the cell: three nodal planes, then two, then one",
     beat: 0.8,
-    notes: [[["D4", "A4"], 3], [["G#4", "D#5"], 3], [["B4", "F#5"], 3], [["G#4", "D#5"], 3], [["D4", "A4"], 3]], // prettier-ignore
+    notes: [[["B4", "F#5"], 4], [["G#4", "D#5"], 4], [["D4", "A4"], 5]], // prettier-ignore
   },
   {
     id: "ode",
