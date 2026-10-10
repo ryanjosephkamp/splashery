@@ -268,6 +268,34 @@ test("Note Rider: a caught note lasts its own length, on the instrument the play
   expect(r.voices).toContain("nylon");
 });
 
+test("Strata: the 3D well, picked in the game, is a real 3D box, 3D only, with an outline where the stone will land", async ({
+  page,
+}) => {
+  await open(page, "strata");
+  await page.evaluate(() => window.__arc.wake());
+  // the choice row rebuilds the game in the 3D well, and it goes on at once
+  await page.evaluate(() => window.__arc.choose("deep"));
+  await page.waitForFunction(() => window.__splashery.player.arcade?.game?.D === 4 && window.__splashery.player.arcade !== window.__arc, null, { timeout: 60_000 }); // prettier-ignore
+  await page.evaluate(() => (window.__arc = window.__splashery.player.arcade));
+  await run(page, 0.5);
+  const r = await read(page, () => {
+    const a = window.__arc;
+    const g = a.game;
+    g.dropT = -100;
+    a.frame(1 / 60);
+    const keys = [...document.querySelectorAll(".arc-key")].map((k) => k.textContent);
+    return { D: g.D, view: a.viewTo, mode: a.mode, viewBtn: !document.querySelector(".arc-view") || document.querySelector(".arc-view").hidden, ghosts: g.ghosts.filter((s) => s && s.fade > 0.5).map((s) => s.pos[1]), pieceY: g.piece.sprites.map((s) => s.pos[1]), keys, well: window.__splashery.player.scene.toy.options.well }; // prettier-ignore
+  });
+  expect(r.D).toBe(4);
+  expect(r.well).toBe("deep");
+  expect(r.view).toBe(1);
+  expect(r.mode).toBe("play");
+  expect(r.viewBtn).toBe(true); // no 2D in the 3D well
+  expect(r.ghosts.length).toBeGreaterThan(0);
+  expect(Math.min(...r.ghosts)).toBeLessThan(Math.min(...r.pieceY)); // the outline is below the stone
+  expect(r.keys).toEqual(expect.arrayContaining(["⟳ Turn", "⤾ Tip", "⤿ Roll", "Drop"]));
+});
+
 test.describe("on a phone", () => {
   test.use({ viewport: { width: 390, height: 844 }, hasTouch: true, isMobile: true });
 

@@ -55,6 +55,8 @@ body.app .arc-root[data-playmode="false"] .arc-pad-side { margin-right: 48px; }
 .arc-pad-dir { grid-template-columns: repeat(3, 54px); grid-template-rows: repeat(2, 54px); }
 .arc-pad-row { grid-auto-flow: column; }
 .arc-pad-col { grid-auto-flow: row; justify-items: center; }
+.arc-pad-grid2 { grid-template-columns: repeat(2, auto); }
+.arc-pad-grid2 .arc-key.arc-fire, .arc-pad-many .arc-pad-grid2 .arc-key.arc-fire { width: 70px; height: 52px; border-radius: 26px; font-size: 13px; }
 .arc-key { width: 54px; height: 54px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.28); background: rgba(12, 14, 20, 0.5);
   color: #fff; font: 800 20px/1 ui-sans-serif, system-ui, sans-serif; touch-action: none; }
 .arc-key.arc-down { background: rgba(90, 130, 240, 0.75); }
@@ -243,7 +245,8 @@ export class Hud {
     // (Arcade r3: two action buttons beside a row of three arrows stand one
     // over the other, so they fit a phone: Strata's Drop over ⟳ Turn)
     const stack = acts.length === 2 && dirs.length >= 3 && dirs.length + acts.length <= 5;
-    right.className = `arc-pad-group ${stack ? "arc-pad-col" : "arc-pad-row"}`;
+    // (and four of them, Strata's 3D turns and drop, make a 2 × 2 block)
+    right.className = `arc-pad-group ${stack ? "arc-pad-col" : acts.length === 4 ? "arc-pad-grid2" : "arc-pad-row"}`;
     const names = this.game.padLabels || {};
     for (const a of acts) {
       const label = names[a] || (a === "fire" ? "●" : a);

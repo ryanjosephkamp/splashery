@@ -1995,7 +1995,7 @@ export const TOY_HELP = {
     howTo:
       "Tap the falling stone (or ⟳ Turn, ↑ or X) to turn it; tap beside it or use ← → to move it. Space drops it.",
     about:
-      "Stones of our own shapes fall down a well between stone walls, ten wide and twenty deep. Move each one across and turn it as it falls (tap it, press ⟳ Turn, ↑ or X); when a whole row is full, it crumbles into rubble that falls away, and every stone above drops into its place. The more rows at once, the more points; every four rows the stones fall faster.\n\nThe 3D button turns the well so its depth shows. Pick a Well in the Toy tab: the classic flat one, or a deep or wide square well you look down into, with stones (a tripod, two screws, a plus) that only work in 3D. P pauses, R starts again.",
+      "Stones of our own shapes fall down a well between stone walls, ten wide and twenty deep. Move each one across and turn it as it falls (tap it, press ⟳ Turn, ↑ or X); when a whole row is full, it crumbles into rubble that falls away, and every stone above drops into its place. The more rows at once, the more points; every four rows the stones fall faster.\n\nThe 3D button turns the well so its depth shows. Pick the well with the buttons at the top: Classic, or a 3D well (deep or wide), a real square box you look down into, with stones that only work in 3D (a tripod, two screws, a plus) and room to put one behind or in front of another. There, ⟳ Turn, ⤾ Tip and ⤿ Roll turn the stone three ways, an outline shows where it will land, and two fingers look round the well. P pauses, R starts again.",
   },
   "volley-table": {
     howTo:

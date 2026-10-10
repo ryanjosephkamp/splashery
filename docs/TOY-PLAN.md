@@ -4033,8 +4033,10 @@ Proposals below are suggestions; the owner may change them.
     screws, a plus, a slab), moved and turned as they fall; a full layer crumbles into rubble that
     falls and fades, and the stones above drop in. 2D is the side view.
   - Improved: Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/). Arcade r3
-    (October 9, 2026): starts in 2D in a classic well, ten wide and twenty deep; a ⟳ Turn button, a
-    tap on the stone and ↑, X or Z turn it; much sharper stones.
+    (October 9, 2026): starts in 2D in a classic well, ten wide and twenty deep, with a 3D-only
+    version (a real 3D well: three turn buttons, an outline where the stone will land, a look round
+    with two fingers) picked in the game; a ⟳ Turn button, a tap on the stone and ↑, X or Z turn it;
+    much sharper stones.
   - Sound: A soft click as a stone moves, a wooden knock when it turns, a stony thud when it lands,
     a crunch and rumble when a layer crumbles.
 - **Volley Table** (`volley-table`). Now: tap: Play or pause. Plan: keep.

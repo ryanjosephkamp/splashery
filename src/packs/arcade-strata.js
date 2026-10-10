@@ -99,6 +99,30 @@ class Strata {
       const col = hex(s.color);
       return recolor(stone, (v) => [v[0] * col[0], v[1] * col[1], v[2] * col[2], 1]);
     });
+    // Arcade r3 (the owner: a real 3D box, with a way to see what is behind
+    // what): in a 3D well, an outline of the falling stone sits where it
+    // will land, cube by cube, as a frame of thin bars in its color, so its
+    // depth reads at a glance from any angle.
+    if (this.D > 1) {
+      const t = c * 0.055;
+      const L = c * 0.94;
+      const frame = crispModel(
+        (k) => {
+          const hL = L / 2;
+          for (const a of [-hL, hL])
+            for (const b of [-hL, hL]) {
+              k.box(L + t, t, t, { pos: [0, a, b], color: [1, 1, 1] });
+              k.box(t, L + t, t, { pos: [a, 0, b], color: [1, 1, 1] });
+              k.box(t, t, L + t, { pos: [a, b, 0], color: [1, 1, 1] });
+            }
+        },
+        { fine: t / 2, coarse: c / 4 },
+      );
+      this.ghostModels = this.shapes.map((s) => {
+        const col = hex(s.color).map((v) => Math.min(1, v * 1.25 + 0.12));
+        return recolor(frame, () => [col[0], col[1], col[2], 1]);
+      });
+    }
     // The well: stone walls drawn as a frame of posts and a floor of slabs.
     const [Wx, Hy, Dz] = [this.W * c, this.H * c, this.D * c];
     const e = c * 0.06;
@@ -191,6 +215,8 @@ class Strata {
     const top = Math.max(...cubes.map((c) => c[1]));
     this.piece.y = this.H - 1 - top;
     this.piece.sprites = cubes.map(() => this.api.sprites.add(this.models[k]));
+    for (const g of this.ghosts || []) if (g) this.api.sprites.remove(g);
+    this.ghosts = this.ghostModels ? cubes.map(() => this.api.sprites.add(this.ghostModels[k], { fade: 0 })) : []; // prettier-ignore
     this.piece.shown = null;
     // (a full layer of splats ends the game like a full well, never breaks it)
     const full = this.piece.sprites.some((sp) => !sp);
@@ -241,7 +267,8 @@ class Strata {
   // Screen directions to well directions (x and z), from the camera's turn.
   screenStep(name) {
     if (this.D === 1) return name === "left" ? [-1, 0] : name === "right" ? [1, 0] : null;
-    const yaw = this.camYaw || 0;
+    // (the player's own look round the well counts too)
+    const yaw = (this.camYaw || 0) + (this.api.look?.().yaw || 0);
     const v = { left: [-1, 0], right: [1, 0], up: [0, -1], down: [0, 1] }[name];
     if (!v) return null;
     const c = Math.cos(yaw);
@@ -330,6 +357,8 @@ class Strata {
 
   land() {
     const p = this.piece;
+    for (const g of this.ghosts || []) if (g) this.api.sprites.remove(g);
+    this.ghosts = [];
     p.cubes.forEach((c, i) => {
       const cx = p.x + c[0];
       const cy = p.y + c[1];
@@ -462,6 +491,18 @@ class Strata {
         ];
         s.quat = [0, 0, 0, 1];
       });
+      // the outline where it will land
+      if (this.ghosts?.length) {
+        let gy = p.y;
+        while (this.fits(p.cubes, p.x, gy - 1, p.z)) gy--;
+        p.cubes.forEach((c, i) => {
+          const g = this.ghosts[i];
+          if (!g) return;
+          g.pos = [this.worldX(p.x + c[0]), this.worldY(gy + c[1]), this.worldZ(p.z + c[2])];
+          g.quat = [0, 0, 0, 1];
+          g.fade = gy < p.y ? 1 : 0;
+        });
+      }
     }
   }
 

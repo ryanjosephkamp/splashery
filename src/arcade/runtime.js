@@ -68,7 +68,7 @@ export class ArcadeRuntime {
     // (Arcade r3: a game's pad, its labels and its controls card may depend
     // on its options: a function of them)
     const def = { ...recipe.arcade };
-    for (const k of ["pad", "padLabels", "controls"]) if (typeof def[k] === "function") def[k] = def[k](options || {}); // prettier-ignore
+    for (const k of ["pad", "padLabels", "controls", "views", "look", "forceView"]) if (typeof def[k] === "function") def[k] = def[k](options || {}); // prettier-ignore
     this.def = def;
     this.options = options || {};
     this.ctx = ctx;
@@ -79,7 +79,9 @@ export class ArcadeRuntime {
     this.layer = new ArcadeLayer(stage, slots, { reach: this.def.reach ?? 3 });
     this.sprites = new Sprites(this.layer);
     this.mode = "attract"; // attract | play | paused | over
-    this.view = this.options.view === "3d" ? 1 : 0;
+    // (Arcade r3: def.forceView, "3d" or "2d", overrides the view option:
+    // Strata's 3D wells are 3D only)
+    this.view = (def.forceView || this.options.view) === "3d" ? 1 : 0;
     this.viewTo = this.view;
     this.viewT = this.view;
     this.time = 0;
@@ -208,6 +210,13 @@ export class ArcadeRuntime {
     this.sprites.write();
     this.layer.upload(true);
     this.stage.requestRender(300);
+    // A game rebuilt for a choice (choose above) goes on at once.
+    const h = ArcadeRuntime.handoff;
+    ArcadeRuntime.handoff = null;
+    if (h && performance.now() - h.at < 8000) {
+      if (h.play) this.enterPlay();
+      else this.wake();
+    }
   }
 
   // ---- State -----------------------------------------------------------------
@@ -248,7 +257,18 @@ export class ArcadeRuntime {
   }
 
   // A game's own choice (def.choices), passed to its steps as ctl.choice.
+  // (Arcade r3: with def.choiceRebuild, a choice is an option that needs a
+  // new game, Strata's well: the toy is rebuilt with it, and the new game
+  // picks up where this one was, in the whole-page view if it was in it.)
   choose(id) {
+    if (this.def.choiceRebuild && this.def.choiceKey && id !== this.choice) {
+      this.choice = id;
+      this.hud.setChoice(id);
+      ArcadeRuntime.handoff = { play: this.playMode, at: performance.now() };
+      if (this.playMode) this.exitPlay();
+      this.player.rebuild?.({ [this.def.choiceKey]: id });
+      return;
+    }
     this.choice = id;
     this.hud.setChoice(id);
     this.input.active = true;

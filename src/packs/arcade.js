@@ -470,18 +470,32 @@ export const RECIPES = {
       views: true,
       // Arcade r3: the classic slot's pad is ◀ ▶ ▼ and a big ⟳ Turn by the
       // right thumb (the owner couldn't find how to turn a stone); a tap on
-      // the stone turns it too, and a tap beside it moves it.
-      pad: (o) => (o.well && o.well !== "slot" ? ["left", "right", "up", "down", "alt", "turnL", "fire"] : ["left", "down", "right", "fire", "alt"]), // prettier-ignore
-      padLabels: (o) => (o.well && o.well !== "slot" ? { alt: "⟳", turnL: "⤾", fire: "▼" } : { alt: "⟳ Turn", fire: "Drop" }), // prettier-ignore
+      // the stone turns it too, and a tap beside it moves it. The 3D wells
+      // (the owner's "a real 3D box", October 9, 2026) are 3D only, with
+      // four arrows and a block of Turn, Tip, Roll and Drop.
+      pad: (o) => (o.well && o.well !== "slot" ? ["left", "right", "up", "down", "alt", "turnL", "turnR", "fire"] : ["left", "down", "right", "fire", "alt"]), // prettier-ignore
+      padLabels: (o) => (o.well && o.well !== "slot" ? { alt: "⟳ Turn", turnL: "⤾ Tip", turnR: "⤿ Roll", fire: "Drop" } : { alt: "⟳ Turn", fire: "Drop" }), // prettier-ignore
+      views: (o) => !o.well || o.well === "slot",
+      forceView: (o) => (o.well && o.well !== "slot" ? "3d" : null),
+      look: (o) => (o.well && o.well !== "slot" ? { yaw: 1.3, pitch: 0.35, zoom: [0.7, 1.3] } : null), // prettier-ignore
+      // the well, picked in the game (a new game in that well)
+      choices: [
+        { id: "slot", label: "Classic", color: "#3f88c5" },
+        { id: "deep", label: "3D well", color: "#c8553d" },
+        { id: "wide", label: "Wide 3D well", color: "#44af69" },
+      ],
+      choiceKey: "well",
+      choiceRebuild: true,
       tapFire: false,
       controls: (o) =>
         o.well && o.well !== "slot"
           ? {
-              keys: "Arrows (or W, A, S, D) move the stone across the well; X (or Z) turns it, Q and E tip it; Space drops it.",
-              touch:
-                "Tap the stone to turn it; swipe to move it, swipe up to turn it; or use the pad.",
-              pad: "D-pad moves; B turns; LB and RB tip; A drops.",
-              short: "Arrows move · X turn · Q E tip · Space drop",
+              keys: "Arrows (or W, A, S, D) move the stone across the well, as the screen shows it; X (or Z) turns it flat, Q tips it toward you, E rolls it sideways; Space drops it.", // prettier-ignore
+              touch: "Arrows move the stone across the well; ⟳ Turn, ⤾ Tip and ⤿ Roll turn it three ways (a tap on the stone turns it too); Drop drops it. The outline under the stone shows where it will land. Drag with two fingers to look round the well.", // prettier-ignore
+              pad: "D-pad moves; B turns; LB tips; RB rolls; A drops.",
+              short: "Arrows move · X turn · Q tip · E roll · Space drop",
+              lookHint:
+                "Drag with two fingers to look round the well; the outline shows where the stone will land",
             }
           : {
               keys: "← → (or A, D) move the stone; ↑, X or Z turns it; ↓ (S) drops it faster; Space drops it at once.",
