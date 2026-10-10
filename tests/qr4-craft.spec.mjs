@@ -158,7 +158,7 @@ test.describe("Other barcodes", () => {
 const BUILD_HASH = "b3918a78fddc50518d2fef2cecb12cee1cf3b16b05a450e61a166fb39b482144";
 
 test.describe("Picture QR: the halftone", () => {
-  test("every module's center and the plain patterns keep their bits, and the free cells are a halftone", () => {
+  test("every module's center and the plain patterns keep their bits (centers in the photo's hue in color), and the free cells are a halftone", () => {
     for (const style of ["color", "bw"]) {
       const w = makeWoven(PICS["wildflowers"], { text: TEXT, style });
       const { code, k, G, cells } = w;
@@ -172,9 +172,13 @@ test.describe("Picture QR: the halftone", () => {
           const m = Math.floor(y / k) * N + Math.floor(x / k);
           const q = (y * G + x) * 3;
           const g = gray([cells[q], cells[q + 1], cells[q + 2]]);
-          if (w.center[y * G + x] || plain[m]) {
+          if (plain[m] || (w.center[y * G + x] && style === "bw")) {
             const want = code.dark[m] ? FG : BG;
             for (let ch = 0; ch < 3; ch++) if (Math.abs(cells[q + ch] - want[ch]) > 1e-5) wrong++;
+          } else if (w.center[y * G + x]) {
+            // The color style: the picture's hue at the ink's or the
+            // paper's darkness.
+            if (code.dark[m] ? g > 0.101 : g < 0.899) wrong++;
           } else {
             free++;
             // A halftone: each free cell is dark or light, nothing between.
