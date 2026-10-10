@@ -140,16 +140,15 @@ Written by the Operator on October 8, 2026, for this cloud session (word for wor
 
 ## State
 
-READY (October 9, 2026, about 21:00 UTC). The lane's work is done unless the owner sends new marks.
-Every hh5 card is marked "good" (36 cards: the first 34, among them the eight `-r2` fixes of his
-first marks, plus the periodic table and the quartz cluster).
+READY (October 10, 2026, about 01:55 UTC). The lane's work is done: every PR is merged. It picks up
+again only if the owner sends new marks. Every hh5 card is marked "good" (36 cards: the first 34,
+among them the eight `-r2` fixes of his first marks, plus the periodic table and the quartz
+cluster).
 
-- **Merged** (batch 1, #457, into main 7f4357565 on October 9): engine #441, Animals #446, Body
-  #448, Atoms #451, Gems #452, AI and computing #454.
-- **In batch 2** (#470, the Operator's full suite running): Math #453 (`claude/lane-hands-h5-math`,
-  9c94b054, main 7f4357565 merged in), Atoms 2 #461 (`claude/lane-hands-h5-atoms`, 1453949a, the
-  periodic table) and Gems 2 #462 (`claude/lane-hands-h5-gems`, 3de9f118, the quartz cluster). Those
-  branches are frozen until it lands.
+- **Batch 1** (#457, into main 7f4357565 on October 9): engine #441, Animals #446, Body #448, Atoms
+  #451, Gems #452, AI and computing #454.
+- **Batch 2** (#470, into main 9122a66df on October 10): Math #453, Atoms 2 #461 (the periodic
+  table) and Gems 2 #462 (the quartz cluster).
 
 What each shelf built:
 
@@ -197,6 +196,18 @@ What each shelf built:
   otherwise leave them leaning or creeping), so a push tips the penguin only a little.
 - With a hands-on rope, the jellyfish's tentacles lose their faint twinkle (they are skin splats
   now), as the octopus's arms did.
+- The Enigma's rotor letters look garbled when a rotor is set far from A, with the ✋ switch off too
+  (the toy's rotor build); a hand turning a rotor shows it more often.
+- The geode's front half swings on its hinge rather than lifting off (its halves open like a book,
+  built twice so they sort right).
+- Sliding the Pythagoras triangles, one can pass over another for a moment on the way.
+- On main (7f4357565 and 8a53aa5c3), `tests/hl1.spec.mjs`'s Level 1 check fails for the teddy bear
+  and the running shoe ("whole-pickup (expected no gaps)"). It isn't from this lane.
+
+## For the Operator
+
+- Every PR of the lane is merged (batches 1 and 2); nothing is left unless the owner sends new
+  marks.
 - The Enigma's rotor letters look garbled when a rotor is set far from A, with the ✋ switch off too
   (the toy's rotor build); a hand turning a rotor shows it more often.
 - The geode's front half swings on its hinge rather than lifting off (its halves open like a book,
