@@ -314,15 +314,14 @@ export function createUI(app) {
 
   // Fix11: on a phone a name wraps onto two lines (styles.css); one that still needs a third with
   // this device's font ("Leaning Tower of Pisa") steps its letters down a little, to 9 px at the
-  // least, so no name is cut. The card keeps its size.
+  // least, so no name is cut. The card keeps its size. Measured again for the row and the grid
+  // (whose cards are wider).
   function fitLabels() {
     const spans = [...els.shelf.children].map((b) => b.querySelector("span")).filter(Boolean);
-    if (!narrow.matches) {
-      for (const s of spans) s.style.fontSize = s.style.minHeight = "";
-      return;
-    }
+    for (const s of spans) if (s.style.fontSize) s.style.fontSize = s.style.minHeight = "";
+    if (!narrow.matches) return;
     const over = (s) => s.clientHeight > 0 && s.scrollHeight > s.clientHeight + 1;
-    let todo = spans.filter((s) => !s.style.fontSize && over(s));
+    let todo = spans.filter(over);
     for (const s of todo) s.style.minHeight = getComputedStyle(s).minHeight;
     for (const px of [10, 9.5, 9]) {
       for (const s of todo) s.style.fontSize = `${px}px`;
@@ -2375,6 +2374,7 @@ export function createUI(app) {
     // handle, a swipe down, a pick or a tap on the toy closes the grid.
     els.sheetToggle.textContent = m === "panel" ? "Done" : "More";
     refreshDock();
+    requestAnimationFrame(fitLabels); // Fix11: the row's and the grid's cards differ in width
   };
   function setMode(m, fill = false) {
     if (m === "grid" && !SHELF_GRID) m = "panel";
@@ -2393,7 +2393,6 @@ export function createUI(app) {
   // UI r2: the maximize button fills the screen with the grid or the panel.
   els.sheetMax.addEventListener("click", () => setMode(mode, !full));
   narrow.addEventListener("change", applySheet);
-  narrow.addEventListener("change", () => requestAnimationFrame(fitLabels)); // Fix11
   document.fonts?.ready.then(() => requestAnimationFrame(fitLabels));
 
   // The handle: swipe up for the grid, down for the row, tap to toggle. The
