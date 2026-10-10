@@ -133,21 +133,25 @@ async function onStage(kit) {
 }
 
 // Renders the toy front on as a square canvas of `size` pixels, still.
-async function renderFront(kit, half, size, margin = 1) {
+async function renderFront(kit, half, size, margin = 1, label = "") {
   const a = app();
   await onStage(kit);
-  return a.withCapture([size, size], async () => {
-    const pose = frontPose(half, margin, kit.transform);
-    // A first frame starts the splat sort for this view; the second is the
-    // picture (as the QR code toy does).
-    await a.player.renderAt(a.player.time, pose);
-    await new Promise((r) => setTimeout(r, 80));
-    const shot = await a.player.renderAt(a.player.time, pose);
-    const c = document.createElement("canvas");
-    c.width = c.height = size;
-    c.getContext("2d").drawImage(shot, 0, 0, size, size);
-    return c;
-  });
+  return a.withCapture(
+    [size, size],
+    async () => {
+      const pose = frontPose(half, margin, kit.transform);
+      // A first frame starts the splat sort for this view; the second is the
+      // picture (as the QR code toy does).
+      await a.player.renderAt(a.player.time, pose);
+      await new Promise((r) => setTimeout(r, 80));
+      const shot = await a.player.renderAt(a.player.time, pose);
+      const c = document.createElement("canvas");
+      c.width = c.height = size;
+      c.getContext("2d").drawImage(shot, 0, 0, size, size);
+      return c;
+    },
+    { label },
+  );
 }
 // A canvas shrunk to `w` pixels wide (smoothed, as a camera averages).
 function shrink(canvas, w) {
@@ -313,6 +317,26 @@ const optionsKey = (o) => JSON.stringify(tidy(o || {})) + (o?.picture ?? "");
 
 // Reads the woven layout at phone size and smaller (picture.js), then the
 // stage's own picture.
+// Lane QR r4 (the owner's note of October 9, 2026): the code is scanned
+// before it is shown. From the build until its check is done, a still of the
+// stage stays up with "Please wait. Scanning code…" on it (Stage.cover);
+// thirty seconds at most, whatever happens.
+const SCANNING = "Please wait. Scanning code…";
+function hold() {
+  const stage = app()?.player?.stage;
+  if (typeof window === "undefined" || PIC.noAuto || !stage?.cover || PIC.holding) return;
+  PIC.holding = stage;
+  stage.cover({ label: SCANNING });
+  clearTimeout(PIC.holdTimer);
+  PIC.holdTimer = setTimeout(release, 30000);
+}
+function release() {
+  clearTimeout(PIC.holdTimer);
+  const stage = PIC.holding;
+  PIC.holding = null;
+  stage?.uncover();
+}
+
 async function checkPicture() {
   const w = PIC.woven;
   if (!w) return null;
@@ -324,7 +348,8 @@ async function checkPicture() {
   try {
     const kit = PIC.kit;
     const half = w.code.size / 2 + QUIET;
-    const big = await renderFront(kit, half, 720);
+    const big = await renderFront(kit, half, 720, 1, SCANNING);
+    // A newer build's own check takes over (and lifts the still).
     if (kit !== PIC.kit) return PIC.check;
     const total = w.code.size + 2 * QUIET + 2; // the picture spans the margin too
     const at = (ppm) => {
@@ -344,21 +369,25 @@ async function checkPicture() {
     ) {
       PIC.extra = (PIC.extra || 0) + 0.04;
       PIC.extraFor = optionsKey(PIC.options);
+      // The still stays up through the rebuild; its check lifts it.
       app()?.player?.switchTo({ options: { ...PIC.options } });
+      PIC.panel?.refresh();
+      return PIC.check;
     }
   } catch (err) {
     PIC.check.stageError = err.message;
   }
+  release();
   PIC.panel?.refresh();
   return PIC.check;
 }
 let checkTimer = 0;
 function scheduleCheck(ms = 500) {
   clearTimeout(checkTimer);
-  if (PIC.noAuto) return;
+  if (PIC.noAuto) return release();
   checkTimer = setTimeout(() => {
     const a = app();
-    if (a?.player?.toyInfo?.id !== "qr-picture") return;
+    if (a?.player?.toyInfo?.id !== "qr-picture") return release();
     if (a.busy) return scheduleCheck(300);
     checkPicture();
   }, ms);
@@ -522,8 +551,9 @@ const PICTURE = {
     k.cloud({ share: Math.min(1, splats.length / k.count), jitter: 0, pattern: false }, (rand, i) => splats[i] || null); // prettier-ignore
     k.data = { size: w.code.size, version: w.code.version };
     PIC.kit = k;
+    hold();
     Promise.resolve().then(() => PIC.panel?.refresh());
-    scheduleCheck(700);
+    scheduleCheck(PIC.holding ? 200 : 700);
   },
   credits: SAMPLES.map((s) =>
     s.ai
