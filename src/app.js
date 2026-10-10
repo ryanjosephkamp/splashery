@@ -193,7 +193,10 @@ class App {
       if (!player.motion.pausedKey) this.sound.resumeToy(); // Sound C: cues mean it runs
       for (const spec of cues) this.sound.play(spec, { key: "cue" });
     });
-    player.on("profile", () => this.updateRenderInfo());
+    player.on("profile", () => {
+      this.updateRenderInfo();
+      ui.setDetail(player.detail, player.splats); // lane Kit lab
+    });
     ui.setSound(this.sound.enabled);
     // Pictures: video sound follows the speaker button; the Toy tab's
     // picture panel and the status line follow the pages.
@@ -247,7 +250,7 @@ class App {
     player.applyLook();
     ui.setEffects(scene.effects);
     ui.setAutoplay(scene.autoplay, player.reducedMotion);
-    ui.setDetail(player.detail);
+    ui.setDetail(player.detail, player.splats);
     ui.setPaintCount(scene.paint.stamps.length);
     ui.setPattern(scene.pattern);
     if (scene.toy.kind === "file" && !file) {
@@ -403,7 +406,25 @@ class App {
   async setDetail(detail) {
     const player = this.player;
     const changed = player.setDetail(detail);
-    this.ui.setDetail(player.detail);
+    this.ui.setDetail(player.detail, player.splats);
+    this.updateRenderInfo();
+    const scene = player.scene;
+    if (!changed || this.busy || scene.toy.kind === "file") return;
+    const cam = player.camera.getState();
+    try {
+      await this.loadToy(scene.toy);
+      player.camera.setState(cam, { snap: true });
+      player.stage.requestRender();
+    } catch (err) {
+      this.ui.toast(err.message, 5000);
+    }
+  }
+
+  // Lane Kit lab: the Detail slider (labs only; see setSplats in player.js).
+  async setSplats(n) {
+    const player = this.player;
+    const changed = player.setSplats(n);
+    this.ui.setDetail(player.detail, player.splats);
     this.updateRenderInfo();
     const scene = player.scene;
     if (!changed || this.busy || scene.toy.kind === "file") return;
@@ -650,7 +671,7 @@ class App {
     const file = toy.kind === "file" ? this.file : null;
     if (toy.kind === "file" && !file) return;
     await this.applyScene(fresh, { file });
-    if (player.detail !== "auto") await this.setDetail("auto");
+    if (player.detail !== "auto" || player.splats) await this.setDetail("auto");
     this.resetCamera();
     this.ui.toast("Everything is back to how it started.");
   }
