@@ -349,6 +349,7 @@ export class HandsOn {
         angDamping: p.angDamping ?? 1.5,
       });
       w.add(body);
+      if (p.strike) body.strike = true; // (lane Hands-on H3)
       this.pieces.push({ body, token: p.token, part: p.part, home: { pos: at.slice(), q: atQ.slice() }, built: { pos: p.pos.slice(), q: (p.quat || [0, 0, 0, 1]).slice() }, def: p }); // prettier-ignore
       // A piece on a stem (a cherry): pinned to its point, springing back
       // to how it hung.
@@ -393,8 +394,10 @@ export class HandsOn {
     this.passing = new Set();
     const key = (a, b) => (a.id < b.id ? `${a.id}:${b.id}` : `${b.id}:${a.id}`);
     this.pairKey = key;
+    // (A held piece passes through the others, unless it strikes: a drumstick
+    // in the hand hits the drum; lane Hands-on H3.)
     w.pairs = (a, b) =>
-      !(a.pinned && b.pinned) && !a.held && !b.held && !this.passing.has(key(a, b));
+      !(a.pinned && b.pinned) && (!a.held || a.strike) && (!b.held || b.strike) && !this.passing.has(key(a, b)); // prettier-ignore
     this.mode = "pieces";
     this.world = w;
     this.extras?.build(w); // lane Hands engine A
@@ -946,6 +949,12 @@ export class HandsOn {
     return !!this.hold;
   }
 
+  // A tap on the toy: a latched joint with a `trigger` lets go (lane
+  // Hands-on H3). True when one did.
+  trigger() {
+    return !!this.joints?.trigger();
+  }
+
   // ↺: everything glides home.
   reset() {
     this.press = null;
@@ -1081,7 +1090,17 @@ export class HandsOn {
         this.squish = { amp, t0: this.time, axis: hit.n.slice(), point: hit.point.slice() };
       }
     }
-    this.sounds.push({ speed, soft: this.soft ?? 0, piece: this.mode === "pieces", body: hit.body }); // prettier-ignore
+    // (What it hit and where, for a recipe's sound: lane Hands-on H3.)
+    // `name` and `against` are the two pieces' names (their `name`, part or
+    // token), so a drum's stick on its skin can sound the drum.
+    this.sounds.push({ speed, soft: this.soft ?? 0, piece: this.mode === "pieces", body: hit.body, other: hit.other, name: this.nameOf(hit.body), against: this.nameOf(hit.other), point: hit.point?.slice() }); // prettier-ignore
+  }
+
+  // A piece's name, for sounds (lane Hands-on H3): null for the floor.
+  nameOf(body) {
+    if (!body) return null;
+    const p = this.pieces.find((q) => q.body === body);
+    return p ? (p.def?.name ?? p.part ?? p.token ?? null) : null;
   }
 
   squishAmp() {

@@ -935,6 +935,33 @@ pen) still takes the toy when the finger's ray crosses it: a piece's `pick` elli
 mode, else the toy's box (trimmed to 0.85 of its half sizes, as it stands now). With the switch off,
 such a press turns the view as before.
 
+**Strike pieces** (lane Hands-on H3): a piece in the hand passes through the others, unless it has
+`strike: true` (a drum's stick): then it hits them, so a held stick knocks the drum's head. Each hit
+that reaches `hands.sound(hit, vol)` names both pieces (`hit.name`, `hit.against`: each piece's
+`name`, else its part or token; null for the floor) and where they met (`hit.point`), so the stick
+on the head can sound the drum and the stick on the rim a click. (The drum under its sticks is a
+`fixed: true` piece, lane Hands-on H1's, so it stays ground for them.)
+
+```js
+pieces: () => [{ name: "stick", strike: true, pos, solid, pick }, { name: "drum", fixed: true, ... }],
+sound: (hit, vol) => (hit.name === "stick" && hit.against === "head" ? { voice: "snare", vol } : undefined), // prettier-ignore
+```
+
+**Strings** (`hands.strings`, lane Hands-on H3): a press within `reach` (recipe units, 0.05) of a
+string doesn't pick the toy up; dragging across the strings plucks each one the finger crosses
+(within its length), in turn. Each pluck reaches `hands.sound(hit, vol)` with `hit.pluck` the
+string's index (and `hit.name`), so each string sounds its own note, and `info.hands.plucked[i]` is
+the seconds since string `i` was last plucked (Infinity before), for the string to vibrate. Each
+string is its two ends (`a`, `b`, recipe units); they lie in one plane (give `normal` for a single
+string). A press elsewhere on the toy picks it up as before.
+
+```js
+hands: {
+  strings: { list: STRINGS.map((s, i) => ({ a: s.bridge, b: s.nut, name: `s${i}` })), reach: 0.04 },
+  sound: (hit, vol) => (hit.pluck !== undefined ? { voice: "pluck", notes: OPEN[hit.pluck], vol } : undefined), // prettier-ignore
+},
+```
+
 `info.hands.on` is whether Hands-on is on. Check the toy's frame time with the pieces running (the
 whole world's step is well under a millisecond for one body, a few for 40 pieces).
 
@@ -1059,6 +1086,19 @@ from the finger (a pen's cap, carried over the pen to its back end, stays clear 
 A picture toy (a recipe with `pictures`, or `turntable: false`) stays out of Hands-on unless its
 `hands` block has `joints` (lane Hands-on H3): then those play, and nothing else (a picture frame
 swings on its nail; its picture is never picked up whole).
+
+**Latches and triggers** (lane Hands-on H3): `latch: "max" | "min" | value` makes a hinge, slider or
+dial catch there as it reaches or passes it (a crossbow's string drawn back into its nut): it holds
+fast, the finger can't move it, and its weight doesn't pull it off. With `trigger: true`, a tap on
+the toy (or the Play button) with ✋ on lets it go instead of the toy's own tap: it springs back by
+its `spring`, or falls by its weight. The catch is the `"latch"` cue and the release `"free"`;
+`player.act()` returns `{ key: "trigger" }` for a tap that pulled it. `catch` (default 0.001, in the
+joint's own units) is how near the finger must bring it for it to catch. ↺ brings it home (caught
+only if home is its latch).
+
+```js
+{ type: "slider", part: "string", axis: [0, 0, -1], min: 0, max: 0.4, spring: 60, latch: "max", catch: 0.03, trigger: true },
+```
 
 **Parents**: `parent` (a joint's name) puts a hinge, slider or dial on another driven part: a desk
 lamp's head on its arm, a clock's hands on a turning dial. Children pose after their parents.
