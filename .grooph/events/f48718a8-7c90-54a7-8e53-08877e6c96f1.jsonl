@@ -448,3 +448,6 @@
 {"v":1,"t":"2026-10-10T08:24:18.500Z","harness":"claude-code","event":"tool","session":"f48718a8-7c90-54a7-8e53-08877e6c96f1","tool":"mcp__bf7c680d-5fdc-5ef4-b4a0-abadb619bf0a__send_later","cwd":"splashery"}
 {"v":1,"t":"2026-10-10T08:24:22.707Z","harness":"claude-code","event":"turn-end","session":"f48718a8-7c90-54a7-8e53-08877e6c96f1","cwd":"splashery"}
 {"v":1,"t":"2026-10-10T08:24:24.581Z","harness":"claude-code","event":"subagent-stop","session":"f48718a8-7c90-54a7-8e53-08877e6c96f1","agent":"a7eaa20d727dcc3f1"}
+{"v":1,"t":"2026-10-10T08:29:07.622Z","harness":"claude-code","event":"session-end","session":"f48718a8-7c90-54a7-8e53-08877e6c96f1","cwd":"splashery"}
+{"v":1,"t":"2026-10-10T09:26:14.629Z","harness":"claude-code","event":"session-start","session":"f48718a8-7c90-54a7-8e53-08877e6c96f1","cwd":"splashery"}
+{"v":1,"t":"2026-10-10T09:26:14.726Z","harness":"claude-code","event":"turn-start","session":"f48718a8-7c90-54a7-8e53-08877e6c96f1","cwd":"splashery"}
