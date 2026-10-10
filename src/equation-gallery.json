@@ -31,17 +31,17 @@
     "title": "Figure-eight Klein bottle",
     "group": "Classic surfaces",
     "about": "This immersed Klein bottle crosses itself where its neck passes through the body.",
-    "program": "x = (2+cos(u/2)sin(v)-sin(u/2)sin(2v))cos(u)\ny = sin(u/2)sin(v)+cos(u/2)sin(2v)\nz = (2+cos(u/2)sin(v)-sin(u/2)sin(2v))sin(u)\nu = 0 .. 2pi\nv = 0 .. 2pi\nhue = v/(2pi)\nsize = 0.055\ncount = 8000",
+    "program": "x = (2+cos(u/2)sin(v)-sin(u/2)sin(2v))cos(u)\ny = sin(u/2)sin(v)+cos(u/2)sin(2v)\nz = (2+cos(u/2)sin(v)-sin(u/2)sin(2v))sin(u)\nu = 0 .. 2pi\nv = 0 .. 2pi\nhue = v/(2pi)\nsize = 0.07\ncount = 10000",
     "source": "https://en.wikipedia.org/wiki/Klein_bottle",
     "loops": true
   },
   {
-    "id": "boy-surface",
-    "title": "Boy surface",
+    "id": "pseudosphere",
+    "title": "Pseudosphere",
     "group": "Classic surfaces",
-    "about": "A parametrized Boy surface folds a projective plane into a smooth immersed form.",
-    "program": "x = (sqrt(2)cos(u)cos(v)^2+cos(2u)sin(v))/(2-sqrt(2)sin(3u)sin(2v))\ny = (sqrt(2)sin(u)cos(v)^2-sin(2u)sin(v))/(2-sqrt(2)sin(3u)sin(2v))\nz = 3cos(v)^2/(2-sqrt(2)sin(3u)sin(2v))\nu = 0 .. 2pi\nv = 0 .. pi\nhue = v/pi\nsize = 0.035\ncount = 8000",
-    "source": "https://en.wikipedia.org/wiki/Boy%27s_surface",
+    "about": "Two tractrix horns meet at a sharp rim: a surface that curves the opposite way from a sphere.",
+    "program": "x = cos(u)/cosh(v)\ny = 1.2(v-tanh(v))\nz = sin(u)/cosh(v)\nu = 0 .. 2pi\nv = -2.6 .. 2.6\nhue = 0.55+0.2v/2.6\nsize = 0.05\ncount = 10000",
+    "source": "https://en.wikipedia.org/wiki/Pseudosphere",
     "loops": true
   },
   {
@@ -49,7 +49,7 @@
     "title": "Enneper surface",
     "group": "Classic surfaces",
     "about": "A simple polynomial surface curls into three spreading lobes.",
-    "program": "x = u-u^3/3+uv^2\ny = v-v^3/3+vu^2\nz = u^2-v^2\nu = -1.7 .. 1.7\nv = -1.7 .. 1.7\nhue = 0.55+0.1sin(4u)\nsize = 0.035\ncount = 8000",
+    "program": "x = u-u^3/3+uv^2\ny = v-v^3/3+vu^2\nz = u^2-v^2\nu = -1.6 .. 1.6\nv = -1.6 .. 1.6\nhue = 0.55+0.1sin(4u)\nsize = 0.07\ncount = 10000",
     "source": "https://en.wikipedia.org/wiki/Enneper_surface",
     "loops": true
   },
@@ -85,7 +85,7 @@
     "title": "Shell growth",
     "group": "Classic surfaces",
     "about": "A logarithmic tube grows wider as it winds away from its narrow tip.",
-    "program": "x = exp(0.12u)(1+0.35cos(v))cos(u)\ny = exp(0.12u)(1+0.35cos(v))sin(u)\nz = exp(0.12u)(0.35sin(v))\nu = 0 .. 6pi\nv = 0 .. 2pi\nhue = u/(6pi)\nsize = 0.025+0.008u\ncount = 9000",
+    "program": "x = exp(0.12u)(1+0.35cos(v))cos(u)\ny = exp(0.12u)(1+0.35cos(v))sin(u)\nz = exp(0.12u)(0.35sin(v))\nu = 0 .. 6pi\nv = 0 .. 2pi\nhue = u/(6pi)\nsize = 0.04+0.01u\ncount = 10000",
     "source": "https://en.wikipedia.org/wiki/Seashell",
     "loops": true
   },
@@ -139,7 +139,7 @@
     "title": "Double helix",
     "group": "Curves as tubes or beads",
     "about": "Two spiral strands wind together around a long axis.",
-    "program": "x = cos(u+pi floor(2v))\ny = 3v-1.5\nz = sin(u+pi floor(2v))\nu = 0 .. 2pi\nv = 0 .. 1\nhue = v\nsize = 0.055\ncount = 5000",
+    "program": "x = 1.1cos(3u+pi floor(2v))\ny = 1.4(u/pi-1)\nz = 1.1sin(3u+pi floor(2v))\nu = 0 .. 2pi\nv = 0 .. 1\nhue = 0.02+0.3floor(2v)+0.1u/(2pi)\nsize = 0.09\ncount = 10000\nspread = random",
     "source": "https://en.wikipedia.org/wiki/DNA",
     "loops": false
   },
@@ -157,7 +157,7 @@
     "title": "Lorenz-like look-alike",
     "group": "Curves as tubes or beads",
     "about": "This butterfly loop is a Lorenz-like look-alike, not a Lorenz-system solution.",
-    "program": "x = sin(3u)+0.3sin(9u)\ny = cos(2u)\nz = sin(4u)\nu = 0 .. 2pi\nv = 0 .. 1\nhue = u/(2pi)\nsize = 0.05\ncount = 3000",
+    "program": "x = 2.4sin(u)\ny = 1.5sin(2u)+0.25sin(6u)\nz = 1.1cos(u)+0.3cos(3u)\nu = 0 .. 2pi\nv = 0 .. 1\nhue = u/(2pi)\nsize = 0.07\ncount = 4000",
     "source": "",
     "loops": true
   },
@@ -181,10 +181,10 @@
   },
   {
     "id": "sunflower-head",
-    "title": "Sunflower seed spiral",
+    "title": "Sunflower-style spiral",
     "group": "Nature-like shapes",
-    "about": "Seeds follow the Fibonacci angle and spread outward across a flat disk.",
-    "program": "x = sqrt(u)cos(2pi v+2.4u)\ny = 0.06sin(2pi v+2.4u)\nz = sqrt(u)sin(2pi v+2.4u)\nu = 0.002 .. 1\nv = 0 .. 1\nhue = 0.12+0.06u\nsize = 0.025\ncount = 8000\nspread = random",
+    "about": "A face-on disk shades from dark seeds to a golden rim, with Fibonacci-style spiral arms drawn in the color.",
+    "program": "x = 1.8sqrt(u)cos(2pi v)\ny = 1.8sqrt(u)sin(2pi v)\nz = 0.25(1-u)\nu = 0.002 .. 1\nv = 0 .. 1\nr = 0.3+0.7sqrt(u)(0.75+0.25sin(26pi v-24sqrt(u)))\ng = 0.15+0.6sqrt(u)(0.75+0.25sin(26pi v-24sqrt(u)))\nb = 0.02+0.1u\nsize = 0.04\ncount = 10000",
     "source": "https://en.wikipedia.org/wiki/Phyllotaxis",
     "loops": true
   },
@@ -193,7 +193,7 @@
     "title": "Nautilus coil",
     "group": "Nature-like shapes",
     "about": "A widening spiral tube evokes a nautilus shell with a visible open center.",
-    "program": "x = exp(0.13u)(1+0.3cos(v))cos(u)\ny = 0.3exp(0.13u)sin(v)\nz = exp(0.13u)(1+0.3cos(v))sin(u)\nu = 0 .. 5pi\nv = 0 .. 2pi\nhue = 0.04+0.12u/(5pi)\nsize = 0.022+0.006u\ncount = 9000",
+    "program": "x = exp(0.13u)(1+0.3cos(v))cos(u)\ny = 0.3exp(0.13u)sin(v)\nz = exp(0.13u)(1+0.3cos(v))sin(u)\nu = 0 .. 5pi\nv = 0 .. 2pi\nhue = 0.04+0.12u/(5pi)\nsize = 0.035+0.008u\ncount = 10000",
     "source": "https://en.wikipedia.org/wiki/Nautilus",
     "loops": true
   },
@@ -202,7 +202,7 @@
     "title": "Jellyfish bell",
     "group": "Nature-like shapes",
     "about": "A dome-like bell pulses as its rim widens and narrows once each cycle.",
-    "program": "x = (0.7+0.1sin(t))sin(v)cos(u)\ny = (0.7+0.1sin(t))cos(v)-0.2\nz = (0.7+0.1sin(t))sin(v)sin(u)\nu = 0 .. 2pi\nv = 0 .. pi/2\nhue = 0.52+0.08cos(v)\nsize = 0.035\ncount = 6500",
+    "program": "x = (0.9+0.12sin(t))sin(v)(1+0.1cos(8u)sin(v)^6)cos(u)\ny = 0.9cos(v)-0.2\nz = (0.9+0.12sin(t))sin(v)(1+0.1cos(8u)sin(v)^6)sin(u)\nu = 0 .. 2pi\nv = 0 .. 0.6pi\nhue = 0.82+0.05cos(8u)-0.1v\nsize = 0.05\ncount = 10000",
     "source": "https://en.wikipedia.org/wiki/Jellyfish",
     "loops": true
   },
@@ -220,7 +220,7 @@
     "title": "Pinecone spiral",
     "group": "Nature-like shapes",
     "about": "Scales follow a Fibonacci angle and taper toward the top of the cone.",
-    "program": "x = (0.9-0.65v)cos(2pi u+2.4v)\ny = 1.8v\nz = (0.9-0.65v)sin(2pi u+2.4v)\nu = 0 .. 1\nv = 0 .. 1\nhue = 0.08+0.05v\nsize = 0.035\ncount = 7000\nspread = random",
+    "program": "x = (0.9-0.65v)(1+0.09sin(16pi u+25v)sin(26pi u-25v))cos(2pi u+2.4v)\ny = 1.8v\nz = (0.9-0.65v)(1+0.09sin(16pi u+25v)sin(26pi u-25v))sin(2pi u+2.4v)\nu = 0 .. 1\nv = 0 .. 1\nhue = 0.07+0.05v+0.025sin(16pi u+25v)sin(26pi u-25v)\nsize = 0.045\ncount = 10000",
     "source": "https://en.wikipedia.org/wiki/Phyllotaxis",
     "loops": true
   },
@@ -265,7 +265,7 @@
     "title": "Lily pad",
     "group": "Nature-like shapes",
     "about": "A scalloped circular leaf floats on a softly raised surface.",
-    "program": "x = vcos(u)\ny = 0.08sin(12u)*v\nz = vsin(u)\nu = 0 .. 2pi\nv = 0 .. 1\nhue = 0.28+0.08v\nsize = 0.035\ncount = 5500",
+    "program": "x = v(1+0.04cos(24u))cos(u)\ny = 0.3v^3+0.12v\nz = v(1+0.04cos(24u))sin(u)\nu = 0.3 .. 2pi\nv = 0 .. 1.2\nhue = 0.3+0.04cos(14u)-0.05v\nsize = 0.06\ncount = 10000",
     "source": "https://en.wikipedia.org/wiki/Water_lily",
     "loops": true
   },
@@ -274,7 +274,7 @@
     "title": "Traveling wave",
     "group": "Things in motion",
     "about": "Concentric ripples travel across a square sheet without breaking at the cycle seam.",
-    "program": "x = u\ny = 0.38sin(2sqrt(u^2+v^2)-t)\nz = v\nu = -3 .. 3\nv = -3 .. 3\nhue = 0.58-0.08sin(2sqrt(u^2+v^2)-t)\nsize = 0.04\ncount = 7000",
+    "program": "x = u\ny = 0.38sin(2sqrt(u^2+v^2)-t)\nz = v\nu = -2.8 .. 2.8\nv = -2.8 .. 2.8\nhue = 0.58-0.08sin(2sqrt(u^2+v^2)-t)\nsize = 0.09\ncount = 10000",
     "source": "https://en.wikipedia.org/wiki/Wave",
     "loops": true
   },
@@ -292,7 +292,7 @@
     "title": "Rotating saddle",
     "group": "Things in motion",
     "about": "A saddle ripple rotates smoothly over a square patch.",
-    "program": "x = u\ny = 0.22(u^2-v^2)cos(t)+0.2uvsin(t)\nz = v\nu = -1.6 .. 1.6\nv = -1.6 .. 1.6\nhue = 0.6+0.08sin(t)\nsize = 0.035\ncount = 6500",
+    "program": "x = u\ny = 0.22(u^2-v^2)cos(t)+0.2uvsin(t)\nz = v\nu = -1.6 .. 1.6\nv = -1.6 .. 1.6\nhue = 0.6+1.2(0.22(u^2-v^2)cos(t)+0.2uvsin(t))\nsize = 0.06\ncount = 10000",
     "source": "https://en.wikipedia.org/wiki/Saddle_surface",
     "loops": true
   },
@@ -316,10 +316,10 @@
   },
   {
     "id": "morphing-sphere",
-    "title": "Sphere to cube-like form",
+    "title": "Breathing bumpy sphere",
     "group": "Things in motion",
-    "about": "A periodic blend shifts a round surface toward a softly squared silhouette.",
-    "program": "x = sin(v)cos(u)*(1+0.12cos(4u)cos(4v)sin(t))\ny = cos(v)*(1+0.12cos(4u)cos(4v)sin(t))\nz = sin(v)sin(u)*(1+0.12cos(4u)cos(4v)sin(t))\nu = 0 .. 2pi\nv = 0 .. pi\nhue = 0.58+0.1sin(t)\nsize = 0.035\ncount = 7000",
+    "about": "Four-fold bumps grow and shrink across a round surface as its color follows each bump.",
+    "program": "x = sin(v)cos(u)(1+0.2cos(4u)cos(4v)sin(t+1.2))\ny = cos(v)(1+0.2cos(4u)cos(4v)sin(t+1.2))\nz = sin(v)sin(u)(1+0.2cos(4u)cos(4v)sin(t+1.2))\nu = 0 .. 2pi\nv = 0 .. pi\nhue = 0.6+0.5cos(4u)cos(4v)sin(t+1.2)\nsize = 0.05\ncount = 10000",
     "source": "https://en.wikipedia.org/wiki/Sphere",
     "loops": true
   },
@@ -328,7 +328,7 @@
     "title": "Twisting ribbon",
     "group": "Things in motion",
     "about": "A narrow ribbon rotates its cross-section through one full turn each cycle.",
-    "program": "x = u\ny = 0.32vcos(t)\nz = 0.32vsin(t)\nu = -2 .. 2\nv = -1 .. 1\nhue = 0.55+0.15v\nsize = 0.035\ncount = 6000",
+    "program": "x = u\ny = 1.1vcos(2u+t)\nz = 1.1vsin(2u+t)\nu = -2.4 .. 2.4\nv = -1 .. 1\nhue = 0.5+0.25v+0.1u\nsize = 0.06\ncount = 10000",
     "source": "https://en.wikipedia.org/wiki/Ribbon_(mathematics)",
     "loops": true
   },
@@ -337,7 +337,7 @@
     "title": "Pulsing star",
     "group": "Things in motion",
     "about": "Five radial points breathe in and out with the beat of a sine wave.",
-    "program": "x = (0.7+0.16sin(t))(0.65+0.35cos(5u))cos(u)\ny = 0.12sin(5u)\nz = (0.7+0.16sin(t))(0.65+0.35cos(5u))sin(u)\nu = 0 .. 2pi\nv = 0 .. 1\nhue = 0.08+0.06sin(t)\nsize = 0.04\ncount = 6000",
+    "program": "x = 1.8v(0.65+0.16sin(t))(0.45+0.55(1-abs(sin(2.5u))))cos(u)\ny = 1.8v(0.65+0.16sin(t))(0.45+0.55(1-abs(sin(2.5u))))sin(u)\nz = 0.3(1-v)\nu = 0 .. 2pi\nv = 0 .. 1\nhue = 0.1+0.08v+0.04sin(t)\nsize = 0.05\ncount = 10000",
     "source": "https://en.wikipedia.org/wiki/Star_polygon",
     "loops": true
   },
@@ -355,7 +355,7 @@
     "title": "Standing wave",
     "group": "Things in motion",
     "about": "A rectangular sheet ripples in place with a standing two-axis wave.",
-    "program": "x = u\ny = 0.35sin(2u)sin(2v)cos(t)\nz = v\nu = -2 .. 2\nv = -2 .. 2\nhue = 0.62+0.12sin(2u)sin(2v)\nsize = 0.035\ncount = 6500",
+    "program": "x = u\ny = 0.35sin(2u)sin(2v)cos(t)\nz = v\nu = -2 .. 2\nv = -2 .. 2\nhue = 0.62+0.12sin(2u)sin(2v)\nsize = 0.065\ncount = 10000",
     "source": "https://en.wikipedia.org/wiki/Standing_wave",
     "loops": true
   },
@@ -400,7 +400,7 @@
     "title": "Rainbow shell",
     "group": "Color play",
     "about": "A growing shell carries a rainbow gradient from its narrow tip to its wide lip.",
-    "program": "x = exp(0.1u)cos(u)(1+0.25cos(v))\ny = exp(0.1u)0.25sin(v)\nz = exp(0.1u)sin(u)(1+0.25cos(v))\nu = 0 .. 6pi\nv = 0 .. 2pi\nhue = u/(6pi)\nsize = 0.025\ncount = 8500",
+    "program": "x = exp(0.1u)cos(u)(1+0.25cos(v))\ny = exp(0.1u)0.25sin(v)\nz = exp(0.1u)sin(u)(1+0.25cos(v))\nu = 0 .. 6pi\nv = 0 .. 2pi\nhue = u/(6pi)\nsize = 0.04+0.01u\ncount = 10000",
     "source": "https://en.wikipedia.org/wiki/Seashell",
     "loops": true
   },
@@ -409,7 +409,7 @@
     "title": "Blue-green sphere",
     "group": "Color play",
     "about": "An RGB gradient moves from deep blue at the bottom to green at the top.",
-    "program": "x = sin(v)cos(u)\ny = cos(v)\nz = sin(v)sin(u)\nu = 0 .. 2pi\nv = 0 .. pi\nr = 0.15+0.25sin(v)\ng = 0.25+0.65(1+cos(v))/2\nb = 0.55+0.4(1-cos(v))/2\nsize = 0.035\ncount = 6500",
+    "program": "x = sin(v)cos(u)\ny = cos(v)\nz = sin(v)sin(u)\nu = 0 .. 2pi\nv = 0 .. pi\nr = 0.05\ng = 0.1+0.85(1+cos(v))/2\nb = 0.15+0.8(1-cos(v))/2\nsize = 0.05\ncount = 10000",
     "source": "https://en.wikipedia.org/wiki/Sphere",
     "loops": true
   },
@@ -418,7 +418,7 @@
     "title": "Klein bottle color flow",
     "group": "Color play",
     "about": "Alternating bands run around the immersed bottle and make its crossing easy to see.",
-    "program": "x = (2+cos(u/2)sin(v)-sin(u/2)sin(2v))cos(u)\ny = sin(u/2)sin(v)+cos(u/2)sin(2v)\nz = (2+cos(u/2)sin(v)-sin(u/2)sin(2v))sin(u)\nu = 0 .. 2pi\nv = 0 .. 2pi\nhue = 0.5+0.25sin(4v)\nsize = 0.04\ncount = 8000",
+    "program": "x = (2+cos(u/2)sin(v)-sin(u/2)sin(2v))cos(u)\ny = sin(u/2)sin(v)+cos(u/2)sin(2v)\nz = (2+cos(u/2)sin(v)-sin(u/2)sin(2v))sin(u)\nu = 0 .. 2pi\nv = 0 .. 2pi\nhue = 0.5+0.25sin(4v)\nsize = 0.07\ncount = 10000",
     "source": "https://en.wikipedia.org/wiki/Klein_bottle",
     "loops": true
   },
@@ -427,7 +427,7 @@
     "title": "Plasma RGB sheet",
     "group": "Color play",
     "about": "Three offset waves make a smooth red, green, and blue color field.",
-    "program": "x = u\ny = 0.15sin(u+v)\nz = v\nu = -2pi .. 2pi\nv = -2pi .. 2pi\nr = 0.5+0.45sin(u)\ng = 0.5+0.45sin(v+2)\nb = 0.5+0.45sin(u+v+4)\nsize = 0.035\ncount = 7000",
+    "program": "x = u\ny = 0.15sin(1.5u+1.5v)\nz = v\nu = -3 .. 3\nv = -3 .. 3\nr = 0.5+0.45sin(1.5u)\ng = 0.5+0.45sin(1.5v+2)\nb = 0.5+0.45sin(1.5u+1.5v+4)\nsize = 0.09\ncount = 10000",
     "source": "https://en.wikipedia.org/wiki/RGB_color_model",
     "loops": true
   },
@@ -460,11 +460,11 @@
   },
   {
     "id": "hopf-link-sample",
-    "title": "Hopf link sample",
+    "title": "Hopf link",
     "group": "Math showpieces",
-    "about": "A sampled family of linked circles shows the shape of Hopf fibers after projection.",
-    "program": "x = 0.707cos(u)/(1-0.707cos(u+v))\ny = 0.707sin(u)/(1-0.707cos(u+v))\nz = 0.707sin(u+v)/(1-0.707cos(u+v))\nu = 0 .. 2pi\nv = 0 .. 2pi\nhue = v/(2pi)\nsize = 0.035\ncount = 7000",
-    "source": "https://en.wikipedia.org/wiki/Hopf_fibration",
+    "about": "Two circles pass through each other once, the simplest link, drawn as two dotted rings in different colors.",
+    "program": "x = 1.6(1-floor(2v))cos(u)+floor(2v)(1.6cos(u)+1.6)-0.8\ny = 1.6(1-floor(2v))sin(u)\nz = 1.6floor(2v)sin(u)\nu = 0 .. 2pi\nv = 0 .. 1\nhue = 0.02+0.55floor(2v)+0.1u/(2pi)\nsize = 0.14\ncount = 10000\nspread = random",
+    "source": "https://en.wikipedia.org/wiki/Hopf_link",
     "loops": true
   },
   {
@@ -480,8 +480,8 @@
     "id": "superquadric",
     "title": "Superquadric",
     "group": "Math showpieces",
-    "about": "Fractional powers round the corners of a box-like superquadric.",
-    "program": "x = cos(u)abs(cos(u))^0.6abs(cos(v))^0.6\ny = sin(v)abs(sin(v))^0.6\nz = sin(u)abs(sin(u))^0.6abs(cos(v))^0.6\nu = 0 .. 2pi\nv = 0 .. pi\nhue = v/pi\nsize = 0.035\ncount = 7000",
+    "about": "Fourth-power rounding turns a sphere into a soft box with six flattened faces.",
+    "program": "x = 1.6cos(u)cos(v)/((cos(u)^4+sin(u)^4)^0.25(cos(v)^4+sin(v)^4)^0.25)\ny = 1.6sin(v)/(cos(v)^4+sin(v)^4)^0.25\nz = 1.6sin(u)cos(v)/((cos(u)^4+sin(u)^4)^0.25(cos(v)^4+sin(v)^4)^0.25)\nu = 0 .. 2pi\nv = -pi/2 .. pi/2\nhue = 0.5+0.3v/pi+0.1sin(u)\nsize = 0.06\ncount = 10000",
     "source": "https://en.wikipedia.org/wiki/Superquadrics",
     "loops": true
   },
@@ -499,7 +499,7 @@
     "title": "Monkey saddle",
     "group": "Math showpieces",
     "about": "A cubic height field has three valleys meeting at one central saddle point.",
-    "program": "x = u\ny = u^3-3uv^2\nz = v\nu = -1.3 .. 1.3\nv = -1.3 .. 1.3\nhue = 0.55+0.1sin(3u)\nsize = 0.035\ncount = 6500",
+    "program": "x = u\ny = 0.12(u^3-3uv^2)\nz = v\nu = -1.2 .. 1.2\nv = -1.2 .. 1.2\nhue = 0.55+0.1sin(3u)+0.2(u^3-3uv^2)\nsize = 0.05\ncount = 10000",
     "source": "https://en.wikipedia.org/wiki/Monkey_saddle",
     "loops": true
   },
@@ -523,10 +523,10 @@
   },
   {
     "id": "gyroid-look",
-    "title": "Gyroid-like sheet",
+    "title": "Gyroid slice",
     "group": "Math showpieces",
-    "about": "A periodic height graph borrows the repeating rhythm of a gyroid while staying open.",
-    "program": "x = u\ny = 0.2(sin(u)cos(v)+sin(v)cos(u))\nz = v\nu = -pi .. pi\nv = -pi .. pi\nhue = 0.55+0.15sin(u+v)\nsize = 0.035\ncount = 7000",
+    "about": "A height graph of one slice of the gyroid function rises and falls in a repeating pattern of hills and valleys.",
+    "program": "x = u\ny = 0.5(sin(u)cos(v)+0.36sin(v)+0.93cos(u))\nz = v\nu = -1.5pi .. 1.5pi\nv = -1.5pi .. 1.5pi\nhue = 0.55+0.3(sin(u)cos(v)+0.36sin(v)+0.93cos(u))\nsize = 0.11\ncount = 10000",
     "source": "https://en.wikipedia.org/wiki/Gyroid",
     "loops": true
   },
