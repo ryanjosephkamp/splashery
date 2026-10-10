@@ -3779,38 +3779,43 @@ Proposals below are suggestions; the owner may change them.
     correction, blocks and interleaving, the zigzag placement (every bit drops into place along the
     path) and the eight masks (the masked tiles turn over, with each mask's penalty), every step
     checked against Nayuki's encoder.
-  - Sound: A light wooden knock and a soft breath as each part lifts.
+  - Sound: A light wooden knock and a faint breath as each part lifts (lane QR r5: the breath
+    quieter).
 - **QR damage lab** (`qr-damage`). Now: tap: Add damage. Plan: new effect (E6).
   - Owner: The owner's push notes of October 4, 2026 (Q7, "an absolute strong yes ... build this out
     very comprehensively"; X3, the code that heals, October 5), lane QR lab r2, October 5, 2026.
   - Effect: The Damage lab: a tap adds the chosen damage (scratch, sticker, tear, burn, smudge, or
     the splats' own: blur, shrink, grow, jitter, fade, color drift; with Tilt, Curve and Move in
-    time as sliders). A sticker drops onto the code, a torn corner peels up and falls away, a burned
-    corner chars and crumbles. A meter reads the very picture on the stage with jsQR after each
-    change and counts each block's lost codewords against what it can fix; the four levels can stand
-    side by side. Heal it shows the code as a reader read it, wrong modules in red, and turns them
-    over block by block as Reed–Solomon decoding fixes each block.
+    time as sliders). A sticker drops onto the code where you tap, and a smudge spreads there; a
+    tear starts from the corner or the edge nearest the tap, peels up and falls away; a burn chars
+    and crumbles from the nearest corner (lane QR r5). A meter reads the very picture on the stage
+    with jsQR after each change and counts each block's lost codewords against what it can fix; the
+    four levels can stand side by side. Heal it shows the code as a reader read it, wrong modules in
+    red, and turns them over block by block as Reed–Solomon decoding fixes each block.
   - Sound: A soft scrape and a muffled thud as the damage lands.
 - **Three QR codes in one** (`qr-three`). Now: tap: Pull the three apart. Plan: new effect (E6).
   - Owner: The owner's pick X2 on the Push Plan, October 5, 2026 (three codes in one square), lane
     QR lab r2.
   - Effect: Three QR codes in the red, green and blue of one square (eight colors). A tap pulls the
     square apart into its three codes, each in its own color, which slide back and out to the sides
-    and come back together. Read all three splits the picture into its channels and reads each code;
-    an ordinary reader's result is shown beside them.
-  - Sound: A soft breath as the codes slide apart and a light knock as they meet again.
-- **Picture QR** (`qr-picture`). Now: tap: Turn the tiles over. Plan: new effect (E6).
+    and come back together (lane QR r5: each white card lies a little behind its own modules, so no
+    white streaks flicker over them; the three colors can be chosen in the Toy tab). Read all three
+    splits the picture into its channels and reads each code; an ordinary reader's result is shown
+    beside them.
+  - Sound: A faint breath as the codes slide apart (lane QR r5: quieter) and a light knock as they
+    meet again.
+- **Picture QR** (`qr-picture`). Now: tap: Send a ripple. Plan: new effect (E6).
   - Owner: The owner's Push Plan pick Q5 ("a hard yes, or a strong yes"), lane QR craft, October
     6, 2026.
   - Effect: Picture QR: a photo woven into a QR code as a real halftone (lane QR r4: 3 x 3 cells a
     module, the middle keeps the bit; error diffusion over the whole grid, the forced cells passing
     their error on; a nudge only where a module would misread; the mask that fits the picture; a
     bigger code for more detail; a color halftone in the color style; one seamless grid of splats).
-    A tap turns every module's tile over in a wave out from the tap; its back is the plain code, and
-    it comes round to the picture again (3.6 s). The toy measures the contrast and reads its code
-    with jsQR at phone size and smaller; Make it scan finds the closest version that scans; Save a
-    PNG.
-  - Sound: A soft breath with a run of light wooden clicks as the tiles turn.
+    A tap sends a ripple out from the tap: each module's tile lifts and falls, tipping toward the
+    tap and away, with its own picture colors all the way, so the picture stays whole (lane QR r5;
+    3.6 s). The toy measures the contrast and reads its code with jsQR at phone size and smaller;
+    Make it scan finds the closest version that scans; Save a PNG.
+  - Sound: A soft breath with a run of light wooden clicks as the tiles lift and fall.
 - **QR from real things** (`qr-build`). Now: tap: Build it. Plan: new effect (E6).
   - Owner: The owner's Push Plan pick Q13 ("Absolutely. This is really, really cool"), lane QR
     craft, October 6, 2026.
@@ -3829,7 +3834,7 @@ Proposals below are suggestions; the owner may change them.
     seamless modules as the QR code toy draws them, lane QR r4). A tap sweeps a scanner's red line
     across the symbol; each bar (or column of modules) lifts toward you as it passes and settles
     back (2.6 s). The toy reads its own picture back with zxing-js.
-  - Sound: A soft breath as the line sweeps, then a gentle low beep.
+  - Sound: A soft breath as the line sweeps (lane QR r5: no note at the end).
 - **Photo to 3D** (`photo-3d`). Now: tap: Raise or flatten the depth. Plan: keep.
   - Owner: Approved on the Splashery Universe page ("photo yes", September 29, 2026; lane Photo to
     3D; labs only).

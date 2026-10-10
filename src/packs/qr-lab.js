@@ -23,8 +23,8 @@
 // The test hook: window.__splashery.qrLab (at the end of this file).
 
 import { encodeSteps, ROLE, LEVELS, LEVEL_RECOVERY, MASKS } from "../qr-lab/steps.js"; // prettier-ignore
-import { codeSplats, hexRGB, QUIET } from "../qr-lab/splats.js";
-import { applyDamage, warpPoint, KINDS as DAMAGE_KINDS, REGIONS, describeDamage } from "../qr-lab/damage.js"; // prettier-ignore
+import { codeSplats, hexRGB, rgbHex, QUIET } from "../qr-lab/splats.js";
+import { applyDamage, warpPoint, KINDS as DAMAGE_KINDS, REGIONS, describeDamage, tearFrom, burnFrom } from "../qr-lab/damage.js"; // prettier-ignore
 import { sampleModules, toDark, analyze } from "../qr-lab/read.js";
 import { encodeRGB, readRGB } from "../qr-lab/rgb.js";
 import { anatomyModifier, damageModifier } from "../qr-lab/field.js";
@@ -525,20 +525,69 @@ const ANATOMY = {
 const BAKED = ["scratch", "sticker", "tear", "burn", "smudge", "blur", "shrink", "grow", "jitter", "fade", "color"]; // prettier-ignore
 const STEP_AMOUNT = 0.12;
 
-// The damage option: "kind:amount:region:seed;…".
+// The damage option: "kind:amount:region:seed;…". Lane QR r5: a damage
+// placed by a tap adds ":x,y", where it was tapped (code units from the
+// code's center), as in "sticker:0.12:all:3:4.5,-2".
 export function parseDamage(str) {
   const out = [];
   for (const part of String(str || "").split(";")) {
-    const [kind, amount, region, seed] = part.split(":");
+    const [kind, amount, region, seed, at] = part.split(":");
     if (!BAKED.includes(kind)) continue;
     const a = Math.min(1, Math.max(0, Number(amount) || 0));
     if (a <= 0) continue;
-    out.push({ kind, amount: a, region: REGIONS.some((r) => r.id === region) ? region : "all", seed: Number(seed) || 1 }); // prettier-ignore
+    const d = { kind, amount: a, region: REGIONS.some((r) => r.id === region) ? region : "all", seed: Number(seed) || 1 }; // prettier-ignore
+    const xy = String(at || "")
+      .split(",")
+      .map(Number);
+    if (PLACED.includes(kind) && xy.length === 2 && xy.every(Number.isFinite)) d.at = xy;
+    out.push(d);
   }
   return out;
 }
+const r1 = (v) => Math.round(v * 10) / 10;
 export const formatDamage = (list) =>
-  list.filter((d) => d.amount > 0).map((d) => `${d.kind}:${Math.round(d.amount * 1000) / 1000}:${d.region}:${d.seed}`).join(";"); // prettier-ignore
+  list.filter((d) => d.amount > 0).map((d) => `${d.kind}:${Math.round(d.amount * 1000) / 1000}:${d.region}:${d.seed}${d.at ? `:${r1(d.at[0])},${r1(d.at[1])}` : ""}`).join(";"); // prettier-ignore
+
+// Lane QR r5: the damage a tap places where it lands. A tap near the last
+// one of its kind (the same corner or edge for a tear or a burn) adds to it;
+// elsewhere it starts a new one there. Other kinds grow over their region.
+const PLACED = ["sticker", "smudge", "tear", "burn"];
+function tapDamage(list, tool, region, at, size) {
+  let d;
+  if (at && PLACED.includes(tool)) {
+    const same = (x) => {
+      if (x.kind !== tool || !x.at) return false;
+      if (tool === "burn") return burnFrom(x.at, size).join() === burnFrom(at, size).join();
+      if (tool === "tear") {
+        const [p, q] = [tearFrom(x.at, size), tearFrom(at, size)];
+        if (p.corner || q.corner) return !!p.corner && !!q.corner && p.corner.join() === q.corner.join(); // prettier-ignore
+        return p.edge.join() === q.edge.join() && Math.abs(p.along - q.along) < size * 0.25;
+      }
+      return Math.hypot(x.at[0] - at[0], x.at[1] - at[1]) < size * 0.12;
+    };
+    d = list.filter(same).pop();
+    if (!d) list.push((d = { kind: tool, amount: 0, region: "all", seed: 1 + list.length, at: at.map(r1) })); // prettier-ignore
+  } else {
+    d = list.find((x) => x.kind === tool && x.region === region && !x.at);
+    if (!d) list.push((d = { kind: tool, amount: 0, region, seed: 1 + list.length }));
+  }
+  d.amount = Math.min(1, d.amount + STEP_AMOUNT);
+  return list;
+}
+
+// The tap point (recipe units) on the code under it, from that code's
+// center (with four codes side by side, the same place on each).
+function tapOnCode(point) {
+  const L = DM.layout;
+  if (!point || !L) return null;
+  let best = null;
+  for (const [ox, oy] of L.offsets) {
+    const p = [point[0] - ox, point[1] - oy];
+    if (!best || Math.hypot(...p) < Math.hypot(...best)) best = p;
+  }
+  const e = L.N / 2 + QUIET;
+  return Math.abs(best[0]) <= e && Math.abs(best[1]) <= e ? best : null;
+}
 
 const DM = { codes: null, layout: null, options: null, panel: null, check: null, checking: false, read: null, timer: 0, geo: { tilt: 0, curve: 0, wave: 0, phase: 0 }, lastGeo: "" }; // prettier-ignore
 
@@ -608,7 +657,9 @@ function damagePanel() {
     el("label", { htmlFor: "qrs-dtext", textContent: "What the code holds" }),
     input,
     row(level, make),
-    note("Damage (tap the code to add more of it):"),
+    note(
+      "Damage: pick one, then tap the code. A sticker or a smudge lands where you tap; a tear starts from the corner or the edge nearest your tap, and a burn from the nearest corner. Tap again to add more.",
+    ),
     tools,
     row(el("span", { textContent: "Where: " }), region),
     actions,
@@ -631,12 +682,25 @@ function damagePanel() {
         b.classList.toggle("primary", on);
       }
       const dmg = parseDamage(o.damage);
-      list.textContent = dmg.length ? `Damage: ${dmg.map((d) => `${describeDamage(d, codes[0].size)} (${REGIONS.find((r) => r.id === d.region).label.toLowerCase()})`).join("; ")}.` : "No damage yet."; // prettier-ignore
+      list.textContent = dmg.length ? `Damage: ${dmg.map((d) => `${describeDamage(d, codes[0].size)} (${whereText(d, codes[0].size)})`).join("; ")}.` : "No damage yet."; // prettier-ignore
       meter.replaceChildren(...meterRows());
     },
   };
   DM.panel.refresh();
   return box;
+}
+
+// Where a damage is, in words (lane QR r5: a tapped one says where it landed).
+function whereText(d, size) {
+  if (!d.at) return REGIONS.find((r) => r.id === d.region).label.toLowerCase();
+  const side = (x, y) => `${y > 0 ? "upper" : "lower"} ${x > 0 ? "right" : "left"}`;
+  if (d.kind === "burn") return `from the ${side(...burnFrom(d.at, size))} corner`;
+  if (d.kind === "tear") {
+    const f = tearFrom(d.at, size);
+    if (f.corner) return `from the ${side(...f.corner)} corner`;
+    return `from the ${f.edge[0] > 0 ? "right" : f.edge[0] < 0 ? "left" : f.edge[1] > 0 ? "top" : "bottom"} edge`; // prettier-ignore
+  }
+  return "where you tapped";
 }
 
 function meterRows() {
@@ -682,10 +746,7 @@ async function addDamage() {
   const o = DM.options || {};
   const tool = o.tool || "scratch";
   const region = o.region || "all";
-  const list = parseDamage(o.damage);
-  let d = list.find((x) => x.kind === tool && x.region === region);
-  if (!d) list.push((d = { kind: tool, amount: 0, region, seed: 1 + list.length }));
-  d.amount = Math.min(1, d.amount + STEP_AMOUNT);
+  const list = tapDamage(parseDamage(o.damage), tool, region, null, DM.layout?.N ?? 25);
   DM.pendingPrev = o.damage || "";
   await switchTo({ damage: formatDamage(list), show: "damaged" }, "drop");
 }
@@ -832,14 +893,13 @@ const DAMAGE = {
   action: {
     key: "drop",
     label: "Add damage",
-    at() {
+    // Lane QR r5: a sticker or a smudge lands where the tap does; a tear
+    // starts from the corner or the edge nearest it, a burn from the corner.
+    at(point) {
       const o = DM.options || {};
       const tool = o.tool || "scratch";
       const region = o.region || "all";
-      const list = parseDamage(o.damage);
-      let d = list.find((x) => x.kind === tool && x.region === region);
-      if (!d) list.push((d = { kind: tool, amount: 0, region, seed: 1 + list.length }));
-      d.amount = Math.min(1, d.amount + STEP_AMOUNT);
+      const list = tapDamage(parseDamage(o.damage), tool, region, tapOnCode(point), DM.layout?.N ?? 25); // prettier-ignore
       DM.pendingPrev = o.damage || "";
       return { options: { damage: formatDamage(list), show: "damaged" }, key: "drop" };
     },
@@ -954,8 +1014,10 @@ const DAMAGE = {
         }
         // The torn piece's center, in the code's own units (the same in
         // every code), for the GPU program to turn it about.
-        const tear = pieces.find((pc) => pc.kind === "tear");
-        if (tear?.splats.length && !torn) torn = tear.splats.reduce((m, q) => [m[0] + q.p[0] / tear.splats.length, m[1] + q.p[1] / tear.splats.length], [0, 0]); // prettier-ignore
+        // Lane QR r5: the piece this tap tore off (tears can now come from
+        // any corner or edge, so not always the first one).
+        const fresh = pieces.filter((pc) => pc.kind === "tear").map((pc) => pc.splats.filter((q) => !gone.has(q.id))).find((l) => l.length); // prettier-ignore
+        if (fresh && !torn) torn = fresh.reduce((m, q) => [m[0] + q.p[0] / fresh.length, m[1] + q.p[1] / fresh.length], [0, 0]); // prettier-ignore
         for (const pcs of pieces)
           for (const sp of pcs.splats) {
             if (!before || gone.has(sp.id)) continue; // came off before this tap
@@ -1004,6 +1066,23 @@ const DAMAGE = {
 // ======================================================================================
 
 const TH = { rgb: null, options: null, panel: null, result: null };
+// The pulled-apart codes' colors (the options' defaults) and the depth
+// between a card and its modules, and between the cards (code units).
+const TINTS = [
+  [0.86, 0.1, 0.12],
+  [0.1, 0.62, 0.2],
+  [0.12, 0.25, 0.85],
+];
+const LAYER = 0.5;
+// A chosen color, darkened until it reads as ink on the white card (its
+// luminance at most 0.5, as dark as the default green, so each code keeps its
+// contrast and still scans).
+function inkColor(c) {
+  const lum = (v) => 0.2126 * v[0] + 0.7152 * v[1] + 0.0722 * v[2];
+  let out = c.slice();
+  for (let i = 0; i < 40 && lum(out) > 0.5; i++) out = out.map((v) => v * 0.94);
+  return out;
+}
 const TEXTS = ["https://ryanjosephkamp.github.io/splashery/", "Three codes in one square", "Red, green and blue"]; // prettier-ignore
 
 function threePanel() {
@@ -1070,6 +1149,12 @@ const THREE = {
     { key: "t2", label: "Green code", type: "text", default: TEXTS[1], hidden: true },
     { key: "t3", label: "Blue code", type: "text", default: TEXTS[2], hidden: true },
     { key: "level", label: "Error correction", type: "select", default: "M", choices: LEVELS.map((l) => ({ id: l, label: `Level ${l}` })) }, // prettier-ignore
+    // Lane QR r5 (the owner's idea of October 10, 2026): the colors of the
+    // three codes pulled apart. The square keeps red, green and blue, which
+    // the reader splits; a light color is darkened so each code still reads.
+    { key: "c1", label: "Red code's color", type: "color", default: rgbHex(TINTS[0]) },
+    { key: "c2", label: "Green code's color", type: "color", default: rgbHex(TINTS[1]) },
+    { key: "c3", label: "Blue code's color", type: "color", default: rgbHex(TINTS[2]) },
   ],
   controls: [{ key: "apart", label: "Pull apart", type: "pulse", ease: 4.2 }],
   action: { key: "apart", label: "Pull the three apart" },
@@ -1088,7 +1173,7 @@ const THREE = {
     out.tokens = [
       { offset: [0, 0, 0], visible: 1 - on },
       { offset: [-1.05 * w * k, 0, -3 * w * k], visible: on },
-      { offset: [0, 0.02 * w * k, -3 * w * k + 0.3], visible: on },
+      { offset: [0, 0.02 * w * k, -3 * w * k], visible: on },
       { offset: [1.05 * w * k, 0, -3 * w * k], visible: on },
     ];
   },
@@ -1101,26 +1186,31 @@ const THREE = {
     const N = r.size;
     const ones = new Uint8Array(N * N).fill(1);
     const key = (i) => r.colors[i * 3] * 4 + r.colors[i * 3 + 1] * 2 + r.colors[i * 3 + 2];
-    const tint = [
-      [0.86, 0.1, 0.12],
-      [0.1, 0.62, 0.2],
-      [0.12, 0.25, 0.85],
-    ];
+    const tint = [o.c1, o.c2, o.c3].map((hex, ch) => inkColor(hexRGB(hex, TINTS[ch])));
     // As many splats per module as the budget allows (four layers).
     let all;
     for (let per = 6; per >= 2; per--) {
       all = [];
       // Token 0: the square, every module in its own color.
+      // (Its sheet a LAYER behind its tiles too, so it never ties with them.)
       for (const sp of codeSplats(ones, N, { per, fg: FG, bg: BG, key }))
-        all.push({ ...sp, color: sp.mod >= 0 ? [r.colors[sp.mod * 3], r.colors[sp.mod * 3 + 1], r.colors[sp.mod * 3 + 2]] : sp.color, kind: "token", params: [0, 0], pattern: false }); // prettier-ignore
-      // Tokens 1–3: each channel's code, in its own color on white.
-      for (let ch = 0; ch < 3; ch++)
-        for (const sp of codeSplats(r.codes[ch].modules, N, { per: Math.max(2, per - 1), fg: tint[ch], bg: BG })) all.push({ ...sp, p: [sp.p[0], sp.p[1], sp.p[2] - 0.05 * (ch + 1)], kind: "token", params: [ch + 1, 0], pattern: false }); // prettier-ignore
+        all.push({ ...sp, p: sp.mod >= 0 ? sp.p : [sp.p[0], sp.p[1], -LAYER], color: sp.mod >= 0 ? [r.colors[sp.mod * 3], r.colors[sp.mod * 3 + 1], r.colors[sp.mod * 3 + 2]] : sp.color, kind: "token", params: [0, 0], pattern: false }); // prettier-ignore
+      // Tokens 1–3: each channel's code, in its own color on white. Lane QR
+      // r5: splats sort in the pose they were built in, at a depth the sorter
+      // splits into steps, so a white card only 0.03 behind its modules tied
+      // with them and flickered over the top rows as the codes moved apart.
+      // Each card now lies a clear LAYER behind its own modules, and the
+      // three codes stack in a fixed order (green, blue, red: the order they
+      // pass in front of each other as they split).
+      for (let ch = 0; ch < 3; ch++) {
+        const z0 = -LAYER * 2 * [2, 0, 1][ch] - LAYER;
+        for (const sp of codeSplats(r.codes[ch].modules, N, { per: Math.max(2, per - 1), fg: tint[ch], bg: BG })) all.push({ ...sp, p: [sp.p[0], sp.p[1], z0 + (sp.mod < 0 ? -LAYER : 0)], kind: "token", params: [ch + 1, 0], pattern: false }); // prettier-ignore
+      }
       if (all.length <= k.count) break;
     }
     const H = N / 2 + QUIET;
     k.reach([H + 1, H + 1, 1]);
-    k.reach([-H - 1, -H - 1, -0.5]);
+    k.reach([-H - 1, -H - 1, -6 * LAYER - 0.5]);
     k.cloud({ share: Math.min(1, all.length / k.count), jitter: 0, pattern: false }, (rand, i) => all[i] || null); // prettier-ignore
     k.data = { size: N };
     Promise.resolve().then(() => TH.panel?.refresh());
