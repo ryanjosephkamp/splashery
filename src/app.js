@@ -1642,10 +1642,11 @@ class App {
   }
 
   // Runs fn with a fixed-size, frozen player and restores it afterwards.
-  async withCapture(size, fn) {
+  // label: a short message shown over the stage meanwhile (Stage.cover).
+  async withCapture(size, fn, { label = "" } = {}) {
     const player = this.player;
     // Engine (QR r4): the fixed size and the export camera stay off screen.
-    await player.stage.cover();
+    await player.stage.cover({ label });
     const base = { cam: player.camera.getState(), time: player.time, idle: player.idle.weight };
     const look = player.scene.look;
     const fx = player.scene.effects;
