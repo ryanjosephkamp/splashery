@@ -107,7 +107,7 @@ The twelve, one by one (root cause, fix, the run that shows it green):
    `…-grid-390x844.png`, `…-row-320x844.png`, `…-grid-320x844.png`: no public name cut at either
    width. Three labs names still need three lines at 9 px in the row ("Cherry blossom (photo)", "The
    solar system on real orbits", "Super-resolution microscope"; they fit in the 390 px grid): see
-   "For the Operator".
+   "Known issues".
 2. `qrs-toys:37`: **the test read it the wrong way.** The toy's code is right: the canvas shows
    exactly the encoder's 21 × 21 modules (sampled module by module: 0 differences), and jsQR reads
    it once the page's own words are out of the picture. The test screenshots the canvas element, and
@@ -127,19 +127,22 @@ The twelve, one by one (root cause, fix, the run that shows it green):
    with its arms and head on ropes, and #434 (Hands-on H1, Clothing) made the running shoe's laces
    ropes (pull a lace end to untie it), both pieces mode, merged October 9, 2026 in #457; a press
    takes a piece, not the whole toy. Fix, the file's own pattern: the teddy bear's place in the
-   sample goes to the rubber duck (same shelf, kit, lifts whole: lift, toss, land, settle and Reset
-   all measured, no gaps); every clothing toy is pieces mode now (hoodie, sunglasses, cap and shoe
-   all measured "whole-pickup"), so the shoe stays the shelf's sample with an exact
-   `["whole-pickup"]` in KNOWN, as the drum and the picture frame have.
+   sample goes to the balloon dog (same shelf, kit, lifts whole: lift, toss, land, settle and Reset
+   all measured, no gaps, the same exterior gap, -0.012, run after run; the rubber duck, tried
+   first, landed in a different pose each run and once missed the rest-height bound); every clothing
+   toy is pieces mode now (hoodie, sunglasses, cap and shoe all measured "whole-pickup"), so the
+   shoe stays the shelf's sample with an exact `["whole-pickup"]` in KNOWN, as the drum and the
+   picture frame have.
 5. `fl7:49` (and `:95`, the same cause): **timing.** `openLab` waited for `fluids.mode`, but the gas
    grid (`fx.gas`) comes after a dynamic import (`FluidRuntime.startGasFx`), so a busy machine read
    it as undefined. Fix: `openLab` waits until a scene with gas has its grid (a real ready signal);
    the checks are unchanged.
-6. `hh4-vehicles:257`: **timing.** The file's drags are worked out in screen points once, and the
-   turntable (2.5 s without a touch) turned the saucer under them on a busy machine. Measured: the
-   same drag lands the cow 1.015 from the middle with the view still and 1.075 with the turntable
-   running, so where the cow lands depended on how long the page sat. Fix: `open()` turns the
-   turntable off and snaps the view before any drag.
+6. `hh4-vehicles:257`: **not fixed.** The drags are worked out in screen points once; the turntable
+   changes where the cow lands (1.015 from the middle with the view still, 1.075 with it running),
+   but holding the view still made it worse under load (4 of 4 failed beside 1 of 4 for the test as
+   it was, same run, `.cache/fx11-h3`), and pausing the page's own frames so only the test's clock
+   runs failed 3 of 3. Both were reverted; the test is as on main. Next step: find what in the
+   page's real frames moves the cow between the drag and the clock steps.
 7. `stm:366`: **timing.** The test waited for the model's name in the toy's data, which the build
    sets before the app draws the Toy tab again (`onToy` → `setToyPanel`). Under load the panel came
    back after the next file's message, replacing the shown warning with a fresh hidden one. Fix:
@@ -148,10 +151,11 @@ The twelve, one by one (root cause, fix, the run that shows it green):
 
 Flaky:
 
-- `hh3-engine2:122`: **timing.** The turntable starts after 2.5 s without a touch; under load the
-  view turned under the drag and the finger ended short of the high string (0 to 4 plucked, not 5).
-  Fix: the view holds still (turntable off, snapped to its target) before the string's screen points
-  are worked out.
+- `hh3-engine2:122`: **not fixed.** Logged under load (`.cache/fx11-h2`): the strum starts, then the
+  canvas gets a `lostpointercapture` part way through the drag (after 7 to 17 of the 24 moves),
+  which ends the tool (`camera.js` treats it as a pointer up), so the later strings are never
+  crossed. What drops the capture is not found yet (nothing in `src/` releases it). The turntable
+  change was reverted; the test is as on main.
 - `ai-engine:7`: **timing.** The failing check is the last one (after Clear, the read is all zeros).
   `read()`'s options go to `setToyOptions`, which rebuilds the toy and draws the Toy tab again with
   a new pad that starts from `value()`; on a busy machine the new pad came after the Clear click, so
@@ -187,6 +191,11 @@ Flaky:
 
 ## Known issues
 
+- Three labs names need a third line in the phone row even at 9 px and stay cut there: "Cherry
+  blossom (photo)", "The solar system on real orbits" and "Super-resolution microscope" (they fit in
+  the 390 px grid). The Operator's call (October 10, 2026, 20:33 UTC): leave them, no smaller font
+  and no third line; their lanes can shorten them later. `smoke:1504` runs with labs off and passes.
+
 - `phf-engine:260` failed once in 12 under the heavy extra load with a different check: the text's
   correlation came out -0.10 (0.8 needed), with no console error. It had come out NaN once before
   the engine fix too (`.cache/fx11-p2`), so it isn't from the fix; the suite runs the file alone.
@@ -199,6 +208,3 @@ Flaky:
 
 - Merge the "Engine:" PR #502 first (`claude/lane-fix11-engine`: the phone card's name fit and the
   two WebGPU changes); #501 has it merged in.
-- Three labs names still need a third line in the phone row at 9 px (above). Going smaller than 9 px
-  or giving those cards a third line would change the row's look; shorter shelf names (their lanes')
-  would fit. Your call.
