@@ -125,7 +125,11 @@ The twelve, one by one (root cause, fix, the run that shows it green):
    grid (`fx.gas`) comes after a dynamic import (`FluidRuntime.startGasFx`), so a busy machine read
    it as undefined. Fix: `openLab` waits until a scene with gas has its grid (a real ready signal);
    the checks are unchanged.
-6. `hh4-vehicles:257`: passed in the first run; repeats under load pending.
+6. `hh4-vehicles:257`: **timing.** The file's drags are worked out in screen points once, and the
+   turntable (2.5 s without a touch) turned the saucer under them on a busy machine. Measured: the
+   same drag lands the cow 1.015 from the middle with the view still and 1.075 with the turntable
+   running, so where the cow lands depended on how long the page sat. Fix: `open()` turns the
+   turntable off and snaps the view before any drag.
 7. `stm:366`: **timing.** The test waited for the model's name in the toy's data, which the build
    sets before the app draws the Toy tab again (`onToy` → `setToyPanel`). Under load the panel came
    back after the next file's message, replacing the shown warning with a fresh hidden one. Fix:
@@ -138,7 +142,25 @@ Flaky:
   view turned under the drag and the finger ended short of the high string (0 to 4 plucked, not 5).
   Fix: the view holds still (turntable off, snapped to its target) before the string's screen points
   are worked out.
-- `ai-engine:7`, `smd-moving:101`, `phf-engine:260`, `hh1-toys:182`: in progress.
+- `ai-engine:7`: **timing.** The failing check is the last one (after Clear, the read is all zeros).
+  `read()`'s options go to `setToyOptions`, which rebuilds the toy and draws the Toy tab again with
+  a new pad that starts from `value()`; on a busy machine the new pad came after the Clear click, so
+  the second read had the starting drawing. Reproduced 1 in 10 on llvmpipe (`.cache/fx11-ai2`). Fix:
+  the pad drawn on is marked, and Clear waits for the new pad; 15 of 15 after (`.cache/fx11-ai3`).
+- `hh1-toys:182`: #494's settle (120 manual frames) fixed the main cause. Those two seconds of clock
+  also start the turntable, which moved the crane under the pull a little (held angle 0.593 still,
+  0.573 with the turntable running): the turntable stays off now.
+- `smd-moving:101`: **timing (the measurement).** `played()` stamped each clip position when its 10
+  ms polling loop next saw it. On a busy machine (two to five frames a second on the low tier) the
+  frame drawn after the drive held the page for up to a third of a second, and that lag differed at
+  the two ends: measured, the clip's position trailed the sound's clock by 0 to 0.35 s at the moment
+  the loop saw it. Fix: `played()` wraps the recipe's drive and stamps each position there; the 3%
+  bound stays. Under heavy extra load (three CPU-bound processes beside it, more than the suite's
+  solo slot ever has) the sound itself plays slow (the audio element's `currentTime` gains 0.118 s
+  in 0.179 s), and the picture follows the sound, as designed: a few runs still miss by 3 to 5%
+  there.
+- `phf-engine:260`: **a real bug** (WebGPU validation errors in the console; the test is right to
+  fail). In progress: see "Notes".
 
 ## Notes
 
@@ -146,9 +168,20 @@ Flaky:
   a 64 px card (scrollHeight 36 against 24), so the 2-line clamp cuts it. It fails the same on main
   back to October 5 in this container (fonts: Inter is the system sans-serif here).
 
+- `phf-engine:260`: the failing frame's console shows
+  `Command buffer recording ended before [RenderPassEncoder "G_-PassEncoder RT:GsplatWorkBuffer-MRT-0"] was ended`:
+  something submitted the device's command encoder while the photo variant's work-buffer pass was
+  open. The engine submits mid-call when it uploads a canvas or image texture (`uploadExternalImage`
+  calls `device.submit()`), and a texture first used inside a pass uploads there. The photo texture
+  was made at `setPhoto` and uploaded only by the microtask `setPhotoSource` queues; it is now
+  uploaded when made (an "Engine:" change in `src/stage.js`), which cut the failures (2 of 8 to 1 of
+  8 under heavy load) but not to zero: a stack of the mid-pass submit is being taken.
+
 ## Known issues
 
-- None yet.
+- `phf-engine:219` failed once in 40 under heavy load with a WebGL error on leaving the photo toy
+  (`GL_INVALID_OPERATION: glDrawElementsInstanced: Mismatch between texture format and sampler type`).
+  Not one of the twelve; noted for the Photo fidelity work.
 
 ## For the Operator
 
