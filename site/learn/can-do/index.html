@@ -1,0 +1,403 @@
+<!doctype html>
+<html lang="en" data-root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>What Splashery can do</title>
+    <meta
+      name="description"
+      content="Everything Splashery does today, which parts are behind the labs switch, and what other 3D Gaussian splat tools don't do, as far as we know."
+    />
+    <meta name="robots" content="noindex" />
+    <link rel="canonical" href="https://ryanjosephkamp.github.io/splashery/site/learn/can-do/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Splashery" />
+    <meta property="og:title" content="What Splashery can do" />
+    <meta
+      property="og:description"
+      content="Everything Splashery does today, which parts are behind the labs switch, and what other 3D Gaussian splat tools don't do, as far as we know."
+    />
+    <meta
+      property="og:url"
+      content="https://ryanjosephkamp.github.io/splashery/site/learn/can-do/"
+    />
+    <meta
+      property="og:image"
+      content="https://ryanjosephkamp.github.io/splashery/site/assets/og.png"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="A strawberry made of soft 3D splats, beside the word Splashery"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#101010" />
+    <link rel="manifest" href="../../manifest.webmanifest" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cg opacity='.92'%3E%3Cellipse cx='24' cy='26' rx='14' ry='11' fill='%23ff5fa2'/%3E%3Cellipse cx='40' cy='24' rx='12' ry='13' fill='%237bdff2'/%3E%3Cellipse cx='33' cy='41' rx='15' ry='11' fill='%23ffd166'/%3E%3C/g%3E%3C/svg%3E"
+    />
+    <link rel="apple-touch-icon" href="../../../assets/app/icon-180.png" />
+    <script>
+      (function () {
+        var d = document.documentElement;
+        d.classList.add("js");
+        try {
+          var t = localStorage.getItem("splashery.site.theme");
+          if (t === "light" || t === "dark") d.dataset.theme = t;
+          var q = new URLSearchParams(location.search).get("labs");
+          if (q === "1") localStorage.setItem("splashery.labs", "1");
+          else if (q === "0") localStorage.removeItem("splashery.labs");
+          if (localStorage.getItem("splashery.labs") === "1") d.classList.add("labs");
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="stylesheet" href="../../assets/site.css" />
+    <link rel="stylesheet" href="../../assets/hubs.css" />
+    <link rel="stylesheet" href="../../assets/outline.css" />
+    <script type="module" src="../../assets/site.js"></script>
+    <script type="module" src="../../assets/outline.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to the page</a>
+    <header class="site-header">
+      <div class="bar">
+        <a class="brand" href="../../" aria-label="Splashery home"
+          ><svg class="logo" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true">
+            <g opacity=".92">
+              <ellipse cx="24" cy="26" rx="14" ry="11" fill="#ff5fa2" />
+              <ellipse cx="40" cy="24" rx="12" ry="13" fill="#7bdff2" />
+              <ellipse cx="33" cy="41" rx="15" ry="11" fill="#ffd166" />
+            </g></svg
+          ><span>Splashery</span></a
+        >
+        <a class="search-link" href="../../search/" aria-label="Search"
+          ><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+            <circle
+              cx="10.5"
+              cy="10.5"
+              r="6.5"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            />
+            <path
+              d="m15.5 15.5 5 5"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            /></svg
+        ></a>
+        <button type="button" class="menu-button" aria-expanded="false" aria-controls="site-menu">
+          <span class="menu-icon" aria-hidden="true"></span><span class="menu-label">Menu</span>
+        </button>
+        <div class="menu" id="site-menu">
+          <nav aria-label="Site">
+            <ul>
+              <li><a href="../../">Home</a></li>
+              <li><a href="../../toys/">Toys</a></li>
+              <li><a href="../../tools/">Tools</a></li>
+              <li><a href="../../science/">Science</a></li>
+              <li><a href="../../studio/">Studio</a></li>
+              <li><a href="../../learn/" aria-current="page">Learn</a></li>
+              <li><a href="../../new/">What's new</a></li>
+              <li><a href="../../about/">About</a></li>
+            </ul>
+          </nav>
+          <form class="search-form" role="search" action="../../search/" method="get">
+            <label class="visually-hidden" for="site-search">Search toys and pages</label>
+            <input
+              id="site-search"
+              type="search"
+              name="q"
+              placeholder="Search toys"
+              autocomplete="off"
+              enterkeyhint="search"
+            />
+            <button type="submit">Search</button>
+          </form>
+          <button type="button" class="theme-button" aria-label="Color theme: follows your device">
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+              <path d="M12 3a9 9 0 1 0 0 18V3z" fill="currentColor" />
+              <circle
+                cx="12"
+                cy="12"
+                r="8.25"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+              />
+            </svg>
+            <span class="theme-label">Auto</span>
+          </button>
+        </div>
+      </div>
+    </header>
+    <main id="main" tabindex="-1" data-outline>
+      <div class="page-intro">
+        <h1>What Splashery can do</h1>
+        <p class="lead">
+          What is on the site now, what is still in labs, and what is different about it.
+        </p>
+      </div>
+      <article class="prose">
+        <section aria-labelledby="h-where">
+          <h2 id="h-where">What is here today</h2>
+          <p>
+            This page lists what Splashery does now. It describes only what is built. As of this
+            build there are 319 toys on the public shelves, and 142 more behind the
+            <strong>labs switch</strong>. Labs is where newer parts wait until they are ready: add
+            <code>?labs=1</code> to the address of the gallery to turn it on (the browser remembers
+            it, and <code>?labs=0</code> turns it off). Anything marked
+            <span class="badge">labs</span> below is behind that switch.
+          </p>
+          <p>
+            Splashery is made of static files that run in your browser. Nothing you open is
+            uploaded, and there is no account.
+          </p>
+        </section>
+        <section aria-labelledby="h-play">
+          <h2 id="h-play">Play with it</h2>
+          <ul>
+            <li>
+              <strong>Hands-on physics.</strong> With the hand switch on, a drag picks up whatever
+              is under your finger and a quick let-go tosses it. It lands, bounces, and settles on
+              the floor, and soft toys squish. Every toy plays this way, scans included, as one
+              rigid body; a toy's own recipe can instead make its pieces separate bodies. This is
+              not behind the labs switch.
+            </li>
+            <li>
+              <strong>Toys with moving parts.</strong> Hinges, pivots, sliders, and morphs run on
+              the graphics chip, so a chest opens and a windmill turns without rebuilding anything.
+            </li>
+            <li>
+              <strong>Liquids, gases, and flames.</strong> A recipe can declare a fluid, which is
+              simulated while the toy is open and drawn as its own splats, one per particle. See
+              <a href="../../toys/fluid-lab/">Fluid lab</a> <span class="badge">labs</span>.
+            </li>
+            <li>
+              <strong>Instruments that are played.</strong> A keyboard toy can play songs from its
+              own list, a MIDI file, or a tune pasted as ABC notation, and every key, hammer, and
+              string moves as a solid piece.
+            </li>
+            <li>
+              <strong>The viewer's controls.</strong> Focus mode hides everything but the toy (the
+              <kbd>F</kbd> key or the focus button; <kbd>Esc</kbd> brings the rest back). On a
+              computer, <kbd>[</kbd> folds the side panel and <kbd>G</kbd> opens the gallery. The
+              Detail setting (Auto, High, or Max, and with labs on a slider from 60,000 to 400,000
+              splats) lives in your browser only, never in a link.
+            </li>
+          </ul>
+        </section>
+        <section aria-labelledby="h-make">
+          <h2 id="h-make">Make your own</h2>
+          <ul>
+            <li>
+              <strong>Toys from rules, in the browser.</strong> A recipe of a few kilobytes becomes
+              up to 200,000 splats on your device, so there is no multi-megabyte file to download.
+              The <a href="../../../manual/">Tinkerer's Manual</a> teaches recipes from the math of
+              one splat up to your own toys.
+            </li>
+            <li>
+              <strong>Equations as a language.</strong> In
+              <a href="../../toys/splat-equation/">Splat equation</a>
+              <span class="badge">labs</span>, type where splats go and what color they are, as
+              formulas in <var>u</var>, <var>v</var>, and <var>t</var>, and get an animated shape,
+              with plain messages instead of crashes. It has three looks: Solid, Fine, and Dots.
+            </li>
+            <li>
+              <strong>A whole scene in a link.</strong> A share link carries the toy, its options,
+              and the camera, compressed into the address itself. No server is involved. A link
+              carries settings, not your files: a photo or a splat file from your device has to be
+              opened again by whoever opens the link.
+              <a href="../../learn/scene-format/">The scene format</a> says exactly what is in one.
+            </li>
+          </ul>
+        </section>
+        <section aria-labelledby="h-own">
+          <h2 id="h-own">Turn your own things into splats</h2>
+          <p>Everything in this section happens on your device. Nothing is sent anywhere.</p>
+          <ul>
+            <li>
+              <strong>Splat files.</strong> The viewer opens <code>.ply</code>, <code>.sog</code>,
+              <code>.splat</code>, and <code>.spz</code> files. (Version 4 SPZ files need a decoder
+              Splashery does not ship, and are refused with a message.) The Scans shelf holds
+              captures with their licenses and credits.
+            </li>
+            <li>
+              <strong>Photos.</strong> <a href="../../toys/photo-3d/">Photo to 3D</a>
+              <span class="badge">labs</span> runs a depth model on your device, works out how far
+              each part of a photo is, and rebuilds it as splats at their depths.
+              <a href="../../toys/moving-photo-3d/">Moving photo to 3D</a>
+              <span class="badge">labs</span> does the same for a moving photo.
+            </li>
+            <li>
+              <strong>3D models.</strong> <a href="../../toys/model-splats/">Model to splats</a>
+              <span class="badge">labs</span> opens a glTF or GLB file, an OBJ with its MTL, or an
+              STL file and turns it into splats: flat discs on the surface, more of them where there
+              is detail, colored from the model's texture, vertex colors, or material.
+            </li>
+            <li>
+              <strong>PDFs, books, and albums.</strong>
+              <a href="../../toys/your-book/">Your book</a> <span class="badge">labs</span> turns
+              the pages of a PDF as paper. <a href="../../toys/photo-album/">Photo album</a>
+              <span class="badge">labs</span> opens several photos at once, and
+              <a href="../../toys/picture-frame/">Picture frame</a>
+              <span class="badge">labs</span> lets you list them and move each up or down.
+            </li>
+            <li>
+              <strong>Songs.</strong> <a href="../../toys/song-landscape/">Song landscape</a>
+              <span class="badge">labs</span> turns a song you open into a 3D field of its
+              spectrogram, and <a href="../../toys/chladni-plate/">Chladni plate</a>
+              <span class="badge">labs</span> shows sand finding a plate's still lines.
+            </li>
+            <li>
+              <strong>QR codes.</strong> <a href="../../toys/qr-code/">QR code</a>
+              <span class="badge">labs</span> makes a code from a link, plain text, a Wi-Fi network,
+              a contact card, or an email, and builds it from splats. After every change it reads
+              the code back to check that it scans. A Wi-Fi password is not kept in a link.
+            </li>
+          </ul>
+        </section>
+        <section aria-labelledby="h-live">
+          <h2 id="h-live">Camera, microphone, and screen</h2>
+          <p>
+            A toy can read the microphone, the camera, or a shared screen, but only after you tap a
+            button for it. Nothing is requested before that tap. While a source is on, a small
+            "Live" pill with a Stop button shows at the top of the page, and the sound or pictures
+            stay on your device: nothing is recorded or sent. Two examples are
+            <a href="../../toys/room-echo/">Room echo meter</a>
+            <span class="badge">labs</span> (clap, and it measures how long the room rings) and
+            <a href="../../toys/splat-mirror/">Splat mirror</a>
+            <span class="badge">labs</span> (your camera as splats, with a depth model of about 27
+            MB that loads only after you start the camera).
+          </p>
+        </section>
+        <section aria-labelledby="h-worlds">
+          <h2 id="h-worlds">Worlds</h2>
+          <p>
+            A world is a small place you walk around in, built on your device from recipes and a
+            seed, with a start screen, a list of places, collision, a character, and a camera that
+            follows. In splats mode everything you see is splats. In hybrid mode the ground, water,
+            sky, and signs are lit models, and only the props and the near grass stay splats, so
+            "everything is splats" holds for the toys but not for every part of every world. Worlds
+            are behind the labs switch <span class="badge">labs</span> (<a
+              href="../../../worlds/?labs=1"
+              target="_blank"
+              rel="noopener"
+              >open the worlds</a
+            >).
+          </p>
+        </section>
+        <section aria-labelledby="h-unique">
+          <h2 id="h-unique">What other splat tools don't do, as far as we know</h2>
+          <p>
+            PlayCanvas is the engine that draws the splats, and its editor, SuperSplat, works on
+            captured splat files: you crop, clean, and arrange a capture. Splashery starts from the
+            other end, because most of its toys are never captured at all. We have not tried every
+            tool, so read this list as "to our knowledge":
+          </p>
+          <ul>
+            <li>toys made from rules, in the browser, with no big file to download;</li>
+            <li>equations as a language for splat shapes;</li>
+            <li>moving parts inside one splat cloud, run on the graphics chip;</li>
+            <li>hands-on physics on splats: toss, stack, pull apart, and pour;</li>
+            <li>
+              photos, videos, PDFs, QR codes, real science data, the night sky, and medical volumes,
+              all as splats;
+            </li>
+            <li>a whole scene in a link, with no server.</li>
+          </ul>
+        </section>
+        <section aria-labelledby="h-more">
+          <h2 id="h-more">Where to go next</h2>
+          <p>
+            The same lists, with the code behind each claim, are in the manual's chapters
+            <a href="../../../manual/#more">What else Splashery does now</a> and
+            <a href="../../../manual/#unique">What Splashery can do that other splat tools can't</a
+            >. The <a href="../../toys/">toy pages</a> and <a href="../../tools/">tools</a> show
+            each one working.
+          </p>
+          <p class="actions">
+            <a class="button primary" href="../../../" target="_blank" rel="noopener"
+              >Open the gallery<svg
+                class="arrow"
+                viewBox="0 0 16 16"
+                width="16"
+                height="16"
+                aria-hidden="true"
+              >
+                <path
+                  d="M3 8h9M8.5 4 12.5 8l-4 4"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                /></svg></a
+            ><a class="button" href="../../learn/">Back to Learn</a>
+          </p>
+        </section>
+      </article>
+    </main>
+    <footer class="site-footer">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="brand" href="../../"
+            ><svg class="logo" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true">
+              <g opacity=".92">
+                <ellipse cx="24" cy="26" rx="14" ry="11" fill="#ff5fa2" />
+                <ellipse cx="40" cy="24" rx="12" ry="13" fill="#7bdff2" />
+                <ellipse cx="33" cy="41" rx="15" ry="11" fill="#ffd166" />
+              </g></svg
+            ><span>Splashery</span></a
+          >
+          <p>
+            splats you can play with. Free, in your browser, with nothing to install; files you open
+            stay on your device.
+          </p>
+        </div>
+        <nav aria-label="Explore">
+          <h2>Explore</h2>
+          <ul>
+            <li><a href="../../">Home</a></li>
+            <li><a href="../../toys/">Toys</a></li>
+            <li><a href="../../tools/">Tools</a></li>
+            <li><a href="../../science/">Science</a></li>
+            <li><a href="../../studio/">Studio</a></li>
+            <li><a href="../../learn/">Learn</a></li>
+            <li><a href="../../new/">What's new</a></li>
+            <li><a href="../../about/">About</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="More">
+          <h2>More</h2>
+          <ul>
+            <li><a href="../../../" target="_blank" rel="noopener">The gallery</a></li>
+            <li><a href="../../search/">Search</a></li>
+            <li><a href="../../../manual/">The Tinkerer's Manual</a></li>
+            <li>
+              <a href="https://github.com/ryanjosephkamp/splashery" target="_blank" rel="noopener"
+                >Source on GitHub</a
+              >
+            </li>
+            <li><a href="../../share/">Embed and share</a></li>
+            <li><a href="../../about/credits/">Credits</a></li>
+            <li><a href="../../about/contact/">Contact</a></li>
+            <li><a href="../../about/privacy/">Privacy</a></li>
+            <li><a href="../../about/terms/">Terms</a></li>
+          </ul>
+        </nav>
+      </div>
+      <p class="fine">
+        Made by <a href="../../about/contact/">Ryan Kamp</a>. Code under the MIT license; each toy's
+        assets keep their own licenses. Built on the PlayCanvas engine. This is a preview of
+        Splashery's new site; the toys live in
+        <a href="../../../" target="_blank" rel="noopener">the gallery</a>.
+      </p>
+    </footer>
+  </body>
+</html>

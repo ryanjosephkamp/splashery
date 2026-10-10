@@ -394,13 +394,14 @@
         <p>
           <b>What it did not test.</b> One pair of budgets (140,000 and 200,000), one phone size,
           one renderer (software, not a real phone's graphics chip), and the toys as they were on
-          that day, before later changes. A larger sweep is planned in the Kit lab.
+          that day, before later changes. The Kit lab's larger sweep is in Level 2, under
+          <a href="#splat-count">How many splats?</a>.
         </p>
         <p>
           <b>If it were chosen differently.</b> A bigger budget costs memory and drawing time on a
-          weak device. A smaller one makes shapes coarser. A Detail slider that sets the count
-          directly, instead of three tiers, is one of the planned experiments (see "Open questions"
-          near the end).
+          weak device. A smaller one makes shapes coarser. With labs on, a Detail slider now sets
+          the count directly, from 60,000 to 400,000, beside the tiers
+          (<code>docs/lab/DETAIL-SLIDER.md</code>); the tiers themselves have not changed.
         </p>
         <p class="where">
           Where it lives: <code>PROFILES</code> in <code>src/generators.js</code>;
@@ -1113,6 +1114,340 @@
         toy and scales it to fit the view, so you can model in any units.
       </p>
 
+      <h3 id="splat-count">How many splats? What a bigger budget does</h3>
+      <p>
+        The kit spreads a budget of splats over a toy's surface (see Level 1 for the four numbers).
+        It is natural to think more splats always look better. The Kit lab measured it
+        (<code>docs/lab/BUDGETS.md</code>, October 10, 2026). It drew the same toy from the same
+        view on the same simulated 390 by 844 phone at five budgets, changing only the count. The
+        table compares 140,000 (the Mid tier) with 200,000 (the High tier) for 24 views of 22 toys.
+      </p>
+      <h4>What the columns mean</h4>
+      <ul>
+        <li>
+          <b>Edge</b> is how many screen pixels the strongest edges take to go from 10 to 90 percent
+          of the way between the two colors. A sharp edge is narrow, so lower is sharper.
+        </li>
+        <li>
+          <b>Speckle</b> is how far pixels on the flatter half of the toy differ from the middle of
+          their neighbors: grit on a smooth surface. Lower is cleaner. Painted grain, like the oak's
+          bark, also counts, because it looks the same at phone size.
+        </li>
+        <li>
+          <b>Shimmer</b> is how much the fine detail changes from one frame to the next while the
+          toy turns a little. Lower is steadier.
+        </li>
+        <li>
+          <b>Area</b> is how much of the screen the toy covers, as a percent of the same view at
+          400,000 splats. Over 100 percent means thin parts drawn fatter than they are. The table
+          shows 60,000 and then 140,000 splats, because that is where the change is.
+        </li>
+      </ul>
+      <!-- BUDGET:START (written by manual/build-budget.mjs; do not edit by hand) -->
+      <p class="table-note">
+        <b>Same toy, same view, same phone: 140,000 splats → 200,000 splats.</b> Lower is better in
+        every column. <span class="swatch worse">Worse</span>
+        <span class="swatch better">Better</span> <span class="swatch same">The same</span> The
+        table scrolls sideways inside its box.
+      </p>
+      <div
+        class="table-wrap budget-wrap"
+        tabindex="0"
+        role="region"
+        aria-label="Table: the same 24 views at 140,000 and 200,000 splats. Scrolls sideways."
+      >
+        <table class="budget">
+          <caption class="sr-only">
+            The same 24 views at 140,000 and 200,000 splats
+          </caption>
+          <thead>
+            <tr>
+              <th scope="col">Toy (view)</th>
+              <th scope="col">Edge (screen pixels)</th>
+              <th scope="col">Speckle</th>
+              <th scope="col">Shimmer</th>
+              <th scope="col">Area, 60k → 140k</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Lamp</th>
+              <td class="pair better">0.52 → 0.51</td>
+              <td class="pair worse">0.37 → 0.39</td>
+              <td class="pair worse">1.57 → 1.65</td>
+              <td class="pair">101% → 100%</td>
+            </tr>
+            <tr>
+              <th scope="row">American football</th>
+              <td class="pair better">0.50 → 0.48</td>
+              <td class="pair worse">0.61 → 0.70</td>
+              <td class="pair worse">1.49 → 1.60</td>
+              <td class="pair">100% → 100%</td>
+            </tr>
+            <tr>
+              <th scope="row">Hockey puck</th>
+              <td class="pair worse">0.27 → 0.29</td>
+              <td class="pair better">0.24 → 0.21</td>
+              <td class="pair better">1.01 → 0.99</td>
+              <td class="pair">102% → 101%</td>
+            </tr>
+            <tr>
+              <th scope="row">Klein bottle</th>
+              <td class="pair better">0.56 → 0.53</td>
+              <td class="pair worse">0.52 → 0.90</td>
+              <td class="pair worse">1.12 → 1.33</td>
+              <td class="pair">100% → 99%</td>
+            </tr>
+            <tr>
+              <th scope="row">Clock</th>
+              <td class="pair better">0.51 → 0.49</td>
+              <td class="pair worse">0.49 → 0.54</td>
+              <td class="pair worse">1.64 → 1.90</td>
+              <td class="pair">101% → 100%</td>
+            </tr>
+            <tr>
+              <th scope="row">Penguin</th>
+              <td class="pair better">0.51 → 0.49</td>
+              <td class="pair worse">0.42 → 0.46</td>
+              <td class="pair worse">2.92 → 3.13</td>
+              <td class="pair">–</td>
+            </tr>
+            <tr>
+              <th scope="row">Snow globe</th>
+              <td class="pair same">0.44 → 0.44</td>
+              <td class="pair worse">0.20 → 0.23</td>
+              <td class="pair worse">0.71 → 0.84</td>
+              <td class="pair">102% → 101%</td>
+            </tr>
+            <tr>
+              <th scope="row">White blood cell</th>
+              <td class="pair better">0.54 → 0.53</td>
+              <td class="pair worse">0.72 → 0.82</td>
+              <td class="pair worse">0.84 → 1.02</td>
+              <td class="pair">101% → 100%</td>
+            </tr>
+            <tr>
+              <th scope="row">Ocean liner</th>
+              <td class="pair better">0.46 → 0.44</td>
+              <td class="pair worse">0.31 → 0.35</td>
+              <td class="pair worse">1.69 → 2.09</td>
+              <td class="pair">106% → 104%</td>
+            </tr>
+            <tr>
+              <th scope="row">Marble</th>
+              <td class="pair better">0.46 → 0.45</td>
+              <td class="pair worse">1.43 → 1.65</td>
+              <td class="pair worse">2.63 → 2.96</td>
+              <td class="pair">100% → 100%</td>
+            </tr>
+            <tr>
+              <th scope="row">Sailboat</th>
+              <td class="pair better">0.50 → 0.46</td>
+              <td class="pair worse">0.51 → 0.59</td>
+              <td class="pair worse">2.26 → 2.93</td>
+              <td class="pair">103% → 103%</td>
+            </tr>
+            <tr>
+              <th scope="row">Toy piano</th>
+              <td class="pair better">0.60 → 0.56</td>
+              <td class="pair worse">0.22 → 0.25</td>
+              <td class="pair worse">1.93 → 2.32</td>
+              <td class="pair">111% → 105%</td>
+            </tr>
+            <tr>
+              <th scope="row">Your book</th>
+              <td class="pair worse">0.52 → 0.55</td>
+              <td class="pair same">0.00 → 0.00</td>
+              <td class="pair better">1.17 → 0.46</td>
+              <td class="pair">–</td>
+            </tr>
+            <tr>
+              <th scope="row">Chladni plate</th>
+              <td class="pair same">0.66 → 0.66</td>
+              <td class="pair same">0.26 → 0.26</td>
+              <td class="pair better">6.02 → 6.01</td>
+              <td class="pair">100% → 100%</td>
+            </tr>
+            <tr>
+              <th scope="row">Bicycle</th>
+              <td class="pair better">0.50 → 0.49</td>
+              <td class="pair worse">0.89 → 0.99</td>
+              <td class="pair worse">6.00 → 6.52</td>
+              <td class="pair">118% → 107%</td>
+            </tr>
+            <tr>
+              <th scope="row">Eiffel tower</th>
+              <td class="pair better">0.58 → 0.55</td>
+              <td class="pair worse">0.20 → 0.24</td>
+              <td class="pair worse">0.86 → 1.19</td>
+              <td class="pair">109% → 104%</td>
+            </tr>
+            <tr>
+              <th scope="row">Crystal lattice</th>
+              <td class="pair better">0.57 → 0.54</td>
+              <td class="pair worse">0.27 → 0.31</td>
+              <td class="pair worse">1.49 → 1.83</td>
+              <td class="pair">111% → 105%</td>
+            </tr>
+            <tr>
+              <th scope="row">Knot</th>
+              <td class="pair better">0.53 → 0.52</td>
+              <td class="pair worse">0.48 → 0.58</td>
+              <td class="pair worse">1.54 → 1.87</td>
+              <td class="pair">103% → 101%</td>
+            </tr>
+            <tr>
+              <th scope="row">Torus knot</th>
+              <td class="pair better">0.53 → 0.52</td>
+              <td class="pair worse">0.29 → 0.34</td>
+              <td class="pair worse">1.10 → 1.25</td>
+              <td class="pair">98% → 98%</td>
+            </tr>
+            <tr>
+              <th scope="row">Oak</th>
+              <td class="pair better">0.58 → 0.57</td>
+              <td class="pair worse">0.40 → 0.51</td>
+              <td class="pair worse">0.82 → 1.03</td>
+              <td class="pair">105% → 102%</td>
+            </tr>
+            <tr>
+              <th scope="row">Chess set</th>
+              <td class="pair better">0.58 → 0.52</td>
+              <td class="pair worse">0.14 → 0.15</td>
+              <td class="pair worse">2.44 → 3.09</td>
+              <td class="pair">106% → 103%</td>
+            </tr>
+            <tr>
+              <th scope="row">Dna</th>
+              <td class="pair better">0.51 → 0.50</td>
+              <td class="pair worse">0.50 → 0.57</td>
+              <td class="pair worse">4.06 → 4.53</td>
+              <td class="pair">–</td>
+            </tr>
+            <tr>
+              <th scope="row">Bicycle (close up, 0.5)</th>
+              <td class="pair better">0.53 → 0.52</td>
+              <td class="pair worse">0.36 → 0.42</td>
+              <td class="pair worse">2.78 → 3.25</td>
+              <td class="pair">118% → 107%</td>
+            </tr>
+            <tr>
+              <th scope="row">Chess set (close up, 0.6)</th>
+              <td class="pair better">0.60 → 0.54</td>
+              <td class="pair worse">0.08 → 0.09</td>
+              <td class="pair worse">1.50 → 2.01</td>
+              <td class="pair">103% → 101%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="table-note">
+        <b>All five budgets across all the views:</b> the middle value of each toy's change against
+        its own result at 140,000 splats.
+      </p>
+      <div
+        class="table-wrap budget-wrap"
+        tabindex="0"
+        role="region"
+        aria-label="Table: how each budget compares with 140,000 splats, across all the views. Scrolls sideways."
+      >
+        <table class="budget summary">
+          <caption class="sr-only">
+            How each budget compares with 140,000 splats
+          </caption>
+          <thead>
+            <tr>
+              <th scope="col">Budget</th>
+              <th scope="col">Edge</th>
+              <th scope="col">Speckle</th>
+              <th scope="col">Shimmer</th>
+              <th scope="col">Thin parts' area</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">60k</th>
+              <td>+11%</td>
+              <td>−23%</td>
+              <td>−36%</td>
+              <td>+1.2%</td>
+            </tr>
+            <tr>
+              <th scope="row">140k</th>
+              <td>–</td>
+              <td>–</td>
+              <td>–</td>
+              <td>–</td>
+            </tr>
+            <tr>
+              <th scope="row">200k</th>
+              <td>−2%</td>
+              <td>+14%</td>
+              <td>+18%</td>
+              <td>−0.8%</td>
+            </tr>
+            <tr>
+              <th scope="row">280k</th>
+              <td>−6%</td>
+              <td>+31%</td>
+              <td>+39%</td>
+              <td>−0.8%</td>
+            </tr>
+            <tr>
+              <th scope="row">400k</th>
+              <td>−9%</td>
+              <td>+52%</td>
+              <td>+61%</td>
+              <td>−1.2%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- COUNTS {"edgeBetter":20,"edgeSame":2,"edgeWorse":2,"speckleWorse":21,"speckleBetter":1,"shimmerWorse":21,"shimmerBetter":3} -->
+      <!-- BUDGET:END -->
+      <h4>What it shows</h4>
+      <ul>
+        <li>
+          <b
+            >Going from 140,000 to 200,000, speckle rose in 21 of the 24 views and shimmer rose in
+            21 of them</b
+          >
+          (the counts are from the table). Across all the views the middle change was 14 percent
+          more speckle and 18 percent more shimmer. Each splat gets smaller as the count goes up, so
+          the fine detail in a pixel comes from more, smaller splats that move in and out of it as
+          the view turns.
+        </li>
+        <li>
+          <b>Edges barely changed.</b> The most any edge gained between the two budgets was 0.06 of
+          a screen pixel, the middle change was 2 percent, and in two views the edge got a little
+          softer.
+        </li>
+        <li>
+          <b>The one place a bigger budget clearly helps is thin parts.</b> At 60,000 splats the
+          bicycle's frame and spokes cover 18 percent more of the screen than at 400,000; at 140,000
+          they are within 7 percent. Solid toys, like the clock or the marble, stay within 1.5
+          percent of the 400,000 view even at 60,000 splats.
+        </li>
+        <li>
+          <b>No holes open at the lower budgets.</b> A low budget makes thin parts fatter, not
+          broken.
+        </li>
+      </ul>
+      <p class="where">
+        What it does not show: one renderer (a software one, not a real phone's graphics chip), one
+        phone size, still views with a slow turn, and no frame rate you could trust. Scans (captured
+        toys) are not affected, because they load their own files. The kit lab's recommendation was
+        to keep the four tiers as they are. The full tables, the method, and the limits are in
+        <a
+          href="https://github.com/ryanjosephkamp/splashery/blob/main/docs/lab/BUDGETS.md"
+          target="_blank"
+          rel="noopener"
+          >docs/lab/BUDGETS.md</a
+        >
+        and the first round of this question is in
+        <code>docs/lab/SHARPNESS.md</code>.
+      </p>
+
       <h3>Colors from functions</h3>
       <p>
         A color can be a fixed quantity or vector (<code>"#9c3b2c"</code>, or
@@ -1718,7 +2053,7 @@ v = 0 .. 2pi</code></pre>
       <p>
         Powers go first, then × and ÷, then + and −, and a power binds to the right:
         <code>2^3^2</code> is 2<sup>9</sup>, and <code>-u^2</code> is −(<var>u</var>²). Each field
-        can be up to 120 characters long.
+        can be up to 240 characters long.
       </p>
       <section class="demo-live" data-demo="order-of-operations" id="demo-reader">
         <h4>Try it: how the reader groups an expression</h4>
@@ -1758,24 +2093,30 @@ v = 0 .. 2pi</code></pre>
         </figcaption>
       </figure>
       <details class="fold why" id="why-length">
-        <summary>Why this number? The 120-character limit</summary>
+        <summary>Why this number? The 240-character limit</summary>
         <p class="kind">
           <span class="chip choice">Our choice</span> Nothing in the math or the browser needs it.
         </p>
         <p>
           A program lives in the toy's link, and a link holds up to 12 fields, so a limit keeps
           links short enough to paste into a message. The longest field of the toy's own programs is
-          53 characters, so 120 leaves room to grow.
+          53 characters. The limit was 120 until October 10, 2026, when the owner approved raising
+          it to 240 for people who write longer formulas. A link written with the old limit loads
+          the same as before.
         </p>
         <p>
           <b>If it were chosen differently.</b> The link could carry much more (a text option may be
           up to 24,000 characters), so the limit is not what stops longer fields. Two other guards
           would be next: expressions nest at most 32 deep and have at most 400 pieces. The cost of
           longer fields is longer links and slower builds, because each expression is worked out for
-          every point at 13 moments. 240 characters is a planned experiment in the Kit lab.
+          every point at 13 moments. At 240 characters a field can take up to twice as long to build
+          as at 120, and the longest possible link grows from about 1,400 to about 1,900 characters
+          once compressed (<code>docs/lab/EQUATION-FIELDS.md</code>). The graph and surface plotters
+          keep 120.
         </p>
         <p class="where">
-          Where it lives: <code>MAX_LENGTH</code>, <code>MAX_DEPTH</code>, and
+          Where it lives: <code>FIELD_MAX</code> in <code>src/packs/splat-equation.js</code> (240);
+          <code>MAX_LENGTH</code> (120, still the plotters' limit), <code>MAX_DEPTH</code>, and
           <code>MAX_NODES</code> in <code>src/equation.js</code>; <code>TEXT_MAX</code> in
           <code>src/state.js</code>.
         </p>
@@ -1870,7 +2211,9 @@ function   = "sin" | "cos" | "tan" | "asin" | "acos" | "atan"
         so on, and each copy slides every splat in a straight line to its place in the next copy (a
         morph, Level 2), so every splat is at its computed place at those 12 moments (up to the
         packing error described below) and slides in a straight line in between. A shape that turns
-        dips very slightly inward between moments, about 3 percent.
+        dips very slightly inward between moments, about 3 percent. (With labs on, a
+        <b>Moments of t</b> choice sets 13, 14, or 15 moments instead; 12 stays the default, so
+        older links build as before.)
       </p>
       <details class="fold why" id="why-moments">
         <summary>Why this number? Twelve moments</summary>
@@ -1891,12 +2234,14 @@ function   = "sin" | "cos" | "tan" | "asin" | "acos" | "atan"
           at 24. But the points per copy shrink on the weakest device: 9,800 at 12, 7,840 at 15, and
           4,900 at 24. And because each moment is a part, 15 is the most without a bigger change.
           Color and size step at the moments rather than sliding, so more moments would smooth color
-          changes too. The moments demo below lets you try every count. 15 moments is a planned
-          experiment in the Kit lab.
+          changes too. The moments demo below lets you try every count. The labs choice
+          <b>Moments of t</b> now offers 12, 13, 14, or 15; the Kit lab measured the worst dip of
+          the splats at 3.41, 2.91, 2.51, and 2.19 percent (<code>docs/lab/MOMENTS.md</code>).
         </p>
         <p class="where">
-          Where it lives: <code>KNOTS</code> in <code>src/packs/splat-equation.js</code>; the points
-          per copy are floor(0.98 × budget ÷ moments).
+          Where it lives: <code>KNOTS</code> (the default, 12) and <code>MOMENTS</code> (the
+          choices) in <code>src/packs/splat-equation.js</code>; the points per copy are floor(0.98 ×
+          budget ÷ moments).
         </p>
       </details>
       <details class="fold why" id="why-moment-parts">
@@ -2530,7 +2875,8 @@ count = 4000</code></pre>
         system, and say so; none is a full solution of the system it names. Each card has the
         picture, one line about the shape, the program (folded), and a <b>Run it</b> link that opens
         the Splat equation toy with that program, in a new tab. Every program fits the toy's own
-        limits: 12 fields, 120 characters each, and at most 10,000 points.
+        limits: 12 fields, 240 characters each (these programs are all under 120, so they would fit
+        the old limit too), and at most 10,000 points.
       </p>
       <!-- GALLERY:START (written by manual/build-gallery.mjs; do not edit by hand) -->
       <details class="fold gallery-group" id="gallery-classic-surfaces">
@@ -5167,7 +5513,8 @@ export const RECIPES = {
         have read about. It describes only what is built. The <b>labs switch</b> hides newer parts
         until they are ready: add <code>?labs=1</code> to the site's address to turn it on (the
         browser remembers it; <code>?labs=0</code> turns it off). Each paragraph says what is behind
-        it.
+        it. The same list is a page on the site:
+        <a href="../site/learn/can-do/" target="_blank" rel="noopener">What Splashery can do</a>.
       </p>
       <!-- Sources: labs switch src/toys.js:3564-3575 (labsOn, ?labs=1 saved, ?labs=0 clears);
            hands-on src/physics/hands-on.js:1-40, src/ui.js:2893-2897 (no labs gate in src/physics or
@@ -5279,9 +5626,10 @@ export const RECIPES = {
         so they close into a clean shape, <b>Fine</b> uses up to four times as many smaller splats
         within the device's budget, and <b>Dots</b> shows each splat you programmed as its own round
         dot. The toy also asks for the sharper labs kernel. Beyond that toy, the viewer's Detail
-        setting (Auto, High, or Max) lives in your browser only, never in a link, and on every toy
-        the canvas resolution drops while you drag if frames are slow. Those two are not behind the
-        labs switch; the toy and the sharper kernel are.
+        setting (Auto, High, or Max, and with labs on a slider from 60,000 to 400,000 splats) lives
+        in your browser only, never in a link, and on every toy the canvas resolution drops while
+        you drag if frames are slow. Those two are not behind the labs switch; the toy and the
+        sharper kernel are.
       </p>
 
       <h3>The viewer's controls</h3>
@@ -5299,7 +5647,8 @@ export const RECIPES = {
         captured splat files: you crop, clean, and arrange a capture. Splashery starts from the
         other end, because most of its toys are never captured at all. These are things we have not
         seen in other public splat tools. (We have not tried every tool, so read this as "to our
-        knowledge".)
+        knowledge".) The site has this list as a page too:
+        <a href="../site/learn/can-do/" target="_blank" rel="noopener">What Splashery can do</a>.
       </p>
       <ul>
         <li>
@@ -5361,31 +5710,44 @@ export const RECIPES = {
             <tbody>
               <tr>
                 <td>A Detail slider</td>
-                <td>Any splat count from Low to Max, beside the three tiers.</td>
-                <td>Planned in the Kit lab</td>
+                <td>
+                  Any splat count from 60,000 to 400,000, beside the tiers. Built as a labs slider
+                  (<code>docs/lab/DETAIL-SLIDER.md</code>).
+                </td>
+                <td>Built, in labs</td>
               </tr>
               <tr>
                 <td>View-dependent color</td>
                 <td>
                   A shine that moves with the view on a few kit toys, from the kit's own data and
-                  shader.
+                  shader. Built as a private comparison, on only when a link or the address asks for
+                  it with labs on (<code>docs/lab/GLOSS.md</code>).
                 </td>
-                <td>Planned in the Kit lab</td>
+                <td>Built, in labs</td>
               </tr>
               <tr>
                 <td>More moments of <var>t</var></td>
-                <td>Turning shapes at more than 12 moments, up to 15.</td>
-                <td>Planned in the Kit lab</td>
+                <td>
+                  Turning shapes at more than 12 moments, up to 15. Built as a labs choice
+                  (<code>docs/lab/MOMENTS.md</code>); more than 15 is still open.
+                </td>
+                <td>Built, in labs</td>
               </tr>
               <tr>
                 <td>240-character fields</td>
-                <td>Longer fields, and what longer links cost.</td>
-                <td>Planned in the Kit lab</td>
+                <td>
+                  Longer fields, and what longer links cost. Built in the Splat equation toy
+                  (<code>docs/lab/EQUATION-FIELDS.md</code>).
+                </td>
+                <td>Built, in labs</td>
               </tr>
               <tr>
-                <td>A larger budget sweep</td>
-                <td>More budgets, phones, and renderers than the one pair measured.</td>
-                <td>Planned in the Kit lab</td>
+                <td>A budget sweep on real phones</td>
+                <td>
+                  Real phone graphics chips, and more phone sizes. The Kit lab's sweep (Level 2)
+                  covered five budgets, one phone size, and one software renderer.
+                </td>
+                <td>Not started</td>
               </tr>
               <tr>
                 <td>More than 15 parts</td>
@@ -5729,7 +6091,7 @@ spread = grid                          # or random</code></pre>
       <p>
         <b>Functions</b>: sin, cos, tan, asin (arcsin), acos (arccos), atan (arctan), sinh, cosh,
         tanh, exp, log (ln), log10, sqrt, abs, floor, min, max. <b>Constants</b>: pi, e.
-        <b>Time</b>: <var>t</var> runs from 0 to 2π per tap. At most 120 characters a field.
+        <b>Time</b>: <var>t</var> runs from 0 to 2π per tap. At most 240 characters a field.
       </p>
       <h3>A picture toy</h3>
       <pre><code>pictures: { sample: () =&gt; "assets/…", accept: ["pdf", "image", "gif", "video"] },

@@ -56,7 +56,7 @@ test("the definitions, the notes and the opening-line context are there", () => 
   const whys = [...html.matchAll(/<details class="fold why"[^>]*>\s*<summary>([^<]*)</g)].map(
     (m) => m[1],
   );
-  for (const w of ["splat budgets", "One color per splat", "Fifteen parts", "Twelve fields", "120-character", "Twelve moments", "Twelve bits", "two clocks"]) // prettier-ignore
+  for (const w of ["splat budgets", "One color per splat", "Fifteen parts", "Twelve fields", "240-character", "Twelve moments", "Twelve bits", "two clocks"]) // prettier-ignore
     expect(whys.join("|").toLowerCase(), w).toContain(w.toLowerCase());
   // The three new questions are folds too.
   for (const w of ["different parts", "different fields", "each moment a part"]) expect(whys.join("|"), w).toContain(w); // prettier-ignore
