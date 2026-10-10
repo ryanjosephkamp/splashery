@@ -10,8 +10,8 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 451 toys. 422 have a tap action today; the other 29 only hop.
-- **keep** (the effect is right: the owner liked it, or C2 finished it): 429.
+- 461 toys. 461 have a tap action today; the other 0 only hop.
+- **keep** (the effect is right: the owner liked it, or C2 finished it): 439.
 - **more** (has an effect; make it clearer or more dramatic): 0.
 - **new** (needs its own effect): 22.
 - Visual fixes: 0 open, 31 done. Touch or drag interaction asked for: 4.
@@ -26,19 +26,25 @@ Proposals below are suggestions; the owner may change them.
   make clearer or more dramatic, still open: none. Done in C2: Cactus, Strawberry, Heart cookie,
   Honeybee, Torus, Jelly blob, Neon knot, Cluster fly, May beetle, Millipede, Carder bumblebee,
   Raspberry, Blackberry, Blueberry, Grape, Cinnamon star cookie, Tomatoes, Mandeltorus, Basket,
-  Orange (photo), Dog plush, Real rubber duck, Garden gnome, Wooden elephant, Marble bust, Ukulele,
-  Real alarm clock, Vintage camera, Boombox, Real croissant, Carrot cake, Pomegranate, Lantern, Cat
-  statue, Horse statue, Real pencil, Real tin can, Basketball, Soccer ball, American football,
-  Tennis ball, Baseball, Softball, Beach ball, Golf ball, Rugby ball, Volleyball, Water polo ball,
-  Ping-pong ball, Cricket ball, Bowling ball, Pool ball, Pickleball, Dodgeball, Medicine ball,
-  Lacrosse ball, Squash ball, Bouncy ball, Marble, Hockey puck, Shuttlecock, Flying disc, Beating
-  heart, Campfire, Treasure chest, Sun, Solar system, Mercury, Venus, Earth, Moon, Mars, Jupiter,
-  Saturn, Uranus, Neptune, Tiny planet, Aurora world, Asteroid, Comet, Meteor, Star, Pulsar, Black
-  hole, Star cluster, Ring nebula, Nebula, Spiral galaxy, The real Moon, The real Mars, The real
-  Earth, The real Mercury, The real Venus, Real moons, Pluto, Ceres and Vesta, Stars near the Sun,
-  Real star systems, Real galaxies, Powers of ten, Saturn V, Space Launch System, Space Shuttle, The
-  solar system on real orbits, Virus, Bacteriophage, Bacterium, Red blood cell, Neuron, Astrocyte,
-  Animal cell, DNA, White blood cell, Microglia, Diatom, Pollen grain, Snowflake, Chromosome,
+  Heart donut, Sushi boat, Seeded bread loaf, Cowboy steak, Stollen, Orange (photo), Physalis,
+  Crystal, Alum crystal, Puffin, Toy T. rex, Monkey doll, Souvenir elephant, Souvenir turtle, Cave
+  lioness, Dog plush, BMX bicycle, Murex shell, Sunflower (photo), White roses, Bonsai tree (photo),
+  Mushroom (photo), Cactus (photo 2), Crochet Earth, Desk globe, Cherry blossom (photo), Golden
+  maple, Peonies in a vase, Money tree, Knight on a horse, Triceratops skull, Cone shell, Celestial
+  globe, Armillary sphere, Stannern meteorite, Fluorite, Ammonite, Morasko meteorite, Pyrite,
+  Megalodon tooth, Real rubber duck, Garden gnome, Wooden elephant, Marble bust, Ukulele, Real alarm
+  clock, Vintage camera, Boombox, Real croissant, Carrot cake, Pomegranate, Lantern, Cat statue,
+  Horse statue, Real pencil, Real tin can, Basketball, Soccer ball, American football, Tennis ball,
+  Baseball, Softball, Beach ball, Golf ball, Rugby ball, Volleyball, Water polo ball, Ping-pong
+  ball, Cricket ball, Bowling ball, Pool ball, Pickleball, Dodgeball, Medicine ball, Lacrosse ball,
+  Squash ball, Bouncy ball, Marble, Hockey puck, Shuttlecock, Flying disc, Beating heart, Campfire,
+  Treasure chest, Sun, Solar system, Mercury, Venus, Earth, Moon, Mars, Jupiter, Saturn, Uranus,
+  Neptune, Tiny planet, Aurora world, Asteroid, Comet, Meteor, Star, Pulsar, Black hole, Star
+  cluster, Ring nebula, Nebula, Spiral galaxy, The real Moon, The real Mars, The real Earth, The
+  real Mercury, The real Venus, Real moons, Pluto, Ceres and Vesta, Stars near the Sun, Real star
+  systems, Real galaxies, Powers of ten, Saturn V, Space Launch System, Space Shuttle, The solar
+  system on real orbits, Virus, Bacteriophage, Bacterium, Red blood cell, Neuron, Astrocyte, Animal
+  cell, DNA, White blood cell, Microglia, Diatom, Pollen grain, Snowflake, Chromosome,
   Mitochondrion, Paramecium, Amoeba, DNA to protein, Cell division, Apoptosis, Phagocytosis,
   Electron orbital, Atom, Molecule, Protein, Crystal lattice, Unit cells, Orbital atlas, Molecule
   viewer, Periodic table, Real elements, Diamond, Ruby, Emerald, Amethyst geode, Sapphire, Quartz
@@ -89,7 +95,7 @@ Proposals below are suggestions; the owner may change them.
   Terrain in a box, Data in 3D, Climate records
 - **F, touch and drag interaction.** Gummy bear, Building bricks, Newton's cradle, Puzzle cube.
 
-## Scans (62)
+## Scans (72)
 
 - **Cactus** (`cactus`). Now: tap: Bloom (rig). Plan: keep.
   - Owner: No special effect. Looks fine.
@@ -196,163 +202,287 @@ Proposals below are suggestions; the owner may change them.
     shells (urchins, sand dollars, starfish, a scallop) bounce up in turn, spinning, and drop back.
     The blurry fringe under the basket is hidden (2.6 s).
   - Sound: Clattering shells.
-- **Heart donut** (`heart-donut`). Now: hops. Plan: keep.
+- **Heart donut** (`heart-donut`). Now: tap: Toss (rig). Plan: keep.
   - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
     good.
-  - Effect: A hop. The capture is one solid piece, so no part moves.
+  - Effect: Tossed up, it twirls round once and lands.
+  - Improved: Photoreal r3 (October 8, 2026): Tossed up, it twirls round once and lands.
   - Sound: A short sound that suits the object.
-- **Sushi boat** (`sushi-boat`). Now: hops. Plan: keep.
+- **Sushi boat** (`sushi-boat`). Now: tap: Rock (rig). Plan: keep.
   - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
     good.
-  - Effect: A hop. The capture is one solid piece, so no part moves.
+  - Effect: The boat rocks from side to side, as if on water, and settles; a kit-built carved-wood
+    hull bottom.
+  - Improved: Photoreal r3 (October 8, 2026): The boat rocks from side to side, as if on water, and
+    settles; a kit-built carved-wood hull bottom.
   - Sound: A short sound that suits the object.
-- **Seeded bread loaf** (`seeded-loaf`). Now: hops. Plan: keep.
+- **Seeded bread loaf** (`seeded-loaf`). Now: tap: Drop (rig). Plan: keep.
   - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
     good.
-  - Effect: A hop. The capture is one solid piece, so no part moves.
+  - Effect: Lifted a little and dropped: it lands with a soft thud and rocks to rest.
+  - Improved: Photoreal r3 (October 8, 2026): Lifted a little and dropped: it lands with a soft thud
+    and rocks to rest.
   - Sound: A short sound that suits the object.
-- **Cowboy steak** (`steak`). Now: hops. Plan: keep.
+- **Cowboy steak** (`steak`). Now: tap: Flip (rig). Plan: keep.
   - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
     good.
-  - Effect: A hop. The capture is one solid piece, so no part moves.
+  - Effect: Flipped over onto its other side and back, like with tongs; a kit-built seared
+    underside.
+  - Improved: Photoreal r3 (October 8, 2026): Flipped over onto its other side and back, like with
+    tongs; a kit-built seared underside.
   - Sound: A short sound that suits the object.
-- **Stollen** (`stollen`). Now: hops. Plan: keep.
+- **Stollen** (`stollen`). Now: tap: Drop (rig). Plan: keep.
   - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
     good.
-  - Effect: A hop. The capture is one solid piece, so no part moves.
+  - Effect: Lifted a little and dropped, and settles; a crust-colored floor inside closes its
+    underside.
+  - Improved: Photoreal r3 (October 8, 2026): Lifted a little and dropped, and settles; a
+    crust-colored floor inside closes its underside.
   - Sound: A short sound that suits the object.
-- **Orange (photo)** (`orange-photo`). Now: hops. Plan: keep.
+- **Orange (photo)** (`orange-photo`). Now: tap: Roll (rig). Plan: keep.
   - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
     good.
-  - Effect: A hop. The capture is one solid piece, so no part moves.
-  - Improved: Fix9 (October 7, 2026, the owner's walkthrough): less grainy: the haze of faint
-    floaters round it and the smear under it cropped away (a sphere crop when it is prepared), the
-    orange itself untouched.
+  - Effect: Rolls along the table and back, turning as far as it travels; a kit-built lower peel.
+  - Improved: Photoreal r3 (October 8, 2026): Rolls along the table and back, turning as far as it
+    travels; a kit-built lower peel.
   - Sound: A short sound that suits the object.
-- **Physalis** (`physalis`). Now: hops. Plan: keep.
+- **Physalis** (`physalis`). Now: tap: Sway (rig). Plan: keep.
   - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
     good.
-  - Effect: A hop. The capture is one solid piece, so no part moves.
+  - Effect: The stem sways from its foot and settles, its lanterns with it.
+  - Improved: Photoreal r3 (October 8, 2026): The stem sways from its foot and settles, its lanterns
+    with it.
   - Sound: A short sound that suits the object.
-- **Crystal** (`crystal-gem`). Now: hops. Plan: keep.
+- **Crystal** (`crystal-gem`). Now: tap: Turn (rig). Plan: keep.
   - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
     good.
-  - Effect: A hop. The capture is one solid piece, so no part moves.
+  - Effect: Turns once round, so the glints move across its faces.
+  - Improved: Photoreal r3 (October 8, 2026): Turns once round, so the glints move across its faces.
   - Sound: A short sound that suits the object.
-- **Alum crystal** (`alum-crystal`). Now: hops. Plan: keep.
+- **Alum crystal** (`alum-crystal`). Now: tap: Turn (rig). Plan: keep.
   - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
     good.
-  - Effect: A hop. The capture is one solid piece, so no part moves.
+  - Effect: The crystal is turned a quarter turn on its block; a kit-built block underside.
+  - Improved: Photoreal r3 (October 8, 2026): The crystal lifts off its block, turns a quarter turn
+    and sets back down; a kit-built block underside.
   - Sound: A short sound that suits the object.
-- **Puffin** (`puffin`). Now: hops. Plan: keep.
+- **Puffin** (`puffin`). Now: tap: Hop (rig). Plan: keep.
   - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
     good.
-  - Effect: A hop. The capture is one solid piece, so no part moves.
+  - Effect: Hops round to look at you and back; a core inside closes its belly.
+  - Improved: Photoreal r3 (October 8, 2026): Hops round to look at you and back; a core inside
+    closes its belly.
   - Sound: A short sound that suits the object.
-- **Toy T. rex** (`toy-trex`). Now: hops. Plan: keep.
+- **Toy T. rex** (`toy-trex`). Now: tap: Stomp (rig). Plan: keep.
   - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
     good.
-  - Effect: A hop. The capture is one solid piece, so no part moves.
+  - Effect: Rocks on its feet on its disc and settles; a kit-built disc underside.
+  - Improved: Photoreal r3 (October 8, 2026): Rocks on its feet on its disc and settles; a kit-built
+    disc underside.
   - Sound: A short sound that suits the object.
-- **Monkey doll** (`monkey-doll`). Now: hops. Plan: keep.
+- **Monkey doll** (`monkey-doll`). Now: tap: Rock (rig). Plan: keep.
   - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
     good.
-  - Effect: A hop. The capture is one solid piece, so no part moves.
+  - Effect: Rocks on its cloth and settles; a kit-built linen underside.
+  - Improved: Photoreal r3 (October 8, 2026): Rocks on its cloth and settles; a kit-built linen
+    underside.
   - Sound: A short sound that suits the object.
-- **Souvenir elephant** (`elephant-souvenir`). Now: hops. Plan: keep.
+- **Souvenir elephant** (`elephant-souvenir`). Now: tap: Turn (rig). Plan: keep.
   - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
     good.
-  - Effect: A hop. The capture is one solid piece, so no part moves.
+  - Effect: Turns to look at you with two heavy steps and back; a core inside; a home view that
+    shows its face.
+  - Improved: Photoreal r3 (October 8, 2026): Turns to look at you with two heavy steps and back; a
+    core inside; a home view that shows its face.
   - Sound: A short sound that suits the object.
-- **Souvenir turtle** (`turtle-souvenir`). Now: hops. Plan: keep.
+- **Souvenir turtle** (`turtle-souvenir`). Now: tap: Crawl (rig). Plan: keep.
   - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
     good.
-  - Effect: A hop. The capture is one solid piece, so no part moves.
+  - Effect: Crawls a little way forward, swaying, and back.
+  - Improved: Photoreal r3 (October 8, 2026): Crawls a little way forward, swaying, and back.
   - Sound: A short sound that suits the object.
-- **Cave lioness** (`cave-lioness`). Now: hops. Plan: keep.
+- **Cave lioness** (`cave-lioness`). Now: tap: Look (rig). Plan: keep.
   - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
     good.
-  - Effect: A hop. The capture is one solid piece, so no part moves.
+  - Effect: Looks one way, then the other, then back; a home view that frames her whole.
+  - Improved: Photoreal r3 (October 8, 2026): Looks one way, then the other, then back; a home view
+    that frames her whole.
   - Sound: A short sound that suits the object.
 - **Dog plush** (`dog-plush`). Now: tap: Hop (rig). Plan: keep.
   - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
     good.
-  - Effect: A hop. The capture is one solid piece, so no part moves.
-  - Improved: Fix9 (October 7, 2026, the owner's walkthrough): the dark gaps under its head and paws
-    closed. They came from the capture (the plush's underside and the mat under it were never seen),
-    not from our cut; a hidden, kit-built core fills the plush from the mat up to its lowest fur,
-    the fur's color darkening toward the mat, and shows only through those gaps.
+  - Effect: A hop (lane Fix9's); a kit-built woven mat underside.
+  - Improved: Photoreal r3 (October 8, 2026): A hop (lane Fix9's); a kit-built woven mat underside.
   - Sound: A short sound that suits the object.
-- **BMX bicycle** (`bmx-bike`). Now: hops. Plan: keep.
+- **BMX bicycle** (`bmx-bike`). Now: tap: Nudge (rig). Plan: keep.
   - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
     good.
-  - Effect: A hop. The capture is one solid piece, so no part moves.
+  - Effect: Nudged, it leans over on its kickstand and rocks back up; a kit-built rug underside.
+  - Improved: Photoreal r3 (October 8, 2026): Nudged, it leans over on its kickstand and rocks back
+    up; a kit-built rug underside.
   - Sound: A short sound that suits the object.
-- **Murex shell** (`murex-shell`). Now: hops. Plan: keep.
+- **Murex shell** (`murex-shell`). Now: tap: Turn (rig). Plan: keep.
   - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
     good.
-  - Effect: A hop. The capture is one solid piece, so no part moves.
+  - Effect: Turns once round, showing its spines; a closer home view.
+  - Improved: Photoreal r3 (October 8, 2026): Turns once round, showing its spines; a closer home
+    view.
   - Sound: A short sound that suits the object.
-- **Sunflower (photo)** (`sunflower-photo`). Now: hops. Plan: keep.
+- **Sunflower (photo)** (`sunflower-photo`). Now: tap: Nod (rig). Plan: keep.
   - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
     good.
-  - Effect: A hop. The capture is one solid piece, so no part moves.
+  - Effect: Nods and settles; a green disc closes the back of its head.
+  - Improved: Photoreal r3 (October 8, 2026): Nods and settles; a green disc closes the back of its
+    head.
   - Sound: A short sound that suits the object.
-- **White roses** (`white-roses`). Now: hops. Plan: keep.
+- **White roses** (`white-roses`). Now: tap: Knock (rig). Plan: keep.
   - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
     good.
-  - Effect: A hop. The capture is one solid piece, so no part moves.
+  - Effect: The vase tips onto the rim of its base, rolls round on it and settles; a kit-built glass
+    bottom.
+  - Improved: Photoreal r3 (October 8, 2026): The vase tips onto the rim of its base, rolls round on
+    it and settles; a kit-built glass bottom.
   - Sound: A short sound that suits the object.
-- **Bonsai tree (photo)** (`bonsai-photo`). Now: hops. Plan: keep.
+- **Bonsai tree (photo)** (`bonsai-photo`). Now: tap: Drop (rig). Plan: keep.
   - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
     good.
-  - Effect: A hop. The capture is one solid piece, so no part moves.
+  - Effect: Lifted a little and set down with a bump; a kit-built board of planks underneath.
+  - Improved: Photoreal r3 (October 8, 2026): Lifted a little and set down with a bump; a kit-built
+    board of planks underneath.
   - Sound: A short sound that suits the object.
-- **Mushroom (photo)** (`mushroom-photo`). Now: hops. Plan: keep.
+- **Mushroom (photo)** (`mushroom-photo`). Now: tap: Drop (rig). Plan: keep.
   - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
     good.
-  - Effect: A hop. The capture is one solid piece, so no part moves.
+  - Effect: Lifted a little and set down with a bump; a kit-built earth underside.
+  - Improved: Photoreal r3 (October 8, 2026): Lifted a little and set down with a bump; a kit-built
+    earth underside.
   - Sound: A short sound that suits the object.
-- **Cactus (photo 2)** (`cactus-real`). Now: hops. Plan: keep.
+- **Cactus (photo 2)** (`cactus-real`). Now: tap: Drop (rig). Plan: keep.
   - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
     good.
-  - Effect: A hop. The capture is one solid piece, so no part moves.
+  - Effect: Lifted a little and set down with a bump; a kit-built earth underside.
+  - Improved: Photoreal r3 (October 8, 2026): Lifted a little and set down with a bump; a kit-built
+    earth underside.
   - Sound: A short sound that suits the object.
-- **Crochet Earth** (`crochet-earth`). Now: hops. Plan: keep.
+- **Crochet Earth** (`crochet-earth`). Now: tap: Spin (rig). Plan: keep.
   - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
     good.
-  - Effect: A hop. The capture is one solid piece, so no part moves.
+  - Effect: Spins round twice, like the other planets; a navy yarn core inside.
+  - Improved: Photoreal r3 (October 8, 2026): Spins round twice, like the other planets; a navy yarn
+    core inside.
   - Sound: A short sound that suits the object.
-- **Desk globe** (`desk-globe`). Now: hops. Plan: keep.
+- **Desk globe** (`desk-globe`). Now: tap: Spin (rig). Plan: keep.
   - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
     good.
-  - Effect: A hop. The capture is one solid piece, so no part moves.
+  - Effect: The globe spins in its stand, fast at first, then slowing; a kit-built sawn log end
+    underneath.
+  - Improved: Photoreal r3 (October 8, 2026): The globe spins in its stand, fast at first, then
+    slowing; a kit-built sawn log end underneath.
   - Sound: A short sound that suits the object.
-- **Cherry blossom (photo)** (`cherry-blossom-photo`). Now: hops. Plan: keep.
+- **Cherry blossom (photo)** (`cherry-blossom-photo`). Now: tap: Drop (rig). Plan: keep.
   - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
     good.
-  - Effect: A hop. The capture is one solid piece, so no part moves.
+  - Effect: Lifted a little and set down with a bump; kit-built earth under each patch; a closer
+    home view.
+  - Improved: Photoreal r3 (October 8, 2026): Lifted a little and set down with a bump; kit-built
+    earth under each patch; a closer home view.
   - Sound: A short sound that suits the object.
-- **Golden maple** (`maple-tree`). Now: hops. Plan: keep.
+- **Golden maple** (`maple-tree`). Now: tap: Drop (rig). Plan: keep.
   - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
     good.
-  - Effect: A hop. The capture is one solid piece, so no part moves.
+  - Effect: Lifted a little and set down with a bump; a kit-built earth underside.
+  - Improved: Photoreal r3 (October 8, 2026): Lifted a little and set down with a bump; a kit-built
+    earth underside.
   - Sound: A short sound that suits the object.
-- **Peonies in a vase** (`peony`). Now: hops. Plan: keep.
+- **Peonies in a vase** (`peony`). Now: tap: Knock (rig). Plan: keep.
   - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
     good.
-  - Effect: A hop. The capture is one solid piece, so no part moves.
+  - Effect: The vase tips onto the rim of its base, rolls round on it and settles; a kit-built glass
+    bottom.
+  - Improved: Photoreal r3 (October 8, 2026): The vase tips onto the rim of its base, rolls round on
+    it and settles; a kit-built glass bottom.
   - Sound: A short sound that suits the object.
-- **Money tree** (`money-tree`). Now: hops. Plan: keep.
+- **Money tree** (`money-tree`). Now: tap: Knock (rig). Plan: keep.
   - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
     good.
-  - Effect: A hop. The capture is one solid piece, so no part moves.
+  - Effect: The pot tips onto the rim of its foot, rolls round on it and settles; a kit-built pot
+    foot.
+  - Improved: Photoreal r3 (October 8, 2026): The pot tips onto the rim of its foot, rolls round on
+    it and settles; a kit-built pot foot.
   - Sound: A short sound that suits the object.
-- **Knight on a horse** (`knight-horse`). Now: hops. Plan: keep.
+- **Knight on a horse** (`knight-horse`). Now: tap: Rear (rig). Plan: keep.
   - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it
     good.
-  - Effect: A hop. The capture is one solid piece, so no part moves.
+  - Effect: The figure rocks back on its base as the horse rears, then lands; a kit-built pewter
+    underside.
+  - Improved: Photoreal r3 (October 8, 2026): The figure rocks back on its base as the horse rears,
+    then lands; a kit-built pewter underside.
   - Sound: A short sound that suits the object.
+- **Triceratops skull** (`triceratops-skull`). Now: tap: Look (rig). Plan: keep.
+  - Owner: New in Photoreal r3 (October 8, 2026), behind the labs switch until the owner marks it
+    good.
+  - Effect: The skull turns to look at you, then the other way.
+  - Improved: Photoreal r3 (October 8, 2026): The skull turns to look at you, then the other way.
+  - Sound: A short, quiet sound that suits the object.
+- **Cone shell** (`cone-shell`). Now: tap: Turn (rig). Plan: keep.
+  - Owner: New in Photoreal r3 (October 8, 2026), behind the labs switch until the owner marks it
+    good.
+  - Effect: Turns one way and the other on its point.
+  - Improved: Photoreal r3 (October 8, 2026): Turns one way and the other on its point.
+  - Sound: A short, quiet sound that suits the object.
+- **Celestial globe** (`celestial-globe`). Now: tap: Spin the globe. Plan: keep.
+  - Owner: New in Photoreal r3 (October 8, 2026), behind the labs switch until the owner marks it
+    good.
+  - Effect: The ball turns in its rings (its own piece of the model).
+  - Improved: Photoreal r3 (October 8, 2026): The ball turns in its rings (its own piece of the
+    model).
+  - Sound: A short, quiet sound that suits the object.
+- **Armillary sphere** (`armillary-sphere`). Now: tap: Turn the rings. Plan: keep.
+  - Owner: New in Photoreal r3 (October 8, 2026), behind the labs switch until the owner marks it
+    good.
+  - Effect: The inner rings turn inside the frame (their own pieces of the model).
+  - Improved: Photoreal r3 (October 8, 2026): The inner rings turn inside the frame (their own
+    pieces of the model).
+  - Sound: A short, quiet sound that suits the object.
+- **Stannern meteorite** (`stannern-meteorites`). Now: tap: Let them fall. Plan: keep.
+  - Owner: New in Photoreal r3 (October 8, 2026), behind the labs switch until the owner marks it
+    good.
+  - Effect: The five stones are lifted and fall one after another, tumbling a little, and land.
+  - Improved: Photoreal r3 (October 8, 2026): The five stones are lifted and fall one after another,
+    tumbling a little, and land.
+  - Sound: A short, quiet sound that suits the object.
+- **Fluorite** (`fluorite-crystal`). Now: tap: Ultraviolet lamp. Plan: keep.
+  - Owner: New in Photoreal r3 (October 8, 2026), behind the labs switch until the owner marks it
+    good.
+  - Effect: An ultraviolet lamp comes on: the stone glows blue-violet as it turns, then the lamp
+    goes off.
+  - Improved: Photoreal r3 (October 8, 2026): An ultraviolet lamp comes on: the stone glows
+    blue-violet as it turns, then the lamp goes off.
+  - Sound: A short, quiet sound that suits the object.
+- **Ammonite** (`ammonite-agate`). Now: tap: Turn it over. Plan: keep.
+  - Owner: New in Photoreal r3 (October 8, 2026), behind the labs switch until the owner marks it
+    good.
+  - Effect: Turns over to show its other face, and back.
+  - Improved: Photoreal r3 (October 8, 2026): Turns over to show its other face, and back.
+  - Sound: A short, quiet sound that suits the object.
+- **Morasko meteorite** (`morasko-meteorite`). Now: tap: Turn it over. Plan: keep.
+  - Owner: New in Photoreal r3 (October 8, 2026), behind the labs switch until the owner marks it
+    good.
+  - Effect: Turns half way round to show its other side, the light running over its pits, and back.
+  - Improved: Photoreal r3 (October 8, 2026): Turns once round, the light running over its pits.
+  - Sound: A short, quiet sound that suits the object.
+- **Pyrite** (`pyrite-cubes`). Now: tap: Turn it over. Plan: keep.
+  - Owner: New in Photoreal r3 (October 8, 2026), behind the labs switch until the owner marks it
+    good.
+  - Effect: Turns half way round to show its other side, and back.
+  - Improved: Photoreal r3 (October 8, 2026): Turns once round.
+  - Sound: A short, quiet sound that suits the object.
+- **Megalodon tooth** (`megalodon-tooth`). Now: tap: Turn it over. Plan: keep.
+  - Owner: New in Photoreal r3 (October 8, 2026), behind the labs switch until the owner marks it
+    good.
+  - Effect: Turns over to show its other side, and back.
+  - Improved: Photoreal r3 (October 8, 2026): Turns over to show its other side, and back.
+  - Sound: A short, quiet sound that suits the object.
 - **Real rubber duck** (`rubber-duck-real`). Now: tap: Squeeze (rig). Plan: keep.
   - Owner: Squeeze and quack. It must differ from the other rubber duck.
   - Effect: Squeezes flat and springs back.

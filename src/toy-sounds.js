@@ -14,17 +14,14 @@ const TOY_PIANO_SONG = "C5 C5 G5 G5 A5 A5 G5 - F5 F5 E5 E5 D5 D5 C5";
 export const TOY_SOUNDS = {
   // ---- Photoreal r2 (lane Photoreal r2) ----
   "heart-donut": { voice: "squish", pitch: 1.3, bright: 0.5, decay: 0.5 },
-  "sushi-boat": [
-    { voice: "wood", f: 420, decay: 0.4 },
-    { voice: "pop", at: 0.2, f: 700, decay: 0.3 },
-  ],
-  "seeded-loaf": [
-    { voice: "crunch", f: 1200, n: 8, decay: 0.6 },
-    { voice: "thud", at: 0.3, f: 90, decay: 0.5 },
-  ],
+  // Photoreal r3 (the owner's review of October 3, 2026): the first sound only, as the boat rocks.
+  "sushi-boat": { voice: "wood", f: 420, decay: 0.4, vol: 0.8 },
+  // Photoreal r3: no zipper-like crunch, only a very soft thud as the loaf lands.
+  "seeded-loaf": { voice: "thud", at: 0.58, f: 110, bright: 0.15, decay: 0.4, vol: 0.45 },
+  // Photoreal r3: a quiet, soft slap as the steak lands on each side (it flips over and back).
   steak: [
-    { voice: "squish", pitch: 0.8, bright: 0.2, decay: 0.6 },
-    { voice: "hiss", at: 0.05, f: 3500, decay: 0.5, vol: 0.4 },
+    { voice: "squish", at: 0.86, pitch: 0.7, bright: 0.15, decay: 0.4, vol: 0.45 },
+    { voice: "squish", at: 2.76, pitch: 0.75, bright: 0.15, decay: 0.4, vol: 0.4 },
   ],
   // Sound D (the walkthrough of October 6, 2026): no zipper-like rustle, and a quieter note.
   stollen: { voice: "pluck", at: 0.15, notes: "G5 C6", step: 0.08, decay: 0.3, vol: 0.35 },
@@ -38,44 +35,41 @@ export const TOY_SOUNDS = {
   ],
   // Sound D (the walkthrough of October 6, 2026): much subtler: one quiet ring, no sparkle.
   "crystal-gem": { voice: "glass", f: 1700, decay: 0.6, vol: 0.4 },
-  "alum-crystal": [
-    { voice: "glass", f: 1200, decay: 0.7 },
-    { voice: "thud", at: 0.2, f: 140, decay: 0.4 },
-  ],
+  // Photoreal r3: no ding: a soft stony knock as the crystal is set back on its block.
+  "alum-crystal": { voice: "stone", at: 1.95, f: 300, bright: 0.2, decay: 0.8, vol: 0.45 },
+  // Photoreal r3: a soft patter of landings as the puffin hops (its real call is to come).
   puffin: [
-    { voice: "flutter", f: 600, decay: 0.5 },
-    { voice: "pock", at: 0.25, f: 900 },
+    { voice: "thud", at: 0.43, f: 150, bright: 0.2, decay: 0.25, vol: 0.35 },
+    { voice: "thud", at: 1.83, f: 150, bright: 0.2, decay: 0.25, vol: 0.3 },
   ],
-  "toy-trex": [
-    { voice: "roar", f: 110, decay: 0.9, vol: 0.7 },
-    { voice: "thud", at: 0.4, f: 60, decay: 0.6 },
-  ],
+  // Photoreal r3: no wind: a subtle plastic tap as the toy rocks on its feet.
+  "toy-trex": { voice: "pock", f: 520, vol: 0.35 },
   // Sound D (the walkthrough of October 6, 2026): the rubber-band boing only (no clicking after).
   "monkey-doll": { voice: "boing", f: 500, decay: 0.5 },
+  // Photoreal r3: no wind: two soft, heavy steps as it turns.
   "elephant-souvenir": [
-    { voice: "roar", f: 260, to: 0.7, decay: 0.8, vol: 0.6 },
-    { voice: "thud", at: 0.5, f: 55, decay: 0.7 },
+    { voice: "thud", at: 0.43, f: 85, bright: 0.15, decay: 0.35, vol: 0.4 },
+    { voice: "thud", at: 1.83, f: 80, bright: 0.15, decay: 0.35, vol: 0.35 },
   ],
   "turtle-souvenir": [
     { voice: "scrape", f: 1100, decay: 0.5, vol: 0.6 },
     { voice: "thud", at: 0.25, f: 100, decay: 0.5 },
   ],
-  "cave-lioness": [
-    { voice: "breath", f: 300, decay: 0.8 },
-    { voice: "roar", at: 0.3, f: 150, decay: 0.9, vol: 0.6 },
-  ],
+  // Photoreal r3: no wind and much quieter: a soft, low breath out as she looks round.
+  "cave-lioness": { voice: "thud", at: 0.1, f: 70, bright: 0.1, decay: 0.6, vol: 0.3 },
+  // Photoreal r3: no rubber band: the soft thump of a plush landing, twice.
   "dog-plush": [
-    { voice: "boing", f: 380, decay: 0.5 },
-    { voice: "squish", at: 0.2, pitch: 0.9, vol: 0.5 },
+    { voice: "thud", at: 0.6, f: 120, bright: 0.1, decay: 0.35, vol: 0.45 },
+    { voice: "thud", at: 0.95, f: 125, bright: 0.1, decay: 0.3, vol: 0.25 },
   ],
+  // Photoreal r3: no bell: a soft, dull knock of the frame as it leans on its kickstand, and a
+  // lighter one as it rocks back.
   "bmx-bike": [
-    { voice: "click", f: 2200, n: 10, decay: 0.5 },
-    { voice: "bell", at: 0.3, f: 2400, decay: 0.8, vol: 0.5 },
+    { voice: "metal", at: 0.05, f: 320, bright: 0.2, decay: 0.3, vol: 0.3 },
+    { voice: "thud", at: 0.55, f: 140, bright: 0.15, decay: 0.25, vol: 0.2 },
   ],
-  "murex-shell": [
-    { voice: "glass", f: 2100, decay: 0.4 },
-    { voice: "rattle", at: 0.1, f: 2600, n: 5, decay: 0.5 },
-  ],
+  // Photoreal r3: no clicking; the ding, more subtle.
+  "murex-shell": { voice: "glass", f: 2100, decay: 0.4, vol: 0.4 },
   // Sound D (the walkthrough of October 6, 2026): something subtle, no clicking, stretch or
   // wind: a soft warm chord as the flower lifts, and a light landing.
   "sunflower-photo": [
@@ -88,20 +82,22 @@ export const TOY_SOUNDS = {
   "bonsai-photo": { voice: "wood", at: 0.25, f: 520, decay: 0.4, vol: 0.5 },
   // Sound D (the walkthrough of October 6, 2026): the soft pop, no clicking.
   "mushroom-photo": { voice: "pop", f: 420, decay: 0.6 },
-  "cactus-real": [
-    { voice: "pluck", notes: "D6 A5 F6", step: 0.06, decay: 0.3, bright: 0.5 },
-    { voice: "rattle", at: 0.05, f: 2200, n: 8, decay: 0.6 },
-  ],
+  // Photoreal r3: no clicking; softer notes, like the first cactus's.
+  "cactus-real": {
+    voice: "pluck",
+    at: 0.55,
+    notes: "E5 G5 B5",
+    step: 0.09,
+    decay: 0.3,
+    bright: 0.3,
+    vol: 0.55,
+  },
   // Sound D (the walkthrough of October 6, 2026): the soft boing, no twinkle.
   "crochet-earth": { voice: "boing", f: 300, decay: 0.7, vol: 0.6 },
-  "desk-globe": [
-    { voice: "click", f: 1400, n: 3, decay: 0.5 },
-    { voice: "whoosh", at: 0.1, f: 600, decay: 0.5, vol: 0.5 },
-  ],
-  "cherry-blossom-photo": [
-    { voice: "flutter", f: 800, decay: 0.7, vol: 0.6 },
-    { voice: "sparkle", at: 0.2, vol: 0.5 },
-  ],
+  // Photoreal r3: no wind or suction: one soft, hollow knock as the globe is flicked round.
+  "desk-globe": { voice: "hollow", f: 260, decay: 0.5, vol: 0.4 },
+  // Photoreal r3: the bounce, with no twinkle.
+  "cherry-blossom-photo": { voice: "flutter", f: 800, decay: 0.7, vol: 0.6 },
   // Sound D (the walkthrough of October 6, 2026): no clicking, and a subtler gust of wind.
   "maple-tree": { voice: "whoosh", at: 0.1, f: 900, decay: 0.5, vol: 0.22 },
   // Sound D (the walkthrough of October 6, 2026): the vase's glass note, no clicking.
@@ -112,6 +108,35 @@ export const TOY_SOUNDS = {
     { voice: "clack", f: 1800, n: 4, decay: 0.5 },
     { voice: "bell", at: 0.25, f: 1500, decay: 0.7, vol: 0.5 },
   ],
+
+  // ---- Photoreal r3 (lane Photoreal r3): the new scientific captures ----
+  // A low, soft knock of bone on its stand as the skull turns to look.
+  "triceratops-skull": { voice: "thud", at: 0.05, f: 75, bright: 0.15, decay: 0.5, vol: 0.4 },
+  // A soft porcelain tick as the shell turns on its point.
+  "cone-shell": { voice: "glass", f: 1900, decay: 0.3, vol: 0.35 },
+  // A gentle wooden creak as the globe is set turning in its rings.
+  "celestial-globe": { voice: "hollow", f: 200, decay: 0.7, vol: 0.4 },
+  // A quiet brass ring as the inner rings turn.
+  "armillary-sphere": { voice: "tine", f: 880, decay: 0.8, vol: 0.3 },
+  // Five soft stony thuds as the stones land one after another.
+  "stannern-meteorites": { voice: "stone", at: 0.68, notes: "C3 C3 C3 C3 C3", step: 0.38, f: 220, bright: 0.2, decay: 0.7, vol: 0.45 }, // prettier-ignore
+  // A low, soft hum while the lamp is on.
+  "fluorite-crystal": {
+    voice: "glow",
+    at: 0.15,
+    notes: "A3+E4",
+    decay: 1.6,
+    bright: 0.15,
+    vol: 0.25,
+  },
+  // A stone-on-wood knock as the fossil is laid down on its other face.
+  "ammonite-agate": { voice: "wood", at: 1.05, f: 260, decay: 0.5, vol: 0.45 },
+  // A deep, quiet ring of iron.
+  "morasko-meteorite": { voice: "metal", f: 110, bright: 0.2, decay: 0.8, vol: 0.3 },
+  // A small, bright clink.
+  "pyrite-cubes": { voice: "glass", f: 2400, decay: 0.3, vol: 0.3 },
+  // A dull stone tap as the tooth is laid down on its other side.
+  "megalodon-tooth": { voice: "stone", at: 1.05, f: 320, bright: 0.2, decay: 0.7, vol: 0.4 },
 
   // ---- Scans ------------------------------------------------------------------------
   cactus: [
