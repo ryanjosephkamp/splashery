@@ -309,6 +309,26 @@ export function createUI(app) {
     for (const [id, b] of chips)
       b.setAttribute("aria-pressed", String(!q && id === shelf.category));
     revealCurrent();
+    requestAnimationFrame(fitLabels);
+  }
+
+  // Fix11: on a phone a name wraps onto two lines (styles.css); one that still needs a third with
+  // this device's font ("Leaning Tower of Pisa") steps its letters down a little, to 9 px at the
+  // least, so no name is cut. The card keeps its size.
+  function fitLabels() {
+    const spans = [...els.shelf.children].map((b) => b.querySelector("span")).filter(Boolean);
+    if (!narrow.matches) {
+      for (const s of spans) s.style.fontSize = s.style.minHeight = "";
+      return;
+    }
+    const over = (s) => s.clientHeight > 0 && s.scrollHeight > s.clientHeight + 1;
+    let todo = spans.filter((s) => !s.style.fontSize && over(s));
+    for (const s of todo) s.style.minHeight = getComputedStyle(s).minHeight;
+    for (const px of [10, 9.5, 9]) {
+      for (const s of todo) s.style.fontSize = `${px}px`;
+      todo = todo.filter(over);
+      if (!todo.length) break;
+    }
   }
 
   function revealCurrent() {
@@ -2373,6 +2393,8 @@ export function createUI(app) {
   // UI r2: the maximize button fills the screen with the grid or the panel.
   els.sheetMax.addEventListener("click", () => setMode(mode, !full));
   narrow.addEventListener("change", applySheet);
+  narrow.addEventListener("change", () => requestAnimationFrame(fitLabels)); // Fix11
+  document.fonts?.ready.then(() => requestAnimationFrame(fitLabels));
 
   // The handle: swipe up for the grid, down for the row, tap to toggle. The
   // tab bar takes the same swipes but keeps the panel open when swiped up.
