@@ -49,3 +49,35 @@ test("the QR family's scan checks never show on screen", async ({ page }) => {
   expect(await page.locator(".stage-cover").count()).toBe(0);
   expect(errors).toEqual([]);
 });
+
+test("a cover carries its label, and a cover inside it waits for the first still", async ({
+  page,
+}) => {
+  await page.goto(APP);
+  await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
+  const r = await page.evaluate(async () => {
+    const stage = window.__splashery.app.player.stage;
+    // Two covers at once, the second with a label and a fixed size right
+    // after it: the still is taken before the size changes.
+    const first = stage.cover();
+    await stage.cover({ label: "Please wait. Scanning code…" });
+    await first;
+    const el = document.querySelector(".stage-cover");
+    const out = { label: el?.dataset.label, w: el?.width, h: el?.height, cw: stage.canvas.width, ch: stage.canvas.height }; // prettier-ignore
+    stage.setFixedSize([300, 300]);
+    await stage.captureFrame();
+    out.still = document.querySelectorAll(".stage-cover").length;
+    stage.setFixedSize(null);
+    await stage.uncover();
+    out.afterOne = document.querySelectorAll(".stage-cover").length;
+    await stage.uncover();
+    out.afterTwo = document.querySelectorAll(".stage-cover").length;
+    return out;
+  });
+  expect(r.label).toBe("Please wait. Scanning code…");
+  // The still has the stage's own shape, not the fixed square.
+  expect([r.w, r.h]).toEqual([r.cw, r.ch]);
+  expect(r.still).toBe(1);
+  expect(r.afterOne).toBe(1);
+  expect(r.afterTwo).toBe(0);
+});

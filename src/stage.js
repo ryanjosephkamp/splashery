@@ -919,27 +919,72 @@ export class Stage {
 
   // Engine (QR r4): a still of the current frame over the canvas while an
   // export renders at a fixed size, so the stretched square never shows.
-  // Calls nest; the last uncover removes the still after the canvas has
-  // drawn a few frames at its own size again.
-  async cover() {
+  // Calls nest (a later call waits for the first still); the last uncover
+  // removes the still after the canvas has drawn a few frames at its own size
+  // again. label (the owner's note of October 9, 2026): a short message on
+  // the still, such as "Please wait. Scanning code…", so the pause reads as
+  // work, not a freeze.
+  cover({ label = "" } = {}) {
     this.coverDepth = (this.coverDepth || 0) + 1;
-    if (this.coverDepth > 1 || this.fixedSize) return;
-    const shot = await this.captureFrame();
-    if (!this.coverDepth || this.coverEl) return;
-    const r = this.canvas.getBoundingClientRect();
-    shot.className = "stage-cover";
-    shot.setAttribute("aria-hidden", "true");
-    Object.assign(shot.style, {
-      position: "fixed",
-      left: `${r.left}px`,
-      top: `${r.top}px`,
-      width: `${r.width}px`,
-      height: `${r.height}px`,
-      pointerEvents: "none",
-      zIndex: getComputedStyle(this.canvas).zIndex,
+    if (label) this.coverLabel = label;
+    if (this.coverDepth > 1) {
+      this.labelCover();
+      return this.coverReady || Promise.resolve();
+    }
+    if (this.fixedSize) return Promise.resolve();
+    this.coverReady = this.captureFrame().then((shot) => {
+      if (!this.coverDepth || this.coverEl) return;
+      const r = this.canvas.getBoundingClientRect();
+      shot.className = "stage-cover";
+      shot.setAttribute("aria-hidden", "true");
+      Object.assign(shot.style, {
+        position: "fixed",
+        left: `${r.left}px`,
+        top: `${r.top}px`,
+        width: `${r.width}px`,
+        height: `${r.height}px`,
+        pointerEvents: "none",
+        zIndex: getComputedStyle(this.canvas).zIndex,
+      });
+      this.canvas.after(shot);
+      this.coverEl = shot;
+      this.labelCover();
     });
-    this.canvas.after(shot);
-    this.coverEl = shot;
+    return this.coverReady;
+  }
+
+  // Draws the cover's label: white text on a dark, rounded band in the middle
+  // of the still (drawn on a fresh copy of the still each time it changes).
+  labelCover() {
+    const el = this.coverEl;
+    const text = this.coverLabel;
+    if (!el || !text || el.dataset.label === text) return;
+    if (!this.coverBase) {
+      this.coverBase = document.createElement("canvas");
+      this.coverBase.width = el.width;
+      this.coverBase.height = el.height;
+      this.coverBase.getContext("2d").drawImage(el, 0, 0);
+    }
+    const g = el.getContext("2d");
+    g.clearRect(0, 0, el.width, el.height);
+    g.drawImage(this.coverBase, 0, 0);
+    // The size the text shows at on screen, whatever the drawing buffer's.
+    const k = el.width / Math.max(1, el.getBoundingClientRect().width || el.width);
+    const px = Math.round(16 * k);
+    g.font = `600 ${px}px system-ui, -apple-system, "Segoe UI", sans-serif`;
+    const w = g.measureText(text).width + px * 1.6;
+    const h = px * 2.2;
+    const x = (el.width - w) / 2;
+    const y = (el.height - h) / 2;
+    g.fillStyle = "rgba(17, 20, 26, 0.82)";
+    g.beginPath();
+    g.roundRect(x, y, w, h, h / 2);
+    g.fill();
+    g.fillStyle = "#ffffff";
+    g.textAlign = "center";
+    g.textBaseline = "middle";
+    g.fillText(text, el.width / 2, el.height / 2);
+    el.dataset.label = text;
   }
 
   async uncover(frames = 3) {
@@ -955,6 +1000,9 @@ export class Stage {
     if (this.coverDepth) return;
     this.coverEl?.remove();
     this.coverEl = null;
+    this.coverBase = null;
+    this.coverLabel = "";
+    this.coverReady = null;
   }
 
   copyCanvas(width, height) {
