@@ -88,7 +88,14 @@ than guessing.
 
 ## State
 
-Model: Opus 5.5 (claude-opus-5-5), high effort. Branch `claude/lane-fix11` from main at ad961bec.
+Model: Opus 5.5 (claude-opus-5-5), high effort. Branch `claude/lane-fix11` from main at ad961bec;
+main (1f6fbc0f, with #500 and #504) merged in on October 10, 2026, into both branches.
+
+Green runs (llvmpipe, two files at once, `tools/suite.mjs`): the closing run of 17 files
+(`.cache/fx11-final`: 14 green; hl1, hh3-engine2, hh4-vehicles failed, see below); three repeats of
+hl1, stm, ai-engine, cmp2-engine, hh1-toys, smd-moving and fl7 (`.cache/fx11-rep`: 171 of 171);
+after merging main, smoke, smd-moving, phf-engine, qrs-toys, cmp2-engine, hl1, stm, fl7, ai-engine,
+hh1-toys, unit, taps and help (`.cache/fx11-post`: 211 of 211).
 
 Reproduction run (October 10, 2026, `.cache/fx11-1`, llvmpipe, two at once): red as briefed for
 `smoke:1504`, `qrs-toys:37`, `hl1:88`, `stm:366`; `hh3-engine2:122`, `smd-moving:101` (bridge and
@@ -190,6 +197,11 @@ Flaky:
   back to October 5 in this container (fonts: Inter is the system sans-serif here).
 
 ## Known issues
+
+- `vol:283` (the Operator's addition) failed 1 in 3 under load after the merge of main
+  (`.cache/fx11-fv`): the wait for the cut-short warning timed out. It looks like `stm:366`'s race:
+  `#vol-stats` names the NIfTI before the Toy tab is drawn again, so the broken file's warning can
+  land in the old panel and be replaced. Not fixed yet. `fx4-engine:79` passed 3 of 3 under load.
 
 - Three labs names need a third line in the phone row even at 9 px and stay cut there: "Cherry
   blossom (photo)", "The solar system on real orbits" and "Super-resolution microscope" (they fit in
