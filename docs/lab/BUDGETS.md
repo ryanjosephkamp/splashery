@@ -97,7 +97,14 @@ Across all the views (the median of each toy's value against its own at 140k):
 | 280k   | −6%  | +31%    | +39%    | −0.8%           |
 | 400k   | −9%  | +52%    | +61%    | −1.2%           |
 
-Frame times: a clean timing pass is running; this section is filled in the next push.
+Frame times, from a separate pass on six toys with nothing else running (ms per frame, software
+renderer, 60k · 140k · 200k · 280k · 400k): the clock 8.8 · 12.8 · 9.0 · 16.3 · 23.9, the bicycle
+10.8 · 8.0 · 6.0 · 10.1 · 8.9, the chess set 6.0 · 6.7 · 7.5 · 11.4 · 9.1, the oak 11.0 · 7.7 · 10.3
+· 12.7 · 10.9, the marble and the pool ball (twice the counts) 14.0 · 7.5 · 7.9 · 8.7 · 10.3 and
+17.3 · 10.1 · 8.1 · 9.3 · 12.1. Only the clock grows steadily with the count; on the rest the noise
+(up to ±30% between runs) is larger than the difference. SwiftShader's time is mostly the frame's readback
+and fixed costs, so it cannot say what more splats cost a phone's GPU, which sorts and blends every
+splat each frame. Expect the cost on a phone to grow with the count.
 
 ## What it shows
 
