@@ -147,6 +147,7 @@ Branches `claude/lane-qr-r4-engine-2` (PR #487: the labs "QR code" button in the
   by jsQR and zxing-cpp, a camera-like view (tilted, turned, softened) read by zxing-cpp, and the
   link opened in a fresh page landing on the same toy and options; a too-long scene offers Save
   JSON. tests/qr4-2-engine.spec.mjs (in #487): the button with labs on and off.
+- The owner marked the `qr4-2-share-qr` clip good (October 10, 2026).
 
 ## Notes
 
