@@ -35,6 +35,7 @@ test("a toy's input panel can carry a drawing pad that hands its drawing to read
   // Draw a stroke across the middle of the pad (pointer events on the
   // canvas, which may sit in a closed sheet on this layout), then read it.
   await pad.evaluate((c) => {
+    c.dataset.drawn = "1"; // (this pad: the one drawn on, before the read rebuilds the toy)
     const r = c.getBoundingClientRect();
     const at = (f) => ({ clientX: r.left + r.width * f, clientY: r.top + r.height * 0.5, pointerId: 1, bubbles: true }); // prettier-ignore
     c.dispatchEvent(new PointerEvent("pointerdown", at(0.2)));
@@ -49,7 +50,10 @@ test("a toy's input panel can carry a drawing pad that hands its drawing to read
   expect(cells.every((v) => v >= 0 && v <= 16)).toBe(true);
   expect(cells[63]).toBe(16); // the drawing it started from
   expect(cells.slice(24, 40).some((v) => v > 0)).toBe(true); // the stroke
-  // Clear empties it.
+  // Clear empties it. (Once the read has rebuilt the toy and drawn the Toy tab again: read()'s
+  // options go to setToyOptions, and a pad drawn anew starts from value(), so a Clear pressed on
+  // the old pad was lost when the new one came after it on a busy machine. Fix11.)
+  await expect(page.locator("#toy-input-pad:not([data-drawn])")).toBeAttached({ timeout: 60_000 });
   await page.evaluate(() => (window.__padTest.got = null));
   await page.locator("#toy-input-pad-clear").click({ force: true });
   await page.locator("#toy-input-pad-go").click({ force: true });
