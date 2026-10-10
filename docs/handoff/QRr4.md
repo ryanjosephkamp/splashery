@@ -126,6 +126,29 @@ with a 3-pixel blur, read with zxing-cpp and jsQR (`.cache/qr4/camera.mjs`, not 
   jsQR misses even plain codes at an angle, so it is the weaker stand-in for a phone. At the stage's
   own 390-pixel width (about 4 pixels a module) Picture QR reads front on only.
 
+## Part 2: the scene as a QR code (the Operator's item of October 10, 2026)
+
+Branches `claude/lane-qr-r4-engine-2` (PR #487: the labs "QR code" button in the Share tab and
+`app.openShareQR()`) and `claude/lane-qr-r4-2` (the dialog, src/qr/share.js and share-code.js).
+
+- The dialog shows the scene's `#s=` link (`buildShareHash`, `shareURL`) as a crisp QR code (a whole
+  number of device pixels a module), reads it back (src/qr/scan.js) and says "✓ It scans.", gives
+  its version, level and length, saves a PNG (10 pixels a module), and can show the code as splats
+  (the QR code toy with the link as its text). It says the code holds only the link, nothing is
+  uploaded, and a file of the person's own stays on the device.
+- Level M while the code stays at version 30 or smaller, else L; over 2,953 bytes (version 40, L) it
+  says the link is too long for one code and offers Save JSON. No splitting.
+- Link lengths (with the live site's base, 47 characters): all 451 toys at their defaults, 692 to
+  714 characters (version 21 at M, 18 at L); the graph and surface plotters with a 120-character
+  equation, about 845 (v23 M); the QR code toy with a 300-character text, 1,016 (v26 M); 20 paint
+  dabs or 30 clay strokes, about 1,170 (v28 M); 60 dabs or 100 strokes, about 2,000 (v33 L); 150
+  dabs, 3,671: too long for one code.
+- tests/qr4-2.spec.mjs: the sizes in Node; Share → QR code in the browser, the saved PNG read back
+  by jsQR and zxing-cpp, a camera-like view (tilted, turned, softened) read by zxing-cpp, and the
+  link opened in a fresh page landing on the same toy and options; a too-long scene offers Save
+  JSON. tests/qr4-2-engine.spec.mjs (in #487): the button with labs on and off.
+- The owner marked the `qr4-2-share-qr` clip good (October 10, 2026).
+
 ## Notes
 
 - Picture QR's nudge reads each module as a camera would: the module's 3 × 3 cells weighted by a
