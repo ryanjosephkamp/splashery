@@ -42,7 +42,7 @@ const SAMPLE = [
   "song-landscape",
   "splat-field",
   "galaxy-box",
-  "snowman",
+  "menorah", // lane Hands-on H3: the snowman comes apart now (pieces mode), so it is never lifted whole
   "drum",
   "bus",
   "eiffel-tower",
@@ -59,11 +59,15 @@ const SAMPLE = [
 // is its own piece, picked off its orbit and let go to orbit again; the campfire has a spare log to
 // lay on the fire, and a fire isn't picked up), so a press on the sun or the fire lifts no whole toy.
 // So does the bacterium (a press on it takes its two halves, to pull it apart and divide it).
+// Lane Hands-on H3: the picture frame swings on its nail now (pieces mode), so it is never lifted
+// whole either. So does the drum (its sticks are pieces, the drum stays put to be hit); every
+// other music toy has its own controls (keys, mallet, strings), so the drum stays the shelf's sample.
 const KNOWN = {
-  "picture-frame": ["unavailable"],
+  "picture-frame": ["whole-pickup"],
   "solar-system": ["whole-pickup"],
   campfire: ["whole-pickup"],
   bacterium: ["whole-pickup"],
+  drum: ["whole-pickup"],
 };
 const selected = ALL ? TOYS : SAMPLE.map((id) => TOYS.find((t) => t.id === id));
 
