@@ -54,28 +54,29 @@ Proposals below are suggestions; the owner may change them.
   attractor, Möbius strip, Klein bottle, Menger sponge, Hypercube, Torus knot, Gyroid, Mandelbulb,
   Sierpinski tetrahedron, Platonic solids, Seashell spiral, Graph plotter, Surface plotter, Circle
   and waves, Fourier circles, Pythagoras proof, Rössler attractor, Thomas attractor, Aizawa
-  attractor, 5-cell, 16-cell, 24-cell, Duoprism, Splat equation, Storybook, Music box, Fountain pen,
-  Water bottle, Soda can, Running shoe, Hoodie, Sunglasses, Baseball cap, Sword in the stone,
-  Heraldic shield, Bow and target, Crown, Wizard's orb, Crystal ball, Jellyfish, School of fish,
-  Butterfly, Pufferfish, Nautilus, Ladybug, Snail, Octopus, Starfish, Sea urchin, Frog, Penguin,
-  Owl, Snowman, Fireworks, Decorated tree, Paper lantern, Diya, Acoustic guitar, Snare drum,
-  Xylophone, Toy piano, Grand piano, Upright piano, Harpsichord, Electronic keyboard, Helicopter,
-  Hot-air balloon, Steam train, Ocean liner, Sports car, Bus, Propeller plane, Jet airliner,
-  Sailboat, Submarine, Bicycle, Tractor, Flying saucer, Eiffel Tower, Washington Monument, Pyramids
-  of Giza, Twisting supertall, Statue of Liberty, White House, Leaning Tower of Pisa, Colosseum,
-  Parthenon, Stonehenge, Big Ben, Taj Mahal, Castle, Pagoda, Windmill, Perceptron, Multilayer
-  perceptron, Neural network, Convolutional network, Recurrent network, Transformer, Looped
-  transformer, Diffusion model, Gradient descent, Gaussian splatting, Word vectors, Sorting machine,
-  Half adder, Turing machine, Difference engine, Enigma machine, Bombe, Picture lab, Your book,
-  Photo album, Picture frame, Song landscape, Chladni plate, Room echo meter, Splat mirror, Model to
-  splats, QR code, Photo to 3D, Moving photo to 3D, Video to 3D, Sound lab, Sound recorder, Splat
-  toolkit, Point clouds, Volume viewer, Splat field, Light lab, Thermal ellipsoids, Super-resolution
-  microscope, Galaxy in a box, Cryo-EM map, Contour lab, Terrain in a box, Ripple tank, Light bench,
-  Fluid lab, Grand Canyon, Mount St. Helens, The sea floor, Tides at Bar Harbor, Hurricane, Relief
-  map, Living city, Stork migration, Earthquakes, Airport X-ray scanner, How CT works, Walnut CT
-  scan, MRI of a fruit, Electron microscope, Thermal camera, Screen, Shardball, Longtail, Grain
-  Garden, Page Breaker, Strata, Volley Table, Stone Belt, Soft Landing, Night Owl Pinball, Cast a
-  Shadow, Photo Dash, Note Rider, Data in 3D.
+  attractor, 5-cell, 16-cell, 24-cell, Duoprism, Splat equation, Storybook, Music box, Alarm clock,
+  Gift box, Umbrella, Desk fan, Desk lamp, Potion bottle, Telescope, Fountain pen, Water bottle,
+  Soda can, Running shoe, Hoodie, Sunglasses, Baseball cap, Sword in the stone, Heraldic shield, Bow
+  and target, Trebuchet, Crossbow, Knight's helmet, Crown, Dragon egg, Wizard's orb, Crystal ball,
+  Jellyfish, School of fish, Butterfly, Pufferfish, Nautilus, Ladybug, Snail, Octopus, Starfish, Sea
+  urchin, Frog, Penguin, Owl, Jack-o'-lantern, Snowman, Fireworks, Decorated tree, Patterned egg,
+  Paper lantern, Diya, Acoustic guitar, Snare drum, Xylophone, Toy piano, Grand piano, Upright
+  piano, Harpsichord, Electronic keyboard, Helicopter, Hot-air balloon, Steam train, Ocean liner,
+  Sports car, Bus, Propeller plane, Jet airliner, Sailboat, Submarine, Bicycle, Tractor, Flying
+  saucer, Eiffel Tower, Washington Monument, Pyramids of Giza, Twisting supertall, Statue of
+  Liberty, White House, Leaning Tower of Pisa, Colosseum, Parthenon, Stonehenge, Big Ben, Taj Mahal,
+  Castle, Pagoda, Windmill, Perceptron, Multilayer perceptron, Neural network, Convolutional
+  network, Recurrent network, Transformer, Looped transformer, Diffusion model, Gradient descent,
+  Gaussian splatting, Word vectors, Sorting machine, Half adder, Turing machine, Difference engine,
+  Enigma machine, Bombe, Picture lab, Your book, Photo album, Picture frame, Song landscape, Chladni
+  plate, Room echo meter, Splat mirror, Model to splats, QR code, Photo to 3D, Moving photo to 3D,
+  Video to 3D, Sound lab, Sound recorder, Splat toolkit, Point clouds, Volume viewer, Splat field,
+  Light lab, Thermal ellipsoids, Super-resolution microscope, Galaxy in a box, Cryo-EM map, Contour
+  lab, Terrain in a box, Ripple tank, Light bench, Fluid lab, Grand Canyon, Mount St. Helens, The
+  sea floor, Tides at Bar Harbor, Hurricane, Relief map, Living city, Stork migration, Earthquakes,
+  Airport X-ray scanner, How CT works, Walnut CT scan, MRI of a fruit, Electron microscope, Thermal
+  camera, Screen, Shardball, Longtail, Grain Garden, Page Breaker, Strata, Volley Table, Stone Belt,
+  Soft Landing, Night Owl Pinball, Cast a Shadow, Photo Dash, Note Rider, Data in 3D.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
@@ -911,25 +912,39 @@ Proposals below are suggestions; the owner may change them.
   - Sound: A music-box melody (plucked comb tones) while open.
 - **Alarm clock** (`clock`). Now: tap: Ring the bell. Plan: keep.
   - Owner: Does roughly what the scan alarm clock should do; keep them slightly different.
+  - Improved: Hands-on H3 (October 8, 2026; Hands-on): Drag around the face to set the time; the
+    minute hand clicks at each minute and the hour hand follows a twelfth as fast.
   - Sound: A real wind-up alarm clock, the hammer rattling between its two bells, in two rings.
 - **Gift box** (`gift-box`). Now: tap: Open the present. Plan: keep.
   - Owner: Outstanding.
+  - Improved: Hands-on H3 (October 8, 2026; Hands-on): Lift the lid off and the star springs up; set
+    it back on and it clicks home.
   - Sound: Ribbon rustle and a ta-da.
 - **Umbrella** (`umbrella`). Now: tap: Open or close. Plan: keep.
   - Owner: Perfect.
+  - Improved: Hands-on H3 (October 8, 2026; Hands-on): Slide the new runner down the stick to fold
+    it and up to open it, into its top catch.
   - Sound: Fwump of the canopy opening.
 - **Desk fan** (`desk-fan`). Now: tap: Switch on or off. Plan: keep.
   - Owner: Perfect.
+  - Improved: Hands-on H3 (October 8, 2026; Hands-on): Push the head to tilt it on its stiff hinge;
+    it keeps swinging and spinning.
   - Sound: The blades' soft thrum of air swelling in as it starts and fading as it stops (no rising
     motor hum).
 - **Desk lamp** (`lamp`). Now: tap: Switch the light. Plan: keep.
   - Owner: Perfect.
+  - Improved: Hands-on H3 (October 8, 2026; Hands-on): Bend the arm at its three joints to point the
+    shade; the pool of light moves over the desk.
   - Sound: Switch click.
 - **Potion bottle** (`potion-bottle`). Now: tap: Pop the cork. Plan: keep.
   - Owner: Perfect.
+  - Improved: Hands-on H3 (October 8, 2026; Hands-on): Pull the cork: it holds, pops with a puff,
+    and squeaks back into the neck.
   - Sound: Cork pop and fizz.
 - **Telescope** (`telescope`). Now: tap: Extend or collapse. Plan: keep.
   - Owner: Perfect.
+  - Improved: Hands-on H3 (October 8, 2026; Hands-on): Pull the draw tubes out and push them back
+    in, one inside the other.
   - Sound: Brass slide and a twinkle.
 - **Fountain pen** (`fountain-pen`). Now: tap: Uncap and write. Plan: keep.
   - Owner: From the owner's approved ideas on the Toy Ideas page (lane Real objects, September 29,
@@ -941,7 +956,8 @@ Proposals below are suggestions; the owner may change them.
   - Improved: Real objects: a detailed CC BY model of a green fountain pen (maker's marks painted
     out) on a kit-built notepad. The cap slides off and posts on the back end, the pen tilts and
     writes a looping swirl in bright wet ink that dries to dark navy from its start, the cap goes
-    back on and the ink runs back into the nib (4 s). Round 2: denser, sharper model.
+    back on and the ink runs back into the nib (4 s). Round 2: denser, sharper model. Hands-on H3
+    (October 8, 2026; Hands-on): Pull the cap off the nib and post it on the back end, turned round.
   - Sound: A cap click, a smooth nib scratch, another click.
 - **Water bottle** (`water-bottle`). Now: tap: Unscrew and pour. Plan: keep.
   - Owner: From the owner's approved ideas on the Toy Ideas page (lane Real objects, September 29,
@@ -2659,13 +2675,19 @@ Proposals below are suggestions; the owner may change them.
     fallback.
 - **Trebuchet** (`trebuchet`). Now: tap: Launch. Plan: keep.
   - Owner: Fine.
+  - Improved: Hands-on H3 (October 8, 2026; Hands-on): Free the arm's catch and let go: the weight
+    drops and the sling flings the stone.
   - Sound: The timber beam creaks and strains, then a softer swing (much less wind).
 - **Crossbow** (`crossbow`). Now: tap: Shoot. Plan: keep.
   - Owner: Solid.
+  - Improved: Hands-on H3 (October 9, 2026; Hands-on): it starts cocked; a tap pulls the trigger and
+    the bolt flies; pull the string back until it clicks onto the catch and a new bolt loads.
   - Sound: No click; the string's real thump, then the bolt hitting as before; real CC0 recordings
     now (bow-and-target-release.mp3), with the synthesized sound as a fallback.
 - **Knight's helmet** (`knights-helmet`). Now: tap: Open the visor. Plan: keep.
   - Owner: Really neat.
+  - Improved: Hands-on H3 (October 8, 2026; Hands-on): Lift the visor on its hinges; all the way up
+    it stays, lower it drops shut.
   - Sound: Visor clank.
 - **Crown** (`crown`). Now: tap: Light the jewels. Plan: keep.
   - Owner: Needs an effect.
@@ -2678,6 +2700,8 @@ Proposals below are suggestions; the owner may change them.
     synthetic brass; the jewels' pings stay.
 - **Dragon egg** (`dragon-egg`). Now: tap: Hatch. Plan: keep.
   - Owner: Cute and perfect.
+  - Improved: Hands-on H3 (October 8, 2026; Hands-on): Pull the shell pieces off one by one; the
+    baby dragon rises as they go.
   - Sound: Crack and a tiny roar.
 - **Wizard's orb** (`wizards-orb`). Now: tap: Cast. Plan: keep.
   - Owner: Looks really good; develop it further to be more impressive.
@@ -2800,6 +2824,8 @@ Proposals below are suggestions; the owner may change them.
 
 - **Jack-o'-lantern** (`jack-o-lantern`). Now: tap: Lift the lid. Plan: keep.
   - Owner: Basically perfect.
+  - Improved: Hands-on H3 (October 8, 2026; Hands-on): Lift the lid off by its stem; brought back,
+    it drops into place.
   - Sound: Spooky flicker whoosh.
 - **Snowman** (`snowman`). Now: tap: Melt and rebuild. Plan: keep.
   - Owner: Do more than bounce; maybe it melts.
@@ -2809,6 +2835,8 @@ Proposals below are suggestions; the owner may change them.
     puddle; then it builds itself again: the balls grow back from the bottom up and each piece hops
     back to its place (about 6 s). The Warmth slider melts it the same way. Fix7: it melts into a
     real puddle of meltwater with a wavering edge (it was a spoked disc that looked like a flower).
+    Hands-on H3 (October 9, 2026; Hands-on): lift the head or the middle ball off, set it down and
+    stack them back up; each ball takes its own decorations.
   - Sound: Drips, then a crunch of snow and a twinkle as it rebuilds.
 - **Fireworks** (`fireworks`). Now: tap: Launch. Plan: keep.
   - Owner: Outstanding. Make each launch different (like the dice), and the burst match the colour
@@ -2828,15 +2856,20 @@ Proposals below are suggestions; the owner may change them.
   - Effect: Lights come on and chase in patterns and stay on; the star glows.
   - Improved: C2: a tap switches the lights on in a sweep up the tree, and they stay on, cycling
     chase, ripple and steady patterns; the star gets a warm halo. A second tap turns them off.
+    Hands-on H3 (October 8, 2026; Hands-on): Shake it and the baubles swing on their hooks, then
+    settle.
   - Sound: Jingle Bells on a real glockenspiel with a shake of real sleigh bells, at the same tempo
     (Sound C, October 2, 2026).
 - **Patterned egg** (`patterned-egg`). Now: tap: Spin. Plan: keep.
   - Owner: Pretty cool; keep.
+  - Improved: Hands-on H3 (October 8, 2026; Hands-on): Flick it: it spins on its end and wobbles to
+    a stop.
   - Sound: Painted-shell tap.
 - **Paper lantern** (`paper-lantern`). Now: tap: Swing. Plan: keep.
   - Owner: Perfect; the physics are really good.
   - Improved: Fix7: a tap never pauses it; a tap mid-swing gives it another push, and the swing
-    grows smoothly (no jump).
+    grows smoothly (no jump). Hands-on H3 (October 8, 2026; Hands-on): Push it: it swings on its
+    string and settles.
   - Sound: Paper rustle.
 - **Diya** (`diya`). Now: tap: Light the diyas. Plan: keep.
   - Owner: Very underwhelming.
@@ -2860,12 +2893,16 @@ Proposals below are suggestions; the owner may change them.
     vibrate one after another, and rings of light pulse out of the soundhole. Music is Phase D.
     Fix6: smooth lacquered wood (the top, sunburst, back, ribs and neck placed evenly with no color
     noise or fine grain), a clean three-ring rosette, and thin strings drawn as clean lines.
+    Hands-on H3 (October 9, 2026; Hands-on): drag across the strings to pluck each one, with its own
+    open note (E, A, D, G, B, E), and it vibrates.
   - Sound: A real strummed chord progression (synth plucks).
 - **Snare drum** (`drum`). Now: tap: Play a roll. Plan: keep.
   - Owner: Could be more dramatic. Fast taps could play longer and faster rolls.
   - Effect: Sticks play a roll; fast repeated taps make faster, longer rolls.
   - Improved: C2: the sticks play a roll; taps within 0.9 s of each other step up through four
-    speeds and make the roll longer (up to 3 s after the last tap).
+    speeds and make the roll longer (up to 3 s after the last tap). Hands-on H3 (October 9, 2026;
+    Hands-on): pick up a stick and hit the drum: the head cracks and ripples, the rim clicks, the
+    shell knocks.
   - Sound: Snare hits with rattle.
 - **Xylophone** (`xylophone`). Now: tap: Play a scale. Plan: keep.
   - Owner: Incredible; basically perfect.
@@ -3464,7 +3501,8 @@ Proposals below are suggestions; the owner may change them.
     (a bead, a flat, a cove and a big bead, burnished on the raised parts); every frame plays a GIF
     or a video on a loop; the digital frame lists its photos in the Toy tab to reorder, and steps
     through them in order or at random. Books r4: a double-tap fills the screen with the photo, and
-    again steps back.
+    again steps back. Hands-on H3 (October 8, 2026; Hands-on): Push the frame: it swings on its nail
+    and settles.
   - Sound: A knock on the wall, the wire creaking on the nail, and a softer knock.
 - **Screen** (`screen`). Now: tap: Switch on or off. Plan: keep.
   - Owner: From the owner's notes of September 28, 2026 (lane Screens; labs only), and his review of
