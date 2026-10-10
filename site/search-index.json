@@ -3685,7 +3685,7 @@
     "u": "toys/chladni-cell/",
     "k": "toy",
     "s": "Studio",
-    "d": "Tap to switch on the sound: the beads gather on the cell's still surfaces. Tap again to swirl them.",
+    "d": "Tap to ring the cell, or play music (Toy tab): the music's pitch is scaled up to the cell's ultrasound modes.",
     "w": "sound in a box studio studio chladni 3d sound ultrasound standing wave acoustic radiation force beads nodal surface cube flask acoustophoresis physics chladni-cell",
     "i": "../assets/toys/chladni-cell/thumb.webp",
     "l": 1

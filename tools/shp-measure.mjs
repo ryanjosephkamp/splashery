@@ -16,6 +16,12 @@
 //   sharp  a 2x phone with the sharp kernel (?kernel=sharp)
 //   high   a 2x phone at the high tier (more splats in a kit toy)
 //   all    a 3x phone with every lever on (?sharp=1&kernel=sharp)
+//   b60 b140 b200 b280 b400   lane Kit lab's budget sweep: a 3x phone at the
+//          mid tier (ratio 3, today's default) with the splat budget set to
+//          60,000 … 400,000 in the page (PROFILES in src/generators.js),
+//          nothing else changed (docs/lab/BUDGETS.md)
+//   g0 g1  a 3x phone without and with the view-dependent gloss (?gloss=,
+//          labs only; docs/lab/GLOSS.md), for its frame time
 // For each toy it renders the still home view (or zoom: 0.4 is 2.5 times
 // closer) and measures, as tools/lab-kernels.mjs does (docs/lab/KERNELS.md):
 //   edge   the median 10–90% rise across the strongest edges, in CSS pixels
@@ -30,6 +36,11 @@
 //          from each splat's size and opacity, kit toys only): cullGL by
 //          minPixelSize (WebGL2 and WebGPU), cullGPU also by minContribution
 //          (WebGPU only).
+//   gaps   the share of the toy's closed silhouette (holes up to about two CSS
+//          pixels across filled in) that shows the background: pinholes
+//          and breaks in thin parts. Lower is more solid.
+//   area, xor   (budget sweep) the silhouette's area, and the pixels that
+//          differ from it, against the largest budget in the run, in %.
 // Writes <id>@<zoom>-<config>.png stills and results.json, and prints a row
 // per render.
 
@@ -57,7 +68,19 @@ const CONFIGS = {
   high: { dsf: 2, q: "", profile: "high" },
   all: { dsf: 3, q: "sharp=1&kernel=sharp" },
   aa: { dsf: 2, q: "aa=1" },
+  // Lane Kit lab: splat budgets at today's default (mid tier, ratio 3).
+  b60: { dsf: 3, q: "", budget: 60000 },
+  b140: { dsf: 3, q: "", budget: 140000 },
+  b200: { dsf: 3, q: "", budget: 200000 },
+  b280: { dsf: 3, q: "", budget: 280000 },
+  b400: { dsf: 3, q: "", budget: 400000 },
+  // Lane Kit lab: the view-dependent gloss (labs only), against the same phone without it.
+  g0: { dsf: 3, q: "" },
+  g1: { dsf: 3, q: "gloss=0.9,250" },
 };
+// A budget's most (a recipe's density can ask for more): the tiers' own
+// ratios, and 1.5 times for 400,000.
+const MAX_FOR = { 60000: 120000, 140000: 240000, 200000: 300000, 280000: 400000, 400000: 600000 };
 const configs = opt("configs", Object.keys(CONFIGS).join(",")).split(",");
 const renderer = opt("renderer", "webgl2");
 const shimmer = opt("shimmer", "1") !== "0";
@@ -178,6 +201,44 @@ function speckle(img, m) {
   return flat.length ? s / flat.length : NaN;
 }
 
+// Lane Kit lab: morphological closing of the mask (a square of radius r).
+function grow(m, w, h, r, val) {
+  const tmp = new Uint8Array(w * h);
+  const out = new Uint8Array(w * h);
+  for (let y = 0; y < h; y++)
+    for (let x = 0; x < w; x++) {
+      let hit = !val;
+      for (let d = -r; d <= r && hit !== val; d++) {
+        const xx = x + d;
+        if (xx >= 0 && xx < w && m[y * w + xx] === (val ? 1 : 0)) hit = val;
+      }
+      tmp[y * w + x] = hit ? 1 : 0;
+    }
+  for (let y = 0; y < h; y++)
+    for (let x = 0; x < w; x++) {
+      let hit = !val;
+      for (let d = -r; d <= r && hit !== val; d++) {
+        const yy = y + d;
+        if (yy >= 0 && yy < h && tmp[yy * w + x] === (val ? 1 : 0)) hit = val;
+      }
+      out[y * w + x] = hit ? 1 : 0;
+    }
+  return out;
+}
+
+// The share of the closed silhouette that shows the background.
+function gaps(m, w, h, r) {
+  const closed = grow(grow(m, w, h, r, true), w, h, r, false);
+  let area = 0;
+  let holes = 0;
+  for (let i = 0; i < w * h; i++)
+    if (closed[i]) {
+      area++;
+      if (!m[i]) holes++;
+    }
+  return area ? holes / area : NaN;
+}
+
 function highpass({ L, w, h }) {
   const out = new Float32Array(w * h);
   for (let y = 1; y < h - 1; y++)
@@ -191,8 +252,14 @@ function highpass({ L, w, h }) {
 
 // Runs in the page: renders one toy in one view and returns the still, the
 // turning frames and the cull estimate.
-async function renderToy({ id, zoom, shimmer }) {
+async function renderToy({ id, zoom, shimmer, budget }) {
   const { app, player } = window.__splashery;
+  if (budget) {
+    // Lane Kit lab: the budget sweep sets the tier's splat count in the page.
+    const { PROFILES } = await import("/src/generators.js");
+    PROFILES[player.profile].defaultCount = budget.count;
+    PROFILES[player.profile].maxCount = budget.max;
+  }
   await app.chooseToy(id);
   app.setLook({ background: "#ffffff" });
   player.opts.idleDelay = 1e9;
@@ -335,6 +402,7 @@ async function measureWorld(name, cfg, world) {
 }
 
 const results = [];
+const masks = new Map();
 for (const name of configs) {
   const worlds = specs.filter((s) => s.startsWith("world:"));
   for (const spec of worlds) {
@@ -378,7 +446,8 @@ for (const name of configs) {
     const zoom = Number(zoomText || 1);
     let r;
     try {
-      r = await page.evaluate(renderToy, { id, zoom, shimmer });
+      const budget = cfg.budget ? { count: cfg.budget, max: MAX_FOR[cfg.budget] } : null;
+      r = await page.evaluate(renderToy, { id, zoom, shimmer, budget });
     } catch (err) {
       console.error(`${id}@${zoom} ${name}: ${err.message}`);
       continue;
@@ -411,16 +480,37 @@ for (const name of configs) {
       shim: shimmer ? +(shim / Math.max(1, count)).toFixed(2) : null,
       ms: +r.ms.toFixed(1),
       splats: r.splats,
+      gaps: +(gaps(m, img.w, img.h, Math.round(r.ratio)) * 100).toFixed(2),
       cullGL: r.cullGL == null ? null : +(r.cullGL * 100).toFixed(1),
       cullGPU: r.cullGPU == null ? null : +(r.cullGPU * 100).toFixed(1),
       kernel: r.kernel,
       sharp: r.sharp,
       dev: r.dev,
     };
+    if (cfg.budget) masks.set(`${id}@${zoom}-${name}`, m);
     results.push(row);
     console.log(JSON.stringify(row));
   }
   await page.close();
+}
+// The budget sweep: each silhouette against the largest budget's.
+const budgets = configs.filter((c) => CONFIGS[c].budget);
+const top = budgets.sort((a, b) => CONFIGS[b].budget - CONFIGS[a].budget)[0];
+for (const row of results) {
+  if (!CONFIGS[row.config]?.budget) continue;
+  const a = masks.get(`${row.toy}@${row.zoom}-${row.config}`);
+  const b = masks.get(`${row.toy}@${row.zoom}-${top}`);
+  if (!a || !b || a.length !== b.length) continue;
+  let na = 0;
+  let nb = 0;
+  let x = 0;
+  for (let i = 0; i < a.length; i++) {
+    na += a[i];
+    nb += b[i];
+    x += a[i] ^ b[i];
+  }
+  row.area = +((na / Math.max(1, nb)) * 100).toFixed(2);
+  row.xor = +((x / Math.max(1, nb)) * 100).toFixed(2);
 }
 fs.writeFileSync(path.join(outDir, "results.json"), JSON.stringify(results, null, 2));
 await browser.close();

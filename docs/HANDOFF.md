@@ -4,7 +4,7 @@ Where Splashery stands, in short. The Operator session keeps this file; each lan
 in [handoff/](handoff/). The ground rules are in [CLAUDE.md](../CLAUDE.md); how the parallel lanes
 work is in [OPERATING.md](OPERATING.md).
 
-## Now (October 8, 2026, about 09:00 UTC)
+## Now (October 10, 2026, about 18:00 UTC)
 
 The Operator is `session_012GmKRUMZLir2nb27Bo8Cu2` (Opus 5.5). This section is current. The sections
 below it are history. The runbook is [OPERATOR.md](OPERATOR.md).
@@ -13,27 +13,38 @@ below it are history. The runbook is [OPERATOR.md](OPERATOR.md).
 high effort, and so do his Codex tasks. A session's effort is set in the Claude app; a message can't
 change it.
 
-**Main** is at `6201395c` (Ops #414). Merged October 8:
+**How main moves now:** the Operator merges in batches. `tools/op-merge.mjs` builds
+`claude/operator-merge-<topic>` from main and the lanes' READY heads, the full suite runs on it
+(`tools/suite.mjs --gl=llvmpipe --jobs=2 --recheck`), the lanes fix what the batch broke, and the
+batch merges as one PR.
 
-- #409: the Codex kit (#398): the Codex cloud setup script, SETUP.md and Codex tasks 22 to 31
-- #410: Math r2 (#392) and Space r4 (#394), labs
-- #412: Lattices and orbitals (#393), labs
-- #413: the Ops merge tool (#397): `tools/op-merge.mjs`, now the Operator's merge routine (the hand
-  procedure stays the fallback)
-- #414: Photo sharp view (#402 engine, #403), labs: Sharp picture is the default view in Photo to 3D
-  and Moving photo to 3D (the owner's call), with Splats one tap away
+**Main** is at batch 6 (#500). Merged October 9 and 10:
+
+- #457: Hands-on H1 and H5 (the Enigma, clothing, the handoffs) and Photo sharp view r3
+- #466: the October 9 walkthrough and manual reviews, triaged into lanes
+- #470: Hands-on H2 (Nature, Food) and H4 (Vehicles, Landmarks, Space, Weather and fire, Tiny
+  world), with their engine PRs
+- #482: Ops: the owner's answers of October 10 (the manual plan, the Kit lab row)
+- #485: Photoreal r3, Fix10 and Photo depth, with their engine PRs
+- #490: Hands-on H3 (Storybook, Music, Level 1, Pictures, Medieval, Holidays, Open me) and its
+  engine PRs
+- #496: QR r4 (no size flash, the halftone Picture QR, crisp barcodes) and part 2 (a scene as a QR
+  code, labs), Arcade r3, both parts of Manual r3 (with Codex task 33's program gallery), the crane
+  test's fix and six handoffs
+- #500: Kit lab (#484 engine, #486) and Live r9 (#488), all labs, plus three lanes' handoffs
 
 **Lanes running** (rows, sessions and files in WORKSTREAMS.md):
 
-- **Photo fidelity** (Opus): sharper splats in both photo toys; merging main after Photo sharp view.
-- **Suite speed** (Opus): measuring the full suite file by file, then cutting its wall time.
+- **Fix11** (Opus): the seven tests that fail on main and the five flaky ones.
 
-**Open with the owner:** whether the Sharp or Splats choice is saved in scenes (nothing is stored
-until he says); the Codex bake-off runs and the blind review.
+**Open with the owner:** the blind bake-off's second round (the owner runs GPT-6.1 Sol's eight
+entries in Codex; then all 40 entries get new codes on a new blind page, and the models stay hidden
+until he has marked them all); Codex task 32 (#479), held for his in-depth review.
 
-**Next for the Operator:** a small fix in `tools/op-merge.mjs` (it misses the Moving photo specs
-when `src/packs/moving-photo.js` changes); the next lanes from the kept list (Photoreal r3, the S4
-volume viewer, the X-ray car and photoreal landmarks, H1 to H5) at about six workers.
+**Next for the Operator:** merge Fix11 after its full suite; the photoreal landmarks lane only where
+a real, cleanly licensed capture exists (docs/audits/photoreal-media-sources-2026-10.md, "Landmarks
+shelf match and honest gaps"); the X-ray car stays on hold (no complete real capture). Pace: about
+three to four workers until the weekly reset.
 
 ## State of main (2026-10-02, history)
 

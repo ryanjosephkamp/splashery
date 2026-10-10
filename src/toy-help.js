@@ -1779,9 +1779,9 @@ export const TOY_HELP = {
   }, // Lane Live r8: the Chladni plate in three dimensions.
   "chladni-cell": {
     howTo:
-      "Tap to switch on the sound: the beads gather on the cell's still surfaces. Tap again to swirl them.",
+      "Tap to ring the cell, or play music (Toy tab): the music's pitch is scaled up to the cell's ultrasound modes.",
     about:
-      "Sand on a ringing plate gathers on the lines that stay still. The same happens in three dimensions, and labs use it to sort cells and tiny beads. Here a glass cell 1 cm across holds water and tiny plastic beads, and a transducer underneath fills it with ultrasound at one of the cell's resonances, so the sound stands still inside it. Each bead feels a gentle push, the acoustic radiation force, toward the places where the pressure hardly changes: the mode's nodal surfaces, the 3D cousins of a plate's nodal lines.\n\nThe toy works out that push from the Gor'kov potential for polystyrene beads in water (H. Bruus, \"Acoustofluidics 7\", Lab Chip, 2012) and moves every bead down it. The modes ring at about 100 to 370 kHz, far too high to hear, so you hear each one eight octaves down. A \"mixed\" mode blends modes that ring at the same pitch. Gravity is left out: beads this small sink only micrometers a second.",
+      "Sand on a ringing plate gathers on the lines that stay still. The same happens in 3D; labs use it to sort cells. Here a glass cell 1 cm across holds water and plastic beads, and a transducer underneath fills it with ultrasound at one of its resonances. Each bead is pushed by the acoustic radiation force toward the mode's nodal surfaces.\n\nThe toy works out that push from the Gor'kov potential for polystyrene in water (H. Bruus, \"Acoustofluidics 7\", Lab Chip, 2012). The modes ring at about 75 to 370 kHz, so you hear each one eight octaves down. Tap to ring the chosen mode; tap again to swirl the water.\n\nOr play a song or sing: the music's pitch is scaled up to the cell's ultrasound modes, moved by octaves into the cell's range and made 256 times higher. The nearest mode rings, keeping the cube's real spacing, √(l² + m² + n²). A held note settles the beads, a new note moves them on, and silence leaves them. Files stay on your device.",
   },
 
   // Lane Data and climate.
