@@ -113,6 +113,19 @@ replace the prefix and lane record with yours).
 - tests/qrc-picture.spec.mjs (lane QR craft's) and qr4-craft now check a center's bit by its gray in
   the color style.
 
+## Camera check (the Operator's ask of October 10, 2026)
+
+The real stage at a phone camera's resolution (390 × 844 at device scale 3, about 15 pixels a
+module), front on and tilted (yaw and pitch of 0.3/0.15, −0.35/−0.2, and 0.5/0.1 radians), sharp and
+with a 3-pixel blur, read with zxing-cpp and jsQR (`.cache/qr4/camera.mjs`, not in the repo):
+
+- Picture QR, the default (Felt farm, color): zxing-cpp reads 7 of 8 views; jsQR 3 of 8.
+- Picture QR, Felt farm, black and white: zxing-cpp 7 of 8; jsQR 3 of 8.
+- The QR code toy (Classic), for comparison: zxing-cpp 8 of 8; jsQR 4 of 8.
+- The one view zxing-cpp misses on both Picture QR styles: tilted down (−0.35, −0.2) and blurred.
+  jsQR misses even plain codes at an angle, so it is the weaker stand-in for a phone. At the stage's
+  own 390-pixel width (about 4 pixels a module) Picture QR reads front on only.
+
 ## Notes
 
 - Picture QR's nudge reads each module as a camera would: the module's 3 × 3 cells weighted by a
