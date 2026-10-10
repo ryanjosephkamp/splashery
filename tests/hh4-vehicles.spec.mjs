@@ -18,14 +18,6 @@ async function open(page, id) {
   }, id);
   await page.waitForTimeout(500);
   await page.click("#hands-toggle");
-  // The view holds still (Fix11): the drags below are worked out in screen points once, and the
-  // turntable, which starts after 2.5 s without a touch, turned the toy under them on a busy
-  // machine (the saucer's cow came down at 0.944 from the middle, not past 0.95).
-  await page.evaluate(() => {
-    const { camera } = window.__splashery.player;
-    camera.turntable = false;
-    camera.setState(camera.getState(), { snap: true });
-  });
   await tick(page, 5);
 }
 
