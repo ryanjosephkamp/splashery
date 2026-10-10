@@ -451,7 +451,7 @@ const PICTURE = {
     { key: "center", label: "Center dot", type: "select", default: "small", choices: CENTERS.map((c) => ({ id: c.id, label: c.label })) }, // prettier-ignore
     { key: "level", label: "Error correction", type: "select", default: "H", choices: LEVELS.map((l) => ({ id: l, label: { L: "L: 7% can be lost", M: "M: 15%", Q: "Q: 25%", H: "H: 30%" }[l] })) }, // prettier-ignore
     { key: "style", label: "Picture style", type: "select", default: "color", choices: PIC_STYLES.map((s) => ({ id: s.id, label: s.label })) }, // prettier-ignore
-    { key: "size", label: "Code size", type: "select", default: "fit", choices: SIZES_UP.map((s) => ({ id: s.id, label: s.label })) }, // prettier-ignore
+    { key: "size", label: "Code size", type: "select", default: "more", choices: SIZES_UP.map((s) => ({ id: s.id, label: s.label })) }, // prettier-ignore
   ],
   controls: [{ key: "turn", label: "Turn the tiles over", type: "pulse", ease: 3.6 }],
   action: {
@@ -525,14 +525,18 @@ const PICTURE = {
     Promise.resolve().then(() => PIC.panel?.refresh());
     scheduleCheck(700);
   },
-  credits: SAMPLES.map((s) => ({
-    label: "Picture QR",
-    title: `${s.label} (a sample picture)`,
-    source: s.page,
-    author: s.author,
-    license: "CC0 1.0",
-    licenseUrl: "https://creativecommons.org/publicdomain/zero/1.0/",
-  })),
+  credits: SAMPLES.map((s) =>
+    s.ai
+      ? { label: "Picture QR", title: `${s.label}: an AI-made sample picture (${s.prompt})`, source: s.page, author: s.author, license: "AI-made by the owner" } // prettier-ignore
+      : {
+          label: "Picture QR",
+          title: `${s.label} (a sample picture)`,
+          source: s.page,
+          author: s.author,
+          license: "CC0 1.0",
+          licenseUrl: "https://creativecommons.org/publicdomain/zero/1.0/",
+        },
+  ),
 };
 
 // ======================================================================================

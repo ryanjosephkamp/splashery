@@ -135,6 +135,10 @@ export function plainModules(code) {
 // LIGHT.
 const DARK = 0.25;
 const LIGHT = 0.78;
+// A forced cell's gray in the color style: as dark as the ink, as light as
+// the paper nearly.
+const FORCED_DARK = 0.1;
+const FORCED_LIGHT = 0.9;
 // Shifts a color's gray to `to` by adding the same amount to each channel
 // (which keeps its colorfulness, where scaling toward black or white washes
 // it out), then darkens or lightens what the clamping left.
@@ -225,6 +229,18 @@ export function weave(code, pic, o = {}) {
     }
   const cells = new Float32Array(G * G * 3);
   const target = new Float32Array(G * G);
+  // A forced cell's color. Lane QR r4 (the owner's note of October 9, 2026,
+  // "a little bit easier to see the image"): in the color style a middle or
+  // nudged cell keeps the picture's own hue, made as dark as the code's ink
+  // or as light as its paper, so the dots carry the picture's color too; the
+  // plain patterns stay ink and paper.
+  const forcedColor = (j) => {
+    const m = Math.floor(Math.floor(j / G) / k) * N + Math.floor((j % G) / k);
+    const ink = fdark[j] === 1;
+    if (bw || !src || plain[m]) return ink ? FG : BG;
+    const p = [src[j * 3], src[j * 3 + 1], src[j * 3 + 2]];
+    return shiftTo(p, ink ? FORCED_DARK : FORCED_LIGHT);
+  };
   if (src) for (let i = 0; i < G * G; i++) target[i] = gray([src[i * 3], src[i * 3 + 1], src[i * 3 + 2]]); // prettier-ignore
   const dither = () => {
     const err = new Float32Array(G * G);
@@ -236,7 +252,7 @@ export function weave(code, pic, o = {}) {
         const want = Math.min(1.5, Math.max(-0.5, target[j] + err[j]));
         const q = j * 3;
         let col;
-        if (forced[j]) col = fdark[j] ? FG : BG;
+        if (forced[j]) col = forcedColor(j);
         else {
           const ink = want < 0.5;
           if (bw) col = ink ? FG : BG;
@@ -330,16 +346,16 @@ export function weave(code, pic, o = {}) {
         const short = () => (dark ? seen - (thr[m] - margin) : thr[m] + margin - seen);
         if (short() <= 0) continue;
         // The cells that move the reading most for the least change in look.
-        const to = dark ? gray(FG) : gray(BG);
+        const to = dark ? FORCED_DARK : FORCED_LIGHT;
         const score = (p) => (p.w * Math.abs(p.g - to)) / (0.05 + p.off);
         list.sort((p, q) => score(q) - score(p));
         for (const it of list) {
           if (short() <= 0) break;
-          seen += it.w * (to - it.g);
           forced[it.j] = 2;
           fdark[it.j] = dark ? 1 : 0;
           const q = it.j * 3;
-          const cc = dark ? FG : BG;
+          const cc = forcedColor(it.j);
+          seen += it.w * (gray(cc) - it.g);
           cells[q] = cc[0];
           cells[q + 1] = cc[1];
           cells[q + 2] = cc[2];
