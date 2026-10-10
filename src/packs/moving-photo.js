@@ -25,8 +25,8 @@
 //     shapes, not edges), so it is sampled smoothly up to the frame's size
 //     and its edges are cut clean (sharpenEdges); the depth is worked out
 //     on at most DEPTH_FRAMES[profile] frames, evenly spread, and the frames
-//     between blend their neighbors' (r6; the colors carry the motion, and
-//     the wait stays about what it was);
+//     between use four-answer cubic interpolation, guided by their colors;
+//     alignment and a symmetric temporal filter steady the model's guesses;
 //   - a video plays with its own sound, and its frames follow that sound's
 //     clock (pause and scrub with them).
 //   - each frame's colors are sharpened a little (SHARPEN), to make up for
@@ -37,6 +37,14 @@
 // over the clip and moves from there by a signed offset (relief axis 3), so
 // the splats sort the way they show (the mirror's flashing, fixed in r3).
 
+import {
+  alignDepth,
+  depthRange,
+  filterDepths,
+  stableEdges,
+  streamDepth,
+  cubicDepth,
+} from "../live/clip-stabilize.js";
 import { songTransport } from "./song-record.js";
 import { FILL, reliefScale } from "./photo-3d-core.js";
 import { sharpEntry, sharpClip, sharpDrive } from "./photo-sharp.js"; // lane Photo sharp view
@@ -164,57 +172,52 @@ const modelSize = (w, h, side = DEPTH_SIDE) => {
 
 // ---- Depth -------------------------------------------------------------------------
 
-// A frame's depth as 0 (far) .. 1 (near) at the clip's size: the model's
-// output scaled by its 2nd and 98th percentiles, those eased across
-// neighboring frames so the depth doesn't pump from frame to frame.
-// Lane Photo fidelity r2: with the frames' colors (`frames`, RGBA at w by h),
-// the depth is enlarged edge-aware (guidedDepth). Measured against the
-// model's own depth at 518 (tools/phf-depth-edges.mjs), it moves the edges
-// too little to be worth its time, so the toy doesn't use it; the tool does.
-export function normalizeDepths(raw, w, h, keepFlat = false, frames = null) {
-  const ranges = raw.map((d) => {
-    const s = Float32Array.from(d.d).sort();
-    return [s[Math.floor(s.length * 0.02)], s[Math.floor(s.length * 0.98)]];
+// Align model answers on still colors before applying one range and one
+// relief scale to the whole clip. Filtering is symmetric, so it adds no lag.
+export function normalizeDepths(raw, w, h, keepFlat = false, frames = null, guide = !!frames) {
+  const colors = frames?.map((f, i) => shrink(f.data, w, h, raw[i].w, raw[i].h));
+  let previous = null;
+  const aligned = raw.map((d, i) => {
+    const values = raw.aligned ? d.d : alignDepth(d.d, previous, colors?.[i], colors?.[i - 1]);
+    previous = values;
+    return { ...d, d: values };
   });
-  return raw.map((d, i) => {
-    let lo = 0;
-    let hi = 0;
-    let n = 0;
-    for (let j = Math.max(0, i - 2); j <= Math.min(raw.length - 1, i + 2); j++) {
-      lo += ranges[j][0];
-      hi += ranges[j][1];
-      n++;
-    }
-    lo /= n;
-    hi /= n;
-    const span = Math.max(1e-6, hi - lo);
-    const f = keepFlat ? reliefScale(lo, hi) : 1; // lane Photo fidelity: a flat picture stays flat
-    if (frames?.[i]) {
-      const dn = new Float32Array(d.w * d.h);
+  const [lo, hi] = depthRange(aligned.map((d) => d.d));
+  const span = Math.max(1e-6, hi - lo);
+  const scale = keepFlat ? reliefScale(lo, hi) : 1;
+  const small = filterDepths(
+    aligned.map((d) => {
+      const dn = new Float32Array(d.d.length);
       for (let k = 0; k < dn.length; k++)
-        dn[k] = 0.5 + (Math.max(0, Math.min(1, (d.d[k] - lo) / span)) - 0.5) * f;
-      return guidedDepth(dn, d.w, d.h, frames[i].data, w, h);
-    }
+        dn[k] = 0.5 + (Math.max(0, Math.min(1, (d.d[k] - lo) / span)) - 0.5) * scale;
+      return dn;
+    }),
+    colors,
+  );
+  const normalized = aligned.map((d, i) => {
+    const dn = small[i];
+    // Use the same spatial filter on worked-out and interpolated answers;
+    // alternating bilinear and guided sampling would itself introduce jitter.
+    if (guide && frames?.[i]) return guidedDepth(dn, d.w, d.h, frames[i].data, w, h);
     const out = new Float32Array(w * h);
-    for (let y = 0; y < h; y++)
+    for (let y = 0; y < h; y++) {
+      const fy = Math.max(0, Math.min(d.h - 1, ((y + 0.5) / h) * d.h - 0.5));
+      const y0 = Math.floor(fy),
+        y1 = Math.min(d.h - 1, y0 + 1),
+        ay = fy - y0;
       for (let x = 0; x < w; x++) {
-        // Bilinear (r5): the depth is smaller than the frame; nearest
-        // sampling left it in blocks.
         const fx = Math.max(0, Math.min(d.w - 1, ((x + 0.5) / w) * d.w - 0.5));
-        const fy = Math.max(0, Math.min(d.h - 1, ((y + 0.5) / h) * d.h - 0.5));
-        const x0 = Math.floor(fx);
-        const y0 = Math.floor(fy);
-        const x1 = Math.min(d.w - 1, x0 + 1);
-        const y1 = Math.min(d.h - 1, y0 + 1);
-        const ax = fx - x0;
-        const ay = fy - y0;
-        const top = d.d[y0 * d.w + x0] * (1 - ax) + d.d[y0 * d.w + x1] * ax;
-        const bot = d.d[y1 * d.w + x0] * (1 - ax) + d.d[y1 * d.w + x1] * ax;
-        const v = top * (1 - ay) + bot * ay;
-        out[y * w + x] = 0.5 + (Math.max(0, Math.min(1, (v - lo) / span)) - 0.5) * f;
+        const x0 = Math.floor(fx),
+          x1 = Math.min(d.w - 1, x0 + 1),
+          ax = fx - x0;
+        const top = dn[y0 * d.w + x0] * (1 - ax) + dn[y0 * d.w + x1] * ax;
+        const bot = dn[y1 * d.w + x0] * (1 - ax) + dn[y1 * d.w + x1] * ax;
+        out[y * w + x] = top * (1 - ay) + bot * ay;
       }
+    }
     return out;
   });
+  return normalized;
 }
 
 // Lane Photo fidelity r2: the depth (dw by dh, 0..1) enlarged to the frame (w by h) with the
@@ -362,19 +365,43 @@ export async function depthOf(frames, w, h, onStatus, side = DEPTH_SIDE) {
   } finally {
     worker.terminate();
   }
-  const done2 = out.map((d) => !!d);
-  for (let i = 0; i < out.length; i++) {
-    if (done2[i]) continue;
-    let ia = i - 1;
-    while (!done2[ia]) ia--;
-    let ib = i + 1;
-    while (!done2[ib]) ib++;
-    const a = out[ia];
-    const b = out[ib];
-    const f = (i - ia) / (ib - ia);
-    const d = new Float32Array(a.d.length);
-    for (let j = 0; j < d.length; j++) d[j] = a.d[j] * (1 - f) + b.d[j] * f;
-    out[i] = { w: a.w, h: a.h, d };
+  const keys = out.flatMap((d, i) => (d ? [i] : []));
+  let previous = null,
+    previousColors = null;
+  for (const i of keys) {
+    const colors = shrink(frames[i].data, w, h, out[i].w, out[i].h);
+    out[i].d = alignDepth(out[i].d, previous, colors, previousColors);
+    previous = out[i].d;
+    previousColors = colors;
+  }
+  out.aligned = true;
+  out.interpolated = frames.map(() => false);
+  const times = [];
+  let clock = 0;
+  for (const frame of frames) {
+    times.push(clock);
+    clock += Math.max(1, frame.delay || 1);
+  }
+  for (let k = 0; k + 1 < keys.length; k++) {
+    const ia = keys[k],
+      ib = keys[k + 1];
+    const ip = keys[Math.max(0, k - 1)],
+      next = keys[Math.min(keys.length - 1, k + 2)];
+    const a = out[ip],
+      b = out[ia];
+    const c = out[ib],
+      d = out[next];
+    const before = times[ia] - times[ip],
+      span = times[ib] - times[ia],
+      after = times[next] - times[ib];
+    for (let i = ia + 1; i < ib; i++) {
+      const f = (times[i] - times[ia]) / span;
+      const values = new Float32Array(b.d.length);
+      for (let j = 0; j < values.length; j++)
+        values[j] = cubicDepth(a.d[j], b.d[j], c.d[j], d.d[j], f, before, span, after);
+      out[i] = { w: b.w, h: b.h, d: values };
+      out.interpolated[i] = true;
+    }
   }
   return out;
 }
@@ -384,33 +411,20 @@ export async function depthOf(frames, w, h, onStatus, side = DEPTH_SIDE) {
 // Where the depth jumps (a near bunny before a far meadow), the model's
 // depth, smaller than the frame and blurred, ramps across a few pixels, and
 // those pixels would hang as dots between the two. Each pixel whose 5 by 5
-// neighborhood spans more than EDGE goes with the nearer or farther side,
-// whichever it is closer to, so the edge is a clean cut.
-const EDGE = 0.15;
-export function sharpenEdges(d, w, h) {
-  const out = new Float32Array(d.length);
-  for (let y = 0; y < h; y++)
-    for (let x = 0; x < w; x++) {
-      let lo = Infinity;
-      let hi = -Infinity;
-      for (let j = Math.max(0, y - 2); j <= Math.min(h - 1, y + 2); j++)
-        for (let i = Math.max(0, x - 2); i <= Math.min(w - 1, x + 2); i++) {
-          const v = d[j * w + i];
-          if (v < lo) lo = v;
-          if (v > hi) hi = v;
-        }
-      const v = d[y * w + x];
-      out[y * w + x] = hi - lo > EDGE ? (v - lo < hi - v ? lo : hi) : v;
-    }
-  return out;
+// neighborhood spans more than 0.15 goes with the nearer or farther side,
+// picked by color when possible. Still pixels hold a contrary side for
+// three consecutive frames before accepting it.
+export function sharpenEdges(d, w, h, colors = null, state = null) {
+  return stableEdges(d, w, h, colors, state);
 }
 
 export function makeClip(name, w, h, frames, near) {
   // r6: each frame's nearness kept as bytes (0..255; a quarter of the
   // memory, for a clip at its own frame rate).
   const mean = new Float32Array(w * h);
-  near = near.map((d) => {
-    const e = sharpenEdges(d, w, h);
+  const edgeState = {};
+  near = near.map((d, f) => {
+    const e = sharpenEdges(d, w, h, frames[f].data, edgeState);
     const q = new Uint8Array(e.length);
     for (let i = 0; i < e.length; i++) {
       q[i] = Math.round(255 * e[i]);
@@ -475,7 +489,7 @@ export async function openClip(file, name, onStatus) {
   // full size is what the splats show (photoSource); the frames above are the depth's and the
   // plain splats' colors.
   const copy = isGif ? null : await keepCopy(file);
-  return { ...makeClip(name, w, h, frames, normalizeDepths(raw, w, h, true)), audio, source, ...copy }; // prettier-ignore
+  return { ...makeClip(name, w, h, frames, normalizeDepths(raw, w, h, true, frames)), audio, source, ...copy }; // prettier-ignore
 }
 
 // A video's first MAX_SECONDS, at clipFps() frames a second, each drawn
@@ -790,9 +804,12 @@ function longDepth(clip, file, onStatus) {
           };
           worker.onerror = () =>
             reject(new Error("The depth model couldn't start in this browser."));
-          worker.postMessage({ type: "frame", id: i, w: D.ms.w, h: D.ms.h, data }, [data.buffer]);
+          const sent = data.slice();
+          worker.postMessage({ type: "frame", id: i, w: D.ms.w, h: D.ms.h, data: sent }, [
+            sent.buffer,
+          ]);
         });
-        D.frames[i] = depthBytes(D, m);
+        D.frames[i] = depthBytes(D, m, data);
         D.done = i + 1;
         D.ready = i + 1;
         if (i + 1 === Math.min(D.n, LONG_FIRST)) firstDone();
@@ -820,34 +837,27 @@ function longDepth(clip, file, onStatus) {
 
 const clock = (s) => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, "0")}`;
 
-// A depth answer as bytes (0 far .. 255 near) at its own size: scaled by its
-// 2nd and 98th percentiles, those eased from picture to picture (so the
-// depth doesn't pump), and its edges cut clean (sharpenEdges).
-function depthBytes(D, m) {
-  const s = Float32Array.from(m.d).sort();
-  const lo = s[Math.floor(s.length * 0.02)];
-  const hi = s[Math.floor(s.length * 0.98)];
-  D.lo = D.lo === null ? lo : D.lo + (lo - D.lo) * 0.3;
-  D.hi = D.hi === null ? hi : D.hi + (hi - D.hi) * 0.3;
-  const span = Math.max(1e-6, D.hi - D.lo);
-  const f = reliefScale(D.lo, D.hi); // lane Photo fidelity: a flat picture stays flat
-  // (The model's own size can differ a little from what was asked.)
-  const out = new Float32Array(D.ms.w * D.ms.h);
+// Long-video answers use the same alignment and color-guided edge hold,
+// keeping only the previous raw map, colors, and filter state beyond the byte cache.
+function depthBytes(D, m, colors) {
+  const raw = new Float32Array(D.ms.w * D.ms.h);
   for (let y = 0; y < D.ms.h; y++)
     for (let x = 0; x < D.ms.w; x++) {
       const sx = Math.min(m.w - 1, Math.floor(((x + 0.5) / D.ms.w) * m.w));
       const sy = Math.min(m.h - 1, Math.floor(((y + 0.5) / D.ms.h) * m.h));
-      out[y * D.ms.w + x] = 0.5 + (Math.max(0, Math.min(1, (m.d[sy * m.w + sx] - D.lo) / span)) - 0.5) * f; // prettier-ignore
+      raw[y * D.ms.w + x] = m.d[sy * m.w + sx];
     }
-  const e = sharpenEdges(out, D.ms.w, D.ms.h);
+  const state = (D.stability ||= {});
+  const smooth = streamDepth(state, raw, colors, reliefScale);
+  const e = stableEdges(smooth, D.ms.w, D.ms.h, colors, (state.edges ||= {}));
   const b = new Uint8Array(e.length);
   for (let i = 0; i < e.length; i++) b[i] = Math.round(255 * e[i]);
   return b;
 }
 
 // The nearness (0..1) at the picture's size (w by h) into `out`: depth
-// pictures a and b blended by f (0 a .. 1 b), each the last one worked out
-// at or before it.
+// pictures a and b blended by f (0 a .. 1 b), with adjacent answers setting
+// their cubic tangents. Missing answers hold the last available depth.
 function nearAt(D, a, b, f, w, h, out) {
   const back = (i) => {
     for (let j = Math.min(i, D.n - 1); j >= 0; j--) if (D.frames[j]) return D.frames[j];
@@ -856,7 +866,15 @@ function nearAt(D, a, b, f, w, h, out) {
   const A = back(a);
   const B = back(b) || A;
   if (!A) return out.fill(0.5);
+  const P = back(a - 1) || A;
+  const N = back(b + 1) || B;
   const { w: dw, h: dh } = D.ms;
+  const blend = (D.blend ||= new Float32Array(dw * dh));
+  for (let i = 0; i < blend.length; i++)
+    blend[i] =
+      B === A || f <= 0
+        ? A[i] / 255
+        : cubicDepth(P[i] / 255, A[i] / 255, B[i] / 255, N[i] / 255, f);
   for (let y = 0; y < h; y++) {
     const fy = Math.max(0, Math.min(dh - 1, ((y + 0.5) / h) * dh - 0.5));
     const y0 = Math.floor(fy);
@@ -867,8 +885,8 @@ function nearAt(D, a, b, f, w, h, out) {
       const x0 = Math.floor(fx);
       const x1 = Math.min(dw - 1, x0 + 1);
       const ax = fx - x0;
-      const at = (F) => ((F[y0 * dw + x0] * (1 - ax) + F[y0 * dw + x1] * ax) * (1 - ay) + (F[y1 * dw + x0] * (1 - ax) + F[y1 * dw + x1] * ax) * ay) / 255; // prettier-ignore
-      out[y * w + x] = B === A || f <= 0 ? at(A) : at(A) * (1 - f) + at(B) * f;
+      const at = (F) => ((F[y0 * dw + x0] * (1 - ax) + F[y0 * dw + x1] * ax) * (1 - ay) + (F[y1 * dw + x0] * (1 - ax) + F[y1 * dw + x1] * ax) * ay); // prettier-ignore
+      out[y * w + x] = at(blend);
     }
   }
   return out;
@@ -1294,7 +1312,13 @@ export async function loadSample(id = "sample") {
   const h = Math.round((s.h * w) / s.w);
   const frames = sheetFrames(sheets, w, s);
   const raw = unpackDepths(dep, unpackDepth);
-  const clip = makeClip(s.name || s.title, w, h, frames, normalizeDepths(raw, w, h));
+  const clip = makeClip(
+    s.name || s.title,
+    w,
+    h,
+    frames,
+    normalizeDepths(raw, w, h, false, frames, false),
+  );
   clip.sample = s.id;
   clip.audio = typeof Audio === "undefined" || s.gif ? null : await soundOf(new URL(sampleSound(s), import.meta.url).href, false); // prettier-ignore
   MOVING.samples.set(s.id, clip);
