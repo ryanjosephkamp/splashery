@@ -190,11 +190,28 @@ clips within about six hours.
 
 ## State
 
-READY (October 9, 2026, 21:35 UTC; Opus 5.5 at high effort): every card on PR #419 is settled. The
-owner's call of October 9 (via the Operator): the desk globe and the photo orange ship as they are,
-at their captures' limit (the globe's blurry spots and the orange's soft outline are in the captures
-themselves). #419 joins merge batch 3, after batch 2 (#470) lands; then this lane merges main, runs
-its tests and taps, and pushes.
+MERGED (October 10, 2026; Opus 5.5 at high effort). PR #419 landed in main with merge batch 3 (#485,
+at 6332bcf5), together with this lane's batch 3 fixes (8b61f857): the BMX rig back within the
+12-region limit, the photo cactus's single soft plucked note (the sound lint keeps tunes to the
+music shelf), and the fluorite's About text at 60 words or more.
+
+What's left: two cards on Effect review page 2 are not marked good, and the owner said on October 9
+to ship both as they are, at their captures' limit:
+
+- `pr3-fx-desk-globe-r2`: the desk globe's ball keeps the capture's own blurry spots (the ball's
+  surface is built from those soft splats; dropping them shredded it).
+- `pr3-fx-orange-photo`: the photo orange keeps its soft outline (its dimpled skin is itself the
+  faint outer shell; each cleanup took the skin with it).
+
+Open threads for a later round (none blocks anything): sharper baked scans need the full Sketchfab
+originals (the Operator is asking the owner); the puffin's real call; the crystal's base and the
+cave lioness's neck; tiny lettering on the BMX's saddle and tires.
+
+Earlier: READY (October 9, 2026, 21:35 UTC; Opus 5.5 at high effort): every card on PR #419 is
+settled. The owner's call of October 9 (via the Operator): the desk globe and the photo orange ship
+as they are, at their captures' limit (the globe's blurry spots and the orange's soft outline are in
+the captures themselves). #419 joins merge batch 3, after batch 2 (#470) lands; then this lane
+merges main, runs its tests and taps, and pushes.
 
 Earlier: READY (October 9, 2026, about 17:30 UTC; Opus 5.5 at high effort): the owner's second marks
 (six `-r2` cards). Pushed: the knight's base hides the bits of hoof just over its floor (card
