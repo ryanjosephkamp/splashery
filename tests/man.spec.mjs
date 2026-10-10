@@ -62,7 +62,7 @@ test.describe("the splat equation reader", () => {
     fails(() => readExpr("a*u"), /“a” can't be used here\. Use u, v and t\./);
     fails(() => readExpr("q"), /I don't know “q”\. Try something like cos\(u\)·sin\(v\)\./);
     fails(() => readExpr("sin(u"), /check the brackets/);
-    fails(() => readExpr("u".repeat(121)), /over 120 characters/);
+    fails(() => readExpr("u".repeat(241)), /over 240 characters/); // lane Kit lab: 240 since October 2026
   });
 
   test("statements: one or many, each field its own message", () => {
