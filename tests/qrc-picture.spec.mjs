@@ -16,6 +16,7 @@ import {
   measure,
   closestScanning,
   plainModules,
+  gray,
   FG,
   BG,
 } from "../src/qr-craft/picture.js";
@@ -59,6 +60,14 @@ test.describe("Picture QR: the layout", () => {
               const mid = u >= lo && u < lo + c && v >= lo && v < lo + c;
               if (!mid && !plain[r * N + col]) continue;
               const q = ((r * k + v) * G + col * k + u) * 3;
+              // Lane QR r4: in the color style a center keeps the picture's
+              // hue at the ink's or the paper's darkness (its bit); the plain
+              // patterns are ink and paper exactly.
+              if (!plain[r * N + col]) {
+                const g = gray([cells[q], cells[q + 1], cells[q + 2]]);
+                if (code.dark[r * N + col] ? g > 0.101 : g < 0.899) wrong++;
+                continue;
+              }
               for (let ch = 0; ch < 3; ch++) if (Math.abs(cells[q + ch] - want[ch]) > 1e-5) wrong++;
             }
         }

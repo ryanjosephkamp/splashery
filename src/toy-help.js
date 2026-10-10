@@ -1822,7 +1822,7 @@ export const TOY_HELP = {
   "qr-picture": {
     howTo: "Pick a picture or open your own, then tap to turn the tiles over.",
     about:
-      "A QR code reader decides each module from a sample at its center, so the rest of a module can carry a picture. Here every module keeps its bit in a dot at its middle, and the picture fills the rest, darkened in dark modules and lightened in light ones. The eyes, the timing lines and the format information stay plain, so a reader still finds the code.\n\nThe toy measures the contrast and reads its own code at phone size and smaller. If it won't scan, Make it scan finds the closest version that does: more contrast, a bigger center dot or a higher error correction level. Your picture never leaves your device.",
+      "A QR code reader decides each module from a sample at its center, so the rest of a module can carry a picture. Here every module keeps its bit in a dot at its middle, and the rest is a halftone of the picture: small dark and light dots, spread by error diffusion so they average out to the picture's tones. Only where a module would read wrong do a few of its dots take its color. The eyes, the timing lines, and the format information stay plain, so a reader still finds the code.\n\nThe toy picks the mask that fits the picture best, reads its own code at phone size and smaller, and nudges a few more dots until it scans. A bigger code size shows more detail. If it still won't scan, Make it scan finds the closest version that does: more contrast, a bigger center dot, or a higher error correction level. Your picture never leaves your device.",
   },
   "qr-build": {
     howTo: "Pick dominoes, marbles or tiles in the Toy tab, then tap to build the code.",

@@ -3792,11 +3792,14 @@ Proposals below are suggestions; the owner may change them.
 - **Picture QR** (`qr-picture`). Now: tap: Turn the tiles over. Plan: new effect (E6).
   - Owner: The owner's Push Plan pick Q5 ("a hard yes, or a strong yes"), lane QR craft, October
     6, 2026.
-  - Effect: Picture QR: a photo woven into a QR code as a halftone (each module's center keeps its
-    bit, the rest carries the picture). A tap turns every module's tile over in a wave out from the
-    tap; its back is the plain code, and it comes round to the picture again (3.6 s). The toy
-    measures the contrast and reads its code with jsQR at phone size and smaller; Make it scan finds
-    the closest version that scans; Save a PNG.
+  - Effect: Picture QR: a photo woven into a QR code as a real halftone (lane QR r4: 3 x 3 cells a
+    module, the middle keeps the bit; error diffusion over the whole grid, the forced cells passing
+    their error on; a nudge only where a module would misread; the mask that fits the picture; a
+    bigger code for more detail; a color halftone in the color style; one seamless grid of splats).
+    A tap turns every module's tile over in a wave out from the tap; its back is the plain code, and
+    it comes round to the picture again (3.6 s). The toy measures the contrast and reads its code
+    with jsQR at phone size and smaller; Make it scan finds the closest version that scans; Save a
+    PNG.
   - Sound: A soft breath with a run of light wooden clicks as the tiles turn.
 - **QR from real things** (`qr-build`). Now: tap: Build it. Plan: new effect (E6).
   - Owner: The owner's Push Plan pick Q13 ("Absolutely. This is really, really cool"), lane QR
@@ -3812,9 +3815,10 @@ Proposals below are suggestions; the owner may change them.
   - Owner: The owner's Push Plan pick Q12 ("I like the other barcodes idea"), lane QR craft, October
     6, 2026.
   - Effect: Other barcodes: Code 128, EAN-13 and UPC-A (our own code, with check digits and quiet
-    zones) and Data Matrix and Aztec (zxing-js). A tap sweeps a scanner's red line across the
-    symbol; each bar (or column of modules) lifts toward you as it passes and settles back (2.6 s).
-    The toy reads its own picture back with zxing-js.
+    zones; Code 128's text on the label, lane QR r4) and Data Matrix and Aztec (zxing-js; crisp,
+    seamless modules as the QR code toy draws them, lane QR r4). A tap sweeps a scanner's red line
+    across the symbol; each bar (or column of modules) lifts toward you as it passes and settles
+    back (2.6 s). The toy reads its own picture back with zxing-js.
   - Sound: A soft breath as the line sweeps, then a gentle low beep.
 - **Photo to 3D** (`photo-3d`). Now: tap: Raise or flatten the depth. Plan: keep.
   - Owner: Approved on the Splashery Universe page ("photo yes", September 29, 2026; lane Photo to

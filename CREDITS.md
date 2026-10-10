@@ -1644,3 +1644,7 @@ to the owner, who made them; no third-party work is in them. Checked October 7, 
 - Giant gears (D31): `assets/toys/photo-3d/ai/gears.jpg`.
 - Chess board (D40): `assets/toys/photo-3d/ai/chess.jpg`.
 - City of books (D29): `assets/toys/photo-3d/ai/book-city.jpg`.
+
+Picture QR (lane QR r4, October 10, 2026) also offers four of them as its sample pictures, labeled
+AI-made in its picker and its credit: Felt farm (D37), Glass wave (D38), Mushrooms (D27), and Stone
+arch (D17).
