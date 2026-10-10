@@ -771,9 +771,10 @@ export const TOY_HELP = {
       "A sapphire is the mineral corundum, the same as ruby, but colored blue by iron and titanium. Sapphires come in many colors, from yellow to pink, but blue is the best known. They are very hard, so they last a long time in rings.\n\nSome sapphires show a star of six rays, because tiny needles of another mineral inside reflect the light. The star is called an asterism, and it moves as the stone or the light moves. Tap it to catch the star: its rays spread out from a bright center, it glides across the top, and the rays draw back in at the far side.",
   },
   "quartz-cluster": {
-    howTo: "Tap it to light the crystal points one by one.",
+    howTo:
+      "Tap it to light the crystal points one by one. Hands-on: snap a point off, put it back.",
     about:
-      "Quartz is one of the most common minerals in the Earth's crust, made of silicon and oxygen. Its crystals grow as six-sided columns with pointed tips, often many together in a cluster like this one. Clear quartz is also called rock crystal.\n\nTap it and the ten points light up one by one, from left to right, each glowing from inside with a glint at its tip and a rising chime. A tiny sliver of quartz shakes at a very steady beat when electricity runs through it, so it keeps time in many watches and clocks.",
+      "Quartz is one of the most common minerals in the Earth's crust, made of silicon and oxygen. Its crystals grow as six-sided columns with pointed tips, often many together in a cluster like this one. Clear quartz is also called rock crystal.\n\nTap it and the ten points light up one by one, from left to right, each glowing from inside with a glint at its tip and a rising chime. A tiny sliver of quartz shakes at a very steady beat when electricity runs through it, so it keeps time in many watches and clocks. With ✋ Hands-on on, snap one of the big points off the rock, then bring it back to its place: it clicks in again.",
   },
   opal: {
     howTo: "Tap it to tilt it and roll flashes of color across it. Pick an opal in the Toy tab.",
@@ -825,79 +826,84 @@ export const TOY_HELP = {
 
   // ---- Nature ---------------------------------------------------------------------------
   oak: {
-    howTo: "Tap it to shake down its leaves. Pick a season in the Toy tab.",
+    howTo: "Tap it to shake down its leaves. Hands-on: shake the trunk and the leaves fall.",
     about:
-      "The oak is a big, broad tree with a thick trunk and wavy-edged leaves, and its seeds are acorns. Oaks grow slowly and can live for hundreds of years. A single old oak is home to hundreds of kinds of insects, birds and other animals.\n\nTap it and the crown rocks on its trunk, and leaves come loose one by one and flutter down to the grass; then fresh leaves open in their place. In the Toy tab, pick spring, summer, autumn or winter, or a Seed for a different tree. In winter some oaks keep a few dead brown leaves on their twigs, and those are the ones that fall.",
+      "The oak is a big, broad tree with a thick trunk and wavy-edged leaves, and its seeds are acorns. Oaks grow slowly and can live for hundreds of years. A single old oak is home to hundreds of kinds of insects, birds and other animals.\n\nTap it and the crown rocks on its trunk, and leaves come loose one by one and flutter down to the grass; then fresh leaves open in their place. In the Toy tab, pick spring, summer, autumn or winter, or a Seed for a different tree. In winter some oaks keep a few dead brown leaves on their twigs, and those are the ones that fall. With ✋ Hands-on on, shake the trunk (a quick back-and-forth drag on it) and the leaves fall and settle on the ground.",
   },
   pine: {
-    howTo: "Tap it to shake the snow off. Turn on Snow in the Toy tab for a snowy day.",
+    howTo: "Tap it to shake the snow off. Hands-on: shake the trunk and the snow slides off.",
     about:
-      "A pine is an evergreen tree: it keeps its long, thin needles all year, and its seeds grow inside woody cones. Its sloping branches help heavy snow slide off instead of breaking them, so pines grow well in cold, snowy places.\n\nTap it and the tree rocks, and the snow on its boughs drops off from the top down in puffs of powder, lies on the ground and melts. On a day without snow, a quick shower dusts the branches first. With Snow on in the Toy tab, fresh snow settles on the boughs again afterward.",
+      "A pine is an evergreen tree: it keeps its long, thin needles all year, and its seeds grow inside woody cones. Its sloping branches help heavy snow slide off instead of breaking them, so pines grow well in cold, snowy places.\n\nTap it and the tree rocks, and the snow on its boughs drops off from the top down in puffs of powder, lies on the ground and melts. On a day without snow, a quick shower dusts the branches first. With Snow on in the Toy tab, fresh snow settles on the boughs again afterward. With ✋ Hands-on on, shake the trunk and the snow slides off the branches.",
   },
   palm: {
-    howTo: "Tap it to shake down the coconuts.",
+    howTo: "Tap it to shake down the coconuts. Hands-on: pull a coconut off and drop it.",
     about:
-      "The coconut palm grows on warm, sandy coasts all around the tropics. It has no branches: its tall, bendy trunk ends in a crown of giant feathery leaves, called fronds, with the coconuts hanging in bunches beneath them.\n\nTap it and the crown shakes, and the five coconuts drop one after another, thump into the sand, bounce and roll to a stop; then new green coconuts swell in the crown. A coconut can float, so it can drift across the sea for weeks and sprout on a faraway beach.",
+      "The coconut palm grows on warm, sandy coasts all around the tropics. It has no branches: its tall, bendy trunk ends in a crown of giant feathery leaves, called fronds, with the coconuts hanging in bunches beneath them.\n\nTap it and the crown shakes, and the five coconuts drop one after another, thump into the sand, bounce and roll to a stop; then new green coconuts swell in the crown. A coconut can float, so it can drift across the sea for weeks and sprout on a faraway beach. With ✋ Hands-on on, pull a coconut and it snaps off into your hand; drop it and it bounces and rolls on the sand; reset puts them back.",
   },
   "cherry-blossom": {
-    howTo: "Tap it to shake down the blossom and watch it bloom again.",
+    howTo: "Tap it to shake down the blossom. Hands-on: shake the trunk; petals flutter down.",
     about:
-      'Cherry trees flower in spring, covering their bare branches in clouds of pale pink blossom before the leaves come out. In Japan, where the blossom is called sakura, people gather under the trees for picnics to enjoy it, a custom called hanami, which means "flower viewing."\n\nTap it and every blossom drops in a flurry of petals that settle on the grass, then the bare branches bloom again. Pick a Seed in the Toy tab for a differently shaped tree. The blossom only lasts a week or two, which is part of why people treasure it.',
+      'Cherry trees flower in spring, covering their bare branches in clouds of pale pink blossom before the leaves come out. In Japan, where the blossom is called sakura, people gather under the trees for picnics to enjoy it, a custom called hanami, which means "flower viewing."\n\nTap it and every blossom drops in a flurry of petals that settle on the grass, then the bare branches bloom again. Pick a Seed in the Toy tab for a differently shaped tree. The blossom only lasts a week or two, which is part of why people treasure it. With ✋ Hands-on on, shake the trunk and the petals flutter down.',
   },
   maple: {
-    howTo: "Tap it to send a gust whirling through. Pick the leaf color in the Toy tab.",
+    howTo: "Tap it to send a gust through. Hands-on: shake the trunk and the leaves spin down.",
     about:
-      "The maple is a tree known for its leaves with pointed lobes, which turn fiery red, orange and gold in autumn. Leaves are green in summer because of chlorophyll, the stuff that catches sunlight; in autumn the tree stops making it, so yellow and orange pigments show through, and many maples also make new red ones. Its seeds have wings and spin down like little helicopters.\n\nTap it and a whirling gust tears leaves off and carries them around the tree in a widening spiral before they settle in a ring on the grass; then fresh leaves open. Maple syrup is made by boiling down maple sap: about 40 liters of sap make 1 liter of syrup.",
+      "The maple is a tree known for its leaves with pointed lobes, which turn fiery red, orange and gold in autumn. Leaves are green in summer because of chlorophyll, the stuff that catches sunlight; in autumn the tree stops making it, so yellow and orange pigments show through, and many maples also make new red ones. Its seeds have wings and spin down like little helicopters.\n\nTap it and a whirling gust tears leaves off and carries them around the tree in a widening spiral before they settle in a ring on the grass; then fresh leaves open. Maple syrup is made by boiling down maple sap: about 40 liters of sap make 1 liter of syrup. With ✋ Hands-on on, shake the trunk and the leaves spin down like real maple leaves.",
   },
   bonsai: {
-    howTo: "Tap it to grow a new branch, then trim it.",
+    howTo: "Tap it to grow a new branch, then trim it. Hands-on: pull a branch; it springs back.",
     about:
-      "A bonsai is a real tree kept small by careful growing in a shallow pot. Its keeper trims the branches and roots and shapes the trunk, sometimes for many years, so it looks like a tiny old tree from the wild. The art grew in China and was refined in Japan.\n\nTap it and a new branch grows out of the trunk with a pad of leaves on its end; then a pair of bonsai scissors slides in and snips it off, the cut piece drops onto the moss and is cleared away, and the stub heals over. Pick the pot's color in the Toy tab. Some bonsai trees are hundreds of years old.",
+      "A bonsai is a real tree kept small by careful growing in a shallow pot. Its keeper trims the branches and roots and shapes the trunk, sometimes for many years, so it looks like a tiny old tree from the wild. The art grew in China and was refined in Japan.\n\nTap it and a new branch grows out of the trunk with a pad of leaves on its end; then a pair of bonsai scissors slides in and snips it off, the cut piece drops onto the moss and is cleared away, and the stub heals over. Pick the pot's color in the Toy tab. Some bonsai trees are hundreds of years old. With ✋ Hands-on on, pull a branch's foliage and it bends after your finger; let go and it springs back.",
   },
   willow: {
-    howTo: "Tap it to send a breeze through the hanging branches.",
+    howTo:
+      "Tap it to send a breeze through the hanging branches. Hands-on: brush the hanging branches.",
     about:
-      "The weeping willow is a tree whose long, thin branches hang down almost to the ground like a curtain. It loves water and often grows on the banks of rivers and ponds. Its branches are so bendy that people have long woven them into baskets.\n\nThe strands sway gently by themselves. Tap it to send a breeze across from the left: the hanging strands swing away with it a curtain at a time, bending most at their tips, then swing back and settle while the crown leans a little. Pick a Seed in the Toy tab for a different tree.",
+      "The weeping willow is a tree whose long, thin branches hang down almost to the ground like a curtain. It loves water and often grows on the banks of rivers and ponds. Its branches are so bendy that people have long woven them into baskets.\n\nThe strands sway gently by themselves. Tap it to send a breeze across from the left: the hanging strands swing away with it a curtain at a time, bending most at their tips, then swing back and settle while the crown leans a little. Pick a Seed in the Toy tab for a different tree. With ✋ Hands-on on, brush the hanging branches and they swing after your finger, then sway and settle.",
   },
   sunflower: {
-    howTo: "Tap it to bring out the sun and watch the flower turn to face it.",
+    howTo: "Tap it to bring out the sun. Hands-on: push the head and it nods on its stem.",
     about:
-      "A sunflower's big head is not one flower but many: the dark middle is packed with hundreds of tiny flowers that each become a seed, and the yellow petals around the edge belong to flowers of their own. The seeds grow in spirals that curve both ways.\n\nThe head nods gently at rest. Tap it to bring out the sun at the top left: the head turns up to face it and its petals spread wide open; then the sun goes in, the head turns back and the petals lift again. Young sunflowers really do follow the Sun, turning from east to west during the day.",
+      "A sunflower's big head is not one flower but many: the dark middle is packed with hundreds of tiny flowers that each become a seed, and the yellow petals around the edge belong to flowers of their own. The seeds grow in spirals that curve both ways.\n\nThe head nods gently at rest. Tap it to bring out the sun at the top left: the head turns up to face it and its petals spread wide open; then the sun goes in, the head turns back and the petals lift again. Young sunflowers really do follow the Sun, turning from east to west during the day. With ✋ Hands-on on, push the head and it nods on its stem, petals and all; let go and it springs back and wobbles.",
   },
   rose: {
-    howTo: "Tap it to open the bloom. Pick its color in the Toy tab.",
+    howTo: "Tap it to open the bloom. Hands-on: pull the petals off one by one.",
     about:
-      "The rose is one of the best-loved flowers in the world, grown in gardens for thousands of years for its soft, layered petals and its scent. There are thousands of kinds, in almost every color. The sharp points on its stems, often called thorns, help it climb and keep animals from eating it.\n\nTap it and the bloom opens further, every petal turning outward, and one outer petal comes loose and flutters down to the grass. Then the bloom closes again and a new petal fills the gap. After the flowers fade, many roses grow round red fruits called hips.",
+      "The rose is one of the best-loved flowers in the world, grown in gardens for thousands of years for its soft, layered petals and its scent. There are thousands of kinds, in almost every color. The sharp points on its stems, often called thorns, help it climb and keep animals from eating it.\n\nTap it and the bloom opens further, every petal turning outward, and one outer petal comes loose and flutters down to the grass. Then the bloom closes again and a new petal fills the gap. After the flowers fade, many roses grow round red fruits called hips. With ✋ Hands-on on, pull the petals off one by one; each drifts down, turning, and lands on the ground; reset puts them back.",
   },
   dandelion: {
-    howTo: "Tap it to blow the seeds away.",
+    howTo: "Tap it to blow the seeds away. Hands-on: swipe back and forth across it.",
     about:
-      'A dandelion starts as a bright yellow flower. When it is done flowering, it turns into a round, fluffy seed head called a clock. Each seed hangs from its own tiny parachute of soft white hairs, so the wind can carry it far away to grow a new plant.\n\nTap it to blow: a gust bends the stalk, the seeds fly off and drift away, and then the seed head grows back. A single clock holds about 150 to 200 seeds. The name comes from the French for "lion\'s tooth," after the jagged edges of its leaves.',
+      'A dandelion starts as a bright yellow flower. When it is done flowering, it turns into a round, fluffy seed head called a clock. Each seed hangs from its own tiny parachute of soft white hairs, so the wind can carry it far away to grow a new plant.\n\nTap it to blow: a gust bends the stalk, the seeds fly off and drift away, and then the seed head grows back. A single clock holds about 150 to 200 seeds. The name comes from the French for "lion\'s tooth," after the jagged edges of its leaves. With ✋ Hands-on on, swipe back and forth across it and the seeds come loose and drift away.',
   },
   tulip: {
-    howTo: "Tap it to open the tulips to the sun. Pick their color in the Toy tab.",
+    howTo: "Tap it to open the tulips to the sun. Hands-on: push a tulip; it sways back.",
     about:
-      "Tulips are spring flowers that grow from bulbs, each stem holding one cup-shaped flower. They first grew wild in the mountains of Central Asia. In the Netherlands in the 1600s, tulip bulbs became so prized that a single rare bulb could cost as much as a house.\n\nTap it and the three tulips open wide to the sun one after another, each petal turning out to show the dark stamens and the pale pistil inside, then they close up again. Real tulips open like this in warm sunshine and close again in the cool of the evening.",
+      "Tulips are spring flowers that grow from bulbs, each stem holding one cup-shaped flower. They first grew wild in the mountains of Central Asia. In the Netherlands in the 1600s, tulip bulbs became so prized that a single rare bulb could cost as much as a house.\n\nTap it and the three tulips open wide to the sun one after another, each petal turning out to show the dark stamens and the pale pistil inside, then they close up again. Real tulips open like this in warm sunshine and close again in the cool of the evening. With ✋ Hands-on on, push a tulip and it bends on its stem; let go and it springs back and sways.",
   },
   daisy: {
-    howTo: "Tap it to spin the big daisy: loves me, loves me not.",
+    howTo:
+      "Tap it to spin the big daisy: loves me, loves me not. Hands-on: pull the petals off one by one.",
     about:
-      'A daisy looks like one flower, but its yellow middle is made of many tiny flowers, and each white petal around it is a flower too. The name comes from the old words "day\'s eye," because many daisies open in the morning and close at night.\n\nTap it and the big daisy spins like a pinwheel, twice around, flinging off eight petals one after another while the small ones bob; then new petals fill the gaps. It plays the old game of pulling off petals one by one: "loves me, loves me not," and the last petal gives the answer.',
+      'A daisy looks like one flower, but its yellow middle is made of many tiny flowers, and each white petal around it is a flower too. The name comes from the old words "day\'s eye," because many daisies open in the morning and close at night.\n\nTap it and the big daisy spins like a pinwheel, twice around, flinging off eight petals one after another while the small ones bob; then new petals fill the gaps. It plays the old game of pulling off petals one by one: "loves me, loves me not," and the last petal gives the answer. With ✋ Hands-on on, pull the petals off one by one (loves me, loves me not); each drifts down to the grass; reset puts them back.',
   },
   lotus: {
-    howTo: "Tap it to lift the flower out of the water and open it.",
+    howTo:
+      "Tap it to lift the flower out of the water and open it. Hands-on: lift it, drop it in: splash.",
     about:
-      "The lotus is a water plant that roots in the mud at the bottom of ponds and holds its big round leaves and flowers above the water. Its leaves are covered in tiny waxy bumps, so water rolls off in beads and carries the dirt away with it. Lotus seeds can last a very long time: one more than 1,000 years old has sprouted.\n\nTap it and the flower folds into a bud, rises out of the water on its stalk as a ring of ripples spreads, and opens wide in the air, the outer petals first. Then it sinks back onto its leaf, still open.",
+      "The lotus is a water plant that roots in the mud at the bottom of ponds and holds its big round leaves and flowers above the water. Its leaves are covered in tiny waxy bumps, so water rolls off in beads and carries the dirt away with it. Lotus seeds can last a very long time: one more than 1,000 years old has sprouted.\n\nTap it and the flower folds into a bud, rises out of the water on its stalk as a ring of ripples spreads, and opens wide in the air, the outer petals first. Then it sinks back onto its leaf, still open. With ✋ Hands-on on, lift the flower off its leaf (rings of ripples run out over the pond) and drop it back in: it splashes, dips under and bobs back up.",
   },
   mushroom: {
-    howTo: "Tap the big cap to puff out a cloud of spores.",
+    howTo:
+      "Tap the big cap to puff out a cloud of spores. Hands-on: squeeze the cap; it springs back.",
     about:
-      "These red toadstools with white spots are fly agarics, perhaps the most famous mushrooms of fairy tales. A mushroom is the part of a fungus that pops up above ground; most of the fungus is a web of fine threads hidden in the soil. Fly agarics are poisonous, so they are for looking at, not eating.\n\nTap it and the big cap dips and springs back, and a cloud of glowing spores puffs out from the gills underneath and drifts away. Spores are how a fungus spreads, like tiny seeds, and one mushroom can let out billions of them. Pick the cap's color in the Toy tab.",
+      "These red toadstools with white spots are fly agarics, perhaps the most famous mushrooms of fairy tales. A mushroom is the part of a fungus that pops up above ground; most of the fungus is a web of fine threads hidden in the soil. Fly agarics are poisonous, so they are for looking at, not eating.\n\nTap it and the big cap dips and springs back, and a cloud of glowing spores puffs out from the gills underneath and drifts away. Spores are how a fungus spreads, like tiny seeds, and one mushroom can let out billions of them. Pick the cap's color in the Toy tab. With ✋ Hands-on on, squeeze the cap and it gives under your finger, then springs back.",
   },
   fern: {
-    howTo: "Tap it to unroll the fiddleheads into new fronds.",
+    howTo:
+      "Tap it to unroll the fiddleheads into new fronds. Hands-on: brush the fronds; they sway back.",
     about:
-      "Ferns are some of the oldest plants on Earth: they grew long before the dinosaurs, and they still grow in shady woods today. They have no flowers or seeds. Instead they spread by spores, tiny specks that grow in brown dots under their leaves, which are called fronds.\n\nEach new frond starts as a tight coil called a fiddlehead, because it looks like the curled end of a violin. Tap it and the two fiddleheads in the middle unroll into new fronds, joint by joint from the base to the tip, then roll back up. Pick a Seed in the Toy tab for a different fern.",
+      "Ferns are some of the oldest plants on Earth: they grew long before the dinosaurs, and they still grow in shady woods today. They have no flowers or seeds. Instead they spread by spores, tiny specks that grow in brown dots under their leaves, which are called fronds.\n\nEach new frond starts as a tight coil called a fiddlehead, because it looks like the curled end of a violin. Tap it and the two fiddleheads in the middle unroll into new fronds, joint by joint from the base to the tip, then roll back up. Pick a Seed in the Toy tab for a different fern. With ✋ Hands-on on, brush the fronds and they bend after your finger; let go and they spring back and sway.",
   },
   saguaro: {
     howTo: "Tap for the spines, then a look inside. Set its arms and flowers in the Toy tab.",
@@ -910,14 +916,15 @@ export const TOY_HELP = {
       "Corals may look like rocks or plants, but they are animals. This reef-building coral is a colony of tiny polyps with tentacles that build a calcium carbonate skeleton; other corals can be soft or solitary. Over thousands of years, corals build reefs. Reefs cover a tiny part of the ocean floor but are home to about a quarter of all the kinds of sea life.\n\nTap it and the polyps open all over this staghorn coral, like tiny tentacled stars, and six little fish dart out of the reef, hover, turn and dart back in; then the polyps close. Pick a Seed in the Toy tab for a different reef.",
   },
   pinecone: {
-    howTo: "Tap it to open the scales and drop them, then put it back together.",
+    howTo: "Tap it to open the scales and drop them. Hands-on: pull the scales off one by one.",
     about:
-      "A pinecone is the part of a pine tree that holds its seeds. Its woody scales are arranged in spirals, and under each one sit seeds with thin wings. In dry weather the scales open so the seeds can fall out and spin away on the wind; in wet weather they close up tight again.\n\nTap it and the cone opens as it does on a dry day, and winged seeds spin down like little propellers. Then the scales facing you break off one after another from the bottom up and tumble into a pile, showing the core. Then they fly back up into place and the cone closes.",
+      "A pinecone is the part of a pine tree that holds its seeds. Its woody scales are arranged in spirals, and under each one sit seeds with thin wings. In dry weather the scales open so the seeds can fall out and spin away on the wind; in wet weather they close up tight again.\n\nTap it and the cone opens as it does on a dry day, and winged seeds spin down like little propellers. Then the scales facing you break off one after another from the bottom up and tumble into a pile, showing the core. Then they fly back up into place and the cone closes. With ✋ Hands-on on, pull the scales off one by one; each snaps off at its root and drops; reset puts them back.",
   },
   acorn: {
-    howTo: "Tap it to pop the caps and sprout the acorns.",
+    howTo:
+      "Tap it to pop the caps and sprout the acorns. Hands-on: pull a cap off and put it back.",
     about:
-      "An acorn is the nut of an oak tree, with a little scaly cap on top. Inside is a seed that can grow into a whole new oak. Squirrels and jays bury acorns to eat later and forget some of them, and those can sprout, so the animals help plant new oak forests.\n\nTap it and the caps pop off, flip through the air and land upside down on the leaf, and a green sprout pokes out of each acorn and opens two tiny leaves. Then the sprouts draw back in and the caps hop home. Pick an autumn or a green leaf in the Toy tab.",
+      "An acorn is the nut of an oak tree, with a little scaly cap on top. Inside is a seed that can grow into a whole new oak. Squirrels and jays bury acorns to eat later and forget some of them, and those can sprout, so the animals help plant new oak forests.\n\nTap it and the caps pop off, flip through the air and land upside down on the leaf, and a green sprout pokes out of each acorn and opens two tiny leaves. Then the sprouts draw back in and the caps hop home. Pick an autumn or a green leaf in the Toy tab. With ✋ Hands-on on, pull a cap off and put it back on: brought close to its acorn, it settles home.",
   },
   succulent: {
     howTo: "Tap it to open the rosette and send up a flower.",
@@ -925,9 +932,9 @@ export const TOY_HELP = {
       "Succulents are plants that store water in fleshy leaves, stems or roots, so they can live through long dry spells. This one grows in a rosette: a tight circle of leaves, like the petals of a rose, with new leaves coming from the middle.\n\nTap it and the rosette opens, every leaf tipping outward, and a flower stalk rises from the middle and arches over with little coral-colored bells; then it draws back and the rosette closes. Pick the color of the leaf tips in the Toy tab. Many succulents grow new plants from a single fallen leaf.",
   },
   bamboo: {
-    howTo: "Tap it to make the new shoots grow up tall.",
+    howTo: "Tap it to make the new shoots grow up tall. Hands-on: pull a stalk; it sways back.",
     about:
-      "Bamboo is a giant grass with tall, hollow stems split into sections by rings called nodes. It is one of the fastest-growing plants in the world: some kinds can grow almost a meter in a single day. People use its strong, light stems to build houses, scaffolding and furniture.\n\nThree young shoots sit on the ground. Tap it and they shoot up a section at a time, each new section sliding up out of the one below with a hollow knock, and a tuft of leaves opens at the top; later they sink back down.",
+      "Bamboo is a giant grass with tall, hollow stems split into sections by rings called nodes. It is one of the fastest-growing plants in the world: some kinds can grow almost a meter in a single day. People use its strong, light stems to build houses, scaffolding and furniture.\n\nThree young shoots sit on the ground. Tap it and they shoot up a section at a time, each new section sliding up out of the one below with a hollow knock, and a tuft of leaves opens at the top; later they sink back down. With ✋ Hands-on on, pull a stalk and it bends after your finger; let go and it sways back and forth and settles.",
   },
   rocks: {
     howTo: "Drag a pebble to pick it up and set it on another to stack them. Tap to tumble them.",
@@ -935,9 +942,9 @@ export const TOY_HELP = {
       "Pebbles are small stones rounded smooth by water. As rivers and waves roll them over and over, knocking against sand and other stones, their sharp corners wear away, a process that can take hundreds or thousands of years. A cairn is a pile of stones stacked up by people, often to mark a trail.\n\nDrag a pebble to lift it and set it on the sand or on another stone. A careful stack stands; one set on the edge topples. The ✋ button turns this off, and reset puts every stone back. Tap it and five pebbles hop one at a time onto a cairn, biggest at the bottom, then all hop back. Pick a pile or a cairn in the Toy tab.",
   },
   kelp: {
-    howTo: "Tap it to bring fish in to nibble the kelp.",
+    howTo: "Tap it to bring fish in to nibble the kelp. Hands-on: push the fronds; they sway back.",
     about:
-      "Kelp is a giant seaweed, a kind of brown algae that grows in cool, shallow seas. It holds on to the rocks with rootlike grips, and little bulbs full of gas keep its long blades floating up toward the light. Kelp can grow so thick that it makes underwater forests, full of fish, snails, sea urchins and sea otters.\n\nThe kelp sways gently by itself. Tap it and three little fish swim in, each noses up to a blade for a few nibbles, and the kelp sways away from them, then swings back as they swim off. Giant kelp can grow more than half a meter in a day.",
+      "Kelp is a giant seaweed, a kind of brown algae that grows in cool, shallow seas. It holds on to the rocks with rootlike grips, and little bulbs full of gas keep its long blades floating up toward the light. Kelp can grow so thick that it makes underwater forests, full of fish, snails, sea urchins and sea otters.\n\nThe kelp sways gently by itself. Tap it and three little fish swim in, each noses up to a blade for a few nibbles, and the kelp sways away from them, then swings back as they swim off. Giant kelp can grow more than half a meter in a day. With ✋ Hands-on on, push the fronds and they swing after your finger, then sway slowly in the water and drift back.",
   },
 
   // ---- Weather and fire -----------------------------------------------------------------
@@ -1010,24 +1017,28 @@ export const TOY_HELP = {
 
   // ---- Food -----------------------------------------------------------------------------
   "ice-cream": {
-    howTo: "Tap to melt it and refreeze it. Pick scoops and flavors in the Toy tab.",
+    howTo:
+      "Tap to melt it and refreeze it. Hands-on: lift the scoops off, or tip the cone to spill them.",
     about:
-      "Ice cream is a frozen mix of milk or cream, sugar and flavors. It is stirred while it freezes, so the ice crystals stay tiny and air is whipped in: up to half of a scoop of soft ice cream can be air, which is why it feels light and smooth.\n\nTap it and it melts: the scoops slump and drips run down the cone, then it freezes firm again. The Warmth slider in the Toy tab melts it slowly by hand. You can also pick one, two or three scoops and their flavors, and add sprinkles and a cherry.",
+      "Ice cream is a frozen mix of milk or cream, sugar and flavors. It is stirred while it freezes, so the ice crystals stay tiny and air is whipped in: up to half of a scoop of soft ice cream can be air, which is why it feels light and smooth.\n\nTap it and it melts: the scoops slump and drips run down the cone, then it freezes firm again. The Warmth slider in the Toy tab melts it slowly by hand. You can also pick one, two or three scoops and their flavors, and add sprinkles and a cherry. With ✋ Hands-on on, lift the scoops off and stack them back, or pick up the cone and tip it: the top scoop slides off, and tipped further the others follow; reset puts them back.",
   },
   watermelon: {
-    howTo: "Tap it to chop it into slices that fan open.",
+    howTo:
+      "Tap it to chop it into slices that fan open. Hands-on: pick up a slice and fit it back.",
     about:
-      "A watermelon is a big fruit that grows on a vine along the ground. Under its hard green rind is sweet red flesh dotted with black seeds, and it is about 92 percent water, which makes it a favorite on hot days. Watermelons were first grown in Africa thousands of years ago.\n\nTap it and a big knife chops the whole melon five times, then the six slices fan open like an accordion, showing the red flesh, the pale rind and the seeds, and fold shut again. Pick a whole melon, a wedge, or both in the Toy tab.",
+      "A watermelon is a big fruit that grows on a vine along the ground. Under its hard green rind is sweet red flesh dotted with black seeds, and it is about 92 percent water, which makes it a favorite on hot days. Watermelons were first grown in Africa thousands of years ago.\n\nTap it and a big knife chops the whole melon five times, then the six slices fan open like an accordion, showing the red flesh, the pale rind and the seeds, and fold shut again. Pick a whole melon, a wedge, or both in the Toy tab. With ✋ Hands-on on, pick up the slices one by one and fit them back together: brought close to its place, each one clicks in.",
   },
   "birthday-cake": {
-    howTo: "Tap to blow out the candles; tap again to light them. Choose how many in the Toy tab.",
+    howTo:
+      "Tap to blow out the candles; tap again to light them. Hands-on: pull a candle out, push it in.",
     about:
-      "A birthday cake is a sweet, frosted cake with candles on top, often one for each year. People sing to the birthday person, who makes a wish and tries to blow out all the candles in one breath.\n\nThis cake starts with its candles lit. Tap to blow them out, with a puff of smoke from each wick, and tap again to light them. In the Toy tab, choose from one to nine candles, the colors of the frosting and the drip, and a vanilla, chocolate, red velvet or strawberry sponge. A candle flame needs air: blowing hard pushes the hot, burning gas away from the wick, and the flame goes out.",
+      "A birthday cake is a sweet, frosted cake with candles on top, often one for each year. People sing to the birthday person, who makes a wish and tries to blow out all the candles in one breath.\n\nThis cake starts with its candles lit. Tap to blow them out, with a puff of smoke from each wick, and tap again to light them. In the Toy tab, choose from one to nine candles, the colors of the frosting and the drip, and a vanilla, chocolate, red velvet or strawberry sponge. A candle flame needs air: blowing hard pushes the hot, burning gas away from the wick, and the flame goes out. With ✋ Hands-on on, pull a candle out of the cake (it goes out) and push it back into its hole, where it clicks home alight again; a candle set down on top lies on the frosting.",
   },
   popcorn: {
-    howTo: "Tap it to pop more kernels up out of the bucket.",
+    howTo:
+      "Tap it to pop more kernels up out of the bucket. Hands-on: pull the rim over to tip the bucket.",
     about:
-      "Popcorn is a kind of corn whose kernels puff up when they are heated. Each kernel has a hard shell with a little water inside. When it gets hot, the water turns to steam, the pressure builds until the shell bursts with a pop, and the soft starch inside puffs out into a white, crunchy foam.\n\nTap it and fresh kernels pop up out of the striped bucket, tumble and land on the heap. People in the Americas were popping corn thousands of years ago, long before movie theaters.",
+      "Popcorn is a kind of corn whose kernels puff up when they are heated. Each kernel has a hard shell with a little water inside. When it gets hot, the water turns to steam, the pressure builds until the shell bursts with a pop, and the soft starch inside puffs out into a white, crunchy foam.\n\nTap it and fresh kernels pop up out of the striped bucket, tumble and land on the heap. People in the Americas were popping corn thousands of years ago, long before movie theaters. With ✋ Hands-on on, pull the bucket's rim over and it tips on its bottom edge: the loose kernels on top spill out over the rim one after another and bounce on the table; reset stands it up again.",
   },
   jelly: {
     howTo: "Drag it to stretch it; let go and it wobbles back. Tap it to poke it.",
@@ -1035,14 +1046,16 @@ export const TOY_HELP = {
       "A jelly, or gelatin dessert, is fruit juice or sweet flavored water set with gelatin and turned out of a mold. Gelatin makes a fine, stretchy mesh that traps the water, so the jelly holds its shape but wobbles when you touch it.\n\nThis one always jiggles a little. Drag any part of it and it stretches toward your finger; let go and it springs back and wobbles on its plate. Tap it to poke it: it squashes and wobbles hard, then settles down. In the Toy tab, pick strawberry, lime, orange, blueberry, grape or rainbow, and choose whether it has fruit set inside.",
   },
   pancakes: {
-    howTo: "Tap to flip the top pancake. Set the stack and the syrup in the Toy tab.",
+    howTo:
+      "Tap to flip the top pancake. Hands-on: lift them off one by one; flick one up to flip it.",
     about:
-      "Pancakes are flat, round cakes made from a runny batter of flour, eggs and milk, cooked on a hot pan. Baking powder in the batter makes bubbles of gas, so they puff up soft and fluffy. When bubbles pop on the top, it is time to flip.\n\nTap it to flip the top pancake: it hops up, turns a full somersault in the air with its syrup and butter, and lands back on the stack. In the Toy tab, set how many pancakes are in the stack, from two to seven, and try the Syrup slider.",
+      "Pancakes are flat, round cakes made from a runny batter of flour, eggs and milk, cooked on a hot pan. Baking powder in the batter makes bubbles of gas, so they puff up soft and fluffy. When bubbles pop on the top, it is time to flip.\n\nTap it to flip the top pancake: it hops up, turns a full somersault in the air with its syrup and butter, and lands back on the stack. In the Toy tab, set how many pancakes are in the stack, from two to seven, and try the Syrup slider. With ✋ Hands-on on, lift the pancakes off the stack one by one and stack them back; flick one quickly up and it flips over in the air and lands upside down.",
   },
   cupcake: {
-    howTo: "Tap it to flick the cherry up; it plops back down.",
+    howTo:
+      "Tap it to flick the cherry up. Hands-on: lift the cherry off, or push the soft frosting.",
     about:
-      "A cupcake is a small cake baked in a paper cup, called a liner, and topped with swirls of frosting. Because it is small, it bakes quickly, and each person gets a whole cake of their own.\n\nTap it and the springy frosting flicks the cherry up: it tumbles and drops back with a plop, the frosting squashes and wobbles, and the sprinkles jump off and rain back down. In the Toy tab, pick the colors of the frosting and the liner, a vanilla, chocolate or red velvet cake, and the topping.",
+      "A cupcake is a small cake baked in a paper cup, called a liner, and topped with swirls of frosting. Because it is small, it bakes quickly, and each person gets a whole cake of their own.\n\nTap it and the springy frosting flicks the cherry up: it tumbles and drops back with a plop, the frosting squashes and wobbles, and the sprinkles jump off and rain back down. In the Toy tab, pick the colors of the frosting and the liner, a vanilla, chocolate or red velvet cake, and the topping. With ✋ Hands-on on, lift the cherry off and put it back (it settles onto its place), or push the soft frosting: it squishes and springs back.",
   },
   lollipop: {
     howTo: "Tap it to spin it fast; the swirl seems to pour inward.",
@@ -1071,14 +1084,16 @@ export const TOY_HELP = {
       "A gummy bear is a small, chewy candy shaped like a bear, made of sugar, fruit flavors and gelatin. Gelatin is what makes it stretchy and springy: it forms a mesh that bends and then pulls back. Gummy bears were first made in Germany in the 1920s.\n\nDrag any part of the bear and it stretches, up to about a body length, then springs back with a few wobbles when you let go. A drag beside it turns the view instead. Tap it for a jelly squish. Pick its flavor in the Toy tab, from cherry red to a clear pineapple.",
   },
   pretzel: {
-    howTo: "Tap it to twist it like a knot and let it spring back.",
+    howTo:
+      "Tap it to twist it like a knot and let it spring back. Hands-on: pull one side to stretch it.",
     about:
-      "A pretzel is a baked bread shaped from a long rope of dough into a loop with a twist in the middle. Before baking, it is dipped in a special bath of water and an alkali, such as lye or baking soda, which gives it its shiny, dark brown crust. Then it is sprinkled with coarse salt.\n\nTap it and it twists like a knot, all in one piece: its two sides wring opposite ways and its loops fold a little toward you. Then it springs a little past its shape into the opposite twist and wobbles to a stop.",
+      "A pretzel is a baked bread shaped from a long rope of dough into a loop with a twist in the middle. Before baking, it is dipped in a special bath of water and an alkali, such as lye or baking soda, which gives it its shiny, dark brown crust. Then it is sprinkled with coarse salt.\n\nTap it and it twists like a knot, all in one piece: its two sides wring opposite ways and its loops fold a little toward you. Then it springs a little past its shape into the opposite twist and wobbles to a stop. With ✋ Hands-on on, pull one side of the loop and the soft pretzel stretches after your finger; let go and it springs back into its twist.",
   },
   croissant: {
-    howTo: "Tap it to slice it open and melt a pat of butter inside.",
+    howTo:
+      "Tap it to slice it open and melt a pat of butter inside. Hands-on: lift the top off like a lid.",
     about:
-      "A croissant is a flaky, crescent-shaped pastry; its name is the French word for crescent. The dough is folded around a slab of butter again and again, making dozens of thin layers. In the hot oven, the water in the butter turns to steam and puffs the layers apart, so the inside is soft and full of holes and the outside is crisp.\n\nTap it and it is sliced open along its middle. The top lifts and tips back like a lid, showing the soft layers inside, where a pat of butter melts and spreads. Then the top settles back down.",
+      "A croissant is a flaky, crescent-shaped pastry; its name is the French word for crescent. The dough is folded around a slab of butter again and again, making dozens of thin layers. In the hot oven, the water in the butter turns to steam and puffs the layers apart, so the inside is soft and full of holes and the outside is crisp.\n\nTap it and it is sliced open along its middle. The top lifts and tips back like a lid, showing the soft layers inside, where a pat of butter melts and spreads. Then the top settles back down. With ✋ Hands-on on, lift the top off like a lid and set it back: brought close to its place, it settles home.",
   },
   pizza: {
     howTo: "Tap to take a slice; tap again to go back.",
@@ -1086,9 +1101,10 @@ export const TOY_HELP = {
       "Pizza is a flat, round bread topped with tomato sauce and cheese and baked in a very hot oven. It comes from Naples, in Italy, and is now eaten all over the world. The margherita pizza, with red tomato, white mozzarella and green basil, shows the colors of the Italian flag.\n\nTap it to take a slice: it slides out with strings of melted cheese stretching behind it. Warm mozzarella stretches because the proteins in it line up in long, stringy strands. Tap again to put the slice back. Pick pepperoni, margherita, veggie or cheese in the Toy tab. With ✋ Hands-on on, drag the slice away yourself: the cheese strings sag, stretch and snap, and you can set the slice back.",
   },
   burger: {
-    howTo: "Tap to spread out the layers; tap again to stack them up.",
+    howTo:
+      "Tap to spread out the layers. Hands-on: lift the layers off and stack them in any order.",
     about:
-      "A burger is a round patty of ground meat, or of vegetables, cooked and served in a sliced bun with toppings. The name comes from the city of Hamburg, in Germany. This one has a sesame seed bun, a patty, a slice of cheese, a leaf of lettuce and tomato.\n\nTap it to spread out the layers in the air, one above the other, so every part shows, and tap again to stack them back up. Engineers call a picture like this an exploded view: it shows how the parts of a machine fit together without taking the real thing apart.",
+      "A burger is a round patty of ground meat, or of vegetables, cooked and served in a sliced bun with toppings. The name comes from the city of Hamburg, in Germany. This one has a sesame seed bun, a patty, a slice of cheese, a leaf of lettuce and tomato.\n\nTap it to spread out the layers in the air, one above the other, so every part shows, and tap again to stack them back up. Engineers call a picture like this an exploded view: it shows how the parts of a machine fit together without taking the real thing apart. With ✋ Hands-on on, lift the layers off one by one and stack them again in any order; take one out from the middle and the ones above it drop onto what is left.",
   },
   sushi: {
     howTo: "Tap a piece: the chopsticks pick that one up, dip it in soy sauce and put it back.",
@@ -1101,14 +1117,14 @@ export const TOY_HELP = {
       "A taco is a Mexican dish: a tortilla, a thin, round flatbread of corn or wheat, folded around a filling such as meat, beans, cheese, lettuce and salsa. People in Mexico have made corn tortillas for thousands of years. This one has a crunchy, fried corn shell.\n\nTap it and the shell snaps across the middle with a crunch. The halves pull apart and swing open like a book, showing the filling in each break, and bits drop out of the break onto the plate, bounce a little and slide to a stop. Then they hop back in and the halves close.",
   },
   egg: {
-    howTo: "Tap to crack it open; tap again to go back.",
+    howTo: "Tap to crack it open; tap again to go back. Hands-on: lift the cracked cap off.",
     about:
-      "A soft-boiled egg is cooked in its shell in boiling water for only a few minutes, so the white sets firm but the yolk stays runny. It is served in an egg cup, with strips of toast for dipping into the yolk.\n\nTap it to crack it open: the top of the shell pops off, and the runny yolk shows and drips down the side. Tap again to put the top back. In the Toy tab, pick a brown or a white shell and the color of the egg cup. The color of a shell depends on the kind of hen that laid it; the egg inside is the same.",
+      "A soft-boiled egg is cooked in its shell in boiling water for only a few minutes, so the white sets firm but the yolk stays runny. It is served in an egg cup, with strips of toast for dipping into the yolk.\n\nTap it to crack it open: the top of the shell pops off, and the runny yolk shows and drips down the side. Tap again to put the top back. In the Toy tab, pick a brown or a white shell and the color of the egg cup. The color of a shell depends on the kind of hen that laid it; the egg inside is the same. With ✋ Hands-on on, lift the cracked top off like a cap and set it back on: brought close, it settles home.",
   },
   coffee: {
-    howTo: "Tap it to stir. Pick the latte art and the steam in the Toy tab.",
+    howTo: "Tap it to stir. Hands-on: drag round in the cup to stir it yourself.",
     about:
-      "Coffee is made from the roasted seeds, called beans, of the coffee plant, which first grew wild in Ethiopia. A latte is a strong shot of coffee topped with a lot of steamed milk. Pouring the milk foam carefully draws a picture on top, called latte art: a heart, a leafy rosetta or a tulip.\n\nTap it to stir: the latte art twists into a swirl, the middle turning further than the edge, then relaxes back, with a thick curl of steam. In the Toy tab, pick the latte art and the color of the cup, and try the Steam slider.",
+      "Coffee is made from the roasted seeds, called beans, of the coffee plant, which first grew wild in Ethiopia. A latte is a strong shot of coffee topped with a lot of steamed milk. Pouring the milk foam carefully draws a picture on top, called latte art: a heart, a leafy rosetta or a tulip.\n\nTap it to stir: the latte art twists into a swirl, the middle turning further than the edge, then relaxes back, with a thick curl of steam. In the Toy tab, pick the latte art and the color of the cup, and try the Steam slider. With ✋ Hands-on on, drag round in the cup to stir: the coffee under your finger turns after it, the rings near it most, so the latte art swirls, then coasts and slows.",
   },
   apple: {
     howTo: "Tap to take a bite; tap again and a worm peeks out before it's whole again.",
@@ -1116,9 +1132,10 @@ export const TOY_HELP = {
       "Apples grow on trees and come in thousands of kinds, from sharp green ones to sweet red and golden ones. The wild apple that most of them come from still grows in the mountains of Central Asia.\n\nTap it to take a bite: a chunk comes away, leaving a scalloped bite of pale flesh, and the apple stays bitten. Tap again and a little worm pokes out of the bite, looks about, ducks back in, and the apple grows whole again. Pick a red, green or golden apple in the Toy tab. The flesh of a cut apple turns brown in the air, much as a sliced potato does.",
   },
   banana: {
-    howTo: "Tap it to pull the bananas apart and peel all three.",
+    howTo:
+      "Tap it to pull the bananas apart and peel all three. Hands-on: pull a banana off the bunch.",
     about:
-      "Bananas grow in big hanging bunches on giant plants that look like trees but are not: the trunk is made of tightly rolled leaves. A banana is picked green and turns yellow as it ripens, and then brown spots appear as its starch turns to sugar and it gets sweeter.\n\nTap it and the three bananas pull apart. Each is peeled from its tip: its skin splits into three strips that curl back, showing the pale fruit. Then the strips fold back up and the bunch comes together. Pick green, just right or spotty bananas in the Toy tab.",
+      "Bananas grow in big hanging bunches on giant plants that look like trees but are not: the trunk is made of tightly rolled leaves. A banana is picked green and turns yellow as it ripens, and then brown spots appear as its starch turns to sugar and it gets sweeter.\n\nTap it and the three bananas pull apart. Each is peeled from its tip: its skin splits into three strips that curl back, showing the pale fruit. Then the strips fold back up and the bunch comes together. Pick green, just right or spotty bananas in the Toy tab. With ✋ Hands-on on, pull a banana and it bends a little at its neck, then breaks off the bunch whole, skin and all; reset puts it back.",
   },
   orange: {
     howTo:
@@ -1127,14 +1144,15 @@ export const TOY_HELP = {
       "An orange is a citrus fruit. Its bright peel is dotted with tiny pockets of fragrant oil, and inside, the fruit is divided into segments packed with little sacs of juice. Oranges are full of vitamin C, and they were first grown in southern China and Southeast Asia.\n\nTap it and the whole orange opens like a flower: eight wedges fall open outward, one just after another, showing their juicy faces, while juice squirts up out of the middle. Then it closes up again. Pick a whole orange, a half, or both in the Toy tab. With ✋ Hands-on on, pull the wedges out one by one and set them down; bring a wedge back over its place and it clicks home.",
   },
   kiwi: {
-    howTo: "Tap it to cut it open and show the green inside.",
+    howTo:
+      "Tap it to cut it open and show the green inside. Hands-on: pull the halves apart and back.",
     about:
-      "A kiwifruit is a small fruit with thin, fuzzy brown skin and bright green flesh around a pale core ringed with tiny black seeds. It first grew wild in China. Farmers in New Zealand made it popular and named it after the kiwi, their fuzzy brown national bird.\n\nTap it and the whole kiwi is cut across the middle; the halves slide apart and turn to show their green faces and the ring of seeds, then close up again. Pick a whole kiwi, a half, or both in the Toy tab.",
+      "A kiwifruit is a small fruit with thin, fuzzy brown skin and bright green flesh around a pale core ringed with tiny black seeds. It first grew wild in China. Farmers in New Zealand made it popular and named it after the kiwi, their fuzzy brown national bird.\n\nTap it and the whole kiwi is cut across the middle; the halves slide apart and turn to show their green faces and the ring of seeds, then close up again. Pick a whole kiwi, a half, or both in the Toy tab. With ✋ Hands-on on, pull the two halves of the whole kiwi apart, each showing its green face, and set them back together: brought close to its place, each clicks home.",
   },
   pineapple: {
-    howTo: "Tap it to slice it into rings.",
+    howTo: "Tap it to slice it into rings. Hands-on: lift the rings off and stack them.",
     about:
-      "A pineapple is a tropical fruit with a tough, scaly skin and a spiky crown of leaves. It is really many small fruits grown together: each scale on the skin comes from a single flower. Pineapples first grew in South America, and a crown twisted off and planted can grow a whole new plant.\n\nTap it for four chops, top first. With each chop, everything above lifts and leans toward you, until five rings stand apart in a leaning stack, showing their golden flesh and pale cores. Then they drop back onto each other.",
+      "A pineapple is a tropical fruit with a tough, scaly skin and a spiky crown of leaves. It is really many small fruits grown together: each scale on the skin comes from a single flower. Pineapples first grew in South America, and a crown twisted off and planted can grow a whole new plant.\n\nTap it for four chops, top first. With each chop, everything above lifts and leans toward you, until five rings stand apart in a leaning stack, showing their golden flesh and pale cores. Then they drop back onto each other. With ✋ Hands-on on, lift the rings off one by one, the crown with the top one, and stack them as you like.",
   },
   cherries: {
     howTo:
@@ -1143,14 +1161,16 @@ export const TOY_HELP = {
       "Cherries are small, round fruits that grow on trees, often in pairs whose long stems are joined at the top. Each cherry has one hard stone in the middle with the seed inside, so it is called a stone fruit, like a plum or a peach.\n\nPull a cherry out on its stem and let go: it swings back and knocks the other one, which swings out in turn, until they settle. Tap it and they swing like a small Newton's cradle, at their real speed: one cherry is flicked out, swings back and knocks the other out, which swings back and knocks the first, with a plink each time, until the swing dies away. A cherry on a stem about 4.5 cm long swings to and fro in under half a second.",
   },
   grapes: {
-    howTo: "Tap it: grapes drop off the bunch, bounce and hop back.",
+    howTo:
+      "Tap it: grapes drop off, bounce and hop back. Hands-on: pull a grape off; it drops and rolls.",
     about:
-      "Grapes grow in bunches on woody vines, from a few dozen to a few hundred on a bunch. They come in purple, green and red, and people eat them fresh, dry them into raisins and press them for juice.\n\nTap it and ten grapes on the front come off one after another, drop and bounce on the table and roll a little, each on its own path, then hop back up to their places one by one. Pick purple, green or red grapes in the Toy tab. The Photoreal shelf has a real grape that peels.",
+      "Grapes grow in bunches on woody vines, from a few dozen to a few hundred on a bunch. They come in purple, green and red, and people eat them fresh, dry them into raisins and press them for juice.\n\nTap it and ten grapes on the front come off one after another, drop and bounce on the table and roll a little, each on its own path, then hop back up to their places one by one. Pick purple, green or red grapes in the Toy tab. The Photoreal shelf has a real grape that peels. With ✋ Hands-on on, pull a grape on the front and it snaps off its stalk into your hand; let go and it drops, bounces and rolls; reset puts them all back.",
   },
   avocado: {
-    howTo: "Tap it to pop the stone into the other half and back.",
+    howTo:
+      "Tap it to pop the stone into the other half. Hands-on: lift the stone out and put it back.",
     about:
-      "An avocado is a fruit with a bumpy green skin, soft, creamy green flesh and one big, round stone in the middle, which is its seed. It first grew in Mexico and Central America. Avocados are unusual: they do not ripen on the tree, only after they are picked.\n\nTap it and the stone pops out of its half, flies over and drops into the empty half with a thock, rocking it, then pops back home and the first half rocks. Pick both halves, or just the half with the stone, in the Toy tab.",
+      "An avocado is a fruit with a bumpy green skin, soft, creamy green flesh and one big, round stone in the middle, which is its seed. It first grew in Mexico and Central America. Avocados are unusual: they do not ripen on the tree, only after they are picked.\n\nTap it and the stone pops out of its half, flies over and drops into the empty half with a thock, rocking it, then pops back home and the first half rocks. Pick both halves, or just the half with the stone, in the Toy tab. With ✋ Hands-on on, lift the stone out of its half and put it back (brought close, it settles into its hollow), or pick up the empty half.",
   },
 
   // ---- Toys -----------------------------------------------------------------------------
@@ -1456,7 +1476,7 @@ export const TOY_HELP = {
 
   // ---- Math -----------------------------------------------------------------------------
   lorenz: {
-    howTo: "Tap to race along the path. Set the glow in the Toy tab.",
+    howTo: "Tap it to race a spark round. Hands-on: drag the point to a new start; let go.",
     about:
       "In 1963 the scientist Edward Lorenz made a very simple model of moving air: three short equations. He found that its path loops around two centers forever, never repeating and never crossing itself, in a shape like a pair of butterfly wings. This shape is called the Lorenz attractor.\n\nTap it and a bright spark races along the whole path, drawing it again in light that then fades. Two starting points that are almost the same soon follow very different paths. This is called chaos, or the butterfly effect, and it is why weather is so hard to forecast far ahead.",
   },
@@ -1471,7 +1491,7 @@ export const TOY_HELP = {
       "A Klein bottle is a surface with no inside and no outside. Its neck bends around and passes through its own side to join the bottom from within, so an ant crawling on it could reach every part of it without ever crossing an edge. Felix Klein described it in 1882. A true Klein bottle needs four dimensions; in our world its neck has to cut through the wall.\n\nTap it and a surge of glowing water pours in at the base, runs up the body, through the neck and around into the bottom, then fades. Set the glow, or pick the color of the glass, in the Toy tab.",
   },
   "menger-sponge": {
-    howTo: "Tap to close and carve the holes. Pick the level in the Toy tab.",
+    howTo: "Tap to close and carve the holes. Hands-on: pull the small cubes out one by one.",
     about:
       "A Menger sponge is a fractal. Start with a cube and cut it into 27 smaller cubes, like a puzzle cube. Take out the one in the middle and the six at the middle of each face, leaving 20. Then do the same to each of those 20 cubes, and again, forever. Karl Menger described it in 1926.\n\nTap it and every hole is plugged, the smallest first, until it is a plain cube. Then it is carved again: the big cubes slide out of the faces, then the next size down, then the smallest. Pick level 2 or 3 in the Toy tab: level 2 keeps 400 little cubes, and level 3 keeps 8,000.",
   },
@@ -1482,7 +1502,7 @@ export const TOY_HELP = {
   },
   "torus-knot": {
     howTo:
-      "Tap it: the knot pulls loose and springs back. Drag to turn it. Pick a knot in the Toy tab.",
+      "Tap it: the knot pulls loose and springs back. Drag to turn it. Hands-on: pull it to stretch.",
     about:
       "A torus knot is a knot that winds around the surface of a donut shape, called a torus. It goes around the hole a few times one way while it loops through it a few times the other way. The simplest is the trefoil, which winds 2 and 3 times; it is the simplest true knot, one that can never be untied without cutting it.\n\nTap it and the knot is pulled loose, its loops stretching and swirling; then it is let go and springs back past its rest shape and wobbles to a stop, like a spring. Choose winding counts (2, 3), (2, 5), (3, 4), (3, 5) or (2, 7) in the Toy tab: the pair counts turns around the torus's two directions. Colors changes its palette and Glow its brightness.",
   },
@@ -1492,20 +1512,19 @@ export const TOY_HELP = {
       "A gyroid is a curving surface that splits space into two tangled mazes of tunnels that never meet. It has no straight lines and no flat parts, and it repeats forever in every direction. Alan Schoen, a scientist working for NASA, found it in 1970. Nature makes it too: tiny gyroid crystals in some butterfly wings give them their shiny green color.\n\nTap it and it breathes: the surface slides along itself, so one set of tunnels swells while the other narrows, then the other way, and it settles. In the Toy tab, cut it into a cube or a ball.",
   },
   mandelbulb: {
-    howTo: "Tap it to turn its discs like the dials of a lock.",
+    howTo: "Tap to turn the discs. Hands-on: drag round a disc to turn it like a lock's dial.",
     about:
       "The Mandelbulb is a 3D fractal, a cousin of the famous flat Mandelbrot set. It is made by repeating one short formula over and over for each point in space and keeping only the points that never fly away. The mathematical fractal has detail on many scales; this toy has a fixed, finite set of points. It was found in 2009 by Daniel White and Paul Nylander.\n\nTap it and its seven slices turn like the dials of a combination lock, neighbors in opposite directions, then back again. Each turns one seventh of a turn, because the bulb looks the same after a seventh of a turn, so it lands on the same picture. Pick the power (power n has n − 1 lobes) or a Julia bulb, which turns whole, in the Toy tab.",
   },
   sierpinski: {
-    howTo: "Tap to explode it; tap again to put it back. Pick the level in the Toy tab.",
+    howTo: "Tap to explode it. Hands-on: lift the small tetrahedra off and stack them back.",
     about:
-      "A Sierpinski tetrahedron is a fractal pyramid. It is made of four smaller copies of itself, each half as tall, and each of those is made of four smaller ones, and so on. It is the 3D cousin of the Sierpinski triangle, named after the mathematician Wacław Sierpiński, who described the triangle in 1915.\n\nTap it to explode it into its pieces; tap again to put it back together. Pick the level in the Toy tab: each level has four times as many little pyramids, so levels 3, 4 and 5 have 64, 256 and 1,024 respectively.",
+      "A Sierpinski tetrahedron is a fractal pyramid. It is made of four smaller copies of itself, each half as tall, and each of those is made of four smaller ones, and so on. It is the 3D cousin of the Sierpinski triangle, named after the mathematician Wacław Sierpiński, who described the triangle in 1915.\n\nTap it to explode it into its pieces; tap again to put it back together. Pick the level in the Toy tab: each level has four times as many little pyramids, so levels 3, 4 and 5 have 64, 256 and 1,024 respectively. With ✋ Hands-on on, lift the four small tetrahedra off one by one and set them down, then stack them back: brought near its place, each settles in.",
   },
   platonic: {
-    howTo:
-      "Tap to explode it; tap again to put it back. Pick one of the five solids in the Toy tab.",
+    howTo: "Tap to explode it. Hands-on: pull the faces off one by one and fit them back.",
     about:
-      "The Platonic solids are the only five convex polyhedra whose faces are all the same regular shape, meeting in the same way at every corner: the tetrahedron (4 triangles), the cube (6 squares), the octahedron (8 triangles), the dodecahedron (12 pentagons) and the icosahedron (20 triangles). They are named after the Greek thinker Plato, and Euclid proved there can be no others.\n\nIt starts as a dodecahedron. Tap it to explode its faces apart; tap again to put them back. Pick any of the five solids, and its colors, in the Toy tab. Many game dice come in these shapes.",
+      "The Platonic solids are the only five convex polyhedra whose faces are all the same regular shape, meeting in the same way at every corner: the tetrahedron (4 triangles), the cube (6 squares), the octahedron (8 triangles), the dodecahedron (12 pentagons) and the icosahedron (20 triangles). They are named after the Greek thinker Plato, and Euclid proved there can be no others.\n\nIt starts as a dodecahedron. Tap it to explode its faces apart; tap again to put them back. Pick any of the five solids, and its colors, in the Toy tab. Many game dice come in these shapes. With ✋ Hands-on on, pull the faces off one by one and lay them down; bring each back near its place and it fits back in.",
   },
   "seashell-spiral": {
     howTo: "Tap it to hear the sea in the shell.",
@@ -1523,7 +1542,7 @@ export const TOY_HELP = {
       "A surface plot is a graph in 3D. For each point on a flat floor, with its x and y, the equation gives a height z, so the graph becomes a landscape of hills, valleys and saddles. Colors show how high each part is.\n\nTap it and the surface lies flat, then rises out of the sheet and ripples, twists or breathes as a number called a changes. Pick one of 16 famous surfaces in the Toy tab, such as the sombrero, the saddle or Rosenbrock's banana valley, which is used to test computer methods that hunt for the lowest point. Or type your own: z = … with x and y, or with r and θ.",
   },
   "unit-circle": {
-    howTo: "Tap to send the point round. Try 3D, or type your own path, in the Toy tab.",
+    howTo: "Tap to send the point round. Hands-on: drag the point round; the waves follow.",
     about:
       "The unit circle is a circle with a radius of 1. As a point goes around it, turning through an angle called θ, its height is the sine of θ and its left-right place is the cosine. Traced out over time, they make two waves, the same shapes as sound and light waves.\n\nTap it and the point goes once around while its height draws the sine wave and its left-right place draws the cosine wave. For the circle, Euler's formula, e^(iθ) = cos θ + i sin θ, lights up piece by piece. In the Toy tab, try a 3D helix, another path, up to three turns, or type your own: x = …, y = … with t, or r = … with θ.",
   },
@@ -1573,7 +1592,7 @@ export const TOY_HELP = {
       "A duoprism pairs two polygons at right angles in four dimensions: every corner of one is matched with every corner of the other. A 3,4-duoprism has 3 × 4 = 12 corners, and its walls are prisms. With two squares it is the hypercube. Each ring of the first polygon has its own color. It is drawn in perspective from 4D.\n\nTap it and it rolls a full turn through the fourth dimension and comes home. Pick each polygon, from a triangle to a hexagon, in the Toy tab. Source: J. H. Conway, H. Burgiel and C. Goodman-Strauss, The Symmetries of Things, 2008.",
   },
   "pythagoras-proof": {
-    howTo: "Tap it to slide the triangles and show that a² + b² = c².",
+    howTo: "Tap to rearrange. Hands-on: slide the triangles yourself to turn a² + b² into c².",
     about:
       "In a right triangle, the two short sides a and b and the long side c always fit a rule: a² + b² = c². So a square drawn on the long side has the same area as the squares on the two short sides put together. It is named after Pythagoras, a Greek thinker of about 2,500 years ago, though people in Babylon knew it even earlier.\n\nThis is a rearrangement proof. Four copies of the triangle fill a big square, leaving two empty squares, a² and b². Tap it and the triangles slide into the corners, and the empty space becomes one tilted square, c², so a² + b² must equal c². Then they slide back.",
   },
