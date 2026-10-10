@@ -303,3 +303,5 @@
 {"v":1,"t":"2026-10-10T20:14:52.806Z","harness":"claude-code","event":"tool","session":"6a083bd9-7d1a-5fe6-8f6b-5e49e60f943b","tool":"ToolSearch","cwd":"splashery"}
 {"v":1,"t":"2026-10-10T20:15:03.450Z","harness":"claude-code","event":"tool","session":"6a083bd9-7d1a-5fe6-8f6b-5e49e60f943b","tool":"mcp__github__update_pull_request","cwd":"splashery"}
 {"v":1,"t":"2026-10-10T20:15:13.078Z","harness":"claude-code","event":"turn-end","session":"6a083bd9-7d1a-5fe6-8f6b-5e49e60f943b","cwd":"splashery"}
+{"v":1,"t":"2026-10-10T20:15:16.121Z","harness":"claude-code","event":"subagent-stop","session":"6a083bd9-7d1a-5fe6-8f6b-5e49e60f943b","agent":"aab600e4c3b176c58"}
+{"v":1,"t":"2026-10-10T20:35:58.737Z","harness":"claude-code","event":"turn-start","session":"6a083bd9-7d1a-5fe6-8f6b-5e49e60f943b","cwd":"splashery"}
