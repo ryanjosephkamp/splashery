@@ -1556,7 +1556,7 @@
       "owner": "The owner's Math notes (BACKLOG.md, Math r2): other 4D shapes beside the hypercube, and color themes.",
       "effect": "Rolls one whole turn through the fourth dimension and comes home.",
       "sound": "Like the hypercube: a slow rush as it rolls out and again as it rolls home, over a low chord in its own key.",
-      "improved": "Math r2: new toy (labs), the 5-cell. The corners are true 4D points turned in the planes of x and w and of y and w and seen in perspective from 4D; the edges stay straight between them. A tap rolls the shape one whole turn through the fourth dimension (about 5 s) and home. Seven color themes."
+      "improved": "Math r2: new toy (labs), the 5-cell. The corners are true 4D points turned in the planes of x and w and of y and w and seen in perspective from 4D; the edges stay straight between them. A tap rolls the shape one whole turn through the fourth dimension (about 5 s) and home. Seven color themes. Fix10: a thumbnail drawn at four times the size (its thin edges showed only in part) and a closer camera, so it looks as big as the other 4D shapes."
     },
     "sixteen-cell": {
       "v": "keep",
@@ -2639,16 +2639,16 @@
     "fruit-mri": {
       "v": "keep",
       "owner": "The owner's imaging idea of October 3, 2026: MRI of a fruit (lane Imaging; labs only).",
-      "effect": "A kiwi's or an orange's MRI, kit-built as 26 thin slices across the fruit (fine in each slice, like a scanner's), T2-weighted gray with a little scanner noise, inside a faint outline of the whole fruit. One slice shows at a time (a slab of the engine's cutting plane); a drag scrolls through them and the tap plays through all of them, front to back, and comes back.",
+      "effect": "A kiwi's or an orange's MRI, kit-built as 26 thin slices across the fruit (fine in each slice, like a scanner's), T2-weighted gray with a little scanner noise, inside a faint outline of the whole fruit. One slice shows at a time (a slab of the engine's cutting plane); a drag scrolls through them and the tap plays through all of them, front to back, and comes back. Fix10: the fruit holds still and face-on; one drag over its height runs through every slice, a Slice slider over the stage does the same, and a drag or the slider always takes over from the play; a brighter outline and a thin ring round each slice.",
       "sound": "An MRI scanner's knocking as it steps through the slices.",
-      "improved": "Imaging: new toy. Imaging r2: sharper and less grainy (finer slices, lighter noise); a Vision option (gray, night vision, infrared). Polish (r3): finer splats."
+      "improved": "Imaging: new toy. Imaging r2: sharper and less grainy (finer slices, lighter noise); a Vision option (gray, night vision, infrared). Polish (r3): finer splats. Fix10 (the walkthrough of October 9, 2026): the slice control (no lock-up, a Slice slider, no turning), a brighter outline and slice rings."
     },
     "electron-microscope": {
       "v": "keep",
       "owner": "The owner's imaging idea of October 3, 2026: an electron microscope with pollen, a diatom and a snowflake (lane Imaging; labs only).",
-      "effect": "Kit-built pollen grains (spiny, netted and winged), diatoms (a centric one with rings of pores and a pennate one) or a rimed snowflake on carbon tape, shaded as a scanning electron microscope sees them: gray, bright edges, a shadow away from the detector, a little grain. Each tap glides the view face-on to the next zoom step (the field, one grain or arm, its surface); the third goes back out.",
+      "effect": "Kit-built pollen grains (spiny, netted and winged), diatoms (a centric one with rings of pores and a pennate one) or a rimed snowflake on carbon tape, shaded as a scanning electron microscope sees them: gray, bright edges, a shadow away from the detector, a little grain. Each tap glides the view face-on to the next zoom step (the field, one grain or arm, its surface); the third goes back out. Fix10: a tap picks the object under it (each pollen grain, the centric or the pennate diatom), so a tap on another object starts that one's zoom.",
       "sound": "The stage motor's two soft steps and a low vacuum hum.",
-      "improved": "Imaging: new toy. Imaging r2: sharper (the labs sharp kernel, twice the splats, finer splats); a Vision option (gray, night vision, infrared). Polish (r3): finer splats."
+      "improved": "Imaging: new toy. Imaging r2: sharper (the labs sharp kernel, twice the splats, finer splats); a Vision option (gray, night vision, infrared). Polish (r3): finer splats. Fix10 (the walkthrough of October 9, 2026): zoom on any object, each with its own two steps."
     },
     "thermal-camera": {
       "v": "keep",
@@ -2696,7 +2696,8 @@
       "v": "new",
       "owner": "Push Plan S15 (the owner's yes, October 4, 2026), lane Night sky, October 5, 2026.",
       "effect": "The sky over a place and time, seen from the ground: about 5,000 stars to magnitude 6 (HYG) sized by brightness and colored by temperature, constellation lines, the Sun, the Moon (a ball lit from the Sun's side, so its real phase) and the planets placed by JPL's formulas. The sky turns with time; daylight and twilight fade the stars out faintest first. A tap names a star or planet with a ring around it and a few facts beside the stage.",
-      "sound": "One soft, low tine and a faint breath as the ring marks it."
+      "sound": "One soft, low tine and a faint breath as the ring marks it.",
+      "improved": "Fix10 (the walkthrough of October 9, 2026): a sharp skyline by day (the day ground at the night's density, and no ground splat's edge crosses the skyline), and a drag that turns with the finger (an engine change: from inside, a drag turns as far as it spans on screen)."
     },
     "cryoem-map": {
       "v": "new",
@@ -2737,7 +2738,7 @@
       "v": "keep",
       "owner": "The owner's Push Plan pick S4, \"For the volume viewer, absolutely\" (October 4, 2026), and his yes to a DICOM reader the same day (lane Volume viewer, October 8, 2026; labs only).",
       "effect": "A person's own CT, MRI or microscope volume (DICOM series, folder, zip or multi-frame file; NIfTI .nii and .nii.gz; TIFF stacks; raw with a size form) drawn as opaque volume splats spaced to the device's budget, each voxel at its true size. Window and level with presets (bone, soft tissue, full range) or sliders, five color maps and two opacity curves, a cut plane on each axis that a drag moves (with a glowing cut face), a thin-slice view, and the maximum-intensity picture. A tap on the volume steps to the next preset (the toy rebuilds with the new window); the Play button sweeps the cut down through the volume and back (5 s).",
-      "sound": "A soft click like a console's dial, then a short low tone as the new window settles.",
+      "sound": "Fix10 (the walkthrough of October 9, 2026: no click and no rising hum): a tap sounds like a film slid onto a lightbox, a papery slip and a soft settle. Play has its own dark, soft rush for each pass of the cut, down and back up. The drag is silent.",
       "improved": "Volume viewer: new toy (labs). Readers in src/volume/read.js (dicom-parser 1.8.21, MIT, vendored and loaded only for a DICOM file; NIfTI, TIFF and zip read in the page), the view in src/volume/view.js on the Imaging lane's volume kind. Samples: the CWI walnut (CC BY 4.0) and a 12.8 mm gar larva's micro-CT by Brian Metscher (Zenodo 19021581, CC BY 4.0; tools/vol-gar.mjs)."
     },
     "real-moon": {
@@ -2911,9 +2912,9 @@
     "ripple-tank": {
       "v": "keep",
       "owner": "Push Plan S9 (yes), October 5, 2026: a ripple tank with a real wave equation (lane Optics; labs only).",
-      "effect": "A water surface of splats, one per cell of a 216 × 216 grid solving the 2D wave equation, lit so the crests catch the light: a plane wave through two slits (bright fringes on dotted lines where d·sin θ = m·λ), one slit, one or two dippers, or still water. The tap drops a pebble where it lands: it falls in and rings spread, bounce off the barrier and die in the beaches. Bars on the back wall graph the waves' strength.",
+      "effect": "A water surface of splats, one per cell of a 216 × 216 grid solving the 2D wave equation, lit so the crests catch the light: a plane wave through two slits (bright fringes on dotted lines where d·sin θ = m·λ), one slit, one or two dippers, or still water. The tap drops a pebble where it lands: it falls in and rings spread, bounce off the barrier and die in the beaches. Bars on the back wall graph the waves' strength. Fix10 (the walkthrough of October 9, 2026: the pebble was hard to see): a 2.4 cm pale stone falls 10 cm in 0.45 s, its shadow on the water tightening under it; it sinks for a moment as it lands, with a dent to match its size.",
       "sound": "The pebble's plop as it lands, and the soft lap of its rings.",
-      "improved": "Optics: new toy (labs). Finite differences at a Courant number of 0.5, absorbing beaches; tests check the fringes against d·sin θ = m·λ, the single slit's spreading, the wave speed and the beaches (docs/evidence/ripple-tank.json)."
+      "improved": "Optics: new toy (labs). Finite differences at a Courant number of 0.5, absorbing beaches; tests check the fringes against d·sin θ = m·λ, the single slit's spreading, the wave speed and the beaches (docs/evidence/ripple-tank.json). Fix10: the bigger, paler pebble with its shadow, sink and dent; its drip moved to the landing."
     },
     "light-bench": {
       "v": "keep",

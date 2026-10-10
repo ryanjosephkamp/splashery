@@ -2775,9 +2775,12 @@ export const TOY_SOUNDS = {
   ],
   // Volume viewer (lane Volume viewer): stepping to the next window preset, a soft click like a
   // scanner console's dial, and a short low tone as the new window settles.
+  // Fix10 (the walkthrough of October 9, 2026: no click and no rising "vroom"): a tap slides a
+  // film onto a lightbox, a papery slip and its soft settle. Play is quiet here; its two dark,
+  // soft rushes come from the recipe's cues, one for each pass of the cut. The drag is silent.
   "volume-viewer": [
-    { voice: "switch", f: 2300, vol: 0.5 },
-    { voice: "hum", at: 0.04, f: 220, to: 1.15, decay: 0.45, bright: 0.25, vol: 0.18 },
+    { voice: "pageflip", f: 1100, decay: 0.8, vol: 0.55 },
+    { voice: "thud", at: 0.36, f: 160, decay: 0.6, bright: 0.15, vol: 0.12 },
   ],
   // Lane Screens: the old TV's click and hum (each style plays its own
   // cues as it switches on: the flat TV's soft tone, the cinema's curtains,
@@ -2900,9 +2903,10 @@ export const TOY_SOUNDS = {
   // ---- Ripple tank (lane Optics) ------------------------------------------------------
   // The pebble's plop as it lands (it falls for 0.3 s), and the soft lap of
   // its rings.
+  // Fix10: on the bigger pebble's landing, 0.45 s after the tap.
   "ripple-tank": [
-    { voice: "drip", f: 640, n: 1, at: 0.3, vol: 0.8 },
-    { voice: "wave", f: 420, decay: 1.2, at: 0.36, vol: 0.16 },
+    { voice: "drip", f: 560, n: 1, at: 0.43, vol: 0.8 },
+    { voice: "wave", f: 420, decay: 1.2, at: 0.49, vol: 0.16 },
   ],
   // ---- Light bench (lane Optics) ------------------------------------------------------
   // A tap changes the light: the lamp's switch clicks.
