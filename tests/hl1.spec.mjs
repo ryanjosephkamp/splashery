@@ -31,7 +31,7 @@ const SAMPLE = [
   "oak",
   "campfire",
   "lollipop", // lane Hands-on H2: the cupcake's cherry lifts off now (pieces mode), so it is never lifted whole
-  "rubber-duck", // Fix11: the teddy bear is a body piece with its arms and head on ropes now (#433, lane Hands-on H1, pieces mode), so it is never lifted whole
+  "balloon-dog", // Fix11: the teddy bear is a body piece with its arms and head on ropes now (#433, lane Hands-on H1, pieces mode), so it is never lifted whole
   "soda-can", // lane Hands engine B: the chest's lid is a hinge now (pieces mode), so it no longer lifts whole
   "running-shoe",
   "shield",
