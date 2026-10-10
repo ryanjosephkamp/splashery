@@ -102,9 +102,9 @@ renderer, 60k · 140k · 200k · 280k · 400k): the clock 8.8 · 12.8 · 9.0 · 
 10.8 · 8.0 · 6.0 · 10.1 · 8.9, the chess set 6.0 · 6.7 · 7.5 · 11.4 · 9.1, the oak 11.0 · 7.7 · 10.3
 · 12.7 · 10.9, the marble and the pool ball (twice the counts) 14.0 · 7.5 · 7.9 · 8.7 · 10.3 and
 17.3 · 10.1 · 8.1 · 9.3 · 12.1. Only the clock grows steadily with the count; on the rest the noise
-(up to ±30% between runs) is larger than the difference. SwiftShader's time is mostly the frame's readback
-and fixed costs, so it cannot say what more splats cost a phone's GPU, which sorts and blends every
-splat each frame. Expect the cost on a phone to grow with the count.
+(up to ±30% between runs) is larger than the difference. SwiftShader's time is mostly the frame's
+readback and fixed costs, so it cannot say what more splats cost a phone's GPU, which sorts and
+blends every splat each frame. Expect the cost on a phone to grow with the count.
 
 ## What it shows
 
