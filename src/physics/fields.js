@@ -17,12 +17,15 @@
 // - strings: { list: [{ a, b, name }], reach, normal } (lane Hands-on H3)
 // - flee: { radius, push, back, max } | true; follow: true
 // - pieces' own `material`, `projectile: { nose, vane, fr }` and `target`
+// - force: (body, h, ctx) => {} each substep, watch: true, and carry:
+//   { key: [keys] } (lane Hands-on H4)
 //
 // src/physics/hands-on.js calls an Extras (made by extrasFor) at a few
 // points: attach, the world built, a press, a move, a let-go, each frame
 // and each hit; the world calls its force once per substep (World.force).
 // What a recipe's drive() reads comes as info.hands (src/motion.js):
-// { on, shake, finger, point, rolled, flee(key, pos), plucked }.
+// { on, shake, finger, point, rolled, moved, flee(key, pos), piece(key),
+// plucked }.
 
 import { quat, v3, surfacePoints } from "./world.js";
 import { materialFor, applyMaterial, airForce, rollForce, throwSpin, driftForce } from "./materials.js"; // prettier-ignore
@@ -329,19 +332,9 @@ export class FleeField {
 
 // ---- The glue to Hands-on -------------------------------------------------
 
-// (touch: lane Hands-on H5; strings: lane Hands-on H3)
-const KEYS = [
-  "material",
-  "water",
-  "air",
-  "well",
-  "wheels",
-  "shake",
-  "flee",
-  "follow",
-  "touch",
-  "strings",
-];
+// (touch: lane Hands-on H5; force, watch and carry: lane Hands-on H4;
+// strings: lane Hands-on H3)
+const KEYS = ["material", "water", "air", "well", "wheels", "shake", "flee", "follow", "touch", "force", "watch", "carry", "strings"]; // prettier-ignore
 
 // An Extras for a toy whose hands block asks for any of these pieces (or
 // whose pieces are projectiles, targets or have materials); null else.
@@ -401,8 +394,7 @@ export class Extras {
       // while a finger is down on the toy (a press, a push or a hold), `held`
       // while it (or a piece) is up in the hand, `speed` how fast the whole
       // toy (or the held piece) moves, in toy radii per second, `joint(name)`
-      // a joint's value (null without one) and `piece(i)` where piece i is
-      // ({ pos, quat, home, held }, recipe units in pieces mode).
+      // a joint's value (null without one) and `piece(i)` where piece i is.
       pressed: false,
       get held() {
         return !!self.ho.hold;
@@ -416,10 +408,11 @@ export class Extras {
         const j = self.ho.joints?.byName?.get(name);
         return j && Number.isFinite(j.v) ? j.v : null;
       },
-      piece(i) {
-        const pc = self.ho.pieces?.[i];
-        if (!pc || !self.ho.world) return null;
-        return { pos: pc.body.pos.slice(), quat: pc.body.q.slice(), home: pc.home.pos.slice(), held: !!pc.body.held }; // prettier-ignore
+      // Where a piece is, by its number (lane Hands-on H5), its part name
+      // (lane Hands-on H2), token or `name` (lane Hands-on H4): see
+      // pieceState().
+      piece(key) {
+        return self.pieceState(key);
       },
     };
   }
@@ -523,6 +516,8 @@ export class Extras {
       this.air ||
       this.well ||
       this.wheels ||
+      hands.force ||
+      hands.carry ||
       ho.pieces.some((p) => p.body.projectile)
     )
       // prettier-ignore
@@ -535,6 +530,7 @@ export class Extras {
     const bodies = ho.mode === "toy" ? [ho.body] : ho.pieces.map((p) => p.body);
     const G = this.G;
     const R = ho.R();
+    if (this.hands.carry) this.carryStep();
     for (const b of bodies) {
       if (b.stuck) {
         if (b.held) {
@@ -557,7 +553,69 @@ export class Extras {
       if (this.air) airBuoyancy(b, this.air, h);
       if (this.well) wellForce(b, this.well, h);
       if (this.wheels) wheelForce(b, this.wheels, G, h, touching);
+      // Lane Hands-on H4: the recipe's own push (a flying saucer's beam).
+      if (this.hands.force) this.hands.force(b, h, this.forceCtx(b, G, R));
     }
+  }
+
+  // What a recipe's `hands.force(body, h, ctx)` gets with each body: the
+  // piece it is (its def, part and token; null for a whole toy), the toy's
+  // eased controls, the build's data, gravity and a toy radius, whether
+  // the body touched anything in the last step, and free() to let a piece
+  // that is resting at home go.
+  forceCtx(b, G, R) {
+    const ho = this.ho;
+    const w = ho.world;
+    const pc = ho.mode === "pieces" ? ho.pieces.find((p) => p.body === b) || null : null;
+    return { piece: pc, c: this.player.motion?.state || {}, data: this.player.proc?.ctx?.kit?.data, G, R, touching: !!w && b.touchTick >= w.tick - 1, free: () => ho.free(b) }; // prettier-ignore
+  }
+
+  // Lane Hands-on H4: `hands.carry` ({ key: [keys] }, by part name or
+  // token): while the piece `key` is held, the others come loose and go with
+  // it as they were built beside it (Galileo's two balls in one hand); let
+  // go, they fly on with its speed and then each goes its own way.
+  carryStep() {
+    const ho = this.ho;
+    const find = (k) => ho.pieces.find((p) => p.part === k || (p.token !== undefined && p.token === k)); // prettier-ignore
+    for (const [key, list] of Object.entries(this.hands.carry)) {
+      const pc = find(isNaN(key) ? key : Number(key)) || find(key);
+      if (!pc?.body.held) continue;
+      const b = pc.body;
+      // Only its turn about the upright: they stay side by side, level,
+      // however the held one swings in the hand.
+      const f = quat.rotate(quat.mul(b.q, quat.conj(pc.home.q)), [1, 0, 0]);
+      const dq = quat.axisAngle([0, 1, 0], Math.atan2(-f[2], f[0]));
+      for (const k2 of list) {
+        const o = find(k2);
+        if (!o || o === pc || o.body.held) continue;
+        const b2 = o.body;
+        if (b2.pinned) ho.free(b2);
+        b2.pos = v3.add(b.pos, quat.rotate(dq, v3.sub(o.home.pos, pc.home.pos)));
+        b2.q = quat.norm(quat.mul(dq, o.home.q));
+        b2.prevPos = b2.pos.slice();
+        b2.prevQ = b2.q.slice();
+        b2.vel = b.vel.slice();
+        b2.omega = [0, 0, 0];
+        b2.carriedBy = b;
+      }
+    }
+  }
+
+  // Where a piece is, for a drive (info.hands.piece): by its number in
+  // `hands.pieces` (lane Hands-on H5), or by its part name, token or `name`
+  // (lane Hands-on H4; a piece with no part of its own, drawn by the drive).
+  // { pos, vel, quat (its turn in the world), turn (its turn from home),
+  // home, held, pinned (resting at home), off (picked up or knocked loose,
+  // = !pinned) }, recipe units in pieces mode; null before the world is
+  // built or for a piece it doesn't have.
+  pieceState(key) {
+    const ho = this.ho;
+    if (!ho.world || !ho.pieces) return null;
+    const pc = typeof key === "number" ? ho.pieces[key] : ho.pieces.find((p) => p.part === key || p.def?.name === key || (p.token !== undefined && p.token === key)); // prettier-ignore
+    if (!pc) return null;
+    const b = pc.body;
+    const turn = quat.mul(b.q, quat.conj(pc.home.q));
+    return { pos: b.pos.slice(), vel: b.vel.slice(), quat: b.q.slice(), turn, home: pc.home.pos.slice(), held: !!b.held, pinned: !!b.pinned, off: !b.pinned }; // prettier-ignore
   }
 
   // ---- The finger ----
@@ -591,9 +649,17 @@ export class Extras {
       this.fingerAt(x, y);
       return true;
     }
-    // Wheels: a drag on the toy pushes it along (never lifts it).
+    // Wheels: a drag on the toy pushes it along (never lifts it). With
+    // `lift` (lane Hands-on H4), a drag that starts straight up the screen
+    // picks it up instead, as any toy is.
     const pr = this.ho.press;
     if (this.hands.wheels && pr && !this.ho.hold && this.ho.mode !== "pieces") {
+      if (this.hands.wheels.lift) {
+        const dx = x - pr.x;
+        const dy = pr.y - y;
+        if (pr.up === undefined && Math.hypot(dx, dy) >= 7) pr.up = dy > 1.2 * Math.abs(dx);
+        if (pr.up) return false;
+      }
       this.ho.pushTo(pr, x, y);
       return true;
     }
@@ -688,6 +754,14 @@ export class Extras {
   // A thrown body: the material's weight, spin and drag.
   thrown(h) {
     const b = h.body;
+    // What it carried flies on with it (lane Hands-on H4).
+    if (this.hands.carry)
+      for (const pc of this.ho.pieces)
+        if (pc.body.carriedBy === b) {
+          pc.body.vel = b.vel.slice();
+          pc.body.damping = b.damping; // the same air on both
+          pc.body.carriedBy = null;
+        }
     const m = this.mats?.get(b);
     if (!m) return;
     b.damping = 0.02;
