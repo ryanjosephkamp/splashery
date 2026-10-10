@@ -17,6 +17,7 @@ import {
   vec,
 } from "../kit.js";
 import { evenBox, evenDisc, evenEllipsoid, evenTorus } from "./even.js";
+import { surfacePoints } from "../physics/world.js"; // lane Hands-on H4
 
 const TAU = Math.PI * 2;
 const { add, sub, mul, dot, cross, len, unit } = vec;
@@ -1160,6 +1161,65 @@ const OW_SPRAY = (() => {
   return out;
 })();
 
+// ---- Hands-on (lane Hands-on H4) -------------------------------------------------------
+
+// Where the campfire's spare log lies, outside the ring of stones.
+const CAMP_LOG = [0.62, -0.55 + 0.075, 0.95];
+
+// The lava lamp tipped (info.up, the world's up in the lamp's frame, while
+// Hands-on has it turned): each blob is drawn toward the glass's upper side
+// on a soft spring, so it lags, overshoots a little and wobbles.
+function lavaTip(m, info) {
+  const up = info?.up;
+  const dt = Math.min(0.1, Math.max(0, (info?.time ?? 0) - (m.tipT ?? info?.time ?? 0)));
+  m.tipT = info?.time ?? 0;
+  const st = (m.tip ||= []);
+  const h = Math.hypot(up?.[0] ?? 0, up?.[2] ?? 0);
+  const k = Math.min(1, 2.5 * h);
+  const dir = h > 1e-4 ? [up[0] / h, up[2] / h] : [0, 0];
+  return {
+    slide(i, b, y) {
+      const s = (st[i] ||= { x: 0, z: 0, vx: 0, vz: 0 });
+      const room = Math.max(0, lavaGlassR(y) - b.r - 0.015);
+      const tx = dir[0] * room * k - (k ? b.x : 0);
+      const tz = dir[1] * room * k - (k ? b.z : 0);
+      for (const [p, v, to] of [
+        ["x", "vx", tx],
+        ["z", "vz", tz],
+      ]) {
+        s[v] += (30 * (to - s[p]) - 4.5 * s[v]) * dt;
+        s[p] += s[v] * dt;
+      }
+      if (!up && Math.abs(s.x) + Math.abs(s.z) < 1e-4) return { x: 0, z: 0 };
+      // It leans the way it is sliding (a soft blob drags behind).
+      const q = quatAxisAngle(unit([s.vz, 0, -s.vx]), Math.min(0.35, 1.2 * Math.hypot(s.vx, s.vz)));
+      return { x: s.x, z: s.z, q: Math.hypot(s.vx, s.vz) > 1e-4 ? q : null };
+    },
+  };
+}
+
+// The iceberg: the berg bobs on a spring when pushed down; the chunk holds
+// to its shoulder until pulled off.
+function icebergJoints(ch) {
+  return [
+    { type: "slider", part: "berg", pivot: [0, 0, 0], axis: [0, 1, 0], min: -0.35, max: 0.2, spring: 14, damping: 1.8, gravity: false, bounce: 0.2, pos: [0, 0.2, 0], pick: [0.85, 0.9, 0.85] }, // prettier-ignore
+    { type: "break", part: "chunk", to: "berg", at: ch.F, pos: ch.C0, pivot: ch.hinge, pull: 0.3, give: 0.06, solid: { type: "ellipsoid", r: [0.2, 0.14, 0.2] }, mass: 0.5, pick: [0.24, 0.2, 0.24], sound: (ev) => (ev.kind === "snap" ? { voice: "shellcrack", f: 1800, n: 3, kind: "ice", decay: 1.0 } : undefined) }, // prettier-ignore
+  ];
+}
+
+// A loose chunk of ice floats: lifted by the water it pushes aside (ice is
+// nine tenths as dense, so it rides mostly under), slowed and steadied in
+// the water.
+function icebergFloat(b, h, ctx) {
+  if (b.held || b.pinned || ctx.piece?.part !== "chunk") return;
+  const depth = IB_FLOAT + 0.06 - b.pos[1];
+  if (depth <= -0.15) return;
+  const sub = clamp((depth + 0.15) / 0.3, 0, 1);
+  b.vel[1] += (ctx.G * (sub / 0.9) - 2.5 * sub * b.vel[1]) * h;
+  for (const k of [0, 2]) b.vel[k] *= 1 - Math.min(1, 1.5 * sub * h);
+  for (const k of [0, 1, 2]) b.omega[k] *= 1 - Math.min(1, 1.2 * sub * h);
+}
+
 export const RECIPES = {
   campfire: {
     alive: true,
@@ -1168,8 +1228,27 @@ export const RECIPES = {
       { key: "stoke", label: "Stoke", type: "pulse", ease: 1.6 },
     ],
     action: { key: "stoke", label: "Stoke the fire" },
-    drive(t, c, out) {
+    // Hands-on (lane Hands-on H4): a spare log lies by the ring of stones.
+    // Pick it up and lay it on the fire: the flames grow, with a crackle.
+    hands: {
+      floor: -0.55,
+      area: 1.2,
+      watch: true,
+      pieces: () => [{ part: "spare", pos: CAMP_LOG, pivot: CAMP_LOG, solid: { type: "box", half: [0.36, 0.07, 0.07] }, points: surfacePoints({ type: "box", half: [0.36, 0.07, 0.07] }, 3), mass: 1, friction: 0.9, restitution: 0.05, pick: [0.42, 0.11, 0.12] }], // prettier-ignore
+      sound: (hit) => (hit.speed > 0.4 ? { voice: hit.body && Math.hypot(hit.body.pos[0], hit.body.pos[2]) < 0.5 ? "flame" : "wood", f: 90, rate: 5, n: 3, bright: 0.45, decay: 0.9, vol: Math.min(0.7, 0.2 + hit.speed / 6) } : null), // prettier-ignore
+    },
+    drive(t, c, out, info) {
       out.amount = 0.45 + 0.9 * c.size + 0.7 * c.stoke;
+      // In Hands-on the spare log shows by the stones; laid on the fire, the
+      // flames grow.
+      out.parts.spare = { visible: info.hands?.on ? 1 : 0 };
+      const log = info.hands?.on ? info.hands.piece("spare") : null;
+      const m = mem(c);
+      let on = 0;
+      if (log && !log.held) on = Math.hypot(log.pos[0], log.pos[2]) < 0.48 && log.pos[1] < -0.2 ? 1 : 0; // prettier-ignore
+      m.logFire = (m.logFire ?? 0) + (on - (m.logFire ?? 0)) * Math.min(1, (info.time - (m.logT ?? info.time)) * 2.5); // prettier-ignore
+      m.logT = info.time;
+      out.amount += 0.9 * m.logFire;
     },
     build(k) {
       const ground = -0.55;
@@ -1217,6 +1296,16 @@ export const RECIPES = {
           },
         });
       }
+      // Lane Hands-on H4: a spare log by the stones (shown only in Hands-on;
+      // left out of the fit).
+      k.add(k.cylinder(0.075, 0.72), {
+        part: k.part("spare", { pivot: CAMP_LOG }),
+        fit: false,
+        pos: CAMP_LOG,
+        rot: [0, 0, 90],
+        flat: 0.25,
+        color: (c) => mix("#6b4526", "#3a2413", 0.5 + 0.5 * c.fbm(c.p[0] * 14, c.p[1] * 14, c.p[2] * 14)), // prettier-ignore
+      });
       // A bed of embers that glows and flickers.
       k.add(k.disc(0.42), {
         pos: [0, ground + 0.03, 0],
@@ -1480,10 +1569,15 @@ export const RECIPES = {
         m.run = 0;
       }
       const tt = m.flowT + (m.base ?? 0) + extra;
+      // Lane Hands-on H4: tipped in Hands-on, the wax (lighter than the
+      // liquid) slides over to the glass's upper side, lagging and wobbling.
+      const tip = lavaTip(m, info);
       blobs.forEach((b, i) => {
         const y = lavaY(b, tt);
+        const sl = tip.slide(i, b, y);
         out.parts[`blob${i}`] = {
-          offset: [Math.sin(tt * b.speed * 0.8 + b.phase) * 0.02, y - lavaY(b, 0), 0],
+          offset: [Math.sin(tt * b.speed * 0.8 + b.phase) * 0.02 + sl.x, y - lavaY(b, 0), sl.z],
+          ...(sl.q ? { quat: sl.q } : {}),
         };
       });
       const hot = s === null ? 0 : ease(band(s, 0, 0.3)) * (1 - ease(band(s, 3.1, 4.5)));
@@ -2774,6 +2868,14 @@ export const RECIPES = {
     alive: true,
     controls: [{ key: "calve", label: "Calve", type: "pulse", ease: IB_SECS }],
     action: { key: "calve", label: "Break off a chunk" },
+    // Hands-on (lane Hands-on H4): push the berg down and it bobs back up;
+    // pull the chunk off its shoulder and it floats, mostly under the sea.
+    hands: {
+      floor: -1.3,
+      area: 1.5,
+      joints: (d) => (d?.chunk ? icebergJoints(d.chunk) : []),
+      force: icebergFloat,
+    },
     // A tap cracks a chunk off the berg's shoulder (a part cut by a plane,
     // with fresh pale ice on both broken faces). It tips over to the right,
     // falls into the sea with a crown of spray and a ring of ripples, bobs
