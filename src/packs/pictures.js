@@ -2680,6 +2680,27 @@ const FRAME_RECIPE = {
   ],
   controls: [{ key: "swing", label: "Swing", type: "pulse", ease: FRAME_SWING }],
   action: { key: "swing", label: "Swing the frame" },
+  // Hands-on (lane Hands-on H3): push the frame and it swings on its nail,
+  // a pendulum that dies away and settles hanging level. (Its picture is
+  // never picked up whole.)
+  hands: {
+    joints: () => [
+      {
+        type: "hinge",
+        part: "frame",
+        pivot: [0, FRAME.nailY, 0.02],
+        axis: [0, 0, 1],
+        min: -0.6,
+        max: 0.6,
+        damping: 0.45,
+        bounce: 0.3,
+        com: [0, 0, 0.02],
+        pos: [0, 0, 0.03],
+        pick: [FRAME.X, FRAME.Y, 0.12],
+        sound: () => null,
+      },
+    ],
+  },
   focus: (p) => focusToggle(FRAME, p),
   pictures: {
     sample: (o) =>
@@ -2767,6 +2788,7 @@ const FRAME_RECIPE = {
     const X = ow + fw;
     const Y = oh + fw;
     const nailY = Y + 0.3;
+    Object.assign(FRAME, { X, Y, nailY }); // (for Hands-on's hinge; lane Hands-on H3)
     const fp = k.part("frame", { pivot: [0, nailY, 0.02], axis: [0, 0, 1] });
     // Room for the swing.
     for (const sx of [-1, 1]) k.reach([sx * (X + 0.25), -Y - 0.1, 0]);
