@@ -21,28 +21,42 @@ async function open(page, profile, clip) {
 
 // Plays the clip for `ms` of real time and returns the seconds of the clip that went by, between
 // the moment its position first changed and the moment it last did (it moves a frame at a time, and
-// a slow device draws few of them, so the ends are where the position was seen to move).
+// a slow device draws few of them, so the ends are where the position was seen to move). Each
+// position is timed when the toy works it out (its drive, at the frame), not when this loop next
+// looks: on a busy machine a frame drawn after the drive held the page for up to a third of a
+// second, and that lag differed at the two ends (Fix11: 3.65 s of the clip "in" 3.93 s).
 const played = (page, ms) =>
   page.evaluate(
     async ([m, ms]) => {
       const { MOVING } = await import(m);
-      window.__splashery.app.setControl("play", 1);
+      const recipe = window.__splashery.player.motion.recipe;
+      const drive = recipe.drive;
+      const seen = [];
+      recipe.drive = function (...args) {
+        const out = drive.apply(this, args);
+        seen.push([performance.now(), MOVING.t]);
+        return out;
+      };
+      try {
+        window.__splashery.app.setControl("play", 1);
+        const t0 = performance.now();
+        while (performance.now() - t0 < ms) await new Promise((r) => setTimeout(r, 10));
+      } finally {
+        recipe.drive = drive;
+      }
       const clip = MOVING.clip;
-      const t0 = performance.now();
-      let last = MOVING.t;
+      let last = seen.length ? seen[0][1] : MOVING.t;
       let total = 0;
       let first = null;
       let at = null;
-      while (performance.now() - t0 < ms) {
-        await new Promise((r) => setTimeout(r, 10));
-        if (MOVING.t === last) continue;
-        let d = MOVING.t - last;
+      for (const [now, t] of seen) {
+        if (t === last) continue;
+        let d = t - last;
         if (d < -clip.duration / 2) d += clip.duration; // it looped
-        const now = performance.now();
         if (first === null) first = now;
         else total += d;
         at = now;
-        last = MOVING.t;
+        last = t;
       }
       return { clip: total, real: first === null ? 0 : (at - first) / 1000, duration: clip.duration, sound: !!clip.audio }; // prettier-ignore
     },

@@ -306,6 +306,10 @@ test.describe("the toy", () => {
     expect(await page.evaluate(() => typeof window.dicomParser)).toBe("object");
     await page.setInputFiles("#toy-input-file", path.join(FIX, "phantom.nii.gz"));
     expect(await shown(/NIfTI-1/)).toMatch(/24 × 20 × 12/);
+    // The Toy tab drawn again for it (onToy, after the build that already set the stats): a
+    // message shown in the old panel would be replaced (Fix11: under load the cut-short alert below
+    // landed in the old panel and was lost).
+    await expect(page.locator("#toy-input .input-shown")).toContainText("Showing phantom", { timeout: 60_000 }); // prettier-ignore
     // A cut-short file: the panel's alert says so, and the volume shown stays.
     await page.setInputFiles("#toy-input-file", {
       name: "broken.nii",
