@@ -4905,6 +4905,336 @@
           ]
         }
       ]
+    },
+    "photo-dash": {
+      "status": "ready",
+      "said": "(October 9, 2026, walkthrough) Give the coin a better sound.",
+      "note": "A better sound for catching a spark (the coin).",
+      "plan": "Now in the game (lane Arcade r3): two quick bright bell notes up a fourth (B5, then E6) with a faint glint, in place of the old scattered sparkle. Each ball also lands with its own sound: the glass marble clinks, the steel ball rings, the beach ball thumps hollow, and the tennis ball pocks.",
+      "candidates": [
+        {
+          "id": "a",
+          "label": "Coin (a spark caught)",
+          "sound": [
+            {
+              "voice": "ding",
+              "f": 987.77,
+              "vol": 0.4,
+              "decay": 0.22
+            },
+            {
+              "voice": "ding",
+              "f": 1318.51,
+              "at": 0.07,
+              "vol": 0.5,
+              "decay": 0.55
+            },
+            {
+              "voice": "sparkle",
+              "at": 0.07,
+              "vol": 0.12,
+              "decay": 0.45
+            }
+          ]
+        },
+        {
+          "id": "b",
+          "label": "Three coins in a row",
+          "sound": [
+            {
+              "voice": "ding",
+              "f": 987.77,
+              "vol": 0.4,
+              "decay": 0.22
+            },
+            {
+              "voice": "ding",
+              "f": 1318.51,
+              "at": 0.07,
+              "vol": 0.5,
+              "decay": 0.55
+            },
+            {
+              "voice": "ding",
+              "f": 987.77,
+              "at": 0.45,
+              "vol": 0.4,
+              "decay": 0.22
+            },
+            {
+              "voice": "ding",
+              "f": 1318.51,
+              "at": 0.52,
+              "vol": 0.5,
+              "decay": 0.55
+            },
+            {
+              "voice": "ding",
+              "f": 987.77,
+              "at": 0.9,
+              "vol": 0.4,
+              "decay": 0.22
+            },
+            {
+              "voice": "ding",
+              "f": 1318.51,
+              "at": 0.97,
+              "vol": 0.5,
+              "decay": 0.55
+            }
+          ]
+        }
+      ]
+    },
+    "note-rider": {
+      "status": "ready",
+      "said": "(October 9, 2026, walkthrough) Notes ring on too long, like a held sustain pedal. Add guitar and other instruments, the way rhythm games do.",
+      "note": "Each note should stop at its own length; add guitar and other instruments to choose from.",
+      "plan": "Now in the game (lane Arcade r3): a caught note lasts its own length. On the keyboards the key lifts and the damper falls when the note ends; a plucked string fades over about the note's length. Seven instruments to pick from a row of buttons in the game (and the Instrument option): piano, guitar, steel guitar, harp, organ, synth, and vibes. A recording still plays its own slices. Each candidate below is the start of Ode to Joy as the game plays it.",
+      "candidates": [
+        {
+          "id": "piano",
+          "label": "Piano",
+          "sound": [
+            {
+              "voice": "grand",
+              "f": 329.63,
+              "vol": 0.8,
+              "hold": 0.275,
+              "at": 0
+            },
+            {
+              "voice": "grand",
+              "f": 329.63,
+              "vol": 0.8,
+              "hold": 0.275,
+              "at": 0.28
+            },
+            {
+              "voice": "grand",
+              "f": 349.23,
+              "vol": 0.8,
+              "hold": 0.275,
+              "at": 0.55
+            },
+            {
+              "voice": "grand",
+              "f": 392.0,
+              "vol": 0.8,
+              "hold": 0.55,
+              "at": 0.83
+            }
+          ]
+        },
+        {
+          "id": "guitar",
+          "label": "Guitar",
+          "sound": [
+            {
+              "voice": "nylon",
+              "f": 329.63,
+              "vol": 0.85,
+              "decay": 0.511,
+              "at": 0
+            },
+            {
+              "voice": "nylon",
+              "f": 329.63,
+              "vol": 0.85,
+              "decay": 0.511,
+              "at": 0.28
+            },
+            {
+              "voice": "nylon",
+              "f": 349.23,
+              "vol": 0.85,
+              "decay": 0.511,
+              "at": 0.55
+            },
+            {
+              "voice": "nylon",
+              "f": 392.0,
+              "vol": 0.85,
+              "decay": 0.772,
+              "at": 0.83
+            }
+          ]
+        },
+        {
+          "id": "steel",
+          "label": "Steel guitar",
+          "sound": [
+            {
+              "voice": "pluck",
+              "f": 329.63,
+              "vol": 0.75,
+              "bright": 0.65,
+              "decay": 0.511,
+              "at": 0
+            },
+            {
+              "voice": "pluck",
+              "f": 329.63,
+              "vol": 0.75,
+              "bright": 0.65,
+              "decay": 0.511,
+              "at": 0.28
+            },
+            {
+              "voice": "pluck",
+              "f": 349.23,
+              "vol": 0.75,
+              "bright": 0.65,
+              "decay": 0.511,
+              "at": 0.55
+            },
+            {
+              "voice": "pluck",
+              "f": 392.0,
+              "vol": 0.75,
+              "bright": 0.65,
+              "decay": 0.772,
+              "at": 0.83
+            }
+          ]
+        },
+        {
+          "id": "harp",
+          "label": "Harp",
+          "sound": [
+            {
+              "voice": "harp",
+              "f": 329.63,
+              "vol": 0.85,
+              "decay": 0.358,
+              "at": 0
+            },
+            {
+              "voice": "harp",
+              "f": 329.63,
+              "vol": 0.85,
+              "decay": 0.358,
+              "at": 0.28
+            },
+            {
+              "voice": "harp",
+              "f": 349.23,
+              "vol": 0.85,
+              "decay": 0.358,
+              "at": 0.55
+            },
+            {
+              "voice": "harp",
+              "f": 392.0,
+              "vol": 0.85,
+              "decay": 0.54,
+              "at": 0.83
+            }
+          ]
+        },
+        {
+          "id": "organ",
+          "label": "Organ",
+          "sound": [
+            {
+              "voice": "organ",
+              "f": 329.63,
+              "vol": 0.55,
+              "hold": 0.275,
+              "at": 0
+            },
+            {
+              "voice": "organ",
+              "f": 329.63,
+              "vol": 0.55,
+              "hold": 0.275,
+              "at": 0.28
+            },
+            {
+              "voice": "organ",
+              "f": 349.23,
+              "vol": 0.55,
+              "hold": 0.275,
+              "at": 0.55
+            },
+            {
+              "voice": "organ",
+              "f": 392.0,
+              "vol": 0.55,
+              "hold": 0.55,
+              "at": 0.83
+            }
+          ]
+        },
+        {
+          "id": "synth",
+          "label": "Synth",
+          "sound": [
+            {
+              "voice": "synth",
+              "f": 329.63,
+              "vol": 0.55,
+              "hold": 0.275,
+              "at": 0
+            },
+            {
+              "voice": "synth",
+              "f": 329.63,
+              "vol": 0.55,
+              "hold": 0.275,
+              "at": 0.28
+            },
+            {
+              "voice": "synth",
+              "f": 349.23,
+              "vol": 0.55,
+              "hold": 0.275,
+              "at": 0.55
+            },
+            {
+              "voice": "synth",
+              "f": 392.0,
+              "vol": 0.55,
+              "hold": 0.55,
+              "at": 0.83
+            }
+          ]
+        },
+        {
+          "id": "vibes",
+          "label": "Vibes",
+          "sound": [
+            {
+              "voice": "vibes",
+              "f": 329.63,
+              "vol": 0.8,
+              "hold": 0.275,
+              "at": 0
+            },
+            {
+              "voice": "vibes",
+              "f": 329.63,
+              "vol": 0.8,
+              "hold": 0.275,
+              "at": 0.28
+            },
+            {
+              "voice": "vibes",
+              "f": 349.23,
+              "vol": 0.8,
+              "hold": 0.275,
+              "at": 0.55
+            },
+            {
+              "voice": "vibes",
+              "f": 392.0,
+              "vol": 0.8,
+              "hold": 0.55,
+              "at": 0.83
+            }
+          ]
+        }
+      ]
     }
   }
 }
