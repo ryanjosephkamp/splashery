@@ -1333,44 +1333,44 @@ export const TOY_HELP = {
   clock: {
     howTo: "Tap it to ring the alarm.",
     about:
-      "A wind-up alarm clock has two metal bells on top and a little hammer between them. At the set time a spring inside lets the hammer go, and it strikes the two bells back and forth very fast, loud enough to wake a sleeper. Before alarm clocks were common, some people were paid to go around town tapping on windows to wake others up.\n\nThe hands on this clock show the real time where you are, or in another time zone you pick in the Toy tab. Tap it to ring the alarm: the hammer rattles between the bells and the whole clock shakes and hops. Pick its color in the Toy tab.",
+      "A wind-up alarm clock has two metal bells on top and a little hammer between them. At the set time a spring inside lets the hammer go, and it strikes the two bells back and forth very fast, loud enough to wake a sleeper. Before alarm clocks were common, some people were paid to go around town tapping on windows to wake others up.\n\nThe hands on this clock show the real time where you are, or in another time zone you pick in the Toy tab. Tap it to ring the alarm: the hammer rattles between the bells and the whole clock shakes and hops. Pick its color in the Toy tab. With ✋ Hands-on on, drag around the face to set the time: the minute hand clicks round under your finger and the hour hand follows through the gears, a twelfth as fast.",
   },
   "gift-box": {
     howTo: "Tap to open the present; tap again to close it.",
     about:
-      "A gift box is a present wrapped in bright paper and tied with a ribbon and a bow. People give wrapped presents for birthdays, holidays and other happy days, and the fun is not knowing what is inside until it is opened.\n\nTap it to open the present: the lid with its bow pops up and tips back, a golden star rises out of the box, and a burst of confetti fills the air. Tap again to close it. Pick the colors of the paper and the ribbon in the Toy tab.",
+      "A gift box is a present wrapped in bright paper and tied with a ribbon and a bow. People give wrapped presents for birthdays, holidays and other happy days, and the fun is not knowing what is inside until it is opened.\n\nTap it to open the present: the lid with its bow pops up and tips back, a golden star rises out of the box, and a burst of confetti fills the air. Tap again to close it. Pick the colors of the paper and the ribbon in the Toy tab. With ✋ Hands-on on, lift the lid off yourself and the star springs up out of the box; set the lid back on and it clicks into place.",
   },
   umbrella: {
     howTo: "Tap to close the umbrella; tap again to open it.",
     about:
-      "An umbrella is a folding shade of cloth stretched over thin metal ribs, held up on a stick. When it opens, a sliding ring pushes little struts that spread the ribs out, and the cloth pulls tight to keep off the rain or the sun. People in ancient Egypt, China and Greece used umbrellas as sunshades thousands of years ago.\n\nThe umbrella starts open. Tap to close it, folding the ribs down along the stick, and tap again to open it. Pick a rainbow, striped or plain canopy and its color in the Toy tab.",
+      "An umbrella is a folding shade of cloth stretched over thin metal ribs, held up on a stick. When it opens, a sliding ring pushes little struts that spread the ribs out, and the cloth pulls tight to keep off the rain or the sun. People in ancient Egypt, China and Greece used umbrellas as sunshades thousands of years ago.\n\nThe umbrella starts open. Tap to close it, folding the ribs down along the stick, and tap again to open it. Pick a rainbow, striped or plain canopy and its color in the Toy tab. With ✋ Hands-on on, slide the runner, the sleeve on the stick under the canopy, down to fold the umbrella and up to open it; at the top it clicks into its catch.",
   },
   "desk-fan": {
     howTo: "Tap to switch it off or on. Turn its swing on or off in the Toy tab.",
     about:
-      "A desk fan cools you by moving air: its angled blades push air forward as they spin, and moving air carries heat and sweat away from your skin faster. A fan does not make the air colder; it only makes you feel cooler.\n\nThis fan starts on, spinning and swinging slowly from side to side. Tap it to switch it off, and the blades slow to a stop; tap again to switch it on. In the Toy tab, turn the swing on or off and pick its color.",
+      "A desk fan cools you by moving air: its angled blades push air forward as they spin, and moving air carries heat and sweat away from your skin faster. A fan does not make the air colder; it only makes you feel cooler.\n\nThis fan starts on, spinning and swinging slowly from side to side. Tap it to switch it off, and the blades slow to a stop; tap again to switch it on. In the Toy tab, turn the swing on or off and pick its color. With ✋ Hands-on on, push the fan's head up or down to tilt it on its stiff hinge; it stays where you leave it.",
   },
   lamp: {
     howTo: "Tap to switch the light off or on.",
     about:
-      "A desk lamp has a jointed arm that bends, so you can point its shade right where you need light, over a book or a drawing. The shade stops the light from shining in your eyes and sends it down onto the desk.\n\nThe lamp starts on, with a warm glow under the shade. Tap it to switch the light off, and tap again to switch it on. Pick its color in the Toy tab.",
+      "A desk lamp has a jointed arm that bends, so you can point its shade right where you need light, over a book or a drawing. The shade stops the light from shining in your eyes and sends it down onto the desk.\n\nThe lamp starts on, with a warm glow under the shade. Tap it to switch the light off, and tap again to switch it on. Pick its color in the Toy tab. With ✋ Hands-on on, bend the arm at its joints and turn the shade to point the light: the pool of light moves across the desk.",
   },
   "potion-bottle": {
     howTo: "Tap it to pop the cork.",
     about:
-      "A potion is a magic drink from fairy tales and wizard stories, said to make you fly, shrink or fall asleep. This one sits in a round glass flask with a long neck and a cork, the kind that chemists really use: the round bottom is strong and heats evenly.\n\nBubbles rise through the potion all the time. Tap it to pop the cork: it shoots up with a puff of glittering sparkles, then drops back into the neck. Pick the color of the potion in the Toy tab.",
+      "A potion is a magic drink from fairy tales and wizard stories, said to make you fly, shrink or fall asleep. This one sits in a round glass flask with a long neck and a cork, the kind that chemists really use: the round bottom is strong and heats evenly.\n\nBubbles rise through the potion all the time. Tap it to pop the cork: it shoots up with a puff of glittering sparkles, then drops back into the neck. Pick the color of the potion in the Toy tab. With ✋ Hands-on on, pull the cork out yourself: it holds, then pops with a puff of sparkles. Push it back onto the neck and it squeaks in.",
   },
   telescope: {
     howTo: "Tap to collapse it; tap again to pull it out.",
     about:
-      "A telescope uses lenses or mirrors to make faraway things look nearer and bigger. This is a sliding spyglass, the kind sailors carried: its tubes slide inside one another, so it folds up short and pulls out long, with a big lens at the far end that gathers light. Galileo Galilei used a small telescope in 1610 to see the moons of Jupiter.\n\nThe telescope starts pulled out, on a three-legged stand. Tap to collapse it, sliding the tubes together, and tap again to pull it out.",
+      "A telescope uses lenses or mirrors to make faraway things look nearer and bigger. This is a sliding spyglass, the kind sailors carried: its tubes slide inside one another, so it folds up short and pulls out long, with a big lens at the far end that gathers light. Galileo Galilei used a small telescope in 1610 to see the moons of Jupiter.\n\nThe telescope starts pulled out, on a three-legged stand. Tap to collapse it, sliding the tubes together, and tap again to pull it out. With ✋ Hands-on on, pull the tubes out and push them back in by hand, one inside the other.",
   },
 
   // ---- Real objects (lane Real objects) -------------------------------------------------
   "fountain-pen": {
     howTo: "Tap it to uncap the pen and write a swirl in wet blue ink.",
     about:
-      "A fountain pen carries its own ink inside. The ink runs from the barrel through a thin channel called the feed to a split metal nib, and the slit draws it down to the paper by capillary action, the same pull that lets a paper towel soak up water.\n\nThis one is made from a detailed 3D model of a real green pen. Tap it and the cap slides off and clicks onto the back end, the nib writes a looping swirl that shines while it is wet and dries darker, and the cap goes back on.",
+      "A fountain pen carries its own ink inside. The ink runs from the barrel through a thin channel called the feed to a split metal nib, and the slit draws it down to the paper by capillary action, the same pull that lets a paper towel soak up water.\n\nThis one is made from a detailed 3D model of a real green pen. Tap it and the cap slides off and clicks onto the back end, the nib writes a looping swirl that shines while it is wet and dries darker, and the cap goes back on. With ✋ Hands-on on, pull the cap off the nib yourself and push it onto the back end, where it clicks on turned around, the way people post a cap while they write.",
   },
   "water-bottle": {
     howTo: "Tap it to unscrew the cap and pour water into the glass.",

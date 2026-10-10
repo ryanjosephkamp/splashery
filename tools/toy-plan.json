@@ -593,37 +593,44 @@
     "clock": {
       "v": "keep",
       "owner": "Does roughly what the scan alarm clock should do; keep them slightly different.",
-      "sound": "A real wind-up alarm clock, the hammer rattling between its two bells, in two rings."
+      "sound": "A real wind-up alarm clock, the hammer rattling between its two bells, in two rings.",
+      "improved": "Hands-on H3 (October 8, 2026; Hands-on): Drag around the face to set the time; the minute hand clicks at each minute and the hour hand follows a twelfth as fast."
     },
     "gift-box": {
       "v": "keep",
       "owner": "Outstanding.",
-      "sound": "Ribbon rustle and a ta-da."
+      "sound": "Ribbon rustle and a ta-da.",
+      "improved": "Hands-on H3 (October 8, 2026; Hands-on): Lift the lid off and the star springs up; set it back on and it clicks home."
     },
     "umbrella": {
       "v": "keep",
       "owner": "Perfect.",
-      "sound": "Fwump of the canopy opening."
+      "sound": "Fwump of the canopy opening.",
+      "improved": "Hands-on H3 (October 8, 2026; Hands-on): Slide the new runner down the stick to fold it and up to open it, into its top catch."
     },
     "desk-fan": {
       "v": "keep",
       "owner": "Perfect.",
-      "sound": "The blades' soft thrum of air swelling in as it starts and fading as it stops (no rising motor hum)."
+      "sound": "The blades' soft thrum of air swelling in as it starts and fading as it stops (no rising motor hum).",
+      "improved": "Hands-on H3 (October 8, 2026; Hands-on): Push the head to tilt it on its stiff hinge; it keeps swinging and spinning."
     },
     "lamp": {
       "v": "keep",
       "owner": "Perfect.",
-      "sound": "Switch click."
+      "sound": "Switch click.",
+      "improved": "Hands-on H3 (October 8, 2026; Hands-on): Bend the arm at its three joints to point the shade; the pool of light moves over the desk."
     },
     "potion-bottle": {
       "v": "keep",
       "owner": "Perfect.",
-      "sound": "Cork pop and fizz."
+      "sound": "Cork pop and fizz.",
+      "improved": "Hands-on H3 (October 8, 2026; Hands-on): Pull the cork: it holds, pops with a puff, and squeaks back into the neck."
     },
     "telescope": {
       "v": "keep",
       "owner": "Perfect.",
-      "sound": "Brass slide and a twinkle."
+      "sound": "Brass slide and a twinkle.",
+      "improved": "Hands-on H3 (October 8, 2026; Hands-on): Pull the draw tubes out and push them back in, one inside the other."
     },
     "sun": {
       "v": "keep",
@@ -2306,7 +2313,7 @@
       "owner": "From the owner's approved ideas on the Toy Ideas page (lane Real objects, September 29, 2026): \"This should be a real life splat if you can find it. I do not want this to be a cartoon or an illustration.\"",
       "effect": "The cap (cut out of the scan as a solid piece) slides off and clicks onto the end, and the nib writes a swirl in wet blue ink that glistens, then dries darker; the cap goes back on (4 s).",
       "sound": "A cap click, a smooth nib scratch, another click.",
-      "improved": "Real objects: a detailed CC BY model of a green fountain pen (maker's marks painted out) on a kit-built notepad. The cap slides off and posts on the back end, the pen tilts and writes a looping swirl in bright wet ink that dries to dark navy from its start, the cap goes back on and the ink runs back into the nib (4 s). Round 2: denser, sharper model."
+      "improved": "Real objects: a detailed CC BY model of a green fountain pen (maker's marks painted out) on a kit-built notepad. The cap slides off and posts on the back end, the pen tilts and writes a looping swirl in bright wet ink that dries to dark navy from its start, the cap goes back on and the ink runs back into the nib (4 s). Round 2: denser, sharper model. Hands-on H3 (October 8, 2026; Hands-on): Pull the cap off the nib and post it on the back end, turned round."
     },
     "water-bottle": {
       "v": "keep",
