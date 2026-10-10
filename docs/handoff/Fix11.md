@@ -144,12 +144,16 @@ The twelve, one by one (root cause, fix, the run that shows it green):
    grid (`fx.gas`) comes after a dynamic import (`FluidRuntime.startGasFx`), so a busy machine read
    it as undefined. Fix: `openLab` waits until a scene with gas has its grid (a real ready signal);
    the checks are unchanged.
-6. `hh4-vehicles:257`: **not fixed.** The drags are worked out in screen points once; the turntable
-   changes where the cow lands (1.015 from the middle with the view still, 1.075 with it running),
-   but holding the view still made it worse under load (4 of 4 failed beside 1 of 4 for the test as
-   it was, same run, `.cache/fx11-h3`), and pausing the page's own frames so only the test's clock
-   runs failed 3 of 3. Both were reverted; the test is as on main. Next step: find what in the
-   page's real frames moves the cow between the drag and the clock steps.
+6. `hh4-vehicles:257`: **timing, and a drag that only passed by chance.** The drags are worked out
+   in screen points, and the view was still easing in from the shelf when they ran (how far depended
+   on the machine's load), so the same drag left the cow in a different place; the page's own frames
+   also stepped the world between the test's steps. With the view settled (turntable off, snapped)
+   and only the test's clock, the result is identical every run, and it showed that the first drag
+   (8 steps a leg) left the cow trailing the finger at 0.916 from the middle, inside the beam's edge
+   (the beam reaches 0.967 at the grass): it had passed only because of the easing view. Fix: the
+   settled view and the test's clock (`open()` and the step helpers), and that drag takes 16 steps a
+   leg (the cow reaches 1.01). Bounds unchanged. 30 of 30 under load (`.cache/fx11-h6`), 16 of 16
+   more (`.cache/fx11-h8`).
 7. `stm:366`: **timing.** The test waited for the model's name in the toy's data, which the build
    sets before the app draws the Toy tab again (`onToy` → `setToyPanel`). Under load the panel came
    back after the next file's message, replacing the shown warning with a fresh hidden one. Fix:
@@ -158,11 +162,14 @@ The twelve, one by one (root cause, fix, the run that shows it green):
 
 Flaky:
 
-- `hh3-engine2:122`: **not fixed.** Logged under load (`.cache/fx11-h2`): the strum starts, then the
-  canvas gets a `lostpointercapture` part way through the drag (after 7 to 17 of the 24 moves),
-  which ends the tool (`camera.js` treats it as a pointer up), so the later strings are never
-  crossed. What drops the capture is not found yet (nothing in `src/` releases it). The turntable
-  change was reverted; the test is as on main.
+- `hh3-engine2:122`: **the test environment.** With `--gl=llvmpipe` the browser runs headed in Xvfb,
+  and a real pointer event from the X server (no button held, outside the canvas) reached Chromium
+  in the middle of the test's synthetic drag: logged (`.cache/fx11-h7`), the canvas got
+  `lostpointercapture` with `buttons=0` and a `pointerleave`, then the test's own `pointerup` a
+  second later, so the strum ended after 7 to 17 of the 24 moves. Not the toy, not the view. Fix:
+  `hh3-engine2` joins `tools/suite.json`'s `swiftshader` list (the files that fail on llvmpipe run
+  headless on SwiftShader, which has no X pointer); the test is unchanged. 16 of 16 under load
+  (`.cache/fx11-h8`).
 - `ai-engine:7`: **timing.** The failing check is the last one (after Clear, the read is all zeros).
   `read()`'s options go to `setToyOptions`, which rebuilds the toy and draws the Toy tab again with
   a new pad that starts from `value()`; on a busy machine the new pad came after the Clear click, so
@@ -171,6 +178,10 @@ Flaky:
 - `hh1-toys:182`: #494's settle (120 manual frames) fixed the main cause. Those two seconds of clock
   also start the turntable, which moved the crane under the pull a little (held angle 0.593 still,
   0.573 with the turntable running): the turntable stays off now.
+- `vol:283` (the Operator's addition): **timing**, `stm:366`'s race. `#vol-stats` names the NIfTI as
+  the build sets it, before the Toy tab is drawn again, so the cut-short alert could land in the old
+  panel and be replaced (1 in 3 under load). Fix: wait for the input panel's "Showing phantom…" line
+  first. 4 of 4 under load (`.cache/fx11-vol`).
 - `smd-moving:101`: **timing (the measurement).** `played()` stamped each clip position when its 10
   ms polling loop next saw it. On a busy machine (two to five frames a second on the low tier) the
   frame drawn after the drive held the page for up to a third of a second, and that lag differed at
@@ -198,10 +209,9 @@ Flaky:
 
 ## Known issues
 
-- `vol:283` (the Operator's addition) failed 1 in 3 under load after the merge of main
-  (`.cache/fx11-fv`): the wait for the cut-short warning timed out. It looks like `stm:366`'s race:
-  `#vol-stats` names the NIfTI before the Toy tab is drawn again, so the broken file's warning can
-  land in the old panel and be replaced. Not fixed yet. `fx4-engine:79` passed 3 of 3 under load.
+- `hl1:88` failed once in 3 under load (`.cache/fx11-h6`) on a different toy: the waterfall's GPU
+  pick at its middle missed ("center-miss"). Not looked into.
+- `fx4-engine:79` passed 3 of 3 under load (`.cache/fx11-fv`).
 
 - Three labs names need a third line in the phone row even at 9 px and stay cut there: "Cherry
   blossom (photo)", "The solar system on real orbits" and "Super-resolution microscope" (they fit in
