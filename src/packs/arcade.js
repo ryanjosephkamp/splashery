@@ -204,13 +204,13 @@ export const RECIPES = {
         key: "style",
         label: "Style",
         type: "select",
-        default: "flat",
+        default: "dome", // Arcade r3: the owner's "the dome is the default"
         choices: [
           { id: "flat", label: "Flat board" },
           { id: "dome", label: "Dome" },
         ],
       },
-      VIEW,
+      { ...VIEW, default: "3d" },
       { key: "level", label: "Level", type: "slider", min: 1, max: 5, step: 1, default: 1 },
     ],
     controls: PLAY,
@@ -221,7 +221,7 @@ export const RECIPES = {
     },
     arcade: {
       title: "Shardball",
-      goal: "Keep the ball in play and break every brick.",
+      goal: "Catch the ball and send it back to break every brick. In the dome, don't let it touch the ground.",
       stats: [
         { key: "score", label: "Score" },
         { key: "lives", label: "Balls", icon: "●" },
@@ -232,13 +232,18 @@ export const RECIPES = {
       pad: ["left", "right", "up", "down", "fire"],
       padLabels: { fire: "Launch" },
       controls: {
-        keys: "← → (or A, D) move the paddle; in the dome, ↑ ↓ (W, S) too. Space launches the ball.",
-        mouse: "Move the mouse to steer the paddle; click to launch.",
-        touch: "Drag to steer the paddle; tap to launch. Or use the pad.",
-        pad: "Stick or D-pad to steer; A launches.",
-        short: "← → steer · Space launch · V for 3D",
+        keys: "← → (or A, D) move the paddle; in the dome, ↑ ↓ (W, S) too. The paddle catches the ball: Space launches it. Q and E turn the dome.",
+        mouse:
+          "Move the mouse to steer the paddle; click to launch. In the dome, drag the dome to turn it; scroll to zoom.",
+        touch:
+          "Drag on the ground to steer the paddle; tap to launch. In the dome, drag the dome itself to turn it, and pinch to zoom. Or use the pad.",
+        pad: "Stick or D-pad to steer; A launches; LB and RB turn the dome.",
+        short: "← → steer · Space launch · Q E turn · V for 2D",
+        lookHint: "Drag the dome to turn it; pinch or scroll to zoom",
       },
-      slots: { high: 100000, mid: 80000, low: 50000 }, // crisp bricks
+      // Arcade r3: turn and zoom a little in the dome (the owner's walkthrough)
+      look: { yaw: 0.75, pitch: 0.3, zoom: [0.75, 1.3], keys: true },
+      slots: { high: 100000, mid: 80000, low: 70000 }, // crisp bricks (and, since r3, the dome's ground)
       create: async (api) => (await import("./arcade-shardball.js")).createShardball(api),
     },
   },
@@ -338,6 +343,8 @@ export const RECIPES = {
         keys: "Q and E turn the box in 3D.",
         short: "Hold to pour · V tips it into 3D",
       },
+      // Arcade r3: look around the box and zoom a little in 3D (one finger pours)
+      look: { yaw: 0.7, pitch: 0.45, zoom: [0.6, 1.3] },
       slots: { high: 130000, mid: 90000, low: 28000 }, // a grain is 2 × 2 small splats
       create: async (api) => (await import("./arcade-grains.js")).createGrains(api),
     },
@@ -435,14 +442,14 @@ export const RECIPES = {
         key: "well",
         label: "Well",
         type: "select",
-        default: "deep",
+        default: "slot", // Arcade r3: the classic flat game first, in 2D
         choices: [
+          { id: "slot", label: "Classic (10 by 20)" },
           { id: "deep", label: "Deep (4 by 4)" },
           { id: "wide", label: "Wide (5 by 5)" },
-          { id: "slot", label: "Flat slot (one deep)" },
         ],
       },
-      { ...VIEW, default: "3d" },
+      VIEW,
     ],
     controls: PLAY,
     action: { key: "go", label: "Play or pause" },
@@ -461,14 +468,43 @@ export const RECIPES = {
       ],
       best: "score",
       views: true,
-      pad: ["left", "right", "up", "down", "alt", "turnL", "fire"],
-      padLabels: { alt: "⟳", turnL: "⤾", fire: "▼" },
-      controls: {
-        keys: "Arrows (or W, A, S, D) move the stone across the well; X turns it, Q and E tip it; Space drops it.",
-        touch: "Swipe to move it, swipe up to turn it; or use the pad.",
-        pad: "D-pad moves; B turns; LB and RB tip; A drops.",
-        short: "Arrows move · X turn · Q E tip · Space drop",
-      },
+      // Arcade r3: the classic slot's pad is ◀ ▶ ▼ and a big ⟳ Turn by the
+      // right thumb (the owner couldn't find how to turn a stone); a tap on
+      // the stone turns it too, and a tap beside it moves it. The 3D wells
+      // (the owner's "a real 3D box", October 9, 2026) are 3D only, with
+      // four arrows and a block of Turn, Tip, Roll and Drop.
+      pad: (o) => (o.well && o.well !== "slot" ? ["left", "right", "up", "down", "alt", "turnL", "turnR", "fire"] : ["left", "down", "right", "fire", "alt"]), // prettier-ignore
+      padLabels: (o) => (o.well && o.well !== "slot" ? { alt: "⟳ Turn", turnL: "⤾ Tip", turnR: "⤿ Roll", fire: "Drop" } : { alt: "⟳ Turn", fire: "Drop" }), // prettier-ignore
+      views: (o) => !o.well || o.well === "slot",
+      forceView: (o) => (o.well && o.well !== "slot" ? "3d" : null),
+      look: (o) => (o.well && o.well !== "slot" ? { yaw: 1.3, pitch: 0.35, zoom: [0.7, 1.3] } : null), // prettier-ignore
+      // the well, picked in the game (a new game in that well)
+      choices: [
+        { id: "slot", label: "Classic", color: "#3f88c5" },
+        { id: "deep", label: "3D well", color: "#c8553d" },
+        { id: "wide", label: "Wide 3D well", color: "#44af69" },
+      ],
+      choiceKey: "well",
+      choiceRebuild: true,
+      tapFire: false,
+      controls: (o) =>
+        o.well && o.well !== "slot"
+          ? {
+              keys: "Arrows (or W, A, S, D) move the stone across the well, as the screen shows it; X (or Z) turns it flat, Q tips it toward you, E rolls it sideways; Space drops it.", // prettier-ignore
+              touch: "Arrows move the stone across the well; ⟳ Turn, ⤾ Tip and ⤿ Roll turn it three ways (a tap on the stone turns it too); Drop drops it. The outline under the stone shows where it will land. Drag with two fingers to look round the well.", // prettier-ignore
+              pad: "D-pad moves; B turns; LB tips; RB rolls; A drops.",
+              short: "Arrows move · X turn · Q tip · E roll · Space drop",
+              lookHint:
+                "Drag with two fingers to look round the well; the outline shows where the stone will land",
+            }
+          : {
+              keys: "← → (or A, D) move the stone; ↑, X or Z turns it; ↓ (S) drops it faster; Space drops it at once.",
+              mouse: "Click the stone to turn it; click beside it to move it that way.",
+              touch:
+                "Tap the stone (or ⟳ Turn) to turn it; tap beside it to move it; swipe down to drop it.",
+              pad: "D-pad moves; B turns; A drops.",
+              short: "← → move · ↑ or X turn · Space drop",
+            },
       slots: { high: 150000, mid: 120000, low: 60000 }, // crisp stones
       create: async (api) => (await import("./arcade-strata.js")).createStrata(api),
     },
@@ -551,7 +587,7 @@ export const RECIPES = {
         pad: "Stick to turn and thrust; A fires.",
         short: "← → turn · ↑ thrust · Space fire · V for the chase view",
       },
-      slots: { high: 120000, mid: 90000, low: 50000 }, // sharper rocks
+      slots: { high: 150000, mid: 120000, low: 60000 }, // sharper rocks (r3: more points a rock)
       create: async (api) => (await import("./arcade-rocks.js")).createRocks(api),
     },
   },
@@ -604,6 +640,7 @@ export const RECIPES = {
       title: "Soft Landing",
       background: "#05060a",
       goal: "Land on real ground: slow, upright and on a level spot. The green lights mark flat ones.",
+      slots: { high: 90000, mid: 75000, low: 40000 }, // (r3: finer ground and its clean cut)
       stats: [
         { key: "score", label: "Score" },
         { key: "lives", label: "Landers", icon: "▲" },
@@ -688,6 +725,8 @@ export const RECIPES = {
         pad: "Stick to turn; LB and RB roll.",
         short: "Drag or arrows turn it · V shows the block itself",
       },
+      // Arcade r3: see the block and its shadow from other angles, and zoom
+      look: { yaw: 0.8, pitch: 0.45, zoom: [0.6, 1.3] },
       slots: { high: 120000, mid: 90000, low: 50000 }, // crisp pieces
       create: async (api) => (await import("./arcade-shadows.js")).createShadows(api),
     },
@@ -697,7 +736,22 @@ export const RECIPES = {
     density: 0.05,
     kernel: "sharp", // the sharper splat edge (labs)
     render: SHARP,
-    options: [VIEW, { key: "source", label: "Source", type: "text", default: "", hidden: true }],
+    options: [
+      VIEW,
+      {
+        key: "ball",
+        label: "Ball",
+        type: "select",
+        default: "marble",
+        choices: [
+          { id: "marble", label: "Glass marble" },
+          { id: "steel", label: "Steel ball" },
+          { id: "beach", label: "Beach ball" },
+          { id: "tennis", label: "Tennis ball" },
+        ],
+      },
+      { key: "source", label: "Source", type: "text", default: "", hidden: true },
+    ],
     controls: PLAY,
     action: { key: "go", label: "Play or pause" },
     drive() {}, // the game moves on its own layer; the toy's still picture stays still
@@ -719,24 +773,50 @@ export const RECIPES = {
       },
       shown: () => "",
     },
+    // Arcade r3: the samples (a new one at random after each level), each
+    // credited on the stage too while it shows.
     credits: [
       {
         label: "Photo Dash",
-        title: "Tulip field (the sample photo)",
+        title: "Tulip field (a sample photo)",
         source: "https://www.flickr.com/photos/14674348@N04/13825345834",
         author: "DennisM2",
         license: "CC0 1.0",
         licenseUrl: "https://creativecommons.org/publicdomain/zero/1.0/",
       },
+      {
+        label: "Photo Dash",
+        title: "Wildflowers in foreground (a sample photo)",
+        source: "https://commons.wikimedia.org/wiki/File:Wildflowers_in_foreground.JPG",
+        author: "PookieFugglestein",
+        license: "CC0 1.0",
+        licenseUrl: "https://creativecommons.org/publicdomain/zero/1.0/",
+      },
+      {
+        label: "Photo Dash",
+        title:
+          "Alpine lake, Castle on a lake, Canyon at sunset, Rice terraces, Paper valley, Felt farm, Fishing cove, Desert oasis, Train on a viaduct and Floating islands: AI-made pictures (the Studio's samples)",
+        source: "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+        author: "Ryan, the owner of Splashery (made with an AI image tool)",
+        license: "AI-made by the owner",
+      },
     ],
     arcade: {
       title: "Photo Dash",
-      goal: "Roll the marble along your photo's skyline. Jump the gaps; catch the sparks.",
+      goal: "Roll the ball along the photo's skyline. Jump the gaps; catch the sparks. Each level brings a new photo.",
       stats: [
         { key: "score", label: "Score" },
-        { key: "lives", label: "Marbles", icon: "●" },
-        { key: "lap", label: "Lap" },
+        { key: "lives", label: "Balls", icon: "●" },
+        { key: "lap", label: "Level" },
       ],
+      // Arcade r3: the player picks the ball
+      choices: [
+        { id: "marble", label: "Marble", color: "#3a73e6" },
+        { id: "steel", label: "Steel", color: "#b9bec6" },
+        { id: "beach", label: "Beach ball", color: "#e8453c" },
+        { id: "tennis", label: "Tennis", color: "#cfe23a" },
+      ],
+      choiceKey: "ball",
       best: "score",
       views: true,
       pad: ["fire"],
@@ -748,7 +828,7 @@ export const RECIPES = {
         pad: "A jumps.",
         short: "Space or tap to jump · V raises the photo into 3D",
       },
-      slots: { high: 140000, mid: 100000, low: 50000 }, // a finer photo
+      slots: { high: 160000, mid: 120000, low: 50000 }, // a finer photo (r3: the part that shows)
       // a dark wall behind the photo, so its ends (the 3D relief's edge)
       // read as a print on a wall, not a cut into a blank page
       background: "#1f232b",
@@ -775,6 +855,21 @@ export const RECIPES = {
         ],
       },
       VIEW,
+      {
+        key: "instrument",
+        label: "Instrument",
+        type: "select",
+        default: "piano",
+        choices: [
+          { id: "piano", label: "Piano" },
+          { id: "guitar", label: "Guitar" },
+          { id: "steel", label: "Steel guitar" },
+          { id: "harp", label: "Harp" },
+          { id: "organ", label: "Organ" },
+          { id: "synth", label: "Synth" },
+          { id: "vibes", label: "Vibes" },
+        ],
+      },
     ],
     controls: PLAY,
     action: { key: "go", label: "Play or pause" },
@@ -814,6 +909,18 @@ export const RECIPES = {
         title: "Open a MIDI file of your own (it stays on this device)",
       },
       goal: "Steer into each note's lane as it arrives: every note you catch plays. Catch them all to play the tune.",
+      // Arcade r3: pick the instrument the caught notes play on, as rhythm
+      // games do (a recording plays its own slices instead)
+      choices: [
+        { id: "piano", label: "Piano", color: "#f4f1e8" },
+        { id: "guitar", label: "Guitar", color: "#c98a4b" },
+        { id: "steel", label: "Steel guitar", color: "#d9dde3" },
+        { id: "harp", label: "Harp", color: "#e9c46a" },
+        { id: "organ", label: "Organ", color: "#9b5de5" },
+        { id: "synth", label: "Synth", color: "#3a86ff" },
+        { id: "vibes", label: "Vibes", color: "#7bdff2" },
+      ],
+      choiceKey: "instrument",
       stats: [
         { key: "score", label: "Score" },
         { key: "caught", label: "Notes" },

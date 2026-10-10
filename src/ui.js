@@ -173,6 +173,7 @@ export function createUI(app) {
     byoAnyway: $("byo-anyway"),
     byoCancel: $("byo-cancel"),
     shareLink: $("share-link"),
+    shareQr: $("share-qr"), // lane QR r4 part 2: the scene as a QR code (labs)
     linkNote: $("link-note"),
     exportJson: $("export-json"),
     importJson: $("import-json"),
@@ -2148,6 +2149,9 @@ export function createUI(app) {
 
   // ---- Share -------------------------------------------------------------------
   els.shareLink.addEventListener("click", () => app.copyLink());
+  // Lane QR r4 part 2: the scene's link as a QR code (labs).
+  els.shareQr.hidden = !labsOn();
+  els.shareQr.addEventListener("click", () => app.openShareQR());
   els.exportJson.addEventListener("click", () => app.exportJSON());
   els.importJson.addEventListener("change", () => {
     const f = els.importJson.files && els.importJson.files[0];
@@ -3256,6 +3260,7 @@ export function createUI(app) {
         els.exportPng,
         els.genMake,
         els.shareLink,
+        els.shareQr,
       ]) {
         b.disabled = on;
       }

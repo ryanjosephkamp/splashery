@@ -1654,8 +1654,11 @@ class App {
   }
 
   // Runs fn with a fixed-size, frozen player and restores it afterwards.
-  async withCapture(size, fn) {
+  // label: a short message shown over the stage meanwhile (Stage.cover).
+  async withCapture(size, fn, { label = "" } = {}) {
     const player = this.player;
+    // Engine (QR r4): the fixed size and the export camera stay off screen.
+    await player.stage.cover({ label });
     const base = { cam: player.camera.getState(), time: player.time, idle: player.idle.weight };
     const look = player.scene.look;
     const fx = player.scene.effects;
@@ -1675,6 +1678,7 @@ class App {
       player.idle.weight = base.idle;
       player.applyLook();
       player.resume();
+      player.stage.uncover();
     }
   }
 
@@ -1737,6 +1741,19 @@ class App {
 
   // Lane PDF lab: Save as PDF (labs). Its dialog and pdf-lib load only when
   // someone opens it (src/pdf-export/).
+  // Lane QR r4 part 2 (labs): the scene's link as a QR code, in a dialog
+  // (src/qr/share.js, loaded when someone opens it).
+  async openShareQR() {
+    if (this.busy) return;
+    try {
+      const { openShareQR } = await import("./qr/share.js");
+      return await openShareQR(this);
+    } catch (err) {
+      console.info(err);
+      this.ui.toast("The QR code couldn't load. Try again in a moment.", 5000);
+    }
+  }
+
   async openPdfExport() {
     if (this.busy) return;
     try {

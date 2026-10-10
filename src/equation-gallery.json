@@ -1,0 +1,542 @@
+[
+  {
+    "id": "sphere",
+    "title": "Spun sphere",
+    "group": "Classic surfaces",
+    "about": "A sphere turns once around its vertical axis while its latitude stripes stay in place.",
+    "program": "x = sin(v)cos(u+t)\ny = cos(v)\nz = sin(v)sin(u+t)\nu = 0 .. 2pi\nv = 0 .. pi\nhue = u/(2pi)\nsize = 0.04\ncount = 6000",
+    "source": "https://en.wikipedia.org/wiki/Sphere",
+    "loops": true
+  },
+  {
+    "id": "torus",
+    "title": "Rainbow torus",
+    "group": "Classic surfaces",
+    "about": "A round tube wraps around a ring as its colors follow the small circle.",
+    "program": "x = (2+0.55cos(v))cos(u)\ny = 0.55sin(v)\nz = (2+0.55cos(v))sin(u)\nu = 0 .. 2pi\nv = 0 .. 2pi\nhue = v/(2pi)\nsize = 0.05\ncount = 7000",
+    "source": "https://en.wikipedia.org/wiki/Torus",
+    "loops": true
+  },
+  {
+    "id": "mobius-ribbon",
+    "title": "Möbius ribbon",
+    "group": "Classic surfaces",
+    "about": "A narrow band turns through one half twist before its edges meet.",
+    "program": "x = (1+vcos(u/2))cos(u)\ny = vsin(u/2)\nz = (1+vcos(u/2))sin(u)\nu = 0 .. 2pi\nv = -0.32 .. 0.32\nhue = u/(2pi)\nsize = 0.035\ncount = 5000",
+    "source": "https://en.wikipedia.org/wiki/M%C3%B6bius_strip",
+    "loops": true
+  },
+  {
+    "id": "klein-figure-eight",
+    "title": "Figure-eight Klein bottle",
+    "group": "Classic surfaces",
+    "about": "This immersed Klein bottle crosses itself where its neck passes through the body.",
+    "program": "x = (2+cos(u/2)sin(v)-sin(u/2)sin(2v))cos(u)\ny = sin(u/2)sin(v)+cos(u/2)sin(2v)\nz = (2+cos(u/2)sin(v)-sin(u/2)sin(2v))sin(u)\nu = 0 .. 2pi\nv = 0 .. 2pi\nhue = v/(2pi)\nsize = 0.07\ncount = 10000",
+    "source": "https://en.wikipedia.org/wiki/Klein_bottle",
+    "loops": true
+  },
+  {
+    "id": "pseudosphere",
+    "title": "Pseudosphere",
+    "group": "Classic surfaces",
+    "about": "Two tractrix horns meet at a sharp rim: a surface that curves the opposite way from a sphere.",
+    "program": "x = cos(u)/cosh(v)\ny = 1.2(v-tanh(v))\nz = sin(u)/cosh(v)\nu = 0 .. 2pi\nv = -2.6 .. 2.6\nhue = 0.55+0.2v/2.6\nsize = 0.05\ncount = 10000",
+    "source": "https://en.wikipedia.org/wiki/Pseudosphere",
+    "loops": true
+  },
+  {
+    "id": "enneper-surface",
+    "title": "Enneper surface",
+    "group": "Classic surfaces",
+    "about": "A simple polynomial surface curls into three spreading lobes.",
+    "program": "x = u-u^3/3+uv^2\ny = v-v^3/3+vu^2\nz = u^2-v^2\nu = -1.6 .. 1.6\nv = -1.6 .. 1.6\nhue = 0.55+0.1sin(4u)\nsize = 0.07\ncount = 10000",
+    "source": "https://en.wikipedia.org/wiki/Enneper_surface",
+    "loops": true
+  },
+  {
+    "id": "catenoid",
+    "title": "Catenoid",
+    "group": "Classic surfaces",
+    "about": "A catenoid pinches between two wide circular rims.",
+    "program": "x = 0.45cosh(v)cos(u)\ny = 0.45v\nz = 0.45cosh(v)sin(u)\nu = 0 .. 2pi\nv = -1.6 .. 1.6\nhue = 0.55+0.1v\nsize = 0.035\ncount = 7000",
+    "source": "https://en.wikipedia.org/wiki/Catenoid",
+    "loops": true
+  },
+  {
+    "id": "helicoid",
+    "title": "Helicoid",
+    "group": "Classic surfaces",
+    "about": "A ruled helicoid spirals upward like a ramp with no outer rim.",
+    "program": "x = vcos(u)\ny = vsin(u)\nz = 0.18u\nu = -3pi .. 3pi\nv = -1 .. 1\nhue = 0.55+0.12sin(u)\nsize = 0.035\ncount = 7000",
+    "source": "https://en.wikipedia.org/wiki/Helicoid",
+    "loops": true
+  },
+  {
+    "id": "dini-surface",
+    "title": "Dini surface",
+    "group": "Classic surfaces",
+    "about": "Dini’s surface twists a trumpet shape into a tight spiral.",
+    "program": "x = 0.65cos(u)sin(v)\ny = 0.65sin(u)sin(v)\nz = 0.65(cos(v)+log(tan(v/2)))+0.12u\nu = 0 .. 4pi\nv = 0.18 .. 2.95\nhue = u/(4pi)\nsize = 0.03\ncount = 8000",
+    "source": "https://en.wikipedia.org/wiki/Dini%27s_surface",
+    "loops": true
+  },
+  {
+    "id": "shell-growth",
+    "title": "Shell growth",
+    "group": "Classic surfaces",
+    "about": "A logarithmic tube grows wider as it winds away from its narrow tip.",
+    "program": "x = exp(0.12u)(1+0.35cos(v))cos(u)\ny = exp(0.12u)(1+0.35cos(v))sin(u)\nz = exp(0.12u)(0.35sin(v))\nu = 0 .. 6pi\nv = 0 .. 2pi\nhue = u/(6pi)\nsize = 0.04+0.01u\ncount = 10000",
+    "source": "https://en.wikipedia.org/wiki/Seashell",
+    "loops": true
+  },
+  {
+    "id": "lissajous-knot",
+    "title": "Lissajous knot",
+    "group": "Curves as tubes or beads",
+    "about": "Three harmonics trace a closed, crossing space curve with a fine bead tube.",
+    "program": "x = sin(3u+t)+0.16cos(7u)\ny = 0.12cos(2u)\nz = cos(4u+t)+0.16sin(7u)\nu = 0 .. 2pi\nv = 0 .. 1\nhue = u/(2pi)\nsize = 0.045\ncount = 3200",
+    "source": "https://en.wikipedia.org/wiki/Lissajous_curve",
+    "loops": true
+  },
+  {
+    "id": "trefoil-tube",
+    "title": "Trefoil tube",
+    "group": "Curves as tubes or beads",
+    "about": "A tube follows the classic three-crossing trefoil knot and rotates in place.",
+    "program": "x = (sin(u)+2sin(2u))cos(t)-sin(3u)sin(t)\ny = cos(u)-2cos(2u)\nz = -(sin(u)+2sin(2u))sin(t)-sin(3u)cos(t)\nu = 0 .. 2pi\nv = 0 .. 1\nhue = u/(2pi)\nsize = 0.08\ncount = 3000",
+    "source": "https://en.wikipedia.org/wiki/Trefoil_knot",
+    "loops": true
+  },
+  {
+    "id": "cinquefoil",
+    "title": "Cinquefoil knot",
+    "group": "Curves as tubes or beads",
+    "about": "Five over-and-under crossings wind around a torus in this thicker knot.",
+    "program": "x = (2+0.35cos(5u))cos(2u+t)\ny = 0.35sin(5u)\nz = (2+0.35cos(5u))sin(2u+t)\nu = 0 .. 2pi\nv = 0 .. 1\nhue = u/(2pi)\nsize = 0.055\ncount = 3500",
+    "source": "https://en.wikipedia.org/wiki/Torus_knot",
+    "loops": true
+  },
+  {
+    "id": "rose-curve",
+    "title": "Rose curve beads",
+    "group": "Curves as tubes or beads",
+    "about": "A six-petal planar rose becomes a dotted three-dimensional curve.",
+    "program": "x = cos(6u)cos(u)\ny = 0.15sin(3u)\nz = cos(6u)sin(u)\nu = 0 .. 2pi\nv = 0 .. 1\nhue = u/(2pi)\nsize = 0.04\ncount = 3000",
+    "source": "https://en.wikipedia.org/wiki/Rose_(mathematics)",
+    "loops": true
+  },
+  {
+    "id": "figure-eight-knot",
+    "title": "Figure-eight knot",
+    "group": "Curves as tubes or beads",
+    "about": "This closed bead tube traces the simplest knot that is not a torus knot.",
+    "program": "x = (2+cos(2u))cos(3u+t)\ny = sin(2u)\nz = (2+cos(2u))sin(3u+t)\nu = 0 .. 2pi\nv = 0 .. 1\nhue = u/(2pi)\nsize = 0.05\ncount = 3500",
+    "source": "https://en.wikipedia.org/wiki/Figure-eight_knot",
+    "loops": true
+  },
+  {
+    "id": "double-helix",
+    "title": "Double helix",
+    "group": "Curves as tubes or beads",
+    "about": "Two spiral strands wind together around a long axis.",
+    "program": "x = 1.1cos(3u+pi floor(2v))\ny = 1.4(u/pi-1)\nz = 1.1sin(3u+pi floor(2v))\nu = 0 .. 2pi\nv = 0 .. 1\nhue = 0.02+0.3floor(2v)+0.1u/(2pi)\nsize = 0.09\ncount = 10000\nspread = random",
+    "source": "https://en.wikipedia.org/wiki/DNA",
+    "loops": false
+  },
+  {
+    "id": "slinky",
+    "title": "Slinky coil",
+    "group": "Curves as tubes or beads",
+    "about": "A spring winds upward in eight turns with a narrow tube around its wire.",
+    "program": "x = (1+0.08v)cos(u)\ny = 0.1u+0.08vcos(u/8)\nz = (1+0.08v)sin(u)\nu = 0 .. 16pi\nv = -1 .. 1\nhue = u/(16pi)\nsize = 0.035\ncount = 5000",
+    "source": "https://en.wikipedia.org/wiki/Helix",
+    "loops": true
+  },
+  {
+    "id": "lorenz-lookalike",
+    "title": "Lorenz-like look-alike",
+    "group": "Curves as tubes or beads",
+    "about": "This butterfly loop is a Lorenz-like look-alike, not a Lorenz-system solution.",
+    "program": "x = 2.4sin(u)\ny = 1.5sin(2u)+0.25sin(6u)\nz = 1.1cos(u)+0.3cos(3u)\nu = 0 .. 2pi\nv = 0 .. 1\nhue = u/(2pi)\nsize = 0.07\ncount = 4000",
+    "source": "",
+    "loops": true
+  },
+  {
+    "id": "rossler-lookalike",
+    "title": "Rössler-like look-alike",
+    "group": "Curves as tubes or beads",
+    "about": "A looping spiral suggests a Rössler attractor but is only a parametric look-alike.",
+    "program": "x = cos(u)+0.35cos(7u)\ny = sin(u)+0.35sin(7u)\nz = 0.45sin(3u)\nu = 0 .. 2pi\nv = 0 .. 1\nhue = u/(2pi)\nsize = 0.045\ncount = 3000",
+    "source": "",
+    "loops": true
+  },
+  {
+    "id": "five-petal-flower",
+    "title": "Five-petal flower",
+    "group": "Curves as tubes or beads",
+    "about": "Five broad petals rise from a shallow cup around a small center.",
+    "program": "x = v(0.55+0.45cos(5u))cos(u)\ny = 0.5v^2+0.1cos(5u)\nz = v(0.55+0.45cos(5u))sin(u)\nu = 0 .. 2pi\nv = 0 .. 1\nhue = 0.9-0.12v\nsize = 0.035\ncount = 6000",
+    "source": "https://en.wikipedia.org/wiki/Flower",
+    "loops": true
+  },
+  {
+    "id": "sunflower-head",
+    "title": "Sunflower-style spiral",
+    "group": "Nature-like shapes",
+    "about": "A face-on disk shades from dark seeds to a golden rim, with Fibonacci-style spiral arms drawn in the color.",
+    "program": "x = 1.8sqrt(u)cos(2pi v)\ny = 1.8sqrt(u)sin(2pi v)\nz = 0.25(1-u)\nu = 0.002 .. 1\nv = 0 .. 1\nr = 0.3+0.7sqrt(u)(0.75+0.25sin(26pi v-24sqrt(u)))\ng = 0.15+0.6sqrt(u)(0.75+0.25sin(26pi v-24sqrt(u)))\nb = 0.02+0.1u\nsize = 0.04\ncount = 10000",
+    "source": "https://en.wikipedia.org/wiki/Phyllotaxis",
+    "loops": true
+  },
+  {
+    "id": "nautilus",
+    "title": "Nautilus coil",
+    "group": "Nature-like shapes",
+    "about": "A widening spiral tube evokes a nautilus shell with a visible open center.",
+    "program": "x = exp(0.13u)(1+0.3cos(v))cos(u)\ny = 0.3exp(0.13u)sin(v)\nz = exp(0.13u)(1+0.3cos(v))sin(u)\nu = 0 .. 5pi\nv = 0 .. 2pi\nhue = 0.04+0.12u/(5pi)\nsize = 0.035+0.008u\ncount = 10000",
+    "source": "https://en.wikipedia.org/wiki/Nautilus",
+    "loops": true
+  },
+  {
+    "id": "jellyfish-bell",
+    "title": "Jellyfish bell",
+    "group": "Nature-like shapes",
+    "about": "A dome-like bell pulses as its rim widens and narrows once each cycle.",
+    "program": "x = (0.9+0.12sin(t))sin(v)(1+0.1cos(8u)sin(v)^6)cos(u)\ny = 0.9cos(v)-0.2\nz = (0.9+0.12sin(t))sin(v)(1+0.1cos(8u)sin(v)^6)sin(u)\nu = 0 .. 2pi\nv = 0 .. 0.6pi\nhue = 0.82+0.05cos(8u)-0.1v\nsize = 0.05\ncount = 10000",
+    "source": "https://en.wikipedia.org/wiki/Jellyfish",
+    "loops": true
+  },
+  {
+    "id": "coral-fan",
+    "title": "Coral fan",
+    "group": "Nature-like shapes",
+    "about": "Branching sine ribs spread across a fan-shaped sheet.",
+    "program": "x = vcos(u)\ny = 0.16sin(9u+2v)\nz = vsin(u)\nu = -1.3 .. 1.3\nv = 0 .. 1.8\nhue = 0.03+0.08sin(9u+2v)\nsize = 0.025\ncount = 7000",
+    "source": "https://en.wikipedia.org/wiki/Coral",
+    "loops": true
+  },
+  {
+    "id": "pinecone-scales",
+    "title": "Pinecone spiral",
+    "group": "Nature-like shapes",
+    "about": "Scales follow a Fibonacci angle and taper toward the top of the cone.",
+    "program": "x = (0.9-0.65v)(1+0.09sin(16pi u+25v)sin(26pi u-25v))cos(2pi u+2.4v)\ny = 1.8v\nz = (0.9-0.65v)(1+0.09sin(16pi u+25v)sin(26pi u-25v))sin(2pi u+2.4v)\nu = 0 .. 1\nv = 0 .. 1\nhue = 0.07+0.05v+0.025sin(16pi u+25v)sin(26pi u-25v)\nsize = 0.045\ncount = 10000",
+    "source": "https://en.wikipedia.org/wiki/Phyllotaxis",
+    "loops": true
+  },
+  {
+    "id": "sea-anemone",
+    "title": "Sea anemone",
+    "group": "Nature-like shapes",
+    "about": "Curled arms rise from a low base like a ring of waving tentacles.",
+    "program": "x = (0.25+0.55v)cos(u+0.3sin(3u))\ny = v(1+0.18sin(5u))\nz = (0.25+0.55v)sin(u+0.3sin(3u))\nu = 0 .. 2pi\nv = 0 .. 1\nhue = 0.82+0.08sin(5u)\nsize = 0.03\ncount = 6000",
+    "source": "https://en.wikipedia.org/wiki/Sea_anemone",
+    "loops": true
+  },
+  {
+    "id": "fern-frond",
+    "title": "Fern frond",
+    "group": "Nature-like shapes",
+    "about": "A central stem and repeated leaflets make a simple fern-like frond.",
+    "program": "x = u\ny = 0.08sin(7piu)\nz = v(0.15+0.65abs(sin(7piu)))\nu = -1 .. 1\nv = 0 .. 1\nhue = 0.28+0.12v\nsize = 0.025\ncount = 6500",
+    "source": "https://en.wikipedia.org/wiki/Fern",
+    "loops": true
+  },
+  {
+    "id": "dahlia",
+    "title": "Dahlia bloom",
+    "group": "Nature-like shapes",
+    "about": "Layered radial petals alternate in height to form a dense dahlia-like flower.",
+    "program": "x = v(0.4+0.6abs(cos(12u)))cos(u)\ny = 0.25sin(12u)*v\nz = v(0.4+0.6abs(cos(12u)))sin(u)\nu = 0 .. 2pi\nv = 0 .. 1\nhue = 0.88+0.1cos(12u)\nsize = 0.025\ncount = 8000",
+    "source": "https://en.wikipedia.org/wiki/Flower",
+    "loops": true
+  },
+  {
+    "id": "sea-fan",
+    "title": "Sea fan branches",
+    "group": "Nature-like shapes",
+    "about": "A flat branching fan uses nested waves to suggest coral growth.",
+    "program": "x = vcos(u)\ny = 0.12sin(11u)\nz = vsin(u)\nu = -1.5 .. 1.5\nv = 0 .. 1.5\nhue = 0.48+0.1sin(11u)\nsize = 0.028\ncount = 6500",
+    "source": "https://en.wikipedia.org/wiki/Sea_fan",
+    "loops": true
+  },
+  {
+    "id": "lily-pad",
+    "title": "Lily pad",
+    "group": "Nature-like shapes",
+    "about": "A scalloped circular leaf floats on a softly raised surface.",
+    "program": "x = v(1+0.04cos(24u))cos(u)\ny = 0.3v^3+0.12v\nz = v(1+0.04cos(24u))sin(u)\nu = 0.3 .. 2pi\nv = 0 .. 1.2\nhue = 0.3+0.04cos(14u)-0.05v\nsize = 0.06\ncount = 10000",
+    "source": "https://en.wikipedia.org/wiki/Water_lily",
+    "loops": true
+  },
+  {
+    "id": "traveling-wave",
+    "title": "Traveling wave",
+    "group": "Things in motion",
+    "about": "Concentric ripples travel across a square sheet without breaking at the cycle seam.",
+    "program": "x = u\ny = 0.38sin(2sqrt(u^2+v^2)-t)\nz = v\nu = -2.8 .. 2.8\nv = -2.8 .. 2.8\nhue = 0.58-0.08sin(2sqrt(u^2+v^2)-t)\nsize = 0.09\ncount = 10000",
+    "source": "https://en.wikipedia.org/wiki/Wave",
+    "loops": true
+  },
+  {
+    "id": "breathing-torus",
+    "title": "Breathing torus",
+    "group": "Things in motion",
+    "about": "The major and minor radii expand together and return once per cycle.",
+    "program": "x = (1.7+0.45cos(v))(1+0.12sin(t))cos(u)\ny = 0.45(1+0.12sin(t))sin(v)\nz = (1.7+0.45cos(v))(1+0.12sin(t))sin(u)\nu = 0 .. 2pi\nv = 0 .. 2pi\nhue = v/(2pi)\nsize = 0.045\ncount = 6500",
+    "source": "https://en.wikipedia.org/wiki/Torus",
+    "loops": true
+  },
+  {
+    "id": "rotating-saddle",
+    "title": "Rotating saddle",
+    "group": "Things in motion",
+    "about": "A saddle ripple rotates smoothly over a square patch.",
+    "program": "x = u\ny = 0.22(u^2-v^2)cos(t)+0.2uvsin(t)\nz = v\nu = -1.6 .. 1.6\nv = -1.6 .. 1.6\nhue = 0.6+1.2(0.22(u^2-v^2)cos(t)+0.2uvsin(t))\nsize = 0.06\ncount = 10000",
+    "source": "https://en.wikipedia.org/wiki/Saddle_surface",
+    "loops": true
+  },
+  {
+    "id": "orbiting-rings",
+    "title": "Orbiting rings",
+    "group": "Things in motion",
+    "about": "Three circular bands revolve at different speeds around the center.",
+    "program": "x = cos(u+t)+0.35cos(3u-t)\ny = 0.35sin(3u-t)\nz = sin(u+t)\nu = 0 .. 2pi\nv = 0 .. 1\nhue = u/(2pi)\nsize = 0.045\ncount = 4500",
+    "source": "https://en.wikipedia.org/wiki/Parametric_equation",
+    "loops": true
+  },
+  {
+    "id": "flower-bloom",
+    "title": "Opening flower",
+    "group": "Things in motion",
+    "about": "Petals lift and flatten in a smooth repeating bloom.",
+    "program": "x = v(0.55+0.45cos(5u))cos(u)\ny = (0.12+0.45(1+sin(t))/2)v^2\nz = v(0.55+0.45cos(5u))sin(u)\nu = 0 .. 2pi\nv = 0 .. 1\nhue = 0.9-0.1v\nsize = 0.03\ncount = 6000",
+    "source": "https://en.wikipedia.org/wiki/Flower",
+    "loops": true
+  },
+  {
+    "id": "morphing-sphere",
+    "title": "Breathing bumpy sphere",
+    "group": "Things in motion",
+    "about": "Four-fold bumps grow and shrink across a round surface as its color follows each bump.",
+    "program": "x = sin(v)cos(u)(1+0.2cos(4u)cos(4v)sin(t+1.2))\ny = cos(v)(1+0.2cos(4u)cos(4v)sin(t+1.2))\nz = sin(v)sin(u)(1+0.2cos(4u)cos(4v)sin(t+1.2))\nu = 0 .. 2pi\nv = 0 .. pi\nhue = 0.6+0.5cos(4u)cos(4v)sin(t+1.2)\nsize = 0.05\ncount = 10000",
+    "source": "https://en.wikipedia.org/wiki/Sphere",
+    "loops": true
+  },
+  {
+    "id": "twisting-ribbon",
+    "title": "Twisting ribbon",
+    "group": "Things in motion",
+    "about": "A narrow ribbon rotates its cross-section through one full turn each cycle.",
+    "program": "x = u\ny = 1.1vcos(2u+t)\nz = 1.1vsin(2u+t)\nu = -2.4 .. 2.4\nv = -1 .. 1\nhue = 0.5+0.25v+0.1u\nsize = 0.06\ncount = 10000",
+    "source": "https://en.wikipedia.org/wiki/Ribbon_(mathematics)",
+    "loops": true
+  },
+  {
+    "id": "pulsing-star",
+    "title": "Pulsing star",
+    "group": "Things in motion",
+    "about": "Five radial points breathe in and out with the beat of a sine wave.",
+    "program": "x = 1.8v(0.65+0.16sin(t))(0.45+0.55(1-abs(sin(2.5u))))cos(u)\ny = 1.8v(0.65+0.16sin(t))(0.45+0.55(1-abs(sin(2.5u))))sin(u)\nz = 0.3(1-v)\nu = 0 .. 2pi\nv = 0 .. 1\nhue = 0.1+0.08v+0.04sin(t)\nsize = 0.05\ncount = 10000",
+    "source": "https://en.wikipedia.org/wiki/Star_polygon",
+    "loops": true
+  },
+  {
+    "id": "wobbling-helix",
+    "title": "Wobbling helix",
+    "group": "Things in motion",
+    "about": "A helix sways side to side and returns to its starting pose each cycle.",
+    "program": "x = cos(u+t)\ny = 0.12u\nz = sin(u+t)+0.2sin(t)\nu = 0 .. 8pi\nv = 0 .. 1\nhue = u/(8pi)\nsize = 0.04\ncount = 5000",
+    "source": "https://en.wikipedia.org/wiki/Helix",
+    "loops": true
+  },
+  {
+    "id": "standing-wave",
+    "title": "Standing wave",
+    "group": "Things in motion",
+    "about": "A rectangular sheet ripples in place with a standing two-axis wave.",
+    "program": "x = u\ny = 0.35sin(2u)sin(2v)cos(t)\nz = v\nu = -2 .. 2\nv = -2 .. 2\nhue = 0.62+0.12sin(2u)sin(2v)\nsize = 0.065\ncount = 10000",
+    "source": "https://en.wikipedia.org/wiki/Standing_wave",
+    "loops": true
+  },
+  {
+    "id": "height-hue",
+    "title": "Height hue bands",
+    "group": "Color play",
+    "about": "A ridged surface assigns a full rainbow cycle to its height.",
+    "program": "x = u\ny = 0.3sin(4u+3v)\nz = v\nu = -2 .. 2\nv = -2 .. 2\nhue = (sin(4u+3v)+1)/2\nsize = 0.04\ncount = 6000",
+    "source": "https://en.wikipedia.org/wiki/Wave",
+    "loops": true
+  },
+  {
+    "id": "angle-hue",
+    "title": "Angle around the torus",
+    "group": "Color play",
+    "about": "Hue sweeps around the large ring while a second color band follows the tube.",
+    "program": "x = (1.5+0.4cos(v))cos(u)\ny = 0.4sin(v)\nz = (1.5+0.4cos(v))sin(u)\nu = 0 .. 2pi\nv = 0 .. 2pi\nhue = u/(2pi)\nsize = 0.04\ncount = 6500",
+    "source": "https://en.wikipedia.org/wiki/Torus",
+    "loops": true
+  },
+  {
+    "id": "curvature-bands",
+    "title": "Curvature-like bands",
+    "group": "Color play",
+    "about": "Nested sine ridges color a saddle with a pattern that suggests changing curvature.",
+    "program": "x = u\ny = 0.15(u^2-v^2)\nz = v\nu = -2 .. 2\nv = -2 .. 2\nhue = 0.5+0.2sin(3u)cos(3v)\nsize = 0.035\ncount = 6500",
+    "source": "https://en.wikipedia.org/wiki/Curvature",
+    "loops": true
+  },
+  {
+    "id": "rgb-sunset",
+    "title": "RGB sunset gradient",
+    "group": "Color play",
+    "about": "Red rises with height, green follows the horizontal angle, and blue fills the valleys.",
+    "program": "x = cos(u)(1+0.2v)\ny = v\nz = sin(u)(1+0.2v)\nu = 0 .. 2pi\nv = -1 .. 1\nr = 0.55+0.35v\ng = 0.5+0.4sin(u)\nb = 0.55-0.3v\nsize = 0.04\ncount = 6000",
+    "source": "https://en.wikipedia.org/wiki/RGB_color_model",
+    "loops": true
+  },
+  {
+    "id": "rainbow-shell",
+    "title": "Rainbow shell",
+    "group": "Color play",
+    "about": "A growing shell carries a rainbow gradient from its narrow tip to its wide lip.",
+    "program": "x = exp(0.1u)cos(u)(1+0.25cos(v))\ny = exp(0.1u)0.25sin(v)\nz = exp(0.1u)sin(u)(1+0.25cos(v))\nu = 0 .. 6pi\nv = 0 .. 2pi\nhue = u/(6pi)\nsize = 0.04+0.01u\ncount = 10000",
+    "source": "https://en.wikipedia.org/wiki/Seashell",
+    "loops": true
+  },
+  {
+    "id": "blue-green-sphere",
+    "title": "Blue-green sphere",
+    "group": "Color play",
+    "about": "An RGB gradient moves from deep blue at the bottom to green at the top.",
+    "program": "x = sin(v)cos(u)\ny = cos(v)\nz = sin(v)sin(u)\nu = 0 .. 2pi\nv = 0 .. pi\nr = 0.05\ng = 0.1+0.85(1+cos(v))/2\nb = 0.15+0.8(1-cos(v))/2\nsize = 0.05\ncount = 10000",
+    "source": "https://en.wikipedia.org/wiki/Sphere",
+    "loops": true
+  },
+  {
+    "id": "striped-klein",
+    "title": "Klein bottle color flow",
+    "group": "Color play",
+    "about": "Alternating bands run around the immersed bottle and make its crossing easy to see.",
+    "program": "x = (2+cos(u/2)sin(v)-sin(u/2)sin(2v))cos(u)\ny = sin(u/2)sin(v)+cos(u/2)sin(2v)\nz = (2+cos(u/2)sin(v)-sin(u/2)sin(2v))sin(u)\nu = 0 .. 2pi\nv = 0 .. 2pi\nhue = 0.5+0.25sin(4v)\nsize = 0.07\ncount = 10000",
+    "source": "https://en.wikipedia.org/wiki/Klein_bottle",
+    "loops": true
+  },
+  {
+    "id": "plasma-rgb",
+    "title": "Plasma RGB sheet",
+    "group": "Color play",
+    "about": "Three offset waves make a smooth red, green, and blue color field.",
+    "program": "x = u\ny = 0.15sin(1.5u+1.5v)\nz = v\nu = -3 .. 3\nv = -3 .. 3\nr = 0.5+0.45sin(1.5u)\ng = 0.5+0.45sin(1.5v+2)\nb = 0.5+0.45sin(1.5u+1.5v+4)\nsize = 0.09\ncount = 10000",
+    "source": "https://en.wikipedia.org/wiki/RGB_color_model",
+    "loops": true
+  },
+  {
+    "id": "longitude-stripes",
+    "title": "Longitude stripes",
+    "group": "Color play",
+    "about": "A sphere is divided into twelve clean color wedges by its longitude.",
+    "program": "x = sin(v)cos(u)\ny = cos(v)\nz = sin(v)sin(u)\nu = 0 .. 2pi\nv = 0 .. pi\nhue = floor(12u/(2pi))/12\nsize = 0.035\ncount = 7000",
+    "source": "https://en.wikipedia.org/wiki/Sphere",
+    "loops": true
+  },
+  {
+    "id": "rainbow-wave",
+    "title": "Rainbow wave",
+    "group": "Color play",
+    "about": "A moving ripple shifts both the sheet height and its rainbow colors.",
+    "program": "x = u\ny = 0.35sin(2u+v-t)\nz = v\nu = -3 .. 3\nv = -3 .. 3\nhue = 0.5+0.2sin(2u+v-t)\nsize = 0.04\ncount = 7000",
+    "source": "https://en.wikipedia.org/wiki/Wave",
+    "loops": true
+  },
+  {
+    "id": "thermal-spiral",
+    "title": "Thermal spiral",
+    "group": "Math showpieces",
+    "about": "Warm colors gather near the core and cool colors trail along the spiral arms.",
+    "program": "x = u cos(v+5u)\ny = 0.12sin(13v+4u)\nz = u sin(v+5u)\nu = 0.02 .. 1\nv = 0 .. 2\nhue = 0.02+0.55u\nsize = 0.018\ncount = 9000\nspread = random",
+    "source": "https://en.wikipedia.org/wiki/Spiral",
+    "loops": true
+  },
+  {
+    "id": "hopf-link-sample",
+    "title": "Hopf link",
+    "group": "Math showpieces",
+    "about": "Two circles pass through each other once, the simplest link, drawn as two dotted rings in different colors.",
+    "program": "x = 1.6(1-floor(2v))cos(u)+floor(2v)(1.6cos(u)+1.6)-0.8\ny = 1.6(1-floor(2v))sin(u)\nz = 1.6floor(2v)sin(u)\nu = 0 .. 2pi\nv = 0 .. 1\nhue = 0.02+0.55floor(2v)+0.1u/(2pi)\nsize = 0.14\ncount = 10000\nspread = random",
+    "source": "https://en.wikipedia.org/wiki/Hopf_link",
+    "loops": true
+  },
+  {
+    "id": "fourier-epicycle",
+    "title": "Fourier epicycle curve",
+    "group": "Math showpieces",
+    "about": "Three rotating harmonics add into one closed curve with a small bead radius.",
+    "program": "x = cos(u)+0.45cos(3u)+0.2cos(5u)\ny = 0.18sin(7u)\nz = sin(u)+0.45sin(3u)+0.2sin(5u)\nu = 0 .. 2pi\nv = 0 .. 1\nhue = u/(2pi)\nsize = 0.04\ncount = 3500",
+    "source": "https://en.wikipedia.org/wiki/Fourier_series",
+    "loops": true
+  },
+  {
+    "id": "superquadric",
+    "title": "Superquadric",
+    "group": "Math showpieces",
+    "about": "Fourth-power rounding turns a sphere into a soft box with six flattened faces.",
+    "program": "x = 1.6cos(u)cos(v)/((cos(u)^4+sin(u)^4)^0.25(cos(v)^4+sin(v)^4)^0.25)\ny = 1.6sin(v)/(cos(v)^4+sin(v)^4)^0.25\nz = 1.6sin(u)cos(v)/((cos(u)^4+sin(u)^4)^0.25(cos(v)^4+sin(v)^4)^0.25)\nu = 0 .. 2pi\nv = -pi/2 .. pi/2\nhue = 0.5+0.3v/pi+0.1sin(u)\nsize = 0.06\ncount = 10000",
+    "source": "https://en.wikipedia.org/wiki/Superquadrics",
+    "loops": true
+  },
+  {
+    "id": "riemann-branch",
+    "title": "Riemann branch look",
+    "group": "Math showpieces",
+    "about": "A square-root branch surface spirals through two sheets around its branch point.",
+    "program": "x = sqrt(u)cos(v/2)\ny = sqrt(u)sin(v/2)\nz = 0.12v\nu = 0.03 .. 1\nv = 0 .. 4pi\nhue = v/(4pi)\nsize = 0.03\ncount = 7000",
+    "source": "https://en.wikipedia.org/wiki/Riemann_surface",
+    "loops": true
+  },
+  {
+    "id": "saddle-monkey",
+    "title": "Monkey saddle",
+    "group": "Math showpieces",
+    "about": "A cubic height field has three valleys meeting at one central saddle point.",
+    "program": "x = u\ny = 0.12(u^3-3uv^2)\nz = v\nu = -1.2 .. 1.2\nv = -1.2 .. 1.2\nhue = 0.55+0.1sin(3u)+0.2(u^3-3uv^2)\nsize = 0.05\ncount = 10000",
+    "source": "https://en.wikipedia.org/wiki/Monkey_saddle",
+    "loops": true
+  },
+  {
+    "id": "spherical-harmonic",
+    "title": "Spherical harmonic lobes",
+    "group": "Math showpieces",
+    "about": "A spherical-harmonic-like radial formula gives the sphere four raised and lowered lobes.",
+    "program": "x = (1+0.3sin(v)^2cos(4u))sin(v)cos(u)\ny = (1+0.3sin(v)^2cos(4u))cos(v)\nz = (1+0.3sin(v)^2cos(4u))sin(v)sin(u)\nu = 0 .. 2pi\nv = 0 .. pi\nhue = 0.55+0.15cos(4u)\nsize = 0.035\ncount = 7000",
+    "source": "https://en.wikipedia.org/wiki/Spherical_harmonics",
+    "loops": true
+  },
+  {
+    "id": "lemniscate-surface",
+    "title": "Lemniscate tube",
+    "group": "Math showpieces",
+    "about": "A tube wraps around a sideways figure eight with a subtle vertical wave.",
+    "program": "x = cos(u)/(1+sin(u)^2)\ny = 0.16sin(3u)\nz = sin(u)cos(u)/(1+sin(u)^2)\nu = 0 .. 2pi\nv = 0 .. 1\nhue = u/(2pi)\nsize = 0.05\ncount = 3000",
+    "source": "https://en.wikipedia.org/wiki/Lemniscate_of_Bernoulli",
+    "loops": true
+  },
+  {
+    "id": "gyroid-look",
+    "title": "Gyroid slice",
+    "group": "Math showpieces",
+    "about": "A height graph of one slice of the gyroid function rises and falls in a repeating pattern of hills and valleys.",
+    "program": "x = u\ny = 0.5(sin(u)cos(v)+0.36sin(v)+0.93cos(u))\nz = v\nu = -1.5pi .. 1.5pi\nv = -1.5pi .. 1.5pi\nhue = 0.55+0.3(sin(u)cos(v)+0.36sin(v)+0.93cos(u))\nsize = 0.11\ncount = 10000",
+    "source": "https://en.wikipedia.org/wiki/Gyroid",
+    "loops": true
+  },
+  {
+    "id": "torus-knot-family",
+    "title": "Torus knot family",
+    "group": "Math showpieces",
+    "about": "A (2,3) torus knot winds twice around the ring and three times around its tube.",
+    "program": "x = (1+0.35cos(3u))cos(2u)\ny = 0.35sin(3u)\nz = (1+0.35cos(3u))sin(2u)\nu = 0 .. 2pi\nv = 0 .. 1\nhue = u/(2pi)\nsize = 0.05\ncount = 3500",
+    "source": "https://en.wikipedia.org/wiki/Torus_knot",
+    "loops": true
+  }
+]

@@ -1512,6 +1512,12 @@ September 30, 2026), decimated into three levels of detail each:
   (`assets/toys/soft-landing/terrain.json`).
 - Page Breaker: the photo sample is the Picture lab's tulip field (see "Pictures and pages"), and
   the article sample is the Picture lab's.
+- Photo Dash (lane Arcade r3, October 9, 2026): a new sample photo at random after each level, from
+  photos the site already ships: the Picture lab's tulip field (CC0 1.0, see "Pictures and pages")
+  and ten of the owner's AI-made Studio samples (see "AI-made Studio samples"): Alpine lake, Castle
+  on a lake, Canyon at sunset, Rice terraces, Paper valley, Felt farm, Fishing cove, Desert oasis,
+  Train on a viaduct and Floating islands. Each one's credit shows on the stage while it shows, the
+  AI-made ones labeled as AI-made. They are scenery for a game, never shown as real places.
 
 ## National flags
 
@@ -1644,3 +1650,7 @@ to the owner, who made them; no third-party work is in them. Checked October 7, 
 - Giant gears (D31): `assets/toys/photo-3d/ai/gears.jpg`.
 - Chess board (D40): `assets/toys/photo-3d/ai/chess.jpg`.
 - City of books (D29): `assets/toys/photo-3d/ai/book-city.jpg`.
+
+Picture QR (lane QR r4, October 10, 2026) also offers four of them as its sample pictures, labeled
+AI-made in its picker and its credit: Felt farm (D37), Glass wave (D38), Mushrooms (D27), and Stone
+arch (D17).

@@ -2230,7 +2230,7 @@
     "qr-picture": {
       "v": "new",
       "owner": "The owner's Push Plan pick Q5 (\"a hard yes, or a strong yes\"), lane QR craft, October 6, 2026.",
-      "effect": "Picture QR: a photo woven into a QR code as a halftone (each module's center keeps its bit, the rest carries the picture). A tap turns every module's tile over in a wave out from the tap; its back is the plain code, and it comes round to the picture again (3.6 s). The toy measures the contrast and reads its code with jsQR at phone size and smaller; Make it scan finds the closest version that scans; Save a PNG.",
+      "effect": "Picture QR: a photo woven into a QR code as a real halftone (lane QR r4: 3 x 3 cells a module, the middle keeps the bit; error diffusion over the whole grid, the forced cells passing their error on; a nudge only where a module would misread; the mask that fits the picture; a bigger code for more detail; a color halftone in the color style; one seamless grid of splats). A tap turns every module's tile over in a wave out from the tap; its back is the plain code, and it comes round to the picture again (3.6 s). The toy measures the contrast and reads its code with jsQR at phone size and smaller; Make it scan finds the closest version that scans; Save a PNG.",
       "sound": "A soft breath with a run of light wooden clicks as the tiles turn."
     },
     "qr-build": {
@@ -2242,7 +2242,7 @@
     "barcodes": {
       "v": "new",
       "owner": "The owner's Push Plan pick Q12 (\"I like the other barcodes idea\"), lane QR craft, October 6, 2026.",
-      "effect": "Other barcodes: Code 128, EAN-13 and UPC-A (our own code, with check digits and quiet zones) and Data Matrix and Aztec (zxing-js). A tap sweeps a scanner's red line across the symbol; each bar (or column of modules) lifts toward you as it passes and settles back (2.6 s). The toy reads its own picture back with zxing-js.",
+      "effect": "Other barcodes: Code 128, EAN-13 and UPC-A (our own code, with check digits and quiet zones; Code 128's text on the label, lane QR r4) and Data Matrix and Aztec (zxing-js; crisp, seamless modules as the QR code toy draws them, lane QR r4). A tap sweeps a scanner's red line across the symbol; each bar (or column of modules) lifts toward you as it passes and settles back (2.6 s). The toy reads its own picture back with zxing-js.",
       "sound": "A soft breath as the line sweeps, then a gentle low beep."
     },
     "chladni-plate": {
@@ -2969,21 +2969,21 @@
       "owner": "New in lane Arcade (October 5, 2026): the owner's games brief, G1 (labs only).",
       "effect": "A brick-breaking game: tap to play; every brick that breaks shatters into real pieces that tumble, bounce and fade. The 3D switch tips the Flat board back into a table, or takes the Dome style's paddle to the bottom of a sphere under a dome of bricks, where the ball bounces in 3D.",
       "sound": "Knocks off the paddle and the rails, a marimba note (one per row, on a pentatonic scale) and a dry crumble for a glazed brick, a low knock and a gritty crumble for stone, a thud for a lost ball, a rising chime for a new level.",
-      "improved": "Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/). Arcade r2 (October 7, 2026): a new brick-breaking sound, 2D/3D and play/pause at the thumbs on a phone, and Launch for Go."
+      "improved": "Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/). Arcade r2 (October 7, 2026): a new brick-breaking sound, 2D/3D and play/pause at the thumbs on a phone, and Launch for Go. Arcade r3 (October 9, 2026): the Dome in 3D is the default; the paddle catches and holds the ball; in the Dome the ground takes the ball; drag on the dome to turn the view, pinch to zoom; sharper."
     },
     "longtail": {
       "v": "keep",
       "owner": "New in lane Arcade (October 5, 2026): the owner's games brief, G2 (labs only).",
       "effect": "A growing-trail game: tap to play; a string of glass beads crawls tile to tile and grows with each berry. The 3D switch folds the flat cross of tiles into a cube, rounds it into a Space-shelf planet, or rolls a strip into a ring; tunnels come out on the far side.",
       "sound": "A soft tick as it crawls, a pop for each berry (higher as it grows), a hollow tone through a tunnel, a thud when it runs into itself.",
-      "improved": "Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/). Arcade r2 (October 7, 2026): sharper solid tiles; a tap beside the head steers it; in 3D a drag turns the world."
+      "improved": "Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/). Arcade r2 (October 7, 2026): sharper solid tiles; a tap beside the head steers it; in 3D a drag turns the world. Arcade r3 (October 9, 2026): crisper tiles with thin clean grout."
     },
     "grain-garden": {
       "v": "keep",
       "owner": "New in lane Arcade (October 5, 2026): the owner's games brief, G6 (labs only).",
       "effect": "A falling-sand box where every grain is a splat: pour sand, water, oil, fire, seeds or stone, and they pile, flow, burn and grow. The 3D switch tips the box round so its depth shows.",
       "sound": "A patter as sand pours, drips for water and oil, a crackle for fire, a sizzle when water puts it out, a pop when a seed sprouts.",
-      "improved": "Arcade: new sandbox on the Arcade shelf (labs), on the game kit (src/arcade/). Arcade r2 (October 7, 2026): the ✕ leaves the whole-page view on a phone (its materials covered it)."
+      "improved": "Arcade: new sandbox on the Arcade shelf (labs), on the game kit (src/arcade/). Arcade r2 (October 7, 2026): the ✕ leaves the whole-page view on a phone (its materials covered it). Arcade r3 (October 9, 2026): look around and zoom in 3D; framed closer with finer grains."
     },
     "page-breaker": {
       "v": "keep",
@@ -2997,7 +2997,7 @@
       "owner": "New in lane Arcade (October 5, 2026): the owner's games brief, G3 (labs only).",
       "effect": "Falling stones in a deep well you look down into: our own stone shapes (a tripod, two screws, a plus, a slab), moved and turned as they fall; a full layer crumbles into rubble that falls and fades, and the stones above drop in. 2D is the side view.",
       "sound": "A soft click as a stone moves, a wooden knock when it turns, a stony thud when it lands, a crunch and rumble when a layer crumbles.",
-      "improved": "Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/)."
+      "improved": "Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/). Arcade r3 (October 9, 2026): starts in 2D in a classic well, ten wide and twenty deep, with a 3D-only version (a real 3D well: three turn buttons, an outline where the stone will land, a look round with two fingers) picked in the game; a ⟳ Turn button, a tap on the stone and ↑, X or Z turn it; much sharper stones."
     },
     "volley-table": {
       "v": "keep",
@@ -3011,14 +3011,14 @@
       "owner": "New in lane Arcade (October 5, 2026): the owner's games brief, G5 (labs only).",
       "effect": "Blast drifting, tumbling rocks shaped like real asteroids (NASA's public-domain models): big ones split into two smaller ones and small ones into dust, with chips flying each time. The 3D switch drops the camera in behind the ship.",
       "sound": "A short zap for each shot, a crack and rumble for a big rock, a crunch for a small one, an engine rumble while thrusting.",
-      "improved": "Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/)."
+      "improved": "Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/). Arcade r3 (October 9, 2026): much sharper: pin-point stars, finer rock surfaces, a closer field on a phone."
     },
     "soft-landing": {
       "v": "keep",
       "owner": "New in lane Arcade (October 5, 2026): the owner's games brief, G11 (labs only): the Moon first, then Mars.",
       "effect": "Land a lander on real ground from NASA's elevation maps (Tycho, Copernicus and the Sea of Tranquility on the Moon; Gale, Jezero, Valles Marineris and Olympus Mons on Mars): slow, upright and level, or it breaks apart into real pieces. 2D is a true slice through the ground; the 3D switch shows the whole patch around it.",
       "sound": "An engine rumble while thrusting, a soft thud and a three-note chime on touchdown, a crack and clatter on a crash.",
-      "improved": "Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/)."
+      "improved": "Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/). Arcade r3 (October 9, 2026): sharper: a clean cut through the ground in 2D with a crisp skyline, finer ground in 3D, pin-point stars."
     },
     "night-owl-pinball": {
       "v": "keep",
@@ -3032,21 +3032,21 @@
       "owner": "New in lane Arcade (October 5, 2026): the owner's games brief, G9 (labs only).",
       "effect": "A shadow puzzle: turn a carved block between a lamp and a wall until its shadow (each piece casting its own dark splat) fills the outline of a picture; the block is carved to cast a different picture from the side. 2D shows only the wall; 3D shows the lamp and the block too.",
       "sound": "A soft rising tine as the shadow gets closer, a four-note chime when it matches.",
-      "improved": "Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/)."
+      "improved": "Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/). Arcade r3 (October 9, 2026): in 3D, two fingers (or the right mouse button) look around the block and its shadow, and a pinch or the wheel zooms."
     },
     "photo-dash": {
       "v": "keep",
       "owner": "New in lane Arcade (October 5, 2026): the owner's games brief, G8 (labs only).",
       "effect": "A run across your own photo: the line where its sky meets its ground becomes the track, and a glass marble rolls along it, faster each lap; tap to jump the gaps and catch the sparks. The 3D switch raises the photo into a relief by its brightness, and the marble rolls on it.",
-      "sound": "A springy boing for each jump, a glassy tick on landing, a sparkle for each spark, a rising three-note chime each lap.",
-      "improved": "Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/)."
+      "sound": "A springy boing for each jump, a landing sound for each ball (a glassy tick, a steel ring, a hollow thump, a pock), two quick bright notes for each spark, a rising chime each level.",
+      "improved": "Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/). Arcade r3 (October 9, 2026): the photo stays still and sharp, cut to the screen; a new sample photo each level; pick the ball; a row of crisp planks; a two-note coin sound."
     },
     "note-rider": {
       "v": "keep",
       "owner": "New in lane Arcade (October 5, 2026): the owner's games brief, G10 (labs only).",
       "effect": "A song's melody comes down a three-lane track as glowing notes, low to high by pitch; steer the sled into each note's lane as it arrives and the note plays, so catching them all plays the tune. The 3D switch turns the track into a road coming toward you. Built-in tunes or your own MIDI file.",
-      "sound": "Each caught note plays on the grand piano at its own pitch; a missed note is silent.",
-      "improved": "Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/). Arcade r2 (October 7, 2026): ♪ Your song opens a MIDI file from the game itself (the file opened in the Toy tab used to be dropped for Ode to Joy), or a recording: a note finder (Basic Pitch) charts its tune on the device, and each caught note plays its slice of the recording."
+      "sound": "Each caught note plays at its own pitch and for its own length on the instrument picked in the game (piano, guitar, steel guitar, harp, organ, synth, or vibes); a missed note is silent.",
+      "improved": "Arcade: new game on the Arcade shelf (labs), on the game kit (src/arcade/). Arcade r2 (October 7, 2026): ♪ Your song opens a MIDI file from the game itself (the file opened in the Toy tab used to be dropped for Ode to Joy), or a recording: a note finder (Basic Pitch) charts its tune on the device, and each caught note plays its slice of the recording. Arcade r3 (October 9, 2026): each note lasts its own length (no more ringing on); seven instruments to pick in the game, guitar among them."
     },
     "unit-cells": {
       "v": "new",

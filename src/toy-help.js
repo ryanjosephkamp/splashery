@@ -1822,7 +1822,7 @@ export const TOY_HELP = {
   "qr-picture": {
     howTo: "Pick a picture or open your own, then tap to turn the tiles over.",
     about:
-      "A QR code reader decides each module from a sample at its center, so the rest of a module can carry a picture. Here every module keeps its bit in a dot at its middle, and the picture fills the rest, darkened in dark modules and lightened in light ones. The eyes, the timing lines and the format information stay plain, so a reader still finds the code.\n\nThe toy measures the contrast and reads its own code at phone size and smaller. If it won't scan, Make it scan finds the closest version that does: more contrast, a bigger center dot or a higher error correction level. Your picture never leaves your device.",
+      "A QR code reader decides each module from a sample at its center, so the rest of a module can carry a picture. Here every module keeps its bit in a dot at its middle, and the rest is a halftone of the picture: small dark and light dots, spread by error diffusion so they average out to the picture's tones. Only where a module would read wrong do a few of its dots take its color. The eyes, the timing lines, and the format information stay plain, so a reader still finds the code.\n\nThe toy picks the mask that fits the picture best, reads its own code at phone size and smaller, and nudges a few more dots until it scans. A bigger code size shows more detail. If it still won't scan, Make it scan finds the closest version that does: more contrast, a bigger center dot, or a higher error correction level. Your picture never leaves your device.",
   },
   "qr-build": {
     howTo: "Pick dominoes, marbles or tiles in the Toy tab, then tap to build the code.",
@@ -2038,9 +2038,9 @@ export const TOY_HELP = {
   // ---- Arcade (lane Arcade) ------------------------------------------------------------
   shardball: {
     howTo:
-      "Tap or press Space to play. Steer with the mouse, a finger or the arrow keys; press 3D for the 3D view.",
+      "Tap to play. Steer the dish with a finger, the mouse or the arrows; it catches the ball. Tap to launch.",
     about:
-      "A ball, a paddle and a wall of bricks. Keep the ball in play and break every brick: where it meets the paddle sets its angle, glazed bricks break at one hit and stone bricks crack first and break at the second. Each brick that breaks falls apart into real pieces that tumble, bounce and fade.\n\nThe 3D button (or V) slides the game into 3D and back. Flat board tips the same board back into a table you look along, and play goes on. Dome takes the paddle down to the bottom of an invisible sphere and spreads the bricks over a dome around and above it; the ball then bounces in three dimensions, with a gentle pull down toward the paddle, and its shadow shows where it will land. Pick a Style and a starting Level in the Toy tab. ⛶ Play fills the whole page; P pauses, R starts again, Esc leaves. The best score stays on this device.",
+      "A ball, a dish and a dome of bricks. Break every brick: glazed ones break at one hit, and stone ones crack first and break at the second. Each brick that breaks falls apart into real pieces that tumble, bounce and fade.\n\nThe game opens in the Dome, in 3D: the dish sits on the ground at the bottom of an invisible sphere, under a dome of bricks, and the ball bounces in three dimensions, its shadow showing where it will land. The dish catches the ball and holds it where it lands; tap or press Space to send it back (where it sits sets its angle), or it goes on its own after three seconds. A ball that touches the ground is lost. Drag on the dome, or with two fingers, to turn the view; pinch or scroll to zoom.\n\nThe 2D button slides it all onto a flat board. Flat board, in the Toy tab, is the classic board, which 3D tips back into a table. \u26f6 Play fills the page; P pauses, R starts again.",
   },
 
   longtail: {
@@ -2064,9 +2064,9 @@ export const TOY_HELP = {
 
   strata: {
     howTo:
-      "Tap or press Space to play. Arrows move the falling stone, X turns it, Q and E tip it, Space drops it.",
+      "Tap the falling stone (or ⟳ Turn, ↑ or X) to turn it; tap beside it or use ← → to move it. Space drops it.",
     about:
-      "Stones of our own shapes fall down a square well: a tripod, two screws, a plus, a slab and more, most of them shapes that only work in 3D. Move each one across the well and turn it as it falls; when a whole layer of the well is full, it crumbles into rubble that falls away, and every stone above drops into its place. The more layers at once, the more points; every four layers the stones fall faster.\n\n3D looks down into the well from above its rim; 2D is the side view, straight in from the front. Pick a Well in the Toy tab: deep, wide, or a flat slot one stone deep that plays like a flat game. P pauses, R starts again.",
+      "Stones of our own shapes fall down a well between stone walls, ten wide and twenty deep. Move each one across and turn it as it falls (tap it, press ⟳ Turn, ↑ or X); when a whole row is full, it crumbles into rubble that falls away, and every stone above drops into its place. The more rows at once, the more points; every four rows the stones fall faster.\n\nThe 3D button turns the well so its depth shows. Pick the well with the buttons at the top: Classic, or a 3D well (deep or wide), a real square box you look down into, with stones that only work in 3D (a tripod, two screws, a plus) and room to put one behind or in front of another. There, ⟳ Turn, ⤾ Tip and ⤿ Roll turn the stone three ways, an outline shows where it will land, and two fingers look round the well. P pauses, R starts again.",
   },
   "volley-table": {
     howTo:
@@ -2103,16 +2103,17 @@ export const TOY_HELP = {
   },
 
   "photo-dash": {
-    howTo: "Tap or press Space to jump. Open your own photo in the Toy tab to run across it.",
+    howTo:
+      "Tap or press Space to jump. Pick a ball at the top; open your own photo in the Toy tab to run across it.",
     about:
-      "Your photo becomes the landscape. Down each column of the picture, the strongest change from light to dark marks where its sky meets its ground, and that line, smoothed, is the track. A glass marble rolls along it by itself, a little faster each lap; tap or press Space to jump the gaps, and catch the sparks on the way. The 3D button raises the photo into a relief, its bright parts nearer and its dark parts deeper, and the marble keeps rolling on it. The photo is read on this device and never leaves it.",
+      "A photo becomes the landscape. Down each column of the picture, the strongest change from light to dark marks where its sky meets its ground, and that line, smoothed, is the track: a row of wooden planks. Your ball rolls along it by itself, a little faster each level; tap or press Space to jump the gaps, and catch the sparks on the way. Pick the ball: a glass marble, a steel ball, a floaty beach ball or a bouncy tennis ball. Each level brings another of the site's sample photos (real photos, or AI-made pictures by Splashery's owner, labeled as such), unless you opened your own. The 3D button raises the photo into a relief, its bright parts nearer and its dark parts deeper, and the marble keeps rolling on it. The photo is read on this device and never leaves it.",
   },
 
   "note-rider": {
     howTo:
       "Steer into each note's lane as it arrives (arrows, a swipe or a finger). ♪ Your song opens MIDI or audio.",
     about:
-      "A song comes down the track as glowing notes: its melody, the highest note at each moment, with the low notes in the low lane and the high notes in the high one. Steer the sled into each note's lane as the note arrives and it plays, so catching every note plays the whole tune; a missed note stays silent. The built-in tunes are Ode to Joy, Twinkle, Twinkle, Little Star and Frère Jacques, or open your own with ♪ Your song: a MIDI file, or a recording, whose tune a note finder hears on this device, each caught note then playing its own slice of the recording. In 2D, on a phone held upright, the notes fall down three lanes side by side to their pads, the low lane on the left (on a wide screen the lanes are stacked by pitch and the notes slide in from the right); the 3D button turns it into a road coming toward you. The file is read on this device and never leaves it.",
+      "A song comes down the track as glowing notes: its melody, low notes in the low lane and high notes in the high one. Steer the sled into each note's lane as the note arrives and it plays for its own length, so catching every note plays the whole tune; a missed note stays silent. Pick the instrument at the top: piano, guitar, steel guitar, harp, organ, synth, or vibes.\n\nThe built-in tunes are Ode to Joy, Twinkle, Twinkle, Little Star and Fr\u00e8re Jacques. Or open your own with \u266a Your song: a MIDI file, or a recording, whose tune a note finder hears on this device; each caught note then plays its own slice of the recording. In 2D on a phone held upright, the notes fall down three lanes side by side; on a wide screen they slide in from the right. The 3D button turns the track into a road coming toward you. The file is read on this device and never leaves it.",
   },
 
   // ---- Holidays -------------------------------------------------------------------------

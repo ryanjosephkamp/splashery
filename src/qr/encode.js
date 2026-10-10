@@ -41,7 +41,8 @@ export const ROLE = { data: 0, finder: 1, alignment: 2, timing: 3, format: 4 };
 //          top-left module and its width in modules (7 or 5); a finder's
 //          piece covers its 7 x 7 modules (the light separator around it
 //          stays with the background)
-export function encodeQR(text, ecc = "M", { boost = true, mask = -1 } = {}) {
+// Lane QR r4: `min`, the smallest version to use (Picture QR's bigger codes).
+export function encodeQR(text, ecc = "M", { boost = true, mask = -1, min = 1 } = {}) {
   const level = ECC[ecc] ? ecc : "M";
   const str = String(text ?? "");
   const bytes = new TextEncoder().encode(str).length;
@@ -50,7 +51,14 @@ export function encodeQR(text, ecc = "M", { boost = true, mask = -1 } = {}) {
       `That is too long for a QR code at level ${level} (${bytes} bytes; at most ${MAX_BYTES[level]}).`,
     );
   const segs = QrSegment.makeSegments(str);
-  const qr = QrCode.encodeSegments(segs, ECC[level], 1, 40, mask, boost);
+  const qr = QrCode.encodeSegments(
+    segs,
+    ECC[level],
+    Math.max(1, Math.min(40, min)),
+    40,
+    mask,
+    boost,
+  );
   const size = qr.size;
   const dark = new Uint8Array(size * size);
   for (let y = 0; y < size; y++)
