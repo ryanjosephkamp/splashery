@@ -87,8 +87,9 @@ games) and the Arcade packs.
   buttons in the game picks Classic, 3D well or Wide 3D well (a new game in that well; the kit's
   `choiceRebuild`); the 3D wells are 3D only (`views`, `forceView`), with ⟳ Turn, ⤾ Tip, ⤿ Roll and
   Drop in a 2 × 2 block, an outline where the stone will land (a frame of thin bars in its color),
-  and a look round the well with two fingers (the arrows follow the view). Card `arc3-strata-r2`,
-  waiting for his mark.
+  and a look round the well with two fingers (the arrows follow the view). Card `arc3-strata-r2`:
+  marked "good" (October 10). Every Arcade r3 card is now marked good.
+- October 10: main merged in (no conflicts); the Arcade specs pass (38).
 - Sounds: Photo Dash (the coin) and Note Rider (seven instruments) are "ready" in
   `tools/sound-review.json`.
 - Tests: `tests/arc3.spec.mjs` (9) and the older Arcade specs pass (37 in all); the full suite is
