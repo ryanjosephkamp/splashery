@@ -88,6 +88,21 @@ replace the prefix and lane record with yours).
 
 ## State
 
+**Merged (October 10, 2026):** part 1 (PR #469) and part 2 (PR #483) are both in main, with the
+follow-up fixes (`525cb88d`, the ops-text expectations; `ca3a82e5`, the gallery fits at 320 px and
+the link list takes Wikipedia articles and the Porter-Duff DOI), through batch 5 (#496, main
+`ad961bec`). The new round is live at /manual/. The owner may ask for layout changes after he reads
+it live. The older notes below are the record of the two parts.
+
+**Left to do (not started):**
+
+- The railroad diagram of the grammar (`grammar-railroad`) and the other demo placeholders:
+  `gaussian-3d`, `splat-numbers`, `bell-1d-to-3d`, `projection`, `sort-blend`, `windmill-parts`,
+  `uv-torus`, and `program-fields`. Four demos are built (covariance, reader, moments, smoothstep).
+- Plan part 7, the expansion (Levels 6 to 10 are headings that say "coming in the next round").
+- The site page about what Splashery can do.
+- Any layout changes the owner asks for after reviewing the live manual.
+
 Model: Sonnet 5.5 (claude-sonnet-5-5), high effort. Lane record `ManualR3` on Effect review page 2.
 
 October 9, 2026: parts 1 to 6 of the plan are written in `manual/index.html` and
@@ -198,10 +213,11 @@ Notes:
 
 - The PDF's figure text for Figures 2 and 3 is smaller relative to the page than on the web, because
   the print rule keeps the figures about 4.7 inches wide.
-- Part 7 (the expansion) and the demos are not started, as the brief says.
+- Part 7 (the expansion), the railroad diagram, and the remaining demo placeholders are not started.
 
 ## For the Operator
 
 - Questions for the owner: none blocking. The level map shows Levels 1 to 5 only, waiting on his
   approval of Levels 6 to 10.
-- The manual is public, so this round waits for the owner's "good" marks (cards `man3-…` on page 2).
+- Parts 1 and 2 are merged and live (the owner marked the cards good). What is left is listed at the
+  top of "State".
