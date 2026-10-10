@@ -1742,14 +1742,15 @@
     "jack-o-lantern": {
       "v": "keep",
       "owner": "Basically perfect.",
-      "sound": "Spooky flicker whoosh."
+      "sound": "Spooky flicker whoosh.",
+      "improved": "Hands-on H3 (October 8, 2026; Hands-on): Lift the lid off by its stem; brought back, it drops into place."
     },
     "snowman": {
       "v": "keep",
       "owner": "Do more than bounce; maybe it melts.",
       "effect": "Melts into a puddle, then rebuilds itself.",
       "sound": "Drips, then a crunch of snow and a twinkle as it rebuilds.",
-      "improved": "E6: it melts as solid pieces, not a squash: the snowballs shrink (the head first), drips fall, and the hat, nose, coals, arms and scarf drop off one by one into a spreading puddle; then it builds itself again: the balls grow back from the bottom up and each piece hops back to its place (about 6 s). The Warmth slider melts it the same way. Fix7: it melts into a real puddle of meltwater with a wavering edge (it was a spoked disc that looked like a flower)."
+      "improved": "E6: it melts as solid pieces, not a squash: the snowballs shrink (the head first), drips fall, and the hat, nose, coals, arms and scarf drop off one by one into a spreading puddle; then it builds itself again: the balls grow back from the bottom up and each piece hops back to its place (about 6 s). The Warmth slider melts it the same way. Fix7: it melts into a real puddle of meltwater with a wavering edge (it was a spoked disc that looked like a flower). Hands-on H3 (October 9, 2026; Hands-on): lift the head or the middle ball off, set it down and stack them back up; each ball takes its own decorations."
     },
     "fireworks": {
       "v": "keep",
@@ -1764,18 +1765,19 @@
       "owner": "Lights only show very briefly; make it more dramatic.",
       "effect": "Lights come on and chase in patterns and stay on; the star glows.",
       "sound": "Jingle Bells on a real glockenspiel with a shake of real sleigh bells, at the same tempo (Sound C, October 2, 2026).",
-      "improved": "C2: a tap switches the lights on in a sweep up the tree, and they stay on, cycling chase, ripple and steady patterns; the star gets a warm halo. A second tap turns them off."
+      "improved": "C2: a tap switches the lights on in a sweep up the tree, and they stay on, cycling chase, ripple and steady patterns; the star gets a warm halo. A second tap turns them off. Hands-on H3 (October 8, 2026; Hands-on): Shake it and the baubles swing on their hooks, then settle."
     },
     "patterned-egg": {
       "v": "keep",
       "owner": "Pretty cool; keep.",
-      "sound": "Painted-shell tap."
+      "sound": "Painted-shell tap.",
+      "improved": "Hands-on H3 (October 8, 2026; Hands-on): Flick it: it spins on its end and wobbles to a stop."
     },
     "paper-lantern": {
       "v": "keep",
       "owner": "Perfect; the physics are really good.",
       "sound": "Paper rustle.",
-      "improved": "Fix7: a tap never pauses it; a tap mid-swing gives it another push, and the swing grows smoothly (no jump)."
+      "improved": "Fix7: a tap never pauses it; a tap mid-swing gives it another push, and the swing grows smoothly (no jump). Hands-on H3 (October 8, 2026; Hands-on): Push it: it swings on its string and settles."
     },
     "diya": {
       "v": "keep",
