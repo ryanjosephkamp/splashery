@@ -1948,13 +1948,13 @@ export const TOY_HELP = {
   },
   "fruit-mri": {
     howTo:
-      "Drag up or down on the fruit, or move the Slice slider, to step through the slices one at a time. Tap to play through them all; a drag stops the play.",
+      "Drag on the fruit or move the Slice slider to step through the slices. Tap to play them all; a drag stops it.",
     about:
       "An MRI scanner (magnetic resonance imaging) uses no X-rays. A strong magnet lines up the hydrogen nuclei in the water of the fruit, radio pulses tip them over, and the radio signal they give back as they relax is turned into a picture, one thin slice at a time. In this T2-weighted look, watery tissue is bright, while seeds, skin and air are dark.\n\nThe kiwi and the orange here are built for the toy to look like real MRI slices: the kiwi's ring of black seeds in its bright locules around a pale core, the orange's segments with thin walls between them and its peel. Choose the fruit and the vision (the realistic gray, night vision or infrared) in the Toy tab. The faint outline of the whole fruit and the thin ring round each slice show where the slice is.",
   },
   "electron-microscope": {
     howTo:
-      "Tap a grain or a shell to zoom in on it, and tap it again to look closer; the third tap goes back out. A tap on another one zooms in on that one. Choose the sample and the vision in the Toy tab.",
+      "Tap a grain or shell to zoom in, again to look closer; a third tap goes back out. Tap another to zoom on it.",
     about:
       "A scanning electron microscope sweeps a fine beam of electrons across a sample in a vacuum. Where the beam hits, the surface gives off low-energy electrons, and a detector counts them, point by point, into a gray picture. More escape where the beam meets the surface at a slant, so edges and spines glow, and the side facing away from the detector falls into shadow. It can show things far smaller than light can: pollen grains a few hundredths of a millimeter across, the rows of tiny pores in a diatom's glass shell, or the frozen droplets on a snowflake (snow is imaged cold, in a special stage).\n\nThe samples here are built for the toy in a microscope's grays. Tap any grain, shell, or crystal to zoom in from the whole field to it, then to its surface. Vision in the Toy tab recolors the picture: the realistic gray, a night-vision scope's green, or an infrared camera's colors (for fun: an electron microscope sees no color).",
   },
