@@ -482,6 +482,32 @@ main > article.prose > section {
   border-radius: var(--radius-lg);
   background: var(--raised);
 }
+.news-feature,
+.news-fix {
+  position: relative;
+}
+/* One link per card: the heading's link stretches over the whole card. */
+.news-link {
+  color: inherit;
+  text-decoration: none;
+}
+.news-link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-lg);
+}
+.news-link:focus-visible {
+  outline: none;
+}
+.news-link:focus-visible::after {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+.news-feature:hover,
+.news-fix:hover {
+  box-shadow: var(--shadow);
+}
 .news-feature-head {
   display: flex;
   gap: 12px;
