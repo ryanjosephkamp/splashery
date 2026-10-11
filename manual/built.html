@@ -128,7 +128,10 @@
         <p>
           Four things follow from it. A toy can be <b>read</b>: the file you open in the browser's
           tools is the file in the repository, not a squeezed copy. The site
-          <b>costs nothing to run</b> and cannot go down because a server did. Your scenes and files
+          <b>costs nothing to run</b> beyond free file hosting, and has no application server of its
+          own that could fail. (The files still have to be served by some host, GitHub Pages today,
+          or a file server on your own computer, and the page loads them over the network, so it can
+          still be unreachable when the host or the network is down.) Your scenes and files
           <b>stay on your device</b>, because there is no server to send them to (the Terms of use
           in the About tab say so). And a page that embeds a toy (<code>embed/index.html</code>, the
           <code>&lt;splashery-toy&gt;</code> element in <code>src/element.js</code>) needs only a
@@ -205,7 +208,10 @@
             <tr>
               <td><code>vendor/</code></td>
               <td>
-                Other people's libraries, copied in unchanged. The next two sections list them all.
+                Other people's libraries, copied in as they were published. Four needed a small
+                change to load here (a comment removed, or a line added so the file loads as an ES
+                module, or the TypeScript compiled to JavaScript); <code>LICENSES.md</code> records
+                each one. The next two sections list them all.
               </td>
             </tr>
             <tr>
@@ -407,15 +413,20 @@
               <td>Project Nayuki's QR Code generator (<code>qrcodegen</code>)</td>
               <td>Writes the QR code's modules.</td>
               <td>MIT</td>
-              <td>Only when the QR code toy, or the Share tab's scene code, opens (labs).</td>
+              <td>
+                Only when something needs a code drawn: the QR code toy, the Share tab's scene code,
+                or Save PDF (labs).
+              </td>
             </tr>
             <tr>
               <td>jsQR 1.4.0 (<code>jsqr</code>)</td>
               <td>Reads a QR code back, to check that it scans.</td>
               <td>Apache-2.0</td>
               <td>
-                Only when a QR toy checks a code in a browser whose own barcode reader cannot read
-                QR codes.
+                Only when a code is read back and the browser's own barcode reader is not used or
+                cannot read it. The QR code toy asks for jsQR directly, and so does the check that
+                Save PDF runs on its code; the Share tab's scene code uses the browser's reader
+                first and falls back to jsQR.
               </td>
             </tr>
             <tr>
@@ -452,9 +463,12 @@
         </table>
       </div>
       <p>
-        The Wikipedia book and the earthquakes, migration, and protein toys do read from outside the
-        site, but they fetch data (an article, a feed, a structure), not code, only when you ask,
-        and a snapshot ships for when the feed cannot be reached.
+        The Wikipedia book, the earthquakes toy, and the molecule viewer's fetch by Protein Data
+        Bank code do read from outside the site while you use it, but they fetch data (an article, a
+        feed, a structure), not code, only when you ask, and a dated snapshot of the earthquake feed
+        ships for when it cannot be reached. The white stork migration is not one of them: it reads
+        a data file that ships with the site. The outside download of that data happens earlier,
+        when a tool in <code>tools/</code> builds the file on a build machine, not in your browser.
       </p>
       <details class="fold approx" id="build-tools">
         <summary>What is used to build the site, but is not in it</summary>

@@ -600,7 +600,7 @@ function projectionDemo() {
     cx.moveTo(W / 2, 0);
     cx.lineTo(W / 2, H);
     cx.stroke();
-    // The true outline of the shell one size out (solid), and the ellipse the renderer draws (dashed).
+    // The true outline of the shell one size out (solid), and the ellipse the formula gives (dashed).
     cx.beginPath();
     outline.forEach(([x, y], i) => (i ? cx.lineTo(x, y) : cx.moveTo(x, y)));
     cx.closePath();
@@ -623,7 +623,7 @@ function projectionDemo() {
     cx.fillStyle = css("--muted");
     cx.textAlign = "left";
     cx.fillText("solid: the true outline of the shell one size out", 8, 18);
-    cx.fillText("dashed: the ellipse from Σ′ (the renderer's)", 8, 35);
+    cx.fillText("dashed: the ellipse from Σ′ (before the renderer's extra blur)", 8, 35);
     // The top view: the camera, its view line to the splat, and the splat seen from above.
     const tw = top.width;
     const th = top.height;
@@ -924,7 +924,11 @@ function windmillDemo() {
     const litSet = lit === "sails" ? new Set(all.filter((i) => partOf(i) === sailsPart)) : lit ? range(lit) : null; // prettier-ignore
     const turn = M.turnAbout(pivot, axis, (angle * Math.PI) / 180);
     drawKit(cx, W, H, buf, all, cam, (i) => (litSet ? (litSet.has(i) ? { alpha: 0.95 } : { alpha: 0.1, tint: [0.55, 0.57, 0.62] }) : { alpha: 0.9 }), (i, p, q) => (partOf(i) === sailsPart ? turn(p, q) : [p, q])); // prettier-ignore
-    if (lit === "sails") {
+    // How many of the lit splats belong to the sails part (the hub and the four sails do; the tower
+    // and the cap do not), by the same part number the shader uses to move them.
+    let moving = 0;
+    if (litSet) for (const i of litSet) if (partOf(i) === sailsPart) moving++;
+    if (moving > 0) {
       // The part's pivot and its axis (the line the sails turn about).
       const a = M.project(cam, M.sub(pivot, M.scale(axis, 0.5)));
       const b = M.project(cam, M.add(pivot, M.scale(axis, 0.5)));
@@ -955,9 +959,13 @@ function windmillDemo() {
       `${name}: ${n.toLocaleString("en-US")} of ${buf.count.toLocaleString("en-US")} splats (${((100 * n) / buf.count).toFixed(0)}%).\n` + // prettier-ignore
       (lit === "sails"
         ? `The part turns as one solid piece about the dashed line (axis [${axis.map((v) => v.toFixed(0)).join(", ")}] through the pivot). Move the slider.` // prettier-ignore
-        : lit
-          ? "These splats stay where they are when the sails turn."
-          : "The recipe builds this many splats; each line below made some of them.");
+        : lit && moving === n
+          ? "These splats belong to the sails part, so they turn with it about the dashed line. Move the slider."
+          : lit && moving > 0
+            ? `${moving.toLocaleString("en-US")} of these splats belong to the sails part and turn with it; the rest stay where they are.` // prettier-ignore
+            : lit
+              ? "These splats are not in the sails part, so they stay where they are when the sails turn."
+              : "The recipe builds this many splats; each line below made some of them.");
     // Mark the lit line.
     for (const b of document.querySelectorAll("#demo-windmill .code-line")) {
       b.setAttribute("aria-pressed", String(b.dataset.lit === pinned));

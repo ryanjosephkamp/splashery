@@ -89,7 +89,12 @@ function shareDemo() {
       $("sh-sizes").textContent = `That is not valid JSON yet: ${e.message}`;
       hashBox.value = "";
       show("Fix the JSON to get a link.");
-      $("sh-qr-note").textContent = "";
+      // No link means no code: hide the old one, so it can't pass for this scene's, and forget the
+      // old link, so "Change one character" has nothing to change.
+      good = "";
+      $("sh-qr").hidden = true;
+      $("sh-qr-note").textContent =
+        "No QR code: there is no link to draw until the JSON can be read.";
       return;
     }
     const hash = await encodeSceneHash(scene);
