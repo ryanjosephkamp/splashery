@@ -44,16 +44,16 @@ batch merges as one PR.
 
 **Lanes running** (rows, sessions and files in WORKSTREAMS.md):
 
-- **Manual r5** (Sonnet, fresh, from Manual r4's branch): chapter pages, the Codex audit's fixes,
-  and the chapters "How Splashery is built" and "Share links and QR codes". A second Codex audit
-  follows.
-- **Live r10** (Opus, fresh): Sound in a box's responsiveness audit, its modes explained with
-  references, and particle colors for it and the Chladni plate.
-- **Bake-off r2** (Opus): new codes for all 40 entries, the new blind page, and the judges' cards
-  for the new contestant's eight entries.
+- **Site r3** (Sonnet, #529 and engine #528): What's new as a gallery, the app's Gallery renamed
+  Playground, a date for every toy with a newest-first view, and description tags. READY; merges
+  after the owner's marks on its cards and a targeted run.
+- **Bake-off r2** (Opus): all 40 cards are on the new blind page; the owner marks them, then the
+  reveal.
 
-Lanes now rotate to fresh sessions (OPERATOR.md, "Rotation"). Finished and safe to archive with the
-owner's OK: Fix11, QR r5, Live r9, Kit lab, Arcade r3, Fix10, Photo depth and QR r4.
+Merged on October 11, 2026: Manual r4 (#527), Manual r5 (#530, after a full suite run) and Live r10
+(#531, labs). Those three lanes have stood down. Finished and safe to archive with the owner's OK:
+Manual r4, Manual r5, Live r10, Fix11, QR r5, Live r9, Kit lab, Arcade r3, Fix10, Photo depth and QR
+r4.
 
 **Open with the owner:** marking the bake-off's 40 cards when the page is ready, then the reveal;
 Search Console (Verify, then submit site/sitemap.xml); the Codex prototype run (pilot #510 to #512
@@ -63,11 +63,10 @@ the front-door call; Codex task 32 (#479), held for his in-depth review. Pace (h
 October 14, 4 p.m. ET), with no new Claude-built toys until then; Codex builds first drafts of new
 toys, and a Claude lane polishes them after the reset.
 
-**Next for the Operator:** merge Manual r4 (#513); start Site r2 (Sonnet, fresh: What's New as a
-visual gallery of new toys, features and before-and-after fixes; "Gallery" renamed "Playground"; a
-date added for every toy with a newest-first view; description tags on the /site/ pages) once #513
-is in; batch Manual r5 and Live r10 when READY; the bake-off reveal after every card is marked; the
-Operator's own handover at about 400k tokens of context.
+**Next for the Operator:** merge Site r3 (#528, then #529) after the owner's marks; review the Codex
+prototypes #514 to #522 (first drafts, never merged as is); the bake-off reveal after every card is
+marked; the owner's second Codex audit of the manual; the Operator's own handover by October 13,
+2026, or at about 400k tokens of context.
 
 ## State of main (2026-10-02, history)
 
