@@ -16,6 +16,7 @@ import {
   evalTree,
   grouped,
 } from "./demo-math.js";
+import { readExpr } from "../src/packs/splat-equation.js";
 
 const $ = (id) => document.getElementById(id);
 const css = (name) => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
@@ -79,14 +80,18 @@ function covDemo() {
     const t = (v) => (v >= 0 ? " " : "") + v.toFixed(3);
     $("cov-readout").textContent =
       `Σ = [ ${t(m.a)}  ${t(m.b)} ]\n    [ ${t(m.b)}  ${t(m.c)} ]\n\n` +
-      `squared sizes along its own axes: ${f.l1.toFixed(3)} and ${f.l2.toFixed(3)}\n` +
-      `(so the sizes are ${Math.sqrt(f.l1).toFixed(3)} and ${Math.sqrt(Math.max(f.l2, 0)).toFixed(3)}; both must be above 0)`; // prettier-ignore
+      `squared sizes along its own axes (the eigenvalues): ${f.l1.toFixed(3)} and ${f.l2.toFixed(3)}\n` +
+      (f.l2 > 0
+        ? `so the sizes are ${Math.sqrt(f.l1).toFixed(3)} and ${Math.sqrt(f.l2).toFixed(3)}; both must be above 0`
+        : `the second one is ${f.l2 < 0 ? "negative: a squared size can't be below 0, so there is no real size" : "0: that axis has no size at all"}`); // prettier-ignore
     const v = $("cov-verdict");
     if (f.valid) {
-      v.textContent = "Valid: it falls off in every direction.";
+      v.textContent = f.thin
+        ? "Valid, but very thin: it falls off in every direction, yet one axis is so much smaller than the other that a computer loses accuracy inverting it."
+        : "Valid: it falls off in every direction.";
       v.className = "verdict ok";
     } else if (f.flat) {
-      v.textContent = "Not valid: it is flat in one direction (a size of 0), so it can't be inverted."; // prettier-ignore
+      v.textContent = "Not valid: its determinant is 0, so it has no inverse (it is flat in one direction)."; // prettier-ignore
       v.className = "verdict bad";
     } else {
       v.textContent = "Not valid: in some direction it grows instead of falling off (it isn't positive definite)."; // prettier-ignore
@@ -156,6 +161,13 @@ function parseDemo() {
       out.innerHTML = treeHtml(tree);
       const val = evalTree(tree, PARSE_ENV);
       ro.textContent = `Grouped: ${grouped(tree)}\n\nAt u = 1, v = 0.5, t = 0:\n= ${Number.isFinite(val) ? +val.toPrecision(6) : "not a number (that point would be skipped)"}`; // prettier-ignore
+      // The tree is a teaching picture. The toy's own reader has the last word (its length, depth,
+      // and piece limits), so ask it too and say so when it would refuse.
+      try {
+        readExpr(src);
+      } catch (e) {
+        out.innerHTML += `<div class="err">The tree is drawn, but the Splat equation toy would not accept this: ${escapeHtml(e.message)}</div>`; // prettier-ignore
+      }
     } catch (e) {
       out.innerHTML = `<div class="err">That can't be drawn: ${escapeHtml(e.message)}</div>`;
       ro.textContent = "Fix the expression to see how it groups.";
@@ -208,11 +220,16 @@ function momentsDemo() {
     tx.fillText("u = 0", W / 2 + first[0] * s + 9, H / 2 - first[1] * s + 4);
     $("t-readout").textContent =
       `t = ${t.toFixed(2)} of 2π = ${TAU.toFixed(2)}  (${Math.round(tf * 100)}% of the cycle)\n` +
-      `on the wall clock: about ${(tf * 4).toFixed(1)} s of 4 s, if played\n` +
+      `Play runs the cycle in 4 s from wherever the slider is, easing in and out\n` +
       (K
         ? `stored moments: ${K} (copy ${Math.min(K - 1, Math.floor(tf * K)) + 1} → next)\n` +
           `largest dip right now: ${(dip * 100).toFixed(1)}%\n` +
-          `worst case for a turn: ${(worstDip(K) * 100).toFixed(1)}%\n` +
+          (K >= 2
+            ? `worst case for a turn: ${(worstDip(K) * 100).toFixed(1)}%\n`
+            : "worst case for a turn: none (one moment is a single copy, with no path between moments)\n") + // prettier-ignore
+          (K >= 12 && K <= 15
+            ? ""
+            : "(the toy offers 12 to 15 moments; this count is only for trying)\n") + // prettier-ignore
           `points per copy on the weakest device: ${pointsPerCopy(120000, K).toLocaleString("en-US")}`
         : "moments: off (the exact shape at every t)");
   }

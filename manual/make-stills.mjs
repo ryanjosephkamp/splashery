@@ -4,11 +4,13 @@
 //   python3 -m http.server 4173 --bind 127.0.0.1 &
 //   SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium node manual/make-stills.mjs
 //
+// (It loads manual/all.html, the whole manual on one page. ONLY=share-link takes just that still.)
+//
 // Each demo is put in a state that shows what it does, in the light theme (the PDF is light).
 
 import { chromium } from "playwright";
 
-const BASE = process.env.MANUAL_URL || "http://127.0.0.1:4173/manual/";
+const BASE = process.env.MANUAL_URL || "http://127.0.0.1:4173/manual/all.html";
 const STILLS = {
   "grammar-railroad": ["demo-railroad.png", async (p) => { await p.selectOption("#rr-start", "x"); await p.click("#rr-walk"); }],
   "gaussian-3d": ["demo-gaussian.png", async () => {}],
@@ -18,6 +20,7 @@ const STILLS = {
   "sort-blend": ["demo-blend.png", async (p) => { await p.click("#bd-reverse"); }],
   "windmill-parts": ["demo-windmill.png", async (p) => { await p.click('#demo-windmill .code-line[data-lit="sails"]'); await p.fill("#wm-angle", "25"); }],
   "uv-torus": ["demo-uvtorus.png", async (p) => { await p.fill("#ut-progress", "0.6"); }],
+  "share-link": ["demo-share.png", async (p) => { await p.click("#sh-break"); await p.waitForTimeout(400); }],
   "program-fields": ["demo-fields.png", async (p) => { await p.fill("#pf-f-hue", "u/(2pi)"); await p.waitForTimeout(600); }],
 }; // prettier-ignore
 
@@ -31,7 +34,10 @@ await page.goto(BASE);
 await page.waitForLoadState("load");
 // The sticky contents bar would sit on top of the pictures.
 await page.addStyleTag({ content: ".outline { display: none !important; }" });
+// ONLY=share-link,projection takes just those stills.
+const only = process.env.ONLY?.split(",");
 for (const [demo, [file, setup]] of Object.entries(STILLS)) {
+  if (only && !only.includes(demo)) continue;
   const sec = page.locator(`section.demo-live[data-demo="${demo}"]`);
   await sec.scrollIntoViewIfNeeded();
   await setup(page);
