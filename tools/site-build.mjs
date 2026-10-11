@@ -26,7 +26,7 @@ import { RIGS } from "../src/rigs.js";
 import { SITE, FRONT_DOOR, MENU, PAGES, NOT_FOUND, HOME_TOY, DOC_PAGES, appLink, newTabLinks, mirrorDocLinks } from "./site-pages.mjs"; // prettier-ignore
 import { hubTypes } from "./site-hubs.mjs";
 import { toyPage, toyPath, toyPageDirs, TOY_DATES, dateText } from "./site-toy-pages.mjs";
-import { swapLayout, liftHtml, KEEP_ASSETS } from "./site-front-door.mjs";
+import { swapLayout, liftHtml } from "./site-front-door.mjs";
 
 const root = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
 const OUT = path.join(root, "site");
@@ -864,12 +864,11 @@ async function buildSwapped() {
     for (const e of fs.readdirSync(path.join(root, "assets"))) {
       fs.symlinkSync(path.join(root, "assets", e), path.join(SWAP_OUT, "assets", e));
     }
-    // The few files other pages still point at under site/.
+    // What stays under site/: its assets (the old addresses still work) and the catalog PDF.
+    fs.mkdirSync(path.join(SWAP_OUT, "site"), { recursive: true });
+    fs.symlinkSync(path.join(OUT, "assets"), path.join(SWAP_OUT, "site/assets"));
     for (const f of ["splashery-catalog.pdf"]) {
-      if (fs.existsSync(path.join(OUT, f))) {
-        fs.mkdirSync(path.join(SWAP_OUT, "site"), { recursive: true });
-        fs.symlinkSync(path.join(OUT, f), path.join(SWAP_OUT, "site", f));
-      }
+      if (fs.existsSync(path.join(OUT, f))) fs.symlinkSync(path.join(OUT, f), path.join(SWAP_OUT, "site", f)); // prettier-ignore
     }
   }
   for (const [f, t] of layout.text) {
@@ -886,13 +885,14 @@ async function buildSwapped() {
     else fs.symlinkSync(src, file);
   }
   if (writeInPlace) {
-    // The preview's own files leave site/ (git sees them as moved): everything that isn't a
-    // redirect, the stand-in worker or a file other pages still use.
-    const keep = new Set([...layout.text.keys(), ...layout.copy.keys(), ...KEEP_ASSETS.map((f) => `site/assets/${f}`), "site/splashery-catalog.pdf"]); // prettier-ignore
+    // The preview's pages become redirects; what is left of them (a toy that left the list, the
+    // old search index and sitemap) goes. site/assets/ and the catalog PDF stay.
+    const keep = new Set([...layout.text.keys()]);
     const prune = (dir) => {
       for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
         const abs = path.join(dir, e.name);
         const rel = path.relative(root, abs).split(path.sep).join("/");
+        if (rel === "site/assets" || rel === "site/splashery-catalog.pdf") continue;
         if (e.isDirectory()) {
           prune(abs);
           if (!fs.readdirSync(abs).length) fs.rmdirSync(abs);

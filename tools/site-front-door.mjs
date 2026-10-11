@@ -22,10 +22,10 @@
 import fs from "node:fs";
 import path from "node:path";
 
-// Files that stay where they are under site/ because other things point at them: the Manual's
-// pages load site/assets/outline.{css,js}, an installed preview or a shared link preview may load
-// og.png, and the catalog PDF is too big to keep twice.
-export const KEEP_ASSETS = ["outline.css", "outline.js", "og.png"];
+// site/assets/ (the hand-written styles and scripts, the pictures) stays where it is: it is the
+// source the build reads, the Manual's pages load site/assets/outline.{css,js}, and shared link
+// previews may load og.png. The swapped layout gets copies in assets/. The catalog PDF is too big
+// to keep twice: it stays in site/ and the pages that link it say so.
 export const KEEP_IN_SITE = ["splashery-catalog.pdf"];
 
 // A site-relative value ("../" is the Playground) at `depth` folders below site/ becomes the value
@@ -238,8 +238,5 @@ export function swapLayout({ files, assets, ctx }) {
   text.set("site/404.html", redirectPage("", "").replaceAll("__ORIGIN__", `${origin}${homeBase}`));
   text.set("site/sw.js", retireSource);
   text.set("site/manifest.webmanifest", siteManifest(files.get("manifest.webmanifest")));
-  for (const f of KEEP_ASSETS) {
-    if (assets.has(`assets/${f}`)) copy.set(`site/assets/${f}`, assets.get(`assets/${f}`));
-  }
   return { text, copy };
 }
