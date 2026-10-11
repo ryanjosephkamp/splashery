@@ -70,7 +70,7 @@ test.describe("toy pages (static)", () => {
       if (!html.includes(`play/?toy=${t.id}`)) say("no live toy");
       if (!html.includes(`embed/?toy=${t.id}`)) say("no iframe snippet");
       if (!html.includes(`toy=&quot;${t.id}&quot;`)) say("no element snippet");
-      if (!/Open in the gallery/.test(html)) say("no gallery link");
+      if (!/Open in the Playground/.test(html)) say("no gallery link");
       // In the sitemap only when public.
       if (sitemap.includes(`<loc>${url}</loc>`) === !!t.labs) say("sitemap");
       // Labs toys: hidden until the labs switch, and the player waits for it.
@@ -273,7 +273,9 @@ test.describe("toy pages (browser)", () => {
     const copied = await page.evaluate(() => navigator.clipboard.readText());
     expect(copied).toContain('src="https://ryanjosephkamp.github.io/splashery/embed/?toy=grape"');
     // The gallery button opens the grape.
-    const open = await page.getByRole("link", { name: "Open in the gallery" }).getAttribute("href");
+    const open = await page
+      .getByRole("link", { name: "Open in the Playground" })
+      .getAttribute("href");
     await page.goto(new URL(open, page.url()).href.replace("/#", "/?renderer=webgl2#"));
     await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
     expect(await page.evaluate(() => window.__splashery.player.scene.toy.id)).toBe("grape");
