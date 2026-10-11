@@ -24,9 +24,8 @@ Picture QR's pictures (and his own uploaded picture) look great, and Photo to 3D
    - The meter must keep agreeing with jsQR (`tests/qrs-toys.spec.mjs:78`).
 3. **Three QR codes in one: white streaks.** As the red, green and blue codes split apart, and while
    they're apart, white horizontal streaks flicker across the top rows of all three codes. It shows
-   best as motion; the two screenshots catch it at the top of each code
-   ([1](qr-three-streaks-1.jpg), [2](qr-three-streaks-2.jpg)). Find the cause and fix it. The
-   owner's idea, if it's simple: let people choose the three colors.
+   best as motion; the two screenshots catch it at the top of each code. Find the cause and fix it.
+   The owner's idea, if it's simple: let people choose the three colors.
 4. **Sounds.**
    - How a QR code works: the wind is too loud; make it quieter.
    - Three QR codes in one: the whoosh when the codes separate is too loud; make it quieter.
