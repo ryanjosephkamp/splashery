@@ -4,91 +4,78 @@
   "toys": {
     "raspberry": {
       "status": "site",
-      "said": "The raspberry sounds a little bit too much like bubbles.",
       "note": "It sounds too much like bubbles.",
       "plan": "A real juicy squish as the drupelets break off, then a soft tap for each one landing on the table, and a small squish as they come back (no bubbles).",
       "candidates": []
     },
     "blackberry": {
       "status": "site",
-      "said": "The raspberry sounds a little bit too much like bubbles. The blackberry does as well.",
       "note": "Like the raspberry, it sounds too much like bubbles.",
       "plan": "A darker, deeper real squish, the drupelets tapping down on the table as they bounce, and a soft squish as they spring back (no bubbles).",
       "candidates": []
     },
     "star-cookie": {
       "status": "site",
-      "said": "The cinnamon star cookie sounds almost like a zipper unzipping. It doesn't actually sound like a cookie breaking apart or anything like that.",
       "note": "It sounds like a zipper, not a cookie breaking apart.",
       "plan": "A real crisp snap and crumble as it breaks, and a small soft crumble as it puts itself back together.",
       "candidates": []
     },
     "mandeltorus": {
       "status": "site",
-      "said": "The mandalorian is a little too robotic sounding. … And quite frankly, we could make the Mandel torus have something kind of similar in terms of the sound effect.",
       "note": "It sounds too robotic; he'd like something similar to the Mandelbulb's sound, which he loves.",
       "plan": "Like the Mandelbulb: a low drone with a ratchet as the rings start to turn, and again as they lock back.",
       "candidates": []
     },
     "garden-gnome": {
       "status": "site",
-      "said": "The garden gnome is a little weird. I'm not sure about this one. I don't really like the chirp sound that it makes at the beginning.",
       "note": "A little weird; he doesn't like the chirp at the start.",
       "plan": "A soft stone thud as the gnome lands from its hop, and a match-like flare and soft flame as its lantern lights (no chirp, no click).",
       "candidates": []
     },
     "lantern": {
       "status": "site",
-      "said": "I don't like the click sound that the lantern makes. So if we could find something else that's more suitable.",
       "note": "He doesn't like the click; he wants something more suitable.",
       "plan": "A real match strike and a soft flame catching when it lights; a real puff blowing it out.",
       "candidates": []
     },
     "wooden-elephant": {
       "status": "site",
-      "said": "The wooden elephant should actually have an elephant-like trumpet sound, like the real sound of an elephant making its trumpet sound. Elephants have a characteristic sound that comes out of their snout or their nose, so we should use that.",
       "note": "It should trumpet like a real elephant.",
       "plan": "A light wooden knock, then a real elephant trumpeting as the trunk lifts.",
       "candidates": []
     },
     "alarm-clock": {
       "status": "site",
-      "said": "The alarm clock within the photo real category could sound a little bit more like a real alarm clock. This currently sounds almost like a wooden instrument. I don't know how to describe it, but it doesn't sound very much like an alarm clock. … The alarm clock here in the Open Me category, kind of like the other alarm clock in the Photo Real category, if I'm not mistaken, should sound more realistic.",
       "note": "It sounds like a wooden instrument, not an alarm clock; it should sound like a real one.",
       "plan": "A real mechanical twin-bell alarm ringing while the clock rattles (2.3 s).",
       "candidates": []
     },
     "vintage-camera": {
       "status": "site",
-      "said": "The vintage camera, the flash should sound more realistic. Right now it sounds kind of like too clicky.",
       "note": "The flash is too clicky; it should sound realistic.",
       "plan": "A real vintage press camera: a soft shutter and the whoomph of the flash powder.",
       "candidates": []
     },
     "carrot-cake": {
       "status": "site",
-      "said": "The carrot cake sound is pretty underwhelming. I guess it's acceptable, but it's really simple. I guess we can leave it. I don't know. If you can find something more suitable, that would be fine.",
       "note": "Acceptable but underwhelming and very simple; a better one would be welcome, otherwise leave it.",
       "plan": "A softer knife slide, a moist crumb as the slice lifts out, and the same soft plate thud.",
       "candidates": []
     },
     "cat-statue": {
       "status": "site",
-      "said": "The cat statue should actually have a cat meowing instead of whatever that noise is that it makes.",
       "note": "It should meow like a real cat.",
       "plan": "A soft stone scrape as the head turns, then a real cat's meow as it tilts.",
       "candidates": []
     },
     "horse-statue": {
       "status": "site",
-      "said": "The horse statue should actually have a horse like whinny or neigh. There's a certain sound that a horse makes. I think you maybe tried to replicate that here, but it actually sounds kind of like some sort of whistle, which is not quite right.",
       "note": "The whinny sounds like a whistle; it should be a real horse whinny or neigh.",
       "plan": "A soft stone scrape, a real horse's whinny as it rears, and a stone thud as it lands.",
       "candidates": []
     },
     "tin-can-real": {
       "status": "site",
-      "said": "(October 2, 2026, review) It sounds like somebody plays a little drum and then a coin, like a metal quarter, is rolling around on the ground. ... It could just sound kind of metallic as it rolls, but I don't need the drum either.",
       "note": "Drop the drum hit and the coin-like ring; just a plain metallic roll.",
       "plan": "Now: One real recording of an empty can rolling on a hard floor, slowing and settling; no drum hit, no coin ring (Sound C).",
       "candidates": [],
@@ -96,7 +83,6 @@
     },
     "donut": {
       "status": "site",
-      "said": "(October 2, 2026, review) It kind of sounds almost too wet.",
       "note": "Sounds too wet; find a better one (right direction).",
       "plan": "Now: A soft, dry tear as it pulls apart (a real bread tear) and a soft pat as the halves meet; nothing wet (Sound C).",
       "candidates": [],
@@ -104,7 +90,6 @@
     },
     "knot": {
       "status": "site",
-      "said": "(October 6, 2026, walkthrough) The neon knot sounds like somebody taking a shit. ... Seriously, please pick something else. You can use the same sound as we use for the other knots. I do not care. But not this. This sounds dirty.",
       "note": "The jelly sounds dirty; pick something else (the other knots' sound is fine).",
       "plan": "Now: the torus knot's sound, timed to this knot: it strains as the loops tie tighter, then lets go with a soft thump and swish as it relaxes; no jelly (Sound D).",
       "candidates": [],
@@ -112,14 +97,12 @@
     },
     "planet": {
       "status": "site",
-      "said": "The tiny planet, it's too much wind. It's kind of loud and almost hurts the ears. There are other toys that have a similar wind effect. For some of them, the wind sound is fine. I may mention those and tell you that that's fine, but generally the wind sound is just a little too overwhelming for a lot of the toys that use it, and the tiny planet is an example of that.",
       "note": "Too much wind: loud enough to hurt the ears (the wind is too strong on many toys).",
       "plan": "A quiet, darker breeze and a soft low whoosh as the clouds race round.",
       "candidates": []
     },
     "tennis-ball": {
       "status": "ready",
-      "said": "The tennis ball does not sound like a tennis ball. It sounds more like a ping pong ball right now. If we can make it sound a little bit more like a real tennis ball, I'd appreciate that. (Hands-on H1, October 8, 2026) New: its landing in Hands-on, to hear on the Sound Board. Its tap sound is unchanged.",
       "note": "It sounds like a ping-pong ball; it should sound like a real tennis ball.",
       "plan": "Now: in Hands-on, a thrown tennis ball lands with its own sound, from its tap's own cues (louder the harder it lands). On the board: three landings, hard to soft.",
       "candidates": [
@@ -169,7 +152,6 @@
     },
     "baseball": {
       "status": "ready",
-      "said": "The baseball, the sound is nearly perfect, but when it gets hit by the invisible bat or whatever, it doesn't sound like it's being hit by, like, a bat. We can make it sound like it's being hit by a wooden bat. (Hands-on H1, October 8, 2026) New: its landing in Hands-on, to hear on the Sound Board. Its tap sound is unchanged.",
       "note": "Nearly perfect, but the hit should sound like a wooden bat.",
       "plan": "Now: in Hands-on, a thrown baseball lands with its own sound, from its tap's own cues (louder the harder it lands). On the board: three landings, hard to soft.",
       "candidates": [
@@ -207,7 +189,6 @@
     },
     "softball": {
       "status": "ready",
-      "said": "The softball is kind of the same situation as the baseball. (Hands-on H1, October 8, 2026) New: its landing in Hands-on, to hear on the Sound Board. Its tap sound is unchanged.",
       "note": "Like the baseball: the hit should sound like a real bat.",
       "plan": "Now: in Hands-on, a thrown softball lands with its own sound, from its tap's own cues (louder the harder it lands). On the board: three landings, hard to soft.",
       "candidates": [
@@ -263,14 +244,12 @@
     },
     "beach-ball": {
       "status": "site",
-      "said": "The beach ball sounds a little too cartoony when it bounces.",
       "note": "The bounce is too cartoony.",
       "plan": "A real plastic beach-ball bounce each time it lands (no boing), and a light slap as it's punched up.",
       "candidates": []
     },
     "golf-ball": {
       "status": "ready",
-      "said": "The golf ball is okay. I think that it's okay. Yeah, never mind. The golf ball is fine, I think. (Hands-on H1, October 8, 2026) New: its landing in Hands-on, to hear on the Sound Board. Its tap sound is unchanged.",
       "note": "It's fine.",
       "plan": "Now: in Hands-on, a thrown golf ball lands with its own sound, from its tap's own cues (louder the harder it lands). On the board: three landings, hard to soft.",
       "candidates": [
@@ -305,7 +284,6 @@
     },
     "bowling-ball": {
       "status": "ready",
-      "said": "For the bowling ball, I feel like we can make it sound just a little bit more like a bowling ball rolling on the bowling alley floor, and then when it hits the invisible pins, those need to sound like actual pins falling down. There is a real sound. You could probably find a sound pack that contains that that's realistic. Right now it just sounds a little too much like a toy. Real pins, like bowling alley pins, have a characteristic sound that you can find that's pretty consistent. This is close, but it's not quite right. (Hands-on H1, October 8, 2026) New: its landing in Hands-on, to hear on the Sound Board. Its tap sound is unchanged.",
       "note": "Close, but too toy-like: it should sound like a ball rolling down a real lane and real pins falling.",
       "plan": "Now: in Hands-on, a thrown bowling ball lands with its own sound, from its tap's own cues (louder the harder it lands). On the board: three landings, hard to soft.",
       "candidates": [
@@ -343,7 +321,6 @@
     },
     "pool-ball": {
       "status": "ready",
-      "said": "The pool ball sounds a little too high-pitched. It almost sounds like the pool ball is hollow or something. It should have the sound that's made when somebody actually hits, like, a pool ball with a pool stick. So it should sound a bit more solid, if that makes any sense. You can also probably find that. It's a pretty characteristic sound. (Hands-on H1, October 8, 2026) New: its landing in Hands-on, to hear on the Sound Board. Its tap sound is unchanged.",
       "note": "Too high-pitched and hollow; it should sound solid, like a real cue striking a pool ball.",
       "plan": "Now: in Hands-on, a thrown pool ball lands with its own sound, from its tap's own cues (louder the harder it lands). On the board: three landings, hard to soft.",
       "candidates": [
@@ -378,7 +355,6 @@
     },
     "pickleball": {
       "status": "ready",
-      "said": "I've never played pickleball, so I don't know if the whistling sound is realistic. It's kind of annoying. If we could change that, I'd appreciate it, unless it's really realistic. Maybe we could change how the whistle sounds at the very least. (Hands-on H1, October 8, 2026) New: its landing in Hands-on, to hear on the Sound Board. Its tap sound is unchanged.",
       "note": "The whistling is annoying; change it unless it's truly realistic.",
       "plan": "Now: in Hands-on, a thrown pickleball lands with its own sound, from its tap's own cues (louder the harder it lands). On the board: three landings, hard to soft.",
       "candidates": [
@@ -416,7 +392,6 @@
     },
     "marble": {
       "status": "ready",
-      "said": "(October 2, 2026, review) The marble is a little too loud. The sound is close. ... It's just, like, kind of annoyingly loud by default. (Hands-on H1, October 8, 2026) New: its landing in Hands-on, to hear on the Sound Board. Its tap sound is unchanged.",
       "note": "Same sound, quieter by default (or a slightly better real marble recording).",
       "plan": "Now: in Hands-on, a thrown marble lands with its own sound, from its tap's own cues (louder the harder it lands). On the board: three landings, hard to soft. The tap keeps the same real marble roll, about 6 dB quieter (Sound C).",
       "candidates": [
@@ -452,63 +427,54 @@
     },
     "solar-system": {
       "status": "site",
-      "said": "The solar system is pretty cool. I don't know if we could make it sound a little bit less robotic or electronic. I don't know if that makes any sense to you. If we have to keep it the way it is, it's fine.",
       "note": "Pretty cool, but a little less robotic or electronic would be better; it's fine to keep if needed.",
       "plan": "No synth chord: a soft whoosh as the planets swing into line, a warm flare as the corona shows, and a whoosh as they swing on.",
       "candidates": []
     },
     "mercury": {
       "status": "site",
-      "said": "Mercury is kind of weird. I don't know if it matches what is supposed to be happening here. So this has to do with heat, right? So I'm looking at the description of Mercury, and it spins fast while the side facing the sun glows red hot and shimmers. This doesn't really sound like that, if that makes any sense.",
       "note": "It doesn't match the effect (a fast spin while the sunlit side glows red hot and shimmers).",
       "plan": "A quick spin whoosh, then a low roar of heat and a soft searing sizzle while the day side glows, fading as it cools (no tone).",
       "candidates": []
     },
     "venus": {
       "status": "keep",
-      "said": "Venus uses that wind sound, but I think it's fine in this case.",
       "note": "The wind is fine here.",
       "plan": "Keep the current sound.",
       "candidates": []
     },
     "earth": {
       "status": "site",
-      "said": "I think that for the Earth, it doesn't need to have such a dramatic wind sound.",
       "note": "The wind is too dramatic.",
       "plan": "The same ocean wash (a little softer) and chime, with the wind turned right down (softer, shorter and quieter).",
       "candidates": []
     },
     "mars": {
       "status": "site",
-      "said": "Mars kind of has, like, a weird wind sound to it, but I think it's okay. Maybe we could improve it a little bit.",
       "note": "The wind is a little weird; okay, but could be a bit better.",
       "plan": "The dust storm is quieter and darker: a softer hiss of dust and a lower wind.",
       "candidates": []
     },
     "saturn": {
       "status": "site",
-      "said": "I don't really like the robotic kind of, like, noise that plays with Saturn.",
       "note": "He doesn't like the robotic noise.",
       "plan": "Two soft icy sweeps as the waves ripple out across the rings, with a faint glitter (no synth shimmer).",
       "candidates": []
     },
     "uranus": {
       "status": "site",
-      "said": "For Uranus, I don't really like the little bell or whatever that noise is that plays at the beginning. And it doesn't seem to make any noises as it rolls. We don't need to have, like, a really loud wind noise as it kind of rolls, but it would be nice if there was, like, some little effect there.",
       "note": "Drop the bell-like tone at the start; add a small sound while it rolls (not loud wind).",
       "plan": "A soft low rumble as it rolls to the right, and again as it rolls back (no bell).",
       "candidates": []
     },
     "neptune": {
       "status": "keep",
-      "said": "Neptune uses that wind sound. I think it's okay here.",
       "note": "The wind is okay here.",
       "plan": "Keep the current sound.",
       "candidates": []
     },
     "aurora-planet": {
       "status": "site",
-      "said": "(October 2, 2026, review) we can make the wind sound a little bit less dramatic",
       "note": "Wind less loud and dramatic.",
       "plan": "Now: The same aurora air, much lower and gentler (Sound C).",
       "candidates": [],
@@ -516,21 +482,18 @@
     },
     "asteroid": {
       "status": "site",
-      "said": "The asteroid doesn't really sound like it's breaking apart.",
       "note": "It doesn't sound like it's breaking apart.",
       "plan": "A rock crack and a muffled boom, real rocks crumbling apart, a soft grinding as the rubble comes back, and the stone settling.",
       "candidates": []
     },
     "comet": {
       "status": "site",
-      "said": "The comet sounds more like wind or like a waterfall. I'd like to change that and make it sound more like something that's on fire, unless that's unrealistic.",
       "note": "It sounds like wind or a waterfall; it should sound more like something on fire.",
       "plan": "A real burning torch roaring as the jets and tails flare, fading as they die back.",
       "candidates": []
     },
     "meteor": {
       "status": "site",
-      "said": "(October 2, 2026, review) The meteor still doesn't really sound like it explodes at the end. ... you can use that same sound for the meteor, because the star sound is basically perfect.",
       "note": "It should audibly explode at the end: reuse the star's burst sound, in sync.",
       "plan": "Now: The streak's fire, then the star's own burst (over a short crack) as it explodes at 0.37 s, in time with the fireball (Sound C).",
       "candidates": [],
@@ -538,28 +501,24 @@
     },
     "star": {
       "status": "site",
-      "said": "The star uses a robotic sort of song type of thing. I'd almost prefer that that's not there, and then we have some sounds that, like, kind of have it bursting like an explosion. I want it to be more realistic sound effects, but I don't want it to be, like, overwhelming wind or other stuff like that, if that makes any sense.",
       "note": "Drop the robotic song; realistic sounds of it bursting like an explosion, without overwhelming wind.",
       "plan": "A deep stellar roar as it swells, low throbs as the red giant pulses, a real explosion as it puffs off its shell, and a soft roar as a new star lights.",
       "candidates": []
     },
     "pulsar": {
       "status": "site",
-      "said": "The pulsar uses that, like, acceleration sound, the vroom kind of sound that's like a buzz. It's really annoying. I want to use something else, and I don't like the clicking that it makes. We should do something different, make it sound more epic.",
       "note": "The \"vroom\" buzz and the clicking are annoying; it should sound more epic.",
       "plan": "A deep boom and rumble as it spins up, and a deep pulse with each flash instead of a tick.",
       "candidates": []
     },
     "black-hole": {
       "status": "site",
-      "said": "For the black hole, we could make it a little more dramatic, that low buzzing noise as the star spirals into it. It's just a little too robotic sounding.",
       "note": "The low buzz as the star spirals in should be more dramatic and less robotic.",
       "plan": "A deep growing roar as the star spirals in, a rushing whoosh, a huge low boom as it plunges, and the gas swirling down after it.",
       "candidates": []
     },
     "star-cluster": {
       "status": "site",
-      "said": "(October 2, 2026, review) it sounds like kind of like a wind sound or something. It could be a little bit less overwhelming",
       "note": "Less wind-like and more subtle.",
       "plan": "Now: Two faint, soft swells of air; much quieter, no hiss (Sound C).",
       "candidates": [],
@@ -567,63 +526,54 @@
     },
     "planetary-nebula": {
       "status": "site",
-      "said": "Yeah, the Ring Nebula, it has, like, that weird robotic music. We should change it completely.",
       "note": "The robotic music is weird; change it completely.",
       "plan": "A small burst as the star flares, a whoosh as the shock ring expands, and a deep soft boom as it pushes the main ring out.",
       "candidates": []
     },
     "nebula": {
       "status": "site",
-      "said": "The nebula, kind of similar to the star cluster, like the little chimes or whatever you want to call that, little bells. I don't quite like it. I know that we have stars here, so we can maybe just change it a little bit.",
       "note": "Like the star cluster, he doesn't like the little chimes; change it a little.",
       "plan": "A soft fiery flare for each of the seven new stars as it lights (no chimes).",
       "candidates": []
     },
     "supernova": {
       "status": "site",
-      "said": "The supernova, it doesn't really sound like an explosion. It sounds more like the ocean or, like, wind. So we should change that.",
       "note": "It sounds like the ocean or wind, not an explosion.",
       "plan": "A real deep explosion with a long rumble, over the fiery roar.",
       "candidates": []
     },
     "spiral-galaxy": {
       "status": "keep",
-      "said": "The spiral galaxy is probably fine. It just sounds... Yeah, I think that that one's okay.",
       "note": "It's fine.",
       "plan": "Keep the current sound.",
       "candidates": []
     },
     "virus": {
       "status": "site",
-      "said": "For the virus, we don't need that little sound that plays at the end of the animation.",
       "note": "Drop the little sound at the end of the animation.",
       "plan": "The same ripple, squish and pops as the copies bud, without the shimmer at the end.",
       "candidates": []
     },
     "red-blood-cell": {
       "status": "site",
-      "said": "For the red blood cell, I feel like we could make the sound different. It sounds almost like a little whistle of some sort. I don't know how to describe the sound, but it's a little weird.",
       "note": "It sounds like a little whistle; a little weird.",
       "plan": "A soft, gel-like squish as it stretches into a crescent, and a soft wobble as it relaxes (no squeaks).",
       "candidates": []
     },
     "neuron": {
       "status": "site",
-      "said": "The neuron could sound more like electricity, if that makes any sense. Right now it just sounds like clicking. It's just like a lot of clicking.",
       "note": "It's just a lot of clicking; it should sound more like electricity.",
       "plan": "A real crackling electric arc running down the axon, and a brighter burst at the terminals.",
       "candidates": []
     },
     "astrocyte": {
       "status": "site",
-      "said": "The astrocyte is almost perfect, but the first sound that's made, that, like, noise that's played when you click on the astrocyte at the beginning, can we change that and make it sound less robotic or just a different tune?",
       "note": "Almost perfect; only the first sound should be less robotic or a different tune.",
       "plan": "A soft airy swell as the calcium wave spreads (no synth shimmer), then the same soft wash as the vessel widens.",
       "candidates": []
     },
     "dna": {
       "status": "site",
-      "said": "(October 2, 2026, review) the zipper sound doesn't seem exactly synchronized. Maybe we could find a different zipper sound",
       "note": "The zip isn't quite in sync with the unzipping; sync it or find a better zipper recording (flexible).",
       "plan": "Now: The real zipper timed to the strands: a quick zip as they fly open, a slower one as they close up (3.45 s) (Sound C).",
       "candidates": [],
@@ -631,21 +581,18 @@
     },
     "white-blood-cell": {
       "status": "site",
-      "said": "The white blood cell uses maybe a little bit more clicking than I'd prefer, but it's mostly good.",
       "note": "Mostly good, with a bit less clicking.",
       "plan": "A soft squishy membrane reaching out (no flutter clicks), the same gulp as it swallows, and a quieter fizz as it digests.",
       "candidates": []
     },
     "chromosome": {
       "status": "site",
-      "said": "For the chromosome, I'd almost prefer that it's just, like, more realistic sound effects and not the, like, guitar string or instrument string.",
       "note": "Realistic sound effects, not a plucked string.",
       "plan": "A soft sticky tear as the chromatids pull apart, and a soft squish as they come back together (no string, no clacks).",
       "candidates": []
     },
     "mitochondrion": {
       "status": "site",
-      "said": "(October 2, 2026, review) I really don't like that vroom or, like, buzz or motor sound. ... It could be, like, the sound of maybe, like, a furnace",
       "note": "No motor, vroom or buzz. A 'powerhouse' sound such as a furnace; try a few and pick.",
       "plan": "Now: A real gas furnace lighting with a soft whoomp and a warm roar as it powers up, with the ATP sparks' soft pops; no motor, vroom or buzz (candidate A; B is a gas burner's steadier roar) (Sound C).",
       "candidates": [
@@ -727,7 +674,6 @@
     },
     "paramecium": {
       "status": "site",
-      "said": "(October 2, 2026, review) change the little shuffle sound at the beginning, maybe make it sound a little bit more like it's swimming, but not make it sound really windy",
       "note": "Replace the opening shuffle with soft swimming strokes, not wind.",
       "plan": "Now: A hand moving gently through water: soft strokes through its loop, no shuffle or wind (Sound C).",
       "candidates": [],
@@ -735,14 +681,12 @@
     },
     "orbital": {
       "status": "site",
-      "said": "So for the electron orbital, I feel like we could make it sound a little bit more, like almost like electrical. I don't know how to describe that. I don't want it to be, like, totally unrealistic, but as the photon is, or I guess the, yeah, photon is absorbed and then sent out. It could sound a little bit more intricate. I don't know what the right word is. Right now it just sounds like a little chirp or something like that.",
       "note": "It's just a little chirp; it should sound a bit more electrical and intricate as the photon is absorbed and sent out.",
       "plan": "A short electric crackle and a rising swish as the photon is absorbed, and a brighter crackle and falling swish as it is given out.",
       "candidates": []
     },
     "atom": {
       "status": "site",
-      "said": "(October 2, 2026, review) The atom has, like, this vroom or motor kind of sound ... the sound that's on the periodic table that plays when I click the atom ... is almost perfect.",
       "note": "No motor sound. Use the periodic table's atom-appear sound (a subtle electric one).",
       "plan": "Now: The periodic table's atom sound: a soft electric blip as the electrons speed up and a ping as they blur into rings; no motor (Sound C).",
       "candidates": [],
@@ -750,7 +694,6 @@
     },
     "molecule": {
       "status": "site",
-      "said": "(October 2, 2026, review) there's, like, a wind sound. We don't need the wind sound. And then for the kind of, like, building blocks sound, we should choose something different.",
       "note": "No wind; replace the building-block clicks with something better.",
       "plan": "Now: Soft little ticks of the atoms jostling as it heats, thinning out as it settles; no wind, no building blocks (Sound C).",
       "candidates": [],
@@ -758,14 +701,12 @@
     },
     "protein": {
       "status": "site",
-      "said": "So for the protein, more or less what we're doing here for the animation is that, like, we're pulling the different parts of the ribbon apart, right? Right now it more or less sounds like wind or something like that, and then you can hear what sounds like building blocks. I'd like to make this more intricate. When it pulls apart, it should sound like something is kind of breaking apart or being separated, and then when it gets put together, it should sound like it's being put together. Right now it's a little too toy sounding.",
       "note": "It sounds like wind and building blocks; it should sound like parts separating, then fitting back together.",
       "plan": "A real tearing apart as it separates, with a whoosh, then a pressing-together and a soft thud as it reassembles (no building blocks).",
       "candidates": []
     },
     "crystal-lattice": {
       "status": "site",
-      "said": "(October 2, 2026, review) The sound is, like, metal chains or something. That's fine, I guess, but maybe we could make it a little bit better.",
       "note": "The metal-chain sound is OK; could be better (low priority).",
       "plan": "Now: One cleaner, softer metallic chime with a faint glassy ring, no rattle after (Sound C).",
       "candidates": [],
@@ -773,21 +714,18 @@
     },
     "ruby": {
       "status": "site",
-      "said": "The ruby should have a different sound effect. Maybe for the ones that I mention, or just for all of the ones here that I don't tell you are, like, basically perfect, perhaps you could find, like, what a real gem of this type sounds like if somebody were to, like, hit on it or tap it or something like that. I don't know if they have a characteristic sound. … Maybe see if you can find something better for the ruby.",
       "note": "It needs a different sound: ideally what a real ruby sounds like when tapped.",
       "plan": "A lower real glassy tap and a warm low glow as it lights red.",
       "candidates": []
     },
     "diamond": {
       "status": "site",
-      "said": "Maybe for the ones that I mention, or just for all of the ones here that I don't tell you are, like, basically perfect, perhaps you could find, like, what a real gem of this type sounds like if somebody were to, like, hit on it or tap it or something like that. I don't know if they have a characteristic sound. I think the diamond, you can maybe find something for the diamond.",
       "note": "Find something better: ideally what a real diamond sounds like when tapped.",
       "plan": "A real bright glassy tap, and smaller tinks as the facets flash.",
       "candidates": []
     },
     "emerald": {
       "status": "site",
-      "said": "(October 2, 2026, review) there's almost like this wind sound, or whoosh sound, that's unnecessary",
       "note": "Remove the wind/whoosh.",
       "plan": "Now: The crisp gem tap alone, without the whoosh (Sound C).",
       "candidates": [],
@@ -795,14 +733,12 @@
     },
     "amethyst-geode": {
       "status": "keep",
-      "said": "I think that the amethyst geode is basically perfect, so you don't have to worry about that one.",
       "note": "Basically perfect.",
       "plan": "Keep the current sound.",
       "candidates": []
     },
     "sapphire": {
       "status": "site",
-      "said": "(October 2, 2026, review) we don't need the wind or, like, sand shuffling sound",
       "note": "Remove the wind and sand-shuffle sound.",
       "plan": "Now: The crisp gem tap alone, without the wind and sandy shuffle (Sound C).",
       "candidates": [],
@@ -810,35 +746,30 @@
     },
     "quartz-cluster": {
       "status": "keep",
-      "said": "The quartz cluster I think is perfect. It's pretty much fine.",
       "note": "Perfect.",
       "plan": "Keep the current sound.",
       "candidates": []
     },
     "opal": {
       "status": "site",
-      "said": "Maybe for the ones that I mention, or just for all of the ones here that I don't tell you are, like, basically perfect, perhaps you could find, like, what a real gem of this type sounds like if somebody were to, like, hit on it or tap it or something like that. I don't know if they have a characteristic sound. … The opal definitely needs work. It sounds, like, robotic or something. You need to find something for that.",
       "note": "It definitely needs work: it sounds robotic.",
       "plan": "A softer, duller real tap and the stone rocking gently on the table (no synth shimmer).",
       "candidates": []
     },
     "pearl": {
       "status": "keep",
-      "said": "I think the pearl is okay as it is.",
       "note": "Okay as it is.",
       "plan": "Keep the current sound.",
       "candidates": []
     },
     "crystal-ball": {
       "status": "site",
-      "said": "… also the sound for this is, like, too robotic. I don't really like it. We should change it.",
       "note": "It sounds too robotic; change it.",
       "plan": "A soft misty whoosh and a real crystal glass ringing as the sign rises (no theremin).",
       "candidates": []
     },
     "heart": {
       "status": "site",
-      "said": "(October 2, 2026, review) I can barely hear the heart beating ... If you could make it louder, but keep the sound, like the same",
       "note": "Louder, same beat and tempo.",
       "plan": "Now: The same real heartbeats at the same tempo, about 60 percent louder (Sound C).",
       "candidates": [],
@@ -846,7 +777,6 @@
     },
     "brain": {
       "status": "site",
-      "said": "(October 2, 2026, review) It should sound kind of electrical, similarly to the neuron. ... a subtle current instead of this wind sound.",
       "note": "Replace the wind with a subtle electrical current (related to the neuron's, not the same).",
       "plan": "Now: A subtle electric crackle as the sparks race round (softer and lower than the neuron's), and a small snap as the side lights up; no wind (Sound C).",
       "candidates": [],
@@ -854,14 +784,12 @@
     },
     "eye": {
       "status": "site",
-      "said": "The eyeball or the eye. So the sound here, of course, is when the eye blinks, and it sounds like sand or something. It doesn't actually sound like an eye blinking. The eye blink should be something a little bit closer to, like, a click than it is to wind. And this sounds more like wind.",
       "note": "The blink sounds like sand or wind; it should be closer to a click.",
       "plan": "A soft, small click as the lids close, and a fainter one as they open.",
       "candidates": []
     },
     "lungs": {
       "status": "site",
-      "said": "(October 2, 2026, review) Could you try to find different inhalation and exhalation sounds, just so I have something to compare it to?",
       "note": "Acceptable; try other inhale and exhale recordings to compare.",
       "plan": "Done (October 7, 2026): the owner picked B, a deep breath, in and out at the same strength; it is now the site sound.",
       "candidates": [],
@@ -869,70 +797,60 @@
     },
     "tooth": {
       "status": "site",
-      "said": "The tooth is almost perfect, but that little whistle or noise at the beginning of the sound effect should just be removed. It's like a whistle. It's kind of awkward.",
       "note": "Almost perfect; remove the whistle-like noise at the start.",
       "plan": "A soft polishing swish instead of the squeak, then the same short gleam and sparkles.",
       "candidates": []
     },
     "kidney": {
       "status": "keep",
-      "said": "So, like, the kidney is fine as it is.",
       "note": "Fine as it is.",
       "plan": "Keep the current sound.",
       "candidates": []
     },
     "oak": {
       "status": "site",
-      "said": "The oak tree is close, but the leaves falling don't really sound like leaves.",
       "note": "Close, but the falling leaves don't sound like leaves.",
       "plan": "Now: a leafy rustle as the crown rocks, then soft rustles as the loose leaves land (synthesized; no flutter or patter); real CC0 recordings now (oak-leaves.mp3), with the synthesized sound as a fallback.",
       "candidates": []
     },
     "pine": {
       "status": "site",
-      "said": "The pine tree, it doesn't need to have that, like, sound that plays, like that chime sort of thing. If anything, it could have a little Christmas-themed sound. This is a little not right.",
       "note": "Drop the chime; if anything, a little Christmas-themed sound.",
       "plan": "Now: the needles rustle as it rocks, with a soft jingle of sleigh bells; the snow's hiss and thump stay (no chime).",
       "candidates": []
     },
     "cherry-blossom": {
       "status": "site",
-      "said": "The cherry blossom could maybe have a little bit more music to it. Not awkward, but we could choose something. I don't know if a cherry blossom is, like, Japanese or something. It could be totally wrong, but we can maybe use some respectful but kind of, like, calm, peaceful music, and then make it sound a lot less like waves or wind.",
       "note": "A little calm, peaceful, respectful music, and much less wave or wind sound.",
       "plan": "Now: the opening of the traditional \"Sakura Sakura\" on a plucked koto-like string, over a faint rustle of petals (no wind).",
       "candidates": []
     },
     "maple": {
       "status": "site",
-      "said": "For the maple tree, we can maybe dial back the wind sound a little bit and remove the clicking. For some reason, it sounds like it's clicking.",
       "note": "Dial back the wind a little and remove the clicking.",
       "plan": "Now: a soft gust and the leaves rustling as they swirl and land (no crunching clicks, much less wind).",
       "candidates": []
     },
     "bonsai": {
       "status": "site",
-      "said": "For the bonsai tree, the branch should actually sound like something growing, and then the scissors when they cut it off should sound like cutting. Right now it just sounds like a bounce or a rubber band when it grows, and then just, like a little click or something when the scissors cut, and that's just not right.",
       "note": "The branch should sound like it's growing and the scissors like real cutting, not a rubber-band bounce and a click.",
       "plan": "Now: the branch creaks and its leaves rustle as it grows, the scissors open and snip, and the cut piece drops onto the moss; real CC0 recordings now (bonsai-snip.mp3), with the synthesized sound as a fallback.",
       "candidates": []
     },
     "willow": {
       "status": "site",
-      "said": "The weeping willow is basically fine. Maybe we could make the wind a little bit less overwhelming.",
       "note": "Basically fine; the wind could be a little less overwhelming.",
       "plan": "Now: the same breath of wind, quieter, with the strands rustling.",
       "candidates": []
     },
     "sunflower": {
       "status": "site",
-      "said": "For the sun— I'm sorry, the sunflower. When the sun appears, it kind of, like, has a bouncing noise. Maybe we can make that a little bit different, but it's pretty much perfect otherwise.",
       "note": "Pretty much perfect, but the bouncing noise when the sun appears should change.",
       "plan": "Now: a warm low swell as the sun comes out (no bouncing tone) and the petals rustling open.",
       "candidates": []
     },
     "daisy": {
       "status": "site",
-      "said": "(October 2, 2026, review) The falling petals mostly fall in sync. They could probably be synchronized just a little bit better with the sound",
       "note": "Sync the petal-landing sounds a little better with the falling petals.",
       "plan": "Now: Each petal's soft tap now lands with it: scheduled for the landing itself, so it stays in sync at any frame rate (Sound C).",
       "candidates": [],
@@ -940,63 +858,54 @@
     },
     "fern": {
       "status": "site",
-      "said": "The fern just sounds like it's scuffling or shuffling. I don't know what the right word is for that. It just sounds like sand or wind, and that's a little awkward.",
       "note": "It sounds like shuffling sand or wind, which is awkward.",
       "plan": "Now: a soft leafy rustle and a gentle stem creak as each frond unrolls, and again as they roll back up (no sandy flutter).",
       "candidates": []
     },
     "rocks": {
       "status": "site",
-      "said": "The pebbles don't really sound like pebbles at the beginning. They sound okay when they're being stacked towards the end, but they don't sound so much like stones, and they probably should. So if you could make it sound a little bit more like stones and less like building blocks or something, that would make sense.",
       "note": "At the start they sound like building blocks, not stones; the stacking at the end is okay.",
       "plan": "Now: real stone-on-stone knocks as the pile shifts and tumbles home; the stacking knocks stay; real CC0 recordings now (rocks-pebbles.mp3), with the synthesized sound as a fallback.",
       "candidates": []
     },
     "campfire": {
       "status": "site",
-      "said": "The campfire is okay. It just clicks too much. Maybe we can remove the clicking and then make the flames have a little bit more sound. … the flame sound could be something that we use almost exactly for the campfire. So, like the flame sound of the volcano is pretty good for the campfire, maybe with slight changes, because they do a very similar sort of thing.",
       "note": "Okay, but it clicks too much: remove the clicking and give the flames more sound (the volcano's flame sound would suit).",
       "plan": "Now: the volcano's kind of fire, a low flickering rush with a few soft pops of wood (no clicks).",
       "candidates": []
     },
     "lava-lamp": {
       "status": "site",
-      "said": "The lava lamp doesn't need to have that acceleration sound. We can just keep the bubbles.",
       "note": "Drop the acceleration sound; keep the bubbles.",
       "plan": "Now: only the gloops and bubbles (the rising hum is gone).",
       "candidates": []
     },
     "snow-globe": {
       "status": "site",
-      "said": "The snow globe does not need to have the clicking sound. The little sort of, like, twinkling sound is okay.",
       "note": "Drop the clicking; the twinkling is okay.",
       "plan": "Now: the water sloshing as it is shaken, then the twinkle (no rattle of clicks).",
       "candidates": []
     },
     "volcano": {
       "status": "keep",
-      "said": "The volcano is basically perfect, and the only reason I'm mentioning it here is that the flame sound could be something that we use almost exactly for the campfire. So, like the flame sound of the volcano is pretty good for the campfire, maybe with slight changes, because they do a very similar sort of thing.",
       "note": "Basically perfect; its flame sound would suit the campfire too.",
       "plan": "Keep the current sound; lend its flame sound to the campfire.",
       "candidates": []
     },
     "ice-statue": {
       "status": "site",
-      "said": "For the ice swan, it's basically perfect, except at the beginning there is almost like a wind sound. We can remove that.",
       "note": "Basically perfect; remove the wind-like sound at the start.",
       "plan": "Now: the drips and the refreezing; the wind at the start is gone.",
       "candidates": []
     },
     "iceberg": {
       "status": "site",
-      "said": "The iceberg, it uses too much clicking. So I think the clicking is supposed to be, like, the ice breaking off the iceberg, right? We can actually find, like, a sound of something breaking, like ice breaking or something like that, and use that. That would probably be a little bit better.",
       "note": "Too much clicking; use a real ice-breaking sound for the ice breaking off.",
       "plan": "Now: real ice breaking, a deep crack with its groan and splinters (no crackle of clicks), then the splash; real CC0 recordings now (iceberg-crack.mp3), with the synthesized sound as a fallback.",
       "candidates": []
     },
     "ice-cream": {
       "status": "keep",
-      "said": "(October 2, 2026, review) it sounds like a little bit too much like wind ... We can leave it like this.",
       "note": "A bit windy, but acceptable as it is (leave it).",
       "plan": "Kept as it is (he said it can stay).",
       "candidates": [],
@@ -1004,21 +913,18 @@
     },
     "watermelon": {
       "status": "site",
-      "said": "For the watermelon, there's kind of like a wind sound at the beginning of it, but everything else is fine. So if you could just remove the, like, whooshing sound at the very beginning, it'd be fine.",
       "note": "Remove the whoosh at the very start; everything else is fine.",
       "plan": "Now: no whoosh at the start, only a soft settle; the chops and the fan are unchanged.",
       "candidates": []
     },
     "birthday-cake": {
       "status": "site",
-      "said": "For the birthday cake, we should have it play Happy Birthday or some part of Happy Birthday, and I don't want it to be a robotic jingle. It should be like an actual Happy Birthday. I don't need voices or anything, but we can just play some part, like just in the Happy Birthday song. We can maybe even have it be like the sound of, you know, at the end, like Happy Birthday to you, as, like, the last part of the song, or at the beginning, either, like the first part or the last part of the Happy Birthday song. Again, no voices.",
       "note": "It should play part of \"Happy Birthday\" (the first or last line), like the real song, not a robotic jingle, and no voices.",
       "plan": "Now: blown out with a breath, then the last line of \"Happy Birthday to You\" on the piano with its chords (no voices); relighting keeps the match; since October 2 (Sound C), on the concert grand's recorded piano notes, at the same tempo.",
       "candidates": []
     },
     "popcorn": {
       "status": "site",
-      "said": "(October 6, 2026, walkthrough) The popcorn sizzle does not sound like real popcorn.",
       "note": "It sounds like a sizzle, not real popcorn.",
       "plan": "Now: a clean, single dry pop for each kernel (ten different real pops, the pot's rumble and the oil's hiss cut out), so each kernel is heard on its own (Sound D).",
       "candidates": [],
@@ -1026,56 +932,48 @@
     },
     "jelly": {
       "status": "site",
-      "said": "The jelly is okay. I feel like it could sound a little bit less cliché, if that makes any sense.",
       "note": "Okay, but a little cliché.",
       "plan": "Now: a wet, heavy wobble instead of a cartoon boing.",
       "candidates": []
     },
     "pancakes": {
       "status": "site",
-      "said": "For the pancakes, it clicks. I don't know why it clicks when you flip a pancake. I feel like if you just were to remove the clicking, it would be fine.",
       "note": "Remove the click on the flip and it's fine.",
       "plan": "Now: a smooth sizzle in the pan, the flip and the soft slap as it lands (no crackling ticks).",
       "candidates": []
     },
     "lollipop": {
       "status": "site",
-      "said": "The lollipop has that vroom, like acceleration noise. You can keep the wind sound, but I don't want it to have that vroom noise.",
       "note": "Drop the \"vroom\" noise; keep the wind.",
       "plan": "Now: only the wind as it spins (the rising \"vroom\" hum is gone).",
       "candidates": []
     },
     "candy-cane": {
       "status": "site",
-      "said": "There's, like, a weird little whistle at the beginning of the candy cane sound. We don't need that. Everything else is fine for that one.",
       "note": "Remove the little whistle at the start; everything else is fine.",
       "plan": "Now: the sugar strains as it twists (no whistle); the snaps and the mends stay.",
       "candidates": []
     },
     "gummy-bear": {
       "status": "site",
-      "said": "The gummy bear has, like, a weird whistle at the beginning of it. We don't need it to have the whistle. Like, it has a whistle and then has the bounce. The bounce is fine, but the whistle is unneeded. It's kind of awkward.",
       "note": "Remove the whistle at the start; the bounce is fine.",
       "plan": "Now: only the bounce (the whistle is gone).",
       "candidates": []
     },
     "pretzel": {
       "status": "site",
-      "said": "The pretzel is almost perfect. We could maybe make it sound a little bit more like stretching dough, just a little bit. If it stays the same, it's okay.",
       "note": "Almost perfect; a little more like stretching dough, but fine if it stays.",
       "plan": "Now: soft dough squished and pulled, with a wet stretching sound.",
       "candidates": []
     },
     "croissant": {
       "status": "site",
-      "said": "The croissant here in this food category, it has, like, a clicking sound. I don't know why it has the clicking.",
       "note": "Remove the clicking.",
       "plan": "Now: the flaky layers shattering softly under the knife, and a smooth butter sizzle (no clicks).",
       "candidates": []
     },
     "pizza": {
       "status": "site",
-      "said": "(October 2, 2026, review) The pizza doesn't need to sound so windy.",
       "note": "Not so windy.",
       "plan": "Now: The bite and a softer, shorter cheese stretch; not windy (Sound C).",
       "candidates": [],
@@ -1083,28 +981,24 @@
     },
     "burger": {
       "status": "site",
-      "said": "The burger, I don't know why it clicks. There should be no clicking for the burger.",
       "note": "No clicking at all.",
       "plan": "Now: the patty's smooth sizzle, no clicking.",
       "candidates": []
     },
     "taco": {
       "status": "site",
-      "said": "The taco doesn't really sound, like, it's breaking apart. It sounds like a zipper unzipping. So it should sound more like a hard taco shell cracking or breaking open. When the food dropped out of it or whatever, that sounds okay.",
       "note": "It sounds like a zipper; it should sound like a hard shell cracking open (the filling dropping out is okay).",
       "plan": "Now: a hard shell cracking open; the filling dropping out is unchanged; real CC0 recordings now (taco-crack.mp3), with the synthesized sound as a fallback.",
       "candidates": []
     },
     "apple": {
       "status": "site",
-      "said": "The apple is almost perfect, but when the user first clicks on it and, like, the bite is taken out of it, it should sound like an apple is having a bite actually taken out of it. There is a characteristic sound. You can probably find that in a sound pack of somebody taking a bite of an apple. That's what it should sound like. Right now, it sounds kind of like a zipper or something, and that's not how it sounds when you bite into an apple.",
       "note": "Almost perfect, but the bite sounds like a zipper; it should be a real apple bite.",
       "plan": "Now: a crisp bite into an apple (a crunch of tiny fractures and a juicy snap), not a zipper; real CC0 recordings now (apple-bite.mp3), with the synthesized sound as a fallback.",
       "candidates": []
     },
     "banana": {
       "status": "site",
-      "said": "(October 2, 2026, review) the peeling sound is just too loud, and it sounds more like a zipper or something. We can make it more subtle.",
       "note": "The peel is too loud and sounds like a zipper; make it subtle like a real peel.",
       "plan": "Now: A soft rustle as the bunch comes apart, and a quiet real banana peel as each one peels (no zipper) (Sound C).",
       "candidates": [],
@@ -1112,21 +1006,18 @@
     },
     "cherries": {
       "status": "site",
-      "said": "The cherries are one of my favorites, honestly. The cherries are basically perfect. The only problem with them is at the beginning, it's almost like it plays, like a note on a string instrument, like a guitar string or something. If we could just remove that and keep the kind of, like, bubble or knocking noise that's there, it's fine.",
       "note": "One of his favorites and basically perfect; just remove the string-like note at the start and keep the bubbly knocking.",
       "plan": "Now: no string note, only the stems' soft swish; the knocking is unchanged.",
       "candidates": []
     },
     "bricks": {
       "status": "site",
-      "said": "I think that the building bricks are just a little too high-pitched, but they're pretty much perfect otherwise.",
       "note": "Pretty much perfect, just a little too high-pitched.",
       "plan": "Now: a lower plastic clack, for the tap and each brick landing.",
       "candidates": []
     },
     "spinning-top": {
       "status": "site",
-      "said": "(October 2, 2026, review) it should actually kind of make the spinning noise, and the spinning noise shouldn't be so loud and kind of awkward ... as the thing gets faster, the spinning sound kind of gets a little bit louder",
       "note": "The spin sound more subtle, in sync with the speed (louder as it spins faster), including when you spin it yourself.",
       "plan": "Now: A soft flick as it starts; its spin is a quiet real hum that follows its speed (louder and a little higher when fast, gone as it slows), also when a drag spins it (Sound C).",
       "candidates": [],
@@ -1134,7 +1025,6 @@
     },
     "dice": {
       "status": "site",
-      "said": "The dice should sound like somebody rolling dice in a casino. Like if you throw dice down and roll them on the ground or on the table or something, there is actually a characteristic sound of that. This is not it. This is kind of like a plinking, twinkling sound that's not realistic.",
       "note": "It's a plinking, twinkling sound; it should sound like real dice thrown on a table.",
       "plan": "Now: two dice thrown on a wooden table, bouncing with quicker, quieter knocks and settling; real CC0 recordings now (dice-throw.mp3), with the synthesized sound as a fallback. In Hands-on (lane Hands-on H1), each die clacks as it lands, a brighter clack when two dice knock (the candidate below).",
       "candidates": [
@@ -1175,14 +1065,12 @@
     },
     "newtons-cradle": {
       "status": "keep",
-      "said": "I think that Newton's cradle is fine. It can maybe sound just a little bit more metallic, but it's almost perfect. It actually sounds almost exactly the way it would in real life. So I think you can keep that one effectively the same. Yeah, I just watched a video of Newton's cradle, and I think that our toy here sounds pretty close. It sounds close enough. It could maybe sound just a tiny bit more metallic, but if you do change that, there's a decent chance that I'll ask you to change it back. I'm just not sure. Maybe you can change it and I'll tell you if I like it.",
       "note": "Almost perfect and close to the real thing; keep it (a slightly more metallic version is only worth a try).",
       "plan": "Keep the current sound; at most, offer one slightly more metallic candidate to compare, with the current one as the default.",
       "candidates": []
     },
     "teddy-bear": {
       "status": "ready",
-      "said": "(October 2, 2026, review) it kind of sounds like wood is stretching or something when it moves ... maybe, like, a wind or the sand kind of sound would make sense, but very subtly (Hands-on H1, October 8, 2026) New: its Hands-on sound, to hear on the Sound Board. Its tap sound is unchanged.",
       "note": "Sounds like wood stretching; make it a subtle soft, plush sound.",
       "plan": "Now: in Hands-on, a soft, plush thud as it lands. The tap keeps the soft rustle of a plush bear's fabric and stuffing; no creak (Sound C).",
       "candidates": [
@@ -1204,21 +1092,18 @@
     },
     "yo-yo": {
       "status": "site",
-      "said": "The yo-yo basically just sounds like some wind or something. There's actually kind of like a typical yo-yo sound. Maybe you could find it in a sound pack.",
       "note": "It sounds like wind; it should sound like a real yo-yo.",
       "plan": "Now: the string unwinding, the whirr at the bottom and the smack back into the hand.",
       "candidates": []
     },
     "puzzle-cube": {
       "status": "site",
-      "said": "I appreciate the sound that you're using for the puzzle cube, but there actually is a sound that you can hopefully find for, like, a typical Rubik's cube. … This is really neat. I love how it is here. But there is a certain sound. This is kind of like almost... Again, I really appreciate the sound here, because it's like when you move it in different directions, or just... I don't know, sometimes the sounds are different. I'm not sure exactly why or how. But I think that the sounds could be just a little bit less like a toy and more like real SFX, almost like ASMR. Not exactly ASMR, but just, like, a little bit more realistic. I don't know how to explain that. You can maybe find, like, a Rubik's cube sound. Sorry to make that so vague.",
       "note": "He likes it, but it should sound less like a toy and more like a real puzzle cube turning, almost ASMR-like.",
       "plan": "Now: each turn a plastic slide over the ridges and a soft clack as the layer seats; real CC0 recordings now (puzzle-cube-turn.mp3), with the synthesized sound as a fallback.",
       "candidates": []
     },
     "spring-toy": {
       "status": "site",
-      "said": "(October 2, 2026, review) The sound is not good. I don't know if you've ever heard what a Slinky ... sounds like in real life, but it's kind of like a... it's almost like sand",
       "note": "Not good: make it sound like a real Slinky (a shimmering, almost sandy metallic sound).",
       "plan": "Now: A real metal Slinky's shimmering coils as it walks (Sound C).",
       "candidates": [],
@@ -1226,14 +1111,12 @@
     },
     "kite": {
       "status": "site",
-      "said": "The kite is okay, but the wind is a little too overwhelming. Maybe just dial that back.",
       "note": "Okay, but the wind is too strong; dial it back.",
       "plan": "Now: the same, with the wind dialed back.",
       "candidates": []
     },
     "paper-plane": {
       "status": "ready",
-      "said": "(October 2, 2026, review) the sound is almost perfect. It's just a little bit too loud. (Hands-on H1, October 8, 2026) New: its Hands-on sound, to hear on the Sound Board. Its tap sound is unchanged.",
       "note": "The wind a little too loud.",
       "plan": "Now: in Hands-on, a light paper slap as it lands. The tap keeps the same fold and glide, with the air lower (Sound C).",
       "candidates": [
@@ -1253,7 +1136,6 @@
     },
     "origami-crane": {
       "status": "ready",
-      "said": "The origami crane is fine. (Hands-on H1, October 8, 2026) New: its Hands-on sound, to hear on the Sound Board. Its tap sound is unchanged.",
       "note": "It's fine.",
       "plan": "Now: in Hands-on, a soft paper flutter as the tail hits its stops.",
       "candidates": [
@@ -1274,7 +1156,6 @@
     },
     "balloon-dog": {
       "status": "site",
-      "said": "The balloon dog doesn't really sound like balloons popping. It has, like, a whistle at the beginning, which shouldn't be there. And then when it pops, it's close, but it's not exactly like a balloon popping. You can definitely find a sound pack or something with balloons popping and use those.",
       "note": "Remove the whistle at the start, and the pop should be a real balloon pop.",
       "plan": "Now: a real balloon bursting (no whistle first); real CC0 recordings now (balloon-dog-pop.mp3), with the synthesized sound as a fallback. In Hands-on (lane Hands-on H1), a long rubbery squeak when squeezed, a short one as it lands (the candidate below).",
       "candidates": [
@@ -1301,7 +1182,6 @@
     },
     "soap-bubbles": {
       "status": "site",
-      "said": "(October 2, 2026, review) the wind sound for, like, blowing the bubble is a little bit too loud, and the bubbles could be a little bit louder",
       "note": "Blowing wind softer; the bubbles a little louder and more like real bubbles.",
       "plan": "Now: A soft breath through the wand, and a soft real pop as each bubble bursts while it's blown (Sound C).",
       "candidates": [],
@@ -1309,7 +1189,6 @@
     },
     "robot": {
       "status": "site",
-      "said": "The wind-up robot is kind of awkward. It should sound more realistic. You can probably find a sound pack for that.",
       "note": "Awkward; it should sound like a real wind-up toy.",
       "plan": "Now: a few clicks of the winding key, then clockwork whirring as it unwinds and its tin feet clanking along; real CC0 recordings now (robot-wind.mp3), with the synthesized sound as a fallback. In Hands-on (lane Hands-on H1), the key clicks as it is wound and ticks as it unwinds (the candidate below).",
       "candidates": [
@@ -1358,91 +1237,78 @@
     },
     "chess-set": {
       "status": "site",
-      "said": "The chess set, the sounds are, I guess, okay, but as somebody who has played quite a bit of online chess, I know that there are better sound themes than others. And, like, this one is not that good, in my opinion. You could probably find some sound packs for chess pieces and use those.",
       "note": "Okay, but not a good chess sound; use better chess-piece sounds, like the good online-chess themes.",
       "plan": "Now: pieces set down on a felted wooden board, a woody thock (a sharper one for captures), like a good online-chess theme; real CC0 recordings now (chess-set-move.mp3), with the synthesized sound as a fallback.",
       "candidates": []
     },
     "book": {
       "status": "site",
-      "said": "For the storybook, I feel like we should have it so that the pages, you can kind of hear the pages flip, but I don't want it to sound like wind. It should sound like a realistic book's pages, you know, flipping. You know, you can probably find a sound pack for that.",
       "note": "We should hear the pages flip like a real book's, not wind.",
       "plan": "Now: real paper pages turning (no wind); real CC0 recordings now (book-page.mp3), with the synthesized sound as a fallback.",
       "candidates": []
     },
     "laptop": {
       "status": "site",
-      "said": "The laptop is basically perfect. You know, clicking sounds fine. The sound when the screen turns on is fine. I feel like we could remove the thunk kind of sound that happens when you click on, like, the outside or somewhere of the keyboard. So if you don't click on the mouse, you don't click on the trackpad. If you click on some other part, and let's say that the keyboard— or I'm sorry, the laptop— closes, it makes like a thunk or a thumping noise. We could probably remove that, and then when the laptop opens, it makes almost like a sprinkling, twinkling kind of noise, and then it has, like, that screen turn on sound. I like the sound that it makes when the screen turns on, but I don't like that twinkling noise that it makes when the laptop opens. We can just remove the twinkling noise. Additionally, for the laptop, the keys don't sound that realistic. … You could probably find some realistic on-screen or, like, physical keyboard sound packs or something that would be suitable here.",
       "note": "Basically perfect: keep the clicks and the screen-on sound, but remove the thunk when it closes and the twinkle when it opens, and make the keys sound more realistic.",
       "plan": "Now: opening keeps only the screen-on sound (no twinkle), closing has no thunk, and the keys sound like a real keyboard (a tick and a thock).",
       "candidates": []
     },
     "clock": {
       "status": "site",
-      "said": "The alarm clock here in the Open Me category, kind of like the other alarm clock in the Photo Real category, if I'm not mistaken, should sound more realistic.",
       "note": "Like the other alarm clock, it should sound more realistic.",
       "plan": "Now: a real wind-up alarm clock, the hammer rattling between its two bells, in two rings.",
       "candidates": []
     },
     "desk-fan": {
       "status": "site",
-      "said": "The desk fan sounds too much like acceleration, like a vroom. It should sound a bit different. I don't want it to be really windy or anything, but, like, you could probably find what propellers sound like. It could sound a little bit more like a propeller as it turns on or off or something.",
       "note": "Too much like a \"vroom\"; it should sound more like real fan blades spinning up or down, not windy.",
       "plan": "Now: the blades' soft thrum of air swelling in as it starts and fading as it stops (no rising motor hum).",
       "candidates": []
     },
     "shield": {
       "status": "site",
-      "said": "For the heraldic shield, we don't need it to have whatever that clicking noise is. It kind of, like, clicks as the shield kind of moves. We don't need the clicking. We will find for a lot of these toys that, like, the clicking is just not right. I don't like the clicking on almost anything. There are very few where I want clicking.",
       "note": "Remove the clicking as the shield moves (he dislikes clicking on almost every toy).",
       "plan": "Now: the clang and the gleam's shimmer, no crackling clicks.",
       "candidates": []
     },
     "bow-and-target": {
       "status": "site",
-      "said": "For now, though, I mean, it's pretty good. I think that the string sound is a little bit too much like a string instrument, like a guitar. So maybe we could change that.",
       "note": "Pretty good, but the string sounds like a guitar.",
       "plan": "Now: a real bowstring's thump and the arrow's hiss, not a guitar-like note; the hit is unchanged; real CC0 recordings now (bow-and-target-release.mp3), with the synthesized sound as a fallback.",
       "candidates": []
     },
     "trebuchet": {
       "status": "site",
-      "said": "The trebuchet is pretty good. The wind sound is a little bit too dramatic. You can kind of tune that back a bit or change it slightly. And then I'd like to hear the wood stretching a little bit, if that makes any sense. Like, I should be able to hear the wood a little bit. I don't know how to describe that any better.",
       "note": "Pretty good, but the wind is too dramatic, and he'd like to hear the wood straining.",
       "plan": "Now: the timber beam creaks and strains, then a softer swing (much less wind).",
       "candidates": []
     },
     "crossbow": {
       "status": "site",
-      "said": "For the crossbow, there's, like, kind of a clicking noise. We can get rid of that. The actual bow sound also sounds too much like an instrument, kind of like the bow and target, so we should change that. But when the arrow hits the target, it's fine.",
       "note": "Remove the click and change the instrument-like bow sound; the hit on the target is fine.",
       "plan": "Now: no click; the string's real thump, then the bolt hitting as before; real CC0 recordings now (bow-and-target-release.mp3), with the synthesized sound as a fallback.",
       "candidates": []
     },
     "knights-helmet": {
       "status": "keep",
-      "said": "I think that the knight's helmet is all right, but it's pretty basic. I think it's okay for now.",
       "note": "All right, if basic; okay for now.",
       "plan": "Keep the current sound for now.",
       "candidates": []
     },
     "crown": {
       "status": "site",
-      "said": "The crown is very close to being perfect, but the trumpet sound— I think it's, like, a trumpet sound— is a bit too robotic. If we could find, like, a real kind of, like, royal trumpet sound, that would make more sense to me.",
       "note": "Very close, but the trumpet is too robotic; it should be a real royal trumpet.",
       "plan": "Now: the fanfare on a natural trumpet (a lip scoop, breath and late vibrato) instead of synthetic brass; the jewels' pings stay.",
       "candidates": []
     },
     "wizards-orb": {
       "status": "site",
-      "said": "The wizard's orb is kind of weird. Like the wind sound is a little odd. The twinkling sound is a little bit cliché. Maybe we could find something else.",
       "note": "The wind is odd and the twinkling cliché; find something else.",
       "plan": "Now: a deep, slow hum of power swelling in the glass (no wind or twinkles).",
       "candidates": []
     },
     "jellyfish": {
       "status": "site",
-      "said": "(October 2, 2026, review) The sound could be just a tiny bit louder.",
       "note": "A tiny bit louder.",
       "plan": "Now: The same two swimming pulses, a little louder (Sound C).",
       "candidates": [],
@@ -1450,7 +1316,6 @@
     },
     "ladybug": {
       "status": "site",
-      "said": "(October 2, 2026, review) the sound is just a little bit too loud",
       "note": "Quieter, less overwhelming.",
       "plan": "Now: The same wing whirr, about 5 dB quieter (Sound C).",
       "candidates": [],
@@ -1458,35 +1323,30 @@
     },
     "snail": {
       "status": "site",
-      "said": "This snail could sound just a little bit more wet, like slime.",
       "note": "It could sound a little wetter, like slime.",
       "plan": "Now: wetter and slimier, a squish with a sticky stretch.",
       "candidates": []
     },
     "octopus": {
       "status": "site",
-      "said": "The octopus, the ink doesn't really sound like it's like a liquid bubbling. It just sounds kind of like wind. We can change that.",
       "note": "The ink sounds like wind; it should sound like bubbling liquid.",
       "plan": "Now: a squirt, then the ink bubbling out as a liquid (no wind).",
       "candidates": []
     },
     "starfish": {
       "status": "site",
-      "said": "The starfish, if possible, we could make the sound be a little bit more synchronized. So I think that the sound that it plays now can be kept, but then when the little pieces of it, I'm going to call these things, I guess, arms or something? I don't know what you technically call them. I don't really care. So we can call these things arms of the jellyfish. As these things open and close, we could have there be, like, a little sound effect. I feel like that would be nice. Not necessary, but make it more like ASMR. Not exactly, but close.",
       "note": "Keep the current sound, and add a small sound synced to the arms as they open and close (nice, not necessary).",
       "plan": "Now: the pop is kept, and each arm makes a soft wet lift as it rises and a soft pat as it settles, one after another.",
       "candidates": []
     },
     "frog": {
       "status": "site",
-      "said": "For the frog, I think it just sounds a little too robotic. So the fly is just a little too robotic in how it buzzes. The frog, the noise that plays after the frog consumes the fly, we could have the frog, like, croak or do, like, a ribbit type of thing. I don't know if that's what a frog does. I know, of course, toads do that. I don't know if it makes a difference. As it is now, it's okay, though. It's more like a cartoon, but we could perhaps change the fly to, like, a more realistic sound.",
       "note": "Okay but cartoonish: a more realistic fly buzz, and a real croak or ribbit after it eats the fly.",
       "plan": "Now: a real fly's wandering buzz, and real croaks after it eats the fly; real CC0 recordings now (frog-fly.mp3, frog-croak.mp3), with the synthesized sound as a fallback.",
       "candidates": []
     },
     "owl": {
       "status": "site",
-      "said": "(October 2, 2026, review) The howl of the owl, or the hoot of the owl, is too long. ... It almost sounds more like a dog howling. ... Can you find a different owl sound clip to use?",
       "note": "The hoot is too long and sounds like a dog howling: a short, natural owl hoot recording.",
       "plan": "Now: A short, natural owl hoot (h'HOO-oo and a soft hoo), about 1 s (Sound C).",
       "candidates": [],
@@ -1494,161 +1354,138 @@
     },
     "lorenz": {
       "status": "site",
-      "said": "All right. Next is the Lorenz attractor. No offense, but this is kind of like one of my least favorite sounds here. It's almost like a weird whistle howl kind of thing. Let's try to use something that's more... I don't know what the right word would be, I'm sorry. It's hard for me to... more like epic, if that makes any sense. Because this is a really cool mathematical thing. It's really cool. … But in terms of the sound, this needs to be changed.",
       "note": "One of his least favorite sounds (a weird whistling howl); it should sound more epic.",
       "plan": "Now: something epic, a deep hit, a dark slow rush and a wide low chord (no whistling howl).",
       "candidates": []
     },
     "mobius": {
       "status": "site",
-      "said": "For the Mobius strip, I appreciate, I think, the intent of the sound effect that you chose, because it kind of synchronizes with the full traversal of the Mobius strip, of the object that's on it. I'm going to call the rider. Yeah, the object will be called the rider that's on it. Having said that, it's kind of awkward, and I'd almost rather not have the xylophone kind of sound. It's not exactly a xylophone, but it's close. It's like the different tones playing like it does, and instead I'd rather just focus on the sound effect of the rider. So for the race car, it should actually have a race car sound, and we'll get to the race car when we actually hit vehicles and go to the vehicles section here. But the race car should sound kind of like a real race car. For the beach ball, it should sound like a real rolling beach ball, or just like a real rolling ball. For the duck on a bike, which is really cool, by the way, it should sound like a bike. We don't need it to quack, although it would be cool if you could add, like, a little quack. That would be cute. But yeah, you could add, like, a tiny little quack, like a real duck quack, but not overwhelmingly, and it shouldn't happen that often, maybe just once at the beginning or in the middle or something. For the ant, this is one of the only cases where I think that that kind of, like, crawling, almost clicky kind of noise could make sense. But I want there to be, like, a different sound effect depending on what the rider is. … Yeah, just returning to the Mobius strip, like I said, I think that, like having a different sound for the different riders would make sense.",
       "note": "Drop the xylophone-like tones and give each rider its own sound: a real race car, a rolling ball, a bike (with maybe one small real quack) for the duck, and a crawling sound for the ant.",
       "plan": "Now: no step tune; each rider has its own sound on the ride: a race car's engine, a rolling beach ball, a bicycle with one soft quack, the ant's tiny feet. Math r2: three new riders with their own ride sounds (cues from the recipe): the toy train's steam chuffs, the ladybug's light feet and one flutter of her wings, the skateboard's rolling wheels with a clack as it sets off and lands.",
       "candidates": []
     },
     "klein-bottle": {
       "status": "site",
-      "said": "The other part of this is the sound effect. So it sounds like bubbles, and then it sounds like wind, or like a waterfall. Let's change this so it actually sounds like water moving in a bottle. You can probably find a sound pack for that. … and then we need to make the sound more like water or liquid in a bottle.",
       "note": "It sounds like bubbles, then wind or a waterfall; it should sound like water moving in a bottle.",
       "plan": "Now: water moving in a bottle, sloshing and glugging (no bubbles or waterfall); real CC0 recordings now (klein-bottle-slosh.mp3), with the synthesized sound as a fallback.",
       "candidates": []
     },
     "hypercube": {
       "status": "site",
-      "said": "So the hypercube is one of the coolest visual effects. Honestly, it really is, like one of my favorite toys here. The sound is one of my least favorite sounds. It has, like, that acceleration vroom kind of sound here, and I would prefer for us to use something else.",
       "note": "One of his favorite toys but least favorite sounds: the \"vroom\" acceleration; use something else.",
       "plan": "Now: no \"vroom\"; a great slow rush as it turns inside out and again as it turns home, over a low chord.",
       "candidates": []
     },
     "torus-knot": {
       "status": "site",
-      "said": "Having said that, the sound... I don't really like the, like, banjo or guitar keys. Maybe we could just make it have more, like, sound effects. I don't know how to describe it, but it shouldn't be like that.",
       "note": "He doesn't like the banjo or guitar notes; it should be sound effects instead.",
       "plan": "Now: it strains as it is pulled and lets go with a real thump and swish (no banjo or guitar notes).",
       "candidates": []
     },
     "gyroid": {
       "status": "site",
-      "said": "The gyroid is like that accelerating noise, and it kind of has, like, some bubbles. It's a little awkward. I'd like to change that. I don't know what to change it to, but it's kind of awkward.",
       "note": "The accelerating noise and bubbles are awkward; change it.",
       "plan": "Now: slow rushes one way and back over a low chord (no rising hum, no bubbles).",
       "candidates": []
     },
     "mandelbulb": {
       "status": "keep",
-      "said": "So the Mandel bulb is one of the things. It's like one of the exceptions where I'm going to tell you that I really like the sound pack, and I don't want to change it here. This is one of the ones where it has some of the stuff in it that I ordinarily would not want to be in the sound effects, but it's actually good. It actually works for the Mandel bulb. And quite frankly, we could make the Mandel torus have something kind of similar in terms of the sound effect.",
       "note": "He really likes it and doesn't want it changed; the Mandeltorus could get something similar.",
       "plan": "Keep the current sound; use it as the model for the Mandeltorus.",
       "candidates": []
     },
     "surface-plotter": {
       "status": "site",
-      "said": "Okay, so for the surface plotter, this one definitely needs some work in terms of the sound. It's kind of like a wave sound, like the ocean, and then it has, like, that vroom acceleration sound. I'm not going to lie, I don't think I like either of those parts of it. I really don't know what would be a good sound, but it needs to be kind of subtle and not overwhelming. Those two things are kind of overwhelming as they are here. So sorry to kind of change that, but, like, it's... We should just pick something that's a little bit less obnoxious.",
       "note": "Both the ocean-like wave and the \"vroom\" are overwhelming; it needs something subtle.",
       "plan": "Now: subtle, a soft low chord swelling as the surface rises (no wave, no \"vroom\").",
       "candidates": []
     },
     "unit-circle": {
       "status": "site",
-      "said": "The circle and waves is okay, but it's a little too robotic. This is one of the ones where I don't really know what the sound should be. So we can just explore some options.",
       "note": "Okay, but a little too robotic; explore some options.",
       "plan": "Now: warmer, a soft low chord that swells with the turn and a gentle rush a quarter turn later (one option to try).",
       "candidates": []
     },
     "fourier-circles": {
       "status": "keep",
-      "said": "Now for the Fourier circles. I actually like this. It's kind of robotic, but I don't dislike how the sound is …",
       "note": "He likes it, even if it's a little robotic.",
       "plan": "Keep the current sound.",
       "candidates": []
     },
     "perceptron": {
       "status": "keep",
-      "said": "For the Perceptron, I think this is basically perfect.",
       "note": "Basically perfect.",
       "plan": "Keep the current sound.",
       "candidates": []
     },
     "neural-network": {
       "status": "site",
-      "said": "The neural network, I feel like we can make the sounds a lot cooler. I mean, this is a very cool— it's actually one of my favorite toys here, but it sounds too much like a child's toy. Like it's just like a almost like a xylophone kind of, like chime thing. We could have it be more exciting or intense.",
       "note": "One of his favorite toys, but it sounds like a child's xylophone; make it cooler, more exciting or intense.",
       "plan": "Now: more intense, an electric surge as each layer lights over a dark chord, a deep hit at the answer and crackling current as the pulses run back.",
       "candidates": []
     },
     "cnn": {
       "status": "approved",
-      "said": "… the noise that takes place basically during the processing is the same noise. Like the sounds are the same for all three of the options: for the 2D poster, the 3D model, and the 3D draw digit. That's really cool. I appreciate that. I like how it's kind of synchronized such that people can understand what each part is. … Anyways, the sounds are fine. I think, yeah, I think that they're okay for this one.",
       "note": "The sounds are fine, and he likes that they match across the poster, the 3D model and the draw-a-digit view.",
       "plan": "Keep the current sounds, the same across all three views.",
       "candidates": []
     },
     "rnn": {
       "status": "site",
-      "said": "For the recurrent network, I think it's fine, but the sound, it has that, like, kind of acceleration vroom sound. If we could change that to something a little bit better, I'd appreciate that.",
       "note": "Fine, but change the \"vroom\" acceleration sound.",
       "plan": "Now: a soft pulse of current as each word goes in and the loop's chord growing a note each time (no rising hum).",
       "candidates": []
     },
     "transformer": {
       "status": "site",
-      "said": "The transformer is not terrible. The sounds are a little more robotic. So, like the kind of like— I'll put it this way. There are four different distinct sounds that I detect that it plays, okay? The first two maybe we could change. They're kind of like a robotic sound. Maybe we could change those.",
       "note": "Not terrible; of its four sounds, the first two are robotic and should change.",
       "plan": "Now: the first two sounds are warm swells of current instead of electronic shimmers; the last two are unchanged.",
       "candidates": []
     },
     "looped-transformer": {
       "status": "approved",
-      "said": "For the looped transformer, I actually really like the sounds here. Those are pretty awesome. … The sounds are fine, though.",
       "note": "He really likes the sounds.",
       "plan": "Keep the current sounds.",
       "candidates": []
     },
     "diffusion-model": {
       "status": "site",
-      "said": "The diffusion model is one of my favorites. This is very cool. The sounds are not bad. I feel like we could maybe make them a little bit better. The first noise is like a sand kind of sound, and then the second noise is like this chord or something. The chord is a little robotic. I don't know if we could change that.",
       "note": "Not bad and could be a little better: the closing chord is a little robotic.",
       "plan": "Now: a soft dark swell as the noise clears (no sandy hiss) and a chord rolled on the piano as the duck appears.",
       "candidates": []
     },
     "gradient-descent": {
       "status": "site",
-      "said": "All right, so for gradient descent, I don't really like the sounds here. First off, the ball actually is, like, kind of bouncing, right? So I feel like we should have it make little sounds as it bounces down. Like as it takes steps down, there should be sounds synchronized properly. Like there should be sound effects there. I don't really like the other sounds of it either, so maybe we don't really need those.",
       "note": "He doesn't like the sounds; the ball should make little sounds in sync with each step down, and the others can go.",
       "plan": "Now: a soft tap as the ball lands each of its 21 hops down, in sync, and one as it lands home (the falling tone and whoosh are gone).",
       "candidates": []
     },
     "word-vectors": {
       "status": "keep",
-      "said": "Now we'll move on to the word vectors. I think the sounds are fine with this. Yeah, I think the sounds are fine for word vectors.",
       "note": "The sounds are fine.",
       "plan": "Keep the current sounds.",
       "candidates": []
     },
     "sorting-machine": {
       "status": "keep",
-      "said": "I really like the sorting machine sounds. Those are basically perfect. Those are outstanding. Really, really cool.",
       "note": "He loves them: basically perfect.",
       "plan": "Keep the current sounds.",
       "candidates": []
     },
     "half-adder": {
       "status": "site",
-      "said": "And for the half outer, this is pretty much fine, … Also, there's kind of, like, a buzzing noise, like a fly or a bee or something. It's, like, the second-to-last noise that it makes. We can remove that entirely.",
       "note": "Pretty much fine; remove the fly-like buzz near the end.",
       "plan": "Now: the buzz near the end is gone; the rest is unchanged.",
       "candidates": []
     },
     "fireworks": {
       "status": "site",
-      "said": "So for the fireworks, there's like a whistling noise when the firework is shot, and there's like some clicking noise, and the firework kind of like thuds when it explodes. I want it to actually sound like a real firework. You can probably find a sound pack for that.",
       "note": "The whistle, clicks and thud should become a real firework.",
       "plan": "Now: a real firework, the launch's thump and rush (no whistle), a deep boom and the stars' soft crackle; real CC0 recordings now (fireworks-burst.mp3), with the synthesized sound as a fallback.",
       "candidates": []
     },
     "decorated-tree": {
       "status": "site",
-      "said": "(October 2, 2026, review) maybe we can make the Jingle Bells song a little bit better, like we could maybe use a different piano or find, like, another chime",
       "note": "Jingle Bells on a nicer instrument (real chimes or bells, or a better piano).",
       "plan": "Now: Jingle Bells on a real glockenspiel with a shake of real sleigh bells, at the same tempo (Sound C).",
       "candidates": [],
@@ -1656,21 +1493,18 @@
     },
     "menorah": {
       "status": "site",
-      "said": "The menorah, the wind sound or whatever, is just too dramatic. I don't know if we could just make it have like a Hanukkah kind of, like, sound, but it's just like the menorah as it is now. It's like there's one sound and then all the lights go off, and it doesn't really make any sense. So if, you know, if this was just like one big gust of wind that blew all the lights out, then it would look like that. But in this case you hear, like, this wind sound and then the lights kind of, like, go off in a certain order, and it doesn't make any physical sense. So we should maybe change the sound for that.",
       "note": "The wind is too dramatic, and one gust doesn't match the lights going out one by one; maybe a Hanukkah-like sound.",
       "plan": "Now: a match struck, then each wick catching with a soft flame as it lights, one by one; going out, a small puff as each flame goes out in turn (no big gust).",
       "candidates": []
     },
     "rocket": {
       "status": "site",
-      "said": "The rocket could be just a little more realistic.",
       "note": "It could be a little more realistic.",
       "plan": "Now: the flickering roar of the exhaust over a deep rumble.",
       "candidates": []
     },
     "helicopter": {
       "status": "site",
-      "said": "(October 2, 2026, review) We need it to sound like the actual, like, kind of chopping of the propeller.",
       "note": "It should sound like real rotor blades chopping.",
       "plan": "Now: Real rotor blades chopping; landing, the chop slowing as it fades (Sound C).",
       "candidates": [],
@@ -1678,7 +1512,6 @@
     },
     "steam-train": {
       "status": "site",
-      "said": "(October 2, 2026, review) It doesn't need to make that little, like, chime or bell noise or horn noise at the beginning, and the wheel noise doesn't really sound like a steam train. It should kind of chug along",
       "note": "No bell or horn at the start; the wheels should chug like a real steam train.",
       "plan": "Now: A real steam locomotive chuffing, fading with its steam; no bell, horn or whistle (Sound C).",
       "candidates": [],
@@ -1686,14 +1519,12 @@
     },
     "ocean-liner": {
       "status": "keep",
-      "said": "The ocean liner is really good. It's really good. I don't think I want to change that. I just want to tell you it's cool.",
       "note": "Really good; don't change it.",
       "plan": "Keep the current sound.",
       "candidates": []
     },
     "sports-car": {
       "status": "site",
-      "said": "(October 2, 2026, review) when the exhaust kind of disappears from the back of it, it still continues to make a noise",
       "note": "The engine keeps sounding after the exhaust has gone; stop it in sync.",
       "plan": "Now: The same real rev, now fading out with the exhaust (gone at 1.8 s) (Sound C).",
       "candidates": [],
@@ -1701,98 +1532,84 @@
     },
     "propeller-plane": {
       "status": "site",
-      "said": "The propeller plane is almost perfect. It could sound a little more realistic. Right now it sounds just a little too, like, digital or robotic.",
       "note": "Almost perfect, but a little too digital or robotic.",
       "plan": "Now: a real piston engine with the propeller's beat; real CC0 recordings now (propeller-plane-engine.mp3), with the synthesized sound as a fallback.",
       "candidates": []
     },
     "jet": {
       "status": "site",
-      "said": "The jet airliner, let's remove, like, all of that sound. So it has, like, a whistle sound and the wind is way too dramatic. We can have it use a little bit more realistic kind of subtle wind sounds, and that's enough.",
       "note": "Remove the whistle and the dramatic wind; a subtle, realistic wind sound is enough.",
       "plan": "Now: no whistle; a softer, natural rush of the engines.",
       "candidates": []
     },
     "tractor": {
       "status": "site",
-      "said": "The tractor should change to, like, an actual tractor-sounding engine.",
       "note": "It should sound like a real tractor engine.",
       "plan": "Now: a slow diesel's putt-putt with its clatter; real CC0 recordings now (tractor-engine.mp3), with the synthesized sound as a fallback.",
       "candidates": []
     },
     "ufo": {
       "status": "site",
-      "said": "The flying saucer, the sound effects are pretty cute. They're pretty cool. It just sounds a little too childish. I want it to sound a bit more kind of, like, realistic sound effects. Not really a lot of wind or anything like that, but it just sounds more like whistling right now.",
       "note": "Cute, but too childish and whistly; more realistic sound effects, without much wind.",
       "plan": "Now: a deep pulsing hum and a heavy rush as it lifts (no whistling theremin).",
       "candidates": []
     },
     "eiffel-tower": {
       "status": "site",
-      "said": "For the Eiffel Tower, the fireworks should actually sound like real fireworks going off. We can remove the lights, like the light sounds, the twinkling, or we could at least tone it down a little bit. I think we should remove the twinkling.",
       "note": "The fireworks should sound like real fireworks, and the twinkling for the lights should go.",
       "plan": "Now: real fireworks, four bursts with booms and soft crackle (no twinkling); real CC0 recordings now (fireworks-burst.mp3), with the synthesized sound as a fallback.",
       "candidates": []
     },
     "washington-monument": {
       "status": "site",
-      "said": "For the Washington Monument, it sounds like waves or wind, which doesn't really make any sense. We can just remove that.",
       "note": "The wave or wind sound makes no sense; remove it.",
       "plan": "Now: only the soft chime at noon (no wind).",
       "candidates": []
     },
     "pyramids": {
       "status": "keep",
-      "said": "I think the pyramids of Giza are basically perfect. They're really funny and cool.",
       "note": "Basically perfect.",
       "plan": "Keep the current sound.",
       "candidates": []
     },
     "statue-of-liberty": {
       "status": "site",
-      "said": "The Statue of Liberty, just remove the clicks. The sound does not need clicks.",
       "note": "Just remove the clicks.",
       "plan": "Now: the whoosh and the bell, no crackling clicks.",
       "candidates": []
     },
     "white-house": {
       "status": "site",
-      "said": "I think that the White House is fine, but I think that—I could be wrong—but, like, the clicking is supposed to correspond to the lights of the windows lighting up, but the clicking goes on even after the lights have all lit up. Maybe we can remove the clicking and do something different. Just nothing, obviously, disrespectful or overwhelming.",
       "note": "Fine, but the clicking goes on after the lights are all lit; remove it and do something different, respectful and not overwhelming.",
       "plan": "Now: the spray's splash and a soft, steady rush of water falling back (no patter of clicks).",
       "candidates": []
     },
     "colosseum": {
       "status": "site",
-      "said": "The Colosseum sound effects could use a lot of work. I'll try to break this down. So maybe remove all of the sounds, or let's just say I don't like any of the sounds, but I think directionally they're fairly correct. We just have to be careful about this. We can use, like, a crowd or, like, an audience sound pack, okay? And then we can just have, like, hooves of a horse kind of moving or something like that for the gladiators, and I think that that would be enough.",
       "note": "He doesn't like any of the current sounds: a real crowd and horse hooves would be enough.",
       "plan": "Now: a real crowd in the stands and horses' hooves trotting; real CC0 recordings now (colosseum-crowd.mp3, colosseum-hooves.mp3), with the synthesized sound as a fallback.",
       "candidates": []
     },
     "fountain-pen": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "soda-can": {
       "status": "site",
-      "said": "(September 30, 2026, on the Sound Board) Doesn't sound realistic enough. Bubble sounds aren't really necessary, and the pssht and fizz need work.",
       "note": "Doesn't sound realistic enough. Bubble sounds aren't really necessary, and the pssht and fizz need work.",
       "plan": "Now: the soda sloshing as it shakes, a sharp pssht as the tab opens and a fine, soft fizz that dies away (no bubbles).",
       "candidates": []
     },
     "running-shoe": {
       "status": "approved",
-      "said": "(September 30, 2026, on the Sound Board) marked good",
       "note": "Approved as it is.",
       "plan": "",
       "candidates": []
     },
     "hoodie": {
       "status": "site",
-      "said": "(October 2, 2026, review) The hoodie does not need to have so much wind.",
       "note": "Less wind; subtler.",
       "plan": "Now: The fabric's soft brushes and the zip, with much less wind (Sound C).",
       "candidates": [],
@@ -1800,7 +1617,6 @@
     },
     "sunglasses": {
       "status": "site",
-      "said": "(September 30, 2026, on the Sound Board) Sounds too robotic and tacky.",
       "note": "Sounds too robotic and tacky.",
       "plan": "Now: each fold is a plastic hinge sliding shut and seating; the lenses darken silently (no electronic clicks or shimmer). In Hands-on (lane Hands-on H1), a small hinge click at each stop (the candidate below).",
       "candidates": [
@@ -1825,7 +1641,6 @@
     },
     "baseball-cap": {
       "status": "site",
-      "said": "(September 30, 2026, on the Sound Board) A bit too windy.",
       "note": "A bit too windy.",
       "plan": "Now: fabric rustles instead of whooshes as it flips; the flick and the soft landings are unchanged. In Hands-on (lane Hands-on H1), a soft cloth thud as it lands (the candidate below).",
       "candidates": [
@@ -1846,14 +1661,12 @@
     },
     "splat-equation": {
       "status": "site",
-      "said": "(September 30, 2026, on the Sound Board) Too robotic and loud; change entirely, please.",
       "note": "Too robotic and loud; change entirely, please.",
       "plan": "Now: changed entirely, the quiet scratch of chalk as t plays.",
       "candidates": []
     },
     "gaussian-splatting": {
       "status": "site",
-      "said": "(October 2, 2026, review) it plays almost like this robotic chord ... and then it has like almost like a xylophone noise ... it's just kind of tacky ... a subtle, descending, continuous sound as the curve is plotted ... For the sorting view ... kind of like the pebble sound, but importantly, I want it to be synchronized.",
       "note": "Training view: drop the opening chord; instead of the xylophone notes, a subtle, continuous descending tone as the loss curve is drawn. One-splat view: the robotic sound must go; something subtle. Many-splats view: the twinkle quieter and subtler. Sorting view: a pebble-like click in sync with each splat placed, slightly different each time.",
       "plan": "Now: Training, a soft tone falling as the loss curve draws (no chord or notes); one splat, a soft airy swell; many splats, a fainter twinkle; sorting, a pebble's click for each splat as it is placed, in sync, each a little different (Sound C).",
       "candidates": [],
@@ -1861,21 +1674,18 @@
     },
     "difference-engine": {
       "status": "approved",
-      "said": "(September 30, 2026, on the Sound Board) marked good",
       "note": "Approved as it is.",
       "plan": "",
       "candidates": []
     },
     "picture-lab": {
       "status": "site",
-      "said": "(September 30, 2026, on the Sound Board) Sounds too much like suction or something.",
       "note": "Sounds too much like suction or something.",
       "plan": "Now: a paper page turning; real CC0 recordings now (book-page.mp3), with the synthesized sound as a fallback.",
       "candidates": []
     },
     "your-book": {
       "status": "site",
-      "said": "(October 2, 2026, review) Maybe we could use a slightly different page-turning sound depending on the book type.",
       "note": "A page sound per book type: glossier for a magazine, different for paperback and hardcover.",
       "plan": "Now: A real page per book type: glossy and slick for the magazine, light for the paperback (and the stapled and spiral ones), fuller with a soft landing for the hardcover (Sound C).",
       "candidates": [],
@@ -1883,28 +1693,24 @@
     },
     "photo-album": {
       "status": "site",
-      "said": "(September 30, 2026, on the Sound Board) Thud is fine, but page turn swish doesn't sound realistic.",
       "note": "Thud is fine, but page turn swish doesn't sound realistic.",
       "plan": "Now: a thick card page turning and the thud; real CC0 recordings now (book-page.mp3), with the synthesized sound as a fallback.",
       "candidates": []
     },
     "song-landscape": {
       "status": "approved",
-      "said": "(September 30, 2026, on the Sound Board) marked good",
       "note": "Approved as it is.",
       "plan": "",
       "candidates": []
     },
     "model-splats": {
       "status": "approved",
-      "said": "(September 30, 2026, on the Sound Board) marked good",
       "note": "Approved as it is.",
       "plan": "",
       "candidates": []
     },
     "photo-3d": {
       "status": "ready",
-      "said": "(September 30, 2026, on the Sound Board) Doesn't need to sound like wind. No whoosh necessary. (October 9, 2026, walkthrough) Choose the depth sound on Photo to 3D: a few built-in choices with no wind or whoosh, plus use my own sound.",
       "note": "Doesn't need to sound like wind. No whoosh necessary.",
       "plan": "Now: a Sound choice in the Toy tab (lane Photo depth): Paper (as it is), a soft chime, pop-up layers (four plucks as the layers rise, and down as they settle), a water drop, none, or your own sound (kept on the device). On the board: the three new ones, rising then settling 3 s later.",
       "candidates": [
@@ -2039,7 +1845,6 @@
     },
     "splat-field": {
       "status": "site",
-      "said": "(October 2, 2026, review) I really don't like the sound, like this default pulse sound of the splat field. ... It sounds robotic. I don't like it.",
       "note": "Replace the robotic, accelerating pulse; maybe a different sound per field.",
       "plan": "Now: Each field its own sound: a soft hush for the galaxy's ring, a stone's plop and a gentle wave for the ocean, a warm swelling tone for the knot; no pulse (Sound C).",
       "candidates": [],
@@ -2047,49 +1852,42 @@
     },
     "anatomy-atlas": {
       "status": "approved",
-      "said": "(September 30, 2026, on the Sound Board) marked good",
       "note": "Approved as it is.",
       "plan": "",
       "candidates": []
     },
     "bombe": {
       "status": "site",
-      "said": "(September 30, 2026, on the Sound Board) Doesn't need the low buzz motor sound.",
       "note": "Doesn't need the low buzz motor sound.",
       "plan": "Now: the drums' clatter without the low motor buzz; the switch, the stop and the bell are unchanged.",
       "candidates": []
     },
     "chladni-plate": {
       "status": "site",
-      "said": "(September 30, 2026, on the Sound Board) Should not have patters/clicks. Sand should sound like it's sliding, not crawling.",
       "note": "Should not have patters/clicks. Sand should sound like it's sliding, not crawling.",
       "plan": "Now: the plate's hum with the sand sliding as it settles (no patter of clicks).",
       "candidates": []
     },
     "coffee": {
       "status": "site",
-      "said": "(September 30, 2026, on the Sound Board) Sounds a bit tacky. Could just be a simple \"tap tap\", like someone is signaling to a waiter/waitress to refill the coffee.",
       "note": "Sounds a bit tacky. Could just be a simple \"tap tap\", like someone is signaling to a waiter/waitress to refill the coffee.",
       "plan": "Now: a simple \"tap tap\" of a spoon on the cup.",
       "candidates": []
     },
     "electronic-keyboard": {
       "status": "approved",
-      "said": "(September 30, 2026, on the Sound Board) marked good",
       "note": "Approved as it is.",
       "plan": "",
       "candidates": []
     },
     "enigma-machine": {
       "status": "approved",
-      "said": "(September 30, 2026, on the Sound Board) marked good",
       "note": "Approved as it is.",
       "plan": "",
       "candidates": []
     },
     "fluid-lab": {
       "status": "change",
-      "said": "(September 30, 2026, on the Sound Board) Isn't in sync with fluid pour animation, and needs to be more realistic. (October 2, 2026, review) The sound effect for it could be just a little bit louder",
       "note": "Isn't in sync with fluid pour animation, and needs to be more realistic. Also (October 2): the honey a little louder; its sound is very good.",
       "plan": "Pours, glugs and splashes in sync with the animation, from real recordings (lane Fluids, r4). Honey a little louder: done by lane Sound C (its gloops about 3 dB up, src/fluids/runtime.js).",
       "candidates": [],
@@ -2097,42 +1895,36 @@
     },
     "grand-piano": {
       "status": "site",
-      "said": "(September 30, 2026, on the Sound Board) Sounds too much like an electronic keyboard.",
       "note": "Sounds too much like an electronic keyboard.",
       "plan": "A real acoustic piano: recorded CC0 notes (one every four semitones, each played at its key's pitch), with the damper falling when a key comes up. The electronic keyboard's PIANO button keeps the synth.",
       "candidates": []
     },
     "graph-plotter": {
       "status": "approved",
-      "said": "(September 30, 2026, on the Sound Board) marked good",
       "note": "Approved as it is.",
       "plan": "",
       "candidates": []
     },
     "harpsichord": {
       "status": "approved",
-      "said": "(September 30, 2026, on the Sound Board) marked good",
       "note": "Approved as it is.",
       "plan": "",
       "candidates": []
     },
     "hot-air-balloon": {
       "status": "approved",
-      "said": "(September 30, 2026, on the Sound Board) marked good",
       "note": "Approved as it is.",
       "plan": "",
       "candidates": []
     },
     "multilayer-perceptron": {
       "status": "approved",
-      "said": "(September 30, 2026, on the Sound Board) marked good",
       "note": "Approved as it is.",
       "plan": "",
       "candidates": []
     },
     "periodic-table": {
       "status": "site",
-      "said": "(October 2, 2026, review) the whooshing sound ... doesn't need to be so loud ... I'd like for there to be, like, a faint synchronized sound that plays for each element as each of those subatomic particles gets packed into the nucleus. (October 6, 2026, walkthrough) the sound that plays as the subatomic particles are being added to the nucleus ... It's kind of like nails on a chalkboard ... maybe a little bit more like the sorting sound for the splat simulator.",
       "note": "The whoosh on tapping an element: keep it but much more subtle. Add a faint sound in sync with each proton and neutron packing into the nucleus (not bubbles, not plastic blocks). Then (October 6): the ticks grate like nails on a chalkboard; make them more like the splat simulator's sorting.",
       "plan": "Now: in the site and new to hear (lane Elements, October 6, 2026): for each proton and neutron as it packs into the nucleus, a soft pebble's click like the splat simulator's sorting, instead of the bright 2.7 to 3.3 kHz clacks (Sound C). On the board, iron's nucleus (26 protons, 30 neutrons): A, the new clicks; B, the old clacks to compare.",
       "candidates": [
@@ -2951,98 +2743,84 @@
     },
     "picture-frame": {
       "status": "approved",
-      "said": "(September 30, 2026, on the Sound Board) marked good",
       "note": "Approved as it is.",
       "plan": "",
       "candidates": []
     },
     "pythagoras-proof": {
       "status": "approved",
-      "said": "(September 30, 2026, on the Sound Board) marked good",
       "note": "Approved as it is.",
       "plan": "",
       "candidates": []
     },
     "rossler-attractor": {
       "status": "ready",
-      "said": "(Math r2, October 7, 2026) A new toy: its first sound, to hear on the Sound Board.",
       "note": "New toy (lane Math r2).",
       "plan": "Now: A soft drip as the tracer drops, over a low, wide chord in the toy's own key.",
       "candidates": []
     },
     "thomas-attractor": {
       "status": "ready",
-      "said": "(Math r2, October 7, 2026) A new toy: its first sound, to hear on the Sound Board.",
       "note": "New toy (lane Math r2).",
       "plan": "Now: A soft drip as the tracer drops, over a low, wide chord in the toy's own key.",
       "candidates": []
     },
     "aizawa-attractor": {
       "status": "ready",
-      "said": "(Math r2, October 7, 2026) A new toy: its first sound, to hear on the Sound Board.",
       "note": "New toy (lane Math r2).",
       "plan": "Now: A soft drip as the tracer drops, over a low, wide chord in the toy's own key.",
       "candidates": []
     },
     "five-cell": {
       "status": "ready",
-      "said": "(Math r2, October 7, 2026) A new toy: its first sound, to hear on the Sound Board.",
       "note": "New toy (lane Math r2).",
       "plan": "Now: Like the hypercube: a slow rush as it rolls out and again as it rolls home, over a low chord in its own key.",
       "candidates": []
     },
     "sixteen-cell": {
       "status": "ready",
-      "said": "(Math r2, October 7, 2026) A new toy: its first sound, to hear on the Sound Board.",
       "note": "New toy (lane Math r2).",
       "plan": "Now: Like the hypercube: a slow rush as it rolls out and again as it rolls home, over a low chord in its own key.",
       "candidates": []
     },
     "twenty-four-cell": {
       "status": "ready",
-      "said": "(Math r2, October 7, 2026) A new toy: its first sound, to hear on the Sound Board.",
       "note": "New toy (lane Math r2).",
       "plan": "Now: Like the hypercube: a slow rush as it rolls out and again as it rolls home, over a low chord in its own key.",
       "candidates": []
     },
     "duoprism": {
       "status": "ready",
-      "said": "(Math r2, October 7, 2026) A new toy: its first sound, to hear on the Sound Board.",
       "note": "New toy (lane Math r2).",
       "plan": "Now: Like the hypercube: a slow rush as it rolls out and again as it rolls home, over a low chord in its own key.",
       "candidates": []
     },
     "screen": {
       "status": "site",
-      "said": "(September 30, 2026, on the Sound Board) \"On\" sound doesn't need the hum; \"Off\" sound is good.",
       "note": "\"On\" sound doesn't need the hum; \"Off\" sound is good.",
       "plan": "Now: switching on is the click and crackle without the hum; switching off is unchanged.",
       "candidates": []
     },
     "supertall": {
       "status": "site",
-      "said": "(September 30, 2026, on the Sound Board) Could be less tacky. Sounds too cute.",
       "note": "Could be less tacky. Sounds too cute.",
       "plan": "Now: the lift's low whir as the floors wring round and a soft low bell each time the light reaches the top (no rising tone or bright dings).",
       "candidates": []
     },
     "turing-machine": {
       "status": "approved",
-      "said": "(September 30, 2026, on the Sound Board) marked good",
       "note": "Approved as it is.",
       "plan": "",
       "candidates": []
     },
     "upright-piano": {
       "status": "approved",
-      "said": "(September 30, 2026, on the Sound Board) marked good",
       "note": "Approved as it is.",
       "plan": "",
       "candidates": []
     },
     "water-bottle": {
       "status": "site",
-      "said": "(October 6, 2026, walkthrough) The sound of the water sounds more like a waterfall than it does water actually being poured out of a bottle or a water bottle like that. Can you change that?",
       "note": "It sounds like a waterfall; it should be water poured from a bottle.",
       "plan": "Now: the cap twisted off, a real recording of water poured into a glass while the stream runs, and the cap twisted back on; no rushing waterfall (Sound D).",
       "candidates": [],
@@ -3050,154 +2828,132 @@
     },
     "cactus": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "strawberry": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "cookie": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "bee": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "blob": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "cluster-fly": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "may-beetle": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "millipede": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "bumblebee": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "blueberry": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "grape": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "tomatoes": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "basket": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "rubber-duck-real": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "marble-bust": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "ukulele": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "boombox": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "croissant-real": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "pomegranate": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "pencil-real": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "basketball": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "soccer-ball": {
       "status": "ready",
-      "said": "(Hands-on H1, October 8, 2026) New: its landing in Hands-on, to hear on the Sound Board. Its tap sound is unchanged.",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "Now: in Hands-on, a thrown soccer ball lands with its own sound, from its tap's own cues (louder the harder it lands). On the board: three landings, hard to soft.",
       "candidates": [
@@ -3232,7 +2988,6 @@
     },
     "american-football": {
       "status": "ready",
-      "said": "(Hands-on H1, October 8, 2026) New: its landing in Hands-on, to hear on the Sound Board. Its tap sound is unchanged.",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "Now: in Hands-on, a thrown american football lands with its own sound, from its tap's own cues (louder the harder it lands). On the board: three landings, hard to soft.",
       "candidates": [
@@ -3267,7 +3022,6 @@
     },
     "rugby-ball": {
       "status": "ready",
-      "said": "(Hands-on H1, October 8, 2026) New: its landing in Hands-on, to hear on the Sound Board. Its tap sound is unchanged.",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "Now: in Hands-on, a thrown rugby ball lands with its own sound, from its tap's own cues (louder the harder it lands). On the board: three landings, hard to soft.",
       "candidates": [
@@ -3305,7 +3059,6 @@
     },
     "volleyball": {
       "status": "ready",
-      "said": "(Hands-on H1, October 8, 2026) New: its landing in Hands-on, to hear on the Sound Board. Its tap sound is unchanged.",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "Now: in Hands-on, a thrown volleyball lands with its own sound, from its tap's own cues (louder the harder it lands). On the board: three landings, hard to soft.",
       "candidates": [
@@ -3340,14 +3093,12 @@
     },
     "water-polo-ball": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "ping-pong-ball": {
       "status": "ready",
-      "said": "(Hands-on H1, October 8, 2026) New: its landing in Hands-on, to hear on the Sound Board. Its tap sound is unchanged.",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "Now: in Hands-on, a thrown ping pong ball lands with its own sound, from its tap's own cues (louder the harder it lands). On the board: three landings, hard to soft.",
       "candidates": [
@@ -3385,7 +3136,6 @@
     },
     "cricket-ball": {
       "status": "ready",
-      "said": "(Hands-on H1, October 8, 2026) New: its landing in Hands-on, to hear on the Sound Board. Its tap sound is unchanged.",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "Now: in Hands-on, a thrown cricket ball lands with its own sound, from its tap's own cues (louder the harder it lands). On the board: three landings, hard to soft.",
       "candidates": [
@@ -3423,7 +3173,6 @@
     },
     "dodgeball": {
       "status": "ready",
-      "said": "(Hands-on H1, October 8, 2026) New: its landing in Hands-on, to hear on the Sound Board. Its tap sound is unchanged.",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "Now: in Hands-on, a thrown dodgeball lands with its own sound, from its tap's own cues (louder the harder it lands). On the board: three landings, hard to soft.",
       "candidates": [
@@ -3464,7 +3213,6 @@
     },
     "medicine-ball": {
       "status": "ready",
-      "said": "(Hands-on H1, October 8, 2026) New: its landing in Hands-on, to hear on the Sound Board. Its tap sound is unchanged.",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "Now: in Hands-on, a thrown medicine ball lands with its own sound, from its tap's own cues (louder the harder it lands). On the board: three landings, hard to soft.",
       "candidates": [
@@ -3502,7 +3250,6 @@
     },
     "lacrosse-ball": {
       "status": "ready",
-      "said": "(Hands-on H1, October 8, 2026) New: its landing in Hands-on, to hear on the Sound Board. Its tap sound is unchanged.",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "Now: in Hands-on, a thrown lacrosse ball lands with its own sound, from its tap's own cues (louder the harder it lands). On the board: three landings, hard to soft.",
       "candidates": [
@@ -3537,7 +3284,6 @@
     },
     "squash-ball": {
       "status": "ready",
-      "said": "(Hands-on H1, October 8, 2026) New: its landing in Hands-on, to hear on the Sound Board. Its tap sound is unchanged.",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "Now: in Hands-on, a thrown squash ball lands with its own sound, from its tap's own cues (louder the harder it lands). On the board: three landings, hard to soft.",
       "candidates": [
@@ -3575,7 +3321,6 @@
     },
     "bouncy-ball": {
       "status": "ready",
-      "said": "(Hands-on H1, October 8, 2026) New: its landing in Hands-on, to hear on the Sound Board. Its tap sound is unchanged.",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "Now: in Hands-on, a thrown bouncy ball lands with its own sound, from its tap's own cues (louder the harder it lands). On the board: three landings, hard to soft.",
       "candidates": [
@@ -3616,7 +3361,6 @@
     },
     "hockey-puck": {
       "status": "ready",
-      "said": "(Hands-on H1, October 8, 2026) New: its landing in Hands-on, to hear on the Sound Board. Its tap sound is unchanged.",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "Now: in Hands-on, a thrown hockey puck lands with its own sound, from its tap's own cues (louder the harder it lands). On the board: three landings, hard to soft.",
       "candidates": [
@@ -3648,7 +3392,6 @@
     },
     "shuttlecock": {
       "status": "ready",
-      "said": "(Hands-on H1, October 8, 2026) New: its landing in Hands-on, to hear on the Sound Board. Its tap sound is unchanged.",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "Now: in Hands-on, a thrown shuttlecock lands with its own sound, from its tap's own cues (louder the harder it lands). On the board: three landings, hard to soft.",
       "candidates": [
@@ -3686,7 +3429,6 @@
     },
     "flying-disc": {
       "status": "ready",
-      "said": "(Hands-on H1, October 8, 2026) New: its landing in Hands-on, to hear on the Sound Board. Its tap sound is unchanged.",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "Now: in Hands-on, a thrown flying disc lands with its own sound, from its tap's own cues (louder the harder it lands). On the board: three landings, hard to soft.",
       "candidates": [
@@ -3718,77 +3460,66 @@
     },
     "chest": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "sun": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "moon": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "jupiter": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "bacteriophage": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "bacterium": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "animal-cell": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "microglia": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "diatom": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "tardigrade": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "pollen": {
       "status": "site",
-      "said": "(October 2, 2026, review) can we make the sound just a little bit less, like, loud by default?",
       "note": "A little quieter by default.",
       "plan": "Now: The same puff and chirp, quieter (Sound C).",
       "candidates": [],
@@ -3796,14 +3527,12 @@
     },
     "snowflake": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "amoeba": {
       "status": "site",
-      "said": "(October 2, 2026, review) we can make that almost like rubber band bounce sound a little bit louder",
       "note": "Barely audible: louder rubbery jelly bounce, like the gummy bear's but no whistle or ding.",
       "plan": "Now: Louder: a soft squelch and a low rubbery wobble as each pseudopod pushes out; no whistle or ding (Sound C).",
       "candidates": [],
@@ -3811,14 +3540,12 @@
     },
     "palm": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "rose": {
       "status": "site",
-      "said": "(October 2, 2026, review) we could actually have, like a little soft sound of the petal of the rose falling on the ground ... we can use that for the rose's petal when it hits the ground.",
       "note": "Add a tiny, soft tap when a petal lands; reuse the daisies' petal-landing sound.",
       "plan": "Now: As before, plus the daisy's soft tap when the loose petal lands on the grass (Sound C).",
       "candidates": [],
@@ -3826,196 +3553,168 @@
     },
     "dandelion": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "tulip": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "lotus": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "mushroom": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "saguaro": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "coral": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "pinecone": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "acorn": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "succulent": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "bamboo": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "kelp": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "storm-cloud": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "candle": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "tornado": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "rainbow": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "waterfall": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "ocean-wave": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "geyser": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "cupcake": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "macarons": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "sushi": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "egg": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "orange": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "kiwi": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "pineapple": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "grapes": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "avocado": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "rubber-duck": {
       "status": "ready",
-      "said": "(Hands-on H1, October 8, 2026) New: its Hands-on sound, to hear on the Sound Board. Its tap sound is unchanged.",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "Now: in Hands-on, a held press squeezes it with a rubber squeak; a landing squeaks softly.",
       "candidates": [
@@ -4043,217 +3742,186 @@
     },
     "menger-sponge": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "sierpinski": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "platonic": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "seashell-spiral": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "music-box": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "gift-box": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "umbrella": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "lamp": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "potion-bottle": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "telescope": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "sword-in-stone": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "dragon-egg": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "fish-school": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "butterfly": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "pufferfish": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "nautilus": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "sea-urchin": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "penguin": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "jack-o-lantern": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "snowman": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "patterned-egg": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "paper-lantern": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "diya": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "guitar": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "drum": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "xylophone": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "toy-piano": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "bus": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "sailboat": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "submarine": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "bicycle": {
       "status": "site",
-      "said": "(October 2, 2026, review) I feel like the bell is maybe not realistic. It could sound more like a real bell.",
       "note": "The bell sounds like a cartoon; use a real bicycle bell.",
       "plan": "Now: A real bicycle bell's ding-ding (Sound C).",
       "candidates": [],
@@ -4261,70 +3929,60 @@
     },
     "lighthouse": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "leaning-tower": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "parthenon": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "stonehenge": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "big-ben": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "taj-mahal": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "castle": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "pagoda": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "windmill": {
       "status": "approved",
-      "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
       "plan": "",
       "candidates": []
     },
     "shardball": {
       "status": "site",
-      "said": "(October 6, 2026, walkthrough) The sound when the bricks break, let's hear something else. I don't like the sound.",
       "note": "A new sound for a brick breaking.",
       "plan": "Now in the game (lane Arcade r2): a glazed brick breaks with a wooden marimba note, one note of a pentatonic scale per row (higher rows ring higher, so clearing a column climbs), and a short dry crumble as it falls apart; a stone brick with a low knock and a longer, gritty crumble. No glass ring. The ball's knocks off the paddle and the walls stay as they were.",
       "candidates": [
@@ -4427,7 +4085,6 @@
     },
     "page-breaker": {
       "status": "site",
-      "said": "(October 6, 2026, walkthrough) Like the sound is kind of weird. The building blocks kind of sound we should change, but the other sound when it hits stuff that's special to this game is okay.",
       "note": "A new sound for a word's block breaking; the game's other sounds stay.",
       "plan": "Now in the game (lane Arcade r2): a word's block tears off the page with a real paper flap (a recording, a touch higher or lower block by block) over a light crumple. The paddle's and the walls' knocks stay as they were.",
       "candidates": [
@@ -4533,7 +4190,6 @@
     },
     "stollen": {
       "status": "site",
-      "said": "(October 6, 2026, walkthrough) The Stollen ... has a weird clicky noise, kind of like a zipper. We can get rid of that, and the little note that plays is too loud.",
       "note": "No zipper-like clicking; the note is too loud.",
       "plan": "Now: just the two soft plucked notes, much quieter; the clicking rustle is gone (Sound D).",
       "candidates": [],
@@ -4541,7 +4197,6 @@
     },
     "orange-photo": {
       "status": "site",
-      "said": "(October 6, 2026, walkthrough) The orange photo kind of sounds like a bubble. We can make it really simple. It doesn't need to have two sounds, like two bubbles popping. You can remove one of them and then maybe make it a little bit more subtle.",
       "note": "One bubble, not two, and subtler.",
       "plan": "Now: one soft pop, quieter; the second bubble (the drips) is gone (Sound D).",
       "candidates": [],
@@ -4549,7 +4204,6 @@
     },
     "physalis": {
       "status": "site",
-      "said": "(October 6, 2026, walkthrough) The P-H-Y-S-A-L-I-S still has that clicking, or, like, zipper noise that I hate, and the twinkles don't need to be there.",
       "note": "No zipper-like clicking and no twinkles.",
       "plan": "Now: the berry's soft papery pop in its husk and a light landing; no clicking rustle, no twinkle (Sound D).",
       "candidates": [],
@@ -4557,7 +4211,6 @@
     },
     "crystal-gem": {
       "status": "site",
-      "said": "(October 6, 2026, walkthrough) The crystal, the sound is too overwhelming. Make it more subtle.",
       "note": "Too overwhelming; much subtler.",
       "plan": "Now: one quiet glassy ring, shorter; the sparkle is gone (Sound D).",
       "candidates": [],
@@ -4565,7 +4218,6 @@
     },
     "monkey-doll": {
       "status": "site",
-      "said": "(October 6, 2026, walkthrough) The monkey doll. The first sound that it makes, which is kind of like a rubber band sound, is fine, but the clicking sound that comes after that can be removed.",
       "note": "Keep the rubber-band sound; remove the clicking after it.",
       "plan": "Now: the rubber-band boing only; the clicking rustle after it is gone (Sound D).",
       "candidates": [],
@@ -4573,7 +4225,6 @@
     },
     "sunflower-photo": {
       "status": "site",
-      "said": "(October 6, 2026, walkthrough) The sunflower photo sound is terrible. It sounds like that clicking, stretching sound and wind. Neither of those things is really applicable here. Make it something subtle.",
       "note": "A new, subtle sound: no clicking, stretching or wind.",
       "plan": "Now: a soft, warm low chord as the flower lifts and a light landing; no clicking, flutter or wind (Sound D).",
       "candidates": [],
@@ -4581,7 +4232,6 @@
     },
     "white-roses": {
       "status": "site",
-      "said": "(October 6, 2026, walkthrough) The white rose still has the clicking noise. Should be removed, but the little ding of the glass is fine.",
       "note": "Remove the clicking; keep the glass ding.",
       "plan": "Now: the vase's glass ding only; the clicking rustle is gone (Sound D).",
       "candidates": [],
@@ -4589,7 +4239,6 @@
     },
     "bonsai-photo": {
       "status": "site",
-      "said": "(October 6, 2026, walkthrough) The bonsai tree photo still has the clicking noise. It should be removed.",
       "note": "Remove the clicking.",
       "plan": "Now: the pot's wooden knock only; the clicking rustle is gone (Sound D).",
       "candidates": [],
@@ -4597,7 +4246,6 @@
     },
     "mushroom-photo": {
       "status": "site",
-      "said": "(October 6, 2026, walkthrough) The mushroom photo still has the clicking noise. Remove it.",
       "note": "Remove the clicking.",
       "plan": "Now: the soft pop only; the clicking rustle is gone (Sound D).",
       "candidates": [],
@@ -4605,7 +4253,6 @@
     },
     "crochet-earth": {
       "status": "site",
-      "said": "(October 6, 2026, walkthrough) For the crow, Shay, Earth, you can remove the twinkle. We don't need the twinkle.",
       "note": "Remove the twinkle.",
       "plan": "Now: the soft boing only; the twinkle is gone (Sound D).",
       "candidates": [],
@@ -4613,7 +4260,6 @@
     },
     "maple-tree": {
       "status": "site",
-      "said": "(October 6, 2026, walkthrough) The golden maple has that clicking noise. I don't like it. The wind is all right, but make it more subtle.",
       "note": "Remove the clicking; the wind is all right but subtler.",
       "plan": "Now: a gentle gust of wind, about half as loud; the clicking rustle is gone (Sound D).",
       "candidates": [],
@@ -4621,7 +4267,6 @@
     },
     "peony": {
       "status": "site",
-      "said": "(October 6, 2026, walkthrough) The peonies in a vase has the clicking noise. We don't need it.",
       "note": "Remove the clicking.",
       "plan": "Now: the vase's glass note only; the clicking rustle is gone (Sound D).",
       "candidates": [],
@@ -4629,7 +4274,6 @@
     },
     "money-tree": {
       "status": "site",
-      "said": "(October 6, 2026, walkthrough) The money tree has a clicking noise. We don't need it.",
       "note": "Remove the clicking.",
       "plan": "Now: the pot's soft knock only; the clicking rustle is gone (Sound D).",
       "candidates": [],
@@ -4637,7 +4281,6 @@
     },
     "point-clouds": {
       "status": "site",
-      "said": "(October 6, 2026, walkthrough) For the point clouds, the sound effect, there's a wind effect and there's a twinkle effect. The twinkle is okay. The wind's a little bit too loud and overwhelming. You can make the wind more subtle. I think you can even make the twinkle a little bit more subtle as well.",
       "note": "The wind is too loud; make it subtler, and the twinkle a little subtler too.",
       "plan": "Now: the same lidar sweep with the airy wind at half its level and the twinkle a little quieter (Sound D).",
       "candidates": [],
@@ -4645,7 +4288,6 @@
     },
     "unit-cells": {
       "status": "ready",
-      "said": "",
       "note": "A new toy's sound, for the owner to hear.",
       "plan": "New (lane Lattices and orbitals): a small, clear glass clink as the view steps, and a soft wooden tick as the atoms settle.",
       "candidates": [],
@@ -4653,7 +4295,6 @@
     },
     "orbital-atlas": {
       "status": "ready",
-      "said": "",
       "note": "A new toy's sound, for the owner to hear.",
       "plan": "New (lane Lattices and orbitals): a soft, low whoosh as the orbital is cut open, and a quiet low ding as its cut face shows.",
       "candidates": [],
@@ -4661,7 +4302,6 @@
     },
     "solar-orbits": {
       "status": "ready",
-      "said": "(New toy, lane Space r4, October 7, 2026.)",
       "note": "A new labs toy: the solar system on real orbits.",
       "plan": "Space is silent: a soft, low breath as the view flies to the next planet, like the other real-space toys.",
       "candidates": [],
@@ -4669,7 +4309,6 @@
     },
     "sushi-boat": {
       "status": "ready",
-      "said": "(October 3, 2026, labs review) Keep the first sound; remove the second little beat.",
       "note": "Keep the first sound; remove the second little beat.",
       "plan": "Now: the wooden knock only, as the boat rocks; the little second beat is gone (Photoreal r3).",
       "round": "2026-10-08",
@@ -4677,7 +4316,6 @@
     },
     "seeded-loaf": {
       "status": "ready",
-      "said": "(October 3, 2026, labs review) It sounds like a zipper: something very subtle instead.",
       "note": "It sounds like a zipper: something very subtle instead.",
       "plan": "Now: one very soft thud as the loaf lands; no crunch (Photoreal r3).",
       "round": "2026-10-08",
@@ -4685,7 +4323,6 @@
     },
     "steak": {
       "status": "ready",
-      "said": "(October 3, 2026, labs review) Not the right sound; something fitting and not overwhelming.",
       "note": "Not the right sound; something fitting and not overwhelming.",
       "plan": "Now: a quiet, soft slap as the steak lands on each side (it flips over and back); no hiss (Photoreal r3).",
       "round": "2026-10-08",
@@ -4693,7 +4330,6 @@
     },
     "alum-crystal": {
       "status": "ready",
-      "said": "(October 3, 2026, labs review) Better, but remove the ding.",
       "note": "Better, but remove the ding.",
       "plan": "Now: no ding: a soft stony knock as the crystal is set back on its block (Photoreal r3).",
       "round": "2026-10-08",
@@ -4701,7 +4337,6 @@
     },
     "puffin": {
       "status": "ready",
-      "said": "(October 3, 2026, labs review) Use a real puffin's call.",
       "note": "Use a real puffin's call.",
       "plan": "Now: soft landings as it hops (no flutter); a real puffin's call, from a CC0 or CC BY recording, is still to come (Photoreal r3).",
       "round": "2026-10-08",
@@ -4709,7 +4344,6 @@
     },
     "toy-trex": {
       "status": "ready",
-      "said": "(October 3, 2026, labs review) They sound like wind: a subtle bounce sound instead.",
       "note": "They sound like wind: a subtle bounce sound instead.",
       "plan": "Now: a subtle plastic tap as the toy rocks on its feet; no roar or wind (Photoreal r3).",
       "round": "2026-10-08",
@@ -4717,7 +4351,6 @@
     },
     "elephant-souvenir": {
       "status": "ready",
-      "said": "(October 3, 2026, labs review) They sound like wind: a subtle bounce sound instead.",
       "note": "They sound like wind: a subtle bounce sound instead.",
       "plan": "Now: two soft, heavy steps as it turns; no wind (Photoreal r3).",
       "round": "2026-10-08",
@@ -4725,7 +4358,6 @@
     },
     "cave-lioness": {
       "status": "ready",
-      "said": "(October 3, 2026, labs review) Wind and far too loud: replace it.",
       "note": "Wind and far too loud: replace it.",
       "plan": "Now: one quiet, low, soft breath out as she looks round; no wind or roar (Photoreal r3).",
       "round": "2026-10-08",
@@ -4733,7 +4365,6 @@
     },
     "dog-plush": {
       "status": "ready",
-      "said": "(October 3, 2026, labs review) Sounds like a rubber band: replace it.",
       "note": "Sounds like a rubber band: replace it.",
       "plan": "Now: the soft thump of a plush landing, twice; no boing (Photoreal r3).",
       "round": "2026-10-08",
@@ -4741,7 +4372,6 @@
     },
     "bmx-bike": {
       "status": "ready",
-      "said": "(October 3, 2026, labs review) Remove the bell; a softer opening sound.",
       "note": "Remove the bell; a softer opening sound.",
       "plan": "Now: a soft, dull knock as it leans on its kickstand, and a lighter one as it rocks back; no bell (Photoreal r3).",
       "round": "2026-10-08",
@@ -4749,7 +4379,6 @@
     },
     "murex-shell": {
       "status": "ready",
-      "said": "(October 3, 2026, labs review) Remove the clicking; keep the ding, more subtle.",
       "note": "Remove the clicking; keep the ding, more subtle.",
       "plan": "Now: the ding only, quieter and shorter; no clicking (Photoreal r3).",
       "round": "2026-10-08",
@@ -4757,7 +4386,6 @@
     },
     "cactus-real": {
       "status": "ready",
-      "said": "(October 3, 2026, labs review) No clicking; softer notes, like the first cactus.",
       "note": "No clicking; softer notes, like the first cactus.",
       "plan": "Now: one soft plucked note, like the first cactus's; no clicking (Photoreal r3; a single note, as the sound lint keeps tunes to the music shelf).",
       "round": "2026-10-08",
@@ -4765,7 +4393,6 @@
     },
     "desk-globe": {
       "status": "ready",
-      "said": "(October 3, 2026, labs review) Spin it, with no wind or suction sound.",
       "note": "Spin it, with no wind or suction sound.",
       "plan": "Now: the globe spins in its stand, with one soft, hollow knock as it is flicked round; no wind or suction (Photoreal r3).",
       "round": "2026-10-08",
@@ -4773,7 +4400,6 @@
     },
     "cherry-blossom-photo": {
       "status": "ready",
-      "said": "(October 3, 2026, labs review) The bounce is fine; no twinkle.",
       "note": "The bounce is fine; no twinkle.",
       "plan": "Now: the bounce's soft flutter only; no twinkle (Photoreal r3).",
       "round": "2026-10-08",
@@ -4781,7 +4407,6 @@
     },
     "triceratops-skull": {
       "status": "ready",
-      "said": "(Photoreal r3, October 8, 2026) A new toy: its first sound, to hear on the Sound Board.",
       "note": "New toy (lane Photoreal r3).",
       "plan": "Now: A low, soft knock of bone as the skull turns to look.",
       "round": "2026-10-08",
@@ -4789,7 +4414,6 @@
     },
     "cone-shell": {
       "status": "ready",
-      "said": "(Photoreal r3, October 8, 2026) A new toy: its first sound, to hear on the Sound Board.",
       "note": "New toy (lane Photoreal r3).",
       "plan": "Now: A soft porcelain tick as the shell turns.",
       "round": "2026-10-08",
@@ -4797,7 +4421,6 @@
     },
     "celestial-globe": {
       "status": "ready",
-      "said": "(Photoreal r3, October 8, 2026) A new toy: its first sound, to hear on the Sound Board.",
       "note": "New toy (lane Photoreal r3).",
       "plan": "Now: A gentle wooden creak as the globe is set turning.",
       "round": "2026-10-08",
@@ -4805,7 +4428,6 @@
     },
     "armillary-sphere": {
       "status": "ready",
-      "said": "(Photoreal r3, October 8, 2026) A new toy: its first sound, to hear on the Sound Board.",
       "note": "New toy (lane Photoreal r3).",
       "plan": "Now: A quiet brass ring as the inner rings turn.",
       "round": "2026-10-08",
@@ -4813,7 +4435,6 @@
     },
     "stannern-meteorites": {
       "status": "ready",
-      "said": "(Photoreal r3, October 8, 2026) A new toy: its first sound, to hear on the Sound Board.",
       "note": "New toy (lane Photoreal r3).",
       "plan": "Now: Five soft stony thuds as the stones land, one after another.",
       "round": "2026-10-08",
@@ -4821,7 +4442,6 @@
     },
     "fluorite-crystal": {
       "status": "ready",
-      "said": "(Photoreal r3, October 8, 2026) A new toy: its first sound, to hear on the Sound Board.",
       "note": "New toy (lane Photoreal r3).",
       "plan": "Now: A low, soft hum while the lamp is on.",
       "round": "2026-10-08",
@@ -4829,7 +4449,6 @@
     },
     "ammonite-agate": {
       "status": "ready",
-      "said": "(Photoreal r3, October 8, 2026) A new toy: its first sound, to hear on the Sound Board.",
       "note": "New toy (lane Photoreal r3).",
       "plan": "Now: A stone-on-wood knock as the fossil is laid on its other face.",
       "round": "2026-10-08",
@@ -4837,7 +4456,6 @@
     },
     "morasko-meteorite": {
       "status": "ready",
-      "said": "(Photoreal r3, October 8, 2026) A new toy: its first sound, to hear on the Sound Board.",
       "note": "New toy (lane Photoreal r3).",
       "plan": "Now: A deep, quiet ring of iron.",
       "round": "2026-10-08",
@@ -4845,7 +4463,6 @@
     },
     "pyrite-cubes": {
       "status": "ready",
-      "said": "(Photoreal r3, October 8, 2026) A new toy: its first sound, to hear on the Sound Board.",
       "note": "New toy (lane Photoreal r3).",
       "plan": "Now: A small, bright clink.",
       "round": "2026-10-08",
@@ -4853,7 +4470,6 @@
     },
     "megalodon-tooth": {
       "status": "ready",
-      "said": "(Photoreal r3, October 8, 2026) A new toy: its first sound, to hear on the Sound Board.",
       "note": "New toy (lane Photoreal r3).",
       "plan": "Now: A dull stone tap as the tooth is laid on its other side.",
       "round": "2026-10-08",
@@ -4861,7 +4477,6 @@
     },
     "volume-viewer": {
       "status": "ready",
-      "said": "(The walkthrough of October 9, 2026, triage Fix10) The volume viewer's sound is wrong: no click and no rising \"vroom\".",
       "note": "No click and no rising hum.",
       "plan": "Now in the site (lane Fix10): a tap slides a film onto a lightbox (a papery slip and a soft settle); Play has its own dark, soft rush for each pass of the cut; the drag is silent. On the board: the tap, then Play's two rushes.",
       "candidates": [
@@ -4908,7 +4523,6 @@
     },
     "photo-dash": {
       "status": "ready",
-      "said": "(October 9, 2026, walkthrough) Give the coin a better sound.",
       "note": "A better sound for catching a spark (the coin).",
       "plan": "Now in the game (lane Arcade r3): two quick bright bell notes up a fourth (B5, then E6) with a faint glint, in place of the old scattered sparkle. Each ball also lands with its own sound: the glass marble clinks, the steel ball rings, the beach ball thumps hollow, and the tennis ball pocks.",
       "candidates": [
@@ -4988,7 +4602,6 @@
     },
     "note-rider": {
       "status": "ready",
-      "said": "(October 9, 2026, walkthrough) Notes ring on too long, like a held sustain pedal. Add guitar and other instruments, the way rhythm games do.",
       "note": "Each note should stop at its own length; add guitar and other instruments to choose from.",
       "plan": "Now in the game (lane Arcade r3): a caught note lasts its own length. On the keyboards the key lifts and the damper falls when the note ends; a plucked string fades over about the note's length. Seven instruments to pick from a row of buttons in the game (and the Instrument option): piano, guitar, steel guitar, harp, organ, synth, and vibes. A recording still plays its own slices. Each candidate below is the start of Ode to Joy as the game plays it.",
       "candidates": [
@@ -5019,7 +4632,7 @@
             },
             {
               "voice": "grand",
-              "f": 392.0,
+              "f": 392,
               "vol": 0.8,
               "hold": 0.55,
               "at": 0.83
@@ -5053,7 +4666,7 @@
             },
             {
               "voice": "nylon",
-              "f": 392.0,
+              "f": 392,
               "vol": 0.85,
               "decay": 0.772,
               "at": 0.83
@@ -5090,7 +4703,7 @@
             },
             {
               "voice": "pluck",
-              "f": 392.0,
+              "f": 392,
               "vol": 0.75,
               "bright": 0.65,
               "decay": 0.772,
@@ -5125,7 +4738,7 @@
             },
             {
               "voice": "harp",
-              "f": 392.0,
+              "f": 392,
               "vol": 0.85,
               "decay": 0.54,
               "at": 0.83
@@ -5159,7 +4772,7 @@
             },
             {
               "voice": "organ",
-              "f": 392.0,
+              "f": 392,
               "vol": 0.55,
               "hold": 0.55,
               "at": 0.83
@@ -5193,7 +4806,7 @@
             },
             {
               "voice": "synth",
-              "f": 392.0,
+              "f": 392,
               "vol": 0.55,
               "hold": 0.55,
               "at": 0.83
@@ -5227,7 +4840,7 @@
             },
             {
               "voice": "vibes",
-              "f": 392.0,
+              "f": 392,
               "vol": 0.8,
               "hold": 0.55,
               "at": 0.83
@@ -5238,7 +4851,6 @@
     },
     "qr-anatomy": {
       "status": "ready",
-      "said": "(The walkthrough of October 10, 2026, triage QR r5) How a QR code works: the wind is too loud; make it quieter.",
       "note": "The wind under the tap, quieter.",
       "plan": "Now in the site (lane QR r5): the soft breath under the tap at about a third of its old level (0.07 to 0.025); the light wooden knock as a part lifts is a little louder (0.16 to 0.26), so the tap is still heard.",
       "candidates": [
@@ -5265,7 +4877,6 @@
     },
     "qr-three": {
       "status": "ready",
-      "said": "(The walkthrough of October 10, 2026, triage QR r5) Three QR codes in one: the whoosh when the codes separate is too loud; make it quieter.",
       "note": "The whoosh as the codes come apart, quieter.",
       "plan": "Now in the site (lane QR r5): the whoosh as the three codes slide apart at a third of its old level (0.12 to 0.04); the soft knock as they come back together stays.",
       "candidates": [
@@ -5293,7 +4904,6 @@
     },
     "barcodes": {
       "status": "ready",
-      "said": "(The walkthrough of October 10, 2026, triage QR r5) Other barcodes: drop the note that plays at the end.",
       "note": "No note at the end.",
       "plan": "Now in the site (lane QR r5): only the soft breath as the scanner's line sweeps, a little fuller (0.025 to 0.06) so the tap is still heard; the note of a read at the end is gone.",
       "candidates": [

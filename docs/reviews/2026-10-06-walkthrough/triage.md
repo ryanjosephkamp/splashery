@@ -1,10 +1,11 @@
 # Triage of the October 6 walkthrough review
 
-The Operator's triage of `notes.md`, item by item, and the lane that owns each. Anything the owner
-didn't mention is approved, and so are the site's layout and design on phone and desktop (he wants
-them kept). Lanes started on October 6–7, 2026: **Site r2** (`st2`, Sonnet), **Toy pages r2**
-(`tp2`, Sonnet), **Sound D** (`sndd`, Opus), **Arcade r2** (`arc2`, Opus) and **Fix9** (`fx9`,
-Opus). Later lanes, once slots free: **Space r3** and **Live r8**.
+The Operator's triage of the owner's review (his notes stay private), item by item, and the lane
+that owns each. Anything the owner didn't mention is approved, and so are the site's layout and
+design on phone and desktop (he wants them kept). Lanes started on October 6–7, 2026: **Site r2**
+(`st2`, Sonnet), **Toy pages r2** (`tp2`, Sonnet), **Sound D** (`sndd`, Opus), **Arcade r2**
+(`arc2`, Opus) and **Fix9** (`fx9`, Opus). Later lanes, once slots free: **Space r3** and **Live
+r8**.
 
 ## Kept as they are (the owner's approvals)
 
