@@ -1562,6 +1562,17 @@ export const TOYS = [
     pack: "atoms",
     tags: "salt diamond graphite ice crystal structure atoms chemistry",
   },
+  // ---- Pack: proto-field-lines (Codex prototype) ----
+  {
+    id: "field-lines",
+    label: "Electric field lines",
+    category: "atoms",
+    kind: "kit",
+    pack: "proto-field-lines",
+    labs: true,
+    tags: "electric field lines charge dipole coulomb force probe physics test charge",
+    camera: { yaw: 0.08, pitch: 0.12, roll: 0, distance: 1.55 },
+  },
   // ---- Pack: lattices (lane Lattices and orbitals; labs) ----
   {
     id: "unit-cells",
