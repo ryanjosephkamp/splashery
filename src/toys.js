@@ -3937,6 +3937,17 @@ export const TOYS = [
     camera: { yaw: 0, pitch: 0.5, roll: 0, distance: 3.4 },
   },
   // ---- End of pack: light-lab ----
+  // ---- Pack: proto-normal-modes (Codex prototype) ----
+  {
+    id: "normal-modes",
+    label: "Coupled oscillators",
+    category: "science",
+    kind: "kit",
+    pack: "proto-normal-modes",
+    labs: true,
+    tags: "normal modes coupled oscillators masses springs track eigenvalues frequency physics",
+    camera: { yaw: 0, pitch: 0, roll: 0, distance: 3.0 },
+  },
   // ---- Pack: science (lane Science) ----
   {
     id: "thermal-ellipsoids",

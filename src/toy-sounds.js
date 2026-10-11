@@ -12,6 +12,14 @@
 const TOY_PIANO_SONG = "C5 C5 G5 G5 A5 A5 G5 - F5 F5 E5 E5 D5 D5 C5";
 
 export const TOY_SOUNDS = {
+  // One illustrative, synthesized hum per mass; the recipe selects the mass count.
+  "normal-modes": [
+    { voice: "hum", f: 110, to: 1, decay: 3.6, bright: 0.05, vol: 0.13 },
+    { voice: "hum", f: 139, to: 1, decay: 3.6, bright: 0.05, vol: 0.13 },
+    { voice: "hum", f: 175, to: 1, decay: 3.6, bright: 0.05, vol: 0.13 },
+    { voice: "hum", f: 220, to: 1, decay: 3.6, bright: 0.05, vol: 0.13 },
+    { voice: "hum", f: 277, to: 1, decay: 3.6, bright: 0.05, vol: 0.13 },
+  ],
   // ---- Photoreal r2 (lane Photoreal r2) ----
   "heart-donut": { voice: "squish", pitch: 1.3, bright: 0.5, decay: 0.5 },
   // Photoreal r3 (the owner's review of October 3, 2026): the first sound only, as the boat rocks.

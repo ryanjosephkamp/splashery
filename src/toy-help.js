@@ -21,6 +21,12 @@
 // the toy's recipe and against a real source for every fact.
 
 export const TOY_HELP = {
+  "normal-modes": {
+    howTo:
+      "Drag a mass to set its start position, or choose a mode in Toy. Tap the track to release.",
+    about:
+      "Equal masses slide on an ideal, frictionless track, joined by equal springs with fixed ends. Drag the colored masses to set their displacements, or choose a pure normal mode in the Toy tab. Tap near the center to release them. Each mass moves separately, and the springs stretch between them.\n\nThe motion is solved from the chain's eigenvalues. The Toy tab shows the mode frequencies in hertz; mass is in kilograms, and spring stiffness is in newtons per meter. A release runs for 3.6 seconds, followed by a labeled 0.6-second reset to your setup. The reset is a replay convenience, not part of the physical solution. Turn on sound to hear a different illustrative hum for each mass; these audible pitches are not the mechanical frequencies. The two-mass option checks the familiar frequencies √(k/m) and √(3k/m), in radians per second.",
+  },
   // ---- Photoreal r3 (lane Photoreal r3) ----
   "triceratops-skull": {
     howTo: "Tap it to make it look at you; drag to turn it.",
