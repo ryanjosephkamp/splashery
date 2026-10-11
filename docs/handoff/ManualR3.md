@@ -94,7 +94,8 @@ the link list takes Wikipedia articles and the Porter-Duff DOI), through batch 5
 `ad961bec`). The new round is live at /manual/. The owner may ask for layout changes after he reads
 it live. The older notes below are the record of the two parts.
 
-**Left to do (not started):**
+**Left to do (this was the list on October 10; round 4, in [ManualR4.md](ManualR4.md), built the
+demos, the budget table, and the site page):**
 
 - The railroad diagram of the grammar (`grammar-railroad`) and the other demo placeholders:
   `gaussian-3d`, `splat-numbers`, `bell-1d-to-3d`, `projection`, `sort-blend`, `windmill-parts`,

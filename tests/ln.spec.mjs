@@ -334,7 +334,7 @@ test.describe("the manual page", () => {
     const pdf = fs.readFileSync("manual/tinkerers-manual.pdf");
     const pages = (pdf.toString("latin1").match(/\/Type\s*\/Page[^s]/g) || []).length;
     expect(pages).toBeGreaterThanOrEqual(25);
-    expect(pdf.length).toBeLessThan(6e6);
+    expect(pdf.length).toBeLessThan(8e6); // 7 MB with the print stills of the live demos (Manual r4)
   });
 });
 
