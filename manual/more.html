@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- HEAD:START (written by manual/build-pages.mjs; do not edit by hand) -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>What else Splashery does now · The Tinkerer's Manual</title>
+    <meta
+      name="description"
+      content="What else Splashery does now. The Tinkerer's Manual: how to program Gaussian splats in Splashery."
+    />
+    <link rel="stylesheet" href="manual.css" />
+    <link rel="stylesheet" href="../site/assets/outline.css" />
+
+    <script type="module" src="fold.js"></script>
+    <script type="module" src="nav.js"></script>
+    <!-- HEAD:END -->
+  </head>
+  <body>
+    <main>
+      <!-- NAV:TOP:START (written by manual/build-pages.mjs; do not edit by hand) -->
+      <div class="outline no-print manual-nav">
+        <button
+          type="button"
+          class="outline-toggle"
+          aria-expanded="false"
+          aria-controls="manual-contents"
+        >
+          <span class="outline-label">Contents</span
+          ><span class="outline-now">What else Splashery does now</span
+          ><svg
+            class="outline-chevron"
+            viewBox="0 0 16 16"
+            width="16"
+            height="16"
+            aria-hidden="true"
+          >
+            <path
+              d="m3.5 6 4.5 4.5L12.5 6"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </button>
+        <nav class="outline-panel" id="manual-contents" aria-label="The manual's chapters" hidden>
+          <ol>
+            <li><a href="index.html">Contents</a></li>
+            <li><a href="splat.html">Chapter 1: What a splat is</a></li>
+            <li><a href="toy.html">Chapter 2: How a toy is built</a></li>
+            <li><a href="language.html">Chapter 3: The splat equation language</a></li>
+            <li><a href="gallery.html">Chapter 4: A gallery of programs</a></li>
+            <li><a href="pictures.html">Chapter 5: Pictures, screens, and your own input</a></li>
+            <li><a href="coming.html">Chapters 6 to 10: coming next</a></li>
+            <li>
+              <a href="more.html" aria-current="page">What else Splashery does now</a>
+              <ol class="outline-sub" aria-label="In this chapter">
+                <li><a href="#hands-on-physics">Hands-on physics</a></li>
+                <li><a href="#the-qr-code-toy">The QR code toy</a></li>
+                <li><a href="#captures-and-file-formats">Captures and file formats</a></li>
+                <li><a href="#camera-microphone-and-screen">Camera, microphone, and screen</a></li>
+                <li><a href="#books-albums-and-frames">Books, albums, and frames</a></li>
+                <li><a href="#studio-sound-and-photos">Studio: sound and photos</a></li>
+                <li><a href="#models-to-splats">Models to splats</a></li>
+                <li><a href="#worlds">Worlds</a></li>
+                <li>
+                  <a href="#fluids-songs-and-smooth-bodies">Fluids, songs, and smooth bodies</a>
+                </li>
+                <li>
+                  <a href="#solid-fine-and-dots-and-the-detail-you-see"
+                    >Solid, Fine, and Dots, and the detail you see</a
+                  >
+                </li>
+                <li><a href="#the-viewer-s-controls">The viewer's controls</a></li>
+              </ol>
+            </li>
+            <li><a href="unique.html">What Splashery can do that other splat tools can't</a></li>
+            <li><a href="built.html">How Splashery is built</a></li>
+            <li><a href="share.html">Share links and QR codes</a></li>
+            <li><a href="experiments.html">Open questions: other choices, not tried yet</a></li>
+            <li><a href="later.html">What comes later: Code a toy</a></li>
+            <li><a href="glossary.html">Glossary</a></li>
+            <li><a href="reading.html">Further reading</a></li>
+            <li><a href="references.html">References</a></li>
+            <li><a href="card.html">Quick reference</a></li>
+          </ol>
+        </nav>
+      </div>
+      <nav class="pager no-print" aria-label="Previous and next chapter, top">
+        <a class="pager-prev" rel="prev" href="coming.html"
+          ><span class="pager-word">← Previous</span
+          ><span class="pager-title">Chapters 6 to 10: coming next</span></a
+        ><a class="pager-next" rel="next" href="unique.html"
+          ><span class="pager-word">Next →</span
+          ><span class="pager-title">What Splashery can do that other splat tools can't</span></a
+        >
+      </nav>
+
+      <!-- NAV:TOP:END -->
+      <!-- ---- What else Splashery does now ---- -->
+      <h2 id="more">What else Splashery does now</h2>
+      <p>
+        This chapter lists what is on the site today, beyond the equation toy and picture toys you
+        have read about. It describes only what is built. The <b>labs switch</b> hides newer parts
+        until they are ready: add <code>?labs=1</code> to the site's address to turn it on (the
+        browser remembers it; <code>?labs=0</code> turns it off). Each paragraph says what is behind
+        it. The same list is a page on the site:
+        <a href="../site/learn/can-do/" target="_blank" rel="noopener">What Splashery can do</a>.
+      </p>
+      <!-- Sources: labs switch src/toys.js:3564-3575 (labsOn, ?labs=1 saved, ?labs=0 clears);
+           hands-on src/physics/hands-on.js:1-40, src/ui.js:2893-2897 (no labs gate in src/physics or
+           the buttons); QR src/qr/content.js:15-75, src/qr/field.js:1-15, src/qr/scan.js:1-5,
+           src/packs/qr.js:662-666 (never the Wi-Fi password in a link), qr-code labs: true in
+           src/toys.js; captures src/app.js:1372, src/loaders.js:9-24, 103, src/packs/photoreal-r2.js:1-24;
+           live src/live/live.js:1-25, src/packs/live.js:1-22; books docs/PACKS.md:469-486,
+           src/packs/pictures.js:1185-1215; albums docs/PACKS.md:487-501; Studio src/packs/studio.js:1-4,
+           src/packs/photo-3d.js:1-8; models src/packs/studio-models.js:1-8; worlds docs/WORLDS.md:1-20,
+           :29-46; fluids docs/PACKS.md:526-534, :587-593, :1244-1258; detail src/sharpness.js:1-30,
+           src/kernels.js:1-45, src/packs/splat-equation.js:404, :411-430, :475; viewer src/player.js:30-36,
+           src/app.js:1245-1265, docs/PACKS.md:384-402. -->
+
+      <h3 id="hands-on-physics">Hands-on physics</h3>
+      <p>
+        With the ✋ switch on, a drag picks up whatever is under your finger and a quick let-go
+        tosses it. It lands, bounces, and settles on the floor under the toy, inside an invisible
+        play area, and soft toys squish when they land. The ↺ button sends everything home. Most
+        toys play this way, scans included, as one rigid body
+        (<code>src/physics/hands-on.js</code>). A recipe can turn it off (<code>handsOn: false</code
+        >), and picture toys and still toys play only if the recipe opts in
+        (<code>handsLevel1</code>) or has joints. A recipe's <code>hands</code> block can instead
+        make its pieces separate bodies, so a toy can have its own interactions. This is not behind
+        the labs switch.
+      </p>
+
+      <h3 id="the-qr-code-toy">The QR code toy</h3>
+      <p>
+        The QR code toy makes a code from a link, plain text, a Wi-Fi network, a contact card, or an
+        email, and builds it from splats. Its motions (assemble, flip, burst, and return, and an
+        "alive" color wave) move each piece as a solid tile, and the alive wave keeps the gray
+        values a reader sees unchanged, so each frame still scans. A "Scan view" turns the code flat
+        to the camera, and after every change the toy renders that view and reads it back, to check
+        that it scans. The reader is the browser's own detector where there is one, and otherwise
+        the vendored jsQR library; nothing leaves the device. A Wi-Fi password is not kept in a
+        link. This toy is behind the labs switch.
+      </p>
+
+      <h3 id="captures-and-file-formats">Captures and file formats</h3>
+      <p>
+        The viewer opens <code>.ply</code>, <code>.sog</code>, <code>.splat</code>, and
+        <code>.spz</code> files (version 4 SPZ files, which need a decoder Splashery does not ship,
+        are refused with a message). Files can carry spherical harmonics, the view-dependent color
+        the kit's splats do not use. The Scans shelf holds captures with their licenses and credits.
+        The newer captures each ship as a full file and a lite file, and some keep a band of
+        spherical harmonics on the full file. Many of the newer captures are behind the labs switch.
+      </p>
+
+      <h3 id="camera-microphone-and-screen">Camera, microphone, and screen</h3>
+      <p>
+        A toy can read the microphone, the camera, or a shared screen, but only after you tap a
+        button for it. Nothing is requested before that tap. While a source is on, a small "Live"
+        pill with a Stop button shows at the top of the page, and the sound or pictures stay on your
+        device: nothing is sent anywhere, and nothing is recorded unless you ask. (One exception: a
+        recorder, such as the splat mirror's, records only after you tap Record, keeps the recording
+        on your device, and saves it only to a file you choose.) Two examples are the room echo
+        meter (clap, and it measures how long the room rings) and the splat mirror (your camera as
+        splats, with a depth model of about 27 MB that loads only after you start the camera). Both
+        are behind the labs switch.
+      </p>
+
+      <h3 id="books-albums-and-frames">Books, albums, and frames</h3>
+      <p>
+        Your book turns the pages of a PDF as paper: a page is a leaf with a front and a back, the
+        engine can re-sort the splats of a turning page where it stands, and a turn waits until the
+        next page is ready so it never shows a blank one. The words of a PDF page are available from
+        its text layer, and links in the PDF are tinted on the page. The photo album opens several
+        photos at once, and the picture frame lets you list them and move each up or down. These
+        toys are behind the labs switch.
+      </p>
+
+      <h3 id="studio-sound-and-photos">Studio: sound and photos</h3>
+      <p>
+        The Studio shelf turns other things into splats on your device. The song landscape makes a
+        spectrogram of a song you open into a 3D field, and the Chladni plate shows sand finding a
+        plate's still lines. Photo to 3D runs a depth model on your device, works out how far each
+        part of a photo is, and rebuilds the photo as splats at their depths. The Studio toys are
+        behind the labs switch.
+      </p>
+
+      <h3 id="models-to-splats">Models to splats</h3>
+      <p>
+        The Model to splats toy opens a glTF or GLB file, an OBJ with its MTL, or an STL file and
+        turns it into splats on your device: flat discs on the surface, more of them where there is
+        detail, each sized to its neighbors so the surface closes, and colored from the model's
+        texture, vertex colors, or material. A toy's input can take several files at once, for a
+        glTF with its <code>.bin</code> and textures. This toy is behind the labs switch.
+      </p>
+
+      <h3 id="worlds">Worlds</h3>
+      <p>
+        A world is a small place you walk around in, built on your device from recipes and a seed.
+        It has a start screen, a list of places, collision, a character, and a camera that follows.
+        In splats mode everything you see is splats. In hybrid mode the ground, water, sky, and
+        signs are lit models, and only the props and the near grass stay splats, so "everything is
+        splats" holds for the toys but not for every part of every world. Worlds are behind the labs
+        switch (<code>worlds/?labs=1</code>).
+      </p>
+
+      <h3 id="fluids-songs-and-smooth-bodies">Fluids, songs, and smooth bodies</h3>
+      <p>
+        A recipe can declare a liquid, a gas or a flame with <code>k.fluid</code>. It is simulated
+        while the toy is open, and the engine loads only when such a toy opens. How it is drawn
+        depends on the fluid and on the device. On the page's own path
+        (<code>src/fluids/render.js</code>) each liquid particle is four small splats. On a device
+        with WebGPU, the liquids run on the graphics chip instead and are drawn as one smooth
+        surface, in a pass after the splats (<code>src/fluids/gpu/surface.js</code>). Smoke, steam,
+        and flames run on a grid on either kind of device and are drawn as a glowing volume
+        (<code>src/fluids/gpu/gas.js</code>); where the grid is off, their particles are splats. So
+        "made of splats" holds for the simplest path, but it is not the only way a fluid is drawn. A
+        keyboard toy can play songs from its own list, a MIDI file, or a tune pasted as ABC
+        notation, with every key, hammer, and string moving as a solid piece. Recipes can also join
+        shapes into one smooth body and place one toy's recipe inside another's (the anatomy atlas
+        does both). The Fluid lab, the bottle toys, and the anatomy atlas are behind the labs
+        switch.
+      </p>
+
+      <h3 id="solid-fine-and-dots-and-the-detail-you-see">
+        Solid, Fine, and Dots, and the detail you see
+      </h3>
+      <p>
+        The Splat equation toy has three looks. <b>Solid</b> lays a surface's splats flat along it
+        so they close into a clean shape, <b>Fine</b> uses up to four times as many smaller splats
+        within the device's budget, and <b>Dots</b> shows each splat you programmed as its own round
+        dot. The toy also asks for the sharper labs kernel. Beyond that toy, the viewer's Detail
+        setting (Auto, High, or Max, and with labs on a slider from 60,000 to 400,000 splats) lives
+        in your browser only, never in a link, and on every toy the canvas resolution drops while
+        you drag if frames are slow. Those two are not behind the labs switch; the toy and the
+        sharper kernel are.
+      </p>
+
+      <h3 id="the-viewer-s-controls">The viewer's controls</h3>
+      <p>
+        Focus mode hides everything but the toy (the <b>F</b> key or the focus button, and
+        <b>Esc</b> brings the rest back). On a computer, <b>[</b> folds the side panel and
+        <b>G</b> opens the gallery. A toy's input panel can take a typed text, a drawing, a file, a
+        binary file such as a sound, or several files at once. These controls are for everyone.
+      </p>
+
+      <!-- NAV:BOTTOM:START (written by manual/build-pages.mjs; do not edit by hand) -->
+      <nav class="pager no-print" aria-label="Previous and next chapter, bottom">
+        <a class="pager-prev" rel="prev" href="coming.html"
+          ><span class="pager-word">← Previous</span
+          ><span class="pager-title">Chapters 6 to 10: coming next</span></a
+        ><a class="pager-next" rel="next" href="unique.html"
+          ><span class="pager-word">Next →</span
+          ><span class="pager-title">What Splashery can do that other splat tools can't</span></a
+        >
+      </nav>
+      <footer>
+        <p>
+          The Tinkerer's Manual, first published September 28, 2026 and updated October 11, 2026.
+          Part of
+          <a href="https://ryanjosephkamp.github.io/splashery/" target="_blank" rel="noopener"
+            >Splashery</a
+          >, a toy box of 3D Gaussian splats that runs in your browser. Every picture here was made
+          with Splashery itself.
+        </p>
+      </footer>
+      <!-- NAV:BOTTOM:END -->
+    </main>
+  </body>
+</html>

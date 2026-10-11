@@ -1,0 +1,916 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- HEAD:START (written by manual/build-pages.mjs; do not edit by hand) -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Chapter 2: How a toy is built · The Tinkerer's Manual</title>
+    <meta
+      name="description"
+      content="Chapter 2: How a toy is built. The Tinkerer's Manual: how to program Gaussian splats in Splashery."
+    />
+    <link rel="stylesheet" href="manual.css" />
+    <link rel="stylesheet" href="../site/assets/outline.css" />
+
+    <script type="module" src="fold.js"></script>
+    <script type="module" src="nav.js"></script>
+    <script type="module" src="demos.js"></script>
+    <script type="module" src="demos2.js"></script>
+    <!-- HEAD:END -->
+  </head>
+  <body>
+    <main>
+      <!-- NAV:TOP:START (written by manual/build-pages.mjs; do not edit by hand) -->
+      <div class="outline no-print manual-nav">
+        <button
+          type="button"
+          class="outline-toggle"
+          aria-expanded="false"
+          aria-controls="manual-contents"
+        >
+          <span class="outline-label">Contents</span
+          ><span class="outline-now">Chapter 2: How a toy is built</span
+          ><svg
+            class="outline-chevron"
+            viewBox="0 0 16 16"
+            width="16"
+            height="16"
+            aria-hidden="true"
+          >
+            <path
+              d="m3.5 6 4.5 4.5L12.5 6"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </button>
+        <nav class="outline-panel" id="manual-contents" aria-label="The manual's chapters" hidden>
+          <ol>
+            <li><a href="index.html">Contents</a></li>
+            <li><a href="splat.html">Chapter 1: What a splat is</a></li>
+            <li>
+              <a href="toy.html" aria-current="page">Chapter 2: How a toy is built</a>
+              <ol class="outline-sub" aria-label="In this chapter">
+                <li><a href="#two-places-a-toy-lives">Two places a toy lives</a></li>
+                <li><a href="#shapes-from-the-kit">Shapes from the kit</a></li>
+                <li><a href="#splat-count">How many splats? What a bigger budget does</a></li>
+                <li><a href="#colors-from-functions">Colors from functions</a></li>
+                <li>
+                  <a href="#parts-that-hinge-spin-or-slide">Parts that hinge, spin or slide</a>
+                </li>
+                <li><a href="#behaviors">Behaviors</a></li>
+                <li><a href="#a-small-complete-recipe">A small, complete recipe</a></li>
+                <li><a href="#run-it">Run it yourself</a></li>
+              </ol>
+            </li>
+            <li><a href="language.html">Chapter 3: The splat equation language</a></li>
+            <li><a href="gallery.html">Chapter 4: A gallery of programs</a></li>
+            <li><a href="pictures.html">Chapter 5: Pictures, screens, and your own input</a></li>
+            <li><a href="coming.html">Chapters 6 to 10: coming next</a></li>
+            <li><a href="more.html">What else Splashery does now</a></li>
+            <li><a href="unique.html">What Splashery can do that other splat tools can't</a></li>
+            <li><a href="built.html">How Splashery is built</a></li>
+            <li><a href="share.html">Share links and QR codes</a></li>
+            <li><a href="experiments.html">Open questions: other choices, not tried yet</a></li>
+            <li><a href="later.html">What comes later: Code a toy</a></li>
+            <li><a href="glossary.html">Glossary</a></li>
+            <li><a href="reading.html">Further reading</a></li>
+            <li><a href="references.html">References</a></li>
+            <li><a href="card.html">Quick reference</a></li>
+          </ol>
+        </nav>
+      </div>
+      <nav class="pager no-print" aria-label="Previous and next chapter, top">
+        <a class="pager-prev" rel="prev" href="splat.html"
+          ><span class="pager-word">← Previous</span
+          ><span class="pager-title">Chapter 1: What a splat is</span></a
+        ><a class="pager-next" rel="next" href="language.html"
+          ><span class="pager-word">Next →</span
+          ><span class="pager-title">Chapter 3: The splat equation language</span></a
+        >
+      </nav>
+      <p class="no-print fold-all">
+        <button type="button" data-fold-all="open">Open all the folds</button>
+        <button type="button" data-fold-all="close">Close all the folds</button>
+        <span class="muted">Definitions, derivations, notes, and long tables start folded.</span>
+      </p>
+      <!-- NAV:TOP:END -->
+      <!-- ---- Level 2 ---- -->
+      <h2 id="toy"><span class="level">Chapter 2</span>How a toy is built</h2>
+      <p>
+        Nobody places Splashery's splats by hand. Most toys are
+        <b><span class="term" data-g="g-recipe">recipes</span></b
+        >: short programs that describe a toy with a kit of shapes, and the kit fills them with
+        splats when you open the toy. A recipe is a few kilobytes of code instead of megabytes of
+        splats, and because every random choice comes from a seed, it builds the same splats with
+        the same seed, options, and budget.
+      </p>
+      <p>
+        The <b><span class="term" data-g="g-kit">kit</span></b> is Splashery's toy-building library.
+        A recipe names shapes, colors, and moving parts; the kit fills them with splats in the
+        browser, spreading the budget evenly by area. A <b>kit toy</b> is built this way. A scan or
+        capture is loaded from a file instead.
+      </p>
+      <p>
+        Recipes are written in JavaScript. This level is a tour, so you can read one; the complete
+        guide is
+        <a
+          href="https://github.com/ryanjosephkamp/splashery/blob/main/docs/PACKS.md"
+          target="_blank"
+          rel="noopener"
+          >docs/PACKS.md</a
+        >
+        in the source code [<a href="references.html#ref-10">10</a>].
+      </p>
+
+      <h3 id="two-places-a-toy-lives">Two places a toy lives</h3>
+      <p>
+        A toy's name and shelf go in a <b>catalog</b> entry (<code>src/toys.js</code>), and the toy
+        itself in a <b>recipe</b> in a pack file (<code>src/packs/…js</code>):
+      </p>
+      <pre><code>{
+  id: "little-windmill",       // lower-case words joined by hyphens
+  label: "Little windmill",    // its name on the shelf
+  category: "objects",         // which shelf
+  kind: "kit",
+  pack: "my-pack",             // loads src/packs/my-pack.js
+}</code></pre>
+      <p>
+        A recipe has six basic parts, all optional except <code>build</code> (Level 5 adds
+        <code>pictures</code>, <code>input</code>, and <code>tiltLock</code>, and
+        <a
+          href="https://github.com/ryanjosephkamp/splashery/blob/main/docs/PACKS.md"
+          target="_blank"
+          rel="noopener"
+          >PACKS.md</a
+        >
+        has more, such as <code>grab</code> and <code>drag</code> for touch play):
+      </p>
+      <details class="fold tablefold">
+        <summary>Show the table: the six parts of a recipe</summary>
+        <div class="table-wrap">
+          <table>
+            <tbody>
+              <tr>
+                <td><code>build(k, o)</code></td>
+                <td>
+                  Describes the toy with the kit <code>k</code>. <code>o</code> holds the chosen
+                  options.
+                </td>
+              </tr>
+              <tr>
+                <td><code>options</code></td>
+                <td>
+                  Choices that rebuild the toy: a color, a style, a number of petals. They are saved
+                  in links.
+                </td>
+              </tr>
+              <tr>
+                <td><code>controls</code></td>
+                <td>
+                  Live values from 0 to 1: sliders, toggles that ease on and off, and pulses that
+                  jump to 1 and fall back.
+                </td>
+              </tr>
+              <tr>
+                <td><code>action</code></td>
+                <td>Which control a tap on the toy fires.</td>
+              </tr>
+              <tr>
+                <td><code>drive(t, c, out)</code></td>
+                <td>
+                  Runs every frame: from the time <code>t</code> and the controls <code>c</code>, it
+                  sets how the parts move.
+                </td>
+              </tr>
+              <tr>
+                <td><code>alive</code></td>
+                <td><code>true</code> when the toy moves by itself, so frames keep coming.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
+
+      <h3 id="shapes-from-the-kit">Shapes from the kit</h3>
+      <p>
+        <code>k.sphere(r)</code>, <code>k.ellipsoid(a, b, c)</code>, <code>k.box(w, h, d)</code>,
+        <code>k.roundedBox(w, h, d)</code>, <code>k.cylinder(r, h)</code>,
+        <code>k.cone(r0, r1, h)</code>, <code>k.torus(R, r)</code>, <code>k.disc(r)</code>,
+        <code>k.lathe(profile)</code> (a vase or a bottle, turned around an axis),
+        <code>k.tube(curve, radius)</code> (a stem, an arm, a knot),
+        <code>k.param((u, v) =&gt; [x, y, z])</code>, any surface you can write in two variables
+        (the same idea as Level 3; here <var>u</var> and <var>v</var> each run from 0 to 1), and
+        <code>k.radial((dir) =&gt; r)</code>, a blobby surface given by its distance from the middle
+        in every direction. Nothing is drawn until you add a shape:
+      </p>
+      <pre><code>k.add(k.sphere(0.2), { pos: [0, 1, 0], color: "#ffcc33", weight: 2 });</code></pre>
+      <p>
+        The kit shares the splats out between the shapes by their surface area, so the toy is evenly
+        dense; <code>weight</code> gives a small shape more (or <code>share</code> a fixed fraction
+        of all the splats). For free-form splats, like stars, sparks, and crumbs,
+        <code>k.cloud</code> places them one by one. After <code>build</code>, the kit centers the
+        toy and scales it to fit the view, so you can model in any units.
+      </p>
+
+      <h3 id="splat-count">How many splats? What a bigger budget does</h3>
+      <p>
+        The kit spreads a budget of splats over a toy's surface (see Level 1 for the four numbers).
+        It is natural to think more splats always look better. The Kit lab measured it
+        (<code>docs/lab/BUDGETS.md</code>, October 10, 2026). It drew the same toy from the same
+        view on the same simulated 390 by 844 phone at five budgets, changing only the count. The
+        table compares 140,000 (the Mid tier) with 200,000 (the High tier) for 24 views of 22 toys.
+      </p>
+      <h4>What the columns mean</h4>
+      <ul>
+        <li>
+          <b>Edge</b> is how many screen pixels the strongest edges take to go from 10 to 90 percent
+          of the way between the two colors. A sharp edge is narrow, so lower is sharper.
+        </li>
+        <li>
+          <b>Speckle</b> is how far pixels on the flatter half of the toy differ from the middle of
+          their neighbors: grit on a smooth surface. Lower is cleaner. Painted grain, like the oak's
+          bark, also counts, because it looks the same at phone size.
+        </li>
+        <li>
+          <b>Shimmer</b> is how much the fine detail changes from one frame to the next while the
+          toy turns a little. Lower is steadier.
+        </li>
+        <li>
+          <b>Area</b> is how much of the screen the toy covers, as a percent of the same view at
+          400,000 splats. Over 100 percent means thin parts drawn fatter than they are. The table
+          shows 60,000 and then 140,000 splats, because that is where the change is.
+        </li>
+      </ul>
+      <!-- BUDGET:START (written by manual/build-budget.mjs; do not edit by hand) -->
+      <p class="table-note">
+        <b>Same toy, same view, same phone: 140,000 splats → 200,000 splats.</b> Lower is better in
+        every column. <span class="swatch worse">Worse</span>
+        <span class="swatch better">Better</span> <span class="swatch same">The same</span> On a
+        screen, the table scrolls sideways inside its box.
+      </p>
+      <div
+        class="table-wrap budget-wrap"
+        tabindex="0"
+        role="region"
+        aria-label="Table: the same 24 views at 140,000 and 200,000 splats. Scrolls sideways."
+      >
+        <table class="budget">
+          <caption class="sr-only">
+            The same 24 views at 140,000 and 200,000 splats
+          </caption>
+          <thead>
+            <tr>
+              <th scope="col">Toy (view)</th>
+              <th scope="col">Edge (screen pixels)</th>
+              <th scope="col">Speckle</th>
+              <th scope="col">Shimmer</th>
+              <th scope="col">Area, 60k → 140k</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Lamp</th>
+              <td class="pair better">0.52 → 0.51</td>
+              <td class="pair worse">0.37 → 0.39</td>
+              <td class="pair worse">1.57 → 1.65</td>
+              <td class="pair">101% → 100%</td>
+            </tr>
+            <tr>
+              <th scope="row">American football</th>
+              <td class="pair better">0.50 → 0.48</td>
+              <td class="pair worse">0.61 → 0.70</td>
+              <td class="pair worse">1.49 → 1.60</td>
+              <td class="pair">100% → 100%</td>
+            </tr>
+            <tr>
+              <th scope="row">Hockey puck</th>
+              <td class="pair worse">0.27 → 0.29</td>
+              <td class="pair better">0.24 → 0.21</td>
+              <td class="pair better">1.01 → 0.99</td>
+              <td class="pair">102% → 101%</td>
+            </tr>
+            <tr>
+              <th scope="row">Klein bottle</th>
+              <td class="pair better">0.56 → 0.53</td>
+              <td class="pair worse">0.52 → 0.90</td>
+              <td class="pair worse">1.12 → 1.33</td>
+              <td class="pair">100% → 99%</td>
+            </tr>
+            <tr>
+              <th scope="row">Clock</th>
+              <td class="pair better">0.51 → 0.49</td>
+              <td class="pair worse">0.49 → 0.54</td>
+              <td class="pair worse">1.64 → 1.90</td>
+              <td class="pair">101% → 100%</td>
+            </tr>
+            <tr>
+              <th scope="row">Penguin</th>
+              <td class="pair better">0.51 → 0.49</td>
+              <td class="pair worse">0.42 → 0.46</td>
+              <td class="pair worse">2.92 → 3.13</td>
+              <td class="pair">–</td>
+            </tr>
+            <tr>
+              <th scope="row">Snow globe</th>
+              <td class="pair same">0.44 → 0.44</td>
+              <td class="pair worse">0.20 → 0.23</td>
+              <td class="pair worse">0.71 → 0.84</td>
+              <td class="pair">102% → 101%</td>
+            </tr>
+            <tr>
+              <th scope="row">White blood cell</th>
+              <td class="pair better">0.54 → 0.53</td>
+              <td class="pair worse">0.72 → 0.82</td>
+              <td class="pair worse">0.84 → 1.02</td>
+              <td class="pair">101% → 100%</td>
+            </tr>
+            <tr>
+              <th scope="row">Ocean liner</th>
+              <td class="pair better">0.46 → 0.44</td>
+              <td class="pair worse">0.31 → 0.35</td>
+              <td class="pair worse">1.69 → 2.09</td>
+              <td class="pair">106% → 104%</td>
+            </tr>
+            <tr>
+              <th scope="row">Marble</th>
+              <td class="pair better">0.46 → 0.45</td>
+              <td class="pair worse">1.43 → 1.65</td>
+              <td class="pair worse">2.63 → 2.96</td>
+              <td class="pair">100% → 100%</td>
+            </tr>
+            <tr>
+              <th scope="row">Sailboat</th>
+              <td class="pair better">0.50 → 0.46</td>
+              <td class="pair worse">0.51 → 0.59</td>
+              <td class="pair worse">2.26 → 2.93</td>
+              <td class="pair">103% → 103%</td>
+            </tr>
+            <tr>
+              <th scope="row">Toy piano</th>
+              <td class="pair better">0.60 → 0.56</td>
+              <td class="pair worse">0.22 → 0.25</td>
+              <td class="pair worse">1.93 → 2.32</td>
+              <td class="pair">111% → 105%</td>
+            </tr>
+            <tr>
+              <th scope="row">Your book</th>
+              <td class="pair worse">0.52 → 0.55</td>
+              <td class="pair same">0.00 → 0.00</td>
+              <td class="pair better">1.17 → 0.46</td>
+              <td class="pair">–</td>
+            </tr>
+            <tr>
+              <th scope="row">Chladni plate</th>
+              <td class="pair same">0.66 → 0.66</td>
+              <td class="pair same">0.26 → 0.26</td>
+              <td class="pair better">6.02 → 6.01</td>
+              <td class="pair">100% → 100%</td>
+            </tr>
+            <tr>
+              <th scope="row">Bicycle</th>
+              <td class="pair better">0.50 → 0.49</td>
+              <td class="pair worse">0.89 → 0.99</td>
+              <td class="pair worse">6.00 → 6.52</td>
+              <td class="pair">118% → 107%</td>
+            </tr>
+            <tr>
+              <th scope="row">Eiffel tower</th>
+              <td class="pair better">0.58 → 0.55</td>
+              <td class="pair worse">0.20 → 0.24</td>
+              <td class="pair worse">0.86 → 1.19</td>
+              <td class="pair">109% → 104%</td>
+            </tr>
+            <tr>
+              <th scope="row">Crystal lattice</th>
+              <td class="pair better">0.57 → 0.54</td>
+              <td class="pair worse">0.27 → 0.31</td>
+              <td class="pair worse">1.49 → 1.83</td>
+              <td class="pair">111% → 105%</td>
+            </tr>
+            <tr>
+              <th scope="row">Knot</th>
+              <td class="pair better">0.53 → 0.52</td>
+              <td class="pair worse">0.48 → 0.58</td>
+              <td class="pair worse">1.54 → 1.87</td>
+              <td class="pair">103% → 101%</td>
+            </tr>
+            <tr>
+              <th scope="row">Torus knot</th>
+              <td class="pair better">0.53 → 0.52</td>
+              <td class="pair worse">0.29 → 0.34</td>
+              <td class="pair worse">1.10 → 1.25</td>
+              <td class="pair">98% → 98%</td>
+            </tr>
+            <tr>
+              <th scope="row">Oak</th>
+              <td class="pair better">0.58 → 0.57</td>
+              <td class="pair worse">0.40 → 0.51</td>
+              <td class="pair worse">0.82 → 1.03</td>
+              <td class="pair">105% → 102%</td>
+            </tr>
+            <tr>
+              <th scope="row">Chess set</th>
+              <td class="pair better">0.58 → 0.52</td>
+              <td class="pair worse">0.14 → 0.15</td>
+              <td class="pair worse">2.44 → 3.09</td>
+              <td class="pair">106% → 103%</td>
+            </tr>
+            <tr>
+              <th scope="row">Dna</th>
+              <td class="pair better">0.51 → 0.50</td>
+              <td class="pair worse">0.50 → 0.57</td>
+              <td class="pair worse">4.06 → 4.53</td>
+              <td class="pair">–</td>
+            </tr>
+            <tr>
+              <th scope="row">Bicycle (close up, 0.5)</th>
+              <td class="pair better">0.53 → 0.52</td>
+              <td class="pair worse">0.36 → 0.42</td>
+              <td class="pair worse">2.78 → 3.25</td>
+              <td class="pair">118% → 107%</td>
+            </tr>
+            <tr>
+              <th scope="row">Chess set (close up, 0.6)</th>
+              <td class="pair better">0.60 → 0.54</td>
+              <td class="pair worse">0.08 → 0.09</td>
+              <td class="pair worse">1.50 → 2.01</td>
+              <td class="pair">103% → 101%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="table-note">
+        <b>All five budgets across all the views:</b> the middle value of each toy's change against
+        its own result at 140,000 splats.
+      </p>
+      <div
+        class="table-wrap budget-wrap"
+        tabindex="0"
+        role="region"
+        aria-label="Table: how each budget compares with 140,000 splats, across all the views. Scrolls sideways."
+      >
+        <table class="budget summary">
+          <caption class="sr-only">
+            How each budget compares with 140,000 splats
+          </caption>
+          <thead>
+            <tr>
+              <th scope="col">Budget</th>
+              <th scope="col">Edge</th>
+              <th scope="col">Speckle</th>
+              <th scope="col">Shimmer</th>
+              <th scope="col">Thin parts' area</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">60k</th>
+              <td>+11%</td>
+              <td>−23%</td>
+              <td>−36%</td>
+              <td>+1.2%</td>
+            </tr>
+            <tr>
+              <th scope="row">140k</th>
+              <td>–</td>
+              <td>–</td>
+              <td>–</td>
+              <td>–</td>
+            </tr>
+            <tr>
+              <th scope="row">200k</th>
+              <td>−2%</td>
+              <td>+14%</td>
+              <td>+18%</td>
+              <td>−0.8%</td>
+            </tr>
+            <tr>
+              <th scope="row">280k</th>
+              <td>−6%</td>
+              <td>+31%</td>
+              <td>+39%</td>
+              <td>−0.8%</td>
+            </tr>
+            <tr>
+              <th scope="row">400k</th>
+              <td>−9%</td>
+              <td>+52%</td>
+              <td>+61%</td>
+              <td>−1.2%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- COUNTS {"edgeBetter":20,"edgeSame":2,"edgeWorse":2,"speckleWorse":21,"speckleBetter":1,"shimmerWorse":21,"shimmerBetter":3} -->
+      <!-- BUDGET:END -->
+      <h4>What it shows</h4>
+      <ul>
+        <li>
+          <b
+            >Going from 140,000 to 200,000, speckle rose in 21 of the 24 views and shimmer rose in
+            21 of them</b
+          >
+          (the counts are from the table). Across all the views the middle change was 14 percent
+          more speckle and 18 percent more shimmer. Each splat gets smaller as the count goes up, so
+          the fine detail in a pixel comes from more, smaller splats that move in and out of it as
+          the view turns.
+        </li>
+        <li>
+          <b>Edges barely changed.</b> The most any edge gained between the two budgets was 0.06 of
+          a screen pixel, the middle change was 2 percent, and in two views the edge got a little
+          softer.
+        </li>
+        <li>
+          <b>The one place a bigger budget clearly helps is thin parts.</b> At 60,000 splats the
+          bicycle's frame and spokes cover 18 percent more of the screen than at 400,000; at 140,000
+          they are within 7 percent. Solid toys, like the clock or the marble, stay within 1.5
+          percent of the 400,000 view even at 60,000 splats.
+        </li>
+        <li>
+          <b>No holes open at the lower budgets.</b> A low budget makes thin parts fatter, not
+          broken.
+        </li>
+      </ul>
+      <p class="where">
+        What it does not show: one renderer (a software one, not a real phone's graphics chip), one
+        phone size, still views with a slow turn, and no frame rate you could trust. Scans (captured
+        toys) are not affected, because they load their own files. The kit lab's recommendation was
+        to keep the four tiers as they are. The full tables, the method, and the limits are in
+        <a
+          href="https://github.com/ryanjosephkamp/splashery/blob/main/docs/lab/BUDGETS.md"
+          target="_blank"
+          rel="noopener"
+          >docs/lab/BUDGETS.md</a
+        >
+        and the first round of this question is in
+        <code>docs/lab/SHARPNESS.md</code>.
+      </p>
+
+      <h3 id="colors-from-functions">Colors from functions</h3>
+      <p>
+        A color can be a fixed quantity or vector (<code>"#9c3b2c"</code>, or
+        <code>[r, g, b]</code> with each from 0 to 1; there are no color names), or it can be a
+        function that the kit calls for every splat. The function gets the splat's place
+        <code>c.p</code>, its surface direction <code>c.n</code>, its surface coordinates
+        <code>c.u</code> and <code>c.v</code>, and a random number and noise that come from the
+        seed. Return <code>null</code> to leave a hole:
+      </p>
+      <pre><code>color: (c) =&gt; (c.p[1] &gt; 0.5 ? "#ffffff" : "#3a7d44"), // snow above, grass below</code></pre>
+
+      <h3 id="parts-that-hinge-spin-or-slide">Parts that hinge, spin or slide</h3>
+      <p>
+        A <b>part</b> is a group of shapes that moves as one solid piece:
+        <code>k.part("lid", { pivot, axis })</code>. Every frame, <code>drive</code> tells each part
+        where to be: an <code>angle</code> about its axis (a lid on a hinge, a wheel that spins), an
+        <code>offset</code> (a drawer that slides), a <code>scale</code>, or <code>visible</code>. A
+        toy may have up to 15 parts. The treasure chest's lid is a part on a hinge.
+      </p>
+      <details class="fold why" id="why-parts">
+        <summary>Why this number? Fifteen parts</summary>
+        <p class="kind">
+          <span class="chip both">Our choice, near a limit</span> The format of the part number sets
+          the count; the shader's space makes it hard to raise.
+        </p>
+        <p>
+          Every splat carries the number of the part it belongs to, and that number gets only 4 bits
+          of a packed value, because the same value also holds two flags for the shader. Four bits
+          count 16 things. Number 0 is the body, which every toy has, so 15 parts are left to name.
+          Asking for a sixteenth stops the build with a message. The shader keeps three vector
+          values for each of the 16 parts (a rotation, a pivot, and an offset with visibility), 48
+          in all.
+        </p>
+        <p>
+          <b>If it were chosen differently.</b> More parts means repacking the part number so the
+          two flags move, moving the part table out of the shader's small set of uniform values and
+          into a texture, and checking real phones. That is a change to the engine, not to a recipe.
+          The kit has other ways to get many moving pieces: up to 48 tokens (game pieces moved and
+          turned by their own offsets) and up to 96 levers in 6 groups (the piano keys).
+        </p>
+        <p class="where">
+          Where it lives: <code>part</code> in <code>src/kit.js</code>; the part number in the
+          shader code of <code>src/effects.js</code>; <code>MAX_TOKENS</code> in
+          <code>src/motion.js</code>.
+        </p>
+      </details>
+      <details class="fold why" id="why-other-parts">
+        <summary>Could a toy use different parts?</summary>
+        <p class="kind"><span class="chip choice">Each recipe's choice</span></p>
+        <p>
+          The 15 is a limit on how many parts a toy can have. It comes from the 4-bit part number.
+          Which pieces become parts is up to each recipe. A recipe makes a part with
+          <code>k.part(name, { pivot, axis })</code> and puts shapes in it with <code>part:</code>.
+          The windmill makes one part for all four sails. A recipe could instead make one part per
+          sail, so each could turn on its own; it would then have used four of its 15.
+        </p>
+      </details>
+      <figure>
+        <div class="shots two">
+          <div>
+            <img src="img/toy-chest.jpg" alt="The treasure chest with its lid open" />
+            <p class="shot-label">The treasure chest: its lid is a part on a hinge.</p>
+          </div>
+          <div>
+            <img src="img/toy-graph-plotter.jpg" alt="The graph plotter drawing a sine wave" />
+            <p class="shot-label">The graph plotter: the a slider is a control.</p>
+          </div>
+        </div>
+      </figure>
+
+      <h3 id="behaviors">Behaviors</h3>
+      <p>
+        Some motion is too fine for parts: a flame that flickers, snow that falls, grass that sways.
+        A <b>behavior</b> moves each splat on its own on the graphics card:
+        <code>kind: "flame"</code>, <code>"twinkle"</code>, <code>"sway"</code>,
+        <code>"orbit"</code>, <code>"fall"</code>, <code>"wave"</code>, and more.
+        <b><span class="term" data-g="g-uvt">Morphs</span></b> give each splat a second place,
+        <code>to: (c) =&gt; [x, y, z]</code>, and slide it there as one of four channels goes from 0
+        to 1. The Splat equation toy's motion is made of morphs.
+      </p>
+
+      <h3 id="a-small-complete-recipe">A small, complete recipe</h3>
+      <p>
+        Here is a whole toy: a little windmill whose sails turn with a Wind slider, and a tap that
+        blows a gust, spinning them once more around.
+      </p>
+      <pre><code>import { mix } from "../src/kit.js";
+
+// A little windmill: a stone tower, a red cap, and four sails that turn in
+// the wind. A tap blows a gust that spins them once more around.
+export const RECIPES = {
+  "little-windmill": {
+    alive: true,
+    options: [{ key: "sails", label: "Sail color", type: "color", default: "#f2eee4" }],
+    controls: [
+      { key: "wind", label: "Wind", type: "slider", default: 0.4 },
+      { key: "gust", label: "Gust", type: "pulse", ease: 3 },
+    ],
+    action: { key: "gust", label: "Blow a gust" },
+    drive(t, c, out) {
+      // The wind turns the sails; a gust adds one extra turn, eased in and
+      // out, so they end where they would have been anyway.
+      const g = c.gust &gt; 0 ? 1 - c.gust : 0;
+      const extra = 2 * Math.PI * g * g * (3 - 2 * g);
+      out.parts.sails = { angle: t * (0.3 + 2 * c.wind) + extra };
+    },
+    build(k, o) {
+      // The tower: whitewashed stone, darker toward the ground.
+      k.add(k.cone(0.5, 0.3, 1.6), {
+        color: (c) =&gt; mix("#8b8f97", "#ece6d8", (c.p[1] + 0.8) / 1.6),
+        interior: 0.1,
+        core: "#6b5b4b",
+      });
+      // The cap.
+      k.add(k.cone(0.36, 0.02, 0.4), { pos: [0, 1.0, 0], color: "#9c3b2c" });
+      // The sails turn together, about an axis that points at you.
+      const sails = k.part("sails", { pivot: [0, 0.6, 0.42], axis: [0, 0, 1] });
+      k.add(k.sphere(0.07), { pos: [0, 0.6, 0.42], part: sails, color: "#4b3a2a" });
+      for (let i = 0; i &lt; 4; i++) {
+        const a = (i * Math.PI) / 2;
+        k.add(k.box(0.16, 0.9, 0.02), {
+          pos: [-0.5 * Math.sin(a), 0.6 + 0.5 * Math.cos(a), 0.44],
+          rot: [0, 0, (a * 180) / Math.PI],
+          part: sails,
+          color: o.sails,
+        });
+      }
+    },
+  },
+};</code></pre>
+      <figure>
+        <div class="shots two">
+          <div>
+            <img
+              src="img/toy-little-windmill.jpg"
+              alt="The little windmill built from the recipe above"
+            />
+            <p class="shot-label">This recipe, built by the kit.</p>
+          </div>
+          <div>
+            <img src="img/toy-windmill.jpg" alt="The Windmill toy on the shelf" />
+            <p class="shot-label">The Windmill on the shelf, a bigger toy built the same way.</p>
+          </div>
+        </div>
+      </figure>
+      <p>
+        Read it from the bottom up. <code>build</code> adds a cone for the tower (its color a
+        function of height), a smaller cone for the cap, and a part called "sails" with a hub and
+        four boxes, each turned a quarter turn more than the last. <code>drive</code> turns the
+        sails part: steadily with the wind, plus one extra turn while the gust pulse runs, eased
+        with the <b><span class="term" data-g="g-smoothstep">smoothstep</span></b> curve
+        3<var>g</var>² − 2<var>g</var>³ (an S-shaped ramp that rises from 0 to 1 and is flat at both
+        ends [<a href="references.html#ref-7">7</a>]) so it starts and ends gently. A full extra
+        turn lands the sails where they would have been anyway, so nothing jumps when the gust ends.
+      </p>
+      <section class="demo-live" data-demo="windmill-parts" id="demo-windmill">
+        <h4>Try it: which splats each line of the recipe made</h4>
+        <p class="hint">
+          This is the windmill from the recipe above, built right now by the real kit (12,000
+          splats). Point at a line of the recipe, or tap it, and the splats it made light up on the
+          windmill; the rest fade. The line that makes the <code>sails</code> part lights up
+          everything in that part. Then move the slider: the whole part turns as one solid piece
+          about its pivot, and the tower and cap stay still.
+        </p>
+        <div class="demo-grid">
+          <canvas
+            id="wm-canvas"
+            width="400"
+            height="460"
+            tabindex="0"
+            role="img"
+            aria-label="The windmill built from splats. Drag or use the arrow keys to turn the view."
+          ></canvas>
+          <div class="controls">
+            <!-- prettier-ignore -->
+            <div class="code-lines" role="group" aria-label="Lines of the windmill's recipe">
+              <button type="button" class="code-line" data-lit="tower" aria-pressed="false"><code>k.add(k.cone(0.5, 0.3, 1.6), {
+  color: (c) =&gt; mix("#8b8f97", "#ece6d8", (c.p[1] + 0.8) / 1.6),
+  interior: 0.1,
+  core: "#6b5b4b",
+});</code></button>
+              <button type="button" class="code-line" data-lit="cap" aria-pressed="false"><code>k.add(k.cone(0.36, 0.02, 0.4), { pos: [0, 1.0, 0], color: "#9c3b2c" });</code></button>
+              <button type="button" class="code-line" data-lit="sails" aria-pressed="false"><code>const sails = k.part("sails", { pivot: [0, 0.6, 0.42], axis: [0, 0, 1] });</code></button>
+              <button type="button" class="code-line" data-lit="hub" aria-pressed="false"><code>k.add(k.sphere(0.07), { pos: [0, 0.6, 0.42], part: sails, color: "#4b3a2a" });</code></button>
+              <button type="button" class="code-line" data-lit="blades" aria-pressed="false"><code>for (let i = 0; i &lt; 4; i++) {
+  const a = (i * Math.PI) / 2;
+  k.add(k.box(0.16, 0.9, 0.02), {
+    pos: [-0.5 * Math.sin(a), 0.6 + 0.5 * Math.cos(a), 0.44],
+    rot: [0, 0, (a * 180) / Math.PI],
+    part: sails,
+    color: o.sails,
+  });
+}</code></button>
+            </div>
+            <label
+              >Sails turn
+              <input type="range" id="wm-angle" min="0" max="360" step="1" value="0" /><output
+                id="wm-angle-out"
+                >0°</output
+              ></label
+            >
+            <div class="readout" id="wm-readout" aria-live="polite"></div>
+          </div>
+        </div>
+      </section>
+      <figure class="demo-still" data-demo-still="windmill-parts">
+        <img
+          src="img/demo-windmill.png"
+          alt="The windmill demo: the recipe's lines beside the windmill built from splats, with the sails lit"
+        />
+        <figcaption>
+          Interactive in the web version:
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/manual/toy.html#demo-windmill"
+            target="_blank"
+            rel="noopener"
+            >ryanjosephkamp.github.io/splashery/manual/toy.html#demo-windmill</a
+          >
+        </figcaption>
+      </figure>
+      <section class="demo-live" data-demo="smoothstep" id="demo-smoothstep">
+        <h4>Try it: smoothstep beside a straight ramp, and a turn that uses it</h4>
+        <p class="hint">
+          The curve 3<var>x</var>² − 2<var>x</var>³ on 0 to 1 is the solid line; a straight ramp is
+          the dashed one. Drag the point, use the arrow keys on the curve, or use the slider. The
+          two shapes below make the same one turn, one eased the straight way and one with
+          smoothstep, so you can see the gentle start and stop on the shape itself.
+        </p>
+        <div class="demo-grid">
+          <canvas
+            id="ss-canvas"
+            width="400"
+            height="300"
+            tabindex="0"
+            role="slider"
+            aria-label="x, from 0 to 1. Arrow keys move it."
+            aria-valuemin="0"
+            aria-valuemax="1"
+          ></canvas>
+          <div class="controls">
+            <label
+              >x <input type="range" id="ss-x" min="0" max="1" step="0.001" value="0.25" /><output
+                id="ss-x-out"
+                >0.25</output
+              ></label
+            >
+            <div class="row"><button type="button" id="ss-play">Play the turn</button></div>
+            <div class="readout" id="ss-readout" aria-live="polite"></div>
+          </div>
+        </div>
+        <canvas
+          id="ss-turn"
+          width="800"
+          height="260"
+          role="img"
+          aria-label="Two four-bladed shapes turning, one straight and one smoothstep"
+        ></canvas>
+      </section>
+      <figure class="demo-still" data-demo-still="smoothstep">
+        <img
+          src="img/demo-smoothstep.png"
+          alt="The smoothstep demo: an S-shaped curve beside a straight ramp, with two four-bladed shapes below"
+        />
+        <figcaption>
+          Interactive in the web version:
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/manual/toy.html#demo-smoothstep"
+            target="_blank"
+            rel="noopener"
+            >ryanjosephkamp.github.io/splashery/manual/toy.html#demo-smoothstep</a
+          >
+        </figcaption>
+      </figure>
+      <h3 id="run-it">Run it yourself</h3>
+      <p>
+        You can run the windmill on your own computer in five steps. You need a copy of the
+        Splashery source (download it from
+        <a href="https://github.com/ryanjosephkamp/splashery" target="_blank" rel="noopener"
+          >GitHub</a
+        >) and Python 3.
+      </p>
+      <ol>
+        <li>
+          <b>Save the recipe as a pack.</b> Copy the module above into
+          <code>src/packs/little-windmill.js</code>, or copy
+          <a href="example-recipe.js" target="_blank" rel="noopener">manual/example-recipe.js</a>.
+          Change its first line to <code>import { mix } from "../kit.js";</code>. A pack lives in
+          <code>src/packs/</code>, so the kit is one folder up. (The copy in
+          <code>manual/</code> says <code>../src/kit.js</code> because it sits beside
+          <code>src/</code>, not in it.)
+        </li>
+        <li>
+          <b>Add its catalog entry.</b> In <code>src/toys.js</code>, find the line
+          <code>export const TOYS = [</code> and paste this right after it:
+          <pre><code>{
+  id: "little-windmill",
+  label: "Little windmill",
+  category: "objects",
+  kind: "kit",
+  pack: "little-windmill",   // loads src/packs/little-windmill.js
+},</code></pre>
+          The <code>id</code> must match the key in the pack's <code>RECIPES</code>.
+        </li>
+        <li>
+          <b>Serve the folder.</b> In the source folder, run
+          <code>python3 -m http.server 8000 --bind 127.0.0.1</code>. The page needs a server because
+          browsers will not load ES modules from a file address.
+        </li>
+        <li>
+          <b>Open the toy.</b> Go to
+          <code>http://127.0.0.1:8000/embed/index.html?toy=little-windmill</code>. The embed page
+          opens a catalog toy by its id. The windmill turns by itself.
+        </li>
+        <li>
+          <b>Tap the windmill.</b> The tap runs the recipe's action, the <b>Blow a gust</b> pulse:
+          the sails spin one extra turn, easing in and out, and end where they would have been.
+        </li>
+      </ol>
+      <p>
+        <b>The same steps, as a prompt.</b> If you work with a coding assistant, paste this into it,
+        from inside your copy of the source folder:
+      </p>
+      <pre
+        class="prompt"
+      ><code>In this copy of the Splashery source, please do exactly these steps and nothing else:
+1. Create src/packs/little-windmill.js as a copy of manual/example-recipe.js, but change its
+   first line to: import { mix } from "../kit.js";
+2. In src/toys.js, right after the line "export const TOYS = [", add this entry:
+   { id: "little-windmill", label: "Little windmill", category: "objects", kind: "kit",
+     pack: "little-windmill" },
+3. Start a local server in the source folder: python3 -m http.server 8000 --bind 127.0.0.1
+4. Tell me to open http://127.0.0.1:8000/embed/index.html?toy=little-windmill and what to
+   expect: the sails turn by themselves, and a tap spins them one extra turn.</code></pre>
+      <div class="approx">
+        <p>
+          The Splat equation toy's text box takes equations (Level 3), not JavaScript recipes. A
+          recipe has to be a module in <code>src/packs/</code>, as above.
+        </p>
+      </div>
+
+      <!-- NAV:BOTTOM:START (written by manual/build-pages.mjs; do not edit by hand) -->
+      <nav class="pager no-print" aria-label="Previous and next chapter, bottom">
+        <a class="pager-prev" rel="prev" href="splat.html"
+          ><span class="pager-word">← Previous</span
+          ><span class="pager-title">Chapter 1: What a splat is</span></a
+        ><a class="pager-next" rel="next" href="language.html"
+          ><span class="pager-word">Next →</span
+          ><span class="pager-title">Chapter 3: The splat equation language</span></a
+        >
+      </nav>
+      <footer>
+        <p>
+          The Tinkerer's Manual, first published September 28, 2026 and updated October 11, 2026.
+          Part of
+          <a href="https://ryanjosephkamp.github.io/splashery/" target="_blank" rel="noopener"
+            >Splashery</a
+          >, a toy box of 3D Gaussian splats that runs in your browser. Every picture here was made
+          with Splashery itself.
+        </p>
+      </footer>
+      <!-- NAV:BOTTOM:END -->
+    </main>
+  </body>
+</html>

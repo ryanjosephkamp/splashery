@@ -14,7 +14,7 @@ import { RECIPES as PICTURE_EXAMPLES } from "../manual/example-pictures.js";
 import { RECIPES as INPUT_EXAMPLES } from "../manual/example-input.js";
 import { RECIPES as WINDMILL } from "../manual/example-recipe.js";
 
-const html = fs.readFileSync("manual/index.html", "utf8");
+const html = fs.readFileSync("manual/all.html", "utf8");
 const indexHtml = fs.readFileSync("index.html", "utf8");
 const squash = (s) => s.replace(/\s+/g, "");
 const unescape = (s) => s.replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&amp;/g, "&");
@@ -41,7 +41,7 @@ test.describe("the manual's claims match the code", () => {
   });
 
   test("every behavior the manual names exists", () => {
-    const para = html.match(/<h3>Behaviors<\/h3>([\s\S]*?)<h3>/)[1];
+    const para = html.match(/<h3[^>]*>Behaviors<\/h3>([\s\S]*?)<h3/)[1];
     const kinds = [...para.matchAll(/kind: "(\w+)"|<code>"(\w+)"<\/code>/g)].map((m) => m[1] || m[2]); // prettier-ignore
     expect(kinds.length).toBeGreaterThan(4);
     for (const k of kinds) expect(KINDS[k], k).toBeDefined();
@@ -57,7 +57,7 @@ test.describe("the manual's claims match the code", () => {
     const quick = [...html.matchAll(/<b>Functions<\/b>:\s*([^<]*)/g)].pop()[1];
     for (const f of named.filter((f) => f !== "log")) expect(quick, f).toContain(f);
     // Every field the manual's table lists is a field, and the other way round.
-    const table = html.match(/<h3>The fields<\/h3>([\s\S]*?)<h3>Expressions/)[1];
+    const table = html.match(/<h3[^>]*>The fields<\/h3>([\s\S]*?)<h3[^>]*>Expressions/)[1];
     const listed = new Set([...table.matchAll(/<td>\s*<code>(\w+)<\/code>/g)].map((m) => m[1]));
     for (const m of table.matchAll(/<code>(x|y|z|r|g|b)<\/code>/g)) listed.add(m[1]);
     for (const f of FIELDS) expect(listed.has(f), f).toBe(true);
@@ -243,7 +243,7 @@ test.describe("the manual page", () => {
     // prettier-ignore
     const problems = [];
     page.on("pageerror", (e) => problems.push(e.message));
-    await page.goto("/manual/");
+    await page.goto("/manual/all.html");
     const hrefs = await page.locator("a[href]").evaluateAll((as) => as.map((a) => a.getAttribute("href"))); // prettier-ignore
     for (const h of hrefs) {
       if (h.startsWith("#") && !h.startsWith("#s="))
@@ -254,7 +254,7 @@ test.describe("the manual page", () => {
     }
     // Every web link goes to this project's site or its source, a paper, or a Wikipedia article.
     for (const h of hrefs.filter((h) => /^https?:/.test(h)))
-      expect(h, h).toMatch(/^https:\/\/(ryanjosephkamp\.github\.io\/splashery|github\.com\/ryanjosephkamp\/splashery|repo-sam\.inria\.fr\/fungraph\/3d-gaussian-splatting\/|arxiv\.org\/pdf\/2308\.04079|www\.cs\.umd\.edu\/~zwicker\/|niujinshuchong\.github\.io\/mip-splatting\/|surfsplatting\.github\.io\/|anttwo\.github\.io\/sugar\/|doi\.org\/10\.1145\/|en\.wikipedia\.org\/wiki\/)/); // prettier-ignore
+      expect(h, h).toMatch(/^https:\/\/(ryanjosephkamp\.github\.io\/splashery|playcanvas\.com\/|keithp\.com\/~keithp\/porterduff\/|github\.com\/ryanjosephkamp\/splashery|repo-sam\.inria\.fr\/fungraph\/3d-gaussian-splatting\/|arxiv\.org\/pdf\/2308\.04079|www\.cs\.umd\.edu\/~zwicker\/|niujinshuchong\.github\.io\/mip-splatting\/|surfsplatting\.github\.io\/|anttwo\.github\.io\/sugar\/|doi\.org\/10\.1145\/|en\.wikipedia\.org\/wiki\/)/); // prettier-ignore
     const imgs = await page.locator("img").evaluateAll((is) => is.map((i) => [i.getAttribute("src"), i.complete && i.naturalWidth > 0, i.alt])); // prettier-ignore
     expect(imgs.length).toBeGreaterThan(30);
     for (const [src, ok, alt] of imgs) {
@@ -262,7 +262,7 @@ test.describe("the manual page", () => {
       expect(alt.length, `${src} has alt text`).toBeGreaterThan(5);
     }
     const toc = await page.locator("nav.toc a").evaluateAll((as) => as.map((a) => a.textContent)); // prettier-ignore
-    for (const level of ["Level 1", "Level 2", "Level 3", "Level 4", "Level 5"])
+    for (const level of ["Chapter 1", "Chapter 2", "Chapter 3", "Chapter 4", "Chapter 5"])
       expect(
         toc.some((t) => t.startsWith(level)),
         level,
@@ -308,7 +308,7 @@ test.describe("the manual page", () => {
       // prettier-ignore
       const ctx = await browser.newContext({ viewport: { width: w, height: h }, ...(w < 500 ? { hasTouch: true, isMobile: true } : {}) }); // prettier-ignore
       const page = await ctx.newPage();
-      await page.goto("/manual/");
+      await page.goto("/manual/all.html");
       await page.waitForLoadState("load");
       const wide = await page.evaluate(() => {
         const de = document.documentElement;
