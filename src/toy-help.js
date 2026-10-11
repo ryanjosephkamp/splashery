@@ -21,6 +21,11 @@
 // the toy's recipe and against a real source for every fact.
 
 export const TOY_HELP = {
+  "logistic-map": {
+    howTo: "Tap to sweep r and hear the orbit. Move the r slider to pick a cobweb plot.",
+    about:
+      "Each generation replaces x with r times x times (1 minus x). Both x and r are dimensionless. The left plot shows settled orbit values as r runs from 2.5 to 4; the right plot steps between the parabola and the diagonal for your chosen r.\n\nThe first two period doublings occur at r = 3 and r = 1 + square root of 6, about 3.44949. The gold points mark the stable period-3 interval, from about 3.82843 to 3.84150. The starting selection, r = 3.835, repeats three values.\n\nTap to redraw the diagram, move its scan bar, and hear the current orbit as notes. Higher x means a higher note. The sweep lasts 4.2 seconds and returns to your selected r. This draft uses a finite number of points and discards 2,048 generations; convergence is slower near bifurcations, so the plotted branches can look thicker there.",
+  },
   // ---- Photoreal r3 (lane Photoreal r3) ----
   "triceratops-skull": {
     howTo: "Tap it to make it look at you; drag to turn it.",

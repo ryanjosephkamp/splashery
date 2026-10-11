@@ -2469,6 +2469,17 @@ export const TOYS = [
     camera: { yaw: 0.55, pitch: 0.6, roll: 0, distance: 3.7 },
   },
 
+  // ---- Pack: proto-logistic-map (Codex prototype) ----
+  {
+    id: "logistic-map",
+    label: "Logistic map",
+    category: "maths",
+    kind: "kit",
+    pack: "proto-logistic-map",
+    labs: true,
+    tags: "logistic map bifurcation chaos cobweb period doubling orbit discrete recurrence math",
+    camera: { yaw: 0, pitch: 0, roll: 0, distance: 3.6 },
+  },
   // ---- Pack: maths ----
   {
     id: "lorenz",
