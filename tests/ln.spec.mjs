@@ -14,7 +14,7 @@ import { RECIPES as PICTURE_EXAMPLES } from "../manual/example-pictures.js";
 import { RECIPES as INPUT_EXAMPLES } from "../manual/example-input.js";
 import { RECIPES as WINDMILL } from "../manual/example-recipe.js";
 
-const html = fs.readFileSync("manual/index.html", "utf8");
+const html = fs.readFileSync("manual/all.html", "utf8");
 const indexHtml = fs.readFileSync("index.html", "utf8");
 const squash = (s) => s.replace(/\s+/g, "");
 const unescape = (s) => s.replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&amp;/g, "&");
@@ -243,7 +243,7 @@ test.describe("the manual page", () => {
     // prettier-ignore
     const problems = [];
     page.on("pageerror", (e) => problems.push(e.message));
-    await page.goto("/manual/");
+    await page.goto("/manual/all.html");
     const hrefs = await page.locator("a[href]").evaluateAll((as) => as.map((a) => a.getAttribute("href"))); // prettier-ignore
     for (const h of hrefs) {
       if (h.startsWith("#") && !h.startsWith("#s="))
@@ -308,7 +308,7 @@ test.describe("the manual page", () => {
       // prettier-ignore
       const ctx = await browser.newContext({ viewport: { width: w, height: h }, ...(w < 500 ? { hasTouch: true, isMobile: true } : {}) }); // prettier-ignore
       const page = await ctx.newPage();
-      await page.goto("/manual/");
+      await page.goto("/manual/all.html");
       await page.waitForLoadState("load");
       const wide = await page.evaluate(() => {
         const de = document.documentElement;

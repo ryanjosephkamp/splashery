@@ -344,7 +344,7 @@ drive(t, c, out) {
 </section>
 <section aria-labelledby="h-more">
 <h2 id="h-more">Where to go next</h2>
-<p>The same lists, with the code behind each claim, are in the manual's chapters <a href="${up}../manual/#more">What else Splashery does now</a> and <a href="${up}../manual/#unique">What Splashery can do that other splat tools can't</a>. The <a href="${up}toys/">toy pages</a> and <a href="${up}tools/">tools</a> show each one working.</p>
+<p>The same lists, with the code behind each claim, are in the manual's chapters <a href="${up}../manual/more.html">What else Splashery does now</a> and <a href="${up}../manual/unique.html">What Splashery can do that other splat tools can't</a>. The <a href="${up}toys/">toy pages</a> and <a href="${up}tools/">tools</a> show each one working.</p>
 <p class="actions"><a class="button primary" href="${up}../">Open the gallery${arrow}</a><a class="button" href="${up}learn/">Back to Learn</a></p>
 </section>
 </article>`;
