@@ -30,12 +30,12 @@ const BG = "#14161c";
 
 export const PICTURES = [
   // What else Splashery does now (more.html)
-  { file: "pic-more-physics", size: [320, 320], panels: [{ toy: "basketball", cam: [0, 0, 1.7], steps: [{ wait: 0.8 }, { shot: true }, { toss: [[0, 0, 0], [0.3, 0.5, 0], [0.9, 1.2, 0]], secs: 0.3 }, { wait: 0.25 }, { shot: true }, { wait: 0.6 }, { shot: true }] }] }, // prettier-ignore
+  { file: "pic-more-physics", size: [320, 320], panels: [{ toy: "basketball", cam: [0, 0, 1.25], steps: [{ wait: 0.8 }, { shot: true }, { toss: [[0, 0, 0], [0.3, 0.5, 0], [0.9, 1.2, 0]], secs: 0.3 }, { wait: 0.25 }, { shot: true }, { wait: 0.6 }, { shot: true }] }] }, // prettier-ignore
   { file: "pic-more-qr", size: [360, 360], panels: [{ toy: "qr-code" }] },
   { file: "pic-more-captures", size: [360, 360], panels: [{ toy: "marble-bust" }, { toy: "wooden-elephant" }] },
   { file: "pic-more-live", size: [360, 360], panels: [{ toy: "room-echo" }, { toy: "splat-mirror" }] },
   { file: "pic-more-books", size: [320, 320], panels: [{ toy: "your-book" }, { toy: "photo-album" }, { toy: "picture-frame" }] },
-  { file: "pic-more-studio", size: [320, 320], panels: [{ toy: "song-landscape" }, { toy: "chladni-plate" }, { toy: "photo-3d" }] },
+  { file: "pic-more-studio", size: [320, 320], panels: [{ toy: "chladni-plate", steps: [{ tap: true }, { wait: 4 }, { shot: true }] }, { toy: "photo-3d" }] },
   { file: "pic-more-models", size: [360, 360], panels: [{ toy: "model-splats" }] },
   { file: "pic-more-worlds", page: "worlds" },
   { file: "pic-more-fluids", size: [360, 360], panels: [{ toy: "fluid-lab" }, { toy: "grand-piano" }] },
@@ -45,7 +45,7 @@ export const PICTURES = [
   { file: "pic-uq-rules", size: [320, 320], panels: [{ toy: "cactus" }, { toy: "strawberry" }, { toy: "knot" }] },
   { file: "pic-uq-equations", size: [320, 320], panels: [{ toy: "splat-equation", opt: { preset: "klein" } }, { toy: "splat-equation", opt: { preset: "trefoil" } }, { toy: "splat-equation", opt: { preset: "galaxy" } }] }, // prettier-ignore
   { file: "pic-uq-moving", size: [320, 320], panels: [{ toy: "chest", steps: [{ wait: 0.5 }, { shot: true }, { tap: true }, { wait: 0.7 }, { shot: true }, { wait: 1.5 }, { shot: true }] }] }, // prettier-ignore
-  { file: "pic-uq-physics", size: [320, 320], panels: [{ toy: "rubber-duck", cam: [0, 0, 1.7], steps: [{ wait: 0.8 }, { shot: true }, { toss: [[0, 0, 0], [0.3, 0.5, 0], [0.9, 1.2, 0]], secs: 0.3 }, { wait: 0.25 }, { shot: true }, { wait: 0.6 }, { shot: true }] }] }, // prettier-ignore
+  { file: "pic-uq-physics", size: [320, 320], panels: [{ toy: "rubber-duck", cam: [0, 0, 1.25], steps: [{ wait: 0.8 }, { shot: true }, { toss: [[0, 0, 0], [0.3, 0.5, 0], [0.9, 1.2, 0]], secs: 0.3 }, { wait: 0.25 }, { shot: true }, { wait: 0.6 }, { shot: true }] }] }, // prettier-ignore
   { file: "pic-uq-anything", size: [320, 320], panels: [{ toy: "photo-3d" }, { toy: "night-sky" }, { toy: "volume-viewer" }] },
 ]; // prettier-ignore
 
@@ -66,10 +66,12 @@ async function otherPage(spec) {
   pg.on("pageerror", (e) => console.error("page error:", e.message));
   const png = path.join(OUT, `${spec.file}.png`);
   if (spec.page === "worlds") {
-    await pg.goto(`${base}worlds/?labs=1&renderer=webgl2&profile=strong`);
-    await pg.waitForSelector("#enter:not([disabled])", { timeout: 180_000 });
-    await pg.click("#enter");
-    await pg.waitForTimeout(5000);
+    await pg.goto(`${base}worlds/?labs=1&renderer=webgl2&profile=mid&clock=manual`);
+    await pg.waitForFunction(() => document.body.dataset.ready, null, { timeout: 300_000 });
+    await pg.evaluate(() => window.__world.enter());
+    await pg.evaluate(() => window.__world.catchUp());
+    // Walk a little, so the character is mid-stride.
+    for (let i = 0; i < 20; i++) await pg.evaluate(() => window.__world.tick(1 / 15, { x: 0, y: 1, amount: 1 })); // prettier-ignore
     await pg.screenshot({ path: png });
   } else {
     await pg.goto(`${base}?renderer=webgl2&profile=strong&adapt=off&labs=1`);

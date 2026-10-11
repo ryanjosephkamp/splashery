@@ -30,7 +30,11 @@ export const LAYERS = [
     then: "become splats, shown by",
     cols: 2,
     boxes: [
-      { t: "packs/*.js", s: "one file per family of toys, loaded when a toy opens", file: "src/packs" },
+      {
+        t: "packs/*.js",
+        s: "one file per family of toys, loaded when a toy opens",
+        file: "src/packs",
+      },
       { t: "kit.js + generators.js", s: "build the splats from a recipe", file: "src/kit.js" },
     ],
   },
@@ -79,7 +83,11 @@ export const CHECKS = [
   ["src/app.js", /from "\.\/state\.js"/, "app.js uses state.js"],
   ["src/app.js", /from "\.\/codec\.js"/, "app.js uses codec.js"],
   ["src/app.js", /from "\.\/toys\.js"/, "app.js uses toys.js"],
-  ["src/player.js", /import\(`\.\/packs\/\$\{def\.pack\}\.js`\)/, "player.js loads a toy's pack when it opens"],
+  [
+    "src/player.js",
+    /import\(`\.\/packs\/\$\{def\.pack\}\.js`\)/,
+    "player.js loads a toy's pack when it opens",
+  ],
   ["src/player.js", /from "\.\/kit\.js"/, "player.js uses kit.js"],
   ["src/player.js", /from "\.\/generators\.js"/, "player.js uses generators.js"],
   ["src/player.js", /from "\.\/stage\.js"/, "player.js shows the toy through stage.js"],

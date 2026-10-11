@@ -7,6 +7,7 @@
 import { crisp } from "./crisp.js";
 import * as M from "./demo-math3.js";
 import { compileProgram } from "../src/packs/splat-equation.js";
+import { encodeSceneHash, deflateRaw, bytesToBase64Url } from "../src/codec.js";
 
 const css = (name) => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
 const reduce = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -123,7 +124,70 @@ function uvTorus(fig) {
   fig.classList.add("live");
 }
 
-const LIVE = { "uv-torus": uvTorus };
+// ---- "A whole scene in a link": the real codec, step by step, on a tiny scene ------------------------
+// Fills <ol class="link-steps"> with the four stages of a link and the real size of each.
+const LINK_SCENE = {
+  app: "splashery",
+  version: 3,
+  seed: 7,
+  toy: { kind: "builtin", id: "cactus" },
+  camera: { yaw: 0.55, pitch: 0.3, roll: 0, distance: 4.5 },
+};
+async function linkSteps(fig) {
+  const ol = fig.querySelector("ol.link-steps");
+  const json = JSON.stringify(LINK_SCENE);
+  const bytes = new TextEncoder().encode(json);
+  let squeezed = null;
+  try {
+    squeezed = await deflateRaw(bytes);
+  } catch {}
+  const hash = await encodeSceneHash(LINK_SCENE);
+  const text = squeezed ? bytesToBase64Url(squeezed) : bytesToBase64Url(bytes);
+  const stages = [
+    [
+      "The scene, as JSON",
+      `${bytes.length} bytes`,
+      json.length > 60 ? json.slice(0, 57) + "…" : json,
+    ],
+    squeezed
+      ? [
+          "Squeezed (raw deflate)",
+          `${squeezed.length} bytes`,
+          "the same facts, said in fewer bytes",
+        ]
+      : [
+          "Left as it is",
+          `${bytes.length} bytes`,
+          "this browser cannot compress, so the link carries the JSON as it is",
+        ],
+    [
+      "Written in 64 safe letters (base64url)",
+      `${text.length} characters`,
+      `${hash.slice(0, 2)}${text.slice(0, 26)}…`,
+    ],
+    [
+      "The link",
+      `${text.length + 2} characters after #s=`,
+      "…/splashery/#s=" + hash.slice(0, 18) + "…",
+    ],
+  ];
+  ol.replaceChildren(
+    ...stages.map(([title, size, sample]) => {
+      const li = document.createElement("li");
+      const b = document.createElement("b");
+      b.textContent = title;
+      const n = document.createElement("span");
+      n.className = "size";
+      n.textContent = size;
+      const c = document.createElement("code");
+      c.textContent = sample;
+      li.append(b, n, c);
+      return li;
+    }),
+  );
+}
+
+const LIVE = { "uv-torus": uvTorus, "link-steps": linkSteps };
 
 for (const fig of document.querySelectorAll("figure[data-live]")) {
   const run = LIVE[fig.dataset.live];
