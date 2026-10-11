@@ -44,6 +44,8 @@ import { Track, SongAnalysis } from "./song-stream.js";
 import { HOP as FRAME, F as FIELD, FIELDS } from "./song-analysis.js";
 import { songTransport } from "./song-record.js";
 import { bands } from "./studio-audio.js";
+// Lane Live r10: the beads' colors (the default stays amber).
+import { colorOptions, colorsOnly, paint, gradient, moving as colorMoves, flagColors } from "./chladni-colors.js"; // prettier-ignore
 
 const C_WATER = 1497; // m/s
 const SIDE = 0.01; // m: the cell is 1 cm across
@@ -144,6 +146,10 @@ export const CELL_WIDTH = 100;
 // on one rings that one). Returns [{ mode, a }] and the scaled pitch.
 export function cellDrive(hz, loud, shape) {
   const f = foldCell(hz, shape) * SCALE;
+  // Live r10: the loudness (0..1 over 30 dB) sets the energy in the cell,
+  // so a mode's pressure swing goes with its square root (the force goes with
+  // the energy: half as loud in energy, half the force; was a quarter).
+  const amp = Math.sqrt(loud);
   const resp = ladder(shape).map((mode) => {
     const x = (1200 * Math.log2(f / cellFreq(mode))) / CELL_WIDTH;
     return { mode, r: 1 / (1 + x * x) };
@@ -151,7 +157,7 @@ export function cellDrive(hz, loud, shape) {
   const top = Math.max(...resp.map((q) => q.r));
   const out = [];
   for (const { mode, r } of resp) {
-    const a = (loud * r) / top;
+    const a = (amp * r) / top;
     if (a > 0.1) out.push({ mode, a }); // (a weaker one adds under 1% to the mix)
   }
   return { modes: out, ultra: f };
@@ -220,6 +226,12 @@ export function potentialGrid(mode) {
         const p = phi[id(i, j, k)];
         U[id(i, j, k)] = F1 * p * p - 1.5 * F2 * (g2 / kk);
       }
+  // Live r10: ∇φ too (the normal of the still surfaces, for the drift).
+  const dphi = new Float32Array(N * N * N * 3);
+  for (let k = 0; k < N; k++)
+    for (let j = 0; j < N; j++)
+      for (let i = 0; i < N; i++)
+        for (let ax = 0; ax < 3; ax++) dphi[id(i, j, k) * 3 + ax] = d(phi, i, j, k, ax);
   const grad = new Float32Array(N * N * N * 3);
   let max = 1e-9;
   for (let k = 0; k < N; k++)
@@ -229,7 +241,7 @@ export function potentialGrid(mode) {
         for (let ax = 0; ax < 3; ax++) grad[o + ax] = d(U, i, j, k, ax);
         max = Math.max(max, Math.hypot(grad[o], grad[o + 1], grad[o + 2]));
       }
-  return { U, grad, max, N, h };
+  return { U, grad, dphi, max, N, h };
 }
 
 // Lane Live r9: each mode's grid is worked out once (its slope only, which
@@ -239,14 +251,15 @@ export function gridFor(mode) {
   const key = mode.id || JSON.stringify(mode);
   let g = GRIDS.get(key);
   if (!g) {
-    const { grad, max, N, h } = potentialGrid(mode);
-    GRIDS.set(key, (g = { grad, max, N, h }));
+    const { grad, dphi, max, N, h } = potentialGrid(mode);
+    GRIDS.set(key, (g = { grad, dphi, max, N, h }));
   }
   return g;
 }
 
-function sample(grid, x, y, z, out) {
-  const { grad, N, h } = grid;
+function sample(grid, x, y, z, out, field = "grad") {
+  const { N, h } = grid;
+  const grad = grid[field];
   const fx = clamp((x + 1) / h, 0, N - 1.0001);
   const fy = clamp((y + 1) / h, 0, N - 1.0001);
   const fz = clamp((z + 1) / h, 0, N - 1.0001);
@@ -271,6 +284,20 @@ function sample(grid, x, y, z, out) {
 
 const WALL = 0.97; // beads keep this far inside the walls
 const SETTLE_SECS = 1.1; // the time scale of the slide (at full sound)
+// Live r10: the owner's walkthrough of October 10, 2026: with music the beads
+// "settle into a shape and then barely follow", where the plate follows a
+// song. Measured (tools/lv10-measure.mjs, docs/handoff/LiveR10.md): a song's
+// notes last about 0.4 s, and the beads took 1.2 to 2.2 s to get halfway to
+// a new figure at full loudness (the plate's sand 0.5 to 0.9 s), and never
+// at 60% (the force went with the loudness squared). So while music or the
+// microphone drives the cell the slide runs on `secs` (the plate's pace; a
+// tap's ring keeps SETTLE_SECS), the loudness sets the energy in the cell
+// (the force goes with it, see cellDrive), and the modes' strengths
+// ease over `follow` seconds. The force law and the figures are unchanged:
+// only the clock of the slide is faster, as the toy's clock already is (a
+// real cell takes seconds to tens of seconds; Live r8's About says so).
+// `drift`: a stand-in for the water's streaming (Beads.step).
+export const LIVE = { secs: 0.35, follow: 0.08, drift: 0.15 };
 
 // The beads: n of them, scattered evenly through the cell.
 export class Beads {
@@ -317,13 +344,13 @@ export class Beads {
   // strength squared: U = Σ aₘ² Uₘ (the plate's E = Σ aₘ² wₘ², in 3D). Each
   // mode's U is scaled to its own steepest slope, so every mode at full
   // strength moves the beads as fast as the toy's single mode does.
-  step(dt, a, stir = 0) {
+  step(dt, a, stir = 0, secs = SETTLE_SECS, drift = 0) {
     const drive = typeof a === "number" ? [{ mode: this.mode, a }] : a;
     const live = [];
     for (const d of drive)
       if (d.a >= 1e-3) {
         const grid = d.mode === this.mode ? this.grid : gridFor(d.mode);
-        live.push({ grid, w: ((d.a * d.a) / grid.max) * (2 / SETTLE_SECS) });
+        live.push({ grid, w: ((d.a * d.a) / grid.max) * (2 / secs) });
       }
     if (dt <= 0 || (!live.length && stir <= 0)) return (this.moving = false);
     this.steps++;
@@ -335,6 +362,25 @@ export class Beads {
     const sub = Math.max(1, Math.ceil(dt / 0.02));
     const h = dt / sub;
     let moved = 0;
+    // Live r10: `drift` (cell half-widths a √second at full sound) stands in
+    // for the water's acoustic streaming, a slow flow the sound drives that
+    // drags beads about (Muller and others, 2013, measured it at about 60
+    // µm/s beside radiation-driven beads at up to about 1 mm/s): a small
+    // random walk along the leading mode's still surface, growing with the
+    // sound's energy. The force still pins each bead across its surface, and
+    // the walk never pushes it off, so a figure stays crisp
+    // (tools/lv10-measure.mjs), but with music the beads spread along the
+    // surfaces instead of piling up for good where several notes' surfaces
+    // cross (of the cell's 12³ blocks, 5% still held beads at the end of the
+    // test song before Live r10, 2% with only the faster slide, 23% with it).
+    let E = 0;
+    for (const d of drive) E += d.a * d.a;
+    const walk = drift > 0 && live.length ? drift * Math.sqrt(Math.min(1, E) * h) * Math.sqrt(12) : 0; // prettier-ignore
+    // The walk runs along the leading mode's still surface only (its
+    // component along ∇φ taken out), as streaming carries pinned beads.
+    const top = walk ? drive.reduce((b, d) => (!b || d.a > b.a ? d : b), null).mode : null;
+    const lead = top && (top === this.mode ? this.grid : gridFor(top));
+    const nv = [0, 0, 0];
     for (let s = 0; s < sub; s++)
       for (let i = 0; i < this.n; i++) {
         const o = i * 3;
@@ -351,6 +397,24 @@ export class Beads {
         let dx = -g[0] * h;
         let dy = -g[1] * h;
         let dz = -g[2] * h;
+        if (walk) {
+          const r = this.rand;
+          let wx = walk * (r() - 0.5);
+          let wy = walk * (r() - 0.5);
+          let wz = walk * (r() - 0.5);
+          sample(lead, x, y, z, nv, "dphi");
+          const [nx, ny, nz] = nv;
+          const nn = nx * nx + ny * ny + nz * nz;
+          if (nn > 1e-12) {
+            const k = (wx * nx + wy * ny + wz * nz) / nn;
+            wx -= k * nx;
+            wy -= k * ny;
+            wz -= k * nz;
+          }
+          dx += wx;
+          dy += wy;
+          dz += wz;
+        }
         if (stir > 0) {
           // A swirl about the upright axis and a stir up and down.
           const r = this.rand;
@@ -444,7 +508,7 @@ const BEAD_A = "#c8701f";
 const BEAD_B = "#eba443"; // a tap rings the transducer this long
 const STIR_SECS = 1.0; // and first swirls a settled cell this long
 
-const CELL = { beads: null, cols: 1, rows: 1, home: null, tone: null, img: null, version: 0, last: null, taps: 0, ringUntil: 0, stirUntil: 0, amp: 0, sorted: -1, unsorted: false, p: 0, frames: 0, amps: new Map(), lead: null, heard: null }; // prettier-ignore
+const CELL = { beads: null, cols: 1, rows: 1, home: null, tone: null, img: null, version: 0, last: null, taps: 0, ringUntil: 0, stirUntil: 0, amp: 0, sorted: -1, unsorted: false, p: 0, frames: 0, amps: new Map(), lead: null, heard: null, opts: null, paint: null, flags: null, flagAsk: 0 }; // prettier-ignore
 
 // For the tests: the beads and how settled they are.
 export const cellState = () => ({
@@ -453,6 +517,8 @@ export const cellState = () => ({
   moving: !!CELL.beads?.moving,
   settled: CELL.beads ? CELL.beads.settled() : 0,
   ringing: CELL.amp,
+  colors: CELL.opts?.colors ?? null, // Live r10: the beads' colors, and the first ten beads'
+  paint: CELL.paint ? Array.from(CELL.paint.subarray(0, 30)) : [],
 });
 
 // ---- Lane Live r9: your audio and the microphone ---------------------------------------
@@ -470,7 +536,7 @@ const clamp01 = (v) => clamp(v, 0, 1);
 // The modes' strengths follow the sound within about 80 ms (the plate's
 // followDrive), so the beads answer a new note at once and stop with it.
 function follow(want, dt) {
-  const k = 1 - Math.exp(-dt / 0.08);
+  const k = 1 - Math.exp(-dt / LIVE.follow);
   const seen = new Set();
   for (const w of want) {
     seen.add(w.mode.id);
@@ -660,23 +726,33 @@ const cellScreen = {
   },
   version: () => CELL.version,
   draw(g) {
-    const { beads, cols, rows, home, tone } = CELL;
+    const { beads, cols, rows, home } = CELL;
     if (!beads) return;
-    if (!CELL.img || CELL.img.width !== cols * 2 || CELL.img.height !== rows) {
-      CELL.img = g.createImageData(cols * 2, rows);
-      const px = CELL.img.data;
+    const px0 = !CELL.img || CELL.img.width !== cols * 2 || CELL.img.height !== rows;
+    if (px0) CELL.img = g.createImageData(cols * 2, rows);
+    const px = CELL.img.data;
+    const P = beads.P;
+    // The colors on the left: once (Live r10: as chosen), or on every draw
+    // when they follow the beads (by height, or by distance from the center).
+    const o = CELL.opts;
+    const follow = colorMoves(o);
+    if (px0 || follow) {
+      const reach = beads.mode.shape === "cube" ? 1.35 : 1;
       for (let i = 0; i < beads.n; i++) {
-        const c = mix(BEAD_A, BEAD_B, tone[i]).map((v) => Math.round(v * 255));
-        const o = (Math.floor(i / cols) * cols * 2 + (i % cols)) * 4;
-        px[o] = c[0];
-        px[o + 1] = c[1];
-        px[o + 2] = c[2];
-        px[o + 3] = 255;
+        const x = P[i * 3];
+        const y = P[i * 3 + 1];
+        const z = P[i * 3 + 2];
+        const c = follow
+          ? gradient(o, o.colors === "height" ? (y + WALL) / (2 * WALL) : Math.hypot(x, y, z) / reach) // prettier-ignore
+          : [CELL.paint[i * 3], CELL.paint[i * 3 + 1], CELL.paint[i * 3 + 2]];
+        const at = (Math.floor(i / cols) * cols * 2 + (i % cols)) * 4;
+        px[at] = Math.round(c[0] * 255);
+        px[at + 1] = Math.round(c[1] * 255);
+        px[at + 2] = Math.round(c[2] * 255);
+        px[at + 3] = 255;
       }
     }
-    const px = CELL.img.data;
     const q = 255 / (2 * LIFT);
-    const P = beads.P;
     for (let i = 0; i < beads.n; i++) {
       const o = (Math.floor(i / cols) * cols * 2 + cols + (i % cols)) * 4;
       px[o] = 127.5 + (P[i * 3] * HALF - home[i * 3]) * q;
@@ -704,6 +780,110 @@ function rod(list, a, b, { step, size, color, n }) {
     const t = i / m;
     list.push({ p: [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t, a[2] + (b[2] - a[2]) * t], n, flat: 0.5, size, opacity: 1, color, pattern: false }); // prettier-ignore
   }
+}
+
+// ---- Lane Live r10: what the modes are (the Toy tab's info panel) ------------------------
+// The owner's walkthrough of October 10, 2026: the five cube modes and three
+// flask modes explained in the toy, plain words first, then the math, how a
+// pitch picks a mode, why the 3D figures are honest physics, and what is a
+// model. Every reference here was opened and read (docs/handoff/LiveR10.md).
+// Each mode's surfaces, in words (the menu's eight, then the ladder's six).
+export const MODE_NOTES = {
+  "cube-110":
+    "two flat sheets through the middle at right angles, one upright and one level, crossing in a line",
+  "cube-111":
+    "three flat sheets through the middle, one for each direction, cutting the cell into eight small cubes",
+  "cube-012":
+    "three modes that share one pitch, (0, 1, 2), (1, 2, 0), and (2, 0, 1), ringing together; their sum has curved sheets instead of flat ones, meeting at the center",
+  "cube-112":
+    "the three modes (1, 1, 2), (1, 2, 1), and (2, 1, 1) together: curved sheets through the center",
+  "cube-122":
+    "the three modes (1, 2, 2), (2, 1, 2), and (2, 2, 1) together, one with its sign turned over: the most folded sheets of the five, since it rings highest",
+  "flask-0-2":
+    "two nested balls: the still places are two spheres around the center (at 41% and 81% of the radius)",
+  "flask-2-1":
+    "a double cone: an upright cone above the center and one below, each opening at 54.7° from the vertical",
+  "flask-2-2": "the same double cone, plus one ball at 79% of the radius",
+  "cube-010":
+    "one level sheet across the middle (the lowest mode, straight up from the transducer)",
+  "cube-020": "two level sheets, a quarter of the way from the top and the bottom",
+  "cube-022": "three modes (0, 2, 2), (2, 0, 2), and (2, 2, 0) together",
+  "flask-1-1": "one level disc through the center",
+  "flask-0-1": "one ball at 70% of the radius",
+  "flask-1-2": "a level disc through the center and a ball at 76% of the radius",
+};
+
+// The panel's text: [heading, paragraphs]. (Numbers that come from the
+// modes themselves are filled in by modesInfo().)
+export function modesInfo() {
+  const kHz = (m) => `${(cellFreq(m) / 1000).toFixed(0)} kHz`;
+  const heard = (m) => `${Math.round(heardFreq(m))} Hz`;
+  const list = (shape) =>
+    CELL_MODES.filter((m) => m.shape === shape).map((m) => `${m.name} (${kHz(m)}, heard at ${heard(m)}): ${MODE_NOTES[m.id]}.`); // prettier-ignore
+  return [
+    [
+      "In plain words",
+      [
+        "Sound is a wave of pressure. In a closed box of water it bounces off the walls, and at certain pitches, the box's resonances or modes, the bounces line up and the wave stands still: a standing wave. In some places the pressure swings hard; on certain surfaces it never swings at all. Those still surfaces are the nodes.",
+        "Small plastic beads in the water are pushed away from where the pressure swings and gather on the still surfaces, as Chladni's sand gathers on the still lines of a ringing plate. Each mode has its own pitch and its own shape of still surfaces.",
+      ],
+    ],
+    [
+      "The math",
+      [
+        "The pressure is p = P·φ(x, y, z)·cos(2πft), where φ solves the Helmholtz equation ∇²φ + k²φ = 0 with k = 2πf / c and c = 1,497 m/s (water). The glass walls are far stiffer than water, so the water can't move into them: the slope of φ across each wall is zero (a rigid wall, a Neumann condition), and the pressure swings most at the walls. Only certain k fit, which sets the modes' pitches.",
+        'The cube, 1 cm on a side: φ = cos(lπx/L)·cos(mπy/L)·cos(nπz/L) for whole numbers l, m, and n, ringing at f = (c / 2L)·√(l² + m² + n²). Modes whose numbers are the same in another order share a pitch, and a real cell rings them together ("mixed").',
+        ...list("cube"),
+        "The flask, a round-bottomed flask 1 cm across (a sphere, not a cylinder): φ = j_l(kr)·P_l(cos θ), a spherical Bessel function times a Legendre polynomial, with θ measured from the vertical. The rigid wall makes j_l′(ka) = 0, so ka is one of that function's zeros, and f = c·ka / (2πa).",
+        ...list("flask"),
+      ],
+    ],
+    [
+      "How the music picks a mode",
+      [
+        `The cell rings at ultrasound, far above hearing, and music is audible, so the music's pitch is scaled up. Every 40 ms the toy measures the strongest pitch, moves it by whole octaves into the cell's range as heard, and multiplies it by ${SCALE} (eight octaves). Every mode then rings by how near it is to that pitch, on a resonance curve (half strength ${CELL_WIDTH} cents away), and the nearest rings at full strength. For example, A4 (440 Hz) becomes 113 kHz, and the cube's 1, 1, 0 mode (106 kHz) rings. Besides the eight in the Mode menu, the toy uses six more modes (cube 0, 1, 0; 0, 2, 0; and 0, 2, 2; three of the flask) so every pitch has one near it. Louder music puts more energy in the cell, and the push on the beads grows with the energy.`,
+      ],
+    ],
+    [
+      "Why this is Chladni in 3D, honestly",
+      [
+        "On Chladni's plate the sand is thrown off the parts that move and comes to rest on the lines that don't. In a liquid the push is the acoustic radiation force: F = −∇U, with U the Gor'kov potential, U ∝ f1·⟨p²⟩ / (2ρc²) − (3/4)·f2·ρ·⟨v²⟩ (H. Bruus, \"Acoustofluidics 7: The acoustic radiation force on small particles\", Lab on a Chip 12, 1014, 2012). For polystyrene in water f1 ≈ 0.44 and f2 ≈ 0.034, so U is lowest where the pressure doesn't swing, and beads collect on the nodal surfaces.",
+        'This is measured physics: labs track beads moving this way in 3D (P. B. Muller and others, "Ultrasound-induced acoustophoretic motion of microparticles in three dimensions", Physical Review E 88, 023006, 2013), pattern particles in 3D at the pressure nodes the Gor\'kov potential predicts (M. A. Ghanem and others, "Phase holograms for the three-dimensional patterning of unconstrained microparticles", Scientific Reports 13, 9160, 2023), and levitate drops and small objects in air at the pressure nodes of standing waves, first done in 1933 (M. A. B. Andrade, A. Marzo, and J. C. Adamowski, "Acoustic levitation in mid-air: Recent advances, challenges, and future perspectives", Applied Physics Letters 116, 250501, 2020).',
+        'Mathematicians draw 3D Chladni figures as the still surfaces of exactly these sums of cosines with rigid-wall conditions, and note that light particles in a fluid driven by a speaker could show them (M. Skrodzki, U. Reitebuch, and K. Polthier, "Chladni Figures Revisited: A Peek Into The Third Dimension", 2016). The sphere\'s modes are the textbook ones used in precision resonators (J. B. Mehl, "Acoustic Eigenvalues of a Quasispherical Resonator", Journal of Research of NIST 112, 163, 2007).',
+      ],
+    ],
+    [
+      "What is measured, and what is a model",
+      [
+        "Measured physics: the radiation force and its formula, beads gathering on pressure nodes, and the mode formulas for a rigid box and a rigid sphere. The slow drift of beads along the surfaces, toward where the water swings most, is real too (the second term of U).",
+        "Model choices: the walls are perfectly rigid and the shapes perfect (real glass flexes a little, which shifts the modes); mixed modes ring in equal parts; the music is moved by octaves and scaled 256 times (a real cell answers only to its own ultrasound); the nearest mode always rings fully; and the beads move faster than real ones (in one lab's cell the fastest moved about a millimeter a second; Muller and others, 2013), so a real figure takes seconds to tens of seconds. The water's slow streaming, which drags beads along the surfaces in a real cell, is stood in for by a gentle random drift while music plays, so beads keep spreading along each new figure; gravity and the beads' pushes on each other are left out.",
+      ],
+    ],
+  ];
+}
+
+// The Toy tab's panel, folded until opened.
+function modesPanel() {
+  const box = document.createElement("details");
+  box.id = "cell-modes";
+  const sum = document.createElement("summary");
+  sum.textContent = "What are these modes? The physics, plain words first";
+  box.append(sum);
+  for (const [head, paras] of modesInfo()) {
+    const h = document.createElement("p");
+    h.className = "note";
+    const b = document.createElement("strong");
+    b.textContent = head;
+    h.append(b);
+    box.append(h);
+    for (const t of paras) {
+      const p = document.createElement("p");
+      p.className = "note";
+      p.textContent = t;
+      box.append(p);
+    }
+  }
+  return box;
 }
 
 // ---- Lane Live r9 part 2: built-in tunes -----------------------------------------------
@@ -861,6 +1041,8 @@ export const CHLADNI_CELL = {
       default: "cube-012",
       choices: CELL_MODES.map((m) => ({ id: m.id, label: cellLabel(m) })),
     },
+    // Live r10: the beads' colors.
+    ...colorOptions("cell", { id: "amber", label: "Amber (as made)" }, () => CELL.opts?.colors),
   ],
   controls: [{ key: "ring", label: "Switch on the sound", type: "toggle", default: 0, ease: RING_SECS }], // prettier-ignore
   action: {
@@ -891,6 +1073,7 @@ export const CHLADNI_CELL = {
       { render: () => tuneRow() }, // Live r9 part 2
       { render: () => songTransport(cellTransport) },
       { kind: "mic", rebuild: false, status: cellStatus },
+      { render: () => modesPanel() }, // Live r10
     ],
     note: "Open a song or any sound file, or tap “Use my microphone” and sing or play. The real cell rings at ultrasound, so the music's pitch is scaled up to the cell's ultrasound modes: moved by octaves into the cell's range, then 256 times higher (eight octaves). The mode nearest it rings, and the beads set off for its surfaces at once, from where they are; a held note settles them, a new note moves them on, and silence leaves them where they are. The Mode choice picks the cube or the flask. The file stays on your device.",
   },
@@ -940,7 +1123,10 @@ export const CHLADNI_CELL = {
       const lead = mix.reduce((b, d) => (!b || d.a > b.a ? d : b), null);
       if (lead && lead.a > 0.05) CELL.lead = lead.mode;
     }
-    if (CELL.beads.step(dt, drive, stir)) {
+    // Live r10: music and the microphone move the beads on LIVE.secs (a
+    // tap's ring keeps its slower, calmer settle).
+    const music = heard || CELL.amps.size > 0;
+    if (CELL.beads.step(dt, drive, stir, music ? LIVE.secs : undefined, music ? LIVE.drift : 0)) {
       CELL.version++;
       if (time - CELL.sorted > 0.15) {
         CELL.sorted = time;
@@ -1017,6 +1203,13 @@ export const CHLADNI_CELL = {
     // sand), each resting a hair from the middle.
     const n = Math.max(5000, Math.min(16000, Math.floor(k.count * 0.07)));
     const beads = new Beads(n, mode, () => k.rand());
+    // Live r10: a change of colors only keeps the beads where they are.
+    const was = CELL.beads;
+    const keep = colorsOnly(CELL.opts, o) && was?.mode.id === mode.id && was.n === n;
+    if (keep) {
+      beads.P.set(was.P);
+      beads.steps = was.steps;
+    }
     const cols = Math.min(256, Math.ceil(Math.sqrt(n * 2)));
     const rows = Math.ceil(n / cols);
     const home = new Float32Array(n * 3);
@@ -1025,10 +1218,27 @@ export const CHLADNI_CELL = {
     for (let i = 0; i < n; i++) {
       for (let a = 0; a < 3; a++) home[i * 3 + a] = (k.rand() - 0.5) * 0.04;
       tone[i] = k.rand();
-      items.push({ p: [home[i * 3], home[i * 3 + 1], home[i * 3 + 2]], color: mix(BEAD_A, BEAD_B, tone[i]), size: 0.42 + 0.22 * tone[i], opacity: 1, kind: "relief", params: [((i % cols) + 0.5) / cols, (Math.floor(i / cols) + 0.5) / rows, 3, LIFT], pattern: false }); // prettier-ignore
+    }
+    // Live r10: each bead's color as chosen (a flag's once its image is read).
+    const opts = { ...o };
+    const flag = opts.colors === "flag" ? CELL.flags?.get(opts.flag) : null;
+    const colors = paint(n, opts, { asMade: (i) => mix(BEAD_A, BEAD_B, tone[i]), tone, flag, pale: 0.78 }); // prettier-ignore
+    if (opts.colors === "flag" && !flag) {
+      const id = ++CELL.flagAsk;
+      flagColors(opts.flag).then((f) => {
+        if (!f || id !== CELL.flagAsk) return;
+        (CELL.flags ??= new Map()).set(opts.flag, f);
+        CELL.paint = paint(n, opts, { asMade: (i) => mix(BEAD_A, BEAD_B, tone[i]), tone, flag: f, pale: 0.78 }); // prettier-ignore
+        CELL.img = null;
+        CELL.version++;
+        liveIn.wake?.();
+      });
+    }
+    for (let i = 0; i < n; i++) {
+      items.push({ p: [home[i * 3], home[i * 3 + 1], home[i * 3 + 2]], color: [colors[i * 3], colors[i * 3 + 1], colors[i * 3 + 2]], size: 0.42 + 0.22 * tone[i], opacity: 1, kind: "relief", params: [((i % cols) + 0.5) / cols, (Math.floor(i / cols) + 0.5) / rows, 3, LIFT], pattern: false }); // prettier-ignore
     }
     k.cloud({ share: n / k.count, size: 0.5, pattern: false, jitter: 0 }, (rand, i) => items[i] || null); // prettier-ignore
-    Object.assign(CELL, { beads, cols, rows, home, tone, img: null, version: CELL.version + 1 });
+    Object.assign(CELL, { beads, cols, rows, home, tone, img: null, version: CELL.version + 1, opts, paint: colors }); // prettier-ignore
     k.reach([0, H + 0.2, 0]);
     k.reach([0, -H - 0.2, 0]);
     k.data = { cell: mode };
