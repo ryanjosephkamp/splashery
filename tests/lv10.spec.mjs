@@ -212,6 +212,10 @@ test.describe("in the browser", () => {
     // beads stay where they are.
     await page.evaluate(() => window.__splashery.player.act(null));
     await until(page, async (m) => (await import(m)).cellState().settled > 0.6, BOX, 60_000);
+    // The ring goes on for 7 s and moves the beads until it dies away, so the
+    // positions are read once it has stopped (on a slow machine the figure
+    // passes 0.6 well before that; the Operator's batch run of October 11).
+    await until(page, async (m) => { const s = (await import(m)).cellState(); return s.ringing === 0 && !s.moving; }, BOX, 60_000); // prettier-ignore
     const before = await page.evaluate(async (m) => (await import(m)).cellAudioState().at, BOX);
     await page.evaluate(() => window.__splashery.app.setToyOptions({ colors: "flag", flag: "ua" }));
     await until(page, async (m) => (await import(m)).cellState().colors === "flag", BOX);
@@ -252,14 +256,14 @@ test.describe("in the browser", () => {
     // The default sand is pale, as made.
     for (const v of (await sand()).paint) expect(v).toBeGreaterThan(0.6);
     await page.evaluate(() => window.__splashery.player.act(null));
-    await page.waitForTimeout(2500);
+    // The bow's 3.6 s and the sand's last slide: the positions are read once
+    // it has stopped.
+    await until(page, async (m) => { const d = (await import(m)).chladniSand(); return d.steps > 0 && !d.moving; }, STUDIO, 60_000); // prettier-ignore
     const before = (await sand()).at;
     await page.evaluate(() => window.__splashery.app.setToyOptions({ colors: "one", color: "#d02040" })); // prettier-ignore
     await until(page, async (m) => (await import(m)).chladniSand().colors === "one", STUDIO);
     const s = await sand();
-    // (The bow may still be moving it: the grains are where they were, give
-    // or take this frame's hop.)
-    for (let i = 0; i < before.length; i++) expect(Math.abs(s.at[i] - before[i])).toBeLessThan(0.05); // prettier-ignore
+    expect(s.at).toEqual(before);
     for (let i = 0; i < 10; i++) {
       const [r, g, b] = s.paint.slice(i * 3, i * 3 + 3);
       expect(r).toBeGreaterThan(g * 3);
