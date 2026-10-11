@@ -9,7 +9,7 @@ a small, additive "Engine: …" PR merged first). PR title: "Phase Live r10: Sou
 responsive, and in color". Handoff file: docs/handoff/LiveR10.md (create it; start it with this
 brief, word for word, under "## Brief", then keep "## State
 
-October 11, 2026 (Opus 5.5, high effort): first round built, all three items. Draft PR #526. Clips:
+October 11, 2026 (Opus 5.5, high effort): first round READY, all three items. Draft PR #526. Clips:
 see "For the Operator".
 
 1. **Responsiveness**: measured, found to be over-slow (not a lag in the audio path), and fixed. See
@@ -223,5 +223,11 @@ October 11, 2026 (Opus 5.5, high effort): started. Item 1 (responsiveness) measu
     description).
   - "3. Colors": `lv10-cell-height`, `lv10-cell-center`, `lv10-cell-flag`, `lv10-plate-flag`, and
     `lv10-plate-few`.
+- A flake to know about (not this lane's; `tests/live4.spec.mjs`, Live input's): "your audio plays
+  to the plate …" fails now and then at its first wait (lead 2-3 with settled over 0.4). The plate
+  steps only about 6 frames a second in headless Chromium, and the tune's first notes alternate two
+  modes, so the poll can miss the moment. It fails on main (eab7c1c4) too: 2 of 12 runs; on this
+  branch 4 of about 23. The plate's motion is identical here (same random sequence and step, same
+  frame rate, measured). Not edited.
 - No sound changes (the toys' sounds are as before), so nothing goes in `tools/sound-review.json`.
 - Thumbnails and the contact sheet are unchanged: the default look of both toys is unchanged.
