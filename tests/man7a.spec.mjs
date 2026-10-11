@@ -133,6 +133,9 @@ test.describe("pictures on the more and unique pages", () => {
   for (const name of ["more", "unique"]) {
     test(`${name}.html: every picture loads, has alt text, and is small`, async ({ page }) => {
       await page.goto(`/manual/${name}.html`);
+      await page.evaluate(() =>
+        document.querySelectorAll("figure.item-pic img").forEach((i) => (i.loading = "eager")),
+      );
       await page.waitForLoadState("networkidle");
       const imgs = await page.locator("figure.item-pic img").evaluateAll((l) =>
         l.map((i) => ({
@@ -141,7 +144,7 @@ test.describe("pictures on the more and unique pages", () => {
           ok: i.complete && i.naturalWidth > 0,
         })),
       );
-      expect(imgs.length).toBeGreaterThan(5);
+      expect(imgs.length).toBeGreaterThanOrEqual(name === "more" ? 11 : 5);
       for (const i of imgs) {
         expect(i.ok, i.src).toBe(true);
         expect(i.alt.length, i.src).toBeGreaterThan(20);

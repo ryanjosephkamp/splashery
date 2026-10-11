@@ -92,6 +92,8 @@
         knowledge".) The site has this list as a page too:
         <a href="../site/learn/can-do/" target="_blank" rel="noopener">What Splashery can do</a>.
       </p>
+      <!-- Each item can end with a <figure> (a picture from manual/make-pictures.mjs, or a live one from
+           manual/demos4.js with data-live): copy one of the figures below into the new <li>. -->
       <ul>
         <li>
           <b>Toys made from rules, in the browser.</b> A recipe of a few kilobytes is built into
@@ -101,21 +103,78 @@
           draws. The shape itself is never a multi-megabyte file to download. (The page, the engine,
           and any optional models or captures a toy uses still download, and only when that toy
           opens.)
+          <figure class="item-pic">
+            <img
+              src="img/pic-uq-rules.webp"
+              width="960"
+              height="320"
+              loading="lazy"
+              alt="Three toys that exist only as rules: a potted cactus, a strawberry, and a knotted ring."
+            />
+            <figcaption>
+              A cactus, a strawberry, and a knot: three toys built from rules, not downloaded as
+              shapes.
+            </figcaption>
+          </figure>
         </li>
         <li>
           <b>Equations as a language.</b> Type <var>x</var>, <var>y</var>, and <var>z</var> in
           <var>u</var>, <var>v</var>, and <var>t</var>, and get an animated splat shape, with plain
           messages instead of crashes (Level 3).
+          <figure class="item-pic">
+            <img
+              src="img/pic-uq-equations.webp"
+              width="960"
+              height="320"
+              loading="lazy"
+              alt="Three shapes made by the equation toy from typed formulas: a Klein bottle, a trefoil knot, and a spiral galaxy."
+            />
+            <figcaption>
+              Three programs of the equation toy: a Klein bottle, a trefoil knot, and a galaxy.
+            </figcaption>
+          </figure>
         </li>
         <li>
           <b>Moving parts inside one splat cloud.</b> Hinges, pivots, sliders, morphs, and per-splat
           effects run on the graphics chip, so a chest opens and a windmill turns without rebuilding
           anything (Level 2).
+          <figure class="item-pic">
+            <img
+              src="img/pic-uq-moving.webp"
+              width="960"
+              height="320"
+              loading="lazy"
+              alt="A treasure chest in three moments: closed, opening, and open with its lid hinged back."
+            />
+            <figcaption>A chest opening on a hinge: one splat cloud, three moments.</figcaption>
+          </figure>
         </li>
-        <li><b>Hands-on physics on splats.</b> Toss, stack, pull apart, and pour.</li>
+        <li>
+          <b>Hands-on physics on splats.</b> Toss, stack, pull apart, and pour.
+          <figure class="item-pic">
+            <img
+              src="img/pic-uq-physics.webp"
+              width="960"
+              height="320"
+              loading="lazy"
+              alt="A rubber duck in three moments of one toss: resting, tossed, and tumbling in the air."
+            />
+            <figcaption>A rubber duck at rest, tossed, and tumbling.</figcaption>
+          </figure>
+        </li>
         <li>
           <b>Anything as splats.</b> Photos and videos with depth, PDFs, QR codes, real science
           data, the night sky, and medical volumes.
+          <figure class="item-pic">
+            <img
+              src="img/pic-uq-anything.webp"
+              width="960"
+              height="320"
+              loading="lazy"
+              alt="Three things that are not splat captures, all shown as splats: a photo of a forest path, the night sky with constellation lines, and a CT-style volume of a walnut."
+            />
+            <figcaption>A photo, the night sky, and a scanned volume, all as splats.</figcaption>
+          </figure>
         </li>
         <li>
           <b>A whole scene in a link.</b> The <code>#s=</code> links carry the toys, their options,
@@ -135,6 +194,16 @@
             </li>
             <li>No server is involved. The link is the whole scene.</li>
           </ul>
+          <figure class="item-pic" data-live="link-steps">
+            <ol
+              class="link-steps"
+              aria-label="The four stages of a link, with the real size of each for a tiny scene"
+            ></ol>
+            <figcaption>
+              A tiny scene (a cactus and a camera), taken through the real link code, stage by
+              stage.
+            </figcaption>
+          </figure>
         </li>
       </ul>
 
@@ -159,6 +228,7 @@
         </p>
       </footer>
       <!-- NAV:BOTTOM:END -->
+      <script type="module" src="demos4.js"></script>
     </main>
   </body>
 </html>
