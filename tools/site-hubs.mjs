@@ -305,7 +305,7 @@ drive(t, c, out) {
 <section aria-labelledby="h-make">
 <h2 id="h-make">Make your own</h2>
 <ul>
-<li><strong>Toys from rules, in the browser.</strong> A recipe of a few kilobytes becomes up to 200,000 splats on your device, so there is no multi-megabyte file to download. The <a href="${up}../manual/">Tinkerer's Manual</a> teaches recipes from the math of one splat up to your own toys.</li>
+<li><strong>Toys from rules, in the browser.</strong> A recipe of a few kilobytes becomes anywhere from 60,000 to 400,000 splats on your device, depending on the device and the Detail setting, so there is no multi-megabyte file to download. The <a href="${up}../manual/">Tinkerer's Manual</a> teaches recipes from the math of one splat up to your own toys.</li>
 <li><strong>Equations as a language.</strong> In ${toy("splat-equation")}, type where splats go and what color they are, as formulas in <var>u</var>, <var>v</var>, and <var>t</var>, and get an animated shape, with plain messages instead of crashes. It has three looks: Solid, Fine, and Dots.</li>
 <li><strong>A whole scene in a link.</strong> A share link carries the toy, its options, and the camera, compressed into the address itself. No server is involved. A link carries settings, not your files: a photo or a splat file from your device has to be opened again by whoever opens the link. <a href="${up}learn/scene-format/">The scene format</a> says exactly what is in one.</li>
 </ul>

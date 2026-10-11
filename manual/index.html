@@ -13,12 +13,13 @@
     <script type="module" src="../site/assets/outline.js"></script>
     <script type="module" src="fold.js"></script>
     <script type="module" src="demos.js"></script>
+    <script type="module" src="demos2.js"></script>
   </head>
   <body>
     <main data-outline>
       <!-- ---- Cover ---- -->
       <section class="cover">
-        <p class="kicker">Splashery · Updated October 9, 2026</p>
+        <p class="kicker">Splashery · Updated October 11, 2026</p>
         <h1>The Tinkerer's Manual</h1>
         <p class="lead">
           How to program Gaussian splats: what one splat is, how the toys are built, and a small
@@ -199,14 +200,56 @@
           </li>
         </ul>
       </div>
-      <aside class="demo-placeholder" data-demo="gaussian-3d">
-        <p class="demo-tag">Demo coming · web only</p>
-        <p><b>A 3D Gaussian, shown instead of told</b></p>
-        <p>
-          A turnable splat on screen. Drag to look at it from any side, and watch the equal-weight
-          shells around its center as nested ellipsoids.
+      <section class="demo-live" data-demo="gaussian-3d" id="demo-gaussian">
+        <h4>Try it: a 3D Gaussian, from every side</h4>
+        <p class="hint">
+          One splat, as a cloud of dots that is thickest in the middle (that is the bell: a dot is
+          more likely where <var>G</var> is larger). Drag the picture to turn it, or use the arrow
+          keys. The solid, dashed, and dotted rings mark the shells one, two, and three sizes out:
+          each is an ellipsoid, and the weight is the same everywhere on it. The colored ring is the
+          shell you pick with the slider.
         </p>
-      </aside>
+        <div class="demo-grid">
+          <canvas
+            id="g3-canvas"
+            width="400"
+            height="400"
+            tabindex="0"
+            role="img"
+            aria-label="A 3D Gaussian as a cloud of dots with three nested ellipsoid shells and one more you choose. Drag or use the arrow keys to turn it."
+          ></canvas>
+          <div class="controls">
+            <label
+              >Weight of your shell
+              <input type="range" id="g3-w" min="0.02" max="0.95" step="0.01" value="0.3" /><output
+                id="g3-w-out"
+                >0.3</output
+              ></label
+            >
+            <div class="row">
+              <button type="button" id="g3-fog" aria-pressed="true">Dots</button>
+              <button type="button" id="g3-spin" aria-pressed="false">Turn by itself</button>
+              <button type="button" id="g3-reset">Reset the view</button>
+            </div>
+            <div class="readout" id="g3-readout" aria-live="polite"></div>
+          </div>
+        </div>
+      </section>
+      <figure class="demo-still" data-demo-still="gaussian-3d">
+        <img
+          src="img/demo-gaussian.png"
+          alt="The 3D Gaussian demo: a cloud of dots with nested ellipsoid shells around its center"
+        />
+        <figcaption>
+          Interactive in the web version:
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/manual/#demo-gaussian"
+            target="_blank"
+            rel="noopener"
+            >ryanjosephkamp.github.io/splashery/manual/#demo-gaussian</a
+          >
+        </figcaption>
+      </figure>
       <!-- Figure 1 (three ways). Sources: recipe splats src/kit.js:1078-1112 (sizes, rotation,
            color per sampled point) and src/player.js:502-506 (buildRecipe on load); capture files
            src/app.js:1372 (ply, sog, splat, spz) and src/player.js:413-426; one-photo fit
@@ -292,14 +335,168 @@
           </tbody>
         </table>
       </div>
-      <aside class="demo-placeholder" data-demo="splat-numbers">
-        <p class="demo-tag">Demo coming · web only</p>
-        <p><b>The numbers in one splat</b></p>
-        <p>
-          One splat on screen with a control for each number: center, three sizes, rotation, color,
-          and opacity. Move a control and see only that number change.
+      <section class="demo-live" data-demo="splat-numbers" id="demo-numbers">
+        <h4>Try it: one splat, one control for each number</h4>
+        <p class="hint">
+          The splat below is made of exactly the numbers in the table: three for the center, three
+          sizes, a rotation, a color, and an opacity. Move one control and only that number changes
+          (the table marks it). The rotation is given as three turns, one about each axis, because
+          that is friendlier than a quaternion; the table shows the quaternion that the three turns
+          make. The thin rings show the splat's shell one size out, and the colored lines are the
+          <var>x</var> (red), <var>y</var> (green), and <var>z</var> (blue) axes.
         </p>
-      </aside>
+        <div class="demo-grid">
+          <canvas
+            id="sn-canvas"
+            width="400"
+            height="400"
+            tabindex="0"
+            role="img"
+            aria-label="One splat drawn on a checkerboard, with its shell and the three axes. Drag or use the arrow keys to turn the view."
+          ></canvas>
+          <div class="controls">
+            <fieldset>
+              <legend>Center</legend>
+              <label
+                >x
+                <input type="range" id="sn-x" min="-1.5" max="1.5" step="0.05" value="0.3" /><output
+                  id="sn-x-out"
+                  >0.3</output
+                ></label
+              >
+              <label
+                >y
+                <input type="range" id="sn-y" min="-1.5" max="1.5" step="0.05" value="0.2" /><output
+                  id="sn-y-out"
+                  >0.2</output
+                ></label
+              >
+              <label
+                >z
+                <input type="range" id="sn-z" min="-1.5" max="1.5" step="0.05" value="0" /><output
+                  id="sn-z-out"
+                  >0</output
+                ></label
+              >
+            </fieldset>
+            <fieldset>
+              <legend>Sizes</legend>
+              <label
+                >s₁
+                <input
+                  type="range"
+                  id="sn-s1"
+                  min="0.05"
+                  max="0.8"
+                  step="0.01"
+                  value="0.5"
+                /><output id="sn-s1-out">0.5</output></label
+              >
+              <label
+                >s₂
+                <input
+                  type="range"
+                  id="sn-s2"
+                  min="0.05"
+                  max="0.8"
+                  step="0.01"
+                  value="0.3"
+                /><output id="sn-s2-out">0.3</output></label
+              >
+              <label
+                >s₃
+                <input
+                  type="range"
+                  id="sn-s3"
+                  min="0.05"
+                  max="0.8"
+                  step="0.01"
+                  value="0.15"
+                /><output id="sn-s3-out">0.15</output></label
+              >
+            </fieldset>
+            <fieldset>
+              <legend>Rotation: three turns</legend>
+              <label
+                >Turn about x
+                <input type="range" id="sn-tx" min="-180" max="180" step="1" value="20" /><output
+                  id="sn-tx-out"
+                  >20°</output
+                ></label
+              >
+              <label
+                >Turn about y
+                <input type="range" id="sn-ty" min="-180" max="180" step="1" value="30" /><output
+                  id="sn-ty-out"
+                  >30°</output
+                ></label
+              >
+              <label
+                >Turn about z
+                <input type="range" id="sn-tz" min="-180" max="180" step="1" value="10" /><output
+                  id="sn-tz-out"
+                  >10°</output
+                ></label
+              >
+            </fieldset>
+            <fieldset>
+              <legend>Color and opacity</legend>
+              <label
+                >Red <input type="range" id="sn-r" min="0" max="1" step="0.01" value="0.9" /><output
+                  id="sn-r-out"
+                  >0.9</output
+                ></label
+              >
+              <label
+                >Green
+                <input type="range" id="sn-g" min="0" max="1" step="0.01" value="0.3" /><output
+                  id="sn-g-out"
+                  >0.3</output
+                ></label
+              >
+              <label
+                >Blue
+                <input type="range" id="sn-b" min="0" max="1" step="0.01" value="0.4" /><output
+                  id="sn-b-out"
+                  >0.4</output
+                ></label
+              >
+              <label
+                >Opacity α
+                <input type="range" id="sn-a" min="0" max="1" step="0.01" value="0.8" /><output
+                  id="sn-a-out"
+                  >0.8</output
+                ></label
+              >
+            </fieldset>
+            <div class="row">
+              <button type="button" id="sn-reset">Reset</button
+              ><span class="sw big" id="sn-swatch" role="img" aria-label="The splat's color"></span>
+            </div>
+          </div>
+        </div>
+        <div
+          class="numgrid"
+          id="sn-table"
+          role="list"
+          aria-label="The 14 numbers of this splat"
+        ></div>
+      </section>
+      <figure class="demo-still" data-demo-still="splat-numbers">
+        <img
+          src="img/demo-numbers.png"
+          alt="The splat numbers demo: one soft pink splat on a checkerboard, with sliders and the table of its 14 numbers"
+        />
+        <figcaption>
+          Interactive in the web version:
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/manual/#demo-numbers"
+            target="_blank"
+            rel="noopener"
+            >ryanjosephkamp.github.io/splashery/manual/#demo-numbers</a
+          >
+        </figcaption>
+      </figure>
       <p>
         That is 14 numbers per splat. A kit toy starts with a budget of 60,000 splats at the Low
         tier, 140,000 at Mid, 200,000 at High, and 280,000 at Max. Recipes can raise that budget, up
@@ -537,14 +734,92 @@
         Where <var>G</var> is the same value, you are on the same "shell" around the center, and
         those shells are ellipsoids: stretched and turned spheres.
       </p>
-      <aside class="demo-placeholder" data-demo="bell-1d-to-3d">
-        <p class="demo-tag">Demo coming · web only</p>
-        <p><b>The 1D bell growing into the 3D bell</b></p>
-        <p>
-          Start from the bell curve above, add a second dimension, then a third. Pick a point
-          <var>p</var> and read off <var>G</var>(<var>p</var>), the strength there.
+      <section class="demo-live" data-demo="bell-1d-to-3d" id="demo-bell">
+        <h4>Try it: the bell, one dimension at a time</h4>
+        <p class="hint">
+          Pick how many dimensions. In one, the bell is the curve above. In two it is a hill, drawn
+          as shading: stronger color means a larger <var>G</var>. In three it is a fog, and the
+          picture shows the slice of it at the <var>z</var> you choose, so the slice fades as you
+          move away from the center. The rings are the shells one, two, and three sizes out, cut by
+          that slice. Drag on the picture (or use the arrow keys) to move the point <var>p</var>,
+          and read off <var>G</var>(<var>p</var>) with the formula filled in.
         </p>
-      </aside>
+        <div class="demo-grid">
+          <canvas
+            id="bl-canvas"
+            width="400"
+            height="360"
+            tabindex="0"
+            role="img"
+            aria-label="The bell in the chosen number of dimensions, with a point you can move. Arrow keys move the point."
+          ></canvas>
+          <div class="controls">
+            <div class="row" role="group" aria-label="Dimensions">
+              <button type="button" id="bl-d1" aria-pressed="true">1 dimension</button>
+              <button type="button" id="bl-d2" aria-pressed="false">2</button>
+              <button type="button" id="bl-d3" aria-pressed="false">3</button>
+            </div>
+            <label
+              >Size σ₁
+              <input type="range" id="bl-s1" min="0.2" max="1.5" step="0.05" value="1" /><output
+                id="bl-s1-out"
+                >1</output
+              ></label
+            >
+            <label
+              >Size σ₂
+              <input type="range" id="bl-s2" min="0.2" max="1.5" step="0.05" value="0.6" /><output
+                id="bl-s2-out"
+                >0.6</output
+              ></label
+            >
+            <label
+              >Size σ₃
+              <input type="range" id="bl-s3" min="0.2" max="1.5" step="0.05" value="0.4" /><output
+                id="bl-s3-out"
+                >0.4</output
+              ></label
+            >
+            <label
+              >Point x
+              <input type="range" id="bl-x" min="-3" max="3" step="0.05" value="1" /><output
+                id="bl-x-out"
+                >1</output
+              ></label
+            >
+            <label
+              >Point y
+              <input type="range" id="bl-y" min="-3" max="3" step="0.05" value="0.4" /><output
+                id="bl-y-out"
+                >0.4</output
+              ></label
+            >
+            <label
+              >Point z
+              <input type="range" id="bl-z" min="-3" max="3" step="0.05" value="0.2" /><output
+                id="bl-z-out"
+                >0.2</output
+              ></label
+            >
+            <div class="readout" id="bl-readout" aria-live="polite"></div>
+          </div>
+        </div>
+      </section>
+      <figure class="demo-still" data-demo-still="bell-1d-to-3d">
+        <img
+          src="img/demo-bell.png"
+          alt="The bell demo: a two-dimensional hill drawn as shading with rings and a point"
+        />
+        <figcaption>
+          Interactive in the web version:
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/manual/#demo-bell"
+            target="_blank"
+            rel="noopener"
+            >ryanjosephkamp.github.io/splashery/manual/#demo-bell</a
+          >
+        </figcaption>
+      </figure>
       <details class="fold tip" id="quadratic-form">
         <summary>Two words in that formula: the inverse and the quadratic form</summary>
         <p>
@@ -780,14 +1055,97 @@
         its eigenvalues are how far it spreads along them. This trick comes from EWA splatting
         (Zwicker, Pfister, van Baar, and Gross, 2001) [<a href="#ref-2">2</a>].
       </p>
-      <aside class="demo-placeholder" data-demo="projection">
-        <p class="demo-tag">Demo coming · web only</p>
-        <p><b>From 3D to the screen</b></p>
-        <p>
-          One ellipsoid and a camera you can move. See the straight-line stand-in at the center, and
-          the elliptical footprint it makes on the screen.
+      <section class="demo-live" data-demo="projection" id="demo-projection">
+        <h4>Try it: one ellipsoid, and a camera you can move</h4>
+        <p class="hint">
+          The solid line is the true outline on the screen of the shell one size out of a splat,
+          found by sending points of the shell through the real perspective map. The dashed line is
+          the ellipse that the renderer draws, from <var>Σ′</var> = <var>J</var> <var>W</var>
+          <var>Σ</var> <var>W</var><sup>T</sup> <var>J</var><sup>T</sup>. Turn the camera and the
+          splat, and change its distance: far away the two lines are one line. Bring the camera in
+          and they part, because <var>J</var> is exact only at the center. (The zoom grows with the
+          distance, so the splat stays about the same size on screen and the only thing that changes
+          is how much perspective bends it.)
         </p>
-      </aside>
+        <div class="demo-grid">
+          <div>
+            <canvas
+              id="pj-canvas"
+              width="400"
+              height="400"
+              role="img"
+              aria-label="The true outline of a splat on the screen, solid, and the ellipse the renderer draws, dashed"
+            ></canvas>
+            <canvas
+              id="pj-top"
+              width="400"
+              height="230"
+              role="img"
+              aria-label="The splat seen from above, with the camera and its line of sight"
+            ></canvas>
+          </div>
+          <div class="controls">
+            <label
+              >Camera distance
+              <input type="range" id="pj-d" min="2.5" max="12" step="0.1" value="5" /><output
+                id="pj-d-out"
+                >5</output
+              ></label
+            >
+            <label
+              >Camera turn
+              <input type="range" id="pj-yaw" min="-80" max="80" step="1" value="25" /><output
+                id="pj-yaw-out"
+                >25°</output
+              ></label
+            >
+            <label
+              >Camera lift
+              <input type="range" id="pj-pitch" min="-60" max="60" step="1" value="15" /><output
+                id="pj-pitch-out"
+                >15°</output
+              ></label
+            >
+            <label
+              >Splat tilt
+              <input type="range" id="pj-tx" min="-90" max="90" step="1" value="20" /><output
+                id="pj-tx-out"
+                >20°</output
+              ></label
+            >
+            <label
+              >Splat turn
+              <input type="range" id="pj-ty" min="-90" max="90" step="1" value="35" /><output
+                id="pj-ty-out"
+                >35°</output
+              ></label
+            >
+            <label
+              >Splat size
+              <input type="range" id="pj-size" min="0.5" max="1.6" step="0.1" value="1" /><output
+                id="pj-size-out"
+                >1</output
+              ></label
+            >
+            <div class="readout" id="pj-readout" aria-live="polite"></div>
+          </div>
+        </div>
+      </section>
+      <figure class="demo-still" data-demo-still="projection">
+        <img
+          src="img/demo-projection.png"
+          alt="The projection demo: a splat's true outline and its ellipse on the screen, with a view from above"
+        />
+        <figcaption>
+          Interactive in the web version:
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/manual/#demo-projection"
+            target="_blank"
+            rel="noopener"
+            >ryanjosephkamp.github.io/splashery/manual/#demo-projection</a
+          >
+        </figcaption>
+      </figure>
       <div class="approx">
         <p>
           <b>Approximation: affine around the center.</b> An affine map is a straight-line map plus
@@ -887,14 +1245,108 @@
           Splats are painted from the back to the front, each one laid over the ones behind it.
         </figcaption>
       </figure>
-      <aside class="demo-placeholder" data-demo="sort-blend">
-        <p class="demo-tag">Demo coming · web only</p>
-        <p><b>Sorting and blending, back to front</b></p>
-        <p>
-          Three, or more overlapping splats, drawn in order one at a time. Switch the order and see
-          the pixel's color change, then watch the transmittance shrink.
+      <section class="demo-live" data-demo="sort-blend" id="demo-blend">
+        <h4>Try it: four splats, painted in an order you choose</h4>
+        <p class="hint">
+          Four see-through splats overlap on a black background. Each has a depth (1 is nearest).
+          Drag on the picture (or use the arrow keys) to choose the pixel to read, marked by the
+          small ring. The table lists the splats in the order they are painted. At each step the
+          pixel's color becomes <var>a</var> <var>c</var> + (1 − <var>a</var>) <var>C</var>, and the
+          transmittance (how much of the background still shows) shrinks by (1 − <var>a</var>).
+          Painted far to near, the order is the right one. Try the others: the color changes, and
+          the transmittance does not.
         </p>
-      </aside>
+        <div class="demo-grid">
+          <canvas
+            id="bd-canvas"
+            width="400"
+            height="280"
+            tabindex="0"
+            role="img"
+            aria-label="Four overlapping see-through splats on black, with a ring marking the pixel being read"
+          ></canvas>
+          <div class="controls">
+            <div class="row" role="group" aria-label="Order">
+              <button type="button" id="bd-sorted">Far to near</button>
+              <button type="button" id="bd-reverse">Near to far</button>
+              <button type="button" id="bd-shuffle">Shuffle</button>
+            </div>
+            <ol class="order" id="bd-order" aria-label="Painting order, first painted first"></ol>
+            <label
+              >Splats painted so far
+              <input type="range" id="bd-steps" min="1" max="4" step="1" value="4" /><output
+                id="bd-steps-out"
+                >4</output
+              ></label
+            >
+            <details class="fold">
+              <summary>Change each splat's opacity</summary>
+              <label
+                >Red α
+                <input type="range" id="bd-a0" min="0" max="1" step="0.05" value="0.8" /><output
+                  id="bd-a0-out"
+                  >0.8</output
+                ></label
+              >
+              <label
+                >Green α
+                <input type="range" id="bd-a1" min="0" max="1" step="0.05" value="0.8" /><output
+                  id="bd-a1-out"
+                  >0.8</output
+                ></label
+              >
+              <label
+                >Blue α
+                <input type="range" id="bd-a2" min="0" max="1" step="0.05" value="0.8" /><output
+                  id="bd-a2-out"
+                  >0.8</output
+                ></label
+              >
+              <label
+                >Gold α
+                <input type="range" id="bd-a3" min="0" max="1" step="0.05" value="0.8" /><output
+                  id="bd-a3-out"
+                  >0.8</output
+                ></label
+              >
+            </details>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table class="numbers blend">
+            <caption class="sr-only">
+              Painting order, the strength of each splat at the pixel, and the color and
+              transmittance after each
+            </caption>
+            <thead>
+              <tr>
+                <th scope="col">Painted</th>
+                <th scope="col">Depth</th>
+                <th scope="col"><var>a</var> at the pixel</th>
+                <th scope="col">Pixel color so far</th>
+                <th scope="col">Transmittance</th>
+              </tr>
+            </thead>
+            <tbody id="bd-table"></tbody>
+          </table>
+        </div>
+        <p class="readout result" id="bd-result" aria-live="polite"></p>
+      </section>
+      <figure class="demo-still" data-demo-still="sort-blend">
+        <img
+          src="img/demo-blend.png"
+          alt="The sorting demo: four overlapping see-through splats on black and the table of the painting order"
+        />
+        <figcaption>
+          Interactive in the web version:
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/manual/#demo-blend"
+            target="_blank"
+            rel="noopener"
+            >ryanjosephkamp.github.io/splashery/manual/#demo-blend</a
+          >
+        </figcaption>
+      </figure>
       <div class="tip">
         <p>
           <b>Why the order matters in the toys.</b> By default, Splashery sorts the splats in the
@@ -1147,8 +1599,8 @@
       <p class="table-note">
         <b>Same toy, same view, same phone: 140,000 splats → 200,000 splats.</b> Lower is better in
         every column. <span class="swatch worse">Worse</span>
-        <span class="swatch better">Better</span> <span class="swatch same">The same</span> The
-        table scrolls sideways inside its box.
+        <span class="swatch better">Better</span> <span class="swatch same">The same</span> On a
+        screen, the table scrolls sideways inside its box.
       </p>
       <div
         class="table-wrap budget-wrap"
@@ -1603,14 +2055,71 @@ export const RECIPES = {
         ends [<a href="#ref-7">7</a>]) so it starts and ends gently. A full extra turn lands the
         sails where they would have been anyway, so nothing jumps when the gust ends.
       </p>
-      <aside class="demo-placeholder" data-demo="windmill-parts">
-        <p class="demo-tag">Demo coming · web only</p>
-        <p><b>Where each part of a recipe shows on the windmill</b></p>
-        <p>
-          The windmill recipe beside the toy. Point at a line of the recipe, such as the cap or the
-          sails part, and the matching splats light up on the windmill.
+      <section class="demo-live" data-demo="windmill-parts" id="demo-windmill">
+        <h4>Try it: which splats each line of the recipe made</h4>
+        <p class="hint">
+          This is the windmill from the recipe above, built right now by the real kit (12,000
+          splats). Point at a line of the recipe, or tap it, and the splats it made light up on the
+          windmill; the rest fade. The line that makes the <code>sails</code> part lights up
+          everything in that part. Then move the slider: the whole part turns as one solid piece
+          about its pivot, and the tower and cap stay still.
         </p>
-      </aside>
+        <div class="demo-grid">
+          <canvas
+            id="wm-canvas"
+            width="400"
+            height="460"
+            tabindex="0"
+            role="img"
+            aria-label="The windmill built from splats. Drag or use the arrow keys to turn the view."
+          ></canvas>
+          <div class="controls">
+            <!-- prettier-ignore -->
+            <div class="code-lines" role="group" aria-label="Lines of the windmill's recipe">
+              <button type="button" class="code-line" data-lit="tower" aria-pressed="false"><code>k.add(k.cone(0.5, 0.3, 1.6), {
+  color: (c) =&gt; mix("#8b8f97", "#ece6d8", (c.p[1] + 0.8) / 1.6),
+  interior: 0.1,
+  core: "#6b5b4b",
+});</code></button>
+              <button type="button" class="code-line" data-lit="cap" aria-pressed="false"><code>k.add(k.cone(0.36, 0.02, 0.4), { pos: [0, 1.0, 0], color: "#9c3b2c" });</code></button>
+              <button type="button" class="code-line" data-lit="sails" aria-pressed="false"><code>const sails = k.part("sails", { pivot: [0, 0.6, 0.42], axis: [0, 0, 1] });</code></button>
+              <button type="button" class="code-line" data-lit="hub" aria-pressed="false"><code>k.add(k.sphere(0.07), { pos: [0, 0.6, 0.42], part: sails, color: "#4b3a2a" });</code></button>
+              <button type="button" class="code-line" data-lit="blades" aria-pressed="false"><code>for (let i = 0; i &lt; 4; i++) {
+  const a = (i * Math.PI) / 2;
+  k.add(k.box(0.16, 0.9, 0.02), {
+    pos: [-0.5 * Math.sin(a), 0.6 + 0.5 * Math.cos(a), 0.44],
+    rot: [0, 0, (a * 180) / Math.PI],
+    part: sails,
+    color: o.sails,
+  });
+}</code></button>
+            </div>
+            <label
+              >Sails turn
+              <input type="range" id="wm-angle" min="0" max="360" step="1" value="0" /><output
+                id="wm-angle-out"
+                >0°</output
+              ></label
+            >
+            <div class="readout" id="wm-readout" aria-live="polite"></div>
+          </div>
+        </div>
+      </section>
+      <figure class="demo-still" data-demo-still="windmill-parts">
+        <img
+          src="img/demo-windmill.png"
+          alt="The windmill demo: the recipe's lines beside the windmill built from splats, with the sails lit"
+        />
+        <figcaption>
+          Interactive in the web version:
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/manual/#demo-windmill"
+            target="_blank"
+            rel="noopener"
+            >ryanjosephkamp.github.io/splashery/manual/#demo-windmill</a
+          >
+        </figcaption>
+      </figure>
       <section class="demo-live" data-demo="smoothstep" id="demo-smoothstep">
         <h4>Try it: smoothstep beside a straight ramp, and a turn that uses it</h4>
         <p class="hint">
@@ -1852,14 +2361,62 @@ v = 0 .. 2pi</code></pre>
           carry every dot to its place on the torus.
         </figcaption>
       </figure>
-      <aside class="demo-placeholder" data-demo="uv-torus">
-        <p class="demo-tag">Demo coming · web only</p>
-        <p><b>The (u, v) grid turning into the torus, dot by dot</b></p>
-        <p>
-          The grid of dots above, carried one dot at a time to its place on the torus, with the
-          dot's <var>u</var> and <var>v</var> shown as it goes.
+      <section class="demo-live" data-demo="uv-torus" id="demo-uvtorus">
+        <h4>Try it: the grid of (<var>u</var>, <var>v</var>), carried onto the torus</h4>
+        <p class="hint">
+          Each dot of the flat grid is one pair (<var>u</var>, <var>v</var>); the colors show where
+          each came from (the hue follows <var>u</var>, the brightness follows <var>v</var>). The
+          program above gives each dot a place on the torus. Press <b>Carry them</b>, or drag the
+          slider, to move the dots from their flat places to their places on the torus. Tap a dot
+          (or use the two sliders under it) to follow one and read its numbers. Drag the picture to
+          turn the view.
         </p>
-      </aside>
+        <div class="demo-grid">
+          <canvas
+            id="ut-canvas"
+            width="400"
+            height="400"
+            tabindex="0"
+            role="img"
+            aria-label="A grid of colored dots moving from a flat sheet onto a torus. Drag or use the arrow keys to turn the view."
+          ></canvas>
+          <div class="controls">
+            <label
+              >Carried
+              <input type="range" id="ut-progress" min="0" max="1" step="0.01" value="0" /><output
+                id="ut-progress-out"
+                >0</output
+              ></label
+            >
+            <div class="row">
+              <button type="button" id="ut-play">Carry them</button>
+              <button type="button" id="ut-mode" aria-pressed="true">One dot at a time</button>
+            </div>
+            <label
+              >Follow u <input type="range" id="ut-u" min="0" max="6.28" step="0.05" value="3.2"
+            /></label>
+            <label
+              >Follow v <input type="range" id="ut-v" min="0" max="6.28" step="0.05" value="1.6"
+            /></label>
+            <div class="readout" id="ut-readout" aria-live="polite"></div>
+          </div>
+        </div>
+      </section>
+      <figure class="demo-still" data-demo-still="uv-torus">
+        <img
+          src="img/demo-uvtorus.png"
+          alt="The torus demo: a grid of colored dots part way from a flat sheet to a torus"
+        />
+        <figcaption>
+          Interactive in the web version:
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/manual/#demo-uvtorus"
+            target="_blank"
+            rel="noopener"
+            >ryanjosephkamp.github.io/splashery/manual/#demo-uvtorus</a
+          >
+        </figcaption>
+      </figure>
 
       <h3>The fields</h3>
       <p>
@@ -1941,15 +2498,63 @@ v = 0 .. 2pi</code></pre>
           </table>
         </div>
       </details>
-      <aside class="demo-placeholder" data-demo="program-fields">
-        <p class="demo-tag">Demo coming · web only</p>
-        <p><b>The fields of a program, labeled on the toy</b></p>
-        <p>
-          A small simulator: change one field, such as <code>hue</code>, <code>size</code>, or
-          <code>count</code>, and see on the toy exactly what that field controls and what it leaves
-          alone.
+      <section class="demo-live" data-demo="program-fields" id="demo-fields">
+        <h4>Try it: change one field, and see what it controls</h4>
+        <p class="hint">
+          This builds the splats with the Splat equation toy's own recipe, from the fields you type,
+          and draws them here. Pick a program, then change a field (try <code>hue</code>,
+          <code>size</code>, <code>count</code>, or <code>x</code>). Below the picture, the page
+          compares the new splats with the ones before, so you can see what that field moved and
+          what it left alone. If a field cannot be read, the toy's own message shows instead.
         </p>
-      </aside>
+        <div class="demo-grid">
+          <div>
+            <canvas
+              id="pf-canvas"
+              width="400"
+              height="400"
+              tabindex="0"
+              role="img"
+              aria-label="The splats the program builds. Drag or use the arrow keys to turn the view."
+            ></canvas>
+            <p class="err" id="pf-error" role="alert"></p>
+            <p class="diff-head" id="pf-diff-head" aria-live="polite"></p>
+            <div class="table-wrap">
+              <table class="numbers">
+                <caption class="sr-only">
+                  What changed since the last edit
+                </caption>
+                <tbody id="pf-diff"></tbody>
+              </table>
+            </div>
+          </div>
+          <div class="controls">
+            <div class="row">
+              <label class="inline"
+                >Program
+                <select id="pf-preset"></select
+              ></label>
+              <button type="button" id="pf-reset">Reset the fields</button>
+            </div>
+            <div class="field-list" id="pf-fields"></div>
+          </div>
+        </div>
+      </section>
+      <figure class="demo-still" data-demo-still="program-fields">
+        <img
+          src="img/demo-fields.png"
+          alt="The fields demo: the torus program's splats beside its twelve fields"
+        />
+        <figcaption>
+          Interactive in the web version:
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/manual/#demo-fields"
+            target="_blank"
+            rel="noopener"
+            >ryanjosephkamp.github.io/splashery/manual/#demo-fields</a
+          >
+        </figcaption>
+      </figure>
       <details class="fold why" id="why-fields">
         <summary>Why this number? Twelve fields</summary>
         <p class="kind">
@@ -2042,12 +2647,12 @@ v = 0 .. 2pi</code></pre>
         <li>
           <b>Shortcuts</b>: <code>2u</code> means 2 × <var>u</var>, and <code>3sin(u)</code> and
           <code>(u + 1)(v − 1)</code> multiply. A function can also skip its brackets when its input
-          is a short product: a run of numbers, names, and bracketed groups, each with an optional
-          power. The input stops at the next function or at a plus or minus. So
-          <code>sin 2u</code> is sin(2<var>u</var>), <code>sin u cos u</code> is sin(<var>u</var>) ×
-          cos(<var>u</var>), and <code>sin u^2</code> is sin(<var>u</var>²), not (sin
-          <var>u</var>)². A minus sign cannot start a bare input (write <code>sin(-u)</code>), and
-          <code>min</code> and <code>max</code> always need brackets.
+          is a short product: a run of numbers and names, each with an optional power. The input
+          stops at the next function, at a bracket, or at a plus or minus. So <code>sin 2u</code> is
+          sin(2<var>u</var>), <code>sin u cos u</code> is sin(<var>u</var>) × cos(<var>u</var>), and
+          <code>sin u^2</code> is sin(<var>u</var>²), not (sin <var>u</var>)². A minus sign cannot
+          start a bare input (write <code>sin(-u)</code>), and <code>min</code> and
+          <code>max</code> always need brackets.
         </li>
       </ul>
       <p>
@@ -2100,9 +2705,9 @@ v = 0 .. 2pi</code></pre>
         <p>
           A program lives in the toy's link, and a link holds up to 12 fields, so a limit keeps
           links short enough to paste into a message. The longest field of the toy's own programs is
-          53 characters. The limit was 120 until October 10, 2026, when the owner approved raising
-          it to 240 for people who write longer formulas. A link written with the old limit loads
-          the same as before.
+          53 characters. The limit was 120 until October 10, 2026, when it was raised to 240, for
+          people who write longer formulas. A link written with the old limit loads the same as
+          before.
         </p>
         <p>
           <b>If it were chosen differently.</b> The link could carry much more (a text option may be
@@ -2153,7 +2758,7 @@ v = 0 .. 2pi</code></pre>
 field      = "x" | "y" | "z" | "u" | "v" | "hue" | "r" | "g" | "b"
            | "size" | "count" | "spread"
 value      = sum                         (x, y, z, hue, r, g, b, size)
-           | sum ".." sum                (u, v: numbers only)
+           | sum ".." sum                (u, v: numbers only, and no min or max)
            | sum                         (count: a number only)
            | "grid" | "random"           (spread)
 sum        = product { ( "+" | "-" ) product }
@@ -2161,24 +2766,56 @@ product    = signed { ( "*" | "/" ) signed | power }   (nothing between: 2u)
 signed     = { "-" | "+" } power
 power      = atom [ "^" signed ]
 atom       = number | "u" | "v" | "t" | "pi" | "e"
-           | function "(" sum { "," sum } ")"
+           | function "(" sum ")"
            | function bare               (sin 2u, sin u cos u, sin u^2)
-           | bracket | "|" sum "|"
+           | ( "min" | "max" ) "(" sum "," sum { "," sum } ")"
+           | bracket | "|" sum "|"       (not directly inside another | |)
 bracket    = "(" sum ")" | "[" sum "]" | "{" sum "}"
-bare       = piece { piece }             (stops at the next function)
-piece      = ( number | "u" | "v" | "t" | "pi" | "e" | bracket ) [ "^" signed ]
+bare       = simple { simple }           (stops at the next function or bracket)
+simple     = ( number | "u" | "v" | "t" | "pi" | "e" ) [ "^" signed ]
 function   = "sin" | "cos" | "tan" | "asin" | "acos" | "atan"
            | "arcsin" | "arccos" | "arctan" | "sinh" | "cosh" | "tanh"
            | "exp" | "log" | "ln" | "log10" | "sqrt" | "abs" | "floor"
-           | "min" | "max"               (min and max need the brackets)</code></pre>
-      <aside class="demo-placeholder" data-demo="grammar-railroad">
-        <p class="demo-tag">Demo coming · web only</p>
-        <p><b>The grammar as a railroad diagram</b></p>
-        <p>
-          The same rules drawn as tracks. Follow a line from the left to the right, taking any
-          branch, and everything you can trace is a valid program.
+                                         (one input; min and max are above)</code></pre>
+      <section class="demo-live" data-demo="grammar-railroad" id="demo-railroad">
+        <h4>Try it: the grammar as tracks, and a walk along them</h4>
+        <p class="hint">
+          Each rule is drawn as tracks. Follow a line from the dot on the left to the dot on the
+          right, taking any branch. A square box means "go and follow that rule here" (tap it to
+          jump to the rule); a round box is a word you type as written. A line that curves back
+          underneath means "as many times as you like". Press <b>Walk the tracks</b> and a random
+          walk lights up the tracks it took and writes down the program it passed. The page then
+          asks the toy's own reader whether it accepts what was written.
         </p>
-      </aside>
+        <div class="row">
+          <label class="inline"
+            >Start with the field
+            <select id="rr-start">
+              <option value="">any</option>
+            </select></label
+          >
+          <button type="button" id="rr-walk">Walk the tracks</button>
+          <button type="button" id="rr-clear">Clear</button>
+        </div>
+        <pre class="rr-text"><code id="rr-text" aria-live="polite"></code></pre>
+        <p class="verdict" id="rr-verdict" aria-live="polite"></p>
+        <div class="rr-rules" id="rr-rules"></div>
+      </section>
+      <figure class="demo-still" data-demo-still="grammar-railroad">
+        <img
+          src="img/demo-railroad.png"
+          alt="The grammar demo: the rule for a sum drawn as tracks, with a walk lit up"
+        />
+        <figcaption>
+          Interactive in the web version:
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/manual/#demo-railroad"
+            target="_blank"
+            rel="noopener"
+            >ryanjosephkamp.github.io/splashery/manual/#demo-railroad</a
+          >
+        </figcaption>
+      </figure>
 
       <h3>Time</h3>
       <p>
@@ -5652,8 +6289,9 @@ export const RECIPES = {
       </p>
       <ul>
         <li>
-          <b>Toys made from rules, in the browser.</b> A recipe of a few kilobytes becomes up to
-          200,000 splats on your device. There is no multi-megabyte file to download.
+          <b>Toys made from rules, in the browser.</b> A recipe of a few kilobytes becomes 60,000 to
+          400,000 splats on your device, depending on the device and the Detail setting. There is no
+          multi-megabyte file to download.
         </li>
         <li>
           <b>Equations as a language.</b> Type <var>x</var>, <var>y</var>, and <var>z</var> in
@@ -6106,7 +6744,7 @@ drive(t, c, out, info) {
 
       <footer>
         <p>
-          The Tinkerer's Manual, first published September 28, 2026 and updated October 9, 2026.
+          The Tinkerer's Manual, first published September 28, 2026 and updated October 11, 2026.
           Part of
           <a href="https://ryanjosephkamp.github.io/splashery/" target="_blank" rel="noopener"
             >Splashery</a

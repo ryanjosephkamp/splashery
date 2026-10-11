@@ -73,8 +73,8 @@ export function build() {
   out += `      <p class="table-note">
         <b>Same toy, same view, same phone: 140,000 splats → 200,000 splats.</b> Lower is better in
         every column. <span class="swatch worse">Worse</span>
-        <span class="swatch better">Better</span> <span class="swatch same">The same</span> The
-        table scrolls sideways inside its box.
+        <span class="swatch better">Better</span> <span class="swatch same">The same</span> On a
+        screen, the table scrolls sideways inside its box.
       </p>
       <div class="table-wrap budget-wrap" tabindex="0" role="region" aria-label="Table: the same 24 views at 140,000 and 200,000 splats. Scrolls sideways.">
         <table class="budget">

@@ -76,20 +76,21 @@ const DEMOS = [
   "uv-torus", "program-fields", "grammar-railroad",
 ]; // prettier-ignore
 
-test("every demo placeholder exists, names what it will show, and is hidden in print", async ({
+test("every planned demo is built: none is a placeholder any more, and each is hidden in print for its still", async ({
   page,
 }) => {
   await page.goto("/manual/");
+  await expect(page.locator("aside.demo-placeholder")).toHaveCount(0);
   for (const d of DEMOS) {
-    const box = page.locator(`aside.demo-placeholder[data-demo="${d}"]`);
-    await expect(box, d).toHaveCount(1);
-    await expect(box).toBeVisible();
-    await expect(box.locator(".demo-tag")).toContainText("Demo coming");
-    expect((await box.innerText()).length).toBeGreaterThan(60);
+    await expect(page.locator(`section.demo-live[data-demo="${d}"]`), d).toHaveCount(1);
+    await expect(page.locator(`section.demo-live[data-demo="${d}"]`)).toBeVisible();
+    await expect(page.locator(`figure.demo-still[data-demo-still="${d}"]`), d).toHaveCount(1);
   }
-  await expect(page.locator("aside.demo-placeholder")).toHaveCount(DEMOS.length);
   await page.emulateMedia({ media: "print" });
-  for (const d of DEMOS) await expect(page.locator(`aside[data-demo="${d}"]`)).toBeHidden();
+  for (const d of DEMOS) {
+    await expect(page.locator(`section[data-demo="${d}"]`)).toBeHidden();
+    await expect(page.locator(`figure[data-demo-still="${d}"]`)).toBeVisible();
+  }
 });
 
 test("every link in the manual opens in a new tab, and the level map shows ten levels, with 6 to 10 as placeholders", async ({
@@ -148,7 +149,7 @@ test("Figures 2 and 3 are roomier on the web, and the page still fits a phone", 
 
 test("the manual is American English with the serial comma in the lists the review named", () => {
   // The cover says the Splashery Playground, and the date is updated.
-  expect(flat).toContain("Updated October 9, 2026");
+  expect(flat).toContain("Updated October 11, 2026");
   expect(flat).toContain("Splashery Playground");
   for (const list of [
     "Pictures, screens, and your own input",
