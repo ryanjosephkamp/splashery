@@ -2929,6 +2929,8 @@ export const TOY_SOUNDS = {
   // ---- Light bench (lane Optics) ------------------------------------------------------
   // A tap changes the light: the lamp's switch clicks.
   "light-bench": { voice: "switch", f: 2900, vol: 0.7 },
+  // Codex prototype: a quiet, steady drive hum, synthesized only after a tap.
+  "gear-train": { voice: "hum", f: 96, to: 1, bright: 0.12, decay: 4, vol: 0.14 },
   // ---- Imaging (lane Imaging) ---------------------------------------------------------
   // The belt's low rumble as the bag rides through, the curtains' slap, and
   // the scanner's soft beep when its picture is done.

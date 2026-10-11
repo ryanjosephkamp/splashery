@@ -3999,6 +3999,22 @@ export const TOYS = [
     tags: "terrain elevation land mountain volcano canyon valley water flood usgs 3dep geography box science",
     camera: { yaw: 0.5, pitch: 0.5, roll: 0, distance: 3.0 },
   },
+  // ---- Pack: proto-gear-train (Codex prototype) ----
+  {
+    id: "gear-train",
+    label: "Gear train lab",
+    category: "science",
+    kind: "kit",
+    pack: "proto-gear-train",
+    labs: true,
+    tags: "gear gears train spur involute teeth ratio reduction speed torque rpm idler physics engineering",
+    camera: {
+      yaw: 0,
+      pitch: 0,
+      roll: 0,
+      distance: typeof window !== "undefined" && window.innerWidth < 600 ? 2.7 : 3.7,
+    },
+  },
   // ---- Pack: optics (lane Optics) ----
   {
     id: "ripple-tank",
