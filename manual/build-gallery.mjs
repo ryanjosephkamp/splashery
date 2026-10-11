@@ -1,11 +1,11 @@
-// Writes Level 4's "Sixty more programs" cards into manual/index.html, from src/equation-gallery.json
+// Writes Level 4's "Sixty more programs" cards into manual/gallery.html, from src/equation-gallery.json
 // (Codex task 33, reviewed in Manual r3 part 2). Each card has the program's thumbnail, its one-line
 // description, its source, the program itself (folded), and a "Run it" link that opens the Splat
 // equation toy with that program, in a new tab. Run it again after the gallery file changes:
 //
-//   node manual/build-gallery.mjs && npx prettier --write manual/index.html
+//   node manual/build-gallery.mjs && npx prettier --write manual/gallery.html
 //
-// It replaces everything between the two GALLERY markers in index.html.
+// It replaces everything between the two GALLERY markers in gallery.html.
 
 import fs from "node:fs";
 import zlib from "node:zlib";
@@ -13,7 +13,7 @@ import { readStatements, compileProgram, FIELDS } from "../src/packs/splat-equat
 
 const SITE = "https://ryanjosephkamp.github.io/splashery/";
 const entries = JSON.parse(fs.readFileSync(new URL("../src/equation-gallery.json", import.meta.url), "utf8")); // prettier-ignore
-const indexUrl = new URL("./index.html", import.meta.url);
+const indexUrl = new URL("./gallery.html", import.meta.url);
 
 const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); // prettier-ignore
 const b64url = (buf) => buf.toString("base64").replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, ""); // prettier-ignore
@@ -65,7 +65,7 @@ function card(entry) {
                 <summary>Show the program</summary>
                 <pre><code>${esc(entry.program)}</code></pre>
               </details>
-              <p class="card-links"><a class="button" href="${link(entry)}" target="_blank" rel="noopener">Run it</a> ${src}</p>
+              <p class="card-links"><a class="button" href="${link(entry)}" target="_blank" rel="noopener">Run it</a> <span class="labs-note">(a labs toy)</span> ${src}</p>
             </div>
           </article>`;
 }
@@ -91,7 +91,7 @@ out += "      <!-- GALLERY:END -->\n";
 const html = fs.readFileSync(indexUrl, "utf8");
 const a = html.indexOf("      <!-- GALLERY:START");
 const b = html.indexOf("      <!-- GALLERY:END -->\n");
-if (a < 0 || b < 0) throw new Error("The GALLERY markers are not in index.html yet.");
+if (a < 0 || b < 0) throw new Error("The GALLERY markers are not in gallery.html yet.");
 fs.writeFileSync(
   indexUrl,
   html.slice(0, a) + out + html.slice(b + "      <!-- GALLERY:END -->\n".length),
