@@ -29,19 +29,19 @@ export const SITE = {
 };
 
 // ---- Links that open in a new tab ------------------------------------------------------------
-// Every link that opens the Splashery app (the gallery, "Open in Splashery") or another site
+// Every link that opens the Splashery app (the Playground, "Open in Splashery") or another site
 // opens in a new tab, so the visitor keeps their place on the site (the owner's walkthrough,
 // October 6, 2026). Write one with appLink(); the build also runs every finished page through
 // newTabLinks(), which catches the rest (the Markdown pages, the toy pages).
 
 export const NEW_TAB = 'target="_blank" rel="noopener"';
 
-// A link to the app, written relative to site/ ("../" is the gallery), as HTML for `up` deep.
+// A link to the app, written relative to site/ ("../" is the Playground), as HTML for `up` deep.
 export const appLink = (href, html, { up = "", cls = "" } = {}) =>
   `<a${cls ? ` class="${cls}"` : ""} href="${up}${href}" ${NEW_TAB}>${html}</a>`;
 
 // Adds target="_blank" rel="noopener" to every <a> in a page that leads out of site/'s own
-// pages: a web address, or a path that climbs out of site/ into the gallery or the app (not the
+// pages: a web address, or a path that climbs out of site/ into the Playground or the app (not the
 // manual or the pictures). `up` is the prefix from the page back to site/.
 export function newTabLinks(html, up = "") {
   return html.replace(/<a\s([^>]*)>/g, (tag, attrs) => {
@@ -89,7 +89,7 @@ export const PAGES = [
     // A row of toys to start with, in this order (public toys only).
     featured: ["grape", "solar-system", "dna", "toy-piano", "chess-set", "newtons-cradle", "black-hole", "puzzle-cube", "atom", "rubber-duck", "earth", "graph-plotter"], // prettier-ignore
     doors: [
-      { nav: "toys", href: "../", label: "Toys", text: "The gallery: every toy on its shelf, ready to play.", art: ["rubber-duck", "grape", "chess-set"] }, // prettier-ignore
+      { nav: "toys", href: "../", label: "Toys", text: "The Playground: every toy on its shelf, ready to play.", art: ["rubber-duck", "grape", "chess-set"] }, // prettier-ignore
       { nav: "tools", text: "Poke, paint, magnet and clay, and ways to share what you make.", art: ["blob", "knot", "torus"] }, // prettier-ignore
       { nav: "science", text: "Atoms, planets, the body, math and computing, as toys.", art: ["atom", "saturn", "dna"] }, // prettier-ignore
       { nav: "studio", text: "Turn your own photos, pages and sounds into splats.", art: ["photo-3d", "song-landscape", "picture-frame"] }, // prettier-ignore
@@ -114,7 +114,7 @@ export const PAGES = [
     nav: "tools",
     title: "Tools",
     description: "Every Splashery tool in one place: make and convert, open your own files, scan and measure, QR codes, sound and light.", // prettier-ignore
-    lead: "Splashery is also a workshop. Each tool has its own page, and opens in the gallery, in a new tab, to work on your own things, on your device; nothing is uploaded.", // prettier-ignore
+    lead: "Splashery is also a workshop. Each tool has its own page, and opens in the Playground, in a new tab, to work on your own things, on your device; nothing is uploaded.", // prettier-ignore
     styles: ["hubs.css"],
     // Each group lists toy ids from src/toys.js (the build stops on an unknown id): the
     // toy's own picture is the drawing, `text` is the line shown, and an item with an
@@ -139,7 +139,7 @@ export const PAGES = [
         title: "Open your own files",
         text: "Pages, pictures, molecules and crystals, opened right in your browser.",
         items: [
-          { name: "Splat files", href: "../", icon: "files", open: "Open the gallery", text: "Drop a .ply, .sog, .splat or .spz file in the gallery's Toy tab to look at it, play with it and share it." }, // prettier-ignore
+          { name: "Splat files", href: "../", icon: "files", open: "Open the Playground", text: "Drop a .ply, .sog, .splat or .spz file in the Playground's Toy tab to look at it, play with it and share it." }, // prettier-ignore
           { toy: "picture-lab", text: "A PDF, a picture, a GIF or a video, drawn in splats with the figures lifted off the page." }, // prettier-ignore
           { toy: "your-book", text: "Any PDF as a book with pages that turn, curl and pop their pictures out." }, // prettier-ignore
           { toy: "photo-album", text: "A set of photos as an album: tap to turn a page, pull one over, pop a photo out." }, // prettier-ignore
@@ -190,7 +190,7 @@ export const PAGES = [
         ],
       },
     ],
-    // The tools every toy has (the gallery's toolbar), after the groups.
+    // The tools every toy has (the Playground's toolbar), after the groups.
     groups: [
       {
         title: "In every toy",
@@ -268,7 +268,7 @@ export const PAGES = [
       "lab",
     ],
     dataLead: "Some toys show published data: each splat is a real measurement, or a real structure. This is where each comes from.", // prettier-ignore
-    dataNote: "The other science toys are built from recipes written for Splashery; each toy's About tab, in the gallery, says what it simplifies.", // prettier-ignore
+    dataNote: "The other science toys are built from recipes written for Splashery; each toy's About tab, in the Playground, says what it simplifies.", // prettier-ignore
     evidenceLead: "Every toy that claims to show something true about the world is meant to have an evidence file: what it claims, how the code does it, the sources, and where it simplifies. How they work is written up in @@, and each toy's own page shows its file.", // prettier-ignore
     // One row per dataset: the toys that show it, what it shows, and its sources and licenses.
     datasets: [
@@ -440,10 +440,9 @@ export const PAGES = [
     type: "news",
     nav: "new",
     title: "What's new",
-    description: "What changed in Splashery, day by day, in plain words, with every merged change listed underneath.", // prettier-ignore
-    lead: "What changed, day by day, in plain words. Under each day is the full list of merged changes.", // prettier-ignore
+    description: "The newest toys on Splashery, with the day each arrived, new features and fixes shown before and after.", // prettier-ignore
+    lead: "The newest toys, what's new in how Splashery works, and fixes you can see, newest first.", // prettier-ignore
     styles: ["hubs.css"],
-    count: 700,
   },
   {
     path: "about/",
