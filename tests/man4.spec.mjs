@@ -267,7 +267,7 @@ test.describe("the 3D demos' math", () => {
   });
 });
 
-const html = fs.readFileSync("manual/all.html", "utf8");
+const html = fs.readFileSync("manual/index.html", "utf8");
 const SHOTS = path.resolve("tests/screenshots");
 const text = (h) =>
   h
@@ -413,7 +413,7 @@ test.describe("the grammar as tracks", () => {
   }) => {
     const errors = [];
     page.on("pageerror", (e) => errors.push(e.message));
-    await page.goto("/manual/all.html");
+    await page.goto("/manual/");
     for (const name of RR.RULE_ORDER)
       await expect(page.locator(`#rr-${name} svg.rr-svg`), name).toHaveCount(1);
     // The sum rule shows its words.
@@ -445,7 +445,7 @@ test.describe("the demos on the page", () => {
     const errors = [];
     page.on("pageerror", (e) => errors.push(e.message));
     page.on("console", (m) => m.type() === "error" && !/favicon|404/.test(m.text()) && errors.push(m.text())); // prettier-ignore
-    await page.goto("/manual/all.html");
+    await page.goto("/manual/");
     await page.waitForTimeout(800);
     for (const d of [
       "gaussian-3d",
@@ -469,7 +469,7 @@ test.describe("the demos on the page", () => {
   test("the 3D Gaussian: the shells' weights, a drag that turns it, and a shell you pick", async ({
     page,
   }) => {
-    await page.goto("/manual/all.html");
+    await page.goto("/manual/");
     const out = page.locator("#g3-readout");
     await out.scrollIntoViewIfNeeded();
     await expect(out).toContainText("G = 0.607");
@@ -495,7 +495,7 @@ test.describe("the demos on the page", () => {
   test("one splat: 14 numbers, only the one you move is marked, and the quaternion has length 1", async ({
     page,
   }) => {
-    await page.goto("/manual/all.html");
+    await page.goto("/manual/");
     await page.locator("#sn-table").scrollIntoViewIfNeeded();
     await expect(page.locator("#sn-table > div")).toHaveCount(14);
     const set = async (id, v) => page.locator(`#${id}`).fill(String(v));
@@ -524,7 +524,7 @@ test.describe("the demos on the page", () => {
   test("the bell: the number it shows is the formula's, in one, two, and three dimensions", async ({
     page,
   }) => {
-    await page.goto("/manual/all.html");
+    await page.goto("/manual/");
     await page.locator("#bl-readout").scrollIntoViewIfNeeded();
     const set = async (id, v) => {
       await page.locator(`#${id}`).fill(String(v));
@@ -564,7 +564,7 @@ test.describe("the demos on the page", () => {
   test("the projection: the outline and the ellipse part as the camera comes in", async ({
     page,
   }) => {
-    await page.goto("/manual/all.html");
+    await page.goto("/manual/");
     await page.locator("#pj-readout").scrollIntoViewIfNeeded();
     const gap = async (d) => {
       await page.locator("#pj-d").fill(String(d));
@@ -583,7 +583,7 @@ test.describe("the demos on the page", () => {
   test("sorting and blending: the table is the formula, order changes the color but not the transmittance", async ({
     page,
   }) => {
-    await page.goto("/manual/all.html");
+    await page.goto("/manual/");
     await page.locator("#bd-table").scrollIntoViewIfNeeded();
     const rows = async () => page.locator("#bd-table tr").evaluateAll((trs) => trs.map((tr) => [...tr.cells].map((c) => c.innerText.trim()))); // prettier-ignore
     // The default: far to near. Gold (depth 4) first, red (depth 1) last.
@@ -638,7 +638,7 @@ test.describe("the demos on the page", () => {
     const n = (...items) =>
       items.reduce((s, i) => s + (k.kit.items[i].end - k.kit.items[i].start), 0);
     expect(k.kit.items.length).toBe(7); // the tower, the cap, the hub, and four sails
-    await page.goto("/manual/all.html");
+    await page.goto("/manual/");
     await page.locator("#wm-readout").scrollIntoViewIfNeeded();
     const click = async (lit) => {
       await page.locator(`#demo-windmill .code-line[data-lit="${lit}"]`).click();
@@ -666,7 +666,7 @@ test.describe("the demos on the page", () => {
   test("the torus: dots start on the flat grid, end on the torus, and the readout agrees", async ({
     page,
   }) => {
-    await page.goto("/manual/all.html");
+    await page.goto("/manual/");
     await page.locator("#ut-readout").scrollIntoViewIfNeeded();
     const readout = async () => page.locator("#ut-readout").innerText();
     const nums = (line, t) =>
@@ -700,7 +700,7 @@ test.describe("the demos on the page", () => {
   test("the fields: the splats come from the toy's own recipe, and each field moves only what it should", async ({
     page,
   }) => {
-    await page.goto("/manual/all.html");
+    await page.goto("/manual/");
     await page.locator("#pf-fields").scrollIntoViewIfNeeded();
     await expect(page.locator("#pf-fields .field-row")).toHaveCount(12);
     await expect(page.locator("#pf-f-x")).toHaveValue("(2 + cos(v + t))cos(u)");
@@ -742,7 +742,7 @@ test.describe("the budget tables", () => {
   test("every number in the manual's table is the document's, and the counts in the text are counted from it", async ({
     page,
   }) => {
-    await page.goto("/manual/all.html");
+    await page.goto("/manual/");
     const rows = readRows();
     expect(rows.length).toBe(24);
     const cells = await page.locator("table.budget:not(.summary) tbody tr").evaluateAll((trs) => trs.map((tr) => [...tr.cells].map((c) => c.innerText.trim()))); // prettier-ignore
@@ -770,7 +770,7 @@ test.describe("the budget tables", () => {
   }) => {
     const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 } });
     const page = await ctx.newPage();
-    await page.goto("/manual/all.html");
+    await page.goto("/manual/");
     await page.locator(".budget-wrap").first().scrollIntoViewIfNeeded();
     await page.evaluate(() => document.querySelector(".table-note").scrollIntoView());
     await page.screenshot({ path: path.join(SHOTS, "man4-budget-table-1440x900.png") });
@@ -799,7 +799,7 @@ test.describe("the budget tables", () => {
       isMobile: true,
     });
     const page = await ctx.newPage();
-    await page.goto("/manual/all.html");
+    await page.goto("/manual/");
     await page.locator("#splat-count").scrollIntoViewIfNeeded();
     const wraps = await page.locator(".budget-wrap").evaluateAll((els) => els.map((e) => [e.scrollWidth, e.clientWidth, e.getAttribute("tabindex"), e.getAttribute("role")])); // prettier-ignore
     expect(wraps.length).toBe(2);
@@ -837,9 +837,8 @@ test.describe("What Splashery can do", () => {
     expect(out).toMatch(/site\/ is current/);
     const learn = fs.readFileSync("site/learn/index.html", "utf8");
     expect(learn).toContain('learn/can-do/"');
-    expect(learn).toContain("../manual/toy.html#splat-count");
+    expect(learn).toContain("../manual/#splat-count");
     expect(html).toContain('href="../site/learn/can-do/"');
-    for (const f of ["more.html", "unique.html"]) expect(fs.readFileSync(`manual/${f}`, "utf8")).toContain('href="../site/learn/can-do/"'); // prettier-ignore
     await page.goto("/site/learn/can-do/");
     await expect(page.locator("h1")).toHaveText("What Splashery can do");
     // The counts are the catalog's own.
@@ -906,7 +905,7 @@ test.describe("print and phone", () => {
   test("in print each demo gives way to its still, and the grammar's tracks are left out", async ({
     page,
   }) => {
-    await page.goto("/manual/all.html");
+    await page.goto("/manual/");
     await page.emulateMedia({ media: "print" });
     for (const d of [
       "gaussian-3d",
@@ -938,7 +937,7 @@ test.describe("print and phone", () => {
         isMobile: true,
       });
       const page = await ctx.newPage();
-      await page.goto("/manual/all.html");
+      await page.goto("/manual/");
       for (const id of [
         "demo-railroad",
         "demo-gaussian",

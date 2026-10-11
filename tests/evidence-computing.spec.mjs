@@ -958,7 +958,7 @@ test("half adder: actual fixed animation gives carry 1, sum 0, then resets", () 
 });
 
 test("browser: production half-adder output agrees with the arithmetic", async ({ page }) => {
-  await page.goto("/manual/all.html");
+  await page.goto("/manual/");
   const actual = await page.evaluate(async () => {
     const { RECIPES } = await import("/src/packs/computing.js");
     const out = { parts: {}, tokens: [], cues: [] };

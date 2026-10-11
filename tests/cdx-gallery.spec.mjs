@@ -29,7 +29,7 @@ test("the gallery is complete, readable, and compiles in the page", async ({ pag
   ]);
   for (const group of Object.values(groupCounts)) expect(group).toHaveLength(10);
 
-  await page.goto("/manual/all.html");
+  await page.goto("/manual/index.html");
   const outcomes = await page.evaluate(async (gallery) => {
     const { compileProgram } = await import("/src/packs/splat-equation.js");
     return gallery.map((entry) => {

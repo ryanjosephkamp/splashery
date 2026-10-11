@@ -214,7 +214,7 @@ test("the manual page opens, and every example link opens the toy with its progr
 }) => {
   const problems = [];
   page.on("pageerror", (e) => problems.push(e.message));
-  await page.goto("/manual/all.html");
+  await page.goto("/manual/");
   await expect(page.locator("h1")).toHaveText(/Tinkerer's Manual/);
   const links = await page.locator("a[href*='#s=']").evaluateAll((as) => as.map((a) => a.getAttribute("href"))); // prettier-ignore
   expect(links.length).toBeGreaterThanOrEqual(8);
@@ -259,7 +259,7 @@ test("splat equation mid-tap screenshots at 390x844 and 1440x900", async ({ brow
     await page.evaluate(() => window.__splashery.player.act(null));
     await page.waitForTimeout(1600);
     await page.screenshot({ path: path.join(SHOTS, `man-splat-equation-${w}x${h}.png`) });
-    await page.goto("/manual/all.html");
+    await page.goto("/manual/");
     await page.waitForLoadState("load");
     await page.screenshot({ path: path.join(SHOTS, `man-manual-${w}x${h}.png`) });
     expect(problems).toEqual([]);
@@ -282,6 +282,6 @@ test("the manual's example recipe builds, and its gust ends where the sails woul
   expect(angle(1e-9) - angle(0)).toBeCloseTo(2 * Math.PI, 5);
   expect(angle(1)).toBeCloseTo(angle(0), 9);
   // The page shows the same code.
-  const html = fs.readFileSync("manual/all.html", "utf8");
+  const html = fs.readFileSync("manual/index.html", "utf8");
   expect(html).toContain("const extra = 2 * Math.PI * g * g * (3 - 2 * g);");
 });

@@ -49,29 +49,19 @@ let current = null;
 let pinned = false;
 let quiet = false; // Escape gives the word back its focus without opening the pop-up again
 
-// An entry comes from the glossary on this page, or, on every other page, from glossary-data.js
-// (written from glossary.html by build-pages.mjs); the pop-up's link goes to the glossary page.
-let glossaryData = null;
-async function loadGlossary() {
-  if (!glossaryData) glossaryData = (await import("./glossary-data.js")).default;
-  return glossaryData;
-}
 function glossaryEntry(id) {
   const dt = document.getElementById(id);
   const dd = dt?.nextElementSibling;
-  if (dt && dd?.tagName === "DD") return { title: dt.innerHTML, body: dd.innerHTML, here: true };
-  const e = glossaryData?.[id];
-  return e ? { ...e, here: false } : null;
+  if (!dt || dd?.tagName !== "DD") return null;
+  return { title: dt.innerHTML, body: dd.innerHTML };
 }
 
-async function show(term, pin) {
-  current = term;
-  pinned = pin;
-  if (!document.getElementById(term.dataset.g)) await loadGlossary();
-  if (current !== term) return; // the pointer left, or another word was picked, while it loaded
+function show(term, pin) {
   const e = glossaryEntry(term.dataset.g);
   if (!e) return;
-  pop.innerHTML = `<strong>${e.title}</strong><span>${e.body}</span><a href="${e.here ? "" : "glossary.html"}#${term.dataset.g}">In the glossary</a>`;
+  current = term;
+  pinned = pin;
+  pop.innerHTML = `<strong>${e.title}</strong><span>${e.body}</span><a href="#${term.dataset.g}">In the glossary</a>`;
   pop.hidden = false;
   term.setAttribute("aria-describedby", "term-pop");
   const r = term.getBoundingClientRect();

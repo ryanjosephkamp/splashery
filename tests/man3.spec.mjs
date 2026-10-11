@@ -8,7 +8,7 @@ import fs from "node:fs";
 import path from "node:path";
 
 const SHOTS = path.resolve("tests/screenshots");
-const html = fs.readFileSync("manual/all.html", "utf8");
+const html = fs.readFileSync("manual/index.html", "utf8");
 // The page's text with tags dropped and white space squeezed, so line breaks in the source don't
 // matter when a sentence is looked for.
 const text = (h) =>
@@ -79,7 +79,7 @@ const DEMOS = [
 test("every planned demo is built: none is a placeholder any more, and each is hidden in print for its still", async ({
   page,
 }) => {
-  await page.goto("/manual/all.html");
+  await page.goto("/manual/");
   await expect(page.locator("aside.demo-placeholder")).toHaveCount(0);
   for (const d of DEMOS) {
     await expect(page.locator(`section.demo-live[data-demo="${d}"]`), d).toHaveCount(1);
@@ -96,7 +96,7 @@ test("every planned demo is built: none is a placeholder any more, and each is h
 test("every link in the manual opens in a new tab, and the level map shows ten levels, with 6 to 10 as placeholders", async ({
   page,
 }) => {
-  await page.goto("/manual/all.html");
+  await page.goto("/manual/");
   const bad = await page.evaluate(() =>
     [...document.querySelectorAll("a[href]")]
       .filter((a) => !a.getAttribute("href").startsWith("#"))
@@ -115,7 +115,7 @@ test("every link in the manual opens in a new tab, and the level map shows ten l
 test("the References section is numbered, and every citation leads to an entry", async ({
   page,
 }) => {
-  await page.goto("/manual/all.html");
+  await page.goto("/manual/");
   const refs = page.locator("ol.refs > li");
   const n = await refs.count();
   expect(n).toBeGreaterThanOrEqual(8);
@@ -134,7 +134,7 @@ test("Figures 2 and 3 are roomier on the web, and the page still fits a phone", 
   page,
 }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
-  await page.goto("/manual/all.html");
+  await page.goto("/manual/");
   for (const label of ["Representation", "The twelve"]) {
     const svg = page.locator(`figure svg[aria-label^='${label}']`);
     const w = (await svg.boundingBox()).width;
@@ -142,7 +142,7 @@ test("Figures 2 and 3 are roomier on the web, and the page still fits a phone", 
   }
   await page.screenshot({ path: path.join(SHOTS, "man3-manual-1440x900.png") });
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto("/manual/all.html");
+  await page.goto("/manual/");
   expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(390);
   await page.screenshot({ path: path.join(SHOTS, "man3-manual-390x844.png") });
 });
