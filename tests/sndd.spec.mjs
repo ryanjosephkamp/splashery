@@ -84,7 +84,8 @@ test("every changed toy is in the sound review, ready to hear or approved, and i
     expect(["ready", "site"], id).toContain(REVIEW[id].status);
     expect(REVIEW[id], id).toMatchObject({ round: "2026-10-06" });
     expect(REVIEW[id].plan, id).toMatch(/^Now: .*\(Sound D\)\.$/);
-    expect(REVIEW[id].said, id).toMatch(/^\(October 6, 2026, walkthrough\) /);
+    // The owner's own words stay private (October 11, 2026): no "said" field in the review.
+    expect(REVIEW[id].said, id).toBeUndefined();
   }
 });
 
