@@ -22,9 +22,7 @@ const BG = "#f4f1ea";
 
 // id -> { file (without r7b- and .jpg; defaults to the id), set, options, wait }
 export const STILLS = {
-  chest: {},
   "sword-in-stone": {},
-  "music-box": {},
   orange: {},
   "candy-cane": {},
   "yo-yo": {},
@@ -36,7 +34,6 @@ export const STILLS = {
   "point-clouds": {},
   hurricane: {},
   "data-in-3d": {},
-  "stork-migration": {},
   protein: {},
   // Chapter 8: the Sharp view is the default, so the splat view needs its option.
   "photo-3d": { file: "photo-3d-sharp", wait: 6000 },
@@ -45,19 +42,13 @@ export const STILLS = {
   "video-3d": { wait: 8000 },
   strawberry: {},
   bee: {},
-  grape: {},
   // Chapter 9
   "qr-code": {},
-  "qr-anatomy": {},
-  "qr-damage": {},
   "qr-picture": { wait: 5000 },
-  "qr-build": {},
-  barcodes: {},
   "your-book": { wait: 5000 },
   // Chapter 10
   "model-splats": { wait: 5000 },
   "splat-toolkit": { wait: 5000 },
-  "splat-equation": {},
 };
 
 const want = process.argv.slice(2);
