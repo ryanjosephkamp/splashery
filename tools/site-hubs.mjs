@@ -295,9 +295,9 @@ drive(t, c, out) {
 <section aria-labelledby="h-play">
 <h2 id="h-play">Play with it</h2>
 <ul>
-<li><strong>Hands-on physics.</strong> With the hand switch on, a drag picks up whatever is under your finger and a quick let-go tosses it. It lands, bounces, and settles on the floor, and soft toys squish. Every toy plays this way, scans included, as one rigid body; a toy's own recipe can instead make its pieces separate bodies. This is not behind the labs switch.</li>
+<li><strong>Hands-on physics.</strong> With the hand switch on, a drag picks up whatever is under your finger and a quick let-go tosses it. It lands, bounces, and settles on the floor, and soft toys squish. Most toys play this way, scans included, as one rigid body; a recipe can turn it off, and picture toys and still toys play only if their recipe opts in. A recipe can also make its pieces separate bodies. This is not behind the labs switch.</li>
 <li><strong>Toys with moving parts.</strong> Hinges, pivots, sliders, and morphs run on the graphics chip, so a chest opens and a windmill turns without rebuilding anything.</li>
-<li><strong>Liquids, gases, and flames.</strong> A recipe can declare a fluid, which is simulated while the toy is open and drawn as its own splats, one per particle. See ${toy("fluid-lab")}.</li>
+<li><strong>Liquids, gases, and flames.</strong> A recipe can declare a liquid, a gas, or a flame, which is simulated while the toy is open. How it is drawn depends on the fluid and on the device: on the page's own path each liquid particle is four small splats; on a device with WebGPU the liquids are drawn as one smooth surface after the splats; and smoke, steam, and flames run on a grid and are drawn as a glowing volume. See ${toy("fluid-lab")}.</li>
 <li><strong>Instruments that are played.</strong> A keyboard toy can play songs from its own list, a MIDI file, or a tune pasted as ABC notation, and every key, hammer, and string moves as a solid piece.</li>
 <li><strong>The viewer's controls.</strong> Focus mode hides everything but the toy (the <kbd>F</kbd> key or the focus button; <kbd>Esc</kbd> brings the rest back). On a computer, <kbd>[</kbd> folds the side panel and <kbd>G</kbd> opens the Playground. The Detail setting (Auto, High, or Max, and with labs on a slider from 60,000 to 400,000 splats) lives in your browser only, never in a link.</li>
 </ul>
@@ -305,7 +305,7 @@ drive(t, c, out) {
 <section aria-labelledby="h-make">
 <h2 id="h-make">Make your own</h2>
 <ul>
-<li><strong>Toys from rules, in the browser.</strong> A recipe of a few kilobytes becomes anywhere from 60,000 to 400,000 splats on your device, depending on the device and the Detail setting, so there is no multi-megabyte file to download. The <a href="${up}../manual/">Tinkerer's Manual</a> teaches recipes from the math of one splat up to your own toys.</li>
+<li><strong>Toys from rules, in the browser.</strong> A recipe of a few kilobytes is built into splats on your device. Its base budget is 60,000 to 400,000 splats, depending on the device and, in labs, the Detail slider (a recipe that asks for more density gets more, up to the tier's most), so the shape itself is never a multi-megabyte file to download. The page, the engine, and any optional models or captures a toy uses still download, and only when that toy opens. The <a href="${up}../manual/">Tinkerer's Manual</a> teaches recipes from the math of one splat up to your own toys.</li>
 <li><strong>Equations as a language.</strong> In ${toy("splat-equation")}, type where splats go and what color they are, as formulas in <var>u</var>, <var>v</var>, and <var>t</var>, and get an animated shape, with plain messages instead of crashes. It has three looks: Solid, Fine, and Dots.</li>
 <li><strong>A whole scene in a link.</strong> A share link carries the toy, its options, and the camera, compressed into the address itself. No server is involved. A link carries settings, not your files: a photo or a splat file from your device has to be opened again by whoever opens the link. <a href="${up}learn/scene-format/">The scene format</a> says exactly what is in one.</li>
 </ul>
@@ -324,17 +324,17 @@ drive(t, c, out) {
 </section>
 <section aria-labelledby="h-live">
 <h2 id="h-live">Camera, microphone, and screen</h2>
-<p>A toy can read the microphone, the camera, or a shared screen, but only after you tap a button for it. Nothing is requested before that tap. While a source is on, a small "Live" pill with a Stop button shows at the top of the page, and the sound or pictures stay on your device: nothing is recorded or sent. Two examples are ${toy("room-echo")} (clap, and it measures how long the room rings) and ${toy("splat-mirror")} (your camera as splats, with a depth model of about 27 MB that loads only after you start the camera).</p>
+<p>A toy can read the microphone, the camera, or a shared screen, but only after you tap a button for it. Nothing is requested before that tap. While a source is on, a small "Live" pill with a Stop button shows at the top of the page, and the sound or pictures stay on your device: nothing is sent anywhere, and nothing is recorded unless you ask. (One exception: a recorder, such as the splat mirror's, records only after you tap Record, keeps the recording on your device, and saves it only to a file you choose.) Two examples are ${toy("room-echo")} (clap, and it measures how long the room rings) and ${toy("splat-mirror")} (your camera as splats, with a depth model of about 27 MB that loads only after you start the camera).</p>
 </section>
 <section aria-labelledby="h-worlds">
 <h2 id="h-worlds">Worlds</h2>
-<p>A world is a small place you walk around in, built on your device from recipes and a seed, with a start screen, a list of places, collision, a character, and a camera that follows. In splats mode everything you see is splats. In hybrid mode the ground, water, sky, and signs are lit models, and only the props and the near grass stay splats, so "everything is splats" holds for the toys but not for every part of every world. Worlds are behind the labs switch <span class="badge">labs</span> (<a href="${up}../worlds/?labs=1">open the worlds</a>).</p>
+<p>A world is a small place you walk around in, built on your device from recipes and a seed, with a start screen, a list of places, collision, a character, and a camera that follows. In splats mode everything you see is splats. In hybrid mode the ground, water, sky, and signs are lit models, and only the props and the near grass stay splats. So Splashery is primarily splat based, but not only: the photo toys' Sharp view is a textured relief, not splats, and some liquids and flames are drawn another way too (see Play with it). Worlds are behind the labs switch <span class="badge">labs</span> (<a href="${up}../worlds/?labs=1">open the worlds</a>).</p>
 </section>
 <section aria-labelledby="h-unique">
 <h2 id="h-unique">What other splat tools don't do, as far as we know</h2>
 <p>PlayCanvas is the engine that draws the splats, and its editor, SuperSplat, works on captured splat files: you crop, clean, and arrange a capture. Splashery starts from the other end, because most of its toys are never captured at all. We have not tried every tool, so read this list as "to our knowledge":</p>
 <ul>
-<li>toys made from rules, in the browser, with no big file to download;</li>
+<li>toys made from rules, in the browser, with no multi-megabyte file for the shape;</li>
 <li>equations as a language for splat shapes;</li>
 <li>moving parts inside one splat cloud, run on the graphics chip;</li>
 <li>hands-on physics on splats: toss, stack, pull apart, and pour;</li>

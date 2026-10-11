@@ -224,6 +224,17 @@
         view on the same simulated 390 by 844 phone at five budgets, changing only the count. The
         table compares 140,000 (the Mid tier) with 200,000 (the High tier) for 24 views of 22 toys.
       </p>
+      <p>
+        These counts are <b>base budgets</b>: the number a tier asks for before the toy's own
+        density. A toy with density 2 asks for twice as many, up to the tier's most (240,000 at Mid
+        and 300,000 at High, from <code>PROFILES</code> in <code>src/generators.js</code> and
+        <code>splatBudget</code> in <code>src/player.js</code>). The American football, the hockey
+        puck, and the marble have density 2, so at the Mid and High base budgets they were asked for
+        240,000 and 300,000 splats, not 140,000 and 200,000. The small line under each toy in the
+        table gives the splats it actually got at the lowest and highest base budgets (from the
+        document), so the table is about what a bigger base budget does, not about a fixed count per
+        toy.
+      </p>
       <h4>What the columns mean</h4>
       <ul>
         <li>
@@ -242,13 +253,15 @@
         <li>
           <b>Area</b> is how much of the screen the toy covers, as a percent of the same view at
           400,000 splats. Over 100 percent means thin parts drawn fatter than they are. The table
-          shows 60,000 and then 140,000 splats, because that is where the change is.
+          shows base budgets of 60,000 and then 140,000, because that is where the change is.
         </li>
       </ul>
       <!-- BUDGET:START (written by manual/build-budget.mjs; do not edit by hand) -->
       <p class="table-note">
-        <b>Same toy, same view, same phone: 140,000 splats → 200,000 splats.</b> Lower is better in
-        every column. <span class="swatch worse">Worse</span>
+        <b>Same toy, same view, same phone, at a base budget of 140,000 splats → 200,000.</b> A base
+        budget is the number the tier asks for before the toy's own density; the small line under
+        each toy gives the splats it actually got at the 60,000 and 400,000 base budgets. Lower is
+        better in every column. <span class="swatch worse">Worse</span>
         <span class="swatch better">Better</span> <span class="swatch same">The same</span> On a
         screen, the table scrolls sideways inside its box.
       </p>
@@ -256,11 +269,11 @@
         class="table-wrap budget-wrap"
         tabindex="0"
         role="region"
-        aria-label="Table: the same 24 views at 140,000 and 200,000 splats. Scrolls sideways."
+        aria-label="Table: the same 24 views at base budgets of 140,000 and 200,000 splats. Scrolls sideways."
       >
         <table class="budget">
           <caption class="sr-only">
-            The same 24 views at 140,000 and 200,000 splats
+            The same 24 views at base budgets of 140,000 and 200,000 splats
           </caption>
           <thead>
             <tr>
@@ -268,173 +281,269 @@
               <th scope="col">Edge (screen pixels)</th>
               <th scope="col">Speckle</th>
               <th scope="col">Shimmer</th>
-              <th scope="col">Area, 60k → 140k</th>
+              <th scope="col">Area, base 60k → 140k</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <th scope="row">Lamp</th>
+              <th scope="row">
+                Lamp<small class="drawn"
+                  >60,000 → 399,998 splats drawn at the 60k → 400k base budgets</small
+                >
+              </th>
               <td class="pair better">0.52 → 0.51</td>
               <td class="pair worse">0.37 → 0.39</td>
               <td class="pair worse">1.57 → 1.65</td>
               <td class="pair">101% → 100%</td>
             </tr>
             <tr>
-              <th scope="row">American football</th>
+              <th scope="row">
+                American football<small class="drawn"
+                  >120,000 → 600,000 splats drawn at the 60k → 400k base budgets</small
+                >
+              </th>
               <td class="pair better">0.50 → 0.48</td>
               <td class="pair worse">0.61 → 0.70</td>
               <td class="pair worse">1.49 → 1.60</td>
               <td class="pair">100% → 100%</td>
             </tr>
             <tr>
-              <th scope="row">Hockey puck</th>
+              <th scope="row">
+                Hockey puck<small class="drawn"
+                  >120,000 → 600,000 splats drawn at the 60k → 400k base budgets</small
+                >
+              </th>
               <td class="pair worse">0.27 → 0.29</td>
               <td class="pair better">0.24 → 0.21</td>
               <td class="pair better">1.01 → 0.99</td>
               <td class="pair">102% → 101%</td>
             </tr>
             <tr>
-              <th scope="row">Klein bottle</th>
+              <th scope="row">
+                Klein bottle<small class="drawn"
+                  >48,000 → 320,000 splats drawn at the 60k → 400k base budgets</small
+                >
+              </th>
               <td class="pair better">0.56 → 0.53</td>
               <td class="pair worse">0.52 → 0.90</td>
               <td class="pair worse">1.12 → 1.33</td>
               <td class="pair">100% → 99%</td>
             </tr>
             <tr>
-              <th scope="row">Clock</th>
+              <th scope="row">
+                Clock<small class="drawn"
+                  >60,000 → 400,000 splats drawn at the 60k → 400k base budgets</small
+                >
+              </th>
               <td class="pair better">0.51 → 0.49</td>
               <td class="pair worse">0.49 → 0.54</td>
               <td class="pair worse">1.64 → 1.90</td>
               <td class="pair">101% → 100%</td>
             </tr>
             <tr>
-              <th scope="row">Penguin</th>
+              <th scope="row">
+                Penguin<small class="drawn"
+                  >60,001 → 400,002 splats drawn at the 60k → 400k base budgets</small
+                >
+              </th>
               <td class="pair better">0.51 → 0.49</td>
               <td class="pair worse">0.42 → 0.46</td>
               <td class="pair worse">2.92 → 3.13</td>
               <td class="pair">–</td>
             </tr>
             <tr>
-              <th scope="row">Snow globe</th>
+              <th scope="row">
+                Snow globe<small class="drawn"
+                  >57,539 → 383,576 splats drawn at the 60k → 400k base budgets</small
+                >
+              </th>
               <td class="pair same">0.44 → 0.44</td>
               <td class="pair worse">0.20 → 0.23</td>
               <td class="pair worse">0.71 → 0.84</td>
               <td class="pair">102% → 101%</td>
             </tr>
             <tr>
-              <th scope="row">White blood cell</th>
+              <th scope="row">
+                White blood cell<small class="drawn"
+                  >60,000 → 400,001 splats drawn at the 60k → 400k base budgets</small
+                >
+              </th>
               <td class="pair better">0.54 → 0.53</td>
               <td class="pair worse">0.72 → 0.82</td>
               <td class="pair worse">0.84 → 1.02</td>
               <td class="pair">101% → 100%</td>
             </tr>
             <tr>
-              <th scope="row">Ocean liner</th>
+              <th scope="row">
+                Ocean liner<small class="drawn"
+                  >53,356 → 355,780 splats drawn at the 60k → 400k base budgets</small
+                >
+              </th>
               <td class="pair better">0.46 → 0.44</td>
               <td class="pair worse">0.31 → 0.35</td>
               <td class="pair worse">1.69 → 2.09</td>
               <td class="pair">106% → 104%</td>
             </tr>
             <tr>
-              <th scope="row">Marble</th>
+              <th scope="row">
+                Marble<small class="drawn"
+                  >120,001 → 600,001 splats drawn at the 60k → 400k base budgets</small
+                >
+              </th>
               <td class="pair better">0.46 → 0.45</td>
               <td class="pair worse">1.43 → 1.65</td>
               <td class="pair worse">2.63 → 2.96</td>
               <td class="pair">100% → 100%</td>
             </tr>
             <tr>
-              <th scope="row">Sailboat</th>
+              <th scope="row">
+                Sailboat<small class="drawn"
+                  >60,000 → 400,002 splats drawn at the 60k → 400k base budgets</small
+                >
+              </th>
               <td class="pair better">0.50 → 0.46</td>
               <td class="pair worse">0.51 → 0.59</td>
               <td class="pair worse">2.26 → 2.93</td>
               <td class="pair">103% → 103%</td>
             </tr>
             <tr>
-              <th scope="row">Toy piano</th>
+              <th scope="row">
+                Toy piano<small class="drawn"
+                  >60,189 → 400,004 splats drawn at the 60k → 400k base budgets</small
+                >
+              </th>
               <td class="pair better">0.60 → 0.56</td>
               <td class="pair worse">0.22 → 0.25</td>
               <td class="pair worse">1.93 → 2.32</td>
               <td class="pair">111% → 105%</td>
             </tr>
             <tr>
-              <th scope="row">Your book</th>
+              <th scope="row">
+                Your book<small class="drawn"
+                  >113,837 → 446,581 splats drawn at the 60k → 400k base budgets</small
+                >
+              </th>
               <td class="pair worse">0.52 → 0.55</td>
               <td class="pair same">0.00 → 0.00</td>
               <td class="pair better">1.17 → 0.46</td>
               <td class="pair">–</td>
             </tr>
             <tr>
-              <th scope="row">Chladni plate</th>
+              <th scope="row">
+                Chladni plate<small class="drawn"
+                  >51,398 → 149,874 splats drawn at the 60k → 400k base budgets</small
+                >
+              </th>
               <td class="pair same">0.66 → 0.66</td>
               <td class="pair same">0.26 → 0.26</td>
               <td class="pair better">6.02 → 6.01</td>
               <td class="pair">100% → 100%</td>
             </tr>
             <tr>
-              <th scope="row">Bicycle</th>
+              <th scope="row">
+                Bicycle<small class="drawn"
+                  >59,097 → 393,919 splats drawn at the 60k → 400k base budgets</small
+                >
+              </th>
               <td class="pair better">0.50 → 0.49</td>
               <td class="pair worse">0.89 → 0.99</td>
               <td class="pair worse">6.00 → 6.52</td>
               <td class="pair">118% → 107%</td>
             </tr>
             <tr>
-              <th scope="row">Eiffel tower</th>
+              <th scope="row">
+                Eiffel tower<small class="drawn"
+                  >60,002 → 400,002 splats drawn at the 60k → 400k base budgets</small
+                >
+              </th>
               <td class="pair better">0.58 → 0.55</td>
               <td class="pair worse">0.20 → 0.24</td>
               <td class="pair worse">0.86 → 1.19</td>
               <td class="pair">109% → 104%</td>
             </tr>
             <tr>
-              <th scope="row">Crystal lattice</th>
+              <th scope="row">
+                Crystal lattice<small class="drawn"
+                  >59,872 → 399,968 splats drawn at the 60k → 400k base budgets</small
+                >
+              </th>
               <td class="pair better">0.57 → 0.54</td>
               <td class="pair worse">0.27 → 0.31</td>
               <td class="pair worse">1.49 → 1.83</td>
               <td class="pair">111% → 105%</td>
             </tr>
             <tr>
-              <th scope="row">Knot</th>
+              <th scope="row">
+                Knot<small class="drawn"
+                  >60,000 → 400,000 splats drawn at the 60k → 400k base budgets</small
+                >
+              </th>
               <td class="pair better">0.53 → 0.52</td>
               <td class="pair worse">0.48 → 0.58</td>
               <td class="pair worse">1.54 → 1.87</td>
               <td class="pair">103% → 101%</td>
             </tr>
             <tr>
-              <th scope="row">Torus knot</th>
+              <th scope="row">
+                Torus knot<small class="drawn"
+                  >60,000 → 400,000 splats drawn at the 60k → 400k base budgets</small
+                >
+              </th>
               <td class="pair better">0.53 → 0.52</td>
               <td class="pair worse">0.29 → 0.34</td>
               <td class="pair worse">1.10 → 1.25</td>
               <td class="pair">98% → 98%</td>
             </tr>
             <tr>
-              <th scope="row">Oak</th>
+              <th scope="row">
+                Oak<small class="drawn"
+                  >59,792 → 398,257 splats drawn at the 60k → 400k base budgets</small
+                >
+              </th>
               <td class="pair better">0.58 → 0.57</td>
               <td class="pair worse">0.40 → 0.51</td>
               <td class="pair worse">0.82 → 1.03</td>
               <td class="pair">105% → 102%</td>
             </tr>
             <tr>
-              <th scope="row">Chess set</th>
+              <th scope="row">
+                Chess set<small class="drawn"
+                  >58,249 → 387,829 splats drawn at the 60k → 400k base budgets</small
+                >
+              </th>
               <td class="pair better">0.58 → 0.52</td>
               <td class="pair worse">0.14 → 0.15</td>
               <td class="pair worse">2.44 → 3.09</td>
               <td class="pair">106% → 103%</td>
             </tr>
             <tr>
-              <th scope="row">Dna</th>
+              <th scope="row">
+                Dna<small class="drawn"
+                  >59,986 → 400,020 splats drawn at the 60k → 400k base budgets</small
+                >
+              </th>
               <td class="pair better">0.51 → 0.50</td>
               <td class="pair worse">0.50 → 0.57</td>
               <td class="pair worse">4.06 → 4.53</td>
               <td class="pair">–</td>
             </tr>
             <tr>
-              <th scope="row">Bicycle (close up, 0.5)</th>
+              <th scope="row">
+                Bicycle (close up, 0.5)<small class="drawn"
+                  >59,097 → 393,919 splats drawn at the 60k → 400k base budgets</small
+                >
+              </th>
               <td class="pair better">0.53 → 0.52</td>
               <td class="pair worse">0.36 → 0.42</td>
               <td class="pair worse">2.78 → 3.25</td>
               <td class="pair">118% → 107%</td>
             </tr>
             <tr>
-              <th scope="row">Chess set (close up, 0.6)</th>
+              <th scope="row">
+                Chess set (close up, 0.6)<small class="drawn"
+                  >58,249 → 387,829 splats drawn at the 60k → 400k base budgets</small
+                >
+              </th>
               <td class="pair better">0.60 → 0.54</td>
               <td class="pair worse">0.08 → 0.09</td>
               <td class="pair worse">1.50 → 2.01</td>
@@ -445,13 +554,13 @@
       </div>
       <p class="table-note">
         <b>All five budgets across all the views:</b> the middle value of each toy's change against
-        its own result at 140,000 splats.
+        its own result at a base budget of 140,000 splats.
       </p>
       <div
         class="table-wrap budget-wrap"
         tabindex="0"
         role="region"
-        aria-label="Table: how each budget compares with 140,000 splats, across all the views. Scrolls sideways."
+        aria-label="Table: how each base budget compares with 140,000 splats, across all the views. Scrolls sideways."
       >
         <table class="budget summary">
           <caption class="sr-only">
@@ -459,7 +568,7 @@
           </caption>
           <thead>
             <tr>
-              <th scope="col">Budget</th>
+              <th scope="col">Base budget</th>
               <th scope="col">Edge</th>
               <th scope="col">Speckle</th>
               <th scope="col">Shimmer</th>

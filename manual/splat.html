@@ -1039,17 +1039,23 @@
         That is the first-order footprint, and a real renderer draws a little more than it. To keep
         a tiny splat from shrinking to less than a pixel (and flickering), splat renderers add a
         small blur on the screen: the original 3D Gaussian splatting code adds 0.3 square pixels to
-        each diagonal entry of the 2-by-2 matrix, and they also clamp very small axes and skip very
-        faint or tiny splats. Splashery's renderer is PlayCanvas's, which applies a filter of this
-        kind (its anti-aliasing option). So the demo below shows Σ′ itself, the geometry; the pixels
-        on your screen have that extra blur on top.
+        each diagonal entry of the 2-by-2 matrix, and so does Splashery's renderer, which is
+        PlayCanvas's. In its vendored shader that blur is always on: it adds 0.3 to both diagonal
+        entries, and it keeps the smaller eigenvalue at least 0.1. It also skips splats that come
+        out under about 2 pixels on the screen (the cull settings in
+        <code>src/sharpness.js</code> explain how). A separate, optional setting, the engine's
+        anti-aliasing (off unless a labs switch turns it on), does something else: it lowers each
+        splat's opacity to make up for the energy that blur spread out, using the ratio of the
+        determinants before and after. So the demo below shows Σ′ itself, the unfiltered geometry;
+        the pixels on your screen have that extra blur on top, whichever way the option is set.
       </p>
       <section class="demo-live" data-demo="projection" id="demo-projection">
         <h4>Try it: one ellipsoid, and a camera you can move</h4>
         <p class="hint">
           The solid line is the true outline on the screen of the shell one size out of a splat,
           found by sending points of the shell through the real perspective map. The dashed line is
-          the ellipse that the formula gives (a renderer adds a small blur to this), from
+          the ellipse that the formula gives (the renderer adds a small blur of 0.3 square pixels to
+          this, which the demo leaves out), from
           <var>Σ′</var> = <var>J</var> <var>W</var> <var>Σ</var> <var>W</var><sup>T</sup>
           <var>J</var><sup>T</sup>. Turn the camera and the splat, and change its distance: far away
           the two lines are one line. Bring the camera in and they part, because <var>J</var> is
@@ -1063,7 +1069,7 @@
               width="400"
               height="400"
               role="img"
-              aria-label="The true outline of a splat on the screen, solid, and the ellipse the renderer draws, dashed"
+              aria-label="The true outline of a splat on the screen, solid, and the ellipse the formula gives, dashed"
             ></canvas>
             <canvas
               id="pj-top"

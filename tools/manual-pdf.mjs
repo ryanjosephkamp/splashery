@@ -32,6 +32,8 @@ const scale = Number(args.find((a) => a.startsWith("--scale="))?.slice(8)) || 1.
 const which = (args.find((a) => a.startsWith("--which="))?.slice(8) || "1,2").split(",").map(Number); // prettier-ignore
 
 const PINNED_MAJOR = 141;
+// The font families the PDF embeds (checked after printing; see below).
+const PINNED_FONTS = ["DejaVuSans", "DejaVuSansMono", "Inter", "LiberationSans", "LiberationSerif", "NotoColorEmoji"]; // prettier-ignore
 const PUBLIC = "https://ryanjosephkamp.github.io/splashery/";
 
 const browser = await chromium.launch({
@@ -81,6 +83,25 @@ let pdf = await page.pdf({
   outline: true,
   tagged: true,
 });
+// The fonts the PDF embeds are whatever the machine has for the manual's font stacks (ui-sans-serif,
+// the browser's serif, monospace, and an emoji font), so the same Chromium on a machine with other
+// fonts prints different lines and glyphs. The family names the shipped PDF uses are listed here; a
+// build that embeds a different set stops, so a rebuild on another machine says so instead of
+// quietly changing the pages. (Install these families, or pass --allow-other-fonts.)
+{
+  const families = new Set(
+    [...pdf.toString("latin1").matchAll(/\/FontName\s*\/[A-Z]{6}\+([A-Za-z0-9]+)/g)].map((m) =>
+      m[1].replace(/(Regular|Bold|SemiBold|Italic|Oblique|Book)+$/, ""),
+    ),
+  );
+  const got = [...families].sort();
+  console.log(`Fonts in the PDF: ${got.join(", ")}`);
+  if (got.join() !== PINNED_FONTS.join() && !args.includes("--allow-other-fonts")) {
+    console.error(`The PDF embeds ${got.join(", ")}; the shipped one embeds ${PINNED_FONTS.join(", ")}. Print on a machine with those fonts, or pass --allow-other-fonts.`); // prettier-ignore
+    await browser.close();
+    process.exit(1);
+  }
+}
 // Fix the two dates Chromium writes (same length, so every offset in the file stays right).
 if (updated) {
   const month = ["January","February","March","April","May","June","July","August","September","October","November","December"].indexOf(updated[1]) + 1; // prettier-ignore

@@ -28,7 +28,11 @@ export function covFacts({ a, b, c }) {
   // Positive definite: a > 0 and det > 0 (both eigenvalues above 0). That is the whole rule. A
   // matrix whose smaller eigenvalue is tiny next to the larger one is still valid, but inverting
   // it loses accuracy (`thin`), which is a warning about numbers, not a failure of the rule.
-  const flat = Math.abs(det) <= 1e-9 * (tr / 2) * (tr / 2) || tr === 0;
+  // `flat` is only a determinant of zero up to rounding, measured against the matrix's own scale
+  // (a trace of zero does not make it flat: [[0.1, 0], [0, -0.1]] has determinant -0.01, an
+  // inverse, and one eigenvalue of each sign).
+  const scale = Math.max(Math.abs(a), Math.abs(b), Math.abs(c));
+  const flat = Math.abs(det) <= 1e-12 * scale * scale;
   const valid = a > 0 && det > 0 && !flat;
   const angle = Math.abs(b) < 1e-12 ? (a >= c ? 0 : Math.PI / 2) : Math.atan2(l1 - a, b);
   return { det, l1, l2, valid, angle, flat, thin: valid && l2 < 1e-4 * l1 };
