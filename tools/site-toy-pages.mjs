@@ -76,7 +76,7 @@ function toyDescription(t) {
     text = text ? `${text} ${sentence}` : sentence;
   }
   // Too short to say much: add the how-to line.
-  if (text.length < 40) text = `${text ? `${text} ` : `${t.label}, a Splashery toy made of 3D Gaussian splats: `}${firstSentence(help.howTo || "tap it, turn it, share it.")}`; // prettier-ignore
+  if (text.length < 50) text = `${text ? `${text} ` : `${t.label}, a Splashery toy made of 3D Gaussian splats: `}${help.howTo || "tap it, turn it, share it."}`; // prettier-ignore
   text = text.replace(/"/g, "'"); // quotes stay out of the attribute
   if (text.length > 160) text = text.slice(0, 157).replace(/[\s,;:(–-]+\S*$/, "") + "…";
   return text;
