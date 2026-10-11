@@ -3780,7 +3780,7 @@ Proposals below are suggestions; the owner may change them.
     path) and the eight masks (the masked tiles turn over, with each mask's penalty), every step
     checked against Nayuki's encoder.
   - Sound: A light wooden knock and a faint breath as each part lifts (lane QR r5: the breath
-    quieter).
+    quieter, the knock a little louder).
 - **QR damage lab** (`qr-damage`). Now: tap: Add damage. Plan: new effect (E6).
   - Owner: The owner's push notes of October 4, 2026 (Q7, "an absolute strong yes ... build this out
     very comprehensively"; X3, the code that heals, October 5), lane QR lab r2, October 5, 2026.
@@ -3834,7 +3834,8 @@ Proposals below are suggestions; the owner may change them.
     seamless modules as the QR code toy draws them, lane QR r4). A tap sweeps a scanner's red line
     across the symbol; each bar (or column of modules) lifts toward you as it passes and settles
     back (2.6 s). The toy reads its own picture back with zxing-js.
-  - Sound: A soft breath as the line sweeps (lane QR r5: no note at the end).
+  - Sound: A soft breath as the line sweeps (lane QR r5: no note at the end, the breath a little
+    fuller).
 - **Photo to 3D** (`photo-3d`). Now: tap: Raise or flatten the depth. Plan: keep.
   - Owner: Approved on the Splashery Universe page ("photo yes", September 29, 2026; lane Photo to
     3D; labs only).

@@ -2834,9 +2834,10 @@ export const TOY_SOUNDS = {
   // scrape and a soft thud as damage lands; a slide out and a knock back.
   // Lane QR r5 (the owner's walkthrough of October 10, 2026): the wind under
   // How a QR code works and the whoosh of the three codes coming apart, both
-  // quieter.
+  // quieter. The knock carries How a QR code works now (a little louder, so
+  // the tap stays audible with the wind at a third of its old level).
   "qr-anatomy": [
-    { voice: "wood", f: 820, decay: 0.18, vol: 0.16 },
+    { voice: "wood", f: 820, decay: 0.18, vol: 0.26 },
     { voice: "breath", f: 1100, to: 0.8, decay: 0.5, vol: 0.025 },
   ],
   "qr-damage": [
@@ -2864,8 +2865,9 @@ export const TOY_SOUNDS = {
     { voice: "thud", at: 1.4, f: 150, decay: 0.2, vol: 0.12 },
   ],
   // A soft breath as the scanner's line sweeps (lane QR r5: the note of a
-  // read at the end is gone, the owner's call of October 10, 2026).
-  barcodes: [{ voice: "breath", f: 900, to: 1.05, decay: 1.2, vol: 0.025 }],
+  // read at the end is gone, the owner's call of October 10, 2026; the sweep
+  // a little fuller, so the tap is still heard without it).
+  barcodes: [{ voice: "breath", f: 900, to: 1.05, decay: 1.2, vol: 0.06 }],
   "splat-field": { voice: "breath", f: 520, to: 0.75, decay: 3.4, vol: 0.2 },
   // ---- Science (lane Science) ----------------------------------------------------------
   // Quiet and subtle (PACKS.md 7e): atoms make no sound, so the jiggle is a faint

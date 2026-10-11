@@ -5240,7 +5240,7 @@
       "status": "ready",
       "said": "(The walkthrough of October 10, 2026, triage QR r5) How a QR code works: the wind is too loud; make it quieter.",
       "note": "The wind under the tap, quieter.",
-      "plan": "Now in the site (lane QR r5): the same light wooden knock as a part lifts, with the soft breath under it at about a third of its old level (0.07 to 0.025).",
+      "plan": "Now in the site (lane QR r5): the soft breath under the tap at about a third of its old level (0.07 to 0.025); the light wooden knock as a part lifts is a little louder (0.16 to 0.26), so the tap is still heard.",
       "candidates": [
         {
           "id": "qr5-anatomy",
@@ -5250,7 +5250,7 @@
               "voice": "wood",
               "f": 820,
               "decay": 0.18,
-              "vol": 0.16
+              "vol": 0.26
             },
             {
               "voice": "breath",
@@ -5295,7 +5295,7 @@
       "status": "ready",
       "said": "(The walkthrough of October 10, 2026, triage QR r5) Other barcodes: drop the note that plays at the end.",
       "note": "No note at the end.",
-      "plan": "Now in the site (lane QR r5): only the soft breath as the scanner's line sweeps; the note of a read at the end is gone.",
+      "plan": "Now in the site (lane QR r5): only the soft breath as the scanner's line sweeps, a little fuller (0.025 to 0.06) so the tap is still heard; the note of a read at the end is gone.",
       "candidates": [
         {
           "id": "qr5-barcodes",
@@ -5306,7 +5306,7 @@
               "f": 900,
               "to": 1.05,
               "decay": 1.2,
-              "vol": 0.025
+              "vol": 0.06
             }
           ]
         }
