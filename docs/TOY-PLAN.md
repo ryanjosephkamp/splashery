@@ -3691,6 +3691,8 @@ Proposals below are suggestions; the owner may change them.
     grainy"): the stand's base and post in fine discs in rows (they were a random fuzz of specks
     from the side), the rim's discs smaller and set inside the edges (no soft fringe past the edge,
     no spike at the corners), a finer top, and each sand grain a little smaller and fully opaque.
+    Live r10: Sand colors: as made (the default), one color, a few colors, or a flag's colors (from
+    the site's flag images); a change of colors keeps the sand where it lies.
   - Sound: The plate's hum with the sand sliding as it settles (no patter of clicks).
 - **Sound in a box** (`chladni-cell`). Now: tap: Switch on the sound. Plan: new effect (E6).
   - Owner: The owner's walkthrough of October 6, 2026 ("Could there be a 3D version? ... I don't
@@ -3713,7 +3715,16 @@ Proposals below are suggestions; the owner may change them.
     tunes made in the page (no recordings): a rising scale through all eight cube modes, a broken
     chord, two voices in fifths (a fifth is heard an octave below its lower note), Ode to Joy
     (Beethoven, 1824) and Twinkle, Twinkle, Little Star (traditional, 1761), each named and credited
-    in the Toy tab and played through the same path as an opened file.
+    in the Toy tab and played through the same path as an opened file. Live r10 (the owner's
+    walkthrough of October 10, 2026): music and the microphone move the beads at the plate's pace
+    (halfway to a new figure in 0.5 to 0.8 s at full loudness, was 1.2 to 2.2 s), the loudness sets
+    the energy in the cell, and a gentle drift along the leading mode's still surface stands in for
+    the water's streaming, so the beads spread over each new figure; a tap's ring is unchanged. A
+    Toy tab panel, "What are these modes?", explains each mode (plain words, the Helmholtz equation
+    and rigid walls, the cube's and the sphere's formulas, how a pitch picks a mode, why it is
+    Chladni in 3D, with sources, and what is a model). Bead colors: as made (amber, the default),
+    one color, a few colors, a flag's colors (from the site's flag images), by height, or by
+    distance from the center.
   - Sound: The mode's tone, eight octaves down (the real cell rings at about 100 to 370 kHz).
 - **Room echo meter** (`room-echo`). Now: tap: Clap in the sample room. Plan: keep.
   - Owner: The owner's approval of lane Live input ("live input go", September 30, 2026; labs only).

@@ -129,8 +129,8 @@
     "chladni-plate": {
       "kind": "kit",
       "recipeFile": "src/packs/studio.js",
-      "recipeKB": 73.1,
-      "recipeGzipKB": 24.2,
+      "recipeKB": 74.8,
+      "recipeGzipKB": 24.8,
       "sharedBy": 3
     },
     "light-lab": {
