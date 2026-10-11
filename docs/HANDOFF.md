@@ -6,9 +6,9 @@ work is in [OPERATING.md](OPERATING.md).
 
 ## Now (October 11, 2026, about 06:00 UTC)
 
-The Operator is `session_01A4ChKuJQqgoCrWAzQMpD4R` (Opus 5.5), since October 10, 2026, 23:48 UTC. It
-took over from `session_012GmKRUMZLir2nb27Bo8Cu2` (Opus 5.5, October 7 to 10) by
-`.claude/skills/operator-handover/SKILL.md`; its own handover is due by October 12, 2026, or sooner
+The Operator is `session_01GX3jNDDvRMLYjDGmHuDmNN` (Opus 5.5), since October 11, 2026, 06:05 UTC. It
+took over from `session_01A4ChKuJQqgoCrWAzQMpD4R` (Opus 5.5, October 10 to 11) by
+`.claude/skills/operator-handover/SKILL.md`; its own handover is due by October 13, 2026, or sooner
 at about 400k tokens of context. This section is current. The sections below it are history. The
 runbook is [OPERATOR.md](OPERATOR.md).
 
@@ -44,8 +44,6 @@ batch merges as one PR.
 
 **Lanes running** (rows, sessions and files in WORKSTREAMS.md):
 
-- **Manual r4** (Sonnet, #513): the splat-budget table, "What Splashery can do" and the demo
-  placeholders. READY; merges after a targeted run and the owner's marks.
 - **Manual r5** (Sonnet, fresh, from Manual r4's branch): chapter pages, the Codex audit's fixes,
   and the chapters "How Splashery is built" and "Share links and QR codes". A second Codex audit
   follows.

@@ -362,11 +362,13 @@ export const PAGES = [
     cards: [
       { main: true, icon: "book", href: "../manual/", title: "The Tinkerer's Manual", text: "How to program splats, from the math of one splat to your own equations, toys and pictures. Start here if you want to make something.", also: [{ href: "../manual/tinkerers-manual.pdf", label: "Download the PDF" }] }, // prettier-ignore
       { icon: "splat", href: "learn/splats/", title: "How 3D Gaussian splats work", text: "A soft colored blob, hundreds of thousands of them, sorted and blended: what a splat is and what a recipe is, with small drawings." }, // prettier-ignore
+      { icon: "splat", href: "learn/can-do/", title: "What Splashery can do", text: "Everything on the site today, which parts are behind the labs switch, and what other splat tools don't do, as far as we know." }, // prettier-ignore
       { icon: "notebook", href: "learn/notebook/", title: "The lab notebook", text: "What each lane built, which model built it, and what the team learned along the way." }, // prettier-ignore
       { icon: "made", href: "learn/made/", title: "How Splashery is made", text: "Lanes, the Operator, the reviews and the rules, in plain words." }, // prettier-ignore
       { icon: "share", href: "share/", title: "Embed and share", text: "Put a toy on your own page, and how a scene link carries a toy and its settings." }, // prettier-ignore
     ],
     links: [
+      { href: "../manual/#splat-count", label: "How many splats? What a bigger budget does", text: "The Kit lab's table: 140,000 against 200,000 splats on 24 views, and what changed in edges, speckle, and shimmer." }, // prettier-ignore
       { href: "learn/recipes/", label: "Writing toy recipes", text: "How a toy's recipe says which parts move, and how." }, // prettier-ignore
       { href: "learn/scene-format/", label: "The scene format", text: "What a shared link or a saved scene holds." }, // prettier-ignore
       { href: "learn/evidence/", label: "Is it right? The evidence files", text: "How each toy that claims to show something true is checked against its sources." }, // prettier-ignore
@@ -381,6 +383,17 @@ export const PAGES = [
     description: "What a 3D Gaussian splat is, how hundreds of thousands of them are sorted and blended into a picture, and what a toy recipe is.", // prettier-ignore
     lead: "A soft colored blob, a lot of them, and a recipe: the whole idea, with pictures.",
     styles: ["hubs.css"],
+  },
+  {
+    path: "learn/can-do/",
+    type: "article",
+    article: "can",
+    nav: "learn",
+    title: "What Splashery can do",
+    description: "Everything Splashery does today, which parts are behind the labs switch, and what other 3D Gaussian splat tools don't do, as far as we know.", // prettier-ignore
+    lead: "What is on the site now, what is still in labs, and what is different about it.",
+    styles: ["hubs.css"],
+    outline: true,
   },
   {
     path: "learn/made/",
