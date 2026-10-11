@@ -472,6 +472,8 @@ export const cellState = () => ({
   moving: !!CELL.beads?.moving,
   settled: CELL.beads ? CELL.beads.settled() : 0,
   ringing: CELL.amp,
+  colors: CELL.opts?.colors ?? null, // Live r10: the beads' colors, and the first ten beads'
+  paint: CELL.paint ? Array.from(CELL.paint.subarray(0, 30)) : [],
 });
 
 // ---- Lane Live r9: your audio and the microphone ---------------------------------------
@@ -735,6 +737,110 @@ function rod(list, a, b, { step, size, color, n }) {
   }
 }
 
+// ---- Lane Live r10: what the modes are (the Toy tab's info panel) ------------------------
+// The owner's walkthrough of October 10, 2026: the five cube modes and three
+// flask modes explained in the toy, plain words first, then the math, how a
+// pitch picks a mode, why the 3D figures are honest physics, and what is a
+// model. Every reference here was opened and read (docs/handoff/LiveR10.md).
+// Each mode's surfaces, in words (the menu's eight, then the ladder's six).
+export const MODE_NOTES = {
+  "cube-110":
+    "two flat sheets through the middle at right angles, one upright and one level, crossing in a line",
+  "cube-111":
+    "three flat sheets through the middle, one for each direction, cutting the cell into eight small cubes",
+  "cube-012":
+    "three modes that share one pitch, (0, 1, 2), (1, 2, 0), and (2, 0, 1), ringing together; their sum has curved sheets instead of flat ones, meeting at the center",
+  "cube-112":
+    "the three modes (1, 1, 2), (1, 2, 1), and (2, 1, 1) together: curved sheets through the center",
+  "cube-122":
+    "the three modes (1, 2, 2), (2, 1, 2), and (2, 2, 1) together, one with its sign turned over: the most folded sheets of the five, since it rings highest",
+  "flask-0-2":
+    "two nested balls: the still places are two spheres around the center (at 41% and 81% of the radius)",
+  "flask-2-1":
+    "a double cone: an upright cone above the center and one below, each opening at 54.7° from the vertical",
+  "flask-2-2": "the same double cone, plus one ball at 79% of the radius",
+  "cube-010":
+    "one level sheet across the middle (the lowest mode, straight up from the transducer)",
+  "cube-020": "two level sheets, a quarter of the way from the top and the bottom",
+  "cube-022": "three modes (0, 2, 2), (2, 0, 2), and (2, 2, 0) together",
+  "flask-1-1": "one level disc through the center",
+  "flask-0-1": "one ball at 70% of the radius",
+  "flask-1-2": "a level disc through the center and a ball at 76% of the radius",
+};
+
+// The panel's text: [heading, paragraphs]. (Numbers that come from the
+// modes themselves are filled in by modesInfo().)
+export function modesInfo() {
+  const kHz = (m) => `${(cellFreq(m) / 1000).toFixed(0)} kHz`;
+  const heard = (m) => `${Math.round(heardFreq(m))} Hz`;
+  const list = (shape) =>
+    CELL_MODES.filter((m) => m.shape === shape).map((m) => `${m.name} (${kHz(m)}, heard at ${heard(m)}): ${MODE_NOTES[m.id]}.`); // prettier-ignore
+  return [
+    [
+      "In plain words",
+      [
+        "Sound is a wave of pressure. In a closed box of water it bounces off the walls, and at certain pitches, the box's resonances or modes, the bounces line up and the wave stands still: a standing wave. In some places the pressure swings hard; on certain surfaces it never swings at all. Those still surfaces are the nodes.",
+        "Small plastic beads in the water are pushed away from where the pressure swings and gather on the still surfaces, as Chladni's sand gathers on the still lines of a ringing plate. Each mode has its own pitch and its own shape of still surfaces.",
+      ],
+    ],
+    [
+      "The math",
+      [
+        "The pressure is p = P·φ(x, y, z)·cos(2πft), where φ solves the Helmholtz equation ∇²φ + k²φ = 0 with k = 2πf / c and c = 1,497 m/s (water). The glass walls are far stiffer than water, so the water can't move into them: the slope of φ across each wall is zero (a rigid wall, a Neumann condition), and the pressure swings most at the walls. Only certain k fit, which sets the modes' pitches.",
+        'The cube, 1 cm on a side: φ = cos(lπx/L)·cos(mπy/L)·cos(nπz/L) for whole numbers l, m, and n, ringing at f = (c / 2L)·√(l² + m² + n²). Modes whose numbers are the same in another order share a pitch, and a real cell rings them together ("mixed").',
+        ...list("cube"),
+        "The flask, a round-bottomed flask 1 cm across (a sphere, not a cylinder): φ = j_l(kr)·P_l(cos θ), a spherical Bessel function times a Legendre polynomial, with θ measured from the vertical. The rigid wall makes j_l′(ka) = 0, so ka is one of that function's zeros, and f = c·ka / (2πa).",
+        ...list("flask"),
+      ],
+    ],
+    [
+      "How the music picks a mode",
+      [
+        `The cell rings at ultrasound, far above hearing, and music is audible, so the music's pitch is scaled up. Every 40 ms the toy measures the strongest pitch, moves it by whole octaves into the cell's range as heard, and multiplies it by ${SCALE} (eight octaves). Every mode then rings by how near it is to that pitch, on a resonance curve (half strength ${CELL_WIDTH} cents away), and the nearest rings at full strength. For example, A4 (440 Hz) becomes 113 kHz, and the cube's 1, 1, 0 mode (106 kHz) rings. Besides the eight in the Mode menu, the toy uses six more modes (cube 0, 1, 0; 0, 2, 0; and 0, 2, 2; three of the flask) so every pitch has one near it. Louder music puts more energy in the cell, and the push on the beads grows with the energy.`,
+      ],
+    ],
+    [
+      "Why this is Chladni in 3D, honestly",
+      [
+        "On Chladni's plate the sand is thrown off the parts that move and comes to rest on the lines that don't. In a liquid the push is the acoustic radiation force: F = −∇U, with U the Gor'kov potential, U ∝ f1·⟨p²⟩ / (2ρc²) − (3/4)·f2·ρ·⟨v²⟩ (H. Bruus, \"Acoustofluidics 7: The acoustic radiation force on small particles\", Lab on a Chip 12, 1014, 2012). For polystyrene in water f1 ≈ 0.44 and f2 ≈ 0.034, so U is lowest where the pressure doesn't swing, and beads collect on the nodal surfaces.",
+        'This is measured physics: labs track beads moving this way in 3D (P. B. Muller and others, "Ultrasound-induced acoustophoretic motion of microparticles in three dimensions", Physical Review E 88, 023006, 2013), pattern particles in 3D at the pressure nodes the Gor\'kov potential predicts (M. A. Ghanem and others, "Phase holograms for the three-dimensional patterning of unconstrained microparticles", Scientific Reports 13, 9160, 2023), and levitate drops and small objects in air at the pressure nodes of standing waves, first done in 1933 (M. A. B. Andrade, A. Marzo, and J. C. Adamowski, "Acoustic levitation in mid-air: Recent advances, challenges, and future perspectives", Applied Physics Letters 116, 250501, 2020).',
+        'Mathematicians draw 3D Chladni figures as the still surfaces of exactly these sums of cosines with rigid-wall conditions, and note that light particles in a fluid driven by a speaker could show them (M. Skrodzki, U. Reitebuch, and K. Polthier, "Chladni Figures Revisited: A Peek Into The Third Dimension", 2016). The sphere\'s modes are the textbook ones used in precision resonators (J. B. Mehl, "Acoustic Eigenvalues of a Quasispherical Resonator", Journal of Research of NIST 112, 163, 2007).',
+      ],
+    ],
+    [
+      "What is measured, and what is a model",
+      [
+        "Measured physics: the radiation force and its formula, beads gathering on pressure nodes, and the mode formulas for a rigid box and a rigid sphere. The slow drift of beads along the surfaces, toward where the water swings most, is real too (the second term of U).",
+        "Model choices: the walls are perfectly rigid and the shapes perfect (real glass flexes a little, which shifts the modes); mixed modes ring in equal parts; the music is moved by octaves and scaled 256 times (a real cell answers only to its own ultrasound); the nearest mode always rings fully; and the beads move faster than real ones (in one lab's cell the fastest moved about a millimeter a second; Muller and others, 2013), so a real figure takes seconds to tens of seconds. Gravity, the beads' pushes on each other, and the water's slow streaming (which carries beads under a micrometer or so, not beads like these) are left out.",
+      ],
+    ],
+  ];
+}
+
+// The Toy tab's panel, folded until opened.
+function modesPanel() {
+  const box = document.createElement("details");
+  box.id = "cell-modes";
+  const sum = document.createElement("summary");
+  sum.textContent = "What are these modes? The physics, plain words first";
+  box.append(sum);
+  for (const [head, paras] of modesInfo()) {
+    const h = document.createElement("p");
+    h.className = "note";
+    const b = document.createElement("strong");
+    b.textContent = head;
+    h.append(b);
+    box.append(h);
+    for (const t of paras) {
+      const p = document.createElement("p");
+      p.className = "note";
+      p.textContent = t;
+      box.append(p);
+    }
+  }
+  return box;
+}
+
 // ---- Lane Live r9 part 2: built-in tunes -----------------------------------------------
 // The owner's walkthrough of October 10, 2026: tunes to choose from beside
 // "Open your own audio…". Each is made in the page (a few sine harmonics per
@@ -922,6 +1028,7 @@ export const CHLADNI_CELL = {
       { render: () => tuneRow() }, // Live r9 part 2
       { render: () => songTransport(cellTransport) },
       { kind: "mic", rebuild: false, status: cellStatus },
+      { render: () => modesPanel() }, // Live r10
     ],
     note: "Open a song or any sound file, or tap “Use my microphone” and sing or play. The real cell rings at ultrasound, so the music's pitch is scaled up to the cell's ultrasound modes: moved by octaves into the cell's range, then 256 times higher (eight octaves). The mode nearest it rings, and the beads set off for its surfaces at once, from where they are; a held note settles them, a new note moves them on, and silence leaves them where they are. The Mode choice picks the cube or the flask. The file stays on your device.",
   },

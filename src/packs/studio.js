@@ -1618,6 +1618,8 @@ export const chladniSand = () => ({
   steps: SAND.sand?.steps ?? 0,
   at: SAND.sand ? Array.from(SAND.sand.X.subarray(0, 50)).concat(Array.from(SAND.sand.Y.subarray(0, 50))) : [], // prettier-ignore
   amps: Object.fromEntries([...CH.amp].map(([k, v]) => [k, v.a])), // each driven mode's strength
+  colors: SAND.opts?.colors ?? null, // Live r10: the sand's colors, and the first ten grains'
+  paint: SAND.paint ? Array.from(SAND.paint.subarray(0, 30)) : [],
 });
 
 // Into the plate's range, by octaves (60 to 400 Hz).
