@@ -22,7 +22,7 @@ import {
 } from "../manual/demo-math.js";
 
 const SHOTS = path.resolve("tests/screenshots");
-const html = fs.readFileSync("manual/index.html", "utf8");
+const html = fs.readFileSync("manual/all.html", "utf8");
 const near = (a, b, d = 1e-9) => expect(Math.abs(a - b)).toBeLessThan(d);
 
 test.describe("the demos' math", () => {
@@ -129,6 +129,11 @@ test.describe("the demos' math", () => {
     // Not valid: a negative determinant (it grows in some direction), and a flat one.
     expect(covFacts({ a: 0.1, b: 0.5, c: 0.1 }).valid).toBe(false);
     expect(covFacts({ a: 0.25, b: 0.5, c: 1 }).flat).toBe(true);
+    // Audit F08: very thin is still valid (a warning about accuracy, not a failure of the rule).
+    const thin = covFacts({ a: 1, b: 0, c: 1e-5 });
+    expect(thin.valid).toBe(true);
+    expect(thin.thin).toBe(true);
+    expect(thin.flat).toBe(false);
   });
 
   test("smoothstep at three points, and the moments' dip and budget", () => {
@@ -164,7 +169,7 @@ test.describe("the live demos", () => {
     page.on("pageerror", (e) => errs.push(e.message));
     page.on("console", (m) => m.type() === "error" && !/Failed to load resource/.test(m.text()) && errs.push(m.text())); // prettier-ignore
     page.on("response", (r) => r.status() >= 400 && !/favicon/.test(r.url()) && errs.push(`${r.status()} ${r.url()}`)); // prettier-ignore
-    await page.goto("/manual/");
+    await page.goto("/manual/all.html");
     // Covariance, at its defaults.
     const cov = page.locator("#cov-readout");
     await expect(cov).toContainText("0.286");
@@ -205,7 +210,7 @@ test.describe("the live demos", () => {
   test("they work with the keyboard: the smoothstep curve takes arrow keys, buttons take Enter", async ({
     page,
   }) => {
-    await page.goto("/manual/");
+    await page.goto("/manual/all.html");
     const curve = page.locator("#ss-canvas");
     await curve.focus();
     await page.keyboard.press("ArrowRight");
@@ -221,7 +226,7 @@ test.describe("the live demos", () => {
     page,
   }) => {
     await page.setViewportSize({ width: 390, height: 844 });
-    await page.goto("/manual/");
+    await page.goto("/manual/all.html");
     expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(
       390,
     );
@@ -250,7 +255,7 @@ test.describe("the live demos", () => {
 
 test.describe("the lighter layout", () => {
   test("folds start closed, a link opens one, print opens them all", async ({ page }) => {
-    await page.goto("/manual/");
+    await page.goto("/manual/all.html");
     const total = await page.locator("details.fold").count();
     expect(total).toBeGreaterThan(18);
     expect(await page.locator("details.fold[open]").count()).toBe(0);
@@ -266,9 +271,9 @@ test.describe("the lighter layout", () => {
       .evaluate((s) => getComputedStyle(s, "::before").content);
     expect(mark).not.toBe("none");
     // A link to something inside a closed fold opens it.
-    await page.goto("/manual/#two-splats");
+    await page.goto("/manual/all.html#two-splats");
     await expect(page.locator("#two-splats")).toHaveJSProperty("open", true);
-    await page.goto("/manual/#why-moment-parts");
+    await page.goto("/manual/all.html#why-moment-parts");
     await expect(page.locator("#why-moment-parts")).toHaveJSProperty("open", true);
     // Print opens every fold, and closes the same ones after.
     const openBefore = await page.locator("details.fold[open]").count();
@@ -286,7 +291,7 @@ test.describe("the lighter layout", () => {
   });
 
   test("the long tables fold behind Show the table", async ({ page }) => {
-    await page.goto("/manual/");
+    await page.goto("/manual/all.html");
     const folds = page.locator("details.tablefold > summary");
     expect(await folds.count()).toBeGreaterThanOrEqual(4);
     for (const s of await folds.all()) expect(await s.textContent()).toMatch(/^Show the table/);
@@ -296,7 +301,7 @@ test.describe("the lighter layout", () => {
   test("a glossary word shows its entry: hover, tap, Escape, and a tap outside", async ({
     page,
   }) => {
-    await page.goto("/manual/");
+    await page.goto("/manual/all.html");
     const term = page.locator('.term[data-g="g-field"]').first();
     await term.scrollIntoViewIfNeeded();
     const pop = page.locator("#term-pop");
@@ -339,7 +344,7 @@ test.describe("the lighter layout", () => {
       isMobile: true,
     });
     const page = await ctx.newPage();
-    await page.goto("/manual/");
+    await page.goto("/manual/all.html");
     const term = page.locator('.term[data-g="g-covariance"]').first();
     await term.scrollIntoViewIfNeeded();
     await term.tap();
@@ -355,7 +360,7 @@ test.describe("the lighter layout", () => {
       390,
     );
     // An opened fold fits too.
-    await page.goto("/manual/#why-budgets");
+    await page.goto("/manual/all.html#why-budgets");
     await page.locator("#why-budgets .tablefold summary").click();
     expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(
       390,
@@ -368,7 +373,7 @@ test.describe("the lighter layout", () => {
   test("the pages keep their anchors and the new chapters are in the contents", async ({
     page,
   }) => {
-    await page.goto("/manual/");
+    await page.goto("/manual/all.html");
     for (const id of ["unique", "experiments", "why-budgets", "why-other-parts", "why-other-fields", "why-moment-parts"]) // prettier-ignore
       await expect(page.locator(`#${id}`)).toHaveCount(1);
     const hrefs = await page.locator("nav.toc a").evaluateAll((as) => as.map((a) => a.getAttribute("href"))); // prettier-ignore
@@ -376,7 +381,7 @@ test.describe("the lighter layout", () => {
     expect(hrefs).toContain("#experiments");
     for (const h of hrefs) await expect(page.locator(h)).toHaveCount(1);
     await page.setViewportSize({ width: 1440, height: 900 });
-    await page.goto("/manual/#why-budgets");
+    await page.goto("/manual/all.html#why-budgets");
     await page.screenshot({ path: path.join(SHOTS, "man3-2-fold-1440x900.png") });
   });
 
@@ -390,7 +395,7 @@ test.describe("the lighter layout", () => {
       "Store the moments in a keyframe texture",
       "Compile the formulas to a shader",
       "Recompute on the processor every frame",
-      "deflate and then written in base64url",
+      "compressed with raw deflate, and written in base64url",
       "A link carries settings, not your files",
       "No server is involved",
       "Open: no plan yet",
@@ -409,7 +414,7 @@ test.describe("Level 4's sixty more programs", () => {
   test("sixty cards in six folded groups, each with its picture, a program, a source, and a Run it link in a new tab", async ({
     page,
   }) => {
-    await page.goto("/manual/");
+    await page.goto("/manual/all.html");
     expect(entries).toHaveLength(60);
     await expect(page.locator("details.gallery-group")).toHaveCount(6);
     await expect(page.locator("details.gallery-group[open]")).toHaveCount(0);
@@ -434,18 +439,20 @@ test.describe("Level 4's sixty more programs", () => {
     );
     expect(bad).toEqual([]);
     // A link to one card opens its group.
-    await page.goto("/manual/#g-torus");
+    await page.goto("/manual/all.html#g-torus");
     await expect(page.locator("details.gallery-group").first()).toHaveJSProperty("open", true);
-    // In the PDF, the groups print open as a compact grid with no code.
+    // In the PDF, the groups print open as a grid, each card with its program (the summary is not
+    // printed, since nothing is folded) and its Run it link (Manual r5, audit F02).
     await page.emulateMedia({ media: "print" });
     await page.evaluate(() => dispatchEvent(new Event("beforeprint")));
     await expect(page.locator("#g-torus h5")).toBeVisible();
-    await expect(page.locator("#g-torus details.program")).toBeHidden();
+    await expect(page.locator("#g-torus details.program pre")).toBeVisible();
+    await expect(page.locator("#g-torus details.program > summary")).toBeHidden();
   });
 
   test("three Run it links open the equation toy with that program", async ({ page }) => {
     test.setTimeout(240_000);
-    await page.goto("/manual/");
+    await page.goto("/manual/all.html");
     const picks = [entries[0], entries[23], entries[59]];
     const hrefs = [];
     for (const e of picks) hrefs.push(await page.locator(`#g-${e.id} a.button`).getAttribute("href")); // prettier-ignore

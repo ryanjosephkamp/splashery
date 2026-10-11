@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- HEAD:START (written by manual/build-pages.mjs; do not edit by hand) -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Share links and QR codes · The Tinkerer's Manual</title>
+    <meta
+      name="description"
+      content="Share links and QR codes. The Tinkerer's Manual: how to program Gaussian splats in Splashery."
+    />
+    <link rel="stylesheet" href="manual.css" />
+    <link rel="stylesheet" href="../site/assets/outline.css" />
+
+    <script type="module" src="fold.js"></script>
+    <script type="module" src="nav.js"></script>
+    <script type="module" src="demos.js"></script>
+    <script type="module" src="demos2.js"></script>
+    <script type="module" src="demos3.js"></script>
+    <!-- HEAD:END -->
+  </head>
+  <body>
+    <main>
+      <!-- NAV:TOP:START (written by manual/build-pages.mjs; do not edit by hand) -->
+      <div class="outline no-print manual-nav">
+        <button
+          type="button"
+          class="outline-toggle"
+          aria-expanded="false"
+          aria-controls="manual-contents"
+        >
+          <span class="outline-label">Contents</span
+          ><span class="outline-now">Share links and QR codes</span
+          ><svg
+            class="outline-chevron"
+            viewBox="0 0 16 16"
+            width="16"
+            height="16"
+            aria-hidden="true"
+          >
+            <path
+              d="m3.5 6 4.5 4.5L12.5 6"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </button>
+        <nav class="outline-panel" id="manual-contents" aria-label="The manual's chapters" hidden>
+          <ol>
+            <li><a href="index.html">Contents</a></li>
+            <li><a href="splat.html">Chapter 1: What a splat is</a></li>
+            <li><a href="toy.html">Chapter 2: How a toy is built</a></li>
+            <li><a href="language.html">Chapter 3: The splat equation language</a></li>
+            <li><a href="gallery.html">Chapter 4: A gallery of programs</a></li>
+            <li><a href="pictures.html">Chapter 5: Pictures, screens, and your own input</a></li>
+            <li><a href="coming.html">Chapters 6 to 10: coming next</a></li>
+            <li><a href="more.html">What else Splashery does now</a></li>
+            <li><a href="unique.html">What Splashery can do that other splat tools can't</a></li>
+            <li><a href="built.html">How Splashery is built</a></li>
+            <li>
+              <a href="share.html" aria-current="page">Share links and QR codes</a>
+              <ol class="outline-sub" aria-label="In this chapter">
+                <li><a href="#what-is-in-a-link">What is in a link</a></li>
+                <li>
+                  <a href="#a-changed-character">Why one changed character usually breaks it</a>
+                </li>
+                <li><a href="#old-links-keep-loading">Old links keep loading</a></li>
+                <li><a href="#how-long-a-link-can-be">How long a link can be</a></li>
+                <li><a href="#a-scene-as-a-qr-code">A scene as a QR code</a></li>
+              </ol>
+            </li>
+            <li><a href="experiments.html">Open questions: other choices, not tried yet</a></li>
+            <li><a href="later.html">What comes later: Code a toy</a></li>
+            <li><a href="glossary.html">Glossary</a></li>
+            <li><a href="reading.html">Further reading</a></li>
+            <li><a href="references.html">References</a></li>
+            <li><a href="card.html">Quick reference</a></li>
+          </ol>
+        </nav>
+      </div>
+      <nav class="pager no-print" aria-label="Previous and next chapter, top">
+        <a class="pager-prev" rel="prev" href="built.html"
+          ><span class="pager-word">← Previous</span
+          ><span class="pager-title">How Splashery is built</span></a
+        ><a class="pager-next" rel="next" href="experiments.html"
+          ><span class="pager-word">Next →</span
+          ><span class="pager-title">Open questions: other choices, not tried yet</span></a
+        >
+      </nav>
+
+      <!-- NAV:TOP:END -->
+      <!-- ---- Share links and QR codes ---- -->
+      <h2 id="share">Share links and QR codes</h2>
+      <p>
+        A Splashery link does not point at your scene. It <em>is</em> your scene. Open the Share
+        tab, copy the link, and the whole toy (its options, the look, the camera, any paint) is
+        written into the web address itself. This chapter takes one apart, lets you make one, and
+        shows how the same link fits in a QR code.
+      </p>
+
+      <h3 id="what-is-in-a-link">What is in a link</h3>
+      <p>The link has four parts, from left to right:</p>
+      <p class="math">
+        <code>https://ryanjosephkamp.github.io/splashery/</code><b>#s=</b><b>d.</b
+        ><code>eJxVjkEOgzAM…</code>
+      </p>
+      <ol>
+        <li>
+          <b>The page.</b> The ordinary address of the app. The browser asks the server for this
+          part and nothing more.
+        </li>
+        <li>
+          <b><code>#s=</code></b
+          >, the start of the <em>fragment</em>. A browser never sends the fragment (everything
+          after the <code>#</code>) to a server, so the scene is not in any request. The page reads
+          it with script after it loads (<code>parseHash</code> in <code>src/codec.js</code>).
+        </li>
+        <li>
+          <b>A format letter and a dot:</b> <code>d.</code> means the rest is compressed, and
+          <code>j.</code> means it is not (the next paragraph says when).
+        </li>
+        <li>
+          <b>The scene.</b> The scene as JSON text (its shape is in
+          <code>docs/SCENE-SCHEMA.md</code>), turned into bytes as UTF-8,
+          <b>compressed with raw deflate</b> (the same method as a zip file, without the zip's
+          wrapper), and written with the 64 letters, digits, <code>-</code> and <code>_</code> that
+          are safe in an address (<b>base64url</b>).
+        </li>
+      </ol>
+      <p>
+        The <code>j.</code> form exists for a browser that cannot compress (no
+        <code>CompressionStream</code>): it is the same JSON, written in base64url but not
+        compressed. It is not readable as text, only safely spelled. Any browser reads either form
+        if it can decompress, and every current browser can.
+      </p>
+      <p>
+        <b>It is not a hash of anything, and not a lookup.</b> Some sites make a short link by
+        saving your data on a server and handing you a key. Splashery cannot do that, because it has
+        no server (the previous chapter). Nothing is stored anywhere. The link is the only copy of
+        the scene, which is why you can send it in a message and the other person sees exactly your
+        toy, and why a scene you did not copy the link of is not recoverable from the site.
+      </p>
+
+      <section class="demo-live" data-demo="share-link" id="demo-share">
+        <h4>Try it: write a scene, get its link, read it back</h4>
+        <p class="hint">
+          This runs the real <code>encodeSceneHash</code> and <code>decodeSceneHash</code> from
+          <code>src/codec.js</code> in your browser, on a tiny scene you can edit. The link below
+          uses this page's own address as the base, so it is the same shape as a real one. Press
+          <b>Change one character</b> to see how fragile the text is. Nothing leaves this page.
+        </p>
+        <div class="demo-grid">
+          <div class="controls">
+            <label for="sh-json" class="hint">The scene (JSON)</label>
+            <textarea id="sh-json" rows="9" spellcheck="false" autocomplete="off"></textarea>
+            <div class="row">
+              <button type="button" id="sh-reset">Reset the scene</button>
+              <button type="button" id="sh-pretty">Spread it out</button>
+            </div>
+          </div>
+          <div>
+            <p class="hint" id="sh-sizes" aria-live="polite"></p>
+            <label for="sh-hash" class="hint"
+              >The link's scene (what follows <code>#s=</code>)</label
+            >
+            <textarea id="sh-hash" rows="5" spellcheck="false" autocomplete="off"></textarea>
+            <div class="row">
+              <button type="button" id="sh-break">Change one character</button>
+              <button type="button" id="sh-undo">Put it back</button>
+            </div>
+            <div class="readout" id="sh-decoded" aria-live="polite"></div>
+          </div>
+        </div>
+        <p class="hint" id="sh-qr-note" aria-live="polite"></p>
+        <canvas
+          id="sh-qr"
+          width="200"
+          height="200"
+          role="img"
+          aria-label="The scene's link as a QR code"
+        ></canvas>
+      </section>
+      <figure class="demo-still" data-demo-still="share-link">
+        <img
+          src="img/demo-share.png"
+          alt="The share link demo: a tiny scene as JSON, its compressed link, the scene read back from the link, and the link as a QR code"
+        />
+        <figcaption>
+          Interactive in the web version:
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/manual/share.html#demo-share"
+            target="_blank"
+            rel="noopener"
+            >ryanjosephkamp.github.io/splashery/manual/share.html#demo-share</a
+          >
+        </figcaption>
+      </figure>
+
+      <h3 id="a-changed-character">Why one changed character usually breaks it</h3>
+      <p>
+        Compressed text is not like ordinary text. In a sentence, a wrong letter is one wrong
+        letter. In a deflate stream each bit tells the decoder how to read the bits after it (which
+        code table, how far back to copy from), so one changed character changes how everything
+        after it is read. The decoder then either stops with an error (<code>decodeSceneHash</code>
+        throws, and the app shows "Could not read the shared scene"), or produces text that is no
+        longer valid JSON, which stops at <code>JSON.parse</code>. Rarely, the changed character
+        lands on a spare bit at the very end or turns one letter inside a word of the JSON into
+        another, and the link still works with a slightly different scene. That is the "usually". Do
+        not edit a link by hand to change a setting. Change the setting in the app and copy the new
+        link.
+      </p>
+      <p>
+        When a link does decode, the app does not trust it. The JSON goes through
+        <code>normalizeScene</code> (<code>src/state.js</code>), which drops keys it does not know,
+        clamps every number to its allowed range, and fills in anything missing with its default.
+        The demo shows the result of that step below the decoded text.
+      </p>
+
+      <h3 id="old-links-keep-loading">Old links keep loading</h3>
+      <p>
+        A link made last month must open next year. The scene has a <code>version</code> number, and
+        <code>normalizeScene</code> reads old ones. Version 3 is the current schema. A
+        <b>version 2</b> link is a version 3 scene without the pattern, the motion, and the options
+        on shelf toys; it loads, and those take their defaults. A version 1 file (the old planet
+        painter) is refused with a message that says so, and so is a scene from a newer Splashery
+        than the one you are running. Saving always writes the current version. The rule is written
+        in <code>CLAUDE.md</code> and is tested.
+      </p>
+      <p>
+        The same applies to the embed player and the <code>&lt;splashery-toy&gt;</code> element,
+        which read the same links (<code>src/viewer.js</code>, <code>src/element.js</code>).
+      </p>
+
+      <h3 id="how-long-a-link-can-be">How long a link can be</h3>
+      <p>
+        A toy at its defaults is a link of about 700 characters. Paint and clay are the things that
+        grow, because every dab or stroke is written into the scene. Sharing stops at 12,288
+        characters of scene (<code>LINK_LIMIT</code> in <code>src/exports.js</code>). Past that,
+        <code>buildShareHash</code> first leaves out the paint, then the clay, says so, and if the
+        link is still too long it tells you to save the scene as a JSON file instead. A link carries
+        <b>settings, not your files</b>: a photo or splat file from your device has to be opened
+        again by whoever opens the link.
+      </p>
+
+      <h3 id="a-scene-as-a-qr-code">A scene as a QR code</h3>
+      <p>
+        A QR code is a picture of bytes, and the link is just text, so any link can be one. With
+        labs on, the Share tab has a <b>QR code</b> button (<code>src/qr/share.js</code>). It builds
+        the same link as the Copy button and draws it as a QR code you can scan with a phone camera
+        and save as a picture. The code holds <em>only the link</em>. Nothing is uploaded, and your
+        own files stay on your device exactly as they do for a link.
+      </p>
+      <p>
+        There is a ceiling. A QR code at its largest (version 40, the lowest error correction) holds
+        2,953 bytes. The code can lose some of its squares and still scan, and the more it can lose
+        the fewer bytes it holds. <code>shareCode</code> (<code>src/qr/share-code.js</code>) picks
+        level <b>M</b> (15 percent can be lost) while the code stays at version 30 or smaller, and
+        level <b>L</b> (7 percent) beyond that, for the smallest code a phone can still resolve. In
+        the measurements of the QR lane, every toy at its defaults came to 692 to 714 characters
+        (version 21 at level M), a toy with 20 dabs of paint was about 1,170 characters (version
+        28), 60 dabs was about 2,000 (version 33, level L), and 150 dabs was 3,671, too long for any
+        code, so the dialog says so and offers Save JSON. Nothing is split across several codes.
+      </p>
+      <p>
+        The dialog also reads the code back before it shows it (with the browser's own barcode
+        reader, or <code>vendor/jsqr</code> where that cannot read QR codes) and says "It scans"
+        only if it does. The demo above does the same sizing with the real <code>shareCode</code>:
+        it shows the version and level of its own link, and draws it.
+      </p>
+
+      <p class="where">
+        Where it lives: <code>src/codec.js</code> (encode, decode, <code>parseHash</code>),
+        <code>src/state.js</code> (<code>normalizeScene</code>),
+        <code>src/exports.js</code> (<code>buildShareHash</code>, <code>shareURL</code>,
+        <code>LINK_LIMIT</code>), <code>src/qr/share.js</code> and
+        <code>src/qr/share-code.js</code> (the QR code), <code>docs/SCENE-SCHEMA.md</code>, and the
+        tests <code>tests/qr4-2.spec.mjs</code> and <code>tests/man5.spec.mjs</code>.
+      </p>
+
+      <!-- NAV:BOTTOM:START (written by manual/build-pages.mjs; do not edit by hand) -->
+      <nav class="pager no-print" aria-label="Previous and next chapter, bottom">
+        <a class="pager-prev" rel="prev" href="built.html"
+          ><span class="pager-word">← Previous</span
+          ><span class="pager-title">How Splashery is built</span></a
+        ><a class="pager-next" rel="next" href="experiments.html"
+          ><span class="pager-word">Next →</span
+          ><span class="pager-title">Open questions: other choices, not tried yet</span></a
+        >
+      </nav>
+      <footer>
+        <p>
+          The Tinkerer's Manual, first published September 28, 2026 and updated October 11, 2026.
+          Part of
+          <a href="https://ryanjosephkamp.github.io/splashery/" target="_blank" rel="noopener"
+            >Splashery</a
+          >, a toy box of 3D Gaussian splats that runs in your browser. Every picture here was made
+          with Splashery itself.
+        </p>
+      </footer>
+      <!-- NAV:BOTTOM:END -->
+    </main>
+  </body>
+</html>
