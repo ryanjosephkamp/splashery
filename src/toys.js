@@ -3999,6 +3999,17 @@ export const TOYS = [
     tags: "terrain elevation land mountain volcano canyon valley water flood usgs 3dep geography box science",
     camera: { yaw: 0.5, pitch: 0.5, roll: 0, distance: 3.0 },
   },
+  // ---- Pack: proto-double-pendulum (Codex prototype) ----
+  {
+    id: "double-pendulum",
+    label: "Double pendulum chaos",
+    category: "science",
+    kind: "kit",
+    pack: "proto-double-pendulum",
+    labs: true,
+    tags: "double pendulum chaos physics lagrangian rk4 gravity mass length trail sensitivity initial conditions",
+    camera: { yaw: 0, pitch: 0, roll: 0, distance: 3.1 },
+  },
   // ---- Pack: optics (lane Optics) ----
   {
     id: "ripple-tank",

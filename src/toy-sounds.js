@@ -2918,6 +2918,9 @@ export const TOY_SOUNDS = {
     on: { voice: "whoosh", f: 300, decay: 2.4, vol: 0.3 },
     off: { voice: "whoosh", f: 240, decay: 2.2, vol: 0.25 },
   },
+  // Double pendulum: a soft synthesized tick at each bottom crossing,
+  // played by the recipe after release; releasing and resetting are silent.
+  "double-pendulum": { voice: "wood", f: 640, bright: 0.12, decay: 0.16, vol: 0.25 },
   // ---- Ripple tank (lane Optics) ------------------------------------------------------
   // The pebble's plop as it lands (it falls for 0.3 s), and the soft lap of
   // its rings.

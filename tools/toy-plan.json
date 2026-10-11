@@ -2951,6 +2951,13 @@
       "sound": "A low rumble, and a second one.",
       "improved": "Geo r3 (the owner: \"still needs to be sharper\"; the text below the planet too): about one globe point per picture pixel, a thin layer of air at the limb, crisp quake dots with no glow at rest, and the plaque's text in square pixels."
     },
+    "double-pendulum": {
+      "v": "more",
+      "owner": "Requested Codex prototype: Double pendulum chaos, Science shelf, labs only.",
+      "effect": "A tap releases two independent double pendulums from the selected start angles, differing only in the upper angle by 0.0001 to 0.1 radian. The short release pulse lasts 0.4 s; the experiment continues until Reset or another release. Rigid arms and separate bobs follow fixed-step RK4 Lagrangian physics, with recent lower-bob trails, simulated elapsed time, and the first arm-angle separation above 10 degrees. Controls set both lengths, both masses, gravity, and start angles. A one-arm mode measures the small-angle period.",
+      "sound": "A soft synthesized wood tick for each lower arm passing vertical down, only after release, through the existing toy-sounds system.",
+      "improved": "Codex built this rough first draft. Mechanics, units, controls, and numerical checks come first. A polish pass should refine the phone layout, trails, and presentation. No assets, libraries, or engine changes."
+    },
     "ripple-tank": {
       "v": "keep",
       "owner": "Push Plan S9 (yes), October 5, 2026: a ripple tank with a real wave equation (lane Optics; labs only).",

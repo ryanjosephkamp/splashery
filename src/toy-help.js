@@ -1970,6 +1970,13 @@ export const TOY_HELP = {
       "Galaxy simulations follow gas and stars as particles. These are subsets of three FIRE-2 simulations: a galaxy of roughly the Milky Way's mass today, the same galaxy 10.4 billion years ago, and a dwarf galaxy. They are simulations, not telescope images. Each gas particle is a Gaussian about as wide as its smoothing kernel (the real kernel isn't Gaussian), colored by temperature or density; tap to keep only the cold gas.\n\nThrough a telescope (simulated) shows what an observer might record if the galaxy were 160 million light-years away: its star particles, bluer and brighter when young, blurred by the telescope's sharpness, with cold, dense gas dimming them like dust. Choose a filter; each tap starts a new exposure whose grainy photon noise smooths out as light builds up. The colors use a rough rule for how starlight fades with age, so it is a picture to explore, not a measurement.",
   },
 
+  // ---- Double pendulum (Codex prototype) ----
+  "double-pendulum": {
+    howTo:
+      "Tap to release both pendulums. Set the starting difference, arm lengths, masses, and gravity in the Toy tab; Reset holds them at their start angles.",
+    about:
+      "Two double pendulums start with zero velocity and the same settings, except B's upper angle is a little different. Blue is A, and orange is B. Each arm and bob moves as a separate solid piece. The recent trails follow the lower bobs, and the elapsed time and first separation above 10 degrees stay visible. Separation means the larger of the upper and lower arm-angle differences, wrapped to 0 through 180 degrees. Large starting angles can amplify a tiny difference; small angles need not become chaotic.\n\nThe simulation uses the standard Euler–Lagrange equations for two point masses on massless, rigid arms, integrated with fourth-order Runge–Kutta at a fixed step of 1/2400 second. There is no friction, and the displayed bob sizes are illustrative. Lengths are meters, masses are kilograms, and time is simulated seconds. Earth, Moon, and Mars use approximate gravity settings of 9.81, 1.62, and 3.71 m/s². Slow frames limit catch-up, so simulated time can run slower than wall time.\n\nTap releases both pendulums from the selected start angles. Changing a setting or pressing Reset holds them again. With sound on, each lower arm passing vertical down makes a soft tick, only after release. The one-arm experiment starts A at 0.01 radian and compares its measured period with T = 2π√(L/g).\n\nCodex built this rough labs prototype. A polish pass should refine the controls, trail styling, and presentation.",
+  },
   // ---- Ripple tank (lane Optics) ------------------------------------------------------
   "ripple-tank": {
     howTo:
