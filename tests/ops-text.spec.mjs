@@ -55,18 +55,17 @@ test.describe("a PDF's words in the Toy tab", () => {
     await expect(words).toHaveAttribute("tabindex", "0");
     await expect(words).toContainText("The Tinkerer's Manual");
     await expect(words).toContainText("is made of Gaussian splats");
-    // Lines join into paragraphs, and a list keeps its items (page 1 now ends with the level map).
-    await expect(words.locator("p", { hasText: /^The level map$/ })).toHaveCount(1);
-    await expect(
-      words.locator("p", { hasText: /^\d+\. Level 1 One splat: what a splat is/ }),
-    ).toHaveCount(1);
+    // The contents follow the cover on page 1 (since October 11, 2026 the manual's pages are chapters,
+    // and the PDF has no level map).
+    await expect(words).toContainText("Contents");
+    await expect(words).toContainText("Chapter 1: What a splat is");
     // Selectable, like any text on a page.
     expect(await words.evaluate((el) => getComputedStyle(el).userSelect)).toBe("text");
 
     // Next: the box follows the page.
     await page.click("#toy-media-next");
     await expect(words).toHaveAttribute("aria-label", "Words on page 2");
-    await expect(words).toContainText("What a splat is");
+    await expect(words).toContainText("Chapter");
     await expect(words).not.toContainText("is made of Gaussian splats");
     expect(await page.evaluate(() => window.__splashery.player.pictures.page)).toBe(1);
 
@@ -184,7 +183,7 @@ test.describe("a PDF's words in the Toy tab", () => {
       await page.click("#toy-media-next");
       const words = page.locator("#toy-media-text");
       await expect(words).toHaveAttribute("aria-label", "Words on page 2");
-      await expect(words).toContainText("What a splat is");
+      await expect(words).toContainText("Chapter");
       await page.fill("#toy-media-find", "splat");
       await page.click("#toy-media-find-go");
       await expect(page.locator("#toy-media-find-note")).toHaveText(/^Found/);
