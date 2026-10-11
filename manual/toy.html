@@ -69,7 +69,11 @@
             <li><a href="language.html">Chapter 3: The splat equation language</a></li>
             <li><a href="gallery.html">Chapter 4: A gallery of programs</a></li>
             <li><a href="pictures.html">Chapter 5: Pictures, screens, and your own input</a></li>
-            <li><a href="coming.html">Chapters 6 to 10: coming next</a></li>
+            <li><a href="moving.html">Chapter 6: Moving things</a></li>
+            <li><a href="data.html">Chapter 7: Real data as splats</a></li>
+            <li><a href="photo3d.html">Chapter 8: Photos and video into 3D</a></li>
+            <li><a href="codes.html">Chapter 9: Codes and pages</a></li>
+            <li><a href="make.html">Chapter 10: Make your own</a></li>
             <li><a href="more.html">What else Splashery does now</a></li>
             <li><a href="unique.html">What Splashery can do that other splat tools can't</a></li>
             <li><a href="built.html">How Splashery is built</a></li>
@@ -98,7 +102,7 @@
         <span class="muted">Definitions, derivations, notes, and long tables start folded.</span>
       </p>
       <!-- NAV:TOP:END -->
-      <!-- ---- Level 2 ---- -->
+      <!-- ---- Chapter 2 ---- -->
       <h2 id="toy"><span class="level">Chapter 2</span>How a toy is built</h2>
       <p>
         Nobody places Splashery's splats by hand. Most toys are
@@ -115,7 +119,7 @@
         capture is loaded from a file instead.
       </p>
       <p>
-        Recipes are written in JavaScript. This level is a tour, so you can read one; the complete
+        Recipes are written in JavaScript. This chapter is a tour, so you can read one; the complete
         guide is
         <a
           href="https://github.com/ryanjosephkamp/splashery/blob/main/docs/PACKS.md"
@@ -139,7 +143,7 @@
   pack: "my-pack",             // loads src/packs/my-pack.js
 }</code></pre>
       <p>
-        A recipe has six basic parts, all optional except <code>build</code> (Level 5 adds
+        A recipe has six basic parts, all optional except <code>build</code> (Chapter 5 adds
         <code>pictures</code>, <code>input</code>, and <code>tiltLock</code>, and
         <a
           href="https://github.com/ryanjosephkamp/splashery/blob/main/docs/PACKS.md"
@@ -203,7 +207,7 @@
         <code>k.lathe(profile)</code> (a vase or a bottle, turned around an axis),
         <code>k.tube(curve, radius)</code> (a stem, an arm, a knot),
         <code>k.param((u, v) =&gt; [x, y, z])</code>, any surface you can write in two variables
-        (the same idea as Level 3; here <var>u</var> and <var>v</var> each run from 0 to 1), and
+        (the same idea as Chapter 3; here <var>u</var> and <var>v</var> each run from 0 to 1), and
         <code>k.radial((dir) =&gt; r)</code>, a blobby surface given by its distance from the middle
         in every direction. Nothing is drawn until you add a shape:
       </p>
@@ -218,8 +222,8 @@
 
       <h3 id="splat-count">How many splats? What a bigger budget does</h3>
       <p>
-        The kit spreads a budget of splats over a toy's surface (see Level 1 for the four numbers).
-        It is natural to think more splats always look better. The Kit lab measured it
+        The kit spreads a budget of splats over a toy's surface (see Chapter 1 for the four
+        numbers). It is natural to think more splats always look better. The Kit lab measured it
         (<code>docs/lab/BUDGETS.md</code>, October 10, 2026). It drew the same toy from the same
         view on the same simulated 390 by 844 phone at five budgets, changing only the count. The
         table compares 140,000 (the Mid tier) with 200,000 (the High tier) for 24 views of 22 toys.
@@ -994,7 +998,7 @@ export const RECIPES = {
    expect: the sails turn by themselves, and a tap spins them one extra turn.</code></pre>
       <div class="approx">
         <p>
-          The Splat equation toy's text box takes equations (Level 3), not JavaScript recipes. A
+          The Splat equation toy's text box takes equations (Chapter 3), not JavaScript recipes. A
           recipe has to be a module in <code>src/packs/</code>, as above.
         </p>
       </div>
@@ -1013,7 +1017,7 @@ export const RECIPES = {
         <p>
           The Tinkerer's Manual, first published September 28, 2026 and updated October 11, 2026.
           Part of
-          <a href="https://ryanjosephkamp.github.io/splashery/" target="_blank" rel="noopener"
+          <a href="https://ryanjosephkamp.github.io/splashery/site/" target="_blank" rel="noopener"
             >Splashery</a
           >, a toy box of 3D Gaussian splats that runs in your browser. Every picture here was made
           with Splashery itself.

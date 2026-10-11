@@ -37,8 +37,8 @@
           >
           is made of Gaussian splats: tens of thousands of soft, colored blobs that blend into a
           solid-looking thing. This manual is for anyone who knows some math and wants to make
-          splats do what they say. It goes level by level. You can stop after any level and still
-          have something to play with.
+          splats do what they say. It goes chapter by chapter. You can stop after any chapter and
+          still have something to play with.
         </p>
         <p>
           Splashery is primarily splat based, but not only. Two honest exceptions. The photo toys
@@ -139,13 +139,77 @@
               </ol>
             </li>
             <li>
-              <a href="#moving">Chapters 6 to 10: coming next</a>
+              <a href="#moving">Chapter 6: Moving things</a>
               <ol class="toc-sections">
-                <li><a href="#moving">Chapter 6: Moving things (coming)</a></li>
-                <li><a href="#data">Chapter 7: Real data as splats (coming)</a></li>
-                <li><a href="#photo3d">Chapter 8: Photos and video into 3D (coming)</a></li>
-                <li><a href="#codes">Chapter 9: Codes and pages (coming)</a></li>
-                <li><a href="#make">Chapter 10: Make your own (coming)</a></li>
+                <li>
+                  <a href="#hands-on-play-pick-up-toss-settle"
+                    >Hands-on play: pick up, toss, settle</a
+                  >
+                </li>
+                <li>
+                  <a href="#pieces-and-joints"
+                    >Pieces and joints: parts that move the way the real thing's do</a
+                  >
+                </li>
+                <li><a href="#ropes-cloth-and-soft-stretch">Ropes, cloth, and soft stretch</a></li>
+                <li>
+                  <a href="#materials-a-thrown-thing-moves-like-the-real-thing"
+                    >Materials: a thrown thing moves like the real thing</a
+                  >
+                </li>
+                <li>
+                  <a href="#rigid-parts-and-the-motion-driver">Rigid parts and the motion driver</a>
+                </li>
+                <li><a href="#try-it-6">Where to try it</a></li>
+              </ol>
+            </li>
+            <li>
+              <a href="#data">Chapter 7: Real data as splats</a>
+              <ol class="toc-sections">
+                <li><a href="#molecules">Molecules</a></li>
+                <li><a href="#earthquakes">Earthquakes</a></li>
+                <li><a href="#the-night-sky">The night sky</a></li>
+                <li><a href="#volumes-and-point-clouds">Volumes and point clouds</a></li>
+                <li>
+                  <a href="#weather-maps-and-the-other-data-toys"
+                    >Weather, maps, and the other data toys</a
+                  >
+                </li>
+                <li><a href="#the-rules-for-live-data">The rules for live data</a></li>
+                <li><a href="#try-it-7">Where to try it</a></li>
+              </ol>
+            </li>
+            <li>
+              <a href="photo3d.html">Chapter 8: Photos and video into 3D</a>
+              <ol class="toc-sections">
+                <li><a href="photo3d.html#photo-to-3d">Photo to 3D</a></li>
+                <li><a href="photo3d.html#the-sharp-view">The Sharp view</a></li>
+                <li><a href="photo3d.html#moving-photo-to-3d">Moving photo to 3D</a></li>
+                <li><a href="photo3d.html#video-to-3d">Video to 3D</a></li>
+                <li><a href="photo3d.html#photoreal-captures">The photoreal captures</a></li>
+                <li><a href="photo3d.html#try-it-8">Where to try it</a></li>
+              </ol>
+            </li>
+            <li>
+              <a href="#codes">Chapter 9: Codes and pages</a>
+              <ol class="toc-sections">
+                <li><a href="#qr-codes">QR codes</a></li>
+                <li><a href="#more-qr-toys">More QR toys, and other barcodes</a></li>
+                <li><a href="#pages-pdfs-and-gifs">Pages, PDFs, and GIFs</a></li>
+                <li><a href="#share-links">Share links</a></li>
+                <li><a href="#try-it-9">Where to try it</a></li>
+              </ol>
+            </li>
+            <li>
+              <a href="#make">Chapter 10: Make your own</a>
+              <ol class="toc-sections">
+                <li><a href="#five-ways">Five ways to make your own</a></li>
+                <li><a href="#roll-one-and-open-one">Roll one and open one</a></li>
+                <li><a href="#the-studio">The Studio</a></li>
+                <li><a href="#models-and-splat-files">Models, and your splat files</a></li>
+                <li><a href="#writing-a-recipe">Writing a recipe</a></li>
+                <li><a href="#sharing-what-you-made">Sharing what you made</a></li>
+                <li><a href="#try-it-10">Where to try it</a></li>
               </ol>
             </li>
             <li>
@@ -200,7 +264,15 @@
             <li><a href="#experiments">Open questions: other choices, not tried yet</a></li>
             <li><a href="#later">What comes later: Code a toy</a></li>
             <li><a href="#glossary">Glossary</a></li>
-            <li><a href="#reading">Further reading</a></li>
+            <li>
+              <a href="#reading">Further reading</a>
+              <ol class="toc-sections">
+                <li><a href="#reading-start">Where splats come from</a></li>
+                <li><a href="#reading-robots">Robotics and other uses</a></li>
+                <li><a href="#reading-dynamic">Moving, talking, and generated splats</a></li>
+                <li><a href="#reading-tools">Open projects and tools</a></li>
+              </ol>
+            </li>
             <li><a href="#references">References</a></li>
             <li>
               <a href="#card">Quick reference</a>
@@ -208,6 +280,10 @@
                 <li><a href="#one-splat">One splat</a></li>
                 <li><a href="#a-splat-program">A splat program</a></li>
                 <li><a href="#a-picture-toy">A picture toy</a></li>
+                <li><a href="#a-recipe">A recipe (a toy)</a></li>
+                <li><a href="#the-controls">The controls</a></li>
+                <li><a href="#key-numbers">Key numbers</a></li>
+                <li><a href="#where-the-files-go">What goes where</a></li>
               </ol>
             </li>
           </ol>
@@ -227,7 +303,7 @@
         </p>
       </section>
 
-      <!-- ---- Level 1 ---- -->
+      <!-- ---- Chapter 1 ---- -->
       <h2 id="splat"><span class="level">Chapter 1</span>What a splat is</h2>
       <p>
         A <b>splat</b> is a small cloud of color floating in space. Up close, it looks like a soft
@@ -281,7 +357,7 @@
         <ul>
           <li>
             <b>A recipe's placed splats.</b> A toy's recipe places them by rule: points sampled on
-            the shapes of <b>the kit</b> (Splashery's toy-building library, Level 2), each given a
+            the shapes of <b>the kit</b> (Splashery's toy-building library, Chapter 2), each given a
             size, a rotation, and a color. Nothing is fitted to photos.
           </li>
           <li>
@@ -687,7 +763,7 @@
         <p>
           <b>What it did not test.</b> One pair of budgets (140,000 and 200,000), one phone size,
           one renderer (software, not a real phone's graphics chip), and the toys as they were on
-          that day, before later changes. The Kit lab's larger sweep is in Level 2, under
+          that day, before later changes. The Kit lab's larger sweep is in Chapter 2, under
           <a href="#splat-count">How many splats?</a>.
         </p>
         <p>
@@ -1131,7 +1207,7 @@
           <var>z</var>, and usually not zero when they do not. (Usually, because a splat that is
           round in a plane has no preferred axes there, so turning it within that plane changes
           nothing.) (In this manual, <b>rotation</b> means a splat's own turn, and "Tilt lock" is
-          the name of the camera control in Level 5.)
+          the name of the camera control in Chapter 5.)
         </p>
       </details>
 
@@ -1471,7 +1547,7 @@
           pose. Turn a solid thing more than a quarter turn and its far side can be drawn over its
           near side. The toys work around it: the Splat equation toy, for one, builds its shape at
           twelve moments and morphs from the copy at the start of the current interval to the next
-          (Level 3).
+          (Chapter 3).
         </p>
       </div>
 
@@ -1573,7 +1649,7 @@
         </figcaption>
       </figure>
 
-      <!-- ---- Level 2 ---- -->
+      <!-- ---- Chapter 2 ---- -->
       <h2 id="toy"><span class="level">Chapter 2</span>How a toy is built</h2>
       <p>
         Nobody places Splashery's splats by hand. Most toys are
@@ -1590,7 +1666,7 @@
         capture is loaded from a file instead.
       </p>
       <p>
-        Recipes are written in JavaScript. This level is a tour, so you can read one; the complete
+        Recipes are written in JavaScript. This chapter is a tour, so you can read one; the complete
         guide is
         <a
           href="https://github.com/ryanjosephkamp/splashery/blob/main/docs/PACKS.md"
@@ -1614,7 +1690,7 @@
   pack: "my-pack",             // loads src/packs/my-pack.js
 }</code></pre>
       <p>
-        A recipe has six basic parts, all optional except <code>build</code> (Level 5 adds
+        A recipe has six basic parts, all optional except <code>build</code> (Chapter 5 adds
         <code>pictures</code>, <code>input</code>, and <code>tiltLock</code>, and
         <a
           href="https://github.com/ryanjosephkamp/splashery/blob/main/docs/PACKS.md"
@@ -1678,7 +1754,7 @@
         <code>k.lathe(profile)</code> (a vase or a bottle, turned around an axis),
         <code>k.tube(curve, radius)</code> (a stem, an arm, a knot),
         <code>k.param((u, v) =&gt; [x, y, z])</code>, any surface you can write in two variables
-        (the same idea as Level 3; here <var>u</var> and <var>v</var> each run from 0 to 1), and
+        (the same idea as Chapter 3; here <var>u</var> and <var>v</var> each run from 0 to 1), and
         <code>k.radial((dir) =&gt; r)</code>, a blobby surface given by its distance from the middle
         in every direction. Nothing is drawn until you add a shape:
       </p>
@@ -1693,8 +1769,8 @@
 
       <h3 id="splat-count">How many splats? What a bigger budget does</h3>
       <p>
-        The kit spreads a budget of splats over a toy's surface (see Level 1 for the four numbers).
-        It is natural to think more splats always look better. The Kit lab measured it
+        The kit spreads a budget of splats over a toy's surface (see Chapter 1 for the four
+        numbers). It is natural to think more splats always look better. The Kit lab measured it
         (<code>docs/lab/BUDGETS.md</code>, October 10, 2026). It drew the same toy from the same
         view on the same simulated 390 by 844 phone at five budgets, changing only the count. The
         table compares 140,000 (the Mid tier) with 200,000 (the High tier) for 24 views of 22 toys.
@@ -2469,12 +2545,12 @@ export const RECIPES = {
    expect: the sails turn by themselves, and a tap spins them one extra turn.</code></pre>
       <div class="approx">
         <p>
-          The Splat equation toy's text box takes equations (Level 3), not JavaScript recipes. A
+          The Splat equation toy's text box takes equations (Chapter 3), not JavaScript recipes. A
           recipe has to be a module in <code>src/packs/</code>, as above.
         </p>
       </div>
 
-      <!-- ---- Level 3 ---- -->
+      <!-- ---- Chapter 3 ---- -->
       <h2 id="language"><span class="level">Chapter 3</span>The splat equation language</h2>
       <p>
         Recipes are powerful, but they are code, and code from a stranger can do things you did not
@@ -2483,7 +2559,7 @@ export const RECIPES = {
         nothing else can happen. That is why a link with your equations in it is safe to share.
       </p>
       <p>
-        Open it with any link in the gallery (Level 4). Type in the box under
+        Open it with any link in the gallery (Chapter 4). Type in the box under
         <b>Your own splat program</b> in the Toy tab and press <b>Splat it</b>. The Program list has
         eight famous shapes to start from.
       </p>
@@ -3089,7 +3165,7 @@ function   = "sin" | "cos" | "tan" | "asin" | "acos" | "atan"
       <p>
         Behind the scenes, the toy builds your shape at 12 moments, <var>t</var> = 0, π/6, 2π/6, and
         so on, and each copy slides every splat in a straight line to its place in the next copy (a
-        morph, Level 2), so every splat is at its computed place at those 12 moments (up to the
+        morph, Chapter 2), so every splat is at its computed place at those 12 moments (up to the
         packing error described below) and slides in a straight line in between. A shape that turns
         dips very slightly inward between moments, about 3 percent. (With labs on, a
         <b>Moments of t</b> choice sets 13, 14, or 15 moments instead; 12 stays the default, so
@@ -3105,7 +3181,8 @@ function   = "sin" | "cos" | "tan" | "asin" | "acos" | "atan"
           Twelve copies of 10,000 points (the most <code>count</code> allows) make 120,000 splats,
           the Low tier's largest budget, so even the weakest device can hold the biggest program.
           (The kit keeps 2 percent in reserve, so on that device each copy is cut to 9,800 points.)
-          Each moment is its own part (Level 2), and 12 parts plus the body fit in the limit of 15.
+          Each moment is its own part (Chapter 2), and 12 parts plus the body fit in the limit of
+          15.
         </p>
         <p>
           <b>If it were chosen differently.</b> More moments make a turning shape rounder, because a
@@ -3374,7 +3451,7 @@ w = qz + 4096 × channel     (one 12-bit number and the channel)</code></pre>
         ("Copy link" in the Share tab), so you can send it to anyone.
       </p>
 
-      <!-- ---- Level 4 ---- -->
+      <!-- ---- Chapter 4 ---- -->
       <h2 id="gallery"><span class="level">Chapter 4</span>A gallery of programs</h2>
       <p>
         The first eight are the toy's own programs; the rest are small ideas to copy and change.
@@ -6060,12 +6137,12 @@ count = 3500</code></pre>
         </p>
       </div>
 
-      <!-- ---- Level 5 ---- -->
+      <!-- ---- Chapter 5 ---- -->
       <h2 id="pictures">
         <span class="level">Chapter 5</span>Pictures, screens, and your own input
       </h2>
       <p>
-        The toys in Level 2 are built from shapes. Some toys show something that is not a shape: a
+        The toys in Chapter 2 are built from shapes. Some toys show something that is not a shape: a
         page of a PDF, a photo, a GIF, a video, or something you type or draw. Three additions to a
         recipe make them: <b>picture sheets</b>, an <b>input panel</b>, and a few
         <b>view settings</b>. They are still Gaussian splats, all the way down. The toys on the
@@ -6136,7 +6213,7 @@ count = 3500</code></pre>
       </p>
       <pre><code>import { smoothstep } from "../src/kit.js";
 
-// Two small picture toys for Level 5 of the Tinkerer's Manual: a framed photo
+// Two small picture toys for Chapter 5 of the Tinkerer's Manual: a framed photo
 // that opens your own picture, and a little book whose page turns like paper.
 export const RECIPES = {
   "little-frame": {
@@ -6193,7 +6270,7 @@ export const RECIPES = {
         </figcaption>
       </figure>
       <p>
-        The little book below uses a pulse control for the turn, the way Level 2's gust does. The
+        The little book below uses a pulse control for the turn, the way Chapter 2's gust does. The
         page under the turning one is built ahead of time (a sheet is normally built only while it
         is visible, unless it requests <code>ahead: 1</code>, so a page that shows up halfway could
         make the turn wait), and the page number moves on when the turn ends. Keep a turning sheet
@@ -6257,8 +6334,8 @@ const BOOK = { turning: false };</code></pre>
       <ul>
         <li>
           <b>Typing</b>: a text box and a button, and maybe a button that opens a text file
-          (<code>fileButton</code>, <code>accept</code>). The Splat equation toy of Level 3 is one;
-          so is the Word vectors toy, where you type <i>king − man + woman</i>.
+          (<code>fileButton</code>, <code>accept</code>). The Splat equation toy of Chapter 3 is
+          one; so is the Word vectors toy, where you type <i>king − man + woman</i>.
         </li>
         <li>
           <b>Drawing</b>: <code>pad: { cols, rows, max, button }</code> adds a small grid you paint
@@ -6269,7 +6346,7 @@ const BOOK = { turning: false };</code></pre>
         <li>
           <b>Opening a picture</b>: <code>media: { accept }</code> adds an <b>Open a file…</b>
           button, a field for a web address, the page buttons (or play and pause for a video) and a
-          way back to the sample. Level 5's picture toys use it.
+          way back to the sample. Chapter 5's picture toys use it.
         </li>
       </ul>
       <figure>
@@ -6290,7 +6367,7 @@ const BOOK = { turning: false };</code></pre>
         are saved in the toy's link. Here is a whole toy with a typed input, a row of bars for the
         numbers you give it:
       </p>
-      <pre><code>// A small toy with its own typed input, for Level 5 of the Tinkerer's Manual:
+      <pre><code>// A small toy with its own typed input, for Chapter 5 of the Tinkerer's Manual:
 // type some numbers and the toy stands them up as bars.
 const LIMIT = 12;
 const COLORS = ["#e8384f", "#ffc233", "#1fb59a", "#4dabf7"];
@@ -6358,7 +6435,7 @@ export const RECIPES = {
         picture. The fit uses front-to-back blending, equivalent to the renderer's back-to-front
         blending, with the renderer's finite bell, so what you see is the real fit.
         <b>One splat</b> lets you set the sizes, the opacity, and the color of a Gaussian
-        illustrated by a cloud of small splats and turn it (Level 1's numbers);
+        illustrated by a cloud of small splats and turn it (Chapter 1's numbers);
         <b>Many splats</b> builds a small rubber duck from kit shapes and then shrinks every splat
         to a dot, so you see the splats that make it; and <b>Sorting</b> shows the splats of a ball
         appearing one by one, in the back-to-front order a camera draws them.
@@ -6396,7 +6473,7 @@ export const RECIPES = {
         </div>
         <figcaption>
           The One splat view: a Gaussian illustrated by small splats, with its three sizes drawn as
-          axes (Level 1's
+          axes (Chapter 1's
           <var>s</var><sub>1</sub>, <var>s</var><sub>2</sub>, and <var>s</var><sub>3</sub>).
         </figcaption>
       </figure>
@@ -6446,30 +6523,1971 @@ export const RECIPES = {
         double-tap does too unless the toy uses it for page focus.
       </p>
 
-      <h2 id="moving" class="coming"><span class="level">Chapter 6</span>Moving things</h2>
-      <p class="coming-note">
-        This level will cover hands-on play, joints, and physics. <b>Coming in the next round.</b>
+      <!-- ---- Chapter 6 ---- -->
+      <h2 id="moving"><span class="level">Chapter 6</span>Moving things</h2>
+      <!-- Sources: src/physics/hands-on.js:1-110 (the constants and the two modes), :196-262 (the
+           world and the hull), src/physics/world.js:1-30 and :396-410 (the engine, substeps and
+           sleep), src/physics/joints.js:1-60, src/physics/soft.js:1-30, src/physics/materials.js:1-45
+           and :54-85, src/motion.js:53-90, :330-375, :395-405 and packParts (:451-480),
+           src/effects.js:783-790 and :1068-1110 (the part's move in the shader), docs/PACKS.md
+           "5g" and "5h". Counts measured by loading the modules: 27 materials, 61 soft toys, 25
+           bounce entries. -->
+      <p>
+        Chapters 1 to 5 moved splats with programs: a recipe's <code>drive</code> sets a part's
+        angle every frame, and the toy plays out. This chapter is about motion that comes from your
+        finger and from physics: pick a toy up, throw it, let it land and settle, open its lid, pull
+        a sword out of a stone. The same rule from the effect-quality notes holds throughout:
+        <b>parts move as solid pieces</b>. Nothing is bent. A lid swings on a hinge, a wedge slides
+        out of its orange, and the splats that belong to a part travel with it. This is not behind
+        the labs switch: the ✋ switch is in the Playground for everyone.
       </p>
-      <h2 id="data" class="coming"><span class="level">Chapter 7</span>Real data as splats</h2>
-      <p class="coming-note">
-        This level will cover science, imaging, maps, and the night sky.
-        <b>Coming in the next round.</b>
+
+      <h3 id="hands-on-play-pick-up-toss-settle">Hands-on play: pick up, toss, settle</h3>
+      <p>
+        <b>What it is.</b> With the ✋ switch on, a drag picks up whatever is under your finger. A
+        quick let-go tosses it; it falls, bounces, and comes to rest on the floor under the toy,
+        inside an invisible play area. The ↺ button sends everything home. A press has to move 7
+        screen pixels before it counts as a pick-up, and a drag shorter than 24 pixels only
+        <i>nudges</i> the toy, so a tap or a light touch never throws anything.
       </p>
-      <h2 id="photo3d" class="coming">
-        <span class="level">Chapter 8</span>Photos and video into 3D
-      </h2>
-      <p class="coming-note">
-        This level will cover depth, the Sharp view, and splats. <b>Coming in the next round.</b>
+      <p>
+        <b>How Splashery does it.</b> Splashery has a small physics engine of its own, with no
+        library (<code>src/physics/world.js</code>). It is
+        <i>extended position-based dynamics</i> [<a href="#ref-11">11</a>,
+        <a href="#ref-12">12</a>]: instead of computing forces and integrating them, each step moves
+        the bodies to where they would be if nothing overlapped and every joint held, then works out
+        velocities from how far they moved. The world is built on the first pick-up, so opening a
+        toy costs nothing. It steps 1/60 of a second at a time whatever the frame rate, in 8 smaller
+        substeps for a whole toy and 10 for a toy with pieces, and it falls asleep once everything
+        has been slower than a small speed for half a second.
       </p>
-      <h2 id="codes" class="coming"><span class="level">Chapter 9</span>Codes and pages</h2>
-      <p class="coming-note">
-        This level will cover QR codes, barcodes, PDFs, and books. <b>Coming in the next round.</b>
+      <p>
+        Most toys play as one rigid body: their pose moves the toy's whole entity, so the splats are
+        sorted and taps land where the toy lies now. A rigid body needs a shape to collide with, and
+        a toy has only splats, so Splashery finds the outside from them. It samples up to 6,000 of
+        the toy's splat centers and, in each of 64 directions, keeps the splat that lies furthest
+        out (ignoring the outermost half of a percent, which are usually stray specks). Those 64
+        points are the body's collision points. A ball gets a sphere instead, so it rolls. The floor
+        is under the toy; four invisible walls sit just past its widest reach; a ceiling sits above
+        the highest point. Gravity is 26 toy radii per second squared, so a toy falls the same way
+        whatever its size on screen. A throw takes its speed from the last tenth of a second of
+        finger motion, and is capped at 4 toy radii per second.
       </p>
-      <h2 id="make" class="coming"><span class="level">Chapter 10</span>Make your own</h2>
-      <p class="coming-note">
-        This level will cover Code a toy, the Studio, and the program gallery.
-        <b>Coming in the next round.</b>
+      <p>
+        Soft toys squish when they land. How much is a number per toy (61 toys have one, such as the
+        jelly at 1, a bouncy ball at 0.55, a strawberry at 0.15), and it reaches the screen as two
+        uniform values that squash and bulge the toy as a whole. This is a squash of the
+        <i>pose</i>, not a bend of the scan: the splats stay where they are inside the toy's own
+        frame.
       </p>
+      <figure>
+        <div class="shots two">
+          <div>
+            <img src="img/r7b-yo-yo.jpg" alt="A red yo-yo with a white target pattern" />
+            <p class="shot-label">A rigid body: the yo-yo</p>
+          </div>
+          <div>
+            <img src="img/r7b-octopus.jpg" alt="A red octopus with eight curled arms" />
+            <p class="shot-label">Arms that ride the body: the octopus</p>
+          </div>
+        </div>
+        <figcaption>Both toys can be picked up and thrown in the Playground.</figcaption>
+      </figure>
+      <details class="fold tablefold">
+        <summary>Show the table: the numbers of hands-on play</summary>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Number</th>
+                <th>Where</th>
+                <th>What it does</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>7 px</td>
+                <td><code>PRESS_MOVE</code></td>
+                <td>How far a press moves before it is a pick-up.</td>
+              </tr>
+              <tr>
+                <td>24 px</td>
+                <td><code>NUDGE</code></td>
+                <td>A drag shorter than this pushes the toy and never picks it up.</td>
+              </tr>
+              <tr>
+                <td>26 radii/s²</td>
+                <td><code>GRAVITY</code></td>
+                <td>Gravity, in toy radii, so every toy falls alike.</td>
+              </tr>
+              <tr>
+                <td>0.1 s</td>
+                <td><code>THROW_WINDOW</code></td>
+                <td>The span of finger motion a let-go takes its speed from.</td>
+              </tr>
+              <tr>
+                <td>4 radii/s</td>
+                <td><code>THROW_MAX</code></td>
+                <td>
+                  The fastest throw. Slower than 0.4 (<code>THROW_MIN</code>) is a still hold.
+                </td>
+              </tr>
+              <tr>
+                <td>0.6 per s</td>
+                <td><code>AIR_DRAG</code></td>
+                <td>Air drag on a thrown toy that has no material of its own.</td>
+              </tr>
+              <tr>
+                <td>1/60 s</td>
+                <td><code>STEP</code></td>
+                <td>The world's step, whatever the frame rate.</td>
+              </tr>
+              <tr>
+                <td>0.45 s</td>
+                <td><code>HOME_SECS</code></td>
+                <td>How long ↺ takes to glide everything home.</td>
+              </tr>
+              <tr>
+                <td>64 directions</td>
+                <td><code>hull()</code></td>
+                <td>
+                  A toy's collision points: the farthest of up to 6,000 sampled splats per
+                  direction.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
+      <details class="fold why" id="why-hands-on-units">
+        <summary>Why toy radii, and why a speed limit?</summary>
+        <p class="kind">
+          <span class="chip choice">Our choice</span> Nothing in the format forces these.
+        </p>
+        <p>
+          Splashery's toys are an inch tall or a planet wide, and the page has no real size. So the
+          world measures everything in the toy's own radius: gravity, the throw's speed, the play
+          area. A matchbox and a mountain then fall and land the same way, and a throw cannot send a
+          toy off the screen. The cost is that the motion is not physically scaled: a real baseball
+          is thrown a hundred times faster than 4 of its radii a second. Where that matters (the
+          curve of a spin, the glide of a disc), the numbers are set to show the real effect in the
+          real order, as the section on materials below says.
+        </p>
+        <p class="where">
+          Where it lives: the constants at the top of <code>src/physics/hands-on.js</code>.
+        </p>
+      </details>
+
+      <h3 id="pieces-and-joints">Pieces and joints: parts that move the way the real thing's do</h3>
+      <p>
+        <b>What it is.</b> A rigid body is one lump. A treasure chest has a lid, and a lid is not a
+        lump: it swings on its hinge and stops when it is open. A recipe's <code>hands</code> block
+        lets a toy say that. <code>hands.pieces</code> names pieces of the toy that are bodies of
+        their own, which stay put until you pick one up or knock it. <code>hands.joints</code> says
+        how a part may move.
+      </p>
+      <p>
+        <b>How Splashery does it.</b> There are five kinds of joint and one more setting
+        (<code>src/physics/joints.js</code>). Hinges, sliders, and dials are <i>driven parts</i>:
+        one number describes each, an angle or a distance. The finger, gravity, a spring, and the
+        stops move that number, and the part is then posed exactly from it, so a part never wobbles
+        off its axis or jitters. Sockets and broken-off pieces are ordinary bodies of the physics
+        world, solid like the rest.
+      </p>
+      <ul>
+        <li>
+          <b>Hinge</b>: a part swings about an axis between two angles, with an optional spring
+          toward a rest angle, and falls by its own weight. It bounces off its stop a little (0.2 of
+          the speed, by default). The
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImNoZXN0In0sImNhbWVyYSI6eyJ5YXciOjAuNDUsInBpdGNoIjowLjQyLCJyb2xsIjowLCJkaXN0YW5jZSI6NS40fSwiYXV0b3BsYXkiOnsidHVybnRhYmxlIjpmYWxzZSwiZWZmZWN0Ijoibm9uZSJ9fQ"
+            target="_blank"
+            rel="noopener"
+            >treasure chest's</a
+          >
+          lid is one.
+        </li>
+        <li>
+          <b>Slider</b>: a part moves along a line between two stops. It can be stuck fast until the
+          finger has pulled a set distance, and then it wiggles loose, as the
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InN3b3JkLWluLXN0b25lIn0sImNhbWVyYSI6eyJ5YXciOjAuNTUsInBpdGNoIjowLjI4LCJyb2xsIjowLCJkaXN0YW5jZSI6NC41fX0"
+            target="_blank"
+            rel="noopener"
+            >sword in the stone</a
+          >
+          does.
+        </li>
+        <li>
+          <b>Dial</b>: you turn a part about its axis, round and round or between two angles, with
+          optional clicks (detents) and coasting after a flick. A dial can hand each turn to the
+          recipe, which is how the
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im11c2ljLWJveCJ9LCJjYW1lcmEiOnsieWF3IjowLjQsInBpdGNoIjowLjM1LCJyb2xsIjowLCJkaXN0YW5jZSI6NC42fSwiYXV0b3BsYXkiOnsidHVybnRhYmxlIjpmYWxzZSwiZWZmZWN0Ijoibm9uZSJ9fQ"
+            target="_blank"
+            rel="noopener"
+            >music box</a
+          >'s crank plays its notes.
+        </li>
+        <li>
+          <b>Socket</b>: a loose piece clicks back into its place when you bring it near (within 0.3
+          toy radii, by default), gliding the last bit in 0.22 seconds. The wedges of the
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im9yYW5nZSJ9LCJjYW1lcmEiOnsieWF3IjowLjU1LCJwaXRjaCI6MC4zNiwicm9sbCI6MCwiZGlzdGFuY2UiOjQuMn19"
+            target="_blank"
+            rel="noopener"
+            >orange</a
+          >
+          are sockets.
+        </li>
+        <li>
+          <b>Break</b>: a piece holds fast until it is pulled hard, then snaps off. ↺ mends it. The
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImNhbmR5LWNhbmUifSwiY2FtZXJhIjp7InlhdyI6MC4zLCJwaXRjaCI6MC4yLCJyb2xsIjowLCJkaXN0YW5jZSI6NH19"
+            target="_blank"
+            rel="noopener"
+            >candy cane</a
+          >
+          breaks this way.
+        </li>
+        <li>
+          <b>Upright</b>: not a joint but a setting, <code>hands.upright</code>: a whole toy rights
+          itself after it has been tipped.
+        </li>
+      </ul>
+      <figure>
+        <div class="shots two">
+          <div>
+            <img src="img/toy-chest.jpg" alt="The treasure chest with its lid open" />
+            <p class="shot-label">A hinge: the chest's lid</p>
+          </div>
+          <div>
+            <img src="img/r7b-sword-in-stone.jpg" alt="A sword standing in a mossy gray stone" />
+            <p class="shot-label">A slider: the sword</p>
+          </div>
+        </div>
+        <div class="shots two">
+          <div>
+            <img
+              src="img/r7b-orange.jpg"
+              alt="A whole orange beside a cut orange half showing its wedges"
+            />
+            <p class="shot-label">Sockets: the wedges</p>
+          </div>
+          <div>
+            <img
+              src="img/r7b-candy-cane.jpg"
+              alt="Two red and white candy canes tied with a green bow"
+            />
+            <p class="shot-label">A break: the cane's top</p>
+          </div>
+        </div>
+        <figcaption>
+          Each part is a solid group of splats that moves whole. The music box's dial is on the
+          shelf too.
+        </figcaption>
+      </figure>
+      <p>
+        <b>Why this way.</b> Splashery's rule for effects is that motion must be real motion and not
+        a warped picture: if a scan cannot move a part cleanly, the part is cut out with hard edges,
+        swapped for a kit-built one, or the effect is dropped. A joint that moves one number, and a
+        part that is moved whole by that number, is exactly that rule in code. The same machinery
+        serves a scan: a scan's rig (<code>src/rigs.js</code>) names the parts of a captured toy,
+        and <code>src/physics/joints.js</code> turns them into pieces.
+      </p>
+      <div class="demo-placeholder">
+        <p class="demo-tag">A demo goes here later</p>
+        <p>
+          A box that lets you grab a hinge, a slider, and a dial on a simple toy, with the one
+          number each of them is moved by shown beside it.
+        </p>
+      </div>
+
+      <h3 id="ropes-cloth-and-soft-stretch">Ropes, cloth, and soft stretch</h3>
+      <p>
+        <b>What it is.</b> Some things bend: a string, an octopus's arms, a hood, a kite's tail.
+        Splashery's rule against bending scans does not forbid them, because these toys are built
+        from kit shapes and their bending is built in.
+      </p>
+      <p>
+        <b>How Splashery does it.</b> Ropes and cloth are lists of points (<i>nodes</i>) held by
+        distance links, solved with the same position-based method as the rigid bodies, in a solver
+        of its own (<code>src/physics/soft.js</code>). A rope can be slack (it folds and never
+        pushes), has a little stiffness against bending, and can be pinned, can ride a piece (an
+        octopus's arm rides its body), or can follow a finger. A cloth is a grid of nodes, pinned at
+        its edge, that hangs, drapes, and flutters in a wind. A link can snap when it is stretched
+        too far, as a cheese string does. Soft stretch, the third piece, is how the gummy bear's
+        splats follow your finger and then wobble back.
+      </p>
+      <p>
+        What moves on screen follows the rule too. A thin, bendy thing (a string, a tentacle) is
+        built from splats that each follow the two nodes they lie between, so a rope bends smoothly
+        and every splat still keeps its shape. A sheet has each splat follow the four corners of its
+        cell. A solid thing on a rope (a bead, a chime, the yo-yo itself) is a rigid piece that
+        rides a node and turns with the link, so it stays solid at every angle.
+      </p>
+      <p>
+        <b>Try it.</b> Pull the string of the
+        <a
+          href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InlvLXlvIn0sImNhbWVyYSI6eyJ5YXciOjAuMzUsInBpdGNoIjowLjEyLCJyb2xsIjowLCJkaXN0YW5jZSI6My45fX0"
+          target="_blank"
+          rel="noopener"
+          >yo-yo</a
+        >
+        and let go, or hold the
+        <a
+          href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im9jdG9wdXMifSwiY2FtZXJhIjp7InlhdyI6MC41NSwicGl0Y2giOjAuNCwicm9sbCI6MCwiZGlzdGFuY2UiOjV9fQ"
+          target="_blank"
+          rel="noopener"
+          >octopus</a
+        >
+        by one arm.
+      </p>
+
+      <h3 id="materials-a-thrown-thing-moves-like-the-real-thing">
+        Materials: a thrown thing moves like the real thing
+      </h3>
+      <p>
+        <b>What it is.</b> A basketball, a hockey puck, a paper plane, and a marble do not move
+        alike. A recipe's <code>hands.material</code> names a preset or gives its own numbers, so a
+        thrown toy bounces, rolls, spins, and flies the way its real counterpart does.
+      </p>
+      <p>
+        <b>How Splashery does it.</b> There are 27 presets (<code>src/physics/materials.js</code>),
+        from the basketball and the soccer ball to the shuttlecock, the flying disc, and the paper
+        plane. A preset holds the real regulation size and mass of the sport, the bounce its rule
+        book asks for (a basketball dropped from 1.8 m should come back to 1.2 to 1.4 m, which is a
+        bounce of 0.82 to 0.88), and the textbook drag of a sphere (0.47). The drag is the real
+        thing, expressed without units: how many toy radii a toy falls before it reaches its top
+        speed, <var>F</var><sub>r</sub> = 2<var>m</var> / (<var>ρ</var> <var>c</var><sub>d</sub> π
+        <var>r</var><sup>3</sup>) with air at 1.2 kg per cubic meter. Because that number has no
+        units, it holds whatever the toy's size on screen. A throw spins the toy by where you held
+        it (a low grab gives backspin, a side grab sidespin), and the spin curves the flight (the
+        Magnus effect). Lift, for a disc, a cap, or a paper plane, and the curve of a spin are set
+        to show in a short flight rather than scaled from real life, in the real direction and the
+        real order: a disc glides more than a cap, and a baseball curves more than a soccer ball.
+      </p>
+      <p>
+        <b>Try it.</b> Throw the
+        <a
+          href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImJhc2tldGJhbGwifX0"
+          target="_blank"
+          rel="noopener"
+          >basketball</a
+        >, the
+        <a
+          href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImJhc2ViYWxsIn19"
+          target="_blank"
+          rel="noopener"
+          >baseball</a
+        >, and the
+        <a
+          href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBhcGVyLXBsYW5lIn0sImNhbWVyYSI6eyJ5YXciOjAuNywicGl0Y2giOjAuNDIsInJvbGwiOjAsImRpc3RhbmNlIjozLjZ9fQ"
+          target="_blank"
+          rel="noopener"
+          >paper plane</a
+        >
+        and watch how each leaves your hand.
+      </p>
+
+      <h3 id="rigid-parts-and-the-motion-driver">Rigid parts and the motion driver</h3>
+      <p>
+        <b>What it is.</b> Everything above, and everything a recipe's <code>drive</code> does, ends
+        in the same place: a few numbers per part for the graphics chip.
+      </p>
+      <p>
+        <b>How Splashery does it.</b> The <code>MotionDriver</code> in
+        <code>src/motion.js</code> runs once per frame, on the CPU. It eases the controls, runs the
+        toy's own behaviors clock, calls the recipe's <code>drive</code>, and gathers what comes out
+        into uniforms. For parts, <code>packParts</code> writes three four-number values for each of
+        up to 16 parts (a rotation, a pivot with a scale, and an offset with a visibility), 48 in
+        all. Every splat carries the number of its part; the shader looks up the part and moves the
+        splat: <i>p</i> = pivot + <i>R</i> (<i>p</i> − pivot) × (1 + scale) + offset. This is the
+        same hinge as Chapter 2's, and a part that a joint moves goes through the very same lines.
+        Hands-on does not have a second way to move a splat: for a toy with pieces, the poses its
+        world computes are merged into the recipe's <code>drive.parts</code>, so a piece moved by a
+        finger and a part turned by a program arrive at the shader identically.
+      </p>
+      <p>
+        <b>Why this way.</b> The GPU moves every splat, and the CPU only decides a few dozen
+        numbers: a physics world with a few dozen bodies costs almost nothing, and a toy with
+        100,000 splats moves as cheaply as one with a hundred. It also keeps the splats solid: a
+        part's splats are all turned by the same rotation, so a part cannot bend. The limit is that
+        a splat can belong to only one part, which is why a toy has at most 15 parts beside the body
+        (Chapter 2's <a href="#why-parts">fold on the number of parts</a> says why).
+      </p>
+
+      <h3 id="try-it-6">Where to try it</h3>
+      <ul>
+        <li>
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImNoZXN0In0sImNhbWVyYSI6eyJ5YXciOjAuNDUsInBpdGNoIjowLjQyLCJyb2xsIjowLCJkaXN0YW5jZSI6NS40fSwiYXV0b3BsYXkiOnsidHVybnRhYmxlIjpmYWxzZSwiZWZmZWN0Ijoibm9uZSJ9fQ"
+            target="_blank"
+            rel="noopener"
+            >Treasure chest</a
+          >,
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InN3b3JkLWluLXN0b25lIn0sImNhbWVyYSI6eyJ5YXciOjAuNTUsInBpdGNoIjowLjI4LCJyb2xsIjowLCJkaXN0YW5jZSI6NC41fX0"
+            target="_blank"
+            rel="noopener"
+            >Sword in the stone</a
+          >,
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im11c2ljLWJveCJ9LCJjYW1lcmEiOnsieWF3IjowLjQsInBpdGNoIjowLjM1LCJyb2xsIjowLCJkaXN0YW5jZSI6NC42fSwiYXV0b3BsYXkiOnsidHVybnRhYmxlIjpmYWxzZSwiZWZmZWN0Ijoibm9uZSJ9fQ"
+            target="_blank"
+            rel="noopener"
+            >Music box</a
+          >,
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im9yYW5nZSJ9LCJjYW1lcmEiOnsieWF3IjowLjU1LCJwaXRjaCI6MC4zNiwicm9sbCI6MCwiZGlzdGFuY2UiOjQuMn19"
+            target="_blank"
+            rel="noopener"
+            >Orange</a
+          >, and
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImNhbmR5LWNhbmUifSwiY2FtZXJhIjp7InlhdyI6MC4zLCJwaXRjaCI6MC4yLCJyb2xsIjowLCJkaXN0YW5jZSI6NH19"
+            target="_blank"
+            rel="noopener"
+            >Candy cane</a
+          >: a hinge, a slider, a dial, sockets, and a break. Turn on the ✋ switch first.
+        </li>
+        <li>
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InlvLXlvIn0sImNhbWVyYSI6eyJ5YXciOjAuMzUsInBpdGNoIjowLjEyLCJyb2xsIjowLCJkaXN0YW5jZSI6My45fX0"
+            target="_blank"
+            rel="noopener"
+            >Yo-yo</a
+          >,
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im9jdG9wdXMifSwiY2FtZXJhIjp7InlhdyI6MC41NSwicGl0Y2giOjAuNCwicm9sbCI6MCwiZGlzdGFuY2UiOjV9fQ"
+            target="_blank"
+            rel="noopener"
+            >Octopus</a
+          >, and
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Imd1bW15LWJlYXIifSwiY2FtZXJhIjp7InlhdyI6MC4zNSwicGl0Y2giOjAuMiwicm9sbCI6MCwiZGlzdGFuY2UiOjR9fQ"
+            target="_blank"
+            rel="noopener"
+            >Gummy bear</a
+          >: ropes, arms that ride a body, and soft stretch.
+        </li>
+        <li>
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImJhc2tldGJhbGwifX0"
+            target="_blank"
+            rel="noopener"
+            >Basketball</a
+          >,
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImJhc2ViYWxsIn19"
+            target="_blank"
+            rel="noopener"
+            >Baseball</a
+          >, and
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBhcGVyLXBsYW5lIn0sImNhbWVyYSI6eyJ5YXciOjAuNywicGl0Y2giOjAuNDIsInJvbGwiOjAsImRpc3RhbmNlIjozLjZ9fQ"
+            target="_blank"
+            rel="noopener"
+            >Paper plane</a
+          >: materials.
+        </li>
+      </ul>
+      <p class="muted">
+        None of these is behind the labs switch. Chapter 10 says how a recipe asks for hands-on
+        play.
+      </p>
+
+      <!-- ---- Chapter 7 ---- -->
+      <h2 id="data"><span class="level">Chapter 7</span>Real data as splats</h2>
+      <!-- Sources: src/packs/molecule-viewer.js:1-60, :216-221, src/molview/parse.js:1-50 (formats,
+           MAX_ATOMS 250,000), src/molview/load.js:1-16 (RCSB fetch, 60 MB), src/molview/draw.js:1-8;
+           src/packs/geo.js:1-40, :1520-1640 (feeds, snapshot, the dot's size), :1725-1760;
+           src/packs/night-sky.js:1-25, src/sky/astro.js:1-25, :136-137, assets/toys/night-sky/sky.json
+           (5,071 stars, magnitude up to 6.47, built 2026-10-05); src/volume/read.js:1-30 (formats,
+           MAX_VOXELS 8e6), src/volume/view.js:1-12 and :85-100, src/packs/volume-viewer.js:1-20;
+           src/packs/viewers.js:1-30 and :547-575 (point clouds); src/packs/data-climate.js:1-16;
+           CLAUDE.md, "Live data". -->
+      <p>
+        A splat is a number-carrying blob: a place, three sizes, a turn, a color, an opacity. Data
+        is also numbers with places: the atoms of a protein, the quakes of last week, the stars over
+        your head, the density of a scanned walnut. This chapter is about turning such data into
+        splats, and doing it honestly: every toy here says where its data came from and how old it
+        is. Nearly all of these toys are behind the labs switch (add <code>?labs=1</code> to the
+        site's address); the paragraphs say which.
+      </p>
+
+      <h3 id="molecules">Molecules</h3>
+      <p>
+        <b>What it is.</b> A molecule is a list of atoms with places, in ångströms. The
+        <b>Molecule viewer</b> opens a structure file and draws it as splats. It reads PDB, mmCIF,
+        SDF/MOL, and XYZ files (<code>src/molview/parse.js</code>), takes the first model, and stops
+        with a message above 250,000 atoms. You can open a file from your device, or type a
+        four-character Protein Data Bank code and have the viewer fetch that entry. It draws balls
+        and sticks, space-filling atoms, a cartoon of the chains as ribbons, or the molecular
+        surface, and colors by element, chain, residue, B-factor (how much an atom blurs in the
+        crystal), position along a chain, or secondary structure. Tap two atoms for the distance
+        between them, a third for the angle. It is behind the labs switch.
+      </p>
+      <p>
+        <b>How Splashery does it.</b> Everything is an explicit splat
+        (<code>src/molview/draw.js</code>): an atom is a sphere of splats (in space-filling style,
+        one of its van der Waals radius), a bond is a stick of splats (a double bond is two thinner
+        sticks, a triple bond three), the cartoon is a ribbon of splats along a path through the
+        backbone, and the surface is a blobby surface made from a sum of bumps, one per atom. The
+        device's splat budget decides how many splats there are. A small molecule gets plenty per
+        atom. A big structure gets fewer, and below about six splats an atom becomes one round
+        Gaussian, so even a big structure opens on a phone: that is the level of detail (Chapter 2).
+        The files are read in a worker, off the page's main thread, and the structure is turned so
+        its widest spread lies across the screen. A turn keeps every distance and angle.
+      </p>
+      <p>
+        <b>The PDB fetch.</b> Typing a code asks <code>files.rcsb.org</code> for that one file
+        (public, no key, no account), only when you press the button. Nothing is sent but the code
+        in the address, nothing is stored, and the file is read on your device. The viewer refuses a
+        file over 60 MB. Five samples ship with the site, so the toy opens offline: crambin, the
+        green fluorescent protein, lysozyme, a stretch of B-DNA, and caffeine; each is a snapshot of
+        the entry, dated October 5, 2026, and the data are CC0 from the Protein Data Bank [<a
+          href="#ref-14"
+          >14</a
+        >].
+      </p>
+      <figure>
+        <div class="shots two">
+          <div>
+            <img
+              src="img/r7b-molecule-viewer.jpg"
+              alt="A protein drawn as red ribbon helices, a yellow sheet, and gray loops"
+            />
+            <p class="shot-label">The Molecule viewer's cartoon</p>
+          </div>
+          <div>
+            <img
+              src="img/r7b-protein.jpg"
+              alt="A small protein drawn as a rainbow ribbon from blue to red"
+            />
+            <p class="shot-label">The Protein toy, on the Atoms shelf</p>
+          </div>
+        </div>
+        <figcaption>
+          Both are drawn with splats. The Protein toy is one of the always-on Atoms toys, and the
+          viewer is the labs version that opens your own file.
+        </figcaption>
+      </figure>
+      <p>
+        <b>Try it.</b>
+        <a
+          href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im1vbGVjdWxlLXZpZXdlciJ9LCJjYW1lcmEiOnsieWF3IjowLjI1LCJwaXRjaCI6MC4xOCwicm9sbCI6MCwiZGlzdGFuY2UiOjMuNH19"
+          target="_blank"
+          rel="noopener"
+          >Molecule viewer</a
+        >
+        (labs),
+        <a
+          href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InByb3RlaW4ifX0"
+          target="_blank"
+          rel="noopener"
+          >Protein</a
+        >,
+        <a
+          href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im1vbGVjdWxlIn19"
+          target="_blank"
+          rel="noopener"
+          >Molecule</a
+        >.
+      </p>
+
+      <h3 id="earthquakes">Earthquakes</h3>
+      <p>
+        <b>What it is.</b> A globe with a dot for every earthquake in a feed from the U.S.
+        Geological Survey, drawn on a relief of the Earth. A bigger quake is a bigger dot. The color
+        says how deep the quake was: shallow ones orange-red, middle ones yellow and green, and the
+        deepest blue, as the USGS's own maps do. The globe is the Earth in true color with its
+        relief. A tap plays the quakes in time order, each flashing as the timeline passes it.
+      </p>
+      <p>
+        <b>How Splashery does it.</b> The toy offers three views: the past week at magnitude 2.5 and
+        up, the past month at 4.5 and up, and a year at 5 and up. The first two read the USGS's
+        GeoJSON summary feeds [<a href="#ref-15">15</a>] when the toy opens or when you tap its
+        plaque to refresh. Each quake is a row of five numbers (time, longitude, latitude, depth in
+        kilometers, magnitude). A quake with a missing magnitude or depth is left out rather than
+        shown as zero. A dot's radius is 0.009 + 0.006 × (<i>M</i> − 2)<sup>1.4</sup>
+        times the globe's radius (for a magnitude of 2 or more), drawn as a flat disc of splats with
+        a crisp edge, and a bigger dot gets more splats, in proportion to its area. The plaque
+        beside the globe says what is showing: the feed, the number of quakes, and when it was made.
+        If the feed cannot be reached within 9 seconds, or if the browser is being driven by a test
+        tool, the toy shows the snapshot that ships with the site (197 quakes in the week view as of
+        October 5, 2026, 14:39 UTC), and the plaque says "snapshot". The year view is always a
+        snapshot, October 2025 to September 2026.
+      </p>
+      <p>
+        <b>Why this way.</b> Splashery has no server, so a live feed has to be read by your browser
+        from a public, keyless address, and it has to degrade: an offline reader still gets a globe.
+        The rules for every such toy are in the box at the end of this chapter.
+      </p>
+      <figure>
+        <img
+          class="ui"
+          src="img/r7b-earthquakes.jpg"
+          width="360"
+          height="360"
+          alt="A dark globe with orange, yellow, and blue dots near the western Pacific, and a plaque that reads USGS feed snapshot, past week"
+        />
+        <figcaption>
+          The earthquakes globe on its snapshot, with the plaque that names the source and the time.
+        </figcaption>
+      </figure>
+      <p>
+        <b>Try it.</b>
+        <a
+          href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImVhcnRocXVha2VzIn0sImNhbWVyYSI6eyJ5YXciOjAsInBpdGNoIjowLjA1LCJyb2xsIjowLCJkaXN0YW5jZSI6My44fX0"
+          target="_blank"
+          rel="noopener"
+          >Earthquakes</a
+        >
+        (labs).
+      </p>
+
+      <h3 id="the-night-sky">The night sky</h3>
+      <p>
+        <b>What it is.</b> The stars and planets above a place, for any date and time and any place.
+        You stand at the center of the dome and look out; the Sun, the Moon, and the seven planets
+        are placed from the date (the planets' tables are made for 1800 to 2050, and the toy says so
+        when you go outside them), the Moon is lit on the side that faces the Sun (so its phase is
+        the real geometry), and daylight washes the stars out faintest first.
+      </p>
+      <p>
+        <b>How Splashery does it.</b> The star catalog is a file of 5,071 stars: every star brighter
+        than magnitude 6 in the HYG database [<a href="#ref-16">16</a>], plus the fainter ones a
+        constellation line needs. One splat each, sized by brightness and colored by temperature.
+        The stars sit at their J2000 positions as one part, and the whole sky turns as one rigid
+        piece: first precession to the date, then the sky's turn for the place's sidereal time
+        (Meeus [<a href="#ref-17">17</a>]). The planets use the approximate orbital elements that
+        NASA's Jet Propulsion Laboratory publishes for 1800 to 2050 [<a href="#ref-18">18</a>],
+        solved with Kepler's equation, and the Moon uses the Astronomical Almanac's low-precision
+        series, good to about 0.3 degrees in longitude. This is the same hinge as every part in
+        Chapter 2. A star field turning about a point is a part turning about its pivot.
+      </p>
+      <p>
+        <b>Your place.</b> You pick a city, or tap <b>Use my location</b>, which asks your browser
+        for it. That is the only time the toy asks. The place lives in the page's memory: it is not
+        saved, not put in a link, and not sent anywhere. Both the stars and the constellation lines
+        come from sources under CC BY-SA 4.0, and the toy's credit says so beside it.
+      </p>
+      <p>
+        <b>Try it.</b>
+        <a
+          href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im5pZ2h0LXNreSJ9LCJjYW1lcmEiOnsieWF3IjowLCJwaXRjaCI6MC4zLCJyb2xsIjowLCJkaXN0YW5jZSI6NX19"
+          target="_blank"
+          rel="noopener"
+          >Night sky</a
+        >
+        (labs).
+      </p>
+
+      <h3 id="volumes-and-point-clouds">Volumes and point clouds</h3>
+      <p>
+        <b>What it is.</b> A CT scan or an MRI is not a surface but a block of numbers, one per
+        little cube (a <i>voxel</i>), measuring how dense the material is there. A lidar scan is a
+        cloud of points with places and sometimes colors. Both can be splats. The
+        <b>Volume viewer</b> opens a medical or microscope scan and shows it as a block of splats
+        you can cut through. The <b>Point clouds</b> toy opens a lidar scan or any list of points.
+        Both are on the Studio shelf, behind the labs switch, and nothing is uploaded.
+      </p>
+      <p>
+        <b>How Splashery does it: volumes.</b> The viewer reads DICOM (a series of slices, a folder,
+        a zip, or one multi-frame file; uncompressed or RLE lossless), NIfTI (<code>.nii</code> and
+        <code>.nii.gz</code>), TIFF stacks, and raw files described by a small form
+        (<code>src/volume/read.js</code>). Slices are sorted by where the scanner put them, and the
+        spacing between slices comes from those places, so a scan that is thick in one direction
+        keeps its true shape. A volume is at most 8 million voxels in memory; a bigger one is
+        averaged down as it is read, so the viewer never keeps more than about 32 MB. The splats sit
+        on a lattice spaced to fit the device's budget. A density <b>window</b> (a lower and an
+        upper level) decides which values show; the presets are bone, soft tissue, and full range,
+        and for a CT in Hounsfield units bone is 300 to 1500 and soft tissue is −160 to 240. A color
+        map turns the value into a color and an opacity. A cutting plane on each axis, which a drag
+        moves, hides the splats on one side. A <b>maximum-intensity</b> view flattens the volume to
+        the brightest voxel along one axis. Splashery's engine has a splat kind for this
+        (<code>volume</code>): each splat carries its density, the shader tests it against the
+        window, and the cut is tested at the splat's place at rest, so the cut stays with the
+        specimen as it turns.
+      </p>
+      <p>
+        <b>How Splashery does it: point clouds.</b> The toy opens LAS, LAZ, PLY, XYZ, and PTS files
+        (LAZ through the vendored laz-perf decoder, loaded only for a LAZ file). The points are
+        drawn as splats within the device's budget, colored by height, by intensity, by
+        classification (ground, vegetation, buildings, and the other codes a lidar file uses), or by
+        the file's own colors. You can measure between two taps, crop, thin the cloud, and save it
+        as PLY, LAS, or XYZ. The three samples are lidar from the U.S. Geological Survey's 3D
+        Elevation Program, public domain: the Palace of Fine Arts and Fort Point in San Francisco,
+        and Meteor Crater in Arizona, each thinned to 450,000 points.
+      </p>
+      <figure>
+        <div class="shots two">
+          <div>
+            <img
+              src="img/r7b-volume-viewer.jpg"
+              alt="A walnut, drawn from a CT scan, with its wrinkled shell and a cut face"
+            />
+            <p class="shot-label">A CT scan of a walnut</p>
+          </div>
+          <div>
+            <img
+              src="img/r7b-point-clouds.jpg"
+              alt="A lidar scan of a park and a domed palace, colored by height from blue to green"
+            />
+            <p class="shot-label">Lidar, colored by height</p>
+          </div>
+        </div>
+        <figcaption>Walnut CT: CWI, CC BY 4.0. Lidar: USGS 3DEP, public domain.</figcaption>
+      </figure>
+      <p>
+        <b>Why this way.</b> A splat can stand for a voxel or a point without any new idea: it is a
+        place, a size, and a color. What the toy has to add is a way to look <i>inside</i>, and that
+        is the window and the cutting plane. Rendering a volume with splats gives up the smooth
+        shading of a proper volume renderer, in return for the same engine, the same controls, and a
+        saved link that opens it in the same viewer as everything else.
+      </p>
+      <p>
+        <b>Try it.</b>
+        <a
+          href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InZvbHVtZS12aWV3ZXIifSwiY2FtZXJhIjp7InlhdyI6MC4zNSwicGl0Y2giOjAuMiwicm9sbCI6MCwiZGlzdGFuY2UiOjMuOH19"
+          target="_blank"
+          rel="noopener"
+          >Volume viewer</a
+        >,
+        <a
+          href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6IndhbG51dC1jdCJ9LCJjYW1lcmEiOnsieWF3IjowLjM1LCJwaXRjaCI6MC4yLCJyb2xsIjowLCJkaXN0YW5jZSI6Mi44fX0"
+          target="_blank"
+          rel="noopener"
+          >Walnut CT scan</a
+        >,
+        <a
+          href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBvaW50LWNsb3VkcyJ9LCJjYW1lcmEiOnsieWF3IjowLjYsInBpdGNoIjowLjU1LCJyb2xsIjowLCJkaXN0YW5jZSI6Mi44fX0"
+          target="_blank"
+          rel="noopener"
+          >Point clouds</a
+        >
+        (all labs).
+      </p>
+
+      <h3 id="weather-maps-and-the-other-data-toys">Weather, maps, and the other data toys</h3>
+      <p>
+        Most of the data toys ship a <b>dated snapshot</b> that a tool on a build machine fetched
+        once, so the page itself never calls a data service. The toys are:
+      </p>
+      <ul>
+        <li>
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Imh1cnJpY2FuZSJ9LCJjYW1lcmEiOnsieWF3IjowLjE1LCJwaXRjaCI6MC45NSwicm9sbCI6MCwiZGlzdGFuY2UiOjMuMn19"
+            target="_blank"
+            rel="noopener"
+            >Hurricane</a
+          >
+          (labs): Hurricane Polo, September 21 and 22, 2026. GOES infrared cloud tops over a
+          satellite map of the Earth, with the eyewall and bands turning. A tap plays the day it
+          grew from 70 to 155 knots, following the storm's best track.
+        </li>
+        <li>
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InRpZGUtaGFyYm9yIn0sImNhbWVyYSI6eyJ5YXciOjAuMSwicGl0Y2giOjAuOCwicm9sbCI6MCwiZGlzdGFuY2UiOjMuNn19"
+            target="_blank"
+            rel="noopener"
+            >Tides at Bar Harbor</a
+          >
+          (labs): a coastal height map and imagery of the harbor in Maine, with NOAA's tide
+          predictions for a spring tide; a tap plays the day and the sandbar to Bar Island floods
+          and dries.
+        </li>
+        <li>
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImdyYW5kLWNhbnlvbiJ9LCJjYW1lcmEiOnsieWF3IjowLjM1LCJwaXRjaCI6MC42Miwicm9sbCI6MCwiZGlzdGFuY2UiOjQuMX19"
+            target="_blank"
+            rel="noopener"
+            >Grand Canyon</a
+          >,
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InN0LWhlbGVucyJ9LCJjYW1lcmEiOnsieWF3IjoyLjg1LCJwaXRjaCI6MC40NSwicm9sbCI6MCwiZGlzdGFuY2UiOjMuM319"
+            target="_blank"
+            rel="noopener"
+            >Mount St. Helens</a
+          >, and
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNlYS1mbG9vciJ9LCJjYW1lcmEiOnsieWF3IjowLjQsInBpdGNoIjowLjU1LCJyb2xsIjowLCJkaXN0YW5jZSI6My42fX0"
+            target="_blank"
+            rel="noopener"
+            >The sea floor</a
+          >
+          (labs): heights from the USGS 3D Elevation Program and NOAA's ETOPO1 relief, as terrain
+          made of splats.
+        </li>
+        <li>
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InN0b3JrLW1pZ3JhdGlvbiJ9LCJjYW1lcmEiOnsieWF3IjowLjEsInBpdGNoIjowLjg1LCJyb2xsIjowLCJkaXN0YW5jZSI6My4yfX0"
+            target="_blank"
+            rel="noopener"
+            >Stork migration</a
+          >
+          (labs): 30 white storks tagged in Germany, flying their real GPS tracks to Africa in fall
+          2013 (Movebank, CC0). The track file ships with the site; the tool that downloaded it is
+          in <code>tools/</code>.
+        </li>
+        <li>
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImNsaW1hdGUtcmVjb3JkcyJ9LCJjYW1lcmEiOnsieWF3IjowLjQ1LCJwaXRjaCI6MC4yMiwicm9sbCI6MCwiZGlzdGFuY2UiOjMuM319"
+            target="_blank"
+            rel="noopener"
+            >Climate records</a
+          >
+          (labs): NOAA's Mauna Loa carbon dioxide record as a rising spiral, one turn a year, and
+          NASA's temperature anomalies as a field of monthly bars or a wall of yearly stripes. Dated
+          snapshots, never fetched live.
+        </li>
+        <li>
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImRhdGEtaW4tM2QifSwiY2FtZXJhIjp7InlhdyI6MC41NSwicGl0Y2giOjAuMywicm9sbCI6MCwiZGlzdGFuY2UiOjMuM319"
+            target="_blank"
+            rel="noopener"
+            >Data in 3D</a
+          >
+          (labs): open a CSV or TSV from your device, pick the columns for X, Y, Z, color, and size,
+          and see a scatter, bars, or a surface with labeled axes that turn to face you. Three small
+          sample tables ship with it. It saves a picture (PNG) or a turning video (WebM) to a file
+          you choose.
+        </li>
+      </ul>
+      <figure>
+        <div class="shots two">
+          <div>
+            <img
+              src="img/r7b-hurricane.jpg"
+              alt="A hurricane's white cloud tops over a green and brown map"
+            />
+            <p class="shot-label">Hurricane Polo</p>
+          </div>
+          <div>
+            <img
+              src="img/r7b-data-in-3d.jpg"
+              alt="A 3D scatter plot of earthquakes with labeled axes for longitude, latitude, and depth"
+            />
+            <p class="shot-label">Data in 3D: the quakes as a scatter</p>
+          </div>
+        </div>
+      </figure>
+      <div class="demo-placeholder">
+        <p class="demo-tag">A demo goes here later</p>
+        <p>
+          A small table of numbers that you edit, with each row appearing as a splat whose place,
+          size, and color come from its columns, to show that a splat is just a row of numbers.
+        </p>
+      </div>
+
+      <h3 id="the-rules-for-live-data">The rules for live data</h3>
+      <p>A toy that reads from outside the page follows a short list of rules:</p>
+      <ul>
+        <li>
+          Only a public endpoint that needs no key or account, and only data, never code: the
+          earthquake feed, an entry from the Protein Data Bank. (Other open feeds, such as animal
+          tracking, may be read the same way when their terms allow; today the stork tracks ship as
+          a file.)
+        </li>
+        <li>It happens when you open the toy or tap to refresh, never before.</li>
+        <li>The source and the time of the data show beside it.</li>
+        <li>Nothing is stored and nothing is sent, except the request for the data itself.</li>
+        <li>A dated snapshot ships with the site, for when the feed cannot be reached.</li>
+        <li>
+          The night sky may ask for your location, only when you tap for it, and never stores or
+          sends it.
+        </li>
+      </ul>
+      <p>
+        A <b>Wikipedia book</b>, which would fetch an article when the reader asks for it (CC BY-SA
+        text, never stored or shipped), is planned. The rules allow it, but it is not built yet, so
+        it is not in this manual's list of toys.
+      </p>
+
+      <h3 id="try-it-7">Where to try it</h3>
+      <ul>
+        <li>
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InByb3RlaW4ifX0"
+            target="_blank"
+            rel="noopener"
+            >Protein</a
+          >
+          and
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im1vbGVjdWxlIn19"
+            target="_blank"
+            rel="noopener"
+            >Molecule</a
+          >
+          (always on);
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im1vbGVjdWxlLXZpZXdlciJ9LCJjYW1lcmEiOnsieWF3IjowLjI1LCJwaXRjaCI6MC4xOCwicm9sbCI6MCwiZGlzdGFuY2UiOjMuNH19"
+            target="_blank"
+            rel="noopener"
+            >Molecule viewer</a
+          >
+          (labs).
+        </li>
+        <li>
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImVhcnRocXVha2VzIn0sImNhbWVyYSI6eyJ5YXciOjAsInBpdGNoIjowLjA1LCJyb2xsIjowLCJkaXN0YW5jZSI6My44fX0"
+            target="_blank"
+            rel="noopener"
+            >Earthquakes</a
+          >,
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im5pZ2h0LXNreSJ9LCJjYW1lcmEiOnsieWF3IjowLCJwaXRjaCI6MC4zLCJyb2xsIjowLCJkaXN0YW5jZSI6NX19"
+            target="_blank"
+            rel="noopener"
+            >Night sky</a
+          >,
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InZvbHVtZS12aWV3ZXIifSwiY2FtZXJhIjp7InlhdyI6MC4zNSwicGl0Y2giOjAuMiwicm9sbCI6MCwiZGlzdGFuY2UiOjMuOH19"
+            target="_blank"
+            rel="noopener"
+            >Volume viewer</a
+          >,
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBvaW50LWNsb3VkcyJ9LCJjYW1lcmEiOnsieWF3IjowLjYsInBpdGNoIjowLjU1LCJyb2xsIjowLCJkaXN0YW5jZSI6Mi44fX0"
+            target="_blank"
+            rel="noopener"
+            >Point clouds</a
+          >,
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Imh1cnJpY2FuZSJ9LCJjYW1lcmEiOnsieWF3IjowLjE1LCJwaXRjaCI6MC45NSwicm9sbCI6MCwiZGlzdGFuY2UiOjMuMn19"
+            target="_blank"
+            rel="noopener"
+            >Hurricane</a
+          >, and
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImRhdGEtaW4tM2QifSwiY2FtZXJhIjp7InlhdyI6MC41NSwicGl0Y2giOjAuMywicm9sbCI6MCwiZGlzdGFuY2UiOjMuM319"
+            target="_blank"
+            rel="noopener"
+            >Data in 3D</a
+          >
+          (all labs).
+        </li>
+      </ul>
+
+      <!-- ---- Chapter 8 ---- -->
+      <h2 id="photo3d"><span class="level">Chapter 8</span>Photos and video into 3D</h2>
+      <!-- Sources: src/packs/photo-3d.js:1-10, photo-3d-depth.js:1-13, photo-3d-core.js:14-72
+           (PHOTO_DENSITY 1.5, TIER_COUNTS, LAYERS 4, CUT 0.015, modelSize 518 and 14), photo-sharp.js:1-30,
+           moving-photo.js:1-50 (MAX_SECONDS 8, CLIP_FPS, DEPTH_FRAMES, CLIP_AREAS, DEPTH_SIDES),
+           video3d.js:1-12, src/video3d/run.js:1-10 and frames.js:14-27 (TIERS), src/video3d/samples.js,
+           src/loaders.js:1-30 (LIMITS, formats), src/packs/photoreal-r2.js:1-30. Counts measured by
+           loading src/toys.js: the Photoreal shelf (category scans) has 72 toys, 32 without the labs
+           switch and 40 with it; 64 are captured scans and 8 are kit toys. -->
+      <p>
+        Chapters 6 and 7 start from things that are already numbers: a toy's recipe, a table, a
+        catalog of stars. A photograph is not. It is a flat grid of colors with no depth, and a
+        video is that grid thirty times a second. This chapter is about the ways Splashery gets 3D
+        out of them, from the cheapest guess to a full reconstruction, and about what it can and
+        cannot promise. The tools here are on the Studio shelf and behind the labs switch; the
+        photoreal captures are on their own shelf, partly open.
+      </p>
+
+      <h3 id="photo-to-3d">Photo to 3D</h3>
+      <p>
+        <b>What it is.</b> Open a photo and get a toy you can turn: near things move across far
+        things as you turn it. It is a depth effect, a guess, not a scan: from one picture there is
+        no way to know what is behind a tree.
+      </p>
+      <p>
+        <b>How Splashery does it.</b> A depth model works out, for every part of the picture, how
+        far away it is. The model is Depth Anything V2 Small [<a href="#ref-13">13</a>] in its 8-bit
+        quantized form, a file of 27 MB that runs in your browser through ONNX Runtime Web on one
+        thread. (A page on GitHub Pages cannot share memory between threads, so the runtime has just
+        one.) Both files are Splashery's own, served from the site; nothing is fetched from anywhere
+        else and your photo is not uploaded. They load only when you open a photo of your own. The
+        sample pictures on the toy come with their depth maps already worked out, so they need no
+        model at all. Some samples are AI-made pictures, and each one says so beside it.
+      </p>
+      <p>
+        The picture goes to the model scaled so its long side is about 518 pixels, each side a
+        multiple of 14 (the model reads the picture in 14-pixel tiles). The answer is a smooth map
+        of <i>relative</i> depth: it says which parts are nearer than which, not how many meters.
+        The photo is then rebuilt as splats. Each splat sits at its place in the picture and at its
+        depth, colored from the photo, and sized to its neighbors on its own surface so the surface
+        closes. A grid that adapts to the picture spends the splats where there is detail: a plain
+        block of a wall is one big splat, and a block of letters splits into four, and again, down
+        to single pixels, until the budget is spent. The budget is the tier's default count times
+        1.5, capped at the tier's maximum: 90,000 splats on a low device, 210,000 on a mid one,
+        300,000 on a high one, and 400,000 on the highest. Where the depth jumps between two
+        neighbors by more than 0.015 of its range, the surface is cut, so a near object stands as
+        its own layer and does not smear into the wall behind it. The picture is split into four
+        depth layers, and a tap lifts them apart one at a time.
+      </p>
+      <p>
+        <b>Why this way.</b> The depth model needs only one photo and runs on the device, which fits
+        a site with no server. The price is the model's guess. Splashery does not try to paint what
+        the camera did not see, so a turn far enough shows the cuts.
+      </p>
+      <figure>
+        <div class="shots two">
+          <div>
+            <img
+              src="img/r7b-photo-3d-sharp.jpg"
+              alt="A forest path photo shown sharp, as a textured relief"
+            />
+            <p class="shot-label">The Sharp view (the default)</p>
+          </div>
+          <div>
+            <img
+              src="img/r7b-photo-3d-splats.jpg"
+              alt="The same photo shown as splats, slightly softer, with layers"
+            />
+            <p class="shot-label">The splat view</p>
+          </div>
+        </div>
+        <figcaption>
+          The same photo, two views. Sample photo: "Forest path" by Seaq68 (from Pixabay, marked CC0
+          on Wikimedia Commons).
+        </figcaption>
+      </figure>
+
+      <h3 id="the-sharp-view">The Sharp view</h3>
+      <p>
+        <b>What it is.</b> Splats are soft by nature, and a photo of a page of small print loses its
+        letters when it is drawn as 200,000 soft blobs. The <b>Sharp</b> view is a second view of
+        the same toy that keeps the photo at its full resolution.
+      </p>
+      <p>
+        <b>How Splashery does it.</b> The photo is laid as a texture on a <i>relief</i>: a surface
+        lifted by the same depth the splats use. It is a textured surface, not splats. The depth
+        slider, the tap, the layers, the sway, and, for a clip, play, pause, and scrubbing all move
+        the relief as they would move the splats. A switch in the toy's panel chooses Sharp or
+        Splats, and the choice is saved with the scene, so a shared link opens in the view it was
+        saved in. A scene saved before the switch existed opens in Sharp. Where splats are needed,
+        they show instead and the panel says so: while Poke, Paint, Magnet, or Clay is the active
+        tool, in hands-on play, and while a Look effect is on. Saving the toy as a splat file is
+        unaffected, since it reads the splats.
+      </p>
+      <p>
+        <b>Why this way.</b> Splashery is primarily splat-based but not only splat-based, and this
+        is the clearest place it is not. The Sharp view is there because splats are the wrong tool
+        for reading small text, and because the toy is still the same toy: the same depth, the same
+        controls, the same saved link.
+      </p>
+
+      <h3 id="moving-photo-to-3d">Moving photo to 3D</h3>
+      <p>
+        <b>What it is.</b> The same idea for a GIF or a short video: it plays back in 3D, each frame
+        lifted by its own depth. The sample is six seconds of "Big Buck Bunny" (the bunny and the
+        butterfly; © Blender Foundation, CC BY 3.0) with its depth worked out ahead of time, so it
+        needs no model.
+      </p>
+      <p>
+        <b>How Splashery does it.</b> It takes the first 8 seconds of a video, or a GIF's frames, at
+        up to 12, 15, or 24 frames a second depending on the device tier, each frame sized to
+        60,000, 140,000, or 200,000 pixels (or 640 by 360 on the highest tier). Running the depth
+        model on every frame would take too long, so it works out the depth on at most 24, 32, or 48
+        frames spread evenly through the clip, at 196 or 294 pixels on the long side, and the frames
+        between blend their neighbors' depths. The colors carry the motion. A video plays with its
+        own sound and its frames follow that sound's clock. The depth is smooth, since the model
+        guesses shapes and not edges, so it is sampled smoothly up to the frame's size and its edges
+        are cut clean. It has the Sharp view too.
+      </p>
+
+      <h3 id="video-to-3d">Video to 3D</h3>
+      <p>
+        <b>What it is.</b> Photo to 3D guesses depth from one picture. This toy does something
+        different and harder: it takes <i>many</i> views of a still scene (the frames of a video
+        that walks or flies around something), works out where the camera was for each, and trains a
+        real 3D Gaussian splat scene that looks right from each of those places. It is the method of
+        Chapter 1's first reference [<a href="#ref-1">1</a>], running in your browser. A scene that
+        stands still works. A moving car or person blurs or vanishes.
+      </p>
+      <p>
+        <b>How Splashery does it.</b> It uses Splat.js [<a href="#ref-21">21</a>], an MIT-licensed
+        library vendored in <code>vendor/splatjs/</code> and loaded only when you open a video in
+        this toy. The toy first picks the sharpest frame in each window of the stretch you choose.
+        Splat.js then works out the camera's path (it finds features, matches them between frames,
+        registers each camera, and adjusts them all together), seeds a splat cloud, and trains it on
+        the graphics chip through WebGPU: the splats' places, sizes, colors, and opacities are
+        nudged by gradient descent until the scene renders like each frame. The result is shown as
+        the toy's splats, and you can turn it, zoom, save it as a PLY, or tap
+        <b>Replay flight</b> to fly the video's own camera path with its sound.
+      </p>
+      <p>
+        How much it does depends on the device. A mid-tier device uses up to 32 frames at 640
+        pixels, trains 3,000 steps, and keeps up to 120,000 splats; a high-tier one uses 60 frames,
+        7,000 steps, and 250,000 splats; the lowest tier, a phone, uses 16 frames, 1,200 steps, and
+        30,000 splats, within 8 minutes. It needs WebGPU: a browser without it says so rather than
+        starting. The samples (a statue flown around, a street walked) are results made the same way
+        from two CC BY 3.0 videos; the videos themselves are not shipped, only the trained splats
+        and the camera path.
+      </p>
+      <p>
+        <b>Why this way.</b> This is the one place Splashery trains a splat scene in your browser.
+        It is honest about the cost: minutes of work on your graphics chip, a result only as good as
+        the video, and no server.
+      </p>
+      <figure>
+        <div class="shots two">
+          <div>
+            <img
+              src="img/r7b-moving-photo-3d.jpg"
+              alt="A frame of a cartoon rabbit and butterfly, lifted into 3D"
+            />
+            <p class="shot-label">A moving photo</p>
+          </div>
+          <div>
+            <img
+              src="img/r7b-video-3d.jpg"
+              alt="A trained splat scene of a statue, from a drone video"
+            />
+            <p class="shot-label">A trained video: the statue sample</p>
+          </div>
+        </div>
+        <figcaption>
+          Video frame from "Big Buck Bunny" © Blender Foundation, CC BY 3.0. The statue scene is
+          trained from a CC BY 3.0 drone video (credit beside it in the toy).
+        </figcaption>
+      </figure>
+
+      <h3 id="photoreal-captures">The photoreal captures</h3>
+      <p>
+        <b>What it is.</b> The Photoreal shelf holds real objects (a strawberry, a honeybee, a
+        sunflower, a bonsai tree) that other people captured with many photographs and trained into
+        3D Gaussian splat files, which Splashery converts and shows. Of its 72 toys, 64 are captured
+        scans and 8 are kit-built; 32 are open to everyone and 40 are behind the labs switch until
+        they are ready.
+      </p>
+      <p>
+        <b>How Splashery does it.</b> Splashery does not train these. Each capture arrives as a file
+        under a license it can use, and a build tool converts it: it decimates the splats, centers
+        and scales the toy, and writes a <code>.sog</code> file (a compressed splat format), usually
+        as a pair, a full file and a lite one for weaker devices. The viewer opens
+        <code>.ply</code>, <code>.sog</code>, <code>.splat</code>, and <code>.spz</code>, so it can
+        also open your own captures. Files can carry spherical harmonics, the view-dependent color
+        the kit's own splats do not use, and some of the newer captures keep one band of them on the
+        full file. Big files warn and then thin: a low device warns at 60 MB or 400,000 splats and
+        thins to 300,000, and the highest tier warns at 200 MB or 2,000,000 splats and thins to
+        1,500,000.
+      </p>
+      <p>
+        <b>Licenses.</b> The 64 captured toys carry their credits beside them: 16 are CC0, 44 CC BY
+        4.0, one CC BY 2.0, and three are NonCommercial (CC BY-NC or CC BY-NC-SA), which are flagged
+        in the asset list so they can be taken out if the site ever earns money. A capture under a
+        NoDerivatives license, or with no license, is never used.
+      </p>
+      <figure>
+        <div class="shots two">
+          <div>
+            <img src="img/r7b-strawberry.jpg" alt="A strawberry captured with photographs" />
+            <p class="shot-label">A strawberry</p>
+          </div>
+          <div>
+            <img src="img/r7b-bee.jpg" alt="A honeybee captured with photographs" />
+            <p class="shot-label">A honeybee</p>
+          </div>
+        </div>
+        <figcaption>
+          Photoreal captures. Strawberry: Dany Bittel, CC BY 4.0. Honeybee: YUMA Co., Ltd., CC BY
+          4.0. Credits and licenses show beside each toy in the Playground.
+        </figcaption>
+      </figure>
+      <div class="demo-placeholder">
+        <p class="demo-tag">A demo goes here later</p>
+        <p>
+          A photo with a slider that turns a flat picture into layers at their depths, side by side
+          with the Sharp view, so the guess and the picture can be compared at once.
+        </p>
+      </div>
+
+      <h3 id="try-it-8">Where to try it</h3>
+      <ul>
+        <li>
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBob3RvLTNkIn0sImNhbWVyYSI6eyJ5YXciOjAsInBpdGNoIjowLCJyb2xsIjowLCJkaXN0YW5jZSI6My40fX0"
+            target="_blank"
+            rel="noopener"
+            >Photo to 3D</a
+          >,
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im1vdmluZy1waG90by0zZCJ9LCJjYW1lcmEiOnsieWF3IjowLCJwaXRjaCI6MCwicm9sbCI6MCwiZGlzdGFuY2UiOjMuNH19"
+            target="_blank"
+            rel="noopener"
+            >Moving photo to 3D</a
+          >, and
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InZpZGVvLTNkIn0sImNhbWVyYSI6eyJ5YXciOjAsInBpdGNoIjowLCJyb2xsIjowLCJkaXN0YW5jZSI6My40fX0"
+            target="_blank"
+            rel="noopener"
+            >Video to 3D</a
+          >
+          (all labs; the last needs WebGPU).
+        </li>
+        <li>
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InN0cmF3YmVycnkifSwiY2FtZXJhIjp7InlhdyI6MC4yNSwicGl0Y2giOjAuMywicm9sbCI6MCwiZGlzdGFuY2UiOjUuNn19"
+            target="_blank"
+            rel="noopener"
+            >Strawberry</a
+          >,
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImJlZSJ9fQ"
+            target="_blank"
+            rel="noopener"
+            >Honeybee</a
+          >, and
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImdyYXBlIn19"
+            target="_blank"
+            rel="noopener"
+            >Grape</a
+          >
+          (open to everyone). The grape has a peel that shows the pale flesh.
+        </li>
+      </ul>
+
+      <!-- ---- Chapter 9 ---- -->
+      <h2 id="codes"><span class="level">Chapter 9</span>Codes and pages</h2>
+      <!-- Sources: src/packs/qr.js:1-60 (styles, scorecard, MIN_MODULE_PX), src/qr/encode.js:1-25 (Nayuki,
+           ECC_RECOVERY), src/qr/content.js:15-70 (the kinds), src/qr/build.js:24-53 (styles, plates),
+           src/qr/scan.js:1-30 (the reader), src/packs/qr-craft.js:1-25, src/packs/qr-lab.js:1-25,
+           src/qr-craft/barcodes.js:1-12, src/pictures.js:1-30, src/pdf-export/pdf.js:1-20, src/exports.js:274
+           (LINK_LIMIT 12 * 1024), manual/share.html (the share links chapter). The Wikipedia book is
+           not in src/ or tools/: docs/WORKSTREAMS.md lists it as "later". -->
+      <p>
+        A code is a picture that stands for bytes. A page is a picture that stands for words. This
+        chapter is about toys that are, in the end, flat: QR codes and other barcodes, the pages of
+        a PDF, a photo, a GIF, and a link. They are made of splats too, and they show a point that
+        Chapters 1 to 5 made in passing:
+        <b
+          >a flat thing made of splats is only useful if every splat stays where the picture needs
+          it</b
+        >. A QR code that scans only some of the time is not a QR code. So the toys here check their
+        own work.
+      </p>
+
+      <h3 id="qr-codes">QR codes</h3>
+      <p>
+        <b>What it is.</b> A QR code is a square grid of dark and light cells (<i>modules</i>) that
+        holds a few hundred bytes of text, plus extra data that lets a reader rebuild the text if
+        some cells are damaged. The three big squares in the corners (<i>finder patterns</i>) let a
+        camera find and orient it, and a blank border (the <i>quiet zone</i>) four modules wide
+        keeps the picture from running into whatever is around it.
+      </p>
+      <p>
+        <b>How Splashery does it.</b> The <b>QR code</b> toy makes a code from a link, plain text, a
+        Wi-Fi network, a contact card, an email, a phone number, a text message, or a map location,
+        and draws it as splats in one of seven styles (Classic, Dots, Rounded, Bricks, Gems,
+        Bubbles, Neon) on a plate of paper, wood, or metal, or on none. The encoding itself is done
+        by Project Nayuki's QR Code generator [<a href="#ref-20">20</a>], a small MIT-licensed
+        library that is vendored and loaded only when the toy opens. Splashery asks it for a code
+        and then marks which modules belong to the finder patterns, to the alignment patterns, and
+        to the rest, so each can be built and moved as a piece of its own. A tap bursts the code
+        into its modules, which fall and fly back and land exactly on their grid again; the toy also
+        has an assemble motion, a flip, and an "alive" color wave. Each module moves as a solid
+        tile, and the alive wave keeps the gray values a reader sees unchanged, so every frame of it
+        still scans.
+      </p>
+      <p>
+        It checks itself. <b>Scan view</b> turns the code flat and square to the camera, and after
+        every change the toy renders that view and reads it back. The reader is the browser's own
+        <code>BarcodeDetector</code> when it reads QR codes, and otherwise the vendored jsQR library
+        (Apache-2.0), loaded the first time a check runs. The result, "It scans," means that one
+        reader read that one drawing, not that every phone camera will; the text beside it says so.
+        Nothing leaves the device: no shortener, no network.
+      </p>
+      <p>
+        <b>Error correction.</b> A QR code carries extra codewords (a codeword is 8 modules) made
+        with a Reed–Solomon code [<a href="#ref-19">19</a>]. There are four levels, L, M, Q, and H,
+        which can lose about 7, 15, 25, and 30 percent of the codewords and still scan. That
+        percentage counts codewords, not squares, and the code is cut into blocks that are corrected
+        separately, so damage to the three finder squares, or damage spread over many blocks, can
+        defeat a code that has lost far less than its limit. The toy uses level M by default.
+      </p>
+      <details class="fold why" id="why-qr-limits">
+        <summary>Why these numbers? Contrast, module size, and level M</summary>
+        <p class="kind">
+          <span class="chip choice">Our choice, measured</span> The QR standard sets the codes; the
+          limits for splat styles are Splashery's own.
+        </p>
+        <p>
+          A splat is not a printed square: it is a soft blob, and the blobs of two cells blend a
+          little at their edges. So Splashery measured how much a code can take. The QR scan lab
+          (October 3, 2026) made 3,768 pictures of the toy's codes the way a phone sees them, and
+          read each with two different readers (jsQR and ZXing). Every style read 100 percent of the
+          time at levels L and M. Contrast was reliable from 4 to 1 (a gray code at 4.0 to 1 read 96
+          to 98 percent of the time) and poor below 3 to 1. A module needs at least 4 pixels on
+          screen, and 6 for the "depth" styles (Bricks, Gems, and Neon). A depth style at version 8
+          or more (a long text) dropped sharply, to 77 percent for a long text. Light-on-dark codes
+          read on most phone cameras but not on some scanner apps. The toy turns these into a
+          warning and a default; a measured limit is only as good as the readers it was measured
+          with.
+        </p>
+        <p class="where">
+          Where it lives: the comment and constants at the top of
+          <code>src/packs/qr.js</code> (<code>eccFor</code>, <code>minContrast</code>,
+          <code>MIN_MODULE_PX</code>).
+        </p>
+      </details>
+      <p>
+        <b>Secrets.</b> A Wi-Fi password is never in the toy's options, so never in a shared link or
+        a saved scene: it lives in the page's memory while the page is open.
+      </p>
+      <figure>
+        <div class="shots two">
+          <div>
+            <img src="img/r7b-qr-code.jpg" alt="A QR code drawn with splats on a plate" />
+            <p class="shot-label">The QR code toy</p>
+          </div>
+          <div>
+            <img
+              src="img/r7b-qr-picture.jpg"
+              alt="A photo woven into a QR code as a halftone of dark and light dots"
+            />
+            <p class="shot-label">A picture woven into a code</p>
+          </div>
+        </div>
+        <figcaption>Both codes scan. The toys check their own pictures.</figcaption>
+      </figure>
+
+      <h3 id="more-qr-toys">More QR toys, and other barcodes</h3>
+      <ul>
+        <li>
+          <b>How a QR code works</b> lights up each part of a real code, or steps through encoding
+          your own text, from the mode bits to the chosen mask.
+        </li>
+        <li>
+          <b>The Damage lab</b> lets you scratch a code, stick a label on it, tear or burn a corner,
+          smudge it, or damage its splats (blur, shrink, grow, jitter, fade, drift the colors,
+          curve, tilt, move). A meter reads the very picture on the stage after each change, and
+          counts, block by block, the codewords lost against the ones error correction can fix.
+          <i>Heal it</i> shows the code as a reader read it and lets Reed–Solomon decoding set it
+          right, block by block, until it scans again.
+        </li>
+        <li>
+          <b>Three codes in one</b> puts three QR codes in the red, green, and blue of one square,
+          which Splashery's reader splits apart.
+        </li>
+        <li>
+          <b>Picture QR</b> weaves a photo into a code as a halftone. The center of each module
+          keeps its bit; the rest of the module carries the picture as dark and light dots by error
+          diffusion, nudged only where a module would misread. The toy measures the contrast and
+          reads the code back with jsQR at phone size and smaller, and offers the closest version
+          that scans when one does not.
+        </li>
+        <li>
+          <b>QR from real things</b> builds a code from dominoes that topple into place, marbles
+          that roll into their modules, or tiles that flip over, and ends on a code that scans.
+        </li>
+        <li>
+          <b>Other barcodes</b> draws Code 128, EAN-13, and UPC-A with Splashery's own code (check
+          digits and quiet zones included), and Data Matrix and Aztec with ZXing for JavaScript, a
+          vendored library loaded only when the toy opens. A tap sweeps a scanner's red line across,
+          and each bar lifts as it passes.
+        </li>
+      </ul>
+      <p>All of these are on the Studio shelf and behind the labs switch.</p>
+      <div class="demo-placeholder">
+        <p class="demo-tag">A demo goes here later</p>
+        <p>
+          A small QR code with a damage brush: scratch some modules, and a meter shows how many
+          codewords are lost against how many the code can repair.
+        </p>
+      </div>
+
+      <h3 id="pages-pdfs-and-gifs">Pages, PDFs, and GIFs</h3>
+      <p>
+        <b>What it is.</b> Chapter 5 showed how a recipe places a <i>sheet</i>, a flat place where a
+        picture shows, and how it turns a page. This section is about what the site does behind a
+        sheet.
+      </p>
+      <p>
+        <b>How Splashery does it.</b> A PDF is drawn page by page by PDF.js [<a href="#ref-22">22</a
+        >], vendored and loaded only when someone opens a PDF. A worker turns each page's pixels
+        into splats. Pages stream through a few sheets, so a 200-page book costs the same as its
+        open pages, and a small cache keeps the pages next to the open ones ready. Each sheet is
+        built at about one picture pixel per screen pixel for how big it shows now, on a ladder of
+        widths a square root of two apart, within the device's budget, and is rebuilt when the view
+        comes much closer or goes much further away: so a page you zoom into gets sharper, and a
+        page you leave is freed. A GIF (decoded by omggif, vendored and loaded only for a GIF) or a
+        video is a screen sheet: the splats are built once and take their colors from the sheet's
+        own texture, which each new frame uploads. A PDF's words are available from its text layer,
+        for reading, selecting, copying, and finding, and a link in a PDF is tinted on the page; a
+        link opens only after the site asks you.
+      </p>
+      <p>
+        The toys on top are <b>Picture lab</b>, <b>Your book</b> (a PDF as a book whose pages turn
+        like paper, and wait until the next page is ready), <b>Photo album</b>,
+        <b>Picture frame</b>, and <b>Screen</b>. They are behind the labs switch.
+      </p>
+      <figure>
+        <div class="shots two">
+          <div>
+            <img
+              src="img/toy-picture-lab.jpg"
+              alt="A page of an article, drawn with splats, with a sharp figure and a table"
+            />
+            <p class="shot-label">A PDF page, drawn with splats</p>
+          </div>
+          <div>
+            <img
+              src="img/r7b-your-book.jpg"
+              alt="An open book whose pages show text, standing on a table"
+            />
+            <p class="shot-label">Your book</p>
+          </div>
+        </div>
+        <figcaption>The article is the toy's own sample text.</figcaption>
+      </figure>
+      <p>
+        <b>Save PDF</b> goes the other way: from a toy to a page. With the labs switch on, the Share
+        tab can write a PDF of the toy (a still, a link, and a QR code of the link), and, if you
+        choose, a second page with a recording of one tap as a flip book, in which each frame is a
+        hidden button whose look is the picture and the PDF's own JavaScript shows one at a time. A
+        viewer without PDF JavaScript shows the first frame. The file is written by pdf-lib (MIT),
+        loaded only when you export, and is saved to a file you choose.
+      </p>
+      <p>
+        <b>A Wikipedia book.</b> The rules in Chapter 7 allow a toy that fetches a Wikipedia article
+        when the reader asks for it (its text is CC BY-SA, never stored in the repository, shipped
+        with the site, or saved in a scene, and its credit shows beside it). Such a toy is planned.
+        It is not built yet.
+      </p>
+
+      <h3 id="share-links">Share links</h3>
+      <p>
+        <b>What it is.</b> A Splashery link is not an address that points at your scene; it is your
+        scene. It carries the toy's options, the look, the camera, and any paint, written into the
+        web address after the <code>#</code>, which a browser never sends to a server. The scene is
+        JSON, compressed with raw deflate and written with the 64 letters, digits, <code>-</code>,
+        and <code>_</code> that are safe in an address. A toy at its defaults is a link of about 700
+        characters; a link stops at 12,288 characters of scene, leaving out paint and then clay
+        first. A link carries <i>settings, not files</i>: a photo or a splat file from your device
+        has to be opened again by whoever opens the link.
+      </p>
+      <p>
+        <b>Where it goes next.</b> A link is text, so it can be a QR code. The
+        <a href="#share">share links chapter</a> takes one apart, lets you break one, and counts how
+        many characters a code can hold. Here, notice what codes and pages have in common with
+        links: they all put a lot of meaning in a small, exact picture.
+      </p>
+
+      <h3 id="try-it-9">Where to try it</h3>
+      <ul>
+        <li>
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InFyLWNvZGUifSwiY2FtZXJhIjp7InlhdyI6MCwicGl0Y2giOjAsInJvbGwiOjAsImRpc3RhbmNlIjozLjF9fQ"
+            target="_blank"
+            rel="noopener"
+            >QR code</a
+          >,
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InFyLWFuYXRvbXkifSwiY2FtZXJhIjp7InlhdyI6MCwicGl0Y2giOjAsInJvbGwiOjAsImRpc3RhbmNlIjozLjR9fQ"
+            target="_blank"
+            rel="noopener"
+            >How a QR code works</a
+          >,
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InFyLWRhbWFnZSJ9LCJjYW1lcmEiOnsieWF3IjowLCJwaXRjaCI6MCwicm9sbCI6MCwiZGlzdGFuY2UiOjMuNH19"
+            target="_blank"
+            rel="noopener"
+            >QR damage lab</a
+          >,
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InFyLXRocmVlIn0sImNhbWVyYSI6eyJ5YXciOjAsInBpdGNoIjowLCJyb2xsIjowLCJkaXN0YW5jZSI6My40fX0"
+            target="_blank"
+            rel="noopener"
+            >Three QR codes in one</a
+          >,
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InFyLXBpY3R1cmUifSwiY2FtZXJhIjp7InlhdyI6MCwicGl0Y2giOjAsInJvbGwiOjAsImRpc3RhbmNlIjozLjR9fQ"
+            target="_blank"
+            rel="noopener"
+            >Picture QR</a
+          >,
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InFyLWJ1aWxkIn0sImNhbWVyYSI6eyJ5YXciOjAsInBpdGNoIjowLjQ1LCJyb2xsIjowLCJkaXN0YW5jZSI6My40fX0"
+            target="_blank"
+            rel="noopener"
+            >QR from real things</a
+          >, and
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImJhcmNvZGVzIn0sImNhbWVyYSI6eyJ5YXciOjAuMjUsInBpdGNoIjowLjM1LCJyb2xsIjowLCJkaXN0YW5jZSI6My4yfX0"
+            target="_blank"
+            rel="noopener"
+            >Other barcodes</a
+          >
+          (all labs).
+        </li>
+        <li>
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBpY3R1cmUtbGFiIn0sImNhbWVyYSI6eyJ5YXciOjAsInBpdGNoIjowLCJyb2xsIjowLCJkaXN0YW5jZSI6My4yfX0"
+            target="_blank"
+            rel="noopener"
+            >Picture lab</a
+          >,
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InlvdXItYm9vayJ9LCJjYW1lcmEiOnsieWF3IjowLjEyLCJwaXRjaCI6MC4xMiwicm9sbCI6MCwiZGlzdGFuY2UiOjIuNn19"
+            target="_blank"
+            rel="noopener"
+            >Your book</a
+          >,
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBob3RvLWFsYnVtIn0sImNhbWVyYSI6eyJ5YXciOjAuMTIsInBpdGNoIjowLjEyLCJyb2xsIjowLCJkaXN0YW5jZSI6Mi42fX0"
+            target="_blank"
+            rel="noopener"
+            >Photo album</a
+          >, and
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNjcmVlbiJ9LCJjYW1lcmEiOnsieWF3IjowLjI1LCJwaXRjaCI6MC4xMiwicm9sbCI6MCwiZGlzdGFuY2UiOjMuMn19"
+            target="_blank"
+            rel="noopener"
+            >Screen</a
+          >
+          (labs).
+        </li>
+      </ul>
+
+      <!-- ---- Chapter 10 ---- -->
+      <h2 id="make"><span class="level">Chapter 10</span>Make your own</h2>
+      <!-- Sources: index.html (the Make tab: "Make a toy", "Your own splat", and the Share tab),
+           src/generators.js:1-60 (SHAPES, PALETTES), src/loaders.js:1-30 (formats, UNSUPPORTED),
+           src/packs/studio-models-core.js:1-25 and :34-45, src/packs/studio-models.js:1-12,
+           src/packs/viewers.js:1-30, src/viewers/splat-io.js:967-972 (SAVE_FORMATS), src/exports.js:1-5
+           and :274, src/element.js:1-20, src/physics/hands-on.js:1-20 and :60-76 (handsOn,
+           handsLevel1), manual/later.html, docs/PACKS.md, docs/SCENE-SCHEMA.md. -->
+      <p>
+        The last chapter of the ladder is a short one, because most of it is the earlier ones: you
+        make your own toy by writing a recipe (Chapters 2 to 6), by typing an equation (Chapter 3),
+        by turning something you already have into splats (Chapters 7 to 9), or by opening a file
+        someone else made. This chapter gathers those ways in one place and says, for each, what it
+        takes and what it cannot do. It ends with how to share what you made.
+      </p>
+
+      <h3 id="five-ways">Five ways to make your own</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Way</th>
+              <th>What you give it</th>
+              <th>What you get</th>
+              <th>Where</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Roll one</td>
+              <td>A shape, a palette, a seed</td>
+              <td>A made-up splat object, the same every time you use that seed</td>
+              <td>Make tab, always on</td>
+            </tr>
+            <tr>
+              <td>Type one</td>
+              <td>An equation for <var>x</var>, <var>y</var>, <var>z</var>, and a color</td>
+              <td>A surface of splats, and a link to share it</td>
+              <td>Splat equation (Chapter 3), labs</td>
+            </tr>
+            <tr>
+              <td>Open one</td>
+              <td>
+                A splat file (<code>.ply</code>, <code>.sog</code>, <code>.splat</code>,
+                <code>.spz</code>)
+              </td>
+              <td>The splat as a toy that Poke, Paint, Magnet, and the effects work on</td>
+              <td>Make tab, always on</td>
+            </tr>
+            <tr>
+              <td>Turn something into one</td>
+              <td>A photo, a video, a 3D model, a table, a sound, a PDF, a molecule, a scan</td>
+              <td>Splats made on your device</td>
+              <td>The Studio, labs (below)</td>
+            </tr>
+            <tr>
+              <td>Write one</td>
+              <td>A recipe in JavaScript</td>
+              <td>A toy with parts, controls, and a tap of its own</td>
+              <td>The source code (Chapters 2 to 6)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 id="roll-one-and-open-one">Roll one and open one</h3>
+      <p>
+        <b>Roll one.</b> The <b>Make a toy</b> section of the Make tab builds a splat object in your
+        browser from a few choices: a shape (sphere, noise blob, torus, capsule, or knot), a
+        palette, a seed, how many splats, how much the sizes jitter, how rough the surface is, and
+        how much color noise there is. The generator is seeded and pure
+        (<code>src/generators.js</code>), so the same seed and settings give the same toy, which is
+        why a link can rebuild it. Part of the splats fill the inside, so the slice effect has
+        something to show.
+      </p>
+      <p>
+        <b>Open one.</b> <b>Your own splat</b> opens a PLY, SOG, SPLAT, or SPZ file (SPZ versions 1
+        to 3). KSPLAT and version 4 SPZ files are refused with a message that says to convert them
+        first. You can also drop a file anywhere on the page. The file stays on your device, and
+        nothing is uploaded. Poke, Paint, Magnet, every effect, the motions, the flag and pattern
+        colors, and the Detail setting all work on it. What cannot work is a toy's own action (a lid
+        that opens: a captured file has no lid) and Clay. And a file cannot go in a share link,
+        because it never leaves your device: a link carries settings, not files (Chapter 9). To
+        share the result, export a picture (PNG), a GIF, or a video.
+      </p>
+
+      <h3 id="the-studio">The Studio</h3>
+      <p>
+        <b>What it is.</b> The Studio is a shelf of tools that turn other things into splats, on
+        your device. Each takes a file you open, does its work in a worker, and shows the result as
+        the toy's splats. They are behind the labs switch. Nothing is uploaded, and the libraries a
+        tool needs (a PDF reader, a depth model, a laz decoder) are loaded only when its toy opens.
+      </p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Toy</th>
+              <th>You open</th>
+              <th>It makes</th>
+              <th>Chapter</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <a
+                  href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBob3RvLTNkIn0sImNhbWVyYSI6eyJ5YXciOjAsInBpdGNoIjowLCJyb2xsIjowLCJkaXN0YW5jZSI6My40fX0"
+                  target="_blank"
+                  rel="noopener"
+                  >Photo to 3D</a
+                >
+              </td>
+              <td>A photo</td>
+              <td>The photo at its depths, as a Sharp view or as splats</td>
+              <td>8</td>
+            </tr>
+            <tr>
+              <td>
+                <a
+                  href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im1vdmluZy1waG90by0zZCJ9LCJjYW1lcmEiOnsieWF3IjowLCJwaXRjaCI6MCwicm9sbCI6MCwiZGlzdGFuY2UiOjMuNH19"
+                  target="_blank"
+                  rel="noopener"
+                  >Moving photo to 3D</a
+                >
+              </td>
+              <td>A GIF or a short video</td>
+              <td>The clip played back in 3D</td>
+              <td>8</td>
+            </tr>
+            <tr>
+              <td>
+                <a
+                  href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InZpZGVvLTNkIn0sImNhbWVyYSI6eyJ5YXciOjAsInBpdGNoIjowLCJyb2xsIjowLCJkaXN0YW5jZSI6My40fX0"
+                  target="_blank"
+                  rel="noopener"
+                  >Video to 3D</a
+                >
+              </td>
+              <td>A video of a still scene</td>
+              <td>A trained splat scene and its camera path (WebGPU)</td>
+              <td>8</td>
+            </tr>
+            <tr>
+              <td>
+                <a
+                  href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im1vZGVsLXNwbGF0cyJ9LCJjYW1lcmEiOnsieWF3IjowLjUsInBpdGNoIjowLjI4LCJyb2xsIjowLCJkaXN0YW5jZSI6NC41fX0"
+                  target="_blank"
+                  rel="noopener"
+                  >Model to splats</a
+                >
+              </td>
+              <td>A glTF, GLB, OBJ with its MTL, or STL file</td>
+              <td>The surface as flat discs, colored from the model</td>
+              <td>10 (below)</td>
+            </tr>
+            <tr>
+              <td>
+                <a
+                  href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNwbGF0LXRvb2xraXQifSwiY2FtZXJhIjp7InlhdyI6MC40NSwicGl0Y2giOjAuMiwicm9sbCI6MCwiZGlzdGFuY2UiOjMuNH19"
+                  target="_blank"
+                  rel="noopener"
+                  >Splat toolkit</a
+                >
+              </td>
+              <td>A splat file (or two, to compare)</td>
+              <td>The file's numbers, cropped, cleaned, shrunk, and saved in another format</td>
+              <td>10 (below)</td>
+            </tr>
+            <tr>
+              <td>
+                <a
+                  href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBvaW50LWNsb3VkcyJ9LCJjYW1lcmEiOnsieWF3IjowLjYsInBpdGNoIjowLjU1LCJyb2xsIjowLCJkaXN0YW5jZSI6Mi44fX0"
+                  target="_blank"
+                  rel="noopener"
+                  >Point clouds</a
+                >
+              </td>
+              <td>A LAS, LAZ, PLY, XYZ, or PTS file</td>
+              <td>The points as splats, colored by height, intensity, or class</td>
+              <td>7</td>
+            </tr>
+            <tr>
+              <td>
+                <a
+                  href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InZvbHVtZS12aWV3ZXIifSwiY2FtZXJhIjp7InlhdyI6MC4zNSwicGl0Y2giOjAuMiwicm9sbCI6MCwiZGlzdGFuY2UiOjMuOH19"
+                  target="_blank"
+                  rel="noopener"
+                  >Volume viewer</a
+                >
+              </td>
+              <td>A DICOM, NIfTI, TIFF, or raw volume</td>
+              <td>A block of splats you can cut through</td>
+              <td>7</td>
+            </tr>
+            <tr>
+              <td>
+                <a
+                  href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImRhdGEtaW4tM2QifSwiY2FtZXJhIjp7InlhdyI6MC41NSwicGl0Y2giOjAuMywicm9sbCI6MCwiZGlzdGFuY2UiOjMuM319"
+                  target="_blank"
+                  rel="noopener"
+                  >Data in 3D</a
+                >
+              </td>
+              <td>A CSV or TSV table</td>
+              <td>A scatter, bars, or a surface with labeled axes</td>
+              <td>7</td>
+            </tr>
+            <tr>
+              <td>
+                <a
+                  href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im1vbGVjdWxlLXZpZXdlciJ9LCJjYW1lcmEiOnsieWF3IjowLjI1LCJwaXRjaCI6MC4xOCwicm9sbCI6MCwiZGlzdGFuY2UiOjMuNH19"
+                  target="_blank"
+                  rel="noopener"
+                  >Molecule viewer</a
+                >
+              </td>
+              <td>A PDB, mmCIF, SDF, or XYZ file</td>
+              <td>Balls and sticks, space-filling atoms, a cartoon, or a surface</td>
+              <td>7</td>
+            </tr>
+            <tr>
+              <td>
+                <a
+                  href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InFyLWNvZGUifSwiY2FtZXJhIjp7InlhdyI6MCwicGl0Y2giOjAsInJvbGwiOjAsImRpc3RhbmNlIjozLjF9fQ"
+                  target="_blank"
+                  rel="noopener"
+                  >QR code</a
+                >
+              </td>
+              <td>A link, text, or other contents</td>
+              <td>A code that checks that it scans</td>
+              <td>9</td>
+            </tr>
+            <tr>
+              <td>
+                <a
+                  href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InlvdXItYm9vayJ9LCJjYW1lcmEiOnsieWF3IjowLjEyLCJwaXRjaCI6MC4xMiwicm9sbCI6MCwiZGlzdGFuY2UiOjIuNn19"
+                  target="_blank"
+                  rel="noopener"
+                  >Your book</a
+                >
+              </td>
+              <td>A PDF</td>
+              <td>A book whose pages turn</td>
+              <td>9</td>
+            </tr>
+            <tr>
+              <td>
+                <a
+                  href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNvbmctbGFuZHNjYXBlIn0sImNhbWVyYSI6eyJ5YXciOjAuMywicGl0Y2giOjAuOCwicm9sbCI6MCwiZGlzdGFuY2UiOjMuOX0sImF1dG9wbGF5Ijp7InR1cm50YWJsZSI6ZmFsc2UsImVmZmVjdCI6Im5vbmUifX0"
+                  target="_blank"
+                  rel="noopener"
+                  >Song landscape</a
+                >
+              </td>
+              <td>A song</td>
+              <td>A 3D field made from its spectrogram</td>
+              <td>(sound toys)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <figure>
+        <div class="shots two">
+          <div>
+            <img
+              src="img/r7b-model-splats.jpg"
+              alt="A 3D model turned into splats, shown with a wire mesh beside it"
+            />
+            <p class="shot-label">Model to splats</p>
+          </div>
+          <div>
+            <img
+              src="img/r7b-splat-toolkit.jpg"
+              alt="The Splat toolkit showing a splat file with its numbers"
+            />
+            <p class="shot-label">Splat toolkit</p>
+          </div>
+        </div>
+      </figure>
+
+      <h3 id="models-and-splat-files">Models, and your splat files</h3>
+      <p>
+        <b>Model to splats</b> (<code>src/packs/studio-models-core.js</code>, which a Node tool
+        shares) reads a glTF 2.0 file (<code>.gltf</code> or <code>.glb</code>), an OBJ with its
+        MTL, or an STL file, and lays flat discs on the surface, more of them where there is detail,
+        each sized to its neighbors so the surface closes. It colors them from the model's
+        base-color texture, vertex colors, or material, and the budget is the tier's default times
+        1.5, capped at its maximum, as for a photo. What it does not read: glTF compressed with
+        Draco or meshopt, morph targets, skinning (a skinned mesh shows in its bind pose),
+        animations, lights, cameras, emissive colors, and any texture except the base color. Glass,
+        a material less than half opaque, is left out, because splats cannot be see-through solids.
+      </p>
+      <p>
+        <b>The Splat toolkit</b> opens a 3D Gaussian splat file and shows its numbers: how many
+        splats, how big, how opaque, and the degree of their view-dependent color. Then it works on
+        it: crop it with a box, remove floaters with a statistical filter you tune (the removed
+        splats show in red, or before and after side by side), shrink it to a share of its splats,
+        and compare it with a second file, turning in step. It saves in four formats: PLY
+        (everything is kept; every tool reads it), SPZ (about a tenth of the size; view-dependent
+        colors are kept), SOG (the smallest; base colors only), and <code>.splat</code> (simple;
+        base colors only). A file is saved to a place you choose.
+      </p>
+      <div class="demo-placeholder">
+        <p class="demo-tag">A demo goes here later</p>
+        <p>
+          A tiny splat file in the page, with a crop box and a floater filter you can move, and the
+          counts changing as you do.
+        </p>
+      </div>
+
+      <h3 id="writing-a-recipe">Writing a recipe</h3>
+      <p>
+        A recipe is a plain JavaScript object in a pack file under <code>src/packs/</code>, and the
+        keys it can have are the whole of this manual so far. Here they are in one place:
+      </p>
+      <details class="fold tablefold">
+        <summary>Show the table: what a recipe can ask for</summary>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Key</th>
+                <th>What it is</th>
+                <th>Chapter</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>build(k, o)</code></td>
+                <td>Makes the splats from the kit's shapes, from the options <code>o</code>.</td>
+                <td>2</td>
+              </tr>
+              <tr>
+                <td><code>drive(t, c, out, info)</code></td>
+                <td>Every frame: moves parts, tokens, and levers; sets glow and sheets.</td>
+                <td>2, 5</td>
+              </tr>
+              <tr>
+                <td><code>options</code>, <code>controls</code>, <code>action</code></td>
+                <td>The choices saved in a link, the live sliders and pulses, and the tap.</td>
+                <td>2</td>
+              </tr>
+              <tr>
+                <td><code>pictures</code>, <code>input</code>, <code>tiltLock</code></td>
+                <td>What a visitor can open or type, and how a drag turns a flat toy.</td>
+                <td>5</td>
+              </tr>
+              <tr>
+                <td><code>hands</code>, <code>handsOn</code>, <code>handsLevel1</code></td>
+                <td>
+                  Pieces, joints, ropes, materials, and the ✋ switch.
+                  <code>handsOn: false</code> keeps a toy out of hands-on play;
+                  <code>handsOn: true</code> starts the switch on; <code>handsLevel1</code> lets a
+                  picture or a still toy play as one rigid body.
+                </td>
+                <td>6</td>
+              </tr>
+              <tr>
+                <td>
+                  <code>alive</code>, <code>density</code>, <code>kernel</code>,
+                  <code>turntable</code>
+                </td>
+                <td>
+                  The toy's own behaviors, how many splats it wants per base budget, the splat
+                  shape, and the idle spin.
+                </td>
+                <td>2, 5</td>
+              </tr>
+              <tr>
+                <td><code>credits</code></td>
+                <td>The license and source notices that show beside the toy.</td>
+                <td>10</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
+      <p>
+        There is no editor in the browser yet; "What comes later" explains the plan. Today a recipe
+        is a file in the project, and you can run your own copy of the site on your computer and
+        look at a recipe as you write it. Chapter 2's <i>run it yourself</i> section shows how, with
+        a prompt you can give to a coding assistant. A toy joins the shelf only after it has been
+        checked and read by a person. Its <code>credits</code> name the source, author, and license
+        of every asset it uses, and the site shows them beside the toy; an asset must carry a
+        license the site can use (never one that forbids changes, and never one that is unlicensed
+        or paid).
+      </p>
+
+      <h3 id="sharing-what-you-made">Sharing what you made</h3>
+      <ul>
+        <li>
+          <b>A link</b>: the Share tab copies a link that holds the whole scene. It works for
+          everything except a file you opened (Chapter 9).
+        </li>
+        <li>
+          <b>A scene file</b>: the same scene as a JSON file, which keeps paint and clay that a link
+          is too short for. Old scenes (versions 2 and 3) keep opening.
+        </li>
+        <li>
+          <b>A picture, a GIF, or a video</b>: PNG, GIF, and WebM exports of the view, and a live
+          recording that starts when you tap Record and is saved only to a file you choose.
+        </li>
+        <li><b>A page of a document</b> (labs): <i>Save PDF</i> (Chapter 9).</li>
+        <li>
+          <b>On a web page</b>: the Share tab gives an iframe snippet and a
+          <code>&lt;splashery-toy&gt;</code> element, which takes a <code>scene</code> or a
+          <code>toy</code>, a <code>theme</code>, a <code>background</code>, an
+          <code>autoplay</code>, a <code>turntable</code> setting, a <code>zoom</code>, and a
+          <code>label</code>. It starts when it scrolls into view and pauses when it leaves.
+        </li>
+      </ul>
+      <p>
+        Every file you open stays on your device, and so does everything you make unless you choose
+        to save it or share it.
+      </p>
+
+      <h3 id="try-it-10">Where to try it</h3>
+      <ul>
+        <li>
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNwbGF0LWVxdWF0aW9uIn0sImNhbWVyYSI6eyJ5YXciOjAuMzUsInBpdGNoIjowLjYsInJvbGwiOjAsImRpc3RhbmNlIjozLjV9LCJhdXRvcGxheSI6eyJ0dXJudGFibGUiOmZhbHNlLCJlZmZlY3QiOiJub25lIn19"
+            target="_blank"
+            rel="noopener"
+            >Splat equation</a
+          >,
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im1vZGVsLXNwbGF0cyJ9LCJjYW1lcmEiOnsieWF3IjowLjUsInBpdGNoIjowLjI4LCJyb2xsIjowLCJkaXN0YW5jZSI6NC41fX0"
+            target="_blank"
+            rel="noopener"
+            >Model to splats</a
+          >, and
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNwbGF0LXRvb2xraXQifSwiY2FtZXJhIjp7InlhdyI6MC40NSwicGl0Y2giOjAuMiwicm9sbCI6MCwiZGlzdGFuY2UiOjMuNH19"
+            target="_blank"
+            rel="noopener"
+            >Splat toolkit</a
+          >
+          (all labs). The Make tab in the Playground is open to everyone.
+        </li>
+      </ul>
 
       <!-- ---- What else Splashery does now ---- -->
       <h2 id="more">What else Splashery does now</h2>
@@ -6642,12 +8660,12 @@ export const RECIPES = {
         <li>
           <b>Equations as a language.</b> Type <var>x</var>, <var>y</var>, and <var>z</var> in
           <var>u</var>, <var>v</var>, and <var>t</var>, and get an animated splat shape, with plain
-          messages instead of crashes (Level 3).
+          messages instead of crashes (Chapter 3).
         </li>
         <li>
           <b>Moving parts inside one splat cloud.</b> Hinges, pivots, sliders, morphs, and per-splat
           effects run on the graphics chip, so a chest opens and a windmill turns without rebuilding
-          anything (Level 2).
+          anything (Chapter 2).
         </li>
         <li><b>Hands-on physics on splats.</b> Toss, stack, pull apart, and pour.</li>
         <li>
@@ -6753,8 +8771,8 @@ export const RECIPES = {
                 effects, and tools for the toy on show), <code>stage.js</code> (the one place that
                 talks to the engine), <code>state.js</code> and <code>codec.js</code> (the scene
                 document and the link; see "Share links and QR codes"), <code>toys.js</code> (the
-                shelf), and <code>kit.js</code> with <code>generators.js</code> (the toy kit, Level
-                2).
+                shelf), and <code>kit.js</code> with <code>generators.js</code> (the toy kit,
+                Chapter 2).
               </td>
             </tr>
             <tr>
@@ -6762,7 +8780,7 @@ export const RECIPES = {
               <td>
                 The toys' recipes, one file for each family of toys (about a hundred files):
                 <code>balls.js</code>, <code>food.js</code>, <code>splat-equation.js</code> (the
-                language of Level 3), and so on. A recipe is the JavaScript of Level 2;
+                language of Chapter 3), and so on. A recipe is the JavaScript of Chapter 2;
                 <code>src/toys.js</code> lists each toy with the pack it comes from and whether it
                 is behind the labs switch.
               </td>
@@ -6858,8 +8876,8 @@ export const RECIPES = {
             </tr>
             <tr>
               <td>
-                Holds the splats in textures, projects each one to the screen (Level 1), draws it as
-                a quad with a Gaussian falloff, and blends them back to front.
+                Holds the splats in textures, projects each one to the screen (Chapter 1), draws it
+                as a quad with a Gaussian falloff, and blends them back to front.
               </td>
               <td>
                 Decides which splats exist: the kit and generators build them from recipes
@@ -7278,8 +9296,8 @@ export const RECIPES = {
       <p>
         Splashery works as it is, and nothing here would replace what works. Each of these would be
         a separate experiment, behind the labs switch or on a comparison page, with today's behavior
-        as the default. If you wonder "why this number?", the answer is in the notes in Levels 1 to
-        3, or it is "not tested yet" and listed here.
+        as the default. If you wonder "why this number?", the answer is in the notes in Chapters 1
+        to 3, or it is "not tested yet" and listed here.
       </p>
       <details class="fold tablefold">
         <summary>Show the table: every choice not tried yet</summary>
@@ -7329,7 +9347,7 @@ export const RECIPES = {
               <tr>
                 <td>A budget sweep on real phones</td>
                 <td>
-                  Real phone graphics chips, and more phone sizes. The Kit lab's sweep (Level 2)
+                  Real phone graphics chips, and more phone sizes. The Kit lab's sweep (Chapter 2)
                   covered five budgets, one phone size, and one software renderer.
                 </td>
                 <td>Not started</td>
@@ -7345,7 +9363,7 @@ export const RECIPES = {
               <tr>
                 <td>An opacity field</td>
                 <td>
-                  See-through splats in a program (and the other candidate fields in Level 3).
+                  See-through splats in a program (and the other candidate fields in Chapter 3).
                 </td>
                 <td>Open: no plan yet</td>
               </tr>
@@ -7366,7 +9384,7 @@ export const RECIPES = {
       <h2 id="later">What comes later: Code a toy</h2>
       <p>
         The splat equation language can place and color splats, but it can't give a toy parts,
-        controls, or a tap of its own. For that you need a full recipe (Level 2). Splashery's plan
+        controls, or a tap of its own. For that you need a full recipe (Chapter 2). Splashery's plan
         includes a <b>Toy Workshop</b> where you will be able to write one: a <b>Code a toy</b>
         editor that builds and shows your recipe as you type.
       </p>
@@ -7379,7 +9397,7 @@ export const RECIPES = {
         one.
       </p>
       <p>
-        Until then, everything in Level 2 is in the source code, which is open under the MIT
+        Until then, everything in Chapter 2 is in the source code, which is open under the MIT
         license:
         <a href="https://github.com/ryanjosephkamp/splashery" target="_blank" rel="noopener"
           >github.com/ryanjosephkamp/splashery</a
@@ -7388,6 +9406,10 @@ export const RECIPES = {
 
       <!-- ---- Glossary ---- -->
       <h2 id="glossary">Glossary</h2>
+      <p>
+        Every term a newcomer meets in Chapters 1 to 10, in the order the chapters bring them up. On
+        the other pages, a word with a dotted underline opens its entry.
+      </p>
       <!-- Checked against: formulas in this manual; src/kit.js:1082-1112 (isotropic, flat and
            stretched splats, one base color, morph kind); src/loaders.js:103 (stored spherical
            harmonics, f_rest) and :155-165 (the .splat reader turns a quaternion to length 1);
@@ -7430,7 +9452,7 @@ export const RECIPES = {
         <dd>
           Tilt is the off-diagonal terms of <var>Σ</var>: zero when a splat's axes line up with
           <var>x</var>, <var>y</var>, and <var>z</var>. Rotation is a splat's own turn. "Tilt lock"
-          is a different thing: the camera control in Level 5.
+          is a different thing: the camera control in Chapter 5.
         </dd>
         <dt id="g-aniso">Anisotropic, isotropic</dt>
         <dd>
@@ -7505,14 +9527,236 @@ export const RECIPES = {
           The rule for how a splat's weight falls off across its patch. The site normally draws a
           cut-off Gaussian; a labs setting can use a sharper one. Neither is the ideal bell.
         </dd>
+        <dt id="g-part">Part, token</dt>
+        <dd>
+          A <b>part</b> is a group of a toy's splats that moves as one solid piece, such as a lid or
+          a sail. Every splat carries the number of its part; number 0 is the body, so a toy has up
+          to 15 more (Chapter 2). A <b>token</b> is one of up to 48 separate pieces, such as a game
+          piece, that a recipe moves by its own offset.
+        </dd>
+        <dt id="g-drive">Drive</dt>
+        <dd>
+          The function in a recipe that runs every frame and says how the toy looks now: the angle
+          of each part, the glow, the page of a sheet. It does not move splats itself; it hands
+          numbers to the graphics chip.
+        </dd>
+        <dt id="g-budget">Splat budget, tier</dt>
+        <dd>
+          The number of splats the toy is asked to draw. It depends on the device: a tier (low, mid,
+          high, or max) sets a default count and a ceiling, and a recipe may ask for more or fewer
+          per base budget with its <code>density</code>. The counts run from 60,000 up to 400,000.
+        </dd>
+        <dt id="g-pack">Pack</dt>
+        <dd>A file under <code>src/packs/</code> that holds the recipes of a group of toys.</dd>
+        <dt id="g-labs">Labs switch</dt>
+        <dd>
+          The setting that shows the toys and tools not yet ready for everyone. Add
+          <code>?labs=1</code> to the site's address to turn it on (the browser remembers it) and
+          <code>?labs=0</code> to turn it off. A link to a labs toy opens it either way; the switch
+          only decides what the shelf shows.
+        </dd>
+        <dt id="g-seed">Seed</dt>
+        <dd>
+          A number that starts a repeatable stream of pseudo-random numbers. The same seed gives the
+          same toy every time, which is why a link can rebuild it.
+        </dd>
+        <dt id="g-sorting">Sorting, back to front</dt>
+        <dd>
+          Splats are partly see-through, so they must be drawn from the farthest to the nearest for
+          the blending to come out right. The engine sorts them for the camera; a toy that moves its
+          splats may need them sorted again where they stand.
+        </dd>
+        <dt id="g-uniform">Uniform, shader</dt>
+        <dd>
+          A <b>shader</b> is a small program that runs on the graphics chip for every splat. A
+          <b>uniform</b> is a value the page hands it once a frame, the same for every splat, such
+          as a part's rotation. Hands-on play, a recipe's drive, and the controls all reach the
+          screen as uniforms.
+        </dd>
+        <dt id="g-lod">Level of detail</dt>
+        <dd>
+          Drawing less where little shows: a big structure gets fewer splats per atom, and a page
+          far away gets a coarser sheet.
+        </dd>
+        <dt id="g-worker">Web worker</dt>
+        <dd>
+          A background thread of a page. Heavy jobs (reading a file, turning a page into splats,
+          training) run in one so the page stays smooth.
+        </dd>
+        <dt id="g-sheet">Sheet, leaf, spine</dt>
+        <dd>
+          A <b>sheet</b> is a flat place in a toy where a picture shows (Chapter 5). A
+          <b>leaf</b> is a sheet that turns like a page, about a <b>spine</b>.
+        </dd>
+        <dt id="g-handson">Hands-on, rigid body</dt>
+        <dd>
+          Hands-on is the ✋ switch: a drag picks up the toy and a let-go tosses it. A
+          <b>rigid body</b> is a thing that never changes shape, described by its place and its
+          turn; most toys play as one (Chapter 6).
+        </dd>
+        <dt id="g-xpbd">Position-based dynamics (XPBD)</dt>
+        <dd>
+          A way to simulate physics by moving things to where they would be if nothing overlapped
+          and every joint held, then working out their speeds from how far they moved. Splashery's
+          own engine uses an extended form of it [<a href="#ref-11">11</a>,
+          <a href="#ref-12">12</a>].
+        </dd>
+        <dt id="g-joint">Joint: hinge, slider, dial, socket, break</dt>
+        <dd>
+          The ways a part may move in hands-on play. A <b>hinge</b> swings about an axis, a
+          <b>slider</b> moves along a line, a <b>dial</b> turns round and round, a
+          <b>socket</b> lets a loose piece click back into its place, and a <b>break</b> lets a
+          piece snap off when pulled hard. Each of the first three is moved by one number, an angle
+          or a distance.
+        </dd>
+        <dt id="g-node">Node, skin</dt>
+        <dd>
+          A <b>node</b> is one point of a rope or a cloth, held to its neighbors by links. A splat
+          that follows two nodes (or four, for cloth) is called a <b>skin</b> splat: the rope bends
+          and the splat stays whole.
+        </dd>
+        <dt id="g-restitution">Restitution (bounce)</dt>
+        <dd>
+          The share of its speed a thing keeps after a bounce: a basketball dropped on a hard floor
+          keeps about 0.82 to 0.88.
+        </dd>
+        <dt id="g-radius">Toy radius</dt>
+        <dd>
+          The unit of length hands-on play uses: the toy's own radius. Gravity, throws, and the play
+          area are given in toy radii, so every toy falls the same way whatever its size on screen.
+        </dd>
+        <dt id="g-angstrom">Ångström, B-factor</dt>
+        <dd>
+          An <b>ångström</b> is a tenth of a nanometer; atoms in a bond are about 1 to 2 of them
+          apart. A <b>B-factor</b> says how much an atom's place is blurred in a crystal, by motion
+          or disorder.
+        </dd>
+        <dt id="g-voxel">Voxel</dt>
+        <dd>
+          A volume pixel: one little cube of a 3D scan, with one number for how dense the material
+          is there.
+        </dd>
+        <dt id="g-window">Window and level, Hounsfield unit</dt>
+        <dd>
+          A <b>window</b> picks the range of values that show, from a lower to an upper level, and
+          the rest is hidden or faded. In a CT scan the values are in <b>Hounsfield units</b>, on
+          which water is 0 and air is about −1000.
+        </dd>
+        <dt id="g-pointcloud">Point cloud, lidar, LAS and LAZ</dt>
+        <dd>
+          A <b>point cloud</b> is a list of points with places and sometimes colors.
+          <b>Lidar</b> makes one by timing laser pulses. <b>LAS</b> is the standard file for them;
+          <b>LAZ</b> is the same file compressed.
+        </dd>
+        <dt id="g-magnitude">Magnitude</dt>
+        <dd>
+          A scale on which each step is a fixed ratio. An earthquake's magnitude goes up by one for
+          about 32 times the energy. A star's magnitude goes the other way: the smaller (or more
+          negative) the number, the brighter the star, and 6 is about the faintest the unaided eye
+          sees under a dark sky.
+        </dd>
+        <dt id="g-sky">Precession, sidereal time, J2000</dt>
+        <dd>
+          <b>Precession</b> is the slow wobble of the Earth's axis, one turn in about 26,000 years,
+          which shifts where the stars are. <b>Sidereal time</b> is time measured by the stars
+          instead of the Sun, and tells which part of the sky is overhead. <b>J2000</b> is the
+          moment (January 1, 2000, noon) a star catalog's positions are given for.
+        </dd>
+        <dt id="g-snapshot">Snapshot, feed</dt>
+        <dd>
+          A <b>feed</b> is a web address that serves current data, such as the earthquakes of the
+          past week. A <b>snapshot</b> is a dated copy of that data that ships with the site, for
+          when the feed cannot be reached.
+        </dd>
+        <dt id="g-depth">Depth map, relative depth</dt>
+        <dd>
+          A picture the same size as a photo whose every pixel holds how far away that part is. A
+          depth model's map is <b>relative</b>: it says which parts are nearer than which, not how
+          many meters. Often it is stored as <i>disparity</i>, which is large for near things.
+        </dd>
+        <dt id="g-sharp">Sharp view, relief</dt>
+        <dd>
+          A second view of the photo toys that lays the photo, at its full resolution, on a
+          <b>relief</b>: a surface lifted by the same depth the splats use. It is a textured
+          surface, not splats.
+        </dd>
+        <dt id="g-training">Training, gradient descent</dt>
+        <dd>
+          <b>Gradient descent</b> nudges numbers again and again in the direction that lowers an
+          error. <b>Training</b> a splat scene is gradient descent on the splats' places, sizes,
+          colors, and opacities until pictures drawn from them match the photos [<a href="#ref-1"
+            >1</a
+          >].
+        </dd>
+        <dt id="g-sfm">Structure from motion</dt>
+        <dd>
+          Working out where the camera was for each of many overlapping photos, and where the points
+          they show lie in space.
+        </dd>
+        <dt id="g-webgpu">WebGPU, WebAssembly</dt>
+        <dd>
+          <b>WebGPU</b> is the browser's newer way to use the graphics chip for general computation,
+          which Video to 3D needs for training. <b>WebAssembly</b> is a compact code format that
+          runs at near native speed; the depth model runs on it through ONNX Runtime Web.
+        </dd>
+        <dt id="g-formats">PLY, SOG, SPZ, .splat</dt>
+        <dd>
+          Splat file formats. <b>PLY</b> is the plain one that every tool reads and that keeps
+          everything. <b>SPZ</b> is about a tenth of its size and keeps view-dependent color.
+          <b>SOG</b> is the smallest and keeps base colors only. <b>.splat</b> is simple and keeps
+          base colors only.
+        </dd>
+        <dt id="g-qrmodule">Module, finder pattern, quiet zone</dt>
+        <dd>
+          A <b>module</b> is one cell of a QR code. The three big squares in the corners are the
+          <b>finder patterns</b>, which let a reader find and orient the code. The
+          <b>quiet zone</b> is the blank border, four modules wide.
+        </dd>
+        <dt id="g-ecc">Error correction, Reed–Solomon, codeword</dt>
+        <dd>
+          A QR code holds extra <b>codewords</b> (8 modules each) made with a
+          <b>Reed–Solomon</b> code [<a href="#ref-19">19</a>], so a reader can rebuild the text if
+          some are lost. The level (L, M, Q, or H) sets how many: about 7, 15, 25, or 30 percent of
+          the codewords.
+        </dd>
+        <dt id="g-version">QR version</dt>
+        <dd>
+          The size of a QR code, from 1 (21 modules on a side) to 40 (177). A longer text needs a
+          higher version.
+        </dd>
+        <dt id="g-halftone">Halftone, error diffusion</dt>
+        <dd>
+          Showing a picture with only dark and light dots. <b>Error diffusion</b> decides each dot
+          by passing the error of the last choice on to the pixels beside it.
+        </dd>
+        <dt id="g-checkdigit">Check digit</dt>
+        <dd>
+          A digit of a barcode worked out from the others, so a reader can tell when it has misread
+          one.
+        </dd>
+        <dt id="g-fragment">Fragment, deflate, base64url</dt>
+        <dd>
+          The <b>fragment</b> of a link is everything after the <code>#</code>; a browser never
+          sends it to a server. <b>Deflate</b> is the compression of zip files and PNG pictures; a
+          Splashery link uses its raw form. <b>Base64url</b> spells bytes with the 64 letters,
+          digits, <code>-</code>, and <code>_</code> that are safe in an address.
+        </dd>
+        <dt id="g-scene">Scene</dt>
+        <dd>
+          Everything needed to rebuild a view: the toy, its options, the look, the camera, and any
+          paint, written as JSON. A link is a scene; a scene file is the same scene saved as a file.
+        </dd>
       </dl>
 
       <!-- ---- Further reading ---- -->
       <h2 id="reading">Further reading</h2>
       <p>
-        Five sources, each opened, and checked on October 4, 2026. Authors, titles, venues, and
-        years are as the source's own page gives them.
+        Each source below was opened and checked on its own page (the first five on October 4, 2026,
+        the rest on October 11, 2026). Authors and titles are as the source's page gives them. A
+        venue is named only where the page names one; the others are preprints on arXiv. These are
+        links only: nothing here is copied.
       </p>
+      <h3 id="reading-start">Where splats come from</h3>
       <ul class="reading">
         <li>
           Bernhard Kerbl, Georgios Kopanas, Thomas Leimkühler, and George Drettakis.
@@ -7535,7 +9779,7 @@ export const RECIPES = {
             target="_blank"
             rel="noopener"
             >Paper</a
-          >. The footprint step in Level 1.
+          >. The footprint step in Chapter 1.
         </li>
         <li>
           Zehao Yu, Anpei Chen, Binbin Huang, Torsten Sattler, and Andreas Geiger.
@@ -7559,6 +9803,164 @@ export const RECIPES = {
           >
           CVPR 2024.
           <a href="https://anttwo.github.io/sugar/" target="_blank" rel="noopener">Project page</a>.
+        </li>
+      </ul>
+      <h3 id="reading-robots">Robotics and other uses</h3>
+      <ul class="reading">
+        <li>
+          Nikhil Keetha, Jay Karhade, Krishna Murthy Jatavallabhula, Gengshan Yang, Sebastian
+          Scherer, Deva Ramanan, and Jonathon Luiten.
+          <b>SplaTAM: Splat, Track &amp; Map 3D Gaussians for Dense RGB-D SLAM.</b> CVPR 2024.
+          <a href="https://arxiv.org/abs/2312.02126" target="_blank" rel="noopener">Paper</a>. A
+          robot camera maps a room with splats as it moves.
+        </li>
+        <li>
+          Hidenobu Matsuki, Riku Murai, Paul H. J. Kelly, and Andrew J. Davison.
+          <b>Gaussian Splatting SLAM.</b> CVPR 2024 (Highlight).
+          <a href="https://arxiv.org/abs/2312.06741" target="_blank" rel="noopener">Paper</a>. The
+          same problem with one ordinary camera.
+        </li>
+        <li>
+          Timothy Chen, Ola Shorinwa, Joseph Bruno, Aiden Swann, Javier Yu, Weijia Zeng, Keiko
+          Nagami, Philip Dames, and Mac Schwager.
+          <b>Splat-Nav: Safe Real-Time Robot Navigation in Gaussian Splatting Maps.</b> arXiv
+          preprint, 2024.
+          <a href="https://arxiv.org/abs/2403.02751" target="_blank" rel="noopener">Paper</a>. A
+          robot plans a safe path through a splat map.
+        </li>
+        <li>
+          Yuhang Zheng, Xiangyu Chen, Yupeng Zheng, Songen Gu, Runyi Yang, Bu Jin, Pengfei Li,
+          Chengliang Zhong, Zengmao Wang, Lina Liu, Chao Yang, Dawei Wang, Zhen Chen, Xiaoxiao Long,
+          and Meiqing Wang.
+          <b
+            >GaussianGrasper: 3D Language Gaussian Splatting for Open-vocabulary Robotic
+            Grasping.</b
+          >
+          arXiv preprint, 2024.
+          <a href="https://arxiv.org/abs/2403.09637" target="_blank" rel="noopener">Paper</a>. A
+          robot is told in words what to pick up.
+        </li>
+        <li>
+          Mazeyu Ji, Ri-Zhao Qiu, Xueyan Zou, and Xiaolong Wang.
+          <b>GraspSplats: Efficient Manipulation with 3D Feature Splatting.</b> arXiv preprint,
+          2024. <a href="https://arxiv.org/abs/2409.02084" target="_blank" rel="noopener">Paper</a>.
+        </li>
+        <li>
+          Yunzhi Yan, Haotong Lin, Chenxu Zhou, Weijie Wang, Haiyang Sun, Kun Zhan, Xianpeng Lang,
+          Xiaowei Zhou, and Sida Peng.
+          <b>Street Gaussians: Modeling Dynamic Urban Scenes with Gaussian Splatting.</b> arXiv
+          preprint, 2024.
+          <a href="https://arxiv.org/abs/2401.01339" target="_blank" rel="noopener">Paper</a>.
+          Driving scenes, with moving cars.
+        </li>
+        <li>
+          Yifan Liu, Chenxin Li, Chen Yang, and Yixuan Yuan.
+          <b
+            >EndoGaussian: Real-time Gaussian Splatting for Dynamic Endoscopic Scene
+            Reconstruction.</b
+          >
+          arXiv preprint, 2024.
+          <a href="https://arxiv.org/abs/2401.12561" target="_blank" rel="noopener">Paper</a>.
+          Surgery video, in medicine.
+        </li>
+      </ul>
+      <h3 id="reading-dynamic">Moving, talking, and generated splats</h3>
+      <ul class="reading">
+        <li>
+          Tianyi Xie, Zeshun Zong, Yuxing Qiu, Xuan Li, Yutao Feng, Yin Yang, and Chenfanfu Jiang.
+          <b>PhysGaussian: Physics-Integrated 3D Gaussians for Generative Dynamics.</b> CVPR 2024.
+          <a href="https://arxiv.org/abs/2311.12198" target="_blank" rel="noopener">Paper</a>.
+          Splats that move by physics, as in Chapter 6's spirit.
+        </li>
+        <li>
+          Jonathon Luiten, Georgios Kopanas, Bastian Leibe, and Deva Ramanan.
+          <b>Dynamic 3D Gaussians: Tracking by Persistent Dynamic View Synthesis.</b> arXiv
+          preprint, 2023.
+          <a href="https://arxiv.org/abs/2308.09713" target="_blank" rel="noopener">Paper</a>.
+        </li>
+        <li>
+          Guanjun Wu, Taoran Yi, Jiemin Fang, Lingxi Xie, Xiaopeng Zhang, Wei Wei, Wenyu Liu, Qi
+          Tian, and Xinggang Wang.
+          <b>4D Gaussian Splatting for Real-Time Dynamic Scene Rendering.</b> CVPR 2024.
+          <a href="https://arxiv.org/abs/2310.08528" target="_blank" rel="noopener">Paper</a>.
+        </li>
+        <li>
+          Shenhan Qian, Tobias Kirschstein, Liam Schoneveld, Davide Davoli, Simon Giebenhain, and
+          Matthias Nießner.
+          <b>GaussianAvatars: Photorealistic Head Avatars with Rigged 3D Gaussians.</b> arXiv
+          preprint, 2023.
+          <a href="https://arxiv.org/abs/2312.02069" target="_blank" rel="noopener">Paper</a>. Heads
+          that can be animated.
+        </li>
+        <li>
+          Minghan Qin, Wanhua Li, Jiawei Zhou, Haoqian Wang, and Hanspeter Pfister.
+          <b>LangSplat: 3D Language Gaussian Splatting.</b> CVPR 2024.
+          <a href="https://arxiv.org/abs/2312.16084" target="_blank" rel="noopener">Paper</a>.
+          Searching a splat scene with words.
+        </li>
+        <li>
+          Jiaxiang Tang, Jiawei Ren, Hang Zhou, Ziwei Liu, and Gang Zeng.
+          <b>DreamGaussian: Generative Gaussian Splatting for Efficient 3D Content Creation.</b>
+          arXiv preprint, 2023 (camera-ready 2024).
+          <a href="https://arxiv.org/abs/2309.16653" target="_blank" rel="noopener">Paper</a>.
+          Making a splat from a prompt or a picture.
+        </li>
+        <li>
+          Tong Wu, Yu-Jie Yuan, Ling-Xiao Zhang, Jie Yang, Yan-Pei Cao, Ling-Qi Yan, and Lin Gao.
+          <b>Recent Advances in 3D Gaussian Splatting.</b> arXiv preprint, 2024.
+          <a href="https://arxiv.org/abs/2403.11134" target="_blank" rel="noopener">Paper</a>. A
+          survey of the field.
+        </li>
+      </ul>
+      <h3 id="reading-tools">Open projects and tools</h3>
+      <ul class="reading">
+        <li>
+          <b>gsplat</b>, an open-source library for training and rendering splats on the graphics
+          chip.
+          <a href="https://github.com/nerfstudio-project/gsplat" target="_blank" rel="noopener"
+            >github.com/nerfstudio-project/gsplat</a
+          >. Vickie Ye and colleagues also describe it in a paper, "gsplat: An Open-Source Library
+          for Gaussian Splatting" (arXiv preprint, 2024):
+          <a href="https://arxiv.org/abs/2409.06765" target="_blank" rel="noopener"
+            >arxiv.org/abs/2409.06765</a
+          >.
+        </li>
+        <li>
+          <b>Brush</b>, a 3D reconstruction engine that uses Gaussian splatting and runs on desktop,
+          Android, and in browsers (Apache-2.0).
+          <a href="https://github.com/ArthurBrussee/brush" target="_blank" rel="noopener"
+            >github.com/ArthurBrussee/brush</a
+          >.
+        </li>
+        <li>
+          <b>SuperSplat</b>, a free, open-source tool for inspecting, editing, optimizing, and
+          publishing splats (MIT).
+          <a href="https://github.com/playcanvas/supersplat" target="_blank" rel="noopener"
+            >github.com/playcanvas/supersplat</a
+          >.
+        </li>
+        <li>
+          <b>Spark</b>, a splat renderer for THREE.js (MIT).
+          <a href="https://github.com/sparkjsdev/spark" target="_blank" rel="noopener"
+            >github.com/sparkjsdev/spark</a
+          >.
+        </li>
+        <li>
+          <b>antimatter15/splat</b>, a small WebGL viewer that renders splat scenes in the browser
+          without dependencies (MIT).
+          <a href="https://github.com/antimatter15/splat" target="_blank" rel="noopener"
+            >github.com/antimatter15/splat</a
+          >.
+        </li>
+        <li>
+          <b>KHR_gaussian_splatting</b>, a glTF extension for storing Gaussian splats, which its
+          page lists as ratified by the Khronos Group.
+          <a
+            href="https://github.com/KhronosGroup/glTF/tree/main/extensions/2.0/Khronos/KHR_gaussian_splatting"
+            target="_blank"
+            rel="noopener"
+            >github.com/KhronosGroup/glTF (extensions/2.0/Khronos/KHR_gaussian_splatting)</a
+          >.
         </li>
       </ul>
 
@@ -7656,6 +10058,89 @@ export const RECIPES = {
             >github.com/ryanjosephkamp/splashery/blob/main/docs/PACKS.md</a
           >
         </li>
+        <li id="ref-11">
+          Müller, M., Macklin, M., Chentanez, N., Jeschke, S., and Kim, T.-Y. "Detailed Rigid Body
+          Simulation with Extended Position Based Dynamics." <i>Computer Graphics Forum</i>, 2020.
+          <a href="https://doi.org/10.1111/cgf.14105" target="_blank" rel="noopener"
+            >doi.org/10.1111/cgf.14105</a
+          >
+        </li>
+        <li id="ref-12">
+          Macklin, M., Müller, M., and Chentanez, N. "XPBD: Position-Based Simulation of Compliant
+          Constrained Dynamics."
+          <i>Proceedings of the 9th International Conference on Motion in Games (MIG '16)</i>, ACM,
+          2016, pp. 49–54.
+        </li>
+        <li id="ref-13">
+          Yang, L., Kang, B., Huang, Z., Zhao, Z., Xu, X., Feng, J., and Zhao, H. "Depth Anything
+          V2." <i>Advances in Neural Information Processing Systems</i> (NeurIPS), 2024.
+          <a href="https://arxiv.org/abs/2406.09414" target="_blank" rel="noopener"
+            >arxiv.org/abs/2406.09414</a
+          >
+        </li>
+        <li id="ref-14">
+          Berman, H. M., Westbrook, J., Feng, Z., Gilliland, G., Bhat, T. N., Weissig, H.,
+          Shindyalov, I. N., and Bourne, P. E. "The Protein Data Bank."
+          <i>Nucleic Acids Research</i> 28(1), 2000, pp. 235–242.
+          <a href="https://doi.org/10.1093/nar/28.1.235" target="_blank" rel="noopener"
+            >doi.org/10.1093/nar/28.1.235</a
+          >
+        </li>
+        <li id="ref-15">
+          U.S. Geological Survey. "GeoJSON Summary Format." Earthquake Hazards Program.
+          <a
+            href="https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php"
+            target="_blank"
+            rel="noopener"
+            >earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php</a
+          >
+        </li>
+        <li id="ref-16">
+          "HYG Database." The Astronomy Nexus (astronexus.com), CC BY-SA 4.0.
+          <a href="https://www.astronexus.com/projects/hyg" target="_blank" rel="noopener"
+            >www.astronexus.com/projects/hyg</a
+          >
+        </li>
+        <li id="ref-17">
+          Meeus, J. <i>Astronomical Algorithms</i>, 2nd ed. Willmann-Bell, 1998. (A book; no link.)
+        </li>
+        <li id="ref-18">
+          Jet Propulsion Laboratory, Solar System Dynamics group. "Approximate Positions of the
+          Planets."
+          <a href="https://ssd.jpl.nasa.gov/planets/approx_pos.html" target="_blank" rel="noopener"
+            >ssd.jpl.nasa.gov/planets/approx_pos.html</a
+          >
+        </li>
+        <li id="ref-19">
+          Reed, I. S., and Solomon, G. "Polynomial Codes over Certain Finite Fields."
+          <i>Journal of the Society for Industrial and Applied Mathematics</i> 8(2), 1960, pp.
+          300–304.
+          <a href="https://doi.org/10.1137/0108018" target="_blank" rel="noopener"
+            >doi.org/10.1137/0108018</a
+          >
+        </li>
+        <li id="ref-20">
+          Project Nayuki. "QR Code generator library." MIT License.
+          <a
+            href="https://www.nayuki.io/page/qr-code-generator-library"
+            target="_blank"
+            rel="noopener"
+            >www.nayuki.io/page/qr-code-generator-library</a
+          >
+        </li>
+        <li id="ref-21">
+          Splat.js, an MIT-licensed library for training Gaussian splats in the browser (Stratum1
+          GmbH).
+          <a href="https://github.com/arrival-space/splat.js" target="_blank" rel="noopener"
+            >github.com/arrival-space/splat.js</a
+          >
+        </li>
+        <li id="ref-22">
+          Mozilla. "PDF.js." Apache License 2.0.
+          <a href="https://mozilla.github.io/pdf.js/" target="_blank" rel="noopener"
+            >mozilla.github.io/pdf.js</a
+          >
+        </li>
       </ol>
 
       <!-- ---- Quick reference ---- -->
@@ -7696,11 +10181,163 @@ drive(t, c, out, info) {
   info.data.pictures                     // page, count, go(n), next(), prev(), togglePlay()
 }</code></pre>
 
+      <h3 id="a-recipe">A recipe (a toy)</h3>
+      <pre><code>export const RECIPES = { "my-toy": {
+  options: [{ key, label, type, default }],   // saved in the link
+  controls: [{ key, label, type: "slider" | "toggle" | "pulse", ease }],
+  action: { key, label },                     // the tap
+  build(k, o) { /* k.sphere, k.box, k.part(name, { pivot, axis }), k.add(shape, { part, pos, color }) */ },
+  drive(t, c, out, info) { out.parts[name] = { angle }; },  // every frame
+  hands: { pieces, joints, ropes, material },  // the ✋ switch (Chapter 6)
+  handsOn: false, tiltLock: true, turntable: false,
+}};</code></pre>
+      <h3 id="the-controls">The controls</h3>
+      <div class="table-wrap">
+        <table>
+          <tbody>
+            <tr>
+              <td>Drag, pinch, scroll</td>
+              <td>Turn, zoom (two fingers roll only after a twist of about 17°)</td>
+            </tr>
+            <tr>
+              <td>Shift or Option/Alt and a drag; two-finger drag</td>
+              <td>Move the toy across the screen</td>
+            </tr>
+            <tr>
+              <td><b>R</b>, ↺, double-tap</td>
+              <td>Reset the view</td>
+            </tr>
+            <tr>
+              <td><b>1</b> to <b>5</b></td>
+              <td>Orbit, Poke, Paint, Magnet, Clay</td>
+            </tr>
+            <tr>
+              <td><b>F</b>, <b>Esc</b></td>
+              <td>Focus mode on, and back</td>
+            </tr>
+            <tr>
+              <td><b>[</b>, <b>G</b></td>
+              <td>Fold the side panel, open the gallery (on a computer)</td>
+            </tr>
+            <tr>
+              <td>✋</td>
+              <td>Hands-on: drag to pick up, let go to toss, ↺ to send home</td>
+            </tr>
+            <tr>
+              <td>Padlock, record player</td>
+              <td>Tilt lock (a drag turns left and right only), turntable when idle</td>
+            </tr>
+            <tr>
+              <td><code>?labs=1</code> or <code>?labs=0</code></td>
+              <td>Show or hide the toys not yet ready for everyone</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <h3 id="key-numbers">Key numbers</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>What</th>
+              <th>Number</th>
+              <th>Chapter</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Splats a device is asked for</td>
+              <td>60,000 up to 400,000, by tier</td>
+              <td>2</td>
+            </tr>
+            <tr>
+              <td>Splats of an equation toy</td>
+              <td>100 to 10,000</td>
+              <td>3</td>
+            </tr>
+            <tr>
+              <td>Characters in one equation field</td>
+              <td>240</td>
+              <td>3</td>
+            </tr>
+            <tr>
+              <td>Option keys of the equation toy</td>
+              <td>16</td>
+              <td>3</td>
+            </tr>
+            <tr>
+              <td>Moments of <var>t</var></td>
+              <td>12</td>
+              <td>3</td>
+            </tr>
+            <tr>
+              <td>Parts, besides the body</td>
+              <td>15</td>
+              <td>2</td>
+            </tr>
+            <tr>
+              <td>Tokens, levers, lever groups</td>
+              <td>48, 96, 6</td>
+              <td>2</td>
+            </tr>
+            <tr>
+              <td>Hands-on: gravity, fastest throw</td>
+              <td>26 and 4 toy radii per second (squared for gravity)</td>
+              <td>6</td>
+            </tr>
+            <tr>
+              <td>Hands-on: collision points of a toy</td>
+              <td>64, from up to 6,000 splats</td>
+              <td>6</td>
+            </tr>
+            <tr>
+              <td>Stars in the night sky</td>
+              <td>5,071</td>
+              <td>7</td>
+            </tr>
+            <tr>
+              <td>Largest molecule, volume</td>
+              <td>250,000 atoms; 8 million voxels</td>
+              <td>7</td>
+            </tr>
+            <tr>
+              <td>Depth model</td>
+              <td>27 MB, loaded only for your own photo</td>
+              <td>8</td>
+            </tr>
+            <tr>
+              <td>Moving photo, video clip length</td>
+              <td>First 8 seconds</td>
+              <td>8</td>
+            </tr>
+            <tr>
+              <td>QR code error correction</td>
+              <td>L 7%, M 15%, Q 25%, H 30% of codewords</td>
+              <td>9</td>
+            </tr>
+            <tr>
+              <td>A link</td>
+              <td>
+                Up to 12,288 characters of scene; version 21 QR code up to 711 characters at M
+              </td>
+              <td>9</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <h3 id="where-the-files-go">What goes where</h3>
+      <p>
+        <b>Splat files</b> (<code>.ply</code>, <code>.sog</code>, <code>.splat</code>,
+        <code>.spz</code>), <b>models</b> (glTF, GLB, OBJ, STL), <b>pictures</b> (PDF, photo, GIF,
+        video), <b>data</b> (CSV, DICOM, NIfTI, TIFF, LAS, LAZ, PDB) are opened on your device and
+        never uploaded. A link carries settings, not files.
+      </p>
+
       <footer>
         <p>
           The Tinkerer's Manual, first published September 28, 2026 and updated October 11, 2026.
           Part of
-          <a href="https://ryanjosephkamp.github.io/splashery/" target="_blank" rel="noopener"
+          <a href="https://ryanjosephkamp.github.io/splashery/site/" target="_blank" rel="noopener"
             >Splashery</a
           >, a toy box of 3D Gaussian splats that runs in your browser. Every picture here was made
           with Splashery itself.
