@@ -4,13 +4,13 @@ Where Splashery stands, in short. The Operator session keeps this file; each lan
 in [handoff/](handoff/). The ground rules are in [CLAUDE.md](../CLAUDE.md); how the parallel lanes
 work is in [OPERATING.md](OPERATING.md).
 
-## Now (October 10, 2026, about 23:45 UTC)
+## Now (October 11, 2026, about 06:00 UTC)
 
-The Operator is changing hands on October 10, 2026: `session_012GmKRUMZLir2nb27Bo8Cu2` (Opus 5.5,
-since October 7) hands over to a fresh Opus 5.5 session at the owner's go, by
-`.claude/skills/operator-handover/SKILL.md`. The new Operator puts its own session id here in its
-first Ops PR. This section is current. The sections below it are history. The runbook is
-[OPERATOR.md](OPERATOR.md).
+The Operator is `session_01A4ChKuJQqgoCrWAzQMpD4R` (Opus 5.5), since October 10, 2026, 23:48 UTC. It
+took over from `session_012GmKRUMZLir2nb27Bo8Cu2` (Opus 5.5, October 7 to 10) by
+`.claude/skills/operator-handover/SKILL.md`; its own handover is due by October 12, 2026, or sooner
+at about 400k tokens of context. This section is current. The sections below it are history. The
+runbook is [OPERATOR.md](OPERATOR.md).
 
 **Effort (the owner's call of October 8, 2026):** every worker, lanes and Integrators alike, runs at
 high effort, and so do his Codex tasks. A session's effort is set in the Claude app; a message can't
@@ -21,7 +21,7 @@ change it.
 (`tools/suite.mjs --gl=llvmpipe --jobs=2 --recheck`), the lanes fix what the batch broke, and the
 batch merges as one PR.
 
-**Main** is at batch 6 (#500). Merged October 9 and 10:
+**Main** is at batch 7 (#524). Merged October 9 to 11:
 
 - #457: Hands-on H1 and H5 (the Enigma, clothing, the handoffs) and Photo sharp view r3
 - #466: the October 9 walkthrough and manual reviews, triaged into lanes
@@ -38,26 +38,38 @@ batch merges as one PR.
 - #504: the owner's evening walkthrough of October 10, triaged (docs/reviews/2026-10-10-evening/)
 - #506: the bake-off kit (`.claude/skills/bakeoff/`, `tools/bakeoff.mjs`), the operator-handover
   skill, and notes on keeping the Operator cheap
+- #524: batch 7: Fix11 (#501, engine #502), QR r5 (#507), Live r9 part 2 (#505), Kit lab's handoff
+  (#503), Codex task 34's Tinkerer's Manual audit (#509, a report), the lanes' rotation rule, and
+  the Google Search Console tag on the home page
 
 **Lanes running** (rows, sessions and files in WORKSTREAMS.md):
 
-- **Fix11** (Opus, #501 and engine #502): the tests that fail on main and the flaky ones.
-- **QR r5** (Opus): the evening walkthrough's QR notes. Its cards are marked; it fixes any notes.
-- **Live r9 part 2** (Opus): built-in multi-note tunes for Sound in a box; cards waiting on marks.
-- **Manual r4** (Sonnet): the splat-budget table on the site, a "What Splashery can do" page, and
-  the nine demo placeholders. Levels 6 to 10 and layout changes wait for the owner's audit.
+- **Manual r4** (Sonnet, #513): the splat-budget table, "What Splashery can do" and the demo
+  placeholders. READY; merges after a targeted run and the owner's marks.
+- **Manual r5** (Sonnet, fresh, from Manual r4's branch): chapter pages, the Codex audit's fixes,
+  and the chapters "How Splashery is built" and "Share links and QR codes". A second Codex audit
+  follows.
+- **Live r10** (Opus, fresh): Sound in a box's responsiveness audit, its modes explained with
+  references, and particle colors for it and the Chladni plate.
+- **Bake-off r2** (Opus): new codes for all 40 entries, the new blind page, and the judges' cards
+  for the new contestant's eight entries.
 
-**Open with the owner:** the bake-off's second round: GPT-6.1 Sol's eight entries are running in
-Codex (since October 10, about 23:30 UTC); then the judges check them, all 40 entries get new codes
-on a new blind page (the bakeoff skill), and the models stay hidden until he has marked them all.
-Also: his audit of the Tinkerer's Manual, Levels 1 to 5; his walkthrough of the new site at /site/
-and the front-door call; Codex task 32 (#479), held for his in-depth review.
+Lanes now rotate to fresh sessions (OPERATOR.md, "Rotation"). Finished and safe to archive with the
+owner's OK: Fix11, QR r5, Live r9, Kit lab, Arcade r3, Fix10, Photo depth and QR r4.
 
-**Next for the Operator:** the handover's readback and "take over"; batch the READY lanes (Fix11, QR
-r5, Live r9 part 2, then Manual r4) with full suites; bake-off round 2 when Sol's PRs exist; a Video
-to 3D round (the owner wants to return to it soon); the front-door switch after his /site/
-walkthrough, Manual r4 and Fix11. Pace: three to four workers until the weekly reset (Wednesday,
-October 14, 4 p.m. ET).
+**Open with the owner:** marking the bake-off's 40 cards when the page is ready, then the reveal;
+Search Console (Verify, then submit site/sitemap.xml); the Codex prototype run (pilot #510 to #512
+done and checked; the other nine prompts are on his private plan page); his /site/ walkthrough and
+the front-door call; Codex task 32 (#479), held for his in-depth review. Pace (his call of October
+11, 2026): about 70% of the week used; finish the planned work before the weekly reset (Wednesday,
+October 14, 4 p.m. ET), with no new Claude-built toys until then; Codex builds first drafts of new
+toys, and a Claude lane polishes them after the reset.
+
+**Next for the Operator:** merge Manual r4 (#513); start Site r2 (Sonnet, fresh: What's New as a
+visual gallery of new toys, features and before-and-after fixes; "Gallery" renamed "Playground"; a
+date added for every toy with a newest-first view; description tags on the /site/ pages) once #513
+is in; batch Manual r5 and Live r10 when READY; the bake-off reveal after every card is marked; the
+Operator's own handover at about 400k tokens of context.
 
 ## State of main (2026-10-02, history)
 

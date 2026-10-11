@@ -3745,7 +3745,7 @@
     "u": "toys/qr-damage/",
     "k": "toy",
     "s": "Studio",
-    "d": "Pick a damage in the Toy tab and tap the code to add it. Watch the meter.",
+    "d": "Pick a damage in the Toy tab, then tap the code to place it. Watch the meter.",
     "w": "qr damage lab studio studio qr code damage scratch sticker tear burn smudge blur error correction reed solomon heal scan meter levels qr-damage",
     "i": "../assets/toys/qr-damage/thumb.webp",
     "l": 1
@@ -3755,7 +3755,7 @@
     "u": "toys/qr-three/",
     "k": "toy",
     "s": "Studio",
-    "d": "Tap to pull the three codes apart. Read all three in the Toy tab.",
+    "d": "Tap to pull the three codes apart. Read all three, or pick their colors, in the Toy tab.",
     "w": "three qr codes in one studio studio qr code color rgb red green blue three codes multiplex channels qr-three",
     "i": "../assets/toys/qr-three/thumb.webp",
     "l": 1
@@ -3765,7 +3765,7 @@
     "u": "toys/qr-picture/",
     "k": "toy",
     "s": "Studio",
-    "d": "Pick a picture or open your own, then tap to turn the tiles over.",
+    "d": "Pick a picture or open your own, then tap to send a ripple through it.",
     "w": "picture qr studio studio qr code picture photo halftone image art custom scan png qr-picture",
     "i": "../assets/toys/qr-picture/thumb.webp",
     "l": 1
