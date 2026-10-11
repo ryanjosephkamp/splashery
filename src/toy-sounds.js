@@ -2832,16 +2832,19 @@ export const TOY_SOUNDS = {
   ],
   // Lane QR lab r2: soft, not electronic. A light knock as a part lifts; a
   // scrape and a soft thud as damage lands; a slide out and a knock back.
+  // Lane QR r5 (the owner's walkthrough of October 10, 2026): the wind under
+  // How a QR code works and the whoosh of the three codes coming apart, both
+  // quieter.
   "qr-anatomy": [
     { voice: "wood", f: 820, decay: 0.18, vol: 0.16 },
-    { voice: "breath", f: 1100, to: 0.8, decay: 0.5, vol: 0.07 },
+    { voice: "breath", f: 1100, to: 0.8, decay: 0.5, vol: 0.025 },
   ],
   "qr-damage": [
     { voice: "breath", f: 520, to: 0.6, decay: 0.45, vol: 0.16 },
     { voice: "thud", at: 0.3, f: 130, decay: 0.25, vol: 0.3 },
   ],
   "qr-three": [
-    { voice: "breath", f: 900, to: 1.1, decay: 1.1, vol: 0.12 },
+    { voice: "breath", f: 900, to: 1.1, decay: 1.1, vol: 0.04 },
     { voice: "wood", at: 2.6, f: 660, decay: 0.15, vol: 0.12 },
   ],
   // Lane QR craft: soft and wooden, not electronic. Tiles turning over: a
@@ -2860,12 +2863,9 @@ export const TOY_SOUNDS = {
     { voice: "wood", at: 1.05, f: 1220, decay: 0.05, vol: 0.09 },
     { voice: "thud", at: 1.4, f: 150, decay: 0.2, vol: 0.12 },
   ],
-  // A soft breath as the scanner's line sweeps, then a gentle low beep of a
-  // read (a sine, not a whistle).
-  barcodes: [
-    { voice: "breath", f: 900, to: 1.05, decay: 1.2, vol: 0.025 },
-    { voice: "bell", at: 1.9, f: 660, decay: 0.25, vol: 0.16 },
-  ],
+  // A soft breath as the scanner's line sweeps (lane QR r5: the note of a
+  // read at the end is gone, the owner's call of October 10, 2026).
+  barcodes: [{ voice: "breath", f: 900, to: 1.05, decay: 1.2, vol: 0.025 }],
   "splat-field": { voice: "breath", f: 520, to: 0.75, decay: 3.4, vol: 0.2 },
   // ---- Science (lane Science) ----------------------------------------------------------
   // Quiet and subtle (PACKS.md 7e): atoms make no sound, so the jiggle is a faint

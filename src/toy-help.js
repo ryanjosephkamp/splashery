@@ -1809,18 +1809,20 @@ export const TOY_HELP = {
       "A QR code is a grid of dark and light modules with a fixed plan. Three finder patterns mark the corners, timing patterns set the grid, alignment patterns help at an angle, and the format information says the error correction level and the mask. The rest is your text in 8-bit codewords, plus Reed–Solomon codewords that can rebuild damaged ones.\n\nTap to light up each part. Or type your own text in the Toy tab and step through the encoding: the mode, the count, the data bits, padding, error correction, interleaving, the zigzag placement and the eight masks with their penalty scores. Each step follows ISO/IEC 18004 and is checked against another encoder.",
   },
   "qr-damage": {
-    howTo: "Pick a damage in the Toy tab and tap the code to add it. Watch the meter.",
+    howTo:
+      "Pick a damage in the Toy tab, then tap the code to place it: a sticker or a smudge lands where you tap, and a tear or a burn starts from the nearest corner. Watch the meter.",
     about:
-      "QR codes still scan when part of them is lost, because error correction can rebuild missing codewords: about 7, 15, 25 or 30 percent at levels L, M, Q and H.\n\nHere you scratch a code, stick a label on it, tear or burn a corner, smudge it, or do what only a code of splats allows: blur, shrink, grow, jitter or fade its splats, drift its color, curve it, tilt it or set it moving. After each change the meter reads the very picture on the stage and counts each block's lost codewords against what it can fix. Show all four levels side by side, or tap Heal it to watch Reed–Solomon decoding set each block right.",
+      "QR codes still scan when part of them is lost, because error correction can rebuild missing codewords: about 7, 15, 25 or 30 percent at levels L, M, Q and H.\n\nHere you scratch a code, stick a label on it where you tap, tear it from the corner or the edge nearest your tap, burn it from the nearest corner, smudge it, or do what only a code of splats allows: blur, shrink, grow, jitter or fade its splats, drift its color, curve it, tilt it or set it moving. After each change the meter reads the very picture on the stage and counts each block's lost codewords against what it can fix. Show all four levels side by side, or tap Heal it to watch Reed–Solomon decoding set each block right.",
   },
   "qr-three": {
-    howTo: "Tap to pull the three codes apart. Read all three in the Toy tab.",
+    howTo:
+      "Tap to pull the three codes apart. Read all three, or pick their colors, in the Toy tab.",
     about:
-      "One square holds three QR codes here: the first sets each module's red, the second its green and the third its blue. So each module is one of eight colors, from white to black.\n\nSplashery's reader splits the picture into its red, green and blue and reads each one as an ordinary code, for three times the data in the same square. An ordinary phone reader sees only gray, which comes mostly from green, so it usually reads the green code or nothing. Tap the square to pull its three codes apart and back. Type your own three texts in the Toy tab.",
+      "One square holds three QR codes here: the first sets each module's red, the second its green and the third its blue. So each module is one of eight colors, from white to black.\n\nSplashery's reader splits the picture into its red, green and blue and reads each one as an ordinary code, for three times the data in the same square. An ordinary phone reader sees only gray, which comes mostly from green, so it usually reads the green code or nothing. Tap the square to pull its three codes apart and back. Type your own three texts in the Toy tab, and pick the color each code shows in when pulled apart.",
   },
   // Lane QR craft.
   "qr-picture": {
-    howTo: "Pick a picture or open your own, then tap to turn the tiles over.",
+    howTo: "Pick a picture or open your own, then tap to send a ripple through it.",
     about:
       "A QR code reader decides each module from a sample at its center, so the rest of a module can carry a picture. Here every module keeps its bit in a dot at its middle, and the rest is a halftone of the picture: small dark and light dots, spread by error diffusion so they average out to the picture's tones. Only where a module would read wrong do a few of its dots take its color. The eyes, the timing lines, and the format information stay plain, so a reader still finds the code.\n\nThe toy picks the mask that fits the picture best, reads its own code at phone size and smaller, and nudges a few more dots until it scans. A bigger code size shows more detail. If it still won't scan, Make it scan finds the closest version that does: more contrast, a bigger center dot, or a higher error correction level. Your picture never leaves your device.",
   },
