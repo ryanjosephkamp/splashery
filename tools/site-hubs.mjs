@@ -277,6 +277,79 @@ drive(t, c, out) {
 </article>`;
     },
 
+    can(page, { up }) {
+      const open = countToys("all");
+      const labs = publicToys.filter((t) => t.labs).length;
+      // A link to a toy's page, with a "labs" badge while the toy is behind the labs switch.
+      const toy = (id, text) => {
+        const t = toyById(id);
+        return `<a href="${up}toys/${id}/">${esc(text || t.label)}</a>${t.labs ? ' <span class="badge">labs</span>' : ""}`;
+      };
+      return `${intro(page)}
+<article class="prose">
+<section aria-labelledby="h-where">
+<h2 id="h-where">What is here today</h2>
+<p>This page lists what Splashery does now. It describes only what is built. As of this build there are ${open} toys on the public shelves, and ${labs} more behind the <strong>labs switch</strong>. Labs is where newer parts wait until they are ready: add <code>?labs=1</code> to the address of the gallery to turn it on (the browser remembers it, and <code>?labs=0</code> turns it off). Anything marked <span class="badge">labs</span> below is behind that switch.</p>
+<p>Splashery is made of static files that run in your browser. Nothing you open is uploaded, and there is no account.</p>
+</section>
+<section aria-labelledby="h-play">
+<h2 id="h-play">Play with it</h2>
+<ul>
+<li><strong>Hands-on physics.</strong> With the hand switch on, a drag picks up whatever is under your finger and a quick let-go tosses it. It lands, bounces, and settles on the floor, and soft toys squish. Every toy plays this way, scans included, as one rigid body; a toy's own recipe can instead make its pieces separate bodies. This is not behind the labs switch.</li>
+<li><strong>Toys with moving parts.</strong> Hinges, pivots, sliders, and morphs run on the graphics chip, so a chest opens and a windmill turns without rebuilding anything.</li>
+<li><strong>Liquids, gases, and flames.</strong> A recipe can declare a fluid, which is simulated while the toy is open and drawn as its own splats, one per particle. See ${toy("fluid-lab")}.</li>
+<li><strong>Instruments that are played.</strong> A keyboard toy can play songs from its own list, a MIDI file, or a tune pasted as ABC notation, and every key, hammer, and string moves as a solid piece.</li>
+<li><strong>The viewer's controls.</strong> Focus mode hides everything but the toy (the <kbd>F</kbd> key or the focus button; <kbd>Esc</kbd> brings the rest back). On a computer, <kbd>[</kbd> folds the side panel and <kbd>G</kbd> opens the gallery. The Detail setting (Auto, High, or Max, and with labs on a slider from 60,000 to 400,000 splats) lives in your browser only, never in a link.</li>
+</ul>
+</section>
+<section aria-labelledby="h-make">
+<h2 id="h-make">Make your own</h2>
+<ul>
+<li><strong>Toys from rules, in the browser.</strong> A recipe of a few kilobytes becomes anywhere from 60,000 to 400,000 splats on your device, depending on the device and the Detail setting, so there is no multi-megabyte file to download. The <a href="${up}../manual/">Tinkerer's Manual</a> teaches recipes from the math of one splat up to your own toys.</li>
+<li><strong>Equations as a language.</strong> In ${toy("splat-equation")}, type where splats go and what color they are, as formulas in <var>u</var>, <var>v</var>, and <var>t</var>, and get an animated shape, with plain messages instead of crashes. It has three looks: Solid, Fine, and Dots.</li>
+<li><strong>A whole scene in a link.</strong> A share link carries the toy, its options, and the camera, compressed into the address itself. No server is involved. A link carries settings, not your files: a photo or a splat file from your device has to be opened again by whoever opens the link. <a href="${up}learn/scene-format/">The scene format</a> says exactly what is in one.</li>
+</ul>
+</section>
+<section aria-labelledby="h-own">
+<h2 id="h-own">Turn your own things into splats</h2>
+<p>Everything in this section happens on your device. Nothing is sent anywhere.</p>
+<ul>
+<li><strong>Splat files.</strong> The viewer opens <code>.ply</code>, <code>.sog</code>, <code>.splat</code>, and <code>.spz</code> files. (Version 4 SPZ files need a decoder Splashery does not ship, and are refused with a message.) The Scans shelf holds captures with their licenses and credits.</li>
+<li><strong>Photos.</strong> ${toy("photo-3d")} runs a depth model on your device, works out how far each part of a photo is, and rebuilds it as splats at their depths. ${toy("moving-photo-3d")} does the same for a moving photo.</li>
+<li><strong>3D models.</strong> ${toy("model-splats")} opens a glTF or GLB file, an OBJ with its MTL, or an STL file and turns it into splats: flat discs on the surface, more of them where there is detail, colored from the model's texture, vertex colors, or material.</li>
+<li><strong>PDFs, books, and albums.</strong> ${toy("your-book")} turns the pages of a PDF as paper. ${toy("photo-album")} opens several photos at once, and ${toy("picture-frame")} lets you list them and move each up or down.</li>
+<li><strong>Songs.</strong> ${toy("song-landscape")} turns a song you open into a 3D field of its spectrogram, and ${toy("chladni-plate")} shows sand finding a plate's still lines.</li>
+<li><strong>QR codes.</strong> ${toy("qr-code")} makes a code from a link, plain text, a Wi-Fi network, a contact card, or an email, and builds it from splats. After every change it reads the code back to check that it scans. A Wi-Fi password is not kept in a link.</li>
+</ul>
+</section>
+<section aria-labelledby="h-live">
+<h2 id="h-live">Camera, microphone, and screen</h2>
+<p>A toy can read the microphone, the camera, or a shared screen, but only after you tap a button for it. Nothing is requested before that tap. While a source is on, a small "Live" pill with a Stop button shows at the top of the page, and the sound or pictures stay on your device: nothing is recorded or sent. Two examples are ${toy("room-echo")} (clap, and it measures how long the room rings) and ${toy("splat-mirror")} (your camera as splats, with a depth model of about 27 MB that loads only after you start the camera).</p>
+</section>
+<section aria-labelledby="h-worlds">
+<h2 id="h-worlds">Worlds</h2>
+<p>A world is a small place you walk around in, built on your device from recipes and a seed, with a start screen, a list of places, collision, a character, and a camera that follows. In splats mode everything you see is splats. In hybrid mode the ground, water, sky, and signs are lit models, and only the props and the near grass stay splats, so "everything is splats" holds for the toys but not for every part of every world. Worlds are behind the labs switch <span class="badge">labs</span> (<a href="${up}../worlds/?labs=1">open the worlds</a>).</p>
+</section>
+<section aria-labelledby="h-unique">
+<h2 id="h-unique">What other splat tools don't do, as far as we know</h2>
+<p>PlayCanvas is the engine that draws the splats, and its editor, SuperSplat, works on captured splat files: you crop, clean, and arrange a capture. Splashery starts from the other end, because most of its toys are never captured at all. We have not tried every tool, so read this list as "to our knowledge":</p>
+<ul>
+<li>toys made from rules, in the browser, with no big file to download;</li>
+<li>equations as a language for splat shapes;</li>
+<li>moving parts inside one splat cloud, run on the graphics chip;</li>
+<li>hands-on physics on splats: toss, stack, pull apart, and pour;</li>
+<li>photos, videos, PDFs, QR codes, real science data, the night sky, and medical volumes, all as splats;</li>
+<li>a whole scene in a link, with no server.</li>
+</ul>
+</section>
+<section aria-labelledby="h-more">
+<h2 id="h-more">Where to go next</h2>
+<p>The same lists, with the code behind each claim, are in the manual's chapters <a href="${up}../manual/#more">What else Splashery does now</a> and <a href="${up}../manual/#unique">What Splashery can do that other splat tools can't</a>. The <a href="${up}toys/">toy pages</a> and <a href="${up}tools/">tools</a> show each one working.</p>
+<p class="actions"><a class="button primary" href="${up}../">Open the gallery${arrow}</a><a class="button" href="${up}learn/">Back to Learn</a></p>
+</section>
+</article>`;
+    },
+
     made(page, { up }) {
       const toys = countToys("all");
       return `${intro(page)}

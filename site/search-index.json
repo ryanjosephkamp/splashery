@@ -4424,6 +4424,13 @@
     "w": "how 3d gaussian splats work a soft colored blob, hundreds of thousands of them, sorted and blended: what a splat is and what a recipe is, with small drawings. learn"
   },
   {
+    "t": "What Splashery can do",
+    "u": "learn/can-do/",
+    "k": "page",
+    "d": "Everything on the site today, which parts are behind the labs switch, and what other splat tools don't do, as far as we know.",
+    "w": "what splashery can do everything on the site today, which parts are behind the labs switch, and what other splat tools don't do, as far as we know. learn"
+  },
+  {
     "t": "The lab notebook",
     "u": "learn/notebook/",
     "k": "page",
@@ -4443,6 +4450,13 @@
     "k": "page",
     "d": "Put a toy on your own page, and how a scene link carries a toy and its settings.",
     "w": "embed and share put a toy on your own page, and how a scene link carries a toy and its settings. learn"
+  },
+  {
+    "t": "How many splats? What a bigger budget does",
+    "u": "../manual/#splat-count",
+    "k": "page",
+    "d": "The Kit lab's table: 140,000 against 200,000 splats on 24 views, and what changed in edges, speckle, and shimmer.",
+    "w": "how many splats? what a bigger budget does the kit lab's table: 140,000 against 200,000 splats on 24 views, and what changed in edges, speckle, and shimmer. learn"
   },
   {
     "t": "Writing toy recipes",
@@ -4471,6 +4485,13 @@
     "k": "page",
     "d": "What a 3D Gaussian splat is, how hundreds of thousands of them are sorted and blended into a picture, and what a toy recipe is.",
     "w": "how 3d gaussian splats work what a 3d gaussian splat is, how hundreds of thousands of them are sorted and blended into a picture, and what a toy recipe is. a soft colored blob, a lot of them, and a recipe: the whole idea, with pictures."
+  },
+  {
+    "t": "What Splashery can do",
+    "u": "learn/can-do/",
+    "k": "page",
+    "d": "Everything Splashery does today, which parts are behind the labs switch, and what other 3D Gaussian splat tools don't do, as far as we know.",
+    "w": "what splashery can do everything splashery does today, which parts are behind the labs switch, and what other 3d gaussian splat tools don't do, as far as we know. what is on the site now, what is still in labs, and what is different about it."
   },
   {
     "t": "How Splashery is made",

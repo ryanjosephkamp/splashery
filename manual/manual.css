@@ -1011,3 +1011,386 @@ details.fold details.fold {
     max-width: 100%;
   }
 }
+
+/* The budget tables (Level 2, "How many splats?"): they scroll inside their own box, with the toy's
+   name staying in view. Color is never the only sign: worse values are bold, better ones plain. */
+.budget-wrap {
+  max-height: 70vh;
+  overflow: auto;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--panel);
+}
+.budget-wrap:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+table.budget {
+  min-width: 560px;
+  margin: 0;
+}
+table.budget.summary {
+  min-width: 440px;
+}
+.table-note {
+  margin: 14px 0 0;
+  font-size: 15px;
+}
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+table.budget td,
+table.budget th {
+  white-space: nowrap;
+}
+table.budget thead th {
+  white-space: normal;
+  min-width: 90px;
+}
+table.budget thead th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: var(--tip);
+  font-size: 13px;
+}
+table.budget tbody th {
+  position: sticky;
+  left: 0;
+  background: var(--panel);
+  border-left: 0;
+  font-weight: 600;
+  white-space: nowrap;
+  z-index: 1;
+}
+table.budget td.pair {
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+table.budget td.worse {
+  color: var(--warn);
+  font-weight: 700;
+}
+table.budget td.better {
+  color: var(--good);
+}
+.swatch {
+  display: inline-block;
+  padding: 0 6px;
+  border-radius: 6px;
+  border: 1px solid var(--line);
+  font-size: 13px;
+}
+.swatch.worse {
+  color: var(--warn);
+  font-weight: 700;
+}
+.swatch.better {
+  color: var(--good);
+}
+@media print {
+  .budget-wrap {
+    max-height: none;
+    overflow: visible;
+    border: 0;
+  }
+  table.budget {
+    min-width: 0;
+    font-size: 9pt;
+  }
+  table.budget thead th,
+  table.budget tbody th {
+    position: static;
+  }
+}
+
+/* The grammar as tracks (Level 3). */
+.rr-text {
+  margin: 10px 0 4px;
+  min-height: 2.4em;
+}
+.rr-rules {
+  max-height: 520px;
+  overflow: auto;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 4px 12px 12px;
+  background: var(--panel);
+}
+.rr-rule h5 {
+  margin: 14px 0 4px;
+  font:
+    600 14px ui-monospace,
+    Menlo,
+    Consolas,
+    monospace;
+  color: var(--muted);
+}
+.rr-scroll {
+  overflow-x: auto;
+}
+.rr-svg {
+  display: block;
+  max-width: none;
+  font:
+    13px ui-monospace,
+    Menlo,
+    Consolas,
+    monospace;
+}
+.rr-rail {
+  fill: none;
+  stroke: var(--svg-soft, var(--muted));
+  stroke-width: 1.6;
+}
+.rr-end {
+  fill: var(--muted);
+}
+.rr-t rect,
+.rr-words rect {
+  fill: var(--panel);
+  stroke: var(--ink);
+  stroke-width: 1.2;
+}
+.rr-nt rect {
+  fill: var(--tip);
+  stroke: var(--accent);
+  stroke-width: 1.2;
+}
+.rr-svg text {
+  fill: var(--ink);
+}
+.rr-note {
+  fill: var(--muted);
+  font-style: italic;
+  font-size: 11px;
+}
+.rr-nt a {
+  cursor: pointer;
+}
+.rr-nt a:hover rect,
+.rr-nt a:focus-visible rect {
+  stroke-width: 2.4;
+}
+/* A walk: what it passed is bold and colored; color is never the only sign (the box is thicker). */
+.rr-svg .on.rr-t rect,
+.rr-svg .on.rr-nt rect,
+.rr-svg .on.rr-words rect {
+  stroke: var(--heat-solid, #e8384f);
+  stroke-width: 3;
+  fill: color-mix(in srgb, var(--heat-solid, #e8384f) 14%, var(--panel));
+}
+.rr-svg text.on {
+  fill: var(--heat-solid, #e8384f);
+  font-weight: 700;
+}
+.rr-svg path.on {
+  stroke: var(--heat-solid, #e8384f);
+  stroke-width: 3;
+}
+label.inline {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  font-size: 14px;
+}
+
+/* The second set of demos (Levels 1 to 3). */
+.demo-live fieldset {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 6px 10px 8px;
+  margin: 0;
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+}
+.demo-live legend {
+  font-size: 13px;
+  font-weight: 600;
+  padding: 0 6px;
+  color: var(--muted);
+}
+.sw {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  border-radius: 4px;
+  border: 1px solid var(--line);
+  vertical-align: -0.12em;
+}
+.sw.big {
+  width: 1.6em;
+  height: 1.6em;
+  vertical-align: -0.4em;
+}
+table.numbers {
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+  font-size: 13px;
+}
+table.numbers th[scope="row"] {
+  font-weight: 600;
+  white-space: nowrap;
+  border-left: 0;
+  background: transparent;
+}
+table.numbers td {
+  white-space: pre;
+}
+table.numbers tr.changed th,
+table.numbers tr.changed td {
+  color: var(--warn);
+  font-weight: 700;
+}
+table.numbers tr.changed th::after {
+  content: " ◀ changed";
+  font-weight: 400;
+  font-size: 11px;
+}
+table.blend tr.later {
+  opacity: 0.45;
+}
+table.blend td,
+table.blend th {
+  white-space: nowrap;
+}
+.order {
+  margin: 0;
+  padding-left: 1.4em;
+  display: grid;
+  gap: 4px;
+  font-size: 14px;
+}
+.order button {
+  padding: 2px 8px;
+  font-size: 12px;
+  margin-left: 6px;
+}
+.readout.result {
+  margin: 10px 0 0;
+}
+.code-lines {
+  display: grid;
+  gap: 6px;
+}
+.demo-live button.code-line {
+  text-align: left;
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+  font-size: 11.5px;
+  line-height: 1.35;
+  padding: 6px 8px;
+  white-space: pre;
+  overflow-x: auto;
+  background: var(--code-bg);
+  color: var(--code-ink);
+}
+.demo-live button.code-line code {
+  background: none;
+  padding: 0;
+  font: inherit;
+  white-space: pre;
+}
+.demo-live button.code-line.hot,
+.demo-live button.code-line[aria-pressed="true"] {
+  background: color-mix(in srgb, var(--accent) 18%, var(--code-bg));
+  color: var(--ink);
+  border-color: var(--accent);
+  box-shadow: inset 4px 0 0 var(--accent);
+}
+.field-list {
+  display: grid;
+  gap: 8px;
+  max-height: 520px;
+  overflow: auto;
+  padding-right: 4px;
+}
+.field-row {
+  display: grid;
+  grid-template-columns: 4.2em minmax(0, 1fr);
+  gap: 2px 8px;
+  align-items: center;
+}
+.field-row .note {
+  grid-column: 2;
+  font-size: 12px;
+  color: var(--muted);
+}
+.demo-live .err,
+.demo-live .diff-head {
+  margin: 8px 0 4px;
+  font-size: 14px;
+}
+.demo-live .diff-head {
+  color: var(--muted);
+}
+#pj-top {
+  margin-top: 10px;
+}
+@media print {
+  .rr-rules,
+  .rr-text {
+    display: none;
+  }
+}
+.demo-live [hidden] {
+  display: none !important;
+}
+.demo-live button.code-line {
+  display: block;
+  width: 100%;
+  text-align: left;
+}
+.demo-live button.code-line code {
+  display: block;
+  text-align: left;
+  overflow-x: auto;
+}
+.demo-live button.code-line {
+  overflow: visible;
+}
+.code-lines {
+  grid-template-columns: minmax(0, 1fr);
+  min-width: 0;
+}
+.demo-live button.code-line {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.numgrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(104px, 1fr));
+  gap: 6px;
+  margin-top: 12px;
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+  font-size: 13px;
+}
+.numgrid > div {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 6px;
+  align-items: baseline;
+  padding: 5px 8px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+}
+.numgrid .k {
+  color: var(--muted);
+}
+.numgrid .v {
+  text-align: right;
+  font-weight: 600;
+}
+.numgrid > div.changed {
+  border-color: var(--warn);
+  box-shadow: inset 4px 0 0 var(--warn);
+}
+.numgrid > div.changed .v {
+  color: var(--warn);
+}

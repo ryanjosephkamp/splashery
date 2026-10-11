@@ -217,8 +217,8 @@ export function parseExpr(text) {
     }
     return base;
   }
-  // A function's input without brackets: a short product of numbers, names and bracketed groups,
-  // each with an optional power. It stops at the next function (sin u cos u).
+  // A function's input without brackets: a short product of numbers and names, each with an optional
+  // power. It stops at the next function (sin u cos u) or at a bracket.
   function bareArg(inAbs) {
     const one = () => {
       const t = peek();

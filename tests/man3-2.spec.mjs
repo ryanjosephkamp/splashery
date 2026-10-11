@@ -386,7 +386,7 @@ test.describe("the lighter layout", () => {
       "200,000 splats instead of 140,000 made no toy sharper",
       "the penguin's shimmer went from 2.72 to 3.90",
       "One pair of budgets (140,000 and 200,000), one phone size, one renderer",
-      "A larger sweep is planned in the Kit lab",
+      "The Kit lab's larger sweep is in Level 2, under How many splats?",
       "Store the moments in a keyframe texture",
       "Compile the formulas to a shader",
       "Recompute on the processor every frame",
@@ -394,7 +394,7 @@ test.describe("the lighter layout", () => {
       "A link carries settings, not your files",
       "No server is involved",
       "Open: no plan yet",
-      "Planned in the Kit lab",
+      "Built, in labs",
     ])
       expect(flat, s).toContain(s);
     for (const chip of ["Our choice", "Format limit", "Not tested yet", "Each recipe's choice"]) expect(flat, chip).toContain(chip); // prettier-ignore
