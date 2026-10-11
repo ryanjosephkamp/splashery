@@ -109,4 +109,7 @@ ui5-engine (see PR for results).
 ## For the Operator
 
 - Merge the engine PR first, then the lane PR. Run `node tools/toy-dates.mjs` in the upkeep.
-- PRs: #528 (engine, merge first) and #529 (lane). Cards `st3-whats-new`, `st3-toy-date` and `st3-newest-first` (before and after, 390×844, Sonnet 5.5) are on Effect review page 2 under lane `SiteR3`. The Playground rename has no visible picture on a phone (tooltip, screen-reader label, close button text). Owner's marks: not yet read.
+- PRs: #528 (engine, merge first) and #529 (lane). Cards `st3-whats-new`, `st3-toy-date` and
+  `st3-newest-first` (before and after, 390×844, Sonnet 5.5) are on Effect review page 2 under lane
+  `SiteR3`. The Playground rename has no visible picture on a phone (tooltip, screen-reader label,
+  close button text). Owner's marks: not yet read.
