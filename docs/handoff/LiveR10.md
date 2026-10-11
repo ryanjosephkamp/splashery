@@ -223,6 +223,12 @@ October 11, 2026 (Opus 5.5, high effort): started. Item 1 (responsiveness) measu
     description).
   - "3. Colors": `lv10-cell-height`, `lv10-cell-center`, `lv10-cell-flag`, `lv10-plate-flag`, and
     `lv10-plate-few`.
+- October 11, 2026, 11:00 UTC: the batch suite (llvmpipe) failed `lv10:197`. Root cause: the test
+  read the beads' places while the tap's 7 s ring was still moving them (on a slow machine the
+  figure passes settled 0.6 long before the ring ends: ringing 1.0, the beads 0.14 farther on half a
+  second later); the color change itself keeps them exactly. Both browser tests now wait until
+  nothing moves and compare exactly (the plate's had a 0.05 bound). lv10, lv9 and lv8, 5 times each
+  on llvmpipe, 2 at once: 125 of 125 passed. Commit ee6f727f.
 - A flake to know about (not this lane's; `tests/live4.spec.mjs`, Live input's): "your audio plays
   to the plate …" fails now and then at its first wait (lead 2-3 with settled over 0.4). The plate
   steps only about 6 frames a second in headless Chromium, and the tune's first notes alternate two
