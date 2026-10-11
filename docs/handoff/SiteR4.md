@@ -66,7 +66,22 @@ you must; aim for a first READY within about five hours.
 
 ## State
 
-(Filled in at the first push.)
+READY for review (October 11, 2026), model Sonnet 5.5. Draft PR (lane) and #537 ("Engine: share,
+embed and element links name the project's root", merge it first; the swap needs it, today's 404
+does not).
+
+- Item 1 (one switch, staged layout): done and tested, including a real in-place swap on a scratch
+  worktree (second build "current", `prettier --check .` clean, home, Playground, `#s=`, old `site/`
+  addresses and the live 404 all worked in a browser).
+- Item 2 (root 404): done; the only public change. Tested for status 404, search, `#s=` and
+  old-toy-address forwarding, and the `*.github.io/<project>/` base.
+- Item 3 (worker): both workers written and staged only; offline and upgrade tested (see Notes).
+- Item 4 (offline sizes): measured and documented; `tools/site-offline-sizes.mjs`.
+- Item 5 (robots.txt): skipped, reasons in Notes.
+- Cards st4-… (six, naming Sonnet 5.5) are on Effect review page 2; marks not read yet.
+
+Tests: `tests/st4.spec.mjs` (22 tests) and `tests/st4-server.mjs`; engine:
+`tests/st4-engine.spec.mjs`.
 
 ## Notes
 
@@ -274,8 +289,24 @@ for their owners (or for the Operator's upkeep), not part of the swap.
 
 ## Known issues
 
-- (Filled in as they come up.)
+- Staged only: until `FRONT_DOOR` is flipped, nothing reads `.cache/front-door/`; `site/sw.js` is
+  still the preview worker.
+- At the swap the specs that read `site/` (man4, opm, site, spg, st2, st3, st4, tp2, tpg) need a
+  base change (see "The swap, step by step", step 4). Not done here: they are other lanes' files.
+- `embed/`, `worlds/` and `manual/` still link back with `../`; after the swap that is the home
+  page.
+- The hub `tools/index.html` lands in the repo's own `tools/` folder next to the build scripts
+  (GitHub Pages serves both; no clash). Argue for another path (`toolbox/`) if that bothers anyone.
+- The preview 404 reads `site/search-index.json`; if that file is missing the page still shows, with
+  "Search isn't available right now."
+- Safari's seven-day storage rule and a first visit's files: see the offline design.
 
 ## For the Operator
 
-- (Filled in at the first push.)
+- Merge order: engine PR #537, then this one. Merging this PR changes the public site only by the
+  new root `404.html` (and `site/assets/not-found.js`, which only it loads); `site/` pages are the
+  same bytes (`site/404.html` has its charset line first; `site/sw.js` also lists `not-found.js`).
+- Needs the owner's "good" on the two 404 cards. The four "staged, not live" cards are for his
+  walkthrough; flipping `FRONT_DOOR` is the swap (Notes, "The swap, step by step").
+- After the swap, `tools/upkeep.mjs` (which runs the site build) writes the swapped layout.
+- Suggestion: after the swap, point `embed/`, `worlds/` and `manual/` back-links at `playground/`.
