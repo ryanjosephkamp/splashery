@@ -273,7 +273,9 @@ test.describe("toy pages (browser)", () => {
     const copied = await page.evaluate(() => navigator.clipboard.readText());
     expect(copied).toContain('src="https://ryanjosephkamp.github.io/splashery/embed/?toy=grape"');
     // The gallery button opens the grape.
-    const open = await page.getByRole("link", { name: "Open in the Playground" }).getAttribute("href");
+    const open = await page
+      .getByRole("link", { name: "Open in the Playground" })
+      .getAttribute("href");
     await page.goto(new URL(open, page.url()).href.replace("/#", "/?renderer=webgl2#"));
     await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
     expect(await page.evaluate(() => window.__splashery.player.scene.toy.id)).toBe("grape");

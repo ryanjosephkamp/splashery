@@ -64,7 +64,10 @@ export function toyPageEntries() {
 // about 160 characters, cut at a word.
 function toyDescription(t) {
   const help = TOY_HELP[t.id] || {};
-  const para = String(help.about || "").split(/\n\s*\n/)[0].replace(/\s+/g, " ").trim();
+  const para = String(help.about || "")
+    .split(/\n\s*\n/)[0]
+    .replace(/\s+/g, " ")
+    .trim();
   // Sentences, not splitting after an abbreviation ("U.S.", "St.").
   const sentences = para.match(/(?:[^.!?]|\b(?:U\.S|St|Dr|Mt|vs|e\.g|i\.e)\.|[.!?](?=\S))+[.!?]?/g)?.map((x) => x.trim()) || []; // prettier-ignore
   let text = "";

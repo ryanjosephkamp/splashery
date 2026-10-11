@@ -492,15 +492,19 @@ async function searchEntries() {
 
 function playPage() {
   const src = fs.readFileSync(path.join(root, "embed/index.html"), "utf8");
-  const desc = "A Splashery toy on its own, made of 3D Gaussian splats: drag to turn it, tap to play.";
+  const desc =
+    "A Splashery toy on its own, made of 3D Gaussian splats: drag to turn it, tap to play.";
   return src
     .replace(/(href|src)="\.\.\//g, '$1="../../')
-    .replace("</head>", `<meta name="description" content="${desc}" />\n<meta property="og:description" content="${desc}" />\n</head>`) // prettier-ignore
     .replace(
-    "</body>",
-    `<script type="module" src="../assets/play.js"></script>
+      "</head>",
+      `<meta name="description" content="${desc}" />\n<meta property="og:description" content="${desc}" />\n</head>`,
+    ) // prettier-ignore
+    .replace(
+      "</body>",
+      `<script type="module" src="../assets/play.js"></script>
 </body>`,
-  );
+    );
 }
 
 // ---- Manifest, sitemap, service worker ---------------------------------------------------

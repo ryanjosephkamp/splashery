@@ -180,7 +180,9 @@ test.describe("site", () => {
     const href = await first.locator("a").getAttribute("href");
     expect(new URL(href, page.url()).pathname).toBe(`/site/toys/${toy.id}/`);
     await page.goto(`/site/toys/${toy.id}/`);
-    const open = await page.getByRole("link", { name: "Open in the Playground" }).getAttribute("href");
+    const open = await page
+      .getByRole("link", { name: "Open in the Playground" })
+      .getAttribute("href");
     const url = new URL(open, page.url());
     expect(url.pathname).toBe("/");
     await page.goto(`/?renderer=webgl2${url.hash}`);

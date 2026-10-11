@@ -77,7 +77,7 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
     let fallback = 0;
     for (const id of missing) {
       if (found[id]) stored[id] = found[id];
-      else if (!stored[id]) (stored[id] = today), fallback++;
+      else if (!stored[id]) ((stored[id] = today), fallback++);
     }
     const sorted = Object.fromEntries(Object.entries(stored).filter(([id]) => ids.includes(id)).sort(([a], [b]) => a.localeCompare(b))); // prettier-ignore
     fs.writeFileSync(FILE, JSON.stringify(sorted, null, 2) + "\n");

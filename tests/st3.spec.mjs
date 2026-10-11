@@ -62,7 +62,9 @@ test.describe("toy dates", () => {
     }
   });
 
-  test("the toy lists switch to Newest first, newest day on top, and back to By shelf", async ({ page }) => {
+  test("the toy lists switch to Newest first, newest day on top, and back to By shelf", async ({
+    page,
+  }) => {
     await page.goto("/site/toys/");
     const bar = page.locator(".order-bar");
     await expect(bar).toBeVisible();
@@ -90,7 +92,12 @@ test.describe("what's new", () => {
     const text = html.replace(/<script[\s\S]*?<\/script>/g, "").replace(/<[^>]+>/g, " ");
     expect(text).not.toMatch(/\bPR #|pull request|\blane\b|\bOpus\b|\bSonnet\b|\bmerged\b/i);
     // Newest first in each part.
-    for (const re of [/<li class="news-toy"[^>]*>[\s\S]*?datetime="([\d-]+)"/g, /<li class="news-feature">[\s\S]*?datetime="([\d-]+)"/g, /<li class="news-fix"[^>]*>[\s\S]*?datetime="([\d-]+)"/g]) { // prettier-ignore
+    for (const re of [
+      /<li class="news-toy"[^>]*>[\s\S]*?datetime="([\d-]+)"/g,
+      /<li class="news-feature">[\s\S]*?datetime="([\d-]+)"/g,
+      /<li class="news-fix"[^>]*>[\s\S]*?datetime="([\d-]+)"/g,
+    ]) {
+      // prettier-ignore
       const dates = [...html.matchAll(re)].map((m) => m[1]);
       expect(dates.length).toBeGreaterThan(1);
       expect(dates).toEqual([...dates].sort().reverse());
@@ -101,13 +108,18 @@ test.describe("what's new", () => {
   });
 
   test("reads well on a phone and a computer, with no sideways scrolling", async ({ page }) => {
-    for (const [w, h] of [[390, 844], [1440, 900]]) {
+    for (const [w, h] of [
+      [390, 844],
+      [1440, 900],
+    ]) {
       await page.setViewportSize({ width: w, height: h });
       await page.goto("/site/new/");
       await page.evaluate(() => localStorage.setItem("splashery-labs", "1"));
       await page.reload();
       expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true); // prettier-ignore
-      await page.screenshot({ path: path.resolve(`tests/screenshots/st3-whats-new-${w}x${h}.png`) });
+      await page.screenshot({
+        path: path.resolve(`tests/screenshots/st3-whats-new-${w}x${h}.png`),
+      });
     }
   });
 });
@@ -121,7 +133,12 @@ test.describe("Playground", () => {
   });
 
   test("the site says Playground where it used to say gallery", () => {
-    for (const f of ["index.html", "toys/index.html", "toys/fireworks/index.html", "tools/index.html"]) {
+    for (const f of [
+      "index.html",
+      "toys/index.html",
+      "toys/fireworks/index.html",
+      "tools/index.html",
+    ]) {
       const text = read(f).replace(/<[^>]+>/g, " ");
       expect(text, f).not.toMatch(/\bthe gallery\b/i);
     }

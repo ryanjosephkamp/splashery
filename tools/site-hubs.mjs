@@ -565,7 +565,10 @@ ${docLinks(up)}
         .slice(0, 24);
     const toyCards = [...newest(false), ...newest(true)]
       .sort((a, b) => TOY_DATES[b.id].localeCompare(TOY_DATES[a.id]) || byLabel(a, b))
-      .map((t) => `<li class="news-toy"${t.labs ? " data-labs" : ""}><a href="${up}${toyPath(t)}"><img src="${up}${thumbHref(t)}" alt="" width="96" height="96" loading="lazy" decoding="async" /><span class="toy-name">${esc(t.label)}${t.labs ? ' <span class="badge">labs</span>' : ""}</span><time datetime="${TOY_DATES[t.id]}">${dateText(TOY_DATES[t.id])}</time></a></li>`) // prettier-ignore
+      .map(
+        (t) =>
+          `<li class="news-toy"${t.labs ? " data-labs" : ""}><a href="${up}${toyPath(t)}"><img src="${up}${thumbHref(t)}" alt="" width="96" height="96" loading="lazy" decoding="async" /><span class="toy-name">${esc(t.label)}${t.labs ? ' <span class="badge">labs</span>' : ""}</span><time datetime="${TOY_DATES[t.id]}">${dateText(TOY_DATES[t.id])}</time></a></li>`,
+      ) // prettier-ignore
       .join("");
 
     const featureCards = features
@@ -573,7 +576,9 @@ ${docLinks(up)}
       .sort((a, b) => b.date.localeCompare(a.date))
       .map((f) => {
         const t = f.toy ? toy(f.toy) : null;
-        const pic = t ? `<img src="${up}${thumbHref(t)}" alt="" width="72" height="72" loading="lazy" decoding="async" />` : "";
+        const pic = t
+          ? `<img src="${up}${thumbHref(t)}" alt="" width="72" height="72" loading="lazy" decoding="async" />`
+          : "";
         const items = f.items.map((x) => `<li>${x}</li>`).join("");
         return `<li class="news-feature"><div class="news-feature-head">${pic}<div><p class="news-when"><time datetime="${f.date}">${esc(dayRange(f.date, f.until))}</time></p><h3>${esc(f.title)}</h3></div></div><ul class="news-items">${items}</ul></li>`; // prettier-ignore
       })
