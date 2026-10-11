@@ -131,3 +131,65 @@ The PDF is reprinted: 74 pages, 6.9 MB (was 67 pages, 5.3 MB; the nine stills ar
   worker). `site/new/` is left as it was (it follows main's history).
 - `tests/ln.spec.mjs` now allows an 8 MB PDF. Say if you would rather keep 6 MB and I make the
   stills smaller.
+
+## For the next round
+
+The chapter split (the Operator's message of October 11, 2026, 00:58 UTC, which is that round's
+brief) was started in this session before the Operator moved it to a fresh session. It is **not** in
+this PR. The work in progress is on the branch **`claude/lane-manual-r5-wip`** (two commits on top
+of this PR's work, `3156c5265` and `1c1203ac8`; this PR's branch reverts them, so it carries only
+the brief's original three items). A fresh session can start from that branch (merge main, then
+build on it) or from scratch with these notes.
+
+The brief, in short: one web page per chapter (the levels are "chapters" in page titles and
+navigation; the text keeps "Level N" only for a learning level), Previous and Next buttons at the
+top and the bottom, the full contents on the first page, a collapsible contents button on every page
+(closed until tapped), no standalone level map, the PDF still complete and in order, every demo,
+fold, pop-up and section kept, old `manual/#anchor` addresses still landing, tests and the site's
+links into the manual updated, before and after cards at phone size.
+
+What the work in progress does:
+
+- `manual/pages.mjs` lists the 15 pages in reading order: the cover (`index.html`), Chapters 1 to 5
+  (`splat`, `toy`, `language`, `gallery`, `pictures`), one page for Chapters 6 to 10 (`coming`, the
+  five headings and their notes), then `more`, `unique`, `experiments`, `later`, `glossary`,
+  `reading`, `references`, `card`.
+- `manual/build-pages.mjs` writes what follows from that list and never touches a chapter's text:
+  each page's head, the contents button and the Previous and Next buttons (between NAV markers), the
+  cover's full contents with every section (between TOC markers), an id on every heading that had
+  none, the page name on every link to a heading on another page, `manual/all.html` (the whole
+  manual on one page), `manual/redirect.js` (an old `#anchor` goes to its page; loaded only by the
+  cover), and `manual/glossary-data.js`. `--check` fails if anything is out of date. Run it after
+  any edit.
+- `manual/nav.js` is the contents button (the same look as `site/assets/outline.css`, closed at
+  first, Escape and a tap outside close it). `manual/fold.js` reads a glossary entry from this page
+  or, on every other page, from `glossary-data.js`, and its pop-up links to `glossary.html#…`.
+- `tools/manual-pdf.mjs` prints `manual/all.html`, so the PDF has every chapter in order (75 pages,
+  6.8 MB with the demo stills).
+- The site's links into the manual go to the pages (`toy.html#splat-count`, `more.html`,
+  `unique.html`), and the print stills' captions link to the page with the demo.
+- The level map block and its style are gone. The heading labels say "Chapter N".
+
+Things to know:
+
+- Tests follow the split by reading `manual/all.html` (the same text and the same working demos on
+  one page) instead of `manual/index.html`; `tests/man4-pages.spec.mjs` (new) covers the pages: the
+  order of Next and Previous, the contents button, the full contents, every link landing, old
+  anchors, pop-ups on other pages, `all.html`, 390 and 320 pixels. At the last full pass of the
+  affected specs, nine failed for reasons that are fixed on the branch but not re-run: `ln` (two
+  regexes that matched `<h3>` without an id, and "Level N" in the contents), `man3-2` (the fold
+  buttons, now also on `all.html`), `man3` and `st2` (links to `all.html` itself, and the outline
+  bar), `ops-text` (the PDF's page 1 no longer ends with the level map). Run the manual specs
+  (`man`, `man2`, `man3`, `man3-2`, `man4`, `man4-pages`, `ln`, `ops-text`, `st2`, `cdx-gallery`,
+  `evidence-computing`) first, then the full suite.
+- `tests/ln.spec.mjs` already allows an 8 MB PDF.
+- Prose still says "Level N" where it points at a learning level (the Operator asked for that); a
+  cross-reference such as "see Level 3" now leads to the page titled "Chapter 3". The owner's audit,
+  and the Codex read-only audit, may want that wording settled.
+- The demo scripts load on every page that has a demo; the pages without one load only `fold.js` and
+  `nav.js`.
+- Not decided: whether the in-chapter sections should also show in the contents button on the cover
+  (they do on a chapter's own page), and whether `all.html` should be linked from the cover (it is,
+  as "Read it all on one page").
+- Before cards for the split, taken from the single page, are in the session notes only; a fresh
+  session should take its own "before" shots from `main` and "after" from the branch.
