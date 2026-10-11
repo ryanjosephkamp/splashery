@@ -1,5 +1,6 @@
 #!/usr/bin/env node
-// Prints the Tinkerer's Manual (manual/index.html) to a PDF with Chromium:
+// Prints the Tinkerer's Manual (manual/all.html, the whole manual on one page, built from the
+// chapter pages by manual/build-pages.mjs) to a PDF with Chromium:
 // letter pages, page numbers in the footer, pictures kept whole (the
 // manual's print styles). Lane Manual.
 //
@@ -28,7 +29,7 @@ const page = await browser.newPage();
 const problems = [];
 page.on("pageerror", (e) => problems.push(e.message));
 page.on("requestfailed", (r) => problems.push(`${r.url()} failed`));
-await page.goto(`${base}manual/`, { waitUntil: "networkidle" });
+await page.goto(`${base}manual/all.html`, { waitUntil: "networkidle" });
 await page.emulateMedia({ media: "print", colorScheme: "light" });
 // Every picture loaded before printing.
 await page.evaluate(

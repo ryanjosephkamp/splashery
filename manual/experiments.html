@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- HEAD:START (written by manual/build-pages.mjs; do not edit by hand) -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Open questions: other choices, not tried yet · The Tinkerer's Manual</title>
+    <meta
+      name="description"
+      content="Open questions: other choices, not tried yet. The Tinkerer's Manual: how to program Gaussian splats in Splashery."
+    />
+    <link rel="stylesheet" href="manual.css" />
+    <link rel="stylesheet" href="../site/assets/outline.css" />
+
+    <script type="module" src="fold.js"></script>
+    <script type="module" src="nav.js"></script>
+    <!-- HEAD:END -->
+  </head>
+  <body>
+    <main>
+      <!-- NAV:TOP:START (written by manual/build-pages.mjs; do not edit by hand) -->
+      <div class="outline no-print manual-nav">
+        <button
+          type="button"
+          class="outline-toggle"
+          aria-expanded="false"
+          aria-controls="manual-contents"
+        >
+          <span class="outline-label">Contents</span
+          ><span class="outline-now">Open questions: other choices, not tried yet</span
+          ><svg
+            class="outline-chevron"
+            viewBox="0 0 16 16"
+            width="16"
+            height="16"
+            aria-hidden="true"
+          >
+            <path
+              d="m3.5 6 4.5 4.5L12.5 6"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </button>
+        <nav class="outline-panel" id="manual-contents" aria-label="The manual's chapters" hidden>
+          <ol>
+            <li><a href="index.html">Contents</a></li>
+            <li><a href="splat.html">Chapter 1: What a splat is</a></li>
+            <li><a href="toy.html">Chapter 2: How a toy is built</a></li>
+            <li><a href="language.html">Chapter 3: The splat equation language</a></li>
+            <li><a href="gallery.html">Chapter 4: A gallery of programs</a></li>
+            <li><a href="pictures.html">Chapter 5: Pictures, screens, and your own input</a></li>
+            <li><a href="coming.html">Chapters 6 to 10: coming next</a></li>
+            <li><a href="more.html">What else Splashery does now</a></li>
+            <li><a href="unique.html">What Splashery can do that other splat tools can't</a></li>
+            <li>
+              <a href="experiments.html" aria-current="page"
+                >Open questions: other choices, not tried yet</a
+              >
+            </li>
+            <li><a href="later.html">What comes later: Code a toy</a></li>
+            <li><a href="glossary.html">Glossary</a></li>
+            <li><a href="reading.html">Further reading</a></li>
+            <li><a href="references.html">References</a></li>
+            <li><a href="card.html">Quick reference</a></li>
+          </ol>
+        </nav>
+      </div>
+      <nav class="pager no-print" aria-label="Previous and next chapter, top">
+        <a class="pager-prev" rel="prev" href="unique.html"
+          ><span class="pager-word">← Previous</span
+          ><span class="pager-title">What Splashery can do that other splat tools can't</span></a
+        ><a class="pager-next" rel="next" href="later.html"
+          ><span class="pager-word">Next →</span
+          ><span class="pager-title">What comes later: Code a toy</span></a
+        >
+      </nav>
+      <p class="no-print fold-all">
+        <button type="button" data-fold-all="open">Open all the folds</button>
+        <button type="button" data-fold-all="close">Close all the folds</button>
+        <span class="muted">Definitions, derivations, notes, and long tables start folded.</span>
+      </p>
+      <!-- NAV:TOP:END -->
+      <!-- ---- Open questions ---- -->
+      <h2 id="experiments">Open questions: other choices, not tried yet</h2>
+      <p>
+        Splashery works as it is, and nothing here would replace what works. Each of these would be
+        a separate experiment, behind the labs switch or on a comparison page, with today's behavior
+        as the default. If you wonder "why this number?", the answer is in the notes in Levels 1 to
+        3, or it is "not tested yet" and listed here.
+      </p>
+      <details class="fold tablefold">
+        <summary>Show the table: every choice not tried yet</summary>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Choice</th>
+                <th>What an experiment would show</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>A Detail slider</td>
+                <td>
+                  Any splat count from 60,000 to 400,000, beside the tiers. Built as a labs slider
+                  (<code>docs/lab/DETAIL-SLIDER.md</code>).
+                </td>
+                <td>Built, in labs</td>
+              </tr>
+              <tr>
+                <td>View-dependent color</td>
+                <td>
+                  A shine that moves with the view on a few kit toys, from the kit's own data and
+                  shader. Built as a private comparison, on only when a link or the address asks for
+                  it with labs on (<code>docs/lab/GLOSS.md</code>).
+                </td>
+                <td>Built, in labs</td>
+              </tr>
+              <tr>
+                <td>More moments of <var>t</var></td>
+                <td>
+                  Turning shapes at more than 12 moments, up to 15. Built as a labs choice
+                  (<code>docs/lab/MOMENTS.md</code>); more than 15 is still open.
+                </td>
+                <td>Built, in labs</td>
+              </tr>
+              <tr>
+                <td>240-character fields</td>
+                <td>
+                  Longer fields, and what longer links cost. Built in the Splat equation toy
+                  (<code>docs/lab/EQUATION-FIELDS.md</code>).
+                </td>
+                <td>Built, in labs</td>
+              </tr>
+              <tr>
+                <td>A budget sweep on real phones</td>
+                <td>
+                  Real phone graphics chips, and more phone sizes. The Kit lab's sweep (Level 2)
+                  covered five budgets, one phone size, and one software renderer.
+                </td>
+                <td>Not started</td>
+              </tr>
+              <tr>
+                <td>More than 15 parts</td>
+                <td>
+                  A toy with 24 or 32 moving parts. The largest change: it repacks the part number,
+                  moves the part table into a texture, and needs a check on real phones.
+                </td>
+                <td>Open: no plan yet</td>
+              </tr>
+              <tr>
+                <td>An opacity field</td>
+                <td>
+                  See-through splats in a program (and the other candidate fields in Level 3).
+                </td>
+                <td>Open: no plan yet</td>
+              </tr>
+              <tr>
+                <td>Formulas on the graphics chip</td>
+                <td>
+                  Formulas compiled to a shader, so <var>t</var> is continuous and no copies are
+                  stored.
+                </td>
+                <td>Open: no plan yet</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
+
+      <!-- NAV:BOTTOM:START (written by manual/build-pages.mjs; do not edit by hand) -->
+      <nav class="pager no-print" aria-label="Previous and next chapter, bottom">
+        <a class="pager-prev" rel="prev" href="unique.html"
+          ><span class="pager-word">← Previous</span
+          ><span class="pager-title">What Splashery can do that other splat tools can't</span></a
+        ><a class="pager-next" rel="next" href="later.html"
+          ><span class="pager-word">Next →</span
+          ><span class="pager-title">What comes later: Code a toy</span></a
+        >
+      </nav>
+      <footer>
+        <p>
+          The Tinkerer's Manual, first published September 28, 2026 and updated October 11, 2026.
+          Part of
+          <a href="https://ryanjosephkamp.github.io/splashery/" target="_blank" rel="noopener"
+            >Splashery</a
+          >, a toy box of 3D Gaussian splats that runs in your browser. Every picture here was made
+          with Splashery itself.
+        </p>
+      </footer>
+      <!-- NAV:BOTTOM:END -->
+    </main>
+  </body>
+</html>

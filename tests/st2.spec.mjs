@@ -90,7 +90,7 @@ test.describe("new tabs and toy pages", () => {
   });
 
   test("the Tinkerer's Manual opens every link in a new tab too", () => {
-    const html = fs.readFileSync(path.resolve("manual/index.html"), "utf8");
+    const html = fs.readFileSync(path.resolve("manual/all.html"), "utf8");
     const bad = [];
     for (const m of html.matchAll(/<a\s([^>]*?)>/g)) {
       const href = /\bhref="([^"]*)"/.exec(m[1])?.[1];
@@ -323,7 +323,7 @@ test.describe("the quick outline", () => {
     page.on("pageerror", (e) => errs.push(e.message));
     page.on("response", (r) => r.status() >= 400 && !/favicon/.test(r.url()) && errs.push(`${r.status()} ${r.url()}`)); // prettier-ignore
     await page.setViewportSize({ width: 390, height: 844 });
-    await page.goto("/manual/");
+    await page.goto("/manual/all.html");
     await expect(page.locator(".outline-toggle")).toHaveCount(1);
     await page.locator(".outline-toggle").click();
     await page.locator("#outline-panel a", { hasText: "Glossary" }).click();
