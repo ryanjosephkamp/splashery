@@ -97,6 +97,18 @@ Written by the Operator on October 10, 2026:
 Model: Opus 5.5 (claude-opus-5-5), high effort. Branches: `claude/lane-kit-lab` (lane) and
 `claude/lane-kit-lab-engine` ("Engine: …", merge first).
 
+**Merged, October 10, 2026:** engine PR #484 and lane PR #486 went in with batch 6 (#500, main at
+32fc9692). This round is done; the lane is idle until the owner's in-depth review.
+
+What's left:
+
+- **Timing on a real phone.** The clean software-renderer timing pass is done (BUDGETS.md and
+  GLOSS.md); it can't tell what more splats or the gloss cost a phone's GPU. The Detail slider
+  (labs) is the tool for it: does a weak phone keep its frame rate at 90,000 to 100,000 splats?
+- **The owner's in-depth review.** His marks on the five cards are provisional. Anything his review
+  asks for (a gloss default on the marble and the pool ball, a Low budget change, more moments)
+  starts a new round.
+
 - October 10, 2026: all five experiments built and measured (see "Notes").
   - 0: the budget sweep (24 views × 5 budgets) is in docs/lab/BUDGETS.md.
   - 1: the Detail slider (engine, labs only).
@@ -132,4 +144,4 @@ Model: Opus 5.5 (claude-opus-5-5), high effort. Branches: `claude/lane-kit-lab` 
 
 ## For the Operator
 
-- Merge the engine PR first; the lane PR's measuring tool and tests need it.
+- Both PRs are merged. Nothing is waiting on this lane.

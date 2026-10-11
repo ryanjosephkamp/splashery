@@ -30,6 +30,15 @@ due shows there.
 Keep context small in the meantime. Hand big reads (a transcript, a full export, a long run log) to
 a helper agent on Sonnet and keep only its summary.
 
+Lanes rotate by the same rule (the owner's call of October 11, 2026):
+
+- A new round always starts in a fresh session, from its brief and the lane's handoff file, never in
+  the last round's session.
+- A finished lane stands down once its handoff PR merges. The Operator lists the sessions that are
+  safe to archive, and the owner archives them.
+- An old lane session is reused only for a small follow-up while its context is still small (under
+  about 300k tokens).
+
 ## Each check-in (about every 90 minutes)
 
 1. **Re-arm first.** `send_later` about 90 minutes out when only waiting, sooner when something is
