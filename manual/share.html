@@ -255,20 +255,31 @@
       </p>
       <p>
         There is a ceiling. A QR code at its largest (version 40, the lowest error correction) holds
-        2,953 bytes. The code can lose some of its squares and still scan, and the more it can lose
-        the fewer bytes it holds. <code>shareCode</code> (<code>src/qr/share-code.js</code>) picks
-        level <b>M</b> (15 percent can be lost) while the code stays at version 30 or smaller, and
-        level <b>L</b> (7 percent) beyond that, for the smallest code a phone can still resolve. In
-        the measurements of the QR lane, every toy at its defaults came to 692 to 714 characters
-        (version 21 at level M), a toy with 20 dabs of paint was about 1,170 characters (version
-        28), 60 dabs was about 2,000 (version 33, level L), and 150 dabs was 3,671, too long for any
-        code, so the dialog says so and offers Save JSON. Nothing is split across several codes.
+        2,953 bytes, and the whole link counts, address and all. A code carries extra codewords (a
+        codeword is 8 squares) from which a scanner can rebuild the data when some of it cannot be
+        read, and the more of them it carries the fewer bytes it holds. Level M can rebuild about 15
+        percent of the codewords and level L about 7 percent. That is a rate for codewords, not a
+        promise about any 15 percent of the squares: damage that covers the three big squares that
+        locate the code, or lands on many blocks of codewords at once, can defeat a code that lost
+        less, while many damaged squares inside one codeword cost only that codeword.
+        <code>shareCode</code> (<code>src/qr/share-code.js</code>) picks level <b>M</b> while the
+        code stays at version 30 or smaller, and level <b>L</b> beyond that, for the smallest code a
+        phone can still resolve. In the measurements of the QR lane, every toy at its defaults came
+        to about 690 to 715 characters. A link of up to 711 characters fits version 21 at level M,
+        and one of 712 to 779 needs version 22, so most toys are version 21 and a few, depending on
+        the scene's random seed, are version 22. A toy with 20 dabs of paint was about 1,170
+        characters (version 28), 60 dabs was about 2,000 (version 33, level L), and 150 dabs was
+        3,671, too long for any code, so the dialog says so and offers Save JSON. Nothing is split
+        across several codes.
       </p>
       <p>
-        The dialog also reads the code back before it shows it (with the browser's own barcode
-        reader, or <code>vendor/jsqr</code> where that cannot read QR codes) and says "It scans"
-        only if it does. The demo above does the same sizing with the real <code>shareCode</code>:
-        it shows the version and level of its own link, and draws it.
+        The dialog shows the code at once, and under it says "Checking that it scans…" while it
+        reads the code back (with the browser's own barcode reader, or
+        <code>vendor/jsqr</code> where that cannot read QR codes). It changes that line to "It
+        scans" only if the text it read back is exactly the link; otherwise it says the code did not
+        read back and suggests Save JSON. That is one reader on one drawing on this device, not a
+        promise about every phone camera. The demo above does the same sizing with the real
+        <code>shareCode</code>: it shows the version and level of its own link, and draws it.
       </p>
 
       <p class="where">

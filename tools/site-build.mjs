@@ -23,13 +23,21 @@ import * as prettier from "prettier";
 import { TOYS, CATEGORIES, holdsStill } from "../src/toys.js";
 import { TOY_HELP, defaultHowTo } from "../src/toy-help.js";
 import { RIGS } from "../src/rigs.js";
-import { SITE, MENU, PAGES, NOT_FOUND, HOME_TOY, DOC_PAGES, appLink, newTabLinks, mirrorDocLinks } from "./site-pages.mjs"; // prettier-ignore
+import { SITE, FRONT_DOOR, MENU, PAGES, NOT_FOUND, HOME_TOY, DOC_PAGES, appLink, newTabLinks, mirrorDocLinks } from "./site-pages.mjs"; // prettier-ignore
 import { hubTypes } from "./site-hubs.mjs";
 import { toyPage, toyPath, toyPageDirs, TOY_DATES, dateText } from "./site-toy-pages.mjs";
+import { swapLayout, liftHtml } from "./site-front-door.mjs";
 
 const root = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
 const OUT = path.join(root, "site");
 const CHECK = process.argv.includes("--check");
+// The swapped layout (lane Site r4): staged in .cache/front-door/ with --front-door, or written
+// into the repo itself when FRONT_DOOR is on (docs/handoff/SiteR4.md, "The swap, step by step").
+const SWAPPED = FRONT_DOOR || process.argv.includes("--front-door");
+const outArg = process.argv.indexOf("--out");
+const STAGE = outArg > 0 ? path.resolve(process.argv[outArg + 1]) : path.join(root, ".cache/front-door"); // prettier-ignore
+const SWAP_OUT = FRONT_DOOR && outArg < 0 ? root : STAGE;
+if (SWAPPED) SITE.preview = false;
 
 // ---- Helpers --------------------------------------------------------------------------
 
@@ -110,11 +118,18 @@ function ogImage(page) {
 <meta name="twitter:card" content="${img.card}" />`;
 }
 
+// The root 404 page is served at any depth, so its links resolve from the project's root: on
+// GitHub Pages the first path segment is the project ("/splashery/"); anywhere else the root is "/".
+// The base, the styles and the scripts are written by that one script (document.write), so the
+// browser's early look-ahead doesn't fetch them from the wrong folder first.
+const rootBase = (css, js) =>
+  `(function(){var p=location.pathname.split("/"),b=/\\.github\\.io$/.test(location.hostname)&&p[1]?"/"+p[1]+"/":"/";document.write('<base href="'+b+'">'${css.map((f) => `+'<link rel="stylesheet" href="'+b+'${f}">'`).join("")}${js.map((f) => `+'<script type="module" src="'+b+'${f}"><\\/script>'`).join("")})})();`; // prettier-ignore
+
 function shell(page, main, opts) {
   return newTabLinks(mirrorDocLinks(shellHtml(page, main, opts), opts.up), opts.up);
 }
 
-function shellHtml(page, main, { up, url, fixedBase = false }) {
+function shellHtml(page, main, { up, url, fixedBase = false, htmlData = "" }) {
   const title = page.title.includes("Splashery") ? page.title : `${page.title} · Splashery`;
   const desc = plain(page.description);
   const nav = MENU.map((m) => {
@@ -122,14 +137,18 @@ function shellHtml(page, main, { up, url, fixedBase = false }) {
     return `<li><a href="${up}${m.href}"${current}>${esc(m.label)}</a></li>`;
   }).join("");
   // The 404 page can be served at any depth, so its links resolve from site/ itself.
-  const base = fixedBase
-    ? `<script>(function(){var p=location.pathname,i=p.indexOf("/site/");var b=document.createElement("base");b.href=i<0?"/":p.slice(0,i+6);document.head.appendChild(b)})();</script>` // prettier-ignore
-    : "";
+  const styles = ["assets/site.css", ...(page.styles || []).map((f) => `assets/${f}`)];
+  const scripts = ["assets/site.js", ...(page.scripts || []).map((f) => `assets/${f}`)];
+  const base =
+    fixedBase === "root"
+      ? `<script>${rootBase(styles, scripts)}</script>`
+      : fixedBase
+        ? `<script>(function(){var p=location.pathname,i=p.indexOf("/site/");var b=document.createElement("base");b.href=i<0?"/":p.slice(0,i+6);document.head.appendChild(b)})();</script>` // prettier-ignore
+        : "";
   return `<!doctype html>
-<html lang="en" data-root="${up || "./"}">
+<html lang="en" data-root="${up || "./"}"${htmlData}>
 <head>
-${base}
-<meta charset="utf-8" />
+<meta charset="utf-8" />${base ? `\n${base}` : ""}
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(desc)}" />
@@ -144,14 +163,16 @@ ${ogImage(page)}
 <meta name="color-scheme" content="light dark" />
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#101010" />
-<link rel="manifest" href="${up}manifest.webmanifest" />
-<link rel="icon" href="${FAVICON}" />
-<link rel="apple-touch-icon" href="${up}../assets/app/icon-180.png" />
-<script>${EARLY}</script>
-<link rel="stylesheet" href="${up}assets/site.css" />
+${fixedBase === "root" ? "" : `<link rel="manifest" href="${up}manifest.webmanifest" />\n`}<link rel="icon" href="${FAVICON}" />
+${fixedBase === "root" ? "" : `<link rel="apple-touch-icon" href="${up}../assets/app/icon-180.png" />\n`}<script>${EARLY}</script>
+${
+  fixedBase === "root"
+    ? ""
+    : `<link rel="stylesheet" href="${up}assets/site.css" />
 ${[...(page.styles || []), ...(page.outline ? ["outline.css"] : [])].map((f) => `<link rel="stylesheet" href="${up}assets/${f}" />`).join("\n")}
 <script type="module" src="${up}assets/site.js"></script>
-${[...(page.scripts || []), ...(page.outline ? ["outline.js"] : [])].map((f) => `<script type="module" src="${up}assets/${f}"></script>`).join("\n")}
+${[...(page.scripts || []), ...(page.outline ? ["outline.js"] : [])].map((f) => `<script type="module" src="${up}assets/${f}"></script>`).join("\n")}`
+}
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to the page</a>
@@ -549,6 +570,78 @@ function serviceWorker(version, precache) {
     .replace('["@@PRECACHE@@"]', JSON.stringify(precache));
 }
 
+// ---- The root 404 page ----------------------------------------------------------------------
+// GitHub Pages serves 404.html for every missing path under the project, at any depth. Two forms:
+// before the swap ("preview") a small page in the site's look that only helps people find a toy in
+// the Playground, so the public never sees the preview's pages; after it ("live") the full shell.
+// Both send a "#s=" link on to the Playground before anything paints and read the path's words
+// (assets/not-found.js).
+
+const FORWARD_404 = `(function(){var h=location.hash;if(/(^#|&)s=/.test(h)){document.documentElement.style.visibility="hidden";location.replace(new URL(document.documentElement.dataset.gallery,document.baseURI).href+location.search+h)}})();`; // prettier-ignore
+
+function notFoundMain(live) {
+  return `<div class="page-intro"><h1>This page isn't here</h1>
+<p class="lead">${live ? "It may have moved. Try a search, or start from the home page." : "It may have moved. Try a search, or open Splashery."}</p></div>
+<form class="search-page-form" id="nf-form" role="search" action="${live ? "search/" : "./"}" method="get">
+<label for="q404">Search ${live ? "toys, tools and pages" : "toys"}</label>
+<input id="q404" type="search" name="q" autocomplete="off" enterkeyhint="search" />
+</form>
+<p class="search-status" id="nf-status" role="status" aria-live="polite"></p>
+<ul class="search-results" id="nf-results"></ul>
+<p class="actions">${live ? '<a class="button primary" href="./">Home</a><a class="button" href="../">Open the Playground</a>' : '<a class="button primary" href="./">Open Splashery</a>'}</p>`; // prettier-ignore
+}
+
+function notFoundPreview() {
+  return `<!doctype html>
+<html lang="en" data-mode="preview" data-gallery="" data-index="site/search-index.json">
+<head>
+<meta charset="utf-8" />
+<script>${rootBase(["site/assets/site.css"], ["site/assets/not-found.js"])}</script>
+<script>${FORWARD_404}</script>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Page not found · Splashery</title>
+<meta name="description" content="This page isn't here." />
+<meta name="robots" content="noindex" />
+<meta name="color-scheme" content="light dark" />
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#101010" />
+<link rel="icon" href="${FAVICON}" />
+<script>${EARLY}</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to the page</a>
+<header class="site-header">
+<div class="bar">
+<a class="brand" href="./" aria-label="Splashery home">${LOGO}<span>Splashery</span></a>
+</div>
+</header>
+<main id="main" tabindex="-1">
+${notFoundMain(false)}
+</main>
+<footer class="site-footer">
+<p class="fine">${esc(SITE.tagline)}. Free, in your browser, with nothing to install; files you open stay on your device.</p>
+</footer>
+</body>
+</html>
+`;
+}
+
+const HOME_BASE = SITE.base.replace(/site\/$/, "");
+function notFoundLive() {
+  const page = { ...NOT_FOUND, scripts: ["not-found.js"] };
+  const html = shell(page, notFoundMain(true), {
+    up: "",
+    url: `${SITE.origin}${HOME_BASE}404.html`,
+    fixedBase: "root",
+    htmlData: ' data-mode="live" data-gallery="playground/" data-index="search-index.json"',
+  });
+  // The forwarding script runs right after the base is set.
+  const baseScript = `<script>${rootBase(["assets/site.css"], ["assets/site.js", "assets/not-found.js"])}</script>`; // prettier-ignore
+  const withForward = html.replace(baseScript, `${baseScript}\n<script>${FORWARD_404}</script>`);
+  if (withForward === html) throw new Error("The live 404 page has no base script to follow.");
+  return liftHtml(withForward, 0).replaceAll(`${SITE.origin}${SITE.base}`, `${SITE.origin}${HOME_BASE}`); // prettier-ignore
+}
+
 // ---- Build ----------------------------------------------------------------------------------
 
 const prettierConfig = (await prettier.resolveConfig(path.join(root, "site/index.html"))) || {};
@@ -589,79 +682,232 @@ for (const w of PAGES.find((p) => p.type === "search").suggest) {
 files.set("manifest.webmanifest", manifest());
 files.set("sitemap.xml", sitemap());
 
-for (const [f, text] of files) files.set(f, await pretty(f, text));
-
-// The shell the service worker keeps from the first visit: every page, the
-// hand-written assets, the index and the icons. Its version changes whenever
-// any of them does, so a new build replaces the old shell.
+// What the pages and the worker need from the hand-written files (assets/*.css, *.js).
 const handWritten = fs
   .readdirSync(path.join(OUT, "assets"))
   .filter((f) => /\.(css|js)$/.test(f))
   .map((f) => `assets/${f}`);
-const precache = [
-  "./",
-  ...PAGES.filter((p) => p.path && p.precache !== false).map((p) => p.path),
-  NOT_FOUND.file,
-  "play/",
-  "search-index.json",
-  "manifest.webmanifest",
-  ...handWritten,
-  "../assets/app/icon-192.png",
-  "../assets/app/icon-512.png",
-];
-const hash = crypto.createHash("sha256");
-for (const f of [...files.keys()].sort()) hash.update(f).update(files.get(f));
-for (const f of handWritten) hash.update(f).update(fs.readFileSync(path.join(OUT, f)));
-hash.update(fs.readFileSync(path.join(root, "tools/site-sw.template.js")));
-const version = hash.digest("hex").slice(0, 12);
-files.set("sw.js", await pretty("sw.js", serviceWorker(version, precache)));
 
-// The files built from the toy list or the git history follow main: a lane that
-// adds a toy (or any merge) changes them, and the Operator's upkeep
-// (tools/upkeep.mjs) rebuilds them after each merge. --check reports them but
-// fails only on the rest: the shell, the hand-written pages and everything else
-// the build makes. A new page type that reads toys belongs in TOY_TYPES.
-const TOY_TYPES = new Set(["home", "shelves", "tools", "science", "learn", "about", "terms", "news", "markdown", "article", "embed", "toy"]); // prettier-ignore
-const followsMain = new Set([
-  ...PAGES.filter((p) => TOY_TYPES.has(p.type)).map((p) => `${p.path}index.html`),
-  "search-index.json",
-  "sw.js",
-]);
-let stale = 0;
-let staleShell = 0;
-for (const [f, text] of files) {
-  const file = path.join(OUT, f);
-  const old = fs.existsSync(file) ? fs.readFileSync(file, "utf8") : null;
-  if (old === text) continue;
-  stale++;
-  if (CHECK) {
-    if (followsMain.has(f)) console.log(`follows main (rebuilt by the upkeep): site/${f}`);
-    else {
+// ---- The preview: site/ and the root 404 page -------------------------------------------------
+
+async function buildPreview() {
+  for (const [f, text] of files) files.set(f, await pretty(f, text));
+
+  // The shell the service worker keeps from the first visit: every page, the
+  // hand-written assets, the index and the icons. Its version changes whenever
+  // any of them does, so a new build replaces the old shell.
+  const precache = [
+    "./",
+    ...PAGES.filter((p) => p.path && p.precache !== false).map((p) => p.path),
+    NOT_FOUND.file,
+    "play/",
+    "search-index.json",
+    "manifest.webmanifest",
+    ...handWritten,
+    "../assets/app/icon-192.png",
+    "../assets/app/icon-512.png",
+  ];
+  const hash = crypto.createHash("sha256");
+  for (const f of [...files.keys()].sort()) hash.update(f).update(files.get(f));
+  for (const f of handWritten) hash.update(f).update(fs.readFileSync(path.join(OUT, f)));
+  hash.update(fs.readFileSync(path.join(root, "tools/site-sw.template.js")));
+  const version = hash.digest("hex").slice(0, 12);
+  files.set("sw.js", await pretty("sw.js", serviceWorker(version, precache)));
+
+  // The files built from the toy list or the git history follow main: a lane that
+  // adds a toy (or any merge) changes them, and the Operator's upkeep
+  // (tools/upkeep.mjs) rebuilds them after each merge. --check reports them but
+  // fails only on the rest: the shell, the hand-written pages and everything else
+  // the build makes. A new page type that reads toys belongs in TOY_TYPES.
+  const TOY_TYPES = new Set(["home", "shelves", "tools", "science", "learn", "about", "terms", "news", "markdown", "article", "embed", "toy"]); // prettier-ignore
+  const followsMain = new Set([
+    ...PAGES.filter((p) => TOY_TYPES.has(p.type)).map((p) => `${p.path}index.html`),
+    "search-index.json",
+    "sw.js",
+  ]);
+  let stale = 0;
+  let staleShell = 0;
+  // The root 404 page lives outside site/ (GitHub Pages serves only the root one).
+  const rootFiles = new Map([["404.html", await pretty("404.html", notFoundPreview())]]);
+  for (const [f, text] of rootFiles) {
+    const old = fs.existsSync(path.join(root, f))
+      ? fs.readFileSync(path.join(root, f), "utf8")
+      : null;
+    if (old === text) continue;
+    stale++;
+    if (CHECK) {
       staleShell++;
-      console.log(`out of date: site/${f}`);
-    }
-    continue;
+      console.log(`out of date: ${f}`);
+    } else fs.writeFileSync(path.join(root, f), text);
   }
-  fs.mkdirSync(path.dirname(file), { recursive: true });
-  fs.writeFileSync(file, text);
+  for (const [f, text] of files) {
+    const file = path.join(OUT, f);
+    const old = fs.existsSync(file) ? fs.readFileSync(file, "utf8") : null;
+    if (old === text) continue;
+    stale++;
+    if (CHECK) {
+      if (followsMain.has(f)) console.log(`follows main (rebuilt by the upkeep): site/${f}`);
+      else {
+        staleShell++;
+        console.log(`out of date: site/${f}`);
+      }
+      continue;
+    }
+    fs.mkdirSync(path.dirname(file), { recursive: true });
+    fs.writeFileSync(file, text);
+  }
+  // A toy that leaves the list takes its page with it.
+  for (const dir of fs.existsSync(path.join(OUT, "toys"))
+    ? fs.readdirSync(path.join(OUT, "toys"))
+    : []) {
+    if (!fs.statSync(path.join(OUT, "toys", dir)).isDirectory() || toyPageDirs().has(dir)) continue;
+    stale++;
+    if (CHECK) console.log(`follows main (rebuilt by the upkeep): site/toys/${dir}/`);
+    else fs.rmSync(path.join(OUT, "toys", dir), { recursive: true });
+  }
+  if (CHECK && staleShell) {
+    console.log("Run: node tools/site-build.mjs");
+    process.exit(1);
+  }
+  if (CHECK) {
+    console.log(`site/ is current${stale ? ` apart from ${stale} file(s) that follow main` : ""}.`);
+    process.exit(0);
+  }
+  console.log(
+    `site/: ${files.size} files (${stale} changed), ${PAGES.length} pages, version ${version}`,
+  );
 }
-// A toy that leaves the list takes its page with it.
-for (const dir of fs.existsSync(path.join(OUT, "toys"))
-  ? fs.readdirSync(path.join(OUT, "toys"))
-  : []) {
-  if (!fs.statSync(path.join(OUT, "toys", dir)).isDirectory() || toyPageDirs().has(dir)) continue;
-  stale++;
-  if (CHECK) console.log(`follows main (rebuilt by the upkeep): site/toys/${dir}/`);
-  else fs.rmSync(path.join(OUT, "toys", dir), { recursive: true });
+
+// ---- The swapped layout (lane Site r4) -------------------------------------------------------
+// The same pages with the site's home at the root and the Playground at playground/. Staged into
+// .cache/front-door/ (the app's own files are linked, not copied) unless FRONT_DOOR is on, which
+// writes it into the repo. See tools/site-front-door.mjs and docs/handoff/SiteR4.md.
+
+// Top-level entries the staged tree doesn't need (or builds itself).
+const NOT_STAGED = new Set([".git", ".cache", ".claude", ".grooph", "node_modules", "tests", "tools", "docs", "test-results", "playwright-report", "site", "assets", "index.html", "404.html", "sw.js", "sitemap.xml", "search-index.json", "manifest.webmanifest", "playground"]); // prettier-ignore
+
+async function buildSwapped() {
+  const writeInPlace = SWAP_OUT === root;
+  const gallerySrc = fs.existsSync(path.join(root, "playground/index.html"))
+    ? "playground/index.html"
+    : "index.html";
+  const assets = new Map();
+  const walk = (dir, rel) => {
+    for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
+      if (e.isDirectory()) walk(path.join(dir, e.name), `${rel}/${e.name}`);
+      else assets.set(`${rel}/${e.name}`, path.join(dir, e.name));
+    }
+  };
+  walk(path.join(OUT, "assets"), "assets");
+
+  const swSource = fs.readFileSync(path.join(root, "tools/site-sw-root.template.js"), "utf8");
+  const retireSource = fs.readFileSync(path.join(root, "tools/site-sw-retire.template.js"), "utf8");
+  const manifestSource = fs.existsSync(path.join(root, "manifest.webmanifest"))
+    ? fs.readFileSync(path.join(root, "manifest.webmanifest"), "utf8")
+    : files.get("manifest.webmanifest");
+  const gallerySource = fs.readFileSync(path.join(root, gallerySrc), "utf8");
+
+  const precache = [
+    "./",
+    ...PAGES.filter((p) => p.path && p.precache !== false).map((p) => p.path),
+    "404.html",
+    "play/",
+    "playground/",
+    "search-index.json",
+    "manifest.webmanifest",
+    ...handWritten,
+    "assets/app/icon-192.png",
+    "assets/app/icon-512.png",
+  ];
+  const layout = swapLayout({
+    files,
+    assets,
+    ctx: {
+      origin: SITE.origin,
+      siteBase: SITE.base,
+      notFoundLive: notFoundLive(),
+      gallerySource,
+      rootManifestText: manifestSource,
+      retireSource,
+    },
+  });
+  // Written into the repo, the files are formatted (and the version is a hash of what is written).
+  if (writeInPlace) for (const [f, t] of layout.text) layout.text.set(f, await pretty(f, t));
+  // The worker's version: a hash of everything it caches, so a change to any of it is a new worker.
+  const hash = crypto.createHash("sha256");
+  for (const f of [...layout.text.keys()].filter((k) => !k.startsWith("site/")).sort()) hash.update(f).update(layout.text.get(f)); // prettier-ignore
+  for (const f of handWritten) hash.update(f).update(fs.readFileSync(path.join(OUT, f)));
+  hash.update(swSource);
+  const version = hash.digest("hex").slice(0, 12);
+  const sw = swSource
+    .replace('"@@VERSION@@"', JSON.stringify(version))
+    .replace('["@@PRECACHE@@"]', JSON.stringify(precache));
+  layout.text.set("sw.js", writeInPlace ? await pretty("sw.js", sw) : sw);
+
+  if (CHECK) {
+    let n = 0;
+    for (const [f, t] of layout.text) {
+      const old = fs.existsSync(path.join(SWAP_OUT, f)) ? fs.readFileSync(path.join(SWAP_OUT, f), "utf8") : null; // prettier-ignore
+      if (old !== t) {
+        n++;
+        console.log(`out of date: ${f}`);
+      }
+    }
+    console.log(n ? `${n} file(s) out of date. Run: node tools/site-build.mjs` : "The swapped layout is current."); // prettier-ignore
+    process.exit(n ? 1 : 0);
+  }
+
+  if (!writeInPlace) {
+    fs.rmSync(SWAP_OUT, { recursive: true, force: true });
+    fs.mkdirSync(path.join(SWAP_OUT, "assets"), { recursive: true });
+    for (const e of fs.readdirSync(root)) {
+      if (NOT_STAGED.has(e)) continue;
+      fs.symlinkSync(path.join(root, e), path.join(SWAP_OUT, e));
+    }
+    for (const e of fs.readdirSync(path.join(root, "assets"))) {
+      fs.symlinkSync(path.join(root, "assets", e), path.join(SWAP_OUT, "assets", e));
+    }
+    // What stays under site/: its assets (the old addresses still work) and the catalog PDF.
+    fs.mkdirSync(path.join(SWAP_OUT, "site"), { recursive: true });
+    fs.symlinkSync(path.join(OUT, "assets"), path.join(SWAP_OUT, "site/assets"));
+    for (const f of ["splashery-catalog.pdf"]) {
+      if (fs.existsSync(path.join(OUT, f))) fs.symlinkSync(path.join(OUT, f), path.join(SWAP_OUT, "site", f)); // prettier-ignore
+    }
+  }
+  for (const [f, t] of layout.text) {
+    const file = path.join(SWAP_OUT, f);
+    fs.mkdirSync(path.dirname(file), { recursive: true });
+    fs.rmSync(file, { force: true });
+    fs.writeFileSync(file, t);
+  }
+  for (const [f, src] of layout.copy) {
+    const file = path.join(SWAP_OUT, f);
+    fs.mkdirSync(path.dirname(file), { recursive: true });
+    fs.rmSync(file, { force: true });
+    if (writeInPlace) fs.copyFileSync(src, file);
+    else fs.symlinkSync(src, file);
+  }
+  if (writeInPlace) {
+    // The preview's pages become redirects; what is left of them (a toy that left the list, the
+    // old search index and sitemap) goes. site/assets/ and the catalog PDF stay.
+    const keep = new Set([...layout.text.keys()]);
+    const prune = (dir) => {
+      for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
+        const abs = path.join(dir, e.name);
+        const rel = path.relative(root, abs).split(path.sep).join("/");
+        if (rel === "site/assets" || rel === "site/splashery-catalog.pdf") continue;
+        if (e.isDirectory()) {
+          prune(abs);
+          if (!fs.readdirSync(abs).length) fs.rmdirSync(abs);
+        } else if (!keep.has(rel)) fs.rmSync(abs);
+      }
+    };
+    prune(path.join(root, "site"));
+  }
+  console.log(
+    `${writeInPlace ? "the repo" : path.relative(root, SWAP_OUT)}: swapped layout, ${layout.text.size} generated files, version ${version}`, // prettier-ignore
+  );
 }
-if (CHECK && staleShell) {
-  console.log("Run: node tools/site-build.mjs");
-  process.exit(1);
-}
-if (CHECK) {
-  console.log(`site/ is current${stale ? ` apart from ${stale} file(s) that follow main` : ""}.`);
-  process.exit(0);
-}
-console.log(
-  `site/: ${files.size} files (${stale} changed), ${PAGES.length} pages, version ${version}`,
-);
+
+if (SWAPPED) await buildSwapped();
+else await buildPreview();

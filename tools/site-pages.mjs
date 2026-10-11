@@ -13,6 +13,14 @@
 import fs from "node:fs";
 import { toyPageEntries } from "./site-toy-pages.mjs";
 
+// The front-door switch (lane Site r4). Off, the site is a preview under site/ and the Playground
+// is the front door. On, `node tools/site-build.mjs` writes the swapped layout into the repo root:
+// the site's home page at the root, the Playground at playground/, one service worker at the
+// root, redirects left in site/, and no `noindex`. Flip it only for the swap itself, on the owner's
+// word (docs/handoff/SiteR4.md, "The swap, step by step"). Without it,
+// `node tools/site-build.mjs --front-door` still stages the swapped layout in .cache/front-door/.
+export const FRONT_DOOR = false;
+
 export const SITE = {
   name: "Splashery",
   tagline: "splats you can play with",

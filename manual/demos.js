@@ -81,9 +81,13 @@ function covDemo() {
     $("cov-readout").textContent =
       `Σ = [ ${t(m.a)}  ${t(m.b)} ]\n    [ ${t(m.b)}  ${t(m.c)} ]\n\n` +
       `squared sizes along its own axes (the eigenvalues): ${f.l1.toFixed(3)} and ${f.l2.toFixed(3)}\n` +
-      (f.l2 > 0
+      (!f.flat && f.l1 > 0 && f.l2 > 0
         ? `so the sizes are ${Math.sqrt(f.l1).toFixed(3)} and ${Math.sqrt(f.l2).toFixed(3)}; both must be above 0`
-        : `the second one is ${f.l2 < 0 ? "negative: a squared size can't be below 0, so there is no real size" : "0: that axis has no size at all"}`); // prettier-ignore
+        : f.flat
+          ? "one of them is 0: that axis has no size at all"
+          : f.l1 <= 0
+            ? "both are negative: a squared size can't be below 0, so there is no real size"
+            : "the second one is negative: a squared size can't be below 0, so there is no real size"); // prettier-ignore
     const v = $("cov-verdict");
     if (f.valid) {
       v.textContent = f.thin
@@ -93,8 +97,11 @@ function covDemo() {
     } else if (f.flat) {
       v.textContent = "Not valid: its determinant is 0, so it has no inverse (it is flat in one direction)."; // prettier-ignore
       v.className = "verdict bad";
+    } else if (f.det < 0) {
+      v.textContent = "Not valid: it has an inverse, but one eigenvalue is positive and one negative, so in some direction it grows instead of falling off (it isn't positive definite)."; // prettier-ignore
+      v.className = "verdict bad";
     } else {
-      v.textContent = "Not valid: in some direction it grows instead of falling off (it isn't positive definite)."; // prettier-ignore
+      v.textContent = "Not valid: both eigenvalues are negative, so in every direction it grows instead of falling off (it isn't positive definite)."; // prettier-ignore
       v.className = "verdict bad";
     }
   }
