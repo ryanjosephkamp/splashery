@@ -16,6 +16,8 @@ export const PAGES = [
   { file: "coming.html", title: "Chapters 6 to 10: coming next", ids: ["moving", "data", "photo3d", "codes", "make"] }, // prettier-ignore
   { file: "more.html", title: "What else Splashery does now", ids: ["more"] },
   { file: "unique.html", title: "What Splashery can do that other splat tools can't", ids: ["unique"] }, // prettier-ignore
+  { file: "built.html", title: "How Splashery is built", ids: ["built"] },
+  { file: "share.html", title: "Share links and QR codes", ids: ["share"] },
   { file: "experiments.html", title: "Open questions: other choices, not tried yet", ids: ["experiments"] }, // prettier-ignore
   { file: "later.html", title: "What comes later: Code a toy", ids: ["later"] },
   { file: "glossary.html", title: "Glossary", ids: ["glossary"] },

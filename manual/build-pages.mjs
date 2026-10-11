@@ -85,7 +85,9 @@ for (const p of pages)
 const hasFolds = (p) => /<details[^>]*class="[^"]*\bfold\b/.test(p.content);
 const demoScripts = (p) => {
   const ids = [...p.content.matchAll(/data-demo="([^"]+)"/g)].map((m) => m[1]);
-  return ids.length ? ["demos.js", "demos2.js"] : [];
+  return ids.length
+    ? ["demos.js", "demos2.js", ...(ids.includes("share-link") ? ["demos3.js"] : [])]
+    : [];
 };
 const headings = (p) =>
   [...p.content.matchAll(/<h3([^>]*)\sid="([^"]+)"([^>]*)>([\s\S]*?)<\/h3>/g)].map((m) => ({ id: m[2], text: plain(m[4]) })); // prettier-ignore
@@ -217,7 +219,7 @@ const onePage = (html) =>
     })
     .join("\n")
     // The whole-manual page does not link to itself, and has the fold buttons once, after the contents.
-    .replace(/\s*·\s*<a href="#[^"]*">Read it all on one page<\/a>/, "")
+    .replace(/\s*·\s*<a href="(?:#[^"]*|all\.html)">Read it all on one page<\/a>/, "")
     .replace(/(<!-- TOC:END -->)/, `$1\n      ${foldButtons}`);
   const html = `<!doctype html>
 <html lang="en">
@@ -230,6 +232,7 @@ const onePage = (html) =>
     <script type="module" src="fold.js"></script>
     <script type="module" src="demos.js"></script>
     <script type="module" src="demos2.js"></script>
+    <script type="module" src="demos3.js"></script>
   </head>
   <body>
     <main class="one-page">

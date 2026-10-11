@@ -79,6 +79,8 @@
             <li><a href="coming.html">Chapters 6 to 10: coming next</a></li>
             <li><a href="more.html">What else Splashery does now</a></li>
             <li><a href="unique.html">What Splashery can do that other splat tools can't</a></li>
+            <li><a href="built.html">How Splashery is built</a></li>
+            <li><a href="share.html">Share links and QR codes</a></li>
             <li><a href="experiments.html">Open questions: other choices, not tried yet</a></li>
             <li><a href="later.html">What comes later: Code a toy</a></li>
             <li><a href="glossary.html">Glossary</a></li>
@@ -593,9 +595,10 @@
         <p>
           <b>If it were chosen differently.</b> A recipe can already fake two such looks:
           <code>glint</code> brightens a splat as the camera moves, and <code>rim</code> changes
-          glass's opacity with the view. A real stored shine, with the color rule coming from the
-          recipe, is a planned experiment in the Kit lab. It would use the kit's own data and
-          shader, with no change to the engine.
+          glass's opacity with the view. A real shine that moves with the view now exists as a labs
+          experiment, on only when a link or the address asks for it with labs on
+          (<code>docs/lab/GLOSS.md</code>). It uses the kit's own data and shader, with no change to
+          the engine. Real-phone checks are still open.
         </p>
         <p class="where">
           Where it lives: <code>src/packs/fidelity.js</code> (its opening comment),
@@ -1004,8 +1007,10 @@
           (0.09 − 0.01) sin 30° cos 30° ≈ 0.035. Those off-diagonal numbers are the
           <b><span class="term" data-g="g-tilt">tilt</span></b
           >: they are zero when the splat's axes line up with <var>x</var>, <var>y</var>, and
-          <var>z</var>, and not zero when they do not. (In this manual, <b>rotation</b> means a
-          splat's own turn, and "Tilt lock" is the name of the camera control in Level 5.)
+          <var>z</var>, and usually not zero when they do not. (Usually, because a splat that is
+          round in a plane has no preferred axes there, so turning it within that plane changes
+          nothing.) (In this manual, <b>rotation</b> means a splat's own turn, and "Tilt lock" is
+          the name of the camera control in Level 5.)
         </p>
       </details>
 
@@ -1030,17 +1035,26 @@
         its eigenvalues are how far it spreads along them. This trick comes from EWA splatting
         (Zwicker, Pfister, van Baar, and Gross, 2001) [<a href="references.html#ref-2">2</a>].
       </p>
+      <p>
+        That is the first-order footprint, and a real renderer draws a little more than it. To keep
+        a tiny splat from shrinking to less than a pixel (and flickering), splat renderers add a
+        small blur on the screen: the original 3D Gaussian splatting code adds 0.3 square pixels to
+        each diagonal entry of the 2-by-2 matrix, and they also clamp very small axes and skip very
+        faint or tiny splats. Splashery's renderer is PlayCanvas's, which applies a filter of this
+        kind (its anti-aliasing option). So the demo below shows Σ′ itself, the geometry; the pixels
+        on your screen have that extra blur on top.
+      </p>
       <section class="demo-live" data-demo="projection" id="demo-projection">
         <h4>Try it: one ellipsoid, and a camera you can move</h4>
         <p class="hint">
           The solid line is the true outline on the screen of the shell one size out of a splat,
           found by sending points of the shell through the real perspective map. The dashed line is
-          the ellipse that the renderer draws, from <var>Σ′</var> = <var>J</var> <var>W</var>
-          <var>Σ</var> <var>W</var><sup>T</sup> <var>J</var><sup>T</sup>. Turn the camera and the
-          splat, and change its distance: far away the two lines are one line. Bring the camera in
-          and they part, because <var>J</var> is exact only at the center. (The zoom grows with the
-          distance, so the splat stays about the same size on screen and the only thing that changes
-          is how much perspective bends it.)
+          the ellipse that the formula gives (a renderer adds a small blur to this), from
+          <var>Σ′</var> = <var>J</var> <var>W</var> <var>Σ</var> <var>W</var><sup>T</sup>
+          <var>J</var><sup>T</sup>. Turn the camera and the splat, and change its distance: far away
+          the two lines are one line. Bring the camera in and they part, because <var>J</var> is
+          exact only at the center. (The zoom grows with the distance, so the splat stays about the
+          same size on screen and the only thing that changes is how much perspective bends it.)
         </p>
         <div class="demo-grid">
           <div>
@@ -1347,6 +1361,15 @@
           0.5 = 0.37. The share of the background that still shows, the
           <b><span class="term" data-g="g-opacity">transmittance</span></b
           >, is 0.6 × 0.5 = 0.3.
+        </p>
+        <p>
+          One caution about the numbers. 0.37 is the arithmetic of one channel in one consistent
+          blending space: the formula does not care what the 0 to 1 numbers mean, as long as every
+          number in the sum uses the same meaning. A screen's red, green, and blue numbers are
+          usually <i>encoded</i> (squeezed so that dark shades get more steps), and blending encoded
+          numbers is not the same as blending the light itself. So read 0.37 as the result of the
+          sum, not as a measured amount of light and not as the final pixel on any particular
+          screen.
         </p>
       </details>
       <div class="approx">

@@ -129,6 +129,11 @@ test.describe("the demos' math", () => {
     // Not valid: a negative determinant (it grows in some direction), and a flat one.
     expect(covFacts({ a: 0.1, b: 0.5, c: 0.1 }).valid).toBe(false);
     expect(covFacts({ a: 0.25, b: 0.5, c: 1 }).flat).toBe(true);
+    // Audit F08: very thin is still valid (a warning about accuracy, not a failure of the rule).
+    const thin = covFacts({ a: 1, b: 0, c: 1e-5 });
+    expect(thin.valid).toBe(true);
+    expect(thin.thin).toBe(true);
+    expect(thin.flat).toBe(false);
   });
 
   test("smoothstep at three points, and the moments' dip and budget", () => {
@@ -390,7 +395,7 @@ test.describe("the lighter layout", () => {
       "Store the moments in a keyframe texture",
       "Compile the formulas to a shader",
       "Recompute on the processor every frame",
-      "deflate and then written in base64url",
+      "compressed with raw deflate, and written in base64url",
       "A link carries settings, not your files",
       "No server is involved",
       "Open: no plan yet",

@@ -72,6 +72,8 @@
             <li><a href="coming.html">Chapters 6 to 10: coming next</a></li>
             <li><a href="more.html">What else Splashery does now</a></li>
             <li><a href="unique.html">What Splashery can do that other splat tools can't</a></li>
+            <li><a href="built.html">How Splashery is built</a></li>
+            <li><a href="share.html">Share links and QR codes</a></li>
             <li><a href="experiments.html">Open questions: other choices, not tried yet</a></li>
             <li><a href="later.html">What comes later: Code a toy</a></li>
             <li><a href="glossary.html">Glossary</a></li>
@@ -422,7 +424,8 @@ v = 0 .. 2pi</code></pre>
         <p>
           The toy's program is saved in its link as options, and a link keeps at most 16 option keys
           per toy. The twelve fields, plus the program picker, the splat style (Solid, Fine, or
-          Dots), and the Light and shade switch, come to 15. One more key would fit; two would not.
+          Dots), the Light and shade switch, and (in labs) the Moments of t choice, come to 16. A
+          fully filled toy has no spare key left; without labs it has one.
         </p>
         <p>
           <b>If it were chosen differently.</b> More fields means more option keys, so either the
@@ -524,7 +527,10 @@ v = 0 .. 2pi</code></pre>
           Type an expression in <var>u</var>, <var>v</var>, and <var>t</var>, or pick one. The tree
           shows what goes together first (deepest first), and the value is worked out at
           <var>u</var> = 1, <var>v</var> = 0.5, <var>t</var> = 0. It follows the real reader's rules
-          for powers, implied multiplication, and bare function inputs.
+          for powers, implied multiplication, and bare function inputs. The tree is a simplified
+          picture, though: the toy's own reader also checks the text and tells you under the tree if
+          it would refuse it (a field may be 240 characters, and there are limits on nesting and on
+          how many pieces it can hold).
         </p>
         <div class="chips" id="parse-presets" role="group" aria-label="Example expressions"></div>
         <label for="parse-input" class="hint">Expression</label>
@@ -572,10 +578,10 @@ v = 0 .. 2pi</code></pre>
           up to 24,000 characters), so the limit is not what stops longer fields. Two other guards
           would be next: expressions nest at most 32 deep and have at most 400 pieces. The cost of
           longer fields is longer links and slower builds, because each expression is worked out for
-          every point at 13 moments. At 240 characters a field can take up to twice as long to build
-          as at 120, and the longest possible link grows from about 1,400 to about 1,900 characters
-          once compressed (<code>docs/lab/EQUATION-FIELDS.md</code>). The graph and surface plotters
-          keep 120.
+          every point at every moment (at the default, 13 positions: the 12 moments and the closing
+          target). At 240 characters a field can take up to twice as long to build as at 120, and
+          the longest possible link grows from about 1,400 to about 1,900 characters once compressed
+          (<code>docs/lab/EQUATION-FIELDS.md</code>). The graph and surface plotters keep 120.
         </p>
         <p class="where">
           Where it lives: <code>FIELD_MAX</code> in <code>src/packs/splat-equation.js</code> (240);
@@ -772,11 +778,13 @@ function   = "sin" | "cos" | "tan" | "asin" | "acos" | "atan"
           <span class="chip limit">Format limit</span> It follows from how much room each splat has.
         </p>
         <p>
-          A moment's target place for each splat is stored as three whole numbers, one per axis,
-          each of 12 bits: 4,096 steps across a range of ±2 toy units. These are real binary digits,
-          not a figure of speech. A toy is fitted to a sphere 1.9 units across, so any move fits,
-          and one step is about 1/1,900 of the toy's width. Rounding to a step is the "tiny error"
-          the manual mentions: at most half a step.
+          What is stored for each splat's moment is the move from its place to its target place (the
+          displacement), as three whole numbers, one per axis, each of 12 bits: 4,096 steps across a
+          range of ±2 toy units. These are real binary digits, not a figure of speech. A toy is
+          fitted to a sphere 1.9 units across, so any move fits, and one step is about 1/1,900 of
+          the toy's width. Rounding to a step is the "tiny error" the manual mentions: at most half
+          a step, as long as the move is inside the range (a move beyond ±2 units is cut off at the
+          end of the range).
         </p>
         <p>
           Each splat's animation data is four 32-bit numbers, and two of them are already taken (the
@@ -798,12 +806,13 @@ w = qz + 4096 × channel     (one 12-bit number and the channel)</code></pre>
       </details>
       <div class="approx">
         <p>
-          <b>Approximations in time.</b> The shape is sampled at 12 moments, not solved for every
-          <var>t</var>. Only each splat's <em>position</em> slides toward the next copy, and that
-          target is packed into 12 bits per axis over a fixed range, so tiny errors are possible.
-          Its color, size, and rotation are built separately for each copy, so they can step at a
-          copy boundary instead of blending. The "count" you type is the number of points sampled
-          for each copy, not the total number of splats in the toy (Figure 3).
+          <b>Approximations in time.</b> The shape is sampled at 12 moments (or 13 to 15, if you
+          chose that in labs), not solved for every <var>t</var>. Only each splat's
+          <em>position</em> slides toward the next copy, and that target is packed into 12 bits per
+          axis over a fixed range, so tiny errors are possible. Its color, size, and rotation are
+          built separately for each copy, so they can step at a copy boundary instead of blending.
+          The "count" you type is the number of points sampled for each copy, not the total number
+          of splats in the toy (Figure 3).
         </p>
       </div>
       <!-- Figure 3 sources: 12 copies, one visible at a time: src/packs/splat-equation.js:27 (KNOTS),
@@ -964,9 +973,10 @@ w = qz + 4096 × channel     (one 12-bit number and the channel)</code></pre>
           <b>It skips impossible points.</b> Where an equation has no value (the square root of a
           negative number, a division by zero, the log of 0), that splat is left out. So is a point
           more than three times farther out than nearly all the others. A hue that can't be worked
-          out becomes gray, a red, green, or blue that can't becomes 0, and a size that can't
-          becomes a small default. If a splat's next moment is impossible, it holds still instead of
-          flying off.
+          out (not a number, or infinite) becomes gray. A red, green, or blue that is not a number
+          becomes 0, and one that is too large or too small is clamped to 1 or 0 (+∞ is 1 and −∞ is
+          0). A size that can't be worked out becomes a small default. If a splat's next moment is
+          impossible, it holds still instead of flying off.
         </li>
         <li>
           <b>It explains mistakes.</b> Each field that can't be read gets one plain message, like

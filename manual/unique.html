@@ -60,6 +60,8 @@
                 >What Splashery can do that other splat tools can't</a
               >
             </li>
+            <li><a href="built.html">How Splashery is built</a></li>
+            <li><a href="share.html">Share links and QR codes</a></li>
             <li><a href="experiments.html">Open questions: other choices, not tried yet</a></li>
             <li><a href="later.html">What comes later: Code a toy</a></li>
             <li><a href="glossary.html">Glossary</a></li>
@@ -73,9 +75,9 @@
         <a class="pager-prev" rel="prev" href="more.html"
           ><span class="pager-word">← Previous</span
           ><span class="pager-title">What else Splashery does now</span></a
-        ><a class="pager-next" rel="next" href="experiments.html"
+        ><a class="pager-next" rel="next" href="built.html"
           ><span class="pager-word">Next →</span
-          ><span class="pager-title">Open questions: other choices, not tried yet</span></a
+          ><span class="pager-title">How Splashery is built</span></a
         >
       </nav>
 
@@ -93,8 +95,9 @@
       <ul>
         <li>
           <b>Toys made from rules, in the browser.</b> A recipe of a few kilobytes becomes 60,000 to
-          400,000 splats on your device, depending on the device and the Detail setting. There is no
-          multi-megabyte file to download.
+          400,000 splats on your device, depending on the device and the Detail setting. The shape
+          itself is never a multi-megabyte file to download. (The page, the engine, and any optional
+          models or captures a toy uses still download, and only when that toy opens.)
         </li>
         <li>
           <b>Equations as a language.</b> Type <var>x</var>, <var>y</var>, and <var>z</var> in
@@ -116,9 +119,12 @@
           and the camera. How they work:
           <ul>
             <li>
-              The scene is compressed with deflate and then written in base64url
-              (<code>src/codec.js</code>). Where a browser cannot compress, the link carries the
-              plain text instead and says so.
+              The scene is written as JSON, compressed with raw deflate, and written in base64url,
+              with a
+              <code>d.</code> in front (<code>src/codec.js</code>). Where a browser cannot compress,
+              the link carries <code>j.</code> and the same JSON, uncompressed but still in
+              base64url, so it is not readable as plain text.
+              <a href="share.html">Share links and QR codes</a> explains the whole path.
             </li>
             <li>
               A link carries settings, not your files. A photo or a splat file from your device has
@@ -134,9 +140,9 @@
         <a class="pager-prev" rel="prev" href="more.html"
           ><span class="pager-word">← Previous</span
           ><span class="pager-title">What else Splashery does now</span></a
-        ><a class="pager-next" rel="next" href="experiments.html"
+        ><a class="pager-next" rel="next" href="built.html"
           ><span class="pager-word">Next →</span
-          ><span class="pager-title">Open questions: other choices, not tried yet</span></a
+          ><span class="pager-title">How Splashery is built</span></a
         >
       </nav>
       <footer>

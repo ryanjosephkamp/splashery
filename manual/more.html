@@ -77,6 +77,8 @@
               </ol>
             </li>
             <li><a href="unique.html">What Splashery can do that other splat tools can't</a></li>
+            <li><a href="built.html">How Splashery is built</a></li>
+            <li><a href="share.html">Share links and QR codes</a></li>
             <li><a href="experiments.html">Open questions: other choices, not tried yet</a></li>
             <li><a href="later.html">What comes later: Code a toy</a></li>
             <li><a href="glossary.html">Glossary</a></li>
@@ -123,10 +125,13 @@
       <p>
         With the ✋ switch on, a drag picks up whatever is under your finger and a quick let-go
         tosses it. It lands, bounces, and settles on the floor under the toy, inside an invisible
-        play area, and soft toys squish when they land. The ↺ button sends everything home. Every
-        toy plays this way, scans included, as one rigid body; a recipe's <code>hands</code> block
-        can instead make its pieces separate bodies, so a toy can have its own interactions. This is
-        not behind the labs switch.
+        play area, and soft toys squish when they land. The ↺ button sends everything home. Most
+        toys play this way, scans included, as one rigid body
+        (<code>src/physics/hands-on.js</code>). A recipe can turn it off (<code>handsOn: false</code
+        >), and picture toys and still toys play only if the recipe opts in
+        (<code>handsLevel1</code>) or has joints. A recipe's <code>hands</code> block can instead
+        make its pieces separate bodies, so a toy can have its own interactions. This is not behind
+        the labs switch.
       </p>
 
       <h3 id="the-qr-code-toy">The QR code toy</h3>
@@ -156,10 +161,12 @@
         A toy can read the microphone, the camera, or a shared screen, but only after you tap a
         button for it. Nothing is requested before that tap. While a source is on, a small "Live"
         pill with a Stop button shows at the top of the page, and the sound or pictures stay on your
-        device: nothing is recorded or sent. Two examples are the room echo meter (clap, and it
-        measures how long the room rings) and the splat mirror (your camera as splats, with a depth
-        model of about 27 MB that loads only after you start the camera). Both are behind the labs
-        switch.
+        device: nothing is sent anywhere, and nothing is recorded unless you ask. (One exception: a
+        recorder, such as the splat mirror's, records only after you tap Record, keeps the recording
+        on your device, and saves it only to a file you choose.) Two examples are the room echo
+        meter (clap, and it measures how long the room rings) and the splat mirror (your camera as
+        splats, with a depth model of about 27 MB that loads only after you start the camera). Both
+        are behind the labs switch.
       </p>
 
       <h3 id="books-albums-and-frames">Books, albums, and frames</h3>
@@ -203,12 +210,19 @@
       <h3 id="fluids-songs-and-smooth-bodies">Fluids, songs, and smooth bodies</h3>
       <p>
         A recipe can declare a liquid, a gas or a flame with <code>k.fluid</code>. It is simulated
-        while the toy is open and drawn as its own splats, one per particle, and the engine loads
-        only when such a toy opens. A keyboard toy can play songs from its own list, a MIDI file, or
-        a tune pasted as ABC notation, with every key, hammer, and string moving as a solid piece.
-        Recipes can also join shapes into one smooth body and place one toy's recipe inside
-        another's (the anatomy atlas does both). The Fluid lab, the bottle toys, and the anatomy
-        atlas are behind the labs switch.
+        while the toy is open, and the engine loads only when such a toy opens. How it is drawn
+        depends on the fluid and on the device. On the page's own path
+        (<code>src/fluids/render.js</code>) each liquid particle is four small splats. On a device
+        with WebGPU, the liquids run on the graphics chip instead and are drawn as one smooth
+        surface, in a pass after the splats (<code>src/fluids/gpu/surface.js</code>). Smoke, steam,
+        and flames run on a grid on either kind of device and are drawn as a glowing volume
+        (<code>src/fluids/gpu/gas.js</code>); where the grid is off, their particles are splats. So
+        "made of splats" holds for the simplest path, but it is not the only way a fluid is drawn. A
+        keyboard toy can play songs from its own list, a MIDI file, or a tune pasted as ABC
+        notation, with every key, hammer, and string moving as a solid piece. Recipes can also join
+        shapes into one smooth body and place one toy's recipe inside another's (the anatomy atlas
+        does both). The Fluid lab, the bottle toys, and the anatomy atlas are behind the labs
+        switch.
       </p>
 
       <h3 id="solid-fine-and-dots-and-the-detail-you-see">

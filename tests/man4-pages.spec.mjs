@@ -100,7 +100,7 @@ test.describe("the pages", () => {
       await btn.click();
       await expect(btn).toHaveAttribute("aria-expanded", "true");
       await expect(panel).toBeVisible();
-      const links = await panel.locator("ol > li > a").evaluateAll((as) => as.map((a) => [a.getAttribute("href"), a.textContent.trim(), a.getAttribute("aria-current")])); // prettier-ignore
+      const links = await panel.locator(":scope > ol > li > a").evaluateAll((as) => as.map((a) => [a.getAttribute("href"), a.textContent.trim(), a.getAttribute("aria-current")])); // prettier-ignore
       expect(links.map((l) => l[0])).toEqual(PAGES.map((q) => q.file));
       expect(links.filter((l) => l[2] === "page").map((l) => l[0])).toEqual([p.file]);
       for (const q of PAGES.filter((q) => q.chapter)) expect(links.map((l) => l[1])).toContain(`Chapter ${q.chapter}: ${q.title}`); // prettier-ignore
@@ -123,7 +123,7 @@ test.describe("the pages", () => {
     await page.tap(".manual-nav .outline-toggle");
     await expect(page.locator("#manual-contents")).toBeVisible();
     await page.screenshot({ path: path.join(SHOTS, "man4-pages-contents-open-390x844.png") });
-    await page.tap("h2");
+    await page.touchscreen.tap(4, 838);
     await expect(page.locator("#manual-contents")).toBeHidden();
     await page.tap(".manual-nav .outline-toggle");
     await page.tap('#manual-contents a[href="language.html"]');
@@ -181,7 +181,7 @@ test.describe("the pages", () => {
         const h = m[1];
         if (/^(https?:|mailto:|\.\.\/|#s=)/.test(h) || h === "") continue;
         const [file, hash] = h.startsWith("#") ? [p.file, h.slice(1)] : h.split("#");
-        if (/\.(pdf|js|css|png|jpg|webp)$/.test(file)) continue;
+        if (/\.(pdf|js|css|png|jpg|webp)$/.test(file) || file === "all.html") continue;
         if (p.file === "language.html" && hash?.startsWith("rr-")) continue; // the grammar's rules are drawn by script
         expect(ids[file], `${p.file}: ${h} goes to a page that is not in the manual`).toBeTruthy();
         if (hash) expect(ids[file].has(hash), `${p.file}: ${h}`).toBe(true);
@@ -237,9 +237,10 @@ test.describe("old addresses, pop-ups, and the whole manual", () => {
 
   test("every id in the manual is found by the old address", () => {
     const redirect = read("redirect.js");
-    const map = JSON.parse(/var pages = (\{[\s\S]*?\});/.exec(redirect)[1]);
+    const map = new Function(`return ${/var pages = (\{[\s\S]*?\});/.exec(redirect)[1]}`)();
     for (const p of PAGES.filter((p) => p.file !== "index.html"))
-      for (const id of idsOf(read(p.file))) expect(map[id], id).toBe(p.file);
+      for (const id of idsOf(read(p.file)).filter((i) => i !== "manual-contents"))
+        expect(map[id], id).toBe(p.file);
   });
 
   test("a glossary word shows its entry on every page, and links to the glossary page", async ({
@@ -257,7 +258,7 @@ test.describe("old addresses, pop-ups, and the whole manual", () => {
       await expect(pop, file).toBeVisible();
       const want = plain(new RegExp(`<dt id="${id}">([\\s\\S]*?)</dt>`).exec(g)[1]);
       await expect(pop.locator("strong")).toContainText(want.slice(0, 12));
-      const link = pop.locator("a");
+      const link = pop.locator("a", { hasText: "In the glossary" });
       await expect(link).toHaveAttribute(
         "href",
         file === "glossary.html" ? `#${id}` : `glossary.html#${id}`,
@@ -280,7 +281,7 @@ test.describe("old addresses, pop-ups, and the whole manual", () => {
       }
     }
     // Every page's text is in it (the chrome is not).
-    const flat = plain(all);
+    const flat = plain(all.replace(/<(pre|svg|script|style)[\s\S]*?<\/\1>/g, " "));
     for (const p of PAGES) {
       const body = read(p.file);
       const content = body.slice(

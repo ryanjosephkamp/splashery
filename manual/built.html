@@ -1,0 +1,506 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- HEAD:START (written by manual/build-pages.mjs; do not edit by hand) -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>How Splashery is built · The Tinkerer's Manual</title>
+    <meta
+      name="description"
+      content="How Splashery is built. The Tinkerer's Manual: how to program Gaussian splats in Splashery."
+    />
+    <link rel="stylesheet" href="manual.css" />
+    <link rel="stylesheet" href="../site/assets/outline.css" />
+
+    <script type="module" src="fold.js"></script>
+    <script type="module" src="nav.js"></script>
+    <!-- HEAD:END -->
+  </head>
+  <body>
+    <main>
+      <!-- NAV:TOP:START (written by manual/build-pages.mjs; do not edit by hand) -->
+      <div class="outline no-print manual-nav">
+        <button
+          type="button"
+          class="outline-toggle"
+          aria-expanded="false"
+          aria-controls="manual-contents"
+        >
+          <span class="outline-label">Contents</span
+          ><span class="outline-now">How Splashery is built</span
+          ><svg
+            class="outline-chevron"
+            viewBox="0 0 16 16"
+            width="16"
+            height="16"
+            aria-hidden="true"
+          >
+            <path
+              d="m3.5 6 4.5 4.5L12.5 6"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </button>
+        <nav class="outline-panel" id="manual-contents" aria-label="The manual's chapters" hidden>
+          <ol>
+            <li><a href="index.html">Contents</a></li>
+            <li><a href="splat.html">Chapter 1: What a splat is</a></li>
+            <li><a href="toy.html">Chapter 2: How a toy is built</a></li>
+            <li><a href="language.html">Chapter 3: The splat equation language</a></li>
+            <li><a href="gallery.html">Chapter 4: A gallery of programs</a></li>
+            <li><a href="pictures.html">Chapter 5: Pictures, screens, and your own input</a></li>
+            <li><a href="coming.html">Chapters 6 to 10: coming next</a></li>
+            <li><a href="more.html">What else Splashery does now</a></li>
+            <li><a href="unique.html">What Splashery can do that other splat tools can't</a></li>
+            <li>
+              <a href="built.html" aria-current="page">How Splashery is built</a>
+              <ol class="outline-sub" aria-label="In this chapter">
+                <li><a href="#static-files-and-modules">Plain files, and nothing else</a></li>
+                <li><a href="#where-the-files-are">Where the files are</a></li>
+                <li>
+                  <a href="#what-playcanvas-does">What PlayCanvas does, and what is our own</a>
+                </li>
+                <li>
+                  <a href="#outside-libraries">Every library that ships, and when it loads</a>
+                </li>
+                <li><a href="#how-a-toy-gets-on-the-shelf">How a toy gets on the shelf</a></li>
+              </ol>
+            </li>
+            <li><a href="share.html">Share links and QR codes</a></li>
+            <li><a href="experiments.html">Open questions: other choices, not tried yet</a></li>
+            <li><a href="later.html">What comes later: Code a toy</a></li>
+            <li><a href="glossary.html">Glossary</a></li>
+            <li><a href="reading.html">Further reading</a></li>
+            <li><a href="references.html">References</a></li>
+            <li><a href="card.html">Quick reference</a></li>
+          </ol>
+        </nav>
+      </div>
+      <nav class="pager no-print" aria-label="Previous and next chapter, top">
+        <a class="pager-prev" rel="prev" href="unique.html"
+          ><span class="pager-word">← Previous</span
+          ><span class="pager-title">What Splashery can do that other splat tools can't</span></a
+        ><a class="pager-next" rel="next" href="share.html"
+          ><span class="pager-word">Next →</span
+          ><span class="pager-title">Share links and QR codes</span></a
+        >
+      </nav>
+      <p class="no-print fold-all">
+        <button type="button" data-fold-all="open">Open all the folds</button>
+        <button type="button" data-fold-all="close">Close all the folds</button>
+        <span class="muted">Definitions, derivations, notes, and long tables start folded.</span>
+      </p>
+      <!-- NAV:TOP:END -->
+      <!-- ---- How Splashery is built ---- -->
+      <h2 id="built">How Splashery is built</h2>
+      <p>
+        Everything else in this manual is about what a toy is. This chapter is about the program
+        that holds the toys: where its files are, why it is made of plain files with no build step,
+        what the PlayCanvas engine does for us, what we wrote ourselves, and every outside library
+        that ships with the site. The file names are real. Open the
+        <a href="https://github.com/ryanjosephkamp/splashery" target="_blank" rel="noopener"
+          >source</a
+        >
+        beside this page and you can follow along.
+      </p>
+
+      <h3 id="static-files-and-modules">Plain files, and nothing else</h3>
+      <p>
+        Splashery is <b>static files and ES modules</b>. There is no bundler (nothing turns many
+        files into one), no server program, no database, no content delivery network, and no key to
+        a paid service. A web page asks for <code>index.html</code>; that page asks for
+        <code>src/app.js</code>; and the browser follows each <code>import</code> line to the next
+        file, one request each. The site is served as it sits in the repository (GitHub Pages serves
+        the <code>main</code> branch), and to run it on your own computer you start any file server
+        in the folder, for example <code>python3 -m http.server 4173 --bind 127.0.0.1</code>. There
+        is nothing to install first, and <code>package.json</code> has no build step.
+      </p>
+      <details class="fold why" id="why-static">
+        <summary>Why this way? No bundler, no server</summary>
+        <p class="kind">
+          <span class="chip both">Our choice</span> It is a ground rule of the project
+          (<code>CLAUDE.md</code>), kept on purpose.
+        </p>
+        <p>
+          Four things follow from it. A toy can be <b>read</b>: the file you open in the browser's
+          tools is the file in the repository, not a squeezed copy. The site
+          <b>costs nothing to run</b> and cannot go down because a server did. Your scenes and files
+          <b>stay on your device</b>, because there is no server to send them to (the Terms of use
+          in the About tab say so). And a page that embeds a toy (<code>embed/index.html</code>, the
+          <code>&lt;splashery-toy&gt;</code> element in <code>src/element.js</code>) needs only a
+          few static files, with a test that keeps an embed under 30 MB.
+        </p>
+        <p>
+          <b>If it were chosen differently.</b> A bundler would make the first load smaller and
+          faster (one file instead of hundreds, with unused code removed). A server would allow
+          short links, saved accounts, and heavy work done off the phone. Each costs something the
+          four points above give for free. The cost of the choice today is that a rarely used part
+          must be loaded by hand, only when its toy opens (see the libraries below).
+        </p>
+        <p class="where">
+          Where it lives: <code>index.html</code>, <code>package.json</code>,
+          <code>playwright.config.mjs</code> (the test server is the same file server), and
+          <code>CLAUDE.md</code> (the ground rules).
+        </p>
+      </details>
+
+      <h3 id="where-the-files-are">Where the files are</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Folder or file</th>
+              <th>What is in it</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>index.html</code>, <code>styles.css</code></td>
+              <td>The app: one page, its styles, and a small import map for the GIF encoder.</td>
+            </tr>
+            <tr>
+              <td><code>src/</code></td>
+              <td>
+                The program. The core is a few files: <code>app.js</code> and
+                <code>ui.js</code> (wiring and panels), <code>player.js</code> (the clock, camera,
+                effects, and tools for the toy on show), <code>stage.js</code> (the one place that
+                talks to the engine), <code>state.js</code> and <code>codec.js</code> (the scene
+                document and the link; see "Share links and QR codes"), <code>toys.js</code> (the
+                shelf), and <code>kit.js</code> with <code>generators.js</code> (the toy kit, Level
+                2).
+              </td>
+            </tr>
+            <tr>
+              <td><code>src/packs/</code></td>
+              <td>
+                The toys' recipes, one file for each family of toys (about a hundred files):
+                <code>balls.js</code>, <code>food.js</code>, <code>splat-equation.js</code> (the
+                language of Level 3), and so on. A recipe is the JavaScript of Level 2;
+                <code>src/toys.js</code> lists each toy with the pack it comes from and whether it
+                is behind the labs switch.
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <code>src/arcade/</code>, <code>src/fluids/</code>, <code>src/physics/</code>,
+                <code>src/qr/</code>, <code>src/live/</code>, and other folders
+              </td>
+              <td>
+                Bigger systems that more than one toy shares, each in its own folder: the games, the
+                liquids and flames, the hands-on physics, QR codes, and the microphone and camera.
+                Most are loaded only when a toy that needs them opens.
+              </td>
+            </tr>
+            <tr>
+              <td><code>assets/</code></td>
+              <td>
+                Captured toys (as <code>.sog</code> files), thumbnails, flags, and the sounds and
+                data some toys read. Every asset's license is in <code>CREDITS.md</code>.
+              </td>
+            </tr>
+            <tr>
+              <td><code>vendor/</code></td>
+              <td>
+                Other people's libraries, copied in unchanged. The next two sections list them all.
+              </td>
+            </tr>
+            <tr>
+              <td><code>tools/</code></td>
+              <td>
+                Node scripts that run on a build machine and are never loaded by the site: they
+                prepare assets, make thumbnails and clips, build the site's pages
+                (<code>tools/site-build.mjs</code>), print this manual's PDF
+                (<code>tools/manual-pdf.mjs</code>), and keep the plan of every toy
+                (<code>tools/toy-plan.json</code>).
+              </td>
+            </tr>
+            <tr>
+              <td><code>tests/</code></td>
+              <td>
+                The Playwright tests, which open the real site in a real browser. For example,
+                <code>tests/taps.spec.mjs</code> finds every toy's tap by itself, so a new toy is
+                tried the day it is added.
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <code>embed/</code>, <code>worlds/</code>, <code>showcase/</code>,
+                <code>site/</code>, <code>manual/</code>, <code>pdf-lab/</code>
+              </td>
+              <td>
+                The other pages of the site: the embed player, the Worlds, the Showcase, the guides
+                and Learn hub (<code>site/</code>), this manual, and the PDF lab.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 id="what-playcanvas-does">What PlayCanvas does, and what is our own</h3>
+      <p>
+        <a href="https://playcanvas.com/" target="_blank" rel="noopener">PlayCanvas</a> is an open
+        source (MIT) web graphics engine. Splashery vendors version 2.22.3 as one file,
+        <code>vendor/playcanvas/playcanvas.min.mjs</code>, and every other file reaches it only
+        through <code>src/pc.js</code>, which does nothing but re-export it. The ordinary toys never
+        touch it: <code>src/stage.js</code> (with <code>src/paint.js</code> and
+        <code>src/loaders.js</code>) is the one place that sets up the device and shows a toy, and
+        only about two dozen files in all (the stage, the fluids, the Worlds, the live relief, and a
+        few toys that draw extra layers) import <code>src/pc.js</code>.
+      </p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>PlayCanvas does</th>
+              <th>Our own code does</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                Opens the graphics device: WebGPU when the browser has a working one, otherwise
+                WebGL2 (<code>deviceOrder</code> in <code>src/stage.js</code> picks).
+              </td>
+              <td>
+                Says which to try first, shows a plain message when neither exists, and falls back
+                to a poster.
+              </td>
+            </tr>
+            <tr>
+              <td>
+                Holds the splats in textures, projects each one to the screen (Level 1), draws it as
+                a quad with a Gaussian falloff, and blends them back to front.
+              </td>
+              <td>
+                Decides which splats exist: the kit and generators build them from recipes
+                (<code>src/kit.js</code>, <code>src/generators.js</code>), and the equation language
+                makes them from your formulas.
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <b>Sorts</b> the splats by depth on a worker, a few frames after anything moves (the
+                comment in <code>src/stage.js</code> about "splat sorting" is about this).
+              </td>
+              <td>
+                Keeps frames coming while the sort finishes, and asks for a new sort when the toy
+                moves.
+              </td>
+            </tr>
+            <tr>
+              <td>
+                Reads <code>.sog</code> and <code>.ply</code> splat files and runs a function on
+                every splat each frame (a "work buffer modifier").
+              </td>
+              <td>
+                The modifier itself: the per-splat effects and the kit's parts, hinges, morphs, and
+                colors, written in two shader languages (<code>src/effects.js</code>), plus the
+                sharper falloff in <code>src/kernels.js</code>. Also reads <code>.splat</code> and
+                <code>.spz</code> files (<code>src/loaders.js</code>).
+              </td>
+            </tr>
+            <tr>
+              <td>The scene graph, a camera, and a loop that calls us each frame.</td>
+              <td>
+                The orbit camera and touch gestures (<code>src/camera.js</code>), paint
+                (<code>src/paint.js</code>), picking, sound (<code>src/sound.js</code>, WebAudio),
+                the panels, the scene document, and every toy.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p>
+        So the engine is the drawing machine, and the toys are ours. Splashery is
+        <b>primarily splat based</b>, not only: the photo toys' Sharp view is a textured mesh of
+        triangles (<code>src/live/relief-mesh.js</code>), the WebGPU liquid surface and the gas grid
+        are extra passes drawn after the splats (<code>src/fluids/gpu/</code>), and the hands-on
+        physics and the games' rules are ordinary JavaScript with no drawing in them at all. (See
+        "What else Splashery does now".)
+      </p>
+      <p class="where">
+        Where it lives: <code>src/pc.js</code> (the one import), <code>src/stage.js</code> (the
+        device, the toy's entity, the sort), <code>src/effects.js</code> and
+        <code>src/kernels.js</code> (the shader code), <code>vendor/playcanvas/LICENSE</code>.
+      </p>
+
+      <h3 id="outside-libraries">Every library that ships, and when it loads</h3>
+      <p>
+        These are all the outside libraries and models in <code>vendor/</code>, the only files in
+        the site that we did not write. <code>LICENSES.md</code> has the full notice and source for
+        each. The rule (see <code>CLAUDE.md</code>) is that a library is vendored, loaded only when
+        the toy that needs it opens, and listed there before it is used. Nothing is fetched from a
+        content delivery network or an outside server, and no key is needed.
+      </p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Library (folder in <code>vendor/</code>)</th>
+              <th>Its job</th>
+              <th>License</th>
+              <th>When it loads</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>PlayCanvas 2.22.3 (<code>playcanvas</code>)</td>
+              <td>The drawing engine, above.</td>
+              <td>MIT</td>
+              <td>With every page that draws a toy (the app, the embed, the Worlds).</td>
+            </tr>
+            <tr>
+              <td>gifenc 1.0.3 (<code>gifenc</code>)</td>
+              <td>Writes an animated GIF when you export one.</td>
+              <td>MIT</td>
+              <td>
+                With the app (<code>src/exports.js</code> imports it through the import map in
+                <code>index.html</code>); it is small.
+              </td>
+            </tr>
+            <tr>
+              <td>PDF.js 6.3.289 (<code>pdfjs</code>)</td>
+              <td>Reads a PDF so its pages can become splats.</td>
+              <td>Apache-2.0 (its image decoders: BSD and MIT)</td>
+              <td>Only when you open a PDF (<code>src/media.js</code>).</td>
+            </tr>
+            <tr>
+              <td>omggif 1.0.10 (<code>omggif</code>)</td>
+              <td>Reads a GIF's frames in browsers that cannot decode them (Safari).</td>
+              <td>MIT</td>
+              <td>Only when you open a GIF in such a browser.</td>
+            </tr>
+            <tr>
+              <td>ONNX Runtime Web 1.30.0 (<code>onnxruntime-web</code>)</td>
+              <td>Runs a neural network on your device, in WebAssembly.</td>
+              <td>MIT</td>
+              <td>
+                Only when you open a photo or start a camera for depth, or a recording in Note
+                Rider.
+              </td>
+            </tr>
+            <tr>
+              <td>
+                Depth Anything V2 Small, int8 (<code>depth-anything-v2-small</code>, about 27 MB)
+              </td>
+              <td>The model that guesses how far away each part of a photo is.</td>
+              <td>Apache-2.0</td>
+              <td>Only when a toy needs depth (Photo to 3D and its relatives).</td>
+            </tr>
+            <tr>
+              <td>Basic Pitch model (<code>basic-pitch</code>, about 230 KB)</td>
+              <td>The model that finds the notes in a recording.</td>
+              <td>Apache-2.0</td>
+              <td>Only when you open a recording as your own song in Note Rider.</td>
+            </tr>
+            <tr>
+              <td>Splat.js 0.1.0 (<code>splatjs</code>)</td>
+              <td>Trains a splat scene from the frames of a video.</td>
+              <td>MIT</td>
+              <td>Only when you open a video in Video to 3D (labs).</td>
+            </tr>
+            <tr>
+              <td>Project Nayuki's QR Code generator (<code>qrcodegen</code>)</td>
+              <td>Writes the QR code's modules.</td>
+              <td>MIT</td>
+              <td>Only when the QR code toy, or the Share tab's scene code, opens (labs).</td>
+            </tr>
+            <tr>
+              <td>jsQR 1.4.0 (<code>jsqr</code>)</td>
+              <td>Reads a QR code back, to check that it scans.</td>
+              <td>Apache-2.0</td>
+              <td>
+                Only when a QR toy checks a code in a browser whose own barcode reader cannot read
+                QR codes.
+              </td>
+            </tr>
+            <tr>
+              <td>ZXing for JavaScript 0.21.3 (<code>zxing-js</code>)</td>
+              <td>Writes and reads Data Matrix and Aztec codes.</td>
+              <td>Apache-2.0</td>
+              <td>Only when the "Other barcodes" toy opens (labs).</td>
+            </tr>
+            <tr>
+              <td>pdf-lib 1.17.1 (<code>pdf-lib</code>)</td>
+              <td>Writes a PDF when you choose Save PDF.</td>
+              <td>MIT</td>
+              <td>Only when you save a PDF from the Share tab (labs).</td>
+            </tr>
+            <tr>
+              <td>laz-perf 0.0.7 (<code>laz-perf</code>)</td>
+              <td>Reads a <code>.laz</code> point cloud.</td>
+              <td>Apache-2.0</td>
+              <td>Only when you open a <code>.laz</code> file in Point clouds (labs).</td>
+            </tr>
+            <tr>
+              <td>dicom-parser 1.8.21 (<code>dicom-parser</code>)</td>
+              <td>Reads a DICOM medical scan.</td>
+              <td>MIT</td>
+              <td>Only when you open a DICOM file in the Volume viewer (labs).</td>
+            </tr>
+            <tr>
+              <td>libwebp, from splat-transform 3.6.1 (<code>webp</code>)</td>
+              <td>Reads and writes the lossless pictures inside a <code>.sog</code> file.</td>
+              <td>MIT and BSD-3-Clause</td>
+              <td>Only when you open or save a <code>.sog</code> in the Splat toolkit (labs).</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p>
+        The Wikipedia book and the earthquakes, migration, and protein toys do read from outside the
+        site, but they fetch data (an article, a feed, a structure), not code, only when you ask,
+        and a snapshot ships for when the feed cannot be reached.
+      </p>
+      <details class="fold approx" id="build-tools">
+        <summary>What is used to build the site, but is not in it</summary>
+        <p>
+          <code>package.json</code> lists pinned <code>devDependencies</code> (the Playwright test
+          runner, Prettier, a splat converter, glTF readers, and the QR readers used to test codes).
+          Some programs outside npm (Blender, the Brush and msplat trainers) make the captured
+          splats on the owner's computer. None of them is served; <code>LICENSES.md</code>, under
+          "Development tools" and "Build tools outside npm", lists each with its license.
+        </p>
+      </details>
+
+      <h3 id="how-a-toy-gets-on-the-shelf">How a toy gets on the shelf</h3>
+      <p>
+        Putting this together: a toy is a recipe in a file in <code>src/packs/</code>, one entry in
+        <code>src/toys.js</code> (its id, label, category, pack, and whether it is labs), its sound
+        in <code>src/toy-sounds.js</code>, its help text in <code>src/toy-help.js</code>, and its
+        plan in <code>tools/toy-plan.json</code>. Nothing is compiled or registered anywhere else.
+        The next time the page loads, the toy is on the shelf, and the tests find it.
+      </p>
+      <p class="where">
+        Where it lives: <code>README.md</code> ("Layout"), <code>LICENSES.md</code>,
+        <code>CREDITS.md</code>, <code>docs/PACKS.md</code> (how to write a recipe).
+      </p>
+
+      <!-- NAV:BOTTOM:START (written by manual/build-pages.mjs; do not edit by hand) -->
+      <nav class="pager no-print" aria-label="Previous and next chapter, bottom">
+        <a class="pager-prev" rel="prev" href="unique.html"
+          ><span class="pager-word">← Previous</span
+          ><span class="pager-title">What Splashery can do that other splat tools can't</span></a
+        ><a class="pager-next" rel="next" href="share.html"
+          ><span class="pager-word">Next →</span
+          ><span class="pager-title">Share links and QR codes</span></a
+        >
+      </nav>
+      <footer>
+        <p>
+          The Tinkerer's Manual, first published September 28, 2026 and updated October 11, 2026.
+          Part of
+          <a href="https://ryanjosephkamp.github.io/splashery/" target="_blank" rel="noopener"
+            >Splashery</a
+          >, a toy box of 3D Gaussian splats that runs in your browser. Every picture here was made
+          with Splashery itself.
+        </p>
+      </footer>
+      <!-- NAV:BOTTOM:END -->
+    </main>
+  </body>
+</html>
