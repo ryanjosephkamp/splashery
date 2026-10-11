@@ -111,7 +111,7 @@ function run(kind) {
       }
     }
     const mix = follow(want, dt);
-    if (kind === "box") box.step(dt, mix, 0, C.LIVE?.secs);
+    if (kind === "box") box.step(dt, mix, 0, C.LIVE?.secs, C.LIVE?.drift);
     else
       sand.step(
         dt,
@@ -139,6 +139,12 @@ function run(kind) {
       sp,
       settled,
     });
+  }
+  if (box) {
+    const occ = new Set();
+    for (let i = 0; i < box.n; i++)
+      occ.add([0, 1, 2].map((a) => Math.min(11, Math.floor((box.P[i * 3 + a] + 1) * 6))).join());
+    log.coverage = occ.size / 1728;
   }
   return log;
 }
@@ -190,6 +196,7 @@ function summarize(log) {
     meanSettledOnCurrent: +mean(playing.map((r) => r.settled ?? 0)).toFixed(2),
     meanSpeed: +mean(playing.map((r) => r.sp)).toFixed(3),
     p90Speed: +playing.map((r) => r.sp).sort((a, b) => a - b)[Math.floor(playing.length * 0.9)].toFixed(3), // prettier-ignore
+    coverageAtEnd: log.coverage === undefined ? null : +log.coverage.toFixed(2),
     quietLastThird: +mean(playing.slice(Math.floor(playing.length * 0.66)).map((r) => r.sp)).toFixed(3), // prettier-ignore
   };
 }
@@ -222,7 +229,7 @@ function stepResponse(kind, loud) {
     const P0 = kind === "box" ? Float32Array.from(st.P) : null;
     for (let i = 1; i <= 5 * FPS; i++) {
       const mix = follow([{ mode: mB, a: aB }], dt);
-      if (kind === "box") st.step(dt, mix, 0, C.LIVE?.secs);
+      if (kind === "box") st.step(dt, mix, 0, C.LIVE?.secs, C.LIVE?.drift);
       else
         st.step(
           dt,

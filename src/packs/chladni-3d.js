@@ -226,6 +226,12 @@ export function potentialGrid(mode) {
         const p = phi[id(i, j, k)];
         U[id(i, j, k)] = F1 * p * p - 1.5 * F2 * (g2 / kk);
       }
+  // Live r10: ∇φ too (the normal of the still surfaces, for the drift).
+  const dphi = new Float32Array(N * N * N * 3);
+  for (let k = 0; k < N; k++)
+    for (let j = 0; j < N; j++)
+      for (let i = 0; i < N; i++)
+        for (let ax = 0; ax < 3; ax++) dphi[id(i, j, k) * 3 + ax] = d(phi, i, j, k, ax);
   const grad = new Float32Array(N * N * N * 3);
   let max = 1e-9;
   for (let k = 0; k < N; k++)
@@ -235,7 +241,7 @@ export function potentialGrid(mode) {
         for (let ax = 0; ax < 3; ax++) grad[o + ax] = d(U, i, j, k, ax);
         max = Math.max(max, Math.hypot(grad[o], grad[o + 1], grad[o + 2]));
       }
-  return { U, grad, max, N, h };
+  return { U, grad, dphi, max, N, h };
 }
 
 // Lane Live r9: each mode's grid is worked out once (its slope only, which
@@ -245,14 +251,15 @@ export function gridFor(mode) {
   const key = mode.id || JSON.stringify(mode);
   let g = GRIDS.get(key);
   if (!g) {
-    const { grad, max, N, h } = potentialGrid(mode);
-    GRIDS.set(key, (g = { grad, max, N, h }));
+    const { grad, dphi, max, N, h } = potentialGrid(mode);
+    GRIDS.set(key, (g = { grad, dphi, max, N, h }));
   }
   return g;
 }
 
-function sample(grid, x, y, z, out) {
-  const { grad, N, h } = grid;
+function sample(grid, x, y, z, out, field = "grad") {
+  const { N, h } = grid;
+  const grad = grid[field];
   const fx = clamp((x + 1) / h, 0, N - 1.0001);
   const fy = clamp((y + 1) / h, 0, N - 1.0001);
   const fz = clamp((z + 1) / h, 0, N - 1.0001);
@@ -289,7 +296,8 @@ const SETTLE_SECS = 1.1; // the time scale of the slide (at full sound)
 // ease over `follow` seconds. The force law and the figures are unchanged:
 // only the clock of the slide is faster, as the toy's clock already is (a
 // real cell takes seconds to tens of seconds; Live r8's About says so).
-export const LIVE = { secs: 0.35, follow: 0.08 };
+// `drift`: a stand-in for the water's streaming (Beads.step).
+export const LIVE = { secs: 0.35, follow: 0.08, drift: 0.15 };
 
 // The beads: n of them, scattered evenly through the cell.
 export class Beads {
@@ -336,7 +344,7 @@ export class Beads {
   // strength squared: U = Σ aₘ² Uₘ (the plate's E = Σ aₘ² wₘ², in 3D). Each
   // mode's U is scaled to its own steepest slope, so every mode at full
   // strength moves the beads as fast as the toy's single mode does.
-  step(dt, a, stir = 0, secs = SETTLE_SECS) {
+  step(dt, a, stir = 0, secs = SETTLE_SECS, drift = 0) {
     const drive = typeof a === "number" ? [{ mode: this.mode, a }] : a;
     const live = [];
     for (const d of drive)
@@ -354,6 +362,25 @@ export class Beads {
     const sub = Math.max(1, Math.ceil(dt / 0.02));
     const h = dt / sub;
     let moved = 0;
+    // Live r10: `drift` (cell half-widths a √second at full sound) stands in
+    // for the water's acoustic streaming, a slow flow the sound drives that
+    // drags beads about (Muller and others, 2013, measured it at about 60
+    // µm/s beside radiation-driven beads at up to about 1 mm/s): a small
+    // random walk along the leading mode's still surface, growing with the
+    // sound's energy. The force still pins each bead across its surface, and
+    // the walk never pushes it off, so a figure stays crisp
+    // (tools/lv10-measure.mjs), but with music the beads spread along the
+    // surfaces instead of piling up for good where several notes' surfaces
+    // cross (of the cell's 12³ blocks, 5% still held beads at the end of the
+    // test song before Live r10, 2% with only the faster slide, 23% with it).
+    let E = 0;
+    for (const d of drive) E += d.a * d.a;
+    const walk = drift > 0 && live.length ? drift * Math.sqrt(Math.min(1, E) * h) * Math.sqrt(12) : 0; // prettier-ignore
+    // The walk runs along the leading mode's still surface only (its
+    // component along ∇φ taken out), as streaming carries pinned beads.
+    const top = walk ? drive.reduce((b, d) => (!b || d.a > b.a ? d : b), null).mode : null;
+    const lead = top && (top === this.mode ? this.grid : gridFor(top));
+    const nv = [0, 0, 0];
     for (let s = 0; s < sub; s++)
       for (let i = 0; i < this.n; i++) {
         const o = i * 3;
@@ -370,6 +397,24 @@ export class Beads {
         let dx = -g[0] * h;
         let dy = -g[1] * h;
         let dz = -g[2] * h;
+        if (walk) {
+          const r = this.rand;
+          let wx = walk * (r() - 0.5);
+          let wy = walk * (r() - 0.5);
+          let wz = walk * (r() - 0.5);
+          sample(lead, x, y, z, nv, "dphi");
+          const [nx, ny, nz] = nv;
+          const nn = nx * nx + ny * ny + nz * nz;
+          if (nn > 1e-12) {
+            const k = (wx * nx + wy * ny + wz * nz) / nn;
+            wx -= k * nx;
+            wy -= k * ny;
+            wz -= k * nz;
+          }
+          dx += wx;
+          dy += wy;
+          dz += wz;
+        }
         if (stir > 0) {
           // A swirl about the upright axis and a stir up and down.
           const r = this.rand;
@@ -811,7 +856,7 @@ export function modesInfo() {
       "What is measured, and what is a model",
       [
         "Measured physics: the radiation force and its formula, beads gathering on pressure nodes, and the mode formulas for a rigid box and a rigid sphere. The slow drift of beads along the surfaces, toward where the water swings most, is real too (the second term of U).",
-        "Model choices: the walls are perfectly rigid and the shapes perfect (real glass flexes a little, which shifts the modes); mixed modes ring in equal parts; the music is moved by octaves and scaled 256 times (a real cell answers only to its own ultrasound); the nearest mode always rings fully; and the beads move faster than real ones (in one lab's cell the fastest moved about a millimeter a second; Muller and others, 2013), so a real figure takes seconds to tens of seconds. Gravity, the beads' pushes on each other, and the water's slow streaming (which carries beads under a micrometer or so, not beads like these) are left out.",
+        "Model choices: the walls are perfectly rigid and the shapes perfect (real glass flexes a little, which shifts the modes); mixed modes ring in equal parts; the music is moved by octaves and scaled 256 times (a real cell answers only to its own ultrasound); the nearest mode always rings fully; and the beads move faster than real ones (in one lab's cell the fastest moved about a millimeter a second; Muller and others, 2013), so a real figure takes seconds to tens of seconds. The water's slow streaming, which drags beads along the surfaces in a real cell, is stood in for by a gentle random drift while music plays, so beads keep spreading along each new figure; gravity and the beads' pushes on each other are left out.",
       ],
     ],
   ];
@@ -1080,8 +1125,8 @@ export const CHLADNI_CELL = {
     }
     // Live r10: music and the microphone move the beads on LIVE.secs (a
     // tap's ring keeps its slower, calmer settle).
-    const secs = heard || CELL.amps.size ? LIVE.secs : undefined;
-    if (CELL.beads.step(dt, drive, stir, secs)) {
+    const music = heard || CELL.amps.size > 0;
+    if (CELL.beads.step(dt, drive, stir, music ? LIVE.secs : undefined, music ? LIVE.drift : 0)) {
       CELL.version++;
       if (time - CELL.sorted > 0.15) {
         CELL.sorted = time;

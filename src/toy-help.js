@@ -1784,7 +1784,6 @@ export const TOY_HELP = {
       "Sand on a ringing plate gathers on the lines that stay still. The same happens in 3D. Here a glass cell 1 cm across holds water and plastic beads, and a transducer underneath fills it with ultrasound at one of its resonances, a standing wave. The acoustic radiation force pushes each bead onto the mode's still surfaces, its nodes (the Gor'kov potential; H. Bruus, 2012).\n\nThe cube's modes ring at f = (c / 2L)·√(l² + m² + n²), the round flask's where a spherical Bessel function's slope is zero at the wall: about 75 to 370 kHz, so you hear each one eight octaves down. Tap to ring the chosen mode; tap again to swirl the water.\n\nOr play a song, a built-in tune, or sing: the music's pitch is scaled up to the cell's ultrasound modes, and the nearest rings. Bead colors picks one color, a palette, a flag's colors, or colors by height or by distance from the center. “What are these modes?” in the Toy tab explains each mode. Files stay on your device.",
   },
 
-
   // Lane Data and climate.
   "data-in-3d": {
     howTo:
