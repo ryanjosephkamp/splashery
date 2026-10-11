@@ -12,6 +12,10 @@
 const TOY_PIANO_SONG = "C5 C5 G5 G5 A5 A5 G5 - F5 F5 E5 E5 D5 D5 C5";
 
 export const TOY_SOUNDS = {
+  "color-space-camera": {
+    on: { voice: "tone", f: 330, to: 0.8, decay: 0.55, bright: 0.15, vol: 0.16 },
+    off: { voice: "tone", f: 264, to: 0.78, decay: 0.6, bright: 0.15, vol: 0.14 },
+  },
   // ---- Photoreal r2 (lane Photoreal r2) ----
   "heart-donut": { voice: "squish", pitch: 1.3, bright: 0.5, decay: 0.5 },
   // Photoreal r3 (the owner's review of October 3, 2026): the first sound only, as the boat rocks.

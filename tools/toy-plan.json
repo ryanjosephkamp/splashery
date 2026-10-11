@@ -1,6 +1,12 @@
 {
   "about": "One entry per shelf toy: the owner's review notes (2026-09-23, docs/reviews/2026-09-23/review.md), a verdict, and a proposed tap effect and sound. v: keep = the effect is right (the owner liked it, or a later phase finished it; improved = what that phase changed); more = it has an effect that should be clearer or more dramatic; new = it only hops today and needs its own effect. fix = a visual problem to fix; fixed = what was done about it (and in which phase). interactive = the owner asked for touch-position or drag interaction. Proposals are suggestions; the owner may change them. tools/toy-plan.mjs checks this file against the shelf and writes docs/TOY-PLAN.md. On 2026-09-24 the owner approved every proposal in this file as written, including the sports-ball texture fixes.",
   "toys": {
+    "color-space-camera": {
+      "v": "keep",
+      "effect": "Each preview pixel translates to its RGB, HSV, or D65 Lab coordinate; a second tap returns it to the picture.",
+      "sound": "A quiet synthesized downward tone, only after a tap.",
+      "improved": "Codex prototype: generated pattern, local photos, opt-in camera frames, fixed 120 Hz critically damped motion, and reference-color readout. Labs only; needs a visual polish pass."
+    },
     "cactus": {
       "v": "keep",
       "owner": "No special effect. Looks fine.",
