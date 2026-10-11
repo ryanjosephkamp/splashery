@@ -3999,6 +3999,17 @@ export const TOYS = [
     tags: "terrain elevation land mountain volcano canyon valley water flood usgs 3dep geography box science",
     camera: { yaw: 0.5, pitch: 0.5, roll: 0, distance: 3.0 },
   },
+  // ---- Pack: proto-doppler (Codex prototype) ----
+  {
+    id: "doppler",
+    label: "Doppler effect lab",
+    category: "science",
+    kind: "kit",
+    pack: "proto-doppler",
+    labs: true,
+    tags: "doppler sound siren frequency pitch waves wavefront mach shock cone physics",
+    camera: { yaw: 0, pitch: 0, roll: 0, distance: 3.3 },
+  },
   // ---- Pack: optics (lane Optics) ----
   {
     id: "ripple-tank",

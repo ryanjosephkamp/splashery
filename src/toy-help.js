@@ -21,6 +21,12 @@
 // the toy's recipe and against a real source for every fact.
 
 export const TOY_HELP = {
+  doppler: {
+    howTo:
+      "Tap for one siren pass. Set the speed in the Toy tab, or switch on Mach mode to see the shock cone.",
+    about:
+      "A moving 440 Hz siren passes a stationary listener in air at 343 m/s. The blue circles stay centered where they were emitted, bunch ahead of the source, and spread behind it. The yellow dot is the listening point; the headphones mark it. At 34.3 m/s, the approaching pitch is about 488.9 Hz. The readout and synthesized sound use the emission direction at the time the sound left the source.\n\nTap anywhere near the center for one pass. The Toy tab sets the speed. With Mach mode on, that setting is added to 343 m/s. Orange lines show a cross section of the shock cone. Inside it, two emission times can reach the listener together, so two pitches are shown and mixed.\n\nThis is a diagram: symbols are enlarged, time is accelerated, and only sampled wavefronts are shown. Sound keeps its calculated pitch. The source returns behind the board after each pass. A realistic sonic boom is not modeled.",
+  },
   // ---- Photoreal r3 (lane Photoreal r3) ----
   "triceratops-skull": {
     howTo: "Tap it to make it look at you; drag to turn it.",
