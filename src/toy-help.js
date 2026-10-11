@@ -21,6 +21,12 @@
 // the toy's recipe and against a real source for every fact.
 
 export const TOY_HELP = {
+  "projectile-drag": {
+    howTo:
+      "Tap the plots to launch. In Toy, choose the ball, speed, and angle, or turn air drag off.",
+    about:
+      "Launch a baseball, a golf ball, or a ping-pong ball beside an ideal flight without air resistance. The orange path includes air drag; the blue path is a parabola. Both plots share the same scale and clock. Read their range, peak height, and flight time in meters and seconds.\n\nThe solver uses gravity and quadratic drag, with real ball masses and diameters and approximate constant drag coefficients. It leaves out spin, lift, and wind. Launch and landing heights are equal. Balls are enlarged so you can follow them. Playback speeds up longer flights, and the balls reset after landing.\n\nTry 40 m/s with a baseball, and compare angles just below 45 degrees. Turn drag off to recover the ideal range. This is a Codex prototype for a later polish pass.",
+  },
   // ---- Photoreal r3 (lane Photoreal r3) ----
   "triceratops-skull": {
     howTo: "Tap it to make it look at you; drag to turn it.",
