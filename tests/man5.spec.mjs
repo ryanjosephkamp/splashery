@@ -39,7 +39,7 @@ test.describe("the audit's fixes (docs/audits/manual-audit-2026-10/REPORT.md)", 
     expect(by["orbiting-rings"].about).not.toMatch(/three circular/i);
     expect(by["orbiting-rings"].title).not.toContain("rings");
     // hue = u/(2pi) only: nothing follows the tube.
-    expect(by["angle-around-torus"]?.about ?? g.find((e) => e.title === "Angle around the torus").about).not.toContain("follows the tube"); // prettier-ignore
+    expect(by["angle-hue"]?.about ?? g.find((e) => e.title === "Angle around the torus").about).not.toContain("follows the tube"); // prettier-ignore
     // The manual's page was built from the file.
     const html = read("gallery.html");
     for (const e of g) expect(html).toContain(e.program.split("\n")[0].replace(/&/g, "&amp;"));

@@ -88,7 +88,12 @@ test("the gallery is complete, readable, and compiles in the page", async ({ pag
     "utf8",
   );
   const normalizedReport = report.replace(/\s+/g, " ");
-  for (const { title, about } of entries) {
+  // Five entries were corrected after the Codex manual audit of October 11, 2026 (F12 to F16: their
+  // sentences, and two titles, did not match their programs); the October 10 report keeps the old
+  // wording, so those are checked in tests/man5.spec.mjs instead.
+  const CORRECTED = ["sphere", "rose-curve", "figure-eight-knot", "orbiting-rings", "angle-hue"]; // prettier-ignore
+  for (const { id, title, about } of entries) {
+    if (CORRECTED.includes(id)) continue;
     expect(normalizedReport).toContain(title);
     expect(normalizedReport).toContain(about);
   }

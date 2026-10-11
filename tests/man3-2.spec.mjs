@@ -441,11 +441,13 @@ test.describe("Level 4's sixty more programs", () => {
     // A link to one card opens its group.
     await page.goto("/manual/all.html#g-torus");
     await expect(page.locator("details.gallery-group").first()).toHaveJSProperty("open", true);
-    // In the PDF, the groups print open as a compact grid with no code.
+    // In the PDF, the groups print open as a grid, each card with its program (the summary is not
+    // printed, since nothing is folded) and its Run it link (Manual r5, audit F02).
     await page.emulateMedia({ media: "print" });
     await page.evaluate(() => dispatchEvent(new Event("beforeprint")));
     await expect(page.locator("#g-torus h5")).toBeVisible();
-    await expect(page.locator("#g-torus details.program")).toBeHidden();
+    await expect(page.locator("#g-torus details.program pre")).toBeVisible();
+    await expect(page.locator("#g-torus details.program > summary")).toBeHidden();
   });
 
   test("three Run it links open the equation toy with that program", async ({ page }) => {

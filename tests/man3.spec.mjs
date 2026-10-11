@@ -60,7 +60,7 @@ test("the definitions, the notes and the opening-line context are there", () => 
     expect(whys.join("|").toLowerCase(), w).toContain(w.toLowerCase());
   // The three new questions are folds too.
   for (const w of ["different parts", "different fields", "each moment a part"]) expect(whys.join("|"), w).toContain(w); // prettier-ignore
-  expect(whys.length).toBe(11);
+  expect(whys.length).toBe(12); // Manual r5 added the one about static files
 });
 
 test("the grammar names the brackets and arcsin, arccos, arctan, and the bare-input rule", () => {

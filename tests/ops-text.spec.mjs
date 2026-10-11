@@ -58,7 +58,7 @@ test.describe("a PDF's words in the Toy tab", () => {
     // The contents follow the cover on page 1 (since October 11, 2026 the manual's pages are chapters,
     // and the PDF has no level map).
     await expect(words).toContainText("Contents");
-    await expect(words).toContainText("Chapter 1: What a splat is");
+    await expect(words).toContainText("What a splat is");
     // Selectable, like any text on a page.
     expect(await words.evaluate((el) => getComputedStyle(el).userSelect)).toBe("text");
 
@@ -75,7 +75,7 @@ test.describe("a PDF's words in the Toy tab", () => {
     await copy.click();
     await expect(copy).toHaveText("Copied");
     const clip = await page.evaluate(() => navigator.clipboard.readText());
-    expect(clip).toContain("Levels 6 to 10 are coming in the next round."); // page 2 now holds the end of the level map and the contents
+    expect(clip).toContain("How a toy is built"); // page 2 now holds the rest of the contents
     expect(clip).toContain("\n\n"); // paragraphs apart
     await expect(copy).toHaveText("Copy", { timeout: 5000 });
 
