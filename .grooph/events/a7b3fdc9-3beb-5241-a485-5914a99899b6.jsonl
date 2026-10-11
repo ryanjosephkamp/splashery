@@ -212,3 +212,5 @@
 {"v":1,"t":"2026-10-11T11:44:53.721Z","harness":"claude-code","event":"turn-start","session":"a7b3fdc9-3beb-5241-a485-5914a99899b6","cwd":"splashery"}
 {"v":1,"t":"2026-10-11T11:44:57.273Z","harness":"claude-code","event":"turn-end","session":"a7b3fdc9-3beb-5241-a485-5914a99899b6","cwd":"splashery"}
 {"v":1,"t":"2026-10-11T11:44:59.361Z","harness":"claude-code","event":"turn-end","session":"a7b3fdc9-3beb-5241-a485-5914a99899b6","cwd":"splashery"}
+{"v":1,"t":"2026-10-11T12:04:13.510Z","harness":"claude-code","event":"turn-start","session":"a7b3fdc9-3beb-5241-a485-5914a99899b6","cwd":"splashery"}
+{"v":1,"t":"2026-10-11T12:04:15.472Z","harness":"claude-code","event":"tool","session":"a7b3fdc9-3beb-5241-a485-5914a99899b6","tool":"ReadNotifications","cwd":"splashery"}
