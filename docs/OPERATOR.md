@@ -120,6 +120,13 @@ The steps, in a scratch worktree:
   cost a wasted turn each time (October 10, 2026).
 - Runs longer than a few minutes go in the background with a long timeout (up to two hours). The
   default background limit is 30 minutes.
+- Start a long run with the Bash tool's background mode, never with a trailing `&` inside a command:
+  the shell ends with the call and takes the run with it (October 11, 2026). A `pgrep -f` check
+  matches its own command line, so check the run's output file instead.
+- A background run stops at two hours. A full suite takes longer: when it stops, run the same
+  `tools/suite.mjs` command again without `--fresh`; it picks up the files that didn't finish.
+- A fresh container has no `node_modules`: run `npm ci` in the main checkout first, then link it
+  into the suite worktree.
 - Afterward, put the screenshots back with `git checkout -- tests/screenshots/`.
 - A line filter must use the test's declared line (where `test(` starts), not the line of the
   failure.
@@ -131,8 +138,9 @@ The steps, in a scratch worktree:
 ### Known flaky tests (they also fail on plain main)
 
 smoke:734, tpg:204, hl1:75, stm:366, fl7:49 and :95, qrs-toys:132, live4:149, phy:64, ui4:42, wd:187
-and :210, wdr3:133, smd-moving:101. One failure that passes when rerun alone is a flake; two
-failures in a row are real.
+and :210, wdr3:133, smd-moving:101, hh5-gems:119 and p3d (both failed under load on October 11,
+2026, and passed alone). One failure that passes when rerun alone is a flake; two failures in a row
+are real.
 
 ## Integrators
 
