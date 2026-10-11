@@ -260,3 +260,15 @@
 {"v":1,"t":"2026-10-11T15:49:13.643Z","harness":"claude-code","event":"session-end","session":"f3bb9e2d-4fc1-5ad8-b7a6-5c49ece25d16","cwd":"splashery"}
 {"v":1,"t":"2026-10-11T16:06:39.979Z","harness":"claude-code","event":"session-start","session":"f3bb9e2d-4fc1-5ad8-b7a6-5c49ece25d16","cwd":"splashery"}
 {"v":1,"t":"2026-10-11T16:14:10.243Z","harness":"claude-code","event":"turn-start","session":"f3bb9e2d-4fc1-5ad8-b7a6-5c49ece25d16","cwd":"splashery"}
+{"v":1,"t":"2026-10-11T16:14:18.428Z","harness":"claude-code","event":"tool","session":"f3bb9e2d-4fc1-5ad8-b7a6-5c49ece25d16","tool":"Bash","cwd":"splashery"}
+{"v":1,"t":"2026-10-11T16:14:35.077Z","harness":"claude-code","event":"tool","session":"f3bb9e2d-4fc1-5ad8-b7a6-5c49ece25d16","tool":"Bash","cwd":"splashery"}
+{"v":1,"t":"2026-10-11T16:14:35.113Z","harness":"claude-code","event":"subagent-start","session":"f3bb9e2d-4fc1-5ad8-b7a6-5c49ece25d16","agent":"a728e422a50ea1d5c","type":"general-purpose"}
+{"v":1,"t":"2026-10-11T16:14:38.474Z","harness":"claude-code","event":"tool","session":"f3bb9e2d-4fc1-5ad8-b7a6-5c49ece25d16","agent":"a728e422a50ea1d5c","type":"general-purpose","tool":"ToolSearch"}
+{"v":1,"t":"2026-10-11T16:14:39.437Z","harness":"claude-code","event":"tool","session":"f3bb9e2d-4fc1-5ad8-b7a6-5c49ece25d16","agent":"a728e422a50ea1d5c","type":"general-purpose","tool":"Artifact"}
+{"v":1,"t":"2026-10-11T16:14:42.785Z","harness":"claude-code","event":"tool","session":"f3bb9e2d-4fc1-5ad8-b7a6-5c49ece25d16","agent":"a728e422a50ea1d5c","type":"general-purpose","tool":"ArtifactData"}
+{"v":1,"t":"2026-10-11T16:14:44.148Z","harness":"claude-code","event":"tool","session":"f3bb9e2d-4fc1-5ad8-b7a6-5c49ece25d16","agent":"a728e422a50ea1d5c","type":"general-purpose","tool":"ArtifactData"}
+{"v":1,"t":"2026-10-11T16:14:46.117Z","harness":"claude-code","event":"tool","session":"f3bb9e2d-4fc1-5ad8-b7a6-5c49ece25d16","agent":"a728e422a50ea1d5c","type":"general-purpose","tool":"Bash"}
+{"v":1,"t":"2026-10-11T16:15:01.131Z","harness":"claude-code","event":"tool","session":"f3bb9e2d-4fc1-5ad8-b7a6-5c49ece25d16","agent":"a728e422a50ea1d5c","type":"general-purpose","tool":"SubagentHandback"}
+{"v":1,"t":"2026-10-11T16:15:01.145Z","harness":"claude-code","event":"subagent-stop","session":"f3bb9e2d-4fc1-5ad8-b7a6-5c49ece25d16","agent":"a728e422a50ea1d5c","type":"general-purpose"}
+{"v":1,"t":"2026-10-11T16:15:01.198Z","harness":"claude-code","event":"tool","session":"f3bb9e2d-4fc1-5ad8-b7a6-5c49ece25d16","tool":"Agent","spawned":"a728e422a50ea1d5c","cwd":"splashery"}
+{"v":1,"t":"2026-10-11T16:15:01.214Z","harness":"claude-code","event":"turn-start","session":"f3bb9e2d-4fc1-5ad8-b7a6-5c49ece25d16","cwd":"splashery"}
