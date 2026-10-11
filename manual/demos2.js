@@ -275,7 +275,7 @@ function numbersDemo() {
     const R = M.quatMatrix(q);
     const sizes = [v.s1, v.s2, v.s3];
     const Sigma = M.covariance(sizes, R);
-    const cam = M.orbitCamera({ ...view, distance: 5, focal: 440, cx: W / 2, cy: H / 2 });
+    const cam = M.orbitCamera({ ...view, distance: 5, focal: 360, cx: W / 2, cy: H / 2 });
     const mu = [v.x, v.y, v.z];
     // The splat on the screen: color, and opacity alpha * G' (its flat bell).
     const cov = M.projectCovariance(cam, mu, Sigma);
