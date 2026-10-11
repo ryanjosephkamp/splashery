@@ -2213,7 +2213,7 @@
       "v": "new",
       "owner": "The owner's push notes of October 4, 2026 (Q6, \"strong yes\"; \"it has to be technically correct\"), lane QR lab r2, October 5, 2026.",
       "effect": "How a QR code works: a tap lights up the next part of a real code (finders, separators, timing, alignment, format and version information, the dark module, data and error correction codewords, remainder bits, the mask); its modules lift toward you as solid tiles in the part's color. Encode your own text steps through the mode, the count, the data bits, padding, error correction, blocks and interleaving, the zigzag placement (every bit drops into place along the path) and the eight masks (the masked tiles turn over, with each mask's penalty), every step checked against Nayuki's encoder.",
-      "sound": "A light wooden knock and a faint breath as each part lifts (lane QR r5: the breath quieter)."
+      "sound": "A light wooden knock and a faint breath as each part lifts (lane QR r5: the breath quieter, the knock a little louder)."
     },
     "qr-damage": {
       "v": "new",
@@ -2243,7 +2243,7 @@
       "v": "new",
       "owner": "The owner's Push Plan pick Q12 (\"I like the other barcodes idea\"), lane QR craft, October 6, 2026.",
       "effect": "Other barcodes: Code 128, EAN-13 and UPC-A (our own code, with check digits and quiet zones; Code 128's text on the label, lane QR r4) and Data Matrix and Aztec (zxing-js; crisp, seamless modules as the QR code toy draws them, lane QR r4). A tap sweeps a scanner's red line across the symbol; each bar (or column of modules) lifts toward you as it passes and settles back (2.6 s). The toy reads its own picture back with zxing-js.",
-      "sound": "A soft breath as the line sweeps (lane QR r5: no note at the end)."
+      "sound": "A soft breath as the line sweeps (lane QR r5: no note at the end, the breath a little fuller)."
     },
     "chladni-plate": {
       "v": "new",

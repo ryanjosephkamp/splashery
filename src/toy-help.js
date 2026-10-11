@@ -1809,8 +1809,7 @@ export const TOY_HELP = {
       "A QR code is a grid of dark and light modules with a fixed plan. Three finder patterns mark the corners, timing patterns set the grid, alignment patterns help at an angle, and the format information says the error correction level and the mask. The rest is your text in 8-bit codewords, plus Reed–Solomon codewords that can rebuild damaged ones.\n\nTap to light up each part. Or type your own text in the Toy tab and step through the encoding: the mode, the count, the data bits, padding, error correction, interleaving, the zigzag placement and the eight masks with their penalty scores. Each step follows ISO/IEC 18004 and is checked against another encoder.",
   },
   "qr-damage": {
-    howTo:
-      "Pick a damage in the Toy tab, then tap the code to place it: a sticker or a smudge lands where you tap, and a tear or a burn starts from the nearest corner. Watch the meter.",
+    howTo: "Pick a damage in the Toy tab, then tap the code to place it. Watch the meter.",
     about:
       "QR codes still scan when part of them is lost, because error correction can rebuild missing codewords: about 7, 15, 25 or 30 percent at levels L, M, Q and H.\n\nHere you scratch a code, stick a label on it where you tap, tear it from the corner or the edge nearest your tap, burn it from the nearest corner, smudge it, or do what only a code of splats allows: blur, shrink, grow, jitter or fade its splats, drift its color, curve it, tilt it or set it moving. After each change the meter reads the very picture on the stage and counts each block's lost codewords against what it can fix. Show all four levels side by side, or tap Heal it to watch Reed–Solomon decoding set each block right.",
   },
