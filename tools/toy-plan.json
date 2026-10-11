@@ -2951,6 +2951,13 @@
       "sound": "A low rumble, and a second one.",
       "improved": "Geo r3 (the owner: \"still needs to be sharper\"; the text below the planet too): about one globe point per picture pixel, a thin layer of air at the limb, crisp quake dots with no glow at rest, and the plaque's text in square pixels."
     },
+    "truss-bridge": {
+      "v": "keep",
+      "owner": "Codex first-draft prototype requested on October 11, 2026; Science shelf, labs only.",
+      "effect": "Drag a load along Warren, Pratt, and Howe trusses with real planar stiffness analysis. Tap a member for its kN force and a 4.4-second load test: the weakest overloaded member breaks into two solid pieces, the bridge sags, and the pieces reassemble.",
+      "sound": "A quiet synthesized load-seat thud and a short, low metal resonance, after the tap.",
+      "improved": "Codex prototype: exact intact static forces, a textbook symmetric Warren test, rigid tokens, touch dragging, a fixed 1/120-second illustrative collapse mechanism, and fewer than 15,000 even surface splats. Claude should polish the visual materials, controls, and failure presentation."
+    },
     "ripple-tank": {
       "v": "keep",
       "owner": "Push Plan S9 (yes), October 5, 2026: a ripple tank with a real wave equation (lane Optics; labs only).",

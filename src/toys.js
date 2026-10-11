@@ -3999,6 +3999,17 @@ export const TOYS = [
     tags: "terrain elevation land mountain volcano canyon valley water flood usgs 3dep geography box science",
     camera: { yaw: 0.5, pitch: 0.5, roll: 0, distance: 3.0 },
   },
+  // ---- Pack: proto-truss-bridge (Codex prototype) ----
+  {
+    id: "truss-bridge",
+    label: "Truss bridge load lab",
+    category: "science",
+    kind: "kit",
+    pack: "proto-truss-bridge",
+    labs: true,
+    tags: "bridge truss warren pratt howe load force tension compression stiffness engineering physics",
+    camera: { yaw: 0.08, pitch: 0.16, roll: 0, distance: 3.5 },
+  },
   // ---- Pack: optics (lane Optics) ----
   {
     id: "ripple-tank",

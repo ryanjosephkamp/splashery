@@ -1970,6 +1970,13 @@ export const TOY_HELP = {
       "Galaxy simulations follow gas and stars as particles. These are subsets of three FIRE-2 simulations: a galaxy of roughly the Milky Way's mass today, the same galaxy 10.4 billion years ago, and a dwarf galaxy. They are simulations, not telescope images. Each gas particle is a Gaussian about as wide as its smoothing kernel (the real kernel isn't Gaussian), colored by temperature or density; tap to keep only the cold gas.\n\nThrough a telescope (simulated) shows what an observer might record if the galaxy were 160 million light-years away: its star particles, bluer and brighter when young, blurred by the telescope's sharpness, with cold, dense gas dimming them like dust. Choose a filter; each tap starts a new exposure whose grainy photon noise smooths out as light builds up. The colors use a rough rule for how starlight fades with age, so it is a picture to explore, not a measurement.",
   },
 
+  "truss-bridge": {
+    howTo:
+      "Drag the yellow load. Tap a bar for its force and a load test. Pick the truss and strength in the Toy tab.",
+    about:
+      "A 12-meter pin-jointed bridge with Warren, Pratt, and Howe trusses. Drag the yellow weight along the deck. Blue members carry tension, red members carry compression, and gray members carry almost no force. Tap a bar to read its axial force in kilonewtons and test the load. The Toy tab sets the load and each member's equal strength.\n\nThe static analysis assembles axial element stiffnesses, solves for joint displacements, and recovers member forces. A pin at the left and a roller at the right support the bridge. The deck splits the load between neighboring joints. The displayed load is carried by this one planar truss.\n\nAbove the strength limit, the most heavily loaded member separates into two solid pieces, and the bridge sags before reassembling in 4.4 seconds. The sag is an illustrative rigid-bar mechanism with gravity, not an engineering collapse prediction. Forces remain the last intact-truss values during failure. Self-weight, buckling, joint stiffness, and material yielding are omitted.",
+  },
+
   // ---- Ripple tank (lane Optics) ------------------------------------------------------
   "ripple-tank": {
     howTo:
