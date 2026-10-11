@@ -2743,6 +2743,8 @@ export const TOY_SOUNDS = {
     },
   ],
   // Lane Live input: a hand clap that rings like the sample room; the mirror's depth rises and falls.
+  // Codex room acoustics: the recipe convolves this dry synthesized clap with the computed room.
+  "room-acoustics": { voice: "clap", f: 1350, decay: 0.25, vol: 0.65 },
   "room-echo": [{ voice: "clap", f: 1400, decay: 4.4, vol: 0.8 }],
   "splat-mirror": {
     on: { voice: "whoosh", f: 240, to: 5, decay: 1.6, vol: 0.5 },

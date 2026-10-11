@@ -2287,6 +2287,13 @@
       "sound": "The photo's paper lifting as the depth comes up and settling as it lies flat (no wind, no whoosh). Lane Photo depth: a Sound choice in the Toy tab (paper, a soft chime, pop-up layers, a water drop, none, or your own sound file, kept on the device).",
       "improved": "Photo to 3D: Depth Anything V2 Small (Apache-2.0, quantized, 27 MB) on ONNX Runtime Web (MIT), both loaded only when a photo is opened; an even grid of splats sized to their neighbors on the same surface, cut at depth jumps; three CC0 samples (a forest path, a cobbled street, a still life). Lane Photo depth: the depth rises and settles cleanly in the Sharp picture (each piece of surface moves as one layer, as the splats do, and the backing stays behind it at every moment of the tap)."
     },
+    "room-acoustics": {
+      "v": "more",
+      "owner": "Codex prototype requested October 11, 2026; Studio shelf, labs only.",
+      "effect": "Two rigid kit-built hands clap, then independent markers follow the direct ray and six specular first reflections at 1/80 real sound speed. The room dimensions and all six surface materials set Sabine RT60 at 500 Hz. Three lowest rigid-wall modes include axial, tangential, and oblique candidates; optional probes show signed modal pressure at 1/80 speed. Fixed 1/120 s steps, 3.8 s tap, and fewer than 15,000 splats.",
+      "sound": "The toy-sounds synthesized hand clap through a ConvolverNode: geometric first reflections and a deterministic diffuse impulse tail decaying 60 dB in the computed RT60, at real speed. Only after a tap with sound enabled.",
+      "improved": "Codex rough first draft. Polish the hands, material surfaces, ray identification, and pressure-probe explanation; coefficients, dimensions, reflection paths, and modes are functional."
+    },
     "room-echo": {
       "v": "keep",
       "owner": "The owner's approval of lane Live input (\"live input go\", September 30, 2026; labs only).",

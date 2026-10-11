@@ -1835,6 +1835,12 @@ export const TOY_HELP = {
       "Barcodes came before QR codes. Code 128 packs any plain text into bars and spaces one to four modules wide, with a check symbol worked out modulo 103. EAN-13 and UPC-A hold the numbers on things in shops, with a check digit from weights of 3 and 1, and quiet zones of blank space either side.\n\nHere those three are drawn by Splashery's own code, and Data Matrix and Aztec, two square codes of their own, come from the open-source ZXing library. Tap to sweep a scanner's red line across. The toy reads its own picture back to check that it scans.",
   },
   // Lane Live input.
+  "room-acoustics": {
+    howTo:
+      "Tap the room to clap. Set dimensions, materials, and modes in the Toy tab; turn sound on to hear the echo.",
+    about:
+      "Design a rectangular room in meters. Choose the material of each wall, the floor, and the ceiling. All six surfaces count, including the three cut away so you can see inside. The teal ball marks the listener.\n\nThe estimate uses Sabine’s RT60: 0.161 times volume divided by absorption area. Coefficients are typical values at 500 Hz: painted concrete 0.06, wood 0.10, heavy curtain 0.55, and carpet on concrete 0.14. Actual absorption depends on frequency, construction, and mounting. Sabine assumes a diffuse sound field.\n\nTap anywhere near the center: two solid hands clap, and markers trace the direct sound and six first reflections, slowed 80 times. With sound on, a synthesized clap passes through a generated room impulse response at real speed. Pick a mode to see pressure probes move; these indicate pressure, not air-particle motion. Mode indices are length, width, and height. Frequencies use ideal rigid walls at 20 °C. This is a first-draft learning toy, not a calibrated acoustic design tool.",
+  },
   "room-echo": {
     howTo:
       "Tap “Use my microphone” in the Toy tab, then clap once: the echo time shows on the back wall.",

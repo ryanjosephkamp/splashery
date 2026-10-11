@@ -3686,6 +3686,17 @@ export const TOYS = [
     tags: "picture frame photo wall nail swing wood gold modern digital",
     camera: { yaw: 0.1, pitch: 0.06, roll: 0, distance: 2.9 },
   },
+  // ---- Pack: proto-room-acoustics (Codex prototype) ----
+  {
+    id: "room-acoustics",
+    label: "Room acoustics designer",
+    category: "studio",
+    kind: "kit",
+    pack: "proto-room-acoustics",
+    labs: true,
+    tags: "room acoustics designer sabine rt60 reverberation clap echo reflection ray standing wave mode concrete wood curtain carpet",
+    camera: { yaw: 0.25, pitch: 0.66, roll: 0, distance: 4.05 },
+  },
   // ---- Pack: studio (lane Studio Sound) ----
   {
     id: "song-landscape",
