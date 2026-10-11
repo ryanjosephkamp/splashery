@@ -4,6 +4,7 @@
 // it can be tested without a page. Some demos run the toy's own code: the grammar demo asks the real
 // reader, and the windmill and program demos build the real recipes with the kit.
 
+import { crisp, putSoft } from "./crisp.js";
 import * as M from "./demo-math3.js";
 import { RULES, RULE_ORDER, FIELD_NAMES, renderRule, walk, compact } from "./railroad.js";
 import {
@@ -160,7 +161,7 @@ function strokeRing(ctx, cam, center, ring) {
 function gaussianDemo() {
   const cv = $("g3-canvas");
   if (!cv) return;
-  const cx = cv.getContext("2d");
+  const cx = crisp(cv, () => draw());
   const view = { yaw: 35, pitch: 22 };
   const sizes = [0.9, 0.55, 0.3];
   const R = M.quatMatrix(M.quatEulerDeg(25, 40, 10));
@@ -252,7 +253,7 @@ const NUM_KEYS = ["x", "y", "z", "s1", "s2", "s3", "tx", "ty", "tz", "r", "g", "
 function numbersDemo() {
   const cv = $("sn-canvas");
   if (!cv) return;
-  const cx = cv.getContext("2d");
+  const cx = crisp(cv, () => draw());
   const view = { yaw: 20, pitch: 15 };
   const off = document.createElement("canvas");
   off.width = cv.width;
@@ -357,7 +358,7 @@ function numbersDemo() {
 function bellDemo() {
   const cv = $("bl-canvas");
   if (!cv) return;
-  const cx = cv.getContext("2d");
+  const cx = crisp(cv, () => draw());
   let dims = 1;
   const RANGE = 3;
   const sig = () => [num("bl-s1"), num("bl-s2"), num("bl-s3")];
@@ -455,7 +456,7 @@ function bellDemo() {
           img.data[k + 2] = hb;
           img.data[k + 3] = Math.min(255, g * 255);
         }
-      cx.putImageData(img, x0, y0);
+      putSoft(cx, img, x0, y0);
       cx.strokeStyle = css("--line");
       cx.strokeRect(x0 + 0.5, y0 + 0.5, side - 1, side - 1);
       const X = (x) => x0 + ((x + RANGE) / (2 * RANGE)) * side;
@@ -571,9 +572,9 @@ function bellDemo() {
 function projectionDemo() {
   const cv = $("pj-canvas");
   if (!cv) return;
-  const cx = cv.getContext("2d");
+  const cx = crisp(cv, () => draw());
   const top = $("pj-top");
-  const tx = top.getContext("2d");
+  const tx = crisp(top, () => draw());
   const base = [0.9, 0.5, 0.3];
   function draw() {
     const W = cv.width;
@@ -696,7 +697,7 @@ const PERMS = [
 function blendDemo() {
   const cv = $("bd-canvas");
   if (!cv) return;
-  const cx = cv.getContext("2d");
+  const cx = crisp(cv, () => draw());
   const splats = BLEND_SPLATS.map((s) => ({ ...s }));
   // Draw order, first drawn first. The right one is far to near, so the biggest depth comes first.
   const rightOrder = () => [0, 1, 2, 3].sort((a, b) => splats[b].depth - splats[a].depth);
@@ -735,7 +736,7 @@ function blendDemo() {
         img.data[k + 2] = b * 255;
         img.data[k + 3] = 255;
       }
-    cx.putImageData(img, 0, 0);
+    putSoft(cx, img);
     // The pixel being read.
     cx.strokeStyle = "#fff";
     cx.lineWidth = 2;
@@ -889,7 +890,7 @@ function drawKit(cx, W, H, buf, idx, cam, look, place) {
 function windmillDemo() {
   const cv = $("wm-canvas");
   if (!cv) return;
-  const cx = cv.getContext("2d");
+  const cx = crisp(cv, () => draw());
   const view = { yaw: 22, pitch: 12 };
   // The real windmill recipe, built by the real kit.
   const run = buildRecipe(WINDMILL["little-windmill"], { seed: 7, count: 12000, options: { sails: "#f2eee4" } }, () => {}); // prettier-ignore
@@ -1021,7 +1022,7 @@ const TORUS_PROGRAM = { x: "(2 + cos v)·cos u", y: "sin v", z: "(2 + cos v)·si
 function torusDemo() {
   const cv = $("ut-canvas");
   if (!cv) return;
-  const cx = cv.getContext("2d");
+  const cx = crisp(cv, () => draw());
   const view = { yaw: 25, pitch: 18 };
   const prog = compileProgram(TORUS_PROGRAM);
   const NU = 36;
@@ -1191,7 +1192,7 @@ const FIELD_NOTES = {
 function fieldsDemo() {
   const cv = $("pf-canvas");
   if (!cv) return;
-  const cx = cv.getContext("2d");
+  const cx = crisp(cv, () => draw());
   const view = { yaw: 25, pitch: 18 };
   const pick = $("pf-preset");
   for (const p of PRESETS) pick.append(new Option(p.label, p.id));
