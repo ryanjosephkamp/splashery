@@ -9,7 +9,7 @@
 // The sound review (docs/OPERATING.md, "The sound review") adds two optional
 // files, both put in too:
 //   tools/sound-review.json      notes and new sounds per toy:
-//     { "round": "", "note": "", "toys": { "<toy id>": { "status", "said",
+//     { "round": "", "note": "", "toys": { "<toy id>": { "status",
 //       "note", "plan", "candidates": [{ "id", "label", "sound" }] } } }
 //     status: keep | change | ready | approved | site
 //   tools/sound-voices-next.js   new voices for candidate sounds, as
