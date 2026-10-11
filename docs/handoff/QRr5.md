@@ -12,6 +12,9 @@ outside the QR files, as a small, additive "Engine: …" PR merged first). PR ti
 October 10 walkthrough's QR notes". Handoff file: docs/handoff/QRr5.md (create it; start it with
 this brief, word for word, under "## Brief", then keep "## State
 
+October 11, 2026: the owner marked all ten `qr5-` cards good (October 10, 23:35 UTC). Waiting for
+the Operator's full suite and merge.
+
 October 10, 2026: first READY. Every item is built, tested and on draft PR #507; the clips are on
 Effect review page 2 (lane record `QRr5`, cards `qr5-…`), and the sounds are on the Sound Board
 through tools/sound-review.json ("ready").
