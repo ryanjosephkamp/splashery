@@ -807,7 +807,6 @@ async function buildSwapped() {
     : files.get("manifest.webmanifest");
   const gallerySource = fs.readFileSync(path.join(root, gallerySrc), "utf8");
 
-  // A first pass without the worker, to know the version (a hash of everything it caches).
   const precache = [
     "./",
     ...PAGES.filter((p) => p.path && p.precache !== false).map((p) => p.path),
@@ -820,26 +819,30 @@ async function buildSwapped() {
     "assets/app/icon-192.png",
     "assets/app/icon-512.png",
   ];
-  const ctx = {
-    origin: SITE.origin,
-    siteBase: SITE.base,
-    notFoundLive: notFoundLive(),
-    gallerySource,
-    rootManifestText: manifestSource,
-    swSource,
-    retireSource,
-    version: "",
-    precache,
-  };
-  const first = swapLayout({ files, assets, ctx });
+  const layout = swapLayout({
+    files,
+    assets,
+    ctx: {
+      origin: SITE.origin,
+      siteBase: SITE.base,
+      notFoundLive: notFoundLive(),
+      gallerySource,
+      rootManifestText: manifestSource,
+      retireSource,
+    },
+  });
+  // Written into the repo, the files are formatted (and the version is a hash of what is written).
+  if (writeInPlace) for (const [f, t] of layout.text) layout.text.set(f, await pretty(f, t));
+  // The worker's version: a hash of everything it caches, so a change to any of it is a new worker.
   const hash = crypto.createHash("sha256");
-  for (const f of [...first.text.keys()].filter((k) => !k.startsWith("site/") && k !== "sw.js").sort()) hash.update(f).update(first.text.get(f)); // prettier-ignore
+  for (const f of [...layout.text.keys()].filter((k) => !k.startsWith("site/")).sort()) hash.update(f).update(layout.text.get(f)); // prettier-ignore
   for (const f of handWritten) hash.update(f).update(fs.readFileSync(path.join(OUT, f)));
   hash.update(swSource);
-  ctx.version = hash.digest("hex").slice(0, 12);
-  const layout = swapLayout({ files, assets, ctx });
-
-  if (writeInPlace) for (const [f, t] of layout.text) layout.text.set(f, await pretty(f, t));
+  const version = hash.digest("hex").slice(0, 12);
+  const sw = swSource
+    .replace('"@@VERSION@@"', JSON.stringify(version))
+    .replace('["@@PRECACHE@@"]', JSON.stringify(precache));
+  layout.text.set("sw.js", writeInPlace ? await pretty("sw.js", sw) : sw);
 
   if (CHECK) {
     let n = 0;
@@ -902,7 +905,7 @@ async function buildSwapped() {
     prune(path.join(root, "site"));
   }
   console.log(
-    `${writeInPlace ? "the repo" : path.relative(root, SWAP_OUT)}: swapped layout, ${layout.text.size} generated files, version ${ctx.version}`, // prettier-ignore
+    `${writeInPlace ? "the repo" : path.relative(root, SWAP_OUT)}: swapped layout, ${layout.text.size} generated files, version ${version}`, // prettier-ignore
   );
 }
 

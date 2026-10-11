@@ -198,7 +198,7 @@ export function rootManifest(existing) {
 export function swapLayout({ files, assets, ctx }) {
   const text = new Map(); // path from the root -> string
   const copy = new Map(); // path from the root -> absolute source (copied or linked as it is)
-  const { origin, siteBase, notFoundLive, gallerySource, rootManifestText, swSource, retireSource, version, precache } = ctx; // prettier-ignore
+  const { origin, siteBase, notFoundLive, gallerySource, rootManifestText, retireSource } = ctx;
   const homeBase = siteBase.replace(/site\/$/, "");
 
   for (const [rel, body] of files) {
@@ -220,7 +220,6 @@ export function swapLayout({ files, assets, ctx }) {
   text.set("404.html", notFoundLive);
   text.set("playground/index.html", playgroundPage(gallerySource));
   text.set("manifest.webmanifest", rootManifest(rootManifestText));
-  text.set("sw.js", swSource.replace('"@@VERSION@@"', JSON.stringify(version)).replace('["@@PRECACHE@@"]', JSON.stringify(precache))); // prettier-ignore
 
   for (const [name, abs] of assets) {
     const base = path.basename(name);
