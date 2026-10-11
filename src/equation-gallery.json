@@ -3,7 +3,7 @@
     "id": "sphere",
     "title": "Spun sphere",
     "group": "Classic surfaces",
-    "about": "A sphere turns once around its vertical axis while its latitude stripes stay in place.",
+    "about": "A sphere turns once around its vertical axis, and its hue runs around the axis (by longitude), so the colors turn with it.",
     "program": "x = sin(v)cos(u+t)\ny = cos(v)\nz = sin(v)sin(u+t)\nu = 0 .. 2pi\nv = 0 .. pi\nhue = u/(2pi)\nsize = 0.04\ncount = 6000",
     "source": "https://en.wikipedia.org/wiki/Sphere",
     "loops": true
@@ -120,18 +120,18 @@
     "id": "rose-curve",
     "title": "Rose curve beads",
     "group": "Curves as tubes or beads",
-    "about": "A six-petal planar rose becomes a dotted three-dimensional curve.",
+    "about": "The curve cos(6u) traced in a plane makes a rose of 12 petals (an even multiple makes twice as many), and a gentle vertical wave lifts it into a dotted three-dimensional curve.",
     "program": "x = cos(6u)cos(u)\ny = 0.15sin(3u)\nz = cos(6u)sin(u)\nu = 0 .. 2pi\nv = 0 .. 1\nhue = u/(2pi)\nsize = 0.04\ncount = 3000",
     "source": "https://en.wikipedia.org/wiki/Rose_(mathematics)",
     "loops": true
   },
   {
     "id": "figure-eight-knot",
-    "title": "Figure-eight knot",
+    "title": "Trefoil knot beads",
     "group": "Curves as tubes or beads",
-    "about": "This closed bead tube traces the simplest knot that is not a torus knot.",
+    "about": "This closed string of beads traces a trefoil, the simplest knot (a torus knot that wraps three times one way and twice the other).",
     "program": "x = (2+cos(2u))cos(3u+t)\ny = sin(2u)\nz = (2+cos(2u))sin(3u+t)\nu = 0 .. 2pi\nv = 0 .. 1\nhue = u/(2pi)\nsize = 0.05\ncount = 3500",
-    "source": "https://en.wikipedia.org/wiki/Figure-eight_knot",
+    "source": "https://en.wikipedia.org/wiki/Trefoil_knot",
     "loops": true
   },
   {
@@ -298,9 +298,9 @@
   },
   {
     "id": "orbiting-rings",
-    "title": "Orbiting rings",
+    "title": "Orbit with a fast wave",
     "group": "Things in motion",
-    "about": "Three circular bands revolve at different speeds around the center.",
+    "about": "One loop circles the center while a smaller wave on it turns the other way three times as fast.",
     "program": "x = cos(u+t)+0.35cos(3u-t)\ny = 0.35sin(3u-t)\nz = sin(u+t)\nu = 0 .. 2pi\nv = 0 .. 1\nhue = u/(2pi)\nsize = 0.045\ncount = 4500",
     "source": "https://en.wikipedia.org/wiki/Parametric_equation",
     "loops": true
@@ -372,7 +372,7 @@
     "id": "angle-hue",
     "title": "Angle around the torus",
     "group": "Color play",
-    "about": "Hue sweeps around the large ring while a second color band follows the tube.",
+    "about": "Hue runs once around the large ring, so each slice across the tube has one color.",
     "program": "x = (1.5+0.4cos(v))cos(u)\ny = 0.4sin(v)\nz = (1.5+0.4cos(v))sin(u)\nu = 0 .. 2pi\nv = 0 .. 2pi\nhue = u/(2pi)\nsize = 0.04\ncount = 6500",
     "source": "https://en.wikipedia.org/wiki/Torus",
     "loops": true

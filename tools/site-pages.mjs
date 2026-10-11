@@ -368,7 +368,7 @@ export const PAGES = [
       { icon: "share", href: "share/", title: "Embed and share", text: "Put a toy on your own page, and how a scene link carries a toy and its settings." }, // prettier-ignore
     ],
     links: [
-      { href: "../manual/#splat-count", label: "How many splats? What a bigger budget does", text: "The Kit lab's table: 140,000 against 200,000 splats on 24 views, and what changed in edges, speckle, and shimmer." }, // prettier-ignore
+      { href: "../manual/toy.html#splat-count", label: "How many splats? What a bigger budget does", text: "The Kit lab's table: 140,000 against 200,000 splats on 24 views, and what changed in edges, speckle, and shimmer." }, // prettier-ignore
       { href: "learn/recipes/", label: "Writing toy recipes", text: "How a toy's recipe says which parts move, and how." }, // prettier-ignore
       { href: "learn/scene-format/", label: "The scene format", text: "What a shared link or a saved scene holds." }, // prettier-ignore
       { href: "learn/evidence/", label: "Is it right? The evidence files", text: "How each toy that claims to show something true is checked against its sources." }, // prettier-ignore

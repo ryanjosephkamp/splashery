@@ -25,9 +25,13 @@ export function covFacts({ a, b, c }) {
   const disc = Math.sqrt(Math.max(0, (tr * tr) / 4 - det));
   const l1 = tr / 2 + disc;
   const l2 = tr / 2 - disc;
-  const valid = a > 1e-6 && det > 1e-8;
+  // Positive definite: a > 0 and det > 0 (both eigenvalues above 0). That is the whole rule. A
+  // matrix whose smaller eigenvalue is tiny next to the larger one is still valid, but inverting
+  // it loses accuracy (`thin`), which is a warning about numbers, not a failure of the rule.
+  const flat = Math.abs(det) <= 1e-9 * (tr / 2) * (tr / 2) || tr === 0;
+  const valid = a > 0 && det > 0 && !flat;
   const angle = Math.abs(b) < 1e-12 ? (a >= c ? 0 : Math.PI / 2) : Math.atan2(l1 - a, b);
-  return { det, l1, l2, valid, angle, flat: Math.abs(det) <= 1e-8 };
+  return { det, l1, l2, valid, angle, flat, thin: valid && l2 < 1e-4 * l1 };
 }
 
 // The weight at an offset (px, py) from the center: exp(-1/2 d^T Sigma^-1 d). Zero where the
@@ -89,7 +93,8 @@ const FN = {
 }; // prettier-ignore
 const VARS = ["u", "v", "t", "pi", "e"];
 const NAMES = [...FUNCS, ...VARS].sort((p, q) => q.length - p.length);
-export const MAX_LENGTH = 120;
+// The Splat equation toy takes 240 characters a field (FIELD_MAX in src/packs/splat-equation.js).
+export const MAX_LENGTH = 240;
 const HINT = "Try something like cos(u)·sin(v).";
 
 // The symbols people paste in, turned into plain ones (as the real reader does).
