@@ -212,6 +212,16 @@ October 11, 2026 (Opus 5.5, high effort): started. Item 1 (responsiveness) measu
 
 ## For the Operator
 
-- No engine PR so far: the new colors module (`src/packs/chladni-colors.js`) is this lane's own
-  file, and the flag colors are read from the site's flag images (`assets/flags/`) with the existing
-  `loadFlags()`, so no other lane's file changes.
+- PR #526 (`claude/lane-live-r10`), labs only. No engine PR: everything is in this lane's files,
+  plus its new `src/packs/chladni-colors.js` and `tools/lv10-*.mjs`. The flag colors come from the
+  site's own flag images through the existing `loadFlags()`, so no other lane's file changes.
+- Cards on Effect review page 2 (lane record `LiveR10`, MP4s at 390×844 with sound, each naming Opus
+  5.5):
+  - "1. Following the music": `lv10-follow` (before and after side by side, the same song and
+    seconds) and `lv10-plate-song` (the plate with the same song, for comparison).
+  - "2. The modes explained": `lv10-modes-tour` (each of the eight modes, rung by a tap, with its
+    description).
+  - "3. Colors": `lv10-cell-height`, `lv10-cell-center`, `lv10-cell-flag`, `lv10-plate-flag`, and
+    `lv10-plate-few`.
+- No sound changes (the toys' sounds are as before), so nothing goes in `tools/sound-review.json`.
+- Thumbnails and the contact sheet are unchanged: the default look of both toys is unchanged.
