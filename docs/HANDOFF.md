@@ -4,13 +4,13 @@ Where Splashery stands, in short. The Operator session keeps this file; each lan
 in [handoff/](handoff/). The ground rules are in [CLAUDE.md](../CLAUDE.md); how the parallel lanes
 work is in [OPERATING.md](OPERATING.md).
 
-## Now (October 11, 2026, about 06:00 UTC)
+## Now (October 11, 2026, about 21:00 UTC)
 
 The Operator is `session_01GX3jNDDvRMLYjDGmHuDmNN` (Opus 5.5), since October 11, 2026, 06:05 UTC. It
 took over from `session_01A4ChKuJQqgoCrWAzQMpD4R` (Opus 5.5, October 10 to 11) by
-`.claude/skills/operator-handover/SKILL.md`; its own handover is due by October 13, 2026, or sooner
-at about 400k tokens of context. This section is current. The sections below it are history. The
-runbook is [OPERATOR.md](OPERATOR.md).
+`.claude/skills/operator-handover/SKILL.md`, and hands over on October 11, 2026, at about 21:00 UTC
+(510k tokens of context) to a fresh Operator, which puts its own id here in its first Ops PR. This
+section is current. The sections below it are history. The runbook is [OPERATOR.md](OPERATOR.md).
 
 **Effort (the owner's call of October 8, 2026):** every worker, lanes and Integrators alike, runs at
 high effort, and so do his Codex tasks. A session's effort is set in the Claude app; a message can't
@@ -21,7 +21,7 @@ change it.
 (`tools/suite.mjs --gl=llvmpipe --jobs=2 --recheck`), the lanes fix what the batch broke, and the
 batch merges as one PR.
 
-**Main** is at batch 7 (#524). Merged October 9 to 11:
+**Main** is at #539 or later (this handover's Ops PR). Merged October 9 to 11:
 
 - #457: Hands-on H1 and H5 (the Enigma, clothing, the handoffs) and Photo sharp view r3
 - #466: the October 9 walkthrough and manual reviews, triaged into lanes
@@ -41,9 +41,21 @@ batch merges as one PR.
 - #524: batch 7: Fix11 (#501, engine #502), QR r5 (#507), Live r9 part 2 (#505), Kit lab's handoff
   (#503), Codex task 34's Tinkerer's Manual audit (#509, a report), the lanes' rotation rule, and
   the Google Search Console tag on the home page
+- #527, #530, #531, #534: Manual r4, Manual r5, Live r10 (labs) and Site r3, each after its tests
+  and the owner's marks; #533: Codex task 35's second manual audit (a report); #532, #535: upkeep
 
-**Lanes running:** none until the weekly reset (Wednesday, October 14, 2026, 4 p.m. ET); usage was
-76% of the week on October 11.
+**Lanes running** (rows, sessions and files in WORKSTREAMS.md):
+
+- **Manual r6** (Sonnet, #536): the fixes for Codex task 35's second audit (#533). READY; merges
+  after the owner's marks on its man6 cards and a targeted run.
+- **Site r4** (Sonnet, #538 and engine #537): ready for the front door (one switch that builds the
+  swapped layout in a staging folder, a root 404 page, a staged root service worker). READY; merges
+  after the owner's marks on its st4 cards and a targeted run.
+
+The owner is walking through `/site/` and will send notes: they become a Site r5 lane. After the
+weekly reset (Wednesday, October 14, 2026, 4 p.m. ET), a polish lane on Sonnet (the owner's trial of
+October 11, after the bake-off) takes the Codex prototypes #518 (truss bridge), #515 (gear train)
+and #517 (coupled oscillators).
 
 Merged on October 11, 2026: Manual r4 (#527), Manual r5 (#530, after a full suite run), Live r10
 (#531, labs), Site r3 (#534: What's new as a gallery, the app's Gallery renamed Playground, a date
@@ -61,11 +73,10 @@ the front-door call; Codex task 32 (#479), held for his in-depth review. Pace (h
 October 14, 4 p.m. ET), with no new Claude-built toys until then; Codex builds first drafts of new
 toys, and a Claude lane polishes them after the reset.
 
-**Next for the Operator:** after the reset, a Manual r6 lane for #533's 14 findings and a polish
-lane for the Codex prototypes #518 (truss bridge), #515 (gear train) and #517 (coupled oscillators),
-with the models the owner picks; the `/site/` pages stay `noindex` until the owner's front-door call
-(Search Console is verified and the sitemap submitted); the Operator's own handover by October 13,
-2026, or at about 400k tokens of context.
+**Next for the Operator:** merge Manual r6 (#536) and Site r4 (#537, then #538) after the owner's
+marks; triage the owner's `/site/` walkthrough into a Site r5 lane; after the reset, the Sonnet
+polish lane for the Codex prototypes. The `/site/` pages stay `noindex` until the owner's front-door
+call (the app at the root is indexed; Search Console is verified and the sitemap submitted).
 
 ## State of main (2026-10-02, history)
 
