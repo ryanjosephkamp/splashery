@@ -488,7 +488,8 @@ ${docLinks(up)}
 
   // The terms are the ones in the Playground's About tab, read from index.html at build time.
   function terms(page, { up }) {
-    const html = read(root, "index.html");
+    // After the swap the Playground's page is playground/index.html (lane Site r4).
+    const html = read(root, fs.existsSync(path.join(root, "playground/index.html")) ? "playground/index.html" : "index.html"); // prettier-ignore
     const m = /<ul class="terms">([\s\S]*?)<\/ul>/.exec(html);
     if (!m) throw new Error("The Playground's terms of use are not in index.html any more.");
     const items = [...m[1].matchAll(/<li>([\s\S]*?)<\/li>/g)].map((x) =>
