@@ -42,18 +42,16 @@ batch merges as one PR.
   (#503), Codex task 34's Tinkerer's Manual audit (#509, a report), the lanes' rotation rule, and
   the Google Search Console tag on the home page
 
-**Lanes running** (rows, sessions and files in WORKSTREAMS.md):
+**Lanes running:** none until the weekly reset (Wednesday, October 14, 2026, 4 p.m. ET); usage was
+76% of the week on October 11.
 
-- **Site r3** (Sonnet, #529 and engine #528): What's new as a gallery, the app's Gallery renamed
-  Playground, a date for every toy with a newest-first view, and description tags. READY; merges
-  after the owner's marks on its cards and a targeted run.
-- **Bake-off r2** (Opus): all 40 cards are on the new blind page; the owner marks them, then the
-  reveal.
-
-Merged on October 11, 2026: Manual r4 (#527), Manual r5 (#530, after a full suite run) and Live r10
-(#531, labs). Those three lanes have stood down. Finished and safe to archive with the owner's OK:
-Manual r4, Manual r5, Live r10, Fix11, QR r5, Live r9, Kit lab, Arcade r3, Fix10, Photo depth and QR
-r4.
+Merged on October 11, 2026: Manual r4 (#527), Manual r5 (#530, after a full suite run), Live r10
+(#531, labs), Site r3 (#534: What's new as a gallery, the app's Gallery renamed Playground, a date
+for every toy, description tags) and Codex task 35's second manual audit (#533, a report: 13 of task
+34's 16 findings fixed, 3 partly; 14 new, none high). The bake-off's second round is marked and
+revealed to the owner (privately). Finished and safe to archive with the owner's OK: Site r3, Manual
+r4, Manual r5, Live r10, the bake-off runner, Fix11, QR r5, Live r9, Kit lab, Arcade r3, Fix10,
+Photo depth and QR r4.
 
 **Open with the owner:** marking the bake-off's 40 cards when the page is ready, then the reveal;
 Search Console (Verify, then submit site/sitemap.xml); the Codex prototype run (pilot #510 to #512
@@ -63,9 +61,10 @@ the front-door call; Codex task 32 (#479), held for his in-depth review. Pace (h
 October 14, 4 p.m. ET), with no new Claude-built toys until then; Codex builds first drafts of new
 toys, and a Claude lane polishes them after the reset.
 
-**Next for the Operator:** merge Site r3 (#528, then #529) after the owner's marks; review the Codex
-prototypes #514 to #522 (first drafts, never merged as is); the bake-off reveal after every card is
-marked; the owner's second Codex audit of the manual; the Operator's own handover by October 13,
+**Next for the Operator:** after the reset, a Manual r6 lane for #533's 14 findings and a polish
+lane for the Codex prototypes #518 (truss bridge), #515 (gear train) and #517 (coupled oscillators),
+with the models the owner picks; the `/site/` pages stay `noindex` until the owner's front-door call
+(Search Console is verified and the sitemap submitted); the Operator's own handover by October 13,
 2026, or at about 400k tokens of context.
 
 ## State of main (2026-10-02, history)
