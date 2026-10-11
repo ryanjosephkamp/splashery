@@ -44,6 +44,8 @@ import { Track, SongAnalysis } from "./song-stream.js";
 import { HOP as FRAME, F as FIELD, FIELDS } from "./song-analysis.js";
 import { songTransport } from "./song-record.js";
 import { bands } from "./studio-audio.js";
+// Lane Live r10: the beads' colors (the default stays amber).
+import { colorOptions, colorsOnly, paint, gradient, moving as colorMoves, flagColors } from "./chladni-colors.js"; // prettier-ignore
 
 const C_WATER = 1497; // m/s
 const SIDE = 0.01; // m: the cell is 1 cm across
@@ -144,6 +146,10 @@ export const CELL_WIDTH = 100;
 // on one rings that one). Returns [{ mode, a }] and the scaled pitch.
 export function cellDrive(hz, loud, shape) {
   const f = foldCell(hz, shape) * SCALE;
+  // Live r10: the loudness (0..1 over 30 dB) sets the energy in the cell,
+  // so a mode's pressure swing goes with its square root (the force goes with
+  // the energy: half as loud in energy, half the force; was a quarter).
+  const amp = Math.sqrt(loud);
   const resp = ladder(shape).map((mode) => {
     const x = (1200 * Math.log2(f / cellFreq(mode))) / CELL_WIDTH;
     return { mode, r: 1 / (1 + x * x) };
@@ -151,7 +157,7 @@ export function cellDrive(hz, loud, shape) {
   const top = Math.max(...resp.map((q) => q.r));
   const out = [];
   for (const { mode, r } of resp) {
-    const a = (loud * r) / top;
+    const a = (amp * r) / top;
     if (a > 0.1) out.push({ mode, a }); // (a weaker one adds under 1% to the mix)
   }
   return { modes: out, ultra: f };
@@ -271,6 +277,19 @@ function sample(grid, x, y, z, out) {
 
 const WALL = 0.97; // beads keep this far inside the walls
 const SETTLE_SECS = 1.1; // the time scale of the slide (at full sound)
+// Live r10: the owner's walkthrough of October 10, 2026: with music the beads
+// "settle into a shape and then barely follow", where the plate follows a
+// song. Measured (tools/lv10-measure.mjs, docs/handoff/LiveR10.md): a song's
+// notes last about 0.4 s, and the beads took 1.2 to 2.2 s to get halfway to
+// a new figure at full loudness (the plate's sand 0.5 to 0.9 s), and never
+// at 60% (the force went with the loudness squared). So while music or the
+// microphone drives the cell the slide runs on `secs` (the plate's pace; a
+// tap's ring keeps SETTLE_SECS), the loudness sets the energy in the cell
+// (the force goes with it, see cellDrive), and the modes' strengths
+// ease over `follow` seconds. The force law and the figures are unchanged:
+// only the clock of the slide is faster, as the toy's clock already is (a
+// real cell takes seconds to tens of seconds; Live r8's About says so).
+export const LIVE = { secs: 0.35, follow: 0.08 };
 
 // The beads: n of them, scattered evenly through the cell.
 export class Beads {
@@ -317,13 +336,13 @@ export class Beads {
   // strength squared: U = Σ aₘ² Uₘ (the plate's E = Σ aₘ² wₘ², in 3D). Each
   // mode's U is scaled to its own steepest slope, so every mode at full
   // strength moves the beads as fast as the toy's single mode does.
-  step(dt, a, stir = 0) {
+  step(dt, a, stir = 0, secs = SETTLE_SECS) {
     const drive = typeof a === "number" ? [{ mode: this.mode, a }] : a;
     const live = [];
     for (const d of drive)
       if (d.a >= 1e-3) {
         const grid = d.mode === this.mode ? this.grid : gridFor(d.mode);
-        live.push({ grid, w: ((d.a * d.a) / grid.max) * (2 / SETTLE_SECS) });
+        live.push({ grid, w: ((d.a * d.a) / grid.max) * (2 / secs) });
       }
     if (dt <= 0 || (!live.length && stir <= 0)) return (this.moving = false);
     this.steps++;
@@ -444,7 +463,7 @@ const BEAD_A = "#c8701f";
 const BEAD_B = "#eba443"; // a tap rings the transducer this long
 const STIR_SECS = 1.0; // and first swirls a settled cell this long
 
-const CELL = { beads: null, cols: 1, rows: 1, home: null, tone: null, img: null, version: 0, last: null, taps: 0, ringUntil: 0, stirUntil: 0, amp: 0, sorted: -1, unsorted: false, p: 0, frames: 0, amps: new Map(), lead: null, heard: null }; // prettier-ignore
+const CELL = { beads: null, cols: 1, rows: 1, home: null, tone: null, img: null, version: 0, last: null, taps: 0, ringUntil: 0, stirUntil: 0, amp: 0, sorted: -1, unsorted: false, p: 0, frames: 0, amps: new Map(), lead: null, heard: null, opts: null, paint: null, flags: null, flagAsk: 0 }; // prettier-ignore
 
 // For the tests: the beads and how settled they are.
 export const cellState = () => ({
@@ -470,7 +489,7 @@ const clamp01 = (v) => clamp(v, 0, 1);
 // The modes' strengths follow the sound within about 80 ms (the plate's
 // followDrive), so the beads answer a new note at once and stop with it.
 function follow(want, dt) {
-  const k = 1 - Math.exp(-dt / 0.08);
+  const k = 1 - Math.exp(-dt / LIVE.follow);
   const seen = new Set();
   for (const w of want) {
     seen.add(w.mode.id);
@@ -660,23 +679,33 @@ const cellScreen = {
   },
   version: () => CELL.version,
   draw(g) {
-    const { beads, cols, rows, home, tone } = CELL;
+    const { beads, cols, rows, home } = CELL;
     if (!beads) return;
-    if (!CELL.img || CELL.img.width !== cols * 2 || CELL.img.height !== rows) {
-      CELL.img = g.createImageData(cols * 2, rows);
-      const px = CELL.img.data;
+    const px0 = !CELL.img || CELL.img.width !== cols * 2 || CELL.img.height !== rows;
+    if (px0) CELL.img = g.createImageData(cols * 2, rows);
+    const px = CELL.img.data;
+    const P = beads.P;
+    // The colors on the left: once (Live r10: as chosen), or on every draw
+    // when they follow the beads (by height, or by distance from the center).
+    const o = CELL.opts;
+    const follow = colorMoves(o);
+    if (px0 || follow) {
+      const reach = beads.mode.shape === "cube" ? 1.35 : 1;
       for (let i = 0; i < beads.n; i++) {
-        const c = mix(BEAD_A, BEAD_B, tone[i]).map((v) => Math.round(v * 255));
-        const o = (Math.floor(i / cols) * cols * 2 + (i % cols)) * 4;
-        px[o] = c[0];
-        px[o + 1] = c[1];
-        px[o + 2] = c[2];
-        px[o + 3] = 255;
+        const x = P[i * 3];
+        const y = P[i * 3 + 1];
+        const z = P[i * 3 + 2];
+        const c = follow
+          ? gradient(o, o.colors === "height" ? (y + WALL) / (2 * WALL) : Math.hypot(x, y, z) / reach) // prettier-ignore
+          : [CELL.paint[i * 3], CELL.paint[i * 3 + 1], CELL.paint[i * 3 + 2]];
+        const at = (Math.floor(i / cols) * cols * 2 + (i % cols)) * 4;
+        px[at] = Math.round(c[0] * 255);
+        px[at + 1] = Math.round(c[1] * 255);
+        px[at + 2] = Math.round(c[2] * 255);
+        px[at + 3] = 255;
       }
     }
-    const px = CELL.img.data;
     const q = 255 / (2 * LIFT);
-    const P = beads.P;
     for (let i = 0; i < beads.n; i++) {
       const o = (Math.floor(i / cols) * cols * 2 + cols + (i % cols)) * 4;
       px[o] = 127.5 + (P[i * 3] * HALF - home[i * 3]) * q;
@@ -861,6 +890,8 @@ export const CHLADNI_CELL = {
       default: "cube-012",
       choices: CELL_MODES.map((m) => ({ id: m.id, label: cellLabel(m) })),
     },
+    // Live r10: the beads' colors.
+    ...colorOptions("cell", { id: "amber", label: "Amber (as made)" }, () => CELL.opts?.colors),
   ],
   controls: [{ key: "ring", label: "Switch on the sound", type: "toggle", default: 0, ease: RING_SECS }], // prettier-ignore
   action: {
@@ -940,7 +971,10 @@ export const CHLADNI_CELL = {
       const lead = mix.reduce((b, d) => (!b || d.a > b.a ? d : b), null);
       if (lead && lead.a > 0.05) CELL.lead = lead.mode;
     }
-    if (CELL.beads.step(dt, drive, stir)) {
+    // Live r10: music and the microphone move the beads on LIVE.secs (a
+    // tap's ring keeps its slower, calmer settle).
+    const secs = heard || CELL.amps.size ? LIVE.secs : undefined;
+    if (CELL.beads.step(dt, drive, stir, secs)) {
       CELL.version++;
       if (time - CELL.sorted > 0.15) {
         CELL.sorted = time;
@@ -1017,6 +1051,13 @@ export const CHLADNI_CELL = {
     // sand), each resting a hair from the middle.
     const n = Math.max(5000, Math.min(16000, Math.floor(k.count * 0.07)));
     const beads = new Beads(n, mode, () => k.rand());
+    // Live r10: a change of colors only keeps the beads where they are.
+    const was = CELL.beads;
+    const keep = colorsOnly(CELL.opts, o) && was?.mode.id === mode.id && was.n === n;
+    if (keep) {
+      beads.P.set(was.P);
+      beads.steps = was.steps;
+    }
     const cols = Math.min(256, Math.ceil(Math.sqrt(n * 2)));
     const rows = Math.ceil(n / cols);
     const home = new Float32Array(n * 3);
@@ -1025,10 +1066,27 @@ export const CHLADNI_CELL = {
     for (let i = 0; i < n; i++) {
       for (let a = 0; a < 3; a++) home[i * 3 + a] = (k.rand() - 0.5) * 0.04;
       tone[i] = k.rand();
-      items.push({ p: [home[i * 3], home[i * 3 + 1], home[i * 3 + 2]], color: mix(BEAD_A, BEAD_B, tone[i]), size: 0.42 + 0.22 * tone[i], opacity: 1, kind: "relief", params: [((i % cols) + 0.5) / cols, (Math.floor(i / cols) + 0.5) / rows, 3, LIFT], pattern: false }); // prettier-ignore
+    }
+    // Live r10: each bead's color as chosen (a flag's once its image is read).
+    const opts = { ...o };
+    const flag = opts.colors === "flag" ? CELL.flags?.get(opts.flag) : null;
+    const colors = paint(n, opts, { asMade: (i) => mix(BEAD_A, BEAD_B, tone[i]), tone, flag, pale: 0.78 }); // prettier-ignore
+    if (opts.colors === "flag" && !flag) {
+      const id = ++CELL.flagAsk;
+      flagColors(opts.flag).then((f) => {
+        if (!f || id !== CELL.flagAsk) return;
+        (CELL.flags ??= new Map()).set(opts.flag, f);
+        CELL.paint = paint(n, opts, { asMade: (i) => mix(BEAD_A, BEAD_B, tone[i]), tone, flag: f, pale: 0.78 }); // prettier-ignore
+        CELL.img = null;
+        CELL.version++;
+        liveIn.wake?.();
+      });
+    }
+    for (let i = 0; i < n; i++) {
+      items.push({ p: [home[i * 3], home[i * 3 + 1], home[i * 3 + 2]], color: [colors[i * 3], colors[i * 3 + 1], colors[i * 3 + 2]], size: 0.42 + 0.22 * tone[i], opacity: 1, kind: "relief", params: [((i % cols) + 0.5) / cols, (Math.floor(i / cols) + 0.5) / rows, 3, LIFT], pattern: false }); // prettier-ignore
     }
     k.cloud({ share: n / k.count, size: 0.5, pattern: false, jitter: 0 }, (rand, i) => items[i] || null); // prettier-ignore
-    Object.assign(CELL, { beads, cols, rows, home, tone, img: null, version: CELL.version + 1 });
+    Object.assign(CELL, { beads, cols, rows, home, tone, img: null, version: CELL.version + 1, opts, paint: colors }); // prettier-ignore
     k.reach([0, H + 0.2, 0]);
     k.reach([0, -H - 0.2, 0]);
     k.data = { cell: mode };

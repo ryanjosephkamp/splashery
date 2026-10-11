@@ -27,6 +27,8 @@ import { MicRecorder, wavBlob, saveBlob, songTransport } from "./song-record.js"
 import { Sand } from "./chladni-sand.js";
 // Lane Live r8: Sound in a box, the 3D version (labs).
 import { CHLADNI_CELL } from "./chladni-3d.js";
+// Lane Live r10: the sand's colors (the default stays as it was).
+import { colorOptions, colorsOnly, paint, flagColors } from "./chladni-colors.js";
 
 // ---- The Chladni plate ----------------------------------------------------------------
 // The classic model of a square plate of side L = 1 (x, y from 0 to 1) in one
@@ -270,7 +272,7 @@ const CH = { last: null, taps: 0, bowUntil: 0, stirUntil: 0, frames: 0, amp: new
 
 // Live r7: the live sand and its canvas (the toy's screen: each grain's
 // color on the left, its offset from where it rests on the right).
-const SAND = { sand: null, cols: 1, rows: 1, home: null, colors: null, img: null, version: 0 };
+const SAND = { sand: null, cols: 1, rows: 1, home: null, colors: null, img: null, version: 0, opts: null, paint: null, flags: null, flagAsk: 0 }; // prettier-ignore
 
 // The modes' strengths follow the sound within about 80 ms, so the sand
 // answers a new note at once and stops when the sound does. want: the
@@ -306,13 +308,14 @@ const sandScreen = {
   version: (time) =>
     SAND.sand?.moving ? `${SAND.version}|${Math.floor(time * 60)}` : SAND.version,
   draw(g, time) {
-    const { sand, cols, rows, home, colors } = SAND;
+    const { sand, cols, rows, home } = SAND;
     if (!sand) return;
     if (!SAND.img || SAND.img.width !== cols * 2 || SAND.img.height !== rows) {
       SAND.img = g.createImageData(cols * 2, rows);
       const px = SAND.img.data;
       for (let i = 0; i < sand.n; i++) {
-        const c = mix("#e9d8ac", "#f8efd2", colors[i]).map((v) => Math.round(v * 255));
+        // Live r10: each grain's color as chosen (as made: pale sand).
+        const c = [0, 1, 2].map((a) => Math.round(SAND.paint[i * 3 + a] * 255));
         const o = (Math.floor(i / cols) * cols * 2 + (i % cols)) * 4;
         px[o] = c[0];
         px[o + 1] = c[1];
@@ -367,6 +370,8 @@ const CHLADNI = {
       default: "2-3+",
       choices: MODES.map((m) => ({ id: m.id, label: modeLabel(m) })),
     },
+    // Live r10: the sand's colors.
+    ...colorOptions("plate", { id: "sand", label: "Sand (as made)" }, () => SAND.opts?.colors),
   ],
   controls: [{ key: "bow", label: "Bow the plate", type: "toggle", default: 0, ease: BOW_SECS }],
   action: {
@@ -556,6 +561,13 @@ const CHLADNI = {
     // Live r8: each grain a little smaller and fully opaque, a crisper speck.
     const n = Math.max(2500, Math.min(10000, Math.floor(k.count * 0.06)));
     const sand = new Sand(n, () => k.rand());
+    // Live r10: a change of colors only keeps the sand where it lies.
+    const was = SAND.sand;
+    if (colorsOnly(SAND.opts, o) && was?.n === n && SAND.opts?.mode === o.mode) {
+      sand.X.set(was.X);
+      sand.Y.set(was.Y);
+      sand.steps = was.steps;
+    }
     const cols = Math.min(256, Math.ceil(Math.sqrt(n * 2)));
     const rows = Math.ceil(n / cols);
     const home = new Float32Array(n * 2);
@@ -566,8 +578,26 @@ const CHLADNI = {
       const tone = k.rand();
       items.push({ p: [home[i * 2], GRAIN_LIFT, home[i * 2 + 1]], color: mix("#e9d8ac", "#f8efd2", tone), tone, size: 0.44 + 0.34 * tone, opacity: 1, kind: "relief", params: [((i % cols) + 0.5) / cols, (Math.floor(i / cols) + 0.5) / rows, 3, SAND_LIFT], part: plate, pattern: false }); // prettier-ignore
     }
+    // Live r10: each grain's color as chosen (a flag's once its image is read).
+    const tones = items.map((it) => it.tone);
+    const asMade = (i) => mix("#e9d8ac", "#f8efd2", tones[i]);
+    const opts = { ...o };
+    const flag = opts.colors === "flag" ? SAND.flags?.get(opts.flag) : null;
+    const colors = paint(n, opts, { asMade, tone: tones, flag });
+    for (let i = 0; i < n; i++) items[i].color = [colors[i * 3], colors[i * 3 + 1], colors[i * 3 + 2]]; // prettier-ignore
+    if (opts.colors === "flag" && !flag) {
+      const id = ++SAND.flagAsk;
+      flagColors(opts.flag).then((f) => {
+        if (!f || id !== SAND.flagAsk) return;
+        (SAND.flags ??= new Map()).set(opts.flag, f);
+        SAND.paint = paint(n, opts, { asMade, tone: tones, flag: f });
+        SAND.img = null;
+        SAND.version++;
+        liveIn.wake?.();
+      });
+    }
     k.cloud({ share: n / k.count, size: 0.5, pattern: false, jitter: 0 }, (rand, i) => items[i] || null); // prettier-ignore
-    Object.assign(SAND, { sand, cols, rows, home, colors: items.map((it) => it.tone), img: null, version: SAND.version + 1 }); // prettier-ignore
+    Object.assign(SAND, { sand, cols, rows, home, colors: tones, img: null, version: SAND.version + 1, opts, paint: colors }); // prettier-ignore
     k.reach([0, HOP + 0.3, 0]);
     k.data = { chladni: { mode } };
   },
