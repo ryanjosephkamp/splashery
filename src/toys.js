@@ -3937,6 +3937,17 @@ export const TOYS = [
     camera: { yaw: 0, pitch: 0.5, roll: 0, distance: 3.4 },
   },
   // ---- End of pack: light-lab ----
+  // ---- Pack: proto-projectile-drag (Codex prototype) ----
+  {
+    id: "projectile-drag",
+    label: "Projectile with air drag",
+    category: "science",
+    kind: "kit",
+    pack: "proto-projectile-drag",
+    labs: true,
+    tags: "projectile ball baseball golf ping-pong air drag parabola range height flight physics",
+    camera: { yaw: 0, pitch: 0, roll: 0, distance: 2.95 },
+  },
   // ---- Pack: science (lane Science) ----
   {
     id: "thermal-ellipsoids",
