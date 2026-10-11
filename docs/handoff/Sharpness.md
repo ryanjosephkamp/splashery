@@ -8,14 +8,14 @@ measurements)".
 (Written by the Operator on September 29, 2026, from the owner's marks and his message that morning,
 and the second Lab round queued in WORKSTREAMS.md.)
 
-The owner's words: "I almost want to make things so incredible with this that people won't even
-realize that they're looking at Gaussian splats … some of the stuff, just, like, the resolution
-isn't great. It just looks grainy." This morning, on the Worlds: "still just a bit too grainy." On
-Books: "The book itself (not the pages) just seem a little bit blurry or grainy, especially around
-the edges." On the blind toy piano, one maker's version was "Too grainy" and the other's was not,
-from the same brief, so much of the grain is in how a toy is built. Lanes Fidelity A and B fixed
-that side toy by toy (even placement, full opacity, full density, clean colors) and the owner marked
-all of it good. Your lane is the other side: the renderer and the engine settings every toy shares.
+The owner's call: make things so good that people don't realize they are looking at Gaussian splats;
+the resolution of some toys isn't great and they look grainy. This morning, on the Worlds: still a
+bit too grainy. On Books: the book itself (not the pages) looks a little blurry or grainy,
+especially around the edges. On the blind toy piano, one maker's version was too grainy and the
+other's was not, from the same brief, so much of the grain is in how a toy is built. Lanes Fidelity
+A and B fixed that side toy by toy (even placement, full opacity, full density, clean colors) and
+the owner marked all of it good. Your lane is the other side: the renderer and the engine settings
+every toy shares.
 
 Find out what grain is left once a toy is built well, and take it out of the engine, measured,
 behind switches first:
@@ -142,13 +142,13 @@ Proposal for the owner (nothing is on by default; he decides what leaves labs):
      Reproduced at 1:52 (the hour hand vanishes, both at 2x and 3x). Lifting them to `0.04`, `0.055`
      and `0.07` shows the hand (tested locally, not committed). A small fix in the clock's recipe
      for whichever lane owns objects.js now; this lane can make it if the Operator says so.
-   - `shp-marble`, "I can barely see the marble's glass spherical shape": the glass shell is a
-     faint, nearly white cloud on a white background at any ratio; the build needs a visible rim (a
-     brighter, more opaque edge where the shell turns away).
-   - `shp-your-book`, "Background rectangle still looks too grainy. The border/edges aren't
-     straight": the cover's edge splats are placed loosely (a frayed edge at any ratio). A build fix
+   - `shp-marble`, the glass sphere's shape is barely visible: the glass shell is a faint, nearly
+     white cloud on a white background at any ratio; the build needs a visible rim (a brighter, more
+     opaque edge where the shell turns away).
+   - `shp-your-book`, the background rectangle is still too grainy and its border and edges are not
+     straight: the cover's edge splats are placed loosely (a frayed edge at any ratio). A build fix
      for the book's cover (lane Books or Pictures).
-   - `shp-test-island`, "The person, however, doesn't look right … a polished video game character":
-     the character's build (lane Worlds or its Character lane).
+   - `shp-test-island`, the person does not look right and should look like a polished video game
+     character: the character's build (lane Worlds or its Character lane).
 9. For the backlog: a toy recipe's `render: { cull, dpr, adapt, aa }` (labs only) lets a lane try
    the levers per toy.

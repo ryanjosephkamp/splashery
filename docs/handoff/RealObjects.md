@@ -14,10 +14,9 @@ file: docs/handoff/RealObjects.md.
 
 The owner approved these everyday objects on the Toy Ideas page
 (https://claude.ai/artifact/5TukiuV3mCt3G3zk6Arx9S; read collection `ideas` and `marks` with
-ArtifactData for the full text, and never write to them). His note on each of them, word for word:
-"This should be a real life splat if you can find it. I do not want this to be a cartoon or an
-illustration. If we cannot find a suitable real life splat for this object, only then can you make
-it a cartoon."
+ArtifactData for the full text, and never write to them). His note on each of them: it should be a
+real life splat if one can be found, not a cartoon or an illustration; only if no suitable real life
+splat exists may it be made a cartoon.
 
 The toys, with his approved taps (the ideas' ids are the toy ids):
 

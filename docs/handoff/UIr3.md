@@ -7,15 +7,13 @@ From the Operator, September 30, 2026 (the second round in the UI r2 session):
 Next, a new round in this session: **UI r3**. Make branch claude/lane-ui-r3 from claude/lane-ui-r2
 (5688d4d), open a draft PR titled "Phase UI r3: tap to pause, quiet turntables and a flag button"
 against main (stacked on #131; merge main into it once #131 lands), and use handoff
-docs/handoff/UIr3.md with prefix `ui3`. These are the owner's requests of September 30, 2026, word
-for word:
+docs/handoff/UIr3.md with prefix `ui3`. These are the owner's requests of September 30, 2026,
+paraphrased by the Operator:
 
-1. "Can we make some special effects work such that they play when clicked/tapped in the right areas
-   (like they do now) and pause if touched again in those areas? For example, if I click the body of
-   the toy piano, it plays a tune, but if I click it again before it's finished, it doesn't pause –
-   it starts over again (actually, it starts playing the song again, over the song that's still
-   playing already). Can we change this so that that second click would pause the song and a third
-   click would resume it from the pause?"
+1. Special effects that play when tapped in the right areas should pause when tapped again there.
+   His example: tapping the toy piano's body plays a tune, but tapping again before it finishes
+   starts the song again over the one still playing. He wants the second tap to pause the song and a
+   third tap to resume it from the pause.
    - Build it in the engine for every effect that runs longer than about 2 seconds, or that plays a
      sequence: songs, tunes, music boxes, the birthday cake, the long demos. A tap on the tap area
      while it runs pauses both the motion and the sound at that moment, the next tap resumes from
@@ -25,12 +23,11 @@ for word:
    - The Toy tab's action button turns into Pause and Resume while an effect runs.
    - Sound: stop scheduling future notes and let the current ones release, remembering the position;
      a look-ahead scheduler is one way.
-2. "Can we make the following categories and toys not have the automatic turntable effect?
-   Basically, I want these to work like the PDF book, etc. and use the same rotation lock and
-   turntable-off default setting. Here's the list: Graph plotter, surface plotter, circle and waves,
-   Fourier circles, Pythagoras proof, EVERYTHING in the AI and computing category, EVERYTHING in the
-   music category, EVERYTHING in the open me category, the chess set, the puzzle cube, and maybe
-   anything else that you think would be best to not use the turntable effect by default."
+2. These categories and toys should not have the automatic turntable, and should work like the PDF
+   book, with the same rotation lock and turntable-off default: Graph plotter, surface plotter,
+   circle and waves, Fourier circles, Pythagoras proof, everything in the AI and computing category,
+   everything in the music category, everything in the open me category, the chess set, the puzzle
+   cube, and anything else that fits better without a default turntable.
    - "Open me" is the `objects` shelf. The laptop is in it, and he asked for the whole shelf, so the
      turntable default and tilt lock apply to the laptop too. Nothing else about the laptop changes.
    - Add toys that read like a chart, a diagram, a page or an instrument: at least the periodic
@@ -39,9 +36,9 @@ for word:
    - A person can still turn the turntable on for a toy.
    - Old links and saved scenes keep loading. A saved scene's own camera and turntable settings win
      over the default.
-3. From his notes of September 28 (docs/reviews/2026-09-28-sounds/review.md, the part about the
-   turntable and the flag theme): **a flag button in the top bar.** The flag choice already carries
-   across toys, so it's a global setting beside ?, the turntable and sound.
+3. From his notes of September 28 (the part about the turntable and the flag theme): **a flag button
+   in the top bar.** The flag choice already carries across toys, so it's a global setting beside ?,
+   the turntable and sound.
 
 Cards (390×844 unless noted, "built by Opus 5.5", lane record `UIr3`; ask me if it's missing):
 

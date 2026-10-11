@@ -22,8 +22,8 @@ when it asks, the zoom gesture for a toy, a scale bar"; merge it first). Lane PR
   `tests/pot-engine.spec.mjs`, 3). Clips on Effect review page 2, lane "Powers": `pot-zoom-out-r2`
   (garden to galaxy; its first version `pot-zoom-out` was marked good) and `pot-zoom-in` (garden to
   ribosome). Screenshots `pot-garden-*` and `pot-earth-*`.
-- The owner's marks: `pot-zoom-out` and `pot-zoom-out-r2` good. `pot-zoom-in` fix ("the leaf is a
-  different color from those on the tree ... moving from one image into another flat image"): the
+- The owner's marks: `pot-zoom-out` and `pot-zoom-out-r2` good. `pot-zoom-in` fix (the leaf is a
+  different color from those on the tree, and the zoom moves from one flat image into another): the
   zoom now stays on the same golden full-moon maple (its leaves from above, then one leaf), each new
   picture comes in as a round soft patch over the one before, which stays behind softly until the
   new one fills the view; posted as `pot-zoom-in-r2`.
@@ -60,8 +60,8 @@ For the Operator" current). Model: Opus 5.5, at the default effort.
 The owner's science pick S12: "One continuous zoom from a virus to a galaxy through existing toys,
 with real scale labels at each step." He called it "one of the best ideas", "but very importantly, I
 don't want it to look like a cartoon": photoreal, or as close as we can make it (a fully kit-built
-version would be acceptable only as a clearly separate style). See
-docs/reviews/2026-10-04-push-alignment/notes.md, around line 630.
+version would be acceptable only as a clearly separate style). (His notes are private; this is the
+Operator's summary.)
 
 1. **The steps.** About 12 to 16 stops from roughly 10⁻⁸ m to 10²¹ m and beyond, each a real splat
    built from real data or real captures, preferring what the site already has: cryo-EM maps

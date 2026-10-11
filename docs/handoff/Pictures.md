@@ -9,28 +9,24 @@ lanes work: [OPERATING.md](../OPERATING.md). Earlier lessons: [history.md](histo
 the plan he accepted the same day)
 
 The owner asked whether people could open a PDF, photos, a GIF or a video and see it made of
-Gaussian splats: "a virtual Gaussian splat book, kind of like our storybook, but you can actually
-flip every page, and each page is the proper corresponding page of the PDF that the person
-uploaded", "an arbitrary number of pages", a photo album, and "a hologram or a TV screen that has,
-like, a video that they've put on there, and it would all be Gaussian splats, with the audio
-synchronized". "It should all still be Gaussian splats, like the rest of it is." "There needs to be
-enough resolution for it to still resemble the original article. It doesn't have to be perfectly
-legible", and it's fine if the toys are big or heavy for the sake of sharpness. His notes, word for
-word, and the plan are in docs/reviews/2026-09-28-pictures/review.md (on the Operator's branch
-claude/operator-pictures-plan until it merges:
-`git fetch origin claude/operator-pictures-plan && git show origin/claude/operator-pictures-plan:docs/reviews/2026-09-28-pictures/review.md`).
-The report he accepted is the private page "Pages into Splats":
-https://claude.ai/artifact/9mrrJYPiZKbSD9s5gFBpaA (read it with the Artifact tool, action "read").
+Gaussian splats: a virtual Gaussian splat book like the storybook where every page flips and each
+page is the matching page of the uploaded PDF, an arbitrary number of pages, a photo album, and a
+hologram or TV screen showing a video, all Gaussian splats, with the audio synchronized. It should
+all still be Gaussian splats, with enough resolution to resemble the original article (it need not
+be perfectly legible), and it's fine if the toys are big or heavy for the sake of sharpness. His
+notes are private; the Operator's summary and the plan are in this brief. The report he accepted is
+the private page "Pages into Splats": https://claude.ai/artifact/9mrrJYPiZKbSD9s5gFBpaA (read it
+with the Artifact tool, action "read").
 
-The plan he accepted, as it concerns this lane: "Start with the engine lane: pictures to splats (PDF
-pages, photos, GIF and video frames), pages that stream through a few sheets, near and far detail,
-Open a file in the Toy tab, and a web address for embeds. Keep the new toys behind a hidden switch
-until I've tried them on my phone." "You may vendor PDF.js (Apache 2.0) and omggif (MIT), loaded
-only when someone opens a PDF or a GIF." "The laptop stays as it is." The toy lanes that follow
-build Your book, Photo album, Picture frame and Screen (old TV, flat TV, cinema, hologram, with
-sound) on a new shelf, "Pictures and pages", plus a Gaussian splat toy (AI and computing) that
-trains a cloud of splats into a picture with the code this lane builds. Build the engine they all
-share, and one plain test toy to prove it.
+The plan he accepted, as it concerns this lane (the Operator's summary): start with the engine lane:
+pictures to splats (PDF pages, photos, GIF and video frames), pages that stream through a few
+sheets, near and far detail, Open a file in the Toy tab, and a web address for embeds. Keep the new
+toys behind a hidden switch until he has tried them on his phone. PDF.js (Apache 2.0) and omggif
+(MIT) may be vendored, loaded only when someone opens a PDF or a GIF. The laptop stays as it is. The
+toy lanes that follow build Your book, Photo album, Picture frame and Screen (old TV, flat TV,
+cinema, hologram, with sound) on a new shelf, "Pictures and pages", plus a Gaussian splat toy (AI
+and computing) that trains a cloud of splats into a picture with the code this lane builds. Build
+the engine they all share, and one plain test toy to prove it.
 
 ### What the Operator's test found (September 28, on main at 30c773a)
 

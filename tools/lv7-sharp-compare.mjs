@@ -1,7 +1,7 @@
 #!/usr/bin/env node
-// Lane Live r7 (the owner's note of October 6, 2026: "The moving photo to
-// 3d is also still too grainy and needs to be much sharper. It should match
-// the sharpness of the photo to 3d toy"): one frame of the Moving photo to
+// Lane Live r7 (the owner's note of October 6, 2026: the moving photo to
+// 3D is still too grainy, needs to be much sharper, and should match the
+// sharpness of the Photo to 3D toy): one frame of the Moving photo to
 // 3D sample, shown by both toys at phone size, and how sharp each looks.
 //
 //   python3 -m http.server 4173 --bind 127.0.0.1 &

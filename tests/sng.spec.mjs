@@ -27,9 +27,8 @@ const kinds = (ctx) => {
 };
 
 test.describe("the Live view (no browser)", () => {
-  // Lane Live input r3: Live is the default since the owner's review of October 2, 2026 ("I like
-  // the live view much more than I like the full spectrum because the full spectrum doesn't
-  // usually seem to move very much while the song is playing, whereas live it actually moves");
+  // Lane Live input r3: Live is the default since the owner's review of October 2, 2026 (he
+  // prefers the live view, because the full spectrum barely moves while the song plays);
   // Whole song is one tap away.
   test("View is an option, Live is the default and Whole song one choice away", () => {
     const opt = R.options.find((x) => x.key === "view");
