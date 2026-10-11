@@ -1529,3 +1529,24 @@ nav.toc > ol {
     display: none;
   }
 }
+.built-diagram svg {
+  max-width: 420px;
+  width: 100%;
+  height: auto;
+}
+.item-pic {
+  margin: 10px 0 16px;
+}
+.item-pic img {
+  display: block;
+  width: 100%;
+  max-width: 540px;
+  height: auto;
+  border-radius: 8px;
+  background: #14161c;
+}
+.item-pic figcaption {
+  margin-top: 4px;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
