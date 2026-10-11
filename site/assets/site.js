@@ -115,3 +115,19 @@ if ("serviceWorker" in navigator && location.protocol !== "file:") {
     .then((reg) => keepLoaded(reg.active))
     .catch((err) => console.info("Splashery: offline use is not available here.", err?.message));
 }
+
+// ---- Toy lists: "By shelf" or "Newest first" ---------------------------------------------------
+for (const views of document.querySelectorAll(".shelf-views")) {
+  const bar = views.querySelector(".order-bar");
+  const buttons = [...bar.querySelectorAll(".order-button")];
+  const index = views.parentElement.querySelector(".shelf-index");
+  const show = (order) => {
+    views.dataset.view = order;
+    if (index) index.hidden = order === "date";
+    for (const b of buttons) b.setAttribute("aria-pressed", String(b.dataset.order === order));
+  };
+  for (const b of buttons) b.addEventListener("click", () => show(b.dataset.order));
+  bar.hidden = false;
+  // A link to #newest opens the list in that order.
+  if (location.hash === "#newest") show("date");
+}

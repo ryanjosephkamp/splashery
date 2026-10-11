@@ -6,7 +6,7 @@
 // a kit recipe's own credits, tools/assets.json, tools/models.json), "Is it
 // right?" from docs/evidence/<id>.json when there is one, related toys, and
 // share and embed snippets. Labs toys get a page too, shown only with the labs
-// switch on, as the gallery does.
+// switch on, as the Playground does.
 //
 // Everything here reads the toy list, so the pages follow main: the Operator's
 // upkeep rebuilds them after each merge ("toy" is in TOY_TYPES).
@@ -16,6 +16,7 @@ import path from "node:path";
 import { TOYS, holdsStill } from "../src/toys.js";
 import { TOY_HELP, toyAbilities } from "../src/toy-help.js";
 import { RIGS } from "../src/rigs.js";
+import { toyDates } from "./toy-dates.mjs";
 
 const root = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
 const readJSON = (f) => JSON.parse(fs.readFileSync(path.join(root, f), "utf8"));
@@ -31,6 +32,14 @@ const APP = "https://ryanjosephkamp.github.io/splashery/";
 
 export const toyPath = (t) => `toys/${t.id}/`;
 
+// The day each toy first arrived on main (tools/toy-dates.mjs derives them from the git history).
+export const TOY_DATES = toyDates();
+const MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]; // prettier-ignore
+export const dateText = (iso) => {
+  const [y, m, d] = iso.split("-").map(Number);
+  return `${MONTHS[m - 1]} ${d}, ${y}`;
+};
+
 // ---- The page entries (pushed onto PAGES in tools/site-pages.mjs) -----------------------
 
 export function toyPageEntries() {
@@ -40,7 +49,7 @@ export function toyPageEntries() {
     nav: "toys",
     toy: t.id,
     title: t.label,
-    description: `${t.label}, a Splashery toy made of 3D Gaussian splats: ${firstSentence(TOY_HELP[t.id]?.howTo || "tap it, turn it, share it.")}`, // prettier-ignore
+    description: toyDescription(t),
     image: `../assets/toys/${t.id}/thumb.webp`,
     imageSize: 256,
     imageAlt: `${t.label}, made of soft 3D splats`,
@@ -49,6 +58,23 @@ export function toyPageEntries() {
     // Labs toys stay out of the sitemap, as they stay off the public shelf.
     sitemap: !t.labs,
   }));
+}
+
+// A toy page's description: the toy's About line (its first sentence), else its how-to line; under
+// about 160 characters, cut at a word.
+function toyDescription(t) {
+  const help = TOY_HELP[t.id] || {};
+  const para = String(help.about || "").split(/\n\s*\n/)[0].replace(/\s+/g, " ").trim();
+  // Sentences, not splitting after an abbreviation ("U.S.", "St.").
+  const sentences = para.match(/(?:[^.!?]|\b(?:U\.S|St|Dr|Mt|vs|e\.g|i\.e)\.|[.!?](?=\S))+[.!?]?/g)?.map((x) => x.trim()) || []; // prettier-ignore
+  let text = "";
+  for (const sentence of sentences) {
+    if (text && (text.length >= 60 || text.length + sentence.length + 1 > 160)) break;
+    text = text ? `${text} ${sentence}` : sentence;
+  }
+  if (!text) text = `${t.label}, a Splashery toy made of 3D Gaussian splats: ${firstSentence(help.howTo || "tap it, turn it, share it.")}`; // prettier-ignore
+  if (text.length > 160) text = text.slice(0, 157).replace(/[\s,;:(–-]+\S*$/, "") + "…";
+  return text;
 }
 
 // Up to the first full stop that ends a sentence (not the one in "3.45 s" or "move.mp3").
@@ -228,7 +254,9 @@ export async function toyPage(page, ctx) {
   // What it does: the tap and its sound, in a sentence each.
   const tap = plan.effect ? firstSentence(plan.effect) : toyAbilities({ id: t.id, kind: t.kind, label: t.label, recipe })[0]?.[1] || "It hops."; // prettier-ignore
   const sound = soundLine(plan.sound);
-  const does = `<dl class="does"><div><dt>Tap</dt><dd>${esc(tap)}</dd></div>${sound ? `<div><dt>Sound</dt><dd>${esc(sound)}</dd></div>` : ""}</dl>`; // prettier-ignore
+  const when = TOY_DATES[t.id];
+  const arrived = when ? `<div><dt>Arrived</dt><dd><time datetime="${when}">${dateText(when)}</time></dd></div>` : ""; // prettier-ignore
+  const does = `<dl class="does"><div><dt>Tap</dt><dd>${esc(tap)}</dd></div>${sound ? `<div><dt>Sound</dt><dd>${esc(sound)}</dd></div>` : ""}${arrived}</dl>`; // prettier-ignore
 
   const about = String(help.about || "")
     .split(/\n\s*\n/)
@@ -296,7 +324,7 @@ ${labsNote}
 <h1>${esc(t.label)}${t.labs ? ' <span class="badge">labs</span>' : ""}</h1>
 <p class="lead how-to">${esc(how)}</p>
 ${does}
-<p class="actions"><a class="button primary" href="${up}${galleryHref(t)}" target="_blank" rel="noopener">Open in the gallery${arrow}</a><a class="button" href="#h-share">Share or embed</a></p>
+<p class="actions"><a class="button primary" href="${up}${galleryHref(t)}" target="_blank" rel="noopener">Open in the Playground${arrow}</a><a class="button" href="#h-share">Share or embed</a></p>
 </div>
 <figure class="hero-toy toy-stage">
 <div class="stage">
