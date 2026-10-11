@@ -3745,7 +3745,7 @@
     "u": "toys/qr-damage/",
     "k": "toy",
     "s": "Studio",
-    "d": "Pick a damage in the Toy tab, then tap the code to place it: a sticker or a smudge lands where you tap, and a tear or a burn starts from the nearest corner. Watch the meter.",
+    "d": "Pick a damage in the Toy tab, then tap the code to place it. Watch the meter.",
     "w": "qr damage lab studio studio qr code damage scratch sticker tear burn smudge blur error correction reed solomon heal scan meter levels qr-damage",
     "i": "../assets/toys/qr-damage/thumb.webp",
     "l": 1
