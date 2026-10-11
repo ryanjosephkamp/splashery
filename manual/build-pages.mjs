@@ -215,10 +215,7 @@ const onePage = (html) =>
       const c = p.file === "index.html" ? p.content.replace(/<!-- TOC:START[\s\S]*?<!-- TOC:END -->/, toc()) : p.content; // prettier-ignore
       return onePage(c);
     })
-    .join("\n")
-    // The whole-manual page does not link to itself, and has the fold buttons once, after the contents.
-    .replace(/\s*·\s*<a href="#[^"]*">Read it all on one page<\/a>/, "")
-    .replace(/(<!-- TOC:END -->)/, `$1\n      ${foldButtons}`);
+    .join("\n");
   const html = `<!doctype html>
 <html lang="en">
   <head>

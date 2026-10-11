@@ -41,7 +41,7 @@ test.describe("the manual's claims match the code", () => {
   });
 
   test("every behavior the manual names exists", () => {
-    const para = html.match(/<h3[^>]*>Behaviors<\/h3>([\s\S]*?)<h3/)[1];
+    const para = html.match(/<h3>Behaviors<\/h3>([\s\S]*?)<h3>/)[1];
     const kinds = [...para.matchAll(/kind: "(\w+)"|<code>"(\w+)"<\/code>/g)].map((m) => m[1] || m[2]); // prettier-ignore
     expect(kinds.length).toBeGreaterThan(4);
     for (const k of kinds) expect(KINDS[k], k).toBeDefined();
@@ -57,7 +57,7 @@ test.describe("the manual's claims match the code", () => {
     const quick = [...html.matchAll(/<b>Functions<\/b>:\s*([^<]*)/g)].pop()[1];
     for (const f of named.filter((f) => f !== "log")) expect(quick, f).toContain(f);
     // Every field the manual's table lists is a field, and the other way round.
-    const table = html.match(/<h3[^>]*>The fields<\/h3>([\s\S]*?)<h3[^>]*>Expressions/)[1];
+    const table = html.match(/<h3>The fields<\/h3>([\s\S]*?)<h3>Expressions/)[1];
     const listed = new Set([...table.matchAll(/<td>\s*<code>(\w+)<\/code>/g)].map((m) => m[1]));
     for (const m of table.matchAll(/<code>(x|y|z|r|g|b)<\/code>/g)) listed.add(m[1]);
     for (const f of FIELDS) expect(listed.has(f), f).toBe(true);
@@ -262,7 +262,7 @@ test.describe("the manual page", () => {
       expect(alt.length, `${src} has alt text`).toBeGreaterThan(5);
     }
     const toc = await page.locator("nav.toc a").evaluateAll((as) => as.map((a) => a.textContent)); // prettier-ignore
-    for (const level of ["Chapter 1", "Chapter 2", "Chapter 3", "Chapter 4", "Chapter 5"])
+    for (const level of ["Level 1", "Level 2", "Level 3", "Level 4", "Level 5"])
       expect(
         toc.some((t) => t.startsWith(level)),
         level,
