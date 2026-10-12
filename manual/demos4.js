@@ -23,14 +23,15 @@ const rgb = (c, a = 1) => `rgba(${c.map((v) => Math.round(v * 255)).join(", ")},
 // A canvas that draws only while it is on the screen and the tab is visible. `frame(seconds)` draws
 // one frame. With reduced motion it draws one still frame and never animates.
 function animate(cv, frame) {
+  const printing = matchMedia("print");
   let raf = 0;
   let visible = false;
   let t0 = 0;
-  const redraw = () => frame(t0 ? (performance.now() - t0) / 1000 : 0);
+  const redraw = () => frame(t0 && !printing.matches ? (performance.now() - t0) / 1000 : 0);
   const cx = crisp(cv, redraw);
   const tick = (now) => {
     raf = 0;
-    if (!visible || document.hidden) return;
+    if (!visible || document.hidden || printing.matches) return;
     t0 ||= now;
     frame((now - t0) / 1000);
     raf = requestAnimationFrame(tick);
@@ -44,6 +45,11 @@ function animate(cv, frame) {
   });
   matchMedia("(prefers-color-scheme: dark)").addEventListener?.("change", redraw);
   new MutationObserver(redraw).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] }); // prettier-ignore
+  // Printing (the PDF) stops the motion on the first frame, so the same page prints the same bytes.
+  printing.addEventListener?.("change", () => {
+    t0 = 0;
+    frame(0);
+  });
   frame(0);
   return cx;
 }
