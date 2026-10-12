@@ -289,7 +289,7 @@ const ICE_SECS = 7.6;
 // where it joins the rest (its pivot) over its window of the melt level
 // [start, end]; a piece that breaks off first thins a little, cracks off
 // at `detach`, falls (over `fall` of the melt level) to lie in the water
-// at `land` (its center, `centre`, turned by `turn`), and melts away there
+// at `land` (its center, `center`, turned by `turn`), and melts away there
 // over `gone`. `min` is what is left of it (the body's lump).
 const ICE_MELT = 4.4;
 const ICE_TOP = 0.93;

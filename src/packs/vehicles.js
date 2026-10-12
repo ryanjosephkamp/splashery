@@ -245,7 +245,7 @@ function plume(k, from, dir, o = {}) {
 
 // Rock (or tilt) a part together with the whole vehicle: a spin `q` about
 // the part's own pivot `pv`, then the vehicle's tilt `tq` about the center
-// `centre`, then a lift. Returns the part pose for drive().
+// `center`, then a lift. Returns the part pose for drive().
 function carried(pv, tq, centre, lift = [0, 0, 0], q = [0, 0, 0, 1]) {
   const qq = quatMulLocal(tq, q);
   const off = add(sub(add(centre, quatRotate(tq, sub(pv, centre))), pv), lift);

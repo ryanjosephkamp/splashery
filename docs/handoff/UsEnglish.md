@@ -14,7 +14,7 @@ For the Operator" current). Model: Sonnet 5.5, at high effort.
 The owner asked today for Splashery to switch to American spelling everywhere a person can read it,
 the app and its documentation together (the README quotes strings the app shows, so both change in
 one PR). `node tools/us-english.mjs` (no arguments: every line) lists 479 British spellings on main
-today (colour, maths, synthesised, recolour, haemoglobin and the rest).
+today (color, math, synthesized, recolour, hemoglobin and the rest).
 
 Scope, in this order: (1) every string a person reads, including code comments; (2) tests that
 assert one of those strings. Leave alone: vendor/ and third-party names; identifiers and stored
@@ -29,6 +29,9 @@ prompt; this is its summary.)
 
 Model: Sonnet 5.5 (claude-sonnet-5-5), high effort. Branch `claude/lane-us-english`.
 
+- October 12, 2026: the first full run found one slip of mine: the sweep had renamed the saved
+  option keys `flavour` and `flavours` in src/packs/food.js (macaron toy failures in kit, e5 and
+  taps). Restored; they are in the kept list.
 - October 12, 2026: sweep done in the working tree: strings, docs, tools/toy-plan.json (so
   TOY-PLAN.md regenerates clean), code comments (scan by script, backticked identifiers left alone),
   and the status line test in tests/smoke.spec.mjs ("in the colors of"). Prettier clean.
@@ -38,16 +41,15 @@ Model: Sonnet 5.5 (claude-sonnet-5-5), high effort. Branch `claude/lane-us-engli
 
 - Fixed by kind (strings and docs, from the checker): colour/colours/coloured/colourful/Colour
   (about 210), maths/Maths in prose and the shelf label (about 25; the shelf label is now "Math",
-  its id stays `maths`), licence(s) (about 14), centre(s)/centred, towards, behaviour(s), favourite,
-  aluminium (displayed text), labelled, synthesised, travelling, neighbours, grey, catalogue,
-  aeroplane, haemoglobin, armour, tyre, flavour, vapour, moulded, modelled, lustre, judgement,
-  jewellery, harbour, fibres, energise, and three "D Month YYYY" dates. Plus about 590 words in code
-  comments.
-- Toy search tags (`tags:` in src/toys.js) are now American too, so searching "colour" or "grey" no
+  its id stays `maths`), license(s) (about 14), center(s)/centred, toward, behavior(s), favorite,
+  aluminum (displayed text), labeled, synthesized, traveling, neighbors, gray, catalog, airplane,
+  hemoglobin, armor, tire, flavor, vapor, molded, modeled, luster, judgment, jewelry, harbor,
+  fibers, energize, and three "D Month YYYY" dates. Plus about 590 words in code comments.
+- Toy search tags (`tags:` in src/toys.js) are now American too, so searching "color" or "gray" no
   longer matches those toys. A search alias list would fix that (an engine change); the owner can
   decide.
 - Tests: only tests/smoke.spec.mjs asserted a changed string. tests/bkd-format.spec.mjs and
-  tests/man3.spec.mjs mention "colour" on purpose (a checker's test and the Manual's search word);
+  tests/man3.spec.mjs mention "color" on purpose (a checker's test and the Manual's search word);
   left as they are.
 - The checker only reads string literals in code; the comment pass used its word rules over `//` and
   `/* */` text.
@@ -67,21 +69,20 @@ Kept on purpose (British identifier or key, third-party name):
 - src/packs/vehicles.js:434 part name `"vapour"`; src/packs/vehicles.js, src/chem/protein.js,
   src/packs/elements.js: `centre` as a variable or property.
 - index.html:788 and :795, src/live/panel.js:352: CSS class `labelled`.
-- src/sound-credits.js:570 ("Aeroplane Passing Close.wav", the author's title),
-  src/packs/space-r2.js:981 (the Gaia paper title), src/space/worlds.js:265 (Tyre, a real place
+- src/sound-credits.js:570 ("Airplane Passing Close.wav", the author's title),
+  src/packs/space-r2.js:981 (the Gaia paper title), src/space/worlds.js:265 (Tire, a real place
   name).
-- docs/audits: URLs and file names (`maths.js`, aluminium and licences in links).
+- docs/audits: URLs and file names (`maths.js`, aluminum and licenses in links).
 - src/packs/space.js:505 and tools/g-looks.mjs:111: `colour(` as a function name in a comment.
 
-## Part 2 (skipped because another branch changes the file)
+## Part 2
 
-Follow-up once #558, #559, #560, #562, #566 and the Manual r8 lane merge. The checker lists these
-hits:
-
-- CREDITS.md: 23 hits (changed by #558).
-- LICENSES.md: 3 hits (changed by #558).
-- docs/SCENE-SCHEMA.md: 11 hits (Manual r8 lane).
-- manual/, site/, tools/site-hubs.mjs, docs/FLUIDS.md: not scanned or changed; run the checker and
-  the comment scan on them after r8 merges. Also the comments in files those PRs change.
+Done after the Operator freed the files (October 12, 2026, main d5039103 merged in): CREDITS.md,
+LICENSES.md, docs/SCENE-SCHEMA.md, the rest of the #558 files, and the generated `site/` (rebuilt
+with `node tools/site-build.mjs`; its remaining hits are `maths` in ids, paths and file names, and
+the kept third-party titles). `manual/`, `tools/site-hubs.mjs` and `docs/FLUIDS.md` had no British
+spellings. Also kept in CREDITS.md: the sound title "Aeroplane Passing Close.wav", the Gaia paper
+title, "Open Government Licence" (a license's name), and the aluminium.php URL. `docs/TOY-PLAN.md`
+still shows "## Maths" because the generator prints the category id.
 
 ## For the Operator

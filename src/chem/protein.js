@@ -689,7 +689,7 @@ export function ribbonPath(chain, { perResidue = 8 } = {}) {
 
 // Moves every atom (chains and ligands) so the protein's center (the mean of
 // its atoms) sits on the origin. Changes the structure in place, records the
-// offset as `centre`, and returns the structure.
+// offset as `center`, and returns the structure.
 export function centreStructure(structure) {
   const protein = structure.chains.flatMap((c) => c.residues.flatMap((r) => r.atoms));
   const pool = protein.length ? protein : structure.ligands.flatMap((l) => l.atoms);

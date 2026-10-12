@@ -88,7 +88,7 @@ Proposals below are suggestions; the owner may change them.
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
 - **E2, new effects: space, atoms and gems.** Unit cells, Orbital atlas, Night sky
-- **E3, new effects: tiny things, anatomy and maths.** None.
+- **E3, new effects: tiny things, anatomy and math.** None.
 - **E4, new effects: nature and weather.** None.
 - **E5, new effects: food.** None.
 - **E6, new effects: balls and the rest.** Picture lab, Song landscape, Chladni plate, Sound in a

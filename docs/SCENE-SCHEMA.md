@@ -63,7 +63,7 @@ Saving always writes version 3.
 | `createdAt` | string | ISO time the file was saved (informational).                                                                |
 | `seed`      | int    | 0 to 16,777,215. Seeds every per-splat random choice in the effects, idle pokes and paint splashes.         |
 | `toy`       | object | Which toy; see below.                                                                                       |
-| `look`      | object | Background, theme, accent colour, splat size and exposure.                                                  |
+| `look`      | object | Background, theme, accent color, splat size and exposure.                                                   |
 | `effects`   | object | Every effect's switch and slider values, whether or not it is on.                                           |
 | `paint`     | object | `stamps`: the paint, as a list of brush stamps replayed in order (at most 4,000).                           |
 | `camera`    | object | Orbit pose. `distance` is in multiples of the toy's radius, so it fits any toy.                             |
@@ -145,13 +145,13 @@ One of three kinds:
 
 ### `look`
 
-| Key          | Values                                                                             |
-| ------------ | ---------------------------------------------------------------------------------- |
-| `background` | `"page"` (the theme's page colour), `"transparent"`, or a colour like `"#f4efe6"`. |
-| `theme`      | `"auto"` (follow the page or system), `"light"` or `"dark"`.                       |
-| `accent`     | `"auto"` (the theme's accent) or a colour. Used by the slice edge and magnet glow. |
-| `splatScale` | 0.3 to 2.5, multiplies every splat's size.                                         |
-| `exposure`   | 0.3 to 2.5, multiplies colour.                                                     |
+| Key          | Values                                                                            |
+| ------------ | --------------------------------------------------------------------------------- |
+| `background` | `"page"` (the theme's page color), `"transparent"`, or a color like `"#f4efe6"`.  |
+| `theme`      | `"auto"` (follow the page or system), `"light"` or `"dark"`.                      |
+| `accent`     | `"auto"` (the theme's accent) or a color. Used by the slice edge and magnet glow. |
+| `splatScale` | 0.3 to 2.5, multiplies every splat's size.                                        |
+| `exposure`   | 0.3 to 2.5, multiplies color.                                                     |
 
 ### `effects`
 
@@ -159,16 +159,16 @@ All sliders are 0 to 1 unless noted. Tools (`poke`, `magnet`, `paint`) act where
 the toy; their `on` is always `false` in a file. Ambient effects run by themselves while `on`.
 `drop` and `dissolve` never run together.
 
-| Effect     | Keys                                                                                     |
-| ---------- | ---------------------------------------------------------------------------------------- |
-| `poke`     | `strength`, `wobble` (how long the ripples ring)                                         |
-| `wind`     | `strength`, `direction` (0 to 360 degrees; 0 blows towards the right edge of the screen) |
-| `dissolve` | `spread`, `speed`                                                                        |
-| `drop`     | `bounce`, `scatter`                                                                      |
-| `magnet`   | `strength` (-1 to 1: negative scatters, positive attracts), `radius`                     |
-| `twist`    | `amount` (-1 to 1), `wobble` (0 holds the twist still), `axis` (`x`, `y` or `z`)         |
-| `slice`    | `position` (-1 to 1), `sweep` (0 holds the plane still), `axis` (`x`, `y` or `z`)        |
-| `paint`    | `size`, `splash`, `color` (the brush)                                                    |
+| Effect     | Keys                                                                                    |
+| ---------- | --------------------------------------------------------------------------------------- |
+| `poke`     | `strength`, `wobble` (how long the ripples ring)                                        |
+| `wind`     | `strength`, `direction` (0 to 360 degrees; 0 blows toward the right edge of the screen) |
+| `dissolve` | `spread`, `speed`                                                                       |
+| `drop`     | `bounce`, `scatter`                                                                     |
+| `magnet`   | `strength` (-1 to 1: negative scatters, positive attracts), `radius`                    |
+| `twist`    | `amount` (-1 to 1), `wobble` (0 holds the twist still), `axis` (`x`, `y` or `z`)        |
+| `slice`    | `position` (-1 to 1), `sweep` (0 holds the plane still), `axis` (`x`, `y` or `z`)       |
+| `paint`    | `size`, `splash`, `color` (the brush)                                                   |
 
 ### `pattern`
 
@@ -178,18 +178,18 @@ the toy; their `on` is always `false` in a file. Ambient effects run by themselv
 | `flag`       | For `flag`: a country code from `assets/flags/flags.json` (ISO 3166 alpha-2, plus `xk` for Kosovo).                   |
 | `projection` | `wrap` (around the toy's up axis), `front` (straight through from the front) or `globe` (latitude and longitude).     |
 | `repeats`    | 1 to 4: how many times the design goes around (not used by `front`).                                                  |
-| `colors`     | Three colours for the patterns that use them.                                                                         |
+| `colors`     | Three colors for the patterns that use them.                                                                          |
 | `scale`      | 0 to 1: how big the stripes, dots or checks are.                                                                      |
-| `amount`     | 0 to 1: how strongly the pattern covers the toy's own colours.                                                        |
+| `amount`     | 0 to 1: how strongly the pattern covers the toy's own colors.                                                         |
 | `detail`     | 0 to 1: how much of the toy's own light and shade shows through.                                                      |
 
-Seams, stitching, flames and similar details that a recipe marks keep their own colours.
+Seams, stitching, flames and similar details that a recipe marks keep their own colors.
 
 ### `motion`
 
 | Key        | Values                                                                                                  |
 | ---------- | ------------------------------------------------------------------------------------------------------- |
-| `alive`    | `true` lets a pack toy's own behaviours run (flames flicker, hearts beat).                              |
+| `alive`    | `true` lets a pack toy's own behaviors run (flames flicker, hearts beat).                               |
 | `move`     | `still`, `bounce`, `spin`, `wobble` or `float`: how the whole toy moves (any toy).                      |
 | `speed`    | 0 to 1.                                                                                                 |
 | `controls` | A pack toy's control values, 0 to 1 (for example `open` for the treasure chest's lid). At most 16 keys. |
