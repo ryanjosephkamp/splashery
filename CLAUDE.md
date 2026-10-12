@@ -37,6 +37,10 @@ coordinates. [docs/OPERATING.md](docs/OPERATING.md) has the rules. In short:
 
 ## Ground rules
 
+Outside builders (the owner's Codex and ChatGPT agents) follow
+[builders/RULES.md](builders/RULES.md) (Rules v1, October 12, 2026): the non-negotiables in short,
+with a hand-back rule. These ground rules are the full set for Claude sessions; the two agree.
+
 - Static files and ES modules only. No bundler, CDN, server, or API keys in the page. PlayCanvas
   2.22.3 is vendored in `vendor/` and imported only through `src/pc.js`. PDF.js and omggif (approved
   September 28, 2026) are vendored there too, loaded only when someone opens a PDF or a GIF. ONNX
