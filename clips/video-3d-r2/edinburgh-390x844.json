@@ -1,0 +1,54 @@
+{
+  "sample": "edinburgh",
+  "width": 390,
+  "height": 844,
+  "transferBytes": 6348878,
+  "renderer": "Chromium WebGL2 / SwiftShader",
+  "info": {
+    "name": "Street, walked",
+    "uid": "edinburgh",
+    "splats": 42292,
+    "cams": 28,
+    "custom": false,
+    "stats": {
+      "tier": "high",
+      "adapter": "google swiftshader",
+      "frames": 28,
+      "registered": 28,
+      "points": 3313,
+      "splats": 120000,
+      "iters": 3002,
+      "psnr": null,
+      "plyBytes": 7914052,
+      "start": 0,
+      "end": 10,
+      "rate": 2.8
+    },
+    "pruned": {
+      "faint": 2057,
+      "smear": 11194,
+      "giant": 3877,
+      "atCamera": 237,
+      "unsupported": 12,
+      "ray": 331,
+      "atPath": 0,
+      "invalid": 0
+    },
+    "clamped": 46,
+    "walkRegion": {
+      "cells": 397,
+      "cameraCells": 17,
+      "multiViewCells": 397,
+      "minimumViews": 3,
+      "cellSize": 0.0696189674059957
+    },
+    "skyDome": {
+      "center": [
+        0.0891450974652838,
+        -0.06807420546693554,
+        0.800608392107063
+      ],
+      "radius": 13.385700485943017
+    }
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "sample": "liberty",
+  "width": 1440,
+  "height": 900,
+  "transferBytes": 8076026,
+  "renderer": "Chromium WebGL2 / SwiftShader",
+  "info": {
+    "name": "Statue, flown around",
+    "uid": "liberty",
+    "splats": 29765,
+    "cams": 26,
+    "custom": false,
+    "stats": {
+      "tier": "high",
+      "adapter": "google swiftshader",
+      "frames": 27,
+      "registered": 26,
+      "points": 3511,
+      "splats": 120000,
+      "iters": 3002,
+      "psnr": null,
+      "plyBytes": 7907388,
+      "start": 0,
+      "end": 13.6,
+      "rate": 1.985
+    },
+    "pruned": {
+      "faint": 2276,
+      "smear": 16193,
+      "giant": 11672,
+      "atCamera": 0,
+      "unsupported": 62,
+      "ray": 32,
+      "atPath": 0,
+      "invalid": 0
+    },
+    "clamped": 0,
+    "walkRegion": {
+      "cells": 340,
+      "cameraCells": 17,
+      "multiViewCells": 323,
+      "minimumViews": 3,
+      "cellSize": 0.07598646792189119
+    },
+    "skyDome": {
+      "center": [
+        -0.011528567479057197,
+        0.010076718119007897,
+        1.5793419404956994
+      ],
+      "radius": 29.443765407424003
+    }
+  }
+}

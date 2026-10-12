@@ -1,0 +1,62 @@
+{
+  "sample": "poltsamaa",
+  "width": 1440,
+  "height": 900,
+  "transferBytes": 7688536,
+  "renderer": "Chromium WebGL2 / SwiftShader",
+  "info": {
+    "name": "Castle courtyard, orbited (compact)",
+    "uid": "poltsamaa",
+    "splats": 22360,
+    "cams": 24,
+    "custom": false,
+    "stats": {
+      "tier": "offline",
+      "adapter": "google swiftshader",
+      "frames": 24,
+      "registered": 24,
+      "points": 3826,
+      "splats": 29947,
+      "iters": 1102,
+      "psnr": 28.75378484246417,
+      "psnrAtIter": 1102,
+      "trainSide": 640,
+      "plyBytes": 2024571,
+      "retried": false,
+      "timedOut": false,
+      "stoppedEarly": false,
+      "start": 0,
+      "end": 20,
+      "rate": 1.2,
+      "exportedSplats": 29767,
+      "psnrIteration": 1102,
+      "psnrTrainSide": 640
+    },
+    "pruned": {
+      "faint": 386,
+      "smear": 6821,
+      "giant": 132,
+      "atCamera": 0,
+      "unsupported": 0,
+      "ray": 68,
+      "atPath": 0,
+      "invalid": 0
+    },
+    "clamped": 0,
+    "walkRegion": {
+      "cells": 2050,
+      "cameraCells": 30,
+      "multiViewCells": 2021,
+      "minimumViews": 3,
+      "cellSize": 0.08962476701242901
+    },
+    "skyDome": {
+      "center": [
+        -0.03590892020665026,
+        0.0030830042543852146,
+        1.5980713404270377
+      ],
+      "radius": 9.76004732219725
+    }
+  }
+}

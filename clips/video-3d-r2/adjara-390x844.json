@@ -1,0 +1,61 @@
+{
+  "sample": "adjara",
+  "width": 390,
+  "height": 844,
+  "transferBytes": 5911565,
+  "renderer": "Chromium WebGL2 / SwiftShader",
+  "info": {
+    "name": "Forest path, walked (compact)",
+    "uid": "adjara",
+    "splats": 27068,
+    "cams": 24,
+    "custom": false,
+    "stats": {
+      "tier": "offline",
+      "adapter": "google swiftshader",
+      "frames": 24,
+      "registered": 24,
+      "points": 1701,
+      "splats": 29969,
+      "iters": 1042,
+      "psnr": 22.785259602319663,
+      "plyBytes": 2018587,
+      "retried": false,
+      "timedOut": false,
+      "stoppedEarly": false,
+      "start": 0,
+      "end": 20,
+      "rate": 1.2,
+      "trainSide": 640,
+      "exportedSplats": 29679,
+      "psnrIteration": 1042,
+      "psnrTrainSide": 640
+    },
+    "pruned": {
+      "faint": 456,
+      "smear": 1689,
+      "giant": 98,
+      "atCamera": 0,
+      "unsupported": 44,
+      "ray": 324,
+      "atPath": 0,
+      "invalid": 0
+    },
+    "clamped": 0,
+    "walkRegion": {
+      "cells": 450,
+      "cameraCells": 23,
+      "multiViewCells": 445,
+      "minimumViews": 3,
+      "cellSize": 0.0472303681760432
+    },
+    "skyDome": {
+      "center": [
+        -0.00034371189779290574,
+        -0.04091861539124673,
+        0.544532023306513
+      ],
+      "radius": 6.521122868336277
+    }
+  }
+}
