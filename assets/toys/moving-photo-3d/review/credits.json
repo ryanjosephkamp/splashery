@@ -86,27 +86,27 @@
       "file": "assets/toys/moving-photo-3d/review/machine.gif",
       "bytes": 2045312,
       "sha256": "45a105e8f1be785e268c742b4414acb93044c76d15fbe6fce93ea3af39643ff5",
-      "author": "Blender Foundation",
+      "author": "Blender Foundation / Netherlands Media Art Institute (2006), www.elephantsdream.org",
       "license": "CC BY 2.5",
-      "source": "https://archive.org/details/ElephantsDream",
+      "source": "https://orange.blender.org/blog/creative-commons-license-2/",
       "modified": "App and relief rendering, controlled camera and source clock, silent six-second 390 by 844 GIF at 8 fps. Made by Ryan with Codex (GPT-6); UI/code MIT; source image and derived rendering retain the listed asset license."
     },
     {
       "file": "assets/toys/moving-photo-3d/review/machine-strip.png",
       "bytes": 697172,
       "sha256": "54dc132e141059ea4fb52d04e32f3286af5b210cfa173f62c809ce97b6eb9072",
-      "author": "Blender Foundation",
+      "author": "Blender Foundation / Netherlands Media Art Institute (2006), www.elephantsdream.org",
       "license": "CC BY 2.5",
-      "source": "https://archive.org/details/ElephantsDream",
+      "source": "https://orange.blender.org/blog/creative-commons-license-2/",
       "modified": "App and relief rendering, controlled camera and source clock, silent six-second 390 by 844 GIF at 8 fps. Made by Ryan with Codex (GPT-6); UI/code MIT; source image and derived rendering retain the listed asset license."
     },
     {
       "file": "assets/toys/moving-photo-3d/review/machine-clocks.json",
       "bytes": 1918,
       "sha256": "56efc8eaf222cdd1a17518b525e9f320f0ef1dd5a87829802d5e94129b671c2b",
-      "author": "Blender Foundation",
+      "author": "Blender Foundation / Netherlands Media Art Institute (2006), www.elephantsdream.org",
       "license": "CC BY 2.5",
-      "source": "https://archive.org/details/ElephantsDream",
+      "source": "https://orange.blender.org/blog/creative-commons-license-2/",
       "modified": "App and relief rendering, controlled camera and source clock, silent six-second 390 by 844 GIF at 8 fps. Made by Ryan with Codex (GPT-6); UI/code MIT; source image and derived rendering retain the listed asset license."
     },
     {
@@ -167,27 +167,27 @@
       "file": "assets/toys/moving-photo-3d/review/machine-long.gif",
       "bytes": 2010231,
       "sha256": "406cda55ea65ab4e56114525fac3639e0ace8585fee48fe410407d5b980ee384",
-      "author": "Blender Foundation",
-      "license": "CC BY 3.0 US",
-      "source": "https://archive.org/details/ElephantsDream",
+      "author": "Blender Foundation / Netherlands Media Art Institute (2006), www.elephantsdream.org",
+      "license": "CC BY 2.5",
+      "source": "https://orange.blender.org/blog/creative-commons-license-2/",
       "modified": "App and relief rendering, controlled camera and source clock, silent six-second 390 by 844 GIF at 8 fps. Made by Ryan with Codex (GPT-6); UI/code MIT; source image and derived rendering retain the listed asset license."
     },
     {
       "file": "assets/toys/moving-photo-3d/review/machine-long-strip.png",
       "bytes": 677949,
       "sha256": "a0d4d9a721082a86f527b0a12b83d1778a0332811a39bbdf1dde69b8750867cf",
-      "author": "Blender Foundation",
-      "license": "CC BY 3.0 US",
-      "source": "https://archive.org/details/ElephantsDream",
+      "author": "Blender Foundation / Netherlands Media Art Institute (2006), www.elephantsdream.org",
+      "license": "CC BY 2.5",
+      "source": "https://orange.blender.org/blog/creative-commons-license-2/",
       "modified": "App and relief rendering, controlled camera and source clock, silent six-second 390 by 844 GIF at 8 fps. Made by Ryan with Codex (GPT-6); UI/code MIT; source image and derived rendering retain the listed asset license."
     },
     {
       "file": "assets/toys/moving-photo-3d/review/machine-long-clocks.json",
       "bytes": 2845,
       "sha256": "3d6d405cca72ec4e3c0b8bd29db7545f4b0634f59cf8e195ef27f9fc077dee6c",
-      "author": "Blender Foundation",
-      "license": "CC BY 3.0 US",
-      "source": "https://archive.org/details/ElephantsDream",
+      "author": "Blender Foundation / Netherlands Media Art Institute (2006), www.elephantsdream.org",
+      "license": "CC BY 2.5",
+      "source": "https://orange.blender.org/blog/creative-commons-license-2/",
       "modified": "App and relief rendering, controlled camera and source clock, silent six-second 390 by 844 GIF at 8 fps. Made by Ryan with Codex (GPT-6); UI/code MIT; source image and derived rendering retain the listed asset license."
     },
     {
@@ -219,30 +219,57 @@
     },
     {
       "file": "assets/toys/moving-photo-3d/review/upload.gif",
-      "bytes": 1770640,
-      "sha256": "075f2e073fb752ef5d3b74e510711795de36504ac7465a270ea28af8b6060f34",
+      "bytes": 1754880,
+      "sha256": "b6fd99d5f7a458b127d1a654250f86e7dd317c4519d9ac88f8a87264cc3dac45",
       "author": "Blender Foundation",
       "license": "CC BY 3.0",
       "source": "https://archive.org/details/BigBuckBunny_328",
-      "modified": "App and relief rendering, controlled camera and source clock, silent six-second 390 by 844 GIF at 8 fps. Made by Ryan with Codex (GPT-6); UI/code MIT; source image and derived rendering retain the listed asset license."
+      "modified": "App and relief rendering of the original Bunny video through the custom upload path, with completed refinement, controlled camera, and verified source clocks. Silent six-second 390 by 844 GIF at 8 fps. Made by Ryan with Codex (GPT-6); UI/code MIT; source image and derived rendering retain the listed asset license."
     },
     {
       "file": "assets/toys/moving-photo-3d/review/upload-strip.png",
-      "bytes": 603432,
-      "sha256": "b94deb4d6a8f650b4f3f0ed4f47c1205929dd74e2133280650b4d93f7ad2fcb0",
+      "bytes": 609110,
+      "sha256": "9684bc2e5a7220e5c1dbbe9b40b48fd5e1bec72cedc57bb2f8226bf16aac469b",
       "author": "Blender Foundation",
       "license": "CC BY 3.0",
       "source": "https://archive.org/details/BigBuckBunny_328",
-      "modified": "App and relief rendering, controlled camera and source clock, silent six-second 390 by 844 GIF at 8 fps. Made by Ryan with Codex (GPT-6); UI/code MIT; source image and derived rendering retain the listed asset license."
+      "modified": "App and relief rendering of the original Bunny video through the custom upload path, with completed refinement, controlled camera, and verified source clocks. Silent six-second 390 by 844 GIF at 8 fps. Made by Ryan with Codex (GPT-6); UI/code MIT; source image and derived rendering retain the listed asset license."
     },
     {
       "file": "assets/toys/moving-photo-3d/review/upload-clocks.json",
-      "bytes": 1918,
-      "sha256": "56efc8eaf222cdd1a17518b525e9f320f0ef1dd5a87829802d5e94129b671c2b",
+      "bytes": 5804,
+      "sha256": "b4bf31a3a10e177b8e33f10b3f68998b999aaed1f295e154aeee2cbd489239ae",
       "author": "Blender Foundation",
       "license": "CC BY 3.0",
       "source": "https://archive.org/details/BigBuckBunny_328",
-      "modified": "App and relief rendering, controlled camera and source clock, silent six-second 390 by 844 GIF at 8 fps. Made by Ryan with Codex (GPT-6); UI/code MIT; source image and derived rendering retain the listed asset license."
+      "modified": "App and relief rendering of the original Bunny video through the custom upload path, with completed refinement, controlled camera, and verified source clocks. Silent six-second 390 by 844 GIF at 8 fps. Made by Ryan with Codex (GPT-6); UI/code MIT; source image and derived rendering retain the listed asset license."
+    },
+    {
+      "file": "assets/toys/moving-photo-3d/review/machine-upload.gif",
+      "author": "Blender Foundation / Netherlands Media Art Institute (2006), www.elephantsdream.org",
+      "license": "CC BY 2.5",
+      "source": "https://orange.blender.org/blog/creative-commons-license-2/",
+      "modified": "App and relief rendering, reconstructed from the shipped JPEG sheets, controlled camera and source clock, silent six-second 390 by 844 GIF at 8 fps. Made by Ryan with Codex (GPT-6); UI/code MIT; source image and derived rendering retain CC BY 2.5.",
+      "bytes": 2094267,
+      "sha256": "8101eaf79b7295dcce2019cecfa5dfe45a5b9729fe07583273231614e5cc806d"
+    },
+    {
+      "file": "assets/toys/moving-photo-3d/review/machine-upload-strip.png",
+      "author": "Blender Foundation / Netherlands Media Art Institute (2006), www.elephantsdream.org",
+      "license": "CC BY 2.5",
+      "source": "https://orange.blender.org/blog/creative-commons-license-2/",
+      "modified": "App and relief rendering, reconstructed from the shipped JPEG sheets, controlled camera and source clock, silent six-second 390 by 844 GIF at 8 fps. Made by Ryan with Codex (GPT-6); UI/code MIT; source image and derived rendering retain CC BY 2.5.",
+      "bytes": 714739,
+      "sha256": "2e9308e2f11b24434f29a07ac5e8a095d9ffcd5512a4545356f20e3fe5fad3b0"
+    },
+    {
+      "file": "assets/toys/moving-photo-3d/review/machine-upload-clocks.json",
+      "author": "Blender Foundation / Netherlands Media Art Institute (2006), www.elephantsdream.org",
+      "license": "CC BY 2.5",
+      "source": "https://orange.blender.org/blog/creative-commons-license-2/",
+      "modified": "App and relief rendering, reconstructed from the shipped JPEG sheets, controlled camera and source clock, silent six-second 390 by 844 GIF at 8 fps. Made by Ryan with Codex (GPT-6); UI/code MIT; source image and derived rendering retain CC BY 2.5.",
+      "bytes": 5900,
+      "sha256": "5dd4a712d648c38688615082a63d34eb956f7a00060085dd6b3d7d30a6013e8e"
     }
   ],
   "note": "Live archive declarations were checked; legacy short samples retain their existing credits. Original project pages were unavailable. This branch is motion evidence, never merged or fetched by the site."
