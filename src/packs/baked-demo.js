@@ -22,7 +22,7 @@ export const RECIPES = {
       {
         label: "Chest",
         title: "Baked chest (built with Splashery's kit and baked to splats)",
-        source: "tools/bkd-bake-chest.mjs",
+        source: "https://github.com/ryanjosephkamp/splashery/blob/main/tools/bkd-bake-chest.mjs",
         author: "Made by Ryan with Claude Code (Opus 5.5)",
         license: "CC0 1.0",
         licenseUrl: "https://creativecommons.org/publicdomain/zero/1.0/",
