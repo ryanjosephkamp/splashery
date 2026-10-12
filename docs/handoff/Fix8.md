@@ -9,9 +9,8 @@ Opus 5.5. A short lane: one toy.
 
 ### Brief (written by the Operator on October 4, 2026, from the owner's push notes that evening)
 
-The owner, twice (docs/reviews/2026-10-03-labs-review/review.md, lines 32-34, and
-docs/reviews/2026-10-04-push-alignment/notes.md): "the photo real alarm clock is not synced with the
-time. Can you fix that?"
+The owner, twice (October 3 and 4, 2026; his notes are private): the photoreal alarm clock is not
+synced with the time, and he asks for a fix.
 
 The "Real alarm clock" (`alarm-clock`, the Photoreal shelf, a CC0 Poly Haven model turned into
 splats; public, not labs) doesn't read the clock. Its rig (`src/rigs.js` 1375-1455) hides the

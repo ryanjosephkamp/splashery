@@ -1,16 +1,7 @@
 # The owner's answers on the October 2 plan page
 
-His prompt from the private plan page "October 2 Review Plan", sent on October 2, 2026, word for
-word:
-
-> October 2 plan answers: Q1 10 for three days; Q2 start now; Q3 start now; Q4 start after the
-> merge; Q5 start after the merge; Q6 after r4; Q7 after r6; Q8 category lanes as soon as the plan
-> is approved; Q9 yes; Q10 Codex. Photoreal: P1 yes; P2 yes; P3 private only; P4 start now. Ideas:
-> N1 now (Live input r3); N2 now (UI r5); N3 now (UI r5); N4 now (Fix7 add-on); N5 now (Codex); N6
-> soon; N7 soon; N8 soon; N9 soon; N10 soon; N11 soon (with Hands-on); N12 soon (Fluids r5); N13
-> later; N14 later; N15 after P4; N16 with the About audit; N17 later; N18 later; N19 later; N20
-> later; N21 later; N22 later; N23 later; N24 later; N25 later; N26 later; N27 later (with P4); N28
-> after the close-out. Notes: Looks great. Thank you for your help.
+His answers on the private plan page "October 2 Review Plan", sent on October 2, 2026, stay private.
+This is the Operator's reading of them.
 
 ## What they mean
 

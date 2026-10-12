@@ -416,6 +416,8 @@ export const RECIPES = {
   "fluid-lab": {
     alive: true,
     turntable: false,
+    // Hands-on Level 1 (lane Hands-on H3): picked up, tossed and set down whole.
+    handsLevel1: true,
     // The props need fewer splats than a toy's whole budget; the rest is left
     // for drawing the fluid.
     // (r7: a third of that on a phone)

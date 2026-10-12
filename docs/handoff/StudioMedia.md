@@ -10,11 +10,9 @@ docs/handoff/StudioMedia.md. Model: Sonnet 5.5 (the owner's split: Studio conver
 
 ### Brief (written by the Operator on October 4, 2026, from the owner's push notes that evening)
 
-The owner's notes are in docs/reviews/2026-10-04-push-alignment/notes.md (read from "All right, so
-I'm going to go through the items in the studio" to "that kind of closes the studio category"). The
-Studio is a main area of the push. He wants people "to be able to see really what the hell this tool
-can actually do": more samples to pick, chosen because they look striking in 3D, and a way to
-compare the original with the 3D result. Every toy here is labs.
+The owner's notes are private; the Operator's summary is here. The Studio is a main area of the
+push. He wants people to see what the tool can really do: more samples to pick, chosen because they
+look striking in 3D, and a way to compare the original with the 3D result. Every toy here is labs.
 
 1. **Photo to 3D** (`photo-3d`; samples in `src/packs/photo-3d.js` 37-61): two or three more curated
    photos beside the forest path, the York street and the still life, chosen to show depth well
@@ -28,9 +26,9 @@ compare the original with the 3D result. Every toy here is labs.
    - Speed: he thinks the bunny plays slower than the source. The code is meant to match it (a
      video's frames follow the sound's clock; a GIF keeps its delays; a silent clip runs on a wall
      clock, 399-406, 921-942). Measure each sample: seconds of source against seconds played, on a
-     slow and a fast tier, and fix any gap. He also said "even if I turn the speed up, it doesn't
-     seem like the speed actually affects the video": find which speed control he means (an app-wide
-     speed, if there is one) and make it work for this toy or hide it here.
+     slow and a fast tier, and fix any gap. He also said that turning the speed up does not seem to
+     affect the video: find which speed control he means (an app-wide speed, if there is one) and
+     make it work for this toy or hide it here.
 3. **Model to splats** (`model-splats`; `SAMPLES` in `src/packs/studio-models.js` 51-69, built by
    `tools/stm-samples.mjs`): four to six more default models besides the burger and the vase, picked
    because they turn into good-looking splats (detailed color textures, varied shapes). Small glTF
@@ -50,8 +48,8 @@ compare the original with the 3D result. Every toy here is labs.
      and 10 seconds in headless Chromium on SwiftShader (software WebGPU), so don't train long clips
      here: estimate the time on a real GPU (the owner's M3 Pro running the toy itself in Chrome, or
      a desktop GPU), and say which the Operator should ask him to run.
-5. **The original beside the 3D** (his idea; "not a default view ... its own toy or its own
-   setting"): an option on Photo to 3D, Moving photo to 3D and Video to 3D that shows the flat
+5. **The original beside the 3D** (his idea; not a default view, but its own toy or its own
+   setting): an option on Photo to 3D, Moving photo to 3D and Video to 3D that shows the flat
    original beside the 3D result, playing in sync for videos and GIFs, so a person can turn the 3D
    one and see what the effect did. Reuse the Screen toy's flat picture where you can.
 

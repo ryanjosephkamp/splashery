@@ -9,12 +9,11 @@ page, one menu, search and offline". Handoff file: docs/handoff/Site.md. Model: 
 
 ### Brief (written by the Operator on October 4, 2026, from the owner's push notes that evening)
 
-The owner: "I want more than just the gallery here. We will have a proper site, not just one
-webpage." On the Push Plan he said yes to W1 (a real home page), W2 (one menu everywhere and a
-search), W11 (install it and use it offline; later maybe native apps) and W12 (the finishing pass),
-and yes to the pages that come after yours (W3 a page for every toy, W4 to W8 the hubs, About,
-credits, privacy and What's new, W10 the embed guide). Read his notes,
-docs/reviews/2026-10-04-push-alignment/notes.md, "All right, next up we have the website stuff".
+The owner wants more than the gallery here: a proper site, not just one webpage. On the Push Plan he
+said yes to W1 (a real home page), W2 (one menu everywhere and a search), W11 (install it and use it
+offline; later maybe native apps) and W12 (the finishing pass), and yes to the pages that come after
+yours (W3 a page for every toy, W4 to W8 the hubs, About, credits, privacy and What's new, W10 the
+embed guide). His notes are private; the Operator's summary is in this brief.
 
 Splashery stays static files on GitHub Pages, ES modules, no bundler, no CDN, no server, no keys.
 The gallery (`index.html`) is the site's home today, and **the home page is the owner's decision**:
@@ -143,12 +142,12 @@ nowhere public, `noindex` while it is a preview):
   sticky header (a search button on phones), sticky shelf chips that scroll sideways on a phone, and
   a fuller footer. Still no web fonts and no images beyond the toys' own thumbnails: the home page's
   own files are 57 KB (about 11 KB gzipped on GitHub Pages).
-- **Polish r3** (the owner's note on r2, October 5, 2026: "almost perfect… keep polishing"): the
-  home page's toy shows its own picture until it is drawn, then fades in (no blank box); the Tools
-  page has a small drawing per tool and the gallery's keys (1 to 5); the search page suggests
-  searches before anything is typed (the build checks each finds a public toy); the Tools page's
-  "Open your own files" heading hides with its labs-only shelves. Fixed a race: the theme was sent
-  to the toy's frame before its player started.
+- **Polish r3** (the owner's note on r2, October 5, 2026: almost perfect, keep polishing): the home
+  page's toy shows its own picture until it is drawn, then fades in (no blank box); the Tools page
+  has a small drawing per tool and the gallery's keys (1 to 5); the search page suggests searches
+  before anything is typed (the build checks each finds a public toy); the Tools page's "Open your
+  own files" heading hides with its labs-only shelves. Fixed a race: the theme was sent to the toy's
+  frame before its player started.
 
 ## Notes
 

@@ -347,7 +347,7 @@ it.
 
 ## r5 (October 2, 2026): the owner's phone review
 
-From the owner's review on his phone (docs/reviews/2026-10-02-mega-review/review.md):
+From the owner's review on his phone (his notes are private; the Operator's summary):
 
 - **A tap on the faucet's handle pours.** On WebGPU the props are traced, and r4 hid their splats,
   so a tap found nothing to hit (the app finds the toy by its splats). They now shrink to 0.55 of

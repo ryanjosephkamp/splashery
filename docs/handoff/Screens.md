@@ -8,14 +8,12 @@ toy". How lanes work: [OPERATING.md](../OPERATING.md). Earlier lessons: [history
 (Written by the Operator on September 28, 2026, from the owner's notes and the Pages into Splats
 plan he accepted the same day; step 3 of ROADMAP.md, "Pictures and pages")
 
-The owner's words: "If somebody uploads a GIF or a video, what if we created, like, a hologram or a
-TV screen that has, like, a video that they've put on there, and it would all be Gaussian splats,
-with the audio synchronized? Or it could be like a movie theater, okay? … But we could also have it
-just be like a flat 2D sort of hologram where you can just, like, move it around and watch it and
-rotate it." And about a second toy: "It would be really cool if we actually had a Gaussian splat
-toy. So it would be a Gaussian splat visualization or demo, or something kind of like how we have
-the AI or computer science demos made out of Gaussian splats." The laptop is locked, so videos go on
-this new screen and never on the laptop.
+The owner's call (his notes are private; the Operator's summary): when someone uploads a GIF or a
+video, make a hologram or a TV screen showing it, all Gaussian splats, with the audio synchronized.
+It could also be a movie theater, or a flat 2D hologram you can move around, watch, and rotate. For
+a second toy, he wants a Gaussian splat toy: a visualization or demo of Gaussian splats, like the AI
+and computer science demos made of Gaussian splats. The laptop is locked, so videos go on this new
+screen and never on the laptop.
 
 Build two toys, both `labs: true`:
 
@@ -105,13 +103,12 @@ Pictures set it up), except where this brief names another shelf. The owner turn
 `?labs=1` and tries the toys on his phone. The labs switch comes off in a later small Ops change,
 when he says so.
 
-The owner's words (docs/reviews/2026-09-28-pictures/review.md, word for word): "It should all still
-be Gaussian splats, like the rest of it is." "There needs to be enough resolution for it to still
-resemble the original article. It doesn't have to be perfectly legible." "It's okay if we allow the
-toys to be bigger than usual, possibly even larger in file size than usual, in order for the
-resolution and quality to be better." Samples only under CC0, CC BY or public domain, checked on the
-live source page and credited (CREDITS.md and the toy's in-app credit); no logos, brand names or
-insignia. The laptop stays exactly as it is.
+The owner's call (September 28, 2026; his notes are private, the Operator's summary follows): it
+should all still be Gaussian splats, like the rest of the site. There needs to be enough resolution
+for the result to still resemble the original article, though it need not be perfectly legible. Toys
+may be bigger than usual, possibly larger in file size, for better resolution and quality. Samples
+only under CC0, CC BY or public domain, checked on the live source page and credited (CREDITS.md and
+the toy's in-app credit); no logos, brand names or insignia. The laptop stays exactly as it is.
 
 ## State
 
@@ -194,12 +191,12 @@ picture). Without it, the fit always learns the sample.
 
 ## Notes
 
-- The owner's review (September 28): seven cards "good"; `scr-splat-sorting` "fix": "This seems
-  basically perfect, but the demo GIF here looks blurry. If it isn't actually blurry in the site,
-  then it's fine, but as it appears here, it isn't as detailed as I'd prefer." The toy itself was
-  soft (300 big soft splats overlapping into a blur), so each splat is now drawn as what it is, a
-  small colored ellipsoid turned its own way, made of 220 tiny opaque splats: crisp at phone size.
-  The clip `scr-splat-sorting-r2` is recorded at full phone resolution (780 pixels wide).
+- The owner's review (September 28): seven cards "good"; `scr-splat-sorting` "fix": it looks
+  basically perfect, but the demo GIF looks blurry, and if that is only how it appears in the review
+  it is fine, but it is not as detailed as he would prefer. The toy itself was soft (300 big soft
+  splats overlapping into a blur), so each splat is now drawn as what it is, a small colored
+  ellipsoid turned its own way, made of 220 tiny opaque splats: crisp at phone size. The clip
+  `scr-splat-sorting-r2` is recorded at full phone resolution (780 pixels wide).
 
 - Page screenshots stall in the stepped-clock clip tool once a toy animates, so `tools/scr-clip.mjs`
   captures the stage canvas instead (like `tools/effect-clip.mjs`), at 390×844.

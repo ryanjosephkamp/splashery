@@ -11,39 +11,39 @@ rotation defaults and the piano bar". Handoff file: docs/handoff/UIr5.md.
 
 ### Brief (written by the Operator on October 2, 2026, from the owner's review of that day and his "start now")
 
-The owner's review of October 2, word for word, is docs/reviews/2026-10-02-mega-review/review.md.
-Read docs/handoff/UIr2.md, UIr3.md and UIr4.md first (the last UI rounds). Your items, his words in
-quotes:
+The owner's review of October 2 is private; the Operator's summary is in this brief. Read
+docs/handoff/UIr2.md, UIr3.md and UIr4.md first (the last UI rounds). Your items, in the Operator's
+words:
 
-1. **The Gallery chip** sits in the category row ("gallery is not a category … if I scroll past it,
-   then I can't just click a gallery button"). Move Gallery out of the category row to a button
-   that's always reachable, for example with the top buttons (flag, full screen, reset, focus …).
-   Leave the search where it is unless a better place is obvious; say what you chose and why.
-2. **Rotation defaults**: the storybook with no rotation lock by default ("we don't need to have any
-   default locks on that"); the umbrella with full rotation; the xylophone unlocked by default or a
-   slightly higher default angle ("so that people can kind of change the angle a little bit"); the
-   upright piano unlockable so you can look from above. Don't change other toys' defaults.
-3. **The grand piano's song bar covers the piano on a phone** ("you can't see all of the piano
-   without zooming out … I shouldn't have to"). The bar is the shared `#game-bar` (song-bar class),
-   fixed above the dock on phones (styles.css:1765-1770, about the bottom 115 px of the stage), and
-   the camera framing doesn't account for it. Make the toy's framing leave room for the bar whenever
-   the bar shows (for every toy with a song bar, not just the grand piano), or move the bar; check
-   all the pianos and the chess bar at 390×844.
-4. **Model to splats takes big files** (his note: "I tried to find a GLB file, but … it was
-   apparently too big"). Today the cap is 40 MB for all files together (`input.maxBytes || 40e6`,
-   ui.js:1539-1541) plus 4,000,000 triangles (studio-models-core.js:51, 160), with no
-   simplification. Raise the caps as far as phones and computers handle well (aim for files of a few
-   hundred MB on a computer), read big files without copying them more than needed, and simplify
-   very large meshes on the device before sampling (the toy already has vertex clustering for its
-   wireframe, core :1571-1577; reuse our own code; a new library would need the owner's OK first).
-   Show progress and a clear message if a file is still too big for the device.
-5. **A Record button** (his idea, approved: "I'd like to have the ability to somehow record a video
-   of, like, how I'm using this"). Record the stage while you play (drags, taps, the effect, the
-   turning view) with the toy's sound, then save the video (MediaRecorder from the canvas's
-   captureStream plus a MediaStreamAudioDestinationNode from the site's audio). MP4 where the
-   browser supports it, otherwise WebM. Put it in the Share tab next to the existing exports, with a
-   clear stop and a time limit (say 60 s). It must work on a phone (iOS Safari and Android Chrome)
-   and a computer. The existing "save video" exports stay.
+1. **The Gallery chip** sits in the category row, but the gallery is not a category, and after
+   scrolling past it he can't just click a gallery button. Move Gallery out of the category row to a
+   button that's always reachable, for example with the top buttons (flag, full screen, reset, focus
+   …). Leave the search where it is unless a better place is obvious; say what you chose and why.
+2. **Rotation defaults**: the storybook with no rotation lock by default; the umbrella with full
+   rotation; the xylophone unlocked by default or a slightly higher default angle, so that people
+   can change the angle a little; the upright piano unlockable so you can look from above. Don't
+   change other toys' defaults.
+3. **The grand piano's song bar covers the piano on a phone** (you can't see all of the piano
+   without zooming out, and he shouldn't have to). The bar is the shared `#game-bar` (song-bar
+   class), fixed above the dock on phones (styles.css:1765-1770, about the bottom 115 px of the
+   stage), and the camera framing doesn't account for it. Make the toy's framing leave room for the
+   bar whenever the bar shows (for every toy with a song bar, not just the grand piano), or move the
+   bar; check all the pianos and the chess bar at 390×844.
+4. **Model to splats takes big files** (his note: a GLB file he tried was apparently too big). Today
+   the cap is 40 MB for all files together (`input.maxBytes || 40e6`, ui.js:1539-1541) plus
+   4,000,000 triangles (studio-models-core.js:51, 160), with no simplification. Raise the caps as
+   far as phones and computers handle well (aim for files of a few hundred MB on a computer), read
+   big files without copying them more than needed, and simplify very large meshes on the device
+   before sampling (the toy already has vertex clustering for its wireframe, core :1571-1577; reuse
+   our own code; a new library would need the owner's OK first). Show progress and a clear message
+   if a file is still too big for the device.
+5. **A Record button** (his idea, approved: he wants to be able to record a video of how he is using
+   the site). Record the stage while you play (drags, taps, the effect, the turning view) with the
+   toy's sound, then save the video (MediaRecorder from the canvas's captureStream plus a
+   MediaStreamAudioDestinationNode from the site's audio). MP4 where the browser supports it,
+   otherwise WebM. Put it in the Share tab next to the existing exports, with a clear stop and a
+   time limit (say 60 s). It must work on a phone (iOS Safari and Android Chrome) and a computer.
+   The existing "save video" exports stay.
 
 Clips for every item in your lane record "UIr5" on Effect review page 2, at 390×844 (and 1440×900
 where the layout matters), "built by Opus 5.5". The gallery button and rotation defaults change what

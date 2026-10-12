@@ -9,10 +9,9 @@ of October 2"). How lanes work: [OPERATING.md](../OPERATING.md).
 Written by the Operator on October 2, 2026, from the owner's review of that day.
 
 On October 2 the owner went through every toy on the preview build and named the sounds he wants
-changed. His review is in docs/reviews/2026-10-02-mega-review/review.md (word for word). The sound
-parts, word for word by toy, are in docs/reviews/sounds-2026-10-02.md. The clean note and a plan per
-toy are in tools/sound-review.json, round "2026-10-02": the 44 toys with status "change". Every toy
-he called perfect or fine keeps its sound. Those files are on the branch
+changed. His notes are private; the Operator's summary is in the brief. The clean note and a plan
+per toy are in tools/sound-review.json, round "2026-10-02": the 44 toys with status "change". Every
+toy he called perfect or fine keeps its sound. Those files are on the branch
 `claude/operator-mega-review` (Ops PR) until it merges; merge that branch or main into yours when it
 lands.
 

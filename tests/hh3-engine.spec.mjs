@@ -262,29 +262,40 @@ test("a forgiving press: off the lava lamp's splats, Hands-on still lifts it", a
     player.opts.idleDelay = 1e9;
   });
   await page.waitForTimeout(800);
-  // A point inside the toy's box where the pick buffer finds nothing.
-  const at = await page.evaluate(async () => {
-    const { player } = window.__splashery;
-    const r = player.stage.canvas.getBoundingClientRect();
-    const info = player.toyInfo;
-    const c = player.screenPoint(player.toRecipe(info.center));
-    for (const [dx, dy] of [
-      [0, 0],
-      [10, 0],
-      [-10, 0],
-      [0, 10],
-      [0, -10],
-      [20, 20],
-      [-20, 20],
-      [20, -20],
-      [-20, -20],
-    ]) {
-      // prettier-ignore
-      player.pickDirty = true;
-      if (!(await player.pickAt(c[0] + dx, c[1] + dy))) return { x: c[0] + dx, y: c[1] + dy, left: r.left, top: r.top }; // prettier-ignore
-    }
-    return null;
-  });
+  // A point inside the toy's box where the pick buffer finds nothing. Polled
+  // until one turns up (up to 15 s), not looked for once after a fixed wait:
+  // whether there is a gap near the middle depends on where the lamp's slow
+  // wax happens to be (it can fill the middle of the glass for several
+  // seconds) and on the view's slow turn (lane Hands-on H4, with the
+  // Operator's leave, October 10, 2026).
+  const scan = () =>
+    page.evaluate(async () => {
+      const { player } = window.__splashery;
+      const r = player.stage.canvas.getBoundingClientRect();
+      const info = player.toyInfo;
+      const c = player.screenPoint(player.toRecipe(info.center));
+      for (const [dx, dy] of [
+        [0, 0],
+        [10, 0],
+        [-10, 0],
+        [0, 10],
+        [0, -10],
+        [20, 20],
+        [-20, 20],
+        [20, -20],
+        [-20, -20],
+      ]) {
+        // prettier-ignore
+        player.pickDirty = true;
+        if (!(await player.pickAt(c[0] + dx, c[1] + dy))) return { x: c[0] + dx, y: c[1] + dy, left: r.left, top: r.top }; // prettier-ignore
+      }
+      return null;
+    });
+  let at = null;
+  for (const t0 = Date.now(); !at && Date.now() - t0 < 15000; ) {
+    at = await scan();
+    if (!at) await page.waitForTimeout(200);
+  }
   expect(at).toBeTruthy();
   // Off: nothing to take there.
   expect(await page.evaluate(({ x, y }) => window.__splashery.player.handsOn.nearPress(x, y), at)).toBe(null); // prettier-ignore

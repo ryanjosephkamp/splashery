@@ -166,7 +166,7 @@ for (const s of SCRIPT) {
   // "auto:0" or "auto:1" turns the autopilot off or on; "tap:x;y" taps the
   // stage there (0..1 across and down); "head:dx;dy" taps beside the
   // head (Longtail); "drag:dx;dy" drags across the stage (in its widths),
-  // over --dragsecs (0.6) of play.
+  // over --dragsecs (0.6) of play; "look:dx;dy" turns the 3D view (Arcade r3).
   else if (cmd === "auto")
     await run((on) => (window.__splashery.player.arcade.autopilot = on), arg === "1"); // prettier-ignore
   else if (cmd === "tap") {
@@ -187,7 +187,7 @@ for (const s of SCRIPT) {
         const a = window.__splashery.player.arcade;
         const p = orbitPose(a.cam);
         const [tx, ty] = viewTangents(a.aspect(), a.cam.fov);
-        const h = a.game.head.pos;
+        const h = a.game.tapTarget?.() || a.game.head.pos; // (Arcade r3: Strata's falling stone)
         const d = [0, 1, 2].map((i) => h[i] - p.position[i]);
         const dot = (u, v) => u[0] * v[0] + u[1] * v[1] + u[2] * v[2];
         const z = dot(d, p.forward);
@@ -199,6 +199,52 @@ for (const s of SCRIPT) {
       [dx, dy],
     );
     await fingerUp();
+  } else if (cmd === "choose") {
+    // Arcade r3: "choose:id" taps that choice button (Photo Dash's ball).
+    await run((id) => {
+      const b = document.querySelector(`.arc-choice[data-id="${id}"]`);
+      const r = b?.getBoundingClientRect();
+      if (r) window.__arcFinger((r.left + r.width / 2) / innerWidth, (r.top + r.height / 2) / innerHeight); // prettier-ignore
+      window.__splashery.player.arcade.choose(id);
+    }, arg);
+    await fingerUp();
+  } else if (cmd === "pad") {
+    // Arcade r3: "pad:alt" presses that button of the on-screen pad, as a
+    // thumb does (a key press would hide the pad: keys mean a keyboard).
+    await run((a) => {
+      const k = document.querySelector(`.arc-key[aria-label="${a}"]`);
+      const r = k?.getBoundingClientRect();
+      if (r) window.__arcFinger((r.left + r.width / 2) / innerWidth, (r.top + r.height / 2) / innerHeight); // prettier-ignore
+      k?.classList.add("arc-down");
+      window.__splashery.player.arcade.input.pad(a, true);
+    }, arg);
+    await step(1 / FPS);
+    await shot();
+    await run((a) => {
+      document.querySelector(`.arc-key[aria-label="${a}"]`)?.classList.remove("arc-down");
+      window.__splashery.player.arcade.input.pad(a, false);
+    }, arg);
+    await fingerUp();
+  } else if (cmd === "look") {
+    // Arcade r3: "look:dx;dy" turns a game's 3D view (two fingers, the
+    // kit's look-around), over --dragsecs of play.
+    const [dx, dy] = arg.split(";").map(Number);
+    const secs = Number(opt("dragsecs", 0.6));
+    const k = Math.max(1, Math.round(secs * FPS));
+    for (let i = 0; i < k; i++) {
+      await run(
+        ([dx, dy, k, f]) => {
+          const l = window.__splashery.player.arcade.input.look;
+          l[0] += dx;
+          l[1] += dy;
+          window.__arcFinger(0.5 + dx * k * (f - 0.5), 0.3 + dy * k * (f - 0.5));
+        },
+        [dx / k, dy / k, k, (i + 1) / k],
+      );
+      await step(1 / FPS);
+      await shot();
+    }
+    await run(() => window.__arcFinger(0, 0, false));
   } else if (cmd === "drag") {
     const [dx, dy] = arg.split(";").map(Number);
     const secs = Number(opt("dragsecs", 0.6));

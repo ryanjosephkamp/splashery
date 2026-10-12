@@ -9,12 +9,12 @@ study". Handoff file: docs/handoff/QRLabR2.md. Model: Opus 5.5.
 
 ### Brief (written by the Operator on October 4, 2026, from the owner's push notes that evening)
 
-The owner made QR codes a major focus of the push (docs/reviews/2026-10-04-push-alignment/notes.md;
-on the Push Plan page he marked Q6 and Q7 "strong yes"). Lane QR built the splat QR toy (#216,
-`src/qr/`, `src/packs/qr.js`), lane QR scan lab measured it with two readers and phone-like captures
-(#215, `tools/qr-scan-lab.mjs`, docs/audits/qr-scan-lab-2026-10.md), and lane QR r3 is improving the
-toy beside you (it owns `src/qr/` and `src/packs/qr.js`; import from them, don't edit them; if you
-need a hook there, tell the Operator).
+The owner made QR codes a major focus of the push (his notes are private; on the Push Plan page he
+marked Q6 and Q7 "strong yes"). Lane QR built the splat QR toy (#216, `src/qr/`, `src/packs/qr.js`),
+lane QR scan lab measured it with two readers and phone-like captures (#215,
+`tools/qr-scan-lab.mjs`, docs/audits/qr-scan-lab-2026-10.md), and lane QR r3 is improving the toy
+beside you (it owns `src/qr/` and `src/packs/qr.js`; import from them, don't edit them; if you need
+a hook there, tell the Operator).
 
 1. **How a QR code works** (Q6). A labs toy that teaches the structure of a real code, as the Splat
    equation toy teaches splats. Tap to light up each part: the finder patterns, separators, timing
@@ -27,17 +27,17 @@ need a hook there, tell the Operator).
    cite (for example Wikipedia's "QR code" article and Thonky's QR code tutorial), and prove it with
    tests that compare each intermediate result with the vendored Nayuki encoder's for the same input
    (version, mask, codewords, final modules).
-2. **The Damage lab** (Q7, "an absolute strong yes ... build this out very comprehensively"). A labs
-   toy: scratch a code, cover it with a sticker, tear or burn a corner, smudge it, and watch a live
-   "still scans?" meter (jsQR, already vendored). Add the damage only splats allow: blur the splats,
-   shrink or grow them, jitter them, fade them, shift their colors, curve or tilt the plate, and
-   move them in time. Show the four error-correction levels (L, M, Q, H) side by side under the same
-   damage, and, from the modules you know, how many codewords each block lost against how many it
-   can fix. Every number shown comes from the code, never invented.
-3. **A study of splat QR codes** (the owner: "maybe even to the point where we actually have some
-   empirical research results ... a parametric study where we really, really precisely and finely
-   change certain variables and scan and check ... and write some sort of report"). Extend the scan
-   lab's method in your own tools (`tools/qrs-*.mjs`; `tools/qr-scan-lab.mjs` stays as it is):
+2. **The Damage lab** (Q7, a strong yes: build this out very comprehensively). A labs toy: scratch a
+   code, cover it with a sticker, tear or burn a corner, smudge it, and watch a live "still scans?"
+   meter (jsQR, already vendored). Add the damage only splats allow: blur the splats, shrink or grow
+   them, jitter them, fade them, shift their colors, curve or tilt the plate, and move them in time.
+   Show the four error-correction levels (L, M, Q, H) side by side under the same damage, and, from
+   the modules you know, how many codewords each block lost against how many it can fix. Every
+   number shown comes from the code, never invented.
+3. **A study of splat QR codes** (the owner wants, if possible, real empirical research results: a
+   parametric study that precisely and finely changes certain variables, scans, checks, and ends in
+   a written report). Extend the scan lab's method in your own tools (`tools/qrs-*.mjs`;
+   `tools/qr-scan-lab.mjs` stays as it is):
    - Variables: what makes a splat code different from a printed one (splat size and softness per
      module, gaps, opacity, color contrast and gradients, style, the living-color wave's phase, a
      motion's frames, viewing angle and distance in 3D, the damage types above by region), against

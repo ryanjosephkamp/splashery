@@ -591,17 +591,18 @@
               as it is.
             </li>
             <li>
-              <strong>Filed.</strong> The Operator keeps the notes word for word in
-              <code>docs/reviews/sounds-&lt;date&gt;.md</code> and writes a clean version per toy
-              into <code>tools/sound-review.json</code>:
+              <strong>Filed.</strong> The owner's notes stay private (CLAUDE.md, &quot;Ground
+              rules&quot;). The Operator writes a clean version per toy, in its own words, into
+              <code>tools/sound-review.json</code>:
               <code
                 >{ &quot;round&quot;, &quot;note&quot;, &quot;toys&quot;: { &quot;&lt;toy
-                id&gt;&quot;: { &quot;status&quot;, &quot;said&quot;, &quot;note&quot;,
-                &quot;plan&quot;, &quot;candidates&quot; } } }</code
+                id&gt;&quot;: { &quot;status&quot;, &quot;note&quot;, &quot;plan&quot;,
+                &quot;candidates&quot; } } }</code
               >. <code>status</code> is <code>keep</code>, <code>change</code>,
               <code>ready</code> (a new sound to hear), <code>approved</code> or
-              <code>site</code> (in the site); <code>said</code> is his words, <code>note</code> the
-              clean version, <code>plan</code> what the new sound will be. The Sound Board shows
+              <code>site</code> (in the site); <code>note</code> is the clean version,
+              <code>plan</code> what the new sound will be. (Older entries had a
+              <code>said</code> field with his words; it is being removed.) The Sound Board shows
               each toy's line, with filters (All, To change, Ready to hear, Approved), &quot;Play
               through&quot; (the filtered toys one after another, the name shown large) and optional
               marks.
@@ -857,11 +858,15 @@
             <li>
               <code>verdicts/&lt;card id&gt;</code>: the owner's marks,
               <code
-                >{ verdict: &quot;good&quot; | &quot;fix&quot; | &quot;&quot;, note, at, sharper
-                }</code
+                >{ verdict: &quot;good&quot; | &quot;fix&quot; | &quot;&quot;, note, at, sharper,
+                images }</code
               >
               (<code>sharper: true</code> marks a &quot;Just sharper&quot; fix on page 2, below).
-              Only the owner writes these.
+              Only the owner writes these. On page 2, <code>images</code> (since October 9, 2026)
+              lists the asset ids of screenshots the owner attached to the note, shrunk to JPEG at
+              most 2000 pixels long; a lane reads each one with the Artifact tool's
+              <code>read</code> (<code>url</code> the page, <code>path</code> the id) and looks at
+              it before fixing the card.
             </li>
           </ul>
           <p>
@@ -1447,7 +1452,7 @@
         <nav aria-label="More">
           <h2>More</h2>
           <ul>
-            <li><a href="../../../" target="_blank" rel="noopener">The gallery</a></li>
+            <li><a href="../../../" target="_blank" rel="noopener">The Playground</a></li>
             <li><a href="../../search/">Search</a></li>
             <li><a href="../../../manual/">The Tinkerer's Manual</a></li>
             <li>
@@ -1467,7 +1472,7 @@
         Made by <a href="../../about/contact/">Ryan Kamp</a>. Code under the MIT license; each toy's
         assets keep their own licenses. Built on the PlayCanvas engine. This is a preview of
         Splashery's new site; the toys live in
-        <a href="../../../" target="_blank" rel="noopener">the gallery</a>.
+        <a href="../../../" target="_blank" rel="noopener">the Playground</a>.
       </p>
     </footer>
   </body>

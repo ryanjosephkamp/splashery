@@ -45,7 +45,7 @@ test.describe("toy pages round 2 (static)", () => {
     for (const t of TOYS.filter((x) => x.category)) {
       const html = read(`toys/${t.id}/index.html`);
       if (!new RegExp(`play/\\?toy=${t.id}[^"]*&amp;sound=on|play/\\?toy=${t.id}[^"]*&sound=on`).test(html)) problems.push(`${t.id}: no sound=on`); // prettier-ignore
-      if (!/<a class="button primary" href="[^"]*" target="_blank" rel="noopener" ?>Open in the gallery/.test(html)) problems.push(`${t.id}: gallery link stays in the tab`); // prettier-ignore
+      if (!/<a class="button primary" href="[^"]*" target="_blank" rel="noopener" ?>Open in the Playground/.test(html)) problems.push(`${t.id}: gallery link stays in the tab`); // prettier-ignore
       // The snippets people copy stay silent, as before.
       const snippet = /id="snip-iframe"[^>]*>([^<]*)</.exec(html)?.[1] || "";
       if (/sound=on/.test(snippet)) problems.push(`${t.id}: the embed snippet is not silent`);
@@ -96,7 +96,7 @@ test.describe("toy pages round 2 (browser)", () => {
     // The Learn more link and the gallery link each open a new tab.
     const learn = page.locator("a", { hasText: "Cactus on Wikipedia" });
     await expect(learn).toHaveAttribute("target", "_blank");
-    const [tab] = await Promise.all([ctx.waitForEvent("page"), page.getByRole("link", { name: "Open in the gallery" }).click()]); // prettier-ignore
+    const [tab] = await Promise.all([ctx.waitForEvent("page"), page.getByRole("link", { name: "Open in the Playground" }).click()]); // prettier-ignore
     expect(tab.url()).toContain("#s=j.");
     await tab.close();
     await ctx.close();

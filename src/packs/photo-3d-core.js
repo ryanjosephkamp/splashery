@@ -369,7 +369,8 @@ export function sharpen(rgb, gx, gy, amount = SHARPEN) {
 // Builds the splats for a photo and its depth.
 //   count   the most splats to make (the tier's budget)
 //   depth   how deep the relief is, 0..1 (0.5 is the default)
-// Returns { n, gx, gy (the fine grid), aspect, relief (3n), flat (3n), sigma (n), rgb (3n), band (n), gap, stats }.
+// Returns { n, gx, gy (the fine grid), aspect, relief (3n), flat (3n), sigma (n), rgb (3n), band (n), depth
+// and cellBand (gx by gy: each cell's depth and layer), gap, stats }.
 export function buildPhotoSplats(
   photo,
   depthMap,
@@ -514,6 +515,7 @@ export function buildPhotoSplats(
     rgb: oRgb,
     band: oBand,
     depth: d,
+    cellBand: band, // lane Photo depth: each fine cell's layer (its piece's), for the Sharp picture
     gap: 0.16 * R + 0.06, // how far apart "Layers" pulls the depth bands, in picture heights
     stats: {
       pieces: pc.count,

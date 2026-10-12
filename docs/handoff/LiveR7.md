@@ -10,14 +10,14 @@ Model: Opus 5.5.
 
 ### Brief (written by the Operator on October 4, 2026, from the owner's push notes that evening)
 
-The owner's notes are in docs/reviews/2026-10-04-push-alignment/notes.md ("All right, so I'm going
-to go through the items in the studio"). Read docs/handoff/LiveInput.md first (rounds r1 to r4; r5
-and r6 are described in the code comments and HANDOFF.md, and r6 merged as #250).
+The owner's notes are private; the Operator's summary is here. Read docs/handoff/LiveInput.md first
+(rounds r1 to r4; r5 and r6 are described in the code comments and HANDOFF.md, and r6 merged as
+#250).
 
-1. **The Splat mirror, polished** (`splat-mirror`, `src/packs/live.js`). His words: "it still seems
-   a little bit too grainy, especially with the hologram view. It's like stuff is kind of put on top
-   of the face. We need to polish this out, and this is something that we can really focus on during
-   the push because it's another thing that kind of makes our product unique."
+1. **The Splat mirror, polished** (`splat-mirror`, `src/packs/live.js`). The owner's call: it is
+   still a bit too grainy, especially in the hologram view, and things look put on top of the face.
+   It needs polish, and the push is the time to focus on it because it helps make the product
+   unique.
    - Find what makes it grainy (splat size and count per pixel, the depth's noise from frame to
      frame, edge splats that straddle the face and the background) and fix it: a face that reads
      cleanly at phone size, steady from frame to frame, with clean edges.
@@ -121,12 +121,12 @@ stability" on `lv7-splat-mirror-r4` and its hologram; the Operator's brief of 14
 - Not changed: seen turned, the wall hidden behind the head shows as a soft pale patch (the filled
   wall), in r4 and r5 alike.
 
-October 6, 2026, 06:40 UTC (Opus 5.5): **sharpness round 2** (the Operator's brief of 04:34 UTC, the
-owner's "the moving photo to 3d is also still too grainy and needs to be much sharper ... the splat
-mirror also needs to improve"), still on `claude/lane-live-r7-polish` (#333). The hl1 fix is its own
-PR (#336); the long videos are their own PR, #338 on `claude/lane-live-r7-long-video` (any length on
-the device: a muted copy of the video plays on the sound's clock, only the depth is kept, 24 MB on
-low to 160 MB on max, with progress and Cancel; clip `lv7-long-video`).
+October 6, 2026, 06:40 UTC (Opus 5.5): **sharpness round 2** (the Operator's brief of 04:34 UTC, on
+the owner's call that the moving photo to 3D is still too grainy and needs to be much sharper, and
+the splat mirror also needs to improve), still on `claude/lane-live-r7-polish` (#333). The hl1 fix
+is its own PR (#336); the long videos are their own PR, #338 on `claude/lane-live-r7-long-video`
+(any length on the device: a muted copy of the video plays on the sound's clock, only the depth is
+kept, 24 MB on low to 160 MB on max, with progress and Cancel; clip `lv7-long-video`).
 
 - **Moving photo to 3D** (`live-moving-sharp-r3` and its still): each splat is sized the way Photo
   to 3D sizes its own (`FILL` times the mean distance to its neighbors on the same surface, smaller
@@ -197,8 +197,8 @@ branches. READY for the Integrator's full run; the engine PR #284 merges first, 
 hourly check-ins merge main as it moves (last: through #291, 14:36 UTC); both PRs are clean.
 
 October 5, 2026, 04:50 UTC (Opus 5.5): the owner's marks: `lv7-song-landscape` and
-`lv7-chladni-plate` good; both mirror cards "fix" ("keep making it sharper ... a little bit more
-seamless"). Round 2 is posted as `lv7-splat-mirror-r2` and `lv7-splat-mirror-hologram-r2` (the old
+`lv7-chladni-plate` good; both mirror cards "fix" (keep making them sharper and a bit more
+seamless). Round 2 is posted as `lv7-splat-mirror-r2` and `lv7-splat-mirror-hologram-r2` (the old
 cards marked replaced):
 
 - Tighter picture splats (1.2 cells across, was 1.45) and a light unsharp mask on the colors.

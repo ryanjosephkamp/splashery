@@ -9,13 +9,13 @@ Handoff file: docs/handoff/StudioModels.md.
 
 ## Brief (written by the Operator on September 29, 2026, from the owner's answers on the Splashery Universe page)
 
-The owner's answers: the Studio (splats from anything) goes in this order: "Sound and music (song
-landscape, Chladni plate); 3D model files to splats; Photo to 3D", with the converters built by
-Sonnet 5.5. On new sources: "CC0 3D models from the Smithsonian, Poly Haven, Kenney and Quaternius,
-converted to splats; plus my own phone scans, which I'll send as files." On anatomy: "I wonder if we
-could build the '3D model files to splats' and 'Photo to 3D' tools first, and then use those with 3D
-organ models … and maybe get better quality than we would now." So this converter is the base for
-later toys and the anatomy atlas: make it accurate and sharp.
+The owner's answers: the Studio (splats from anything) goes in this order: sound and music (song
+landscape, Chladni plate); 3D model files to splats; Photo to 3D, with the converters built by
+Sonnet 5.5. On new sources: CC0 3D models from the Smithsonian, Poly Haven, Kenney and Quaternius,
+converted to splats, plus his own phone scans, which he will send as files. On anatomy: build the
+"3D model files to splats" and "Photo to 3D" tools first, then use them with 3D organ models for
+better quality than now. So this converter is the base for later toys and the anatomy atlas: make it
+accurate and sharp.
 
 Build two things.
 

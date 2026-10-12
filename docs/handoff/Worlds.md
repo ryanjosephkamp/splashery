@@ -7,15 +7,11 @@ island". How lanes work: [OPERATING.md](../OPERATING.md). Earlier lessons: [hist
 
 (Written by the Operator on September 30, 2026, from the owner's marks of September 29 and 30)
 
-The owner's words on `wd-hybrid-character` (September 30, 2026): "This is looking much better. It's
-still doesn't feel premium yet and while I know that I marked some of the other Island scenes as
-looking right, the terrain was generally what I was referring to. The sand looks okay, but the
-character and a lot of the other stuff in the environment could use some work. The character in
-particular could use a lot of work. It looks way too simple and simplistic. I would also like to try
-to improve the Fidelity or resolution or sharpness of the rest of the island." And on `wd-walk-r3`
-and `wd-list-r3` (September 29): "make the character look much, much better; the player looks far
-too low-poly here. I know you're capable of incredible character design, so please see what more you
-can do here."
+The owner's call on `wd-hybrid-character` (September 30, 2026): better, but still not premium. The
+terrain was what he meant when he marked some Island scenes right; the sand is fine, but the
+character and much of the rest of the environment need work, the character most of all (too simple),
+and he wants the rest of the island sharper and higher in resolution. On `wd-walk-r3` and
+`wd-list-r3` (September 29): the character looks far too low-poly and needs to look much better.
 
 So the terrain, water, sky, shadows and depth pass (those cards are good). The character and the
 props don't. Build, in this order, posting each part's cards as soon as it's done:
@@ -152,12 +148,9 @@ Worlds r3: a premium character and a sharper island. The rest of this file is th
 - The owner's marks (Effect review page, lane record "Worlds"):
   - `wd-hybrid-walk`, `wd-hybrid-shore`, `wd-hybrid-shadows`, `wd-hybrid-sky` and `wd-hybrid-depth`
     are good.
-  - `wd-hybrid-character` is fix (September 30, 2026), word for word: "This is looking much better.
-    It's still doesn't feel premium yet and while I know that I marked some of the other Island
-    scenes as looking right, the terrain was generally what I was referring to. The sand looks okay,
-    but the character and a lot of the other stuff in the environment could use some work. The
-    character in particular could use a lot of work. It looks way too simple and simplistic. I would
-    also like to try to improve the Fidelity or resolution or sharpness of the rest of the island."
+  - `wd-hybrid-character` is fix (September 30, 2026): better, but not premium yet. The terrain was
+    the scene he meant when he marked others right; the sand is fine, but the character (too simple)
+    and much of the environment need work, and the island needs more fidelity and sharpness.
   - `wd-walk-r3` and `wd-list-r3` (September 29) were fix too: keep improving sharpness, and make
     the character look much better, "the player looks far too low-poly".
   - So for r3: the terrain passes; the character (both kinds) and the props don't.
@@ -415,24 +408,22 @@ Worlds r3: a premium character and a sharper island. The rest of this file is th
 (Written by the Operator on September 29, 2026, from the owner's note "big new Splashery ideas" and
 his answers on the Splashery Universe page the same night)
 
-The owner's words: "I kind of want to make something that's like an actual universe, or like an open
-world kind of game that runs in the browser using Gaussian splats. You know, somebody can actually
-view it on their phone." "Somebody could make a personal website … the whole site is basically like
-a Gaussian splat … they enter it as like … some character in like an open world, and the character
-runs around … different landmarks or milestones … will be different parts of their portfolio."
-"Maybe investing in the sandbox and the method and stuff like that before we try any really specific
-templates or games would make more sense."
+The owner's call (September 29, 2026): he wants an actual universe, an open-world game that runs in
+the browser on Gaussian splats and plays on a phone. One use: a personal website built as a splat
+world, where the visitor enters as a character in an open world and the landmarks are the parts of
+the portfolio. He prefers investing in the sandbox and the method first, before any specific
+templates or games.
 
-His answers (September 29, 2026): Worlds are built in this order: "The engine as a sandbox first
+His answers (September 29, 2026): Worlds are built in this order: the engine as a sandbox first
 (Opus), then a small pilot game (Sonnet), then the first portfolio template (Sonnet), then more
-templates two at a time." The pilot game will be "Toy Hunt Island: twelve toys have escaped the
-shelf onto a small island; find them all." The first template will be "Forest trail (walk between
-clearings)." On rendering: "Everything you see is splats. Only menus and text are page text, and
-collision uses invisible simple shapes. The toy shelf stays pure splats." He added: "if that fails
-and we really can't find a way to make it work, then I'd be willing to resort to one of the other
-options" (meshes where splats look worse). If you reach that point, tell the Operator with evidence
-(clips) before using any mesh you can see. On the site layout: "Add Studio, Worlds, Lab and Learn as
-sections behind the labs switch. I decide when each goes public."
+templates two at a time. The pilot game is Toy Hunt Island: twelve toys have escaped the shelf onto
+a small island; find them all. The first template is a forest trail (walk between clearings). On
+rendering: everything you see is splats; only menus and text are page text, and collision uses
+invisible simple shapes; the toy shelf stays pure splats. If that fails and no way is found to make
+it work, he would accept one of the other options (meshes where splats look worse). If you reach
+that point, tell the Operator with evidence (clips) before using any mesh you can see. On the site
+layout: add Studio, Worlds, Lab and Learn as sections behind the labs switch; he decides when each
+goes public.
 
 You build the engine that the Sonnet lanes will build the pilot game and the templates on, so design
 it for them: clear modules, a documented world file, and a sandbox that shows every feature.
@@ -544,9 +535,9 @@ Model: Opus 5.5 (default effort).
 - Full suite: 318 passed after merging main (then the bush fix and the touch clip's script changed;
   `tests/wd.spec.mjs` passed again, 14 of 14).
 - Cards on the Effect review page (September 29, 2026): `wd-walk`, `wd-landmark`, `wd-touch`,
-  `wd-list`. The owner marked `wd-landmark` and `wd-touch` good, `wd-walk` good with a note ("looks
-  extremely grainy and basic. This must be an impeccable and high-fidelity game") and `wd-list` fix
-  ("Needs better resolution and precision. Better character design").
+  `wd-list`. The owner marked `wd-landmark` and `wd-touch` good, `wd-walk` good with a note (it
+  looks extremely grainy and basic, and this must be an impeccable, high-fidelity game) and
+  `wd-list` fix (needs better resolution and precision, and a better character design).
 - Fidelity pass: 8 m chunks with five levels, a much denser near ground and about three times the
   grass blades, less color noise, more detail per prop, raised budgets, the character redesigned
   (eleven joints, elbows, hands, a face, hair, collar, belt, shoes), the aerial view planned around
@@ -618,10 +609,9 @@ Model: Opus 5.5 (default effort).
 
 Branch `claude/lane-worlds-r2`, PR "Phase Worlds r2: a sharper island". Built by Opus 5.5.
 
-The owner's words (September 29, 2026), word for word: "My main criticism is about the worlds: still
-just a bit too grainy, and the player/character looks way too low-poly and simplistic. But, the
-mechanics are solid! So it primarily seems like design problems and sharpness, not physics and
-mechanics."
+The owner's call (September 29, 2026): the worlds are still a bit too grainy, and the player
+character looks far too low-poly and simplistic, but the mechanics are solid. So the work is design
+and sharpness, not physics and mechanics.
 
 The Operator's plan: the character goes to a new Character lane (it owns `src/worlds/character.js`
 and the character section of docs/WORLDS.md). This round takes the grain out of everything else:
@@ -662,17 +652,14 @@ Cards: `wd-island-r2`, `wd-ground-r2`, `wd-props-r2`, `wd-sky-r2`.
 Branch `claude/lane-worlds-hybrid` (from the r2 head; it merges after #108), PR "Phase Worlds
 hybrid: model ground, water and sky with splat props (Opus 5.5)". Built by Opus 5.5. Labs only.
 
-The owner's words on the r2 cards (September 29, 2026), word for word: "This continues to get
-better, but the quality is still not at the level of a real video game. Is that an unrealistic
-expectation for Gaussian splats? Are there other tools that we could integrate (i.e., by upgrading
-your tech stack, etc.) to make the graphics better while maintaining Gaussian splat functionality?
-Eventually, I do want to see how a hybrid approach would look, where we use Gaussian splats
-strategically and use better game tools for other parts, and then integrate these together to build
-games that can do things that are almost impossible without Gaussian splats. We can certainly
-continue to build out the splat-only world, but if it can't achieve ~AAA graphics and gameplay, then
-we can see if there's a way to do that with other tools." After the Operator's report, his answer:
-"Hybrid yes." and "I am very interested in making a hyper-realistic hybrid game or simulation
-world."
+The owner's call on the r2 cards (September 29, 2026): the quality improves but is still short of a
+real video game. He asked whether that is unrealistic for Gaussian splats, and whether other tools
+could be integrated to improve the graphics while keeping splat functionality. He wants to see a
+hybrid approach, with splats used strategically and better game tools for the rest, so games can do
+things almost impossible without splats. The splat-only world can keep growing, but if it cannot
+reach roughly AAA graphics and gameplay, he wants to see whether other tools can. After the
+Operator's report, his answer: "Hybrid yes." and that he is very interested in a hyper-realistic
+hybrid game or simulation world.
 
 The Operator's brief (the report's steps 1 and 2):
 
@@ -704,15 +691,15 @@ Test island stays in splats mode until the owner picks. How it works is in docs/
   `tests/wdh.spec.mjs` checks it in both modes (taking away a bush behind the hill changes no
   pixel).
 - The character A/B (the Operator's addendum of September 29, 2026, after the owner's marks on the
-  Character cards: "Better, but still looks too low-poly. We can stop trying to perfect this for
-  now. The hybrid simulation will hopefully enable better characters."): `?character=mesh` swaps in
-  a lit, skinned character, Kenney's "Animated Characters: Protagonists" (CC0, checked on the live
-  page and in the pack's license file), with idle, walk and run blended by speed and driven by the
-  world's clock. The pack has no walk; `tools/world-character.mjs` makes one from the run.
-  Quaternius packs were the first choice, but Google Drive refused the downloads here ("Quota
-  exceeded") and the one Quaternius pack on OpenGameArt is the older chibi style. My pick for hybrid
-  worlds: the mesh character (it reads as a finished game character at phone size), though it is
-  stylized, not realistic. The owner decides from `wd-hybrid-character`.
+  Character cards: better, but still too low-poly; stop trying to perfect this for now, since the
+  hybrid simulation should enable better characters): `?character=mesh` swaps in a lit, skinned
+  character, Kenney's "Animated Characters: Protagonists" (CC0, checked on the live page and in the
+  pack's license file), with idle, walk and run blended by speed and driven by the world's clock.
+  The pack has no walk; `tools/world-character.mjs` makes one from the run. Quaternius packs were
+  the first choice, but Google Drive refused the downloads here ("Quota exceeded") and the one
+  Quaternius pack on OpenGameArt is the older chibi style. My pick for hybrid worlds: the mesh
+  character (it reads as a finished game character at phone size), though it is stylized, not
+  realistic. The owner decides from `wd-hybrid-character`.
 - Cards (390×844, splats left, hybrid right, the same walk): `wd-hybrid-walk`, `wd-hybrid-shore`,
   `wd-hybrid-shadows`, `wd-hybrid-sky`, plus `wd-hybrid-depth` (the depth close-up) and
   `wd-hybrid-character` (splats and mesh characters in the hybrid island).

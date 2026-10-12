@@ -40,10 +40,10 @@ issues" and "## For the Operator" current). Model: Opus 5.5, at the default effo
 
 ### Brief (written by the Operator on October 7, 2026)
 
-Ryan's walkthrough review (docs/reviews/2026-10-06-walkthrough/notes.md and triage.md, "Elsewhere")
-asks two things of the real planets and moons (real-earth, real-moon, real-mars, real-mercury,
-real-venus, real-moons, real-small-worlds; src/packs/space-r2.js). Read docs/handoff/SpaceR2.md
-first.
+Ryan's walkthrough review (the Operator's triage is docs/reviews/2026-10-06-walkthrough/triage.md,
+"Elsewhere") asks two things of the real planets and moons (real-earth, real-moon, real-mars,
+real-mercury, real-venus, real-moons, real-small-worlds; src/packs/space-r2.js). Read
+docs/handoff/SpaceR2.md first.
 
 1. **Sharper, less grainy.** Raise their fidelity the way the Fidelity and Space r2 lanes sharpened
    others: finer splats where it shows, a better use of the color and elevation maps, no speckle.

@@ -9,7 +9,7 @@
 // tools/models.json.
 
 import { clamp, smoothstep, mix, quatAxisAngle, quatFromTo, quatMul, quatRotate } from "../kit.js";
-import { surfacePoints } from "../physics/world.js"; // lane Hands-on H1
+import { surfacePoints } from "../physics/world.js"; // lanes Hands-on H1 and H3
 
 // ---- The baked models ------------------------------------------------------------------------
 
@@ -840,8 +840,61 @@ function fpPen(s) {
   return { q, tip, u };
 }
 
+// Lane Hands-on H3: the pen's cap by hand, as a loose piece (an ellipsoid
+// about its middle), and the pen lying under it as ground.
+// (Its full length, end to end, so a cap that tumbles never sinks into the
+// paper: the owner's note of October 8, 2026.)
+const FP_CAP = { type: "ellipsoid", r: [0.48, 0.07, 0.07] };
+const FP_BODY = { type: "box", half: [0.97, 0.06, 0.06] };
+// The cap's place by hand, coarsely (null at home), and whether it moved
+// enough to sort the splats again: splats sort in the pose they were built
+// in, so a cap set down on the paper in front of the pen sorted as if still
+// on the nib, and the paper drew over it (the owner's note: the cap went
+// under the paper).
+const FP_HAND = { key: null, resort: false };
+
 const FOUNTAIN_PEN = {
   alive: false,
+  // Hands-on (lane Hands-on H3): pull the cap off the nib (it holds, then
+  // comes free with a click), and push it onto the back end, where it posts
+  // turned half round, or back over the nib. It holds fast wherever it
+  // clicks on; dropped, it lands on the notepad.
+  hands: {
+    floor: FP.paper,
+    pieces: () => [
+      { part: "cap", pos: FP.capC.slice(), pivot: FP.capC.slice(), solid: FP_CAP, points: surfacePoints(FP_CAP, 1), pick: [0.3, 0.13, 0.13], mass: 0.2, friction: 0.7, restitution: 0.2 }, // prettier-ignore
+      // The pen: ground for the cap, never picked up (the cap is how it's held).
+      { pos: [-0.015, FP.axis[1], FP.axis[2]], solid: FP_BODY, pick: [1e-3, 1e-3, 1e-3] },
+    ],
+    joints: [
+      {
+        type: "break",
+        part: "cap",
+        at: [FP.capC[0] + 0.24, FP.capC[1], FP.capC[2]],
+        pull: 0.14,
+        give: 0.02,
+        // (Held as it was pulled off, never hanging down past the paper.)
+        steady: true,
+        also: (v, parts) => {
+          const p = parts.cap;
+          const key = p ? [...(p.offset || []).map((x) => Math.round(x / 0.03)), ...(p.quat || []).map((x) => Math.round(x * 10))].join() : null; // prettier-ignore
+          if (key !== FP_HAND.key) FP_HAND.resort = true;
+          FP_HAND.key = key;
+        },
+        reseat: {
+          snap: 0.25,
+          seats: [{ pos: [2 * FP.post - FP.capC[0] - 0.12, FP.capC[1], FP.capC[2]], quat: quatAxisAngle([0, 1, 0], Math.PI) }], // prettier-ignore
+        },
+        sound: (ev) =>
+          ev.kind === "snap"
+            ? { voice: "click", f: 1500, decay: 0.06, vol: 0.6 }
+            : ev.kind === "socket"
+              ? { voice: "click", f: 2100, decay: 0.05, vol: 0.6 }
+              : undefined,
+      },
+    ],
+    sound: (hit, vol) => ({ voice: "clack", f: 900, decay: 0.06, vol: vol * 0.5 }),
+  },
   density: 1.5, // as the Model to splats toy: 300,000 splats on the high tier
   controls: [{ key: "write", label: "Write", type: "pulse", ease: FP.T }],
   action: { key: "write", label: "Uncap and write" },
@@ -886,6 +939,11 @@ const FOUNTAIN_PEN = {
     const dry = seg(s, 2.25, 3.3) * (1 - back);
     out.morph = [wet * 1.02, dry * 1.02, 0, 0];
     sortWhileMoving(out, info, s, on && s < FP.T, 0.06);
+    // By hand: sorted again as the cap moves (lane Hands-on H3).
+    if (FP_HAND.resort) {
+      out.resortPose = true;
+      FP_HAND.resort = false;
+    }
   },
   build(k) {
     const scan = SCANS.get("fountain-pen");

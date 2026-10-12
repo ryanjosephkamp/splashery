@@ -21,10 +21,10 @@ your brief is already here). Model: Opus 5.5.
 
 ### Brief (written by the Operator on October 3, 2026, from the owner's notes that afternoon)
 
-The owner, on October 3, 2026: "It looks like some of the effects don't work well when the
-objects/toys are on the ground or turned over. For example, the hoodie animation breaks at the hood
-and arms like it used to." Since the hands-on switch (#176, #203), people pick toys up, toss them
-and leave them lying on their side or upside down, then tap them.
+The owner, on October 3, 2026: some effects do not work well when the objects or toys are on the
+ground or turned over; for example, the hoodie animation breaks at the hood and arms, as it used to.
+Since the hands-on switch (#176, #203), people pick toys up, toss them and leave them lying on their
+side or upside down, then tap them.
 
 #### What to build
 

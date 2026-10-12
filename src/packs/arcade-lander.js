@@ -46,7 +46,7 @@ class Lander {
     this.world = world;
     this.g = world === "Mars" ? 0.32 : 0.16;
     const low = api.profile === "low";
-    this.per = low ? 1 : 2; // splats a ground cell
+    this.per = low ? 1 : 2; // (r3) a ground cell is per × per splats
     const { kitModel } = api;
     const lit = (c, n, f = 1) => c.map((v) => v * (0.72 + 0.26 * n[1] + 0.12 * n[2]) * f);
     // The lander, crisp (src/packs/arcade-crisp.js).
@@ -81,13 +81,24 @@ class Lander {
         }),
       { count: low ? 60 : 110 },
     );
-    this.padModel = kitModel((k) => k.add(k.sphere(0.008), { color: [0.4, 1, 0.55] }), {
-      count: 12,
-    });
-    this.starModel = kitModel(
-      (k) => k.cloud({ share: 1 }, (rand) => ({ p: [(rand() - 0.5) * 8, 0.6 + rand() * 3, -1.5 - rand() * 2], color: "#eef2ff", opacity: 0.3 + 0.6 * rand(), size: 0.7 })), // prettier-ignore
-      { count: low ? 200 : 500 },
-    );
+    // (Arcade r3, "sharper": a crisp landing light and pin-point stars)
+    this.padModel = crispModel((k) => k.sphere(0.009, { step: 0.0025, color: [0.45, 1, 0.6] }));
+    {
+      const { makeModel } = api;
+      const n = low ? 260 : 600;
+      const m = makeModel(n);
+      let seed = 11;
+      const rand = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+      for (let i = 0; i < n; i++) {
+        m.pos.set([(rand() - 0.5) * 8, 0.6 + rand() * 3, -1.5 - rand() * 2], i * 3);
+        const b = 0.4 + 0.6 * Math.pow(rand(), 2);
+        m.color.set([b * 0.95, b * 0.97, b, 1], i * 4);
+        const s = 0.005 + 0.005 * rand() * b;
+        m.scale.set([s, s, s], i * 3);
+        m.rot.set([0, 0, 0, 1], i * 4);
+      }
+      this.starModel = m;
+    }
   }
 
   // ---- The ground --------------------------------------------------------------------
@@ -109,32 +120,44 @@ class Lander {
     const slice = Math.floor(rows / 2);
     this.slice = slice;
     const sun = norm3([0.75, 0.45, 0.3]); // low from the east: craters cast their shading
+    // (Arcade r3, "sharper": each ground cell is cut into q × q smaller
+    // cells, their heights and slopes read from a smooth (bilinear) fit of
+    // the real heights, so the ridges and crater rims come out finer)
+    const q = this.per;
+    const hB = (u, v) => {
+      const i0 = Math.floor(u);
+      const j0 = Math.floor(v);
+      const fu = u - i0;
+      const fv = v - j0;
+      return (hAt(i0, j0) * (1 - fu) + hAt(i0 + 1, j0) * fu) * (1 - fv) + (hAt(i0, j0 + 1) * (1 - fu) + hAt(i0 + 1, j0 + 1) * fu) * fv; // prettier-ignore
+    };
     const make = (j0, j1) => {
-      const n = (j1 - j0) * cols * this.per;
+      const n = (j1 - j0) * cols * q * q;
       const m = makeModel(n);
       let k = 0;
+      const e = 0.5 / q;
       for (let j = j0; j < j1; j++)
         for (let i = 0; i < cols; i++) {
-          const dx = (((hAt(i + 1, j) - hAt(i - 1, j)) / relief) * RELIEF) / ((2 * W) / cols);
-          const dz = (((hAt(i, j + 1) - hAt(i, j - 1)) / relief) * RELIEF) / ((2 * D) / rows);
-          const nn = norm3([-dx, 1, -dz]);
-          const l = clamp(dot3(nn, sun), 0, 1);
           const o = (j * cols + i) * 3;
-          const base = [site.c[o] / 255, site.c[o + 1] / 255, site.c[o + 2] / 255].map(
-            (v) => v * 0.62,
-          );
-          const f = 0.55 + 0.6 * l;
-          for (let s = 0; s < this.per; s++) {
-            const ox = this.per > 1 ? (s - 0.5) * 0.5 : 0;
-            const x = -W / 2 + ((i + 0.5 + ox) / cols) * W;
-            const z = -D / 2 + ((j + 0.5) / rows) * D;
-            m.pos.set([x, yOf(hAt(i, j)), z], k * 3);
-            m.color.set([base[0] * f, base[1] * f, base[2] * f, 1], k * 4);
-            const sz = ((W / cols) * (this.per > 1 ? 0.72 : 1.0)) / Math.max(0.35, nn[1]); // steep ground: a longer cell
-            m.scale.set([sz, sz, sz * 0.7], k * 3);
-            m.rot.set(this.q.qfromto([0, 0, 1], nn), k * 4);
-            k++;
-          }
+          const base = [site.c[o] / 255, site.c[o + 1] / 255, site.c[o + 2] / 255].map((v) => v * 0.62); // prettier-ignore
+          for (let sj = 0; sj < q; sj++)
+            for (let si = 0; si < q; si++) {
+              const u = i + (si + 0.5) / q - 0.5;
+              const v = j + (sj + 0.5) / q - 0.5;
+              const dx = (((hB(u + e, v) - hB(u - e, v)) / relief) * RELIEF) / ((2 * e * W) / cols);
+              const dz = (((hB(u, v + e) - hB(u, v - e)) / relief) * RELIEF) / ((2 * e * D) / rows);
+              const nn = norm3([-dx, 1, -dz]);
+              const l = clamp(dot3(nn, sun), 0, 1);
+              const f = 0.42 + 0.78 * l;
+              const x = -W / 2 + ((u + 0.5) / cols) * W;
+              const z = -D / 2 + ((v + 0.5) / rows) * D;
+              m.pos.set([x, yOf(hB(u, v)), z], k * 3);
+              m.color.set([base[0] * f, base[1] * f, base[2] * f, 1], k * 4);
+              const sz = ((W / cols / q) * 0.78) / Math.max(0.35, nn[1]); // steep ground: a longer cell
+              m.scale.set([sz, sz, sz * 0.4], k * 3);
+              m.rot.set(this.q.qfromto([0, 0, 1], nn), k * 4);
+              k++;
+            }
         }
       return m;
     };
@@ -143,7 +166,68 @@ class Lander {
     for (let i = 0; i < cols; i++) prof[i] = yOf(hAt(i, slice));
     this.profile = prof;
     this.sliceZ = -D / 2 + ((slice + 0.5) / rows) * D;
-    return { back: make(0, slice + 1), front: make(slice + 1, rows) };
+    return {
+      back: make(0, slice + 1),
+      front: make(slice + 1, rows),
+      cut: this.buildCut(site, slice),
+    };
+  }
+
+  // Arcade r3 ("sharper"): in 2D the ground is seen edge-on, so its
+  // splats drew a soft, smeared skyline. The slice is now cut clean, like
+  // a slice of cake: a face of crisp splats from the profile down, two
+  // columns a ground cell, with fine rows along its top edge and a pale
+  // rim of sunlit dust, darker rock below.
+  buildCut(site, slice) {
+    const { makeModel } = this.api;
+    const cols = this.profile.length;
+    const low = this.api.profile === "low";
+    const nx = cols * (low ? 1 : 2);
+    const dx = GROUND_W / nx;
+    const bottom = -1.7;
+    // one rock color for the whole face (each column its own read as streaks)
+    let base = [0, 0, 0];
+    for (let i = 0; i < cols; i++) {
+      const o = (slice * cols + i) * 3;
+      for (let k = 0; k < 3; k++) base[k] += site.c[o + k] / 255 / cols;
+    }
+    const pts = [];
+    for (let i = 0; i < nx; i++) {
+      const x = -GROUND_W / 2 + (i + 0.5) * dx;
+      const top = this.groundY(x);
+      // rows: fine just under the top edge, coarser further down
+      let y = top - 0.006;
+      let k = 0;
+      while (y > bottom) {
+        const h = k < 3 ? dx : 0.05;
+        const c = y - h / 2;
+        const depth = top - c;
+        // sunlit dust at the top, darker rock below, fading into the night
+        const f = 0.12 + 0.5 * Math.exp(-depth * 2.2);
+        pts.push([x, c, base.map((v) => Math.min(1, v * f * 1.15)), dx, h]);
+        y -= h;
+        k++;
+      }
+    }
+    const m = makeModel(pts.length);
+    pts.forEach(([x, y, col, w, h], i) => {
+      m.pos.set([x, y, this.sliceZ + 0.004], i * 3);
+      m.color.set([...col, 1], i * 4);
+      m.scale.set([w * 0.75, h * 0.66, Math.min(w, h) * 0.12], i * 3);
+      m.rot.set([0, 0, 0, 1], i * 4);
+    });
+    // the top edge: one crisp pale line along the profile
+    const rim = crispModel(
+      (c) => {
+        for (let i = 0; i < nx; i++) {
+          const x0 = -GROUND_W / 2 + i * dx;
+          const x1 = x0 + dx;
+          c.line([x0, this.groundY(x0) - 0.003, 0], [x1, this.groundY(x1) - 0.003, 0], 0.007, { color: [0.86, 0.86, 0.83] }); // prettier-ignore
+        }
+      },
+      { fine: 0.0035, coarse: 0.01 },
+    );
+    return { face: m, rim };
   }
 
   groundY(x) {
@@ -197,6 +281,8 @@ class Lander {
     this.stars = S.add(this.starModel);
     this.back = S.add(g.back);
     this.front = S.add(g.front, { fade: 0 });
+    this.cut = S.add(g.cut.face);
+    this.rim = S.add(g.cut.rim, { pos: [0, 0, this.sliceZ + 0.007] });
     this.pads = this.findPads();
     this.padSprites = [];
     for (const p of this.pads)
@@ -306,8 +392,13 @@ class Lander {
     sh.flame.pos = [sh.p[0], sh.p[1], z];
     sh.flame.quat = this.q.qaxis([0, 0, 1], sh.a);
     sh.flame.fade = sh.thrust ? 0.6 + 0.4 * Math.sin(this.t * 45) : 0;
-    // 2D shows only the slice and the ground behind it; 3D the whole patch.
+    // 2D shows only the slice; 3D the whole patch.
+    // (r3: in 2D the clean cut alone; the ground behind it, seen edge-on,
+    // drew soft gray clouds over the skyline)
     if (this.front) this.front.fade = clamp(view * 1.4, 0, 1);
+    if (this.back) this.back.fade = clamp(view * 1.6, 0, 1);
+    if (this.cut) this.cut.fade = clamp(1 - view * 1.6, 0, 1);
+    if (this.rim) this.rim.fade = clamp(1 - view * 1.6, 0, 1);
   }
 
   camera(view, aspect) {

@@ -107,6 +107,32 @@ kit-built core (`tools/fx9-dog-fill.mjs`); the dog plush stays CC BY-NC 4.0.
 | Money tree             | [Money Tree (Pachira)](https://superspl.at/scene/45d3761b)                                | Natural Ai        | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)             |
 | Knight on a horse      | [A knight with a sword and shield on a black horse](https://superspl.at/scene/2d074d8a)   | Alfred Duemlein   | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)             |
 
+### Scientific captures, round 3 (lane Photoreal r3)
+
+Ten scientific toys, added October 8, 2026 behind the labs switch. Each license was read on the
+item's live page that day. The two SuperSplat scenes were changed by `tools/pr3-prepare.mjs`
+(rotated upright, recentered, scaled and cropped: the skull's mounting rod and the putty under the
+shell). The eight museum scans (from Sketchfab, through Allen AI's Objaverse mirror on Hugging Face,
+and from the Natural History Museum Vienna's data repository) were baked into splats by
+`tools/pr3-bake.mjs`, each splat tagged with the piece it moves with (the globe's ball, the
+armillary sphere's inner rings, each Stannern stone); the armillary sphere's glass over its compass
+is left out, and the five Stannern stones are set side by side. The Stannern stones are
+NonCommercial (CC BY-NC 4.0), allowed per asset since the owner's call of October 3, 2026: they
+carry `"nc": true` in `tools/models.json`, and `node tools/nc-assets.mjs` lists them.
+
+| Toy                | Source                                                                                                                                                              | Author                                                               | License                                                         |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------- | --------------------------------------------------------------- |
+| Triceratops skull  | [Triceratops (Burke Museum)](https://superspl.at/scene/811dd9ed)                                                                                                    | Luke Shea                                                            | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)       |
+| Cone shell         | [Leopard (textile) cone shell](https://superspl.at/scene/410c2b24)                                                                                                  | Alfred Duemlein                                                      | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)       |
+| Celestial globe    | [Celestial globe](https://sketchfab.com/3d-models/celestial-globe-341fa8a777e94883841409438756f747)                                                                 | Virtual Museums of Małopolska                                        | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/)   |
+| Armillary sphere   | [Armillary sphere (1771)](https://sketchfab.com/3d-models/armillary-sphere-1771-41e23659c75241459eec6477d9e77c93)                                                   | Virtual Museums of Małopolska                                        | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)       |
+| Stannern meteorite | [Stannern meteorite (NHMW-MIN-A21, A135, A136, A139, A140)](https://datarepository.nhm-wien.ac.at/10.57756/cuqmeh)                                                  | Viola Winkler, Natural History Museum Vienna                         | [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/) |
+| Fluorite           | [Mineral: Fluorite](https://sketchfab.com/3d-models/mineral-fluorite-5ed87d4487be495aac0a86632eb3880c)                                                              | Digital Atlas of Ancient Life (Paleontological Research Institution) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/)   |
+| Ammonite           | [Ammonite mineralised with quartz and chalcedony](https://sketchfab.com/3d-models/ammonite-mineralised-with-quartz-and-chalcedony-4a8582d264a9466f87dc68cea5c28838) | Virtual Museums of Małopolska                                        | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/)   |
+| Morasko meteorite  | [“Morasko” iron meteorite](https://sketchfab.com/3d-models/morasko-iron-meteorite-37fd0d100a3246f2892ece5f8d178c06)                                                 | Virtual Museums of Małopolska                                        | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/)   |
+| Pyrite             | [Pyrite](https://sketchfab.com/3d-models/pyrite-0b7c6e8e32144b72806ed31cb49b4145)                                                                                   | Digital Atlas of Ancient Life (Paleontological Research Institution) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/)   |
+| Megalodon tooth    | [Vertebrate: Carcharocles megalodon (PRI 55188)](https://sketchfab.com/3d-models/vertebrate-carcharocles-megalodon-pri-55188-06e0bef4795840b4b21d17e5f51f3140)      | Digital Atlas of Ancient Life (Paleontological Research Institution) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/)   |
+
 ### Models from Poly Haven, turned into splats
 
 Fifteen textured 3D models from [Poly Haven](https://polyhaven.com), all CC0: Poly Haven publishes
@@ -519,6 +545,10 @@ The Picture lab (a labs toy) opens with two samples:
   September 28, 2026). Unchanged (Flickr's 1024 by 768 copy).
 
 Files and web addresses people open in the Picture lab are read in their browser and never uploaded.
+
+The Storybook is "The Little Lamp Who Wanted to See the Sea" (`assets/toys/storybook/storybook.pdf`,
+lane Hands-on H3): our own story and drawings, written for Splashery and printed with Chromium by
+`tools/hh3-storybook.mjs`.
 
 Your book opens with the Tinkerer's Manual (`manual/tinkerers-manual.pdf`, lane Manual). The photo
 album and the picture frame (labs toys, lane Books) open with these photos, each
@@ -1482,6 +1512,12 @@ September 30, 2026), decimated into three levels of detail each:
   (`assets/toys/soft-landing/terrain.json`).
 - Page Breaker: the photo sample is the Picture lab's tulip field (see "Pictures and pages"), and
   the article sample is the Picture lab's.
+- Photo Dash (lane Arcade r3, October 9, 2026): a new sample photo at random after each level, from
+  photos the site already ships: the Picture lab's tulip field (CC0 1.0, see "Pictures and pages")
+  and ten of the owner's AI-made Studio samples (see "AI-made Studio samples"): Alpine lake, Castle
+  on a lake, Canyon at sunset, Rice terraces, Paper valley, Felt farm, Fishing cove, Desert oasis,
+  Train on a viaduct and Floating islands. Each one's credit shows on the stage while it shows, the
+  AI-made ones labeled as AI-made. They are scenery for a game, never shown as real places.
 
 ## National flags
 
@@ -1614,3 +1650,7 @@ to the owner, who made them; no third-party work is in them. Checked October 7, 
 - Giant gears (D31): `assets/toys/photo-3d/ai/gears.jpg`.
 - Chess board (D40): `assets/toys/photo-3d/ai/chess.jpg`.
 - City of books (D29): `assets/toys/photo-3d/ai/book-city.jpg`.
+
+Picture QR (lane QR r4, October 10, 2026) also offers four of them as its sample pictures, labeled
+AI-made in its picker and its credit: Felt farm (D37), Glass wave (D38), Mushrooms (D27), and Stone
+arch (D17).

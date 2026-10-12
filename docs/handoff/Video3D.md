@@ -9,11 +9,10 @@ Handoff file: docs/handoff/Video3D.md.
 
 ## Brief (written by the Operator on September 30, 2026, from the owner's question and his answer that morning)
 
-The owner asked, word for word: "videos are a bunch of image frames in a sequence with perhaps an
-audio track in sync with the frames, right? So, if someone uploaded a video shot from, say, a drone
-that's flying though a city or something, couldn't we use that footage to create a 4D video (3
-spatial dimensions + time), kind of like our Photo to 3D toy, but maybe the user can move through it
-or it does that automatically or something? Can you tell me if that's possible?"
+The owner asked whether a video (frames in a sequence, perhaps with a synced audio track), such as
+drone footage flying through a city, could become a 4D video (3 spatial dimensions plus time), like
+the Photo to 3D toy, where the user moves through it or it moves automatically, and whether that is
+possible.
 
 The Operator's answer, which he approved (call 18): yes for scenes that stand still, the classic use
 of Gaussian splats. A program works out where the camera was for each frame (structure from motion),

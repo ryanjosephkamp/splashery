@@ -174,3 +174,45 @@ choices side by side:
 Level 4's gallery becomes a first-class page on the Splashery site, with many more programs. It is
 written for Codex as task 33 (docs/codex/33-program-gallery.md). It is also a test of how well Codex
 writes recipes.
+
+## The owner's answers of October 10, 2026
+
+The owner read the Operator's answers to his manual questions and approved nearly all of them for
+the manual. His notes stay private. This is the Operator's summary.
+
+- **The answers go into the manual.** Nearly everything on the answers page belongs in the manual,
+  in the manual's voice: the budgets table and what Auto does, one color per splat, the kit's
+  definition, the field and moment limits, the grammar table, and the demos (covariance, the grammar
+  reader, and the moments).
+- **A note for every choice.** Each limit says whether the format forces it or we chose it, and what
+  would change with a different choice. That includes three new questions:
+  - Could a toy have different parts?
+  - Could the equation toy have different fields?
+  - Why is each moment a part, and what else could work?
+- **The budget evidence.** The manual shows lane Sharpness's measurement (docs/lab/SHARPNESS.md:
+  140,000 against 200,000 splats on 14 toys) and what it didn't test. The Kit lab reruns it at a
+  larger scale.
+- **A smoothstep demo.** An interactive curve beside a linear ramp, and a small shape whose turn
+  uses it.
+- **What Splashery can do that other splat tools can't.** It goes in the manual now, and on the site
+  once the manual text settles. "A whole scene in a link" gets more detail: links are compressed,
+  and they carry settings, not files.
+- **Open questions in plain view.** Every choice not yet tested is listed as an open question, with
+  what an experiment would show and whether one is planned.
+- **A lighter layout.** The text is kept, but definitions, derivations and notes fold closed,
+  glossary terms pop up on hover or tap, and long tables fold away. The PDF prints everything open.
+  The owner will review it again and may adjust it.
+- **The Kit lab starts now**, smallest experiments first:
+  1. a larger budget sweep;
+  2. the Detail slider;
+  3. view-dependent color;
+  4. up to 15 moments. The 240-character fields are approved and go in the same lane. More parts, an
+     opacity field, and formulas on the graphics chip stay open.
+- **Links and short links.** A URL shortener needs a server and would store people's scenes off
+  their devices, so it isn't planned. Any change to the "no server" rule is the owner's call.
+  Shorter links without a server (a compression dictionary) and a "scene as a QR code" button are
+  possible Kit lab items.
+
+Lanes: Manual r3, part 2 (`claude/lane-manual-r3-2`, Sonnet 5.5), and Kit lab (`klab`, Opus 5.5).
+Codex task 33's gallery (#478) is reviewed by the Manual lane, and task 32 (#479) by the Photo depth
+lane.

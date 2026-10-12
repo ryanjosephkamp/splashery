@@ -3,10 +3,10 @@
 **Branch:** `codex/fluid-phone`, cut from `main`. **Output, and nothing else:**
 `docs/audits/fluid-phone-2026-10.md` and its data in `docs/audits/fluid-phone-2026-10/`.
 
-The owner, on October 3, 2026: "the Fluid Lab is still really hard for me to run on my phone … it
-starts locking up. The memory or the processor or something just can't handle it. So maybe we should
-just have instructions for that, or there's something we can do to improve that performance." This
-task measures why and proposes the fix. Lane Fluids builds it afterward.
+The owner, on October 3, 2026, reported that the Fluid Lab is still hard to run on his phone: it
+starts locking up, perhaps from memory or the processor. He suggests either instructions for that or
+a performance improvement. This task measures why and proposes the fix. Lane Fluids builds it
+afterward.
 
 ## Steps
 

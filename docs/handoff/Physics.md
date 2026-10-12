@@ -12,11 +12,10 @@ docs/handoff/Physics.md.
 
 This is step 7 of docs/ROADMAP.md, "Physics and hands-on play", which the owner approved earlier.
 Read its "Hands-on play" and "Physics" sections first: they are the design. In his review of October
-2 (docs/reviews/2026-10-02-mega-review/review.md, on branch `claude/operator-mega-review` until that
-Ops PR merges) he said this is what he most wants finished in the next one to three days: "I really
-do want to add all the interactivity and maybe, like, a little physics stuff to all the toys so that
-they're interactive." Speed matters, and so does quality: everything you ship must pass the effect
-quality rules in CLAUDE.md (real motion, solid pieces, things move like the real thing).
+2 (the Operator's summary is in docs/reviews/2026-10-02-mega-review/answers.md) he said this is what
+he most wants finished in the next one to three days: interactivity, and a little physics, in all
+the toys. Speed matters, and so does quality: everything you ship must pass the effect quality rules
+in CLAUDE.md (real motion, solid pieces, things move like the real thing).
 
 ### Part 1: the engine (claude/lane-physics-engine)
 

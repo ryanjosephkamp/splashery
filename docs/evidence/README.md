@@ -1,10 +1,9 @@
 # Evidence: how each toy shows it is correct
 
-The owner, October 4, 2026: "I need evidence for every single toy that is supposed to be accurately
-showing something that's theoretical or mathematical or an engineering object or scientific ... I do
-not want to hallucinate these things ... Anything that we find that actually isn't correct, we will
-have to improve ... in some cases you have to stretch things because you can only visualize so much
-in an appealing way, but we need to be transparent about that."
+The owner's call, October 4, 2026: every toy that is supposed to accurately show something
+theoretical, mathematical, scientific, or an engineering object needs evidence, so nothing is made
+up. Anything found to be incorrect gets improved. Where a visual has to stretch things to look
+appealing, the toy must say so plainly.
 
 Each such toy gets one file here, `docs/evidence/<toy id>.json`. The toy's own page on the site (the
 Site lanes, "a page for every toy") shows it in an "Is it right?" section. Nothing of it shows

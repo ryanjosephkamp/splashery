@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>Splashery · splats you can play with</title>
+    <meta name="google-site-verification" content="w8pbv9kWt5By4VXOGAL0XQ9GbhnJVScvrUW2_Z5m17g" />
     <meta
       name="description"
       content="Splashery is a pure-browser toy made of 3D Gaussian splats: pick a toy or make one, poke it, blow on it, paint it, drop it, dissolve it, then share it as a link, an embed, a GIF or a video."
@@ -71,7 +72,12 @@
       <div class="stage-dial-track">
         <input type="range" id="stage-dial-input" min="0" max="1" step="0.05" value="0.5" />
       </div>
-      <span id="stage-dial-label" class="stage-dial-label"></span>
+      <span
+        id="stage-dial-label"
+        class="stage-dial-label"
+        tabindex="0"
+        title="Drag to move. Arrow keys move it, Home puts it back."
+      ></span>
     </div>
     <button type="button" id="stage-dial-show" class="stage-dial-show" hidden></button>
 
@@ -385,8 +391,8 @@
       type="button"
       class="view-button ui2-only"
       aria-expanded="false"
-      title="Gallery: every toy on one page (G)"
-      aria-label="Gallery"
+      title="Playground: every toy on one page (G)"
+      aria-label="Playground"
     >
       <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
         <rect x="4" y="4" width="6.5" height="6.5" rx="1.4" fill="currentColor" />
@@ -580,10 +586,10 @@
           type="button"
           id="gallery-close"
           class="gallery-close"
-          title="Close the gallery (Escape)"
+          title="Close the Playground (Escape)"
           hidden
         >
-          Close the gallery
+          Close the Playground
         </button>
         <div
           id="sheet-handle"
@@ -816,6 +822,23 @@
                   <button type="button" data-detail="max" aria-pressed="false">Max</button>
                 </div>
               </div>
+              <label class="row" id="look-splats-row" hidden>
+                <span>Splats</span>
+                <input
+                  id="look-splats"
+                  type="range"
+                  min="60000"
+                  max="400000"
+                  step="10000"
+                  value="140000"
+                  aria-describedby="look-splats-note"
+                />
+                <output id="look-splats-value" for="look-splats">140k</output>
+              </label>
+              <p class="note" id="look-splats-note" hidden>
+                Labs: the slider sets a toy's splats directly, from 60,000 to 400,000. The nearest
+                tier sets the rest. Auto, High, or Max puts the tiers back.
+              </p>
               <p class="note">
                 Detail stays on this device and is never part of a link. High and Max draw more
                 splats at sharper resolution, which can be slow on phones.
@@ -1144,6 +1167,7 @@
               <h2 id="h-share">Link and scene file</h2>
               <div class="button-row">
                 <button id="share-link" type="button">Copy link</button>
+                <button id="share-qr" type="button" hidden>QR code</button>
                 <button id="export-json" type="button">Save JSON</button>
                 <label class="file-button">
                   <span>Load JSON</span>
@@ -1282,12 +1306,12 @@
                 </li>
                 <li class="ui2-only">
                   <b>F</b> or the focus button shows only the toy (<b>Esc</b> brings the rest back);
-                  <b>[</b> folds the panel away; <b>G</b> or the gallery button shows every toy on
-                  one page
+                  <b>[</b> folds the panel away; <b>G</b> or the Playground button shows every toy
+                  on one page
                 </li>
                 <li class="ui2-only">
                   On a phone, swipe the toy row down to hide it, and the square button fills the
-                  screen with the gallery or the settings
+                  screen with the Playground or the settings
                 </li>
                 <!-- /UI r2 -->
               </ul>

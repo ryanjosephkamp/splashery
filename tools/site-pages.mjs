@@ -13,6 +13,14 @@
 import fs from "node:fs";
 import { toyPageEntries } from "./site-toy-pages.mjs";
 
+// The front-door switch (lane Site r4). Off, the site is a preview under site/ and the Playground
+// is the front door. On, `node tools/site-build.mjs` writes the swapped layout into the repo root:
+// the site's home page at the root, the Playground at playground/, one service worker at the
+// root, redirects left in site/, and no `noindex`. Flip it only for the swap itself, on the owner's
+// word (docs/handoff/SiteR4.md, "The swap, step by step"). Without it,
+// `node tools/site-build.mjs --front-door` still stages the swapped layout in .cache/front-door/.
+export const FRONT_DOOR = false;
+
 export const SITE = {
   name: "Splashery",
   tagline: "splats you can play with",
@@ -29,19 +37,19 @@ export const SITE = {
 };
 
 // ---- Links that open in a new tab ------------------------------------------------------------
-// Every link that opens the Splashery app (the gallery, "Open in Splashery") or another site
+// Every link that opens the Splashery app (the Playground, "Open in Splashery") or another site
 // opens in a new tab, so the visitor keeps their place on the site (the owner's walkthrough,
 // October 6, 2026). Write one with appLink(); the build also runs every finished page through
 // newTabLinks(), which catches the rest (the Markdown pages, the toy pages).
 
 export const NEW_TAB = 'target="_blank" rel="noopener"';
 
-// A link to the app, written relative to site/ ("../" is the gallery), as HTML for `up` deep.
+// A link to the app, written relative to site/ ("../" is the Playground), as HTML for `up` deep.
 export const appLink = (href, html, { up = "", cls = "" } = {}) =>
   `<a${cls ? ` class="${cls}"` : ""} href="${up}${href}" ${NEW_TAB}>${html}</a>`;
 
 // Adds target="_blank" rel="noopener" to every <a> in a page that leads out of site/'s own
-// pages: a web address, or a path that climbs out of site/ into the gallery or the app (not the
+// pages: a web address, or a path that climbs out of site/ into the Playground or the app (not the
 // manual or the pictures). `up` is the prefix from the page back to site/.
 export function newTabLinks(html, up = "") {
   return html.replace(/<a\s([^>]*)>/g, (tag, attrs) => {
@@ -89,7 +97,7 @@ export const PAGES = [
     // A row of toys to start with, in this order (public toys only).
     featured: ["grape", "solar-system", "dna", "toy-piano", "chess-set", "newtons-cradle", "black-hole", "puzzle-cube", "atom", "rubber-duck", "earth", "graph-plotter"], // prettier-ignore
     doors: [
-      { nav: "toys", href: "../", label: "Toys", text: "The gallery: every toy on its shelf, ready to play.", art: ["rubber-duck", "grape", "chess-set"] }, // prettier-ignore
+      { nav: "toys", href: "../", label: "Toys", text: "The Playground: every toy on its shelf, ready to play.", art: ["rubber-duck", "grape", "chess-set"] }, // prettier-ignore
       { nav: "tools", text: "Poke, paint, magnet and clay, and ways to share what you make.", art: ["blob", "knot", "torus"] }, // prettier-ignore
       { nav: "science", text: "Atoms, planets, the body, math and computing, as toys.", art: ["atom", "saturn", "dna"] }, // prettier-ignore
       { nav: "studio", text: "Turn your own photos, pages and sounds into splats.", art: ["photo-3d", "song-landscape", "picture-frame"] }, // prettier-ignore
@@ -114,7 +122,7 @@ export const PAGES = [
     nav: "tools",
     title: "Tools",
     description: "Every Splashery tool in one place: make and convert, open your own files, scan and measure, QR codes, sound and light.", // prettier-ignore
-    lead: "Splashery is also a workshop. Each tool has its own page, and opens in the gallery, in a new tab, to work on your own things, on your device; nothing is uploaded.", // prettier-ignore
+    lead: "Splashery is also a workshop. Each tool has its own page, and opens in the Playground, in a new tab, to work on your own things, on your device; nothing is uploaded.", // prettier-ignore
     styles: ["hubs.css"],
     // Each group lists toy ids from src/toys.js (the build stops on an unknown id): the
     // toy's own picture is the drawing, `text` is the line shown, and an item with an
@@ -139,7 +147,7 @@ export const PAGES = [
         title: "Open your own files",
         text: "Pages, pictures, molecules and crystals, opened right in your browser.",
         items: [
-          { name: "Splat files", href: "../", icon: "files", open: "Open the gallery", text: "Drop a .ply, .sog, .splat or .spz file in the gallery's Toy tab to look at it, play with it and share it." }, // prettier-ignore
+          { name: "Splat files", href: "../", icon: "files", open: "Open the Playground", text: "Drop a .ply, .sog, .splat or .spz file in the Playground's Toy tab to look at it, play with it and share it." }, // prettier-ignore
           { toy: "picture-lab", text: "A PDF, a picture, a GIF or a video, drawn in splats with the figures lifted off the page." }, // prettier-ignore
           { toy: "your-book", text: "Any PDF as a book with pages that turn, curl and pop their pictures out." }, // prettier-ignore
           { toy: "photo-album", text: "A set of photos as an album: tap to turn a page, pull one over, pop a photo out." }, // prettier-ignore
@@ -190,7 +198,7 @@ export const PAGES = [
         ],
       },
     ],
-    // The tools every toy has (the gallery's toolbar), after the groups.
+    // The tools every toy has (the Playground's toolbar), after the groups.
     groups: [
       {
         title: "In every toy",
@@ -268,7 +276,7 @@ export const PAGES = [
       "lab",
     ],
     dataLead: "Some toys show published data: each splat is a real measurement, or a real structure. This is where each comes from.", // prettier-ignore
-    dataNote: "The other science toys are built from recipes written for Splashery; each toy's About tab, in the gallery, says what it simplifies.", // prettier-ignore
+    dataNote: "The other science toys are built from recipes written for Splashery; each toy's About tab, in the Playground, says what it simplifies.", // prettier-ignore
     evidenceLead: "Every toy that claims to show something true about the world is meant to have an evidence file: what it claims, how the code does it, the sources, and where it simplifies. How they work is written up in @@, and each toy's own page shows its file.", // prettier-ignore
     // One row per dataset: the toys that show it, what it shows, and its sources and licenses.
     datasets: [
@@ -362,11 +370,13 @@ export const PAGES = [
     cards: [
       { main: true, icon: "book", href: "../manual/", title: "The Tinkerer's Manual", text: "How to program splats, from the math of one splat to your own equations, toys and pictures. Start here if you want to make something.", also: [{ href: "../manual/tinkerers-manual.pdf", label: "Download the PDF" }] }, // prettier-ignore
       { icon: "splat", href: "learn/splats/", title: "How 3D Gaussian splats work", text: "A soft colored blob, hundreds of thousands of them, sorted and blended: what a splat is and what a recipe is, with small drawings." }, // prettier-ignore
+      { icon: "splat", href: "learn/can-do/", title: "What Splashery can do", text: "Everything on the site today, which parts are behind the labs switch, and what other splat tools don't do, as far as we know." }, // prettier-ignore
       { icon: "notebook", href: "learn/notebook/", title: "The lab notebook", text: "What each lane built, which model built it, and what the team learned along the way." }, // prettier-ignore
       { icon: "made", href: "learn/made/", title: "How Splashery is made", text: "Lanes, the Operator, the reviews and the rules, in plain words." }, // prettier-ignore
       { icon: "share", href: "share/", title: "Embed and share", text: "Put a toy on your own page, and how a scene link carries a toy and its settings." }, // prettier-ignore
     ],
     links: [
+      { href: "../manual/toy.html#splat-count", label: "How many splats? What a bigger budget does", text: "The Kit lab's table: 140,000 against 200,000 splats on 24 views, and what changed in edges, speckle, and shimmer." }, // prettier-ignore
       { href: "learn/recipes/", label: "Writing toy recipes", text: "How a toy's recipe says which parts move, and how." }, // prettier-ignore
       { href: "learn/scene-format/", label: "The scene format", text: "What a shared link or a saved scene holds." }, // prettier-ignore
       { href: "learn/evidence/", label: "Is it right? The evidence files", text: "How each toy that claims to show something true is checked against its sources." }, // prettier-ignore
@@ -381,6 +391,17 @@ export const PAGES = [
     description: "What a 3D Gaussian splat is, how hundreds of thousands of them are sorted and blended into a picture, and what a toy recipe is.", // prettier-ignore
     lead: "A soft colored blob, a lot of them, and a recipe: the whole idea, with pictures.",
     styles: ["hubs.css"],
+  },
+  {
+    path: "learn/can-do/",
+    type: "article",
+    article: "can",
+    nav: "learn",
+    title: "What Splashery can do",
+    description: "Everything Splashery does today, which parts are behind the labs switch, and what other 3D Gaussian splat tools don't do, as far as we know.", // prettier-ignore
+    lead: "What is on the site now, what is still in labs, and what is different about it.",
+    styles: ["hubs.css"],
+    outline: true,
   },
   {
     path: "learn/made/",
@@ -427,10 +448,9 @@ export const PAGES = [
     type: "news",
     nav: "new",
     title: "What's new",
-    description: "What changed in Splashery, day by day, in plain words, with every merged change listed underneath.", // prettier-ignore
-    lead: "What changed, day by day, in plain words. Under each day is the full list of merged changes.", // prettier-ignore
+    description: "The newest toys on Splashery, with the day each arrived, new features and fixes shown before and after.", // prettier-ignore
+    lead: "The newest toys, what's new in how Splashery works, and fixes you can see, newest first.", // prettier-ignore
     styles: ["hubs.css"],
-    count: 700,
   },
   {
     path: "about/",

@@ -7,15 +7,14 @@ player.js, ui.js or kit.js. Lane record "Fix7" on Effect review page 2. How lane
 
 ## Brief
 
-Written by the Operator on October 2, 2026, from the owner's review of that day, word for word:
+Written by the Operator on October 2, 2026, from the owner's review of that day (his notes are
+private; this brief is the Operator's summary):
 
-The owner went through every toy on the preview build on October 2. His review, word for word, is
-docs/reviews/2026-10-02-mega-review/review.md (on branch `claude/operator-mega-review` until that
-Ops PR merges), with three screenshots there: `burger-bun.jpg`, `splat-equation-seam.jpg` and
-`thermal-ellipsoids.jpg`. Read his words for each item below before you start it. Sounds go to lane
-Sound C, sharpness and hollow bases to a later Sharpness lane, and hands-on physics (stretching,
-stacking, picking up) to lane Physics: don't do those here, but if a fix of yours changes what a toy
-sounds or looks like, say so.
+The owner went through every toy on the preview build on October 2. His notes and his three
+screenshots (a burger bun, a splat equation seam, and thermal ellipsoids) are not in the repo; the
+items below are the Operator's summary of each. Sounds go to lane Sound C, sharpness and hollow
+bases to a later Sharpness lane, and hands-on physics (stretching, stacking, picking up) to lane
+Physics: don't do those here, but if a fix of yours changes what a toy sounds or looks like, say so.
 
 ### Part 1: taps where you tap, and pauses that make sense (claude/lane-fix7-1, first)
 
@@ -31,8 +30,8 @@ sounds or looks like, say so.
    or nothing). The diya can stay as it is.
 6. **puzzle-cube**: pausing mid-scramble lets the turn in progress finish, then pauses, so the cube
    is in a turnable state. A move of the person's own then ends the automatic scramble, and the next
-   tap starts a new one from that state. His words: "if you're in the middle of a turn, you really
-   can't make any other moves with the cube."
+   tap starts a new one from that state. His call: in the middle of a turn, you really can't make
+   any other moves with the cube.
 7. **gaussian-splatting**, one-splat view: hard to start; you have to tap its exact center. A tap
    anywhere on the toy starts it. Also check what the one-splat animation shows: if it doesn't map
    to a real step of training, make it map (for example one splat's position, size, rotation,

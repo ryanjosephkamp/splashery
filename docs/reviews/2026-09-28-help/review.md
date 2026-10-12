@@ -2,9 +2,7 @@
 
 On the Help Board (https://claude.ai/artifact/P1NCWsGRE3MFqYTWTnTuqN), in chat, word for word:
 
-> Thank you for your help. Rather than making the artifact myself, I'll just tell you that all
-> existing how-to lines read well and are fully approved. Please update the artifact accordingly and
-> proceed. Thank you.
+> (The owner approved every existing how-to line in chat; his message stays private.)
 
 What the Operator did: the board as he read it (built at 04:32 UTC from both text lanes' branches)
 had 247 how-to lines of the toys' own. Each got his mark `howTo: "good"` on the board, with the text
@@ -15,9 +13,7 @@ board now has a separate mark for the how-to line and the About text of each toy
 
 Word for word:
 
-> The help texts, etc. in the artifact are all fully approved. Thank you for your help. Please
-> update everything accordingly and let me know what and when to merge and in which order, and I'll
-> do it. Thank you.
+> (The owner approved all the help texts in chat; his message stays private.)
 
 What the Operator did: every toy on the board (303) got `about: "good"` with its text, and the 55
 how-to lines added since the first approval got `howTo: "good"`. The one line not on the board when

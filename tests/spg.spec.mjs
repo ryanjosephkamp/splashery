@@ -128,11 +128,10 @@ test.describe("site pages", () => {
     ).toBeVisible();
   });
 
-  test("What's new has a plain summary per day above the list of changes", async ({ page }) => {
-    const news = JSON.parse(fs.readFileSync("tools/site-news.json", "utf8")).days;
+  test("What's new has a plain card per feature and no operational wording", async ({ page }) => {
+    const news = JSON.parse(fs.readFileSync("tools/site-news.json", "utf8")).features;
     await page.goto("/site/new/");
-    expect(await page.locator(".news-day .news-title").count()).toBeGreaterThanOrEqual(news.length);
-    await expect(page.locator(".pr-list").first()).toBeVisible();
+    expect(await page.locator(".news-feature h3").count()).toBeGreaterThanOrEqual(news.length);
     await expect(page.locator("main")).not.toContainText(/Phase [A-Z]/);
   });
 

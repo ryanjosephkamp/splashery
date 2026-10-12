@@ -6,7 +6,7 @@
     <title>Picture QR · Splashery</title>
     <meta
       name="description"
-      content="Picture QR, a Splashery toy made of 3D Gaussian splats: Pick a picture or open your own, then tap to turn the tiles over."
+      content="A QR code reader decides each module from a sample at its center, so the rest of a module can carry a picture."
     />
     <meta name="robots" content="noindex" />
     <link rel="canonical" href="https://ryanjosephkamp.github.io/splashery/site/toys/qr-picture/" />
@@ -15,7 +15,7 @@
     <meta property="og:title" content="Picture QR · Splashery" />
     <meta
       property="og:description"
-      content="Picture QR, a Splashery toy made of 3D Gaussian splats: Pick a picture or open your own, then tap to turn the tiles over."
+      content="A QR code reader decides each module from a sample at its center, so the rest of a module can carry a picture."
     />
     <meta
       property="og:url"
@@ -151,19 +151,26 @@
           <div class="toy-head">
             <h1>Picture QR <span class="badge">labs</span></h1>
             <p class="lead how-to">
-              Pick a picture or open your own, then tap to turn the tiles over.
+              Pick a picture or open your own, then tap to send a ripple through it.
             </p>
             <dl class="does">
               <div>
                 <dt>Tap</dt>
                 <dd>
-                  Picture QR: a photo woven into a QR code as a halftone (each module's center keeps
-                  its bit, the rest carries the picture).
+                  Picture QR: a photo woven into a QR code as a real halftone (lane QR r4: 3 x 3
+                  cells a module, the middle keeps the bit; error diffusion over the whole grid, the
+                  forced cells passing their error on; a nudge only where a module would misread;
+                  the mask that fits the picture; a bigger code for more detail; a color halftone in
+                  the color style; one seamless grid of splats).
                 </dd>
               </div>
               <div>
                 <dt>Sound</dt>
-                <dd>A soft breath with a run of light wooden clicks as the tiles turn.</dd>
+                <dd>A soft breath with a run of light wooden clicks as the tiles lift and fall.</dd>
+              </div>
+              <div>
+                <dt>Arrived</dt>
+                <dd><time datetime="2026-10-06">October 6, 2026</time></dd>
               </div>
             </dl>
             <p class="actions">
@@ -172,7 +179,7 @@
                 href="../../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InFyLXBpY3R1cmUifSwiY2FtZXJhIjp7InlhdyI6MCwicGl0Y2giOjAsInJvbGwiOjAsImRpc3RhbmNlIjozLjR9fQ"
                 target="_blank"
                 rel="noopener"
-                >Open in the gallery<svg
+                >Open in the Playground<svg
                   class="arrow"
                   viewBox="0 0 16 16"
                   width="16"
@@ -215,14 +222,17 @@
           <p>
             A QR code reader decides each module from a sample at its center, so the rest of a
             module can carry a picture. Here every module keeps its bit in a dot at its middle, and
-            the picture fills the rest, darkened in dark modules and lightened in light ones. The
-            eyes, the timing lines and the format information stay plain, so a reader still finds
-            the code.
+            the rest is a halftone of the picture: small dark and light dots, spread by error
+            diffusion so they average out to the picture's tones. Only where a module would read
+            wrong do a few of its dots take its color. The eyes, the timing lines, and the format
+            information stay plain, so a reader still finds the code.
           </p>
           <p>
-            The toy measures the contrast and reads its own code at phone size and smaller. If it
-            won't scan, Make it scan finds the closest version that does: more contrast, a bigger
-            center dot or a higher error correction level. Your picture never leaves your device.
+            The toy picks the mask that fits the picture best, reads its own code at phone size and
+            smaller, and nudges a few more dots until it scans. A bigger code size shows more
+            detail. If it still won't scan, Make it scan finds the closest version that does: more
+            contrast, a bigger center dot, or a higher error correction level. Your picture never
+            leaves your device.
           </p>
         </section>
 
@@ -238,6 +248,13 @@
             >.
           </p>
           <ul class="toy-credits">
+            <li>
+              <b>Picture QR</b>:
+              <a href="../../about/credits/"
+                >Felt farm (AI-made): an AI-made sample picture (D37)</a
+              >
+              by Ryan, the owner of Splashery (made with an AI image tool), AI-made by the owner.
+            </li>
             <li>
               <b>Picture QR</b>:
               <a
@@ -558,7 +575,7 @@ https://ryanjosephkamp.github.io/splashery/site/toys/qr-picture/</textarea
         <nav aria-label="More">
           <h2>More</h2>
           <ul>
-            <li><a href="../../../" target="_blank" rel="noopener">The gallery</a></li>
+            <li><a href="../../../" target="_blank" rel="noopener">The Playground</a></li>
             <li><a href="../../search/">Search</a></li>
             <li><a href="../../../manual/">The Tinkerer's Manual</a></li>
             <li>
@@ -578,7 +595,7 @@ https://ryanjosephkamp.github.io/splashery/site/toys/qr-picture/</textarea
         Made by <a href="../../about/contact/">Ryan Kamp</a>. Code under the MIT license; each toy's
         assets keep their own licenses. Built on the PlayCanvas engine. This is a preview of
         Splashery's new site; the toys live in
-        <a href="../../../" target="_blank" rel="noopener">the gallery</a>.
+        <a href="../../../" target="_blank" rel="noopener">the Playground</a>.
       </p>
     </footer>
   </body>

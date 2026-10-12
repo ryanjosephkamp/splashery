@@ -3,7 +3,13 @@
 // the engine directly lives here or in paint.js / loaders.js.
 
 import * as pc from "./pc.js";
-import { MODIFIER, MODIFIER_KIT, MODIFIER_KIT_PHOTO, MODIFIER_RIG } from "./effects.js";
+import {
+  MODIFIER,
+  MODIFIER_KIT,
+  MODIFIER_KIT_PHOTO,
+  MODIFIER_KIT_GLOSS,
+  MODIFIER_RIG,
+} from "./effects.js";
 import { photoRender, withPhotoPS } from "./photo-splats.js"; // lane Photo fidelity
 import { kernelChunks, normalizeKernel } from "./kernels.js";
 
@@ -59,6 +65,17 @@ export class Stage {
   constructor(canvas, device, { weak = false, pixelRatio = 2, adaptive = true } = {}) {
     this.canvas = canvas;
     this.device = device;
+    // Fix11: on WebGPU the engine sends its command encoder before it uploads a texture's data,
+    // and a texture first needed inside a render pass (its own fallback for an unset sampler, made
+    // on first use) was uploaded there: the open pass was cut off and the frame's command buffer
+    // was invalid (phf-engine:260). Inside a pass the send now waits for the frame's own; the
+    // upload goes through the queue as before.
+    if (device.isWebGPU) {
+      const submit = device.submit.bind(device);
+      device.submit = () => {
+        if (!device.insideRenderPass) submit();
+      };
+    }
     this.weak = weak;
     this.pixelCap = pixelRatio;
     this.adaptive = adaptive;
@@ -125,7 +142,7 @@ export class Stage {
       if (this.captureWaiters.length) {
         const waiters = this.captureWaiters;
         this.captureWaiters = [];
-        for (const w of waiters) w(this.copyCanvas(w.width, w.height));
+        for (const w of waiters) w(w.bare ? null : this.copyCanvas(w.width, w.height));
       }
     });
 
@@ -325,8 +342,10 @@ export class Stage {
   // a captured toy with moving parts (a splatPart stream, see src/rig.js).
   // Lab: `modifier` ({ glsl, wgsl }) replaces a kit toy's work-buffer program
   // (a splat field computed on the GPU every frame, src/packs/lab.js).
+  // Lane Kit lab: `gloss` ({ strength, sharpness }, labs only) gives a kit
+  // toy a highlight that moves with the view (MODIFIER_KIT_GLOSS).
   // prettier-ignore
-  setToy({ resource, asset = null, owned = false, transform = null, kit = false, rig = false, modifier = null, photo = false }) {
+  setToy({ resource, asset = null, owned = false, transform = null, kit = false, rig = false, modifier = null, photo = false, gloss = null }) {
     this.clearToy();
     if (!photo) this.setPhoto(false); // lane Photo fidelity: only a photo toy keeps it on
     const entity = new pc.Entity("toy");
@@ -362,14 +381,16 @@ export class Stage {
       }
     }
     const photoOn = photo && kit && !modifier && !!this.photo; // lane Photo fidelity
-    entity.gsplat.setWorkBufferModifier(modifier || (photoOn ? MODIFIER_KIT_PHOTO : kit ? MODIFIER_KIT : rig ? MODIFIER_RIG : MODIFIER)); // prettier-ignore
+    const glossOn = !!gloss && kit && !modifier && !photoOn; // lane Kit lab
+    entity.gsplat.setWorkBufferModifier(modifier || (photoOn ? MODIFIER_KIT_PHOTO : glossOn ? MODIFIER_KIT_GLOSS : kit ? MODIFIER_KIT : rig ? MODIFIER_RIG : MODIFIER)); // prettier-ignore
+    if (glossOn) entity.gsplat.setParameter("uSpGloss", [gloss.strength, gloss.sharpness, 0, 0]);
     entity.gsplat.workBufferUpdate = pc.WORKBUFFER_UPDATE_ALWAYS;
     // The pattern sampler always needs a texture, even with no pattern on
     // (and kit toys' screen sampler too).
     entity.gsplat.setParameter("uSpPattern", this.blankTexture());
     if (kit) entity.gsplat.setParameter("uSpScreen", this.blankTexture());
     this.app.root.addChild(entity);
-    this.toy = { entity, resource, asset, owned, kit, rig, photo: photoOn };
+    this.toy = { entity, resource, asset, owned, kit, rig, photo: photoOn, gloss: glossOn };
     this.requestRender();
     return this.toy;
   }
@@ -732,7 +753,8 @@ export class Stage {
   }
 
   photoTexture() {
-    this.photoTex ||= new pc.Texture(this.device, {
+    if (this.photoTex) return this.photoTex;
+    this.photoTex = new pc.Texture(this.device, {
       name: "splashery-photo",
       width: 4,
       height: 4,
@@ -743,6 +765,11 @@ export class Stage {
       addressU: pc.ADDRESS_CLAMP_TO_EDGE,
       addressV: pc.ADDRESS_CLAMP_TO_EDGE,
     });
+    // Fix11: made on the GPU now, outside any frame. Left for its first use, a frame that drew the
+    // photo toy before the photo's own upload (setPhotoSource waits for a microtask) made it inside
+    // the work-buffer pass, and on WebGPU its mipmaps' passes broke that frame's command buffer.
+    this.photoTex.upload();
+    if (this.device.isWebGPU) this.device.submit();
     return this.photoTex;
   }
 
@@ -917,6 +944,94 @@ export class Stage {
     });
   }
 
+  // Engine (QR r4): a still of the current frame over the canvas while an
+  // export renders at a fixed size, so the stretched square never shows.
+  // Calls nest (a later call waits for the first still); the last uncover
+  // removes the still after the canvas has drawn a few frames at its own size
+  // again. label (the owner's note of October 9, 2026): a short message on
+  // the still, such as "Please wait. Scanning code…", so the pause reads as
+  // work, not a freeze.
+  cover({ label = "" } = {}) {
+    this.coverDepth = (this.coverDepth || 0) + 1;
+    if (label) this.coverLabel = label;
+    if (this.coverDepth > 1) {
+      this.labelCover();
+      return this.coverReady || Promise.resolve();
+    }
+    if (this.fixedSize) return Promise.resolve();
+    this.coverReady = this.captureFrame().then((shot) => {
+      if (!this.coverDepth || this.coverEl) return;
+      const r = this.canvas.getBoundingClientRect();
+      shot.className = "stage-cover";
+      shot.setAttribute("aria-hidden", "true");
+      Object.assign(shot.style, {
+        position: "fixed",
+        left: `${r.left}px`,
+        top: `${r.top}px`,
+        width: `${r.width}px`,
+        height: `${r.height}px`,
+        pointerEvents: "none",
+        zIndex: getComputedStyle(this.canvas).zIndex,
+      });
+      this.canvas.after(shot);
+      this.coverEl = shot;
+      this.labelCover();
+    });
+    return this.coverReady;
+  }
+
+  // Draws the cover's label: white text on a dark, rounded band in the middle
+  // of the still (drawn on a fresh copy of the still each time it changes).
+  labelCover() {
+    const el = this.coverEl;
+    const text = this.coverLabel;
+    if (!el || !text || el.dataset.label === text) return;
+    if (!this.coverBase) {
+      this.coverBase = document.createElement("canvas");
+      this.coverBase.width = el.width;
+      this.coverBase.height = el.height;
+      this.coverBase.getContext("2d").drawImage(el, 0, 0);
+    }
+    const g = el.getContext("2d");
+    g.clearRect(0, 0, el.width, el.height);
+    g.drawImage(this.coverBase, 0, 0);
+    // The size the text shows at on screen, whatever the drawing buffer's.
+    const k = el.width / Math.max(1, el.getBoundingClientRect().width || el.width);
+    const px = Math.round(16 * k);
+    g.font = `600 ${px}px system-ui, -apple-system, "Segoe UI", sans-serif`;
+    const w = g.measureText(text).width + px * 1.6;
+    const h = px * 2.2;
+    const x = (el.width - w) / 2;
+    const y = (el.height - h) / 2;
+    g.fillStyle = "rgba(17, 20, 26, 0.82)";
+    g.beginPath();
+    g.roundRect(x, y, w, h, h / 2);
+    g.fill();
+    g.fillStyle = "#ffffff";
+    g.textAlign = "center";
+    g.textBaseline = "middle";
+    g.fillText(text, el.width / 2, el.height / 2);
+    el.dataset.label = text;
+  }
+
+  async uncover(frames = 3) {
+    if (!this.coverDepth) return;
+    if (--this.coverDepth > 0) return;
+    for (let i = 0; i < frames && !this.coverDepth; i++) {
+      await new Promise((resolve) => {
+        resolve.bare = true;
+        this.captureWaiters.push(resolve);
+        this.requestRender();
+      });
+    }
+    if (this.coverDepth) return;
+    this.coverEl?.remove();
+    this.coverEl = null;
+    this.coverBase = null;
+    this.coverLabel = "";
+    this.coverReady = null;
+  }
+
   copyCanvas(width, height) {
     const src = this.canvas;
     const out = document.createElement("canvas");
@@ -929,6 +1044,7 @@ export class Stage {
 
   destroy() {
     clearTimeout(this.restoreTimer);
+    this.coverEl?.remove();
     this.resizeObserver.disconnect();
     this.clearToy();
     this.buryToys(true);

@@ -114,10 +114,9 @@ longer wait is the owner's call (For the Operator).
 ### Brief (written by the Operator on October 8, 2026, from the owner's note)
 
 The owner, on Moving photo to 3D with his own 29-second phone screen recording (1056x2178, a feed
-scrolled at a normal pace): "Structurally, it looks extremely cool. But the detail is just not
-there. It's too blurry. I can't read any of the text. If I pause the effect, I can't read any of
-it." He wants a big push on Photo to 3D and Moving photo to 3D sharpness, and to know what the input
-has to be for it to work.
+scrolled at a normal pace): structurally it looks extremely cool, but the detail is not there. It is
+too blurry to read any of the text, even with the effect paused. He wants a big push on Photo to 3D
+and Moving photo to 3D sharpness, and to know what the input has to be for it to work.
 
 What limits them today (check each in the code; the Operator found these): Moving photo keeps each
 frame at CLIP_AREAS (60k to 230k pixels, so his 2.3-megapixel frames are cut to about a tenth), the

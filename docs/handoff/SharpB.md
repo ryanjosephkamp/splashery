@@ -7,18 +7,17 @@ and closed bases". How lanes work: [OPERATING.md](../OPERATING.md).
 
 (Written by the Operator on October 2, 2026, from the owner's review of that day)
 
-On October 2 the owner went through every toy on the preview build
-(docs/reviews/2026-10-02-mega-review/review.md, word for word). He keeps saying the same thing about
-many toys: "a little grainy", "could be sharper", and, turning toys over, that some have hollow or
-see-through bottoms. He wants all of it fixed before the team moves on, and he approved this second
-sharpness lane. Lane Sharpness A (#172, docs/handoff/SharpA.md) is doing the landmarks, vehicles,
-Medieval, Open me, gems, space and weather now: read its handoff and PR for what worked, plus
-PACKS.md section 7c ("Sharp kit toys"), docs/handoff/Sharpness.md, FidelityA.md and FidelityB.md.
-The materials rule applies: real-looking materials, no see-through solids, no blur, no speckle. Keep
-every toy's shape, effect, sound and splat budget per tier; only the look gets sharper (and the
-bases closed).
+On October 2 the owner went through every toy on the preview build (the owner's notes are private;
+the Operator's summary is in the brief). He keeps saying the same thing about many toys: "a little
+grainy", "could be sharper", and, turning toys over, that some have hollow or see-through bottoms.
+He wants all of it fixed before the team moves on, and he approved this second sharpness lane. Lane
+Sharpness A (#172, docs/handoff/SharpA.md) is doing the landmarks, vehicles, Medieval, Open me,
+gems, space and weather now: read its handoff and PR for what worked, plus PACKS.md section 7c
+("Sharp kit toys"), docs/handoff/Sharpness.md, FidelityA.md and FidelityB.md. The materials rule
+applies: real-looking materials, no see-through solids, no blur, no speckle. Keep every toy's shape,
+effect, sound and splat budget per tier; only the look gets sharper (and the bases closed).
 
-### Part 1: sharper (his words in brackets; read his full note for each in the review)
+### Part 1: sharper (the Operator's summary of his notes in brackets)
 
 - Food: birthday-cake ("sharper overall: the icing on the sides, the plate, everything"), popcorn
   (the bucket "a little sharper"), pancakes (the plate and the whole toy), croissant ("especially

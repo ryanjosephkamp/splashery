@@ -130,9 +130,9 @@ need player/ui/app/kit changes: small, additive "Engine: …" PR, merged first) 
 your handoff file current (add an "## Brief r3" section with this text). These toys are behind the
 labs switch, so the Operator merges after the full test run; still post clips for the owner.
 
-The owner reviewed your toys on October 2 (docs/reviews/2026-10-02-mega-review/review.md, lines 686
-to 770 and 870 to 892: read his words first). He loved them ("might also be one of the coolest
-things that we've made so far"). He accepted this round:
+The owner reviewed your toys on October 2 (his notes are private; the Operator's summary is in this
+brief). He loved them, calling them possibly among the coolest things made so far. He accepted this
+round:
 
 **Song landscape**
 

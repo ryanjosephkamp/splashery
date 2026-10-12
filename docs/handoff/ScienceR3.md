@@ -10,20 +10,20 @@ r3: more crystals, microscopes and galaxies". Handoff file: docs/handoff/Science
 
 ### Brief (written by the Operator on October 4, 2026, from the owner's push notes that evening)
 
-On the Push Plan the owner marked S17 "100%. ... This could be a primary or a major focus of our
-push" (docs/reviews/2026-10-04-push-alignment/notes.md, from "So for this one, I'm going to go
-through these"). The Science shelf shows data whose natural form is already a set of Gaussians.
-Today it has two thermal-ellipsoid structures (aspirin form II, COD 2104857; crambin, PDB 1EJG), two
-super-resolution microscopy sets (ShareLoc.XYZ on Zenodo, CC BY 4.0) and one galaxy (FIRE-2 m12i,
-300,000 gas particles, CC BY 4.0); see `src/packs/science.js` 79-100, 420-444 and 783, and
-docs/handoff/Science.md. Also read docs/audits/new-sources-2026-10.md (the Dot's sources report).
+On the Push Plan the owner marked S17 a full yes and a possible primary or major focus of the push
+(his notes are private). The Science shelf shows data whose natural form is already a set of
+Gaussians. Today it has two thermal-ellipsoid structures (aspirin form II, COD 2104857; crambin, PDB
+1EJG), two super-resolution microscopy sets (ShareLoc.XYZ on Zenodo, CC BY 4.0) and one galaxy
+(FIRE-2 m12i, 300,000 gas particles, CC BY 4.0); see `src/packs/science.js` 79-100, 420-444 and 783,
+and docs/handoff/Science.md. Also read docs/audits/new-sources-2026-10.md (the Dot's sources
+report).
 
-1. **Many more thermal-ellipsoid structures** (he: "maybe we can add more structures by default ...
-   we could maybe add quite a number"). Fifteen to twenty-five, grouped in the picker (everyday
-   molecules, medicines, minerals and gems, ice and salts, proteins at atomic resolution, DNA). Each
-   must carry real anisotropic displacement parameters: CIFs with `_atom_site_aniso_U` from the
-   Crystallography Open Database (public domain) and PDB entries with ANISOU records at atomic
-   resolution (CC0). Keep the person's own file upload as it is.
+1. **Many more thermal-ellipsoid structures** (he suggested adding quite a number of structures by
+   default). Fifteen to twenty-five, grouped in the picker (everyday molecules, medicines, minerals
+   and gems, ice and salts, proteins at atomic resolution, DNA). Each must carry real anisotropic
+   displacement parameters: CIFs with `_atom_site_aniso_U` from the Crystallography Open Database
+   (public domain) and PDB entries with ANISOU records at atomic resolution (CC0). Keep the person's
+   own file upload as it is.
 2. **More microscopy.** Three to six more single-molecule localization sets from ShareLoc.XYZ or
    other CC BY or CC0 sources (nuclear pores, actin, mitochondria, DNA origami, 3D sets), and a new
    **cryo-EM** toy: a density map from EMDB (CC0) turned into Gaussians (a ribosome, apoferritin, a
@@ -32,11 +32,11 @@ docs/handoff/Science.md. Also read docs/audits/new-sources-2026-10.md (the Dot's
 3. **Galaxies, and a telescope.** More galaxies in Galaxy in a box: other FIRE-2 halos on FlatHub
    (check each license), and if the licenses allow, a merger, a dwarf and an elliptical from other
    open simulations (read their terms; "free with citation" is a question for the Operator). A
-   telescope view (he: "a telescope type of effect"): the galaxy seen as through a telescope, with
-   its point spread, filters and exposure building up, told plainly as a simulation.
-4. **More "in a box"** (he likes the concept: "terrain ... fire, like a wildfire ... wind in a
-   box"). Propose three, with the data each needs and its license; build one if time allows (the
-   Operator may give the rest to a later lane).
+   telescope view (a telescope-type effect): the galaxy seen as through a telescope, with its point
+   spread, filters and exposure building up, told plainly as a simulation.
+4. **More "in a box"** (he likes the concept: terrain, fire such as a wildfire, wind). Propose
+   three, with the data each needs and its license; build one if time allows (the Operator may give
+   the rest to a later lane).
 
 Every dataset: only CC0, CC BY, CC BY-SA, CC BY-NC (with `"nc": true`), CC BY-NC-SA or public
 domain, read on its live page, and credited beside the toy. Scientific claims are shown with their
@@ -123,13 +123,13 @@ choices in a toy's select options", needed by the structure picker; merge it fir
   Screenshots `tests/screenshots/sci3-*-390x844.png` and `…-1440x900.png`.
 
 - October 5, 2026, 04:10 UTC, the owner's first marks: `sci3-molecules` good. `sci3-cryoem-*` (all
-  three): "outstanding ... cool as hell", "make it sharper, and keep iterating"; `sci3-minerals`:
-  "keep enhancing this and making it sharper"; `sci3-dna`: "virtually perfect ... could you add even
-  more molecules?". Done in r2 (commit 81523da7): the cryo-EM map draws more, smaller, flatter
-  splats with ambient occlusion (Tenengrad 172 → 216, 179 → 232), and 13 more structures (38 in
-  seven groups, with Molecules of life and DNA and RNA). The r2 clips render at 2× (780 × 1688), as
-  r2 of lane Science found sharper on the phone. Posted October 5, 05:30 UTC: `sci3-cryoem-*-r2`,
-  `sci3-minerals-r2`, `sci3-dna-r2` (replacing their cards) and `sci3-life` (new).
+  three): outstanding, but make them sharper and keep iterating; `sci3-minerals`: keep enhancing and
+  sharpening; `sci3-dna`: virtually perfect, and add even more molecules. Done in r2 (commit
+  81523da7): the cryo-EM map draws more, smaller, flatter splats with ambient occlusion (Tenengrad
+  172 → 216, 179 → 232), and 13 more structures (38 in seven groups, with Molecules of life and DNA
+  and RNA). The r2 clips render at 2× (780 × 1688), as r2 of lane Science found sharper on the
+  phone. Posted October 5, 05:30 UTC: `sci3-cryoem-*-r2`, `sci3-minerals-r2`, `sci3-dna-r2`
+  (replacing their cards) and `sci3-life` (new).
 
 - October 5, 2026, 05:28 UTC, more marks: good: `sci3-contour-lab`, `sci3-galaxies`,
   `sci3-microscope-pores`, `sci3-microscope-sets`, `sci3-terrain`, `sci3-terrain-helens`; "good, but

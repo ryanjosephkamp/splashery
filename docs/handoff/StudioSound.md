@@ -8,11 +8,10 @@ and the Chladni plate". How lanes work: [OPERATING.md](../OPERATING.md).
 Written by the Operator on September 29, 2026, from the owner's note "big new Splashery ideas" and
 his answers on the Splashery Universe page the same night.
 
-The owner's words: "Maybe they could upload a song or some audio and we'll be able to see, like, the
-wavelengths and frequency or something like the audio sounds and it will actually be accurate. But,
-like, some 2D or 3D visualization." His answer: the Studio (splats from anything) starts with "Sound
-and music (song landscape, Chladni plate)", built by Sonnet 5.5, behind the labs switch, on a new
-Studio section.
+The owner's call: people could upload a song or some audio and see the wavelengths and frequency, or
+something like what the audio sounds like, accurately, as a 2D or 3D visualization. His answer: the
+Studio (splats from anything) starts with "Sound and music (song landscape, Chladni plate)", built
+by Sonnet 5.5, behind the labs switch, on a new Studio section.
 
 Build two labs toys (`labs: true`) on a new shelf, **Studio** (category id `studio`, label
 "Studio"). Add the shelf to the categories in src/toys.js, placed after "Pictures and pages".
@@ -80,11 +79,11 @@ Started September 29, 2026. Both toys are finished and on PR #80 (with the engin
 - Song landscape: real spectrogram (each tap plays or pauses; a song that ends resets, so the next
   tap plays it again), open your own song (Toy tab), the tap plays it through the speaker button,
   the marker and the view glide along the time axis, waveform along the left edge.
-- The owner's mark (September 29): all three cards "fix", "Looks great. Can we increase the
-  resolution? ... the toy seems grainy." It was the toys, not the GIFs: the plate top and the floor
-  were grids of dots and the landscape's splats left gaps. Fixed with solid sheets of overlapping
-  flat discs (`sheet()` in `src/packs/studio.js`), 2.5 times the sand grains (recipe density 2,
-  still within the tier caps), overlapping landscape splats and 40 slices a second. r2 cards and
+- The owner's mark (September 29): all three cards "fix": they look great, but can the resolution go
+  up, since the toy seems grainy. It was the toys, not the GIFs: the plate top and the floor were
+  grids of dots and the landscape's splats left gaps. Fixed with solid sheets of overlapping flat
+  discs (`sheet()` in `src/packs/studio.js`), 2.5 times the sand grains (recipe density 2, still
+  within the tier caps), overlapping landscape splats and 40 slices a second. r2 cards and
   full-resolution stills are posted; the old cards are marked replaced.
 - Cards (lane StudioSound): `sts-chladni-r2`, `sts-chladni-mode2-r2`, `sts-song-r2`, `sts-song-own`,
   and the stills `sts-chladni-still`, `sts-chladni-mode2-still`, `sts-song-still`.

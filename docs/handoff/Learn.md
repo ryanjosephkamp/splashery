@@ -13,11 +13,10 @@ file: docs/handoff/Learn.md.
 (Written by the Operator on September 29, 2026, from the owner's note "big new Splashery ideas" and
 his answers on the Splashery Universe page the same night)
 
-The owner's words: "We can, you know, continue to build the Tinker's operator manual, make it very
-comprehensive and complete, you know, run some audits on it." His answers: Learn is built by Sonnet
-5.5: "an audit of the Tinkerer's Manual, and a running lab notebook"; and for the blog: "Keep it
-last, but start a running lab notebook now (what each model built, numbers, lessons), so nothing is
-lost."
+The owner's call: continue to build the Tinkerer's Manual, make it very comprehensive and complete,
+and run audits on it. His answers: Learn is built by Sonnet 5.5, with an audit of the Tinkerer's
+Manual and a running lab notebook; for the blog, keep it last, but start a running lab notebook now
+(what each model built, numbers, lessons) so nothing is lost.
 
 Do two things.
 

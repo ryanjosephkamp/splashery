@@ -6,7 +6,7 @@
     <title>Sound in a box · Splashery</title>
     <meta
       name="description"
-      content="Sound in a box, a Splashery toy made of 3D Gaussian splats: Tap to switch on the sound: the beads gather on the cell's still surfaces."
+      content="Sand on a ringing plate gathers on the lines that stay still."
     />
     <meta name="robots" content="noindex" />
     <link
@@ -18,7 +18,7 @@
     <meta property="og:title" content="Sound in a box · Splashery" />
     <meta
       property="og:description"
-      content="Sound in a box, a Splashery toy made of 3D Gaussian splats: Tap to switch on the sound: the beads gather on the cell's still surfaces."
+      content="Sand on a ringing plate gathers on the lines that stay still."
     />
     <meta
       property="og:url"
@@ -154,8 +154,8 @@
           <div class="toy-head">
             <h1>Sound in a box <span class="badge">labs</span></h1>
             <p class="lead how-to">
-              Tap to switch on the sound: the beads gather on the cell's still surfaces. Tap again
-              to swirl them.
+              Tap to ring the cell, or play music (Toy tab): the music's pitch is scaled up to the
+              cell's ultrasound modes.
             </p>
             <dl class="does">
               <div>
@@ -171,6 +171,10 @@
                   The mode's tone, eight octaves down (the real cell rings at about 100 to 370 kHz).
                 </dd>
               </div>
+              <div>
+                <dt>Arrived</dt>
+                <dd><time datetime="2026-10-07">October 7, 2026</time></dd>
+              </div>
             </dl>
             <p class="actions">
               <a
@@ -178,7 +182,7 @@
                 href="../../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImNobGFkbmktY2VsbCJ9LCJjYW1lcmEiOnsieWF3IjowLjU1LCJwaXRjaCI6MC40Miwicm9sbCI6MCwiZGlzdGFuY2UiOjQuNn19"
                 target="_blank"
                 rel="noopener"
-                >Open in the gallery<svg
+                >Open in the Playground<svg
                   class="arrow"
                   viewBox="0 0 16 16"
                   width="16"
@@ -219,19 +223,22 @@
         <section class="toy-section" aria-labelledby="h-about">
           <h2 id="h-about">About this toy</h2>
           <p>
-            Sand on a ringing plate gathers on the lines that stay still. The same happens in three
-            dimensions, and labs use it to sort cells and tiny beads. Here a glass cell 1 cm across
-            holds water and tiny plastic beads, and a transducer underneath fills it with ultrasound
-            at one of the cell's resonances, so the sound stands still inside it. Each bead feels a
-            gentle push, the acoustic radiation force, toward the places where the pressure hardly
-            changes: the mode's nodal surfaces, the 3D cousins of a plate's nodal lines.
+            Sand on a ringing plate gathers on the lines that stay still. The same happens in 3D.
+            Here a glass cell 1 cm across holds water and plastic beads, and a transducer underneath
+            fills it with ultrasound at one of its resonances, a standing wave. The acoustic
+            radiation force pushes each bead onto the mode's still surfaces, its nodes (the Gor'kov
+            potential; H. Bruus, 2012).
           </p>
           <p>
-            The toy works out that push from the Gor'kov potential for polystyrene beads in water
-            (H. Bruus, &quot;Acoustofluidics 7&quot;, Lab Chip, 2012) and moves every bead down it.
-            The modes ring at about 100 to 370 kHz, far too high to hear, so you hear each one eight
-            octaves down. A &quot;mixed&quot; mode blends modes that ring at the same pitch. Gravity
-            is left out: beads this small sink only micrometers a second.
+            The cube's modes ring at f = (c / 2L)·√(l² + m² + n²), the round flask's where a
+            spherical Bessel function's slope is zero at the wall: about 75 to 370 kHz, so you hear
+            each one eight octaves down. Tap to ring the chosen mode; tap again to swirl the water.
+          </p>
+          <p>
+            Or play a song, a built-in tune, or sing: the music's pitch is scaled up to the cell's
+            ultrasound modes, and the nearest rings. Bead colors picks one color, a palette, a
+            flag's colors, or colors by height or by distance from the center. “What are these
+            modes?” in the Toy tab explains each mode. Files stay on your device.
           </p>
         </section>
 
@@ -501,7 +508,7 @@ https://ryanjosephkamp.github.io/splashery/site/toys/chladni-cell/</textarea
         <nav aria-label="More">
           <h2>More</h2>
           <ul>
-            <li><a href="../../../" target="_blank" rel="noopener">The gallery</a></li>
+            <li><a href="../../../" target="_blank" rel="noopener">The Playground</a></li>
             <li><a href="../../search/">Search</a></li>
             <li><a href="../../../manual/">The Tinkerer's Manual</a></li>
             <li>
@@ -521,7 +528,7 @@ https://ryanjosephkamp.github.io/splashery/site/toys/chladni-cell/</textarea
         Made by <a href="../../about/contact/">Ryan Kamp</a>. Code under the MIT license; each toy's
         assets keep their own licenses. Built on the PlayCanvas engine. This is a preview of
         Splashery's new site; the toys live in
-        <a href="../../../" target="_blank" rel="noopener">the gallery</a>.
+        <a href="../../../" target="_blank" rel="noopener">the Playground</a>.
       </p>
     </footer>
   </body>

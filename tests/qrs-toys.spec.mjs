@@ -20,6 +20,10 @@ const jsQR = (() => {
 const read = (rgba, w, h) =>
   jsQR(new Uint8ClampedArray(rgba), w, h, { inversionAttempts: "dontInvert" })?.data ?? null;
 
+// A screenshot style that hides everything on the page but the stage's canvas.
+const ONLY_STAGE =
+  "body * { visibility: hidden !important; } canvas { visibility: visible !important; }";
+
 async function open(page, id) {
   const errors = [];
   page.on("pageerror", (e) => errors.push(e.message));
@@ -52,7 +56,10 @@ test("How a QR code works: its code is the encoder's, and it scans", async ({ pa
     p.camera.setState(window.__splashery.qrLab.frontPose(12, 2), { snap: true });
   });
   await page.waitForTimeout(800);
-  const png = PNG.sync.read(await page.locator("canvas").first().screenshot());
+  // Only the toy's own pixels: the page's words over the stage (the status
+  // line "How a QR code works · 43k splats", the title, the buttons) stay
+  // out of the picture, or jsQR takes a run of letters for a finder (Fix11).
+  const png = PNG.sync.read(await page.locator("canvas").first().screenshot({ style: ONLY_STAGE }));
   expect(read(png.data, png.width, png.height)).toBe("Splashery QR");
   // Every part and step builds.
   for (const part of ["finder", "timing", "alignment", "format", "mask"]) await switchTo(page, { view: "parts", part }, "lift"); // prettier-ignore

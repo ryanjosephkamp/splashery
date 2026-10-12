@@ -37,6 +37,10 @@ coordinates. [docs/OPERATING.md](docs/OPERATING.md) has the rules. In short:
 
 ## Ground rules
 
+Outside builders (the owner's Codex and ChatGPT agents) follow
+[builders/RULES.md](builders/RULES.md) (Rules v1, October 12, 2026): the non-negotiables in short,
+with a hand-back rule. These ground rules are the full set for Claude sessions; the two agree.
+
 - Static files and ES modules only. No bundler, CDN, server, or API keys in the page. PlayCanvas
   2.22.3 is vendored in `vendor/` and imported only through `src/pc.js`. PDF.js and omggif (approved
   September 28, 2026) are vendored there too, loaded only when someone opens a PDF or a GIF. ONNX
@@ -44,7 +48,10 @@ coordinates. [docs/OPERATING.md](docs/OPERATING.md) has the rules. In short:
   too, loaded only when someone turns a photo into 3D. Splat.js (MIT; approved September 30, 2026,
   for the video-to-3D spike) may join them, behind the labs switch, loaded only when someone opens a
   video for it. Project Nayuki's QR Code generator (MIT) and jsQR (Apache-2.0) (approved October
-  3, 2026) are vendored there too, loaded only when someone opens the QR code toy.
+  3, 2026) are vendored there too, loaded only when someone opens the QR code toy. Faster depth (the
+  owner's yes of October 12, 2026, for Codex task 37): a WebGPU or WebNN build of ONNX Runtime Web
+  and a better depth model may join them, over 2 MB, when their license is Apache-2.0, MIT or BSD,
+  loaded only when someone turns a photo, a clip or the camera into 3D.
 - Libraries (the owner's rule of October 4, 2026): the Operator may approve an open-source library a
   toy or tool needs without asking the owner each time: vendored in `vendor/`, loaded only when its
   toy opens, listed in `LICENSES.md` and named in the PR. A copyleft license (GPL, AGPL), a library
@@ -107,6 +114,11 @@ coordinates. [docs/OPERATING.md](docs/OPERATING.md) has the rules. In short:
   the side: one sweep does that before the blog post.
 - The serial (Oxford) comma in every new public-facing text: "a, b, and c" and "d, e, or f" (the
   owner's call of October 9, 2026). Older text gets it in the same sweep as American English.
+- The owner's notes are private (his rule of October 11, 2026). Every note, walkthrough, review,
+  answer, idea or file he gives a session is private and internal. A version of it goes into the
+  repo, a PR, a card or the site only after it is cleaned up and he approves that version. Until
+  then only the Operator's own summary (a triage, a brief) is committed, in the Operator's words.
+  Never commit his raw notes or his attachments.
 - Secrets: `HF_TOKEN` (a Hugging Face read token) is for build-time tools only. Never print it,
   commit it, or put it in logs, PRs or files. To check it, test that it is set
   (`[ -n "$HF_TOKEN" ]`), or call the whoami API and print only the account name and token role.
@@ -201,7 +213,8 @@ new or changed effect against them before calling it done.
 - `tools/upkeep.mjs`: the Operator's upkeep after a merge (TOY-PLAN.md, the Sound Board page file,
   the standard screenshots). `tools/sound-board.mjs` builds the Sound Board page and
   `tools/help-board.mjs` the Help Board (every toy's how-to line and About text).
-- `docs/reviews/`: the owner's reviews, verbatim, with screenshots (sound notes too).
+- `docs/reviews/`: the Operator's triage of each of the owner's reviews, in its own words (his notes
+  stay private).
 - `tools/sound-review.json`: the sound review, per toy (notes, plans and new sounds to hear), shown
   on the Sound Board (OPERATING.md, "The sound review").
 - `docs/PACKS.md`: how to write toy recipes.

@@ -32,6 +32,9 @@ export const TANK = { width: 36, depth: 36, nx: 216, beach: 5, cMax: 30 };
 // The water is shown slowed down this many times, so a wave at 8 Hz is easy
 // to follow.
 export const SLOW = 4;
+// Fix10: the dropped pebble (recipe units are 10 cm): its fall (s) from `height`, its sink after
+// it lands (s, to `depth` under the water), and its dent's radius and depth (cm).
+const PEBBLE = { height: 1, fall: 0.45, sink: 0.3, depth: 0.12, dent: 1.1, dentDepth: 0.75 };
 // Controls (0..1) to physical values.
 export const SPEED = [15, 30]; // cm/s
 export const FREQ = [4, 10]; // Hz
@@ -423,19 +426,29 @@ const RIPPLE = {
     }
     if (RT.drop) {
       RT.drop.t += dt;
-      const fall = 0.32; // seconds from 0.5 recipe units up (shown, not slowed)
-      const s = Math.min(1, RT.drop.t / fall);
+      // Fix10 (the walkthrough of October 9, 2026: the pebble was hard to see): a 2.4 cm pale
+      // stone falls 10 cm, a little slower than life so the eye can follow it, its shadow on the
+      // water tightening and darkening under it; it lands with a dent to match its size, sinks
+      // for a moment and is gone.
+      const s = Math.min(1, RT.drop.t / PEBBLE.fall);
+      const sink = clamp((RT.drop.t - PEBBLE.fall) / PEBBLE.sink, 0, 1);
+      const x = toX(RT.drop.at[0]);
+      const z = toZ(RT.drop.at[1]);
       out.parts.pebble = {
-        offset: [toX(RT.drop.at[0]), 0.5 * (1 - s * s), toZ(RT.drop.at[1])],
-        visible: s < 1 ? 1 : 0,
+        offset: [x, s < 1 ? PEBBLE.height * (1 - s * s) : -PEBBLE.depth * Math.sin((Math.PI / 2) * sink), z], // prettier-ignore
+        visible: sink < 1 ? 1 : 0,
       };
+      out.parts.pebbleShadow = { offset: [x, 0, z], scale: 2.4 - 1.4 * s * s, visible: s < 1 ? 0.25 + 0.75 * s * s : 0 }; // prettier-ignore
       if (s >= 1 && !RT.drop.hit) {
         RT.drop.hit = true;
         RT.splashes = (RT.splashes || 0) + 1;
-        tank.pebble(RT.drop.at[0], RT.drop.at[1]);
+        tank.pebble(RT.drop.at[0], RT.drop.at[1], PEBBLE.dent, PEBBLE.dentDepth);
       }
-      if (RT.drop.t > fall + 0.1) RT.drop = null;
-    } else out.parts.pebble = { offset: [0, 0.5, 0], visible: 0 };
+      if (RT.drop.t > PEBBLE.fall + PEBBLE.sink + 0.05) RT.drop = null;
+    } else {
+      out.parts.pebble = { offset: [0, PEBBLE.height, 0], visible: 0 };
+      out.parts.pebbleShadow = { offset: [0, 0, 0], visible: 0 };
+    }
     tank.advance(dt / SLOW);
     // The dippers and the bar bob with the source, on the water's clock.
     const bob = tank.running ? 0.035 * Math.sin(tank.phase) * Math.min(1, tank.time * tank.f) : 0;
@@ -534,9 +547,12 @@ const RIPPLE = {
       for (const x of [-W / 2 + 0.3, W / 2 - 0.3])
         k.add(k.cylinder(0.008, 0.45), { pos: [x, 0.26, toZ(L.line.y)], color: "#9aa0aa", part: dip }); // prettier-ignore
     }
-    // The pebble, shown while it falls.
+    // The pebble, shown while it falls (Fix10: about 2.4 cm, pale stone), and its shadow on the
+    // water.
     const peb = k.part("pebble", { pivot: [0, 0, 0] });
-    k.add(k.ellipsoid(0.05, 0.035, 0.045), { pos: [0, 0, 0], color: "#8a8378", part: peb, even: true }); // prettier-ignore
+    k.add(k.ellipsoid(0.12, 0.08, 0.105), { pos: [0, 0, 0], color: "#d8d1c3", part: peb, even: true }); // prettier-ignore
+    const shadow = k.part("pebbleShadow", { pivot: [0, 0, 0] });
+    k.add(k.ellipsoid(0.11, 0.004, 0.1), { pos: [0, 0.012, 0], color: "#06181b", opacity: 0.55, part: shadow, even: true }); // prettier-ignore
     k.data = { setup: o.setup };
   },
 };

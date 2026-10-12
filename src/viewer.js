@@ -186,7 +186,13 @@ export class Viewer {
     const sound = (this.sound = new Sound());
     sound.enabled = true;
     player.setSound(sound);
-    const own = () => (player.scene.toy.kind === "builtin" ? toySound(player.scene.toy.id) : null);
+    // (a recipe may pick its tap sound from its options: lane Photo depth, as in src/app.js)
+    const own = () => {
+      const toy = player.scene.toy;
+      if (toy.kind !== "builtin") return null;
+      const pick = player.toyInfo?.recipe?.toySound?.(toy.options || {});
+      return pick !== undefined && pick !== null ? pick : toySound(toy.id);
+    };
     const extra = () => {
       const more = player.toyInfo?.recipe?.sounds;
       const list = typeof more === "function" ? more(player.scene.toy?.options || {}) : more;

@@ -6,11 +6,10 @@
 numbers or labels under `src/` (each one listed in the report with its source).
 
 The owner wants evidence for every toy that claims to show something scientific, mathematical or
-technical: "I do not want to hallucinate these things ... Anything that we find that actually isn't
-correct, we will have to improve ... in some cases you have to stretch things ... but we need to be
-transparent about that." The evidence will show on each toy's page on the site, not in the toy. This
-task covers the `tiny`, `atoms`, `anatomy`, `gems` and `science` shelves. Read
-`docs/evidence/README.md` first: it defines the file you write.
+technical: nothing may be made up, anything found to be incorrect gets improved, and where a visual
+stretches things to be appealing, the toy must say so plainly. The evidence will show on each toy's
+page on the site, not in the toy. This task covers the `tiny`, `atoms`, `anatomy`, `gems` and
+`science` shelves. Read `docs/evidence/README.md` first: it defines the file you write.
 
 ## Steps
 

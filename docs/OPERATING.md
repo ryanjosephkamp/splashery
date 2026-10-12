@@ -160,13 +160,14 @@ site.
 
 1. **Notes.** The owner sends notes as a Markdown file (voice-typed is fine). He names only the toys
    he wants to comment on; any toy he doesn't mention stays as it is.
-2. **Filed.** The Operator keeps the notes word for word in `docs/reviews/sounds-<date>.md` and
-   writes a clean version per toy into `tools/sound-review.json`:
-   `{ "round", "note", "toys": { "<toy id>": { "status", "said", "note", "plan", "candidates" } } }`.
+2. **Filed.** The owner's notes stay private (CLAUDE.md, "Ground rules"). The Operator writes a
+   clean version per toy, in its own words, into `tools/sound-review.json`:
+   `{ "round", "note", "toys": { "<toy id>": { "status", "note", "plan", "candidates" } } }`.
    `status` is `keep`, `change`, `ready` (a new sound to hear), `approved` or `site` (in the site);
-   `said` is his words, `note` the clean version, `plan` what the new sound will be. The Sound Board
-   shows each toy's line, with filters (All, To change, Ready to hear, Approved), "Play through"
-   (the filtered toys one after another, the name shown large) and optional marks.
+   `note` is the clean version, `plan` what the new sound will be. (Older entries had a `said` field
+   with his words; it is being removed.) The Sound Board shows each toy's line, with filters (All,
+   To change, Ready to hear, Approved), "Play through" (the filtered toys one after another, the
+   name shown large) and optional marks.
 3. **New sounds, on the board only.** Sound lanes add candidates to their toys' entries:
    `candidates: [{ "id": "a", "label": "New A", "sound": <spec> }]`, with the same specs as
    `src/toy-sounds.js`. New voices go in `tools/sound-voices-next.js` as `VOICES.name = { … };`

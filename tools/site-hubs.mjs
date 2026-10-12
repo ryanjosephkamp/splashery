@@ -113,7 +113,7 @@ function dayRange(from, until) {
 
 export function hubTypes(h) {
   const { esc, plain, fold, intro, arrow, galleryHref, thumbHref, shelfSections, shelfIndex } = h;
-  const { countToys, publicToys, TOYS, shelfName, SITE, root, changelog, LOGO } = h;
+  const { countToys, publicToys, TOYS, shelfName, SITE, root, LOGO } = h;
   const toyById = (id) => {
     const t = TOYS.find((x) => x.id === id);
     if (!t) throw new Error(`site-pages.mjs names a toy that doesn't exist: ${id}`);
@@ -157,7 +157,7 @@ export function hubTypes(h) {
         const items = g.items
           .map(([name, text]) => {
             const k = fold(name).replace(/\W+/g, "-");
-            const key = h.TOOL_KEYS[k] ? ` <kbd title="Key ${h.TOOL_KEYS[k]} in the gallery">${h.TOOL_KEYS[k]}</kbd>` : ""; // prettier-ignore
+            const key = h.TOOL_KEYS[k] ? ` <kbd title="Key ${h.TOOL_KEYS[k]} in the Playground">${h.TOOL_KEYS[k]}</kbd>` : ""; // prettier-ignore
             const icon = h.TOOL_ICONS[k] ? `<svg class="tool-icon" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">${h.TOOL_ICONS[k]}</svg>` : ""; // prettier-ignore
             return `<div id="tool-${k}">${icon}<dt>${esc(name)}${key}</dt><dd>${esc(text)}</dd></div>`;
           })
@@ -192,7 +192,7 @@ ${hub}
       .join("");
     const n = countToys(page.shelves);
     const ev = TOYS.filter((t) => evidenceFile(t.id));
-    return `${intro(page, `<p>${h.appLink("../", `Open the gallery${arrow}`, { up, cls: "button primary" })}</p>`, `${n} toys`)}
+    return `${intro(page, `<p>${h.appLink("../", `Open the Playground${arrow}`, { up, cls: "button primary" })}</p>`, `${n} toys`)}
 ${shelfIndex(page.shelves, [
   ["data", "The data"],
   ["evidence", "Is it right?"],
@@ -272,7 +272,80 @@ drive(t, c, out) {
 <section aria-labelledby="h-why">
 <h2 id="h-why">Why make toys from splats?</h2>
 <p>Splats are usually something you watch: a scan you orbit and then close. Here they are something you play with. Because each splat is separate, a toy can peel like a grape, pour like water or ring like a piano, and the same recipes run atoms, planets and games. And since the whole thing is plain web code, it works on a phone with nothing to install.</p>
-<p class="actions"><a class="button primary" href="${up}../">Open the gallery${arrow}</a><a class="button" href="${up}learn/">Back to Learn</a></p>
+<p class="actions"><a class="button primary" href="${up}../">Open the Playground${arrow}</a><a class="button" href="${up}learn/">Back to Learn</a></p>
+</section>
+</article>`;
+    },
+
+    can(page, { up }) {
+      const open = countToys("all");
+      const labs = publicToys.filter((t) => t.labs).length;
+      // A link to a toy's page, with a "labs" badge while the toy is behind the labs switch.
+      const toy = (id, text) => {
+        const t = toyById(id);
+        return `<a href="${up}toys/${id}/">${esc(text || t.label)}</a>${t.labs ? ' <span class="badge">labs</span>' : ""}`;
+      };
+      return `${intro(page)}
+<article class="prose">
+<section aria-labelledby="h-where">
+<h2 id="h-where">What is here today</h2>
+<p>This page lists what Splashery does now. It describes only what is built. As of this build there are ${open} toys on the public shelves, and ${labs} more behind the <strong>labs switch</strong>. Labs is where newer parts wait until they are ready: add <code>?labs=1</code> to the address of the Playground to turn it on (the browser remembers it, and <code>?labs=0</code> turns it off). Anything marked <span class="badge">labs</span> below is behind that switch.</p>
+<p>Splashery is made of static files that run in your browser. Nothing you open is uploaded, and there is no account.</p>
+</section>
+<section aria-labelledby="h-play">
+<h2 id="h-play">Play with it</h2>
+<ul>
+<li><strong>Hands-on physics.</strong> With the hand switch on, a drag picks up whatever is under your finger and a quick let-go tosses it. It lands, bounces, and settles on the floor, and soft toys squish. Most toys play this way, scans included, as one rigid body; a recipe can turn it off, and picture toys and still toys play only if their recipe opts in. A recipe can also make its pieces separate bodies. This is not behind the labs switch.</li>
+<li><strong>Toys with moving parts.</strong> Hinges, pivots, sliders, and morphs run on the graphics chip, so a chest opens and a windmill turns without rebuilding anything.</li>
+<li><strong>Liquids, gases, and flames.</strong> A recipe can declare a liquid, a gas, or a flame, which is simulated while the toy is open. How it is drawn depends on the fluid and on the device: on the page's own path each liquid particle is four small splats; on a device with WebGPU the liquids are drawn as one smooth surface after the splats; and smoke, steam, and flames run on a grid and are drawn as a glowing volume. See ${toy("fluid-lab")}.</li>
+<li><strong>Instruments that are played.</strong> A keyboard toy can play songs from its own list, a MIDI file, or a tune pasted as ABC notation, and every key, hammer, and string moves as a solid piece.</li>
+<li><strong>The viewer's controls.</strong> Focus mode hides everything but the toy (the <kbd>F</kbd> key or the focus button; <kbd>Esc</kbd> brings the rest back). On a computer, <kbd>[</kbd> folds the side panel and <kbd>G</kbd> opens the Playground. The Detail setting (Auto, High, or Max, and with labs on a slider from 60,000 to 400,000 splats) lives in your browser only, never in a link.</li>
+</ul>
+</section>
+<section aria-labelledby="h-make">
+<h2 id="h-make">Make your own</h2>
+<ul>
+<li><strong>Toys from rules, in the browser.</strong> A recipe of a few kilobytes is built into splats on your device. Its base budget is 60,000 to 400,000 splats, depending on the device and, in labs, the Detail slider (a recipe that asks for more density gets more, up to the tier's most), so the shape itself is never a multi-megabyte file to download. The page, the engine, and any optional models or captures a toy uses still download, and only when that toy opens. The <a href="${up}../manual/">Tinkerer's Manual</a> teaches recipes from the math of one splat up to your own toys.</li>
+<li><strong>Equations as a language.</strong> In ${toy("splat-equation")}, type where splats go and what color they are, as formulas in <var>u</var>, <var>v</var>, and <var>t</var>, and get an animated shape, with plain messages instead of crashes. It has three looks: Solid, Fine, and Dots.</li>
+<li><strong>A whole scene in a link.</strong> A share link carries the toy, its options, and the camera, compressed into the address itself. No server is involved. A link carries settings, not your files: a photo or a splat file from your device has to be opened again by whoever opens the link. <a href="${up}learn/scene-format/">The scene format</a> says exactly what is in one.</li>
+</ul>
+</section>
+<section aria-labelledby="h-own">
+<h2 id="h-own">Turn your own things into splats</h2>
+<p>Everything in this section happens on your device. Nothing is sent anywhere.</p>
+<ul>
+<li><strong>Splat files.</strong> The viewer opens <code>.ply</code>, <code>.sog</code>, <code>.splat</code>, and <code>.spz</code> files. (Version 4 SPZ files need a decoder Splashery does not ship, and are refused with a message.) The Scans shelf holds captures with their licenses and credits.</li>
+<li><strong>Photos.</strong> ${toy("photo-3d")} runs a depth model on your device, works out how far each part of a photo is, and rebuilds it as splats at their depths. ${toy("moving-photo-3d")} does the same for a moving photo.</li>
+<li><strong>3D models.</strong> ${toy("model-splats")} opens a glTF or GLB file, an OBJ with its MTL, or an STL file and turns it into splats: flat discs on the surface, more of them where there is detail, colored from the model's texture, vertex colors, or material.</li>
+<li><strong>PDFs, books, and albums.</strong> ${toy("your-book")} turns the pages of a PDF as paper. ${toy("photo-album")} opens several photos at once, and ${toy("picture-frame")} lets you list them and move each up or down.</li>
+<li><strong>Songs.</strong> ${toy("song-landscape")} turns a song you open into a 3D field of its spectrogram, and ${toy("chladni-plate")} shows sand finding a plate's still lines.</li>
+<li><strong>QR codes.</strong> ${toy("qr-code")} makes a code from a link, plain text, a Wi-Fi network, a contact card, or an email, and builds it from splats. After every change it reads the code back to check that it scans. A Wi-Fi password is not kept in a link.</li>
+</ul>
+</section>
+<section aria-labelledby="h-live">
+<h2 id="h-live">Camera, microphone, and screen</h2>
+<p>A toy can read the microphone, the camera, or a shared screen, but only after you tap a button for it. Nothing is requested before that tap. While a source is on, a small "Live" pill with a Stop button shows at the top of the page, and the sound or pictures stay on your device: nothing is sent anywhere, and nothing is recorded unless you ask. (One exception: a recorder, such as the splat mirror's, records only after you tap Record, keeps the recording on your device, and saves it only to a file you choose.) Two examples are ${toy("room-echo")} (clap, and it measures how long the room rings) and ${toy("splat-mirror")} (your camera as splats, with a depth model of about 27 MB that loads only after you start the camera).</p>
+</section>
+<section aria-labelledby="h-worlds">
+<h2 id="h-worlds">Worlds</h2>
+<p>A world is a small place you walk around in, built on your device from recipes and a seed, with a start screen, a list of places, collision, a character, and a camera that follows. In splats mode everything you see is splats. In hybrid mode the ground, water, sky, and signs are lit models, and only the props and the near grass stay splats. So Splashery is primarily splat based, but not only: the photo toys' Sharp view is a textured relief, not splats, and some liquids and flames are drawn another way too (see Play with it). Worlds are behind the labs switch <span class="badge">labs</span> (<a href="${up}../worlds/?labs=1">open the worlds</a>).</p>
+</section>
+<section aria-labelledby="h-unique">
+<h2 id="h-unique">What other splat tools don't do, as far as we know</h2>
+<p>PlayCanvas is the engine that draws the splats, and its editor, SuperSplat, works on captured splat files: you crop, clean, and arrange a capture. Splashery starts from the other end, because most of its toys are never captured at all. We have not tried every tool, so read this list as "to our knowledge":</p>
+<ul>
+<li>toys made from rules, in the browser, with no multi-megabyte file for the shape;</li>
+<li>equations as a language for splat shapes;</li>
+<li>moving parts inside one splat cloud, run on the graphics chip;</li>
+<li>hands-on physics on splats: toss, stack, pull apart, and pour;</li>
+<li>photos, videos, PDFs, QR codes, real science data, the night sky, and medical volumes, all as splats;</li>
+<li>a whole scene in a link, with no server.</li>
+</ul>
+</section>
+<section aria-labelledby="h-more">
+<h2 id="h-more">Where to go next</h2>
+<p>The same lists, with the code behind each claim, are in the manual's chapters <a href="${up}../manual/more.html">What else Splashery does now</a> and <a href="${up}../manual/unique.html">What Splashery can do that other splat tools can't</a>. The <a href="${up}toys/">toy pages</a> and <a href="${up}tools/">tools</a> show each one working.</p>
+<p class="actions"><a class="button primary" href="${up}../">Open the Playground${arrow}</a><a class="button" href="${up}learn/">Back to Learn</a></p>
 </section>
 </article>`;
     },
@@ -413,11 +486,12 @@ ${docLinks(up)}
 </article>`;
   }
 
-  // The terms are the ones in the gallery's About tab, read from index.html at build time.
+  // The terms are the ones in the Playground's About tab, read from index.html at build time.
   function terms(page, { up }) {
-    const html = read(root, "index.html");
+    // After the swap the Playground's page is playground/index.html (lane Site r4).
+    const html = read(root, fs.existsSync(path.join(root, "playground/index.html")) ? "playground/index.html" : "index.html"); // prettier-ignore
     const m = /<ul class="terms">([\s\S]*?)<\/ul>/.exec(html);
-    if (!m) throw new Error("The gallery's terms of use are not in index.html any more.");
+    if (!m) throw new Error("The Playground's terms of use are not in index.html any more.");
     const items = [...m[1].matchAll(/<li>([\s\S]*?)<\/li>/g)].map((x) =>
       x[1].replace(/\s+/g, " ").trim(),
     );
@@ -426,7 +500,7 @@ ${docLinks(up)}
 <section aria-labelledby="h-terms">
 <h2 id="h-terms">Terms of use</h2>
 <ul>${items.map((t) => `<li>${t.replace(/\(see Credits\)/, `(see the <a href="${up}about/credits/">credits</a>)`)}</li>`).join("")}</ul>
-<p class="note">These are the same terms the gallery shows in its About tab. See also the <a href="${up}about/privacy/">privacy page</a> and the <a href="${up}about/credits/">credits and licenses</a>.</p>
+<p class="note">These are the same terms the Playground shows in its About tab. See also the <a href="${up}about/privacy/">privacy page</a> and the <a href="${up}about/credits/">credits and licenses</a>.</p>
 </section>
 </article>`;
   }
@@ -475,35 +549,69 @@ ${docLinks(up)}
   // ---- What's new --------------------------------------------------------------------------------
 
   function news(page, { up }) {
-    const curated = JSON.parse(read(root, "tools/site-news.json")).days;
-    const items = changelog(page.count);
-    const byDate = new Map();
-    for (const it of items) byDate.set(it.date, [...(byDate.get(it.date) || []), it]);
-    const days = curated
+    const { features, fixes } = JSON.parse(read(root, "tools/site-news.json"));
+    const { TOY_DATES, dateText, toyPath } = h;
+    const byLabel = (a, b) => a.label.localeCompare(b.label);
+    const toy = (id, where) => {
+      const t = TOYS.find((x) => x.id === id);
+      if (!t) throw new Error(`What's new: ${where} names the toy "${id}", which doesn't exist.`);
+      if (!thumbHref(t)) throw new Error(`What's new: ${where} names the toy "${id}", which has no thumbnail.`); // prettier-ignore
+      return t;
+    };
+    // One link per card, on its heading and stretched over the whole card (hubs.css, .news-link):
+    // it opens the toy in the Playground in a new tab, the same link as the toy page's button.
+    const cardLink = (t, text) =>
+      `<a class="news-link" href="${up}${h.galleryHref(t)}" target="_blank" rel="noopener">${text}<span class="visually-hidden">: opens the ${esc(t.label.toLowerCase())} in the Playground, in a new tab</span></a>`; // prettier-ignore
+
+    // New toys: the newest public ones, and the newest labs ones (shown with the labs switch).
+    const newest = (labs) =>
+      publicToys
+        .filter((t) => !!t.labs === labs && TOY_DATES[t.id] && thumbHref(t))
+        .sort((a, b) => TOY_DATES[b.id].localeCompare(TOY_DATES[a.id]) || byLabel(a, b))
+        .slice(0, 24);
+    const toyCards = [...newest(false), ...newest(true)]
+      .sort((a, b) => TOY_DATES[b.id].localeCompare(TOY_DATES[a.id]) || byLabel(a, b))
+      .map(
+        (t) =>
+          `<li class="news-toy"${t.labs ? " data-labs" : ""}><a href="${up}${toyPath(t)}"><img src="${up}${thumbHref(t)}" alt="" width="96" height="96" loading="lazy" decoding="async" /><span class="toy-name">${esc(t.label)}${t.labs ? ' <span class="badge">labs</span>' : ""}</span><time datetime="${TOY_DATES[t.id]}">${dateText(TOY_DATES[t.id])}</time></a></li>`,
+      ) // prettier-ignore
+      .join("");
+
+    const featureCards = features
       .slice()
       .sort((a, b) => b.date.localeCompare(a.date))
-      .map((d) => {
-        const prs = byDate.get(d.date) || [];
-        const list = d.items.map((t) => `<li>${t}</li>`).join("");
-        const raw = prs.length
-          ? `<details class="pr-list"><summary>All ${prs.length} merged change${prs.length === 1 ? "" : "s"} that day</summary><ul>${prs.map((it) => `<li><a href="${SITE.github}/pull/${it.pr}">${esc(it.title)}</a></li>`).join("")}</ul></details>` // prettier-ignore
-          : "";
-        const when = dayRange(d.date, d.until);
-        return `<section class="news-day" aria-labelledby="d-${d.date}"><h2 id="d-${d.date}"><time datetime="${d.date}">${esc(when)}</time></h2><p class="news-title">${esc(d.title)}</p><ul class="news-items">${list}</ul>${raw}</section>`; // prettier-ignore
+      .map((f) => {
+        const t = toy(f.toy, `the feature "${f.title}"`);
+        const pic = `<img src="${up}${thumbHref(t)}" alt="" width="72" height="72" loading="lazy" decoding="async" />`;
+        const items = f.items.map((x) => `<li>${x}</li>`).join("");
+        return `<li class="news-feature"><div class="news-feature-head">${pic}<div><p class="news-when"><time datetime="${f.date}">${esc(dayRange(f.date, f.until))}</time></p><h3>${cardLink(t, esc(f.title))}</h3></div></div><ul class="news-items">${items}</ul></li>`; // prettier-ignore
       })
-      .join("\n");
-    // Merged days the curated file hasn't covered yet still get their list.
-    const covered = new Set(curated.map((d) => d.date));
-    const rest = [...byDate]
-      .filter(([date]) => !covered.has(date))
-      .map(
-        ([date, list]) => `<section class="news-day"><h2><time datetime="${date}">${esc(h.longDate(date))}</time></h2><ul class="pr-plain">${list.map((it) => `<li><a href="${SITE.github}/pull/${it.pr}">${esc(it.title)}</a></li>`).join("")}</ul></section>`, // prettier-ignore
-      )
-      .join("\n");
+      .join("");
+
+    const fixCards = fixes
+      .slice()
+      .sort((a, b) => b.date.localeCompare(a.date))
+      .map((f) => {
+        const t = toy(f.toy, `the fix "${f.title}"`);
+        const img = (side, word) => `<figure><img src="${up}assets/news/${f.id}-${side}.webp" alt="${esc(`${word}: ${f.title}`)}" width="160" height="160" loading="lazy" decoding="async" /><figcaption>${word}</figcaption></figure>`; // prettier-ignore
+        return `<li class="news-fix"${t.labs ? " data-labs" : ""}><div class="news-ba">${img("before", "Before")}${img("after", "After")}</div><p class="news-when"><time datetime="${f.date}">${esc(h.longDate(f.date))}</time></p><h3>${cardLink(t, esc(f.title))}${t.labs ? ' <span class="badge">labs</span>' : ""}</h3><p>${esc(f.line)}</p></li>`; // prettier-ignore
+      })
+      .join("");
+
     return `${intro(page)}
-${rest}
-${days}
-<p class="note">Each day's list of merged changes comes from the project's history on <a href="${SITE.github}/pulls?q=is%3Apr+is%3Amerged">GitHub</a>.</p>`;
+<nav class="shelf-index" aria-label="On this page"><ul><li><a href="#h-new-toys">New toys</a></li><li><a href="#h-new-features">New features</a></li><li><a href="#h-fixed">Fixed</a></li></ul></nav>
+<section class="news-section" aria-labelledby="h-new-toys">
+<div class="band-head"><h2 id="h-new-toys">New toys</h2><a href="${up}toys/#newest">Every toy, newest first${h.arrow}</a></div>
+<ul class="news-toys">${toyCards}</ul>
+</section>
+<section class="news-section" aria-labelledby="h-new-features">
+<h2 id="h-new-features">New features</h2>
+<ul class="news-features">${featureCards}</ul>
+</section>
+<section class="news-section" aria-labelledby="h-fixed">
+<h2 id="h-fixed">Fixed, before and after</h2>
+<ul class="news-fixes">${fixCards}</ul>
+</section>`;
   }
 
   // ---- The embed and share guide -------------------------------------------------------------
@@ -567,7 +675,7 @@ ${days}
 </section>
 <section aria-labelledby="h-links">
 <h2 id="h-links">How scene links work</h2>
-<p>Every toy can be shared as a link. Open the gallery's <strong>Share</strong> tab and tap <strong>Copy link</strong>. The link looks like this:</p>
+<p>Every toy can be shared as a link. Open the Playground's <strong>Share</strong> tab and tap <strong>Copy link</strong>. The link looks like this:</p>
 <pre class="code"><code>${esc(origin)}#s=<span class="muted-code">PAYLOAD</span></code></pre>
 <p>The part after <code>#s=</code> is the <strong>scene</strong>: a small JSON document that says which toy it is, the camera, the look (background, theme, accent color, splat size and exposure), every effect's settings, any paint, and the pattern and motion. The JSON is compressed and written in a URL-safe form, so the payload starts with <code>d.</code> (compressed) or <code>j.</code> (plain JSON, for old browsers). It all lives after the <code>#</code>, so it goes to nobody: your browser keeps the part after a hash to itself.</p>
 <ul>
@@ -589,7 +697,7 @@ ${days}
 <h2 id="h-more">More</h2>
 <ul>
 <li><a href="${SITE.github}/blob/main/embed/demo.html">The demo page</a> shows the iframe and the element side by side.</li>
-<li><a href="${up}../">Open the gallery</a> to make your own scene, then share it.</li>
+<li><a href="${up}../">Open the Playground</a> to make your own scene, then share it.</li>
 </ul>
 </section>
 </article>`;

@@ -22,9 +22,17 @@ async function openLab(page, url, scene) {
     await app.chooseToy("fluid-lab");
     if (scene !== "glass") await app.setToyOption("scene", scene);
   }, scene);
-  await page.waitForFunction(() => window.__splashery.player.fluids?.mode, null, {
-    timeout: 60_000,
-  });
+  // Ready once the path is picked and, for a scene with smoke, steam or a flame, once its gas grid
+  // is up: the runtime builds it after a dynamic import (FluidRuntime.startGasFx), so on a busy
+  // machine it came a moment after `mode` (Fix11: fx.gas undefined at :49 and :95).
+  await page.waitForFunction(
+    () => {
+      const f = window.__splashery.player.fluids;
+      return !!f?.mode && (!f.gridGas || !!f.fx?.gas);
+    },
+    null,
+    { timeout: 60_000 },
+  );
   return errors;
 }
 

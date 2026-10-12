@@ -98,7 +98,7 @@ class Grains {
     this.box = S.add(this.boxModel);
     const q = this.sub;
     this.pts = this.api.points(this.cap * q * q, {
-      size: q === 1 ? this.cell * 0.4 : this.cell * 0.26,
+      size: q === 1 ? this.cell * 0.4 : this.cell * 0.235, // (r3: a little finer)
       flat: 0.5,
     });
     this.free = [];
@@ -469,13 +469,14 @@ class Grains {
 
   camera(view, aspect) {
     const [w, h] = this.size;
-    const d2 = this.api.fitDistance(w + 0.25, h + 0.55, aspect);
+    // (Arcade r3: framed closer, so each grain shows bigger)
+    const d2 = this.api.fitDistance(w + 0.12, h + 0.45, aspect);
     return {
       target: [0, view * -0.05 + 0.08 * (1 - view), 0],
       yaw: view * (0.62 + this.yaw),
       pitch: view * 0.42,
       // (on a tall screen the turned box needs a little more room)
-      distance: d2 * (1 + (aspect < 1 ? 0.12 : -0.08) * view),
+      distance: d2 * (1 + (aspect < 1 ? 0.06 : -0.1) * view),
     };
   }
 

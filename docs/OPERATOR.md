@@ -22,13 +22,28 @@ Operator does the handover:
 - moves the routines;
 - stands by for a day without acting unless asked.
 
+The steps, the new Operator's first prompt and the readback are in
+`.claude/skills/operator-handover/SKILL.md`. The daily digest reports the Operator's age, context
+size and compactions every morning (the owner's request of October 10, 2026), so a handover that's
+due shows there.
+
 Keep context small in the meantime. Hand big reads (a transcript, a full export, a long run log) to
 a helper agent on Sonnet and keep only its summary.
 
-## Each check-in (about hourly)
+Lanes rotate by the same rule (the owner's call of October 11, 2026):
 
-1. **Re-arm first.** `send_later` 45 to 60 minutes out. Its message lists every open item, so the
-   next check-in can start cold.
+- A new round always starts in a fresh session, from its brief and the lane's handoff file, never in
+  the last round's session.
+- A finished lane stands down once its handoff PR merges. The Operator lists the sessions that are
+  safe to archive, and the owner archives them.
+- An old lane session is reused only for a small follow-up while its context is still small (under
+  about 300k tokens).
+
+## Each check-in (about every 90 minutes)
+
+1. **Re-arm first.** `send_later` about 90 minutes out when only waiting, sooner when something is
+   due (PR events and finished background runs wake the Operator on their own). Its message lists
+   every open item, so the next check-in can start cold.
 2. **Integrator results.** Fetch them:
    `git fetch origin +refs/heads/claude/integrator-results:refs/remotes/origin/claude/integrator-results`.
    Then read the newest `runs/*.md`. The first line starts "READY: RESULT".
@@ -99,8 +114,19 @@ The steps, in a scratch worktree:
 - Use `SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium npx playwright test <files> --reporter=line`.
   Never run `playwright install`.
 - One test server runs on port 4173. Kill a stale one with `pkill -f "[h]ttp.server 4173"`.
+- Run the full suite in its own worktree, `/home/user/wt-suite` (`git worktree add`, with
+  `node_modules` linked from the main checkout), never in the checkout the session starts in. The
+  cloud stop hook checks that checkout at every turn's end, and the screenshots a run rewrites there
+  cost a wasted turn each time (October 10, 2026).
 - Runs longer than a few minutes go in the background with a long timeout (up to two hours). The
   default background limit is 30 minutes.
+- Start a long run with the Bash tool's background mode, never with a trailing `&` inside a command:
+  the shell ends with the call and takes the run with it (October 11, 2026). A `pgrep -f` check
+  matches its own command line, so check the run's output file instead.
+- A background run stops at two hours. A full suite takes longer: when it stops, run the same
+  `tools/suite.mjs` command again without `--fresh`; it picks up the files that didn't finish.
+- A fresh container has no `node_modules`: run `npm ci` in the main checkout first, then link it
+  into the suite worktree.
 - Afterward, put the screenshots back with `git checkout -- tests/screenshots/`.
 - A line filter must use the test's declared line (where `test(` starts), not the line of the
   failure.
@@ -112,8 +138,9 @@ The steps, in a scratch worktree:
 ### Known flaky tests (they also fail on plain main)
 
 smoke:734, tpg:204, hl1:75, stm:366, fl7:49 and :95, qrs-toys:132, live4:149, phy:64, ui4:42, wd:187
-and :210, wdr3:133, smd-moving:101. One failure that passes when rerun alone is a flake; two
-failures in a row are real.
+and :210, wdr3:133, smd-moving:101, hh5-gems:119 and p3d (both failed under load on October 11,
+2026, and passed alone). One failure that passes when rerun alone is a flake; two failures in a row
+are real.
 
 ## Integrators
 
@@ -170,7 +197,8 @@ publishes it for him, and he marks the sounds there.
 
 All are on the owner's account:
 
-- **Daily digest:** 7:54 a.m. ET, fresh Sonnet session, read only.
+- **Daily digest:** 7:54 a.m. ET, fresh Sonnet session, read only. Since October 10, 2026 it also
+  reports the Operator's health (age, context, compactions) and says when a handover is due.
 - **Site patrol:** 7:21 a.m. ET, fresh Sonnet session, read only.
 - **Backup kit:** 8:07 a.m. and 8:07 p.m. ET, fires into the Operator session. It exports the review
   pages and zips the private state for the owner.
@@ -181,6 +209,15 @@ the private page.
 
 ## Habits worth keeping
 
+- Watch your own context (October 12, 2026): an Operator reached 557k tokens in about four and a
+  half hours. The biggest costs were tool output, not work: every PR subscription and event carries
+  a long guidance block, and a full PR list returns every body. List PRs with
+  `git ls-remote origin 'refs/pull/5*/head'` and match the heads to the lane branches; subscribe to
+  a PR only when it is ready to merge; hand big reads to a Sonnet helper.
+- The owner's notes and files are private (his rule of October 11, 2026): only your own summary goes
+  into the repo. The repo is public and Pages serves every file in it.
+- A merge through GitHub can be stopped by the session's permission check as a production deploy.
+  Ask the owner once, in one line; his explicit OK for that PR lets it through.
 - Re-arm the check-in before anything else, every time.
 - Say what was verified and what was skipped; never call a flake without a rerun.
 - Check that a fix doesn't change something the owner already marked good; if it would, ask first
@@ -188,3 +225,8 @@ the private page.
 - A test that only fails under load is still a bug. Reproduce it with `--repeat-each` or a CPU
   throttle (`Emulation.setCPUThrottlingRate` through CDP), then fix the cause, not the limit.
 - Keep the owner's messages short: what changed, what he needs to do, step by step.
+- Keep trigger prompts short: every create or update echoes the whole prompt back into the
+  Operator's context.
+- Keep blind reviews blind everywhere the owner can read: messages, check-in prompts (they show in
+  the transcript when they fire) and first prompts. A key goes only in the handover page's `sealed/`
+  folder and the Operator's scratchpad.

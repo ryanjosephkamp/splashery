@@ -118,8 +118,8 @@ The owner's marks (September 27, 2026): gradient descent and half adder "good". 
 - Text on every toy now uses a lower splat weight (4): at weight 10 the letters vanished at 320
   pixels (PACKS.md: tiny splats vanish on small screens).
 
-Second round (the Operator's notes on the owner's review, September 27, 2026;
-[review](../reviews/2026-09-27-ai-math/review.md)):
+Second round (the Operator's notes on the owner's review, September 27, 2026; the owner's notes are
+private):
 
 - **Neural network, your own size**: options for 2 to 4 inputs, 1 to 3 hidden layers of 2 to 5
   neurons and 1 to 3 outputs (at most 14 neurons: each neuron's glow is a part). Every size gets a
@@ -177,8 +177,8 @@ Round 3 (the owner's notes on round 2, September 27; everything else was marked 
   INPUTS/OUTPUTS and POS labels were dropped. Cards `ai-transformer-classic-r2` and
   `ai-transformer-classic-3d-r2`.
 
-Round 4 (the owner's notes on round 3, September 28): "the labels are black rectangles, the writing
-too faint; higher fidelity, less blurry".
+Round 4 (the owner's notes on round 3, September 28): the labels are black rectangles and the
+writing is too faint; he wants higher fidelity and less blur.
 
 - Root cause, checked (the Operator's findings were right): `text()` spread its splats over the
   whole label rectangle and dropped the ones off the ink, and its weight had been cut from 10 to 4,

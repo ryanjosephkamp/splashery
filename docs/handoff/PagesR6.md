@@ -24,10 +24,9 @@ docs/handoff/PagesR6.md. Model: Opus 5.5.
 
 ### Brief (written by the Operator on October 4, 2026, from the owner's push notes that evening)
 
-The owner's notes are in docs/reviews/2026-10-04-push-alignment/notes.md (read the part that starts
-"So, since the last time that I checked the Labs page"). Pictures and Pages is one of the push's
-main areas. He called the figures that pop out of a page "one of the coolest things that we've
-created so far", and Draw a box (drag a box on a page and what's inside rises) "the real truly
+The owner's notes are private; the Operator's summary is here. Pictures and Pages is one of the
+push's main areas. He called the figures that pop out of a page "one of the coolest things that
+we've created so far", and Draw a box (drag a box on a page and what's inside rises) "the real truly
 coolest thing". He tried them on a computer. What he wants changed:
 
 1. **One pop-up switch for every page toy, in the top bar.** Today Pop out is a switch in each toy's
@@ -69,7 +68,7 @@ coolest thing". He tried them on a computer. What he wants changed:
 7. **New page ideas** the owner picks on the Push Plan page (P1 to P4: layered pop-up scenes, peel a
    figure off as a sticker, a magnifier that lifts what's under it, folds that open with the page).
    The Operator tells you which, if any; build them after items 1 to 6, keeping the page uncluttered
-   (his words: "Nothing that's going to make it too cluttered or complicated to use").
+   (he wants nothing that makes the page too cluttered or complicated to use).
 
 Read docs/handoff/BooksR5.md first (how Pop out and Draw a box work, and their known issues), then
 the earlier Books handoff files. The effect itself stays what he loves: the figure rises as one

@@ -22,6 +22,8 @@
 // depth slider, the tap (the morph), Layers, the sway, play, pause and scrubbing. A tap on the
 // relief reaches the toy through its tap box. The relief module loads with the first picture.
 
+import { depthBytes } from "../live/relief-height.js"; // lane Photo depth
+
 const VIEW = { "photo-3d": "sharp", "moving-photo-3d": "sharp" };
 const S = {
   src: null, // what the last build showed: { toy, kind, ... }
@@ -120,8 +122,9 @@ export function sharpEntry(toy) {
 }
 
 // Photo to 3D's build: the photo, the splats' own depth (0..1 at gx x gy) and its relief.
-export function sharpPhoto({ photo, depth, gx, gy, aspect, relief, uid }) {
-  S.src = { toy: "photo-3d", kind: "photo", photo, depth, gx, gy, aspect, relief, uid };
+// (band: each cell's layer, its piece's, so each piece moves as one, as the splats do; lane Photo depth)
+export function sharpPhoto({ photo, depth, band, gx, gy, aspect, relief, uid }) {
+  S.src = { toy: "photo-3d", kind: "photo", photo, depth, band, gx, gy, aspect, relief, uid };
   fromScene("photo-3d");
   S.key = "";
 }
@@ -302,7 +305,12 @@ function fillPhoto(m, src) {
   if (S.key === key) return;
   S.key = key;
   m.setColor(src.photo);
-  m.setDepth({ w: src.gx, h: src.gy, data: src.depth });
+  const bytes = depthBytes(src.depth);
+  m.setDepth({ w: src.gx, h: src.gy, data: bytes });
+  // Lane Photo depth: each piece moves with its own layer, and the backing stays behind it.
+  m.setPieces(
+    src.band ? { band: src.band, depth: bytes, gx: src.gx, gy: src.gy, base: 0.5 } : null,
+  );
 }
 
 // A clip: the depth of the frame on show; the color straight from a playing video (the long clip's
@@ -311,6 +319,7 @@ function fillClip(m, src) {
   const mv = src.moving;
   const clip = mv.clip;
   if (!clip) return;
+  if (m.u.uBack[2]) m.setPieces(null); // (a clip's relief blends by depth, as before)
   const playing = (pl) => (pl?.motion?.targets?.play ?? 1) > 0.5;
   let video = null;
   if (clip.long) video = clip.video;
@@ -388,6 +397,7 @@ function shape(m, src, pl) {
     bodyQ: out.body?.quat || [0, 0, 0, 1],
     bodyT: [0, 0, 0],
     reach: 0.11,
+    tint: !!S.tint, // (tests: the backing in magenta)
   };
   if (src.kind === "photo") {
     const L = out.parts?.layer3?.offset?.[2] ?? 0; // (layer b is offset (b - 1.5) x spacing)
@@ -460,4 +470,10 @@ export const sharpState = () => ({
   cost: S.mesh ? S.mesh.cost() : null,
   splatsOff: !!S.splatsOff,
 });
-if (typeof window !== "undefined") window.__psv = { set: setSharpView, state: sharpState };
+// (lane Photo depth: `tint` draws the backing in magenta, for the tests)
+const tint = (on) => {
+  S.tint = !!on;
+  sync();
+  player()?.stage?.requestRender?.();
+};
+if (typeof window !== "undefined") window.__psv = { set: setSharpView, state: sharpState, tint };

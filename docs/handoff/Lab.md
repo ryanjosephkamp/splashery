@@ -10,12 +10,11 @@ file: docs/handoff/Lab.md.
 
 ## Brief (written by the Operator on September 29, 2026, from the owner's note "big new Splashery ideas" and his answers on the Splashery Universe page the same night)
 
-The owner's words: "What if we found something that's, like, totally unique that nobody's ever done
-that's actually valuable … Could we use a different kernel for some parts of this? Could we use
-splats that are not Gaussian? … could we use 4D Gaussians?" And: "I almost want to make things so
-incredible with this that people won't even realize that they're looking at Gaussian splats." His
-answer: "The Lab? One Opus lane: a short literature check, then the sharper-kernel test on pages and
-grainy toys, then splat fields on the GPU. Keep only what beats today's clips."
+The owner's call (September 29, 2026): look for something unique and valuable that nobody has done,
+such as a different kernel for parts of this, splats that are not Gaussian, or 4D Gaussians. He
+wants to make things so good that people do not realize they are looking at Gaussian splats. His
+answer: the Lab is one Opus lane: a short literature check, then the sharper-kernel test on pages
+and grainy toys, then splat fields on the GPU. Keep only what beats today's clips.
 
 Work in this order, and stop a step early rather than ship something that doesn't clearly win.
 
@@ -145,19 +144,15 @@ Model: Opus 5.5 (claude-opus-5-5), default effort.
 
 ## r2
 
-### Brief (the Operator's message of September 29, 2026, word for word)
+### Brief (the Operator's message of September 29, 2026, paraphrased)
 
-From the Operator: a follow-up for this lane from the owner's review of September 29, 2026
-(docs/reviews/2026-09-29-new-toys/review.md; Ops PR coming). Two small fixes, labs only, as "Lab
-r2". Your model stays Opus 5.5.
+From the Operator: a follow-up for this lane from the owner's review of September 29, 2026 (the
+owner's notes are private; the Operator's summary is in this brief; Ops PR coming). Two small fixes,
+labs only, as "Lab r2". Your model stays Opus 5.5.
 
-His notes, word for word:
-
-"For the Lab category: The galaxy toy doesn't seem to show it's effect when I click on it... The
-"Send a pulse" button works, but clicking on the toy doesn't."
-
-"For the "Splat equation"... These splats seem really, really grainy. Is that on purpose? If not, or
-if it makes sense to also improve the sharpness, let's please improve the sharpness."
+His notes, in the Operator's words: the Lab category's galaxy toy does not show its effect when
+tapped (the "Send a pulse" button works, but a tap on the toy does not), and the "Splat equation"
+splats look very grainy; if that is not on purpose, or if it makes sense, improve the sharpness.
 
 1. The Splat field (`splat-field`, src/packs/lab.js): a tap on the toy must send the same pulse as
    the Toy tab's "Send a pulse" button, for every field (galaxy, ocean, knot), at phone size and on
@@ -217,12 +212,10 @@ Model: Opus 5.5 (claude-opus-5-5), default effort.
   - Every program keeps its own count and size, so old links, typed programs and the Manual's
     gallery build the same program; a program that sets size = … keeps it.
 
-- **The owner's marks (September 29, 2026), on both r2 cards, word for word:** "Looks basically
-  perfect right now. If we can safely increase sharpness even further, then I'd like to see what
-  that looks like. But if not, then the resolution seems fine as-is. For the ocean, I wonder if we
-  can make this interactive (perhaps in the upcoming interactivity work that we already have
-  planned, or now; I'm comfortable either way) such that clicking/tapping different parts of the
-  liquid surface sends the ripples from those locations?"
+- **The owner's marks (September 29, 2026), on both r2 cards:** the toys look basically perfect. If
+  sharpness can safely go further, he wants to see it; if not, the resolution is fine. For the
+  ocean, he asked whether it could be interactive (in the planned interactivity work or now), so
+  that tapping different parts of the liquid surface sends ripples from those places.
   - **The ocean:** a tap now drops the stone where it lands (the tap's point, in field units, rides
     on the pulse's channels 1 and 2; all 0 again at rest); the button still drops it in the middle.
     Card `lab-field-tap-r2`.

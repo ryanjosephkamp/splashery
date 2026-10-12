@@ -8,20 +8,19 @@ loose pieces, "built where they end", sounds, known issues) are in [history.md](
 ## Brief
 
 Phase E4 (PR #33, merged 2026-09-26) gave the 28 nature and weather toys new tap effects. On the
-Effect review page the owner marked 26 of the 30 clips good and four "Needs work". Their notes, word
-for word (`verdicts/e4-<toy id>`):
+Effect review page the owner marked 26 of the 30 clips good and four "Needs work". The Operator's
+summary of their notes (`verdicts/e4-<toy id>`):
 
-1. **Ice swan** (`ice-statue`, `src/packs/elements.js`): "The ice swan shouldn't melt like an ice
-   cream cone – it currently does, and it's basically just squishing downwards. The ice swan is made
-   of water, so it melts by dripping water and slowly breaking decomposing, with the melt speed
-   accelerating a bit as more of it melts, if that makes sense."
-2. **Lava lamp** (`lava-lamp`, `src/packs/elements.js`): "This is basically perfect already, but I'd
-   like the user to be able to choose different colors and blob numbers, sizes, etc. if possible."
-   The owner wants the lava lamp expanded further (their prompt may list more wishes).
-3. **Ocean wave** (`ocean-wave`, `src/packs/elements.js`): "Take a look at this. It doesn't look
-   natural. The waves themselves should curl, not just the end."
-4. **Pinecone** (`pinecone`, `src/packs/nature.js`): "The actual pieces of the pinecone must fall
-   off of the pinecone."
+1. **Ice swan** (`ice-statue`, `src/packs/elements.js`): it should not melt like an ice cream cone,
+   as it does now by squishing downward. It is made of water, so it should melt by dripping and
+   slowly breaking down, with the melt speeding up a bit as more of it melts.
+2. **Lava lamp** (`lava-lamp`, `src/packs/elements.js`): basically perfect already, but he wants the
+   user to be able to choose different colors and blob numbers, sizes, and so on, if possible. The
+   owner wants the lava lamp expanded further (their prompt may list more wishes).
+3. **Ocean wave** (`ocean-wave`, `src/packs/elements.js`): it does not look natural. The waves
+   themselves should curl, not just the end.
+4. **Pinecone** (`pinecone`, `src/packs/nature.js`): the actual pieces of the pinecone must fall off
+   of the pinecone.
 
 Starting points from the E4 session (2026-09-26):
 

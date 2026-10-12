@@ -44,11 +44,11 @@ brief, word for word, under "## Brief", then keep "## State
 
 For the Operator" current). Model: Opus 5.5.
 
-### Brief (written by the Operator on October 5, 2026, from the owner's push notes, docs/reviews/2026-10-04-push-alignment/notes.md)
+### Brief (written by the Operator on October 5, 2026, from the owner's push notes, which are private)
 
-The owner wants proof that the science and computing toys are right ("I need evidence ... I do not
-want to hallucinate these things"), and more from two toys on the AI and computing shelf (public
-toys: your changes merge after his "good" marks).
+The owner wants proof that the science and computing toys are right (he wants evidence for each,
+with nothing made up), and more from two toys on the AI and computing shelf (public toys: your
+changes merge after his "good" marks).
 
 1. **Sorting machine** (`sorting-machine`, `src/packs/computing.js` near 1052-1150 and 3733; eight
    algorithms with steps computed from real code; one sound for all today, toy-sounds.js 2609-2614).

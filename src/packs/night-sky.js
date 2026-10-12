@@ -657,12 +657,15 @@ function buildSky(k, o) {
       const j = sg * R2D * 0.35;
       const alt = q.alt + (k.rand() - 0.5) * j;
       const az = q.az + ((k.rand() - 0.5) * j) / Math.max(0.2, Math.cos(alt * D2R));
-      if (alt > skyline(az) - edge) continue;
+      const below = skyline(az) - alt;
+      if (below < edge) continue;
       const e = [Math.cos(alt * D2R) * Math.sin(az * D2R), Math.cos(alt * D2R) * Math.cos(az * D2R), Math.sin(alt * D2R)]; // prettier-ignore
+      // Fix10: no splat's soft edge crosses the skyline (it smeared the hills against the day sky).
+      const cap = Math.max(0.12, below / 2) * D2R;
       push(
         sheetSplat(
           sc(e).map((v) => v * rr),
-          sg * rr,
+          Math.min(sg, cap) * rr,
           color(alt),
           1,
           extra,
@@ -689,13 +692,15 @@ function buildSky(k, o) {
   };
   const nightGround = (alt) => mix([0.03, 0.033, 0.04], [0.012, 0.014, 0.018], clamp(-alt / 30, 0, 1)); // prettier-ignore
   const dayGround = (alt) => mix([0.2, 0.24, 0.17], [0.1, 0.12, 0.08], clamp(-alt / 30, 0, 1));
-  // The daylight ground comes in over a short stretch of the dawn, and its splats overlap more:
-  // while it is half faded in, uneven overlap shows as mottling.
+  // The daylight ground comes in over a short stretch of the dawn, and its splats overlap a little
+  // more than the night's: while it is half faded in, uneven overlap shows as mottling. (Fix10, the
+  // walkthrough of October 9, 2026: the day was blurry, the night excellent. The day now has the
+  // night's density, so its splats are about half as wide, and no splat crosses the skyline.)
   const dayFade = { kind: FADE, params: [0.55, -0.3], channel: 0 };
   groundLayer(Math.round(N * 0.07), -14, 4, R.ground, nightGround);
   groundLayer(Math.round(N * 0.03), -90, -13, R.ground, nightGround);
   ridge(R.ground - 0.001, nightGround);
-  groundLayer(Math.round(N * 0.035), -14, 4, R.ground - 0.003, dayGround, dayFade, 0.05, 1.7);
+  groundLayer(Math.round(N * 0.07), -14, 4, R.ground - 0.003, dayGround, dayFade, 0.05, 1.45);
   groundLayer(Math.round(N * 0.012), -90, -13, R.ground - 0.003, dayGround, dayFade, 0.05, 1.7);
   ridge(R.ground - 0.004, dayGround, dayFade);
 

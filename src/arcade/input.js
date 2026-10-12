@@ -25,6 +25,7 @@ const KEYS = {
   Space: "fire",
   Enter: "fire",
   KeyX: "alt",
+  KeyZ: "alt", // Arcade r3: Z turns too (Strata)
   ShiftLeft: "alt",
   ShiftRight: "alt",
   KeyQ: "turnL",
@@ -56,6 +57,11 @@ export class Input {
     this.taps = 0; // taps on the play area since the last read
     this.tapAt = []; // where they landed ({ x, y }, 0..1), for games that aim by tapping
     this.drag = [0, 0]; // one finger's (or the mouse's) drag since the last read, in widths
+    // Arcade r3: looking around a 3D view. Two fingers dragging (or the
+    // mouse's right button) turn it, a pinch or the wheel zooms; the
+    // runtime reads them for games with a `look` block.
+    this.look = [0, 0]; // in widths
+    this.zoom = 0; // the log of the zoom asked for since the last read
     this.active = false; // takes the keyboard (the game is in play or chosen)
     // A touch screen shows the pad from the start (until keys are used).
     this.lastDevice = globalThis.matchMedia?.("(pointer: coarse)").matches ? "touch" : "keys";
@@ -103,9 +109,18 @@ export class Input {
       if (e.target !== surface) return;
       surface.setPointerCapture?.(e.pointerId);
       const p = where(e);
-      pts.set(e.pointerId, { ...p, x0: p.x, y0: p.y, t0: e.timeStamp, moved: 0 });
+      pts.set(e.pointerId, { ...p, x0: p.x, y0: p.y, t0: e.timeStamp, moved: 0, button: e.button }); // prettier-ignore
       this.skipTap = false; // the runtime sets it when this press starts or resumes the game
-      this.pointer = { ...p, down: true, kind: e.pointerType };
+      // (start: where this press began, for games that read a drag by
+      // where it started: Shardball's dish or its dome)
+      this.pointer = {
+        ...p,
+        down: true,
+        kind: e.pointerType,
+        start: { ...p },
+        multi: pts.size > 1,
+      };
+      if (pts.size === 2) this.pinchD = spread(pts);
       this.lastDevice = e.pointerType === "touch" ? "touch" : "mouse";
       e.preventDefault();
     });
@@ -114,13 +129,28 @@ export class Input {
       const s = pts.get(e.pointerId);
       if (s) {
         s.moved = Math.max(s.moved, Math.hypot(p.x - s.x0, (p.y - s.y0) * (surface.clientHeight / Math.max(1, surface.clientWidth)))); // prettier-ignore
-        if (pts.size === 1) {
-          this.drag[0] += p.x - s.x;
-          this.drag[1] += (p.y - s.y) * (surface.clientHeight / Math.max(1, surface.clientWidth));
+        const ddx = p.x - s.x;
+        const ddy = (p.y - s.y) * (surface.clientHeight / Math.max(1, surface.clientWidth));
+        if (pts.size === 1 && s.button === 2) {
+          this.look[0] += ddx;
+          this.look[1] += ddy;
+        } else if (pts.size === 1) {
+          this.drag[0] += ddx;
+          this.drag[1] += ddy;
+        } else if (pts.size === 2) {
+          // two fingers: their mean move turns, their spread zooms
+          this.look[0] += ddx / 2;
+          this.look[1] += ddy / 2;
         }
         s.x = p.x;
         s.y = p.y;
-        this.pointer = { ...p, down: true, kind: e.pointerType };
+        if (pts.size === 2) {
+          const d = spread(pts);
+          if (this.pinchD > 0 && d > 0) this.zoom += Math.log(this.pinchD / d);
+          this.pinchD = d;
+        }
+        const prev = this.pointer;
+        this.pointer = { ...p, down: true, kind: e.pointerType, start: prev?.start || { ...p }, multi: pts.size > 1 || !!prev?.multi }; // prettier-ignore
         // A quick flick is a swipe (snake turns), once per drag leg.
         const dx = p.x - s.x0;
         const dy = (p.y - s.y0) * (surface.clientHeight / Math.max(1, surface.clientWidth));
@@ -151,6 +181,16 @@ export class Input {
       if (e.pointerType === "mouse" && !pts.size) this.pointer = null;
     });
     on(surface, "contextmenu", (e) => e.preventDefault());
+    on(
+      surface,
+      "wheel",
+      (e) => {
+        if (!this.wheelZoom) return;
+        e.preventDefault();
+        this.zoom += Math.max(-0.4, Math.min(0.4, e.deltaY * (e.deltaMode ? 0.05 : 0.0015)));
+      },
+      { passive: false },
+    );
   }
 
   // The on-screen pad's buttons call this.
@@ -234,6 +274,16 @@ export class Input {
     return d;
   }
 
+  // The look-around since the last call: [across, down] in widths, and
+  // the log of the zoom (positive: farther).
+  takeLook() {
+    const l = this.look;
+    const z = this.zoom;
+    this.look = [0, 0];
+    this.zoom = 0;
+    return { turn: l, zoom: z };
+  }
+
   takeTaps() {
     const t = this.taps;
     this.taps = 0;
@@ -248,12 +298,20 @@ export class Input {
     this.taps = 0;
     this.tapAt = [];
     this.drag = [0, 0];
+    this.look = [0, 0];
+    this.zoom = 0;
   }
 
   destroy() {
     for (const off of this.listeners) off();
     this.listeners = [];
   }
+}
+
+// The distance between the first two fingers down.
+function spread(pts) {
+  const [a, b] = [...pts.values()];
+  return a && b ? Math.hypot(a.x - b.x, a.y - b.y) : 0;
 }
 
 function typing(el) {

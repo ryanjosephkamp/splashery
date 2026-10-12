@@ -26,6 +26,12 @@ const R = 1.0; // the dome's sphere
 const DOME_PADDLE_Y = -0.8;
 const DOME_G = 0.85;
 const SPAN = Math.PI * 0.62; // the dome's bricks reach this far around each side of the back
+// Arcade r3: the dome's ground, just under the dish. The ball that touches
+// it is lost, as a ball that gets past the paddle is in 2D.
+const GROUND_Y = DOME_PADDLE_Y - 0.02;
+const GROUND_R = Math.sqrt(R * R - GROUND_Y * GROUND_Y);
+const DISH_R = 0.2;
+const HOLD_SECONDS = 3; // a caught ball goes on its own after this
 
 // A point on the unit sphere: phi around from the back (-Z), th down from the top.
 function spherePoint(phi, th) {
@@ -63,7 +69,11 @@ export class Shardball {
   constructor(api) {
     this.api = api;
     this.q = api.q;
-    this.style = api.options.style === "dome" ? "dome" : "flat";
+    this.style = api.options.style === "flat" ? "flat" : "dome";
+    // Arcade r3 (the owner's walkthrough): the paddle catches and holds the
+    // ball every time, and in the dome the ground takes the ball. Shardball
+    // only: Page Breaker (which builds on this game) stays as it was.
+    this.r3 = this.constructor === Shardball;
     this.geo = { ...BOARD };
     this.startLevel = clamp(Math.round(api.options.level || 1), 1, LEVELS.length);
     this.rand = api.rand;
@@ -206,6 +216,36 @@ export class Shardball {
       },
       { count: 900 },
     );
+    // Arcade r3: the dome's ground, a solid disc of slate lying flat
+    // (facing +y), so the ball that touches it reads. Its faint ring and its
+    // darker rim are rings of their own, so each edge is a crisp grid edge
+    // (a color change inside a coarse splat blurs).
+    const ground = crispModel(
+      (c) => {
+        const up = { normal: [0, 1, 0] };
+        const slate = (f) => [f * 0.86, f * 0.92, f * 1.04];
+        const w = 0.008;
+        const ringAt = GROUND_R * 0.45;
+        const rimAt = GROUND_R * 0.955;
+        c.disc(ringAt - w, { ...up, inner: 1e-4, color: slate(0.6) });
+        c.disc(ringAt + w, { ...up, inner: ringAt - w, color: slate(0.47) });
+        c.disc(rimAt, { ...up, inner: ringAt + w, color: slate(0.55) });
+        c.disc(GROUND_R, { ...up, inner: rimAt, color: slate(0.38) });
+      },
+      { fine: 0.005, coarse: 0.022 },
+    );
+    // Arcade r3: a crisper dish: an orange rim and a pale blue middle, each
+    // its own ring, over an orange side.
+    const dishR3 = crispModel(
+      (c) => {
+        const h = 0.035;
+        const up = { normal: [0, 1, 0], pos: [0, h / 2, 0] };
+        c.cylinder(DISH_R, h, { axis: [0, 1, 0], caps: false, color: (p, n) => [0.95, 0.45, 0.2].map((v) => v * (0.7 + 0.15 * n[2])) }); // prettier-ignore
+        c.disc(DISH_R, { ...up, inner: DISH_R * 0.74, color: [0.97, 0.5, 0.22] });
+        c.disc(DISH_R * 0.74, { ...up, inner: 1e-4, color: [0.66, 0.78, 0.93] });
+      },
+      { fine: 0.004, coarse: 0.02 },
+    );
     // (rails are built when the board's size is known: see reset)
     const rails = new Map();
     const railOf = (len) => {
@@ -213,7 +253,7 @@ export class Shardball {
       if (!rails.has(key)) rails.set(key, rail(len));
       return rails.get(key);
     };
-    return { brick, paddle, dish, ball, shadow, railOf, floor };
+    return { brick, paddle, dish: this.r3 ? dishR3 : dish, ball, shadow, railOf, floor, ground };
   }
 
   // ---- Game ----------------------------------------------------------------------
@@ -243,7 +283,14 @@ export class Shardball {
     this.dish = { sprite: s.add(this.models.dish, { fade: 0 }) };
     this.ball = { p: [0, 0, 0], v: [0, 0, 0], stuck: true, sprite: s.add(this.models.ball) };
     this.shadow = s.add(this.models.shadow, { fade: 0 });
-    this.floor = this.style === "dome" ? s.add(this.models.floor, { pos: [0, DOME_PADDLE_Y, 0], fade: 0 }) : null; // prettier-ignore
+    this.floor =
+      this.style !== "dome"
+        ? null
+        : this.r3
+          ? s.add(this.models.ground, { pos: [0, GROUND_Y, 0], fade: 0 })
+          : s.add(this.models.floor, { pos: [0, DOME_PADDLE_Y, 0], fade: 0 });
+    if (this.floor && this.r3) this.floor.sortBias = [0, -0.3, 0]; // below the dish, the ball and its shadow
+    this.downT = 0;
     this.shards = [];
     this.buildLevel();
     this.serve();
@@ -277,8 +324,22 @@ export class Shardball {
   serve() {
     const b = this.ball;
     b.stuck = true;
+    b.off = null;
     b.v = [0, 0, 0];
     this.serveAt = this.t + 1.2;
+  }
+
+  // Arcade r3: the paddle (or the dish) catches the ball and holds it where
+  // it landed; a press launches it from there (the place sets the angle),
+  // and after a few seconds it goes on its own.
+  catchBall(off) {
+    const b = this.ball;
+    b.stuck = true;
+    b.off = off;
+    b.v = [0, 0, 0];
+    this.caughtAt = this.t;
+    this.caught = (this.caught || 0) + 1;
+    this.api.sound({ voice: "pock", f: 300, vol: 0.55, decay: 0.5 });
   }
 
   launch() {
@@ -286,11 +347,21 @@ export class Shardball {
     if (!b.stuck) return;
     b.stuck = false;
     const a = (this.rand() - 0.5) * 0.6;
+    const off = b.off;
+    b.off = null;
     if (this.style === "dome" && this.mode3d) {
-      b.v = [Math.sin(a) * 0.4, 2.15, Math.cos(a) * 0.25 - 0.1];
+      if (off) {
+        // from where it sits on the dish: off-center sends it outward
+        const d = Math.hypot(off[0], off[1]);
+        const k = Math.max(0.25, d / DISH_R);
+        const ux = d > 1e-3 ? off[0] / d : Math.sin(a);
+        const uz = d > 1e-3 ? off[1] / d : -Math.cos(a);
+        b.v = [ux * 0.9 * k, 2.15 + 0.04 * (this.level - 1), uz * 0.9 * k];
+      } else b.v = [Math.sin(a) * 0.4, 2.15, Math.cos(a) * 0.25 - 0.1];
     } else {
       const sp = this.speed();
-      b.v = [Math.sin(a) * sp, Math.cos(a) * sp, 0];
+      const ang = off ? clamp(off[0] / (this.paddle.w / 2), -1, 1) * 1.05 : a;
+      b.v = [Math.sin(ang) * sp, Math.cos(ang) * sp, 0];
     }
     this.api.sound({ voice: "pock", f: 520, vol: 0.6 });
   }
@@ -305,6 +376,7 @@ export class Shardball {
     // Hand the ball over to the other view's game: hold it while the view
     // slides, then go on from the matching place.
     const b = this.ball;
+    b.off = null; // a held ball sits in the middle of the other view's paddle
     if (to > 0.5 && !this.mode3d) {
       const p = this.toDome2(b.p[0], b.p[1], 0.62);
       const v2 = b.v;
@@ -336,13 +408,21 @@ export class Shardball {
       this.hold -= dt;
       return;
     }
+    // The ball on the ground lies there a moment, then it is lost.
+    if (this.downT > 0) {
+      if ((this.downT -= dt) <= 0) this.loseBall();
+      return;
+    }
     const dome = this.style === "dome" && this.mode3d;
     this.movePaddle(dt, ctl, dome);
     const b = this.ball;
     if (b.stuck) {
-      if (dome) b.p = [this.paddle.x, DOME_PADDLE_Y + 0.03 + BALL_R, this.paddle.z];
-      else b.p = [this.paddle.x, PADDLE_Y + 0.025 + BALL_R, 0];
-      const go = ctl.pressed.has("fire") || (ctl.demo && this.t > this.serveAt) || (!ctl.demo && this.t > this.serveAt + 4); // prettier-ignore
+      const o = b.off || [0, 0];
+      if (dome) b.p = [this.paddle.x + o[0], DOME_PADDLE_Y + 0.0175 + BALL_R, this.paddle.z + o[1]];
+      else b.p = [this.paddle.x + o[0], PADDLE_Y + 0.025 + BALL_R, 0];
+      const go = b.off
+        ? ctl.pressed.has("fire") || this.t > this.caughtAt + (ctl.demo ? 0.45 : HOLD_SECONDS)
+        : ctl.pressed.has("fire") || (ctl.demo && this.t > this.serveAt) || (!ctl.demo && this.t > this.serveAt + 4); // prettier-ignore
       if (go) this.launch();
       return;
     }
@@ -365,8 +445,8 @@ export class Shardball {
       let mx = inp.axis[0];
       let mz = -inp.axis[1];
       if (dome) {
-        // Keys move the dish in the camera's frame.
-        const yaw = this.camYaw || 0;
+        // Keys move the dish in the camera's frame (with the player's look).
+        const yaw = (this.camYaw || 0) + (this.api.look?.().yaw || 0);
         const ax = Math.cos(yaw) * mx + Math.sin(yaw) * mz;
         const az = -Math.sin(yaw) * mx + Math.cos(yaw) * mz;
         mx = ax;
@@ -374,7 +454,21 @@ export class Shardball {
       }
       p.x += mx * sp * dt;
       if (dome) p.z += mz * sp * dt;
-      const ptr = inp.pointer;
+      let ptr = inp.pointer;
+      // Arcade r3: in the dome, a drag that starts on the dome (not on the
+      // ground) turns the view a little; one on the ground moves the dish.
+      // Two fingers always look around (the kit).
+      if (dome && this.r3 && ptr?.down) {
+        if (ptr.start !== this.pressStart) {
+          this.pressStart = ptr.start;
+          this.lookDrag = !this.onGround(ptr.start.x, ptr.start.y);
+        }
+        const d = inp.takeDrag?.() || [0, 0];
+        if (this.lookDrag || ptr.multi) {
+          if (!ptr.multi) this.api.lookBy?.(d[0], d[1]);
+          ptr = null;
+        }
+      }
       if (ptr && (ptr.down || ptr.kind === "mouse") && this.api.ray) {
         const ray = this.api.ray(ptr.x, ptr.y);
         const y0 = dome ? DOME_PADDLE_Y : null;
@@ -401,6 +495,15 @@ export class Shardball {
         p.z *= 0.42 / l;
       }
     } else p.x = clamp(p.x, -W / 2 + p.w / 2, W / 2 - p.w / 2);
+  }
+
+  // Whether a point of the stage (0..1) looks at the dome's ground (a
+  // little wider than it, so a finger near the dish still moves it).
+  onGround(x, y) {
+    const ray = this.api.ray?.(x, y);
+    if (!ray || ray.dir[1] >= -1e-4) return false;
+    const t = (GROUND_Y - ray.origin[1]) / ray.dir[1];
+    return Math.hypot(ray.origin[0] + ray.dir[0] * t, ray.origin[2] + ray.dir[2] * t) < GROUND_R * 1.25; // prettier-ignore
   }
 
   // The board point under a pointer ray, in the flat style's tipped view.
@@ -437,6 +540,10 @@ export class Shardball {
         b.p[1] > PADDLE_Y - 0.03 &&
         Math.abs(b.p[0] - p.x) < p.w / 2 + BALL_R
       ) {
+        if (this.r3) {
+          this.catchBall([clamp(b.p[0] - p.x, -p.w / 2, p.w / 2), 0]);
+          return;
+        }
         // The angle comes from where it hit the paddle.
         const off = clamp((b.p[0] - p.x) / (p.w / 2), -1, 1);
         const a = off * 1.05;
@@ -498,6 +605,12 @@ export class Shardball {
         const dx = b.p[0] - p.x;
         const dz = b.p[2] - p.z;
         const d = Math.hypot(dx, dz);
+        if (d < DISH_R + BALL_R && this.r3) {
+          // caught where it landed (kept on the dish)
+          const k = Math.min(1, (DISH_R - BALL_R * 0.5) / Math.max(d, 1e-6));
+          this.catchBall([dx * k, dz * k]);
+          return;
+        }
         if (d < 0.2 + BALL_R) {
           // Off-center hits send it outward, toward that side of the dome.
           const k = d / 0.2;
@@ -531,6 +644,14 @@ export class Shardball {
           break;
         }
       }
+      // Arcade r3: the ground takes the ball (it lies there, then is lost).
+      if (this.r3 && b.p[1] - BALL_R < GROUND_Y && b.v[1] < 0) {
+        b.p[1] = GROUND_Y + BALL_R;
+        b.v = [0, 0, 0];
+        this.downT = 0.7;
+        this.api.sound([{ voice: "thud", f: 110, vol: 0.7 }, { voice: "pock", f: 180, vol: 0.4, decay: 0.3 }]); // prettier-ignore
+        return;
+      }
       if (b.p[1] < DOME_PADDLE_Y - 0.12) {
         this.loseBall();
         return;
@@ -558,6 +679,12 @@ export class Shardball {
     br.alive = false;
     this.score += KINDS[br.kind].points;
     const s = br.sprite;
+    if (!s) {
+      // (a brick the layer had no room for: it breaks without pieces)
+      this.api.sound(this.breakSound(br));
+      if (!this.bricks.some((x) => x.alive)) this.nextLevel();
+      return;
+    }
     const dome = this.style === "dome" && this.view > 0.5;
     const vel = dome ? [0, 0, 0] : [this.ball.v[0] * 0.15, 0.4, 0.6 * this.view];
     // world-space hit point: in the flat style's tipped view the board is turned
@@ -752,9 +879,11 @@ export class Shardball {
         b.sprite.pos = lerp3(b.p, this.toDome2(b.p[0], b.p[1], 0.62), view);
       }
       // Its shadow on the dish's level shows where it will come down.
-      this.shadow.pos = [b.p[0], DOME_PADDLE_Y + 0.02, b.p[2]];
+      this.shadow.pos = [b.p[0], this.r3 ? GROUND_Y + 0.004 : DOME_PADDLE_Y + 0.02, b.p[2]];
       this.shadow.quat = [0, 0, 0, 1];
       this.shadow.fade = this.mode3d && !b.stuck ? clamp(view * 2 - 1, 0, 1) : 0;
+      // (r3: only on the ground; past its edge it would hang in the air)
+      if (this.r3 && Math.hypot(b.p[0], b.p[2]) > GROUND_R - BALL_R) this.shadow.fade = 0;
       if (this.floor) this.floor.fade = clamp(view * 1.5 - 0.5, 0, 1);
     }
     b.sprite.fade = this.over ? 0 : 1;
@@ -778,11 +907,13 @@ export class Shardball {
     const want = this.mode3d ? clamp(b.p[0] * 0.35, -0.3, 0.3) : 0;
     this.camYaw = this.camYaw ?? 0;
     this.camYaw += (want - this.camYaw) * 0.02;
+    // (Arcade r3: framed closer, so the bricks and the ground fill a phone)
+    const d3 = this.r3 ? this.api.fitDistance(2.3, 2.2, aspect, 1.0, 48) : this.api.fitDistance(2.75, 2.7, aspect, 1.0, 48); // prettier-ignore
     return {
-      target: [0, lerp(0.14, -0.04, view), lerp(0, -0.2, view)],
+      target: [0, lerp(0.14, this.r3 ? -0.28 : -0.04, view), lerp(0, this.r3 ? -0.05 : -0.2, view)],
       yaw: this.camYaw * view,
       pitch: lerp(0, 0.5, view),
-      distance: lerp(d2, this.api.fitDistance(2.75, 2.7, aspect, 1.0, 48), view),
+      distance: lerp(d2, d3, view),
       fov: lerp(38, 48, view),
     };
   }

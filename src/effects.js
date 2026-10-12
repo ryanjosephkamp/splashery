@@ -1892,6 +1892,82 @@ export const MODIFIER_KIT_PHOTO = {
   glsl: variant(GLSL, "kitphoto", "glsl"),
   wgsl: variant(WGSL, "kitphoto", "wgsl"),
 };
+// Lane Kit lab: generated toys with a gloss that moves with the view (labs
+// only; a recipe's `gloss`, or ?gloss= for any kit toy). Kit splats store
+// one color; this adds a highlight from each flat splat's normal (its
+// thinnest axis), the camera and a fixed light, set by uSpGloss (x strength,
+// y sharpness). Used only while such a toy shows, so every other toy keeps
+// the kit's program exactly. docs/lab/GLOSS.md has the comparison.
+const GLOSS = {
+  glslUniforms: `uniform vec4 uSpGloss; // lane Kit lab: x strength, y sharpness
+vec3 spGlossN = vec3(0.0);
+float spGlossK = 0.0;
+`,
+  wgslUniforms: `uniform uSpGloss: vec4f;
+var<private> spGlossN: vec3f = vec3f(0.0);
+var<private> spGlossK: f32 = 0.0;
+`,
+  // The normal: the thinnest axis of the splat, turned with it. K is 1 for a
+  // flat splat and 0 for a round one (a round splat has no facing).
+  glslRS: `  vec3 gs = abs(scale);
+  vec3 gax = gs.x <= gs.y && gs.x <= gs.z ? vec3(1.0, 0.0, 0.0) : (gs.y <= gs.z ? vec3(0.0, 1.0, 0.0) : vec3(0.0, 0.0, 1.0));
+  spGlossN = spQuatRotate(normalize(rotation), gax);
+  float gmid = max(min(gs.x, gs.y), min(max(gs.x, gs.y), gs.z));
+  spGlossK = 1.0 - smoothstep(0.25, 0.6, min(gs.x, min(gs.y, gs.z)) / max(gmid, 1e-6));
+`,
+  wgslRS: `  let gs = abs(*scale);
+  var gax = vec3f(0.0, 0.0, 1.0);
+  if (gs.x <= gs.y && gs.x <= gs.z) { gax = vec3f(1.0, 0.0, 0.0); } else if (gs.y <= gs.z) { gax = vec3f(0.0, 1.0, 0.0); }
+  spGlossN = spQuatRotate(normalize(*rotation), gax);
+  let gmid = max(min(gs.x, gs.y), min(max(gs.x, gs.y), gs.z));
+  spGlossK = 1.0 - smoothstep(0.25, 0.6, min(gs.x, min(gs.y, gs.z)) / max(gmid, 1e-6));
+`,
+  // Blinn-Phong: the highlight where the normal is halfway between the light
+  // (the kit's own, from above and to the front) and the camera.
+  glslColor: `  if (spGlossK > 0.0 && uSpGloss.x > 0.0) {
+    vec3 gv = normalize(uSpCam.xyz - center);
+    vec3 gn = dot(spGlossN, gv) < 0.0 ? -spGlossN : spGlossN;
+    vec3 gh = normalize(normalize(vec3(0.42, 0.8, 0.43)) + gv);
+    float gs = pow(max(dot(gn, gh), 0.0), uSpGloss.y) * uSpGloss.x * spGlossK;
+    // A reflection shows on clear glass too: it adds light and cover.
+    float ga = color.a + min(gs, 1.0) * (1.0 - color.a);
+    color.rgb = (color.rgb * color.a + vec3(gs)) / max(ga, 1e-4);
+    color.a = ga;
+  }
+`,
+  wgslColor: `  if (spGlossK > 0.0 && uniform.uSpGloss.x > 0.0) {
+    let gv = normalize(uniform.uSpCam.xyz - center);
+    let gn = select(spGlossN, -spGlossN, dot(spGlossN, gv) < 0.0);
+    let gh = normalize(normalize(vec3f(0.42, 0.8, 0.43)) + gv);
+    let gs = pow(max(dot(gn, gh), 0.0), uniform.uSpGloss.y) * uniform.uSpGloss.x * spGlossK;
+    // A reflection shows on clear glass too: it adds light and cover.
+    let ga = a + min(gs, 1.0) * (1.0 - a);
+    rgb = (rgb * a + vec3f(gs)) / max(ga, 1e-4);
+    a = ga;
+  }
+`,
+};
+
+function withGloss(src, glsl) {
+  const at = (text, find, add, before = true) => {
+    if (!text.includes(find)) throw new Error(`gloss: missing ${find}`);
+    return text.replace(find, before ? add + find : find + add);
+  };
+  if (glsl) {
+    src = at(src, "uniform vec4 uSpCam;", GLOSS.glslUniforms);
+    src = at(src, "  if (spCut > 0.5) scale = vec3(0.0);\n}", GLOSS.glslRS);
+    return at(src, "  color.rgb *= uSpClock.z * (1.0 + clamp(spShade, -0.6, 0.6));\n}", GLOSS.glslColor); // prettier-ignore
+  }
+  src = at(src, "uniform uSpCam: vec4f;", GLOSS.wgslUniforms);
+  src = at(src, "  if (spCut > 0.5) { *scale = vec3f(0.0); }\n}", GLOSS.wgslRS);
+  return at(src, "  *color = vec4f(rgb * uniform.uSpClock.z", GLOSS.wgslColor);
+}
+
+export const MODIFIER_KIT_GLOSS = {
+  glsl: withGloss(variant(GLSL, "kit", "glsl"), true),
+  wgsl: withGloss(variant(WGSL, "kit", "wgsl"), false),
+};
+
 // Captured toys with a rig (they carry the splatPart stream).
 export const MODIFIER_RIG = {
   glsl: variant(GLSL, "rig", "glsl"),

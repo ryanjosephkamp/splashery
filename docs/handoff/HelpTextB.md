@@ -20,16 +20,14 @@ food, landmarks and animals taps, read the E-lane handoffs in docs/handoff/; for
 puzzle cube, the bricks and Newton's cradle, docs/handoff/F.md. Landmarks: say where each is and
 when it was built, plainly and respectfully.
 
-The owner's words (docs/reviews/2026-09-27-ai-math/review.md): "When I open the site and go to a new
-toy (or have refreshed the page, etc.), I'd like to briefly see information on the screen (not
-overlapping the toy, if possible) that concisely tells the user how to play with the toy. For
-example, if I open the puzzle cube, it would be nice to know that I can drag a row or column in a
-direction to turn that; other examples: how to use the chess toy, how to play the xylophone, etc. We
-will eventually have this brief type of instructions for every toy in the gallery. And within the
-configuration panel, perhaps we can add a new tab or put the info in the main tab, etc., with a
-proper description of what the toy shows or means, what you can do with it, etc. That way, if
-someone sees something they don't recognize, they can learn a little bit about it without needing to
-leave the site to search for it."
+The owner's request (September 27, 2026; his notes are private, the Operator's summary follows):
+when someone opens the site and goes to a new toy (or refreshes the page), he wants brief on-screen
+information, not overlapping the toy if possible, that concisely tells the user how to play with it.
+For example, for the puzzle cube, that you can drag a row or column to turn it; likewise for the
+chess toy, the xylophone, and so on. Eventually every toy in the gallery gets this brief type of
+instruction. In the configuration panel, a new tab or the main tab should also give a proper
+description of what the toy shows or means and what you can do with it, so someone who sees
+something unfamiliar can learn about it without leaving the site.
 
 Lane Help (PR #57, merged September 28, 2026) built the line, the "?" button and the "About this
 toy" section, and wrote the first entries in `src/toy-help.js`: 88 how-to lines and 13 About texts.

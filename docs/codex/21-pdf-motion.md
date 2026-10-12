@@ -5,12 +5,11 @@
 `docs/audits/pdf-motion-2026-10/` (each PDF 15 MB or less), and the build scripts that make them in
 `tools/pdf-motion/` (any new tool listed in `LICENSES.md`).
 
-The owner, October 4, 2026: "I want you to really clearly explain to me why we cannot embed a
-Splashery toy in a digital PDF that, when viewed from a typical digital PDF viewer, could actually
-either be interactive or at least could move ... Is there any way that we can kind of, like, almost
-like jailbreak LaTeX, or something that we can compile into a PDF so that it would do that? ...
-Maybe it would only be viewable in a certain PDF viewer." He is "not going to let up on this". This
-task finds out, with working samples he can open on his own devices.
+The owner, October 4, 2026, asks for a clear explanation of why a Splashery toy cannot be embedded
+in a digital PDF that, in a typical PDF viewer, is interactive or at least moves, and whether any
+route works, such as a way to compile into a PDF that does it, even if only one PDF viewer supports
+it. He will keep pressing on this. This task finds out, with working samples he can open on his own
+devices.
 
 A Splashery toy is a WebGL page that draws hundreds of thousands of Gaussian splats, sorted and
 blended every frame, from ES modules. The question is what of that, or what picture of it, a PDF can

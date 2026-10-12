@@ -7,12 +7,12 @@ import fs from "node:fs";
 test("the newcomer material is there and every contents link has a target", async ({ page }) => {
   const problems = [];
   page.on("pageerror", (e) => problems.push(e.message));
-  await page.goto("/manual/");
+  await page.goto("/manual/all.html");
   await expect(page.locator("#what-is-a-gaussian")).toContainText("probability density");
   for (const label of ["Three ways", "Representation", "The twelve"]) {
     await expect(page.locator(`figure svg[aria-label^='${label}']`)).toHaveCount(1);
   }
-  await expect(page.locator("dl.glossary dt")).toHaveCount(14);
+  await expect(page.locator("dl.glossary dt")).toHaveCount(21); // Manual r3 added seven terms
   await expect(page.locator("ul.reading a[href^='https://']")).toHaveCount(6);
   const hrefs = await page.locator("nav.toc a").evaluateAll((as) => as.map((a) => a.getAttribute("href"))); // prettier-ignore
   for (const h of hrefs) await expect(page.locator(h)).toHaveCount(1);
@@ -23,7 +23,7 @@ test("the newcomer material is there and every contents link has a target", asyn
 });
 
 test("the runnable recipe: the module, the catalog entry and the URL agree", async () => {
-  const html = fs.readFileSync("manual/index.html", "utf8");
+  const html = fs.readFileSync("manual/all.html", "utf8");
   const mod = fs.readFileSync("manual/example-recipe.js", "utf8");
   expect(mod.split("\n")[0]).toBe('import { mix } from "../src/kit.js";');
   expect(mod).toContain('"little-windmill": {');

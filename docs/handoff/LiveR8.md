@@ -12,12 +12,11 @@ For the Operator" current). Model: Opus 5.5, at the default effort.
 
 ### Brief (written by the Operator on October 7, 2026, from the owner's walkthrough review)
 
-Read the owner's own words first: docs/reviews/2026-10-06-walkthrough/notes.md (the Chladni plate
-and splat mirror paragraphs), then the Operator's triage in
-docs/reviews/2026-10-06-walkthrough/triage.md, "Elsewhere", "Live r8". Read docs/handoff/LiveR7.md
-(its "For the Operator" has Live r7's notes for you) and docs/handoff/LiveInput.md. The owner loves
-the Chladni plate ("one of the coolest things here"): keep how it works and how it looks, and change
-only what follows.
+The owner's notes are private (the Chladni plate and splat mirror paragraphs); read the Operator's
+triage in docs/reviews/2026-10-06-walkthrough/triage.md, "Elsewhere", "Live r8". Read
+docs/handoff/LiveR7.md (its "For the Operator" has Live r7's notes for you) and
+docs/handoff/LiveInput.md. The owner loves the Chladni plate ("one of the coolest things here"):
+keep how it works and how it looks, and change only what follows.
 
 Build in this order:
 

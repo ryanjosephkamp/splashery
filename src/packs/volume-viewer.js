@@ -224,6 +224,12 @@ function cutDrag() {
   };
 }
 
+// Fix10: Play's two passes (the pulse eases over 5 s, each pass about 2.5 s).
+const SWEEP_SOUND = {
+  down: { voice: "whoom", f: 260, decay: 1.6, vol: 0.32 },
+  up: { voice: "whoom", f: 220, decay: 1.5, vol: 0.26 },
+};
+
 function driveVolume(t, c, out, info) {
   const d = info.data;
   if (!d || d.mip) return;
@@ -232,6 +238,11 @@ function driveVolume(t, c, out, info) {
     VV.cut.at = 1;
   }
   let at = VV.cut.at;
+  // Fix10: Play's own sound, a dark, soft rush for each pass of the cut (down, then back up).
+  const was = VV.sweepWas ?? 0;
+  VV.sweepWas = c.sweep;
+  if (c.sweep > was + 0.5) out.cues.push(SWEEP_SOUND.down);
+  else if (was > 0.5 && c.sweep <= 0.5) out.cues.push(SWEEP_SOUND.up);
   // The sweep: the cut runs down through the volume and back.
   if (c.sweep > 0.001) at = Math.min(at, 1 - Math.sin(Math.PI * (1 - c.sweep)) * 0.85);
   const dir = CUT_DIRS[d.cut] || CUT_DIRS.front;
@@ -493,6 +504,7 @@ const VIEWER = {
   // The Play button sweeps the cut through; a tap on the volume steps to the next preset.
   action: {
     key: "sweep",
+    quiet: ["sweep"], // Fix10: Play's rushes are the drive's cues
     label: "Sweep the cut through (tap the volume for the next preset: bone, soft tissue, full range)", // prettier-ignore
     at(point, c) {
       void point;

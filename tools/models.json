@@ -243,6 +243,103 @@
       "author": "NASA (SVS; LRO LOLA and LROC; MGS MOLA, PDS)",
       "license": "Public domain",
       "note": "Lane Arcade: tools/arc-terrain.mjs cuts seven site patches into assets/toys/soft-landing/terrain.json for the Soft Landing game; checked October 5, 2026."
+    },
+    {
+      "id": "celestial-globe",
+      "name": "Celestial globe",
+      "source": "https://huggingface.co/datasets/allenai/objaverse/resolve/main/glbs/000-066/341fa8a777e94883841409438756f747.glb",
+      "page": "https://sketchfab.com/3d-models/celestial-globe-341fa8a777e94883841409438756f747",
+      "author": "Virtual Museums of Małopolska",
+      "license": "CC0 1.0",
+      "splats": 300000,
+      "pack": "pr3",
+      "checked": "2026-10-08",
+      "bake": "tools/pr3-bake.mjs"
+    },
+    {
+      "id": "armillary-sphere",
+      "name": "Armillary sphere (1771)",
+      "source": "https://huggingface.co/datasets/allenai/objaverse/resolve/main/glbs/000-127/41e23659c75241459eec6477d9e77c93.glb",
+      "page": "https://sketchfab.com/3d-models/armillary-sphere-1771-41e23659c75241459eec6477d9e77c93",
+      "author": "Virtual Museums of Małopolska",
+      "license": "CC BY 4.0",
+      "splats": 300000,
+      "pack": "pr3",
+      "checked": "2026-10-08",
+      "bake": "tools/pr3-bake.mjs"
+    },
+    {
+      "id": "fluorite-crystal",
+      "name": "Mineral: Fluorite",
+      "source": "https://huggingface.co/datasets/allenai/objaverse/resolve/main/glbs/000-077/5ed87d4487be495aac0a86632eb3880c.glb",
+      "page": "https://sketchfab.com/3d-models/mineral-fluorite-5ed87d4487be495aac0a86632eb3880c",
+      "author": "Digital Atlas of Ancient Life (Paleontological Research Institution)",
+      "license": "CC0 1.0",
+      "splats": 300000,
+      "pack": "pr3",
+      "checked": "2026-10-08",
+      "bake": "tools/pr3-bake.mjs"
+    },
+    {
+      "id": "ammonite-agate",
+      "name": "Ammonite mineralised with quartz and chalcedony",
+      "source": "https://huggingface.co/datasets/allenai/objaverse/resolve/main/glbs/000-009/4a8582d264a9466f87dc68cea5c28838.glb",
+      "page": "https://sketchfab.com/3d-models/ammonite-mineralised-with-quartz-and-chalcedony-4a8582d264a9466f87dc68cea5c28838",
+      "author": "Virtual Museums of Małopolska",
+      "license": "CC0 1.0",
+      "splats": 300000,
+      "pack": "pr3",
+      "checked": "2026-10-08",
+      "bake": "tools/pr3-bake.mjs"
+    },
+    {
+      "id": "morasko-meteorite",
+      "name": "“Morasko” iron meteorite",
+      "source": "https://huggingface.co/datasets/allenai/objaverse/resolve/main/glbs/000-076/37fd0d100a3246f2892ece5f8d178c06.glb",
+      "page": "https://sketchfab.com/3d-models/morasko-iron-meteorite-37fd0d100a3246f2892ece5f8d178c06",
+      "author": "Virtual Museums of Małopolska",
+      "license": "CC0 1.0",
+      "splats": 300000,
+      "pack": "pr3",
+      "checked": "2026-10-08",
+      "bake": "tools/pr3-bake.mjs"
+    },
+    {
+      "id": "pyrite-cubes",
+      "name": "Pyrite",
+      "source": "https://huggingface.co/datasets/allenai/objaverse/resolve/main/glbs/000-001/0b7c6e8e32144b72806ed31cb49b4145.glb",
+      "page": "https://sketchfab.com/3d-models/pyrite-0b7c6e8e32144b72806ed31cb49b4145",
+      "author": "Digital Atlas of Ancient Life (Paleontological Research Institution)",
+      "license": "CC0 1.0",
+      "splats": 300000,
+      "pack": "pr3",
+      "checked": "2026-10-08",
+      "bake": "tools/pr3-bake.mjs"
+    },
+    {
+      "id": "megalodon-tooth",
+      "name": "Vertebrate: Carcharocles megalodon (PRI 55188)",
+      "source": "https://huggingface.co/datasets/allenai/objaverse/resolve/main/glbs/000-092/06e0bef4795840b4b21d17e5f51f3140.glb",
+      "page": "https://sketchfab.com/3d-models/vertebrate-carcharocles-megalodon-pri-55188-06e0bef4795840b4b21d17e5f51f3140",
+      "author": "Digital Atlas of Ancient Life (Paleontological Research Institution)",
+      "license": "CC0 1.0",
+      "splats": 300000,
+      "pack": "pr3",
+      "checked": "2026-10-08",
+      "bake": "tools/pr3-bake.mjs"
+    },
+    {
+      "id": "stannern-meteorites",
+      "name": "Stannern meteorite (NHMW-MIN-A21, A135, A136, A139, A140)",
+      "source": "https://datarepository.nhm-wien.ac.at/public/cuqmeh/public/NHMW-MIN-A21-3D.zip",
+      "page": "https://datarepository.nhm-wien.ac.at/10.57756/cuqmeh",
+      "author": "Viola Winkler, Natural History Museum Vienna",
+      "license": "CC BY-NC 4.0",
+      "splats": 300000,
+      "pack": "pr3",
+      "checked": "2026-10-08",
+      "nc": true,
+      "bake": "tools/pr3-bake.mjs"
     }
   ]
 }

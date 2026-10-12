@@ -1,7 +1,9 @@
 // Engine (lane Computing r2): a kit toy's text option that isn't hidden shows
 // as a text box in the Toy tab, and what is typed there rebuilds the toy with
 // it. Every text option a toy had before is hidden, so no Toy tab changes; the
-// only shown one is the Enigma's plugboard (lane Computing r2).
+// only shown ones are the Enigma's plugboard (lane Computing r2) and, since
+// #423 (lane Volume viewer, labs, October 8, 2026), the volume viewer's voxel
+// size, typed in when a file has none (Fix11).
 
 import { test, expect } from "@playwright/test";
 import fs from "node:fs";
@@ -16,7 +18,9 @@ test("every text option shipped before this change stays hidden", async () => {
       const block = before.slice(before.lastIndexOf("{")) + m[0];
       // Only a toy's options (a key and a label), not the page's own inputs.
       if (!/key: /.test(block) || !/label: /.test(block)) continue;
-      if (!/hidden: true/.test(block) && !/key: "plugs"/.test(block)) shown.push(`${f}: ${block}`);
+      if (/hidden: true/.test(block)) continue;
+      if (/key: "plugs"/.test(block) || (f === "volume-viewer.js" && /key: "spacing"/.test(block))) continue; // prettier-ignore
+      shown.push(`${f}: ${block}`);
     }
   }
   expect(shown).toEqual([]);
