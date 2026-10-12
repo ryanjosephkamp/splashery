@@ -1,0 +1,59 @@
+{
+  "format": "splashery-baked-manifest",
+  "version": 1,
+  "id": "edinburgh",
+  "title": "Street, walked",
+  "source": {
+    "file": "edinburgh.ply",
+    "sha256": "61e63401d6ef5556274ff7977841e9f70bbc793ad503677e3a814799871c7ac9",
+    "splats": 116377,
+    "up": "y"
+  },
+  "bounds": {
+    "min": [-12.59228801727295, -4.691856384277344, -0.2816396951675415],
+    "max": [6.3360137939453125, 2.7728664875030518, 38.596309661865234]
+  },
+  "parts": [{ "id": 0, "name": "body" }],
+  "defaultTier": 116377,
+  "tiers": [
+    {
+      "splats": 60000,
+      "bytes": 953990,
+      "files": [
+        {
+          "path": "assets/edinburgh-60000-0.bkd.gz",
+          "splats": 60000,
+          "bytes": 953990,
+          "sha256": "765a7a8d96ca3f92aec12e8ad625d80f51c978af6e9b8709923ffed2bd5a6d46"
+        }
+      ]
+    },
+    {
+      "splats": 116377,
+      "bytes": 1847857,
+      "files": [
+        {
+          "path": "assets/edinburgh-116377-0.bkd.gz",
+          "splats": 65536,
+          "bytes": 1039961,
+          "sha256": "f918dd0f4c624215beda2c4260ca9aab6ec6dbd530214931a8ec6b5a601bd441"
+        },
+        {
+          "path": "assets/edinburgh-116377-1.bkd.gz",
+          "splats": 50841,
+          "bytes": 807896,
+          "sha256": "a2c7c1cbdf6e1a804d643ceb40fe9e884028b3efcceb48b5a01ba188ee9e3d7f"
+        }
+      ]
+    }
+  ],
+  "credit": {
+    "title": "Walking in EDINBURGH - Scotland (UK) - 4K 60fps (UHD) (10 s from 7:32)",
+    "author": "POPtravel",
+    "source": "https://commons.wikimedia.org/wiki/File:Walking_in_EDINBURGH_-_Scotland_(UK)_-_4K_60fps_(UHD).webm",
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+    "checked": "October 12, 2026",
+    "changes": "Quantized the reviewed trained PLY into BKD1 phone tiers, preserving Gaussian rotations, scales, opacity, and degree-0 color. Smaller tiers thin deterministically. Cameras and source footage are unchanged. Made by Ryan with Codex (GPT-6)."
+  }
+}

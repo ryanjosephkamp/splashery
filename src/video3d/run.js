@@ -124,7 +124,7 @@ export async function videoTo3D(file, opts = {}) {
     progress({ stage: "frames", done: 0, total: plan.windows.length });
     picks = await grabFrames(opened, plan, {
       side: set.frameSide,
-      tries: gentle ? 2 : 3,
+      tries: 3,
       signal: opts.signal,
       onFrame: (d, n) => progress({ stage: "frames", done: d, total: n }),
     });
@@ -144,12 +144,9 @@ export async function videoTo3D(file, opts = {}) {
   const s = splatjs.createSession({
     maxIters: set.iters,
     refineEvery,
-    refineStart: Math.max(50, Math.round(set.iters * 0.08)),
-    fenceRing: gentle ? 2 : 4,
-    gpuChunkMs: gentle ? 120 : 400,
     lowMem: gentle || tier === "low" || tier === "mid",
     // A phone trains a few steps a frame, so each frame stays short and the page stays responsive.
-    itersPerFrame: gentle ? 2 : tier === "low" ? 4 : tier === "mid" ? 6 : 10,
+    ...(gentle ? { itersPerFrame: 2 } : {}),
     initTarget: set.seed || Math.min(60000, Math.round(set.splats / 3)),
     evalHoldEvery: 1e9,
     sfm: gentle || tier === "low" || tier === "mid" ? { siftFeats: 3000, siftFirstOctave: 0, refineAspect: false } : {}, // prettier-ignore

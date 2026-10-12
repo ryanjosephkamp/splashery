@@ -1,28 +1,30 @@
 // Conservative cleanup in the scene's display frame. Camera support is a frustum estimate:
 // training exports no per-splat observation counts, so this does not claim occlusion testing.
 
+export function cameraView(c) {
+  const sy = Math.sin(c.yaw),
+    cy = Math.cos(c.yaw);
+  const sp = Math.sin(c.pitch),
+    cp = Math.cos(c.pitch);
+  const forward = c.forward || [-sy * cp, -sp, -cy * cp];
+  const up = c.up || [-sp * sy, cp, -sp * cy];
+  const right = [
+    forward[1] * up[2] - forward[2] * up[1],
+    forward[2] * up[0] - forward[0] * up[2],
+    forward[0] * up[1] - forward[1] * up[0],
+  ];
+  return {
+    ...c,
+    forward,
+    up,
+    right,
+    tx: c.f && c.w ? c.w / (2 * c.f) : 1,
+    ty: c.f && c.h ? c.h / (2 * c.f) : 0.8,
+  };
+}
+
 export function cleanScene(s, path, { affine = false } = {}) {
-  const views = path.map((c) => {
-    const sy = Math.sin(c.yaw),
-      cy = Math.cos(c.yaw);
-    const sp = Math.sin(c.pitch),
-      cp = Math.cos(c.pitch);
-    const forward = c.forward || [-sy * cp, -sp, -cy * cp];
-    const up = c.up || [-sp * sy, cp, -sp * cy];
-    const right = [
-      forward[1] * up[2] - forward[2] * up[1],
-      forward[2] * up[0] - forward[0] * up[2],
-      forward[0] * up[1] - forward[1] * up[0],
-    ];
-    return {
-      ...c,
-      forward,
-      up,
-      right,
-      tx: c.f && c.w ? c.w / (2 * c.f) : 1,
-      ty: c.f && c.h ? c.h / (2 * c.f) : 0.8,
-    };
-  });
+  const views = path.map(cameraView);
   const segments = path.map((a, i) => {
     const b = path[i + 1] || a;
     const delta = b.pos.map((v, k) => v - a.pos[k]);
@@ -67,15 +69,23 @@ export function cleanScene(s, path, { affine = false } = {}) {
       removed.invalid++;
       continue;
     }
-    // The contracted display has a background shell. Affine walking retains actual distant
-    // surfaces: distance and height alone cannot distinguish sky from mountains or buildings.
-    if (!affine && p[1] > high && s.outer?.[i]) {
+    // Only sample bright, sky-colored upper background; never remove a surface based on its
+    // color. The same source-derived dome backs both affine Walk and the contracted view.
+    if (
+      p[1] > high &&
+      (s.outer?.[i] || Math.hypot(...p) > 1.5) &&
+      color[2] >= Math.max(color[0], color[1]) * 0.85 &&
+      color.reduce((a, v) => a + v, 0) / 3 > 0.35
+    ) {
       for (let k = 0; k < 3; k++) skySum[k] += Math.max(0, Math.min(1, color[k]));
       skyCount++;
     }
     // A ray has one long axis and two short ones. A broad, thin wall can have a tiny normal
     // axis without being a ray, so compare the longest axis with the middle one.
-    if (big / Math.max(1e-8, middle) > 24 && big > 0.035) {
+    const upperBackground = p[1] > high && Math.hypot(...p) > 0.8;
+    const rayRatio = upperBackground ? 6 : 24;
+    const raySize = upperBackground ? 0.025 : 0.035;
+    if (big / Math.max(1e-8, middle) > rayRatio && big > raySize) {
       removed.ray++;
       continue;
     }

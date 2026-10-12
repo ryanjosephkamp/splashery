@@ -2621,7 +2621,31 @@
       "page": "https://commons.wikimedia.org/wiki/File:Statue_Of_Liberty_4k_Drone.webm",
       "license": "CC BY 3.0",
       "checked": "September 30, 2026",
-      "note": "14 seconds from 3:24 (the 480p transcode on Commons, one shot), trained by tools/v3d-sample.mjs at 640 px for 3,000 steps, with the splats grown to 120,000. Only the trained splats and the camera path are shipped, with the same span of the source at 480p (liberty-source.mp4 and .webm, made by tools/smd-source.mjs from the Commons transcode, no sound) for Show the original. The source is 3 minutes 48 seconds long."
+      "note": "14 seconds from 3:24 (the 480p transcode on Commons, one shot), trained by tools/v3d-sample.mjs at 640 px for 3,000 steps, with the splats grown to 120,000. Only the trained splats and the camera path are shipped, with the same span of the source at 480p (liberty-source.mp4 and .webm, made by tools/smd-source.mjs from the Commons transcode, no sound) for Show the original. The source is 3 minutes 48 seconds long.",
+      "baked": {
+        "file": "assets/toys/video-3d/liberty-baked/manifest.json",
+        "files": {
+          "assets/toys/video-3d/liberty-baked/manifest.json": {
+            "bytes": 1906,
+            "sha256": "c9b73fc2029545773b0a217001b69cb5afeb336c59f2cc6357960215a0bdd5be"
+          },
+          "assets/toys/video-3d/liberty-baked/assets/liberty-60000-0.bkd.gz": {
+            "bytes": 972429,
+            "sha256": "53c446ca23c005a076543398df4ef5d042c959d83356dfa0287f0b2a1c3365b9"
+          },
+          "assets/toys/video-3d/liberty-baked/assets/liberty-116279-0.bkd.gz": {
+            "bytes": 1058981,
+            "sha256": "112e37cf7907a8fd6d6311363314240b7771097a1396a44fb65b69caaa357312"
+          },
+          "assets/toys/video-3d/liberty-baked/assets/liberty-116279-1.bkd.gz": {
+            "bytes": 820587,
+            "sha256": "a8a8b3c9abc5ed810fdda56ec44a524ce02a82365c8ab51229bed271622d857e"
+          }
+        },
+        "defaultBytes": 1889156,
+        "sourcePlySha256": "51f36c567afcdb3302beb9f61b6391e3aa829ceea70824ac79369cedbc1d1fc6",
+        "changes": "Quantized the reviewed trained PLY into BKD1 phone tiers, preserving Gaussian rotations, scales, opacity, and degree-0 color. Smaller tiers thin deterministically. Cameras and source footage are unchanged. Made by Ryan with Codex (GPT-6)."
+      }
     },
     {
       "id": "edinburgh",
@@ -2633,7 +2657,31 @@
       "page": "https://commons.wikimedia.org/wiki/File:Walking_in_EDINBURGH_-_Scotland_(UK)_-_4K_60fps_(UHD).webm",
       "license": "CC BY 3.0",
       "checked": "September 30, 2026",
-      "note": "10 seconds from 7:32 (the 480p transcode on Commons), 28 frames, trained by tools/v3d-sample.mjs at 640 px for 3,000 steps, with the splats grown to 120,000. Only the trained splats and the camera path are shipped, with the same span of the source at 480p (edinburgh-source.mp4 and .webm, made by tools/smd-source.mjs from the Commons transcode, no sound) for Show the original. The source is 67 minutes long."
+      "note": "10 seconds from 7:32 (the 480p transcode on Commons), 28 frames, trained by tools/v3d-sample.mjs at 640 px for 3,000 steps, with the splats grown to 120,000. Only the trained splats and the camera path are shipped, with the same span of the source at 480p (edinburgh-source.mp4 and .webm, made by tools/smd-source.mjs from the Commons transcode, no sound) for Show the original. The source is 67 minutes long.",
+      "baked": {
+        "file": "assets/toys/video-3d/edinburgh-baked/manifest.json",
+        "files": {
+          "assets/toys/video-3d/edinburgh-baked/manifest.json": {
+            "bytes": 1974,
+            "sha256": "841b9c9e2b3aa9134ed36d911cc235706c2666e07bb223a1fa44d80f86c25d48"
+          },
+          "assets/toys/video-3d/edinburgh-baked/assets/edinburgh-60000-0.bkd.gz": {
+            "bytes": 953990,
+            "sha256": "765a7a8d96ca3f92aec12e8ad625d80f51c978af6e9b8709923ffed2bd5a6d46"
+          },
+          "assets/toys/video-3d/edinburgh-baked/assets/edinburgh-116377-0.bkd.gz": {
+            "bytes": 1039961,
+            "sha256": "f918dd0f4c624215beda2c4260ca9aab6ec6dbd530214931a8ec6b5a601bd441"
+          },
+          "assets/toys/video-3d/edinburgh-baked/assets/edinburgh-116377-1.bkd.gz": {
+            "bytes": 807896,
+            "sha256": "a2c7c1cbdf6e1a804d643ceb40fe9e884028b3efcceb48b5a01ba188ee9e3d7f"
+          }
+        },
+        "defaultBytes": 1858076,
+        "sourcePlySha256": "61e63401d6ef5556274ff7977841e9f70bbc793ad503677e3a814799871c7ac9",
+        "changes": "Quantized the reviewed trained PLY into BKD1 phone tiers, preserving Gaussian rotations, scales, opacity, and degree-0 color. Smaller tiers thin deterministically. Cameras and source footage are unchanged. Made by Ryan with Codex (GPT-6)."
+      }
     },
     {
       "id": "adjara",
@@ -2664,10 +2712,34 @@
         "assets/toys/video-3d/adjara-source.webm": {
           "bytes": 2357793,
           "sha256": "422a4a07218f68843a18e30ad4f1f8048e961cb26990e6df5a5480ab06dc0f9d"
+        },
+        "assets/toys/video-3d/adjara-baked/manifest.json": {
+          "bytes": 1434,
+          "sha256": "11c72259ef2f175f3c8b984b95bb9fdff887bfa7506f0ed6e4ed5d26bd01c7e6"
+        },
+        "assets/toys/video-3d/adjara-baked/assets/adjara-29679-0.bkd.gz": {
+          "bytes": 486371,
+          "sha256": "5031e7542839311ef0d1a09eda6fe026d9875b59d953a33711635443d33a290a"
         }
       },
-      "defaultBytes": 2057677,
-      "note": "20 seconds from 0 seconds; 24/24 cameras placed; 1042 completed total iterations; 29679 exported splats. Selected one continuous shot, removed sound, made 480p source cuts, solved cameras, and trained real Gaussian splats through Splat.js. Compact model budget, initially 256 px training. The last continuation completed 102 additional steps at up to 640 px, reusing the recorded cameras and learned model. Silent MP4 and WebM cuts ship for Show the original. Scene, path, and source cuts retain the source license. No identifiable people, logos, or brands were seen in the inspected shot."
+      "defaultBytes": 526895,
+      "note": "20 seconds from 0 seconds; 24/24 cameras placed; 1042 completed total iterations; 29679 exported splats. Selected one continuous shot, removed sound, made 480p source cuts, solved cameras, and trained real Gaussian splats through Splat.js. Compact model budget, initially 256 px training. The last continuation completed 102 additional steps at up to 640 px, reusing the recorded cameras and learned model. Silent MP4 and WebM cuts ship for Show the original. Scene, path, and source cuts retain the source license. No identifiable people, logos, or brands were seen in the inspected shot.",
+      "baked": {
+        "file": "assets/toys/video-3d/adjara-baked/manifest.json",
+        "files": {
+          "assets/toys/video-3d/adjara-baked/manifest.json": {
+            "bytes": 1434,
+            "sha256": "11c72259ef2f175f3c8b984b95bb9fdff887bfa7506f0ed6e4ed5d26bd01c7e6"
+          },
+          "assets/toys/video-3d/adjara-baked/assets/adjara-29679-0.bkd.gz": {
+            "bytes": 486371,
+            "sha256": "5031e7542839311ef0d1a09eda6fe026d9875b59d953a33711635443d33a290a"
+          }
+        },
+        "defaultBytes": 526895,
+        "sourcePlySha256": "ccd48b18bb5689cd231bc6bc05b3b02c61e76bc9f9eb88e9d7d17c9332ea6f4b",
+        "changes": "Quantized the reviewed trained PLY into BKD1 phone tiers, preserving Gaussian rotations, scales, opacity, and degree-0 color. Smaller tiers thin deterministically. Cameras and source footage are unchanged. Made by Ryan with Codex (GPT-6)."
+      }
     },
     {
       "id": "lihula",
@@ -2698,10 +2770,34 @@
         "assets/toys/video-3d/lihula-source.webm": {
           "bytes": 2031504,
           "sha256": "339cc6e4c732fa1077711d358d50b38180db0df96d14b9c07fd173d0b3eed500"
+        },
+        "assets/toys/video-3d/lihula-baked/manifest.json": {
+          "bytes": 1529,
+          "sha256": "7ff3ce1d97e2df8e647a4498308206dab540431124aa7ee88978342e0588b0ce"
+        },
+        "assets/toys/video-3d/lihula-baked/assets/lihula-28212-0.bkd.gz": {
+          "bytes": 458087,
+          "sha256": "4ef3ab1c429d0f18256f8c702e4994c50702ecd4de4d2a9d796bffd060ae59bd"
         }
       },
-      "defaultBytes": 1959039,
-      "note": "20 seconds from 18 seconds; 24/24 cameras placed; 1092 completed total iterations; 28212 exported splats. Selected one continuous shot, removed sound, made 480p source cuts, solved cameras, and trained real Gaussian splats through Splat.js. Compact model budget, initially 256 px training. The last continuation completed 102 additional steps at up to 640 px, reusing the recorded cameras and learned model. Silent MP4 and WebM cuts ship for Show the original. Scene, path, and source cuts retain the source license. No identifiable people, logos, or brands were seen in the inspected shot."
+      "defaultBytes": 499824,
+      "note": "20 seconds from 18 seconds; 24/24 cameras placed; 1092 completed total iterations; 28212 exported splats. Selected one continuous shot, removed sound, made 480p source cuts, solved cameras, and trained real Gaussian splats through Splat.js. Compact model budget, initially 256 px training. The last continuation completed 102 additional steps at up to 640 px, reusing the recorded cameras and learned model. Silent MP4 and WebM cuts ship for Show the original. Scene, path, and source cuts retain the source license. No identifiable people, logos, or brands were seen in the inspected shot.",
+      "baked": {
+        "file": "assets/toys/video-3d/lihula-baked/manifest.json",
+        "files": {
+          "assets/toys/video-3d/lihula-baked/manifest.json": {
+            "bytes": 1529,
+            "sha256": "7ff3ce1d97e2df8e647a4498308206dab540431124aa7ee88978342e0588b0ce"
+          },
+          "assets/toys/video-3d/lihula-baked/assets/lihula-28212-0.bkd.gz": {
+            "bytes": 458087,
+            "sha256": "4ef3ab1c429d0f18256f8c702e4994c50702ecd4de4d2a9d796bffd060ae59bd"
+          }
+        },
+        "defaultBytes": 499824,
+        "sourcePlySha256": "7f3f69fa5f02bbaadf9f46c10ff0aa77a7c8e7be79a23af61d1e437ebc2b4572",
+        "changes": "Quantized the reviewed trained PLY into BKD1 phone tiers, preserving Gaussian rotations, scales, opacity, and degree-0 color. Smaller tiers thin deterministically. Cameras and source footage are unchanged. Made by Ryan with Codex (GPT-6)."
+      }
     },
     {
       "id": "toolse",
@@ -2732,10 +2828,34 @@
         "assets/toys/video-3d/toolse-source.webm": {
           "bytes": 1860042,
           "sha256": "99e0942825029222456b2c5fa79d94387b25725a2e327a79ed27326ab5720fc6"
+        },
+        "assets/toys/video-3d/toolse-baked/manifest.json": {
+          "bytes": 1449,
+          "sha256": "17d47d65c7f8ecd24faeb4964a8c959dfea6fba0501881defe93a746554cc438"
+        },
+        "assets/toys/video-3d/toolse-baked/assets/toolse-29096-0.bkd.gz": {
+          "bytes": 464805,
+          "sha256": "9648f7fc421292a17db3de6154ad116772a3e6a4e2d7da9349ed038e99aab450"
         }
       },
-      "defaultBytes": 2021490,
-      "note": "20 seconds from 14 seconds; 24/24 cameras placed; 922 completed total iterations; 29096 exported splats. Selected one continuous shot, removed sound, made 480p source cuts, solved cameras, and trained real Gaussian splats through Splat.js. Compact model budget, initially 256 px training. The last continuation completed 102 additional steps at up to 640 px, reusing the recorded cameras and learned model. Silent MP4 and WebM cuts ship for Show the original. Scene, path, and source cuts retain the source license. No identifiable people, logos, or brands were seen in the inspected shot."
+      "defaultBytes": 508801,
+      "note": "20 seconds from 14 seconds; 24/24 cameras placed; 922 completed total iterations; 29096 exported splats. Selected one continuous shot, removed sound, made 480p source cuts, solved cameras, and trained real Gaussian splats through Splat.js. Compact model budget, initially 256 px training. The last continuation completed 102 additional steps at up to 640 px, reusing the recorded cameras and learned model. Silent MP4 and WebM cuts ship for Show the original. Scene, path, and source cuts retain the source license. No identifiable people, logos, or brands were seen in the inspected shot.",
+      "baked": {
+        "file": "assets/toys/video-3d/toolse-baked/manifest.json",
+        "files": {
+          "assets/toys/video-3d/toolse-baked/manifest.json": {
+            "bytes": 1449,
+            "sha256": "17d47d65c7f8ecd24faeb4964a8c959dfea6fba0501881defe93a746554cc438"
+          },
+          "assets/toys/video-3d/toolse-baked/assets/toolse-29096-0.bkd.gz": {
+            "bytes": 464805,
+            "sha256": "9648f7fc421292a17db3de6154ad116772a3e6a4e2d7da9349ed038e99aab450"
+          }
+        },
+        "defaultBytes": 508801,
+        "sourcePlySha256": "565aeafb33dc0e0d82312ace949e401510d31551268bce088aab8978c7626125",
+        "changes": "Quantized the reviewed trained PLY into BKD1 phone tiers, preserving Gaussian rotations, scales, opacity, and degree-0 color. Smaller tiers thin deterministically. Cameras and source footage are unchanged. Made by Ryan with Codex (GPT-6)."
+      }
     },
     {
       "id": "poltsamaa",
@@ -2766,10 +2886,34 @@
         "assets/toys/video-3d/poltsamaa-source.webm": {
           "bytes": 2546197,
           "sha256": "f08f0b2690b19518aa2c5778aa0835cf2210e961a8afdaf29b89ff89c1c6bcea"
+        },
+        "assets/toys/video-3d/poltsamaa-baked/manifest.json": {
+          "bytes": 1494,
+          "sha256": "0943dd8a5ef3c8f4e9812c55fc4ec50a1b3bc8bc72ae7bd1f9d2d0d98d31cd05"
+        },
+        "assets/toys/video-3d/poltsamaa-baked/assets/poltsamaa-29767-0.bkd.gz": {
+          "bytes": 488080,
+          "sha256": "9b23e77a5eed715b507fd64471b7a2b411c8b977a168c58e1bc75007aeacf5dd"
         }
       },
-      "defaultBytes": 2129522,
-      "note": "20 seconds from 24 seconds; 24/24 cameras placed; 1102 completed total iterations; 29767 exported splats. Selected one continuous shot, removed sound, made 480p source cuts, solved cameras, and trained real Gaussian splats through Splat.js. Compact model budget, initially 256 px training. The last continuation completed 102 additional steps at up to 640 px, reusing the recorded cameras and learned model. Silent MP4 and WebM cuts ship for Show the original. Scene, path, and source cuts retain the source license. No identifiable people, logos, or brands were seen in the inspected shot."
+      "defaultBytes": 594525,
+      "note": "20 seconds from 24 seconds; 24/24 cameras placed; 1102 completed total iterations; 29767 exported splats. Selected one continuous shot, removed sound, made 480p source cuts, solved cameras, and trained real Gaussian splats through Splat.js. Compact model budget, initially 256 px training. The last continuation completed 102 additional steps at up to 640 px, reusing the recorded cameras and learned model. Silent MP4 and WebM cuts ship for Show the original. Scene, path, and source cuts retain the source license. No identifiable people, logos, or brands were seen in the inspected shot.",
+      "baked": {
+        "file": "assets/toys/video-3d/poltsamaa-baked/manifest.json",
+        "files": {
+          "assets/toys/video-3d/poltsamaa-baked/manifest.json": {
+            "bytes": 1494,
+            "sha256": "0943dd8a5ef3c8f4e9812c55fc4ec50a1b3bc8bc72ae7bd1f9d2d0d98d31cd05"
+          },
+          "assets/toys/video-3d/poltsamaa-baked/assets/poltsamaa-29767-0.bkd.gz": {
+            "bytes": 488080,
+            "sha256": "9b23e77a5eed715b507fd64471b7a2b411c8b977a168c58e1bc75007aeacf5dd"
+          }
+        },
+        "defaultBytes": 594525,
+        "sourcePlySha256": "9e1c24609d5fe2e7db854c90151b47b13f2e89b75d0e6cf9afdf005e3ed34d49",
+        "changes": "Quantized the reviewed trained PLY into BKD1 phone tiers, preserving Gaussian rotations, scales, opacity, and degree-0 color. Smaller tiers thin deterministically. Cameras and source footage are unchanged. Made by Ryan with Codex (GPT-6)."
+      }
     }
   ],
   "movingSamples": [
@@ -5847,476 +5991,6 @@
       "license": "CC0 1.0",
       "checked": "October 12, 2026",
       "note": "Original: built with Splashery's kit by tools/bkd-bake-chest.mjs, baked to a 3DGS PLY with a parts sidecar (the lid), and converted by tools/port-convert.mjs into the baked format at 30,000 and 100,001 splats (lane Baked engine, labs)."
-    }
-  ],
-  "videoReviewEvidence": [
-    {
-      "file": "assets/toys/video-3d/review/adjara-1440x900.json",
-      "toy": "video-3d",
-      "author": "Vitaly Zdanevich",
-      "page": "https://commons.wikimedia.org/wiki/File:Adjara2025walking-summer-forest.webm",
-      "license": "CC BY 4.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
-      "checked": "October 12, 2026",
-      "bytes": 972,
-      "sha256": "4f4c44b4a9736f0b65b0f9ed47181a8ed4755ff3efbee1d8feaa118f802cf5a2",
-      "transformationCredit": "Made by Ryan with Codex (GPT-6).",
-      "changed": "Recorded actual browser load, transfer bytes, and scene statistics alongside the rendered screenshot."
-    },
-    {
-      "file": "assets/toys/video-3d/review/adjara-1440x900.png",
-      "toy": "video-3d",
-      "author": "Vitaly Zdanevich",
-      "page": "https://commons.wikimedia.org/wiki/File:Adjara2025walking-summer-forest.webm",
-      "license": "CC BY 4.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
-      "checked": "October 12, 2026",
-      "bytes": 1280176,
-      "sha256": "73a463e6b2137328fbca2c378a8cca01b9e60651c2c12ce1355b4da54e428f18",
-      "transformationCredit": "Made by Ryan with Codex (GPT-6).",
-      "changed": "Rendered the actual video-derived Gaussian scene through the browser renderer; images and clips retain the capture license. Interface and other shelf thumbnails retain their existing credits."
-    },
-    {
-      "file": "assets/toys/video-3d/review/adjara-390x844.json",
-      "toy": "video-3d",
-      "author": "Vitaly Zdanevich",
-      "page": "https://commons.wikimedia.org/wiki/File:Adjara2025walking-summer-forest.webm",
-      "license": "CC BY 4.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
-      "checked": "October 12, 2026",
-      "bytes": 971,
-      "sha256": "48b2e44ae800aea6610583c58ac2a435d02af15274d4a4d8602e50957210953a",
-      "transformationCredit": "Made by Ryan with Codex (GPT-6).",
-      "changed": "Recorded actual browser load, transfer bytes, and scene statistics alongside the rendered screenshot."
-    },
-    {
-      "file": "assets/toys/video-3d/review/adjara-390x844.png",
-      "toy": "video-3d",
-      "author": "Vitaly Zdanevich",
-      "page": "https://commons.wikimedia.org/wiki/File:Adjara2025walking-summer-forest.webm",
-      "license": "CC BY 4.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
-      "checked": "October 12, 2026",
-      "bytes": 388910,
-      "sha256": "4f11de8aa7153dc61623f9db7e9146ecb70b32622a56ff1753c526187c08bb68",
-      "transformationCredit": "Made by Ryan with Codex (GPT-6).",
-      "changed": "Rendered the actual video-derived Gaussian scene through the browser renderer; images and clips retain the capture license. Interface and other shelf thumbnails retain their existing credits."
-    },
-    {
-      "file": "assets/toys/video-3d/review/adjara-training-after.png",
-      "toy": "video-3d",
-      "author": "Vitaly Zdanevich",
-      "page": "https://commons.wikimedia.org/wiki/File:Adjara2025walking-summer-forest.webm",
-      "license": "CC BY 4.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
-      "checked": "October 12, 2026",
-      "bytes": 275771,
-      "sha256": "9c88896d7b78affc1bbe181ab06ae158347db2f23621b894e58a2409b339a9c1",
-      "transformationCredit": "Made by Ryan with Codex (GPT-6).",
-      "changed": "Rendered the actual video-derived Gaussian scene through the browser renderer; images and clips retain the capture license. Interface and other shelf thumbnails retain their existing credits."
-    },
-    {
-      "file": "assets/toys/video-3d/review/adjara-training-before.png",
-      "toy": "video-3d",
-      "author": "Vitaly Zdanevich",
-      "page": "https://commons.wikimedia.org/wiki/File:Adjara2025walking-summer-forest.webm",
-      "license": "CC BY 4.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
-      "checked": "October 12, 2026",
-      "bytes": 271802,
-      "sha256": "72ffebff2296494e9d8ab08a518227bc81cb911180d200e315938624a6b7e0bb",
-      "transformationCredit": "Made by Ryan with Codex (GPT-6).",
-      "changed": "Rendered the actual video-derived Gaussian scene through the browser renderer; images and clips retain the capture license. Interface and other shelf thumbnails retain their existing credits."
-    },
-    {
-      "file": "assets/toys/video-3d/review/adjara-walk-strip.png",
-      "toy": "video-3d",
-      "author": "Vitaly Zdanevich",
-      "page": "https://commons.wikimedia.org/wiki/File:Adjara2025walking-summer-forest.webm",
-      "license": "CC BY 4.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
-      "checked": "October 12, 2026",
-      "bytes": 809497,
-      "sha256": "47cb28bb6b6150ec8c83829404748dd7fbeba7bdf19c07daec1740109c404872",
-      "transformationCredit": "Made by Ryan with Codex (GPT-6).",
-      "changed": "Rendered the actual video-derived Gaussian scene through the browser renderer; images and clips retain the capture license. Interface and other shelf thumbnails retain their existing credits."
-    },
-    {
-      "file": "assets/toys/video-3d/review/adjara-walk.gif",
-      "toy": "video-3d",
-      "author": "Vitaly Zdanevich",
-      "page": "https://commons.wikimedia.org/wiki/File:Adjara2025walking-summer-forest.webm",
-      "license": "CC BY 4.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
-      "checked": "October 12, 2026",
-      "bytes": 5483905,
-      "sha256": "b36563cc143772f96ef92da8aaca4ae19fd7f08110979db18ccea47de237e3f0",
-      "transformationCredit": "Made by Ryan with Codex (GPT-6).",
-      "changed": "Rendered the actual video-derived Gaussian scene through the browser renderer; images and clips retain the capture license. Interface and other shelf thumbnails retain their existing credits."
-    },
-    {
-      "file": "assets/toys/video-3d/review/edinburgh-after-strip.png",
-      "toy": "video-3d",
-      "author": "POPtravel",
-      "page": "https://commons.wikimedia.org/wiki/File:Walking_in_EDINBURGH_-_Scotland_(UK)_-_4K_60fps_(UHD).webm",
-      "license": "CC BY 3.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
-      "checked": "October 12, 2026",
-      "bytes": 515217,
-      "sha256": "a9c5b87c2c569c0e892c036a20e6e2d8ffef96b9b57575d47b454e9bebc60b5d",
-      "transformationCredit": "Made by Ryan with Codex (GPT-6).",
-      "changed": "Rendered the actual video-derived Gaussian scene through the browser renderer; images and clips retain the capture license. Interface and other shelf thumbnails retain their existing credits."
-    },
-    {
-      "file": "assets/toys/video-3d/review/edinburgh-after.gif",
-      "toy": "video-3d",
-      "author": "POPtravel",
-      "page": "https://commons.wikimedia.org/wiki/File:Walking_in_EDINBURGH_-_Scotland_(UK)_-_4K_60fps_(UHD).webm",
-      "license": "CC BY 3.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
-      "checked": "October 12, 2026",
-      "bytes": 2505185,
-      "sha256": "b1e02738abb4a40d0cf39bac32e9ad8aeed6f5a08afad804dd5d69b8039231f3",
-      "transformationCredit": "Made by Ryan with Codex (GPT-6).",
-      "changed": "Rendered the actual video-derived Gaussian scene through the browser renderer; images and clips retain the capture license. Interface and other shelf thumbnails retain their existing credits."
-    },
-    {
-      "file": "assets/toys/video-3d/review/edinburgh-before-strip.png",
-      "toy": "video-3d",
-      "author": "POPtravel",
-      "page": "https://commons.wikimedia.org/wiki/File:Walking_in_EDINBURGH_-_Scotland_(UK)_-_4K_60fps_(UHD).webm",
-      "license": "CC BY 3.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
-      "checked": "October 12, 2026",
-      "bytes": 515826,
-      "sha256": "9f4de4736bfb88aa8b112265b41da420e2b59961361158528adb3e5166addd8b",
-      "transformationCredit": "Made by Ryan with Codex (GPT-6).",
-      "changed": "Rendered the actual video-derived Gaussian scene through the browser renderer; images and clips retain the capture license. Interface and other shelf thumbnails retain their existing credits."
-    },
-    {
-      "file": "assets/toys/video-3d/review/edinburgh-before.gif",
-      "toy": "video-3d",
-      "author": "POPtravel",
-      "page": "https://commons.wikimedia.org/wiki/File:Walking_in_EDINBURGH_-_Scotland_(UK)_-_4K_60fps_(UHD).webm",
-      "license": "CC BY 3.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
-      "checked": "October 12, 2026",
-      "bytes": 2613492,
-      "sha256": "9d21f7a26bf093de18fae35d500c71617e1f0e62db2c9e120f932395f235e85f",
-      "transformationCredit": "Made by Ryan with Codex (GPT-6).",
-      "changed": "Rendered the actual video-derived Gaussian scene through the browser renderer; images and clips retain the capture license. Interface and other shelf thumbnails retain their existing credits."
-    },
-    {
-      "file": "assets/toys/video-3d/review/edinburgh-walk-strip.png",
-      "toy": "video-3d",
-      "author": "POPtravel",
-      "page": "https://commons.wikimedia.org/wiki/File:Walking_in_EDINBURGH_-_Scotland_(UK)_-_4K_60fps_(UHD).webm",
-      "license": "CC BY 3.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
-      "checked": "October 12, 2026",
-      "bytes": 744084,
-      "sha256": "21ffee4c17c93bdecbee0c7edc7fc8ce32dd42ee1468e31ee766dcc2187f4a7d",
-      "transformationCredit": "Made by Ryan with Codex (GPT-6).",
-      "changed": "Rendered the actual video-derived Gaussian scene through the browser renderer; images and clips retain the capture license. Interface and other shelf thumbnails retain their existing credits."
-    },
-    {
-      "file": "assets/toys/video-3d/review/edinburgh-walk.gif",
-      "toy": "video-3d",
-      "author": "POPtravel",
-      "page": "https://commons.wikimedia.org/wiki/File:Walking_in_EDINBURGH_-_Scotland_(UK)_-_4K_60fps_(UHD).webm",
-      "license": "CC BY 3.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
-      "checked": "October 12, 2026",
-      "bytes": 4701952,
-      "sha256": "bef516be30b922f78ace70606a0c75219975897de89608a2e60de2adba0dbf18",
-      "transformationCredit": "Made by Ryan with Codex (GPT-6).",
-      "changed": "Rendered the actual video-derived Gaussian scene through the browser renderer; images and clips retain the capture license. Interface and other shelf thumbnails retain their existing credits."
-    },
-    {
-      "file": "assets/toys/video-3d/review/liberty-thumb.webp",
-      "toy": "video-3d",
-      "author": "the Dronalist",
-      "page": "https://commons.wikimedia.org/wiki/File:Statue_Of_Liberty_4k_Drone.webm",
-      "license": "CC BY 3.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
-      "checked": "October 12, 2026",
-      "bytes": 21732,
-      "sha256": "2e45b6cdb3ea3a2fd88be57422535da52b298efe63d457e595f8e1c6f0147a6f",
-      "transformationCredit": "Made by Ryan with Codex (GPT-6).",
-      "changed": "Rendered the actual video-derived Gaussian scene through the browser renderer; images and clips retain the capture license. Interface and other shelf thumbnails retain their existing credits."
-    },
-    {
-      "file": "assets/toys/video-3d/review/lihula-1440x900.json",
-      "toy": "video-3d",
-      "author": "Sillerkiil",
-      "page": "https://commons.wikimedia.org/wiki/File:Drone_video_of_ruins_of_Lihula_stronghold,_the_manor_and_town_(august_2021).webm",
-      "license": "CC0 1.0",
-      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
-      "checked": "October 12, 2026",
-      "bytes": 979,
-      "sha256": "adfcb13831d7c6617e2c17d981e7151a20a7444731cfcef8e4ec9da002c304db",
-      "transformationCredit": "Made by Ryan with Codex (GPT-6).",
-      "changed": "Recorded actual browser load, transfer bytes, and scene statistics alongside the rendered screenshot."
-    },
-    {
-      "file": "assets/toys/video-3d/review/lihula-1440x900.png",
-      "toy": "video-3d",
-      "author": "Sillerkiil",
-      "page": "https://commons.wikimedia.org/wiki/File:Drone_video_of_ruins_of_Lihula_stronghold,_the_manor_and_town_(august_2021).webm",
-      "license": "CC0 1.0",
-      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
-      "checked": "October 12, 2026",
-      "bytes": 1215230,
-      "sha256": "80425d3fc100269ca5285366ca2a094eecb7fb9b09f17f48e1a6eb7b68900e82",
-      "transformationCredit": "Made by Ryan with Codex (GPT-6).",
-      "changed": "Rendered the actual video-derived Gaussian scene through the browser renderer; images and clips retain the capture license. Interface and other shelf thumbnails retain their existing credits."
-    },
-    {
-      "file": "assets/toys/video-3d/review/lihula-390x844.json",
-      "toy": "video-3d",
-      "author": "Sillerkiil",
-      "page": "https://commons.wikimedia.org/wiki/File:Drone_video_of_ruins_of_Lihula_stronghold,_the_manor_and_town_(august_2021).webm",
-      "license": "CC0 1.0",
-      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
-      "checked": "October 12, 2026",
-      "bytes": 978,
-      "sha256": "9af28a5a34e271a8fdf8032f9c9c2bc93476c32dcad2f1300e0dc1f3679ecce2",
-      "transformationCredit": "Made by Ryan with Codex (GPT-6).",
-      "changed": "Recorded actual browser load, transfer bytes, and scene statistics alongside the rendered screenshot."
-    },
-    {
-      "file": "assets/toys/video-3d/review/lihula-390x844.png",
-      "toy": "video-3d",
-      "author": "Sillerkiil",
-      "page": "https://commons.wikimedia.org/wiki/File:Drone_video_of_ruins_of_Lihula_stronghold,_the_manor_and_town_(august_2021).webm",
-      "license": "CC0 1.0",
-      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
-      "checked": "October 12, 2026",
-      "bytes": 323565,
-      "sha256": "644ca33565f5c09f772cec1452893edfb3ec548a85e63cd68104444bdbd5dafb",
-      "transformationCredit": "Made by Ryan with Codex (GPT-6).",
-      "changed": "Rendered the actual video-derived Gaussian scene through the browser renderer; images and clips retain the capture license. Interface and other shelf thumbnails retain their existing credits."
-    },
-    {
-      "file": "assets/toys/video-3d/review/lihula-training-after.png",
-      "toy": "video-3d",
-      "author": "Sillerkiil",
-      "page": "https://commons.wikimedia.org/wiki/File:Drone_video_of_ruins_of_Lihula_stronghold,_the_manor_and_town_(august_2021).webm",
-      "license": "CC0 1.0",
-      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
-      "checked": "October 12, 2026",
-      "bytes": 238941,
-      "sha256": "bf07b6fe13ae57f3463a1ef6da3fe2e77b219dfe350d7b249d9ad2e8ca2b4c48",
-      "transformationCredit": "Made by Ryan with Codex (GPT-6).",
-      "changed": "Rendered the actual video-derived Gaussian scene through the browser renderer; images and clips retain the capture license. Interface and other shelf thumbnails retain their existing credits."
-    },
-    {
-      "file": "assets/toys/video-3d/review/lihula-training-before.png",
-      "toy": "video-3d",
-      "author": "Sillerkiil",
-      "page": "https://commons.wikimedia.org/wiki/File:Drone_video_of_ruins_of_Lihula_stronghold,_the_manor_and_town_(august_2021).webm",
-      "license": "CC0 1.0",
-      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
-      "checked": "October 12, 2026",
-      "bytes": 230819,
-      "sha256": "93a30daf8c7583f21cfadf9272de4ed41b08f23dda4f8ad18bfeaa5d2f1d2271",
-      "transformationCredit": "Made by Ryan with Codex (GPT-6).",
-      "changed": "Rendered the actual video-derived Gaussian scene through the browser renderer; images and clips retain the capture license. Interface and other shelf thumbnails retain their existing credits."
-    },
-    {
-      "file": "assets/toys/video-3d/review/phone-walk.png",
-      "toy": "video-3d",
-      "author": "POPtravel",
-      "page": "https://commons.wikimedia.org/wiki/File:Walking_in_EDINBURGH_-_Scotland_(UK)_-_4K_60fps_(UHD).webm",
-      "license": "CC BY 3.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
-      "checked": "October 12, 2026",
-      "bytes": 390825,
-      "sha256": "174025c189cc130c6c2068b89a23523a1536095753d55403416d5db40c479157",
-      "transformationCredit": "Made by Ryan with Codex (GPT-6).",
-      "changed": "Rendered the actual video-derived Gaussian scene through the browser renderer; images and clips retain the capture license. Interface and other shelf thumbnails retain their existing credits."
-    },
-    {
-      "file": "assets/toys/video-3d/review/poltsamaa-1440x900.json",
-      "toy": "video-3d",
-      "author": "Sillerkiil",
-      "page": "https://commons.wikimedia.org/wiki/File:Drone_video_of_P%C3%B5ltsamaa_river_and_castle_in_Estonia.webm",
-      "license": "CC BY-SA 4.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
-      "checked": "October 12, 2026",
-      "bytes": 1007,
-      "sha256": "99df894e7d75c7ab909619a43076c27dc266cd0295be748cc589db8fe34726fc",
-      "transformationCredit": "Made by Ryan with Codex (GPT-6).",
-      "changed": "Recorded actual browser load, transfer bytes, and scene statistics alongside the rendered screenshot."
-    },
-    {
-      "file": "assets/toys/video-3d/review/poltsamaa-1440x900.png",
-      "toy": "video-3d",
-      "author": "Sillerkiil",
-      "page": "https://commons.wikimedia.org/wiki/File:Drone_video_of_P%C3%B5ltsamaa_river_and_castle_in_Estonia.webm",
-      "license": "CC BY-SA 4.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
-      "checked": "October 12, 2026",
-      "bytes": 1299462,
-      "sha256": "e01cc17a14059d6817c7bab84c612af87f84359368fae31165b4692a90187670",
-      "transformationCredit": "Made by Ryan with Codex (GPT-6).",
-      "changed": "Rendered the actual video-derived Gaussian scene through the browser renderer; images and clips retain the capture license. Interface and other shelf thumbnails retain their existing credits."
-    },
-    {
-      "file": "assets/toys/video-3d/review/poltsamaa-390x844.json",
-      "toy": "video-3d",
-      "author": "Sillerkiil",
-      "page": "https://commons.wikimedia.org/wiki/File:Drone_video_of_P%C3%B5ltsamaa_river_and_castle_in_Estonia.webm",
-      "license": "CC BY-SA 4.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
-      "checked": "October 12, 2026",
-      "bytes": 1006,
-      "sha256": "17e0e8abb5cb2b9e4d5b94807954dec0a10e4be8e9f927c8e754c60ce006550f",
-      "transformationCredit": "Made by Ryan with Codex (GPT-6).",
-      "changed": "Recorded actual browser load, transfer bytes, and scene statistics alongside the rendered screenshot."
-    },
-    {
-      "file": "assets/toys/video-3d/review/poltsamaa-390x844.png",
-      "toy": "video-3d",
-      "author": "Sillerkiil",
-      "page": "https://commons.wikimedia.org/wiki/File:Drone_video_of_P%C3%B5ltsamaa_river_and_castle_in_Estonia.webm",
-      "license": "CC BY-SA 4.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
-      "checked": "October 12, 2026",
-      "bytes": 351406,
-      "sha256": "63dcab8709793b3c5ba7a343ec42cc8827f700c46734d088ca3b7dfed0c61bb5",
-      "transformationCredit": "Made by Ryan with Codex (GPT-6).",
-      "changed": "Rendered the actual video-derived Gaussian scene through the browser renderer; images and clips retain the capture license. Interface and other shelf thumbnails retain their existing credits."
-    },
-    {
-      "file": "assets/toys/video-3d/review/poltsamaa-training-after.png",
-      "toy": "video-3d",
-      "author": "Sillerkiil",
-      "page": "https://commons.wikimedia.org/wiki/File:Drone_video_of_P%C3%B5ltsamaa_river_and_castle_in_Estonia.webm",
-      "license": "CC BY-SA 4.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
-      "checked": "October 12, 2026",
-      "bytes": 270041,
-      "sha256": "4b2ae0fcb6467b8f7995dc5b11eb9a2e8627de3811f31ced1690d81a257fab8b",
-      "transformationCredit": "Made by Ryan with Codex (GPT-6).",
-      "changed": "Rendered the actual video-derived Gaussian scene through the browser renderer; images and clips retain the capture license. Interface and other shelf thumbnails retain their existing credits."
-    },
-    {
-      "file": "assets/toys/video-3d/review/poltsamaa-training-before.png",
-      "toy": "video-3d",
-      "author": "Sillerkiil",
-      "page": "https://commons.wikimedia.org/wiki/File:Drone_video_of_P%C3%B5ltsamaa_river_and_castle_in_Estonia.webm",
-      "license": "CC BY-SA 4.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
-      "checked": "October 12, 2026",
-      "bytes": 264527,
-      "sha256": "96feaa7d9ee15a797f0322679db1d5a5e7710932fc7072f53e46a90df06dbff4",
-      "transformationCredit": "Made by Ryan with Codex (GPT-6).",
-      "changed": "Rendered the actual video-derived Gaussian scene through the browser renderer; images and clips retain the capture license. Interface and other shelf thumbnails retain their existing credits."
-    },
-    {
-      "file": "assets/toys/video-3d/review/poltsamaa-walk-strip.png",
-      "toy": "video-3d",
-      "author": "Sillerkiil",
-      "page": "https://commons.wikimedia.org/wiki/File:Drone_video_of_P%C3%B5ltsamaa_river_and_castle_in_Estonia.webm",
-      "license": "CC BY-SA 4.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
-      "checked": "October 12, 2026",
-      "bytes": 681036,
-      "sha256": "af51950998de81510e896cf2c2e8e52529eef1cab741f95c56bb04136acd28ec",
-      "transformationCredit": "Made by Ryan with Codex (GPT-6).",
-      "changed": "Rendered the actual video-derived Gaussian scene through the browser renderer; images and clips retain the capture license. Interface and other shelf thumbnails retain their existing credits."
-    },
-    {
-      "file": "assets/toys/video-3d/review/poltsamaa-walk.gif",
-      "toy": "video-3d",
-      "author": "Sillerkiil",
-      "page": "https://commons.wikimedia.org/wiki/File:Drone_video_of_P%C3%B5ltsamaa_river_and_castle_in_Estonia.webm",
-      "license": "CC BY-SA 4.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
-      "checked": "October 12, 2026",
-      "bytes": 4588177,
-      "sha256": "fc3862527a185656ec8e73bf9cecabaa7a9aaf71918fcb6f923fd0b900ebb898",
-      "transformationCredit": "Made by Ryan with Codex (GPT-6).",
-      "changed": "Rendered the actual video-derived Gaussian scene through the browser renderer; images and clips retain the capture license. Interface and other shelf thumbnails retain their existing credits."
-    },
-    {
-      "file": "assets/toys/video-3d/review/toolse-1440x900.json",
-      "toy": "video-3d",
-      "author": "Sillerkiil",
-      "page": "https://commons.wikimedia.org/wiki/File:Toolse_castle_in_Estonia_(Fall_2021).webm",
-      "license": "CC BY-SA 4.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
-      "checked": "October 12, 2026",
-      "bytes": 976,
-      "sha256": "782df8cdfd9d18c3da729c9f0bf8393a0f78cd177f8a00e7b7734a783347aab7",
-      "transformationCredit": "Made by Ryan with Codex (GPT-6).",
-      "changed": "Recorded actual browser load, transfer bytes, and scene statistics alongside the rendered screenshot."
-    },
-    {
-      "file": "assets/toys/video-3d/review/toolse-1440x900.png",
-      "toy": "video-3d",
-      "author": "Sillerkiil",
-      "page": "https://commons.wikimedia.org/wiki/File:Toolse_castle_in_Estonia_(Fall_2021).webm",
-      "license": "CC BY-SA 4.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
-      "checked": "October 12, 2026",
-      "bytes": 1074885,
-      "sha256": "19f022fea4578e525338463734a87a43b48b9a9e80db0272446f9591fe209a91",
-      "transformationCredit": "Made by Ryan with Codex (GPT-6).",
-      "changed": "Rendered the actual video-derived Gaussian scene through the browser renderer; images and clips retain the capture license. Interface and other shelf thumbnails retain their existing credits."
-    },
-    {
-      "file": "assets/toys/video-3d/review/toolse-390x844.json",
-      "toy": "video-3d",
-      "author": "Sillerkiil",
-      "page": "https://commons.wikimedia.org/wiki/File:Toolse_castle_in_Estonia_(Fall_2021).webm",
-      "license": "CC BY-SA 4.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
-      "checked": "October 12, 2026",
-      "bytes": 975,
-      "sha256": "2e9f6f99b61d1a0fc539b454691763727a57d3ae98dd9b413ed0de8f427e6615",
-      "transformationCredit": "Made by Ryan with Codex (GPT-6).",
-      "changed": "Recorded actual browser load, transfer bytes, and scene statistics alongside the rendered screenshot."
-    },
-    {
-      "file": "assets/toys/video-3d/review/toolse-390x844.png",
-      "toy": "video-3d",
-      "author": "Sillerkiil",
-      "page": "https://commons.wikimedia.org/wiki/File:Toolse_castle_in_Estonia_(Fall_2021).webm",
-      "license": "CC BY-SA 4.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
-      "checked": "October 12, 2026",
-      "bytes": 309703,
-      "sha256": "e6fa96a48100f7cac7b42355d3a4385411396ada48500c12a53b1919c1f81dc5",
-      "transformationCredit": "Made by Ryan with Codex (GPT-6).",
-      "changed": "Rendered the actual video-derived Gaussian scene through the browser renderer; images and clips retain the capture license. Interface and other shelf thumbnails retain their existing credits."
-    },
-    {
-      "file": "assets/toys/video-3d/review/toolse-training-after.png",
-      "toy": "video-3d",
-      "author": "Sillerkiil",
-      "page": "https://commons.wikimedia.org/wiki/File:Toolse_castle_in_Estonia_(Fall_2021).webm",
-      "license": "CC BY-SA 4.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
-      "checked": "October 12, 2026",
-      "bytes": 176823,
-      "sha256": "168132cdd04ab9c4bdb533bd71237cef69b452eb201b07792cb45d75608f1334",
-      "transformationCredit": "Made by Ryan with Codex (GPT-6).",
-      "changed": "Rendered the actual video-derived Gaussian scene through the browser renderer; images and clips retain the capture license. Interface and other shelf thumbnails retain their existing credits."
-    },
-    {
-      "file": "assets/toys/video-3d/review/toolse-training-before.png",
-      "toy": "video-3d",
-      "author": "Sillerkiil",
-      "page": "https://commons.wikimedia.org/wiki/File:Toolse_castle_in_Estonia_(Fall_2021).webm",
-      "license": "CC BY-SA 4.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
-      "checked": "October 12, 2026",
-      "bytes": 174196,
-      "sha256": "b3204a645de8228e1a2d1fe336a044285e8ab49fadf4266388d8dc69e07becdc",
-      "transformationCredit": "Made by Ryan with Codex (GPT-6).",
-      "changed": "Rendered the actual video-derived Gaussian scene through the browser renderer; images and clips retain the capture license. Interface and other shelf thumbnails retain their existing credits."
     }
   ]
 }

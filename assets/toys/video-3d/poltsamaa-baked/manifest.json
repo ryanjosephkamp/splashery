@@ -1,0 +1,41 @@
+{
+  "format": "splashery-baked-manifest",
+  "version": 1,
+  "id": "poltsamaa",
+  "title": "Castle courtyard, orbited (compact)",
+  "source": {
+    "file": "poltsamaa.ply",
+    "sha256": "9e1c24609d5fe2e7db854c90151b47b13f2e89b75d0e6cf9afdf005e3ed34d49",
+    "splats": 29767,
+    "up": "y"
+  },
+  "bounds": {
+    "min": [-5.19822883605957, -3.834887742996216, 0.7449010014533997],
+    "max": [7.950371265411377, 1.652026653289795, 12.539632797241211]
+  },
+  "parts": [{ "id": 0, "name": "body" }],
+  "defaultTier": 29767,
+  "tiers": [
+    {
+      "splats": 29767,
+      "bytes": 488080,
+      "files": [
+        {
+          "path": "assets/poltsamaa-29767-0.bkd.gz",
+          "splats": 29767,
+          "bytes": 488080,
+          "sha256": "9b23e77a5eed715b507fd64471b7a2b411c8b977a168c58e1bc75007aeacf5dd"
+        }
+      ]
+    }
+  ],
+  "credit": {
+    "title": "Drone video of Põltsamaa river and castle in Estonia (20 seconds from 24 seconds)",
+    "author": "Sillerkiil",
+    "source": "https://commons.wikimedia.org/wiki/File:Drone_video_of_P%C3%B5ltsamaa_river_and_castle_in_Estonia.webm",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "checked": "October 12, 2026",
+    "changes": "Quantized the reviewed trained PLY into BKD1 phone tiers, preserving Gaussian rotations, scales, opacity, and degree-0 color. Smaller tiers thin deterministically. Cameras and source footage are unchanged. Made by Ryan with Codex (GPT-6)."
+  }
+}

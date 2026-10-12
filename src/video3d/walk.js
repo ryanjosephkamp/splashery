@@ -1,4 +1,4 @@
-// Walking stays in a narrow tube around the filmed cameras, with a limited view of the scene.
+// Walking eases through connected, well-observed free space, with a full horizontal turn.
 import { setLens, putLens } from "./flight.js";
 
 const clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
@@ -36,15 +36,15 @@ export function closestPathPoint(path, p) {
   return best;
 }
 
-export function createWalk(path) {
+export function createWalk(path, { region = null } = {}) {
   const lengths = path
     .slice(1)
     .map((p, i) => Math.hypot(...p.pos.map((v, k) => v - path[i].pos[k])))
     .sort((a, b) => a - b);
   const spacing = lengths[Math.floor(lengths.length / 2)] || 0.05;
   const radius = clamp(spacing * 0.35, 0.012, 0.055);
-  const speed = clamp(spacing * 0.8, 0.025, 0.16);
-  const lookLimit = 0.35;
+  const speed = region ? clamp(region.cell * 3, 0.06, 0.4) : clamp(spacing * 0.8, 0.025, 0.16);
+  const lookLimit = Math.PI;
   const state = { pos: [], yaw: 0, pitch: 0, velocity: [0, 0, 0], boundary: false };
   let desiredYaw = 0;
   let desiredPitch = 0;
@@ -63,6 +63,7 @@ export function createWalk(path) {
     radius,
     speed,
     lookLimit,
+    region,
     reset,
     step(dt, input = {}) {
       dt = clamp(Number(dt) || 0, 0, 0.05);
@@ -78,35 +79,33 @@ export function createWalk(path) {
       state.velocity = state.velocity.map((v, k) => v + (desired[k] - v) * ease);
       const next = state.pos.map((v, k) => v + state.velocity[k] * dt);
       const hit = closestPathPoint(path, next);
-      state.boundary = hit.distance > radius;
+      const permitted = region ? region.move(state.pos, next) : next;
+      state.boundary = region
+        ? Math.hypot(...permitted.map((v, k) => v - next[k])) > 1e-8
+        : hit.distance > radius;
       state.time = hit.time;
       state.roll = hit.roll;
-      state.pos = state.boundary
-        ? next.map((v, k) => hit.pos[k] + ((v - hit.pos[k]) * radius) / hit.distance)
-        : next;
+      state.pos = region
+        ? permitted
+        : state.boundary
+          ? next.map((v, k) => hit.pos[k] + ((v - hit.pos[k]) * radius) / hit.distance)
+          : next;
       desiredYaw += (input.lookX || 0) * 0.004;
       desiredPitch += (input.lookY || 0) * 0.004;
-      desiredYaw = hit.yaw + clamp(wrap(desiredYaw - hit.yaw), -lookLimit, lookLimit);
-      desiredPitch = hit.pitch + clamp(desiredPitch - hit.pitch, -0.5, 0.5);
-      state.yaw =
-        hit.yaw +
-        clamp(
-          wrap(state.yaw + wrap(desiredYaw - state.yaw) * ease - hit.yaw),
-          -lookLimit,
-          lookLimit,
-        );
-      state.pitch =
-        hit.pitch + clamp(state.pitch + (desiredPitch - state.pitch) * ease - hit.pitch, -0.5, 0.5);
+      desiredYaw = state.yaw + wrap(desiredYaw - state.yaw);
+      desiredPitch = clamp(desiredPitch, -Math.PI * 0.44, Math.PI * 0.44);
+      state.yaw += wrap(desiredYaw - state.yaw) * ease;
+      state.pitch += (desiredPitch - state.pitch) * ease;
       return state;
     },
   };
 }
 
-export function mountWalk(path, { flight, isCurrent = () => true } = {}) {
+export function mountWalk(path, { flight, region = null, isCurrent = () => true } = {}) {
   let player = globalThis.window?.__splashery?.player;
   let token = player?.loadToken;
   let cam = player?.camera;
-  const walk = createWalk(path);
+  const walk = createWalk(path, { region });
   let wasLens = cam ? setLens(path[0]) : null;
   const root = document.createElement("section");
   root.id = "v3d-walk";
@@ -281,6 +280,7 @@ export function mountWalk(path, { flight, isCurrent = () => true } = {}) {
   const api = {
     state: walk.state,
     radius: walk.radius,
+    region,
     root,
     resumeAt(p) {
       walk.reset(p);
@@ -324,7 +324,7 @@ export function mountWalk(path, { flight, isCurrent = () => true } = {}) {
       cam.turntable = false;
       cam.idleFor = 0;
       hint.textContent = state.boundary
-        ? "Edge of the filmed area. Turn gently, or move back along the path."
+        ? "Edge of the well-seen area. Turn, or move back into the scene."
         : "Walk: keys or left thumb. Look: drag or right thumb.";
       moved = true;
     },

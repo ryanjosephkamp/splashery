@@ -1,6 +1,4 @@
-// Real, independently trained Video to 3D captures. Source cuts, camera paths, and splats
-// retain the credited source licenses. Full hashes and training history are in tools/assets.json
-// and the sample JSON. Attribution also appears beside the viewer.
+// Real video captures. BKD1 manifests and camera JSON retain each source license.
 export const SAMPLES = [
   {
     id: "liberty",
@@ -12,6 +10,8 @@ export const SAMPLES = [
     source: "https://commons.wikimedia.org/wiki/File:Statue_Of_Liberty_4k_Drone.webm",
     license: "CC BY 3.0",
     licenseUrl: "https://creativecommons.org/licenses/by/3.0/",
+    baked: "liberty-baked/manifest.json",
+    bakedSha256: "c9b73fc2029545773b0a217001b69cb5afeb336c59f2cc6357960215a0bdd5be",
   },
   {
     id: "edinburgh",
@@ -24,6 +24,8 @@ export const SAMPLES = [
       "https://commons.wikimedia.org/wiki/File:Walking_in_EDINBURGH_-_Scotland_(UK)_-_4K_60fps_(UHD).webm",
     license: "CC BY 3.0",
     licenseUrl: "https://creativecommons.org/licenses/by/3.0/",
+    baked: "edinburgh-baked/manifest.json",
+    bakedSha256: "841b9c9e2b3aa9134ed36d911cc235706c2666e07bb223a1fa44d80f86c25d48",
   },
   {
     id: "adjara",
@@ -38,6 +40,8 @@ export const SAMPLES = [
     licenseUrl: "https://creativecommons.org/licenses/by/4.0/",
     checked: "October 12, 2026",
     sha256: "ccd48b18bb5689cd231bc6bc05b3b02c61e76bc9f9eb88e9d7d17c9332ea6f4b",
+    baked: "adjara-baked/manifest.json",
+    bakedSha256: "11c72259ef2f175f3c8b984b95bb9fdff887bfa7506f0ed6e4ed5d26bd01c7e6",
   },
   {
     id: "lihula",
@@ -54,6 +58,8 @@ export const SAMPLES = [
     licenseUrl: "https://creativecommons.org/publicdomain/zero/1.0/",
     checked: "October 12, 2026",
     sha256: "7f3f69fa5f02bbaadf9f46c10ff0aa77a7c8e7be79a23af61d1e437ebc2b4572",
+    baked: "lihula-baked/manifest.json",
+    bakedSha256: "7ff3ce1d97e2df8e647a4498308206dab540431124aa7ee88978342e0588b0ce",
   },
   {
     id: "toolse",
@@ -68,6 +74,8 @@ export const SAMPLES = [
     licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/",
     checked: "October 12, 2026",
     sha256: "565aeafb33dc0e0d82312ace949e401510d31551268bce088aab8978c7626125",
+    baked: "toolse-baked/manifest.json",
+    bakedSha256: "17d47d65c7f8ecd24faeb4964a8c959dfea6fba0501881defe93a746554cc438",
   },
   {
     id: "poltsamaa",
@@ -83,5 +91,7 @@ export const SAMPLES = [
     licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/",
     checked: "October 12, 2026",
     sha256: "9e1c24609d5fe2e7db854c90151b47b13f2e89b75d0e6cf9afdf005e3ed34d49",
+    baked: "poltsamaa-baked/manifest.json",
+    bakedSha256: "0943dd8a5ef3c8f4e9812c55fc4ec50a1b3bc8bc72ae7bd1f9d2d0d98d31cd05",
   },
 ];

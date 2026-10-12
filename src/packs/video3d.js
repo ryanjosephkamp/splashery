@@ -10,12 +10,14 @@
 // samples (assets/toys/video-3d/) are real results with source credits and compatible CC licenses.
 
 import { readSplatPly } from "../video3d/ply.js";
+import { readBakedScene } from "../video3d/baked.js";
 import { sceneFrame, splatsInFrame, toyCamera, pruneSplats } from "../video3d/scene.js";
 import { SAMPLES } from "../video3d/samples.js";
 import { makeFlight } from "../video3d/flight.js";
 import { GUIDE_NOTE } from "../video3d/guide.js";
 import { cleanScene } from "../video3d/cleanup.js";
 import { mountWalk } from "../video3d/walk.js";
+import { buildWalkRegion } from "../video3d/region.js";
 import { mountSceneCredit } from "../video3d/credit.js";
 
 const V3D = {
@@ -40,6 +42,10 @@ export const video3dResult = () => V3D.custom;
 // toy's frame. cams: [{ time, R, t }].
 export function sceneFromPly(bytes, cams, keep = 400000, { affine = false } = {}) {
   const raw = readSplatPly(bytes, keep);
+  return sceneFromSplats(raw, cams, { affine });
+}
+
+export function sceneFromSplats(raw, cams, { affine = false } = {}) {
   const frame = sceneFrame(raw, cams);
   const framed = splatsInFrame(frame, raw, { contract: !affine });
   // globalThis.__v3dNoPrune (tools/v3d-clip.mjs --prune=0) shows the scene as trained, for a
@@ -49,23 +55,34 @@ export function sceneFromPly(bytes, cams, keep = 400000, { affine = false } = {}
     ? null
     : pruneSplats(
         framed,
-        affine
-          ? { faint: 0.008, smearSize: Infinity, smearOpacity: 0, giant: Infinity }
-          : undefined,
+        undefined,
         path.map((c) => c.pos),
       );
   const cleaned = globalThis.__v3dNoPrune
     ? null
     : cleanScene(pruned ? pruned.scene : framed, path, { affine });
   const scene = cleaned?.scene || framed;
+  const domeCenter =
+    affine && path.length
+      ? [0, 1, 2].map((k) => path.reduce((n, c) => n + c.pos[k], 0) / path.length)
+      : [0, 0, 0];
+  let domeRadius = 4;
+  for (let i = 0; i < scene.count; i++)
+    domeRadius = Math.max(
+      domeRadius,
+      Math.hypot(...[0, 1, 2].map((k) => scene.pos[i * 3 + k] - domeCenter[k])) * 1.1,
+    );
+  domeRadius = Math.min(160, domeRadius); // The stage's unchanged far clip is 200.
   return {
     scene,
     path,
     pruned: { ...pruned?.removed, ...cleaned?.removed },
     sky: cleaned?.sky,
     skyCount: cleaned?.skyCount || 0,
+    dome: { center: domeCenter, radius: domeRadius },
     clamped: cleaned?.clamped || 0,
     affine,
+    region: affine ? buildWalkRegion(scene, path) : null,
   };
 }
 
@@ -80,17 +97,19 @@ async function readBytes(rel) {
   return new Uint8Array(await r.arrayBuffer());
 }
 
-async function loadSample(id, navigation) {
+async function loadSample(id, navigation, budget = 400000) {
   const s = SAMPLES.find((x) => x.id === id) || SAMPLES[0];
   if (!s) return null;
-  const key = `${s.id}/${navigation === "walk" ? "walk" : "orbit"}`;
+  const key = `${s.id}/${navigation === "walk" ? "walk" : "orbit"}/${budget}`;
   if (!V3D.samples.has(key)) {
-    const [ply, json] = await Promise.all([
-      readBytes(`../../assets/toys/video-3d/${s.id}.ply`),
+    const [raw, json] = await Promise.all([
+      s.baked
+        ? readBakedScene(new URL(`../../assets/toys/video-3d/${s.baked}`, import.meta.url), budget)
+        : readBytes(`../../assets/toys/video-3d/${s.id}.ply`).then((bytes) => readSplatPly(bytes)),
       readBytes(`../../assets/toys/video-3d/${s.id}.json`),
     ]);
     const meta = JSON.parse(new TextDecoder().decode(json));
-    const framed = sceneFromPly(ply, meta.cams, undefined, { affine: navigation === "walk" });
+    const framed = sceneFromSplats(raw, meta.cams, { affine: navigation === "walk" });
     V3D.samples.set(key, { ...framed, name: s.label, stats: meta.stats, sample: s, uid: s.id });
   }
   return V3D.samples.get(key);
@@ -397,8 +416,6 @@ const VIDEO_3D = {
         { id: "10", label: "10 seconds" },
         { id: "20", label: "20 seconds" },
         { id: "40", label: "40 seconds" },
-        { id: "60", label: "60 seconds (a computer is best)" },
-        { id: "90", label: "90 seconds (fewer frames per second)" },
       ],
     },
     {
@@ -469,7 +486,7 @@ const VIDEO_3D = {
     license: s.license,
     licenseUrl: s.licenseUrl,
   })),
-  async prepare(o) {
+  async prepare(o, _help, ctx) {
     const generation = (V3D.prepareUid = (V3D.prepareUid || 0) + 1);
     const choice = watchChoice();
     const current = () => generation === V3D.prepareUid && choice.matches();
@@ -491,7 +508,11 @@ const VIDEO_3D = {
     }
     if (!want && SAMPLES.length) {
       try {
-        want = await loadSample(o.source === "custom" ? SAMPLES[0].id : o.source, o.navigation);
+        want = await loadSample(
+          o.source === "custom" ? SAMPLES[0].id : o.source,
+          o.navigation,
+          ctx?.count,
+        );
       } catch {
         want = null;
       }
@@ -568,14 +589,16 @@ const VIDEO_3D = {
         j < picked.far.length ? splat(picked.far[j]) : null,
       );
     // The soft upper dome uses the video's trained sky colors, behind the scene's far shell.
-    if (!src.affine && src.skyCount > 10 && src.sky && !globalThis.__v3dNoPrune)
+    if (src.skyCount > 10 && src.sky && !globalThis.__v3dNoPrune)
       k.cloud({ share: 0.015, pattern: false, fit: false }, (r) => {
         const y = r();
         const a = r() * Math.PI * 2;
         const b = Math.sqrt(1 - y * y);
         return {
-          p: [Math.cos(a) * b * 4, y * 4, Math.sin(a) * b * 4],
-          scales: [0.23, 0.23, 0.23],
+          p: [Math.cos(a) * b, y, Math.sin(a) * b].map(
+            (v, i) => src.dome.center[i] + v * src.dome.radius,
+          ),
+          scales: [0.0575, 0.0575, 0.0575].map((v) => v * src.dome.radius),
           color: src.sky.map((c) => Math.min(1, c + (1 - y) * 0.07)),
           opacity: 0.98,
           pattern: false,
@@ -591,6 +614,8 @@ const VIDEO_3D = {
       timings: src.timings,
       pruned: src.pruned,
       clamped: src.clamped,
+      walkRegion: src.region?.stats,
+      skyDome: src.skyCount > 10 ? src.dome : null,
     };
     k.data = { video: V3D.info };
     V3D.shown = src;
@@ -604,6 +629,7 @@ const VIDEO_3D = {
       if (o.navigation === "walk") {
         V3D.walk = mountWalk(src.path, {
           flight: V3D.flight,
+          region: src.region,
           isCurrent: () => V3D.shown === src,
         });
         k.data.walk = V3D.walk;

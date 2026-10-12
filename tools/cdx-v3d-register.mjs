@@ -9,6 +9,7 @@ import { format } from "prettier";
 import { CAPTURES } from "./cdx-v3d-sample-sources.mjs";
 import { SAMPLES } from "../src/video3d/samples.js";
 import { readSplatPly } from "../src/video3d/ply.js";
+import { registerBakedSamples } from "./cdx-v3d-baked.mjs";
 
 const directory = process.argv[2];
 if (!directory) throw new Error("Usage: cdx-v3d-register.mjs <reviewed-bake-directory>");
@@ -23,7 +24,8 @@ const staged = [];
 
 // Validate and format every export before changing any shipped file or registry entry.
 for (const s of CAPTURES) {
-  const input = path.join(directory, s.id);
+  const flat = path.join(directory, s.id);
+  const input = fs.existsSync(`${flat}.ply`) ? flat : path.join(flat, s.id);
   const ply = fs.readFileSync(`${input}.ply`);
   const meta = JSON.parse(fs.readFileSync(`${input}.json`, "utf8"));
   const raw = readSplatPly(ply);
@@ -50,7 +52,10 @@ for (const s of CAPTURES) {
   const finish = meta.continuation
     ? ` The last continuation completed ${meta.continuation.completedIterations} additional steps at up to ${exportSide} px, reusing the recorded cameras and learned model.`
     : "";
-  const changed = `Selected one continuous shot, removed sound, made 480p source cuts, solved cameras, and trained real Gaussian splats through Splat.js. Compact model budget, initially ${initialSide} px training.${finish}`;
+  const backend = meta.bake?.backend === "msplat/Metal" ? "COLMAP and msplat on Metal" : "Splat.js";
+  const capture =
+    meta.bake?.backend === "msplat/Metal" && meta.bake.source?.captureSha256 ? meta.bake.source : s;
+  const changed = `Selected one continuous shot, removed sound, made 480p source cuts, solved cameras, and trained real Gaussian splats through ${backend}. Initially ${initialSide} px training.${finish}`;
   meta.provenance = {
     transformationCredit: credit,
     source: s.source,
@@ -58,21 +63,21 @@ for (const s of CAPTURES) {
     license: s.license,
     licenseUrl: s.licenseUrl,
     checked: s.checked,
-    captureUrl: s.captureUrl,
-    captureSha256: s.captureSha256,
+    captureUrl: capture.captureUrl,
+    captureSha256: capture.captureSha256,
     sourceSpan: s.span,
     changed,
   };
   meta.bake ||= {};
   meta.bake.originalSourceSpan = s.span;
-  meta.bake.sourceTimeOffset = meta.bake.start || 0;
+  meta.bake.sourceTimeOffset ??= meta.bake.start || 0;
   const base = `assets/toys/video-3d/${s.id}`;
   const json = Buffer.from(await pretty(JSON.stringify(meta)));
   const sourceMp4 = fs.readFileSync(`${base}-source.mp4`);
   const sourceWebm = fs.readFileSync(`${base}-source.webm`);
   const files = {};
   for (const [file, bytes] of [
-    [`${base}.ply`, ply],
+    ...(ply.length <= 20_000_000 ? [[`${base}.ply`, ply]] : []),
     [`${base}.json`, json],
     [`${base}-source.mp4`, sourceMp4],
     [`${base}-source.webm`, sourceWebm],
@@ -81,8 +86,10 @@ for (const s of CAPTURES) {
     files[file] = { bytes: bytes.length, sha256: sha(bytes) };
   }
   const defaultBytes = ply.length + json.length;
-  if (defaultBytes > 15_000_000) throw new Error(`Default scene over 15 MB: ${s.id}`);
-  staged.push([`${base}.ply`, ply], [`${base}.json`, json]);
+  // A full-resolution build export may exceed the site's single-file guidance. It remains
+  // in scratch; BKD1 phone tiers are created from it before checking the actual default load.
+  if (ply.length <= 20_000_000) staged.push([`${base}.ply`, ply]);
+  staged.push([`${base}.json`, json]);
   samples.push({
     id: s.id,
     label: `${s.label} (compact)`,
@@ -108,8 +115,8 @@ for (const s of CAPTURES) {
     page: s.source,
     license: s.license,
     checked: s.checked,
-    captureUrl: s.captureUrl,
-    captureSha256: s.captureSha256,
+    captureUrl: capture.captureUrl,
+    captureSha256: capture.captureSha256,
     files,
     defaultBytes,
     note: `${s.span.length} seconds from ${s.span.start} seconds; ${meta.stats.registered}/${meta.stats.frames} cameras placed; ${meta.stats.iters} completed total iterations; ${raw.count} exported splats. ${changed} Silent MP4 and WebM cuts ship for Show the original. Scene, path, and source cuts retain the source license. No identifiable people, logos, or brands were seen in the inspected shot.`,
@@ -125,7 +132,7 @@ const asset = JSON.parse(fs.readFileSync("tools/assets.json", "utf8"));
 asset.videoSamples = [...asset.videoSamples.filter((s) => !ids.has(s.id)), ...records];
 const start = "<!-- Codex task 40 new Video to 3D captures -->";
 const end = "<!-- End Codex task 40 new Video to 3D captures -->";
-const section = `${start}\n\nCodex task 40 code (MIT): made by Ryan with Codex (GPT-6).\n\nNew Video to 3D captures, checked on their live Commons pages on October 12, 2026:\n\n${rows.join("\n")}\n\nThe transformations were made by Ryan with Codex (GPT-6). These are real captures, independently solved and trained with Splat.js. Their silent 480p source cuts, camera paths, splats, and video-derived review images retain each source license, including CC BY-SA. The models use compact budgets; every completed iteration, initial bake, and continuation is recorded in the sample JSON. Full high bakes can be reproduced with \`tools/cdx-v3d-sample-batch.mjs --high\`. Sources, changes, byte counts, and SHA-256 hashes of every shipped sample file are recorded in \`tools/assets.json\`. The selected shots were inspected for identifiable people, logos, and brands.\n\n${end}`;
+const section = `${start}\n\nCodex task 40 code (MIT): made by Ryan with Codex (GPT-6).\n\nNew Video to 3D captures, checked on their live Commons pages on October 12, 2026:\n\n${rows.join("\n")}\n\nThe transformations were made by Ryan with Codex (GPT-6). These are real captures, independently solved and trained with the backend recorded in each sample JSON. Their silent 480p source cuts, camera paths, and splats retain each source license, including CC BY-SA. The models use compact budgets; every completed iteration, initial bake, and continuation is recorded in the sample JSON. Native-resolution hardware bakes use \`tools/cdx-v3d-mac-bake.mjs\`; compact browser bakes use \`tools/cdx-v3d-sample-batch.mjs\`. Sources, changes, byte counts, and SHA-256 hashes of every shipped sample file are recorded in \`tools/assets.json\`. The selected shots were inspected for identifiable people, logos, and brands.\n\n${end}`;
 let credits = fs.readFileSync("CREDITS.md", "utf8");
 if (!credits.includes(start) || !credits.includes(end))
   throw new Error(
@@ -145,5 +152,7 @@ staged.push([
 staged.push(["tools/assets.json", await pretty(JSON.stringify(asset))]);
 staged.push(["CREDITS.md", await pretty(credits, "markdown")]);
 for (const [file, bytes] of staged) fs.writeFileSync(file, bytes);
+await registerBakedSamples(directory, all);
+for (const r of records) if (!r.files[r.file]) fs.rmSync(r.file, { force: true });
 for (const r of records)
   console.log(JSON.stringify({ id: r.id, defaultBytes: r.defaultBytes, files: r.files }));

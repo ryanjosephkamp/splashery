@@ -12,8 +12,8 @@ function frameStats({ gray, width, height }) {
 }
 
 // Small patches matched after subtracting their average brightness. A common displacement is
-// consistent with panning; differing displacements give a hint of depth. This cannot identify
-// people/cars, distinguish every rotation from translation, or measure geometric visibility.
+// consistent with panning. Radial expansion can be forward movement or zoom; residual motion can
+// be depth, independently moving objects, or matching error. None of these proves a camera solve.
 function motion(a, b) {
   const w = a.width;
   const h = a.height;
@@ -49,13 +49,21 @@ function motion(a, b) {
           }
         }
       }
-      flows.push({ dx, dy, error: best });
+      flows.push({ x: x - w / 2, y: y - h / 2, dx, dy, error: best });
     }
   }
   const good = flows.filter((v) => v.error < 0.65);
   const mx = median(good.map((v) => v.dx));
   const my = median(good.map((v) => v.dy));
+  const radius2 = good.reduce((s, v) => s + v.x * v.x + v.y * v.y, 0) || 1;
+  const zoom = good.reduce((s, v) => s + v.x * (v.dx - mx) + v.y * (v.dy - my), 0) / radius2;
+  const residuals = good.map((v) => Math.hypot(v.dx - mx - zoom * v.x, v.dy - my - zoom * v.y));
   return {
+    dx: mx,
+    dy: my,
+    zoom,
+    outliers: mean(residuals.map((v) => Number(v > 2))),
+    residual: median(residuals),
     displacement: median(good.map((v) => Math.hypot(v.dx, v.dy))),
     spread: mean(good.map((v) => Math.hypot(v.dx - mx, v.dy - my))),
     unmatched: 1 - good.length / Math.max(1, flows.length),
@@ -64,7 +72,16 @@ function motion(a, b) {
 }
 
 export function assessFrames(frames) {
-  if (frames.length < 3 || frames.some((f) => !f.gray || f.gray.length !== f.width * f.height))
+  if (
+    frames.length < 3 ||
+    frames.some(
+      (f) =>
+        !f.gray ||
+        f.gray.length !== f.width * f.height ||
+        f.width !== frames[0].width ||
+        f.height !== frames[0].height,
+    )
+  )
     return {
       checked: false,
       verdict: "unknown",
@@ -73,7 +90,14 @@ export function assessFrames(frames) {
       metrics: { frames: frames.length },
     };
   const stats = frames.map(frameStats);
-  const motions = frames.slice(1).map((b, i) => motion(frames[i], b));
+  const motions = frames
+    .slice(1)
+    .flatMap((b, i) => (b.group === frames[i].group ? [motion(frames[i], b)] : []));
+  // Short triplets measure local speed and direction changes. Distant centers only establish
+  // that the camera moved at all: their mismatches cannot diagnose instability within a shot.
+  const grouped = frames[0].group !== undefined;
+  const centers = frames.filter((_, i) => i % 3 === 1);
+  const wide = grouped ? centers.slice(1).map((b, i) => motion(centers[i], b)) : motions;
   const metrics = {
     frames: frames.length,
     sharpness: median(stats.map((s) => s.sharp)),
@@ -83,10 +107,28 @@ export function assessFrames(frames) {
     motion: median(motions.map((m) => m.displacement)),
     parallax: median(motions.map((m) => m.spread)),
     unmatched: mean(motions.map((m) => m.unmatched)),
+    wideMotion: median(wide.map((m) => m.displacement)),
+    outliers: mean(motions.map((m) => m.outliers)),
+    residual: median(motions.map((m) => m.residual)),
+    zoom: Math.max(0, ...motions.map((m) => Math.abs(m.zoom))),
+    texturePatches: median(motions.map((m) => m.patches)),
+    worstUnmatched: Math.max(0, ...motions.map((m) => m.unmatched)),
+    localWindows: grouped,
+    reversals: grouped
+      ? motions.filter(
+          (m, i) => i % 2 === 1 && m.dx * motions[i - 1].dx + m.dy * motions[i - 1].dy < -1,
+        ).length
+      : 0,
   };
+  return assessMetrics(metrics);
+}
+
+// Kept pure so the measured calibration cases can guard the thresholds without redistributing
+// the privately retained counterexample videos (which include people and signs).
+export function assessMetrics(metrics) {
   const reasons = [];
   let poor = false;
-  if (metrics.contrast < 12 || median(motions.map((m) => m.patches)) < 4) {
+  if (metrics.contrast < 12 || metrics.texturePatches < 4) {
     reasons.push(
       "Too few textured details to match. Include brick, bark, stone, or other detailed surfaces.",
     );
@@ -100,7 +142,7 @@ export function assessFrames(frames) {
   }
   if (metrics.exposure > 24)
     reasons.push("Brightness changes a lot. Keep the same exposure and even light.");
-  if (metrics.motion < 0.6) {
+  if (Math.max(metrics.motion, metrics.wideMotion) < 0.6) {
     reasons.push(
       "Very little camera motion. Walk slowly sideways or around something rather than filming from one spot.",
     );
@@ -109,10 +151,27 @@ export function assessFrames(frames) {
     reasons.push(
       "Little difference in how near and far details move. This may be a pan; move through the place, rather than only turning.",
     );
-  if (metrics.unmatched > 0.4 && metrics.contrast >= 12)
+  if (metrics.unmatched > 0.2 || metrics.outliers > 0.22 || metrics.worstUnmatched > 0.7)
     reasons.push(
       "Many patches do not line up. Fast motion, a cut, moving objects, or reflections may cause this. Try a steady stretch without moving people or cars.",
     );
+  // Calibrated on six shipped real cuts and three privately retained real counterexamples.
+  // At 128 px, >5 px per 0.25 s with many inconsistent patches marks a rapid, unstable pan.
+  // A >10% radial change in one pair marks a sudden zoom/approach, not reliable depth evidence.
+  if (
+    metrics.localWindows &&
+    metrics.motion > 5 &&
+    (metrics.outliers > 0.25 || metrics.reversals > 0)
+  ) {
+    reasons.push("The camera moves quickly and inconsistently. Choose a slower, steadier stretch.");
+    poor = true;
+  }
+  if (metrics.localWindows && metrics.zoom > 0.1) {
+    reasons.push(
+      "The picture expands or shrinks suddenly. Avoid fast zooms, and move slowly through the place.",
+    );
+    poor = true;
+  }
   const verdict = poor ? "poor" : reasons.length ? "caution" : "promising";
   const message =
     verdict === "promising"
@@ -121,6 +180,44 @@ export function assessFrames(frames) {
         ? "This stretch is unlikely to make a clean 3D scene."
         : "This stretch may work, with some risks.";
   return { checked: true, verdict, message, reasons, metrics };
+}
+
+// A paused video's seeked event can precede presentation of its decoded frame. Reading the
+// canvas then sometimes copies the previous window and invents a sudden zoom. Wait for the
+// matching presented frame, bounded by the same cancellation signal and a short local timeout.
+async function seekPresented(video, time, signal) {
+  if (!video.requestVideoFrameCallback) return seek(video, time, { signal, timeoutMs: 4000 });
+  let cleanup;
+  const presented = new Promise((resolve, reject) => {
+    let callback;
+    let done = false;
+    const finish = (error) => {
+      if (done) return;
+      done = true;
+      clearTimeout(timer);
+      signal.removeEventListener("abort", abort);
+      if (callback !== undefined) video.cancelVideoFrameCallback(callback);
+      error ? reject(error) : resolve();
+    };
+    const abort = () => finish(new DOMException("Stopped", "AbortError"));
+    const timer = setTimeout(
+      () => finish(new Error("The decoded video frame took too long.")),
+      1000,
+    );
+    const frame = (_, metadata) => {
+      if (Math.abs(metadata.mediaTime - time) <= 0.08) finish();
+      else callback = video.requestVideoFrameCallback(frame);
+    };
+    cleanup = finish;
+    signal.addEventListener("abort", abort, { once: true });
+    if (signal.aborted) abort();
+    else callback = video.requestVideoFrameCallback(frame);
+  });
+  try {
+    await Promise.all([seek(video, time, { signal, timeoutMs: 4000 }), presented]);
+  } finally {
+    cleanup();
+  }
 }
 
 export async function checkVideo(file, { start = 0, length = 10, signal } = {}) {
@@ -140,15 +237,21 @@ export async function checkVideo(file, { start = 0, length = 10, signal } = {}) 
     const from = Math.min(Math.max(0, Number(start) || 0), Math.max(0, opened.duration - 0.1));
     const span = Math.min(Math.max(0.1, Number(length) || 10), opened.duration - from);
     const frames = [];
-    for (const fraction of [0.05, 0.35, 0.65, 0.95]) {
-      await seek(opened.video, from + span * fraction, { signal: ctrl.signal, timeoutMs: 4000 });
-      g.drawImage(opened.video, 0, 0, width, height);
-      const rgba = g.getImageData(0, 0, width, height).data;
-      const gray = Float32Array.from(
-        { length: width * height },
-        (_, i) => 0.299 * rgba[i * 4] + 0.587 * rgba[i * 4 + 1] + 0.114 * rgba[i * 4 + 2],
-      );
-      frames.push({ width, height, gray });
+    // Four short triplets retain coverage of the shot while observing motion within each
+    // window. Four frames several seconds apart missed shaking and outran the patch search.
+    const fractions = [0.05, 0.35, 0.65, 0.95];
+    const delta = Math.min(0.25, span * 0.025);
+    for (const [group, fraction] of fractions.entries()) {
+      for (const offset of [-delta, 0, delta]) {
+        await seekPresented(opened.video, from + span * fraction + offset, ctrl.signal);
+        g.drawImage(opened.video, 0, 0, width, height);
+        const rgba = g.getImageData(0, 0, width, height).data;
+        const gray = Float32Array.from(
+          { length: width * height },
+          (_, i) => 0.299 * rgba[i * 4] + 0.587 * rgba[i * 4 + 1] + 0.114 * rgba[i * 4 + 2],
+        );
+        frames.push({ width, height, gray, group });
+      }
     }
     return { ...assessFrames(frames), duration: opened.duration, start: from, end: from + span };
   } catch (e) {

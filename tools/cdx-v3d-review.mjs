@@ -3,6 +3,8 @@
 // SPLASHERY_CHROMIUM=/path/to/chromium SPLASHERY_URL=http://127.0.0.1:4173/ \
 // node tools/cdx-v3d-review.mjs [sample-id ...]
 import fs from "node:fs";
+import os from "node:os";
+import path from "node:path";
 import { chromium } from "@playwright/test";
 import { SAMPLES } from "../src/video3d/samples.js";
 import { createScene } from "../src/state.js";
@@ -13,7 +15,7 @@ for (const id of ids)
   if (!SAMPLES.some((s) => s.id === id)) throw new Error(`Unknown sample: ${id}`);
 const selected = SAMPLES.filter((s) => !ids.length || ids.includes(s.id));
 const base = (process.env.SPLASHERY_URL || "http://127.0.0.1:4173/").replace(/\/$/, "");
-const out = "assets/toys/video-3d/review";
+const out = process.env.V3D_REVIEW_OUT || path.join(os.tmpdir(), "cdx-v3d-review");
 fs.mkdirSync(out, { recursive: true });
 const browser = await chromium.launch({
   executablePath: process.env.SPLASHERY_CHROMIUM || undefined,

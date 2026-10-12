@@ -766,23 +766,19 @@ New Video to 3D captures, checked on their live Commons pages on October 12, 202
   export trained at up to 640 pixels.
 
 The transformations were made by Ryan with Codex (GPT-6). These are real captures, independently
-solved and trained with Splat.js. Their silent 480p source cuts, camera paths, splats, and
-video-derived review images retain each source license, including CC BY-SA. The models use compact
-budgets; every completed iteration, initial bake, and continuation is recorded in the sample JSON.
-Full high bakes can be reproduced with `tools/cdx-v3d-sample-batch.mjs --high`. Sources, changes,
-byte counts, and SHA-256 hashes of every shipped sample file are recorded in `tools/assets.json`.
-The selected shots were inspected for identifiable people, logos, and brands.
+solved and trained with Splat.js. Their silent 480p source cuts, camera paths, and splats retain
+each source license, including CC BY-SA. The models use compact budgets; every completed iteration,
+initial bake, and continuation is recorded in the sample JSON. The native-resolution hardware
+workflow is `tools/cdx-v3d-mac-bake.mjs`; no such bake was completed in this container. All six
+default models are loaded through source-credited BKD1 manifests and gzip chunks. The small PLYs
+remain offline build sources. Sources, changes, byte counts, and SHA-256 hashes of every shipped
+sample file are recorded in `tools/assets.json`. The selected shots were inspected for identifiable
+people, logos, and brands.
 
 <!-- End Codex task 40 new Video to 3D captures -->
 
-Video to 3D task 40 review evidence (`assets/toys/video-3d/review/`) was rendered by Ryan with Codex
-(GPT-6), using the actual scenes and browser renderer. The video-derived pictures, GIFs, and frame
-strips retain their capture licenses: `edinburgh-*` and `phone-walk.png`, POPtravel, CC BY 3.0;
-`liberty-thumb.webp`, the Dronalist, CC BY 3.0; `adjara-*`, Vitaly Zdanevich, CC BY 4.0; `lihula-*`,
-Sillerkiil, CC0 1.0; `toolse-*` and `poltsamaa-*`, Sillerkiil, CC BY-SA 4.0. The live source pages
-linked above were checked on October 12, 2026. The interface and other shelf thumbnails keep their
-existing credits. Per-file sizes and SHA-256 hashes, sources, authors, licenses, and transformations
-are recorded in the `videoReviewEvidence` entries in `tools/assets.json`.
+Video to 3D review images and clips live only on the separate `codex/video-3d-r2-clips` branch.
+Their source licenses and hashes are recorded beside them; the audit links to that evidence.
 
 The camera path and the splats are worked out on the device by
 [Splat.js](https://github.com/arrival-space/splat.js) (Stratum1 GmbH, MIT). Videos people open are

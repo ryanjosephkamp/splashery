@@ -19,17 +19,23 @@ test("new captures retain their provenance and match every shipped file hash", (
     expect(record.checked).toBe(sample.checked);
     expect(record.transformationCredit).toBe(sample.transformationCredit);
     expect(record.captureSha256).toMatch(/^[a-f0-9]{64}$/);
-    expect(Object.keys(record.files)).toHaveLength(4);
+    expect(Object.keys(record.files).length).toBeGreaterThanOrEqual(4);
     for (const [file, declared] of Object.entries(record.files)) {
       const bytes = readFileSync(file);
       expect(bytes.length, file).toBe(declared.bytes);
       expect(bytes.length, file).toBeLessThan(20_000_000);
       expect(createHash("sha256").update(bytes).digest("hex"), file).toBe(declared.sha256);
     }
-    expect(record.files[record.file].sha256).toBe(sample.sha256);
-    expect(record.defaultBytes).toBe(
-      record.files[record.file].bytes + record.files[record.path].bytes,
+    expect(record.files[record.file].sha256).toBe(
+      record.file.endsWith(".ply") ? sample.sha256 : sample.bakedSha256,
     );
+    for (const [file, declared] of Object.entries(record.baked.files)) {
+      const bytes = readFileSync(file);
+      expect(bytes.length, file).toBe(declared.bytes);
+      expect(createHash("sha256").update(bytes).digest("hex"), file).toBe(declared.sha256);
+    }
+    expect(record.baked.files[record.baked.file].sha256).toBe(sample.bakedSha256);
+    expect(record.defaultBytes).toBe(record.baked.defaultBytes);
     const meta = JSON.parse(readFileSync(record.path));
     const finish = meta.continuation;
     expect(finish.completedIterations, sample.id).toBeGreaterThan(0);
@@ -102,6 +108,8 @@ test("each selected sample loads in the browser without fetching the trainer", a
   }
   expect(errors).toEqual([]);
   expect(requests.filter((u) => /vendor\/splatjs/.test(u))).toEqual([]);
+  expect(requests.filter((u) => /video-3d\/[^/]+\.ply(?:\?|$)/.test(u))).toEqual([]);
+  expect(requests.filter((u) => /\.bkd\.gz(?:\?|$)/.test(u)).length).toBeGreaterThanOrEqual(6);
 });
 
 test("a saved walk-mode BY-SA sample loads with its attribution in a standalone embed", async ({

@@ -3,7 +3,7 @@
 
 export const WORKS = [
   "Walk slowly around an object, or through a place, so the camera moves sideways and sees the same things from new angles.",
-  "10 to 40 seconds, held steady, in even light. A computer can try 60 to 90 seconds for a longer walk.",
+  "10 to 40 seconds, held steady, in even light.",
   "Plenty of texture: stone, bark, brick, leaves, signs.",
   "No zoom, and few people or cars moving.",
   "A drone circling a building or a statue is ideal.",

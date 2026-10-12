@@ -1,0 +1,41 @@
+{
+  "format": "splashery-baked-manifest",
+  "version": 1,
+  "id": "lihula",
+  "title": "Ruined courtyard, flown over (compact)",
+  "source": {
+    "file": "lihula.ply",
+    "sha256": "7f3f69fa5f02bbaadf9f46c10ff0aa77a7c8e7be79a23af61d1e437ebc2b4572",
+    "splats": 28212,
+    "up": "y"
+  },
+  "bounds": {
+    "min": [-2.1393327713012695, -2.099775552749634, -0.742924153804779],
+    "max": [2.1592319011688232, 1.5486589670181274, 4.661925792694092]
+  },
+  "parts": [{ "id": 0, "name": "body" }],
+  "defaultTier": 28212,
+  "tiers": [
+    {
+      "splats": 28212,
+      "bytes": 458087,
+      "files": [
+        {
+          "path": "assets/lihula-28212-0.bkd.gz",
+          "splats": 28212,
+          "bytes": 458087,
+          "sha256": "4ef3ab1c429d0f18256f8c702e4994c50702ecd4de4d2a9d796bffd060ae59bd"
+        }
+      ]
+    }
+  ],
+  "credit": {
+    "title": "Drone video of ruins of Lihula stronghold, the manor and town (august 2021) (20 seconds from 18 seconds)",
+    "author": "Sillerkiil",
+    "source": "https://commons.wikimedia.org/wiki/File:Drone_video_of_ruins_of_Lihula_stronghold,_the_manor_and_town_(august_2021).webm",
+    "license": "CC0 1.0",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "checked": "October 12, 2026",
+    "changes": "Quantized the reviewed trained PLY into BKD1 phone tiers, preserving Gaussian rotations, scales, opacity, and degree-0 color. Smaller tiers thin deterministically. Cameras and source footage are unchanged. Made by Ryan with Codex (GPT-6)."
+  }
+}

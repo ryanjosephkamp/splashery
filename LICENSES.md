@@ -131,8 +131,8 @@ OR OTHER DEALINGS IN THE SOFTWARE.
 - License: MIT (Copyright (c) 2026 Stratum1 GmbH; checked on the live repository page on September
   30, 2026; the full text is in `vendor/splatjs/LICENSE`).
 - Local change by Codex for task 40 (October 12, 2026): `src/session.js` accepts `refineStart`,
-  defaulting to its existing 1,500-step threshold. Video to 3D lowers it for short runs so phone
-  training can grow and refine splats before its step budget ends. The MIT notice is retained.
+  defaulting to its existing 1,500-step threshold. Explicit build tools may change it; browser
+  training retains the original threshold. The MIT notice is retained.
 
 ## omggif 1.0.10 (lane Pictures)
 
@@ -353,6 +353,13 @@ trained from them) is ours, and the models and textures they use keep their own 
   (`tools/fidelity/run-orrery.sh`). The version used is recorded in each run's report.
 - msplat (Apache-2.0), https://github.com/rayanht/msplat: the second choice of trainer on Apple
   Silicon, if Brush can't run.
+- Video to 3D's native Mac bake workflow pins COLMAP 4.2.1 (BSD-3-Clause),
+  https://github.com/colmap/colmap/blob/4.2.1/COPYING.txt, and msplat 1.1.4 (Apache-2.0),
+  https://github.com/rayanht/msplat/blob/6b819711fa7c90f054567cb4fb4937743367afdd/LICENSE. Its
+  Python CLI uses tyro 0.9.35 (MIT), https://github.com/brentyi/tyro/blob/v0.9.35/LICENSE. License
+  pages checked October 12, 2026. Native frame preparation and CLI help were checked here; COLMAP
+  solving and Metal training were not run. These tools and their dependencies are never shipped to
+  the browser.
 - GROOPH 0.4.0 (MIT, by the owner), https://www.npmjs.com/package/grooph: the command line
   (`npx grooph@0.4.0`, run by `tools/site-loop.mjs`) draws the project's lane loop as an SVG for the
   draft page "The loop a lane follows" (lane Site r2). Nothing of it is served; only the SVG it

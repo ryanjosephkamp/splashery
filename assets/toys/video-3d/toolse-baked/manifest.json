@@ -1,0 +1,41 @@
+{
+  "format": "splashery-baked-manifest",
+  "version": 1,
+  "id": "toolse",
+  "title": "Coastal ruins, drone pass (compact)",
+  "source": {
+    "file": "toolse.ply",
+    "sha256": "565aeafb33dc0e0d82312ace949e401510d31551268bce088aab8978c7626125",
+    "splats": 29096,
+    "up": "y"
+  },
+  "bounds": {
+    "min": [-26.560558319091797, -34.12953186035156, 1.2947101593017578],
+    "max": [64.13458251953125, 1.042698860168457, 106.19881439208984]
+  },
+  "parts": [{ "id": 0, "name": "body" }],
+  "defaultTier": 29096,
+  "tiers": [
+    {
+      "splats": 29096,
+      "bytes": 464805,
+      "files": [
+        {
+          "path": "assets/toolse-29096-0.bkd.gz",
+          "splats": 29096,
+          "bytes": 464805,
+          "sha256": "9648f7fc421292a17db3de6154ad116772a3e6a4e2d7da9349ed038e99aab450"
+        }
+      ]
+    }
+  ],
+  "credit": {
+    "title": "Toolse castle in Estonia (Fall 2021) (20 seconds from 14 seconds)",
+    "author": "Sillerkiil",
+    "source": "https://commons.wikimedia.org/wiki/File:Toolse_castle_in_Estonia_(Fall_2021).webm",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "checked": "October 12, 2026",
+    "changes": "Quantized the reviewed trained PLY into BKD1 phone tiers, preserving Gaussian rotations, scales, opacity, and degree-0 color. Smaller tiers thin deterministically. Cameras and source footage are unchanged. Made by Ryan with Codex (GPT-6)."
+  }
+}

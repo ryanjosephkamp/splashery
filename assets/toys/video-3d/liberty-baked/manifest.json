@@ -1,0 +1,59 @@
+{
+  "format": "splashery-baked-manifest",
+  "version": 1,
+  "id": "liberty",
+  "title": "Statue, flown around",
+  "source": {
+    "file": "liberty.ply",
+    "sha256": "51f36c567afcdb3302beb9f61b6391e3aa829ceea70824ac79369cedbc1d1fc6",
+    "splats": 116279,
+    "up": "y"
+  },
+  "bounds": {
+    "min": [-57.263916015625, -23.59562110900879, 3.001455783843994],
+    "max": [40.76171875, 5.102437973022461, 119.542724609375]
+  },
+  "parts": [{ "id": 0, "name": "body" }],
+  "defaultTier": 116279,
+  "tiers": [
+    {
+      "splats": 60000,
+      "bytes": 972429,
+      "files": [
+        {
+          "path": "assets/liberty-60000-0.bkd.gz",
+          "splats": 60000,
+          "bytes": 972429,
+          "sha256": "53c446ca23c005a076543398df4ef5d042c959d83356dfa0287f0b2a1c3365b9"
+        }
+      ]
+    },
+    {
+      "splats": 116279,
+      "bytes": 1879568,
+      "files": [
+        {
+          "path": "assets/liberty-116279-0.bkd.gz",
+          "splats": 65536,
+          "bytes": 1058981,
+          "sha256": "112e37cf7907a8fd6d6311363314240b7771097a1396a44fb65b69caaa357312"
+        },
+        {
+          "path": "assets/liberty-116279-1.bkd.gz",
+          "splats": 50743,
+          "bytes": 820587,
+          "sha256": "a8a8b3c9abc5ed810fdda56ec44a524ce02a82365c8ab51229bed271622d857e"
+        }
+      ]
+    }
+  ],
+  "credit": {
+    "title": "Statue Of Liberty 4k Drone (14 s from 3:24)",
+    "author": "the Dronalist",
+    "source": "https://commons.wikimedia.org/wiki/File:Statue_Of_Liberty_4k_Drone.webm",
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+    "checked": "October 12, 2026",
+    "changes": "Quantized the reviewed trained PLY into BKD1 phone tiers, preserving Gaussian rotations, scales, opacity, and degree-0 color. Smaller tiers thin deterministically. Cameras and source footage are unchanged. Made by Ryan with Codex (GPT-6)."
+  }
+}

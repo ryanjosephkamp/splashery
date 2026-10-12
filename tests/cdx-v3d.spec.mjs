@@ -106,12 +106,12 @@ test("walking eases motion and stays in the filmed corridor, including its ends"
   expect(walk.state.pos).toEqual(before);
 });
 
-test("walking keeps the view within filmed directions rather than looking through the back of a scene", async () => {
+test("walking allows a full turn while keeping pitch below vertical", async () => {
   const { createWalk } = await import("../src/video3d/walk.js");
   const walk = createWalk(path);
   for (let i = 0; i < 300; i++) walk.step(1 / 60, { lookX: 20, lookY: 20 });
-  expect(Math.abs(walk.state.yaw)).toBeLessThanOrEqual(walk.lookLimit + 1e-6);
-  expect(Math.abs(walk.state.pitch)).toBeLessThanOrEqual(0.5 + 1e-6);
+  expect(Math.abs(walk.state.yaw)).toBeGreaterThan(0.35);
+  expect(Math.abs(walk.state.pitch)).toBeLessThanOrEqual(Math.PI * 0.44 + 1e-6);
 });
 
 test("cleanup rejects single-view floaters and sky rays while retaining supported surfaces", async () => {
@@ -343,7 +343,7 @@ test("changing navigation reuses a learned custom result and keeps its original-
   expect(result.walk.splats).toBeGreaterThan(1000);
 });
 
-test("short training refines before the phone budget ends", async () => {
+test("an explicit build-tool refinement setting runs through the real Session loop", async () => {
   const { createSession } = await import("../vendor/splatjs/src/session.js");
   const session = createSession({
     maxIters: 1200,
@@ -633,7 +633,7 @@ test("desktop keys and a mouse drag move the real stage camera, and leaving remo
   await expect(page.locator("#v3d-walk")).toHaveCount(0);
 });
 
-test("two phone thumbs move and look independently while remaining near the filmed path", async ({
+test("two phone thumbs move and look independently while staying in the observed region", async ({
   browser,
 }) => {
   const context = await browser.newContext({
@@ -700,19 +700,11 @@ test("two phone thumbs move and look independently while remaining near the film
   const after = await read();
   expect(Math.hypot(...after.pos.map((v, k) => v - before.pos[k]))).toBeGreaterThan(0.001);
   expect(Math.abs(after.yaw - before.yaw)).toBeGreaterThan(0.005);
-  const distance = await page.evaluate(async () => {
-    const { closestPathPoint } = await import("./src/video3d/walk.js");
+  const allowed = await page.evaluate(() => {
     const { player } = window.__splashery;
-    const cams = JSON.parse(
-      await (await fetch("./assets/toys/video-3d/edinburgh.json")).text(),
-    ).cams;
-    const { sceneFromPly } = await import("./src/packs/video3d.js");
-    const ply = new Uint8Array(
-      await (await fetch("./assets/toys/video-3d/edinburgh.ply")).arrayBuffer(),
-    );
-    return closestPathPoint(sceneFromPly(ply, cams).path, player.camera.pose().position).distance;
+    return player.proc.ctx.kit.data.walk.region.contains(player.camera.pose().position);
   });
-  expect(distance).toBeLessThanOrEqual(after.radius + 1e-6);
-  await page.screenshot({ path: "assets/toys/video-3d/review/phone-walk.png" });
+  expect(allowed).toBe(true);
+  await page.screenshot({ path: "/tmp/cdx-v3d-phone-walk.png" });
   await context.close();
 });

@@ -247,7 +247,7 @@ export function splatsInFrame(frame, s, { contract = true } = {}) {
 // matter, big faint ones (the smears beside the subject), any giant, and floaters at the cameras
 // (`cams`: the camera path's positions in the toy's frame). Sizes are in the toy's frame (the unit sphere).
 // Returns { scene, removed: { faint, smear, giant } }.
-export const PRUNE = { faint: 0.008, smearSize: 0.03, smearOpacity: 0.25, giant: 0.12 };
+export const PRUNE = { faint: 0.008, smearSize: 0.03, smearOpacity: 0.4, giant: 0.12 };
 
 export function pruneSplats(s, rules = PRUNE, cams = []) {
   const removed = { faint: 0, smear: 0, giant: 0, atCamera: 0 };

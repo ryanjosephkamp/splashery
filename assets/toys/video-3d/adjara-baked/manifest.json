@@ -1,0 +1,41 @@
+{
+  "format": "splashery-baked-manifest",
+  "version": 1,
+  "id": "adjara",
+  "title": "Forest path, walked (compact)",
+  "source": {
+    "file": "adjara.ply",
+    "sha256": "ccd48b18bb5689cd231bc6bc05b3b02c61e76bc9f9eb88e9d7d17c9332ea6f4b",
+    "splats": 29679,
+    "up": "y"
+  },
+  "bounds": {
+    "min": [-20.923425674438477, -49.11762619018555, -3.1470203399658203],
+    "max": [14.925187110900879, 3.8310132026672363, 107.7322998046875]
+  },
+  "parts": [{ "id": 0, "name": "body" }],
+  "defaultTier": 29679,
+  "tiers": [
+    {
+      "splats": 29679,
+      "bytes": 486371,
+      "files": [
+        {
+          "path": "assets/adjara-29679-0.bkd.gz",
+          "splats": 29679,
+          "bytes": 486371,
+          "sha256": "5031e7542839311ef0d1a09eda6fe026d9875b59d953a33711635443d33a290a"
+        }
+      ]
+    }
+  ],
+  "credit": {
+    "title": "Adjara2025walking-summer-forest (20 seconds from 0 seconds)",
+    "author": "Vitaly Zdanevich",
+    "source": "https://commons.wikimedia.org/wiki/File:Adjara2025walking-summer-forest.webm",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "checked": "October 12, 2026",
+    "changes": "Quantized the reviewed trained PLY into BKD1 phone tiers, preserving Gaussian rotations, scales, opacity, and degree-0 color. Smaller tiers thin deterministically. Cameras and source footage are unchanged. Made by Ryan with Codex (GPT-6)."
+  }
+}
