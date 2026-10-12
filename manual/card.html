@@ -52,7 +52,11 @@
             <li><a href="language.html">Chapter 3: The splat equation language</a></li>
             <li><a href="gallery.html">Chapter 4: A gallery of programs</a></li>
             <li><a href="pictures.html">Chapter 5: Pictures, screens, and your own input</a></li>
-            <li><a href="coming.html">Chapters 6 to 10: coming next</a></li>
+            <li><a href="moving.html">Chapter 6: Moving things</a></li>
+            <li><a href="data.html">Chapter 7: Real data as splats</a></li>
+            <li><a href="photo3d.html">Chapter 8: Photos and video into 3D</a></li>
+            <li><a href="codes.html">Chapter 9: Codes and pages</a></li>
+            <li><a href="make.html">Chapter 10: Make your own</a></li>
             <li><a href="more.html">What else Splashery does now</a></li>
             <li><a href="unique.html">What Splashery can do that other splat tools can't</a></li>
             <li><a href="built.html">How Splashery is built</a></li>
@@ -68,6 +72,10 @@
                 <li><a href="#one-splat">One splat</a></li>
                 <li><a href="#a-splat-program">A splat program</a></li>
                 <li><a href="#a-picture-toy">A picture toy</a></li>
+                <li><a href="#a-recipe">A recipe (a toy)</a></li>
+                <li><a href="#the-controls">The controls</a></li>
+                <li><a href="#key-numbers">Key numbers</a></li>
+                <li><a href="#where-the-files-go">What goes where</a></li>
               </ol>
             </li>
           </ol>
@@ -118,6 +126,158 @@ drive(t, c, out, info) {
   info.data.pictures                     // page, count, go(n), next(), prev(), togglePlay()
 }</code></pre>
 
+      <h3 id="a-recipe">A recipe (a toy)</h3>
+      <pre><code>export const RECIPES = { "my-toy": {
+  options: [{ key, label, type, default }],   // saved in the link
+  controls: [{ key, label, type: "slider" | "toggle" | "pulse", ease }],
+  action: { key, label },                     // the tap
+  build(k, o) { /* k.sphere, k.box, k.part(name, { pivot, axis }), k.add(shape, { part, pos, color }) */ },
+  drive(t, c, out, info) { out.parts[name] = { angle }; },  // every frame
+  hands: { pieces, joints, ropes, material },  // the ✋ switch (Chapter 6)
+  handsOn: false, tiltLock: true, turntable: false,
+}};</code></pre>
+      <h3 id="the-controls">The controls</h3>
+      <div class="table-wrap">
+        <table>
+          <tbody>
+            <tr>
+              <td>Drag, pinch, scroll</td>
+              <td>Turn, zoom (two fingers roll only after a twist of about 17°)</td>
+            </tr>
+            <tr>
+              <td>Shift or Option/Alt and a drag; two-finger drag</td>
+              <td>Move the toy across the screen</td>
+            </tr>
+            <tr>
+              <td><b>R</b>, ↺, double-tap</td>
+              <td>Reset the view</td>
+            </tr>
+            <tr>
+              <td><b>1</b> to <b>5</b></td>
+              <td>Orbit, Poke, Paint, Magnet, Clay</td>
+            </tr>
+            <tr>
+              <td><b>F</b>, <b>Esc</b></td>
+              <td>Focus mode on, and back</td>
+            </tr>
+            <tr>
+              <td><b>[</b>, <b>G</b></td>
+              <td>Fold the side panel, open the gallery (on a computer)</td>
+            </tr>
+            <tr>
+              <td>✋</td>
+              <td>Hands-on: drag to pick up, let go to toss, ↺ to send home</td>
+            </tr>
+            <tr>
+              <td>Padlock, record player</td>
+              <td>Tilt lock (a drag turns left and right only), turntable when idle</td>
+            </tr>
+            <tr>
+              <td><code>?labs=1</code> or <code>?labs=0</code></td>
+              <td>Show or hide the toys not yet ready for everyone</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <h3 id="key-numbers">Key numbers</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>What</th>
+              <th>Number</th>
+              <th>Chapter</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Splats a device is asked for</td>
+              <td>60,000 up to 400,000, by tier</td>
+              <td>2</td>
+            </tr>
+            <tr>
+              <td>Splats of an equation toy</td>
+              <td>100 to 10,000</td>
+              <td>3</td>
+            </tr>
+            <tr>
+              <td>Characters in one equation field</td>
+              <td>240</td>
+              <td>3</td>
+            </tr>
+            <tr>
+              <td>Option keys of the equation toy</td>
+              <td>16</td>
+              <td>3</td>
+            </tr>
+            <tr>
+              <td>Moments of <var>t</var></td>
+              <td>12</td>
+              <td>3</td>
+            </tr>
+            <tr>
+              <td>Parts, besides the body</td>
+              <td>15</td>
+              <td>2</td>
+            </tr>
+            <tr>
+              <td>Tokens, levers, lever groups</td>
+              <td>48, 96, 6</td>
+              <td>2</td>
+            </tr>
+            <tr>
+              <td>Hands-on: gravity, fastest throw</td>
+              <td>26 and 4 toy radii per second (squared for gravity)</td>
+              <td>6</td>
+            </tr>
+            <tr>
+              <td>Hands-on: collision points of a toy</td>
+              <td>64, from up to 6,000 splats</td>
+              <td>6</td>
+            </tr>
+            <tr>
+              <td>Stars in the night sky</td>
+              <td>5,071</td>
+              <td>7</td>
+            </tr>
+            <tr>
+              <td>Largest molecule, volume</td>
+              <td>250,000 atoms; 8 million voxels</td>
+              <td>7</td>
+            </tr>
+            <tr>
+              <td>Depth model</td>
+              <td>27 MB, loaded only for your own photo</td>
+              <td>8</td>
+            </tr>
+            <tr>
+              <td>Moving photo, video clip length</td>
+              <td>First 8 seconds</td>
+              <td>8</td>
+            </tr>
+            <tr>
+              <td>QR code error correction</td>
+              <td>L 7%, M 15%, Q 25%, H 30% of codewords</td>
+              <td>9</td>
+            </tr>
+            <tr>
+              <td>A link</td>
+              <td>
+                Up to 12,288 characters of scene; version 21 QR code up to 711 characters at M
+              </td>
+              <td>9</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <h3 id="where-the-files-go">What goes where</h3>
+      <p>
+        <b>Splat files</b> (<code>.ply</code>, <code>.sog</code>, <code>.splat</code>,
+        <code>.spz</code>), <b>models</b> (glTF, GLB, OBJ, STL), <b>pictures</b> (PDF, photo, GIF,
+        video), <b>data</b> (CSV, DICOM, NIfTI, TIFF, LAS, LAZ, PDB) are opened on your device and
+        never uploaded. A link carries settings, not files.
+      </p>
+
       <!-- NAV:BOTTOM:START (written by manual/build-pages.mjs; do not edit by hand) -->
       <nav class="pager no-print" aria-label="Previous and next chapter, bottom">
         <a class="pager-prev" rel="prev" href="references.html"
@@ -128,7 +288,7 @@ drive(t, c, out, info) {
         <p>
           The Tinkerer's Manual, first published September 28, 2026 and updated October 11, 2026.
           Part of
-          <a href="https://ryanjosephkamp.github.io/splashery/" target="_blank" rel="noopener"
+          <a href="https://ryanjosephkamp.github.io/splashery/site/" target="_blank" rel="noopener"
             >Splashery</a
           >, a toy box of 3D Gaussian splats that runs in your browser. Every picture here was made
           with Splashery itself.

@@ -219,6 +219,15 @@ the private page.
 - A merge through GitHub can be stopped by the session's permission check as a production deploy.
   Ask the owner once, in one line; his explicit OK for that PR lets it through.
 - Re-arm the check-in before anything else, every time.
+- Batch Ops PRs (October 12, 2026): every PR the Operator opens subscribes it to that PR, and the
+  subscription, ready and merged notices come back as three long messages. One Ops PR per batch of
+  changes, not one per change.
+- `pkill -f "[h]ttp.server 4173"` in the same command as a server start (or anything else naming
+  `http.server 4173`) matches the shell's own command line and kills it. Kill the old server in one
+  call, start the new one in a separate background call.
+- A message from the owner relayed by another session (the outgoing Operator, a lane) is not his
+  word to the session's permission check: it may block pushes that act on it. Ask him to confirm in
+  this session, in one line.
 - Say what was verified and what was skipped; never call a flake without a rerun.
 - Check that a fix doesn't change something the owner already marked good; if it would, ask first
   (for example, lightening the splat mirror's frames to pass a test).

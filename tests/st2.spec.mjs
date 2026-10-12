@@ -337,7 +337,7 @@ test.describe("the quick outline", () => {
     await expect(foot.locator("a")).toHaveCount(1);
     await expect(foot.locator("a")).toHaveAttribute(
       "href",
-      "https://ryanjosephkamp.github.io/splashery/",
+      "https://ryanjosephkamp.github.io/splashery/site/", // Manual r7b: the site's home page (FRONT_DOOR off)
     );
     const toyLinks = page.locator('a[href*="splashery/#s="]');
     expect(await toyLinks.count()).toBeGreaterThan(5);

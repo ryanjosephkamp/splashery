@@ -50,6 +50,11 @@ merges.
 | 39-photo-3d-r2.md                 | Photo to 3D with no gaps                                       | Photo to 3D, the relief mesh, tests   | no            |
 | 40-video-3d-r2.md                 | Video to 3D, a world you can walk through                      | `src/video3d/`, samples, tests        | yes           |
 | 41-splat-mirror-r2.md             | A steadier, cleaner Splat mirror                               | `src/live/relief.js`, tests           | no            |
+| 42-fluid-lab-phone-r2.md          | The Fluid Lab, smooth on a phone                               | `src/fluids/`, tests, report          | no            |
+| 43-arcade-new-games.md            | Three new arcade games, played by real rules                   | new game modules, tests               | yes           |
+| 44-photoreal-planets.md           | The photoreal planets, polished                                | `src/space/`, tiles, tests            | yes           |
+| 45-elements-polish.md             | The periodic table and the real elements, polished             | the elements toys, photos, tests      | yes           |
+| 46-blender-worlds.md              | Blender-built worlds, baked to splats (after PR #549)          | `tools/blender/`, a world, tests      | yes           |
 
 The Codex cloud environment is set up with `tools/codex-setup.sh`; [SETUP.md](SETUP.md) has the
 steps for creating it and fixing a failed setup.
@@ -82,7 +87,7 @@ Task 37 owns the depth model that the other toys call. Task 38 starts from task 
 replaces PR #479. All four toys are behind the labs switch, so the Operator merges each PR after its
 tests pass and the owner has seen its clips.
 
-After these, the owner's next ideas for Codex are in `builders/TASKS.md` (Blender-baked remakes and
-Worlds, the Workshop, performance, photoreal sourcing) and in tasks the Operator will write next:
-the Fluid Lab on a phone (task 14's follow-up), new arcade games, and the photoreal planets and the
-elements polished.
+The second wave (tasks 42 to 46) can run beside them; their files don't overlap the Studio's: the
+Fluid Lab on a phone, three new arcade games, the photoreal planets, the periodic table and the real
+elements, and Blender-built worlds (after the Baked engine, PR #549, is on `main`). More ideas are
+in `builders/TASKS.md` (Blender-baked remakes, the Workshop, performance, photoreal sourcing).

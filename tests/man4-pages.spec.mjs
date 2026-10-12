@@ -7,7 +7,7 @@ import { test, expect } from "@playwright/test";
 import fs from "node:fs";
 import path from "node:path";
 import { execSync } from "node:child_process";
-import { PAGES, COMING, label } from "../manual/pages.mjs";
+import { PAGES, label } from "../manual/pages.mjs";
 
 const SHOTS = path.resolve("tests/screenshots");
 const read = (f) => fs.readFileSync(`manual/${f}`, "utf8");
@@ -28,7 +28,6 @@ test.describe("the pages", () => {
       if (p.chapter) expect(html).toContain(`<span class="level">Chapter ${p.chapter}</span>`);
       expect(html).not.toMatch(/<span class="level">Level/);
     }
-    for (const c of COMING) expect(read("coming.html")).toContain(`<span class="level">Chapter ${c.chapter}</span>`); // prettier-ignore
   });
 
   test("the level map block is gone, from the page and the style sheet", () => {
@@ -152,8 +151,6 @@ test.describe("the pages", () => {
       .evaluateAll((as) => as.map((a) => [a.getAttribute("href"), a.textContent.trim()]));
     const hrefs = links.map((l) => l[0]);
     for (const p of PAGES.slice(1)) expect(hrefs, p.file).toContain(p.file);
-    for (const c of COMING)
-      expect(links.map((l) => l[1])).toContain(`Chapter ${c.chapter}: ${c.title} (coming)`);
     // Every section (h3) of every page is in it, with the right page in its address.
     for (const p of PAGES.slice(1)) {
       for (const m of read(p.file).matchAll(/<h3[^>]*\sid="([^"]+)"/g))
@@ -200,7 +197,11 @@ test.describe("old addresses, pop-ups, and the whole manual", () => {
       language: "language.html",
       gallery: "gallery.html",
       pictures: "pictures.html",
-      moving: "coming.html",
+      moving: "moving.html",
+      data: "data.html",
+      photo3d: "photo3d.html",
+      codes: "codes.html",
+      make: "make.html",
       more: "more.html",
       unique: "unique.html",
       experiments: "experiments.html",
@@ -339,7 +340,7 @@ test.describe("every page works", () => {
         }
         if (
           w === 390 &&
-          ["splat.html", "language.html", "gallery.html", "coming.html"].includes(p.file)
+          ["splat.html", "language.html", "gallery.html", "moving.html"].includes(p.file)
         ) {
           await page.screenshot({
             path: path.join(SHOTS, `man4-pages-${p.file.replace(".html", "")}-390x844.png`),

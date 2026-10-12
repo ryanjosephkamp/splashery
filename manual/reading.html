@@ -52,7 +52,11 @@
             <li><a href="language.html">Chapter 3: The splat equation language</a></li>
             <li><a href="gallery.html">Chapter 4: A gallery of programs</a></li>
             <li><a href="pictures.html">Chapter 5: Pictures, screens, and your own input</a></li>
-            <li><a href="coming.html">Chapters 6 to 10: coming next</a></li>
+            <li><a href="moving.html">Chapter 6: Moving things</a></li>
+            <li><a href="data.html">Chapter 7: Real data as splats</a></li>
+            <li><a href="photo3d.html">Chapter 8: Photos and video into 3D</a></li>
+            <li><a href="codes.html">Chapter 9: Codes and pages</a></li>
+            <li><a href="make.html">Chapter 10: Make your own</a></li>
             <li><a href="more.html">What else Splashery does now</a></li>
             <li><a href="unique.html">What Splashery can do that other splat tools can't</a></li>
             <li><a href="built.html">How Splashery is built</a></li>
@@ -60,7 +64,15 @@
             <li><a href="experiments.html">Open questions: other choices, not tried yet</a></li>
             <li><a href="later.html">What comes later: Code a toy</a></li>
             <li><a href="glossary.html">Glossary</a></li>
-            <li><a href="reading.html" aria-current="page">Further reading</a></li>
+            <li>
+              <a href="reading.html" aria-current="page">Further reading</a>
+              <ol class="outline-sub" aria-label="In this chapter">
+                <li><a href="#reading-start">Where splats come from</a></li>
+                <li><a href="#reading-robots">Robotics and other uses</a></li>
+                <li><a href="#reading-dynamic">Moving, talking, and generated splats</a></li>
+                <li><a href="#reading-tools">Open projects and tools</a></li>
+              </ol>
+            </li>
             <li><a href="references.html">References</a></li>
             <li><a href="card.html">Quick reference</a></li>
           </ol>
@@ -78,9 +90,12 @@
       <!-- ---- Further reading ---- -->
       <h2 id="reading">Further reading</h2>
       <p>
-        Five sources, each opened, and checked on October 4, 2026. Authors, titles, venues, and
-        years are as the source's own page gives them.
+        Each source below was opened and checked on its own page (the first five on October 4, 2026,
+        the rest on October 11, 2026). Authors and titles are as the source's page gives them. A
+        venue is named only where the page names one; the others are preprints on arXiv. These are
+        links only: nothing here is copied.
       </p>
+      <h3 id="reading-start">Where splats come from</h3>
       <ul class="reading">
         <li>
           Bernhard Kerbl, Georgios Kopanas, Thomas Leimkühler, and George Drettakis.
@@ -103,7 +118,7 @@
             target="_blank"
             rel="noopener"
             >Paper</a
-          >. The footprint step in Level 1.
+          >. The footprint step in Chapter 1.
         </li>
         <li>
           Zehao Yu, Anpei Chen, Binbin Huang, Torsten Sattler, and Andreas Geiger.
@@ -129,6 +144,164 @@
           <a href="https://anttwo.github.io/sugar/" target="_blank" rel="noopener">Project page</a>.
         </li>
       </ul>
+      <h3 id="reading-robots">Robotics and other uses</h3>
+      <ul class="reading">
+        <li>
+          Nikhil Keetha, Jay Karhade, Krishna Murthy Jatavallabhula, Gengshan Yang, Sebastian
+          Scherer, Deva Ramanan, and Jonathon Luiten.
+          <b>SplaTAM: Splat, Track &amp; Map 3D Gaussians for Dense RGB-D SLAM.</b> CVPR 2024.
+          <a href="https://arxiv.org/abs/2312.02126" target="_blank" rel="noopener">Paper</a>. A
+          robot camera maps a room with splats as it moves.
+        </li>
+        <li>
+          Hidenobu Matsuki, Riku Murai, Paul H. J. Kelly, and Andrew J. Davison.
+          <b>Gaussian Splatting SLAM.</b> CVPR 2024 (Highlight).
+          <a href="https://arxiv.org/abs/2312.06741" target="_blank" rel="noopener">Paper</a>. The
+          same problem with one ordinary camera.
+        </li>
+        <li>
+          Timothy Chen, Ola Shorinwa, Joseph Bruno, Aiden Swann, Javier Yu, Weijia Zeng, Keiko
+          Nagami, Philip Dames, and Mac Schwager.
+          <b>Splat-Nav: Safe Real-Time Robot Navigation in Gaussian Splatting Maps.</b> arXiv
+          preprint, 2024.
+          <a href="https://arxiv.org/abs/2403.02751" target="_blank" rel="noopener">Paper</a>. A
+          robot plans a safe path through a splat map.
+        </li>
+        <li>
+          Yuhang Zheng, Xiangyu Chen, Yupeng Zheng, Songen Gu, Runyi Yang, Bu Jin, Pengfei Li,
+          Chengliang Zhong, Zengmao Wang, Lina Liu, Chao Yang, Dawei Wang, Zhen Chen, Xiaoxiao Long,
+          and Meiqing Wang.
+          <b
+            >GaussianGrasper: 3D Language Gaussian Splatting for Open-vocabulary Robotic
+            Grasping.</b
+          >
+          arXiv preprint, 2024.
+          <a href="https://arxiv.org/abs/2403.09637" target="_blank" rel="noopener">Paper</a>. A
+          robot is told in words what to pick up.
+        </li>
+        <li>
+          Mazeyu Ji, Ri-Zhao Qiu, Xueyan Zou, and Xiaolong Wang.
+          <b>GraspSplats: Efficient Manipulation with 3D Feature Splatting.</b> arXiv preprint,
+          2024. <a href="https://arxiv.org/abs/2409.02084" target="_blank" rel="noopener">Paper</a>.
+        </li>
+        <li>
+          Yunzhi Yan, Haotong Lin, Chenxu Zhou, Weijie Wang, Haiyang Sun, Kun Zhan, Xianpeng Lang,
+          Xiaowei Zhou, and Sida Peng.
+          <b>Street Gaussians: Modeling Dynamic Urban Scenes with Gaussian Splatting.</b> arXiv
+          preprint, 2024.
+          <a href="https://arxiv.org/abs/2401.01339" target="_blank" rel="noopener">Paper</a>.
+          Driving scenes, with moving cars.
+        </li>
+        <li>
+          Yifan Liu, Chenxin Li, Chen Yang, and Yixuan Yuan.
+          <b
+            >EndoGaussian: Real-time Gaussian Splatting for Dynamic Endoscopic Scene
+            Reconstruction.</b
+          >
+          arXiv preprint, 2024.
+          <a href="https://arxiv.org/abs/2401.12561" target="_blank" rel="noopener">Paper</a>.
+          Surgery video, in medicine.
+        </li>
+      </ul>
+      <h3 id="reading-dynamic">Moving, talking, and generated splats</h3>
+      <ul class="reading">
+        <li>
+          Tianyi Xie, Zeshun Zong, Yuxing Qiu, Xuan Li, Yutao Feng, Yin Yang, and Chenfanfu Jiang.
+          <b>PhysGaussian: Physics-Integrated 3D Gaussians for Generative Dynamics.</b> CVPR 2024.
+          <a href="https://arxiv.org/abs/2311.12198" target="_blank" rel="noopener">Paper</a>.
+          Splats that move by physics, as in Chapter 6's spirit.
+        </li>
+        <li>
+          Jonathon Luiten, Georgios Kopanas, Bastian Leibe, and Deva Ramanan.
+          <b>Dynamic 3D Gaussians: Tracking by Persistent Dynamic View Synthesis.</b> arXiv
+          preprint, 2023.
+          <a href="https://arxiv.org/abs/2308.09713" target="_blank" rel="noopener">Paper</a>.
+        </li>
+        <li>
+          Guanjun Wu, Taoran Yi, Jiemin Fang, Lingxi Xie, Xiaopeng Zhang, Wei Wei, Wenyu Liu, Qi
+          Tian, and Xinggang Wang.
+          <b>4D Gaussian Splatting for Real-Time Dynamic Scene Rendering.</b> CVPR 2024.
+          <a href="https://arxiv.org/abs/2310.08528" target="_blank" rel="noopener">Paper</a>.
+        </li>
+        <li>
+          Shenhan Qian, Tobias Kirschstein, Liam Schoneveld, Davide Davoli, Simon Giebenhain, and
+          Matthias Nießner.
+          <b>GaussianAvatars: Photorealistic Head Avatars with Rigged 3D Gaussians.</b> arXiv
+          preprint, 2023.
+          <a href="https://arxiv.org/abs/2312.02069" target="_blank" rel="noopener">Paper</a>. Heads
+          that can be animated.
+        </li>
+        <li>
+          Minghan Qin, Wanhua Li, Jiawei Zhou, Haoqian Wang, and Hanspeter Pfister.
+          <b>LangSplat: 3D Language Gaussian Splatting.</b> CVPR 2024.
+          <a href="https://arxiv.org/abs/2312.16084" target="_blank" rel="noopener">Paper</a>.
+          Searching a splat scene with words.
+        </li>
+        <li>
+          Jiaxiang Tang, Jiawei Ren, Hang Zhou, Ziwei Liu, and Gang Zeng.
+          <b>DreamGaussian: Generative Gaussian Splatting for Efficient 3D Content Creation.</b>
+          arXiv preprint, 2023 (camera-ready 2024).
+          <a href="https://arxiv.org/abs/2309.16653" target="_blank" rel="noopener">Paper</a>.
+          Making a splat from a prompt or a picture.
+        </li>
+        <li>
+          Tong Wu, Yu-Jie Yuan, Ling-Xiao Zhang, Jie Yang, Yan-Pei Cao, Ling-Qi Yan, and Lin Gao.
+          <b>Recent Advances in 3D Gaussian Splatting.</b> arXiv preprint, 2024.
+          <a href="https://arxiv.org/abs/2403.11134" target="_blank" rel="noopener">Paper</a>. A
+          survey of the field.
+        </li>
+      </ul>
+      <h3 id="reading-tools">Open projects and tools</h3>
+      <ul class="reading">
+        <li>
+          <b>gsplat</b>, an open-source library for training and rendering splats on the graphics
+          chip.
+          <a href="https://github.com/nerfstudio-project/gsplat" target="_blank" rel="noopener"
+            >github.com/nerfstudio-project/gsplat</a
+          >. Vickie Ye and colleagues also describe it in a paper, "gsplat: An Open-Source Library
+          for Gaussian Splatting" (arXiv preprint, 2024):
+          <a href="https://arxiv.org/abs/2409.06765" target="_blank" rel="noopener"
+            >arxiv.org/abs/2409.06765</a
+          >.
+        </li>
+        <li>
+          <b>Brush</b>, a 3D reconstruction engine that uses Gaussian splatting and runs on desktop,
+          Android, and in browsers (Apache-2.0).
+          <a href="https://github.com/ArthurBrussee/brush" target="_blank" rel="noopener"
+            >github.com/ArthurBrussee/brush</a
+          >.
+        </li>
+        <li>
+          <b>SuperSplat</b>, a free, open-source tool for inspecting, editing, optimizing, and
+          publishing splats (MIT).
+          <a href="https://github.com/playcanvas/supersplat" target="_blank" rel="noopener"
+            >github.com/playcanvas/supersplat</a
+          >.
+        </li>
+        <li>
+          <b>Spark</b>, a splat renderer for THREE.js (MIT).
+          <a href="https://github.com/sparkjsdev/spark" target="_blank" rel="noopener"
+            >github.com/sparkjsdev/spark</a
+          >.
+        </li>
+        <li>
+          <b>antimatter15/splat</b>, a small WebGL viewer that renders splat scenes in the browser
+          without dependencies (MIT).
+          <a href="https://github.com/antimatter15/splat" target="_blank" rel="noopener"
+            >github.com/antimatter15/splat</a
+          >.
+        </li>
+        <li>
+          <b>KHR_gaussian_splatting</b>, a glTF extension for storing Gaussian splats, which its
+          page lists as ratified by the Khronos Group.
+          <a
+            href="https://github.com/KhronosGroup/glTF/tree/main/extensions/2.0/Khronos/KHR_gaussian_splatting"
+            target="_blank"
+            rel="noopener"
+            >github.com/KhronosGroup/glTF (extensions/2.0/Khronos/KHR_gaussian_splatting)</a
+          >.
+        </li>
+      </ul>
 
       <!-- NAV:BOTTOM:START (written by manual/build-pages.mjs; do not edit by hand) -->
       <nav class="pager no-print" aria-label="Previous and next chapter, bottom">
@@ -142,7 +315,7 @@
         <p>
           The Tinkerer's Manual, first published September 28, 2026 and updated October 11, 2026.
           Part of
-          <a href="https://ryanjosephkamp.github.io/splashery/" target="_blank" rel="noopener"
+          <a href="https://ryanjosephkamp.github.io/splashery/site/" target="_blank" rel="noopener"
             >Splashery</a
           >, a toy box of 3D Gaussian splats that runs in your browser. Every picture here was made
           with Splashery itself.

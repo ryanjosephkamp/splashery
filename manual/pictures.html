@@ -80,7 +80,11 @@
                 </li>
               </ol>
             </li>
-            <li><a href="coming.html">Chapters 6 to 10: coming next</a></li>
+            <li><a href="moving.html">Chapter 6: Moving things</a></li>
+            <li><a href="data.html">Chapter 7: Real data as splats</a></li>
+            <li><a href="photo3d.html">Chapter 8: Photos and video into 3D</a></li>
+            <li><a href="codes.html">Chapter 9: Codes and pages</a></li>
+            <li><a href="make.html">Chapter 10: Make your own</a></li>
             <li><a href="more.html">What else Splashery does now</a></li>
             <li><a href="unique.html">What Splashery can do that other splat tools can't</a></li>
             <li><a href="built.html">How Splashery is built</a></li>
@@ -98,19 +102,19 @@
         <a class="pager-prev" rel="prev" href="gallery.html"
           ><span class="pager-word">← Previous</span
           ><span class="pager-title">Chapter 4: A gallery of programs</span></a
-        ><a class="pager-next" rel="next" href="coming.html"
+        ><a class="pager-next" rel="next" href="moving.html"
           ><span class="pager-word">Next →</span
-          ><span class="pager-title">Chapters 6 to 10: coming next</span></a
+          ><span class="pager-title">Chapter 6: Moving things</span></a
         >
       </nav>
 
       <!-- NAV:TOP:END -->
-      <!-- ---- Level 5 ---- -->
+      <!-- ---- Chapter 5 ---- -->
       <h2 id="pictures">
         <span class="level">Chapter 5</span>Pictures, screens, and your own input
       </h2>
       <p>
-        The toys in Level 2 are built from shapes. Some toys show something that is not a shape: a
+        The toys in Chapter 2 are built from shapes. Some toys show something that is not a shape: a
         page of a PDF, a photo, a GIF, a video, or something you type or draw. Three additions to a
         recipe make them: <b>picture sheets</b>, an <b>input panel</b>, and a few
         <b>view settings</b>. They are still Gaussian splats, all the way down. The toys on the
@@ -181,7 +185,7 @@
       </p>
       <pre><code>import { smoothstep } from "../src/kit.js";
 
-// Two small picture toys for Level 5 of the Tinkerer's Manual: a framed photo
+// Two small picture toys for Chapter 5 of the Tinkerer's Manual: a framed photo
 // that opens your own picture, and a little book whose page turns like paper.
 export const RECIPES = {
   "little-frame": {
@@ -238,7 +242,7 @@ export const RECIPES = {
         </figcaption>
       </figure>
       <p>
-        The little book below uses a pulse control for the turn, the way Level 2's gust does. The
+        The little book below uses a pulse control for the turn, the way Chapter 2's gust does. The
         page under the turning one is built ahead of time (a sheet is normally built only while it
         is visible, unless it requests <code>ahead: 1</code>, so a page that shows up halfway could
         make the turn wait), and the page number moves on when the turn ends. Keep a turning sheet
@@ -302,8 +306,8 @@ const BOOK = { turning: false };</code></pre>
       <ul>
         <li>
           <b>Typing</b>: a text box and a button, and maybe a button that opens a text file
-          (<code>fileButton</code>, <code>accept</code>). The Splat equation toy of Level 3 is one;
-          so is the Word vectors toy, where you type <i>king − man + woman</i>.
+          (<code>fileButton</code>, <code>accept</code>). The Splat equation toy of Chapter 3 is
+          one; so is the Word vectors toy, where you type <i>king − man + woman</i>.
         </li>
         <li>
           <b>Drawing</b>: <code>pad: { cols, rows, max, button }</code> adds a small grid you paint
@@ -314,7 +318,7 @@ const BOOK = { turning: false };</code></pre>
         <li>
           <b>Opening a picture</b>: <code>media: { accept }</code> adds an <b>Open a file…</b>
           button, a field for a web address, the page buttons (or play and pause for a video) and a
-          way back to the sample. Level 5's picture toys use it.
+          way back to the sample. Chapter 5's picture toys use it.
         </li>
       </ul>
       <figure>
@@ -335,7 +339,7 @@ const BOOK = { turning: false };</code></pre>
         are saved in the toy's link. Here is a whole toy with a typed input, a row of bars for the
         numbers you give it:
       </p>
-      <pre><code>// A small toy with its own typed input, for Level 5 of the Tinkerer's Manual:
+      <pre><code>// A small toy with its own typed input, for Chapter 5 of the Tinkerer's Manual:
 // type some numbers and the toy stands them up as bars.
 const LIMIT = 12;
 const COLORS = ["#e8384f", "#ffc233", "#1fb59a", "#4dabf7"];
@@ -403,7 +407,7 @@ export const RECIPES = {
         picture. The fit uses front-to-back blending, equivalent to the renderer's back-to-front
         blending, with the renderer's finite bell, so what you see is the real fit.
         <b>One splat</b> lets you set the sizes, the opacity, and the color of a Gaussian
-        illustrated by a cloud of small splats and turn it (Level 1's numbers);
+        illustrated by a cloud of small splats and turn it (Chapter 1's numbers);
         <b>Many splats</b> builds a small rubber duck from kit shapes and then shrinks every splat
         to a dot, so you see the splats that make it; and <b>Sorting</b> shows the splats of a ball
         appearing one by one, in the back-to-front order a camera draws them.
@@ -441,7 +445,7 @@ export const RECIPES = {
         </div>
         <figcaption>
           The One splat view: a Gaussian illustrated by small splats, with its three sizes drawn as
-          axes (Level 1's
+          axes (Chapter 1's
           <var>s</var><sub>1</sub>, <var>s</var><sub>2</sub>, and <var>s</var><sub>3</sub>).
         </figcaption>
       </figure>
@@ -496,16 +500,16 @@ export const RECIPES = {
         <a class="pager-prev" rel="prev" href="gallery.html"
           ><span class="pager-word">← Previous</span
           ><span class="pager-title">Chapter 4: A gallery of programs</span></a
-        ><a class="pager-next" rel="next" href="coming.html"
+        ><a class="pager-next" rel="next" href="moving.html"
           ><span class="pager-word">Next →</span
-          ><span class="pager-title">Chapters 6 to 10: coming next</span></a
+          ><span class="pager-title">Chapter 6: Moving things</span></a
         >
       </nav>
       <footer>
         <p>
           The Tinkerer's Manual, first published September 28, 2026 and updated October 11, 2026.
           Part of
-          <a href="https://ryanjosephkamp.github.io/splashery/" target="_blank" rel="noopener"
+          <a href="https://ryanjosephkamp.github.io/splashery/site/" target="_blank" rel="noopener"
             >Splashery</a
           >, a toy box of 3D Gaussian splats that runs in your browser. Every picture here was made
           with Splashery itself.

@@ -1,0 +1,566 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- HEAD:START (written by manual/build-pages.mjs; do not edit by hand) -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Chapter 10: Make your own · The Tinkerer's Manual</title>
+    <meta
+      name="description"
+      content="Chapter 10: Make your own. The Tinkerer's Manual: how to program Gaussian splats in Splashery."
+    />
+    <link rel="stylesheet" href="manual.css" />
+    <link rel="stylesheet" href="../site/assets/outline.css" />
+
+    <script type="module" src="fold.js"></script>
+    <script type="module" src="nav.js"></script>
+    <!-- HEAD:END -->
+  </head>
+  <body>
+    <main>
+      <!-- NAV:TOP:START (written by manual/build-pages.mjs; do not edit by hand) -->
+      <div class="outline no-print manual-nav">
+        <button
+          type="button"
+          class="outline-toggle"
+          aria-expanded="false"
+          aria-controls="manual-contents"
+        >
+          <span class="outline-label">Contents</span
+          ><span class="outline-now">Chapter 10: Make your own</span
+          ><svg
+            class="outline-chevron"
+            viewBox="0 0 16 16"
+            width="16"
+            height="16"
+            aria-hidden="true"
+          >
+            <path
+              d="m3.5 6 4.5 4.5L12.5 6"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </button>
+        <nav class="outline-panel" id="manual-contents" aria-label="The manual's chapters" hidden>
+          <ol>
+            <li><a href="index.html">Contents</a></li>
+            <li><a href="splat.html">Chapter 1: What a splat is</a></li>
+            <li><a href="toy.html">Chapter 2: How a toy is built</a></li>
+            <li><a href="language.html">Chapter 3: The splat equation language</a></li>
+            <li><a href="gallery.html">Chapter 4: A gallery of programs</a></li>
+            <li><a href="pictures.html">Chapter 5: Pictures, screens, and your own input</a></li>
+            <li><a href="moving.html">Chapter 6: Moving things</a></li>
+            <li><a href="data.html">Chapter 7: Real data as splats</a></li>
+            <li><a href="photo3d.html">Chapter 8: Photos and video into 3D</a></li>
+            <li><a href="codes.html">Chapter 9: Codes and pages</a></li>
+            <li>
+              <a href="make.html" aria-current="page">Chapter 10: Make your own</a>
+              <ol class="outline-sub" aria-label="In this chapter">
+                <li><a href="#five-ways">Five ways to make your own</a></li>
+                <li><a href="#roll-one-and-open-one">Roll one and open one</a></li>
+                <li><a href="#the-studio">The Studio</a></li>
+                <li><a href="#models-and-splat-files">Models, and your splat files</a></li>
+                <li><a href="#writing-a-recipe">Writing a recipe</a></li>
+                <li><a href="#sharing-what-you-made">Sharing what you made</a></li>
+                <li><a href="#try-it-10">Where to try it</a></li>
+              </ol>
+            </li>
+            <li><a href="more.html">What else Splashery does now</a></li>
+            <li><a href="unique.html">What Splashery can do that other splat tools can't</a></li>
+            <li><a href="built.html">How Splashery is built</a></li>
+            <li><a href="share.html">Share links and QR codes</a></li>
+            <li><a href="experiments.html">Open questions: other choices, not tried yet</a></li>
+            <li><a href="later.html">What comes later: Code a toy</a></li>
+            <li><a href="glossary.html">Glossary</a></li>
+            <li><a href="reading.html">Further reading</a></li>
+            <li><a href="references.html">References</a></li>
+            <li><a href="card.html">Quick reference</a></li>
+          </ol>
+        </nav>
+      </div>
+      <nav class="pager no-print" aria-label="Previous and next chapter, top">
+        <a class="pager-prev" rel="prev" href="codes.html"
+          ><span class="pager-word">← Previous</span
+          ><span class="pager-title">Chapter 9: Codes and pages</span></a
+        ><a class="pager-next" rel="next" href="more.html"
+          ><span class="pager-word">Next →</span
+          ><span class="pager-title">What else Splashery does now</span></a
+        >
+      </nav>
+      <p class="no-print fold-all">
+        <button type="button" data-fold-all="open">Open all the folds</button>
+        <button type="button" data-fold-all="close">Close all the folds</button>
+        <span class="muted">Definitions, derivations, notes, and long tables start folded.</span>
+      </p>
+      <!-- NAV:TOP:END -->
+      <!-- ---- Chapter 10 ---- -->
+      <h2 id="make"><span class="level">Chapter 10</span>Make your own</h2>
+      <!-- Sources: index.html (the Make tab: "Make a toy", "Your own splat", and the Share tab),
+           src/generators.js:1-60 (SHAPES, PALETTES), src/loaders.js:1-30 (formats, UNSUPPORTED),
+           src/packs/studio-models-core.js:1-25 and :34-45, src/packs/studio-models.js:1-12,
+           src/packs/viewers.js:1-30, src/viewers/splat-io.js:967-972 (SAVE_FORMATS), src/exports.js:1-5
+           and :274, src/element.js:1-20, src/physics/hands-on.js:1-20 and :60-76 (handsOn,
+           handsLevel1), manual/later.html, docs/PACKS.md, docs/SCENE-SCHEMA.md. -->
+      <p>
+        The last chapter of the ladder is a short one, because most of it is the earlier ones: you
+        make your own toy by writing a recipe (Chapters 2 to 6), by typing an equation (Chapter 3),
+        by turning something you already have into splats (Chapters 7 to 9), or by opening a file
+        someone else made. This chapter gathers those ways in one place and says, for each, what it
+        takes and what it cannot do. It ends with how to share what you made.
+      </p>
+
+      <h3 id="five-ways">Five ways to make your own</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Way</th>
+              <th>What you give it</th>
+              <th>What you get</th>
+              <th>Where</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Roll one</td>
+              <td>A shape, a palette, a seed</td>
+              <td>A made-up splat object, the same every time you use that seed</td>
+              <td>Make tab, always on</td>
+            </tr>
+            <tr>
+              <td>Type one</td>
+              <td>An equation for <var>x</var>, <var>y</var>, <var>z</var>, and a color</td>
+              <td>A surface of splats, and a link to share it</td>
+              <td>Splat equation (Chapter 3), labs</td>
+            </tr>
+            <tr>
+              <td>Open one</td>
+              <td>
+                A splat file (<code>.ply</code>, <code>.sog</code>, <code>.splat</code>,
+                <code>.spz</code>)
+              </td>
+              <td>The splat as a toy that Poke, Paint, Magnet, and the effects work on</td>
+              <td>Make tab, always on</td>
+            </tr>
+            <tr>
+              <td>Turn something into one</td>
+              <td>A photo, a video, a 3D model, a table, a sound, a PDF, a molecule, a scan</td>
+              <td>Splats made on your device</td>
+              <td>The Studio, labs (below)</td>
+            </tr>
+            <tr>
+              <td>Write one</td>
+              <td>A recipe in JavaScript</td>
+              <td>A toy with parts, controls, and a tap of its own</td>
+              <td>The source code (Chapters 2 to 6)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 id="roll-one-and-open-one">Roll one and open one</h3>
+      <p>
+        <b>Roll one.</b> The <b>Make a toy</b> section of the Make tab builds a splat object in your
+        browser from a few choices: a shape (sphere, noise blob, torus, capsule, or knot), a
+        palette, a seed, how many splats, how much the sizes jitter, how rough the surface is, and
+        how much color noise there is. The generator is seeded and pure
+        (<code>src/generators.js</code>), so the same seed and settings give the same toy, which is
+        why a link can rebuild it. Part of the splats fill the inside, so the slice effect has
+        something to show.
+      </p>
+      <p>
+        <b>Open one.</b> <b>Your own splat</b> opens a PLY, SOG, SPLAT, or SPZ file (SPZ versions 1
+        to 3). KSPLAT and version 4 SPZ files are refused with a message that says to convert them
+        first. You can also drop a file anywhere on the page. The file stays on your device, and
+        nothing is uploaded. Poke, Paint, Magnet, every effect, the motions, the flag and pattern
+        colors, and the Detail setting all work on it. What cannot work is a toy's own action (a lid
+        that opens: a captured file has no lid) and Clay. And a file cannot go in a share link,
+        because it never leaves your device: a link carries settings, not files (Chapter 9). To
+        share the result, export a picture (PNG), a GIF, or a video.
+      </p>
+
+      <h3 id="the-studio">The Studio</h3>
+      <p>
+        <b>What it is.</b> The Studio is a shelf of tools that turn other things into splats, on
+        your device. Each takes a file you open, does its work in a worker, and shows the result as
+        the toy's splats. They are behind the labs switch. Nothing is uploaded, and the libraries a
+        tool needs (a PDF reader, a depth model, a laz decoder) are loaded only when its toy opens.
+      </p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Toy</th>
+              <th>You open</th>
+              <th>It makes</th>
+              <th>Chapter</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <a
+                  href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBob3RvLTNkIn0sImNhbWVyYSI6eyJ5YXciOjAsInBpdGNoIjowLCJyb2xsIjowLCJkaXN0YW5jZSI6My40fX0"
+                  target="_blank"
+                  rel="noopener"
+                  >Photo to 3D</a
+                >
+              </td>
+              <td>A photo</td>
+              <td>The photo at its depths, as a Sharp view or as splats</td>
+              <td>8</td>
+            </tr>
+            <tr>
+              <td>
+                <a
+                  href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im1vdmluZy1waG90by0zZCJ9LCJjYW1lcmEiOnsieWF3IjowLCJwaXRjaCI6MCwicm9sbCI6MCwiZGlzdGFuY2UiOjMuNH19"
+                  target="_blank"
+                  rel="noopener"
+                  >Moving photo to 3D</a
+                >
+              </td>
+              <td>A GIF or a short video</td>
+              <td>The clip played back in 3D</td>
+              <td>8</td>
+            </tr>
+            <tr>
+              <td>
+                <a
+                  href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InZpZGVvLTNkIn0sImNhbWVyYSI6eyJ5YXciOjAsInBpdGNoIjowLCJyb2xsIjowLCJkaXN0YW5jZSI6My40fX0"
+                  target="_blank"
+                  rel="noopener"
+                  >Video to 3D</a
+                >
+              </td>
+              <td>A video of a still scene</td>
+              <td>A trained splat scene and its camera path (WebGPU)</td>
+              <td>8</td>
+            </tr>
+            <tr>
+              <td>
+                <a
+                  href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im1vZGVsLXNwbGF0cyJ9LCJjYW1lcmEiOnsieWF3IjowLjUsInBpdGNoIjowLjI4LCJyb2xsIjowLCJkaXN0YW5jZSI6NC41fX0"
+                  target="_blank"
+                  rel="noopener"
+                  >Model to splats</a
+                >
+              </td>
+              <td>A glTF, GLB, OBJ with its MTL, or STL file</td>
+              <td>The surface as flat discs, colored from the model</td>
+              <td>10 (below)</td>
+            </tr>
+            <tr>
+              <td>
+                <a
+                  href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNwbGF0LXRvb2xraXQifSwiY2FtZXJhIjp7InlhdyI6MC40NSwicGl0Y2giOjAuMiwicm9sbCI6MCwiZGlzdGFuY2UiOjMuNH19"
+                  target="_blank"
+                  rel="noopener"
+                  >Splat toolkit</a
+                >
+              </td>
+              <td>A splat file (or two, to compare)</td>
+              <td>The file's numbers, cropped, cleaned, shrunk, and saved in another format</td>
+              <td>10 (below)</td>
+            </tr>
+            <tr>
+              <td>
+                <a
+                  href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBvaW50LWNsb3VkcyJ9LCJjYW1lcmEiOnsieWF3IjowLjYsInBpdGNoIjowLjU1LCJyb2xsIjowLCJkaXN0YW5jZSI6Mi44fX0"
+                  target="_blank"
+                  rel="noopener"
+                  >Point clouds</a
+                >
+              </td>
+              <td>A LAS, LAZ, PLY, XYZ, or PTS file</td>
+              <td>The points as splats, colored by height, intensity, or class</td>
+              <td>7</td>
+            </tr>
+            <tr>
+              <td>
+                <a
+                  href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InZvbHVtZS12aWV3ZXIifSwiY2FtZXJhIjp7InlhdyI6MC4zNSwicGl0Y2giOjAuMiwicm9sbCI6MCwiZGlzdGFuY2UiOjMuOH19"
+                  target="_blank"
+                  rel="noopener"
+                  >Volume viewer</a
+                >
+              </td>
+              <td>A DICOM, NIfTI, TIFF, or raw volume</td>
+              <td>A block of splats you can cut through</td>
+              <td>7</td>
+            </tr>
+            <tr>
+              <td>
+                <a
+                  href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImRhdGEtaW4tM2QifSwiY2FtZXJhIjp7InlhdyI6MC41NSwicGl0Y2giOjAuMywicm9sbCI6MCwiZGlzdGFuY2UiOjMuM319"
+                  target="_blank"
+                  rel="noopener"
+                  >Data in 3D</a
+                >
+              </td>
+              <td>A CSV or TSV table</td>
+              <td>A scatter, bars, or a surface with labeled axes</td>
+              <td>7</td>
+            </tr>
+            <tr>
+              <td>
+                <a
+                  href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im1vbGVjdWxlLXZpZXdlciJ9LCJjYW1lcmEiOnsieWF3IjowLjI1LCJwaXRjaCI6MC4xOCwicm9sbCI6MCwiZGlzdGFuY2UiOjMuNH19"
+                  target="_blank"
+                  rel="noopener"
+                  >Molecule viewer</a
+                >
+              </td>
+              <td>A PDB, mmCIF, SDF, or XYZ file</td>
+              <td>Balls and sticks, space-filling atoms, a cartoon, or a surface</td>
+              <td>7</td>
+            </tr>
+            <tr>
+              <td>
+                <a
+                  href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InFyLWNvZGUifSwiY2FtZXJhIjp7InlhdyI6MCwicGl0Y2giOjAsInJvbGwiOjAsImRpc3RhbmNlIjozLjF9fQ"
+                  target="_blank"
+                  rel="noopener"
+                  >QR code</a
+                >
+              </td>
+              <td>A link, text, or other contents</td>
+              <td>A code that checks that it scans</td>
+              <td>9</td>
+            </tr>
+            <tr>
+              <td>
+                <a
+                  href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InlvdXItYm9vayJ9LCJjYW1lcmEiOnsieWF3IjowLjEyLCJwaXRjaCI6MC4xMiwicm9sbCI6MCwiZGlzdGFuY2UiOjIuNn19"
+                  target="_blank"
+                  rel="noopener"
+                  >Your book</a
+                >
+              </td>
+              <td>A PDF</td>
+              <td>A book whose pages turn</td>
+              <td>9</td>
+            </tr>
+            <tr>
+              <td>
+                <a
+                  href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNvbmctbGFuZHNjYXBlIn0sImNhbWVyYSI6eyJ5YXciOjAuMywicGl0Y2giOjAuOCwicm9sbCI6MCwiZGlzdGFuY2UiOjMuOX0sImF1dG9wbGF5Ijp7InR1cm50YWJsZSI6ZmFsc2UsImVmZmVjdCI6Im5vbmUifX0"
+                  target="_blank"
+                  rel="noopener"
+                  >Song landscape</a
+                >
+              </td>
+              <td>A song</td>
+              <td>A 3D field made from its spectrogram</td>
+              <td>(sound toys)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <figure>
+        <div class="shots two">
+          <div>
+            <img
+              src="img/r7b-model-splats.jpg"
+              alt="A 3D model turned into splats, shown with a wire mesh beside it"
+            />
+            <p class="shot-label">Model to splats</p>
+          </div>
+          <div>
+            <img
+              src="img/r7b-splat-toolkit.jpg"
+              alt="The Splat toolkit showing a splat file with its numbers"
+            />
+            <p class="shot-label">Splat toolkit</p>
+          </div>
+        </div>
+      </figure>
+
+      <h3 id="models-and-splat-files">Models, and your splat files</h3>
+      <p>
+        <b>Model to splats</b> (<code>src/packs/studio-models-core.js</code>, which a Node tool
+        shares) reads a glTF 2.0 file (<code>.gltf</code> or <code>.glb</code>), an OBJ with its
+        MTL, or an STL file, and lays flat discs on the surface, more of them where there is detail,
+        each sized to its neighbors so the surface closes. It colors them from the model's
+        base-color texture, vertex colors, or material, and the budget is the tier's default times
+        1.5, capped at its maximum, as for a photo. What it does not read: glTF compressed with
+        Draco or meshopt, morph targets, skinning (a skinned mesh shows in its bind pose),
+        animations, lights, cameras, emissive colors, and any texture except the base color. Glass,
+        a material less than half opaque, is left out, because splats cannot be see-through solids.
+      </p>
+      <p>
+        <b>The Splat toolkit</b> opens a 3D Gaussian splat file and shows its numbers: how many
+        splats, how big, how opaque, and the degree of their view-dependent color. Then it works on
+        it: crop it with a box, remove floaters with a statistical filter you tune (the removed
+        splats show in red, or before and after side by side), shrink it to a share of its splats,
+        and compare it with a second file, turning in step. It saves in four formats: PLY
+        (everything is kept; every tool reads it), SPZ (about a tenth of the size; view-dependent
+        colors are kept), SOG (the smallest; base colors only), and <code>.splat</code> (simple;
+        base colors only). A file is saved to a place you choose.
+      </p>
+      <div class="demo-placeholder">
+        <p class="demo-tag">A demo goes here later</p>
+        <p>
+          A tiny splat file in the page, with a crop box and a floater filter you can move, and the
+          counts changing as you do.
+        </p>
+      </div>
+
+      <h3 id="writing-a-recipe">Writing a recipe</h3>
+      <p>
+        A recipe is a plain JavaScript object in a pack file under <code>src/packs/</code>, and the
+        keys it can have are the whole of this manual so far. Here they are in one place:
+      </p>
+      <details class="fold tablefold">
+        <summary>Show the table: what a recipe can ask for</summary>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Key</th>
+                <th>What it is</th>
+                <th>Chapter</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>build(k, o)</code></td>
+                <td>Makes the splats from the kit's shapes, from the options <code>o</code>.</td>
+                <td>2</td>
+              </tr>
+              <tr>
+                <td><code>drive(t, c, out, info)</code></td>
+                <td>Every frame: moves parts, tokens, and levers; sets glow and sheets.</td>
+                <td>2, 5</td>
+              </tr>
+              <tr>
+                <td><code>options</code>, <code>controls</code>, <code>action</code></td>
+                <td>The choices saved in a link, the live sliders and pulses, and the tap.</td>
+                <td>2</td>
+              </tr>
+              <tr>
+                <td><code>pictures</code>, <code>input</code>, <code>tiltLock</code></td>
+                <td>What a visitor can open or type, and how a drag turns a flat toy.</td>
+                <td>5</td>
+              </tr>
+              <tr>
+                <td><code>hands</code>, <code>handsOn</code>, <code>handsLevel1</code></td>
+                <td>
+                  Pieces, joints, ropes, materials, and the ✋ switch.
+                  <code>handsOn: false</code> keeps a toy out of hands-on play;
+                  <code>handsOn: true</code> starts the switch on; <code>handsLevel1</code> lets a
+                  picture or a still toy play as one rigid body.
+                </td>
+                <td>6</td>
+              </tr>
+              <tr>
+                <td>
+                  <code>alive</code>, <code>density</code>, <code>kernel</code>,
+                  <code>turntable</code>
+                </td>
+                <td>
+                  The toy's own behaviors, how many splats it wants per base budget, the splat
+                  shape, and the idle spin.
+                </td>
+                <td>2, 5</td>
+              </tr>
+              <tr>
+                <td><code>credits</code></td>
+                <td>The license and source notices that show beside the toy.</td>
+                <td>10</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
+      <p>
+        There is no editor in the browser yet; "What comes later" explains the plan. Today a recipe
+        is a file in the project, and you can run your own copy of the site on your computer and
+        look at a recipe as you write it. Chapter 2's <i>run it yourself</i> section shows how, with
+        a prompt you can give to a coding assistant. A toy joins the shelf only after it has been
+        checked and read by a person. Its <code>credits</code> name the source, author, and license
+        of every asset it uses, and the site shows them beside the toy; an asset must carry a
+        license the site can use (never one that forbids changes, and never one that is unlicensed
+        or paid).
+      </p>
+
+      <h3 id="sharing-what-you-made">Sharing what you made</h3>
+      <ul>
+        <li>
+          <b>A link</b>: the Share tab copies a link that holds the whole scene. It works for
+          everything except a file you opened (Chapter 9).
+        </li>
+        <li>
+          <b>A scene file</b>: the same scene as a JSON file, which keeps paint and clay that a link
+          is too short for. Old scenes (versions 2 and 3) keep opening.
+        </li>
+        <li>
+          <b>A picture, a GIF, or a video</b>: PNG, GIF, and WebM exports of the view, and a live
+          recording that starts when you tap Record and is saved only to a file you choose.
+        </li>
+        <li><b>A page of a document</b> (labs): <i>Save PDF</i> (Chapter 9).</li>
+        <li>
+          <b>On a web page</b>: the Share tab gives an iframe snippet and a
+          <code>&lt;splashery-toy&gt;</code> element, which takes a <code>scene</code> or a
+          <code>toy</code>, a <code>theme</code>, a <code>background</code>, an
+          <code>autoplay</code>, a <code>turntable</code> setting, a <code>zoom</code>, and a
+          <code>label</code>. It starts when it scrolls into view and pauses when it leaves.
+        </li>
+      </ul>
+      <p>
+        Every file you open stays on your device, and so does everything you make unless you choose
+        to save it or share it.
+      </p>
+
+      <h3 id="try-it-10">Where to try it</h3>
+      <ul>
+        <li>
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNwbGF0LWVxdWF0aW9uIn0sImNhbWVyYSI6eyJ5YXciOjAuMzUsInBpdGNoIjowLjYsInJvbGwiOjAsImRpc3RhbmNlIjozLjV9LCJhdXRvcGxheSI6eyJ0dXJudGFibGUiOmZhbHNlLCJlZmZlY3QiOiJub25lIn19"
+            target="_blank"
+            rel="noopener"
+            >Splat equation</a
+          >,
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im1vZGVsLXNwbGF0cyJ9LCJjYW1lcmEiOnsieWF3IjowLjUsInBpdGNoIjowLjI4LCJyb2xsIjowLCJkaXN0YW5jZSI6NC41fX0"
+            target="_blank"
+            rel="noopener"
+            >Model to splats</a
+          >, and
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNwbGF0LXRvb2xraXQifSwiY2FtZXJhIjp7InlhdyI6MC40NSwicGl0Y2giOjAuMiwicm9sbCI6MCwiZGlzdGFuY2UiOjMuNH19"
+            target="_blank"
+            rel="noopener"
+            >Splat toolkit</a
+          >
+          (all labs). The Make tab in the Playground is open to everyone.
+        </li>
+      </ul>
+
+      <!-- NAV:BOTTOM:START (written by manual/build-pages.mjs; do not edit by hand) -->
+      <nav class="pager no-print" aria-label="Previous and next chapter, bottom">
+        <a class="pager-prev" rel="prev" href="codes.html"
+          ><span class="pager-word">← Previous</span
+          ><span class="pager-title">Chapter 9: Codes and pages</span></a
+        ><a class="pager-next" rel="next" href="more.html"
+          ><span class="pager-word">Next →</span
+          ><span class="pager-title">What else Splashery does now</span></a
+        >
+      </nav>
+      <footer>
+        <p>
+          The Tinkerer's Manual, first published September 28, 2026 and updated October 11, 2026.
+          Part of
+          <a href="https://ryanjosephkamp.github.io/splashery/site/" target="_blank" rel="noopener"
+            >Splashery</a
+          >, a toy box of 3D Gaussian splats that runs in your browser. Every picture here was made
+          with Splashery itself.
+        </p>
+      </footer>
+      <!-- NAV:BOTTOM:END -->
+    </main>
+  </body>
+</html>

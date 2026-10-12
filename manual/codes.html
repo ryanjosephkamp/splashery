@@ -1,0 +1,426 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- HEAD:START (written by manual/build-pages.mjs; do not edit by hand) -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Chapter 9: Codes and pages · The Tinkerer's Manual</title>
+    <meta
+      name="description"
+      content="Chapter 9: Codes and pages. The Tinkerer's Manual: how to program Gaussian splats in Splashery."
+    />
+    <link rel="stylesheet" href="manual.css" />
+    <link rel="stylesheet" href="../site/assets/outline.css" />
+
+    <script type="module" src="fold.js"></script>
+    <script type="module" src="nav.js"></script>
+    <!-- HEAD:END -->
+  </head>
+  <body>
+    <main>
+      <!-- NAV:TOP:START (written by manual/build-pages.mjs; do not edit by hand) -->
+      <div class="outline no-print manual-nav">
+        <button
+          type="button"
+          class="outline-toggle"
+          aria-expanded="false"
+          aria-controls="manual-contents"
+        >
+          <span class="outline-label">Contents</span
+          ><span class="outline-now">Chapter 9: Codes and pages</span
+          ><svg
+            class="outline-chevron"
+            viewBox="0 0 16 16"
+            width="16"
+            height="16"
+            aria-hidden="true"
+          >
+            <path
+              d="m3.5 6 4.5 4.5L12.5 6"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </button>
+        <nav class="outline-panel" id="manual-contents" aria-label="The manual's chapters" hidden>
+          <ol>
+            <li><a href="index.html">Contents</a></li>
+            <li><a href="splat.html">Chapter 1: What a splat is</a></li>
+            <li><a href="toy.html">Chapter 2: How a toy is built</a></li>
+            <li><a href="language.html">Chapter 3: The splat equation language</a></li>
+            <li><a href="gallery.html">Chapter 4: A gallery of programs</a></li>
+            <li><a href="pictures.html">Chapter 5: Pictures, screens, and your own input</a></li>
+            <li><a href="moving.html">Chapter 6: Moving things</a></li>
+            <li><a href="data.html">Chapter 7: Real data as splats</a></li>
+            <li><a href="photo3d.html">Chapter 8: Photos and video into 3D</a></li>
+            <li>
+              <a href="codes.html" aria-current="page">Chapter 9: Codes and pages</a>
+              <ol class="outline-sub" aria-label="In this chapter">
+                <li><a href="#qr-codes">QR codes</a></li>
+                <li><a href="#more-qr-toys">More QR toys, and other barcodes</a></li>
+                <li><a href="#pages-pdfs-and-gifs">Pages, PDFs, and GIFs</a></li>
+                <li><a href="#share-links">Share links</a></li>
+                <li><a href="#try-it-9">Where to try it</a></li>
+              </ol>
+            </li>
+            <li><a href="make.html">Chapter 10: Make your own</a></li>
+            <li><a href="more.html">What else Splashery does now</a></li>
+            <li><a href="unique.html">What Splashery can do that other splat tools can't</a></li>
+            <li><a href="built.html">How Splashery is built</a></li>
+            <li><a href="share.html">Share links and QR codes</a></li>
+            <li><a href="experiments.html">Open questions: other choices, not tried yet</a></li>
+            <li><a href="later.html">What comes later: Code a toy</a></li>
+            <li><a href="glossary.html">Glossary</a></li>
+            <li><a href="reading.html">Further reading</a></li>
+            <li><a href="references.html">References</a></li>
+            <li><a href="card.html">Quick reference</a></li>
+          </ol>
+        </nav>
+      </div>
+      <nav class="pager no-print" aria-label="Previous and next chapter, top">
+        <a class="pager-prev" rel="prev" href="photo3d.html"
+          ><span class="pager-word">← Previous</span
+          ><span class="pager-title">Chapter 8: Photos and video into 3D</span></a
+        ><a class="pager-next" rel="next" href="make.html"
+          ><span class="pager-word">Next →</span
+          ><span class="pager-title">Chapter 10: Make your own</span></a
+        >
+      </nav>
+      <p class="no-print fold-all">
+        <button type="button" data-fold-all="open">Open all the folds</button>
+        <button type="button" data-fold-all="close">Close all the folds</button>
+        <span class="muted">Definitions, derivations, notes, and long tables start folded.</span>
+      </p>
+      <!-- NAV:TOP:END -->
+      <!-- ---- Chapter 9 ---- -->
+      <h2 id="codes"><span class="level">Chapter 9</span>Codes and pages</h2>
+      <!-- Sources: src/packs/qr.js:1-60 (styles, scorecard, MIN_MODULE_PX), src/qr/encode.js:1-25 (Nayuki,
+           ECC_RECOVERY), src/qr/content.js:15-70 (the kinds), src/qr/build.js:24-53 (styles, plates),
+           src/qr/scan.js:1-30 (the reader), src/packs/qr-craft.js:1-25, src/packs/qr-lab.js:1-25,
+           src/qr-craft/barcodes.js:1-12, src/pictures.js:1-30, src/pdf-export/pdf.js:1-20, src/exports.js:274
+           (LINK_LIMIT 12 * 1024), manual/share.html (the share links chapter). The Wikipedia book is
+           not in src/ or tools/: docs/WORKSTREAMS.md lists it as "later". -->
+      <p>
+        A code is a picture that stands for bytes. A page is a picture that stands for words. This
+        chapter is about toys that are, in the end, flat: QR codes and other barcodes, the pages of
+        a PDF, a photo, a GIF, and a link. They are made of splats too, and they show a point that
+        Chapters 1 to 5 made in passing:
+        <b
+          >a flat thing made of splats is only useful if every splat stays where the picture needs
+          it</b
+        >. A QR code that scans only some of the time is not a QR code. So the toys here check their
+        own work.
+      </p>
+
+      <h3 id="qr-codes">QR codes</h3>
+      <p>
+        <b>What it is.</b> A QR code is a square grid of dark and light cells (<i>modules</i>) that
+        holds a few hundred bytes of text, plus extra data that lets a reader rebuild the text if
+        some cells are damaged. The three big squares in the corners (<i>finder patterns</i>) let a
+        camera find and orient it, and a blank border (the <i>quiet zone</i>) four modules wide
+        keeps the picture from running into whatever is around it.
+      </p>
+      <p>
+        <b>How Splashery does it.</b> The <b>QR code</b> toy makes a code from a link, plain text, a
+        Wi-Fi network, a contact card, an email, a phone number, a text message, or a map location,
+        and draws it as splats in one of seven styles (Classic, Dots, Rounded, Bricks, Gems,
+        Bubbles, Neon) on a plate of paper, wood, or metal, or on none. The encoding itself is done
+        by Project Nayuki's QR Code generator [<a href="references.html#ref-20">20</a>], a small
+        MIT-licensed library that is vendored and loaded only when the toy opens. Splashery asks it
+        for a code and then marks which modules belong to the finder patterns, to the alignment
+        patterns, and to the rest, so each can be built and moved as a piece of its own. A tap
+        bursts the code into its modules, which fall and fly back and land exactly on their grid
+        again; the toy also has an assemble motion, a flip, and an "alive" color wave. Each module
+        moves as a solid tile, and the alive wave keeps the gray values a reader sees unchanged, so
+        every frame of it still scans.
+      </p>
+      <p>
+        It checks itself. <b>Scan view</b> turns the code flat and square to the camera, and after
+        every change the toy renders that view and reads it back. The reader is the browser's own
+        <code>BarcodeDetector</code> when it reads QR codes, and otherwise the vendored jsQR library
+        (Apache-2.0), loaded the first time a check runs. The result, "It scans," means that one
+        reader read that one drawing, not that every phone camera will; the text beside it says so.
+        Nothing leaves the device: no shortener, no network.
+      </p>
+      <p>
+        <b>Error correction.</b> A QR code carries extra codewords (a codeword is 8 modules) made
+        with a Reed–Solomon code [<a href="references.html#ref-19">19</a>]. There are four levels,
+        L, M, Q, and H, which can lose about 7, 15, 25, and 30 percent of the codewords and still
+        scan. That percentage counts codewords, not squares, and the code is cut into blocks that
+        are corrected separately, so damage to the three finder squares, or damage spread over many
+        blocks, can defeat a code that has lost far less than its limit. The toy uses level M by
+        default.
+      </p>
+      <details class="fold why" id="why-qr-limits">
+        <summary>Why these numbers? Contrast, module size, and level M</summary>
+        <p class="kind">
+          <span class="chip choice">Our choice, measured</span> The QR standard sets the codes; the
+          limits for splat styles are Splashery's own.
+        </p>
+        <p>
+          A splat is not a printed square: it is a soft blob, and the blobs of two cells blend a
+          little at their edges. So Splashery measured how much a code can take. The QR scan lab
+          (October 3, 2026) made 3,768 pictures of the toy's codes the way a phone sees them, and
+          read each with two different readers (jsQR and ZXing). Every style read 100 percent of the
+          time at levels L and M. Contrast was reliable from 4 to 1 (a gray code at 4.0 to 1 read 96
+          to 98 percent of the time) and poor below 3 to 1. A module needs at least 4 pixels on
+          screen, and 6 for the "depth" styles (Bricks, Gems, and Neon). A depth style at version 8
+          or more (a long text) dropped sharply, to 77 percent for a long text. Light-on-dark codes
+          read on most phone cameras but not on some scanner apps. The toy turns these into a
+          warning and a default; a measured limit is only as good as the readers it was measured
+          with.
+        </p>
+        <p class="where">
+          Where it lives: the comment and constants at the top of
+          <code>src/packs/qr.js</code> (<code>eccFor</code>, <code>minContrast</code>,
+          <code>MIN_MODULE_PX</code>).
+        </p>
+      </details>
+      <p>
+        <b>Secrets.</b> A Wi-Fi password is never in the toy's options, so never in a shared link or
+        a saved scene: it lives in the page's memory while the page is open.
+      </p>
+      <figure>
+        <div class="shots two">
+          <div>
+            <img src="img/r7b-qr-code.jpg" alt="A QR code drawn with splats on a plate" />
+            <p class="shot-label">The QR code toy</p>
+          </div>
+          <div>
+            <img
+              src="img/r7b-qr-picture.jpg"
+              alt="A photo woven into a QR code as a halftone of dark and light dots"
+            />
+            <p class="shot-label">A picture woven into a code</p>
+          </div>
+        </div>
+        <figcaption>Both codes scan. The toys check their own pictures.</figcaption>
+      </figure>
+
+      <h3 id="more-qr-toys">More QR toys, and other barcodes</h3>
+      <ul>
+        <li>
+          <b>How a QR code works</b> lights up each part of a real code, or steps through encoding
+          your own text, from the mode bits to the chosen mask.
+        </li>
+        <li>
+          <b>The Damage lab</b> lets you scratch a code, stick a label on it, tear or burn a corner,
+          smudge it, or damage its splats (blur, shrink, grow, jitter, fade, drift the colors,
+          curve, tilt, move). A meter reads the very picture on the stage after each change, and
+          counts, block by block, the codewords lost against the ones error correction can fix.
+          <i>Heal it</i> shows the code as a reader read it and lets Reed–Solomon decoding set it
+          right, block by block, until it scans again.
+        </li>
+        <li>
+          <b>Three codes in one</b> puts three QR codes in the red, green, and blue of one square,
+          which Splashery's reader splits apart.
+        </li>
+        <li>
+          <b>Picture QR</b> weaves a photo into a code as a halftone. The center of each module
+          keeps its bit; the rest of the module carries the picture as dark and light dots by error
+          diffusion, nudged only where a module would misread. The toy measures the contrast and
+          reads the code back with jsQR at phone size and smaller, and offers the closest version
+          that scans when one does not.
+        </li>
+        <li>
+          <b>QR from real things</b> builds a code from dominoes that topple into place, marbles
+          that roll into their modules, or tiles that flip over, and ends on a code that scans.
+        </li>
+        <li>
+          <b>Other barcodes</b> draws Code 128, EAN-13, and UPC-A with Splashery's own code (check
+          digits and quiet zones included), and Data Matrix and Aztec with ZXing for JavaScript, a
+          vendored library loaded only when the toy opens. A tap sweeps a scanner's red line across,
+          and each bar lifts as it passes.
+        </li>
+      </ul>
+      <p>All of these are on the Studio shelf and behind the labs switch.</p>
+      <div class="demo-placeholder">
+        <p class="demo-tag">A demo goes here later</p>
+        <p>
+          A small QR code with a damage brush: scratch some modules, and a meter shows how many
+          codewords are lost against how many the code can repair.
+        </p>
+      </div>
+
+      <h3 id="pages-pdfs-and-gifs">Pages, PDFs, and GIFs</h3>
+      <p>
+        <b>What it is.</b> Chapter 5 showed how a recipe places a <i>sheet</i>, a flat place where a
+        picture shows, and how it turns a page. This section is about what the site does behind a
+        sheet.
+      </p>
+      <p>
+        <b>How Splashery does it.</b> A PDF is drawn page by page by PDF.js [<a
+          href="references.html#ref-22"
+          >22</a
+        >], vendored and loaded only when someone opens a PDF. A worker turns each page's pixels
+        into splats. Pages stream through a few sheets, so a 200-page book costs the same as its
+        open pages, and a small cache keeps the pages next to the open ones ready. Each sheet is
+        built at about one picture pixel per screen pixel for how big it shows now, on a ladder of
+        widths a square root of two apart, within the device's budget, and is rebuilt when the view
+        comes much closer or goes much further away: so a page you zoom into gets sharper, and a
+        page you leave is freed. A GIF (decoded by omggif, vendored and loaded only for a GIF) or a
+        video is a screen sheet: the splats are built once and take their colors from the sheet's
+        own texture, which each new frame uploads. A PDF's words are available from its text layer,
+        for reading, selecting, copying, and finding, and a link in a PDF is tinted on the page; a
+        link opens only after the site asks you.
+      </p>
+      <p>
+        The toys on top are <b>Picture lab</b>, <b>Your book</b> (a PDF as a book whose pages turn
+        like paper, and wait until the next page is ready), <b>Photo album</b>,
+        <b>Picture frame</b>, and <b>Screen</b>. They are behind the labs switch.
+      </p>
+      <figure>
+        <div class="shots two">
+          <div>
+            <img
+              src="img/toy-picture-lab.jpg"
+              alt="A page of an article, drawn with splats, with a sharp figure and a table"
+            />
+            <p class="shot-label">A PDF page, drawn with splats</p>
+          </div>
+          <div>
+            <img
+              src="img/r7b-your-book.jpg"
+              alt="An open book whose pages show text, standing on a table"
+            />
+            <p class="shot-label">Your book</p>
+          </div>
+        </div>
+        <figcaption>The article is the toy's own sample text.</figcaption>
+      </figure>
+      <p>
+        <b>Save PDF</b> goes the other way: from a toy to a page. With the labs switch on, the Share
+        tab can write a PDF of the toy (a still, a link, and a QR code of the link), and, if you
+        choose, a second page with a recording of one tap as a flip book, in which each frame is a
+        hidden button whose look is the picture and the PDF's own JavaScript shows one at a time. A
+        viewer without PDF JavaScript shows the first frame. The file is written by pdf-lib (MIT),
+        loaded only when you export, and is saved to a file you choose.
+      </p>
+      <p>
+        <b>A Wikipedia book.</b> The rules in Chapter 7 allow a toy that fetches a Wikipedia article
+        when the reader asks for it (its text is CC BY-SA, never stored in the repository, shipped
+        with the site, or saved in a scene, and its credit shows beside it). Such a toy is planned.
+        It is not built yet.
+      </p>
+
+      <h3 id="share-links">Share links</h3>
+      <p>
+        <b>What it is.</b> A Splashery link is not an address that points at your scene; it is your
+        scene. It carries the toy's options, the look, the camera, and any paint, written into the
+        web address after the <code>#</code>, which a browser never sends to a server. The scene is
+        JSON, compressed with raw deflate and written with the 64 letters, digits, <code>-</code>,
+        and <code>_</code> that are safe in an address. A toy at its defaults is a link of about 700
+        characters; a link stops at 12,288 characters of scene, leaving out paint and then clay
+        first. A link carries <i>settings, not files</i>: a photo or a splat file from your device
+        has to be opened again by whoever opens the link.
+      </p>
+      <p>
+        <b>Where it goes next.</b> A link is text, so it can be a QR code. The
+        <a href="share.html">share links chapter</a> takes one apart, lets you break one, and counts
+        how many characters a code can hold. Here, notice what codes and pages have in common with
+        links: they all put a lot of meaning in a small, exact picture.
+      </p>
+
+      <h3 id="try-it-9">Where to try it</h3>
+      <ul>
+        <li>
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InFyLWNvZGUifSwiY2FtZXJhIjp7InlhdyI6MCwicGl0Y2giOjAsInJvbGwiOjAsImRpc3RhbmNlIjozLjF9fQ"
+            target="_blank"
+            rel="noopener"
+            >QR code</a
+          >,
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InFyLWFuYXRvbXkifSwiY2FtZXJhIjp7InlhdyI6MCwicGl0Y2giOjAsInJvbGwiOjAsImRpc3RhbmNlIjozLjR9fQ"
+            target="_blank"
+            rel="noopener"
+            >How a QR code works</a
+          >,
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InFyLWRhbWFnZSJ9LCJjYW1lcmEiOnsieWF3IjowLCJwaXRjaCI6MCwicm9sbCI6MCwiZGlzdGFuY2UiOjMuNH19"
+            target="_blank"
+            rel="noopener"
+            >QR damage lab</a
+          >,
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InFyLXRocmVlIn0sImNhbWVyYSI6eyJ5YXciOjAsInBpdGNoIjowLCJyb2xsIjowLCJkaXN0YW5jZSI6My40fX0"
+            target="_blank"
+            rel="noopener"
+            >Three QR codes in one</a
+          >,
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InFyLXBpY3R1cmUifSwiY2FtZXJhIjp7InlhdyI6MCwicGl0Y2giOjAsInJvbGwiOjAsImRpc3RhbmNlIjozLjR9fQ"
+            target="_blank"
+            rel="noopener"
+            >Picture QR</a
+          >,
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InFyLWJ1aWxkIn0sImNhbWVyYSI6eyJ5YXciOjAsInBpdGNoIjowLjQ1LCJyb2xsIjowLCJkaXN0YW5jZSI6My40fX0"
+            target="_blank"
+            rel="noopener"
+            >QR from real things</a
+          >, and
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImJhcmNvZGVzIn0sImNhbWVyYSI6eyJ5YXciOjAuMjUsInBpdGNoIjowLjM1LCJyb2xsIjowLCJkaXN0YW5jZSI6My4yfX0"
+            target="_blank"
+            rel="noopener"
+            >Other barcodes</a
+          >
+          (all labs).
+        </li>
+        <li>
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBpY3R1cmUtbGFiIn0sImNhbWVyYSI6eyJ5YXciOjAsInBpdGNoIjowLCJyb2xsIjowLCJkaXN0YW5jZSI6My4yfX0"
+            target="_blank"
+            rel="noopener"
+            >Picture lab</a
+          >,
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InlvdXItYm9vayJ9LCJjYW1lcmEiOnsieWF3IjowLjEyLCJwaXRjaCI6MC4xMiwicm9sbCI6MCwiZGlzdGFuY2UiOjIuNn19"
+            target="_blank"
+            rel="noopener"
+            >Your book</a
+          >,
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBob3RvLWFsYnVtIn0sImNhbWVyYSI6eyJ5YXciOjAuMTIsInBpdGNoIjowLjEyLCJyb2xsIjowLCJkaXN0YW5jZSI6Mi42fX0"
+            target="_blank"
+            rel="noopener"
+            >Photo album</a
+          >, and
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNjcmVlbiJ9LCJjYW1lcmEiOnsieWF3IjowLjI1LCJwaXRjaCI6MC4xMiwicm9sbCI6MCwiZGlzdGFuY2UiOjMuMn19"
+            target="_blank"
+            rel="noopener"
+            >Screen</a
+          >
+          (labs).
+        </li>
+      </ul>
+
+      <!-- NAV:BOTTOM:START (written by manual/build-pages.mjs; do not edit by hand) -->
+      <nav class="pager no-print" aria-label="Previous and next chapter, bottom">
+        <a class="pager-prev" rel="prev" href="photo3d.html"
+          ><span class="pager-word">← Previous</span
+          ><span class="pager-title">Chapter 8: Photos and video into 3D</span></a
+        ><a class="pager-next" rel="next" href="make.html"
+          ><span class="pager-word">Next →</span
+          ><span class="pager-title">Chapter 10: Make your own</span></a
+        >
+      </nav>
+      <footer>
+        <p>
+          The Tinkerer's Manual, first published September 28, 2026 and updated October 11, 2026.
+          Part of
+          <a href="https://ryanjosephkamp.github.io/splashery/site/" target="_blank" rel="noopener"
+            >Splashery</a
+          >, a toy box of 3D Gaussian splats that runs in your browser. Every picture here was made
+          with Splashery itself.
+        </p>
+      </footer>
+      <!-- NAV:BOTTOM:END -->
+    </main>
+  </body>
+</html>

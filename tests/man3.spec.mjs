@@ -60,7 +60,7 @@ test("the definitions, the notes and the opening-line context are there", () => 
     expect(whys.join("|").toLowerCase(), w).toContain(w.toLowerCase());
   // The three new questions are folds too.
   for (const w of ["different parts", "different fields", "each moment a part"]) expect(whys.join("|"), w).toContain(w); // prettier-ignore
-  expect(whys.length).toBe(12); // Manual r5 added the one about static files
+  expect(whys.length).toBe(14); // Manual r5 added the one about static files, Manual r7b two (hands-on units, QR limits)
 });
 
 test("the grammar names the brackets and arcsin, arccos, arctan, and the bare-input rule", () => {
@@ -93,9 +93,7 @@ test("every planned demo is built: none is a placeholder any more, and each is h
   }
 });
 
-test("every link in the manual opens in a new tab, and chapters 6 to 10 are placeholders (the level map is gone)", async ({
-  page,
-}) => {
+test("every link in the manual opens in a new tab, and the level map is gone", async ({ page }) => {
   await page.goto("/manual/all.html");
   const bad = await page.evaluate(() =>
     [...document.querySelectorAll("a[href]")]
@@ -107,9 +105,7 @@ test("every link in the manual opens in a new tab, and chapters 6 to 10 are plac
   // The cover link and "Back" are among them.
   await expect(page.locator(".cover a[href='../']")).toHaveAttribute("target", "_blank");
   await expect(page.locator("#level-map, .levelmap")).toHaveCount(0);
-  for (const id of ["moving", "data", "photo3d", "codes", "make"]) await expect(page.locator(`h2#${id}.coming`)).toHaveCount(1); // prettier-ignore
-  await expect(page.locator("p.coming-note")).toHaveCount(5);
-  await expect(page.locator("p.coming-note").first()).toContainText("Coming in the next round");
+  // (Chapters 6 to 10 are written since Manual r7b: tests/man7b.spec.mjs checks their pages.)
 });
 
 test("the References section is numbered, and every citation leads to an entry", async ({

@@ -4,7 +4,7 @@ Where Splashery stands, in short. The Operator session keeps this file; each lan
 in [handoff/](handoff/). The ground rules are in [CLAUDE.md](../CLAUDE.md); how the parallel lanes
 work is in [OPERATING.md](OPERATING.md).
 
-## Now (October 12, 2026, about 01:40 UTC)
+## Now (October 12, 2026, about 03:40 UTC)
 
 The Operator is `session_01BbS2vUAWpeFF2i6KoJAqCt` (Opus 5.5), since October 12, 2026, 01:38 UTC. It
 took over from `session_01Mo8sLhAitbYjZiPgD8Hc4t` by `.claude/skills/operator-handover/SKILL.md`.
@@ -20,7 +20,7 @@ change it.
 (`tools/suite.mjs --gl=llvmpipe --jobs=2 --recheck`), the lanes fix what the batch broke, and the
 batch merges as one PR.
 
-**Main** is at #550 or later. Merged October 9 to 12:
+**Main** is at #556 or later. Merged October 9 to 12:
 
 - #457: Hands-on H1 and H5 (the Enigma, clothing, the handoffs) and Photo sharp view r3
 - #466: the October 9 walkthrough and manual reviews, triaged into lanes
@@ -50,34 +50,28 @@ batch merges as one PR.
 - #546: Rules v1 for outside builders (`builders/RULES.md`), from the owner's answers of October 12
 - #547: Codex task 36 (the whole manual's third audit), to run once #542 and #545 are in
 - #550: Privacy r1 (#544): his quotes in the lane files rewritten in the Operator's words
+- #552: Site r5 (#543), What's new's cards open their toy, and the new Operator's id
+- #553: Builders r1 (#548), the pack for outside builders (`builders/`, `tools/builders-pack.mjs`);
+  the ZIP went to the owner for his Google Drive
+- #554 and the upkeep after it: Codex tasks 37 to 46 (the Studio push, then the Fluid Lab on a
+  phone, arcade games, the photoreal planets, the elements and Blender worlds)
+- #555: the owner's calls of October 12 (faster depth approved; his notes' git history stays)
+- #556: Manual r7a (#545) and Manual r7b (#542) in one batch, the PDF rebuilt by the Operator
 
 **Lanes running** (rows, sessions and files in WORKSTREAMS.md):
 
-- **Site r5** (Sonnet, #543): What's new's cards open their toy. READY; waits on the owner's marks
-  on its three st5 cards.
-- **Manual r7a** (Sonnet, #545): crisp demos, sliders, the moving torus, pictures, the built
-  diagram. Its cards were still to come at the handover; merges after the owner's marks.
-- **Manual r7b** (Sonnet, #542): Chapters 6 to 10 (about 2,000 to 2,900 words each), glossary 58,
-  Further reading 27, References 22, the Quick reference, Chapter naming, the footer link. Waits on
-  the owner's marks on ten man7b cards, then on main carrying r7a: it merges main and rebuilds the
-  PDF (its context is large, 485k; a fresh session or the Operator can rebuild the PDF instead).
-- **Baked engine** (Opus, #549): the compact baked-splat format through the Kit, the converter and
-  the checker, a labs example. It posts its format design as a WORKING note before the Kit path.
-- **Builders r1** (Sonnet, #548): the rest of `builders/` (start here, repo map, setup, Kit guide,
-  toy package, Workshop, handback, 12 task prompts, credits) and `tools/builders-pack.mjs`. When it
-  merges, the Operator sends the owner the ZIP for his Google Drive.
+- **Baked engine** (Opus, #549): READY; the owner marked its chest card good. A full suite runs on
+  `claude/operator-merge-oct12e`; it merges after that (additive engine, labs).
+- **Builders r1** (Sonnet): merged; holds for one small follow-up once #549 is in (TOY-PACKAGE,
+  KIT-GUIDE, HANDBACK and the T3 prompt name the baked format).
 
-After r7a and r7b merge: the owner runs Codex task 36 (docs/codex/36-manual-audit-r3.md), a Sonnet
-lane fixes what it finds, then the owner does one rewording pass for the manual and the Learn pages.
-The owner builds the Workshop with his own agents from `builders/WORKSHOP.md`.
+Codex (the owner runs these): task 36 (the manual's third audit) now that r7a and r7b are in, then a
+Sonnet lane (Manual r8) fixes what it finds, then the owner's one rewording pass for the manual and
+the Learn pages. Tasks 37 to 41 (the Studio push) and 42 to 46 (the second wave) run in parallel;
+the Operator checks each PR, collects its clips and merges labs work after its tests.
 
-Merged on October 11, 2026: Manual r4 (#527), Manual r5 (#530, after a full suite run), Live r10
-(#531, labs), Site r3 (#534: What's new as a gallery, the app's Gallery renamed Playground, a date
-for every toy, description tags) and Codex task 35's second manual audit (#533, a report: 13 of task
-34's 16 findings fixed, 3 partly; 14 new, none high). The bake-off's second round is marked and
-revealed to the owner (privately). Finished and safe to archive with the owner's OK: Site r3, Manual
-r4, Manual r5, Live r10, the bake-off runner, Fix11, QR r5, Live r9, Kit lab, Arcade r3, Fix10,
-Photo depth, QR r4, Manual r6 and Site r4.
+Finished and safe to archive with the owner's OK: Site r5, Manual r7a, Manual r7b, Privacy r1,
+Manual r6, Site r4, and the earlier list below.
 
 **Open with the owner:** the front-door call; Codex tasks 37 to 41 (#554), which he runs; task 38
 replaces Codex task 32 (#479). Decided October 12, 2026: the git history of his removed notes stays
@@ -86,12 +80,11 @@ model may ship over 2 MB under Apache-2.0, MIT or BSD (CLAUDE.md); he marked eve
 man7b card good. Pace: about 78% of the week used (October 12); his priorities before the reset
 (Wednesday, October 14, 4 p.m. ET) are the finished manual first, then the engine change.
 
-**Next for the Operator:** merge Site r5, then Manual r7a, then Manual r7b with the PDF rebuilt,
-after the owner's marks; tell him to run Codex task 36; brief the fix lane (Manual r8) on its
-report; merge Builders r1 and send him the ZIP (`node tools/builders-pack.mjs`); check the Baked
-engine's format design, then merge it after a full test run (additive, labs); the Privacy r1
-leftovers (WORKSTREAMS, OPERATING, two audit files, toy-plan.json and TOY-PLAN.md, one sound-review
-note); after the reset, the Sonnet polish lane for Codex prototypes #518, #515 and #517.
+**Next for the Operator:** merge the Baked engine after its full suite, then send Builders r1 its
+follow-up; brief Manual r8 (Sonnet) on Codex task 36's report; check and merge the Codex PRs from
+tasks 37 to 46 as they arrive (task 38 replaces #479; close #479 then); the Privacy r1 leftovers
+(WORKSTREAMS, OPERATING, two audit files, toy-plan.json and TOY-PLAN.md, one sound-review note);
+after the reset, the Sonnet polish lane for Codex prototypes #518, #515 and #517.
 
 ## State of main (2026-10-02, history)
 

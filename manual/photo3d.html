@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- HEAD:START (written by manual/build-pages.mjs; do not edit by hand) -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Chapter 8: Photos and video into 3D · The Tinkerer's Manual</title>
+    <meta
+      name="description"
+      content="Chapter 8: Photos and video into 3D. The Tinkerer's Manual: how to program Gaussian splats in Splashery."
+    />
+    <link rel="stylesheet" href="manual.css" />
+    <link rel="stylesheet" href="../site/assets/outline.css" />
+
+    <script type="module" src="fold.js"></script>
+    <script type="module" src="nav.js"></script>
+    <!-- HEAD:END -->
+  </head>
+  <body>
+    <main>
+      <!-- NAV:TOP:START (written by manual/build-pages.mjs; do not edit by hand) -->
+      <div class="outline no-print manual-nav">
+        <button
+          type="button"
+          class="outline-toggle"
+          aria-expanded="false"
+          aria-controls="manual-contents"
+        >
+          <span class="outline-label">Contents</span
+          ><span class="outline-now">Chapter 8: Photos and video into 3D</span
+          ><svg
+            class="outline-chevron"
+            viewBox="0 0 16 16"
+            width="16"
+            height="16"
+            aria-hidden="true"
+          >
+            <path
+              d="m3.5 6 4.5 4.5L12.5 6"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </button>
+        <nav class="outline-panel" id="manual-contents" aria-label="The manual's chapters" hidden>
+          <ol>
+            <li><a href="index.html">Contents</a></li>
+            <li><a href="splat.html">Chapter 1: What a splat is</a></li>
+            <li><a href="toy.html">Chapter 2: How a toy is built</a></li>
+            <li><a href="language.html">Chapter 3: The splat equation language</a></li>
+            <li><a href="gallery.html">Chapter 4: A gallery of programs</a></li>
+            <li><a href="pictures.html">Chapter 5: Pictures, screens, and your own input</a></li>
+            <li><a href="moving.html">Chapter 6: Moving things</a></li>
+            <li><a href="data.html">Chapter 7: Real data as splats</a></li>
+            <li>
+              <a href="photo3d.html" aria-current="page">Chapter 8: Photos and video into 3D</a>
+              <ol class="outline-sub" aria-label="In this chapter">
+                <li><a href="#photo-to-3d">Photo to 3D</a></li>
+                <li><a href="#the-sharp-view">The Sharp view</a></li>
+                <li><a href="#moving-photo-to-3d">Moving photo to 3D</a></li>
+                <li><a href="#video-to-3d">Video to 3D</a></li>
+                <li><a href="#photoreal-captures">The photoreal captures</a></li>
+                <li><a href="#try-it-8">Where to try it</a></li>
+              </ol>
+            </li>
+            <li><a href="codes.html">Chapter 9: Codes and pages</a></li>
+            <li><a href="make.html">Chapter 10: Make your own</a></li>
+            <li><a href="more.html">What else Splashery does now</a></li>
+            <li><a href="unique.html">What Splashery can do that other splat tools can't</a></li>
+            <li><a href="built.html">How Splashery is built</a></li>
+            <li><a href="share.html">Share links and QR codes</a></li>
+            <li><a href="experiments.html">Open questions: other choices, not tried yet</a></li>
+            <li><a href="later.html">What comes later: Code a toy</a></li>
+            <li><a href="glossary.html">Glossary</a></li>
+            <li><a href="reading.html">Further reading</a></li>
+            <li><a href="references.html">References</a></li>
+            <li><a href="card.html">Quick reference</a></li>
+          </ol>
+        </nav>
+      </div>
+      <nav class="pager no-print" aria-label="Previous and next chapter, top">
+        <a class="pager-prev" rel="prev" href="data.html"
+          ><span class="pager-word">← Previous</span
+          ><span class="pager-title">Chapter 7: Real data as splats</span></a
+        ><a class="pager-next" rel="next" href="codes.html"
+          ><span class="pager-word">Next →</span
+          ><span class="pager-title">Chapter 9: Codes and pages</span></a
+        >
+      </nav>
+
+      <!-- NAV:TOP:END -->
+      <!-- ---- Chapter 8 ---- -->
+      <h2 id="photo3d"><span class="level">Chapter 8</span>Photos and video into 3D</h2>
+      <!-- Sources: src/packs/photo-3d.js:1-10, photo-3d-depth.js:1-13, photo-3d-core.js:14-72
+           (PHOTO_DENSITY 1.5, TIER_COUNTS, LAYERS 4, CUT 0.015, modelSize 518 and 14), photo-sharp.js:1-30,
+           moving-photo.js:1-50 (MAX_SECONDS 8, CLIP_FPS, DEPTH_FRAMES, CLIP_AREAS, DEPTH_SIDES),
+           video3d.js:1-12, src/video3d/run.js:1-10 and frames.js:14-27 (TIERS), src/video3d/samples.js,
+           src/loaders.js:1-30 (LIMITS, formats), src/packs/photoreal-r2.js:1-30. Counts measured by
+           loading src/toys.js: the Photoreal shelf (category scans) has 72 toys, 32 without the labs
+           switch and 40 with it; 64 are captured scans and 8 are kit toys. -->
+      <p>
+        Chapters 6 and 7 start from things that are already numbers: a toy's recipe, a table, a
+        catalog of stars. A photograph is not. It is a flat grid of colors with no depth, and a
+        video is that grid thirty times a second. This chapter is about the ways Splashery gets 3D
+        out of them, from the cheapest guess to a full reconstruction, and about what it can and
+        cannot promise. The tools here are on the Studio shelf and behind the labs switch; the
+        photoreal captures are on their own shelf, partly open.
+      </p>
+
+      <h3 id="photo-to-3d">Photo to 3D</h3>
+      <p>
+        <b>What it is.</b> Open a photo and get a toy you can turn: near things move across far
+        things as you turn it. It is a depth effect, a guess, not a scan: from one picture there is
+        no way to know what is behind a tree.
+      </p>
+      <p>
+        <b>How Splashery does it.</b> A depth model works out, for every part of the picture, how
+        far away it is. The model is Depth Anything V2 Small [<a href="references.html#ref-13">13</a
+        >] in its 8-bit quantized form, a file of 27 MB that runs in your browser through ONNX
+        Runtime Web on one thread. (A page on GitHub Pages cannot share memory between threads, so
+        the runtime has just one.) Both files are Splashery's own, served from the site; nothing is
+        fetched from anywhere else and your photo is not uploaded. They load only when you open a
+        photo of your own. The sample pictures on the toy come with their depth maps already worked
+        out, so they need no model at all. Some samples are AI-made pictures, and each one says so
+        beside it.
+      </p>
+      <p>
+        The picture goes to the model scaled so its long side is about 518 pixels, each side a
+        multiple of 14 (the model reads the picture in 14-pixel tiles). The answer is a smooth map
+        of <i>relative</i> depth: it says which parts are nearer than which, not how many meters.
+        The photo is then rebuilt as splats. Each splat sits at its place in the picture and at its
+        depth, colored from the photo, and sized to its neighbors on its own surface so the surface
+        closes. A grid that adapts to the picture spends the splats where there is detail: a plain
+        block of a wall is one big splat, and a block of letters splits into four, and again, down
+        to single pixels, until the budget is spent. The budget is the tier's default count times
+        1.5, capped at the tier's maximum: 90,000 splats on a low device, 210,000 on a mid one,
+        300,000 on a high one, and 400,000 on the highest. Where the depth jumps between two
+        neighbors by more than 0.015 of its range, the surface is cut, so a near object stands as
+        its own layer and does not smear into the wall behind it. The picture is split into four
+        depth layers, and a tap lifts them apart one at a time.
+      </p>
+      <p>
+        <b>Why this way.</b> The depth model needs only one photo and runs on the device, which fits
+        a site with no server. The price is the model's guess. Splashery does not try to paint what
+        the camera did not see, so a turn far enough shows the cuts.
+      </p>
+      <figure>
+        <div class="shots two">
+          <div>
+            <img
+              src="img/r7b-photo-3d-sharp.jpg"
+              alt="A forest path photo shown sharp, as a textured relief"
+            />
+            <p class="shot-label">The Sharp view (the default)</p>
+          </div>
+          <div>
+            <img
+              src="img/r7b-photo-3d-splats.jpg"
+              alt="The same photo shown as splats, slightly softer, with layers"
+            />
+            <p class="shot-label">The splat view</p>
+          </div>
+        </div>
+        <figcaption>
+          The same photo, two views. Sample photo: "Forest path" by Seaq68 (from Pixabay, marked CC0
+          on Wikimedia Commons).
+        </figcaption>
+      </figure>
+
+      <h3 id="the-sharp-view">The Sharp view</h3>
+      <p>
+        <b>What it is.</b> Splats are soft by nature, and a photo of a page of small print loses its
+        letters when it is drawn as 200,000 soft blobs. The <b>Sharp</b> view is a second view of
+        the same toy that keeps the photo at its full resolution.
+      </p>
+      <p>
+        <b>How Splashery does it.</b> The photo is laid as a texture on a <i>relief</i>: a surface
+        lifted by the same depth the splats use. It is a textured surface, not splats. The depth
+        slider, the tap, the layers, the sway, and, for a clip, play, pause, and scrubbing all move
+        the relief as they would move the splats. A switch in the toy's panel chooses Sharp or
+        Splats, and the choice is saved with the scene, so a shared link opens in the view it was
+        saved in. A scene saved before the switch existed opens in Sharp. Where splats are needed,
+        they show instead and the panel says so: while Poke, Paint, Magnet, or Clay is the active
+        tool, in hands-on play, and while a Look effect is on. Saving the toy as a splat file is
+        unaffected, since it reads the splats.
+      </p>
+      <p>
+        <b>Why this way.</b> Splashery is primarily splat-based but not only splat-based, and this
+        is the clearest place it is not. The Sharp view is there because splats are the wrong tool
+        for reading small text, and because the toy is still the same toy: the same depth, the same
+        controls, the same saved link.
+      </p>
+
+      <h3 id="moving-photo-to-3d">Moving photo to 3D</h3>
+      <p>
+        <b>What it is.</b> The same idea for a GIF or a short video: it plays back in 3D, each frame
+        lifted by its own depth. The sample is six seconds of "Big Buck Bunny" (the bunny and the
+        butterfly; © Blender Foundation, CC BY 3.0) with its depth worked out ahead of time, so it
+        needs no model.
+      </p>
+      <p>
+        <b>How Splashery does it.</b> It takes the first 8 seconds of a video, or a GIF's frames, at
+        up to 12, 15, or 24 frames a second depending on the device tier, each frame sized to
+        60,000, 140,000, or 200,000 pixels (or 640 by 360 on the highest tier). Running the depth
+        model on every frame would take too long, so it works out the depth on at most 24, 32, or 48
+        frames spread evenly through the clip, at 196 or 294 pixels on the long side, and the frames
+        between blend their neighbors' depths. The colors carry the motion. A video plays with its
+        own sound and its frames follow that sound's clock. The depth is smooth, since the model
+        guesses shapes and not edges, so it is sampled smoothly up to the frame's size and its edges
+        are cut clean. It has the Sharp view too.
+      </p>
+
+      <h3 id="video-to-3d">Video to 3D</h3>
+      <p>
+        <b>What it is.</b> Photo to 3D guesses depth from one picture. This toy does something
+        different and harder: it takes <i>many</i> views of a still scene (the frames of a video
+        that walks or flies around something), works out where the camera was for each, and trains a
+        real 3D Gaussian splat scene that looks right from each of those places. It is the method of
+        Chapter 1's first reference [<a href="references.html#ref-1">1</a>], running in your
+        browser. A scene that stands still works. A moving car or person blurs or vanishes.
+      </p>
+      <p>
+        <b>How Splashery does it.</b> It uses Splat.js [<a href="references.html#ref-21">21</a>], an
+        MIT-licensed library vendored in <code>vendor/splatjs/</code> and loaded only when you open
+        a video in this toy. The toy first picks the sharpest frame in each window of the stretch
+        you choose. Splat.js then works out the camera's path (it finds features, matches them
+        between frames, registers each camera, and adjusts them all together), seeds a splat cloud,
+        and trains it on the graphics chip through WebGPU: the splats' places, sizes, colors, and
+        opacities are nudged by gradient descent until the scene renders like each frame. The result
+        is shown as the toy's splats, and you can turn it, zoom, save it as a PLY, or tap
+        <b>Replay flight</b> to fly the video's own camera path with its sound.
+      </p>
+      <p>
+        How much it does depends on the device. A mid-tier device uses up to 32 frames at 640
+        pixels, trains 3,000 steps, and keeps up to 120,000 splats; a high-tier one uses 60 frames,
+        7,000 steps, and 250,000 splats; the lowest tier, a phone, uses 16 frames, 1,200 steps, and
+        30,000 splats, within 8 minutes. It needs WebGPU: a browser without it says so rather than
+        starting. The samples (a statue flown around, a street walked) are results made the same way
+        from two CC BY 3.0 videos; the videos themselves are not shipped, only the trained splats
+        and the camera path.
+      </p>
+      <p>
+        <b>Why this way.</b> This is the one place Splashery trains a splat scene in your browser.
+        It is honest about the cost: minutes of work on your graphics chip, a result only as good as
+        the video, and no server.
+      </p>
+      <figure>
+        <div class="shots two">
+          <div>
+            <img
+              src="img/r7b-moving-photo-3d.jpg"
+              alt="A frame of a cartoon rabbit and butterfly, lifted into 3D"
+            />
+            <p class="shot-label">A moving photo</p>
+          </div>
+          <div>
+            <img
+              src="img/r7b-video-3d.jpg"
+              alt="A trained splat scene of a statue, from a drone video"
+            />
+            <p class="shot-label">A trained video: the statue sample</p>
+          </div>
+        </div>
+        <figcaption>
+          Video frame from "Big Buck Bunny" © Blender Foundation, CC BY 3.0. The statue scene is
+          trained from a CC BY 3.0 drone video (credit beside it in the toy).
+        </figcaption>
+      </figure>
+
+      <h3 id="photoreal-captures">The photoreal captures</h3>
+      <p>
+        <b>What it is.</b> The Photoreal shelf holds real objects (a strawberry, a honeybee, a
+        sunflower, a bonsai tree) that other people captured with many photographs and trained into
+        3D Gaussian splat files, which Splashery converts and shows. Of its 72 toys, 64 are captured
+        scans and 8 are kit-built; 32 are open to everyone and 40 are behind the labs switch until
+        they are ready.
+      </p>
+      <p>
+        <b>How Splashery does it.</b> Splashery does not train these. Each capture arrives as a file
+        under a license it can use, and a build tool converts it: it decimates the splats, centers
+        and scales the toy, and writes a <code>.sog</code> file (a compressed splat format), usually
+        as a pair, a full file and a lite one for weaker devices. The viewer opens
+        <code>.ply</code>, <code>.sog</code>, <code>.splat</code>, and <code>.spz</code>, so it can
+        also open your own captures. Files can carry spherical harmonics, the view-dependent color
+        the kit's own splats do not use, and some of the newer captures keep one band of them on the
+        full file. Big files warn and then thin: a low device warns at 60 MB or 400,000 splats and
+        thins to 300,000, and the highest tier warns at 200 MB or 2,000,000 splats and thins to
+        1,500,000.
+      </p>
+      <p>
+        <b>Licenses.</b> The 64 captured toys carry their credits beside them: 16 are CC0, 44 CC BY
+        4.0, one CC BY 2.0, and three are NonCommercial (CC BY-NC or CC BY-NC-SA), which are flagged
+        in the asset list so they can be taken out if the site ever earns money. A capture under a
+        NoDerivatives license, or with no license, is never used.
+      </p>
+      <figure>
+        <div class="shots two">
+          <div>
+            <img src="img/r7b-strawberry.jpg" alt="A strawberry captured with photographs" />
+            <p class="shot-label">A strawberry</p>
+          </div>
+          <div>
+            <img src="img/r7b-bee.jpg" alt="A honeybee captured with photographs" />
+            <p class="shot-label">A honeybee</p>
+          </div>
+        </div>
+        <figcaption>
+          Photoreal captures. Strawberry: Dany Bittel, CC BY 4.0. Honeybee: YUMA Co., Ltd., CC BY
+          4.0. Credits and licenses show beside each toy in the Playground.
+        </figcaption>
+      </figure>
+      <div class="demo-placeholder">
+        <p class="demo-tag">A demo goes here later</p>
+        <p>
+          A photo with a slider that turns a flat picture into layers at their depths, side by side
+          with the Sharp view, so the guess and the picture can be compared at once.
+        </p>
+      </div>
+
+      <h3 id="try-it-8">Where to try it</h3>
+      <ul>
+        <li>
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBob3RvLTNkIn0sImNhbWVyYSI6eyJ5YXciOjAsInBpdGNoIjowLCJyb2xsIjowLCJkaXN0YW5jZSI6My40fX0"
+            target="_blank"
+            rel="noopener"
+            >Photo to 3D</a
+          >,
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im1vdmluZy1waG90by0zZCJ9LCJjYW1lcmEiOnsieWF3IjowLCJwaXRjaCI6MCwicm9sbCI6MCwiZGlzdGFuY2UiOjMuNH19"
+            target="_blank"
+            rel="noopener"
+            >Moving photo to 3D</a
+          >, and
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InZpZGVvLTNkIn0sImNhbWVyYSI6eyJ5YXciOjAsInBpdGNoIjowLCJyb2xsIjowLCJkaXN0YW5jZSI6My40fX0"
+            target="_blank"
+            rel="noopener"
+            >Video to 3D</a
+          >
+          (all labs; the last needs WebGPU).
+        </li>
+        <li>
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InN0cmF3YmVycnkifSwiY2FtZXJhIjp7InlhdyI6MC4yNSwicGl0Y2giOjAuMywicm9sbCI6MCwiZGlzdGFuY2UiOjUuNn19"
+            target="_blank"
+            rel="noopener"
+            >Strawberry</a
+          >,
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImJlZSJ9fQ"
+            target="_blank"
+            rel="noopener"
+            >Honeybee</a
+          >, and
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImdyYXBlIn19"
+            target="_blank"
+            rel="noopener"
+            >Grape</a
+          >
+          (open to everyone). The grape has a peel that shows the pale flesh.
+        </li>
+      </ul>
+
+      <!-- NAV:BOTTOM:START (written by manual/build-pages.mjs; do not edit by hand) -->
+      <nav class="pager no-print" aria-label="Previous and next chapter, bottom">
+        <a class="pager-prev" rel="prev" href="data.html"
+          ><span class="pager-word">← Previous</span
+          ><span class="pager-title">Chapter 7: Real data as splats</span></a
+        ><a class="pager-next" rel="next" href="codes.html"
+          ><span class="pager-word">Next →</span
+          ><span class="pager-title">Chapter 9: Codes and pages</span></a
+        >
+      </nav>
+      <footer>
+        <p>
+          The Tinkerer's Manual, first published September 28, 2026 and updated October 11, 2026.
+          Part of
+          <a href="https://ryanjosephkamp.github.io/splashery/site/" target="_blank" rel="noopener"
+            >Splashery</a
+          >, a toy box of 3D Gaussian splats that runs in your browser. Every picture here was made
+          with Splashery itself.
+        </p>
+      </footer>
+      <!-- NAV:BOTTOM:END -->
+    </main>
+  </body>
+</html>
