@@ -105,7 +105,7 @@ export function sharpEntry(toy) {
           sharpView(toy) === "sharp" && S.yielded
             ? "Showing the splats while a tool, Hands-on or an effect is on (they work on splats). Sharp picture comes back after."
             : toy === "photo-3d" && player()?.scene?.toy?.options?.detail !== "splats"
-              ? "Sharp picture: the picture at full size on a 3D relief. Fine Splats: a hybrid view, with splats over a filled background."
+              ? "Fine Splats (hybrid) adds a filled background sheet behind the splats. Splat exports omit the sheet; scene saves keep the view settings."
               : "Sharp picture: the picture at its full size on a 3D relief, so small text stays readable. Splats: the picture rebuilt from splats.";
       };
       paint();
