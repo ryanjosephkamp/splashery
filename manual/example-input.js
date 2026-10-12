@@ -1,4 +1,4 @@
-// A small toy with its own typed input, for Level 5 of the Tinkerer's Manual:
+// A small toy with its own typed input, for Chapter 5 of the Tinkerer's Manual:
 // type some numbers and the toy stands them up as bars.
 const LIMIT = 12;
 const COLORS = ["#e8384f", "#ffc233", "#1fb59a", "#4dabf7"];

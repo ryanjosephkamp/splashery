@@ -7,6 +7,12 @@
 //   - the full table of contents on the cover (between the TOC markers);
 //   - an id on every heading that has none, and the page prefix on every link to a heading that is
 //     on another page (`href="#x"` becomes `href="toy.html#x"`), so a link always lands;
+//   - a link that opens a toy: `<a href="toy:chest">` becomes the Playground address of that toy
+//     (a v3 scene link, as the site's "Open in Splashery" buttons are), opened in a new tab; an id
+//     that is not a toy stops the build;
+//   - the Playground links (`../` and the cover's) and the footer's link to the site's home page,
+//     which follow the front-door switch (FRONT_DOOR in tools/site-pages.mjs), so they stay right
+//     on the day the site becomes the front door;
 //   - manual/all.html, the whole manual on one page in reading order (the PDF is printed from it);
 //   - manual/redirect.js, which sends an old `manual/#anchor` address to the page that has it;
 //   - manual/glossary-data.js, the glossary's entries, which the pop-ups on every other page read.
@@ -19,7 +25,8 @@
 
 import fs from "node:fs";
 import * as prettier from "prettier";
-import { PAGES, COMING, label } from "./pages.mjs";
+import { PAGES, label } from "./pages.mjs";
+import { toyHref, HOME_URL, PLAYGROUND_URL, PLAYGROUND_REL } from "./links.mjs";
 
 const dir = new URL("./", import.meta.url);
 const read = (f) => fs.readFileSync(new URL(f, dir), "utf8");
@@ -34,6 +41,13 @@ async function write(file, text) {
 }
 const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); // prettier-ignore
 const plain = (html) => html.replace(/<[^>]+>/g, "").replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/\s+/g, " ").trim(); // prettier-ignore
+
+const toyLinks = (html) =>
+  html
+    .replace(/<a\s+href="toy:([a-z0-9-]+)"\s*>/g, (all, id) => `<a href="${toyHref(id)}" target="_blank" rel="noopener">`) // prettier-ignore
+    // The Playground, wherever a page links to it.
+    .replace(/href="(?:\.\.\/|\.\.\/playground\/)"/g, `href="${PLAYGROUND_REL}"`)
+    .replace(/href="https:\/\/ryanjosephkamp\.github\.io\/splashery\/(?:playground\/)?"/g, `href="${PLAYGROUND_URL}"`); // prettier-ignore
 
 // ---- Read the pages ----------------------------------------------------------------------------
 const MARK = {
@@ -53,6 +67,7 @@ function split(html, file) {
   };
 }
 const pages = PAGES.map((p) => ({ ...p, ...split(read(p.file), p.file) }));
+for (const p of pages) p.content = toyLinks(p.content);
 
 // An id on every heading that has none: the text, lower case, with dashes.
 const slug = (s) => plain(s).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 48); // prettier-ignore
@@ -94,7 +109,7 @@ const headings = (p) =>
 
 function head(p) {
   const desc = p.file === "index.html"
-    ? "How to program Gaussian splats in Splashery: the math of one splat, how a toy is built, the splat equation language, and pictures, screens and your own input."
+    ? "How to program Gaussian splats in Splashery: the math of one splat, how a toy is built, the splat equation language, pictures and your own input, moving things, real data, photos and video in 3D, codes and pages, and making your own."
     : `${plain(label(p))}. The Tinkerer's Manual: how to program Gaussian splats in Splashery.`; // prettier-ignore
   const title = p.file === "index.html" ? p.title : `${label(p)} · The Tinkerer's Manual`;
   const scripts = ["fold.js", "nav.js", ...demoScripts(p)];
@@ -147,7 +162,7 @@ const footer = `<footer>
         <p>
           The Tinkerer's Manual, first published September 28, 2026 and updated October 11, 2026.
           Part of
-          <a href="https://ryanjosephkamp.github.io/splashery/" target="_blank" rel="noopener">Splashery</a>, a toy box of 3D Gaussian splats that runs in your browser. Every picture here was made with Splashery itself.
+          <a href="${HOME_URL}" target="_blank" rel="noopener">Splashery</a>, a toy box of 3D Gaussian splats that runs in your browser. Every picture here was made with Splashery itself.
         </p>
       </footer>`;
 
@@ -174,16 +189,7 @@ function toc() {
         : ""
     }</li>`;
   };
-  const coming = PAGES.find((q) => q.file === "coming.html");
-  const out = [];
-  for (const p of pages.slice(1)) {
-    if (p.file === "coming.html") {
-      out.push(
-        `<li><a href="coming.html">${esc(plain(p.title))}</a><ol class="toc-sections">${COMING.map((c) => `<li><a href="coming.html#${c.id}">Chapter ${c.chapter}: ${esc(c.title)} (coming)</a></li>`).join("")}</ol></li>`, // prettier-ignore
-      );
-    } else out.push(li(p));
-  }
-  void coming;
+  const out = pages.slice(1).map(li);
   return `<!-- TOC:START (written by manual/build-pages.mjs; do not edit by hand) -->
         <nav class="toc" aria-label="Contents">
           <strong>Contents</strong>
@@ -207,7 +213,7 @@ for (const p of pages) await write(p.file, assemble(p));
 // need. The PDF is printed from this page (tools/manual-pdf.mjs).
 const firstId = new Map(PAGES.map((q) => [q.file, q.ids[0]]));
 const onePage = (html) =>
-  html.replace(/href="([a-z]+\.html)(#[^"]*)?"/g, (all, file, hash) =>
+  html.replace(/href="([a-z0-9]+\.html)(#[^"]*)?"/g, (all, file, hash) =>
     hash ? `href="${hash}"` : firstId.get(file) ? `href="#${firstId.get(file)}"` : all,
   );
 {

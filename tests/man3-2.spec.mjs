@@ -391,7 +391,7 @@ test.describe("the lighter layout", () => {
       "200,000 splats instead of 140,000 made no toy sharper",
       "the penguin's shimmer went from 2.72 to 3.90",
       "One pair of budgets (140,000 and 200,000), one phone size, one renderer",
-      "The Kit lab's larger sweep is in Level 2, under How many splats?",
+      "The Kit lab's larger sweep is in Chapter 2, under How many splats?",
       "Store the moments in a keyframe texture",
       "Compile the formulas to a shader",
       "Recompute on the processor every frame",

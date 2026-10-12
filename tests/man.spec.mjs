@@ -216,7 +216,8 @@ test("the manual page opens, and every example link opens the toy with its progr
   page.on("pageerror", (e) => problems.push(e.message));
   await page.goto("/manual/all.html");
   await expect(page.locator("h1")).toHaveText(/Tinkerer's Manual/);
-  const links = await page.locator("a[href*='#s=']").evaluateAll((as) => as.map((a) => a.getAttribute("href"))); // prettier-ignore
+  // (The chapters from Manual r7b also link to other toys, with plain-JSON scene links, "#s=j.")
+  const links = (await page.locator("a[href*='#s=']").evaluateAll((as) => as.map((a) => a.getAttribute("href")))).filter((h) => !h.includes("#s=j.")); // prettier-ignore
   expect(links.length).toBeGreaterThanOrEqual(8);
   const { decodeSceneHash } = await import("../src/codec.js");
   for (const href of links) {

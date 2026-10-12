@@ -48,7 +48,10 @@ with a hand-back rule. These ground rules are the full set for Claude sessions; 
   too, loaded only when someone turns a photo into 3D. Splat.js (MIT; approved September 30, 2026,
   for the video-to-3D spike) may join them, behind the labs switch, loaded only when someone opens a
   video for it. Project Nayuki's QR Code generator (MIT) and jsQR (Apache-2.0) (approved October
-  3, 2026) are vendored there too, loaded only when someone opens the QR code toy.
+  3, 2026) are vendored there too, loaded only when someone opens the QR code toy. Faster depth (the
+  owner's yes of October 12, 2026, for Codex task 37): a WebGPU or WebNN build of ONNX Runtime Web
+  and a better depth model may join them, over 2 MB, when their license is Apache-2.0, MIT or BSD,
+  loaded only when someone turns a photo, a clip or the camera into 3D.
 - Libraries (the owner's rule of October 4, 2026): the Operator may approve an open-source library a
   toy or tool needs without asking the owner each time: vendored in `vendor/`, loaded only when its
   toy opens, listed in `LICENSES.md` and named in the PR. A copyleft license (GPL, AGPL), a library

@@ -45,6 +45,16 @@ merges.
 | 31-credits-consistency.md         | Credits, licenses and assets checked against each other        | a script, report                      | no            |
 | 32-moving-photo-stability.md      | A steadier Moving photo to 3D, measured before and after       | `moving-photo.js`, a helper, tests    | no            |
 | 33-program-gallery.md             | Sixty splat programs for a gallery, with tests and thumbnails  | a data file, tests, thumbnails        | yes           |
+| 37-depth-engine.md                | Faster, steadier depth for the Studio                          | the depth worker, tests, report       | yes           |
+| 38-moving-photo-r2.md             | Moving photo to 3D, as good on your own clip as on the samples | `moving-photo.js`, samples, tests     | yes           |
+| 39-photo-3d-r2.md                 | Photo to 3D with no gaps                                       | Photo to 3D, the relief mesh, tests   | no            |
+| 40-video-3d-r2.md                 | Video to 3D, a world you can walk through                      | `src/video3d/`, samples, tests        | yes           |
+| 41-splat-mirror-r2.md             | A steadier, cleaner Splat mirror                               | `src/live/relief.js`, tests           | no            |
+| 42-fluid-lab-phone-r2.md          | The Fluid Lab, smooth on a phone                               | `src/fluids/`, tests, report          | no            |
+| 43-arcade-new-games.md            | Three new arcade games, played by real rules                   | new game modules, tests               | yes           |
+| 44-photoreal-planets.md           | The photoreal planets, polished                                | `src/space/`, tiles, tests            | yes           |
+| 45-elements-polish.md             | The periodic table and the real elements, polished             | the elements toys, photos, tests      | yes           |
+| 46-blender-worlds.md              | Blender-built worlds, baked to splats (after PR #549)          | `tools/blender/`, a world, tests      | yes           |
 
 The Codex cloud environment is set up with `tools/codex-setup.sh`; [SETUP.md](SETUP.md) has the
 steps for creating it and fixing a failed setup.
@@ -67,3 +77,17 @@ Provision the tools and reserve the paths before assigning a brief.
 | [J07 — License graph](../audits/dot-jobs-2026-10.md#j07--license-evidence-graph-proposal)        | A bounded source and rights review template proposal                    | two audit proposals; Grooph read-only              | yes           |
 | [J08 — Effect review graph](../audits/dot-jobs-2026-10.md#j08--toy-effect-review-graph-proposal) | Separate tests, motion critique and owner acceptance                    | two audit proposals; Grooph read-only              | yes           |
 | 36-manual-audit-r3.md                                                                            | The whole Tinkerer's Manual, audited a third time (after #542 and #545) | report only                                        | yes           |
+
+## The Studio push (tasks 37 to 41, October 12, 2026)
+
+The owner's first priority for Codex: the Studio's 2D-to-3D toys (Photo to 3D, Moving photo to 3D,
+Video to 3D and the Splat mirror) as good as they can be. The five tasks run at the same time, each
+in its own Codex session, and each task file names the files it may change so they don't collide.
+Task 37 owns the depth model that the other toys call. Task 38 starts from task 32's branch and
+replaces PR #479. All four toys are behind the labs switch, so the Operator merges each PR after its
+tests pass and the owner has seen its clips.
+
+The second wave (tasks 42 to 46) can run beside them; their files don't overlap the Studio's: the
+Fluid Lab on a phone, three new arcade games, the photoreal planets, the periodic table and the real
+elements, and Blender-built worlds (after the Baked engine, PR #549, is on `main`). More ideas are
+in `builders/TASKS.md` (Blender-baked remakes, the Workshop, performance, photoreal sourcing).

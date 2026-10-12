@@ -1,0 +1,610 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- HEAD:START (written by manual/build-pages.mjs; do not edit by hand) -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Chapter 6: Moving things · The Tinkerer's Manual</title>
+    <meta
+      name="description"
+      content="Chapter 6: Moving things. The Tinkerer's Manual: how to program Gaussian splats in Splashery."
+    />
+    <link rel="stylesheet" href="manual.css" />
+    <link rel="stylesheet" href="../site/assets/outline.css" />
+
+    <script type="module" src="fold.js"></script>
+    <script type="module" src="nav.js"></script>
+    <!-- HEAD:END -->
+  </head>
+  <body>
+    <main>
+      <!-- NAV:TOP:START (written by manual/build-pages.mjs; do not edit by hand) -->
+      <div class="outline no-print manual-nav">
+        <button
+          type="button"
+          class="outline-toggle"
+          aria-expanded="false"
+          aria-controls="manual-contents"
+        >
+          <span class="outline-label">Contents</span
+          ><span class="outline-now">Chapter 6: Moving things</span
+          ><svg
+            class="outline-chevron"
+            viewBox="0 0 16 16"
+            width="16"
+            height="16"
+            aria-hidden="true"
+          >
+            <path
+              d="m3.5 6 4.5 4.5L12.5 6"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </button>
+        <nav class="outline-panel" id="manual-contents" aria-label="The manual's chapters" hidden>
+          <ol>
+            <li><a href="index.html">Contents</a></li>
+            <li><a href="splat.html">Chapter 1: What a splat is</a></li>
+            <li><a href="toy.html">Chapter 2: How a toy is built</a></li>
+            <li><a href="language.html">Chapter 3: The splat equation language</a></li>
+            <li><a href="gallery.html">Chapter 4: A gallery of programs</a></li>
+            <li><a href="pictures.html">Chapter 5: Pictures, screens, and your own input</a></li>
+            <li>
+              <a href="moving.html" aria-current="page">Chapter 6: Moving things</a>
+              <ol class="outline-sub" aria-label="In this chapter">
+                <li>
+                  <a href="#hands-on-play-pick-up-toss-settle"
+                    >Hands-on play: pick up, toss, settle</a
+                  >
+                </li>
+                <li>
+                  <a href="#pieces-and-joints"
+                    >Pieces and joints: parts that move the way the real thing's do</a
+                  >
+                </li>
+                <li><a href="#ropes-cloth-and-soft-stretch">Ropes, cloth, and soft stretch</a></li>
+                <li>
+                  <a href="#materials-a-thrown-thing-moves-like-the-real-thing"
+                    >Materials: a thrown thing moves like the real thing</a
+                  >
+                </li>
+                <li>
+                  <a href="#rigid-parts-and-the-motion-driver">Rigid parts and the motion driver</a>
+                </li>
+                <li><a href="#try-it-6">Where to try it</a></li>
+              </ol>
+            </li>
+            <li><a href="data.html">Chapter 7: Real data as splats</a></li>
+            <li><a href="photo3d.html">Chapter 8: Photos and video into 3D</a></li>
+            <li><a href="codes.html">Chapter 9: Codes and pages</a></li>
+            <li><a href="make.html">Chapter 10: Make your own</a></li>
+            <li><a href="more.html">What else Splashery does now</a></li>
+            <li><a href="unique.html">What Splashery can do that other splat tools can't</a></li>
+            <li><a href="built.html">How Splashery is built</a></li>
+            <li><a href="share.html">Share links and QR codes</a></li>
+            <li><a href="experiments.html">Open questions: other choices, not tried yet</a></li>
+            <li><a href="later.html">What comes later: Code a toy</a></li>
+            <li><a href="glossary.html">Glossary</a></li>
+            <li><a href="reading.html">Further reading</a></li>
+            <li><a href="references.html">References</a></li>
+            <li><a href="card.html">Quick reference</a></li>
+          </ol>
+        </nav>
+      </div>
+      <nav class="pager no-print" aria-label="Previous and next chapter, top">
+        <a class="pager-prev" rel="prev" href="pictures.html"
+          ><span class="pager-word">← Previous</span
+          ><span class="pager-title">Chapter 5: Pictures, screens, and your own input</span></a
+        ><a class="pager-next" rel="next" href="data.html"
+          ><span class="pager-word">Next →</span
+          ><span class="pager-title">Chapter 7: Real data as splats</span></a
+        >
+      </nav>
+      <p class="no-print fold-all">
+        <button type="button" data-fold-all="open">Open all the folds</button>
+        <button type="button" data-fold-all="close">Close all the folds</button>
+        <span class="muted">Definitions, derivations, notes, and long tables start folded.</span>
+      </p>
+      <!-- NAV:TOP:END -->
+      <!-- ---- Chapter 6 ---- -->
+      <h2 id="moving"><span class="level">Chapter 6</span>Moving things</h2>
+      <!-- Sources: src/physics/hands-on.js:1-110 (the constants and the two modes), :196-262 (the
+           world and the hull), src/physics/world.js:1-30 and :396-410 (the engine, substeps and
+           sleep), src/physics/joints.js:1-60, src/physics/soft.js:1-30, src/physics/materials.js:1-45
+           and :54-85, src/motion.js:53-90, :330-375, :395-405 and packParts (:451-480),
+           src/effects.js:783-790 and :1068-1110 (the part's move in the shader), docs/PACKS.md
+           "5g" and "5h". Counts measured by loading the modules: 27 materials, 61 soft toys, 25
+           bounce entries. -->
+      <p>
+        Chapters 1 to 5 moved splats with programs: a recipe's <code>drive</code> sets a part's
+        angle every frame, and the toy plays out. This chapter is about motion that comes from your
+        finger and from physics: pick a toy up, throw it, let it land and settle, open its lid, pull
+        a sword out of a stone. The same rule from the effect-quality notes holds throughout:
+        <b>parts move as solid pieces</b>. Nothing is bent. A lid swings on a hinge, a wedge slides
+        out of its orange, and the splats that belong to a part travel with it. This is not behind
+        the labs switch: the ✋ switch is in the Playground for everyone.
+      </p>
+
+      <h3 id="hands-on-play-pick-up-toss-settle">Hands-on play: pick up, toss, settle</h3>
+      <p>
+        <b>What it is.</b> With the ✋ switch on, a drag picks up whatever is under your finger. A
+        quick let-go tosses it; it falls, bounces, and comes to rest on the floor under the toy,
+        inside an invisible play area. The ↺ button sends everything home. A press has to move 7
+        screen pixels before it counts as a pick-up, and a drag shorter than 24 pixels only
+        <i>nudges</i> the toy, so a tap or a light touch never throws anything.
+      </p>
+      <p>
+        <b>How Splashery does it.</b> Splashery has a small physics engine of its own, with no
+        library (<code>src/physics/world.js</code>). It is
+        <i>extended position-based dynamics</i> [<a href="references.html#ref-11">11</a>,
+        <a href="references.html#ref-12">12</a>]: instead of computing forces and integrating them,
+        each step moves the bodies to where they would be if nothing overlapped and every joint
+        held, then works out velocities from how far they moved. The world is built on the first
+        pick-up, so opening a toy costs nothing. It steps 1/60 of a second at a time whatever the
+        frame rate, in 8 smaller substeps for a whole toy and 10 for a toy with pieces, and it falls
+        asleep once everything has been slower than a small speed for half a second.
+      </p>
+      <p>
+        Most toys play as one rigid body: their pose moves the toy's whole entity, so the splats are
+        sorted and taps land where the toy lies now. A rigid body needs a shape to collide with, and
+        a toy has only splats, so Splashery finds the outside from them. It samples up to 6,000 of
+        the toy's splat centers and, in each of 64 directions, keeps the splat that lies furthest
+        out (ignoring the outermost half of a percent, which are usually stray specks). Those 64
+        points are the body's collision points. A ball gets a sphere instead, so it rolls. The floor
+        is under the toy; four invisible walls sit just past its widest reach; a ceiling sits above
+        the highest point. Gravity is 26 toy radii per second squared, so a toy falls the same way
+        whatever its size on screen. A throw takes its speed from the last tenth of a second of
+        finger motion, and is capped at 4 toy radii per second.
+      </p>
+      <p>
+        Soft toys squish when they land. How much is a number per toy (61 toys have one, such as the
+        jelly at 1, a bouncy ball at 0.55, a strawberry at 0.15), and it reaches the screen as two
+        uniform values that squash and bulge the toy as a whole. This is a squash of the
+        <i>pose</i>, not a bend of the scan: the splats stay where they are inside the toy's own
+        frame.
+      </p>
+      <figure>
+        <div class="shots two">
+          <div>
+            <img src="img/r7b-yo-yo.jpg" alt="A red yo-yo with a white target pattern" />
+            <p class="shot-label">A rigid body: the yo-yo</p>
+          </div>
+          <div>
+            <img src="img/r7b-octopus.jpg" alt="A red octopus with eight curled arms" />
+            <p class="shot-label">Arms that ride the body: the octopus</p>
+          </div>
+        </div>
+        <figcaption>Both toys can be picked up and thrown in the Playground.</figcaption>
+      </figure>
+      <details class="fold tablefold">
+        <summary>Show the table: the numbers of hands-on play</summary>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Number</th>
+                <th>Where</th>
+                <th>What it does</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>7 px</td>
+                <td><code>PRESS_MOVE</code></td>
+                <td>How far a press moves before it is a pick-up.</td>
+              </tr>
+              <tr>
+                <td>24 px</td>
+                <td><code>NUDGE</code></td>
+                <td>A drag shorter than this pushes the toy and never picks it up.</td>
+              </tr>
+              <tr>
+                <td>26 radii/s²</td>
+                <td><code>GRAVITY</code></td>
+                <td>Gravity, in toy radii, so every toy falls alike.</td>
+              </tr>
+              <tr>
+                <td>0.1 s</td>
+                <td><code>THROW_WINDOW</code></td>
+                <td>The span of finger motion a let-go takes its speed from.</td>
+              </tr>
+              <tr>
+                <td>4 radii/s</td>
+                <td><code>THROW_MAX</code></td>
+                <td>
+                  The fastest throw. Slower than 0.4 (<code>THROW_MIN</code>) is a still hold.
+                </td>
+              </tr>
+              <tr>
+                <td>0.6 per s</td>
+                <td><code>AIR_DRAG</code></td>
+                <td>Air drag on a thrown toy that has no material of its own.</td>
+              </tr>
+              <tr>
+                <td>1/60 s</td>
+                <td><code>STEP</code></td>
+                <td>The world's step, whatever the frame rate.</td>
+              </tr>
+              <tr>
+                <td>0.45 s</td>
+                <td><code>HOME_SECS</code></td>
+                <td>How long ↺ takes to glide everything home.</td>
+              </tr>
+              <tr>
+                <td>64 directions</td>
+                <td><code>hull()</code></td>
+                <td>
+                  A toy's collision points: the farthest of up to 6,000 sampled splats per
+                  direction.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
+      <details class="fold why" id="why-hands-on-units">
+        <summary>Why toy radii, and why a speed limit?</summary>
+        <p class="kind">
+          <span class="chip choice">Our choice</span> Nothing in the format forces these.
+        </p>
+        <p>
+          Splashery's toys are an inch tall or a planet wide, and the page has no real size. So the
+          world measures everything in the toy's own radius: gravity, the throw's speed, the play
+          area. A matchbox and a mountain then fall and land the same way, and a throw cannot send a
+          toy off the screen. The cost is that the motion is not physically scaled: a real baseball
+          is thrown a hundred times faster than 4 of its radii a second. Where that matters (the
+          curve of a spin, the glide of a disc), the numbers are set to show the real effect in the
+          real order, as the section on materials below says.
+        </p>
+        <p class="where">
+          Where it lives: the constants at the top of <code>src/physics/hands-on.js</code>.
+        </p>
+      </details>
+
+      <h3 id="pieces-and-joints">Pieces and joints: parts that move the way the real thing's do</h3>
+      <p>
+        <b>What it is.</b> A rigid body is one lump. A treasure chest has a lid, and a lid is not a
+        lump: it swings on its hinge and stops when it is open. A recipe's <code>hands</code> block
+        lets a toy say that. <code>hands.pieces</code> names pieces of the toy that are bodies of
+        their own, which stay put until you pick one up or knock it. <code>hands.joints</code> says
+        how a part may move.
+      </p>
+      <p>
+        <b>How Splashery does it.</b> There are five kinds of joint and one more setting
+        (<code>src/physics/joints.js</code>). Hinges, sliders, and dials are <i>driven parts</i>:
+        one number describes each, an angle or a distance. The finger, gravity, a spring, and the
+        stops move that number, and the part is then posed exactly from it, so a part never wobbles
+        off its axis or jitters. Sockets and broken-off pieces are ordinary bodies of the physics
+        world, solid like the rest.
+      </p>
+      <ul>
+        <li>
+          <b>Hinge</b>: a part swings about an axis between two angles, with an optional spring
+          toward a rest angle, and falls by its own weight. It bounces off its stop a little (0.2 of
+          the speed, by default). The
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImNoZXN0In0sImNhbWVyYSI6eyJ5YXciOjAuNDUsInBpdGNoIjowLjQyLCJyb2xsIjowLCJkaXN0YW5jZSI6NS40fSwiYXV0b3BsYXkiOnsidHVybnRhYmxlIjpmYWxzZSwiZWZmZWN0Ijoibm9uZSJ9fQ"
+            target="_blank"
+            rel="noopener"
+            >treasure chest's</a
+          >
+          lid is one.
+        </li>
+        <li>
+          <b>Slider</b>: a part moves along a line between two stops. It can be stuck fast until the
+          finger has pulled a set distance, and then it wiggles loose, as the
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InN3b3JkLWluLXN0b25lIn0sImNhbWVyYSI6eyJ5YXciOjAuNTUsInBpdGNoIjowLjI4LCJyb2xsIjowLCJkaXN0YW5jZSI6NC41fX0"
+            target="_blank"
+            rel="noopener"
+            >sword in the stone</a
+          >
+          does.
+        </li>
+        <li>
+          <b>Dial</b>: you turn a part about its axis, round and round or between two angles, with
+          optional clicks (detents) and coasting after a flick. A dial can hand each turn to the
+          recipe, which is how the
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im11c2ljLWJveCJ9LCJjYW1lcmEiOnsieWF3IjowLjQsInBpdGNoIjowLjM1LCJyb2xsIjowLCJkaXN0YW5jZSI6NC42fSwiYXV0b3BsYXkiOnsidHVybnRhYmxlIjpmYWxzZSwiZWZmZWN0Ijoibm9uZSJ9fQ"
+            target="_blank"
+            rel="noopener"
+            >music box</a
+          >'s crank plays its notes.
+        </li>
+        <li>
+          <b>Socket</b>: a loose piece clicks back into its place when you bring it near (within 0.3
+          toy radii, by default), gliding the last bit in 0.22 seconds. The wedges of the
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im9yYW5nZSJ9LCJjYW1lcmEiOnsieWF3IjowLjU1LCJwaXRjaCI6MC4zNiwicm9sbCI6MCwiZGlzdGFuY2UiOjQuMn19"
+            target="_blank"
+            rel="noopener"
+            >orange</a
+          >
+          are sockets.
+        </li>
+        <li>
+          <b>Break</b>: a piece holds fast until it is pulled hard, then snaps off. ↺ mends it. The
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImNhbmR5LWNhbmUifSwiY2FtZXJhIjp7InlhdyI6MC4zLCJwaXRjaCI6MC4yLCJyb2xsIjowLCJkaXN0YW5jZSI6NH19"
+            target="_blank"
+            rel="noopener"
+            >candy cane</a
+          >
+          breaks this way.
+        </li>
+        <li>
+          <b>Upright</b>: not a joint but a setting, <code>hands.upright</code>: a whole toy rights
+          itself after it has been tipped.
+        </li>
+      </ul>
+      <figure>
+        <div class="shots two">
+          <div>
+            <img src="img/toy-chest.jpg" alt="The treasure chest with its lid open" />
+            <p class="shot-label">A hinge: the chest's lid</p>
+          </div>
+          <div>
+            <img src="img/r7b-sword-in-stone.jpg" alt="A sword standing in a mossy gray stone" />
+            <p class="shot-label">A slider: the sword</p>
+          </div>
+        </div>
+        <div class="shots two">
+          <div>
+            <img
+              src="img/r7b-orange.jpg"
+              alt="A whole orange beside a cut orange half showing its wedges"
+            />
+            <p class="shot-label">Sockets: the wedges</p>
+          </div>
+          <div>
+            <img
+              src="img/r7b-candy-cane.jpg"
+              alt="Two red and white candy canes tied with a green bow"
+            />
+            <p class="shot-label">A break: the cane's top</p>
+          </div>
+        </div>
+        <figcaption>
+          Each part is a solid group of splats that moves whole. The music box's dial is on the
+          shelf too.
+        </figcaption>
+      </figure>
+      <p>
+        <b>Why this way.</b> Splashery's rule for effects is that motion must be real motion and not
+        a warped picture: if a scan cannot move a part cleanly, the part is cut out with hard edges,
+        swapped for a kit-built one, or the effect is dropped. A joint that moves one number, and a
+        part that is moved whole by that number, is exactly that rule in code. The same machinery
+        serves a scan: a scan's rig (<code>src/rigs.js</code>) names the parts of a captured toy,
+        and <code>src/physics/joints.js</code> turns them into pieces.
+      </p>
+      <div class="demo-placeholder">
+        <p class="demo-tag">A demo goes here later</p>
+        <p>
+          A box that lets you grab a hinge, a slider, and a dial on a simple toy, with the one
+          number each of them is moved by shown beside it.
+        </p>
+      </div>
+
+      <h3 id="ropes-cloth-and-soft-stretch">Ropes, cloth, and soft stretch</h3>
+      <p>
+        <b>What it is.</b> Some things bend: a string, an octopus's arms, a hood, a kite's tail.
+        Splashery's rule against bending scans does not forbid them, because these toys are built
+        from kit shapes and their bending is built in.
+      </p>
+      <p>
+        <b>How Splashery does it.</b> Ropes and cloth are lists of points (<i>nodes</i>) held by
+        distance links, solved with the same position-based method as the rigid bodies, in a solver
+        of its own (<code>src/physics/soft.js</code>). A rope can be slack (it folds and never
+        pushes), has a little stiffness against bending, and can be pinned, can ride a piece (an
+        octopus's arm rides its body), or can follow a finger. A cloth is a grid of nodes, pinned at
+        its edge, that hangs, drapes, and flutters in a wind. A link can snap when it is stretched
+        too far, as a cheese string does. Soft stretch, the third piece, is how the gummy bear's
+        splats follow your finger and then wobble back.
+      </p>
+      <p>
+        What moves on screen follows the rule too. A thin, bendy thing (a string, a tentacle) is
+        built from splats that each follow the two nodes they lie between, so a rope bends smoothly
+        and every splat still keeps its shape. A sheet has each splat follow the four corners of its
+        cell. A solid thing on a rope (a bead, a chime, the yo-yo itself) is a rigid piece that
+        rides a node and turns with the link, so it stays solid at every angle.
+      </p>
+      <p>
+        <b>Try it.</b> Pull the string of the
+        <a
+          href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InlvLXlvIn0sImNhbWVyYSI6eyJ5YXciOjAuMzUsInBpdGNoIjowLjEyLCJyb2xsIjowLCJkaXN0YW5jZSI6My45fX0"
+          target="_blank"
+          rel="noopener"
+          >yo-yo</a
+        >
+        and let go, or hold the
+        <a
+          href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im9jdG9wdXMifSwiY2FtZXJhIjp7InlhdyI6MC41NSwicGl0Y2giOjAuNCwicm9sbCI6MCwiZGlzdGFuY2UiOjV9fQ"
+          target="_blank"
+          rel="noopener"
+          >octopus</a
+        >
+        by one arm.
+      </p>
+
+      <h3 id="materials-a-thrown-thing-moves-like-the-real-thing">
+        Materials: a thrown thing moves like the real thing
+      </h3>
+      <p>
+        <b>What it is.</b> A basketball, a hockey puck, a paper plane, and a marble do not move
+        alike. A recipe's <code>hands.material</code> names a preset or gives its own numbers, so a
+        thrown toy bounces, rolls, spins, and flies the way its real counterpart does.
+      </p>
+      <p>
+        <b>How Splashery does it.</b> There are 27 presets (<code>src/physics/materials.js</code>),
+        from the basketball and the soccer ball to the shuttlecock, the flying disc, and the paper
+        plane. A preset holds the real regulation size and mass of the sport, the bounce its rule
+        book asks for (a basketball dropped from 1.8 m should come back to 1.2 to 1.4 m, which is a
+        bounce of 0.82 to 0.88), and the textbook drag of a sphere (0.47). The drag is the real
+        thing, expressed without units: how many toy radii a toy falls before it reaches its top
+        speed, <var>F</var><sub>r</sub> = 2<var>m</var> / (<var>ρ</var> <var>c</var><sub>d</sub> π
+        <var>r</var><sup>3</sup>) with air at 1.2 kg per cubic meter. Because that number has no
+        units, it holds whatever the toy's size on screen. A throw spins the toy by where you held
+        it (a low grab gives backspin, a side grab sidespin), and the spin curves the flight (the
+        Magnus effect). Lift, for a disc, a cap, or a paper plane, and the curve of a spin are set
+        to show in a short flight rather than scaled from real life, in the real direction and the
+        real order: a disc glides more than a cap, and a baseball curves more than a soccer ball.
+      </p>
+      <p>
+        <b>Try it.</b> Throw the
+        <a
+          href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImJhc2tldGJhbGwifX0"
+          target="_blank"
+          rel="noopener"
+          >basketball</a
+        >, the
+        <a
+          href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImJhc2ViYWxsIn19"
+          target="_blank"
+          rel="noopener"
+          >baseball</a
+        >, and the
+        <a
+          href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBhcGVyLXBsYW5lIn0sImNhbWVyYSI6eyJ5YXciOjAuNywicGl0Y2giOjAuNDIsInJvbGwiOjAsImRpc3RhbmNlIjozLjZ9fQ"
+          target="_blank"
+          rel="noopener"
+          >paper plane</a
+        >
+        and watch how each leaves your hand.
+      </p>
+
+      <h3 id="rigid-parts-and-the-motion-driver">Rigid parts and the motion driver</h3>
+      <p>
+        <b>What it is.</b> Everything above, and everything a recipe's <code>drive</code> does, ends
+        in the same place: a few numbers per part for the graphics chip.
+      </p>
+      <p>
+        <b>How Splashery does it.</b> The <code>MotionDriver</code> in
+        <code>src/motion.js</code> runs once per frame, on the CPU. It eases the controls, runs the
+        toy's own behaviors clock, calls the recipe's <code>drive</code>, and gathers what comes out
+        into uniforms. For parts, <code>packParts</code> writes three four-number values for each of
+        up to 16 parts (a rotation, a pivot with a scale, and an offset with a visibility), 48 in
+        all. Every splat carries the number of its part; the shader looks up the part and moves the
+        splat: <i>p</i> = pivot + <i>R</i> (<i>p</i> − pivot) × (1 + scale) + offset. This is the
+        same hinge as Chapter 2's, and a part that a joint moves goes through the very same lines.
+        Hands-on does not have a second way to move a splat: for a toy with pieces, the poses its
+        world computes are merged into the recipe's <code>drive.parts</code>, so a piece moved by a
+        finger and a part turned by a program arrive at the shader identically.
+      </p>
+      <p>
+        <b>Why this way.</b> The GPU moves every splat, and the CPU only decides a few dozen
+        numbers: a physics world with a few dozen bodies costs almost nothing, and a toy with
+        100,000 splats moves as cheaply as one with a hundred. It also keeps the splats solid: a
+        part's splats are all turned by the same rotation, so a part cannot bend. The limit is that
+        a splat can belong to only one part, which is why a toy has at most 15 parts beside the body
+        (Chapter 2's <a href="toy.html#why-parts">fold on the number of parts</a> says why).
+      </p>
+
+      <h3 id="try-it-6">Where to try it</h3>
+      <ul>
+        <li>
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImNoZXN0In0sImNhbWVyYSI6eyJ5YXciOjAuNDUsInBpdGNoIjowLjQyLCJyb2xsIjowLCJkaXN0YW5jZSI6NS40fSwiYXV0b3BsYXkiOnsidHVybnRhYmxlIjpmYWxzZSwiZWZmZWN0Ijoibm9uZSJ9fQ"
+            target="_blank"
+            rel="noopener"
+            >Treasure chest</a
+          >,
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InN3b3JkLWluLXN0b25lIn0sImNhbWVyYSI6eyJ5YXciOjAuNTUsInBpdGNoIjowLjI4LCJyb2xsIjowLCJkaXN0YW5jZSI6NC41fX0"
+            target="_blank"
+            rel="noopener"
+            >Sword in the stone</a
+          >,
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im11c2ljLWJveCJ9LCJjYW1lcmEiOnsieWF3IjowLjQsInBpdGNoIjowLjM1LCJyb2xsIjowLCJkaXN0YW5jZSI6NC42fSwiYXV0b3BsYXkiOnsidHVybnRhYmxlIjpmYWxzZSwiZWZmZWN0Ijoibm9uZSJ9fQ"
+            target="_blank"
+            rel="noopener"
+            >Music box</a
+          >,
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im9yYW5nZSJ9LCJjYW1lcmEiOnsieWF3IjowLjU1LCJwaXRjaCI6MC4zNiwicm9sbCI6MCwiZGlzdGFuY2UiOjQuMn19"
+            target="_blank"
+            rel="noopener"
+            >Orange</a
+          >, and
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImNhbmR5LWNhbmUifSwiY2FtZXJhIjp7InlhdyI6MC4zLCJwaXRjaCI6MC4yLCJyb2xsIjowLCJkaXN0YW5jZSI6NH19"
+            target="_blank"
+            rel="noopener"
+            >Candy cane</a
+          >: a hinge, a slider, a dial, sockets, and a break. Turn on the ✋ switch first.
+        </li>
+        <li>
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InlvLXlvIn0sImNhbWVyYSI6eyJ5YXciOjAuMzUsInBpdGNoIjowLjEyLCJyb2xsIjowLCJkaXN0YW5jZSI6My45fX0"
+            target="_blank"
+            rel="noopener"
+            >Yo-yo</a
+          >,
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im9jdG9wdXMifSwiY2FtZXJhIjp7InlhdyI6MC41NSwicGl0Y2giOjAuNCwicm9sbCI6MCwiZGlzdGFuY2UiOjV9fQ"
+            target="_blank"
+            rel="noopener"
+            >Octopus</a
+          >, and
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Imd1bW15LWJlYXIifSwiY2FtZXJhIjp7InlhdyI6MC4zNSwicGl0Y2giOjAuMiwicm9sbCI6MCwiZGlzdGFuY2UiOjR9fQ"
+            target="_blank"
+            rel="noopener"
+            >Gummy bear</a
+          >: ropes, arms that ride a body, and soft stretch.
+        </li>
+        <li>
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImJhc2tldGJhbGwifX0"
+            target="_blank"
+            rel="noopener"
+            >Basketball</a
+          >,
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImJhc2ViYWxsIn19"
+            target="_blank"
+            rel="noopener"
+            >Baseball</a
+          >, and
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBhcGVyLXBsYW5lIn0sImNhbWVyYSI6eyJ5YXciOjAuNywicGl0Y2giOjAuNDIsInJvbGwiOjAsImRpc3RhbmNlIjozLjZ9fQ"
+            target="_blank"
+            rel="noopener"
+            >Paper plane</a
+          >: materials.
+        </li>
+      </ul>
+      <p class="muted">
+        None of these is behind the labs switch. Chapter 10 says how a recipe asks for hands-on
+        play.
+      </p>
+
+      <!-- NAV:BOTTOM:START (written by manual/build-pages.mjs; do not edit by hand) -->
+      <nav class="pager no-print" aria-label="Previous and next chapter, bottom">
+        <a class="pager-prev" rel="prev" href="pictures.html"
+          ><span class="pager-word">← Previous</span
+          ><span class="pager-title">Chapter 5: Pictures, screens, and your own input</span></a
+        ><a class="pager-next" rel="next" href="data.html"
+          ><span class="pager-word">Next →</span
+          ><span class="pager-title">Chapter 7: Real data as splats</span></a
+        >
+      </nav>
+      <footer>
+        <p>
+          The Tinkerer's Manual, first published September 28, 2026 and updated October 11, 2026.
+          Part of
+          <a href="https://ryanjosephkamp.github.io/splashery/site/" target="_blank" rel="noopener"
+            >Splashery</a
+          >, a toy box of 3D Gaussian splats that runs in your browser. Every picture here was made
+          with Splashery itself.
+        </p>
+      </footer>
+      <!-- NAV:BOTTOM:END -->
+    </main>
+  </body>
+</html>

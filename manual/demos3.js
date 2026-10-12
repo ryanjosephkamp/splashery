@@ -34,6 +34,7 @@ function drawQR(canvas, code) {
   const ppm = Math.max(1, Math.floor(260 / total));
   canvas.width = canvas.height = total * ppm;
   canvas.style.width = `${canvas.width}px`;
+  canvas.style.imageRendering = "pixelated"; // square modules stay sharp at any pixel ratio
   const g = canvas.getContext("2d");
   g.fillStyle = "#ffffff";
   g.fillRect(0, 0, canvas.width, canvas.height);

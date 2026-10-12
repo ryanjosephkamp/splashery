@@ -1,0 +1,612 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- HEAD:START (written by manual/build-pages.mjs; do not edit by hand) -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Chapter 7: Real data as splats · The Tinkerer's Manual</title>
+    <meta
+      name="description"
+      content="Chapter 7: Real data as splats. The Tinkerer's Manual: how to program Gaussian splats in Splashery."
+    />
+    <link rel="stylesheet" href="manual.css" />
+    <link rel="stylesheet" href="../site/assets/outline.css" />
+
+    <script type="module" src="fold.js"></script>
+    <script type="module" src="nav.js"></script>
+    <!-- HEAD:END -->
+  </head>
+  <body>
+    <main>
+      <!-- NAV:TOP:START (written by manual/build-pages.mjs; do not edit by hand) -->
+      <div class="outline no-print manual-nav">
+        <button
+          type="button"
+          class="outline-toggle"
+          aria-expanded="false"
+          aria-controls="manual-contents"
+        >
+          <span class="outline-label">Contents</span
+          ><span class="outline-now">Chapter 7: Real data as splats</span
+          ><svg
+            class="outline-chevron"
+            viewBox="0 0 16 16"
+            width="16"
+            height="16"
+            aria-hidden="true"
+          >
+            <path
+              d="m3.5 6 4.5 4.5L12.5 6"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </button>
+        <nav class="outline-panel" id="manual-contents" aria-label="The manual's chapters" hidden>
+          <ol>
+            <li><a href="index.html">Contents</a></li>
+            <li><a href="splat.html">Chapter 1: What a splat is</a></li>
+            <li><a href="toy.html">Chapter 2: How a toy is built</a></li>
+            <li><a href="language.html">Chapter 3: The splat equation language</a></li>
+            <li><a href="gallery.html">Chapter 4: A gallery of programs</a></li>
+            <li><a href="pictures.html">Chapter 5: Pictures, screens, and your own input</a></li>
+            <li><a href="moving.html">Chapter 6: Moving things</a></li>
+            <li>
+              <a href="data.html" aria-current="page">Chapter 7: Real data as splats</a>
+              <ol class="outline-sub" aria-label="In this chapter">
+                <li><a href="#molecules">Molecules</a></li>
+                <li><a href="#earthquakes">Earthquakes</a></li>
+                <li><a href="#the-night-sky">The night sky</a></li>
+                <li><a href="#volumes-and-point-clouds">Volumes and point clouds</a></li>
+                <li>
+                  <a href="#weather-maps-and-the-other-data-toys"
+                    >Weather, maps, and the other data toys</a
+                  >
+                </li>
+                <li><a href="#the-rules-for-live-data">The rules for live data</a></li>
+                <li><a href="#try-it-7">Where to try it</a></li>
+              </ol>
+            </li>
+            <li><a href="photo3d.html">Chapter 8: Photos and video into 3D</a></li>
+            <li><a href="codes.html">Chapter 9: Codes and pages</a></li>
+            <li><a href="make.html">Chapter 10: Make your own</a></li>
+            <li><a href="more.html">What else Splashery does now</a></li>
+            <li><a href="unique.html">What Splashery can do that other splat tools can't</a></li>
+            <li><a href="built.html">How Splashery is built</a></li>
+            <li><a href="share.html">Share links and QR codes</a></li>
+            <li><a href="experiments.html">Open questions: other choices, not tried yet</a></li>
+            <li><a href="later.html">What comes later: Code a toy</a></li>
+            <li><a href="glossary.html">Glossary</a></li>
+            <li><a href="reading.html">Further reading</a></li>
+            <li><a href="references.html">References</a></li>
+            <li><a href="card.html">Quick reference</a></li>
+          </ol>
+        </nav>
+      </div>
+      <nav class="pager no-print" aria-label="Previous and next chapter, top">
+        <a class="pager-prev" rel="prev" href="moving.html"
+          ><span class="pager-word">← Previous</span
+          ><span class="pager-title">Chapter 6: Moving things</span></a
+        ><a class="pager-next" rel="next" href="photo3d.html"
+          ><span class="pager-word">Next →</span
+          ><span class="pager-title">Chapter 8: Photos and video into 3D</span></a
+        >
+      </nav>
+
+      <!-- NAV:TOP:END -->
+      <!-- ---- Chapter 7 ---- -->
+      <h2 id="data"><span class="level">Chapter 7</span>Real data as splats</h2>
+      <!-- Sources: src/packs/molecule-viewer.js:1-60, :216-221, src/molview/parse.js:1-50 (formats,
+           MAX_ATOMS 250,000), src/molview/load.js:1-16 (RCSB fetch, 60 MB), src/molview/draw.js:1-8;
+           src/packs/geo.js:1-40, :1520-1640 (feeds, snapshot, the dot's size), :1725-1760;
+           src/packs/night-sky.js:1-25, src/sky/astro.js:1-25, :136-137, assets/toys/night-sky/sky.json
+           (5,071 stars, magnitude up to 6.47, built 2026-10-05); src/volume/read.js:1-30 (formats,
+           MAX_VOXELS 8e6), src/volume/view.js:1-12 and :85-100, src/packs/volume-viewer.js:1-20;
+           src/packs/viewers.js:1-30 and :547-575 (point clouds); src/packs/data-climate.js:1-16;
+           CLAUDE.md, "Live data". -->
+      <p>
+        A splat is a number-carrying blob: a place, three sizes, a turn, a color, an opacity. Data
+        is also numbers with places: the atoms of a protein, the quakes of last week, the stars over
+        your head, the density of a scanned walnut. This chapter is about turning such data into
+        splats, and doing it honestly: every toy here says where its data came from and how old it
+        is. Nearly all of these toys are behind the labs switch (add <code>?labs=1</code> to the
+        site's address); the paragraphs say which.
+      </p>
+
+      <h3 id="molecules">Molecules</h3>
+      <p>
+        <b>What it is.</b> A molecule is a list of atoms with places, in ångströms. The
+        <b>Molecule viewer</b> opens a structure file and draws it as splats. It reads PDB, mmCIF,
+        SDF/MOL, and XYZ files (<code>src/molview/parse.js</code>), takes the first model, and stops
+        with a message above 250,000 atoms. You can open a file from your device, or type a
+        four-character Protein Data Bank code and have the viewer fetch that entry. It draws balls
+        and sticks, space-filling atoms, a cartoon of the chains as ribbons, or the molecular
+        surface, and colors by element, chain, residue, B-factor (how much an atom blurs in the
+        crystal), position along a chain, or secondary structure. Tap two atoms for the distance
+        between them, a third for the angle. It is behind the labs switch.
+      </p>
+      <p>
+        <b>How Splashery does it.</b> Everything is an explicit splat
+        (<code>src/molview/draw.js</code>): an atom is a sphere of splats (in space-filling style,
+        one of its van der Waals radius), a bond is a stick of splats (a double bond is two thinner
+        sticks, a triple bond three), the cartoon is a ribbon of splats along a path through the
+        backbone, and the surface is a blobby surface made from a sum of bumps, one per atom. The
+        device's splat budget decides how many splats there are. A small molecule gets plenty per
+        atom. A big structure gets fewer, and below about six splats an atom becomes one round
+        Gaussian, so even a big structure opens on a phone: that is the level of detail (Chapter 2).
+        The files are read in a worker, off the page's main thread, and the structure is turned so
+        its widest spread lies across the screen. A turn keeps every distance and angle.
+      </p>
+      <p>
+        <b>The PDB fetch.</b> Typing a code asks <code>files.rcsb.org</code> for that one file
+        (public, no key, no account), only when you press the button. Nothing is sent but the code
+        in the address, nothing is stored, and the file is read on your device. The viewer refuses a
+        file over 60 MB. Five samples ship with the site, so the toy opens offline: crambin, the
+        green fluorescent protein, lysozyme, a stretch of B-DNA, and caffeine; each is a snapshot of
+        the entry, dated October 5, 2026, and the data are CC0 from the Protein Data Bank [<a
+          href="references.html#ref-14"
+          >14</a
+        >].
+      </p>
+      <figure>
+        <div class="shots two">
+          <div>
+            <img
+              src="img/r7b-molecule-viewer.jpg"
+              alt="A protein drawn as red ribbon helices, a yellow sheet, and gray loops"
+            />
+            <p class="shot-label">The Molecule viewer's cartoon</p>
+          </div>
+          <div>
+            <img
+              src="img/r7b-protein.jpg"
+              alt="A small protein drawn as a rainbow ribbon from blue to red"
+            />
+            <p class="shot-label">The Protein toy, on the Atoms shelf</p>
+          </div>
+        </div>
+        <figcaption>
+          Both are drawn with splats. The Protein toy is one of the always-on Atoms toys, and the
+          viewer is the labs version that opens your own file.
+        </figcaption>
+      </figure>
+      <p>
+        <b>Try it.</b>
+        <a
+          href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im1vbGVjdWxlLXZpZXdlciJ9LCJjYW1lcmEiOnsieWF3IjowLjI1LCJwaXRjaCI6MC4xOCwicm9sbCI6MCwiZGlzdGFuY2UiOjMuNH19"
+          target="_blank"
+          rel="noopener"
+          >Molecule viewer</a
+        >
+        (labs),
+        <a
+          href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InByb3RlaW4ifX0"
+          target="_blank"
+          rel="noopener"
+          >Protein</a
+        >,
+        <a
+          href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im1vbGVjdWxlIn19"
+          target="_blank"
+          rel="noopener"
+          >Molecule</a
+        >.
+      </p>
+
+      <h3 id="earthquakes">Earthquakes</h3>
+      <p>
+        <b>What it is.</b> A globe with a dot for every earthquake in a feed from the U.S.
+        Geological Survey, drawn on a relief of the Earth. A bigger quake is a bigger dot. The color
+        says how deep the quake was: shallow ones orange-red, middle ones yellow and green, and the
+        deepest blue, as the USGS's own maps do. The globe is the Earth in true color with its
+        relief. A tap plays the quakes in time order, each flashing as the timeline passes it.
+      </p>
+      <p>
+        <b>How Splashery does it.</b> The toy offers three views: the past week at magnitude 2.5 and
+        up, the past month at 4.5 and up, and a year at 5 and up. The first two read the USGS's
+        GeoJSON summary feeds [<a href="references.html#ref-15">15</a>] when the toy opens or when
+        you tap its plaque to refresh. Each quake is a row of five numbers (time, longitude,
+        latitude, depth in kilometers, magnitude). A quake with a missing magnitude or depth is left
+        out rather than shown as zero. A dot's radius is 0.009 + 0.006 × (<i>M</i> − 2)<sup
+          >1.4</sup
+        >
+        times the globe's radius (for a magnitude of 2 or more), drawn as a flat disc of splats with
+        a crisp edge, and a bigger dot gets more splats, in proportion to its area. The plaque
+        beside the globe says what is showing: the feed, the number of quakes, and when it was made.
+        If the feed cannot be reached within 9 seconds, or if the browser is being driven by a test
+        tool, the toy shows the snapshot that ships with the site (197 quakes in the week view as of
+        October 5, 2026, 14:39 UTC), and the plaque says "snapshot". The year view is always a
+        snapshot, October 2025 to September 2026.
+      </p>
+      <p>
+        <b>Why this way.</b> Splashery has no server, so a live feed has to be read by your browser
+        from a public, keyless address, and it has to degrade: an offline reader still gets a globe.
+        The rules for every such toy are in the box at the end of this chapter.
+      </p>
+      <figure>
+        <img
+          class="ui"
+          src="img/r7b-earthquakes.jpg"
+          width="360"
+          height="360"
+          alt="A dark globe with orange, yellow, and blue dots near the western Pacific, and a plaque that reads USGS feed snapshot, past week"
+        />
+        <figcaption>
+          The earthquakes globe on its snapshot, with the plaque that names the source and the time.
+        </figcaption>
+      </figure>
+      <p>
+        <b>Try it.</b>
+        <a
+          href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImVhcnRocXVha2VzIn0sImNhbWVyYSI6eyJ5YXciOjAsInBpdGNoIjowLjA1LCJyb2xsIjowLCJkaXN0YW5jZSI6My44fX0"
+          target="_blank"
+          rel="noopener"
+          >Earthquakes</a
+        >
+        (labs).
+      </p>
+
+      <h3 id="the-night-sky">The night sky</h3>
+      <p>
+        <b>What it is.</b> The stars and planets above a place, for any date and time and any place.
+        You stand at the center of the dome and look out; the Sun, the Moon, and the seven planets
+        are placed from the date (the planets' tables are made for 1800 to 2050, and the toy says so
+        when you go outside them), the Moon is lit on the side that faces the Sun (so its phase is
+        the real geometry), and daylight washes the stars out faintest first.
+      </p>
+      <p>
+        <b>How Splashery does it.</b> The star catalog is a file of 5,071 stars: every star brighter
+        than magnitude 6 in the HYG database [<a href="references.html#ref-16">16</a>], plus the
+        fainter ones a constellation line needs. One splat each, sized by brightness and colored by
+        temperature. The stars sit at their J2000 positions as one part, and the whole sky turns as
+        one rigid piece: first precession to the date, then the sky's turn for the place's sidereal
+        time (Meeus [<a href="references.html#ref-17">17</a>]). The planets use the approximate
+        orbital elements that NASA's Jet Propulsion Laboratory publishes for 1800 to 2050 [<a
+          href="references.html#ref-18"
+          >18</a
+        >], solved with Kepler's equation, and the Moon uses the Astronomical Almanac's
+        low-precision series, good to about 0.3 degrees in longitude. This is the same hinge as
+        every part in Chapter 2. A star field turning about a point is a part turning about its
+        pivot.
+      </p>
+      <p>
+        <b>Your place.</b> You pick a city, or tap <b>Use my location</b>, which asks your browser
+        for it. That is the only time the toy asks. The place lives in the page's memory: it is not
+        saved, not put in a link, and not sent anywhere. Both the stars and the constellation lines
+        come from sources under CC BY-SA 4.0, and the toy's credit says so beside it.
+      </p>
+      <figure>
+        <img
+          class="ui"
+          src="img/r7b-night-sky.jpg"
+          width="360"
+          height="360"
+          alt="A dark sky with faint stars, constellation lines, and a glow on the horizon"
+        />
+        <figcaption>The night sky toy at dusk, with constellation lines.</figcaption>
+      </figure>
+      <p>
+        <b>Try it.</b>
+        <a
+          href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im5pZ2h0LXNreSJ9LCJjYW1lcmEiOnsieWF3IjowLCJwaXRjaCI6MC4zLCJyb2xsIjowLCJkaXN0YW5jZSI6NX19"
+          target="_blank"
+          rel="noopener"
+          >Night sky</a
+        >
+        (labs).
+      </p>
+
+      <h3 id="volumes-and-point-clouds">Volumes and point clouds</h3>
+      <p>
+        <b>What it is.</b> A CT scan or an MRI is not a surface but a block of numbers, one per
+        little cube (a <i>voxel</i>), measuring how dense the material is there. A lidar scan is a
+        cloud of points with places and sometimes colors. Both can be splats. The
+        <b>Volume viewer</b> opens a medical or microscope scan and shows it as a block of splats
+        you can cut through. The <b>Point clouds</b> toy opens a lidar scan or any list of points.
+        Both are on the Studio shelf, behind the labs switch, and nothing is uploaded.
+      </p>
+      <p>
+        <b>How Splashery does it: volumes.</b> The viewer reads DICOM (a series of slices, a folder,
+        a zip, or one multi-frame file; uncompressed or RLE lossless), NIfTI (<code>.nii</code> and
+        <code>.nii.gz</code>), TIFF stacks, and raw files described by a small form
+        (<code>src/volume/read.js</code>). Slices are sorted by where the scanner put them, and the
+        spacing between slices comes from those places, so a scan that is thick in one direction
+        keeps its true shape. A volume is at most 8 million voxels in memory; a bigger one is
+        averaged down as it is read, so the viewer never keeps more than about 32 MB. The splats sit
+        on a lattice spaced to fit the device's budget. A density <b>window</b> (a lower and an
+        upper level) decides which values show; the presets are bone, soft tissue, and full range,
+        and for a CT in Hounsfield units bone is 300 to 1500 and soft tissue is −160 to 240. A color
+        map turns the value into a color and an opacity. A cutting plane on each axis, which a drag
+        moves, hides the splats on one side. A <b>maximum-intensity</b> view flattens the volume to
+        the brightest voxel along one axis. Splashery's engine has a splat kind for this
+        (<code>volume</code>): each splat carries its density, the shader tests it against the
+        window, and the cut is tested at the splat's place at rest, so the cut stays with the
+        specimen as it turns.
+      </p>
+      <p>
+        <b>How Splashery does it: point clouds.</b> The toy opens LAS, LAZ, PLY, XYZ, and PTS files
+        (LAZ through the vendored laz-perf decoder, loaded only for a LAZ file). The points are
+        drawn as splats within the device's budget, colored by height, by intensity, by
+        classification (ground, vegetation, buildings, and the other codes a lidar file uses), or by
+        the file's own colors. You can measure between two taps, crop, thin the cloud, and save it
+        as PLY, LAS, or XYZ. The three samples are lidar from the U.S. Geological Survey's 3D
+        Elevation Program, public domain: the Palace of Fine Arts and Fort Point in San Francisco,
+        and Meteor Crater in Arizona, each thinned to 450,000 points.
+      </p>
+      <figure>
+        <div class="shots two">
+          <div>
+            <img
+              src="img/r7b-volume-viewer.jpg"
+              alt="A walnut, drawn from a CT scan, with its wrinkled shell and a cut face"
+            />
+            <p class="shot-label">A CT scan of a walnut</p>
+          </div>
+          <div>
+            <img
+              src="img/r7b-point-clouds.jpg"
+              alt="A lidar scan of a park and a domed palace, colored by height from blue to green"
+            />
+            <p class="shot-label">Lidar, colored by height</p>
+          </div>
+        </div>
+        <figcaption>Walnut CT: CWI, CC BY 4.0. Lidar: USGS 3DEP, public domain.</figcaption>
+      </figure>
+      <p>
+        <b>Why this way.</b> A splat can stand for a voxel or a point without any new idea: it is a
+        place, a size, and a color. What the toy has to add is a way to look <i>inside</i>, and that
+        is the window and the cutting plane. Rendering a volume with splats gives up the smooth
+        shading of a proper volume renderer, in return for the same engine, the same controls, and a
+        saved link that opens it in the same viewer as everything else.
+      </p>
+      <p>
+        <b>Try it.</b>
+        <a
+          href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InZvbHVtZS12aWV3ZXIifSwiY2FtZXJhIjp7InlhdyI6MC4zNSwicGl0Y2giOjAuMiwicm9sbCI6MCwiZGlzdGFuY2UiOjMuOH19"
+          target="_blank"
+          rel="noopener"
+          >Volume viewer</a
+        >,
+        <a
+          href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6IndhbG51dC1jdCJ9LCJjYW1lcmEiOnsieWF3IjowLjM1LCJwaXRjaCI6MC4yLCJyb2xsIjowLCJkaXN0YW5jZSI6Mi44fX0"
+          target="_blank"
+          rel="noopener"
+          >Walnut CT scan</a
+        >,
+        <a
+          href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBvaW50LWNsb3VkcyJ9LCJjYW1lcmEiOnsieWF3IjowLjYsInBpdGNoIjowLjU1LCJyb2xsIjowLCJkaXN0YW5jZSI6Mi44fX0"
+          target="_blank"
+          rel="noopener"
+          >Point clouds</a
+        >
+        (all labs).
+      </p>
+
+      <h3 id="weather-maps-and-the-other-data-toys">Weather, maps, and the other data toys</h3>
+      <p>
+        Most of the data toys ship a <b>dated snapshot</b> that a tool on a build machine fetched
+        once, so the page itself never calls a data service. The toys are:
+      </p>
+      <ul>
+        <li>
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Imh1cnJpY2FuZSJ9LCJjYW1lcmEiOnsieWF3IjowLjE1LCJwaXRjaCI6MC45NSwicm9sbCI6MCwiZGlzdGFuY2UiOjMuMn19"
+            target="_blank"
+            rel="noopener"
+            >Hurricane</a
+          >
+          (labs): Hurricane Polo, September 21 and 22, 2026. GOES infrared cloud tops over a
+          satellite map of the Earth, with the eyewall and bands turning. A tap plays the day it
+          grew from 70 to 155 knots, following the storm's best track.
+        </li>
+        <li>
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InRpZGUtaGFyYm9yIn0sImNhbWVyYSI6eyJ5YXciOjAuMSwicGl0Y2giOjAuOCwicm9sbCI6MCwiZGlzdGFuY2UiOjMuNn19"
+            target="_blank"
+            rel="noopener"
+            >Tides at Bar Harbor</a
+          >
+          (labs): a coastal height map and imagery of the harbor in Maine, with NOAA's tide
+          predictions for a spring tide; a tap plays the day and the sandbar to Bar Island floods
+          and dries.
+        </li>
+        <li>
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImdyYW5kLWNhbnlvbiJ9LCJjYW1lcmEiOnsieWF3IjowLjM1LCJwaXRjaCI6MC42Miwicm9sbCI6MCwiZGlzdGFuY2UiOjQuMX19"
+            target="_blank"
+            rel="noopener"
+            >Grand Canyon</a
+          >,
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InN0LWhlbGVucyJ9LCJjYW1lcmEiOnsieWF3IjoyLjg1LCJwaXRjaCI6MC40NSwicm9sbCI6MCwiZGlzdGFuY2UiOjMuM319"
+            target="_blank"
+            rel="noopener"
+            >Mount St. Helens</a
+          >, and
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InNlYS1mbG9vciJ9LCJjYW1lcmEiOnsieWF3IjowLjQsInBpdGNoIjowLjU1LCJyb2xsIjowLCJkaXN0YW5jZSI6My42fX0"
+            target="_blank"
+            rel="noopener"
+            >The sea floor</a
+          >
+          (labs): heights from the USGS 3D Elevation Program and NOAA's ETOPO1 relief, as terrain
+          made of splats.
+        </li>
+        <li>
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InN0b3JrLW1pZ3JhdGlvbiJ9LCJjYW1lcmEiOnsieWF3IjowLjEsInBpdGNoIjowLjg1LCJyb2xsIjowLCJkaXN0YW5jZSI6My4yfX0"
+            target="_blank"
+            rel="noopener"
+            >Stork migration</a
+          >
+          (labs): 30 white storks tagged in Germany, flying their real GPS tracks to Africa in fall
+          2013 (Movebank, CC0). The track file ships with the site; the tool that downloaded it is
+          in <code>tools/</code>.
+        </li>
+        <li>
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImNsaW1hdGUtcmVjb3JkcyJ9LCJjYW1lcmEiOnsieWF3IjowLjQ1LCJwaXRjaCI6MC4yMiwicm9sbCI6MCwiZGlzdGFuY2UiOjMuM319"
+            target="_blank"
+            rel="noopener"
+            >Climate records</a
+          >
+          (labs): NOAA's Mauna Loa carbon dioxide record as a rising spiral, one turn a year, and
+          NASA's temperature anomalies as a field of monthly bars or a wall of yearly stripes. Dated
+          snapshots, never fetched live.
+        </li>
+        <li>
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImRhdGEtaW4tM2QifSwiY2FtZXJhIjp7InlhdyI6MC41NSwicGl0Y2giOjAuMywicm9sbCI6MCwiZGlzdGFuY2UiOjMuM319"
+            target="_blank"
+            rel="noopener"
+            >Data in 3D</a
+          >
+          (labs): open a CSV or TSV from your device, pick the columns for X, Y, Z, color, and size,
+          and see a scatter, bars, or a surface with labeled axes that turn to face you. Three small
+          sample tables ship with it. It saves a picture (PNG) or a turning video (WebM) to a file
+          you choose.
+        </li>
+      </ul>
+      <figure>
+        <div class="shots two">
+          <div>
+            <img
+              src="img/r7b-hurricane.jpg"
+              alt="A hurricane's white cloud tops over a green and brown map"
+            />
+            <p class="shot-label">Hurricane Polo</p>
+          </div>
+          <div>
+            <img
+              src="img/r7b-data-in-3d.jpg"
+              alt="A 3D scatter plot of earthquakes with labeled axes for longitude, latitude, and depth"
+            />
+            <p class="shot-label">Data in 3D: the quakes as a scatter</p>
+          </div>
+        </div>
+      </figure>
+      <div class="demo-placeholder">
+        <p class="demo-tag">A demo goes here later</p>
+        <p>
+          A small table of numbers that you edit, with each row appearing as a splat whose place,
+          size, and color come from its columns, to show that a splat is just a row of numbers.
+        </p>
+      </div>
+
+      <h3 id="the-rules-for-live-data">The rules for live data</h3>
+      <p>A toy that reads from outside the page follows a short list of rules:</p>
+      <ul>
+        <li>
+          Only a public endpoint that needs no key or account, and only data, never code: the
+          earthquake feed, an entry from the Protein Data Bank. (Other open feeds, such as animal
+          tracking, may be read the same way when their terms allow; today the stork tracks ship as
+          a file.)
+        </li>
+        <li>It happens when you open the toy or tap to refresh, never before.</li>
+        <li>The source and the time of the data show beside it.</li>
+        <li>Nothing is stored and nothing is sent, except the request for the data itself.</li>
+        <li>A dated snapshot ships with the site, for when the feed cannot be reached.</li>
+        <li>
+          The night sky may ask for your location, only when you tap for it, and never stores or
+          sends it.
+        </li>
+      </ul>
+      <p>
+        A <b>Wikipedia book</b>, which would fetch an article when the reader asks for it (CC BY-SA
+        text, never stored or shipped), is planned. The rules allow it, but it is not built yet, so
+        it is not in this manual's list of toys.
+      </p>
+
+      <h3 id="try-it-7">Where to try it</h3>
+      <ul>
+        <li>
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InByb3RlaW4ifX0"
+            target="_blank"
+            rel="noopener"
+            >Protein</a
+          >
+          and
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im1vbGVjdWxlIn19"
+            target="_blank"
+            rel="noopener"
+            >Molecule</a
+          >
+          (always on);
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im1vbGVjdWxlLXZpZXdlciJ9LCJjYW1lcmEiOnsieWF3IjowLjI1LCJwaXRjaCI6MC4xOCwicm9sbCI6MCwiZGlzdGFuY2UiOjMuNH19"
+            target="_blank"
+            rel="noopener"
+            >Molecule viewer</a
+          >
+          (labs).
+        </li>
+        <li>
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImVhcnRocXVha2VzIn0sImNhbWVyYSI6eyJ5YXciOjAsInBpdGNoIjowLjA1LCJyb2xsIjowLCJkaXN0YW5jZSI6My44fX0"
+            target="_blank"
+            rel="noopener"
+            >Earthquakes</a
+          >,
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Im5pZ2h0LXNreSJ9LCJjYW1lcmEiOnsieWF3IjowLCJwaXRjaCI6MC4zLCJyb2xsIjowLCJkaXN0YW5jZSI6NX19"
+            target="_blank"
+            rel="noopener"
+            >Night sky</a
+          >,
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InZvbHVtZS12aWV3ZXIifSwiY2FtZXJhIjp7InlhdyI6MC4zNSwicGl0Y2giOjAuMiwicm9sbCI6MCwiZGlzdGFuY2UiOjMuOH19"
+            target="_blank"
+            rel="noopener"
+            >Volume viewer</a
+          >,
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBvaW50LWNsb3VkcyJ9LCJjYW1lcmEiOnsieWF3IjowLjYsInBpdGNoIjowLjU1LCJyb2xsIjowLCJkaXN0YW5jZSI6Mi44fX0"
+            target="_blank"
+            rel="noopener"
+            >Point clouds</a
+          >,
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6Imh1cnJpY2FuZSJ9LCJjYW1lcmEiOnsieWF3IjowLjE1LCJwaXRjaCI6MC45NSwicm9sbCI6MCwiZGlzdGFuY2UiOjMuMn19"
+            target="_blank"
+            rel="noopener"
+            >Hurricane</a
+          >, and
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImRhdGEtaW4tM2QifSwiY2FtZXJhIjp7InlhdyI6MC41NSwicGl0Y2giOjAuMywicm9sbCI6MCwiZGlzdGFuY2UiOjMuM319"
+            target="_blank"
+            rel="noopener"
+            >Data in 3D</a
+          >
+          (all labs).
+        </li>
+      </ul>
+
+      <!-- NAV:BOTTOM:START (written by manual/build-pages.mjs; do not edit by hand) -->
+      <nav class="pager no-print" aria-label="Previous and next chapter, bottom">
+        <a class="pager-prev" rel="prev" href="moving.html"
+          ><span class="pager-word">← Previous</span
+          ><span class="pager-title">Chapter 6: Moving things</span></a
+        ><a class="pager-next" rel="next" href="photo3d.html"
+          ><span class="pager-word">Next →</span
+          ><span class="pager-title">Chapter 8: Photos and video into 3D</span></a
+        >
+      </nav>
+      <footer>
+        <p>
+          The Tinkerer's Manual, first published September 28, 2026 and updated October 11, 2026.
+          Part of
+          <a href="https://ryanjosephkamp.github.io/splashery/site/" target="_blank" rel="noopener"
+            >Splashery</a
+          >, a toy box of 3D Gaussian splats that runs in your browser. Every picture here was made
+          with Splashery itself.
+        </p>
+      </footer>
+      <!-- NAV:BOTTOM:END -->
+    </main>
+  </body>
+</html>
