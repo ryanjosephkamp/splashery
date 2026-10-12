@@ -82,8 +82,8 @@ Model: Sonnet 5.5 (claude-sonnet-5-5), high effort. October 11, 2026. Branch `cl
    merged in.
 6. **Cards**: `st5-features-390x844`, `st5-fixes-390x844`, `st5-fixes-1440x900` on Effect review
    page 2, lane `SiteR5`, Sonnet 5.5 (before and after side by side; no republish). Screenshots
-   `tests/screenshots/st5-whats-new-{features,fixes}-{390x844,1440x900}.png`. Owner's marks: not yet
-   read.
+   `tests/screenshots/st5-whats-new-{features,fixes}-{390x844,1440x900}.png`. Owner's marks (read
+   October 12, 2026, 01:14 UTC): all three `good`.
 
 ## Notes
 
