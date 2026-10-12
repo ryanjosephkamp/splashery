@@ -152,6 +152,8 @@
     "run-it": "toy.html",
     language: "language.html",
     "the-idea-every-splat-gets-its-own-u-and-v": "language.html",
+    "uv-dots": "language.html",
+    "uv-ring": "language.html",
     "demo-uvtorus": "language.html",
     "ut-canvas": "language.html",
     "ut-progress": "language.html",

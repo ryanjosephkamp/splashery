@@ -479,36 +479,24 @@
               <legend>Sizes</legend>
               <label
                 >s₁
-                <input
-                  type="range"
-                  id="sn-s1"
-                  min="0.05"
-                  max="0.8"
-                  step="0.01"
-                  value="0.5"
-                /><output id="sn-s1-out">0.5</output></label
+                <input type="range" id="sn-s1" min="0" max="1.6" step="0.01" value="0.8" /><output
+                  id="sn-s1-out"
+                  >0.80</output
+                ></label
               >
               <label
                 >s₂
-                <input
-                  type="range"
-                  id="sn-s2"
-                  min="0.05"
-                  max="0.8"
-                  step="0.01"
-                  value="0.3"
-                /><output id="sn-s2-out">0.3</output></label
+                <input type="range" id="sn-s2" min="0" max="1.6" step="0.01" value="0.8" /><output
+                  id="sn-s2-out"
+                  >0.80</output
+                ></label
               >
               <label
                 >s₃
-                <input
-                  type="range"
-                  id="sn-s3"
-                  min="0.05"
-                  max="0.8"
-                  step="0.01"
-                  value="0.15"
-                /><output id="sn-s3-out">0.15</output></label
+                <input type="range" id="sn-s3" min="0" max="1.6" step="0.01" value="0.8" /><output
+                  id="sn-s3-out"
+                  >0.80</output
+                ></label
               >
             </fieldset>
             <fieldset>
@@ -2506,96 +2494,121 @@ y = sin v
 z = (2 + cos v)·sin u
 u = 0 .. 2pi
 v = 0 .. 2pi</code></pre>
-      <figure class="diagram">
-        <svg
-          viewBox="0 0 540 190"
-          width="540"
-          height="190"
-          role="img"
-          aria-label="A grid of u and v values becomes a torus"
-        >
-          <g font-family="sans-serif" font-size="12" fill="currentColor" text-anchor="middle">
-            <g stroke="currentColor" stroke-width="0.8" opacity="0.5">
-              <rect x="40" y="20" width="150" height="150" fill="none" />
+      <figure class="diagram" data-live="uv-torus">
+        <div class="fig-stack">
+          <svg
+            viewBox="0 0 540 190"
+            width="540"
+            height="190"
+            role="img"
+            aria-label="A grid of u and v values becomes a torus"
+          >
+            <g font-family="sans-serif" font-size="12" fill="currentColor" text-anchor="middle">
+              <g stroke="currentColor" stroke-width="0.8" opacity="0.5">
+                <rect x="40" y="20" width="150" height="150" fill="none" />
+              </g>
+              <g fill="#1fb59a" id="uv-dots">
+                <circle cx="49.4" cy="29.4" r="3" />
+                <circle cx="68.1" cy="29.4" r="3" />
+                <circle cx="86.9" cy="29.4" r="3" />
+                <circle cx="105.6" cy="29.4" r="3" />
+                <circle cx="124.4" cy="29.4" r="3" />
+                <circle cx="143.1" cy="29.4" r="3" />
+                <circle cx="161.9" cy="29.4" r="3" />
+                <circle cx="180.6" cy="29.4" r="3" />
+                <circle cx="49.4" cy="48.1" r="3" />
+                <circle cx="68.1" cy="48.1" r="3" />
+                <circle cx="86.9" cy="48.1" r="3" />
+                <circle cx="105.6" cy="48.1" r="3" />
+                <circle cx="124.4" cy="48.1" r="3" />
+                <circle cx="143.1" cy="48.1" r="3" />
+                <circle cx="161.9" cy="48.1" r="3" />
+                <circle cx="180.6" cy="48.1" r="3" />
+                <circle cx="49.4" cy="66.9" r="3" />
+                <circle cx="68.1" cy="66.9" r="3" />
+                <circle cx="86.9" cy="66.9" r="3" />
+                <circle cx="105.6" cy="66.9" r="3" />
+                <circle cx="124.4" cy="66.9" r="3" />
+                <circle cx="143.1" cy="66.9" r="3" />
+                <circle cx="161.9" cy="66.9" r="3" />
+                <circle cx="180.6" cy="66.9" r="3" />
+                <circle cx="49.4" cy="85.6" r="3" />
+                <circle cx="68.1" cy="85.6" r="3" />
+                <circle cx="86.9" cy="85.6" r="3" />
+                <circle cx="105.6" cy="85.6" r="3" />
+                <circle cx="124.4" cy="85.6" r="3" />
+                <circle cx="143.1" cy="85.6" r="3" />
+                <circle cx="161.9" cy="85.6" r="3" />
+                <circle cx="180.6" cy="85.6" r="3" />
+                <circle cx="49.4" cy="104.4" r="3" />
+                <circle cx="68.1" cy="104.4" r="3" />
+                <circle cx="86.9" cy="104.4" r="3" />
+                <circle cx="105.6" cy="104.4" r="3" />
+                <circle cx="124.4" cy="104.4" r="3" />
+                <circle cx="143.1" cy="104.4" r="3" />
+                <circle cx="161.9" cy="104.4" r="3" />
+                <circle cx="180.6" cy="104.4" r="3" />
+                <circle cx="49.4" cy="123.1" r="3" />
+                <circle cx="68.1" cy="123.1" r="3" />
+                <circle cx="86.9" cy="123.1" r="3" />
+                <circle cx="105.6" cy="123.1" r="3" />
+                <circle cx="124.4" cy="123.1" r="3" />
+                <circle cx="143.1" cy="123.1" r="3" />
+                <circle cx="161.9" cy="123.1" r="3" />
+                <circle cx="180.6" cy="123.1" r="3" />
+                <circle cx="49.4" cy="141.9" r="3" />
+                <circle cx="68.1" cy="141.9" r="3" />
+                <circle cx="86.9" cy="141.9" r="3" />
+                <circle cx="105.6" cy="141.9" r="3" />
+                <circle cx="124.4" cy="141.9" r="3" />
+                <circle cx="143.1" cy="141.9" r="3" />
+                <circle cx="161.9" cy="141.9" r="3" />
+                <circle cx="180.6" cy="141.9" r="3" />
+                <circle cx="49.4" cy="160.6" r="3" />
+                <circle cx="68.1" cy="160.6" r="3" />
+                <circle cx="86.9" cy="160.6" r="3" />
+                <circle cx="105.6" cy="160.6" r="3" />
+                <circle cx="124.4" cy="160.6" r="3" />
+                <circle cx="143.1" cy="160.6" r="3" />
+                <circle cx="161.9" cy="160.6" r="3" />
+                <circle cx="180.6" cy="160.6" r="3" />
+              </g>
+              <circle
+                id="uv-ring"
+                cx="124.4"
+                cy="66.9"
+                r="6"
+                fill="none"
+                stroke="#e8384f"
+                stroke-width="2"
+              />
+              <text x="115" y="186">u, from 0 to 2π</text>
+              <text x="22" y="98" transform="rotate(-90 22 98)">v, from 0 to 2π</text>
+              <text x="270" y="92" font-size="13">x(u, v), y(u, v), z(u, v)</text>
+              <text x="270" y="112" font-size="22">→</text>
             </g>
-            <g fill="#1fb59a">
-              <circle cx="49.4" cy="29.4" r="3" />
-              <circle cx="68.1" cy="29.4" r="3" />
-              <circle cx="86.9" cy="29.4" r="3" />
-              <circle cx="105.6" cy="29.4" r="3" />
-              <circle cx="124.4" cy="29.4" r="3" />
-              <circle cx="143.1" cy="29.4" r="3" />
-              <circle cx="161.9" cy="29.4" r="3" />
-              <circle cx="180.6" cy="29.4" r="3" />
-              <circle cx="49.4" cy="48.1" r="3" />
-              <circle cx="68.1" cy="48.1" r="3" />
-              <circle cx="86.9" cy="48.1" r="3" />
-              <circle cx="105.6" cy="48.1" r="3" />
-              <circle cx="124.4" cy="48.1" r="3" />
-              <circle cx="143.1" cy="48.1" r="3" />
-              <circle cx="161.9" cy="48.1" r="3" />
-              <circle cx="180.6" cy="48.1" r="3" />
-              <circle cx="49.4" cy="66.9" r="3" />
-              <circle cx="68.1" cy="66.9" r="3" />
-              <circle cx="86.9" cy="66.9" r="3" />
-              <circle cx="105.6" cy="66.9" r="3" />
-              <circle cx="124.4" cy="66.9" r="3" />
-              <circle cx="143.1" cy="66.9" r="3" />
-              <circle cx="161.9" cy="66.9" r="3" />
-              <circle cx="180.6" cy="66.9" r="3" />
-              <circle cx="49.4" cy="85.6" r="3" />
-              <circle cx="68.1" cy="85.6" r="3" />
-              <circle cx="86.9" cy="85.6" r="3" />
-              <circle cx="105.6" cy="85.6" r="3" />
-              <circle cx="124.4" cy="85.6" r="3" />
-              <circle cx="143.1" cy="85.6" r="3" />
-              <circle cx="161.9" cy="85.6" r="3" />
-              <circle cx="180.6" cy="85.6" r="3" />
-              <circle cx="49.4" cy="104.4" r="3" />
-              <circle cx="68.1" cy="104.4" r="3" />
-              <circle cx="86.9" cy="104.4" r="3" />
-              <circle cx="105.6" cy="104.4" r="3" />
-              <circle cx="124.4" cy="104.4" r="3" />
-              <circle cx="143.1" cy="104.4" r="3" />
-              <circle cx="161.9" cy="104.4" r="3" />
-              <circle cx="180.6" cy="104.4" r="3" />
-              <circle cx="49.4" cy="123.1" r="3" />
-              <circle cx="68.1" cy="123.1" r="3" />
-              <circle cx="86.9" cy="123.1" r="3" />
-              <circle cx="105.6" cy="123.1" r="3" />
-              <circle cx="124.4" cy="123.1" r="3" />
-              <circle cx="143.1" cy="123.1" r="3" />
-              <circle cx="161.9" cy="123.1" r="3" />
-              <circle cx="180.6" cy="123.1" r="3" />
-              <circle cx="49.4" cy="141.9" r="3" />
-              <circle cx="68.1" cy="141.9" r="3" />
-              <circle cx="86.9" cy="141.9" r="3" />
-              <circle cx="105.6" cy="141.9" r="3" />
-              <circle cx="124.4" cy="141.9" r="3" />
-              <circle cx="143.1" cy="141.9" r="3" />
-              <circle cx="161.9" cy="141.9" r="3" />
-              <circle cx="180.6" cy="141.9" r="3" />
-              <circle cx="49.4" cy="160.6" r="3" />
-              <circle cx="68.1" cy="160.6" r="3" />
-              <circle cx="86.9" cy="160.6" r="3" />
-              <circle cx="105.6" cy="160.6" r="3" />
-              <circle cx="124.4" cy="160.6" r="3" />
-              <circle cx="143.1" cy="160.6" r="3" />
-              <circle cx="161.9" cy="160.6" r="3" />
-              <circle cx="180.6" cy="160.6" r="3" />
-            </g>
-            <circle cx="124.4" cy="66.9" r="6" fill="none" stroke="#e8384f" stroke-width="2" />
-            <text x="115" y="186">u, from 0 to 2π</text>
-            <text x="22" y="98" transform="rotate(-90 22 98)">v, from 0 to 2π</text>
-            <text x="270" y="92" font-size="13">x(u, v), y(u, v), z(u, v)</text>
-            <text x="270" y="112" font-size="22">→</text>
-          </g>
-          <image href="img/gallery-torus.jpg" x="360" y="15" width="165" height="165" />
-        </svg>
+            <image
+              class="fig-still"
+              href="img/gallery-torus.jpg"
+              x="360"
+              y="15"
+              width="165"
+              height="165"
+            />
+          </svg>
+          <canvas
+            class="fig-live"
+            width="330"
+            height="330"
+            role="img"
+            aria-label="The torus the grid becomes, turning slowly. One splat, ringed in red, is the one the ring on the grid marks; the ring steps across the grid and the splat moves on the torus to match."
+          ></canvas>
+        </div>
         <figcaption>
           Each dot on the grid is one splat with its own (<var>u</var>, <var>v</var>). The equations
           carry every dot to its place on the torus.
         </figcaption>
+        <script type="module" src="demos4.js"></script>
       </figure>
       <section class="demo-live" data-demo="uv-torus" id="demo-uvtorus">
         <h4>Try it: the grid of (<var>u</var>, <var>v</var>), carried onto the torus</h4>
@@ -6472,6 +6485,8 @@ export const RECIPES = {
       </p>
 
       <!-- ---- What else Splashery does now ---- -->
+      <!-- Pictures: each section ends with <figure class="item-pic"> (a real still of the app). Make one with
+           manual/make-pictures.mjs: add an entry to PICTURES there, run it, and add the figure here. -->
       <h2 id="more">What else Splashery does now</h2>
       <p>
         This chapter lists what is on the site today, beyond the equation toy and picture toys you
@@ -6506,6 +6521,17 @@ export const RECIPES = {
         the labs switch.
       </p>
 
+      <figure class="item-pic">
+        <img
+          src="img/pic-more-physics.webp"
+          width="960"
+          height="320"
+          alt="A basketball in three moments of one toss: resting, just after being let go, and in the air."
+        />
+        <figcaption>
+          A ball at rest, just tossed, and in the air: three moments of one toss, drawn by the app.
+        </figcaption>
+      </figure>
       <h3 id="the-qr-code-toy">The QR code toy</h3>
       <p>
         The QR code toy makes a code from a link, plain text, a Wi-Fi network, a contact card, or an
@@ -6518,6 +6544,15 @@ export const RECIPES = {
         link. This toy is behind the labs switch.
       </p>
 
+      <figure class="item-pic">
+        <img
+          src="img/pic-more-qr.webp"
+          width="360"
+          height="360"
+          alt="The QR code toy: a black-and-white code built from splats, shown flat to the camera."
+        />
+        <figcaption>The QR code toy, drawn from splats.</figcaption>
+      </figure>
       <h3 id="captures-and-file-formats">Captures and file formats</h3>
       <p>
         The viewer opens <code>.ply</code>, <code>.sog</code>, <code>.splat</code>, and
@@ -6528,6 +6563,17 @@ export const RECIPES = {
         spherical harmonics on the full file. Many of the newer captures are behind the labs switch.
       </p>
 
+      <figure class="item-pic">
+        <img
+          src="img/pic-more-captures.webp"
+          width="720"
+          height="360"
+          alt="Two captures from the Scans shelf: a marble bust and a wooden elephant, each drawn from real splat files."
+        />
+        <figcaption>
+          Two captures from the Scans shelf: a marble bust and a wooden elephant.
+        </figcaption>
+      </figure>
       <h3 id="camera-microphone-and-screen">Camera, microphone, and screen</h3>
       <p>
         A toy can read the microphone, the camera, or a shared screen, but only after you tap a
@@ -6541,6 +6587,17 @@ export const RECIPES = {
         are behind the labs switch.
       </p>
 
+      <figure class="item-pic">
+        <img
+          src="img/pic-more-live.webp"
+          width="720"
+          height="360"
+          alt="Left, the room echo meter, a room with a floor and a sign that says Clap once, sharply. Right, the splat mirror as it opens, before a camera is started."
+        />
+        <figcaption>
+          The room echo meter waiting for a clap (left) and the splat mirror as it opens (right).
+        </figcaption>
+      </figure>
       <h3 id="books-albums-and-frames">Books, albums, and frames</h3>
       <p>
         Your book turns the pages of a PDF as paper: a page is a leaf with a front and a back, the
@@ -6551,6 +6608,15 @@ export const RECIPES = {
         toys are behind the labs switch.
       </p>
 
+      <figure class="item-pic">
+        <img
+          src="img/pic-more-books.webp"
+          width="960"
+          height="320"
+          alt="Three picture toys side by side: a book showing a page, a photo album with a leather cover, and a picture frame holding a landscape photo."
+        />
+        <figcaption>A book, a photo album, and a picture frame.</figcaption>
+      </figure>
       <h3 id="studio-sound-and-photos">Studio: sound and photos</h3>
       <p>
         The Studio shelf turns other things into splats on your device. The song landscape makes a
@@ -6560,6 +6626,18 @@ export const RECIPES = {
         behind the labs switch.
       </p>
 
+      <figure class="item-pic">
+        <img
+          src="img/pic-more-studio.webp"
+          width="640"
+          height="320"
+          alt="Left, the Chladni plate with sand gathered along curving still lines. Right, a photo of a forest path rebuilt as splats by Photo to 3D."
+        />
+        <figcaption>
+          The Chladni plate with its sand on the still lines (left) and a photo rebuilt as splats
+          (right).
+        </figcaption>
+      </figure>
       <h3 id="models-to-splats">Models to splats</h3>
       <p>
         The Model to splats toy opens a glTF or GLB file, an OBJ with its MTL, or an STL file and
@@ -6569,6 +6647,17 @@ export const RECIPES = {
         glTF with its <code>.bin</code> and textures. This toy is behind the labs switch.
       </p>
 
+      <figure class="item-pic">
+        <img
+          src="img/pic-more-models.webp"
+          width="360"
+          height="360"
+          alt="A burger, the sample of the Model to splats toy, drawn as flat splat discs: bun, tomato, cheese, patty, and lettuce."
+        />
+        <figcaption>
+          The Model to splats toy as it opens, with its sample model drawn as splats.
+        </figcaption>
+      </figure>
       <h3 id="worlds">Worlds</h3>
       <p>
         A world is a small place you walk around in, built on your device from recipes and a seed.
@@ -6579,6 +6668,15 @@ export const RECIPES = {
         switch (<code>worlds/?labs=1</code>).
       </p>
 
+      <figure class="item-pic">
+        <img
+          src="img/pic-more-worlds.webp"
+          width="720"
+          height="446"
+          alt="A world: a small green island with a character in a red shirt standing by a wooden welcome sign, with trees and a striped lighthouse behind."
+        />
+        <figcaption>A small world you walk around in.</figcaption>
+      </figure>
       <h3 id="fluids-songs-and-smooth-bodies">Fluids, songs, and smooth bodies</h3>
       <p>
         A recipe can declare a liquid, a gas or a flame with <code>k.fluid</code>. It is simulated
@@ -6597,6 +6695,15 @@ export const RECIPES = {
         switch.
       </p>
 
+      <figure class="item-pic">
+        <img
+          src="img/pic-more-fluids.webp"
+          width="720"
+          height="360"
+          alt="Left, the Fluid lab: a glass of blue liquid on a table beside a basketball hoop. Right, a grand piano whose keys and strings are separate moving parts."
+        />
+        <figcaption>The Fluid lab (left) and a grand piano that plays songs (right).</figcaption>
+      </figure>
       <h3 id="solid-fine-and-dots-and-the-detail-you-see">
         Solid, Fine, and Dots, and the detail you see
       </h3>
@@ -6611,6 +6718,15 @@ export const RECIPES = {
         sharper kernel are.
       </p>
 
+      <figure class="item-pic">
+        <img
+          src="img/pic-more-looks.webp"
+          width="960"
+          height="320"
+          alt="The same seashell shape drawn three ways, left to right: Solid, Fine, and Dots."
+        />
+        <figcaption>One program, three looks: Solid, Fine, and Dots.</figcaption>
+      </figure>
       <h3 id="the-viewer-s-controls">The viewer's controls</h3>
       <p>
         Focus mode hides everything but the toy (the <b>F</b> key or the focus button, and
@@ -6618,6 +6734,18 @@ export const RECIPES = {
         <b>G</b> opens the gallery. A toy's input panel can take a typed text, a drawing, a file, a
         binary file such as a sound, or several files at once. These controls are for everyone.
       </p>
+
+      <figure class="item-pic">
+        <img
+          src="img/pic-more-viewer.webp"
+          width="720"
+          height="446"
+          alt="The Splashery app: a rainbow torus on the left, and on the right the shelf of toys and the panel with its controls."
+        />
+        <figcaption>
+          The viewer: the toy on the left, the shelf and the panel of its controls on the right.
+        </figcaption>
+      </figure>
 
       <!-- ---- What only Splashery does ---- -->
       <h2 id="unique">What Splashery can do that other splat tools can't</h2>
@@ -6629,6 +6757,8 @@ export const RECIPES = {
         knowledge".) The site has this list as a page too:
         <a href="../site/learn/can-do/" target="_blank" rel="noopener">What Splashery can do</a>.
       </p>
+      <!-- Each item can end with a <figure> (a picture from manual/make-pictures.mjs, or a live one from
+           manual/demos4.js with data-live): copy one of the figures below into the new <li>. -->
       <ul>
         <li>
           <b>Toys made from rules, in the browser.</b> A recipe of a few kilobytes is built into
@@ -6638,21 +6768,73 @@ export const RECIPES = {
           draws. The shape itself is never a multi-megabyte file to download. (The page, the engine,
           and any optional models or captures a toy uses still download, and only when that toy
           opens.)
+          <figure class="item-pic">
+            <img
+              src="img/pic-uq-rules.webp"
+              width="960"
+              height="320"
+              alt="Three toys that exist only as rules: a potted cactus, a strawberry, and a knotted ring."
+            />
+            <figcaption>
+              A cactus, a strawberry, and a knot: three toys built from rules, not downloaded as
+              shapes.
+            </figcaption>
+          </figure>
         </li>
         <li>
           <b>Equations as a language.</b> Type <var>x</var>, <var>y</var>, and <var>z</var> in
           <var>u</var>, <var>v</var>, and <var>t</var>, and get an animated splat shape, with plain
           messages instead of crashes (Level 3).
+          <figure class="item-pic">
+            <img
+              src="img/pic-uq-equations.webp"
+              width="960"
+              height="320"
+              alt="Three shapes made by the equation toy from typed formulas: a Klein bottle, a trefoil knot, and a spiral galaxy."
+            />
+            <figcaption>
+              Three programs of the equation toy: a Klein bottle, a trefoil knot, and a galaxy.
+            </figcaption>
+          </figure>
         </li>
         <li>
           <b>Moving parts inside one splat cloud.</b> Hinges, pivots, sliders, morphs, and per-splat
           effects run on the graphics chip, so a chest opens and a windmill turns without rebuilding
           anything (Level 2).
+          <figure class="item-pic">
+            <img
+              src="img/pic-uq-moving.webp"
+              width="960"
+              height="320"
+              alt="A treasure chest in three moments: closed, opening, and open with its lid hinged back."
+            />
+            <figcaption>A chest opening on a hinge: one splat cloud, three moments.</figcaption>
+          </figure>
         </li>
-        <li><b>Hands-on physics on splats.</b> Toss, stack, pull apart, and pour.</li>
+        <li>
+          <b>Hands-on physics on splats.</b> Toss, stack, pull apart, and pour.
+          <figure class="item-pic">
+            <img
+              src="img/pic-uq-physics.webp"
+              width="960"
+              height="320"
+              alt="A rubber duck in three moments of one toss: resting, tossed, and tumbling in the air."
+            />
+            <figcaption>A rubber duck at rest, tossed, and tumbling.</figcaption>
+          </figure>
+        </li>
         <li>
           <b>Anything as splats.</b> Photos and videos with depth, PDFs, QR codes, real science
           data, the night sky, and medical volumes.
+          <figure class="item-pic">
+            <img
+              src="img/pic-uq-anything.webp"
+              width="960"
+              height="320"
+              alt="Three things that are not splat captures, all shown as splats: a photo of a forest path, the night sky with constellation lines, and a CT-style volume of a walnut."
+            />
+            <figcaption>A photo, the night sky, and a scanned volume, all as splats.</figcaption>
+          </figure>
         </li>
         <li>
           <b>A whole scene in a link.</b> The <code>#s=</code> links carry the toys, their options,
@@ -6672,6 +6854,16 @@ export const RECIPES = {
             </li>
             <li>No server is involved. The link is the whole scene.</li>
           </ul>
+          <figure class="item-pic" data-live="link-steps">
+            <ol
+              class="link-steps"
+              aria-label="The four stages of a link, with the real size of each for a tiny scene"
+            ></ol>
+            <figcaption>
+              A tiny scene (a cactus and a camera), taken through the real link code, stage by
+              stage.
+            </figcaption>
+          </figure>
         </li>
       </ul>
 
@@ -6688,6 +6880,17 @@ export const RECIPES = {
         beside this page and you can follow along.
       </p>
 
+      <figure class="diagram built-diagram" data-diagram="built">
+        <svg
+          viewBox="0 0 360 600"
+          role="img"
+          aria-label="How Splashery is built, from the top down: the page index.html loads the program in src, which asks for the toy's recipe; recipes become splats and are shown by stage.js through pc.js and the PlayCanvas engine, which runs on WebGPU or WebGL2 on your device. Beside that, some libraries and shared systems ship but load only when a toy needs them, and tools and tests run on a build machine and are never shipped."
+        ></svg>
+        <figcaption>
+          The parts of Splashery, top to bottom: what the browser loads, and what draws the toy.
+        </figcaption>
+        <script type="module" src="demos5.js"></script>
+      </figure>
       <h3 id="static-files-and-modules">Plain files, and nothing else</h3>
       <p>
         Splashery is <b>static files and ES modules</b>. There is no bundler (nothing turns many

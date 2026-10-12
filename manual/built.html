@@ -108,6 +108,17 @@
         beside this page and you can follow along.
       </p>
 
+      <figure class="diagram built-diagram" data-diagram="built">
+        <svg
+          viewBox="0 0 360 600"
+          role="img"
+          aria-label="How Splashery is built, from the top down: the page index.html loads the program in src, which asks for the toy's recipe; recipes become splats and are shown by stage.js through pc.js and the PlayCanvas engine, which runs on WebGPU or WebGL2 on your device. Beside that, some libraries and shared systems ship but load only when a toy needs them, and tools and tests run on a build machine and are never shipped."
+        ></svg>
+        <figcaption>
+          The parts of Splashery, top to bottom: what the browser loads, and what draws the toy.
+        </figcaption>
+        <script type="module" src="demos5.js"></script>
+      </figure>
       <h3 id="static-files-and-modules">Plain files, and nothing else</h3>
       <p>
         Splashery is <b>static files and ES modules</b>. There is no bundler (nothing turns many
