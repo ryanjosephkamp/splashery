@@ -53,10 +53,11 @@ const toyLinks = (html) =>
 // Every link in the manual opens in a new tab (the owner's requirement, Codex task 36): any `<a href>`
 // without a `target` gets `target="_blank"` and `noopener`. Applied to the hand-written chapters and
 // to the chrome this tool writes (the contents button, the pager, the cover's contents, all.html).
-// (A link to a place on the same page, `href="#x"`, opens in a new tab too, except on all.html.)
+// A link to a place on the same page (`href="#x"`) stays as it is: a new tab would only reload the
+// page, and the owner's other tests (tests/man3.spec.mjs) take those as exempt too.
 const newTab = (html) =>
   html.replace(/<a\s[^>]*?href=[^>]*?>/g, (tag) => {
-    if (/\starget=/.test(tag)) return tag;
+    if (/\starget=/.test(tag) || /\shref="#/.test(tag)) return tag;
     const rel = tag.match(/\srel="([^"]*)"/);
     const withRel = rel
       ? tag.replace(rel[0], ` rel="${rel[1]} noopener"`)
@@ -227,15 +228,10 @@ for (const p of pages) await write(p.file, assemble(p));
 // The cover and every chapter in order, links back to plain anchors, and the scripts the demos
 // need. The PDF is printed from this page (tools/manual-pdf.mjs).
 const firstId = new Map(PAGES.map((q) => [q.file, q.ids[0]]));
-// (A link to a place on the page itself opens there, not in a new tab: all.html is one page.)
 const onePage = (html) =>
-  html
-    .replace(/href="([a-z0-9]+\.html)(#[^"]*)?"/g, (all, file, hash) =>
-      hash ? `href="${hash}"` : firstId.get(file) ? `href="#${firstId.get(file)}"` : all,
-    )
-    .replace(/<a\s[^>]*?href="#[^"]*"[^>]*>/g, (tag) =>
-      tag.replace(/\s+target="_blank"/, "").replace(/\s+rel="noopener"/, ""),
-    );
+  html.replace(/href="([a-z0-9]+\.html)(#[^"]*)?"/g, (all, file, hash) =>
+    hash ? `href="${hash}"` : firstId.get(file) ? `href="#${firstId.get(file)}"` : all,
+  );
 {
   const first = pages[0];
   const body = pages
