@@ -26,20 +26,20 @@ both behind the labs switch first:
    file links. For a link to another page of the same document, turn the book to that page. A faint
    underline or glow on link boxes while the book is open is a nice touch if it reads well at phone
    size. The PDF never leaves the device.
-2. **Figures and photos pop out in 3D** (the owner's idea of October 3, 2026: "a button that the
-   user can click or tap to make the figures … or images within a PDF, or the photos in a photo
-   album, pop up from the page seamlessly in 3D … strictly optional"). A "Pop out" button (in the
-   Toy tab, and on the page itself if it reads well) lifts the figure or photo off the page as a
-   depth splat that rises and turns toward the reader, and a second tap lays it back flat. Find the
-   figures: for photos in the album the photo is known; for a PDF, find the image boxes from
-   PDF.js's operator list (the image paint operators and their transforms), and let the reader drag
-   a box around anything else (a vector plot, a diagram). For the depth, reuse the Photo to 3D
-   pipeline (`src/packs/photo-3d-depth.js`, `src/packs/photo-3d-core.js`; Depth Anything V2 Small
-   through ONNX Runtime Web, both vendored and loaded only on first use). Import those modules; if
-   they need a change, say so in your message first, since the Photo to 3D lane owns them. For flat
-   graphics (plots, diagrams, text) a depth model guesses badly, so give those a clean layered lift
-   instead (the figure as a card that rises with a soft shadow, with its strongest shapes a little
-   in front), and say which you used for what. The whole effect must follow the effect rules: the
+2. **Figures and photos pop out in 3D** (the owner's idea of October 3, 2026: a strictly optional
+   button the user can click or tap to make the figures or images within a PDF, or the photos in a
+   photo album, pop up from the page seamlessly in 3D). A "Pop out" button (in the Toy tab, and on
+   the page itself if it reads well) lifts the figure or photo off the page as a depth splat that
+   rises and turns toward the reader, and a second tap lays it back flat. Find the figures: for
+   photos in the album the photo is known; for a PDF, find the image boxes from PDF.js's operator
+   list (the image paint operators and their transforms), and let the reader drag a box around
+   anything else (a vector plot, a diagram). For the depth, reuse the Photo to 3D pipeline
+   (`src/packs/photo-3d-depth.js`, `src/packs/photo-3d-core.js`; Depth Anything V2 Small through
+   ONNX Runtime Web, both vendored and loaded only on first use). Import those modules; if they need
+   a change, say so in your message first, since the Photo to 3D lane owns them. For flat graphics
+   (plots, diagrams, text) a depth model guesses badly, so give those a clean layered lift instead
+   (the figure as a card that rises with a soft shadow, with its strongest shapes a little in
+   front), and say which you used for what. The whole effect must follow the effect rules: the
    figure moves as a solid piece, no warped picture, and it reads at phone size.
 
 #### What to deliver

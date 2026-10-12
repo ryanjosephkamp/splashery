@@ -23,17 +23,16 @@ Branches and PRs (one lane, stacked parts, merged in order):
   MP4 clips there as before. No new or changed sounds: if a new effect needs one, list it in the PR
   for Sound B.
 
-1. Photo to 3D: "Offset is out of bounds" on the owner's own photos (do this first) Owner: "if I try
-   to upload a photo of my own, it almost doesn't matter what photo I upload. I get the same error.
-   It says Offset is out of bounds… I want it to support arbitrarily large photo sizes, I guess
-   maybe within reason… If that means that we have to transform the input photos in some way, then
-   I'm willing to do that… We just need to be clear about how we're doing it." I found the cause,
-   and it isn't the photo. GitHub Pages serves vendor/depth-anything-v2-small/model_quantized.onnx
-   with `content-encoding: gzip` and `content-length: 21773358` (the compressed size). The body
-   stream gives the decompressed 27,258,801 bytes. `fetchBytes()` in src/packs/photo-3d-depth.js
-   allocates `new Uint8Array(content-length)`, so `out.set(value, at)` throws "RangeError: offset is
-   out of bounds" at about 80%. The samples work because they don't need the model, and the local
-   test server doesn't compress, so the tests never saw it.
+1. Photo to 3D: "Offset is out of bounds" on the owner's own photos (do this first) Owner: any photo
+   of his own gives the same error, "Offset is out of bounds". He wants arbitrarily large photo
+   sizes supported, within reason, and is willing to have photos transformed if we are clear about
+   how. I found the cause, and it isn't the photo. GitHub Pages serves
+   vendor/depth-anything-v2-small/model_quantized.onnx with `content-encoding: gzip` and
+   `content-length: 21773358` (the compressed size). The body stream gives the decompressed
+   27,258,801 bytes. `fetchBytes()` in src/packs/photo-3d-depth.js allocates
+   `new Uint8Array(content-length)`, so `out.set(value, at)` throws "RangeError: offset is out of
+   bounds" at about 80%. The samples work because they don't need the model, and the local test
+   server doesn't compress, so the tests never saw it.
    - Fix fetchBytes: never size the buffer from content-length. Collect the chunks (or grow the
      buffer), and use content-length only for an approximate progress figure, capped below 100%
      until done.
@@ -49,10 +48,9 @@ Branches and PRs (one lane, stacked parts, merged in order):
      your device." A browser that can't read a format (HEIC outside Safari) should get a clear
      message: what happened and what to do, such as "Save it as a JPEG".
 
-2. Enigma machine: type your own letters on the machine Owner: "the user should actually be able to
-   type somewhere on a letter, I guess. Like they should be able to enter something aside from
-   hello." The "Your own message" panel in the Toy tab exists, but he didn't find it. Make typing
-   direct:
+2. Enigma machine: type your own letters on the machine Owner: the user should be able to type
+   somewhere on the machine, and enter something other than "hello". The "Your own message" panel in
+   the Toy tab exists, but he didn't find it. Make typing direct:
    - A tap on a key of the machine's keyboard types that letter: the key goes down, the rotors step,
      the lamp lights, and the letter and its code go on the pad.
    - Typing on a computer keyboard while the toy is shown does the same. Don't take keys from text
@@ -62,28 +60,24 @@ Branches and PRs (one lane, stacked parts, merged in order):
    - Make the message panel easy to find too, and update the how-to line and About text
      (toy-help.js).
 
-3. Periodic table (public toy) Owner: "if I click on one of the elements on the periodic table, the
-   screen kind of, like, flashes with a loading sign or something, and then it shows the actual
-   atom. Can we not have that loading animation thing happen or something? Or maybe we can keep it,
-   but it just kind of flashes really fast… Also it would be cool if somebody could, like, tap on
-   the background of the periodic table… maybe it would just, like, shuffle randomly, or it would
-   just do, like, a walk-through all of the elements… based on atomic number… automatically." a. The
-   flash: a tile tap sets the "element" option, which rebuilds the toy, and the player shows its
-   loading overlay. Make the switch seamless: the table stays and the new atom rises, with no
-   overlay. If the fix belongs in player.js (for example, show the overlay only when a rebuild takes
-   longer than about half a second), it goes in the Fix6 engine PR. It then helps every toy whose
-   options rebuild it. Keep that diff small: UI r2 (#131) and the Live input engine (#144) touch
-   player.js too. b. A tour: a tap on the board's background (not a tile, not the atom) starts a
-   walk through the elements by atomic number, 1 to 118. Each atom rises for about two seconds with
-   its tile lit. A tap stops the tour. Add an option for the order: "By atomic number" or
-   "Shuffled". Today a background tap lowers the atom, so give lowering another clear gesture and
-   say it in the how-to line.
+3. Periodic table (public toy) Owner: when he taps an element, the screen flashes a loading sign
+   before the atom shows. He asks for no loading animation, or at least a very fast flash. He also
+   would like a tap on the table's background to do something, such as shuffle randomly or walk
+   through all of the elements by atomic number automatically. a. The flash: a tile tap sets the
+   "element" option, which rebuilds the toy, and the player shows its loading overlay. Make the
+   switch seamless: the table stays and the new atom rises, with no overlay. If the fix belongs in
+   player.js (for example, show the overlay only when a rebuild takes longer than about half a
+   second), it goes in the Fix6 engine PR. It then helps every toy whose options rebuild it. Keep
+   that diff small: UI r2 (#131) and the Live input engine (#144) touch player.js too. b. A tour: a
+   tap on the board's background (not a tile, not the atom) starts a walk through the elements by
+   atomic number, 1 to 118. Each atom rises for about two seconds with its tile lit. A tap stops the
+   tour. Add an option for the order: "By atomic number" or "Shuffled". Today a background tap
+   lowers the atom, so give lowering another clear gesture and say it in the how-to line.
 
-4. Acoustic guitar (public toy): "the acoustic guitar looks too grainy, quite frankly. We should
-   improve that." Apply the materials rule (no speckle, no blur): the top, the sunburst, the neck
-   and the soundhole should read as smooth lacquered wood, and the strings as clean lines. Keep the
-   strum (the strings visibly move). Post before and after clips at phone size and a still at
-   1440×900.
+4. Acoustic guitar (public toy): the owner finds it too grainy and wants it improved. Apply the
+   materials rule (no speckle, no blur): the top, the sunburst, the neck and the soundhole should
+   read as smooth lacquered wood, and the strings as clean lines. Keep the strum (the strings
+   visibly move). Post before and after clips at phone size and a still at 1440×900.
 
 Before each push, run the CLAUDE.md checks. Post clips for 1 (a real photo of a scene: a 24 MP JPEG
 you make or a CC0 photo, opened end to end), 2, 3a, 3b and 4. Reply with "READY:", "WORKING:" or

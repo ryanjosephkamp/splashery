@@ -10,9 +10,9 @@ science, the Studio and music. These two shelves, `geo` (Earth and maps) and `im
 evidence yet (`docs/evidence/` has no file for `grand-canyon`, `st-helens`, `sea-floor`,
 `tide-harbor`, `hurricane`, `relief-map`, `living-city`, `stork-migration`, `earthquakes`,
 `airport-xray`, `how-ct`, `walnut-ct`, `fruit-mri`, `electron-microscope` or `thermal-camera`). The
-owner's rule (October 4, 2026): "I do not want to hallucinate these things ... but we need to be
-transparent about [what is stretched]." Read `docs/evidence/README.md` first: it defines the file
-you write. Another file in `docs/evidence/` (say `climate-records.json`) shows the style.
+owner's rule (October 4, 2026): nothing may be made up, and the toy must be transparent about what
+is stretched. Read `docs/evidence/README.md` first: it defines the file you write. Another file in
+`docs/evidence/` (say `climate-records.json`) shows the style.
 
 ## Steps
 

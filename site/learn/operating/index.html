@@ -591,17 +591,18 @@
               as it is.
             </li>
             <li>
-              <strong>Filed.</strong> The Operator keeps the notes word for word in
-              <code>docs/reviews/sounds-&lt;date&gt;.md</code> and writes a clean version per toy
-              into <code>tools/sound-review.json</code>:
+              <strong>Filed.</strong> The owner's notes stay private (CLAUDE.md, &quot;Ground
+              rules&quot;). The Operator writes a clean version per toy, in its own words, into
+              <code>tools/sound-review.json</code>:
               <code
                 >{ &quot;round&quot;, &quot;note&quot;, &quot;toys&quot;: { &quot;&lt;toy
-                id&gt;&quot;: { &quot;status&quot;, &quot;said&quot;, &quot;note&quot;,
-                &quot;plan&quot;, &quot;candidates&quot; } } }</code
+                id&gt;&quot;: { &quot;status&quot;, &quot;note&quot;, &quot;plan&quot;,
+                &quot;candidates&quot; } } }</code
               >. <code>status</code> is <code>keep</code>, <code>change</code>,
               <code>ready</code> (a new sound to hear), <code>approved</code> or
-              <code>site</code> (in the site); <code>said</code> is his words, <code>note</code> the
-              clean version, <code>plan</code> what the new sound will be. The Sound Board shows
+              <code>site</code> (in the site); <code>note</code> is the clean version,
+              <code>plan</code> what the new sound will be. (Older entries had a
+              <code>said</code> field with his words; it is being removed.) The Sound Board shows
               each toy's line, with filters (All, To change, Ready to hear, Approved), &quot;Play
               through&quot; (the filtered toys one after another, the name shown large) and optional
               marks.

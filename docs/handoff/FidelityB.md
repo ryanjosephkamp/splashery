@@ -12,10 +12,10 @@ sharp". Handoff file: docs/handoff/FidelityB.md.
 
 ### Brief (written by the Operator on September 29, 2026, from the owner's note "big new Splashery ideas", his answers on the Splashery Universe page, and his marks on lane Fidelity A)
 
-The owner's words: "I almost want to make things so incredible with this that people won't even
-realize that they're looking at Gaussian splats … some of the stuff, just, like, the resolution
-isn't great. It just looks grainy." His answer: "two fidelity lanes (Fidelity A audits every toy at
-phone size and fixes the worst …; Fidelity B fixes the rest of its list)."
+The owner's call: make things so good that people don't realize they are looking at Gaussian splats,
+because the resolution of some toys isn't great and they look grainy. His answer: two fidelity lanes
+(Fidelity A audits every toy at phone size and fixes the worst; Fidelity B fixes the rest of its
+list).
 
 Lane Fidelity A (PR #77, claude/lane-fidelity-a) audited every toy and fixed 24. The owner marked 23
 of its before-and-after cards "good" on September 29 (the Klein bottle is being redone there). So

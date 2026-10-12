@@ -88,14 +88,12 @@ Rules for this round:
 (Written by the Operator on September 28, 2026, from the owner's notes and the Pages into Splats
 plan he accepted the same day; step 3 of ROADMAP.md, "Pictures and pages")
 
-The owner's words: "I'm wondering if we could maybe create, like, a tinkerer operator manual or
-something like that. You don't have to call it that, but it's something kind of like that where if
-somebody knows the math, they could actually, you know, program a Gaussian splat to do something
-using what we've provided." "I'd like to know if there's any way to kind of construct something so
-that people can submit their own, like, Gaussian splat equations and play around with that stuff
-here." "I'd like to know, you know, what the quote-unquote programming language is, and present it
-to people so that they can do this stuff themselves." The accepted plan: "the splat equation toy
-with a public Tinkerer's Manual that is also the book's default PDF."
+The owner's call (his notes are private; the Operator's summary): he wants a tinkerer's operator
+manual, whatever it is called, so that someone who knows the math can program a Gaussian splat to do
+something with what we provide. He wants a way for people to submit their own Gaussian splat
+equations and play with them on the site, and wants the "programming language" explained and
+presented to people so they can do this themselves. The accepted plan: the splat equation toy with a
+public Tinkerer's Manual that is also the book's default PDF.
 
 Build two things:
 
@@ -187,13 +185,12 @@ Pictures set it up), except where this brief names another shelf. The owner turn
 `?labs=1` and tries the toys on his phone. The labs switch comes off in a later small Ops change,
 when he says so.
 
-The owner's words (docs/reviews/2026-09-28-pictures/review.md, word for word): "It should all still
-be Gaussian splats, like the rest of it is." "There needs to be enough resolution for it to still
-resemble the original article. It doesn't have to be perfectly legible." "It's okay if we allow the
-toys to be bigger than usual, possibly even larger in file size than usual, in order for the
-resolution and quality to be better." Samples only under CC0, CC BY or public domain, checked on the
-live source page and credited (CREDITS.md and the toy's in-app credit); no logos, brand names or
-insignia. The laptop stays exactly as it is.
+The owner's call (September 28, 2026; his notes are private, the Operator's summary follows): it
+should all still be Gaussian splats, like the rest of the site. There needs to be enough resolution
+for the result to still resemble the original article, though it need not be perfectly legible. Toys
+may be bigger than usual, possibly larger in file size, for better resolution and quality. Samples
+only under CC0, CC BY or public domain, checked on the live source page and credited (CREDITS.md and
+the toy's in-app credit); no logos, brand names or insignia. The laptop stays exactly as it is.
 
 HOW THIS LANE RUNS
 

@@ -208,15 +208,15 @@
             </li>
             <li>
               <strong>Figures and photos pop out in 3D</strong> (the owner's idea of October 3,
-              2026: &quot;a button that the user can click or tap to make the figures … or images
-              within a PDF, or the photos in a photo album, pop up from the page seamlessly in 3D …
-              strictly optional&quot;). A &quot;Pop out&quot; button (in the Toy tab, and on the
-              page itself if it reads well) lifts the figure or photo off the page as a depth splat
-              that rises and turns toward the reader, and a second tap lays it back flat. Find the
-              figures: for photos in the album the photo is known; for a PDF, find the image boxes
-              from PDF.js's operator list (the image paint operators and their transforms), and let
-              the reader drag a box around anything else (a vector plot, a diagram). For the depth,
-              reuse the Photo to 3D pipeline (<code>src/packs/photo-3d-depth.js</code>,
+              2026: a strictly optional button the user can click or tap to make the figures or
+              images within a PDF, or the photos in a photo album, pop up from the page seamlessly
+              in 3D). A &quot;Pop out&quot; button (in the Toy tab, and on the page itself if it
+              reads well) lifts the figure or photo off the page as a depth splat that rises and
+              turns toward the reader, and a second tap lays it back flat. Find the figures: for
+              photos in the album the photo is known; for a PDF, find the image boxes from PDF.js's
+              operator list (the image paint operators and their transforms), and let the reader
+              drag a box around anything else (a vector plot, a diagram). For the depth, reuse the
+              Photo to 3D pipeline (<code>src/packs/photo-3d-depth.js</code>,
               <code>src/packs/photo-3d-core.js</code>; Depth Anything V2 Small through ONNX Runtime
               Web, both vendored and loaded only on first use). Import those modules; if they need a
               change, say so in your message first, since the Photo to 3D lane owns them. For flat

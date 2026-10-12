@@ -56,9 +56,9 @@ back.
   is its sandbox.
 - It needed no shared engine change: the world has its own small PlayCanvas setup
   (`src/worlds/render.js`) and reuses the kit, the noise, the font and the pack recipes as they are.
-- The owner liked the mechanics but not the look: "still just a bit too grainy, and the
-  player/character looks way too low-poly and simplistic." So round 2 splits in two: Worlds r2 takes
-  the grain out of the island, and a new Character lane builds "a polished video game character".
+- The owner liked the mechanics but not the look: still a bit too grainy, and the player character
+  looks far too low-poly and simplistic. So round 2 splits in two: Worlds r2 takes the grain out of
+  the island, and a new Character lane builds "a polished video game character".
 - About 14 hours from start to merge; the Integrator's run on main + #78 passed 413 of 413.
 - Lessons (WORLDS.md): PlayCanvas 2.22.3's level of detail and splat budget work only on streamed
   octree files, so a world built on the device keeps its own levels and budgets; limbs built as
@@ -66,12 +66,12 @@ back.
 
 ### Fidelity A and B: the grainy toys made sharp (PRs #77 and #90, merged 2026-09-29)
 
-- Built by Opus 5.5, in two lanes from the owner's words: "I almost want to make things so
-  incredible with this that people won't even realize that they're looking at Gaussian splats."
-  Fidelity A audited every toy at phone size (a ranked list with five causes of grain: random
-  placement, low density, mirror chrome on thin parts, see-through `rim()` shells, faint clouds) and
-  made the 24 worst sharp; Fidelity B built on its branch and did the other 73 on the list, adding
-  even versions of the kit's shapes (`src/packs/even.js`).
+- Built by Opus 5.5, in two lanes from the owner's goal (September 29, 2026) of making things so
+  good that people don't realize they are looking at Gaussian splats. Fidelity A audited every toy
+  at phone size (a ranked list with five causes of grain: random placement, low density, mirror
+  chrome on thin parts, see-through `rim()` shells, faint clouds) and made the 24 worst sharp;
+  Fidelity B built on its branch and did the other 73 on the list, adding even versions of the kit's
+  shapes (`src/packs/even.js`).
 - The owner marked 23 of Fidelity A's 24 cards good the first time (the Klein bottle was redone
   once) and all 73 of Fidelity B's. Fidelity A took about 12 hours from start to merge (it waited on
   one mark), Fidelity B about 8.5.
@@ -241,8 +241,8 @@ back.
   read the drive code and rendered a filmstrip (`tools/effect-clip.mjs --strip=8`). Facts come from
   science agencies, museums and encyclopedias; ones they couldn't confirm were left out. Where a toy
   does something the real thing doesn't, the text says "the toy" does it.
-- The owner read every text on the Help Board and approved them all on September 28, 2026
-  ([review](../reviews/2026-09-28-help/review.md)).
+- The owner read every text on the Help Board and approved them all on September 28, 2026 (the
+  redacted summary is [reviews/2026-09-28-help/review.md](../reviews/2026-09-28-help/review.md)).
 - `tests/hta.spec.mjs` and `tests/htb.spec.mjs` check that every toy on their shelves has both texts
   of the right shape, and show a long About text whole at both sizes. `tests/help.spec.mjs` now
   reads the current texts (#61), since no toy is left without an entry.
@@ -504,19 +504,18 @@ back.
 - **Sounds (E3).** 26 specs re-timed in `src/toy-sounds.js` (all pass `tools/sound-check.mjs`); the
   heart's lub-dubs follow its racing beat. The Splashery Sound Board page was rebuilt.
 - 199 toys are keep, 2 more, 83 new.
-- **E2 review (2026-09-25).** The owner's review is word for word in
-  `docs/reviews/2026-09-25-e2/review.md` (and its marks are in the Effect review page's database).
-  24 of 32 were "good"; the fixes are in this PR: the Moon's phases were replaced by a landing (a
-  lunar module lands near the top of the Moon, an astronaut climbs down, plants a chosen flag,
-  unrolls it and waves; a second tap packs up and lifts off; the flag is a `type: "flag"` toy option
-  drawn from its SVG through the screen texture, at the flag's real shape, which
-  `tools/flag-aspects.mjs` now writes into flags.json); the sapphire's star lies on the stone and
-  ends at its edge; the quartz glints point different ways; the solar system's planets are spaced
-  and sized so none touch, at rest or in the row. The atom, orbital, molecule and crystal lattice
-  were "good, but more of them some day" (BACKLOG). The owner's other requests (a resizable, roomier
-  settings panel with a main tab and a reset button, sharper laptop keys, chess playback and flag
-  colours, molecules from formulas or files, a protein toy with PDB upload) are in the stacked PRs
-  `claude/quirky-pasteur-modo55-2` and `-3` (merge them in that order, after this one).
+- **E2 review (2026-09-25).** The owner's review is private (and its marks are in the Effect review
+  page's database). 24 of 32 were "good"; the fixes are in this PR: the Moon's phases were replaced
+  by a landing (a lunar module lands near the top of the Moon, an astronaut climbs down, plants a
+  chosen flag, unrolls it and waves; a second tap packs up and lifts off; the flag is a
+  `type: "flag"` toy option drawn from its SVG through the screen texture, at the flag's real shape,
+  which `tools/flag-aspects.mjs` now writes into flags.json); the sapphire's star lies on the stone
+  and ends at its edge; the quartz glints point different ways; the solar system's planets are
+  spaced and sized so none touch, at rest or in the row. The atom, orbital, molecule and crystal
+  lattice were "good, but more of them some day" (BACKLOG). The owner's other requests (a resizable,
+  roomier settings panel with a main tab and a reset button, sharper laptop keys, chess playback and
+  flag colors, molecules from formulas or files, a protein toy with PDB upload) are in the stacked
+  PRs `claude/quirky-pasteur-modo55-2` and `-3` (merge them in that order, after this one).
 - **Settings panel (after the E2 review, PR `-2`).** Tabs: **Toy** (the main tab: action, controls,
   options, Motion with the turntable ON/OFF switch, Quick settings with flag colours, Detail and
   **Reset everything**), **Tools** (the picked tool's settings, opened by picking a tool, and the
@@ -618,14 +617,15 @@ back.
   and its collar follows the neck's measured radius.
 - **Sounds (E1c).** Cues play mid-effect sounds (Newton's cradle clacks on each strike). A sound
   spec's `pickAt` times a picked note (a xylophone bar sounds as the mallet lands, at 0.12 s).
-- **Locked toys (owner approved, do not change their look or behaviour):** the laptop ("basically
-  perfect … please lock that in"). Engine changes must keep it working exactly as now; the laptop
-  smoke test guards it. The one change since, at the owner's request after E2: sharper key letters
-  (every font pixel filled by a 3 x 3 grid of dots just above the cap) and digits on the top row.
-- **Phase E1b** (the owner's review of E1, verbatim in `docs/reviews/2026-09-24-e1/review.md`) is in
-  three stacked PRs, merged in order: `claude/phase-e1-45lgvf-1` (rules, clip tool, scan and shape
-  fixes), `-2` (thrown balls, eight-ball, storybook) and `-3` (chess and laptop). Check that all
-  three are merged before starting E2.
+- **Locked toys (owner approved, do not change their look or behavior):** the laptop (basically
+  perfect; the owner asked to lock it in). Engine changes must keep it working exactly as now; the
+  laptop smoke test guards it. The one change since, at the owner's request after E2: sharper key
+  letters (every font pixel filled by a 3 x 3 grid of dots just above the cap) and digits on the top
+  row.
+- **Phase E1b** (the owner's review of E1, which is private) is in three stacked PRs, merged in
+  order: `claude/phase-e1-45lgvf-1` (rules, clip tool, scan and shape fixes), `-2` (thrown balls,
+  eight-ball, storybook) and `-3` (chess and laptop). Check that all three are merged before
+  starting E2.
 - **Effect quality rules (E1b).** CLAUDE.md now has "Effect quality rules" and docs/PACKS.md section
   7b the details: real motion of solid pieces (never bend a scan with soft regions), separate things
   move separately, real breaking, instruments visibly played, mouths move, real rules and real
@@ -1007,10 +1007,10 @@ Known issues carried forward:
 ## Phases
 
 Each phase is one session and one PR, or a small stack of PRs. The owner reviewed every toy on
-2026-09-23 (raw notes and screenshots in [reviews/2026-09-23/](../reviews/2026-09-23/review.md)).
-The per-toy plan that came out of it is [TOY-PLAN.md](../TOY-PLAN.md), generated from
-`tools/toy-plan.json` by `node tools/toy-plan.mjs`. Keep that JSON current: when a phase finishes a
-toy, update its entry (for example `"v": "keep"`) and regenerate.
+2026-09-23 (the owner's notes are private). The per-toy plan that came out of it is
+[TOY-PLAN.md](../TOY-PLAN.md), generated from `tools/toy-plan.json` by `node tools/toy-plan.mjs`.
+Keep that JSON current: when a phase finishes a toy, update its entry (for example `"v": "keep"`)
+and regenerate.
 
 **On 2026-09-24 the owner approved every proposal in the plan as written**, including the
 sports-ball texture fixes added that day, and all toys are marked approved on the page below. Build

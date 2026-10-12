@@ -2615,7 +2615,7 @@ Object.assign(LEVEL, {
 VOICE_NAMES.push(...Object.keys(SOUND_B));
 
 // ---- Sound C (lane Sound C, October 2, 2026) --------------------------------------
-// For the owner's review of October 2 (docs/reviews/sounds-2026-10-02.md).
+// For the owner's review of October 2 (tools/sound-review.json).
 const SOUND_C = {
   glide: {
     // A soft, continuous tone that falls the way a curve settles (from f to

@@ -1363,8 +1363,8 @@ From lanes Math and Fix3 (September 27–28, 2026):
 
 ## 7b. Effect quality
 
-The owner's review of Phase E1 (`docs/reviews/2026-09-24-e1/review.md`) set these rules. The short
-form is in CLAUDE.md.
+The owner's review of Phase E1 (his notes are private) set these rules. The short form is in
+CLAUDE.md.
 
 - **Real motion, not a warped picture.** A part moves as a solid piece. A scan rig's soft regions
   (`soft` above about 0.1) bend the picture where a part meets the rest, and at any visible size
@@ -1536,10 +1536,10 @@ inside it (`src/packs/anatomy-atlas.js`):
 
 ## 7e. Sound preferences
 
-Drawn from the owner's sound review of September 28, 2026 (`docs/reviews/2026-09-28-sounds/`, filed
-September 30) and his summary that day. They are general guidance, not strict rules, but every new
-or changed sound follows them unless the owner asks otherwise. `tools/sound-review.json` has his
-notes per toy.
+Drawn from the owner's sound review of September 28, 2026 (private; filed September 30) and his
+summary that day. They are general guidance, not strict rules, but every new or changed sound
+follows them unless the owner asks otherwise. `tools/sound-review.json` has the Operator's notes and
+plans per toy.
 
 - **Real things sound real.** A real-world object makes the sound the real thing makes, like a good
   sound effect or "almost ASMR": a bite of an apple, a hard taco shell cracking, dice on a table,

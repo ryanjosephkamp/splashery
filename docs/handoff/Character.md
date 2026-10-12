@@ -8,15 +8,13 @@ How lanes work: [OPERATING.md](../OPERATING.md). Earlier lessons: [history.md](h
 (Written by the Operator on September 29, 2026, from the owner's words that morning)
 
 Worlds (#78, merged September 29, 2026; docs/WORLDS.md) lets you walk a character around the Test
-island (`worlds/?labs=1`). The owner, word for word: "My main criticism is about the worlds: still
-just a bit too grainy, and the player/character looks way too low-poly and simplistic. But, the
-mechanics are solid! So it primarily seems like design problems and sharpness, not physics and
-mechanics." Earlier, on the `wd-list` card: "Needs better resolution and precision. Better character
-design." On `wd-walk`: "looks extremely grainy and basic. This must be an impeccable and
-high-fidelity game." And on the Sharpness lane's Test island card this afternoon
-(`shp-test-island`): "This is getting better and better! The person, however, doesn't look right. I
-don't know if you can make this person look like a polished video game character, but perhaps you
-could try?"
+island (`worlds/?labs=1`). The owner's call: the worlds are still a bit too grainy, and the player
+character looks far too low-poly and simplistic, but the mechanics are solid, so the work is design
+and sharpness, not physics and mechanics. Earlier, on the `wd-list` card: better resolution and
+precision, and a better character design. On `wd-walk`: it looks very grainy and basic, and this
+must be an impeccable, high-fidelity game. And on the Sharpness lane's Test island card
+(`shp-test-island`): it keeps getting better, but the person doesn't look right, and he asks whether
+it can look like a polished video game character.
 
 So: aim for the look of a polished video game character. Build a detailed, well-proportioned, sharp
 person who walks, runs and stands like a real one. The mechanics stay: the speeds, the controls, the
