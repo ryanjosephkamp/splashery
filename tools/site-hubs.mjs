@@ -552,11 +552,16 @@ ${docLinks(up)}
     const { features, fixes } = JSON.parse(read(root, "tools/site-news.json"));
     const { TOY_DATES, dateText, toyPath } = h;
     const byLabel = (a, b) => a.label.localeCompare(b.label);
-    const toy = (id) => {
+    const toy = (id, where) => {
       const t = TOYS.find((x) => x.id === id);
-      if (!t || !thumbHref(t)) throw new Error(`What's new: no toy or thumbnail for "${id}".`);
+      if (!t) throw new Error(`What's new: ${where} names the toy "${id}", which doesn't exist.`);
+      if (!thumbHref(t)) throw new Error(`What's new: ${where} names the toy "${id}", which has no thumbnail.`); // prettier-ignore
       return t;
     };
+    // One link per card, on its heading and stretched over the whole card (hubs.css, .news-link):
+    // it opens the toy in the Playground in a new tab, the same link as the toy page's button.
+    const cardLink = (t, text) =>
+      `<a class="news-link" href="${up}${h.galleryHref(t)}" target="_blank" rel="noopener">${text}<span class="visually-hidden">: opens the ${esc(t.label.toLowerCase())} in the Playground, in a new tab</span></a>`; // prettier-ignore
 
     // New toys: the newest public ones, and the newest labs ones (shown with the labs switch).
     const newest = (labs) =>
@@ -576,12 +581,10 @@ ${docLinks(up)}
       .slice()
       .sort((a, b) => b.date.localeCompare(a.date))
       .map((f) => {
-        const t = f.toy ? toy(f.toy) : null;
-        const pic = t
-          ? `<img src="${up}${thumbHref(t)}" alt="" width="72" height="72" loading="lazy" decoding="async" />`
-          : "";
+        const t = toy(f.toy, `the feature "${f.title}"`);
+        const pic = `<img src="${up}${thumbHref(t)}" alt="" width="72" height="72" loading="lazy" decoding="async" />`;
         const items = f.items.map((x) => `<li>${x}</li>`).join("");
-        return `<li class="news-feature"><div class="news-feature-head">${pic}<div><p class="news-when"><time datetime="${f.date}">${esc(dayRange(f.date, f.until))}</time></p><h3>${esc(f.title)}</h3></div></div><ul class="news-items">${items}</ul></li>`; // prettier-ignore
+        return `<li class="news-feature"><div class="news-feature-head">${pic}<div><p class="news-when"><time datetime="${f.date}">${esc(dayRange(f.date, f.until))}</time></p><h3>${cardLink(t, esc(f.title))}</h3></div></div><ul class="news-items">${items}</ul></li>`; // prettier-ignore
       })
       .join("");
 
@@ -589,9 +592,9 @@ ${docLinks(up)}
       .slice()
       .sort((a, b) => b.date.localeCompare(a.date))
       .map((f) => {
-        const t = toy(f.toy);
+        const t = toy(f.toy, `the fix "${f.title}"`);
         const img = (side, word) => `<figure><img src="${up}assets/news/${f.id}-${side}.webp" alt="${esc(`${word}: ${f.title}`)}" width="160" height="160" loading="lazy" decoding="async" /><figcaption>${word}</figcaption></figure>`; // prettier-ignore
-        return `<li class="news-fix"${t.labs ? " data-labs" : ""}><div class="news-ba">${img("before", "Before")}${img("after", "After")}</div><p class="news-when"><time datetime="${f.date}">${esc(h.longDate(f.date))}</time></p><h3>${esc(f.title)}${t.labs ? ' <span class="badge">labs</span>' : ""}</h3><p>${esc(f.line)}</p></li>`; // prettier-ignore
+        return `<li class="news-fix"${t.labs ? " data-labs" : ""}><div class="news-ba">${img("before", "Before")}${img("after", "After")}</div><p class="news-when"><time datetime="${f.date}">${esc(h.longDate(f.date))}</time></p><h3>${cardLink(t, esc(f.title))}${t.labs ? ' <span class="badge">labs</span>' : ""}</h3><p>${esc(f.line)}</p></li>`; // prettier-ignore
       })
       .join("");
 
