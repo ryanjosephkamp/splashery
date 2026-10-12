@@ -1,0 +1,50 @@
+{
+  "toy": "baked-chest",
+  "checked": "2026-10-12",
+  "summary": "The chest is a set of 3D Gaussian splats baked ahead of time and stored at 18 bytes each. The stored rotation, sizes, color, and opacity follow the standard 3D Gaussian splatting layout, and the round-trip error was measured on two trained splat files in the repository. The chest itself is a made-up object, not a measured one.",
+  "claims": [
+    {
+      "claim": "Each splat keeps its own place, three sizes, a turn, a color, an opacity, and the piece it belongs to.",
+      "how": "The encoder writes the position, the three log sizes, the rotation quaternion, the degree-0 color, the opacity after the sigmoid, and a part id for every splat, in the fields a 3D Gaussian splatting file defines.",
+      "where": "src/baked.js:111",
+      "sources": [
+        {
+          "title": "3D Gaussian Splatting for Real-Time Radiance Field Rendering",
+          "publisher": "Kerbl, Kopanas, Leimkühler, and Drettakis, ACM Transactions on Graphics, 2023",
+          "url": "https://repo-sam.inria.fr/fungraph/3d-gaussian-splatting/",
+          "says": "Each Gaussian has a position, a covariance stored as a scale and a rotation quaternion, an opacity, and color as spherical harmonics."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/bkd-format.spec.mjs:60",
+      "note": "Only the degree-0 color is kept; view-dependent color is dropped."
+    },
+    {
+      "claim": "A turn is packed into 32 bits by storing the three smallest parts of the quaternion.",
+      "how": "The largest component's index takes 2 bits and the other three take 10 bits each over plus or minus one over the square root of two; the largest is rebuilt from unit length. Random rotations come back within 0.25 degrees.",
+      "where": "src/baked.js:55",
+      "sources": [
+        {
+          "title": "Snapshot Compression",
+          "publisher": "Glenn Fiedler, Gaffer On Games, 2015",
+          "url": "https://gafferongames.com/post/snapshot_compression/",
+          "says": "A unit quaternion can be sent as its three smallest components plus two bits naming the largest, which is recovered from the unit length."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/bkd-format.spec.mjs:45",
+      "note": ""
+    },
+    {
+      "claim": "The page loads 30,000 splats or 100,001, or fewer still on a slow device.",
+      "how": "The splat budget picks the largest stored tier that fits; below the smallest tier, that tier's first splats are used, which the converter stores in an even random order.",
+      "where": "src/baked.js:240",
+      "sources": [],
+      "verdict": "unverified",
+      "test": "tests/bkd-format.spec.mjs:115",
+      "note": "A behavior of this site, checked by its tests; there is no outside source to compare against."
+    }
+  ],
+  "simplified": [],
+  "fixes": []
+}

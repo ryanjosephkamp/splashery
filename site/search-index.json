@@ -3891,6 +3891,16 @@
     "l": 1
   },
   {
+    "t": "Baked chest",
+    "u": "toys/baked-chest/",
+    "k": "toy",
+    "s": "Lab",
+    "d": "Tap to open or close the lid.",
+    "w": "baked chest lab lab baked splats asset tiers parts lid hinge chest treasure gold 3dgs ply converter baked-chest",
+    "i": "../assets/toys/baked-chest/thumb.webp",
+    "l": 1
+  },
+  {
     "t": "Thermal ellipsoids",
     "u": "toys/thermal-ellipsoids/",
     "k": "toy",
