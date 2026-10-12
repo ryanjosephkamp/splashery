@@ -408,3 +408,14 @@
 {"v":1,"t":"2026-10-12T07:25:10.777Z","harness":"claude-code","event":"tool","session":"aff21b66-ad0b-5e44-8f7f-c39398b674ba","tool":"mcp__Claude_Code_Remote__create_trigger","cwd":"splashery"}
 {"v":1,"t":"2026-10-12T07:25:16.879Z","harness":"claude-code","event":"tool","session":"aff21b66-ad0b-5e44-8f7f-c39398b674ba","tool":"Bash","cwd":"splashery"}
 {"v":1,"t":"2026-10-12T07:25:22.745Z","harness":"claude-code","event":"turn-end","session":"aff21b66-ad0b-5e44-8f7f-c39398b674ba","cwd":"splashery"}
+{"v":1,"t":"2026-10-12T07:30:42.118Z","harness":"claude-code","event":"session-end","session":"aff21b66-ad0b-5e44-8f7f-c39398b674ba","cwd":"splashery"}
+{"v":1,"t":"2026-10-12T07:46:02.441Z","harness":"claude-code","event":"session-start","session":"aff21b66-ad0b-5e44-8f7f-c39398b674ba","cwd":"splashery"}
+{"v":1,"t":"2026-10-12T07:46:02.563Z","harness":"claude-code","event":"turn-start","session":"aff21b66-ad0b-5e44-8f7f-c39398b674ba","cwd":"splashery"}
+{"v":1,"t":"2026-10-12T07:46:06.902Z","harness":"claude-code","event":"tool","session":"aff21b66-ad0b-5e44-8f7f-c39398b674ba","tool":"ReadNotifications","cwd":"splashery"}
+{"v":1,"t":"2026-10-12T07:46:17.450Z","harness":"claude-code","event":"tool","session":"aff21b66-ad0b-5e44-8f7f-c39398b674ba","tool":"mcp__Claude_Code_Remote__send_later","cwd":"splashery"}
+{"v":1,"t":"2026-10-12T07:46:21.471Z","harness":"claude-code","event":"tool","session":"aff21b66-ad0b-5e44-8f7f-c39398b674ba","tool":"Bash","cwd":"splashery"}
+{"v":1,"t":"2026-10-12T07:46:25.770Z","harness":"claude-code","event":"tool","session":"aff21b66-ad0b-5e44-8f7f-c39398b674ba","tool":"mcp__Claude_Code_Remote__get_session","cwd":"splashery"}
+{"v":1,"t":"2026-10-12T07:46:33.282Z","harness":"claude-code","event":"tool","session":"aff21b66-ad0b-5e44-8f7f-c39398b674ba","tool":"Bash","cwd":"splashery"}
+{"v":1,"t":"2026-10-12T07:46:37.623Z","harness":"claude-code","event":"tool","session":"aff21b66-ad0b-5e44-8f7f-c39398b674ba","tool":"Bash","cwd":"splashery"}
+{"v":1,"t":"2026-10-12T07:46:41.344Z","harness":"claude-code","event":"tool","session":"aff21b66-ad0b-5e44-8f7f-c39398b674ba","tool":"Bash","cwd":"splashery"}
+{"v":1,"t":"2026-10-12T07:46:41.424Z","harness":"claude-code","event":"turn-start","session":"aff21b66-ad0b-5e44-8f7f-c39398b674ba","cwd":"splashery"}
