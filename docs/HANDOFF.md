@@ -4,11 +4,12 @@ Where Splashery stands, in short. The Operator session keeps this file; each lan
 in [handoff/](handoff/). The ground rules are in [CLAUDE.md](../CLAUDE.md); how the parallel lanes
 work is in [OPERATING.md](OPERATING.md).
 
-## Now (October 12, 2026, about 03:40 UTC)
+## Now (October 12, 2026, about 09:00 UTC)
 
-The Operator is `session_01BbS2vUAWpeFF2i6KoJAqCt` (Opus 5.5), since October 12, 2026, 01:38 UTC. It
-took over from `session_01Mo8sLhAitbYjZiPgD8Hc4t` by `.claude/skills/operator-handover/SKILL.md`.
-This section is current. The sections below it are history. The runbook is
+The Operator was `session_01BbS2vUAWpeFF2i6KoJAqCt` (Opus 5.5), from October 12, 2026, 01:38 UTC. It
+hands over at about 09:00 UTC the same day (470k tokens of context, mostly PR notices), by
+`.claude/skills/operator-handover/SKILL.md`, to a fresh Operator, which puts its own id here in its
+first Ops PR. This section is current. The sections below it are history. The runbook is
 [OPERATOR.md](OPERATOR.md).
 
 **Effort (the owner's call of October 8, 2026):** every worker, lanes and Integrators alike, runs at
@@ -20,7 +21,7 @@ change it.
 (`tools/suite.mjs --gl=llvmpipe --jobs=2 --recheck`), the lanes fix what the batch broke, and the
 batch merges as one PR.
 
-**Main** is at #556 or later. Merged October 9 to 12:
+**Main** is at #563 or later. Merged October 9 to 12:
 
 - #457: Hands-on H1 and H5 (the Enigma, clothing, the handoffs) and Photo sharp view r3
 - #466: the October 9 walkthrough and manual reviews, triaged into lanes
@@ -57,33 +58,40 @@ batch merges as one PR.
   phone, arcade games, the photoreal planets, the elements and Blender worlds)
 - #555: the owner's calls of October 12 (faster depth approved; his notes' git history stays)
 - #556: Manual r7a (#545) and Manual r7b (#542) in one batch, the PDF rebuilt by the Operator
+- #557: Codex tasks 42 to 46 and upkeep; #563: the Baked engine (#549), after a full suite
 
 **Lanes running** (rows, sessions and files in WORKSTREAMS.md):
 
-- **Baked engine** (Opus, #549): READY; the owner marked its chest card good. A full suite runs on
-  `claude/operator-merge-oct12e`; it merges after that (additive engine, labs).
-- **Builders r1** (Sonnet): merged; holds for one small follow-up once #549 is in (TOY-PACKAGE,
-  KIT-GUIDE, HANDBACK and the T3 prompt name the baked format).
+- **Manual r7c** (Sonnet, #561, `session_01Tko4V1aaTv9kT4qzNy4LNh`): `ln:136`, `ln:240` and `ln:333`
+  fail on main since #556 (a fifth code sample, new Further reading sites, the PDF at 12.1 MB over
+  the 8 MB bound). Merge it after its specs (ln, man\*, st2, site, spg); then the owner runs Codex
+  task 36.
+- **Builders r1b** (Sonnet, `session_01PBv3i865UDjudcgzSUMGjq`, branch `claude/lane-builders-r1b`):
+  the baked format in `builders/` (TOY-PACKAGE, KIT-GUIDE, HANDBACK, T3). Merge after `bld`, then
+  send the owner a fresh ZIP (`node tools/builders-pack.mjs`).
 
-Codex (the owner runs these): task 36 (the manual's third audit) now that r7a and r7b are in, then a
-Sonnet lane (Manual r8) fixes what it finds, then the owner's one rewording pass for the manual and
-the Learn pages. Tasks 37 to 41 (the Studio push) and 42 to 46 (the second wave) run in parallel;
-the Operator checks each PR, collects its clips and merges labs work after its tests.
+**Codex** (the owner runs these; tasks in `docs/codex/`, the Studio push 37 to 41 and the second
+wave 42 to 46). The Operator reviews each PR with a Sonnet helper and posts one comment listing the
+fixes; the owner tells the Codex session "Read the Operator's comment on your PR and do it":
 
-Finished and safe to archive with the owner's OK: Site r5, Manual r7a, Manual r7b, Privacy r1,
-Manual r6, Site r4, and the earlier list below.
+- #558 (task 37, depth engine), #559 (task 41, Splat mirror), #560 (task 38, Moving photo; replaces
+  #479, close #479 when it merges) and #562 (task 40, Video to 3D): fix comments posted October 12;
+  waiting on Codex. All four toys are labs: merge after the fixes, the tests (`cdx-*` plus the toys'
+  specs) and the owner's look at the clips.
+- Not yet opened: tasks 36, 39 and 42 to 46 (46 may start now that the Baked engine is in).
 
-**Open with the owner:** the front-door call; Codex tasks 37 to 41 (#554), which he runs; task 38
-replaces Codex task 32 (#479). Decided October 12, 2026: the git history of his removed notes stays
-as it is (no rewrite, no change to the repo's visibility); a faster depth runtime and a better depth
-model may ship over 2 MB under Apache-2.0, MIT or BSD (CLAUDE.md); he marked every st5, man7a and
-man7b card good. Pace: about 78% of the week used (October 12); his priorities before the reset
-(Wednesday, October 14, 4 p.m. ET) are the finished manual first, then the engine change.
+Finished and safe to archive with the owner's OK: the Baked engine, Site r5, Manual r7a, Manual r7b,
+Privacy r1, Manual r6, Site r4, and the earlier list below.
 
-**Next for the Operator:** merge the Baked engine after its full suite, then send Builders r1 its
-follow-up; brief Manual r8 (Sonnet) on Codex task 36's report; check and merge the Codex PRs from
-tasks 37 to 46 as they arrive (task 38 replaces #479; close #479 then); the Privacy r1 leftovers
-(WORKSTREAMS, OPERATING, two audit files, toy-plan.json and TOY-PLAN.md, one sound-review note);
+**Open with the owner:** the front-door call; three questions on the Codex PRs (the 16 MB of GIFs
+#559 says he approved; the Tears of Steel bridge sample, which may show an actor, A2; the 61 MB of
+longer films in #560); Codex task 36 after Manual r7c. Decided October 12, 2026: his notes' git
+history stays as it is; a faster depth runtime and a better depth model may ship over 2 MB under
+Apache-2.0, MIT or BSD (CLAUDE.md).
+
+**Next for the Operator:** merge Manual r7c, then tell the owner to run Codex task 36; merge
+Builders r1b and send him the ZIP; review and merge the Codex PRs as their fixes land (labs; tests
+and his look at the clips); brief Manual r8 (Sonnet) on task 36's report; the Privacy r1 leftovers;
 after the reset, the Sonnet polish lane for Codex prototypes #518, #515 and #517.
 
 ## State of main (2026-10-02, history)
