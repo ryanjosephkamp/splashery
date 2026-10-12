@@ -16,3 +16,5 @@
 {"v":1,"t":"2026-10-12T01:32:47.887Z","harness":"claude-code","event":"tool","session":"aff21b66-ad0b-5e44-8f7f-c39398b674ba","tool":"Bash","cwd":"splashery"}
 {"v":1,"t":"2026-10-12T01:33:05.664Z","harness":"claude-code","event":"tool","session":"aff21b66-ad0b-5e44-8f7f-c39398b674ba","tool":"mcp__bf7c680d-5fdc-5ef4-b4a0-abadb619bf0a__create_trigger","cwd":"splashery"}
 {"v":1,"t":"2026-10-12T01:33:24.356Z","harness":"claude-code","event":"turn-end","session":"aff21b66-ad0b-5e44-8f7f-c39398b674ba","cwd":"splashery"}
+{"v":1,"t":"2026-10-12T01:38:08.483Z","harness":"claude-code","event":"turn-start","session":"aff21b66-ad0b-5e44-8f7f-c39398b674ba","cwd":"splashery"}
+{"v":1,"t":"2026-10-12T01:38:09.875Z","harness":"claude-code","event":"tool","session":"aff21b66-ad0b-5e44-8f7f-c39398b674ba","tool":"ReadNotifications","cwd":"splashery"}
