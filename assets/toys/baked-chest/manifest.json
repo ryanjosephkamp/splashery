@@ -1,0 +1,86 @@
+{
+  "format": "splashery-baked-manifest",
+  "version": 1,
+  "id": "baked-chest",
+  "title": "",
+  "source": {
+    "file": "baked-chest.ply",
+    "sha256": "4048903bf8f08e045d7642d10f9f61754b536b7536d45a61e625958e18fb3c92",
+    "splats": 100001,
+    "parts": "baked-chest.parts.json",
+    "partsSha256": "39a1d0601af6a09dc853bf975be6eeac8199c23d613a874e39b48dad3965b45b",
+    "up": "y"
+  },
+  "bounds": {
+    "min": [
+      -0.800000011920929,
+      -0.004999999888241291,
+      -0.5120000243186951
+    ],
+    "max": [
+      0.800000011920929,
+      1.2059999704360962,
+      0.5180000066757202
+    ]
+  },
+  "parts": [
+    {
+      "id": 0,
+      "name": "body"
+    },
+    {
+      "id": 1,
+      "name": "lid",
+      "pivot": [
+        0,
+        0.86,
+        -0.5
+      ],
+      "axis": [
+        1,
+        0,
+        0
+      ]
+    }
+  ],
+  "defaultTier": 30000,
+  "tiers": [
+    {
+      "splats": 30000,
+      "bytes": 423480,
+      "files": [
+        {
+          "path": "assets/baked-chest-30000-0.bkd.gz",
+          "splats": 30000,
+          "bytes": 423480,
+          "sha256": "31ecfe0e61ff559f5eccb37bf75ddc07fa8491cd936d3a5362a91641bedc0ea1"
+        }
+      ]
+    },
+    {
+      "splats": 100001,
+      "bytes": 1404000,
+      "files": [
+        {
+          "path": "assets/baked-chest-100001-0.bkd.gz",
+          "splats": 65536,
+          "bytes": 918861,
+          "sha256": "5c12f79689940eec6d03f13c5f731dd98063a78db1d41e4dc2125ba373bfb89b"
+        },
+        {
+          "path": "assets/baked-chest-100001-1.bkd.gz",
+          "splats": 34465,
+          "bytes": 485139,
+          "sha256": "d060117cead1b7566cf534c2032f64d7cc847c1f9bb49fbe9f7d01e747814cd7"
+        }
+      ]
+    }
+  ],
+  "credit": {
+    "title": "",
+    "author": "",
+    "source": "",
+    "license": "",
+    "licenseUrl": ""
+  }
+}

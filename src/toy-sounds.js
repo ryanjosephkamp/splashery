@@ -2994,6 +2994,14 @@ export const TOY_SOUNDS = {
   // ---- Molecule viewer (lane Molecule viewer) ---------------------------------------
   // Quiet (PACKS.md 7e): one soft, low click as an atom is picked.
   "molecule-viewer": { voice: "clack", f: 1500, decay: 0.18, bright: 0.1, vol: 0.4 },
+  // ---- Baked chest (lane Baked engine): a wooden creak as the lid swings up, a soft knock as it shuts.
+  "baked-chest": {
+    on: { voice: "scrape", f: 300, rate: 5, decay: 1.1, vol: 0.7 },
+    off: [
+      { voice: "scrape", f: 260, rate: 8, decay: 0.6, vol: 0.5 },
+      { voice: "wood", at: 0.45, f: 180, decay: 1.2 },
+    ],
+  },
   // ---- Fluid lab (lane Fluids) ------------------------------------------------------
   // A pour's splash and glug (each scene plays its own through cues: a pour,
   // a thick gloop for honey and lava, a splash, a breath on the candle).

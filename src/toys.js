@@ -3937,6 +3937,18 @@ export const TOYS = [
     camera: { yaw: 0, pitch: 0.5, roll: 0, distance: 3.4 },
   },
   // ---- End of pack: light-lab ----
+  // ---- Pack: baked-demo (lane Baked engine) ----
+  {
+    id: "baked-chest",
+    label: "Baked chest",
+    category: "lab",
+    kind: "kit",
+    pack: "baked-demo",
+    labs: true,
+    tags: "baked splats asset tiers parts lid hinge chest treasure gold 3dgs ply converter",
+    camera: { yaw: 0.5, pitch: 0.35, roll: 0, distance: 3.2 },
+  },
+  // ---- End of pack: baked-demo ----
   // ---- Pack: science (lane Science) ----
   {
     id: "thermal-ellipsoids",
