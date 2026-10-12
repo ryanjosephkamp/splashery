@@ -95,9 +95,9 @@ Its largest page task was 2,743 ms, versus 2,793 ms before: the first build can 
 page, even though refinement no longer has the old full-pass rendering stall. These observations are
 separate from the clean `psv3` regression result.
 
-The final metric CLI uses the regression suite's complete Chromium launch configuration. Native
-input varies with the browser graphics setup: a separate Sintel extraction probe found that 69 of 71
-retained RGB frame hashes differed between plain headless Chromium and that configuration.
+The pre-integration metric CLI uses the regression suite's complete Chromium launch configuration.
+Native input varies with the browser graphics setup: a separate Sintel extraction probe found that
+69 of 71 retained RGB frame hashes differed between plain headless Chromium and that configuration.
 Plain-headless upload jitter was 0.021923, compared with 0.014680 in the regression setup; machine
 jitter was 0.009842 in plain headless and 0.009238 in the regression setup. These are observations
 of input and metric sensitivity, not a claim that one decoding path supplies ground-truth depth. The
@@ -114,7 +114,7 @@ clip's identity, completed refinement, and zero media-element clock error. The B
 silhouette tears remain visible; a zero background-hole count in the central sample area does not
 cover those silhouettes.
 
-## Final review measurements
+## Review measurements before task 37 integration
 
 Low tier, one isolated browser measurement per row, using the same Chromium configuration as the
 regression suite. "Open" is the model/clip return time in the isolated tool, not a completed app
@@ -342,11 +342,25 @@ silent; native sound and playback timing are verified separately.
 
 ## Verification
 
-The final review run passed **167/167** in one invocation: 103 required regressions, 14 task 38
-specs, and 50 smoke tests. No failures, skips, or retries. Real Chromium, software WebGL2, one
-worker, `--trace=off`; WebGPU checks also passed. Browser plugin was unavailable; regular Playwright
-was used. Existing screenshot specs exercised 390 × 844 and 1440 × 900, and their standard files
-were restored afterward. The embed transfer check measured 9.1 MB against its 30 MB limit.
+After merging main through `d5039103` (task 37's new worker and Manual r8), the complete required
+list plus all 14 new specs passed **117/117** in one isolated invocation at `47359f83`. No failures,
+skips, or retries. The command below was repeated without `tests/smoke.spec.mjs`, with output in
+`.cache/cdx-mp2/integration-results`. All 16 `psv3` cases passed again. The 50 smoke tests had
+already passed before this merge; they were not repeated afterward.
+
+Post-merge first desktop Sharp presentation was **1,758 ms**, with refinement still active. The new
+worker preserves the legacy raw-frame protocol. The real-model machine, bridge, horse, and Sintel
+specs reproduced their pre-merge jitter and surface-cut values exactly, and the Bunny and larger 60
+fps refinement checks also passed. The historical tables and upload GIFs below are explicitly
+labeled as pre-integration captures; their core numerical upload results were rechecked on the
+merged worker. Standard screenshots were restored again after this run.
+
+The pre-integration review run passed **167/167** in one invocation at `9ad9a3a9` (before the
+subsequent task 37 worker merge): 103 required regressions, 14 task 38 specs, and 50 smoke tests. No
+failures, skips, or retries. Real Chromium, software WebGL2, one worker, `--trace=off`; WebGPU
+checks also passed. Browser plugin was unavailable; regular Playwright was used. Existing screenshot
+specs exercised 390 × 844 and 1440 × 900, and their standard files were restored afterward. The
+embed transfer check measured 9.1 MB against its 30 MB limit.
 
 ```sh
 SPLASHERY_CHROMIUM=/usr/bin/chromium SPLASHERY_PORT=4388 npx playwright test \
@@ -368,9 +382,10 @@ Earlier verification is retained here for context: the initial PR's overlapping 
 99/103; the affected files passed separate reruns. A later sound-loop check observed 0.622 seconds
 against a 0.5-second bound under concurrent rendering. Review runs with trace recording also exposed
 a wrap-crossing `live5` measurement and 4.4–4.8-second instrumented desktop previews. Those failures
-led to the startup, sampling, yielding, and ended-audio changes described above. The final run had
-no overlapping browser jobs and disabled recording overhead without changing required assertions.
-Its first completed desktop Sharp picture was **1,417 ms**, with background refinement still active.
+led to the startup, sampling, yielding, and ended-audio changes described above. That complete run
+had no overlapping browser jobs and disabled recording overhead without changing required
+assertions. Its first completed desktop Sharp picture was **1,417 ms**, with background refinement
+still active.
 
 `node tools/check-packs.mjs moving-photo-3d` produced 208,806 finite splats in 3,071 ms and still
 fails its 1.5-second construction cap. The recorded baseline was 3,079 ms with the same count; this
@@ -387,15 +402,16 @@ unmeasured.
 
 Phone motion evidence is stored on the separate review branch and linked from the draft PR, with
 per-frame media clocks. Screenshots and GIFs expose remaining contour gaps instead of hiding them.
-The legacy bridge review GIF is excluded under A2; its model and renderer numbers are included
-above.
+The legacy bridge review GIF is included following the Operator's confirmation to keep that existing
+sample; its source credit and clock records accompany the render.
 
 ## Rule check and cuts
 
-Rule check: none for the new assets. A1 and A2 shaped the Tears of Steel montage. The Operator's
-follow-up confirms retaining the existing bridge sample and the longer films. A new review GIF of
-that legacy live-action sample is withheld; its numerical results remain in the tables. No owner
-notes or attachments were committed.
+Rule check: A2 applies to the legacy bridge. It is retained per the Operator's confirmation, and
+rendered under the original task's request to review each sample. This uses the existing footage; no
+new live-action source is introduced. A1/A2 shaped the new city montage, which excludes identifiable
+faces and modern firearms. The Operator also confirmed retaining the longer films. No owner notes or
+attachments were committed.
 
 The full upload gap is not claimed closed for every clip, native 60 fps depth inference is not
 promised within the existing geometry budget, original short-source downloads were not available for

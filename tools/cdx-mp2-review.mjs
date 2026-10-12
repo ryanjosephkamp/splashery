@@ -13,6 +13,7 @@ const cases = [
   ["bunny", "sample"],
   ["horse", "horse"],
   ["sintel", "dragon"],
+  ["bridge", "bridge"],
   ["machine", "machine"],
   ["bunny-long", "sample-long"],
   ["sintel-long", "dragon-long"],
