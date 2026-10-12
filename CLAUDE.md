@@ -107,6 +107,11 @@ coordinates. [docs/OPERATING.md](docs/OPERATING.md) has the rules. In short:
   the side: one sweep does that before the blog post.
 - The serial (Oxford) comma in every new public-facing text: "a, b, and c" and "d, e, or f" (the
   owner's call of October 9, 2026). Older text gets it in the same sweep as American English.
+- The owner's notes are private (his rule of October 11, 2026). Every note, walkthrough, review,
+  answer, idea or file he gives a session is private and internal. A version of it goes into the
+  repo, a PR, a card or the site only after it is cleaned up and he approves that version. Until
+  then only the Operator's own summary (a triage, a brief) is committed, in the Operator's words.
+  Never commit his raw notes or his attachments.
 - Secrets: `HF_TOKEN` (a Hugging Face read token) is for build-time tools only. Never print it,
   commit it, or put it in logs, PRs or files. To check it, test that it is set
   (`[ -n "$HF_TOKEN" ]`), or call the whoami API and print only the account name and token role.
@@ -201,7 +206,8 @@ new or changed effect against them before calling it done.
 - `tools/upkeep.mjs`: the Operator's upkeep after a merge (TOY-PLAN.md, the Sound Board page file,
   the standard screenshots). `tools/sound-board.mjs` builds the Sound Board page and
   `tools/help-board.mjs` the Help Board (every toy's how-to line and About text).
-- `docs/reviews/`: the owner's reviews, verbatim, with screenshots (sound notes too).
+- `docs/reviews/`: the Operator's triage of each of the owner's reviews, in its own words (his notes
+  stay private).
 - `tools/sound-review.json`: the sound review, per toy (notes, plans and new sounds to hear), shown
   on the Sound Board (OPERATING.md, "The sound review").
 - `docs/PACKS.md`: how to write toy recipes.
