@@ -11,7 +11,21 @@ const root = opt("root", ".cache/cdx-p3d2");
 const current = opt("after", "review-r2/final");
 const out = opt("out", "docs/audits/photo-3d-r2");
 const read = (f) => JSON.parse(fs.readFileSync(path.join(root, f)));
-const original = read("review-r2/original-outliers.json");
+const originalFile = path.join(root, "review-r2/original-outliers.json");
+const original = JSON.parse(
+  fs.readFileSync(
+    fs.existsSync(originalFile)
+      ? originalFile
+      : "docs/audits/photo-3d-r2/original-eight-poses.json",
+  ),
+).map((r) => ({ ...r, after: r.originalAfter ?? r.after }));
+const buildFile = path.join(root, "review-r2/build.json");
+const build = JSON.parse(
+  fs.readFileSync(fs.existsSync(buildFile) ? buildFile : "docs/audits/photo-3d-r2/build.json"),
+);
+for (const [file, hash] of Object.entries(build.files))
+  if (createHash("sha256").update(fs.readFileSync(file)).digest("hex") !== hash)
+    throw new Error(`Source differs from the evidence build: ${file}`);
 const after = read(`${current}/rows.json`);
 const before = read("evidence/before.json");
 const key = (r) => [r.id, r.view, r.depth, r.angle, r.direction].join(":");
@@ -72,7 +86,7 @@ fs.writeFileSync(
   [columns.join(","), ...zero.map((r) => columns.map((k) => r[k]).join(","))].join("\n") + "\n",
 );
 fs.writeFileSync(path.join(out, "original-eight-poses.json"), JSON.stringify(rows, null, 2) + "\n");
-fs.copyFileSync(path.join(root, "review-r2/build.json"), path.join(out, "build.json"));
+fs.writeFileSync(path.join(out, "build.json"), JSON.stringify(build, null, 2) + "\n");
 fs.copyFileSync(
   path.join(root, "evidence/summary.json"),
   path.join(out, "measurement-summary.json"),
