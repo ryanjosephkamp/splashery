@@ -377,9 +377,10 @@ ${fullRows}
 
 ## Verification and handback
 
-The new depth/UI tests use real browser WASM inference. They verify that explicit WebGPU/WebNN
-requests make no model/runtime fetch, and that the same worker can subsequently use WASM. Only
-the failed-download test injects an HTTP error; no model outputs or hardware are mocked. The
+The browser cases use real WASM inference. They verify that explicit WebGPU/WebNN
+requests make no model/runtime fetch, and that the same worker can subsequently use WASM. Hardware
+absence is mocked in one test, and the failed-download test injects an HTTP error; no model
+outputs are mocked in browser cases. The
 numerical edge/cut fixtures isolate the sparse helper's behavior. UI checks opened a real file
 through the panel at 390×844 and 1440×900, received progress events, switched tabs during inference,
 and verified a custom photo with no page errors. Callback and event messages agree, including
@@ -391,8 +392,14 @@ completion. The strict inference-phase long-task limit stays at 200 ms.
   produced relief, rose, and lay back; screenshots at 390×844 and 1440×900 were checked.
   The combined focused run took 2.0 minutes.
 - Required caller files: \`p3d\`, \`phf\`, \`phf2\`, \`phf-engine\`, \`smd-photo\`, \`smd-moving\`,
-  \`live\`, \`live3\`, \`lv7\`, \`psv\`, \`psv2\`, and \`psv3\`: **114 passed** (43.4 minutes).
-- Embed transfer check: **passed, 9.1 MB** for the captured bee at the strong profile.
+  \`live\`, \`live3\`, \`lv7\`, \`psv\`, \`psv2\`, and \`psv3\`: **114 passed** after review.
+- Combined depth/UI/caller run on merged main \`097ca436\`: **126 passed** (36.2 minutes).
+  The GPU-absence/WASM case was also checked separately after retaining that explicit coverage: **1 passed**.
+- Embed transfer check after the main merge: **passed, 9.1 MB** for the captured bee at the strong profile.
+- Updated capability tool smoke: **completed**. Current production WASM used 1, 2, and 4 threads
+  in the isolated cache scope; the pinned historical WebGPU/WebNN experiments recovered to WASM.
+  No runtime-file request returned 404. These fresh smoke timings do not replace the original
+  committed measurement artifact.
 - Repository-wide Prettier, American English, and Git whitespace/scope checks: **passed**.
 - No physical-phone, hardware-GPU, or native-WebNN run was available. The full repository suite
   was not run; this task specifies the caller files above.

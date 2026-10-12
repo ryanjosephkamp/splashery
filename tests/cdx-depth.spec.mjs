@@ -150,7 +150,19 @@ for (const provider of ["webgpu", "webnn"]) {
   });
 }
 
-test("extra WASM threads stay disabled without isolation", async ({ page }) => {
+test("missing GPU still uses real WASM inference; extra threads stay disabled without isolation", async ({
+  page,
+}) => {
+  // Mock only hardware absence; the vendored model, runtime, and inference remain real.
+  await page.route("**/src/live/depth-worker.js", async (route) => {
+    const response = await route.fetch();
+    await route.fulfill({
+      response,
+      body:
+        'Object.defineProperty(navigator, "gpu", { value: undefined });\n' +
+        (await response.text()),
+    });
+  });
   await page.goto("/tests/");
   const r = await page.evaluate(async () => {
     const { createDepthClient } = await import("/src/depth/client.js");
