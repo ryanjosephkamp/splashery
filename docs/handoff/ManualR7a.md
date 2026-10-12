@@ -70,4 +70,6 @@ Model: Sonnet 5.5 (claude-sonnet-5-5), high effort. Started October 11, 2026. Br
 
 - Rebuild the PDF after both r7 lanes merge (all.html has the new figures; the torus and diagram
   print as a still and a drawn SVG).
-- Cards on Effect review page 2 (ids man7a-...): see the PR for what is posted.
+- Cards posted on Effect review page 2 (lane `ManualR7a`): man7a-crisp, man7a-sizes, man7a-torus, man7a-built, man7a-pics-more, man7a-pics-unique. Waiting for the owner's marks.
+- Expected failure until the PDF is rebuilt: tests/man5.spec.mjs "the same input and the same Chromium print the same bytes" (the shipped PDF no longer matches a fresh print, because the manual changed). Two prints of the new pages are byte-identical (the live figures stop on their first frame when printing). Everything else in man*, site, spg, and smoke passed (206 tests) before the final fixes; man5 and man7a passed again after them.
+- Pictures carry no `loading="lazy"`: tools/manual-pdf.mjs waits for every image to load and would hang on a lazy one.
