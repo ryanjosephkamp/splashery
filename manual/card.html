@@ -46,28 +46,72 @@
         </button>
         <nav class="outline-panel" id="manual-contents" aria-label="The manual's chapters" hidden>
           <ol>
-            <li><a href="index.html">Contents</a></li>
-            <li><a href="splat.html">Chapter 1: What a splat is</a></li>
-            <li><a href="toy.html">Chapter 2: How a toy is built</a></li>
-            <li><a href="language.html">Chapter 3: The splat equation language</a></li>
-            <li><a href="gallery.html">Chapter 4: A gallery of programs</a></li>
-            <li><a href="pictures.html">Chapter 5: Pictures, screens, and your own input</a></li>
-            <li><a href="moving.html">Chapter 6: Moving things</a></li>
-            <li><a href="data.html">Chapter 7: Real data as splats</a></li>
-            <li><a href="photo3d.html">Chapter 8: Photos and video into 3D</a></li>
-            <li><a href="codes.html">Chapter 9: Codes and pages</a></li>
-            <li><a href="make.html">Chapter 10: Make your own</a></li>
-            <li><a href="more.html">What else Splashery does now</a></li>
-            <li><a href="unique.html">What Splashery can do that other splat tools can't</a></li>
-            <li><a href="built.html">How Splashery is built</a></li>
-            <li><a href="share.html">Share links and QR codes</a></li>
-            <li><a href="experiments.html">Open questions: other choices, not tried yet</a></li>
-            <li><a href="later.html">What comes later: Code a toy</a></li>
-            <li><a href="glossary.html">Glossary</a></li>
-            <li><a href="reading.html">Further reading</a></li>
-            <li><a href="references.html">References</a></li>
+            <li><a href="index.html" rel="noopener" target="_blank">Contents</a></li>
             <li>
-              <a href="card.html" aria-current="page">Quick reference</a>
+              <a href="splat.html" rel="noopener" target="_blank">Chapter 1: What a splat is</a>
+            </li>
+            <li>
+              <a href="toy.html" rel="noopener" target="_blank">Chapter 2: How a toy is built</a>
+            </li>
+            <li>
+              <a href="language.html" rel="noopener" target="_blank"
+                >Chapter 3: The splat equation language</a
+              >
+            </li>
+            <li>
+              <a href="gallery.html" rel="noopener" target="_blank"
+                >Chapter 4: A gallery of programs</a
+              >
+            </li>
+            <li>
+              <a href="pictures.html" rel="noopener" target="_blank"
+                >Chapter 5: Pictures, screens, and your own input</a
+              >
+            </li>
+            <li>
+              <a href="moving.html" rel="noopener" target="_blank">Chapter 6: Moving things</a>
+            </li>
+            <li>
+              <a href="data.html" rel="noopener" target="_blank">Chapter 7: Real data as splats</a>
+            </li>
+            <li>
+              <a href="photo3d.html" rel="noopener" target="_blank"
+                >Chapter 8: Photos and video into 3D</a
+              >
+            </li>
+            <li>
+              <a href="codes.html" rel="noopener" target="_blank">Chapter 9: Codes and pages</a>
+            </li>
+            <li>
+              <a href="make.html" rel="noopener" target="_blank">Chapter 10: Make your own</a>
+            </li>
+            <li>
+              <a href="more.html" rel="noopener" target="_blank">What else Splashery does now</a>
+            </li>
+            <li>
+              <a href="unique.html" rel="noopener" target="_blank"
+                >What Splashery can do that other splat tools can't</a
+              >
+            </li>
+            <li><a href="built.html" rel="noopener" target="_blank">How Splashery is built</a></li>
+            <li>
+              <a href="share.html" rel="noopener" target="_blank">Share links and QR codes</a>
+            </li>
+            <li>
+              <a href="experiments.html" rel="noopener" target="_blank"
+                >Open questions: other choices, not tried yet</a
+              >
+            </li>
+            <li>
+              <a href="later.html" rel="noopener" target="_blank">What comes later: Code a toy</a>
+            </li>
+            <li><a href="glossary.html" rel="noopener" target="_blank">Glossary</a></li>
+            <li><a href="reading.html" rel="noopener" target="_blank">Further reading</a></li>
+            <li><a href="references.html" rel="noopener" target="_blank">References</a></li>
+            <li>
+              <a href="card.html" aria-current="page" rel="noopener" target="_blank"
+                >Quick reference</a
+              >
               <ol class="outline-sub" aria-label="In this chapter">
                 <li><a href="#one-splat">One splat</a></li>
                 <li><a href="#a-splat-program">A splat program</a></li>
@@ -82,7 +126,7 @@
         </nav>
       </div>
       <nav class="pager no-print" aria-label="Previous and next chapter, top">
-        <a class="pager-prev" rel="prev" href="references.html"
+        <a class="pager-prev" rel="prev noopener" href="references.html" target="_blank"
           ><span class="pager-word">← Previous</span><span class="pager-title">References</span></a
         ><span></span>
       </nav>
@@ -113,7 +157,8 @@ spread = grid                          # or random</code></pre>
       <p>
         <b>Functions</b>: sin, cos, tan, asin (arcsin), acos (arccos), atan (arctan), sinh, cosh,
         tanh, exp, log (ln), log10, sqrt, abs, floor, min, max. <b>Constants</b>: pi, e.
-        <b>Time</b>: <var>t</var> runs from 0 to 2π per tap. At most 240 characters a field.
+        <b>Time</b>: <var>t</var> runs from 0 to 2π per tap. At most 240 characters an expression
+        (each end of a range counts on its own).
       </p>
       <h3 id="a-picture-toy">A picture toy</h3>
       <pre><code>pictures: { sample: () =&gt; "assets/…", accept: ["pdf", "image", "gif", "video"] },
@@ -226,8 +271,11 @@ drive(t, c, out, info) {
               <td>2</td>
             </tr>
             <tr>
-              <td>Hands-on: gravity, fastest throw</td>
-              <td>26 and 4 toy radii per second (squared for gravity)</td>
+              <td>Hands-on: gravity, throw cap</td>
+              <td>
+                26 and 4 toy radii per second (squared for gravity); 4 is the base cap, and a
+                material can scale a throw to 5
+              </td>
               <td>6</td>
             </tr>
             <tr>
@@ -252,7 +300,7 @@ drive(t, c, out, info) {
             </tr>
             <tr>
               <td>Moving photo, video clip length</td>
-              <td>First 8 seconds</td>
+              <td>8 seconds for a GIF or a short clip (a longer video plays whole)</td>
               <td>8</td>
             </tr>
             <tr>
@@ -280,7 +328,7 @@ drive(t, c, out, info) {
 
       <!-- NAV:BOTTOM:START (written by manual/build-pages.mjs; do not edit by hand) -->
       <nav class="pager no-print" aria-label="Previous and next chapter, bottom">
-        <a class="pager-prev" rel="prev" href="references.html"
+        <a class="pager-prev" rel="prev noopener" href="references.html" target="_blank"
           ><span class="pager-word">← Previous</span><span class="pager-title">References</span></a
         ><span></span>
       </nav>
