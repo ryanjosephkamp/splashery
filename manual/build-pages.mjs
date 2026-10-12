@@ -27,6 +27,7 @@ import fs from "node:fs";
 import * as prettier from "prettier";
 import { PAGES, label } from "./pages.mjs";
 import { toyHref, HOME_URL, PLAYGROUND_URL, PLAYGROUND_REL } from "./links.mjs";
+import { RULES } from "./railroad.js";
 
 const dir = new URL("./", import.meta.url);
 const read = (f) => fs.readFileSync(new URL(f, dir), "utf8");
@@ -49,6 +50,20 @@ const toyLinks = (html) =>
     .replace(/href="(?:\.\.\/|\.\.\/playground\/)"/g, `href="${PLAYGROUND_REL}"`)
     .replace(/href="https:\/\/ryanjosephkamp\.github\.io\/splashery\/(?:playground\/)?"/g, `href="${PLAYGROUND_URL}"`); // prettier-ignore
 
+// Every link in the manual opens in a new tab (the owner's requirement, Codex task 36): any `<a href>`
+// without a `target` gets `target="_blank"` and `noopener`. Applied to the hand-written chapters and
+// to the chrome this tool writes (the contents button, the pager, the cover's contents, all.html).
+// (A link to a place on the same page, `href="#x"`, opens in a new tab too, except on all.html.)
+const newTab = (html) =>
+  html.replace(/<a\s[^>]*?href=[^>]*?>/g, (tag) => {
+    if (/\starget=/.test(tag)) return tag;
+    const rel = tag.match(/\srel="([^"]*)"/);
+    const withRel = rel
+      ? tag.replace(rel[0], ` rel="${rel[1]} noopener"`)
+      : tag.replace(/>$/, ' rel="noopener">');
+    return withRel.replace(/>$/, ' target="_blank">');
+  });
+
 // ---- Read the pages ----------------------------------------------------------------------------
 const MARK = {
   top: ["<!-- NAV:TOP:START", "<!-- NAV:TOP:END -->"],
@@ -67,7 +82,7 @@ function split(html, file) {
   };
 }
 const pages = PAGES.map((p) => ({ ...p, ...split(read(p.file), p.file) }));
-for (const p of pages) p.content = toyLinks(p.content);
+for (const p of pages) p.content = newTab(toyLinks(p.content));
 
 // An id on every heading that has none: the text, lower case, with dashes.
 const slug = (s) => plain(s).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 48); // prettier-ignore
@@ -204,7 +219,7 @@ function assemble(p) {
   let content = p.content;
   if (p.file === "index.html")
     content = content.replace(/<!-- TOC:START[\s\S]*?<!-- TOC:END -->/, toc());
-  return `${before}${topChrome(p)}${content}${bottomChrome(p)}${p.after}`;
+  return newTab(`${before}${topChrome(p)}${content}${bottomChrome(p)}${p.after}`);
 }
 for (const p of pages) await write(p.file, assemble(p));
 
@@ -212,10 +227,15 @@ for (const p of pages) await write(p.file, assemble(p));
 // The cover and every chapter in order, links back to plain anchors, and the scripts the demos
 // need. The PDF is printed from this page (tools/manual-pdf.mjs).
 const firstId = new Map(PAGES.map((q) => [q.file, q.ids[0]]));
+// (A link to a place on the page itself opens there, not in a new tab: all.html is one page.)
 const onePage = (html) =>
-  html.replace(/href="([a-z0-9]+\.html)(#[^"]*)?"/g, (all, file, hash) =>
-    hash ? `href="${hash}"` : firstId.get(file) ? `href="#${firstId.get(file)}"` : all,
-  );
+  html
+    .replace(/href="([a-z0-9]+\.html)(#[^"]*)?"/g, (all, file, hash) =>
+      hash ? `href="${hash}"` : firstId.get(file) ? `href="#${firstId.get(file)}"` : all,
+    )
+    .replace(/<a\s[^>]*?href="#[^"]*"[^>]*>/g, (tag) =>
+      tag.replace(/\s+target="_blank"/, "").replace(/\s+rel="noopener"/, ""),
+    );
 {
   const first = pages[0];
   const body = pages
@@ -250,7 +270,7 @@ const onePage = (html) =>
 </html>
 `;
   void first;
-  await write("all.html", html);
+  await write("all.html", newTab(html));
 }
 
 // ---- Old addresses ---------------------------------------------------------------------------
@@ -258,6 +278,12 @@ const onePage = (html) =>
 {
   const map = {};
   for (const [id, file] of pageOf) if (file !== "index.html") map[id] = file;
+  // The railroad's rule boxes (`#rr-<rule>`) are drawn by the grammar demo on language.html when it
+  // runs, so no page has them as plain ids. They were on the cover when the manual was one page. The
+  // chapter names (`#splat`, `#toy`, ...) are covered above. `#level-map` (the old cover's level
+  // map) is gone on purpose (tests/man3.spec.mjs), and no `#level-1` to `#level-10` ever existed in
+  // the manual's history, so neither has an alias.
+  for (const rule of Object.keys(RULES)) map[`rr-${rule}`] = "language.html";
   const js = `// Sends an old manual/#anchor address to the page that has it (written by manual/build-pages.mjs).
 (function () {
   var pages = ${JSON.stringify(map)};

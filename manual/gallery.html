@@ -47,40 +47,82 @@
         </button>
         <nav class="outline-panel" id="manual-contents" aria-label="The manual's chapters" hidden>
           <ol>
-            <li><a href="index.html">Contents</a></li>
-            <li><a href="splat.html">Chapter 1: What a splat is</a></li>
-            <li><a href="toy.html">Chapter 2: How a toy is built</a></li>
-            <li><a href="language.html">Chapter 3: The splat equation language</a></li>
+            <li><a href="index.html" rel="noopener" target="_blank">Contents</a></li>
             <li>
-              <a href="gallery.html" aria-current="page">Chapter 4: A gallery of programs</a>
+              <a href="splat.html" rel="noopener" target="_blank">Chapter 1: What a splat is</a>
+            </li>
+            <li>
+              <a href="toy.html" rel="noopener" target="_blank">Chapter 2: How a toy is built</a>
+            </li>
+            <li>
+              <a href="language.html" rel="noopener" target="_blank"
+                >Chapter 3: The splat equation language</a
+              >
+            </li>
+            <li>
+              <a href="gallery.html" aria-current="page" rel="noopener" target="_blank"
+                >Chapter 4: A gallery of programs</a
+              >
               <ol class="outline-sub" aria-label="In this chapter">
-                <li><a href="#gallery-60">Sixty more programs</a></li>
+                <li>
+                  <a href="#gallery-60" rel="noopener" target="_blank">Sixty more programs</a>
+                </li>
               </ol>
             </li>
-            <li><a href="pictures.html">Chapter 5: Pictures, screens, and your own input</a></li>
-            <li><a href="moving.html">Chapter 6: Moving things</a></li>
-            <li><a href="data.html">Chapter 7: Real data as splats</a></li>
-            <li><a href="photo3d.html">Chapter 8: Photos and video into 3D</a></li>
-            <li><a href="codes.html">Chapter 9: Codes and pages</a></li>
-            <li><a href="make.html">Chapter 10: Make your own</a></li>
-            <li><a href="more.html">What else Splashery does now</a></li>
-            <li><a href="unique.html">What Splashery can do that other splat tools can't</a></li>
-            <li><a href="built.html">How Splashery is built</a></li>
-            <li><a href="share.html">Share links and QR codes</a></li>
-            <li><a href="experiments.html">Open questions: other choices, not tried yet</a></li>
-            <li><a href="later.html">What comes later: Code a toy</a></li>
-            <li><a href="glossary.html">Glossary</a></li>
-            <li><a href="reading.html">Further reading</a></li>
-            <li><a href="references.html">References</a></li>
-            <li><a href="card.html">Quick reference</a></li>
+            <li>
+              <a href="pictures.html" rel="noopener" target="_blank"
+                >Chapter 5: Pictures, screens, and your own input</a
+              >
+            </li>
+            <li>
+              <a href="moving.html" rel="noopener" target="_blank">Chapter 6: Moving things</a>
+            </li>
+            <li>
+              <a href="data.html" rel="noopener" target="_blank">Chapter 7: Real data as splats</a>
+            </li>
+            <li>
+              <a href="photo3d.html" rel="noopener" target="_blank"
+                >Chapter 8: Photos and video into 3D</a
+              >
+            </li>
+            <li>
+              <a href="codes.html" rel="noopener" target="_blank">Chapter 9: Codes and pages</a>
+            </li>
+            <li>
+              <a href="make.html" rel="noopener" target="_blank">Chapter 10: Make your own</a>
+            </li>
+            <li>
+              <a href="more.html" rel="noopener" target="_blank">What else Splashery does now</a>
+            </li>
+            <li>
+              <a href="unique.html" rel="noopener" target="_blank"
+                >What Splashery can do that other splat tools can't</a
+              >
+            </li>
+            <li><a href="built.html" rel="noopener" target="_blank">How Splashery is built</a></li>
+            <li>
+              <a href="share.html" rel="noopener" target="_blank">Share links and QR codes</a>
+            </li>
+            <li>
+              <a href="experiments.html" rel="noopener" target="_blank"
+                >Open questions: other choices, not tried yet</a
+              >
+            </li>
+            <li>
+              <a href="later.html" rel="noopener" target="_blank">What comes later: Code a toy</a>
+            </li>
+            <li><a href="glossary.html" rel="noopener" target="_blank">Glossary</a></li>
+            <li><a href="reading.html" rel="noopener" target="_blank">Further reading</a></li>
+            <li><a href="references.html" rel="noopener" target="_blank">References</a></li>
+            <li><a href="card.html" rel="noopener" target="_blank">Quick reference</a></li>
           </ol>
         </nav>
       </div>
       <nav class="pager no-print" aria-label="Previous and next chapter, top">
-        <a class="pager-prev" rel="prev" href="language.html"
+        <a class="pager-prev" rel="prev noopener" href="language.html" target="_blank"
           ><span class="pager-word">← Previous</span
           ><span class="pager-title">Chapter 3: The splat equation language</span></a
-        ><a class="pager-next" rel="next" href="pictures.html"
+        ><a class="pager-next" rel="next noopener" href="pictures.html" target="_blank"
           ><span class="pager-word">Next →</span
           ><span class="pager-title">Chapter 5: Pictures, screens, and your own input</span></a
         >
@@ -478,8 +520,8 @@ count = 4000</code></pre>
         the Splat equation toy with that program, in a new tab. That toy is a <b>labs</b> toy: it is
         not on the ordinary shelf, but a direct link like these opens it even with labs off, and its
         sharper kernel setting needs labs turned on. Every program fits the toy's own limits: 12
-        fields, 240 characters each (these programs are all under 120, so they would fit the old
-        limit too), and at most 10,000 points.
+        fields, 240 characters to an expression (each end of a range counts on its own; these
+        programs are all under 120, so they would fit the old limit too), and at most 10,000 points.
       </p>
       <!-- GALLERY:START (written by manual/build-gallery.mjs; do not edit by hand) -->
       <details class="fold gallery-group" id="gallery-classic-surfaces">
@@ -609,7 +651,7 @@ count = 5000</code></pre>
             <div class="body">
               <h5>Figure-eight Klein bottle</h5>
               <p>
-                This immersed Klein bottle crosses itself where its neck passes through the body.
+                This immersed Klein bottle is a figure-eight tube that crosses itself along a ring.
               </p>
               <details class="fold program">
                 <summary>Show the program</summary>
@@ -685,7 +727,7 @@ count = 10000</code></pre>
             />
             <div class="body">
               <h5>Enneper surface</h5>
-              <p>A simple polynomial surface curls into three spreading lobes.</p>
+              <p>A simple polynomial surface curls into spreading lobes.</p>
               <details class="fold program">
                 <summary>Show the program</summary>
                 <pre><code>x = u-u^3/3+uv^2
@@ -760,7 +802,10 @@ count = 7000</code></pre>
             />
             <div class="body">
               <h5>Helicoid</h5>
-              <p>A ruled helicoid spirals upward like a ramp with no outer rim.</p>
+              <p>
+                A finite ruled helicoid patch winds like a ramp around the Z axis, with a helical
+                edge on its outer rim.
+              </p>
               <details class="fold program">
                 <summary>Show the program</summary>
                 <pre><code>x = vcos(u)
@@ -870,13 +915,16 @@ count = 10000</code></pre>
           <article class="card" id="g-lissajous-knot">
             <img
               src="../assets/gallery/lissajous-knot.webp"
-              alt="Lissajous knot, made of splats"
+              alt="Lissajous curve, made of splats"
               width="256"
               height="256"
             />
             <div class="body">
-              <h5>Lissajous knot</h5>
-              <p>Three harmonics trace a closed, crossing space curve with a fine bead tube.</p>
+              <h5>Lissajous curve</h5>
+              <p>
+                Four frequencies (2, 3, 4, and 7) trace a closed space curve that crosses itself,
+                with a fine bead tube.
+              </p>
               <details class="fold program">
                 <summary>Show the program</summary>
                 <pre><code>x = sin(3u+t)+0.16cos(7u)
@@ -1106,7 +1154,7 @@ spread = random</code></pre>
             />
             <div class="body">
               <h5>Slinky coil</h5>
-              <p>A spring winds upward in eight turns with a narrow tube around its wire.</p>
+              <p>A spring winds upward in eight turns as a narrow ribbon.</p>
               <details class="fold program">
                 <summary>Show the program</summary>
                 <pre><code>x = (1+0.08v)cos(u)
@@ -1735,8 +1783,8 @@ count = 10000</code></pre>
             <div class="body">
               <h5>Orbit with a fast wave</h5>
               <p>
-                One loop circles the center while a smaller wave on it turns the other way three
-                times as fast.
+                One loop circles the center while a smaller wave on it, with three times as many
+                crests around the loop, turns the other way.
               </p>
               <details class="fold program">
                 <summary>Show the program</summary>
@@ -2779,10 +2827,10 @@ count = 3500</code></pre>
 
       <!-- NAV:BOTTOM:START (written by manual/build-pages.mjs; do not edit by hand) -->
       <nav class="pager no-print" aria-label="Previous and next chapter, bottom">
-        <a class="pager-prev" rel="prev" href="language.html"
+        <a class="pager-prev" rel="prev noopener" href="language.html" target="_blank"
           ><span class="pager-word">← Previous</span
           ><span class="pager-title">Chapter 3: The splat equation language</span></a
-        ><a class="pager-next" rel="next" href="pictures.html"
+        ><a class="pager-next" rel="next noopener" href="pictures.html" target="_blank"
           ><span class="pager-word">Next →</span
           ><span class="pager-title">Chapter 5: Pictures, screens, and your own input</span></a
         >

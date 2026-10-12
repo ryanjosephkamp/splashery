@@ -125,13 +125,23 @@ test.describe("the pages", () => {
     await page.touchscreen.tap(4, 838);
     await expect(page.locator("#manual-contents")).toBeHidden();
     await page.tap(".manual-nav .outline-toggle");
-    await page.tap('#manual-contents a[href="language.html"]');
-    await page.waitForURL(/language\.html/);
-    await expect(page.locator("h2").first()).toContainText("The splat equation language");
+    // Every manual link opens in a new tab (the owner's rule, Codex task 36; Manual r8).
+    const [chapter] = await Promise.all([
+      page.waitForEvent("popup"),
+      page.tap('#manual-contents a[href="language.html"]'),
+    ]);
+    await chapter.waitForURL(/language\.html/);
+    await expect(chapter.locator("h2").first()).toContainText("The splat equation language");
+    await chapter.close();
     // A section of this chapter, from the list.
     await page.tap(".manual-nav .outline-toggle");
-    await page.tap('#manual-contents .outline-sub a[href="#time"]');
-    await expect(page.locator("#time")).toBeInViewport();
+    const [section] = await Promise.all([
+      page.waitForEvent("popup"),
+      page.tap('#manual-contents .outline-sub a[href="#time"]'),
+    ]);
+    await section.waitForURL(/toy\.html#time/);
+    await expect(section.locator("#time")).toBeInViewport();
+    await section.close();
     expect(
       await page.evaluate(
         () => document.documentElement.scrollWidth - document.documentElement.clientWidth,
