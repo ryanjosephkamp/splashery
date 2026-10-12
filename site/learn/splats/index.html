@@ -145,10 +145,10 @@
         <section aria-labelledby="h-one">
           <h2 id="h-one">One splat is a soft, colored blob</h2>
           <p>
-            A <strong>3D Gaussian splat</strong> is the smallest piece of every toy here. Think of a
-            tiny ball of colored fog. It has a <strong>center</strong> (where it sits in space), a
-            <strong>size in each direction</strong> (so it can be a ball, a disc or a long grain of
-            rice) with a <strong>tilt</strong>, a <strong>color</strong> and an
+            A <strong>3D Gaussian splat</strong> is the smallest piece of nearly every toy here.
+            Think of a tiny ball of colored fog. It has a <strong>center</strong> (where it sits in
+            space), a <strong>size in each direction</strong> (so it can be a ball, a disc or a long
+            grain of rice) with a <strong>tilt</strong>, a <strong>color</strong> and an
             <strong>opacity</strong>. Its edge isn't sharp: it fades out smoothly, the way a drop of
             ink fades into wet paper. Mathematicians call that fade a <em>Gaussian</em>, which is
             where the name comes from.
@@ -1681,10 +1681,11 @@
           <h2 id="h-sorted">Sorted, then blended</h2>
           <p>
             To draw a frame, the computer does two things with all those splats. First it
-            <strong>sorts</strong> them by distance from you, farthest first. Then it
-            <strong>paints</strong> them one after another, and each one is see-through, so it only
-            tints what is already there. A near splat covers a far one, and where they overlap their
-            colors mix. Do that sixty times a second and the picture can move.
+            <strong>sorts</strong> them by depth along the way you are looking (one depth for each
+            splat's center), farthest first. Then it <strong>paints</strong> them one after another,
+            and each one is see-through, so it only tints what is already there. A near splat covers
+            a far one, and where they overlap their colors mix. Do that sixty times a second and the
+            picture can move.
           </p>
           <figure class="figure">
             <svg viewBox="0 0 400 190" role="img" aria-labelledby="g3-t" class="figure-svg">
@@ -1837,9 +1838,11 @@
             </figcaption>
           </figure>
           <p>
-            That is the whole trick, and it is why splats look so soft and real: no hard polygons,
-            no textures, just blended color. It also means every splat is free to move on its own,
-            which is what makes toys that peel, ripple, shatter and come back together possible.
+            That is the whole trick, and it is why splats look so soft and real: for the splats
+            themselves there are no hard polygons and no textures, just blended color (a few toys
+            add a textured picture view, a liquid surface, or a solid mesh, which the Tinkerer's
+            Manual lists). It also means every splat is free to move on its own, which is what makes
+            toys that peel, ripple, shatter and come back together possible.
           </p>
         </section>
         <section aria-labelledby="h-recipe">

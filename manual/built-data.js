@@ -60,7 +60,7 @@ export const LAYERS = [
       { t: "PDF.js", s: "PDFs", file: "vendor/pdfjs" },
       { t: "ONNX Runtime", s: "depth models", file: "vendor/onnxruntime-web" },
       { t: "QR code", s: "qrcodegen, jsQR", file: "vendor/qrcodegen" },
-      { t: "Shared systems", s: "games, liquids, physics, live input", file: "src/fluids" },
+      { t: "Shared systems", s: "games, liquids, live input", file: "src/fluids" },
       { t: "assets/", s: "captures, sounds, data", file: "assets" },
     ],
   },

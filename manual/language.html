@@ -49,11 +49,17 @@
         </button>
         <nav class="outline-panel" id="manual-contents" aria-label="The manual's chapters" hidden>
           <ol>
-            <li><a href="index.html">Contents</a></li>
-            <li><a href="splat.html">Chapter 1: What a splat is</a></li>
-            <li><a href="toy.html">Chapter 2: How a toy is built</a></li>
+            <li><a href="index.html" rel="noopener" target="_blank">Contents</a></li>
             <li>
-              <a href="language.html" aria-current="page">Chapter 3: The splat equation language</a>
+              <a href="splat.html" rel="noopener" target="_blank">Chapter 1: What a splat is</a>
+            </li>
+            <li>
+              <a href="toy.html" rel="noopener" target="_blank">Chapter 2: How a toy is built</a>
+            </li>
+            <li>
+              <a href="language.html" aria-current="page" rel="noopener" target="_blank"
+                >Chapter 3: The splat equation language</a
+              >
               <ol class="outline-sub" aria-label="In this chapter">
                 <li>
                   <a href="#the-idea-every-splat-gets-its-own-u-and-v"
@@ -67,31 +73,65 @@
                 <li><a href="#why-it-is-safe">Why it is safe</a></li>
               </ol>
             </li>
-            <li><a href="gallery.html">Chapter 4: A gallery of programs</a></li>
-            <li><a href="pictures.html">Chapter 5: Pictures, screens, and your own input</a></li>
-            <li><a href="moving.html">Chapter 6: Moving things</a></li>
-            <li><a href="data.html">Chapter 7: Real data as splats</a></li>
-            <li><a href="photo3d.html">Chapter 8: Photos and video into 3D</a></li>
-            <li><a href="codes.html">Chapter 9: Codes and pages</a></li>
-            <li><a href="make.html">Chapter 10: Make your own</a></li>
-            <li><a href="more.html">What else Splashery does now</a></li>
-            <li><a href="unique.html">What Splashery can do that other splat tools can't</a></li>
-            <li><a href="built.html">How Splashery is built</a></li>
-            <li><a href="share.html">Share links and QR codes</a></li>
-            <li><a href="experiments.html">Open questions: other choices, not tried yet</a></li>
-            <li><a href="later.html">What comes later: Code a toy</a></li>
-            <li><a href="glossary.html">Glossary</a></li>
-            <li><a href="reading.html">Further reading</a></li>
-            <li><a href="references.html">References</a></li>
-            <li><a href="card.html">Quick reference</a></li>
+            <li>
+              <a href="gallery.html" rel="noopener" target="_blank"
+                >Chapter 4: A gallery of programs</a
+              >
+            </li>
+            <li>
+              <a href="pictures.html" rel="noopener" target="_blank"
+                >Chapter 5: Pictures, screens, and your own input</a
+              >
+            </li>
+            <li>
+              <a href="moving.html" rel="noopener" target="_blank">Chapter 6: Moving things</a>
+            </li>
+            <li>
+              <a href="data.html" rel="noopener" target="_blank">Chapter 7: Real data as splats</a>
+            </li>
+            <li>
+              <a href="photo3d.html" rel="noopener" target="_blank"
+                >Chapter 8: Photos and video into 3D</a
+              >
+            </li>
+            <li>
+              <a href="codes.html" rel="noopener" target="_blank">Chapter 9: Codes and pages</a>
+            </li>
+            <li>
+              <a href="make.html" rel="noopener" target="_blank">Chapter 10: Make your own</a>
+            </li>
+            <li>
+              <a href="more.html" rel="noopener" target="_blank">What else Splashery does now</a>
+            </li>
+            <li>
+              <a href="unique.html" rel="noopener" target="_blank"
+                >What Splashery can do that other splat tools can't</a
+              >
+            </li>
+            <li><a href="built.html" rel="noopener" target="_blank">How Splashery is built</a></li>
+            <li>
+              <a href="share.html" rel="noopener" target="_blank">Share links and QR codes</a>
+            </li>
+            <li>
+              <a href="experiments.html" rel="noopener" target="_blank"
+                >Open questions: other choices, not tried yet</a
+              >
+            </li>
+            <li>
+              <a href="later.html" rel="noopener" target="_blank">What comes later: Code a toy</a>
+            </li>
+            <li><a href="glossary.html" rel="noopener" target="_blank">Glossary</a></li>
+            <li><a href="reading.html" rel="noopener" target="_blank">Further reading</a></li>
+            <li><a href="references.html" rel="noopener" target="_blank">References</a></li>
+            <li><a href="card.html" rel="noopener" target="_blank">Quick reference</a></li>
           </ol>
         </nav>
       </div>
       <nav class="pager no-print" aria-label="Previous and next chapter, top">
-        <a class="pager-prev" rel="prev" href="toy.html"
+        <a class="pager-prev" rel="prev noopener" href="toy.html" target="_blank"
           ><span class="pager-word">← Previous</span
           ><span class="pager-title">Chapter 2: How a toy is built</span></a
-        ><a class="pager-next" rel="next" href="gallery.html"
+        ><a class="pager-next" rel="next noopener" href="gallery.html" target="_blank"
           ><span class="pager-word">Next →</span
           ><span class="pager-title">Chapter 4: A gallery of programs</span></a
         >
@@ -123,11 +163,11 @@
         The toy lays out its splats on a grid of two numbers, <var>u</var> and <var>v</var>, each
         running over a range you choose. Think of them as the coordinates of a flat sheet of points,
         laid out before the equations bend it into shape. They are the parameters of a parametric
-        surface [<a href="references.html#ref-9">9</a>], not a substitution: nothing is replaced by
-        <var>u</var> or <var>v</var>; each splat simply has its own pair. Your equations turn each
-        splat's (<var>u</var>, <var>v</var>) into a place in space, (<var>x</var>, <var>y</var>,
-        <var>z</var>). If <var>u</var> goes around a circle and <var>v</var> around a smaller
-        circle, the grid wraps into a torus:
+        surface [<a href="references.html#ref-9" rel="noopener" target="_blank">9</a>], not a
+        substitution: nothing is replaced by <var>u</var> or <var>v</var>; each splat simply has its
+        own pair. Your equations turn each splat's (<var>u</var>, <var>v</var>) into a place in
+        space, (<var>x</var>, <var>y</var>, <var>z</var>). If <var>u</var> goes around a circle and
+        <var>v</var> around a smaller circle, the grid wraps into a torus:
       </p>
       <pre><code>x = (2 + cos v)·cos u
 y = sin v
@@ -550,8 +590,8 @@ v = 0 .. 2pi</code></pre>
       </ul>
       <p>
         Powers go first, then × and ÷, then + and −, and a power binds to the right:
-        <code>2^3^2</code> is 2<sup>9</sup>, and <code>-u^2</code> is −(<var>u</var>²). Each field
-        can be up to 240 characters long.
+        <code>2^3^2</code> is 2<sup>9</sup>, and <code>-u^2</code> is −(<var>u</var>²). Each
+        expression can be up to 240 characters long (each end of a range counts on its own).
       </p>
       <section class="demo-live" data-demo="order-of-operations" id="demo-reader">
         <h4>Try it: how the reader groups an expression</h4>
@@ -561,8 +601,8 @@ v = 0 .. 2pi</code></pre>
           <var>u</var> = 1, <var>v</var> = 0.5, <var>t</var> = 0. It follows the real reader's rules
           for powers, implied multiplication, and bare function inputs. The tree is a simplified
           picture, though: the toy's own reader also checks the text and tells you under the tree if
-          it would refuse it (a field may be 240 characters, and there are limits on nesting and on
-          how many pieces it can hold).
+          it would refuse it (an expression may be 240 characters, and there are limits on nesting
+          and on how many pieces it can hold).
         </p>
         <div class="chips" id="parse-presets" role="group" aria-label="Example expressions"></div>
         <label for="parse-input" class="hint">Expression</label>
@@ -611,9 +651,10 @@ v = 0 .. 2pi</code></pre>
           would be next: expressions nest at most 32 deep and have at most 400 pieces. The cost of
           longer fields is longer links and slower builds, because each expression is worked out for
           every point at every moment (at the default, 13 positions: the 12 moments and the closing
-          target). At 240 characters a field can take up to twice as long to build as at 120, and
-          the longest possible link grows from about 1,400 to about 1,900 characters once compressed
-          (<code>docs/lab/EQUATION-FIELDS.md</code>). The graph and surface plotters keep 120.
+          target). At 240 characters a field can take up to twice as long to build as at 120, and a
+          link with every field at the limit grows from about 1,400 to about 1,900 characters once
+          compressed (<code>docs/lab/EQUATION-FIELDS.md</code>). The graph and surface plotters keep
+          120.
         </p>
         <p class="where">
           Where it lives: <code>FIELD_MAX</code> in <code>src/packs/splat-equation.js</code> (240);
@@ -626,7 +667,12 @@ v = 0 .. 2pi</code></pre>
       <p>Here is the core grammar. Note: words in quotes must be typed exactly as written below.</p>
       <p>
         A grammar is a short list of rules for what counts as a valid program. Its notation follows
-        EBNF, a standard way to write such rules [<a href="references.html#ref-8">8</a>]:
+        EBNF, a standard way to write such rules [<a
+          href="references.html#ref-8"
+          rel="noopener"
+          target="_blank"
+          >8</a
+        >]:
       </p>
       <ul>
         <li>
@@ -1030,10 +1076,10 @@ w = qz + 4096 × channel     (one 12-bit number and the channel)</code></pre>
 
       <!-- NAV:BOTTOM:START (written by manual/build-pages.mjs; do not edit by hand) -->
       <nav class="pager no-print" aria-label="Previous and next chapter, bottom">
-        <a class="pager-prev" rel="prev" href="toy.html"
+        <a class="pager-prev" rel="prev noopener" href="toy.html" target="_blank"
           ><span class="pager-word">← Previous</span
           ><span class="pager-title">Chapter 2: How a toy is built</span></a
-        ><a class="pager-next" rel="next" href="gallery.html"
+        ><a class="pager-next" rel="next noopener" href="gallery.html" target="_blank"
           ><span class="pager-word">Next →</span
           ><span class="pager-title">Chapter 4: A gallery of programs</span></a
         >

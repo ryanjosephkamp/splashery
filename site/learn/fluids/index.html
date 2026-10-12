@@ -194,8 +194,10 @@
             A kit toy declares fluids with <code>k.fluid({ ... })</code> in its <code>build</code>.
             When the toy opens, the player loads <code>src/fluids/</code> (never before: the shelf
             and embeds don't fetch it), simulates the fluids on the toy's own clock and draws them
-            as one extra splat layer, one splat per particle, sorted with the toy. The recipe's
-            <code>drive()</code> steers them through <code>out.fluid</code>.
+            as one extra splat layer (four small splats for each liquid particle, one for each other
+            particle; with WebGPU a liquid can also be drawn as a surface and a gas as a grid),
+            sorted with the toy. The recipe's <code>drive()</code> steers them through
+            <code>out.fluid</code>.
           </p>
           <div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrolls sideways">
             <table>
@@ -343,9 +345,10 @@
           </p>
           <h2 id="drawing">Drawing</h2>
           <p>
-            One splat per particle, in a layer with its own work-buffer program, reading four small
-            float textures a frame (place; velocity and kind; turn; radii and material) and the
-            toy's uniforms (the camera, the whole-toy move and turn, the splat scale and exposure).
+            One splat per particle (four for a liquid, below), in a layer with its own work-buffer
+            program, reading four small float textures a frame (place; velocity and kind; turn;
+            radii and material) and the toy's uniforms (the camera, the whole-toy move and turn, the
+            splat scale and exposure).
           </p>
           <ul>
             <li>
