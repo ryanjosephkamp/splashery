@@ -2,6 +2,7 @@
 // is a <section class="demo-live" data-demo="..."> in index.html; this file finds it by its ids and
 // wires it up. The math is in demo-math.js, so it can be tested without a page.
 
+import { crisp, putSoft } from "./crisp.js";
 import {
   TAU,
   covFromSizes,
@@ -27,7 +28,7 @@ const redraws = [];
 function covDemo() {
   if (!$("cov-canvas")) return;
   const cv = $("cov-canvas");
-  const cx = cv.getContext("2d");
+  const cx = crisp(cv, () => draw());
   let mode = "sizes";
   const num = (id) => Number($(id).value);
   const matrix = () =>
@@ -57,7 +58,7 @@ function covDemo() {
       }
     }
     cx.clearRect(0, 0, W, H);
-    cx.putImageData(img, 0, 0);
+    putSoft(cx, img);
     cx.strokeStyle = css("--line");
     cx.lineWidth = 1;
     cx.beginPath();
@@ -188,7 +189,7 @@ function parseDemo() {
 function momentsDemo() {
   if (!$("t-canvas")) return;
   const tc = $("t-canvas");
-  const tx = tc.getContext("2d");
+  const tx = crisp(tc, () => draw());
   const N = 72;
   let raf = 0;
   function draw() {
@@ -265,8 +266,9 @@ function momentsDemo() {
 function smoothDemo() {
   if (!$("ss-canvas")) return;
   const cv = $("ss-canvas");
-  const cx = cv.getContext("2d");
+  const cx = crisp(cv, () => draw());
   const slider = $("ss-x");
+  crisp($("ss-turn"), () => draw());
   let raf = 0;
   const pad = 34;
   const px = (x) => pad + x * (cv.width - 2 * pad);

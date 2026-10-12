@@ -52,7 +52,11 @@
             <li><a href="language.html">Chapter 3: The splat equation language</a></li>
             <li><a href="gallery.html">Chapter 4: A gallery of programs</a></li>
             <li><a href="pictures.html">Chapter 5: Pictures, screens, and your own input</a></li>
-            <li><a href="coming.html">Chapters 6 to 10: coming next</a></li>
+            <li><a href="moving.html">Chapter 6: Moving things</a></li>
+            <li><a href="data.html">Chapter 7: Real data as splats</a></li>
+            <li><a href="photo3d.html">Chapter 8: Photos and video into 3D</a></li>
+            <li><a href="codes.html">Chapter 9: Codes and pages</a></li>
+            <li><a href="make.html">Chapter 10: Make your own</a></li>
             <li><a href="more.html">What else Splashery does now</a></li>
             <li><a href="unique.html">What Splashery can do that other splat tools can't</a></li>
             <li><a href="built.html">How Splashery is built</a></li>
@@ -78,6 +82,10 @@
       <!-- NAV:TOP:END -->
       <!-- ---- Glossary ---- -->
       <h2 id="glossary">Glossary</h2>
+      <p>
+        Every term a newcomer meets in Chapters 1 to 10, in the order the chapters bring them up. On
+        the other pages, a word with a dotted underline opens its entry.
+      </p>
       <!-- Checked against: formulas in this manual; src/kit.js:1082-1112 (isotropic, flat and
            stretched splats, one base color, morph kind); src/loaders.js:103 (stored spherical
            harmonics, f_rest) and :155-165 (the .splat reader turns a quaternion to length 1);
@@ -120,7 +128,7 @@
         <dd>
           Tilt is the off-diagonal terms of <var>Σ</var>: zero when a splat's axes line up with
           <var>x</var>, <var>y</var>, and <var>z</var>. Rotation is a splat's own turn. "Tilt lock"
-          is a different thing: the camera control in Level 5.
+          is a different thing: the camera control in Chapter 5.
         </dd>
         <dt id="g-aniso">Anisotropic, isotropic</dt>
         <dd>
@@ -196,6 +204,226 @@
           The rule for how a splat's weight falls off across its patch. The site normally draws a
           cut-off Gaussian; a labs setting can use a sharper one. Neither is the ideal bell.
         </dd>
+        <dt id="g-part">Part, token</dt>
+        <dd>
+          A <b>part</b> is a group of a toy's splats that moves as one solid piece, such as a lid or
+          a sail. Every splat carries the number of its part; number 0 is the body, so a toy has up
+          to 15 more (Chapter 2). A <b>token</b> is one of up to 48 separate pieces, such as a game
+          piece, that a recipe moves by its own offset.
+        </dd>
+        <dt id="g-drive">Drive</dt>
+        <dd>
+          The function in a recipe that runs every frame and says how the toy looks now: the angle
+          of each part, the glow, the page of a sheet. It does not move splats itself; it hands
+          numbers to the graphics chip.
+        </dd>
+        <dt id="g-budget">Splat budget, tier</dt>
+        <dd>
+          The number of splats the toy is asked to draw. It depends on the device: a tier (low, mid,
+          high, or max) sets a default count and a ceiling, and a recipe may ask for more or fewer
+          per base budget with its <code>density</code>. The counts run from 60,000 up to 400,000.
+        </dd>
+        <dt id="g-pack">Pack</dt>
+        <dd>A file under <code>src/packs/</code> that holds the recipes of a group of toys.</dd>
+        <dt id="g-labs">Labs switch</dt>
+        <dd>
+          The setting that shows the toys and tools not yet ready for everyone. Add
+          <code>?labs=1</code> to the site's address to turn it on (the browser remembers it) and
+          <code>?labs=0</code> to turn it off. A link to a labs toy opens it either way; the switch
+          only decides what the shelf shows.
+        </dd>
+        <dt id="g-seed">Seed</dt>
+        <dd>
+          A number that starts a repeatable stream of pseudo-random numbers. The same seed gives the
+          same toy every time, which is why a link can rebuild it.
+        </dd>
+        <dt id="g-sorting">Sorting, back to front</dt>
+        <dd>
+          Splats are partly see-through, so they must be drawn from the farthest to the nearest for
+          the blending to come out right. The engine sorts them for the camera; a toy that moves its
+          splats may need them sorted again where they stand.
+        </dd>
+        <dt id="g-uniform">Uniform, shader</dt>
+        <dd>
+          A <b>shader</b> is a small program that runs on the graphics chip for every splat. A
+          <b>uniform</b> is a value the page hands it once a frame, the same for every splat, such
+          as a part's rotation. Hands-on play, a recipe's drive, and the controls all reach the
+          screen as uniforms.
+        </dd>
+        <dt id="g-lod">Level of detail</dt>
+        <dd>
+          Drawing less where little shows: a big structure gets fewer splats per atom, and a page
+          far away gets a coarser sheet.
+        </dd>
+        <dt id="g-worker">Web worker</dt>
+        <dd>
+          A background thread of a page. Heavy jobs (reading a file, turning a page into splats,
+          training) run in one so the page stays smooth.
+        </dd>
+        <dt id="g-sheet">Sheet, leaf, spine</dt>
+        <dd>
+          A <b>sheet</b> is a flat place in a toy where a picture shows (Chapter 5). A
+          <b>leaf</b> is a sheet that turns like a page, about a <b>spine</b>.
+        </dd>
+        <dt id="g-handson">Hands-on, rigid body</dt>
+        <dd>
+          Hands-on is the ✋ switch: a drag picks up the toy and a let-go tosses it. A
+          <b>rigid body</b> is a thing that never changes shape, described by its place and its
+          turn; most toys play as one (Chapter 6).
+        </dd>
+        <dt id="g-xpbd">Position-based dynamics (XPBD)</dt>
+        <dd>
+          A way to simulate physics by moving things to where they would be if nothing overlapped
+          and every joint held, then working out their speeds from how far they moved. Splashery's
+          own engine uses an extended form of it [<a href="references.html#ref-11">11</a>,
+          <a href="references.html#ref-12">12</a>].
+        </dd>
+        <dt id="g-joint">Joint: hinge, slider, dial, socket, break</dt>
+        <dd>
+          The ways a part may move in hands-on play. A <b>hinge</b> swings about an axis, a
+          <b>slider</b> moves along a line, a <b>dial</b> turns round and round, a
+          <b>socket</b> lets a loose piece click back into its place, and a <b>break</b> lets a
+          piece snap off when pulled hard. Each of the first three is moved by one number, an angle
+          or a distance.
+        </dd>
+        <dt id="g-node">Node, skin</dt>
+        <dd>
+          A <b>node</b> is one point of a rope or a cloth, held to its neighbors by links. A splat
+          that follows two nodes (or four, for cloth) is called a <b>skin</b> splat: the rope bends
+          and the splat stays whole.
+        </dd>
+        <dt id="g-restitution">Restitution (bounce)</dt>
+        <dd>
+          The share of its speed a thing keeps after a bounce: a basketball dropped on a hard floor
+          keeps about 0.82 to 0.88.
+        </dd>
+        <dt id="g-radius">Toy radius</dt>
+        <dd>
+          The unit of length hands-on play uses: the toy's own radius. Gravity, throws, and the play
+          area are given in toy radii, so every toy falls the same way whatever its size on screen.
+        </dd>
+        <dt id="g-angstrom">Ångström, B-factor</dt>
+        <dd>
+          An <b>ångström</b> is a tenth of a nanometer; atoms in a bond are about 1 to 2 of them
+          apart. A <b>B-factor</b> says how much an atom's place is blurred in a crystal, by motion
+          or disorder.
+        </dd>
+        <dt id="g-voxel">Voxel</dt>
+        <dd>
+          A volume pixel: one little cube of a 3D scan, with one number for how dense the material
+          is there.
+        </dd>
+        <dt id="g-window">Window and level, Hounsfield unit</dt>
+        <dd>
+          A <b>window</b> picks the range of values that show, from a lower to an upper level, and
+          the rest is hidden or faded. In a CT scan the values are in <b>Hounsfield units</b>, on
+          which water is 0 and air is about −1000.
+        </dd>
+        <dt id="g-pointcloud">Point cloud, lidar, LAS and LAZ</dt>
+        <dd>
+          A <b>point cloud</b> is a list of points with places and sometimes colors.
+          <b>Lidar</b> makes one by timing laser pulses. <b>LAS</b> is the standard file for them;
+          <b>LAZ</b> is the same file compressed.
+        </dd>
+        <dt id="g-magnitude">Magnitude</dt>
+        <dd>
+          A scale on which each step is a fixed ratio. An earthquake's magnitude goes up by one for
+          about 32 times the energy. A star's magnitude goes the other way: the smaller (or more
+          negative) the number, the brighter the star, and 6 is about the faintest the unaided eye
+          sees under a dark sky.
+        </dd>
+        <dt id="g-sky">Precession, sidereal time, J2000</dt>
+        <dd>
+          <b>Precession</b> is the slow wobble of the Earth's axis, one turn in about 26,000 years,
+          which shifts where the stars are. <b>Sidereal time</b> is time measured by the stars
+          instead of the Sun, and tells which part of the sky is overhead. <b>J2000</b> is the
+          moment (January 1, 2000, noon) a star catalog's positions are given for.
+        </dd>
+        <dt id="g-snapshot">Snapshot, feed</dt>
+        <dd>
+          A <b>feed</b> is a web address that serves current data, such as the earthquakes of the
+          past week. A <b>snapshot</b> is a dated copy of that data that ships with the site, for
+          when the feed cannot be reached.
+        </dd>
+        <dt id="g-depth">Depth map, relative depth</dt>
+        <dd>
+          A picture the same size as a photo whose every pixel holds how far away that part is. A
+          depth model's map is <b>relative</b>: it says which parts are nearer than which, not how
+          many meters. Often it is stored as <i>disparity</i>, which is large for near things.
+        </dd>
+        <dt id="g-sharp">Sharp view, relief</dt>
+        <dd>
+          A second view of the photo toys that lays the photo, at its full resolution, on a
+          <b>relief</b>: a surface lifted by the same depth the splats use. It is a textured
+          surface, not splats.
+        </dd>
+        <dt id="g-training">Training, gradient descent</dt>
+        <dd>
+          <b>Gradient descent</b> nudges numbers again and again in the direction that lowers an
+          error. <b>Training</b> a splat scene is gradient descent on the splats' places, sizes,
+          colors, and opacities until pictures drawn from them match the photos [<a
+            href="references.html#ref-1"
+            >1</a
+          >].
+        </dd>
+        <dt id="g-sfm">Structure from motion</dt>
+        <dd>
+          Working out where the camera was for each of many overlapping photos, and where the points
+          they show lie in space.
+        </dd>
+        <dt id="g-webgpu">WebGPU, WebAssembly</dt>
+        <dd>
+          <b>WebGPU</b> is the browser's newer way to use the graphics chip for general computation,
+          which Video to 3D needs for training. <b>WebAssembly</b> is a compact code format that
+          runs at near native speed; the depth model runs on it through ONNX Runtime Web.
+        </dd>
+        <dt id="g-formats">PLY, SOG, SPZ, .splat</dt>
+        <dd>
+          Splat file formats. <b>PLY</b> is the plain one that every tool reads and that keeps
+          everything. <b>SPZ</b> is about a tenth of its size and keeps view-dependent color.
+          <b>SOG</b> is the smallest and keeps base colors only. <b>.splat</b> is simple and keeps
+          base colors only.
+        </dd>
+        <dt id="g-qrmodule">Module, finder pattern, quiet zone</dt>
+        <dd>
+          A <b>module</b> is one cell of a QR code. The three big squares in the corners are the
+          <b>finder patterns</b>, which let a reader find and orient the code. The
+          <b>quiet zone</b> is the blank border, four modules wide.
+        </dd>
+        <dt id="g-ecc">Error correction, Reed–Solomon, codeword</dt>
+        <dd>
+          A QR code holds extra <b>codewords</b> (8 modules each) made with a
+          <b>Reed–Solomon</b> code [<a href="references.html#ref-19">19</a>], so a reader can
+          rebuild the text if some are lost. The level (L, M, Q, or H) sets how many: about 7, 15,
+          25, or 30 percent of the codewords.
+        </dd>
+        <dt id="g-version">QR version</dt>
+        <dd>
+          The size of a QR code, from 1 (21 modules on a side) to 40 (177). A longer text needs a
+          higher version.
+        </dd>
+        <dt id="g-halftone">Halftone, error diffusion</dt>
+        <dd>
+          Showing a picture with only dark and light dots. <b>Error diffusion</b> decides each dot
+          by passing the error of the last choice on to the pixels beside it.
+        </dd>
+        <dt id="g-checkdigit">Check digit</dt>
+        <dd>
+          A digit of a barcode worked out from the others, so a reader can tell when it has misread
+          one.
+        </dd>
+        <dt id="g-fragment">Fragment, deflate, base64url</dt>
+        <dd>
+          The <b>fragment</b> of a link is everything after the <code>#</code>; a browser never
+          sends it to a server. <b>Deflate</b> is the compression of zip files and PNG pictures; a
+          Splashery link uses its raw form. <b>Base64url</b> spells bytes with the 64 letters,
+          digits, <code>-</code>, and <code>_</code> that are safe in an address.
+        </dd>
+        <dt id="g-scene">Scene</dt>
+        <dd>
+          Everything needed to rebuild a view: the toy, its options, the look, the camera, and any
+          paint, written as JSON. A link is a scene; a scene file is the same scene saved as a file.
+        </dd>
       </dl>
 
       <!-- NAV:BOTTOM:START (written by manual/build-pages.mjs; do not edit by hand) -->
@@ -211,7 +439,7 @@
         <p>
           The Tinkerer's Manual, first published September 28, 2026 and updated October 11, 2026.
           Part of
-          <a href="https://ryanjosephkamp.github.io/splashery/" target="_blank" rel="noopener"
+          <a href="https://ryanjosephkamp.github.io/splashery/site/" target="_blank" rel="noopener"
             >Splashery</a
           >, a toy box of 3D Gaussian splats that runs in your browser. Every picture here was made
           with Splashery itself.

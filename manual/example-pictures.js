@@ -1,6 +1,6 @@
 import { smoothstep } from "../src/kit.js";
 
-// Two small picture toys for Level 5 of the Tinkerer's Manual: a framed photo
+// Two small picture toys for Chapter 5 of the Tinkerer's Manual: a framed photo
 // that opens your own picture, and a little book whose page turns like paper.
 export const RECIPES = {
   "little-frame": {
