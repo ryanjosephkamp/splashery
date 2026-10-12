@@ -181,17 +181,20 @@ request them. Browser plugin was unavailable; regular Playwright was used.
   default artifact directory, deleting a trace; concurrent CPU work also disturbed tight timing
   checks. The affected `phf2` and `smd-moving` files passed an isolated rerun, 23/23.
 - `cdx-mp2` initially passed eight browser tests; the added frame-diversity check makes nine. The
-  final run also verifies that paused pictures stay Sharp through repeated stage updates.
+  final run passed 9/9 and also verifies that paused pictures stay Sharp through repeated stage
+  updates.
 - `smoke` plus the eight then-current new tests passed 58/58, including embed transfer ≤ 30 MB and
   the WebGPU availability check. The full unrelated repository suite was not run.
 - After media changes, the Moving photo subset of `psv3` plus the eight new tests passed 16/17 under
   simultaneous review rendering; one wrap was first observed at 0.622 seconds against a 0.5-second
   bound. That precise real-browser sound-loop test passed in isolation. `lv7-long` and
   `cdx-stability` passed again, 12/12.
-- `node tools/check-packs.mjs moving-photo-3d`, `node tools/nc-assets.mjs --check`, the contact
-  sheet, Prettier, American English, and diff whitespace checks were run. Existing screenshots were
-  restored after the runs. No depth worker, model implementation, relief-mesh code, other photo
-  path, library, or dependency changed.
+- `node tools/check-packs.mjs moving-photo-3d` fails its 1.5-second Node construction cap on both
+  the measured baseline `5e5671b0` (3,079 ms) and this branch (3,098 ms), each with 208,806 finite
+  splats. This inherited failure is separate from the browser open-time measurements above.
+  `node tools/nc-assets.mjs --check`, the contact sheet, Prettier, American English, and diff
+  whitespace checks passed. Existing screenshots were restored after the runs. No depth worker,
+  model implementation, relief-mesh code, other photo path, library, or dependency changed.
 
 The new speaker and upload tests use real media, Sound, Track, and the on-device model. The
 moving-edge oracle uses synthetic depths to check interpolation. Some existing live-input tests mock
