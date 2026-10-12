@@ -13,6 +13,8 @@
 
 // The tier budgets for the toy's splats (the kit's count: the tier's default count times the
 // recipe's density, capped at the tier's maximum). The same as the model toy's.
+import { backgroundImage, planarDepth, rimDepth, softenDepth } from "../photo3d/background.js";
+
 export const PHOTO_DENSITY = 1.5;
 export const TIER_COUNTS = {
   low: { maxCount: 120000, defaultCount: 60000 },
@@ -374,7 +376,7 @@ export function sharpen(rgb, gx, gy, amount = SHARPEN) {
 export function buildPhotoSplats(
   photo,
   depthMap,
-  { count = 100000, depth = 0.5, cut = CUT, keepFlat = false } = {},
+  { count = 100000, depth = 0.5, cut = CUT, keepFlat = false, sharpCells = count * 0.7 } = {},
 ) {
   // prettier-ignore
   const aspect = photo.w / photo.h;
@@ -399,11 +401,12 @@ export function buildPhotoSplats(
   }
   const gx = B * bx;
   const gy = B * by;
-  const rgb = sharpen(resampleArea(photo, gx, gy), gx, gy);
+  const sampled = resampleArea(photo, gx, gy);
   const { w: dw, h: dh } = depthMap;
   const guideLo = resampleArea(photo, dw, dh);
   const dn = normalizeDepth(depthMap.d);
   const flatness = keepFlat ? reliefScale(...percentiles(depthMap.d)) : 1;
+  const rgb = keepFlat && flatness <= FLAT_KEEP ? sampled : sharpen(sampled, gx, gy);
   if (flatness < 1) for (let i = 0; i < dn.length; i++) dn[i] = 0.5 + (dn[i] - 0.5) * flatness;
   let d = upsampleDepth(dn, dw, dh, guideLo, gx, gy, rgb);
   const minCells = Math.max(6, Math.round(MIN_PIECE * gx * gy));
@@ -431,10 +434,32 @@ export function buildPhotoSplats(
   const cell = 1 / gy;
   const n = gx * gy;
   const z = new Float32Array(n);
-  for (let c = 0; c < n; c++) z[c] = R * (d[c] - 0.5);
+  const isPlane = keepFlat && flatness <= FLAT_KEEP;
+  // A planar upload keeps its affine plane. Size its footprints from that
+  // displayed plane, so depth noise cannot bend text or inflate its splats.
+  const displayDepth = isPlane ? planarDepth(d, gx, gy) : d;
+  // A plane rises as one piece, including halfway through the tap and Layers.
+  if (isPlane) band.fill(bandOf(displayDepth.reduce((a, b) => a + b, 0) / n));
+  const soft = softenDepth(
+    Float32Array.from(displayDepth, (v) => Math.round(v * 255) / 255),
+    gx,
+    gy,
+    aspect,
+  );
+  const softBytes = Uint8Array.from(soft, (v) => Math.round(v * 255));
+  const edge = rimDepth(
+    displayDepth,
+    gx,
+    gy,
+    sharpCells,
+    Float32Array.from(softBytes, (v) => v / 255),
+  );
+  for (let c = 0; c < n; c++) z[c] = R * (edge[c] - 0.5);
+  const sizeZ = z;
   // Sizes: FILL times the mean distance to the neighbors on the same surface (a cell with
   // none takes a plain cell's size), never more than 1.7 cells so a steep slope stays sharp.
   const sigma = new Float32Array(n);
+  const coverage = new Float32Array(n);
   const cw = cell * aspect * (gy / gx); // the cell's width (equal to `cell` for a square grid)
   for (let j = 0; j < gy; j++)
     for (let i = 0; i < gx; i++) {
@@ -445,13 +470,16 @@ export function buildPhotoSplats(
         sum += Math.hypot(step, dz);
         k++;
       };
-      if (i > 0 && linkedRight(m, c - 1)) add(z[c] - z[c - 1], cw);
-      if (i + 1 < gx && linkedRight(m, c)) add(z[c] - z[c + 1], cw);
-      if (j > 0 && linkedDown(m, c - gx)) add(z[c] - z[c - gx], cell);
-      if (j + 1 < gy && linkedDown(m, c)) add(z[c] - z[c + gx], cell);
+      if (i > 0 && linkedRight(m, c - 1)) add(sizeZ[c] - sizeZ[c - 1], cw);
+      if (i + 1 < gx && linkedRight(m, c)) add(sizeZ[c] - sizeZ[c + 1], cw);
+      if (j > 0 && linkedDown(m, c - gx)) add(sizeZ[c] - sizeZ[c - gx], cell);
+      if (j + 1 < gy && linkedDown(m, c)) add(sizeZ[c] - sizeZ[c + gx], cell);
       const base = k ? sum / k : cell * 1.15;
       // beside a cut the splat is a little smaller, so the edge stays crisp
       sigma[c] = FILL * Math.min(base, 1.7 * cell) * (k < 4 ? 0.85 : 1);
+      // Textured splats can overlap without averaging different colors. Give
+      // steep surfaces the coverage their true neighbor distances require.
+      coverage[c] = 1.3 * FILL * Math.min(base, 6 * cell) * (k < 4 ? 0.85 : 1);
     }
   const cutCells = (() => {
     let e = 0;
@@ -467,6 +495,7 @@ export function buildPhotoSplats(
   const oRelief = new Float32Array(no * 3);
   const oFlat = new Float32Array(no * 3);
   const oSigma = new Float32Array(no);
+  const oCoverage = new Float32Array(no);
   const oRgb = new Float32Array(no * 3);
   const oBand = new Uint8Array(no);
   for (let k = 0; k < no; k++) {
@@ -475,6 +504,7 @@ export function buildPhotoSplats(
     const sz = g.size[k];
     let zz = 0;
     let sg = 0;
+    let cv = 0;
     let r = 0;
     let gg = 0;
     let b = 0;
@@ -483,6 +513,7 @@ export function buildPhotoSplats(
         const c = j * gx + i;
         zz += z[c];
         sg += sigma[c];
+        cv += coverage[c];
         r += rgb[c * 3];
         gg += rgb[c * 3 + 1];
         b += rgb[c * 3 + 2];
@@ -502,6 +533,7 @@ export function buildPhotoSplats(
     oRgb[k * 3 + 2] = b / q;
     // a block of sz by sz cells: sz times its cells' mean size (r1: a 2 x 2 block, twice)
     oSigma[k] = ((sz * sg) / q) * (sz === 1 ? SMALL_FILL : sz === 2 ? PAIR_FILL : 1);
+    oCoverage[k] = ((sz * cv) / q) * (sz === 1 ? SMALL_FILL : sz === 2 ? PAIR_FILL : 1);
     oBand[k] = band[(y0 + (sz >> 1)) * gx + x0 + (sz >> 1)];
   }
   return {
@@ -512,10 +544,16 @@ export function buildPhotoSplats(
     relief: oRelief,
     flat: oFlat,
     sigma: oSigma,
+    coverage: oCoverage,
     rgb: oRgb,
     band: oBand,
-    depth: d,
+    depth: displayDepth,
+    edgeDepth: edge,
     cellBand: band, // lane Photo depth: each fine cell's layer (its piece's), for the Sharp picture
+    background: {
+      ...backgroundImage(photo, displayDepth, gx, gy, R, pc.label),
+      soft: { w: gx, h: gy, data: softBytes },
+    },
     gap: 0.16 * R + 0.06, // how far apart "Layers" pulls the depth bands, in picture heights
     stats: {
       pieces: pc.count,

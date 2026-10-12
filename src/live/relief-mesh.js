@@ -27,6 +27,7 @@
 // the picture's own colors, as the splats show them. PlayCanvas comes only through src/pc.js.
 
 import * as pc from "../pc.js";
+import { surfaceGrid } from "../photo3d/surface.js";
 import { backingField } from "./relief-height.js"; // lane Photo depth
 
 const VS = /* glsl */ `
@@ -34,6 +35,7 @@ attribute vec3 aPosition;
 uniform mat4 matrix_model;
 uniform mat4 matrix_viewProjection;
 uniform sampler2D uDepth;
+uniform sampler2D uSoftDepth;
 uniform vec4 uGrid;   // picture width and height (recipe units), cells across and down
 uniform vec4 uLift;   // lift, base (z = lift * (d - base)), backing offset, backing's flat z
 uniform vec4 uMorph;  // the four morph channels (0 with its depth, 1 flat)
@@ -44,11 +46,13 @@ uniform vec4 uBodyQ;  // the body's turn (quaternion)
 uniform vec4 uBodyT;  // the body's offset
 uniform vec4 uFrame;  // the dark frame (mode 2): its width across and down (picture units), z offset
 uniform vec4 uBack;   // the backing's grid cells across and down, pieces (1) or not, tint it (1)
+uniform vec4 uFill;   // filled still photo (1); clips keep the original shader path
 uniform sampler2D uBand;    // each cell's layer (0, 1/3, 2/3, 1), with pieces
 uniform sampler2D uBackMin; // each backing point's lowest depth per layer (bytes, 255 none)
 varying vec2 vUv;
 varying float vD;
 varying float vEdge;
+varying vec2 vCenter;
 vec3 psvRot(vec4 q, vec3 v) { return v + 2.0 * cross(q.xyz, cross(q.xyz, v) + q.w * v); }
 vec4 psvPlace(vec3 p) {
   p = (p - uTf.xyz) * uTf.w;
@@ -59,6 +63,7 @@ vec4 psvPlace(vec3 p) {
 // The depth softened over about a twelfth of the picture: the picture's border and its frame take
 // it, so the edge runs straight however noisy the depth is there.
 float psvSoft(vec2 p) {
+  if (uFill.x > 0.5) return textureLod(uSoftDepth, p, 0.0).r;
   vec2 st = vec2(0.02 * uGrid.y / uGrid.x, 0.02);
   float s = 0.0;
   for (int j = -2; j <= 2; j++)
@@ -93,14 +98,21 @@ void main(void) {
     vUv = vec2(0.0);
     vD = 0.0;
     vEdge = 0.0;
+    vCenter = vec2(0.5);
     return;
   }
   // (the backing is a little inside the picture, so it never shows past the edge as the view turns)
-  vec2 uv = back > 0.5 ? 0.5 + (aPosition.xy - 0.5) * 0.96 : aPosition.xy;
+  bool filled = uFill.x > 0.5;
+  vec2 uv = back > 0.5 ? 0.5 + (aPosition.xy - 0.5) * (filled ? 1.0 : 0.96) : aPosition.xy;
+  vec2 center = uv;
+  if (filled && back < 0.5) {
+    float cell = aPosition.z - 1.0;
+    center = (vec2(mod(cell, uGrid.z), floor(cell / uGrid.z)) + 0.5) / uGrid.zw;
+  }
   vec2 cuv = uv;
   bool pieces = uBack.z > 0.5;
   float d;
-  if (back > 0.5) {
+  if (back > 0.5 && !filled) {
     // (its color: the farthest point within reach)
     d = 2.0;
     vec2 st = vec2(uLayer.w * uGrid.y / uGrid.x, uLayer.w) / 3.0;
@@ -110,7 +122,15 @@ void main(void) {
         float t = textureLod(uDepth, s, 0.0).r;
         if (t < d) { d = t; cuv = s; }
       }
-  } else d = textureLod(uDepth, uv, 0.0).r;
+  } else {
+    d = textureLod(uDepth, uv, 0.0).r;
+    if (filled && back < 0.5) {
+      float cd = textureLod(uDepth, center, 0.0).r;
+      float cb = floor(textureLod(uBand, center, 0.0).r * 3.0 + 0.5);
+      float vb = floor(textureLod(uBand, uv, 0.0).r * 3.0 + 0.5);
+      if (abs(d - cd) > uLayer.y || abs(cb - vb) > 0.5) d = cd;
+    }
+  }
   float z;
   float pb = 0.0;
   if (back > 0.5 && pieces) {
@@ -129,7 +149,7 @@ void main(void) {
     if (back < 0.5 && pieces) {
       // Lane Photo depth: the layer of this point's piece of surface (one for the whole piece, as
       // the splats have), eased into the old blend by depth within six cells of the border.
-      pb = floor(textureLod(uBand, uv, 0.0).r * 3.0 + 0.5);
+      pb = floor(textureLod(uBand, filled ? center : uv, 0.0).r * 3.0 + 0.5);
       b = mix(clamp(dz * 4.0 - 0.5, 0.0, 3.0), pb, pdpDeep(uv));
     }
     float i0 = min(floor(b), 2.0);
@@ -143,14 +163,31 @@ void main(void) {
     z += (b - 1.5) * uLayer.x;
   }
   gl_Position = psvPlace(vec3((uv.x - 0.5) * uGrid.x, (0.5 - uv.y) * uGrid.y, z));
+  if (filled && back > 0.5) {
+    // Carry the conservative back layer to the projected photo border. Moving
+    // only its clip-space coverage keeps its depth behind the surface, unlike
+    // raising its rim vertices, which can interpolate in front of a near part.
+    float bd = psvSoft(uv);
+    float band = clamp(bd * 4.0 - 0.5, 0.0, 3.0);
+    float bi = min(floor(band), 2.0);
+    float bm0 = bi < 0.5 ? uMorph.x : (bi < 1.5 ? uMorph.y : uMorph.z);
+    float bm1 = bi < 0.5 ? uMorph.y : (bi < 1.5 ? uMorph.z : uMorph.w);
+    float bz = mix(uLift.x * (bd - uLift.y), 0.0, mix(bm0, bm1, band - bi)) + (band - 1.5) * uLayer.x;
+    vec4 edge = psvPlace(vec3((uv.x - 0.5) * uGrid.x, (0.5 - uv.y) * uGrid.y, bz));
+    float rim = min(min(uv.x, 1.0 - uv.x) * uGrid.x / uGrid.y, min(uv.y, 1.0 - uv.y));
+    float blend = 1.0 - smoothstep(0.02, 0.10, rim);
+    gl_Position.xy = mix(gl_Position.xy / gl_Position.w, edge.xy / edge.w, blend) * gl_Position.w;
+    gl_Position.z = max(gl_Position.z, (edge.z / edge.w + 0.00001) * gl_Position.w);
+  }
   vUv = cuv;
+  vCenter = center;
   vD = d;
   // A point beside a depth step (within a cell): every triangle touching it is dropped, so a cut is
   // a clean band (filled by the backing) instead of scattered triangles left on either side. With
   // pieces, a point beside another piece's layer is cut too, so no surface stretches between two
   // layers as they rise at different times.
   float e = 0.0;
-  if (back < 0.5) {
+  if (back < 0.5 && !filled) {
     vec2 cell = 1.0 / uGrid.zw;
     for (int j = -1; j <= 1; j++)
       for (int i = -1; i <= 1; i++) {
@@ -165,16 +202,37 @@ void main(void) {
 
 const FS = /* glsl */ `
 uniform sampler2D uColor;
+uniform sampler2D uDepth;
+uniform sampler2D uBand;
 uniform vec4 uGrid;
 uniform vec4 uLayer;
 uniform vec4 uBack;
+uniform vec4 uFill;
 varying vec2 vUv;
 varying float vD;
 varying float vEdge;
+varying vec2 vCenter;
 void main(void) {
+  vec2 aa = max(fwidth(vUv), vec2(1e-7));
+  float coverage = 1.0;
+  if (uFill.x > 0.5 && uLayer.z < 0.5) {
+    float cd = textureLod(uDepth, vCenter, 0.0).r;
+    float cb = textureLod(uBand, vCenter, 0.0).r;
+    for (int axis = 0; axis < 2; axis++) for (int side = -1; side <= 1; side += 2) {
+      vec2 stepUv = vec2(0.0); stepUv[axis] = float(side) / uGrid[axis + 2];
+      vec2 neighbor = clamp(vCenter + stepUv, 0.0, 1.0);
+      float nd = textureLod(uDepth, neighbor, 0.0).r;
+      float nb = textureLod(uBand, neighbor, 0.0).r;
+      if (cd - nd > uLayer.y || cb - nb > 0.2) {
+        float edge = vCenter[axis] + stepUv[axis] * 0.5;
+        float distance = (edge - vUv[axis]) * float(side);
+        coverage = min(coverage, smoothstep(-0.5 * aa[axis], 0.5 * aa[axis], distance));
+      }
+    }
+  }
   // (nothing is cut within a cell and a half of the picture's border, so its edge stays straight)
   vec2 rim = min(vUv, 1.0 - vUv) * uGrid.zw;
-  if (uLayer.z < 0.5 && min(rim.x, rim.y) > 1.5) {
+  if (uLayer.z < 0.5 && uFill.x < 0.5 && min(rim.x, rim.y) > 1.5) {
     if (vEdge > 0.001) discard;
     vec2 ux = dFdx(vUv);
     vec2 uy = dFdy(vUv);
@@ -189,7 +247,7 @@ void main(void) {
   }
   vec3 c = texture(uColor, vUv).rgb;
   if (uLayer.z > 0.5 && uLayer.z < 1.5 && uBack.w > 0.5) c = vec3(1.0, 0.0, 1.0); // (tests: the backing in magenta)
-  gl_FragColor = vec4(uLayer.z > 1.5 ? vec3(0.133, 0.149, 0.173) : c, 1.0);
+  gl_FragColor = vec4(uLayer.z > 1.5 ? vec3(0.133, 0.149, 0.173) : c, coverage);
 }
 `;
 
@@ -207,8 +265,11 @@ uniform uBodyQ: vec4f;
 uniform uBodyT: vec4f;
 uniform uFrame: vec4f;
 uniform uBack: vec4f;
+uniform uFill: vec4f;
 var uDepth: texture_2d<f32>;
 var uDepthSampler: sampler;
+var uSoftDepth: texture_2d<f32>;
+var uSoftDepthSampler: sampler;
 var uBand: texture_2d<f32>;
 var uBandSampler: sampler;
 var uBackMin: texture_2d<f32>;
@@ -216,6 +277,7 @@ var uBackMinSampler: sampler;
 varying vUv: vec2f;
 varying vD: f32;
 varying vEdge: f32;
+varying vCenter: vec2f;
 fn psvRot(q: vec4f, v: vec3f) -> vec3f { return v + 2.0 * cross(q.xyz, cross(q.xyz, v) + q.w * v); }
 fn psvPlace(p0: vec3f) -> vec4f {
   var p = (p0 - uniform.uTf.xyz) * uniform.uTf.w;
@@ -225,6 +287,7 @@ fn psvPlace(p0: vec3f) -> vec4f {
   return uniform.matrix_viewProjection * uniform.matrix_model * vec4f(p, 1.0);
 }
 fn psvSoft(p: vec2f) -> f32 {
+  if (uniform.uFill.x > 0.5) { return textureSampleLevel(uSoftDepth, uSoftDepthSampler, p, 0.0).r; }
   let st = vec2f(0.02 * uniform.uGrid.y / uniform.uGrid.x, 0.02);
   var s = 0.0;
   for (var j: i32 = -2; j <= 2; j++) {
@@ -257,14 +320,21 @@ fn pdpDeep(uv: vec2f) -> f32 {
     output.vUv = vec2f(0.0);
     output.vD = 0.0;
     output.vEdge = 0.0;
+    output.vCenter = vec2f(0.5);
     return output;
   }
   var uv = input.aPosition.xy;
-  if (back > 0.5) { uv = 0.5 + (uv - 0.5) * 0.96; }
+  let filled = uniform.uFill.x > 0.5;
+  if (back > 0.5) { uv = 0.5 + (uv - 0.5) * select(0.96, 1.0, filled); }
+  var center = uv;
+  if (filled && back < 0.5) {
+    let cell = input.aPosition.z - 1.0;
+    center = (vec2f(cell % uniform.uGrid.z, floor(cell / uniform.uGrid.z)) + 0.5) / uniform.uGrid.zw;
+  }
   var cuv = uv;
   let pieces = uniform.uBack.z > 0.5;
   var d: f32;
-  if (back > 0.5) {
+  if (back > 0.5 && !filled) {
     d = 2.0;
     let st = vec2f(uniform.uLayer.w * uniform.uGrid.y / uniform.uGrid.x, uniform.uLayer.w) / 3.0;
     for (var j: i32 = -3; j <= 3; j++) {
@@ -276,6 +346,12 @@ fn pdpDeep(uv: vec2f) -> f32 {
     }
   } else {
     d = textureSampleLevel(uDepth, uDepthSampler, uv, 0.0).r;
+    if (filled && back < 0.5) {
+      let cd = textureSampleLevel(uDepth, uDepthSampler, center, 0.0).r;
+      let cb = floor(textureSampleLevel(uBand, uBandSampler, center, 0.0).r * 3.0 + 0.5);
+      let vb = floor(textureSampleLevel(uBand, uBandSampler, uv, 0.0).r * 3.0 + 0.5);
+      if (abs(d - cd) > uniform.uLayer.y || abs(cb - vb) > 0.5) { d = cd; }
+    }
   }
   var z: f32;
   var pb = 0.0;
@@ -295,7 +371,7 @@ fn pdpDeep(uv: vec2f) -> f32 {
     var b = clamp(d * 4.0 - 0.5, 0.0, 3.0);
     if (back > 0.5) { b = 0.0; }
     if (back < 0.5 && pieces) {
-      pb = floor(textureSampleLevel(uBand, uBandSampler, uv, 0.0).r * 3.0 + 0.5);
+      pb = floor(textureSampleLevel(uBand, uBandSampler, select(uv, center, filled), 0.0).r * 3.0 + 0.5);
       b = mix(clamp(dz * 4.0 - 0.5, 0.0, 3.0), pb, pdpDeep(uv));
     }
     let i0 = min(floor(b), 2.0);
@@ -309,10 +385,25 @@ fn pdpDeep(uv: vec2f) -> f32 {
     z += (b - 1.5) * uniform.uLayer.x;
   }
   output.position = psvPlace(vec3f((uv.x - 0.5) * uniform.uGrid.x, (0.5 - uv.y) * uniform.uGrid.y, z));
+  if (filled && back > 0.5) {
+    let bd = psvSoft(uv);
+    let band = clamp(bd * 4.0 - 0.5, 0.0, 3.0);
+    let bi = min(floor(band), 2.0);
+    var bm0 = uniform.uMorph.x;
+    var bm1 = uniform.uMorph.y;
+    if (bi > 0.5) { bm0 = uniform.uMorph.y; bm1 = uniform.uMorph.z; }
+    if (bi > 1.5) { bm0 = uniform.uMorph.z; bm1 = uniform.uMorph.w; }
+    let bz = mix(uniform.uLift.x * (bd - uniform.uLift.y), 0.0, mix(bm0, bm1, band - bi)) + (band - 1.5) * uniform.uLayer.x;
+    let edge = psvPlace(vec3f((uv.x - 0.5) * uniform.uGrid.x, (0.5 - uv.y) * uniform.uGrid.y, bz));
+    let rim = min(min(uv.x, 1.0 - uv.x) * uniform.uGrid.x / uniform.uGrid.y, min(uv.y, 1.0 - uv.y));
+    let blend = 1.0 - smoothstep(0.02, 0.10, rim);
+    output.position = vec4f(mix(output.position.xy / output.position.w, edge.xy / edge.w, blend) * output.position.w, max(output.position.z, (edge.z / edge.w + 0.00001) * output.position.w), output.position.w);
+  }
   output.vUv = cuv;
+  output.vCenter = center;
   output.vD = d;
   var e = 0.0;
-  if (back < 0.5) {
+  if (back < 0.5 && !filled) {
     let cell = 1.0 / uniform.uGrid.zw;
     for (var j: i32 = -1; j <= 1; j++) {
       for (var i: i32 = -1; i <= 1; i++) {
@@ -331,11 +422,17 @@ const FS_W = /* wgsl */ `
 uniform uGrid: vec4f;
 uniform uLayer: vec4f;
 uniform uBack: vec4f;
+uniform uFill: vec4f;
 var uColor: texture_2d<f32>;
 var uColorSampler: sampler;
+var uDepth: texture_2d<f32>;
+var uDepthSampler: sampler;
+var uBand: texture_2d<f32>;
+var uBandSampler: sampler;
 varying vUv: vec2f;
 varying vD: f32;
 varying vEdge: f32;
+varying vCenter: vec2f;
 @fragment fn fragmentMain(input: FragmentInput) -> FragmentOutput {
   var output: FragmentOutput;
   let ux = dpdx(input.vUv);
@@ -343,8 +440,27 @@ varying vEdge: f32;
   let dx = dpdx(input.vD);
   let dy = dpdy(input.vD);
   let c = textureSample(uColor, uColorSampler, input.vUv);
+  let aa = max(fwidth(input.vUv), vec2f(1e-7));
+  var coverage = 1.0;
+  if (uniform.uFill.x > 0.5 && uniform.uLayer.z < 0.5) {
+    let cd = textureSampleLevel(uDepth, uDepthSampler, input.vCenter, 0.0).r;
+    let cb = textureSampleLevel(uBand, uBandSampler, input.vCenter, 0.0).r;
+    for (var axis: i32 = 0; axis < 2; axis++) {
+      for (var side: i32 = -1; side <= 1; side += 2) {
+        var stepUv = vec2f(0.0); stepUv[axis] = f32(side) / uniform.uGrid[axis + 2];
+        let neighbor = clamp(input.vCenter + stepUv, vec2f(0.0), vec2f(1.0));
+        let nd = textureSampleLevel(uDepth, uDepthSampler, neighbor, 0.0).r;
+        let nb = textureSampleLevel(uBand, uBandSampler, neighbor, 0.0).r;
+        if (cd - nd > uniform.uLayer.y || cb - nb > 0.2) {
+          let edge = input.vCenter[axis] + stepUv[axis] * 0.5;
+          let distance = (edge - input.vUv[axis]) * f32(side);
+          coverage = min(coverage, smoothstep(-0.5 * aa[axis], 0.5 * aa[axis], distance));
+        }
+      }
+    }
+  }
   let rim = min(input.vUv, 1.0 - input.vUv) * uniform.uGrid.zw;
-  if (uniform.uLayer.z < 0.5 && min(rim.x, rim.y) > 1.5) {
+  if (uniform.uLayer.z < 0.5 && uniform.uFill.x < 0.5 && min(rim.x, rim.y) > 1.5) {
     if (input.vEdge > 0.001) { discard; }
     let det = ux.x * uy.y - ux.y * uy.x;
     if (abs(det) > 1e-18) {
@@ -355,14 +471,27 @@ varying vEdge: f32;
   }
   var rgb = c.rgb;
   if (uniform.uLayer.z > 0.5 && uniform.uLayer.z < 1.5 && uniform.uBack.w > 0.5) { rgb = vec3f(1.0, 0.0, 1.0); }
-  output.color = vec4f(select(rgb, vec3f(0.133, 0.149, 0.173), uniform.uLayer.z > 1.5), 1.0);
+  output.color = vec4f(select(rgb, vec3f(0.133, 0.149, 0.173), uniform.uLayer.z > 1.5), coverage);
   return output;
 }
 `;
 
 // A grid of (cols + 1) x (rows + 1) points over the picture (u, v from 0 to 1, v down) and its
 // triangles, each cell split along alternating diagonals.
-function gridMesh(device, cols, rows) {
+function gridMesh(device, cols, rows, split = false, prepared = null) {
+  if (split) {
+    // Independent cells meet at the depth edge, with no triangle bridging the
+    // foreground and background. z encodes the cell, not a geometric height.
+    const grid =
+      prepared?.cols === cols && prepared?.rows === rows ? prepared : surfaceGrid(cols, rows);
+    const pos = grid.positions,
+      idx = grid.indices;
+    const mesh = new pc.Mesh(device);
+    mesh.setPositions(pos, 3);
+    mesh.setIndices(idx);
+    mesh.update(pc.PRIMITIVE_TRIANGLES);
+    return { mesh, bytes: pos.byteLength + idx.byteLength };
+  }
   const pos = new Float32Array((cols + 1) * (rows + 1) * 3);
   let o = 0;
   for (let j = 0; j <= rows; j++)
@@ -427,15 +556,31 @@ function frameMesh(device, n = 96) {
   return mesh;
 }
 
-function material() {
-  const m = new pc.ShaderMaterial({
-    uniqueName: "psvRelief",
+function shaderDescription(filled = false, back = 0) {
+  const specialize = (code, wgsl) => {
+    if (!filled) return code;
+    // Each still material needs only its own branch. Clips retain the original
+    // shader, including their 49-tap color search and depth blending.
+    return wgsl
+      ? code
+          .replace("uniform uFill: vec4f;", "")
+          .replaceAll("uniform.uFill", "vec4f(1.0)")
+          .replaceAll("uniform.uLayer.z", `${back}.0`)
+      : code
+          .replace(/uniform vec4 uFill;[^\n]*/, "const vec4 uFill = vec4(1.0);")
+          .replaceAll("uLayer.z", `${back}.0`);
+  };
+  return {
+    uniqueName: filled ? `p3dFilled${back}` : "psvRelief",
     attributes: { aPosition: pc.SEMANTIC_POSITION },
-    vertexGLSL: VS,
-    fragmentGLSL: FS,
-    vertexWGSL: VS_W,
-    fragmentWGSL: FS_W,
-  });
+    vertexGLSL: specialize(VS, false),
+    fragmentGLSL: specialize(FS, false),
+    vertexWGSL: specialize(VS_W, true),
+    fragmentWGSL: specialize(FS_W, true),
+  };
+}
+function material(filled = false, back = 0) {
+  const m = new pc.ShaderMaterial(shaderDescription(filled, back));
   m.cull = pc.CULLFACE_NONE;
   m.depthWrite = true;
   m.depthTest = true;
@@ -450,7 +595,7 @@ const isMedia = (s) =>
 
 export class ReliefMesh {
   // cols x rows: the surface's grid cells; back: the backing sheet's cells across (down follows).
-  constructor(stage, { cols, rows, backCols = 96 }) {
+  constructor(stage, { cols, rows, backCols = 96, surface = null }) {
     this.stage = stage;
     const device = stage.device;
     this.device = device;
@@ -459,15 +604,17 @@ export class ReliefMesh {
     const backRows = Math.max(8, Math.round((backCols * rows) / cols));
     this.backCols = backCols;
     this.backRows = backRows;
-    this.surface = gridMesh(device, cols, rows);
+    this.split = !!surface;
+    this.surface = gridMesh(device, cols, rows, this.split, surface);
     this.backing = gridMesh(device, backCols, backRows);
-    this.matS = material();
-    this.matB = material();
+    this.shaderFilled = this.split;
+    this.matS = material(this.split, 0);
+    this.matB = material(this.split, 1);
     this.node = new pc.GraphNode("psv-relief");
     this.miS = new pc.MeshInstance(this.surface.mesh, this.matS, this.node);
     this.miB = new pc.MeshInstance(this.backing.mesh, this.matB, this.node);
     this.frame = frameMesh(device);
-    this.matF = material();
+    this.matF = material(this.split, 2);
     this.miF = new pc.MeshInstance(this.frame, this.matF, this.node);
     for (const mi of [this.miS, this.miB, this.miF]) mi.cull = false; // (the shader moves its points)
     this.layer = stage.app.scene.layers.getLayerByName("World");
@@ -486,14 +633,23 @@ export class ReliefMesh {
       uBodyT: [0, 0, 0, 0],
       uFrame: [0, 0, 0, 0],
       uBack: [backCols, backRows, 0, 0],
+      uFill: [0, 0, 0, 0],
     };
     // Lane Photo depth: the pieces' layers and the backing's lowest depths (one-texel stand-ins
     // until setPieces; a moving clip never has them).
     this.band = this.byteTexture("psv-band", 1, 1, pc.PIXELFORMAT_R8, new Uint8Array([0]));
+    this.softDepth = this.byteTexture(
+      "p3d-soft-depth",
+      1,
+      1,
+      pc.PIXELFORMAT_R8,
+      new Uint8Array([128]),
+    );
     this.backMin = this.byteTexture("psv-back-min", 1, 1, pc.PIXELFORMAT_RGBA8, new Uint8Array([255, 255, 255, 255])); // prettier-ignore
     this.pieceBytes = 0;
     for (const m of [this.matS, this.matB, this.matF]) {
       m.setParameter("uBand", this.band);
+      m.setParameter("uSoftDepth", this.softDepth);
       m.setParameter("uBackMin", this.backMin);
     }
     this.visible = true;
@@ -525,6 +681,7 @@ export class ReliefMesh {
     this.band.destroy();
     this.backMin.destroy();
     if (!p) {
+      this.setBackground(null);
       this.band = this.byteTexture("psv-band", 1, 1, pc.PIXELFORMAT_R8, new Uint8Array([0]));
       this.backMin = this.byteTexture("psv-back-min", 1, 1, pc.PIXELFORMAT_RGBA8, new Uint8Array([255, 255, 255, 255])); // prettier-ignore
       this.pieceBytes = 0;
@@ -534,14 +691,16 @@ export class ReliefMesh {
       const b = new Uint8Array(gx * gy);
       for (let i = 0; i < b.length; i++) b[i] = Math.round((Math.min(3, band[i]) * 255) / 3);
       this.band = this.byteTexture("psv-band", gx, gy, pc.PIXELFORMAT_R8, b);
-      const field = backingField(depth, band, gx, gy, {
-        cols: this.backCols,
-        rows: this.backRows,
-        reach: this.u.uLayer[3],
-        // (the border band where layers blend: six cells, and at least 3% of the picture)
-        rim: Math.max(6 / this.rows, 0.03 * Math.max(1, this.cols / this.rows)),
-        base,
-      });
+      const field =
+        p.field ||
+        backingField(depth, band, gx, gy, {
+          cols: this.backCols,
+          rows: this.backRows,
+          reach: this.u.uLayer[3],
+          // (the border band where layers blend: six cells, and at least 3% of the picture)
+          rim: Math.max(6 / this.rows, 0.03 * Math.max(1, this.cols / this.rows)),
+          base,
+        });
       this.field = field;
       this.backMin = this.byteTexture("psv-back-min", this.backCols + 1, this.backRows + 1, pc.PIXELFORMAT_RGBA8, field); // prettier-ignore
       this.pieceBytes = gx * gy + field.length;
@@ -552,6 +711,55 @@ export class ReliefMesh {
       m.setParameter("uBackMin", this.backMin);
       m.setParameter("uBack", this.u.uBack);
     }
+  }
+
+  setBackground(b) {
+    const filled = !!b;
+    if (filled !== this.shaderFilled) {
+      this.shaderFilled = filled;
+      for (const [back, mat] of [this.matS, this.matB, this.matF].entries()) {
+        mat.shaderDesc = shaderDescription(filled, back);
+        mat.update();
+      }
+    }
+    if (filled !== this.split) {
+      this.split = filled;
+      const old = this.surface;
+      this.surface = gridMesh(this.device, this.cols, this.rows, filled, b?.surface);
+      this.miS.mesh = this.surface.mesh;
+      old.mesh.destroy();
+    }
+    this.backgroundColor?.destroy();
+    this.softDepth?.destroy();
+    this.softDepth = this.byteTexture(
+      "p3d-soft-depth",
+      b?.soft?.w || 1,
+      b?.soft?.h || 1,
+      pc.PIXELFORMAT_R8,
+      b?.soft?.data || new Uint8Array([128]),
+    );
+    this.softDepth.minFilter = pc.FILTER_LINEAR;
+    this.softDepth.magFilter = pc.FILTER_LINEAR;
+    for (const mat of [this.matS, this.matB, this.matF])
+      mat.setParameter("uSoftDepth", this.softDepth);
+    this.backgroundColor = null;
+    this.backgroundBytes = 0;
+    if (b) {
+      this.backgroundColor = this.byteTexture(
+        "p3d-filled-background",
+        b.w,
+        b.h,
+        pc.PIXELFORMAT_RGBA8,
+        b.rgba,
+      );
+      this.backgroundColor.minFilter = pc.FILTER_LINEAR;
+      this.backgroundColor.magFilter = pc.FILTER_LINEAR;
+      this.backgroundBytes = b.rgba.byteLength + (b.soft?.data.byteLength || 0);
+      this.matB.setParameter("uColor", this.backgroundColor);
+    } else if (this.color) this.matB.setParameter("uColor", this.color);
+    this.u.uFill[0] = filled ? 1 : 0;
+    this.matS.blendType = filled ? pc.BLEND_NORMAL : pc.BLEND_NONE;
+    this.matS.update();
   }
 
   // The picture: { w, h, data: RGBA bytes }, or a <video>, canvas or ImageBitmap (uploaded by the
@@ -668,6 +876,13 @@ export class ReliefMesh {
     this.visible = v;
   }
 
+  showBackground(on) {
+    // A continuous filled sheet closes the spaces between background splats.
+    // The foreground remains splats; their saved/exported cloud still includes
+    // its own back layer. This sheet is hidden for editing tools and effects.
+    this.miB.visible = !!on && !!this.backgroundColor && !!this.depth;
+  }
+
   // What it holds on the GPU, in bytes: the picture (with its mipmaps), the depth, the two grids.
   cost() {
     const depth = this.depth ? this.depth.width * this.depth.height : 0;
@@ -676,8 +891,15 @@ export class ReliefMesh {
       depth,
       mesh: this.surface.bytes + this.backing.bytes,
       pieces: this.pieceBytes,
+      background: this.backgroundBytes || 0,
       triangles: 2 * (this.cols * this.rows) + this.backing.mesh.primitive[0].count / 3,
-      total: this.colorBytes + depth + this.surface.bytes + this.backing.bytes + this.pieceBytes,
+      total:
+        this.colorBytes +
+        depth +
+        this.surface.bytes +
+        this.backing.bytes +
+        this.pieceBytes +
+        (this.backgroundBytes || 0),
     };
   }
 
@@ -689,7 +911,9 @@ export class ReliefMesh {
     this.frame.destroy();
     this.matF.destroy();
     this.color?.destroy();
+    this.backgroundColor?.destroy();
     this.depth?.destroy();
+    this.softDepth?.destroy();
     this.band.destroy();
     this.backMin.destroy();
     this.matS.destroy();
