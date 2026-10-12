@@ -57,6 +57,7 @@ The engine files at the top of `src/`:
 | `motion.js`, `patterns.js`                                       | Whole-toy motion, parts and controls; the pattern layer (designs on toys).     |
 | `effects.js`                                                     | The per-splat effect shader (GLSL and WGSL).                                   |
 | `loaders.js`                                                     | Loading SOG, PLY, SPLAT, SPZ files.                                            |
+| `baked.js`                                                       | Baked splat assets for the Kit: the 18-byte format, `loadBaked`, `addBaked`.   |
 | `state.js`, `codec.js`                                           | The scene document (schema v3, loads v2) and the `#s=` link codec.             |
 | `toys.js`                                                        | The shelf catalog: every toy's metadata, and `labsOn()`.                       |
 | `toy-sounds.js`, `voices.js`, `sound.js`                         | Each toy's tap sound, the synthesized voice library, and the output.           |
@@ -120,19 +121,20 @@ a task's extra tests in a new `tests/<prefix>.spec.mjs`.
 About 270 scripts; most are one lane's clip or sample maker (`<prefix>-clip.mjs`). The ones every
 builder meets:
 
-| Tool                                                                                | Use                                                                               |
-| ----------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
-| `check-packs.mjs`                                                                   | Builds kit toys in Node and reports splat counts, build time, bad values.         |
-| `contact-sheet.mjs`, `make-thumbs.mjs`                                              | A contact sheet of a pack's toys; the thumbnails (`assets/toys/<id>/thumb.webp`). |
-| `effect-clip.mjs`, `effect-strip.mjs`, `drag-clip.mjs`                              | A toy's tap effect as a looping clip, as a filmstrip, or a drag.                  |
-| `toy-shots.mjs`                                                                     | Toys at their home camera, as PNG files.                                          |
-| `suite.mjs`                                                                         | The full test run, file by file, resumable.                                       |
-| `us-english.mjs`                                                                    | Lists British spellings in the lines your branch adds.                            |
-| `toy-plan.mjs`                                                                      | Checks `tools/toy-plan.json` and writes `docs/TOY-PLAN.md`.                       |
-| `prepare-assets.mjs`, `mesh-to-splats.mjs`, `model-to-splats.mjs`, `ro-bake.mjs`    | Turn scans and models into the files toys load.                                   |
-| `nc-assets.mjs`                                                                     | Lists every non-commercial (NC) asset.                                            |
-| `upkeep.mjs`, `op-merge.mjs`, `site-build.mjs`, `sound-board.mjs`, `help-board.mjs` | The Operator's upkeep and page builders. Don't run them in a task.                |
-| `builders-pack.mjs`                                                                 | Builds the ZIP of this folder.                                                    |
+| Tool                                                                                | Use                                                                                                  |
+| ----------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `check-packs.mjs`                                                                   | Builds kit toys in Node and reports splat counts, build time, bad values.                            |
+| `contact-sheet.mjs`, `make-thumbs.mjs`                                              | A contact sheet of a pack's toys; the thumbnails (`assets/toys/<id>/thumb.webp`).                    |
+| `effect-clip.mjs`, `effect-strip.mjs`, `drag-clip.mjs`                              | A toy's tap effect as a looping clip, as a filmstrip, or a drag.                                     |
+| `toy-shots.mjs`                                                                     | Toys at their home camera, as PNG files.                                                             |
+| `suite.mjs`                                                                         | The full test run, file by file, resumable.                                                          |
+| `us-english.mjs`                                                                    | Lists British spellings in the lines your branch adds.                                               |
+| `toy-plan.mjs`                                                                      | Checks `tools/toy-plan.json` and writes `docs/TOY-PLAN.md`.                                          |
+| `prepare-assets.mjs`, `mesh-to-splats.mjs`, `model-to-splats.mjs`, `ro-bake.mjs`    | Turn scans and models into the files toys load.                                                      |
+| `nc-assets.mjs`                                                                     | Lists every non-commercial (NC) asset.                                                               |
+| `port-convert.mjs`, `port-check.mjs`                                                | A 3DGS PLY to the baked format at each tier (and its manifest); the machine check for a toy package. |
+| `upkeep.mjs`, `op-merge.mjs`, `site-build.mjs`, `sound-board.mjs`, `help-board.mjs` | The Operator's upkeep and page builders. Don't run them in a task.                                   |
+| `builders-pack.mjs`                                                                 | Builds the ZIP of this folder.                                                                       |
 
 ## `tests/`
 

@@ -135,7 +135,8 @@ test.describe("the manual's code samples", () => {
 
   test("each JavaScript sample is a piece of a file in manual/ that builds", () => {
     const files = ["example-recipe.js", "example-pictures.js", "example-input.js"].map((f) => squash(fs.readFileSync(`manual/${f}`, "utf8"))); // prettier-ignore
-    const js = blocks.filter((b) => /^(import |\s*"little-book")/.test(b) || b.includes("export const RECIPES")); // prettier-ignore
+    // The Card's "A recipe" block is a grammar sketch with placeholders (Manual r7b), not a file piece.
+    const js = blocks.filter((b) => /^(import |\s*"little-book")/.test(b) || (b.includes("export const RECIPES") && !b.startsWith('export const RECIPES = { "my-toy"'))); // prettier-ignore
     expect(js.length).toBe(4);
     for (const b of js)
       expect(
@@ -252,9 +253,9 @@ test.describe("the manual page", () => {
         expect(fs.existsSync(path.join("manual", h.split("#")[0])), h).toBe(true);
       }
     }
-    // Every web link goes to this project's site or its source, a paper, or a Wikipedia article.
+    // Every web link goes to this project's site or its source, a paper, a source named in the References or Further reading (checked October 12, 2026), or a Wikipedia article.
     for (const h of hrefs.filter((h) => /^https?:/.test(h)))
-      expect(h, h).toMatch(/^https:\/\/(ryanjosephkamp\.github\.io\/splashery|playcanvas\.com\/|keithp\.com\/~keithp\/porterduff\/|github\.com\/ryanjosephkamp\/splashery|repo-sam\.inria\.fr\/fungraph\/3d-gaussian-splatting\/|arxiv\.org\/pdf\/2308\.04079|www\.cs\.umd\.edu\/~zwicker\/|niujinshuchong\.github\.io\/mip-splatting\/|surfsplatting\.github\.io\/|anttwo\.github\.io\/sugar\/|doi\.org\/10\.1145\/|en\.wikipedia\.org\/wiki\/)/); // prettier-ignore
+      expect(h, h).toMatch(/^https:\/\/(ryanjosephkamp\.github\.io\/splashery|playcanvas\.com\/|keithp\.com\/~keithp\/porterduff\/|github\.com\/ryanjosephkamp\/splashery|repo-sam\.inria\.fr\/fungraph\/3d-gaussian-splatting\/|arxiv\.org\/pdf\/2308\.04079|www\.cs\.umd\.edu\/~zwicker\/|niujinshuchong\.github\.io\/mip-splatting\/|surfsplatting\.github\.io\/|anttwo\.github\.io\/sugar\/|doi\.org\/10\.(1145|1111|1093|1137)\/|arxiv\.org\/abs\/\d{4}\.\d{5}$|earthquake\.usgs\.gov\/earthquakes\/feed\/v1\.0\/geojson\.php$|www\.astronexus\.com\/projects\/hyg$|ssd\.jpl\.nasa\.gov\/planets\/approx_pos\.html$|www\.nayuki\.io\/page\/qr-code-generator-library$|mozilla\.github\.io\/pdf\.js\/$|github\.com\/(ArthurBrussee\/brush|antimatter15\/splat|arrival-space\/splat\.js|nerfstudio-project\/gsplat|playcanvas\/supersplat|sparkjsdev\/spark|KhronosGroup\/glTF\/tree\/main\/extensions\/2\.0\/Khronos\/KHR_gaussian_splatting)$|en\.wikipedia\.org\/wiki\/)/); // prettier-ignore
     const imgs = await page.locator("img").evaluateAll((is) => is.map((i) => [i.getAttribute("src"), i.complete && i.naturalWidth > 0, i.alt])); // prettier-ignore
     expect(imgs.length).toBeGreaterThan(30);
     for (const [src, ok, alt] of imgs) {
