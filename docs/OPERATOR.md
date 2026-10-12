@@ -209,6 +209,15 @@ the private page.
 
 ## Habits worth keeping
 
+- Watch your own context (October 12, 2026): an Operator reached 557k tokens in about four and a
+  half hours. The biggest costs were tool output, not work: every PR subscription and event carries
+  a long guidance block, and a full PR list returns every body. List PRs with
+  `git ls-remote origin 'refs/pull/5*/head'` and match the heads to the lane branches; subscribe to
+  a PR only when it is ready to merge; hand big reads to a Sonnet helper.
+- The owner's notes and files are private (his rule of October 11, 2026): only your own summary goes
+  into the repo. The repo is public and Pages serves every file in it.
+- A merge through GitHub can be stopped by the session's permission check as a production deploy.
+  Ask the owner once, in one line; his explicit OK for that PR lets it through.
 - Re-arm the check-in before anything else, every time.
 - Say what was verified and what was skipped; never call a flake without a rerun.
 - Check that a fix doesn't change something the owner already marked good; if it would, ask first
