@@ -82,10 +82,62 @@ export function cubicDepth(a, b, c, d, t, before = 1, span = 1, after = 1) {
   return clamp(v, Math.min(b, c), Math.max(b, c));
 }
 
+// Follow a surface's color between sparse answers instead of blending two
+// unrelated surfaces at the same coordinate. Search a bounded neighborhood
+// on the model grid; still colors keep the cubic answer exactly. A cut favors
+// the endpoint whose color actually appears in the current picture.
+export function motionDepth(left, right, leftColor, rightColor, color, w, h, t, fallback) {
+  if (!leftColor || !rightColor || !color) return fallback;
+  const out = new Float32Array(w * h);
+  const match = (source, x, y, i) => {
+    let best = Infinity,
+      index = i,
+      error = Infinity;
+    const visit = (dx, dy) => {
+      const yy = y + dy;
+      const xx = x + dx;
+      if (yy < 0 || yy >= h || xx < 0 || xx >= w) return;
+      const k = yy * w + xx;
+      let cd = 0;
+      for (let c = 0; c < 3; c++) cd += (source[k * 4 + c] - color[i * 4 + c]) ** 2 / 3;
+      const score = cd + (dx * dx + dy * dy) * 4;
+      if (score < best) {
+        best = score;
+        index = k;
+        error = cd;
+      }
+    };
+    for (let dy = -4; dy <= 4; dy += 2) for (let dx = -4; dx <= 4; dx += 2) visit(dx, dy);
+    const dx = (index % w) - x,
+      dy = Math.floor(index / w) - y;
+    for (let yy = Math.max(-4, dy - 1); yy <= Math.min(4, dy + 1); yy++)
+      for (let xx = Math.max(-4, dx - 1); xx <= Math.min(4, dx + 1); xx++) visit(xx, yy);
+    return { index, error };
+  };
+  for (let y = 0; y < h; y++)
+    for (let x = 0; x < w; x++) {
+      const i = y * w + x;
+      if (colorDistance(leftColor, color, i) <= 64 && colorDistance(rightColor, color, i) <= 64) {
+        out[i] = fallback[i];
+        continue;
+      }
+      const a = match(leftColor, x, y, i),
+        b = match(rightColor, x, y, i);
+      if (Math.min(a.error, b.error) > 1024) {
+        out[i] = fallback[i];
+        continue;
+      }
+      const wa = (1 - t) * Math.exp(-a.error / 144),
+        wb = t * Math.exp(-b.error / 144);
+      out[i] = (left[a.index] * wa + right[b.index] * wb) / Math.max(1e-12, wa + wb);
+    }
+  return out;
+}
+
 // A symmetric seven-frame window has no causal delay. Color differences
 // reject moving surfaces; large depth differences reject disocclusions.
 const weights = Float32Array.from({ length: 1025 }, (_, i) => Math.exp(-i / 72));
-export function filterDepths(list, colors, radius = 3) {
+export function filterDepths(list, colors, radius = 3, rejectDepth = true) {
   return list.map((d, f) => {
     const out = new Float32Array(d.length);
     const first = Math.max(0, f - radius),
@@ -97,7 +149,9 @@ export function filterDepths(list, colors, radius = 3) {
         const cd = colorDistance(colors?.[f], colors?.[j], i);
         const delta = Math.abs(list[j][i] - d[i]);
         const weight =
-          cd > 1024 || delta > 0.2 ? 0 : weights[cd | 0] * (radius + 1 - Math.abs(j - f));
+          cd > 1024 || (rejectDepth && delta > 0.2)
+            ? 0
+            : weights[cd | 0] * (radius + 1 - Math.abs(j - f));
         sum += list[j][i] * weight;
         count += weight;
       }

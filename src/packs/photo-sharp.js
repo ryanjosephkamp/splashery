@@ -131,10 +131,38 @@ export function sharpPhoto({ photo, depth, band, gx, gy, aspect, relief, uid }) 
 
 // Moving photo to 3D's build: the toy's state (MOVING), the picture's size and its lift.
 export function sharpClip(moving, { width, height, full }) {
+  const stage = player()?.stage;
+  if (stage && S.clipStage !== stage) {
+    S.clipStage = stage;
+    stage.onUpdate(() => {
+      const pl = player();
+      // A paused clip has no drive calls. Camera moves and decoded frames
+      // still update the stage, so it must not age out of Sharp into Splats.
+      if (
+        pl?.stage === stage &&
+        S.src?.kind === "clip" &&
+        pl.scene?.toy?.id === S.src.toy &&
+        (pl.motion?.targets?.play ?? 1) <= 0.5 &&
+        !pl.loading
+      )
+        S.droveTick = S.ticks;
+    });
+  }
+  if (S.src?.clip !== moving.clip) {
+    S.video?.pause();
+    S.video?.removeAttribute("src");
+    S.video?.load();
+    S.video = null;
+    S.rvfc = null;
+  }
   S.src = { toy: "moving-photo-3d", kind: "clip", moving, width, height, full, clip: moving.clip };
   fromScene("moving-photo-3d");
   S.key = "";
   S.frame = -1;
+  // Paint the selected clip before the next drive, rather than waiting for
+  // a decoder or leaving the previous sample's texture on this relief.
+  if (S.mesh && moving.clip?.colors?.[moving.frame])
+    S.mesh.setColor({ w: moving.clip.w, h: moving.clip.h, data: moving.clip.colors[moving.frame] });
 }
 
 // The end of the toy's drive: the relief follows this frame.
@@ -322,8 +350,11 @@ function fillClip(m, src) {
   if (m.u.uBack[2]) m.setPieces(null); // (a clip's relief blends by depth, as before)
   const playing = (pl) => (pl?.motion?.targets?.play ?? 1) > 0.5;
   let video = null;
-  if (clip.long) video = clip.video;
-  else if (clip.audio?.url && typeof document !== "undefined") {
+  if (clip.video) video = clip.video;
+  else if (
+    /\.(mp4|webm|mov|m4v)(?:[?#]|$)/i.test(clip.audio?.url || "") &&
+    typeof document !== "undefined"
+  ) {
     if (!S.video || S.video.dataset.url !== clip.audio.url) {
       S.video?.pause();
       const v = document.createElement("video");
@@ -347,24 +378,49 @@ function fillClip(m, src) {
       if (Math.abs(video.currentTime - mv.t) > 0.02 && !video.seeking) video.currentTime = mv.t;
     }
   }
-  const usable = video && video.readyState >= 2 && video.videoWidth > 0;
-  if (usable && (newFrame(video) || m.colorSrc !== video)) m.setColor(video);
+  const usable =
+    video &&
+    video.readyState >= 2 &&
+    video.videoWidth > 0 &&
+    !video.seeking &&
+    Math.abs(video.currentTime - mv.t) < 0.25;
   const f = mv.frame;
-  const depth = clip.long ? clip.scratch?.bytes : clip.near[f];
-  const key = `c${clip.name}|${f}|${clip.long ? clip.depth?.ready : ""}|${video ? "v" : "f"}`;
+  const depth = clip.long ? clip.scratch?.bytes : clip.shownDepth?.(f) || clip.near[f];
+  const key = `c${clip.name}|${clip.version || 0}|${clip.transition || clip.depthEase ? Math.floor(performance.now() / 16) : ""}|${f}|${clip.long ? clip.depth?.ready : ""}|${usable ? "v" : "f"}`;
   if (S.key !== key) {
     S.key = key;
     if (depth) m.setDepth({ w: clip.w, h: clip.h, data: depth });
-    // (the clip's own frames only when there is no video; while the video copy seeks, the last
-    // picture it gave stays)
-    if (!video && !clip.long && clip.colors[f])
+    // Audio files have no picture. A loading or seeking video uses this
+    // clip's frame too, so an old sample can never stay on the surface.
+    if (!usable && !clip.long && clip.colors[f])
       m.setColor({ w: clip.w, h: clip.h, data: clip.colors[f] });
   }
+  if (usable && (newFrame(video) || m.colorSrc !== (video.paused ? S.clipStill : video)))
+    clipPicture(m, video);
+}
+
+// A paused decoder has no continuously presented video frames. Copy its
+// decoded picture through a canvas so a seek uploads actual pixels even when
+// the browser's video texture/compositor keeps its previous presented frame.
+function clipPicture(m, video) {
+  if (!video.paused) return m.setColor(video);
+  const c = (S.clipStill ||= document.createElement("canvas"));
+  if (c.width !== video.videoWidth || c.height !== video.videoHeight) {
+    c.width = video.videoWidth;
+    c.height = video.videoHeight;
+  }
+  c.getContext("2d").drawImage(video, 0, 0);
+  c.currentTime = video.currentTime; // the snapshot's source time, for diagnostics
+  m.setColor(c);
 }
 
 // Whether the video has a new picture since the last upload (the browser says so where it can,
 // else its time moved), so a paused or slow video isn't uploaded again every frame.
 function newFrame(v) {
+  // A hidden, paused video can finish seeking without a compositor callback.
+  // Its clock still proves that a new decoded picture needs an upload.
+  const moved = v.currentTime !== S.lastTime;
+  S.lastTime = v.currentTime;
   if (v.requestVideoFrameCallback) {
     if (S.rvfc !== v) {
       S.rvfc = v;
@@ -379,10 +435,8 @@ function newFrame(v) {
     }
     const f = S.fresh;
     S.fresh = false;
-    return f;
+    return f || moved;
   }
-  const moved = v.currentTime !== S.lastTime;
-  S.lastTime = v.currentTime;
   return moved;
 }
 
