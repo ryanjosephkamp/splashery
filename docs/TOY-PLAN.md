@@ -10,10 +10,10 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 461 toys. 461 have a tap action today; the other 0 only hop.
+- 462 toys. 462 have a tap action today; the other 0 only hop.
 - **keep** (the effect is right: the owner liked it, or C2 finished it): 439.
 - **more** (has an effect; make it clearer or more dramatic): 0.
-- **new** (needs its own effect): 22.
+- **new** (needs its own effect): 23.
 - Visual fixes: 0 open, 31 done. Touch or drag interaction asked for: 4.
 
 ## By phase
@@ -77,13 +77,13 @@ Proposals below are suggestions; the owner may change them.
   Enigma machine, Bombe, Picture lab, Your book, Photo album, Picture frame, Song landscape, Chladni
   plate, Sound in a box, Room echo meter, Splat mirror, Model to splats, QR code, Photo to 3D,
   Moving photo to 3D, Video to 3D, Sound lab, Sound recorder, Splat toolkit, Point clouds, Volume
-  viewer, Splat field, Light lab, Thermal ellipsoids, Super-resolution microscope, Galaxy in a box,
-  Cryo-EM map, Contour lab, Terrain in a box, Ripple tank, Light bench, Fluid lab, Grand Canyon,
-  Mount St. Helens, The sea floor, Tides at Bar Harbor, Hurricane, Relief map, Living city, Stork
-  migration, Earthquakes, Airport X-ray scanner, How CT works, Walnut CT scan, MRI of a fruit,
-  Electron microscope, Thermal camera, Screen, Shardball, Longtail, Grain Garden, Page Breaker,
-  Strata, Volley Table, Stone Belt, Soft Landing, Night Owl Pinball, Cast a Shadow, Photo Dash, Note
-  Rider, Night sky, Data in 3D.
+  viewer, Splat field, Light lab, Baked chest, Thermal ellipsoids, Super-resolution microscope,
+  Galaxy in a box, Cryo-EM map, Contour lab, Terrain in a box, Ripple tank, Light bench, Fluid lab,
+  Grand Canyon, Mount St. Helens, The sea floor, Tides at Bar Harbor, Hurricane, Relief map, Living
+  city, Stork migration, Earthquakes, Airport X-ray scanner, How CT works, Walnut CT scan, MRI of a
+  fruit, Electron microscope, Thermal camera, Screen, Shardball, Longtail, Grain Garden, Page
+  Breaker, Strata, Volley Table, Stone Belt, Soft Landing, Night Owl Pinball, Cast a Shadow, Photo
+  Dash, Note Rider, Night sky, Data in 3D.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
@@ -93,8 +93,8 @@ Proposals below are suggestions; the owner may change them.
 - **E5, new effects: food.** None.
 - **E6, new effects: balls and the rest.** Picture lab, Song landscape, Chladni plate, Sound in a
   box, QR code, How a QR code works, QR damage lab, Three QR codes in one, Picture QR, QR from real
-  things, Other barcodes, Video to 3D, Splat toolkit, Point clouds, Cryo-EM map, Contour lab,
-  Terrain in a box, Data in 3D, Climate records
+  things, Other barcodes, Video to 3D, Splat toolkit, Point clouds, Baked chest, Cryo-EM map,
+  Contour lab, Terrain in a box, Data in 3D, Climate records
 - **F, touch and drag interaction.** Gummy bear, Building bricks, Newton's cradle, Puzzle cube.
 
 ## Scans (72)
@@ -3979,7 +3979,7 @@ Proposals below are suggestions; the owner may change them.
     on its axes plays the drop and rise, not only a tap on a point.
   - Sound: A soft thud as the marks land, a light knock, and a breath as they rise.
 
-## Lab (3)
+## Lab (4)
 
 - **Splat field** (`splat-field`). Now: tap: Send a pulse. Plan: keep.
   - Owner: The owner's note "big new Splashery ideas" and his answer of September 29, 2026 (lane
@@ -4011,6 +4011,16 @@ Proposals below are suggestions; the owner may change them.
     deviation and the grating angles match their formulas, and the spectrometer finds the lines of a
     made-up picture within 2 nm (tested).
   - Sound: The click of a slide changer.
+- **Baked chest** (`baked-chest`). Now: tap: Open or close. Plan: new effect (E6).
+  - Owner: The Operator's brief of October 12, 2026 (lane Baked engine): the example of the
+    baked-asset path for outside agents' high-fidelity toys (labs).
+  - Effect: The lid swings back on its hinge as one solid piece and shows the gold inside; a second
+    tap shuts it.
+  - Improved: Baked engine: new toy (labs). The chest is baked offline into a standard 3DGS PLY with
+    a parts sidecar and converted into Splashery's baked format (18 bytes a splat, two tiers: 30,000
+    and 100,001 splats); the splat budget picks the tier, and below the smallest tier it is thinned
+    the same way every time.
+  - Sound: A wooden creak as the lid opens, a scrape and a soft knock as it shuts.
 - **Fluid lab** (`fluid-lab`). Now: tap: Pour, drop or blow. Plan: keep.
   - Owner: The owner's notes on the water bottle and soda can of September 29, 2026 ("a realistic
     fluid splat simulator"; lane Fluids; labs only).

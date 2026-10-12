@@ -587,8 +587,9 @@ export class Player {
     // A recipe may read a data file first (the protein toy's structure).
     if (recipe.prepare) {
       // The third argument tells it the device's profile (lane Fidelity: a
-      // toy made of trained files loads its lite files on "low").
-      await recipe.prepare(options, this.prepareHelp(toy, recipe, options), { profile: this.profile }); // prettier-ignore
+      // toy made of trained files loads its lite files on "low"), and the toy's splat budget
+      // (lane Baked engine: a baked asset picks its tier from it, src/baked.js).
+      await recipe.prepare(options, this.prepareHelp(toy, recipe, options), { profile: this.profile, count }); // prettier-ignore
       if (token !== this.loadToken) return null;
     }
     // Pictures (lane Books): a picture toy's media opens first, so the

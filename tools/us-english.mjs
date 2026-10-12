@@ -125,6 +125,13 @@ function textOf(file, line) {
   if (/\.html$/.test(file)) parts.push(line.replace(/<[^>]*>/g, " "));
   return parts.join(" | ");
 }
+// The British spellings in a piece of text, as [found, suggested] (lane Baked engine:
+// tools/port-check.mjs reuses the rules).
+export function britishIn(text) {
+  const found = [];
+  for (const [re, fix] of rules) for (const m of text.matchAll(re)) found.push([m[0], fix(m[0])]);
+  return found;
+}
 function check(file, lineNo, line, out) {
   const text = textOf(file, line);
   if (!text) return;
@@ -132,40 +139,46 @@ function check(file, lineNo, line, out) {
     for (const m of text.matchAll(re)) out.push(`${file}:${lineNo}: "${m[0]}" → ${fix(m[0])}`);
 }
 
-const args = process.argv.slice(2);
+// The command line (skipped when another tool imports britishIn).
+const isMain = import.meta.url === new URL(`file://${path.resolve(process.argv[1] || "")}`).href;
+const args = isMain ? process.argv.slice(2) : [];
 const diffArg = args.find((a) => a === "--diff" || a.startsWith("--diff="));
-const out = [];
-if (diffArg) {
-  const base = diffArg.includes("=") ? diffArg.split("=")[1] : "origin/main";
-  const mergeBase = git(`merge-base ${base} HEAD`).trim();
-  const diff = git(`diff -U0 --no-color ${mergeBase}`);
-  let file = null;
-  let n = 0;
-  for (const line of diff.split("\n")) {
-    if (line.startsWith("+++ ")) {
-      file = line.slice(4).replace(/^b\//, "");
-      if (file === "/dev/null" || !isPublic(file)) file = null;
-    } else if (line.startsWith("@@")) {
-      n = Number(line.match(/\+(\d+)/)[1]);
-    } else if (file && line.startsWith("+")) {
-      check(file, n, line.slice(1), out);
-      n++;
+if (isMain) main();
+
+function main() {
+  const out = [];
+  if (diffArg) {
+    const base = diffArg.includes("=") ? diffArg.split("=")[1] : "origin/main";
+    const mergeBase = git(`merge-base ${base} HEAD`).trim();
+    const diff = git(`diff -U0 --no-color ${mergeBase}`);
+    let file = null;
+    let n = 0;
+    for (const line of diff.split("\n")) {
+      if (line.startsWith("+++ ")) {
+        file = line.slice(4).replace(/^b\//, "");
+        if (file === "/dev/null" || !isPublic(file)) file = null;
+      } else if (line.startsWith("@@")) {
+        n = Number(line.match(/\+(\d+)/)[1]);
+      } else if (file && line.startsWith("+")) {
+        check(file, n, line.slice(1), out);
+        n++;
+      }
+    }
+  } else {
+    const want = args.length ? args : git("ls-files").split("\n").filter(Boolean);
+    for (const f of want.filter(isPublic)) {
+      const full = path.join(root, f);
+      if (!fs.existsSync(full)) continue;
+      fs.readFileSync(full, "utf8")
+        .split("\n")
+        .forEach((line, i) => check(f, i + 1, line, out));
     }
   }
-} else {
-  const want = args.length ? args : git("ls-files").split("\n").filter(Boolean);
-  for (const f of want.filter(isPublic)) {
-    const full = path.join(root, f);
-    if (!fs.existsSync(full)) continue;
-    fs.readFileSync(full, "utf8")
-      .split("\n")
-      .forEach((line, i) => check(f, i + 1, line, out));
-  }
+  for (const line of out) console.log(line);
+  console.log(
+    out.length
+      ? `\n${out.length} British spelling${out.length === 1 ? "" : "s"}. Leave code identifiers, file names and anything saved in links as they are.`
+      : "No British spellings found.",
+  );
+  process.exit(out.length ? 1 : 0);
 }
-for (const line of out) console.log(line);
-console.log(
-  out.length
-    ? `\n${out.length} British spelling${out.length === 1 ? "" : "s"}. Leave code identifiers, file names and anything saved in links as they are.`
-    : "No British spellings found.",
-);
-process.exit(out.length ? 1 : 0);
