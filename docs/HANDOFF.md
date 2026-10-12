@@ -78,11 +78,10 @@ fixes; the owner tells the Codex session "Read the Operator's comment on your PR
 Finished and safe to archive with the owner's OK: the Baked engine, Site r5, Manual r7a, Manual r7b,
 Privacy r1, Manual r6, Site r4, and the earlier list below.
 
-**Open with the owner:** the front-door call; three questions on the Codex PRs (the 16 MB of GIFs
-#559 says he approved; the Tears of Steel bridge sample, which may show an actor, A2; the 61 MB of
-longer films in #560); Codex task 36 after Manual r7c. Decided October 12, 2026: his notes' git
-history stays as it is; a faster depth runtime and a better depth model may ship over 2 MB under
-Apache-2.0, MIT or BSD (CLAUDE.md).
+**Open with the owner:** the front-door call. Answered October 12, 2026: the 16 MB of review GIFs in
+#559 were his approval; keep the Tears of Steel bridge sample for now; the 61 MB of longer films in
+#560 is fine. Decided October 12, 2026: his notes' git history stays as it is; a faster depth
+runtime and a better depth model may ship over 2 MB under Apache-2.0, MIT or BSD (CLAUDE.md).
 
 **Next for the Operator:** review and merge the Codex PRs as their fixes land (labs; tests and his
 look at the clips); brief Manual r8 (Sonnet) on task 36's report; the Privacy r1 leftovers; after
