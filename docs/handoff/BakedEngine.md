@@ -102,6 +102,9 @@ October 12, 2026 (Opus 5.5): built in the brief's order, all on `claude/lane-bak
 - **Converter** (`tools/port-convert.mjs`), **checker** (`tools/port-check.mjs`): done, with tests.
   The checker reuses `tools/us-english.mjs`, which now exports `britishIn(text)` (its command line
   is unchanged).
+- **Checks** (October 12, about 01:35 UTC): smoke, kit, unit, taps, hta, help, st3 and both bkd
+  specs: 183 passed. Prettier and `us-english --diff` clean; check-packs, contact sheet and
+  thumbnail done. Card `bkd-baked-chest` posted on Effect review page 2.
 - **Example**: "Baked chest" (labs, Lab shelf, `src/packs/baked-demo.js`), baked by
   `tools/bkd-bake-chest.mjs` into `assets/toys/baked-chest/` (tiers of 30,000 and 100,001 splats,
   1.8 MB gzipped together). A tap swings the lid open on its hinge.
