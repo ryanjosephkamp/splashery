@@ -45,16 +45,22 @@ export function buildChest(k) {
   k.add(k.box(wall, h, d - 2 * wall), { pos: [-w / 2 + wall / 2, h / 2, 0], ...wallOpts((c) => c.p[1] / h) }); // prettier-ignore
   k.add(k.box(w - 2 * wall, wall, d - 2 * wall), { pos: [0, wall / 2, 0], ...wallOpts((c) => (c.p[2] + d / 2) / d) }); // prettier-ignore
   // Gold inside: a heap of coins under the rim, bright where it faces up.
-  k.add(k.param((u, v) => {
-    const x = (u - 0.5) * (w - 2 * wall - 0.04);
-    const z = (v - 0.5) * (d - 2 * wall - 0.04);
-    const r = Math.hypot(x / (w / 2), z / (d / 2));
-    return [x, h * 0.62 + 0.16 * Math.max(0, 1 - r * r), z];
-  }, { grid: 48 }), {
-    weight: 1.4,
-    flat: 0.3,
-    color: (c) => mix("#9a6b12", "#ffd75a", smoothstep(-0.3, 0.6, c.noise.fbm(c.p[0] * 14, 0, c.p[2] * 14, 2))), // prettier-ignore
-  });
+  k.add(
+    k.param(
+      (u, v) => {
+        const x = (u - 0.5) * (w - 2 * wall - 0.04);
+        const z = (v - 0.5) * (d - 2 * wall - 0.04);
+        const r = Math.hypot(x / (w / 2), z / (d / 2));
+        return [x, h * 0.62 + 0.16 * Math.max(0, 1 - r * r), z];
+      },
+      { grid: 48 },
+    ),
+    {
+      weight: 1.4,
+      flat: 0.3,
+      color: (c) => mix("#9a6b12", "#ffd75a", smoothstep(-0.3, 0.6, c.noise.fbm(c.p[0] * 14, 0, c.p[2] * 14, 2))), // prettier-ignore
+    },
+  );
   // Iron bands round the box, and a lock plate on the front.
   for (const x of [-w * 0.32, w * 0.32]) {
     k.add(k.box(0.09, h + 0.01, 0.012), { pos: [x, h / 2, d / 2 + 0.006], color: IRON, flat: 0.1 }); // prettier-ignore
@@ -94,19 +100,15 @@ export function plyOf(buf) {
   const hb = new TextEncoder().encode(head);
   const out = new Uint8Array(hb.length + n * props.length * 4);
   out.set(hb);
-  const f = new Float32Array(out.buffer, hb.length, n * props.length);
+  const dv = new DataView(out.buffer, hb.length);
+  const put = (i, k, v) => dv.setFloat32((i * props.length + k) * 4, v, true);
   for (let i = 0; i < n; i++) {
-    const o = i * props.length;
-    f[o] = buf.pos[i * 3];
-    f[o + 1] = buf.pos[i * 3 + 1];
-    f[o + 2] = buf.pos[i * 3 + 2];
-    for (let c = 0; c < 3; c++) f[o + 6 + c] = (buf.color[i * 4 + c] - 0.5) / C0;
-    f[o + 9] = logit(buf.color[i * 4 + 3]);
-    for (let c = 0; c < 3; c++) f[o + 10 + c] = Math.log(Math.max(1e-7, buf.scale[i * 3 + c]));
-    f[o + 13] = buf.rot[i * 4 + 3];
-    f[o + 14] = buf.rot[i * 4];
-    f[o + 15] = buf.rot[i * 4 + 1];
-    f[o + 16] = buf.rot[i * 4 + 2];
+    for (let k = 0; k < 3; k++) put(i, k, buf.pos[i * 3 + k]);
+    for (let c = 0; c < 3; c++) put(i, 6 + c, (buf.color[i * 4 + c] - 0.5) / C0);
+    put(i, 9, logit(buf.color[i * 4 + 3]));
+    for (let c = 0; c < 3; c++) put(i, 10 + c, Math.log(Math.max(1e-7, buf.scale[i * 3 + c])));
+    put(i, 13, buf.rot[i * 4 + 3]);
+    for (let c = 0; c < 3; c++) put(i, 14 + c, buf.rot[i * 4 + c]);
   }
   return out;
 }

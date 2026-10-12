@@ -5700,5 +5700,17 @@
       "checked": "October 6, 2026",
       "note": "Width of image 4.5 µm (its page). Cut by tools/pot-micro.mjs."
     }
+  ],
+  "bakedSamples": [
+    {
+      "id": "baked-chest",
+      "file": "assets/toys/baked-chest/manifest.json",
+      "toy": "baked-chest",
+      "name": "Baked chest",
+      "author": "Made by Ryan with Claude Code (Opus 5.5)",
+      "license": "CC0 1.0",
+      "checked": "October 12, 2026",
+      "note": "Original: built with Splashery's kit by tools/bkd-bake-chest.mjs, baked to a 3DGS PLY with a parts sidecar (the lid), and converted by tools/port-convert.mjs into the baked format at 30,000 and 100,001 splats (lane Baked engine, labs)."
+    }
   ]
 }

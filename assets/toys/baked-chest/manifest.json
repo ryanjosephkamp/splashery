@@ -2,7 +2,7 @@
   "format": "splashery-baked-manifest",
   "version": 1,
   "id": "baked-chest",
-  "title": "",
+  "title": "Baked chest",
   "source": {
     "file": "baked-chest.ply",
     "sha256": "4048903bf8f08e045d7642d10f9f61754b536b7536d45a61e625958e18fb3c92",
@@ -77,10 +77,12 @@
     }
   ],
   "credit": {
-    "title": "",
-    "author": "",
-    "source": "",
-    "license": "",
-    "licenseUrl": ""
+    "title": "Baked chest",
+    "author": "Made by Ryan with Claude Code (Opus 5.5)",
+    "source": "tools/bkd-bake-chest.mjs",
+    "license": "CC0 1.0",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "checked": "October 12, 2026",
+    "changes": "Built with Splashery's kit, baked to a 3DGS PLY with its lid as part 1, converted by tools/port-convert.mjs (tiers of 30,000 and 100,001 splats, gzipped)."
   }
 }

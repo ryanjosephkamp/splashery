@@ -21,10 +21,11 @@ export const RECIPES = {
     credits: [
       {
         label: "Chest",
-        title: "Baked chest (made by Splashery's kit and baked to splats)",
+        title: "Baked chest (built with Splashery's kit and baked to splats)",
         source: "tools/bkd-bake-chest.mjs",
-        author: "Splashery",
-        license: "MIT",
+        author: "Made by Ryan with Claude Code (Opus 5.5)",
+        license: "CC0 1.0",
+        licenseUrl: "https://creativecommons.org/publicdomain/zero/1.0/",
       },
     ],
     // The budget (the splat menu or Auto) picks the tier; with no budget (the Node tools), the
@@ -35,10 +36,12 @@ export const RECIPES = {
     build(k) {
       if (!ASSET) throw new Error("The baked chest is not loaded (prepare() loads it).");
       addBaked(k, ASSET);
-      // The open lid's far edge and top, so the camera frames them.
+      // The open lid's far edge and top, so the camera frames them, and the same depth in front
+      // and below, so the closed chest stays in the middle of the frame.
       for (const x of [-0.8, 0.8]) {
         k.reach([x, 0.86 + 1.02, -0.5 - 0.32]);
         k.reach([x, 0.86 + 0.95, -0.5 - 0.66]);
+        k.reach([x, -0.35, 1.16]);
       }
       k.data.tier = { splats: ASSET.tier.splats, used: ASSET.n };
     },

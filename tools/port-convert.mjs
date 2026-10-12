@@ -142,7 +142,8 @@ export function readParts(file, n, hex) {
   let ids;
   if (j.ids) ids = Uint8Array.from(j.ids);
   else if (j.ids_b64) ids = new Uint8Array(Buffer.from(j.ids_b64, "base64"));
-  else if (j.ids_file) ids = new Uint8Array(fs.readFileSync(path.resolve(path.dirname(file), j.ids_file))); // prettier-ignore
+  else if (j.ids_file)
+    ids = new Uint8Array(fs.readFileSync(path.resolve(path.dirname(file), j.ids_file))); // prettier-ignore
   else if (j.ranges) {
     ids = new Uint8Array(n);
     for (const [a, b, id] of j.ranges) ids.fill(id, a, b);
@@ -268,7 +269,15 @@ export function convert(plys, opts) {
     parts,
     defaultTier: opts.default ?? old.defaultTier ?? undefined,
     tiers: written.map((w) => w.tier),
-    credit: old.credit ?? { title: "", author: "", source: "", license: "", licenseUrl: "" },
+    credit: old.credit ?? {
+      title: "",
+      author: "",
+      source: "",
+      license: "",
+      licenseUrl: "",
+      checked: "",
+      changes: "",
+    },
     ...(old.nc !== undefined ? { nc: old.nc } : {}),
     ...(old.aiMade !== undefined ? { aiMade: old.aiMade } : {}),
     ...(old.notes !== undefined ? { notes: old.notes } : {}),

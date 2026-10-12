@@ -3946,7 +3946,7 @@ export const TOYS = [
     pack: "baked-demo",
     labs: true,
     tags: "baked splats asset tiers parts lid hinge chest treasure gold 3dgs ply converter",
-    camera: { yaw: 0.5, pitch: 0.35, roll: 0, distance: 3.2 },
+    camera: { yaw: 0.5, pitch: 0.35, roll: 0, distance: 3.9 },
   },
   // ---- End of pack: baked-demo ----
   // ---- Pack: science (lane Science) ----
