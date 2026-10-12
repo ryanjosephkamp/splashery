@@ -67,6 +67,8 @@ export async function measure(page, { id, path, profile = "low", refine = true }
               error: clip.refinement.error,
               measured: clip.refinement.measured,
               side: clip.refinement.side,
+              normalization: clip.refinement.normalization,
+              scores: clip.refinement.scores,
             }
           : null,
       };
@@ -87,11 +89,12 @@ export async function measure(page, { id, path, profile = "low", refine = true }
   );
 }
 
-async function reconstructedSources(dir) {
+export async function reconstructedSources(dir, ids = null) {
   await fs.mkdir(dir, { recursive: true });
   const sources = {};
   for (const s of SAMPLES) {
     if (s.long) continue;
+    if (ids && !ids.includes(s.id)) continue;
     if (s.id === "sample") sources[s.id] = "assets/toys/screen/bunny.webm";
     else if (s.gif) sources[s.id] = "assets/toys/screen/horse.gif";
     else {
@@ -120,6 +123,7 @@ async function reconstructedSources(dir) {
       sources[s.id] = path;
     }
   }
+  if (ids && !ids.includes("fast60")) return sources;
   const fast = `${dir}/fast-60.webm`;
   execFileSync("ffmpeg", [
     "-nostdin",
@@ -148,6 +152,19 @@ if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) 
     : await reconstructedSources(".cache/cdx-mp2/sources");
   const browser = await chromium.launch({
     executablePath: process.env.SPLASHERY_CHROMIUM || undefined,
+    // Match the browser regression suite. Native video/canvas conversion
+    // and upload metrics can differ with plain headless Chromium's GPU setup.
+    args: [
+      "--use-angle=swiftshader",
+      "--enable-unsafe-swiftshader",
+      "--ignore-gpu-blocklist",
+      "--enable-webgl",
+      "--disable-gpu-driver-bug-workarounds",
+      "--enable-unsafe-webgpu",
+      "--enable-features=Vulkan,WebGPU",
+      "--use-webgpu-adapter=swiftshader",
+      "--use-vulkan=swiftshader",
+    ],
   });
   try {
     const page = await browser.newPage();

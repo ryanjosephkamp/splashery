@@ -48,7 +48,7 @@ import {
 } from "../live/clip-stabilize.js";
 import { songTransport } from "./song-record.js";
 import { FILL, reliefScale } from "./photo-3d-core.js";
-import { sharpEntry, sharpClip, sharpDrive } from "./photo-sharp.js"; // lane Photo sharp view
+import { sharpEntry, sharpClip, sharpDrive, sharpView, CLIP_CUT } from "./photo-sharp.js"; // lane Photo sharp view
 
 export const MAX_SECONDS = 8;
 export const CLIP_FPS = { low: 12, mid: 15, high: 24, max: 24 };
@@ -67,6 +67,7 @@ const LIFT = 0.9; // recipe units at full depth
 export const MOVING = {
   samples: new Map(), // sample id -> its clip, once loaded
   custom: null, // a clip the person opened
+  opening: false,
   want: null, // the clip the next build shows
   clip: null, // the clip on show
   t: 0, // seconds into the clip
@@ -208,6 +209,7 @@ export function normalizeDepths(
     smoothing?.rejectDepth ?? true,
   );
   const normalized = aligned.map((d, i) => {
+    if (smoothing?.only && (i < smoothing.only[0] || i >= smoothing.only[1])) return null;
     const dn = small[i];
     // Use the same spatial filter on worked-out and interpolated answers;
     // alternating bilinear and guided sampling would itself introduce jitter.
@@ -378,17 +380,35 @@ export async function depthOf(frames, w, h, onStatus, side = DEPTH_SIDE, options
   } finally {
     if (!options.worker) worker.terminate();
   }
-  return completeDepths(out, frames, w, h, options.motion !== false, options.anchor);
+  return completeDepths(
+    out,
+    frames,
+    w,
+    h,
+    options.motion !== false,
+    options.anchor,
+    options.cancelled,
+  );
 }
 
 // Preserve the unaligned model cache: a new pass must not align an answer
 // that has already been aligned against a different set of neighbors.
-function completeDepths(raw, frames, w, h, followMotion = true, reference = null) {
+const yieldPage = () => new Promise((resolve) => setTimeout(resolve, 0));
+async function completeDepths(
+  raw,
+  frames,
+  w,
+  h,
+  followMotion = true,
+  reference = null,
+  cancelled = () => false,
+) {
   const out = raw.map((d) => (d ? { ...d, d: d.d.slice() } : null));
   const keys = out.flatMap((d, i) => (d ? [i] : []));
   let previous = null,
     previousColors = null;
   for (const i of keys) {
+    if (cancelled()) throw new Error("The depth refinement was canceled.");
     const colors = shrink(frames[i].data, w, h, out[i].w, out[i].h);
     // A refinement fits to the preceding pass at the SAME source time.
     // This preserves the established clip range without compounding fits
@@ -413,11 +433,17 @@ function completeDepths(raw, frames, w, h, followMotion = true, reference = null
     } else out[i].d = alignDepth(out[i].d, previous, colors, previousColors);
     previous = out[i].d;
     previousColors = colors;
+    await yieldPage();
   }
   out.aligned = true;
   out.interpolated = frames.map(() => false);
   const times = [];
-  const colors = out.map((d, i) => shrink(frames[i].data, w, h, out[keys[0]].w, out[keys[0]].h));
+  const colors = [];
+  for (const frame of frames) {
+    if (cancelled()) throw new Error("The depth refinement was canceled.");
+    colors.push(shrink(frame.data, w, h, out[keys[0]].w, out[keys[0]].h));
+    await yieldPage();
+  }
   let clock = 0;
   for (const frame of frames) {
     times.push(clock);
@@ -436,6 +462,7 @@ function completeDepths(raw, frames, w, h, followMotion = true, reference = null
       span = times[ib] - times[ia],
       after = times[next] - times[ib];
     for (let i = ia + 1; i < ib; i++) {
+      if (cancelled()) throw new Error("The depth refinement was canceled.");
       const f = (times[i] - times[ia]) / span;
       const values = new Float32Array(b.d.length);
       for (let j = 0; j < values.length; j++)
@@ -448,6 +475,7 @@ function completeDepths(raw, frames, w, h, followMotion = true, reference = null
           : values,
       };
       out.interpolated[i] = true;
+      await yieldPage();
     }
   }
   return out;
@@ -513,12 +541,72 @@ export function shownDepth(clip, f) {
   return out;
 }
 
-function refineClip(clip, frames, raw, worker, range, onStatus, anchor) {
+// Normalize in overlapping temporal windows, retaining the full clip's range
+// and the edge history across batches. A pass never holds the page for all
+// of its frames at once: sound, decoding, and the loop clock keep advancing.
+async function refinedNear(raw, frames, clip, cancelled, range = null) {
+  range ||= depthRange(raw.map((d) => d.d));
+  const radius = Math.max(3, Math.round(clip.n / clip.duration / 2));
+  const near = [];
+  const edges = {};
+  for (let first = 0; first < raw.length; first += 2) {
+    if (cancelled()) throw new Error("The depth refinement was canceled.");
+    const from = Math.max(0, first - radius);
+    const to = Math.min(raw.length, first + 2 + radius);
+    const slice = raw.slice(from, to);
+    slice.aligned = true;
+    const normalized = normalizeDepths(slice, clip.w, clip.h, true, frames.slice(from, to), true, range, { radius, rejectDepth: false, only: [first - from, first - from + 2] }); // prettier-ignore
+    for (let f = first; f < Math.min(raw.length, first + 2); f++) {
+      const d = sharpenEdges(normalized[f - from], clip.w, clip.h, frames[f].data, edges);
+      near.push(Uint8Array.from(d, (v) => Math.round(255 * v)));
+    }
+    await yieldPage();
+  }
+  return near;
+}
+
+// Two valid calibrations of relative model depth can differ greatly after
+// cuts or exposure changes. Choose once for the complete pass, retaining
+// real model geometry in both candidates. Never change units frame by frame
+// to win the still-pixel score or remove a contour.
+async function refinementScore(near, frames, w, h, cancelled) {
+  let jitter = 0,
+    still = 0,
+    cuts = 0,
+    triangles = 0;
+  for (let f = 0; f < near.length; f++) {
+    if (cancelled()) throw new Error("The depth refinement was canceled.");
+    const d = near[f];
+    for (let y = 0; y + 1 < h; y += 4)
+      for (let x = 0; x + 1 < w; x += 4) {
+        const i = y * w + x;
+        const a = d[i],
+          b = d[i + 1],
+          c = d[i + w],
+          e = d[i + w + 1];
+        cuts += Math.max(a, b, c) - Math.min(a, b, c) > 255 * CLIP_CUT;
+        cuts += Math.max(b, c, e) - Math.min(b, c, e) > 255 * CLIP_CUT;
+        triangles += 2;
+        if (!f) continue;
+        let color = 0;
+        for (let k = 0; k < 3; k++)
+          color += (frames[f].data[i * 4 + k] - frames[f - 1].data[i * 4 + k]) ** 2;
+        if (color <= 3 * 64) {
+          jitter += Math.abs(d[i] - near[f - 1][i]) / 255;
+          still++;
+        }
+      }
+    await yieldPage();
+  }
+  return jitter / Math.max(1, still) + (0.1 * cuts) / Math.max(1, triangles);
+}
+
+function refineClip(clip, frames, raw, worker, onStatus, readFrames = null) {
   let finish;
   const job = {
     done: false,
     cancelled: false,
-    measured: 4,
+    measured: 1,
     side: DEPTH_SIDE,
     finished: new Promise((r) => (finish = r)),
   };
@@ -540,13 +628,28 @@ function refineClip(clip, frames, raw, worker, range, onStatus, anchor) {
   // Let the caller show the first answer before doing more main-thread work.
   setTimeout(async () => {
     try {
+      if (readFrames) {
+        const firstPicture = frames[0].data;
+        frames = (await readFrames(say, () => job.cancelled)).frames;
+        if (job.cancelled) return;
+        // A playback callback may arrive on frame 1 at 60 fps. Retain the
+        // exact time-zero picture used by the cached preview answer, so
+        // depth and color never describe different first pictures.
+        frames[0].data = firstPicture;
+        clip.colors = frames.map((f) => f.data);
+        clip.version = (clip.version || 0) + 1;
+      }
+      job.framesReady = true;
       const fullSide = REFINE_SIDES[profile()] || REFINE_SIDES.mid;
       const passes = [
+        { cap: Math.min(frames.length, 4), side: DEPTH_SIDE },
         { cap: Math.min(frames.length, DEPTH_FRAMES[profile()] || 32), side: DEPTH_SIDE },
         { cap: frames.length, side: DEPTH_SIDE },
       ];
       if (fullSide > DEPTH_SIDE) passes.push({ cap: frames.length, side: fullSide });
       let cache = raw;
+      let anchor = null,
+        coarseRange = null;
       for (const pass of passes) {
         if (job.cancelled) break;
         if (pass.side !== job.side) cache = new Array(frames.length).fill(null);
@@ -563,26 +666,51 @@ function refineClip(clip, frames, raw, worker, range, onStatus, anchor) {
             worker,
             cancelled: () => job.cancelled,
             onPending: (reject) => (job.reject = reject),
-            anchor,
+            motion: !!anchor,
           },
         );
         if (job.cancelled) break;
-        anchor = result;
-        const next = makeClip(
-          clip.name,
-          clip.w,
-          clip.h,
-          frames,
-          normalizeDepths(result, clip.w, clip.h, true, frames, true, range, {
-            radius: Math.max(3, Math.round(clip.n / clip.duration / 2)),
-            rejectDepth: false,
-          }),
-        );
+        let next;
+        if (!anchor) {
+          anchor = result;
+          coarseRange = depthRange(result.map((d) => d.d));
+          next = await refinedNear(result, frames, clip, () => job.cancelled, coarseRange);
+          job.normalization = "range-fit";
+        } else {
+          anchor = await completeDepths(
+            cache,
+            frames,
+            clip.w,
+            clip.h,
+            true,
+            anchor,
+            () => job.cancelled,
+          );
+          const fitted = await refinedNear(anchor, frames, clip, () => job.cancelled, coarseRange);
+          const whole = await refinedNear(result, frames, clip, () => job.cancelled);
+          const fitScore = await refinementScore(
+            fitted,
+            frames,
+            clip.w,
+            clip.h,
+            () => job.cancelled,
+          );
+          const wholeScore = await refinementScore(
+            whole,
+            frames,
+            clip.w,
+            clip.h,
+            () => job.cancelled,
+          );
+          next = wholeScore < fitScore ? whole : fitted;
+          job.normalization = wholeScore < fitScore ? "whole-clip" : "range-fit";
+          job.scores = { fitted: fitScore, whole: wholeScore };
+        }
         // Finish the previous ease before starting the next pass.
         if (clip.transition) await new Promise((r) => setTimeout(r, 500));
         if (job.cancelled) break;
         clip.transition = { from: clip.near, at: performance.now() };
-        clip.near = next.near;
+        clip.near = next;
         clip.version = (clip.version || 0) + 1;
         job.measured = cache.filter(Boolean).length;
         job.side = pass.side;
@@ -611,6 +739,8 @@ export async function openClip(file, name, onStatus) {
   let h;
   let frames;
   let audio = null;
+  let copy = null;
+  let readFrames = null;
   let source = 0; // the file's own length (s)
   const side = clipArea();
   const isGif = /\.gif$/i.test(name) || file.type === "image/gif";
@@ -638,8 +768,21 @@ export async function openClip(file, name, onStatus) {
     // Live r7: a video longer than MAX_SECONDS plays whole (openLong).
     const len = await videoLength(file);
     if (len > MAX_SECONDS + 0.05) return openLong(file, name, onStatus, len);
-    onStatus?.("Reading the video…");
-    ({ w, h, frames, source } = await videoFrames(file, side, onStatus));
+    if (!(len > 0.2)) throw new Error("That video is too short.");
+    onStatus?.("Opening the first picture…");
+    copy = await keepCopy(file);
+    if (!copy) throw new Error("This browser can't read the video's first picture.");
+    ({ w, h } = sizeFor(copy.video.videoWidth, copy.video.videoHeight, side));
+    source = len;
+    const n = Math.max(2, Math.min(maxFrames(), Math.round(len * clipFps())));
+    const canvas = document.createElement("canvas");
+    canvas.width = w;
+    canvas.height = h;
+    const g = canvas.getContext("2d", { willReadFrequently: true });
+    g.drawImage(copy.video, 0, 0, w, h);
+    const data = g.getImageData(0, 0, w, h).data;
+    frames = Array.from({ length: n }, () => ({ data, delay: (len * 1000) / n }));
+    readFrames = (say, cancelled) => videoFrames(file, side, say, cancelled);
     audio = await soundOf(URL.createObjectURL(file), true);
   }
   if (frames.length < 2) throw new Error("That file has only one picture. Open a GIF or a video that moves."); // prettier-ignore
@@ -649,36 +792,43 @@ export async function openClip(file, name, onStatus) {
   const cache = new Array(frames.length).fill(null);
   let raw;
   try {
-    raw = await depthOf(frames, w, h, onStatus, DEPTH_SIDE, {
-      cap: 4,
+    raw = await depthOf([frames[0]], w, h, onStatus, DEPTH_SIDE, {
       worker,
-      raw: cache,
+      raw: cache.slice(0, 1),
       motion: false,
     });
   } catch (e) {
     worker.terminate();
     closeSound(audio);
+    copy?.video.pause();
+    if (copy?.url) URL.revokeObjectURL(copy.url);
     throw e;
   }
   const range = depthRange(raw.map((d) => d.d));
   // Lane Photo fidelity: a video keeps a muted copy on the clip's clock, whose picture at its own
   // full size is what the splats show (photoSource); the frames above are the depth's and the
   // plain splats' colors.
-  const copy = isGif ? null : await keepCopy(file);
+  const first = makeClip(name, w, h, [frames[0]], normalizeDepths(raw, w, h, true, [frames[0]], true, range)); // prettier-ignore
+  cache[0] = raw[0];
   const clip = {
-    ...makeClip(name, w, h, frames, normalizeDepths(raw, w, h, true, frames, true, range)),
+    ...first,
+    n: frames.length,
+    duration: frames.reduce((sum, f) => sum + f.delay, 0) / 1000,
+    delays: frames.map((f) => f.delay),
+    colors: frames.map((f) => f.data),
+    near: frames.map(() => first.near[0]),
     audio,
     source,
     ...copy,
   };
-  clip.refinement = refineClip(clip, frames, cache, worker, range, onStatus, raw);
+  clip.refinement = refineClip(clip, frames, cache, worker, onStatus, readFrames);
   clip.shownDepth = (f) => shownDepth(clip, f);
   return clip;
 }
 
 // A video's first MAX_SECONDS, at clipFps() frames a second, each drawn
 // after a seek (its length is the video's own, so it plays at its speed).
-async function videoFrames(file, side, onStatus) {
+async function videoFrames(file, side, onStatus, cancelled = () => false) {
   const v = document.createElement("video");
   v.muted = true;
   v.playsInline = true;
@@ -700,32 +850,19 @@ async function videoFrames(file, side, onStatus) {
     const g = c.getContext("2d", { willReadFrequently: true });
     const frames = [];
     const grab = () => frames.push({ data: g.getImageData(0, 0, w, h).data, delay: (len * 1000) / n }); // prettier-ignore
-    // r6: played through once, muted, each frame taken as it shows
-    // (requestVideoFrameCallback): about the clip's own length. A seek to
-    // each frame decodes from the last key frame every time, which took
-    // minutes for a phone's video at 24 frames a second.
-    if (
-      v.requestVideoFrameCallback &&
-      (await playedFrames(
-        v,
-        n,
-        len,
-        () => {
-          g.drawImage(v, 0, 0, w, h);
-          grab();
-        },
-        onStatus,
-      ))
-    )
-      // prettier-ignore
-      return { w, h, frames, source: v.duration || len };
-    frames.length = 0;
+    // Reading no longer blocks the first preview. Exact background seeks
+    // give the model the frame actually shown at each retained source time,
+    // rather than whichever frame a busy page's playback callback reached.
+    READ.lead = 0;
+    READ.slowed = 1;
     for (let i = 0; i < n; i++) {
+      if (cancelled()) throw new Error("The depth refinement was canceled.");
       const at = (i * len) / n;
-      await new Promise((resolve) => {
-        v.addEventListener("seeked", resolve, { once: true });
-        v.currentTime = at;
-      });
+      if (Math.abs(v.currentTime - at) > 1e-5 || v.seeking)
+        await new Promise((resolve) => {
+          v.addEventListener("seeked", resolve, { once: true });
+          v.currentTime = at;
+        });
       g.drawImage(v, 0, 0, w, h);
       grab();
       if (i % 12 === 11) onStatus?.(`Reading the video: frame ${i + 1} of ${n}…`);
@@ -738,66 +875,8 @@ async function videoFrames(file, side, onStatus) {
   }
 }
 
-// Plays v (muted) from the start and calls take() for frame i at (i * len /
-// n) seconds, as the frame on show reaches it (a frame the browser skipped
-// takes the next one shown). False if it can't play here (the caller seeks
-// instead).
-export const READ = { lead: 0, slowed: 1 }; // (how the last video read went; tests)
-async function playedFrames(v, n, len, take, onStatus) {
-  READ.lead = 0;
-  READ.slowed = 1;
-  v.currentTime = 0;
-  await new Promise((r) => v.addEventListener("seeked", r, { once: true }));
-  let i = 0;
-  const done = new Promise((resolve) => {
-    const end = () => {
-      if (i === 0) return resolve(false);
-      while (i < n) {
-        take();
-        i++;
-      }
-      v.pause();
-      resolve(true);
-    };
-    const watchdog = setInterval(() => {
-      if (v.paused || v.ended) {
-        clearInterval(watchdog);
-        end();
-      }
-    }, 500);
-    const half = len / n / 2;
-    const step = (_now, meta) => {
-      const at = meta.mediaTime;
-      // A frame the browser skipped (it couldn't decode that fast): back to
-      // it, at half the speed (a phone decodes in hardware and rarely
-      // needs this).
-      if (i < n && (i * len) / n < at - half && v.playbackRate > 1 / 16) {
-        v.playbackRate /= 2;
-        READ.slowed = v.playbackRate;
-        v.currentTime = (i * len) / n;
-        v.requestVideoFrameCallback(step);
-        return;
-      }
-      while (i < n && (i * len) / n <= at + half) {
-        READ.lead = Math.max(READ.lead, at - (i * len) / n);
-        take();
-        i++;
-      }
-      if (i % 24 < 2) onStatus?.(`Reading the video: frame ${i} of ${n}…`);
-      if (i >= n || at >= len) {
-        clearInterval(watchdog);
-        end();
-      } else v.requestVideoFrameCallback(step);
-    };
-    v.requestVideoFrameCallback(step);
-  });
-  try {
-    await v.play();
-  } catch {
-    return false;
-  }
-  return done;
-}
+// Retained read diagnostics for tools that used the earlier playback reader.
+export const READ = { lead: 0, slowed: 1, mode: "seek" };
 
 // A video's own sound (r5): a Track (song-stream.js) playing the file,
 // routed to the site's speaker button; its clock drives the frames. Null if
@@ -1521,7 +1600,7 @@ export const SAMPLES = [
     fps: 16, // prettier-ignore
     title: "Elephants Dream (six seconds from 5:29.7)",
     source: "https://orange.blender.org/",
-    author: "Blender Foundation",
+    author: "Blender Foundation / Netherlands Media Art Institute (2006), www.elephantsdream.org",
     license: "CC BY 2.5",
     licenseUrl: "https://creativecommons.org/licenses/by/2.5/",
     sound: "elephants",
@@ -1563,10 +1642,11 @@ export const LONG_SAMPLES = [
     fps: 24,
     frames: 720,
     title: "Elephants Dream (5:29.7 to 5:59.7)",
-    source: "https://archive.org/details/ElephantsDream",
+    source: "https://orange.blender.org/blog/creative-commons-license-2/",
     ...BLENDER,
-    license: "CC BY 3.0 US",
-    licenseUrl: "https://creativecommons.org/licenses/by/3.0/us/",
+    author: "Blender Foundation / Netherlands Media Art Institute (2006), www.elephantsdream.org",
+    license: "CC BY 2.5",
+    licenseUrl: "https://creativecommons.org/licenses/by/2.5/",
     cut: { src: ".cache/smd/elephants-full.mp4", ss: 329.7, t: 30 },
   },
   {
@@ -1901,7 +1981,7 @@ const photoVersion = () => {
 };
 
 export const MOVING_PHOTO = {
-  alive: (c) => (c.play ?? 1) > 0.5 && !!MOVING.clip,
+  alive: (c) => (c.play ?? 1) > 0.5 && !!MOVING.clip && !MOVING.opening,
   photo: {
     on: (o) => o.detail !== "splats",
     rect: () => {
@@ -1987,13 +2067,47 @@ export const MOVING_PHOTO = {
     async read(_text, fileName, file) {
       if (!file) throw new Error("Open a GIF or a video.");
       // A newly opened file gets the model's time and memory. The previous
-      // preview can keep playing while its replacement is read.
+      // picture stays visible while its replacement is read.
       MOVING.custom?.refinement?.cancel();
       MOVING.custom?.job?.cancel();
-      const clip = await openClip(file, fileName.replace(/\.[^.]+$/, ""), setShown);
+      // Hold the previous picture while the first answer loads. Rendering
+      // its animated relief continuously otherwise competes with inference
+      // on devices using a software graphics driver.
+      MOVING.opening = true;
+      track()?.pause();
+      MOVING.clip?.video?.pause();
+      liveWake();
+      let clip;
+      try {
+        clip = await openClip(file, fileName.replace(/\.[^.]+$/, ""), setShown);
+      } catch (error) {
+        MOVING.opening = false;
+        liveWake();
+        throw error;
+      }
       track()?.pause();
       if (MOVING.custom) closeClip(MOVING.custom);
       MOVING.custom = clip;
+      // Paint the first relief on the existing Sharp stage before the
+      // regular splat build. Its hidden splats can take seconds to rebuild
+      // on a software renderer; the new picture need not wait for them.
+      const pl = globalThis.window?.__splashery?.player;
+      if (pl?.scene?.toy?.id === "moving-photo-3d" && sharpView("moving-photo-3d") === "sharp") {
+        // Keep the playback state on the existing clip until its regular
+        // build commits. The preview has its own stopped clock, so a Play
+        // or Start over tap cannot start the new audio during that build.
+        const preview = { ...MOVING, clip, frame: 0, t: 0, anchor: null, opening: true };
+        sharpClip(preview, { width: 2, height: (2 * clip.h) / clip.w, full: MOVING.full });
+        sharpDrive({});
+        if (pl.stage.toy?.entity?.gsplat?.enabled === false)
+          await new Promise((resolve) => {
+            pl.stage.app.once("frameend", () => {
+              clip.firstPresentedAt = performance.now();
+              resolve();
+            });
+            pl.stage.requestRender();
+          });
+      }
       setShown("");
       return { clip: "custom", clipName: clip.name };
     },
@@ -2039,11 +2153,25 @@ export const MOVING_PHOTO = {
     if (info?.sound) MOVING.sound = info.sound;
     const clip = MOVING.clip;
     if (!clip) return;
+    if (MOVING.opening) {
+      sharpDrive(out);
+      return;
+    }
     // r6: the control's target, not its eased value (see playTarget).
     const on = globalThis.window?.__splashery?.player?.motion ? playTarget() : (c.play ?? 1) > 0.5;
     const tr = track();
     const rate = clipRate();
     if (tr) tr.el.playbackRate = rate;
+    // A slow frame can land after the element has ended. Restart at the
+    // beginning in that very frame; entering the silent fallback first
+    // used to hold the last picture, then resume partway into the next loop.
+    if (on && tr?.el.ended && Math.abs(tr.duration - clip.duration) < 0.15) {
+      tr.el.currentTime = 0;
+      tr.anchor = null;
+      MOVING.anchor = null;
+      MOVING.t = 0;
+      tr.play(MOVING.sound);
+    }
     if (!on) {
       if (tr?.playing) {
         // (Live r7: the picture stops where the sound stops, though the last
@@ -2102,6 +2230,7 @@ export const MOVING_PHOTO = {
       MOVING.t = 0;
     }
     MOVING.clip = clip;
+    MOVING.opening = false;
     MOVING.last = null;
     MOVING.anchor = null;
     const { cols, rows } = clipGrid(clip, k.count);

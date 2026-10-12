@@ -1,10 +1,42 @@
 import { test, expect } from "@playwright/test";
 import { motionDepth } from "../src/live/clip-stabilize.js";
-import { measure } from "../tools/cdx-mp2-measure.mjs";
+import { MOVING, MOVING_PHOTO } from "../src/packs/moving-photo.js";
+import { measure, reconstructedSources } from "../tools/cdx-mp2-measure.mjs";
 import fs from "node:fs";
 import crypto from "node:crypto";
 
 const mp = "/src/packs/moving-photo.js";
+
+test("a frame after the audio has ended restarts at frame zero instead of waiting in the tail", () => {
+  const saved = { ...MOVING };
+  let plays = 0;
+  const el = { ended: true, paused: true, currentTime: 2, playbackRate: 1 };
+  const track = {
+    el,
+    duration: 2,
+    get playing() {
+      return !el.paused && !el.ended;
+    },
+    time: () => el.currentTime,
+    play() {
+      el.ended = false;
+      el.paused = false;
+      plays++;
+    },
+  };
+  MOVING.clip = { duration: 2, n: 4, delays: [500, 500, 500, 500], audio: { track } };
+  MOVING.t = 1.95;
+  MOVING.anchor = null;
+  try {
+    MOVING_PHOTO.drive(2.6, { play: 1 }, {}, { time: 2.6 });
+    expect(MOVING.t).toBe(0);
+    expect(MOVING.frame).toBe(0);
+    expect(el.currentTime).toBe(0);
+    expect(plays).toBe(1);
+  } finally {
+    Object.assign(MOVING, saved);
+  }
+});
 
 test("long depth assets contain changing per-frame answers, not repeated first-frame estimates", () => {
   for (const stem of ["bunny", "sintel", "elephants", "tears"]) {
@@ -31,6 +63,43 @@ async function open(page) {
   await page.evaluate(() => window.__splashery.app.chooseToy("moving-photo-3d"));
   await page.waitForFunction(() => window.__psv?.state().on && !window.__splashery.player.loading);
 }
+
+test("a desktop upload presents a prompt first Sharp relief before refinement finishes", async ({
+  page,
+}) => {
+  test.setTimeout(120_000);
+  await page.setViewportSize({ width: 1280, height: 720 });
+  await page.goto("/?renderer=webgl2&adapt=off&profile=mid&labs=1");
+  await page.waitForSelector("body[data-ready='true']");
+  await page.evaluate(() => window.__splashery.app.chooseToy("moving-photo-3d"));
+  await page.waitForFunction(() => window.__psv?.state().on && !window.__splashery.player.loading);
+  await page.evaluate(async () => {
+    window.__moving = await import("/src/packs/moving-photo.js");
+    window.__openedAt = performance.now();
+  });
+  await page.setInputFiles("#toy-input-file", "tests/fixtures/psv3/sound.webm");
+  await page.waitForFunction(
+    () =>
+      window.__moving.MOVING.custom?.name === "sound" &&
+      !!window.__moving.MOVING.custom.firstPresentedAt,
+  );
+  const result = await page.evaluate(() => {
+    const clip = window.__moving.MOVING.custom;
+    return {
+      ms: clip.firstPresentedAt - window.__openedAt,
+      sharp: window.__psv.state().on,
+      native: clip.video.videoWidth,
+      refining: !clip.refinement.done,
+    };
+  });
+  console.log(`Desktop first Sharp picture: ${Math.round(result.ms)} ms`);
+  // Software graphics can add a frame of startup latency beyond the
+  // 3–4-second desktop aim. Keep a hard five-second regression ceiling.
+  expect(result.ms).toBeLessThan(5000);
+  expect(result.sharp).toBe(true);
+  expect(result.native).toBeGreaterThan(0);
+  expect(result.refining).toBe(true);
+});
 
 test("a sample's own pixels replace the previous picture in the first Sharp update", async ({
   page,
@@ -102,7 +171,7 @@ test("the speaker mutes and unmutes a real track while playing and paused, inclu
   expect(await state()).toMatchObject({ playing: false, muted: true, gain: 0 });
 });
 
-test("all tracks on a speaker follow its toggle, and closed tracks stop observing it", async ({
+test("standalone tracks follow playing and paused toggles without replacing Sound methods", async ({
   page,
 }) => {
   await page.goto("/LICENSES.md");
@@ -118,19 +187,40 @@ test("all tracks on a speaker follow its toggle, and closed tracks stop observin
     ];
     await Promise.all(tracks.map((t) => t.ready));
     tracks.forEach((t) => t.route(sound));
+    const wait = async (check) => {
+      const until = performance.now() + 2000;
+      while (!check()) {
+        if (performance.now() > until) throw new Error("Track did not follow its speaker.");
+        await new Promise((resolve) => setTimeout(resolve, 10));
+      }
+    };
+    tracks[0].play(sound);
     sound.setEnabled(true);
+    await wait(() => tracks.every((t) => !t.el.muted));
     const audible = tracks.every((t) => !t.el.muted && t.gain.gain.value === 1);
     sound.setEnabled(false);
+    await wait(() => tracks.every((t) => t.el.muted));
     const silent = tracks.every((t) => t.el.muted && t.gain.gain.value === 0);
+    const untouched = sound.setEnabled === original && !Object.hasOwn(sound, "setEnabled");
     tracks[0].close();
+    tracks[1].pause();
     sound.setEnabled(true);
+    await wait(() => !tracks[1].el.muted);
     const survivor = !tracks[1].el.muted;
     tracks[1].close();
-    const restored = sound.setEnabled === original;
+    const closed =
+      tracks.every((t) => t.soundTimer === null && t.sound === null) &&
+      sound.setEnabled === original;
     await sound.ctx?.close();
-    return { audible, silent, survivor, restored };
+    return { audible, silent, survivor, untouched, closed };
   });
-  expect(result).toEqual({ audible: true, silent: true, survivor: true, restored: true });
+  expect(result).toEqual({
+    audible: true,
+    silent: true,
+    survivor: true,
+    untouched: true,
+    closed: true,
+  });
 });
 
 test("a hidden, paused video uploads the picture reached by a seek", async ({ page }) => {
@@ -213,9 +303,44 @@ test("a real uploaded bunny refines every depth frame and closes the measured lo
   const upload = await measure(page, { id: "sample", path: "assets/toys/screen/bunny.webm" });
   expect(upload.refinement.error).toBeFalsy();
   expect(upload.refinement.measured).toBe(upload.frames);
+  expect(upload.openMs).toBeLessThan(4000);
   expect(upload.heightJitter).toBeLessThan(sample.heightJitter * 1.2);
   expect(upload.edgeFlipsPer1000).toBeLessThan(sample.edgeFlipsPer1000 * 1.2);
   expect(upload.surfaceCutShare).toBeLessThan(sample.surfaceCutShare * 1.2);
+});
+
+test("upload refinement reduces machine and bridge regressions without losing horse and Sintel stability", async ({
+  page,
+}) => {
+  test.setTimeout(600_000);
+  const sources = await reconstructedSources(".cache/cdx-mp2/sources", [
+    "machine",
+    "bridge",
+    "dragon",
+    "horse",
+  ]);
+  await page.goto("/LICENSES.md");
+  for (const id of ["machine", "bridge", "dragon", "horse"]) {
+    const sample = await measure(page, { id });
+    const upload = await measure(page, { id, path: sources[id] });
+    console.log(
+      JSON.stringify({
+        id,
+        jitter: upload.heightJitter,
+        cuts: upload.surfaceCutShare,
+        normalization: upload.refinement.normalization,
+      }),
+    );
+    expect(upload.refinement.error).toBeFalsy();
+    expect(upload.heightJitter).toBeLessThan(sample.heightJitter * (id === "dragon" ? 1.3 : 1.2));
+    if (id === "horse") expect(upload.heightJitter).toBeLessThan(0.015);
+    expect(upload.edgeFlipsPer1000).toBeLessThan(sample.edgeFlipsPer1000 * 1.2);
+    expect(upload.surfaceCutShare).toBeLessThan(
+      // Bound these against the reviewed PR's cuts, not an exploratory
+      // playback-callback capture whose source times varied with CPU load.
+      { machine: 0.00878, bridge: 0.08525, dragon: 0.006, horse: 0.002 }[id],
+    );
+  }
 });
 
 test("60 fps input retains its native picture and improves depth in the background at a larger size", async ({
@@ -226,8 +351,12 @@ test("60 fps input retains its native picture and improves depth in the backgrou
   const result = await page.evaluate(async () => {
     window.__splashery = { player: { profile: "mid" } };
     const m = await import("/src/packs/moving-photo.js");
+    const start = performance.now();
     const blob = await (await fetch("/assets/toys/moving-photo-3d/cdx-mp2-fast-60.webm")).blob();
     const clip = await m.openClip(new File([blob], "fast.webm", { type: blob.type }), "fast");
+    const openMs = performance.now() - start;
+    const firstMeasured = clip.refinement.measured;
+    const readingInBackground = !clip.refinement.framesReady;
     const initial = { n: clip.n, duration: clip.duration, w: clip.w, h: clip.h };
     await clip.refinement.finished;
     const result = {
@@ -237,6 +366,9 @@ test("60 fps input retains its native picture and improves depth in the backgrou
       measured: clip.refinement.measured,
       side: clip.refinement.side,
       error: clip.refinement.error,
+      openMs,
+      firstMeasured,
+      readingInBackground,
     };
     clip.audio?.track.close();
     clip.video.pause();
@@ -249,7 +381,62 @@ test("60 fps input retains its native picture and improves depth in the backgrou
   expect(result.side).toBe(294);
   expect(result.measured).toBe(result.final.n);
   expect(result.error).toBeFalsy();
+  expect(result.openMs).toBeLessThan(4000);
+  expect(result.firstMeasured).toBe(1);
+  expect(result.readingInBackground).toBe(true);
 });
+
+for (const [toy, module, state] of [
+  ["chladni-cell", "/src/packs/chladni-3d.js", "cellAudioState"],
+  ["song-landscape", "/src/packs/studio.js", "songTest"],
+]) {
+  test(`${toy} opens a real song and follows the speaker while playing and paused`, async ({
+    page,
+  }) => {
+    test.setTimeout(180_000);
+    const errors = [];
+    page.on("pageerror", (e) => errors.push(e.message));
+    await page.goto("/?renderer=webgl2&adapt=off&profile=low&labs=1");
+    await page.waitForSelector("body[data-ready='true']");
+    await page.evaluate((id) => window.__splashery.app.chooseToy(id), toy);
+    await page.waitForFunction(() => !window.__splashery.player.loading);
+    await page.setInputFiles(
+      "#toy-input-file",
+      toy === "song-landscape"
+        ? "tests/fixtures/live2/clicks.mp3"
+        : "assets/toys/song-landscape/sample.wav",
+    );
+    await page.evaluate(
+      async ([path, state]) => {
+        window.__readSong = (await import(path))[state];
+      },
+      [module, state],
+    );
+    await page.waitForFunction(() => !!window.__readSong().track);
+    await page.evaluate(
+      async ([path, state]) => {
+        window.__songTrack = (await import(path))[state]().track;
+        window.__songTrack.play(window.__splashery.app.sound);
+      },
+      [module, state],
+    );
+    const track = () =>
+      page.evaluate(() => ({
+        playing: window.__songTrack.playing,
+        muted: window.__songTrack.el.muted,
+        gain: window.__songTrack.gain?.gain.value,
+      }));
+    await expect.poll(async () => (await track()).playing).toBe(true);
+    await page.locator("#sound-toggle").click();
+    await expect.poll(async () => (await track()).muted).toBe(false);
+    await page.locator("#sound-toggle").click();
+    await expect.poll(track).toMatchObject({ muted: true, gain: 0 });
+    await page.evaluate(() => window.__songTrack.pause());
+    await page.locator("#sound-toggle").click();
+    await expect.poll(track).toMatchObject({ playing: false, muted: false, gain: 1 });
+    expect(errors).toEqual([]);
+  });
+}
 
 test("30-second films are opt-in, play precomputed depth on every frame, and never load the model", async ({
   page,

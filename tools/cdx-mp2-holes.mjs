@@ -153,6 +153,8 @@ try {
             frames: clip.n,
             holeShare: holes / Math.max(1, pixels),
             backingShare: backing / Math.max(1, pixels),
+            normalization: clip.refinement?.normalization || null,
+            scores: clip.refinement?.scores || null,
           };
         },
         { id, path, upload },

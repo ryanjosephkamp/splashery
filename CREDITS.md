@@ -608,9 +608,9 @@ made by `tools/live3-depth.mjs`) and, for the videos, their sound as a mono MP3:
 - "Tears of Steel" (8:30.5 to 8:36.5), © Blender Foundation,
   [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/), from the 720p download on
   download.blender.org ([mango.blender.org](https://mango.blender.org/)).
-- "Elephants Dream" (5:29.7 to 5:35.7), © Blender Foundation,
-  [CC BY 2.5](https://creativecommons.org/licenses/by/2.5/), from the download on
-  download.blender.org ([orange.blender.org](https://orange.blender.org/)).
+- "Elephants Dream" (5:29.7 to 5:35.7), © 2006 Blender Foundation / Netherlands Media Art Institute
+  / www.elephantsdream.org, [CC BY 2.5](https://creativecommons.org/licenses/by/2.5/), from the
+  download on download.blender.org ([orange.blender.org](https://orange.blender.org/)).
 
 Task 38 adds explicitly picked longer films at 24 frames per second, with their own sound:
 
@@ -620,9 +620,12 @@ Task 38 adds explicitly picked longer films at 24 frames per second, with their 
 - Sintel, 2:15 to 2:45, © Blender Foundation
   ([Internet Archive source](https://archive.org/details/Sintel),
   [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/)).
-- Elephants Dream, 5:29.7 to 5:59.7, © Blender Foundation
-  ([Internet Archive source](https://archive.org/details/ElephantsDream),
-  [CC BY 3.0 US](https://creativecommons.org/licenses/by/3.0/us/)).
+- Elephants Dream, 5:29.7 to 5:59.7, © 2006 Blender Foundation / Netherlands Media Art Institute /
+  www.elephantsdream.org
+  ([film's copyright notice](https://orange.blender.org/blog/creative-commons-license-2/),
+  [CC BY 2.5](https://creativecommons.org/licenses/by/2.5/),
+  [Internet Archive download](https://archive.org/details/ElephantsDream)). This matches the short
+  sample's license; the film's own notice takes precedence over the archive's 3.0 US descriptor.
 - Tears of Steel, a 27-second city and robot montage, © Blender Foundation
   ([Internet Archive source](https://archive.org/details/Tears-of-Steel),
   [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/)). The selected spans are 1:10 to 1:16,
@@ -630,8 +633,9 @@ Task 38 adds explicitly picked longer films at 24 frames per second, with their 
   faces and modern firearms are excluded.
 
 The live archive pages' declared licenses were checked on October 12, 2026. The original Blender
-project pages returned HTTP 403 here, so their original notices could not be rechecked. Each cut and
-its derived depth retain its source's CC BY license. The files are
+project pages initially returned HTTP 403 here; Elephants Dream's own copyright page was reachable
+on recheck and confirms CC BY 2.5 for the film, including its sound. Each cut and its derived depth
+retain its source's CC BY license. The files are
 `assets/toys/moving-photo-3d/{bunny,sintel,elephants,tears}-long.webm` and `-long.mp2depth`: VP9 and
 Opus video, and a depth byte cache, estimated on all 720 playback frames (648 for Tears of Steel),
 aligned, filtered, and stabilized offline with the vendored depth model. `tools/cdx-mp2-samples.mjs`

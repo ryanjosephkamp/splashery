@@ -348,7 +348,7 @@ function fillClip(m, src) {
   const clip = mv.clip;
   if (!clip) return;
   if (m.u.uBack[2]) m.setPieces(null); // (a clip's relief blends by depth, as before)
-  const playing = (pl) => (pl?.motion?.targets?.play ?? 1) > 0.5;
+  const playing = (pl) => !mv.opening && (pl?.motion?.targets?.play ?? 1) > 0.5;
   let video = null;
   if (clip.video) video = clip.video;
   else if (

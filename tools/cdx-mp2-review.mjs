@@ -19,6 +19,7 @@ const cases = [
   ["machine-long", "machine-long"],
   ["bridge-long", "bridge-long"],
   ["upload", "custom"],
+  ["machine-upload", "custom", ".cache/cdx-mp2/sources/machine.webm"],
 ];
 await fs.mkdir(dir, { recursive: true });
 const browser = await chromium.launch({
@@ -26,7 +27,7 @@ const browser = await chromium.launch({
   args: ["--use-angle=swiftshader", "--enable-unsafe-swiftshader", "--ignore-gpu-blocklist"],
 });
 try {
-  for (const [name, id] of cases.filter(([n]) => !ids.length || ids.includes(n))) {
+  for (const [name, id, source] of cases.filter(([n]) => !ids.length || ids.includes(n))) {
     const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
     page.on("pageerror", (e) => {
       throw e;
@@ -37,13 +38,20 @@ try {
     await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
     await page.evaluate(() => window.__splashery.app.chooseToy("moving-photo-3d"));
     if (id === "custom") {
-      await page.setInputFiles("#toy-input-file", "assets/toys/screen/bunny.webm");
+      await page.evaluate(
+        async () => (window.__reviewM = await import("/src/packs/moving-photo.js")),
+      );
+      const input = source || "assets/toys/screen/bunny.webm";
+      await page.setInputFiles("#toy-input-file", input);
       await page.waitForFunction(
-        async () => {
-          const m = await import("/src/packs/moving-photo.js");
-          return m.MOVING.clip?.name === "bunny" && !window.__splashery.player.loading;
+        (name) => {
+          const clip = window.__reviewM.MOVING.clip;
+          return clip?.name === name && !!clip.refinement && !window.__splashery.player.loading;
         },
-        null,
+        input
+          .split("/")
+          .pop()
+          .replace(/\.[^.]+$/, ""),
         { timeout: 600_000 },
       );
       await page.evaluate(async () => {
@@ -100,7 +108,14 @@ try {
           m.MOVING_PHOTO.screen.draw(canvas.getContext("2d"));
           (await import("/src/packs/photo-sharp.js")).sharpDrive({});
           await window.__splashery.player.stage.captureFrame();
-          return { t: m.MOVING.t, frame: m.MOVING.frame, video: c.video?.currentTime };
+          return {
+            t: m.MOVING.t,
+            frame: m.MOVING.frame,
+            video: c.video?.currentTime,
+            name: c.name,
+            sample: c.sample || null,
+            refined: c.refinement ? c.refinement.done && !c.refinement.error : null,
+          };
         }, i / 8),
       );
       frames.push(PNG.sync.read(await page.screenshot()));

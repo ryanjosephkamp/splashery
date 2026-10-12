@@ -16,47 +16,6 @@
 import { makeFeatures, FIELDS } from "./song-analysis.js";
 import { mp3Frames } from "./song-mp3.js";
 
-// Sound has no subscription API. Observe its public toggle once per instance,
-// so every Track responds inside the same user gesture, even while paused.
-// Remove the wrapper when the last track leaves; don't retain closed elements.
-const routedSounds = new WeakMap();
-function watchSound(track, sound) {
-  if (track.sound === sound) return;
-  unwatchSound(track);
-  if (!sound || typeof sound.setEnabled !== "function") return;
-  let state = routedSounds.get(sound);
-  if (!state) {
-    state = {
-      tracks: new Set(),
-      original: sound.setEnabled,
-      own: Object.hasOwn(sound, "setEnabled"),
-    };
-    state.toggle = function (...args) {
-      const result = state.original.apply(this, args);
-      for (const t of state.tracks) t.route(sound);
-      return result;
-    };
-    routedSounds.set(sound, state);
-    sound.setEnabled = state.toggle;
-  }
-  state.tracks.add(track);
-  track.sound = sound;
-}
-function unwatchSound(track) {
-  const sound = track.sound;
-  if (!sound) return;
-  const state = routedSounds.get(sound);
-  state?.tracks.delete(track);
-  if (state && !state.tracks.size) {
-    if (sound.setEnabled === state.toggle) {
-      if (state.own) sound.setEnabled = state.original;
-      else delete sound.setEnabled;
-    }
-    routedSounds.delete(sound);
-  }
-  track.sound = null;
-}
-
 export class Track {
   constructor(url) {
     const el = new Audio();
@@ -67,6 +26,12 @@ export class Track {
     this.ctx = null;
     this.blocked = false;
     this.anchor = null;
+    this.sound = null;
+    this.soundTimer = null;
+    // Check after a UI gesture's handlers, while audio activation is still
+    // available. The bounded poll also follows programmatic toggles and
+    // paused tracks, without changing the shared Sound instance or its API.
+    this.soundGesture = () => this.syncSound();
     this.ready = new Promise((resolve, reject) => {
       el.addEventListener("loadedmetadata", () => resolve(el.duration), { once: true });
       el.addEventListener("error", () => reject(new Error("This browser cannot read that sound file. Try an MP3, WAV, OGG or M4A.")), { once: true }); // prettier-ignore
@@ -84,7 +49,17 @@ export class Track {
   // Through the site's sound (its speaker button and volume), once; with the
   // sound off the element plays muted, so the picture still runs.
   route(sound) {
-    watchSound(this, sound);
+    this.sound = sound;
+    if (sound && !this.soundTimer) {
+      this.soundTimer = setInterval(() => this.syncSound(), 50);
+      globalThis.addEventListener?.("click", this.soundGesture);
+      globalThis.addEventListener?.("keydown", this.soundGesture);
+    }
+    this.syncSound();
+  }
+
+  syncSound() {
+    const sound = this.sound;
     if (!this.src && sound?.enabled) {
       const ctx = sound.audio?.();
       if (ctx && sound.master) {
@@ -125,6 +100,7 @@ export class Track {
 
   // The audio clock: the second of the song being heard now.
   time() {
+    if (this.sound) this.syncSound();
     const el = this.el;
     let t = el.currentTime || 0;
     if (this.playing) {
@@ -140,7 +116,11 @@ export class Track {
   }
 
   close() {
-    unwatchSound(this);
+    clearInterval(this.soundTimer);
+    this.soundTimer = null;
+    this.sound = null;
+    globalThis.removeEventListener?.("click", this.soundGesture);
+    globalThis.removeEventListener?.("keydown", this.soundGesture);
     this.el.pause();
     try {
       this.src?.disconnect();
