@@ -122,17 +122,20 @@ OR OTHER DEALINGS IN THE SOFTWARE.
 - Source: https://github.com/arrival-space/splat.js, commit
   `88efe9aaf32279b0b9bcb781ea0deb4d60c49dff` (September 23, 2026; package version 0.1.0). Files in
   `vendor/splatjs/src/`: the 20 modules that `session.js` and its two workers reach (structure from
-  motion, the WebGPU trainer, frame decoding and the PLY writer), all unmodified; the list and what
-  was left out are in `vendor/splatjs/VERSION.md`. The library's own video reader
-  (`src/io/video.js`, which loads Mediabunny, MPL-2.0) is not vendored: Splashery picks the frames
-  itself.
+  motion, the WebGPU trainer, frame decoding and the PLY writer), unchanged except for the local
+  Session option below; the list and what was left out are in `vendor/splatjs/VERSION.md`. The
+  library's own video reader (`src/io/video.js`, which loads Mediabunny, MPL-2.0) is not vendored:
+  Splashery picks the frames itself.
 - Loaded only when someone opens a video in the Video to 3D toy (a dynamic import in
   `src/video3d/run.js`); never on the shelf, in another toy or in an embed. Labs only.
 - License: MIT (Copyright (c) 2026 Stratum1 GmbH; checked on the live repository page on September
   30, 2026; the full text is in `vendor/splatjs/LICENSE`).
-- Local change by Codex for task 40 (October 12, 2026): `src/session.js` accepts `refineStart`,
-  defaulting to its existing 1,500-step threshold. Explicit build tools may change it; browser
-  training retains the original threshold. The MIT notice is retained.
+- Local change by Codex for task 40 (October 12, 2026): `src/session.js` accepts `refineStart`, an
+  opt-in first-refinement threshold for short offline build-tool passes. It replaces the hardcoded
+  `trainer.iter > 1500` check with `trainer.iter > (this.opts.refineStart ?? 1500)` so a build tool
+  can refine a short run explicitly. Omitted or null values retain the original 1,500-step
+  threshold; `src/video3d/run.js` does not pass this option, so browser training keeps the upstream
+  schedule. The vendor edit is isolated in commit `ffcc71cc`. The MIT notice is retained.
 
 ## omggif 1.0.10 (lane Pictures)
 

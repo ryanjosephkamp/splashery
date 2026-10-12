@@ -343,36 +343,42 @@ test("changing navigation reuses a learned custom result and keeps its original-
   expect(result.walk.splats).toBeGreaterThan(1000);
 });
 
-test("an explicit build-tool refinement setting runs through the real Session loop", async () => {
-  const { createSession } = await import("../vendor/splatjs/src/session.js");
-  const session = createSession({
-    maxIters: 1200,
-    refineStart: 100,
-    refineEvery: 100,
-    itersPerFrame: 2,
+for (const refineStart of [undefined, 100])
+  test(`Session refinement ${refineStart === undefined ? "keeps the upstream default" : "accepts an explicit build-tool threshold"}`, async () => {
+    const { createSession } = await import("../vendor/splatjs/src/session.js");
+    const session = createSession({
+      maxIters: 3000,
+      ...(refineStart === undefined ? {} : { refineStart }),
+      refineEvery: 100,
+      itersPerFrame: 2,
+    });
+    // The actual session loop with GPU calls stubbed: this proves schedule selection, not quality.
+    let refined = 0;
+    session.trainer = {
+      camMeta: [{}],
+      iter: 100,
+      n: 100,
+      stepOnce() {
+        this.iter++;
+      },
+      async refine() {
+        refined++;
+        return { moved: 0, grown: 0, n: 100 };
+      },
+      device: { queue: { onSubmittedWorkDone: () => Promise.resolve() } },
+    };
+    session.training = true;
+    session._lastStats = performance.now();
+    session._frameCount = 0;
+    session._sched = { raf() {} };
+    await session._frameLoop();
+    expect(refined).toBe(refineStart === undefined ? 0 : 1);
+    if (refineStart === undefined) {
+      session.trainer.iter = 1500;
+      await session._frameLoop();
+      expect(refined).toBe(1);
+    }
   });
-  // The actual session loop with GPU calls stubbed: this proves schedule selection, not quality.
-  let refined = 0;
-  session.trainer = {
-    camMeta: [{}],
-    iter: 100,
-    n: 100,
-    stepOnce() {
-      this.iter++;
-    },
-    async refine() {
-      refined++;
-      return { moved: 0, grown: 0, n: 100 };
-    },
-    device: { queue: { onSubmittedWorkDone: () => Promise.resolve() } },
-  };
-  session.training = true;
-  session._lastStats = performance.now();
-  session._frameCount = 0;
-  session._sched = { raf() {} };
-  await session._frameLoop();
-  expect(refined).toBe(1);
-});
 
 test("Replay releases its audio and lens when its scene ownership changes, including a late embed", async () => {
   const { makeFlight } = await import("../src/video3d/flight.js");

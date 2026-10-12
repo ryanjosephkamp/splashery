@@ -59,7 +59,7 @@ test("Walk can cross supported space away from the camera path and stops at unkn
   expect(Math.hypot(...walk.state.pos.map((v, k) => v - before[k]))).toBeLessThan(0.02);
 });
 
-test("a large native build export is compacted before the site byte gate", () => {
+test("a large native build export is compacted and loads through the unchanged viewer", async () => {
   test.setTimeout(120000);
   const scratch = mkdtempSync(join(tmpdir(), "cdx-v3d-register-"));
   try {
@@ -133,6 +133,40 @@ test("a large native build export is compacted before the site byte gate", () =>
     expect(readFileSync(join(scratch, "CREDITS.md"), "utf8")).toContain(
       "the backend recorded in each sample JSON",
     );
+    const { readBakedScene } = await import("../src/video3d/baked.js");
+    const { sceneFromSplats } = await import("../src/packs/video3d.js");
+    const installed = await readBakedScene(pathToFileURL(join(scratch, record.baked.file)), 60000);
+    const loaded = sceneFromSplats(installed, metadata.cams, { affine: true });
+    expect(installed.count).toBe(60000);
+    expect(loaded.path.length).toBe(metadata.cams.length);
+    expect(loaded.scene.count).toBeGreaterThan(1000);
+    const generated = await import(
+      `data:text/javascript;base64,${readFileSync(join(scratch, "src/video3d/samples.js")).toString("base64")}`
+    );
+    expect(generated.SAMPLES.find((s) => s.id === "lihula").baked).toBe(
+      SAMPLES.find((s) => s.id === "lihula").baked,
+    );
+    const poltsamaa = generated.SAMPLES.find((s) => s.id === "poltsamaa");
+    expect(poltsamaa.license).toBe("CC BY-SA 4.0");
+    const poltsamaaBaked = JSON.parse(readFileSync(join(assets, poltsamaa.baked)));
+    expect(poltsamaaBaked.credit.license).toBe("CC BY-SA 4.0");
+    // A later single-sample return must not need the previous large PLY again.
+    const savedManifest = readFileSync(join(scratch, record.baked.file));
+    const savedMetadata = readFileSync(join(assets, "lihula.json"));
+    const obsolete = join(assets, "poltsamaa-baked/assets/poltsamaa-old.bkd.gz");
+    writeFileSync(obsolete, "Obsolete chunk fixture");
+    rmSync(join(input, "lihula"), { recursive: true });
+    execFileSync(process.execPath, [resolve("tools/cdx-v3d-register.mjs"), input, "poltsamaa"], {
+      cwd: scratch,
+      timeout: 110000,
+      maxBuffer: 2e6,
+    });
+    expect(readFileSync(join(scratch, record.baked.file)).equals(savedManifest)).toBe(true);
+    expect(readFileSync(join(assets, "lihula.json")).equals(savedMetadata)).toBe(true);
+    expect(existsSync(obsolete)).toBe(false);
+    const partialRegistry = JSON.parse(readFileSync(join(scratch, "tools/assets.json")));
+    expect(partialRegistry.videoSamples.find((r) => r.id === "lihula")).toEqual(record);
+    expect(partialRegistry.bakedSamples).toEqual(registry.bakedSamples);
   } finally {
     rmSync(scratch, { recursive: true, force: true });
   }
@@ -152,7 +186,6 @@ test("Walk supports a full turn and clamps pitch without snapping to the filmed 
 test("six BKD1 scenes preserve cameras and reduce default bytes", async () => {
   const { readBakedScene } = await import("../src/video3d/baked.js");
   const { sceneFromSplats } = await import("../src/packs/video3d.js");
-  const { readSplatPly } = await import("../src/video3d/ply.js");
   const assets = JSON.parse(readFileSync("tools/assets.json"));
   expect(assets.bakedSamples.length).toBeGreaterThan(0);
   expect(assets.videoReviewEvidence).toBeUndefined();
@@ -161,9 +194,9 @@ test("six BKD1 scenes preserve cameras and reduce default bytes", async () => {
     const raw = await readBakedScene(pathToFileURL(resolve(file)));
     const meta = JSON.parse(readFileSync(`assets/toys/video-3d/${sample.id}.json`));
     const result = sceneFromSplats(raw, meta.cams, { affine: true });
-    expect(raw.count).toBe(
-      readSplatPly(new Uint8Array(readFileSync(`assets/toys/video-3d/${sample.id}.ply`))).count,
-    );
+    const manifest = JSON.parse(readFileSync(file));
+    expect(raw.count).toBe(manifest.defaultTier);
+    expect(raw.count).toBeLessThanOrEqual(meta.stats.exportedSplats || meta.stats.splats);
     expect(result.path.length).toBe(meta.cams.length);
     expect(result.scene.count).toBeGreaterThan(1000);
     expect(raw.pos.every(Number.isFinite)).toBe(true);

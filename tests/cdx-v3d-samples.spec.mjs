@@ -1,8 +1,11 @@
 import { test, expect } from "@playwright/test";
-import { readFileSync, statSync } from "node:fs";
+import { readFileSync, statSync, existsSync } from "node:fs";
 import { createHash } from "node:crypto";
+import { pathToFileURL } from "node:url";
+import { resolve } from "node:path";
 import { SAMPLES } from "../src/video3d/samples.js";
-import { sceneFromPly } from "../src/packs/video3d.js";
+import { sceneFromSplats } from "../src/packs/video3d.js";
+import { readBakedScene } from "../src/video3d/baked.js";
 import { createScene } from "../src/state.js";
 import { encodeSceneHash } from "../src/codec.js";
 
@@ -37,6 +40,22 @@ test("new captures retain their provenance and match every shipped file hash", (
     expect(record.baked.files[record.baked.file].sha256).toBe(sample.bakedSha256);
     expect(record.defaultBytes).toBe(record.baked.defaultBytes);
     const meta = JSON.parse(readFileSync(record.path));
+    expect(record.baked.sourcePlySha256, sample.id).toBe(sample.sha256);
+    if (meta.bake.backend === "msplat/Metal") {
+      expect(meta.stats.iters, sample.id).toBeGreaterThanOrEqual(30000);
+      expect(meta.stats.frames, sample.id).toBe(60);
+      expect(meta.stats.registered, sample.id).toBeGreaterThanOrEqual(54);
+      expect(meta.bake.settings.downscaleFactor, sample.id).toBe(1);
+      expect(meta.bake.settings.numDownscales, sample.id).toBe(0);
+      expect(meta.bake.settings.keepCrs, sample.id).toBe(true);
+      expect(meta.bake.training.plySha256, sample.id).toBe(sample.sha256);
+      expect(meta.bake.sourceSha256, sample.id).toBe(record.captureSha256);
+      expect(meta.bake.source.span, sample.id).toEqual(sample.span);
+      expect(meta.bake.exportTrainSide, sample.id).toBe(
+        Math.max(...meta.cams.map((c) => Math.max(c.w, c.h))),
+      );
+      continue;
+    }
     const finish = meta.continuation;
     expect(finish.completedIterations, sample.id).toBeGreaterThan(0);
     expect(finish.actualIteration, sample.id).toBe(meta.stats.iters);
@@ -56,19 +75,24 @@ test("new captures retain their provenance and match every shipped file hash", (
   }
 });
 
-test("every baked sample has usable splats, a solved path, a credit, and a light default load", () => {
+test("every baked sample has usable splats, a solved path, a credit, and a light default load", async () => {
   expect(new Set(SAMPLES.map((s) => s.id)).size).toBe(SAMPLES.length);
+  const records = JSON.parse(readFileSync("tools/assets.json")).videoSamples;
   for (const sample of SAMPLES) {
     const base = `assets/toys/video-3d/${sample.id}`;
-    const ply = new Uint8Array(readFileSync(`${base}.ply`));
     const json = readFileSync(`${base}.json`);
     const meta = JSON.parse(json);
-    const { scene, path } = sceneFromPly(ply, meta.cams, undefined, { affine: true });
-    expect(ply.length + json.length, sample.id).toBeLessThan(15_000_000);
+    const raw = await readBakedScene(
+      pathToFileURL(resolve(`assets/toys/video-3d/${sample.baked}`)),
+    );
+    const { scene, path } = sceneFromSplats(raw, meta.cams, { affine: true });
+    const record = records.find((r) => r.id === sample.id || r.file === `${base}.ply`);
+    expect(record.baked.defaultBytes, sample.id).toBeLessThan(15_000_000);
     expect(scene.count, sample.id).toBeGreaterThan(1000);
     expect(path.length, sample.id).toBeGreaterThanOrEqual(3);
     expect(meta.stats.registered, sample.id).toBe(meta.cams.length);
-    expect(meta.stats.plyBytes, sample.id).toBe(ply.length);
+    if (existsSync(`${base}.ply`))
+      expect(meta.stats.plyBytes, sample.id).toBe(statSync(`${base}.ply`).size);
     expect(meta.stats.iters, sample.id).toBeGreaterThan(0);
     expect(
       path.every((c) => c.pos.every(Number.isFinite)),
@@ -112,54 +136,55 @@ test("each selected sample loads in the browser without fetching the trainer", a
   expect(requests.filter((u) => /\.bkd\.gz(?:\?|$)/.test(u)).length).toBeGreaterThanOrEqual(6);
 });
 
-test("a saved walk-mode BY-SA sample loads with its attribution in a standalone embed", async ({
-  page,
-}) => {
-  await page.setViewportSize({ width: 390, height: 200 });
-  const errors = [];
-  page.on("pageerror", (e) => errors.push(e.message));
-  const hash = await encodeSceneHash(
-    createScene({
-      toy: {
-        kind: "builtin",
-        id: "video-3d",
-        options: { source: "toolse", navigation: "walk" },
-      },
-    }),
-  );
-  await page.goto(`/embed/?renderer=webgl2&labs=1&profile=low&adapt=off#s=${hash}`);
-  await page.waitForSelector("body[data-ready='true']");
-  const state = await page.evaluate(() => ({
-    scene: window.__splashery.scene(),
-    info: window.__splashery.player.proc?.ctx?.kit?.data?.video,
-  }));
-  expect(state.scene.toy.id).toBe("video-3d");
-  expect(state.info?.uid).toBe("toolse");
-  expect(state.info.splats).toBeGreaterThan(1000);
-  await expect(page.locator("#v3d-source-credit")).toContainText("Sillerkiil");
-  await expect(page.locator("#v3d-source-credit")).toContainText("CC BY-SA 4.0");
-  await expect(page.locator("#v3d-walk")).toBeVisible();
-  await page.waitForFunction(() => {
-    const p = window.__splashery.player;
-    return (
-      p.proc.ctx.kit.data.walk &&
-      p.camera
-        .pose()
-        .position.every((v, k) => Math.abs(v - p.proc.ctx.kit.data.walk.state.pos[k]) < 1e-6)
-    );
-  });
-  const credit = await page.locator("#v3d-source-credit").boundingBox();
-  expect(credit.y).toBeGreaterThanOrEqual(0);
-  expect(credit.y + credit.height).toBeLessThanOrEqual(200);
-  const move = await page.locator('[data-pad="move"]').boundingBox();
-  expect(credit.y + credit.height).toBeLessThanOrEqual(move.y);
-  for (const link of await page.locator("#v3d-source-credit a").all()) {
-    expect(
-      await link.evaluate((a) => {
-        const r = a.getBoundingClientRect();
-        return document.elementFromPoint(r.x + r.width / 2, r.y + r.height / 2) === a;
+for (const source of ["toolse", "poltsamaa"])
+  test(`a saved ${source} walk-mode BY-SA sample keeps visible, clickable attribution`, async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 390, height: 200 });
+    const errors = [];
+    page.on("pageerror", (e) => errors.push(e.message));
+    const hash = await encodeSceneHash(
+      createScene({
+        toy: {
+          kind: "builtin",
+          id: "video-3d",
+          options: { source, navigation: "walk" },
+        },
       }),
-    ).toBe(true);
-  }
-  expect(errors).toEqual([]);
-});
+    );
+    await page.goto(`/embed/?renderer=webgl2&labs=1&profile=low&adapt=off#s=${hash}`);
+    await page.waitForSelector("body[data-ready='true']");
+    const state = await page.evaluate(() => ({
+      scene: window.__splashery.scene(),
+      info: window.__splashery.player.proc?.ctx?.kit?.data?.video,
+    }));
+    expect(state.scene.toy.id).toBe("video-3d");
+    expect(state.info?.uid).toBe(source);
+    expect(state.info.splats).toBeGreaterThan(1000);
+    await expect(page.locator("#v3d-source-credit")).toContainText("Sillerkiil");
+    await expect(page.locator("#v3d-source-credit")).toContainText("CC BY-SA 4.0");
+    await expect(page.locator("#v3d-walk")).toBeVisible();
+    await page.waitForFunction(() => {
+      const p = window.__splashery.player;
+      return (
+        p.proc.ctx.kit.data.walk &&
+        p.camera
+          .pose()
+          .position.every((v, k) => Math.abs(v - p.proc.ctx.kit.data.walk.state.pos[k]) < 1e-6)
+      );
+    });
+    const credit = await page.locator("#v3d-source-credit").boundingBox();
+    expect(credit.y).toBeGreaterThanOrEqual(0);
+    expect(credit.y + credit.height).toBeLessThanOrEqual(200);
+    const move = await page.locator('[data-pad="move"]').boundingBox();
+    expect(credit.y + credit.height).toBeLessThanOrEqual(move.y);
+    for (const link of await page.locator("#v3d-source-credit a").all()) {
+      expect(
+        await link.evaluate((a) => {
+          const r = a.getBoundingClientRect();
+          return document.elementFromPoint(r.x + r.width / 2, r.y + r.height / 2) === a;
+        }),
+      ).toBe(true);
+    }
+    expect(errors).toEqual([]);
+  });

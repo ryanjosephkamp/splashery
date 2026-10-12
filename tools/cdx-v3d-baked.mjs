@@ -18,10 +18,15 @@ const pretty = (value, parser = "json") => format(value, { parser, printWidth: 1
 export async function registerBakedSamples(
   directory = "assets/toys/video-3d",
   sampleList = SAMPLES,
+  selectedIds = null,
 ) {
   const assets = JSON.parse(fs.readFileSync("tools/assets.json", "utf8"));
   const samples = [];
   for (const s of sampleList) {
+    if (selectedIds && !selectedIds.has(s.id)) {
+      samples.push(s);
+      continue;
+    }
     const base = `assets/toys/video-3d/${s.id}`;
     const folder = `${base}-baked`;
     const flat = path.join(directory, `${s.id}.ply`);
@@ -75,6 +80,15 @@ export async function registerBakedSamples(
     if (defaultBytes > 15_000_000) throw new Error(`Default scene over 15 MB: ${s.id}`);
     if (defaultBytes >= fs.statSync(input).size + metaBytes)
       throw new Error(`BKD1 did not reduce the default load: ${s.id}`);
+    // Replacing a small bake with a native one changes tier filenames. Retire only this
+    // capture's obsolete chunks so every shipped file still has a current hash/credit record.
+    const retained = new Set(Object.keys(files));
+    const chunkDirectory = `${folder}/assets`;
+    for (const name of fs.readdirSync(chunkDirectory)) {
+      const chunk = `${chunkDirectory}/${name}`;
+      if (name.startsWith(`${s.id}-`) && /\.bkd(?:\.gz)?$/.test(name) && !retained.has(chunk))
+        fs.rmSync(chunk);
+    }
     const record = assets.videoSamples.find((r) => r.id === s.id || r.file === `${base}.ply`);
     if (!record) throw new Error(`No source credit: ${s.id}`);
     record.baked = {

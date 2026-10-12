@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // MIT. Build-only Apple silicon workflow. Never imported by the site.
-// node tools/cdx-v3d-mac-bake.mjs <plan|prepare|solve|train|import> <capture-id> <scratch-directory>
+// node tools/cdx-v3d-mac-bake.mjs <plan|prepare|solve|train|import|bundle> <capture-id> <scratch-directory>
 // Run stages in order. Output stays in scratch; the Operator reviews it before replacing assets.
 // CLI flags verified against COLMAP 4.2.1 and msplat's pinned Python CLI on October 12, 2026.
 import fs from "node:fs";
@@ -205,11 +205,58 @@ function convertModel(model, text) {
   ]);
 }
 
+export function bundleReturn(work, id) {
+  const capture = CAPTURES.find((c) => c.id === id);
+  if (!capture) throw new Error("Choose one of the four reviewed captures.");
+  if (path.resolve(work) === repo || path.resolve(work).startsWith(repo + path.sep))
+    throw new Error("Keep return archives outside the Splashery repository.");
+  const files = [
+    `${id}.ply`, `${id}.json`, "preparation.json", "cameras.json", "solve.json",
+    "training.json", "training.log", "extraction.log", "undistorted-text/cameras.txt",
+    "undistorted-text/images.txt", "undistorted-text/points3D.txt",
+  ]; // prettier-ignore
+  for (const file of files)
+    if (!fs.lstatSync(path.join(work, file)).isFile())
+      throw new Error(`Return file must be a regular file: ${file}.`);
+  const training = read(path.join(work, "training.json"));
+  const meta = read(path.join(work, `${id}.json`));
+  const prep = read(path.join(work, "preparation.json"));
+  if (
+    !(training.iterations >= 30000 && meta.stats?.iters === training.iterations) ||
+    meta.stats.frames !== 60 ||
+    !(meta.stats.registered >= 54 && meta.stats.registered <= 60) ||
+    meta.bake?.backend !== "msplat/Metal" ||
+    training.settings?.keepCrs !== true
+  )
+    throw new Error("Finish the 30,000-step native bake and import before bundling it.");
+  if (
+    hash(path.join(work, `${id}.ply`)) !== training.plySha256 ||
+    meta.bake?.training?.plySha256 !== training.plySha256
+  )
+    throw new Error("The PLY changed after training or import; do not return a mismatched pair.");
+  for (const source of [prep.capture, meta.bake?.source])
+    if (
+      source?.license !== capture.license ||
+      source?.source !== capture.source ||
+      source?.captureSha256 !== ORIGINAL_CAPTURES[id].captureSha256
+    )
+      throw new Error("Keep the reviewed source, hash, and license in every returned bake.");
+  const archive = path.join(path.dirname(work), `${id}-return.tar.gz`);
+  const partial = `${archive}.partial`;
+  try {
+    run("tar", ["-czf", partial, "-C", work, ...files]);
+    fs.renameSync(partial, archive);
+  } finally {
+    fs.rmSync(partial, { force: true });
+  }
+  return archive;
+}
+
 async function main() {
   const [stage, id, scratch] = process.argv.slice(2);
   const historical = CAPTURES.find((c) => c.id === id);
-  if (!historical || !scratch || !["plan", "prepare", "solve", "train", "import"].includes(stage))
-    throw new Error("Usage: cdx-v3d-mac-bake.mjs <plan|prepare|solve|train|import> <adjara|lihula|toolse|poltsamaa> <scratch-directory>"); // prettier-ignore
+  if (!historical || !scratch || !["plan", "prepare", "solve", "train", "import", "bundle"].includes(stage))
+    throw new Error("Usage: cdx-v3d-mac-bake.mjs <plan|prepare|solve|train|import|bundle> <adjara|lihula|toolse|poltsamaa> <scratch-directory>"); // prettier-ignore
   const capture = {
     ...historical,
     ...ORIGINAL_CAPTURES[id],
@@ -218,6 +265,12 @@ async function main() {
   const work = path.join(path.resolve(scratch), id);
   if (work === repo || work.startsWith(repo + path.sep))
     throw new Error("Choose a scratch directory outside the Splashery repository.");
+  if (stage === "bundle") {
+    const archive = bundleReturn(work, id);
+    console.log(`Return ${archive} to the Operator. It contains the PLY/JSON pair, run records, logs, and COLMAP text model; no original movie or unrelated files.`); // prettier-ignore
+    return;
+  }
+  const stageStart = Date.now();
   const preparation = path.join(work, "preparation.json");
   const dataset = path.join(work, "undistorted");
   const output = path.join(work, `${id}.ply`);
@@ -302,6 +355,7 @@ async function main() {
       ffmpegVersion: run("ffmpeg", ["-version"]).split("\n")[0],
       prepared: new Date().toISOString(),
       settings: MAC_SETTINGS,
+      seconds: (Date.now() - stageStart) / 1000,
     });
     console.log(
       `Prepared 60 native ${width}×${height} PNGs in ${images}. Review them before solving.`,
@@ -365,6 +419,7 @@ async function main() {
         ]),
       ]),
       cameraMetadataSha256: hash(path.join(work, "cameras.json")),
+      seconds: (Date.now() - stageStart) / 1000,
       completed: new Date().toISOString(),
     });
     console.log(
