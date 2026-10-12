@@ -1,26 +1,17 @@
-// Video to 3D (lane Video 3D): the sample scenes (a walk around a statue, a street), each trained from a CC BY video by
-// tools/v3d-sample.mjs (assets/toys/video-3d/<id>.ply and <id>.json): the trained splats and the
-// solved camera path. The videos themselves are not shipped. Credits are in CREDITS.md and
-// tools/assets.json too; each license was checked on its live Wikimedia Commons page on September
-// 30, 2026.
-
-const CC_BY_3 = {
-  license: "CC BY 3.0",
-  licenseUrl: "https://creativecommons.org/licenses/by/3.0/",
-};
-
+// Real, independently trained Video to 3D captures. Source cuts, camera paths, and splats
+// retain the credited source licenses. Full hashes and training history are in tools/assets.json
+// and the sample JSON. Attribution also appears beside the viewer.
 export const SAMPLES = [
   {
     id: "liberty",
     label: "Statue, flown around",
     title: "Statue Of Liberty 4k Drone (14 s from 3:24)",
-    // The source's own length, and the span the sample was made from (the original's file,
-    // assets/toys/video-3d/<id>-source.mp4 and .webm, is that span at 480p).
     length: 228.2,
     span: { start: 204, length: 14 },
     author: "the Dronalist",
     source: "https://commons.wikimedia.org/wiki/File:Statue_Of_Liberty_4k_Drone.webm",
-    ...CC_BY_3,
+    license: "CC BY 3.0",
+    licenseUrl: "https://creativecommons.org/licenses/by/3.0/",
   },
   {
     id: "edinburgh",
@@ -31,6 +22,66 @@ export const SAMPLES = [
     author: "POPtravel",
     source:
       "https://commons.wikimedia.org/wiki/File:Walking_in_EDINBURGH_-_Scotland_(UK)_-_4K_60fps_(UHD).webm",
-    ...CC_BY_3,
+    license: "CC BY 3.0",
+    licenseUrl: "https://creativecommons.org/licenses/by/3.0/",
+  },
+  {
+    id: "adjara",
+    label: "Forest path, walked (compact)",
+    transformationCredit: "Made by Ryan with Codex (GPT-6).",
+    title: "Adjara2025walking-summer-forest (20 seconds from 0 seconds)",
+    length: 118.919,
+    span: { start: 0, length: 20 },
+    author: "Vitaly Zdanevich",
+    source: "https://commons.wikimedia.org/wiki/File:Adjara2025walking-summer-forest.webm",
+    license: "CC BY 4.0",
+    licenseUrl: "https://creativecommons.org/licenses/by/4.0/",
+    checked: "October 12, 2026",
+    sha256: "ccd48b18bb5689cd231bc6bc05b3b02c61e76bc9f9eb88e9d7d17c9332ea6f4b",
+  },
+  {
+    id: "lihula",
+    label: "Ruined courtyard, flown over (compact)",
+    transformationCredit: "Made by Ryan with Codex (GPT-6).",
+    title:
+      "Drone video of ruins of Lihula stronghold, the manor and town (august 2021) (20 seconds from 18 seconds)",
+    length: 52.152,
+    span: { start: 18, length: 20 },
+    author: "Sillerkiil",
+    source:
+      "https://commons.wikimedia.org/wiki/File:Drone_video_of_ruins_of_Lihula_stronghold,_the_manor_and_town_(august_2021).webm",
+    license: "CC0 1.0",
+    licenseUrl: "https://creativecommons.org/publicdomain/zero/1.0/",
+    checked: "October 12, 2026",
+    sha256: "7f3f69fa5f02bbaadf9f46c10ff0aa77a7c8e7be79a23af61d1e437ebc2b4572",
+  },
+  {
+    id: "toolse",
+    label: "Coastal ruins, drone pass (compact)",
+    transformationCredit: "Made by Ryan with Codex (GPT-6).",
+    title: "Toolse castle in Estonia (Fall 2021) (20 seconds from 14 seconds)",
+    length: 114.284,
+    span: { start: 14, length: 20 },
+    author: "Sillerkiil",
+    source: "https://commons.wikimedia.org/wiki/File:Toolse_castle_in_Estonia_(Fall_2021).webm",
+    license: "CC BY-SA 4.0",
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/",
+    checked: "October 12, 2026",
+    sha256: "565aeafb33dc0e0d82312ace949e401510d31551268bce088aab8978c7626125",
+  },
+  {
+    id: "poltsamaa",
+    label: "Castle courtyard, orbited (compact)",
+    transformationCredit: "Made by Ryan with Codex (GPT-6).",
+    title: "Drone video of Põltsamaa river and castle in Estonia (20 seconds from 24 seconds)",
+    length: 50.44,
+    span: { start: 24, length: 20 },
+    author: "Sillerkiil",
+    source:
+      "https://commons.wikimedia.org/wiki/File:Drone_video_of_P%C3%B5ltsamaa_river_and_castle_in_Estonia.webm",
+    license: "CC BY-SA 4.0",
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/",
+    checked: "October 12, 2026",
+    sha256: "9e1c24609d5fe2e7db854c90151b47b13f2e89b75d0e6cf9afdf005e3ed34d49",
   },
 ];

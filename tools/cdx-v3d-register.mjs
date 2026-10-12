@@ -1,0 +1,149 @@
+#!/usr/bin/env node
+// Register the genuine task-40 exports after inspecting them. Source cuts must already
+// exist (cdx-v3d-sample-sources.mjs); this updates only their assets, sample entries, and credits.
+// node tools/cdx-v3d-register.mjs <reviewed-bake-directory>
+import fs from "node:fs";
+import path from "node:path";
+import { createHash } from "node:crypto";
+import { format } from "prettier";
+import { CAPTURES } from "./cdx-v3d-sample-sources.mjs";
+import { SAMPLES } from "../src/video3d/samples.js";
+import { readSplatPly } from "../src/video3d/ply.js";
+
+const directory = process.argv[2];
+if (!directory) throw new Error("Usage: cdx-v3d-register.mjs <reviewed-bake-directory>");
+const sha = (bytes) => createHash("sha256").update(bytes).digest("hex");
+const pretty = (value, parser = "json") =>
+  format(value, { parser, printWidth: 100, proseWrap: "always" });
+const credit = "Made by Ryan with Codex (GPT-6).";
+const records = [];
+const samples = [];
+const rows = [];
+const staged = [];
+
+// Validate and format every export before changing any shipped file or registry entry.
+for (const s of CAPTURES) {
+  const input = path.join(directory, s.id);
+  const ply = fs.readFileSync(`${input}.ply`);
+  const meta = JSON.parse(fs.readFileSync(`${input}.json`, "utf8"));
+  const raw = readSplatPly(ply);
+  if (!(meta.stats?.iters > 0 && raw.count > 0 && meta.cams?.length >= 3))
+    throw new Error(`No learned model and usable camera path: ${s.id}`);
+  for (const key of ["pos", "scales", "quat", "color", "opacity"])
+    if (!raw[key].every(Number.isFinite)) throw new Error(`Nonfinite ${key}: ${s.id}`);
+  if (!raw.scales.every((v) => v > 0) || !raw.opacity.every((v) => v > 0))
+    throw new Error(`Invalid Gaussian size or opacity: ${s.id}`);
+  if (
+    meta.stats.registered !== meta.cams.length ||
+    meta.cams.some(
+      (c) =>
+        ![...c.R, ...c.t, c.f, c.w, c.h, c.time].every(Number.isFinite) ||
+        c.time < 0 ||
+        c.time > s.span.length + 0.05,
+    )
+  )
+    throw new Error(`Invalid or incorrectly timed camera path: ${s.id}`);
+  meta.stats.exportedSplats = raw.count;
+  meta.stats.plyBytes = ply.length;
+  const initialSide = meta.bake?.settings?.trainSide;
+  const exportSide = meta.bake?.exportTrainSide || meta.continuation?.trainSide || initialSide;
+  const finish = meta.continuation
+    ? ` The last continuation completed ${meta.continuation.completedIterations} additional steps at up to ${exportSide} px, reusing the recorded cameras and learned model.`
+    : "";
+  const changed = `Selected one continuous shot, removed sound, made 480p source cuts, solved cameras, and trained real Gaussian splats through Splat.js. Compact model budget, initially ${initialSide} px training.${finish}`;
+  meta.provenance = {
+    transformationCredit: credit,
+    source: s.source,
+    author: s.author,
+    license: s.license,
+    licenseUrl: s.licenseUrl,
+    checked: s.checked,
+    captureUrl: s.captureUrl,
+    captureSha256: s.captureSha256,
+    sourceSpan: s.span,
+    changed,
+  };
+  meta.bake ||= {};
+  meta.bake.originalSourceSpan = s.span;
+  meta.bake.sourceTimeOffset = meta.bake.start || 0;
+  const base = `assets/toys/video-3d/${s.id}`;
+  const json = Buffer.from(await pretty(JSON.stringify(meta)));
+  const sourceMp4 = fs.readFileSync(`${base}-source.mp4`);
+  const sourceWebm = fs.readFileSync(`${base}-source.webm`);
+  const files = {};
+  for (const [file, bytes] of [
+    [`${base}.ply`, ply],
+    [`${base}.json`, json],
+    [`${base}-source.mp4`, sourceMp4],
+    [`${base}-source.webm`, sourceWebm],
+  ]) {
+    if (bytes.length > 20_000_000) throw new Error(`Over 20 MB: ${file}`);
+    files[file] = { bytes: bytes.length, sha256: sha(bytes) };
+  }
+  const defaultBytes = ply.length + json.length;
+  if (defaultBytes > 15_000_000) throw new Error(`Default scene over 15 MB: ${s.id}`);
+  staged.push([`${base}.ply`, ply], [`${base}.json`, json]);
+  samples.push({
+    id: s.id,
+    label: `${s.label} (compact)`,
+    transformationCredit: credit,
+    title: `${s.title} (${s.span.length} seconds from ${s.span.start} seconds)`,
+    length: s.length,
+    span: s.span,
+    author: s.author,
+    source: s.source,
+    license: s.license,
+    licenseUrl: s.licenseUrl,
+    checked: s.checked,
+    sha256: sha(ply),
+  });
+  records.push({
+    id: s.id,
+    transformationCredit: credit,
+    file: `${base}.ply`,
+    path: `${base}.json`,
+    toy: "video-3d",
+    name: s.title,
+    author: s.author,
+    page: s.source,
+    license: s.license,
+    checked: s.checked,
+    captureUrl: s.captureUrl,
+    captureSha256: s.captureSha256,
+    files,
+    defaultBytes,
+    note: `${s.span.length} seconds from ${s.span.start} seconds; ${meta.stats.registered}/${meta.stats.frames} cameras placed; ${meta.stats.iters} completed total iterations; ${raw.count} exported splats. ${changed} Silent MP4 and WebM cuts ship for Show the original. Scene, path, and source cuts retain the source license. No identifiable people, logos, or brands were seen in the inspected shot.`,
+  });
+  rows.push(
+    `- [${s.label}](${s.source}), by ${s.author}: [${s.license}](${s.licenseUrl}), ${s.span.length} seconds from ${s.span.start} seconds. ${meta.stats.registered}/${meta.stats.frames} cameras, ${meta.stats.iters.toLocaleString("en-US")} completed total training steps, and ${raw.count.toLocaleString("en-US")} exported splats. Last export trained at up to ${exportSide} pixels.`,
+  );
+}
+// The unshipped Christ–Roi experiment failed visual review; retire its task-40 draft entries too.
+const ids = new Set([...CAPTURES.map((s) => s.id), "christ-roi"]);
+const all = [...SAMPLES.filter((s) => !ids.has(s.id)), ...samples];
+const asset = JSON.parse(fs.readFileSync("tools/assets.json", "utf8"));
+asset.videoSamples = [...asset.videoSamples.filter((s) => !ids.has(s.id)), ...records];
+const start = "<!-- Codex task 40 new Video to 3D captures -->";
+const end = "<!-- End Codex task 40 new Video to 3D captures -->";
+const section = `${start}\n\nCodex task 40 code (MIT): made by Ryan with Codex (GPT-6).\n\nNew Video to 3D captures, checked on their live Commons pages on October 12, 2026:\n\n${rows.join("\n")}\n\nThe transformations were made by Ryan with Codex (GPT-6). These are real captures, independently solved and trained with Splat.js. Their silent 480p source cuts, camera paths, splats, and video-derived review images retain each source license, including CC BY-SA. The models use compact budgets; every completed iteration, initial bake, and continuation is recorded in the sample JSON. Full high bakes can be reproduced with \`tools/cdx-v3d-sample-batch.mjs --high\`. Sources, changes, byte counts, and SHA-256 hashes of every shipped sample file are recorded in \`tools/assets.json\`. The selected shots were inspected for identifiable people, logos, and brands.\n\n${end}`;
+let credits = fs.readFileSync("CREDITS.md", "utf8");
+if (!credits.includes(start) || !credits.includes(end))
+  throw new Error(
+    "The task-40 credit markers are missing; preserve unrelated credits before registering.",
+  );
+credits =
+  credits.slice(0, credits.indexOf(start)) +
+  section +
+  credits.slice(credits.indexOf(end) + end.length);
+staged.push([
+  "src/video3d/samples.js",
+  await pretty(
+    `// Real, independently trained Video to 3D captures. Source cuts, camera paths, and splats\n// retain the credited source licenses. Full hashes and training history are in tools/assets.json\n// and the sample JSON. Attribution also appears beside the viewer.\nexport const SAMPLES = ${JSON.stringify(all)};\n`,
+    "babel",
+  ),
+]);
+staged.push(["tools/assets.json", await pretty(JSON.stringify(asset))]);
+staged.push(["CREDITS.md", await pretty(credits, "markdown")]);
+for (const [file, bytes] of staged) fs.writeFileSync(file, bytes);
+for (const r of records)
+  console.log(JSON.stringify({ id: r.id, defaultBytes: r.defaultBytes, files: r.files }));

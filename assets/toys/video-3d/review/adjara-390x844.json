@@ -1,0 +1,46 @@
+{
+  "sample": "adjara",
+  "width": 390,
+  "height": 844,
+  "transferBytes": 7419125,
+  "renderer": "Chromium WebGL2 / SwiftShader",
+  "info": {
+    "name": "Forest path, walked (compact)",
+    "uid": "adjara",
+    "splats": 29259,
+    "cams": 24,
+    "custom": false,
+    "stats": {
+      "tier": "offline",
+      "adapter": "google swiftshader",
+      "frames": 24,
+      "registered": 24,
+      "points": 1701,
+      "splats": 29969,
+      "iters": 1042,
+      "psnr": 22.785259602319663,
+      "plyBytes": 2018587,
+      "retried": false,
+      "timedOut": false,
+      "stoppedEarly": false,
+      "start": 0,
+      "end": 20,
+      "rate": 1.2,
+      "trainSide": 640,
+      "exportedSplats": 29679,
+      "psnrIteration": 1042,
+      "psnrTrainSide": 640
+    },
+    "pruned": {
+      "faint": 332,
+      "smear": 0,
+      "giant": 0,
+      "atCamera": 0,
+      "unsupported": 44,
+      "ray": 44,
+      "atPath": 0,
+      "invalid": 0
+    },
+    "clamped": 3
+  }
+}

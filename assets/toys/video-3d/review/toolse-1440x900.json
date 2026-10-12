@@ -1,0 +1,46 @@
+{
+  "sample": "toolse",
+  "width": 1440,
+  "height": 900,
+  "transferBytes": 9089085,
+  "renderer": "Chromium WebGL2 / SwiftShader",
+  "info": {
+    "name": "Coastal ruins, drone pass (compact)",
+    "uid": "toolse",
+    "splats": 28447,
+    "cams": 24,
+    "custom": false,
+    "stats": {
+      "tier": "offline",
+      "adapter": "google swiftshader",
+      "frames": 24,
+      "registered": 24,
+      "points": 2433,
+      "splats": 29908,
+      "iters": 922,
+      "psnr": 30.46257233852886,
+      "plyBytes": 1978943,
+      "retried": false,
+      "timedOut": false,
+      "stoppedEarly": false,
+      "start": 14,
+      "end": 34,
+      "rate": 1.2,
+      "exportedSplats": 29096,
+      "trainSide": 640,
+      "psnrIteration": 922,
+      "psnrTrainSide": 640
+    },
+    "pruned": {
+      "faint": 497,
+      "smear": 0,
+      "giant": 0,
+      "atCamera": 0,
+      "unsupported": 0,
+      "ray": 152,
+      "atPath": 0,
+      "invalid": 0
+    },
+    "clamped": 0
+  }
+}

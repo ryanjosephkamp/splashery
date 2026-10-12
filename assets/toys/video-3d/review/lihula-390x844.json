@@ -1,0 +1,46 @@
+{
+  "sample": "lihula",
+  "width": 390,
+  "height": 844,
+  "transferBytes": 7320487,
+  "renderer": "Chromium WebGL2 / SwiftShader",
+  "info": {
+    "name": "Ruined courtyard, flown over (compact)",
+    "uid": "lihula",
+    "splats": 27905,
+    "cams": 24,
+    "custom": false,
+    "stats": {
+      "tier": "offline",
+      "adapter": "google swiftshader",
+      "frames": 24,
+      "registered": 24,
+      "points": 2689,
+      "splats": 28540,
+      "iters": 1092,
+      "psnr": 29.38861193985684,
+      "plyBytes": 1918831,
+      "retried": false,
+      "timedOut": false,
+      "stoppedEarly": false,
+      "start": 18,
+      "end": 38,
+      "rate": 1.2,
+      "exportedSplats": 28212,
+      "trainSide": 640,
+      "psnrIteration": 1092,
+      "psnrTrainSide": 640
+    },
+    "pruned": {
+      "faint": 303,
+      "smear": 0,
+      "giant": 0,
+      "atCamera": 0,
+      "unsupported": 2,
+      "ray": 2,
+      "atPath": 0,
+      "invalid": 0
+    },
+    "clamped": 0
+  }
+}

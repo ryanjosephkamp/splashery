@@ -5,7 +5,7 @@
 //
 //   python3 -m http.server 4173 --bind 127.0.0.1 &
 //   SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium node tools/v3d-clip.mjs <out.gif> \
-//     --scene=<sample id> --mode=turn|replay|roam|steer [--size=390x844] [--secs=8] [--fps=12]
+//     --scene=<sample id> --mode=turn|replay|roam|steer|walk [--size=390x844] [--secs=8] [--fps=12]
 //
 // turn: the camera swings around the scene. replay: the tap (Replay flight) flies the video's
 // camera path. roam: the flight, then the camera turns away from where the flight ended. steer
@@ -55,6 +55,7 @@ const res = await page.evaluate(
     globalThis.__v3dNoPrune = !s.prune;
     await app.chooseToy("video-3d");
     if (s.scene) await app.setToyOptions({ source: s.scene });
+    if (s.mode === "walk") await app.setToyOptions({ navigation: "walk" });
     app.setLook({ background: s.bg });
     player.opts.idleDelay = 1e9;
     player.idle.weight = 0;
@@ -91,6 +92,12 @@ const res = await page.evaluate(
     let roamFrom = null;
     const frame = async () => {
       const f = n / Math.max(1, total - 1);
+      if (s.mode === "walk") {
+        window.dispatchEvent(new KeyboardEvent("keydown", { key: "w" }));
+        window.dispatchEvent(
+          new KeyboardEvent(f > 0.4 && f < 0.6 ? "keydown" : "keyup", { key: "d" }),
+        );
+      }
       if (s.mode === "turn") {
         const yaw = home.yaw + s.swing * Math.sin(f * Math.PI * 2);
         cam.cur = { ...home, yaw, pitch: home.pitch + 0.15 * Math.sin(f * Math.PI * 4) };
@@ -123,7 +130,13 @@ const res = await page.evaluate(
           cam.tgt = { ...cam.cur };
         }
       }
-      pending = step;
+      // Walking caps a resumed tab's time step. Subdivide a low-frame-rate review clip so its
+      // movement still covers the advertised number of seconds.
+      if (s.mode === "walk") {
+        const parts = Math.ceil(step / 0.05);
+        for (let i = 0; i < parts; i++) for (const fn of handlers) fn(step / parts);
+        pending = 0;
+      } else pending = step;
       await stage.captureFrame();
       pending = 0;
       const c = await stage.captureFrame();
@@ -135,7 +148,7 @@ const res = await page.evaluate(
     };
     pending = 0.5;
     await stage.captureFrame();
-    if (s.mode !== "turn") {
+    if (s.mode !== "turn" && s.mode !== "walk") {
       for (let i = 0; i < 4; i++) await frame();
       player.act(null);
     }
