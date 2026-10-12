@@ -76,6 +76,14 @@ Model: Sonnet 5.5 (claude-sonnet-5-5), high effort. October 11, 2026. Branch `cl
    `tools/site-front-door.mjs` already turns that into `../playground/#s=…` in the staged build, so
    no front-door change was needed. `tests/st5.spec.mjs` builds the staged layout and clicks a card.
 4. **Mirror report**: below, under "For the Operator".
+5. **Tests** (October 12, 2026): `tests/st5.spec.mjs` 5 of 5. With st\*, site, spg, tpg and smoke
+   (179 tests, two workers on llvmpipe): 175 passed, 4 failed under load (smoke 156 and 734, spg
+   138, st4 511); all 4 passed when rerun alone. Prettier and `site-build --check` clean; main
+   merged in.
+6. **Cards**: `st5-features-390x844`, `st5-fixes-390x844`, `st5-fixes-1440x900` on Effect review
+   page 2, lane `SiteR5`, Sonnet 5.5 (before and after side by side; no republish). Screenshots
+   `tests/screenshots/st5-whats-new-{features,fixes}-{390x844,1440x900}.png`. Owner's marks: not yet
+   read.
 
 ## Notes
 
