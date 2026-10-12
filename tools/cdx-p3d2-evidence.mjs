@@ -130,11 +130,20 @@ fs.writeFileSync(path.join(out, "angles.json"), JSON.stringify(angles, null, 2))
 const browser = await chromium.launch({ executablePath: process.env.SPLASHERY_CHROMIUM });
 try {
   const page = await browser.newPage();
-  for (const [name, rows] of [
-    ["before", before],
-    ["after", after],
+  const worstViews = (rows) =>
+    ["sharp", "splats"].flatMap((view) =>
+      rows
+        .filter((r) => r.view === view)
+        .sort((a, b) => b.holes + b.tears - a.holes - a.tears)
+        .slice(0, 6),
+    );
+  const baselineWorst = worstViews(before);
+  const afterByPose = new Map(after.map((r) => [key(r), r]));
+  for (const [name, worst] of [
+    ["before", baselineWorst],
+    ["after-baseline", baselineWorst.map((r) => afterByPose.get(key(r)))],
+    ["after", worstViews(after)],
   ]) {
-    const worst = [...rows].sort((a, b) => b.holes + b.tears - a.holes - a.tears).slice(0, 12);
     const images = worst.map((r) => ({
       ...r,
       image: `data:image/png;base64,${fs.readFileSync(path.join(root, r.directory, r.file)).toString("base64")}`,
