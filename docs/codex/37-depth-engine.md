@@ -39,12 +39,12 @@ worked out ahead of time).
    models. For each, record the license **from its live model page**, the file size and the speed.
    Only Apache-2.0, MIT, BSD or CC BY weights can ship; note any NC or custom license and leave it
    out.
-5. **Rule check (B3 in `builders/RULES.md`).** A new runtime bundle (for example ONNX Runtime Web's
-   WebGPU build) or new model weights over 2 MB need the owner's yes before they ship. Do the
-   benchmark in your branch, keep any new vendored file in its own commit titled "Needs the owner's
-   OK: …", list it in `LICENSES.md` in that same commit, and say in the PR exactly what it adds and
-   how big it is. Everything else (the worker, the settings, the faster paths on the current files)
-   goes in normal commits.
+5. **Approved by the owner (October 12, 2026).** A new runtime bundle (for example ONNX Runtime
+   Web's WebGPU or WebNN build) and better model weights may ship even over 2 MB (B3 in
+   `builders/RULES.md`), when their license is Apache-2.0, MIT or BSD, checked on the live source
+   page. Vendor them in `vendor/`, load them only when a 2D-to-3D toy needs depth, keep the WASM
+   path as the fallback, list each in `LICENSES.md`, and say in the PR exactly what each file adds
+   and how big it is. Anything under another license (NC, custom, GPL) stays out: report it only.
 6. **Tests.** `tests/cdx-depth*.spec.mjs`: the worker answers for a photo and for a clip frame; the
    page stays responsive (no long task over 200 ms) while Photo to 3D works out depth; the fallback
    path runs when WebGPU is missing. Keep green: `p3d`, `phf`, `phf2`, `phf-engine`, `smd-photo`,
