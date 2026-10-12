@@ -239,14 +239,67 @@ Photo-scanned splat files (`.sog`) load a different way: a `kind: "captured"` ca
 at the file (`url`, and a lighter `urlWeak` for phones) and carries its `credit`. The Bee in
 `src/toys.js` is an example. Those toys get moving parts through `src/rigs.js`.
 
-### Baked splats: coming with the engine PR
+### Baked splats
 
-The owner's Baked engine lane is building a compact baked-splat format (rotation, three sizes,
-color, opacity, part) that loads through the Kit at the device's budget, with parts on the same
-one-entity path as above. It comes with a converter (`tools/port-convert.mjs`) and a checker
-(`tools/port-check.mjs`). Until that PR merges, don't invent a format: bake with the Real Objects
-tool, or hand back your splats as a Workshop package ([TOY-PACKAGE.md](TOY-PACKAGE.md)). The
-Operator will update this section when the engine PR lands.
+This is the path for splats you make offline (Blender, Python, a Gaussian splat trainer). A toy that
+uses it is still a kit toy: parts, effects, the motion system, and scene saving work as for any
+recipe. The format is "BKD1" (`src/baked.js`): 18 bytes a splat, with each splat's rotation, three
+sizes, color, opacity, and part id, in chunks. The numbers are in `docs/handoff/BakedEngine.md`.
+
+1. **Convert** your 3DGS PLY (and its parts sidecar) into tiers with the converter:
+
+   ```sh
+   node tools/port-convert.mjs <in.ply> --out assets/toys/<id> --id <id> --tiers 100000,400000 --gzip
+   ```
+
+   It writes `manifest.json` and the tier files, and refuses a PLY that isn't valid. Fill in the
+   manifest's `credit`. The PLY layout, the sidecar, and every option are in
+   [TOY-PACKAGE.md](TOY-PACKAGE.md) and at the top of `tools/port-convert.mjs`.
+
+2. **Load** it in `prepare()`. Its third argument carries the toy's splat budget, so the loader
+   fetches only the tier that fits and only the chunks it needs:
+
+   ```js
+   import { loadBaked, addBaked } from "../baked.js";
+
+   const MANIFEST = new URL("../../assets/toys/<id>/manifest.json", import.meta.url);
+   let ASSET = null;
+
+   // in the recipe:
+   async prepare(_o, _help, ctx) {
+     ASSET = await loadBaked(MANIFEST, { budget: ctx?.count });
+   },
+   ```
+
+3. **Add** it in `build()`, then move its parts in `drive()` by name:
+
+   ```js
+   build(k) {
+     addBaked(k, ASSET);            // each manifest part becomes a kit part, with its pivot and axis
+   },
+   drive(t, c, out) {
+     out.parts.lid = { angle: -1.85 * c.open };
+   },
+   ```
+
+   `addBaked(k, asset, options)` takes `parts` (`"auto"`, an array, or a function from the file's
+   part id), `quat`, `pos`, and `scale` (to place the asset), `sizeMul`, `color(c, i, filePart)` to
+   recolor, and `kind`, `params`, and `pattern` as `k.cloud` does. It returns the cloud item. Add
+   kit shapes beside it (water, ink, a shadow) the usual way.
+
+4. **Check** it: `node tools/port-check.mjs <folder>` for a package (see
+   [TOY-PACKAGE.md](TOY-PACKAGE.md)), and `node tools/check-packs.mjs <pack>` for a toy in a pack.
+
+How a budget picks a tier: the largest tier that fits is used whole, and below the smallest tier,
+that tier is thinned to the budget, the same splats every time for the same budget. So give the
+smallest tier a size you would be happy to see on a weak phone.
+
+The repo's example is the **Baked chest** (labs, the Lab shelf): `src/packs/baked-demo.js` is its
+recipe, `tools/bkd-bake-chest.mjs` bakes it, and `assets/toys/baked-chest/` holds the result in two
+tiers (30,000 and 100,001 splats, 1.8 MB together). A tap swings the lid open on its hinge.
+
+Only degree-0 color is kept: a baked splat's color doesn't change with the view, as with all kit
+splats, so bake the light into the color.
 
 ## The effect quality bar
 

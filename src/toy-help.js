@@ -2029,6 +2029,11 @@ export const TOY_HELP = {
     about:
       "Every element glows in its own colors. Its electrons jump up and fall back, each fall giving off light of one exact wavelength, so an element's light split by a prism is a few sharp lines, as unique as a fingerprint. These are the strong visible lines of sixteen elements measured by NIST, brightness from NIST's relative intensities.\n\nThe prism bends each color by Snell's law, from the glass maker's formula for its index: blue bends most. A grating (a CD, a DVD or a slide) sends each color off where d sin θ = m λ: red bends most, in several orders. Tap to change the lamp and every ray moves. Home spectrometer: hold an old CD or DVD near your camera under a fluorescent lamp, find the rainbow in it and tap “Use my camera”. It calibrates on mercury's 436 and 546 nm lines. Simplified: screens can't show pure spectral colors, and a real lamp's line strengths depend on its pressure and heat.",
   },
+  "baked-chest": {
+    howTo: "Tap to open or close the lid.",
+    about:
+      "This chest was made ahead of time and stored as ready-made Gaussian splats, the way a detailed model trained or baked in other software arrives. Each splat keeps its own place, three sizes, a turn, a color, an opacity, and the piece it belongs to, packed into 18 bytes. The page loads the size that fits your device: 30,000 splats or 100,001, or fewer still on a slow one.\n\nTap to open the lid. It is its own piece, so it swings on its hinge as one solid part and shows the gold inside.",
+  },
   "fluid-lab": {
     howTo:
       "Tap to pour, drop a splash, or blow on the candle or the cup. Pick a Scene and a Liquid in the Toy tab.",
