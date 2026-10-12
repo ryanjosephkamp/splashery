@@ -8,7 +8,8 @@
 //
 // With no ids it takes every picture in STILLS. A picture may set toy options first (`options`,
 // which `app.setToyOptions` takes), set controls (`set`, eased snap), or wait for a toy that loads
-// something (`wait`, milliseconds). JPEG files come from pngjs and jpeg-js (devDependencies).
+// something (`wait`, milliseconds), or tap the toy once (`tap: true`, then `tapWait` milliseconds for
+// what the tap does, such as a book opening, and `zoom` to back the camera off). JPEG files come from pngjs and jpeg-js (devDependencies).
 
 import { chromium } from "@playwright/test";
 import fs from "node:fs";
@@ -30,7 +31,8 @@ export const STILLS = {
   "molecule-viewer": {},
   earthquakes: {},
   "night-sky": {},
-  "volume-viewer": {},
+  // (The walnut is cut open: the sweep control puts the cut face partway down.)
+  "volume-viewer": { set: { sweep: 0.2 } },
   "point-clouds": {},
   hurricane: {},
   "data-in-3d": {},
@@ -45,7 +47,7 @@ export const STILLS = {
   // Chapter 9
   "qr-code": {},
   "qr-picture": { wait: 5000 },
-  "your-book": { wait: 5000 },
+  "your-book": { wait: 5000, tap: true, tapWait: 4000, zoom: 1.4 }, // tapped, so the cover is open
   // Chapter 10
   "model-splats": { wait: 5000 },
   "splat-toolkit": { wait: 5000 },
@@ -81,9 +83,14 @@ for (const id of ids) {
         player.motion.setControl(key, Number(value), { snap: true });
       player.idle.weight = 0;
       await new Promise((r) => setTimeout(r, s.wait || 2500));
+      if (s.tap) {
+        player.act(null);
+        await new Promise((r) => setTimeout(r, s.tapWait || 2500));
+      }
       player.stage.setFixedSize([size, size]);
       player.camera.cur = { ...player.camera.home };
-      player.camera.tgt = { ...player.camera.home };
+      if (s.zoom) player.camera.cur.distance *= s.zoom; // (backs the camera off, as an open book is wide)
+      player.camera.tgt = { ...player.camera.cur };
       for (let i = 0; i < 6; i++) await player.stage.captureFrame();
       const shot = await player.stage.captureFrame();
       player.stage.setFixedSize(null);

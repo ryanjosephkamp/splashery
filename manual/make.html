@@ -47,18 +47,46 @@
         </button>
         <nav class="outline-panel" id="manual-contents" aria-label="The manual's chapters" hidden>
           <ol>
-            <li><a href="index.html">Contents</a></li>
-            <li><a href="splat.html">Chapter 1: What a splat is</a></li>
-            <li><a href="toy.html">Chapter 2: How a toy is built</a></li>
-            <li><a href="language.html">Chapter 3: The splat equation language</a></li>
-            <li><a href="gallery.html">Chapter 4: A gallery of programs</a></li>
-            <li><a href="pictures.html">Chapter 5: Pictures, screens, and your own input</a></li>
-            <li><a href="moving.html">Chapter 6: Moving things</a></li>
-            <li><a href="data.html">Chapter 7: Real data as splats</a></li>
-            <li><a href="photo3d.html">Chapter 8: Photos and video into 3D</a></li>
-            <li><a href="codes.html">Chapter 9: Codes and pages</a></li>
+            <li><a href="index.html" rel="noopener" target="_blank">Contents</a></li>
             <li>
-              <a href="make.html" aria-current="page">Chapter 10: Make your own</a>
+              <a href="splat.html" rel="noopener" target="_blank">Chapter 1: What a splat is</a>
+            </li>
+            <li>
+              <a href="toy.html" rel="noopener" target="_blank">Chapter 2: How a toy is built</a>
+            </li>
+            <li>
+              <a href="language.html" rel="noopener" target="_blank"
+                >Chapter 3: The splat equation language</a
+              >
+            </li>
+            <li>
+              <a href="gallery.html" rel="noopener" target="_blank"
+                >Chapter 4: A gallery of programs</a
+              >
+            </li>
+            <li>
+              <a href="pictures.html" rel="noopener" target="_blank"
+                >Chapter 5: Pictures, screens, and your own input</a
+              >
+            </li>
+            <li>
+              <a href="moving.html" rel="noopener" target="_blank">Chapter 6: Moving things</a>
+            </li>
+            <li>
+              <a href="data.html" rel="noopener" target="_blank">Chapter 7: Real data as splats</a>
+            </li>
+            <li>
+              <a href="photo3d.html" rel="noopener" target="_blank"
+                >Chapter 8: Photos and video into 3D</a
+              >
+            </li>
+            <li>
+              <a href="codes.html" rel="noopener" target="_blank">Chapter 9: Codes and pages</a>
+            </li>
+            <li>
+              <a href="make.html" aria-current="page" rel="noopener" target="_blank"
+                >Chapter 10: Make your own</a
+              >
               <ol class="outline-sub" aria-label="In this chapter">
                 <li><a href="#five-ways">Five ways to make your own</a></li>
                 <li><a href="#roll-one-and-open-one">Roll one and open one</a></li>
@@ -69,24 +97,38 @@
                 <li><a href="#try-it-10">Where to try it</a></li>
               </ol>
             </li>
-            <li><a href="more.html">What else Splashery does now</a></li>
-            <li><a href="unique.html">What Splashery can do that other splat tools can't</a></li>
-            <li><a href="built.html">How Splashery is built</a></li>
-            <li><a href="share.html">Share links and QR codes</a></li>
-            <li><a href="experiments.html">Open questions: other choices, not tried yet</a></li>
-            <li><a href="later.html">What comes later: Code a toy</a></li>
-            <li><a href="glossary.html">Glossary</a></li>
-            <li><a href="reading.html">Further reading</a></li>
-            <li><a href="references.html">References</a></li>
-            <li><a href="card.html">Quick reference</a></li>
+            <li>
+              <a href="more.html" rel="noopener" target="_blank">What else Splashery does now</a>
+            </li>
+            <li>
+              <a href="unique.html" rel="noopener" target="_blank"
+                >What Splashery can do that other splat tools can't</a
+              >
+            </li>
+            <li><a href="built.html" rel="noopener" target="_blank">How Splashery is built</a></li>
+            <li>
+              <a href="share.html" rel="noopener" target="_blank">Share links and QR codes</a>
+            </li>
+            <li>
+              <a href="experiments.html" rel="noopener" target="_blank"
+                >Open questions: other choices, not tried yet</a
+              >
+            </li>
+            <li>
+              <a href="later.html" rel="noopener" target="_blank">What comes later: Code a toy</a>
+            </li>
+            <li><a href="glossary.html" rel="noopener" target="_blank">Glossary</a></li>
+            <li><a href="reading.html" rel="noopener" target="_blank">Further reading</a></li>
+            <li><a href="references.html" rel="noopener" target="_blank">References</a></li>
+            <li><a href="card.html" rel="noopener" target="_blank">Quick reference</a></li>
           </ol>
         </nav>
       </div>
       <nav class="pager no-print" aria-label="Previous and next chapter, top">
-        <a class="pager-prev" rel="prev" href="codes.html"
+        <a class="pager-prev" rel="prev noopener" href="codes.html" target="_blank"
           ><span class="pager-word">← Previous</span
           ><span class="pager-title">Chapter 9: Codes and pages</span></a
-        ><a class="pager-next" rel="next" href="more.html"
+        ><a class="pager-next" rel="next noopener" href="more.html" target="_blank"
           ><span class="pager-word">Next →</span
           ><span class="pager-title">What else Splashery does now</span></a
         >
@@ -186,9 +228,10 @@
       <h3 id="the-studio">The Studio</h3>
       <p>
         <b>What it is.</b> The Studio is a shelf of tools that turn other things into splats, on
-        your device. Each takes a file you open, does its work in a worker, and shows the result as
-        the toy's splats. They are behind the labs switch. Nothing is uploaded, and the libraries a
-        tool needs (a PDF reader, a depth model, a laz decoder) are loaded only when its toy opens.
+        your device. Each takes a file you open, does its work on your device (some tools in a
+        worker), and shows the result as the toy's splats. They are behind the labs switch. Nothing
+        is uploaded, and the libraries a tool needs (a PDF reader, a depth model, a laz decoder) are
+        loaded only when its toy opens.
       </p>
       <div class="table-wrap">
         <table>
@@ -363,16 +406,13 @@
       <figure>
         <div class="shots two">
           <div>
-            <img
-              src="img/r7b-model-splats.jpg"
-              alt="A 3D model turned into splats, shown with a wire mesh beside it"
-            />
+            <img src="img/r7b-model-splats.jpg" alt="A 3D model of a burger turned into splats" />
             <p class="shot-label">Model to splats</p>
           </div>
           <div>
             <img
               src="img/r7b-splat-toolkit.jpg"
-              alt="The Splat toolkit showing a splat file with its numbers"
+              alt="Two views of a cactus splat scene on the Splat toolkit's stage"
             />
             <p class="shot-label">Splat toolkit</p>
           </div>
@@ -542,10 +582,10 @@
 
       <!-- NAV:BOTTOM:START (written by manual/build-pages.mjs; do not edit by hand) -->
       <nav class="pager no-print" aria-label="Previous and next chapter, bottom">
-        <a class="pager-prev" rel="prev" href="codes.html"
+        <a class="pager-prev" rel="prev noopener" href="codes.html" target="_blank"
           ><span class="pager-word">← Previous</span
           ><span class="pager-title">Chapter 9: Codes and pages</span></a
-        ><a class="pager-next" rel="next" href="more.html"
+        ><a class="pager-next" rel="next noopener" href="more.html" target="_blank"
           ><span class="pager-word">Next →</span
           ><span class="pager-title">What else Splashery does now</span></a
         >

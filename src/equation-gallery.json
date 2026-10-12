@@ -30,7 +30,7 @@
     "id": "klein-figure-eight",
     "title": "Figure-eight Klein bottle",
     "group": "Classic surfaces",
-    "about": "This immersed Klein bottle crosses itself where its neck passes through the body.",
+    "about": "This immersed Klein bottle is a figure-eight tube that crosses itself along a ring.",
     "program": "x = (2+cos(u/2)sin(v)-sin(u/2)sin(2v))cos(u)\ny = sin(u/2)sin(v)+cos(u/2)sin(2v)\nz = (2+cos(u/2)sin(v)-sin(u/2)sin(2v))sin(u)\nu = 0 .. 2pi\nv = 0 .. 2pi\nhue = v/(2pi)\nsize = 0.07\ncount = 10000",
     "source": "https://en.wikipedia.org/wiki/Klein_bottle",
     "loops": true
@@ -48,7 +48,7 @@
     "id": "enneper-surface",
     "title": "Enneper surface",
     "group": "Classic surfaces",
-    "about": "A simple polynomial surface curls into three spreading lobes.",
+    "about": "A simple polynomial surface curls into spreading lobes.",
     "program": "x = u-u^3/3+uv^2\ny = v-v^3/3+vu^2\nz = u^2-v^2\nu = -1.6 .. 1.6\nv = -1.6 .. 1.6\nhue = 0.55+0.1sin(4u)\nsize = 0.07\ncount = 10000",
     "source": "https://en.wikipedia.org/wiki/Enneper_surface",
     "loops": true
@@ -66,7 +66,7 @@
     "id": "helicoid",
     "title": "Helicoid",
     "group": "Classic surfaces",
-    "about": "A ruled helicoid spirals upward like a ramp with no outer rim.",
+    "about": "A finite ruled helicoid patch winds like a ramp around the Z axis, with a helical edge on its outer rim.",
     "program": "x = vcos(u)\ny = vsin(u)\nz = 0.18u\nu = -3pi .. 3pi\nv = -1 .. 1\nhue = 0.55+0.12sin(u)\nsize = 0.035\ncount = 7000",
     "source": "https://en.wikipedia.org/wiki/Helicoid",
     "loops": true
@@ -91,9 +91,9 @@
   },
   {
     "id": "lissajous-knot",
-    "title": "Lissajous knot",
+    "title": "Lissajous curve",
     "group": "Curves as tubes or beads",
-    "about": "Three harmonics trace a closed, crossing space curve with a fine bead tube.",
+    "about": "Four frequencies (2, 3, 4, and 7) trace a closed space curve that crosses itself, with a fine bead tube.",
     "program": "x = sin(3u+t)+0.16cos(7u)\ny = 0.12cos(2u)\nz = cos(4u+t)+0.16sin(7u)\nu = 0 .. 2pi\nv = 0 .. 1\nhue = u/(2pi)\nsize = 0.045\ncount = 3200",
     "source": "https://en.wikipedia.org/wiki/Lissajous_curve",
     "loops": true
@@ -147,7 +147,7 @@
     "id": "slinky",
     "title": "Slinky coil",
     "group": "Curves as tubes or beads",
-    "about": "A spring winds upward in eight turns with a narrow tube around its wire.",
+    "about": "A spring winds upward in eight turns as a narrow ribbon.",
     "program": "x = (1+0.08v)cos(u)\ny = 0.1u+0.08vcos(u/8)\nz = (1+0.08v)sin(u)\nu = 0 .. 16pi\nv = -1 .. 1\nhue = u/(16pi)\nsize = 0.035\ncount = 5000",
     "source": "https://en.wikipedia.org/wiki/Helix",
     "loops": true
@@ -300,7 +300,7 @@
     "id": "orbiting-rings",
     "title": "Orbit with a fast wave",
     "group": "Things in motion",
-    "about": "One loop circles the center while a smaller wave on it turns the other way three times as fast.",
+    "about": "One loop circles the center while a smaller wave on it, with three times as many crests around the loop, turns the other way.",
     "program": "x = cos(u+t)+0.35cos(3u-t)\ny = 0.35sin(3u-t)\nz = sin(u+t)\nu = 0 .. 2pi\nv = 0 .. 1\nhue = u/(2pi)\nsize = 0.045\ncount = 4500",
     "source": "https://en.wikipedia.org/wiki/Parametric_equation",
     "loops": true

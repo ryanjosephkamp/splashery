@@ -223,8 +223,9 @@ test.describe("the two new chapters", () => {
     const i = files.indexOf("unique.html");
     expect(files.slice(i + 1, i + 3)).toEqual(["built.html", "share.html"]);
     const cover = read("index.html");
-    expect(cover).toContain('href="built.html">How Splashery is built');
-    expect(cover).toContain('href="share.html">Share links and QR codes');
+    // (Every manual link opens in a new tab since Manual r8, so the links carry target and rel.)
+    expect(cover).toMatch(/href="built\.html"[^>]*>How Splashery is built/);
+    expect(cover).toMatch(/href="share\.html"[^>]*>Share links and QR codes/);
     const all = read("all.html");
     expect(all.indexOf('id="built"')).toBeGreaterThan(all.indexOf('id="unique"'));
     expect(all.indexOf('id="share"')).toBeGreaterThan(all.indexOf('id="built"'));
