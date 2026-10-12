@@ -1,6 +1,6 @@
 // Sports balls. Generic designs only: classic panels, seams and stitching,
 // no logos or league marks. Seams and stitches are kept out of the pattern
-// layer, so a ball in the colours of a flag keeps its seams. Tap a ball to
+// layer, so a ball in the colors of a flag keeps its seams. Tap a ball to
 // make it hop; Move > Bounce keeps it bouncing.
 
 import {
@@ -34,8 +34,8 @@ const keep = (c, size) => ({ c, keep: true, size });
 const pebble = (c, col, amount = 0.08, f = 38) =>
   shade(col, 1 - amount * 0.5 + amount * c.noise(c.lp[0] * f, c.lp[1] * f, c.lp[2] * f));
 
-// Soft studio light baked into the colours (splats are unlit): a key light
-// from the upper left and a highlight where it glints towards the home view.
+// Soft studio light baked into the colors (splats are unlit): a key light
+// from the upper left and a highlight where it glints toward the home view.
 // Materials read from this, not from random speckle.
 const LIGHT = unit([-0.35, 0.8, 0.5]);
 const VIEW = unit([0.5, 0.28, 0.82]);
@@ -98,7 +98,7 @@ function pebbled(c, f, depth = 0.5) {
   };
 }
 
-// A pebbled, lit surface colour.
+// A pebbled, lit surface color.
 function grip(
   c,
   col,
@@ -159,8 +159,8 @@ function sub(a, b) {
   return [a[0] - b[0], a[1] - b[1], a[2] - b[2]];
 }
 
-// A plain ball body with a darker core for Slice. Colour noise is low: the
-// material comes from the colour function.
+// A plain ball body with a darker core for Slice. Color noise is low: the
+// material comes from the color function.
 // The shell is part "ball" and its inside part "core", so a tap can spin
 // it (see "Real throws and bounces").
 function body(k, color, opts = {}) {
@@ -194,7 +194,7 @@ function poleCap(k, s, a = 0.14) {
 // Leather ball with stitched seam (baseball, softball).
 function stitchedBall(k, leather, stitch, { a = 0.72, n = 108 } = {}) {
   const seam = seamCurve(a);
-  // Its colours and what it is (for the light): groove, stitch, band or
+  // Its colors and what it is (for the light): groove, stitch, band or
   // leather.
   const part = (c) => {
     const s = seam(c.ln);
@@ -224,7 +224,7 @@ function stitchedBall(k, leather, stitch, { a = 0.72, n = 108 } = {}) {
 }
 
 // Truncated icosahedron faces (soccer ball): 12 pentagon and 20 hexagon
-// centres; a point belongs to the face its ray meets first.
+// centers; a point belongs to the face its ray meets first.
 function soccerFaces() {
   const pent = [];
   for (const s1 of [-1, 1])
@@ -237,14 +237,14 @@ function soccerFaces() {
   const ip = 1 / PHI;
   for (const s1 of [-1, 1])
     for (const s2 of [-1, 1]) {
-      // Face centres of the icosahedron above (its dual dodecahedron).
+      // Face centers of the icosahedron above (its dual dodecahedron).
       hex.push(
         unit([0, s1 * PHI, s2 * ip]),
         unit([s2 * ip, 0, s1 * PHI]),
         unit([s1 * PHI, s2 * ip, 0]),
       );
     }
-  // Face distances from the centre for edge length 1.
+  // Face distances from the center for edge length 1.
   const faces = [
     ...pent.map((n) => ({ n, h: 2.3274, pent: true })),
     ...hex.map((n) => ({ n, h: 2.2673, pent: false })),
@@ -351,7 +351,7 @@ function segDist(px, py, [x0, y0, x1, y1]) {
   const t = clamp(((px - x0) * dx + (py - y0) * dy) / (dx * dx + dy * dy || 1), 0, 1);
   return Math.hypot(px - x0 - dx * t, py - y0 - dy * t);
 }
-// Distance from (x, y) to the strokes of a number centred at the origin,
+// Distance from (x, y) to the strokes of a number centered at the origin,
 // in units where a digit is `h` tall.
 function numberDist(text, x, y, h) {
   const s = h / 2;
@@ -432,7 +432,7 @@ const arc = (f, peak) => peak * 4 * f * (1 - f);
 // little bigger to close the gaps the far side filled, and its inside
 // ("core", for Slice) hides. The whole toy squashes on the floor (body).
 
-// The home view: across the screen (to the right) and towards the camera,
+// The home view: across the screen (to the right) and toward the camera,
 // both along the floor.
 const ACROSS = unit([VIEW[2], 0, -VIEW[0]]);
 const TOWARD = unit([VIEW[0], 0, VIEW[2]]);
@@ -442,14 +442,14 @@ const CULL_SIZE = 1.15;
 const add3 = (a, b) => [a[0] + b[0], a[1] + b[1], a[2] + b[2]];
 const scale3 = (a, s) => [a[0] * s, a[1] * s, a[2] * s];
 const lerp3 = (a, b, t) => [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t, a[2] + (b[2] - a[2]) * t]; // prettier-ignore
-// A point on the floor plan: x across the screen, z towards the camera, y up.
+// A point on the floor plan: x across the screen, z toward the camera, y up.
 const at3 = (x, y = 0, z = 0) => add3(add3(scale3(ACROSS, x), scale3(TOWARD, z)), [0, y, 0]);
 // The axis a ball rolls about when it moves along d (topspin for d).
 const rollAxis = (d) => unit(cross(UP, d));
 const easeOut = (x) => 1 - (1 - x) * (1 - x);
 const EASE = { linear: (x) => x, out: easeOut, inout: easeIO, in: (x) => x * x };
 // Each ball's gravity, in its own radii per second squared: a slowed-down
-// real g over the real ball's radius (metres), so a big ball falls slowly
+// real g over the real ball's radius (meters), so a big ball falls slowly
 // for its size and a small one snaps.
 const grav = (r) => 1.4 / r;
 const KICK = [
@@ -703,7 +703,7 @@ function showBall(out, { p, q, squash }, more = {}) {
   // A see-through rim shell (dark balls) only moves: it looks the same turned.
   out.parts.rim = { offset: p };
   if (squash) {
-    // The squash widens the toy about its centre: keep the ball's place.
+    // The squash widens the toy about its center: keep the ball's place.
     const k = 1 + 0.5 * squash;
     const o = [p[0] / k, p[1], p[2] / k];
     out.parts.ball.offset = out.parts.core.offset = out.parts.rim.offset = o;
@@ -711,10 +711,10 @@ function showBall(out, { p, q, squash }, more = {}) {
   }
 }
 
-// Spinning a glossy ball. Its light is baked into its colours, so a copy
+// Spinning a glossy ball. Its light is baked into its colors, so a copy
 // that spins would carry its highlight round with it (a rolling pool ball
 // would look like glass). While it moves it shows instead an unlit copy that
-// spins ("spin": built tiny at the centre, so it always sorts behind, and
+// spins ("spin": built tiny at the center, so it always sorts behind, and
 // grown to size by its part) under a fixed layer of light ("light": a
 // see-through shell that darkens and brightens what is under it just as
 // the baked light did: out = a * base + b). At rest the ball is itself.
@@ -723,7 +723,7 @@ function showBall(out, { p, q, squash }, more = {}) {
 const SPIN_R = 0.04;
 const SPIN_SCALE = 1 / SPIN_R;
 // How many light splats cover a point, as a power (calibrated on renders
-// against the ball at rest); more towards the outline, where the eye looks
+// against the ball at rest); more toward the outline, where the eye looks
 // along the layer.
 const LIGHT_OVERLAP = 3.1;
 const lightOverlap = (n) => LIGHT_OVERLAP * (1 + 1.5 * (1 - Math.max(0, dot(n, VIEW))) ** 2);
@@ -880,7 +880,7 @@ const BASKETBALL_HAND = (() => {
 // The basketball's robot hand: the index finger points up under the ball,
 // the other fingers curl into a fist with the thumb across them, and the
 // wrist and forearm come up from below. It is seen from the palm side,
-// turned a little towards the thumb. Its own frame: x along the knuckles towards the
+// turned a little toward the thumb. Its own frame: x along the knuckles toward the
 // thumb, y up the finger, z out of the palm; sizes in ball radii (times
 // HAND_SIZE). It is built at half size inside the ball's sphere (the toy is
 // framed by all its splats) and grown and moved into place by its parts,
@@ -893,7 +893,7 @@ const HAND_Q = (() => {
 const HAND_SIZE = 1.12;
 const handDir = (l) => quatRotate(HAND_Q, scale3(l, HAND_SIZE));
 const HAND_BUILT = 0.5;
-// The hand's knuckle (its origin) as built: the hand centred in the ball.
+// The hand's knuckle (its origin) as built: the hand centered in the ball.
 const HAND_AT = scale3(handDir([0.14, 0.52, 0]), HAND_BUILT);
 const handB = (l) => add3(HAND_AT, scale3(handDir(l), HAND_BUILT));
 // The index finger's joints up from its knuckle, its length and its joints
@@ -1078,7 +1078,7 @@ const TENNIS_HITS = plan(TN_G, TENNIS).segs.filter((s) => s.L.hit !== undefined)
 // land at its spot, where it takes a dead little bounce (0.5 of its speed).
 const CURVE_AXIS = unit(add3(scale3(ACROSS, -0.87), scale3(UP, 0.5)));
 const BASEBALL = [
-  // The wind-up: back towards the camera and up, in the hand.
+  // The wind-up: back toward the camera and up, in the hand.
   { path: 0.24, pos: (u) => lerp3([0, 0, 0], at3(0.08, 0.28, 0.4), easeIO(u)) },
   {
     path: 0.58,
@@ -1562,7 +1562,7 @@ export const RECIPES = {
     // A few more splats (as far as the device allows) for the robot hand, so
     // the ball at rest keeps its own.
     density: 1.13,
-    options: [{ key: "color", label: "Colour", type: "color", default: "#d9632b" }],
+    options: [{ key: "color", label: "Color", type: "color", default: "#d9632b" }],
     // Dribble: four fast, low bounces, each pushed back down by an unseen
     // hand; then a toss onto the fingertip of a robot hand that comes up
     // from below, where it spins with a slight wobble, and it drops off,
@@ -1642,7 +1642,7 @@ export const RECIPES = {
     // axis (six whole turns, so it lands laces up as it started), the nose
     // tipping over at the top, and lands with a wobble. Splats sort in their
     // built pose, so the ball is built twice (PACKS.md 7b, rule 1): the
-    // second copy half a turn round about its long axis, coloured as the
+    // second copy half a turn round about its long axis, colored as the
     // first would be there, and whichever copy is within a quarter turn of
     // its built pose is shown. Its inside hides while it spins.
     ...throwPulse("pass", "Throw a spiral", 2.4),
@@ -1832,9 +1832,9 @@ export const RECIPES = {
 
   "beach-ball": {
     options: [
-      { key: "c1", label: "Colour 1", type: "color", default: "#e63946" },
-      { key: "c2", label: "Colour 2", type: "color", default: "#f4d35e" },
-      { key: "c3", label: "Colour 3", type: "color", default: "#1d70b8" },
+      { key: "c1", label: "Color 1", type: "color", default: "#e63946" },
+      { key: "c2", label: "Color 2", type: "color", default: "#f4d35e" },
+      { key: "c3", label: "Color 3", type: "color", default: "#1d70b8" },
     ],
     // Punched up, the air slows it at once; it floats down slowly, drifting
     // and turning lazily, lands soft with a wobble and bobs to a stop.
@@ -1870,7 +1870,7 @@ export const RECIPES = {
       const dimples = fibonacciSphere(336);
       const R = 0.088;
       const cosR = Math.cos(R);
-      // Fibonacci neighbours within a dimple's radius sit within ~R*n/2
+      // Fibonacci neighbors within a dimple's radius sit within ~R*n/2
       // indices of the point's own latitude, so only those are checked.
       const n = dimples.length;
       const span = Math.ceil((R * n) / 2) + 6;
@@ -1976,8 +1976,8 @@ export const RECIPES = {
     // Hands-on (lane Hands-on H1): its own material and landing sound.
     hands: { area: 3, view: 0.6, material: "volleyball", sound: land("volleyball") },
     options: [
-      { key: "c1", label: "Colour 1", type: "color", default: "#f7c948" },
-      { key: "c2", label: "Colour 2", type: "color", default: "#1f4e9c" },
+      { key: "c1", label: "Color 1", type: "color", default: "#f7c948" },
+      { key: "c2", label: "Color 2", type: "color", default: "#1f4e9c" },
     ],
     // A soft set straight up with no spin, then a spike drives it down hard
     // with topspin; it slams into the floor, kicks up and bounces out.
@@ -2066,7 +2066,7 @@ export const RECIPES = {
     options: [
       {
         key: "color",
-        label: "Colour",
+        label: "Color",
         type: "select",
         default: "white",
         choices: [
@@ -2102,7 +2102,7 @@ export const RECIPES = {
     ...throwBall("flick", "Seam-up flick", grav(0.036), CRICKET, { gloss: true }),
     build(k) {
       const leather = "#8f1d1d";
-      // lit: (colour, normal, light) => colour. Unlit (for the spinning
+      // lit: (color, normal, light) => color. Unlit (for the spinning
       // copy), the seam keeps the shading of its ridge.
       const paint = (c, lit) => {
         const [x, y] = c.ln;
@@ -2116,7 +2116,7 @@ export const RECIPES = {
           return keep(lit(dash ? "#f2ead4" : shade(leather, 0.8), ridge, { sheen: 0.3 }), 0.6);
         }
         if (Math.abs(x) < 0.008) return keep(lit(shade(leather, 0.7), c.n));
-        // Polished red leather: deep colour and a bright, tight shine.
+        // Polished red leather: deep color and a bright, tight shine.
         return lit(leather, c.n, { sheen: 0.6, tight: 40, soft: 0.3 });
       };
       body(k, (c) => paint(c, lit));
@@ -2137,8 +2137,8 @@ export const RECIPES = {
       sound: land("bowling-ball"),
     },
     options: [
-      { key: "c1", label: "Colour 1", type: "color", default: "#3a1f78" },
-      { key: "c2", label: "Colour 2", type: "color", default: "#d946ef" },
+      { key: "c1", label: "Color 1", type: "color", default: "#3a1f78" },
+      { key: "c2", label: "Color 2", type: "color", default: "#d946ef" },
     ],
     // A heavy roll with a hook: it drops onto the lane, rolls away straight
     // and hooks across; the pins crash far off, and it rolls back home.
@@ -2198,8 +2198,8 @@ export const RECIPES = {
         const x = rgb(base);
         return [0, 1, 2].map((i) => clamp(x[i] * a + b[i], 0, 1));
       };
-      // Its colours, before the light: the number circle on the front and
-      // back, the stripe or the solid colour.
+      // Its colors, before the light: the number circle on the front and
+      // back, the stripe or the solid color.
       const paint = (c) => {
         const [x, y, z] = c.ln;
         if (n > 0 && Math.abs(z) > 0.93) {
@@ -2231,7 +2231,7 @@ export const RECIPES = {
       material: { preset: "pickleball", mass: 0.0243, bounce: 0.62 },
       sound: land("pickleball"),
     },
-    options: [{ key: "color", label: "Colour", type: "color", default: "#dce83a" }],
+    options: [{ key: "color", label: "Color", type: "color", default: "#dce83a" }],
     // Popped up twice, the light holed ball slows fast in the air and
     // knuckles, then lands with a hollow click and a small, dead bounce.
     ...throwBall("pop", "Pop it up", 10, PICKLE),
@@ -2266,7 +2266,7 @@ export const RECIPES = {
       material: { preset: "dodgeball", mass: 0.14, r: 0.089 },
       sound: land("dodgeball"),
     },
-    options: [{ key: "color", label: "Colour", type: "color", default: "#d7263d" }],
+    options: [{ key: "color", label: "Color", type: "color", default: "#d7263d" }],
     // Lifted and slammed down: the soft rubber squashes flat and wobbles,
     // and it bounces up lively, squashing again.
     ...throwBall("slam", "Slam it down", DB_G, DODGEBALL),
@@ -2322,7 +2322,7 @@ export const RECIPES = {
   "lacrosse-ball": {
     // Hands-on (lane Hands-on H1): its own material and landing sound.
     hands: { area: 3, view: 0.6, material: "lacrosse-ball", sound: land("lacrosse-ball") },
-    options: [{ key: "color", label: "Colour", type: "color", default: "#f4f3ef" }],
+    options: [{ key: "color", label: "Color", type: "color", default: "#f4f3ef" }],
     // Slammed down, the hard rubber ball rockets up and bounces hard and
     // fast, the liveliest ball on the shelf.
     ...throwBall("slam", "Slam it down", LX_G, LACROSSE),
@@ -2373,9 +2373,9 @@ export const RECIPES = {
     // Hands-on (lane Hands-on H1): its own material and landing sound.
     hands: { area: 3, view: 0.6, soft: 0.15, material: "bouncy-ball", sound: land("bouncy-ball") },
     options: [
-      { key: "c1", label: "Colour 1", type: "color", default: "#ff2e88" },
-      { key: "c2", label: "Colour 2", type: "color", default: "#27e1c1" },
-      { key: "c3", label: "Colour 3", type: "color", default: "#ffe14d" },
+      { key: "c1", label: "Color 1", type: "color", default: "#ff2e88" },
+      { key: "c2", label: "Color 2", type: "color", default: "#27e1c1" },
+      { key: "c3", label: "Color 3", type: "color", default: "#ffe14d" },
     ],
     // Thrown down hard, it ricochets all over, its spin flipping at every
     // bounce, then comes home and settles.
@@ -2403,14 +2403,14 @@ export const RECIPES = {
       },
     }),
     build(k, o) {
-      // Clear glass that glints, with twisted vanes of colour inside. The
+      // Clear glass that glints, with twisted vanes of color inside. The
       // vanes turn when it rolls (part "ball"); the glass only moves.
       const glass = k.part("glass");
       const ball = k.part("ball");
       // The glass (lane Fix4). Real glass is clear face on and shows a bright,
       // crisp edge where it turns away. Splats can't see the camera, so the
       // edge is built from "fins": thin splats standing on edge across the
-      // surface, each in a plane through the centre. Face on, the eye sees
+      // surface, each in a plane through the center. Face on, the eye sees
       // every fin edge on, as a hairline, so the glass is nearly clear; at
       // the rim it sees them side on, stacked along its line of sight, so
       // they add up to a solid edge from any side. A dark fin layer outside
@@ -2682,7 +2682,7 @@ export const RECIPES = {
   "flying-disc": {
     // Hands-on (lane Hands-on H1): its own material and landing sound.
     hands: { area: 3, view: 0.6, material: "flying-disc", sound: land("flying-disc") },
-    options: [{ key: "color", label: "Colour", type: "color", default: "#ff5a36" }],
+    options: [{ key: "color", label: "Color", type: "color", default: "#ff5a36" }],
     // A throw: it spins fast and flat, banks into a curve, glides round a
     // loop like a returning throw and settles back, still spinning down.
     ...throwPulse("throw", "Throw", 3),
@@ -2721,7 +2721,7 @@ export const RECIPES = {
         color: (c) => {
           const r = Math.hypot(c.lp[0], c.lp[2]);
           const top = c.lp[1] > 0.06;
-          // Moulded flight rings: two low ridges, lit on one side and shaded
+          // molded flight rings: two low ridges, lit on one side and shaded
           // on the other, and a groove.
           if (top && Math.abs(r - 0.55) < 0.02) return keep(lit(shade(o.color, 0.72), c.n), 0.7);
           let n = c.n;

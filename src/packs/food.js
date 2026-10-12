@@ -1,6 +1,6 @@
 // Food pack: sweets, fruit and dinners, many of them doing something. Ice
 // cream melts as it warms, popcorn pops, jelly wobbles, candles blow out,
-// pancakes flip. There is no lighting in a splat toy, so colour functions
+// pancakes flip. There is no lighting in a splat toy, so color functions
 // fake it: a soft light from the upper left front, a painted highlight on
 // glossy things, and noise for crumb, peel and grain. Seeds, sprinkles,
 // flames, steam, stems and leaves are kept out of the pattern layer.
@@ -37,7 +37,7 @@ import { ropeSkin } from "../physics/soft.js"; // lane Hands engine C
 const TAU = Math.PI * 2;
 const { add, sub, mul, dot, len, cross, unit } = vec;
 
-// ---- Light and colour helpers --------------------------------------------------
+// ---- Light and color helpers --------------------------------------------------
 
 const LIGHT = unit([-0.45, 0.8, 0.55]);
 const VIEW = unit([0.5, 0.32, 0.8]);
@@ -235,7 +235,7 @@ function jiggle(t, time, poke, { idle = 1, big = 1 } = {}) {
 }
 
 // A pointed leaf along +X from its stalk end, folded along the midrib and
-// curling up towards the tip. c.u runs along it, c.v across (0.5 = midrib).
+// curling up toward the tip. c.u runs along it, c.v across (0.5 = midrib).
 function leafShape(k, length, width, curl = 0.25) {
   return k.param(
     (u, v) => {
@@ -361,7 +361,7 @@ function hopTo(a, b, f, h) {
 // How many rings the coffee's surface is cut into (each a part).
 const COFFEE_RINGS = 12;
 const ICE_RIM = 1.15; // height of the cone's rim above its tip
-const ICE_MELT = 0.48; // how easily the scoops melt (the melt behaviour's a)
+const ICE_MELT = 0.48; // how easily the scoops melt (the melt behavior's a)
 
 const FLAVOURS = {
   strawberry: { label: "Strawberry", base: "#f6a8ba", deep: "#e57d97", bits: "#c7304f", bit: 0.5 },
@@ -379,7 +379,7 @@ const FLAVOURS = {
     bit: 0.42,
   },
 };
-// Parsed once, so colour functions do not re-read hex strings per splat.
+// Parsed once, so color functions do not re-read hex strings per splat.
 for (const f of Object.values(FLAVOURS))
   for (const key of ["base", "deep", "bits"]) f[key] = rgb(f[key]);
 const flavourChoices = () => Object.entries(FLAVOURS).map(([id, f]) => ({ id, label: f.label }));
@@ -436,7 +436,7 @@ function melonSkin(c, theta, along) {
   return glossy(c, col, 0.35, 18, 0.72, 0.4);
 }
 
-// Flesh colour at relative radius rho (0 centre, 1 skin).
+// Flesh color at relative radius rho (0 center, 1 skin).
 function melonFlesh(rho, c) {
   if (rho > 0.965) return MELON.dark;
   if (rho > 0.9) return mix(MELON.pith, "#b8dc86", smoothstep(0.92, 0.965, rho));
@@ -693,7 +693,7 @@ export const RECIPES = {
       const w = Math.max(c.warmth, tap);
       out.energy = w;
       out.grow = w;
-      // Melt slumps everything towards the floor (the cone's tip), so the
+      // Melt slumps everything toward the floor (the cone's tip), so the
       // scoops rise by what the rim would sink: they flatten onto the cone
       // and ooze over its edge instead of sinking through it.
       const up = { offset: [0, ICE_RIM * 0.895 * ICE_MELT * w, 0] };
@@ -1066,7 +1066,7 @@ export const RECIPES = {
           }
         }
         // The knife: a steel blade across the melon with a dark handle
-        // towards you, built down in each cut and lifted clear at rest.
+        // toward you, built down in each cut and lifted clear at rest.
         const lift = B * 2 + 0.12;
         const H = 0.5;
         for (let i = 0; i < n - 1; i++) {
@@ -1206,7 +1206,7 @@ export const RECIPES = {
           );
         }
       };
-      // The whole melon lies at an angle, so its cut faces turn towards you.
+      // The whole melon lies at an angle, so its cut faces turn toward you.
       if (o.style === "whole") whole([0, 0, 0], WM_YAW);
       else if (o.style === "wedge") wedge([0, 0.3, 0], 28, 1.1, 0.34);
       else {
@@ -1726,8 +1726,8 @@ export const RECIPES = {
     alive: true,
     options: [
       {
-        key: "flavour",
-        label: "Flavour",
+        key: "flavor",
+        label: "Flavor",
         type: "select",
         default: "strawberry",
         choices: [
@@ -1811,7 +1811,7 @@ export const RECIPES = {
       const flute = (a, y) => 1 + 0.075 * Math.cos(a * 10) * (1 - smoothstep(0.86, 1.0, y));
       const shape = revolve(k, pts, flute, { grid: 96 });
       // A see-through skin: faint where it faces you, denser (bigger splats)
-      // and deeper in colour where it turns away, like light through jelly.
+      // and deeper in color where it turns away, like light through jelly.
       k.add(shape, {
         part: jelly,
         flat: 0.2,
@@ -2349,7 +2349,7 @@ export const RECIPES = {
     options: [
       {
         key: "colors",
-        label: "Colours",
+        label: "Colors",
         type: "select",
         default: "rainbow",
         choices: [
@@ -2657,7 +2657,7 @@ export const RECIPES = {
           channel: i,
           color: (c) => glossy(c, stripe(c.u, c.t ?? 0), 0.9, 30, 0.8, 0.3),
         });
-        // The mend's glint: a ring of splats just below the break, coloured
+        // The mend's glint: a ring of splats just below the break, colored
         // as the cane is there, that glows as channel 2 (or 3) passes 0.5.
         k.add(evenCylinder(0.104, 0.104, 0.03, false), {
           even: true,
@@ -2805,8 +2805,8 @@ export const RECIPES = {
   macarons: {
     options: [
       {
-        key: "flavours",
-        label: "Flavours",
+        key: "flavors",
+        label: "Flavors",
         type: "select",
         default: "pastel",
         choices: [
@@ -2843,7 +2843,7 @@ export const RECIPES = {
       const d = info.data;
       if (!d) return;
       const { homes, quats, tower, base } = d;
-      // Where each is (centre) and how it has turned from its built pose.
+      // Where each is (center) and how it has turned from its built pose.
       const at = homes.map((h) => h.slice());
       const turn = homes.map(() => IDQ);
       if (s >= 0) {
@@ -2997,7 +2997,7 @@ export const RECIPES = {
     options: [
       {
         key: "color",
-        label: "Flavour",
+        label: "Flavor",
         type: "select",
         default: "red",
         choices: [
@@ -3105,7 +3105,7 @@ export const RECIPES = {
     // springs back into its twist, wobbling a little.
     hands: { floor: -0.78, stretch: { radius: 0.55, max: 0.45, hz: 3.2, damping: 0.25, at: (p) => Math.abs(p[0]) > 0.35 } }, // prettier-ignore
     // A tap twists the pretzel like a knot, all in one piece: its two sides
-    // wring opposite ways and its loops fold a little towards you. Let go, it
+    // wring opposite ways and its loops fold a little toward you. Let go, it
     // springs back a little past its shape into the opposite twist and
     // wobbles to a stop, like a twanged spring.
     drive(t, c, out) {
@@ -3148,7 +3148,7 @@ export const RECIPES = {
       const qi = [-q[0], -q[1], -q[2], q[3]];
       // The pretzel twisted like a knot: its two sides wring opposite ways
       // about its width, the top turns against the bottom, and the loops fold
-      // a little towards you. It is one smooth twist of the whole shape, so
+      // a little toward you. It is one smooth twist of the whole shape, so
       // wherever the rope crosses or rests on itself it stays joined. A
       // negative channel twists it the other way.
       const y0 = -0.08;
@@ -3302,7 +3302,7 @@ export const RECIPES = {
         },
         color: (c) => crust(c, c.v, c.u),
       });
-      // The crust's colour at (v along, u around).
+      // The crust's color at (v along, u around).
       function crust(c, cv, cu) {
         const b = bulge(cv, cu);
         const under = smoothstep(-0.2, -0.7, c.n[1]);
@@ -4056,7 +4056,7 @@ export const RECIPES = {
       // The piece it picks: the one tapped (lane Physics), else the roll.
       const which = SUSHI_PIECES[info.tap?.pick ?? SUSHI_ROLL] || SUSHI_PIECES[SUSHI_ROLL];
       const roll = which.at;
-      // The roll's centre over time (it rides between the tips when held).
+      // The roll's center over time (it rides between the tips when held).
       const above = add(roll, [0, 0.34, 0]);
       const overDish = [d.dish[0], 0.45, d.dish[2]];
       const inDish = [d.dish[0], d.dish[1] + 0.13, d.dish[2]];
@@ -5090,7 +5090,7 @@ export const RECIPES = {
         [0.03, 0.34],
         [0, 0.33],
       ];
-      // The bite: a few overlapping spheres (the teeth) on the side towards
+      // The bite: a few overlapping spheres (the teeth) on the side toward
       // you. Skin and flesh inside them are the chunk that comes away (it
       // fades on channel 0); under it lies the bitten surface.
       const rAt = radiusAt(pts);
@@ -5694,7 +5694,7 @@ export const RECIPES = {
         );
         return glossy(c, col, 0.4, 30, 0.74, 0.38);
       };
-      // Segments seen in a cut: angle a around the core, rho 0 centre .. 1 peel.
+      // Segments seen in a cut: angle a around the core, rho 0 center .. 1 peel.
       const flesh = (a, rho, c) => {
         if (rho > 0.965) return "#ec7a14";
         if (rho > 0.88) return "#fbeed6";
@@ -5719,7 +5719,7 @@ export const RECIPES = {
         if (rho > 0.965) return "#ec7a14";
         if (rho > 0.88) return "#fbeed6";
         if (x < 0.07) return "#fbeed6";
-        // Juice sacs run out from the core towards the peel.
+        // Juice sacs run out from the core toward the peel.
         const sacs = smoothstep(0.2, 0.6, c.noise(Math.atan2(y / H, x) * 16, rho * 3, 0.5));
         const col = mix("#fb9c1f", "#f57e0f", 0.5 + 0.5 * c.noise(x * 5, y * 5, 1.5));
         return mix(col, "#ffcf8a", 0.45 * sacs);
@@ -6149,7 +6149,7 @@ export const RECIPES = {
       sound: (hit, vol) => ({ voice: "squish", pitch: 1.5, decay: 0.2, vol: vol * 0.55 }),
     },
     // A tap chops the pineapple into five rings, top first: with each chop
-    // everything above lifts a little and leans towards you, until the
+    // everything above lifts a little and leans toward you, until the
     // rings stand apart in a leaning stack showing their golden faces and
     // pale cores. Then they drop back down onto each other.
     drive(t, c, out) {
@@ -6244,7 +6244,7 @@ export const RECIPES = {
         },
       );
       // The cut faces on top of each ring (all but the top one): golden
-      // flesh with fibres running out from a pale core, inside the skin.
+      // flesh with fibers running out from a pale core, inside the skin.
       for (let i = 0; i < PINE_RINGS - 1; i++) {
         const y = cuts[i + 1];
         const R = radius(y) * 0.99;
@@ -6559,7 +6559,7 @@ export const RECIPES = {
         col = mix(col, dark, 0.45 * smoothstep(0.2, -0.8, c.n[1]));
         return glossy(c, col, 0.55, 30, 0.72, 0.42);
       };
-      // The grapes that fall: a dozen on the front (towards the viewer),
+      // The grapes that fall: a dozen on the front (toward the viewer),
       // from the second row down, each a piece on its own path.
       const view = [Math.sin(0.45), 0, Math.cos(0.45)];
       const floor = -0.97;
@@ -6903,7 +6903,7 @@ export const RECIPES = {
   },
 };
 
-// The pizza slice slides out towards the viewer.
+// The pizza slice slides out toward the viewer.
 const PIZZA_AZ = 0.55;
 const PIZZA_OUT = [Math.sin(PIZZA_AZ) * 0.5, 0.16, Math.cos(PIZZA_AZ) * 0.5];
 // Hands-on (lane Hands engine C): the slice is a piece to pick up and set
@@ -6988,7 +6988,7 @@ function bentSlab(k, sx, sy, sz, power, bend) {
   );
 }
 
-// Half an ellipsoid: the dome towards -Z, the open rim on z = 0 (for cut fruit).
+// Half an ellipsoid: the dome toward -Z, the open rim on z = 0 (for cut fruit).
 function halfEllipsoid(k, a, b, c) {
   return k.param(
     (u, v) => {

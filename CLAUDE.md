@@ -219,4 +219,4 @@ new or changed effect against them before calling it done.
   on the Sound Board (OPERATING.md, "The sound review").
 - `docs/PACKS.md`: how to write toy recipes.
 - `docs/SCENE-SCHEMA.md`: the scene format.
-- `CREDITS.md` and `LICENSES.md`: attributions and licences.
+- `CREDITS.md` and `LICENSES.md`: attributions and licenses.

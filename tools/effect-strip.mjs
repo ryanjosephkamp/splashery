@@ -8,7 +8,7 @@
 // Writes <out-dir>/<id><suffix>.png. The clock is stepped by hand (1/30 s
 // steps), so frames land at the same toy time on any machine. --taps=3 taps
 // three times, --gap seconds apart (times count from the last tap).
-// --bg sets the page colour (dark theme by default). --opt=style=double sets a
+// --bg sets the page color (dark theme by default). --opt=style=double sets a
 // toy option first. --at=x,y,z taps that point (in the recipe's coordinates)
 // instead of pressing the action, for toys whose tap depends on where it lands.
 // --pgn loads a game into a game toy (the chess set) first.
@@ -97,7 +97,7 @@ for (const id of ids) {
       };
       await advance(0.5);
       const frames = [await shot()];
-      // Recipe coordinates -> world (a kit toy is centred and scaled).
+      // Recipe coordinates -> world (a kit toy is centered and scaled).
       const tf = player.motion.ctx?.transform;
       const world = at && (tf ? at.map((v, i) => (v - tf.center[i]) * tf.scale) : at);
       for (let i = 0; i < taps; i++) {

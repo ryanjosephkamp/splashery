@@ -64,7 +64,7 @@ clips are on the Effect review page (lane F). Waiting for the owner's marks.
 - **Engine PR (draw order).** Splats sort in the pose they were built in, so a cubie turned from the
   back of the cube to the front drew behind the others (holes). A recipe now sets `out.resort` on a
   frame where its tokens have settled, and `player.resortTokens()` writes the tokens' current places
-  into the sort centres (one re-sort, not every frame). The cube asks after every turn, the bricks
+  into the sort centers (one re-sort, not every frame). The cube asks after every turn, the bricks
   after every brick lands. The same PR makes the game panel follow a game that changes on the board
   (its title and the "Opera Game" button).
 - **Puzzle cube.** 26 cubies are tokens; the cube state (each cubie's place and turn) is kept in
@@ -96,7 +96,7 @@ clips are on the Effect review page (lane F). Waiting for the owner's marks.
 - The cube's button reads "Scramble or solve": the panel does not relabel a toy's button while it is
   shown, so it cannot switch between the two words.
 - On SwiftShader (the tests) a tap waits for a slow GPU pick; quick taps are queued, not lost.
-- Brick colours are random per model, so the dog and the tree are not coloured like a dog or a tree.
+- Brick colors are random per model, so the dog and the tree are not colored like a dog or a tree.
 
 ## For the Operator
 

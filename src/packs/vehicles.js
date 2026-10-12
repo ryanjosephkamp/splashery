@@ -1,7 +1,7 @@
 // Vehicles: chunky, toy-like things that go. Generic designs only: no makes,
 // models, liveries, logos or insignia. Wheels, rotors and propellers are
 // parts that turn while the toy is alive; most vehicles have a tap action.
-// There is no scene lighting, so colours carry a little baked sunlight.
+// There is no scene lighting, so colors carry a little baked sunlight.
 
 import {
   mix,
@@ -36,7 +36,7 @@ const lerp3 = (a, b, t) => [
 const easeInOut = (x) => (x < 0.5 ? 2 * x * x : 1 - Math.pow(-2 * x + 2, 2) / 2);
 const keep = (c, size) => ({ c, keep: true, size });
 
-// Baked sunlight: the sun is high, towards the viewer and a little right.
+// Baked sunlight: the sun is high, toward the viewer and a little right.
 const SUN = unit([0.3, 0.8, 0.55]);
 const sunOf = (n) => n[0] * SUN[0] + n[1] * SUN[1] + n[2] * SUN[2];
 const lit = (col, c, amb = 0.72) => shade(col, amb + (1 - amb) * sunOf(c.n));
@@ -90,7 +90,7 @@ function slab(k, pts, thick, opts) {
 
 // A box with rounded edges and corners, sampled evenly: flat faces, quarter
 // cylinders along the edges and sphere corners. (The kit's roundedBox
-// crowds its samples towards the edges when it is very boxy.)
+// crowds its samples toward the edges when it is very boxy.)
 function roundBox(sx, sy, sz, r) {
   r = Math.max(1e-4, Math.min(r, sx / 2, sy / 2, sz / 2));
   const h = [sx / 2 - r, sy / 2 - r, sz / 2 - r];
@@ -145,7 +145,7 @@ function roundBox(sx, sy, sz, r) {
   };
 }
 
-// A wheel turning about Z: a round tyre, a rim with spokes and a hub.
+// A wheel turning about Z: a round tire, a rim with spokes and a hub.
 function wheel(k, pos, r, w, opts = {}) {
   const {
     part,
@@ -158,7 +158,7 @@ function wheel(k, pos, r, w, opts = {}) {
     even = false,
   } = opts;
   const tr = r * (1 - rimR) * 0.62;
-  // even: an even, solid tyre and rim (lane Fidelity B's toys).
+  // even: an even, solid tire and rim (lane Fidelity B's toys).
   const E = even ? { even: true, opacity: 1, jitter: 0.015 } : {};
   k.add(even ? evenTorus(k, r - tr, tr) : k.torus(r - tr, tr), {
     ...E,
@@ -244,7 +244,7 @@ function plume(k, from, dir, o = {}) {
 }
 
 // Rock (or tilt) a part together with the whole vehicle: a spin `q` about
-// the part's own pivot `pv`, then the vehicle's tilt `tq` about the centre
+// the part's own pivot `pv`, then the vehicle's tilt `tq` about the center
 // `centre`, then a lift. Returns the part pose for drive().
 function carried(pv, tq, centre, lift = [0, 0, 0], q = [0, 0, 0, 1]) {
   const qq = quatMulLocal(tq, q);
@@ -430,7 +430,7 @@ function rocketBuild(k, o) {
       params: [0.45 + 0.35 * rand(), rand()],
     };
   });
-  // A wisp of cold vapour while the rocket waits.
+  // A wisp of cold vapor while the rocket waits.
   const vapour = k.part("vapour", { pivot: [0, 0, 0] });
   k.cloud({ share: 0.0025, size: 2.2, pattern: false, part: vapour }, (rand) => {
     const a = ROCKET_A0 + 0.9 + (rand() - 0.5) * 1.4;
@@ -1578,7 +1578,7 @@ function carBuild(k, o) {
       return lit(col, c);
     },
   });
-  // The cabin: a low glass canopy with a roof in body colour.
+  // The cabin: a low glass canopy with a roof in body color.
   const cx0 = -0.86;
   const cx1 = 0.45;
   const cabin = k.param(
@@ -2202,7 +2202,7 @@ function jetBuild(k, o) {
   });
   const grey = (c) => lit("#dfe3e8", c, 0.66);
   for (const s of [-1, 1]) {
-    // Wings with a little dihedral, winglets in the tail colour.
+    // Wings with a little dihedral, winglets in the tail color.
     slab(
       k,
       [
@@ -2285,7 +2285,7 @@ function jetBuild(k, o) {
       { flat: 0.2, color: grey },
     );
   }
-  // The fin in the tail colour with a light band.
+  // The fin in the tail color with a light band.
   slab(
     k,
     [
@@ -2361,7 +2361,7 @@ function sailboatBuild(k, o) {
   rod(k, [mx, 0.62, 0], [-1.08, 0.66, 0], 0.024, { ...S, weight: 1.6, color: "#c09160" });
   rod(k, [1.28, top(1), 0], [mx, 2.85, 0], 0.006, { ...S, weight: 4, color: "#555" });
   rod(k, [-1.25, top(0), 0], [mx, mTop - 0.05, 0], 0.006, { ...S, weight: 4, color: "#555" });
-  // Sails, filled with wind towards the viewer.
+  // Sails, filled with wind toward the viewer.
   const sailColor = (c) => {
     const y = c.p[1];
     const seam = Math.abs(((y - 0.6) / 0.34) % 1) < 0.03;
@@ -3207,7 +3207,7 @@ function ufoBuild(k) {
     params: [0.25, 0],
     color: "#8ff7ff",
   });
-  // Coloured lights that run round the rim.
+  // Colored lights that run round the rim.
   const lights = k.part("lights", { pivot: UFO.centre, axis: [0, 1, 0] });
   const bulbs = ["#ff4d6d", "#ffd23f", "#3ee6ff", "#7cff6b", "#c77dff"];
   for (let i = 0; i < 16; i++) {
@@ -3380,7 +3380,7 @@ export const RECIPES = {
     // billows along the pad), not the world's up.
     gravity: false,
     alive: true,
-    options: [{ key: "color", label: "Colour", type: "color", default: "#d62d2d" }],
+    options: [{ key: "color", label: "Color", type: "color", default: "#d62d2d" }],
     controls: [{ key: "launch", label: "Launch", type: "pulse", ease: 7 }],
     action: { key: "launch", label: "Launch" },
     drive(t, c, out, info) {
@@ -3409,7 +3409,7 @@ export const RECIPES = {
 
   helicopter: {
     alive: true,
-    options: [{ key: "color", label: "Colour", type: "color", default: "#e8452c" }],
+    options: [{ key: "color", label: "Color", type: "color", default: "#e8452c" }],
     controls: [{ key: "fly", label: "Fly", type: "toggle", default: 0, ease: 2.4 }],
     action: { key: "fly", label: "Take off or land" },
     // Hands-on (lane Hands-on H4): flick the main rotor or the tail rotor to
@@ -3459,8 +3459,8 @@ export const RECIPES = {
           { id: "rainbow", label: "Rainbow" },
         ],
       },
-      { key: "c1", label: "Colour 1", type: "color", default: "#e8412f" },
-      { key: "c2", label: "Colour 2", type: "color", default: "#f6c945" },
+      { key: "c1", label: "Color 1", type: "color", default: "#e8412f" },
+      { key: "c2", label: "Color 2", type: "color", default: "#f6c945" },
     ],
     controls: [{ key: "burn", label: "Burner", type: "pulse", ease: 4 }],
     action: { key: "burn", label: "Fire the burner" },
@@ -3487,7 +3487,7 @@ export const RECIPES = {
 
   "steam-train": {
     alive: true,
-    options: [{ key: "color", label: "Colour", type: "color", default: "#1f6b43" }],
+    options: [{ key: "color", label: "Color", type: "color", default: "#1f6b43" }],
     controls: [{ key: "toot", label: "Whistle", type: "pulse", ease: 2 }],
     action: { key: "toot", label: "Blow the whistle" },
     // Hands-on (lane Hands-on H4): push the engine along its rails; it rolls
@@ -3540,7 +3540,7 @@ export const RECIPES = {
   "sports-car": {
     alive: true,
     options: [
-      { key: "color", label: "Colour", type: "color", default: "#e3242b" },
+      { key: "color", label: "Color", type: "color", default: "#e3242b" },
       { key: "stripes", label: "Stripes", type: "switch", default: true },
     ],
     controls: [{ key: "vroom", label: "Rev", type: "pulse", ease: 1.8 }],
@@ -3682,7 +3682,7 @@ export const RECIPES = {
 
   submarine: {
     alive: true,
-    options: [{ key: "color", label: "Colour", type: "color", default: "#f5c21b" }],
+    options: [{ key: "color", label: "Color", type: "color", default: "#f5c21b" }],
     controls: [{ key: "dive", label: "Dive", type: "pulse", ease: 5 }],
     action: { key: "dive", label: "Dive and surface" },
     // Hands-on (lane Hands-on H4): she floats on a water line; push her under
@@ -3740,7 +3740,7 @@ export const RECIPES = {
 
   tractor: {
     alive: true,
-    options: [{ key: "color", label: "Colour", type: "color", default: "#c8322b" }],
+    options: [{ key: "color", label: "Color", type: "color", default: "#c8322b" }],
     controls: [{ key: "chug", label: "Chug", type: "pulse", ease: 2 }],
     action: { key: "chug", label: "Chug chug" },
     // Hands-on (lane Hands-on H4): push it and it rolls on its big wheels;

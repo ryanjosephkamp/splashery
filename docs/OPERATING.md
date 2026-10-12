@@ -62,7 +62,7 @@ or reformat anyone else's lines, so git can merge the lanes line by line.
 - `src/toy-sounds.js` (each toy's sound spec)
 - `src/toy-help.js` (each toy's how-to line and About text, in its shelf's section)
 - `tools/toy-plan.json` (each toy's plan entry: `"v": "keep"` and `improved` when finished)
-- `src/toys.js` (the shelf catalogue: only new toys add rows)
+- `src/toys.js` (the shelf catalog: only new toys add rows)
 - `src/rigs.js` (a scan's rig)
 - `tools/assets.json`, `tools/models.json`, `CREDITS.md`, `LICENSES.md` (add your lines)
 
@@ -376,7 +376,7 @@ simulations, not novelty toys. Its collections:
 - `ideas/<idea id>`:
   `{ day, order, name, kind: "kit" | "scan", shelf, tap, sound, why, notes, source, lane, reply, revised, set, setNote, from }`.
   The id is a slug of the name. A scan idea's `source` is `{ title, url, licence, author }`, with
-  the licence checked on the live source page (CC0 or CC BY only). `set` groups ideas under a
+  the license checked on the live source page (CC0 or CC BY only). `set` groups ideas under a
   heading within their day (`setNote` is its line), and `from: "owner"` tags the owner's own ideas.
   Only the Operator writes ideas.
 - `marks/<idea id>`: the owner's marks, `{ mark: "approve" | "change" | "skip" | "", note, at }`.
@@ -407,7 +407,7 @@ phone with `grooph share docs/lane-loop.grooph.json`. Update it when these rules
   force-push a branch that has been pushed. The session's PR watcher does this when a merge-conflict
   notice arrives, and at each check-in.
 - Resolving:
-  - Shared lists (`src/toy-sounds.js`, `tools/toy-plan.json`, `src/toys.js`, credits, licences,
+  - Shared lists (`src/toy-sounds.js`, `tools/toy-plan.json`, `src/toys.js`, credits, licenses,
     asset lists): keep both sides' lines.
   - `docs/TOY-PLAN.md`: take main's copy (`git checkout origin/main -- docs/TOY-PLAN.md`), then
     regenerate it as above.

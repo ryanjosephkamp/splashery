@@ -38,7 +38,7 @@ const unit = (a) => mul(a, 1 / (len(a) || 1));
 const lerp = (a, b, t) => add(a, mul(sub(b, a), t));
 
 // Fake lighting (splats are unlit): a key light from the upper left front and
-// a highlight towards the default camera.
+// a highlight toward the default camera.
 const LIGHT = unit([-0.45, 0.8, 0.45]);
 const VIEW = unit([0.5, 0.3, 0.82]);
 const HALF = unit(add(LIGHT, VIEW));
@@ -307,7 +307,7 @@ const ELEMENTS = [
   ["Ne", "Neon", 20, [2, 8]],
   ["Na", "Sodium", 23, [2, 8, 1]],
   ["Mg", "Magnesium", 24, [2, 8, 2]],
-  ["Al", "Aluminium", 27, [2, 8, 3]],
+  ["Al", "Aluminum", 27, [2, 8, 3]],
   ["Si", "Silicon", 28, [2, 8, 4]],
   ["P", "Phosphorus", 31, [2, 8, 5]],
   ["S", "Sulfur", 32, [2, 8, 6]],
@@ -365,8 +365,8 @@ const shellNormal = (i) => {
 };
 const shellSpeed = (i) => (i % 2 ? -1 : 1) * (1.5 / Math.pow(i + 1, 0.75));
 
-// Balls packed in a round cluster: face-centred cubic points nearest the
-// centre, for a nucleus of n nucleons of radius rb.
+// Balls packed in a round cluster: face-centered cubic points nearest the
+// center, for a nucleus of n nucleons of radius rb.
 function packBall(n, rb, rand) {
   const a = rb * 2 * 0.98 * Math.SQRT2;
   const pts = [];
@@ -397,7 +397,7 @@ const CPK = {
 };
 
 // Adds atoms and bonds. atoms: [{ el, p, color?, r? }], bonds: [[i, j, order]].
-// Bonds are split in two, each half in its atom's colour. Each atom and its
+// Bonds are split in two, each half in its atom's color. Each atom and its
 // bond halves can be a token (token(i), moved by drive) or a part
 // (part(i)); `overlap` lengthens each half past the middle so a stretched
 // bond does not open a gap.
@@ -451,7 +451,7 @@ function ballStick(
     const d = sub(B.p, A.p);
     const L = len(d);
     const u = mul(d, 1 / L);
-    // A sideways offset for double bonds, in the plane of a neighbour.
+    // A sideways offset for double bonds, in the plane of a neighbor.
     let side = cross(u, [0, 0, 1]);
     if (len(side) < 0.2) side = cross(u, [0, 1, 0]);
     side = unit(side);
@@ -484,7 +484,7 @@ function ballStick(
   }
 }
 
-// Hydrogens on an sp3 atom at p with neighbours at the given positions:
+// Hydrogens on an sp3 atom at p with neighbors at the given positions:
 // fills the missing corners of a tetrahedron.
 function tetraH(p, neighbours, count, bond = 1.09, twist = 0) {
   const dirs = neighbours.map((q) => unit(sub(q, p)));
@@ -785,7 +785,7 @@ const MOLECULES = {
         bonds.push([m, atoms.length - 1]);
       }
     }
-    // Centre it.
+    // Center it.
     const c = mul(
       atoms.reduce((s, a) => add(s, a.p), [0, 0, 0]),
       1 / atoms.length,
@@ -964,7 +964,7 @@ function graphiteLattice() {
 
 // ---- Lane Chemistry: more crystals -------------------------------------------------
 // Each from its unit cell (lattice constants in ångströms, room temperature),
-// repeated and cut to a block; bonds join nearest neighbours.
+// repeated and cut to a block; bonds join nearest neighbors.
 
 // Atoms of a cubic cell basis repeated n times along each axis, keeping
 // those inside the block (boundary included). basis: [[el, fx, fy, fz]].
@@ -1003,13 +1003,13 @@ function bondsAt(atoms, pairs) {
   return bonds;
 }
 
-// Iron: body-centred cubic, a = 2.87 Å; each atom touches eight.
+// Iron: body-centered cubic, a = 2.87 Å; each atom touches eight.
 function ironLattice() {
   const a = 2.8665;
   const atoms = cubicBlock(a, [["Fe", 0, 0, 0], ["Fe", 0.5, 0.5, 0.5]], 3, { Fe: { color: "#a9b0b8", r: 0.55 } }); // prettier-ignore
   return { atoms, bonds: bondsAt(atoms, [["Fe", "Fe", (a * Math.sqrt(3)) / 2]]), bondR: 0.07, grey: "#7d848c", crisp: true }; // prettier-ignore
 }
-// Copper: face-centred cubic, a = 3.615 Å; each atom touches twelve.
+// Copper: face-centered cubic, a = 3.615 Å; each atom touches twelve.
 function copperLattice() {
   const a = 3.615;
   const atoms = cubicBlock(a, [["Cu", 0, 0, 0], ["Cu", 0, 0.5, 0.5], ["Cu", 0.5, 0, 0.5], ["Cu", 0.5, 0.5, 0]], 2, { Cu: { color: "#d9854a", r: 0.6 } }); // prettier-ignore
@@ -1033,7 +1033,7 @@ function cesiumChlorideLattice() {
   );
   return { atoms, bonds: bondsAt(atoms, [["Cs", "Cl", (a * Math.sqrt(3)) / 2]]), bondR: 0.06, grey: "#c9c9c9", crisp: true }; // prettier-ignore
 }
-// Fluorite (CaF2): calcium ions face-centred, a fluoride ion in each of the
+// Fluorite (CaF2): calcium ions face-centered, a fluoride ion in each of the
 // eight small cubes between them (a = 5.46 Å).
 function fluoriteLattice() {
   const a = 5.4626;
@@ -1133,7 +1133,7 @@ function grapheneLattice() {
         if (Math.hypot(x, z - 0.5 * b) > 7.4) continue;
         atoms.push({ el: "C", p: [x, 0, z - 0.5 * b], color: "#4b4f57", r: 0.36 });
       }
-  // Keep only carbons with two or three neighbours (no loose ends at the rim).
+  // Keep only carbons with two or three neighbors (no loose ends at the rim).
   let bonds = bondsAt(atoms, [["C", "C", b, 0.03]]);
   const deg = atoms.map(() => 0);
   for (const [i, j] of bonds) (deg[i]++, deg[j]++);
@@ -1205,7 +1205,7 @@ function iceLattice(rand) {
 
 // An orbital as the toy draws it: its boundary surface (the level that
 // holds 90% of the electron) and a cloud sampled from |psi|² inside it,
-// scaled to fit (1 = the resting size). glow mixes the colours towards
+// scaled to fit (1 = the resting size). glow mixes the colors toward
 // white; the surface's weight sets its share of the rest of the budget.
 function orbitalLook(
   k,
@@ -1360,9 +1360,9 @@ const PROTEIN_INPUT = {
   shown: () => PROTEIN_SHOWN.label,
 };
 
-// Where each residue of a chain gets its colour: `rainbow` runs blue to
+// Where each residue of a chain gets its color: `rainbow` runs blue to
 // red from each chain's start to its end; `chain` gives each chain its own
-// colour; `structure` colours helices, strands and loops.
+// color; `structure` colors helices, strands and loops.
 const CHAIN_COLOURS = ["#4f7cff", "#ff8a3d", "#39b86a", "#e04f8c", "#9c6bff", "#f2c230", "#2fb7c9", "#d9544a"]; // prettier-ignore
 const SS_COLOURS = { H: "#e0445c", E: "#f2c230", C: "#d8d8d2" };
 function residueColour(scheme, chainIndex, t, ss) {
@@ -1394,7 +1394,7 @@ function buildProtein(k, s, scheme) {
     });
   });
   // At most 48 tokens, the ligands included: merge the shortest runs into
-  // their neighbours in the same chain until the rest fit.
+  // their neighbors in the same chain until the rest fit.
   const budget = 48 - Math.min(16, s.ligands.length);
   while (runs.length > budget) {
     let best = -1;
@@ -1604,7 +1604,7 @@ export const RECIPES = {
       const crisp = !ORIGINAL_ORBITALS.has(o.orbital);
       const look = { plus: o.plus, minus: o.minus, lobes, crisp };
       orbitalLook(k, orb, { ...look, part: ground, cloudShare: lobes ? 0.2 : 0.46 });
-      // The nucleus: a tiny bright dot at the centre, with a soft glow.
+      // The nucleus: a tiny bright dot at the center, with a soft glow.
       k.add(k.sphere(0.03), { share: 0.01, color: (c) => gloss("#fff3c4", c.n, 0.6, 8) });
       k.cloud({ share: 0.01, size: 1.4, pattern: false }, (rand) => ({
         p: mul(randDir(rand), 0.06 * Math.abs(gauss(rand))),
@@ -1681,7 +1681,7 @@ export const RECIPES = {
     ],
     controls: [
       { key: "speed", label: "Electrons", type: "slider", default: 0.5 },
-      { key: "energy", label: "Energise", type: "pulse", ease: 4.6 },
+      { key: "energy", label: "Energize", type: "pulse", ease: 4.6 },
     ],
     action: { key: "energy", label: "Speed up the electrons" },
     // Lane Chemistry: the numbers behind the 118 elements.
@@ -1696,7 +1696,7 @@ export const RECIPES = {
           "https://www.nist.gov/open/copyright-fair-use-and-licensing-statements-srd-data-software-and-technical-series-publications",
       },
     ],
-    // A tap energises the atom: the electrons whirl faster and faster until
+    // A tap energizes the atom: the electrons whirl faster and faster until
     // each shell blurs into a glowing ring (as a fast electron is better
     // pictured, a cloud round its orbit), then slow down again.
     drive(t, c, out) {
@@ -1971,7 +1971,7 @@ export const RECIPES = {
       } = mol
         ? { atoms: mol.atoms.map((a) => ({ ...a, p: a.p.slice() })), bonds: mol.bonds }
         : shelf || (MOLECULES[o.molecule] || MOLECULES.caffeine)();
-      // Any element: its colour and a size from its covalent radius.
+      // Any element: its color and a size from its covalent radius.
       for (const a of atoms) {
         if (CPK[a.el]) continue;
         a.color = element(a.el)?.color || "#ff66cc";
@@ -2152,7 +2152,7 @@ export const RECIPES = {
         for (const a of lat.atoms) a.p = quatRotate(q, a.p);
       }
       if (o.crystal === "ice") {
-        // Tip ice towards the viewer so its six-sided channels show.
+        // Tip ice toward the viewer so its six-sided channels show.
         const q = quatFromTo([0, 1, 0], unit(lerp([0, 1, 0], VIEW, 0.72)));
         for (const a of lat.atoms) a.p = quatRotate(q, a.p);
         lat.hbonds = lat.hbonds.map(([a, b]) => [quatRotate(q, a), quatRotate(q, b)]);
@@ -2198,7 +2198,7 @@ export const RECIPES = {
         crisp: !!lat.crisp,
       });
       if (lat.hbonds) {
-        // Hydrogen bonds: dotted lines from each hydrogen to its neighbour's oxygen.
+        // Hydrogen bonds: dotted lines from each hydrogen to its neighbor's oxygen.
         k.cloud({ share: 0.03, size: 0.9, pattern: false }, (rand, i, n) => {
           const [a, b] = lat.hbonds[i % lat.hbonds.length];
           const t = 0.18 + (0.64 * Math.floor(rand() * 6)) / 5;
@@ -2239,8 +2239,8 @@ export const RECIPES = {
         ],
       },
       {
-        key: "colour",
-        label: "Colour",
+        key: "color",
+        label: "Color",
         type: "select",
         default: "rainbow",
         choices: [
@@ -2371,7 +2371,7 @@ export const RECIPES = {
 };
 
 // The directions the orbital's photons travel: in from the upper left, out
-// towards the lower right (both in the picture plane).
+// toward the lower right (both in the picture plane).
 const PHOTON_IN = unit([-0.75, 0.62, 0.2]);
 const PHOTON_OUT = unit([0.8, -0.35, -0.1]);
 

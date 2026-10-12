@@ -121,7 +121,7 @@ test("a struck key dips, its hammer meets its rod as the note sounds, and the ro
 });
 
 test("the hammer's head just meets its rod at the strike, without passing into it", async () => {
-  // The head's centre at rest and its pivot, in recipe coordinates.
+  // The head's center at rest and its pivot, in recipe coordinates.
   const pivot = [0, 0.52, -0.13];
   const head = [0, 0.632, -0.002];
   // The rod's front is at z = -0.2 + 0.0115; the head's radius is 0.025.

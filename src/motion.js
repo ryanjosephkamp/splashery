@@ -1,5 +1,5 @@
 // Motion on the CPU side: whole-toy moves (bounce, spin, wobble, float and a
-// tap-to-hop), a kit toy's own behaviours clock, its controls (eased
+// tap-to-hop), a kit toy's own behaviors clock, its controls (eased
 // toggles and sliders) and its rigid parts. Produces uniforms for the effect
 // modifier (uSpBody*, uSpKit*, uSpParts). Pure JavaScript.
 
@@ -17,7 +17,7 @@ export const MOVES = [
 export const MOVE_IDS = MOVES.map((m) => m.id);
 
 export const DEFAULT_MOTION = Object.freeze({
-  alive: true, // the toy's own behaviours (flames flicker, hearts beat)
+  alive: true, // the toy's own behaviors (flames flicker, hearts beat)
   move: "still",
   speed: 0.5,
   controls: {},
@@ -288,7 +288,7 @@ export class MotionDriver {
     const F = info.half[1];
     const u = {};
 
-    // Controls ease towards their targets.
+    // Controls ease toward their targets.
     for (const k in paused ? {} : this.targets) {
       const def = this.controlDef(k);
       const goal = this.targets[k];
@@ -327,7 +327,7 @@ export class MotionDriver {
       squash += hop.squash;
     }
 
-    // The kit toy's own frame: behaviours clock, recipe drive, parts.
+    // The kit toy's own frame: behaviors clock, recipe drive, parts.
     const kt = this.tick(this.kitClock, clock, rate, motion.alive !== false && !paused);
     // out.resort: true on a frame asks the player to sort the tokens again
     // where they stand (resortTokens in src/player.js).
@@ -469,7 +469,7 @@ export function packParts(data, parts, driven, scale) {
     const pv = def ? def.pivot : [0, 0, 0];
     data.set(pq, o);
     data.set([pv[0], pv[1], pv[2], grow], o + 4);
-    // A culled part hides its splats on the far side of its centre (the
+    // A culled part hides its splats on the far side of its center (the
     // kit shader reads visibility -w - 1 from a w of -1 or less); cull:
     // "below" hides those under the level plane through it (lane Night sky,
     // -w - 10 from a w of -10 or less).
@@ -481,7 +481,7 @@ export function packParts(data, parts, driven, scale) {
 
 // Lever groups for uSpLever (kind "lever"): per group the pivot and the
 // full amount, the axis or direction with mode * 4 + channel, and the glow
-// colour with its channel (-1: none). See Kit.lever().
+// color with its channel (-1: none). See Kit.lever().
 function packLeverGroups(data, groups = []) {
   data.fill(0);
   for (let g = 0; g < MAX_LEVER_GROUPS; g++) {

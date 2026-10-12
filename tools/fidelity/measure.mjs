@@ -50,7 +50,7 @@ const A = [
 const mul = (a, b) => a.map((row) => b[0].map((_, j) => row.reduce((s, v, k) => s + v * b[k][j], 0))); // prettier-ignore
 
 function onBackground(png, w) {
-  // Nearest-neighbour resample to w x w (the renders are square), then alpha over bg.
+  // Nearest-neighbor resample to w x w (the renders are square), then alpha over bg.
   const o = new Float64Array(w * w * 3);
   for (let y = 0; y < w; y++)
     for (let x = 0; x < w; x++) {

@@ -16,7 +16,7 @@
 //
 // ribbonPath(chain) gives a smooth backbone through the CA atoms for drawing a
 // cartoon, and centreStructure(structure) moves everything onto the
-// protein's centre.
+// protein's center.
 
 import { readPdbAtom, perceiveBonds, guessBondOrders } from "./molfile.js";
 import { element, normalSymbol } from "./elements.js";
@@ -687,7 +687,7 @@ export function ribbonPath(chain, { perResidue = 8 } = {}) {
   return out;
 }
 
-// Moves every atom (chains and ligands) so the protein's centre (the mean of
+// Moves every atom (chains and ligands) so the protein's center (the mean of
 // its atoms) sits on the origin. Changes the structure in place, records the
 // offset as `centre`, and returns the structure.
 export function centreStructure(structure) {

@@ -1,6 +1,6 @@
 // Weather and elements pack: fire, storms, ice. Loaded on demand.
 //
-// Weather toys lean on behaviours: rain and snow fall, sparks and steam
+// Weather toys lean on behaviors: rain and snow fall, sparks and steam
 // rise, dust orbits; lightning, blobs of wax and swirling snow are parts
 // that drive() shows, hides and moves on a clock.
 
@@ -168,9 +168,9 @@ const lavaGlassR = (y) =>
   0.2 +
   0.075 * Math.sin(Math.PI * clamp((y + 0.05) / 1.35, 0, 1) * 0.8) -
   0.115 * smoothstep(0.62, 1.3, y);
-// Colour sets: wax, liquid, and the glow the wax runs through when heated
+// Color sets: wax, liquid, and the glow the wax runs through when heated
 // (from its resting glow round to it again). "own" takes the Wax and
-// Liquid colours from the pickers and the classic orange-magenta-gold.
+// Liquid colors from the pickers and the classic orange-magenta-gold.
 const LAVA_SETS = {
   own: { label: "Pick below" },
   ocean: {
@@ -289,7 +289,7 @@ const ICE_SECS = 7.6;
 // where it joins the rest (its pivot) over its window of the melt level
 // [start, end]; a piece that breaks off first thins a little, cracks off
 // at `detach`, falls (over `fall` of the melt level) to lie in the water
-// at `land` (its centre, `centre`, turned by `turn`), and melts away there
+// at `land` (its center, `centre`, turned by `turn`), and melts away there
 // over `gone`. `min` is what is left of it (the body's lump).
 const ICE_MELT = 4.4;
 const ICE_TOP = 0.93;
@@ -452,8 +452,8 @@ function icePose(L, regrow) {
     const f = band(L, pc.detach, pc.detach + pc.fall);
     const sc = then.scale * (1 - ease(band(L, pc.gone[0], pc.gone[1])));
     const q = slerpQ(ICE_Q0, qLand, ease(f));
-    // The centre falls (faster and faster) and drifts to where it lands,
-    // then the piece melts away about its centre, lying in the water.
+    // The center falls (faster and faster) and drifts to where it lands,
+    // then the piece melts away about its center, lying in the water.
     const landY = pc.land[1] * Math.max(0.3, sc);
     const at = [
       c0[0] + (pc.land[0] - c0[0]) * easeOut(f),
@@ -526,7 +526,7 @@ function twDebrisAt(d, s, lift) {
   return [[Math.sin(a) * rr, d.h + y, Math.cos(a) * rr], u];
 }
 // Rainbow: seven bands, red outside. A tap wipes it away (violet first,
-// right to left) and draws it again, red first, each colour from left to
+// right to left) and draws it again, red first, each color from left to
 // right (a fade on channel 0: the undrawing run backwards). at() is where
 // a splat of band i at angle a (0 at the right foot, PI at the left) sits
 // along the channel.
@@ -558,7 +558,7 @@ const IB_FLOAT = 0.02;
 const IB_G = 6;
 
 // The chunk's geometry for a berg of radius function shapeR: the cut
-// (dot(p, IB_N) > h), the chunk's centre, a point on its broken face, the
+// (dot(p, IB_N) > h), the chunk's center, a point on its broken face, the
 // hinge it tips over, and its fall worked out ahead (the time it hits the
 // water and how it is moving then).
 function icebergChunk(shapeR) {
@@ -577,7 +577,7 @@ function icebergChunk(shapeR) {
   const cap = pts.filter((p) => dot(p, IB_N) > h);
   const mean = (list) => mul(list.reduce(add, [0, 0, 0]), 1 / Math.max(1, list.length));
   // The broken face's middle (the chunk's outside, pressed onto the cut),
-  // and the chunk's centre (between that and its outer surface).
+  // and the chunk's center (between that and its outer surface).
   const F = mean(cap.map((p) => sub(p, mul(IB_N, dot(p, IB_N) - h))));
   const C0 = add(mul(mean(cap), 0.65), mul(F, 0.35));
   // It tips over its outer bottom edge, on the right.
@@ -597,7 +597,7 @@ function icebergChunk(shapeR) {
   return { h, F, C0, hinge, T1, th1, w1, C1, V1, Ti: T1 + tau };
 }
 
-// Where the chunk is at s seconds: { C, th, k } (its centre, how far it has
+// Where the chunk is at s seconds: { C, th, k } (its center, how far it has
 // turned about IB_AXIS, and its size), or { regrow } while it grows back.
 function icebergPose(ch, s) {
   const { T1, th1, w1, C1, V1, Ti, hinge, C0 } = ch;
@@ -622,7 +622,7 @@ function icebergPose(ch, s) {
   return { C, th, k: 1 - ease(melt) };
 }
 
-// Debris is built this far towards the default camera and moved back to
+// Debris is built this far toward the default camera and moved back to
 // where it lies, so it sorts in front of the funnel's dust (it is hidden
 // while it passes behind the funnel instead).
 const TW_AHEAD = mul(TW_CAM, 0.42);
@@ -1276,7 +1276,7 @@ export const RECIPES = {
         const lean = 38 + k.rand() * 8;
         const len = 0.95;
         const base = [Math.sin(a) * 0.46, ground + 0.08, Math.cos(a) * 0.46];
-        // A cylinder along Y, tipped towards the centre.
+        // A cylinder along Y, tipped toward the center.
         k.add(k.cylinder(0.075, len), {
           pos: [
             base[0] * 0.55,
@@ -1509,7 +1509,7 @@ export const RECIPES = {
     options: [
       {
         key: "set",
-        label: "Colour set",
+        label: "Color set",
         type: "select",
         default: "own",
         choices: Object.entries(LAVA_SETS).map(([id, v]) => ({ id, label: v.label })),
@@ -1546,7 +1546,7 @@ export const RECIPES = {
     ],
     action: { key: "heat", label: "Heat it up" },
     // A tap heats the lamp: the blobs run about three and a half times as
-    // fast for a few seconds, the wax glows and shifts through its colour
+    // fast for a few seconds, the wax glows and shifts through its color
     // set's glow (orange, magenta, gold for the classic lamp), and the
     // liquid brightens; then it all eases back. The extra speed is an extra
     // clock (the boost's integral), kept when the effect ends so the blobs
@@ -2162,7 +2162,7 @@ export const RECIPES = {
         return { base: d.p, offset: [from[0] - d.p[0], from[1] - drop - d.p[1], from[2] - d.p[2]] };
       });
       out.parts.frost = { visible: 1 - smoothstep(0, 0.3, e) };
-      // The frost front: the coat shows (coloured as the ice) just before
+      // The frost front: the coat shows (colored as the ice) just before
       // it and the band of light runs up it on channel 0.
       const F = ICE_MELT + 1.5;
       const front = s === null ? 0 : bump(s, F, F + 0.15, F + 1.4, F + 1.6);
@@ -2200,7 +2200,7 @@ export const RECIPES = {
         ICE_PIECES.map((pc) => [pc.name, k.part(pc.name, { pivot: pc.pivot })]),
       );
       // The frost coat: fewer, bigger splats over the same surfaces,
-      // coloured as the ice there, that glow as the frost front (channel
+      // colored as the ice there, that glow as the frost front (channel
       // 0, by height) passes. Hidden except while it runs, when the swan is
       // whole again.
       const coat = k.part("coat", { pivot: [0, 0.5, 0] });
@@ -2715,8 +2715,8 @@ export const RECIPES = {
     controls: [{ key: "draw", label: "Draw", type: "pulse", ease: RB_SECS }],
     action: { key: "draw", label: "Draw the rainbow" },
     // A tap wipes the arc away in a blink (violet first), then draws it
-    // again colour by colour, red first, each band from the left cloud to
-    // the right one behind a bright little pen of its own colour. When the
+    // again color by color, red first, each band from the left cloud to
+    // the right one behind a bright little pen of its own color. When the
     // last band is in, sparkles burst from both clouds, which puff up, and
     // drift down as they fade.
     drive(t, c, out) {
@@ -3012,7 +3012,7 @@ export const RECIPES = {
         });
       }
       // The sea: see-through and rippling, with foam at the waterline,
-      // fading out towards its edge.
+      // fading out toward its edge.
       k.cloud({ share: 0.14, size: 1.7, flat: 0.3, pattern: false }, (r) => {
         const a = r() * TAU;
         const rr = Math.sqrt(0.2 + r() * (1.9 - 0.2));
@@ -3034,7 +3034,7 @@ export const RECIPES = {
       const Ci = add(add(ch.C1, mul(ch.V1, fall)), [0, -0.5 * IB_G * fall * fall, 0]);
       const W = [Ci[0], 0.012, Ci[2]];
       // The splash: drops built packed at the landing point (a little
-      // towards the camera, to draw over the chunk) and thrown up by their
+      // toward the camera, to draw over the chunk) and thrown up by their
       // part's scale; the drive adds the fall (see splash in drive).
       const W1 = add(W, mul(IB_CAM, 0.3));
       const splash = k.part("splash", { pivot: W1 });
@@ -3218,7 +3218,7 @@ export const RECIPES = {
           channel: 1,
           n: unit([0, 0.2, 1]),
           flat: 0.35,
-          // Softer towards its foot, so its leading edge is ragged water.
+          // Softer toward its foot, so its leading edge is ragged water.
           size: 1 + 0.6 * smoothstep(0.75, 1, v),
           color: mix("#a8dcf2", "#ffffff", 0.5 + 0.5 * s),
           opacity: 0.55 * (1 - 0.65 * smoothstep(0.8, 1, v + 0.1 * (r() - 0.5))),
@@ -3430,7 +3430,7 @@ export const RECIPES = {
         offset: [0.07 * ease(band(s, OW_HIT, 2.2)) * (1 - band(s, 2.4, 2.6)), 0, 0],
       };
       // The spray off the lip goes as it is thrown and comes back once the
-      // lip has curled over again, rising off it (the behaviours' amount
+      // lip has curled over again, rising off it (the behaviors' amount
       // grows back from 0, so it starts on the lip).
       out.parts.spray = { visible: s < 0.3 ? 1 - ease(band(s, 0, 0.3)) : ease(band(s, 5.2, 5.7)) };
       out.parts.churn = { visible: 1 - band(s, 0.3, 0.8) + ease(band(s, 4.9, 5.6)) };
@@ -3449,7 +3449,7 @@ export const RECIPES = {
         if (foamN > 0.5) col = mix(col, "#dff4ff", 0.55);
         return lit(col, c.n, 0.25);
       };
-      // The sea and the wave thin out towards their ends, so they fade into
+      // The sea and the wave thin out toward their ends, so they fade into
       // the water round them instead of stopping at a straight edge.
       const frayed = (c) => {
         const z = Math.abs(c.p[2]);
@@ -3492,7 +3492,7 @@ export const RECIPES = {
         skin: skin(OW_NM, OW_NL),
         color: (c) => {
           if (frayed(c)) return null;
-          // White only towards its tip, where it breaks.
+          // White only toward its tip, where it breaks.
           const foamN = c.noise(c.p[0] * 12, c.p[1] * 12, c.p[2] * 5);
           if (foamN > 0.95 - 1.7 * c.u * c.u) return keep(mix("#e4f6ff", "#ffffff", c.rand()));
           return water(c, 0.5, false);
@@ -3514,7 +3514,7 @@ export const RECIPES = {
         const rr = (0.2 + 0.08 * lump) * (1 - 0.35 * r() * r());
         const p = [1.0 + 0.1 * Math.cos(a) + Math.cos(a) * rr, Math.sin(a) * rr * 0.95, z];
         if (p[1] < 0.01) return null;
-        // Thinner towards the wave's ends.
+        // Thinner toward the wave's ends.
         const l = 0.5 + 0.5 * k.noise(p[0] * 14, p[1] * 14, z * 6);
         if (r() < band(Math.abs(z), 0.4, OW_Z1) * (1.2 - 0.4 * l)) return null;
         const d = Math.hypot(p[0] - OW_PLUNGE[0], p[1] - OW_PLUNGE[1]) / 0.5;
@@ -3616,7 +3616,7 @@ export const RECIPES = {
       out.amount = 0.6 + 0.5 * cycle + 1.2 * c.erupt;
     },
     build(k) {
-      // Terraced sinter mound with coloured mats around a blue pool.
+      // Terraced sinter mound with colored mats around a blue pool.
       const mound = k.lathe(
         [
           [1.0, 0],

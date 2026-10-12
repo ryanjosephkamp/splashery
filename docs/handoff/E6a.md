@@ -103,7 +103,7 @@ How the balls move (all in `src/packs/balls.js`, "Real throws and bounces (E6a)"
   sphere's even placement, which show as a swirl once a spin turns them into view.
 - **Glossy balls keep their light.** Baked light turns with a spinning ball, so a rolling pool ball
   looked like glass and the cricket ball's shine swung round. The pool, cricket, baseball and
-  softball now spin as an unlit copy ("spin", built tiny at the centre so it always sorts behind,
+  softball now spin as an unlit copy ("spin", built tiny at the center so it always sorts behind,
   grown by its part) under a fixed see-through layer of light ("light", `glossSpin()`), calibrated
   on renders against the ball at rest (`LIGHT_OVERLAP`). They ask for twice the splats
   (`density: 2`) so the ball at rest keeps its own.
@@ -134,7 +134,7 @@ Lessons for PACKS.md, backlog items and README lines, to move after the merge.
   cull while turned, hide the inside, splats about 1.15 times bigger. Spinning about an axis near
   the view direction keeps the order without it.
 - PACKS.md 7b (materials): baked light turns with a spinning body. For a glossy one, spin an unlit
-  copy built tiny at the centre (it sorts behind everything, for any camera) under a fixed
+  copy built tiny at the center (it sorts behind everything, for any camera) under a fixed
   see-through layer of light (`glossSpin()` in `src/packs/balls.js`).
 - PACKS.md 7b (hidden pieces): the app frames a toy by all its splats (`buf.bounds()` in
   `src/player.js`), not only the fit, so effect pieces must be built inside the toy even with
@@ -147,7 +147,7 @@ Lessons for PACKS.md, backlog items and README lines, to move after the merge.
   caps) should pass `interior: 0`, or their inside splats show as dots when the part turns.
 - PACKS.md 3: `k.roundedBox(sx, sy, sz)` takes full sizes, unlike the half sizes one might expect.
 - Backlog: the American football's end (above).
-- A smoke test fails in this sandbox on main as well as on this branch: "rigs pick splats by colour,
+- A smoke test fails in this sandbox on main as well as on this branch: "rigs pick splats by color,
   run effects and show add-ons" (`tests/smoke.spec.mjs`); the strawberry has not settled back 3 s
   after its tap (about 68,000 pixels differ against a limit near 14,000 on main). Nothing in this
   lane touches it; worth a look by whoever owns the scan rigs.

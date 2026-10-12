@@ -2,7 +2,7 @@
 // assets/toys/<id>/ (prepared with tools/prepare-assets.mjs, credits in
 // CREDITS.md); procedural toys are generator presets built in the browser.
 //
-// This catalogue is metadata only (ids, labels, categories, search words) so
+// This catalog is metadata only (ids, labels, categories, search words) so
 // it stays small as the shelf grows; toy code that needs more than a
 // generator preset lives in per-pack modules that load when a toy is picked.
 //
@@ -31,7 +31,7 @@ export const CATEGORIES = [
   { id: "clothing", label: "Clothing" },
   { id: "medieval", label: "Medieval" },
   { id: "animals", label: "Animals" },
-  { id: "maths", label: "Maths" },
+  { id: "maths", label: "Math" },
   { id: "computing", label: "AI and computing" },
   { id: "pictures", label: "Pictures and pages" },
   { id: "studio", label: "Studio" },
@@ -145,7 +145,7 @@ export const TOYS = [
     id: "knot",
     label: "Neon knot",
     category: "shapes",
-    tags: "trefoil neon maths generated",
+    tags: "trefoil neon math generated",
     kind: "procedural",
     generator: {
       shape: "knot",
@@ -332,7 +332,7 @@ export const TOYS = [
     id: "mandeltorus",
     label: "Mandeltorus",
     category: "scans",
-    tags: "photoreal scan captured maths fractal art",
+    tags: "photoreal scan captured math fractal art",
     kind: "captured",
     url: "assets/toys/mandeltorus/mandeltorus.sog",
     urlWeak: "assets/toys/mandeltorus/mandeltorus-lite.sog",
@@ -972,7 +972,7 @@ export const TOYS = [
     category: "space",
     kind: "kit",
     pack: "space",
-    tags: "planet craters grey rocky small solar system",
+    tags: "planet craters gray rocky small solar system",
   },
   {
     id: "venus",
@@ -996,7 +996,7 @@ export const TOYS = [
     category: "space",
     kind: "kit",
     pack: "space",
-    tags: "lunar craters maria grey satellite",
+    tags: "lunar craters maria gray satellite",
   },
   {
     id: "mars",
@@ -1146,7 +1146,7 @@ export const TOYS = [
     category: "space",
     kind: "kit",
     pack: "space",
-    tags: "gas cloud pillars stars emission colourful",
+    tags: "gas cloud pillars stars emission colorful",
     camera: { yaw: 0, pitch: 0.06, roll: 0, distance: 4.4 },
   },
   {
@@ -1340,7 +1340,7 @@ export const TOYS = [
     category: "tiny",
     kind: "kit",
     pack: "tiny",
-    tags: "phage virus microbe tail fibres lander inject dna microscope biology",
+    tags: "phage virus microbe tail fibers lander inject dna microscope biology",
     camera: { yaw: 0.55, pitch: 0.2, roll: 0, distance: 4.4 },
   },
   {
@@ -1675,7 +1675,7 @@ export const TOYS = [
     category: "gems",
     kind: "kit",
     pack: "gems",
-    tags: "gem jewel rainbow play of colour cabochon stone mineral",
+    tags: "gem jewel rainbow play of color cabochon stone mineral",
   },
   {
     id: "pearl",
@@ -1683,7 +1683,7 @@ export const TOYS = [
     category: "gems",
     kind: "kit",
     pack: "gems",
-    tags: "gem jewel oyster shell lustre sea open",
+    tags: "gem jewel oyster shell luster sea open",
   },
 
   // ---- Pack: anatomy ----
@@ -2022,7 +2022,7 @@ export const TOYS = [
     category: "weather",
     kind: "kit",
     pack: "elements",
-    tags: "weather colours arc clouds sky",
+    tags: "weather colors arc clouds sky",
     camera: { yaw: 0.2, pitch: 0.15, roll: 0, distance: 4.0 },
   },
   {
@@ -2393,7 +2393,7 @@ export const TOYS = [
     category: "toys",
     kind: "kit",
     pack: "playthings",
-    tags: "twist cube colours puzzle 3x3",
+    tags: "twist cube colors puzzle 3x3",
     camera: { yaw: 0.62, pitch: 0.5, roll: 0, distance: 7.4 },
   },
   {
@@ -2420,7 +2420,7 @@ export const TOYS = [
     category: "toys",
     kind: "kit",
     pack: "playthings",
-    tags: "paper aeroplane airplane dart fold fly",
+    tags: "paper airplane airplane dart fold fly",
     camera: { yaw: 0.7, pitch: 0.42, roll: 0, distance: 3.6 },
   },
   {
@@ -2469,7 +2469,7 @@ export const TOYS = [
     camera: { yaw: 0.55, pitch: 0.6, roll: 0, distance: 3.7 },
   },
 
-  // ---- Pack: maths ----
+  // ---- Pack: math ----
   {
     id: "lorenz",
     label: "Lorenz attractor",
@@ -2687,7 +2687,7 @@ export const TOYS = [
     tags: "duoprism 4d four dimensions polygon prism polytope projection",
     camera: { yaw: 0.55, pitch: 0.35, roll: 0, distance: 4.1 },
   },
-  // Lane Manual: the splat equation toy (its own pack, on the Maths shelf).
+  // Lane Manual: the splat equation toy (its own pack, on the math shelf).
   {
     id: "splat-equation",
     label: "Splat equation",
@@ -2725,7 +2725,7 @@ export const TOYS = [
     category: "objects",
     kind: "kit",
     pack: "objects",
-    tags: "ballerina dancer jewellery box lid tune",
+    tags: "ballerina dancer jewelry box lid tune",
     camera: { yaw: 0.4, pitch: 0.35, roll: 0, distance: 4.6 },
   },
   {
@@ -2875,7 +2875,7 @@ export const TOYS = [
     category: "medieval",
     kind: "kit",
     pack: "medieval",
-    tags: "knight heater coat of arms heraldry crest armour",
+    tags: "knight heater coat of arms heraldry crest armor",
     camera: { yaw: 0.3, pitch: 0.2, roll: 0, distance: 5 },
   },
   {
@@ -2911,7 +2911,7 @@ export const TOYS = [
     category: "medieval",
     kind: "kit",
     pack: "medieval",
-    tags: "armour helm visor plume feathers steel",
+    tags: "armor helm visor plume feathers steel",
   },
   {
     id: "crown",
@@ -3283,7 +3283,7 @@ export const TOYS = [
     category: "vehicles",
     kind: "kit",
     pack: "vehicles",
-    tags: "biplane aeroplane airplane aircraft pilot prop fly loop",
+    tags: "biplane airplane airplane aircraft pilot prop fly loop",
     camera: { yaw: 0.6, pitch: 0.3, roll: 0, distance: 4.3 },
   },
   {
@@ -3292,7 +3292,7 @@ export const TOYS = [
     category: "vehicles",
     kind: "kit",
     pack: "vehicles",
-    tags: "aeroplane airplane aircraft plane passenger fly wings engines",
+    tags: "airplane airplane aircraft plane passenger fly wings engines",
     camera: { yaw: 0.6, pitch: 0.35, roll: 0, distance: 4.2 },
   },
   {
@@ -3393,7 +3393,7 @@ export const TOYS = [
     category: "landmarks",
     kind: "kit",
     pack: "landmarks",
-    tags: "new york usa torch crown statue harbour",
+    tags: "new york usa torch crown statue harbor",
     camera: { yaw: 0.55, pitch: 0.25, roll: 0, distance: 4.0 },
   },
   {

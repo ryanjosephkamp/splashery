@@ -108,16 +108,16 @@ What each tap does now (the `improved` entries in `tools/toy-plan.json` have the
 
 Lessons for PACKS.md, backlog items and README lines, to move after the merge.
 
-- Draw order for walkers (PACKS 7b rule 7): figures that walk towards the camera must be built at
-  the point of their path nearest the camera (the Parthenon's procession disappeared under the rock
-  when built where it started).
-- Negative glow darkens: `out.glow` with negative colours on a `band` layer makes night fall (the
-  Taj Mahal) or casts a moving shadow (the Washington Monument's sundial shadow is a band on the
-  ground at each splat's bearing).
+- Draw order for walkers (PACKS 7b rule 7): figures that walk toward the camera must be built at the
+  point of their path nearest the camera (the Parthenon's procession disappeared under the rock when
+  built where it started).
+- Negative glow darkens: `out.glow` with negative colors on a `band` layer makes night fall (the Taj
+  Mahal) or casts a moving shadow (the Washington Monument's sundial shadow is a band on the ground
+  at each splat's bearing).
 - A sustained light from a `band`: give it `params: [1, 0.5]` and hold its channel partway (for
   example 0.5 to 0.7); the glow's strength then follows the channel (the Eiffel Tower's gold lights,
   Stonehenge's gold stones).
-- A travelling wave with morphs: split the moving pieces between three channels driven a third of a
+- A traveling wave with morphs: split the moving pieces between three channels driven a third of a
   cycle apart (the sea urchin's spines).
 - A morph target that should grow out of a hidden spot (a tongue, sparks, sand) is built bunched up
   at the spot and morphs out to its full shape; build it as a cloud with `p` at rest and `to` at

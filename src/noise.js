@@ -103,7 +103,7 @@ export function createNoise3(seed) {
       w,
     );
   }
-  // Fractal sum of octaves, normalised back to roughly [-1, 1].
+  // Fractal sum of octaves, normalized back to roughly [-1, 1].
   noise.fbm = function (x, y, z, octaves = 4) {
     let sum = 0;
     let amp = 1;

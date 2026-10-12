@@ -1087,7 +1087,7 @@ export const TOY_SOUNDS = {
     { voice: "sparkle", f: 3000, n: 5, decay: 0.8, bright: 0.5, vol: 0.5 },
     { voice: "glass", at: 1.2, notes: "E6 G6 B6 D7 E7", step: 0.45, decay: 0.5, vol: 0.45 },
   ],
-  // The fibres pull the chromatids apart (0.5 s); they rejoin (3.9 s).
+  // The fibers pull the chromatids apart (0.5 s); they rejoin (3.9 s).
   chromosome: [
     {
       voice: "sample",
@@ -1549,7 +1549,7 @@ export const TOY_SOUNDS = {
     { voice: "whoosh", at: 0.3, f: 180, to: 5, decay: 2.2, vol: 0.8 },
     { voice: "clatter", at: 3.9, f: 900, n: 10, kind: "wood", decay: 1.4, vol: 0.8 },
   ],
-  // Wiped with a swish, drawn again a note per colour, then sparkles.
+  // Wiped with a swish, drawn again a note per color, then sparkles.
   rainbow: [
     { voice: "whoosh", f: 1200, to: 0.3, decay: 0.7, vol: 0.5 },
     { voice: "harp", at: 0.8, notes: "C5 D5 E5 G5 A5 C6 D6", step: 0.4, decay: 0.8 },
@@ -1781,7 +1781,7 @@ export const TOY_SOUNDS = {
     { voice: "clockwork", at: 0.3, f: 2600, rate: 2.7, decay: 1.1 },
   ],
 
-  // ---- Maths ------------------------------------------------------------------------
+  // ---- math ------------------------------------------------------------------------
   // Sound B: something epic for the strange attractor: a deep hit, a dark
   // slow rush and a wide low chord (no whistling howl).
   lorenz: [
@@ -2484,7 +2484,7 @@ export const TOY_SOUNDS = {
     on: { voice: "horn", f: 62, kind: "fog", decay: 1.4 },
     off: { voice: "switch", f: 1800, decay: 1.5 },
   },
-  // The flame whooshes up, sparks crackle and a harbour bell rings.
+  // The flame whooshes up, sparks crackle and a harbor bell rings.
   "statue-of-liberty": [
     // Sound B: no crackling clicks.
     { voice: "whoosh", f: 300, to: 3, decay: 0.8 },

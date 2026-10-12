@@ -155,7 +155,7 @@ WORKING (October 5, 2026): sources chosen (see Notes); building the sample pipel
 - A few photos can't be cut cleanly and show as cropped cards (fluorine, sodium, uranium) or an oval
   (neptunium); samples in glass tubes keep the whole tube.
 - The tiles are small on a phone (the whole 18-column table fits the width); a tap needs aim.
-- `node tools/us-english.mjs --diff` flags "aluminium" in CREDITS.md: it is the Images of Elements
+- `node tools/us-english.mjs --diff` flags "aluminum" in CREDITS.md: it is the Images of Elements
   page's address, which can't change.
 
 ## For the Operator
