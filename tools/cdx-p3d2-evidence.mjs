@@ -22,19 +22,9 @@ const before = [...read("before"), ...read("before-extra")].map((r) => {
   if (b) return { ...r, backing: b.backing, backingRuns: b.backingRuns };
   return r.view === "splats" ? { ...r, backing: null, backingRuns: null } : r;
 });
-const final20 = read("final20");
-if (final20.length !== 864 || backingBefore.length !== 432)
-  throw new Error("Incomplete current 20-degree sweep or backing baseline.");
-// Final ordering and handoff fixes do not alter the relief topology. Use the
-// fresh sweep for the acceptance angle; keep earlier 10/30-degree sensitivity
-// captures with their source directories so the provenance remains explicit.
-const after = [
-  ...read("final")
-    .filter((r) => r.angle !== 20)
-    .map((r) => (r.view === "splats" ? { ...r, backing: null, backingRuns: null } : r)),
-  ...(fs.existsSync(path.join(root, "final-tail", "rows.json")) ? read("final-tail") : []),
-  ...final20,
-];
+if (backingBefore.length !== 432) throw new Error("Incomplete backing baseline.");
+// The follow-up captures every after pose with one final renderer build.
+const after = read(opt("after", "review-r2/final"));
 if (before.length !== 2592 || after.length !== 2592)
   throw new Error(`Incomplete sweep: ${before.length}/${after.length}; need 2592 each.`);
 for (const rows of [before, after]) {
@@ -70,6 +60,7 @@ for (const sample of ALL_SAMPLES)
       before: b,
       after: a,
       reduction: b.holes ? 100 * (1 - a.holes / b.holes) : null,
+      zeroHoleBaseline: b.holes === 0,
       pass: a.holes <= b.holes * 0.2 && a.tears <= b.tears * 0.2,
     });
   }
@@ -148,39 +139,42 @@ try {
       ...r,
       image: `data:image/png;base64,${fs.readFileSync(path.join(root, r.directory, r.file)).toString("base64")}`,
     }));
-    const image = await page.evaluate(async (rows) => {
-      const c = document.createElement("canvas");
-      c.width = 390 * 4;
-      c.height = (844 + 66) * 3;
-      const g = c.getContext("2d");
-      g.fillStyle = "#fff";
-      g.fillRect(0, 0, c.width, c.height);
-      for (let k = 0; k < rows.length; k++) {
-        const r = rows[k],
-          x = (k % 4) * 390,
-          y = Math.floor(k / 4) * (844 + 66);
-        g.fillStyle = "#111";
-        g.font = "16px sans-serif";
-        g.fillText(
-          `${r.id} · ${r.view === "splats" && r.directory.startsWith("final") ? "Fine Splats (hybrid)" : r.view}`,
-          x + 8,
-          y + 18,
-          374,
-        );
-        g.fillText(
-          `${r.id.startsWith("dot-") ? "AI-made Studio · " : ""}Depth ${r.depth} · ${r.direction} ${r.angle}°`,
-          x + 8,
-          y + 38,
-          374,
-        );
-        g.fillText(`Clear holes ${r.holes} · tears ${r.tears}`, x + 8, y + 58, 374);
-        const i = new Image();
-        i.src = r.image;
-        await i.decode();
-        g.drawImage(i, x, y + 66);
-      }
-      return c.toDataURL("image/png");
-    }, images);
+    const image = await page.evaluate(
+      async ({ rows, name }) => {
+        const c = document.createElement("canvas");
+        c.width = 390 * 4;
+        c.height = (844 + 66) * 3;
+        const g = c.getContext("2d");
+        g.fillStyle = "#fff";
+        g.fillRect(0, 0, c.width, c.height);
+        for (let k = 0; k < rows.length; k++) {
+          const r = rows[k],
+            x = (k % 4) * 390,
+            y = Math.floor(k / 4) * (844 + 66);
+          g.fillStyle = "#111";
+          g.font = "16px sans-serif";
+          g.fillText(
+            `${r.id} · ${r.view === "splats" && name !== "before" ? "Fine Splats (hybrid)" : r.view}`,
+            x + 8,
+            y + 18,
+            374,
+          );
+          g.fillText(
+            `${r.id.startsWith("dot-") ? "AI-made Studio · " : ""}Depth ${r.depth} · ${r.direction} ${r.angle}°`,
+            x + 8,
+            y + 38,
+            374,
+          );
+          g.fillText(`Clear holes ${r.holes} · tears ${r.tears}`, x + 8, y + 58, 374);
+          const i = new Image();
+          i.src = r.image;
+          await i.decode();
+          g.drawImage(i, x, y + 66);
+        }
+        return c.toDataURL("image/png");
+      },
+      { rows: images, name },
+    );
     fs.writeFileSync(
       path.join(out, `${name}-worst.png`),
       Buffer.from(image.split(",")[1], "base64"),
@@ -194,8 +188,9 @@ console.log(
   JSON.stringify(
     {
       renders: before.length + after.length,
-      passed: summary.filter((r) => r.pass).length,
-      total: summary.length,
+      positiveBaselinePassed: summary.filter((r) => !r.zeroHoleBaseline && r.pass).length,
+      positiveBaselineGroups: summary.filter((r) => !r.zeroHoleBaseline).length,
+      zeroBaselineNonregressions: summary.filter((r) => r.zeroHoleBaseline && r.pass).length,
       failures: summary.filter((r) => !r.pass),
     },
     null,
