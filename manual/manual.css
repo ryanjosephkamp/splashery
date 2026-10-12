@@ -1493,3 +1493,88 @@ nav.toc > ol {
   font-size: 0.85rem;
   color: var(--muted);
 }
+
+/* ---- r7a: live figures, and the pictures on the "more", "unique" and "built" pages ---------------
+   A live figure (manual/demos4.js) has a still inside it for the PDF and a canvas for the web page;
+   the script adds .live when the canvas is running. */
+.fig-stack {
+  position: relative;
+  max-width: 540px;
+  margin: 0 auto;
+}
+.fig-stack svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.fig-stack .fig-live {
+  display: none;
+}
+.diagram.live .fig-still {
+  display: none;
+}
+.diagram.live .fig-live {
+  display: block;
+  position: absolute;
+  top: 7.9%;
+  left: 66.7%;
+  width: 30.5%;
+  height: auto;
+}
+@media print {
+  .diagram.live .fig-still {
+    display: inline;
+  }
+  .diagram.live .fig-live {
+    display: none;
+  }
+}
+.built-diagram svg {
+  max-width: 420px;
+  width: 100%;
+  height: auto;
+}
+.item-pic {
+  margin: 10px 0 16px;
+}
+.item-pic img {
+  display: block;
+  width: 100%;
+  max-width: 540px;
+  height: auto;
+  border-radius: 8px;
+  background: #14161c;
+}
+.item-pic figcaption {
+  margin-top: 4px;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+.link-steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+.link-steps li {
+  display: grid;
+  gap: 2px;
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+  overflow-wrap: anywhere;
+}
+.link-steps .size {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+.link-steps code {
+  font-size: 0.8rem;
+}
+
+/* ---- r7b: Chapters 6 to 10 and the back matter (Manual r7b) ---- */
+ul.reading li {
+  overflow-wrap: anywhere;
+}
