@@ -21,12 +21,12 @@ your brief is already here). Model: Opus 5.5.
 
 ### Brief (written by the Operator on October 3, 2026, from the owner's review that evening)
 
-The owner's review is in docs/reviews/2026-10-03-labs-review/review.md. On the QR code toy (labs;
-lane QR built it, #216, and the scan lab measured it, #215) he wrote that the dots and squares look
-a little blurry; he'd like more than the breaking-apart effect; he loves the live color and wants it
-expanded (faster, slower, different ways); he wants country-flag color themes on the splats
-themselves, not the background, with good judgment about white; and more color themes to choose
-from. Every code must still scan.
+The owner's review is private; this is the Operator's summary. On the QR code toy (labs; lane QR
+built it, #216, and the scan lab measured it, #215) he wrote that the dots and squares look a little
+blurry; he'd like more than the breaking-apart effect; he loves the live color and wants it expanded
+(faster, slower, different ways); he wants country-flag color themes on the splats themselves, not
+the background, with good judgment about white; and more color themes to choose from. Every code
+must still scan.
 
 #### What to build
 
@@ -55,7 +55,7 @@ from. Every code must still scan.
 #### Added October 4, 2026 (the owner's push notes)
 
 The owner made the QR code "one of the things that we specialize in" and a major focus of the push
-(docs/reviews/2026-10-04-push-alignment/notes.md). On this toy he asked for:
+(his notes are private). On this toy he asked for:
 
 7. **More effects like the living color.** He likes "an electrical wave effect as the colors change"
    and wants more like it: for example a current that runs along the module paths, a charge that

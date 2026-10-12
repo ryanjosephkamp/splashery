@@ -1,5 +1,5 @@
 // Lane Sound C: the owner's sound notes of October 2, 2026
-// (docs/reviews/sounds-2026-10-02.md, tools/sound-review.json).
+// (tools/sound-review.json).
 //
 // - Every toy the lane changed is marked in the review, and its spec is sound.
 // - Every recording it names exists, is credited and small, with a synth fallback.

@@ -194,34 +194,35 @@
             Brief (written by the Operator on September 30, 2026, from the owner's marks of
             September 29)
           </h2>
-          <p>The owner marked two of lane Sharpness's cards &quot;fix&quot;, word for word:</p>
+          <p>
+            The owner marked two of lane Sharpness's cards &quot;fix&quot; (the Operator's summary):
+          </p>
           <ol>
             <li>
-              <code>shp-clock</code>: &quot;The minute and hour hands on the clock aren't fully
-              visible here for some reason...&quot; Lane Sharpness found why
-              (docs/handoff/Sharpness.md, item 8): the hands sit only 1 to 3 cm above the dial
-              (<code>hand()</code> in src/packs/objects.js: <code>zf + 0.01</code>,
-              <code>0.02</code>, <code>0.03</code>), so from the home view the dial's big, flat
-              splats sort in front of a hand pointing up and to the right. Lifting them to about
-              <code>0.04</code>, <code>0.055</code> and <code>0.07</code> showed the hand in its
-              test. Fix it so both hands (and the second hand, if there is one) are fully visible at
-              every time of day and from every normal viewing angle: check 12 hand positions around
-              the dial, from the home view and from 30° to either side, at 390×844 and 1440×900.
-              Keep the hands looking attached to the center (a real clock's hands sit a few
-              millimeters apart on the arbor, so if lifting makes them float, use a visible arbor
-              and a small hub), and keep the tap effect as it is.
+              <code>shp-clock</code>: the minute and hour hands on the clock are not fully visible.
+              Lane Sharpness found why (docs/handoff/Sharpness.md, item 8): the hands sit only 1 to
+              3 cm above the dial (<code>hand()</code> in src/packs/objects.js:
+              <code>zf + 0.01</code>, <code>0.02</code>, <code>0.03</code>), so from the home view
+              the dial's big, flat splats sort in front of a hand pointing up and to the right.
+              Lifting them to about <code>0.04</code>, <code>0.055</code> and
+              <code>0.07</code> showed the hand in its test. Fix it so both hands (and the second
+              hand, if there is one) are fully visible at every time of day and from every normal
+              viewing angle: check 12 hand positions around the dial, from the home view and from
+              30° to either side, at 390×844 and 1440×900. Keep the hands looking attached to the
+              center (a real clock's hands sit a few millimeters apart on the arbor, so if lifting
+              makes them float, use a visible arbor and a small hub), and keep the tap effect as it
+              is.
             </li>
             <li>
-              <code>shp-marble</code>: &quot;Overall, this looks really good, but I can barely see
-              the marble's glass spherical shape, only the glass thing inside of it.&quot; The glass
-              shell is a faint, nearly white cloud on a white background. Make the glass sphere read
-              clearly as clear glass: a visible rim where the shell turns away (brighter and more
-              opaque at grazing angles, the way real glass shows a bright edge and a thin dark
-              line), a highlight and its small reflection, and a faint tint, while the colored swirl
-              inside stays fully visible and sharp. Check it on both the light and the dark
-              background, at phone size. The effect quality rules apply: no see-through solids, but
-              this one is glass, so it must look like glass (clear, with a crisp edge), never like a
-              cloud.
+              <code>shp-marble</code>: overall it looks really good, but he can barely see the
+              marble's glass spherical shape, only the glass thing inside of it. The glass shell is
+              a faint, nearly white cloud on a white background. Make the glass sphere read clearly
+              as clear glass: a visible rim where the shell turns away (brighter and more opaque at
+              grazing angles, the way real glass shows a bright edge and a thin dark line), a
+              highlight and its small reflection, and a faint tint, while the colored swirl inside
+              stays fully visible and sharp. Check it on both the light and the dark background, at
+              phone size. The effect quality rules apply: no see-through solids, but this one is
+              glass, so it must look like glass (clear, with a crisp edge), never like a cloud.
             </li>
           </ol>
           <p>Both are public toys: they merge only after the owner marks your new cards good.</p>

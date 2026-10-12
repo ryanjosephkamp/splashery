@@ -625,9 +625,8 @@ function closeSound(audio) {
 }
 
 // ---- Long videos (Live r7) -------------------------------------------------------
-// The owner's request of October 6, 2026: "Can we support full video uploads
-// beyond 8 seconds? … I want users to be able to watch long videos here if
-// they want to and are willing to wait for them to load after upload."
+// The owner's request of October 6, 2026: support full video uploads beyond
+// 8 seconds, for people who are willing to wait for them to load.
 //
 // A video longer than MAX_SECONDS plays whole. Its frames aren't kept: a
 // muted copy of the video plays along with its sound (on the sound's clock)

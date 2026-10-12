@@ -9,17 +9,16 @@ docs/handoff/Science.md.
 
 ## Brief (written by the Operator on September 29, 2026, from the owner's question and answer that day)
 
-The owner asked, word for word: "can we actually enable realistic scientific simulations using
-splats, potentially offering scientists a useful tool that does something valuable that's hard to
-achieve without splats?" The Operator's research page
-(https://claude.ai/artifact/V3rJhrgPuntHLPTUR16tev, section 3) answered honestly: splats won't
-replace validated simulators, and the Gaussian research that compresses big simulations (Volume
-Encoding Gaussians, ParticleGS) needs GPU training. But some science data already are Gaussians, so
-they become splats exactly, with no training and no GPU: each splat is the published measurement,
-and its shape shows the measurement's uncertainty. Existing desktop tools (ORTEP and Mercury for
-ellipsoids, ThunderSTORM and napari for microscopy, SPLASH and yt for SPH) already draw these; what
-Splashery adds is access (any phone, no install, a shared link, millions of points) and uncertainty
-drawn as a soft shape. The owner's answer: "Science yes."
+The owner asked whether splats can enable realistic scientific simulations, potentially giving
+scientists a useful tool that does something valuable that is hard to achieve without splats. The
+Operator's research page (https://claude.ai/artifact/V3rJhrgPuntHLPTUR16tev, section 3) answered
+honestly: splats won't replace validated simulators, and the Gaussian research that compresses big
+simulations (Volume Encoding Gaussians, ParticleGS) needs GPU training. But some science data
+already are Gaussians, so they become splats exactly, with no training and no GPU: each splat is the
+published measurement, and its shape shows the measurement's uncertainty. Existing desktop tools
+(ORTEP and Mercury for ellipsoids, ThunderSTORM and napari for microscopy, SPLASH and yt for SPH)
+already draw these; what Splashery adds is access (any phone, no install, a shared link, millions of
+points) and uncertainty drawn as a soft shape. The owner's answer: "Science yes."
 
 Build three labs toys on a new "Science" shelf behind the labs switch, in this order, posting each
 toy's cards as soon as it is done:

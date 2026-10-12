@@ -62,13 +62,13 @@ now waits for the owner's marks and fixes any "Needs work" in the same PR (new c
 (TOY-PLAN.md taken from main and regenerated). Both fixes are posted as `e6a-basketball-r2` and
 `e6a-bowling-ball-r2` (the old cards marked `replacedBy`):
 
-- **Basketball.** "The finger doesn't look like a finger… put more of the hand in the shot… Can you
-  make it a robot hand, too?" The fingertip is now a kit-built robot hand (`buildHand()`,
-  `showHand()`): a pointing hand with a jointed index finger (three parts, each turning about its
-  own joint), the other fingers curled into a fist with the thumb across them, a palm with a blue
-  light, and the wrist and forearm. It rises as the ball is tossed, its finger straightening to
-  catch it, sways with the wobble, and drops away as the ball falls. The ball's motion and sound are
-  unchanged.
+- **Basketball.** The owner said the finger does not look like a finger, that more of the hand
+  should be in the shot, and asked for a robot hand too. The fingertip is now a kit-built robot hand
+  (`buildHand()`, `showHand()`): a pointing hand with a jointed index finger (three parts, each
+  turning about its own joint), the other fingers curled into a fist with the thumb across them, a
+  palm with a blue light, and the wrist and forearm. It rises as the ball is tossed, its finger
+  straightening to catch it, sways with the wobble, and drops away as the ball falls. The ball's
+  motion and sound are unchanged.
 - **Bowling ball.** "At the end of the video, a couple of black spots appear on the ball." They were
   in the app too. Two causes, both turning with the rolling ball: the finger holes (dark tubes bored
   into the ball) drew through it as black blocks, and the pole caps' inside splats (the caps took

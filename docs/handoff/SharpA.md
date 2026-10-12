@@ -7,15 +7,15 @@ Medieval, Open me, gems, space and weather". How lanes work: [OPERATING.md](../O
 
 (Written by the Operator on October 2, 2026, from the owner's review of that day)
 
-On October 2 the owner went through every toy on the preview build
-(docs/reviews/2026-10-02-mega-review/review.md, word for word). He keeps saying the same thing about
-many toys: "a little grainy", "could be sharper". He wants every one he named sharp before the team
-moves on, and he approved this lane ("start now"). Read PACKS.md section 7c ("Sharp kit toys") and
+On October 2 the owner went through every toy on the preview build (the owner's notes are private;
+the Operator's summary is in the brief). He keeps saying the same thing about many toys: "a little
+grainy", "could be sharper". He wants every one he named sharp before the team moves on, and he
+approved this lane ("start now"). Read PACKS.md section 7c ("Sharp kit toys") and
 docs/handoff/Sharpness.md and FidelityA.md / FidelityB.md (what worked before) first. The materials
 rule applies: real-looking materials, no see-through solids, no blur, no speckle. Keep every toy's
 shape, effect, sound and splat budget per tier; only the look gets sharper.
 
-Your toys (his words in brackets; read his full note for each in the review):
+Your toys (the Operator's summary of his notes in brackets):
 
 - Landmarks: eiffel-tower ("a little grainy"), pyramids ("could be a little bit sharper overall… the
   Sphinx is really not that clear"), leaning-tower ("significantly sharper"), colosseum, parthenon,

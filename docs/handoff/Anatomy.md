@@ -9,12 +9,12 @@ docs/handoff/Anatomy.md.
 
 ## Brief (written by the Operator on September 29, 2026, from the owner's answers on the Splashery Universe page)
 
-The owner's answer: "Human anatomy? Yes: a clinical atlas I peel layer by layer (skin, muscle,
+The owner's answer: human anatomy, yes, as a clinical atlas peeled layer by layer (skin, muscle,
 skeleton, organs). The skin layer is smooth like an anatomical mannequin; the organs look as they do
-in a textbook. Build it first from our own organ toys; ask me before using CC BY-SA sources." And:
-"I wonder if we could build the '3D model files to splats' and 'Photo to 3D' tools first, and then
-use those with 3D organ models or photos to build the anatomy, and maybe get better quality than we
-would now while avoiding CC BY-SA?" The 3D model converter is now merged (lane Studio Models, #86:
+in a textbook. Build it first from our own organ toys, and ask him before using CC BY-SA sources. He
+also suggested building the "3D model files to splats" and "Photo to 3D" tools first, then using
+those with 3D organ models or photos for the anatomy, which might give better quality than now while
+avoiding CC BY-SA. The 3D model converter is now merged (lane Studio Models, #86:
 `tools/model-to-splats.mjs`, docs/PACKS.md section 9).
 
 Build **the anatomy atlas** (`anatomy-atlas`), a labs toy (`labs: true`) on the Body shelf (category
@@ -66,9 +66,9 @@ Sources, in this order of preference:
 If the container can't reach a source site, say so and build from the kit and our organ toys.
 
 Quality: Fidelity A's method (even placement, full opacity for solids, full density, clean colors)
-is the bar. The owner wants toys "so incredible … that people won't even realize that they're
-looking at Gaussian splats." Keep the toy within the tier budgets (a big toy may use the higher
-budgets that picture toys use; measure and say so).
+is the bar. The owner wants toys so good that people don't realize they are looking at Gaussian
+splats. Keep the toy within the tier budgets (a big toy may use the higher budgets that picture toys
+use; measure and say so).
 
 Sound: a soft, clean "peel" (a gentle paper-and-cloth slide) for each layer, and a low chime when
 all layers return. Add your entry in src/toy-sounds.js.

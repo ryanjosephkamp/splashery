@@ -306,10 +306,10 @@
               pack recipes as they are.
             </li>
             <li>
-              The owner liked the mechanics but not the look: &quot;still just a bit too grainy, and
-              the player/character looks way too low-poly and simplistic.&quot; So round 2 splits in
-              two: Worlds r2 takes the grain out of the island, and a new Character lane builds
-              &quot;a polished video game character&quot;.
+              The owner liked the mechanics but not the look: still a bit too grainy, and the player
+              character looks far too low-poly and simplistic. So round 2 splits in two: Worlds r2
+              takes the grain out of the island, and a new Character lane builds &quot;a polished
+              video game character&quot;.
             </li>
             <li>
               About 14 hours from start to merge; the Integrator's run on main + #78 passed 413 of
@@ -326,13 +326,13 @@
           </h3>
           <ul>
             <li>
-              Built by Opus 5.5, in two lanes from the owner's words: &quot;I almost want to make
-              things so incredible with this that people won't even realize that they're looking at
-              Gaussian splats.&quot; Fidelity A audited every toy at phone size (a ranked list with
-              five causes of grain: random placement, low density, mirror chrome on thin parts,
-              see-through <code>rim()</code> shells, faint clouds) and made the 24 worst sharp;
-              Fidelity B built on its branch and did the other 73 on the list, adding even versions
-              of the kit's shapes (<code>src/packs/even.js</code>).
+              Built by Opus 5.5, in two lanes from the owner's goal (September 29, 2026) of making
+              things so good that people don't realize they are looking at Gaussian splats. Fidelity
+              A audited every toy at phone size (a ranked list with five causes of grain: random
+              placement, low density, mirror chrome on thin parts, see-through
+              <code>rim()</code> shells, faint clouds) and made the 24 worst sharp; Fidelity B built
+              on its branch and did the other 73 on the list, adding even versions of the kit's
+              shapes (<code>src/packs/even.js</code>).
             </li>
             <li>
               The owner marked 23 of Fidelity A's 24 cards good the first time (the Klein bottle was
@@ -631,11 +631,12 @@
             </li>
             <li>
               The owner read every text on the Help Board and approved them all on September 28,
-              2026 (<a
+              2026 (the redacted summary is
+              <a
                 href="https://github.com/ryanjosephkamp/splashery/blob/main/docs/reviews/2026-09-28-help/review.md"
                 target="_blank"
                 rel="noopener"
-                >review</a
+                >reviews/2026-09-28-help/review.md</a
               >).
             </li>
             <li>
@@ -1109,22 +1110,22 @@
             </li>
             <li>199 toys are keep, 2 more, 83 new.</li>
             <li>
-              <strong>E2 review (2026-09-25).</strong> The owner's review is word for word in
-              <code>docs/reviews/2026-09-25-e2/review.md</code> (and its marks are in the Effect
-              review page's database). 24 of 32 were &quot;good&quot;; the fixes are in this PR: the
-              Moon's phases were replaced by a landing (a lunar module lands near the top of the
-              Moon, an astronaut climbs down, plants a chosen flag, unrolls it and waves; a second
-              tap packs up and lifts off; the flag is a <code>type: &quot;flag&quot;</code> toy
-              option drawn from its SVG through the screen texture, at the flag's real shape, which
-              <code>tools/flag-aspects.mjs</code> now writes into flags.json); the sapphire's star
-              lies on the stone and ends at its edge; the quartz glints point different ways; the
-              solar system's planets are spaced and sized so none touch, at rest or in the row. The
-              atom, orbital, molecule and crystal lattice were &quot;good, but more of them some
-              day&quot; (BACKLOG). The owner's other requests (a resizable, roomier settings panel
-              with a main tab and a reset button, sharper laptop keys, chess playback and flag
-              colours, molecules from formulas or files, a protein toy with PDB upload) are in the
-              stacked PRs <code>claude/quirky-pasteur-modo55-2</code> and <code>-3</code> (merge
-              them in that order, after this one).
+              <strong>E2 review (2026-09-25).</strong> The owner's review is private (and its marks
+              are in the Effect review page's database). 24 of 32 were &quot;good&quot;; the fixes
+              are in this PR: the Moon's phases were replaced by a landing (a lunar module lands
+              near the top of the Moon, an astronaut climbs down, plants a chosen flag, unrolls it
+              and waves; a second tap packs up and lifts off; the flag is a
+              <code>type: &quot;flag&quot;</code> toy option drawn from its SVG through the screen
+              texture, at the flag's real shape, which <code>tools/flag-aspects.mjs</code> now
+              writes into flags.json); the sapphire's star lies on the stone and ends at its edge;
+              the quartz glints point different ways; the solar system's planets are spaced and
+              sized so none touch, at rest or in the row. The atom, orbital, molecule and crystal
+              lattice were &quot;good, but more of them some day&quot; (BACKLOG). The owner's other
+              requests (a resizable, roomier settings panel with a main tab and a reset button,
+              sharper laptop keys, chess playback and flag colors, molecules from formulas or files,
+              a protein toy with PDB upload) are in the stacked PRs
+              <code>claude/quirky-pasteur-modo55-2</code> and <code>-3</code> (merge them in that
+              order, after this one).
             </li>
             <li>
               <strong>Settings panel (after the E2 review, PR <code>-2</code>).</strong> Tabs:
@@ -1290,18 +1291,18 @@
               sounds as the mallet lands, at 0.12 s).
             </li>
             <li>
-              <strong>Locked toys (owner approved, do not change their look or behaviour):</strong>
-              the laptop (&quot;basically perfect … please lock that in&quot;). Engine changes must
+              <strong>Locked toys (owner approved, do not change their look or behavior):</strong>
+              the laptop (basically perfect; the owner asked to lock it in). Engine changes must
               keep it working exactly as now; the laptop smoke test guards it. The one change since,
               at the owner's request after E2: sharper key letters (every font pixel filled by a 3 x
               3 grid of dots just above the cap) and digits on the top row.
             </li>
             <li>
-              <strong>Phase E1b</strong> (the owner's review of E1, verbatim in
-              <code>docs/reviews/2026-09-24-e1/review.md</code>) is in three stacked PRs, merged in
-              order: <code>claude/phase-e1-45lgvf-1</code> (rules, clip tool, scan and shape fixes),
-              <code>-2</code> (thrown balls, eight-ball, storybook) and <code>-3</code> (chess and
-              laptop). Check that all three are merged before starting E2.
+              <strong>Phase E1b</strong> (the owner's review of E1, which is private) is in three
+              stacked PRs, merged in order: <code>claude/phase-e1-45lgvf-1</code> (rules, clip tool,
+              scan and shape fixes), <code>-2</code> (thrown balls, eight-ball, storybook) and
+              <code>-3</code> (chess and laptop). Check that all three are merged before starting
+              E2.
             </li>
             <li>
               <strong>Effect quality rules (E1b).</strong> CLAUDE.md now has &quot;Effect quality
@@ -2147,13 +2148,8 @@
           <h2 id="phases">Phases</h2>
           <p>
             Each phase is one session and one PR, or a small stack of PRs. The owner reviewed every
-            toy on 2026-09-23 (raw notes and screenshots in
-            <a
-              href="https://github.com/ryanjosephkamp/splashery/blob/main/docs/reviews/2026-09-23/review.md"
-              target="_blank"
-              rel="noopener"
-              >reviews/2026-09-23/</a
-            >). The per-toy plan that came out of it is
+            toy on 2026-09-23 (the owner's notes are private). The per-toy plan that came out of it
+            is
             <a
               href="https://github.com/ryanjosephkamp/splashery/blob/main/docs/TOY-PLAN.md"
               target="_blank"

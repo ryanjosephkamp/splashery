@@ -12,11 +12,10 @@ worst toys made sharp". Handoff file: docs/handoff/FidelityA.md.
 
 ### Brief (written by the Operator on September 29, 2026, from the owner's note "big new Splashery ideas" and his answers on the Splashery Universe page the same night)
 
-The owner's words: "I almost want to make things so incredible with this that people won't even
-realize that they're looking at Gaussian splats … There are some where we could improve the fidelity
-or the quality, like they could at least seem to be rendered at higher resolution. You know, for
-example, like the desk lamp, or maybe like the football, or the hockey puck … Those are examples …
-some of the stuff, just, like, the resolution isn't great. It just looks grainy."
+The owner's call: make things so good that people don't realize they are looking at Gaussian splats.
+Some toys could be improved in fidelity, to at least seem rendered at higher resolution; he named
+the desk lamp, the football, and the hockey puck as examples. In some of the toys the resolution
+isn't great and they look grainy.
 
 Do two things:
 

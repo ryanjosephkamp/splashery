@@ -2,9 +2,8 @@
 
 ## Now: the October push (accepted October 4, 2026)
 
-The owner's push alignment notes of October 4, 2026
-([notes](reviews/2026-10-04-push-alignment/notes.md)) turn Splashery from a toy box into a site of
-tools, science and studio work built on splats:
+The owner's push alignment notes of October 4, 2026 (private) turn Splashery from a toy box into a
+site of tools, science and studio work built on splats:
 
 1. **Close the toy shelves.** Finish the hands-on work on the closed shelves (CLAUDE.md, "Working
    style", "Shelves"); new toys there only when the owner asks, or as photoreal captures at the
@@ -30,8 +29,7 @@ Lanes and order: WORKSTREAMS.md, "Next", "The push".
 ## Before the push: the plan from September 27, 2026
 
 The owner approved this plan on September 27, 2026 (Part 1 of the How Splashery Is Made page), and
-added step 3 on September 28, 2026 (the Pages into Splats report,
-[review](reviews/2026-09-28-pictures/review.md)). The Operator runs the lanes
+added step 3 on September 28, 2026 (the Pages into Splats report). The Operator runs the lanes
 ([OPERATING.md](OPERATING.md), [WORKSTREAMS.md](WORKSTREAMS.md)); the current state is in
 [HANDOFF.md](HANDOFF.md).
 
@@ -52,12 +50,11 @@ vehicles, and the everyday objects as real captures), as brand-free sources turn
 
 ### The Splashery Universe (accepted September 29, 2026)
 
-The owner's note of big ideas and his answers on the planning page "The Splashery Universe" are in
-[reviews/2026-09-29-universe/review.md](reviews/2026-09-29-universe/review.md). Splashery grows into
-five parts. New parts open behind the labs switch, and the owner decides when each goes public. The
-steps above continue alongside them. Until the weekly reset (September 30, 2026, 4 p.m. ET), up to
-12 workers run at once (the owner raised it from 8 on the morning of September 29). Each lane names
-its model (the owner's split in CLAUDE.md).
+The owner's note of big ideas and his answers on the planning page "The Splashery Universe" are
+private. Splashery grows into five parts. New parts open behind the labs switch, and the owner
+decides when each goes public. The steps above continue alongside them. Until the weekly reset
+(September 30, 2026, 4 p.m. ET), up to 12 workers run at once (the owner raised it from 8 on the
+morning of September 29). Each lane names its model (the owner's split in CLAUDE.md).
 
 - **Toys** (Opus 5.5): the sound overhaul (step 4, two lanes from the owner's notes); two fidelity
   lanes (Fidelity A audits every toy at phone size and fixes the worst, starting with the desk lamp,
@@ -90,8 +87,8 @@ its model (the owner's split in CLAUDE.md).
 
 ### Pictures and pages
 
-The owner asked for this on September 28, 2026 ([his notes](reviews/2026-09-28-pictures/review.md))
-and accepted the plan in the Pages into Splats report the same day:
+The owner asked for this on September 28, 2026 (his notes are private) and accepted the plan in the
+Pages into Splats report the same day:
 
 - **Why it works.** The Operator's test turned an article page into 172k splats ("paper plus ink":
   the paper is one sheet, and only inked pixels get splats). At phone size the title and headings
@@ -119,8 +116,8 @@ and accepted the plan in the Pages into Splats report the same day:
 
 ### Toy help
 
-Done on September 28, 2026 (#57, #60 and #59). The owner asked for this on September 27, 2026
-([review](reviews/2026-09-27-ai-math/review.md)):
+Done on September 28, 2026 (#57, #60 and #59). The owner asked for this on September 27, 2026 (his
+review is private):
 
 - **How to play**: when a toy opens (from the shelf, a link or a refresh), one short line says how
   to play with it, for example "Drag a row or column to turn it" on the puzzle cube, or "Tap a bar

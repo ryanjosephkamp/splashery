@@ -10,12 +10,12 @@ docs/handoff/PhotorealR3.md (this file; your brief is already here). Model: Opus
 
 ### Brief (written by the Operator on October 3, 2026, from the owner's notes that afternoon)
 
-The owner, on October 3, 2026: "The sounds for the new photoreal toys can be improved, and we can
-give some of those toys better animations/effects. For example, the crochet earth could spin like
-the other planets or earths do, etc. We will need to do a little audit on the bottoms of the bases
-of the new photoreal toys like we did recently" and "Are there other photoreal toys we could use?
-They don't have to be versions of toys we already have. Anything scientific?" Photoreal r2 (#212)
-added 30 captured toys, behind labs; a tap only hops them (docs/handoff/PhotorealR2.md).
+The owner, on October 3, 2026: the sounds for the new photoreal toys can be improved, and some of
+those toys could have better animations and effects (for example, the crochet earth could spin like
+the other planets). The bottoms of the bases of the new photoreal toys need a little audit, as done
+recently. He also asked whether there are other photoreal toys to use, not necessarily versions of
+toys we already have, and whether anything scientific fits. Photoreal r2 (#212) added 30 captured
+toys, behind labs; a tap only hops them (docs/handoff/PhotorealR2.md).
 
 #### What to build
 
@@ -49,8 +49,8 @@ added 30 captured toys, behind labs; a tap only hops them (docs/handoff/Photorea
 
 #### The owner's review of October 3, 2026 (evening): do these first
 
-His words are in docs/reviews/2026-10-03-labs-review/review.md. They come before items 1 to 5 above
-and replace the general wording there where they are more specific.
+The Operator's summary of his notes (which are private) is below. It comes before items 1 to 5 above
+and replaces the general wording there where it is more specific.
 
 **Sounds.** His rule for all of them: if a toy just bounces, give it a subtle bounce sound; no wind,
 stretching, twinkle or clicking layers, and nothing loud or overwhelming.

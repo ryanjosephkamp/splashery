@@ -13,12 +13,12 @@ Model: Opus 5.5, at the default effort.
 ### Brief (written by the Operator on October 8, 2026, from the owner's note)
 
 The owner, on Moving photo to 3D with his own 29-second phone screen recording (1056x2178):
-"Structurally, it looks extremely cool. But the detail is just not there. It's too blurry. I can't
-read any of the text." Splats at a phone's budget (about 200k to 400k) can't show a 2-megapixel
-picture's text: that needs about one splat per screen pixel. The Photo fidelity lane pushes the
-splats as far as they go. Your job is the other route, a hybrid (CLAUDE.md allows one where it
-clearly works better), offered as a choice beside the splats, never replacing them: the owner
-decides from your clips which is the default.
+structurally it looks extremely cool, but the detail is not there; it is too blurry to read any of
+the text. Splats at a phone's budget (about 200k to 400k) can't show a 2-megapixel picture's text:
+that needs about one splat per screen pixel. The Photo fidelity lane pushes the splats as far as
+they go. Your job is the other route, a hybrid (CLAUDE.md allows one where it clearly works better),
+offered as a choice beside the splats, never replacing them: the owner decides from your clips which
+is the default.
 
 Build a "Sharp" view for both Photo to 3D and Moving photo to 3D: the picture at its full resolution
 as a texture on a 3D relief surface displaced by the same depth the splats use, so text reads as it
@@ -116,8 +116,8 @@ Photo to 3D and Moving photo to 3D"; merge it first). Sharp picture is the defau
 
 - October 8, 2026, 16:40 UTC, round 2 (branch `claude/lane-photo-sharp-view-2`, PR "Phase Photo
   sharp view r2: saved view and the photo views guide"; Opus 5.5, high effort), on the owner's calls
-  "I want saved scenes to remember sharp/splat" and "We will need to properly document this
-  difference and our implementation":
+  that saved scenes should remember the sharp or splat choice and that the difference and our
+  implementation need proper documentation:
   - The view is saved: the switch writes the toy option `view` (`"sharp"` or `"splats"`) into the
     scene without rebuilding the toy, and each build reads it back (`fromScene`). Splats' Detail was
     already the recipe option `detail`. A scene without `view` (all of them before) opens in Sharp
@@ -154,16 +154,16 @@ Photo to 3D and Moving photo to 3D"; merge it first). Sharp picture is the defau
     main (4 of 4: the old toy's splats are on at the swap) and passes with the fix (8 of 8). Lane
     Photo fidelity's own flow showed the WebGL error in about 1 run in 3 on main, 0 of 12 with the
     fix.
-  - Second item, from the owner (October 9, 2026, about 03:35 UTC): "Moving photo to 3D doesn't loop
-    properly when the video/GIF ends. It just gets stuck at the end of the clip and plays like the
-    last 0.5 seconds over and over again." The cause, in the drive of `src/packs/moving-photo.js`:
-    with a sound track (any video, with or without sound), the clip wrapped only on a frame that
-    caught the sound in its last 20 ms. A frame that came later found the sound ended, and the
-    silent clock sent the sound back to the last time shown, a moment before its end; while it
-    sought there it still read as playing, so the next frame took its time again, and the cycle
-    repeated for good, the video copy (and Sharp picture's live picture) pulled back to that time
-    each time it ran ahead. The fix: the silent clock sends the sound back only where it has
-    something left to play, else it runs on to the loop and the sound starts again there.
+  - Second item, from the owner (October 9, 2026, about 03:35 UTC): Moving photo to 3D does not loop
+    properly when the video or GIF ends: it gets stuck at the end of the clip and replays about the
+    last half second over and over. The cause, in the drive of `src/packs/moving-photo.js`: with a
+    sound track (any video, with or without sound), the clip wrapped only on a frame that caught the
+    sound in its last 20 ms. A frame that came later found the sound ended, and the silent clock
+    sent the sound back to the last time shown, a moment before its end; while it sought there it
+    still read as playing, so the next frame took its time again, and the cycle repeated for good,
+    the video copy (and Sharp picture's live picture) pulled back to that time each time it ran
+    ahead. The fix: the silent clock sends the sound back only where it has something left to play,
+    else it runs on to the loop and the sound starts again there.
   - Tests in `tests/psv3.spec.mjs`: a short video with sound, one without and a GIF
     (`tests/fixtures/psv3/`, and the horse GIF) each play past their end at least twice, at 1 and
     1.75 times (the Speed slider's top; 2 times is out of its range), and the time must wrap to the

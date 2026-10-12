@@ -5,9 +5,8 @@ corrected texts in `src/toy-help.js`, and `docs/audits/element-facts.md`.
 
 Every toy has a short "how to play" line and an About text in `src/toy-help.js` (the style guide is
 in `docs/handoff/Help.md`). The owner wants them complete and correct before the site goes further:
-"I want to make sure that the about sections are complete or sufficient", and for toys like the
-Turing machine "we'll need to include some information about … what the different programs mean"
-(his review of October 2, 2026, `docs/reviews/2026-10-02-mega-review/review.md`).
+that the About sections be complete and sufficient, and for toys like the Turing machine that they
+say what the different programs mean (his review of October 2, 2026, which is private).
 
 1. **Check every toy's texts against the toy itself.** For each toy in `src/toy-help.js`, read its
    recipe (find its id in `src/toys.js` and the pack under `src/packs/`) and check that the how-to
