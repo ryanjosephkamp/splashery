@@ -219,6 +219,10 @@ the private page.
 - A merge through GitHub can be stopped by the session's permission check as a production deploy.
   Ask the owner once, in one line; his explicit OK for that PR lets it through.
 - Re-arm the check-in before anything else, every time.
+- Review Codex PRs with a Sonnet helper (October 12, 2026): it reads the task file, the diff, the
+  licenses and the PR body, and reports scope, rule flags and claims in a few hundred words; the
+  Operator posts one comment per PR with the fixes, and the owner tells the Codex session to do it.
+  Run the spec list of every area a merge touches, including `ln` for the manual.
 - Batch Ops PRs (October 12, 2026): every PR the Operator opens subscribes it to that PR, and the
   subscription, ready and merged notices come back as three long messages. One Ops PR per batch of
   changes, not one per change.

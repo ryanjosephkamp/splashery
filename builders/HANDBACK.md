@@ -73,8 +73,11 @@ ask the creator for a CC BY grant; (3) drop the toy.
 
 Attach what shows the work does what you say:
 
-1. **The checker's output**, once `tools/port-check.mjs` exists (coming with the Baked engine PR);
-   until then, the hand checks listed in [TOY-PACKAGE.md](TOY-PACKAGE.md), "Checking a package".
+1. **The checker's output** for a toy package: `node tools/port-check.mjs <folder>`, pasted in full.
+   It must say "Nothing blocks the port". Fix every block, and explain each warning in the record (a
+   size over the guidance, say). It can't judge motion or taste; the other proof still applies. See
+   [TOY-PACKAGE.md](TOY-PACKAGE.md), "Checking a package". A task with no package (a report) has no
+   checker output.
 2. **The real-browser test run**: the specs for the area you touched, and for any change under
    `src/`, `smoke`, `kit`, `taps`, `help`, `hta`, and `unit`
    (`node tools/suite.mjs --files=smoke,kit,taps,help,hta,unit`), with the pass and fail counts.
