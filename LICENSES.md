@@ -130,6 +130,9 @@ OR OTHER DEALINGS IN THE SOFTWARE.
   `src/video3d/run.js`); never on the shelf, in another toy or in an embed. Labs only.
 - License: MIT (Copyright (c) 2026 Stratum1 GmbH; checked on the live repository page on September
   30, 2026; the full text is in `vendor/splatjs/LICENSE`).
+- Local change by Codex for task 40 (October 12, 2026): `src/session.js` accepts `refineStart`,
+  defaulting to its existing 1,500-step threshold. Video to 3D lowers it for short runs so phone
+  training can grow and refine splats before its step budget ends. The MIT notice is retained.
 
 ## omggif 1.0.10 (lane Pictures)
 
