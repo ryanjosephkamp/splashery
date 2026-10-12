@@ -2239,7 +2239,7 @@ export const RECIPES = {
         ],
       },
       {
-        key: "color",
+        key: "colour",
         label: "Color",
         type: "select",
         default: "rainbow",
