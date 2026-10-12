@@ -8,16 +8,14 @@ shelves". How lanes work: [OPERATING.md](../OPERATING.md).
 Written by the Operator on September 30, 2026, from the owner's sound review.
 
 The owner reviewed every toy's sound in a long voice-typed notes file (written September 28, 2026,
-filed September 30). Read it word for word in docs/reviews/2026-09-28-sounds/review.md. The clean
-version per toy is in tools/sound-review.json (`status` "change" or "keep", `said` = his words,
-`note`, `plan`); the rules drawn from it are in docs/PACKS.md, section 7e, "Sound preferences". All
-three are on branch claude/operator-sound-review until that Ops PR merges (merge it into your branch
-if main doesn't have them yet). His summary, in his words: a lot of stuff "sounds robotic and
-digital when it shouldn't"; there are "overwhelming, like wave or wind sounds, like sounds that
-sound like sand"; "a lot of the whistles just don't need to be in it. A lot of the clicking doesn't
-need to be in the sounds"; and "for any kind of, like, real-life object, I'd like for things to have
-almost, like, ASMR, or just real SFX, right? Like real-life, realistic sound effects. And you are
-absolutely allowed to find sound packs."
+filed September 30). His notes are private; the Operator's summary is in the brief. The clean
+version per toy is in tools/sound-review.json (`status` "change" or "keep", `note`, `plan`); the
+rules drawn from it are in docs/PACKS.md, section 7e, "Sound preferences". All three are on branch
+claude/operator-sound-review until that Ops PR merges (merge it into your branch if main doesn't
+have them yet). His summary, in the Operator's words: a lot of the sounds are robotic and digital
+when they should not be; wave, wind, and sand-like sounds are overwhelming; many whistles and clicks
+do not need to be in the sounds; and for any real-life object he wants almost ASMR-like, realistic
+sound effects. Finding sound packs is allowed.
 
 His new process (September 30, 2026): new sounds may go live on the site before he has heard them,
 and he names any to fix. So you change `src/toy-sounds.js` directly, not as board candidates. Set

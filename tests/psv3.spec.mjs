@@ -128,9 +128,9 @@ for (const toy of ["photo-3d", "moving-photo-3d"]) {
   });
 }
 
-// The owner's report of October 9, 2026: "Moving photo to 3D doesn't loop properly when the
-// video/GIF ends. It just gets stuck at the end of the clip and plays like the last 0.5 seconds over
-// and over again." A frame that came after the sound's last 20 ms found it ended and sent it back to
+// The owner's report of October 9, 2026: Moving photo to 3D did not loop properly when the
+// video or GIF ended; it got stuck at the end of the clip and replayed about the last half second
+// over and over. A frame that came after the sound's last 20 ms found it ended and sent it back to
 // the last time shown, a moment before the end, over and over. Each clip plays past its end at least
 // twice, at normal speed and at the Speed slider's top (1.75 times), in the default view (Sharp
 // picture): the shown time wraps to the start each time, and the frames after it are the clip's

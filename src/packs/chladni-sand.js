@@ -1,7 +1,7 @@
 // Lane Live r7: the Chladni plate's sand, live (the owner's report of
-// October 5, 2026: "I want the plate to move continuously ... very
-// responsive to the audio ... the sand rearranges, like immediately, or at
-// least starts to move immediately").
+// October 5, 2026: the plate should move continuously and respond to the
+// audio at once, with the sand rearranging or at least starting to move
+// immediately).
 //
 // Until r7 the sand was twelve snapshots of one settle, made when the plate
 // was built for one mode, and a new note meant a new plate with freshly

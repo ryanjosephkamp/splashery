@@ -87,14 +87,13 @@ splats". Handoff file: docs/handoff/Fluids.md.
 
 ### Brief (written by the Operator on September 29, 2026, from the owner's note of that day)
 
-On the Real objects lane's water bottle card the owner wrote, word for word: "The water also pours
-out in circles, not like actual liquid would. Perhaps we should create a realistic fluid splat
-simulator (liquid fluids, gases, flames, etc.; different viscosities, etc.) and use that here?" On
-the soda can: "the soda bubbles don't look realistic; they look like marshmallows or popcorn here,
-and the soda should come out as a liquid splash or splat (no pun intended)." Later that evening, on
-the second round of both cards: "We can defer completing this until after the liquid/fluid engine is
-built and perfected." Today, liquids in Splashery are hand-animated clouds and sheets (the ocean
-wave, the waterfall, the coffee, the lava lamp), and the Lab lane's GPU splat fields (`gpuField`,
+On the Real objects lane's water bottle card the owner noted that the water pours out in circles,
+not like a real liquid, and suggested building a realistic fluid splat simulator (liquids, gases,
+flames, different viscosities) and using it there. On the soda can: the bubbles look like
+marshmallows or popcorn, and the soda should come out as a liquid splash. Later that evening, on the
+second round of both cards, he said completing this can wait until the liquid/fluid engine is built
+and perfected. Today, liquids in Splashery are hand-animated clouds and sheets (the ocean wave, the
+waterfall, the coffee, the lava lamp), and the Lab lane's GPU splat fields (`gpuField`,
 docs/lab/FIELDS.md) move splats by formula, with no state from frame to frame.
 
 Build a fluid engine for splats, labs first:
@@ -225,12 +224,12 @@ Model: Opus 5.5 (claude-opus-5-5), default effort.
 
 ## r4 (September 30, 2026): a GPU solver, a liquid surface and a gas grid
 
-The Operator's brief of 15:05 UTC, from the owner's note ("I marked the fluids as looking right, but
-that might have been premature... They still don't seem realistic enough for me"; "r4 yes"): far
-more particles on the GPU (WebGPU compute, PBF or MLS-MPM after a short measurement), a real liquid
-surface (screen-space fluid rendering, splats kept for spray, foam and bubbles), real smoke and
-flames (a grid gas solver with vorticity confinement and buoyancy, ray-marched, WebGL2 too), and
-evidence Ryan can see (each scene beside real footage or a published measurement). Branch
+The Operator's brief of 15:05 UTC, from the owner's note (he had marked the fluids as looking right,
+but that may have been premature; they still do not seem realistic enough to him; and his go-ahead,
+"r4 yes"): far more particles on the GPU (WebGPU compute, PBF or MLS-MPM after a short measurement),
+a real liquid surface (screen-space fluid rendering, splats kept for spray, foam and bubbles), real
+smoke and flames (a grid gas solver with vorticity confinement and buoyancy, ray-marched, WebGL2
+too), and evidence Ryan can see (each scene beside real footage or a published measurement). Branch
 `claude/lane-fluids-r4` from b328e58 (v1, PR #121); PR "Engine: Fluids r4, a GPU solver and a liquid
 surface". Cards: fl-r4-pour, fl-r4-splash, fl-r4-soda, fl-r4-smoke, fl-r4-flame, fl-r4-phone.
 

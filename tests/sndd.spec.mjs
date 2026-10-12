@@ -1,5 +1,5 @@
 // Lane Sound D (docs/handoff/SoundD.md): the sound fixes from the owner's walkthrough of
-// October 6, 2026 (docs/reviews/2026-10-06-walkthrough/notes.md and triage.md, "Sound D").
+// October 6, 2026 (docs/reviews/2026-10-06-walkthrough/triage.md, "Sound D").
 //
 // - The clicking "zipper" on the photoreal shelf was the rustle voice (a run of short noise
 //   grains) that ten Photoreal r2 captures shared. No photoreal toy plays it any more.

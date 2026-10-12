@@ -21,11 +21,10 @@ Sonnet 5.5, at the default effort.
 
 ### Brief (written by the Operator on October 7, 2026, from the owner's walkthrough review)
 
-Read the owner's own words first: docs/reviews/2026-10-06-walkthrough/notes.md (dictated on his
-phone; he praised the site and asked for these refinements), then the Operator's triage in
-docs/reviews/2026-10-06-walkthrough/triage.md, section "Toy pages r2". That section is your list.
-Anything the owner didn't mention is approved: change nothing else, and keep the look and layout he
-praised.
+The owner's notes are private (he praised the site and asked for these refinements); read the
+Operator's triage in docs/reviews/2026-10-06-walkthrough/triage.md, section "Toy pages r2". That
+section is your list. Anything the owner didn't mention is approved: change nothing else, and keep
+the look and layout he praised.
 
 Read docs/handoff/ToyPages.md first.
 

@@ -10,10 +10,9 @@ docs/handoff/Photoreal.md. Model: Sonnet 5.5 (research and docs).
 
 ### Brief (written by the Operator on October 2, 2026, from the owner's review and his answers that day)
 
-The owner thinks the photoreal scans are the best things on the site ("the absolute highest fidelity
-best objects in the entire site are the photoreal ones") and wants to see photoreal versions of what
-we already have, even under licenses we keep off the site, to compare privately and then decide what
-to add. His calls of October 2, 2026:
+The owner thinks the photoreal scans are the highest-fidelity, best objects on the site and wants to
+see photoreal versions of what we already have, even under licenses we keep off the site, to compare
+privately and then decide what to add. His calls of October 2, 2026:
 
 - P1 yes: a **private comparison page** where he can see photoreal captures beside our toys,
   including ones whose licenses we keep off the site, as long as the source lets you download them
@@ -27,8 +26,7 @@ to add. His calls of October 2, 2026:
   be used, so the samples must come from elsewhere. N27 (later, with you): other depth models for
   Photo to 3D.
 
-His review, word for word: docs/reviews/2026-10-02-mega-review/review.md (look for "photo real",
-"photoreal", "geospatial", "tornado", "anatomy" and "Theodore Gray").
+His review is private; the Operator's summary is in the brief.
 
 #### What to deliver
 

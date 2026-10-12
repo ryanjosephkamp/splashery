@@ -15,9 +15,9 @@ is better, what each costs, how they measure, how the choice is saved, and which
 ## Why there are two
 
 On October 8, 2026, the owner opened his own 29-second phone screen recording in Moving photo to 3D:
-"Structurally, it looks extremely cool. But the detail is just not there. It's too blurry. I can't
-read any of the text." At a phone's budget of about 200,000 to 400,000 splats, each splat stood for
-about ten of the recording's 2.3 million pixels, so small letters merged.
+it looked extremely cool structurally, but the detail was not there: it was too blurry to read any
+of the text. At a phone's budget of about 200,000 to 400,000 splats, each splat stood for about ten
+of the recording's 2.3 million pixels, so small letters merged.
 
 Two lanes took it on the same day, from opposite ends:
 

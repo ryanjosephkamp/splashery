@@ -12,21 +12,21 @@ docs/handoff/Pianos.md.
 
 The owner approved five pianos of his own on the Toy Ideas page. The toy piano is being built
 separately (a blind A/B lane); leave it alone. You build the other four, and the song engine they
-share. The owner's words for the set: "Each piano works like the xylophone: tap a key to play that
-note, tap anywhere else for its song. Each can also play a song file of your own."
+share. The set's approved design: each piano works like the xylophone (tap a key to play that note,
+tap anywhere else for its song), and each can also play a song file of your own.
 
 ### Part 1: the engine PR (first, on claude/lane-pianos-engine)
 
-The owner's note on the grand piano, word for word: "Your own songs: MIDI (.mid) is the natural
-match for the chess toy's PGN or the protein's PDB. It is the standard file of notes and timings,
-and it maps key for key onto a piano, so the right keys go down. The toy would read the file in the
-page (a small reader, no library), use its notes and its sustain pedal, move any note outside the
-keyboard up or down by octaves, and show a song bar like the chess game bar: a title you can edit,
-play and pause, back to the start, speed and loop. It could also take ABC notation pasted as text (a
-plain-text tune format; thousands of folk tunes are online). The built-in songs are public-domain
-compositions we write out ourselves, so no recording rights are involved. It needs a small engine
-change first (the chess game bar made general for songs, plus the file reader), as its own "Engine:"
-PR."
+The approved note on the grand piano (the Operator's summary): a person's own songs come in as MIDI
+(.mid), the natural match for the chess toy's PGN or the protein's PDB, since it is the standard
+file of notes and timings and maps key for key onto a piano, so the right keys go down. The toy
+reads the file in the page (a small reader, no library), uses its notes and its sustain pedal, moves
+any note outside the keyboard up or down by octaves, and shows a song bar like the chess game bar:
+an editable title, play and pause, back to the start, speed and loop. It could also take ABC
+notation pasted as text (a plain-text tune format; thousands of folk tunes are online). The built-in
+songs are public-domain compositions we write out ourselves, so no recording rights are involved. It
+needs a small engine change first (the chess game bar made general for songs, plus the file reader),
+as its own "Engine:" PR.
 
 - A MIDI reader in the page (our own code, no library): Standard MIDI Files, format 0 and 1, notes
   on and off, velocity, tempo changes and the sustain pedal (controller 64); the notes come out as a
@@ -44,7 +44,7 @@ PR."
 
 ### Part 2: the four pianos (on claude/lane-pianos, a new pack `src/packs/pianos.js` on the Music shelf)
 
-The owner's ideas, word for word:
+The approved ideas (the tap and sound lines are the plan's text, not the owner's notes):
 
 1. **Grand piano** (`grand-piano`). Tap: "Tap a key: it dips, its hammer flies up under the open lid
    and strikes the strings, and the damper lifts while the note rings. Tap anywhere else: it plays

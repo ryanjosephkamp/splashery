@@ -14,10 +14,9 @@ docs/handoff/MachinesA.md.
 
 The owner approved these on the Toy Ideas page (https://claude.ai/artifact/5TukiuV3mCt3G3zk6Arx9S;
 read collections `ideas` and `marks` with ArtifactData for the full text and his notes; never write
-to them). On the Turing machine he wrote, word for word: "I approve this as given, but I also want
-to add more Turing-related things, if possible, like the Turing-Welchman Bombe, maybe a German
-Enigma toy that's photoreal (if possible; a sharp generation would be acceptable instead, if
-necessary), etc."
+to them). On the Turing machine he approved it as given and asked to add more Turing-related things
+if possible, such as the Turing-Welchman Bombe and a German Enigma toy that is photoreal if possible
+(a sharp generation would do if necessary).
 
 Build four public toys on the AI and computing shelf, in this order:
 
@@ -117,15 +116,15 @@ Model: Opus 5.5 (default effort).
 - Cards on the Effect review page (lane MachinesA): `mca-turing`, `mca-difference`, `mca-enigma`,
   `mca-bombe`, `mca-stills`. Waiting for the owner's marks; an hourly check-in reads them.
 - Owner's marks (September 29, 2026, 19:47 UTC check-in): all five "fix", with the same note:
-  "Basically everything (mechanics, etc.) looks perfect, but this could use just a bit more detail
-  and sharpness" ("needs more detail" for the difference engine). Done in the same PR: density 2 on
-  all four; even shapes on every part (the last `k.cylinder`, `k.disc`, `k.tube` and `k.cone` went);
-  screws, trim and feet (Turing); a gear train on the crank, engraved shields with window bezels,
-  carriage racks, finials and label plates (difference engine); a lampboard plate, latches, hinges
-  and screws (Enigma); clean drum faces, drum bolts, panel frames, rivets, handles and vents
-  (Bombe). The r2 clips are rendered at 520 to 560 px, nearer what a phone shows at its pixel ratio.
-  Cards `mca-turing-r2`, `mca-difference-r2`, `mca-enigma-r2`, `mca-bombe-r2`, `mca-stills-r2`
-  posted; the old cards marked replaced.
+  everything (mechanics, etc.) looks perfect, but each could use a bit more detail and sharpness
+  (more detail for the difference engine). Done in the same PR: density 2 on all four; even shapes
+  on every part (the last `k.cylinder`, `k.disc`, `k.tube` and `k.cone` went); screws, trim and feet
+  (Turing); a gear train on the crank, engraved shields with window bezels, carriage racks, finials
+  and label plates (difference engine); a lampboard plate, latches, hinges and screws (Enigma);
+  clean drum faces, drum bolts, panel frames, rivets, handles and vents (Bombe). The r2 clips are
+  rendered at 520 to 560 px, nearer what a phone shows at its pixel ratio. Cards `mca-turing-r2`,
+  `mca-difference-r2`, `mca-enigma-r2`, `mca-bombe-r2`, `mca-stills-r2` posted; the old cards marked
+  replaced.
 - Owner's marks on the r2 cards (September 29, 2026, about 21:30 UTC): Turing machine and difference
   engine **good**; Enigma "fix" ("make the wood and container sharper"), Bombe "fix" ("make the
   background board rectangle sharper"), stills "fix" ("sharper overall"). Fixed: the Enigma's case,
