@@ -661,6 +661,9 @@ export class CameraDepth {
       this.moving = m / n;
       const near = grow(moved, cols, rows, 1);
       for (let k = 0; k < n; k++) still[k] = near[k] ? 0 : Math.min(60, still[k] + dt);
+      // Once the color average reaches its two-second cap, every held
+      // cell has the same weight. Compute that exponential once per draw.
+      const heldColor = 1 - Math.exp(-dt / 2);
       for (let i = 0; i < cp.length; i += 4) {
         const d = Math.abs(cp[i] - last[i]) + Math.abs(cp[i + 1] - last[i + 1]) + Math.abs(cp[i + 2] - last[i + 2]); // prettier-ignore
         // (Live r7, the finer grid of October 6: each cell averages fewer of
@@ -668,8 +671,8 @@ export class CameraDepth {
         // within the noise, was a fifth. Stability: that eighth is now
         // a quarter-second average at 30 frames a second, longer as the cell
         // holds still.)
-        const tau = 0.25 + Math.min(1.75, still[i >> 2] * 0.9);
-        const calm = 1 - Math.exp(-dt / tau);
+        const age = still[i >> 2];
+        const calm = age >= 1.75 / 0.9 ? heldColor : 1 - Math.exp(-dt / (0.25 + age * 0.9));
         const a = near[i >> 2]
           ? 1
           : d <= 24
@@ -685,7 +688,9 @@ export class CameraDepth {
         cp[i + 2] = last[i + 2];
       }
     }
-    this.lastColors = cp.slice();
+    if (!this.lastColors || this.lastColors.length !== cp.length)
+      this.lastColors = new Uint8ClampedArray(cp.length);
+    this.lastColors.set(cp);
     // Follow a moving outline with today's colors and the request's own
     // color/depth pairs. Only changed pixels are revisited; a still face
     // cannot acquire the patches a full per-frame recoloring used to make.
@@ -707,14 +712,16 @@ export class CameraDepth {
     // two wide read crisply at phone size. The noise is smoothed first.
     // Live r7 polish (the owner's "the toys could still be sharper", October
     // 5): 1.2, held to 28 levels (sharpen); was 0.5.
-    sharpen(cp, cols, rows, 1.2, (this.blurBuf ||= new Float32Array(cols * rows * 3)), 12);
+    // Noise has already averaged out. Keep weak eye and mouth edges crisp
+    // with a smaller coring threshold; other callers retain their old one.
+    sharpen(cp, cols, rows, 1.35, (this.blurBuf ||= new Float32Array(cols * rows * 3)), 28, 2);
     g.putImageData(cur, 0, 0);
     // Heights ease toward the newest depth (about a fifth of a second).
     const k = 1 - Math.exp(-dt / 0.12);
     const kBig = 1 - Math.exp(-dt / 0.04);
     const hts = this.heights;
     const t = this.target;
-    const img = g.createImageData(cols, rows);
+    const img = (this.heightImage ||= g.createImageData(cols, rows));
     const px = img.data;
     for (let i = 0; i < hts.length; i++) {
       // r5: a big jump (a person's edge moving) is quick, so no splat
@@ -760,6 +767,7 @@ export class CameraDepth {
       this.filtered =
       this.depthColors =
       this.depthGuide =
+      this.heightImage =
       this.lastColors =
       this.lastSmooth =
         null;
@@ -928,27 +936,49 @@ export class BackPlate {
     near.fill(0);
     const cap = (this.cap ||= new Float32Array(bc * br));
     cap.fill(1);
-    if (hts)
+    const cellKey = `${cols},${rows},${bc},${br}`;
+    if (this.cellKey !== cellKey) {
+      this.cellKey = cellKey;
+      this.cells = new Uint32Array(cols * rows);
       for (let j = 0; j < rows; j++) {
         const y = Math.min(br - 1, Math.floor((j * br) / rows));
-        for (let i = 0; i < cols; i++) {
-          const b = y * bc + Math.min(bc - 1, Math.floor((i * bc) / cols));
-          const value = hts[j * cols + i];
-          if (value >= FAR) near[b] = 1;
-          cap[b] = Math.min(cap[b], value);
-        }
+        for (let i = 0; i < cols; i++)
+          this.cells[j * cols + i] = y * bc + Math.min(bc - 1, Math.floor((i * bc) / cols));
+      }
+    }
+    // The mapping is fixed for this grid; depths and their footprint caps
+    // are still recomputed on every draw.
+    const cells = this.cells;
+    if (hts)
+      for (let i = 0; i < hts.length; i++) {
+        const b = cells[i];
+        const value = hts[i];
+        if (value >= FAR) near[b] = 1;
+        cap[b] = Math.min(cap[b], value);
       }
     // A coarse splat overlaps adjacent cells. Cap its ENTIRE footprint,
     // not only its center, so it cannot peek through a lower visible wall.
     const safe = (this.safe ||= new Float32Array(bc * br));
+    const rowMin = (this.rowMin ||= new Float32Array(bc * br));
+    // A 3 by 3 minimum separates into two three-cell passes. It covers
+    // the same footprint without rescanning nine neighbors for each cell.
     for (let y = 0; y < br; y++)
       for (let x = 0; x < bc; x++) {
-        let lowest = cap[y * bc + x];
-        for (let j = Math.max(0, y - 1); j <= Math.min(br - 1, y + 1); j++)
-          for (let i = Math.max(0, x - 1); i <= Math.min(bc - 1, x + 1); i++)
-            lowest = Math.min(lowest, cap[j * bc + i]);
-        safe[y * bc + x] = lowest;
+        const row = y * bc;
+        rowMin[row + x] = Math.min(
+          cap[row + Math.max(0, x - 1)],
+          cap[row + x],
+          cap[row + Math.min(bc - 1, x + 1)],
+        );
       }
+    for (let y = 0; y < br; y++) {
+      const above = Math.max(0, y - 1) * bc;
+      const row = y * bc;
+      const below = Math.min(br - 1, y + 1) * bc;
+      for (let x = 0; x < bc; x++) {
+        safe[row + x] = Math.min(rowMin[above + x], rowMin[row + x], rowMin[below + x]);
+      }
+    }
     const show = (this.show ||= new Uint8Array(bc * br));
     show.fill(0);
     for (let y = 0; y < br; y++)
@@ -964,23 +994,32 @@ export class BackPlate {
       hold[b] = show[b] ? 1 : Math.max(0, hold[b] - dt);
       if (hold[b] > 0) show[b] = 1;
     }
+    // Every fine texel under one background cell has the same color and
+    // depth. Encode that cell once, then expand it with the cached mapping.
+    const encoded = (this.encoded ||= new Uint8ClampedArray(bc * br * 4));
+    for (let b = 0; b < bc * br; b++) {
+      const c = b * 4;
+      encoded[c] = vals[c];
+      encoded[c + 1] = vals[c + 1];
+      encoded[c + 2] = vals[c + 2];
+      const depth = Math.min(vals[c + 3], safe[b]);
+      encoded[c + 3] = Math.round(255 * (0.5 + Math.max(0, depth * gain) / 2));
+    }
     for (let j = 0; j < rows; j++) {
-      const y = Math.min(br - 1, Math.floor((j * br) / rows));
       for (let i = 0; i < cols; i++) {
-        const b = y * bc + Math.min(bc - 1, Math.floor((i * bc) / cols));
+        const b = cells[j * cols + i];
         const c = b * 4;
         const o = (j * cols * 2 + i) * 4;
-        px[o] = vals[c];
-        px[o + 1] = vals[c + 1];
-        px[o + 2] = vals[c + 2];
+        px[o] = encoded[c];
+        px[o + 1] = encoded[c + 1];
+        px[o + 2] = encoded[c + 2];
         px[o + 3] = 255;
         const q = o + cols * 4;
         px[q] = px[q + 1] = 128;
         // A previously learned wall may be nearer than the current wall.
         // Clamp each texel to the visible picture so the coarse plate's
         // footprint cannot come through it, including when depth is flat.
-        const depth = Math.min(vals[c + 3], safe[b]);
-        px[q + 2] = Math.round(255 * (0.5 + Math.max(0, depth * gain) / 2));
+        px[q + 2] = encoded[c + 3];
         px[q + 3] = show[b] ? 255 : 0;
       }
     }
@@ -1331,32 +1370,41 @@ export function tidyBand(band, d) {
 // Live r7: an unsharp mask on RGBA pixels (w x h) in place: c + amount (c -
 // the 3 by 3 box mean), by rows then columns.
 const CORE = 4; // levels (sharpen)
-export function sharpen(px, w, h, amount, tmp, limit = 28) {
-  for (let ch = 0; ch < 3; ch++) {
-    for (let y = 0; y < h; y++)
-      for (let x = 0; x < w; x++) {
-        const a = px[(y * w + Math.max(0, x - 1)) * 4 + ch];
-        const b = px[(y * w + x) * 4 + ch];
-        const c = px[(y * w + Math.min(w - 1, x + 1)) * 4 + ch];
-        tmp[(y * w + x) * 3 + ch] = (a + b + c) / 3;
-      }
-  }
+export function sharpen(px, w, h, amount, tmp, limit = 28, core = CORE) {
+  // Walk the packed RGB cells together. The old channel-at-a-time pass
+  // recalculated the same neighbors three times; the arithmetic is identical.
+  for (let y = 0; y < h; y++)
+    for (let x = 0; x < w; x++) {
+      const k = y * w + x;
+      const a = (y * w + Math.max(0, x - 1)) * 4;
+      const b = k * 4;
+      const c = (y * w + Math.min(w - 1, x + 1)) * 4;
+      const q = k * 3;
+      tmp[q] = (px[a] + px[b] + px[c]) / 3;
+      tmp[q + 1] = (px[a + 1] + px[b + 1] + px[c + 1]) / 3;
+      tmp[q + 2] = (px[a + 2] + px[b + 2] + px[c + 2]) / 3;
+    }
   for (let y = 0; y < h; y++) {
     const y0 = Math.max(0, y - 1);
     const y1 = Math.min(h - 1, y + 1);
-    for (let x = 0; x < w; x++)
+    for (let x = 0; x < w; x++) {
+      const a = (y0 * w + x) * 3;
+      const b = (y * w + x) * 3;
+      const c = (y1 * w + x) * 3;
+      const q = (y * w + x) * 4;
       for (let ch = 0; ch < 3; ch++) {
-        const m = (tmp[(y0 * w + x) * 3 + ch] + tmp[(y * w + x) * 3 + ch] + tmp[(y1 * w + x) * 3 + ch]) / 3; // prettier-ignore
-        const o = (y * w + x) * 4 + ch;
+        const m = (tmp[a + ch] + tmp[b + ch] + tmp[c + ch]) / 3;
+        const o = q + ch;
         // (Live r7 polish: the push is held to 28 levels, so a strong edge
         // (an eye's rim) gets no halo while fine detail still sharpens; and a
         // difference within the camera's leftover noise, a few levels, gets
         // little of it (coring), so the picture is no less steady.)
         const d = px[o] - m;
         const ad = d < 0 ? -d : d;
-        const push = amount * (ad < CORE ? (d * ad) / CORE : d);
-        px[o] = px[o] + Math.max(-limit, Math.min(limit, push));
+        const push = amount * (ad < core ? (d * ad) / core : d);
+        px[o] = px[o] + (push > limit ? limit : push < -limit ? -limit : push);
       }
+    }
   }
 }
 

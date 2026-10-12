@@ -3,10 +3,12 @@ import { test, expect } from "@playwright/test";
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
+import { execFileSync } from "node:child_process";
 import config from "../playwright.config.mjs";
 import { fakeCamera, openMirror, measure } from "../tools/lv7-mirror-measure.mjs";
 import { cameras } from "../tools/cdx-mir-camera.mjs";
 import { relativeAlignment, holdDepth, upsampleSnap, BackPlate } from "../src/live/relief.js";
+import { paired } from "../tools/cdx-mir-paired.mjs";
 
 const meanError = (a, b) => a.reduce((s, v, i) => s + Math.abs(v - b[i]), 0) / a.length;
 const rgba = (w, h, rgb) => {
@@ -87,6 +89,37 @@ test("upsampling uses the request's colors to move an edge, without a stretched 
   expect(out[8 * gw + 16]).toBeCloseTo(0.9);
   expect(out[8 * gw + 18]).toBeCloseTo(0.1);
   expect(out[8 * gw + 17]).toBeCloseTo(0.9);
+});
+
+test("the faster sharpening pass preserves the existing default filter's pixels", async ({
+  page,
+}) => {
+  const before = execFileSync("git", ["show", "ec4aaa37:src/live/relief.js"], { encoding: "utf8" });
+  await page.route(/\/src\/live\/relief\.js\?cdx-before$/, (route) =>
+    route.fulfill({ contentType: "text/javascript", body: before }),
+  );
+  await page.goto("/tests/");
+  const different = await page.evaluate(async () => {
+    const before = await import("/src/live/relief.js?cdx-before");
+    const after = await import("/src/live/relief.js");
+    let different = 0;
+    for (const [w, h] of [
+      [1, 1],
+      [3, 2],
+      [64, 48],
+    ]) {
+      const pixels = Uint8ClampedArray.from({ length: w * h * 4 }, (_, i) =>
+        i % 4 === 3 ? 255 : Math.round(120 + 45 * Math.sin(i * 2.1) + 2 * Math.cos(i / 3)),
+      );
+      const a = pixels.slice(),
+        b = pixels.slice();
+      before.sharpen(a, w, h, 1.2, new Float32Array(w * h * 3));
+      after.sharpen(b, w, h, 1.2, new Float32Array(w * h * 3));
+      different += a.reduce((n, v, i) => n + (v !== b[i] ? 1 : 0), 0);
+    }
+    return different;
+  });
+  expect(different).toBe(0);
 });
 
 test("previously seen wall detail survives occlusion, and its plate stays behind the visible wall", () => {
@@ -252,8 +285,11 @@ test.describe("real depth worker with a fake camera", () => {
   });
   test.afterAll(() => fs.rmSync(dir, { recursive: true, force: true }));
   for (const [clip, height, shown] of [
-    ["still", 0.0015, 1.3],
-    ["low-light", 0.016, 3],
+    // Live sampling varied across four independent runs. Bounds cover the
+    // measured maxima (0.0003501 still, 0.0110579 low light); the exact-pose
+    // comparison below adds much tighter absolute and relative checks.
+    ["still", 0.00055, 0.95],
+    ["low-light", 0.0135, 2.2],
   ]) {
     test(`${clip}: measured drift stays below the baseline`, async ({ playwright, baseURL }) => {
       const browser = await playwright.chromium.launch({
@@ -274,7 +310,8 @@ test.describe("real depth worker with a fake camera", () => {
         console.log(`cdx mirror ${clip}: ${JSON.stringify(m)}`);
         expect(m.heightJitter).toBeLessThan(height);
         expect(m.shownJitter).toBeLessThan(shown);
-        expect(m.drawMs).toBeLessThan(90);
+        // Record live timing, but guard cost with the identical-input
+        // relative benchmark below instead of a host-dependent ceiling.
         expect(m.grid).toBe("423x317");
         expect(errors).toEqual([]);
         expect(
@@ -286,5 +323,40 @@ test.describe("real depth worker with a fake camera", () => {
         await browser.close();
       }
     });
+  }
+});
+
+test("matched camera frames keep real feature contrast and improve held-pose stability", async () => {
+  test.setTimeout(600000);
+  fs.mkdirSync(".cache", { recursive: true });
+  const dir = fs.mkdtempSync(path.resolve(".cache/cdx-mir-pairs-test-"));
+  try {
+    const result = await paired(dir, {
+      profiles: ["mid"],
+      clips: ["still", "low-light"],
+      includeReview: false,
+      liveTiming: false,
+    });
+    const before = result["mid-before"],
+      after = result["mid-after"];
+    expect(before.grid).toBe(after.grid);
+    expect(before.modelHash).toBe(after.modelHash);
+    expect(before.errors).toEqual([]);
+    expect(after.errors).toEqual([]);
+    for (let i = 0; i < before.poses.length; i++) {
+      const a = after.poses[i],
+        b = before.poses[i];
+      expect(a.inputHash).toBe(b.inputHash);
+      expect(a.featurePixels).toBe(b.featurePixels);
+      expect(a.featureSharpness).toBeGreaterThanOrEqual(b.featureSharpness * 0.99);
+      expect(a.heightJitter).toBeLessThan(b.heightJitter * 0.2);
+      // Fixed input and draw times remove the live camera's sampling
+      // variation, allowing a tight absolute regression bound too.
+      expect(a.heightJitter).toBeLessThan(a.clip === "still" ? 0.00001 : 0.002);
+      expect(a.shownJitterTurned).toBeLessThan(b.shownJitterTurned * 0.85);
+      expect(a.drawMs).toBeLessThan(b.drawMs * 1.1);
+    }
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
   }
 });

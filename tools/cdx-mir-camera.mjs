@@ -6,14 +6,22 @@ import fs from "node:fs";
 import path from "node:path";
 
 export const CLIPS = ["still", "turn", "wave", "low-light"];
-export function cameras(dir, frames = 120, clips = CLIPS) {
+export function cameras(dir, frames = 120, clips = CLIPS, phase = null, noise = null) {
   fs.mkdirSync(dir, { recursive: true });
   const original = fs.readFileSync(new URL("./lv7-mannequin.mjs", import.meta.url), "utf8");
   for (const name of clips) {
     const out = path.resolve(dir, `${name}.y4m`);
     const header = "YUV4MPEG2 W320 H240 F15:1 Ip A1:1 C420jpeg\n";
     const expected = Buffer.byteLength(header) + frames * (320 * 240 * 1.5 + 6);
-    if (fs.existsSync(out) && fs.statSync(out).size === expected) continue;
+    const mark = `${out}.json`;
+    const key = JSON.stringify({ frames, name, phase, noise });
+    if (
+      fs.existsSync(out) &&
+      fs.statSync(out).size === expected &&
+      ((phase === null && noise === null) ||
+        (fs.existsSync(mark) && fs.readFileSync(mark, "utf8") === key))
+    )
+      continue;
     let source = original.replace(/^#!.*\n/, "").replace('import fs from "node:fs";', "");
     if (name === "turn") {
       source = source.replace(
@@ -39,13 +47,16 @@ export function cameras(dir, frames = 120, clips = CLIPS) {
     }
     if (name === "low-light")
       source = source.replace("rgb[o] = r;", "r *= 0.22; g *= 0.22; b *= 0.22; rgb[o] = r;");
+    // The review harness holds geometry at one exact phase while the
+    // generator's seeded sensor noise still changes on every frame.
+    if (phase !== null) source = source.replace("const P = pose(s);", `const P = pose(${phase});`);
     const args = [
       out,
       "--w=320",
       "--h=240",
       `--frames=${frames}`,
       "--fps=15",
-      name === "low-light" ? "--noise=7" : "--noise=5",
+      `--noise=${noise ?? (name === "low-light" ? 7 : 5)}`,
     ];
     if (name === "still" || name === "low-light") args.push("--still");
     // Only execute this repository's generator, with a local argument list.
@@ -54,6 +65,7 @@ export function cameras(dir, frames = 120, clips = CLIPS) {
       argv: ["node", "lv7-mannequin.mjs", ...args],
       stderr: { write() {} },
     });
+    if (phase !== null || noise !== null) fs.writeFileSync(mark, key);
     console.log(`Generated ${name}: ${out}`);
   }
 }

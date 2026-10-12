@@ -6,6 +6,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { execFileSync } from "node:child_process";
+import { createHash } from "node:crypto";
 import { chromium } from "@playwright/test";
 import jpeg from "jpeg-js";
 import gifenc from "gifenc";
@@ -17,7 +18,8 @@ const [dir = ".cache/cdx-mir", label = "after", revision] = process.argv.slice(2
 cameras(dir);
 const baseline = revision
   ? execFileSync("git", ["show", `${revision}:src/live/relief.js`], { encoding: "utf8" })
-  : null;
+  : fs.readFileSync(new URL("../src/live/relief.js", import.meta.url), "utf8");
+const metadata = { sourceHash: createHash("sha256").update(baseline).digest("hex"), clips: {} };
 for (const clip of CLIPS) {
   const browser = await chromium.launch({
     ...config.use.launchOptions,
@@ -41,11 +43,13 @@ for (const clip of CLIPS) {
       () => document.getElementById("progress").hidden && window.__splashery.player.motion.recipe,
     );
     await page.locator("#live-camera-stage").click();
-    await page.waitForFunction(
-      async () => (await import("/src/live/relief.js")).MIRROR.cam?.answers >= 6,
-      null,
-      { timeout: 180000 },
-    );
+    await page.evaluate(async () => {
+      const { MIRROR } = await import("/src/live/relief.js");
+      const start = performance.now();
+      while (!(MIRROR.cam?.answers >= 12) && performance.now() - start < 240000)
+        await new Promise((r) => setTimeout(r, 100));
+      if (!(MIRROR.cam?.answers >= 12)) throw new Error("Camera depth did not warm up");
+    });
     await page.evaluate((text) => {
       const badge = document.createElement("div");
       badge.textContent = text;
@@ -94,6 +98,13 @@ for (const clip of CLIPS) {
     gif.finish();
     const out = path.join(dir, `${label}-${clip}-390x844.gif`);
     fs.writeFileSync(out, gif.bytes());
+    metadata.clips[clip] = {
+      frames: frames.length,
+      width: 390,
+      height: 844,
+      warmedDepthAnswers: 12,
+    };
+    fs.writeFileSync(path.join(dir, `${label}-clips.json`), JSON.stringify(metadata, null, 2));
     await page.screenshot({ path: path.join(dir, `${label}-${clip}-390x844.png`) });
     if (clip === "still") {
       await page.setViewportSize({ width: 1440, height: 900 });

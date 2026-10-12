@@ -10,6 +10,24 @@ import { CLIPS, cameras } from "./cdx-mir-camera.mjs";
 import { fakeCamera, openMirror, measure } from "./lv7-mirror-measure.mjs";
 import config from "../playwright.config.mjs";
 
+export async function openProfile(page, base, profile = "mid") {
+  if (profile === "mid") return openMirror(page, base);
+  await page.goto(`${base}?renderer=webgl2&adapt=off&profile=${profile}&labs=1`);
+  await page.waitForSelector("body[data-ready='true']", { timeout: 180000 });
+  await page.evaluate(() => window.__splashery.app.chooseToy("splat-mirror"));
+  await page.waitForFunction(
+    () => document.getElementById("progress").hidden && window.__splashery.player.motion.recipe,
+  );
+  await page.evaluate(() => document.querySelector("#live-camera-stage").click());
+  await page.evaluate(async () => {
+    const { MIRROR } = await import("/src/live/relief.js");
+    const start = performance.now();
+    while (!(MIRROR.cam?.answers >= 12) && performance.now() - start < 240000)
+      await new Promise((r) => setTimeout(r, 100));
+    if (!(MIRROR.cam?.answers >= 12)) throw new Error("Camera depth did not warm up");
+  });
+}
+
 export async function timing(page, secs = 8) {
   await page.evaluate(async () => {
     const { MIRROR } = await import("/src/live/relief.js");
@@ -108,7 +126,14 @@ export async function timing(page, secs = 8) {
   });
 }
 
-export async function run(dir, label, answers = 6, clips = CLIPS, revision = null) {
+export async function run(
+  dir,
+  label,
+  answers = 6,
+  clips = CLIPS,
+  revision = null,
+  profile = "mid",
+) {
   cameras(dir);
   // Every clip uses one immutable module while a long measurement runs.
   const source = revision
@@ -130,7 +155,7 @@ export async function run(dir, label, answers = 6, clips = CLIPS, revision = nul
       );
       const errors = [];
       page.on("pageerror", (e) => errors.push(e.message));
-      await openMirror(page, process.env.SPLASHERY_URL || "http://127.0.0.1:4173/");
+      await openProfile(page, process.env.SPLASHERY_URL || "http://127.0.0.1:4173/", profile);
       const t = await timing(page);
       const m = await measure(page, { answers, dump: path.join(dir, `${label}-${clip}`) });
       results[clip] = { ...m, ...t, errors };
