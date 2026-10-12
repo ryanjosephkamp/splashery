@@ -90,9 +90,9 @@ One of three kinds:
   The generated shelf toys use the device's default splat count. Toys built from a pack recipe can
   also carry:
   - `options`: the recipe's choices, such as `{ "style": "love", "color": "#c42f3c" }`. At most 16
-    keys; values are numbers, `true`/`false`, `#rrggbb` colors, short lower-case words, or
-    printable text of up to 24,000 characters, kept as typed (the equation and QR toys' input). The
-    recipe checks their meaning when it builds, so unknown options are ignored.
+    keys; values are numbers, `true`/`false`, `#rrggbb` colors, short lower-case words, or printable
+    text of up to 24,000 characters, kept as typed (the equation and QR toys' input). The recipe
+    checks their meaning when it builds, so unknown options are ignored.
     - Photo to 3D and Moving photo to 3D (`photo-3d`, `moving-photo-3d`; added October 8, 2026, lane
       Photo sharp view r2): `view` is `"sharp"` (Sharp picture: the picture itself on a 3D relief)
       or `"splats"` (Splats). It is written when someone picks a view, without rebuilding the toy. A
