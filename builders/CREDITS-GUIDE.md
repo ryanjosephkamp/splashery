@@ -13,7 +13,7 @@ For each asset you bring in (a scan, a model, a texture, a sound, a dataset):
    domain, and NASA 3D Resources (insignia removed). Never NoDerivatives (ND), unlicensed, "personal
    use", paid, or scraped (Rules B1). If you can't open the page, you can't use the asset.
 2. **Record it in four places**: `CREDITS.md`, `tools/assets.json` or `tools/models.json`, the toy's
-   catalogue entry (or recipe), and the toy's in-app credit. Each is below.
+   catalog entry (or recipe), and the toy's in-app credit. Each is below.
 3. **Hash the file** (`sha256`) and record what you changed. Your handback's record has a table for
    this ([HANDBACK.md](HANDBACK.md)); the toy package's manifest has the same fields
    ([TOY-PACKAGE.md](TOY-PACKAGE.md)).
@@ -101,7 +101,7 @@ merge an NC asset and a BY-SA asset into one asset (side by side in a scene is f
 
 ## 4. The in-app credit line
 
-The credit the visitor sees comes from the toy's catalogue entry in `src/toys.js` (a captured toy's
+The credit the visitor sees comes from the toy's catalog entry in `src/toys.js` (a captured toy's
 `credit`) or from the recipe (a kit toy built on an asset has a `credits: […]` array). A real
 `credit`, from the rubber duck:
 

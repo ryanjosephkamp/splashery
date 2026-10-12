@@ -58,7 +58,7 @@ The engine files at the top of `src/`:
 | `effects.js`                                                     | The per-splat effect shader (GLSL and WGSL).                                   |
 | `loaders.js`                                                     | Loading SOG, PLY, SPLAT, SPZ files.                                            |
 | `state.js`, `codec.js`                                           | The scene document (schema v3, loads v2) and the `#s=` link codec.             |
-| `toys.js`                                                        | The shelf catalogue: every toy's metadata, and `labsOn()`.                     |
+| `toys.js`                                                        | The shelf catalog: every toy's metadata, and `labsOn()`.                       |
 | `toy-sounds.js`, `voices.js`, `sound.js`                         | Each toy's tap sound, the synthesized voice library, and the output.           |
 | `toy-help.js`                                                    | Each toy's how-to line and About text.                                         |
 | `rig.js`, `rigs.js`, `rig-fx.js`                                 | Rigs: moving parts for scans and shapes.                                       |
@@ -99,15 +99,15 @@ Good packs to read first: `shapes-torus` (one toy, well commented), `gems` (many
 These files list every toy. Many people edit them, so **edit only your own toys' entries, in place:
 don't reorder, reflow, or reformat anyone else's lines.** Git then merges them line by line.
 
-| File                                     | What goes there                                                                       |
-| ---------------------------------------- | ------------------------------------------------------------------------------------- |
-| `src/toys.js`                            | The catalogue. A new toy adds one entry (`id`, `label`, `category`, `kind`, `pack`…). |
-| `src/toy-sounds.js`                      | The toy's tap sound, as a spec for the voice library.                                 |
-| `src/toy-help.js`                        | The toy's `howTo` line and `about` text, in its shelf's section.                      |
-| `tools/toy-plan.json`                    | The toy's planned tap effect and sound; `"v": "keep"` when finished.                  |
-| `src/rigs.js`                            | A scan's rig (only for captured toys).                                                |
-| `tools/assets.json`, `tools/models.json` | Where an asset came from (see [CREDITS-GUIDE.md](CREDITS-GUIDE.md)).                  |
-| `CREDITS.md`, `LICENSES.md`              | Credits for assets; notices for libraries and build tools.                            |
+| File                                     | What goes there                                                                     |
+| ---------------------------------------- | ----------------------------------------------------------------------------------- |
+| `src/toys.js`                            | The catalog. A new toy adds one entry (`id`, `label`, `category`, `kind`, `pack`…). |
+| `src/toy-sounds.js`                      | The toy's tap sound, as a spec for the voice library.                               |
+| `src/toy-help.js`                        | The toy's `howTo` line and `about` text, in its shelf's section.                    |
+| `tools/toy-plan.json`                    | The toy's planned tap effect and sound; `"v": "keep"` when finished.                |
+| `src/rigs.js`                            | A scan's rig (only for captured toys).                                              |
+| `tools/assets.json`, `tools/models.json` | Where an asset came from (see [CREDITS-GUIDE.md](CREDITS-GUIDE.md)).                |
+| `CREDITS.md`, `LICENSES.md`              | Credits for assets; notices for libraries and build tools.                          |
 
 `docs/TOY-PLAN.md` is generated from `tools/toy-plan.json` by `node tools/toy-plan.mjs`. Never edit
 or merge it by hand. The Operator keeps `CLAUDE.md`, `docs/OPERATING.md`, `docs/WORKSTREAMS.md`,

@@ -14,7 +14,7 @@ Chapter 3, [The splat equation language](../manual/language.html).
    or a scan) plus kit-built extras (water, ink, shadows). Real Objects
    (`src/packs/real-objects.js`) does this today.
 
-Both are `kind: "kit"` in the catalogue. The sections below take them in order.
+Both are `kind: "kit"` in the catalog. The sections below take them in order.
 
 ## 1. A kit recipe
 
@@ -22,12 +22,12 @@ Both are `kind: "kit"` in the catalogue. The sections below take them in order.
 
 | Where                 | What                                                                                                  |
 | --------------------- | ----------------------------------------------------------------------------------------------------- |
-| `src/toys.js`         | One catalogue entry: `id`, `label`, `category`, `kind: "kit"`, `pack`, `tags`.                        |
+| `src/toys.js`         | One catalog entry: `id`, `label`, `category`, `kind: "kit"`, `pack`, `tags`.                          |
 | `src/packs/<pack>.js` | The recipe, in `export const RECIPES = { "<id>": { … } }`.                                            |
 | the shared lists      | The tap sound (`src/toy-sounds.js`), the words (`src/toy-help.js`), the plan (`tools/toy-plan.json`). |
 
 Add only your own entries to the shared lists (see [REPO-MAP.md](REPO-MAP.md)). New toys open behind
-the labs switch: put `labs: true` on the catalogue entry.
+the labs switch: put `labs: true` on the catalog entry.
 
 ### Coordinates
 
@@ -113,7 +113,7 @@ makes the parts.
     controls: [{ key: "fire", label: "Fire", type: "pulse", ease: 3.8 }],
     action: { key: "fire", label: "Turn it in the light" },
     // A tap turns it one way and the other in the light, as you would a
-    // ring: facet after facet flashes with fire (rainbow colours, the light
+    // ring: facet after facet flashes with fire (rainbow colors, the light
     // split by the stone) and the star glints flare.
     drive(t, c, out) {
       const p = progress(c.fire);
@@ -153,7 +153,7 @@ makes the parts.
   },
 ```
 
-Its catalogue entry, in `src/toys.js`:
+Its catalog entry, in `src/toys.js`:
 
 ```js
 {
@@ -235,7 +235,7 @@ gets), `parts` (the kit part for each part number in the file), and options for 
 The toy still moves as solid kit parts, and the rest of the recipe (controls, `drive`, tap, sound,
 help) is exactly as in section 1.
 
-Photo-scanned splat files (`.sog`) load a different way: a `kind: "captured"` catalogue entry points
+Photo-scanned splat files (`.sog`) load a different way: a `kind: "captured"` catalog entry points
 at the file (`url`, and a lighter `urlWeak` for phones) and carries its `credit`. The Bee in
 `src/toys.js` is an example. Those toys get moving parts through `src/rigs.js`.
 
