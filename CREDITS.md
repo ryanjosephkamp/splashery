@@ -217,6 +217,12 @@ browser from a seed by `src/generators.js`. The toys from packs (`src/packs/*.js
 beating heart, the campfire and the treasure chest) are built in the browser by the toy kit
 (`src/kit.js`) from recipes written for Splashery. None of them use external assets.
 
+### Baked assets (lane Baked engine)
+
+The Baked chest (labs) is original: built with Splashery's kit by `tools/bkd-bake-chest.mjs`, baked
+to a 3D Gaussian splat PLY with its lid as a moving part, and converted by `tools/port-convert.mjs`
+into the baked format. Made by Ryan with Claude Code (Opus 5.5), CC0 1.0.
+
 ## Protein structures
 
 The protein toy shows real structures from the [RCSB Protein Data Bank](https://www.rcsb.org/). PDB

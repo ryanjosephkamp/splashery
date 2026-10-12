@@ -111,10 +111,10 @@ Ryan with <agent and model>"), D1 (a Workshop project may ship bundled output on
 beside it), and the effect quality bar (parts move as solid pieces; never bend a scan).
 
 **What comes back.** A toy package ([TOY-PACKAGE.md](TOY-PACKAGE.md)) under `workshop/<project>/`:
-the recipe, the manifest, one set of files per tier, the record with the generation command,
-versions and seed, the Blender file's source or script, screenshots at 390×844 and 1440×900, and a
-clip of each effect. The package goes in a draft PR (or your sandbox repo); the owner picks which to
-promote.
+the recipe, the manifest and tier files from `tools/port-convert.mjs`, the record with the
+generation command, versions and seed, the Blender file's source or script, screenshots at 390×844
+and 1440×900, and a clip of each effect. The package goes in a draft PR (or your sandbox repo); the
+owner picks which to promote.
 
 **Best-fit agent.** The Dot (Blender and procedural modeling).
 
@@ -129,8 +129,13 @@ promote.
 > <agent and model>"; use no outside asset unless its license is checked on the live page and
 > recorded. Hand back a toy package per builders/TOY-PACKAGE.md under `workshop/<project>/` on
 > branch `dot/t3-<slug>`, a draft PR, screenshots at 390×844 and 1440×900, a clip per effect, and
-> the full record. The asset format and `tools/port-convert.mjs` come with the Baked engine PR;
-> until it lands, hand back 3DGS `.ply` tiers and a per-splat part file, and say so.
+> the full record. Bake your splats to a standard 3DGS PLY with a parts sidecar (each moving part a
+> part id with its pivot and axis; Blender's up axis is z, so convert with `--up z`), make tiers
+> with
+> `node tools/port-convert.mjs <in.ply> --out <toy-id> --id <toy-id> --tiers 100000,400000 --gzip`,
+> fill in the manifest's credit, and run `node tools/port-check.mjs <toy-id>` until nothing blocks;
+> paste its output in the record. The baked loader and the example are in `src/baked.js` and
+> `src/packs/baked-demo.js`.
 
 ## T4: Code cleanup with no behavior change
 

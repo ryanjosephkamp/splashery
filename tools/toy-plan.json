@@ -2406,6 +2406,13 @@
       "sound": "The pour's splash and glug (soda fizzes; honey and lava a thick gloop), a splash, a breath on the candle and the cup.",
       "improved": "Fluids: new sandbox on the Lab shelf (labs). Liquids are position-based fluids with a viscosity from water to lava, drawn as stretched, lit surface splats; smoke and steam rise in a curl field; flames cool through a real color ramp with sparks; colliders keep the liquid in the glass and the bowl. Fix9 (October 7, 2026, the owner's walkthrough): on a phone that can't keep up (its frames timed for the first second), a short, plain warning offers a lighter mode (the lowest tier), a way back to the first toy, or to keep going."
     },
+    "baked-chest": {
+      "v": "new",
+      "owner": "The Operator's brief of October 12, 2026 (lane Baked engine): the example of the baked-asset path for outside agents' high-fidelity toys (labs).",
+      "effect": "The lid swings back on its hinge as one solid piece and shows the gold inside; a second tap shuts it.",
+      "sound": "A wooden creak as the lid opens, a scrape and a soft knock as it shuts.",
+      "improved": "Baked engine: new toy (labs). The chest is baked offline into a standard 3DGS PLY with a parts sidecar and converted into Splashery's baked format (18 bytes a splat, two tiers: 30,000 and 100,001 splats); the splat budget picks the tier, and below the smallest tier it is thinned the same way every time."
+    },
     "heart-donut": {
       "v": "keep",
       "owner": "New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.",

@@ -72,3 +72,25 @@ Checks run before READY: `npx prettier --check .`, `node tools/us-english.mjs --
   the T3 prompt in `TASKS.md`.
 - A suggestion for Rules v1 (not changed here): none.
 - `docs/WORKSTREAMS.md` could get a row for this lane. README.md's layout could name `builders/`.
+
+## Follow-up: r1b (October 12, 2026)
+
+Branch `claude/lane-builders-r1b` from main 346270db, after the Baked engine merged (#563). Updated
+from the merged code, and checked against it:
+
+- `builders/TOY-PACKAGE.md`: the folder, the recipe, the manifest and the `assets/` section now
+  describe the real format (BKD1, 18 bytes a splat), `tools/port-convert.mjs` (with the PLY layout,
+  the parts sidecar and the options) and `tools/port-check.mjs` (what blocks and what warns, with
+  real output). My earlier invented manifest is gone: the converter writes it.
+- `builders/KIT-GUIDE.md`: "Baked splats" shows convert, `loadBaked` in `prepare()` (the budget is
+  its third argument), `addBaked` in `build()`, and the Baked chest example.
+- `builders/HANDBACK.md`: proof 1 is the checker's full output.
+- `builders/TASKS.md`: the T3 prompt (Blender's up axis, `--up z`, tiers, the checker) and its "what
+  comes back".
+- `builders/REPO-MAP.md`: rows for `src/baked.js`, `port-convert.mjs` and `port-check.mjs`.
+
+Verified here: `tools/bkd-bake-chest.mjs` then `tools/port-convert.mjs --tiers 30000 --gzip` ran and
+wrote the manifest and three tier files; `tools/port-check.mjs` on a package made from the Baked
+chest's manifest and files (with a recipe like the one in TOY-PACKAGE.md) exits 0, and warns about a
+missing "Rule check" line until the record has one. The package's `screenshots/` and `clips/`
+folders don't trip it. Not tested: a block (the repo's `tests/bkd*.spec.mjs` cover them).
