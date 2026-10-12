@@ -90,8 +90,9 @@ One of three kinds:
   The generated shelf toys use the device's default splat count. Toys built from a pack recipe can
   also carry:
   - `options`: the recipe's choices, such as `{ "style": "love", "color": "#c42f3c" }`. At most 16
-    keys; values are numbers, `true`/`false`, `#rrggbb` colours or short lower-case words. The
-    recipe checks their meaning when it builds, so unknown options are ignored.
+    keys; values are numbers, `true`/`false`, `#rrggbb` colors, short lower-case words, or printable
+    text of up to 24,000 characters, kept as typed (the equation and QR toys' input). The recipe
+    checks their meaning when it builds, so unknown options are ignored.
     - Photo to 3D and Moving photo to 3D (`photo-3d`, `moving-photo-3d`; added October 8, 2026, lane
       Photo sharp view r2): `view` is `"sharp"` (Sharp picture: the picture itself on a 3D relief)
       or `"splats"` (Splats). It is written when someone picks a view, without rebuilding the toy. A
@@ -131,7 +132,8 @@ One of three kinds:
   - `generator.palette`: `candy`, `ocean`, `meadow`, `sunset`, `ink`, `neon`, `planet` or
     `frosting`.
   - `generator.seed`: 0 to 4,294,967,295.
-  - `generator.count`: splats, 2,000 to 300,000 (clamped to 120,000 on weak devices).
+  - `generator.count`: splats, 2,000 up to the tier's ceiling (clamped to 120,000 on Low, 240,000 on
+    Mid, 300,000 on High, and 400,000 on Max).
   - `generator.sizeJitter`, `generator.roughness`, `generator.colorNoise`: 0 to 1.
   - `clay`: clay edits replayed in order after generation, each `["a" | "e", x, y, z, radius]` in
     the toy's own coordinates (`a` adds a lump, `e` erases everything inside the sphere). At most

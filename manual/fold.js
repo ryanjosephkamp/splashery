@@ -71,7 +71,7 @@ async function show(term, pin) {
   if (current !== term) return; // the pointer left, or another word was picked, while it loaded
   const e = glossaryEntry(term.dataset.g);
   if (!e) return;
-  pop.innerHTML = `<strong>${e.title}</strong><span>${e.body}</span><a href="${e.here ? "" : "glossary.html"}#${term.dataset.g}">In the glossary</a>`;
+  pop.innerHTML = `<strong>${e.title}</strong><span>${e.body}</span><a href="${e.here ? "" : "glossary.html"}#${term.dataset.g}" target="_blank" rel="noopener">In the glossary</a>`;
   pop.hidden = false;
   term.setAttribute("aria-describedby", "term-pop");
   const r = term.getBoundingClientRect();

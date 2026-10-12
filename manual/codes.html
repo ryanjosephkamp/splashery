@@ -47,17 +47,43 @@
         </button>
         <nav class="outline-panel" id="manual-contents" aria-label="The manual's chapters" hidden>
           <ol>
-            <li><a href="index.html">Contents</a></li>
-            <li><a href="splat.html">Chapter 1: What a splat is</a></li>
-            <li><a href="toy.html">Chapter 2: How a toy is built</a></li>
-            <li><a href="language.html">Chapter 3: The splat equation language</a></li>
-            <li><a href="gallery.html">Chapter 4: A gallery of programs</a></li>
-            <li><a href="pictures.html">Chapter 5: Pictures, screens, and your own input</a></li>
-            <li><a href="moving.html">Chapter 6: Moving things</a></li>
-            <li><a href="data.html">Chapter 7: Real data as splats</a></li>
-            <li><a href="photo3d.html">Chapter 8: Photos and video into 3D</a></li>
+            <li><a href="index.html" rel="noopener" target="_blank">Contents</a></li>
             <li>
-              <a href="codes.html" aria-current="page">Chapter 9: Codes and pages</a>
+              <a href="splat.html" rel="noopener" target="_blank">Chapter 1: What a splat is</a>
+            </li>
+            <li>
+              <a href="toy.html" rel="noopener" target="_blank">Chapter 2: How a toy is built</a>
+            </li>
+            <li>
+              <a href="language.html" rel="noopener" target="_blank"
+                >Chapter 3: The splat equation language</a
+              >
+            </li>
+            <li>
+              <a href="gallery.html" rel="noopener" target="_blank"
+                >Chapter 4: A gallery of programs</a
+              >
+            </li>
+            <li>
+              <a href="pictures.html" rel="noopener" target="_blank"
+                >Chapter 5: Pictures, screens, and your own input</a
+              >
+            </li>
+            <li>
+              <a href="moving.html" rel="noopener" target="_blank">Chapter 6: Moving things</a>
+            </li>
+            <li>
+              <a href="data.html" rel="noopener" target="_blank">Chapter 7: Real data as splats</a>
+            </li>
+            <li>
+              <a href="photo3d.html" rel="noopener" target="_blank"
+                >Chapter 8: Photos and video into 3D</a
+              >
+            </li>
+            <li>
+              <a href="codes.html" aria-current="page" rel="noopener" target="_blank"
+                >Chapter 9: Codes and pages</a
+              >
               <ol class="outline-sub" aria-label="In this chapter">
                 <li><a href="#qr-codes">QR codes</a></li>
                 <li><a href="#more-qr-toys">More QR toys, and other barcodes</a></li>
@@ -66,25 +92,41 @@
                 <li><a href="#try-it-9">Where to try it</a></li>
               </ol>
             </li>
-            <li><a href="make.html">Chapter 10: Make your own</a></li>
-            <li><a href="more.html">What else Splashery does now</a></li>
-            <li><a href="unique.html">What Splashery can do that other splat tools can't</a></li>
-            <li><a href="built.html">How Splashery is built</a></li>
-            <li><a href="share.html">Share links and QR codes</a></li>
-            <li><a href="experiments.html">Open questions: other choices, not tried yet</a></li>
-            <li><a href="later.html">What comes later: Code a toy</a></li>
-            <li><a href="glossary.html">Glossary</a></li>
-            <li><a href="reading.html">Further reading</a></li>
-            <li><a href="references.html">References</a></li>
-            <li><a href="card.html">Quick reference</a></li>
+            <li>
+              <a href="make.html" rel="noopener" target="_blank">Chapter 10: Make your own</a>
+            </li>
+            <li>
+              <a href="more.html" rel="noopener" target="_blank">What else Splashery does now</a>
+            </li>
+            <li>
+              <a href="unique.html" rel="noopener" target="_blank"
+                >What Splashery can do that other splat tools can't</a
+              >
+            </li>
+            <li><a href="built.html" rel="noopener" target="_blank">How Splashery is built</a></li>
+            <li>
+              <a href="share.html" rel="noopener" target="_blank">Share links and QR codes</a>
+            </li>
+            <li>
+              <a href="experiments.html" rel="noopener" target="_blank"
+                >Open questions: other choices, not tried yet</a
+              >
+            </li>
+            <li>
+              <a href="later.html" rel="noopener" target="_blank">What comes later: Code a toy</a>
+            </li>
+            <li><a href="glossary.html" rel="noopener" target="_blank">Glossary</a></li>
+            <li><a href="reading.html" rel="noopener" target="_blank">Further reading</a></li>
+            <li><a href="references.html" rel="noopener" target="_blank">References</a></li>
+            <li><a href="card.html" rel="noopener" target="_blank">Quick reference</a></li>
           </ol>
         </nav>
       </div>
       <nav class="pager no-print" aria-label="Previous and next chapter, top">
-        <a class="pager-prev" rel="prev" href="photo3d.html"
+        <a class="pager-prev" rel="prev noopener" href="photo3d.html" target="_blank"
           ><span class="pager-word">← Previous</span
           ><span class="pager-title">Chapter 8: Photos and video into 3D</span></a
-        ><a class="pager-next" rel="next" href="make.html"
+        ><a class="pager-next" rel="next noopener" href="make.html" target="_blank"
           ><span class="pager-word">Next →</span
           ><span class="pager-title">Chapter 10: Make your own</span></a
         >
@@ -128,14 +170,19 @@
         Wi-Fi network, a contact card, an email, a phone number, a text message, or a map location,
         and draws it as splats in one of seven styles (Classic, Dots, Rounded, Bricks, Gems,
         Bubbles, Neon) on a plate of paper, wood, or metal, or on none. The encoding itself is done
-        by Project Nayuki's QR Code generator [<a href="references.html#ref-20">20</a>], a small
-        MIT-licensed library that is vendored and loaded only when the toy opens. Splashery asks it
-        for a code and then marks which modules belong to the finder patterns, to the alignment
-        patterns, and to the rest, so each can be built and moved as a piece of its own. A tap
-        bursts the code into its modules, which fall and fly back and land exactly on their grid
-        again; the toy also has an assemble motion, a flip, and an "alive" color wave. Each module
-        moves as a solid tile, and the alive wave keeps the gray values a reader sees unchanged, so
-        every frame of it still scans.
+        by Project Nayuki's QR Code generator [<a
+          href="references.html#ref-20"
+          rel="noopener"
+          target="_blank"
+          >20</a
+        >], a small MIT-licensed library that is vendored and loaded only when the toy opens.
+        Splashery asks it for a code and then marks which modules belong to the finder patterns, to
+        the alignment patterns, and to the rest, so each can be built and moved as a piece of its
+        own. A tap bursts the code into its modules, which fall and fly back and land exactly on
+        their grid again; the toy also has an assemble motion, a flip, and an "alive" color wave.
+        Each module moves as a solid tile, and the alive hue waves keep the gray values a reader
+        sees unchanged (the electric patterns brighten dark modules by a bounded amount), so every
+        frame of it still scans.
       </p>
       <p>
         It checks itself. <b>Scan view</b> turns the code flat and square to the camera, and after
@@ -147,12 +194,13 @@
       </p>
       <p>
         <b>Error correction.</b> A QR code carries extra codewords (a codeword is 8 modules) made
-        with a Reed–Solomon code [<a href="references.html#ref-19">19</a>]. There are four levels,
-        L, M, Q, and H, which can lose about 7, 15, 25, and 30 percent of the codewords and still
-        scan. That percentage counts codewords, not squares, and the code is cut into blocks that
-        are corrected separately, so damage to the three finder squares, or damage spread over many
-        blocks, can defeat a code that has lost far less than its limit. The toy uses level M by
-        default.
+        with a Reed–Solomon code [<a href="references.html#ref-19" rel="noopener" target="_blank"
+          >19</a
+        >]. There are four levels, L, M, Q, and H, which can lose about 7, 15, 25, and 30 percent of
+        the codewords and still scan. That percentage counts codewords, not squares, and the code is
+        cut into blocks that are corrected separately, so damage to the three finder squares, or
+        damage spread over many blocks, can defeat a code that has lost far less than its limit. The
+        toy uses level M by default.
       </p>
       <details class="fold why" id="why-qr-limits">
         <summary>Why these numbers? Contrast, module size, and level M</summary>
@@ -254,6 +302,8 @@
       <p>
         <b>How Splashery does it.</b> A PDF is drawn page by page by PDF.js [<a
           href="references.html#ref-22"
+          rel="noopener"
+          target="_blank"
           >22</a
         >], vendored and loaded only when someone opens a PDF. A worker turns each page's pixels
         into splats. Pages stream through a few sheets, so a 200-page book costs the same as its
@@ -284,7 +334,7 @@
           <div>
             <img
               src="img/r7b-your-book.jpg"
-              alt="An open book whose pages show text, standing on a table"
+              alt="An open book: the inside of the cover on the left and a page of text on the right"
             />
             <p class="shot-label">Your book</p>
           </div>
@@ -311,17 +361,19 @@
         <b>What it is.</b> A Splashery link is not an address that points at your scene; it is your
         scene. It carries the toy's options, the look, the camera, and any paint, written into the
         web address after the <code>#</code>, which a browser never sends to a server. The scene is
-        JSON, compressed with raw deflate and written with the 64 letters, digits, <code>-</code>,
-        and <code>_</code> that are safe in an address. A toy at its defaults is a link of about 700
-        characters; a link stops at 12,288 characters of scene, leaving out paint and then clay
-        first. A link carries <i>settings, not files</i>: a photo or a splat file from your device
-        has to be opened again by whoever opens the link.
+        JSON, compressed with raw deflate (a <code>d.</code> link; a browser that cannot compress
+        writes an uncompressed <code>j.</code> link instead) and written with the 64 letters,
+        digits, <code>-</code>, and <code>_</code> that are safe in an address. A toy at its
+        defaults is a link of about 700 characters; a link stops at 12,288 characters of scene,
+        leaving out paint and then clay first. A link carries <i>settings, not files</i>: a photo or
+        a splat file from your device has to be opened again by whoever opens the link.
       </p>
       <p>
         <b>Where it goes next.</b> A link is text, so it can be a QR code. The
-        <a href="share.html">share links chapter</a> takes one apart, lets you break one, and counts
-        how many characters a code can hold. Here, notice what codes and pages have in common with
-        links: they all put a lot of meaning in a small, exact picture.
+        <a href="share.html" rel="noopener" target="_blank">share links chapter</a> takes one apart,
+        lets you break one, and counts how many characters a code can hold. Here, notice what codes
+        and pages have in common with links: they all put a lot of meaning in a small, exact
+        picture.
       </p>
 
       <h3 id="try-it-9">Where to try it</h3>
@@ -402,10 +454,10 @@
 
       <!-- NAV:BOTTOM:START (written by manual/build-pages.mjs; do not edit by hand) -->
       <nav class="pager no-print" aria-label="Previous and next chapter, bottom">
-        <a class="pager-prev" rel="prev" href="photo3d.html"
+        <a class="pager-prev" rel="prev noopener" href="photo3d.html" target="_blank"
           ><span class="pager-word">← Previous</span
           ><span class="pager-title">Chapter 8: Photos and video into 3D</span></a
-        ><a class="pager-next" rel="next" href="make.html"
+        ><a class="pager-next" rel="next noopener" href="make.html" target="_blank"
           ><span class="pager-word">Next →</span
           ><span class="pager-title">Chapter 10: Make your own</span></a
         >

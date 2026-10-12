@@ -11,8 +11,9 @@ scientific solver, and the Fluid lab's About text says so.
 
 A kit toy declares fluids with `k.fluid({ ... })` in its `build`. When the toy opens, the player
 loads `src/fluids/` (never before: the shelf and embeds don't fetch it), simulates the fluids on the
-toy's own clock and draws them as one extra splat layer, one splat per particle, sorted with the
-toy. The recipe's `drive()` steers them through `out.fluid`.
+toy's own clock and draws them as one extra splat layer (four small splats for each liquid particle,
+one for each other particle; with WebGPU a liquid can also be drawn as a surface and a gas as a
+grid), sorted with the toy. The recipe's `drive()` steers them through `out.fluid`.
 
 | File                     | What it does                                                                                                                                                                                                                            |
 | ------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -85,9 +86,9 @@ They don't move (yet).
 
 ## Drawing
 
-One splat per particle, in a layer with its own work-buffer program, reading four small float
-textures a frame (place; velocity and kind; turn; radii and material) and the toy's uniforms (the
-camera, the whole-toy move and turn, the splat scale and exposure).
+One splat per particle (four for a liquid, below), in a layer with its own work-buffer program,
+reading four small float textures a frame (place; velocity and kind; turn; radii and material) and
+the toy's uniforms (the camera, the whole-toy move and turn, the splat scale and exposure).
 
 - **Liquid.** Each particle draws four smaller splats (`LIQUID_SUB`), which gives a crisper edge
   than one big one. Its place is smoothed toward its neighbors' (75%), and its normal is its

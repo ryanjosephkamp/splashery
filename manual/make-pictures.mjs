@@ -46,7 +46,7 @@ export const PICTURES = [
   { file: "pic-uq-equations", size: [320, 320], panels: [{ toy: "splat-equation", opt: { preset: "klein" } }, { toy: "splat-equation", opt: { preset: "trefoil" } }, { toy: "splat-equation", opt: { preset: "galaxy" } }] }, // prettier-ignore
   { file: "pic-uq-moving", size: [320, 320], panels: [{ toy: "chest", steps: [{ wait: 0.5 }, { shot: true }, { tap: true }, { wait: 0.7 }, { shot: true }, { wait: 1.5 }, { shot: true }] }] }, // prettier-ignore
   { file: "pic-uq-physics", size: [320, 320], panels: [{ toy: "rubber-duck", cam: [0, 0, 1.25], steps: [{ wait: 0.8 }, { shot: true }, { toss: [[0, 0, 0], [0.3, 0.5, 0], [0.9, 1.2, 0]], secs: 0.3 }, { wait: 0.25 }, { shot: true }, { wait: 0.6 }, { shot: true }] }] }, // prettier-ignore
-  { file: "pic-uq-anything", size: [320, 320], panels: [{ toy: "photo-3d" }, { toy: "night-sky" }, { toy: "volume-viewer" }] },
+  { file: "pic-uq-anything", size: [320, 320], panels: [{ toy: "photo-3d", opt: { view: "splats" } }, { toy: "night-sky" }, { toy: "volume-viewer" }] },
 ]; // prettier-ignore
 
 const only = process.argv.slice(2);
