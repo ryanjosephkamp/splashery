@@ -6,8 +6,9 @@ stepped; GIFs are silent. Playback timing and sound have separate browser tests.
 attribution, license, size, and SHA-256 are in assets/toys/moving-photo-3d/review/credits.json.
 
 This evidence branch is never merged. The implementation and full audit are on
-codex/moving-photo-r2-public. The legacy bridge review GIF is withheld under A2 because it depicts
-an identifiable live-action actor; the permitted city montage is included.
+codex/moving-photo-r2-public. The gallery includes the existing bridge sample under the original
+task's request to render each sample and the Operator's confirmation to keep it. The new city
+montage excludes identifiable live-action faces.
 
 The review follow-up, rendered before task 37 entered main (task 38 code `9ad9a3a9`), replaces the
 Bunny upload capture and adds a machine upload. The wrapper now waits for the actual selected upload
@@ -28,6 +29,13 @@ Blender Foundation / Netherlands Media Art Institute / www.elephantsdream.org.
 ## sintel
 
 ![sintel](../../assets/toys/moving-photo-3d/review/sintel.gif)
+
+The bridge sample was rendered after task 37 integration at `47359f83`, using its existing prepared
+depth and frames; it introduces no new footage.
+
+## bridge
+
+![bridge](../../assets/toys/moving-photo-3d/review/bridge.gif)
 
 ## machine
 

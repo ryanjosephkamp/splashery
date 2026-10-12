@@ -270,6 +270,33 @@
       "modified": "App and relief rendering, reconstructed from the shipped JPEG sheets, controlled camera and source clock, silent six-second 390 by 844 GIF at 8 fps. Made by Ryan with Codex (GPT-6); UI/code MIT; source image and derived rendering retain CC BY 2.5.",
       "bytes": 5900,
       "sha256": "5dd4a712d648c38688615082a63d34eb956f7a00060085dd6b3d7d30a6013e8e"
+    },
+    {
+      "file": "assets/toys/moving-photo-3d/review/bridge.gif",
+      "bytes": 2346463,
+      "sha256": "17263fcfd6cbca9b7a26f356d1b25eb550a6225412635faa1d65685b8c18ae08",
+      "author": "Blender Foundation",
+      "license": "CC BY 3.0",
+      "source": "https://archive.org/details/Tears-of-Steel",
+      "modified": "Existing shipped Tears of Steel sample, 8:30.5 to 8:36.5, retained per the Operator confirmation and rendered under task 38\u2019s request to review each sample. No new live-action footage. App and relief rendering at code 47359f83 after task 37 integration; controlled camera and source clocks; silent six-second 390 by 844 GIF at 8 fps. Made by Ryan with Codex (GPT-6); UI/code MIT; film and derived rendering retain CC BY 3.0."
+    },
+    {
+      "file": "assets/toys/moving-photo-3d/review/bridge-strip.png",
+      "bytes": 771798,
+      "sha256": "bd6feb62757d5bbd4615f0ea838599e65102d5cdf8e51c1f8780ded090234e09",
+      "author": "Blender Foundation",
+      "license": "CC BY 3.0",
+      "source": "https://archive.org/details/Tears-of-Steel",
+      "modified": "Existing shipped Tears of Steel sample, 8:30.5 to 8:36.5, retained per the Operator confirmation and rendered under task 38\u2019s request to review each sample. No new live-action footage. App and relief rendering at code 47359f83 after task 37 integration; controlled camera and source clocks; silent six-second 390 by 844 GIF at 8 fps. Made by Ryan with Codex (GPT-6); UI/code MIT; film and derived rendering retain CC BY 3.0."
+    },
+    {
+      "file": "assets/toys/moving-photo-3d/review/bridge-clocks.json",
+      "bytes": 6766,
+      "sha256": "1b49c8d490fb1f8b6fbb77312392a9051b27922b29861e4e15cebee70b88bdbc",
+      "author": "Blender Foundation",
+      "license": "CC BY 3.0",
+      "source": "https://archive.org/details/Tears-of-Steel",
+      "modified": "Existing shipped Tears of Steel sample, 8:30.5 to 8:36.5, retained per the Operator confirmation and rendered under task 38\u2019s request to review each sample. No new live-action footage. App and relief rendering at code 47359f83 after task 37 integration; controlled camera and source clocks; silent six-second 390 by 844 GIF at 8 fps. Made by Ryan with Codex (GPT-6); UI/code MIT; film and derived rendering retain CC BY 3.0."
     }
   ],
   "note": "Live archive declarations were checked; legacy short samples retain their existing credits. Original project pages were unavailable. This branch is motion evidence, never merged or fetched by the site."
