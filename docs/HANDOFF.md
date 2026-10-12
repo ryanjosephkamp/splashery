@@ -79,10 +79,12 @@ revealed to the owner (privately). Finished and safe to archive with the owner's
 r4, Manual r5, Live r10, the bake-off runner, Fix11, QR r5, Live r9, Kit lab, Arcade r3, Fix10,
 Photo depth, QR r4, Manual r6 and Site r4.
 
-**Open with the owner:** marks on the st5, man7a and man7b cards; the git history of his removed
-notes (leave it, make the repo private, or rewrite history); the front-door call; Codex task 32
-(#479). Pace: about 78% of the week used (October 12); his priorities before the reset (Wednesday,
-October 14, 4 p.m. ET) are the finished manual first, then the engine change.
+**Open with the owner:** the front-door call; Codex tasks 37 to 41 (#554), which he runs; task 38
+replaces Codex task 32 (#479). Decided October 12, 2026: the git history of his removed notes stays
+as it is (no rewrite, no change to the repo's visibility); a faster depth runtime and a better depth
+model may ship over 2 MB under Apache-2.0, MIT or BSD (CLAUDE.md); he marked every st5, man7a and
+man7b card good. Pace: about 78% of the week used (October 12); his priorities before the reset
+(Wednesday, October 14, 4 p.m. ET) are the finished manual first, then the engine change.
 
 **Next for the Operator:** merge Site r5, then Manual r7a, then Manual r7b with the PDF rebuilt,
 after the owner's marks; tell him to run Codex task 36; brief the fix lane (Manual r8) on its
