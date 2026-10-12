@@ -55,6 +55,7 @@ merges.
 | 44-photoreal-planets.md           | The photoreal planets, polished                                | `src/space/`, tiles, tests            | yes           |
 | 45-elements-polish.md             | The periodic table and the real elements, polished             | the elements toys, photos, tests      | yes           |
 | 46-blender-worlds.md              | Blender-built worlds, baked to splats (after PR #549)          | `tools/blender/`, a world, tests      | yes           |
+| 47-manual-audit-r4.md             | The third manual audit's fixes (Manual r8, #571), audited      | report only                           | yes           |
 
 The Codex cloud environment is set up with `tools/codex-setup.sh`; [SETUP.md](SETUP.md) has the
 steps for creating it and fixing a failed setup.

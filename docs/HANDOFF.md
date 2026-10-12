@@ -73,15 +73,16 @@ wave 42 to 46). The Operator reviews each PR with a Sonnet helper and posts one 
 fixes; the owner tells the Codex session "Read the Operator's comment on your PR and do it":
 
 - #558 (task 37, depth engine): merged in this batch.
-- #559 (task 41, Splat mirror): fixes in; waits on the Operator's test run and the owner's look at
-  the GIFs (the sharpening changed).
+- #559 (task 41, Splat mirror): merged in this batch, after its specs and the owner's look at the
+  GIFs.
 - #560 (task 38, Moving photo; replaces #479, close #479 when it merges): waits on Codex.
 - #562 (task 40, Video to 3D): second fix comment; the sharp bakes need the owner's Mac run.
 - #566 (task 39, Photo to 3D): the owner approved the clips; `phf-engine:200` fails on it (text
   legibility 0.775, under 0.8), sent back to Codex.
 - All are labs: merge after the fixes, the tests (`cdx-*` plus the toys' specs) and the owner's
   look.
-- Not yet opened: tasks 42 to 46 (46 may start now that the Baked engine is in).
+- Not yet opened: tasks 42 to 46, and 47 (a short audit of Manual r8's fixes, before the owner's
+  rewording pass) (46 may start now that the Baked engine is in).
 
 Finished and safe to archive with the owner's OK: the Baked engine, Site r5, Manual r7a, Manual r7b,
 Privacy r1, Manual r6, Site r4, and the earlier list below.
