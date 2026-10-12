@@ -23,7 +23,7 @@ export default {
   },
   "g-quadratic": {
     title: "Quadratic form",
-    body: 'An expression in which every term has two factors of the input. In two dimensions,\n          <var>a</var><var>d</var><sub>1</sub>² + 2<var>b</var><var>d</var><sub>1</sub><var>d</var\n          ><sub>2</sub> + <var>c</var><var>d</var><sub>2</sub>². With 4 and 1 on the diagonal it is\n          4<var>d</var><sub>1</sub>² + <var>d</var><sub>2</sub>², and setting it to 1 draws an\n          ellipse. The exponent of a Gaussian holds one [<a href="references.html#ref-5">5</a>].',
+    body: 'An expression in which every term has two factors of the input. In two dimensions,\n          <var>a</var><var>d</var><sub>1</sub>² + 2<var>b</var><var>d</var><sub>1</sub><var>d</var\n          ><sub>2</sub> + <var>c</var><var>d</var><sub>2</sub>². With 4 and 1 on the diagonal it is\n          4<var>d</var><sub>1</sub>² + <var>d</var><sub>2</sub>², and setting it to 1 draws an\n          ellipse. The exponent of a Gaussian holds one [<a\n            href="references.html#ref-5"\n            rel="noopener"\n            target="_blank"\n            >5</a\n          >].',
   },
   "g-tilt": {
     title: "Tilt, rotation",
@@ -39,7 +39,7 @@ export default {
   },
   "g-affine": {
     title: "Affine",
-    body: 'A straight-line map plus a shift, <var>p</var> ↦ <var>A</var><var>p</var> + <var>b</var>.\n          Straight lines stay straight [<a href="references.html#ref-6">6</a>].',
+    body: 'A straight-line map plus a shift, <var>p</var> ↦ <var>A</var><var>p</var> + <var>b</var>.\n          Straight lines stay straight [<a\n            href="references.html#ref-6"\n            rel="noopener"\n            target="_blank"\n            >6</a\n          >].',
   },
   "g-footprint": {
     title: "Footprint",
@@ -71,15 +71,15 @@ export default {
   },
   "g-smoothstep": {
     title: "Smoothstep",
-    body: 'The curve 3<var>g</var>² − 2<var>g</var>³, an S-shaped ramp from 0 to 1 that is flat at\n          both ends, used to start and stop a motion gently [<a href="references.html#ref-7">7</a>].',
+    body: 'The curve 3<var>g</var>² − 2<var>g</var>³, an S-shaped ramp from 0 to 1 that is flat at\n          both ends, used to start and stop a motion gently [<a\n            href="references.html#ref-7"\n            rel="noopener"\n            target="_blank"\n            >7</a\n          >].',
   },
   "g-grammar": {
     title: "Grammar, atom",
-    body: 'A grammar is a list of rules for what counts as a valid program. In it, <code>=</code> is\n          "is made of", <code>|</code> is "or", <code>{ }</code> repeats, <code>[ ]</code> is\n          optional, and quotes mark text typed exactly. An atom is the smallest piece of an\n          expression that can stand alone [<a href="references.html#ref-8">8</a>].',
+    body: 'A grammar is a list of rules for what counts as a valid program. In it, <code>=</code> is\n          "is made of", <code>|</code> is "or", <code>{ }</code> repeats, <code>[ ]</code> is\n          optional, and quotes mark text typed exactly. An atom is the smallest piece of an\n          expression that can stand alone [<a\n            href="references.html#ref-8"\n            rel="noopener"\n            target="_blank"\n            >8</a\n          >].',
   },
   "g-uvt": {
     title: "u, v, t, morph",
-    body: "<var>u</var> and <var>v</var> are the coordinates of the flat sheet of points that each\n          splat gets a place on, before the equations bend it into shape. They are parameters of a\n          parametric surface, not a substitution [<a href=\"references.html#ref-9\">9</a>].\n          <var>t</var> is time: 0 to 2π in the equation language, and the toy's running time in a\n          recipe's <code>drive</code>. A morph is a splat sliding from its own place to a target\n          place.",
+    body: '<var>u</var> and <var>v</var> are the coordinates of the flat sheet of points that each\n          splat gets a place on, before the equations bend it into shape. They are parameters of a\n          parametric surface, not a substitution [<a\n            href="references.html#ref-9"\n            rel="noopener"\n            target="_blank"\n            >9</a\n          >]. <var>t</var> is time: 0 to 2π in the equation language, and the toy\'s running time in\n          a recipe\'s <code>drive</code>. A morph is a splat sliding from its own place to a target\n          place.',
   },
   "g-kernel": {
     title: "Kernel",
@@ -135,7 +135,7 @@ export default {
   },
   "g-xpbd": {
     title: "Position-based dynamics (XPBD)",
-    body: 'A way to simulate physics by moving things to where they would be if nothing overlapped\n          and every joint held, then working out their speeds from how far they moved. Splashery\'s\n          own engine uses an extended form of it [<a href="references.html#ref-11">11</a>,\n          <a href="references.html#ref-12">12</a>].',
+    body: 'A way to simulate physics by moving things to where they would be if nothing overlapped\n          and every joint held, then working out their speeds from how far they moved. Splashery\'s\n          own engine uses an extended form of it [<a\n            href="references.html#ref-11"\n            rel="noopener"\n            target="_blank"\n            >11</a\n          >, <a href="references.html#ref-12" rel="noopener" target="_blank">12</a>].',
   },
   "g-joint": {
     title: "Joint: hinge, slider, dial, socket, break",
@@ -191,7 +191,7 @@ export default {
   },
   "g-training": {
     title: "Training, gradient descent",
-    body: '<b>Gradient descent</b> nudges numbers again and again in the direction that lowers an\n          error. <b>Training</b> a splat scene is gradient descent on the splats\' places, sizes,\n          colors, and opacities until pictures drawn from them match the photos [<a\n            href="references.html#ref-1"\n            >1</a\n          >].',
+    body: '<b>Gradient descent</b> nudges numbers again and again in the direction that lowers an\n          error. <b>Training</b> a splat scene is gradient descent on the splats\' places, sizes,\n          colors, and opacities until pictures drawn from them match the photos [<a\n            href="references.html#ref-1"\n            rel="noopener"\n            target="_blank"\n            >1</a\n          >].',
   },
   "g-sfm": {
     title: "Structure from motion",
@@ -203,7 +203,7 @@ export default {
   },
   "g-formats": {
     title: "PLY, SOG, SPZ, .splat",
-    body: "Splat file formats. <b>PLY</b> is the plain one that every tool reads and that keeps\n          everything. <b>SPZ</b> is about a tenth of its size and keeps view-dependent color.\n          <b>SOG</b> is the smallest and keeps base colors only. <b>.splat</b> is simple and keeps\n          base colors only.",
+    body: "Splat file formats. <b>PLY</b> is the plain one that every tool reads and that keeps\n          everything. <b>SPZ</b> is about a tenth of its size and keeps view-dependent color.\n          <b>SOG</b> is the smallest and can keep view-dependent color (Splashery's Splat toolkit\n          writes it with base colors only). <b>.splat</b> is simple and keeps base colors only.",
   },
   "g-qrmodule": {
     title: "Module, finder pattern, quiet zone",
@@ -211,7 +211,7 @@ export default {
   },
   "g-ecc": {
     title: "Error correction, Reed–Solomon, codeword",
-    body: 'A QR code holds extra <b>codewords</b> (8 modules each) made with a\n          <b>Reed–Solomon</b> code [<a href="references.html#ref-19">19</a>], so a reader can\n          rebuild the text if some are lost. The level (L, M, Q, or H) sets how many: about 7, 15,\n          25, or 30 percent of the codewords.',
+    body: 'A QR code holds extra <b>codewords</b> (8 modules each) made with a\n          <b>Reed–Solomon</b> code [<a href="references.html#ref-19" rel="noopener" target="_blank"\n            >19</a\n          >], so a reader can rebuild the text if some are lost. The level (L, M, Q, or H) sets how\n          much damage it can repair: about 7, 15, 25, or 30 percent of the codewords lost.',
   },
   "g-version": {
     title: "QR version",

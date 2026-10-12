@@ -236,7 +236,7 @@ ${sectionHead("h-more", "More to read")}
 <article class="prose">
 <section aria-labelledby="h-one">
 <h2 id="h-one">One splat is a soft, colored blob</h2>
-<p>A <strong>3D Gaussian splat</strong> is the smallest piece of every toy here. Think of a tiny ball of colored fog. It has a <strong>center</strong> (where it sits in space), a <strong>size in each direction</strong> (so it can be a ball, a disc or a long grain of rice) with a <strong>tilt</strong>, a <strong>color</strong> and an <strong>opacity</strong>. Its edge isn't sharp: it fades out smoothly, the way a drop of ink fades into wet paper. Mathematicians call that fade a <em>Gaussian</em>, which is where the name comes from.</p>
+<p>A <strong>3D Gaussian splat</strong> is the smallest piece of nearly every toy here. Think of a tiny ball of colored fog. It has a <strong>center</strong> (where it sits in space), a <strong>size in each direction</strong> (so it can be a ball, a disc or a long grain of rice) with a <strong>tilt</strong>, a <strong>color</strong> and an <strong>opacity</strong>. Its edge isn't sharp: it fades out smoothly, the way a drop of ink fades into wet paper. Mathematicians call that fade a <em>Gaussian</em>, which is where the name comes from.</p>
 <figure class="figure">${figureSplat()}<figcaption>One splat, drawn flat: a center, a stretch in two directions, a tilt, a color and a soft edge. In 3D it has three sizes, not two.</figcaption></figure>
 </section>
 <section aria-labelledby="h-many">
@@ -247,9 +247,9 @@ ${sectionHead("h-more", "More to read")}
 </section>
 <section aria-labelledby="h-sorted">
 <h2 id="h-sorted">Sorted, then blended</h2>
-<p>To draw a frame, the computer does two things with all those splats. First it <strong>sorts</strong> them by distance from you, farthest first. Then it <strong>paints</strong> them one after another, and each one is see-through, so it only tints what is already there. A near splat covers a far one, and where they overlap their colors mix. Do that sixty times a second and the picture can move.</p>
+<p>To draw a frame, the computer does two things with all those splats. First it <strong>sorts</strong> them by depth along the way you are looking (one depth for each splat's center), farthest first. Then it <strong>paints</strong> them one after another, and each one is see-through, so it only tints what is already there. A near splat covers a far one, and where they overlap their colors mix. Do that sixty times a second and the picture can move.</p>
 <figure class="figure">${figureBlend()}<figcaption>Three splats, painted from the farthest to the nearest. The overlaps blend.</figcaption></figure>
-<p>That is the whole trick, and it is why splats look so soft and real: no hard polygons, no textures, just blended color. It also means every splat is free to move on its own, which is what makes toys that peel, ripple, shatter and come back together possible.</p>
+<p>That is the whole trick, and it is why splats look so soft and real: for the splats themselves there are no hard polygons and no textures, just blended color (a few toys add a textured picture view, a liquid surface, or a solid mesh, which the Tinkerer's Manual lists). It also means every splat is free to move on its own, which is what makes toys that peel, ripple, shatter and come back together possible.</p>
 </section>
 <section aria-labelledby="h-recipe">
 <h2 id="h-recipe">Where the splats come from</h2>
@@ -372,7 +372,7 @@ drive(t, c, out) {
 </section>
 <section aria-labelledby="h-checks">
 <h2 id="h-checks">Checked in a real browser, with rules about what goes in</h2>
-<p>Every change is tested by driving a real browser through the toys, the links and the page layout, and a test checks that an embed stays under 30 MB. The site is plain files, with nothing to deploy but the files. Beyond the tests there are rules the toys must follow: every picture, scan and sound is public domain or under a Creative Commons license that allows it here, and each is credited; nothing you open is uploaded; and files and links from older versions keep working.</p>
+<p>Every change is tested by driving a real browser through the toys, the links and the page layout, and a test checks that an embed stays under 30 MB. The site is plain files, with nothing to deploy but the files. Beyond the tests there are rules the toys must follow: every picture, scan and sound is public domain, under a Creative Commons license that allows it here, or one of the owner's labeled AI-made samples, and each is credited; nothing you open is uploaded; and files and links from older versions keep working.</p>
 </section>
 <section aria-labelledby="h-notes">
 <h2 id="h-notes">The notes are public</h2>
@@ -665,7 +665,7 @@ ${docLinks(up)}
 <section aria-labelledby="h-details">
 <h2 id="h-details">Good to know</h2>
 <ul>
-<li><strong>Size.</strong> The iframe is 4:3 and fills its column, up to the width you set. A built-in toy loads well under 30 MB in all; even the heaviest scan is about 8 MB (the engine plus one file).</li>
+<li><strong>Size.</strong> The iframe is 4:3 and fills its column, up to the width you set. A built-in toy loads under 30 MB in all (the engine plus one file).</li>
 <li><strong>Transparent embeds.</strong> Add <code>color-scheme: light</code> to the iframe's style, as the snippet does, so browsers keep it see-through when a visitor's system is in dark mode.</li>
 <li><strong>Switching the theme from your page.</strong> Send the iframe a message: <code>iframe.contentWindow.postMessage({ type: "splashery:theme", theme: "dark" }, "*")</code>. The element follows the page by itself, including a <code>paper-theme-change</code> event on <code>document</code> and <code>data-resolved-theme</code> on <code>&lt;html&gt;</code>.</li>
 <li><strong>Scrolling and zooming.</strong> The mouse wheel scrolls your page until a visitor clicks or taps the toy; after that it zooms until the pointer leaves. Ctrl or ⌘ with the wheel, a pinch, and the + and − buttons always zoom.</li>
