@@ -283,7 +283,7 @@ function draw(node, x, y) {
     case "t":
       return `<g class="rr-t" data-rr="${node.id}"><rect x="${x}" y="${y - BOX_H / 2}" width="${m.w}" height="${BOX_H}" rx="${BOX_H / 2}"/><text x="${x + m.w / 2}" y="${y + 4.5}" text-anchor="middle">${esc(node.text)}</text></g>`; // prettier-ignore
     case "nt":
-      return `<g class="rr-nt" data-rr="${node.id}" data-rule="${node.rule}"><a href="#rr-${node.rule}"><rect x="${x}" y="${y - BOX_H / 2}" width="${m.w}" height="${BOX_H}" rx="3"/><text x="${x + m.w / 2}" y="${y + 4.5}" text-anchor="middle">${esc(node.rule)}</text></a></g>`; // prettier-ignore
+      return `<g class="rr-nt" data-rr="${node.id}" data-rule="${node.rule}"><a href="#rr-${node.rule}" target="_blank" rel="noopener"><rect x="${x}" y="${y - BOX_H / 2}" width="${m.w}" height="${BOX_H}" rx="3"/><text x="${x + m.w / 2}" y="${y + 4.5}" text-anchor="middle">${esc(node.rule)}</text></a></g>`; // prettier-ignore
     case "note":
       return `<text class="rr-note" x="${x + 2}" y="${y + 4}">${esc(node.text)}</text>`;
     case "words": {

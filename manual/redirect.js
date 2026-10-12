@@ -451,6 +451,18 @@
     "the-controls": "card.html",
     "key-numbers": "card.html",
     "where-the-files-go": "card.html",
+    "rr-program": "language.html",
+    "rr-field": "language.html",
+    "rr-value": "language.html",
+    "rr-sum": "language.html",
+    "rr-product": "language.html",
+    "rr-signed": "language.html",
+    "rr-power": "language.html",
+    "rr-atom": "language.html",
+    "rr-bracket": "language.html",
+    "rr-bare": "language.html",
+    "rr-simple": "language.html",
+    "rr-function": "language.html",
   };
   var id = decodeURIComponent(location.hash.slice(1));
   if (id && Object.prototype.hasOwnProperty.call(pages, id)) location.replace(pages[id] + "#" + id);

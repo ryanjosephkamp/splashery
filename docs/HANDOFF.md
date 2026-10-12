@@ -62,18 +62,26 @@ batch merges as one PR.
 - This batch: Manual r7c (#561: the `ln` tests green again, the PDF down to 7.1 MB) and Builders r1b
   (#565: the baked format in `builders/`)
 
-**Lanes running:** none. Manual r7c and Builders r1b merged in this batch and stand down. Next: the
-owner runs Codex task 36 (the manual's third audit); Manual r8 (Sonnet) is briefed on its report.
+**Lanes running:** US English (Sonnet, `session_01Lidt6WyFTaVR9bpedcY9Cu`, #570): the American
+spelling sweep the owner asked for on October 12, 2026; files the open Codex PRs change wait for its
+Part 2. Manual r8 (#571, the third audit's fixes, the owner's marks all good) merged with Codex task
+37 (#558) in this batch; its phrasing-only items wait in docs/handoff/ManualR8.md for the owner's
+rewording pass.
 
 **Codex** (the owner runs these; tasks in `docs/codex/`, the Studio push 37 to 41 and the second
 wave 42 to 46). The Operator reviews each PR with a Sonnet helper and posts one comment listing the
 fixes; the owner tells the Codex session "Read the Operator's comment on your PR and do it":
 
-- #558 (task 37, depth engine), #559 (task 41, Splat mirror), #560 (task 38, Moving photo; replaces
-  #479, close #479 when it merges), #562 (task 40, Video to 3D) and #566 (task 39, Photo to 3D): fix
-  comments posted October 12; waiting on Codex. All four toys are labs: merge after the fixes, the
-  tests (`cdx-*` plus the toys' specs) and the owner's look at the clips.
-- Not yet opened: tasks 36 and 42 to 46 (46 may start now that the Baked engine is in).
+- #558 (task 37, depth engine): merged in this batch.
+- #559 (task 41, Splat mirror): fixes in; waits on the Operator's test run and the owner's look at
+  the GIFs (the sharpening changed).
+- #560 (task 38, Moving photo; replaces #479, close #479 when it merges): waits on Codex.
+- #562 (task 40, Video to 3D): second fix comment; the sharp bakes need the owner's Mac run.
+- #566 (task 39, Photo to 3D): the owner approved the clips; `phf-engine:200` fails on it (text
+  legibility 0.775, under 0.8), sent back to Codex.
+- All are labs: merge after the fixes, the tests (`cdx-*` plus the toys' specs) and the owner's
+  look.
+- Not yet opened: tasks 42 to 46 (46 may start now that the Baked engine is in).
 
 Finished and safe to archive with the owner's OK: the Baked engine, Site r5, Manual r7a, Manual r7b,
 Privacy r1, Manual r6, Site r4, and the earlier list below.
