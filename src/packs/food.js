@@ -1726,7 +1726,7 @@ export const RECIPES = {
     alive: true,
     options: [
       {
-        key: "flavor",
+        key: "flavour",
         label: "Flavor",
         type: "select",
         default: "strawberry",
@@ -2805,7 +2805,7 @@ export const RECIPES = {
   macarons: {
     options: [
       {
-        key: "flavors",
+        key: "flavours",
         label: "Flavors",
         type: "select",
         default: "pastel",
