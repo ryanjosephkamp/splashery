@@ -1,6 +1,7 @@
 // Reproduce provider/isolation experiments without shipping service-worker or runtime changes.
 import { chromium } from "@playwright/test";
 import fs from "node:fs/promises";
+import { execFileSync } from "node:child_process";
 const dir = ".cache/cdx-depth/isolation";
 await fs.mkdir(dir, { recursive: true });
 await fs.writeFile(
@@ -27,6 +28,23 @@ for (const file of [
 ])
   await fs.copyFile(`.cache/cdx-depth/ort/package/dist/${file}`, `${dir}/runtime/${file}`);
 await fs.writeFile(`${dir}/worker.js`, 'import "/src/live/depth-worker.js";');
+// GPU support was removed from production after review. Reproduce the recorded experiment
+// with its pinned implementation, only in this ignored cache and only with complete runtimes.
+const historical = (file) =>
+  execFileSync("git", ["show", `ffc4cf77:${file}`], { encoding: "utf8" });
+await fs.writeFile(
+  `${dir}/research-engine.js`,
+  historical("src/depth/engine.js")
+    .replaceAll("../../vendor/", "/vendor/")
+    .replace("../packs/photo-3d-core.js", "/src/packs/photo-3d-core.js")
+    .replace("./io.js", "/src/depth/io.js"),
+);
+await fs.writeFile(
+  `${dir}/research-worker.js`,
+  historical("src/live/depth-worker.js")
+    .replace("../depth/engine.js", "./research-engine.js")
+    .replace("../depth/clip.js", "/src/depth/clip.js"),
+);
 const browser = await chromium.launch({
   executablePath: process.env.SPLASHERY_CHROMIUM || "/usr/bin/chromium",
   args: [
@@ -62,12 +80,16 @@ for (const options of [
   { threads: 2 },
   { threads: 4 },
   { provider: "webgpu", runtimeUrl: "/.cache/cdx-depth/isolation/runtime/" },
-  { provider: "webnn" },
+  { provider: "webnn", runtimeUrl: "/.cache/cdx-depth/isolation/runtime/" },
 ]) {
   const row = await page.evaluate(async (options) => {
     const { createDepthClient } = await import("/src/depth/client.js");
     const { decodePhoto } = await import("/src/packs/photo-3d.js");
-    const c = createDepthClient({ workerUrl: "/.cache/cdx-depth/isolation/worker.js" });
+    const c = createDepthClient({
+      workerUrl: options.provider
+        ? "/.cache/cdx-depth/isolation/research-worker.js"
+        : "/.cache/cdx-depth/isolation/worker.js",
+    });
     try {
       const t = performance.now();
       const meta = await Promise.race([

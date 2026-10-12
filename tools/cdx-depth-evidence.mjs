@@ -15,7 +15,7 @@ const groups = [
   "side-294",
   "side-392",
 ];
-const evidence = "src/depth/evidence";
+const evidence = "docs/audits/depth-engine-2026-10";
 await fs.mkdir(evidence, { recursive: true });
 const manifests = {};
 for (const g of groups)

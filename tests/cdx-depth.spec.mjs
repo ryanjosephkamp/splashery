@@ -113,46 +113,61 @@ test("the real worker answers concurrent photo and legacy frame requests and kee
   expect(r.retry).toBe(196 * 126);
 });
 
-test("WebGPU missing uses real WASM inference; extra threads stay disabled without isolation", async ({
-  page,
-}) => {
-  await page.route("**/src/live/depth-worker.js", async (route) => {
-    const response = await route.fetch();
-    await route.fulfill({
-      response,
-      body:
-        'Object.defineProperty(navigator, "gpu", { value: undefined });\n' +
-        (await response.text()),
+for (const provider of ["webgpu", "webnn"]) {
+  test(`${provider} is rejected without fetching an unshipped runtime; the worker can then use WASM`, async ({
+    page,
+    context,
+  }) => {
+    const requests = [];
+    context.on("request", (r) => requests.push(r.url()));
+    await page.goto("/tests/");
+    const rejection = await page.evaluate(async (provider) => {
+      const { createDepthClient } = await import("/src/depth/client.js");
+      window.__cdxDepthClient = createDepthClient();
+      return window.__cdxDepthClient.request("init", { options: { provider } }).then(
+        () => "unexpected success",
+        (err) => err.message,
+      );
+    }, provider);
+    expect(rejection).toContain("Only the vendored WASM");
+    expect(requests.filter((u) => /onnxruntime|depth-anything/.test(u))).toEqual([]);
+    const result = await page.evaluate(async () => {
+      const c = window.__cdxDepthClient;
+      try {
+        const meta = await c.request("init");
+        const d = await c.request("frame", {
+          w: 28,
+          h: 28,
+          data: new Uint8Array(28 * 28 * 4).fill(180),
+        });
+        return { provider: meta.provider, finite: d.d.every(Number.isFinite) };
+      } finally {
+        c.dispose();
+      }
     });
+    expect(result).toEqual({ provider: "wasm", finite: true });
+    expect(requests.filter((u) => /ort\.(webgpu|all)\.min\.mjs/.test(u))).toEqual([]);
   });
+}
+
+test("extra WASM threads stay disabled without isolation", async ({ page }) => {
   await page.goto("/tests/");
   const r = await page.evaluate(async () => {
     const { createDepthClient } = await import("/src/depth/client.js");
     const c = createDepthClient();
     try {
-      // Only hardware availability is mocked; the WASM model and inference are real.
-      const meta = await c.request("init", {
-        options: { provider: "webgpu", runtimeUrl: "/vendor/onnxruntime-web/", threads: 4 },
-      });
+      const meta = await c.request("init", { options: { threads: 4 } });
       const r = await c.request("frame", {
         w: 28,
         h: 28,
         data: new Uint8Array(28 * 28 * 4).fill(180),
       });
-      return {
-        provider: meta.provider,
-        fallback: meta.fallback,
-        threads: meta.threads,
-        finite: r.d.every(Number.isFinite),
-      };
+      return { provider: meta.provider, threads: meta.threads, finite: r.d.every(Number.isFinite) };
     } finally {
       c.dispose();
     }
   });
-  expect(r.provider).toBe("wasm");
-  expect(r.fallback).toBeTruthy();
-  expect(r.threads).toBe(1);
-  expect(r.finite).toBe(true);
+  expect(r).toEqual({ provider: "wasm", threads: 1, finite: true });
 });
 
 for (const rate of [1, 4]) {
@@ -179,8 +194,12 @@ for (const rate of [1, 4]) {
       observer.observe({ type: "longtask" });
       let ticks = 0;
       const timer = setInterval(() => ticks++, 16);
-      const statuses = [];
+      const statuses = [],
+        events = [];
+      const listen = (event) => events.push(event.detail.text);
+      dep.depthProgress.addEventListener("progress", listen);
       const depth = await dep.estimateDepth(photo, (s) => statuses.push(s));
+      dep.depthProgress.removeEventListener("progress", listen);
       await new Promise((r) => setTimeout(r, 100));
       clearInterval(timer);
       observer.disconnect();
@@ -199,6 +218,7 @@ for (const rate of [1, 4]) {
         ticks,
         tasks,
         statuses,
+        events,
         raw: out[s.outputNames[0]].dims,
       };
     });
@@ -209,50 +229,11 @@ for (const rate of [1, 4]) {
     expect(r.ticks).toBeGreaterThan(10);
     expect(Math.max(0, ...r.tasks)).toBeLessThanOrEqual(200);
     expect(r.statuses.some((s) => s.includes("Working out"))).toBe(true);
+    expect(r.events).toEqual(r.statuses);
+    expect(r.events.at(-1)).toBe("");
     expect(r.raw.slice(-2)).toEqual([28, 28]);
   });
 }
-
-test("a failed GPU runtime cannot poison the real WASM fallback", async ({ page }) => {
-  await page.route("**/src/live/depth-worker.js", async (route) => {
-    const response = await route.fetch();
-    await route.fulfill({
-      response,
-      body:
-        'Object.defineProperty(navigator, "gpu", { value: { requestAdapter: async () => ({}) } });\n' +
-        (await response.text()),
-    });
-  });
-  await page.route("**/ort.webgpu.min.mjs", (route) =>
-    route.fulfill({
-      contentType: "text/javascript",
-      body: 'export const env={wasm:{}}; export const InferenceSession={create:async()=>{throw new Error("GPU initialization failed");}};',
-    }),
-  );
-  await page.goto("/tests/");
-  const r = await page.evaluate(async () => {
-    const { createDepthClient } = await import("/src/depth/client.js");
-    const c = createDepthClient();
-    try {
-      const meta = await c.request("init", { options: { provider: "webgpu" } });
-      const d = await c.request("frame", {
-        w: 28,
-        h: 28,
-        data: new Uint8Array(28 * 28 * 4).fill(180),
-      });
-      return {
-        provider: meta.provider,
-        fallback: meta.fallback,
-        finite: d.d.every(Number.isFinite),
-      };
-    } finally {
-      c.dispose();
-    }
-  });
-  expect(r.provider).toBe("wasm");
-  expect(r.fallback).toContain("GPU initialization failed");
-  expect(r.finite).toBe(true);
-});
 
 test("a failed first model download is retried by the same worker", async ({ page, context }) => {
   let first = true;
@@ -279,46 +260,5 @@ test("a failed first model download is retried by the same worker", async ({ pag
     }
   });
   expect(r.failed).toBe(true);
-  expect(r.finite).toBe(true);
-});
-
-test("a stalled accelerated run switches to WASM and later frames reuse it", async ({ page }) => {
-  await page.route("**/src/live/depth-worker.js", async (route) => {
-    const response = await route.fetch();
-    await route.fulfill({
-      response,
-      body:
-        'Object.defineProperty(navigator, "gpu", { value: { requestAdapter: async () => ({}) } });\n' +
-        (await response.text()),
-    });
-  });
-  await page.route("**/ort.webgpu.min.mjs", (route) =>
-    route.fulfill({
-      contentType: "text/javascript",
-      body: `import * as wasm from "/vendor/onnxruntime-web/ort.wasm.min.mjs";
-    export const Tensor=wasm.Tensor, env=wasm.env;
-    export const InferenceSession={create:async()=>({inputNames:["pixel_values"],outputNames:["predicted_depth"],run:()=>new Promise(()=>{}),release:async()=>{}})};`,
-    }),
-  );
-  await page.goto("/tests/");
-  const r = await page.evaluate(async () => {
-    const { createDepthClient } = await import("/src/depth/client.js");
-    const c = createDepthClient();
-    const frame = { w: 28, h: 28, data: new Uint8Array(28 * 28 * 4).fill(180) };
-    try {
-      await c.request("init", { options: { provider: "webgpu", providerTimeoutMs: 50 } });
-      const a = await c.request("frame", frame),
-        b = await c.request("frame", frame);
-      return {
-        providers: [a.provider, b.provider],
-        fallback: a.fallback,
-        finite: a.d.every(Number.isFinite) && b.d.every(Number.isFinite),
-      };
-    } finally {
-      c.dispose();
-    }
-  });
-  expect(r.providers).toEqual(["wasm", "wasm"]);
-  expect(r.fallback).toContain("took too long");
   expect(r.finite).toBe(true);
 });

@@ -10,6 +10,14 @@ let client = null;
 let loading = null;
 const getClient = () => (client ||= createDepthClient());
 
+// Any toy can subscribe without the depth module knowing about its scene or panel.
+// The existing callback remains available for progress scoped to one request.
+export const depthProgress = new EventTarget();
+const reportProgress = (onStatus) => (text) => {
+  onStatus?.(text);
+  depthProgress.dispatchEvent(new CustomEvent("progress", { detail: { text } }));
+};
+
 // Keep { ort, s } for existing warm-up callers and callers that construct ort.Tensor and use
 // s.run(). That session is a worker facade, with the same CPU Tensor inputs and outputs.
 export function loadDepthModel(onStatus) {
@@ -17,7 +25,7 @@ export function loadDepthModel(onStatus) {
     const c = getClient();
     loading = (async () => {
       const [meta, ort] = await Promise.all([
-        c.request("init", {}, onStatus),
+        c.request("init", {}, reportProgress(onStatus)),
         import("../../vendor/onnxruntime-web/ort.wasm.min.mjs"),
       ]);
       ort.env.wasm.wasmPaths = RUNTIME_URL;
@@ -63,25 +71,11 @@ export function loadDepthModel(onStatus) {
   return loading;
 }
 
-// Photo to 3D's current reader does not pass its progress callback. Reuse its existing live
-// status line without changing that toy (task 39 owns it). New callers should pass onStatus.
-function panelProgress() {
-  if (globalThis.window?.__splashery?.player?.scene?.toy?.id !== "photo-3d") return null;
-  const line = document.querySelector(".input-progress");
-  if (!line) return null;
-  return (text) => {
-    if (line.isConnected) {
-      line.textContent = text;
-      line.hidden = !text;
-    }
-  };
-}
-
 // Defaults preserve the old 518-pixel input and relative inverse depth exactly. Opt in to a
 // smaller side, or to { tier: "low" | "mid" | "high" | "max" }, after checking the quality.
 export async function estimateDepth(photo, onStatus, options = {}) {
   validatePhoto(photo);
-  const progress = onStatus || panelProgress();
+  const progress = reportProgress(onStatus);
   try {
     const { w, h, d, ms } = await getClient().request(
       "photo",
@@ -90,6 +84,6 @@ export async function estimateDepth(photo, onStatus, options = {}) {
     );
     return { w, h, d, ms };
   } finally {
-    progress?.("");
+    progress("");
   }
 }

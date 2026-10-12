@@ -4,7 +4,7 @@ for (const [width, height] of [
   [390, 844],
   [1440, 900],
 ]) {
-  test(`Photo to 3D shows progress and its controls respond during inference at ${width}×${height}`, async ({
+  test(`Photo to 3D publishes progress and its controls respond during inference at ${width}×${height}`, async ({
     browser,
   }) => {
     const page = await browser.newPage({ viewport: { width, height } });
@@ -16,7 +16,14 @@ for (const [width, height] of [
       await page.goto("/?renderer=webgl2&adapt=off&profile=low&labs=1");
       await page.waitForSelector("body[data-ready='true']");
       await expect(page).toHaveTitle(/Splashery/);
-      await page.evaluate(() => window.__splashery.app.chooseToy("photo-3d"));
+      await page.evaluate(async () => {
+        const { depthProgress } = await import("/src/packs/photo-3d-depth.js");
+        window.__cdxDepthProgress = [];
+        depthProgress.addEventListener("progress", (event) =>
+          window.__cdxDepthProgress.push(event.detail.text),
+        );
+        await window.__splashery.app.chooseToy("photo-3d");
+      });
       await page.waitForFunction(
         () => window.__splashery.player.proc?.ctx?.kit?.data?.photo?.splats > 5000,
       );
@@ -24,8 +31,9 @@ for (const [width, height] of [
       if (width < 760) await page.locator("#sheet-toggle").click();
       await page.locator("#tab-play").click();
       await page.locator("#toy-input-file").setInputFiles("tests/fixtures/p3d/scene.jpg");
-      await expect(page.locator(".input-progress")).toContainText(/Loading|Starting|Working out/);
-      await expect(page.locator(".input-progress")).toHaveAttribute("role", "status");
+      await page.waitForFunction(() =>
+        window.__cdxDepthProgress.some((text) => /Loading|Starting|Working out/.test(text)),
+      );
       await page.locator("#tab-look").click();
       await expect(page.locator("#tab-look")).toHaveAttribute("aria-selected", "true");
       await page.waitForFunction(
@@ -34,7 +42,12 @@ for (const [width, height] of [
         { timeout: 150000 },
       );
       await page.locator("#tab-play").click();
-      await expect(page.locator(".input-progress")).toBeHidden();
+      expect(await page.evaluate(() => window.__cdxDepthProgress.at(-1))).toBe("");
+      expect(
+        await page.evaluate(() =>
+          window.__cdxDepthProgress.some((text) => text.includes("Working out")),
+        ),
+      ).toBe(true);
       expect(
         await page.evaluate(() => window.__splashery.player.proc.ctx.kit.data.photo.name),
       ).toBe("scene");

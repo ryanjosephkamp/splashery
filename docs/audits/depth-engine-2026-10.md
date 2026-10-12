@@ -22,14 +22,17 @@ runtime/model weight bytes: **0**.
   timings. Camera and clip callers retain their quiet status after loading. Errors now carry the
   request ID. A serial queue protects the reusable session and input Tensor from overlapping
   requests; output Tensors are released after copying their data.
-- Photo to 3D's existing progress line shows model download progress and inference status. Its
-  current reader does not forward its fifth progress argument, so the depth module bridges that
-  existing line. Task 39 should pass the callback directly. No toy-owned file was changed.
+- Progress is exposed through the existing `onStatus(text)` callback and the exported
+  `depthProgress` EventTarget. Subscribe with
+  `depthProgress.addEventListener("progress", listener)`; each event has `detail.text`, and
+  `estimateDepth` emits an empty string when the request ends. The depth module does not access a
+  scene, panel, or DOM element. Task 39 should pass its reader's progress callback to show these
+  messages in its own panel. No toy-owned file was changed.
 - New options: `side` or `tier` (low 294, mid 392, high/max 518). Omitting them keeps 518. Separate
-  clients can initialize a same-origin model/runtime and request `webgpu` or `webnn`. Missing
-  hardware, initialization failure, and run failure use the independent WASM module; accelerated
-  initialization/runs have a 15-second deadline before CPU fallback. The default requests only the
-  existing WASM bundle.
+  clients can initialize a same-origin WASM model/runtime and opt in to extra threads when isolated.
+  The production engine uses only the existing, vendored WASM bundle. After the Operator's review,
+  unshipped WebGPU/WebNN paths were removed; explicit non-WASM requests fail before any
+  runtime/model fetch and do not prevent a subsequent WASM initialization.
 - `estimateClipDepth` in `src/depth/client.js` is an optional separate-worker API. It returns
   `{ depths, modelRuns }` plus message metadata. Local color patches guide depth between anchors;
   large appearance changes use full inference. Existing toys continue through their original APIs.
@@ -62,7 +65,7 @@ overlapped browser regressions and are labeled separately below; those timings i
 contention.
 
 Raw float maps and research binaries stay in the local `.cache/cdx-depth` folder. The small
-[measurement artifact](../../src/depth/evidence/measurements.json) records times, dimensions, and
+[measurement artifact](./depth-engine-2026-10/measurements.json) records times, dimensions, and
 SHA-256 output hashes; the figures below can be rebuilt with the supplied tools.
 
 ## Before and after
@@ -122,13 +125,14 @@ and
 1.30.0 runtime package was downloaded only into the research cache. Its WebGPU path requires the
 package's asyncify/JSPI files as well as its JS entry; adding only the older JSEP pair was
 insufficient. A software-provider run did not finish within the research tool's 60-second bound.
-Hardware GPU speed is unmeasured. GPU failures must not poison the fallback's WASM initialization,
-so the engine switches to the independent WASM-only module, not a retry of an already-failed JSEP
-instance. Real CPU inference tests cover missing hardware, failed GPU initialization, and a
-simulated stalled accelerated run. The final real software-adapter probe also switched from WebGPU
-to WASM after the 15-second deadline: the first reply took about 17.5 seconds including recovery,
-and the next two inferences took about 1.8 seconds. The shipped engine uses that shorter bound for
-the optional accelerated path.
+Hardware GPU speed is unmeasured. The experimental implementation used an independent WASM-only
+module after failed JSEP initialization. The final real software-adapter probe switched from WebGPU
+to WASM after its 15-second deadline: the first reply took about 17.5 seconds including recovery,
+and the next two inferences took about 1.8 seconds. These are historical research results from
+`ffc4cf77`, not a shipped accelerated path. After review, production WebGPU/WebNN imports and their
+deadline/fallback code were removed. The reproduction tool extracts that pinned engine into its
+ignored research cache; production WASM/thread probes still use the current engine. All accelerated
+runtime files are present in that local experiment's cache before it runs.
 
 **WebNN:** `navigator.ml` was absent. The request fell back to WASM and produced real depth. No
 native WebNN speed is claimed. Opened references:
@@ -151,7 +155,7 @@ Lower resolution changes the model's guess as well as smoothing edges.
 | 392       | 787                         | 3.53%                  | 0.92 / 0.95 / 0.89   |
 | 518       | 1,652                       | 0.00%                  | 1.00 / 1.00 / 1.00   |
 
-![Depth at four input sizes](../../src/depth/evidence/sizes.png)
+![Depth at four input sizes](./depth-engine-2026-10/sizes.png)
 
 392 is a useful opt-in starting point for photos. 294 trades more detail for speed; 196 loses
 substantial forest detail and remains a clip/live starting point rather than the photo default.
@@ -217,7 +221,7 @@ native CPU backend and two threads differ from browser WASM, so these are **not 
 claims**. At 518, first/repeat window times were: forest: 39,039 / 33,111; street: 48,062 / 41,206;
 still-life: 51,221 / 55,602 ms. No browser export was produced or shipped.
 
-![Candidate depth on three samples](../../src/depth/evidence/models.png)
+![Candidate depth on three samples](./depth-engine-2026-10/models.png)
 
 White is nearer. Each image uses its own 2nd–98th percentile range. These images are depth guesses,
 not ground-truth geometry. Quantized/half variants preserve the major outlines. DA3 changes the
@@ -271,22 +275,28 @@ measurement artifact.
 
 ## What tasks 38–41 should do
 
-| Task             | Integration                                                                                                                                                                                                                                                                                                                      |
-| ---------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 38, Moving photo | Keep the existing frame API as the compatibility path. Compare `estimateClipDepth(frames, w, h, progress, { side: 196, keyEvery: 2 })` with the current sampling, then pass its `depths` through the existing normalization/backing path. Preserve full inference at cuts and review moving edges.                               |
-| 39, Photo to 3D  | Pass the reader's progress callback to `estimateDepth`. Keep the default 518 output; trial `{ side: 392 }` or an explicit tier after checking detail. Guard stale read results if the selection changes while the now-responsive page is converting. Keep image decoding, splat construction, and backing fixes in the toy lane. |
-| 40, Video to 3D  | Reuse a persistent worker/session for V2-compatible depth needs. Keep reconstruction and frame-clock work separate from relative depth. Use the same benchmark inputs before adopting a new backend or weight export.                                                                                                            |
-| 41, Splat mirror | Existing frame messages work unchanged and remain quiet after model load. Retain one outstanding frame, use the current 196/294 input policy, and reuse the worker for the capture's lifetime. GPU/model changes require real device measurements.                                                                               |
+| Task             | Integration                                                                                                                                                                                                                                                                                                                                                                                        |
+| ---------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 38, Moving photo | Keep the existing frame API as the compatibility path. Compare `estimateClipDepth(frames, w, h, progress, { side: 196, keyEvery: 2 })` with the current sampling, then pass its `depths` through the existing normalization/backing path. Preserve full inference at cuts and review moving edges.                                                                                                 |
+| 39, Photo to 3D  | Pass the reader's progress callback to `estimateDepth`, or subscribe to `depthProgress` events using `event.detail.text`. Keep the default 518 output; trial `{ side: 392 }` or an explicit tier after checking detail. Guard stale read results if the selection changes while the now-responsive page is converting. Keep image decoding, splat construction, and backing fixes in the toy lane. |
+| 40, Video to 3D  | Reuse a persistent worker/session for V2-compatible depth needs. Keep reconstruction and frame-clock work separate from relative depth. Use the same benchmark inputs before adopting a new backend or weight export.                                                                                                                                                                              |
+| 41, Splat mirror | Existing frame messages work unchanged and remain quiet after model load. Retain one outstanding frame, use the current 196/294 input policy, and reuse the worker for the capture's lifetime. GPU/model changes require real device measurements.                                                                                                                                                 |
 
 ## Verification and handback
 
-The new depth/UI tests use real browser WASM inference. Only hardware absence and accelerated
-failure/stall behavior are mocked; no model outputs are mocked in those tests. The numerical
+The new depth/UI tests use real browser WASM inference. They verify that explicit WebGPU/WebNN
+requests make no model/runtime fetch, and that the same worker can subsequently use WASM. Only the
+failed-download test injects an HTTP error; no model outputs or hardware are mocked. The numerical
 edge/cut fixtures isolate the sparse helper's behavior. UI checks opened a real file through the
-panel at 390×844 and 1440×900, saw progress, switched tabs during inference, and verified a custom
-photo with no page errors. The strict inference-phase long-task limit stays at 200 ms.
+panel at 390×844 and 1440×900, received progress events, switched tabs during inference, and
+verified a custom photo with no page errors. Callback and event messages agree, including
+completion. The strict inference-phase long-task limit stays at 200 ms.
 
-- New engine/UI tests: **12 passed**.
+- New engine/UI tests after the Operator revisions: **12 passed**.
+- PDF pop-out smoke: **1 passed**, `tests/bk5.spec.mjs`, "Your book: the PDF's picture pops out with
+  its depth and lies back". Real PDF pixels reached `estimateDepth` in `pictures.js`, produced
+  relief, rose, and lay back; screenshots at 390×844 and 1440×900 were checked. The combined focused
+  run took 2.0 minutes.
 - Required caller files: `p3d`, `phf`, `phf2`, `phf-engine`, `smd-photo`, `smd-moving`, `live`,
   `live3`, `lv7`, `psv`, `psv2`, and `psv3`: **114 passed** (43.4 minutes).
 - Embed transfer check: **passed, 9.1 MB** for the captured bee at the strong profile.
@@ -296,8 +306,10 @@ photo with no page errors. The strict inference-phase long-task limit stays at 2
 
 Code is offered under the repository's MIT license. Original audit figures are CC0, made by Ryan
 with Codex (GPT-6), from the repository's existing CC0 forest, street, and still-life samples. The
-images and measurement JSON live under `src/depth/evidence`, within the task's allowed new-file
-directory, and are audit artifacts. Runtime and model binaries remain unchanged.
+images and measurement JSON live under `docs/audits/depth-engine-2026-10/`, moved out of `src/` as
+requested by the Operator. Both report generators use that audit path. The camera worker header
+again states that frames stay in device memory and are neither stored nor sent. Runtime and model
+binaries remain unchanged.
 
 **Rule check: none.** No merge, public-site deployment, new runtime bundle, or new weight file is
 part of this draft handback.

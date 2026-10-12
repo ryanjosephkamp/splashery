@@ -12,20 +12,6 @@ export const DEPTH_SIDES = { low: 294, mid: 392, high: 518, max: 518 };
 const MEAN = [0.485, 0.456, 0.406];
 const STD = [0.229, 0.224, 0.225];
 
-async function providerDeadline(promise, ms = 15000) {
-  let timer;
-  try {
-    return await Promise.race([
-      promise,
-      new Promise((_, reject) => {
-        timer = setTimeout(() => reject(new Error("The depth provider took too long.")), ms);
-      }),
-    ]);
-  } finally {
-    clearTimeout(timer);
-  }
-}
-
 export function validatePhoto({ w, h, data } = {}) {
   if (
     !Number.isInteger(w) ||
@@ -46,6 +32,8 @@ export function createDepthEngine(onStatus = () => {}) {
   let configKey = null;
   const status = (text) => onStatus(text);
   async function load(options = {}) {
+    if (options.provider && options.provider !== "wasm")
+      throw new Error("Only the vendored WASM depth provider is available.");
     // Overrides are for same-origin, locally vendored experiments, never a remote inference API.
     const modelUrl = new URL(options.modelUrl || MODEL_URL, import.meta.url);
     const runtimeUrl = new URL(options.runtimeUrl || RUNTIME_URL, import.meta.url);
@@ -63,25 +51,7 @@ export function createDepthEngine(onStatus = () => {}) {
       configKey = key;
       ready = (async () => {
         status("Loading the depth model (27 MB, once)…");
-        let provider = options.provider || "wasm";
-        let fallback = null;
-        let ort;
-        if (provider === "webgpu" || provider === "webnn") {
-          try {
-            if (provider === "webgpu" && !(await globalThis.navigator?.gpu?.requestAdapter()))
-              throw new Error("WebGPU is unavailable.");
-            if (provider === "webnn" && !globalThis.navigator?.ml)
-              throw new Error("WebNN is unavailable.");
-            ort = await import(
-              new URL(provider === "webgpu" ? "ort.webgpu.min.mjs" : "ort.all.min.mjs", runtimeUrl)
-                .href
-            );
-          } catch (err) {
-            fallback = String(err.message || err);
-            provider = "wasm";
-          }
-        } else if (provider !== "wasm") throw new Error("Unknown depth execution provider.");
-        ort ||= await import(new URL("ort.wasm.min.mjs", runtimeUrl).href);
+        const ort = await import(new URL("ort.wasm.min.mjs", runtimeUrl).href);
         ort.env.wasm.wasmPaths = runtimeUrl.href;
         ort.env.wasm.numThreads = globalThis.crossOriginIsolated
           ? Math.max(1, Math.min(4, options.threads || 1))
@@ -91,49 +61,11 @@ export function createDepthEngine(onStatus = () => {}) {
           status(`Loading the depth model… ${Math.round(p * 100)}%`),
         );
         status("Starting the depth model…");
-        let s;
-        try {
-          const creating = ort.InferenceSession.create(bytes, {
-            executionProviders: provider === "wasm" ? ["wasm"] : [provider, "wasm"],
-            graphOptimizationLevel: "all",
-          });
-          try {
-            s =
-              provider === "wasm"
-                ? await creating
-                : await providerDeadline(creating, options.providerTimeoutMs);
-          } catch (err) {
-            // A provider may settle after the CPU fallback starts; release its unused session.
-            creating.then((unused) => unused.release()).catch(() => {});
-            throw err;
-          }
-        } catch (err) {
-          if (provider === "wasm") throw err;
-          fallback = String(err.message || err);
-          provider = "wasm";
-          status("Using the depth model on this device's CPU…");
-          // A failed JSEP/WASM initialization poisons that runtime instance. Load the independent
-          // WASM-only module so missing GPU kernels or binaries cannot poison the CPU fallback.
-          ort = await import(new URL("ort.wasm.min.mjs", runtimeUrl).href);
-          ort.env.wasm.wasmPaths = runtimeUrl.href;
-          ort.env.wasm.numThreads = globalThis.crossOriginIsolated
-            ? Math.max(1, Math.min(4, options.threads || 1))
-            : 1;
-          ort.env.wasm.proxy = false;
-          s = await ort.InferenceSession.create(bytes, {
-            executionProviders: ["wasm"],
-            graphOptimizationLevel: "all",
-          });
-        }
-        return {
-          ort,
-          s,
-          provider,
-          fallback,
-          threads: ort.env.wasm.numThreads,
-          runtimeUrl: runtimeUrl.href,
-          bytes: provider === "wasm" ? null : bytes,
-        };
+        const s = await ort.InferenceSession.create(bytes, {
+          executionProviders: ["wasm"],
+          graphOptimizationLevel: "all",
+        });
+        return { ort, s, provider: "wasm", fallback: null, threads: ort.env.wasm.numThreads };
       })().catch((err) => {
         ready = null;
         configKey = null;
@@ -144,9 +76,7 @@ export function createDepthEngine(onStatus = () => {}) {
   }
   async function estimate(photo, options = {}, frame = false) {
     validatePhoto(photo);
-    const state = await load(options);
-    const { threads } = state;
-    let { ort, s, provider, fallback } = state;
+    const { ort, s, provider, fallback, threads } = await load(options);
     const side = options.side ?? (options.tier ? DEPTH_SIDES[options.tier] : 518);
     if (!frame && (!Number.isInteger(side) || side < 14 || side > 1036))
       throw new Error("Choose a depth input side from 14 to 1,036 pixels.");
@@ -168,45 +98,7 @@ export function createDepthEngine(onStatus = () => {}) {
       for (let i = 0; i < n; i++)
         input[c * n + i] = ((frame ? px[i * 4 + c] / 255 : px[i * 3 + c]) - MEAN[c]) / STD[c];
     const t0 = performance.now();
-    let out;
-    const gpuSession = s;
-    const gpuTensor = tensor;
-    const running = s.run({ [s.inputNames[0]]: tensor });
-    try {
-      out =
-        provider === "wasm"
-          ? await running
-          : await providerDeadline(running, options.providerTimeoutMs);
-    } catch (err) {
-      if (provider === "wasm") throw err;
-      fallback = String(err.message || err);
-      status("Using the depth model on this device's CPU…");
-      // Do not release an in-flight GPU session or reuse its input buffer. Late GPU output is
-      // discarded, and later frames run exclusively on the independent WASM session.
-      running
-        .then((late) => {
-          for (const t of Object.values(late)) t.dispose();
-        })
-        .catch(() => {})
-        .finally(() => {
-          gpuTensor.dispose();
-          gpuSession.release().catch(() => {});
-        })
-        .catch(() => {});
-      ort = await import(new URL("ort.wasm.min.mjs", state.runtimeUrl).href);
-      ort.env.wasm.wasmPaths = state.runtimeUrl;
-      ort.env.wasm.numThreads = threads;
-      ort.env.wasm.proxy = false;
-      input = input.slice();
-      tensor = new ort.Tensor("float32", input, [1, 3, dh, dw]);
-      s = await ort.InferenceSession.create(state.bytes, {
-        executionProviders: ["wasm"],
-        graphOptimizationLevel: "all",
-      });
-      provider = "wasm";
-      ready = Promise.resolve({ ...state, ort, s, provider, fallback, bytes: null });
-      out = await s.run({ [s.inputNames[0]]: tensor });
-    }
+    const out = await s.run({ [s.inputNames[0]]: tensor });
     const ms = performance.now() - t0;
     try {
       const o = out[s.outputNames[0]];

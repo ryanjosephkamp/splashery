@@ -1,6 +1,7 @@
 // Existing clip/mirror messages stay { type: "frame", id, w, h, data } -> { type: "depth",
 // id, w, h, d, ms }. Photo messages accept the original RGBA size and resize inside this worker.
 // One serialized queue protects the reused tensor and ONNX session from overlapping runs.
+// Camera frames stay in memory on this device; nothing is stored or sent.
 import { createDepthEngine } from "../depth/engine.js";
 import { sparseClipDepth } from "../depth/clip.js";
 
