@@ -1493,3 +1493,8 @@ nav.toc > ol {
   font-size: 0.85rem;
   color: var(--muted);
 }
+
+/* ---- r7b: Chapters 6 to 10 and the back matter (Manual r7b) ---- */
+ul.reading li {
+  overflow-wrap: anywhere;
+}

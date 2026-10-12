@@ -55,7 +55,8 @@ test.describe("the five new chapters", () => {
 
   test("old addresses still land: manual/#moving and coming.html#data", () => {
     const redirect = read("redirect.js");
-    for (const [id] of Object.entries(NEW)) expect(redirect).toMatch(new RegExp(`\\b${id}: "${id}\\.html"`));
+    for (const [id] of Object.entries(NEW))
+      expect(redirect).toMatch(new RegExp(`\\b${id}: "${id}\\.html"`));
     const stub = read("coming.html");
     expect(stub).toContain('<script src="redirect.js"></script>');
     for (const f of NEW_FILES) expect(stub).toContain(`href="${f}"`);

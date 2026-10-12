@@ -213,7 +213,7 @@ for (const p of pages) await write(p.file, assemble(p));
 // need. The PDF is printed from this page (tools/manual-pdf.mjs).
 const firstId = new Map(PAGES.map((q) => [q.file, q.ids[0]]));
 const onePage = (html) =>
-  html.replace(/href="([a-z]+\.html)(#[^"]*)?"/g, (all, file, hash) =>
+  html.replace(/href="([a-z0-9]+\.html)(#[^"]*)?"/g, (all, file, hash) =>
     hash ? `href="${hash}"` : firstId.get(file) ? `href="#${firstId.get(file)}"` : all,
   );
 {
