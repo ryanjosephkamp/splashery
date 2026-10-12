@@ -57,6 +57,50 @@ await page.evaluate(
   () =>
   Promise.all([...document.images].map((i) => (i.complete ? null : new Promise((r) => (i.onload = i.onerror = r))))), // prettier-ignore
 );
+// Chromium prints a PNG or WebP picture as a lossless Flate image, which made the PDF 12 MB (Manual
+// r7c). Each one is swapped for a JPEG at quality 0.92 (the pictures are renders and photos; the web
+// page keeps its own files). A picture with transparency is flattened onto the flat color behind it
+// first, so its edges look the same; one with no flat color behind it stays as it is. The same
+// Chromium encodes the same JPEG, so the build stays reproducible.
+const jpegged = await page.evaluate(async () => {
+  const flat = (el) => {
+    for (let e = el; e; e = e.parentElement) {
+      const cs = getComputedStyle(e);
+      if (cs.backgroundImage !== "none") return null;
+      const m = cs.backgroundColor.match(/^rgba?\((\d+), (\d+), (\d+)(?:, ([\d.]+))?\)$/);
+      if (m && (m[4] === undefined || Number(m[4]) === 1)) return cs.backgroundColor;
+      if (m && Number(m[4]) > 0) return null;
+    }
+    return "#fff";
+  };
+  let n = 0;
+  for (const img of document.images) {
+    if (!/\.(png|webp)(\?|$)/i.test(img.currentSrc || img.src)) continue;
+    const c = document.createElement("canvas");
+    c.width = img.naturalWidth;
+    c.height = img.naturalHeight;
+    const g = c.getContext("2d");
+    g.drawImage(img, 0, 0);
+    const a = g.getImageData(0, 0, c.width, c.height).data;
+    let opaque = true;
+    for (let i = 3; i < a.length; i += 4) if (a[i] !== 255) { opaque = false; break; } // prettier-ignore
+    if (!opaque) {
+      const bg = flat(img);
+      if (!bg) continue;
+      g.globalCompositeOperation = "destination-over";
+      g.fillStyle = bg;
+      g.fillRect(0, 0, c.width, c.height);
+    }
+    img.removeAttribute("srcset");
+    await new Promise((r) => {
+      img.onload = img.onerror = r;
+      img.src = c.toDataURL("image/jpeg", 0.92);
+    });
+    n++;
+  }
+  return n;
+});
+console.log(`${jpegged} PNG/WebP pictures printed as JPEG`);
 // A link to a file in the manual points at the public copy, not at the local server that printed it.
 // (A link to a place in the page stays a link inside the PDF.)
 await page.evaluate(
