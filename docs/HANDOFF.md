@@ -6,10 +6,9 @@ work is in [OPERATING.md](OPERATING.md).
 
 ## Now (October 12, 2026, about 01:40 UTC)
 
-The Operator was `session_01Mo8sLhAitbYjZiPgD8Hc4t` (Opus 5.5), from October 11, 2026, 21:06 UTC. It
-hands over early, on October 12 at about 01:40 UTC (557k tokens of context), by
-`.claude/skills/operator-handover/SKILL.md`, to a fresh Operator, which puts its own id here in its
-first Ops PR. This section is current. The sections below it are history. The runbook is
+The Operator is `session_01BbS2vUAWpeFF2i6KoJAqCt` (Opus 5.5), since October 12, 2026, 01:38 UTC. It
+took over from `session_01Mo8sLhAitbYjZiPgD8Hc4t` by `.claude/skills/operator-handover/SKILL.md`.
+This section is current. The sections below it are history. The runbook is
 [OPERATOR.md](OPERATOR.md).
 
 **Effort (the owner's call of October 8, 2026):** every worker, lanes and Integrators alike, runs at
