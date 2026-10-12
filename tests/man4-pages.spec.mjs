@@ -132,11 +132,11 @@ test.describe("the pages", () => {
     ]);
     await chapter.waitForURL(/language\.html/);
     await expect(chapter.locator("h2").first()).toContainText("The splat equation language");
+    // A section of that chapter, from its list (a link to a place on the same page stays in the page).
+    await chapter.tap(".manual-nav .outline-toggle");
+    await chapter.tap('#manual-contents .outline-sub a[href="#time"]');
+    await expect(chapter.locator("#time")).toBeInViewport();
     await chapter.close();
-    // A section of this chapter, from the list (a link to a place on the same page stays in the page).
-    await page.tap(".manual-nav .outline-toggle");
-    await page.tap('#manual-contents .outline-sub a[href="#time"]');
-    await expect(page.locator("#time")).toBeInViewport();
     expect(
       await page.evaluate(
         () => document.documentElement.scrollWidth - document.documentElement.clientWidth,
