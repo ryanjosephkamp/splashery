@@ -1,0 +1,176 @@
+{
+  "description": "Diagnostic checks before the final merged-head verification; neither existing regression test was edited.",
+  "runs": [
+    {
+      "label": "Two added text guards before the shader fix",
+      "stats": {
+        "startTime": "2026-10-12T22:55:45.792Z",
+        "duration": 45720.228,
+        "expected": 1,
+        "skipped": 0,
+        "unexpected": 1,
+        "flaky": 0
+      },
+      "errors": [
+        {
+          "test": "flattened photo-textured splats retain DejaVu Sans text fidelity",
+          "message": "Error: expect(received).toBeGreaterThanOrEqual(expected)\n\nExpected: >= 0.9\nReceived:    0.8031588819138544"
+        }
+      ]
+    },
+    {
+      "label": "Added text guards and unchanged engine cases after the shader fix",
+      "stats": {
+        "startTime": "2026-10-12T23:08:56.819Z",
+        "duration": 140511.13199999998,
+        "expected": 7,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "errors": []
+    },
+    {
+      "label": "Added input-warning race case before the warning fix",
+      "stats": {
+        "startTime": "2026-10-13T00:00:52.677Z",
+        "duration": 77768.68000000001,
+        "expected": 0,
+        "skipped": 0,
+        "unexpected": 1,
+        "flaky": 0
+      },
+      "errors": [
+        {
+          "test": "an invalid photo warning survives a pending photo rebuild",
+          "message": "Error: expect(locator).toBeVisible() failed\n\nLocator:  locator('#toy-input .warning')\nExpected: visible\nReceived: hidden\nTimeout:  60000ms\n\nCall log:\n  - Expect \"toBeVisible\" with timeout 60000ms\n  - waiting for locator('#toy-input .warning')\n    63 \u00d7 locator resolved to <div hidden=\"\" role=\"alert\" class=\"warning\"></div>\n       - unexpected value \"hidden\"\n"
+        }
+      ]
+    },
+    {
+      "label": "Added input-warning case and all unchanged p3d cases after the warning fix",
+      "stats": {
+        "startTime": "2026-10-13T00:02:28.678Z",
+        "duration": 83560.58099999999,
+        "expected": 11,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "errors": []
+    }
+  ],
+  "initialFullRun": {
+    "build": "664c5743a747bb3274119555b73c1fa7a0ca91e0",
+    "files": [
+      {
+        "spec": "cdx-p3d2-core",
+        "expected": 4,
+        "unexpected": 0,
+        "skipped": 0
+      },
+      {
+        "spec": "cdx-p3d2-render",
+        "expected": 16,
+        "unexpected": 0,
+        "skipped": 0
+      },
+      {
+        "spec": "cdx-p3d2-text",
+        "expected": 2,
+        "unexpected": 0,
+        "skipped": 0
+      },
+      {
+        "spec": "dsm-samples",
+        "expected": 6,
+        "unexpected": 0,
+        "skipped": 0
+      },
+      {
+        "spec": "live3",
+        "expected": 11,
+        "unexpected": 0,
+        "skipped": 0
+      },
+      {
+        "spec": "lv8-dial",
+        "expected": 2,
+        "unexpected": 0,
+        "skipped": 0
+      },
+      {
+        "spec": "p3d",
+        "expected": 9,
+        "unexpected": 1,
+        "skipped": 0
+      },
+      {
+        "spec": "pdp-engine",
+        "expected": 7,
+        "unexpected": 0,
+        "skipped": 0
+      },
+      {
+        "spec": "pdp",
+        "expected": 6,
+        "unexpected": 0,
+        "skipped": 0
+      },
+      {
+        "spec": "phf-engine",
+        "expected": 5,
+        "unexpected": 0,
+        "skipped": 0
+      },
+      {
+        "spec": "phf",
+        "expected": 7,
+        "unexpected": 0,
+        "skipped": 0
+      },
+      {
+        "spec": "phf2",
+        "expected": 7,
+        "unexpected": 0,
+        "skipped": 0
+      },
+      {
+        "spec": "psv",
+        "expected": 8,
+        "unexpected": 0,
+        "skipped": 0
+      },
+      {
+        "spec": "psv2",
+        "expected": 6,
+        "unexpected": 0,
+        "skipped": 0
+      },
+      {
+        "spec": "psv3",
+        "expected": 16,
+        "unexpected": 0,
+        "skipped": 0
+      },
+      {
+        "spec": "smd-compare",
+        "expected": 3,
+        "unexpected": 0,
+        "skipped": 0
+      },
+      {
+        "spec": "smd-moving",
+        "expected": 16,
+        "unexpected": 0,
+        "skipped": 0
+      },
+      {
+        "spec": "smd-photo",
+        "expected": 4,
+        "unexpected": 0,
+        "skipped": 0
+      }
+    ]
+  }
+}

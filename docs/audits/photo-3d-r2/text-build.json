@@ -1,0 +1,22 @@
+{
+  "build": "50be99d8ba25e218d9b81a5241233eb1b52e744d",
+  "main": "f8c82db047c92b2a6c801e79548f0d0c4a5fb837",
+  "originalEngineTestSha256": "6ed45a7164fc09464507e5d16703d3c12d0bf359eb314c30634fd00fb7a82a39",
+  "files": {
+    "src/photo-splats.js": "227cd345c3a8654e98cfd8f4d9adba5521a9db186e5f969838f6a8bb219c71b3",
+    "tests/cdx-p3d2-text.spec.mjs": "ea40622cf04e3584f1fdeb03f74bb2d0f87e4890666660096a1a9fe96dcaa652",
+    "tools/cdx-p3d2-text.mjs": "6aefbd45d3cb8a14b3d453d5692409849f819cfd27551da95d1ae0000567ecbb",
+    "src/packs/photo-3d.js": "b7367bdae9e0bf44d4baefdf3e283f8857a263dcd3e0569d43afc16ba5c9a36d",
+    "src/photo3d/input-warning.js": "3a760de15afa35e661e40d9940fc38e52293846ec9fffef8da03343b26628964",
+    "tests/cdx-p3d2-input.spec.mjs": "b27d7fc4cc69f1f26e920142e413573ae28b6f2cfe31e4bc5791d8d4d602e2bc",
+    "src/live/relief.js": "2115a20815fd31979db1f53453cb477521c7dd5fd690f8204bb217bb7bd870e1"
+  },
+  "browser": "Chromium 151.0.7922.173",
+  "executable": "/usr/bin/chromium",
+  "operatorExecutableAvailable": false,
+  "sourceTree": "7b6561c71489f548e10b97d05b22f435f27a90e3",
+  "assetTree": "90a632f72866f1d6d4a16e93d2084b85bf48d2d5",
+  "testTree": "65e7591ff499a2a8cc3d1f5413e9d33e6894d547",
+  "shaderBuild": "664c5743a747bb3274119555b73c1fa7a0ca91e0",
+  "measurementBuild": "8314de82c80055f571eee053fdd5731a11ad6a87"
+}
