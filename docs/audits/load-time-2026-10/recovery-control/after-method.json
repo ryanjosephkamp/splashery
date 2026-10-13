@@ -52,5 +52,6 @@
   "cache": "fresh context per toy; CDP cache disabled; service workers blocked",
   "firstFrame": "navigation to first postrender after requested toy is ready",
   "payload": "completed HTTP body bytes after 1500 ms settling; Content-Length with Resource Timing fallback, including worker imports; headers excluded",
-  "deviationFromTask06": "Linux llvmpipe instead of Mac Metal; opening metrics only, without the idle/tap frame-cadence windows"
+  "deviationFromTask06": "Linux llvmpipe instead of Mac Metal; opening metrics only, without the idle/tap frame-cadence windows",
+  "publishedEquivalentCandidateSource": "b9c081a67a9cc8c12ea49956183e11811202d8f4"
 }

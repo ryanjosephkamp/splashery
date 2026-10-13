@@ -56,6 +56,10 @@ const time = (n) => (n == null ? "—" : n.toFixed(1));
 const imageLink = (name, label) => `[${label}](load-time-2026-10/images/${name})`;
 const method = read("before-method.json");
 const afterMethod = read("after-method.json");
+const publication = fs.existsSync(`${dir}/verification.json`)
+  ? read("verification.json").runtimePublication
+  : null;
+const publishedSource = publication?.equivalentPublishedCommit || afterMethod.candidateSource;
 const lines = [
   "# Load-time audit — October 13, 2026",
   "",
@@ -63,6 +67,11 @@ const lines = [
   "",
   `- Frozen main: \`${method.frozenMain}\`.`,
   `- Measured runtime source: \`${afterMethod.candidateSource}\`; later commits add audit evidence and tests and integrate newer main.`,
+  ...(publication
+    ? [
+        `- Published equivalent runtime: \`${publishedSource}\`, with identical tree \`${publication.identicalTree}\`. GitHub rejected the original unpublished commit emails; only author/committer email metadata was rewritten. Raw method receipts retain their original measured IDs and add the published equivalents.`,
+      ]
+    : []),
   `- Coverage: ${TOYS.filter((t) => !t.labs).length} public and ${TOYS.filter((t) => t.labs).length} labs toys, at both task 06 settings.`,
   "- Five recipes transfer only the exact scan records their low or mid budget uses; their original population count and rendered buffers are preserved.",
   "- Unrelated toys defer Real objects helpers; GIF encoding loads only for a GIF export.",
@@ -255,7 +264,7 @@ lines.push(
   "",
   "This task records opening metrics. Task 06's separate five-second idle/tap frame-cadence windows and heap census were not repeated. A single cold run per cell is a screening measurement; CPU load, shader caches, and OS caches can move the first-frame result. Timing increases need paired reruns before declaring a regression or claiming the no-slower target.",
   "",
-  "Reproduction: serve archives of the recorded frozen main on port 4174 and measured candidate on 4173 with `python3 -m http.server PORT --bind 127.0.0.1`. Run `node tools/load-time-audit.mjs --phase=before` and then `node tools/load-time-audit.mjs --phase=after --base=http://127.0.0.1:4173`, adding `--frozen-main=49c809b4 --candidate-source=2c229dbd --out=NEW_DIR` to both commands, with `SPLASHERY_CHROMIUM`, `DISPLAY`, `SPLASHERY_GL=llvmpipe`, and `LP_NUM_THREADS=2`. Use a new output directory for fresh measurements; each run resumes completed version-2 cells. The explicit commit options keep method receipts accurate when the collector repository has advanced beyond the served archives. `--only=ID,ID`, `--device=phone`, `--samples=N`, and `--out=DIR` support focused reruns. `node tools/load-time-paired.mjs --only=ID,ID --samples=5` accepts the same commit options and alternates before/after phase order while adding one sample per pass. Recovery runs used `nice -n 10` and `--navigation-timeout=180000 --readiness-timeout=300000`; focused recovery additionally used `--cell-timeout=180000`. Run `tools/load-time-visuals.mjs` for stills, `tools/load-time-prefixes.mjs` and `tools/load-time-smoothing.mjs` to regenerate exact opening assets, and `tools/load-time-report.mjs` for this report.",
+  `Reproduction: serve archives of the recorded frozen main on port 4174 and measured candidate on 4173 with `python3 -m http.server PORT --bind 127.0.0.1`. Run `node tools/load-time-audit.mjs --phase=before` and then `node tools/load-time-audit.mjs --phase=after --base=http://127.0.0.1:4173`, adding `--frozen-main=49c809b4 --candidate-source=${publishedSource} --out=NEW_DIR` to both commands, with `SPLASHERY_CHROMIUM`, `DISPLAY`, `SPLASHERY_GL=llvmpipe`, and `LP_NUM_THREADS=2`. Use a new output directory for fresh measurements; each run resumes completed version-2 cells. The explicit commit options keep method receipts accurate when the collector repository has advanced beyond the served archives. `--only=ID,ID`, `--device=phone`, `--samples=N`, and `--out=DIR` support focused reruns. `node tools/load-time-paired.mjs --only=ID,ID --samples=5` accepts the same commit options and alternates before/after phase order while adding one sample per pass. Recovery runs used `nice -n 10` and `--navigation-timeout=180000 --readiness-timeout=300000`; focused recovery additionally used `--cell-timeout=180000`. Run `tools/load-time-visuals.mjs` for stills, `tools/load-time-prefixes.mjs` and `tools/load-time-smoothing.mjs` to regenerate exact opening assets, and `tools/load-time-report.mjs` for this report.`,
   "",
   "## Verification and remaining work",
   "",

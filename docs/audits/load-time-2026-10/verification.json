@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-13T19:16:23.120Z",
+  "generatedAt": "2026-10-13T19:22:53.268Z",
   "runtimeSource": "2c229dbd95774b00c2ee7f6e182d4a4c3371dea0",
   "frozenMain": "49c809b4ee798f9011ad3f223ecb2e6021caec65",
   "environment": {
@@ -203,7 +203,8 @@
         ]
       }
     ],
-    "note": "One strawberry return-to-rest image threshold failed in the first broad run. Isolated checks subsequently passed on both frozen main and the candidate; this does not prove a baseline defect."
+    "note": "One strawberry return-to-rest image threshold failed in the first broad run. Isolated checks subsequently passed on both frozen main and the candidate; this does not prove a baseline defect.",
+    "publishedEquivalentSource": "a451fb0379470002058cad636a3bd2c2bd382afa"
   },
   "isolatedFrozenMain": {
     "stats": {
@@ -267,13 +268,25 @@
     }
   },
   "protectedFiles": {
-    "pullRequests": [560, 562, 566, 570, 576],
+    "pullRequests": [
+      560,
+      562,
+      566,
+      570,
+      576
+    ],
     "protectedFileCount": 392,
     "changedFileCount": 201,
     "intersection": [],
     "finalRefresh": {
       "checkedAt": "2026-10-13T18:59:03.032Z",
-      "pullRequests": [560, 562, 566, 570, 576],
+      "pullRequests": [
+        560,
+        562,
+        566,
+        570,
+        576
+      ],
       "protected": 428,
       "newProtected": [
         "tests/cdx-mp2-decode.spec.mjs",
@@ -1012,7 +1025,8 @@
       "unexpected": 0,
       "flaky": 0
     },
-    "note": "37 additional checks after integrating main; the four modified runtime modules are unchanged from measured source 2c229dbd. The full 160-test required suite was not repeated after this merge."
+    "note": "37 additional checks after integrating main; the four modified runtime modules are unchanged from measured source 2c229dbd. The full 160-test required suite was not repeated after this merge.",
+    "publishedEquivalentSource": "ad9184231326416f154a806c91deb3c606f7e8c1"
   },
   "collectorSourceMetadataProbe": {
     "command": "SPLASHERY_CHROMIUM=/usr/bin/chromium nice -n 10 node tools/load-time-audit.mjs --phase=before --base=http://127.0.0.1:4174 --only=cactus --device=phone --samples=1 --frozen-main=49c809b4 --candidate-source=2c229dbd --out=NEW_DIR --cell-timeout=180000",
@@ -1022,5 +1036,67 @@
     "status": "ok",
     "consoleErrors": 0,
     "scope": "Actual frozen-main browser opening verifies explicit source references after the collector repository advanced. Headless SwiftShader probe is separate from all measured llvmpipe timing cells."
+  },
+  "runtimePublication": {
+    "originalMeasuredCommit": "2c229dbd95774b00c2ee7f6e182d4a4c3371dea0",
+    "equivalentPublishedCommit": "b9c081a67a9cc8c12ea49956183e11811202d8f4",
+    "identicalTree": "843478b9bfcf82189f2460c7704c38bda6d715ac",
+    "allRewrittenTreesVerified": true,
+    "reason": "GitHub rejected the initial unpublished push under email privacy protection. Only these task commits' author/committer emails changed to the account's public noreply address; messages, timestamps, trees, and parent topology were preserved.",
+    "count": 10,
+    "originalHead": "e70f79c2f8866d1074a6a00d3b1dc32e64dd5eb0",
+    "publishedHead": "738386f1f4d177c3c5f477937eca529d76fd7f31",
+    "commits": [
+      {
+        "original": "76926895559d401d58cfd3bf206d62291e4c2bf4",
+        "replacement": "35c1785d2da7671fc66f6dc0632751ddb8bc01d0",
+        "tree": "601c64d1fd818722131991373a9152412d4b21c1"
+      },
+      {
+        "original": "c3eb4655ca28ac84fbfa7ac84d1e3d7c39c53061",
+        "replacement": "544fb38948ab25f09f313a4a49a32098a04d30dd",
+        "tree": "ca0472cd755aa40169a4b94a33ff453d355c5ec2"
+      },
+      {
+        "original": "b8271ce1d7c834fa36d8d40dc4ebf24d6bcc0428",
+        "replacement": "e63bfb6b361ba85e7ed07d0dffb44d8d7868cdf5",
+        "tree": "8d656aeacd0a897642309d888e554c1ee696034c"
+      },
+      {
+        "original": "edafc7cc4e1ad3e1882ca2640ce7319467110ffe",
+        "replacement": "a451fb0379470002058cad636a3bd2c2bd382afa",
+        "tree": "3f49c8daaa0f196ff1dd285656309a66075bacd7"
+      },
+      {
+        "original": "42025d71bceb0464829733000e0d45f45a6acdd8",
+        "replacement": "061937a656fb9c7fa350fce1789801cfa767ef44",
+        "tree": "7d3fda1707f9f3c84cb0d3321a4303efddc79e1c"
+      },
+      {
+        "original": "e246c8e8292e4155befa0034de800b259e282d8b",
+        "replacement": "a5140e706c5a26cf4ac898d693d345c3218d2cc2",
+        "tree": "2b81d414e5ee31d52ebee9a9eac56ced924a4daa"
+      },
+      {
+        "original": "2c229dbd95774b00c2ee7f6e182d4a4c3371dea0",
+        "replacement": "b9c081a67a9cc8c12ea49956183e11811202d8f4",
+        "tree": "843478b9bfcf82189f2460c7704c38bda6d715ac"
+      },
+      {
+        "original": "81363934f308f8b390dc0f32f4e0377439fa8521",
+        "replacement": "ae3afd80ff1e848b3aed3584d8bf110feb544e18",
+        "tree": "766c15ada9332abd93e74fe28b583e9a1a000bbe"
+      },
+      {
+        "original": "9769ce310d67d36e9e1ccf7d6c3d9fe532b9f8fd",
+        "replacement": "ad9184231326416f154a806c91deb3c606f7e8c1",
+        "tree": "bf97ae3e07ddaff350d49018971ba195f737db2d"
+      },
+      {
+        "original": "e70f79c2f8866d1074a6a00d3b1dc32e64dd5eb0",
+        "replacement": "738386f1f4d177c3c5f477937eca529d76fd7f31",
+        "tree": "ca786ab9924700f4d5f42c8e561be610da0a1dd5"
+      }
+    ]
   }
 }
