@@ -1578,3 +1578,120 @@ nav.toc > ol {
 ul.reading li {
   overflow-wrap: anywhere;
 }
+
+/* Manual r9: the last five demos, the Chapter 9 picture row, the "more" page's pictures, and the PDF's
+   clickable contents. */
+.demo-live .controls + .row,
+.demo-live .row + .readout,
+.demo-live canvas + .controls,
+.demo-live .photo-pair + .controls {
+  margin-top: 10px;
+}
+.demo-live canvas[tabindex] {
+  touch-action: none;
+}
+.demo-live .controls label.check {
+  display: flex;
+  gap: 8px;
+}
+.photo-pair {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 10px;
+}
+.photo-pair figure {
+  margin: 0;
+}
+.photo-pair figcaption {
+  font-size: 13px;
+  color: var(--muted);
+  text-align: center;
+  margin-top: 4px;
+}
+.table-wrap {
+  min-width: 0;
+}
+.dt-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  margin-bottom: 10px;
+}
+.dt-table th,
+.dt-table td {
+  padding: 2px 3px;
+  text-align: center;
+}
+.dt-table input {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  padding: 6px 3px;
+  font-size: 13px;
+  text-align: center;
+}
+.qd-meter {
+  display: grid;
+  gap: 6px;
+}
+.qd-block {
+  display: grid;
+  grid-template-columns: 4.5em minmax(0, 1fr) 7.5em;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+}
+.qd-bar {
+  position: relative;
+  display: block;
+  height: 12px;
+  background: var(--code-bg);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+}
+.qd-bar > span {
+  display: block;
+  height: 100%;
+  background: var(--good);
+  border-radius: 5px;
+}
+.qd-bar > span.over {
+  background: var(--warn);
+}
+.qd-bar > i {
+  position: absolute;
+  top: -3px;
+  bottom: -3px;
+  width: 2px;
+  background: var(--ink);
+}
+.qd-nums {
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+  font-size: 12px;
+}
+.demo-live[data-demo="moving-joints"] .controls label {
+  grid-template-columns: 8em minmax(0, 1fr) 6.5em;
+}
+.demo-live .controls output {
+  white-space: nowrap;
+}
+.demo-live[data-demo="qr-damage"] .qd-meter {
+  margin-bottom: 8px;
+}
+/* Two pictures in one row, the same size, level with each other (Chapter 9's QR codes). They stack,
+   each at most 300 px wide and centered, on a phone. */
+.shots.even {
+  align-items: start;
+}
+.shots.even img {
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  height: auto;
+}
+@media (max-width: 480px) {
+  .shots.even {
+    grid-template-columns: minmax(0, 1fr);
+    max-width: 300px;
+    margin: 0 auto;
+  }
+}
