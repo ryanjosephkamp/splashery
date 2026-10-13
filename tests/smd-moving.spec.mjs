@@ -2,7 +2,7 @@
 // timing, and a clip plays at the speed of its source (seconds played against seconds of source,
 // within 3%, on a slow and a fast tier), with the Toy tab's Speed slider scaling it.
 
-import { test, expect } from "@playwright/test";
+import { test, expect } from "./suite-load.mjs";
 
 const APP = (profile) => `/?renderer=webgl2&adapt=off&profile=${profile}&labs=1`;
 const mp = "/src/packs/moving-photo.js";

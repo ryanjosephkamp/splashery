@@ -5,7 +5,7 @@
 // and license notices are there); a sample, one toy from every shelf plus labs
 // and noncommercial toys, is loaded in the browser.
 
-import { test, expect } from "@playwright/test";
+import { test, expect } from "./suite-load.mjs";
 import fs from "node:fs";
 import path from "node:path";
 import { TOYS, CATEGORIES } from "../src/toys.js";
@@ -202,11 +202,14 @@ async function quietPlayers(page) {
 }
 
 test.describe("toy pages (browser)", () => {
+  // The mocked players must stay behind Playwright's route. A service worker
+  // can claim the site during this loop and fetch a real player past that route.
+  test.use({ serviceWorkers: "block" });
   test(`a sample of ${SAMPLE.length} pages loads, fits a phone and links on`, async ({
     browser,
   }) => {
     expect(SAMPLE.length).toBeGreaterThanOrEqual(15);
-    const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, hasTouch: true });
+    const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, hasTouch: true, serviceWorkers: "block" }); // prettier-ignore
     const page = await ctx.newPage();
     const problems = watchConsole(page);
     await quietPlayers(page);
@@ -259,7 +262,7 @@ test.describe("toy pages (browser)", () => {
   });
 
   test("the live toy plays on its page, and the copy buttons copy", async ({ browser }) => {
-    const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 }, permissions: ["clipboard-read", "clipboard-write"] }); // prettier-ignore
+    const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 }, permissions: ["clipboard-read", "clipboard-write"], serviceWorkers: "allow" }); // prettier-ignore
     const page = await ctx.newPage();
     const problems = watchConsole(page);
     await page.goto("/site/toys/grape/");
@@ -292,7 +295,7 @@ test.describe("toy pages (browser)", () => {
         [390, 844],
         [1440, 900],
       ]) {
-        const ctx = await browser.newContext({ viewport: { width: w, height: h }, colorScheme: "light" }); // prettier-ignore
+        const ctx = await browser.newContext({ viewport: { width: w, height: h }, colorScheme: "light", serviceWorkers: "allow" }); // prettier-ignore
         const page = await ctx.newPage();
         await page.goto(`/site/toys/${id}/?labs=0`);
         await page.frameLocator(".toy-stage iframe").locator("body[data-ready='true']").waitFor({ timeout: 180_000 }); // prettier-ignore

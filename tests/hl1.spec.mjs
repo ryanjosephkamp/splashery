@@ -1,7 +1,8 @@
 // Codex task 12: Level 1 receipts from the real player and HandsOn world.
 // Run the 40-toy regression sample normally, or HL1_ALL=1 for the strict
 // whole shelf audit. Measurements are attached even when the audit fails.
-import { test, expect } from "@playwright/test";
+import { test, expect } from "./suite-load.mjs";
+import { waitForRenderedToy } from "./render-ready.mjs";
 import { writeFile } from "node:fs/promises";
 import { TOYS } from "../src/toys.js";
 
@@ -124,10 +125,7 @@ test("Hands-on: lift, toss, land, settle and Reset", async ({ page }, testInfo) 
           },
           { id: toy.id, camera: toy.camera },
         );
-        await page.evaluate(
-          () =>
-            new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve))),
-        );
+        await waitForRenderedToy(page);
         Object.assign(
           row,
           await page.evaluate(async () => {

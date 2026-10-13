@@ -8,7 +8,7 @@
 // it (__world.tick or __world.step) and the software renderer's speed does
 // not matter.
 
-import { test, expect } from "@playwright/test";
+import { test, expect } from "./suite-load.mjs";
 import fs from "node:fs";
 import { WORLD_BUDGETS, TIERS } from "../src/worlds/tiers.js";
 import { normalizeWorld } from "../src/worlds/world-file.js";

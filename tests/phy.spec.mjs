@@ -2,7 +2,8 @@
 // amoeba, cherries, bricks, macarons, spring toy, sushi and the bow. The
 // clock is stepped by hand (SwiftShader draws slowly).
 
-import { test, expect } from "@playwright/test";
+import { test, expect } from "./suite-load.mjs";
+import { waitForCamera, waitForRenderedToy } from "./render-ready.mjs";
 
 const APP = "/?renderer=webgl2&adapt=off&profile=mid";
 
@@ -15,6 +16,7 @@ async function open(page, id, options = null) {
       await app.chooseToy(id);
       if (options) await app.setToyOptions(options);
       player.opts.idleDelay = 1e9;
+      player.camera.setTurntable(false);
       // Steps the clock by hand; moves a held piece from a recipe point to
       // recipe points (as a finger would, through Hands-on).
       window.__run = (secs, step = 1 / 30) => {
@@ -47,16 +49,8 @@ async function open(page, id, options = null) {
   );
   // The camera eases in to fit the toy; the finger's screen points need it
   // still.
-  await page.waitForFunction(
-    () => {
-      const c = window.__splashery.player.camera;
-      const d = c.cur && c.tgt ? Math.abs(c.cur.yaw - c.tgt.yaw) + Math.abs(c.cur.pitch - c.tgt.pitch) + Math.abs(c.cur.distance - c.tgt.distance) / (c.tgt.distance || 1) : 0; // prettier-ignore
-      return d < 1e-3;
-    },
-    null,
-    { timeout: 30_000 },
-  );
-  await page.waitForTimeout(500);
+  await waitForCamera(page, { timeout: 30_000 });
+  await waitForRenderedToy(page);
 }
 
 const finite = (list) => list.every((v) => Number.isFinite(v));

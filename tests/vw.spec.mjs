@@ -14,7 +14,7 @@ import { RECIPES as SCREENS } from "../src/packs/screens.js";
 import { RECIPES as SPLATTING } from "../src/packs/splatting.js";
 
 const APP = "/?renderer=webgl2&adapt=off&profile=mid";
-const FIGURES = "http://127.0.0.1:4173/tests/fixtures/vw/figures.pdf";
+const FIGURES = `http://127.0.0.1:${Number(process.env.SPLASHERY_PORT) || 4173}/tests/fixtures/vw/figures.pdf`;
 
 // A half float that is NaN or infinite (drawn black by the GPU).
 const badHalf = (h) => (h & 0x7c00) === 0x7c00;

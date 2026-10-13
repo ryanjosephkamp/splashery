@@ -2,7 +2,8 @@
 // The parsers and the converter are checked on small models of our own (tests/fixtures/stm/,
 // made by tools/stm-fixtures.mjs); the toy is checked through the kit and in the browser.
 
-import { test, expect } from "@playwright/test";
+import { test, expect } from "./suite-load.mjs";
+import { waitForCamera, waitForRenderedToy } from "./render-ready.mjs";
 import fs from "node:fs";
 import path from "node:path";
 import { execFileSync } from "node:child_process";
@@ -371,7 +372,10 @@ test.describe("the toy in the browser", () => {
     // A model is in once the Toy tab is drawn again for it (the app's onToy, after the build): its
     // input panel's line names it. Until then a message shown in the old panel would be replaced
     // (Fix11: under load the panel came back after the next file's message, hiding it).
-    const shown = (name) => expect(page.locator("#toy-input .input-shown")).toContainText(`${name}:`, { timeout: 60_000 }); // prettier-ignore
+    const shown = async (name) => {
+      await page.waitForFunction(() => window.__splashery.player.loading === 0, null, { timeout: 60_000 }); // prettier-ignore
+      await expect(page.locator("#toy-input .input-shown")).toContainText(`${name}:`, { timeout: 60_000 }); // prettier-ignore
+    };
     await page.goto(APP);
     await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
     await page.evaluate(() => window.__splashery.app.chooseToy("model-splats"));
@@ -383,6 +387,19 @@ test.describe("the toy in the browser", () => {
     // The tap: lifts, then settles back to rest.
     await page.evaluate(() => window.__splashery.app.act());
     await page.waitForFunction(() => window.__splashery.player.motion.state.lift > 0.2, null, { timeout: 30_000 }); // prettier-ignore
+    // The renderer clamps a slow frame to 0.1 s of toy time. Advance the
+    // actual player clock through this 3.2 s pulse, as the physics tests do,
+    // so CPU contention cannot stretch the same effect past a wall deadline.
+    await page.evaluate(() => {
+      const { player } = window.__splashery;
+      const paused = player.paused;
+      player.setPaused(false);
+      try {
+        for (let i = 0; i < 200; i++) player.update(1 / 60);
+      } finally {
+        player.setPaused(paused);
+      }
+    });
     await page.waitForFunction(() => window.__splashery.player.motion.state.lift === 0, null, { timeout: 60_000 }); // prettier-ignore
     // Your own model: a binary STL, then a GLB with a texture.
     await page.locator("#toy-input-file").setInputFiles(path.join(FIX, "cube-binary.stl"));
@@ -416,6 +433,9 @@ test.describe("the toy in the browser", () => {
     await expect(page.locator(".warning:visible")).toContainText("None of those files");
     // A file that is not a model gives a message, not a crash.
     await page.locator("#toy-input-file").setInputFiles({ name: "x.glb", mimeType: "model/gltf-binary", buffer: Buffer.from("not a model") }); // prettier-ignore
+    // The previous file's warning was already visible. Check this read's
+    // message before selecting another file and racing the asynchronous parse.
+    await expect(page.locator("#toy-input .warning")).toContainText("JSON is broken");
     await expect(page.locator(".warning:visible")).toBeVisible();
     // A .gltf that needs another file says which.
     await page.locator("#toy-input-file").setInputFiles(path.join(FIX, "quad-loose.gltf"));
@@ -436,7 +456,8 @@ test.describe("the toy in the browser", () => {
       await page.waitForFunction(() => window.__splashery.player.proc?.ctx?.kit?.data?.model?.splats > 5000, null, { timeout: 90_000 }); // prettier-ignore
       await page.evaluate(() => window.__splashery.app.setToyOptions({ source: "vase" }));
       await page.waitForFunction(() => window.__splashery.player.proc?.ctx?.kit?.data?.model?.name === "Blue-and-white vase", null, { timeout: 60_000 }); // prettier-ignore
-      await page.waitForTimeout(800);
+      await waitForCamera(page);
+      await waitForRenderedToy(page);
       await page.screenshot({ path: `tests/screenshots/stm-model-splats-${w}x${h}.png` });
       await page.close();
     }

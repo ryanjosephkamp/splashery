@@ -5,7 +5,7 @@
 // healing brings a code back to scanning; and the three codes in one square
 // read back with the splitting reader.
 
-import { test, expect } from "@playwright/test";
+import { test, expect } from "./suite-load.mjs";
 import fs from "node:fs";
 import { PNG } from "pngjs";
 import { encodeSteps } from "../src/qr-lab/steps.js";

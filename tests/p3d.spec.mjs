@@ -2,7 +2,8 @@
 // checked on numbers and on the samples; the browser tests open a tiny photo through the Toy tab's
 // panel (the depth model runs for real) and check that nothing loads the model or the runtime before.
 
-import { test, expect } from "@playwright/test";
+import { test, expect } from "./suite-load.mjs";
+import { waitForCamera, waitForRenderedToy } from "./render-ready.mjs";
 import fs from "node:fs";
 import {
   buildPhotoSplats,
@@ -170,7 +171,7 @@ test.describe("in the browser", () => {
     await page.waitForFunction(() => window.__splashery.player.proc?.ctx?.kit?.data?.photo?.splats > 5000, null, { timeout: 90_000 }); // prettier-ignore
     for (const id of ["street", "still-life", "forest"]) {
       await page.evaluate((id) => window.__splashery.app.setToyOptions({ source: id }), id);
-      await page.waitForTimeout(600);
+      await waitForRenderedToy(page);
     }
     const heavy = (u) => /onnx|depth-anything|ort-wasm/i.test(u);
     expect(requests.filter(heavy)).toEqual([]);
@@ -183,7 +184,10 @@ test.describe("in the browser", () => {
     await page.waitForFunction(() => window.__splashery.player.motion.state.flat > 0.95, null, { timeout: 90_000 }); // prettier-ignore
     // your own photo, through the panel
     await page.locator("#toy-input-file").setInputFiles(`${FIX}/scene.jpg`);
-    await page.waitForFunction(() => window.__splashery.player.proc?.ctx?.kit?.data?.photo?.custom === true, null, { timeout: 150_000 }); // prettier-ignore
+    // The new context is assigned before onToy replaces the input panel.
+    // Wait for that replacement before sending the next file through it.
+    await page.waitForFunction(() => window.__splashery.player.loading === 0 && window.__splashery.player.proc?.ctx?.kit?.data?.photo?.custom === true, null, { timeout: 150_000 }); // prettier-ignore
+    await expect(page.locator("#toy-input .input-shown")).toContainText("scene:");
     expect(requests.filter(heavy).length).toBeGreaterThan(0); // now the model and the runtime came
     const info = await page.evaluate(() => window.__splashery.player.proc.ctx.kit.data.photo);
     expect(info.name).toBe("scene");
@@ -208,7 +212,8 @@ test.describe("in the browser", () => {
       await page.evaluate(() =>
         window.__splashery.player.motion.setControl("flat", 0, { snap: true }),
       );
-      await page.waitForTimeout(1200);
+      await waitForCamera(page);
+      await waitForRenderedToy(page);
       await page.screenshot({ path: `tests/screenshots/p3d-photo-3d-${w}x${h}.png` });
       await page.close();
     }

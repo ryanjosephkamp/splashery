@@ -5,7 +5,8 @@
 // into its place; the crystal ball lifts off its stand, rolls on the table
 // and settles back into its cup, its mist and bottom going with it.
 
-import { test, expect } from "@playwright/test";
+import { test, expect } from "./suite-load.mjs";
+import { waitForCamera, waitForRenderedToy } from "./render-ready.mjs";
 
 const APP = "/?renderer=webgl2&adapt=off&profile=mid";
 
@@ -24,7 +25,7 @@ async function ready(page, id) {
       player.camera.idleDelay = 1e9;
     }
   }, id);
-  await page.waitForTimeout(800);
+  await waitForCamera(page);
   if (!(await page.evaluate(() => window.__splashery.player.handsOn.on)))
     await page.click("#hands-toggle");
   await page.evaluate(() => window.__splashery.player.handsOn.ensure());
@@ -123,9 +124,19 @@ test("crystal ball: lifted off its stand, it rolls off the stand's base onto the
   const home = (await piece(page, 0)).home;
   await finger(page, [home, [0.3, 1.2, 0.3], [1.0, 0.4, 0.5]], { steps: 10 });
   await tick(page, 0.2);
-  let p = await parts(page);
   // The mist and the cap under the glass go with it.
-  const at = await piece(page, 0);
+  // Read both sides in one task: the live render loop can step the ball
+  // between separate evaluations, even immediately after a manual tick.
+  const snapshot = await page.evaluate(() => {
+    const { player } = window.__splashery;
+    const pc = player.handsOn.pieces[0];
+    return {
+      parts: JSON.parse(JSON.stringify(player.motion.out.parts)),
+      piece: { pos: pc.body.pos.slice(), home: pc.home.pos.slice(), pinned: !!pc.body.pinned },
+    };
+  });
+  let p = snapshot.parts;
+  const at = snapshot.piece;
   const off = at.pos.map((v, i) => v - at.home[i]);
   expect(Math.hypot(...p.mist.offset.map((v, i) => v - off[i]))).toBeLessThan(1e-6);
   expect(p.cap.visible).toBe(1);
@@ -178,7 +189,7 @@ test("screenshots: the pearl, hands-on", async ({ page }) => {
   ]) {
     await page.setViewportSize({ width: w, height: h });
     await ready(page, "pearl");
-    await page.waitForTimeout(600);
+    await waitForRenderedToy(page);
     await page.screenshot({ path: `tests/screenshots/hh5-pearl-${w}x${h}.png` });
   }
 });

@@ -4,7 +4,7 @@
 // figure on the same plate (no new plate per note).
 // Chromium's fake microphone plays WAV files made here.
 
-import { test, expect } from "@playwright/test";
+import { test, expect } from "./suite-load.mjs";
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
@@ -175,11 +175,19 @@ test("your audio plays to the plate: its strongest pitch rings the modes, re-sor
   const b = await until(page, async (m) => { const s = (await import(m)).chladniFileState(); return s.lead?.startsWith("3-4") && s.p > 0.3 ? s : null; }, studio, 60_000); // prettier-ignore
   expect(b.builds).toBe(a.builds);
   expect(b.playing).toBe(true); // the audio played on through the switch
-  // Pause: the clock and the sand hold. (Live r7: the sand stops on the next
-  // frame; its settledness is read a moment later.)
+  // Pause: the clock and the sand hold. The drive clears the remaining mode
+  // amplitudes on its next frame; elapsed time cannot guarantee that frame.
   await page.evaluate(() => document.getElementById("chladni-play").click());
-  await page.waitForTimeout(400);
-  const p0 = await page.evaluate(async (m) => (await import(m)).chladniFileState(), studio);
+  const p0 = await until(
+    page,
+    async (m) => {
+      const mod = await import(m);
+      const state = mod.chladniFileState();
+      return !state.playing && !mod.chladniSand().moving ? state : null;
+    },
+    studio,
+    60_000,
+  );
   await page.waitForTimeout(1000);
   const p1 = await page.evaluate(async (m) => (await import(m)).chladniFileState(), studio);
   expect(p1.playing).toBe(false);
@@ -194,8 +202,13 @@ test("your audio plays to the plate: its strongest pitch rings the modes, re-sor
   });
   const p2 = await page.evaluate(async (m) => (await import(m)).chladniFileState(), studio);
   expect(Math.abs(p2.pos - 12)).toBeLessThan(0.5);
-  await page.evaluate(() => document.getElementById("chladni-start").click());
-  const p3 = await page.evaluate(async (m) => (await import(m)).chladniFileState(), studio);
+  // Restart and observe in one browser task. A second CDP round trip can
+  // take longer than the original 0.3 s assertion while playback advances.
+  const p3 = await page.evaluate(async (m) => {
+    const mod = await import(m);
+    document.getElementById("chladni-start").click();
+    return mod.chladniFileState();
+  }, studio);
   expect(p3.pos).toBeLessThan(0.3);
   expect(p3.playing).toBe(true);
   // Nothing left the device.

@@ -2,8 +2,9 @@
 // the pointer crosses plays once, in order; a drag that starts off the keys
 // still turns the toy.
 
-import { test, expect } from "@playwright/test";
+import { test, expect } from "./suite-load.mjs";
 import { keyPoint } from "../src/packs/pianos.js";
+import { waitForCamera, waitForRenderedToy } from "./render-ready.mjs";
 
 const SHOTS = new URL("./screenshots/", import.meta.url);
 
@@ -18,7 +19,8 @@ async function open(page, id) {
     window.__fired = [];
     player.on("action", (r) => r.drag && window.__fired.push(r.pick));
   });
-  await page.waitForTimeout(1500); // the view settles
+  await waitForCamera(page);
+  await waitForRenderedToy(page);
 }
 
 // A recipe point on the canvas (CSS pixels).

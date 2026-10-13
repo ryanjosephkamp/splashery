@@ -25,14 +25,17 @@
 //   node tools/suite.mjs -- --trace=on    # anything after "--" goes to Playwright as it is
 //
 // SPLASHERY_CHROMIUM defaults to /opt/pw-browsers/chromium when that exists (the cloud
-// container). SPLASHERY_PORT is honored as in playwright.config.mjs. The summary (pass and fail
+// container). Each concurrent lane owns a server on an OS-reserved port. SPLASHERY_PORT, when
+// set explicitly, starts the lane's port range; an occupied port fails instead of being reused.
+// The summary (pass and fail
 // lists, the slowest files and tests) is printed at the end and saved as <out>/summary.md; the
 // exit code is 1 when any test failed or a file could not run.
 
 import fs from "node:fs";
 import path from "node:path";
-import http from "node:http";
 import { spawn } from "node:child_process";
+import { setTimeout as delay } from "node:timers/promises";
+import { startServer, reportProblems, ownProcess } from "./suite-runtime.mjs";
 
 const root = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
 // Anything after "--" goes to every Playwright process as it is (e.g. -- --trace=on).
@@ -46,7 +49,7 @@ const arg = (name, fallback = null) => {
 };
 const OUT = path.resolve(root, arg("out", ".cache/suite"));
 const JOBS = Math.max(1, Number(arg("jobs", 1)) || 1);
-const PORT = Number(process.env.SPLASHERY_PORT) || 4173;
+const PORT = Number(process.env.SPLASHERY_PORT) || 0;
 const PLAN = path.join(root, "tools/suite.json");
 
 const env = { ...process.env };
@@ -130,19 +133,33 @@ function collect(report) {
   return tests;
 }
 
-function runFile(f, dir = OUT) {
+const cancellation = new AbortController();
+const resources = new Set();
+let stopping = false;
+const track = (owned) => {
+  resources.add(owned);
+  owned.closed.then(() => {
+    if (!stopping) resources.delete(owned);
+  });
+  return owned;
+};
+
+function runFile(f, dir = OUT, server) {
+  cancellation.signal.throwIfAborted();
   return new Promise((done) => {
     const tmp = path.join(dir, `${f}.json.part`);
     const started = Date.now();
     const pattern = `[\\\\/]${f.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\.spec\\.mjs$`;
     const child = spawn(
-      "npx",
-      ["playwright", "test", pattern, "--workers=1", "--reporter=json", `--output=${path.join(dir, "results", f)}`, ...PASS], // prettier-ignore
-      { cwd: root, env: { ...env, PLAYWRIGHT_JSON_OUTPUT_NAME: tmp, ...(ON_SWIFTSHADER.has(f) ? { SPLASHERY_GL: "swiftshader" } : {}) }, stdio: ["ignore", "pipe", "pipe"] }, // prettier-ignore
+      process.execPath,
+      [path.join(root, "node_modules/@playwright/test/cli.js"), "test", pattern, "--workers=1", "--reporter=json", `--output=${path.join(dir, "results", f)}`, ...PASS], // prettier-ignore
+      { cwd: root, env: { ...env, SPLASHERY_PORT: String(server.port), PLAYWRIGHT_JSON_OUTPUT_NAME: tmp, ...(ON_SWIFTSHADER.has(f) ? { SPLASHERY_GL: "swiftshader" } : {}) }, stdio: ["ignore", "pipe", "pipe"], detached: true }, // prettier-ignore
     );
+    track(ownProcess(child, { signal: cancellation.signal, group: true }));
     const log = fs.createWriteStream(path.join(dir, `${f}.log`));
     child.stdout.pipe(log);
     child.stderr.pipe(log);
+    child.on("error", (error) => log.write(error.message + "\n"));
     child.on("close", (code) => {
       const wall = (Date.now() - started) / 1000;
       let report = null;
@@ -150,7 +167,12 @@ function runFile(f, dir = OUT) {
         report = JSON.parse(fs.readFileSync(tmp, "utf8"));
       } catch {}
       if (report) {
-        report.suiteRun = { wall, code };
+        report.suiteRun = {
+          wall,
+          code,
+          port: server.port,
+          gl: ON_SWIFTSHADER.has(f) ? "swiftshader" : GL,
+        };
         fs.writeFileSync(reportOf(f, dir), JSON.stringify(report));
         fs.rmSync(tmp, { force: true });
       }
@@ -161,38 +183,23 @@ function runFile(f, dir = OUT) {
 
 // ---- The test server ---------------------------------------------------------------------------
 
-const answers = () =>
-  new Promise((ok) => {
-    const req = http.get(`http://127.0.0.1:${PORT}/`, (res) => (res.resume(), ok(true)));
-    req.on("error", () => ok(false));
-    req.setTimeout(3000, () => (req.destroy(), ok(false)));
-  });
-
-async function serve() {
-  // Every Playwright process would start its own server otherwise, all at once on one port.
-  if (await answers()) return null;
-  const server = spawn("python3", ["-m", "http.server", String(PORT), "--bind", "127.0.0.1"], {
-    cwd: root,
-    stdio: "ignore",
-  });
-  for (let i = 0; i < 100 && !(await answers()); i++) await new Promise((ok) => setTimeout(ok, 100)); // prettier-ignore
-  return server;
-}
-
 // The virtual display a headed browser needs for llvmpipe: one Xvfb for the whole run.
 async function display() {
   if (GL !== "llvmpipe" || env.DISPLAY) return null;
   for (let n = 90; n < 110; n++) {
+    cancellation.signal.throwIfAborted();
     if (fs.existsSync(`/tmp/.X${n}-lock`)) continue;
     const x = spawn("Xvfb", [`:${n}`, "-screen", "0", "1920x1080x24", "-nolisten", "tcp"], { stdio: "ignore" }); // prettier-ignore
-    await new Promise((ok) => setTimeout(ok, 1000));
-    if (x.exitCode === null) {
+    const owned = track(ownProcess(x, { signal: cancellation.signal }));
+    await Promise.race([delay(1000, null, { signal: cancellation.signal }), owned.closed]);
+    cancellation.signal.throwIfAborted();
+    if (x.pid && x.exitCode === null && x.signalCode === null) {
       env.DISPLAY = `:${n}`;
-      return x;
+      return owned;
     }
+    await owned.close();
   }
-  console.error("Could not start Xvfb for --gl=llvmpipe.");
-  process.exit(2);
+  throw new Error("Could not start Xvfb for --gl=llvmpipe.");
 }
 
 // ---- The summary -------------------------------------------------------------------------------
@@ -202,9 +209,12 @@ const fmt = (s) => (s >= 3600 ? `${Math.floor(s / 3600)} h ${Math.round((s % 360
 function summary(list, elapsed) {
   const rows = [];
   const tests = [];
+  const processErrors = [];
   for (const f of list) {
     if (!fs.existsSync(reportOf(f))) continue;
     const report = JSON.parse(fs.readFileSync(reportOf(f), "utf8"));
+    for (const error of reportProblems(report, report.suiteRun ? report.suiteRun.code : 0))
+      processErrors.push({ file: f, error });
     const ts = collect(report).map((t) => ({ ...t, file: f }));
     tests.push(...ts);
     rows.push({ f, wall: report.suiteRun?.wall ?? report.stats.duration / 1000, n: ts.length, bad: ts.filter((t) => !["passed", "skipped"].includes(t.status)).length }); // prettier-ignore
@@ -219,8 +229,10 @@ function summary(list, elapsed) {
   out.push(`- Time in files (one after another): ${fmt(fileTime)}.${elapsed ? ` Wall time of this run: ${fmt(elapsed)} (${JOBS} at once).` : ""}`); // prettier-ignore
   if (missing.length) out.push(`- Not run yet: ${missing.join(", ")}.`);
   out.push("", "## Failed", "");
-  if (!failed.length) out.push("None.");
+  if (!failed.length && !processErrors.length) out.push("None.");
   for (const t of failed) out.push(`- \`${t.file}:${t.line}\` ${t.title}: ${t.status}. ${t.error}`);
+  for (const e of processErrors)
+    out.push(`- \`${e.file}\`: ${e.error.replace(/\x1b\[[0-9;]*m/g, "").split("\n")[0]}`);
   out.push("", "## Slowest files", "", "| File | Seconds | Tests |", "| --- | ---: | ---: |");
   for (const r of [...rows].sort((a, b) => b.wall - a.wall).slice(0, 25))
     out.push(`| ${r.f} | ${Math.round(r.wall)} | ${r.n} |`);
@@ -228,7 +240,7 @@ function summary(list, elapsed) {
   for (const t of [...tests].sort((a, b) => b.seconds - a.seconds).slice(0, 25))
     out.push(`| \`${t.file}:${t.line}\` ${t.title.slice(0, 90)} | ${Math.round(t.seconds)} |`);
   out.push("");
-  return { text: out.join("\n"), rows, failed, missing };
+  return { text: out.join("\n"), rows, failed, missing, processErrors };
 }
 
 // ---- Run ---------------------------------------------------------------------------------------
@@ -236,7 +248,7 @@ function summary(list, elapsed) {
 if (arg("report")) {
   const s = summary(files);
   console.log(s.text);
-  process.exit(s.failed.length || s.missing.length ? 1 : 0);
+  process.exit(s.failed.length || s.missing.length || s.processErrors.length ? 1 : 0);
 }
 
 if (arg("fresh")) fs.rmSync(OUT, { recursive: true, force: true });
@@ -244,57 +256,115 @@ fs.mkdirSync(OUT, { recursive: true });
 const todo = files.filter((f) => !fs.existsSync(reportOf(f)));
 console.log(`${files.length - todo.length} of ${files.length} files already done in ${path.relative(root, OUT) || "."}; running ${todo.length}, ${JOBS} at once, WebGL2 on ${GL}.`); // prettier-ignore
 
-const server = await serve();
-const xvfb = await display();
 const t0 = Date.now();
-let finished = 0;
-async function lane(queue) {
-  while (queue.length) {
-    const f = queue.shift();
-    const r = await runFile(f);
-    finished++;
-    const s = r.ok ? summary([f]) : null;
-    const note = !r.ok
-      ? "no report (see its .log)"
-      : s.failed.length
-        ? `${s.failed.length} failed`
-        : "ok";
-    console.log(`[${finished}/${todo.length}] ${f} ${Math.round(r.wall)} s: ${note}`);
+const servers = [];
+let shutdown;
+let signalCode;
+function cleanup() {
+  stopping = true;
+  cancellation.abort();
+  return (shutdown ||= Promise.all([...resources].map((owned) => owned.close())));
+}
+for (const [signal, code] of [
+  ["SIGINT", 130],
+  ["SIGTERM", 143],
+])
+  process.once(signal, () => {
+    signalCode = code;
+    process.exitCode = code;
+    void cleanup().catch((error) => console.error(error.message));
+  });
+try {
+  await display();
+  // One server per lane, retained across its files. Default ports are assigned
+  // atomically by the OS, including when two independent suite runs overlap.
+  for (let i = 0; i < Math.min(JOBS, Math.max(todo.length, 1)); i++) {
+    cancellation.signal.throwIfAborted();
+    servers.push(await startServer({ root, port: PORT ? PORT + i : 0, signal: cancellation.signal, onSpawn: track })); // prettier-ignore
   }
-}
-const shared = JOBS > 1 ? todo.filter((f) => !SOLO.has(f)) : [...todo];
-const alone = JOBS > 1 ? todo.filter((f) => SOLO.has(f)) : [];
-await Promise.all(Array.from({ length: Math.min(JOBS, shared.length) }, () => lane(shared)));
-await lane(alone);
-const elapsed = (Date.now() - t0) / 1000;
-const s = summary(files, elapsed);
-let text = s.text;
-// --recheck: a test that fails only beside another file checks the wall clock (docs/OPERATING.md,
-// "Running the suite fast"). Its failure still counts; this only says which ones pass alone, so
-// they can join the solo list.
-if (arg("recheck") && s.failed.length) {
-  const dir = path.join(OUT, "recheck");
-  fs.mkdirSync(dir, { recursive: true });
-  const again = [...new Set(s.failed.map((t) => t.file))];
-  console.log(`\nRechecking ${again.length} files alone: ${again.join(", ")}`);
-  const lines = ["", "## Rechecked alone", "", "The failures above still count. Each failed file ran once more, alone:", ""]; // prettier-ignore
-  for (const f of again) {
-    const r = await runFile(f, dir);
-    const failedAgain = r.ok ? collect(JSON.parse(fs.readFileSync(reportOf(f, dir), "utf8"))).filter((t) => !["passed", "skipped"].includes(t.status)) : null; // prettier-ignore
-    const note = !failedAgain ? "no report" : failedAgain.length ? `failed again: ${failedAgain.map((t) => `${t.line}`).join(", ")}` : "passed alone (a wall-clock check: a candidate for the solo list)"; // prettier-ignore
-    lines.push(`- \`${f}\`: ${note}.`);
-    console.log(`  ${f}: ${note}`);
+  cancellation.signal.throwIfAborted();
+  const startup = (Date.now() - t0) / 1000;
+  fs.writeFileSync(
+    path.join(OUT, "run.json"),
+    JSON.stringify(
+      {
+        started: new Date(t0).toISOString(),
+        jobs: JOBS,
+        gl: GL,
+        ports: servers.map((server) => server.port),
+        startup,
+        files,
+        playwrightArgs: PASS,
+        browser: env.SPLASHERY_CHROMIUM || "Playwright default",
+      },
+      null,
+      2,
+    ) + "\n",
+  );
+  let finished = 0;
+  async function lane(queue, server) {
+    while (!stopping && queue.length) {
+      const f = queue.shift();
+      const r = await runFile(f, OUT, server);
+      if (stopping) return;
+      finished++;
+      const s = r.ok ? summary([f]) : null;
+      const note = !r.ok
+        ? "no report (see its .log)"
+        : s.failed.length || s.processErrors.length
+          ? `${s.failed.length} failed, ${s.processErrors.length} process errors`
+          : "ok";
+      console.log(`[${finished}/${todo.length}] ${f} ${Math.round(r.wall)} s: ${note}`);
+    }
   }
-  text += lines.join("\n") + "\n";
+  const shared = JOBS > 1 ? todo.filter((f) => !SOLO.has(f)) : [...todo];
+  const alone = JOBS > 1 ? todo.filter((f) => SOLO.has(f)) : [];
+  await Promise.all(
+    Array.from({ length: Math.min(JOBS, shared.length) }, (_, i) => lane(shared, servers[i])),
+  );
+  await lane(alone, servers[0]);
+  cancellation.signal.throwIfAborted();
+  const elapsed = (Date.now() - t0) / 1000;
+  const run = JSON.parse(fs.readFileSync(path.join(OUT, "run.json"), "utf8"));
+  fs.writeFileSync(
+    path.join(OUT, "run.json"),
+    JSON.stringify({ ...run, elapsed, finished: new Date().toISOString() }, null, 2) + "\n",
+  );
+  const s = summary(files, elapsed);
+  let text = s.text;
+  // --recheck: a test that fails only beside another file checks the wall clock (docs/OPERATING.md,
+  // "Running the suite fast"). Its failure still counts; this only says which ones pass alone, so
+  // they can join the solo list.
+  if (arg("recheck") && s.failed.length) {
+    const dir = path.join(OUT, "recheck");
+    fs.mkdirSync(dir, { recursive: true });
+    const again = [...new Set(s.failed.map((t) => t.file))];
+    console.log(`\nRechecking ${again.length} files alone: ${again.join(", ")}`);
+    const lines = ["", "## Rechecked alone", "", "The failures above still count. Each failed file ran once more, alone:", ""]; // prettier-ignore
+    for (const f of again) {
+      cancellation.signal.throwIfAborted();
+      const r = await runFile(f, dir, servers[0]);
+      cancellation.signal.throwIfAborted();
+      const failedAgain = r.ok ? collect(JSON.parse(fs.readFileSync(reportOf(f, dir), "utf8"))).filter((t) => !["passed", "skipped"].includes(t.status)) : null; // prettier-ignore
+      const note = !failedAgain ? "no report" : failedAgain.length ? `failed again: ${failedAgain.map((t) => `${t.line}`).join(", ")}` : "passed alone (a wall-clock check: a candidate for the solo list)"; // prettier-ignore
+      lines.push(`- \`${f}\`: ${note}.`);
+      console.log(`  ${f}: ${note}`);
+    }
+    text += lines.join("\n") + "\n";
+  }
+  await cleanup();
+  fs.writeFileSync(path.join(OUT, "summary.md"), text);
+  console.log("\n" + text);
+  if (arg("save-times") && !s.missing.length) {
+    const seconds = { ...times };
+    for (const r of s.rows) seconds[r.f] = Math.round(r.wall);
+    const sorted = Object.fromEntries(Object.keys(seconds).filter((f) => all.includes(f)).sort().map((f) => [f, seconds[f]])); // prettier-ignore
+    fs.writeFileSync(PLAN, JSON.stringify({ ...timing, seconds: sorted }, null, 2) + "\n");
+  }
+  process.exitCode =
+    signalCode || (s.failed.length || s.missing.length || s.processErrors.length ? 1 : 0);
+} catch (error) {
+  if (!signalCode) throw error;
+} finally {
+  await cleanup();
 }
-server?.kill();
-xvfb?.kill();
-fs.writeFileSync(path.join(OUT, "summary.md"), text);
-console.log("\n" + text);
-if (arg("save-times") && !s.missing.length) {
-  const seconds = { ...times };
-  for (const r of s.rows) seconds[r.f] = Math.round(r.wall);
-  const sorted = Object.fromEntries(Object.keys(seconds).filter((f) => all.includes(f)).sort().map((f) => [f, seconds[f]])); // prettier-ignore
-  fs.writeFileSync(PLAN, JSON.stringify({ ...timing, seconds: sorted }, null, 2) + "\n");
-}
-process.exit(s.failed.length || s.missing.length ? 1 : 0);

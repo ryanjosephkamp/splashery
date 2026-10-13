@@ -3,7 +3,7 @@
 // arrays. Page tests force the phone with ?phone=1, since the test browser
 // has a fine pointer.
 
-import { test, expect } from "@playwright/test";
+import { test, expect } from "./suite-load.mjs";
 import { FluidWorld } from "../src/fluids/world.js";
 import { PHONE_ENV } from "../src/fluids/phone.js";
 

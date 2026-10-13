@@ -7,7 +7,7 @@
 //
 // Like tests/wd.spec.mjs, the page runs with ?clock=manual.
 
-import { test, expect } from "@playwright/test";
+import { test, expect } from "./suite-load.mjs";
 import fs from "node:fs";
 
 const URL = (extra = "", tier = "mid") =>
