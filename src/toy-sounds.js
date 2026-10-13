@@ -12,6 +12,8 @@
 const TOY_PIANO_SONG = "C5 C5 G5 G5 A5 A5 G5 - F5 F5 E5 E5 D5 D5 C5";
 
 export const TOY_SOUNDS = {
+  // The Doppler recipe drives sine oscillators through Sound.audio() and Sound.master after a tap.
+  doppler: { voice: "tone", f: 440, vol: 0.12, decay: 0.35 },
   // ---- Photoreal r2 (lane Photoreal r2) ----
   "heart-donut": { voice: "squish", pitch: 1.3, bright: 0.5, decay: 0.5 },
   // Photoreal r3 (the owner's review of October 3, 2026): the first sound only, as the boat rocks.
