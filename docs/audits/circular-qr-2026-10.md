@@ -133,8 +133,52 @@ sharper edges.
 
 ## Verification and motion proof
 
-Verification is in progress; the final command results will be recorded before the draft PR is
-opened.
+Chromium is `/usr/bin/chromium`, using the repository's SwiftShader WebGL2 configuration. The new
+Circle and lab files passed **20 tests**:
+
+```sh
+SPLASHERY_CHROMIUM=/usr/bin/chromium npx playwright test tests/cdx-circle-qr.spec.mjs tests/cdx-circle-lab.spec.mjs
+```
+
+The required regression selection contains 216 tests in 20 files:
+
+```sh
+SPLASHERY_CHROMIUM=/usr/bin/chromium npx playwright test tests/qr*.spec.mjs tests/taps.spec.mjs tests/help.spec.mjs tests/unit.spec.mjs tests/smoke.spec.mjs
+```
+
+The selection was completed across group runs and targeted retries: **215 of 216 requested cases
+passed, with one existing failure and no skipped or missing cases**. This was not a single clean
+suite run. Comparing the listed cases with the completed logs confirms coverage of every requested
+case.
+
+| Group                    | Final result across runs and retries                                      |
+| ------------------------ | ------------------------------------------------------------------------- |
+| New Circle and lab tests | 20 passed                                                                 |
+| Existing `qr*` tests     | 69 passed; 1 existing snapshot failure                                    |
+| `taps`                   | 62 passed                                                                 |
+| `help`                   | 14 passed after targeted retries                                          |
+| `unit`                   | 20 passed                                                                 |
+| `smoke`                  | 50 passed after a targeted retry; WebGPU and embed transfer checks passed |
+
+The initial process ended after 81 cases, so the remaining groups were run separately. Three help
+checks failed initially and passed on targeted retries; the phone help-line check also failed on the
+immutable pre-change baseline. A shared-server shutdown interrupted the first remainder run, causing
+connection-refused failures. The dedicated-port run was later interrupted with 19 smoke cases
+unfinished; only those cases were restarted, together with four checks of incoming main changes.
+That final run passed all 23 cases. A procedural-seed smoke check failed once and passed on both
+targeted retries. `main` was incorporated through `acaebd19`; its updated About panel passed at both
+sizes, and loading, seed generation, and the remaining rendering checks passed after that update.
+The QR implementation did not change during these follow-ups.
+
+The existing `qr4-craft` shared-builder snapshot assertion fails on this branch and on unmodified
+`main` (`acaebd19`). Both produce SHA-256
+`d98ad9f651252c2f37ce6d6530dc7aa8c45fca762319a496421846fec9788eb6`; the test expects
+`b3918a78fddc50518d2fef2cecb12cee1cf3b16b05a450e61a166fb39b482144`. The protected assertion is
+unchanged. This existing failure prevents claiming a completely green regression selection.
+
+Before publication, `npx prettier --check .`, `node tools/us-english.mjs --diff`, and
+`git diff --check` passed. Standard screenshots were restored; the task's proof captures and
+before-and-after stills remain committed.
 
 The new tests read actual Chromium WebGL2 captures of all five Circle toys with both decoders, check
 exports and decoration invariance, check the anatomy default and legend, and exercise the reported
@@ -153,8 +197,12 @@ wrapper: 390-pixel captures, 390 × 844 page viewport, eight frames per second, 
 flip tiles for the circular build. Automatic scan jobs are disabled during manual clock stepping to
 avoid competing captures. The temporary wrapper changes no committed tool or engine file.
 
-Clips will be published only on `codex/circular-qr-clips`, which is never merged. The draft PR will
-link every clip.
+The
+[six motion clips](https://github.com/ryanjosephkamp/splashery/tree/codex/circular-qr-clips/docs/audits/circular-qr-clips)
+are published only on `codex/circular-qr-clips`, which is never merged. The draft PR links every
+clip.
+[Separate default-setting captures](https://github.com/ryanjosephkamp/splashery/blob/codex/circular-qr-clips/docs/audits/circular-qr-clips/default-reads.json)
+also decoded all five Circle toys with both readers at phone size.
 
 ## Scope and handback
 
