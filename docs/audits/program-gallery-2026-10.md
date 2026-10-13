@@ -3,40 +3,43 @@
 The gallery has 60 programs in six groups of ten. Each line below repeats the entry title and its
 one-sentence description, and links to the shape reference when one applies.
 
-- **Spun sphere** (Classic surfaces): A sphere turns once around its vertical axis while its
-  latitude stripes stay in place. ([source](https://en.wikipedia.org/wiki/Sphere))
+- **Spun sphere** (Classic surfaces): A sphere turns once around its vertical axis, and its hue runs
+  around the axis (by longitude), so the colors turn with it.
+  ([source](https://en.wikipedia.org/wiki/Sphere))
 - **Rainbow torus** (Classic surfaces): A round tube wraps around a ring as its colors follow the
   small circle. ([source](https://en.wikipedia.org/wiki/Torus))
 - **Möbius ribbon** (Classic surfaces): A narrow band turns through one half twist before its edges
   meet. ([source](https://en.wikipedia.org/wiki/M%C3%B6bius_strip))
-- **Figure-eight Klein bottle** (Classic surfaces): This immersed Klein bottle crosses itself where
-  its neck passes through the body. ([source](https://en.wikipedia.org/wiki/Klein_bottle))
+- **Figure-eight Klein bottle** (Classic surfaces): This immersed Klein bottle is a figure-eight
+  tube that crosses itself along a ring. ([source](https://en.wikipedia.org/wiki/Klein_bottle))
 - **Pseudosphere** (Classic surfaces): Two tractrix horns meet at a sharp rim: a surface that curves
   the opposite way from a sphere. ([source](https://en.wikipedia.org/wiki/Pseudosphere))
-- **Enneper surface** (Classic surfaces): A simple polynomial surface curls into three spreading
-  lobes. ([source](https://en.wikipedia.org/wiki/Enneper_surface))
+- **Enneper surface** (Classic surfaces): A simple polynomial surface curls into spreading lobes.
+  ([source](https://en.wikipedia.org/wiki/Enneper_surface))
 - **Catenoid** (Classic surfaces): A catenoid pinches between two wide circular rims.
   ([source](https://en.wikipedia.org/wiki/Catenoid))
-- **Helicoid** (Classic surfaces): A ruled helicoid spirals upward like a ramp with no outer rim.
-  ([source](https://en.wikipedia.org/wiki/Helicoid))
+- **Helicoid** (Classic surfaces): A finite ruled helicoid patch winds like a ramp around the Z
+  axis, with a helical edge on its outer rim. ([source](https://en.wikipedia.org/wiki/Helicoid))
 - **Dini surface** (Classic surfaces): Dini’s surface twists a trumpet shape into a tight spiral.
   ([source](https://en.wikipedia.org/wiki/Dini%27s_surface))
 - **Shell growth** (Classic surfaces): A logarithmic tube grows wider as it winds away from its
   narrow tip. ([source](https://en.wikipedia.org/wiki/Seashell))
-- **Lissajous knot** (Curves as tubes or beads): Three harmonics trace a closed, crossing space
-  curve with a fine bead tube. ([source](https://en.wikipedia.org/wiki/Lissajous_curve))
+- **Lissajous curve** (Curves as tubes or beads): Four frequencies (2, 3, 4, and 7) trace a closed
+  space curve that crosses itself, with a fine bead tube.
+  ([source](https://en.wikipedia.org/wiki/Lissajous_curve))
 - **Trefoil tube** (Curves as tubes or beads): A tube follows the classic three-crossing trefoil
   knot and rotates in place. ([source](https://en.wikipedia.org/wiki/Trefoil_knot))
 - **Cinquefoil knot** (Curves as tubes or beads): Five over-and-under crossings wind around a torus
   in this thicker knot. ([source](https://en.wikipedia.org/wiki/Torus_knot))
-- **Rose curve beads** (Curves as tubes or beads): A six-petal planar rose becomes a dotted
-  three-dimensional curve. ([source](<https://en.wikipedia.org/wiki/Rose_(mathematics)>))
+- **Rose curve beads** (Curves as tubes or beads): The curve cos(6u) traced in a plane makes a rose
+  of 12 petals (an even multiple makes twice as many), and a gentle vertical wave lifts it into a
+  dotted three-dimensional curve. ([source](<https://en.wikipedia.org/wiki/Rose_(mathematics)>))
 - **Figure-eight knot** (Curves as tubes or beads): This closed bead tube traces the simplest knot
   that is not a torus knot. ([source](https://en.wikipedia.org/wiki/Figure-eight_knot))
 - **Double helix** (Curves as tubes or beads): Two spiral strands wind together around a long axis.
   ([source](https://en.wikipedia.org/wiki/DNA))
-- **Slinky coil** (Curves as tubes or beads): A spring winds upward in eight turns with a narrow
-  tube around its wire. ([source](https://en.wikipedia.org/wiki/Helix))
+- **Slinky coil** (Curves as tubes or beads): A spring winds upward in eight turns as a narrow
+  ribbon. ([source](https://en.wikipedia.org/wiki/Helix))
 - **Lorenz-like look-alike** (Curves as tubes or beads): This butterfly loop is a Lorenz-like
   look-alike, not a Lorenz-system solution.
 - **Rössler-like look-alike** (Curves as tubes or beads): A looping spiral suggests a Rössler
@@ -86,8 +89,8 @@ one-sentence description, and links to the shape reference when one applies.
   two-axis wave. ([source](https://en.wikipedia.org/wiki/Standing_wave))
 - **Height hue bands** (Color play): A ridged surface assigns a full rainbow cycle to its height.
   ([source](https://en.wikipedia.org/wiki/Wave))
-- **Angle around the torus** (Color play): Hue sweeps around the large ring while a second color
-  band follows the tube. ([source](https://en.wikipedia.org/wiki/Torus))
+- **Angle around the torus** (Color play): Hue runs once around the large ring, so each slice across
+  the tube has one color. ([source](https://en.wikipedia.org/wiki/Torus))
 - **Curvature-like bands** (Color play): Nested sine ridges color a saddle with a pattern that
   suggests changing curvature. ([source](https://en.wikipedia.org/wiki/Curvature))
 - **RGB sunset gradient** (Color play): Red rises with height, green follows the horizontal angle,
