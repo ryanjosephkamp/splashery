@@ -379,7 +379,8 @@ function pictureSplats(w, budget, shape = "square", pic = null) {
   return { splats, half: H };
 }
 
-const optionsKey = (o) => JSON.stringify(tidy(o || {})) + (o?.picture ?? "");
+const optionsKey = (o) =>
+  JSON.stringify(tidy(o || {})) + (o?.picture ?? "") + (o?.shape || "square");
 
 // Reads the woven layout at phone size and smaller (picture.js), then the
 // stage's own picture.

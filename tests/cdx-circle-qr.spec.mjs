@@ -146,6 +146,22 @@ test("Circle Picture QR handles overlong saved text with its existing fallback",
   expect(errors).toEqual([]);
 });
 
+test("Make it scan handles a Circle recipe whose own picture is missing", async ({ page }) => {
+  const errors = [];
+  page.on("pageerror", (error) => errors.push(error.message));
+  await open(page, "qr-picture", { picture: "own", size: "fit" });
+  const info = await page.evaluate(async () => {
+    const q = window.__splashery.qrCraft;
+    await q.makeItScan();
+    const p = q.picture();
+    return { error: p.error, text: p.woven.code.text, shape: p.options.shape };
+  });
+  expect(info.error).toContain("isn't on this device");
+  expect(info.shape).toBe("circle");
+  expect(info.text).toBe(TEXT);
+  expect(errors).toEqual([]);
+});
+
 test("Circle QR keeps its shape and text in PNG, GIF, and scene recipe exports", async ({
   page,
 }) => {
