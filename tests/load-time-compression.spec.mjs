@@ -11,6 +11,42 @@ test("opening gzip copies preserve every original byte", () => {
     expect(gunzipSync(fs.readFileSync(file)).equals(fs.readFileSync(source)), source).toBe(true);
 });
 
+test("the mapped engine transfers while the app entry is held", async ({ page }) => {
+  await page.addInitScript(() => {
+    window.__mappedEnginePreloaded = false;
+    new MutationObserver((records) => {
+      for (const record of records)
+        for (const node of record.addedNodes)
+          if (
+            node instanceof HTMLLinkElement &&
+            node.rel === "modulepreload" &&
+            node.href.startsWith("blob:")
+          )
+            node.addEventListener(
+              "load",
+              () => {
+                window.__mappedEnginePreloaded = true;
+              },
+              { once: true },
+            );
+    }).observe(document, { childList: true, subtree: true });
+  });
+  let release;
+  const held = new Promise((resolve) => (release = resolve));
+  await page.route("**/src/app.js", async (route) => {
+    await held;
+    await route.continue();
+  });
+  await page.goto("/?renderer=webgl2&profile=weak&adapt=off", { waitUntil: "commit" });
+  try {
+    await page.waitForFunction(() => window.__mappedEnginePreloaded, null, { timeout: 10000 });
+  } finally {
+    release();
+  }
+  await page.waitForSelector("body[data-ready='true']", { timeout: 180000 });
+  expect(await page.evaluate(async () => (await import("/src/pc.js")).version)).toBe("2.22.3");
+});
+
 test("the app graph transfers while the selected scan helper is held", async ({ page }) => {
   let release;
   const held = new Promise((resolve) => (release = resolve));

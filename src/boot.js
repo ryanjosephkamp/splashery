@@ -53,6 +53,12 @@
       map.textContent = JSON.stringify({ imports });
       document.head.appendChild(map);
     }
+    // Preserve the original engine preload: fetch and compile the mapped
+    // module while the app's remaining dependency graph is still loading.
+    const preload = document.createElement("link");
+    preload.rel = "modulepreload";
+    preload.href = imports[engine.href] || engine.href;
+    document.head.appendChild(preload);
     // Warm the selected scan independently of the app's larger module graph.
     // Both entry modules await its shared promise before GPU initialization.
     import("./opening-pack.js").catch(() => {});
