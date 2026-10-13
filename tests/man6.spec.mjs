@@ -75,6 +75,16 @@ test.describe("R2-F02: the covariance demo's verdicts", () => {
     await page.screenshot({ path: path.join(SHOTS, "man6-covariance-390x844.png") });
     await set(0.2, 0.2, 0.2);
     await expect(v).toContainText("determinant is 0");
+    // Positive in exact arithmetic but below double precision's reach (the sliders cannot reach it):
+    // the helper calls it flat, with a determinant that is not 0, and the page says "near-singular".
+    const facts = await page.evaluate(async () => {
+      const { covFacts } = await import("/manual/demo-math.js");
+      return covFacts({ a: 1e-15, b: 0, c: 1 });
+    });
+    expect(facts.flat).toBe(true);
+    expect(facts.det).toBeGreaterThan(0);
+    const src = await page.evaluate(() => fetch("/manual/demos.js").then((r) => r.text()));
+    expect(src).toContain("numerically near-singular");
     await set(0.3, 0, 0.2);
     await expect(v).toContainText("Valid");
     await ctx.close();
