@@ -14,6 +14,8 @@
 
     <script type="module" src="fold.js"></script>
     <script type="module" src="nav.js"></script>
+    <script type="module" src="demos.js"></script>
+    <script type="module" src="demos2.js"></script>
     <!-- HEAD:END -->
   </head>
   <body>
@@ -47,46 +49,18 @@
         </button>
         <nav class="outline-panel" id="manual-contents" aria-label="The manual's chapters" hidden>
           <ol>
-            <li><a href="index.html" rel="noopener" target="_blank">Contents</a></li>
+            <li><a href="index.html">Contents</a></li>
+            <li><a href="splat.html">Chapter 1: What a splat is</a></li>
+            <li><a href="toy.html">Chapter 2: How a toy is built</a></li>
+            <li><a href="language.html">Chapter 3: The splat equation language</a></li>
+            <li><a href="gallery.html">Chapter 4: A gallery of programs</a></li>
+            <li><a href="pictures.html">Chapter 5: Pictures, screens, and your own input</a></li>
+            <li><a href="moving.html">Chapter 6: Moving things</a></li>
+            <li><a href="data.html">Chapter 7: Real data as splats</a></li>
+            <li><a href="photo3d.html">Chapter 8: Photos and video into 3D</a></li>
+            <li><a href="codes.html">Chapter 9: Codes and pages</a></li>
             <li>
-              <a href="splat.html" rel="noopener" target="_blank">Chapter 1: What a splat is</a>
-            </li>
-            <li>
-              <a href="toy.html" rel="noopener" target="_blank">Chapter 2: How a toy is built</a>
-            </li>
-            <li>
-              <a href="language.html" rel="noopener" target="_blank"
-                >Chapter 3: The splat equation language</a
-              >
-            </li>
-            <li>
-              <a href="gallery.html" rel="noopener" target="_blank"
-                >Chapter 4: A gallery of programs</a
-              >
-            </li>
-            <li>
-              <a href="pictures.html" rel="noopener" target="_blank"
-                >Chapter 5: Pictures, screens, and your own input</a
-              >
-            </li>
-            <li>
-              <a href="moving.html" rel="noopener" target="_blank">Chapter 6: Moving things</a>
-            </li>
-            <li>
-              <a href="data.html" rel="noopener" target="_blank">Chapter 7: Real data as splats</a>
-            </li>
-            <li>
-              <a href="photo3d.html" rel="noopener" target="_blank"
-                >Chapter 8: Photos and video into 3D</a
-              >
-            </li>
-            <li>
-              <a href="codes.html" rel="noopener" target="_blank">Chapter 9: Codes and pages</a>
-            </li>
-            <li>
-              <a href="make.html" aria-current="page" rel="noopener" target="_blank"
-                >Chapter 10: Make your own</a
-              >
+              <a href="make.html" aria-current="page">Chapter 10: Make your own</a>
               <ol class="outline-sub" aria-label="In this chapter">
                 <li><a href="#five-ways">Five ways to make your own</a></li>
                 <li><a href="#roll-one-and-open-one">Roll one and open one</a></li>
@@ -97,38 +71,24 @@
                 <li><a href="#try-it-10">Where to try it</a></li>
               </ol>
             </li>
-            <li>
-              <a href="more.html" rel="noopener" target="_blank">What else Splashery does now</a>
-            </li>
-            <li>
-              <a href="unique.html" rel="noopener" target="_blank"
-                >What Splashery can do that other splat tools can't</a
-              >
-            </li>
-            <li><a href="built.html" rel="noopener" target="_blank">How Splashery is built</a></li>
-            <li>
-              <a href="share.html" rel="noopener" target="_blank">Share links and QR codes</a>
-            </li>
-            <li>
-              <a href="experiments.html" rel="noopener" target="_blank"
-                >Open questions: other choices, not tried yet</a
-              >
-            </li>
-            <li>
-              <a href="later.html" rel="noopener" target="_blank">What comes later: Code a toy</a>
-            </li>
-            <li><a href="glossary.html" rel="noopener" target="_blank">Glossary</a></li>
-            <li><a href="reading.html" rel="noopener" target="_blank">Further reading</a></li>
-            <li><a href="references.html" rel="noopener" target="_blank">References</a></li>
-            <li><a href="card.html" rel="noopener" target="_blank">Quick reference</a></li>
+            <li><a href="more.html">What else Splashery does now</a></li>
+            <li><a href="unique.html">What Splashery can do that other splat tools can't</a></li>
+            <li><a href="built.html">How Splashery is built</a></li>
+            <li><a href="share.html">Share links and QR codes</a></li>
+            <li><a href="experiments.html">Open questions: other choices, not tried yet</a></li>
+            <li><a href="later.html">What comes later: Code a toy</a></li>
+            <li><a href="glossary.html">Glossary</a></li>
+            <li><a href="reading.html">Further reading</a></li>
+            <li><a href="references.html">References</a></li>
+            <li><a href="card.html">Quick reference</a></li>
           </ol>
         </nav>
       </div>
       <nav class="pager no-print" aria-label="Previous and next chapter, top">
-        <a class="pager-prev" rel="prev noopener" href="codes.html" target="_blank"
+        <a class="pager-prev" rel="prev" href="codes.html"
           ><span class="pager-word">← Previous</span
           ><span class="pager-title">Chapter 9: Codes and pages</span></a
-        ><a class="pager-next" rel="next noopener" href="more.html" target="_blank"
+        ><a class="pager-next" rel="next" href="more.html"
           ><span class="pager-word">Next →</span
           ><span class="pager-title">What else Splashery does now</span></a
         >
@@ -441,13 +401,61 @@
         colors are kept), SOG (the smallest; base colors only), and <code>.splat</code> (simple;
         base colors only). A file is saved to a place you choose.
       </p>
-      <div class="demo-placeholder">
-        <p class="demo-tag">A demo goes here later</p>
-        <p>
-          A tiny splat file in the page, with a crop box and a floater filter you can move, and the
-          counts changing as you do.
+      <section class="demo-live" data-demo="splat-file" id="demo-file">
+        <h4>Try it: crop a splat file and filter its floaters</h4>
+        <p class="hint">
+          A tiny splat file (420 splats) lives in this page: a ring and sixty strays. Drag inside
+          the picture to move the crop box (or use the arrow keys), change its size, and set how far
+          a splat may sit from its neighbors before the floater filter calls it a stray (a lower
+          number removes more). Splats outside the box fade; the floaters the filter removes turn
+          red. This runs the Splat toolkit's own crop and filter. Nothing leaves this page.
         </p>
-      </div>
+        <canvas
+          id="sf-canvas"
+          width="400"
+          height="300"
+          tabindex="0"
+          role="img"
+          aria-label="A ring of splats with a crop box"
+        ></canvas>
+        <div class="controls">
+          <label for="sf-size"
+            >Box size
+            <input id="sf-size" type="range" min="0.2" max="1.4" step="0.05" value="1" /><output
+              id="sf-size-out"
+              for="sf-size"
+            ></output
+          ></label>
+          <label for="sf-strength"
+            >Tolerance
+            <input id="sf-strength" type="range" min="0.5" max="3" step="0.1" value="2" /><output
+              id="sf-strength-out"
+              for="sf-strength"
+            ></output
+          ></label>
+          <label class="check"
+            ><input id="sf-floaters" type="checkbox" checked /> Remove floaters</label
+          >
+        </div>
+        <div class="row"><button type="button" id="sf-reset">Reset</button></div>
+        <p class="readout" id="sf-counts" aria-live="polite"></p>
+        <script type="module" src="demos6.js"></script>
+      </section>
+      <figure class="demo-still" data-demo-still="splat-file">
+        <img
+          src="img/demo-file.png"
+          alt="The splat file demo: a ring of colored splats inside a dashed crop box, with a few red strays removed and the counts underneath"
+        />
+        <figcaption>
+          Interactive in the web version:
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/manual/make.html#demo-file"
+            target="_blank"
+            rel="noopener"
+            >ryanjosephkamp.github.io/splashery/manual/make.html#demo-file</a
+          >
+        </figcaption>
+      </figure>
 
       <h3 id="writing-a-recipe">Writing a recipe</h3>
       <p>
@@ -582,10 +590,10 @@
 
       <!-- NAV:BOTTOM:START (written by manual/build-pages.mjs; do not edit by hand) -->
       <nav class="pager no-print" aria-label="Previous and next chapter, bottom">
-        <a class="pager-prev" rel="prev noopener" href="codes.html" target="_blank"
+        <a class="pager-prev" rel="prev" href="codes.html"
           ><span class="pager-word">← Previous</span
           ><span class="pager-title">Chapter 9: Codes and pages</span></a
-        ><a class="pager-next" rel="next noopener" href="more.html" target="_blank"
+        ><a class="pager-next" rel="next" href="more.html"
           ><span class="pager-word">Next →</span
           ><span class="pager-title">What else Splashery does now</span></a
         >

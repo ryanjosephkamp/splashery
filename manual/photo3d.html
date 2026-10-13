@@ -14,6 +14,8 @@
 
     <script type="module" src="fold.js"></script>
     <script type="module" src="nav.js"></script>
+    <script type="module" src="demos.js"></script>
+    <script type="module" src="demos2.js"></script>
     <!-- HEAD:END -->
   </head>
   <body>
@@ -47,38 +49,16 @@
         </button>
         <nav class="outline-panel" id="manual-contents" aria-label="The manual's chapters" hidden>
           <ol>
-            <li><a href="index.html" rel="noopener" target="_blank">Contents</a></li>
+            <li><a href="index.html">Contents</a></li>
+            <li><a href="splat.html">Chapter 1: What a splat is</a></li>
+            <li><a href="toy.html">Chapter 2: How a toy is built</a></li>
+            <li><a href="language.html">Chapter 3: The splat equation language</a></li>
+            <li><a href="gallery.html">Chapter 4: A gallery of programs</a></li>
+            <li><a href="pictures.html">Chapter 5: Pictures, screens, and your own input</a></li>
+            <li><a href="moving.html">Chapter 6: Moving things</a></li>
+            <li><a href="data.html">Chapter 7: Real data as splats</a></li>
             <li>
-              <a href="splat.html" rel="noopener" target="_blank">Chapter 1: What a splat is</a>
-            </li>
-            <li>
-              <a href="toy.html" rel="noopener" target="_blank">Chapter 2: How a toy is built</a>
-            </li>
-            <li>
-              <a href="language.html" rel="noopener" target="_blank"
-                >Chapter 3: The splat equation language</a
-              >
-            </li>
-            <li>
-              <a href="gallery.html" rel="noopener" target="_blank"
-                >Chapter 4: A gallery of programs</a
-              >
-            </li>
-            <li>
-              <a href="pictures.html" rel="noopener" target="_blank"
-                >Chapter 5: Pictures, screens, and your own input</a
-              >
-            </li>
-            <li>
-              <a href="moving.html" rel="noopener" target="_blank">Chapter 6: Moving things</a>
-            </li>
-            <li>
-              <a href="data.html" rel="noopener" target="_blank">Chapter 7: Real data as splats</a>
-            </li>
-            <li>
-              <a href="photo3d.html" aria-current="page" rel="noopener" target="_blank"
-                >Chapter 8: Photos and video into 3D</a
-              >
+              <a href="photo3d.html" aria-current="page">Chapter 8: Photos and video into 3D</a>
               <ol class="outline-sub" aria-label="In this chapter">
                 <li><a href="#photo-to-3d">Photo to 3D</a></li>
                 <li><a href="#the-sharp-view">The Sharp view</a></li>
@@ -88,44 +68,26 @@
                 <li><a href="#try-it-8">Where to try it</a></li>
               </ol>
             </li>
-            <li>
-              <a href="codes.html" rel="noopener" target="_blank">Chapter 9: Codes and pages</a>
-            </li>
-            <li>
-              <a href="make.html" rel="noopener" target="_blank">Chapter 10: Make your own</a>
-            </li>
-            <li>
-              <a href="more.html" rel="noopener" target="_blank">What else Splashery does now</a>
-            </li>
-            <li>
-              <a href="unique.html" rel="noopener" target="_blank"
-                >What Splashery can do that other splat tools can't</a
-              >
-            </li>
-            <li><a href="built.html" rel="noopener" target="_blank">How Splashery is built</a></li>
-            <li>
-              <a href="share.html" rel="noopener" target="_blank">Share links and QR codes</a>
-            </li>
-            <li>
-              <a href="experiments.html" rel="noopener" target="_blank"
-                >Open questions: other choices, not tried yet</a
-              >
-            </li>
-            <li>
-              <a href="later.html" rel="noopener" target="_blank">What comes later: Code a toy</a>
-            </li>
-            <li><a href="glossary.html" rel="noopener" target="_blank">Glossary</a></li>
-            <li><a href="reading.html" rel="noopener" target="_blank">Further reading</a></li>
-            <li><a href="references.html" rel="noopener" target="_blank">References</a></li>
-            <li><a href="card.html" rel="noopener" target="_blank">Quick reference</a></li>
+            <li><a href="codes.html">Chapter 9: Codes and pages</a></li>
+            <li><a href="make.html">Chapter 10: Make your own</a></li>
+            <li><a href="more.html">What else Splashery does now</a></li>
+            <li><a href="unique.html">What Splashery can do that other splat tools can't</a></li>
+            <li><a href="built.html">How Splashery is built</a></li>
+            <li><a href="share.html">Share links and QR codes</a></li>
+            <li><a href="experiments.html">Open questions: other choices, not tried yet</a></li>
+            <li><a href="later.html">What comes later: Code a toy</a></li>
+            <li><a href="glossary.html">Glossary</a></li>
+            <li><a href="reading.html">Further reading</a></li>
+            <li><a href="references.html">References</a></li>
+            <li><a href="card.html">Quick reference</a></li>
           </ol>
         </nav>
       </div>
       <nav class="pager no-print" aria-label="Previous and next chapter, top">
-        <a class="pager-prev" rel="prev noopener" href="data.html" target="_blank"
+        <a class="pager-prev" rel="prev" href="data.html"
           ><span class="pager-word">← Previous</span
           ><span class="pager-title">Chapter 7: Real data as splats</span></a
-        ><a class="pager-next" rel="next noopener" href="codes.html" target="_blank"
+        ><a class="pager-next" rel="next" href="codes.html"
           ><span class="pager-word">Next →</span
           ><span class="pager-title">Chapter 9: Codes and pages</span></a
         >
@@ -158,11 +120,7 @@
       </p>
       <p>
         <b>How Splashery does it.</b> A depth model works out, for every part of the picture, how
-        far away it is. The model is Depth Anything V2 Small [<a
-          href="references.html#ref-13"
-          rel="noopener"
-          target="_blank"
-          >13</a
+        far away it is. The model is Depth Anything V2 Small [<a href="references.html#ref-13">13</a
         >] in its 8-bit quantized form, a file of 27 MB that runs in your browser through ONNX
         Runtime Web on one thread. (A page on GitHub Pages cannot share memory between threads, so
         the runtime has just one.) Both files are Splashery's own, served from the site; nothing is
@@ -232,11 +190,76 @@
         unaffected, since it reads the splats.
       </p>
       <p>
-        <b>Why this way.</b> Splashery is primarily splat-based but not only splat-based, and this
-        is the clearest place it is not. The Sharp view is there because splats are the wrong tool
-        for reading small text, and because the toy is still the same toy: the same depth, the same
-        controls, the same saved link.
+        <b>Why this way.</b> Splashery is primarily splat-based but not entirely splat-based, and
+        this is the clearest place it is not. The Sharp view is there because splats are the wrong
+        tool for reading small text, and because the toy is still the same toy: the same depth, the
+        same controls, the same saved link.
       </p>
+
+      <section class="demo-live" data-demo="photo-depth" id="demo-depth">
+        <h4>Try it: a picture cut into depth layers</h4>
+        <p class="hint">
+          A small picture with a depth for every dot (made by hand for this page, not by a model).
+          On the left the depth is cut into eight layers, each a flat card; on the right is the
+          Sharp view's way, one continuous relief. Raise <b>Depth</b> and turn the view (drag the
+          picture, or use the slider): the layers part and leave gaps, while the relief stretches.
+          At zero depth both are the flat picture. Nothing leaves this page.
+        </p>
+        <div class="photo-pair">
+          <figure>
+            <canvas
+              id="pd-layers"
+              width="200"
+              height="150"
+              role="img"
+              aria-label="The picture as eight layers at their depths"
+            ></canvas>
+            <figcaption>Layers</figcaption>
+          </figure>
+          <figure>
+            <canvas
+              id="pd-sharp"
+              width="200"
+              height="150"
+              role="img"
+              aria-label="The same picture as one continuous relief"
+            ></canvas>
+            <figcaption>Sharp view</figcaption>
+          </figure>
+        </div>
+        <div class="controls">
+          <label for="pd-depth"
+            >Depth
+            <input id="pd-depth" type="range" min="0" max="1" step="0.01" value="0.8" /><output
+              id="pd-depth-out"
+              for="pd-depth"
+            ></output
+          ></label>
+          <label for="pd-turn"
+            >Turn the view
+            <input id="pd-turn" type="range" min="-1" max="1" step="0.01" value="0.7" /><output
+              id="pd-turn-out"
+              for="pd-turn"
+            ></output
+          ></label>
+        </div>
+        <script type="module" src="demos6.js"></script>
+      </section>
+      <figure class="demo-still" data-demo-still="photo-depth">
+        <img
+          src="img/demo-depth.png"
+          alt="The depth demo: a small landscape with a house and a tree drawn as eight depth layers with gaps between them, beside the same picture as one stretched relief"
+        />
+        <figcaption>
+          Interactive in the web version:
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/manual/photo3d.html#demo-depth"
+            target="_blank"
+            rel="noopener"
+            >ryanjosephkamp.github.io/splashery/manual/photo3d.html#demo-depth</a
+          >
+        </figcaption>
+      </figure>
 
       <h3 id="moving-photo-to-3d">Moving photo to 3D</h3>
       <p>
@@ -266,24 +289,18 @@
         different and harder: it takes <i>many</i> views of a still scene (the frames of a video
         that walks or flies around something), works out where the camera was for each, and trains a
         real 3D Gaussian splat scene that looks right from each of those places. It is the method of
-        Chapter 1's first reference [<a href="references.html#ref-1" rel="noopener" target="_blank"
-          >1</a
-        >], running in your browser. A scene that stands still works. A moving car or person blurs
-        or vanishes.
+        Chapter 1's first reference [<a href="references.html#ref-1">1</a>], running in your
+        browser. A scene that stands still works. A moving car or person blurs or vanishes.
       </p>
       <p>
-        <b>How Splashery does it.</b> It uses Splat.js [<a
-          href="references.html#ref-21"
-          rel="noopener"
-          target="_blank"
-          >21</a
-        >], an MIT-licensed library vendored in <code>vendor/splatjs/</code> and loaded only when
-        you open a video in this toy. The toy first picks the sharpest frame in each window of the
-        stretch you choose. Splat.js then works out the camera's path (it finds features, matches
-        them between frames, registers each camera, and adjusts them all together), seeds a splat
-        cloud, and trains it on the graphics chip through WebGPU: the splats' places, sizes, colors,
-        and opacities are nudged by gradient descent until the scene renders like each frame. The
-        result is shown as the toy's splats, and you can turn it, zoom, save it as a PLY, or tap
+        <b>How Splashery does it.</b> It uses Splat.js [<a href="references.html#ref-21">21</a>], an
+        MIT-licensed library vendored in <code>vendor/splatjs/</code> and loaded only when you open
+        a video in this toy. The toy first picks the sharpest frame in each window of the stretch
+        you choose. Splat.js then works out the camera's path (it finds features, matches them
+        between frames, registers each camera, and adjusts them all together), seeds a splat cloud,
+        and trains it on the graphics chip through WebGPU: the splats' places, sizes, colors, and
+        opacities are nudged by gradient descent until the scene renders like each frame. The result
+        is shown as the toy's splats, and you can turn it, zoom, save it as a PLY, or tap
         <b>Replay flight</b> to fly the video's own camera path with its sound.
       </p>
       <p>
@@ -366,13 +383,6 @@
           4.0. Credits and licenses show beside each toy in the Playground.
         </figcaption>
       </figure>
-      <div class="demo-placeholder">
-        <p class="demo-tag">A demo goes here later</p>
-        <p>
-          A photo with a slider that turns a flat picture into layers at their depths, side by side
-          with the Sharp view, so the guess and the picture can be compared at once.
-        </p>
-      </div>
 
       <h3 id="try-it-8">Where to try it</h3>
       <ul>
@@ -422,10 +432,10 @@
 
       <!-- NAV:BOTTOM:START (written by manual/build-pages.mjs; do not edit by hand) -->
       <nav class="pager no-print" aria-label="Previous and next chapter, bottom">
-        <a class="pager-prev" rel="prev noopener" href="data.html" target="_blank"
+        <a class="pager-prev" rel="prev" href="data.html"
           ><span class="pager-word">← Previous</span
           ><span class="pager-title">Chapter 7: Real data as splats</span></a
-        ><a class="pager-next" rel="next noopener" href="codes.html" target="_blank"
+        ><a class="pager-next" rel="next" href="codes.html"
           ><span class="pager-word">Next →</span
           ><span class="pager-title">Chapter 9: Codes and pages</span></a
         >
