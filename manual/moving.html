@@ -14,6 +14,8 @@
 
     <script type="module" src="fold.js"></script>
     <script type="module" src="nav.js"></script>
+    <script type="module" src="demos.js"></script>
+    <script type="module" src="demos2.js"></script>
     <!-- HEAD:END -->
   </head>
   <body>
@@ -47,32 +49,14 @@
         </button>
         <nav class="outline-panel" id="manual-contents" aria-label="The manual's chapters" hidden>
           <ol>
-            <li><a href="index.html" rel="noopener" target="_blank">Contents</a></li>
+            <li><a href="index.html">Contents</a></li>
+            <li><a href="splat.html">Chapter 1: What a splat is</a></li>
+            <li><a href="toy.html">Chapter 2: How a toy is built</a></li>
+            <li><a href="language.html">Chapter 3: The splat equation language</a></li>
+            <li><a href="gallery.html">Chapter 4: A gallery of programs</a></li>
+            <li><a href="pictures.html">Chapter 5: Pictures, screens, and your own input</a></li>
             <li>
-              <a href="splat.html" rel="noopener" target="_blank">Chapter 1: What a splat is</a>
-            </li>
-            <li>
-              <a href="toy.html" rel="noopener" target="_blank">Chapter 2: How a toy is built</a>
-            </li>
-            <li>
-              <a href="language.html" rel="noopener" target="_blank"
-                >Chapter 3: The splat equation language</a
-              >
-            </li>
-            <li>
-              <a href="gallery.html" rel="noopener" target="_blank"
-                >Chapter 4: A gallery of programs</a
-              >
-            </li>
-            <li>
-              <a href="pictures.html" rel="noopener" target="_blank"
-                >Chapter 5: Pictures, screens, and your own input</a
-              >
-            </li>
-            <li>
-              <a href="moving.html" aria-current="page" rel="noopener" target="_blank"
-                >Chapter 6: Moving things</a
-              >
+              <a href="moving.html" aria-current="page">Chapter 6: Moving things</a>
               <ol class="outline-sub" aria-label="In this chapter">
                 <li>
                   <a href="#hands-on-play-pick-up-toss-settle"
@@ -96,52 +80,28 @@
                 <li><a href="#try-it-6">Where to try it</a></li>
               </ol>
             </li>
-            <li>
-              <a href="data.html" rel="noopener" target="_blank">Chapter 7: Real data as splats</a>
-            </li>
-            <li>
-              <a href="photo3d.html" rel="noopener" target="_blank"
-                >Chapter 8: Photos and video into 3D</a
-              >
-            </li>
-            <li>
-              <a href="codes.html" rel="noopener" target="_blank">Chapter 9: Codes and pages</a>
-            </li>
-            <li>
-              <a href="make.html" rel="noopener" target="_blank">Chapter 10: Make your own</a>
-            </li>
-            <li>
-              <a href="more.html" rel="noopener" target="_blank">What else Splashery does now</a>
-            </li>
-            <li>
-              <a href="unique.html" rel="noopener" target="_blank"
-                >What Splashery can do that other splat tools can't</a
-              >
-            </li>
-            <li><a href="built.html" rel="noopener" target="_blank">How Splashery is built</a></li>
-            <li>
-              <a href="share.html" rel="noopener" target="_blank">Share links and QR codes</a>
-            </li>
-            <li>
-              <a href="experiments.html" rel="noopener" target="_blank"
-                >Open questions: other choices, not tried yet</a
-              >
-            </li>
-            <li>
-              <a href="later.html" rel="noopener" target="_blank">What comes later: Code a toy</a>
-            </li>
-            <li><a href="glossary.html" rel="noopener" target="_blank">Glossary</a></li>
-            <li><a href="reading.html" rel="noopener" target="_blank">Further reading</a></li>
-            <li><a href="references.html" rel="noopener" target="_blank">References</a></li>
-            <li><a href="card.html" rel="noopener" target="_blank">Quick reference</a></li>
+            <li><a href="data.html">Chapter 7: Real data as splats</a></li>
+            <li><a href="photo3d.html">Chapter 8: Photos and video into 3D</a></li>
+            <li><a href="codes.html">Chapter 9: Codes and pages</a></li>
+            <li><a href="make.html">Chapter 10: Make your own</a></li>
+            <li><a href="more.html">What else Splashery does now</a></li>
+            <li><a href="unique.html">What Splashery can do that other splat tools can't</a></li>
+            <li><a href="built.html">How Splashery is built</a></li>
+            <li><a href="share.html">Share links and QR codes</a></li>
+            <li><a href="experiments.html">Open questions: other choices, not tried yet</a></li>
+            <li><a href="later.html">What comes later: Code a toy</a></li>
+            <li><a href="glossary.html">Glossary</a></li>
+            <li><a href="reading.html">Further reading</a></li>
+            <li><a href="references.html">References</a></li>
+            <li><a href="card.html">Quick reference</a></li>
           </ol>
         </nav>
       </div>
       <nav class="pager no-print" aria-label="Previous and next chapter, top">
-        <a class="pager-prev" rel="prev noopener" href="pictures.html" target="_blank"
+        <a class="pager-prev" rel="prev" href="pictures.html"
           ><span class="pager-word">← Previous</span
           ><span class="pager-title">Chapter 5: Pictures, screens, and your own input</span></a
-        ><a class="pager-next" rel="next noopener" href="data.html" target="_blank"
+        ><a class="pager-next" rel="next" href="data.html"
           ><span class="pager-word">Next →</span
           ><span class="pager-title">Chapter 7: Real data as splats</span></a
         >
@@ -183,18 +143,13 @@
       <p>
         <b>How Splashery does it.</b> Splashery has a small physics engine of its own, with no
         library (<code>src/physics/world.js</code>). It is
-        <i>extended position-based dynamics</i> [<a
-          href="references.html#ref-11"
-          rel="noopener"
-          target="_blank"
-          >11</a
-        >, <a href="references.html#ref-12" rel="noopener" target="_blank">12</a>]: each step first
-        predicts where the bodies go from their velocities and gravity, then moves them to where
-        they would be if nothing overlapped and every joint held, then works out velocities from how
-        far they moved. The world is built on the first pick-up, so opening a toy costs nothing. It
-        steps 1/60 of a second at a time whatever the frame rate, in 8 smaller substeps for a whole
-        toy and 10 for a toy with pieces, and it falls asleep once everything has been slower than a
-        small speed for half a second.
+        <i>extended position-based dynamics</i> [<a href="references.html#ref-11">11</a>,
+        <a href="references.html#ref-12">12</a>]: each step first predicts where the bodies go from
+        their velocities and gravity, then moves them to where they would be if nothing overlapped
+        and every joint held, then works out velocities from how far they moved. The world is built
+        on the first pick-up, so opening a toy costs nothing. It steps 1/60 of a second at a time
+        whatever the frame rate, in 8 smaller substeps for a whole toy and 10 for a toy with pieces,
+        and it falls asleep once everything has been slower than a small speed for half a second.
       </p>
       <p>
         Most toys play as one rigid body: their pose moves the toy's whole entity, so the splats are
@@ -435,13 +390,62 @@
         serves a scan: a scan's rig (<code>src/rigs.js</code>) names the parts of a captured toy,
         and <code>src/physics/joints.js</code> turns them into pieces.
       </p>
-      <div class="demo-placeholder">
-        <p class="demo-tag">A demo goes here later</p>
-        <p>
-          A box that lets you grab a hinge, a slider, and a dial on a simple toy, with the one
-          number each of them is moved by shown beside it.
+      <section class="demo-live" data-demo="moving-joints" id="demo-joints">
+        <h4>Try it: grab a hinge, a slider, and a dial</h4>
+        <p class="hint">
+          Drag the lid, the blade, or the knob (or use the sliders under the picture). Each part is
+          posed from one number, shown beside it. Let go of the lid and it falls by its weight and
+          bounces a little off its stop; the blade stays where you leave it, held by friction like
+          the sword in the stone; flick the dial and it coasts. Nothing leaves this page.
         </p>
-      </div>
+        <canvas
+          id="mj-canvas"
+          width="400"
+          height="240"
+          role="img"
+          aria-label="A chest with a lid on a hinge, a blade in a stone, and a dial, each with the number that moves it"
+        ></canvas>
+        <div class="controls">
+          <label for="mj-hinge"
+            >Hinge (angle)
+            <input id="mj-hinge" type="range" min="0" max="90" step="1" value="20" /><output
+              id="mj-hinge-out"
+              for="mj-hinge"
+            ></output
+          ></label>
+          <label for="mj-slide"
+            >Slider (distance)
+            <input id="mj-slide" type="range" min="0" max="0.5" step="0.01" value="0.18" /><output
+              id="mj-slide-out"
+              for="mj-slide"
+            ></output
+          ></label>
+          <label for="mj-dial"
+            >Dial (angle)
+            <input id="mj-dial" type="range" min="-720" max="720" step="1" value="34" /><output
+              id="mj-dial-out"
+              for="mj-dial"
+            ></output
+          ></label>
+        </div>
+        <div class="row"><button type="button" id="mj-reset">Reset</button></div>
+        <script type="module" src="demos6.js"></script>
+      </section>
+      <figure class="demo-still" data-demo-still="moving-joints">
+        <img
+          src="img/demo-joints.png"
+          alt="The joints demo: a chest with its lid half open, a blade partway out of a stone, and a dial turned about a third of the way round, each with its number"
+        />
+        <figcaption>
+          Interactive in the web version:
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/manual/moving.html#demo-joints"
+            target="_blank"
+            rel="noopener"
+            >ryanjosephkamp.github.io/splashery/manual/moving.html#demo-joints</a
+          >
+        </figcaption>
+      </figure>
 
       <h3 id="ropes-cloth-and-soft-stretch">Ropes, cloth, and soft stretch</h3>
       <p>
@@ -555,7 +559,7 @@
         part's splats are all turned by the same rotation, so a part cannot bend. The limit is that
         a splat can belong to only one part, which is why a toy has at most 15 parts beside the body
         (Chapter 2's
-        <a href="toy.html#why-parts" rel="noopener" target="_blank">fold on the number of parts</a>
+        <a href="toy.html#why-parts">fold on the number of parts</a>
         says why).
       </p>
 
@@ -641,10 +645,10 @@
 
       <!-- NAV:BOTTOM:START (written by manual/build-pages.mjs; do not edit by hand) -->
       <nav class="pager no-print" aria-label="Previous and next chapter, bottom">
-        <a class="pager-prev" rel="prev noopener" href="pictures.html" target="_blank"
+        <a class="pager-prev" rel="prev" href="pictures.html"
           ><span class="pager-word">← Previous</span
           ><span class="pager-title">Chapter 5: Pictures, screens, and your own input</span></a
-        ><a class="pager-next" rel="next noopener" href="data.html" target="_blank"
+        ><a class="pager-next" rel="next" href="data.html"
           ><span class="pager-word">Next →</span
           ><span class="pager-title">Chapter 7: Real data as splats</span></a
         >

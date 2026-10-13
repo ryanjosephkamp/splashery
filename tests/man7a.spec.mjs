@@ -169,7 +169,23 @@ test.describe("pictures on the more and unique pages", () => {
     await page.goto("/manual/more.html");
     const heads = await page.locator("main h3").count();
     expect(heads).toBe(11);
-    expect(await page.locator("main > figure.item-pic").count()).toBe(heads);
+    // At least one picture before the next heading (Manual r9 gave four sections a second one).
+    const per = await page.evaluate(() => {
+      const out = [];
+      for (const h of document.querySelectorAll("main h3")) {
+        let n = 0;
+        for (
+          let e = h.nextElementSibling;
+          e && e.tagName !== "H3" && e.tagName !== "H2";
+          e = e.nextElementSibling
+        )
+          if (e.matches("figure.item-pic")) n++;
+        out.push(n);
+      }
+      return out;
+    });
+    for (const n of per) expect(n).toBeGreaterThanOrEqual(1);
+    expect(await page.locator("main > figure.item-pic").count()).toBeGreaterThanOrEqual(heads + 4);
   });
   test("the link steps use the real codec", async ({ page }) => {
     await page.goto("/manual/unique.html");
