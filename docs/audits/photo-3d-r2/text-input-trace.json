@@ -1,0 +1,72 @@
+{
+  "events": [
+    {
+      "label": "read-start",
+      "time": 7529.599999997765,
+      "name": "scene.jpg"
+    },
+    {
+      "label": "warning",
+      "time": 7529.800000000745,
+      "text": "",
+      "hidden": true,
+      "connected": true
+    },
+    {
+      "label": "read-success",
+      "time": 11218.199999999255,
+      "name": "scene.jpg"
+    },
+    {
+      "label": "options-start",
+      "time": 11218.199999999255
+    },
+    {
+      "label": "read-start",
+      "time": 11617.699999999255,
+      "name": "x.jpg"
+    },
+    {
+      "label": "warning",
+      "time": 11617.89999999851,
+      "text": "",
+      "hidden": true,
+      "connected": true
+    },
+    {
+      "label": "read-error",
+      "time": 11620.300000000745,
+      "name": "x.jpg",
+      "error": "This browser couldn't read that file as a photo. Save it as a JPEG, PNG or WebP and open that."
+    },
+    {
+      "label": "warning",
+      "time": 11620.300000000745,
+      "text": "This browser couldn't read that file as a photo. Save it as a JPEG, PNG or WebP and open that.",
+      "hidden": false,
+      "connected": true
+    },
+    {
+      "label": "warning",
+      "time": 11620.300000000745,
+      "text": "This browser couldn't read that file as a photo. Save it as a JPEG, PNG or WebP and open that.",
+      "hidden": false,
+      "connected": true
+    },
+    {
+      "label": "panel-removed",
+      "time": 11768.699999999255
+    },
+    {
+      "label": "options-done",
+      "time": 11768.89999999851
+    }
+  ],
+  "warnings": [
+    {
+      "text": "",
+      "hidden": true
+    }
+  ],
+  "loading": 0
+}

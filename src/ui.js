@@ -12,8 +12,10 @@ import { PATTERNS, PROJECTIONS, loadFlags } from "./patterns.js";
 import { initLive, renderLive } from "./live/panel.js"; // lane Live input
 import { ui2On } from "./player.js"; // UI r2
 import { importGzipModule } from "./gzip.js";
+import { SITE_TOY_IDS } from "./site-toy-pages.js";
 
 const $ = (id) => document.getElementById(id);
+const siteToyIds = new Set(SITE_TOY_IDS);
 
 const SWATCHES = [
   "#e63b2e",
@@ -2959,6 +2961,8 @@ export function createUI(app) {
     aboutText: $("toy-about-text"),
     howTo: $("toy-about-howto"),
     can: $("toy-about-can"),
+    siteRow: $("toy-site-row"),
+    siteLink: $("toy-site-link"),
   };
   let helpModule = null;
   let helpKey = null;
@@ -3066,6 +3070,13 @@ export function createUI(app) {
   }
   async function setToyHelp(info) {
     helpInfo = info;
+    // The site build records only toy pages that exist. Scene files and old
+    // share links reach this same path; a file or a toy made here has no page.
+    const id = info?.id;
+    const hasPage = siteToyIds.has(id);
+    help.siteRow.hidden = !hasPage;
+    if (hasPage) help.siteLink.setAttribute("href", `./site/toys/${encodeURIComponent(id)}/`);
+    else help.siteLink.removeAttribute("href");
     // A new toy shows the line; the same toy rebuilt (an option, the detail
     // tier) only updates the text.
     const key = info ? `${info.kind}:${info.id ?? info.label}` : null;

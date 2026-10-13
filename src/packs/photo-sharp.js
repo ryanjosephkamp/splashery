@@ -104,7 +104,9 @@ export function sharpEntry(toy) {
         note.textContent =
           sharpView(toy) === "sharp" && S.yielded
             ? "Showing the splats while a tool, Hands-on or an effect is on (they work on splats). Sharp picture comes back after."
-            : "Sharp picture: the picture at its full size on a 3D relief, so small text stays readable. Splats: the picture rebuilt from splats.";
+            : toy === "photo-3d" && player()?.scene?.toy?.options?.detail !== "splats"
+              ? "Fine Splats (hybrid) adds a filled background sheet behind the splats. Splat exports omit the sheet; scene saves keep the view settings."
+              : "Sharp picture: the picture at its full size on a 3D relief, so small text stays readable. Splats: the picture rebuilt from splats.";
       };
       paint();
       LISTENERS.add(paint);
@@ -123,10 +125,26 @@ export function sharpEntry(toy) {
 
 // Photo to 3D's build: the photo, the splats' own depth (0..1 at gx x gy) and its relief.
 // (band: each cell's layer, its piece's, so each piece moves as one, as the splats do; lane Photo depth)
-export function sharpPhoto({ photo, depth, band, gx, gy, aspect, relief, uid }) {
-  S.src = { toy: "photo-3d", kind: "photo", photo, depth, band, gx, gy, aspect, relief, uid };
+export function sharpPhoto({ photo, depth, band, gx, gy, aspect, relief, uid, background }) {
+  S.src = {
+    toy: "photo-3d",
+    kind: "photo",
+    photo,
+    depth,
+    band,
+    gx,
+    gy,
+    aspect,
+    relief,
+    uid,
+    background,
+  };
   fromScene("photo-3d");
   S.key = "";
+}
+
+export async function prepareSharpPhoto() {
+  S.mod ||= await import("../live/relief-mesh.js");
 }
 
 // Moving photo to 3D's build: the toy's state (MOVING), the picture's size and its lift.
@@ -158,6 +176,19 @@ const wanted = () => {
     for (const fn of LISTENERS) fn();
   }
   return on && !yielded;
+};
+
+const backgroundWanted = () => {
+  const pl = player();
+  return !!(
+    S.src?.kind === "photo" &&
+    S.src.background &&
+    S.ticks - (S.droveTick ?? -1e9) <= 3 &&
+    pl?.scene?.toy?.id === "photo-3d" &&
+    pl.scene.toy.options?.detail !== "splats" &&
+    pl.stage?.toy &&
+    !splatsNeeded(pl)
+  );
 };
 
 // Where the splats must stay: a tool that works on them (Poke, Paint, Magnet, Clay), Hands-on, a
@@ -234,10 +265,13 @@ function status(on) {
   if (!pl.psvLabel) {
     pl.psvLabel = true;
     const before = pl.statusLabel;
-    pl.statusLabel = (info) => (S.labelOn ? "Sharp picture" : before?.(info));
+    pl.statusLabel = (info) =>
+      S.labelOn ? "Sharp picture" : S.hybrid ? `${before?.(info)} · Hybrid` : before?.(info);
   }
-  if (S.labelOn === on) return;
+  const hybrid = !!(backgroundWanted() && S.mesh?.miB.visible && !S.mesh.visible);
+  if (S.labelOn === on && S.hybrid === hybrid) return;
   S.labelOn = on;
+  S.hybrid = hybrid;
   globalThis.window?.__splashery?.app?.updateStatus?.();
 }
 
@@ -252,7 +286,8 @@ function hide() {
 // Keeps the relief in step with the toy: made, filled and moved while Sharp is on, hidden (and the
 // splats back) otherwise.
 export function sync() {
-  if (!wanted()) return hide();
+  const surface = wanted();
+  if (!surface && !backgroundWanted()) return hide();
   const pl = player();
   const stage = pl.stage;
   if (!S.mod) {
@@ -280,7 +315,11 @@ export function sync() {
   const [cols, rows] = grid(src);
   if (!S.mesh || S.mesh.cols !== cols || S.mesh.rows !== rows) {
     S.mesh?.destroy();
-    S.mesh = new S.mod.ReliefMesh(stage, { cols, rows });
+    S.mesh = new S.mod.ReliefMesh(stage, {
+      cols,
+      rows,
+      surface: src.kind === "photo" ? src.background?.surface : null,
+    });
     S.key = "";
   }
   const m = S.mesh;
@@ -288,8 +327,11 @@ export function sync() {
   else fillClip(m, src);
   shape(m, src, pl);
   follow();
-  m.show(true);
-  if (m.visible) splats(false);
+  // Keep the old surface until the next frame enables the splats. Its visible
+  // state must agree with the entity during this handoff, including rebuilds.
+  splats(!surface);
+  m.show(surface || S.wake);
+  if (!surface) m.showBackground(true);
   status(m.visible);
 }
 
@@ -309,8 +351,18 @@ function fillPhoto(m, src) {
   m.setDepth({ w: src.gx, h: src.gy, data: bytes });
   // Lane Photo depth: each piece moves with its own layer, and the backing stays behind it.
   m.setPieces(
-    src.band ? { band: src.band, depth: bytes, gx: src.gx, gy: src.gy, base: 0.5 } : null,
+    src.band
+      ? {
+          band: src.band,
+          depth: bytes,
+          gx: src.gx,
+          gy: src.gy,
+          base: 0.5,
+          field: src.background?.field,
+        }
+      : null,
   );
+  m.setBackground(src.background);
 }
 
 // A clip: the depth of the frame on show; the color straight from a playing video (the long clip's
@@ -445,8 +497,8 @@ function follow() {
   if (!m) return;
   const pl = player();
   const ent = pl?.stage?.toy?.entity;
-  if (!ent || !wanted()) {
-    if (m.visible) hide();
+  if (!ent || (!wanted() && !backgroundWanted())) {
+    if (m.visible || m.miB.visible) hide();
     return;
   }
   if (!m.node.parent) pl.stage.app.root.addChild(m.node);
@@ -454,6 +506,7 @@ function follow() {
   m.node.setRotation(ent.getRotation());
   const s = ent.getLocalScale();
   m.node.setLocalScale(s.x, s.y, s.z);
+  if (!wanted() && backgroundWanted()) m.showBackground(true);
   if (S.src?.kind === "clip" && S.src.moving.clip?.long) fillClip(m, S.src); // (keep the video in step)
 }
 
