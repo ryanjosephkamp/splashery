@@ -11,6 +11,32 @@ test("opening gzip copies preserve every original byte", () => {
     expect(gunzipSync(fs.readFileSync(file)).equals(fs.readFileSync(source)), source).toBe(true);
 });
 
+test("the opening scan starts transferring before GPU initialization", async ({ page }) => {
+  await page.addInitScript(() => {
+    let scanStarted = false;
+    const fetch = window.fetch;
+    window.fetch = function (input, ...args) {
+      if (String(input?.url ?? input).includes("/assets/toys/soda-can/")) scanStarted = true;
+      return fetch.call(this, input, ...args);
+    };
+    window.__scanBeforeGpu = [];
+    const getContext = HTMLCanvasElement.prototype.getContext;
+    HTMLCanvasElement.prototype.getContext = function (kind, ...args) {
+      if (this.id === "stage" && kind === "webgl2") window.__scanBeforeGpu.push(scanStarted);
+      return getContext.call(this, kind, ...args);
+    };
+  });
+  const scene = Buffer.from(
+    JSON.stringify(createScene({ toy: { kind: "builtin", id: "soda-can" } })),
+  );
+  await page.goto(`/?renderer=webgl2&profile=weak&adapt=off#s=j.${scene.toString("base64url")}`);
+  await page.waitForSelector("body[data-ready='true']", { timeout: 180000 });
+  const order = await page.evaluate(() => window.__scanBeforeGpu);
+  expect(order.length).toBeGreaterThan(0);
+  expect(order.every(Boolean)).toBe(true);
+  expect(await page.evaluate(() => window.__splashery.player.toyInfo.id)).toBe("soda-can");
+});
+
 test("the mapped engine transfers while the app entry is held", async ({ page }) => {
   await page.addInitScript(() => {
     window.__mappedEnginePreloaded = false;

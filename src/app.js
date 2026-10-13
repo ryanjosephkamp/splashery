@@ -153,7 +153,7 @@ class App {
     document.documentElement.dataset.theme = matchMedia("(prefers-color-scheme: dark)").matches
       ? "dark"
       : "light";
-    this.player = new Player(canvas);
+    this.player = new Player(canvas, { preloadOpeningScan: true });
     try {
       await openingReady;
       await this.player.init();
