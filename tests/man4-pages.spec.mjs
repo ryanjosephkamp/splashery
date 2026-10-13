@@ -125,18 +125,15 @@ test.describe("the pages", () => {
     await page.touchscreen.tap(4, 838);
     await expect(page.locator("#manual-contents")).toBeHidden();
     await page.tap(".manual-nav .outline-toggle");
-    // Every manual link opens in a new tab (the owner's rule, Codex task 36; Manual r8).
-    const [chapter] = await Promise.all([
-      page.waitForEvent("popup"),
-      page.tap('#manual-contents a[href="language.html"]'),
-    ]);
+    // A link to another chapter opens in the same tab (the owner's rule, Manual r9).
+    const chapter = page;
+    await page.tap('#manual-contents a[href="language.html"]');
     await chapter.waitForURL(/language\.html/);
     await expect(chapter.locator("h2").first()).toContainText("The splat equation language");
     // A section of that chapter, from its list (a link to a place on the same page stays in the page).
     await chapter.tap(".manual-nav .outline-toggle");
     await chapter.tap('#manual-contents .outline-sub a[href="#time"]');
     await expect(chapter.locator("#time")).toBeInViewport();
-    await chapter.close();
     expect(
       await page.evaluate(
         () => document.documentElement.scrollWidth - document.documentElement.clientWidth,
