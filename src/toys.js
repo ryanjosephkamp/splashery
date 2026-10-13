@@ -3647,6 +3647,16 @@ export const TOYS = [
   // ---- End of pack: computing-history ----
   // ---- Pack: pictures ----
   {
+    id: "color-space-camera",
+    label: "Color space camera",
+    category: "pictures",
+    kind: "kit",
+    pack: "proto-color-space-camera",
+    labs: true,
+    tags: "photo camera palette color rgb hsv cone cielab lab pixels",
+    camera: { yaw: 0, pitch: 0, roll: 0, distance: 4.3 },
+  },
+  {
     id: "picture-lab",
     label: "Picture lab",
     category: "pictures",

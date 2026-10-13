@@ -21,6 +21,12 @@
 // the toy's recipe and against a real source for every fact.
 
 export const TOY_HELP = {
+  "color-space-camera": {
+    howTo:
+      "Tap to spread pixels into color space, and tap again to return. Choose a space or photo in the Toy tab.",
+    about:
+      "A picture's palette becomes a three-dimensional shape. Each pixel of a small preview moves as one solid point, keeping its color and size. Start with the generated pattern, open your own photo, or tap Use camera to sample a camera frame. Nothing is recorded, saved, or uploaded; your photo lasts only until you leave the toy.\n\nTap to spread the picture, drag to inspect the palette, and tap again to return. The Toy tab switches among an RGB cube, an HSV cone, and CIELAB with a D65 reference white. Switch spaces to compare the same palette. The readout shows a selected reference color's actual coordinates; Lab values are dimensionless. In the HSV cone, height is value, angle is hue, and radius is saturation times value. Refresh camera view samples a new frame while the camera is on. Stop ends its stream.",
+  },
   // ---- Photoreal r3 (lane Photoreal r3) ----
   "triceratops-skull": {
     howTo: "Tap it to make it look at you; drag to turn it.",
