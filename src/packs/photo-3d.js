@@ -586,6 +586,8 @@ function photoCanvas(sh) {
   return c;
 }
 
+let inputRead = 0;
+let stopInputWarning = () => {};
 const PHOTO_3D = {
   density: PHOTO_DENSITY,
   photo: {
@@ -668,11 +670,31 @@ const PHOTO_3D = {
     note: "Open a JPEG, PNG or WebP photo (HEIC too, where the browser can read it). Large photos are scaled down to 2,048 pixels on the long side, and turned upright by their camera tag. A depth model that runs on this device (about 27 MB, loaded the first time) works out how far away each part of the picture is, and the photo is rebuilt as splats in 3D. Your photo never leaves your device. It takes a few seconds, longer on a phone.",
     async read(_text, fileName, file) {
       if (!file) throw new Error("Open a photo.");
-      const p = await openPhoto(
-        file,
-        (file.name || fileName || "Your photo").replace(/\.[^.]+$/, ""),
-      );
-      return { source: "custom", photoName: p.name };
+      const version = ++inputRead;
+      stopInputWarning();
+      const panel = globalThis.document?.getElementById("toy-input");
+      try {
+        const p = await openPhoto(
+          file,
+          (file.name || fileName || "Your photo").replace(/\.[^.]+$/, ""),
+        );
+        return { source: "custom", photoName: p.name };
+      } catch (error) {
+        const pl = globalThis.window?.__splashery?.player;
+        const source = pl?.scene?.toy?.options?.source;
+        if (panel && (pl?.loading || !panel.isConnected)) {
+          const { preserveInputWarning } = await import("../photo3d/input-warning.js");
+          stopInputWarning = preserveInputWarning(
+            panel,
+            error.message,
+            () =>
+              version === inputRead &&
+              pl?.scene?.toy?.id === "photo-3d" &&
+              pl.scene.toy.options?.source === source,
+          );
+        }
+        throw error;
+      }
     },
     // Lane Live input: the camera, and a button that takes the picture.
     live: [{ kind: "camera", capture: { button: "Take the picture", name: "Camera picture.jpg" }, status: mirrorStatus }, sharpEntry("photo-3d"), soundEntry()], // prettier-ignore
