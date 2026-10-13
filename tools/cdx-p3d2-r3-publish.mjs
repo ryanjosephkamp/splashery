@@ -11,6 +11,12 @@ const finalDest = path.resolve(
 );
 const read = (f) => JSON.parse(fs.readFileSync(f));
 const builds = read(path.join(cache, "builds.json"));
+const publication = fs.existsSync(path.join(cache, "publication-provenance.json"))
+  ? read(path.join(cache, "publication-provenance.json"))
+  : null;
+const publicRenderer = publication?.equivalents.find(
+  (r) => r.measuredLocalCommit === builds.after.commit,
+)?.publicCommit;
 const sameBuild = (a, b) =>
   !!(
     a &&
@@ -188,6 +194,8 @@ for (const name of [
   "baseline-desktop-pause.json",
   "target-phone-complete.json",
   "goal-status-final-prepared.md",
+  "publication-provenance.json",
+  "bounded-stop.json",
 ])
   if (fs.existsSync(path.join(cache, name))) copy(path.join(cache, name), name);
 for (const round of [1, 2])
@@ -226,6 +234,12 @@ const lines = [
   "Made by Ryan with Codex (GPT-6). Original review assets are CC0; code is under Splashery's MIT license. Source photos and their GIF derivatives retain the source licenses and credits in [the source manifest](sources/manifest.json). AI-made Studio samples are labeled in each clip.",
   "",
   `Before: \`${builds.before.commit}\`. Round 3 renderer: \`${builds.after.commit}\`. Main comparison: \`${builds.main.commit}\`. See [source hashes](builds.json).`,
+  ...(publication
+    ? [
+        "",
+        `GitHub rejected the original private-email push. Original local commits and raw measured identities remain intact; newly packaged no-reply commits preserve the public PR ancestry. The public renderer equivalent is \`${publicRenderer}\`. Its entire tracked tree matches the actual measured local renderer tree, with the nine renderer hashes and separate UI hashes checked in [publication-provenance.json](publication-provenance.json). Measurements ran on the original checkout, not on the new publication commit. No existing remote history was rewritten.`,
+      ]
+    : []),
   "",
   "Each completed MP4 has two 390×844 halves: the previous PR head on the left and round 3 on the right. The actual phone profile is 390×844 at device scale factor 3, with the existing low-profile drawing buffer of 585×1266. Review export reduces each half to phone size. Clips sweep yaw and pitch through ±30° at depth 1. GIF inputs exercise the app's first-frame photo decode; these are not moving-photo clips.",
   `Sharp sampling rates: ${[...new Set(clips.rows.filter((r) => r.view === "sharp").map((r) => `${r.frames} captured poses at ${r.fps} fps`))].join("; ") || "pending"}. Each clip's counts and original capture-method hash are in clips.json and its linked capture manifest. Playback rate is a review choice, not a physical-device frame-rate measurement. Every yaw/pitch extreme reaches 30 degrees. The encoder receives lossless raw RGBA; the retained handoff check matches the former PNG input pixel for pixel.`,
@@ -255,6 +269,12 @@ lines.push(
   "## Reproduce",
   "",
   "Use the task branch's tools/cdx-p3d2-r3-*.mjs and the recorded immutable checkouts. Serve before on 4174, main on 4176, and the final renderer on 4177. Copy the public source files and depth fixtures into .cache/cdx-p3d2/r3/sources and restore the manifest's file/depthFile paths to that cache directory. Copy builds.json into the cache. Built-in sources remain the repository's unchanged samples. The source manifest records each live source page, author, license, hash and modification.",
+  ...(publicRenderer
+    ? [
+        "",
+        `For a public clone, check out renderer \`${publicRenderer}\` for port 4177 rather than the original local-only measured SHA. Before and main remain the public commits in builds.json. Keep the raw build records unchanged; the equivalence proof supplies the public checkout and verifies identical source bytes.`,
+      ]
+    : []),
   "",
   "The run used /usr/bin/chromium 151.0.7922.173, temporary Debian Xvfb 2:21.1.16-1.3+deb13u4 displays, and Mesa llvmpipe. The requested /opt/pw-browsers/chromium was absent. No Playwright browser download was installed. Set SPLASHERY_CHROMIUM=/usr/bin/chromium and SPLASHERY_GL=llvmpipe. Cadence jobs ran alone with LP_NUM_THREADS=2 and DISPLAY=:90. Target pose, anchored-edge and review-clip captures used LP_NUM_THREADS=1 on displays :90–:93; baseline pose captures used LP_NUM_THREADS=2 on :94. The first desktop target group used one thread; the resumed remaining desktop groups use two threads on :90, preserving completed groups and persistent console history. The target phone phase uses sweep-after; its original full-matrix worker is paused once all phone groups finish. The separate sweep-after-desktop phase uses the same method, inputs, views and capture policy. Reproduce both target profiles with the full-matrix command below, or capture desktop separately with the second command; do not duplicate desktop poses across phases. These software-GPU worker limits do not change image resolution or camera poses. Original clip-tool sources are retained under capture-methods/; their combined SHA-256 must match the linked capture manifest. Restore each cohort's two files into tools/ before reproducing its clip command.",
   "",
