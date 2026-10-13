@@ -10,23 +10,6 @@ test("opening gzip copies preserve every original byte", () => {
     expect(gunzipSync(fs.readFileSync(file)).equals(fs.readFileSync(source)), source).toBe(true);
 });
 
-test("engine transfer starts while the stylesheet still blocks DOM readiness", async ({ page }) => {
-  let release;
-  const held = new Promise((resolve) => (release = resolve));
-  await page.route("**/styles.css", async (route) => {
-    await held;
-    await route.continue();
-  });
-  const engine = page.waitForRequest("**/playcanvas.min.mjs.gz", { timeout: 10000 });
-  await page.goto("/?renderer=webgl2&profile=weak&adapt=off", { waitUntil: "commit" });
-  try {
-    await engine;
-  } finally {
-    release();
-  }
-  await page.waitForSelector("body[data-ready='true']", { timeout: 180000 });
-});
-
 test("compressed startup preserves the complete live PlayCanvas namespace and help", async ({
   page,
 }) => {

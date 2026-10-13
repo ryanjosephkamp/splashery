@@ -1,0 +1,5 @@
+# Keep raw request matrices out of line diffs; their JSON contents remain intact.
+docs/audits/load-time-2026-10/before.json -diff
+docs/audits/load-time-2026-10/after.json -diff
+docs/audits/load-time-2026-10/paired/before.json -diff
+docs/audits/load-time-2026-10/paired/after.json -diff
