@@ -5,7 +5,7 @@
 //   SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium node tools/toy-shots.mjs <out-dir> [--size=480] [--bg=#111111] [--suffix=-after] id ...
 //
 // Writes <out-dir>/<id><suffix>.png. The background defaults to the dark
-// theme's page colour; pass --bg=#f4f1ea (or any colour) to check light mode.
+// theme's page color; pass --bg=#f4f1ea (or any color) to check light mode.
 // --set=open=0 sets a toy control first (for example, a closed book).
 // --flag=fr dresses the toy in a national flag.
 

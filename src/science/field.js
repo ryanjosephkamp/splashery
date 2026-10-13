@@ -4,7 +4,7 @@
 // each splat's four splatAnim values are this program's own:
 //
 //   x (the kit's part and flags) = 16 × (type + 8 × payload), a multiple of
-//   16, so the kit reads part 0 with no flags; y (the kit's behaviour kind)
+//   16, so the kit reads part 0 with no flags; y (the kit's behavior kind)
 //   stays 0, "none". The type says what the splat is:
 //     SCI_TYPE.plain  a splat that only zooms (the slide, the box)
 //     SCI_TYPE.bond   a bond: fades while the atoms jiggle
@@ -51,7 +51,7 @@
 export const SCI_TYPE = { plain: 0, bond: 1, atom: 2, gauss: 3, gas: 4, loc: 5, star: 6 };
 
 // A splat's first value (the kit's part, plus flags) for a type: a multiple
-// of 16, so the kit reads part 0 with no flags; its behaviour kind stays
+// of 16, so the kit reads part 0 with no flags; its behavior kind stays
 // "none". Without labs the kit's own program then draws these splats still.
 export const sciPart = (type) => 16 * type;
 

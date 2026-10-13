@@ -24,7 +24,7 @@ const HALF = vec.unit(vec.add(LIGHT, VIEW));
 const dot = (a, b) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
 const band = (x, a, b) => clamp((x - a) / (b - a), 0, 1);
 
-// A colour lit by the key light, with a glossy highlight for lacquer.
+// A color lit by the key light, with a glossy highlight for lacquer.
 function lit(c, col, k = 0.3, gloss = 0, sharp = 24) {
   const d = dot(c.n, LIGHT);
   let out = shade(col, 1 + k * (0.9 * d - 0.15));
@@ -137,8 +137,8 @@ function edged(shape, dist, short) {
     sampleEven: sampleEven && ((a, b) => tag(sampleEven(a, b))),
   };
 }
-// Even placement and clean colours for every shape (docs/PACKS.md 7c): the
-// kit's default colour noise reads as grain on lacquer and ivory, and a
+// Even placement and clean colors for every shape (docs/PACKS.md 7c): the
+// kit's default color noise reads as grain on lacquer and ivory, and a
 // strip box's outlines take smaller splats so its edges stay crisp.
 function sharpen(k) {
   const add = k.add.bind(k);
@@ -207,7 +207,7 @@ function keyAt(layout, p, { top, blackTop, blackFront, front = 0.02, back = -0.2
 
 // Builds the keys as levers of `group` (lever i is key i). opts: top (the
 // white keys' top), len and blackLen (visible lengths back from the front at
-// z = 0), height, white and black colours.
+// z = 0), height, white and black colors.
 function buildKeys(k, layout, group, o) {
   const { w } = layout;
   const h = o.height ?? 0.02;
@@ -289,7 +289,7 @@ function lidRim(k, { x0, zF, zB, rightX, lidPt, a, lift, color, weight = 3 }) {
   });
   k.add(edged(shape, (u, v) => Math.min(v, 1 - v) * lift, lift), { color, even: true, weight, flat: 0.08 }); // prettier-ignore
 }
-// The outward normal of a case wall drawn along an outline (anticlockwise
+// The outward normal of a case wall drawn along an outline (counterclockwise
 // seen from above) with tangent t.
 const outward = (t) => [t[2], 0, -t[0]];
 
@@ -798,7 +798,7 @@ const levers = () => [new Float32Array(96), new Float32Array(96), new Float32Arr
 
 // ---- The grand piano ----------------------------------------------------------------
 
-// In metres, the keyboard's front at z = 0 facing the viewer, the tail at
+// In meters, the keyboard's front at z = 0 facing the viewer, the tail at
 // the back. 88 keys (A0 to C8), a hammer for each and dampers for all but the
 // top 18 (as on a real grand).
 const G = (() => {
@@ -1765,7 +1765,7 @@ function buildKeyboard(k) {
       pattern: false,
     },
   );
-  // The voice buttons, each its own colour.
+  // The voice buttons, each its own color.
   EK.buttons.forEach((b, i) =>
     k.add(evenRoundBox(0.034, 0.01, 0.024, 0.003), {
       pos: [b.x, 0.086, EK.buttonZ],

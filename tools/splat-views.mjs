@@ -6,7 +6,7 @@
 //   SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium node tools/splat-views.mjs <file.ply> <out.png>
 //     [--rotate=180,0,0] [--splats=300000] [--views=4] [--size=360] [--pitch=0.25] [--bg=#f4f1ea]
 //
-// The file is first rotated, stripped of spherical harmonics, centred, scaled
+// The file is first rotated, stripped of spherical harmonics, centered, scaled
 // and decimated with splat-transform (as tools/prepare-assets.mjs does), then
 // opened like a dropped file and shot at evenly spaced yaws. Writes one PNG
 // strip, the views side by side.

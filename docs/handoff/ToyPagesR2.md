@@ -96,7 +96,7 @@ October 7, 2026. Model: Sonnet 5.5 (claude-sonnet-5-5), default effort.
   is labeled "Flying disc"; the puzzle cube links to "Combination puzzle").
 - The settings in the catalog are read from each recipe's `options` and `controls`; a select lists
   its choices, a slider says "slider". "Views" are the select options named like a view, mode or
-  layer. Labels come from the recipes, so a few older British spellings ("Colour set") show as the
+  layer. Labels come from the recipes, so a few older British spellings ("Color set") show as the
   app shows them.
 - The "Tap" and "Sound" lines are the plan's (`tools/toy-plan.json`), as on the toy pages.
 - Tests: `tests/tp2.spec.mjs` (links, every page's Learn more and new-tab links, the catalog's

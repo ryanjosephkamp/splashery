@@ -7,8 +7,8 @@ seed, so it rebuilds exactly the same everywhere.
 
 ## 1. The two places a toy lives
 
-**The catalogue** (`src/toys.js`, the `TOYS` array) holds metadata only. Add entries under your
-pack's `// ---- Pack: <name> ----` marker:
+**The catalog** (`src/toys.js`, the `TOYS` array) holds metadata only. Add entries under your pack's
+`// ---- Pack: <name> ----` marker:
 
 ```js
 {
@@ -29,8 +29,8 @@ import { mix, shade, smoothstep, spline } from "../kit.js";
 
 export const RECIPES = {
   comet: {
-    alive: true,                 // has behaviours that move by themselves
-    options: [...],              // rebuild the toy (style, colour); optional
+    alive: true,                 // has behaviors that move by themselves
+    options: [...],              // rebuild the toy (style, color); optional
     controls: [...],             // change it live (sliders, switches, pulses); optional
     action: { key, label, sound }, // what a tap on the toy does; optional
     drive(t, c, out, info) {},   // per frame: parts, amounts; optional
@@ -43,7 +43,7 @@ export const RECIPES = {
 
 - **+Y is up.** The default camera looks from the front-right, slightly above: +Z faces the viewer,
   +X is to the right.
-- Model in any units around the origin. After `build`, the kit centres the toy and scales it to fit
+- Model in any units around the origin. After `build`, the kit centers the toy and scales it to fit
   a sphere of radius 0.95, and moves part pivots with it. Keep proportions, not absolute sizes.
 - Things that travel outside the toy's resting shape (rising flames, an opened lid, an orbit) should
   be declared with `k.reach([x, y, z])` so the camera frames them.
@@ -58,7 +58,7 @@ Each call returns a shape; nothing is drawn until you `k.add` it.
 | `k.ellipsoid(a, b, c)`                                        | Ellipsoid with half-axes along X, Y, Z.                                                                                                        |
 | `k.box(sx, sy, sz)`                                           | Box with full sizes. Samples carry `face` (0..5 for +X, −X, +Y, −Y, +Z, −Z) and face `u`, `v`.                                                 |
 | `k.roundedBox(sx, sy, sz, power = 8)`                         | Rounded box (a superellipsoid: 2 is an ellipsoid, higher is boxier).                                                                           |
-| `k.cylinder(r, h, { caps })`                                  | Cylinder along Y, centred. `caps`: `true`, `false`, `"top"` or `"bottom"`. Samples carry `side` or `cap` and `radial`.                         |
+| `k.cylinder(r, h, { caps })`                                  | Cylinder along Y, centered. `caps`: `true`, `false`, `"top"` or `"bottom"`. Samples carry `side` or `cap` and `radial`.                        |
 | `k.cone(r0, r1, h, { caps })`                                 | Cone frustum from radius r0 at the bottom to r1 at the top.                                                                                    |
 | `k.torus(R, r)`                                               | Torus in the XZ plane.                                                                                                                         |
 | `k.disc(r1, r0 = 0)`                                          | Flat disc (or ring) in the XZ plane, both sides.                                                                                               |
@@ -88,20 +88,20 @@ Shape notes from the lanes (2026-09-26):
 k.add(shape, {
   pos: [x, y, z], rot: [degX, degY, degZ], // or quat: [x, y, z, w]
   scale: 1 | [sx, sy, sz],
-  color: "#hex" | [r, g, b] | (c) => colour,
+  color: "#hex" | [r, g, b] | (c) => color,
   weight: 1,        // density relative to the rest (2 = twice as many splats per area)
   share: 0.1,       // or: exactly this fraction of the whole budget
   size: 1,          // splat size multiplier
   flat: 0.25,       // splat thickness (0 flat discs .. 1 round blobs)
   stretch: 3,       // for tubes: splats elongated along the tube
   opacity: 0.95,
-  jitter: 0.04,     // colour noise (keep it low, 0.01..0.02, on smooth materials)
+  jitter: 0.04,     // color noise (keep it low, 0.01..0.02, on smooth materials)
   even: true,       // place surface splats evenly (spheres, boxes, cylinders, cones, lathes, param)
   interior: 0.12,   // share of this shape's splats that fill its inside (for Slice)
-  core: "#hex" | (c) => colour,   // colour of the inside
+  core: "#hex" | (c) => color,   // color of the inside
   part: index,      // from k.part(...), or (c) => index to split a shape between parts
-  kind: "flame", params: [a, b] | (c) => [a, b],  // a behaviour (section 6)
-  pattern: false,   // keep this shape's own colours under flags and patterns
+  kind: "flame", params: [a, b] | (c) => [a, b],  // a behavior (section 6)
+  pattern: false,   // keep this shape's own colors under flags and patterns
   fit: false,       // leave it out of the fit (see "Hidden pieces count in the fit")
 });
 ```
@@ -110,14 +110,14 @@ The splat budget is shared between shapes by surface area times `weight`, so the
 density. Use `share` for small details that need a fixed number of splats, and `weight` > 1 for
 small shapes that would otherwise look sparse (eyes, stitches, gems).
 
-Splats are unlit, so a material reads from colour alone. Random placement leaves thin spots where
-the far side of the toy shows through as dark speckle; `even: true` closes them (it made the sports
+Splats are unlit, so a material reads from color alone. Random placement leaves thin spots where the
+far side of the toy shows through as dark speckle; `even: true` closes them (it made the sports
 balls read as leather and rubber instead of grain). For smooth materials also bake a little light
-into the colour (a key light from above, and a sheen for gloss) instead of adding noise: see `lit()`
+into the color (a key light from above, and a sheen for gloss) instead of adding noise: see `lit()`
 and `grip()` in `src/packs/balls.js`. Parts that are hidden most of the time can have a low `weight`
 so the faces people see get the splats (see the storybook's pages).
 
-**The colour function** gets `c` with:
+**The color function** gets `c` with:
 
 | Field                                         | Meaning                                                                      |
 | --------------------------------------------- | ---------------------------------------------------------------------------- |
@@ -129,7 +129,7 @@ so the faces people see get the splats (see the storybook's pages).
 | `c.noise(x, y, z)`, `c.fbm(x, y, z, octaves)` | Seeded smooth noise, roughly −1..1.                                          |
 | `c.inside`                                    | True for interior splats.                                                    |
 
-It returns a colour, or `null` to leave a hole (openings, cut-outs, a missing box face), or
+It returns a color, or `null` to leave a hole (openings, cut-outs, a missing box face), or
 `{ c: colour, keep: true, size: 0.8 }` to keep one splat out of the pattern layer (seams, stitches,
 eyes, labels) or resize it.
 
@@ -174,7 +174,7 @@ drive(t, c, out, info) {
   out.amount = 0.5 + c.size;   // scales beat, breathe, flame, rise, twinkle, sway and wave
   out.energy = c.melt;         // drives "melt" (0..1)
   out.grow = c.bloom;          // drives "grow" (0..1)
-  out.glow = [r, g, b, strength]; // colour of the "pulse" glow
+  out.glow = [r, g, b, strength]; // color of the "pulse" glow
   out.body = { offset: [0, 0.1, 0], quat, squash };  // move the whole toy (in toy radii)
 }
 ```
@@ -278,11 +278,11 @@ owner's exceptions (7e), the music shelf and toys marked `keep` in `tools/sound-
 warn. The thresholds (`LINT` at the top) were set on September 30, 2026, so that the toys the owner
 complained about fail and the ones he likes pass; they are a guide, and his ears are the real test.
 
-**Flag colours**: `patternProjection: "top"` makes a toy lay flag colours on from above (a flat toy:
+**Flag colors**: `patternProjection: "top"` makes a toy lay flag colors on from above (a flat toy:
 the chess board) when a flag is picked; `patternAmount: 0.3` lays them on gently and
 `patternDetail: 1` keeps each splat's own light and dark under them (the chess board's light and
 dark squares stay easy to tell apart). The app switches to the toy's way when it comes out with a
-flag on, and back to the usual way for the next toy unless the look was changed. Splats a colour
+flag on, and back to the usual way for the next toy unless the look was changed. Splats a color
 function returns with `keep: true`, or with `pattern: false` on their shape, never take a pattern
 (the chess pieces keep their own ivory and ebony under any flag).
 
@@ -333,7 +333,7 @@ a recipe, plus `parts`, each made of soft ellipsoid regions in world coordinates
 
 A GPU pass tags each splat with the region it falls in when the toy loads; `soft` (a fraction of the
 radius) blends the edge so the part bends into the rest of the toy. Up to 15 parts and 12 regions.
-Open the app with `?rig=show` to tint each part (and the colour keys) while placing regions, or
+Open the app with `?rig=show` to tint each part (and the color keys) while placing regions, or
 render `tools/rig-map.mjs <dir> --rig <id>` for front, side and top views on a world grid.
 `out.body` (squash, offset, rotation) moves the whole scan, for squeezes and hops. Shelf shapes
 (blob, donut, knot, planet) use rigs too.
@@ -341,15 +341,15 @@ render `tools/rig-map.mjs <dir> --rig <id>` for front, side and top views on a w
 More that a rig can do (Phase E1; the full reference is at the top of `src/rigs.js` and
 `src/rig-fx.js`):
 
-- A region can take only splats of one colour: `{ at, r, color: "#d84a34", tol: 0.4 }` (the alarm
+- A region can take only splats of one color: `{ at, r, color: "#d84a34", tol: 0.4 }` (the alarm
   clock's red second hand).
-- `keys: [{ color: "#c9b25a", tol: 0.2 }]` marks up to two sets of splats by colour (optionally only
+- `keys: [{ color: "#c9b25a", tol: 0.2 }]` marks up to two sets of splats by color (optionally only
   within `r` of `at`), or `{ long: 0.42 }` for long thin splats (the donut's sprinkles).
 - A driven part takes `{ tint: "#ffb040", glow: 0.5, bright: 0.3 }` to light up and `{ scale: 1.1 }`
   to grow about its pivot.
 - `fx` lists up to four whole-body effects for things too many or too small for parts: each picks
   splats (`select`: all, a key or a part; `mask`: half-space, strips, sphere or wedge), moves them
-  (push, along, scatter, hop, shiver, turn, counter-rotating bands, bend, peel, split) and colours
+  (push, along, scatter, hop, shiver, turn, counter-rotating bands, bend, peel, split) and colors
   them (glow, recolour, brighten, sparkle, fade, darken), shaped by a pattern (a growing shell, a
   band, a stagger per piece, a swirl wipe, a wave). `drive()` sets
   `out.fx.<name> = { move, color, phase }` each frame.
@@ -1254,15 +1254,15 @@ A link that snaps sends a hit with `snap: true` (and `strand`, the rope's `name`
 `hands.sound(hit, vol)`. In tests, `player.handsOn.state().soft` gives each strand's nodes, their
 homes and how many links are broken. `tests/hec-engine.spec.mjs` measures each piece.
 
-## 6. Behaviours
+## 6. Behaviors
 
-A behaviour moves each splat on the GPU, every frame. Set `kind` and `params: [a, b]` on a shape or
-a cloud splat:
+A behavior moves each splat on the GPU, every frame. Set `kind` and `params: [a, b]` on a shape or a
+cloud splat:
 
 | kind      | What it does                                              | a                                     | b                                |
 | --------- | --------------------------------------------------------- | ------------------------------------- | -------------------------------- |
 | `orbit`   | Turns around the toy's up axis.                           | turns per second at the rim (radians) | falloff: 0 rigid, 1.5 Keplerian  |
-| `beat`    | Heartbeat swell from the centre.                          | amount (0.05)                         | phase                            |
+| `beat`    | Heartbeat swell from the center.                          | amount (0.05)                         | phase                            |
 | `breathe` | Slow swell.                                               | amount                                | phase                            |
 | `flame`   | Rises, shrinks and reddens in a loop.                     | height in toy radii                   | phase (random)                   |
 | `rise`    | Drifts up and fades (embers, bubbles, smoke).             | height                                | phase                            |
@@ -1277,7 +1277,7 @@ a cloud splat:
 | `band`    | Glows (`out.glow`) as its channel passes a.               | where along the channel (0..1)        | band width (0.08)                |
 | `fade`    | Fades out (alpha) as its channel passes a.                | where along the channel               | width; negative: fades in        |
 
-`amount` from `drive` multiplies beat, breathe, flame, rise, twinkle, sway and wave. Behaviours run
+`amount` from `drive` multiplies beat, breathe, flame, rise, twinkle, sway and wave. Behaviors run
 in the toy's rest pose, before parts move it.
 
 **Rim (glass; lane Fix4, September 30, 2026).** `kind: "rim", params: [face, sharpness]` sets a
@@ -1302,10 +1302,10 @@ with `channel: 0..3` (or `(c) => n`):
   red cell curling into a sickle, a cell pinching in two, a knot contorting. Return `null` to keep a
   splat still. Targets count in the fit. Splats keep the orientation they were built with, so where
   the surface turns a lot use rounder splats (`flat` 0.4 or more). Morph combines with a part (the
-  part moves the morphed splat), not with another behaviour.
-- **Band**: `kind: "band", params: [at, width]` adds the glow colour where the channel passes `at`:
-  a wave of light that starts at the tap (a calcium wave, a sheen wiping across). Give each splat
-  its `at` from its place (distance along an arm, height).
+  part moves the morphed splat), not with another behavior.
+- **Band**: `kind: "band", params: [at, width]` adds the glow color where the channel passes `at`: a
+  wave of light that starts at the tap (a calcium wave, a sheen wiping across). Give each splat its
+  `at` from its place (distance along an arm, height).
 - **Fade**: `kind: "fade", params: [at, width]` clears a splat by its alpha as the channel passes
   `at` (a negative width makes it appear instead). Unlike `visible` and `grow`, it does not shrink
   splats, so a fading layer never turns to speckle.
@@ -1320,18 +1320,18 @@ Channel tricks from the lanes (2026-09-26):
   the tokens move through the keyframes (E4-finish's ocean wave, 38 control tokens). Keep the
   bending in the plane the camera looks along, and use rounder splats.
 - **Bending one piece that touches itself** (a pretzel): use one smooth twist of space for every
-  splat, so crossings stay joined. Moving each splat along a new centre line lifts the rope off
+  splat, so crossings stay joined. Moving each splat along a new center line lifts the rope off
   itself where it crosses (E5's pretzel r2; r3 fixed it).
 - **Growing out of a hidden spot** (a tongue, sparks, sand): build the morph bunched up at the spot
   (`p` at rest) and morph it out to its full shape (`to` at full reach).
-- **A travelling wave with morphs**: split the moving pieces between three channels driven a third
-  of a cycle apart (E6b's sea urchin spines).
-- **Negative glow darkens**: `out.glow` with negative colours on a `band` layer makes night fall
-  (the Taj Mahal) or casts a moving shadow (the Washington Monument's sundial shadow, a band on the
+- **A traveling wave with morphs**: split the moving pieces between three channels driven a third of
+  a cycle apart (E6b's sea urchin spines).
+- **Negative glow darkens**: `out.glow` with negative colors on a `band` layer makes night fall (the
+  Taj Mahal) or casts a moving shadow (the Washington Monument's sundial shadow, a band on the
   ground at each splat's bearing).
 - **A sustained light from a band**: give it `params: [1, 0.5]` and hold its channel partway (0.5 to
   0.7); the glow follows the channel (the Eiffel Tower's gold lights, Stonehenge's stones).
-- **A frayed edge**: a colour function that returns `null` for more splats towards an edge makes a
+- **A frayed edge**: a color function that returns `null` for more splats toward an edge makes a
   surface fade into its surroundings instead of stopping at a straight line (the ocean wave).
 
 From lanes Math and Fix3 (September 27–28, 2026):
@@ -1351,7 +1351,7 @@ From lanes Math and Fix3 (September 27–28, 2026):
 ## 7. House rules
 
 - **Deterministic**: only `k.rand()`, `c.rand()` and the kit's noise. No `Math.random`, no dates.
-- **Generic designs**: no logos, brands, league marks or named products. Landmarks may be modelled;
+- **Generic designs**: no logos, brands, league marks or named products. Landmarks may be modeled;
   modern named buildings become generic ("supertall"). Weapons are medieval or fantasy only. Anatomy
   is stylised and friendly, never gory.
 - **Keep details**: seams, stitches, eyes, flames, coins and labels use `pattern: false` or `keep`.
@@ -1359,7 +1359,7 @@ From lanes Math and Fix3 (September 27–28, 2026):
   inside (a cake has sponge, a planet has a core).
 - **Fast**: `node tools/check-packs.mjs <pack>` must report every toy under 1.5 s at 160,000 splats.
   Avoid per-splat loops over hundreds of items; bucket or precompute.
-- **Stable**: at most 15 parts; behaviour names from the table; positions finite.
+- **Stable**: at most 15 parts; behavior names from the table; positions finite.
 
 ## 7b. Effect quality
 
@@ -1370,7 +1370,7 @@ CLAUDE.md.
   (`soft` above about 0.1) bend the picture where a part meets the rest, and at any visible size
   that reads as a stretched photo (the E1 cat, horse, elephant trunk and tomatoes). Use soft edges
   only to hide a seam of a few percent of the toy. When a scan cannot move a part cleanly:
-  1. cut the part out with hard edges (`soft: 0.02`, colour-keyed regions) and keep the move small
+  1. cut the part out with hard edges (`soft: 0.02`, color-keyed regions) and keep the move small
      enough that no gap shows;
   2. hide the scan's part (`visible: 0`) and show a kit-built stand-in from an `addon` that moves;
   3. rebuild the toy as a kit toy (a recipe) where every piece is its own part; or
@@ -1397,7 +1397,7 @@ CLAUDE.md.
   showing it; the owner reviews the clips on the private "Effect review" page before merging.
 - **Draw order (E2).** Splats are depth-sorted in the pose they were built in, so:
   1. A solid body turned more than a quarter turn draws its far side over its near side (it looks
-     hollow). For a full turn, build it twice, the second copy half a turn round and coloured as the
+     hollow). For a full turn, build it twice, the second copy half a turn round and colored as the
      first would be there, and show whichever copy is within a quarter turn of its built pose
      (`spinParts` in `src/packs/space.js`: Venus, Jupiter, Neptune).
   2. A layer of splats above a turning body (clouds) draws wrongly even then: paint it onto the
@@ -1410,7 +1410,7 @@ CLAUDE.md.
   4. A fixed layer over part of a turning body (Earth's night, Mercury's heat) is covered wherever
      the body's shown copy was built nearer the camera. Build four copies a quarter turn apart and
      show one that was built on the far side of where it is shown (`spinQuarters`: side -1 when the
-     layer is on the side the ground turns towards, +1 when it turns away). Things that ride over
+     layer is on the side the ground turns toward, +1 when it turns away). Things that ride over
      that layer (Earth's city lights) are built where they first come into it, so they are always
      shown at or past their built pose.
   5. Splats inside a turning body (`interior`) draw over its turned surface: keep a turning body
@@ -1427,7 +1427,7 @@ CLAUDE.md.
      American football) loses its ends. Build a long one twice instead (rule 1; lane Math).
   10. Don't bore holes into a body that turns: dark tubes inside it (a bowling ball's finger holes)
       draw through the shell once it turns. Paint them on the surface.
-  11. Figures that walk towards the camera are built at the point of their path nearest the camera
+  11. Figures that walk toward the camera are built at the point of their path nearest the camera
       (the Parthenon's procession vanished under the rock when built where it started).
   12. Tokens that move far (a cube's cubies, a model's bricks) set `out.resort` on the frame they
       land, and the player sorts them again where they stand. Do it once per landing, not every
@@ -1436,7 +1436,7 @@ CLAUDE.md.
       between sorts. Set `out.resort` a few times during the glide, not only when it lands (lane
       AI).
 - **Glossy things that spin.** Baked light turns with a spinning body, so a rolling pool ball looks
-  like glass. Spin an unlit copy built tiny at the centre (it sorts behind everything, from any
+  like glass. Spin an unlit copy built tiny at the center (it sorts behind everything, from any
   camera) under a fixed see-through layer of light (`glossSpin()` in `src/packs/balls.js`).
 - **Thin ribbons need bigger splats.** A thin ribbon with a high weight gets splats too small to see
   below about 300 px, and the curve vanishes. Use fewer, bigger splats (weight 2 to 2.5, size 1.5;
@@ -1477,9 +1477,9 @@ CLAUDE.md.
   its rest pose (the kiwi). A piece that must look right both still and moving fast can be two
   copies that swap while it is fast (the avocado stone). A toggle can tell a two-part story, with
   each tap remembering which way it goes (the apple: a bite, then a worm and it heals).
-- **Light that plays over a surface.** A layer of splats coloured exactly as the surface is there
+- **Light that plays over a surface.** A layer of splats colored exactly as the surface is there
   (invisible at rest) with `kind: "pulse"` flashes as `out.glow` runs over it; change the glow's
-  colour each frame for rainbow fire (diamond, opal) or keep it one colour for a running light
+  color each frame for rainbow fire (diamond, opal) or keep it one color for a running light
   (emerald, the aurora's folds). The glow runs at a fixed speed (a pass every 2.9 s at normal
   speed), so it suits loops and repeats, not a front that must start at the tap: for that, use
   `kind: "grow"` and `out.grow` (the Moon's terminator, the Mars dust front, the ruby's glow).
@@ -1593,7 +1593,7 @@ SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium npx playwright test tests/kit.spec.
 ```
 
 Look at the contact sheet: every toy should be recognisable at 200 px, fill its square, and face the
-viewer. `make-thumbs` renders with motion off, so behaviours show their resting pose. Check a tap
+viewer. `make-thumbs` renders with motion off, so behaviors show their resting pose. Check a tap
 effect with `effect-strip`: it should last at least 1.5 s, move at least about a tenth of the toy
 (or change its light clearly), and be obvious within the first half second.
 

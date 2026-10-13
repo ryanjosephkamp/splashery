@@ -2,7 +2,7 @@
 // browser. Pure JavaScript (no engine imports) so it can run anywhere.
 //
 // A generator fills a SplatBuffer: positions, anisotropic scales, rotations
-// (x, y, z, w) and colours (display RGB plus opacity). Surface splats are
+// (x, y, z, w) and colors (display RGB plus opacity). Surface splats are
 // flat discs lying on the surface; a share of splats fills the inside so the
 // slice effect has something to reveal. Clay operations (add or erase blobs)
 // are replayed on top, in order, so a saved JSON rebuilds the same toy.
@@ -88,7 +88,7 @@ const TAU = Math.PI * 2;
 // ---- Buffer -----------------------------------------------------------------
 
 export class SplatBuffer {
-  // `anim` adds the per-splat part and behaviour data kit toys carry
+  // `anim` adds the per-splat part and behavior data kit toys carry
   // (see KINDS in effects.js): [part + 16 * flags, kind, a, b].
   constructor(capacity, { anim = false } = {}) {
     this.capacity = capacity;
@@ -167,7 +167,7 @@ export function hexRgb(hex) {
   return [((n >> 16) & 255) / 255, ((n >> 8) & 255) / 255, (n & 255) / 255];
 }
 
-// Samples a palette. `sharp` (0..1) keeps more of each pure colour and
+// Samples a palette. `sharp` (0..1) keeps more of each pure color and
 // shortens the blends between them, so mixes do not go muddy.
 function gradient(stops, t, sharp = 0) {
   t = clamp01(t) * (stops.length - 1);
@@ -334,7 +334,7 @@ function makeShape(id, noise) {
           hi[k] = Math.max(hi[k], o[k]);
         }
       }
-      // Centre the knot on the origin.
+      // Center the knot on the origin.
       const mid = [0, 1, 2].map((k) => (lo[k] + hi[k]) / 2);
       return {
         area: length * TAU * tube,
@@ -372,7 +372,7 @@ export function randomDir(rand) {
   return [r * Math.cos(a), z, r * Math.sin(a)];
 }
 
-// ---- Colouring --------------------------------------------------------------
+// ---- Coloring --------------------------------------------------------------
 // Returns { surface(p, n, rand), core(p, depth, rand), displace(p, n) }.
 
 function makeColoring(paletteId, seed, noise, colorNoise) {
@@ -582,7 +582,7 @@ function makeColoring(paletteId, seed, noise, colorNoise) {
 
 // ---- Generator ----------------------------------------------------------------
 
-// Normalises generator params (also used when loading JSON).
+// Normalizes generator params (also used when loading JSON).
 export function normalizeGenerator(g, profile = "high") {
   const src = g && typeof g === "object" ? g : {};
   const max = PROFILES[profile]?.maxCount ?? PROFILES.high.maxCount;

@@ -4,7 +4,7 @@
 //
 //   node tools/sp2-stars.mjs
 //
-// The stars come from the Gaia Catalogue of Nearby Stars (GCNS; Gaia
+// The stars come from the Gaia catalog of Nearby Stars (GCNS; Gaia
 // Collaboration, Smart et al. 2021, A&A 649, A6; Gaia data, CC BY-SA 3.0
 // IGO), read from CDS VizieR (J/A+A/649/A6): each star's Galactic x, y, z
 // (the median of its distance), G magnitude and BP and RP magnitudes. Gaia

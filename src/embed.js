@@ -23,7 +23,7 @@ function setPageTheme(theme) {
 }
 
 const background = params.get("bg") || params.get("background") || null;
-// A transparent iframe stays see-through only when its colour scheme matches
+// A transparent iframe stays see-through only when its color scheme matches
 // the iframe element's on the host page; otherwise the browser paints an
 // opaque backdrop behind it. Both sides say "light": the snippet sets it on
 // the iframe, and here the meta tag changes too (with "light dark" there, a

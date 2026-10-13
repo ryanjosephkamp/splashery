@@ -106,7 +106,7 @@ function wire(k, pts, r, { color = "#5b6b8c", to, channel = 0, part, weight = 1.
   };
   if (part !== undefined) opts.part = part;
   if (to !== undefined) {
-    // Each splat moves straight out from (or in towards) the wire's centre
+    // Each splat moves straight out from (or in toward) the wire's center
     // line.
     opts.channel = channel;
     opts.to = (c) => {
@@ -119,7 +119,7 @@ function wire(k, pts, r, { color = "#5b6b8c", to, channel = 0, part, weight = 1.
 }
 
 // A glowing bead of light (a token, hidden at rest), built at `p`: a white
-// hot core in a coloured halo.
+// hot core in a colored halo.
 function bead(k, p, r, color, token) {
   k.add(k.sphere(r * 0.6), {
     pos: p,
@@ -231,7 +231,7 @@ function inkAt(line, s, t) {
 // The width of a line of text in font pixels.
 const textWidth = (str) => str.length * 6 - 1;
 
-// A line of text facing +Z, centred on `at`, `px` the size of one font pixel.
+// A line of text facing +Z, centered on `at`, `px` the size of one font pixel.
 // Its splats go only where the letters' ink is (one square per font pixel,
 // sampled evenly), twice as dense as a plain surface at the same splat size,
 // so letters read solid at phone size.
@@ -323,7 +323,7 @@ const SEGS = [
 ];
 const DIGIT_SEGS = ["abcdef", "bc", "abdeg", "abcdg", "bcfg", "acdfg", "acdefg", "abc", "abcdefg", "abcdfg"]; // prettier-ignore
 
-// A seven-segment digit of height h at p (its centre): each segment on its
+// A seven-segment digit of height h at p (its center): each segment on its
 // own token (tokens from `token` to token + 6), shown only when lit. Unlit
 // segments are not drawn at all, so a counter never reads as a dim "8".
 function sevenSeg(k, p, h, token, { on = "#ff5a4f" } = {}) {
@@ -627,7 +627,7 @@ const CNN_AT = {
   bars: -0.88,
   barH: 0.62,
 };
-// The centre of cell (r, c) of an n x n grid centred at g.
+// The center of cell (r, c) of an n x n grid centered at g.
 const cellAt = (g, n, cell, r, c) => [g[0] + (c - (n - 1) / 2) * cell, g[1] - (r - (n - 1) / 2) * cell, g[2] ?? 0]; // prettier-ignore
 // The 3D model: the maps are slabs of little cubes standing one behind
 // another (the picture in front, the feature map behind it, the pooled map
@@ -646,7 +646,7 @@ const featColor = (v) => mix("#16305a", "#7ff6ff", Math.pow(v, 0.8));
 
 // The recurrent network: three words go into the cell one at a time, and
 // the hidden state (an orb) comes out, loops back round and goes in again
-// with each one, its colour mixing in each word's colour.
+// with each one, its color mixing in each word's color.
 const RNN = (() => {
   const words = ["THE", "CAT", "SAT"];
   const wordColors = ["#36d6c3", "#a66bff", "#ff9a3c"];
@@ -677,7 +677,7 @@ const RNN = (() => {
 })();
 const RNN_STEP = 1.2;
 
-// The LSTM's three gates on the cell's face, and their slats' centres.
+// The LSTM's three gates on the cell's face, and their slats' centers.
 const RNN_GATES = [
   { label: "F", color: "#ff6b8a" },
   { label: "I", color: "#6be38f" },
@@ -758,7 +758,7 @@ const TF = (() => {
 const TF_HEADS = ["#4fe3ff", "#ff5ad1"];
 const TF_TILE = [0.42, 0.22];
 
-// A word tile: a dark block with a coloured rim and its word, on a token.
+// A word tile: a dark block with a colored rim and its word, on a token.
 function wordTile(k, word, p, color, token, { w = TF_TILE[0], h = TF_TILE[1], px = 0.02 } = {}) {
   const ride = token === undefined ? {} : { kind: "token", params: [token, 0] };
   k.add(k.box(w, h, 0.05), {
@@ -842,10 +842,10 @@ const LOOP = (() => {
 // The diffusion model: a small rubber duck (ellipsoids) whose splats rest
 // as a cloud of random specks. Each denoising step moves every speck part of
 // the way to its place on the duck (a morph on channel 0) and clears some of
-// the loose coloured specks (a fade on channel 1), while the counter runs
+// the loose colored specks (a fade on channel 1), while the counter runs
 // down from 50 to 0.
 const DUCK = [
-  // [centre, radii, colour]
+  // [center, radii, color]
   [[0, 0, 0], [0.62, 0.36, 0.46], "#ffd21f"],
   [[0.22, 0.04, 0], [0.4, 0.34, 0.42], "#ffd21f"],
   [[0.3, 0.56, 0], [0.28, 0.28, 0.28], "#ffd21f"],
@@ -2055,7 +2055,7 @@ function buildRnn3D(k, lstm) {
       );
       text(k, g.label, [g.c[0], g.c[1] - 0.155, g.c[2] + 0.02], 0.016, g.color);
     });
-  // The orb: four copies, one per colour (tokens 3 to 6), in front of the
+  // The orb: four copies, one per color (tokens 3 to 6), in front of the
   // cell.
   RNN.orbColors.forEach((col, j) => {
     const p = G.path(0);
@@ -2518,7 +2518,7 @@ function buildClassicTf(k, model) {
   const W = T.W;
   k.data = { view: model ? "model" : "poster", diagram: "classic" };
   const depth = model ? 0.24 : 0.04;
-  const zf = model ? 0 : 0.03; // box centres
+  const zf = model ? 0 : 0.03; // box centers
   const front = zf + depth / 2;
   // A label: flat text on the poster, on a dark plate in 3D (so it reads
   // against any background).
@@ -3463,7 +3463,7 @@ export const RECIPES = {
     controls: [{ key: "go", label: "Read", type: "pulse", ease: 4.5 }],
     action: { key: "go", label: "Read a sentence" },
     // Each word rises into the cell; the cell flashes and the orb (the hidden
-    // state) takes on the word's colour mixed with what it carried, runs out
+    // state) takes on the word's color mixed with what it carried, runs out
     // of the cell, round the loop and back in, ready for the next word. The
     // LSTM style also opens and shuts its forget, input and output gates.
     drive(t, c, out, info) {
@@ -3491,7 +3491,7 @@ export const RECIPES = {
         if (run > 0 && run < 1) f = run;
       });
       if (on && s > 4.0) orb = 0;
-      // The orb: one copy per colour, one shown.
+      // The orb: one copy per color, one shown.
       const p = G.path(ease(f));
       const home = G.path(0);
       for (let j = 0; j < 4; j++)
@@ -3579,7 +3579,7 @@ export const RECIPES = {
           );
           text(k, g.label, [g.c[0], g.c[1] - 0.155, 0.152], 0.016, g.color);
         });
-      // The orb: four copies, one per colour (tokens 3 to 6).
+      // The orb: four copies, one per color (tokens 3 to 6).
       RNN.orbColors.forEach((col, j) => {
         const p = RNN.path(0);
         k.add(k.sphere(0.085), {
@@ -3647,7 +3647,7 @@ export const RECIPES = {
     // The encoder-decoder diagram's key sits here in the panel, off the toy.
     note: "Encoder–decoder key: ◉ attention · ◒ masked attention · + add & norm · » feed forward · ⠿ embedding · ∿ positional encoding · ╱ linear · ▁▃▇ softmax · N× repeated N times. HELLO WORLD goes in, and the prepared decoder example, given START HOLA, ends with MUNDO. Its words and attention strengths are stored.", // prettier-ignore
     // Arcs of light jump between the word tiles (thicker where attention is
-    // stronger, a colour for each head); the tiles rise through the
+    // stronger, a color for each head); the tiles rise through the
     // feed-forward block to the next layer, where new arcs jump, then up
     // through its block to the top; the next word drops into place at the
     // end of the row.
@@ -3762,7 +3762,7 @@ export const RECIPES = {
       const on = s >= 0;
       const L = LOOP;
       const at = info.data?.view === "model" ? (d) => loopTilt(L.at(d)) : L.at;
-      // Distance travelled: three laps between 0.2 s and 4.0 s, easing in
+      // Distance traveled: three laps between 0.2 s and 4.0 s, easing in
       // and out.
       const D = on ? 3 * L.P * ease(band(s, 0.2, 4.0)) : 0;
       const blur = on ? band(s, 4.45, 4.9) : 0;
@@ -3922,7 +3922,7 @@ export const RECIPES = {
       const shapes = DUCK.map(([, r]) => k.ellipsoid(r[0], r[1], r[2]));
       const areas = shapes.map((sh) => sh.area);
       const total = areas.reduce((a, b) => a + b, 0);
-      // A point on the duck, its normal and its colour.
+      // A point on the duck, its normal and its color.
       const duckPoint = (rand) => {
         for (let tries = 0; tries < 40; tries++) {
           let x = rand() * total;
@@ -3962,7 +3962,7 @@ export const RECIPES = {
           return d && { p: d.q, n: d.n, flat: 0.45, color: d.color, part: solid };
         });
       }
-      // Loose coloured specks that clear, step by step, on channel 1.
+      // Loose colored specks that clear, step by step, on channel 1.
       k.cloud({ share: model ? 0.2 : 0.22, size: 0.9, pattern: false }, (rand) => ({
         p: cloudAt(rand),
         color: [rand(), rand(), rand()],
@@ -4053,7 +4053,7 @@ export const RECIPES = {
       k.data = { path: pts };
       const loss = ["#1b3a8a", "#1f8fb3", "#3cc48a", "#d9d24a", "#f08a3c", "#d94a3c"];
       const shade01 = (v) => clamp01((v + 0.3) / 1.25);
-      // The landscape, coloured by height with contour lines.
+      // The landscape, colored by height with contour lines.
       k.add(
         k.param((u, v) => {
           const x = -1 + 2 * u;

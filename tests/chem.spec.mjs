@@ -187,7 +187,7 @@ test("embedding: benzene is a flat regular hexagon", () => {
     expect(d).toBeLessThan(1.45);
   }
   expect(planeDeviation(mol.atoms.map((a) => a.p))).toBeLessThan(0.05);
-  // Centred on the origin.
+  // Centered on the origin.
   for (let k = 0; k < 3; k++)
     expect(Math.abs(mol.atoms.reduce((s, a) => s + a.p[k], 0))).toBeLessThan(1e-2);
 });

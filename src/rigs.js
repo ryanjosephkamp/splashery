@@ -1,10 +1,10 @@
 // Rigs for captured toys and shelf shapes (see src/rig.js): parts made of
 // soft ellipsoid regions in world coordinates, plus controls, an action and
 // drive() as in a kit recipe. Place regions with ?rig=show, which tints each
-// part (and the colour keys), and with tools/rig-map.mjs.
+// part (and the color keys), and with tools/rig-map.mjs.
 //
 // Beyond parts, a rig can have:
-//   keys   up to two colour keys (seeds, jam, strings): { color, tol, at, r }
+//   keys   up to two color keys (seeds, jam, strings): { color, tol, at, r }
 //          or { long } for long thin splats; see tagRig in src/rig.js
 //   fx     up to four whole-body effects (src/rig-fx.js explains them)
 //   addon  { build(k), count }: a small kit-built splat cloud in world
@@ -49,9 +49,9 @@ const vary = (tap, salt = 0) => {
 };
 
 // The home camera looks from here (yaw 0.55): effects that show a face turn
-// towards it.
+// toward it.
 const VIEW = [Math.sin(0.55), 0, Math.cos(0.55)];
-// The carrot cake's slice lifts out towards the viewer and up.
+// The carrot cake's slice lifts out toward the viewer and up.
 const SLICE_DIR = unit([VIEW[0] * 0.55, 1, VIEW[2] * 0.55]);
 
 // A part that turns (ql about its own pivot pl) while riding on another part
@@ -233,7 +233,7 @@ const SHELLS = [
 // The wooden elephant's trunk, traced from the scan's splats: it rises from
 // the face, curls back over the head and its tip rests on the forehead, so
 // the scan's own trunk cannot move without tearing. A kit-built trunk (five
-// segments on ball joints, in the scan's colours) takes its place.
+// segments on ball joints, in the scan's colors) takes its place.
 const TRUNK = (() => {
   const path = [
     [-0.869, 0.53, 0.417], [-0.884, 0.562, 0.436], [-0.888, 0.601, 0.442], [-0.881, 0.64, 0.446],
@@ -282,7 +282,7 @@ const TRUNK_REGIONS = [
   { at: [-0.47, 0.862, 0.15], r: 0.05 },
   { at: [-0.445, 0.805, 0.15], r: 0.055 },
 ].map(({ at, r }) => ({ at, r: [r, r, r] }));
-// The carving's wood and its dark specks, from the scan's colours round the
+// The carving's wood and its dark specks, from the scan's colors round the
 // trunk and forehead.
 const WOOD = "#633f25";
 const WOOD_SPECK = "#2b1a0e";
@@ -341,7 +341,7 @@ const HORSE = {
 
 // ---- Add-on builders ------------------------------------------------------------
 
-// A small open flower: petals round a centre, facing n.
+// A small open flower: petals round a center, facing n.
 function flower(k, at, n, part, { petal = "#ff4f9a", heart = "#ffd23f", r = 0.05 } = {}) {
   const q = quatFromTo([0, 0, 1], unit(n));
   const petals = 8;
@@ -392,8 +392,8 @@ function flameAt(k, at, { h = 0.2, r = 0.05, share = 0.5, part = 0, glowPart = 0
   });
 }
 
-// A flat panel of splats: fn(u, v) -> colour or null, over a w x h
-// rectangle centred at `at`, facing n (up is roughly +y).
+// A flat panel of splats: fn(u, v) -> color or null, over a w x h
+// rectangle centered at `at`, facing n (up is roughly +y).
 function panel(k, at, n, w, h, share, part, fn, { size = 0.6 } = {}) {
   const nz = unit(n);
   const x = unit(cross([0, 1, 0], nz));
@@ -672,7 +672,7 @@ export const RIGS = {
       const wipe = env(e, 1.0, 1.25, 2.1, 2.35);
       const scrub = Math.sin(e * TAU * 5);
       const reach = [0.45 * rub + (0.8 + 0.15 * scrub) * wipe, 0.45 * rub + (0.8 - 0.15 * scrub) * wipe]; // prettier-ignore
-      // While rubbing, the feet cross towards each other and back.
+      // While rubbing, the feet cross toward each other and back.
       const cross = 0.25 * rub * scrub;
       ["A", "B"].forEach((k, i) => {
         const L = FLY[k];
@@ -868,7 +868,7 @@ export const RIGS = {
     },
   },
 
-  // Like the grape: the dark skin peels back towards you in five strips to
+  // Like the grape: the dark skin peels back toward you in five strips to
   // show the pale green flesh, then closes.
   blueberry: {
     // A solid core just inside (lane Sharpness B), hidden while it peels.
@@ -959,11 +959,11 @@ export const RIGS = {
   },
 
   // Each tomato is its own solid piece (hard regions split by the nearest
-  // centre, the white plate left out). The plate gives a little shake and a
+  // center, the white plate left out). The plate gives a little shake and a
   // wave of small hops runs round it: four groups of tomatoes pop up in turn
   // and land on the four thuds of the sound, each rocking outward and
   // settling with a wobble. Hops stay low and rolls small, so no tomato
-  // shows the unscanned side where it touched its neighbours.
+  // shows the unscanned side where it touched its neighbors.
   tomatoes: {
     // The plate's underside: a white glazed foot and floor, so the plate
     // reads solid from below (lane Sharpness B).
@@ -1214,7 +1214,7 @@ export const RIGS = {
     addon: {
       count: 26000,
       build(k) {
-        // The carved wood: the scan's mean colour with a soft grain, lighter
+        // The carved wood: the scan's mean color with a soft grain, lighter
         // on top, and the sparse dark specks of the carving.
         const wood = (c) => {
           if (c.rand() < 0.035) return { c: WOOD_SPECK, keep: true, size: 0.55 };
@@ -1244,7 +1244,7 @@ export const RIGS = {
           pos: TRUNK.tip,
         });
         // The forehead where the tip rested (the scan never saw it).
-        // Its splats shrink towards the rim, so it blends into the scan.
+        // Its splats shrink toward the rim, so it blends into the scan.
         k.add(k.ellipsoid(0.1, 0.022, 0.085), {
           pos: [-0.53, 0.745, 0.165],
           rot: [0, 35, 4],
@@ -2039,7 +2039,7 @@ export const RIGS = {
       const start = TAU * vary(info?.tap, 7);
       const round = start + e * 7 + e * e * 2.2;
       const d = [Math.cos(round), 0, Math.sin(round)];
-      // Rim contact point (radius 0.59, bottom -0.9 in the can's normalised size).
+      // Rim contact point (radius 0.59, bottom -0.9 in the can's normalized size).
       const rim = [0.59 * d[0], -0.9, 0.59 * d[2]];
       const q = quatAxisAngle(cross([0, 1, 0], d), lean);
       const moved = quatRotate(q, rim);

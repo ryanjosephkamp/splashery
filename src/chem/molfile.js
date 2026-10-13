@@ -3,7 +3,7 @@
 //
 //   { atoms: [{ el: "C", p: [x, y, z], charge? }], bonds: [[i, j, order]], name? }
 //
-// Positions are in ångströms and centred on the origin; bond orders are 1, 2
+// Positions are in ångströms and centered on the origin; bond orders are 1, 2
 // or 3 (aromatic rings kekulized).
 //
 //   readMoleculeFile(text, fileName)  MOL/SDF (V2000 and V3000), XYZ or PDB

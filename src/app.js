@@ -53,7 +53,7 @@ function showFallback(reason) {
   document.body.dataset.ready = "true";
 }
 
-// How a toy likes flag colours laid on (recipe.patternProjection,
+// How a toy likes flag colors laid on (recipe.patternProjection,
 // patternDetail and patternAmount), or null for the usual way; `usual`
 // gives the usual way itself.
 function flagLook(recipe, usual = false) {
@@ -72,7 +72,7 @@ const sameLook = (p, look) =>
 
 // ---- View settings (lane Viewer) -------------------------------------------------
 // The turntable is one setting for every toy, remembered on this device; the
-// tilt lock and flag colours belong to each toy, remembered for the visit.
+// tilt lock and flag colors belong to each toy, remembered for the visit.
 
 const TURNTABLE_KEY = "splashery.turntable";
 
@@ -143,7 +143,7 @@ class App {
     this.tiltLocks = new Map(); // toy key -> locked (lane Viewer)
     this.handsChoice = new Map(); // toy key -> Hands-on on (lane Physics)
     this.spins = new Map(); // UI r3: toy key -> turntable, chosen for a toy that holds still
-    this.toyFlags = new Map(); // toy key -> its flag colours, or null (lane Viewer)
+    this.toyFlags = new Map(); // toy key -> its flag colors, or null (lane Viewer)
     this.globalFlag = null; // UI r3: the top bar's flag, for every toy (a flag code)
     this.popOut = popOutPref(); // lane Pages r6: the top bar's Pop out, for the page toys
   }
@@ -375,7 +375,7 @@ class App {
     // or as it was left on this toy earlier in the visit.
     if (this.handsChoice.has(key)) player.handsOn.setOn(this.handsChoice.get(key));
     this.showHands();
-    // A toy that lays flag colours on its own way (the chess board: from
+    // A toy that lays flag colors on its own way (the chess board: from
     // above, gently) gets that way when it comes out with a flag on, and
     // the next toy gets the usual way back, unless the look was changed.
     const pat = scene.pattern;
@@ -532,7 +532,7 @@ class App {
     this.ui.setCredits(nodes);
   }
 
-  // The status line under the toy: name, splats, credit and colours.
+  // The status line under the toy: name, splats, credit and colors.
   async updateStatus() {
     const player = this.player;
     const info = player.toyInfo;
@@ -549,7 +549,7 @@ class App {
     if (pat.id === "flag" && pat.flag) {
       const f = await flagInfo(pat.flag);
       if (f) {
-        parts.push(`in the colours of ${f.the ? "the " : ""}${f.name}`);
+        parts.push(`in the colors of ${f.the ? "the " : ""}${f.name}`);
         this.flagCredit = f;
       }
     }
@@ -564,7 +564,7 @@ class App {
     this.sound.stopHeld("toy"); // UI r3: the last toy's tune stops with it
     const player = this.player;
     const scene = player.scene;
-    // Flag colours belong to the toy they were chosen on (lane Viewer): keep
+    // Flag colors belong to the toy they were chosen on (lane Viewer): keep
     // this toy's, and bring back the next toy's own (none if it had none).
     const pat = scene.pattern;
     this.toyFlags.set(toyKey(scene.toy), pat.id === "flag" ? { ...pat } : null);
@@ -656,7 +656,7 @@ class App {
   }
 
   // Everything back to how the toy starts: the scene is rebuilt for the same
-  // toy with no flag colours or pattern, paint, clay, effects, toy options,
+  // toy with no flag colors or pattern, paint, clay, effects, toy options,
   // motion or look changes; Detail goes back to Auto and the view resets.
   async resetAll() {
     const player = this.player;
@@ -987,7 +987,7 @@ class App {
     this.player.setControl(key, value);
   }
 
-  // Rebuilds a kit toy with a changed option (colour, style), or loads a
+  // Rebuilds a kit toy with a changed option (color, style), or loads a
   // scan's other look.
   async setToyOption(key, value) {
     return this.setToyOptions({ [key]: value });

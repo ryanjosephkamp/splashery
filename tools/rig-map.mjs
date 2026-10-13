@@ -5,12 +5,12 @@
 //   python3 -m http.server 4173 --bind 127.0.0.1 &
 //   SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium node tools/rig-map.mjs <out-dir> [--size=420] [--rig] [--at=0.6] [--views=front,right,top,back,bottom,left] [--center=x,y,z --half=0.4] id ...
 //
-// Writes <out-dir>/<id>-map.png. Grid lines are 0.1 apart, labelled every
+// Writes <out-dir>/<id>-map.png. Grid lines are 0.1 apart, labeled every
 // 0.5. Front looks along -z (x right, y up), right along -x (-z right),
 // top along -y (x right, -z up), back along +z (-x right). --rig tints each
 // rig part (as ?rig=show does); --at=0.6 taps the toy and renders the pose
 // that many seconds later. --center and --half zoom in on a box of that
-// half-size round a point (grid lines stay 0.1 apart, labelled every 0.5,
+// half-size round a point (grid lines stay 0.1 apart, labeled every 0.5,
 // with extra labels every 0.1 when zoomed).
 
 import { chromium } from "@playwright/test";
