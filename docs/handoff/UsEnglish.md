@@ -75,6 +75,12 @@ Kept on purpose (British identifier or key, third-party name):
 - docs/audits: URLs and file names (`maths.js`, aluminum and licenses in links).
 - src/packs/space.js:505 and tools/g-looks.mjs:111: `colour(` as a function name in a comment.
 
+- October 13, 2026: full first run 2166/2178; after the fixes, the 27 selected files (354 tests, 347
+  pass before the key fix) and a rerun of kit, e5, taps, hh2-engine, phy, shw, ai: 144 of 145 pass,
+  the one left (shw facts, recipe size changed by comments) fixed by regenerating
+  src/showcase/facts.json. The `site`, `man4`, `man6` checks passed after
+  `node tools/site-build.mjs`. No manual/ files are changed on this branch.
+
 ## Part 2
 
 Done after the Operator freed the files (October 12, 2026, main d5039103 merged in): CREDITS.md,
