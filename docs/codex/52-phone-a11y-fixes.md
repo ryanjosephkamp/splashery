@@ -20,7 +20,7 @@ by keyboard and with a screen reader. Fix what it found that is still true on to
 
 ## Don't touch
 
-`manual/` (a lane owns it now), and the files of the open PRs (#560, #562, #566, #570, #576).
+the files of the open PRs (#560, #562, #566, #581 and #582).
 
 ## Report
 
