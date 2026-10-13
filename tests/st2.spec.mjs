@@ -89,13 +89,15 @@ test.describe("new tabs and toy pages", () => {
     expect(bad.slice(0, 10)).toEqual([]);
   });
 
-  test("the Tinkerer's Manual opens every link in a new tab too", () => {
+  test("the Tinkerer's Manual opens a link that leaves it in a new tab, and one inside it in the same tab", () => {
     const html = fs.readFileSync(path.resolve("manual/all.html"), "utf8");
     const bad = [];
     for (const m of html.matchAll(/<a\s([^>]*?)>/g)) {
       const href = /\bhref="([^"]*)"/.exec(m[1])?.[1];
-      if (!href || href.startsWith("#")) continue;
-      if (!(/target="_blank"/.test(m[1]) && /rel="[^"]*noopener/.test(m[1]))) bad.push(href.slice(0, 60)); // prettier-ignore
+      if (!href) continue;
+      const inside = /^(?:#.*|[a-z0-9-]+\.html(?:#.*)?)$/.test(href);
+      const blank = /target="_blank"/.test(m[1]) && /rel="[^"]*noopener/.test(m[1]);
+      if (inside ? /target=/.test(m[1]) : !blank) bad.push(href.slice(0, 60));
     }
     expect(bad).toEqual([]);
   });
@@ -326,11 +328,9 @@ test.describe("the quick outline", () => {
     await page.goto("/manual/language.html");
     await expect(page.locator(".outline-toggle")).toHaveCount(1);
     await page.locator(".outline-toggle").click();
-    // The link opens the glossary in a new tab (every manual link does, since Manual r8).
-    const [glossary] = await Promise.all([
-      page.waitForEvent("popup"),
-      page.locator("#manual-contents > ol > li > a", { hasText: "Glossary" }).click(),
-    ]);
+    // The link opens the glossary in the same tab (a link inside the manual, since Manual r9).
+    const glossary = page;
+    await page.locator("#manual-contents > ol > li > a", { hasText: "Glossary" }).click();
     await glossary.waitForURL(/glossary\.html/);
     await glossary.waitForTimeout(300);
     const gap = await glossary.evaluate(() => document.getElementById("glossary").getBoundingClientRect().top - document.querySelector(".outline").getBoundingClientRect().bottom); // prettier-ignore

@@ -41,6 +41,11 @@ export const PICTURES = [
   { file: "pic-more-fluids", size: [360, 360], panels: [{ toy: "fluid-lab" }, { toy: "grand-piano" }] },
   { file: "pic-more-looks", size: [320, 320], panels: [{ toy: "splat-equation", opt: { preset: "seashell", splats: "solid" } }, { toy: "splat-equation", opt: { preset: "seashell", splats: "fine" } }, { toy: "splat-equation", opt: { preset: "seashell", splats: "dots" } }] }, // prettier-ignore
   { file: "pic-more-viewer", page: "app", toy: "splat-equation" },
+  // Manual r9: a second picture for five of the sections above
+  { file: "pic-more-bonsai", size: [360, 360], panels: [{ toy: "bonsai" }, { toy: "sunflower" }] },
+  { file: "pic-more-damage", size: [360, 360], panels: [{ toy: "qr-damage" }, { toy: "qr-picture" }] },
+  { file: "pic-more-flames", size: [360, 360], panels: [{ toy: "campfire" }, { toy: "candle" }] },
+  { file: "pic-more-body", size: [360, 360], panels: [{ toy: "anatomy-atlas" }, { toy: "potion-bottle" }] },
   // What Splashery can do that other splat tools can't (unique.html)
   { file: "pic-uq-rules", size: [320, 320], panels: [{ toy: "cactus" }, { toy: "strawberry" }, { toy: "knot" }] },
   { file: "pic-uq-equations", size: [320, 320], panels: [{ toy: "splat-equation", opt: { preset: "klein" } }, { toy: "splat-equation", opt: { preset: "trefoil" } }, { toy: "splat-equation", opt: { preset: "galaxy" } }] }, // prettier-ignore

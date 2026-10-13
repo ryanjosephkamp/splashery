@@ -63,10 +63,10 @@ batch merges as one PR.
   (#565: the baked format in `builders/`)
 
 **Lanes running:** US English (Sonnet, `session_01Lidt6WyFTaVR9bpedcY9Cu`, #570): the American
-spelling sweep the owner asked for on October 12, 2026; files the open Codex PRs change wait for its
-Part 2. Manual r8 (#571, the third audit's fixes, the owner's marks all good) merged with Codex task
-37 (#558) in this batch; its phrasing-only items wait in docs/handoff/ManualR8.md for the owner's
-rewording pass.
+spelling sweep the owner asked for on October 12, 2026; ready, waiting on his OK; manual/ follows in
+its Part 2. Manual r9 (#576: the owner's walkthrough of October 12, the last five demos, the PDF's
+clickable contents, task 47's two factual fixes; his marks all good) merged with Codex task 47's
+report (#575) in this batch. The manual is now final but for its Part 2 spelling sweep.
 
 **Codex** (the owner runs these; tasks in `docs/codex/`, the Studio push 37 to 41 and the second
 wave 42 to 46). The Operator reviews each PR with a Sonnet helper and posts one comment listing the
@@ -81,8 +81,9 @@ fixes; the owner tells the Codex session "Read the Operator's comment on your PR
   legibility 0.775, under 0.8), sent back to Codex.
 - All are labs: merge after the fixes, the tests (`cdx-*` plus the toys' specs) and the owner's
   look.
-- Not yet opened: tasks 42 to 46, and 47 (a short audit of Manual r8's fixes, before the owner's
-  rewording pass) (46 may start now that the Baked engine is in).
+- Ready for the owner to start: tasks 42 to 46 and 49 to 52 (`docs/codex/`). Task 48 (Moving photo,
+  a long Goal run on #560's branch) is running. #562 (Video to 3D) passed its specs but the owner
+  wants it better before it merges. (46 may start now that the Baked engine is in).
 
 Finished and safe to archive with the owner's OK: the Baked engine, Site r5, Manual r7a, Manual r7b,
 Privacy r1, Manual r6, Site r4, and the earlier list below.
