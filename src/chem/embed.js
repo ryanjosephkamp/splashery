@@ -11,7 +11,7 @@
 //      their atom puts them.
 //   3. Relax with a small force field: bond lengths from covalent radii and
 //      bond order, angles from hybridisation (sp 180°, sp2 120°, sp3 109.5°),
-//      flat sp2 centres and flat conjugated rings, a mild preference for
+//      flat sp2 centers and flat conjugated rings, a mild preference for
 //      staggered and trans torsions, and soft repulsion between atoms that
 //      are not bonded.
 //   4. Repeat from a few seeded starts and keep the lowest energy.
@@ -29,15 +29,15 @@ const DEG = Math.PI / 180;
 // matter, since the energy is used for shape and for picking the best start.
 const K_BOND = 400; // (r − r0)²
 const K_ANGLE = 90; // (cos θ − cos θ0)²
-const K_LINEAR = 120; // (1 + cos θ) for linear centres
-const K_IMPROPER = 6; // (signed volume)² keeps sp2 centres flat
+const K_LINEAR = 120; // (1 + cos θ) for linear centers
+const K_IMPROPER = 6; // (signed volume)² keeps sp2 centers flat
 const K_PLANAR = 4; // (1 − cos 2φ) across double and aromatic bonds
 const K_CONJ = 1.2; // the same across single bonds between sp2 atoms
 const K_AMIDE = 3; // ... and across amide C–N bonds
 const K_STAGGER = 0.25; // (1 + cos 3φ) across sp3–sp3 bonds
 const K_TRANS = 0.3; // (1 + cos φ) between heavy atoms across sp3–sp3 bonds
 const K_REPEL = 10; // (d0 − d)² for non-bonded atoms closer than contact
-const K_SPHERE = 30; // 1/d² between the neighbours of 5- and 6-coordinate atoms
+const K_SPHERE = 30; // 1/d² between the neighbors of 5- and 6-coordinate atoms
 
 // Bond length factors by bond order, applied to the sum of covalent radii.
 const ORDER_FACTOR = { 1: 1, 2: 0.87, 3: 0.78, 4: 0.78 };
@@ -204,7 +204,7 @@ function bondLength(atoms, info, k, [a, b, order]) {
   return sum * (ORDER_FACTOR[order] ?? 1);
 }
 
-// The natural angle at centre j, before ring corrections.
+// The natural angle at center j, before ring corrections.
 function baseAngle(atoms, info, j) {
   const h = info.hyb[j];
   if (h === "sp") return 180;
@@ -282,7 +282,7 @@ function buildForceField(atoms, bonds, info) {
         } else if (size && size < 6 && hyb[j] === "sp3") theta = [60, 89, 104.5][size - 3];
         pairs.push({ a: nbs[p], b: nbs[q], theta, fixed });
       }
-    // A flat centre's three angles add up to 360°: the ring ones are set, the
+    // A flat center's three angles add up to 360°: the ring ones are set, the
     // others share what is left (126° outside a five-ring).
     if (hyb[j] === "sp2" && nbs.length === 3) {
       const fixed = pairs.filter((p) => p.fixed);
@@ -302,7 +302,7 @@ function buildForceField(atoms, bonds, info) {
     }
   }
 
-  // Flat sp2 centres.
+  // Flat sp2 centers.
   const imp = [];
   for (let j = 0; j < n; j++)
     if (hyb[j] === "sp2" && adj[j].length === 3) imp.push(j, ...adj[j].map((e) => e.to));
@@ -471,7 +471,7 @@ function makeEnergy({ bonds, bondR0, ang, imp, tor, sphere, topo, contact }) {
         e += K_ANGLE * dc * dc;
         dEdc = 2 * K_ANGLE * dc;
       }
-      // d(cos θ)/d(end atom) for each end; the centre takes minus both.
+      // d(cos θ)/d(end atom) for each end; the center takes minus both.
       const iuv = 1 / (lu * lv);
       const cu = c / (lu * lu);
       const cv = c / (lv * lv);
@@ -486,7 +486,7 @@ function makeEnergy({ bonds, bondR0, ang, imp, tor, sphere, topo, contact }) {
       addGrad(g, j, -dEdc, ax + bx, ay + by, az + bz);
     }
 
-    // Flatness: the signed volume of centre + three neighbours goes to zero.
+    // Flatness: the signed volume of center + three neighbors goes to zero.
     for (let m = 0; m < im.length; m += 4) {
       const c = 3 * im[m];
       const p = 3 * im[m + 1];
@@ -573,7 +573,7 @@ function makeEnergy({ bonds, bondR0, ang, imp, tor, sphere, topo, contact }) {
       addGrad(g, k, p * fi, mx, my, mz);
     }
 
-    // Neighbours of 5- and 6-coordinate atoms push apart evenly.
+    // Neighbors of 5- and 6-coordinate atoms push apart evenly.
     for (let m = 0; m < sp.length; m += 2) {
       const i = 3 * sp[m];
       const j = 3 * sp[m + 1];
@@ -969,8 +969,8 @@ function placeHydrogens(x, info, ff, hydrogens, rng) {
               unit(add(scale(bisector, Math.cos(half)), scale(side, s * Math.sin(half)))),
             );
     } else {
-      // Build a frame from the first heavy neighbour and, for staggering,
-      // the direction away from that neighbour's own neighbours.
+      // Build a frame from the first heavy neighbor and, for staggering,
+      // the direction away from that neighbor's own neighbors.
       const e1 = us[0] ?? unit([rng() - 0.5, rng() - 0.5, rng() - 0.5]);
       let e2;
       if (us[1]) e2 = us[1];
@@ -1076,7 +1076,7 @@ function embedPiece(atoms, bonds, seed) {
 }
 
 // Turns a flat coordinate array around so its longest extent lies along x
-// and its shortest along z (principal axes), centred on the origin.
+// and its shortest along z (principal axes), centered on the origin.
 function alignPrincipal(points) {
   const n = points.length;
   if (!n) return points;
@@ -1131,7 +1131,7 @@ function alignPrincipal(points) {
 // Positions in ångströms for every atom of the graph. If the graph still
 // has hydrogen counts, they are made into atoms first (as withHydrogens
 // does), so the result lines up with withHydrogens(graph).atoms. The result
-// is centred on the origin with its longest extent along x.
+// is centered on the origin with its longest extent along x.
 export function embed3D(graph, { seed = 1 } = {}) {
   const full = graph.atoms.some((a) => a.h > 0) ? withHydrogens(graph) : graph;
   const { atoms, bonds } = full;
@@ -1172,7 +1172,7 @@ const round = (v) => Math.round(v * 1e4) / 1e4 + 0;
 
 // Builds the toy's molecule format from a graph with explicit hydrogens and
 // its positions: { atoms: [{ el, p, charge? }], bonds: [[i, j, order]] },
-// centred on the origin.
+// centered on the origin.
 export function toMolecule(graph, positions) {
   const atoms = graph.atoms.map((a, i) => {
     const atom = { el: a.el, p: positions[i].map(round) };

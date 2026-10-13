@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Prepares the captured toys with @playcanvas/splat-transform (MIT):
-// rotate upright, drop spherical harmonics, centre and scale to a radius of
+// rotate upright, drop spherical harmonics, center and scale to a radius of
 // about 0.9, crop stray floaters, decimate, and write SOG files.
 //
 //   node tools/prepare-assets.mjs            # every toy in tools/assets.json

@@ -1,6 +1,6 @@
 // Games: a chess set that plays a real game. Loaded on demand.
 //
-// Every piece is its own token (behaviour "token"), so all 32 can slide,
+// Every piece is its own token (behavior "token"), so all 32 can slide,
 // hop, leave the board when captured and tip over at the end. Tap a piece
 // and then a square to play a legal move yourself (from any point of the
 // game on the board: the game goes on from there as your own). The game is
@@ -495,8 +495,8 @@ export const RECIPES = {
       quiet: ["touch"],
     },
     note: "Tap a piece, then a square, to move it. Open a PGN file or paste a game to watch it played out on the board.", // prettier-ignore
-    // Flag colours lie over the board from above, gently (30%), keeping
-    // each square's own light or dark; the pieces keep their own colours.
+    // Flag colors lie over the board from above, gently (30%), keeping
+    // each square's own light or dark; the pieces keep their own colors.
     patternProjection: "top",
     patternDetail: 1,
     patternAmount: 0.3,
@@ -669,14 +669,14 @@ export const RECIPES = {
           const across = (fx + fz) % 2 === 0 ? c.p[2] : c.p[0];
           const grain = 0.95 + 0.06 * c.noise(along * 3, across * 28, fx * 7 + fz);
           const col = shade(isLight ? light : dark, grain);
-          // Splats shrink towards a square's edge, so the edges stay straight.
+          // Splats shrink toward a square's edge, so the edges stay straight.
           const ex = 0.5 - Math.abs(((c.p[0] / S + 4) % 1) - 0.5);
           const ez = 0.5 - Math.abs(((c.p[2] / S + 4) % 1) - 0.5);
           const edge = Math.min(ex, ez);
           // A thin dark inlay line between squares, in small splats.
           if (edge < 0.022) return keep(lit("#3a2413", c.n, { spec: 0.1 }), 0.35);
           const size = 0.35 + 0.65 * Math.min(1, (edge - 0.022) / 0.12);
-          // (Not kept out of the pattern layer: flag colours tint the squares.)
+          // (Not kept out of the pattern layer: flag colors tint the squares.)
           return { c: lit(col, c.n, { spec: 0.35, pow: 40 }), size };
         },
       });
@@ -698,7 +698,7 @@ export const RECIPES = {
         });
       }
       // The pieces: turned ivory and ebony, each one a token. They keep
-      // their own colours under flag colours, so the two sides stay light
+      // their own colors under flag colors, so the two sides stay light
       // and dark.
       const tone = { w: "#efe3c8", b: "#2a1d17" };
       for (const t of TOKENS) {

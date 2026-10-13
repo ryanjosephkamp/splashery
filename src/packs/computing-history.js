@@ -33,7 +33,7 @@ const quatZ = (a) => [0, 0, Math.sin(a / 2), Math.cos(a / 2)];
 // ---- Materials -----------------------------------------------------------------------
 
 // A soft key light from above and the front, with a sheen for gloss, baked
-// into the colour (splats are unlit).
+// into the color (splats are unlit).
 const LIGHT = unit([0.35, 0.8, 0.55]);
 const HALF = unit(add(LIGHT, [0, 0, 1]));
 function lit(col, n, { amb = 0.62, dif = 0.45, spec = 0.25, pow = 28 } = {}) {
@@ -203,7 +203,7 @@ const BITS = Object.fromEntries(
 );
 const textWidth = (str) => [...str].length * 6 - 1;
 
-// A line of text facing +Z, centred on its origin, `px` the size of one
+// A line of text facing +Z, centered on its origin, `px` the size of one
 // font pixel. Its splats go only where the letters' ink is (one square per
 // font pixel, sampled evenly), so letters read solid at phone size.
 function inkShape(str, px) {
@@ -235,7 +235,7 @@ function inkShape(str, px) {
     },
   };
 }
-// Text centred on `at` (or left- or right-aligned), facing +Z unless `rot`.
+// Text centered on `at` (or left- or right-aligned), facing +Z unless `rot`.
 function text(k, str, at, px, color, { weight = 8, align = "center", ...rest } = {}) {
   if (!str.trim()) return;
   const W = textWidth(str) * px;
@@ -2049,7 +2049,7 @@ function buildBombe(k, o) {
     block(k, [0.03, 0.03, 0.3], [sx * (W / 2 + 0.035), 1.05, 0.12], steel, { weight: 2 }); // handle bar
     for (let v = 0; v < 8; v++) block(k, [0.006, 0.018, 0.4], [sx * (W / 2 + 0.003), 0.35 + v * 0.05, -0.1], () => keep("#15181b"), { weight: 1.5 }); // prettier-ignore
   }
-  // The drums (tokens 0..35): a coloured drum with a cream letter ring, a
+  // The drums (tokens 0..35): a colored drum with a cream letter ring, a
   // steel hub and a white index notch, turning about its own axle.
   for (let set = 0; set < BO.sets; set++) {
     const x = boX(set);

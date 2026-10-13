@@ -43,7 +43,7 @@ const F_AXIS = [30, 16000];
 
 // ---- A panel of screen splats ------------------------------------------------------
 // One flat splat per pixel of the panel, colored from the recipe's screen
-// canvas at (u, v) (behaviour "screen"). Absolute sizes, so the panel is
+// canvas at (u, v) (behavior "screen"). Absolute sizes, so the panel is
 // exactly as dense as asked whatever else the toy holds.
 function screenPanel(k, { center, width, height, cols, rows, part = 0, u = [0, 1], v = [0, 1] }) {
   const dx = width / cols;

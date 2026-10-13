@@ -1,7 +1,7 @@
 # Credits
 
 Every captured toy on Splashery's shelf (the Photoreal shelf) is either public domain (CC0) or
-licensed under Creative Commons Attribution 4.0 (CC BY 4.0). Nothing with a stricter licence is
+licensed under Creative Commons Attribution 4.0 (CC BY 4.0). Nothing with a stricter license is
 used. The same attributions appear in the app under **About & credits**.
 
 ## Captured toys
@@ -14,7 +14,7 @@ The first four were changed the same way with `tools/prepare-assets.mjs` (the co
 common size, cropped to the object, decimated to at most 450,000 splats, and a lighter 120,000-splat
 copy made for phones.
 
-| Toy          | Work                                                                          | Author                                                                                | Licence                                                       | Changes                                                                                                             |
+| Toy          | Work                                                                          | Author                                                                                | License                                                       | Changes                                                                                                             |
 | ------------ | ----------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
 | Cactus       | [3DGS PLY sample data: cactus](https://note.com/steam_studio/n/ne9736d94f162) | steam studio / 3D SCAN STUDIO iris (Lespace Vision Inc.), https://www.steam-studio.jp | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | Converted to SOG, SH removed, recentred, scaled, cropped to the pot.                                                |
 | Strawberry   | [Strawberry](https://superspl.at/scene/84df8849)                              | Dany Bittel ([patreon.com/DanyBittel](https://www.patreon.com/DanyBittel))            | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)     | Decimated from 1.5M to 450k splats, SH removed, recentred, scaled.                                                  |
@@ -29,19 +29,19 @@ Where the files came from:
   free to use them for commercial and non-commercial purposes without any copyright restrictions."
   The authors ask for a credit link to https://www.steam-studio.jp.
 - **Strawberry, Heart cookie, Honeybee**: SuperSplat scenes with downloads enabled and the CC BY 4.0
-  licence chosen by their authors (checked on each scene page on 22 September 2026). The source
+  license chosen by their authors (checked on each scene page on September 22, 2026). The source
   files are the SOG data the public SuperSplat viewer streams for each scene.
 
 ### More scans from SuperSplat
 
-Twelve more SuperSplat scenes, each with downloads enabled and the CC BY 4.0 licence chosen by its
-author (checked on 23 September 2026 through the scene data SuperSplat publishes for each page). The
-source files are the SOG data the public viewer streams. Each was changed the same way by
+Twelve more SuperSplat scenes, each with downloads enabled and the CC BY 4.0 license chosen by its
+author (checked on September 23, 2026 through the scene data SuperSplat publishes for each page).
+The source files are the SOG data the public viewer streams. Each was changed the same way by
 `tools/prepare-assets.mjs`: spherical harmonics removed, rotated upright, recentred, scaled to the
 common size, decimated to at most 300,000 splats, and a lighter 100,000-splat copy made for phones.
 The Mandeltorus is a rendered fractal rather than a scan.
 
-| Toy                  | Work                                                                                             | Author                                  | Licence                                                   |
+| Toy                  | Work                                                                                             | Author                                  | License                                                   |
 | -------------------- | ------------------------------------------------------------------------------------------------ | --------------------------------------- | --------------------------------------------------------- |
 | Cluster fly          | [Cluster Fly](https://superspl.at/scene/285082b2)                                                | Dany Bittel                             | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) |
 | May beetle           | [MAY-BEETLE-HIRES](https://superspl.at/scene/9d4c4442)                                           | trilithon                               | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) |
@@ -137,16 +137,16 @@ carry `"nc": true` in `tools/models.json`, and `node tools/nc-assets.mjs` lists 
 
 Fifteen textured 3D models from [Poly Haven](https://polyhaven.com), all CC0: Poly Haven publishes
 every asset under CC0 ([polyhaven.com/license](https://polyhaven.com/license)), and each model's
-name and authors were checked in the Poly Haven API on 23 September 2026. `tools/mesh-to-splats.mjs`
-downloads each glTF, scatters splats over its surfaces by area, colours them from the model's
-textures (glass materials are skipped so the insides show), and writes a 3DGS PLY file;
-`tools/prepare-assets.mjs` then packs it like the scans (at most 200,000 splats, 80,000 for phones).
-Poly Haven does not require credit, but it is given here anyway. Since Phase C1 the vintage camera,
-boombox, wooden elephant and horse statue also have soft studio light baked into their colours (with
-the models' own normal and occlusion maps), and the printed maker's names on the camera, its lens
-and the boombox are painted out (see `tools/models.json`).
+name and authors were checked in the Poly Haven API on September 23, 2026.
+`tools/mesh-to-splats.mjs` downloads each glTF, scatters splats over its surfaces by area, colors
+them from the model's textures (glass materials are skipped so the insides show), and writes a 3DGS
+PLY file; `tools/prepare-assets.mjs` then packs it like the scans (at most 200,000 splats, 80,000
+for phones). Poly Haven does not require credit, but it is given here anyway. Since Phase C1 the
+vintage camera, boombox, wooden elephant and horse statue also have soft studio light baked into
+their colors (with the models' own normal and occlusion maps), and the printed maker's names on the
+camera, its lens and the boombox are painted out (see `tools/models.json`).
 
-| Toy              | Model                                                                    | Author                       | Licence                                                       |
+| Toy              | Model                                                                    | Author                       | License                                                       |
 | ---------------- | ------------------------------------------------------------------------ | ---------------------------- | ------------------------------------------------------------- |
 | Real rubber duck | [Rubber Duck Toy](https://polyhaven.com/a/rubber_duck_toy)               | Plat251                      | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
 | Garden gnome     | [Garden Gnome](https://polyhaven.com/a/garden_gnome)                     | Bhargav Kubal                | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
@@ -166,17 +166,17 @@ and the boombox are painted out (see `tools/models.json`).
 
 ### Made from one photo with an image-to-3D model (lane G)
 
-Each of these started as a single photo (CC0 or CC BY, the licence checked on its Wikimedia Commons
-page on 27 September 2026, with no brands or logos). `tools/image-to-3d.mjs` sent the photo, shrunk
+Each of these started as a single photo (CC0 or CC BY, the license checked on its Wikimedia Commons
+page on September 27, 2026, with no brands or logos). `tools/image-to-3d.mjs` sent the photo, shrunk
 to 1024 px, to the public [TRELLIS Space](https://huggingface.co/spaces/trellis-community/TRELLIS)
 on Hugging Face, which cut out the background (rembg with the u2net model, Apache-2.0) and generated
 3D Gaussians with [TRELLIS](https://github.com/microsoft/TRELLIS) (model
 [microsoft/TRELLIS-image-large](https://huggingface.co/microsoft/TRELLIS-image-large), MIT). The MIT
-licence puts no terms on what the model makes, so each toy keeps its photo's licence and credit.
+license puts no terms on what the model makes, so each toy keeps its photo's license and credit.
 `tools/prepare-assets.mjs` then packs it like the scans. The sides the photo does not show are the
 model's guess.
 
-| Toy          | Photo                                                                                                  | Photographer | Licence                                                       |
+| Toy          | Photo                                                                                                  | Photographer | License                                                       |
 | ------------ | ------------------------------------------------------------------------------------------------------ | ------------ | ------------------------------------------------------------- |
 | Real pencil  | [Kleiner Bleistift](<https://commons.wikimedia.org/wiki/File:Kleiner_Bleistift_(40045317711).jpg>)     | Tim Reckmann | [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/)     |
 | Real tin can | [Can opened with side opener](https://commons.wikimedia.org/wiki/File:Can_opened_with_side_opener.jpg) | Ll1324       | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
@@ -1529,11 +1529,11 @@ September 30, 2026), decimated into three levels of detail each:
 
 The pattern layer can wrap a national flag around any toy. The flags are SVG files from
 [Wikimedia Commons](https://commons.wikimedia.org/wiki/Category:SVG_flags_of_countries), fetched by
-`tools/fetch-flags.mjs`, which reads each file's licence from the Commons API and keeps only public
-domain and CC0 files. The files are unchanged. Each flag's source page, author line and licence are
-listed in [assets/flags/flags.json](assets/flags/flags.json) (196 flags, checked on 23 September
+`tools/fetch-flags.mjs`, which reads each file's license from the Commons API and keeps only public
+domain and CC0 files. The files are unchanged. Each flag's source page, author line and license are
+listed in [assets/flags/flags.json](assets/flags/flags.json) (196 flags, checked on September 23,
 2026). The flag of Oman is not included: its Commons file is under Oman's Open Government Licence
-rather than a public-domain or Creative Commons licence (see [docs/BACKLOG.md](docs/BACKLOG.md)).
+rather than a public-domain or Creative Commons license (see [docs/BACKLOG.md](docs/BACKLOG.md)).
 
 ## Sounds
 

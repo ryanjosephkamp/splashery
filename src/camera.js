@@ -1,8 +1,8 @@
 // Orbit camera around the toy, plus a small gesture recognizer.
 //
 // The camera moves; the toy stays put. State is yaw/pitch/roll/distance so it
-// serialises cleanly. Motion is damped: input moves targets, the rendered
-// pose eases towards them, and a released drag coasts to a stop. An idle
+// serializes cleanly. Motion is damped: input moves targets, the rendered
+// pose eases toward them, and a released drag coasts to a stop. An idle
 // turntable starts after a pause (never under prefers-reduced-motion).
 // With the tilt locked (lane Viewer), a drag only spins the toy around its
 // vertical axis: pitch and roll stay at the toy's home pose. A toy may also
@@ -34,7 +34,7 @@ export class OrbitCamera {
     this.maxDistance = 9;
     this.radius = 1;
     this.target = [0, 0, 0];
-    // UI r2 (pan): the point the view eases towards (target follows it), and
+    // UI r2 (pan): the point the view eases toward (target follows it), and
     // the toy's own center, where Reset puts it back.
     this.aim = [0, 0, 0];
     this.center = [0, 0, 0];
@@ -42,7 +42,7 @@ export class OrbitCamera {
     // camera move the target itself, so a page's focus glide (which sets the
     // target) is never pulled back.
     this.easeAim = false;
-    this.follow = [0, 0, 0]; // extra target offset the camera eases towards
+    this.follow = [0, 0, 0]; // extra target offset the camera eases toward
     this.offset = [0, 0, 0];
     this.turntable = !reducedMotion;
     this.tiltLock = false;

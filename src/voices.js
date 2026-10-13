@@ -1,4 +1,4 @@
-// The voice library: small synthesised instruments and noises that a toy's
+// The voice library: small synthesized instruments and noises that a toy's
 // sound spec plays (no audio files). Pure WebAudio, so it runs in a live
 // AudioContext and in an OfflineAudioContext (tools/sound-check.mjs). Nothing
 // here touches the page; src/sound.js owns the context and the on/off switch.
@@ -274,7 +274,7 @@ function grains(ctx, out, t, { n = 8, dur = 0.4, accel = 0, grain }) {
   let at = 0;
   for (let i = 0; i < n; i++) {
     const r = Math.random();
-    // accel > 0 packs the events towards the start (a burst that thins out).
+    // accel > 0 packs the events toward the start (a burst that thins out).
     const u = (i + 0.5 * Math.random()) / n;
     at = dur * (accel >= 0 ? u ** (1 + accel) : 1 - (1 - u) ** (1 - accel));
     grain(t + at, i, r);
@@ -1758,7 +1758,7 @@ export function playSpec(ctx, out, t, spec, { pitch = 1, raw = false, pick = nul
 }
 
 // ---- Sound B (lane Sound B, September 30, 2026) -----------------------------------
-// Real-world sound effects, synthesised, for the owner's sound review of
+// Real-world sound effects, synthesized, for the owner's sound review of
 // September 28 (docs/PACKS.md 7e): fire like the volcano's, leaves, pages,
 // bites, dice, engines, rotors, creaking wood, scissors, fireworks, hooves, a
 // crowd, water in a bottle, a fly, a frog, an owl, keys and more. Each aims at

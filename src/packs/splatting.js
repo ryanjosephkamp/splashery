@@ -812,7 +812,7 @@ function buildSorting(k) {
     if (i >= body.length) return null;
     return { p: body[i].p, size: 0.9, jitter: 0, color: shade("#3a3f48", body[i].shade), opacity: 1 }; // prettier-ignore
   });
-  // The lens: a short barrel towards the ball, closed by its glass.
+  // The lens: a short barrel toward the ball, closed by its glass.
   const lens = [];
   const na = 64;
   const nz = 16;

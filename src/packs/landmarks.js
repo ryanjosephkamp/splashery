@@ -1,6 +1,6 @@
 // Landmarks: famous places as little dioramas. Historic landmarks are
-// modelled procedurally; modern named buildings become generic ones (a
-// "twisting supertall"). There is no scene lighting, so colours carry baked
+// modeled procedurally; modern named buildings become generic ones (a
+// "twisting supertall"). There is no scene lighting, so colors carry baked
 // sunlight, stone courses and window grids.
 
 import {
@@ -44,7 +44,7 @@ const hash = (x, y = 0, z = 0) => {
   return s - Math.floor(s);
 };
 
-// Baked sunlight: the sun is high, towards the viewer and a little right.
+// Baked sunlight: the sun is high, toward the viewer and a little right.
 const SUN = unit([0.3, 0.8, 0.55]);
 const sunOf = (n) => n[0] * SUN[0] + n[1] * SUN[1] + n[2] * SUN[2];
 const lit = (col, c, amb = 0.7) => shade(col, amb + (1 - amb) * sunOf(c.n));
@@ -281,7 +281,7 @@ const usFlag = (u, v) => {
   return Math.floor(v * 13) % 2 ? "#f4f4f4" : "#b82235";
 };
 
-// A disc of lawn (or any ground) with a soft edge colour.
+// A disc of lawn (or any ground) with a soft edge color.
 // even: true (lane Sharpness A) lays it out evenly, as solid splats.
 function ground(k, r, y, color, { edge = "#6b5a44", h = 0.06, share, even = false } = {}) {
   const sharp = even ? { even: true, opacity: 1, jitter: 0.012 } : {};
@@ -358,7 +358,7 @@ function curve(points) {
 // Units of 100 m. Four curved lattice legs meet above the second floor and
 // rise as one tapering shaft to the top and its antenna.
 
-// Firework bursts round the tower: centre, radius and colours (blue, white,
+// Firework bursts round the tower: center, radius and colors (blue, white,
 // red and gold), each at its own moment after the tap (at, seconds). Placed
 // either side of the tower as seen from the home view.
 const EIF_VIEW_R = [0.85, 0, -0.52];
@@ -371,7 +371,7 @@ const EIF_BURSTS = [
 const EIF_SECS = 4.2;
 const EIF_BUILT = 0.6;
 
-// A firework burst: rays of sparks from the centre with bright tips, built
+// A firework burst: rays of sparks from the center with bright tips, built
 // at its fullest (drive() grows it with its part's scale and fades it).
 function burst(k, part, C, r, a, b, share) {
   const rays = 72;
@@ -492,7 +492,7 @@ function eiffelBuild(k) {
     const f = 0.78 + 0.16 * side + 0.025 * (rand() - 0.5) + 0.08 * smoothstep(0, 2.8, p[1]);
     return shade(brown, f);
   };
-  // The ironwork glows gold at night as channel 1 rises towards 1 (its
+  // The ironwork glows gold at night as channel 1 rises toward 1 (its
   // floodlights: drive() holds the channel partway for a warm wash).
   lattice(k, segs, {
     share: 0.56,
@@ -503,7 +503,7 @@ function eiffelBuild(k) {
     more: () => ({ kind: "band", channel: 1, params: [1, 0.5] }),
   });
   // Sparkle lights on the ironwork, shown only while the tower is lit (so
-  // they are coloured as the lit iron). Each flashes once as channel 0
+  // they are colored as the lit iron). Each flashes once as channel 0
   // passes it: drive() runs the channel up, and lower lights come a little
   // earlier, so the sparkle climbs.
   lattice(k, segs, {
@@ -821,7 +821,7 @@ const PYR = {
 };
 
 // A dromedary as a few simple solids in its own frame (x forward, y up, z
-// to its left): [kind, centre or ends, radii], sampled by area.
+// to its left): [kind, center or ends, radii], sampled by area.
 const CAMEL = [
   ["ell", [0, 0.27, 0], [0.19, 0.09, 0.085]],
   ["ell", [-0.01, 0.35, 0], [0.09, 0.085, 0.06]],
@@ -983,7 +983,7 @@ function pyramidsBuild(k) {
   }
 }
 
-// A tiny flying saucer (the Flying saucer toy's look), centred on C with a
+// A tiny flying saucer (the Flying saucer toy's look), centered on C with a
 // hull radius of 1.5 * s, on `part`. Left out of the fit: it flies in.
 function miniSaucer(k, part, C, s) {
   const S = { part, flat: 0.2, fit: false, pattern: false };
@@ -1186,7 +1186,7 @@ function supertallBuild(k, o) {
       return keep(c.p[1] < 0.11 ? shade("#24313c", 0.8 + 0.3 * sunOf(c.n)) : lit("#cfd4d8", c));
     },
   });
-  // Neighbours for scale, a plaza and trees.
+  // Neighbors for scale, a plaza and trees.
   const block = (x, z, w, d, h, col) =>
     k.add(evenBox(w, h, d), {
       even: true,
@@ -1420,7 +1420,7 @@ function lighthouseBuild(k, o) {
 
 // ---- Statue of Liberty ------------------------------------------------------------------------
 
-// A local frame: an origin, a turn about Y and a scale, for modelling a
+// A local frame: an origin, a turn about Y and a scale, for modeling a
 // figure facing +Z and then turning it to face the viewer.
 function frame(origin, yaw, s) {
   const q = quatAxisAngle([0, 1, 0], yaw);
@@ -1547,7 +1547,7 @@ function libertyBuild(k) {
     flat: 0.2,
     color: plain,
   });
-  // The statue, modelled facing +Z and turned towards the viewer. Its
+  // The statue, modeled facing +Z and turned toward the viewer. Its
   // copper carries a warm light from the torch (channel 2: brightest near
   // the torch, see drive()).
   const F = frame([0, y1 + 0.095, 0], 0.5, 0.9);
@@ -1792,7 +1792,7 @@ function libertyBuild(k) {
       params: [0.3, -0.5],
     };
   });
-  // Sparks drift up and away on the harbour breeze (to the right as seen
+  // Sparks drift up and away on the harbor breeze (to the right as seen
   // from the home view), by channel 0.
   k.fitMorphs = false;
   // Each spark's target lies in a plume that widens as it rises and bends
@@ -2170,7 +2170,7 @@ function whiteHouseBuild(k) {
 const PISA = { base: [0, 0.08, 0], axis: unit([-0.52, 0, -0.85]), max: 0.19 };
 // Galileo's drop: two balls on the top ledge on the leaning side (the tower
 // leans to the right as seen from the home view), [side, depth, radius,
-// colour, bounce]. The heavy one is iron, the light one bronze.
+// color, bounce]. The heavy one is iron, the light one bronze.
 const PISA_R = [0.85, 0, -0.52];
 const PISA_V = [0.52, 0, 0.85];
 const PISA_BALLS = [
@@ -2220,7 +2220,7 @@ function pisaBuild(k) {
   const T = { part: tower, flat: 0.2 };
   const y0 = PISA.base[1];
   const face = 0.55;
-  // The ground storey: a solid drum with blind arches and a door.
+  // The ground story: a solid drum with blind arches and a door.
   k.add(evenCylinder(0.5, 0.5, 0.74, false), {
     even: true,
     opacity: 1,
@@ -2960,7 +2960,7 @@ function parthenonBuild(k, o) {
 // ---- Stonehenge -------------------------------------------------------------------------------
 
 // The solstice sun rises over the far bank, behind the great trilithon
-// (the horseshoe opens towards the home view, bearing 0.55).
+// (the horseshoe opens toward the home view, bearing 0.55).
 const HENGE = {
   dir: unit([Math.sin(0.55 + Math.PI), 0.32, Math.cos(0.55 + Math.PI)]),
   sun: [Math.sin(0.55 + Math.PI) * 2.3, 0.78, Math.cos(0.55 + Math.PI) * 2.3],
@@ -2970,7 +2970,7 @@ const HENGE = {
 function stonehengeBuild(k) {
   const sarsen = "#9a968b";
   const face = 0.55;
-  // Every stone catches the solstice sun on channel 1: faces towards the
+  // Every stone catches the solstice sun on channel 1: faces toward the
   // sun (behind the horseshoe) most, the faces in view a little.
   const sunlit = {
     kind: "band",
@@ -3074,7 +3074,7 @@ function stonehengeBuild(k) {
       });
     }
   }
-  // The horseshoe of great trilithons, opening towards the viewer.
+  // The horseshoe of great trilithons, opening toward the viewer.
   const tri = [
     [-1.25, 0.58],
     [-0.62, 0.66],
@@ -4186,7 +4186,7 @@ function pagodaBuild(k, o) {
     const s = 0.46 - 0.068 * i;
     const h = i === 0 ? 0.4 : 0.3;
     const yb = y;
-    // The storey: posts, plaster panels and a door.
+    // The story: posts, plaster panels and a door.
     k.add(evenBox(2 * s, h, 2 * s), {
       even: true,
       opacity: 1,
@@ -4950,7 +4950,7 @@ export const RECIPES = {
     action: { key: "race", label: "A chariot race" },
     drive(t, c, out) {
       // A chariot race (no fighting): the crowd fills the seats, and four
-      // chariots in the team colours race a lap and a quarter of the arena,
+      // chariots in the team colors race a lap and a quarter of the arena,
       // swapping the lead, while the crowd jumps and cheers. Then the
       // chariots and the crowd fade away.
       const on = c.race > 0;

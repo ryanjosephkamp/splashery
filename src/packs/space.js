@@ -1,7 +1,7 @@
 // Space pack: the Sun and planets, moons and comets, stars, nebulae and
 // galaxies. Loaded on demand. There is no lighting, so surfaces bake in a
 // soft light and glows are clouds of faint splats; glows, rings and stars
-// keep their colours under flags and patterns.
+// keep their colors under flags and patterns.
 
 import {
   mix,
@@ -94,7 +94,7 @@ const dirOf = (lat, lon) => [
 ];
 const angle = (a, b) => Math.acos(clamp(dot(a, b), -1, 1));
 
-// Direction towards a camera at yaw/pitch (the default is 0.55, 0.28), its
+// Direction toward a camera at yaw/pitch (the default is 0.55, 0.28), its
 // right and up vectors, and points on the limb it sees.
 function camDir(yaw = 0.55, pitch = 0.28) {
   return [Math.sin(yaw) * Math.cos(pitch), Math.sin(pitch), Math.cos(yaw) * Math.cos(pitch)];
@@ -109,14 +109,14 @@ function limbDir(a, cam = camDir(), lift = 0) {
   const e2 = cross(e1, cam);
   return unit(add(add(mul(e1, Math.cos(a)), mul(e2, Math.sin(a))), mul(cam, lift)));
 }
-// A rotation that opens a disc's face `open` radians further towards the
+// A rotation that opens a disc's face `open` radians further toward the
 // camera and turns it `slant` radians about the view direction.
 function faceCamera(open, slant, yaw = 0.55, pitch = 0.28) {
   const f = camFrame(yaw, pitch);
   return quatMul(quatAxisAngle(f.c, slant), quatAxisAngle(f.right, open));
 }
 
-// Soft light baked into a surface: brighter towards the light, never black.
+// Soft light baked into a surface: brighter toward the light, never black.
 const LIGHT = unit([-0.35, 0.55, 0.75]);
 function lit(col, n, amount = 0.35, light = LIGHT) {
   const l = dot(n, light);
@@ -139,7 +139,7 @@ const coverSize = (k, area, share) =>
 // Splats are depth-sorted in the pose they are built in, so a solid body
 // turned more than a quarter turn draws its far side over its near side.
 // A body that turns all the way round is built twice: copy B half a turn
-// round, coloured just as copy A would be there (its baked light turns
+// round, colored just as copy A would be there (its baked light turns
 // with it). spinParts() shows whichever copy is within a quarter turn of
 // the pose it was built in. (A layer of splats above a turning body, such
 // as clouds, still draws wrongly, so clouds are painted on instead.)
@@ -175,7 +175,7 @@ const CULLED_SIZE = 1.2;
 // it is shown: side +1 shows copies turned 0..90° past their build (built
 // behind: for a layer on the side the ground turns away from), side -1
 // copies turned -90..0° (built ahead: for a layer on the side it turns
-// towards).
+// toward).
 const QUARTER = { weight: 0.55, size: 1.35 };
 const QUARTER_NAMES = ["", "B", "C", "D"];
 function spinQuarters(out, name, angle, side, more = {}) {
@@ -203,7 +203,7 @@ function coreBall(k, { r = 0.97, oblate = 1, quat, share = 0.06, col }) {
 // ---- Glows ----------------------------------------------------------------------
 
 // A halo of faint round splats around a sphere of radius r0, thinning out
-// to r1. col(t) gives the colour at t = 0 (inner) .. 1 (outer).
+// to r1. col(t) gives the color at t = 0 (inner) .. 1 (outer).
 function halo(
   k,
   {
@@ -474,13 +474,13 @@ function globe(
   return item;
 }
 
-// A core in layers for Slice: stops from the centre out.
+// A core in layers for Slice: stops from the center out.
 const layers =
   (stops, R = 1) =>
   (c) =>
     ramp(stops, clamp01(len(c.lp) / R));
 
-// Colour bands by latitude: stops are [sinLat, colour] from south to north.
+// Color bands by latitude: stops are [sinLat, color] from south to north.
 function bandAt(stops, y) {
   if (y <= stops[0][0]) return stops[0][1];
   for (let i = 1; i < stops.length; i++) {
@@ -493,7 +493,7 @@ function bandAt(stops, y) {
 }
 
 // Distance inside an oval spot at (lat, lon) with half sizes a (east-west)
-// and b (north-south) in radians: 0 at the centre, 1 at the edge.
+// and b (north-south) in radians: 0 at the center, 1 at the edge.
 function ovalDist(d, lat0, lon0, a, b) {
   const lat = latOf(d);
   let lon = lonOf(d) - lon0;
@@ -502,7 +502,7 @@ function ovalDist(d, lat0, lon0, a, b) {
 }
 
 // Flat rings in the XZ plane (turned by quat): each ring is [r0, r1,
-// opacity, colour(r, c) -> colour or null for a gap, share]. Toys with no
+// opacity, colour(r, c) -> color or null for a gap, share]. Toys with no
 // weighted surfaces get splats sized to cover each ring.
 function rings(k, list, { quat, part, pos, flat = 0.12, size = 1, glint = 0, even = false }) {
   for (const [r0, r1, opacity, col, share, own] of list) {
@@ -869,7 +869,7 @@ const ORRERY = [
 ];
 
 // The Sun's prominences (angle round the limb, half span, height, tilt
-// towards the viewer) and its flare, on the upper right limb.
+// toward the viewer) and its flare, on the upper right limb.
 const SUN_LOOPS = [
   { a: 0.55, span: 0.2, h: 0.3 },
   { a: 2.35, span: 0.14, h: 0.24 },
@@ -886,9 +886,9 @@ const SUN_FLARE = (() => {
 
 // ---- The Moon landing ----------------------------------------------------------------
 
-// The landing site: near the top of the face we see, tipped towards us, so
+// The landing site: near the top of the face we see, tipped toward us, so
 // the lander, the astronaut and the flag stand up against the sky. R runs
-// to the viewer's right, U up from the ground and F towards the viewer.
+// to the viewer's right, U up from the ground and F toward the viewer.
 // Everything in the scene is built lower down inside the Moon (by `sink`,
 // straight down the screen, so every splat keeps its depth and draws in
 // the right order) and shown moved up into place: built in place, the
@@ -903,7 +903,7 @@ const LANDING = (() => {
 // Moon's radius is 1), and how big they are.
 const LANDER_AT = [-0.08, 0];
 const LANDER_G = 1.25; // the lander's scale: it stands 0.31 tall
-const PAD_OUT = 0.22; // the footpads, out from the lander's centre
+const PAD_OUT = 0.22; // the footpads, out from the lander's center
 const PAD_TOP = 0.014 * LANDER_G; // the top of a footpad
 const TAKE_AT = [0.1, 0.13]; // where the astronaut takes the flag off the leg
 const PLANT_AT = [0.245, 0.07]; // where the astronaut stands to plant it
@@ -939,7 +939,7 @@ function moonSpot(ground, [x, z]) {
   const q = quatFromTo(U, n);
   return { base: mul(n, ground(n)), n, r: quatRotate(q, R), f: quatRotate(q, F), q };
 }
-// A point in a spot's frame: x to the right, y up, z towards the viewer.
+// A point in a spot's frame: x to the right, y up, z toward the viewer.
 const spotAt = (s, [x, y, z]) => add(s.base, add(add(mul(s.r, x), mul(s.n, y)), mul(s.f, z)));
 // The rotation that turns a shape's own axes (x, y, z) to a spot's (r, n, f).
 function spotQuat(s) {
@@ -1231,7 +1231,7 @@ function buildLanding(k, ground, code) {
     part: lander,
     color: metal("#56585d"),
   });
-  // The ascent stage: grey panels, two slanted windows and the hatch.
+  // The ascent stage: gray panels, two slanted windows and the hatch.
   box(0.105, 0.08, 0.095, [0, 0.1775, 0], (c) => {
     const x = c.lp[0] / (0.0525 * G);
     const y = c.lp[1] / (0.04 * G);
@@ -1343,8 +1343,8 @@ function buildLanding(k, ground, code) {
   astronaut(k, { ...onPad, base: foot }, -1, climber, climber, B);
 
   // The flag: a pole, a crossbar along its top and the cloth hanging from
-  // it (with the wrinkles it keeps from being folded), coloured from the
-  // chosen flag's picture (behaviour "screen").
+  // it (with the wrinkles it keeps from being folded), colored from the
+  // chosen flag's picture (behavior "screen").
   MOON_FLAG.code = code;
   const W = CLOTH_H * flagShape(code);
   const F0 = moonSpot(ground, FLAG_AT);
@@ -1373,7 +1373,7 @@ function buildLanding(k, ground, code) {
     k.add(strip, { ...sheet, part, params: (c) => [u0 + c.u / CLOTH_STRIPS, c.v] });
   }
   // The rolled-up cloth: a fat sleeve at the hoist, showing the fly end's
-  // colours.
+  // colors.
   k.add(k.cylinder(0.0065, CLOTH_H, { caps: true }), {
     ...fine,
     pos: B(spotAt(F0, [0.006, POLE_H - 0.008 - CLOTH_H / 2, 0])),
@@ -1436,7 +1436,7 @@ const EARTH_LIGHTS = (() => {
 })();
 
 // Jupiter's bands (between sines of latitude) and how many turns each makes
-// when the winds race: neighbours go opposite ways, the equator fastest.
+// when the winds race: neighbors go opposite ways, the equator fastest.
 // The Great Red Spot's band and the poles stay put.
 const JUPITER_JETS = [
   { y0: -1, y1: -0.72, turns: 0 },
@@ -1477,7 +1477,7 @@ const SATURN_RING_SPEEDS = [0.24, 0.16, 0.11, 0.095];
 const RING_PERIOD = TAU / 8;
 const ringAngle = (a) => ((a % RING_PERIOD) + RING_PERIOD) % RING_PERIOD;
 
-// Cells for rocks that break into pieces (asteroid, meteor): centres inside
+// Cells for rocks that break into pieces (asteroid, meteor): centers inside
 // an ellipsoid with half axes `ax`, the direction and distance each piece
 // flies and how it tumbles. From a fixed seed, so every build agrees.
 function rockCells(n, ax, seed) {
@@ -1529,7 +1529,7 @@ const PULSAR = (() => {
 
 // The path of the star that falls into the black hole: from high on the
 // right, above the disk, it spirals down and in, round the front, to plunge
-// in just left of centre. phi is the angle from the viewer's right towards
+// in just left of center. phi is the angle from the viewer's right toward
 // the viewer.
 const BH_PATH = (() => {
   const f = camFrame(0.55, 0.16);
@@ -2001,7 +2001,7 @@ export const RECIPES = {
       const dusk = on * ease(band(p, 0, 0.13)) * (1 - ease(band(p, 0.87, 1)));
       out.grow = 1.1 * dusk;
       const turn = TAU * ease(band(p, 0.08, 0.9));
-      // The night lies over the side the ground turns towards.
+      // The night lies over the side the ground turns toward.
       spinQuarters(out, "globe", turn, -1);
       out.parts.core = { visible: on ? 0 : 1 };
       // Each wedge of lights is built turned to where the ground enters the
@@ -2241,10 +2241,10 @@ export const RECIPES = {
     alive: true,
     controls: [{ key: "race", label: "Winds", type: "pulse", ease: 4.2 }],
     action: { key: "race", label: "Race the bands" },
-    // A tap sets the cloud bands racing, neighbours in opposite directions
+    // A tap sets the cloud bands racing, neighbors in opposite directions
     // as Jupiter's jets do (each band turns a whole number of times, so the
     // picture comes back together), and the Great Red Spot spins up
-    // anticlockwise inside its oval.
+    // counterclockwise inside its oval.
     drive(t, c, out) {
       const u = ease(band(progress(c.race), 0, 1));
       // While the bands turn, each hides its far side (cull), or one band's
@@ -2575,7 +2575,7 @@ export const RECIPES = {
       });
       const shapeR = (d) => lumps(d) / Math.hypot(d[0] / 1.45, d[1] / 0.82, d[2] / 0.95);
       const cells = ASTEROID_CELLS;
-      // The nearest two cell centres to p: [index, bisector distance].
+      // The nearest two cell centers to p: [index, bisector distance].
       const nearest = (p) => {
         let i1 = 0;
         let i2 = 0;
@@ -2887,7 +2887,7 @@ export const RECIPES = {
     options: [
       {
         key: "palette",
-        label: "Colours",
+        label: "Colors",
         type: "select",
         default: "emission",
         choices: [
@@ -3385,7 +3385,7 @@ export const RECIPES = {
         col: (t) => mix("#ffffff", "#c8fff2", t),
       });
       // The coma: a soft green-blue hood, pressed flat on the sunward side
-      // and drawn out towards the tails. Faint enough to see the nucleus.
+      // and drawn out toward the tails. Faint enough to see the nucleus.
       k.cloud({ share: 0.05, pattern: false, kind: "twinkle", part: coma }, (rand) => {
         const t = Math.pow(rand(), 1.2);
         const d = randDir(rand);
@@ -3556,7 +3556,7 @@ export const RECIPES = {
             Math.abs(c.noise(d[0] * T.freq, d[1] * T.freq, d[2] * T.freq)),
           );
           const big = c.fbm(d[0] * 2.5 + 9, d[1] * 2.5, d[2] * 2.5, 3);
-          // Hotter towards the middle of the face the viewer sees.
+          // Hotter toward the middle of the face the viewer sees.
           const face = smoothstep(0.2, 1, dot(d, f.c));
           let col = ramp(T.surface, clamp01(0.25 + 0.35 * g + big * 1.2 + 0.35 * face));
           for (const s of spots) {
@@ -4231,7 +4231,7 @@ export const RECIPES = {
       };
       // A ragged shell of glowing gas: brightest at its rim, where the eye
       // looks through the most of it, and laced with filaments. Hydrogen
-      // glows red, oxygen teal, sulphur gold.
+      // glows red, oxygen teal, sulfur gold.
       const shell = (d) => 0.72 + 0.2 * (0.5 + 1.4 * noise(d[0] * 1.1 + 4, d[1] * 1.1, d[2] * 1.1));
       const hue = (d) => noise.fbm(d[0] * 1.5 + 50, d[1] * 1.5, d[2] * 1.5, 3);
       const tint = (h, rand) =>
@@ -4463,7 +4463,7 @@ export const RECIPES = {
     // The curtains move all the time: bright folds race round the oval
     // (a glow running along it, three at a time), the rays flicker and the
     // oval sways. A tap sets off a substorm: the oval flares, a second,
-    // wider curtain with violet tops bursts out towards the equator, and
+    // wider curtain with violet tops bursts out toward the equator, and
     // the folds race brighter, then it all calms.
     drive(t, c, out) {
       const p = progress(c.surge);
@@ -4483,7 +4483,7 @@ export const RECIPES = {
     },
     build(k) {
       const noise = k.noise;
-      // The night side of an Earth-like world, its pole tipped towards the
+      // The night side of an Earth-like world, its pole tipped toward the
       // viewer so the auroral oval shows.
       const q = faceCamera(30 * DEG, -10 * DEG);
       const SEA = 0.07;
@@ -4740,7 +4740,7 @@ export const RECIPES = {
           size: 0.45 * S,
         };
       });
-      // The smoke left by the burst: a grey puff that spreads and fades.
+      // The smoke left by the burst: a gray puff that spreads and fades.
       k.cloud({ share: 0.02, pattern: false, part: k.part("smoke") }, (rand) => ({
         p: mul(randDir(rand), R * 1.2 * Math.cbrt(rand())),
         color: mix("#5a524c", "#8a7e76", rand()),

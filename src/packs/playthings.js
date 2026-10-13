@@ -556,7 +556,7 @@ function segDist(x, y, s) {
   const t = clamp(((x - s[0]) * dx + (y - s[1]) * dy) / (dx * dx + dy * dy || 1), 0, 1);
   return Math.hypot(x - s[0] - dx * t, y - s[1] - dy * t);
 }
-// Distance from (x, y) to a string drawn centred at the origin, 2 units
+// Distance from (x, y) to a string drawn centered at the origin, 2 units
 // tall; `underline` marks a 6 or a 9.
 function textDist(str, x, y, underline = false) {
   const adv = 1.55;
@@ -640,7 +640,7 @@ const BRICKS = (() => {
     };
   });
 })();
-// The models: each brick's slot as [kind, centre x, centre z, layer, turned]
+// The models: each brick's slot as [kind, center x, center z, layer, turned]
 // (turned: a quarter turn, so a 4x2 runs along z). Built in this order.
 const MODELS = [
   {
@@ -694,7 +694,7 @@ const MODELS = [
 // time, each taking FLY seconds.
 const BUILD = { secs: 5, pop: 0.9, fly: 0.45 };
 const bricks = { at: null, seq: null, model: -1 };
-// A brick's place: its centre and yaw (degrees).
+// A brick's place: its center and yaw (degrees).
 const brickHome = (i) => ({ p: [BRICKS[i].x, BRICK_H / 2, BRICKS[i].z], yaw: BRICKS[i].yaw });
 function slotPlace(slot, i) {
   const [, x, z, layer, turned] = slot;
@@ -976,7 +976,7 @@ function chrome(n) {
   return mix(c, [1, 1, 1], Math.pow(Math.max(0, dot(n, HALF)), 60));
 }
 
-// Soap film: thin-film colours that swirl over the surface.
+// Soap film: thin-film colors that swirl over the surface.
 function film(p, n, c) {
   const sw = c.fbm(p[0] * 3 + 5, p[1] * 3, p[2] * 3, 3);
   const hue = (0.55 + 0.8 * sw + 0.35 * n[1] + 1) % 1;
@@ -1207,7 +1207,7 @@ function slinkyStep(time, out) {
   return true;
 }
 
-// Soap bubbles drift from the wand towards the top right.
+// Soap bubbles drift from the wand toward the top right.
 const WAND = { c: [-0.6, -0.42, 0.1], n: unit([0.55, 0.65, 0.5]), r: 0.2 };
 const BUBBLES = [0.22, 0.12, 0.17, 0.08, 0.26, 0.1, 0.15, 0.2, 0.07, 0.13].map((r, i) => {
   const b = {
@@ -1252,7 +1252,7 @@ const BURST = [
 const CRADLE = { amp: 0.8, lift: 0.35, release: 0.55, period: 1.3, loss: 0.84, secs: 9 };
 const cradle = { hits: 0, grab: null, free: null };
 const CRADLE_TOP = 1.0; // where the strings hang from
-const CRADLE_Y = 0.2; // the balls' centres at rest
+const CRADLE_Y = 0.2; // the balls' centers at rest
 const cradleX = (i) => (i - 2) * 0.3;
 // The ball a point is on (or -1).
 function cradleBall(p) {
@@ -1302,13 +1302,13 @@ function cradleSwing(s, m, left, amp0, out, e = s) {
 }
 
 // ---- Puzzle cube -----------------------------------------------------------------
-// The cube is 3 units wide, centred on the origin: 26 cubies, each a token
-// turned about the centre by its own quaternion. A turn is { axis (0-2),
+// The cube is 3 units wide, centered on the origin: 26 cubies, each a token
+// turned about the center by its own quaternion. A turn is { axis (0-2),
 // layer (-1, 0 or 1), q (quarter turns, +1 or -1 about the axis) }.
 
 const CUBE_TAP = 4; // seconds a scramble or a solve takes
 const CUBE_SNAP = 0.16; // seconds a let-go layer takes to snap into place
-// Sticker colours by face (+x, -x, +y, -y, +z, -z).
+// Sticker colors by face (+x, -x, +y, -y, +z, -z).
 const CUBE_COLOURS = ["#c41e3a", "#ff6d1f", "#f6f6f1", "#ffd21a", "#0aa04f", "#1b4fc4"];
 const CUBIES = [];
 for (let x = -1; x <= 1; x++)
@@ -1361,7 +1361,7 @@ function cubeApply(t, record = true) {
     if (last.q === 0) h.pop();
   } else h.push({ ...t });
 }
-// Solved when each face shows one colour (the whole cube may have turned).
+// Solved when each face shows one color (the whole cube may have turned).
 function cubeSolved() {
   const seen = {};
   for (let i = 0; i < CUBIES.length; i++) {
@@ -1390,7 +1390,7 @@ function cubeDragStart(p) {
   cube.drag = cubeBusy() ? null : { p0: p, ...cubeFace(p) };
 }
 // The finger's path across the face picks the row or column (whichever
-// way it moves more), then turns it by the arc it has travelled.
+// way it moves more), then turns it by the arc it has traveled.
 function cubeDragMove(p) {
   const d = cube.drag;
   if (!d) return;
@@ -1538,7 +1538,7 @@ export const RECIPES = {
     options: [
       {
         key: "colors",
-        label: "Colours",
+        label: "Colors",
         type: "select",
         default: "classic",
         choices: [
@@ -1637,7 +1637,7 @@ export const RECIPES = {
           ? { voice: "squeak", f: 1500, to: 1.3, decay: 1.6, vol: 0.8 }
           : { voice: "squeak", f: 1100, decay: 0.8, vol: vol * 0.5 },
     },
-    options: [{ key: "color", label: "Colour", type: "color", default: "#ffd21f" }],
+    options: [{ key: "color", label: "Color", type: "color", default: "#ffd21f" }],
     controls: [{ key: "squeak", label: "Squeak", type: "pulse", ease: 1.8 }],
     action: { key: "squeak", label: "Squeak" },
     drive(t, c, out) {
@@ -1731,7 +1731,7 @@ export const RECIPES = {
     options: [
       {
         key: "colors",
-        label: "Colours",
+        label: "Colors",
         type: "select",
         default: "circus",
         choices: [
@@ -1871,7 +1871,7 @@ export const RECIPES = {
           { id: "d20", label: "d20" },
         ],
       },
-      { key: "color", label: "Colour", type: "color", default: "#c8262e" },
+      { key: "color", label: "Color", type: "color", default: "#c8262e" },
     ],
     controls: [{ key: "roll", label: "Roll", type: "pulse", ease: 1.8 }],
     action: { key: "roll", label: "Roll" },
@@ -1894,8 +1894,8 @@ export const RECIPES = {
     drive(t, c, out) {
       // Drives both kinds; only the parts that exist move.
       const m = mem(c);
-      // Each die is modelled in its resting pose (splats sort best near the
-      // modelled pose), so its part turns by target * rest^-1.
+      // Each die is modeled in its resting pose (splats sort best near the
+      // modeled pose), so its part turns by target * rest^-1.
       const dice = [
         { name: "d6a", targets: D6_TARGETS, rest: D6_REST[0], h: 1.2, delay: 0 },
         { name: "d6b", targets: D6_TARGETS, rest: D6_REST[1], h: 1.0, delay: 0.07 },
@@ -2380,7 +2380,7 @@ export const RECIPES = {
 
   "yo-yo": {
     alive: true,
-    options: [{ key: "color", label: "Colour", type: "color", default: "#e6392f" }],
+    options: [{ key: "color", label: "Color", type: "color", default: "#e6392f" }],
     controls: [{ key: "throw", label: "Throw", type: "pulse", ease: 1.8 }],
     action: { key: "throw", label: "Throw" },
     hands: {
@@ -2521,7 +2521,7 @@ export const RECIPES = {
     // The cube pauses itself (between turns), so the site's pause is off.
     controls: [{ key: "twist", label: "Scramble", type: "pulse", ease: CUBE_TAP, pausable: false }],
     action: { key: "twist", label: "Scramble or solve" },
-    // For tests: whether each face shows one colour, and the turns since.
+    // For tests: whether each face shows one color, and the turns since.
     cube: { solved: () => cubeSolved(), turns: () => cube.history.length },
     note: "Swipe across a face to turn a row or a column. Tap to scramble, or to solve it again.",
     drag: {
@@ -2645,8 +2645,8 @@ export const RECIPES = {
     alive: true,
     density: 0.3,
     options: [
-      { key: "c1", label: "Colour 1", type: "color", default: "#e8413c" },
-      { key: "c2", label: "Colour 2", type: "color", default: "#f7c948" },
+      { key: "c1", label: "Color 1", type: "color", default: "#e8413c" },
+      { key: "c2", label: "Color 2", type: "color", default: "#f7c948" },
     ],
     controls: [{ key: "gust", label: "Gust", type: "pulse", ease: 2.8 }],
     action: { key: "gust", label: "Gust of wind" },
@@ -3215,7 +3215,7 @@ export const RECIPES = {
 
   robot: {
     alive: true,
-    options: [{ key: "color", label: "Colour", type: "color", default: "#4f9fdc" }],
+    options: [{ key: "color", label: "Color", type: "color", default: "#4f9fdc" }],
     controls: [{ key: "wind", label: "Wind up", type: "pulse", ease: 3 }],
     action: { key: "wind", label: "Wind it up" },
     // Hands-on (lane Hands-on H1): turn its key round to wind it (up to

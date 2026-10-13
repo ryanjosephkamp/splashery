@@ -1,5 +1,5 @@
 // Lane Sound B: the owner's sound review of September 28, 2026 (docs/PACKS.md
-// 7e) on the nature, weather, food, toys, Open me, medieval, animals, maths,
+// 7e) on the nature, weather, food, toys, Open me, medieval, animals, math,
 // AI and computing, holidays, vehicles and landmarks shelves, and the newer
 // toys it names.
 //

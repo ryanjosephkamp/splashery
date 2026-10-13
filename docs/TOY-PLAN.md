@@ -88,7 +88,7 @@ Proposals below are suggestions; the owner may change them.
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
 - **E2, new effects: space, atoms and gems.** Unit cells, Orbital atlas, Night sky
-- **E3, new effects: tiny things, anatomy and maths.** None.
+- **E3, new effects: tiny things, anatomy and math.** None.
 - **E4, new effects: nature and weather.** None.
 - **E5, new effects: food.** None.
 - **E6, new effects: balls and the rest.** Picture lab, Song landscape, Chladni plate, Sound in a
@@ -108,14 +108,14 @@ Proposals below are suggestions; the owner may change them.
 - **Strawberry** (`strawberry`). Now: tap: Pop seeds (rig). Plan: keep.
   - Owner: No special effect. Looks fine.
   - Effect: Seeds pop out and sparkle, then settle back; the berry blushes redder.
-  - Improved: E1: the seeds (picked by colour) pop out in a staggered wave and glow, the red flesh
+  - Improved: E1: the seeds (picked by color) pop out in a staggered wave and glow, the red flesh
     blushes deeper, then all settles (2.2 s).
   - Sound: Juicy squish.
 - **Heart cookie** (`cookie`). Now: tap: Heartbeat (rig). Plan: keep.
   - Owner: No special effect. Looks fine.
   - Effect: The jam heart glows and throbs twice like a heartbeat.
-  - Improved: E1: the jam heart (picked by colour) glows red and swells twice like a heartbeat,
-    timed with the two thumps (1.6 s).
+  - Improved: E1: the jam heart (picked by color) glows red and swells twice like a heartbeat, timed
+    with the two thumps (1.6 s).
   - Sound: Short crunch and a soft double thump.
 - **Honeybee** (`bee`). Now: tap: Fly (rig). Plan: keep.
   - Owner: Now the right way up. Maybe flap its wings.
@@ -139,7 +139,7 @@ Proposals below are suggestions; the owner may change them.
 - **Millipede** (`millipede`). Now: tap: Crawl (rig). Plan: keep.
   - Owner: Great chance for all the legs to move and the body to stretch out.
   - Effect: A leg wave ripples down the body while it stretches and curls.
-  - Improved: E1: a leg wave (the legs, picked by colour) ripples down the body while it stretches
+  - Improved: E1: a leg wave (the legs, picked by color) ripples down the body while it stretches
     straight, then curls tighter and relaxes (2.8 s).
   - Sound: Soft many-footed patter.
 - **Carder bumblebee** (`bumblebee`). Now: tap: Hover (rig). Plan: keep.
@@ -165,8 +165,8 @@ Proposals below are suggestions; the owner may change them.
 - **Blueberry** (`blueberry`). Now: tap: Peel (rig). Plan: keep.
   - Owner: Looks good.
   - Effect: The bloom (dusty coat) wipes off in a swirl, showing deep blue, then returns.
-  - Improved: E1b: now like the grape (the owner's favourite): the dark skin peels back towards you
-    in five strips, showing the pale green flesh, then closes (3.2 s).
+  - Improved: E1b: now like the grape (the owner's favorite): the dark skin peels back toward you in
+    five strips, showing the pale green flesh, then closes (3.2 s).
   - Sound: Small round pop.
 - **Grape** (`grape`). Now: tap: Peel (rig). Plan: keep.
   - Owner: Looks good. Maybe the skin comes off.
@@ -500,13 +500,13 @@ Proposals below are suggestions; the owner may change them.
     as its lantern lights (no chirp, no click).
 - **Wooden elephant** (`wooden-elephant`). Now: tap: Trumpet (rig). Plan: keep.
   - Owner: Underwhelming; the style seems off.
-  - Fixed: C1: soft studio light and the model's normal map baked into the colours, and textures
+  - Fixed: C1: soft studio light and the model's normal map baked into the colors, and textures
     filtered to each splat's size, so the carving reads. The model stays (it is the best CC0
     elephant found).
   - Effect: Trunk lifts and it rocks on its wooden feet.
   - Improved: E1c: the scan's trunk is fused to the forehead, so it could only tear; it is replaced
     by a kit-built trunk traced from the scan (five segments on ball joints, in the carving's
-    colours). A tap uncurls it straight up to trumpet with a few toots, and it curls back down while
+    colors). A tap uncurls it straight up to trumpet with a few toots, and it curls back down while
     the elephant rocks on its feet (2.6 s). A small kit patch covers the forehead where the tip
     rested.
   - Sound: A light wooden knock, then a real elephant trumpeting as the trunk lifts.
@@ -842,7 +842,7 @@ Proposals below are suggestions; the owner may change them.
   - Sound: Light racket tock.
 - **Flying disc** (`flying-disc`). Now: tap: Throw. Plan: keep.
   - Owner: Looks fine.
-  - Fixed: C1: glossy plastic with a highlight and two moulded flight rings.
+  - Fixed: C1: glossy plastic with a highlight and two molded flight rings.
   - Effect: Spins fast and hovers, tilting.
   - Improved: E1b: thrown: it spins fast and flat, banks into a curve, glides round a loop like a
     returning throw and settles back (3 s). Hands-on H1: in Hands-on, throw it from the rim with a
@@ -927,13 +927,13 @@ Proposals below are suggestions; the owner may change them.
     tapped place), not in a fixed spot.
   - Sound: Thunder rumble.
 - **Lava lamp** (`lava-lamp`). Now: tap: Heat it up. Plan: keep.
-  - Owner: Moves really well. On tap: blobs move faster, light up or change colours.
+  - Owner: Moves really well. On tap: blobs move faster, light up or change colors.
   - Fixed: C1: the glass now tapers into the cap and sits in rolled metal collars top and bottom.
-  - Effect: Blobs speed up, glow and shift colour for a few seconds.
+  - Effect: Blobs speed up, glow and shift color for a few seconds.
   - Improved: E4: a tap heats the lamp: the wax blobs speed up to about three and a half times,
-    smoothly with no jump, the wax glows and shifts through its colour set's glow (orange, magenta,
+    smoothly with no jump, the wax glows and shifts through its color set's glow (orange, magenta,
     gold for the classic lamp) and the liquid brightens, then it all eases back (about 4.5 s). The
-    glow also shows with motion off. After the owner's review: a Colour set (Pick below, Ocean,
+    glow also shows with motion off. After the owner's review: a Color set (Pick below, Ocean,
     Violet, Lime, Sunset, Midnight), Blobs (2 to 12), Blob size and Blob shape (mixed, round, tall),
     and Flow and Glow sliders. Hands-on H4: in Hands-on, pick the lamp up and tip it: the wax blobs
     slide over to the glass's upper side, lagging and wobbling, and slide back when it stands again.
@@ -971,8 +971,8 @@ Proposals below are suggestions; the owner may change them.
   - Sound: Rising roar of wind.
 - **Rainbow** (`rainbow`). Now: tap: Draw the rainbow. Plan: keep.
   - Owner: Pick an effect.
-  - Effect: The arc draws itself colour by colour and sparkles at the ends.
-  - Improved: E4: a tap wipes the arc away in a blink, then redraws it colour by colour, red first,
+  - Effect: The arc draws itself color by color and sparkles at the ends.
+  - Improved: E4: a tap wipes the arc away in a blink, then redraws it color by color, red first,
     each band sweeping left to right behind a bright pen, and sparkles burst from both clouds and
     settle (about 5 s).
   - Sound: Rising harp glissando.
@@ -1187,7 +1187,7 @@ Proposals below are suggestions; the owner may change them.
   - Sound: The dust storm is quieter and darker: a softer hiss of dust and a lower wind.
 - **Jupiter** (`jupiter`). Now: tap: Race the bands. Plan: keep.
   - Effect: Bands race and the Great Red Spot spins up.
-  - Improved: E2: a tap sets the cloud bands racing, neighbours in opposite directions (the equator
+  - Improved: E2: a tap sets the cloud bands racing, neighbors in opposite directions (the equator
     fastest), and the Great Red Spot's swirl spins up inside its oval; each band turns whole turns,
     so the picture comes back together (4.2 s).
   - Sound: Low gas-giant drone.
@@ -1221,7 +1221,7 @@ Proposals below are suggestions; the owner may change them.
   - Effect: Idle: auroras ripple as curtains. Tap: a bright surge of green and violet.
   - Improved: E2: the curtains move all the time: bright folds race round the oval, rays flicker and
     the oval sways. A tap sets off a substorm: the oval flares, a wider curtain with violet tops
-    bursts out towards the equator and the folds race brighter, then it calms (4.2 s).
+    bursts out toward the equator and the folds race brighter, then it calms (4.2 s).
   - Sound: The same aurora air, much lower and gentler (Sound C, October 2, 2026).
 - **Asteroid** (`asteroid`). Now: tap: Break it apart. Plan: keep.
   - Owner: Pretty neat. Maybe it breaks into pieces.
@@ -1640,7 +1640,7 @@ Proposals below are suggestions; the owner may change them.
   - Owner: Melt it, or change into another shape.
   - Effect: Arms regrow into a new pattern each tap.
   - Improved: E3: the arms melt back from their tips to the middle, then a new flake grows out from
-    the centre: three patterns of the chosen kind, one after another, each tap (3.6 s).
+    the center: three patterns of the chosen kind, one after another, each tap (3.6 s).
   - Sound: Crystalline tinkle.
 - **Chromosome** (`chromosome`). Now: tap: Pull apart. Plan: keep.
   - Owner: Something like mitosis or meiosis.
@@ -1736,7 +1736,7 @@ Proposals below are suggestions; the owner may change them.
     crackle and falling swish as it is given out.
 - **Atom** (`atom`). Now: tap: Speed up the electrons. Plan: keep.
   - Effect: Electrons speed up into blurred shells.
-  - Improved: E2: a tap energises the atom: the electrons whirl faster and faster until each shell
+  - Improved: E2: a tap energizes the atom: the electrons whirl faster and faster until each shell
     blurs into a glowing ring, then slow down (4.6 s). The cloud style's shells swell and brighten.
   - Sound: The periodic table's atom sound: a soft electric blip as the electrons speed up and a
     ping as they blur into rings; no motor (Sound C, October 2, 2026).
@@ -1760,7 +1760,7 @@ Proposals below are suggestions; the owner may change them.
   - Effect: The protein pulls apart into its helices, strands and loops, then locks back together.
   - Improved: New after the E2 review: a cartoon of a real structure from the Protein Data Bank
     (ubiquitin, insulin, GFP, hemoglobin; CC0), helices as coiled bands, strands as flat arrows,
-    loops as tubes, bound molecules (hemes, zinc, GFP's chromophore) as balls and sticks; coloured
+    loops as tubes, bound molecules (hemes, zinc, GFP's chromophore) as balls and sticks; colored
     rainbow start to end, by chain or by structure. Open any PDB or mmCIF file. A tap pulls it apart
     into its pieces, turning a little, and puts it back (5 s); in GFP the chromophore glows green
     while the barrel is open. Fix7: a tap while it is apart brings the pieces back at once (1.4 s),
@@ -1895,7 +1895,7 @@ Proposals below are suggestions; the owner may change them.
 - **Sapphire** (`sapphire`). Now: tap: Catch the star. Plan: keep.
   - Effect: A star shimmer (asterism) glides across it.
   - Improved: E2: a tap catches a six-rayed star (asterism): its rays spread out over the stone from
-    a bright centre, lying on the stone and ending at its edge; it glides across the top with its
+    a bright center, lying on the stone and ending at its edge; it glides across the top with its
     rays keeping their directions, and the rays draw back in at the far side (3.6 s). Sharpness A
     (October 2, 2026): sharper look (even, solid splats and calmer textures).
   - Sound: The crisp gem tap alone, without the wind and sandy shuffle (Sound C, October 2, 2026).
@@ -1910,8 +1910,8 @@ Proposals below are suggestions; the owner may change them.
     its place doesn't glow where it grew.
   - Sound: Tinkling chimes.
 - **Opal** (`opal`). Now: tap: Tilt it in the light. Plan: keep.
-  - Effect: Colour play: flashes of colour roll across it.
-  - Improved: E2: a tap rocks the stone in the light while flashes of colour roll across it patch by
+  - Effect: Color play: flashes of color roll across it.
+  - Improved: E2: a tap rocks the stone in the light while flashes of color roll across it patch by
     patch, changing hue as they go (4.2 s).
   - Sound: A softer, duller real tap and the stone rocking gently on the table (no synth shimmer).
 - **Pearl** (`pearl`). Now: tap: Open or close. Plan: keep.
@@ -2214,7 +2214,7 @@ Proposals below are suggestions; the owner may change them.
   - Owner: Some sort of twisting, like the knots.
   - Effect: Untwists into a rope and twists back.
   - Improved: E5 (r3, after the owner's notes): the pretzel twists like a knot, all in one piece:
-    its two sides wring opposite ways and its loops fold a little towards you, and wherever the rope
+    its two sides wring opposite ways and its loops fold a little toward you, and wherever the rope
     crosses or rests on itself it stays joined; let go, it springs a little past its shape into the
     opposite twist and wobbles to a stop (about 3.8 s). Hands-on H2 (Hands-on): Pull one side of the
     loop and the soft pretzel stretches after your finger; let go and it springs back into its
@@ -2314,7 +2314,7 @@ Proposals below are suggestions; the owner may change them.
 - **Pineapple** (`pineapple`). Now: tap: Slice into rings. Plan: keep.
   - Owner: Maybe it gets cut.
   - Effect: Cut into rings that stack.
-  - Improved: E5: four chops, top first: with each, everything above lifts and leans towards you,
+  - Improved: E5: four chops, top first: with each, everything above lifts and leans toward you,
     until five rings stand apart in a leaning stack showing their golden faces and pale cores; then
     they drop back onto each other (about 3 s). Hands-on H2 (Hands-on): Lift the rings off one by
     one, the crown with the top one, and stack them as you like.
@@ -2376,7 +2376,7 @@ Proposals below are suggestions; the owner may change them.
     and a little higher when fast, gone as it slows), also when a drag spins it (Sound C, October 2,
     2026).
 - **Dice** (`dice`). Now: tap: Roll. Plan: keep.
-  - Owner: Maybe my favourite; rolls feel random like real dice. Keep it.
+  - Owner: Maybe my favorite; rolls feel random like real dice. Keep it.
   - Improved: Hands-on H1: in Hands-on, throw them: each die tumbles, bounces and lands on a real
     face (two rounded cubes, or the d20's corners), with a clatter.
   - Sound: Two dice thrown on a wooden table, bouncing with quicker, quieter knocks and settling;
@@ -2511,7 +2511,7 @@ Proposals below are suggestions; the owner may change them.
   - Sound: Water moving in a bottle, sloshing and glugging (no bubbles or waterfall); real CC0
     recordings now (klein-bottle-slosh.mp3), with the synthesized sound as a fallback.
 - **Menger sponge** (`menger-sponge`). Now: tap: Close and carve the holes. Plan: keep.
-  - Owner: No idea for an effect; looks good. The owner calls one of these a favourite and a likely
+  - Owner: No idea for an effect; looks good. The owner calls one of these a favorite and a likely
     homepage embed (the transcript may refer to the next toy, the hypercube).
   - Effect: Zooms into itself: the holes open to show the next level down.
   - Improved: E3: a tap plugs every hole with a solid cube, smallest first, closing the sponge into
@@ -2522,7 +2522,7 @@ Proposals below are suggestions; the owner may change them.
     and tumbles; Reset mends them.
   - Sound: Descending recursive blips.
 - **Hypercube** (`hypercube`). Now: tap: Turn inside out. Plan: keep.
-  - Owner: Possibly the favourite and homepage embed (see the Menger sponge).
+  - Owner: Possibly the favorite and homepage embed (see the Menger sponge).
   - Effect: Rotates through the fourth dimension, turning inside out.
   - Improved: E3: a tap turns the tesseract once round through the fourth dimension: the pink inner
     cube swells out to become the outer one while the blue one folds inside, holds a moment, then
@@ -2550,7 +2550,7 @@ Proposals below are suggestions; the owner may change them.
   - Owner: Like the Mandeltorus: twisting.
   - Effect: Morphs through powers (bulb shapes twist and bloom).
   - Improved: E3: a tap turns the bulb's seven horizontal discs like the dials of a combination
-    lock: neighbours click round in opposite directions, top to bottom, then back the other way,
+    lock: neighbors click round in opposite directions, top to bottom, then back the other way,
     bottom to top; each turns a seventh of a turn (the bulb's own symmetry), so it lands on the same
     picture (about 4 s). This replaced a twist after the owner's review. Math r2: a Power option (5
     to 12; power n has n − 1-fold symmetry, so the slices turn 1/(n − 1) of a turn) and a Julia bulb
@@ -2892,8 +2892,8 @@ Proposals below are suggestions; the owner may change them.
   - Owner: Enter and exit its shell.
   - Effect: Tentacles pull into the shell, then peek back out.
   - Improved: E6: startled, it jets back a little and pulls its tentacles in behind its hood (each
-    shortens towards its base); it waits, peeks out halfway, then slowly reaches out again (about
-    4.5 s).
+    shortens toward its base); it waits, peeks out halfway, then slowly reaches out again (about 4.5
+    s).
   - Sound: A jet of water, the hollow shell, a knock and bubbles.
 - **Ladybug** (`ladybug`). Now: tap: Open the wings. Plan: keep.
   - Owner: Perfect.
@@ -2977,11 +2977,11 @@ Proposals below are suggestions; the owner may change them.
     stack them back up; each ball takes its own decorations.
   - Sound: Drips, then a crunch of snow and a twinkle as it rebuilds.
 - **Fireworks** (`fireworks`). Now: tap: Launch. Plan: keep.
-  - Owner: Outstanding. Make each launch different (like the dice), and the burst match the colour
-    of the cannon that fires it.
-  - Effect: Random shell types each tap; burst colour matches its tube.
+  - Owner: Outstanding. Make each launch different (like the dice), and the burst match the color of
+    the cannon that fires it.
+  - Effect: Random shell types each tap; burst color matches its tube.
   - Improved: C2: each tap fires a different tube and shell type (peony, ring, willow or star); the
-    rocket rises from its tube and the burst takes that tube's colour. Fix7: a tap never pauses the
+    rocket rises from its tube and the burst takes that tube's color. Fix7: a tap never pauses the
     show; rapid taps launch more shells, up to three at once (one per tube), each with its own
     rocket and its own clock; the burst now flies out from its middle (about 3.4 s each). Sharpness
     A (October 2, 2026): sharper look (even, solid splats and calmer textures).
@@ -3192,7 +3192,7 @@ Proposals below are suggestions; the owner may change them.
   - Sound: A slow diesel's putt-putt with its clatter; real CC0 recordings now (tractor-engine.mp3),
     with the synthesized sound as a fallback.
 - **Flying saucer** (`ufo`). Now: tap: Beam on or off. Plan: keep.
-  - Owner: Maybe my favourite; really cool.
+  - Owner: Maybe my favorite; really cool.
   - Improved: Hands-on H4: in Hands-on, pick the cow up and set it on the grass; drag it under the
     beam and it floats up to the saucer, turning slowly; switch the beam off and it drops.
   - Sound: A deep pulsing hum and a heavy rush as it lifts (no whistling theremin).
@@ -3268,7 +3268,7 @@ Proposals below are suggestions; the owner may change them.
   - Effect: Non-violent: a tiny chariot race loops the arena while the crowd cheers (no fighting,
     per the no-gore rule).
   - Improved: E6: a chariot race (no fighting): a crowd fills the seats, and four chariots in the
-    team colours (red, white, blue and green) race a lap and a quarter of the arena in two lanes,
+    team colors (red, white, blue and green) race a lap and a quarter of the arena in two lanes,
     swapping the lead, while the crowd jumps and cheers; then they fade away (about 5 s). Sharpness
     A (October 2, 2026): sharper look (even, solid splats and calmer textures).
   - Sound: A real crowd in the stands and horses' hooves trotting; real CC0 recordings now

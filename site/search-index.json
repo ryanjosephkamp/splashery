@@ -59,7 +59,7 @@
     "k": "toy",
     "s": "Shapes",
     "d": "Tap it to make it twist and writhe.",
-    "w": "neon knot shapes shapes trefoil neon maths generated knot",
+    "w": "neon knot shapes shapes trefoil neon math generated knot",
     "i": "../assets/toys/knot/thumb.webp"
   },
   {
@@ -158,7 +158,7 @@
     "k": "toy",
     "s": "Photoreal",
     "d": "Tap it to spin its rings opposite ways.",
-    "w": "mandeltorus photoreal photoreal photoreal scan captured maths fractal art mandeltorus",
+    "w": "mandeltorus photoreal photoreal photoreal scan captured math fractal art mandeltorus",
     "i": "../assets/toys/mandeltorus/thumb.webp"
   },
   {
@@ -990,7 +990,7 @@
     "k": "toy",
     "s": "Space",
     "d": "Tap it to spin it fast in the sunlight.",
-    "w": "mercury space space planet craters grey rocky small solar system mercury",
+    "w": "mercury space space planet craters gray rocky small solar system mercury",
     "i": "../assets/toys/mercury/thumb.webp"
   },
   {
@@ -1017,7 +1017,7 @@
     "k": "toy",
     "s": "Space",
     "d": "Tap to land a lunar module; tap again to pack up and lift off. Pick the flag in the Toy tab.",
-    "w": "moon space space lunar craters maria grey satellite moon",
+    "w": "moon space space lunar craters maria gray satellite moon",
     "i": "../assets/toys/moon/thumb.webp"
   },
   {
@@ -1161,7 +1161,7 @@
     "k": "toy",
     "s": "Space",
     "d": "Tap it to light new stars in the clouds. Pick its colors in the Toy tab.",
-    "w": "nebula space space gas cloud pillars stars emission colourful nebula",
+    "w": "nebula space space gas cloud pillars stars emission colorful nebula",
     "i": "../assets/toys/nebula/thumb.webp"
   },
   {
@@ -1347,7 +1347,7 @@
     "k": "toy",
     "s": "Tiny world",
     "d": "Tap it to land and inject its DNA.",
-    "w": "bacteriophage tiny world tiny world phage virus microbe tail fibres lander inject dna microscope biology bacteriophage",
+    "w": "bacteriophage tiny world tiny world phage virus microbe tail fibers lander inject dna microscope biology bacteriophage",
     "i": "../assets/toys/bacteriophage/thumb.webp"
   },
   {
@@ -1688,7 +1688,7 @@
     "k": "toy",
     "s": "Gems",
     "d": "Tap it to tilt it and roll flashes of color across it. Pick an opal in the Toy tab.",
-    "w": "opal gems gems gem jewel rainbow play of colour cabochon stone mineral opal",
+    "w": "opal gems gems gem jewel rainbow play of color cabochon stone mineral opal",
     "i": "../assets/toys/opal/thumb.webp"
   },
   {
@@ -1697,7 +1697,7 @@
     "k": "toy",
     "s": "Gems",
     "d": "Tap to open or close the oyster. Hands-on: lift the pearl out, then put it back.",
-    "w": "pearl gems gems gem jewel oyster shell lustre sea open pearl",
+    "w": "pearl gems gems gem jewel oyster shell luster sea open pearl",
     "i": "../assets/toys/pearl/thumb.webp"
   },
   {
@@ -2031,7 +2031,7 @@
     "k": "toy",
     "s": "Weather & fire",
     "d": "Tap it to draw the rainbow again, color by color.",
-    "w": "rainbow weather & fire weather & fire weather colours arc clouds sky rainbow",
+    "w": "rainbow weather & fire weather & fire weather colors arc clouds sky rainbow",
     "i": "../assets/toys/rainbow/thumb.webp"
   },
   {
@@ -2391,7 +2391,7 @@
     "k": "toy",
     "s": "Toys",
     "d": "Drag across a face to turn a row or column. Tap to scramble or solve it; tap again to pause.",
-    "w": "puzzle cube toys toys twist cube colours puzzle 3x3 puzzle-cube",
+    "w": "puzzle cube toys toys twist cube colors puzzle 3x3 puzzle-cube",
     "i": "../assets/toys/puzzle-cube/thumb.webp"
   },
   {
@@ -2418,7 +2418,7 @@
     "k": "toy",
     "s": "Toys",
     "d": "Tap it to do a barrel roll.",
-    "w": "paper plane toys toys paper aeroplane airplane dart fold fly paper-plane",
+    "w": "paper plane toys toys paper airplane airplane dart fold fly paper-plane",
     "i": "../assets/toys/paper-plane/thumb.webp"
   },
   {
@@ -2472,7 +2472,7 @@
     "k": "toy",
     "s": "Math",
     "d": "Tap it to race a spark round. Hands-on: drag the point to a new start; let go.",
-    "w": "lorenz attractor math maths chaos butterfly strange attractor curve differential equations lorenz",
+    "w": "lorenz attractor math math chaos butterfly strange attractor curve differential equations lorenz",
     "i": "../assets/toys/lorenz/thumb.webp"
   },
   {
@@ -2481,7 +2481,7 @@
     "k": "toy",
     "s": "Math",
     "d": "Tap to send the rider round. Pick a rider in the Toy tab.",
-    "w": "mobius strip math maths mobius moebius band one side twist topology surface mobius",
+    "w": "mobius strip math math mobius moebius band one side twist topology surface mobius",
     "i": "../assets/toys/mobius/thumb.webp"
   },
   {
@@ -2490,7 +2490,7 @@
     "k": "toy",
     "s": "Math",
     "d": "Tap to send water through. Set the glow in the Toy tab.",
-    "w": "klein bottle math maths topology surface glass bottle non-orientable klein-bottle",
+    "w": "klein bottle math math topology surface glass bottle non-orientable klein-bottle",
     "i": "../assets/toys/klein-bottle/thumb.webp"
   },
   {
@@ -2499,7 +2499,7 @@
     "k": "toy",
     "s": "Math",
     "d": "Tap to close and carve the holes. Hands-on: pull the small cubes out one by one.",
-    "w": "menger sponge math maths fractal cube holes sponge recursive menger-sponge",
+    "w": "menger sponge math math fractal cube holes sponge recursive menger-sponge",
     "i": "../assets/toys/menger-sponge/thumb.webp"
   },
   {
@@ -2508,7 +2508,7 @@
     "k": "toy",
     "s": "Math",
     "d": "Tap to turn it inside out. Try the 4D turn slider in the Toy tab.",
-    "w": "hypercube math maths tesseract 4d four dimensions cube projection hypercube",
+    "w": "hypercube math math tesseract 4d four dimensions cube projection hypercube",
     "i": "../assets/toys/hypercube/thumb.webp"
   },
   {
@@ -2517,7 +2517,7 @@
     "k": "toy",
     "s": "Math",
     "d": "Tap it: the knot pulls loose and springs back. Drag to turn it. Hands-on: pull it to stretch.",
-    "w": "torus knot math maths knot trefoil topology tube curve torus-knot",
+    "w": "torus knot math math knot trefoil topology tube curve torus-knot",
     "i": "../assets/toys/torus-knot/thumb.webp"
   },
   {
@@ -2526,7 +2526,7 @@
     "k": "toy",
     "s": "Math",
     "d": "Tap to make it breathe. Pick a cube or a ball in the Toy tab.",
-    "w": "gyroid math maths minimal surface triply periodic labyrinth gyroid",
+    "w": "gyroid math math minimal surface triply periodic labyrinth gyroid",
     "i": "../assets/toys/gyroid/thumb.webp"
   },
   {
@@ -2535,7 +2535,7 @@
     "k": "toy",
     "s": "Math",
     "d": "Tap to turn the discs. Hands-on: drag round a disc to turn it like a lock's dial.",
-    "w": "mandelbulb math maths fractal 3d mandelbrot bulb mandelbulb",
+    "w": "mandelbulb math math fractal 3d mandelbrot bulb mandelbulb",
     "i": "../assets/toys/mandelbulb/thumb.webp"
   },
   {
@@ -2544,7 +2544,7 @@
     "k": "toy",
     "s": "Math",
     "d": "Tap to explode it. Hands-on: lift the small tetrahedra off and stack them back.",
-    "w": "sierpinski tetrahedron math maths fractal triangle pyramid tetrix recursive sierpinski",
+    "w": "sierpinski tetrahedron math math fractal triangle pyramid tetrix recursive sierpinski",
     "i": "../assets/toys/sierpinski/thumb.webp"
   },
   {
@@ -2553,7 +2553,7 @@
     "k": "toy",
     "s": "Math",
     "d": "Tap to explode it. Hands-on: pull the faces off one by one and fit them back.",
-    "w": "platonic solids math maths polyhedron tetrahedron cube octahedron dodecahedron icosahedron geometry platonic",
+    "w": "platonic solids math math polyhedron tetrahedron cube octahedron dodecahedron icosahedron geometry platonic",
     "i": "../assets/toys/platonic/thumb.webp"
   },
   {
@@ -2562,7 +2562,7 @@
     "k": "toy",
     "s": "Math",
     "d": "Tap it to hear the sea in the shell.",
-    "w": "seashell spiral math maths spiral shell logarithmic conch snail growth seashell-spiral",
+    "w": "seashell spiral math math spiral shell logarithmic conch snail growth seashell-spiral",
     "i": "../assets/toys/seashell-spiral/thumb.webp"
   },
   {
@@ -2571,7 +2571,7 @@
     "k": "toy",
     "s": "Math",
     "d": "Tap to draw the curve. Pick a curve, or type your own, in the Toy tab.",
-    "w": "graph plotter math maths graph plot curve function equation type sine polar parametric cardioid rose butterfly heart lissajous spiral graph-plotter",
+    "w": "graph plotter math math graph plot curve function equation type sine polar parametric cardioid rose butterfly heart lissajous spiral graph-plotter",
     "i": "../assets/toys/graph-plotter/thumb.webp"
   },
   {
@@ -2580,7 +2580,7 @@
     "k": "toy",
     "s": "Math",
     "d": "Tap to raise the surface. Pick one, or type your own, in the Toy tab.",
-    "w": "surface plotter math maths surface plot 3d function equation type saddle sombrero egg crate gaussian rosenbrock banana surface-plotter",
+    "w": "surface plotter math math surface plot 3d function equation type saddle sombrero egg crate gaussian rosenbrock banana surface-plotter",
     "i": "../assets/toys/surface-plotter/thumb.webp"
   },
   {
@@ -2589,7 +2589,7 @@
     "k": "toy",
     "s": "Math",
     "d": "Tap to send the point round. Hands-on: drag the point round; the waves follow.",
-    "w": "circle and waves math maths unit circle sine cosine wave trigonometry euler formula angle radian unit-circle",
+    "w": "circle and waves math math unit circle sine cosine wave trigonometry euler formula angle radian unit-circle",
     "i": "../assets/toys/unit-circle/thumb.webp"
   },
   {
@@ -2598,7 +2598,7 @@
     "k": "toy",
     "s": "Math",
     "d": "Tap to spin the circles. Type a word or a curve in the Toy tab.",
-    "w": "fourier circles math maths fourier series epicycles circles spinning draw heart star square wave frequency fourier-circles",
+    "w": "fourier circles math math fourier series epicycles circles spinning draw heart star square wave frequency fourier-circles",
     "i": "../assets/toys/fourier-circles/thumb.webp"
   },
   {
@@ -2607,7 +2607,7 @@
     "k": "toy",
     "s": "Math",
     "d": "Tap to rearrange. Hands-on: slide the triangles yourself to turn a² + b² into c².",
-    "w": "pythagoras proof math maths pythagoras theorem proof right triangle square hypotenuse geometry pythagoras-proof",
+    "w": "pythagoras proof math math pythagoras theorem proof right triangle square hypotenuse geometry pythagoras-proof",
     "i": "../assets/toys/pythagoras-proof/thumb.webp"
   },
   {
@@ -2616,7 +2616,7 @@
     "k": "toy",
     "s": "Math",
     "d": "Tap to drop a tracer where you tap. Up to four run at once.",
-    "w": "rossler attractor math maths rossler roessler chaos strange attractor spiral differential equations tracer rossler-attractor",
+    "w": "rossler attractor math math rossler roessler chaos strange attractor spiral differential equations tracer rossler-attractor",
     "i": "../assets/toys/rossler-attractor/thumb.webp",
     "l": 1
   },
@@ -2626,7 +2626,7 @@
     "k": "toy",
     "s": "Math",
     "d": "Tap to drop a tracer where you tap. Up to four run at once.",
-    "w": "thomas attractor math maths thomas cyclically symmetric chaos strange attractor differential equations tracer thomas-attractor",
+    "w": "thomas attractor math math thomas cyclically symmetric chaos strange attractor differential equations tracer thomas-attractor",
     "i": "../assets/toys/thomas-attractor/thumb.webp",
     "l": 1
   },
@@ -2636,7 +2636,7 @@
     "k": "toy",
     "s": "Math",
     "d": "Tap to drop a tracer where you tap. Up to four run at once.",
-    "w": "aizawa attractor math maths aizawa langford chaos strange attractor sphere tube differential equations tracer aizawa-attractor",
+    "w": "aizawa attractor math math aizawa langford chaos strange attractor sphere tube differential equations tracer aizawa-attractor",
     "i": "../assets/toys/aizawa-attractor/thumb.webp",
     "l": 1
   },
@@ -2646,7 +2646,7 @@
     "k": "toy",
     "s": "Math",
     "d": "Tap to roll it through the fourth dimension. Pick its colors in the Toy tab.",
-    "w": "5-cell math maths 5-cell pentachoron 4-simplex 4d four dimensions polytope projection five-cell",
+    "w": "5-cell math math 5-cell pentachoron 4-simplex 4d four dimensions polytope projection five-cell",
     "i": "../assets/toys/five-cell/thumb.webp",
     "l": 1
   },
@@ -2656,7 +2656,7 @@
     "k": "toy",
     "s": "Math",
     "d": "Tap to roll it through the fourth dimension. Pick its colors in the Toy tab.",
-    "w": "16-cell math maths 16-cell hexadecachoron cross polytope orthoplex 4d four dimensions projection sixteen-cell",
+    "w": "16-cell math math 16-cell hexadecachoron cross polytope orthoplex 4d four dimensions projection sixteen-cell",
     "i": "../assets/toys/sixteen-cell/thumb.webp",
     "l": 1
   },
@@ -2666,7 +2666,7 @@
     "k": "toy",
     "s": "Math",
     "d": "Tap to roll it through the fourth dimension. Pick its colors in the Toy tab.",
-    "w": "24-cell math maths 24-cell icositetrachoron octaplex 4d four dimensions polytope projection twenty-four-cell",
+    "w": "24-cell math math 24-cell icositetrachoron octaplex 4d four dimensions polytope projection twenty-four-cell",
     "i": "../assets/toys/twenty-four-cell/thumb.webp",
     "l": 1
   },
@@ -2676,7 +2676,7 @@
     "k": "toy",
     "s": "Math",
     "d": "Tap to roll it through the fourth dimension. Pick the two polygons in the Toy tab.",
-    "w": "duoprism math maths duoprism 4d four dimensions polygon prism polytope projection duoprism",
+    "w": "duoprism math math duoprism 4d four dimensions polygon prism polytope projection duoprism",
     "i": "../assets/toys/duoprism/thumb.webp",
     "l": 1
   },
@@ -2686,7 +2686,7 @@
     "k": "toy",
     "s": "Math",
     "d": "Tap to play time t. Pick a program, or type your own equations, in the Toy tab.",
-    "w": "splat equation math maths splat equation program parametric code u v time sphere torus mobius seashell trefoil knot wave galaxy klein bottle splat-equation",
+    "w": "splat equation math math splat equation program parametric code u v time sphere torus mobius seashell trefoil knot wave galaxy klein bottle splat-equation",
     "i": "../assets/toys/splat-equation/thumb.webp",
     "l": 1
   },
@@ -2714,7 +2714,7 @@
     "k": "toy",
     "s": "Open me",
     "d": "Tap to close or open the lid. With ✋ on, turn the crank round to play the tune note by note.",
-    "w": "music box open me open me ballerina dancer jewellery box lid tune music-box",
+    "w": "music box open me open me ballerina dancer jewelry box lid tune music-box",
     "i": "../assets/toys/music-box/thumb.webp"
   },
   {
@@ -2860,7 +2860,7 @@
     "k": "toy",
     "s": "Medieval",
     "d": "Tap it and it blocks a blow where you tap: sparks fly and the emblem gleams.",
-    "w": "heraldic shield medieval medieval knight heater coat of arms heraldry crest armour shield",
+    "w": "heraldic shield medieval medieval knight heater coat of arms heraldry crest armor shield",
     "i": "../assets/toys/shield/thumb.webp"
   },
   {
@@ -2896,7 +2896,7 @@
     "k": "toy",
     "s": "Medieval",
     "d": "Tap to open the visor; tap again to close it.",
-    "w": "knight's helmet medieval medieval armour helm visor plume feathers steel knights-helmet",
+    "w": "knight's helmet medieval medieval armor helm visor plume feathers steel knights-helmet",
     "i": "../assets/toys/knights-helmet/thumb.webp"
   },
   {
@@ -3265,7 +3265,7 @@
     "k": "toy",
     "s": "Vehicles",
     "d": "Tap it to loop the loop.",
-    "w": "propeller plane vehicles vehicles biplane aeroplane airplane aircraft pilot prop fly loop propeller-plane",
+    "w": "propeller plane vehicles vehicles biplane airplane airplane aircraft pilot prop fly loop propeller-plane",
     "i": "../assets/toys/propeller-plane/thumb.webp"
   },
   {
@@ -3274,7 +3274,7 @@
     "k": "toy",
     "s": "Vehicles",
     "d": "Tap it to climb and bank left, then right.",
-    "w": "jet airliner vehicles vehicles aeroplane airplane aircraft plane passenger fly wings engines jet",
+    "w": "jet airliner vehicles vehicles airplane airplane aircraft plane passenger fly wings engines jet",
     "i": "../assets/toys/jet/thumb.webp"
   },
   {
@@ -3373,7 +3373,7 @@
     "k": "toy",
     "s": "Landmarks",
     "d": "Tap it to make the torch flare and send up golden sparks.",
-    "w": "statue of liberty landmarks landmarks new york usa torch crown statue harbour statue-of-liberty",
+    "w": "statue of liberty landmarks landmarks new york usa torch crown statue harbor statue-of-liberty",
     "i": "../assets/toys/statue-of-liberty/thumb.webp"
   },
   {

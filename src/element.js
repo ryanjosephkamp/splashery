@@ -45,7 +45,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--sp-accent); out
 [hidden] { display: none !important; }
 `;
 
-const POSTER = `<svg viewBox="0 0 320 240" role="img" aria-label="A toy made of coloured splats"><g opacity="0.9">
+const POSTER = `<svg viewBox="0 0 320 240" role="img" aria-label="A toy made of colored splats"><g opacity="0.9">
 <ellipse cx="118" cy="104" rx="62" ry="48" fill="#ff5fa2"/><ellipse cx="196" cy="96" rx="54" ry="58" fill="#7bdff2"/>
 <ellipse cx="160" cy="160" rx="70" ry="46" fill="#ffd166"/><ellipse cx="108" cy="160" rx="26" ry="20" fill="#b388ff"/>
 <ellipse cx="226" cy="158" rx="22" ry="16" fill="#0b4f9c"/></g></svg>`;

@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Fetches national flags from Wikimedia Commons for the pattern layer and
 // writes assets/flags/<code>.svg plus assets/flags/flags.json. Every file's
-// licence is read from the Commons API (extmetadata) and only public-domain
+// license is read from the Commons API (extmetadata) and only public-domain
 // or CC0 files are kept; anything else is reported and skipped.
 //
 //   node tools/fetch-flags.mjs            # all flags
@@ -223,7 +223,7 @@ export const COUNTRIES = [
 
 const OK_LICENCES = /^(public domain|pd|cc0)/i;
 
-// Names read with "the" in a sentence ("in the colours of the Netherlands").
+// Names read with "the" in a sentence ("in the colors of the Netherlands").
 const WITH_THE = new Set([
   "bs",
   "cf",
@@ -262,7 +262,7 @@ async function getJSON(url) {
 }
 
 // Downloads politely: one file at a time, a pause between files, and
-// backoff (honouring Retry-After) when Commons asks us to slow down.
+// backoff (honoring Retry-After) when Commons asks us to slow down.
 async function getBytes(url) {
   for (let attempt = 0; attempt < 6; attempt++) {
     const res = await fetch(url, { headers: { "User-Agent": UA } });
@@ -298,7 +298,7 @@ for (let i = 0; i < want.length; i += 40) {
     `&iiprop=url|size|extmetadata&titles=${encodeURIComponent(titles.join("|"))}`;
   const j = await getJSON(url);
   const pages = j.query?.pages || [];
-  // Map requested titles through normalisation and redirects.
+  // Map requested titles through normalization and redirects.
   const alias = new Map();
   for (const n of j.query?.normalized || []) alias.set(n.from, n.to);
   for (const r of j.query?.redirects || []) alias.set(r.from, r.to);

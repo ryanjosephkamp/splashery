@@ -1,4 +1,4 @@
-// Maths & art: curves, surfaces, solids and fractals, coloured with soft
+// math & art: curves, surfaces, solids and fractals, colored with soft
 // gradients. Strange attractors glow along their path, the tesseract turns
 // itself inside out, and the solids and the Sierpinski tetrahedron come
 // apart when tapped. Loaded on demand.
@@ -65,14 +65,14 @@ function quatBasis(x, y, z) {
   const s = Math.sqrt(1 + z[2] - x[0] - y[1]) * 2;
   return [(z[0] + x[2]) / s, (z[1] + y[2]) / s, 0.25 * s, (x[1] - y[0]) / s];
 }
-// Direction towards a camera at yaw/pitch (see src/camera.js).
+// Direction toward a camera at yaw/pitch (see src/camera.js).
 const camDir = (yaw, pitch) => [
   Math.sin(yaw) * Math.cos(pitch),
   Math.sin(pitch),
   Math.cos(yaw) * Math.cos(pitch),
 ];
 
-// Baked light from above, front and right, with a sheen towards the viewer.
+// Baked light from above, front and right, with a sheen toward the viewer.
 const LIGHT = unit([0.4, 0.85, 0.55]);
 const VIEW = unit([0.5, 0.35, 0.8]);
 const HALF = unit(add(LIGHT, VIEW));
@@ -145,8 +145,8 @@ function polyShape(pts) {
     tris.push({ b: pts[i], c: pts[i + 1], cum: total });
   }
   const a = pts[0];
-  // For even: true (lane Fidelity B): a fan of triangles from the centre;
-  // a runs round the fan by area and b out from the centre.
+  // For even: true (lane Fidelity B): a fan of triangles from the center;
+  // a runs round the fan by area and b out from the center.
   const m = pts.length;
   const ctr = [0, 1, 2].map((i) => pts.reduce((s, p) => s + p[i], 0) / m);
   const fan = [];
@@ -565,7 +565,7 @@ function cellFaces(grid, want, shade = grid, rims = grid) {
   };
 }
 
-// The sponge's colour at p on a face (0..5) with occlusion occl: warm
+// The sponge's color at p on a face (0..5) with occlusion occl: warm
 // outside, cooler and darker on the walls deep in the holes.
 const MENGER_LIGHT = [1.0, 0.62, 1.12, 0.5, 0.88, 0.6];
 function mengerLook(p, face, occl) {
@@ -579,7 +579,7 @@ function mengerLook(p, face, occl) {
 
 // The plugs of the holes that level k of the sponge carves: the cube (side
 // 3^-k) at the middle of each face that level k - 1 leaves exposed. Each is
-// { c: centre, f: the face it closes, occl: the occlusion its outer face
+// { c: center, f: the face it closes, occl: the occlusion its outer face
 // would have in the finished sponge (read from `fine`) }.
 function mengerPlugs(k, fine) {
   const g = mengerGrid(k - 1);
@@ -609,7 +609,7 @@ function mengerPlugs(k, fine) {
 
 // Faces of plug cubes of side s: the outer one, or the four sides (the
 // inner face never shows). Samples carry the face and the plug, and `at`,
-// the matching point on the outer face (sides take its colour).
+// the matching point on the outer face (sides take its color).
 function plugFaces(plugs, s, sides) {
   const per = sides ? 4 : 1;
   return {
@@ -640,7 +640,7 @@ function plugFaces(plugs, s, sides) {
 
 // A triply periodic gyroid sin x cos y + sin y cos z + sin z cos x = 0,
 // clipped to a ball or a cube: points projected onto the surface, both
-// sides offset a little so each can take its own colour.
+// sides offset a little so each can take its own color.
 const gyroidG = (x, y, z) =>
   Math.sin(x) * Math.cos(y) + Math.sin(y) * Math.cos(z) + Math.sin(z) * Math.cos(x);
 const gyroidGrad = (x, y, z) => [
@@ -960,7 +960,7 @@ const SIER_PIECES = SIER.corners.map((v) => {
 });
 
 // Faces grouped (at most 15) for exploding solids: the icosahedron's 20
-// faces go in pairs of neighbours.
+// faces go in pairs of neighbors.
 function groupFaces(faces) {
   if (faces.length <= 15) return faces.map((_, i) => i);
   const group = faces.map(() => -1);
@@ -1046,7 +1046,7 @@ const MOB_WALK = (() => {
     return MOB_START + (2 * TAU * (i - 1 + f)) / N;
   };
 })();
-// The ant (facing +X, standing on the origin): body parts [centre, radii],
+// The ant (facing +X, standing on the origin): body parts [center, radii],
 // and its six hips (front, middle, back; left then right).
 const ANT = 1.3;
 const ANT_BODY = [
@@ -1088,7 +1088,7 @@ const shiny =
   (col, spec = 0.6) =>
   (c) =>
     keep(lit(col, c.n, { amb: 0.66, dif: 0.45, spec, pow: 24 }));
-// A wheel in the XY plane: a tyre, a light hub, and marks that show it turn.
+// A wheel in the XY plane: a tire, a light hub, and marks that show it turn.
 function wheelShapes(k, at, token, R, { tyre = 0.3, spokes = 0, rim = "#c9ced6" } = {}) {
   k.add(k.torus(R * (1 - tyre / 2), R * (tyre / 2)), {
     ...token,
@@ -1166,7 +1166,7 @@ const walkingLegs = (col, reachScale = 1) =>
   }));
 const RIDERS = {
   // An open-wheel racing car with a white stripe and four spinning wheels,
-  // blue (red on the ocean colours, so it always stands out).
+  // blue (red on the ocean colors, so it always stands out).
   car: [
     {
       hub: [0, 0, 0],
@@ -1210,7 +1210,7 @@ const RIDERS = {
       };
     }),
   ],
-  // A beach ball: coloured gores round its own up axis, so it shows it roll.
+  // A beach ball: colored gores round its own up axis, so it shows it roll.
   ball: [
     {
       hub: [0, 0.16, 0],
@@ -1458,7 +1458,7 @@ const RIDERS = {
 };
 
 // The seashell's mouth (its last cross-section is a circle in the plane
-// z = 0 before the shell is turned 40 degrees about Y): centre, the axis it
+// z = 0 before the shell is turned 40 degrees about Y): center, the axis it
 // opens along, and radius. And when each of its three ripples sets off.
 const SHELL_MOUTH = (() => {
   const q = quatEuler(0, 40, 0);
@@ -1608,7 +1608,7 @@ export const RECIPES = {
     options: [
       {
         key: "colors",
-        label: "Colours",
+        label: "Colors",
         type: "select",
         default: "sunset",
         choices: [
@@ -2081,7 +2081,7 @@ export const RECIPES = {
       },
       {
         key: "colors",
-        label: "Colours",
+        label: "Colors",
         type: "select",
         default: "sunset",
         choices: [
@@ -2130,7 +2130,7 @@ export const RECIPES = {
       const look = {
         flat: 0.25,
         interior: 0.06,
-        // The inside is the tube's own colour, darker (a dark core would
+        // The inside is the tube's own color, darker (a dark core would
         // show through the thinner half-budget copies as speckle).
         core: (c) => shade(ramp(cyc, c.t), 0.85),
         color: (c) => {
@@ -2205,7 +2205,7 @@ export const RECIPES = {
       const scale = 4.6;
       k.fitMorphs = false; // the breath stays inside the clip; keep the rest fit
       // Slightly large splats, so each face covers the other (the far face
-      // showed through the gaps as specks of the other colour).
+      // showed through the gaps as specks of the other color).
       k.add(gyroidShape(scale, o.clip), {
         even: true,
         opacity: 1,
@@ -2283,7 +2283,7 @@ export const RECIPES = {
             }),
     },
     // A tap turns the bulb's discs like the dials of a combination lock:
-    // stacked horizontal slices click round, neighbours in opposite
+    // stacked horizontal slices click round, neighbors in opposite
     // directions, top to bottom, then back the other way, bottom to top.
     // The power-8 bulb has seven-fold symmetry about its axis (and its
     // splats are laid down seven-fold too), so each slice turns one
@@ -2415,7 +2415,7 @@ export const RECIPES = {
       },
       {
         key: "colors",
-        label: "Colours",
+        label: "Colors",
         type: "select",
         default: "ocean",
         choices: [
@@ -2677,7 +2677,7 @@ const GLYPHS = {
   " ": "00000 00000 00000 00000 00000 00000 00000",
   2: "01110 10001 00001 00010 00100 01000 11111",
 };
-// The pixel centres of a line of text: `h` is the glyph height; the text's
+// The pixel centers of a line of text: `h` is the glyph height; the text's
 // left end, baseline middle is at `at` in the XY plane (z = at[2]). Pieces of
 // the form "^(...)" are set small and raised (an exponent). Returns
 // [{ p, char }] with the index of each character.
@@ -2890,7 +2890,7 @@ function makePlot(parsed, spec, b) {
   const rest = at(A[1]);
   const all = usesA ? knots.map((a) => at(a)) : [rest];
   // The window: robust bounds of the curve at rest (a few wild points, near
-  // an asymptote, are left off the board), widened a little towards where
+  // an asymptote, are left off the board), widened a little toward where
   // the sweep takes it, so the curve bends within the board.
   const bounds = (lists, cut) => {
     const xs = [];
@@ -3072,7 +3072,7 @@ function alongPieces(pieces, us, n, rand, i) {
 
 // What the plotter shows (for the input panel).
 const PLOT_SHOWN = { label: "" };
-// The curve's colour along its parameter (the same on every copy, so the
+// The curve's color along its parameter (the same on every copy, so the
 // copies swap without a flicker).
 const CURVE_RAMP = ["#ffd166", "#ff9f43", "#ff6b6b", "#f06595", "#cc5de8"];
 
@@ -3097,7 +3097,7 @@ const GRAPH_INPUT = {
 
 // A flat ribbon along a curve's pieces, facing +Z, sampled by length.
 // Samples carry u (the curve's parameter there), s (the arc fraction) and
-// t (the parameter as a fraction of its range, for colour).
+// t (the parameter as a fraction of its range, for color).
 function ribbon(pieces, us, width) {
   alongPieces(pieces, us, 1, () => 0, 0); // fills the cumulative lengths
   const u0 = us[0];
@@ -3214,7 +3214,7 @@ color: "#8b97ad",
   return knob;
 }
 
-// A marker pen, its tip at `tip`, leaning back towards the viewer.
+// A marker pen, its tip at `tip`, leaning back toward the viewer.
 function plotPen(k, tip, part) {
   const dir = unit([0.32, 0.62, 0.72]);
   const q = quatFromDir(dir);
@@ -3596,7 +3596,7 @@ Object.assign(RECIPES, {
     ],
     action: { key: "rise", label: "Raise it" },
     // A tap lays the surface flat, then it rises out of the sheet (its
-    // colours are its heights) and overshoots a little; then its parameter
+    // colors are its heights) and overshoots a little; then its parameter
     // a plays, so it ripples, twists or breathes, and settles (5 s). As with
     // the graph plotter, the surface is built once at rest (morphing to the
     // flat sheet on channel 0) and once at each of nine values of a, each
@@ -3651,7 +3651,7 @@ Object.assign(RECIPES, {
       const step = niceStep(g.dx[1] - g.dx[0], 12);
       const gridStep = [step / (g.dx[1] - g.dx[0]), step / (g.dy[1] - g.dy[0])];
       const gridOff = [(-g.dx[0] / step) % 1, (-g.dy[0] / step) % 1];
-      // Coloured by height, with a fine mesh of darker lines, two-sided. A
+      // Colored by height, with a fine mesh of darker lines, two-sided. A
       // point off the plot is marked `bad` (a hole).
       const look = (c) => {
         if (c.s.p.bad) return null;
@@ -4677,7 +4677,7 @@ function fourierPath(shape, M) {
   });
 }
 // The circles that draw a closed path (points evenly spaced in time):
-// [{ r, f, ph }] biggest first, and the centre they hang from.
+// [{ r, f, ph }] biggest first, and the center they hang from.
 function fourierOf(pts, n) {
   const M = pts.length;
   const coef = [];
@@ -4725,7 +4725,7 @@ function fourierCurvePath(eq, M) {
   if (!(half > 1e-9)) return null;
   return pts.map(([x, y]) => [((x - cx) / half) * 0.9, ((y - cy) / half) * 0.9]);
 }
-// Everything a Fourier build draws: its chains ({ circles, centre }), and
+// Everything a Fourier build draws: its chains ({ circles, center }), and
 // whether it is the square wave.
 const FOURIER_CACHE = new Map();
 export function fourierSet(o) {
@@ -4829,7 +4829,7 @@ function fourierText(word, n) {
 }
 // The spin's length: 5 s, or for longer text 2.6 s for each group of letters.
 const fourierSecs = (set) => (set.groups > 1 ? 0.7 + FOURIER_GROUP_SECS * set.groups : 5);
-// Where each circle's centre is, and the tip, at θ (0..2π for one round).
+// Where each circle's center is, and the tip, at θ (0..2π for one round).
 function fourierChain(F, th) {
   let x = F.centre[0];
   let y = F.centre[1];
@@ -5370,12 +5370,12 @@ color: (c) => wood(c, "#8b5a2b"),
         const zb = z0 + 0.01;
         const zt2 = zb + PY_THICK;
         const pts = [tri.R, tri.A, tri.B];
-        // Shrunk a hair about their middle, so neighbours show a seam.
+        // Shrunk a hair about their middle, so neighbors show a seam.
         const mid = [(pts[0][0] + pts[1][0] + pts[2][0]) / 3, (pts[0][1] + pts[1][1] + pts[2][1]) / 3]; // prettier-ignore
         const inset = (p) => [mid[0] + (p[0] - mid[0]) * 0.985, mid[1] + (p[1] - mid[1]) * 0.985];
         const P = pts.map(inset);
         const top = P.map((p) => pyP(p[0], p[1], zt2));
-        // Wind the top towards the viewer.
+        // Wind the top toward the viewer.
         const n = cross(sub(top[1], top[0]), sub(top[2], top[0]));
         const topPts = n[2] > 0 ? top : [top[0], top[2], top[1]];
         k.add(polyShape(topPts), {
