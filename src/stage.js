@@ -164,7 +164,10 @@ export class Stage {
 
   // The ratio frames render at now.
   pixelRatio() {
-    const cap = Math.min(this.sharp?.dpr ?? this.pixelCap, this.fluidCap ?? Infinity); // Sharpness (dpr is labs only); Fluids r7 (fluidCap)
+    // A recipe that disables adaptation must still respect the device profile's cap,
+    // including later tier changes. In particular, low/weak stays at or below 1.5.
+    const profileCap = this.sharp?.adapt === "off" ? this.pixelCap : Infinity;
+    const cap = Math.min(this.sharp?.dpr ?? this.pixelCap, profileCap, this.fluidCap ?? Infinity);
     const full = Math.min(window.devicePixelRatio || 1, cap);
     return this.reduced ? Math.max(1, full / 1.5) : full;
   }
