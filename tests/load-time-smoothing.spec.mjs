@@ -34,6 +34,36 @@ test("a compressed exact-mean scan preserves low-budget and high-detail buffers"
   }
 });
 
+test("armillary and Stannern openings preserve all low and high geometry and shading buffers", async () => {
+  const full = await import("../src/packs/photoreal-r3.js?museum-full-reference");
+  const hash = (x) => crypto.createHash("sha256").update(new Uint8Array(x.buffer)).digest("hex");
+  for (const id of ["armillary-sphere", "stannern-meteorites"]) {
+    const small = await import(`../src/packs/photoreal-r3.js?museum-prefix-${id}`);
+    const build = async (module, profile, count) => {
+      const recipe = module.RECIPES[id],
+        options = resolveOptions(recipe, {});
+      await recipe.prepare(options, null, { profile, count });
+      const it = buildRecipe(recipe, { seed: 424242, count, options }, applyClay);
+      let result;
+      do {
+        result = it.next();
+      } while (!result.done);
+      return result.value.buf;
+    };
+    for (const [profile, count] of [
+      ["low", 90000],
+      ["low", 30000],
+      ["high", 300000],
+    ]) {
+      const a = await build(full, "high", count),
+        b = await build(small, profile, count);
+      expect(b.count).toBe(a.count);
+      for (const key of Object.keys(a).filter((key) => ArrayBuffer.isView(a[key])))
+        expect(hash(b[key]), `${id} ${profile} ${key}`).toBe(hash(a[key]));
+    }
+  }
+});
+
 test("the low tier requests compressed exact means and raises detail safely", async ({ page }) => {
   const requests = [];
   page.on("request", (r) => requests.push(new URL(r.url()).pathname));

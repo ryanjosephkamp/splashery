@@ -37,45 +37,53 @@ export function smoothingPrefix(bytes, capacity, cell = 0.012) {
 }
 
 if (process.argv[1] && pathToFileURL(path.resolve(process.argv[1])).href === import.meta.url) {
-  const source = "assets/toys/celestial-globe/celestial-globe.splats";
-  const file = "assets/toys/celestial-globe/celestial-globe-opening.splats.gz";
-  const bytes = fs.readFileSync(source),
-    capacity = Math.floor(90000 * 0.86);
-  const raw = smoothingPrefix(bytes, capacity),
-    compressed = gzipSync(raw, { level: 9 });
-  const scan = decodeSplats(raw);
-  const sha = (b) => crypto.createHash("sha256").update(b).digest("hex");
-  fs.writeFileSync(file, compressed);
-  const receipt = {
-    id: "celestial-globe",
-    budget: 90000,
-    capacity,
-    originalCount: scan.n,
-    source,
-    file,
-    sourceSha256: sha(bytes),
-    rawSha256: sha(raw),
-    sha256: sha(compressed),
-    beforeBytes: bytes.length,
-    afterBytes: compressed.length,
-    rawBytes: raw.length,
-    meanCell: scan.meanCell,
-    meanPrecision: "IEEE 754 Float64; no rounding to Float32",
-    credit: {
-      author: "Virtual Museums of Małopolska",
-      license: "CC0 1.0",
-      url: "https://sketchfab.com/3d-models/celestial-globe-341fa8a777e94883841409438756f747",
-      checked: "October 13, 2026",
-      inheritedFrom: "tools/models.json and the toy's in-app credit",
-      transformation:
-        "Exact record prefix plus the original per-cell mean colors, gzip compressed; made by Ryan with Codex (GPT-6).",
-    },
-  };
+  const models = JSON.parse(fs.readFileSync("tools/models.json")).models;
+  const sha = (bytes) => crypto.createHash("sha256").update(bytes).digest("hex");
+  const records = [];
+  for (const id of ["celestial-globe", "armillary-sphere", "stannern-meteorites"]) {
+    const model = models.find((m) => m.id === id);
+    const source = `assets/toys/${id}/${id}.splats`;
+    const file = `assets/toys/${id}/${id}-opening.splats.gz`;
+    const bytes = fs.readFileSync(source),
+      capacity = Math.floor(90000 * 0.86);
+    const raw = smoothingPrefix(bytes, capacity),
+      compressed = gzipSync(raw, { level: 9 });
+    fs.writeFileSync(file, compressed);
+    const scan = decodeSplats(raw);
+    records.push({
+      id,
+      budget: 90000,
+      capacity,
+      originalCount: scan.n,
+      source,
+      file,
+      sourceSha256: sha(bytes),
+      rawSha256: sha(raw),
+      sha256: sha(compressed),
+      beforeBytes: bytes.length,
+      afterBytes: compressed.length,
+      rawBytes: raw.length,
+      meanCell: scan.meanCell,
+      meanPrecision: "IEEE 754 Float64; no rounding to Float32",
+      credit: {
+        author: model.author,
+        license: model.license,
+        url: model.page,
+        checked: "October 13, 2026",
+        nc: model.nc === true,
+        inheritedFrom: "tools/models.json and the toy's in-app credit",
+        transformation:
+          "Exact record prefix plus the original per-cell mean colors, gzip compressed; made by Ryan with Codex (GPT-6).",
+      },
+    });
+  }
   fs.writeFileSync(
     "docs/audits/load-time-2026-10/smoothing-prefix.json",
-    JSON.stringify(receipt, null, 2) + "\n",
+    JSON.stringify(records[0], null, 2) + "\n",
   );
-  console.log(
-    `${source}: ${bytes.length} -> ${compressed.length} bytes, ${capacity} exact records and exact smoothing means`,
+  fs.writeFileSync(
+    "docs/audits/load-time-2026-10/museum-prefixes.json",
+    JSON.stringify(records.slice(1), null, 2) + "\n",
   );
+  console.log(records.map(({ id, beforeBytes, afterBytes }) => ({ id, beforeBytes, afterBytes })));
 }

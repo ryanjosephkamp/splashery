@@ -54,9 +54,44 @@
     "url": "https://sketchfab.com/3d-models/celestial-globe-341fa8a777e94883841409438756f747",
     "status": 200,
     "checked": "October 13, 2026",
-    "inheritedAuthor": "Virtual Museums of Ma\u0142opolska",
+    "inheritedAuthor": "Virtual Museums of Małopolska",
     "matchedAuthorText": "Virtual Museums",
     "inheritedLicense": "CC0 1.0",
     "expectedLicenseLinkFound": true
+  },
+  {
+    "id": "armillary-sphere",
+    "url": "https://sketchfab.com/3d-models/armillary-sphere-1771-41e23659c75241459eec6477d9e77c93",
+    "finalUrl": "https://sketchfab.com/3d-models/armillary-sphere-1771-41e23659c75241459eec6477d9e77c93",
+    "status": 200,
+    "checked": "October 13, 2026",
+    "licenseLinks": [
+      "http://creativecommons.org/licenses/by/4.0/",
+      "http://creativecommons.org/licenses/by/4.0/&#34;,"
+    ],
+    "terms": {
+      "CC BY": false,
+      "CC BY-NC": false,
+      "Viola Winkler": false,
+      "VMM": true
+    },
+    "verifiedLicense": "CC BY 4.0",
+    "authorVerified": true
+  },
+  {
+    "id": "stannern-meteorites",
+    "url": "https://datarepository.nhm-wien.ac.at/10.57756/cuqmeh",
+    "finalUrl": "https://datarepository.nhm-wien.ac.at/10.57756/cuqmeh",
+    "status": 200,
+    "checked": "October 13, 2026",
+    "licenseLinks": ["https://creativecommons.org/licenses/by-nc/4.0/legalcode"],
+    "terms": {
+      "CC BY": true,
+      "CC BY-NC": true,
+      "Viola Winkler": false,
+      "VMM": false
+    },
+    "verifiedLicense": "CC BY-NC 4.0",
+    "authorVerified": true
   }
 ]

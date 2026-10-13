@@ -18,6 +18,7 @@
     "license": "CC0 1.0",
     "url": "https://sketchfab.com/3d-models/celestial-globe-341fa8a777e94883841409438756f747",
     "checked": "October 13, 2026",
+    "nc": false,
     "inheritedFrom": "tools/models.json and the toy's in-app credit",
     "transformation": "Exact record prefix plus the original per-cell mean colors, gzip compressed; made by Ryan with Codex (GPT-6)."
   }

@@ -266,7 +266,15 @@
       "splats": 300000,
       "pack": "pr3",
       "checked": "2026-10-08",
-      "bake": "tools/pr3-bake.mjs"
+      "bake": "tools/pr3-bake.mjs",
+      "opening": {
+        "file": "assets/toys/armillary-sphere/armillary-sphere-opening.splats.gz",
+        "sha256": "ca2dfc556ef5eb7cdddbf046280cd78a8e6e0392821de2ae4ca1834954442591",
+        "sourceSha256": "c1e6d204a53e3ac5f02cad3215ee265952ced837457ef8300e583650e6046a3c",
+        "checked": "October 13, 2026",
+        "transformation": "Exact record prefix plus the original per-cell mean colors, gzip compressed; made by Ryan with Codex (GPT-6).",
+        "nc": false
+      }
     },
     {
       "id": "fluorite-crystal",
@@ -339,7 +347,15 @@
       "pack": "pr3",
       "checked": "2026-10-08",
       "nc": true,
-      "bake": "tools/pr3-bake.mjs"
+      "bake": "tools/pr3-bake.mjs",
+      "opening": {
+        "file": "assets/toys/stannern-meteorites/stannern-meteorites-opening.splats.gz",
+        "sha256": "ce1c163144fc52e6792f2ed035bc8f59bda5601a317b6b573d936ff2823047c1",
+        "sourceSha256": "6d99d79c3b9a7a5dcea9bf8fb95ffa69d38f261c0a820941ceb32c6827a136f9",
+        "checked": "October 13, 2026",
+        "transformation": "Exact record prefix plus the original per-cell mean colors, gzip compressed; made by Ryan with Codex (GPT-6).",
+        "nc": true
+      }
     }
   ]
 }
