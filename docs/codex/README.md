@@ -77,6 +77,8 @@ merges.
 | 66-kit-tiers.md                   | Splat tiers for the Science, Space and Math kit toys (builders/TASKS.md T2)              | recipes in `src/packs/`, report                      | no            |
 | 67-flagship-pilots.md             | Five flagship pilots, proposed (builders/TASKS.md T12; a report, nothing built)          | report only                                          | yes           |
 | 68-splat-sharpness-experiment.md  | Sharper splats on screen without shimmer, a Workshop experiment (T9)                     | `workshop/`, report                                  | no            |
+| 69-circular-qr.md                 | Circular QR codes in five QR toys, and two QR fixes (grainy anatomy, white lines)        | the QR packs, tests, report                          | yes           |
+| 70-playground-site-links.md       | The Playground links to the site and each toy's page; settings reachable in landscape    | the app's UI, tests                                  | no            |
 
 The Codex cloud environment is set up with `tools/codex-setup.sh`; [SETUP.md](SETUP.md) has the
 steps for creating it and fixing a failed setup.
