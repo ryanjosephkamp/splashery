@@ -21,6 +21,12 @@
 // the toy's recipe and against a real source for every fact.
 
 export const TOY_HELP = {
+  "field-lines": {
+    howTo:
+      "Tap to release. Drag charges to move them; tap one to flip its sign. Choose drops in This toy.",
+    about:
+      "Red spheres are positive charges, and blue spheres are negative charges. Each source has a magnitude of 1 nanocoulomb. The gold strokes trace the summed electric field in three dimensions; arrows point from positive toward negative. A white probe reports field strength in newtons per coulomb. Drag the probe to measure elsewhere.\n\nTap the center to release the green positive test charge, or drag it to choose its starting point. Its acceleration follows Coulomb's law and Newton's second law, with inertia, so its path can cross curved field lines. The test charge is 1 nanocoulomb with a mass of 10 micrograms; sources stay fixed. It stops at a source's surface or the display boundary, then reloads for another release. Choose a drop tool in This toy, then tap an empty spot to add a source, up to four. The one-charge preset places the probe exactly 1 meter away, where it reads 8.988 N/C. Field strokes are illustrative samples, and their spacing is not a calibrated strength scale.",
+  },
   // ---- Photoreal r3 (lane Photoreal r3) ----
   "triceratops-skull": {
     howTo: "Tap it to make it look at you; drag to turn it.",
