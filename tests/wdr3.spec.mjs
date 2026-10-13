@@ -133,6 +133,9 @@ test.describe("worlds r3", () => {
   test("idle, walk and run play, and the standing foot stays planted while it walks and runs", async ({
     page,
   }) => {
+    // Bone/world positions and every manual step stay the same at this
+    // landscape aspect; the separate screenshot cases cover both output sizes.
+    await page.setViewportSize({ width: 640, height: 360 });
     await open(page);
     await page.click("#enter");
     await settle(page);

@@ -24,18 +24,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            24335
-          ],
-          "startedAt": [
-            "2026-10-13T02:21:22.407Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [24335],
+          "startedAt": ["2026-10-13T02:21:22.407Z"],
+          "retrySequence": [0]
         },
         "hh5-gems.spec.mjs > pearl: lifted out, it rests in its shell or on the table, never through the shell; brought back, it clicks in": {
           "registered": 1,
@@ -43,18 +35,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            29740
-          ],
-          "startedAt": [
-            "2026-10-13T02:21:47.134Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [29740],
+          "startedAt": ["2026-10-13T02:21:47.134Z"],
+          "retrySequence": [0]
         },
         "hh5-gems.spec.mjs > crystal ball: lifted off its stand, it rolls off the stand's base onto the table; brought back, it settles in its cup": {
           "registered": 1,
@@ -62,18 +46,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            23640
-          ],
-          "startedAt": [
-            "2026-10-13T02:22:16.937Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [23640],
+          "startedAt": ["2026-10-13T02:22:16.937Z"],
+          "retrySequence": [0]
         },
         "hh5-gems.spec.mjs > quartz cluster: a big point snaps off the rock, rests, and clicks back into its place": {
           "registered": 1,
@@ -81,18 +57,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            26491
-          ],
-          "startedAt": [
-            "2026-10-13T02:22:40.632Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [26491],
+          "startedAt": ["2026-10-13T02:22:40.632Z"],
+          "retrySequence": [0]
         },
         "hh5-gems.spec.mjs > screenshots: the pearl, hands-on": {
           "registered": 1,
@@ -100,18 +68,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            64103
-          ],
-          "startedAt": [
-            "2026-10-13T02:23:07.176Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [64103],
+          "startedAt": ["2026-10-13T02:23:07.176Z"],
+          "retrySequence": [0]
         },
         "p3d.spec.mjs > the conversion > the toy is a labs toy on the Studio shelf": {
           "registered": 1,
@@ -119,18 +79,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            9
-          ],
-          "startedAt": [
-            "2026-10-13T02:24:13.080Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [9],
+          "startedAt": ["2026-10-13T02:24:13.080Z"],
+          "retrySequence": [0]
         },
         "p3d.spec.mjs > the conversion > splat budgets follow the tiers": {
           "registered": 1,
@@ -138,18 +90,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            6
-          ],
-          "startedAt": [
-            "2026-10-13T02:24:13.111Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [6],
+          "startedAt": ["2026-10-13T02:24:13.111Z"],
+          "retrySequence": [0]
         },
         "p3d.spec.mjs > the conversion > area averaging keeps a flat color and halves a stripe": {
           "registered": 1,
@@ -157,18 +101,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            11
-          ],
-          "startedAt": [
-            "2026-10-13T02:24:13.149Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [11],
+          "startedAt": ["2026-10-13T02:24:13.149Z"],
+          "retrySequence": [0]
         },
         "p3d.spec.mjs > the conversion > depth is stretched to 0..1 and stored without loss that shows": {
           "registered": 1,
@@ -176,18 +112,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            25
-          ],
-          "startedAt": [
-            "2026-10-13T02:24:13.203Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [25],
+          "startedAt": ["2026-10-13T02:24:13.203Z"],
+          "retrySequence": [0]
         },
         "p3d.spec.mjs > the conversion > splats sit at different depths where the photo's depth differs, and a near object is its own piece": {
           "registered": 1,
@@ -195,18 +123,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            8951
-          ],
-          "startedAt": [
-            "2026-10-13T02:24:13.276Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [8951],
+          "startedAt": ["2026-10-13T02:24:13.276Z"],
+          "retrySequence": [0]
         },
         "p3d.spec.mjs > the conversion > the layers rise one after another and end where they should": {
           "registered": 1,
@@ -214,18 +134,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            7
-          ],
-          "startedAt": [
-            "2026-10-13T02:24:22.282Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [7],
+          "startedAt": ["2026-10-13T02:24:22.282Z"],
+          "retrySequence": [0]
         },
         "p3d.spec.mjs > the conversion > each sample builds within every tier's budget, with finite numbers": {
           "registered": 1,
@@ -233,18 +145,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            60632
-          ],
-          "startedAt": [
-            "2026-10-13T02:24:22.308Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [60632],
+          "startedAt": ["2026-10-13T02:24:22.308Z"],
+          "retrySequence": [0]
         },
         "p3d.spec.mjs > the conversion > a photo of your own builds": {
           "registered": 1,
@@ -252,18 +156,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            55
-          ],
-          "startedAt": [
-            "2026-10-13T02:25:22.976Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [55],
+          "startedAt": ["2026-10-13T02:25:22.976Z"],
+          "retrySequence": [0]
         },
         "p3d.spec.mjs > in the browser > nothing loads the depth model until a photo is opened; then it builds and taps": {
           "registered": 1,
@@ -271,18 +167,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            61486
-          ],
-          "startedAt": [
-            "2026-10-13T02:25:23.045Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [61486],
+          "startedAt": ["2026-10-13T02:25:23.045Z"],
+          "retrySequence": [0]
         },
         "p3d.spec.mjs > in the browser > screenshots at phone and desktop size": {
           "registered": 1,
@@ -290,18 +178,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            61796
-          ],
-          "startedAt": [
-            "2026-10-13T02:26:24.589Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [61796],
+          "startedAt": ["2026-10-13T02:26:24.589Z"],
+          "retrySequence": [0]
         },
         "ui4.spec.mjs > every keyboard and the xylophone take a glissando drag": {
           "registered": 1,
@@ -309,18 +189,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            98
-          ],
-          "startedAt": [
-            "2026-10-13T02:29:18.011Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [98],
+          "startedAt": ["2026-10-13T02:29:18.011Z"],
+          "retrySequence": [0]
         },
         "ui4.spec.mjs > 1440x900 > a drag along the keys plays each key it crosses, in order, up and back (1440x900)": {
           "registered": 1,
@@ -328,18 +200,10 @@
             "unexpected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "failed"
-          ],
-          "durationMs": [
-            33066
-          ],
-          "startedAt": [
-            "2026-10-13T02:27:26.600Z"
-          ],
-          "retrySequence": [
-            0
-          ],
+          "statusSequence": ["failed"],
+          "durationMs": [33066],
+          "startedAt": ["2026-10-13T02:27:26.600Z"],
+          "retrySequence": [0],
           "errors": [
             {
               "message": "Error: [38,39,40]\n\nexpect(received).toBeGreaterThan(expected)\n\nExpected: > 5\nReceived:   3\n\n  69 |       const up = fired.slice(0, peak + 1);\n  70 |       const down = fired.slice(peak);\n> 71 |       expect(up.length, JSON.stringify(fired)).toBeGreaterThan(5);\n     |                                                ^\n  72 |       expect(down.length, JSON.stringify(fired)).toBeGreaterThan(5);\n  73 |       for (let i = 1; i < up.length; i++) expect(up[i], JSON.stringify(fired)).toBeGreaterThan(up[i - 1]); // prettier-ignore\n  74 |       for (let i = 1; i < down.length; i++) expect(down[i], JSON.stringify(fired)).toBeLessThan(down[i - 1]); // prettier-ignore\n    at /tmp/splashery-suite-before/tests/ui4.spec.mjs:71:48",
@@ -353,18 +217,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            34482
-          ],
-          "startedAt": [
-            "2026-10-13T02:28:03.716Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [34482],
+          "startedAt": ["2026-10-13T02:28:03.716Z"],
+          "retrySequence": [0]
         },
         "ui4.spec.mjs > off the keys > a drag that starts off the keys still turns the toy, and plays nothing": {
           "registered": 1,
@@ -372,18 +228,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            39211
-          ],
-          "startedAt": [
-            "2026-10-13T02:28:38.736Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [39211],
+          "startedAt": ["2026-10-13T02:28:38.736Z"],
+          "retrySequence": [0]
         }
       }
     },
@@ -410,30 +258,15 @@
             "skipped": 7
           },
           "annotations": [],
-          "statusSequence": [
-            "timedOut",
-            "timedOut",
-            "timedOut",
-            "interrupted"
-          ],
-          "durationMs": [
-            245019,
-            244746,
-            245009,
-            140988
-          ],
+          "statusSequence": ["timedOut", "timedOut", "timedOut", "interrupted"],
+          "durationMs": [245019, 244746, 245009, 140988],
           "startedAt": [
             "2026-10-13T02:33:45.851Z",
             "2026-10-13T02:38:36.095Z",
             "2026-10-13T02:42:57.907Z",
             "2026-10-13T02:47:42.952Z"
           ],
-          "retrySequence": [
-            0,
-            0,
-            0,
-            0
-          ],
+          "retrySequence": [0, 0, 0, 0],
           "errors": [
             {
               "message": "Test timeout of 240000ms exceeded.",
@@ -504,26 +337,8 @@
             "passed"
           ],
           "durationMs": [
-            23190,
-            24393,
-            26289,
-            27945,
-            30008,
-            27719,
-            38813,
-            34954,
-            38016,
-            35419,
-            30834,
-            32589,
-            42644,
-            39158,
-            38841,
-            38097,
-            37544,
-            33542,
-            57703,
-            32507
+            23190, 24393, 26289, 27945, 30008, 27719, 38813, 34954, 38016, 35419, 30834, 32589,
+            42644, 39158, 38841, 38097, 37544, 33542, 57703, 32507
           ],
           "startedAt": [
             "2026-10-13T02:33:06.994Z",
@@ -547,28 +362,7 @@
             "2026-10-13T02:44:56.149Z",
             "2026-10-13T02:45:59.512Z"
           ],
-          "retrySequence": [
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ]
+          "retrySequence": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         }
       }
     },
@@ -606,18 +400,7 @@
             "passed",
             "passed"
           ],
-          "durationMs": [
-            71292,
-            92315,
-            78577,
-            66007,
-            76891,
-            96682,
-            73398,
-            94917,
-            68149,
-            77148
-          ],
+          "durationMs": [71292, 92315, 78577, 66007, 76891, 96682, 73398, 94917, 68149, 77148],
           "startedAt": [
             "2026-10-13T02:34:44.710Z",
             "2026-10-13T02:36:02.550Z",
@@ -630,18 +413,7 @@
             "2026-10-13T02:46:29.296Z",
             "2026-10-13T02:47:45.291Z"
           ],
-          "retrySequence": [
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ]
+          "retrySequence": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         }
       }
     },
@@ -674,18 +446,10 @@
               }
             ]
           ],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            213916
-          ],
-          "startedAt": [
-            "2026-10-13T02:50:12.232Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [213916],
+          "startedAt": ["2026-10-13T02:50:12.232Z"],
+          "retrySequence": [0]
         }
       }
     },
@@ -711,18 +475,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            116107
-          ],
-          "startedAt": [
-            "2026-10-13T02:36:11.450Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [116107],
+          "startedAt": ["2026-10-13T02:36:11.450Z"],
+          "retrySequence": [0]
         }
       }
     },
@@ -755,18 +511,10 @@
               }
             ]
           ],
-          "statusSequence": [
-            "failed"
-          ],
-          "durationMs": [
-            147854
-          ],
-          "startedAt": [
-            "2026-10-13T02:49:46.517Z"
-          ],
-          "retrySequence": [
-            0
-          ],
+          "statusSequence": ["failed"],
+          "durationMs": [147854],
+          "startedAt": ["2026-10-13T02:49:46.517Z"],
+          "retrySequence": [0],
           "errors": [
             {
               "message": "Error: Timed out waiting for async m => {\n    const s = (await import(m)).chladniFileState();\n    return s.lead?.startsWith(\"2-3\") && s.p > 0.4 ? s : null;\n  }\n\n  109 |     const v = await page.evaluate(check, arg);\n  110 |     if (v) return v;\n> 111 |     if (Date.now() > end) throw new Error(`Timed out waiting for ${check}`);\n      |                                 ^\n  112 |     await page.waitForTimeout(250);\n  113 |   }\n  114 | }\n    at until (/workspace/splashery/tests/live4.spec.mjs:111:33)\n    at /workspace/splashery/tests/live4.spec.mjs:170:13",
@@ -810,18 +558,10 @@
               }
             ]
           ],
-          "statusSequence": [
-            "failed"
-          ],
-          "durationMs": [
-            40599
-          ],
-          "startedAt": [
-            "2026-10-13T02:59:07.415Z"
-          ],
-          "retrySequence": [
-            0
-          ],
+          "statusSequence": ["failed"],
+          "durationMs": [40599],
+          "startedAt": ["2026-10-13T02:59:07.415Z"],
+          "retrySequence": [0],
           "errors": [
             {
               "message": "Error: expect(received).toBeLessThan(expected)\n\nExpected: < 0.3\nReceived:   0.606888\n\n  205 |   await page.evaluate(() => document.getElementById(\"chladni-start\").click());\n  206 |   const p3 = await page.evaluate(async (m) => (await import(m)).chladniFileState(), studio);\n> 207 |   expect(p3.pos).toBeLessThan(0.3);\n      |                  ^\n  208 |   expect(p3.playing).toBe(true);\n  209 |   // Nothing left the device.\n  210 |   const base = new URL(page.url()).origin;\n    at /workspace/splashery/tests/live4.spec.mjs:207:18",
@@ -858,18 +598,10 @@
             "unexpected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "failed"
-          ],
-          "durationMs": [
-            2969
-          ],
-          "startedAt": [
-            "2026-10-13T02:58:57.080Z"
-          ],
-          "retrySequence": [
-            0
-          ],
+          "statusSequence": ["failed"],
+          "durationMs": [2969],
+          "startedAt": ["2026-10-13T02:58:57.080Z"],
+          "retrySequence": [0],
           "errors": [
             {
               "message": "Error: expect(received).toBe(expected) // Object.is equality\n\nExpected: \"http://127.0.0.1:4173/#s=d.FYxRCgMhDAXv8r7DUmilkNukbmBDrYq6LbJ49-rfDAxzQXIGo-Yg9dDSQfhqqZYi-E6oqjv4SWipgy-8LU7H67TQLM7Ylnrx7awYNOmjRVbZ5Qe-bc4RsjV_LJnDkkKYSNitNolewY_NjfEH\"\nReceived: \"http://127.0.0.1:45093/#s=d.FYxRCgMhDAXv8r7DUmilkNukbmBDrYq6LbJ49-rfDAxzQXIGo-Yg9dDSQfhqqZYi-E6oqjv4SWipgy-8LU7H67TQLM7Ylnrx7awYNOmjRVbZ5Qe-bc4RsjV_LJnDkkKYSNitNolewY_NjfEH\"\n\n  383 |         return globalThis.jsQR(img.data, img.width, img.height)?.data ?? null;\n  384 |       });\n> 385 |       expect(read).toBe(\n      |                    ^\n  386 |         new URL(\"../\", `http://127.0.0.1:4173/manual/share.html`).href + `#s=${hash}`,\n  387 |       );\n  388 |       // Edit the scene: the link follows. A bad JSON says so.\n    at /workspace/splashery/tests/man5.spec.mjs:385:20",
@@ -906,18 +638,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            33
-          ],
-          "startedAt": [
-            "2026-10-13T02:46:01.304Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [33],
+          "startedAt": ["2026-10-13T02:46:01.304Z"],
+          "retrySequence": [0]
         },
         "p3d.spec.mjs > the conversion > splat budgets follow the tiers": {
           "registered": 1,
@@ -925,18 +649,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            38
-          ],
-          "startedAt": [
-            "2026-10-13T02:46:01.421Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [38],
+          "startedAt": ["2026-10-13T02:46:01.421Z"],
+          "retrySequence": [0]
         },
         "p3d.spec.mjs > the conversion > area averaging keeps a flat color and halves a stripe": {
           "registered": 1,
@@ -944,18 +660,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            24
-          ],
-          "startedAt": [
-            "2026-10-13T02:46:01.501Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [24],
+          "startedAt": ["2026-10-13T02:46:01.501Z"],
+          "retrySequence": [0]
         },
         "p3d.spec.mjs > the conversion > depth is stretched to 0..1 and stored without loss that shows": {
           "registered": 1,
@@ -963,18 +671,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            103
-          ],
-          "startedAt": [
-            "2026-10-13T02:46:01.593Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [103],
+          "startedAt": ["2026-10-13T02:46:01.593Z"],
+          "retrySequence": [0]
         },
         "p3d.spec.mjs > the conversion > splats sit at different depths where the photo's depth differs, and a near object is its own piece": {
           "registered": 1,
@@ -982,18 +682,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            11934
-          ],
-          "startedAt": [
-            "2026-10-13T02:46:01.842Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [11934],
+          "startedAt": ["2026-10-13T02:46:01.842Z"],
+          "retrySequence": [0]
         },
         "p3d.spec.mjs > the conversion > the layers rise one after another and end where they should": {
           "registered": 1,
@@ -1001,18 +693,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            9
-          ],
-          "startedAt": [
-            "2026-10-13T02:46:13.821Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [9],
+          "startedAt": ["2026-10-13T02:46:13.821Z"],
+          "retrySequence": [0]
         },
         "p3d.spec.mjs > the conversion > each sample builds within every tier's budget, with finite numbers": {
           "registered": 1,
@@ -1020,18 +704,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            76555
-          ],
-          "startedAt": [
-            "2026-10-13T02:46:13.844Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [76555],
+          "startedAt": ["2026-10-13T02:46:13.844Z"],
+          "retrySequence": [0]
         },
         "p3d.spec.mjs > the conversion > a photo of your own builds": {
           "registered": 1,
@@ -1039,18 +715,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            124
-          ],
-          "startedAt": [
-            "2026-10-13T02:47:30.448Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [124],
+          "startedAt": ["2026-10-13T02:47:30.448Z"],
+          "retrySequence": [0]
         },
         "p3d.spec.mjs > in the browser > nothing loads the depth model until a photo is opened; then it builds and taps": {
           "registered": 1,
@@ -1058,18 +726,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            131195
-          ],
-          "startedAt": [
-            "2026-10-13T02:47:30.628Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [131195],
+          "startedAt": ["2026-10-13T02:47:30.628Z"],
+          "retrySequence": [0]
         },
         "p3d.spec.mjs > in the browser > screenshots at phone and desktop size": {
           "registered": 1,
@@ -1077,18 +737,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            171302
-          ],
-          "startedAt": [
-            "2026-10-13T02:49:42.980Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [171302],
+          "startedAt": ["2026-10-13T02:49:42.980Z"],
+          "retrySequence": [0]
         }
       }
     },
@@ -1119,18 +771,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            514
-          ],
-          "startedAt": [
-            "2026-10-13T02:59:49.053Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [514],
+          "startedAt": ["2026-10-13T02:59:49.053Z"],
+          "retrySequence": [0]
         },
         "vw.spec.mjs > whole PDF figures > every kind of embedded picture builds whole splats at every detail width": {
           "registered": 1,
@@ -1138,18 +782,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            58051
-          ],
-          "startedAt": [
-            "2026-10-13T02:59:49.628Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [58051],
+          "startedAt": ["2026-10-13T02:59:49.628Z"],
+          "retrySequence": [0]
         },
         "vw.spec.mjs > whole PDF figures > the Picture lab shows each figure page with no black on screen": {
           "registered": 1,
@@ -1157,18 +793,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            25003
-          ],
-          "startedAt": [
-            "2026-10-13T03:00:48.443Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [25003],
+          "startedAt": ["2026-10-13T03:00:48.443Z"],
+          "retrySequence": [0]
         }
       }
     },
@@ -1199,18 +827,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            16
-          ],
-          "startedAt": [
-            "2026-10-13T03:01:19.978Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [16],
+          "startedAt": ["2026-10-13T03:01:19.978Z"],
+          "retrySequence": [0]
         },
         "suite-readiness.spec.mjs > an outstanding sort for the current scene cannot be replaced by an older result": {
           "registered": 1,
@@ -1218,18 +838,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            28
-          ],
-          "startedAt": [
-            "2026-10-13T03:01:20.031Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [28],
+          "startedAt": ["2026-10-13T03:01:20.031Z"],
+          "retrySequence": [0]
         },
         "suite-readiness.spec.mjs > a toy's camera and sorted GPU frame finish before a pick": {
           "registered": 1,
@@ -1237,18 +849,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            23332
-          ],
-          "startedAt": [
-            "2026-10-13T03:01:20.105Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [23332],
+          "startedAt": ["2026-10-13T03:01:20.105Z"],
+          "retrySequence": [0]
         }
       }
     },
@@ -1297,26 +901,8 @@
             "passed"
           ],
           "durationMs": [
-            72718,
-            81903,
-            84954,
-            53692,
-            72417,
-            38750,
-            36242,
-            27843,
-            21736,
-            24392,
-            35537,
-            44983,
-            44671,
-            40906,
-            32334,
-            40502,
-            43832,
-            44860,
-            40459,
-            42133
+            72718, 81903, 84954, 53692, 72417, 38750, 36242, 27843, 21736, 24392, 35537, 44983,
+            44671, 40906, 32334, 40502, 43832, 44860, 40459, 42133
           ],
           "startedAt": [
             "2026-10-13T02:40:25.206Z",
@@ -1340,28 +926,7 @@
             "2026-10-13T03:13:52.221Z",
             "2026-10-13T03:15:30.729Z"
           ],
-          "retrySequence": [
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ]
+          "retrySequence": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         },
         "phy.spec.mjs > Pebbles: stones pick up and stack into a new cairn; a careless one topples": {
           "registered": 20,
@@ -1392,26 +957,8 @@
             "passed"
           ],
           "durationMs": [
-            100197,
-            83516,
-            89674,
-            92400,
-            94330,
-            41001,
-            42365,
-            30467,
-            37700,
-            34744,
-            38563,
-            48366,
-            60827,
-            64905,
-            53080,
-            71944,
-            72051,
-            57950,
-            47103,
-            50480
+            100197, 83516, 89674, 92400, 94330, 41001, 42365, 30467, 37700, 34744, 38563, 48366,
+            60827, 64905, 53080, 71944, 72051, 57950, 47103, 50480
           ],
           "startedAt": [
             "2026-10-13T02:40:25.209Z",
@@ -1435,28 +982,7 @@
             "2026-10-13T03:14:33.430Z",
             "2026-10-13T03:16:13.309Z"
           ],
-          "retrySequence": [
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ]
+          "retrySequence": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         },
         "ui4.spec.mjs > 1440x900 > a drag along the keys plays each key it crosses, in order, up and back (1440x900)": {
           "registered": 20,
@@ -1487,26 +1013,8 @@
             "passed"
           ],
           "durationMs": [
-            103113,
-            94700,
-            77583,
-            88966,
-            47438,
-            46402,
-            32987,
-            26623,
-            30471,
-            42706,
-            54800,
-            56663,
-            53146,
-            47015,
-            44890,
-            67659,
-            58899,
-            51122,
-            46204,
-            43075
+            103113, 94700, 77583, 88966, 47438, 46402, 32987, 26623, 30471, 42706, 54800, 56663,
+            53146, 47015, 44890, 67659, 58899, 51122, 46204, 43075
           ],
           "startedAt": [
             "2026-10-13T02:41:39.902Z",
@@ -1530,28 +1038,7 @@
             "2026-10-13T03:15:20.918Z",
             "2026-10-13T03:17:02.164Z"
           ],
-          "retrySequence": [
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ]
+          "retrySequence": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         },
         "ui4.spec.mjs > 390x844 > a drag along the keys plays each key it crosses, in order, up and back (390x844)": {
           "registered": 20,
@@ -1582,26 +1069,8 @@
             "passed"
           ],
           "durationMs": [
-            97343,
-            74512,
-            84011,
-            74413,
-            39740,
-            38057,
-            26117,
-            27737,
-            35782,
-            35674,
-            40205,
-            58545,
-            61723,
-            53834,
-            62938,
-            62527,
-            46420,
-            42308,
-            49790,
-            36801
+            97343, 74512, 84011, 74413, 39740, 38057, 26117, 27737, 35782, 35674, 40205, 58545,
+            61723, 53834, 62938, 62527, 46420, 42308, 49790, 36801
           ],
           "startedAt": [
             "2026-10-13T02:43:23.175Z",
@@ -1625,28 +1094,7 @@
             "2026-10-13T03:16:07.178Z",
             "2026-10-13T03:17:45.862Z"
           ],
-          "retrySequence": [
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ]
+          "retrySequence": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         }
       }
     },
@@ -1707,26 +1155,8 @@
             "passed"
           ],
           "durationMs": [
-            51574,
-            51926,
-            50081,
-            56773,
-            51788,
-            53320,
-            56278,
-            65787,
-            66677,
-            64465,
-            59623,
-            54319,
-            46553,
-            53188,
-            48755,
-            40901,
-            34499,
-            31044,
-            27957,
-            24986
+            51574, 51926, 50081, 56773, 51788, 53320, 56278, 65787, 66677, 64465, 59623, 54319,
+            46553, 53188, 48755, 40901, 34499, 31044, 27957, 24986
           ],
           "startedAt": [
             "2026-10-13T03:02:13.535Z",
@@ -1750,28 +1180,7 @@
             "2026-10-13T03:19:22.388Z",
             "2026-10-13T03:19:53.092Z"
           ],
-          "retrySequence": [
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ]
+          "retrySequence": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         }
       }
     },
@@ -1802,18 +1211,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            2633
-          ],
-          "startedAt": [
-            "2026-10-13T03:10:55.514Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [2633],
+          "startedAt": ["2026-10-13T03:10:55.514Z"],
+          "retrySequence": [0]
         },
         "suite-runner.spec.mjs > canceling during display startup stops the starting process": {
           "registered": 1,
@@ -1821,18 +1222,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            2451
-          ],
-          "startedAt": [
-            "2026-10-13T03:10:58.209Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [2451],
+          "startedAt": ["2026-10-13T03:10:58.209Z"],
+          "retrySequence": [0]
         },
         "suite-runner.spec.mjs > canceling an active lane stops its process group without starting the next file (forced leader)": {
           "registered": 1,
@@ -1840,18 +1233,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            2650
-          ],
-          "startedAt": [
-            "2026-10-13T03:11:00.694Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [2650],
+          "startedAt": ["2026-10-13T03:11:00.694Z"],
+          "retrySequence": [0]
         },
         "suite-runner.spec.mjs > canceling an active lane stops its process group without starting the next file (graceful leader)": {
           "registered": 1,
@@ -1859,18 +1244,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            494
-          ],
-          "startedAt": [
-            "2026-10-13T03:11:03.373Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [494],
+          "startedAt": ["2026-10-13T03:11:03.373Z"],
+          "retrySequence": [0]
         },
         "suite-runner.spec.mjs > concurrent suite servers reserve different ports and serve their own checkout": {
           "registered": 1,
@@ -1878,18 +1255,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            649
-          ],
-          "startedAt": [
-            "2026-10-13T03:11:03.919Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [649],
+          "startedAt": ["2026-10-13T03:11:03.919Z"],
+          "retrySequence": [0]
         },
         "suite-runner.spec.mjs > a suite process error or a report with no executed tests cannot count as a pass": {
           "registered": 1,
@@ -1897,18 +1266,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            18
-          ],
-          "startedAt": [
-            "2026-10-13T03:11:04.610Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [18],
+          "startedAt": ["2026-10-13T03:11:04.610Z"],
+          "retrySequence": [0]
         }
       }
     },
@@ -1939,18 +1300,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            36
-          ],
-          "startedAt": [
-            "2026-10-13T03:08:58.776Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [36],
+          "startedAt": ["2026-10-13T03:08:58.776Z"],
+          "retrySequence": [0]
         },
         "tpg.spec.mjs > toy pages (static) > every page has its link preview, its words and links that lead somewhere": {
           "registered": 1,
@@ -1958,18 +1311,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            611
-          ],
-          "startedAt": [
-            "2026-10-13T03:08:58.889Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [611],
+          "startedAt": ["2026-10-13T03:08:58.889Z"],
+          "retrySequence": [0]
         },
         "tpg.spec.mjs > toy pages (static) > credits and license notices are shown as the rules ask": {
           "registered": 1,
@@ -1977,18 +1322,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            461
-          ],
-          "startedAt": [
-            "2026-10-13T03:08:59.533Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [461],
+          "startedAt": ["2026-10-13T03:08:59.533Z"],
+          "retrySequence": [0]
         },
         "tpg.spec.mjs > toy pages (static) > cards and search results across the site link to the toy's page": {
           "registered": 1,
@@ -1996,18 +1333,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            4907
-          ],
-          "startedAt": [
-            "2026-10-13T03:09:00.023Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [4907],
+          "startedAt": ["2026-10-13T03:09:00.023Z"],
+          "retrySequence": [0]
         },
         "tpg.spec.mjs > toy pages (static) > the toy pages follow main and stay out of the service worker's install": {
           "registered": 1,
@@ -2015,18 +1344,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            15
-          ],
-          "startedAt": [
-            "2026-10-13T03:09:04.983Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [15],
+          "startedAt": ["2026-10-13T03:09:04.983Z"],
+          "retrySequence": [0]
         },
         "tpg.spec.mjs > toy pages (static) > 'Is it right?' shows a toy's evidence file, and nothing without one": {
           "registered": 1,
@@ -2034,18 +1355,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            1013
-          ],
-          "startedAt": [
-            "2026-10-13T03:09:05.040Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [1013],
+          "startedAt": ["2026-10-13T03:09:05.040Z"],
+          "retrySequence": [0]
         },
         "tpg.spec.mjs > toy pages (static) > the catalog PDF has every public toy, one per page": {
           "registered": 1,
@@ -2053,18 +1366,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            37
-          ],
-          "startedAt": [
-            "2026-10-13T03:09:06.102Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [37],
+          "startedAt": ["2026-10-13T03:09:06.102Z"],
+          "retrySequence": [0]
         },
         "tpg.spec.mjs > toy pages (browser) > a sample of 25 pages loads, fits a phone and links on": {
           "registered": 1,
@@ -2072,18 +1377,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            23390
-          ],
-          "startedAt": [
-            "2026-10-13T03:09:06.154Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [23390],
+          "startedAt": ["2026-10-13T03:09:06.154Z"],
+          "retrySequence": [0]
         },
         "tpg.spec.mjs > toy pages (browser) > a labs toy's page shows its toy with the labs switch on": {
           "registered": 1,
@@ -2091,18 +1388,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            8814
-          ],
-          "startedAt": [
-            "2026-10-13T03:09:30.292Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [8814],
+          "startedAt": ["2026-10-13T03:09:30.292Z"],
+          "retrySequence": [0]
         },
         "tpg.spec.mjs > toy pages (browser) > the live toy plays on its page, and the copy buttons copy": {
           "registered": 1,
@@ -2110,18 +1399,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            66540
-          ],
-          "startedAt": [
-            "2026-10-13T03:09:39.176Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [66540],
+          "startedAt": ["2026-10-13T03:09:39.176Z"],
+          "retrySequence": [0]
         },
         "tpg.spec.mjs > toy pages (browser) > screenshots: two toy pages at both sizes": {
           "registered": 1,
@@ -2129,18 +1410,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            193617
-          ],
-          "startedAt": [
-            "2026-10-13T03:10:45.741Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [193617],
+          "startedAt": ["2026-10-13T03:10:45.741Z"],
+          "retrySequence": [0]
         }
       }
     },
@@ -2171,18 +1444,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            45
-          ],
-          "startedAt": [
-            "2026-10-13T03:15:35.937Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [45],
+          "startedAt": ["2026-10-13T03:15:35.937Z"],
+          "retrySequence": [0]
         },
         "hl1.spec.mjs > Hands-on: lift, toss, land, settle and Reset": {
           "registered": 1,
@@ -2190,18 +1455,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            237689
-          ],
-          "startedAt": [
-            "2026-10-13T03:15:36.022Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [237689],
+          "startedAt": ["2026-10-13T03:15:36.022Z"],
+          "retrySequence": [0]
         }
       }
     },
@@ -2262,26 +1519,8 @@
             "passed"
           ],
           "durationMs": [
-            25537,
-            23801,
-            23214,
-            22464,
-            23223,
-            23415,
-            25702,
-            24459,
-            23876,
-            24756,
-            22606,
-            23635,
-            23740,
-            23206,
-            23748,
-            23066,
-            24390,
-            25812,
-            25839,
-            24128
+            25537, 23801, 23214, 22464, 23223, 23415, 25702, 24459, 23876, 24756, 22606, 23635,
+            23740, 23206, 23748, 23066, 24390, 25812, 25839, 24128
           ],
           "startedAt": [
             "2026-10-13T03:20:53.062Z",
@@ -2305,28 +1544,847 @@
             "2026-10-13T03:28:34.033Z",
             "2026-10-13T03:29:02.091Z"
           ],
-          "retrySequence": [
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
+          "retrySequence": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        }
+      }
+    },
+    {
+      "localReceipt": "manual-port-final/man5.json",
+      "sha256": "f49c687c0c78ab808fe9cce051f3e62e3eb9a8b10182cc748132d3bfce9402f7",
+      "stats": {
+        "startTime": "2026-10-13T03:33:09.295Z",
+        "duration": 19916.968,
+        "expected": 1,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "suiteRun": {
+        "wall": 22.051,
+        "code": 0,
+        "port": 41531,
+        "gl": "llvmpipe"
+      },
+      "configuredWorkers": 1,
+      "repeatEach": 1,
+      "topLevelErrors": [],
+      "tests": {
+        "man5.spec.mjs > the two new chapters > the demo: it encodes, reads back, breaks, and draws a QR code that reads back to the link (390 and 1440)": {
+          "registered": 1,
+          "outcomes": {
+            "expected": 1
+          },
+          "annotations": [],
+          "statusSequence": ["passed"],
+          "durationMs": [16270],
+          "startedAt": ["2026-10-13T03:33:11.554Z"],
+          "retrySequence": [0]
+        }
+      }
+    },
+    {
+      "localReceipt": "protected-smoke-10/smoke.json",
+      "sha256": "310c2ab3546c3931207176f0d83d705cca087f6ab2294d79f648bf4fb8344b3a",
+      "stats": {
+        "startTime": "2026-10-13T03:31:55.010Z",
+        "duration": 332190.304,
+        "expected": 2,
+        "skipped": 0,
+        "unexpected": 8,
+        "flaky": 0
+      },
+      "suiteRun": {
+        "wall": 333.629,
+        "code": 1,
+        "port": 46743,
+        "gl": "swiftshader"
+      },
+      "configuredWorkers": 2,
+      "repeatEach": 10,
+      "topLevelErrors": [],
+      "tests": {
+        "smoke.spec.mjs > Splashery v3 engine (WebGL2) > rigs pick splats by colour, run effects and show add-ons; shelf shapes have rigs": {
+          "registered": 10,
+          "outcomes": {
+            "unexpected": 8,
+            "expected": 2
+          },
+          "annotations": [],
+          "statusSequence": [
+            "failed",
+            "passed",
+            "failed",
+            "failed",
+            "failed",
+            "failed",
+            "failed",
+            "failed",
+            "failed",
+            "passed"
+          ],
+          "durationMs": [51326, 99710, 53849, 54373, 54433, 52823, 49892, 52526, 52016, 57879],
+          "startedAt": [
+            "2026-10-13T03:31:56.811Z",
+            "2026-10-13T03:31:56.812Z",
+            "2026-10-13T03:32:51.075Z",
+            "2026-10-13T03:33:38.428Z",
+            "2026-10-13T03:33:47.905Z",
+            "2026-10-13T03:34:35.778Z",
+            "2026-10-13T03:34:45.436Z",
+            "2026-10-13T03:35:31.854Z",
+            "2026-10-13T03:35:37.767Z",
+            "2026-10-13T03:36:28.120Z"
+          ],
+          "retrySequence": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+          "errors": [
+            {
+              "message": "Error: expect(received).toBeLessThan(expected)\n\nExpected: < 22810\nReceived:   80770\n\nCall Log:\n- Timeout 15000ms exceeded while waiting on the predicate\n\n  752 |     const settled = async () =>\n  753 |       countDifferentPixels(page, rest, await canvas.screenshot({ type: \"png\" }));\n> 754 |     await expect\n      |     ^\n  755 |       .poll(settled, { timeout: 15_000, intervals: [3000, 1000] })\n  756 |       .toBeLessThan(moved / 4);\n  757 |     // Lantern: a toggle lights a flame add-on; a second tap puts it out.\n    at /workspace/splashery/tests/smoke.spec.mjs:754:5",
+              "count": 1
+            },
+            {
+              "message": "Error: expect(received).toBeLessThan(expected)\n\nExpected: < 17252.5\nReceived:   82354\n\nCall Log:\n- Timeout 15000ms exceeded while waiting on the predicate\n\n  752 |     const settled = async () =>\n  753 |       countDifferentPixels(page, rest, await canvas.screenshot({ type: \"png\" }));\n> 754 |     await expect\n      |     ^\n  755 |       .poll(settled, { timeout: 15_000, intervals: [3000, 1000] })\n  756 |       .toBeLessThan(moved / 4);\n  757 |     // Lantern: a toggle lights a flame add-on; a second tap puts it out.\n    at /workspace/splashery/tests/smoke.spec.mjs:754:5",
+              "count": 1
+            },
+            {
+              "message": "Error: expect(received).toBeLessThan(expected)\n\nExpected: < 20848.75\nReceived:   82325\n\nCall Log:\n- Timeout 15000ms exceeded while waiting on the predicate\n\n  752 |     const settled = async () =>\n  753 |       countDifferentPixels(page, rest, await canvas.screenshot({ type: \"png\" }));\n> 754 |     await expect\n      |     ^\n  755 |       .poll(settled, { timeout: 15_000, intervals: [3000, 1000] })\n  756 |       .toBeLessThan(moved / 4);\n  757 |     // Lantern: a toggle lights a flame add-on; a second tap puts it out.\n    at /workspace/splashery/tests/smoke.spec.mjs:754:5",
+              "count": 1
+            },
+            {
+              "message": "Error: expect(received).toBeLessThan(expected)\n\nExpected: < 9253.5\nReceived:   82300\n\nCall Log:\n- Timeout 15000ms exceeded while waiting on the predicate\n\n  752 |     const settled = async () =>\n  753 |       countDifferentPixels(page, rest, await canvas.screenshot({ type: \"png\" }));\n> 754 |     await expect\n      |     ^\n  755 |       .poll(settled, { timeout: 15_000, intervals: [3000, 1000] })\n  756 |       .toBeLessThan(moved / 4);\n  757 |     // Lantern: a toggle lights a flame add-on; a second tap puts it out.\n    at /workspace/splashery/tests/smoke.spec.mjs:754:5",
+              "count": 1
+            },
+            {
+              "message": "Error: expect(received).toBeLessThan(expected)\n\nExpected: < 22656\nReceived:   82018\n\nCall Log:\n- Timeout 15000ms exceeded while waiting on the predicate\n\n  752 |     const settled = async () =>\n  753 |       countDifferentPixels(page, rest, await canvas.screenshot({ type: \"png\" }));\n> 754 |     await expect\n      |     ^\n  755 |       .poll(settled, { timeout: 15_000, intervals: [3000, 1000] })\n  756 |       .toBeLessThan(moved / 4);\n  757 |     // Lantern: a toggle lights a flame add-on; a second tap puts it out.\n    at /workspace/splashery/tests/smoke.spec.mjs:754:5",
+              "count": 1
+            },
+            {
+              "message": "Error: expect(received).toBeLessThan(expected)\n\nExpected: < 17318.75\nReceived:   82315\n\nCall Log:\n- Timeout 15000ms exceeded while waiting on the predicate\n\n  752 |     const settled = async () =>\n  753 |       countDifferentPixels(page, rest, await canvas.screenshot({ type: \"png\" }));\n> 754 |     await expect\n      |     ^\n  755 |       .poll(settled, { timeout: 15_000, intervals: [3000, 1000] })\n  756 |       .toBeLessThan(moved / 4);\n  757 |     // Lantern: a toggle lights a flame add-on; a second tap puts it out.\n    at /workspace/splashery/tests/smoke.spec.mjs:754:5",
+              "count": 1
+            },
+            {
+              "message": "Error: expect(received).toBeLessThan(expected)\n\nExpected: < 14051.5\nReceived:   82312\n\nCall Log:\n- Timeout 15000ms exceeded while waiting on the predicate\n\n  752 |     const settled = async () =>\n  753 |       countDifferentPixels(page, rest, await canvas.screenshot({ type: \"png\" }));\n> 754 |     await expect\n      |     ^\n  755 |       .poll(settled, { timeout: 15_000, intervals: [3000, 1000] })\n  756 |       .toBeLessThan(moved / 4);\n  757 |     // Lantern: a toggle lights a flame add-on; a second tap puts it out.\n    at /workspace/splashery/tests/smoke.spec.mjs:754:5",
+              "count": 1
+            },
+            {
+              "message": "Error: expect(received).toBeLessThan(expected)\n\nExpected: < 9210.25\nReceived:   82345\n\nCall Log:\n- Timeout 15000ms exceeded while waiting on the predicate\n\n  752 |     const settled = async () =>\n  753 |       countDifferentPixels(page, rest, await canvas.screenshot({ type: \"png\" }));\n> 754 |     await expect\n      |     ^\n  755 |       .poll(settled, { timeout: 15_000, intervals: [3000, 1000] })\n  756 |       .toBeLessThan(moved / 4);\n  757 |     // Lantern: a toggle lights a flame add-on; a second tap puts it out.\n    at /workspace/splashery/tests/smoke.spec.mjs:754:5",
+              "count": 1
+            }
           ]
+        }
+      }
+    },
+    {
+      "localReceipt": "smoke-probe/original.json",
+      "sha256": "3fbb7ee00add3d7f944d918865e4960550d2daf28340e8cc318162b6c84f572b",
+      "stats": {
+        "startTime": "2026-10-13T03:54:51.342Z",
+        "duration": 140057.73,
+        "expected": 0,
+        "skipped": 0,
+        "unexpected": 4,
+        "flaky": 0
+      },
+      "suiteRun": null,
+      "configuredWorkers": 2,
+      "repeatEach": 4,
+      "topLevelErrors": [],
+      "tests": {
+        "probe.spec.mjs > rigs pick splats by colour, run effects and show add-ons; shelf shapes have rigs": {
+          "registered": 4,
+          "outcomes": {
+            "unexpected": 4
+          },
+          "annotations": [],
+          "statusSequence": ["failed", "failed", "failed", "failed"],
+          "durationMs": [64047, 64157, 64071, 65966],
+          "startedAt": [
+            "2026-10-13T03:54:52.589Z",
+            "2026-10-13T03:54:52.639Z",
+            "2026-10-13T03:56:01.516Z",
+            "2026-10-13T03:56:02.418Z"
+          ],
+          "retrySequence": [0, 0, 0, 0],
+          "errors": [
+            {
+              "message": "Error: Timeout 15000ms exceeded while waiting on the predicate\n\n  106 |       return n;\n  107 |     };\n> 108 |     await expect\n      |     ^\n  109 |       .poll(settled, { timeout: 15_000, intervals: [3000, 1000] })\n  110 |       .toBeLessThan(moved / 4);\n  111 |     // Lantern: a toggle lights a flame add-on; a second tap puts it out.\n    at /workspace/splashery/.cache/suite-speed/smoke-probe/probe.spec.mjs:108:5",
+              "count": 4
+            }
+          ]
+        }
+      }
+    },
+    {
+      "localReceipt": "smoke-probe/fenced.json",
+      "sha256": "7f294b69f094e99658532758d5ccfc03dd109b654f50ce4f00ca6d415dceae97",
+      "stats": {
+        "startTime": "2026-10-13T03:57:33.166Z",
+        "duration": 181945.23200000002,
+        "expected": 0,
+        "skipped": 0,
+        "unexpected": 4,
+        "flaky": 0
+      },
+      "suiteRun": null,
+      "configuredWorkers": 2,
+      "repeatEach": 4,
+      "topLevelErrors": [],
+      "tests": {
+        "probe.spec.mjs > rigs pick splats by colour, run effects and show add-ons; shelf shapes have rigs": {
+          "registered": 4,
+          "outcomes": {
+            "unexpected": 4
+          },
+          "annotations": [],
+          "statusSequence": ["failed", "failed", "failed", "failed"],
+          "durationMs": [78307, 69907, 91692, 94140],
+          "startedAt": [
+            "2026-10-13T03:57:34.892Z",
+            "2026-10-13T03:57:34.679Z",
+            "2026-10-13T03:58:53.524Z",
+            "2026-10-13T03:58:58.829Z"
+          ],
+          "retrySequence": [0, 0, 0, 0],
+          "errors": [
+            {
+              "message": "TimeoutError: page.waitForFunction: Timeout 15000ms exceeded.\n\n  100 |     expect(moved).toBeGreaterThan(3000);\n  101 |     if(process.env.SMOKE_FENCE === \"1\") {\n> 102 |       await page.waitForFunction(()=>window.__splashery.player.motion.state.pop===0,null,{timeout:15000});\n      |                  ^\n  103 |       await waitForRenderedToy(page);\n  104 |       await snapshot(page,\"idle and rendered\");\n  105 |     }\n    at /workspace/splashery/.cache/suite-speed/smoke-probe/probe.spec.mjs:102:18",
+              "count": 4
+            }
+          ]
+        }
+      }
+    },
+    {
+      "localReceipt": "smoke-probe/clock.json",
+      "sha256": "76e27283dbe2e167069584696cc09ac8cdd1a55f49320b4336934dd4d1c67aef",
+      "stats": {
+        "startTime": "2026-10-13T04:01:00.264Z",
+        "duration": 123216.93400000001,
+        "expected": 0,
+        "skipped": 0,
+        "unexpected": 2,
+        "flaky": 0
+      },
+      "suiteRun": null,
+      "configuredWorkers": 2,
+      "repeatEach": 2,
+      "topLevelErrors": [],
+      "tests": {
+        "clock.spec.mjs > rigs pick splats by colour, run effects and show add-ons; shelf shapes have rigs": {
+          "registered": 2,
+          "outcomes": {
+            "unexpected": 2
+          },
+          "annotations": [],
+          "statusSequence": ["failed", "failed"],
+          "durationMs": [114849, 118064],
+          "startedAt": ["2026-10-13T04:01:02.648Z", "2026-10-13T04:01:02.311Z"],
+          "retrySequence": [0, 0],
+          "errors": [
+            {
+              "message": "Error: expect(received).toBeLessThan(expected)\n\nExpected: < 400\nReceived:   1821\n\n  131 |     await page.waitForTimeout(1500);\n  132 |     const out = await canvas.screenshot({ type: \"png\" });\n> 133 |     expect(await countDifferentPixels(page, dark, out)).toBeLessThan(400);\n      |                                                         ^\n  134 |     // The jelly blob (a procedural shelf shape) splits in three.\n  135 |     await page.click(\".chip[data-category='shapes']\");\n  136 |     await page.click(\".toy-card[data-toy='blob']\");\n    at /workspace/splashery/.cache/suite-speed/smoke-probe/clock.spec.mjs:133:57",
+              "count": 1
+            },
+            {
+              "message": "Error: expect(received).toBeLessThan(expected)\n\nExpected: < 400\nReceived:   1774\n\n  131 |     await page.waitForTimeout(1500);\n  132 |     const out = await canvas.screenshot({ type: \"png\" });\n> 133 |     expect(await countDifferentPixels(page, dark, out)).toBeLessThan(400);\n      |                                                         ^\n  134 |     // The jelly blob (a procedural shelf shape) splits in three.\n  135 |     await page.click(\".chip[data-category='shapes']\");\n  136 |     await page.click(\".toy-card[data-toy='blob']\");\n    at /workspace/splashery/.cache/suite-speed/smoke-probe/clock.spec.mjs:133:57",
+              "count": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "localReceipt": "smoke-probe/phases.json",
+      "sha256": "21bdb57962238b1260e0132668c879a631e9e3a317af64ff2eccf490c36d26ac",
+      "stats": {
+        "startTime": "2026-10-13T04:03:44.936Z",
+        "duration": 188112.026,
+        "expected": 2,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "suiteRun": null,
+      "configuredWorkers": 2,
+      "repeatEach": 2,
+      "topLevelErrors": [],
+      "tests": {
+        "phases.spec.mjs > rigs pick splats by colour, run effects and show add-ons; shelf shapes have rigs": {
+          "registered": 2,
+          "outcomes": {
+            "expected": 2
+          },
+          "annotations": [],
+          "statusSequence": ["passed", "passed"],
+          "durationMs": [185407, 176398],
+          "startedAt": ["2026-10-13T04:03:46.458Z", "2026-10-13T04:03:46.143Z"],
+          "retrySequence": [0, 0]
+        }
+      }
+    },
+    {
+      "localReceipt": "smoke-probe/phases-20.json",
+      "sha256": "ce5b31b71ce0875ddbe2a81b93433e3d98f28b790a34fea10091ddbd70c23dde",
+      "stats": {
+        "startTime": "2026-10-13T04:08:41.174Z",
+        "duration": 1188332.506,
+        "expected": 20,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "suiteRun": {
+        "started": "2026-10-13T04:08:37.968Z",
+        "finished": "2026-10-13T04:28:29.558Z",
+        "wall": 1191.590071138,
+        "code": 0,
+        "port": 33955,
+        "gl": "llvmpipe",
+        "diagnosticCopy": true
+      },
+      "configuredWorkers": 2,
+      "repeatEach": 20,
+      "topLevelErrors": [],
+      "tests": {
+        "phases.spec.mjs > rigs pick splats by colour, run effects and show add-ons; shelf shapes have rigs": {
+          "registered": 20,
+          "outcomes": {
+            "expected": 20
+          },
+          "annotations": [],
+          "statusSequence": [
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed"
+          ],
+          "durationMs": [
+            87655, 88572, 100458, 98033, 106301, 113722, 139050, 125504, 114156, 116413, 140118,
+            140913, 120449, 117223, 108540, 118923, 107384, 100986, 96648, 93432
+          ],
+          "startedAt": [
+            "2026-10-13T04:08:43.403Z",
+            "2026-10-13T04:08:43.071Z",
+            "2026-10-13T04:10:16.354Z",
+            "2026-10-13T04:10:18.380Z",
+            "2026-10-13T04:12:01.796Z",
+            "2026-10-13T04:12:03.833Z",
+            "2026-10-13T04:13:56.003Z",
+            "2026-10-13T04:14:04.347Z",
+            "2026-10-13T04:16:17.316Z",
+            "2026-10-13T04:16:23.620Z",
+            "2026-10-13T04:18:19.884Z",
+            "2026-10-13T04:18:27.460Z",
+            "2026-10-13T04:20:47.634Z",
+            "2026-10-13T04:20:57.405Z",
+            "2026-10-13T04:22:55.132Z",
+            "2026-10-13T04:23:02.741Z",
+            "2026-10-13T04:24:48.718Z",
+            "2026-10-13T04:25:07.368Z",
+            "2026-10-13T04:26:41.169Z",
+            "2026-10-13T04:26:53.289Z"
+          ],
+          "retrySequence": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        }
+      }
+    },
+    {
+      "localReceipt": "helper-worlds-viewport640/wd.json",
+      "sha256": "ace9dead7a170d2684ba19c77754d116e6b1a9429792522e5ce7c6e6d854bfcb",
+      "stats": {
+        "startTime": "2026-10-13T03:58:59.145Z",
+        "duration": 248483.75699999998,
+        "expected": 1,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "suiteRun": {
+        "wall": 250.838,
+        "code": 0,
+        "port": 39697,
+        "gl": "llvmpipe"
+      },
+      "configuredWorkers": 1,
+      "repeatEach": 1,
+      "topLevelErrors": [],
+      "tests": {
+        "wd.spec.mjs > worlds > each tier stays within its splat budget": {
+          "registered": 1,
+          "outcomes": {
+            "expected": 1
+          },
+          "annotations": [
+            [
+              {
+                "description": "2\u00d7 for fixture-created pages",
+                "type": "cpu-throttle-requested"
+              }
+            ]
+          ],
+          "statusSequence": ["passed"],
+          "durationMs": [243456],
+          "startedAt": ["2026-10-13T03:59:02.850Z"],
+          "retrySequence": [0]
+        }
+      }
+    },
+    {
+      "localReceipt": "helper-worlds-viewport640/wdr3.json",
+      "sha256": "92c15e4fc11b378cdff658883eb6d0da7ec35e7aee5ad0b456044773477f0555",
+      "stats": {
+        "startTime": "2026-10-13T03:55:41.777Z",
+        "duration": 194995.03999999998,
+        "expected": 1,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "suiteRun": {
+        "wall": 196.993,
+        "code": 0,
+        "port": 39697,
+        "gl": "llvmpipe"
+      },
+      "configuredWorkers": 1,
+      "repeatEach": 1,
+      "topLevelErrors": [],
+      "tests": {
+        "wdr3.spec.mjs > worlds r3 > idle, walk and run play, and the standing foot stays planted while it walks and runs": {
+          "registered": 1,
+          "outcomes": {
+            "expected": 1
+          },
+          "annotations": [
+            [
+              {
+                "description": "2\u00d7 for fixture-created pages",
+                "type": "cpu-throttle-requested"
+              }
+            ]
+          ],
+          "statusSequence": ["passed"],
+          "durationMs": [191469],
+          "startedAt": ["2026-10-13T03:55:43.857Z"],
+          "retrySequence": [0]
+        }
+      }
+    },
+    {
+      "localReceipt": "helper-remaining-20/wd.json",
+      "sha256": "1087194540163e8ff875352bb2d8dfe87285e198ba40d08e9ecb82e53d8e5e15",
+      "stats": {
+        "startTime": "2026-10-13T04:04:02.319Z",
+        "duration": 1125155.285,
+        "expected": 3,
+        "skipped": 36,
+        "unexpected": 1,
+        "flaky": 0
+      },
+      "suiteRun": {
+        "wall": 1127.8,
+        "code": 1,
+        "port": 41313,
+        "gl": "llvmpipe"
+      },
+      "configuredWorkers": 1,
+      "repeatEach": 20,
+      "topLevelErrors": [
+        {
+          "message": "\u001b[31mTesting stopped early after 1 maximum allowed failures.\u001b[39m"
+        }
+      ],
+      "tests": {
+        "wd.spec.mjs > worlds > each tier stays within its splat budget": {
+          "registered": 20,
+          "outcomes": {
+            "expected": 2,
+            "skipped": 18
+          },
+          "annotations": [
+            [
+              {
+                "description": "2\u00d7 for fixture-created pages",
+                "type": "cpu-throttle-requested"
+              }
+            ]
+          ],
+          "statusSequence": ["passed", "passed"],
+          "durationMs": [272680, 417245],
+          "startedAt": ["2026-10-13T04:04:05.082Z", "2026-10-13T04:11:45.012Z"],
+          "retrySequence": [0, 0]
+        },
+        "wd.spec.mjs > worlds > screenshots at 390x844 and 1440x900": {
+          "registered": 20,
+          "outcomes": {
+            "expected": 1,
+            "unexpected": 1,
+            "skipped": 18
+          },
+          "annotations": [
+            [
+              {
+                "description": "2\u00d7 for fixture-created pages",
+                "type": "cpu-throttle-requested"
+              }
+            ]
+          ],
+          "statusSequence": ["passed", "timedOut"],
+          "durationMs": [181912, 240003],
+          "startedAt": ["2026-10-13T04:08:38.709Z", "2026-10-13T04:18:43.974Z"],
+          "retrySequence": [0, 0],
+          "errors": [
+            {
+              "message": "Test timeout of 240000ms exceeded.",
+              "count": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "localReceipt": "helper-remaining-pilot/fl7.json",
+      "sha256": "b97d83c739190d4f81b832ebf1933c945f860b91db5738132b01abf0c0990dcb",
+      "stats": {
+        "startTime": "2026-10-13T03:49:25.653Z",
+        "duration": 37614.15,
+        "expected": 3,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "suiteRun": {
+        "wall": 39.15,
+        "code": 0,
+        "port": 32949,
+        "gl": "llvmpipe"
+      },
+      "configuredWorkers": 1,
+      "repeatEach": 1,
+      "topLevelErrors": [],
+      "tests": {
+        "fl7.spec.mjs > on the CPU a phone halves a glass's liquid budget and a splash's vessel, and keeps the splash's pool": {
+          "registered": 1,
+          "outcomes": {
+            "expected": 1
+          },
+          "annotations": [
+            [
+              {
+                "description": "2\u00d7 for fixture-created pages",
+                "type": "cpu-throttle-requested"
+              }
+            ]
+          ],
+          "statusSequence": ["passed"],
+          "durationMs": [37],
+          "startedAt": ["2026-10-13T03:49:27.355Z"],
+          "retrySequence": [0]
+        },
+        "fl7.spec.mjs > the phone envelope: the hint, a 1.5 canvas cap, fewer prop splats, smaller gas grids": {
+          "registered": 1,
+          "outcomes": {
+            "expected": 1
+          },
+          "annotations": [
+            [
+              {
+                "description": "2\u00d7 for fixture-created pages",
+                "type": "cpu-throttle-requested"
+              }
+            ]
+          ],
+          "statusSequence": ["passed"],
+          "durationMs": [21043],
+          "startedAt": ["2026-10-13T03:49:27.414Z"],
+          "retrySequence": [0]
+        },
+        "fl7.spec.mjs > a deliberate High detail (or ?profile=high) keeps the full lab on a phone": {
+          "registered": 1,
+          "outcomes": {
+            "expected": 1
+          },
+          "annotations": [
+            [
+              {
+                "description": "2\u00d7 for fixture-created pages",
+                "type": "cpu-throttle-requested"
+              }
+            ]
+          ],
+          "statusSequence": ["passed"],
+          "durationMs": [14191],
+          "startedAt": ["2026-10-13T03:49:48.869Z"],
+          "retrySequence": [0]
+        }
+      }
+    },
+    {
+      "localReceipt": "helper-remaining-pilot/qrs-toys.json",
+      "sha256": "4a07c352d1115a1e8219ab13b81b6e821d9a25539882e4a133237c4674f8f5d4",
+      "stats": {
+        "startTime": "2026-10-13T03:47:09.398Z",
+        "duration": 30621.636000000002,
+        "expected": 1,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "suiteRun": {
+        "wall": 31.309,
+        "code": 0,
+        "port": 32949,
+        "gl": "llvmpipe"
+      },
+      "configuredWorkers": 1,
+      "repeatEach": 1,
+      "topLevelErrors": [],
+      "tests": {
+        "qrs-toys.spec.mjs > healing: a code with a covered finder scans again": {
+          "registered": 1,
+          "outcomes": {
+            "expected": 1
+          },
+          "annotations": [
+            [
+              {
+                "description": "2\u00d7 for fixture-created pages",
+                "type": "cpu-throttle-requested"
+              }
+            ]
+          ],
+          "statusSequence": ["passed"],
+          "durationMs": [29126],
+          "startedAt": ["2026-10-13T03:47:10.016Z"],
+          "retrySequence": [0]
+        }
+      }
+    },
+    {
+      "localReceipt": "helper-remaining-pilot/wd.json",
+      "sha256": "89bb72208242a921daf060a33cad0f67c9fb23f07b5edcd91222104598c7097f",
+      "stats": {
+        "startTime": "2026-10-13T03:43:45.959Z",
+        "duration": 202755.498,
+        "expected": 2,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "suiteRun": {
+        "wall": 203.835,
+        "code": 0,
+        "port": 32949,
+        "gl": "llvmpipe"
+      },
+      "configuredWorkers": 1,
+      "repeatEach": 1,
+      "topLevelErrors": [],
+      "tests": {
+        "wd.spec.mjs > worlds > each tier stays within its splat budget": {
+          "registered": 1,
+          "outcomes": {
+            "expected": 1
+          },
+          "annotations": [
+            [
+              {
+                "description": "2\u00d7 for fixture-created pages",
+                "type": "cpu-throttle-requested"
+              }
+            ]
+          ],
+          "statusSequence": ["passed"],
+          "durationMs": [131049],
+          "startedAt": ["2026-10-13T03:43:47.117Z"],
+          "retrySequence": [0]
+        },
+        "wd.spec.mjs > worlds > screenshots at 390x844 and 1440x900": {
+          "registered": 1,
+          "outcomes": {
+            "expected": 1
+          },
+          "annotations": [
+            [
+              {
+                "description": "2\u00d7 for fixture-created pages",
+                "type": "cpu-throttle-requested"
+              }
+            ]
+          ],
+          "statusSequence": ["passed"],
+          "durationMs": [69809],
+          "startedAt": ["2026-10-13T03:45:58.561Z"],
+          "retrySequence": [0]
+        }
+      }
+    },
+    {
+      "localReceipt": "helper-remaining-pilot/wdr3.json",
+      "sha256": "7c8046513dbaecd0769e81e4bb087a6a62fe072952b76109e93d6aa704a5aeb1",
+      "stats": {
+        "startTime": "2026-10-13T03:41:32.415Z",
+        "duration": 132461.898,
+        "expected": 1,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "suiteRun": {
+        "wall": 133.878,
+        "code": 0,
+        "port": 32949,
+        "gl": "llvmpipe"
+      },
+      "configuredWorkers": 1,
+      "repeatEach": 1,
+      "topLevelErrors": [],
+      "tests": {
+        "wdr3.spec.mjs > worlds r3 > idle, walk and run play, and the standing foot stays planted while it walks and runs": {
+          "registered": 1,
+          "outcomes": {
+            "expected": 1
+          },
+          "annotations": [
+            [
+              {
+                "description": "2\u00d7 for fixture-created pages",
+                "type": "cpu-throttle-requested"
+              }
+            ]
+          ],
+          "statusSequence": ["passed"],
+          "durationMs": [130267],
+          "startedAt": ["2026-10-13T03:41:33.741Z"],
+          "retrySequence": [0]
+        }
+      }
+    },
+    {
+      "localReceipt": "helper-remaining-pilot/smd-moving.json",
+      "sha256": "3c21d6965f016a33c211c0213c6f923f3c1442ddc6b884d5e2aa8a0cdcf00b62",
+      "stats": {
+        "startTime": "2026-10-13T03:47:41.344Z",
+        "duration": 102806.462,
+        "expected": 5,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "suiteRun": {
+        "wall": 104.131,
+        "code": 0,
+        "port": 32949,
+        "gl": "llvmpipe"
+      },
+      "configuredWorkers": 1,
+      "repeatEach": 1,
+      "topLevelErrors": [],
+      "tests": {
+        "smd-moving.spec.mjs > the samples > sample: builds and renders on a phone": {
+          "registered": 1,
+          "outcomes": {
+            "expected": 1
+          },
+          "annotations": [
+            [
+              {
+                "description": "2\u00d7 for fixture-created pages",
+                "type": "cpu-throttle-requested"
+              }
+            ]
+          ],
+          "statusSequence": ["passed"],
+          "durationMs": [20624],
+          "startedAt": ["2026-10-13T03:47:42.242Z"],
+          "retrySequence": [0]
+        },
+        "smd-moving.spec.mjs > the samples > horse: builds and renders on a phone": {
+          "registered": 1,
+          "outcomes": {
+            "expected": 1
+          },
+          "annotations": [
+            [
+              {
+                "description": "2\u00d7 for fixture-created pages",
+                "type": "cpu-throttle-requested"
+              }
+            ]
+          ],
+          "statusSequence": ["passed"],
+          "durationMs": [15665],
+          "startedAt": ["2026-10-13T03:48:03.268Z"],
+          "retrySequence": [0]
+        },
+        "smd-moving.spec.mjs > the samples > dragon: builds and renders on a phone": {
+          "registered": 1,
+          "outcomes": {
+            "expected": 1
+          },
+          "annotations": [
+            [
+              {
+                "description": "2\u00d7 for fixture-created pages",
+                "type": "cpu-throttle-requested"
+              }
+            ]
+          ],
+          "statusSequence": ["passed"],
+          "durationMs": [22954],
+          "startedAt": ["2026-10-13T03:48:18.957Z"],
+          "retrySequence": [0]
+        },
+        "smd-moving.spec.mjs > the samples > bridge: builds and renders on a phone": {
+          "registered": 1,
+          "outcomes": {
+            "expected": 1
+          },
+          "annotations": [
+            [
+              {
+                "description": "2\u00d7 for fixture-created pages",
+                "type": "cpu-throttle-requested"
+              }
+            ]
+          ],
+          "statusSequence": ["passed"],
+          "durationMs": [21966],
+          "startedAt": ["2026-10-13T03:48:41.941Z"],
+          "retrySequence": [0]
+        },
+        "smd-moving.spec.mjs > the samples > machine: builds and renders on a phone": {
+          "registered": 1,
+          "outcomes": {
+            "expected": 1
+          },
+          "annotations": [
+            [
+              {
+                "description": "2\u00d7 for fixture-created pages",
+                "type": "cpu-throttle-requested"
+              }
+            ]
+          ],
+          "statusSequence": ["passed"],
+          "durationMs": [19750],
+          "startedAt": ["2026-10-13T03:49:04.016Z"],
+          "retrySequence": [0]
         }
       }
     },
@@ -2357,18 +2415,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            68
-          ],
-          "startedAt": [
-            "2026-10-13T02:30:17.310Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [68],
+          "startedAt": ["2026-10-13T02:30:17.310Z"],
+          "retrySequence": [0]
         },
         "stm.spec.mjs > reading model files > a glTF with embedded data and vertex colors loads": {
           "registered": 1,
@@ -2376,18 +2426,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            43
-          ],
-          "startedAt": [
-            "2026-10-13T02:30:17.432Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [43],
+          "startedAt": ["2026-10-13T02:30:17.432Z"],
+          "retrySequence": [0]
         },
         "stm.spec.mjs > reading model files > a glTF that needs its own file says which, and loads once it has it": {
           "registered": 1,
@@ -2395,18 +2437,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            14
-          ],
-          "startedAt": [
-            "2026-10-13T02:30:17.502Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [14],
+          "startedAt": ["2026-10-13T02:30:17.502Z"],
+          "retrySequence": [0]
         },
         "stm.spec.mjs > reading model files > an OBJ takes its colors from its MTL, and shows gray without it": {
           "registered": 1,
@@ -2414,18 +2448,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            21
-          ],
-          "startedAt": [
-            "2026-10-13T02:30:17.548Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [21],
+          "startedAt": ["2026-10-13T02:30:17.548Z"],
+          "retrySequence": [0]
         },
         "stm.spec.mjs > reading model files > an STL loads, binary and ASCII": {
           "registered": 1,
@@ -2433,18 +2459,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            13
-          ],
-          "startedAt": [
-            "2026-10-13T02:30:17.624Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [13],
+          "startedAt": ["2026-10-13T02:30:17.624Z"],
+          "retrySequence": [0]
         },
         "stm.spec.mjs > reading model files > things that are not models give a plain message": {
           "registered": 1,
@@ -2452,18 +2470,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            90
-          ],
-          "startedAt": [
-            "2026-10-13T02:30:17.721Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [90],
+          "startedAt": ["2026-10-13T02:30:17.721Z"],
+          "retrySequence": [0]
         },
         "stm.spec.mjs > reading model files > every format turns into splats that lie on it": {
           "registered": 1,
@@ -2471,18 +2481,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            222
-          ],
-          "startedAt": [
-            "2026-10-13T02:30:17.848Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [222],
+          "startedAt": ["2026-10-13T02:30:17.848Z"],
+          "retrySequence": [0]
         },
         "stm.spec.mjs > the conversion > the tier budgets are the kit's counts for the toy": {
           "registered": 1,
@@ -2490,18 +2492,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            19
-          ],
-          "startedAt": [
-            "2026-10-13T02:30:18.146Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [19],
+          "startedAt": ["2026-10-13T02:30:18.146Z"],
+          "retrySequence": [0]
         },
         "stm.spec.mjs > the conversion > a sample model stays within each tier's budget, in splats and in a wireframe": {
           "registered": 1,
@@ -2509,18 +2503,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            7677
-          ],
-          "startedAt": [
-            "2026-10-13T02:30:18.236Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [7677],
+          "startedAt": ["2026-10-13T02:30:18.236Z"],
+          "retrySequence": [0]
         },
         "stm.spec.mjs > the conversion > a flat quad closes: no holes, and nothing to see through": {
           "registered": 1,
@@ -2528,18 +2514,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            1058
-          ],
-          "startedAt": [
-            "2026-10-13T02:30:25.929Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [1058],
+          "startedAt": ["2026-10-13T02:30:25.929Z"],
+          "retrySequence": [0]
         },
         "stm.spec.mjs > the conversion > colors follow the texture (the quad's four colors land where they should)": {
           "registered": 1,
@@ -2547,18 +2525,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            81
-          ],
-          "startedAt": [
-            "2026-10-13T02:30:27.008Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [81],
+          "startedAt": ["2026-10-13T02:30:27.008Z"],
+          "retrySequence": [0]
         },
         "stm.spec.mjs > the conversion > vertex colors and MTL colors show, and light shades them softly": {
           "registered": 1,
@@ -2566,18 +2536,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            148
-          ],
-          "startedAt": [
-            "2026-10-13T02:30:27.124Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [148],
+          "startedAt": ["2026-10-13T02:30:27.124Z"],
+          "retrySequence": [0]
         },
         "stm.spec.mjs > the conversion > hard edges are found, and an upright STL turns to Y up": {
           "registered": 1,
@@ -2585,18 +2547,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            23
-          ],
-          "startedAt": [
-            "2026-10-13T02:30:27.314Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [23],
+          "startedAt": ["2026-10-13T02:30:27.314Z"],
+          "retrySequence": [0]
         },
         "stm.spec.mjs > the conversion > the wireframe is the mesh's edges": {
           "registered": 1,
@@ -2604,18 +2558,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            531
-          ],
-          "startedAt": [
-            "2026-10-13T02:30:27.357Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [531],
+          "startedAt": ["2026-10-13T02:30:27.357Z"],
+          "retrySequence": [0]
         },
         "stm.spec.mjs > the conversion > the command-line tool writes a splat PLY": {
           "registered": 1,
@@ -2623,18 +2569,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            274
-          ],
-          "startedAt": [
-            "2026-10-13T02:30:27.939Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [274],
+          "startedAt": ["2026-10-13T02:30:27.939Z"],
+          "retrySequence": [0]
         },
         "stm.spec.mjs > the tap > the lift is 0 at rest, rises through the model like a wave and settles back to 0": {
           "registered": 1,
@@ -2642,18 +2580,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            238
-          ],
-          "startedAt": [
-            "2026-10-13T02:30:28.240Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [238],
+          "startedAt": ["2026-10-13T02:30:28.240Z"],
+          "retrySequence": [0]
         },
         "stm.spec.mjs > the tap > each splat has its own place in the cloud, and every number is finite": {
           "registered": 1,
@@ -2661,18 +2591,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            284
-          ],
-          "startedAt": [
-            "2026-10-13T02:30:28.508Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [284],
+          "startedAt": ["2026-10-13T02:30:28.508Z"],
+          "retrySequence": [0]
         },
         "stm.spec.mjs > the toy in the browser > it is a labs toy on the Studio shelf": {
           "registered": 1,
@@ -2680,18 +2602,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            13
-          ],
-          "startedAt": [
-            "2026-10-13T02:30:28.823Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [13],
+          "startedAt": ["2026-10-13T02:30:28.823Z"],
+          "retrySequence": [0]
         },
         "stm.spec.mjs > the toy in the browser > a sample shows, a tap lifts and settles, opening your own models works": {
           "registered": 1,
@@ -2699,18 +2613,10 @@
             "unexpected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "failed"
-          ],
-          "durationMs": [
-            83209
-          ],
-          "startedAt": [
-            "2026-10-13T02:30:28.976Z"
-          ],
-          "retrySequence": [
-            0
-          ],
+          "statusSequence": ["failed"],
+          "durationMs": [83209],
+          "startedAt": ["2026-10-13T02:30:28.976Z"],
+          "retrySequence": [0],
           "errors": [
             {
               "message": "TimeoutError: page.waitForFunction: Timeout 60000ms exceeded.\n\n  388 |     await page.evaluate(() => window.__splashery.app.act());\n  389 |     await page.waitForFunction(() => window.__splashery.player.motion.state.lift > 0.2, null, { timeout: 30_000 }); // prettier-ignore\n> 390 |     await page.waitForFunction(() => window.__splashery.player.motion.state.lift === 0, null, { timeout: 60_000 }); // prettier-ignore\n      |                ^\n  391 |     // Your own model: a binary STL, then a GLB with a texture.\n  392 |     await page.locator(\"#toy-input-file\").setInputFiles(path.join(FIX, \"cube-binary.stl\"));\n  393 |     await page.waitForFunction(() => window.__splashery.player.proc?.ctx?.kit?.data?.model?.name === \"cube-binary\", null, { timeout: 60_000 }); // prettier-ignore\n    at /workspace/splashery/tests/stm.spec.mjs:390:16",
@@ -2724,18 +2630,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            137506
-          ],
-          "startedAt": [
-            "2026-10-13T02:32:01.787Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [137506],
+          "startedAt": ["2026-10-13T02:32:01.787Z"],
+          "retrySequence": [0]
         }
       }
     },
@@ -2766,18 +2664,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            68
-          ],
-          "startedAt": [
-            "2026-10-13T02:30:06.711Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [68],
+          "startedAt": ["2026-10-13T02:30:06.711Z"],
+          "retrySequence": [0]
         },
         "tpg.spec.mjs > toy pages (static) > every page has its link preview, its words and links that lead somewhere": {
           "registered": 1,
@@ -2785,18 +2675,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            464
-          ],
-          "startedAt": [
-            "2026-10-13T02:30:06.845Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [464],
+          "startedAt": ["2026-10-13T02:30:06.845Z"],
+          "retrySequence": [0]
         },
         "tpg.spec.mjs > toy pages (static) > credits and license notices are shown as the rules ask": {
           "registered": 1,
@@ -2804,18 +2686,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            259
-          ],
-          "startedAt": [
-            "2026-10-13T02:30:07.345Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [259],
+          "startedAt": ["2026-10-13T02:30:07.345Z"],
+          "retrySequence": [0]
         },
         "tpg.spec.mjs > toy pages (static) > cards and search results across the site link to the toy's page": {
           "registered": 1,
@@ -2823,18 +2697,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            2495
-          ],
-          "startedAt": [
-            "2026-10-13T02:30:07.622Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [2495],
+          "startedAt": ["2026-10-13T02:30:07.622Z"],
+          "retrySequence": [0]
         },
         "tpg.spec.mjs > toy pages (static) > the toy pages follow main and stay out of the service worker's install": {
           "registered": 1,
@@ -2842,18 +2708,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            29
-          ],
-          "startedAt": [
-            "2026-10-13T02:30:10.140Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [29],
+          "startedAt": ["2026-10-13T02:30:10.140Z"],
+          "retrySequence": [0]
         },
         "tpg.spec.mjs > toy pages (static) > 'Is it right?' shows a toy's evidence file, and nothing without one": {
           "registered": 1,
@@ -2861,18 +2719,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            874
-          ],
-          "startedAt": [
-            "2026-10-13T02:30:10.222Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [874],
+          "startedAt": ["2026-10-13T02:30:10.222Z"],
+          "retrySequence": [0]
         },
         "tpg.spec.mjs > toy pages (static) > the catalog PDF has every public toy, one per page": {
           "registered": 1,
@@ -2880,18 +2730,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            29
-          ],
-          "startedAt": [
-            "2026-10-13T02:30:11.114Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [29],
+          "startedAt": ["2026-10-13T02:30:11.114Z"],
+          "retrySequence": [0]
         },
         "tpg.spec.mjs > toy pages (browser) > a sample of 25 pages loads, fits a phone and links on": {
           "registered": 1,
@@ -2899,18 +2741,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            18113
-          ],
-          "startedAt": [
-            "2026-10-13T02:30:11.175Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [18113],
+          "startedAt": ["2026-10-13T02:30:11.175Z"],
+          "retrySequence": [0]
         },
         "tpg.spec.mjs > toy pages (browser) > a labs toy's page shows its toy with the labs switch on": {
           "registered": 1,
@@ -2918,18 +2752,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            7901
-          ],
-          "startedAt": [
-            "2026-10-13T02:30:30.116Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [7901],
+          "startedAt": ["2026-10-13T02:30:30.116Z"],
+          "retrySequence": [0]
         },
         "tpg.spec.mjs > toy pages (browser) > the live toy plays on its page, and the copy buttons copy": {
           "registered": 1,
@@ -2937,18 +2763,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            45238
-          ],
-          "startedAt": [
-            "2026-10-13T02:30:38.086Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [45238],
+          "startedAt": ["2026-10-13T02:30:38.086Z"],
+          "retrySequence": [0]
         },
         "tpg.spec.mjs > toy pages (browser) > screenshots: two toy pages at both sizes": {
           "registered": 1,
@@ -2956,18 +2774,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            207301
-          ],
-          "startedAt": [
-            "2026-10-13T02:31:23.394Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [207301],
+          "startedAt": ["2026-10-13T02:31:23.394Z"],
+          "retrySequence": [0]
         }
       }
     },
@@ -2998,18 +2808,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            56368
-          ],
-          "startedAt": [
-            "2026-10-13T02:34:33.954Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [56368],
+          "startedAt": ["2026-10-13T02:34:33.954Z"],
+          "retrySequence": [0]
         },
         "hh5-gems.spec.mjs > pearl: lifted out, it rests in its shell or on the table, never through the shell; brought back, it clicks in": {
           "registered": 1,
@@ -3017,18 +2819,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            68379
-          ],
-          "startedAt": [
-            "2026-10-13T02:35:31.007Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [68379],
+          "startedAt": ["2026-10-13T02:35:31.007Z"],
+          "retrySequence": [0]
         },
         "hh5-gems.spec.mjs > crystal ball: lifted off its stand, it rolls off the stand's base onto the table; brought back, it settles in its cup": {
           "registered": 1,
@@ -3036,18 +2830,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            78482
-          ],
-          "startedAt": [
-            "2026-10-13T02:36:39.506Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [78482],
+          "startedAt": ["2026-10-13T02:36:39.506Z"],
+          "retrySequence": [0]
         },
         "hh5-gems.spec.mjs > quartz cluster: a big point snaps off the rock, rests, and clicks back into its place": {
           "registered": 1,
@@ -3055,18 +2841,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            54984
-          ],
-          "startedAt": [
-            "2026-10-13T02:37:58.097Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [54984],
+          "startedAt": ["2026-10-13T02:37:58.097Z"],
+          "retrySequence": [0]
         },
         "hh5-gems.spec.mjs > screenshots: the pearl, hands-on": {
           "registered": 1,
@@ -3074,18 +2852,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            163668
-          ],
-          "startedAt": [
-            "2026-10-13T02:38:53.206Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [163668],
+          "startedAt": ["2026-10-13T02:38:53.206Z"],
+          "retrySequence": [0]
         }
       }
     },
@@ -3116,18 +2886,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            42
-          ],
-          "startedAt": [
-            "2026-10-13T02:35:07.887Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [42],
+          "startedAt": ["2026-10-13T02:35:07.887Z"],
+          "retrySequence": [0]
         },
         "p3d.spec.mjs > the conversion > splat budgets follow the tiers": {
           "registered": 1,
@@ -3135,18 +2897,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            7
-          ],
-          "startedAt": [
-            "2026-10-13T02:35:08.016Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [7],
+          "startedAt": ["2026-10-13T02:35:08.016Z"],
+          "retrySequence": [0]
         },
         "p3d.spec.mjs > the conversion > area averaging keeps a flat color and halves a stripe": {
           "registered": 1,
@@ -3154,18 +2908,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            16
-          ],
-          "startedAt": [
-            "2026-10-13T02:35:08.048Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [16],
+          "startedAt": ["2026-10-13T02:35:08.048Z"],
+          "retrySequence": [0]
         },
         "p3d.spec.mjs > the conversion > depth is stretched to 0..1 and stored without loss that shows": {
           "registered": 1,
@@ -3173,18 +2919,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            22
-          ],
-          "startedAt": [
-            "2026-10-13T02:35:08.108Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [22],
+          "startedAt": ["2026-10-13T02:35:08.108Z"],
+          "retrySequence": [0]
         },
         "p3d.spec.mjs > the conversion > splats sit at different depths where the photo's depth differs, and a near object is its own piece": {
           "registered": 1,
@@ -3192,18 +2930,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            7975
-          ],
-          "startedAt": [
-            "2026-10-13T02:35:08.208Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [7975],
+          "startedAt": ["2026-10-13T02:35:08.208Z"],
+          "retrySequence": [0]
         },
         "p3d.spec.mjs > the conversion > the layers rise one after another and end where they should": {
           "registered": 1,
@@ -3211,18 +2941,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            6
-          ],
-          "startedAt": [
-            "2026-10-13T02:35:16.202Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [6],
+          "startedAt": ["2026-10-13T02:35:16.202Z"],
+          "retrySequence": [0]
         },
         "p3d.spec.mjs > the conversion > each sample builds within every tier's budget, with finite numbers": {
           "registered": 1,
@@ -3230,18 +2952,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            70782
-          ],
-          "startedAt": [
-            "2026-10-13T02:35:16.236Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [70782],
+          "startedAt": ["2026-10-13T02:35:16.236Z"],
+          "retrySequence": [0]
         },
         "p3d.spec.mjs > the conversion > a photo of your own builds": {
           "registered": 1,
@@ -3249,18 +2963,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            476
-          ],
-          "startedAt": [
-            "2026-10-13T02:36:27.050Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [476],
+          "startedAt": ["2026-10-13T02:36:27.050Z"],
+          "retrySequence": [0]
         },
         "p3d.spec.mjs > in the browser > nothing loads the depth model until a photo is opened; then it builds and taps": {
           "registered": 1,
@@ -3268,18 +2974,10 @@
             "unexpected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "failed"
-          ],
-          "durationMs": [
-            170632
-          ],
-          "startedAt": [
-            "2026-10-13T02:36:27.604Z"
-          ],
-          "retrySequence": [
-            0
-          ],
+          "statusSequence": ["failed"],
+          "durationMs": [170632],
+          "startedAt": ["2026-10-13T02:36:27.604Z"],
+          "retrySequence": [0],
           "errors": [
             {
               "message": "Error: page.evaluate: Error: Render readiness: {\"toy\":\"photo-3d\",\"loading\":0,\"pending\":false}\n    at eval (eval at evaluate (:290:30), <anonymous>:22:16)\n    at eval (eval at evaluate (:290:30), <anonymous>:22:16)\n    at waitForRenderedToy (/workspace/splashery/tests/render-ready.mjs:39:14)\n    at /workspace/splashery/tests/p3d.spec.mjs:174:13",
@@ -3293,18 +2991,10 @@
             "unexpected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "failed"
-          ],
-          "durationMs": [
-            116528
-          ],
-          "startedAt": [
-            "2026-10-13T02:39:32.580Z"
-          ],
-          "retrySequence": [
-            0
-          ],
+          "statusSequence": ["failed"],
+          "durationMs": [116528],
+          "startedAt": ["2026-10-13T02:39:32.580Z"],
+          "retrySequence": [0],
           "errors": [
             {
               "message": "Error: page.evaluate: Error: Render readiness: {\"toy\":\"photo-3d\",\"loading\":0,\"pending\":false}\n    at eval (eval at evaluate (:290:30), <anonymous>:22:16)\n    at eval (eval at evaluate (:290:30), <anonymous>:22:16)\n    at waitForRenderedToy (/workspace/splashery/tests/render-ready.mjs:30:14)\n    at /workspace/splashery/tests/p3d.spec.mjs:216:13",
@@ -3341,18 +3031,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            94854
-          ],
-          "startedAt": [
-            "2026-10-13T02:47:23.626Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [94854],
+          "startedAt": ["2026-10-13T02:47:23.626Z"],
+          "retrySequence": [0]
         },
         "phy.spec.mjs > bricks and macarons stack; a brick snaps onto the studs": {
           "registered": 1,
@@ -3360,18 +3042,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            104458
-          ],
-          "startedAt": [
-            "2026-10-13T02:48:59.237Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [104458],
+          "startedAt": ["2026-10-13T02:48:59.237Z"],
+          "retrySequence": [0]
         },
         "phy.spec.mjs > jelly and amoeba stretch and spring back; cherries swing and knock": {
           "registered": 1,
@@ -3379,18 +3053,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            183826
-          ],
-          "startedAt": [
-            "2026-10-13T02:50:43.878Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [183826],
+          "startedAt": ["2026-10-13T02:50:43.878Z"],
+          "retrySequence": [0]
         },
         "phy.spec.mjs > the spring toy stretches and settles; the bow shoots; sushi picks the tapped piece": {
           "registered": 1,
@@ -3398,18 +3064,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            85955
-          ],
-          "startedAt": [
-            "2026-10-13T02:53:47.776Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [85955],
+          "startedAt": ["2026-10-13T02:53:47.776Z"],
+          "retrySequence": [0]
         },
         "phy.spec.mjs > screenshots: the Hands-on buttons on Pebbles at 390x844": {
           "registered": 1,
@@ -3417,18 +3075,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            31749
-          ],
-          "startedAt": [
-            "2026-10-13T02:55:13.893Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [31749],
+          "startedAt": ["2026-10-13T02:55:13.893Z"],
+          "retrySequence": [0]
         },
         "phy.spec.mjs > screenshots: the Hands-on buttons on Pebbles at 1440x900": {
           "registered": 1,
@@ -3436,18 +3086,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            35842
-          ],
-          "startedAt": [
-            "2026-10-13T02:55:45.728Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [35842],
+          "startedAt": ["2026-10-13T02:55:45.728Z"],
+          "retrySequence": [0]
         }
       }
     },
@@ -3478,18 +3120,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            1924
-          ],
-          "startedAt": [
-            "2026-10-13T02:47:10.508Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [1924],
+          "startedAt": ["2026-10-13T02:47:10.508Z"],
+          "retrySequence": [0]
         },
         "ui4.spec.mjs > 1440x900 > a drag along the keys plays each key it crosses, in order, up and back (1440x900)": {
           "registered": 1,
@@ -3497,18 +3131,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            96909
-          ],
-          "startedAt": [
-            "2026-10-13T02:41:55.307Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [96909],
+          "startedAt": ["2026-10-13T02:41:55.307Z"],
+          "retrySequence": [0]
         },
         "ui4.spec.mjs > 390x844 > a drag along the keys plays each key it crosses, in order, up and back (390x844)": {
           "registered": 1,
@@ -3516,18 +3142,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            84093
-          ],
-          "startedAt": [
-            "2026-10-13T02:43:33.429Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [84093],
+          "startedAt": ["2026-10-13T02:43:33.429Z"],
+          "retrySequence": [0]
         },
         "ui4.spec.mjs > off the keys > a drag that starts off the keys still turns the toy, and plays nothing": {
           "registered": 1,
@@ -3535,18 +3153,10 @@
             "expected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "passed"
-          ],
-          "durationMs": [
-            132866
-          ],
-          "startedAt": [
-            "2026-10-13T02:44:57.590Z"
-          ],
-          "retrySequence": [
-            0
-          ]
+          "statusSequence": ["passed"],
+          "durationMs": [132866],
+          "startedAt": ["2026-10-13T02:44:57.590Z"],
+          "retrySequence": [0]
         }
       }
     },
@@ -3577,18 +3187,10 @@
             "unexpected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "failed"
-          ],
-          "durationMs": [
-            50033
-          ],
-          "startedAt": [
-            "2026-10-13T02:41:59.127Z"
-          ],
-          "retrySequence": [
-            0
-          ],
+          "statusSequence": ["failed"],
+          "durationMs": [50033],
+          "startedAt": ["2026-10-13T02:41:59.127Z"],
+          "retrySequence": [0],
           "errors": [
             {
               "message": "Error: expect(received).toMatch(expected)\n\nExpected pattern: /^2-3/\nReceived string:  \"3-4+\"\n\n  130 |     const a = await until(page, async (m) => { const s = (await import(m)).singState(); return s.p > 0.4 ? s : null; }, studio, 60_000); // prettier-ignore\n  131 |     expect(a.builds).toBe(before);\n> 132 |     expect(a.mode).toMatch(/^2-3/);\n      |                    ^\n  133 |     // Then F\u266f4: the sand moves on to the 3, 4 figure (375 Hz) and settles\n  134 |     // there. (Live r7: on the same plate, from where it lies; until r7 a new\n  135 |     // plate with fresh sand.)\n    at /workspace/splashery/tests/live4.spec.mjs:132:20",
@@ -3602,18 +3204,10 @@
             "unexpected": 1
           },
           "annotations": [],
-          "statusSequence": [
-            "failed"
-          ],
-          "durationMs": [
-            122580
-          ],
-          "startedAt": [
-            "2026-10-13T02:42:54.715Z"
-          ],
-          "retrySequence": [
-            0
-          ],
+          "statusSequence": ["failed"],
+          "durationMs": [122580],
+          "startedAt": ["2026-10-13T02:42:54.715Z"],
+          "retrySequence": [0],
           "errors": [
             {
               "message": "Error: Timed out waiting for async m => {\n    const s = (await import(m)).chladniFileState();\n    return s.lead?.startsWith(\"2-3\") && s.p > 0.4 ? s : null;\n  }\n\n  109 |     const v = await page.evaluate(check, arg);\n  110 |     if (v) return v;\n> 111 |     if (Date.now() > end) throw new Error(`Timed out waiting for ${check}`);\n      |                                 ^\n  112 |     await page.waitForTimeout(250);\n  113 |   }\n  114 | }\n    at until (/workspace/splashery/tests/live4.spec.mjs:111:33)\n    at /workspace/splashery/tests/live4.spec.mjs:170:13",
@@ -3636,5 +3230,84 @@
         "\u203a tests/live4.spec.mjs:161:1 \u203a your audio plays to the plate: its strongest pitch rings the modes, re-sorting as the tune moves; play, pause and scrub \n\n    Error: Timed out waiting for async m => {\n        const s = (await import(m)).chladniFileState();\n        return s.lead?.startsWith(\"2-3\") && s.p > 0.4 ? s : null;\n      }\n\n      109 |     const v = await page.evaluate(check, arg);\n      110 |     if (v) return v;\n    > 111 |     if (Date.now() > end) throw new Error(`Timed out waiting for ${check}`);\n          |                                 ^\n      112 |     await page.waitForTimeout(250);\n      113 |   }\n      114 | }\n        at until (/workspace/splashery/tests/live4.spec.mjs:111:33)\n        at /workspace/splashery/tests/live4.spec.mjs:170:13"
       ]
     }
-  ]
+  ],
+  "worldViewportEquivalence": {
+    "wdr3": {
+      "baseline": ".cache/suite-speed/helper-remaining-pilot/wdr3.json",
+      "candidate": ".cache/suite-speed/helper-worlds-viewport640/wdr3.json",
+      "exact_metrics_equal": true,
+      "metrics": [
+        {
+          "speed": 1.299999999493908,
+          "slide": 0.04681979920761567,
+          "lift": 0.11423628961990251,
+          "state": "Move"
+        },
+        {
+          "speed": 2.699999998948886,
+          "slide": 0.16265365121307698,
+          "lift": 0.14454857605559468,
+          "state": "Move"
+        }
+      ]
+    },
+    "wd": {
+      "baseline": ".cache/suite-speed/helper-remaining-pilot/wd.json",
+      "candidate": ".cache/suite-speed/helper-worlds-viewport640/wd.json",
+      "exact_budget_counts_equal": true,
+      "tiers": [
+        ["low", "273345", "297196", "300000", "161291"],
+        ["mid", "516386", "502615", "550000", "363510"],
+        ["high", "814930", "808206", "900000", "641953"],
+        ["max", "1339616", "1307798", "1400000", "1136153"]
+      ]
+    },
+    "sources": {
+      "viewport_independence": [
+        "src/worlds/world.js:489 (LOD plan uses world positions/counts)",
+        "src/worlds/lod.js (distance/budget planner)",
+        "src/worlds/render.js:164 (same landscape FOV branch)",
+        "src/worlds/world.js:643 (same landscape overview branch)"
+      ],
+      "contents_preserved": [
+        "all four forced tiers",
+        "both island locations",
+        "same full island and assets",
+        "same 20 warmup and 45 sampled steps per gait",
+        "same camera and16:9 aspect",
+        "all original assertions and thresholds"
+      ]
+    }
+  },
+  "currentStaticInventory": {
+    "baseline": {
+      "files": 255,
+      "literalWaits": 426,
+      "literalMs": 462946,
+      "waits": 436,
+      "goto": 550,
+      "toys": 331,
+      "shots": 267,
+      "clips": 11
+    },
+    "current": {
+      "files": 257,
+      "literalWaits": 418,
+      "literalMs": 456546,
+      "waits": 428,
+      "goto": 551,
+      "toys": 332,
+      "shots": 267,
+      "clips": 11
+    }
+  },
+  "fullCheckAttempt": {
+    "command": "SPLASHERY_CHROMIUM=/usr/bin/chromium SPLASHERY_PORT=42210 taskset -c 0-3 npx playwright test --reporter=line,json",
+    "sha256": "99c119da57fe89cdeca6806026be3d02cbe2b5b60bb49efa4e2c336b0514ad74",
+    "lastStartedTest": 57,
+    "registeredTests": 2229,
+    "completeJSONReport": false,
+    "exitCode": 143,
+    "note": "Stopped after stacked proof/full-check work exhausted the original WD screenshot deadline. Graceful interruption did not finish; owned full-check processes were terminated. No complete-suite success or timing claim."
+  }
 }

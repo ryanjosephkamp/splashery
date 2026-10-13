@@ -1,0 +1,51 @@
+--- a/tests/smoke.spec.mjs
++++ b/tests/smoke.spec.mjs
+@@ -6,0 +7 @@
++import { waitForCamera, waitForRenderedToy } from "./render-ready.mjs";
+@@ -740,0 +742,23 @@
++    const ready = async (label) => {
++      await expect(page.locator("#toy-status")).toHaveText(new RegExp(`^${label}`), {
++        timeout: 180000,
++      });
++      await waitForCamera(page);
++      await waitForRenderedToy(page);
++    };
++    // Use the real player clock: software rendering caps toy time per
++    // frame, so fixed wall sleeps need not reach the intended effect phase.
++    const advance = async (seconds) => {
++      await page.evaluate((seconds) => {
++        const { player } = window.__splashery;
++        const paused = player.paused;
++        player.setPaused(false);
++        try {
++          for (let i = 0; i < Math.ceil(seconds * 60); i++) player.update(1 / 60);
++        } finally {
++          player.setPaused(paused);
++        }
++      }, seconds);
++      await waitForRenderedToy(page);
++    };
++
+@@ -743 +767 @@
+-    await waitForToy(page, "Strawberry");
++    await ready("Strawberry");
+@@ -747 +771 @@
+-    await page.waitForTimeout(600);
++    await advance(0.6);
+@@ -750,0 +775 @@
++    await advance(2.2);
+@@ -759 +784 @@
+-    await waitForToy(page, "Lantern");
++    await ready("Lantern");
+@@ -763 +788 @@
+-    await page.waitForTimeout(1200);
++    await advance(1.2);
+@@ -767 +792 @@
+-    await page.waitForTimeout(1500);
++    await advance(1.5);
+@@ -773 +798 @@
+-    await waitForToy(page, "Jelly blob");
++    await ready("Jelly blob");
+@@ -777 +802 @@
+-    await page.waitForTimeout(900);
++    await advance(0.9);

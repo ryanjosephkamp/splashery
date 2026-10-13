@@ -7,7 +7,11 @@ a before/after benchmark or remove the whole flaky list on the strength of this 
 
 ## Checkout and machine
 
-- Baseline: `main` at `49c809b4`; implementation branch: `codex/suite-speed`.
+- Initial flake baseline: `main` at `49c809b4`; implementation branch: `codex/suite-speed`.
+- Main advanced during the investigation. The branch merged `a31f69df` and the later docs-only
+  `6bcebac2` update. The latter did not change test or engine sources.
+- A matching immutable benchmark baseline is prepared at `a31f69df` in
+  `/tmp/splashery-suite-before-current`; its 255 files match current main's test inventory.
 - Four-CPU quota (`cpu.max`: `400000 100000`), 17 GiB memory; commands used affinity
   `taskset -c 0-3`.
 - Chromium `151.0.7922.173` at `/usr/bin/chromium`; pinned Playwright `1.56.1`.
@@ -15,7 +19,8 @@ a before/after benchmark or remove the whole flaky list on the strength of this 
   Xvfb. These renderer modes are not interchangeable benchmark samples.
 - The baseline was a detached checkout in `/tmp/splashery-suite-before`, with the same installed
   dependencies. No browser download or dependency change was made.
-- The baseline has 254 spec files; this branch adds two infrastructure specs.
+- The original baseline has 254 spec files. Updated main adds `man9`; this patch adds two
+  infrastructure specs, for 257 current files.
 
 The earlier [test-health audit](test-health-2026-10.md) concerns a different checkout and browser.
 Its full-suite times, and the task's approximate 4.5-hour figure, are context, not measurements of
@@ -24,36 +29,41 @@ is not proof that those fixes were completed.
 
 ## Protected-file exception
 
-[Task 50](../codex/50-suite-speed-flakes.md) says: “Toys and tests the open PRs change (#560, #562, #566, #570, #576). Ask in the PR if a
-fix needs them.” The changed-file lists were read from GitHub. `tests/man5.spec.mjs` is protected by
-#576 and was left unchanged.
+[Task 50](../codex/50-suite-speed-flakes.md) says: “Toys and tests the open PRs change (#560, #562,
+#566, #570, #576). Ask in the PR if a fix needs them.” Changed-file lists and current PR status were
+read from GitHub. PRs #560, #562, #566, and #570 remain open. PR #576 merged during the
+investigation and is included in the main merge above.
 
-Its sharing-demo assertion at source line 386 expects port 4173. The demo correctly encodes the
-current page's origin. Running that test on the isolated server at port 45093 produced the correct
-QR URL with that port, then failed its literal comparison. The targeted run took 9.015 seconds
-including the Playwright process, with one failure and zero skips. This is a deterministic
-compatibility failure caused by port isolation, not a newly discovered product defect.
+The actual `smoke:734` case is
+`rigs pick splats by colour, run effects and show add-ons; shelf shapes have rigs`. Its untouched
+test failed 8 of 10 repetitions with two Playwright workers and SwiftShader. All eight failures were
+the strawberry return-to-rest comparison: about 82,000 pixels remained different, above the original
+`moved / 4` limits. The assertion detecting the initial pop passed. No threshold, effect duration,
+or protected source/test was changed. Read-only copies reproduced four more failures. At the failed
+comparison, the camera was settled, pixel ratio stayed 1, and pulse state was still about 0.10–0.17.
+PlayCanvas caps each update at 0.1 seconds of toy time, so the pulse can remain active beyond the
+wall-clock comparison deadline. Waiting another 15 seconds for exact idle also failed under this
+diagnostic load. Advancing the actual player through the existing pulse and waiting for a rendered
+frame reduced the returned image difference to 4–5 pixels. Those copies then exposed the same
+fixed-delay issue in the lantern return comparison (1,774 and 1,821 pixels against the unchanged 400
+limit). The full candidate controls the real effect phases rather than the wall sleeps. Its ignored
+copy passed both complete pilot repetitions with two SwiftShader workers under concurrent renderer
+load (all original assertions and samples). The llvmpipe copy passed 20/20 complete repetitions with
+two workers, zero skips/retries, 1188.333 seconds Playwright duration (1191.590 seconds process
+wall), under concurrent renderer load. This is a proven candidate, not an applied protected-file
+fix. The protected test remains unchanged. The PR must request
+[the concrete patch](suite-speed-2026-10-smoke.patch) before it is applied. Its zero-context form
+passes `git apply --check --unidiff-zero`; approval is required before actual application.
 
-The concrete requested exception is to replace the expected URL expression:
+The formerly protected `man5` sharing-demo assertion expected port 4173. Before #576 merged, its
+isolated-port run failed in 9.015 seconds at port 45093. After syncing updated main, the expected
+origin now uses `new URL("../", page.url()).href`; QR decoding, equality, scene, and both viewport
+cases are unchanged. Its focused test passed at both sizes. The equivalent editable PDF-fixture
+origin in `tests/vw.spec.mjs` honors `SPLASHERY_PORT`; its three PDF checks also passed.
 
-```js
-new URL("../", `http://127.0.0.1:4173/manual/share.html`).href + `#s=${hash}`;
-```
-
-with:
-
-```js
-new URL("../", page.url()).href + `#s=${hash}`;
-```
-
-The assertion, QR decoding, scene, and both viewport cases remain the same. There is no port-4173
-fallback, skipped test, quarantine, or change to the production sharing URL. The equivalent editable
-PDF-fixture origin in `tests/vw.spec.mjs` now honors `SPLASHERY_PORT`; its three PDF checks passed
-on an isolated port.
-
-Full acceptance remains blocked on this exception. The clean four-mode benchmark matrix has not been
-completed. An initial baseline run was stopped before it completed a file because concurrent
-diagnostic browsers contaminated its timing; it is explicitly excluded.
+The clean four-mode benchmark matrix has not been completed. An initial baseline run was stopped
+before it completed a file because concurrent diagnostic browsers contaminated its timing; it is
+explicitly excluded. Protected smoke acceptance remains unresolved.
 
 ## Runner and measurement changes
 
@@ -74,7 +84,8 @@ server-startup duration. It refuses aggregate speedup claims without complete, s
 single-attempt, matching original coverage and one complete run's timestamps. Resumed reports and
 added infrastructure tests cannot silently inflate a speedup claim.
 
-Across the original 254 files, the static inventory changed as follows:
+Across the original 254 files, before merging the upstream manual additions, the static inventory
+changed as follows:
 
 | Call sites                        | Before |  After |
 | --------------------------------- | -----: | -----: |
@@ -90,6 +101,20 @@ These are source counts, not elapsed-time estimates. Loop counts, helper reuse, 
 dynamic arguments can multiply them. No screenshot, clip, toy sample, assertion threshold, retry
 policy, or test selection was removed. Generated tracked screenshots are restored before the commit.
 `tests/taps.spec.mjs` and `docs/OPERATOR.md` are unchanged.
+
+## Reducing Worlds render cost
+
+The tier-budget and planted-foot measurements now use 640×360 while retaining the default landscape
+aspect. The full world, assets, forced tiers, locations, camera branch, warmup steps, and sample
+steps remain unchanged. The separate screenshot cases still cover 390×844 and 1440×900. Every
+original assertion and numerical threshold remains.
+
+A 320×180 candidate clipped the start-screen button and was discarded; it is not a known-flake
+reproduction. The retained size fits that screen. Its eight tier/location totals and all four
+near-ground counts exactly matched the original-size pilot. Walk/run speed, slide, lift, and
+animation-state measurements also matched exactly. The
+[compact receipts](suite-speed-2026-10-results.json) include this comparison. These checks ran with
+competing browsers and do not establish a speedup; only a clean before/after matrix can do that.
 
 ## Readiness and load controls
 
@@ -117,24 +142,28 @@ are load proofs, never benchmark samples.
 References in Task 50 refer to source lines. Playwright's reported registration locations can
 differ; titles identify the actual cases. “Not reproduced” does not mean fixed.
 
-| Task reference     | Observed cause and change                                                                                                                                                                                                                                                                                                                                                                                                                     | Consecutive load proof                                                             |
-| ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| `smoke:734`        | Protected smoke test and app/player paths (#570); untouched.                                                                                                                                                                                                                                                                                                                                                                                  | Not obtained.                                                                      |
-| `tpg:204`          | A service worker takes control after the first page and bypasses the mocked embed route. Three original attempts timed out at 240 seconds; seven remaining repetitions were interrupted, not completed. Block service workers in the two contexts that explicitly mock iframe content. Real embed tests remain real.                                                                                                                          | 20/20 passed, zero skips/retries, 811.514 seconds, under concurrent renderer load. |
-| `hl1:75`           | Two animation-frame callbacks do not fence asynchronous sort upload before a GPU pick. Replace them with actual rendered-world readiness. Root cause is supported by engine order and readiness regressions, not a completed original/fixed 20-run comparison.                                                                                                                                                                                | Latest full 40-toy sample: 2/2 tests passed, 244.991 seconds process wall. No 20-run proof. |
-| `stm:366`          | A model context appears before loading and input-panel replacement finish; an old visible warning can satisfy the next malformed-file check. Wait for loading completion, the named input panel, and this malformed file's warning. A loaded run also exceeded the lift-settle wall deadline because toy time is capped per rendered frame; advance the real player clock through the unchanged 3.2-second pulse. Original thresholds remain. | 20/20 passed, zero skips/retries, 1089.400 seconds Playwright duration (1091.486 seconds process wall), llvmpipe with CDP 2×. |
-| `fl7:49`, `fl7:95` | No new reproduced cause. Main already waits for the gas grid in the phone-envelope case. Only opt-in load instrumentation was added.                                                                                                                                                                                                                                                                                                          | Not obtained.                                                                      |
-| `qrs-toys:132`     | No reproduced cause for the healing assertion. One healing run passed at CDP 4×. Ten original three-code runs passed under concurrent load, but those are a different case and do not prove healing.                                                                                                                                                                                                                                          | No 20-run proof for healing.                                                       |
-| `live4:149`        | Pause's fixed delay does not guarantee a frame clearing the remaining drive. Wait for stopped playback and stationary sand, retaining the one-second stability observation. CDP 4× reproduced Start over at position 0.606888 after a second browser round trip, above the unchanged 0.3-second limit; click and snapshot are now atomic. Extreme SwiftShader contention also missed the first tune's settlement; that failure is unresolved. |20/20 passed, zero skips/retries, 515.710 seconds Playwright duration (516.873 seconds process wall), llvmpipe with CDP 4× and no other browser jobs. Extreme competing-renderer failures remain unresolved. |
-| `phy:64`           | Screen projections used during camera easing/turntable motion can select the wrong stone. Disable automatic turntable motion in this manual-clock test and wait for the real camera/frame. Six whole-file checks passed under load; no changed physics threshold.                                                                                                                                                                             | 20/20 passed in the 80-test concurrent-renderer run. Final deadline preservation occurred during the run; a frozen final-code 20-run proof is still due. |
-| `ui4:42`           | Original desktop drag fired only `[38,39,40]`, failing the unchanged `>5` crossing assertion. The 1500 ms delay did not settle the easing camera before projecting finger points. Wait for camera and rendered-world readiness. Both sizes and all four whole-file checks passed under load.                                                                                                                                                  | 20/20 passed at each size in the 80-test concurrent-renderer run; see checkpoint qualification below. |
-| `wd:187`, `wd:210` | No new reproduced cause for tier budgets or screenshots. Only opt-in load instrumentation was added.                                                                                                                                                                                                                                                                                                                                          | Not obtained.                                                                      |
-| `wdr3:133`         | No new reproduced cause for planted-foot measurements. Only opt-in load instrumentation was added.                                                                                                                                                                                                                                                                                                                                            | Not obtained.                                                                      |
-| `smd-moving:101`   | No new reproduced cause for sample builds. The moving-photo source is protected by #560; no speculative source change was made.                                                                                                                                                                                                                                                                                                               | Not obtained.                                                                      |
-| `hh5-gems:119`     | The crystal-ball test read rendered mist and its live body in separate browser tasks, allowing a physics step between snapshots. Read both atomically and retain the original `1e-6` offset assertion. Camera/screenshot delays now use readiness. All five whole-file checks passed under load.                                                                                                                                              | 20/20 passed in the 80-test concurrent-renderer run; see checkpoint qualification below. |
-| `p3d`              | A custom-photo context is assigned before its new input panel is connected; a following invalid file can target the retiring panel. Wait for completed loading and the named replacement panel. Replace sample/screenshot sleeps with real readiness, including Sharp relief view. Latest full file: 10/10 passed under competing renderer load, 413.048 seconds process wall.                                                                | No 20-run full-file proof.                                                         |
+| Task reference     | Observed cause and change                                                                                                                                                                                                                                                                                                                                                                                                                     | Consecutive load proof                                                                                                                                                                                       |
+| ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `smoke:734`        | Protected smoke test and app/player paths (#570); untouched. Reproduced 8/10 failures at strawberry return-to-rest, about 82,000 differing pixels. Diagnostics identify clamped toy time. The unapplied phase-control candidate passed 20/20 complete copies under concurrent load; the protected test remains untouched.                                                                                                                     | Candidate copy: 20/20 passed, no skips/retries. Not applied to the protected test.                                                                                                                           |
+| `tpg:204`          | A service worker takes control after the first page and bypasses the mocked embed route. Three original attempts timed out at 240 seconds; seven remaining repetitions were interrupted, not completed. Block service workers in the two contexts that explicitly mock iframe content. Real embed tests remain real.                                                                                                                          | 20/20 passed, zero skips/retries, 811.514 seconds, under concurrent renderer load.                                                                                                                           |
+| `hl1:75`           | Two animation-frame callbacks do not fence asynchronous sort upload before a GPU pick. Replace them with actual rendered-world readiness. Root cause is supported by engine order and readiness regressions, not a completed original/fixed 20-run comparison.                                                                                                                                                                                | Latest full 40-toy sample: 2/2 tests passed, 244.991 seconds process wall. No 20-run proof.                                                                                                                  |
+| `stm:366`          | A model context appears before loading and input-panel replacement finish; an old visible warning can satisfy the next malformed-file check. Wait for loading completion, the named input panel, and this malformed file's warning. A loaded run also exceeded the lift-settle wall deadline because toy time is capped per rendered frame; advance the real player clock through the unchanged 3.2-second pulse. Original thresholds remain. | 20/20 passed, zero skips/retries, 1089.400 seconds Playwright duration (1091.486 seconds process wall), llvmpipe with CDP 2×.                                                                                |
+| `fl7:49`, `fl7:95` | No new reproduced cause. Main already waits for the gas grid in the phone-envelope case. Only opt-in load instrumentation was added.                                                                                                                                                                                                                                                                                                          | Not obtained.                                                                                                                                                                                                |
+| `qrs-toys:132`     | No reproduced cause for the healing assertion. One healing run passed at CDP 4×. Ten original three-code runs passed under concurrent load, but those are a different case and do not prove healing.                                                                                                                                                                                                                                          | No 20-run proof for healing.                                                                                                                                                                                 |
+| `live4:149`        | Pause's fixed delay does not guarantee a frame clearing the remaining drive. Wait for stopped playback and stationary sand, retaining the one-second stability observation. CDP 4× reproduced Start over at position 0.606888 after a second browser round trip, above the unchanged 0.3-second limit; click and snapshot are now atomic. Extreme SwiftShader contention also missed the first tune's settlement; that failure is unresolved. | 20/20 passed, zero skips/retries, 515.710 seconds Playwright duration (516.873 seconds process wall), llvmpipe with CDP 4× and no other browser jobs. Extreme competing-renderer failures remain unresolved. |
+| `phy:64`           | Screen projections used during camera easing/turntable motion can select the wrong stone. Disable automatic turntable motion in this manual-clock test and wait for the real camera/frame. Six whole-file checks passed under load; no changed physics threshold.                                                                                                                                                                             | 20/20 passed in the 80-test concurrent-renderer run. Final deadline preservation occurred during the run; a frozen final-code 20-run proof is still due.                                                     |
+| `ui4:42`           | Original desktop drag fired only `[38,39,40]`, failing the unchanged `>5` crossing assertion. The 1500 ms delay did not settle the easing camera before projecting finger points. Wait for camera and rendered-world readiness. Both sizes and all four whole-file checks passed under load.                                                                                                                                                  | 20/20 passed at each size in the 80-test concurrent-renderer run; see checkpoint qualification below.                                                                                                        |
+| `wd:187`, `wd:210` | No new reproduced cause for tier budgets or screenshots. Opt-in load instrumentation and a smaller logic-test viewport were added; all tier/location counts matched exactly. Screenshot sizes stay unchanged.                                                                                                                                                                                                                                 | Not obtained.                                                                                                                                                                                                |
+| `wdr3:133`         | No new reproduced cause for planted-foot measurements. Opt-in load instrumentation and a smaller logic-test viewport were added; every walk/run metric matched exactly.                                                                                                                                                                                                                                                                       | Not obtained.                                                                                                                                                                                                |
+| `smd-moving:101`   | No new reproduced cause for sample builds. The moving-photo source is protected by #560; no speculative source change was made.                                                                                                                                                                                                                                                                                                               | Not obtained.                                                                                                                                                                                                |
+| `hh5-gems:119`     | The crystal-ball test read rendered mist and its live body in separate browser tasks, allowing a physics step between snapshots. Read both atomically and retain the original `1e-6` offset assertion. Camera/screenshot delays now use readiness. All five whole-file checks passed under load.                                                                                                                                              | 20/20 passed in the 80-test concurrent-renderer run; see checkpoint qualification below.                                                                                                                     |
+| `p3d`              | A custom-photo context is assigned before its new input panel is connected; a following invalid file can target the retiring panel. Wait for completed loading and the named replacement panel. Replace sample/screenshot sleeps with real readiness, including Sharp relief view. Latest full file: 10/10 passed under competing renderer load, 413.048 seconds process wall.                                                                | No 20-run full-file proof.                                                                                                                                                                                   |
 
-The 80-test proof took 2287.230 seconds, with zero failures, skips, or retries. Each of its four case titles had 20 passes. It began before the stationary-scene fallback was added to the shared readiness helper and before the physics camera deadline was restored to its original 30 seconds. These are checkpoint receipts; the final helpers have separate regressions, but a fresh frozen-code proof is still required before removing these entries from the flaky list.
+The 80-test proof took 2287.230 seconds, with zero failures, skips, or retries. Each of its four
+case titles had 20 passes. It began before the stationary-scene fallback was added to the shared
+readiness helper and before the physics camera deadline was restored to its original 30 seconds.
+These are checkpoint receipts; the final helpers have separate regressions, but a fresh frozen-code
+proof is still required before removing these entries from the flaky list.
 
 ## Exploratory timing receipts
 
@@ -152,18 +181,34 @@ subsequent focused checks verify the later repairs. Do not aggregate them into a
 | `ui4`      |                          330 | 4 / 0 / 0                 |
 | `live4`    |                          197 | 0 / 2 / 0                 |
 
+The fresh WD proof failed with 3passes,1 timeout, and36 unrun cases after the first failure. Its
+trace showed both world loads completing (48.761 and 64.467 seconds), all manual steps finishing,
+and both screenshots returning (13.122 and 30.951 seconds). The original 240-second test deadline
+expired around final close/teardown. This is aggregate cost under stacked jobs, not evidence of a
+stale-state assertion. The deadline remains unchanged. A controlled CDP 2× rerun is still required.
+
+Two further HL1 repetitions completed before its concurrent-load queue was interrupted during the
+third. These are checkpoint attempts, not a 20-run proof. The full 2,229-test Playwright check was
+stopped after test 57 started, to remove extra contention. It produced no complete JSON report and
+is not reported as green. Its raw-log checksum and interruption details are retained in the compact
+results.
+
 Latest focused STM check passed after the player-clock repair. Latest P3D full-file check passed
-after Sharp-view readiness. The isolated-port manual test failed as documented. Raw local logs and
-JSON receipts are under `.cache/suite-speed/`; [compact results](suite-speed-2026-10-results.json) and checksums are retained with this
-audit so these conclusions do not require temporary logs.
+after Sharp-view readiness. The original isolated-port manual test failed; its allowed repair passed
+after #576 merged. Raw local logs and JSON receipts are under `.cache/suite-speed/`;
+[compact results](suite-speed-2026-10-results.json) and checksums are retained with this audit so
+these conclusions do not require temporary logs.
 
 ## Required checks and publication
 
-The task requires a draft PR, not a merge. The full suite is not green and the four-mode benchmark is incomplete. Required `npx prettier --check .`, `node tools/us-english.mjs --diff`, and `git diff --check` must pass on the final staged changes before publication. The protected-path intersection and generated screenshot diff are empty.
+The task requires a draft PR, not a merge. The full suite is not green and the four-mode benchmark
+is incomplete. Required `npx prettier --check .`, `node tools/us-english.mjs --diff`, and
+`git diff --check` must pass on the final staged changes before publication. The protected-path
+intersection and generated screenshot diff are empty.
 
 ## Remaining acceptance work
 
-1. Approve and apply the protected `man5` expected-origin repair.
+1. Approve and apply the concrete protected smoke repair requested in the draft PR.
 2. Reproduce the remaining named flakes and obtain 20 consecutive load passes for each final patch,
    including the protected smoke case and the unresolved audio contention case.
 3. Freeze the code, stop all load generators, and complete four fresh whole-suite runs on the same
@@ -176,7 +221,7 @@ Reproduce the profile once the four directories contain complete reports:
 
 ```sh
 node tools/suite-profile.mjs \
-  --original-specs-dir=/tmp/splashery-suite-before/tests \
+  --original-specs-dir=/tmp/splashery-suite-before-current/tests \
   --before-jobs1=.cache/suite-speed/clean-before-jobs1 \
   --before-jobs2=.cache/suite-speed/clean-before-jobs2 \
   --after-jobs1=.cache/suite-speed/clean-after-jobs1 \
@@ -185,9 +230,9 @@ node tools/suite-profile.mjs \
 
 ## Per-file cost inventory and benchmark coverage
 
-All four clean timing modes remain unmeasured. The following table lists every original spec plus
-the two added infrastructure specs, so missing files are visible. Counts are static current-source
-call sites with the limitations described above.
+All four clean timing modes remain unmeasured. The following table lists every original spec,
+updated main’s `man9`, and the two added infrastructure specs, so missing files are visible. Counts
+are static current-source call sites with the limitations described above.
 
 | File                    | Literal waits | Literal ms | goto | chooseToy | Screenshots | Clip/record calls | Before jobs=1 (w/t/r) | Before jobs=2 (w/t/r) | After jobs=1 (w/t/r) | After jobs=2 (w/t/r) |
 | ----------------------- | ------------: | ---------: | ---: | --------: | ----------: | ----------------: | --------------------- | --------------------- | -------------------- | -------------------- |
@@ -329,6 +374,7 @@ call sites with the limitations described above.
 | man6                    |             0 |          0 |    7 |         0 |           6 |                 0 | unmeasured            | unmeasured            | unmeasured           | unmeasured           |
 | man7a                   |             3 |       3800 |   10 |         0 |           3 |                 0 | unmeasured            | unmeasured            | unmeasured           | unmeasured           |
 | man7b                   |             0 |          0 |    1 |         0 |           1 |                 0 | unmeasured            | unmeasured            | unmeasured           | unmeasured           |
+| man9 (added)            |             3 |       1700 |   14 |         0 |           1 |                 0 | unmeasured            | unmeasured            | unmeasured           | unmeasured           |
 | math                    |             1 |       1500 |    7 |         3 |           1 |                 0 | unmeasured            | unmeasured            | unmeasured           | unmeasured           |
 | mca                     |             1 |       1500 |    1 |         1 |           1 |                 0 | unmeasured            | unmeasured            | unmeasured           | unmeasured           |
 | mol                     |             0 |          0 |    2 |         1 |           1 |                 0 | unmeasured            | unmeasured            | unmeasured           | unmeasured           |
@@ -447,3 +493,182 @@ call sites with the limitations described above.
 | wd                      |             0 |          0 |    4 |         0 |           1 |                 0 | unmeasured            | unmeasured            | unmeasured           | unmeasured           |
 | wdh                     |             1 |        500 |    1 |         0 |           2 |                 0 | unmeasured            | unmeasured            | unmeasured           | unmeasured           |
 | wdr3                    |             2 |       1200 |    2 |         0 |           1 |                 0 | unmeasured            | unmeasured            | unmeasured           | unmeasured           |
+
+Current source totals: 418 literal waits, 456546 literal ms, 10 dynamic wait call sites.
+
+Added files excluded from comparisons: `man9`, `suite-readiness`, `suite-runner`. Removed original
+files: none.
+
+## Measurement coverage
+
+### before-jobs1
+
+Directory: not supplied. 0/254 original files reported; 0 comparable.
+
+Measured-file sums: unmeasured wall seconds, unmeasured test seconds, unmeasured residual seconds, 0
+registered tests, 0 attempts, 0 failures, 0 skipped.
+
+Whole-run elapsed: unmeasured seconds. Recorded server/display startup: unmeasured seconds.
+Whole-run wall cannot be reconstructed by adding concurrent file walls.
+
+Missing: `abb`, `ai`, `ai-engine`, `an`, `an-engine`, `arc`, `arc-engine`, `arc2`, `arc2-engine`,
+`arc3`, `asc`, `asc-core`, `asc-engine`, `asc-repeat`, `asc-unit`, `asc2`, `bk`, `bk5`,
+`bk5-engine`, `bkd`, `bkd-format`, `bld`, `cdx-depth`, `cdx-depth-ui`, `cdx-gallery`, `cdx-mir`,
+`chem`, `chr`, `chs`, `chs-engine`, `cmp2-engine`, `cmp2-enigma`, `cmp2-shots`, `cmp2-sort`, `dcl`,
+`dsm-samples`, `e4f`, `e5`, `e6a`, `e6b`, `evidence-computing`, `f`, `fb`, `fid`, `fix3`, `fl`,
+`fl7`, `fx10`, `fx4`, `fx4-engine`, `fx5`, `fx6`, `fx6-2`, `fx6-engine`, `fx7`, `fx8`, `fx9`,
+`fx9-engine`, `g`, `geo`, `hea`, `hea-engine`, `heb`, `heb-engine`, `hec`, `hec-engine`, `help`,
+`hh1-balls`, `hh1-clothing`, `hh1-engine`, `hh1-shapes`, `hh1-toys`, `hh2-engine`, `hh2-food`,
+`hh2-nature`, `hh3-crossbow`, `hh3-engine`, `hh3-engine2`, `hh3-holidays`, `hh3-level1`,
+`hh3-level1-engine`, `hh3-medieval`, `hh3-music`, `hh3-open-me`, `hh3-pictures`, `hh3-sort`,
+`hh3-storybook`, `hh4-engine`, `hh4-landmarks`, `hh4-space`, `hh4-tiny`, `hh4-vehicles`,
+`hh4-weather`, `hh5-ai`, `hh5-animals`, `hh5-atoms`, `hh5-body`, `hh5-engine`, `hh5-gems`,
+`hh5-math`, `hl1`, `hta`, `img`, `img-engine`, `kit`, `klab`, `klab-engine`, `lab`, `lab-engine`,
+`lat`, `live`, `live-engine`, `live2`, `live2-engine`, `live3`, `live3-engine`, `live4`, `live5`,
+`live6`, `ln`, `lv10`, `lv7`, `lv7-engine`, `lv7-long`, `lv8`, `lv8-dial`, `lv9`, `lv9-2`, `man`,
+`man2`, `man3`, `man3-2`, `man4`, `man4-pages`, `man5`, `man6`, `man7a`, `man7b`, `math`, `mca`,
+`mol`, `mol-engine`, `mt2`, `opm`, `ops-media`, `ops-text`, `opt`, `p3d`, `pdf`, `pdf-engine`,
+`pdp`, `pdp-engine`, `pg6`, `pg6-engine`, `phf`, `phf-engine`, `phf2`, `phy`, `phy-engine`, `pic`,
+`pno`, `pno-engine`, `pose`, `pose-engine`, `pot`, `pot-engine`, `pr2`, `psv`, `psv2`, `psv3`, `qr`,
+`qr3`, `qr4-2`, `qr4-2-engine`, `qr4-craft`, `qr4-flash`, `qr4-scan`, `qr5`, `qrc-barcodes`,
+`qrc-build`, `qrc-picture`, `qrl`, `qrs-heal`, `qrs-steps`, `qrs-study`, `qrs-toys`, `rel`,
+`rel-engine`, `ro`, `sci`, `sci-engine`, `sci3`, `sci3-engine`, `scr`, `scr-engine`, `scr2`,
+`scr2-engine`, `sha`, `sha-book`, `shb`, `shb-engine`, `shp`, `shv`, `shw`, `site`, `sky`,
+`sky-engine`, `sll`, `smd-compare`, `smd-models`, `smd-moving`, `smd-photo`, `smoke`, `snda`,
+`snda-engine`, `sndb`, `sndc`, `sndc-engine`, `sndd`, `sng`, `sp2`, `sp3`, `sp4`, `spg`, `st2`,
+`st3`, `st4`, `st4-engine`, `st5`, `stm`, `stm-engine`, `sts`, `sts-engine`, `taps`, `tp2`,
+`tp2-engine`, `tpg`, `tpg-engine`, `tw2-cells`, `tw2-dna`, `ui2`, `ui3`, `ui4`, `ui4-engine`, `ui5`,
+`ui5-engine`, `unit`, `v3d`, `vol`, `vw`, `vwr`, `wd`, `wdh`, `wdr3`.
+
+Excluded or incomplete: none. Reports outside original inventory: none.
+
+### before-jobs2
+
+Directory: not supplied. 0/254 original files reported; 0 comparable.
+
+Measured-file sums: unmeasured wall seconds, unmeasured test seconds, unmeasured residual seconds, 0
+registered tests, 0 attempts, 0 failures, 0 skipped.
+
+Whole-run elapsed: unmeasured seconds. Recorded server/display startup: unmeasured seconds.
+Whole-run wall cannot be reconstructed by adding concurrent file walls.
+
+Missing: `abb`, `ai`, `ai-engine`, `an`, `an-engine`, `arc`, `arc-engine`, `arc2`, `arc2-engine`,
+`arc3`, `asc`, `asc-core`, `asc-engine`, `asc-repeat`, `asc-unit`, `asc2`, `bk`, `bk5`,
+`bk5-engine`, `bkd`, `bkd-format`, `bld`, `cdx-depth`, `cdx-depth-ui`, `cdx-gallery`, `cdx-mir`,
+`chem`, `chr`, `chs`, `chs-engine`, `cmp2-engine`, `cmp2-enigma`, `cmp2-shots`, `cmp2-sort`, `dcl`,
+`dsm-samples`, `e4f`, `e5`, `e6a`, `e6b`, `evidence-computing`, `f`, `fb`, `fid`, `fix3`, `fl`,
+`fl7`, `fx10`, `fx4`, `fx4-engine`, `fx5`, `fx6`, `fx6-2`, `fx6-engine`, `fx7`, `fx8`, `fx9`,
+`fx9-engine`, `g`, `geo`, `hea`, `hea-engine`, `heb`, `heb-engine`, `hec`, `hec-engine`, `help`,
+`hh1-balls`, `hh1-clothing`, `hh1-engine`, `hh1-shapes`, `hh1-toys`, `hh2-engine`, `hh2-food`,
+`hh2-nature`, `hh3-crossbow`, `hh3-engine`, `hh3-engine2`, `hh3-holidays`, `hh3-level1`,
+`hh3-level1-engine`, `hh3-medieval`, `hh3-music`, `hh3-open-me`, `hh3-pictures`, `hh3-sort`,
+`hh3-storybook`, `hh4-engine`, `hh4-landmarks`, `hh4-space`, `hh4-tiny`, `hh4-vehicles`,
+`hh4-weather`, `hh5-ai`, `hh5-animals`, `hh5-atoms`, `hh5-body`, `hh5-engine`, `hh5-gems`,
+`hh5-math`, `hl1`, `hta`, `img`, `img-engine`, `kit`, `klab`, `klab-engine`, `lab`, `lab-engine`,
+`lat`, `live`, `live-engine`, `live2`, `live2-engine`, `live3`, `live3-engine`, `live4`, `live5`,
+`live6`, `ln`, `lv10`, `lv7`, `lv7-engine`, `lv7-long`, `lv8`, `lv8-dial`, `lv9`, `lv9-2`, `man`,
+`man2`, `man3`, `man3-2`, `man4`, `man4-pages`, `man5`, `man6`, `man7a`, `man7b`, `math`, `mca`,
+`mol`, `mol-engine`, `mt2`, `opm`, `ops-media`, `ops-text`, `opt`, `p3d`, `pdf`, `pdf-engine`,
+`pdp`, `pdp-engine`, `pg6`, `pg6-engine`, `phf`, `phf-engine`, `phf2`, `phy`, `phy-engine`, `pic`,
+`pno`, `pno-engine`, `pose`, `pose-engine`, `pot`, `pot-engine`, `pr2`, `psv`, `psv2`, `psv3`, `qr`,
+`qr3`, `qr4-2`, `qr4-2-engine`, `qr4-craft`, `qr4-flash`, `qr4-scan`, `qr5`, `qrc-barcodes`,
+`qrc-build`, `qrc-picture`, `qrl`, `qrs-heal`, `qrs-steps`, `qrs-study`, `qrs-toys`, `rel`,
+`rel-engine`, `ro`, `sci`, `sci-engine`, `sci3`, `sci3-engine`, `scr`, `scr-engine`, `scr2`,
+`scr2-engine`, `sha`, `sha-book`, `shb`, `shb-engine`, `shp`, `shv`, `shw`, `site`, `sky`,
+`sky-engine`, `sll`, `smd-compare`, `smd-models`, `smd-moving`, `smd-photo`, `smoke`, `snda`,
+`snda-engine`, `sndb`, `sndc`, `sndc-engine`, `sndd`, `sng`, `sp2`, `sp3`, `sp4`, `spg`, `st2`,
+`st3`, `st4`, `st4-engine`, `st5`, `stm`, `stm-engine`, `sts`, `sts-engine`, `taps`, `tp2`,
+`tp2-engine`, `tpg`, `tpg-engine`, `tw2-cells`, `tw2-dna`, `ui2`, `ui3`, `ui4`, `ui4-engine`, `ui5`,
+`ui5-engine`, `unit`, `v3d`, `vol`, `vw`, `vwr`, `wd`, `wdh`, `wdr3`.
+
+Excluded or incomplete: none. Reports outside original inventory: none.
+
+### after-jobs1
+
+Directory: not supplied. 0/254 original files reported; 0 comparable.
+
+Measured-file sums: unmeasured wall seconds, unmeasured test seconds, unmeasured residual seconds, 0
+registered tests, 0 attempts, 0 failures, 0 skipped.
+
+Whole-run elapsed: unmeasured seconds. Recorded server/display startup: unmeasured seconds.
+Whole-run wall cannot be reconstructed by adding concurrent file walls.
+
+Missing: `abb`, `ai`, `ai-engine`, `an`, `an-engine`, `arc`, `arc-engine`, `arc2`, `arc2-engine`,
+`arc3`, `asc`, `asc-core`, `asc-engine`, `asc-repeat`, `asc-unit`, `asc2`, `bk`, `bk5`,
+`bk5-engine`, `bkd`, `bkd-format`, `bld`, `cdx-depth`, `cdx-depth-ui`, `cdx-gallery`, `cdx-mir`,
+`chem`, `chr`, `chs`, `chs-engine`, `cmp2-engine`, `cmp2-enigma`, `cmp2-shots`, `cmp2-sort`, `dcl`,
+`dsm-samples`, `e4f`, `e5`, `e6a`, `e6b`, `evidence-computing`, `f`, `fb`, `fid`, `fix3`, `fl`,
+`fl7`, `fx10`, `fx4`, `fx4-engine`, `fx5`, `fx6`, `fx6-2`, `fx6-engine`, `fx7`, `fx8`, `fx9`,
+`fx9-engine`, `g`, `geo`, `hea`, `hea-engine`, `heb`, `heb-engine`, `hec`, `hec-engine`, `help`,
+`hh1-balls`, `hh1-clothing`, `hh1-engine`, `hh1-shapes`, `hh1-toys`, `hh2-engine`, `hh2-food`,
+`hh2-nature`, `hh3-crossbow`, `hh3-engine`, `hh3-engine2`, `hh3-holidays`, `hh3-level1`,
+`hh3-level1-engine`, `hh3-medieval`, `hh3-music`, `hh3-open-me`, `hh3-pictures`, `hh3-sort`,
+`hh3-storybook`, `hh4-engine`, `hh4-landmarks`, `hh4-space`, `hh4-tiny`, `hh4-vehicles`,
+`hh4-weather`, `hh5-ai`, `hh5-animals`, `hh5-atoms`, `hh5-body`, `hh5-engine`, `hh5-gems`,
+`hh5-math`, `hl1`, `hta`, `img`, `img-engine`, `kit`, `klab`, `klab-engine`, `lab`, `lab-engine`,
+`lat`, `live`, `live-engine`, `live2`, `live2-engine`, `live3`, `live3-engine`, `live4`, `live5`,
+`live6`, `ln`, `lv10`, `lv7`, `lv7-engine`, `lv7-long`, `lv8`, `lv8-dial`, `lv9`, `lv9-2`, `man`,
+`man2`, `man3`, `man3-2`, `man4`, `man4-pages`, `man5`, `man6`, `man7a`, `man7b`, `math`, `mca`,
+`mol`, `mol-engine`, `mt2`, `opm`, `ops-media`, `ops-text`, `opt`, `p3d`, `pdf`, `pdf-engine`,
+`pdp`, `pdp-engine`, `pg6`, `pg6-engine`, `phf`, `phf-engine`, `phf2`, `phy`, `phy-engine`, `pic`,
+`pno`, `pno-engine`, `pose`, `pose-engine`, `pot`, `pot-engine`, `pr2`, `psv`, `psv2`, `psv3`, `qr`,
+`qr3`, `qr4-2`, `qr4-2-engine`, `qr4-craft`, `qr4-flash`, `qr4-scan`, `qr5`, `qrc-barcodes`,
+`qrc-build`, `qrc-picture`, `qrl`, `qrs-heal`, `qrs-steps`, `qrs-study`, `qrs-toys`, `rel`,
+`rel-engine`, `ro`, `sci`, `sci-engine`, `sci3`, `sci3-engine`, `scr`, `scr-engine`, `scr2`,
+`scr2-engine`, `sha`, `sha-book`, `shb`, `shb-engine`, `shp`, `shv`, `shw`, `site`, `sky`,
+`sky-engine`, `sll`, `smd-compare`, `smd-models`, `smd-moving`, `smd-photo`, `smoke`, `snda`,
+`snda-engine`, `sndb`, `sndc`, `sndc-engine`, `sndd`, `sng`, `sp2`, `sp3`, `sp4`, `spg`, `st2`,
+`st3`, `st4`, `st4-engine`, `st5`, `stm`, `stm-engine`, `sts`, `sts-engine`, `taps`, `tp2`,
+`tp2-engine`, `tpg`, `tpg-engine`, `tw2-cells`, `tw2-dna`, `ui2`, `ui3`, `ui4`, `ui4-engine`, `ui5`,
+`ui5-engine`, `unit`, `v3d`, `vol`, `vw`, `vwr`, `wd`, `wdh`, `wdr3`.
+
+Excluded or incomplete: none. Reports outside original inventory: none.
+
+### after-jobs2
+
+Directory: not supplied. 0/254 original files reported; 0 comparable.
+
+Measured-file sums: unmeasured wall seconds, unmeasured test seconds, unmeasured residual seconds, 0
+registered tests, 0 attempts, 0 failures, 0 skipped.
+
+Whole-run elapsed: unmeasured seconds. Recorded server/display startup: unmeasured seconds.
+Whole-run wall cannot be reconstructed by adding concurrent file walls.
+
+Missing: `abb`, `ai`, `ai-engine`, `an`, `an-engine`, `arc`, `arc-engine`, `arc2`, `arc2-engine`,
+`arc3`, `asc`, `asc-core`, `asc-engine`, `asc-repeat`, `asc-unit`, `asc2`, `bk`, `bk5`,
+`bk5-engine`, `bkd`, `bkd-format`, `bld`, `cdx-depth`, `cdx-depth-ui`, `cdx-gallery`, `cdx-mir`,
+`chem`, `chr`, `chs`, `chs-engine`, `cmp2-engine`, `cmp2-enigma`, `cmp2-shots`, `cmp2-sort`, `dcl`,
+`dsm-samples`, `e4f`, `e5`, `e6a`, `e6b`, `evidence-computing`, `f`, `fb`, `fid`, `fix3`, `fl`,
+`fl7`, `fx10`, `fx4`, `fx4-engine`, `fx5`, `fx6`, `fx6-2`, `fx6-engine`, `fx7`, `fx8`, `fx9`,
+`fx9-engine`, `g`, `geo`, `hea`, `hea-engine`, `heb`, `heb-engine`, `hec`, `hec-engine`, `help`,
+`hh1-balls`, `hh1-clothing`, `hh1-engine`, `hh1-shapes`, `hh1-toys`, `hh2-engine`, `hh2-food`,
+`hh2-nature`, `hh3-crossbow`, `hh3-engine`, `hh3-engine2`, `hh3-holidays`, `hh3-level1`,
+`hh3-level1-engine`, `hh3-medieval`, `hh3-music`, `hh3-open-me`, `hh3-pictures`, `hh3-sort`,
+`hh3-storybook`, `hh4-engine`, `hh4-landmarks`, `hh4-space`, `hh4-tiny`, `hh4-vehicles`,
+`hh4-weather`, `hh5-ai`, `hh5-animals`, `hh5-atoms`, `hh5-body`, `hh5-engine`, `hh5-gems`,
+`hh5-math`, `hl1`, `hta`, `img`, `img-engine`, `kit`, `klab`, `klab-engine`, `lab`, `lab-engine`,
+`lat`, `live`, `live-engine`, `live2`, `live2-engine`, `live3`, `live3-engine`, `live4`, `live5`,
+`live6`, `ln`, `lv10`, `lv7`, `lv7-engine`, `lv7-long`, `lv8`, `lv8-dial`, `lv9`, `lv9-2`, `man`,
+`man2`, `man3`, `man3-2`, `man4`, `man4-pages`, `man5`, `man6`, `man7a`, `man7b`, `math`, `mca`,
+`mol`, `mol-engine`, `mt2`, `opm`, `ops-media`, `ops-text`, `opt`, `p3d`, `pdf`, `pdf-engine`,
+`pdp`, `pdp-engine`, `pg6`, `pg6-engine`, `phf`, `phf-engine`, `phf2`, `phy`, `phy-engine`, `pic`,
+`pno`, `pno-engine`, `pose`, `pose-engine`, `pot`, `pot-engine`, `pr2`, `psv`, `psv2`, `psv3`, `qr`,
+`qr3`, `qr4-2`, `qr4-2-engine`, `qr4-craft`, `qr4-flash`, `qr4-scan`, `qr5`, `qrc-barcodes`,
+`qrc-build`, `qrc-picture`, `qrl`, `qrs-heal`, `qrs-steps`, `qrs-study`, `qrs-toys`, `rel`,
+`rel-engine`, `ro`, `sci`, `sci-engine`, `sci3`, `sci3-engine`, `scr`, `scr-engine`, `scr2`,
+`scr2-engine`, `sha`, `sha-book`, `shb`, `shb-engine`, `shp`, `shv`, `shw`, `site`, `sky`,
+`sky-engine`, `sll`, `smd-compare`, `smd-models`, `smd-moving`, `smd-photo`, `smoke`, `snda`,
+`snda-engine`, `sndb`, `sndc`, `sndc-engine`, `sndd`, `sng`, `sp2`, `sp3`, `sp4`, `spg`, `st2`,
+`st3`, `st4`, `st4-engine`, `st5`, `stm`, `stm-engine`, `sts`, `sts-engine`, `taps`, `tp2`,
+`tp2-engine`, `tpg`, `tpg-engine`, `tw2-cells`, `tw2-dna`, `ui2`, `ui3`, `ui4`, `ui4-engine`, `ui5`,
+`ui5-engine`, `unit`, `v3d`, `vol`, `vw`, `vwr`, `wd`, `wdh`, `wdr3`.
+
+Excluded or incomplete: none. Reports outside original inventory: none.
+
+## Comparable original coverage
+
+Jobs=1: no complete-coverage speedup claim. Missing pairs: 254; excluded pairs: 0; changed
+test/project/outcome coverage: 0; removed original files: 0.
+
+Jobs=2: no complete-coverage speedup claim. Missing pairs: 254; excluded pairs: 0; changed
+test/project/outcome coverage: 0; removed original files: 0.

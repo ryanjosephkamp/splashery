@@ -186,6 +186,9 @@ test.describe("worlds", () => {
 
   test("each tier stays within its splat budget", async ({ page }) => {
     test.setTimeout(600_000);
+    // This checks the complete world's distance-based LOD plan, not pixels.
+    // Keep the default landscape aspect while reducing render work per tick.
+    await page.setViewportSize({ width: 640, height: 360 });
     const seen = {};
     for (const tier of TIERS) {
       await open(page, tier);

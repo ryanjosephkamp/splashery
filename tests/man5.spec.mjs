@@ -382,9 +382,7 @@ test.describe("the two new chapters", () => {
         const img = g.getImageData(0, 0, c.width, c.height);
         return globalThis.jsQR(img.data, img.width, img.height)?.data ?? null;
       });
-      expect(read).toBe(
-        new URL("../", `http://127.0.0.1:4173/manual/share.html`).href + `#s=${hash}`,
-      );
+      expect(read).toBe(new URL("../", page.url()).href + `#s=${hash}`);
       // Edit the scene: the link follows. A bad JSON says so.
       await page.fill("#sh-json", JSON.stringify({ ...scene, seed: 99 }));
       await expect(page.locator("#sh-decoded")).toContainText('"seed":99');
