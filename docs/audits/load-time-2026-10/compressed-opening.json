@@ -1,0 +1,32 @@
+[
+  {
+    "source": "vendor/playcanvas/playcanvas.min.mjs",
+    "file": "vendor/playcanvas/playcanvas.min.mjs.gz",
+    "sourceBytes": 2465494,
+    "bytes": 634277,
+    "sourceSha256": "cfa18c70e2e0fd5362399f37897c531b7796a7f41a652144ab4ceda991b5d46c",
+    "sha256": "2ca410f1c8899d1dd0166a9f5515c4076542aa374d3fd23a2d62647ef5191816",
+    "license": "MIT; existing PlayCanvas 2.22.3 notices",
+    "transformation": "Exact gzip copy made by Ryan with Codex (GPT-6); no source or decoded-byte changes"
+  },
+  {
+    "source": "src/toy-help.js",
+    "file": "assets/opening/toy-help.mjs.gz",
+    "sourceBytes": 344736,
+    "bytes": 115832,
+    "sourceSha256": "52a434da465618f547671bee6502e3369ef0f3ac0cfeb511a4aaa720b8dc8516",
+    "sha256": "7805c71a83fa3c07bc8977a13dc2ac09c361a3b5d0c34dff4e58ec85ddd1acff",
+    "license": "MIT; existing Splashery code",
+    "transformation": "Exact gzip copy made by Ryan with Codex (GPT-6); no source or decoded-byte changes"
+  },
+  {
+    "source": "manual/tinkerers-manual.pdf",
+    "file": "manual/tinkerers-manual.pdf.gz",
+    "sourceBytes": 7968242,
+    "bytes": 6004462,
+    "sourceSha256": "e564f7b385574f0b86dde63ac765a4d7a0bc3534511ad0f651c69a2dd8ecd7e1",
+    "sha256": "32161c35a6344875f1cbab6db9887f3853ccc04f7a82889dfcf1cc5f22053aa4",
+    "license": "Original manual and enclosed asset notices, unchanged",
+    "transformation": "Exact gzip copy made by Ryan with Codex (GPT-6); no source or decoded-byte changes"
+  }
+]

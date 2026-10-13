@@ -25,6 +25,7 @@
 
 import { LIMITS } from "./loaders.js";
 import { normalizeMediaURL } from "./state.js";
+import { gzipBytes } from "./gzip.js";
 
 const ROOT = new URL("../", import.meta.url);
 const PDFJS = new URL("vendor/pdfjs/", ROOT).href;
@@ -147,6 +148,22 @@ async function readSource(source, limits) {
   if (typeof source === "string") {
     const url = checkMediaURL(source);
     const name = decodeURIComponent(new URL(url).pathname.split("/").pop() || "picture");
+    // The site's manual is an exact gzip copy, with its original PDF retained.
+    // Its PDF decoder can load while the document transfers.
+    if (
+      url === new URL("manual/tinkerers-manual.pdf", ROOT).href &&
+      typeof DecompressionStream === "function"
+    ) {
+      try {
+        const [bytes] = await Promise.all([gzipBytes(`${url}.gz`), loadPDFJS()]);
+        if (bytes.byteLength > limits.bytes) throw tooBig(bytes.byteLength, limits.bytes);
+        const blob = new Blob([bytes], { type: "application/pdf" });
+        return { kind: "pdf", name, blob, size: blob.size, url };
+      } catch (error) {
+        if (error instanceof MediaError) throw error;
+        // A missing compressed copy uses the existing original request below.
+      }
+    }
     let res;
     try {
       res = await fetch(url, { mode: "cors", credentials: "omit" });

@@ -25,14 +25,9 @@
     />
     <link rel="stylesheet" href="./styles.css" />
     <script type="importmap">
-      {
-        "imports": {
-          "gifenc": "./vendor/gifenc/gifenc.esm.js"
-        }
-      }
+      { "imports": { "gifenc": "./vendor/gifenc/gifenc.esm.js" } }
     </script>
-    <link rel="modulepreload" href="./vendor/playcanvas/playcanvas.min.mjs" />
-    <script type="module" src="./src/app.js"></script>
+    <script type="module" src="./src/boot.js" data-splashery-entry="app.js"></script>
   </head>
   <body class="app">
     <a class="skip-link" href="#panel">Skip to controls</a>
