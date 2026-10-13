@@ -5,6 +5,27 @@ export const screens = {
   phone: { width: 390, height: 844, deviceScaleFactor: 3, profile: "low" },
   desktop: { width: 1440, height: 900, deviceScaleFactor: 1, profile: "mid" },
 };
+export function photoBorderR3(cols, rows) {
+  if (!Number.isInteger(cols) || !Number.isInteger(rows) || cols < 1 || rows < 1)
+    throw new RangeError("The footprint needs the actual mesh's positive integer cell counts.");
+  const points = [];
+  for (let side = 0; side < 4; side++) {
+    const count = side % 2 ? rows : cols;
+    for (let i = 0; i < count; i++) {
+      // Match the Float32 UV positions actually uploaded to the renderer.
+      points.push(
+        side === 0
+          ? [Math.fround(i / cols), 0]
+          : side === 1
+            ? [1, Math.fround(i / rows)]
+            : side === 2
+              ? [Math.fround((cols - i) / cols), 1]
+              : [0, Math.fround((rows - i) / rows)],
+      );
+    }
+  }
+  return points;
+}
 export function inputs() {
   const extras = JSON.parse(fs.readFileSync(".cache/cdx-p3d2/r3/sources/manifest.json"));
   return [
@@ -82,9 +103,29 @@ export async function selectR3(page, entry, depth, view) {
   );
 }
 
-export async function poseR3(page, yaw, pitch, mode = "color", background = [0, 1, 0]) {
+export async function poseR3(
+  page,
+  yaw,
+  pitch,
+  mode = "color",
+  background = [0, 1, 0],
+  captures = 2,
+  compareFirst = false,
+) {
+  if (captures !== 1 && captures !== 2)
+    throw new RangeError("Capture one or two completed frames.");
+  const resolution = await page.evaluate(() => {
+    const mi = window.__splashery.player.stage.app.scene.layers
+      .getLayerByName("World")
+      .meshInstances.find(
+        (m) => m.material.getParameter("uDepth") && m.material.getParameter("uLayer").data[2] === 0,
+      );
+    const grid = mi.material.getParameter("uGrid").data;
+    return [grid[2], grid[3]];
+  });
+  const border = photoBorderR3(...resolution);
   return page.evaluate(
-    async ({ yaw, pitch, mode, background }) => {
+    async ({ yaw, pitch, mode, background, border, captures, compareFirst }) => {
       const pl = window.__splashery.player;
       const { Vec3 } = await import("/src/pc.js");
       pl.camera.cur = {
@@ -126,8 +167,9 @@ export async function poseR3(page, yaw, pitch, mode = "color", background = [0, 
           restore.push([mat, old]);
         }
       pl.stage.setClearColor(mode === "color" ? background : [0, 0, 0], 1);
-      await pl.stage.captureFrame();
-      const frame = await pl.stage.captureFrame();
+      const first = await pl.stage.captureFrame();
+      const firstImage = compareFirst ? first.toDataURL() : undefined;
+      const frame = captures === 2 ? await pl.stage.captureFrame() : first;
       const image = frame.toDataURL();
       for (const [mat, old] of restore) {
         mat.shaderDesc = old;
@@ -159,28 +201,24 @@ export async function poseR3(page, yaw, pitch, mode = "color", background = [0, 
       const aspect = mi.material.getParameter("uGrid").data[0],
         R = mi.material.getParameter("uLift").data[0];
       const corners = [];
-      for (let side = 0; side < 4; side++)
-        for (let i = 0; i < 32; i++) {
-          const t = i / 32,
-            [u, v] =
-              side === 0 ? [t, 0] : side === 1 ? [1, t] : side === 2 ? [1 - t, 1] : [0, 1 - t];
-          let bd = 0;
-          if (soft) bd = sample(u, v);
-          else {
-            for (let j = -2; j <= 2; j++)
-              for (let k = -2; k <= 2; k++) bd += sample(u + (k * 0.02) / aspect, v + j * 0.02);
-            bd /= 25;
-          }
-          const p = pl.stage.cameraEntity.camera.camera.worldToScreen(
-            new Vec3(...pl.fromRecipe([(u - 0.5) * aspect, 0.5 - v, R * (bd - 0.5)])),
-            frame.width,
-            frame.height,
-          );
-          corners.push([p.x, p.y]);
+      for (const [u, v] of border) {
+        let bd = 0;
+        if (soft) bd = sample(u, v);
+        else {
+          for (let j = -2; j <= 2; j++)
+            for (let k = -2; k <= 2; k++) bd += sample(u + (k * 0.02) / aspect, v + j * 0.02);
+          bd /= 25;
         }
-      return { image, corners, width: frame.width, height: frame.height };
+        const p = pl.stage.cameraEntity.camera.camera.worldToScreen(
+          new Vec3(...pl.fromRecipe([(u - 0.5) * aspect, 0.5 - v, R * (bd - 0.5)])),
+          frame.width,
+          frame.height,
+        );
+        corners.push([p.x, p.y]);
+      }
+      return { image, firstImage, captures, corners, width: frame.width, height: frame.height };
     },
-    { yaw, pitch, mode, background },
+    { yaw, pitch, mode, background, border, captures, compareFirst },
   );
 }
 

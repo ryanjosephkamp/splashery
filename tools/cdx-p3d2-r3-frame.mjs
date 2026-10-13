@@ -1,16 +1,29 @@
 // GPU-completed frames, with no screenshot readbacks in the timed interval.
 import fs from "node:fs";
+import crypto from "node:crypto";
 import { chromium } from "@playwright/test";
 import config from "../playwright.config.mjs";
 import { inputs, screens, openR3, selectR3 } from "./cdx-p3d2-r3-common.mjs";
 const opt = (n, d) => process.argv.find((a) => a.startsWith(`--${n}=`))?.slice(n.length + 3) ?? d;
+const url = opt("url", "http://127.0.0.1:4175/");
+const build = JSON.parse(fs.readFileSync(".cache/cdx-p3d2/r3/builds.json"))[opt("build", "after")];
+if (!build) throw new Error("Record the immutable browser build before timing it.");
+for (const [file, hash] of Object.entries(build.files)) {
+  const response = await fetch(new URL(file, url));
+  if (!response.ok) throw new Error(`Cannot read browser source: ${file}`);
+  const actual = crypto
+    .createHash("sha256")
+    .update(Buffer.from(await response.arrayBuffer()))
+    .digest("hex");
+  if (actual !== hash) throw new Error(`Timing browser source changed: ${file}`);
+}
 const browser = await chromium.launch(config.use.launchOptions);
 try {
   const rows = [];
   for (const name of opt("screens", "phone,desktop").split(",")) {
     const { width, height, deviceScaleFactor: dpr, profile } = screens[name];
     const page = await browser.newPage({ viewport: { width, height }, deviceScaleFactor: dpr });
-    await openR3(page, opt("url", "http://127.0.0.1:4175/"), screens[name]);
+    await openR3(page, url, screens[name]);
     const selected = opt("samples", "forest,dot-dragonfly,spiral-stairs");
     for (const entry of inputs().filter(
       (s) => selected === "all" || selected.split(",").includes(s.id),
@@ -39,7 +52,7 @@ try {
             pl.camera.cur = {
               ...pl.camera.home,
               yaw: 0.52 * Math.sin(i / 24),
-              pitch: 0.35 * Math.cos(i / 31),
+              pitch: 0.52 * Math.cos(i / 31),
             };
             pl.camera.tgt = { ...pl.camera.cur };
             pl.stage.setCameraPose(pl.camera.pose());
@@ -109,7 +122,8 @@ try {
         JSON.stringify(
           {
             browser: browser.version(),
-            url: opt("url", "http://127.0.0.1:4175/"),
+            url,
+            build,
             renderer: process.env.SPLASHERY_GL || "swiftshader",
             method:
               "Completed pose cadence: request renderNextFrame with keep-alive cleared, postrender then WebGL2 fence with asynchronous timer polling; 30 warmup + 120 measured requests. Record additional asynchronous draws rather than treating them as requested poses. Includes scheduling/polling overhead.",

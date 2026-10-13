@@ -12,10 +12,8 @@ export function preserveInputWarning(panel, message, current) {
       error.hidden = false;
     }
   };
-  if (!panel.isConnected) {
-    restore();
-    return () => {};
-  }
+  restore();
+  if (!panel.isConnected) return () => {};
   const observer = new MutationObserver(() => {
     if (!current() || !panel.isConnected) {
       observer.disconnect();

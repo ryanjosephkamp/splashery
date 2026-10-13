@@ -17,6 +17,7 @@ import {
   projectAnchorsR3,
 } from "./cdx-p3d2-r3-common.mjs";
 import { sourceAnchorsR3, anchoredEdgesR3 } from "./cdx-p3d2-r3-anchored.mjs";
+import { inputFingerprintsR3 } from "./cdx-p3d2-r3-fingerprint.mjs";
 const opt = (n, d) => process.argv.find((a) => a.startsWith(`--${n}=`))?.slice(n.length + 3) ?? d;
 const out = opt("out", ".cache/cdx-p3d2/r3/anchored-sweep");
 fs.mkdirSync(path.join(out, "anchors"), { recursive: true });
@@ -38,6 +39,7 @@ const settings = {
   screens: opt("screens", "phone,desktop"),
   depths: opt("depths", "0.2,0.5,1"),
   samples: opt("samples", "all"),
+  inputHashes: inputFingerprintsR3(inputs()),
 };
 const settingsFile = path.join(out, "settings.json");
 if (
@@ -49,15 +51,20 @@ fs.writeFileSync(settingsFile, JSON.stringify(settings, null, 2));
 const decode = (image) => PNG.sync.read(Buffer.from(image.split(",")[1], "base64"));
 const rows = [],
   errors = [];
+const urls = [opt("before", "http://127.0.0.1:4174/"), opt("after", "http://127.0.0.1:4177/")];
+for (let k = 0; k < urls.length; k++)
+  for (const [file, hash] of Object.entries(k ? builds.after.files : builds.before.files)) {
+    const response = await fetch(new URL(file, urls[k]));
+    if (!response.ok) throw new Error(`Cannot read browser source: ${file}`);
+    if (sha(Buffer.from(await response.arrayBuffer())) !== hash)
+      throw new Error(`Anchored audit browser source changed: ${file}`);
+  }
 const browser = await chromium.launch(config.use.launchOptions);
 try {
   for (const name of opt("screens", "phone,desktop").split(",")) {
     const screen = screens[name],
       pages = [];
-    for (const url of [
-      opt("before", "http://127.0.0.1:4174/"),
-      opt("after", "http://127.0.0.1:4177/"),
-    ]) {
+    for (const url of urls) {
       const page = await browser.newPage({
         viewport: { width: screen.width, height: screen.height },
         deviceScaleFactor: screen.deviceScaleFactor,
@@ -77,6 +84,7 @@ try {
         rows.push(...JSON.parse(fs.readFileSync(file)));
         continue;
       }
+      await pages[1].bringToFront();
       await selectR3(pages[1], entry, 1, "sharp");
       const sourcePhoto = decode((await texturesR3(pages[1])).surface);
       const anchorFile = path.join(out, "anchors", `${name}-${entry.id}.json`);
@@ -90,6 +98,7 @@ try {
       fs.writeFileSync(anchorFile, JSON.stringify(anchors));
       const sampleRows = [];
       for (let build = 0; build < 2; build++) {
+        await pages[build].bringToFront();
         let worst = -1;
         for (const depth of opt("depths", "0.2,0.5,1").split(",").map(Number)) {
           await selectR3(pages[build], entry, depth, "sharp");
@@ -159,6 +168,7 @@ try {
     }
     for (const page of pages) await page.close();
   }
+  fs.writeFileSync(path.join(out, "rows.json"), JSON.stringify(rows));
   fs.writeFileSync(
     path.join(out, "run.json"),
     JSON.stringify(

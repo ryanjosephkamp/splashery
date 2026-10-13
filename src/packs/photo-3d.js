@@ -682,7 +682,7 @@ const PHOTO_3D = {
       } catch (error) {
         const pl = globalThis.window?.__splashery?.player;
         const source = pl?.scene?.toy?.options?.source;
-        if (panel && (pl?.loading || !panel.isConnected)) {
+        if (panel) {
           const { preserveInputWarning } = await import("../photo3d/input-warning.js");
           stopInputWarning = preserveInputWarning(
             panel,

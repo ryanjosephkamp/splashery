@@ -3,8 +3,10 @@ import fs from "node:fs";
 import path from "node:path";
 import { chromium } from "@playwright/test";
 import { PNG } from "pngjs";
+import crypto from "node:crypto";
 import config from "../playwright.config.mjs";
 import { inputs, screens, openR3, selectR3, poseR3, texturesR3 } from "./cdx-p3d2-r3-common.mjs";
+import { inputFingerprintsR3, pixelMethodHashR3 } from "./cdx-p3d2-r3-fingerprint.mjs";
 
 const opt = (n, d) => process.argv.find((a) => a.startsWith(`--${n}=`))?.slice(n.length + 3) ?? d;
 export const decode = (image) => PNG.sync.read(Buffer.from(image.split(",")[1], "base64"));
@@ -188,9 +190,60 @@ async function main() {
         : []),
     ]),
   ];
+  const url = opt("url", "http://127.0.0.1:4175/");
+  const buildsFile = ".cache/cdx-p3d2/r3/builds.json";
+  const build = fs.existsSync(buildsFile)
+    ? JSON.parse(fs.readFileSync(buildsFile))[opt("build", "after")]
+    : null;
+  if (!build) throw new Error("Record the immutable browser build before measuring it.");
+  for (const [file, hash] of Object.entries(build.files)) {
+    const response = await fetch(new URL(file, url));
+    if (!response.ok) throw new Error(`Cannot read browser source: ${file}`);
+    const actual = crypto
+      .createHash("sha256")
+      .update(Buffer.from(await response.arrayBuffer()))
+      .digest("hex");
+    if (actual !== hash) throw new Error(`Browser build differs from its recorded source: ${file}`);
+  }
+  const settings = {
+    build,
+    names,
+    depths,
+    views,
+    poses,
+    samples: selected.map((s) => s.id),
+    methodHash: pixelMethodHashR3(),
+    inputHashes: inputFingerprintsR3(selected),
+    capturePolicy: {
+      sharpFirstFrames: 2,
+      sharpRestFrames: Number(opt("sharp-rest-frames", "2")),
+      splatsFrames: 2,
+    },
+  };
+  if (![1, 2].includes(settings.capturePolicy.sharpRestFrames))
+    throw new Error("Sharp captures must use one or two completed frames.");
+  const settingsFile = path.join(out, "settings.json");
+  if (
+    fs.existsSync(settingsFile) &&
+    JSON.stringify(JSON.parse(fs.readFileSync(settingsFile))) !== JSON.stringify(settings)
+  )
+    throw new Error("Saved sweep settings or browser build changed; use a fresh directory.");
+  fs.writeFileSync(settingsFile, JSON.stringify(settings, null, 2));
+  const errorFile = path.join(out, "errors.json");
+  const retainedErrors =
+    opt("resume", "false") === "true" && fs.existsSync(errorFile)
+      ? JSON.parse(fs.readFileSync(errorFile))
+      : opt("resume", "false") === "true" && fs.existsSync(path.join(out, "run.json"))
+        ? JSON.parse(fs.readFileSync(path.join(out, "run.json"))).errors || []
+        : [];
   const browser = await chromium.launch(config.use.launchOptions),
     rows = [],
-    errors = [];
+    errors = [...retainedErrors];
+  const recordError = (message) => {
+    errors.push(message);
+    fs.writeFileSync(errorFile, JSON.stringify(errors, null, 2));
+  };
+  fs.writeFileSync(errorFile, JSON.stringify(errors, null, 2));
   try {
     for (const name of names) {
       const screen = screens[name];
@@ -198,21 +251,24 @@ async function main() {
         viewport: { width: screen.width, height: screen.height },
         deviceScaleFactor: screen.deviceScaleFactor,
       });
-      page.on("pageerror", (e) => errors.push(e.message));
+      page.on("pageerror", (e) => recordError(e.message));
       page.on("console", (m) => {
         if (m.type() === "error" || /GL_INVALID|Invalid command|shader compilation/i.test(m.text()))
-          errors.push(m.text());
+          recordError(m.text());
       });
-      const display = await openR3(page, opt("url", "http://127.0.0.1:4175/"), screen);
+      const display = await openR3(page, url, screen);
       for (const entry of selected) {
         const saved = path.join(out, `${name}-${entry.id}.json`);
         if (opt("resume", "false") === "true" && fs.existsSync(saved)) {
           const previous = JSON.parse(fs.readFileSync(saved));
           const expected = depths.length * views.length * poses.length;
+          const keys = previous.map((r) => `${r.depth}/${r.view}/${r.yaw}/${r.pitch}`);
           if (
             previous.length !== expected ||
+            new Set(keys).size !== expected ||
             previous.some(
               (r) =>
+                r.id !== entry.id ||
                 r.screen !== name ||
                 !depths.includes(r.depth) ||
                 !views.includes(r.view) ||
@@ -221,6 +277,7 @@ async function main() {
           )
             throw new Error(`Incompatible saved poses: ${saved}`);
           rows.push(...previous);
+          fs.writeFileSync(path.join(out, "rows.json"), JSON.stringify(rows));
           console.log(name, entry.id, "resumed", previous.length, "poses");
           continue;
         }
@@ -230,19 +287,27 @@ async function main() {
         for (const depth of depths)
           for (const view of views) {
             await selectR3(page, entry, depth, view);
+            const warmed = new Set();
+            const capture = async (yaw, pitch, mode = "color") => {
+              const frames =
+                view === "sharp" && warmed.has(mode) ? settings.capturePolicy.sharpRestFrames : 2;
+              const shot = await poseR3(page, yaw, pitch, mode, [0, 1, 0], frames);
+              warmed.add(mode);
+              return shot;
+            };
             let textures;
             if (view === "sharp") {
               const images = await texturesR3(page);
               textures = { surface: decode(images.surface), background: decode(images.background) };
             }
             for (const [yaw, pitch] of poses) {
-              const shot = await poseR3(page, yaw, pitch),
+              const shot = await capture(yaw, pitch),
                 actual = decode(shot.image);
               const hole = holesR3(actual, shot.corners);
               let edge = {};
               if (view === "sharp") {
-                const mask = decode((await poseR3(page, yaw, pitch, "mask")).image);
-                const uv = decode((await poseR3(page, yaw, pitch, "uv")).image);
+                const mask = decode((await capture(yaw, pitch, "mask")).image);
+                const uv = decode((await capture(yaw, pitch, "uv")).image);
                 edge = edgesR3(actual, mask, uv, textures, display.ratio);
                 if (edge.haloMean > worstHalo) {
                   worstHalo = edge.haloMean;
@@ -292,12 +357,14 @@ async function main() {
       }
       await page.close();
     }
+    fs.writeFileSync(path.join(out, "rows.json"), JSON.stringify(rows));
     fs.writeFileSync(
       path.join(out, "run.json"),
       JSON.stringify(
         {
           browser: browser.version(),
-          url: opt("url", "http://127.0.0.1:4175/"),
+          url,
+          build,
           renderer: process.env.SPLASHERY_GL || "swiftshader",
           rows: rows.length,
           errors,

@@ -73,11 +73,13 @@ test("the filled background draws far interior colors behind a source antialiasi
     const { player: pl, app } = window.__splashery;
     const { ReliefMesh } = await import("/src/live/relief-mesh.js");
     const { backgroundImage } = await import("/src/photo3d/background.js");
+    const { surfaceGrid } = await import("/src/photo3d/surface.js");
     const { Vec3 } = await import("/src/pc.js");
+    await app.chooseToy("photo-3d");
     pl.setPaused(true);
     pl.idle.weight = 0;
     app.setLook({ ground: "none" });
-    pl.stage.toy.entity.gsplat.enabled = false;
+    pl.stage.toy.entity.enabled = false;
     pl.stage.setFixedSize([
       Math.round(390 * pl.stage.pixelRatio()),
       Math.round(844 * pl.stage.pixelRatio()),
@@ -97,8 +99,24 @@ test("the filled background draws far interior colors behind a source antialiasi
         band[y * w + x] = x < 16 ? 3 : 0;
       }
     const b = backgroundImage({ w, h, data }, d, w, h, 0.78),
-      m = new ReliefMesh(pl.stage, { cols: w, rows: h });
+      m = new ReliefMesh(pl.stage, {
+        cols: w,
+        rows: h,
+        surface: surfaceGrid(w, h, {
+          depth: Uint8Array.from(d, (v) => Math.round(v * 255)),
+          band,
+          gx: w,
+          gy: h,
+        }),
+      });
     try {
+      m.attach(pl.stage.app.root);
+      m.layer.removeMeshInstances(
+        m.layer.meshInstances.filter(
+          (mi) =>
+            mi !== m.miS && mi !== m.miB && mi !== m.miF && mi.material.getParameter("uDepth"),
+        ),
+      );
       m.setColor({ w, h, data });
       m.setDepth({ w, h, data: Uint8Array.from(d, (v) => Math.round(v * 255)) });
       m.set({
@@ -111,7 +129,12 @@ test("the filled background draws far interior colors behind a source antialiasi
         layers: 0,
         reach: b.reach,
       });
-      m.setPieces({ depth: d, band, gx: w, gy: h });
+      m.setPieces({
+        depth: Uint8Array.from(d, (v) => Math.round(v * 255)),
+        band,
+        gx: w,
+        gy: h,
+      });
       m.setBackground({ ...b, soft: { w, h, data: new Uint8Array(w * h).fill(51) } });
       m.show(true);
       m.miS.visible = false;
@@ -136,6 +159,13 @@ test("the filled background draws far interior colors behind a source antialiasi
           frame.width,
           frame.height,
         );
+        if (p.x < 0 || p.y < 0 || p.x >= frame.width || p.y >= frame.height)
+          throw new Error("The projected backing sample must lie inside the drawing buffer.");
+        const visible = m.layer.meshInstances.filter(
+          (mi) => mi.visible && mi.material.getParameter("uDepth"),
+        );
+        if (visible.length !== 1 || visible[0] !== m.miB)
+          throw new Error("The fixture must draw only its custom backing.");
         colors.push(
           Array.from(
             frame.getContext("2d").getImageData(Math.floor(p.x), Math.floor(p.y), 1, 1).data,
@@ -147,6 +177,7 @@ test("the filled background draws far interior colors behind a source antialiasi
       m.destroy();
     }
   });
+  console.log({ backingColors: colors });
   for (const color of colors) expect(color).toEqual([24, 72, 184, 255]);
   expect(errors).toEqual([]);
 });
