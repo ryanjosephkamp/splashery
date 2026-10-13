@@ -91,10 +91,11 @@ with a hand-back rule. These ground rules are the full set for Claude sessions; 
 - AI-made samples (the owner's calls of October 5, 2026, Push Plan AI1 to AI5): pictures and video
   the owner makes with his own AI image or video plan may ship as Studio samples (Photo to 3D, Video
   to 3D, Moving photo to 3D), labeled as AI-made beside them, with no people, logos or text, and
-  never presented as real captures or real places. Record each in `CREDITS.md` and
-  `tools/assets.json` as AI-made by the owner. AI-made pictures and video are never used for
-  science, math or engineering toys, the photoreal shelves, or landmarks shown as real; those keep
-  real data and real captures.
+  never presented as real captures or real places. Since October 13, 2026 (the owner's yes, for
+  Codex task 54), AI-made pictures may also ship as Picture QR backgrounds, on the same terms.
+  Record each in `CREDITS.md` and `tools/assets.json` as AI-made by the owner. AI-made pictures and
+  video are never used for science, math or engineering toys, the photoreal shelves, or landmarks
+  shown as real; those keep real data and real captures.
 - Photoreal captures under licenses the site can't use (ND, no license) may be viewed privately, on
   a private page, for comparison (the owner's call of October 2, 2026). They never go into the repo
   or the site.
