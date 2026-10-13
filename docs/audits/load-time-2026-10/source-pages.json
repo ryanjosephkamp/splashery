@@ -1,0 +1,62 @@
+[
+  {
+    "id": "water-bottle",
+    "url": "https://sketchfab.com/3d-models/water-bottle-42827e2ce39145eda296e6d6524f4c3d",
+    "status": 200,
+    "checked": "October 13, 2026",
+    "inheritedAuthor": "danny_p3d",
+    "authorTextFound": true,
+    "inheritedLicense": "CC BY 4.0",
+    "expectedLicenseLinkFound": true
+  },
+  {
+    "id": "sunglasses",
+    "url": "https://polyhaven.com/a/round_spectacles",
+    "status": 200,
+    "checked": "October 13, 2026",
+    "inheritedAuthor": "Sean Buckley",
+    "authorTextFound": true,
+    "inheritedLicense": "CC0 1.0",
+    "expectedLicenseLinkFound": true
+  },
+  {
+    "id": "baseball-cap",
+    "url": "https://sketchfab.com/3d-models/baseball-cap-1c1d34d73fd94e6b9e8f82b1eb7194a0",
+    "status": 200,
+    "checked": "October 13, 2026",
+    "inheritedAuthor": "Scott VanArsdale",
+    "authorTextFound": true,
+    "inheritedLicense": "CC BY 4.0",
+    "expectedLicenseLinkFound": true
+  },
+  {
+    "id": "fountain-pen",
+    "url": "https://sketchfab.com/3d-models/af3606f31c4343859d887049a1908fb0",
+    "status": 200,
+    "checked": "October 13, 2026",
+    "inheritedAuthor": "chemicalX",
+    "authorTextFound": true,
+    "inheritedLicense": "CC BY 4.0",
+    "expectedLicenseLinkFound": true
+  },
+  {
+    "id": "soda-can",
+    "url": "https://sketchfab.com/3d-models/soda-can-f3560f1b73a1498d9313a0f10fd11ef6",
+    "status": 200,
+    "checked": "October 13, 2026",
+    "inheritedAuthor": "RoutineStudio",
+    "authorTextFound": true,
+    "inheritedLicense": "CC BY 4.0",
+    "expectedLicenseLinkFound": true
+  },
+  {
+    "id": "celestial-globe",
+    "url": "https://sketchfab.com/3d-models/celestial-globe-341fa8a777e94883841409438756f747",
+    "status": 200,
+    "checked": "October 13, 2026",
+    "inheritedAuthor": "Virtual Museums of Ma\u0142opolska",
+    "matchedAuthorText": "Virtual Museums",
+    "inheritedLicense": "CC0 1.0",
+    "expectedLicenseLinkFound": true
+  }
+]

@@ -1,0 +1,975 @@
+{
+  "generatedAt": "2026-10-13T19:00:39.970Z",
+  "runtimeSource": "2c229dbd95774b00c2ee7f6e182d4a4c3371dea0",
+  "frozenMain": "49c809b4ee798f9011ad3f223ecb2e6021caec65",
+  "environment": {
+    "browser": "/usr/bin/chromium",
+    "display": ":91",
+    "SPLASHERY_GL": "llvmpipe",
+    "LP_NUM_THREADS": "2",
+    "workers": 1
+  },
+  "finalSuite": {
+    "command": "SPLASHERY_CHROMIUM=/usr/bin/chromium SPLASHERY_GL=llvmpipe LP_NUM_THREADS=2 DISPLAY=:91 npx playwright test tests/smoke.spec.mjs tests/taps.spec.mjs tests/kit.spec.mjs tests/unit.spec.mjs tests/ro.spec.mjs tests/load-time.spec.mjs tests/load-time-catalog.spec.mjs tests/load-time-exports.spec.mjs tests/load-time-format.spec.mjs tests/load-time-metrics.spec.mjs tests/load-time-means.spec.mjs tests/load-time-smoothing.spec.mjs --reporter=line,json",
+    "stats": {
+      "startTime": "2026-10-13T04:39:32.737Z",
+      "duration": 2524080.841,
+      "expected": 160,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "files": [
+      {
+        "file": "kit.spec.mjs",
+        "passed": 10,
+        "failed": 0,
+        "skipped": 0,
+        "durationMs": 596365
+      },
+      {
+        "file": "load-time-catalog.spec.mjs",
+        "passed": 1,
+        "failed": 0,
+        "skipped": 0,
+        "durationMs": 11321
+      },
+      {
+        "file": "load-time-exports.spec.mjs",
+        "passed": 1,
+        "failed": 0,
+        "skipped": 0,
+        "durationMs": 372
+      },
+      {
+        "file": "load-time-format.spec.mjs",
+        "passed": 1,
+        "failed": 0,
+        "skipped": 0,
+        "durationMs": 67
+      },
+      {
+        "file": "load-time-means.spec.mjs",
+        "passed": 2,
+        "failed": 0,
+        "skipped": 0,
+        "durationMs": 776
+      },
+      {
+        "file": "load-time-metrics.spec.mjs",
+        "passed": 2,
+        "failed": 0,
+        "skipped": 0,
+        "durationMs": 12
+      },
+      {
+        "file": "load-time-smoothing.spec.mjs",
+        "passed": 4,
+        "failed": 0,
+        "skipped": 0,
+        "durationMs": 40536
+      },
+      {
+        "file": "load-time.spec.mjs",
+        "passed": 3,
+        "failed": 0,
+        "skipped": 0,
+        "durationMs": 94161
+      },
+      {
+        "file": "ro.spec.mjs",
+        "passed": 4,
+        "failed": 0,
+        "skipped": 0,
+        "durationMs": 243282
+      },
+      {
+        "file": "smoke.spec.mjs",
+        "passed": 50,
+        "failed": 0,
+        "skipped": 0,
+        "durationMs": 1438490
+      },
+      {
+        "file": "taps.spec.mjs",
+        "passed": 62,
+        "failed": 0,
+        "skipped": 0,
+        "durationMs": 70639
+      },
+      {
+        "file": "unit.spec.mjs",
+        "passed": 20,
+        "failed": 0,
+        "skipped": 0,
+        "durationMs": 12538
+      }
+    ],
+    "failures": []
+  },
+  "embedTransfer": {
+    "observed": "9.1 MiB (rounded)",
+    "limitBytes": 31457280
+  },
+  "earlierSuite": {
+    "runtimeSource": "edafc7cc",
+    "stats": {
+      "startTime": "2026-10-13T03:38:20.347Z",
+      "duration": 2153595.251,
+      "expected": 153,
+      "skipped": 0,
+      "unexpected": 1,
+      "flaky": 0
+    },
+    "files": [
+      {
+        "file": "kit.spec.mjs",
+        "passed": 10,
+        "failed": 0,
+        "skipped": 0,
+        "durationMs": 470642
+      },
+      {
+        "file": "load-time-catalog.spec.mjs",
+        "passed": 1,
+        "failed": 0,
+        "skipped": 0,
+        "durationMs": 10888
+      },
+      {
+        "file": "load-time-exports.spec.mjs",
+        "passed": 1,
+        "failed": 0,
+        "skipped": 0,
+        "durationMs": 388
+      },
+      {
+        "file": "load-time-format.spec.mjs",
+        "passed": 1,
+        "failed": 0,
+        "skipped": 0,
+        "durationMs": 65
+      },
+      {
+        "file": "load-time-metrics.spec.mjs",
+        "passed": 2,
+        "failed": 0,
+        "skipped": 0,
+        "durationMs": 6
+      },
+      {
+        "file": "load-time.spec.mjs",
+        "passed": 3,
+        "failed": 0,
+        "skipped": 0,
+        "durationMs": 33402
+      },
+      {
+        "file": "ro.spec.mjs",
+        "passed": 4,
+        "failed": 0,
+        "skipped": 0,
+        "durationMs": 206940
+      },
+      {
+        "file": "smoke.spec.mjs",
+        "passed": 49,
+        "failed": 1,
+        "skipped": 0,
+        "durationMs": 1301688
+      },
+      {
+        "file": "taps.spec.mjs",
+        "passed": 62,
+        "failed": 0,
+        "skipped": 0,
+        "durationMs": 75041
+      },
+      {
+        "file": "unit.spec.mjs",
+        "passed": 20,
+        "failed": 0,
+        "skipped": 0,
+        "durationMs": 10245
+      }
+    ],
+    "failures": [
+      {
+        "file": "smoke.spec.mjs",
+        "title": "rigs pick splats by colour, run effects and show add-ons; shelf shapes have rigs",
+        "status": "failed",
+        "errors": [
+          "Error: expect(received).toBeLessThan(expected)\n\nExpected: < 22892.5\nReceived:   68656\n\nCall Log:\n- Timeout 15000ms exceeded while waiting on the predicate\n\n  752 |     const settled = async () =>\n  753 |       countDifferentPixels(page, rest, await canvas.screenshot({ type: \"png\" }));\n> 754 |     await expect\n      |     ^\n  755 |       .poll(settled, { timeout: 15_000, intervals: [3000, 1000] })\n  756 |       .toBeLessThan(moved / 4);\n  757 |     // Lantern: a toggle lights a flame add-on; a second tap puts it out.\n    at /workspace/splashery/tests/smoke.spec.mjs:754:5"
+        ]
+      }
+    ],
+    "note": "One strawberry return-to-rest image threshold failed in the first broad run. Isolated checks subsequently passed on both frozen main and the candidate; this does not prove a baseline defect."
+  },
+  "isolatedFrozenMain": {
+    "stats": {
+      "startTime": "2026-10-13T04:15:05.917Z",
+      "duration": 67975.82,
+      "expected": 1,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "files": [
+      {
+        "file": "smoke.spec.mjs",
+        "passed": 1,
+        "failed": 0,
+        "skipped": 0,
+        "durationMs": 63643
+      }
+    ],
+    "failures": []
+  },
+  "isolatedCandidate": {
+    "stats": {
+      "startTime": "2026-10-13T04:18:29.273Z",
+      "duration": 68250.143,
+      "expected": 1,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "files": [
+      {
+        "file": "smoke.spec.mjs",
+        "passed": 1,
+        "failed": 0,
+        "skipped": 0,
+        "durationMs": 64743
+      }
+    ],
+    "failures": []
+  },
+  "packChecks": {
+    "command": "node tools/check-packs.mjs real-objects photoreal-r3",
+    "exitCode": 0,
+    "output": "celestial-globe           172000 splats  1427 ms\narmillary-sphere          172000 splats   742 ms\nstannern-meteorites       172000 splats   572 ms\nfluorite-crystal          180000 splats  1398 ms\nammonite-agate            172000 splats   597 ms\nmorasko-meteorite         172000 splats   502 ms\npyrite-cubes              172000 splats   941 ms\nmegalodon-tooth           172000 splats   556 ms\nfountain-pen              197122 splats   484 ms\nwater-bottle              189314 splats   943 ms\nsoda-can                  197734 splats  1152 ms\nrunning-shoe              165382 splats  1079 ms\nhoodie                    188418 splats   878 ms\nsunglasses                196074 splats   498 ms\nbaseball-cap              188000 splats   654 ms",
+    "earlierNote": "A preflight ran during image capture and exceeded the 1500 ms budget for two recipes. A repeat alone passed all 15 recipes, and the final check passed all 15."
+  },
+  "imageEvidence": {
+    "pairs": 40,
+    "zeroDifferencePairs": 40,
+    "tapPairs": 19,
+    "allTapPosesMoved": true,
+    "comparison": "Direct RGBA comparison of the committed before/after PNGs, plus the PNG diff tool; fixed camera and clocks. Frame-end waits are not GPU fences.",
+    "artifactRecheck": {
+      "pairs": 40,
+      "allRGBAEqual": true,
+      "tapPairs": 19,
+      "allTapsMoved": true,
+      "prefixHashes": 10,
+      "compressedMeanHash": true
+    }
+  },
+  "protectedFiles": {
+    "pullRequests": [560, 562, 566, 570, 576],
+    "protectedFileCount": 392,
+    "changedFileCount": 200,
+    "intersection": [],
+    "finalRefresh": {
+      "checkedAt": "2026-10-13T18:59:03.032Z",
+      "pullRequests": [560, 562, 566, 570, 576],
+      "protected": 428,
+      "newProtected": [
+        "tests/cdx-mp2-decode.spec.mjs",
+        "tests/cdx-mp2-pixels.spec.mjs",
+        "tests/cdx-mp2-r3.spec.mjs",
+        "tools/cdx-mp2-inputs.mjs",
+        "tools/cdx-mp2-originals.mjs",
+        "tools/cdx-mp2-pixels.mjs",
+        "tools/cdx-mp2-r3-review.mjs",
+        "tools/cdx-mp2-render.mjs",
+        "tools/cdx-mp2-startup.mjs",
+        "src/photo3d/depth-edges.js",
+        "tests/cdx-p3d2-r3-anchored.spec.mjs",
+        "tests/cdx-p3d2-r3-background-interior.spec.mjs",
+        "tests/cdx-p3d2-r3-background.spec.mjs",
+        "tests/cdx-p3d2-r3-compact.spec.mjs",
+        "tests/cdx-p3d2-r3-depth.spec.mjs",
+        "tests/cdx-p3d2-r3-edges.spec.mjs",
+        "tests/cdx-p3d2-r3-footprint.spec.mjs",
+        "tests/cdx-p3d2-r3-input-race.spec.mjs",
+        "tests/cdx-p3d2-r3-metrics.spec.mjs",
+        "tests/cdx-p3d2-r3-surface.spec.mjs",
+        "tools/cdx-p3d2-r3-anchor-sweep.mjs",
+        "tools/cdx-p3d2-r3-anchored.mjs",
+        "tools/cdx-p3d2-r3-calibrate.mjs",
+        "tools/cdx-p3d2-r3-capture-check.mjs",
+        "tools/cdx-p3d2-r3-clips.mjs",
+        "tools/cdx-p3d2-r3-common.mjs",
+        "tools/cdx-p3d2-r3-compact-pixels.mjs",
+        "tools/cdx-p3d2-r3-edge.mjs",
+        "tools/cdx-p3d2-r3-fingerprint.mjs",
+        "tools/cdx-p3d2-r3-frame.mjs",
+        "tools/cdx-p3d2-r3-hole-debug.mjs",
+        "tools/cdx-p3d2-r3-inputs.mjs",
+        "tools/cdx-p3d2-r3-measure.mjs",
+        "tools/cdx-p3d2-r3-profile.mjs",
+        "tools/cdx-p3d2-r3-publish.mjs",
+        "tools/cdx-p3d2-r3-report.mjs"
+      ],
+      "changed": 200,
+      "intersection": []
+    }
+  },
+  "independentReview": {
+    "scope": "Exact prefix and exact-mean decoding, shading, compressed/raw HTTP bodies, native fallback, concurrent cache behavior, audit cutoff/tap evidence, report ranking, and focused timing completeness.",
+    "result": "No unresolved correctness finding. Earlier audit-evidence findings were fixed and covered by checks; final report findings were fixed and re-reviewed.",
+    "timing": {
+      "recommendation": "Retain the frozen implementation for the draft, disclose repeated increases and unresolved attribution. Stable-environment isolated import measurements are required before claiming the no-slower target.",
+      "pyritePhoneHelperToScan": [
+        {
+          "sample": 0,
+          "helperToScanMs": 258.69499999680556
+        },
+        {
+          "sample": 1,
+          "helperToScanMs": 254.18899999931455
+        },
+        {
+          "sample": 2,
+          "helperToScanMs": 425.8700000063982
+        },
+        {
+          "sample": 3,
+          "helperToScanMs": 185.61100000079023
+        },
+        {
+          "sample": 4,
+          "helperToScanMs": 29.772000001685228
+        }
+      ],
+      "note": "Lazy museum helpers create a serial dependency. Observed helper-to-scan intervals include scheduling delays and do not explain the full measured increases. Soda can and Sunglasses increases remain review risks."
+    }
+  },
+  "browserAndMockScope": "Request/detail/native-fallback/tap/export/image checks ran in Chromium. The already HTTP-decoded gzip check fulfills a request with the real decompressed file. Decoder, buffer equality, and delayed filesystem-read checks run in Node; they do not substitute for the browser image comparisons.",
+  "checks": {
+    "prettier": "pending",
+    "americanEnglish": "pending",
+    "diffWhitespace": "pending"
+  },
+  "beforeMatrix": {
+    "cells": 924,
+    "uniqueCells": 924,
+    "readinessErrors": 0,
+    "consoleErrorCells": 0,
+    "incorrectSums": 0,
+    "lateBodies": 0
+  },
+  "afterMatrix": {
+    "cells": 924,
+    "uniqueCells": 924,
+    "readinessErrors": 0,
+    "consoleErrorCells": 0,
+    "incorrectSums": 0,
+    "lateBodies": 0
+  },
+  "recovery": {
+    "savedCellsAtGPUExit": 578,
+    "savedCellsAtDisplayRestart": 598,
+    "savedCellsAtExecutionServiceDisconnect": 615,
+    "recoveryProcessPriority": 10,
+    "controlBefore": [
+      {
+        "id": "cactus",
+        "device": "desktop",
+        "firstFrameMs": 55411.29999999702,
+        "bytes": 11021766,
+        "status": "ok",
+        "errors": []
+      }
+    ],
+    "controlAfter": [
+      {
+        "id": "cactus",
+        "device": "desktop",
+        "firstFrameMs": 69546.60000000149,
+        "bytes": 10923441,
+        "status": "ok",
+        "errors": []
+      }
+    ],
+    "note": "Saved completed cells were resumed. An unchanged frozen-main control also became much slower after the interruption; later timings do not isolate patch effects.",
+    "focusedGPUExitAfterCompletedObservations": 25,
+    "focusedRecoveryCellTimeoutMs": 180000
+  },
+  "focusedTiming": [
+    {
+      "id": "cactus",
+      "device": "phone",
+      "before": {
+        "samples": 5,
+        "median": 3566.2000000029802,
+        "min": 3188.39999999851,
+        "max": 4796.20000000298
+      },
+      "after": {
+        "samples": 5,
+        "median": 3057.2999999970198,
+        "min": 2625.6999999955297,
+        "max": 3403.7000000029802
+      }
+    },
+    {
+      "id": "tomatoes",
+      "device": "phone",
+      "before": {
+        "samples": 5,
+        "median": 3274.10000000149,
+        "min": 2906.89999999851,
+        "max": 4552.89999999851
+      },
+      "after": {
+        "samples": 5,
+        "median": 3162.10000000149,
+        "min": 2631.89999999851,
+        "max": 6534.20000000298
+      }
+    },
+    {
+      "id": "mandeltorus",
+      "device": "phone",
+      "before": {
+        "samples": 5,
+        "median": 2626.8000000044703,
+        "min": 2531.6999999955297,
+        "max": 2738.89999999851
+      },
+      "after": {
+        "samples": 5,
+        "median": 2420.9000000059605,
+        "min": 2279.89999999851,
+        "max": 5415.89999999851
+      }
+    },
+    {
+      "id": "basket",
+      "device": "phone",
+      "before": {
+        "samples": 5,
+        "median": 3012.7999999970198,
+        "min": 2802.60000000149,
+        "max": 3643.60000000149
+      },
+      "after": {
+        "samples": 5,
+        "median": 2551.6999999955297,
+        "min": 2303.9000000059605,
+        "max": 3347.60000000149
+      }
+    },
+    {
+      "id": "heart-donut",
+      "device": "phone",
+      "before": {
+        "samples": 5,
+        "median": 3177.5,
+        "min": 2739.6999999955297,
+        "max": 3299.7999999970198
+      },
+      "after": {
+        "samples": 5,
+        "median": 2583.0999999940395,
+        "min": 2127.1999999955297,
+        "max": 4100.80000000447
+      }
+    },
+    {
+      "id": "sushi-boat",
+      "device": "phone",
+      "before": {
+        "samples": 5,
+        "median": 3040.10000000149,
+        "min": 2803.5,
+        "max": 5771.79999999702
+      },
+      "after": {
+        "samples": 5,
+        "median": 2788.3000000044703,
+        "min": 2468.7999999970198,
+        "max": 3392.89999999851
+      }
+    },
+    {
+      "id": "seeded-loaf",
+      "device": "phone",
+      "before": {
+        "samples": 5,
+        "median": 3408.3000000044703,
+        "min": 2421.39999999851,
+        "max": 8063.5
+      },
+      "after": {
+        "samples": 5,
+        "median": 2631.7000000029802,
+        "min": 2527.60000000149,
+        "max": 3313.7000000029802
+      }
+    },
+    {
+      "id": "dog-plush",
+      "device": "phone",
+      "before": {
+        "samples": 5,
+        "median": 4145.69999999553,
+        "min": 2811.6999999955297,
+        "max": 15302.10000000149
+      },
+      "after": {
+        "samples": 5,
+        "median": 2738.2000000029802,
+        "min": 2421.60000000149,
+        "max": 10307.69999999553
+      }
+    },
+    {
+      "id": "celestial-globe",
+      "device": "phone",
+      "before": {
+        "samples": 5,
+        "median": 3519,
+        "min": 2270.0999999940395,
+        "max": 21404.69999999553
+      },
+      "after": {
+        "samples": 5,
+        "median": 2860,
+        "min": 2475.39999999851,
+        "max": 9013
+      }
+    },
+    {
+      "id": "pyrite-cubes",
+      "device": "phone",
+      "before": {
+        "samples": 5,
+        "median": 3623.4000000059605,
+        "min": 2978,
+        "max": 4792
+      },
+      "after": {
+        "samples": 5,
+        "median": 8304.89999999851,
+        "min": 2239.7000000029802,
+        "max": 12532.39999999851
+      }
+    },
+    {
+      "id": "asteroid",
+      "device": "phone",
+      "before": {
+        "samples": 5,
+        "median": 3699.1999999955297,
+        "min": 3196.7000000029802,
+        "max": 4379.30000000447
+      },
+      "after": {
+        "samples": 5,
+        "median": 3634.5999999940395,
+        "min": 2063,
+        "max": 7344.69999999553
+      }
+    },
+    {
+      "id": "black-hole",
+      "device": "phone",
+      "before": {
+        "samples": 5,
+        "median": 2529.4000000059605,
+        "min": 2210.0999999940395,
+        "max": 9163.5
+      },
+      "after": {
+        "samples": 5,
+        "median": 2828.60000000149,
+        "min": 2299.2000000029802,
+        "max": 5121.60000000149
+      }
+    },
+    {
+      "id": "fountain-pen",
+      "device": "phone",
+      "before": {
+        "samples": 5,
+        "median": 2411.2000000029802,
+        "min": 1796.8999999985099,
+        "max": 5365.39999999851
+      },
+      "after": {
+        "samples": 5,
+        "median": 2410.60000000149,
+        "min": 1834.3000000044703,
+        "max": 3184.10000000149
+      }
+    },
+    {
+      "id": "water-bottle",
+      "device": "phone",
+      "before": {
+        "samples": 5,
+        "median": 2999,
+        "min": 2406.39999999851,
+        "max": 3109.39999999851
+      },
+      "after": {
+        "samples": 5,
+        "median": 2753.7999999970198,
+        "min": 2422.7999999970198,
+        "max": 5218.89999999851
+      }
+    },
+    {
+      "id": "soda-can",
+      "device": "phone",
+      "before": {
+        "samples": 5,
+        "median": 2605.10000000149,
+        "min": 2129,
+        "max": 3190.0999999940395
+      },
+      "after": {
+        "samples": 5,
+        "median": 3638.4000000059605,
+        "min": 2150.2000000029802,
+        "max": 6416.79999999702
+      }
+    },
+    {
+      "id": "sunglasses",
+      "device": "phone",
+      "before": {
+        "samples": 5,
+        "median": 2333.4000000059605,
+        "min": 2094.6999999955297,
+        "max": 3735.60000000149
+      },
+      "after": {
+        "samples": 5,
+        "median": 4112,
+        "min": 1898.1000000014901,
+        "max": 6159.5999999940395
+      }
+    },
+    {
+      "id": "baseball-cap",
+      "device": "phone",
+      "before": {
+        "samples": 5,
+        "median": 2822.7000000029802,
+        "min": 2054,
+        "max": 17803.5
+      },
+      "after": {
+        "samples": 5,
+        "median": 2919.1999999955297,
+        "min": 2092.9000000059605,
+        "max": 3048.1999999955297
+      }
+    },
+    {
+      "id": "cactus",
+      "device": "desktop",
+      "before": {
+        "samples": 5,
+        "median": 5485.60000000149,
+        "min": 3704.10000000149,
+        "max": 8238.20000000298
+      },
+      "after": {
+        "samples": 5,
+        "median": 5372.30000000447,
+        "min": 4315.70000000298,
+        "max": 10696.39999999851
+      }
+    },
+    {
+      "id": "tomatoes",
+      "device": "desktop",
+      "before": {
+        "samples": 5,
+        "median": 5158.29999999702,
+        "min": 4687.29999999702,
+        "max": 19132.20000000298
+      },
+      "after": {
+        "samples": 5,
+        "median": 4224.69999999553,
+        "min": 3596.1999999955297,
+        "max": 7873.10000000149
+      }
+    },
+    {
+      "id": "mandeltorus",
+      "device": "desktop",
+      "before": {
+        "samples": 5,
+        "median": 3694.39999999851,
+        "min": 3519.5999999940395,
+        "max": 9525.89999999851
+      },
+      "after": {
+        "samples": 5,
+        "median": 3671.2000000029802,
+        "min": 2906.60000000149,
+        "max": 6786.70000000298
+      }
+    },
+    {
+      "id": "basket",
+      "device": "desktop",
+      "before": {
+        "samples": 5,
+        "median": 5512.29999999702,
+        "min": 3202.7999999970198,
+        "max": 17536.29999999702
+      },
+      "after": {
+        "samples": 5,
+        "median": 4089.1999999955297,
+        "min": 3036.6999999955297,
+        "max": 13471.70000000298
+      }
+    },
+    {
+      "id": "heart-donut",
+      "device": "desktop",
+      "before": {
+        "samples": 5,
+        "median": 4056,
+        "min": 3111.5,
+        "max": 12905.60000000149
+      },
+      "after": {
+        "samples": 5,
+        "median": 9749.89999999851,
+        "min": 2925.9000000059605,
+        "max": 18235.90000000596
+      }
+    },
+    {
+      "id": "sushi-boat",
+      "device": "desktop",
+      "before": {
+        "samples": 5,
+        "median": 4526.20000000298,
+        "min": 2846.60000000149,
+        "max": 10047.5
+      },
+      "after": {
+        "samples": 5,
+        "median": 7236.29999999702,
+        "min": 3097,
+        "max": 12468.60000000149
+      }
+    },
+    {
+      "id": "seeded-loaf",
+      "device": "desktop",
+      "before": {
+        "samples": 5,
+        "median": 4436.79999999702,
+        "min": 3395.3000000044703,
+        "max": 10923.10000000149
+      },
+      "after": {
+        "samples": 5,
+        "median": 14150.69999999553,
+        "min": 3680.10000000149,
+        "max": 37357.70000000298
+      }
+    },
+    {
+      "id": "dog-plush",
+      "device": "desktop",
+      "before": {
+        "samples": 5,
+        "median": 6903.60000000149,
+        "min": 3808,
+        "max": 40432.60000000149
+      },
+      "after": {
+        "samples": 5,
+        "median": 9016.70000000298,
+        "min": 4024.5,
+        "max": 13552.89999999851
+      }
+    },
+    {
+      "id": "celestial-globe",
+      "device": "desktop",
+      "before": {
+        "samples": 5,
+        "median": 4588.20000000298,
+        "min": 3910.9000000059605,
+        "max": 11868.19999999553
+      },
+      "after": {
+        "samples": 5,
+        "median": 4489.20000000298,
+        "min": 3868.7999999970198,
+        "max": 5537.20000000298
+      }
+    },
+    {
+      "id": "pyrite-cubes",
+      "device": "desktop",
+      "before": {
+        "samples": 5,
+        "median": 5440.39999999851,
+        "min": 3799.2000000029802,
+        "max": 6792.89999999851
+      },
+      "after": {
+        "samples": 5,
+        "median": 5361,
+        "min": 4114.20000000298,
+        "max": 8333.29999999702
+      }
+    },
+    {
+      "id": "asteroid",
+      "device": "desktop",
+      "before": {
+        "samples": 5,
+        "median": 5416.80000000447,
+        "min": 4023.7999999970198,
+        "max": 6234.5
+      },
+      "after": {
+        "samples": 5,
+        "median": 5518.79999999702,
+        "min": 4133.60000000149,
+        "max": 6638.10000000149
+      }
+    },
+    {
+      "id": "black-hole",
+      "device": "desktop",
+      "before": {
+        "samples": 5,
+        "median": 4031.39999999851,
+        "min": 3108.2000000029802,
+        "max": 4863.29999999702
+      },
+      "after": {
+        "samples": 5,
+        "median": 4806.89999999851,
+        "min": 3499.4000000059605,
+        "max": 6580.39999999851
+      }
+    },
+    {
+      "id": "fountain-pen",
+      "device": "desktop",
+      "before": {
+        "samples": 5,
+        "median": 4270.69999999553,
+        "min": 3048.3000000044703,
+        "max": 5509
+      },
+      "after": {
+        "samples": 5,
+        "median": 6125.39999999851,
+        "min": 2979.10000000149,
+        "max": 21815
+      }
+    },
+    {
+      "id": "water-bottle",
+      "device": "desktop",
+      "before": {
+        "samples": 5,
+        "median": 4087.2999999970198,
+        "min": 3967.7000000029802,
+        "max": 4967.39999999851
+      },
+      "after": {
+        "samples": 5,
+        "median": 4131.29999999702,
+        "min": 3807.7000000029802,
+        "max": 5085.10000000149
+      }
+    },
+    {
+      "id": "soda-can",
+      "device": "desktop",
+      "before": {
+        "samples": 5,
+        "median": 3719.8000000044703,
+        "min": 2929.7999999970198,
+        "max": 5807.89999999851
+      },
+      "after": {
+        "samples": 5,
+        "median": 4657.9000000059605,
+        "min": 3903.2999999970198,
+        "max": 5060.5
+      }
+    },
+    {
+      "id": "sunglasses",
+      "device": "desktop",
+      "before": {
+        "samples": 5,
+        "median": 3727.5,
+        "min": 3238.89999999851,
+        "max": 5981.5
+      },
+      "after": {
+        "samples": 5,
+        "median": 4469.5999999940395,
+        "min": 3598.10000000149,
+        "max": 18489.20000000298
+      }
+    },
+    {
+      "id": "baseball-cap",
+      "device": "desktop",
+      "before": {
+        "samples": 5,
+        "median": 4353,
+        "min": 2988.10000000149,
+        "max": 5619.29999999702
+      },
+      "after": {
+        "samples": 5,
+        "median": 3712.7999999970198,
+        "min": 3136.10000000149,
+        "max": 4538.80000000447
+      }
+    }
+  ],
+  "auditStoreTests": {
+    "command": "npx playwright test tests/load-time-store.spec.mjs --reporter=line,json",
+    "stats": {
+      "startTime": "2026-10-13T15:21:04.665Z",
+      "duration": 12046.985,
+      "expected": 3,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "note": "Three Node-based journal, checkpoint, replacement, and interrupted-record checks; separate from the required 160-test run."
+  },
+  "watchdogProbe": {
+    "browser": "/usr/bin/chromium",
+    "renderer": "headless SwiftShader",
+    "forcedCellTimeoutMs": 1,
+    "forcedExitCode": 2,
+    "resumedCellTimeoutMs": 180000,
+    "resumedExitCode": 0,
+    "result": {
+      "id": "cactus",
+      "device": "phone",
+      "status": "ok",
+      "bytes": 6451875,
+      "firstFrameMs": 4906.20000000298
+    },
+    "scope": "Actual collector and browser on frozen main; checks forced watchdog termination and successful resume, not timing comparability with the llvmpipe matrix."
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "at": "2026-10-13T14:54:44.717Z",
+  "browser": "151.0.7922.173",
+  "args": [
+    "--use-gl=angle",
+    "--use-angle=gl",
+    "--hide-scrollbars",
+    "--enable-unsafe-swiftshader",
+    "--enable-webgl",
+    "--ignore-gpu-blocklist",
+    "--disable-background-timer-throttling",
+    "--disable-renderer-backgrounding",
+    "--disable-backgrounding-occluded-windows"
+  ],
+  "base": "http://127.0.0.1:4173",
+  "definitions": [
+    {
+      "name": "phone",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "deviceScaleFactor": 3,
+      "isMobile": true,
+      "hasTouch": true,
+      "profile": "weak"
+    },
+    {
+      "name": "desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "deviceScaleFactor": 1,
+      "isMobile": false,
+      "hasTouch": false,
+      "profile": "high"
+    }
+  ],
+  "frozenMain": "49c809b4ee798f9011ad3f223ecb2e6021caec65",
+  "candidateSource": "2c229dbd95774b00c2ee7f6e182d4a4c3371dea0",
+  "host": {
+    "platform": "linux",
+    "architecture": "x64",
+    "availableCPUs": 4,
+    "mesaThreads": "2"
+  },
+  "sound": "off",
+  "seed": 424242,
+  "renderer": "webgl2",
+  "adaptation": "off",
+  "cache": "fresh context per toy; CDP cache disabled; service workers blocked",
+  "firstFrame": "navigation to first postrender after requested toy is ready",
+  "payload": "completed HTTP body bytes after 1500 ms settling; Content-Length with Resource Timing fallback, including worker imports; headers excluded",
+  "deviationFromTask06": "Linux llvmpipe instead of Mac Metal; opening metrics only, without the idle/tap frame-cadence windows"
+}

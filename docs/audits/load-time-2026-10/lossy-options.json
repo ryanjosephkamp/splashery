@@ -1,0 +1,78 @@
+[
+  {
+    "id": "fountain-pen",
+    "shipped": false,
+    "option": "Half the phone recipe's splat budget (45000 instead of 90000); fewer rendered splats, no asset changes",
+    "before": {
+      "file": "fountain-pen-phone-after-rest.png",
+      "id": "fountain-pen",
+      "splats": 90273,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "write": 0
+      },
+      "settledFrames": 27,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      }
+    },
+    "after": {
+      "file": "fountain-pen-phone-lossy-half-budget-rest.png",
+      "id": "fountain-pen",
+      "splats": 46130,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "write": 0
+      },
+      "settledFrames": 31,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      }
+    },
+    "differentPixels": 29272,
+    "pixels": 251550,
+    "rmsRGB": 2.810416870646609,
+    "maxChannelDifference": 180,
+    "diff": "fountain-pen-phone-lossy-diff.png"
+  },
+  {
+    "id": "sunglasses",
+    "shipped": false,
+    "option": "Half the phone recipe's splat budget (45000 instead of 90000); fewer rendered splats, no asset changes",
+    "before": {
+      "file": "sunglasses-phone-after-rest.png",
+      "id": "sunglasses",
+      "splats": 88274,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "flip": 0
+      },
+      "settledFrames": 32,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      }
+    },
+    "after": {
+      "file": "sunglasses-phone-lossy-half-budget-rest.png",
+      "id": "sunglasses",
+      "splats": 44174,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "flip": 0
+      },
+      "settledFrames": 38,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      }
+    },
+    "differentPixels": 27216,
+    "pixels": 251550,
+    "rmsRGB": 4.384783473723918,
+    "maxChannelDifference": 192,
+    "diff": "sunglasses-phone-lossy-diff.png"
+  }
+]

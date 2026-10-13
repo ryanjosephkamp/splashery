@@ -63,3 +63,17 @@ test("an HTTP-decoded opening body also loads correctly", async ({ page }) => {
   await page.evaluate(() => window.__splashery.app.chooseToy("celestial-globe"));
   expect(await page.evaluate(() => window.__splashery.player.toyInfo.splats)).toBe(77400);
 });
+
+test("a browser without native decompression retains the original full scan", async ({ page }) => {
+  await page.addInitScript(() =>
+    Object.defineProperty(window, "DecompressionStream", { value: undefined }),
+  );
+  const requests = [];
+  page.on("request", (r) => requests.push(new URL(r.url()).pathname));
+  await page.goto("/?renderer=webgl2&profile=weak&adapt=off&labs=1");
+  await page.waitForSelector("body[data-ready='true']", { timeout: 180000 });
+  await page.evaluate(() => window.__splashery.app.chooseToy("celestial-globe"));
+  expect(requests).toContain("/assets/toys/celestial-globe/celestial-globe.splats");
+  expect(requests).not.toContain("/assets/toys/celestial-globe/celestial-globe-opening.splats.gz");
+  expect(await page.evaluate(() => window.__splashery.player.toyInfo.splats)).toBe(77400);
+});

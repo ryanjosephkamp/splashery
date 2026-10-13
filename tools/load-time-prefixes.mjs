@@ -60,6 +60,7 @@ for (const [id, share] of Object.entries(shares))
         license: SOURCES[id].license,
         inheritedFrom: "tools/ro-sources.mjs, CREDITS.md, and the toy's in-app credit",
         originalLicenseCheck: "September 29, 2026, as recorded by the original bake tool",
+        liveLicenseCheck: "October 13, 2026; see this audit's source-pages.json",
         transformation: "Exact prefix copy made by Ryan with Codex (GPT-6); same asset license",
       },
     });

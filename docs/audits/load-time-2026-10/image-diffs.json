@@ -1,0 +1,1555 @@
+[
+  {
+    "captureVersion": 2,
+    "id": "cactus",
+    "device": "phone",
+    "pose": "rest",
+    "before": {
+      "file": "cactus-phone-before-rest.png",
+      "id": "cactus",
+      "splats": 120000,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "bloom": 0
+      },
+      "canvas": {
+        "width": 585,
+        "height": 967
+      }
+    },
+    "after": {
+      "file": "cactus-phone-after-rest.png",
+      "id": "cactus",
+      "splats": 120000,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "bloom": 0
+      },
+      "canvas": {
+        "width": 585,
+        "height": 967
+      }
+    },
+    "differentPixels": 0,
+    "pixels": 251550,
+    "rmsRGB": 0,
+    "maxChannelDifference": 0,
+    "diff": "cactus-phone-diff-rest.png"
+  },
+  {
+    "captureVersion": 2,
+    "id": "pyrite-cubes",
+    "device": "phone",
+    "pose": "rest",
+    "before": {
+      "file": "pyrite-cubes-phone-before-rest.png",
+      "id": "pyrite-cubes",
+      "splats": 77400,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "tap": 0
+      },
+      "canvas": {
+        "width": 585,
+        "height": 967
+      }
+    },
+    "after": {
+      "file": "pyrite-cubes-phone-after-rest.png",
+      "id": "pyrite-cubes",
+      "splats": 77400,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "tap": 0
+      },
+      "canvas": {
+        "width": 585,
+        "height": 967
+      }
+    },
+    "differentPixels": 0,
+    "pixels": 251550,
+    "rmsRGB": 0,
+    "maxChannelDifference": 0,
+    "diff": "pyrite-cubes-phone-diff-rest.png"
+  },
+  {
+    "captureVersion": 2,
+    "id": "pyrite-cubes",
+    "device": "phone",
+    "pose": "tap",
+    "before": {
+      "file": "pyrite-cubes-phone-before-tap.png",
+      "id": "pyrite-cubes",
+      "splats": 77400,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "tap": 0.7142857142857143
+      },
+      "canvas": {
+        "width": 585,
+        "height": 967
+      }
+    },
+    "after": {
+      "file": "pyrite-cubes-phone-after-tap.png",
+      "id": "pyrite-cubes",
+      "splats": 77400,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "tap": 0.7142857142857143
+      },
+      "canvas": {
+        "width": 585,
+        "height": 967
+      }
+    },
+    "differentPixels": 0,
+    "pixels": 251550,
+    "rmsRGB": 0,
+    "maxChannelDifference": 0,
+    "diff": "pyrite-cubes-phone-diff-tap.png",
+    "tapChangedPixels": 31482
+  },
+  {
+    "captureVersion": 2,
+    "id": "water-bottle",
+    "device": "phone",
+    "pose": "rest",
+    "before": {
+      "file": "water-bottle-phone-before-rest.png",
+      "id": "water-bottle",
+      "splats": 85396,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "pour": 0
+      },
+      "canvas": {
+        "width": 585,
+        "height": 967
+      }
+    },
+    "after": {
+      "file": "water-bottle-phone-after-rest.png",
+      "id": "water-bottle",
+      "splats": 85396,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "pour": 0
+      },
+      "canvas": {
+        "width": 585,
+        "height": 967
+      }
+    },
+    "differentPixels": 0,
+    "pixels": 251550,
+    "rmsRGB": 0,
+    "maxChannelDifference": 0,
+    "diff": "water-bottle-phone-diff-rest.png"
+  },
+  {
+    "captureVersion": 2,
+    "id": "water-bottle",
+    "device": "phone",
+    "pose": "tap",
+    "before": {
+      "file": "water-bottle-phone-before-tap.png",
+      "id": "water-bottle",
+      "splats": 85396,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "pour": 0.7777777777777778
+      },
+      "canvas": {
+        "width": 585,
+        "height": 967
+      }
+    },
+    "after": {
+      "file": "water-bottle-phone-after-tap.png",
+      "id": "water-bottle",
+      "splats": 85396,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "pour": 0.7777777777777778
+      },
+      "canvas": {
+        "width": 585,
+        "height": 967
+      }
+    },
+    "differentPixels": 0,
+    "pixels": 251550,
+    "rmsRGB": 0,
+    "maxChannelDifference": 0,
+    "diff": "water-bottle-phone-diff-tap.png",
+    "tapChangedPixels": 22839
+  },
+  {
+    "captureVersion": 2,
+    "id": "sunglasses",
+    "device": "phone",
+    "pose": "rest",
+    "before": {
+      "file": "sunglasses-phone-before-rest.png",
+      "id": "sunglasses",
+      "splats": 88274,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "flip": 0
+      },
+      "canvas": {
+        "width": 585,
+        "height": 967
+      }
+    },
+    "after": {
+      "file": "sunglasses-phone-after-rest.png",
+      "id": "sunglasses",
+      "splats": 88274,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "flip": 0
+      },
+      "canvas": {
+        "width": 585,
+        "height": 967
+      }
+    },
+    "differentPixels": 0,
+    "pixels": 251550,
+    "rmsRGB": 0,
+    "maxChannelDifference": 0,
+    "diff": "sunglasses-phone-diff-rest.png"
+  },
+  {
+    "captureVersion": 2,
+    "id": "sunglasses",
+    "device": "phone",
+    "pose": "tap",
+    "before": {
+      "file": "sunglasses-phone-before-tap.png",
+      "id": "sunglasses",
+      "splats": 88274,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "flip": 0.7142857142857143
+      },
+      "canvas": {
+        "width": 585,
+        "height": 967
+      }
+    },
+    "after": {
+      "file": "sunglasses-phone-after-tap.png",
+      "id": "sunglasses",
+      "splats": 88274,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "flip": 0.7142857142857143
+      },
+      "canvas": {
+        "width": 585,
+        "height": 967
+      }
+    },
+    "differentPixels": 0,
+    "pixels": 251550,
+    "rmsRGB": 0,
+    "maxChannelDifference": 0,
+    "diff": "sunglasses-phone-diff-tap.png",
+    "tapChangedPixels": 39797
+  },
+  {
+    "captureVersion": 2,
+    "id": "baseball-cap",
+    "device": "phone",
+    "pose": "rest",
+    "before": {
+      "file": "baseball-cap-phone-before-rest.png",
+      "id": "baseball-cap",
+      "splats": 84600,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "toss": 0
+      },
+      "canvas": {
+        "width": 585,
+        "height": 967
+      }
+    },
+    "after": {
+      "file": "baseball-cap-phone-after-rest.png",
+      "id": "baseball-cap",
+      "splats": 84600,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "toss": 0
+      },
+      "canvas": {
+        "width": 585,
+        "height": 967
+      }
+    },
+    "differentPixels": 0,
+    "pixels": 251550,
+    "rmsRGB": 0,
+    "maxChannelDifference": 0,
+    "diff": "baseball-cap-phone-diff-rest.png"
+  },
+  {
+    "captureVersion": 2,
+    "id": "fountain-pen",
+    "device": "phone",
+    "pose": "rest",
+    "before": {
+      "file": "fountain-pen-phone-before-rest.png",
+      "id": "fountain-pen",
+      "splats": 90273,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "write": 0
+      },
+      "canvas": {
+        "width": 585,
+        "height": 967
+      }
+    },
+    "after": {
+      "file": "fountain-pen-phone-after-rest.png",
+      "id": "fountain-pen",
+      "splats": 90273,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "write": 0
+      },
+      "canvas": {
+        "width": 585,
+        "height": 967
+      }
+    },
+    "differentPixels": 0,
+    "pixels": 251550,
+    "rmsRGB": 0,
+    "maxChannelDifference": 0,
+    "diff": "fountain-pen-phone-diff-rest.png"
+  },
+  {
+    "captureVersion": 2,
+    "id": "fountain-pen",
+    "device": "phone",
+    "pose": "tap",
+    "before": {
+      "file": "fountain-pen-phone-before-tap.png",
+      "id": "fountain-pen",
+      "splats": 90273,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "write": 0.75
+      },
+      "canvas": {
+        "width": 585,
+        "height": 967
+      }
+    },
+    "after": {
+      "file": "fountain-pen-phone-after-tap.png",
+      "id": "fountain-pen",
+      "splats": 90273,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "write": 0.75
+      },
+      "canvas": {
+        "width": 585,
+        "height": 967
+      }
+    },
+    "differentPixels": 0,
+    "pixels": 251550,
+    "rmsRGB": 0,
+    "maxChannelDifference": 0,
+    "diff": "fountain-pen-phone-diff-tap.png",
+    "tapChangedPixels": 5325
+  },
+  {
+    "captureVersion": 2,
+    "id": "soda-can",
+    "device": "phone",
+    "pose": "rest",
+    "before": {
+      "file": "soda-can-phone-before-rest.png",
+      "id": "soda-can",
+      "splats": 89317,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "open": 0
+      },
+      "canvas": {
+        "width": 585,
+        "height": 967
+      }
+    },
+    "after": {
+      "file": "soda-can-phone-after-rest.png",
+      "id": "soda-can",
+      "splats": 89317,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "open": 0
+      },
+      "canvas": {
+        "width": 585,
+        "height": 967
+      }
+    },
+    "differentPixels": 0,
+    "pixels": 251550,
+    "rmsRGB": 0,
+    "maxChannelDifference": 0,
+    "diff": "soda-can-phone-diff-rest.png"
+  },
+  {
+    "captureVersion": 2,
+    "id": "soda-can",
+    "device": "phone",
+    "pose": "tap",
+    "before": {
+      "file": "soda-can-phone-before-tap.png",
+      "id": "soda-can",
+      "splats": 89317,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "open": 0.75
+      },
+      "canvas": {
+        "width": 585,
+        "height": 967
+      }
+    },
+    "after": {
+      "file": "soda-can-phone-after-tap.png",
+      "id": "soda-can",
+      "splats": 89317,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "open": 0.75
+      },
+      "canvas": {
+        "width": 585,
+        "height": 967
+      }
+    },
+    "differentPixels": 0,
+    "pixels": 251550,
+    "rmsRGB": 0,
+    "maxChannelDifference": 0,
+    "diff": "soda-can-phone-diff-tap.png",
+    "tapChangedPixels": 1055
+  },
+  {
+    "captureVersion": 2,
+    "id": "cactus",
+    "device": "desktop",
+    "pose": "rest",
+    "before": {
+      "file": "cactus-desktop-before-rest.png",
+      "id": "cactus",
+      "splats": 450000,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "bloom": 0
+      },
+      "canvas": {
+        "width": 1072,
+        "height": 900
+      }
+    },
+    "after": {
+      "file": "cactus-desktop-after-rest.png",
+      "id": "cactus",
+      "splats": 450000,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "bloom": 0
+      },
+      "canvas": {
+        "width": 1072,
+        "height": 900
+      }
+    },
+    "differentPixels": 0,
+    "pixels": 964800,
+    "rmsRGB": 0,
+    "maxChannelDifference": 0,
+    "diff": "cactus-desktop-diff-rest.png"
+  },
+  {
+    "captureVersion": 2,
+    "id": "baseball-cap",
+    "device": "phone",
+    "pose": "tap",
+    "before": {
+      "file": "baseball-cap-phone-before-tap.png",
+      "id": "baseball-cap",
+      "splats": 84600,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "toss": 0.6666666666666667
+      },
+      "settledFrames": 25,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      }
+    },
+    "after": {
+      "file": "baseball-cap-phone-after-tap.png",
+      "id": "baseball-cap",
+      "splats": 84600,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "toss": 0.6666666666666667
+      },
+      "settledFrames": 27,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      }
+    },
+    "differentPixels": 0,
+    "pixels": 251550,
+    "rmsRGB": 0,
+    "maxChannelDifference": 0,
+    "diff": "baseball-cap-phone-diff-tap.png",
+    "tapChangedPixels": 21389
+  },
+  {
+    "captureVersion": 2,
+    "id": "pyrite-cubes",
+    "device": "desktop",
+    "pose": "rest",
+    "before": {
+      "file": "pyrite-cubes-desktop-before-rest.png",
+      "id": "pyrite-cubes",
+      "splats": 256191,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "tap": 0
+      },
+      "settledFrames": 23,
+      "canvas": {
+        "width": 1072,
+        "height": 900
+      }
+    },
+    "after": {
+      "file": "pyrite-cubes-desktop-after-rest.png",
+      "id": "pyrite-cubes",
+      "splats": 256191,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "tap": 0
+      },
+      "settledFrames": 22,
+      "canvas": {
+        "width": 1072,
+        "height": 900
+      }
+    },
+    "differentPixels": 0,
+    "pixels": 964800,
+    "rmsRGB": 0,
+    "maxChannelDifference": 0,
+    "diff": "pyrite-cubes-desktop-diff-rest.png"
+  },
+  {
+    "captureVersion": 2,
+    "id": "pyrite-cubes",
+    "device": "desktop",
+    "pose": "tap",
+    "before": {
+      "file": "pyrite-cubes-desktop-before-tap.png",
+      "id": "pyrite-cubes",
+      "splats": 256191,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "tap": 0.7142857142857143
+      },
+      "settledFrames": 22,
+      "canvas": {
+        "width": 1072,
+        "height": 900
+      }
+    },
+    "after": {
+      "file": "pyrite-cubes-desktop-after-tap.png",
+      "id": "pyrite-cubes",
+      "splats": 256191,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "tap": 0.7142857142857143
+      },
+      "settledFrames": 22,
+      "canvas": {
+        "width": 1072,
+        "height": 900
+      }
+    },
+    "differentPixels": 0,
+    "pixels": 964800,
+    "rmsRGB": 0,
+    "maxChannelDifference": 0,
+    "diff": "pyrite-cubes-desktop-diff-tap.png",
+    "tapChangedPixels": 162507
+  },
+  {
+    "captureVersion": 2,
+    "id": "water-bottle",
+    "device": "desktop",
+    "pose": "rest",
+    "before": {
+      "file": "water-bottle-desktop-before-rest.png",
+      "id": "water-bottle",
+      "splats": 283780,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "pour": 0
+      },
+      "settledFrames": 22,
+      "canvas": {
+        "width": 1072,
+        "height": 900
+      }
+    },
+    "after": {
+      "file": "water-bottle-desktop-after-rest.png",
+      "id": "water-bottle",
+      "splats": 283780,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "pour": 0
+      },
+      "settledFrames": 22,
+      "canvas": {
+        "width": 1072,
+        "height": 900
+      }
+    },
+    "differentPixels": 0,
+    "pixels": 964800,
+    "rmsRGB": 0,
+    "maxChannelDifference": 0,
+    "diff": "water-bottle-desktop-diff-rest.png"
+  },
+  {
+    "captureVersion": 2,
+    "id": "water-bottle",
+    "device": "desktop",
+    "pose": "tap",
+    "before": {
+      "file": "water-bottle-desktop-before-tap.png",
+      "id": "water-bottle",
+      "splats": 283780,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "pour": 0.7777777777777778
+      },
+      "settledFrames": 20,
+      "canvas": {
+        "width": 1072,
+        "height": 900
+      }
+    },
+    "after": {
+      "file": "water-bottle-desktop-after-tap.png",
+      "id": "water-bottle",
+      "splats": 283780,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "pour": 0.7777777777777778
+      },
+      "settledFrames": 22,
+      "canvas": {
+        "width": 1072,
+        "height": 900
+      }
+    },
+    "differentPixels": 0,
+    "pixels": 964800,
+    "rmsRGB": 0,
+    "maxChannelDifference": 0,
+    "diff": "water-bottle-desktop-diff-tap.png",
+    "tapChangedPixels": 114807
+  },
+  {
+    "captureVersion": 2,
+    "id": "sunglasses",
+    "device": "desktop",
+    "pose": "rest",
+    "before": {
+      "file": "sunglasses-desktop-before-rest.png",
+      "id": "sunglasses",
+      "splats": 294074,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "flip": 0
+      },
+      "settledFrames": 22,
+      "canvas": {
+        "width": 1072,
+        "height": 900
+      }
+    },
+    "after": {
+      "file": "sunglasses-desktop-after-rest.png",
+      "id": "sunglasses",
+      "splats": 294074,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "flip": 0
+      },
+      "settledFrames": 22,
+      "canvas": {
+        "width": 1072,
+        "height": 900
+      }
+    },
+    "differentPixels": 0,
+    "pixels": 964800,
+    "rmsRGB": 0,
+    "maxChannelDifference": 0,
+    "diff": "sunglasses-desktop-diff-rest.png"
+  },
+  {
+    "captureVersion": 2,
+    "id": "sunglasses",
+    "device": "desktop",
+    "pose": "tap",
+    "before": {
+      "file": "sunglasses-desktop-before-tap.png",
+      "id": "sunglasses",
+      "splats": 294074,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "flip": 0.7142857142857143
+      },
+      "settledFrames": 23,
+      "canvas": {
+        "width": 1072,
+        "height": 900
+      }
+    },
+    "after": {
+      "file": "sunglasses-desktop-after-tap.png",
+      "id": "sunglasses",
+      "splats": 294074,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "flip": 0.7142857142857143
+      },
+      "settledFrames": 22,
+      "canvas": {
+        "width": 1072,
+        "height": 900
+      }
+    },
+    "differentPixels": 0,
+    "pixels": 964800,
+    "rmsRGB": 0,
+    "maxChannelDifference": 0,
+    "diff": "sunglasses-desktop-diff-tap.png",
+    "tapChangedPixels": 208295
+  },
+  {
+    "captureVersion": 2,
+    "id": "baseball-cap",
+    "device": "desktop",
+    "pose": "rest",
+    "before": {
+      "file": "baseball-cap-desktop-before-rest.png",
+      "id": "baseball-cap",
+      "splats": 282000,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "toss": 0
+      },
+      "settledFrames": 22,
+      "canvas": {
+        "width": 1072,
+        "height": 900
+      }
+    },
+    "after": {
+      "file": "baseball-cap-desktop-after-rest.png",
+      "id": "baseball-cap",
+      "splats": 282000,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "toss": 0
+      },
+      "settledFrames": 23,
+      "canvas": {
+        "width": 1072,
+        "height": 900
+      }
+    },
+    "differentPixels": 0,
+    "pixels": 964800,
+    "rmsRGB": 0,
+    "maxChannelDifference": 0,
+    "diff": "baseball-cap-desktop-diff-rest.png"
+  },
+  {
+    "captureVersion": 2,
+    "id": "baseball-cap",
+    "device": "desktop",
+    "pose": "tap",
+    "before": {
+      "file": "baseball-cap-desktop-before-tap.png",
+      "id": "baseball-cap",
+      "splats": 282000,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "toss": 0.6666666666666667
+      },
+      "settledFrames": 22,
+      "canvas": {
+        "width": 1072,
+        "height": 900
+      }
+    },
+    "after": {
+      "file": "baseball-cap-desktop-after-tap.png",
+      "id": "baseball-cap",
+      "splats": 282000,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "toss": 0.6666666666666667
+      },
+      "settledFrames": 22,
+      "canvas": {
+        "width": 1072,
+        "height": 900
+      }
+    },
+    "differentPixels": 0,
+    "pixels": 964800,
+    "rmsRGB": 0,
+    "maxChannelDifference": 0,
+    "diff": "baseball-cap-desktop-diff-tap.png",
+    "tapChangedPixels": 107931
+  },
+  {
+    "captureVersion": 2,
+    "id": "fountain-pen",
+    "device": "desktop",
+    "pose": "rest",
+    "before": {
+      "file": "fountain-pen-desktop-before-rest.png",
+      "id": "fountain-pen",
+      "splats": 293727,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "write": 0
+      },
+      "settledFrames": 22,
+      "canvas": {
+        "width": 1072,
+        "height": 900
+      }
+    },
+    "after": {
+      "file": "fountain-pen-desktop-after-rest.png",
+      "id": "fountain-pen",
+      "splats": 293727,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "write": 0
+      },
+      "settledFrames": 23,
+      "canvas": {
+        "width": 1072,
+        "height": 900
+      }
+    },
+    "differentPixels": 0,
+    "pixels": 964800,
+    "rmsRGB": 0,
+    "maxChannelDifference": 0,
+    "diff": "fountain-pen-desktop-diff-rest.png"
+  },
+  {
+    "captureVersion": 2,
+    "id": "fountain-pen",
+    "device": "desktop",
+    "pose": "tap",
+    "before": {
+      "file": "fountain-pen-desktop-before-tap.png",
+      "id": "fountain-pen",
+      "splats": 293727,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "write": 0.75
+      },
+      "settledFrames": 20,
+      "canvas": {
+        "width": 1072,
+        "height": 900
+      }
+    },
+    "after": {
+      "file": "fountain-pen-desktop-after-tap.png",
+      "id": "fountain-pen",
+      "splats": 293727,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "write": 0.75
+      },
+      "settledFrames": 23,
+      "canvas": {
+        "width": 1072,
+        "height": 900
+      }
+    },
+    "differentPixels": 0,
+    "pixels": 964800,
+    "rmsRGB": 0,
+    "maxChannelDifference": 0,
+    "diff": "fountain-pen-desktop-diff-tap.png",
+    "tapChangedPixels": 26713
+  },
+  {
+    "captureVersion": 2,
+    "id": "soda-can",
+    "device": "desktop",
+    "pose": "rest",
+    "before": {
+      "file": "soda-can-desktop-before-rest.png",
+      "id": "soda-can",
+      "splats": 296278,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "open": 0
+      },
+      "settledFrames": 23,
+      "canvas": {
+        "width": 1072,
+        "height": 900
+      }
+    },
+    "after": {
+      "file": "soda-can-desktop-after-rest.png",
+      "id": "soda-can",
+      "splats": 296278,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "open": 0
+      },
+      "settledFrames": 23,
+      "canvas": {
+        "width": 1072,
+        "height": 900
+      }
+    },
+    "differentPixels": 0,
+    "pixels": 964800,
+    "rmsRGB": 0,
+    "maxChannelDifference": 0,
+    "diff": "soda-can-desktop-diff-rest.png"
+  },
+  {
+    "captureVersion": 2,
+    "id": "soda-can",
+    "device": "desktop",
+    "pose": "tap",
+    "before": {
+      "file": "soda-can-desktop-before-tap.png",
+      "id": "soda-can",
+      "splats": 296278,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "open": 0.75
+      },
+      "settledFrames": 22,
+      "canvas": {
+        "width": 1072,
+        "height": 900
+      }
+    },
+    "after": {
+      "file": "soda-can-desktop-after-tap.png",
+      "id": "soda-can",
+      "splats": 296278,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "open": 0.75
+      },
+      "settledFrames": 22,
+      "canvas": {
+        "width": 1072,
+        "height": 900
+      }
+    },
+    "differentPixels": 0,
+    "pixels": 964800,
+    "rmsRGB": 0,
+    "maxChannelDifference": 0,
+    "diff": "soda-can-desktop-diff-tap.png",
+    "tapChangedPixels": 4664
+  },
+  {
+    "captureVersion": 2,
+    "id": "water-bottle",
+    "device": "phone-mid",
+    "pose": "rest",
+    "before": {
+      "file": "water-bottle-phone-mid-before-rest.png",
+      "id": "water-bottle",
+      "splats": 198766,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "pour": 0
+      },
+      "settledFrames": 22,
+      "canvas": {
+        "width": 1170,
+        "height": 1935
+      }
+    },
+    "after": {
+      "file": "water-bottle-phone-mid-after-rest.png",
+      "id": "water-bottle",
+      "splats": 198766,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "pour": 0
+      },
+      "settledFrames": 23,
+      "canvas": {
+        "width": 1170,
+        "height": 1935
+      }
+    },
+    "differentPixels": 0,
+    "pixels": 251550,
+    "rmsRGB": 0,
+    "maxChannelDifference": 0,
+    "diff": "water-bottle-phone-mid-diff-rest.png"
+  },
+  {
+    "captureVersion": 2,
+    "id": "water-bottle",
+    "device": "phone-mid",
+    "pose": "tap",
+    "before": {
+      "file": "water-bottle-phone-mid-before-tap.png",
+      "id": "water-bottle",
+      "splats": 198766,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "pour": 0.7777777777777778
+      },
+      "settledFrames": 21,
+      "canvas": {
+        "width": 1170,
+        "height": 1935
+      }
+    },
+    "after": {
+      "file": "water-bottle-phone-mid-after-tap.png",
+      "id": "water-bottle",
+      "splats": 198766,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "pour": 0.7777777777777778
+      },
+      "settledFrames": 19,
+      "canvas": {
+        "width": 1170,
+        "height": 1935
+      }
+    },
+    "differentPixels": 0,
+    "pixels": 251550,
+    "rmsRGB": 0,
+    "maxChannelDifference": 0,
+    "diff": "water-bottle-phone-mid-diff-tap.png",
+    "tapChangedPixels": 21769
+  },
+  {
+    "captureVersion": 2,
+    "id": "sunglasses",
+    "device": "phone-mid",
+    "pose": "rest",
+    "before": {
+      "file": "sunglasses-phone-mid-before-rest.png",
+      "id": "sunglasses",
+      "splats": 205874,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "flip": 0
+      },
+      "settledFrames": 20,
+      "canvas": {
+        "width": 1170,
+        "height": 1935
+      }
+    },
+    "after": {
+      "file": "sunglasses-phone-mid-after-rest.png",
+      "id": "sunglasses",
+      "splats": 205874,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "flip": 0
+      },
+      "settledFrames": 23,
+      "canvas": {
+        "width": 1170,
+        "height": 1935
+      }
+    },
+    "differentPixels": 0,
+    "pixels": 251550,
+    "rmsRGB": 0,
+    "maxChannelDifference": 0,
+    "diff": "sunglasses-phone-mid-diff-rest.png"
+  },
+  {
+    "captureVersion": 2,
+    "id": "sunglasses",
+    "device": "phone-mid",
+    "pose": "tap",
+    "before": {
+      "file": "sunglasses-phone-mid-before-tap.png",
+      "id": "sunglasses",
+      "splats": 205874,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "flip": 0.7142857142857143
+      },
+      "settledFrames": 23,
+      "canvas": {
+        "width": 1170,
+        "height": 1935
+      }
+    },
+    "after": {
+      "file": "sunglasses-phone-mid-after-tap.png",
+      "id": "sunglasses",
+      "splats": 205874,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "flip": 0.7142857142857143
+      },
+      "settledFrames": 24,
+      "canvas": {
+        "width": 1170,
+        "height": 1935
+      }
+    },
+    "differentPixels": 0,
+    "pixels": 251550,
+    "rmsRGB": 0,
+    "maxChannelDifference": 0,
+    "diff": "sunglasses-phone-mid-diff-tap.png",
+    "tapChangedPixels": 37871
+  },
+  {
+    "captureVersion": 2,
+    "id": "baseball-cap",
+    "device": "phone-mid",
+    "pose": "rest",
+    "before": {
+      "file": "baseball-cap-phone-mid-before-rest.png",
+      "id": "baseball-cap",
+      "splats": 197400,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "toss": 0
+      },
+      "settledFrames": 22,
+      "canvas": {
+        "width": 1170,
+        "height": 1935
+      }
+    },
+    "after": {
+      "file": "baseball-cap-phone-mid-after-rest.png",
+      "id": "baseball-cap",
+      "splats": 197400,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "toss": 0
+      },
+      "settledFrames": 23,
+      "canvas": {
+        "width": 1170,
+        "height": 1935
+      }
+    },
+    "differentPixels": 0,
+    "pixels": 251550,
+    "rmsRGB": 0,
+    "maxChannelDifference": 0,
+    "diff": "baseball-cap-phone-mid-diff-rest.png"
+  },
+  {
+    "captureVersion": 2,
+    "id": "baseball-cap",
+    "device": "phone-mid",
+    "pose": "tap",
+    "before": {
+      "file": "baseball-cap-phone-mid-before-tap.png",
+      "id": "baseball-cap",
+      "splats": 197400,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "toss": 0.6666666666666667
+      },
+      "settledFrames": 22,
+      "canvas": {
+        "width": 1170,
+        "height": 1935
+      }
+    },
+    "after": {
+      "file": "baseball-cap-phone-mid-after-tap.png",
+      "id": "baseball-cap",
+      "splats": 197400,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "toss": 0.6666666666666667
+      },
+      "settledFrames": 23,
+      "canvas": {
+        "width": 1170,
+        "height": 1935
+      }
+    },
+    "differentPixels": 0,
+    "pixels": 251550,
+    "rmsRGB": 0,
+    "maxChannelDifference": 0,
+    "diff": "baseball-cap-phone-mid-diff-tap.png",
+    "tapChangedPixels": 20452
+  },
+  {
+    "captureVersion": 2,
+    "id": "fountain-pen",
+    "device": "phone-mid",
+    "pose": "rest",
+    "before": {
+      "file": "fountain-pen-phone-mid-before-rest.png",
+      "id": "fountain-pen",
+      "splats": 206803,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "write": 0
+      },
+      "settledFrames": 22,
+      "canvas": {
+        "width": 1170,
+        "height": 1935
+      }
+    },
+    "after": {
+      "file": "fountain-pen-phone-mid-after-rest.png",
+      "id": "fountain-pen",
+      "splats": 206803,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "write": 0
+      },
+      "settledFrames": 23,
+      "canvas": {
+        "width": 1170,
+        "height": 1935
+      }
+    },
+    "differentPixels": 0,
+    "pixels": 251550,
+    "rmsRGB": 0,
+    "maxChannelDifference": 0,
+    "diff": "fountain-pen-phone-mid-diff-rest.png"
+  },
+  {
+    "captureVersion": 2,
+    "id": "fountain-pen",
+    "device": "phone-mid",
+    "pose": "tap",
+    "before": {
+      "file": "fountain-pen-phone-mid-before-tap.png",
+      "id": "fountain-pen",
+      "splats": 206803,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "write": 0.75
+      },
+      "settledFrames": 24,
+      "canvas": {
+        "width": 1170,
+        "height": 1935
+      }
+    },
+    "after": {
+      "file": "fountain-pen-phone-mid-after-tap.png",
+      "id": "fountain-pen",
+      "splats": 206803,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "write": 0.75
+      },
+      "settledFrames": 23,
+      "canvas": {
+        "width": 1170,
+        "height": 1935
+      }
+    },
+    "differentPixels": 0,
+    "pixels": 251550,
+    "rmsRGB": 0,
+    "maxChannelDifference": 0,
+    "diff": "fountain-pen-phone-mid-diff-tap.png",
+    "tapChangedPixels": 4932
+  },
+  {
+    "captureVersion": 2,
+    "id": "soda-can",
+    "device": "phone-mid",
+    "pose": "rest",
+    "before": {
+      "file": "soda-can-phone-mid-before-rest.png",
+      "id": "soda-can",
+      "splats": 207584,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "open": 0
+      },
+      "settledFrames": 24,
+      "canvas": {
+        "width": 1170,
+        "height": 1935
+      }
+    },
+    "after": {
+      "file": "soda-can-phone-mid-after-rest.png",
+      "id": "soda-can",
+      "splats": 207584,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "open": 0
+      },
+      "settledFrames": 24,
+      "canvas": {
+        "width": 1170,
+        "height": 1935
+      }
+    },
+    "differentPixels": 0,
+    "pixels": 251550,
+    "rmsRGB": 0,
+    "maxChannelDifference": 0,
+    "diff": "soda-can-phone-mid-diff-rest.png"
+  },
+  {
+    "captureVersion": 2,
+    "id": "soda-can",
+    "device": "phone-mid",
+    "pose": "tap",
+    "before": {
+      "file": "soda-can-phone-mid-before-tap.png",
+      "id": "soda-can",
+      "splats": 207584,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "open": 0.75
+      },
+      "settledFrames": 23,
+      "canvas": {
+        "width": 1170,
+        "height": 1935
+      }
+    },
+    "after": {
+      "file": "soda-can-phone-mid-after-tap.png",
+      "id": "soda-can",
+      "splats": 207584,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "open": 0.75
+      },
+      "settledFrames": 23,
+      "canvas": {
+        "width": 1170,
+        "height": 1935
+      }
+    },
+    "differentPixels": 0,
+    "pixels": 251550,
+    "rmsRGB": 0,
+    "maxChannelDifference": 0,
+    "diff": "soda-can-phone-mid-diff-tap.png",
+    "tapChangedPixels": 913
+  },
+  {
+    "captureVersion": 2,
+    "id": "celestial-globe",
+    "device": "phone",
+    "pose": "rest",
+    "before": {
+      "file": "celestial-globe-phone-before-rest.png",
+      "id": "celestial-globe",
+      "splats": 77400,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "tap": 0
+      },
+      "settledFrames": 28,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      }
+    },
+    "after": {
+      "file": "celestial-globe-phone-after-rest.png",
+      "id": "celestial-globe",
+      "splats": 77400,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "tap": 0
+      },
+      "settledFrames": 28,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      }
+    },
+    "differentPixels": 0,
+    "pixels": 251550,
+    "rmsRGB": 0,
+    "maxChannelDifference": 0,
+    "diff": "celestial-globe-phone-diff-rest.png"
+  },
+  {
+    "captureVersion": 2,
+    "id": "celestial-globe",
+    "device": "phone",
+    "pose": "tap",
+    "before": {
+      "file": "celestial-globe-phone-before-tap.png",
+      "id": "celestial-globe",
+      "splats": 77400,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "tap": 0.7222222222222222
+      },
+      "settledFrames": 27,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      }
+    },
+    "after": {
+      "file": "celestial-globe-phone-after-tap.png",
+      "id": "celestial-globe",
+      "splats": 77400,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "tap": 0.7222222222222222
+      },
+      "settledFrames": 29,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      }
+    },
+    "differentPixels": 0,
+    "pixels": 251550,
+    "rmsRGB": 0,
+    "maxChannelDifference": 0,
+    "diff": "celestial-globe-phone-diff-tap.png",
+    "tapChangedPixels": 12701
+  },
+  {
+    "captureVersion": 2,
+    "id": "celestial-globe",
+    "device": "desktop",
+    "pose": "rest",
+    "before": {
+      "file": "celestial-globe-desktop-before-rest.png",
+      "id": "celestial-globe",
+      "splats": 258000,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "tap": 0
+      },
+      "settledFrames": 23,
+      "canvas": {
+        "width": 1072,
+        "height": 900
+      }
+    },
+    "after": {
+      "file": "celestial-globe-desktop-after-rest.png",
+      "id": "celestial-globe",
+      "splats": 258000,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "tap": 0
+      },
+      "settledFrames": 24,
+      "canvas": {
+        "width": 1072,
+        "height": 900
+      }
+    },
+    "differentPixels": 0,
+    "pixels": 964800,
+    "rmsRGB": 0,
+    "maxChannelDifference": 0,
+    "diff": "celestial-globe-desktop-diff-rest.png"
+  },
+  {
+    "captureVersion": 2,
+    "id": "celestial-globe",
+    "device": "desktop",
+    "pose": "tap",
+    "before": {
+      "file": "celestial-globe-desktop-before-tap.png",
+      "id": "celestial-globe",
+      "splats": 258000,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "tap": 0.7222222222222222
+      },
+      "settledFrames": 25,
+      "canvas": {
+        "width": 1072,
+        "height": 900
+      }
+    },
+    "after": {
+      "file": "celestial-globe-desktop-after-tap.png",
+      "id": "celestial-globe",
+      "splats": 258000,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "tap": 0.7222222222222222
+      },
+      "settledFrames": 23,
+      "canvas": {
+        "width": 1072,
+        "height": 900
+      }
+    },
+    "differentPixels": 0,
+    "pixels": 964800,
+    "rmsRGB": 0,
+    "maxChannelDifference": 0,
+    "diff": "celestial-globe-desktop-diff-tap.png",
+    "tapChangedPixels": 66104
+  }
+]
