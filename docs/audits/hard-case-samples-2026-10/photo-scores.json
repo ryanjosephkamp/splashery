@@ -1,0 +1,3522 @@
+[
+  {
+    "prompt": "C57-P01",
+    "file": "cdx-hard-glass-jug",
+    "name": "Glass jug",
+    "category": "glass-water",
+    "sha256": "94d271cb99f65a62cac14f1f8298141673eadb50cc721e7284ded692722af669",
+    "depthSha256": "6d2f0b709538fb1f2ef504a7a2284ec84a27ebaab789bb03ea0492bb2dae2bde",
+    "poses": [
+      {
+        "axis": "yaw",
+        "degrees": -30,
+        "holePixels": 30,
+        "area": 61484,
+        "holeFraction": 0.00048793181966039944,
+        "edgeSamples": 4701,
+        "haloExcursion": 0.09029534809031088
+      },
+      {
+        "axis": "yaw",
+        "degrees": -20,
+        "holePixels": 36,
+        "area": 64680,
+        "holeFraction": 0.0005565862708719852,
+        "edgeSamples": 4686,
+        "haloExcursion": 0.09116182537889314
+      },
+      {
+        "axis": "yaw",
+        "degrees": 20,
+        "holePixels": 159,
+        "area": 65253,
+        "holeFraction": 0.002436669578410188,
+        "edgeSamples": 4608,
+        "haloExcursion": 0.09478826252723323
+      },
+      {
+        "axis": "yaw",
+        "degrees": 30,
+        "holePixels": 208,
+        "area": 62048,
+        "holeFraction": 0.0033522434244455906,
+        "edgeSamples": 4626,
+        "haloExcursion": 0.09159906072243017
+      },
+      {
+        "axis": "pitch",
+        "degrees": -30,
+        "holePixels": 85,
+        "area": 49793,
+        "holeFraction": 0.001707067258449983,
+        "edgeSamples": 3903,
+        "haloExcursion": 0.09551325526367405
+      },
+      {
+        "axis": "pitch",
+        "degrees": -20,
+        "holePixels": 29,
+        "area": 55010,
+        "holeFraction": 0.000527176876931467,
+        "edgeSamples": 4023,
+        "haloExcursion": 0.08032440915715072
+      },
+      {
+        "axis": "pitch",
+        "degrees": 20,
+        "holePixels": 134,
+        "area": 69071,
+        "holeFraction": 0.001940032719954829,
+        "edgeSamples": 4713,
+        "haloExcursion": 0.09737355583014073
+      },
+      {
+        "axis": "pitch",
+        "degrees": 30,
+        "holePixels": 300,
+        "area": 68776,
+        "holeFraction": 0.004361986739560311,
+        "edgeSamples": 4653,
+        "haloExcursion": 0.09593389042700749
+      }
+    ],
+    "edgeCount": 240,
+    "score": 96.81664421542055,
+    "splats": 199498,
+    "pieces": 6,
+    "kept": true,
+    "reason": "Highest measured score with a two-per-category coverage floor."
+  },
+  {
+    "prompt": "C57-P02",
+    "file": "cdx-hard-fish-bowl",
+    "name": "Fish bowl",
+    "category": "glass-water",
+    "sha256": "15f0194b2152efa56a4dcb520c1554aced6641a969ea06e293f3b54d78f41ccc",
+    "depthSha256": "28ff32c71cea4d4f5f77dd30d3eb8ec9093319408c133bbfaa31427dfa2d0c29",
+    "poses": [
+      {
+        "axis": "yaw",
+        "degrees": -30,
+        "holePixels": 135,
+        "area": 59054,
+        "holeFraction": 0.0022860432824194804,
+        "edgeSamples": 3468,
+        "haloExcursion": 0.10477305108894813
+      },
+      {
+        "axis": "yaw",
+        "degrees": -20,
+        "holePixels": 124,
+        "area": 62865,
+        "holeFraction": 0.001972480712638193,
+        "edgeSamples": 3426,
+        "haloExcursion": 0.11598044938932996
+      },
+      {
+        "axis": "yaw",
+        "degrees": 20,
+        "holePixels": 546,
+        "area": 65203,
+        "holeFraction": 0.008373847829087618,
+        "edgeSamples": 3933,
+        "haloExcursion": 0.10658929221319884
+      },
+      {
+        "axis": "yaw",
+        "degrees": 30,
+        "holePixels": 659,
+        "area": 63110,
+        "holeFraction": 0.010442085247979719,
+        "edgeSamples": 4023,
+        "haloExcursion": 0.11563119903691071
+      },
+      {
+        "axis": "pitch",
+        "degrees": -30,
+        "holePixels": 19,
+        "area": 48548,
+        "holeFraction": 0.0003913652467660872,
+        "edgeSamples": 2907,
+        "haloExcursion": 0.07658053245377999
+      },
+      {
+        "axis": "pitch",
+        "degrees": -20,
+        "holePixels": 45,
+        "area": 54840,
+        "holeFraction": 0.0008205689277899343,
+        "edgeSamples": 3033,
+        "haloExcursion": 0.07799305676771243
+      },
+      {
+        "axis": "pitch",
+        "degrees": 20,
+        "holePixels": 664,
+        "area": 68147,
+        "holeFraction": 0.009743642420062511,
+        "edgeSamples": 3870,
+        "haloExcursion": 0.11741602067183488
+      },
+      {
+        "axis": "pitch",
+        "degrees": 30,
+        "holePixels": 912,
+        "area": 67445,
+        "holeFraction": 0.013522129142264068,
+        "edgeSamples": 3744,
+        "haloExcursion": 0.11690757499581061
+      }
+    ],
+    "edgeCount": 240,
+    "score": 95.5462237101672,
+    "splats": 199498,
+    "pieces": 1,
+    "kept": false,
+    "reason": "Lower measured score after category coverage."
+  },
+  {
+    "prompt": "C57-P03",
+    "file": "cdx-hard-rainy-window",
+    "name": "Rainy window",
+    "category": "glass-water",
+    "sha256": "4fe307fb0d800a205222c32d2f02da697e763a5d7b671255e7db4ff76ebbde47",
+    "depthSha256": "64df3c84dcc0cdbbf70ab20f915f94797a57f649ef36164fd4b75c4bb04b2e86",
+    "poses": [
+      {
+        "axis": "yaw",
+        "degrees": -30,
+        "holePixels": 6634,
+        "area": 70289,
+        "holeFraction": 0.09438176670602796,
+        "edgeSamples": 2385,
+        "haloExcursion": 0.11984050643318167
+      },
+      {
+        "axis": "yaw",
+        "degrees": -20,
+        "holePixels": 6181,
+        "area": 74213,
+        "holeFraction": 0.08328729467882985,
+        "edgeSamples": 2451,
+        "haloExcursion": 0.11663426692586487
+      },
+      {
+        "axis": "yaw",
+        "degrees": 20,
+        "holePixels": 4571,
+        "area": 73831,
+        "holeFraction": 0.061911663122536605,
+        "edgeSamples": 2463,
+        "haloExcursion": 0.1147683758846619
+      },
+      {
+        "axis": "yaw",
+        "degrees": 30,
+        "holePixels": 5267,
+        "area": 69654,
+        "holeFraction": 0.0756166192896316,
+        "edgeSamples": 2193,
+        "haloExcursion": 0.11084645440483602
+      },
+      {
+        "axis": "pitch",
+        "degrees": -30,
+        "holePixels": 13814,
+        "area": 73157,
+        "holeFraction": 0.18882676982380361,
+        "edgeSamples": 2061,
+        "haloExcursion": 0.11479673868577091
+      },
+      {
+        "axis": "pitch",
+        "degrees": -20,
+        "holePixels": 11349,
+        "area": 75269,
+        "holeFraction": 0.15077920525050154,
+        "edgeSamples": 2190,
+        "haloExcursion": 0.11414629778852224
+      },
+      {
+        "axis": "pitch",
+        "degrees": 20,
+        "holePixels": 6061,
+        "area": 77797,
+        "holeFraction": 0.07790788847899019,
+        "edgeSamples": 2583,
+        "haloExcursion": 0.11236819931224597
+      },
+      {
+        "axis": "pitch",
+        "degrees": 30,
+        "holePixels": 8251,
+        "area": 76660,
+        "holeFraction": 0.10763109835637881,
+        "edgeSamples": 2163,
+        "haloExcursion": 0.12727783670102402
+      }
+    ],
+    "edgeCount": 240,
+    "score": 83.33822395176063,
+    "splats": 199498,
+    "pieces": 1,
+    "kept": false,
+    "reason": "Lower measured score after category coverage."
+  },
+  {
+    "prompt": "C57-P04",
+    "file": "cdx-hard-water-carafe",
+    "name": "Water carafe",
+    "category": "glass-water",
+    "sha256": "84567814b91dbe258c3b991f3c7a92d6951db7135823165145f03deb7d9d8c1d",
+    "depthSha256": "9ca1b0d6034462547abdfdeaf93438e33e119b0f3c6f934a6a5feabda0c63cc0",
+    "poses": [
+      {
+        "axis": "yaw",
+        "degrees": -30,
+        "holePixels": 106,
+        "area": 58948,
+        "holeFraction": 0.0017981950193390786,
+        "edgeSamples": 4194,
+        "haloExcursion": 0.08291022656082067
+      },
+      {
+        "axis": "yaw",
+        "degrees": -20,
+        "holePixels": 151,
+        "area": 62811,
+        "holeFraction": 0.0024040375093534573,
+        "edgeSamples": 4191,
+        "haloExcursion": 0.09419156829995251
+      },
+      {
+        "axis": "yaw",
+        "degrees": 20,
+        "holePixels": 504,
+        "area": 66679,
+        "holeFraction": 0.0075586016586931416,
+        "edgeSamples": 4305,
+        "haloExcursion": 0.09488920771560694
+      },
+      {
+        "axis": "yaw",
+        "degrees": 30,
+        "holePixels": 751,
+        "area": 64585,
+        "holeFraction": 0.011628087017109236,
+        "edgeSamples": 4287,
+        "haloExcursion": 0.09940952354816467
+      },
+      {
+        "axis": "pitch",
+        "degrees": -30,
+        "holePixels": 14,
+        "area": 50637,
+        "holeFraction": 0.00027647767442778994,
+        "edgeSamples": 3480,
+        "haloExcursion": 0.12092630155510511
+      },
+      {
+        "axis": "pitch",
+        "degrees": -20,
+        "holePixels": 15,
+        "area": 54892,
+        "holeFraction": 0.0002732638635866793,
+        "edgeSamples": 3600,
+        "haloExcursion": 0.11690522875817046
+      },
+      {
+        "axis": "pitch",
+        "degrees": 20,
+        "holePixels": 563,
+        "area": 68775,
+        "holeFraction": 0.008186114140312614,
+        "edgeSamples": 4395,
+        "haloExcursion": 0.0759365589239113
+      },
+      {
+        "axis": "pitch",
+        "degrees": 30,
+        "holePixels": 718,
+        "area": 68365,
+        "holeFraction": 0.010502450084107365,
+        "edgeSamples": 4398,
+        "haloExcursion": 0.07438229498256821
+      }
+    ],
+    "edgeCount": 240,
+    "score": 96.20374820235742,
+    "splats": 199498,
+    "pieces": 4,
+    "kept": false,
+    "reason": "Lower measured score after category coverage."
+  },
+  {
+    "prompt": "C57-P05",
+    "file": "cdx-hard-submerged-stones",
+    "name": "Stones under water",
+    "category": "glass-water",
+    "sha256": "6d0cd04fbefe956f1d4ef650555fdfbb3d3a2c32a19bd099527b28f8b92a4420",
+    "depthSha256": "672dd60fe6134b81e34fbd9dbc722fe07b889da1185c3199f3b4133bf5efbc62",
+    "poses": [
+      {
+        "axis": "yaw",
+        "degrees": -30,
+        "holePixels": 16,
+        "area": 58762,
+        "holeFraction": 0.0002722848099111671,
+        "edgeSamples": 2805,
+        "haloExcursion": 0.10937611408199696
+      },
+      {
+        "axis": "yaw",
+        "degrees": -20,
+        "holePixels": 40,
+        "area": 62555,
+        "holeFraction": 0.0006394372951802414,
+        "edgeSamples": 2688,
+        "haloExcursion": 0.0956889005602245
+      },
+      {
+        "axis": "yaw",
+        "degrees": 20,
+        "holePixels": 284,
+        "area": 64432,
+        "holeFraction": 0.004407747703004718,
+        "edgeSamples": 2211,
+        "haloExcursion": 0.08360514716967796
+      },
+      {
+        "axis": "yaw",
+        "degrees": 30,
+        "holePixels": 410,
+        "area": 62537,
+        "holeFraction": 0.006556118777683612,
+        "edgeSamples": 2190,
+        "haloExcursion": 0.08775897573641368
+      },
+      {
+        "axis": "pitch",
+        "degrees": -30,
+        "holePixels": 2,
+        "area": 49475,
+        "holeFraction": 0.0000404244567963618,
+        "edgeSamples": 1953,
+        "haloExcursion": 0.07087939118299688
+      },
+      {
+        "axis": "pitch",
+        "degrees": -20,
+        "holePixels": 12,
+        "area": 54784,
+        "holeFraction": 0.00021904205607476635,
+        "edgeSamples": 1989,
+        "haloExcursion": 0.09209081319808009
+      },
+      {
+        "axis": "pitch",
+        "degrees": 20,
+        "holePixels": 579,
+        "area": 67574,
+        "holeFraction": 0.008568384289815609,
+        "edgeSamples": 2568,
+        "haloExcursion": 0.0878749007391122
+      },
+      {
+        "axis": "pitch",
+        "degrees": 30,
+        "holePixels": 966,
+        "area": 66739,
+        "holeFraction": 0.01447429538950239,
+        "edgeSamples": 2376,
+        "haloExcursion": 0.08739519376774324
+      }
+    ],
+    "edgeCount": 240,
+    "score": 96.36494350970254,
+    "splats": 199498,
+    "pieces": 1,
+    "kept": true,
+    "reason": "Highest measured score with a two-per-category coverage floor."
+  },
+  {
+    "prompt": "C57-P06",
+    "file": "cdx-hard-glass-terrarium",
+    "name": "Glass terrarium",
+    "category": "glass-water",
+    "sha256": "6e311daf8faf16a44d2bd74a5c6387db0f7e2c8aa43c21fdd706fc507e7dbf18",
+    "depthSha256": "99504da5d29031b6c1844e08de7781def9bb240d51b8a3270fe7f7d0809a45d5",
+    "poses": [
+      {
+        "axis": "yaw",
+        "degrees": -30,
+        "holePixels": 631,
+        "area": 59033,
+        "holeFraction": 0.010688936696424034,
+        "edgeSamples": 3021,
+        "haloExcursion": 0.11271296999435372
+      },
+      {
+        "axis": "yaw",
+        "degrees": -20,
+        "holePixels": 491,
+        "area": 62357,
+        "holeFraction": 0.007874015748031496,
+        "edgeSamples": 3060,
+        "haloExcursion": 0.10176086120722835
+      },
+      {
+        "axis": "yaw",
+        "degrees": 20,
+        "holePixels": 950,
+        "area": 63079,
+        "holeFraction": 0.015060479715911793,
+        "edgeSamples": 3192,
+        "haloExcursion": 0.10884195783576633
+      },
+      {
+        "axis": "yaw",
+        "degrees": 30,
+        "holePixels": 1207,
+        "area": 61141,
+        "holeFraction": 0.01974125382313014,
+        "edgeSamples": 3264,
+        "haloExcursion": 0.1084751057285664
+      },
+      {
+        "axis": "pitch",
+        "degrees": -30,
+        "holePixels": 408,
+        "area": 50424,
+        "holeFraction": 0.00809138505473584,
+        "edgeSamples": 2748,
+        "haloExcursion": 0.08123269686331626
+      },
+      {
+        "axis": "pitch",
+        "degrees": -20,
+        "holePixels": 465,
+        "area": 55345,
+        "holeFraction": 0.00840184298491282,
+        "edgeSamples": 2817,
+        "haloExcursion": 0.07611072828137343
+      },
+      {
+        "axis": "pitch",
+        "degrees": 20,
+        "holePixels": 1724,
+        "area": 66646,
+        "holeFraction": 0.025868019085916634,
+        "edgeSamples": 3165,
+        "haloExcursion": 0.11148034569277991
+      },
+      {
+        "axis": "pitch",
+        "degrees": 30,
+        "holePixels": 2076,
+        "area": 65797,
+        "holeFraction": 0.031551590498047025,
+        "edgeSamples": 3105,
+        "haloExcursion": 0.11874585583025497
+      }
+    ],
+    "edgeCount": 240,
+    "score": 94.22901299022905,
+    "splats": 199498,
+    "pieces": 5,
+    "kept": false,
+    "reason": "Lower measured score after category coverage."
+  },
+  {
+    "prompt": "C57-P07",
+    "file": "cdx-hard-cat-on-rug",
+    "name": "Cat on a rug",
+    "category": "hair-fur",
+    "sha256": "a8cec0f327259196b7c71bec2a47e771459707123ff11f5463b37aedc7fa34c3",
+    "depthSha256": "410712a371cd97a7ad826a9a6a9512eea3e20faaac2aeb5b6d6623f061572e0c",
+    "poses": [
+      {
+        "axis": "yaw",
+        "degrees": -30,
+        "holePixels": 180,
+        "area": 62824,
+        "holeFraction": 0.002865147077549981,
+        "edgeSamples": 4953,
+        "haloExcursion": 0.12170560127947848
+      },
+      {
+        "axis": "yaw",
+        "degrees": -20,
+        "holePixels": 187,
+        "area": 66129,
+        "holeFraction": 0.002827806257466467,
+        "edgeSamples": 4899,
+        "haloExcursion": 0.1170651073248244
+      },
+      {
+        "axis": "yaw",
+        "degrees": 20,
+        "holePixels": 130,
+        "area": 65990,
+        "holeFraction": 0.001969995453856645,
+        "edgeSamples": 4644,
+        "haloExcursion": 0.103568593673473
+      },
+      {
+        "axis": "yaw",
+        "degrees": 30,
+        "holePixels": 142,
+        "area": 62794,
+        "holeFraction": 0.0022613625505621556,
+        "edgeSamples": 4641,
+        "haloExcursion": 0.10234947674394067
+      },
+      {
+        "axis": "pitch",
+        "degrees": -30,
+        "holePixels": 556,
+        "area": 49615,
+        "holeFraction": 0.011206288420840472,
+        "edgeSamples": 3978,
+        "haloExcursion": 0.11874229832707354
+      },
+      {
+        "axis": "pitch",
+        "degrees": -20,
+        "holePixels": 157,
+        "area": 54819,
+        "holeFraction": 0.0028639705211696673,
+        "edgeSamples": 4266,
+        "haloExcursion": 0.11159923885165922
+      },
+      {
+        "axis": "pitch",
+        "degrees": 20,
+        "holePixels": 41,
+        "area": 69617,
+        "holeFraction": 0.0005889366103107,
+        "edgeSamples": 4929,
+        "haloExcursion": 0.11236499468929406
+      },
+      {
+        "axis": "pitch",
+        "degrees": 30,
+        "holePixels": 47,
+        "area": 69393,
+        "holeFraction": 0.0006773017451327944,
+        "edgeSamples": 4932,
+        "haloExcursion": 0.11661339312691871
+      }
+    ],
+    "edgeCount": 240,
+    "score": 95.65329086072896,
+    "splats": 199498,
+    "pieces": 5,
+    "kept": false,
+    "reason": "Lower measured score after category coverage."
+  },
+  {
+    "prompt": "C57-P08",
+    "file": "cdx-hard-long-haired-dog",
+    "name": "Dog in grass",
+    "category": "hair-fur",
+    "sha256": "a78425af753956b0e64ea641baae42b24257f5da718145d5cf054a58b507ae16",
+    "depthSha256": "431608e8ec50c367bac322b61426ef6c1ebaa2957546f4a9bc42bb50ce841d55",
+    "poses": [
+      {
+        "axis": "yaw",
+        "degrees": -30,
+        "holePixels": 1177,
+        "area": 60626,
+        "holeFraction": 0.01941411275690298,
+        "edgeSamples": 4368,
+        "haloExcursion": 0.09755171299288992
+      },
+      {
+        "axis": "yaw",
+        "degrees": -20,
+        "holePixels": 1165,
+        "area": 64203,
+        "holeFraction": 0.01814556952167344,
+        "edgeSamples": 4320,
+        "haloExcursion": 0.09509440813362435
+      },
+      {
+        "axis": "yaw",
+        "degrees": 20,
+        "holePixels": 1690,
+        "area": 66029,
+        "holeFraction": 0.02559481439973345,
+        "edgeSamples": 4278,
+        "haloExcursion": 0.09528641751230683
+      },
+      {
+        "axis": "yaw",
+        "degrees": 30,
+        "holePixels": 1758,
+        "area": 62989,
+        "holeFraction": 0.02790963501563765,
+        "edgeSamples": 4287,
+        "haloExcursion": 0.08917246394709079
+      },
+      {
+        "axis": "pitch",
+        "degrees": -30,
+        "holePixels": 494,
+        "area": 47698,
+        "holeFraction": 0.010356828378548366,
+        "edgeSamples": 4182,
+        "haloExcursion": 0.11028122391950601
+      },
+      {
+        "axis": "pitch",
+        "degrees": -20,
+        "holePixels": 560,
+        "area": 53201,
+        "holeFraction": 0.010526117930114095,
+        "edgeSamples": 4215,
+        "haloExcursion": 0.09958086200079116
+      },
+      {
+        "axis": "pitch",
+        "degrees": 20,
+        "holePixels": 3430,
+        "area": 69645,
+        "holeFraction": 0.04924976667384593,
+        "edgeSamples": 4266,
+        "haloExcursion": 0.09848505740786755
+      },
+      {
+        "axis": "pitch",
+        "degrees": 30,
+        "holePixels": 4217,
+        "area": 69597,
+        "holeFraction": 0.06059169217063954,
+        "edgeSamples": 4233,
+        "haloExcursion": 0.1010584436940385
+      }
+    ],
+    "edgeCount": 240,
+    "score": 92.72682823723407,
+    "splats": 199498,
+    "pieces": 1,
+    "kept": false,
+    "reason": "Lower measured score after category coverage."
+  },
+  {
+    "prompt": "C57-P09",
+    "file": "cdx-hard-curled-cat",
+    "name": "Curled cat",
+    "category": "hair-fur",
+    "sha256": "37956a972379eefbb7a79da843b4ee5e0253fb739c2da6741edd562318dab26e",
+    "depthSha256": "12fc2df0c259d70b22f13e45bf0691dd75999f4d934618fe700e9adf4902cb44",
+    "poses": [
+      {
+        "axis": "yaw",
+        "degrees": -30,
+        "holePixels": 20,
+        "area": 56585,
+        "holeFraction": 0.00035345056110276576,
+        "edgeSamples": 3327,
+        "haloExcursion": 0.14326868108229204
+      },
+      {
+        "axis": "yaw",
+        "degrees": -20,
+        "holePixels": 34,
+        "area": 60933,
+        "holeFraction": 0.0005579899233584429,
+        "edgeSamples": 3297,
+        "haloExcursion": 0.14052109166384208
+      },
+      {
+        "axis": "yaw",
+        "degrees": 20,
+        "holePixels": 269,
+        "area": 64067,
+        "holeFraction": 0.004198729455101691,
+        "edgeSamples": 3234,
+        "haloExcursion": 0.14336886269659405
+      },
+      {
+        "axis": "yaw",
+        "degrees": 30,
+        "holePixels": 345,
+        "area": 62794,
+        "holeFraction": 0.005494155492562984,
+        "edgeSamples": 3273,
+        "haloExcursion": 0.14764891596724267
+      },
+      {
+        "axis": "pitch",
+        "degrees": -30,
+        "holePixels": 11,
+        "area": 51728,
+        "holeFraction": 0.00021265078874110733,
+        "edgeSamples": 3318,
+        "haloExcursion": 0.11936909785011061
+      },
+      {
+        "axis": "pitch",
+        "degrees": -20,
+        "holePixels": 22,
+        "area": 56629,
+        "holeFraction": 0.0003884935280509986,
+        "edgeSamples": 3216,
+        "haloExcursion": 0.15931494488342662
+      },
+      {
+        "axis": "pitch",
+        "degrees": 20,
+        "holePixels": 175,
+        "area": 65973,
+        "holeFraction": 0.0026526003061858637,
+        "edgeSamples": 3135,
+        "haloExcursion": 0.13904368765049932
+      },
+      {
+        "axis": "pitch",
+        "degrees": 30,
+        "holePixels": 203,
+        "area": 64496,
+        "holeFraction": 0.003147482014388489,
+        "edgeSamples": 3048,
+        "haloExcursion": 0.13976120631979908
+      }
+    ],
+    "edgeCount": 240,
+    "score": 95.18594163650332,
+    "splats": 199498,
+    "pieces": 1,
+    "kept": false,
+    "reason": "Lower measured score after category coverage."
+  },
+  {
+    "prompt": "C57-P10",
+    "file": "cdx-hard-rabbit-clover",
+    "name": "Rabbit in clover",
+    "category": "hair-fur",
+    "sha256": "061532105783e83c69289292fdf1d1146ae62e20462309e9b8c148c05adb14eb",
+    "depthSha256": "52c083825623b08c5bdcd1808fb88080a7a350253997b2d154695704f3e09cfa",
+    "poses": [
+      {
+        "axis": "yaw",
+        "degrees": -30,
+        "holePixels": 858,
+        "area": 61168,
+        "holeFraction": 0.014026942191995816,
+        "edgeSamples": 3678,
+        "haloExcursion": 0.0661570120163349
+      },
+      {
+        "axis": "yaw",
+        "degrees": -20,
+        "holePixels": 779,
+        "area": 64650,
+        "holeFraction": 0.012049497293116782,
+        "edgeSamples": 3690,
+        "haloExcursion": 0.07263191455444014
+      },
+      {
+        "axis": "yaw",
+        "degrees": 20,
+        "holePixels": 1242,
+        "area": 66074,
+        "holeFraction": 0.01879710627478282,
+        "edgeSamples": 3489,
+        "haloExcursion": 0.06901466232810168
+      },
+      {
+        "axis": "yaw",
+        "degrees": 30,
+        "holePixels": 1385,
+        "area": 62845,
+        "holeFraction": 0.022038348317288566,
+        "edgeSamples": 3471,
+        "haloExcursion": 0.06827099609650879
+      },
+      {
+        "axis": "pitch",
+        "degrees": -30,
+        "holePixels": 338,
+        "area": 48602,
+        "holeFraction": 0.006954446319081519,
+        "edgeSamples": 3483,
+        "haloExcursion": 0.10020773167148064
+      },
+      {
+        "axis": "pitch",
+        "degrees": -20,
+        "holePixels": 398,
+        "area": 53068,
+        "holeFraction": 0.007499811562523555,
+        "edgeSamples": 3477,
+        "haloExcursion": 0.08641887586210845
+      },
+      {
+        "axis": "pitch",
+        "degrees": 20,
+        "holePixels": 2328,
+        "area": 69734,
+        "holeFraction": 0.033384002064989815,
+        "edgeSamples": 3546,
+        "haloExcursion": 0.07512911537993718
+      },
+      {
+        "axis": "pitch",
+        "degrees": 30,
+        "holePixels": 2973,
+        "area": 69769,
+        "holeFraction": 0.04261204833092061,
+        "edgeSamples": 3507,
+        "haloExcursion": 0.07516283958693307
+      }
+    ],
+    "edgeCount": 240,
+    "score": 94.76227142922757,
+    "splats": 199498,
+    "pieces": 4,
+    "kept": false,
+    "reason": "Lower measured score after category coverage."
+  },
+  {
+    "prompt": "C57-P11",
+    "file": "cdx-hard-backlit-dog",
+    "name": "Backlit dog",
+    "category": "hair-fur",
+    "sha256": "bb015d7434cc474aae1f8136597ff886189dbb669a9a0cc92f676b753ad58740",
+    "depthSha256": "94d2f1044d0e3acdcd2184bfe91785f08b576c59817b5545f05c327d5bd59db1",
+    "poses": [
+      {
+        "axis": "yaw",
+        "degrees": -30,
+        "holePixels": 514,
+        "area": 58196,
+        "holeFraction": 0.00883222214585195,
+        "edgeSamples": 3294,
+        "haloExcursion": 0.0630260604545404
+      },
+      {
+        "axis": "yaw",
+        "degrees": -20,
+        "holePixels": 472,
+        "area": 62314,
+        "holeFraction": 0.00757454183650544,
+        "edgeSamples": 3297,
+        "haloExcursion": 0.06631697264893283
+      },
+      {
+        "axis": "yaw",
+        "degrees": 20,
+        "holePixels": 813,
+        "area": 65744,
+        "holeFraction": 0.012366147481138963,
+        "edgeSamples": 3279,
+        "haloExcursion": 0.07599638818626003
+      },
+      {
+        "axis": "yaw",
+        "degrees": 30,
+        "holePixels": 863,
+        "area": 63249,
+        "holeFraction": 0.01364448449777862,
+        "edgeSamples": 3309,
+        "haloExcursion": 0.08401922267849464
+      },
+      {
+        "axis": "pitch",
+        "degrees": -30,
+        "holePixels": 328,
+        "area": 51064,
+        "holeFraction": 0.006423311922293592,
+        "edgeSamples": 2943,
+        "haloExcursion": 0.08746443871466393
+      },
+      {
+        "axis": "pitch",
+        "degrees": -20,
+        "holePixels": 313,
+        "area": 55713,
+        "holeFraction": 0.005618078365911008,
+        "edgeSamples": 3075,
+        "haloExcursion": 0.07911111111111155
+      },
+      {
+        "axis": "pitch",
+        "degrees": 20,
+        "holePixels": 1353,
+        "area": 67504,
+        "holeFraction": 0.020043256695899504,
+        "edgeSamples": 3291,
+        "haloExcursion": 0.06430371601694501
+      },
+      {
+        "axis": "pitch",
+        "degrees": 30,
+        "holePixels": 1809,
+        "area": 66566,
+        "holeFraction": 0.02717603581407926,
+        "edgeSamples": 3240,
+        "haloExcursion": 0.068992979908013
+      }
+    ],
+    "edgeCount": 240,
+    "score": 96.02788809577406,
+    "splats": 199498,
+    "pieces": 1,
+    "kept": true,
+    "reason": "Highest measured score with a two-per-category coverage floor."
+  },
+  {
+    "prompt": "C57-P12",
+    "file": "cdx-hard-wool-fleece",
+    "name": "Wool fleece",
+    "category": "hair-fur",
+    "sha256": "d97c08aea3c6d0431b9145145315d28d2fb4477c0c0eedb02198cd7b9c1bd9ef",
+    "depthSha256": "278b30121a794565498f42b82a3200f542576430089ee94989f4e808f867ca6f",
+    "poses": [
+      {
+        "axis": "yaw",
+        "degrees": -30,
+        "holePixels": 723,
+        "area": 59904,
+        "holeFraction": 0.012069310897435898,
+        "edgeSamples": 3570,
+        "haloExcursion": 0.050044488383589054
+      },
+      {
+        "axis": "yaw",
+        "degrees": -20,
+        "holePixels": 479,
+        "area": 62491,
+        "holeFraction": 0.007665103774943592,
+        "edgeSamples": 3570,
+        "haloExcursion": 0.05912451255011839
+      },
+      {
+        "axis": "yaw",
+        "degrees": 20,
+        "holePixels": 338,
+        "area": 62422,
+        "holeFraction": 0.005414757617506648,
+        "edgeSamples": 3570,
+        "haloExcursion": 0.0485494589992862
+      },
+      {
+        "axis": "yaw",
+        "degrees": 30,
+        "holePixels": 282,
+        "area": 59674,
+        "holeFraction": 0.004725676173878071,
+        "edgeSamples": 3552,
+        "haloExcursion": 0.0462175410704825
+      },
+      {
+        "axis": "pitch",
+        "degrees": -30,
+        "holePixels": 156,
+        "area": 51518,
+        "holeFraction": 0.0030280678597771654,
+        "edgeSamples": 3390,
+        "haloExcursion": 0.05904910636821126
+      },
+      {
+        "axis": "pitch",
+        "degrees": -20,
+        "holePixels": 93,
+        "area": 55824,
+        "holeFraction": 0.0016659501289767841,
+        "edgeSamples": 3525,
+        "haloExcursion": 0.06210095953274959
+      },
+      {
+        "axis": "pitch",
+        "degrees": 20,
+        "holePixels": 1050,
+        "area": 65960,
+        "holeFraction": 0.015918738629472406,
+        "edgeSamples": 3570,
+        "haloExcursion": 0.03941890481682894
+      },
+      {
+        "axis": "pitch",
+        "degrees": 30,
+        "holePixels": 700,
+        "area": 65267,
+        "holeFraction": 0.010725175050178497,
+        "edgeSamples": 3570,
+        "haloExcursion": 0.036226725984511696
+      }
+    ],
+    "edgeCount": 240,
+    "score": 97.65381358567181,
+    "splats": 199498,
+    "pieces": 6,
+    "kept": true,
+    "reason": "Highest measured score with a two-per-category coverage floor."
+  },
+  {
+    "prompt": "C57-P13",
+    "file": "cdx-hard-bicycle-spokes",
+    "name": "Bicycle spokes",
+    "category": "thin-structures",
+    "sha256": "ec371af0d3f84216ab3192f8c7f3fb30cba2119a6af8e7fe1db48d08ef72da98",
+    "depthSha256": "be24cd837a18800cbff37a20bd9a8939b57c956078287ba11a8dc6565be09dd5",
+    "poses": [
+      {
+        "axis": "yaw",
+        "degrees": -30,
+        "holePixels": 10,
+        "area": 60895,
+        "holeFraction": 0.00016421709499958947,
+        "edgeSamples": 5040,
+        "haloExcursion": 0.07397292250233457
+      },
+      {
+        "axis": "yaw",
+        "degrees": -20,
+        "holePixels": 14,
+        "area": 66004,
+        "holeFraction": 0.00021210835706926852,
+        "edgeSamples": 5040,
+        "haloExcursion": 0.07969810146280776
+      },
+      {
+        "axis": "yaw",
+        "degrees": 20,
+        "holePixels": 100,
+        "area": 70063,
+        "holeFraction": 0.0014272868703880794,
+        "edgeSamples": 5040,
+        "haloExcursion": 0.08775054466230983
+      },
+      {
+        "axis": "yaw",
+        "degrees": 30,
+        "holePixels": 185,
+        "area": 67180,
+        "holeFraction": 0.0027537957725513548,
+        "edgeSamples": 5031,
+        "haloExcursion": 0.09540690853960374
+      },
+      {
+        "axis": "pitch",
+        "degrees": -30,
+        "holePixels": 45,
+        "area": 52743,
+        "holeFraction": 0.0008531937887492179,
+        "edgeSamples": 4935,
+        "haloExcursion": 0.08539086556608512
+      },
+      {
+        "axis": "pitch",
+        "degrees": -20,
+        "holePixels": 43,
+        "area": 58307,
+        "holeFraction": 0.0007374757747783285,
+        "edgeSamples": 4965,
+        "haloExcursion": 0.08028671287246064
+      },
+      {
+        "axis": "pitch",
+        "degrees": 20,
+        "holePixels": 80,
+        "area": 72146,
+        "holeFraction": 0.0011088625842042524,
+        "edgeSamples": 5040,
+        "haloExcursion": 0.09352240896358582
+      },
+      {
+        "axis": "pitch",
+        "degrees": 30,
+        "holePixels": 100,
+        "area": 71793,
+        "holeFraction": 0.0013928934575794297,
+        "edgeSamples": 5040,
+        "haloExcursion": 0.09221521942110192
+      }
+    ],
+    "edgeCount": 240,
+    "score": 96.94502703973329,
+    "splats": 199498,
+    "pieces": 1,
+    "kept": true,
+    "reason": "Highest measured score with a two-per-category coverage floor."
+  },
+  {
+    "prompt": "C57-P14",
+    "file": "cdx-hard-wire-fence",
+    "name": "Wire fence",
+    "category": "thin-structures",
+    "sha256": "eed986488016a78f992c2acb6dbf21b66fde4a9eb85d5470e186bc26f1d04117",
+    "depthSha256": "bb1b6dac5ab6a8a666df15b1f0e7d31595d6f9dc3ed1387e9bd14ad76fbe0464",
+    "poses": [
+      {
+        "axis": "yaw",
+        "degrees": -30,
+        "holePixels": 339,
+        "area": 58926,
+        "holeFraction": 0.005752978311780878,
+        "edgeSamples": 5040,
+        "haloExcursion": 0.0854170557111737
+      },
+      {
+        "axis": "yaw",
+        "degrees": -20,
+        "holePixels": 346,
+        "area": 62720,
+        "holeFraction": 0.0055165816326530615,
+        "edgeSamples": 5040,
+        "haloExcursion": 0.09025521319639003
+      },
+      {
+        "axis": "yaw",
+        "degrees": 20,
+        "holePixels": 1725,
+        "area": 66817,
+        "holeFraction": 0.025816783153987756,
+        "edgeSamples": 4743,
+        "haloExcursion": 0.09853116873989791
+      },
+      {
+        "axis": "yaw",
+        "degrees": 30,
+        "holePixels": 1886,
+        "area": 64691,
+        "holeFraction": 0.029153978142245445,
+        "edgeSamples": 3615,
+        "haloExcursion": 0.09129932470913706
+      },
+      {
+        "axis": "pitch",
+        "degrees": -30,
+        "holePixels": 252,
+        "area": 50774,
+        "holeFraction": 0.004963170126442667,
+        "edgeSamples": 3360,
+        "haloExcursion": 0.09105975723622824
+      },
+      {
+        "axis": "pitch",
+        "degrees": -20,
+        "holePixels": 325,
+        "area": 56485,
+        "holeFraction": 0.005753739930955121,
+        "edgeSamples": 4095,
+        "haloExcursion": 0.09045847398788615
+      },
+      {
+        "axis": "pitch",
+        "degrees": 20,
+        "holePixels": 1604,
+        "area": 68958,
+        "holeFraction": 0.02326053539835842,
+        "edgeSamples": 4953,
+        "haloExcursion": 0.09129424432805675
+      },
+      {
+        "axis": "pitch",
+        "degrees": 30,
+        "holePixels": 1996,
+        "area": 68244,
+        "holeFraction": 0.029247992497508937,
+        "edgeSamples": 4077,
+        "haloExcursion": 0.08816748185661384
+      }
+    ],
+    "edgeCount": 240,
+    "score": 95.2202417887687,
+    "splats": 199498,
+    "pieces": 1,
+    "kept": false,
+    "reason": "Lower measured score after category coverage."
+  },
+  {
+    "prompt": "C57-P15",
+    "file": "cdx-hard-dew-web",
+    "name": "Dew on a web",
+    "category": "thin-structures",
+    "sha256": "137d731c08b3b2b429e9099a8c2a31768bb0d946139d6afc77c028e6911639bf",
+    "depthSha256": "4b983ce2f2d849e80aa02147ae269e7b294e7c4d21245d5bfb5e7dfbbe725e30",
+    "poses": [
+      {
+        "axis": "yaw",
+        "degrees": -30,
+        "holePixels": 941,
+        "area": 58897,
+        "holeFraction": 0.015977044671205663,
+        "edgeSamples": 4491,
+        "haloExcursion": 0.0795438371295972
+      },
+      {
+        "axis": "yaw",
+        "degrees": -20,
+        "holePixels": 1109,
+        "area": 62076,
+        "holeFraction": 0.017865197499838906,
+        "edgeSamples": 4455,
+        "haloExcursion": 0.08651482141678261
+      },
+      {
+        "axis": "yaw",
+        "degrees": 20,
+        "holePixels": 2633,
+        "area": 65221,
+        "holeFraction": 0.04037043283604974,
+        "edgeSamples": 4209,
+        "haloExcursion": 0.06980559864715709
+      },
+      {
+        "axis": "yaw",
+        "degrees": 30,
+        "holePixels": 2401,
+        "area": 62109,
+        "holeFraction": 0.03865784346874044,
+        "edgeSamples": 4092,
+        "haloExcursion": 0.06933854675790217
+      },
+      {
+        "axis": "pitch",
+        "degrees": -30,
+        "holePixels": 564,
+        "area": 53770,
+        "holeFraction": 0.010489120327320066,
+        "edgeSamples": 3960,
+        "haloExcursion": 0.06390077243018474
+      },
+      {
+        "axis": "pitch",
+        "degrees": -20,
+        "holePixels": 580,
+        "area": 56826,
+        "holeFraction": 0.010206595572449231,
+        "edgeSamples": 3957,
+        "haloExcursion": 0.06438131482059645
+      },
+      {
+        "axis": "pitch",
+        "degrees": 20,
+        "holePixels": 4901,
+        "area": 67815,
+        "holeFraction": 0.07227014672270146,
+        "edgeSamples": 4539,
+        "haloExcursion": 0.08361779609398344
+      },
+      {
+        "axis": "pitch",
+        "degrees": 30,
+        "holePixels": 6207,
+        "area": 66817,
+        "holeFraction": 0.09289552060104464,
+        "edgeSamples": 4524,
+        "haloExcursion": 0.08228012690487367
+      }
+    ],
+    "edgeCount": 240,
+    "score": 91.02890975078067,
+    "splats": 199498,
+    "pieces": 11,
+    "kept": false,
+    "reason": "Lower measured score after category coverage."
+  },
+  {
+    "prompt": "C57-P16",
+    "file": "cdx-hard-bare-branches",
+    "name": "Bare branches",
+    "category": "thin-structures",
+    "sha256": "ffe9d7a925de2c834f01fdb4339681c278f83e5f27603100d46c3749ddf7f26b",
+    "depthSha256": "24e61dd7a16cbe3b67a77a649e02be8c95aaead060376af1c61b728da9325be9",
+    "poses": [
+      {
+        "axis": "yaw",
+        "degrees": -30,
+        "holePixels": 505,
+        "area": 60208,
+        "holeFraction": 0.008387589689077863,
+        "edgeSamples": 4968,
+        "haloExcursion": 0.07601986044015059
+      },
+      {
+        "axis": "yaw",
+        "degrees": -20,
+        "holePixels": 426,
+        "area": 63470,
+        "holeFraction": 0.006711832361745706,
+        "edgeSamples": 4986,
+        "haloExcursion": 0.07731216032341566
+      },
+      {
+        "axis": "yaw",
+        "degrees": 20,
+        "holePixels": 1016,
+        "area": 65793,
+        "holeFraction": 0.015442372288845319,
+        "edgeSamples": 5037,
+        "haloExcursion": 0.07217570371408472
+      },
+      {
+        "axis": "yaw",
+        "degrees": 30,
+        "holePixels": 1165,
+        "area": 63361,
+        "holeFraction": 0.01838670475529111,
+        "edgeSamples": 5037,
+        "haloExcursion": 0.07179109880998286
+      },
+      {
+        "axis": "pitch",
+        "degrees": -30,
+        "holePixels": 84,
+        "area": 48483,
+        "holeFraction": 0.001732566054080812,
+        "edgeSamples": 4473,
+        "haloExcursion": 0.08169364772513096
+      },
+      {
+        "axis": "pitch",
+        "degrees": -20,
+        "holePixels": 109,
+        "area": 53317,
+        "holeFraction": 0.0020443760901776168,
+        "edgeSamples": 4791,
+        "haloExcursion": 0.0839171485751471
+      },
+      {
+        "axis": "pitch",
+        "degrees": 20,
+        "holePixels": 1214,
+        "area": 69386,
+        "holeFraction": 0.017496324907041765,
+        "edgeSamples": 5028,
+        "haloExcursion": 0.07514857971828373
+      },
+      {
+        "axis": "pitch",
+        "degrees": 30,
+        "holePixels": 1516,
+        "area": 68609,
+        "holeFraction": 0.022096226442594995,
+        "edgeSamples": 4959,
+        "haloExcursion": 0.07724359354550474
+      }
+    ],
+    "edgeCount": 240,
+    "score": 96.1359563426532,
+    "splats": 199498,
+    "pieces": 17,
+    "kept": true,
+    "reason": "Highest measured score with a two-per-category coverage floor."
+  },
+  {
+    "prompt": "C57-P17",
+    "file": "cdx-hard-wicker-chair",
+    "name": "Wicker chair",
+    "category": "thin-structures",
+    "sha256": "8b4282e67abe779f0d5ec65247606d1aa550eaee5007c0450b4b702dca9f3f3e",
+    "depthSha256": "100f1040e7bf6e08559c9ccb235dcaabd5b2e34c894d554b05336f14b686a347",
+    "poses": [
+      {
+        "axis": "yaw",
+        "degrees": -30,
+        "holePixels": 1783,
+        "area": 60631,
+        "holeFraction": 0.029407398855371015,
+        "edgeSamples": 3438,
+        "haloExcursion": 0.13377362579703253
+      },
+      {
+        "axis": "yaw",
+        "degrees": -20,
+        "holePixels": 1539,
+        "area": 64816,
+        "holeFraction": 0.023744137250061713,
+        "edgeSamples": 3438,
+        "haloExcursion": 0.12671525852924106
+      },
+      {
+        "axis": "yaw",
+        "degrees": 20,
+        "holePixels": 832,
+        "area": 65686,
+        "holeFraction": 0.012666321590597692,
+        "edgeSamples": 3444,
+        "haloExcursion": 0.11916376306620256
+      },
+      {
+        "axis": "yaw",
+        "degrees": 30,
+        "holePixels": 1021,
+        "area": 62775,
+        "holeFraction": 0.016264436479490243,
+        "edgeSamples": 3468,
+        "haloExcursion": 0.11126489811610964
+      },
+      {
+        "axis": "pitch",
+        "degrees": -30,
+        "holePixels": 768,
+        "area": 52522,
+        "holeFraction": 0.014622443928258634,
+        "edgeSamples": 2901,
+        "haloExcursion": 0.1170509155058098
+      },
+      {
+        "axis": "pitch",
+        "degrees": -20,
+        "holePixels": 646,
+        "area": 57310,
+        "holeFraction": 0.011272029314255801,
+        "edgeSamples": 3153,
+        "haloExcursion": 0.11809232414818184
+      },
+      {
+        "axis": "pitch",
+        "degrees": 20,
+        "holePixels": 2003,
+        "area": 69492,
+        "holeFraction": 0.028823461693432337,
+        "edgeSamples": 3435,
+        "haloExcursion": 0.10417786910979847
+      },
+      {
+        "axis": "pitch",
+        "degrees": 30,
+        "holePixels": 2746,
+        "area": 68603,
+        "holeFraction": 0.040027404049385595,
+        "edgeSamples": 3402,
+        "haloExcursion": 0.10221092552247288
+      }
+    ],
+    "edgeCount": 240,
+    "score": 93.92827330621306,
+    "splats": 199498,
+    "pieces": 5,
+    "kept": false,
+    "reason": "Lower measured score after category coverage."
+  },
+  {
+    "prompt": "C57-P18",
+    "file": "cdx-hard-fine-grass",
+    "name": "Fine grass",
+    "category": "thin-structures",
+    "sha256": "e47ea95b186294b47acd9e110ec2389f21f0255043910e08d8dcb0fb84f61aea",
+    "depthSha256": "c8d22fbc22c8da3a71d6f8a575484fd7d99ebfd893219978942202b4ecc8a8e0",
+    "poses": [
+      {
+        "axis": "yaw",
+        "degrees": -30,
+        "holePixels": 230,
+        "area": 57952,
+        "holeFraction": 0.003968801766979569,
+        "edgeSamples": 4452,
+        "haloExcursion": 0.06150485351373294
+      },
+      {
+        "axis": "yaw",
+        "degrees": -20,
+        "holePixels": 275,
+        "area": 62334,
+        "holeFraction": 0.004411717521737735,
+        "edgeSamples": 4452,
+        "haloExcursion": 0.05805542342723298
+      },
+      {
+        "axis": "yaw",
+        "degrees": 20,
+        "holePixels": 731,
+        "area": 66484,
+        "holeFraction": 0.010995126647012816,
+        "edgeSamples": 4404,
+        "haloExcursion": 0.06901212801196815
+      },
+      {
+        "axis": "yaw",
+        "degrees": 30,
+        "holePixels": 863,
+        "area": 64432,
+        "holeFraction": 0.013393965731313634,
+        "edgeSamples": 4431,
+        "haloExcursion": 0.07026254419619389
+      },
+      {
+        "axis": "pitch",
+        "degrees": -30,
+        "holePixels": 56,
+        "area": 50927,
+        "holeFraction": 0.0010996131717949222,
+        "edgeSamples": 4452,
+        "haloExcursion": 0.06566513397811995
+      },
+      {
+        "axis": "pitch",
+        "degrees": -20,
+        "holePixels": 74,
+        "area": 55556,
+        "holeFraction": 0.0013319893440852473,
+        "edgeSamples": 4452,
+        "haloExcursion": 0.06209502668992194
+      },
+      {
+        "axis": "pitch",
+        "degrees": 20,
+        "holePixels": 2104,
+        "area": 69019,
+        "holeFraction": 0.030484359379301353,
+        "edgeSamples": 4449,
+        "haloExcursion": 0.060145703594991946
+      },
+      {
+        "axis": "pitch",
+        "degrees": 30,
+        "holePixels": 2803,
+        "area": 68448,
+        "holeFraction": 0.040950794763908366,
+        "edgeSamples": 4347,
+        "haloExcursion": 0.062020685891103995
+      }
+    ],
+    "edgeCount": 240,
+    "score": 95.27282378979329,
+    "splats": 199498,
+    "pieces": 2,
+    "kept": false,
+    "reason": "Lower measured score after category coverage."
+  },
+  {
+    "prompt": "C57-P19",
+    "file": "cdx-hard-puddle-reflection",
+    "name": "Puddle reflection",
+    "category": "reflections",
+    "sha256": "f23952df933bbcd708534ef2b404bbbddddb502710a8723e45ceffbf3478cbf3",
+    "depthSha256": "10c22a947bea4c0c50d7ea0a397dde0f06fd9adb82a49e85c4b74cc42f966c04",
+    "poses": [
+      {
+        "axis": "yaw",
+        "degrees": -30,
+        "holePixels": 14,
+        "area": 61178,
+        "holeFraction": 0.00022884043283533296,
+        "edgeSamples": 1971,
+        "haloExcursion": 0.06288238278568697
+      },
+      {
+        "axis": "yaw",
+        "degrees": -20,
+        "holePixels": 15,
+        "area": 64945,
+        "holeFraction": 0.00023096466240665178,
+        "edgeSamples": 1884,
+        "haloExcursion": 0.07375837808584203
+      },
+      {
+        "axis": "yaw",
+        "degrees": 20,
+        "holePixels": 85,
+        "area": 65920,
+        "holeFraction": 0.0012894417475728156,
+        "edgeSamples": 1614,
+        "haloExcursion": 0.07574167213353791
+      },
+      {
+        "axis": "yaw",
+        "degrees": 30,
+        "holePixels": 77,
+        "area": 62866,
+        "holeFraction": 0.00122482741068304,
+        "edgeSamples": 1569,
+        "haloExcursion": 0.08317524587910427
+      },
+      {
+        "axis": "pitch",
+        "degrees": -30,
+        "holePixels": 14,
+        "area": 47569,
+        "holeFraction": 0.0002943093190943682,
+        "edgeSamples": 942,
+        "haloExcursion": 0.06886474334956962
+      },
+      {
+        "axis": "pitch",
+        "degrees": -20,
+        "holePixels": 40,
+        "area": 53364,
+        "holeFraction": 0.00074956899782625,
+        "edgeSamples": 903,
+        "haloExcursion": 0.09669294074218879
+      },
+      {
+        "axis": "pitch",
+        "degrees": 20,
+        "holePixels": 404,
+        "area": 70190,
+        "holeFraction": 0.005755805670323408,
+        "edgeSamples": 1911,
+        "haloExcursion": 0.08619652989400953
+      },
+      {
+        "axis": "pitch",
+        "degrees": 30,
+        "holePixels": 851,
+        "area": 69533,
+        "holeFraction": 0.012238793091050292,
+        "edgeSamples": 1830,
+        "haloExcursion": 0.09650058930676136
+      }
+    ],
+    "edgeCount": 240,
+    "score": 96.24826680442364,
+    "splats": 199498,
+    "pieces": 1,
+    "kept": true,
+    "reason": "Highest measured score with a two-per-category coverage floor."
+  },
+  {
+    "prompt": "C57-P20",
+    "file": "cdx-hard-polished-floor",
+    "name": "Polished floor",
+    "category": "reflections",
+    "sha256": "61004a99fd5b9a034b496a20c571137e1eb41e7957c13429bf5ef2f9926a3c56",
+    "depthSha256": "ef7e8b1b1cdaf418e94d88b3d52e0ccf8bc6d761ae1dd930109965152447b60c",
+    "poses": [
+      {
+        "axis": "yaw",
+        "degrees": -30,
+        "holePixels": 25,
+        "area": 61815,
+        "holeFraction": 0.0004044325810887325,
+        "edgeSamples": 5040,
+        "haloExcursion": 0.07008636788048578
+      },
+      {
+        "axis": "yaw",
+        "degrees": -20,
+        "holePixels": 10,
+        "area": 65387,
+        "holeFraction": 0.00015293559881933717,
+        "edgeSamples": 5040,
+        "haloExcursion": 0.06379007158418949
+      },
+      {
+        "axis": "yaw",
+        "degrees": 20,
+        "holePixels": 328,
+        "area": 66600,
+        "holeFraction": 0.004924924924924925,
+        "edgeSamples": 4986,
+        "haloExcursion": 0.10411190549224122
+      },
+      {
+        "axis": "yaw",
+        "degrees": 30,
+        "holePixels": 585,
+        "area": 63740,
+        "holeFraction": 0.00917791026043301,
+        "edgeSamples": 4884,
+        "haloExcursion": 0.0945584622055214
+      },
+      {
+        "axis": "pitch",
+        "degrees": -30,
+        "holePixels": 70,
+        "area": 48427,
+        "holeFraction": 0.0014454746319202097,
+        "edgeSamples": 4998,
+        "haloExcursion": 0.08831532613045268
+      },
+      {
+        "axis": "pitch",
+        "degrees": -20,
+        "holePixels": 64,
+        "area": 54071,
+        "holeFraction": 0.0011836289323297147,
+        "edgeSamples": 5040,
+        "haloExcursion": 0.08726423902894526
+      },
+      {
+        "axis": "pitch",
+        "degrees": 20,
+        "holePixels": 144,
+        "area": 69911,
+        "holeFraction": 0.002059761697014776,
+        "edgeSamples": 5040,
+        "haloExcursion": 0.08515328353563671
+      },
+      {
+        "axis": "pitch",
+        "degrees": 30,
+        "holePixels": 189,
+        "area": 69336,
+        "holeFraction": 0.0027258566978193145,
+        "edgeSamples": 5040,
+        "haloExcursion": 0.08642390289449156
+      }
+    ],
+    "edgeCount": 240,
+    "score": 96.52079241560405,
+    "splats": 199498,
+    "pieces": 2,
+    "kept": true,
+    "reason": "Highest measured score with a two-per-category coverage floor."
+  },
+  {
+    "prompt": "C57-P21",
+    "file": "cdx-hard-lake-reflection",
+    "name": "Lake reflection",
+    "category": "reflections",
+    "sha256": "eb21096dd57fb6bfc44e0ad70c1c9e481b09f786542c5ea53067b074c74ce8c9",
+    "depthSha256": "a90ed48f9d96e01a531171d1834fb1037f83d270b9fc2aeaaf62fc1116304b37",
+    "poses": [
+      {
+        "axis": "yaw",
+        "degrees": -30,
+        "holePixels": 416,
+        "area": 59170,
+        "holeFraction": 0.0070305898259253,
+        "edgeSamples": 4200,
+        "haloExcursion": 0.06374789915966424
+      },
+      {
+        "axis": "yaw",
+        "degrees": -20,
+        "holePixels": 440,
+        "area": 63030,
+        "holeFraction": 0.006980802792321117,
+        "edgeSamples": 4200,
+        "haloExcursion": 0.06603361344537828
+      },
+      {
+        "axis": "yaw",
+        "degrees": 20,
+        "holePixels": 1077,
+        "area": 66166,
+        "holeFraction": 0.01627724208808149,
+        "edgeSamples": 4125,
+        "haloExcursion": 0.08090505050505102
+      },
+      {
+        "axis": "yaw",
+        "degrees": 30,
+        "holePixels": 1257,
+        "area": 63704,
+        "holeFraction": 0.019731884967976895,
+        "edgeSamples": 4086,
+        "haloExcursion": 0.0808969892411201
+      },
+      {
+        "axis": "pitch",
+        "degrees": -30,
+        "holePixels": 580,
+        "area": 50591,
+        "holeFraction": 0.011464489731375146,
+        "edgeSamples": 3891,
+        "haloExcursion": 0.09833048613945723
+      },
+      {
+        "axis": "pitch",
+        "degrees": -20,
+        "holePixels": 510,
+        "area": 56039,
+        "holeFraction": 0.00910080479665947,
+        "edgeSamples": 3954,
+        "haloExcursion": 0.08830769535937845
+      },
+      {
+        "axis": "pitch",
+        "degrees": 20,
+        "holePixels": 1603,
+        "area": 68564,
+        "holeFraction": 0.023379616125080216,
+        "edgeSamples": 4164,
+        "haloExcursion": 0.07032736245314682
+      },
+      {
+        "axis": "pitch",
+        "degrees": 30,
+        "holePixels": 2094,
+        "area": 67849,
+        "holeFraction": 0.030862650886527437,
+        "edgeSamples": 4131,
+        "haloExcursion": 0.07829182508152173
+      }
+    ],
+    "edgeCount": 240,
+    "score": 95.49085968549743,
+    "splats": 199498,
+    "pieces": 5,
+    "kept": false,
+    "reason": "Lower measured score after category coverage."
+  },
+  {
+    "prompt": "C57-P22",
+    "file": "cdx-hard-steel-teapot",
+    "name": "Steel teapot",
+    "category": "reflections",
+    "sha256": "4828919f810c9b95509186d1b538fb06ce6b69c52daefbfc5572c1debdaa4645",
+    "depthSha256": "ae6f08f9a02b75f08e9c8f9a6caa0b0ce5b15b2cdf36b79d76a5096aa812873c",
+    "poses": [
+      {
+        "axis": "yaw",
+        "degrees": -30,
+        "holePixels": 276,
+        "area": 62198,
+        "holeFraction": 0.004437441718383227,
+        "edgeSamples": 5013,
+        "haloExcursion": 0.11030066924036769
+      },
+      {
+        "axis": "yaw",
+        "degrees": -20,
+        "holePixels": 353,
+        "area": 65893,
+        "holeFraction": 0.005357169957355106,
+        "edgeSamples": 5022,
+        "haloExcursion": 0.11972497481668928
+      },
+      {
+        "axis": "yaw",
+        "degrees": 20,
+        "holePixels": 410,
+        "area": 67041,
+        "holeFraction": 0.006115660565922346,
+        "edgeSamples": 5040,
+        "haloExcursion": 0.11175225645813897
+      },
+      {
+        "axis": "yaw",
+        "degrees": 30,
+        "holePixels": 489,
+        "area": 64050,
+        "holeFraction": 0.007634660421545668,
+        "edgeSamples": 5037,
+        "haloExcursion": 0.10916628712235384
+      },
+      {
+        "axis": "pitch",
+        "degrees": -30,
+        "holePixels": 318,
+        "area": 49003,
+        "holeFraction": 0.0064893986082484745,
+        "edgeSamples": 4758,
+        "haloExcursion": 0.08473159755705593
+      },
+      {
+        "axis": "pitch",
+        "degrees": -20,
+        "holePixels": 348,
+        "area": 54573,
+        "holeFraction": 0.00637677972623825,
+        "edgeSamples": 4830,
+        "haloExcursion": 0.08265172735761019
+      },
+      {
+        "axis": "pitch",
+        "degrees": 20,
+        "holePixels": 475,
+        "area": 70589,
+        "holeFraction": 0.006729093768150845,
+        "edgeSamples": 5037,
+        "haloExcursion": 0.12706910042158628
+      },
+      {
+        "axis": "pitch",
+        "degrees": 30,
+        "holePixels": 565,
+        "area": 70332,
+        "holeFraction": 0.008033327646021726,
+        "edgeSamples": 5019,
+        "haloExcursion": 0.12326648930143898
+      }
+    ],
+    "edgeCount": 240,
+    "score": 95.71689042358186,
+    "splats": 199498,
+    "pieces": 4,
+    "kept": false,
+    "reason": "Lower measured score after category coverage."
+  },
+  {
+    "prompt": "C57-P23",
+    "file": "cdx-hard-rainy-courtyard",
+    "name": "Rain-soaked courtyard",
+    "category": "reflections",
+    "sha256": "1335d24c52e87fbb1d9c1a1a2b8d4d544bfd0491bfe114e5a053283d992a0b53",
+    "depthSha256": "d1c99e42f19eb45c4d0e6533de9751419bc01234a2ed169237ff53811f580432",
+    "poses": [
+      {
+        "axis": "yaw",
+        "degrees": -30,
+        "holePixels": 250,
+        "area": 62032,
+        "holeFraction": 0.004030177972659273,
+        "edgeSamples": 4683,
+        "haloExcursion": 0.07758810549630943
+      },
+      {
+        "axis": "yaw",
+        "degrees": -20,
+        "holePixels": 245,
+        "area": 66121,
+        "holeFraction": 0.0037053281105851395,
+        "edgeSamples": 4683,
+        "haloExcursion": 0.07187448970619698
+      },
+      {
+        "axis": "yaw",
+        "degrees": 20,
+        "holePixels": 901,
+        "area": 68176,
+        "holeFraction": 0.013215794414456701,
+        "edgeSamples": 4563,
+        "haloExcursion": 0.06307425885103143
+      },
+      {
+        "axis": "yaw",
+        "degrees": 30,
+        "holePixels": 930,
+        "area": 65030,
+        "holeFraction": 0.01430109180378287,
+        "edgeSamples": 4524,
+        "haloExcursion": 0.06797992406511724
+      },
+      {
+        "axis": "pitch",
+        "degrees": -30,
+        "holePixels": 1439,
+        "area": 52032,
+        "holeFraction": 0.027656057810578106,
+        "edgeSamples": 4626,
+        "haloExcursion": 0.06412603952086679
+      },
+      {
+        "axis": "pitch",
+        "degrees": -20,
+        "holePixels": 1199,
+        "area": 57499,
+        "holeFraction": 0.02085253656585332,
+        "edgeSamples": 4650,
+        "haloExcursion": 0.06161079485557698
+      },
+      {
+        "axis": "pitch",
+        "degrees": 20,
+        "holePixels": 149,
+        "area": 70786,
+        "holeFraction": 0.0021049360042946345,
+        "edgeSamples": 4638,
+        "haloExcursion": 0.07262088966677689
+      },
+      {
+        "axis": "pitch",
+        "degrees": 30,
+        "holePixels": 201,
+        "area": 70500,
+        "holeFraction": 0.002851063829787234,
+        "edgeSamples": 4635,
+        "haloExcursion": 0.0771478731730022
+      }
+    ],
+    "edgeCount": 240,
+    "score": 96.14029476763353,
+    "splats": 199498,
+    "pieces": 3,
+    "kept": false,
+    "reason": "Lower measured score after category coverage."
+  },
+  {
+    "prompt": "C57-P24",
+    "file": "cdx-hard-reflecting-pool",
+    "name": "Reflecting pool",
+    "category": "reflections",
+    "sha256": "65f02c443ca02ab650db7f53a29945a0df8691b619e84935cbc08696cee4a8ef",
+    "depthSha256": "e9e795204f27b3d3bb3b174ce7c704e1629b8946063d6f67a2c294c1d58c0709",
+    "poses": [
+      {
+        "axis": "yaw",
+        "degrees": -30,
+        "holePixels": 29,
+        "area": 60214,
+        "holeFraction": 0.00048161557112963763,
+        "edgeSamples": 1041,
+        "haloExcursion": 0.08523478555687428
+      },
+      {
+        "axis": "yaw",
+        "degrees": -20,
+        "holePixels": 53,
+        "area": 63369,
+        "holeFraction": 0.0008363710962773596,
+        "edgeSamples": 1029,
+        "haloExcursion": 0.08704815259437124
+      },
+      {
+        "axis": "yaw",
+        "degrees": 20,
+        "holePixels": 296,
+        "area": 63646,
+        "holeFraction": 0.004650724318888854,
+        "edgeSamples": 954,
+        "haloExcursion": 0.09126073909647742
+      },
+      {
+        "axis": "yaw",
+        "degrees": 30,
+        "holePixels": 503,
+        "area": 61323,
+        "holeFraction": 0.008202468894215874,
+        "edgeSamples": 951,
+        "haloExcursion": 0.09848869095482587
+      },
+      {
+        "axis": "pitch",
+        "degrees": -30,
+        "holePixels": 0,
+        "area": 47358,
+        "holeFraction": 0,
+        "edgeSamples": 585,
+        "haloExcursion": 0.08061002178649244
+      },
+      {
+        "axis": "pitch",
+        "degrees": -20,
+        "holePixels": 3,
+        "area": 53036,
+        "holeFraction": 0.00005656535183648842,
+        "edgeSamples": 648,
+        "haloExcursion": 0.07460058097313006
+      },
+      {
+        "axis": "pitch",
+        "degrees": 20,
+        "holePixels": 582,
+        "area": 67628,
+        "holeFraction": 0.008605902880463713,
+        "edgeSamples": 1050,
+        "haloExcursion": 0.08411577964519154
+      },
+      {
+        "axis": "pitch",
+        "degrees": 30,
+        "holePixels": 829,
+        "area": 67073,
+        "holeFraction": 0.012359667824609007,
+        "edgeSamples": 1059,
+        "haloExcursion": 0.09523597918865392
+      }
+    ],
+    "edgeCount": 105,
+    "score": 96.27774387661775,
+    "splats": 199498,
+    "pieces": 2,
+    "kept": true,
+    "reason": "Highest measured score with a two-per-category coverage floor."
+  },
+  {
+    "prompt": "C57-P25",
+    "file": "cdx-hard-lanterns",
+    "name": "Lanterns at night",
+    "category": "low-light",
+    "sha256": "097ab77aea595e18147f4abcd80230483f86c15537dc6a32863f2b159326277c",
+    "depthSha256": "c4fd029d0b0a6c7b87492260633ab6b172bcab283a5d91baecffbabccf3ff554",
+    "poses": [
+      {
+        "axis": "yaw",
+        "degrees": -30,
+        "holePixels": 424,
+        "area": 61111,
+        "holeFraction": 0.006938194433080787,
+        "edgeSamples": 3441,
+        "haloExcursion": 0.06921722481494806
+      },
+      {
+        "axis": "yaw",
+        "degrees": -20,
+        "holePixels": 405,
+        "area": 65878,
+        "holeFraction": 0.006147727617717599,
+        "edgeSamples": 3414,
+        "haloExcursion": 0.07142561769874961
+      },
+      {
+        "axis": "yaw",
+        "degrees": 20,
+        "holePixels": 693,
+        "area": 67852,
+        "holeFraction": 0.010213405647585922,
+        "edgeSamples": 3360,
+        "haloExcursion": 0.08202380952380989
+      },
+      {
+        "axis": "yaw",
+        "degrees": 30,
+        "holePixels": 744,
+        "area": 64794,
+        "holeFraction": 0.011482544680062969,
+        "edgeSamples": 3312,
+        "haloExcursion": 0.08480747371412364
+      },
+      {
+        "axis": "pitch",
+        "degrees": -30,
+        "holePixels": 869,
+        "area": 52446,
+        "holeFraction": 0.016569423788277467,
+        "edgeSamples": 3186,
+        "haloExcursion": 0.07317307337247562
+      },
+      {
+        "axis": "pitch",
+        "degrees": -20,
+        "holePixels": 824,
+        "area": 57979,
+        "holeFraction": 0.014212042291174391,
+        "edgeSamples": 3255,
+        "haloExcursion": 0.08157224179994611
+      },
+      {
+        "axis": "pitch",
+        "degrees": 20,
+        "holePixels": 817,
+        "area": 71299,
+        "holeFraction": 0.01145878623823616,
+        "edgeSamples": 3336,
+        "haloExcursion": 0.07739102835378789
+      },
+      {
+        "axis": "pitch",
+        "degrees": 30,
+        "holePixels": 1375,
+        "area": 71129,
+        "holeFraction": 0.01933107452656441,
+        "edgeSamples": 3279,
+        "haloExcursion": 0.07560291576221877
+      }
+    ],
+    "edgeCount": 240,
+    "score": 96.37873731027393,
+    "splats": 199498,
+    "pieces": 1,
+    "kept": true,
+    "reason": "Highest measured score with a two-per-category coverage floor."
+  },
+  {
+    "prompt": "C57-P26",
+    "file": "cdx-hard-campfire",
+    "name": "Campfire",
+    "category": "low-light",
+    "sha256": "b925ea29f1517bf327c7342ce2a3779898cb9ecb31bd1132e1287fc8f4043e5c",
+    "depthSha256": "17650720f3053d26c80234724250ec3a1611cf0e9117a24a3cd8925dc4d59bbb",
+    "poses": [
+      {
+        "axis": "yaw",
+        "degrees": -30,
+        "holePixels": 1403,
+        "area": 61917,
+        "holeFraction": 0.022659366571377813,
+        "edgeSamples": 3747,
+        "haloExcursion": 0.053539302029859716
+      },
+      {
+        "axis": "yaw",
+        "degrees": -20,
+        "holePixels": 1179,
+        "area": 65469,
+        "holeFraction": 0.018008523117811485,
+        "edgeSamples": 3717,
+        "haloExcursion": 0.055886309325990875
+      },
+      {
+        "axis": "yaw",
+        "degrees": 20,
+        "holePixels": 762,
+        "area": 66001,
+        "holeFraction": 0.0115452796169755,
+        "edgeSamples": 3588,
+        "haloExcursion": 0.04265634905021137
+      },
+      {
+        "axis": "yaw",
+        "degrees": 30,
+        "holePixels": 779,
+        "area": 62868,
+        "holeFraction": 0.012391041547369091,
+        "edgeSamples": 3567,
+        "haloExcursion": 0.046261756735214904
+      },
+      {
+        "axis": "pitch",
+        "degrees": -30,
+        "holePixels": 86,
+        "area": 48194,
+        "holeFraction": 0.0017844544964103416,
+        "edgeSamples": 3345,
+        "haloExcursion": 0.044792637533339556
+      },
+      {
+        "axis": "pitch",
+        "degrees": -20,
+        "holePixels": 13,
+        "area": 53854,
+        "holeFraction": 0.00024139339696215695,
+        "edgeSamples": 3291,
+        "haloExcursion": 0.043382725317413884
+      },
+      {
+        "axis": "pitch",
+        "degrees": 20,
+        "holePixels": 1377,
+        "area": 69745,
+        "holeFraction": 0.019743350777833537,
+        "edgeSamples": 3570,
+        "haloExcursion": 0.0475564343384417
+      },
+      {
+        "axis": "pitch",
+        "degrees": 30,
+        "holePixels": 1958,
+        "area": 69463,
+        "holeFraction": 0.028187668255042254,
+        "edgeSamples": 3483,
+        "haloExcursion": 0.048492115766778
+      }
+    ],
+    "edgeCount": 240,
+    "score": 96.5720997491437,
+    "splats": 199498,
+    "pieces": 1,
+    "kept": true,
+    "reason": "Highest measured score with a two-per-category coverage floor."
+  },
+  {
+    "prompt": "C57-P27",
+    "file": "cdx-hard-candle-still-life",
+    "name": "Candle still life",
+    "category": "low-light",
+    "sha256": "7f6894a685255c3d5d890ef14fe5aa5c813b47ae9f08297b31bed89bb9b2099c",
+    "depthSha256": "b0f42bf730c37dc2050e78aa45f914780ddbf8bc069394ad4592222342cc8060",
+    "poses": [
+      {
+        "axis": "yaw",
+        "degrees": -30,
+        "holePixels": 19,
+        "area": 61520,
+        "holeFraction": 0.00030884265279583874,
+        "edgeSamples": 4917,
+        "haloExcursion": 0.044897454609259146
+      },
+      {
+        "axis": "yaw",
+        "degrees": -20,
+        "holePixels": 15,
+        "area": 64341,
+        "holeFraction": 0.00023313283909171445,
+        "edgeSamples": 4920,
+        "haloExcursion": 0.042635899888410926
+      },
+      {
+        "axis": "yaw",
+        "degrees": 20,
+        "holePixels": 28,
+        "area": 64871,
+        "holeFraction": 0.0004316258420557722,
+        "edgeSamples": 4968,
+        "haloExcursion": 0.048178933409112876
+      },
+      {
+        "axis": "yaw",
+        "degrees": 30,
+        "holePixels": 36,
+        "area": 62098,
+        "holeFraction": 0.0005797288157428581,
+        "edgeSamples": 4989,
+        "haloExcursion": 0.04306886915920957
+      },
+      {
+        "axis": "pitch",
+        "degrees": -30,
+        "holePixels": 39,
+        "area": 47265,
+        "holeFraction": 0.0008251348778165661,
+        "edgeSamples": 4215,
+        "haloExcursion": 0.03373851557230279
+      },
+      {
+        "axis": "pitch",
+        "degrees": -20,
+        "holePixels": 10,
+        "area": 52814,
+        "holeFraction": 0.00018934373461582156,
+        "edgeSamples": 4602,
+        "haloExcursion": 0.03287914035670804
+      },
+      {
+        "axis": "pitch",
+        "degrees": 20,
+        "holePixels": 53,
+        "area": 68675,
+        "holeFraction": 0.0007717510010921005,
+        "edgeSamples": 4998,
+        "haloExcursion": 0.0362733328625571
+      },
+      {
+        "axis": "pitch",
+        "degrees": 30,
+        "holePixels": 67,
+        "area": 68004,
+        "holeFraction": 0.0009852361625786719,
+        "edgeSamples": 4983,
+        "haloExcursion": 0.040123085156198085
+      }
+    ],
+    "edgeCount": 240,
+    "score": 98.5244181887827,
+    "splats": 199500,
+    "pieces": 1,
+    "kept": true,
+    "reason": "Highest measured score with a two-per-category coverage floor."
+  },
+  {
+    "prompt": "C57-P28",
+    "file": "cdx-hard-moonlit-greenhouse",
+    "name": "Moonlit greenhouse",
+    "category": "low-light",
+    "sha256": "b277ecb2d705f6104c18f1e1d940b248cd05cd00d4f1f51b789b39b6f52f9029",
+    "depthSha256": "d3bc06d8d3fddcba3ab40d9b396feb6d8f1c69ce384700fa89e8b3b3987a67d3",
+    "poses": [
+      {
+        "axis": "yaw",
+        "degrees": -30,
+        "holePixels": 433,
+        "area": 67059,
+        "holeFraction": 0.006457000551752934,
+        "edgeSamples": 4524,
+        "haloExcursion": 0.045495050363204885
+      },
+      {
+        "axis": "yaw",
+        "degrees": -20,
+        "holePixels": 196,
+        "area": 68999,
+        "holeFraction": 0.0028406208785634575,
+        "edgeSamples": 4608,
+        "haloExcursion": 0.04610055827886739
+      },
+      {
+        "axis": "yaw",
+        "degrees": 20,
+        "holePixels": 138,
+        "area": 66070,
+        "holeFraction": 0.0020886938095958834,
+        "edgeSamples": 4767,
+        "haloExcursion": 0.035148508742704566
+      },
+      {
+        "axis": "yaw",
+        "degrees": 30,
+        "holePixels": 208,
+        "area": 61505,
+        "holeFraction": 0.0033818388748882203,
+        "edgeSamples": 4815,
+        "haloExcursion": 0.03363915867489295
+      },
+      {
+        "axis": "pitch",
+        "degrees": -30,
+        "holePixels": 136,
+        "area": 53132,
+        "holeFraction": 0.002559662726793646,
+        "edgeSamples": 3912,
+        "haloExcursion": 0.021243834957296145
+      },
+      {
+        "axis": "pitch",
+        "degrees": -20,
+        "holePixels": 54,
+        "area": 58175,
+        "holeFraction": 0.0009282337773957886,
+        "edgeSamples": 3597,
+        "haloExcursion": 0.018242871238014564
+      },
+      {
+        "axis": "pitch",
+        "degrees": 20,
+        "holePixels": 112,
+        "area": 70652,
+        "holeFraction": 0.0015852346713468833,
+        "edgeSamples": 4653,
+        "haloExcursion": 0.052356691655815975
+      },
+      {
+        "axis": "pitch",
+        "degrees": 30,
+        "holePixels": 154,
+        "area": 69227,
+        "holeFraction": 0.0022245655596804716,
+        "edgeSamples": 4461,
+        "haloExcursion": 0.047885157201190603
+      }
+    ],
+    "edgeCount": 240,
+    "score": 98.18315845048114,
+    "splats": 199498,
+    "pieces": 1,
+    "kept": true,
+    "reason": "Highest measured score with a two-per-category coverage floor."
+  },
+  {
+    "prompt": "C57-P29",
+    "file": "cdx-hard-shed-lamps",
+    "name": "Lamps in a potting shed",
+    "category": "low-light",
+    "sha256": "823201a4c10440249ce4ca6a565a335ea178f99f07efc32f5a0e5ca23b9668e3",
+    "depthSha256": "b1c7479260386b52fda14b6977953e79049edf5ed6baea1fb2464738b1c1f0a8",
+    "poses": [
+      {
+        "axis": "yaw",
+        "degrees": -30,
+        "holePixels": 51,
+        "area": 57637,
+        "holeFraction": 0.0008848482745458646,
+        "edgeSamples": 4134,
+        "haloExcursion": 0.053618486581861136
+      },
+      {
+        "axis": "yaw",
+        "degrees": -20,
+        "holePixels": 71,
+        "area": 61804,
+        "holeFraction": 0.0011487929583845705,
+        "edgeSamples": 4128,
+        "haloExcursion": 0.04976535187718534
+      },
+      {
+        "axis": "yaw",
+        "degrees": 20,
+        "holePixels": 420,
+        "area": 64145,
+        "holeFraction": 0.0065476654454750954,
+        "edgeSamples": 3966,
+        "haloExcursion": 0.05609049469510496
+      },
+      {
+        "axis": "yaw",
+        "degrees": 30,
+        "holePixels": 556,
+        "area": 62875,
+        "holeFraction": 0.008842942345924453,
+        "edgeSamples": 3915,
+        "haloExcursion": 0.06226329101244623
+      },
+      {
+        "axis": "pitch",
+        "degrees": -30,
+        "holePixels": 60,
+        "area": 52040,
+        "holeFraction": 0.0011529592621060721,
+        "edgeSamples": 3480,
+        "haloExcursion": 0.04123168807753025
+      },
+      {
+        "axis": "pitch",
+        "degrees": -20,
+        "holePixels": 47,
+        "area": 57049,
+        "holeFraction": 0.000823853178846255,
+        "edgeSamples": 3486,
+        "haloExcursion": 0.053924380997379416
+      },
+      {
+        "axis": "pitch",
+        "degrees": 20,
+        "holePixels": 554,
+        "area": 66739,
+        "holeFraction": 0.008300993422136981,
+        "edgeSamples": 4071,
+        "haloExcursion": 0.04645002191493194
+      },
+      {
+        "axis": "pitch",
+        "degrees": 30,
+        "holePixels": 542,
+        "area": 65645,
+        "holeFraction": 0.008256531342828851,
+        "edgeSamples": 3951,
+        "haloExcursion": 0.04440573495913214
+      }
+    ],
+    "edgeCount": 240,
+    "score": 97.5130953054119,
+    "splats": 199498,
+    "pieces": 3,
+    "kept": true,
+    "reason": "Highest measured score with a two-per-category coverage floor."
+  },
+  {
+    "prompt": "C57-P30",
+    "file": "cdx-hard-fire-bowl",
+    "name": "Fire bowl at dusk",
+    "category": "low-light",
+    "sha256": "4c3c6614d69f4d2fcac734e30676fd7faa477a9f7b7fa337e40a13e990d5de4f",
+    "depthSha256": "fd41cecca45e8f8fdf20e8a64b4ec2e2c8d6f483b901fd9b5eaa0153680b483d",
+    "poses": [
+      {
+        "axis": "yaw",
+        "degrees": -30,
+        "holePixels": 5,
+        "area": 61869,
+        "holeFraction": 0.00008081591750311141,
+        "edgeSamples": 5040,
+        "haloExcursion": 0.05759259259259296
+      },
+      {
+        "axis": "yaw",
+        "degrees": -20,
+        "holePixels": 8,
+        "area": 65379,
+        "holeFraction": 0.00012236345003747382,
+        "edgeSamples": 5040,
+        "haloExcursion": 0.05844304388422076
+      },
+      {
+        "axis": "yaw",
+        "degrees": 20,
+        "holePixels": 32,
+        "area": 66072,
+        "holeFraction": 0.000484320135609638,
+        "edgeSamples": 5040,
+        "haloExcursion": 0.051542172424525884
+      },
+      {
+        "axis": "yaw",
+        "degrees": 30,
+        "holePixels": 48,
+        "area": 62919,
+        "holeFraction": 0.0007628856148381252,
+        "edgeSamples": 5040,
+        "haloExcursion": 0.04901027077497723
+      },
+      {
+        "axis": "pitch",
+        "degrees": -30,
+        "holePixels": 10,
+        "area": 47520,
+        "holeFraction": 0.00021043771043771043,
+        "edgeSamples": 4458,
+        "haloExcursion": 0.05242217120136576
+      },
+      {
+        "axis": "pitch",
+        "degrees": -20,
+        "holePixels": 12,
+        "area": 53130,
+        "holeFraction": 0.00022586109542631282,
+        "edgeSamples": 4689,
+        "haloExcursion": 0.046524406307628934
+      },
+      {
+        "axis": "pitch",
+        "degrees": 20,
+        "holePixels": 43,
+        "area": 69656,
+        "holeFraction": 0.0006173193981853681,
+        "edgeSamples": 5040,
+        "haloExcursion": 0.054547930283224785
+      },
+      {
+        "axis": "pitch",
+        "degrees": 30,
+        "holePixels": 54,
+        "area": 69379,
+        "holeFraction": 0.0007783335014918058,
+        "edgeSamples": 5040,
+        "haloExcursion": 0.05214985994397805
+      }
+    ],
+    "edgeCount": 240,
+    "score": 98.23814324197076,
+    "splats": 199498,
+    "pieces": 1,
+    "kept": true,
+    "reason": "Highest measured score with a two-per-category coverage floor."
+  },
+  {
+    "prompt": "C57-P31",
+    "file": "cdx-hard-beetle-leaf",
+    "name": "Beetle on a leaf",
+    "category": "macro",
+    "sha256": "3c1a472fff870c71613dee3d10e60ea8b6c09758010f93833bb9e7cd5e378954",
+    "depthSha256": "db57382a0bbc57fd05fdffcd46fef4fa75f52fbc24627c296c8ac5b4b57699b3",
+    "poses": [
+      {
+        "axis": "yaw",
+        "degrees": -30,
+        "holePixels": 938,
+        "area": 59258,
+        "holeFraction": 0.015829086368085322,
+        "edgeSamples": 3171,
+        "haloExcursion": 0.097195787807397
+      },
+      {
+        "axis": "yaw",
+        "degrees": -20,
+        "holePixels": 914,
+        "area": 63102,
+        "holeFraction": 0.014484485436277773,
+        "edgeSamples": 3171,
+        "haloExcursion": 0.09842382869262532
+      },
+      {
+        "axis": "yaw",
+        "degrees": 20,
+        "holePixels": 893,
+        "area": 66042,
+        "holeFraction": 0.013521698313194634,
+        "edgeSamples": 3255,
+        "haloExcursion": 0.09647058823529452
+      },
+      {
+        "axis": "yaw",
+        "degrees": 30,
+        "holePixels": 899,
+        "area": 63855,
+        "holeFraction": 0.014078772218307101,
+        "edgeSamples": 3255,
+        "haloExcursion": 0.08970693653805659
+      },
+      {
+        "axis": "pitch",
+        "degrees": -30,
+        "holePixels": 583,
+        "area": 52189,
+        "holeFraction": 0.011170936404223113,
+        "edgeSamples": 2817,
+        "haloExcursion": 0.0922536142607563
+      },
+      {
+        "axis": "pitch",
+        "degrees": -20,
+        "holePixels": 294,
+        "area": 56756,
+        "holeFraction": 0.005180069067587568,
+        "edgeSamples": 2853,
+        "haloExcursion": 0.10126938963457836
+      },
+      {
+        "axis": "pitch",
+        "degrees": 20,
+        "holePixels": 2478,
+        "area": 69534,
+        "holeFraction": 0.035637242212442834,
+        "edgeSamples": 3249,
+        "haloExcursion": 0.09081527347781261
+      },
+      {
+        "axis": "pitch",
+        "degrees": 30,
+        "holePixels": 2836,
+        "area": 69122,
+        "holeFraction": 0.04102890541361651,
+        "edgeSamples": 3252,
+        "haloExcursion": 0.09123676530883006
+      }
+    ],
+    "edgeCount": 240,
+    "score": 94.39087366178194,
+    "splats": 199498,
+    "pieces": 5,
+    "kept": false,
+    "reason": "Lower measured score after category coverage."
+  },
+  {
+    "prompt": "C57-P32",
+    "file": "cdx-hard-frost-crystals",
+    "name": "Frost crystals",
+    "category": "macro",
+    "sha256": "aa9a14605137f337ea900d97fcc3abc7623e0cf09d1f0170473c909e086a8c60",
+    "depthSha256": "6d3c7eb91ba93946d4782244e97465855d79b6c34fafd73baea5ac4934e1e0e5",
+    "poses": [
+      {
+        "axis": "yaw",
+        "degrees": -30,
+        "holePixels": 713,
+        "area": 63009,
+        "holeFraction": 0.011315843768350552,
+        "edgeSamples": 4977,
+        "haloExcursion": 0.13815078774125758
+      },
+      {
+        "axis": "yaw",
+        "degrees": -20,
+        "holePixels": 625,
+        "area": 66231,
+        "holeFraction": 0.009436668629493742,
+        "edgeSamples": 4977,
+        "haloExcursion": 0.1375558943689999
+      },
+      {
+        "axis": "yaw",
+        "degrees": 20,
+        "holePixels": 258,
+        "area": 65331,
+        "holeFraction": 0.003949120631859301,
+        "edgeSamples": 4977,
+        "haloExcursion": 0.1348682370275823
+      },
+      {
+        "axis": "yaw",
+        "degrees": 30,
+        "holePixels": 307,
+        "area": 61605,
+        "holeFraction": 0.004983361740118497,
+        "edgeSamples": 5001,
+        "haloExcursion": 0.13609827054197032
+      },
+      {
+        "axis": "pitch",
+        "degrees": -30,
+        "holePixels": 257,
+        "area": 50541,
+        "holeFraction": 0.005084980510872361,
+        "edgeSamples": 4956,
+        "haloExcursion": 0.1538107898526642
+      },
+      {
+        "axis": "pitch",
+        "degrees": -20,
+        "holePixels": 234,
+        "area": 56330,
+        "holeFraction": 0.00415409195810403,
+        "edgeSamples": 4977,
+        "haloExcursion": 0.15716373750625454
+      },
+      {
+        "axis": "pitch",
+        "degrees": 20,
+        "holePixels": 776,
+        "area": 70350,
+        "holeFraction": 0.011030561478322673,
+        "edgeSamples": 4977,
+        "haloExcursion": 0.1362030044085143
+      },
+      {
+        "axis": "pitch",
+        "degrees": 30,
+        "holePixels": 1079,
+        "area": 70120,
+        "holeFraction": 0.015387906446092413,
+        "edgeSamples": 4977,
+        "haloExcursion": 0.13890878432948472
+      }
+    ],
+    "edgeCount": 240,
+    "score": 94.75558301888898,
+    "splats": 199498,
+    "pieces": 1,
+    "kept": false,
+    "reason": "Lower measured score after category coverage."
+  },
+  {
+    "prompt": "C57-P33",
+    "file": "cdx-hard-dew-fern",
+    "name": "Dew on a fern",
+    "category": "macro",
+    "sha256": "e87ec68eb27619a975d9304c3f2e2dfa85477a0705a2c52eca859a2a5ae4d85d",
+    "depthSha256": "2212dde45290d24aa683903e998970d17b290bab012e8da5d5ab59a19c9c6a83",
+    "poses": [
+      {
+        "axis": "yaw",
+        "degrees": -30,
+        "holePixels": 150,
+        "area": 57523,
+        "holeFraction": 0.0026076525911374582,
+        "edgeSamples": 4383,
+        "haloExcursion": 0.08453785347130009
+      },
+      {
+        "axis": "yaw",
+        "degrees": -20,
+        "holePixels": 93,
+        "area": 61633,
+        "holeFraction": 0.0015089319033634579,
+        "edgeSamples": 4518,
+        "haloExcursion": 0.08775703287069624
+      },
+      {
+        "axis": "yaw",
+        "degrees": 20,
+        "holePixels": 487,
+        "area": 66129,
+        "holeFraction": 0.007364393836289676,
+        "edgeSamples": 4662,
+        "haloExcursion": 0.0839730486789315
+      },
+      {
+        "axis": "yaw",
+        "degrees": 30,
+        "holePixels": 818,
+        "area": 64974,
+        "holeFraction": 0.01258965124511343,
+        "edgeSamples": 4662,
+        "haloExcursion": 0.08139484021836994
+      },
+      {
+        "axis": "pitch",
+        "degrees": -30,
+        "holePixels": 59,
+        "area": 54092,
+        "holeFraction": 0.0010907343045182282,
+        "edgeSamples": 4662,
+        "haloExcursion": 0.08415474297827265
+      },
+      {
+        "axis": "pitch",
+        "degrees": -20,
+        "holePixels": 9,
+        "area": 57899,
+        "holeFraction": 0.00015544309918996875,
+        "edgeSamples": 4662,
+        "haloExcursion": 0.08551240315946246
+      },
+      {
+        "axis": "pitch",
+        "degrees": 20,
+        "holePixels": 1928,
+        "area": 67224,
+        "holeFraction": 0.02868023325002975,
+        "edgeSamples": 4587,
+        "haloExcursion": 0.09013366846629672
+      },
+      {
+        "axis": "pitch",
+        "degrees": 30,
+        "holePixels": 2827,
+        "area": 66399,
+        "holeFraction": 0.04257594240877122,
+        "edgeSamples": 4407,
+        "haloExcursion": 0.08781661972708338
+      }
+    ],
+    "edgeCount": 240,
+    "score": 94.38518543957352,
+    "splats": 199498,
+    "pieces": 2,
+    "kept": false,
+    "reason": "Lower measured score after category coverage."
+  },
+  {
+    "prompt": "C57-P34",
+    "file": "cdx-hard-snail-shell",
+    "name": "Snail and wet moss",
+    "category": "macro",
+    "sha256": "9e8894b15bdf8ab07f685341b0e33b85b86620c8ac11638f5abdd129455ec7a9",
+    "depthSha256": "6f5ceb2d2d4484fa307b7c24e744e70c31951277f0405a8a6e71c0669a4b6b08",
+    "poses": [
+      {
+        "axis": "yaw",
+        "degrees": -30,
+        "holePixels": 247,
+        "area": 61813,
+        "holeFraction": 0.003995923187678967,
+        "edgeSamples": 4818,
+        "haloExcursion": 0.12072619832490884
+      },
+      {
+        "axis": "yaw",
+        "degrees": -20,
+        "holePixels": 254,
+        "area": 65402,
+        "holeFraction": 0.003883673282162625,
+        "edgeSamples": 4788,
+        "haloExcursion": 0.11899847658361613
+      },
+      {
+        "axis": "yaw",
+        "degrees": 20,
+        "holePixels": 285,
+        "area": 65602,
+        "holeFraction": 0.0043443797445199845,
+        "edgeSamples": 4725,
+        "haloExcursion": 0.10778960473078163
+      },
+      {
+        "axis": "yaw",
+        "degrees": 30,
+        "holePixels": 413,
+        "area": 62600,
+        "holeFraction": 0.006597444089456869,
+        "edgeSamples": 4725,
+        "haloExcursion": 0.10586492374727713
+      },
+      {
+        "axis": "pitch",
+        "degrees": -30,
+        "holePixels": 63,
+        "area": 49244,
+        "holeFraction": 0.001279343676386971,
+        "edgeSamples": 4689,
+        "haloExcursion": 0.13234144158836517
+      },
+      {
+        "axis": "pitch",
+        "degrees": -20,
+        "holePixels": 60,
+        "area": 54494,
+        "holeFraction": 0.0011010386464564907,
+        "edgeSamples": 4704,
+        "haloExcursion": 0.13284480458850234
+      },
+      {
+        "axis": "pitch",
+        "degrees": 20,
+        "holePixels": 738,
+        "area": 70225,
+        "holeFraction": 0.010509077963688145,
+        "edgeSamples": 4803,
+        "haloExcursion": 0.10742713908382491
+      },
+      {
+        "axis": "pitch",
+        "degrees": 30,
+        "holePixels": 880,
+        "area": 69464,
+        "holeFraction": 0.01266843256938846,
+        "edgeSamples": 4779,
+        "haloExcursion": 0.09851925704368428
+      }
+    ],
+    "edgeCount": 240,
+    "score": 95.93758315709297,
+    "splats": 199498,
+    "pieces": 1,
+    "kept": true,
+    "reason": "Highest measured score with a two-per-category coverage floor."
+  },
+  {
+    "prompt": "C57-P35",
+    "file": "cdx-hard-feather-lichen",
+    "name": "Feather on lichen",
+    "category": "macro",
+    "sha256": "427907337fae68313866150de2f96bea188f63c803235f75d4a5d9161c56ea5b",
+    "depthSha256": "6f85d947e2194a7c5b850caea981be9323c30d09ec15e7aedd935d4b8ecd1b5d",
+    "poses": [
+      {
+        "axis": "yaw",
+        "degrees": -30,
+        "holePixels": 55,
+        "area": 61628,
+        "holeFraction": 0.000892451483092101,
+        "edgeSamples": 4566,
+        "haloExcursion": 0.08000566849604537
+      },
+      {
+        "axis": "yaw",
+        "degrees": -20,
+        "holePixels": 68,
+        "area": 64836,
+        "holeFraction": 0.0010488000493552964,
+        "edgeSamples": 4536,
+        "haloExcursion": 0.08503821281599107
+      },
+      {
+        "axis": "yaw",
+        "degrees": 20,
+        "holePixels": 120,
+        "area": 64485,
+        "holeFraction": 0.0018608978832286578,
+        "edgeSamples": 4437,
+        "haloExcursion": 0.08525986910427953
+      },
+      {
+        "axis": "yaw",
+        "degrees": 30,
+        "holePixels": 178,
+        "area": 61087,
+        "holeFraction": 0.002913876929624961,
+        "edgeSamples": 4398,
+        "haloExcursion": 0.08480503615725532
+      },
+      {
+        "axis": "pitch",
+        "degrees": -30,
+        "holePixels": 7,
+        "area": 49106,
+        "holeFraction": 0.00014254877204414939,
+        "edgeSamples": 4329,
+        "haloExcursion": 0.09000131353072555
+      },
+      {
+        "axis": "pitch",
+        "degrees": -20,
+        "holePixels": 15,
+        "area": 55802,
+        "holeFraction": 0.00026880756962116055,
+        "edgeSamples": 4356,
+        "haloExcursion": 0.09128990439150873
+      },
+      {
+        "axis": "pitch",
+        "degrees": 20,
+        "holePixels": 136,
+        "area": 68889,
+        "holeFraction": 0.0019741903642090898,
+        "edgeSamples": 4440,
+        "haloExcursion": 0.08790496378731703
+      },
+      {
+        "axis": "pitch",
+        "degrees": 30,
+        "holePixels": 162,
+        "area": 67818,
+        "holeFraction": 0.002388746350526409,
+        "edgeSamples": 4395,
+        "haloExcursion": 0.09028441410693987
+      }
+    ],
+    "edgeCount": 240,
+    "score": 97.12425533225496,
+    "splats": 199498,
+    "pieces": 1,
+    "kept": true,
+    "reason": "Highest measured score with a two-per-category coverage floor."
+  },
+  {
+    "prompt": "C57-P36",
+    "file": "cdx-hard-workshop-bench",
+    "name": "Workshop bench",
+    "category": "dense-clutter",
+    "sha256": "1df172c95fd9dd9c480617bfea3cceabfe1e7359f06059c72287bb34b7df4924",
+    "depthSha256": "ace64d4210c832de6ae12b29713c04b7a74087b54658dd62532841da4cc5fa3c",
+    "poses": [
+      {
+        "axis": "yaw",
+        "degrees": -30,
+        "holePixels": 643,
+        "area": 62957,
+        "holeFraction": 0.010213320202678018,
+        "edgeSamples": 4821,
+        "haloExcursion": 0.09877130690484066
+      },
+      {
+        "axis": "yaw",
+        "degrees": -20,
+        "holePixels": 536,
+        "area": 65478,
+        "holeFraction": 0.008185955588136474,
+        "edgeSamples": 4818,
+        "haloExcursion": 0.10072603553667275
+      },
+      {
+        "axis": "yaw",
+        "degrees": 20,
+        "holePixels": 83,
+        "area": 63941,
+        "holeFraction": 0.0012980716598113887,
+        "edgeSamples": 4839,
+        "haloExcursion": 0.09598239791887019
+      },
+      {
+        "axis": "yaw",
+        "degrees": 30,
+        "holePixels": 111,
+        "area": 60343,
+        "holeFraction": 0.0018394842815239547,
+        "edgeSamples": 4848,
+        "haloExcursion": 0.08576085549731499
+      },
+      {
+        "axis": "pitch",
+        "degrees": -30,
+        "holePixels": 118,
+        "area": 49941,
+        "holeFraction": 0.0023627880899461363,
+        "edgeSamples": 4767,
+        "haloExcursion": 0.09873764483767107
+      },
+      {
+        "axis": "pitch",
+        "degrees": -20,
+        "holePixels": 128,
+        "area": 55213,
+        "holeFraction": 0.0023182946045315414,
+        "edgeSamples": 4767,
+        "haloExcursion": 0.0880506093773785
+      },
+      {
+        "axis": "pitch",
+        "degrees": 20,
+        "holePixels": 512,
+        "area": 69284,
+        "holeFraction": 0.007389873563881993,
+        "edgeSamples": 4791,
+        "haloExcursion": 0.08862204869424312
+      },
+      {
+        "axis": "pitch",
+        "degrees": 30,
+        "holePixels": 715,
+        "area": 68485,
+        "holeFraction": 0.010440242388844272,
+        "edgeSamples": 4734,
+        "haloExcursion": 0.08831233380551243
+      }
+    ],
+    "edgeCount": 240,
+    "score": 96.32192837866732,
+    "splats": 199498,
+    "pieces": 2,
+    "kept": true,
+    "reason": "Highest measured score with a two-per-category coverage floor."
+  },
+  {
+    "prompt": "C57-P37",
+    "file": "cdx-hard-market-stall",
+    "name": "Market stall",
+    "category": "dense-clutter",
+    "sha256": "0dc22fa964f0d347ce4d75f6297192dba1e23bfaebf87260e4b4ca954f27351b",
+    "depthSha256": "c14a93d880d349c8a880ac87ee1d373d02be5b221175f782f60efe3ecefdb02c",
+    "poses": [
+      {
+        "axis": "yaw",
+        "degrees": -30,
+        "holePixels": 275,
+        "area": 60994,
+        "holeFraction": 0.004508640194117454,
+        "edgeSamples": 4713,
+        "haloExcursion": 0.09342536080844391
+      },
+      {
+        "axis": "yaw",
+        "degrees": -20,
+        "holePixels": 180,
+        "area": 65383,
+        "holeFraction": 0.002753009191991802,
+        "edgeSamples": 4737,
+        "haloExcursion": 0.0862968620000252
+      },
+      {
+        "axis": "yaw",
+        "degrees": 20,
+        "holePixels": 436,
+        "area": 68929,
+        "holeFraction": 0.006325349272439757,
+        "edgeSamples": 4602,
+        "haloExcursion": 0.08732094315344609
+      },
+      {
+        "axis": "yaw",
+        "degrees": 30,
+        "holePixels": 454,
+        "area": 65781,
+        "holeFraction": 0.006901688937535154,
+        "edgeSamples": 4518,
+        "haloExcursion": 0.08770755756928772
+      },
+      {
+        "axis": "pitch",
+        "degrees": -30,
+        "holePixels": 659,
+        "area": 51321,
+        "holeFraction": 0.01284074745230997,
+        "edgeSamples": 4752,
+        "haloExcursion": 0.09997606786822509
+      },
+      {
+        "axis": "pitch",
+        "degrees": -20,
+        "holePixels": 395,
+        "area": 56599,
+        "holeFraction": 0.006978921889079313,
+        "edgeSamples": 4728,
+        "haloExcursion": 0.09383232142264714
+      },
+      {
+        "axis": "pitch",
+        "degrees": 20,
+        "holePixels": 168,
+        "area": 70883,
+        "holeFraction": 0.00237010284553419,
+        "edgeSamples": 4407,
+        "haloExcursion": 0.08862905271026084
+      },
+      {
+        "axis": "pitch",
+        "degrees": 30,
+        "holePixels": 258,
+        "area": 69621,
+        "holeFraction": 0.003705778428922308,
+        "edgeSamples": 4023,
+        "haloExcursion": 0.0889912415376297
+      }
+    ],
+    "edgeCount": 240,
+    "score": 96.10186564229154,
+    "splats": 199498,
+    "pieces": 2,
+    "kept": false,
+    "reason": "Lower measured score after category coverage."
+  },
+  {
+    "prompt": "C57-P38",
+    "file": "cdx-hard-potting-bench",
+    "name": "Potting bench",
+    "category": "dense-clutter",
+    "sha256": "b6d9a095312ffae760b7f274cd446061e0562d73d4c698b7cabd6b6586b5eeff",
+    "depthSha256": "8721538945ad6ce321bd3456e13081e3e8cafed7970c176f0ca820d3ea9d6cd2",
+    "poses": [
+      {
+        "axis": "yaw",
+        "degrees": -30,
+        "holePixels": 187,
+        "area": 57040,
+        "holeFraction": 0.0032784011220196355,
+        "edgeSamples": 3573,
+        "haloExcursion": 0.07737223072828389
+      },
+      {
+        "axis": "yaw",
+        "degrees": -20,
+        "holePixels": 199,
+        "area": 61953,
+        "holeFraction": 0.0032121124077930043,
+        "edgeSamples": 3540,
+        "haloExcursion": 0.0762213359920243
+      },
+      {
+        "axis": "yaw",
+        "degrees": 20,
+        "holePixels": 624,
+        "area": 67155,
+        "holeFraction": 0.009291936564663837,
+        "edgeSamples": 3624,
+        "haloExcursion": 0.06148552136086255
+      },
+      {
+        "axis": "yaw",
+        "degrees": 30,
+        "holePixels": 842,
+        "area": 65430,
+        "holeFraction": 0.012868714656885221,
+        "edgeSamples": 3624,
+        "haloExcursion": 0.062172661559105336
+      },
+      {
+        "axis": "pitch",
+        "degrees": -30,
+        "holePixels": 83,
+        "area": 54128,
+        "holeFraction": 0.0015334023056458763,
+        "edgeSamples": 3573,
+        "haloExcursion": 0.079331368707573
+      },
+      {
+        "axis": "pitch",
+        "degrees": -20,
+        "holePixels": 64,
+        "area": 59060,
+        "holeFraction": 0.0010836437521164917,
+        "edgeSamples": 3600,
+        "haloExcursion": 0.06493572984749502
+      },
+      {
+        "axis": "pitch",
+        "degrees": 20,
+        "holePixels": 512,
+        "area": 67974,
+        "holeFraction": 0.007532291758613588,
+        "edgeSamples": 3513,
+        "haloExcursion": 0.07217673291918565
+      },
+      {
+        "axis": "pitch",
+        "degrees": 30,
+        "holePixels": 789,
+        "area": 66790,
+        "holeFraction": 0.011813145680491091,
+        "edgeSamples": 3450,
+        "haloExcursion": 0.06932764990054024
+      }
+    ],
+    "edgeCount": 240,
+    "score": 97.09325030534941,
+    "splats": 199498,
+    "pieces": 1,
+    "kept": true,
+    "reason": "Highest measured score with a two-per-category coverage floor."
+  },
+  {
+    "prompt": "C57-P39",
+    "file": "cdx-hard-sewing-materials",
+    "name": "Sewing materials",
+    "category": "dense-clutter",
+    "sha256": "b29ca171d252b496b63e1c3d86e2ef154baa60ff57f1141172716f134ed08b60",
+    "depthSha256": "d58ba41793170d9ed4c43bd11f857ae2401b6c00adf728b8693de43f48e3c129",
+    "poses": [
+      {
+        "axis": "yaw",
+        "degrees": -30,
+        "holePixels": 161,
+        "area": 61215,
+        "holeFraction": 0.0026300743281875358,
+        "edgeSamples": 3729,
+        "haloExcursion": 0.07703058697332571
+      },
+      {
+        "axis": "yaw",
+        "degrees": -20,
+        "holePixels": 146,
+        "area": 64893,
+        "holeFraction": 0.0022498574576610727,
+        "edgeSamples": 3729,
+        "haloExcursion": 0.08031591290310734
+      },
+      {
+        "axis": "yaw",
+        "degrees": 20,
+        "holePixels": 438,
+        "area": 65878,
+        "holeFraction": 0.006648653571753848,
+        "edgeSamples": 3720,
+        "haloExcursion": 0.09699557242251786
+      },
+      {
+        "axis": "yaw",
+        "degrees": 30,
+        "holePixels": 516,
+        "area": 62260,
+        "holeFraction": 0.008287825248955992,
+        "edgeSamples": 3738,
+        "haloExcursion": 0.09451525928723575
+      },
+      {
+        "axis": "pitch",
+        "degrees": -30,
+        "holePixels": 4,
+        "area": 48425,
+        "holeFraction": 0.00008260196179659266,
+        "edgeSamples": 3600,
+        "haloExcursion": 0.10590413943355173
+      },
+      {
+        "axis": "pitch",
+        "degrees": -20,
+        "holePixels": 26,
+        "area": 54903,
+        "holeFraction": 0.0004735624647104894,
+        "edgeSamples": 3630,
+        "haloExcursion": 0.12449413925349792
+      },
+      {
+        "axis": "pitch",
+        "degrees": 20,
+        "holePixels": 1557,
+        "area": 70600,
+        "holeFraction": 0.022053824362606233,
+        "edgeSamples": 3669,
+        "haloExcursion": 0.08371250380773777
+      },
+      {
+        "axis": "pitch",
+        "degrees": 30,
+        "holePixels": 1912,
+        "area": 69848,
+        "holeFraction": 0.027373725804604284,
+        "edgeSamples": 3630,
+        "haloExcursion": 0.0842748339005027
+      }
+    ],
+    "edgeCount": 240,
+    "score": 95.55559417666262,
+    "splats": 199498,
+    "pieces": 1,
+    "kept": false,
+    "reason": "Lower measured score after category coverage."
+  },
+  {
+    "prompt": "C57-P40",
+    "file": "cdx-hard-ceramic-shelf",
+    "name": "Ceramic studio shelf",
+    "category": "dense-clutter",
+    "sha256": "48fb04b3126eb12b8f417b5cd79e0f22e10c6c698e1f0038c9bad9d17b33ee07",
+    "depthSha256": "5d7dcef366c594d06d4c9f3a203d09d16917846fe39376d41fb462c59b4d711f",
+    "poses": [
+      {
+        "axis": "yaw",
+        "degrees": -30,
+        "holePixels": 341,
+        "area": 61452,
+        "holeFraction": 0.00554904641020634,
+        "edgeSamples": 4413,
+        "haloExcursion": 0.0546478097243886
+      },
+      {
+        "axis": "yaw",
+        "degrees": -20,
+        "holePixels": 277,
+        "area": 64531,
+        "holeFraction": 0.00429251057631216,
+        "edgeSamples": 4416,
+        "haloExcursion": 0.056758844842285106
+      },
+      {
+        "axis": "yaw",
+        "degrees": 20,
+        "holePixels": 505,
+        "area": 64252,
+        "holeFraction": 0.007859677519765922,
+        "edgeSamples": 3948,
+        "haloExcursion": 0.046303911635576615
+      },
+      {
+        "axis": "yaw",
+        "degrees": 30,
+        "holePixels": 559,
+        "area": 61359,
+        "holeFraction": 0.009110317964764745,
+        "edgeSamples": 3960,
+        "haloExcursion": 0.049967320261438276
+      },
+      {
+        "axis": "pitch",
+        "degrees": -30,
+        "holePixels": 162,
+        "area": 47728,
+        "holeFraction": 0.003394233992624874,
+        "edgeSamples": 4272,
+        "haloExcursion": 0.06492160534625878
+      },
+      {
+        "axis": "pitch",
+        "degrees": -20,
+        "holePixels": 130,
+        "area": 54141,
+        "holeFraction": 0.0024011377698971207,
+        "edgeSamples": 4074,
+        "haloExcursion": 0.04716278263882907
+      },
+      {
+        "axis": "pitch",
+        "degrees": 20,
+        "holePixels": 483,
+        "area": 69179,
+        "holeFraction": 0.006981887567036239,
+        "edgeSamples": 4038,
+        "haloExcursion": 0.04504171158309814
+      },
+      {
+        "axis": "pitch",
+        "degrees": 30,
+        "holePixels": 925,
+        "area": 69176,
+        "holeFraction": 0.013371689603330635,
+        "edgeSamples": 3897,
+        "haloExcursion": 0.04467287556541771
+      }
+    ],
+    "edgeCount": 240,
+    "score": 97.72379546080433,
+    "splats": 199498,
+    "pieces": 3,
+    "kept": true,
+    "reason": "Highest measured score with a two-per-category coverage floor."
+  }
+]

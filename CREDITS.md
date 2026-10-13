@@ -1661,6 +1661,51 @@ Picture QR (lane QR r4, October 10, 2026) also offers four of them as its sample
 AI-made in its picker and its credit: Felt farm (D37), Glass wave (D38), Mushrooms (D27), and Stone
 arch (D17).
 
+## AI-made Studio samples: hard cases (Codex task 57)
+
+Made by Ryan with Codex (GPT-6) and the OpenAI native image tool, October 13, 2026. These 20
+fictional pictures were selected from 40 original candidates measured in Photo to 3D. They use the
+existing **AI-made by the owner** credit, with that label beside each picture in the Hard cases
+picker group. The generator did not return its model identity. No people, text, logos, or real
+landmarks were seen. They are Studio samples, never real captures or real places, and never used for
+science, math, engineering, or photoreal shelves. Each JPEG is 1,280 px wide (quality 82); its depth
+map was made by the unchanged `tools/dsm-depth.mjs`. File hashes, prompts, scores, and selection
+decisions are in [the scored report](docs/audits/hard-case-samples-2026-10.md).
+
+- Glass jug (C57-P01): `assets/toys/photo-3d/hard-cases/cdx-hard-glass-jug.jpg` (glass-water).
+- Stones under water (C57-P05): `assets/toys/photo-3d/hard-cases/cdx-hard-submerged-stones.jpg`
+  (glass-water).
+- Backlit dog (C57-P11): `assets/toys/photo-3d/hard-cases/cdx-hard-backlit-dog.jpg` (hair-fur).
+- Wool fleece (C57-P12): `assets/toys/photo-3d/hard-cases/cdx-hard-wool-fleece.jpg` (hair-fur).
+- Bicycle spokes (C57-P13): `assets/toys/photo-3d/hard-cases/cdx-hard-bicycle-spokes.jpg`
+  (thin-structures).
+- Bare branches (C57-P16): `assets/toys/photo-3d/hard-cases/cdx-hard-bare-branches.jpg`
+  (thin-structures).
+- Puddle reflection (C57-P19): `assets/toys/photo-3d/hard-cases/cdx-hard-puddle-reflection.jpg`
+  (reflections).
+- Polished floor (C57-P20): `assets/toys/photo-3d/hard-cases/cdx-hard-polished-floor.jpg`
+  (reflections).
+- Reflecting pool (C57-P24): `assets/toys/photo-3d/hard-cases/cdx-hard-reflecting-pool.jpg`
+  (reflections).
+- Lanterns at night (C57-P25): `assets/toys/photo-3d/hard-cases/cdx-hard-lanterns.jpg` (low-light).
+- Campfire (C57-P26): `assets/toys/photo-3d/hard-cases/cdx-hard-campfire.jpg` (low-light).
+- Candle still life (C57-P27): `assets/toys/photo-3d/hard-cases/cdx-hard-candle-still-life.jpg`
+  (low-light).
+- Moonlit greenhouse (C57-P28): `assets/toys/photo-3d/hard-cases/cdx-hard-moonlit-greenhouse.jpg`
+  (low-light).
+- Lamps in a potting shed (C57-P29): `assets/toys/photo-3d/hard-cases/cdx-hard-shed-lamps.jpg`
+  (low-light).
+- Fire bowl at dusk (C57-P30): `assets/toys/photo-3d/hard-cases/cdx-hard-fire-bowl.jpg` (low-light).
+- Snail and wet moss (C57-P34): `assets/toys/photo-3d/hard-cases/cdx-hard-snail-shell.jpg` (macro).
+- Feather on lichen (C57-P35): `assets/toys/photo-3d/hard-cases/cdx-hard-feather-lichen.jpg`
+  (macro).
+- Workshop bench (C57-P36): `assets/toys/photo-3d/hard-cases/cdx-hard-workshop-bench.jpg`
+  (dense-clutter).
+- Potting bench (C57-P38): `assets/toys/photo-3d/hard-cases/cdx-hard-potting-bench.jpg`
+  (dense-clutter).
+- Ceramic studio shelf (C57-P40): `assets/toys/photo-3d/hard-cases/cdx-hard-ceramic-shelf.jpg`
+  (dense-clutter).
+
 ## Task 54: more sample pictures
 
 Codex (GPT-6) built the sample selection and verification tools for Ryan under Splashery’s MIT
