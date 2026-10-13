@@ -260,7 +260,11 @@ export function createUI(app) {
       }
     });
     const label = document.createElement("span");
-    label.textContent = toy.label;
+    label.className = "toy-card-label";
+    const name = document.createElement("span");
+    name.className = "toy-card-name";
+    name.textContent = toy.label;
+    label.append(name);
     b.append(img, label);
     b.addEventListener("click", () => {
       // Picking from the phone grid folds it back to the row at once.
@@ -308,30 +312,10 @@ export function createUI(app) {
     els.shelf.replaceChildren(...list.map((t) => cards.get(t.id)));
     els.shelf.scrollLeft = 0;
     els.shelf.scrollTop = 0;
-    els.shelfEmpty.hidden = list.length > 0;
     els.shelfEmpty.textContent = list.length ? "" : `No toys match “${q}”.`;
     for (const [id, b] of chips)
       b.setAttribute("aria-pressed", String(!q && id === shelf.category));
     revealCurrent();
-    requestAnimationFrame(fitLabels);
-  }
-
-  // Fix11: on a phone a name wraps onto two lines (styles.css); one that still needs a third with
-  // this device's font ("Leaning Tower of Pisa") steps its letters down a little, to 9 px at the
-  // least, so no name is cut. The card keeps its size. Measured again for the row and the grid
-  // (whose cards are wider).
-  function fitLabels() {
-    const spans = [...els.shelf.children].map((b) => b.querySelector("span")).filter(Boolean);
-    for (const s of spans) if (s.style.fontSize) s.style.fontSize = s.style.minHeight = "";
-    if (!narrow.matches) return;
-    const over = (s) => s.clientHeight > 0 && s.scrollHeight > s.clientHeight + 1;
-    let todo = spans.filter(over);
-    for (const s of todo) s.style.minHeight = getComputedStyle(s).minHeight;
-    for (const px of [10, 9.5, 9]) {
-      for (const s of todo) s.style.fontSize = `${px}px`;
-      todo = todo.filter(over);
-      if (!todo.length) break;
-    }
   }
 
   function revealCurrent() {
@@ -538,10 +522,62 @@ export function createUI(app) {
   );
   els.toyAlive.addEventListener("change", () => app.setMotion({ alive: els.toyAlive.checked }));
   els.toyAction.addEventListener("click", () => app.act());
+  for (const [id, factor] of [
+    ["stage-zoom-in", 0.85],
+    ["stage-zoom-out", 1 / 0.85],
+  ])
+    $(id).addEventListener("click", () => {
+      app.player.camera.zoomBy(factor);
+      app.player.interact();
+      app.player.stage.requestRender();
+    });
   const controlInputs = new Map(); // key -> { input, output, def }
+  let partKeyboard = null;
+  let partButtons = [];
+  const partPanel = $("toy-keyboard");
+  const partStatus = document.createElement("p");
+  partStatus.className = "note";
+  partStatus.setAttribute("role", "status");
+  function refreshPartKeyboard() {
+    if (!partKeyboard || !partPanel.checkVisibility()) return;
+    for (const [i, item] of partKeyboard.items().entries()) {
+      const b = partButtons[i];
+      if (b.getAttribute("aria-label") !== item.label) b.setAttribute("aria-label", item.label);
+      if (item.pressed !== undefined && b.getAttribute("aria-pressed") !== String(item.pressed))
+        b.setAttribute("aria-pressed", String(item.pressed));
+      const disabled = String(!!item.disabled);
+      if (b.getAttribute("aria-disabled") !== disabled) b.setAttribute("aria-disabled", disabled);
+    }
+    const status = partKeyboard.status?.() || "";
+    if (partStatus.textContent !== status) partStatus.textContent = status;
+  }
+  app.player.on("frame", refreshPartKeyboard);
 
   function renderToyPanel(info) {
     const recipe = info?.recipe || null;
+    partKeyboard = recipe?.keyboard || null;
+    partButtons = [];
+    partPanel.replaceChildren();
+    partPanel.hidden = !partKeyboard;
+    if (partKeyboard) {
+      const title = document.createElement("h3");
+      title.textContent = partKeyboard.label;
+      const group = document.createElement("div");
+      group.className = "part-buttons";
+      group.setAttribute("role", "group");
+      group.setAttribute("aria-label", partKeyboard.label);
+      partButtons = partKeyboard.items().map((item) => {
+        const b = document.createElement("button");
+        b.type = "button";
+        b.textContent = item.text;
+        b.setAttribute("aria-label", item.label);
+        b.addEventListener("click", () => app.player.playPart(item.id));
+        group.append(b);
+        return b;
+      });
+      partPanel.append(title, partStatus, group);
+      refreshPartKeyboard();
+    }
     if (app.tool === "orbit")
       els.toolHint.textContent =
         TOOL_HINTS[recipe?.grab ? "stretch" : ui2On() ? "orbit2" : "orbit"]; // UI r2
@@ -1971,13 +2007,16 @@ export function createUI(app) {
   });
   // UI r3: the top bar's flag button, flag colors for every toy.
   function showFlagPop(on) {
+    const hadFocus = els.flagPop.contains(document.activeElement);
     els.flagPop.hidden = !on;
     els.flagToggle.setAttribute("aria-expanded", String(on));
     if (on) listFlags().then(() => els.flagGlobal.focus({ preventScroll: true }));
+    else if (hadFocus) els.flagToggle.focus({ preventScroll: true });
   }
   els.flagToggle.addEventListener("click", () => showFlagPop(els.flagPop.hidden));
   els.flagPop.addEventListener("keydown", (e) => {
     if (e.key !== "Escape") return;
+    e.preventDefault();
     showFlagPop(false);
     els.flagToggle.focus();
   });
@@ -2380,12 +2419,12 @@ export function createUI(app) {
     if (narrow.matches)
       els.galleryOpen?.setAttribute("aria-expanded", String(mode === "grid" && full)); // UI r5
     els.sheetMax.title = full ? "Make it smaller" : "Fill the screen";
+    els.sheetMax.setAttribute("aria-label", els.sheetMax.title);
     els.sheetToggle.setAttribute("aria-expanded", String(mode === "panel"));
     // From the grid, More goes straight to the settings (one tap); the
     // handle, a swipe down, a pick or a tap on the toy closes the grid.
     els.sheetToggle.textContent = m === "panel" ? "Done" : "More";
     refreshDock();
-    requestAnimationFrame(fitLabels); // Fix11: the row's and the grid's cards differ in width
   };
   function setMode(m, fill = false) {
     if (m === "grid" && !SHELF_GRID) m = "panel";
@@ -2394,7 +2433,10 @@ export function createUI(app) {
     if (mode === m && full === f) return;
     mode = m;
     full = f;
+    const focused = document.activeElement;
     applySheet();
+    if (narrow.matches && els.panel.contains(focused) && !focused.checkVisibility())
+      (m === "hidden" ? els.galleryOpen : els.sheetToggle).focus({ preventScroll: true });
     if (m !== "panel") revealCurrent();
   }
   new ResizeObserver(refreshDock).observe(els.panel);
@@ -2404,7 +2446,14 @@ export function createUI(app) {
   // UI r2: the maximize button fills the screen with the grid or the panel.
   els.sheetMax.addEventListener("click", () => setMode(mode, !full));
   narrow.addEventListener("change", applySheet);
-  document.fonts?.ready.then(() => requestAnimationFrame(fitLabels));
+  document.querySelector(".skip-link").addEventListener("click", (e) => {
+    e.preventDefault();
+    if (focusOn) setFocus(false);
+    if (galleryOn) setGallery(false);
+    setFolded(false);
+    if (narrow.matches) setMode("panel");
+    tabs.find((t) => t.getAttribute("aria-selected") === "true").focus();
+  });
 
   // The handle: swipe up for the grid, down for the row, tap to toggle. The
   // tab bar takes the same swipes but keeps the panel open when swiped up.
@@ -2962,11 +3011,34 @@ export function createUI(app) {
   let helpModule = null;
   let helpKey = null;
   let helpInfo = null;
+  let helpReady = Promise.resolve();
   let helpTimer = 0;
+  const dismissHelp = () => {
+    if (!help.line.contains(document.activeElement)) hideHelpLine();
+  };
+  function armHelpTimer() {
+    if (!help.line.classList.contains("show")) return;
+    clearTimeout(helpTimer);
+    // Loading time is not reading time. Start the dismissal clock once the
+    // app is ready and the toy has finished loading.
+    helpTimer =
+      document.body.dataset.ready === "true" && !app.busy
+        ? setTimeout(dismissHelp, HELP_MS)
+        : setTimeout(armHelpTimer, 100);
+  }
+  help.line.addEventListener("focusin", () => {
+    clearTimeout(helpTimer);
+    help.line.classList.add("show");
+    help.toggle.setAttribute("aria-expanded", "true");
+  });
+  help.line.addEventListener("focusout", () => {
+    armHelpTimer();
+  });
   function hideHelpLine() {
     clearTimeout(helpTimer);
     help.line.classList.remove("show");
     help.toggle.setAttribute("aria-expanded", "false");
+    if (help.line.contains(document.activeElement)) help.toggle.focus({ preventScroll: true });
     // Hidden once faded (the fade is off under reduced motion).
     helpTimer = setTimeout(() => (help.line.hidden = true), 500);
   }
@@ -2974,28 +3046,37 @@ export function createUI(app) {
   // lines for a scan's credit.
   function placeHelpLine() {
     const r = els.toyStatus.getBoundingClientRect();
-    help.line.style.top = narrow.matches && r.height ? `${Math.round(r.bottom + 6)}px` : "";
+    help.line.style.top = narrow.matches && r.height ? `${Math.ceil(r.bottom)}px` : "";
     help.line.style.bottom = "";
     // UI r3: on a computer a toy that holds still, facing you (a chart, a
     // page), can reach up under the line; then the line sits at the bottom
     // left instead, above the toy's name, when the toy is clear of it there.
     const toy = app.player?.scene?.toy;
     const still = toy?.kind === "builtin" && holdsStill(TOYS.find((t) => t.id === toy.id));
-    if (narrow.matches || !still) return;
+    if (!narrow.matches && !still) return;
     const box = toyScreenBox();
     if (!box) return;
     const line = help.line.getBoundingClientRect();
     const h = line.height || 60;
+    if (narrow.matches) {
+      const top = r.bottom;
+      const lowBottom = $("stage-zoom").getBoundingClientRect().top - 8;
+      if (box.top < top + h + 4 && box.bottom - (lowBottom - h - 4) < top + h + 4 - box.top) {
+        help.line.style.top = "auto";
+        help.line.style.bottom = `${Math.round(window.innerHeight - lowBottom)}px`;
+      }
+      return;
+    }
     if (box.left > 18 + (line.width || 440) + 4) return;
     // How far the toy's box reaches under the line at the top and at the
     // bottom (the box is a little larger than the toy): the side it reaches
     // less far wins.
-    const lowTop = r.top - h - 8;
+    const lowTop = r.top - h - 4;
     const atTop = 62 + h + 4 - box.top;
     const atBottom = box.bottom - (lowTop - 4);
     if (atTop > 0 && atBottom < atTop) {
       help.line.style.top = "auto";
-      help.line.style.bottom = `${Math.round(window.innerHeight - r.top + 8)}px`;
+      help.line.style.bottom = `${Math.round(window.innerHeight - r.top + 4)}px`;
     }
   }
   // UI r3: where the toy's bounding box falls on the stage (CSS pixels).
@@ -3035,7 +3116,7 @@ export function createUI(app) {
     void help.line.offsetWidth; // start the fade from the hidden state
     help.line.classList.add("show");
     help.toggle.setAttribute("aria-expanded", "true");
-    helpTimer = setTimeout(hideHelpLine, HELP_MS);
+    armHelpTimer();
     // UI r3: placed again once the new toy's view is set (it may move).
     for (const ms of [250, 800]) setTimeout(() => !help.line.hidden && placeHelpLine(), ms);
   }
@@ -3090,8 +3171,8 @@ export function createUI(app) {
   );
   help.about.addEventListener("click", () => {
     hideHelpLine();
-    showTab("about");
     if (narrow.matches) setMode("panel");
+    showTab("about", { focus: true });
     els.panes.scrollTop = 0;
   });
   // /Toy help
@@ -3161,8 +3242,13 @@ export function createUI(app) {
     },
     setToyPanel(info) {
       renderToyPanel(info);
-      setToyHelp(info); // Toy help (lane Help)
+      helpReady = setToyHelp(info); // Toy help (lane Help)
       showMotion(app.player.effectiveMotion(), app.player.scene.motion.controls);
+    },
+    async showToyHelp() {
+      const info = helpInfo;
+      await helpReady;
+      if (helpAuto && info === helpInfo) showHelpLine();
     },
     // Shows motion as it runs (under reduced motion, off until asked).
     setMotion(m, controls) {
@@ -3393,11 +3479,18 @@ export function createUI(app) {
         cancel.type = "button";
         cancel.id = "link-confirm-cancel";
         cancel.textContent = "Cancel";
-        const close = () => (bar.hidden = true);
+        const close = () => {
+          bar.hidden = true;
+          const opener = bar.returnFocus;
+          (opener?.checkVisibility() ? opener : $("stage")).focus({ preventScroll: true });
+        };
         open.addEventListener("click", () => setTimeout(close, 0));
         cancel.addEventListener("click", close);
         bar.addEventListener("keydown", (e) => {
-          if (e.key === "Escape") close();
+          if (e.key === "Escape") {
+            e.preventDefault();
+            close();
+          }
         });
         row.append(open, cancel);
         bar.append(text, addr, row);
@@ -3409,6 +3502,7 @@ export function createUI(app) {
       const open = bar.querySelector("#link-confirm-open");
       open.href = u.href;
       open.target = u.protocol === "mailto:" ? "_self" : "_blank";
+      bar.returnFocus = document.activeElement;
       bar.hidden = false;
       open.focus({ preventScroll: true });
     },
@@ -3477,8 +3571,10 @@ export function createUI(app) {
     toggleGallery, // UI r5
     // Escape: leave focus mode or the gallery page first (true when it did).
     escape() {
-      if (!els.flagPop.hidden)
-        els.flagPop.hidden = true; // UI r3
+      const linkDialog = $("link-confirm");
+      if (linkDialog && !linkDialog.hidden) $("link-confirm-cancel").click();
+      else if (!els.flagPop.hidden)
+        (showFlagPop(false), els.flagToggle.focus()); // UI r3
       else if (focusOn) setFocus(false);
       else if (galleryOn) setGallery(false);
       else return false;
