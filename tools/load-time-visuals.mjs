@@ -2,6 +2,7 @@
 // another rendering page open. Clocks and the camera are fixed for each pose.
 import fs from "node:fs";
 import path from "node:path";
+import { execFileSync } from "node:child_process";
 import { chromium } from "playwright-core";
 import { PNG } from "pngjs";
 import { TOYS } from "../src/toys.js";
@@ -12,6 +13,15 @@ const option = (key, fallback) =>
 const raw = path.resolve(option("out", "../load-time-runs/visuals"));
 const out = path.join(raw, "images");
 fs.mkdirSync(out, { recursive: true });
+const source = {
+  frozenMain: execFileSync("git", ["rev-parse", option("frozen-main", "origin/main")], {
+    encoding: "utf8",
+  }).trim(),
+  candidateSource: execFileSync("git", ["rev-parse", option("candidate-source", "HEAD")], {
+    encoding: "utf8",
+  }).trim(),
+  gpuCompletion: "WebGL gl.finish() immediately before capture",
+};
 const pilot = process.argv.includes("--pilot");
 const allIds = [
   "cactus",
@@ -120,7 +130,11 @@ async function shot(id, device, phase, pose, halfBudget = false) {
     { timeout: 60000 },
   );
   await page.waitForTimeout(1500);
-  await page.evaluate(() => window.__splashery.player.stage.device.gl?.finish());
+  await page.evaluate(() => {
+    const gl = window.__splashery.player.stage.device.gl;
+    if (!gl || gl.isContextLost()) throw new Error("A live WebGL context is required for capture");
+    gl.finish();
+  });
   const file = `${id}-${device}-${halfBudget ? "lossy-half-budget" : phase}-${pose}.png`;
   await page.locator("#stage").screenshot({ path: path.join(out, file), scale: "css" });
   const info = await page.evaluate(() => ({
@@ -195,7 +209,7 @@ try {
           if (!moved.differentPixels) throw new Error(`${id} ${device}: tap pose did not move`);
           delta.tapChangedPixels = moved.differentPixels;
         }
-        records.push({ captureVersion: 2, id, device, pose, before, after, ...delta });
+        records.push({ captureVersion: 3, ...source, id, device, pose, before, after, ...delta });
         console.log(`${id} ${device} ${pose}: ${delta.differentPixels} changed pixels`);
         fs.writeFileSync(recordsFile, JSON.stringify(records, null, 2) + "\n");
       }

@@ -22,11 +22,11 @@ const stats = (rows) => {
   const times = rows.map((r) => r.firstFrameMs).sort((a, b) => a - b);
   return {
     n: times.length,
-    median: times[Math.floor(times.length / 2)],
+    median: (times[Math.floor((times.length - 1) / 2)] + times[Math.floor(times.length / 2)]) / 2,
     min: times[0],
     max: times.at(-1),
     bytes: Math.round(rows.reduce((n, r) => n + r.bytes, 0) / rows.length),
-    requests: rows[0].requests,
+    requests: Math.round(rows.reduce((n, r) => n + r.requests, 0) / rows.length),
   };
 };
 const fmt = (n) => Math.round(n).toLocaleString("en-US");
@@ -38,13 +38,27 @@ function loadRun(root) {
     before: read(`${root}/before.json`).map(summarize),
     after: read(`${root}/after.json`).map(summarize),
   };
+  const beforeGroups = groups(data.before).sort();
+  const afterGroups = groups(data.after).sort();
+  if (!beforeGroups.length || JSON.stringify(beforeGroups) !== JSON.stringify(afterGroups))
+    throw Error(`Before/after groups differ: ${root}`);
   for (const phase of ["before", "after"])
     for (const k of groups(data[phase])) {
       const rows = data[phase].filter((r) => `${r.device}:${r.id}` === k);
       if (
-        rows.length < 5 ||
-        rows.some((r) => r.status !== "ok" || r.errors.length) ||
-        new Set(rows.map((r) => r.sample)).size !== rows.length
+        rows.length !== 5 ||
+        rows.some(
+          (r) =>
+            r.status !== "ok" ||
+            !Array.isArray(r.errors) ||
+            r.errors.length ||
+            !Number.isFinite(r.firstFrameMs) ||
+            r.firstFrameMs <= 0 ||
+            !Number.isFinite(r.bytes) ||
+            r.bytes <= 0 ||
+            !Number.isFinite(r.requests),
+        ) ||
+        JSON.stringify(rows.map((r) => r.sample).sort((a, b) => a - b)) !== "[0,1,2,3,4]"
       )
         throw Error(`Incomplete or failed five-run group: ${phase}:${k}`);
     }
@@ -52,6 +66,11 @@ function loadRun(root) {
 }
 const timing = loadRun(option("timing", "../load-time-runs/review-timing"));
 const payload = loadRun(option("payload", "../load-time-runs/review-top20"));
+if (
+  payload &&
+  (groups(payload.before).length !== 20 || payload.before.some((r) => r.device !== "phone"))
+)
+  throw Error("The payload run must contain exactly 20 phone groups.");
 if (timing) fs.writeFileSync(`${dir}/review-timing.json`, JSON.stringify(timing, null, 2) + "\n");
 if (payload) fs.writeFileSync(`${dir}/review-top20.json`, JSON.stringify(payload, null, 2) + "\n");
 const historical = {
@@ -182,7 +201,7 @@ lines.push(
   "",
   "Opening bytes count completed HTTP bodies at a snapshot after a real 1.5-second delay. They exclude headers, blob/data URLs, and incomplete bodies. Worker timing is approximate. The local server does not apply HTTP compression; live Pages wire totals can differ. Idle/tap cadence and a heap census were not repeated.",
   "",
-  "Serve archived baseline main on port 4174 and the frozen candidate on 4173. `tools/load-time-audit.mjs` and `tools/load-time-paired.mjs` accept `--only=ID,ID`, `--device=phone`, `--samples=5`, `--out=DIR`, `--frozen-main=COMMIT`, and `--candidate-source=COMMIT`. Their defaults save raw runs beside the repository, not under `docs/audits/`. Run with `DISPLAY=:91 LP_NUM_THREADS=2 SPLASHERY_GL=llvmpipe SPLASHERY_CHROMIUM=/usr/bin/chromium nice -n 10`. The paired script creates a fresh browser per opening and alternates each adjacent pair.",
+  "Serve archived baseline main on port 4174 and the frozen candidate on 4173. `tools/load-time-audit.mjs` and `tools/load-time-paired.mjs` accept `--only=ID,ID`, `--device=phone`, `--samples=5`, `--out=DIR`, `--frozen-main=COMMIT`, and `--candidate-source=COMMIT`. Their defaults save raw runs beside the repository, not under `docs/audits/`. Run with `DISPLAY=:92 LP_NUM_THREADS=2 SPLASHERY_GL=llvmpipe SPLASHERY_CHROMIUM=/usr/bin/chromium nice -n 10`. The paired script creates a fresh browser per opening and alternates each adjacent pair.",
   "",
   "`tools/load-time-visuals.mjs --out=DIR` writes full captures outside Git. `tools/load-time-prefixes.mjs`, `tools/load-time-smoothing.mjs`, and `tools/load-time-compress.mjs` regenerate production files. `tools/load-time-report.mjs --timing=DIR --payload=DIR` publishes compact summaries and tables. No raw request JSON or bulk captures belong in this task's audit tree.",
   "",
