@@ -151,7 +151,10 @@ Model: Sonnet 5.5 (claude-sonnet-5-5), high effort. October 12 to 13, 2026. Bran
    ("not entirely splat-based"). 8. splat.html: "Do not mix them up" deleted; the sentence now ends
    "(Figure 1):".
 
-Specs: see "For the Operator". Screenshots: `tests/screenshots/man9-*.png` (390x844 and 1440x900).
+Specs (October 13, 2026): ln, man, man2, man3, man3-2, man4, man4-pages, man5, man6, man7a, man7b,
+st2, site, spg, tpg and man9, one run: 252 passed (17.9 minutes). Prettier clean;
+`node tools/us-english.mjs --diff` lists only lines in files this lane did not touch. The standard
+screenshots are restored. Screenshots: `tests/screenshots/man9-*.png` (390x844 and 1440x900).
 
 ## Notes
 
@@ -173,6 +176,7 @@ Specs: see "For the Operator". Screenshots: `tests/screenshots/man9-*.png` (390x
 
 ## For the Operator
 
-READY after the owner's "good" marks on the man9 cards. Cards (Effect review page 2, lane
-`ManualR9`, built by Sonnet 5.5): man9-moving, man9-depth, man9-table, man9-qr, man9-file,
-man9-qr-row, man9-more-pics, man9-pdf-contents.
+Cards are posted on Effect review page 2 (lane `ManualR9`, MP4 clips, Sonnet 5.5). READY after the
+owner's "good" marks on the man9 cards. Cards (Effect review page 2, lane `ManualR9`, built by
+Sonnet 5.5): man9-moving, man9-depth, man9-table, man9-qr, man9-file, man9-qr-row, man9-more-pics,
+man9-pdf-contents.
