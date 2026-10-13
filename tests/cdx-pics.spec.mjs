@@ -32,7 +32,7 @@ test("20 Studio samples and 24 payload-independent QR pictures have complete rec
     expect(s.label).toContain("(AI-made)");
     expect(s.license).toBe("AI-made by the owner");
   }
-  expect(QR_PICTURES.some((s) => s.ai)).toBe(true);
+  expect(QR_PICTURES.every((s) => s.ai)).toBe(true);
   expect(new Set(LINKS).size).toBe(5);
   expect(Math.max(...LINKS.map((s) => s.length))).toBeGreaterThanOrEqual(100);
   for (const s of QR_PICTURES) {

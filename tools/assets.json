@@ -6499,17 +6499,17 @@
       "note": "AI-made by the owner with an AI image tool, on his instruction. Fictional subject; no people, faces, logos, readable text, or real landmarks. Native square image resized to 960×960, JPEG quality 88. Full prompt: tools/cdx-pics-qr-ai-prompts.json. No payload-specific image conditioning."
     },
     {
-      "id": "cdx-qr-print-3-6",
-      "file": "assets/toys/qr-picture/codex/cdx-qr-print-3-6.jpg",
-      "author": "Ryan, with Codex (GPT-6)",
-      "page": "https://github.com/ryanjosephkamp/splashery/blob/main/tools/cdx-pics-qr-print.mjs",
-      "license": "CC0 1.0",
-      "ai": false,
+      "id": "cdx-qr-ai-green-watering-can",
+      "file": "assets/toys/qr-picture/codex/cdx-qr-ai-green-watering-can.jpg",
+      "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+      "page": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+      "license": "AI-made by the owner",
+      "ai": true,
       "toy": "qr-picture",
-      "name": "Pebble pool soft 6",
+      "name": "Green watering can",
       "checked": "October 13, 2026",
-      "sha256": "3a5ba4d25de3df1c4d314a56a9b2312ce6d41ac541d1360cde8f6471e495b1c6",
-      "score": 49.53210657929096,
+      "sha256": "4aaf392bf69ec827d1283cf9a0e13a47454663b772ca11d2daa65e5b268c59f7",
+      "score": 49.47738052207224,
       "testedLinks": [
         "https://ryanjosephkamp.github.io/splashery/",
         "https://example.org/",
@@ -6517,7 +6517,8 @@
         "https://example.net/exhibits/ceramics?view=phone&color=blue",
         "https://example.org/collections/botanical-studies/2026/autumn/large-format-print?item=fern-frond&edition=public&ref=mobile-preview"
       ],
-      "note": "Original procedural picture, made by Ryan with Codex (GPT-6), CC0 1.0. No payload-specific image conditioning. Original family/variant and five-link measurements are in the scored audit."
+      "prompt": "C54-Q41",
+      "note": "AI-made by the owner with an AI image tool, on his instruction. Fictional subject; no people, faces, logos, readable text, or real landmarks. Native square image resized to 960×960, JPEG quality 88. Full prompt: tools/cdx-pics-qr-ai-prompts.json. No payload-specific image conditioning."
     },
     {
       "id": "cdx-qr-ai-cactus",
@@ -6542,27 +6543,6 @@
       "note": "AI-made by the owner with an AI image tool, on his instruction. Fictional subject; no people, faces, logos, readable text, or real landmarks. Native square image resized to 960×960, JPEG quality 88. Full prompt: tools/cdx-pics-qr-ai-prompts.json. No payload-specific image conditioning."
     },
     {
-      "id": "cdx-qr-print-5-6",
-      "file": "assets/toys/qr-picture/codex/cdx-qr-print-5-6.jpg",
-      "author": "Ryan, with Codex (GPT-6)",
-      "page": "https://github.com/ryanjosephkamp/splashery/blob/main/tools/cdx-pics-qr-print.mjs",
-      "license": "CC0 1.0",
-      "ai": false,
-      "toy": "qr-picture",
-      "name": "Leaf canopy soft 6",
-      "checked": "October 13, 2026",
-      "sha256": "540c6da10fa66a09273e33e061364675b83a86db2abba987ce237226cee41e73",
-      "score": 49.12903928146648,
-      "testedLinks": [
-        "https://ryanjosephkamp.github.io/splashery/",
-        "https://example.org/",
-        "https://example.com/gallery/summer-leaves",
-        "https://example.net/exhibits/ceramics?view=phone&color=blue",
-        "https://example.org/collections/botanical-studies/2026/autumn/large-format-print?item=fern-frond&edition=public&ref=mobile-preview"
-      ],
-      "note": "Original procedural picture, made by Ryan with Codex (GPT-6), CC0 1.0. No payload-specific image conditioning. Original family/variant and five-link measurements are in the scored audit."
-    },
-    {
       "id": "cdx-qr-ai-pitcher",
       "file": "assets/toys/qr-picture/codex/cdx-qr-ai-pitcher.jpg",
       "author": "Ryan, the owner of Splashery (made with an AI image tool)",
@@ -6582,6 +6562,28 @@
         "https://example.org/collections/botanical-studies/2026/autumn/large-format-print?item=fern-frond&edition=public&ref=mobile-preview"
       ],
       "prompt": "C54-Q28",
+      "note": "AI-made by the owner with an AI image tool, on his instruction. Fictional subject; no people, faces, logos, readable text, or real landmarks. Native square image resized to 960×960, JPEG quality 88. Full prompt: tools/cdx-pics-qr-ai-prompts.json. No payload-specific image conditioning."
+    },
+    {
+      "id": "cdx-qr-ai-stacking-rings",
+      "file": "assets/toys/qr-picture/codex/cdx-qr-ai-stacking-rings.jpg",
+      "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+      "page": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+      "license": "AI-made by the owner",
+      "ai": true,
+      "toy": "qr-picture",
+      "name": "Wooden stacking rings",
+      "checked": "October 13, 2026",
+      "sha256": "daf94bf87fdc91ab972b0bf143bd01609fe3cab1c9d6c71592167ba1e507518e",
+      "score": 48.88653348661005,
+      "testedLinks": [
+        "https://ryanjosephkamp.github.io/splashery/",
+        "https://example.org/",
+        "https://example.com/gallery/summer-leaves",
+        "https://example.net/exhibits/ceramics?view=phone&color=blue",
+        "https://example.org/collections/botanical-studies/2026/autumn/large-format-print?item=fern-frond&edition=public&ref=mobile-preview"
+      ],
+      "prompt": "C54-Q42",
       "note": "AI-made by the owner with an AI image tool, on his instruction. Fictional subject; no people, faces, logos, readable text, or real landmarks. Native square image resized to 960×960, JPEG quality 88. Full prompt: tools/cdx-pics-qr-ai-prompts.json. No payload-specific image conditioning."
     },
     {
@@ -6648,6 +6650,28 @@
         "https://example.org/collections/botanical-studies/2026/autumn/large-format-print?item=fern-frond&edition=public&ref=mobile-preview"
       ],
       "prompt": "C54-Q12",
+      "note": "AI-made by the owner with an AI image tool, on his instruction. Fictional subject; no people, faces, logos, readable text, or real landmarks. Native square image resized to 960×960, JPEG quality 88. Full prompt: tools/cdx-pics-qr-ai-prompts.json. No payload-specific image conditioning."
+    },
+    {
+      "id": "cdx-qr-ai-spinning-top",
+      "file": "assets/toys/qr-picture/codex/cdx-qr-ai-spinning-top.jpg",
+      "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+      "page": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+      "license": "AI-made by the owner",
+      "ai": true,
+      "toy": "qr-picture",
+      "name": "Wooden spinning top",
+      "checked": "October 13, 2026",
+      "sha256": "7e964dbd5bfb925d845028c0ff9012d3f631fbf2f2d48717df28e45110fc6260",
+      "score": 48.6765032825014,
+      "testedLinks": [
+        "https://ryanjosephkamp.github.io/splashery/",
+        "https://example.org/",
+        "https://example.com/gallery/summer-leaves",
+        "https://example.net/exhibits/ceramics?view=phone&color=blue",
+        "https://example.org/collections/botanical-studies/2026/autumn/large-format-print?item=fern-frond&edition=public&ref=mobile-preview"
+      ],
+      "prompt": "C54-Q33",
       "note": "AI-made by the owner with an AI image tool, on his instruction. Fictional subject; no people, faces, logos, readable text, or real landmarks. Native square image resized to 960×960, JPEG quality 88. Full prompt: tools/cdx-pics-qr-ai-prompts.json. No payload-specific image conditioning."
     },
     {
@@ -6935,27 +6959,6 @@
       ],
       "prompt": "C54-Q11",
       "note": "AI-made by the owner with an AI image tool, on his instruction. Fictional subject; no people, faces, logos, readable text, or real landmarks. Native square image resized to 960×960, JPEG quality 88. Full prompt: tools/cdx-pics-qr-ai-prompts.json. No payload-specific image conditioning."
-    },
-    {
-      "id": "cdx-qr-8-7",
-      "file": "assets/toys/qr-picture/codex/cdx-qr-8-7.jpg",
-      "author": "Ryan, with Codex (GPT-6)",
-      "page": "https://github.com/ryanjosephkamp/splashery/blob/main/tools/cdx-pics-qr.mjs",
-      "license": "CC0 1.0",
-      "ai": false,
-      "toy": "qr-picture",
-      "name": "Ceramic vase 7",
-      "checked": "October 13, 2026",
-      "sha256": "3fed3c148f3b22efef58743fc471ccb11d4fdc22ea897d28bf8f5c393008ca17",
-      "score": 46.75358768920497,
-      "testedLinks": [
-        "https://ryanjosephkamp.github.io/splashery/",
-        "https://example.org/",
-        "https://example.com/gallery/summer-leaves",
-        "https://example.net/exhibits/ceramics?view=phone&color=blue",
-        "https://example.org/collections/botanical-studies/2026/autumn/large-format-print?item=fern-frond&edition=public&ref=mobile-preview"
-      ],
-      "note": "Original procedural picture, made by Ryan with Codex (GPT-6), CC0 1.0. No payload-specific image conditioning. Original family/variant and five-link measurements are in the scored audit."
     },
     {
       "id": "cdx-qr-ai-pebbles",

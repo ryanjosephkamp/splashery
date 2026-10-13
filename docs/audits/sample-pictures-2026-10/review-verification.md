@@ -1,5 +1,8 @@
 # Task 54 review verification: October 13, 2026
 
+This is the **previous review record**, for the 21-AI/3-procedural selection. The all-AI final set
+and current merged-main checks are in [final-review-verification.md](final-review-verification.md).
+
 Made by Ryan with Codex (GPT-6). Main `574a68d3`, then the task-document-only update `a2189958`, was
 merged without rebasing. Linux, Node 24.19.0, Chromium 151.0.7922.173, SwiftShader WebGL2, pinned
 Playwright, and one worker per command. Application files, assets, renderer, production encoder, and

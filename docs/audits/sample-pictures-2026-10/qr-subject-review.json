@@ -4,20 +4,20 @@
     "reason": "Recognizable Pebble pool 2 silhouette and color regions in the actual 330-pixel phone render; visually reviewed by Codex (GPT-6)."
   },
   "cdx-qr-8-7": {
-    "clear": true,
-    "reason": "Recognizable Ceramic vase 7 silhouette and color regions in the actual 330-pixel phone render; visually reviewed by Codex (GPT-6)."
+    "clear": false,
+    "reason": "Retired after the final Operator review: flat vase silhouette; replace with a subject with stronger volume."
   },
   "cdx-qr-print-3-6": {
-    "clear": true,
-    "reason": "Recognizable Pebble pool soft 6 silhouette and color regions in the actual 330-pixel phone render; visually reviewed by Codex (GPT-6)."
+    "clear": false,
+    "reason": "Retired after the final Operator review: dark panel with pale blobs; replace with a clearer single AI-made subject."
   },
   "cdx-qr-print-5-2": {
     "clear": true,
     "reason": "Recognizable Leaf canopy soft 2 silhouette and color regions in the actual 330-pixel phone render; visually reviewed by Codex (GPT-6)."
   },
   "cdx-qr-print-5-6": {
-    "clear": true,
-    "reason": "Recognizable Leaf canopy soft 6 silhouette and color regions in the actual 330-pixel phone render; visually reviewed by Codex (GPT-6)."
+    "clear": false,
+    "reason": "Retired after the final Operator review: dark panel with pale blobs; replace with a clearer single AI-made subject."
   },
   "cdx-qr-print-8-2": {
     "clear": true,
@@ -150,5 +150,45 @@
   "cdx-qr-ai-crystal": {
     "clear": false,
     "reason": "Crystal facets merge into a faint purple mass in the phone halftone."
+  },
+  "cdx-qr-ai-spinning-top": {
+    "clear": true,
+    "reason": "Complete single-object silhouette, shading, and distinctive parts remain visible in the actual 330-pixel render."
+  },
+  "cdx-qr-ai-wicker-basket": {
+    "clear": true,
+    "reason": "Complete single-object silhouette, shading, and distinctive parts remain visible in the actual 330-pixel render."
+  },
+  "cdx-qr-ai-copper-kettle": {
+    "clear": true,
+    "reason": "Complete single-object silhouette, shading, and distinctive parts remain visible in the actual 330-pixel render."
+  },
+  "cdx-qr-ai-wooden-mallet": {
+    "clear": true,
+    "reason": "Complete single-object silhouette, shading, and distinctive parts remain visible in the actual 330-pixel render."
+  },
+  "cdx-qr-ai-clay-mortar": {
+    "clear": true,
+    "reason": "Complete single-object silhouette, shading, and distinctive parts remain visible in the actual 330-pixel render."
+  },
+  "cdx-qr-ai-brass-padlock": {
+    "clear": true,
+    "reason": "Complete single-object silhouette, shading, and distinctive parts remain visible in the actual 330-pixel render."
+  },
+  "cdx-qr-ai-red-apple": {
+    "clear": true,
+    "reason": "Round red body, leaf, stem, and shading remain clear at 330 pixels."
+  },
+  "cdx-qr-ai-ceramic-bell": {
+    "clear": true,
+    "reason": "Flared blue bell body, handle, open mouth, and clapper remain clear at 330 pixels."
+  },
+  "cdx-qr-ai-green-watering-can": {
+    "clear": true,
+    "reason": "Rounded green body, open rim, spout, and arching handle remain distinct at 330 pixels."
+  },
+  "cdx-qr-ai-stacking-rings": {
+    "clear": true,
+    "reason": "Four rounded colored rings and the peg remain distinct, with visible depth, at 330 pixels."
   }
 }

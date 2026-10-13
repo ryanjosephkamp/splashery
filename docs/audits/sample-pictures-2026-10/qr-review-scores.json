@@ -3,7 +3,7 @@
     "id": "cdx-qr-3-2",
     "label": "Pebble pool 2",
     "ai": false,
-    "file": "assets/toys/qr-picture/codex/cdx-qr-3-2.jpg",
+    "file": ".cache/cdx-pics/qr/cdx-qr-3-2.jpg",
     "links": [
       {
         "text": "https://ryanjosephkamp.github.io/splashery/",
@@ -216,13 +216,13 @@
     "browserEligible": true,
     "visualPass": true,
     "eligible": true,
-    "reason": "Lower worst-link detail score or a repeated subject."
+    "reason": "Retired in the final Operator review: replace procedural panels and the flat vase silhouette with stronger AI subjects."
   },
   {
     "id": "cdx-qr-8-7",
     "label": "Ceramic vase 7",
     "ai": false,
-    "file": "assets/toys/qr-picture/codex/cdx-qr-8-7.jpg",
+    "file": ".cache/cdx-pics/qr/cdx-qr-8-7.jpg",
     "links": [
       {
         "text": "https://ryanjosephkamp.github.io/splashery/",
@@ -431,17 +431,17 @@
     "score": 46.75358768920497,
     "meanScore": 48.308559244831805,
     "rasterEligible": true,
-    "kept": true,
+    "kept": false,
     "browserEligible": true,
-    "visualPass": true,
-    "eligible": true,
-    "reason": "Clear subject at 330px; all five rendered links pass; highest worst-link detail with distinct subjects."
+    "visualPass": false,
+    "eligible": false,
+    "reason": "Retired in the final Operator review: replace procedural panels and the flat vase silhouette with stronger AI subjects."
   },
   {
     "id": "cdx-qr-print-3-6",
     "label": "Pebble pool soft 6",
     "ai": false,
-    "file": "assets/toys/qr-picture/codex/cdx-qr-print-3-6.jpg",
+    "file": ".cache/cdx-pics/qr/cdx-qr-print-3-6.jpg",
     "links": [
       {
         "text": "https://ryanjosephkamp.github.io/splashery/",
@@ -650,17 +650,17 @@
     "score": 49.53210657929096,
     "meanScore": 50.40425114478269,
     "rasterEligible": true,
-    "kept": true,
+    "kept": false,
     "browserEligible": true,
-    "visualPass": true,
-    "eligible": true,
-    "reason": "Clear subject at 330px; all five rendered links pass; highest worst-link detail with distinct subjects."
+    "visualPass": false,
+    "eligible": false,
+    "reason": "Retired in the final Operator review: replace procedural panels and the flat vase silhouette with stronger AI subjects."
   },
   {
     "id": "cdx-qr-print-5-2",
     "label": "Leaf canopy soft 2",
     "ai": false,
-    "file": "assets/toys/qr-picture/codex/cdx-qr-print-5-2.jpg",
+    "file": ".cache/cdx-pics/qr/cdx-qr-print-5-2.jpg",
     "links": [
       {
         "text": "https://ryanjosephkamp.github.io/splashery/",
@@ -873,13 +873,13 @@
     "browserEligible": true,
     "visualPass": true,
     "eligible": true,
-    "reason": "Lower worst-link detail score or a repeated subject."
+    "reason": "Retired in the final Operator review: replace procedural panels and the flat vase silhouette with stronger AI subjects."
   },
   {
     "id": "cdx-qr-print-5-6",
     "label": "Leaf canopy soft 6",
     "ai": false,
-    "file": "assets/toys/qr-picture/codex/cdx-qr-print-5-6.jpg",
+    "file": ".cache/cdx-pics/qr/cdx-qr-print-5-6.jpg",
     "links": [
       {
         "text": "https://ryanjosephkamp.github.io/splashery/",
@@ -1088,17 +1088,17 @@
     "score": 49.12903928146648,
     "meanScore": 50.751261869338684,
     "rasterEligible": true,
-    "kept": true,
+    "kept": false,
     "browserEligible": true,
-    "visualPass": true,
-    "eligible": true,
-    "reason": "Clear subject at 330px; all five rendered links pass; highest worst-link detail with distinct subjects."
+    "visualPass": false,
+    "eligible": false,
+    "reason": "Retired in the final Operator review: replace procedural panels and the flat vase silhouette with stronger AI subjects."
   },
   {
     "id": "cdx-qr-print-8-2",
     "label": "Ceramic vase soft 2",
     "ai": false,
-    "file": "assets/toys/qr-picture/codex/cdx-qr-print-8-2.jpg",
+    "file": ".cache/cdx-pics/qr/cdx-qr-print-8-2.jpg",
     "links": [
       {
         "text": "https://ryanjosephkamp.github.io/splashery/",
@@ -1311,7 +1311,7 @@
     "browserEligible": true,
     "visualPass": true,
     "eligible": true,
-    "reason": "Lower worst-link detail score or a repeated subject."
+    "reason": "Retired in the final Operator review: replace procedural panels and the flat vase silhouette with stronger AI subjects."
   },
   {
     "id": "cdx-qr-ai-blue-vase",
@@ -1531,7 +1531,7 @@
     "browserEligible": true,
     "visualPass": true,
     "eligible": true,
-    "reason": "Clear subject at 330px; all five rendered links pass; highest worst-link detail with distinct subjects."
+    "reason": "Accepted AI subject retained; clear at 330px; all five rendered links pass."
   },
   {
     "id": "cdx-qr-ai-teapot",
@@ -1751,7 +1751,7 @@
     "browserEligible": true,
     "visualPass": true,
     "eligible": true,
-    "reason": "Clear subject at 330px; all five rendered links pass; highest worst-link detail with distinct subjects."
+    "reason": "Accepted AI subject retained; clear at 330px; all five rendered links pass."
   },
   {
     "id": "cdx-qr-ai-fern",
@@ -1971,7 +1971,7 @@
     "browserEligible": true,
     "visualPass": true,
     "eligible": true,
-    "reason": "Clear subject at 330px; all five rendered links pass; highest worst-link detail with distinct subjects."
+    "reason": "Accepted AI subject retained; clear at 330px; all five rendered links pass."
   },
   {
     "id": "cdx-qr-ai-ginkgo",
@@ -2191,7 +2191,7 @@
     "browserEligible": true,
     "visualPass": true,
     "eligible": true,
-    "reason": "Clear subject at 330px; all five rendered links pass; highest worst-link detail with distinct subjects."
+    "reason": "Accepted AI subject retained; clear at 330px; all five rendered links pass."
   },
   {
     "id": "cdx-qr-ai-monstera",
@@ -2411,7 +2411,7 @@
     "browserEligible": true,
     "visualPass": true,
     "eligible": true,
-    "reason": "Clear subject at 330px; all five rendered links pass; highest worst-link detail with distinct subjects."
+    "reason": "Accepted AI subject retained; clear at 330px; all five rendered links pass."
   },
   {
     "id": "cdx-qr-ai-cactus",
@@ -2631,7 +2631,7 @@
     "browserEligible": true,
     "visualPass": true,
     "eligible": true,
-    "reason": "Clear subject at 330px; all five rendered links pass; highest worst-link detail with distinct subjects."
+    "reason": "Accepted AI subject retained; clear at 330px; all five rendered links pass."
   },
   {
     "id": "cdx-qr-ai-succulent",
@@ -3071,7 +3071,7 @@
     "browserEligible": true,
     "visualPass": true,
     "eligible": true,
-    "reason": "Clear subject at 330px; all five rendered links pass; highest worst-link detail with distinct subjects."
+    "reason": "Accepted AI subject retained; clear at 330px; all five rendered links pass."
   },
   {
     "id": "cdx-qr-ai-pear",
@@ -3291,7 +3291,7 @@
     "browserEligible": true,
     "visualPass": true,
     "eligible": true,
-    "reason": "Clear subject at 330px; all five rendered links pass; highest worst-link detail with distinct subjects."
+    "reason": "Accepted AI subject retained; clear at 330px; all five rendered links pass."
   },
   {
     "id": "cdx-qr-ai-citrus",
@@ -3731,7 +3731,7 @@
     "browserEligible": true,
     "visualPass": true,
     "eligible": true,
-    "reason": "Clear subject at 330px; all five rendered links pass; highest worst-link detail with distinct subjects."
+    "reason": "Accepted AI subject retained; clear at 330px; all five rendered links pass."
   },
   {
     "id": "cdx-qr-ai-mushroom",
@@ -3951,7 +3951,7 @@
     "browserEligible": true,
     "visualPass": true,
     "eligible": true,
-    "reason": "Clear subject at 330px; all five rendered links pass; highest worst-link detail with distinct subjects."
+    "reason": "Accepted AI subject retained; clear at 330px; all five rendered links pass."
   },
   {
     "id": "cdx-qr-ai-shell",
@@ -4391,7 +4391,7 @@
     "browserEligible": true,
     "visualPass": true,
     "eligible": true,
-    "reason": "Clear subject at 330px; all five rendered links pass; highest worst-link detail with distinct subjects."
+    "reason": "Accepted AI subject retained; clear at 330px; all five rendered links pass."
   },
   {
     "id": "cdx-qr-ai-tulip",
@@ -4611,7 +4611,7 @@
     "browserEligible": true,
     "visualPass": true,
     "eligible": true,
-    "reason": "Clear subject at 330px; all five rendered links pass; highest worst-link detail with distinct subjects."
+    "reason": "Accepted AI subject retained; clear at 330px; all five rendered links pass."
   },
   {
     "id": "cdx-qr-ai-lotus",
@@ -4831,7 +4831,7 @@
     "browserEligible": true,
     "visualPass": true,
     "eligible": true,
-    "reason": "Clear subject at 330px; all five rendered links pass; highest worst-link detail with distinct subjects."
+    "reason": "Accepted AI subject retained; clear at 330px; all five rendered links pass."
   },
   {
     "id": "cdx-qr-ai-poppy",
@@ -5491,7 +5491,7 @@
     "browserEligible": true,
     "visualPass": true,
     "eligible": true,
-    "reason": "Clear subject at 330px; all five rendered links pass; highest worst-link detail with distinct subjects."
+    "reason": "Accepted AI subject retained; clear at 330px; all five rendered links pass."
   },
   {
     "id": "cdx-qr-ai-pumpkin",
@@ -5711,7 +5711,7 @@
     "browserEligible": true,
     "visualPass": true,
     "eligible": true,
-    "reason": "Clear subject at 330px; all five rendered links pass; highest worst-link detail with distinct subjects."
+    "reason": "Accepted AI subject retained; clear at 330px; all five rendered links pass."
   },
   {
     "id": "cdx-qr-ai-wood-blocks",
@@ -5931,7 +5931,7 @@
     "browserEligible": true,
     "visualPass": true,
     "eligible": true,
-    "reason": "Clear subject at 330px; all five rendered links pass; highest worst-link detail with distinct subjects."
+    "reason": "Accepted AI subject retained; clear at 330px; all five rendered links pass."
   },
   {
     "id": "cdx-qr-ai-rook",
@@ -6151,7 +6151,7 @@
     "browserEligible": true,
     "visualPass": true,
     "eligible": true,
-    "reason": "Clear subject at 330px; all five rendered links pass; highest worst-link detail with distinct subjects."
+    "reason": "Accepted AI subject retained; clear at 330px; all five rendered links pass."
   },
   {
     "id": "cdx-qr-ai-paper-boat",
@@ -6371,7 +6371,7 @@
     "browserEligible": true,
     "visualPass": true,
     "eligible": true,
-    "reason": "Lower worst-link detail score or a repeated subject."
+    "reason": "Not selected in the earlier accepted AI set."
   },
   {
     "id": "cdx-qr-ai-hot-air-balloon",
@@ -6591,7 +6591,7 @@
     "browserEligible": true,
     "visualPass": true,
     "eligible": true,
-    "reason": "Clear subject at 330px; all five rendered links pass; highest worst-link detail with distinct subjects."
+    "reason": "Accepted AI subject retained; clear at 330px; all five rendered links pass."
   },
   {
     "id": "cdx-qr-ai-sailboat",
@@ -7471,7 +7471,7 @@
     "browserEligible": true,
     "visualPass": true,
     "eligible": true,
-    "reason": "Clear subject at 330px; all five rendered links pass; highest worst-link detail with distinct subjects."
+    "reason": "Accepted AI subject retained; clear at 330px; all five rendered links pass."
   },
   {
     "id": "cdx-qr-ai-watering-can",
@@ -7691,7 +7691,7 @@
     "browserEligible": true,
     "visualPass": true,
     "eligible": true,
-    "reason": "Lower worst-link detail score or a repeated subject."
+    "reason": "Not selected in the earlier accepted AI set."
   },
   {
     "id": "cdx-qr-ai-rainbow",
@@ -7911,7 +7911,7 @@
     "browserEligible": true,
     "visualPass": true,
     "eligible": true,
-    "reason": "Clear subject at 330px; all five rendered links pass; highest worst-link detail with distinct subjects."
+    "reason": "Accepted AI subject retained; clear at 330px; all five rendered links pass."
   },
   {
     "id": "cdx-qr-ai-stacked-stones",
@@ -8131,7 +8131,7 @@
     "browserEligible": true,
     "visualPass": true,
     "eligible": true,
-    "reason": "Clear subject at 330px; all five rendered links pass; highest worst-link detail with distinct subjects."
+    "reason": "Accepted AI subject retained; clear at 330px; all five rendered links pass."
   },
   {
     "id": "cdx-qr-ai-crystal",
@@ -8352,5 +8352,2225 @@
     "visualPass": false,
     "eligible": false,
     "reason": "Crystal facets merge into a faint purple mass in the phone halftone."
+  },
+  {
+    "id": "cdx-qr-ai-spinning-top",
+    "label": "Wooden spinning top",
+    "scene": "One large wooden spinning top with a wide rounded cone, a short chunky stem, and a small visible tip. Rich honey-colored and walnut wood form three broad horizontal bands; the round body shows substantial three-dimensional volume.",
+    "round": 3,
+    "prompt": "Create ONE square image, an original AI-made fictional single-object still life for a halftone QR background. One large wooden spinning top with a wide rounded cone, a short chunky stem, and a small visible tip. Rich honey-colored and walnut wood form three broad horizontal bands; the round body shows substantial three-dimensional volume. The complete subject fills about 78% of the width and 82% of the height, centered with empty corners, against a very pale warm cream seamless background. The subject must be unmistakable at a small phone thumbnail: a strong large silhouette, rich natural colors, broad substantial shaded volumes, and clear depth. Sculptural product photography, soft diffuse side lighting, a gentle contact shadow, restrained texture. No extra props, no fine noisy texture, and no tiny ornament. No people, no faces of any kind, no animals, no logos, brands, labels, letters, numerals, readable text, watermark, QR code, checkerboard, grid, border, or real landmark. Show the whole object.",
+    "ai": true,
+    "file": "assets/toys/qr-picture/codex/cdx-qr-ai-spinning-top.jpg",
+    "links": [
+      {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "characters": 43,
+        "version": 9,
+        "margin": 0.1,
+        "score": 50.10966157782204,
+        "fidelity": 0.8090636716063452,
+        "edges": 0.12469243643273444,
+        "moduleContrast": 3.534603595448642,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          },
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "blur": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "print-900",
+            "pixels": 900,
+            "blur": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "phone-soft-focus",
+            "pixels": 330,
+            "blur": 0.3,
+            "ok": true
+          }
+        ],
+        "eligible": true
+      },
+      {
+        "text": "https://example.org/",
+        "characters": 20,
+        "version": 7,
+        "margin": 0.1,
+        "score": 49.612234949421534,
+        "fidelity": 0.791510532794893,
+        "edges": 0.13509234768227588,
+        "moduleContrast": 4.03511444246959,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          },
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "blur": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "print-900",
+            "pixels": 900,
+            "blur": 0.2,
+            "ok": false
+          },
+          {
+            "trial": "phone-soft-focus",
+            "pixels": 330,
+            "blur": 0.3,
+            "ok": true
+          }
+        ],
+        "eligible": true
+      },
+      {
+        "text": "https://example.com/gallery/summer-leaves",
+        "characters": 41,
+        "version": 9,
+        "margin": 0.1,
+        "score": 49.530164492477915,
+        "fidelity": 0.806740998061116,
+        "edges": 0.11465354664703402,
+        "moduleContrast": 3.49752070592933,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          },
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "blur": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "print-900",
+            "pixels": 900,
+            "blur": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "phone-soft-focus",
+            "pixels": 330,
+            "blur": 0.3,
+            "ok": true
+          }
+        ],
+        "eligible": true
+      },
+      {
+        "text": "https://example.net/exhibits/ceramics?view=phone&color=blue",
+        "characters": 59,
+        "version": 11,
+        "margin": 0.1,
+        "score": 48.6765032825014,
+        "fidelity": 0.8146304458530419,
+        "edges": 0.08604063912409086,
+        "moduleContrast": 3.251815495244295,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          },
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "blur": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "print-900",
+            "pixels": 900,
+            "blur": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "phone-soft-focus",
+            "pixels": 330,
+            "blur": 0.3,
+            "ok": true
+          }
+        ],
+        "eligible": true
+      },
+      {
+        "text": "https://example.org/collections/botanical-studies/2026/autumn/large-format-print?item=fern-frond&edition=public&ref=mobile-preview",
+        "characters": 130,
+        "version": 15,
+        "margin": 0.1,
+        "score": 49.14390355887421,
+        "fidelity": 0.8184389988571028,
+        "edges": 0.09177241381630104,
+        "moduleContrast": 3.0856328518401512,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          },
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "blur": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "print-900",
+            "pixels": 900,
+            "blur": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "phone-soft-focus",
+            "pixels": 330,
+            "blur": 0.3,
+            "ok": false
+          }
+        ],
+        "eligible": true
+      }
+    ],
+    "properties": {
+      "contrastRange": 0.8300278871327639,
+      "edgeDensity": 0.04655314322810229,
+      "centerDetail": 0.054857911341847504,
+      "outerDetail": 0.043784887190187416,
+      "color": 0.19300765853949997,
+      "midtones": 0.2463107638888889
+    },
+    "score": 48.6765032825014,
+    "meanScore": 49.41449357221941,
+    "rasterEligible": true,
+    "kept": true,
+    "browserEligible": true,
+    "visualPass": true,
+    "eligible": true,
+    "reason": "Clear single AI subject at 330px; all five rendered links pass; one of the three highest worst-link replacement scores."
+  },
+  {
+    "id": "cdx-qr-ai-wicker-basket",
+    "label": "Wicker basket",
+    "scene": "One large warm ocher wicker basket with a broad deep oval body and one thick arching handle. Large broad woven strips, an open dark interior, and a sturdy rim make the basket's three-dimensional form clear.",
+    "round": 3,
+    "prompt": "Create ONE square image, an original AI-made fictional single-object still life for a halftone QR background. One large warm ocher wicker basket with a broad deep oval body and one thick arching handle. Large broad woven strips, an open dark interior, and a sturdy rim make the basket's three-dimensional form clear. The complete subject fills about 78% of the width and 82% of the height, centered with empty corners, against a very pale warm cream seamless background. The subject must be unmistakable at a small phone thumbnail: a strong large silhouette, rich natural colors, broad substantial shaded volumes, and clear depth. Sculptural product photography, soft diffuse side lighting, a gentle contact shadow, restrained texture. No extra props, no fine noisy texture, and no tiny ornament. No people, no faces of any kind, no animals, no logos, brands, labels, letters, numerals, readable text, watermark, QR code, checkerboard, grid, border, or real landmark. Show the whole object.",
+    "ai": true,
+    "file": ".cache/cdx-pics/round2/ai/cdx-qr-ai-wicker-basket.jpg",
+    "links": [
+      {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "characters": 43,
+        "version": 9,
+        "margin": 0.1,
+        "score": 51.15581655344806,
+        "fidelity": 0.811667821886122,
+        "edges": 0.14475747443803003,
+        "moduleContrast": 3.5767405735516307,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          },
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "blur": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "print-900",
+            "pixels": 900,
+            "blur": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "phone-soft-focus",
+            "pixels": 330,
+            "blur": 0.3,
+            "ok": true
+          }
+        ],
+        "eligible": true
+      },
+      {
+        "text": "https://example.org/",
+        "characters": 20,
+        "version": 7,
+        "margin": 0.1,
+        "score": 49.918365134294085,
+        "fidelity": 0.7873421467836456,
+        "edges": 0.14698993469319063,
+        "moduleContrast": 3.922147738430919,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          },
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "blur": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "print-900",
+            "pixels": 900,
+            "blur": 0.2,
+            "ok": false
+          },
+          {
+            "trial": "phone-soft-focus",
+            "pixels": 330,
+            "blur": 0.3,
+            "ok": true
+          }
+        ],
+        "eligible": true
+      },
+      {
+        "text": "https://example.com/gallery/summer-leaves",
+        "characters": 41,
+        "version": 9,
+        "margin": 0.12000000000000001,
+        "score": 50.503974024931765,
+        "fidelity": 0.7986582778505222,
+        "edges": 0.14617263873673414,
+        "moduleContrast": 3.7000044010641204,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          },
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "blur": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "print-900",
+            "pixels": 900,
+            "blur": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "phone-soft-focus",
+            "pixels": 330,
+            "blur": 0.3,
+            "ok": true
+          }
+        ],
+        "eligible": true
+      },
+      {
+        "text": "https://example.net/exhibits/ceramics?view=phone&color=blue",
+        "characters": 59,
+        "version": 11,
+        "margin": 0.1,
+        "score": 51.603394654589266,
+        "fidelity": 0.8179320617329725,
+        "edges": 0.14704736131723933,
+        "moduleContrast": 3.229456228014522,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          },
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "blur": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "print-900",
+            "pixels": 900,
+            "blur": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "phone-soft-focus",
+            "pixels": 330,
+            "blur": 0.3,
+            "ok": true
+          }
+        ],
+        "eligible": true
+      },
+      {
+        "text": "https://example.org/collections/botanical-studies/2026/autumn/large-format-print?item=fern-frond&edition=public&ref=mobile-preview",
+        "characters": 130,
+        "version": 15,
+        "margin": 0.1,
+        "score": 51.64828006238934,
+        "fidelity": 0.8259213812080384,
+        "edges": 0.13828009102104943,
+        "moduleContrast": 3.061509984186041,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          },
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "blur": 0.2,
+            "ok": false
+          },
+          {
+            "trial": "print-900",
+            "pixels": 900,
+            "blur": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "phone-soft-focus",
+            "pixels": 330,
+            "blur": 0.3,
+            "ok": false
+          }
+        ],
+        "eligible": true
+      }
+    ],
+    "properties": {
+      "contrastRange": 0.7737743877083063,
+      "edgeDensity": 0.10351682070445838,
+      "centerDetail": 0.13705330611198607,
+      "outerDetail": 0.0923379922352828,
+      "color": 0.30558204501538927,
+      "midtones": 0.3610026041666667
+    },
+    "score": 49.918365134294085,
+    "meanScore": 50.9659660859305,
+    "rasterEligible": true,
+    "kept": false,
+    "browserEligible": false,
+    "visualPass": true,
+    "eligible": false,
+    "reason": "Rendered link scan failure."
+  },
+  {
+    "id": "cdx-qr-ai-copper-kettle",
+    "label": "Copper kettle",
+    "scene": "One large matte copper kettle with a broad round belly, a short prominent curved spout, a lid, and a thick black overhead handle. Warm copper shading and a darker side make its rounded three-dimensional body distinct.",
+    "round": 3,
+    "prompt": "Create ONE square image, an original AI-made fictional single-object still life for a halftone QR background. One large matte copper kettle with a broad round belly, a short prominent curved spout, a lid, and a thick black overhead handle. Warm copper shading and a darker side make its rounded three-dimensional body distinct. The complete subject fills about 78% of the width and 82% of the height, centered with empty corners, against a very pale warm cream seamless background. The subject must be unmistakable at a small phone thumbnail: a strong large silhouette, rich natural colors, broad substantial shaded volumes, and clear depth. Sculptural product photography, soft diffuse side lighting, a gentle contact shadow, restrained texture. No extra props, no fine noisy texture, and no tiny ornament. No people, no faces of any kind, no animals, no logos, brands, labels, letters, numerals, readable text, watermark, QR code, checkerboard, grid, border, or real landmark. Show the whole object.",
+    "ai": true,
+    "file": ".cache/cdx-pics/round2/ai/cdx-qr-ai-copper-kettle.jpg",
+    "links": [
+      {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "characters": 43,
+        "version": 9,
+        "margin": 0.1,
+        "score": 50.76262684648759,
+        "fidelity": 0.8018954993265752,
+        "edges": 0.1479638751894656,
+        "moduleContrast": 3.6306106106136276,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          },
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "blur": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "print-900",
+            "pixels": 900,
+            "blur": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "phone-soft-focus",
+            "pixels": 330,
+            "blur": 0.3,
+            "ok": true
+          }
+        ],
+        "eligible": true
+      },
+      {
+        "text": "https://example.org/",
+        "characters": 20,
+        "version": 7,
+        "margin": 0.1,
+        "score": 49.36630065168149,
+        "fidelity": 0.7822466855726125,
+        "edges": 0.14094962100417333,
+        "moduleContrast": 4.16964633046395,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          },
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "blur": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "print-900",
+            "pixels": 900,
+            "blur": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "phone-soft-focus",
+            "pixels": 330,
+            "blur": 0.3,
+            "ok": false
+          }
+        ],
+        "eligible": true
+      },
+      {
+        "text": "https://example.com/gallery/summer-leaves",
+        "characters": 41,
+        "version": 9,
+        "margin": 0.12000000000000001,
+        "score": 49.81942310969825,
+        "fidelity": 0.7936950813260775,
+        "edges": 0.1370265252614219,
+        "moduleContrast": 3.8232806749257158,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          },
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "blur": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "print-900",
+            "pixels": 900,
+            "blur": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "phone-soft-focus",
+            "pixels": 330,
+            "blur": 0.3,
+            "ok": true
+          }
+        ],
+        "eligible": true
+      },
+      {
+        "text": "https://example.net/exhibits/ceramics?view=phone&color=blue",
+        "characters": 59,
+        "version": 11,
+        "margin": 0.1,
+        "score": 50.83458733438766,
+        "fidelity": 0.8077886373652785,
+        "edges": 0.14236027287327435,
+        "moduleContrast": 3.287490318485251,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          },
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "blur": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "print-900",
+            "pixels": 900,
+            "blur": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "phone-soft-focus",
+            "pixels": 330,
+            "blur": 0.3,
+            "ok": true
+          }
+        ],
+        "eligible": true
+      },
+      {
+        "text": "https://example.org/collections/botanical-studies/2026/autumn/large-format-print?item=fern-frond&edition=public&ref=mobile-preview",
+        "characters": 130,
+        "version": 15,
+        "margin": 0.1,
+        "score": 51.73266481486678,
+        "fidelity": 0.8185721209585121,
+        "edges": 0.1491377369366358,
+        "moduleContrast": 3.1564960531754975,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          },
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "blur": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "print-900",
+            "pixels": 900,
+            "blur": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "phone-soft-focus",
+            "pixels": 330,
+            "blur": 0.3,
+            "ok": false
+          }
+        ],
+        "eligible": true
+      }
+    ],
+    "properties": {
+      "contrastRange": 0.7900705341540277,
+      "edgeDensity": 0.07180072904538909,
+      "centerDetail": 0.08554298217758924,
+      "outerDetail": 0.06721997800132247,
+      "color": 0.21370315000664655,
+      "midtones": 0.2421875
+    },
+    "score": 49.36630065168149,
+    "meanScore": 50.50312055142435,
+    "rasterEligible": true,
+    "kept": false,
+    "browserEligible": false,
+    "visualPass": true,
+    "eligible": false,
+    "reason": "Rendered link scan failure."
+  },
+  {
+    "id": "cdx-qr-ai-wooden-mallet",
+    "label": "Wooden mallet",
+    "scene": "One large wooden mallet resting diagonally: a thick honey-brown cuboid head and a chunky walnut handle. The top and two sides of the head are clearly visible; a strong simple outline and broad surfaces show depth.",
+    "round": 3,
+    "prompt": "Create ONE square image, an original AI-made fictional single-object still life for a halftone QR background. One large wooden mallet resting diagonally: a thick honey-brown cuboid head and a chunky walnut handle. The top and two sides of the head are clearly visible; a strong simple outline and broad surfaces show depth. The complete subject fills about 78% of the width and 82% of the height, centered with empty corners, against a very pale warm cream seamless background. The subject must be unmistakable at a small phone thumbnail: a strong large silhouette, rich natural colors, broad substantial shaded volumes, and clear depth. Sculptural product photography, soft diffuse side lighting, a gentle contact shadow, restrained texture. No extra props, no fine noisy texture, and no tiny ornament. No people, no faces of any kind, no animals, no logos, brands, labels, letters, numerals, readable text, watermark, QR code, checkerboard, grid, border, or real landmark. Show the whole object.",
+    "ai": true,
+    "file": ".cache/cdx-pics/round2/ai/cdx-qr-ai-wooden-mallet.jpg",
+    "links": [
+      {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "characters": 43,
+        "version": 9,
+        "margin": 0.1,
+        "score": 48.34814974758984,
+        "fidelity": 0.7958668699423447,
+        "edges": 0.10167715335024163,
+        "moduleContrast": 3.4614902634624354,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          },
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "blur": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "print-900",
+            "pixels": 900,
+            "blur": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "phone-soft-focus",
+            "pixels": 330,
+            "blur": 0.3,
+            "ok": true
+          }
+        ],
+        "eligible": true
+      },
+      {
+        "text": "https://example.org/",
+        "characters": 20,
+        "version": 7,
+        "margin": 0.1,
+        "score": 47.07207466384349,
+        "fidelity": 0.7820351657601756,
+        "edges": 0.09022534548964051,
+        "moduleContrast": 3.976069672896225,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          },
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "blur": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "print-900",
+            "pixels": 900,
+            "blur": 0.2,
+            "ok": false
+          },
+          {
+            "trial": "phone-soft-focus",
+            "pixels": 330,
+            "blur": 0.3,
+            "ok": true
+          }
+        ],
+        "eligible": true
+      },
+      {
+        "text": "https://example.com/gallery/summer-leaves",
+        "characters": 41,
+        "version": 9,
+        "margin": 0.1,
+        "score": 48.10095993697755,
+        "fidelity": 0.7955969234398175,
+        "edges": 0.09651398106194632,
+        "moduleContrast": 3.3639895042826464,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          },
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "blur": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "print-900",
+            "pixels": 900,
+            "blur": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "phone-soft-focus",
+            "pixels": 330,
+            "blur": 0.3,
+            "ok": true
+          }
+        ],
+        "eligible": true
+      },
+      {
+        "text": "https://example.net/exhibits/ceramics?view=phone&color=blue",
+        "characters": 59,
+        "version": 11,
+        "margin": 0.1,
+        "score": 48.78916573535696,
+        "fidelity": 0.8087963279472097,
+        "edges": 0.09567483773912054,
+        "moduleContrast": 3.1988746306334233,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          },
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "blur": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "print-900",
+            "pixels": 900,
+            "blur": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "phone-soft-focus",
+            "pixels": 330,
+            "blur": 0.3,
+            "ok": true
+          }
+        ],
+        "eligible": true
+      },
+      {
+        "text": "https://example.org/collections/botanical-studies/2026/autumn/large-format-print?item=fern-frond&edition=public&ref=mobile-preview",
+        "characters": 130,
+        "version": 15,
+        "margin": 0.1,
+        "score": 48.98729860772939,
+        "fidelity": 0.8123306460504638,
+        "edges": 0.09575806833230845,
+        "moduleContrast": 3.0248835294279943,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          },
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "blur": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "print-900",
+            "pixels": 900,
+            "blur": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "phone-soft-focus",
+            "pixels": 330,
+            "blur": 0.3,
+            "ok": false
+          }
+        ],
+        "eligible": true
+      }
+    ],
+    "properties": {
+      "contrastRange": 0.7466951916534453,
+      "edgeDensity": 0.04777371978525395,
+      "centerDetail": 0.08043071892201784,
+      "outerDetail": 0.03688805340633263,
+      "color": 0.16673482865447417,
+      "midtones": 0.2243923611111111
+    },
+    "score": 47.07207466384349,
+    "meanScore": 48.25952973829945,
+    "rasterEligible": true,
+    "kept": false,
+    "browserEligible": true,
+    "visualPass": true,
+    "eligible": true,
+    "reason": "Lower worst-link detail than the three qualified replacement subjects."
+  },
+  {
+    "id": "cdx-qr-ai-clay-mortar",
+    "label": "Clay mortar",
+    "scene": "One large terracotta mortar with a thick deep bowl and a single chunky pestle leaning diagonally inside. The front rim, the dark bowl interior, and the rounded body show substantial depth; warm rusty clay with broad smooth shaded surfaces.",
+    "round": 3,
+    "prompt": "Create ONE square image, an original AI-made fictional single-object still life for a halftone QR background. One large terracotta mortar with a thick deep bowl and a single chunky pestle leaning diagonally inside. The front rim, the dark bowl interior, and the rounded body show substantial depth; warm rusty clay with broad smooth shaded surfaces. The complete subject fills about 78% of the width and 82% of the height, centered with empty corners, against a very pale warm cream seamless background. The subject must be unmistakable at a small phone thumbnail: a strong large silhouette, rich natural colors, broad substantial shaded volumes, and clear depth. Sculptural product photography, soft diffuse side lighting, a gentle contact shadow, restrained texture. No extra props, no fine noisy texture, and no tiny ornament. No people, no faces of any kind, no animals, no logos, brands, labels, letters, numerals, readable text, watermark, QR code, checkerboard, grid, border, or real landmark. Show the whole object.",
+    "ai": true,
+    "file": ".cache/cdx-pics/round2/ai/cdx-qr-ai-clay-mortar.jpg",
+    "links": [
+      {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "characters": 43,
+        "version": 9,
+        "margin": 0.1,
+        "score": 49.54135633228861,
+        "fidelity": 0.8074456706641489,
+        "edges": 0.11404098768356473,
+        "moduleContrast": 3.533574895466597,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          },
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "blur": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "print-900",
+            "pixels": 900,
+            "blur": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "phone-soft-focus",
+            "pixels": 330,
+            "blur": 0.3,
+            "ok": true
+          }
+        ],
+        "eligible": true
+      },
+      {
+        "text": "https://example.org/",
+        "characters": 20,
+        "version": 7,
+        "margin": 0.1,
+        "score": 49.12645147941069,
+        "fidelity": 0.7855875040128169,
+        "edges": 0.1315364168601279,
+        "moduleContrast": 4.050229927367196,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          },
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "blur": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "print-900",
+            "pixels": 900,
+            "blur": 0.2,
+            "ok": false
+          },
+          {
+            "trial": "phone-soft-focus",
+            "pixels": 330,
+            "blur": 0.3,
+            "ok": true
+          }
+        ],
+        "eligible": true
+      },
+      {
+        "text": "https://example.com/gallery/summer-leaves",
+        "characters": 41,
+        "version": 9,
+        "margin": 0.1,
+        "score": 49.94962249877108,
+        "fidelity": 0.8062419539869008,
+        "edges": 0.12458477843314517,
+        "moduleContrast": 3.4256488049389353,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          },
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "blur": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "print-900",
+            "pixels": 900,
+            "blur": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "phone-soft-focus",
+            "pixels": 330,
+            "blur": 0.3,
+            "ok": true
+          }
+        ],
+        "eligible": true
+      },
+      {
+        "text": "https://example.net/exhibits/ceramics?view=phone&color=blue",
+        "characters": 59,
+        "version": 11,
+        "margin": 0.1,
+        "score": 50.83857299122707,
+        "fidelity": 0.8163106174080973,
+        "edges": 0.13203308963959368,
+        "moduleContrast": 3.2345717463476715,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          },
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "blur": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "print-900",
+            "pixels": 900,
+            "blur": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "phone-soft-focus",
+            "pixels": 330,
+            "blur": 0.3,
+            "ok": true
+          }
+        ],
+        "eligible": true
+      },
+      {
+        "text": "https://example.org/collections/botanical-studies/2026/autumn/large-format-print?item=fern-frond&edition=public&ref=mobile-preview",
+        "characters": 130,
+        "version": 15,
+        "margin": 0.1,
+        "score": 50.363179477401545,
+        "fidelity": 0.8247954842297698,
+        "edges": 0.11109839655031556,
+        "moduleContrast": 3.046838901585478,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          },
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "blur": 0.2,
+            "ok": false
+          },
+          {
+            "trial": "print-900",
+            "pixels": 900,
+            "blur": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "phone-soft-focus",
+            "pixels": 330,
+            "blur": 0.3,
+            "ok": false
+          }
+        ],
+        "eligible": true
+      }
+    ],
+    "properties": {
+      "contrastRange": 0.78860292506963,
+      "edgeDensity": 0.0504880677384808,
+      "centerDetail": 0.0529100207667715,
+      "outerDetail": 0.04968075006238386,
+      "color": 0.26221205946807735,
+      "midtones": 0.3371310763888889
+    },
+    "score": 49.12645147941069,
+    "meanScore": 49.963836555819796,
+    "rasterEligible": true,
+    "kept": false,
+    "browserEligible": false,
+    "visualPass": true,
+    "eligible": false,
+    "reason": "Rendered link scan failure."
+  },
+  {
+    "id": "cdx-qr-ai-brass-padlock",
+    "label": "Brass padlock",
+    "scene": "One large old-fashioned unbranded matte brass padlock, with a broad rounded rectangular golden body and a thick dark curved shackle. A slight three-quarter view reveals the front and one side, with strong rounded volume and no inscriptions.",
+    "round": 3,
+    "prompt": "Create ONE square image, an original AI-made fictional single-object still life for a halftone QR background. One large old-fashioned unbranded matte brass padlock, with a broad rounded rectangular golden body and a thick dark curved shackle. A slight three-quarter view reveals the front and one side, with strong rounded volume and no inscriptions. The complete subject fills about 78% of the width and 82% of the height, centered with empty corners, against a very pale warm cream seamless background. The subject must be unmistakable at a small phone thumbnail: a strong large silhouette, rich natural colors, broad substantial shaded volumes, and clear depth. Sculptural product photography, soft diffuse side lighting, a gentle contact shadow, restrained texture. No extra props, no fine noisy texture, and no tiny ornament. No people, no faces of any kind, no animals, no logos, brands, labels, letters, numerals, readable text, watermark, QR code, checkerboard, grid, border, or real landmark. Show the whole object.",
+    "ai": true,
+    "file": ".cache/cdx-pics/round2/ai/cdx-qr-ai-brass-padlock.jpg",
+    "links": [
+      {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "characters": 43,
+        "version": 9,
+        "margin": 0.1,
+        "score": 49.44365580580746,
+        "fidelity": 0.8024355436751396,
+        "edges": 0.11799335341499503,
+        "moduleContrast": 3.467511867919731,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          },
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "blur": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "print-900",
+            "pixels": 900,
+            "blur": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "phone-soft-focus",
+            "pixels": 330,
+            "blur": 0.3,
+            "ok": true
+          }
+        ],
+        "eligible": true
+      },
+      {
+        "text": "https://example.org/",
+        "characters": 20,
+        "version": 7,
+        "margin": 0.12000000000000001,
+        "score": 48.45325437012534,
+        "fidelity": 0.7765478410733933,
+        "edges": 0.12762495802419357,
+        "moduleContrast": 4.287449500211584,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          },
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "blur": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "print-900",
+            "pixels": 900,
+            "blur": 0.2,
+            "ok": false
+          },
+          {
+            "trial": "phone-soft-focus",
+            "pixels": 330,
+            "blur": 0.3,
+            "ok": true
+          }
+        ],
+        "eligible": true
+      },
+      {
+        "text": "https://example.com/gallery/summer-leaves",
+        "characters": 41,
+        "version": 9,
+        "margin": 0.1,
+        "score": 49.256544090155884,
+        "fidelity": 0.8015199436875934,
+        "edges": 0.11495438194084993,
+        "moduleContrast": 3.460737070747915,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          },
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "blur": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "print-900",
+            "pixels": 900,
+            "blur": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "phone-soft-focus",
+            "pixels": 330,
+            "blur": 0.3,
+            "ok": true
+          }
+        ],
+        "eligible": true
+      },
+      {
+        "text": "https://example.net/exhibits/ceramics?view=phone&color=blue",
+        "characters": 59,
+        "version": 11,
+        "margin": 0.1,
+        "score": 51.41719714973001,
+        "fidelity": 0.8094899562540671,
+        "edges": 0.15322776790569584,
+        "moduleContrast": 3.2049024247780897,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          },
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "blur": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "print-900",
+            "pixels": 900,
+            "blur": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "phone-soft-focus",
+            "pixels": 330,
+            "blur": 0.3,
+            "ok": true
+          }
+        ],
+        "eligible": true
+      },
+      {
+        "text": "https://example.org/collections/botanical-studies/2026/autumn/large-format-print?item=fern-frond&edition=public&ref=mobile-preview",
+        "characters": 130,
+        "version": 15,
+        "margin": 0.1,
+        "score": 50.302872352351514,
+        "fidelity": 0.8178062642929174,
+        "edges": 0.11830061813869,
+        "moduleContrast": 3.06920880058309,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          },
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "blur": 0.2,
+            "ok": false
+          },
+          {
+            "trial": "print-900",
+            "pixels": 900,
+            "blur": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "phone-soft-focus",
+            "pixels": 330,
+            "blur": 0.3,
+            "ok": false
+          }
+        ],
+        "eligible": true
+      }
+    ],
+    "properties": {
+      "contrastRange": 0.7431386993139981,
+      "edgeDensity": 0.0628328977889303,
+      "centerDetail": 0.07747597606430769,
+      "outerDetail": 0.05795187169713796,
+      "color": 0.19839736847441397,
+      "midtones": 0.3042534722222222
+    },
+    "score": 48.45325437012534,
+    "meanScore": 49.77470475363405,
+    "rasterEligible": true,
+    "kept": false,
+    "browserEligible": false,
+    "visualPass": true,
+    "eligible": false,
+    "reason": "Rendered link scan failure."
+  },
+  {
+    "id": "cdx-qr-ai-red-apple",
+    "label": "Red apple",
+    "scene": "One large deep-red apple with a thick short brown stem and one broad green leaf. A full rounded three-dimensional body, a clear top indentation, rich red sides, and a softly lit lighter side make it unmistakable.",
+    "round": 3,
+    "prompt": "Create ONE square image, an original AI-made fictional single-object still life for a halftone QR background. One large deep-red apple with a thick short brown stem and one broad green leaf. A full rounded three-dimensional body, a clear top indentation, rich red sides, and a softly lit lighter side make it unmistakable. The complete subject fills about 78% of the width and 82% of the height, centered with empty corners, against a very pale warm cream seamless background. Use broad, simple, matte shaded surfaces with smooth large gradients and almost no small texture. The silhouette and three-dimensional volume must read immediately at a small phone thumbnail. Gentle diffuse side lighting, a subtle contact shadow, no shiny highlights. Sculptural product photography. No extra props. No people, no faces of any kind, no animals, no logos, brands, labels, letters, numerals, readable text, watermark, QR code, checkerboard, grid, border, or real landmark. Show the whole object.",
+    "ai": true,
+    "file": ".cache/cdx-pics/round2/ai/cdx-qr-ai-red-apple.jpg",
+    "links": [
+      {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "characters": 43,
+        "version": 9,
+        "margin": 0.1,
+        "score": 49.44581957520998,
+        "fidelity": 0.8075793861809012,
+        "edges": 0.11175451856134248,
+        "moduleContrast": 3.79331609826485,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          },
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "blur": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "print-900",
+            "pixels": 900,
+            "blur": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "phone-soft-focus",
+            "pixels": 330,
+            "blur": 0.3,
+            "ok": true
+          }
+        ],
+        "eligible": true
+      },
+      {
+        "text": "https://example.org/",
+        "characters": 20,
+        "version": 7,
+        "margin": 0.1,
+        "score": 47.91568629068793,
+        "fidelity": 0.782227310564507,
+        "edges": 0.10873742688088985,
+        "moduleContrast": 4.332451812581394,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          },
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "blur": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "print-900",
+            "pixels": 900,
+            "blur": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "phone-soft-focus",
+            "pixels": 330,
+            "blur": 0.3,
+            "ok": true
+          }
+        ],
+        "eligible": true
+      },
+      {
+        "text": "https://example.com/gallery/summer-leaves",
+        "characters": 41,
+        "version": 9,
+        "margin": 0.1,
+        "score": 48.98132890253541,
+        "fidelity": 0.8021028825293994,
+        "edges": 0.10812600807596533,
+        "moduleContrast": 3.745411190279575,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          },
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "blur": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "print-900",
+            "pixels": 900,
+            "blur": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "phone-soft-focus",
+            "pixels": 330,
+            "blur": 0.3,
+            "ok": true
+          }
+        ],
+        "eligible": true
+      },
+      {
+        "text": "https://example.net/exhibits/ceramics?view=phone&color=blue",
+        "characters": 59,
+        "version": 11,
+        "margin": 0.1,
+        "score": 50.441300376275365,
+        "fidelity": 0.8146088651800165,
+        "edges": 0.12528472869721016,
+        "moduleContrast": 3.434594086301757,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          },
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "blur": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "print-900",
+            "pixels": 900,
+            "blur": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "phone-soft-focus",
+            "pixels": 330,
+            "blur": 0.3,
+            "ok": true
+          }
+        ],
+        "eligible": true
+      },
+      {
+        "text": "https://example.org/collections/botanical-studies/2026/autumn/large-format-print?item=fern-frond&edition=public&ref=mobile-preview",
+        "characters": 130,
+        "version": 15,
+        "margin": 0.1,
+        "score": 50.39757860170398,
+        "fidelity": 0.8185873061647987,
+        "edges": 0.11945059472533437,
+        "moduleContrast": 3.2953260488572176,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          },
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "blur": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "print-900",
+            "pixels": 900,
+            "blur": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "phone-soft-focus",
+            "pixels": 330,
+            "blur": 0.3,
+            "ok": false
+          }
+        ],
+        "eligible": true
+      }
+    ],
+    "properties": {
+      "contrastRange": 0.8715906409040094,
+      "edgeDensity": 0.04780570495443077,
+      "centerDetail": 0.02938066394857763,
+      "outerDetail": 0.053947385289715155,
+      "color": 0.30004401544920256,
+      "midtones": 0.1763237847222222
+    },
+    "score": 47.91568629068793,
+    "meanScore": 49.43634274928253,
+    "rasterEligible": true,
+    "kept": false,
+    "browserEligible": true,
+    "visualPass": true,
+    "eligible": true,
+    "reason": "Lower worst-link detail than the three qualified replacement subjects."
+  },
+  {
+    "id": "cdx-qr-ai-ceramic-bell",
+    "label": "Ceramic bell",
+    "scene": "One large matte cobalt-blue ceramic handbell, with a short chunky handle above a broad flared hollow bell body. A slight three-quarter view reveals the thick lower rim and dark open interior; broad curved surfaces show solid volume.",
+    "round": 3,
+    "prompt": "Create ONE square image, an original AI-made fictional single-object still life for a halftone QR background. One large matte cobalt-blue ceramic handbell, with a short chunky handle above a broad flared hollow bell body. A slight three-quarter view reveals the thick lower rim and dark open interior; broad curved surfaces show solid volume. The complete subject fills about 78% of the width and 82% of the height, centered with empty corners, against a very pale warm cream seamless background. Use broad, simple, matte shaded surfaces with smooth large gradients and almost no small texture. The silhouette and three-dimensional volume must read immediately at a small phone thumbnail. Gentle diffuse side lighting, a subtle contact shadow, no shiny highlights. Sculptural product photography. No extra props. No people, no faces of any kind, no animals, no logos, brands, labels, letters, numerals, readable text, watermark, QR code, checkerboard, grid, border, or real landmark. Show the whole object.",
+    "ai": true,
+    "file": ".cache/cdx-pics/round2/ai/cdx-qr-ai-ceramic-bell.jpg",
+    "links": [
+      {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "characters": 43,
+        "version": 9,
+        "margin": 0.1,
+        "score": 49.19157691009852,
+        "fidelity": 0.7984999335437046,
+        "edges": 0.11720179033766139,
+        "moduleContrast": 3.8106059518995887,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          },
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "blur": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "print-900",
+            "pixels": 900,
+            "blur": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "phone-soft-focus",
+            "pixels": 330,
+            "blur": 0.3,
+            "ok": true
+          }
+        ],
+        "eligible": true
+      },
+      {
+        "text": "https://example.org/",
+        "characters": 20,
+        "version": 7,
+        "margin": 0.1,
+        "score": 48.3730331194684,
+        "fidelity": 0.7796008334169355,
+        "edges": 0.1221108284785989,
+        "moduleContrast": 4.201580320903752,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          },
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "blur": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "print-900",
+            "pixels": 900,
+            "blur": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "phone-soft-focus",
+            "pixels": 330,
+            "blur": 0.3,
+            "ok": true
+          }
+        ],
+        "eligible": true
+      },
+      {
+        "text": "https://example.com/gallery/summer-leaves",
+        "characters": 41,
+        "version": 9,
+        "margin": 0.1,
+        "score": 49.35692135371995,
+        "fidelity": 0.7989100006950962,
+        "edges": 0.12037491812199226,
+        "moduleContrast": 3.6551987214236927,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          },
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "blur": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "print-900",
+            "pixels": 900,
+            "blur": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "phone-soft-focus",
+            "pixels": 330,
+            "blur": 0.3,
+            "ok": true
+          }
+        ],
+        "eligible": true
+      },
+      {
+        "text": "https://example.net/exhibits/ceramics?view=phone&color=blue",
+        "characters": 59,
+        "version": 11,
+        "margin": 0.1,
+        "score": 49.79014368316169,
+        "fidelity": 0.8064315731834157,
+        "edges": 0.12080904795719603,
+        "moduleContrast": 3.4155187799045152,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          },
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "blur": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "print-900",
+            "pixels": 900,
+            "blur": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "phone-soft-focus",
+            "pixels": 330,
+            "blur": 0.3,
+            "ok": true
+          }
+        ],
+        "eligible": true
+      },
+      {
+        "text": "https://example.org/collections/botanical-studies/2026/autumn/large-format-print?item=fern-frond&edition=public&ref=mobile-preview",
+        "characters": 130,
+        "version": 15,
+        "margin": 0.1,
+        "score": 48.92288490083528,
+        "fidelity": 0.8132341895394362,
+        "edges": 0.09322232169258415,
+        "moduleContrast": 3.2572319286964353,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          },
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "blur": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "print-900",
+            "pixels": 900,
+            "blur": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "phone-soft-focus",
+            "pixels": 330,
+            "blur": 0.3,
+            "ok": false
+          }
+        ],
+        "eligible": true
+      }
+    ],
+    "properties": {
+      "contrastRange": 0.8745472943179309,
+      "edgeDensity": 0.036343719336207,
+      "centerDetail": 0.04986812446083145,
+      "outerDetail": 0.0318355842946653,
+      "color": 0.18202151491323093,
+      "midtones": 0.15266927083333334
+    },
+    "score": 48.3730331194684,
+    "meanScore": 49.126911993456766,
+    "rasterEligible": true,
+    "kept": false,
+    "browserEligible": true,
+    "visualPass": true,
+    "eligible": true,
+    "reason": "Lower worst-link detail than the three qualified replacement subjects."
+  },
+  {
+    "id": "cdx-qr-ai-green-watering-can",
+    "label": "Green watering can",
+    "scene": "One large matte forest-green watering can with a broad round body, a short stout curved spout and a thick rounded loop handle. The spout and handle are large and distinct; a three-quarter view shows the solid body and open top.",
+    "round": 3,
+    "prompt": "Create ONE square image, an original AI-made fictional single-object still life for a halftone QR background. One large matte forest-green watering can with a broad round body, a short stout curved spout and a thick rounded loop handle. The spout and handle are large and distinct; a three-quarter view shows the solid body and open top. The complete subject fills about 78% of the width and 82% of the height, centered with empty corners, against a very pale warm cream seamless background. Use broad, simple, matte shaded surfaces with smooth large gradients and almost no small texture. The silhouette and three-dimensional volume must read immediately at a small phone thumbnail. Gentle diffuse side lighting, a subtle contact shadow, no shiny highlights. Sculptural product photography. No extra props. No people, no faces of any kind, no animals, no logos, brands, labels, letters, numerals, readable text, watermark, QR code, checkerboard, grid, border, or real landmark. Show the whole object.",
+    "ai": true,
+    "file": "assets/toys/qr-picture/codex/cdx-qr-ai-green-watering-can.jpg",
+    "links": [
+      {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "characters": 43,
+        "version": 9,
+        "margin": 0.12000000000000001,
+        "score": 50.03381375097099,
+        "fidelity": 0.7925379551302585,
+        "edges": 0.1432050270845949,
+        "moduleContrast": 4.056156644355164,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          },
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "blur": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "print-900",
+            "pixels": 900,
+            "blur": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "phone-soft-focus",
+            "pixels": 330,
+            "blur": 0.3,
+            "ok": true
+          }
+        ],
+        "eligible": true
+      },
+      {
+        "text": "https://example.org/",
+        "characters": 20,
+        "version": 7,
+        "margin": 0.1,
+        "score": 49.6794957959156,
+        "fidelity": 0.780872737019181,
+        "edges": 0.14958878355245867,
+        "moduleContrast": 4.318744434932789,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          },
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "blur": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "print-900",
+            "pixels": 900,
+            "blur": 0.2,
+            "ok": false
+          },
+          {
+            "trial": "phone-soft-focus",
+            "pixels": 330,
+            "blur": 0.3,
+            "ok": true
+          }
+        ],
+        "eligible": true
+      },
+      {
+        "text": "https://example.com/gallery/summer-leaves",
+        "characters": 41,
+        "version": 9,
+        "margin": 0.12000000000000001,
+        "score": 49.47738052207224,
+        "fidelity": 0.7870562623284905,
+        "edges": 0.1375396909778946,
+        "moduleContrast": 3.966625651566938,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          },
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "blur": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "print-900",
+            "pixels": 900,
+            "blur": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "phone-soft-focus",
+            "pixels": 330,
+            "blur": 0.3,
+            "ok": true
+          }
+        ],
+        "eligible": true
+      },
+      {
+        "text": "https://example.net/exhibits/ceramics?view=phone&color=blue",
+        "characters": 59,
+        "version": 11,
+        "margin": 0.1,
+        "score": 50.863397748124704,
+        "fidelity": 0.8075832750783082,
+        "edges": 0.14325150264039452,
+        "moduleContrast": 3.4343343745495014,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          },
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "blur": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "print-900",
+            "pixels": 900,
+            "blur": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "phone-soft-focus",
+            "pixels": 330,
+            "blur": 0.3,
+            "ok": true
+          }
+        ],
+        "eligible": true
+      },
+      {
+        "text": "https://example.org/collections/botanical-studies/2026/autumn/large-format-print?item=fern-frond&edition=public&ref=mobile-preview",
+        "characters": 130,
+        "version": 15,
+        "margin": 0.1,
+        "score": 50.900941254737084,
+        "fidelity": 0.8151308886583051,
+        "edges": 0.1348609417451178,
+        "moduleContrast": 3.254981690647198,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          },
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "blur": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "print-900",
+            "pixels": 900,
+            "blur": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "phone-soft-focus",
+            "pixels": 330,
+            "blur": 0.3,
+            "ok": false
+          }
+        ],
+        "eligible": true
+      }
+    ],
+    "properties": {
+      "contrastRange": 0.7914660663872957,
+      "edgeDensity": 0.0507898648193501,
+      "centerDetail": 0.04931023182542875,
+      "outerDetail": 0.05128307581732403,
+      "color": 0.0731222431407635,
+      "midtones": 0.17220052083333334
+    },
+    "score": 49.47738052207224,
+    "meanScore": 50.19100581436412,
+    "rasterEligible": true,
+    "kept": true,
+    "browserEligible": true,
+    "visualPass": true,
+    "eligible": true,
+    "reason": "Clear single AI subject at 330px; all five rendered links pass; one of the three highest worst-link replacement scores."
+  },
+  {
+    "id": "cdx-qr-ai-stacking-rings",
+    "label": "Wooden stacking rings",
+    "scene": "One large wooden stacking-ring toy: four thick rounded rings in muted red, yellow, green, and blue on a short chunky wooden peg. The largest lower ring is broad, each upper ring smaller; a three-quarter view clearly shows the top surfaces and substantial rounded volumes.",
+    "round": 3,
+    "prompt": "Create ONE square image, an original AI-made fictional single-object still life for a halftone QR background. One large wooden stacking-ring toy: four thick rounded rings in muted red, yellow, green, and blue on a short chunky wooden peg. The largest lower ring is broad, each upper ring smaller; a three-quarter view clearly shows the top surfaces and substantial rounded volumes. The complete subject fills about 78% of the width and 82% of the height, centered with empty corners, against a very pale warm cream seamless background. Use broad, simple, matte shaded surfaces with smooth large gradients and almost no small texture. The silhouette and three-dimensional volume must read immediately at a small phone thumbnail. Gentle diffuse side lighting, a subtle contact shadow, no shiny highlights. Sculptural product photography. No extra props. No people, no faces of any kind, no animals, no logos, brands, labels, letters, numerals, readable text, watermark, QR code, checkerboard, grid, border, or real landmark. Show the whole object.",
+    "ai": true,
+    "file": "assets/toys/qr-picture/codex/cdx-qr-ai-stacking-rings.jpg",
+    "links": [
+      {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "characters": 43,
+        "version": 9,
+        "margin": 0.1,
+        "score": 49.777861042266956,
+        "fidelity": 0.8071517089171667,
+        "edges": 0.11965593448495081,
+        "moduleContrast": 3.658779859667059,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          },
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "blur": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "print-900",
+            "pixels": 900,
+            "blur": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "phone-soft-focus",
+            "pixels": 330,
+            "blur": 0.3,
+            "ok": true
+          }
+        ],
+        "eligible": true
+      },
+      {
+        "text": "https://example.org/",
+        "characters": 20,
+        "version": 7,
+        "margin": 0.1,
+        "score": 48.88653348661005,
+        "fidelity": 0.7912698018495683,
+        "edges": 0.11925987521963984,
+        "moduleContrast": 4.083002205155503,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          },
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "blur": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "print-900",
+            "pixels": 900,
+            "blur": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "phone-soft-focus",
+            "pixels": 330,
+            "blur": 0.3,
+            "ok": true
+          }
+        ],
+        "eligible": true
+      },
+      {
+        "text": "https://example.com/gallery/summer-leaves",
+        "characters": 41,
+        "version": 9,
+        "margin": 0.1,
+        "score": 49.659256149239575,
+        "fidelity": 0.8063768114701998,
+        "edges": 0.11796736707507952,
+        "moduleContrast": 3.5097045399193703,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          },
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "blur": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "print-900",
+            "pixels": 900,
+            "blur": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "phone-soft-focus",
+            "pixels": 330,
+            "blur": 0.3,
+            "ok": true
+          }
+        ],
+        "eligible": true
+      },
+      {
+        "text": "https://example.net/exhibits/ceramics?view=phone&color=blue",
+        "characters": 59,
+        "version": 11,
+        "margin": 0.1,
+        "score": 50.47586829075228,
+        "fidelity": 0.8181302421148329,
+        "edges": 0.12174899943192148,
+        "moduleContrast": 3.2320707578085437,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          },
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "blur": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "print-900",
+            "pixels": 900,
+            "blur": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "phone-soft-focus",
+            "pixels": 330,
+            "blur": 0.3,
+            "ok": true
+          }
+        ],
+        "eligible": true
+      },
+      {
+        "text": "https://example.org/collections/botanical-studies/2026/autumn/large-format-print?item=fern-frond&edition=public&ref=mobile-preview",
+        "characters": 130,
+        "version": 15,
+        "margin": 0.1,
+        "score": 49.72423355925656,
+        "fidelity": 0.8206050207584353,
+        "edges": 0.10202127594539147,
+        "moduleContrast": 3.120615840012537,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          },
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "blur": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "print-900",
+            "pixels": 900,
+            "blur": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "phone-soft-focus",
+            "pixels": 330,
+            "blur": 0.3,
+            "ok": false
+          }
+        ],
+        "eligible": true
+      }
+    ],
+    "properties": {
+      "contrastRange": 0.7712544699355961,
+      "edgeDensity": 0.04511209801044935,
+      "centerDetail": 0.06549083517083257,
+      "outerDetail": 0.03831918562365518,
+      "color": 0.21656169673464218,
+      "midtones": 0.2893880208333333
+    },
+    "score": 48.88653348661005,
+    "meanScore": 49.704750505625086,
+    "rasterEligible": true,
+    "kept": true,
+    "browserEligible": true,
+    "visualPass": true,
+    "eligible": true,
+    "reason": "Clear single AI subject at 330px; all five rendered links pass; one of the three highest worst-link replacement scores."
   }
 ]

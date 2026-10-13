@@ -1,16 +1,20 @@
 # Sample pictures: October 13, 2026
 
 Made by Ryan with Codex (GPT-6). Implemented on `codex/sample-pictures`, draft
-[PR #582](https://github.com/ryanjosephkamp/splashery/pull/582). Main `574a68d3`, then `a2189958`,
-was merged into the branch, without rebasing. The latter adds task documents only; application and
-test code are identical to the clean-main failure baseline. Nothing is merged into main.
+[PR #582](https://github.com/ryanjosephkamp/splashery/pull/582). Main `4b0127da` was merged into the
+branch, without rebasing, including #585's 20 hard-case samples and #586's site rebuild. The later
+task-document-only update `c66a49e9` was also merged; it leaves application, tests, and assets
+unchanged. Both main's complete records/credit block and this task's records/credit block were
+preserved. Nothing is merged into main.
 
 The accepted Photo to 3D set is unchanged: 20 AI-made samples from 40 measured candidates, with
-their original JPEGs, depth maps, labels, and records. The revised Picture QR set has **24
-recognizable subjects**, 21 AI-made and 3 procedural CC0, chosen from 32 new AI candidates and six
-earlier subject pictures. All 18 URL-specific carriers from the first selection are removed from the
-picker, asset records, and shipping folder. Neither toy's default picture changed; new pictures load
-only when selected.
+their original JPEGs, depth maps, labels, and records. The final Picture QR set has **24
+recognizable AI-made subjects**. The 21 AI pictures accepted in the previous review are retained,
+and the three remaining procedural panels/silhouette are replaced by the best three eligible single
+subjects from ten new AI candidates. The combined history contains 42 AI candidates and six
+procedural subject pictures. All 18 URL-specific carriers from the first selection are removed from
+the picker, asset records, and shipping folder. Neither toy's default picture changed; new pictures
+load only when selected.
 
 ## Scope and rules
 
@@ -24,18 +28,24 @@ assertion was edited. `tests/taps.spec.mjs` is untouched.
 
 ![Final 24: actual 330-pixel phone renders, score, and five-link scan rate](sample-pictures-2026-10/qr-final-phone.jpg)
 
-![The same 24 source pictures](sample-pictures-2026-10/qr-final-sources.jpg)
+![The same 24 AI-made source pictures](sample-pictures-2026-10/qr-final-sources.jpg)
 
 ## Revised QR selection and five-link protocol
 
-The Operator's review called for subjects that remain recognizable at phone size and backgrounds
-that do not encode the default URL. The new 32 AI candidates use large, distinct silhouettes,
-restrained colors, quiet corners, and broad surfaces. The source pictures contain no QR pattern,
-grid, or payload-derived luminance carrier. Their prompts are recorded in
+The Operator's reviews called for recognizable phone-size subjects, payload-independent backgrounds,
+and finally stronger single objects in place of Pebble pool soft 6, Leaf canopy soft 6, and Ceramic
+vase 7. All procedural variants are retired from the shipping set. The 42 AI candidates use large,
+distinct silhouettes, restrained colors, quiet corners, and broad surfaces. The ten final-round
+objects add clearer volume, handles, rims, and shaded surfaces. The source pictures contain no QR
+pattern, grid, or payload-derived luminance carrier. Their prompts are recorded in
 [the scene manifest](../../tools/cdx-pics-qr-ai-prompts.json). Native images are retained locally;
 the shipping JPEGs are 960×960 at quality 88, made with the repository's licensed Pillow.
 
-![All 32 new AI candidates](sample-pictures-2026-10/qr-ai-candidates.jpg)
+![The first 32 AI candidates](sample-pictures-2026-10/qr-ai-candidates.jpg)
+
+![Ten final-round single-object candidates](sample-pictures-2026-10/qr-replacement-candidates.jpg)
+
+![Actual 330-pixel renders of all ten replacements](sample-pictures-2026-10/qr-replacement-phone.jpg)
 
 Five unrelated links, from 20 to 130 characters, are fixed in
 [cdx-pics-links.mjs](../../tools/cdx-pics-links.mjs). Every candidate uses H correction, Contrast
@@ -76,54 +86,66 @@ The detail measure is the original RGB-fidelity/gradient-cosine metric applied t
 woven layout, averaged to one color per module:
 `100 × (0.55 × (1 − RGB_MAE) + 0.45 × max(0, gradient_cosine))`. **The minimum of the five link
 scores** ranks a candidate. It includes forced finder areas and is not a semantic-recognition
-percentage. Separately, the actual 330-pixel render is visually reviewed for a clear subject.
-Selection keeps the highest worst-link scores among fully scan-qualified, visually clear pictures,
-with one procedural variant per subject family. Every cut has a reason.
+percentage. Separately, the actual 330-pixel render is visually reviewed for a clear subject. The
+final review retains the accepted 21 AI pictures and selects the three highest worst-link scores
+among the ten new, fully scan-qualified, visually clear single objects. The visual subject gate
+takes priority over a procedural panel's numerically higher RGB-fidelity score; the detail metric is
+not a measure of object recognition. Every cut has a reason.
 [qr-review-scores.json](sample-pictures-2026-10/qr-review-scores.json),
 [qr-review-browser.json](sample-pictures-2026-10/qr-review-browser.json), and
 [qr-subject-review.json](sample-pictures-2026-10/qr-subject-review.json) contain the complete
 measurements and visual dispositions.
 
-| Candidate                 | Subject             | Origin  | Worst-link detail | Rendered links | Raw 900px links | Decision                                                                   |
-| ------------------------- | ------------------- | ------- | ----------------: | -------------: | --------------: | -------------------------------------------------------------------------- |
-| cdx-qr-3-2                | Pebble pool 2       | CC0     |            48.940 |            5/5 |             4/5 | Lower worst-link detail score or a repeated subject.                       |
-| cdx-qr-8-7                | Ceramic vase 7      | CC0     |            46.754 |            5/5 |             4/5 | Keep                                                                       |
-| cdx-qr-print-3-6          | Pebble pool soft 6  | CC0     |            49.532 |            5/5 |             4/5 | Keep                                                                       |
-| cdx-qr-print-5-2          | Leaf canopy soft 2  | CC0     |            49.001 |            5/5 |             4/5 | Lower worst-link detail score or a repeated subject.                       |
-| cdx-qr-print-5-6          | Leaf canopy soft 6  | CC0     |            49.129 |            5/5 |             4/5 | Keep                                                                       |
-| cdx-qr-print-8-2          | Ceramic vase soft 2 | CC0     |            46.271 |            5/5 |             4/5 | Lower worst-link detail score or a repeated subject.                       |
-| cdx-qr-ai-blue-vase       | Blue vase           | AI-made |            47.570 |            5/5 |             3/5 | Keep                                                                       |
-| cdx-qr-ai-teapot          | Clay teapot         | AI-made |            47.996 |            5/5 |             3/5 | Keep                                                                       |
-| cdx-qr-ai-fern            | Fern frond          | AI-made |            49.785 |            5/5 |             3/5 | Keep                                                                       |
-| cdx-qr-ai-ginkgo          | Ginkgo leaf         | AI-made |            47.144 |            5/5 |             3/5 | Keep                                                                       |
-| cdx-qr-ai-monstera        | Split leaf          | AI-made |            51.648 |            5/5 |             3/5 | Keep                                                                       |
-| cdx-qr-ai-cactus          | Potted cactus       | AI-made |            49.351 |            5/5 |             3/5 | Keep                                                                       |
-| cdx-qr-ai-succulent       | Succulent           | AI-made |            49.138 |            4/5 |             3/5 | Rendered link scan failure.                                                |
-| cdx-qr-ai-pebbles         | Smooth pebbles      | AI-made |            46.046 |            5/5 |             3/5 | Keep                                                                       |
-| cdx-qr-ai-pear            | Pear                | AI-made |            48.862 |            5/5 |             3/5 | Keep                                                                       |
-| cdx-qr-ai-citrus          | Citrus halves       | AI-made |            49.505 |            3/5 |             3/5 | Rendered link scan failure.                                                |
-| cdx-qr-ai-squash          | Autumn squash       | AI-made |            46.834 |            5/5 |             3/5 | Keep                                                                       |
-| cdx-qr-ai-mushroom        | Mushroom            | AI-made |            48.682 |            5/5 |             3/5 | Keep                                                                       |
-| cdx-qr-ai-shell           | Spiral shell        | AI-made |            45.966 |            4/5 |             3/5 | Rendered link scan failure.                                                |
-| cdx-qr-ai-scallop         | Scallop shell       | AI-made |            47.719 |            5/5 |             3/5 | Keep                                                                       |
-| cdx-qr-ai-tulip           | Tulip               | AI-made |            48.648 |            5/5 |             3/5 | Keep                                                                       |
-| cdx-qr-ai-lotus           | Lotus bloom         | AI-made |            47.875 |            5/5 |             3/5 | Keep                                                                       |
-| cdx-qr-ai-poppy           | Poppy bloom         | AI-made |            46.955 |            4/5 |             3/5 | Rendered link scan failure.                                                |
-| cdx-qr-ai-acorns          | Acorns              | AI-made |            48.117 |            4/5 |             3/5 | Rendered link scan failure.                                                |
-| cdx-qr-ai-pinecone        | Pinecone            | AI-made |            48.564 |            5/5 |             3/5 | Keep                                                                       |
-| cdx-qr-ai-pumpkin         | Pumpkin             | AI-made |            47.647 |            5/5 |             3/5 | Keep                                                                       |
-| cdx-qr-ai-wood-blocks     | Wooden blocks       | AI-made |            48.019 |            5/5 |             3/5 | Keep                                                                       |
-| cdx-qr-ai-rook            | Wooden rook         | AI-made |            48.380 |            5/5 |             4/5 | Keep                                                                       |
-| cdx-qr-ai-paper-boat      | Paper boat          | AI-made |            45.336 |            5/5 |             3/5 | Lower worst-link detail score or a repeated subject.                       |
-| cdx-qr-ai-hot-air-balloon | Balloon             | AI-made |            48.720 |            5/5 |             3/5 | Keep                                                                       |
-| cdx-qr-ai-sailboat        | Sailboat            | AI-made |            47.095 |            5/5 |             4/5 | The pale main structure is too faint against the background at 330 pixels. |
-| cdx-qr-ai-cup             | Stoneware cup       | AI-made |            45.229 |            5/5 |             3/5 | The pale main structure is too faint against the background at 330 pixels. |
-| cdx-qr-ai-tea-bowl        | Tea bowl            | AI-made |            47.734 |            4/5 |             3/5 | Rendered link scan failure.                                                |
-| cdx-qr-ai-pitcher         | Clay pitcher        | AI-made |            49.054 |            5/5 |             3/5 | Keep                                                                       |
-| cdx-qr-ai-watering-can    | Watering can        | AI-made |            45.794 |            5/5 |             3/5 | Lower worst-link detail score or a repeated subject.                       |
-| cdx-qr-ai-rainbow         | Paper rainbow       | AI-made |            48.178 |            5/5 |             3/5 | Keep                                                                       |
-| cdx-qr-ai-stacked-stones  | Stacked stones      | AI-made |            48.542 |            5/5 |             3/5 | Keep                                                                       |
-| cdx-qr-ai-crystal         | Crystal cluster     | AI-made |            45.390 |            5/5 |             3/5 | Crystal facets merge into a faint purple mass in the phone halftone.       |
+| Candidate                    | Subject               | Origin  | Worst-link detail | Rendered links | Raw 900px links | Decision                                                                                                                |
+| ---------------------------- | --------------------- | ------- | ----------------: | -------------: | --------------: | ----------------------------------------------------------------------------------------------------------------------- |
+| cdx-qr-3-2                   | Pebble pool 2         | CC0     |            48.940 |            5/5 |             4/5 | Retired in the final Operator review: replace procedural panels and the flat vase silhouette with stronger AI subjects. |
+| cdx-qr-8-7                   | Ceramic vase 7        | CC0     |            46.754 |            5/5 |             4/5 | Retired in the final Operator review: replace procedural panels and the flat vase silhouette with stronger AI subjects. |
+| cdx-qr-print-3-6             | Pebble pool soft 6    | CC0     |            49.532 |            5/5 |             4/5 | Retired in the final Operator review: replace procedural panels and the flat vase silhouette with stronger AI subjects. |
+| cdx-qr-print-5-2             | Leaf canopy soft 2    | CC0     |            49.001 |            5/5 |             4/5 | Retired in the final Operator review: replace procedural panels and the flat vase silhouette with stronger AI subjects. |
+| cdx-qr-print-5-6             | Leaf canopy soft 6    | CC0     |            49.129 |            5/5 |             4/5 | Retired in the final Operator review: replace procedural panels and the flat vase silhouette with stronger AI subjects. |
+| cdx-qr-print-8-2             | Ceramic vase soft 2   | CC0     |            46.271 |            5/5 |             4/5 | Retired in the final Operator review: replace procedural panels and the flat vase silhouette with stronger AI subjects. |
+| cdx-qr-ai-blue-vase          | Blue vase             | AI-made |            47.570 |            5/5 |             3/5 | Keep                                                                                                                    |
+| cdx-qr-ai-teapot             | Clay teapot           | AI-made |            47.996 |            5/5 |             3/5 | Keep                                                                                                                    |
+| cdx-qr-ai-fern               | Fern frond            | AI-made |            49.785 |            5/5 |             3/5 | Keep                                                                                                                    |
+| cdx-qr-ai-ginkgo             | Ginkgo leaf           | AI-made |            47.144 |            5/5 |             3/5 | Keep                                                                                                                    |
+| cdx-qr-ai-monstera           | Split leaf            | AI-made |            51.648 |            5/5 |             3/5 | Keep                                                                                                                    |
+| cdx-qr-ai-cactus             | Potted cactus         | AI-made |            49.351 |            5/5 |             3/5 | Keep                                                                                                                    |
+| cdx-qr-ai-succulent          | Succulent             | AI-made |            49.138 |            4/5 |             3/5 | Rendered link scan failure.                                                                                             |
+| cdx-qr-ai-pebbles            | Smooth pebbles        | AI-made |            46.046 |            5/5 |             3/5 | Keep                                                                                                                    |
+| cdx-qr-ai-pear               | Pear                  | AI-made |            48.862 |            5/5 |             3/5 | Keep                                                                                                                    |
+| cdx-qr-ai-citrus             | Citrus halves         | AI-made |            49.505 |            3/5 |             3/5 | Rendered link scan failure.                                                                                             |
+| cdx-qr-ai-squash             | Autumn squash         | AI-made |            46.834 |            5/5 |             3/5 | Keep                                                                                                                    |
+| cdx-qr-ai-mushroom           | Mushroom              | AI-made |            48.682 |            5/5 |             3/5 | Keep                                                                                                                    |
+| cdx-qr-ai-shell              | Spiral shell          | AI-made |            45.966 |            4/5 |             3/5 | Rendered link scan failure.                                                                                             |
+| cdx-qr-ai-scallop            | Scallop shell         | AI-made |            47.719 |            5/5 |             3/5 | Keep                                                                                                                    |
+| cdx-qr-ai-tulip              | Tulip                 | AI-made |            48.648 |            5/5 |             3/5 | Keep                                                                                                                    |
+| cdx-qr-ai-lotus              | Lotus bloom           | AI-made |            47.875 |            5/5 |             3/5 | Keep                                                                                                                    |
+| cdx-qr-ai-poppy              | Poppy bloom           | AI-made |            46.955 |            4/5 |             3/5 | Rendered link scan failure.                                                                                             |
+| cdx-qr-ai-acorns             | Acorns                | AI-made |            48.117 |            4/5 |             3/5 | Rendered link scan failure.                                                                                             |
+| cdx-qr-ai-pinecone           | Pinecone              | AI-made |            48.564 |            5/5 |             3/5 | Keep                                                                                                                    |
+| cdx-qr-ai-pumpkin            | Pumpkin               | AI-made |            47.647 |            5/5 |             3/5 | Keep                                                                                                                    |
+| cdx-qr-ai-wood-blocks        | Wooden blocks         | AI-made |            48.019 |            5/5 |             3/5 | Keep                                                                                                                    |
+| cdx-qr-ai-rook               | Wooden rook           | AI-made |            48.380 |            5/5 |             4/5 | Keep                                                                                                                    |
+| cdx-qr-ai-paper-boat         | Paper boat            | AI-made |            45.336 |            5/5 |             3/5 | Not selected in the earlier accepted AI set.                                                                            |
+| cdx-qr-ai-hot-air-balloon    | Balloon               | AI-made |            48.720 |            5/5 |             3/5 | Keep                                                                                                                    |
+| cdx-qr-ai-sailboat           | Sailboat              | AI-made |            47.095 |            5/5 |             4/5 | The pale main structure is too faint against the background at 330 pixels.                                              |
+| cdx-qr-ai-cup                | Stoneware cup         | AI-made |            45.229 |            5/5 |             3/5 | The pale main structure is too faint against the background at 330 pixels.                                              |
+| cdx-qr-ai-tea-bowl           | Tea bowl              | AI-made |            47.734 |            4/5 |             3/5 | Rendered link scan failure.                                                                                             |
+| cdx-qr-ai-pitcher            | Clay pitcher          | AI-made |            49.054 |            5/5 |             3/5 | Keep                                                                                                                    |
+| cdx-qr-ai-watering-can       | Watering can          | AI-made |            45.794 |            5/5 |             3/5 | Not selected in the earlier accepted AI set.                                                                            |
+| cdx-qr-ai-rainbow            | Paper rainbow         | AI-made |            48.178 |            5/5 |             3/5 | Keep                                                                                                                    |
+| cdx-qr-ai-stacked-stones     | Stacked stones        | AI-made |            48.542 |            5/5 |             3/5 | Keep                                                                                                                    |
+| cdx-qr-ai-crystal            | Crystal cluster       | AI-made |            45.390 |            5/5 |             3/5 | Crystal facets merge into a faint purple mass in the phone halftone.                                                    |
+| cdx-qr-ai-spinning-top       | Wooden spinning top   | AI-made |            48.677 |            5/5 |             3/5 | Keep                                                                                                                    |
+| cdx-qr-ai-wicker-basket      | Wicker basket         | AI-made |            49.918 |            4/5 |             3/5 | Rendered link scan failure.                                                                                             |
+| cdx-qr-ai-copper-kettle      | Copper kettle         | AI-made |            49.366 |            4/5 |             3/5 | Rendered link scan failure.                                                                                             |
+| cdx-qr-ai-wooden-mallet      | Wooden mallet         | AI-made |            47.072 |            5/5 |             3/5 | Lower worst-link detail than the three qualified replacement subjects.                                                  |
+| cdx-qr-ai-clay-mortar        | Clay mortar           | AI-made |            49.126 |            3/5 |             3/5 | Rendered link scan failure.                                                                                             |
+| cdx-qr-ai-brass-padlock      | Brass padlock         | AI-made |            48.453 |            4/5 |             3/5 | Rendered link scan failure.                                                                                             |
+| cdx-qr-ai-red-apple          | Red apple             | AI-made |            47.916 |            5/5 |             3/5 | Lower worst-link detail than the three qualified replacement subjects.                                                  |
+| cdx-qr-ai-ceramic-bell       | Ceramic bell          | AI-made |            48.373 |            5/5 |             3/5 | Lower worst-link detail than the three qualified replacement subjects.                                                  |
+| cdx-qr-ai-green-watering-can | Green watering can    | AI-made |            49.477 |            5/5 |             3/5 | Keep                                                                                                                    |
+| cdx-qr-ai-stacking-rings     | Wooden stacking rings | AI-made |            48.887 |            5/5 |             3/5 | Keep                                                                                                                    |
 
 ## Photo to 3D method and limits
 
@@ -220,8 +242,8 @@ candidates in three 72-picture batches. The first-round CPU and browser scan his
 The third batch encoded a default-URL luminance carrier. Every carrier is now rejected. Its
 source-reference detail metric excluded the carrier, but that did not ensure recognizable subjects
 in the final phone render. The revised selection therefore adds a visual subject gate and five-link
-checks. The original default-URL selection and contact sheets below are **superseded**, not the
-shipping set.
+checks. The original default-URL selection and procedural contact sheet below are **superseded**,
+not the shipping set.
 
 ![All 216 first-round procedural candidates](sample-pictures-2026-10/qr-candidates.jpg)
 
@@ -289,7 +311,7 @@ shipping set.
 | cdx-qr-8-4         |                48.295 | Cut: first-round scan failure                                  |
 | cdx-qr-8-5         |                48.298 | Cut: no clear-subject/five-link advantage over final selection |
 | cdx-qr-8-6         |                49.083 | Cut: no clear-subject/five-link advantage over final selection |
-| cdx-qr-8-7         |                48.971 | Kept after five-link/subject review                            |
+| cdx-qr-8-7         |                48.971 | Cut: no clear-subject/five-link advantage over final selection |
 | cdx-qr-8-8         |                48.882 | Cut: no clear-subject/five-link advantage over final selection |
 | cdx-qr-9-1         |                48.795 | Cut: no clear-subject/five-link advantage over final selection |
 | cdx-qr-9-2         |                48.794 | Cut: no clear-subject/five-link advantage over final selection |
@@ -320,7 +342,7 @@ shipping set.
 | cdx-qr-print-3-3   |                49.999 | Cut: no clear-subject/five-link advantage over final selection |
 | cdx-qr-print-3-4   |                49.552 | Cut: no clear-subject/five-link advantage over final selection |
 | cdx-qr-print-3-5   |                49.155 | Cut: no clear-subject/five-link advantage over final selection |
-| cdx-qr-print-3-6   |                49.856 | Kept after five-link/subject review                            |
+| cdx-qr-print-3-6   |                49.856 | Cut: no clear-subject/five-link advantage over final selection |
 | cdx-qr-print-3-7   |                49.585 | Cut: no clear-subject/five-link advantage over final selection |
 | cdx-qr-print-3-8   |                49.577 | Cut: no clear-subject/five-link advantage over final selection |
 | cdx-qr-print-4-1   |                49.380 | Cut: no clear-subject/five-link advantage over final selection |
@@ -336,7 +358,7 @@ shipping set.
 | cdx-qr-print-5-3   |                51.430 | Cut: first-round scan failure                                  |
 | cdx-qr-print-5-4   |                51.154 | Cut: no clear-subject/five-link advantage over final selection |
 | cdx-qr-print-5-5   |                49.427 | Cut: no clear-subject/five-link advantage over final selection |
-| cdx-qr-print-5-6   |                50.001 | Kept after five-link/subject review                            |
+| cdx-qr-print-5-6   |                50.001 | Cut: no clear-subject/five-link advantage over final selection |
 | cdx-qr-print-5-7   |                51.178 | Cut: no clear-subject/five-link advantage over final selection |
 | cdx-qr-print-5-8   |                51.357 | Cut: no clear-subject/five-link advantage over final selection |
 | cdx-qr-print-6-1   |                48.738 | Cut: no clear-subject/five-link advantage over final selection |
@@ -459,7 +481,9 @@ warning. The hash expected/actual strings are in the attached log. The original 
 `555e8f5c` observations also remain in the first verification record.
 
 Current run results and required checks are recorded in
-[review-verification.md](sample-pictures-2026-10/review-verification.md). The original
+[final-review-verification.md](sample-pictures-2026-10/final-review-verification.md). The prior
+[review-verification.md](sample-pictures-2026-10/review-verification.md) describes the
+21-AI/3-procedural round only. The original
 [verification.md](sample-pictures-2026-10/verification.md) describes the first-round checks only.
 Neither existing assertion was weakened, and `tests/taps.spec.mjs` is untouched.
 
@@ -470,19 +494,21 @@ Toy IDs: `photo-3d` and `qr-picture`. Existing recipe hooks, units, axes, pivots
 APIs, and quaternion order are unchanged. Only selected picture data/imports and this task's
 evidence/tests/tools changed beyond the requested main merge.
 
-1. Generate the 32 individual square QR pictures from their complete manifest prompts with the image
+1. Generate the 42 individual square QR pictures from their complete manifest prompts with the image
    tool. Keep `{id,path,prompt}` local mappings in `.cache/cdx-pics/round2/ai/*.json`; preserve
    native originals.
 2. Run `python3 tools/cdx-pics-qr-prepare.py`, then `node tools/cdx-pics-review.mjs`. The six
-   earlier procedural subjects are reused as recorded in the first-round generation tools.
+   earlier procedural subjects remain only as measurement history; none ships in the final set. CPU
+   scoring resumes recorded candidates. Delete qr-review-scores.json to measure all candidates
+   again.
 3. With the local server on 4173, run
    `SPLASHERY_CHROMIUM=/usr/bin/chromium node tools/cdx-pics-review-browser.mjs`; it resumes
    completed subjects. Delete the review browser score file for a complete new measurement.
 4. Inspect all actual phone renders and record each subject decision in qr-subject-review.json. Run
    `node tools/cdx-pics-review-select.mjs`, then `python3 tools/cdx-pics-review-report.py`. Format
    the resulting code, JSON, and Markdown with Prettier.
-5. Run the tests and pre-push checks listed in review-verification.md. The accepted Studio assets
-   and scores need no regeneration.
+5. Run the tests and pre-push checks listed in final-review-verification.md. The accepted Studio
+   assets and scores need no regeneration.
 
 AI generation is nondeterministic; procedural families/variants are deterministic. Shipping asset
 SHA-256 hashes, source pages, owner/agent credits, licenses, dates, and transformations are in

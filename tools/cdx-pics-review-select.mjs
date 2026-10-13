@@ -1,5 +1,6 @@
 // Final review selection: recognizable subjects, all five rendered links, then worst-link detail.
 import fs from "node:fs";
+import { QR_PICTURES } from "../src/qr-craft/codex-pictures.js";
 const directory = "docs/audits/sample-pictures-2026-10/";
 const subjects = JSON.parse(fs.readFileSync(directory + "qr-review-scores.json"));
 const browser = new Map(
@@ -13,33 +14,51 @@ for (const r of subjects) {
   r.visualPass = visual[r.id]?.clear ?? false;
   r.eligible = r.rasterEligible && r.browserEligible && r.visualPass;
 }
-const ranked = subjects.filter((r) => r.eligible).sort((a, b) => b.score - a.score);
-const selected = [],
-  families = new Set();
-for (const r of ranked) {
-  const family = r.ai ? r.id : r.label.replace(/(?: soft)? \d+$/, "");
-  if (families.has(family)) continue;
-  selected.push(r);
-  families.add(family);
-  if (selected.length === 24) break;
-}
+// The final review accepts the existing 21 AI subjects and retires all procedural panels.
+// Choose only the three replacements from the new, individually reviewed single objects.
+const replacements = new Set(
+  JSON.parse(fs.readFileSync("tools/cdx-pics-qr-ai-prompts.json"))
+    .filter((r) => r.round === 3)
+    .map((r) => r.id),
+);
+const accepted = new Set(
+  QR_PICTURES.filter((r) => r.ai && !replacements.has(r.id)).map((r) => r.id),
+);
+if (accepted.size !== 21) throw Error(`Expected 21 accepted AI pictures, got ${accepted.size}.`);
+const selected = subjects.filter((r) => accepted.has(r.id));
+if (selected.some((r) => !r.eligible)) throw Error("An accepted subject no longer qualifies.");
+const ranked = subjects
+  .filter((r) => replacements.has(r.id) && r.eligible)
+  .sort((a, b) => b.score - a.score);
+selected.push(...ranked.slice(0, 3));
+selected.sort((a, b) => b.score - a.score);
 if (selected.length !== 24) throw Error(`Only ${selected.length} distinct subjects qualify.`);
 const keep = new Set(selected.map((r) => r.id));
 for (const r of subjects) {
   r.kept = keep.has(r.id);
   r.reason = r.kept
-    ? "Clear subject at 330px; all five rendered links pass; highest worst-link detail with distinct subjects."
-    : !r.rasterEligible
-      ? "Production layout scan failure."
-      : !r.browserEligible
-        ? "Rendered link scan failure."
-        : !r.visualPass
-          ? visual[r.id]?.reason || "Subject not clear enough at phone size."
-          : "Lower worst-link detail score or a repeated subject.";
+    ? accepted.has(r.id)
+      ? "Accepted AI subject retained; clear at 330px; all five rendered links pass."
+      : "Clear single AI subject at 330px; all five rendered links pass; one of the three highest worst-link replacement scores."
+    : !r.ai
+      ? "Retired in the final Operator review: replace procedural panels and the flat vase silhouette with stronger AI subjects."
+      : !r.rasterEligible
+        ? "Production layout scan failure."
+        : !r.browserEligible
+          ? "Rendered link scan failure."
+          : !r.visualPass
+            ? visual[r.id]?.reason || "Subject not clear enough at phone size."
+            : replacements.has(r.id)
+              ? "Lower worst-link detail than the three qualified replacement subjects."
+              : "Not selected in the earlier accepted AI set.";
   if (r.kept) {
     const destination = `assets/toys/qr-picture/codex/${r.id}.jpg`;
     if (r.file !== destination) fs.copyFileSync(r.file, destination);
     r.file = destination;
+  } else if (r.file.startsWith("assets/toys/qr-picture/codex/")) {
+    const cached = `.cache/cdx-pics/qr/${r.id}.jpg`;
+    if (!fs.existsSync(cached)) throw Error(`Missing preserved original: ${r.id}`);
+    r.file = cached;
   }
 }
 const model = selected.map((r) => ({

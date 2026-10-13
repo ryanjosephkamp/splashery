@@ -1737,20 +1737,23 @@ readable text, logos, or real landmarks. Each JPEG is 1,280 px wide, with its de
 - Paper canyon (C54-P37): `assets/toys/photo-3d/ai/cdx-paper-canyon.jpg`.
 - Wood valley (C54-P40): `assets/toys/photo-3d/ai/cdx-wood-valley.jpg`.
 
-The following 24 Picture QR backgrounds show clear subjects and have no URL-specific carriers. 21
-are **AI-made by the owner with an AI image tool**, on his instruction, labeled **AI-made** in the
-picker and in-app credit. 3 are original procedural pictures, **made by Ryan with Codex (GPT-6)**,
-offered under **CC0 1.0**. Checked October 13, 2026:
+The following 24 Picture QR backgrounds show clear subjects and have no URL-specific carriers. All
+24 are **AI-made by the owner with an AI image tool**, on his instruction, labeled **AI-made** in
+the picker and in-app credit. Checked October 13, 2026:
 
 - Split leaf (AI-made by the owner): `assets/toys/qr-picture/codex/cdx-qr-ai-monstera.jpg`.
 - Fern frond (AI-made by the owner): `assets/toys/qr-picture/codex/cdx-qr-ai-fern.jpg`.
-- Pebble pool soft 6 (CC0, Ryan with Codex): `assets/toys/qr-picture/codex/cdx-qr-print-3-6.jpg`.
+- Green watering can (AI-made by the owner):
+  `assets/toys/qr-picture/codex/cdx-qr-ai-green-watering-can.jpg`.
 - Potted cactus (AI-made by the owner): `assets/toys/qr-picture/codex/cdx-qr-ai-cactus.jpg`.
-- Leaf canopy soft 6 (CC0, Ryan with Codex): `assets/toys/qr-picture/codex/cdx-qr-print-5-6.jpg`.
 - Clay pitcher (AI-made by the owner): `assets/toys/qr-picture/codex/cdx-qr-ai-pitcher.jpg`.
+- Wooden stacking rings (AI-made by the owner):
+  `assets/toys/qr-picture/codex/cdx-qr-ai-stacking-rings.jpg`.
 - Pear (AI-made by the owner): `assets/toys/qr-picture/codex/cdx-qr-ai-pear.jpg`.
 - Balloon (AI-made by the owner): `assets/toys/qr-picture/codex/cdx-qr-ai-hot-air-balloon.jpg`.
 - Mushroom (AI-made by the owner): `assets/toys/qr-picture/codex/cdx-qr-ai-mushroom.jpg`.
+- Wooden spinning top (AI-made by the owner):
+  `assets/toys/qr-picture/codex/cdx-qr-ai-spinning-top.jpg`.
 - Tulip (AI-made by the owner): `assets/toys/qr-picture/codex/cdx-qr-ai-tulip.jpg`.
 - Pinecone (AI-made by the owner): `assets/toys/qr-picture/codex/cdx-qr-ai-pinecone.jpg`.
 - Stacked stones (AI-made by the owner):
@@ -1765,7 +1768,6 @@ offered under **CC0 1.0**. Checked October 13, 2026:
 - Blue vase (AI-made by the owner): `assets/toys/qr-picture/codex/cdx-qr-ai-blue-vase.jpg`.
 - Ginkgo leaf (AI-made by the owner): `assets/toys/qr-picture/codex/cdx-qr-ai-ginkgo.jpg`.
 - Autumn squash (AI-made by the owner): `assets/toys/qr-picture/codex/cdx-qr-ai-squash.jpg`.
-- Ceramic vase 7 (CC0, Ryan with Codex): `assets/toys/qr-picture/codex/cdx-qr-8-7.jpg`.
 - Smooth pebbles (AI-made by the owner): `assets/toys/qr-picture/codex/cdx-qr-ai-pebbles.jpg`.
 
 The full prompts, hashes, scores, five-link scan rates, and phone-size contact sheet are in

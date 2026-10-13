@@ -59,9 +59,12 @@ if (process.argv[1]?.endsWith("cdx-pics-review.mjs")) {
       .filter((r) => fs.existsSync(`.cache/cdx-pics/round2/ai/${r.id}.jpg`))
       .map((r) => ({ ...r, ai: true, file: `.cache/cdx-pics/round2/ai/${r.id}.jpg` })),
   );
-  const rows = [];
+  // Resume measured candidates; remove this file for a complete new measurement.
+  const scoreFile = directory + "qr-review-scores.json";
+  const rows = fs.existsSync(scoreFile) ? JSON.parse(fs.readFileSync(scoreFile)) : [];
   fs.mkdirSync(".cache/cdx-pics/round2/phone", { recursive: true });
   for (const r of subjects) {
+    if (rows.some((row) => row.id === r.id)) continue;
     const pic = load(r.file),
       links = pictureTrials(pic);
     const row = {

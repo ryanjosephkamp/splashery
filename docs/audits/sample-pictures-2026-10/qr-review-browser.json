@@ -7826,5 +7826,2065 @@
       }
     ],
     "eligible": true
+  },
+  {
+    "id": "cdx-qr-ai-spinning-top",
+    "links": [
+      {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "characters": 43,
+        "options": {
+          "text": "https://ryanjosephkamp.github.io/splashery/",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "margin": 0.1,
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 488,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 244,
+            "ok": true
+          }
+        ],
+        "raw900": false,
+        "eligible": true,
+        "rgbaSha256": "808632a949b1d9deec01f6f8171c291ce7eded4bfd3469d156467f29114c60ee"
+      },
+      {
+        "text": "https://example.org/",
+        "characters": 20,
+        "options": {
+          "text": "https://example.org/",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "margin": 0.1,
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 424,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 212,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "db4fc41af9c9d83d5244a6e93cf2572975da30ae7b87e5d8f313e81210f65f12"
+      },
+      {
+        "text": "https://example.com/gallery/summer-leaves",
+        "characters": 41,
+        "options": {
+          "text": "https://example.com/gallery/summer-leaves",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "margin": 0.1,
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 488,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 244,
+            "ok": true
+          }
+        ],
+        "raw900": false,
+        "eligible": true,
+        "rgbaSha256": "b1e2db1ed316f45ba7670e7526c7fdb1a73a7c6d92e77b760d8dd39ab0dd4068"
+      },
+      {
+        "text": "https://example.net/exhibits/ceramics?view=phone&color=blue",
+        "characters": 59,
+        "options": {
+          "text": "https://example.net/exhibits/ceramics?view=phone&color=blue",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "margin": 0.1,
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 552,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 276,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "8a8de0d31ff054a6b40d663c3683df73b04901ca9c2d0d2b355e90b28cdecb30"
+      },
+      {
+        "text": "https://example.org/collections/botanical-studies/2026/autumn/large-format-print?item=fern-frond&edition=public&ref=mobile-preview",
+        "characters": 130,
+        "options": {
+          "text": "https://example.org/collections/botanical-studies/2026/autumn/large-format-print?item=fern-frond&edition=public&ref=mobile-preview",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "margin": 0.1,
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 680,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 340,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "f2eb05c5c75ce28199d36fe0eaea520495fd7feef11a7e4036219a1ede0df388"
+      }
+    ],
+    "eligible": true
+  },
+  {
+    "id": "cdx-qr-ai-wicker-basket",
+    "links": [
+      {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "characters": 43,
+        "options": {
+          "text": "https://ryanjosephkamp.github.io/splashery/",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "margin": 0.1,
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": false
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 488,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 244,
+            "ok": true
+          }
+        ],
+        "raw900": false,
+        "eligible": false,
+        "rgbaSha256": "057b9615feb04f78934678bfe93aee1918e7aee7c37cb95fb5bf38f3931ffe55"
+      },
+      {
+        "text": "https://example.org/",
+        "characters": 20,
+        "options": {
+          "text": "https://example.org/",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "margin": 0.12000000000000001,
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 424,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 212,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "8d31488a944ca3f18f81d44ba5a5706bfec31966e7b372455ec7761e6d19dcdc"
+      },
+      {
+        "text": "https://example.com/gallery/summer-leaves",
+        "characters": 41,
+        "options": {
+          "text": "https://example.com/gallery/summer-leaves",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "margin": 0.1,
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 488,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 244,
+            "ok": true
+          }
+        ],
+        "raw900": false,
+        "eligible": true,
+        "rgbaSha256": "bf904021b285cee02a3ac987921f429eb4f1ad8939526999711eb45b16b27d66"
+      },
+      {
+        "text": "https://example.net/exhibits/ceramics?view=phone&color=blue",
+        "characters": 59,
+        "options": {
+          "text": "https://example.net/exhibits/ceramics?view=phone&color=blue",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "margin": 0.1,
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 552,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 276,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "072d829dd5128ecc4c42dab2e3a1d8d761e78ab078c4a8bd4a1307d9a78d726c"
+      },
+      {
+        "text": "https://example.org/collections/botanical-studies/2026/autumn/large-format-print?item=fern-frond&edition=public&ref=mobile-preview",
+        "characters": 130,
+        "options": {
+          "text": "https://example.org/collections/botanical-studies/2026/autumn/large-format-print?item=fern-frond&edition=public&ref=mobile-preview",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "margin": 0.1,
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 680,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 340,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "847540287cce64d4a4a4ad9db3db7ade8c422724644efcf1ceecd59d1a794d2d"
+      }
+    ],
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-ai-copper-kettle",
+    "links": [
+      {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "characters": 43,
+        "options": {
+          "text": "https://ryanjosephkamp.github.io/splashery/",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "margin": 0.1,
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 488,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 244,
+            "ok": true
+          }
+        ],
+        "raw900": false,
+        "eligible": true,
+        "rgbaSha256": "fd7b40b658819c7598508ebea5c41b378b7e64c616acce5af229bba21af2deae"
+      },
+      {
+        "text": "https://example.org/",
+        "characters": 20,
+        "options": {
+          "text": "https://example.org/",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "margin": 0.12000000000000001,
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 424,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 212,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "5366cdf1aad8645a97a39017f469f958742a8e34fddc0eb3b918b54dd9f12bb4"
+      },
+      {
+        "text": "https://example.com/gallery/summer-leaves",
+        "characters": 41,
+        "options": {
+          "text": "https://example.com/gallery/summer-leaves",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "margin": 0.1,
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 488,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 244,
+            "ok": true
+          }
+        ],
+        "raw900": false,
+        "eligible": true,
+        "rgbaSha256": "9f3067d56b54974a407f68c1f89816ffb797832f6ea8b9b77a86df6408199fa3"
+      },
+      {
+        "text": "https://example.net/exhibits/ceramics?view=phone&color=blue",
+        "characters": 59,
+        "options": {
+          "text": "https://example.net/exhibits/ceramics?view=phone&color=blue",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "margin": 0.1,
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 552,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 276,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "310b7793f5f4d1830186025961c8029bc346481a046940161cc7207a85c2ebd1"
+      },
+      {
+        "text": "https://example.org/collections/botanical-studies/2026/autumn/large-format-print?item=fern-frond&edition=public&ref=mobile-preview",
+        "characters": 130,
+        "options": {
+          "text": "https://example.org/collections/botanical-studies/2026/autumn/large-format-print?item=fern-frond&edition=public&ref=mobile-preview",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "margin": 0.1,
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": false
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 680,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 340,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": false,
+        "rgbaSha256": "9ce804043faafab063c7bfdededcf54113ecf255955ca1aa8f87f430741a0171"
+      }
+    ],
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-ai-wooden-mallet",
+    "links": [
+      {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "characters": 43,
+        "options": {
+          "text": "https://ryanjosephkamp.github.io/splashery/",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "margin": 0.1,
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 488,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 244,
+            "ok": true
+          }
+        ],
+        "raw900": false,
+        "eligible": true,
+        "rgbaSha256": "e849f55f90242d91f348f52262325dc64afe78c76d451f54fdf6b95ce825d4db"
+      },
+      {
+        "text": "https://example.org/",
+        "characters": 20,
+        "options": {
+          "text": "https://example.org/",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "margin": 0.1,
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 424,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 212,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "7f171052bf35cefd252192ca52246fb9ca9ccb2fd0b5dc240633fadf63b3771f"
+      },
+      {
+        "text": "https://example.com/gallery/summer-leaves",
+        "characters": 41,
+        "options": {
+          "text": "https://example.com/gallery/summer-leaves",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "margin": 0.1,
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 488,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 244,
+            "ok": true
+          }
+        ],
+        "raw900": false,
+        "eligible": true,
+        "rgbaSha256": "f0890c07b14b7e929618d9350f99f3a4af291185d00e1b6df1336d923c8a0b8e"
+      },
+      {
+        "text": "https://example.net/exhibits/ceramics?view=phone&color=blue",
+        "characters": 59,
+        "options": {
+          "text": "https://example.net/exhibits/ceramics?view=phone&color=blue",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "margin": 0.1,
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 552,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 276,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "ed045daa8d6669c59fc2887521e7f0e5929e90fdd609e02fa5b818ee1785d097"
+      },
+      {
+        "text": "https://example.org/collections/botanical-studies/2026/autumn/large-format-print?item=fern-frond&edition=public&ref=mobile-preview",
+        "characters": 130,
+        "options": {
+          "text": "https://example.org/collections/botanical-studies/2026/autumn/large-format-print?item=fern-frond&edition=public&ref=mobile-preview",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "margin": 0.1,
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 680,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 340,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "7f5ccc82aa3c9e278007357a069f5f9ea04f8d011b8a12c25d04285ab2af8aec"
+      }
+    ],
+    "eligible": true
+  },
+  {
+    "id": "cdx-qr-ai-clay-mortar",
+    "links": [
+      {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "characters": 43,
+        "options": {
+          "text": "https://ryanjosephkamp.github.io/splashery/",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "margin": 0.1,
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 488,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 244,
+            "ok": true
+          }
+        ],
+        "raw900": false,
+        "eligible": true,
+        "rgbaSha256": "7945e4a96e2c1854336858d16ea773214d9853b437c8c724704c5e3b0d47147b"
+      },
+      {
+        "text": "https://example.org/",
+        "characters": 20,
+        "options": {
+          "text": "https://example.org/",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "margin": 0.1,
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": false
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 424,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 212,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": false,
+        "rgbaSha256": "921e48b5bd86dbadad015e25425a80bd88df2aabed8254323f8c697dce83fde1"
+      },
+      {
+        "text": "https://example.com/gallery/summer-leaves",
+        "characters": 41,
+        "options": {
+          "text": "https://example.com/gallery/summer-leaves",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "margin": 0.1,
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 488,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 244,
+            "ok": true
+          }
+        ],
+        "raw900": false,
+        "eligible": true,
+        "rgbaSha256": "8bdc1400e5c70f98672029d2d7818043efe8c80c123b52ea23c8bb7de09cabd8"
+      },
+      {
+        "text": "https://example.net/exhibits/ceramics?view=phone&color=blue",
+        "characters": 59,
+        "options": {
+          "text": "https://example.net/exhibits/ceramics?view=phone&color=blue",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "margin": 0.1,
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 552,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 276,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "908343fd7eb8beeaf10dccdae75849c3c56cc2bf00369a7108333d81c6a51e66"
+      },
+      {
+        "text": "https://example.org/collections/botanical-studies/2026/autumn/large-format-print?item=fern-frond&edition=public&ref=mobile-preview",
+        "characters": 130,
+        "options": {
+          "text": "https://example.org/collections/botanical-studies/2026/autumn/large-format-print?item=fern-frond&edition=public&ref=mobile-preview",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "margin": 0.1,
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": false
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 680,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 340,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": false,
+        "rgbaSha256": "aa5e4d8eff96127ea3fac66073f04fa485e658b68fb441ac5dc6f7780fc24f0b"
+      }
+    ],
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-ai-brass-padlock",
+    "links": [
+      {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "characters": 43,
+        "options": {
+          "text": "https://ryanjosephkamp.github.io/splashery/",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "margin": 0.1,
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 488,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 244,
+            "ok": true
+          }
+        ],
+        "raw900": false,
+        "eligible": true,
+        "rgbaSha256": "af0f042192acc882f7c570046ab9d7dc9c629834caea7ef7a465b573ec3e5b51"
+      },
+      {
+        "text": "https://example.org/",
+        "characters": 20,
+        "options": {
+          "text": "https://example.org/",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "margin": 0.12000000000000001,
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 424,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 212,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "898a195d25f3c4ea30c110a2636ed03c77b6bc3454814df92a7d33dd63176f5a"
+      },
+      {
+        "text": "https://example.com/gallery/summer-leaves",
+        "characters": 41,
+        "options": {
+          "text": "https://example.com/gallery/summer-leaves",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "margin": 0.1,
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 488,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 244,
+            "ok": true
+          }
+        ],
+        "raw900": false,
+        "eligible": true,
+        "rgbaSha256": "2bdcddf93296b16185a589ff79c9a2f18f881c85b12d1e3c66054521469412a5"
+      },
+      {
+        "text": "https://example.net/exhibits/ceramics?view=phone&color=blue",
+        "characters": 59,
+        "options": {
+          "text": "https://example.net/exhibits/ceramics?view=phone&color=blue",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "margin": 0.1,
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 552,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 276,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "d8708aeb2babeb8d3323728f09b214a9b6f2e1504b2984c6cd857bb8f3c5b697"
+      },
+      {
+        "text": "https://example.org/collections/botanical-studies/2026/autumn/large-format-print?item=fern-frond&edition=public&ref=mobile-preview",
+        "characters": 130,
+        "options": {
+          "text": "https://example.org/collections/botanical-studies/2026/autumn/large-format-print?item=fern-frond&edition=public&ref=mobile-preview",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "margin": 0.1,
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": false
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 680,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 340,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": false,
+        "rgbaSha256": "fea02c34419fa97b2069346312a356f5c5e398506dff36748201aa0c93a47132"
+      }
+    ],
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-ai-red-apple",
+    "links": [
+      {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "characters": 43,
+        "options": {
+          "text": "https://ryanjosephkamp.github.io/splashery/",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "margin": 0.1,
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 488,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 244,
+            "ok": true
+          }
+        ],
+        "raw900": false,
+        "eligible": true,
+        "rgbaSha256": "aa4c0851255390a578ea4afb6336a7355fc1c136c4d82a638683838513409836"
+      },
+      {
+        "text": "https://example.org/",
+        "characters": 20,
+        "options": {
+          "text": "https://example.org/",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "margin": 0.1,
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 424,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 212,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "6306afd9fdfa520e1bf39830e13001a8cacc7461960b24d854470208fc1484c4"
+      },
+      {
+        "text": "https://example.com/gallery/summer-leaves",
+        "characters": 41,
+        "options": {
+          "text": "https://example.com/gallery/summer-leaves",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "margin": 0.1,
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 488,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 244,
+            "ok": true
+          }
+        ],
+        "raw900": false,
+        "eligible": true,
+        "rgbaSha256": "046188186161e5287bae37247dfd94c09eb78f0f538d5f0141d8ec12918f6fd9"
+      },
+      {
+        "text": "https://example.net/exhibits/ceramics?view=phone&color=blue",
+        "characters": 59,
+        "options": {
+          "text": "https://example.net/exhibits/ceramics?view=phone&color=blue",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "margin": 0.1,
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 552,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 276,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "61c82f2da241a00828c0387358c106f262552bb70cf7ecca50564fd32d37ca3d"
+      },
+      {
+        "text": "https://example.org/collections/botanical-studies/2026/autumn/large-format-print?item=fern-frond&edition=public&ref=mobile-preview",
+        "characters": 130,
+        "options": {
+          "text": "https://example.org/collections/botanical-studies/2026/autumn/large-format-print?item=fern-frond&edition=public&ref=mobile-preview",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "margin": 0.1,
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 680,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 340,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "1143a74e0b300a9c1f842fc98877557be6ba3fdeadeea00b85174029814ceec6"
+      }
+    ],
+    "eligible": true
+  },
+  {
+    "id": "cdx-qr-ai-ceramic-bell",
+    "links": [
+      {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "characters": 43,
+        "options": {
+          "text": "https://ryanjosephkamp.github.io/splashery/",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "margin": 0.1,
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 488,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 244,
+            "ok": true
+          }
+        ],
+        "raw900": false,
+        "eligible": true,
+        "rgbaSha256": "563bac9c67a0385eb9cd7bcab0cae38ce1494d1eb1fa40633bb85a7684dd5b25"
+      },
+      {
+        "text": "https://example.org/",
+        "characters": 20,
+        "options": {
+          "text": "https://example.org/",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "margin": 0.1,
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 424,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 212,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "40573ea91293afc1a612e8d588e25d235259c3b018ffffbe1be8ed14e60f5633"
+      },
+      {
+        "text": "https://example.com/gallery/summer-leaves",
+        "characters": 41,
+        "options": {
+          "text": "https://example.com/gallery/summer-leaves",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "margin": 0.1,
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 488,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 244,
+            "ok": true
+          }
+        ],
+        "raw900": false,
+        "eligible": true,
+        "rgbaSha256": "66194c5a82aeb98e9c9dac19e813bfde75d859d1144ef99e4d9bd7219c2ca216"
+      },
+      {
+        "text": "https://example.net/exhibits/ceramics?view=phone&color=blue",
+        "characters": 59,
+        "options": {
+          "text": "https://example.net/exhibits/ceramics?view=phone&color=blue",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "margin": 0.1,
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 552,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 276,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "ce10d26ba75227bc78fef087117d820c27a03ac960fafabfc5f5da5306f2ec83"
+      },
+      {
+        "text": "https://example.org/collections/botanical-studies/2026/autumn/large-format-print?item=fern-frond&edition=public&ref=mobile-preview",
+        "characters": 130,
+        "options": {
+          "text": "https://example.org/collections/botanical-studies/2026/autumn/large-format-print?item=fern-frond&edition=public&ref=mobile-preview",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "margin": 0.1,
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 680,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 340,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "f5e73c24f8bfc87da7f35c6221fdc8e98985430ee15b7e8d84f4d211b31f9c02"
+      }
+    ],
+    "eligible": true
+  },
+  {
+    "id": "cdx-qr-ai-green-watering-can",
+    "links": [
+      {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "characters": 43,
+        "options": {
+          "text": "https://ryanjosephkamp.github.io/splashery/",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "margin": 0.12000000000000001,
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 488,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 244,
+            "ok": true
+          }
+        ],
+        "raw900": false,
+        "eligible": true,
+        "rgbaSha256": "d67926e18d994d283d5ad82775322b0142d9fb2b5718ac08fa19a4e98ebe01ef"
+      },
+      {
+        "text": "https://example.org/",
+        "characters": 20,
+        "options": {
+          "text": "https://example.org/",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "margin": 0.1,
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 424,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 212,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "9293407f746b0b377fad0402efea2adafc7f538ecacc60ac7a4c79fb5ca22181"
+      },
+      {
+        "text": "https://example.com/gallery/summer-leaves",
+        "characters": 41,
+        "options": {
+          "text": "https://example.com/gallery/summer-leaves",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "margin": 0.12000000000000001,
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 488,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 244,
+            "ok": true
+          }
+        ],
+        "raw900": false,
+        "eligible": true,
+        "rgbaSha256": "14f226d94b5c99e6b9b0167a5d0ae57f57a21eca82198e69d02a0a5a03e64048"
+      },
+      {
+        "text": "https://example.net/exhibits/ceramics?view=phone&color=blue",
+        "characters": 59,
+        "options": {
+          "text": "https://example.net/exhibits/ceramics?view=phone&color=blue",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "margin": 0.1,
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 552,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 276,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "d08a721a92dbd3650a2fc74632356357cb3c2384c4f9deeaccd7b27667d22df2"
+      },
+      {
+        "text": "https://example.org/collections/botanical-studies/2026/autumn/large-format-print?item=fern-frond&edition=public&ref=mobile-preview",
+        "characters": 130,
+        "options": {
+          "text": "https://example.org/collections/botanical-studies/2026/autumn/large-format-print?item=fern-frond&edition=public&ref=mobile-preview",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "margin": 0.1,
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 680,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 340,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "3d3adcb43f307936c6087f2f4122432ab55b1a3a8ce97a7b727cd0d021f200fa"
+      }
+    ],
+    "eligible": true
+  },
+  {
+    "id": "cdx-qr-ai-stacking-rings",
+    "links": [
+      {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "characters": 43,
+        "options": {
+          "text": "https://ryanjosephkamp.github.io/splashery/",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "margin": 0.1,
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 488,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 244,
+            "ok": true
+          }
+        ],
+        "raw900": false,
+        "eligible": true,
+        "rgbaSha256": "963da88b1a565a21e3d101e2d03449a9222222d75671e9d7ffe3b95f680b8c9d"
+      },
+      {
+        "text": "https://example.org/",
+        "characters": 20,
+        "options": {
+          "text": "https://example.org/",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "margin": 0.1,
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 424,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 212,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "18f7953c20f4e3295a3da3221f13a8e7283d02584add7ac83041b3b848681608"
+      },
+      {
+        "text": "https://example.com/gallery/summer-leaves",
+        "characters": 41,
+        "options": {
+          "text": "https://example.com/gallery/summer-leaves",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "margin": 0.1,
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 488,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 244,
+            "ok": true
+          }
+        ],
+        "raw900": false,
+        "eligible": true,
+        "rgbaSha256": "48651741d85310ecc81559c36f551e0756938415a56fecbe361e623a171c38ef"
+      },
+      {
+        "text": "https://example.net/exhibits/ceramics?view=phone&color=blue",
+        "characters": 59,
+        "options": {
+          "text": "https://example.net/exhibits/ceramics?view=phone&color=blue",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "margin": 0.1,
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 552,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 276,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "7b77131b2c431dbefdebd54c119b0192ddbfb39581e28bb71d766a739c2a4828"
+      },
+      {
+        "text": "https://example.org/collections/botanical-studies/2026/autumn/large-format-print?item=fern-frond&edition=public&ref=mobile-preview",
+        "characters": 130,
+        "options": {
+          "text": "https://example.org/collections/botanical-studies/2026/autumn/large-format-print?item=fern-frond&edition=public&ref=mobile-preview",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "margin": 0.1,
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 680,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 340,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "d7cdffd435bd5952120e2103876eb1c7fb4ad1f95f57fe8b2487cf024925255b"
+      }
+    ],
+    "eligible": true
   }
 ]

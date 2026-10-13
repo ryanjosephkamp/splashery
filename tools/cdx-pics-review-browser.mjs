@@ -52,7 +52,8 @@ if (process.argv[1]?.endsWith("cdx-pics-review-browser.mjs")) {
   });
   const errors = [];
   page.on("pageerror", (e) => errors.push(e.message));
-  await page.goto("http://127.0.0.1:4173/?renderer=webgl2&adapt=off&profile=mid&labs=1");
+  const port = process.env.SPLASHERY_PORT || 4173;
+  await page.goto(`http://127.0.0.1:${port}/?renderer=webgl2&adapt=off&profile=mid&labs=1`);
   await page.waitForSelector("body[data-ready='true']", { timeout: 180000 });
   await page.evaluate(async () => {
     await import("/src/packs/qr-craft.js");
