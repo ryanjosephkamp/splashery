@@ -27,6 +27,7 @@ import { SITE, FRONT_DOOR, MENU, PAGES, NOT_FOUND, HOME_TOY, DOC_PAGES, appLink,
 import { hubTypes } from "./site-hubs.mjs";
 import { toyPage, toyPath, toyPageDirs, TOY_DATES, dateText } from "./site-toy-pages.mjs";
 import { swapLayout, liftHtml } from "./site-front-door.mjs";
+import { buildPlaygroundLinks } from "./site-playground-links.mjs";
 
 const root = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
 const OUT = path.join(root, "site");
@@ -765,6 +766,7 @@ async function buildPreview() {
     if (CHECK) console.log(`follows main (rebuilt by the upkeep): site/toys/${dir}/`);
     else fs.rmSync(path.join(OUT, "toys", dir), { recursive: true });
   }
+  if (!(await buildPlaygroundLinks({ check: CHECK }))) staleShell++;
   if (CHECK && staleShell) {
     console.log("Run: node tools/site-build.mjs");
     process.exit(1);
