@@ -1,0 +1,1298 @@
+[
+  {
+    "id": "forest",
+    "label": "Forest path",
+    "view": "sharp",
+    "before": {
+      "holes": 33521,
+      "tears": 60986,
+      "backing": 115201
+    },
+    "after": {
+      "holes": 45,
+      "tears": 0,
+      "backing": 35853
+    },
+    "reduction": 99.86575579487486,
+    "zeroHoleBaseline": false,
+    "pass": true
+  },
+  {
+    "id": "forest",
+    "label": "Forest path",
+    "view": "splats",
+    "before": {
+      "holes": 5547,
+      "tears": 0,
+      "backing": 10168
+    },
+    "after": {
+      "holes": 1,
+      "tears": 0,
+      "backing": 7592
+    },
+    "reduction": 99.98197223724536,
+    "zeroHoleBaseline": false,
+    "pass": true
+  },
+  {
+    "id": "street",
+    "label": "Cobbled street",
+    "view": "sharp",
+    "before": {
+      "holes": 1629,
+      "tears": 10499,
+      "backing": 29760
+    },
+    "after": {
+      "holes": 46,
+      "tears": 0,
+      "backing": 6949
+    },
+    "reduction": 97.17618170656844,
+    "zeroHoleBaseline": false,
+    "pass": true
+  },
+  {
+    "id": "street",
+    "label": "Cobbled street",
+    "view": "splats",
+    "before": {
+      "holes": 229,
+      "tears": 0,
+      "backing": 2290
+    },
+    "after": {
+      "holes": 28,
+      "tears": 0,
+      "backing": 553
+    },
+    "reduction": 87.77292576419214,
+    "zeroHoleBaseline": false,
+    "pass": true
+  },
+  {
+    "id": "still-life",
+    "label": "Still life",
+    "view": "sharp",
+    "before": {
+      "holes": 41008,
+      "tears": 41256,
+      "backing": 92146
+    },
+    "after": {
+      "holes": 56,
+      "tears": 0,
+      "backing": 29721
+    },
+    "reduction": 99.8634412797503,
+    "zeroHoleBaseline": false,
+    "pass": true
+  },
+  {
+    "id": "still-life",
+    "label": "Still life",
+    "view": "splats",
+    "before": {
+      "holes": 2885,
+      "tears": 0,
+      "backing": 7314
+    },
+    "after": {
+      "holes": 42,
+      "tears": 0,
+      "backing": 3998
+    },
+    "reduction": 98.54419410745234,
+    "zeroHoleBaseline": false,
+    "pass": true
+  },
+  {
+    "id": "spiral-stairs",
+    "label": "Spiral staircase",
+    "view": "sharp",
+    "before": {
+      "holes": 17253,
+      "tears": 89591,
+      "backing": 169801
+    },
+    "after": {
+      "holes": 31,
+      "tears": 0,
+      "backing": 55553
+    },
+    "reduction": 99.82032110357619,
+    "zeroHoleBaseline": false,
+    "pass": true
+  },
+  {
+    "id": "spiral-stairs",
+    "label": "Spiral staircase",
+    "view": "splats",
+    "before": {
+      "holes": 3100,
+      "tears": 0,
+      "backing": 23024
+    },
+    "after": {
+      "holes": 0,
+      "tears": 0,
+      "backing": 16599
+    },
+    "reduction": 100,
+    "zeroHoleBaseline": false,
+    "pass": true
+  },
+  {
+    "id": "palace-stairs",
+    "label": "Palace staircase",
+    "view": "sharp",
+    "before": {
+      "holes": 12511,
+      "tears": 25084,
+      "backing": 74316
+    },
+    "after": {
+      "holes": 14,
+      "tears": 0,
+      "backing": 24477
+    },
+    "reduction": 99.88809847334346,
+    "zeroHoleBaseline": false,
+    "pass": true
+  },
+  {
+    "id": "palace-stairs",
+    "label": "Palace staircase",
+    "view": "splats",
+    "before": {
+      "holes": 944,
+      "tears": 0,
+      "backing": 10261
+    },
+    "after": {
+      "holes": 5,
+      "tears": 0,
+      "backing": 5880
+    },
+    "reduction": 99.47033898305084,
+    "zeroHoleBaseline": false,
+    "pass": true
+  },
+  {
+    "id": "wildflowers",
+    "label": "Wildflowers up close",
+    "view": "sharp",
+    "before": {
+      "holes": 48476,
+      "tears": 168509,
+      "backing": 286236
+    },
+    "after": {
+      "holes": 122,
+      "tears": 0,
+      "backing": 89561
+    },
+    "reduction": 99.74832907005529,
+    "zeroHoleBaseline": false,
+    "pass": true
+  },
+  {
+    "id": "wildflowers",
+    "label": "Wildflowers up close",
+    "view": "splats",
+    "before": {
+      "holes": 7147,
+      "tears": 0,
+      "backing": 17653
+    },
+    "after": {
+      "holes": 58,
+      "tears": 0,
+      "backing": 9529
+    },
+    "reduction": 99.18847068700154,
+    "zeroHoleBaseline": false,
+    "pass": true
+  },
+  {
+    "id": "dot-train",
+    "label": "Train on a viaduct (AI-made)",
+    "view": "sharp",
+    "before": {
+      "holes": 16921,
+      "tears": 61101,
+      "backing": 120348
+    },
+    "after": {
+      "holes": 28,
+      "tears": 0,
+      "backing": 34895
+    },
+    "reduction": 99.83452514626795,
+    "zeroHoleBaseline": false,
+    "pass": true
+  },
+  {
+    "id": "dot-train",
+    "label": "Train on a viaduct (AI-made)",
+    "view": "splats",
+    "before": {
+      "holes": 2244,
+      "tears": 0,
+      "backing": 15710
+    },
+    "after": {
+      "holes": 2,
+      "tears": 0,
+      "backing": 11423
+    },
+    "reduction": 99.91087344028521,
+    "zeroHoleBaseline": false,
+    "pass": true
+  },
+  {
+    "id": "dot-oasis",
+    "label": "Desert oasis (AI-made)",
+    "view": "sharp",
+    "before": {
+      "holes": 5586,
+      "tears": 50149,
+      "backing": 109776
+    },
+    "after": {
+      "holes": 146,
+      "tears": 0,
+      "backing": 19573
+    },
+    "reduction": 97.38632295023272,
+    "zeroHoleBaseline": false,
+    "pass": true
+  },
+  {
+    "id": "dot-oasis",
+    "label": "Desert oasis (AI-made)",
+    "view": "splats",
+    "before": {
+      "holes": 71,
+      "tears": 0,
+      "backing": 4309
+    },
+    "after": {
+      "holes": 7,
+      "tears": 0,
+      "backing": 1922
+    },
+    "reduction": 90.14084507042254,
+    "zeroHoleBaseline": false,
+    "pass": true
+  },
+  {
+    "id": "dot-castle",
+    "label": "Castle on a lake (AI-made)",
+    "view": "sharp",
+    "before": {
+      "holes": 9406,
+      "tears": 50745,
+      "backing": 99464
+    },
+    "after": {
+      "holes": 20,
+      "tears": 0,
+      "backing": 19525
+    },
+    "reduction": 99.78736976398044,
+    "zeroHoleBaseline": false,
+    "pass": true
+  },
+  {
+    "id": "dot-castle",
+    "label": "Castle on a lake (AI-made)",
+    "view": "splats",
+    "before": {
+      "holes": 198,
+      "tears": 0,
+      "backing": 5259
+    },
+    "after": {
+      "holes": 2,
+      "tears": 0,
+      "backing": 2526
+    },
+    "reduction": 98.98989898989899,
+    "zeroHoleBaseline": false,
+    "pass": true
+  },
+  {
+    "id": "dot-cove",
+    "label": "Fishing cove (AI-made)",
+    "view": "sharp",
+    "before": {
+      "holes": 7627,
+      "tears": 27606,
+      "backing": 65014
+    },
+    "after": {
+      "holes": 20,
+      "tears": 0,
+      "backing": 12639
+    },
+    "reduction": 99.73777369870199,
+    "zeroHoleBaseline": false,
+    "pass": true
+  },
+  {
+    "id": "dot-cove",
+    "label": "Fishing cove (AI-made)",
+    "view": "splats",
+    "before": {
+      "holes": 445,
+      "tears": 0,
+      "backing": 3646
+    },
+    "after": {
+      "holes": 0,
+      "tears": 0,
+      "backing": 2372
+    },
+    "reduction": 100,
+    "zeroHoleBaseline": false,
+    "pass": true
+  },
+  {
+    "id": "dot-harbor",
+    "label": "Toy harbor (AI-made)",
+    "view": "sharp",
+    "before": {
+      "holes": 10329,
+      "tears": 62604,
+      "backing": 105021
+    },
+    "after": {
+      "holes": 61,
+      "tears": 0,
+      "backing": 37189
+    },
+    "reduction": 99.40942976086747,
+    "zeroHoleBaseline": false,
+    "pass": true
+  },
+  {
+    "id": "dot-harbor",
+    "label": "Toy harbor (AI-made)",
+    "view": "splats",
+    "before": {
+      "holes": 2553,
+      "tears": 0,
+      "backing": 16489
+    },
+    "after": {
+      "holes": 0,
+      "tears": 0,
+      "backing": 13008
+    },
+    "reduction": 100,
+    "zeroHoleBaseline": false,
+    "pass": true
+  },
+  {
+    "id": "dot-paper-valley",
+    "label": "Paper valley (AI-made)",
+    "view": "sharp",
+    "before": {
+      "holes": 12193,
+      "tears": 39783,
+      "backing": 83469
+    },
+    "after": {
+      "holes": 21,
+      "tears": 0,
+      "backing": 34090
+    },
+    "reduction": 99.82777003198557,
+    "zeroHoleBaseline": false,
+    "pass": true
+  },
+  {
+    "id": "dot-paper-valley",
+    "label": "Paper valley (AI-made)",
+    "view": "splats",
+    "before": {
+      "holes": 1984,
+      "tears": 0,
+      "backing": 13649
+    },
+    "after": {
+      "holes": 0,
+      "tears": 0,
+      "backing": 10025
+    },
+    "reduction": 100,
+    "zeroHoleBaseline": false,
+    "pass": true
+  },
+  {
+    "id": "dot-farm",
+    "label": "Felt farm (AI-made)",
+    "view": "sharp",
+    "before": {
+      "holes": 35382,
+      "tears": 69653,
+      "backing": 126659
+    },
+    "after": {
+      "holes": 13,
+      "tears": 0,
+      "backing": 38999
+    },
+    "reduction": 99.96325815386355,
+    "zeroHoleBaseline": false,
+    "pass": true
+  },
+  {
+    "id": "dot-farm",
+    "label": "Felt farm (AI-made)",
+    "view": "splats",
+    "before": {
+      "holes": 3108,
+      "tears": 0,
+      "backing": 8900
+    },
+    "after": {
+      "holes": 3,
+      "tears": 0,
+      "backing": 7065
+    },
+    "reduction": 99.9034749034749,
+    "zeroHoleBaseline": false,
+    "pass": true
+  },
+  {
+    "id": "dot-treehouses",
+    "label": "Treehouse village (AI-made)",
+    "view": "sharp",
+    "before": {
+      "holes": 23609,
+      "tears": 90526,
+      "backing": 135900
+    },
+    "after": {
+      "holes": 67,
+      "tears": 0,
+      "backing": 40977
+    },
+    "reduction": 99.71620991994578,
+    "zeroHoleBaseline": false,
+    "pass": true
+  },
+  {
+    "id": "dot-treehouses",
+    "label": "Treehouse village (AI-made)",
+    "view": "splats",
+    "before": {
+      "holes": 2778,
+      "tears": 0,
+      "backing": 15125
+    },
+    "after": {
+      "holes": 0,
+      "tears": 0,
+      "backing": 11237
+    },
+    "reduction": 100,
+    "zeroHoleBaseline": false,
+    "pass": true
+  },
+  {
+    "id": "dot-library",
+    "label": "Long library (AI-made)",
+    "view": "sharp",
+    "before": {
+      "holes": 12555,
+      "tears": 50141,
+      "backing": 85710
+    },
+    "after": {
+      "holes": 104,
+      "tears": 0,
+      "backing": 33440
+    },
+    "reduction": 99.17164476304261,
+    "zeroHoleBaseline": false,
+    "pass": true
+  },
+  {
+    "id": "dot-library",
+    "label": "Long library (AI-made)",
+    "view": "splats",
+    "before": {
+      "holes": 560,
+      "tears": 0,
+      "backing": 13187
+    },
+    "after": {
+      "holes": 0,
+      "tears": 0,
+      "backing": 9001
+    },
+    "reduction": 100,
+    "zeroHoleBaseline": false,
+    "pass": true
+  },
+  {
+    "id": "dot-workshop",
+    "label": "Woodworking shop (AI-made)",
+    "view": "sharp",
+    "before": {
+      "holes": 9692,
+      "tears": 56973,
+      "backing": 98931
+    },
+    "after": {
+      "holes": 23,
+      "tears": 0,
+      "backing": 21506
+    },
+    "reduction": 99.76269087907552,
+    "zeroHoleBaseline": false,
+    "pass": true
+  },
+  {
+    "id": "dot-workshop",
+    "label": "Woodworking shop (AI-made)",
+    "view": "splats",
+    "before": {
+      "holes": 707,
+      "tears": 0,
+      "backing": 6228
+    },
+    "after": {
+      "holes": 0,
+      "tears": 0,
+      "backing": 4117
+    },
+    "reduction": 100,
+    "zeroHoleBaseline": false,
+    "pass": true
+  },
+  {
+    "id": "dot-cloister",
+    "label": "Stone cloister (AI-made)",
+    "view": "sharp",
+    "before": {
+      "holes": 41439,
+      "tears": 48130,
+      "backing": 87003
+    },
+    "after": {
+      "holes": 44,
+      "tears": 0,
+      "backing": 49333
+    },
+    "reduction": 99.89381983155964,
+    "zeroHoleBaseline": false,
+    "pass": true
+  },
+  {
+    "id": "dot-cloister",
+    "label": "Stone cloister (AI-made)",
+    "view": "splats",
+    "before": {
+      "holes": 19377,
+      "tears": 0,
+      "backing": 15774
+    },
+    "after": {
+      "holes": 28,
+      "tears": 0,
+      "backing": 17157
+    },
+    "reduction": 99.85549878722196,
+    "zeroHoleBaseline": false,
+    "pass": true
+  },
+  {
+    "id": "dot-greenhouse",
+    "label": "Greenhouse (AI-made)",
+    "view": "sharp",
+    "before": {
+      "holes": 27700,
+      "tears": 103778,
+      "backing": 171119
+    },
+    "after": {
+      "holes": 58,
+      "tears": 0,
+      "backing": 40401
+    },
+    "reduction": 99.79061371841155,
+    "zeroHoleBaseline": false,
+    "pass": true
+  },
+  {
+    "id": "dot-greenhouse",
+    "label": "Greenhouse (AI-made)",
+    "view": "splats",
+    "before": {
+      "holes": 3150,
+      "tears": 0,
+      "backing": 12343
+    },
+    "after": {
+      "holes": 4,
+      "tears": 0,
+      "backing": 7785
+    },
+    "reduction": 99.87301587301587,
+    "zeroHoleBaseline": false,
+    "pass": true
+  },
+  {
+    "id": "dot-attic",
+    "label": "Attic (AI-made)",
+    "view": "sharp",
+    "before": {
+      "holes": 6658,
+      "tears": 51495,
+      "backing": 85764
+    },
+    "after": {
+      "holes": 45,
+      "tears": 0,
+      "backing": 22946
+    },
+    "reduction": 99.3241213577651,
+    "zeroHoleBaseline": false,
+    "pass": true
+  },
+  {
+    "id": "dot-attic",
+    "label": "Attic (AI-made)",
+    "view": "splats",
+    "before": {
+      "holes": 799,
+      "tears": 0,
+      "backing": 9806
+    },
+    "after": {
+      "holes": 1,
+      "tears": 0,
+      "backing": 6266
+    },
+    "reduction": 99.87484355444305,
+    "zeroHoleBaseline": false,
+    "pass": true
+  },
+  {
+    "id": "dot-bamboo",
+    "label": "Bamboo path (AI-made)",
+    "view": "sharp",
+    "before": {
+      "holes": 25517,
+      "tears": 123500,
+      "backing": 176558
+    },
+    "after": {
+      "holes": 57,
+      "tears": 0,
+      "backing": 41290
+    },
+    "reduction": 99.77661950856292,
+    "zeroHoleBaseline": false,
+    "pass": true
+  },
+  {
+    "id": "dot-bamboo",
+    "label": "Bamboo path (AI-made)",
+    "view": "splats",
+    "before": {
+      "holes": 1310,
+      "tears": 0,
+      "backing": 13212
+    },
+    "after": {
+      "holes": 0,
+      "tears": 0,
+      "backing": 8304
+    },
+    "reduction": 100,
+    "zeroHoleBaseline": false,
+    "pass": true
+  },
+  {
+    "id": "dot-terraces",
+    "label": "Rice terraces (AI-made)",
+    "view": "sharp",
+    "before": {
+      "holes": 24317,
+      "tears": 30238,
+      "backing": 97972
+    },
+    "after": {
+      "holes": 0,
+      "tears": 0,
+      "backing": 11321
+    },
+    "reduction": 100,
+    "zeroHoleBaseline": false,
+    "pass": true
+  },
+  {
+    "id": "dot-terraces",
+    "label": "Rice terraces (AI-made)",
+    "view": "splats",
+    "before": {
+      "holes": 609,
+      "tears": 0,
+      "backing": 1645
+    },
+    "after": {
+      "holes": 0,
+      "tears": 0,
+      "backing": 946
+    },
+    "reduction": 100,
+    "zeroHoleBaseline": false,
+    "pass": true
+  },
+  {
+    "id": "dot-canyon",
+    "label": "Canyon at sunset (AI-made)",
+    "view": "sharp",
+    "before": {
+      "holes": 15619,
+      "tears": 43242,
+      "backing": 88239
+    },
+    "after": {
+      "holes": 31,
+      "tears": 0,
+      "backing": 33226
+    },
+    "reduction": 99.8015237851335,
+    "zeroHoleBaseline": false,
+    "pass": true
+  },
+  {
+    "id": "dot-canyon",
+    "label": "Canyon at sunset (AI-made)",
+    "view": "splats",
+    "before": {
+      "holes": 5656,
+      "tears": 0,
+      "backing": 12653
+    },
+    "after": {
+      "holes": 0,
+      "tears": 0,
+      "backing": 11735
+    },
+    "reduction": 100,
+    "zeroHoleBaseline": false,
+    "pass": true
+  },
+  {
+    "id": "dot-arch",
+    "label": "Stone arch (AI-made)",
+    "view": "sharp",
+    "before": {
+      "holes": 20940,
+      "tears": 43896,
+      "backing": 117899
+    },
+    "after": {
+      "holes": 56,
+      "tears": 0,
+      "backing": 35860
+    },
+    "reduction": 99.73256924546322,
+    "zeroHoleBaseline": false,
+    "pass": true
+  },
+  {
+    "id": "dot-arch",
+    "label": "Stone arch (AI-made)",
+    "view": "splats",
+    "before": {
+      "holes": 2545,
+      "tears": 0,
+      "backing": 13290
+    },
+    "after": {
+      "holes": 1,
+      "tears": 0,
+      "backing": 11112
+    },
+    "reduction": 99.96070726915521,
+    "zeroHoleBaseline": false,
+    "pass": true
+  },
+  {
+    "id": "dot-fallen-log",
+    "label": "Forest and fallen log (AI-made)",
+    "view": "sharp",
+    "before": {
+      "holes": 26176,
+      "tears": 77684,
+      "backing": 138217
+    },
+    "after": {
+      "holes": 78,
+      "tears": 0,
+      "backing": 27752
+    },
+    "reduction": 99.70201711491443,
+    "zeroHoleBaseline": false,
+    "pass": true
+  },
+  {
+    "id": "dot-fallen-log",
+    "label": "Forest and fallen log (AI-made)",
+    "view": "splats",
+    "before": {
+      "holes": 1179,
+      "tears": 0,
+      "backing": 10165
+    },
+    "after": {
+      "holes": 0,
+      "tears": 0,
+      "backing": 6799
+    },
+    "reduction": 100,
+    "zeroHoleBaseline": false,
+    "pass": true
+  },
+  {
+    "id": "dot-alpine-lake",
+    "label": "Alpine lake (AI-made)",
+    "view": "sharp",
+    "before": {
+      "holes": 11374,
+      "tears": 32360,
+      "backing": 69113
+    },
+    "after": {
+      "holes": 10,
+      "tears": 0,
+      "backing": 19961
+    },
+    "reduction": 99.91208018287323,
+    "zeroHoleBaseline": false,
+    "pass": true
+  },
+  {
+    "id": "dot-alpine-lake",
+    "label": "Alpine lake (AI-made)",
+    "view": "splats",
+    "before": {
+      "holes": 1087,
+      "tears": 0,
+      "backing": 11075
+    },
+    "after": {
+      "holes": 0,
+      "tears": 0,
+      "backing": 9496
+    },
+    "reduction": 100,
+    "zeroHoleBaseline": false,
+    "pass": true
+  },
+  {
+    "id": "dot-ice-falls",
+    "label": "Frozen waterfall (AI-made)",
+    "view": "sharp",
+    "before": {
+      "holes": 22097,
+      "tears": 27902,
+      "backing": 63227
+    },
+    "after": {
+      "holes": 57,
+      "tears": 0,
+      "backing": 28840
+    },
+    "reduction": 99.74204643164231,
+    "zeroHoleBaseline": false,
+    "pass": true
+  },
+  {
+    "id": "dot-ice-falls",
+    "label": "Frozen waterfall (AI-made)",
+    "view": "splats",
+    "before": {
+      "holes": 5094,
+      "tears": 0,
+      "backing": 11165
+    },
+    "after": {
+      "holes": 0,
+      "tears": 0,
+      "backing": 12506
+    },
+    "reduction": 100,
+    "zeroHoleBaseline": false,
+    "pass": true
+  },
+  {
+    "id": "dot-floating-isles",
+    "label": "Floating islands (AI-made)",
+    "view": "sharp",
+    "before": {
+      "holes": 1021,
+      "tears": 62203,
+      "backing": 115584
+    },
+    "after": {
+      "holes": 29,
+      "tears": 0,
+      "backing": 27776
+    },
+    "reduction": 97.15964740450539,
+    "zeroHoleBaseline": false,
+    "pass": true
+  },
+  {
+    "id": "dot-floating-isles",
+    "label": "Floating islands (AI-made)",
+    "view": "splats",
+    "before": {
+      "holes": 0,
+      "tears": 0,
+      "backing": 11226
+    },
+    "after": {
+      "holes": 0,
+      "tears": 0,
+      "backing": 6784
+    },
+    "reduction": null,
+    "zeroHoleBaseline": true,
+    "pass": true
+  },
+  {
+    "id": "dot-wave",
+    "label": "Glass wave (AI-made)",
+    "view": "sharp",
+    "before": {
+      "holes": 6264,
+      "tears": 14994,
+      "backing": 43933
+    },
+    "after": {
+      "holes": 2,
+      "tears": 0,
+      "backing": 6468
+    },
+    "reduction": 99.96807151979566,
+    "zeroHoleBaseline": false,
+    "pass": true
+  },
+  {
+    "id": "dot-wave",
+    "label": "Glass wave (AI-made)",
+    "view": "splats",
+    "before": {
+      "holes": 47,
+      "tears": 0,
+      "backing": 1365
+    },
+    "after": {
+      "holes": 0,
+      "tears": 0,
+      "backing": 896
+    },
+    "reduction": 100,
+    "zeroHoleBaseline": false,
+    "pass": true
+  },
+  {
+    "id": "dot-explorer-desk",
+    "label": "Explorer's desk (AI-made)",
+    "view": "sharp",
+    "before": {
+      "holes": 8754,
+      "tears": 69820,
+      "backing": 116414
+    },
+    "after": {
+      "holes": 52,
+      "tears": 0,
+      "backing": 36652
+    },
+    "reduction": 99.40598583504683,
+    "zeroHoleBaseline": false,
+    "pass": true
+  },
+  {
+    "id": "dot-explorer-desk",
+    "label": "Explorer's desk (AI-made)",
+    "view": "splats",
+    "before": {
+      "holes": 1277,
+      "tears": 0,
+      "backing": 10073
+    },
+    "after": {
+      "holes": 1,
+      "tears": 0,
+      "backing": 5506
+    },
+    "reduction": 99.92169146436962,
+    "zeroHoleBaseline": false,
+    "pass": true
+  },
+  {
+    "id": "dot-watchmaker",
+    "label": "Watchmaker's bench (AI-made)",
+    "view": "sharp",
+    "before": {
+      "holes": 18487,
+      "tears": 58138,
+      "backing": 94710
+    },
+    "after": {
+      "holes": 28,
+      "tears": 0,
+      "backing": 33138
+    },
+    "reduction": 99.8485422188565,
+    "zeroHoleBaseline": false,
+    "pass": true
+  },
+  {
+    "id": "dot-watchmaker",
+    "label": "Watchmaker's bench (AI-made)",
+    "view": "splats",
+    "before": {
+      "holes": 1829,
+      "tears": 0,
+      "backing": 11593
+    },
+    "after": {
+      "holes": 5,
+      "tears": 0,
+      "backing": 7995
+    },
+    "reduction": 99.72662657189721,
+    "zeroHoleBaseline": false,
+    "pass": true
+  },
+  {
+    "id": "dot-dragonfly",
+    "label": "Dragonfly (AI-made)",
+    "view": "sharp",
+    "before": {
+      "holes": 12883,
+      "tears": 94752,
+      "backing": 145013
+    },
+    "after": {
+      "holes": 349,
+      "tears": 0,
+      "backing": 81628
+    },
+    "reduction": 97.29100364821859,
+    "zeroHoleBaseline": false,
+    "pass": true
+  },
+  {
+    "id": "dot-dragonfly",
+    "label": "Dragonfly (AI-made)",
+    "view": "splats",
+    "before": {
+      "holes": 5365,
+      "tears": 0,
+      "backing": 44572
+    },
+    "after": {
+      "holes": 2,
+      "tears": 0,
+      "backing": 27202
+    },
+    "reduction": 99.96272134203168,
+    "zeroHoleBaseline": false,
+    "pass": true
+  },
+  {
+    "id": "dot-mushrooms",
+    "label": "Mushrooms (AI-made)",
+    "view": "sharp",
+    "before": {
+      "holes": 10820,
+      "tears": 71244,
+      "backing": 139151
+    },
+    "after": {
+      "holes": 89,
+      "tears": 0,
+      "backing": 35142
+    },
+    "reduction": 99.17744916820702,
+    "zeroHoleBaseline": false,
+    "pass": true
+  },
+  {
+    "id": "dot-mushrooms",
+    "label": "Mushrooms (AI-made)",
+    "view": "splats",
+    "before": {
+      "holes": 593,
+      "tears": 0,
+      "backing": 10294
+    },
+    "after": {
+      "holes": 0,
+      "tears": 0,
+      "backing": 5685
+    },
+    "reduction": 100,
+    "zeroHoleBaseline": false,
+    "pass": true
+  },
+  {
+    "id": "dot-market",
+    "label": "Fruit market (AI-made)",
+    "view": "sharp",
+    "before": {
+      "holes": 10261,
+      "tears": 66181,
+      "backing": 110821
+    },
+    "after": {
+      "holes": 49,
+      "tears": 0,
+      "backing": 21112
+    },
+    "reduction": 99.52246369749537,
+    "zeroHoleBaseline": false,
+    "pass": true
+  },
+  {
+    "id": "dot-market",
+    "label": "Fruit market (AI-made)",
+    "view": "splats",
+    "before": {
+      "holes": 413,
+      "tears": 0,
+      "backing": 6049
+    },
+    "after": {
+      "holes": 0,
+      "tears": 0,
+      "backing": 3176
+    },
+    "reduction": 100,
+    "zeroHoleBaseline": false,
+    "pass": true
+  },
+  {
+    "id": "dot-gears",
+    "label": "Giant gears (AI-made)",
+    "view": "sharp",
+    "before": {
+      "holes": 26662,
+      "tears": 78223,
+      "backing": 127833
+    },
+    "after": {
+      "holes": 163,
+      "tears": 0,
+      "backing": 50488
+    },
+    "reduction": 99.38864301252718,
+    "zeroHoleBaseline": false,
+    "pass": true
+  },
+  {
+    "id": "dot-gears",
+    "label": "Giant gears (AI-made)",
+    "view": "splats",
+    "before": {
+      "holes": 6038,
+      "tears": 0,
+      "backing": 14961
+    },
+    "after": {
+      "holes": 32,
+      "tears": 0,
+      "backing": 7926
+    },
+    "reduction": 99.47002318648559,
+    "zeroHoleBaseline": false,
+    "pass": true
+  },
+  {
+    "id": "dot-chess",
+    "label": "Chess board (AI-made)",
+    "view": "sharp",
+    "before": {
+      "holes": 2357,
+      "tears": 43588,
+      "backing": 81655
+    },
+    "after": {
+      "holes": 37,
+      "tears": 0,
+      "backing": 26517
+    },
+    "reduction": 98.43020789138735,
+    "zeroHoleBaseline": false,
+    "pass": true
+  },
+  {
+    "id": "dot-chess",
+    "label": "Chess board (AI-made)",
+    "view": "splats",
+    "before": {
+      "holes": 6,
+      "tears": 0,
+      "backing": 12596
+    },
+    "after": {
+      "holes": 0,
+      "tears": 0,
+      "backing": 8152
+    },
+    "reduction": 100,
+    "zeroHoleBaseline": false,
+    "pass": true
+  },
+  {
+    "id": "dot-book-city",
+    "label": "City of books (AI-made)",
+    "view": "sharp",
+    "before": {
+      "holes": 39867,
+      "tears": 93539,
+      "backing": 165585
+    },
+    "after": {
+      "holes": 107,
+      "tears": 0,
+      "backing": 93947
+    },
+    "reduction": 99.73160759525422,
+    "zeroHoleBaseline": false,
+    "pass": true
+  },
+  {
+    "id": "dot-book-city",
+    "label": "City of books (AI-made)",
+    "view": "splats",
+    "before": {
+      "holes": 21036,
+      "tears": 0,
+      "backing": 34875
+    },
+    "after": {
+      "holes": 27,
+      "tears": 0,
+      "backing": 37502
+    },
+    "reduction": 99.8716486023959,
+    "zeroHoleBaseline": false,
+    "pass": true
+  }
+]
