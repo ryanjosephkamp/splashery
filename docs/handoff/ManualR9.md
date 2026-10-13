@@ -6,7 +6,20 @@ You are a Splashery worker session, started by the Operator (the coordinating se
 session_011WeiHJ3ygHhoTrrJiThHzX). Repo: ryanjosephkamp/splashery. Your lane: Manual r9 (id
 `ManualR9`, prefix `man9`). Branch: `claude/lane-manual-r9` from main. PR title: "Phase Manual r9:
 the owner's walkthrough and the last demos". Handoff file: docs/handoff/ManualR9.md (create it;
-start it with this brief, word for word, under "## Brief", then keep "## State", "## Notes", "##
+start it with this brief, word for word, under "## Brief", then keep "## State", "8. **Task 47
+follow-up (October 13, 2026): done.** A1 (F05): the covariance demo says "numerically near-singular"
+for a positive determinant too small for double precision (1e-15 beside entries of
+
+1.  and "its determinant is 0" only when it is 0 (`demos.js`, a comment in `demo-math.js`, a check
+    in `tests/man6.spec.mjs`). A3 (F30): eleven glossary entries (matrix inverse, determinant,
+    eigenvalue and eigenvector, positive definite, radian, anti-aliasing, parametric surface, lever,
+    substep, CT and MRI, spectrogram), 58 to 69, linked at each term's first use; `man2` expects 69.
+    F18, F20, F22, F32, F36 left as they are; A4 is another lane's. PDF rebuilt: 7,968,242 bytes,
+    under ln's 8,000,000 by about 32 KB (the next addition needs image trimming first). Specs again:
+    252 passed.
+
+## Notes", "##
+
 Known issues" and "## For the Operator" current). Model: Sonnet 5.5, at high effort.
 
 Read CLAUDE.md, docs/HANDOFF.md ("Now"), docs/handoff/ScienceR3.md ("How this lane runs"),
