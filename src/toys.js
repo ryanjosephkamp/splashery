@@ -3645,6 +3645,17 @@ export const TOYS = [
     camera: { yaw: 0.3, pitch: 0.12, roll: 0, distance: 3.5 },
   },
   // ---- End of pack: computing-history ----
+  // ---- Pack: proto-pathfinding (Codex prototype) ----
+  {
+    id: "pathfinding",
+    label: "Pathfinding race",
+    category: "computing",
+    kind: "kit",
+    pack: "proto-pathfinding",
+    labs: true,
+    tags: "maze grid graph search breadth first bfs dijkstra astar a-star manhattan shortest path frontier algorithm race",
+    camera: { yaw: 0.12, pitch: 1.12, roll: 0, distance: 4.1 },
+  },
   // ---- Pack: pictures ----
   {
     id: "picture-lab",

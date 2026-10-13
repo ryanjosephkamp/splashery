@@ -21,6 +21,11 @@
 // the toy's recipe and against a real source for every fact.
 
 export const TOY_HELP = {
+  pathfinding: {
+    howTo: "Tap to race. Drag the gold goal to an open cell; set walls and speed in This toy.",
+    about:
+      "Breadth-first search, Dijkstra, and A* search the same maze. Blue, orange, and purple tracks show each search separately. Dim markers are unvisited. Tall markers are the frontier: cells waiting to be expanded. Low markers have been visited. The tallest markers trace the final path. The green disk marks the start, and the gold handle marks the goal.\n\nEach move goes one cell horizontally or vertically and costs one step. Breadth-first search uses a queue. Dijkstra chooses the lowest cost so far, so it matches breadth-first search here. A* adds Manhattan distance, the horizontal and vertical steps still needed without walls. Visited counts include the goal. Change wall density or make a new maze, drag the goal, and tap again. A blocked maze reports no route.",
+  },
   // ---- Photoreal r3 (lane Photoreal r3) ----
   "triceratops-skull": {
     howTo: "Tap it to make it look at you; drag to turn it.",

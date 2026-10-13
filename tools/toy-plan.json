@@ -1,6 +1,13 @@
 {
   "about": "One entry per shelf toy: the owner's review notes (2026-09-23, docs/reviews/2026-09-23/review.md), a verdict, and a proposed tap effect and sound. v: keep = the effect is right (the owner liked it, or a later phase finished it; improved = what that phase changed); more = it has an effect that should be clearer or more dramatic; new = it only hops today and needs its own effect. fix = a visual problem to fix; fixed = what was done about it (and in which phase). interactive = the owner asked for touch-position or drag interaction. Proposals are suggestions; the owner may change them. tools/toy-plan.mjs checks this file against the shelf and writes docs/TOY-PLAN.md. On 2026-09-24 the owner approved every proposal in this file as written, including the sports-ball texture fixes.",
   "toys": {
+    "pathfinding": {
+      "v": "keep",
+      "owner": "Requested Codex prototype; labs only, pending a Claude polish pass.",
+      "effect": "Breadth-first search, Dijkstra, and A* race on a shared 7 by 7 maze. Rigid colored tracks rise for the frontier, settle for visited cells, and rise along each optimal final path. The race settles in under 4.3 seconds at the slowest speed.",
+      "sound": "One soft synthesized sine blip per expanded node, pitched by Manhattan distance to the goal, only after a tap.",
+      "improved": "Codex: deterministic unit-cost searches, visited and path counters, a random-maze button, wall density and speed sliders, and a draggable goal. Fixed 1/120-second steps with exact critically damped marker motion. Rough presentation awaits polish."
+    },
     "cactus": {
       "v": "keep",
       "owner": "No special effect. Looks fine.",
