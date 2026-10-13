@@ -104,24 +104,35 @@ for (const recipe of [null, { adapt: "drag" }]) {
 }
 
 test("full-resolution mode restores a reduced canvas and resists slow-frame reduction", async ({
-  page,
+  browser,
 }) => {
-  await page.goto("/?renderer=webgl2&profile=low&adapt=off");
+  const page = await browser.newPage({ deviceScaleFactor: 3 });
+  await page.goto("/?renderer=webgl2&profile=high&labs=1");
   await page.waitForSelector("body[data-ready='true']");
   const result = await page.evaluate(async () => {
     const { stage } = window.__splashery.player;
     stage.adaptive = true;
     stage.reduced = true;
     stage.setSharpness({ adapt: "off", dpr: 3, cull: null, aa: false });
+    let stepDowns = 0;
+    stage.onSlow = () => stepDowns++;
+    stage.setBusy(true, true);
+    const busyOnDrag = stage.busy;
     stage.busy = true;
     stage.skipFrames = 0;
     for (let i = 0; i < 60; i++) stage.timeFrame(50);
     return {
       reduced: stage.reduced,
+      busyOnDrag,
+      stepDowns,
       ratio: stage.device.maxPixelRatio,
       wanted: Math.min(window.devicePixelRatio, 3),
     };
   });
   expect(result.reduced).toBe(false);
+  expect(result.busyOnDrag).toBe(false);
+  expect(result.stepDowns).toBe(0);
   expect(result.ratio).toBe(result.wanted);
+  expect(result.ratio).toBe(3);
+  await page.close();
 });
