@@ -29,9 +29,10 @@ Every handback says "Rule check: none" or lists the rules it touches.
 - **A2.** No real person's likeness: no living celebrities, no identifiable people. Flags stay
   respectful. Anatomy is a clinical atlas. _Why: consent and respect; no one is surprised to find
   themselves in a toy._
-- **A3.** AI-made pictures and video appear only as labeled Studio samples, with no people, logos or
-  text. They are never presented as real, and never used for science, math or engineering toys, the
-  photoreal shelves, or landmarks shown as real. _Why: science and real places need real data._
+- **A3.** AI-made pictures and video appear only as labeled Studio samples (and, since October 13,
+  2026, as labeled Picture QR backgrounds), with no people, logos or text. They are never presented
+  as real, and never used for science, math or engineering toys, the photoreal shelves, or landmarks
+  shown as real. _Why: science and real places need real data._
 
 ## B. Licenses and credit
 
