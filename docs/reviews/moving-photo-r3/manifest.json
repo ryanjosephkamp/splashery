@@ -1,0 +1,464 @@
+{
+  "baseline": "93077cf6ce85cb00e0daf23e9aa5a831f6cb321f",
+  "snapshotHash": "94a18adf3efac9ec6f84154b01ef2783701e28f96ecc278568a12a499a181413",
+  "oracleVersion": "native-role-v4",
+  "viewport": [390, 844],
+  "deviceScaleFactor": 3,
+  "camera": {
+    "yaw": 0.18,
+    "pitch": 0.08
+  },
+  "presentation": "Actual phone-stage pixels, every measured playback frame at the source's app playback rate; white background; before/after side by side",
+  "cases": [
+    {
+      "id": "sample",
+      "upload": false,
+      "baseline": "93077cf6ce85cb00e0daf23e9aa5a831f6cb321f",
+      "snapshotHash": "94a18adf3efac9ec6f84154b01ef2783701e28f96ecc278568a12a499a181413",
+      "source": "assets/toys/screen/bunny.mp4",
+      "author": "Blender Foundation / www.bigbuckbunny.org",
+      "page": "https://peach.blender.org/about/",
+      "license": "CC BY 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+      "checked": "October 13, 2026",
+      "modifications": "Existing source cut rendered as a 3D relief, every measured playback frame, before/after side by side, white transparency background, phone-size comparison labels, VP9, no audio",
+      "madeBy": "Ryan with Codex (GPT-6)",
+      "oracleVersion": "native-role-v4",
+      "sourcePixelsVerified": true,
+      "sourceSha256": "4fd31a10f7d8ca38a3db5567a2264f8d1410d541bf30edb07e02d3af86e87e6f",
+      "sourceClockHashes": [
+        "86eec41e702bcea484dd2fac38b30387ca698490dc674bf2bcb1bb7691968952",
+        "86eec41e702bcea484dd2fac38b30387ca698490dc674bf2bcb1bb7691968952"
+      ],
+      "frames": 144,
+      "fps": 24,
+      "actualStageCanvas": [585, 967],
+      "actualStageDpr": 1.5,
+      "encoding": {
+        "codec": "VP9",
+        "crf": 24,
+        "cpuUsed": 4,
+        "pixelFormat": "yuv420p",
+        "audio": false
+      },
+      "encodedVerification": {
+        "decodedFrames": 144,
+        "dimensions": [780, 844],
+        "fps": 24
+      },
+      "duration": 6,
+      "file": "sample-sample.webm",
+      "bytes": 476981,
+      "sha256": "9c999992968a13c59f31199de506827e518fc8086341e2647b91bf10b3e24a10"
+    },
+    {
+      "id": "horse",
+      "upload": false,
+      "baseline": "93077cf6ce85cb00e0daf23e9aa5a831f6cb321f",
+      "snapshotHash": "94a18adf3efac9ec6f84154b01ef2783701e28f96ecc278568a12a499a181413",
+      "source": "assets/toys/screen/horse.gif",
+      "author": "Eadweard Muybridge, 1887",
+      "page": "https://commons.wikimedia.org/wiki/File:Muybridge_race_horse_animated.gif",
+      "license": "Public domain",
+      "checked": "October 13, 2026",
+      "modifications": "Existing source cut rendered as a 3D relief, every measured playback frame, before/after side by side, white transparency background, phone-size comparison labels, VP9, no audio",
+      "madeBy": "Ryan with Codex (GPT-6)",
+      "oracleVersion": "native-role-v4",
+      "sourcePixelsVerified": true,
+      "sourceSha256": "eb40bebc1f039e7c2a121673c3b55d4aa73582f858053dbbcca9ebce9e2b479d",
+      "sourceClockHashes": [
+        "5197a2b8adafda27515d955e5943520dd1199994f479a1ce1fd6f9e816ab39b8",
+        "5197a2b8adafda27515d955e5943520dd1199994f479a1ce1fd6f9e816ab39b8"
+      ],
+      "frames": 15,
+      "fps": 10,
+      "actualStageCanvas": [585, 967],
+      "actualStageDpr": 1.5,
+      "encoding": {
+        "codec": "VP9",
+        "crf": 24,
+        "cpuUsed": 4,
+        "pixelFormat": "yuv420p",
+        "audio": false
+      },
+      "encodedVerification": {
+        "decodedFrames": 15,
+        "dimensions": [780, 844],
+        "fps": 10
+      },
+      "duration": 1.5,
+      "file": "horse-sample.webm",
+      "bytes": 199817,
+      "sha256": "e8d0e6072ac50e377e8a13dac34a763f8618e9de24694c4f05002f0d5fdaf09e"
+    },
+    {
+      "id": "dragon",
+      "upload": false,
+      "baseline": "93077cf6ce85cb00e0daf23e9aa5a831f6cb321f",
+      "snapshotHash": "94a18adf3efac9ec6f84154b01ef2783701e28f96ecc278568a12a499a181413",
+      "source": ".cache/cdx-mp3/originals/dragon.webm",
+      "author": "Blender Foundation",
+      "page": "https://durian.blender.org/about/",
+      "license": "CC BY 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+      "checked": "October 13, 2026",
+      "modifications": "Existing source cut rendered as a 3D relief, every measured playback frame, before/after side by side, white transparency background, phone-size comparison labels, VP9, no audio",
+      "madeBy": "Ryan with Codex (GPT-6)",
+      "oracleVersion": "native-role-v4",
+      "sourcePixelsVerified": true,
+      "sourceSha256": "b8cd3e0f7f9f9fb76d233782b0e41e526c5fc9491179f0e7535dab6310d138ef",
+      "sourceClockHashes": [
+        "e31939f72147d4749e451d19312e7f310d4a60d3fd46248a52877b18d4ef87bd",
+        "e31939f72147d4749e451d19312e7f310d4a60d3fd46248a52877b18d4ef87bd"
+      ],
+      "frames": 96,
+      "fps": 16,
+      "actualStageCanvas": [585, 967],
+      "actualStageDpr": 1.5,
+      "encoding": {
+        "codec": "VP9",
+        "crf": 24,
+        "cpuUsed": 4,
+        "pixelFormat": "yuv420p",
+        "audio": false
+      },
+      "encodedVerification": {
+        "decodedFrames": 96,
+        "dimensions": [780, 844],
+        "fps": 16
+      },
+      "duration": 6,
+      "file": "dragon-sample.webm",
+      "bytes": 505475,
+      "sha256": "f9c3a441e0a37b9cec979ca7e6e268f416ad48bf7bb9eb11c874eeef1c2cad18"
+    },
+    {
+      "id": "bridge",
+      "upload": false,
+      "baseline": "93077cf6ce85cb00e0daf23e9aa5a831f6cb321f",
+      "snapshotHash": "94a18adf3efac9ec6f84154b01ef2783701e28f96ecc278568a12a499a181413",
+      "source": ".cache/cdx-mp3/originals/bridge.webm",
+      "author": "Blender Foundation",
+      "page": "https://mango.blender.org/about/",
+      "license": "CC BY 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+      "checked": "October 13, 2026",
+      "modifications": "Existing source cut rendered as a 3D relief, every measured playback frame, before/after side by side, white transparency background, phone-size comparison labels, VP9, no audio",
+      "madeBy": "Ryan with Codex (GPT-6)",
+      "oracleVersion": "native-role-v4",
+      "sourcePixelsVerified": true,
+      "sourceSha256": "e97e5f27bcafdeac1da97ac993fdb779238e57046487523af65538c9c6e98a23",
+      "sourceClockHashes": [
+        "e31939f72147d4749e451d19312e7f310d4a60d3fd46248a52877b18d4ef87bd",
+        "e31939f72147d4749e451d19312e7f310d4a60d3fd46248a52877b18d4ef87bd"
+      ],
+      "frames": 96,
+      "fps": 16,
+      "actualStageCanvas": [585, 967],
+      "actualStageDpr": 1.5,
+      "encoding": {
+        "codec": "VP9",
+        "crf": 24,
+        "cpuUsed": 4,
+        "pixelFormat": "yuv420p",
+        "audio": false
+      },
+      "encodedVerification": {
+        "decodedFrames": 96,
+        "dimensions": [780, 844],
+        "fps": 16
+      },
+      "duration": 6,
+      "file": "bridge-sample.webm",
+      "bytes": 998292,
+      "sha256": "2a56fcfa56c275aed9f5a58a0c0cb7c48f006c156161e0af024ebd85a7b78c46"
+    },
+    {
+      "id": "bridge",
+      "upload": true,
+      "baseline": "93077cf6ce85cb00e0daf23e9aa5a831f6cb321f",
+      "snapshotHash": "94a18adf3efac9ec6f84154b01ef2783701e28f96ecc278568a12a499a181413",
+      "source": ".cache/cdx-mp3/originals/bridge.webm",
+      "author": "Blender Foundation",
+      "page": "https://mango.blender.org/about/",
+      "license": "CC BY 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+      "checked": "October 13, 2026",
+      "modifications": "Existing source cut rendered as a 3D relief, every measured playback frame, before/after side by side, white transparency background, phone-size comparison labels, VP9, no audio",
+      "madeBy": "Ryan with Codex (GPT-6)",
+      "oracleVersion": "native-role-v4",
+      "sourcePixelsVerified": true,
+      "sourceSha256": "e97e5f27bcafdeac1da97ac993fdb779238e57046487523af65538c9c6e98a23",
+      "sourceClockHashes": [
+        "e13b605da764a8588d9f7463dd18cd89e1344635228253b3bf9d0ef2e679d286",
+        "e13b605da764a8588d9f7463dd18cd89e1344635228253b3bf9d0ef2e679d286"
+      ],
+      "frames": 144,
+      "fps": 24,
+      "actualStageCanvas": [585, 967],
+      "actualStageDpr": 1.5,
+      "encoding": {
+        "codec": "VP9",
+        "crf": 24,
+        "cpuUsed": 4,
+        "pixelFormat": "yuv420p",
+        "audio": false
+      },
+      "encodedVerification": {
+        "decodedFrames": 144,
+        "dimensions": [780, 844],
+        "fps": 24
+      },
+      "duration": 6,
+      "file": "bridge-upload.webm",
+      "bytes": 1268479,
+      "sha256": "afaf8e9c6c0a24359b0c64451bed1bd6f2818961221d8aa9c7d2cae86cd0d774"
+    },
+    {
+      "id": "machine",
+      "upload": false,
+      "baseline": "93077cf6ce85cb00e0daf23e9aa5a831f6cb321f",
+      "snapshotHash": "94a18adf3efac9ec6f84154b01ef2783701e28f96ecc278568a12a499a181413",
+      "source": ".cache/cdx-mp3/originals/machine.webm",
+      "author": "Blender Foundation / Netherlands Media Art Institute / www.elephantsdream.org (2006)",
+      "page": "https://orange.blender.org/blog/creative-commons-license-2/",
+      "license": "CC BY 2.5",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.5/",
+      "checked": "October 13, 2026",
+      "modifications": "Existing source cut rendered as a 3D relief, every measured playback frame, before/after side by side, white transparency background, phone-size comparison labels, VP9, no audio",
+      "madeBy": "Ryan with Codex (GPT-6)",
+      "oracleVersion": "native-role-v4",
+      "sourcePixelsVerified": true,
+      "sourceSha256": "b4c77d60257e69053ecc825515bdb440981f660b385a3bc0a5f9d9d1b711dc44",
+      "sourceClockHashes": [
+        "e31939f72147d4749e451d19312e7f310d4a60d3fd46248a52877b18d4ef87bd",
+        "e31939f72147d4749e451d19312e7f310d4a60d3fd46248a52877b18d4ef87bd"
+      ],
+      "frames": 96,
+      "fps": 16,
+      "actualStageCanvas": [585, 967],
+      "actualStageDpr": 1.5,
+      "encoding": {
+        "codec": "VP9",
+        "crf": 24,
+        "cpuUsed": 4,
+        "pixelFormat": "yuv420p",
+        "audio": false
+      },
+      "encodedVerification": {
+        "decodedFrames": 96,
+        "dimensions": [780, 844],
+        "fps": 16
+      },
+      "duration": 6,
+      "file": "machine-sample.webm",
+      "bytes": 564318,
+      "sha256": "f6c026af889df361b45c71054adc8a72c07f12dc0986267a7f851b75610eed4e"
+    },
+    {
+      "id": "machine",
+      "upload": true,
+      "baseline": "93077cf6ce85cb00e0daf23e9aa5a831f6cb321f",
+      "snapshotHash": "94a18adf3efac9ec6f84154b01ef2783701e28f96ecc278568a12a499a181413",
+      "source": ".cache/cdx-mp3/originals/machine.webm",
+      "author": "Blender Foundation / Netherlands Media Art Institute / www.elephantsdream.org (2006)",
+      "page": "https://orange.blender.org/blog/creative-commons-license-2/",
+      "license": "CC BY 2.5",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.5/",
+      "checked": "October 13, 2026",
+      "modifications": "Existing source cut rendered as a 3D relief, every measured playback frame, before/after side by side, white transparency background, phone-size comparison labels, VP9, no audio",
+      "madeBy": "Ryan with Codex (GPT-6)",
+      "oracleVersion": "native-role-v4",
+      "sourcePixelsVerified": true,
+      "sourceSha256": "b4c77d60257e69053ecc825515bdb440981f660b385a3bc0a5f9d9d1b711dc44",
+      "sourceClockHashes": [
+        "e13b605da764a8588d9f7463dd18cd89e1344635228253b3bf9d0ef2e679d286",
+        "e13b605da764a8588d9f7463dd18cd89e1344635228253b3bf9d0ef2e679d286"
+      ],
+      "frames": 144,
+      "fps": 24,
+      "actualStageCanvas": [585, 967],
+      "actualStageDpr": 1.5,
+      "encoding": {
+        "codec": "VP9",
+        "crf": 24,
+        "cpuUsed": 4,
+        "pixelFormat": "yuv420p",
+        "audio": false
+      },
+      "encodedVerification": {
+        "decodedFrames": 144,
+        "dimensions": [780, 844],
+        "fps": 24
+      },
+      "duration": 6,
+      "file": "machine-upload.webm",
+      "bytes": 868800,
+      "sha256": "f64b13f3578576e5cd717f27cccb698c8005b3eadfe0a771baabecccbce89621"
+    },
+    {
+      "id": "sample-long",
+      "upload": false,
+      "baseline": "93077cf6ce85cb00e0daf23e9aa5a831f6cb321f",
+      "snapshotHash": "94a18adf3efac9ec6f84154b01ef2783701e28f96ecc278568a12a499a181413",
+      "source": "assets/toys/moving-photo-3d/bunny-long.webm",
+      "author": "Blender Foundation / www.bigbuckbunny.org",
+      "page": "https://peach.blender.org/about/",
+      "license": "CC BY 3.0 US",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0/us/",
+      "checked": "October 13, 2026",
+      "modifications": "Existing source cut rendered as a 3D relief, every measured playback frame, before/after side by side, white transparency background, phone-size comparison labels, VP9, no audio",
+      "madeBy": "Ryan with Codex (GPT-6)",
+      "oracleVersion": "native-role-v4",
+      "sourcePixelsVerified": true,
+      "sourceSha256": "bbc30a02b8ecbf1714ceb113da01bf83b7ac9759e85270d6e33b94440f3c324e",
+      "sourceClockHashes": [
+        "456fb44e1afa1861928c29f266b8356bc17a38f03471a35b88c5d6a50a91bbe8",
+        "456fb44e1afa1861928c29f266b8356bc17a38f03471a35b88c5d6a50a91bbe8"
+      ],
+      "frames": 720,
+      "fps": 24,
+      "actualStageCanvas": [585, 967],
+      "actualStageDpr": 1.5,
+      "encoding": {
+        "codec": "VP9",
+        "crf": 24,
+        "cpuUsed": 4,
+        "pixelFormat": "yuv420p",
+        "audio": false
+      },
+      "encodedVerification": {
+        "decodedFrames": 720,
+        "dimensions": [780, 844],
+        "fps": 24
+      },
+      "duration": 30,
+      "file": "sample-long-sample.webm",
+      "bytes": 3141185,
+      "sha256": "c267d37320dc761bcb5be993aeba4bb0f8e8cabb21288e967bb7778337e82d4a"
+    },
+    {
+      "id": "dragon-long",
+      "upload": false,
+      "baseline": "93077cf6ce85cb00e0daf23e9aa5a831f6cb321f",
+      "snapshotHash": "94a18adf3efac9ec6f84154b01ef2783701e28f96ecc278568a12a499a181413",
+      "source": "assets/toys/moving-photo-3d/sintel-long.webm",
+      "author": "Blender Foundation",
+      "page": "https://durian.blender.org/about/",
+      "license": "CC BY 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+      "checked": "October 13, 2026",
+      "modifications": "Existing source cut rendered as a 3D relief, every measured playback frame, before/after side by side, white transparency background, phone-size comparison labels, VP9, no audio",
+      "madeBy": "Ryan with Codex (GPT-6)",
+      "oracleVersion": "native-role-v4",
+      "sourcePixelsVerified": true,
+      "sourceSha256": "c3d4432e8adb1f9c33bef5656c9a6ff2289b49e448fb6c4b67ed2400a54f3269",
+      "sourceClockHashes": [
+        "456fb44e1afa1861928c29f266b8356bc17a38f03471a35b88c5d6a50a91bbe8",
+        "456fb44e1afa1861928c29f266b8356bc17a38f03471a35b88c5d6a50a91bbe8"
+      ],
+      "frames": 720,
+      "fps": 24,
+      "actualStageCanvas": [585, 967],
+      "actualStageDpr": 1.5,
+      "encoding": {
+        "codec": "VP9",
+        "crf": 24,
+        "cpuUsed": 4,
+        "pixelFormat": "yuv420p",
+        "audio": false
+      },
+      "encodedVerification": {
+        "decodedFrames": 720,
+        "dimensions": [780, 844],
+        "fps": 24
+      },
+      "duration": 30,
+      "file": "dragon-long-sample.webm",
+      "bytes": 1247592,
+      "sha256": "7367d8e115203012461d8100b4789036e4a195d880edebc927bb2f57c4280983"
+    },
+    {
+      "id": "machine-long",
+      "upload": false,
+      "baseline": "93077cf6ce85cb00e0daf23e9aa5a831f6cb321f",
+      "snapshotHash": "94a18adf3efac9ec6f84154b01ef2783701e28f96ecc278568a12a499a181413",
+      "source": "assets/toys/moving-photo-3d/elephants-long.webm",
+      "author": "Blender Foundation / Netherlands Media Art Institute / www.elephantsdream.org (2006)",
+      "page": "https://orange.blender.org/blog/creative-commons-license-2/",
+      "license": "CC BY 2.5",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.5/",
+      "checked": "October 13, 2026",
+      "modifications": "Existing source cut rendered as a 3D relief, every measured playback frame, before/after side by side, white transparency background, phone-size comparison labels, VP9, no audio",
+      "madeBy": "Ryan with Codex (GPT-6)",
+      "oracleVersion": "native-role-v4",
+      "sourcePixelsVerified": true,
+      "sourceSha256": "ccaace69c7899f5ee97c97010d2820dc4ec04da9d2e18b355c074a5506aaf367",
+      "sourceClockHashes": [
+        "456fb44e1afa1861928c29f266b8356bc17a38f03471a35b88c5d6a50a91bbe8",
+        "456fb44e1afa1861928c29f266b8356bc17a38f03471a35b88c5d6a50a91bbe8"
+      ],
+      "frames": 720,
+      "fps": 24,
+      "actualStageCanvas": [585, 967],
+      "actualStageDpr": 1.5,
+      "encoding": {
+        "codec": "VP9",
+        "crf": 24,
+        "cpuUsed": 4,
+        "pixelFormat": "yuv420p",
+        "audio": false
+      },
+      "encodedVerification": {
+        "decodedFrames": 720,
+        "dimensions": [780, 844],
+        "fps": 24
+      },
+      "duration": 30,
+      "file": "machine-long-sample.webm",
+      "bytes": 3117604,
+      "sha256": "e6161dd4124bab0a49fa26bc6bcdc51beb4da7ff26000c1825be40d2e2ea928a"
+    },
+    {
+      "id": "bridge-long",
+      "upload": false,
+      "baseline": "93077cf6ce85cb00e0daf23e9aa5a831f6cb321f",
+      "snapshotHash": "94a18adf3efac9ec6f84154b01ef2783701e28f96ecc278568a12a499a181413",
+      "source": "assets/toys/moving-photo-3d/tears-long.webm",
+      "author": "Blender Foundation",
+      "page": "https://mango.blender.org/about/",
+      "license": "CC BY 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+      "checked": "October 13, 2026",
+      "modifications": "Existing source cut rendered as a 3D relief, every measured playback frame, before/after side by side, white transparency background, phone-size comparison labels, VP9, no audio",
+      "madeBy": "Ryan with Codex (GPT-6)",
+      "oracleVersion": "native-role-v4",
+      "sourcePixelsVerified": true,
+      "sourceSha256": "5d16d59945f20504f0998b220fa35d5a78bf6d8d82d874cc338c23634477236b",
+      "sourceClockHashes": [
+        "a0f673596343daf63c02763c589e56419055e57cfd79ba1905344ff6c8adab87",
+        "a0f673596343daf63c02763c589e56419055e57cfd79ba1905344ff6c8adab87"
+      ],
+      "frames": 648,
+      "fps": 24,
+      "actualStageCanvas": [585, 967],
+      "actualStageDpr": 1.5,
+      "encoding": {
+        "codec": "VP9",
+        "crf": 24,
+        "cpuUsed": 4,
+        "pixelFormat": "yuv420p",
+        "audio": false
+      },
+      "encodedVerification": {
+        "decodedFrames": 648,
+        "dimensions": [780, 844],
+        "fps": 24
+      },
+      "duration": 27,
+      "file": "bridge-long-sample.webm",
+      "bytes": 2565182,
+      "sha256": "d9f0e19222b90cd8beb94ee08403f28da70755a005fc91ca0fcd50940265d04a"
+    }
+  ]
+}

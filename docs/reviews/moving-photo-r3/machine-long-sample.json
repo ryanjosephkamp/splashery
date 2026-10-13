@@ -1,0 +1,41 @@
+{
+  "id": "machine-long",
+  "upload": false,
+  "baseline": "93077cf6ce85cb00e0daf23e9aa5a831f6cb321f",
+  "snapshotHash": "94a18adf3efac9ec6f84154b01ef2783701e28f96ecc278568a12a499a181413",
+  "source": "assets/toys/moving-photo-3d/elephants-long.webm",
+  "author": "Blender Foundation / Netherlands Media Art Institute / www.elephantsdream.org (2006)",
+  "page": "https://orange.blender.org/blog/creative-commons-license-2/",
+  "license": "CC BY 2.5",
+  "licenseUrl": "https://creativecommons.org/licenses/by/2.5/",
+  "checked": "October 13, 2026",
+  "modifications": "Existing source cut rendered as a 3D relief, every measured playback frame, before/after side by side, white transparency background, phone-size comparison labels, VP9, no audio",
+  "madeBy": "Ryan with Codex (GPT-6)",
+  "oracleVersion": "native-role-v4",
+  "sourcePixelsVerified": true,
+  "sourceSha256": "ccaace69c7899f5ee97c97010d2820dc4ec04da9d2e18b355c074a5506aaf367",
+  "sourceClockHashes": [
+    "456fb44e1afa1861928c29f266b8356bc17a38f03471a35b88c5d6a50a91bbe8",
+    "456fb44e1afa1861928c29f266b8356bc17a38f03471a35b88c5d6a50a91bbe8"
+  ],
+  "frames": 720,
+  "fps": 24,
+  "actualStageCanvas": [585, 967],
+  "actualStageDpr": 1.5,
+  "encoding": {
+    "codec": "VP9",
+    "crf": 24,
+    "cpuUsed": 4,
+    "pixelFormat": "yuv420p",
+    "audio": false
+  },
+  "encodedVerification": {
+    "decodedFrames": 720,
+    "dimensions": [780, 844],
+    "fps": 24
+  },
+  "duration": 30,
+  "file": "machine-long-sample.webm",
+  "bytes": 3117604,
+  "sha256": "e6161dd4124bab0a49fa26bc6bcdc51beb4da7ff26000c1825be40d2e2ea928a"
+}
