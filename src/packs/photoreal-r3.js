@@ -44,10 +44,20 @@ const qa = (axis, ang) => quatAxisAngle(unit(axis), ang);
 // ---- The baked models ------------------------------------------------------------------------
 
 const SCANS = new Map();
-async function loadScan(id) {
-  if (SCANS.has(id)) return SCANS.get(id);
+async function loadScan(id, ctx) {
+  const opening =
+    id === "celestial-globe" &&
+    ["low", "weak"].includes(ctx?.profile) &&
+    ctx?.count > 0 &&
+    ctx.count <= 90000 &&
+    typeof DecompressionStream === "function";
+  const cached = SCANS.get(id);
+  if (cached && cached.capacity >= (opening ? Math.floor(90000 * 0.86) : cached.n)) return cached;
   ({ addScan, decodeSplats } = await import("./real-objects.js"));
-  const url = new URL(`../../assets/toys/${id}/${id}.splats`, import.meta.url);
+  const url = new URL(
+    `../../assets/toys/${id}/${id}${opening ? "-opening.splats.gz" : ".splats"}`,
+    import.meta.url,
+  );
   let bytes;
   if (url.protocol === "file:") {
     const fs = await import("node:fs/promises");
@@ -57,7 +67,20 @@ async function loadScan(id) {
     if (!r.ok) throw new Error("Could not load the model.");
     bytes = new Uint8Array(await r.arrayBuffer());
   }
-  SCANS.set(id, decodeSplats(bytes));
+  // fetch may already have decoded an HTTP Content-Encoding layer. Only
+  // inflate when the delivered body still has the gzip signature.
+  if (opening && bytes[0] === 0x1f && bytes[1] === 0x8b) {
+    if (url.protocol === "file:") {
+      const { gunzipSync } = await import("node:zlib");
+      bytes = gunzipSync(bytes);
+    } else {
+      const stream = new Blob([bytes]).stream().pipeThrough(new DecompressionStream("gzip"));
+      bytes = new Uint8Array(await new Response(stream).arrayBuffer());
+    }
+  }
+  const loaded = decodeSplats(bytes),
+    latest = SCANS.get(id);
+  if (!latest || loaded.capacity > latest.capacity) SCANS.set(id, loaded);
   return SCANS.get(id);
 }
 
@@ -84,8 +107,8 @@ function scanToy({ id, credit, label, secs, parts, drive, share = 0.86, extra, a
     controls: [{ key: "tap", label, type: "pulse", ease: secs }],
     action: { key: "tap", label },
     credits: [credit],
-    async prepare() {
-      await loadScan(id);
+    async prepare(_options, _scene, ctx) {
+      await loadScan(id, ctx);
     },
     drive(t, c, out, info) {
       const e = since(c, "tap", secs);
