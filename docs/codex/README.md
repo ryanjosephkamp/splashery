@@ -80,6 +80,8 @@ merges.
 | 69-circular-qr.md                 | Circular QR codes in five QR toys, and two QR fixes (grainy anatomy, white lines)                   | the QR packs, tests, report                          | yes           |
 | 70-playground-site-links.md       | The Playground links to the site and each toy's page; settings reachable in landscape               | the app's UI, tests                                  | no            |
 | 71-renderer-diagnostics.md        | When 3D can't start: keep the real cause, a local report, honest tests and guidance                 | start-up path (an Engine commit), tests              | no            |
+| 72-three-codes-lines.md           | The white lines in Three QR codes in one, reproduced on Android and fixed at the cause              | the qr-three toy, tests                              | no            |
+| 73-manual-pdf-phone.md            | The manual PDF on phones: no stale copies, a contents page that works in any viewer                 | the PDF build, links                                 | no            |
 
 The Codex cloud environment is set up with `tools/codex-setup.sh`; [SETUP.md](SETUP.md) has the
 steps for creating it and fixing a failed setup.
