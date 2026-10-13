@@ -27,11 +27,6 @@
     }
   }
   async function start() {
-    // Only this small codec/ID module is safe to fetch before engine mapping.
-    const opening =
-      location.hash.includes("s=") || new URLSearchParams(location.search).has("toy")
-        ? import("./opening-pack.js").catch(() => null)
-        : null;
     if (
       typeof DecompressionStream === "function" &&
       HTMLScriptElement.supports?.("importmap") &&
@@ -57,13 +52,6 @@
       map.type = "importmap";
       map.textContent = JSON.stringify({ imports });
       document.head.appendChild(map);
-    }
-    if (opening) {
-      try {
-        await (await opening)?.warmOpeningPack();
-      } catch {
-        // A malformed scene or unavailable helper retains the app's fallback.
-      }
     }
     await ready;
     await import(entry.href);

@@ -11,6 +11,31 @@ test("opening gzip copies preserve every original byte", () => {
     expect(gunzipSync(fs.readFileSync(file)).equals(fs.readFileSync(source)), source).toBe(true);
 });
 
+test("the app graph transfers while the selected scan helper is held", async ({ page }) => {
+  let release;
+  const held = new Promise((resolve) => (release = resolve));
+  await page.route("**/src/packs/real-objects.js", async (route) => {
+    await held;
+    await route.continue();
+  });
+  const scene = Buffer.from(
+    JSON.stringify(createScene({ toy: { kind: "builtin", id: "sunglasses" } })),
+  );
+  const helper = page.waitForRequest("**/src/packs/real-objects.js", { timeout: 10000 });
+  const app = page.waitForRequest("**/src/app.js", { timeout: 10000 });
+  await page.goto(`/?renderer=webgl2&profile=weak&adapt=off#s=j.${scene.toString("base64url")}`, {
+    waitUntil: "commit",
+  });
+  try {
+    await helper;
+    await app;
+  } finally {
+    release();
+  }
+  await page.waitForSelector("body[data-ready='true']", { timeout: 180000 });
+  expect(await page.evaluate(() => window.__splashery.player.toyInfo.id)).toBe("sunglasses");
+});
+
 for (const [id, format] of [
   ["sunglasses", "j"],
   ["pyrite-cubes", "d"],

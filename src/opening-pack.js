@@ -28,3 +28,7 @@ export async function warmOpeningPack() {
   if (toy?.kind !== "builtin") return;
   if (SCAN_IDS.has(toy.id)) await import("./packs/real-objects.js");
 }
+
+// Entry modules import this after the engine mapping is installed. Their
+// remaining graph transfers in parallel; only GPU initialization awaits it.
+export const openingReady = warmOpeningPack().catch(() => {});

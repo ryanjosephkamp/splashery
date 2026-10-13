@@ -5,6 +5,7 @@
 
 import { Viewer, NoGPUError } from "./viewer.js";
 import { parseHash } from "./codec.js";
+import { openingReady } from "./opening-pack.js";
 
 const canvas = document.getElementById("stage");
 const status = document.getElementById("embed-status");
@@ -83,6 +84,7 @@ for (const b of zoomButtons.querySelectorAll("button")) {
 }
 
 try {
+  await openingReady;
   await viewer.start();
   openLink.href = viewer.openURL();
   if (params.get("sound") === "on") addSoundButton(await viewer.enableSound());
