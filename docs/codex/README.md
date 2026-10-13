@@ -63,6 +63,20 @@ merges.
 | 52-phone-a11y-fixes.md            | The phone and accessibility audit's fixes                                                | site UI, tests, report                               | no            |
 | 53-photo-3d-r3.md                 | Photo to 3D perfected: no outlines in the Sharp view, no holes (a long Goal run on #566) | Photo to 3D, the relief, tests, report               | yes           |
 | 54-sample-pictures.md             | New AI-made Photo to 3D samples, and backgrounds made for the Picture QR                 | samples, `src/qr-craft/samples.js`, tests, report    | yes           |
+| 55-video-3d-clarity.md            | Video to 3D, sharp and clear (a long Goal run on #562)                                   | `src/video3d/`, bakes, tests, report                 | yes           |
+| 56-ground-truth-scenes.md         | Test scenes with exact depth and camera paths, and a scorer, for the Studio              | tools, fixtures, report                              | yes           |
+| 57-hard-case-samples.md           | Hard-case AI-made Photo to 3D samples (glass, hair, thin parts, reflections)             | samples, records, tests, report                      | yes           |
+| 58-qr-theme-packs.md              | Six themed packs of Picture QR backgrounds that scan with any link (after #582)          | backgrounds, records, tests, report                  | yes           |
+| 59-material-swatches.md           | Twenty real-looking materials made by code, a helper, and a labs swatch toy              | `src/materials/`, a labs toy, tests, report          | yes           |
+| 60-world-skies.md                 | Sixteen skies and backdrops made by code for the Worlds, and a labs Sky picker           | `src/worlds/skies.js`, a labs toy, tests, report     | yes           |
+| 61-prototypes-batch-2.md          | Double pendulum, orbit transfer, logistic map and projectile drag into labs toys         | new packs, shared-list lines, tests, evidence        | yes           |
+| 62-prototypes-batch-3.md          | Pathfinding, room acoustics, field lines, Doppler and color space into labs toys         | new packs, shared-list lines, tests, evidence        | yes           |
+| 63-new-labs-trio.md               | Wing section lab, monochord and Apollo capsule interior: three new labs toys             | new packs, a NASA model, tests, evidence             | yes           |
+| 64-workshop-foundation.md         | The Workshop foundation (builders/TASKS.md T11)                                          | `workshop/`, an Engine PR, a smoke test              | no            |
+| 65-compat-tests-r2.md             | Old links and saved scenes locked in by tests (task 05 finished, on #197)                | one test file, a corpus, a schema note               | no            |
+| 66-kit-tiers.md                   | Splat tiers for the Science, Space and Math kit toys (builders/TASKS.md T2)              | recipes in `src/packs/`, report                      | no            |
+| 67-flagship-pilots.md             | Five flagship pilots, proposed (builders/TASKS.md T12; a report, nothing built)          | report only                                          | yes           |
+| 68-splat-sharpness-experiment.md  | Sharper splats on screen without shimmer, a Workshop experiment (T9)                     | `workshop/`, report                                  | no            |
 
 The Codex cloud environment is set up with `tools/codex-setup.sh`; [SETUP.md](SETUP.md) has the
 steps for creating it and fixing a failed setup.
@@ -85,6 +99,15 @@ Provision the tools and reserve the paths before assigning a brief.
 | [J07 — License graph](../audits/dot-jobs-2026-10.md#j07--license-evidence-graph-proposal)        | A bounded source and rights review template proposal                    | two audit proposals; Grooph read-only              | yes           |
 | [J08 — Effect review graph](../audits/dot-jobs-2026-10.md#j08--toy-effect-review-graph-proposal) | Separate tests, motion critique and owner acceptance                    | two audit proposals; Grooph read-only              | yes           |
 | 36-manual-audit-r3.md                                                                            | The whole Tinkerer's Manual, audited a third time (after #542 and #545) | report only                                        | yes           |
+
+## The third wave (tasks 55 to 68, October 13, 2026)
+
+While the weekly reset is a day away, Codex does the heavy lifting. Tasks 55 to 57 serve the owner's
+first priority (any picture or video into clear 3D); 57, 58, 59 and 60 make new pictures and
+materials within Rules v1 (AI-made pictures only as labeled Studio samples and Picture QR
+backgrounds; everything else made by code, CC0); 61 to 63 add labs toys on the open shelves; 64 to
+68 build the platform. PRs #570 and #576 have merged, so their files are free. The Operator keeps
+the list of what is running and what to start next.
 
 ## The Studio push (tasks 37 to 41, October 12, 2026)
 
