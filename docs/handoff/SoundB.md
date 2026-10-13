@@ -72,7 +72,7 @@ branch before each push.
 ### Your part
 
 1. **Start with what synthesis can fix now**, on your shelves: nature, weather (his "weather and
-   fire"), food, toys, objects (his "Open Me"), medieval, animals, maths, computing (his "AI and
+   fire"), food, toys, objects (his "Open Me"), medieval, animals, math, computing (his "AI and
    Computing"), holidays, vehicles and landmarks.
    - Remove the clicks, whistles, "vroom" rises, loud wind and robotic tones he named.
    - Sync sounds to what happens on screen: daisy petals landing, the gradient-descent ball's

@@ -226,7 +226,7 @@ function markNitro(atoms, bonds) {
 
 // Fills in double and triple bonds from the atoms' valences, stepping an
 // S or P up to a higher valence when it has too many bonds or its
-// neighbours need more. Returns false when nothing fits.
+// neighbors need more. Returns false when nothing fits.
 function fillBonds(atoms, bonds) {
   const level = atoms.map(() => 0);
   const kind = (i) => (atoms[i].el === "Ph" ? "C" : atoms[i].el);
@@ -270,7 +270,7 @@ function fillBonds(atoms, bonds) {
       free[b[1]]--;
     }
     if (free.every((f) => f === 0)) return true;
-    // Room left over: step up a neighbour that can take more bonds.
+    // Room left over: step up a neighbor that can take more bonds.
     let stepped = false;
     free.forEach((f, i) => {
       if (f <= 0 || stepped) return;

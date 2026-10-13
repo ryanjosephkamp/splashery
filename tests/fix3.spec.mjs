@@ -63,7 +63,7 @@ test("the ocean wave collapses smoothly, without stops or jumps", async () => {
     prev = p;
   }
   // No control point jumps: every step is small and close to its
-  // neighbours' (the speed changes smoothly, and never stops at a key
+  // neighbors' (the speed changes smoothly, and never stops at a key
   // while the wave falls).
   for (let i = 1; i < steps.length; i++) {
     expect(steps[i]).toBeLessThan(0.02);

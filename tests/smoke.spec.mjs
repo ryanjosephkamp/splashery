@@ -599,7 +599,7 @@ test.describe("Splashery v3 engine (WebGL2)", () => {
     await page.selectOption("#pat-id", "flag");
     await page.waitForFunction(() => document.querySelectorAll("#pat-flag option").length > 150);
     await page.selectOption("#pat-flag", "fr");
-    await expect(page.locator("#toy-status")).toContainText("in the colours of France");
+    await expect(page.locator("#toy-status")).toContainText("in the colors of France");
     await page.waitForTimeout(1000);
     const flagged = await canvas.screenshot({ type: "png" });
     expect(await countDifferentPixels(page, before, flagged)).toBeGreaterThan(5000);
@@ -614,7 +614,7 @@ test.describe("Splashery v3 engine (WebGL2)", () => {
     const page2 = await page.context().newPage();
     await page2.goto(`/?renderer=webgl2&profile=weak${hash}`);
     await page2.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
-    await expect(page2.locator("#toy-status")).toContainText("in the colours of Japan", {
+    await expect(page2.locator("#toy-status")).toContainText("in the colors of Japan", {
       timeout: 60_000,
     });
     expect(problems).toEqual([]);
@@ -738,7 +738,7 @@ test.describe("Splashery v3 engine (WebGL2)", () => {
     await loadApp(page);
     await page.evaluate(() => window.__splashery.player.camera.setTurntable(false));
     const canvas = page.locator("#stage");
-    // Strawberry: the seeds (a colour key) pop out and the berry blushes, then settles.
+    // Strawberry: the seeds (a color key) pop out and the berry blushes, then settles.
     await page.click(".toy-card[data-toy='strawberry']");
     await waitForToy(page, "Strawberry");
     await expect(page.locator("#toy-action")).toHaveText("Pop seeds");
@@ -982,16 +982,16 @@ test.describe("Settings panel (WebGL2)", () => {
     await loadApp(page);
     await page.click(".toy-card[data-toy='blob']");
     await waitForToy(page, "Jelly blob");
-    // The main tab: Detail, the turntable switch and flag colours.
+    // The main tab: Detail, the turntable switch and flag colors.
     const toy = page.locator("#pane-play");
     await expect(toy).toBeVisible();
     await expect(toy.locator("#look-detail")).toBeVisible();
     await expect(toy.locator("#auto-turntable")).toHaveAttribute("role", "switch");
     await expect(page.locator("#tab-play")).toHaveText("Toy");
-    // Change things: flag colours, an effect, the speed and the splat size.
+    // Change things: flag colors, an effect, the speed and the splat size.
     await page.waitForFunction(() => document.querySelectorAll("#toy-flag option").length > 150);
     await page.selectOption("#toy-flag", "fr");
-    await expect(page.locator("#toy-status")).toContainText("in the colours of France");
+    await expect(page.locator("#toy-status")).toContainText("in the colors of France");
     await page.click("#tab-tools");
     await page.click("#fx-twist");
     await expect(page.locator("#fx-twist")).toBeChecked();
@@ -1005,7 +1005,7 @@ test.describe("Settings panel (WebGL2)", () => {
     await page.click("#reset-all");
     await expect(page.locator("#reset-all")).toHaveText("Tap again to reset");
     await page.click("#reset-all");
-    await expect(page.locator("#toy-status")).not.toContainText("colours of");
+    await expect(page.locator("#toy-status")).not.toContainText("colors of");
     const scene = await page.evaluate(() => window.__splashery.exportScene());
     expect(scene.pattern.id).toBe("none");
     expect(scene.effects.twist.on).toBe(false);
@@ -1064,7 +1064,7 @@ test.describe("Settings panel (WebGL2)", () => {
     // Picked on the chess set, it lays on from above at 30%, keeping its squares.
     await page.evaluate(() => window.__splashery.app.setPattern({ id: "flag", flag: "fr" }));
     await expect.poll(pattern).toMatchObject({ projection: "top", amount: 0.3, detail: 1 });
-    await expect(page.locator("#toy-status")).toContainText("in the colours of France");
+    await expect(page.locator("#toy-status")).toContainText("in the colors of France");
     // The blob gets its own flag back, the usual way.
     await page.click(".chip[data-category='all']");
     await page.click(".toy-card[data-toy='blob']");
@@ -1166,7 +1166,7 @@ test.describe("Sports balls (WebGL2)", () => {
     const before = await canvas.screenshot({ type: "png" });
     await page.waitForFunction(() => document.querySelectorAll("#toy-flag option").length > 150);
     await page.selectOption("#toy-flag", "us");
-    await expect(page.locator("#toy-status")).toContainText("in the colours of the United States");
+    await expect(page.locator("#toy-status")).toContainText("in the colors of the United States");
     await page.waitForTimeout(1200);
     const after = await canvas.screenshot({ type: "png" });
     expect(await countDifferentPixels(page, before, after)).toBeGreaterThan(8000);
@@ -1714,7 +1714,7 @@ test.describe("Splashery on WebGPU", () => {
     await page.waitForTimeout(2500);
     const after = await canvas.screenshot({ type: "png" });
     expect(await countDifferentPixels(page, before, after)).toBeGreaterThan(3000);
-    // The kit shader variant (parts, behaviours) and the pattern layer on WebGPU.
+    // The kit shader variant (parts, behaviors) and the pattern layer on WebGPU.
     await page.click(".toy-card[data-toy='chest']");
     await waitForToy(page, "Treasure chest");
     const closed = await canvas.screenshot({ type: "png" });

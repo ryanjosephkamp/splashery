@@ -28,8 +28,11 @@ export function covFacts({ a, b, c }) {
   // Positive definite: a > 0 and det > 0 (both eigenvalues above 0). That is the whole rule. A
   // matrix whose smaller eigenvalue is tiny next to the larger one is still valid, but inverting
   // it loses accuracy (`thin`), which is a warning about numbers, not a failure of the rule.
-  // `flat` is only a determinant of zero up to rounding (a few units in the last place), measured
-  // against the matrix's own scale. It is not a tolerance on conditioning: [[1e-13, 0], [0, 1]] has
+  // `flat` means the determinant is zero up to rounding (a few units in the last place), measured
+  // against the matrix's own scale: "numerically near-singular". A determinant of 1e-15 next to
+  // entries of 1 is positive in exact arithmetic but cannot be told from 0 in double precision, so
+  // the demo reports it as numerically singular and does not say the determinant is exactly 0 (the
+  // page does that only when `det === 0`). It is not a tolerance on conditioning: [[1e-13, 0], [0, 1]] has
   // a determinant of 1e-13, two positive eigenvalues, and is valid (and `thin`). A trace of zero does
   // not make a matrix flat either: [[0.1, 0], [0, -0.1]] has determinant -0.01, an inverse, and one
   // eigenvalue of each sign.

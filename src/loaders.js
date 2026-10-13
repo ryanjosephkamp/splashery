@@ -363,9 +363,9 @@ export function resourceFromProps(stage, { count, props }) {
   return new pc.GSplatResource(stage.device, data, { prepareCenters: true });
 }
 
-// ---- Normalising --------------------------------------------------------------
+// ---- Normalizing --------------------------------------------------------------
 
-// Robust bounds of a resource's centres (ignores the outer 2% of floaters).
+// Robust bounds of a resource's centers (ignores the outer 2% of floaters).
 export function robustBounds(resource) {
   const centers = resource.centers || resource.gsplatData?.getCenters?.();
   const n = resource.numSplats || (centers ? centers.length / 3 : 0);

@@ -223,7 +223,7 @@ test.describe("the two new chapters", () => {
     const i = files.indexOf("unique.html");
     expect(files.slice(i + 1, i + 3)).toEqual(["built.html", "share.html"]);
     const cover = read("index.html");
-    // (Every manual link opens in a new tab since Manual r8, so the links carry target and rel.)
+    // (A link inside the manual opens in the same tab since Manual r9; the regex allows other attributes.)
     expect(cover).toMatch(/href="built\.html"[^>]*>How Splashery is built/);
     expect(cover).toMatch(/href="share\.html"[^>]*>Share links and QR codes/);
     const all = read("all.html");

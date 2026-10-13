@@ -1,0 +1,642 @@
+[
+  {
+    "prompt": "C57-P01",
+    "file": "cdx-hard-glass-jug",
+    "name": "Glass jug",
+    "category": "glass-water",
+    "scene": "A clear glass jug half-filled with water on an unmarked rustic wooden table in a fictional garden. Main jug is fully visible with a thin transparent handle and rim, a curved water meniscus, subtle sunlight caustics. Foreground pebbles, middle jug and table, background leafy shrubs with gentle depth of field.",
+    "generationPrompt": "Create one original fictional photorealistic landscape photograph, 1536 by 1024 composition with clear foreground, middle ground, and background, crisp natural materials and plausible three-dimensional depth. This is an AI-made stress-test source picture for photo-to-3D. Preserve physically realistic transparent surfaces, fine edges and reflections in the described scene. No people, human faces, logos, brands, writing, text, labels, signs, numerals, recognizable landmarks, or identifiable actual locations. Do not create a collage or grid. Animals when present are in profile or back view. A clear glass jug half-filled with water on an unmarked rustic wooden table in a fictional garden. Main jug is fully visible with a thin transparent handle and rim, a curved water meniscus, subtle sunlight caustics. Foreground pebbles, middle jug and table, background leafy shrubs with gentle depth of field.",
+    "generator": "OpenAI native image tool",
+    "generatorModel": "unknown",
+    "nativeSha256": "298b35de2924ddf11da0fe1b9a8d88e491f214471f67c0fa755a61b6616aa580",
+    "nativeDimensions": [1536, 1024],
+    "screening": {
+      "accepted": true,
+      "notes": "Clear transparent jug with a complete handle and visible waterline; no people, faces, text, branding, or recognizable place."
+    }
+  },
+  {
+    "prompt": "C57-P02",
+    "file": "cdx-hard-fish-bowl",
+    "name": "Fish bowl",
+    "category": "glass-water",
+    "scene": "A round clear glass fish bowl on a low rough stone garden ledge, one small orange fish seen strictly in side profile inside clean water above smooth gravel and a short aquatic plant. Full round rim and realistic refraction visible. Foreground textured ledge, middle fish bowl, background soft green garden foliage. No decorative patterns on bowl.",
+    "generationPrompt": "Create one original fictional photorealistic landscape photograph, 1536 by 1024 composition with clear foreground, middle ground, and background, crisp natural materials and plausible three-dimensional depth. This is an AI-made stress-test source picture for photo-to-3D. Preserve physically realistic transparent surfaces, fine edges and reflections in the described scene. No people, human faces, logos, brands, writing, text, labels, signs, numerals, recognizable landmarks, or identifiable actual locations. Do not create a collage or grid. Animals when present are in profile or back view. A round clear glass fish bowl on a low rough stone garden ledge, one small orange fish seen strictly in side profile inside clean water above smooth gravel and a short aquatic plant. Full round rim and realistic refraction visible. Foreground textured ledge, middle fish bowl, background soft green garden foliage. No decorative patterns on bowl.",
+    "generator": "OpenAI native image tool",
+    "generatorModel": "unknown",
+    "nativeSha256": "d01e2a5794598ca3f0681b34caf5b5626170e81786033d8787216d1fe151424d",
+    "nativeDimensions": [1536, 1024],
+    "screening": {
+      "accepted": true,
+      "notes": "Clear bowl, visible refraction, and one fish in profile; no people, text, branding, or identifiable place."
+    }
+  },
+  {
+    "prompt": "C57-P03",
+    "file": "cdx-hard-rainy-window",
+    "name": "Rainy window",
+    "category": "glass-water",
+    "scene": "An unmarked old greenhouse window pane in a fictional garden after rain, large sharply defined transparent raindrops on the near glass and delicate trails of water, the wooden frame visible along the edges. Behind the pane are terracotta pots and plants at middle distance and garden trees further back. Natural overcast daylight, believable refraction through droplets.",
+    "generationPrompt": "Create one original fictional photorealistic landscape photograph, 1536 by 1024 composition with clear foreground, middle ground, and background, crisp natural materials and plausible three-dimensional depth. This is an AI-made stress-test source picture for photo-to-3D. Preserve physically realistic transparent surfaces, fine edges and reflections in the described scene. No people, human faces, logos, brands, writing, text, labels, signs, numerals, recognizable landmarks, or identifiable actual locations. Do not create a collage or grid. Animals when present are in profile or back view. An unmarked old greenhouse window pane in a fictional garden after rain, large sharply defined transparent raindrops on the near glass and delicate trails of water, the wooden frame visible along the edges. Behind the pane are terracotta pots and plants at middle distance and garden trees further back. Natural overcast daylight, believable refraction through droplets.",
+    "generator": "OpenAI native image tool",
+    "generatorModel": "unknown",
+    "nativeSha256": "e3f5593da6733841e5e27ed37066a24e6ae03afc2587275f245fa9cb99e610b9",
+    "nativeDimensions": [1536, 1024],
+    "screening": {
+      "accepted": true,
+      "notes": "Transparent raindrops and water trails remain visible over plants at several depths; no people, text, branding, or identifiable place."
+    }
+  },
+  {
+    "prompt": "C57-P04",
+    "file": "cdx-hard-water-carafe",
+    "name": "Water carafe",
+    "category": "glass-water",
+    "scene": "A tall thin clear glass water carafe three-quarters full on a pale stone patio table, alongside a simple empty unmarked drinking glass. Main carafe fully visible with slender neck and realistic waterline, distinct rim, reflected garden highlights. Foreground table edge, middle carafe and glass, background lush plants and a distant fictional wooden wall.",
+    "generationPrompt": "Create one original fictional photorealistic landscape photograph, 1536 by 1024 composition with clear foreground, middle ground, and background, crisp natural materials and plausible three-dimensional depth. This is an AI-made stress-test source picture for photo-to-3D. Preserve physically realistic transparent surfaces, fine edges and reflections in the described scene. No people, human faces, logos, brands, writing, text, labels, signs, numerals, recognizable landmarks, or identifiable actual locations. Do not create a collage or grid. Animals when present are in profile or back view. A tall thin clear glass water carafe three-quarters full on a pale stone patio table, alongside a simple empty unmarked drinking glass. Main carafe fully visible with slender neck and realistic waterline, distinct rim, reflected garden highlights. Foreground table edge, middle carafe and glass, background lush plants and a distant fictional wooden wall.",
+    "generator": "OpenAI native image tool",
+    "generatorModel": "unknown",
+    "nativeSha256": "59aa77a746d17734ad8f7b7c63f083b9d9c9d324ff8b7983a2ef16f1c4b4238a",
+    "nativeDimensions": [1536, 1024],
+    "screening": {
+      "accepted": true,
+      "notes": "Slender carafe and empty glass preserve transparent rims and highlights; no people, faces, text, branding, or identifiable place."
+    }
+  },
+  {
+    "prompt": "C57-P05",
+    "file": "cdx-hard-submerged-stones",
+    "name": "Stones under water",
+    "category": "glass-water",
+    "scene": "A clear shallow pool in a fictional woodland stream, seen obliquely near ground level. Large wet smooth colored stones are sharply visible just under the clear water, delicate ripples bend their outlines, with glints and gentle caustics. Foreground mossy bank, middle submerged stones, background creek banks and soft green trees. No recognizable geography.",
+    "generationPrompt": "Create one original fictional photorealistic landscape photograph, 1536 by 1024 composition with clear foreground, middle ground, and background, crisp natural materials and plausible three-dimensional depth. This is an AI-made stress-test source picture for photo-to-3D. Preserve physically realistic transparent surfaces, fine edges and reflections in the described scene. No people, human faces, logos, brands, writing, text, labels, signs, numerals, recognizable landmarks, or identifiable actual locations. Do not create a collage or grid. Animals when present are in profile or back view. A clear shallow pool in a fictional woodland stream, seen obliquely near ground level. Large wet smooth colored stones are sharply visible just under the clear water, delicate ripples bend their outlines, with glints and gentle caustics. Foreground mossy bank, middle submerged stones, background creek banks and soft green trees. No recognizable geography.",
+    "generator": "OpenAI native image tool",
+    "generatorModel": "unknown",
+    "nativeSha256": "c07322360a4ed3999113114df466b086b0ec6b628f4c50f5145854158e3139b8",
+    "nativeDimensions": [1536, 1024],
+    "screening": {
+      "accepted": true,
+      "notes": "Submerged stones remain clearly visible through refracting water and small ripples; no people, text, branding, or identifiable place."
+    }
+  },
+  {
+    "prompt": "C57-P06",
+    "file": "cdx-hard-glass-terrarium",
+    "name": "Glass terrarium",
+    "category": "glass-water",
+    "scene": "A plain glass terrarium with thin dark metal edges on a weathered garden table. Inside are small ferns, soft moss, and gray stones. The clear glass panels show real transparent edge highlights and subtle reflections; a tiny amount of condensation is visible. Foreground wood grain, middle terrarium, background a fictional lush garden and tree trunks.",
+    "generationPrompt": "Create one original fictional photorealistic landscape photograph, 1536 by 1024 composition with clear foreground, middle ground, and background, crisp natural materials and plausible three-dimensional depth. This is an AI-made stress-test source picture for photo-to-3D. Preserve physically realistic transparent surfaces, fine edges and reflections in the described scene. No people, human faces, logos, brands, writing, text, labels, signs, numerals, recognizable landmarks, or identifiable actual locations. Do not create a collage or grid. Animals when present are in profile or back view. A plain glass terrarium with thin dark metal edges on a weathered garden table. Inside are small ferns, soft moss, and gray stones. The clear glass panels show real transparent edge highlights and subtle reflections; a tiny amount of condensation is visible. Foreground wood grain, middle terrarium, background a fictional lush garden and tree trunks.",
+    "generator": "OpenAI native image tool",
+    "generatorModel": "unknown",
+    "nativeSha256": "b62f79d941a71c8ac0e53af84f4c7f3210e6c6e0d95b42ab86cc50805aa9fef8",
+    "nativeDimensions": [1536, 1024],
+    "screening": {
+      "accepted": true,
+      "notes": "Transparent terrarium panels retain fine metal edges, condensation, and fern detail; no people, text, branding, or identifiable place."
+    }
+  },
+  {
+    "prompt": "C57-P07",
+    "file": "cdx-hard-cat-on-rug",
+    "name": "Cat on a rug",
+    "category": "hair-fur",
+    "scene": "A fluffy ginger cat sitting in strict side profile on a coarse plain woven rug on the floor of an empty fictional sunlit garden room. Individual wispy fur hairs and whiskers visible against the darker background. Foreground rug fibers, middle full cat body, background unmarked clay pots and soft plants through a window. No collar, tags, patterns resembling writing, or faces other than the cat's side profile.",
+    "generationPrompt": "Create one original fictional photorealistic landscape photograph, 1536 by 1024 composition with clear foreground, middle ground, and background, crisp natural materials and plausible three-dimensional depth. This is an AI-made stress-test source picture for photo-to-3D. Preserve physically realistic transparent surfaces, fine edges and reflections in the described scene. No people, human faces, logos, brands, writing, text, labels, signs, numerals, recognizable landmarks, or identifiable actual locations. Do not create a collage or grid. Animals when present are in profile or back view. A fluffy ginger cat sitting in strict side profile on a coarse plain woven rug on the floor of an empty fictional sunlit garden room. Individual wispy fur hairs and whiskers visible against the darker background. Foreground rug fibers, middle full cat body, background unmarked clay pots and soft plants through a window. No collar, tags, patterns resembling writing, or faces other than the cat's side profile.",
+    "generator": "OpenAI native image tool",
+    "generatorModel": "unknown",
+    "nativeSha256": "ccf48fc23a881fb81c99868c86624dbbeb0c1d1c58efd407f12f4c7d5227fa03",
+    "nativeDimensions": [1536, 1024],
+    "screening": {
+      "accepted": true,
+      "notes": "Cat is in side profile, with visible fine fur and whiskers against a layered room and garden; no people, human faces, text, or branding."
+    }
+  },
+  {
+    "prompt": "C57-P08",
+    "file": "cdx-hard-long-haired-dog",
+    "name": "Dog in grass",
+    "category": "hair-fur",
+    "scene": "A long-haired cream-colored dog standing in strict side profile amid tall summer grass in a completely fictional clearing. Whole body and fluffy tail visible, individual fur strands mixed with thin grass blades create fine detailed edges. Foreground grass, middle dog, background soft shrubs and trees. Natural gentle sunlight, no collar, tags, markings, or people.",
+    "generationPrompt": "Create one original fictional photorealistic landscape photograph, 1536 by 1024 composition with clear foreground, middle ground, and background, crisp natural materials and plausible three-dimensional depth. This is an AI-made stress-test source picture for photo-to-3D. Preserve physically realistic transparent surfaces, fine edges and reflections in the described scene. No people, human faces, logos, brands, writing, text, labels, signs, numerals, recognizable landmarks, or identifiable actual locations. Do not create a collage or grid. Animals when present are in profile or back view. A long-haired cream-colored dog standing in strict side profile amid tall summer grass in a completely fictional clearing. Whole body and fluffy tail visible, individual fur strands mixed with thin grass blades create fine detailed edges. Foreground grass, middle dog, background soft shrubs and trees. Natural gentle sunlight, no collar, tags, markings, or people.",
+    "generator": "OpenAI native image tool",
+    "generatorModel": "unknown",
+    "nativeSha256": "79308b12281816d3531aae45cc6e9cd504ec51c78cc88d6d184313a9239b0fde",
+    "nativeDimensions": [1536, 1024],
+    "screening": {
+      "accepted": true,
+      "notes": "Dog is in side profile, with long individual fur strands against tall grass; no people, human faces, text, branding, or identifiable place."
+    }
+  },
+  {
+    "prompt": "C57-P09",
+    "file": "cdx-hard-curled-cat",
+    "name": "Curled cat",
+    "category": "hair-fur",
+    "scene": "A long-haired gray cat sleeping curled on a plain thick knitted blanket over a rustic bench in a fictional empty garden room. View from the cat's side and slightly behind so its face is tucked away and not front facing. Wispy fur on tail and back crosses blanket loops. Foreground blanket fibers, middle curled cat, background plain unmarked pots and leafy window plants, soft afternoon daylight.",
+    "generationPrompt": "Create one original fictional photorealistic landscape photograph, 1536 by 1024 composition with clear foreground, middle ground, and background, crisp natural materials and plausible three-dimensional depth. This is an AI-made stress-test source picture for photo-to-3D. Preserve physically realistic transparent surfaces, fine edges and reflections in the described scene. No people, human faces, logos, brands, writing, text, labels, signs, numerals, recognizable landmarks, or identifiable actual locations. Do not create a collage or grid. Animals when present are in profile or back view. A long-haired gray cat sleeping curled on a plain thick knitted blanket over a rustic bench in a fictional empty garden room. View from the cat's side and slightly behind so its face is tucked away and not front facing. Wispy fur on tail and back crosses blanket loops. Foreground blanket fibers, middle curled cat, background plain unmarked pots and leafy window plants, soft afternoon daylight.",
+    "generator": "OpenAI native image tool",
+    "generatorModel": "unknown",
+    "nativeSha256": "98549dcdd5de9f59b7b50af79e6f1d9eb091d939bf6fde9b608075417158cce4",
+    "nativeDimensions": [1536, 1024],
+    "screening": {
+      "accepted": true,
+      "notes": "Curled cat hides its face; fine fur crosses detailed blanket loops with convincing foreground and room depth. No people, human faces, text, or branding."
+    }
+  },
+  {
+    "prompt": "C57-P10",
+    "file": "cdx-hard-rabbit-clover",
+    "name": "Rabbit in clover",
+    "category": "hair-fur",
+    "scene": "A fluffy brown rabbit sitting in strict side profile in thick clover in a fictional meadow. Entire rabbit visible, fine soft edge fur and detailed ears, tiny whiskers. Foreground clover leaves, middle rabbit with flowers, background soft tall grasses and distant anonymous shrubs. Natural morning light, no collar, text, people, or recognizable geography.",
+    "generationPrompt": "Create one original fictional photorealistic landscape photograph, 1536 by 1024 composition with clear foreground, middle ground, and background, crisp natural materials and plausible three-dimensional depth. This is an AI-made stress-test source picture for photo-to-3D. Preserve physically realistic transparent surfaces, fine edges and reflections in the described scene. No people, human faces, logos, brands, writing, text, labels, signs, numerals, recognizable landmarks, or identifiable actual locations. Do not create a collage or grid. Animals when present are in profile or back view. A fluffy brown rabbit sitting in strict side profile in thick clover in a fictional meadow. Entire rabbit visible, fine soft edge fur and detailed ears, tiny whiskers. Foreground clover leaves, middle rabbit with flowers, background soft tall grasses and distant anonymous shrubs. Natural morning light, no collar, text, people, or recognizable geography.",
+    "generator": "OpenAI native image tool",
+    "generatorModel": "unknown",
+    "nativeSha256": "e23a008ed2945d4184195d89d387ac361a00984b1fa1ccc80d6b3544850f73da",
+    "nativeDimensions": [1536, 1024],
+    "screening": {
+      "accepted": true,
+      "notes": "Rabbit is in side profile, with fine edge fur and clover layers. No people, human faces, text, branding, or identifiable place."
+    }
+  },
+  {
+    "prompt": "C57-P11",
+    "file": "cdx-hard-backlit-dog",
+    "name": "Backlit dog",
+    "category": "hair-fur",
+    "scene": "A shaggy russet-colored dog seen entirely from the back standing on a winding woodland path at golden hour, looking away from the camera. Its long fur and tail are backlit so individual fine hairs form a realistic delicate rim. Foreground path pebbles and grass, middle dog, background fictional trees and low sunlight through branches. No collar, tags, text, people, or animal front face.",
+    "generationPrompt": "Create one original fictional photorealistic landscape photograph, 1536 by 1024 composition with clear foreground, middle ground, and background, crisp natural materials and plausible three-dimensional depth. This is an AI-made stress-test source picture for photo-to-3D. Preserve physically realistic transparent surfaces, fine edges and reflections in the described scene. No people, human faces, logos, brands, writing, text, labels, signs, numerals, recognizable landmarks, or identifiable actual locations. Do not create a collage or grid. Animals when present are in profile or back view. A shaggy russet-colored dog seen entirely from the back standing on a winding woodland path at golden hour, looking away from the camera. Its long fur and tail are backlit so individual fine hairs form a realistic delicate rim. Foreground path pebbles and grass, middle dog, background fictional trees and low sunlight through branches. No collar, tags, text, people, or animal front face.",
+    "generator": "OpenAI native image tool",
+    "generatorModel": "unknown",
+    "nativeSha256": "9664b2e39f31f395fbc50d297349f4186a907d8ddf41c4e918b8e275b665ef9a",
+    "nativeDimensions": [1536, 1024],
+    "screening": {
+      "accepted": true,
+      "notes": "Dog is seen from behind, with realistic backlit fur along its silhouette. No people, human faces, text, branding, or identifiable place."
+    }
+  },
+  {
+    "prompt": "C57-P12",
+    "file": "cdx-hard-wool-fleece",
+    "name": "Wool fleece",
+    "category": "hair-fur",
+    "scene": "A still life of loose undyed cream wool fleece spilling from an unmarked shallow wicker basket on a rustic wooden bench in an empty fictional barn. Dense individual curls and flyaway wool fibers, a folded plain coarse fabric next to the basket. Foreground bench edge, middle basket and fleece, background rough wooden wall and plain clay pot in soft window light. No tools with marks, no people, no text.",
+    "generationPrompt": "Create one original fictional photorealistic landscape photograph, 1536 by 1024 composition with clear foreground, middle ground, and background, crisp natural materials and plausible three-dimensional depth. This is an AI-made stress-test source picture for photo-to-3D. Preserve physically realistic transparent surfaces, fine edges and reflections in the described scene. No people, human faces, logos, brands, writing, text, labels, signs, numerals, recognizable landmarks, or identifiable actual locations. Do not create a collage or grid. Animals when present are in profile or back view. A still life of loose undyed cream wool fleece spilling from an unmarked shallow wicker basket on a rustic wooden bench in an empty fictional barn. Dense individual curls and flyaway wool fibers, a folded plain coarse fabric next to the basket. Foreground bench edge, middle basket and fleece, background rough wooden wall and plain clay pot in soft window light. No tools with marks, no people, no text.",
+    "generator": "OpenAI native image tool",
+    "generatorModel": "unknown",
+    "nativeSha256": "c4952aef1e7681c4d37adac02801f8b78d420a23cf5a827f71689e9d1a7d2b68",
+    "nativeDimensions": [1536, 1024],
+    "screening": {
+      "accepted": true,
+      "notes": "Cream wool retains dense curls and fine loose fibers over wicker and wood; no people, faces, text, or branding."
+    }
+  },
+  {
+    "prompt": "C57-P13",
+    "file": "cdx-hard-bicycle-spokes",
+    "name": "Bicycle spokes",
+    "category": "thin-structures",
+    "scene": "An old plain dark green bicycle with no branding, no labels, and absolutely no tire lettering leaning beside a rough stone wall in a fictional garden. View in side profile, both complete thin wheels and all delicate metal spokes visible, a front wicker basket completely blank. Foreground uneven pebbled path, middle bicycle, background soft shrubs and a plain wooden gate. Natural daylight with slender spoke shadows.",
+    "generationPrompt": "Create one original fictional photorealistic landscape photograph, 1536 by 1024 composition with clear foreground, middle ground, and background, crisp natural materials and plausible three-dimensional depth. This is an AI-made stress-test source picture for photo-to-3D. Preserve physically realistic transparent surfaces, fine edges and reflections in the described scene. No people, human faces, logos, brands, writing, text, labels, signs, numerals, recognizable landmarks, or identifiable actual locations. Do not create a collage or grid. Animals when present are in profile or back view. An old plain dark green bicycle with no branding, no labels, and absolutely no tire lettering leaning beside a rough stone wall in a fictional garden. View in side profile, both complete thin wheels and all delicate metal spokes visible, a front wicker basket completely blank. Foreground uneven pebbled path, middle bicycle, background soft shrubs and a plain wooden gate. Natural daylight with slender spoke shadows.",
+    "generator": "OpenAI native image tool",
+    "generatorModel": "unknown",
+    "nativeSha256": "24db394c17b1e796c4e1ad9be695c56943d87746a1c39477a2774c2a178e6061",
+    "nativeDimensions": [1536, 1024],
+    "screening": {
+      "accepted": true,
+      "notes": "Unbranded bicycle retains fine metal spokes, a woven basket, and visible gaps against stone; no tire lettering, people, faces, or text."
+    }
+  },
+  {
+    "prompt": "C57-P14",
+    "file": "cdx-hard-wire-fence",
+    "name": "Wire fence",
+    "category": "thin-structures",
+    "scene": "A weathered wooden post-and-thin-wire fence crosses a fictional meadow diagonally away from the camera. Fine loosely woven galvanized wire strands and intersections stay physically delicate and clearly defined, some grass blades pass through the fence. Foreground pebbles and clover, middle nearest posts and wire mesh, background more fence posts shrinking away into soft trees. No barbed wire, no writing, no signs.",
+    "generationPrompt": "Create one original fictional photorealistic landscape photograph, 1536 by 1024 composition with clear foreground, middle ground, and background, crisp natural materials and plausible three-dimensional depth. This is an AI-made stress-test source picture for photo-to-3D. Preserve physically realistic transparent surfaces, fine edges and reflections in the described scene. No people, human faces, logos, brands, writing, text, labels, signs, numerals, recognizable landmarks, or identifiable actual locations. Do not create a collage or grid. Animals when present are in profile or back view. A weathered wooden post-and-thin-wire fence crosses a fictional meadow diagonally away from the camera. Fine loosely woven galvanized wire strands and intersections stay physically delicate and clearly defined, some grass blades pass through the fence. Foreground pebbles and clover, middle nearest posts and wire mesh, background more fence posts shrinking away into soft trees. No barbed wire, no writing, no signs.",
+    "generator": "OpenAI native image tool",
+    "generatorModel": "unknown",
+    "nativeSha256": "e7dcd32ea24aa44177ebecdd0acf0437be80b2c9c99331c2ca5fde58ba0006f0",
+    "nativeDimensions": [1536, 1024],
+    "screening": {
+      "accepted": true,
+      "notes": "Thin fence wire and intersections remain distinct across posts receding into the meadow; no people, text, branding, or identifiable place."
+    }
+  },
+  {
+    "prompt": "C57-P15",
+    "file": "cdx-hard-dew-web",
+    "name": "Dew on a web",
+    "category": "thin-structures",
+    "scene": "A delicate orb spider web hung between two thin bare twigs in a fictional garden, without a spider. Fine radial and spiral threads carry many individual transparent morning dew droplets; the web is a single slightly angled plane at middle distance, crisp and plausible. Foreground dark leaves partly visible at lower corners, middle entire web and supporting twigs, background deep green soft foliage, gentle side light.",
+    "generationPrompt": "Create one original fictional photorealistic landscape photograph, 1536 by 1024 composition with clear foreground, middle ground, and background, crisp natural materials and plausible three-dimensional depth. This is an AI-made stress-test source picture for photo-to-3D. Preserve physically realistic transparent surfaces, fine edges and reflections in the described scene. No people, human faces, logos, brands, writing, text, labels, signs, numerals, recognizable landmarks, or identifiable actual locations. Do not create a collage or grid. Animals when present are in profile or back view. A delicate orb spider web hung between two thin bare twigs in a fictional garden, without a spider. Fine radial and spiral threads carry many individual transparent morning dew droplets; the web is a single slightly angled plane at middle distance, crisp and plausible. Foreground dark leaves partly visible at lower corners, middle entire web and supporting twigs, background deep green soft foliage, gentle side light.",
+    "generator": "OpenAI native image tool",
+    "generatorModel": "unknown",
+    "nativeSha256": "50571c480eaadccbeaa1fbd376fc9fc95f086363f37b16b2440873e605d628df",
+    "nativeDimensions": [1536, 1024],
+    "screening": {
+      "accepted": true,
+      "notes": "Fine web threads and separate transparent droplets remain visible against layered leaves; no spider, people, faces, text, or branding."
+    }
+  },
+  {
+    "prompt": "C57-P16",
+    "file": "cdx-hard-bare-branches",
+    "name": "Bare branches",
+    "category": "thin-structures",
+    "scene": "A small leafless fruit tree with many very thin bare branches in a fictional winter garden. Whole tree visible from dark trunk to detailed interlacing twig tips against a pale blue-gray sky. Foreground fallen leaves and stones, middle tree, background anonymous low garden wall and several softly focused leafless trees. Natural restrained daylight, no buildings with signs, no people, no writing.",
+    "generationPrompt": "Create one original fictional photorealistic landscape photograph, 1536 by 1024 composition with clear foreground, middle ground, and background, crisp natural materials and plausible three-dimensional depth. This is an AI-made stress-test source picture for photo-to-3D. Preserve physically realistic transparent surfaces, fine edges and reflections in the described scene. No people, human faces, logos, brands, writing, text, labels, signs, numerals, recognizable landmarks, or identifiable actual locations. Do not create a collage or grid. Animals when present are in profile or back view. A small leafless fruit tree with many very thin bare branches in a fictional winter garden. Whole tree visible from dark trunk to detailed interlacing twig tips against a pale blue-gray sky. Foreground fallen leaves and stones, middle tree, background anonymous low garden wall and several softly focused leafless trees. Natural restrained daylight, no buildings with signs, no people, no writing.",
+    "generator": "OpenAI native image tool",
+    "generatorModel": "unknown",
+    "nativeSha256": "79e1ca762289c5e02cc0eb5041aaedfdb541a5c4ef6023810c1bd466b3d8b761",
+    "nativeDimensions": [1536, 1024],
+    "screening": {
+      "accepted": true,
+      "notes": "Bare twig tips are distinct against a pale sky, with a layered stone foreground; no people, faces, text, branding, or identifiable place."
+    }
+  },
+  {
+    "prompt": "C57-P17",
+    "file": "cdx-hard-wicker-chair",
+    "name": "Wicker chair",
+    "category": "thin-structures",
+    "scene": "An empty unmarked light brown wicker armchair on an uneven stone patio in a fictional garden. Angle shows whole chair from three-quarter side, intricate thin woven strands form airy gaps in back and sides, delicate curved legs and wicker joints visible. Foreground stone and a few leaves, middle chair, background plain garden wall and soft green trees. Natural side light, no patterned cushion, no people, no writing.",
+    "generationPrompt": "Create one original fictional photorealistic landscape photograph, 1536 by 1024 composition with clear foreground, middle ground, and background, crisp natural materials and plausible three-dimensional depth. This is an AI-made stress-test source picture for photo-to-3D. Preserve physically realistic transparent surfaces, fine edges and reflections in the described scene. No people, human faces, logos, brands, writing, text, labels, signs, numerals, recognizable landmarks, or identifiable actual locations. Do not create a collage or grid. Animals when present are in profile or back view. An empty unmarked light brown wicker armchair on an uneven stone patio in a fictional garden. Angle shows whole chair from three-quarter side, intricate thin woven strands form airy gaps in back and sides, delicate curved legs and wicker joints visible. Foreground stone and a few leaves, middle chair, background plain garden wall and soft green trees. Natural side light, no patterned cushion, no people, no writing.",
+    "generator": "OpenAI native image tool",
+    "generatorModel": "unknown",
+    "nativeSha256": "ead08be254b9b257d23adf2ebc2d66c5b6e6ecf1b9ede82dd4db851520c38434",
+    "nativeDimensions": [1536, 1024],
+    "screening": {
+      "accepted": true,
+      "notes": "Wicker chair retains thin strands and open gaps over a stone patio, with no people, faces, text, branding, or identifiable place."
+    }
+  },
+  {
+    "prompt": "C57-P18",
+    "file": "cdx-hard-fine-grass",
+    "name": "Fine grass",
+    "category": "thin-structures",
+    "scene": "A dense tuft of very fine meadow grass rising from a mossy rock by a fictional woodland path. Many thin individual arching blades and delicate seed heads overlap at different depths, crisp in the middle plane with natural blur before and behind. Foreground moss and pebbles, middle tall tuft, background woodland trunks and shaded ferns. Soft side-lit daylight, no people, no writing or identifiable place.",
+    "generationPrompt": "Create one original fictional photorealistic landscape photograph, 1536 by 1024 composition with clear foreground, middle ground, and background, crisp natural materials and plausible three-dimensional depth. This is an AI-made stress-test source picture for photo-to-3D. Preserve physically realistic transparent surfaces, fine edges and reflections in the described scene. No people, human faces, logos, brands, writing, text, labels, signs, numerals, recognizable landmarks, or identifiable actual locations. Do not create a collage or grid. Animals when present are in profile or back view. A dense tuft of very fine meadow grass rising from a mossy rock by a fictional woodland path. Many thin individual arching blades and delicate seed heads overlap at different depths, crisp in the middle plane with natural blur before and behind. Foreground moss and pebbles, middle tall tuft, background woodland trunks and shaded ferns. Soft side-lit daylight, no people, no writing or identifiable place.",
+    "generator": "OpenAI native image tool",
+    "generatorModel": "unknown",
+    "nativeSha256": "f0d186622814c07e9ed746dc4e4e588e1bfabc35df0e56d8982a15f3725c720e",
+    "nativeDimensions": [1536, 1024],
+    "screening": {
+      "accepted": true,
+      "notes": "Fine grass blades and seed heads overlap visibly at different depths against a shaded woodland; no people, text, branding, or identifiable place."
+    }
+  },
+  {
+    "prompt": "C57-P19",
+    "file": "cdx-hard-puddle-reflection",
+    "name": "Puddle reflection",
+    "category": "reflections",
+    "scene": "A still puddle on a rough cobblestone garden path after rain in a fictional empty garden. Low viewpoint with a thin rim of wet leaves; the water clearly reflects a nearby leafless tree and pale cloudy sky, gentle small ripples toward one edge. Foreground damp stones, middle reflective puddle, background real tree trunk and anonymous shrubs; mirrored branches are plausible and sharply defined. No people or signs.",
+    "generationPrompt": "Create one original fictional photorealistic landscape photograph, 1536 by 1024 composition with clear foreground, middle ground, and background, crisp natural materials and plausible three-dimensional depth. This is an AI-made stress-test source picture for photo-to-3D. Preserve physically realistic transparent surfaces, fine edges and reflections in the described scene. No people, human faces, logos, brands, writing, text, labels, signs, numerals, recognizable landmarks, or identifiable actual locations. Do not create a collage or grid. Animals when present are in profile or back view. A still puddle on a rough cobblestone garden path after rain in a fictional empty garden. Low viewpoint with a thin rim of wet leaves; the water clearly reflects a nearby leafless tree and pale cloudy sky, gentle small ripples toward one edge. Foreground damp stones, middle reflective puddle, background real tree trunk and anonymous shrubs; mirrored branches are plausible and sharply defined. No people or signs.",
+    "generator": "OpenAI native image tool",
+    "generatorModel": "unknown",
+    "nativeSha256": "332eabbfab5f4407b62a005394f9e6e2fff78c46dd76b62293c742f00d731450",
+    "nativeDimensions": [1536, 1024],
+    "screening": {
+      "accepted": true,
+      "notes": "Puddle preserves tree and sky reflections while the foreground cobbles stay distinct; no people, faces, text, branding, or identifiable place."
+    }
+  },
+  {
+    "prompt": "C57-P20",
+    "file": "cdx-hard-polished-floor",
+    "name": "Polished floor",
+    "category": "reflections",
+    "scene": "An empty fictional sunroom with a highly polished dark stone tile floor showing realistic soft reflections of arched plain windows, terracotta plants, and simple unmarked wooden furniture. Low camera height emphasizes reflected light across the foreground tiles. Middle room contains clay pots and an empty plain bench; background window reveals anonymous leafy garden. No people, art, books, labels, decorative writing, logos, or signage.",
+    "generationPrompt": "Create one original fictional photorealistic landscape photograph, 1536 by 1024 composition with clear foreground, middle ground, and background, crisp natural materials and plausible three-dimensional depth. This is an AI-made stress-test source picture for photo-to-3D. Preserve physically realistic transparent surfaces, fine edges and reflections in the described scene. No people, human faces, logos, brands, writing, text, labels, signs, numerals, recognizable landmarks, or identifiable actual locations. Do not create a collage or grid. Animals when present are in profile or back view. An empty fictional sunroom with a highly polished dark stone tile floor showing realistic soft reflections of arched plain windows, terracotta plants, and simple unmarked wooden furniture. Low camera height emphasizes reflected light across the foreground tiles. Middle room contains clay pots and an empty plain bench; background window reveals anonymous leafy garden. No people, art, books, labels, decorative writing, logos, or signage.",
+    "generator": "OpenAI native image tool",
+    "generatorModel": "unknown",
+    "nativeSha256": "2cbb68c5eab713dcfd294a6d9aeb692d380f53484dcd6fbe81fd29494292f9d4",
+    "nativeDimensions": [1536, 1024],
+    "screening": {
+      "accepted": true,
+      "notes": "Polished floor preserves broad reflected window light and plant silhouettes with room depth; no people, faces, text, branding, or identifiable place."
+    }
+  },
+  {
+    "prompt": "C57-P21",
+    "file": "cdx-hard-lake-reflection",
+    "name": "Lake reflection",
+    "category": "reflections",
+    "scene": "An anonymous fictional small lake with calm mirror-like water under gentle overcast morning light. Fine reeds and rounded stones fill the foreground shore, the midground water distinctly reflects a stand of birch trees on the opposite bank, background low soft forest and pale sky. Tiny ripples slightly bend the tree reflections. No mountains resembling famous peaks, no buildings, boats, people, text, or identifiable actual geography.",
+    "generationPrompt": "Create one original fictional photorealistic landscape photograph, 1536 by 1024 composition with clear foreground, middle ground, and background, crisp natural materials and plausible three-dimensional depth. This is an AI-made stress-test source picture for photo-to-3D. Preserve physically realistic transparent surfaces, fine edges and reflections in the described scene. No people, human faces, logos, brands, writing, text, labels, signs, numerals, recognizable landmarks, or identifiable actual locations. Do not create a collage or grid. Animals when present are in profile or back view. An anonymous fictional small lake with calm mirror-like water under gentle overcast morning light. Fine reeds and rounded stones fill the foreground shore, the midground water distinctly reflects a stand of birch trees on the opposite bank, background low soft forest and pale sky. Tiny ripples slightly bend the tree reflections. No mountains resembling famous peaks, no buildings, boats, people, text, or identifiable actual geography.",
+    "generator": "OpenAI native image tool",
+    "generatorModel": "unknown",
+    "nativeSha256": "54079132a1e911a31da0efd5977f96c3760d9fb19f977860f98e2648eced3cde",
+    "nativeDimensions": [1536, 1024],
+    "screening": {
+      "accepted": true,
+      "notes": "Lake retains birch-tree reflections with shoreline reeds and foreground rocks; no people, text, branding, or identifiable actual geography."
+    }
+  },
+  {
+    "prompt": "C57-P22",
+    "file": "cdx-hard-steel-teapot",
+    "name": "Steel teapot",
+    "category": "reflections",
+    "scene": "A simple plain polished stainless steel teapot without any writing, stamp, maker mark, or decoration sits on an unmarked rough wooden garden table beside a plain ceramic cup. Teapot is fully visible with physically realistic curved mirror reflections of nearby foliage and window, slender spout and handle clear. Foreground table grain, middle teapot, background anonymous shrubs and plain greenhouse wall. No people or portraits reflected anywhere.",
+    "generationPrompt": "Create one original fictional photorealistic landscape photograph, 1536 by 1024 composition with clear foreground, middle ground, and background, crisp natural materials and plausible three-dimensional depth. This is an AI-made stress-test source picture for photo-to-3D. Preserve physically realistic transparent surfaces, fine edges and reflections in the described scene. No people, human faces, logos, brands, writing, text, labels, signs, numerals, recognizable landmarks, or identifiable actual locations. Do not create a collage or grid. Animals when present are in profile or back view. A simple plain polished stainless steel teapot without any writing, stamp, maker mark, or decoration sits on an unmarked rough wooden garden table beside a plain ceramic cup. Teapot is fully visible with physically realistic curved mirror reflections of nearby foliage and window, slender spout and handle clear. Foreground table grain, middle teapot, background anonymous shrubs and plain greenhouse wall. No people or portraits reflected anywhere.",
+    "generator": "OpenAI native image tool",
+    "generatorModel": "unknown",
+    "nativeSha256": "a157d352e12c42d27fa14d56f8d2f1e74ea17a2ec2c9bc17fc0efbe761e3008a",
+    "nativeDimensions": [1536, 1024],
+    "screening": {
+      "accepted": true,
+      "notes": "Plain steel teapot retains curved mirror reflections, a slender spout, and a complete handle; no person or face is reflected, and no text or branding is visible."
+    }
+  },
+  {
+    "prompt": "C57-P23",
+    "file": "cdx-hard-rainy-courtyard",
+    "name": "Rain-soaked courtyard",
+    "category": "reflections",
+    "scene": "An entirely fictional empty modest garden courtyard after rain. Wet uneven brick paving stretches through foreground, reflecting leafy plants, soft blue-gray sky, and a simple unmarked wooden bench at middle distance. Plain stucco walls and clay pots in background; no ornate architecture, no gates with lettering, no signs. Low camera viewpoint emphasizes glistening paving and several small puddles, plausible calm natural reflections.",
+    "generationPrompt": "Create one original fictional photorealistic landscape photograph, 1536 by 1024 composition with clear foreground, middle ground, and background, crisp natural materials and plausible three-dimensional depth. This is an AI-made stress-test source picture for photo-to-3D. Preserve physically realistic transparent surfaces, fine edges and reflections in the described scene. No people, human faces, logos, brands, writing, text, labels, signs, numerals, recognizable landmarks, or identifiable actual locations. Do not create a collage or grid. Animals when present are in profile or back view. An entirely fictional empty modest garden courtyard after rain. Wet uneven brick paving stretches through foreground, reflecting leafy plants, soft blue-gray sky, and a simple unmarked wooden bench at middle distance. Plain stucco walls and clay pots in background; no ornate architecture, no gates with lettering, no signs. Low camera viewpoint emphasizes glistening paving and several small puddles, plausible calm natural reflections.",
+    "generator": "OpenAI native image tool",
+    "generatorModel": "unknown",
+    "nativeSha256": "9b4354f5aec82e802d6dfe10def7b9b83b181e72344d9650dbfd2573804007e0",
+    "nativeDimensions": [1536, 1024],
+    "screening": {
+      "accepted": true,
+      "notes": "Wet brick courtyard retains reflected sky and plants through irregular puddles; no people, faces, text, branding, or identifiable place."
+    }
+  },
+  {
+    "prompt": "C57-P24",
+    "file": "cdx-hard-reflecting-pool",
+    "name": "Reflecting pool",
+    "category": "reflections",
+    "scene": "A plain rectangular shallow reflecting pool in an entirely fictional quiet private garden, bordered by rough pale stone with a few scattered wet leaves. Foreground stone edge and pool surface, middle reflected tree canopy and a simple unmarked wooden pergola, background shrubs and anonymous low garden wall. Realistic still water with gentle ripples and reflections that remain sharp near center. No landmarks, elaborate monuments, writing, people, or statues.",
+    "generationPrompt": "Create one original fictional photorealistic landscape photograph, 1536 by 1024 composition with clear foreground, middle ground, and background, crisp natural materials and plausible three-dimensional depth. This is an AI-made stress-test source picture for photo-to-3D. Preserve physically realistic transparent surfaces, fine edges and reflections in the described scene. No people, human faces, logos, brands, writing, text, labels, signs, numerals, recognizable landmarks, or identifiable actual locations. Do not create a collage or grid. Animals when present are in profile or back view. A plain rectangular shallow reflecting pool in an entirely fictional quiet private garden, bordered by rough pale stone with a few scattered wet leaves. Foreground stone edge and pool surface, middle reflected tree canopy and a simple unmarked wooden pergola, background shrubs and anonymous low garden wall. Realistic still water with gentle ripples and reflections that remain sharp near center. No landmarks, elaborate monuments, writing, people, or statues.",
+    "generator": "OpenAI native image tool",
+    "generatorModel": "unknown",
+    "nativeSha256": "07aaf2ba511ef25efa968e00b828d0e45c8f9d286b13ed912290d916b831873a",
+    "nativeDimensions": [1536, 1024],
+    "screening": {
+      "accepted": true,
+      "notes": "Reflecting pool preserves pergola and tree reflections with transparent near-edge water; no people, faces, text, branding, or recognizable landmark."
+    }
+  },
+  {
+    "prompt": "C57-P25",
+    "file": "cdx-hard-lanterns",
+    "name": "Lanterns at night",
+    "category": "low-light",
+    "scene": "Three plain unmarked metal-and-glass candle lanterns at different depths on an uneven stone garden path at blue-hour nightfall in a fictional garden. Near lantern is largest with a warm small flame visible through clear glass, the other two recede toward soft plants and a dark low wooden fence. Foreground textured stone and small leaves, middle lanterns, background dusky shrubs and pale twilight sky. Realistic low light, shadow texture preserved, no people or writing.",
+    "generationPrompt": "Create one original fictional photorealistic landscape photograph, 1536 by 1024 composition with clear foreground, middle ground, and background, crisp natural materials and plausible three-dimensional depth. This is an AI-made stress-test source picture for photo-to-3D. Preserve physically realistic transparent surfaces, fine edges and reflections in the described scene. No people, human faces, logos, brands, writing, text, labels, signs, numerals, recognizable landmarks, or identifiable actual locations. Do not create a collage or grid. Animals when present are in profile or back view. Three plain unmarked metal-and-glass candle lanterns at different depths on an uneven stone garden path at blue-hour nightfall in a fictional garden. Near lantern is largest with a warm small flame visible through clear glass, the other two recede toward soft plants and a dark low wooden fence. Foreground textured stone and small leaves, middle lanterns, background dusky shrubs and pale twilight sky. Realistic low light, shadow texture preserved, no people or writing.",
+    "generator": "OpenAI native image tool",
+    "generatorModel": "unknown",
+    "nativeSha256": "2c63eed2234eee57a09fb3b3eae190b6391d19975270d0ecdd4c27a7fbfa6ffe",
+    "nativeDimensions": [1536, 1024],
+    "screening": {
+      "accepted": true,
+      "notes": "Lantern glass, warm candle flames, stone texture, and receding depth remain visible in low light; no people, faces, text, branding, or identifiable place."
+    }
+  },
+  {
+    "prompt": "C57-P26",
+    "file": "cdx-hard-campfire",
+    "name": "Campfire",
+    "category": "low-light",
+    "scene": "A small campfire burning among stacked logs inside a rough stone fire ring in a fictional woodland clearing at twilight. Delicate orange flames, a few tiny sparks, warm light on log grain and nearby rocks; no humans or gear anywhere. Foreground gravel and fallen leaves, middle logs and fire, background softly visible tall dark trees and muted blue evening sky. Preserve realistic low-light detail in shadows rather than solid black.",
+    "generationPrompt": "Create one original fictional photorealistic landscape photograph, 1536 by 1024 composition with clear foreground, middle ground, and background, crisp natural materials and plausible three-dimensional depth. This is an AI-made stress-test source picture for photo-to-3D. Preserve physically realistic transparent surfaces, fine edges and reflections in the described scene. No people, human faces, logos, brands, writing, text, labels, signs, numerals, recognizable landmarks, or identifiable actual locations. Do not create a collage or grid. Animals when present are in profile or back view. A small campfire burning among stacked logs inside a rough stone fire ring in a fictional woodland clearing at twilight. Delicate orange flames, a few tiny sparks, warm light on log grain and nearby rocks; no humans or gear anywhere. Foreground gravel and fallen leaves, middle logs and fire, background softly visible tall dark trees and muted blue evening sky. Preserve realistic low-light detail in shadows rather than solid black.",
+    "generator": "OpenAI native image tool",
+    "generatorModel": "unknown",
+    "nativeSha256": "c0cb5b14a79b6038da9b6b0414bee81544a59494beca6341bbfb8a8c85f9dae5",
+    "nativeDimensions": [1536, 1024],
+    "screening": {
+      "accepted": true,
+      "notes": "Firelight illuminates log grain and stone edges while shadowed woodland remains discernible; no people, faces, text, branding, or identifiable place."
+    }
+  },
+  {
+    "prompt": "C57-P27",
+    "file": "cdx-hard-candle-still-life",
+    "name": "Candle still life",
+    "category": "low-light",
+    "scene": "An original low-light still life in an empty fictional rustic room. Three unmarked cream wax candles with natural flames and melted wax edges sit on a plain wood table alongside a smooth gray pebble and a small bare twig in an unmarked clay cup. Foreground tabletop grain, middle candles and objects, background rough plain wall and a softly visible window frame at night. Warm light, detailed shadow texture, no books, labels, people, signs, or writing.",
+    "generationPrompt": "Create one original fictional photorealistic landscape photograph, 1536 by 1024 composition with clear foreground, middle ground, and background, crisp natural materials and plausible three-dimensional depth. This is an AI-made stress-test source picture for photo-to-3D. Preserve physically realistic transparent surfaces, fine edges and reflections in the described scene. No people, human faces, logos, brands, writing, text, labels, signs, numerals, recognizable landmarks, or identifiable actual locations. Do not create a collage or grid. Animals when present are in profile or back view. An original low-light still life in an empty fictional rustic room. Three unmarked cream wax candles with natural flames and melted wax edges sit on a plain wood table alongside a smooth gray pebble and a small bare twig in an unmarked clay cup. Foreground tabletop grain, middle candles and objects, background rough plain wall and a softly visible window frame at night. Warm light, detailed shadow texture, no books, labels, people, signs, or writing.",
+    "generator": "OpenAI native image tool",
+    "generatorModel": "unknown",
+    "nativeSha256": "7da3ecbcddf95cb110105567d325ad0d3cdd4c0eccf4d8f8f8e4938bf2517534",
+    "nativeDimensions": [1536, 1024],
+    "screening": {
+      "accepted": true,
+      "notes": "Candle flames, melting wax, twig edges, and the shadowed tabletop remain distinct; no people, faces, text, or branding."
+    }
+  },
+  {
+    "prompt": "C57-P28",
+    "file": "cdx-hard-moonlit-greenhouse",
+    "name": "Moonlit greenhouse",
+    "category": "low-light",
+    "scene": "The exterior corner of a small empty fictional greenhouse on a moonlit night, simple thin dark wood frame and clear glass panes reflecting cool sky. Through glass are rows of unmarked terracotta pots and leafy plants at several depths. Foreground wet stones and a fern, middle greenhouse corner, background anonymous tree silhouettes under soft silver-blue moonlight. A pale moon may be visible, no artificial text, signs, people, human faces, or logos. Low-light photograph with shadow detail retained.",
+    "generationPrompt": "Create one original fictional photorealistic landscape photograph, 1536 by 1024 composition with clear foreground, middle ground, and background, crisp natural materials and plausible three-dimensional depth. This is an AI-made stress-test source picture for photo-to-3D. Preserve physically realistic transparent surfaces, fine edges and reflections in the described scene. No people, human faces, logos, brands, writing, text, labels, signs, numerals, recognizable landmarks, or identifiable actual locations. Do not create a collage or grid. Animals when present are in profile or back view. The exterior corner of a small empty fictional greenhouse on a moonlit night, simple thin dark wood frame and clear glass panes reflecting cool sky. Through glass are rows of unmarked terracotta pots and leafy plants at several depths. Foreground wet stones and a fern, middle greenhouse corner, background anonymous tree silhouettes under soft silver-blue moonlight. A pale moon may be visible, no artificial text, signs, people, human faces, or logos. Low-light photograph with shadow detail retained.",
+    "generator": "OpenAI native image tool",
+    "generatorModel": "unknown",
+    "nativeSha256": "20df5e1dd0388abc38b1250099e8a601756731d76c1f07d6bb3cf7846a1cc7e4",
+    "nativeDimensions": [1536, 1024],
+    "screening": {
+      "accepted": true,
+      "notes": "Moonlit glass reflections and plants remain visible over wet foreground stones; no people, faces, text, branding, or recognizable actual place."
+    }
+  },
+  {
+    "prompt": "C57-P29",
+    "file": "cdx-hard-shed-lamps",
+    "name": "Lamps in a potting shed",
+    "category": "low-light",
+    "scene": "Two plain unmarked warm oil lamps at different depths on a rough wooden potting bench inside an empty fictional garden shed at night. Their clear glass chimneys and small flames cast warm light on clay pots, unmarked gardening tools, tangled roots and soil. Foreground bench edge and a clay saucer, middle closest lamp and pots, background second lamp and wooden shed wall with night window. Preserve low-light texture. No labels, packaged goods, writing, people, faces, or logos.",
+    "generationPrompt": "Create one original fictional photorealistic landscape photograph, 1536 by 1024 composition with clear foreground, middle ground, and background, crisp natural materials and plausible three-dimensional depth. This is an AI-made stress-test source picture for photo-to-3D. Preserve physically realistic transparent surfaces, fine edges and reflections in the described scene. No people, human faces, logos, brands, writing, text, labels, signs, numerals, recognizable landmarks, or identifiable actual locations. Do not create a collage or grid. Animals when present are in profile or back view. Two plain unmarked warm oil lamps at different depths on a rough wooden potting bench inside an empty fictional garden shed at night. Their clear glass chimneys and small flames cast warm light on clay pots, unmarked gardening tools, tangled roots and soil. Foreground bench edge and a clay saucer, middle closest lamp and pots, background second lamp and wooden shed wall with night window. Preserve low-light texture. No labels, packaged goods, writing, people, faces, or logos.",
+    "generator": "OpenAI native image tool",
+    "generatorModel": "unknown",
+    "nativeSha256": "7f26ce5a4ad92136fe59b25d314f6435415850c3ce2edb8bfd63d10df38e3a97",
+    "nativeDimensions": [1536, 1024],
+    "screening": {
+      "accepted": true,
+      "notes": "Plain lamp glass and warm flames remain distinct amid roots, tools, and pots at different depths; no people, faces, text, branding, or identifiable place."
+    }
+  },
+  {
+    "prompt": "C57-P30",
+    "file": "cdx-hard-fire-bowl",
+    "name": "Fire bowl at dusk",
+    "category": "low-light",
+    "scene": "A plain round dark steel fire bowl with three simple legs on a rough stone patio at blue-hour dusk in a completely fictional garden. Small logs and delicate orange flames inside, glowing embers and subtle warm reflections on bowl rim. Foreground damp patio stones, middle full bowl and thin legs, background soft grasses, low wall, and anonymous tree silhouettes. No people, signs, brands, text, or recognizable place; shadow texture remains visible.",
+    "generationPrompt": "Create one original fictional photorealistic landscape photograph, 1536 by 1024 composition with clear foreground, middle ground, and background, crisp natural materials and plausible three-dimensional depth. This is an AI-made stress-test source picture for photo-to-3D. Preserve physically realistic transparent surfaces, fine edges and reflections in the described scene. No people, human faces, logos, brands, writing, text, labels, signs, numerals, recognizable landmarks, or identifiable actual locations. Do not create a collage or grid. Animals when present are in profile or back view. A plain round dark steel fire bowl with three simple legs on a rough stone patio at blue-hour dusk in a completely fictional garden. Small logs and delicate orange flames inside, glowing embers and subtle warm reflections on bowl rim. Foreground damp patio stones, middle full bowl and thin legs, background soft grasses, low wall, and anonymous tree silhouettes. No people, signs, brands, text, or recognizable place; shadow texture remains visible.",
+    "generator": "OpenAI native image tool",
+    "generatorModel": "unknown",
+    "nativeSha256": "8b03bedb1298c5ed6e80d79a9e0005103a3253263735694a9042bb9b7e5f35fa",
+    "nativeDimensions": [1536, 1024],
+    "screening": {
+      "accepted": true,
+      "notes": "Fire bowl retains delicate flames, ember light, a defined rim, and slender legs over wet stones; no people, faces, text, branding, or identifiable place."
+    }
+  },
+  {
+    "prompt": "C57-P31",
+    "file": "cdx-hard-beetle-leaf",
+    "name": "Beetle on a leaf",
+    "category": "macro",
+    "scene": "A photorealistic macro landscape photograph of a small iridescent green beetle in strict side profile on a fresh green leaf in a fictional woodland. Entire insect visible with believable six legs, thin antennae, crisp shell texture; a few transparent dew beads along leaf veins. Foreground leaf edge softly blurred, middle beetle and leaf vein sharp, background softly layered green foliage. Natural diffuse morning light, no humans, text, logos, or fantasy anatomy.",
+    "generationPrompt": "Create one original fictional photorealistic landscape photograph, 1536 by 1024 composition with clear foreground, middle ground, and background, crisp natural materials and plausible three-dimensional depth. This is an AI-made stress-test source picture for photo-to-3D. Preserve physically realistic transparent surfaces, fine edges and reflections in the described scene. No people, human faces, logos, brands, writing, text, labels, signs, numerals, recognizable landmarks, or identifiable actual locations. Do not create a collage or grid. Animals when present are in profile or back view. A photorealistic macro landscape photograph of a small iridescent green beetle in strict side profile on a fresh green leaf in a fictional woodland. Entire insect visible with believable six legs, thin antennae, crisp shell texture; a few transparent dew beads along leaf veins. Foreground leaf edge softly blurred, middle beetle and leaf vein sharp, background softly layered green foliage. Natural diffuse morning light, no humans, text, logos, or fantasy anatomy.",
+    "generator": "OpenAI native image tool",
+    "generatorModel": "unknown",
+    "nativeSha256": "d6c63c8969cf78a3de1e732a6cfbfe5820ffbb6e8f05891d51db9112a66088fc",
+    "nativeDimensions": [1536, 1024],
+    "screening": {
+      "accepted": true,
+      "notes": "Beetle is in profile with crisp iridescent shell, fine antennae, leaf veins, and dew; no people, human faces, text, or branding."
+    }
+  },
+  {
+    "prompt": "C57-P32",
+    "file": "cdx-hard-frost-crystals",
+    "name": "Frost crystals",
+    "category": "macro",
+    "scene": "A photorealistic macro landscape photograph of intricate white frost crystals coating the curled edge of a fallen brown leaf and a slender twig in a fictional garden. Delicate branching ice needles remain translucent and distinct; sharp middle plane, soft foreground moss, background muted soft winter foliage and stone. Cool natural morning side light, plausible tiny scale, no people, text, logos, or recognizable place.",
+    "generationPrompt": "Create one original fictional photorealistic landscape photograph, 1536 by 1024 composition with clear foreground, middle ground, and background, crisp natural materials and plausible three-dimensional depth. This is an AI-made stress-test source picture for photo-to-3D. Preserve physically realistic transparent surfaces, fine edges and reflections in the described scene. No people, human faces, logos, brands, writing, text, labels, signs, numerals, recognizable landmarks, or identifiable actual locations. Do not create a collage or grid. Animals when present are in profile or back view. A photorealistic macro landscape photograph of intricate white frost crystals coating the curled edge of a fallen brown leaf and a slender twig in a fictional garden. Delicate branching ice needles remain translucent and distinct; sharp middle plane, soft foreground moss, background muted soft winter foliage and stone. Cool natural morning side light, plausible tiny scale, no people, text, logos, or recognizable place.",
+    "generator": "OpenAI native image tool",
+    "generatorModel": "unknown",
+    "nativeSha256": "043193af84e8d1cf2ccd7ce8320180d847b3022a3b3daea39f06472a8486a09f",
+    "nativeDimensions": [1536, 1024],
+    "screening": {
+      "accepted": true,
+      "notes": "Frost retains translucent branching crystal edges on leaf and twig above moss; no people, faces, text, branding, or identifiable place."
+    }
+  },
+  {
+    "prompt": "C57-P33",
+    "file": "cdx-hard-dew-fern",
+    "name": "Dew on a fern",
+    "category": "macro",
+    "scene": "A photorealistic close macro landscape photograph of a fresh green fern frond covered in separate transparent morning dew droplets in a fictional woodland. Thin tiny leaflets and curled young tips cross each other at several depths, the central frond and round droplets sharply in focus. Foreground moss softly blurred, middle fern sharp, background dark layered ferns and tree bark with gentle blur. Physically real clear droplets and delicate plant edges, no text, logos, people, or actual recognizable place.",
+    "generationPrompt": "Create one original fictional photorealistic landscape photograph, 1536 by 1024 composition with clear foreground, middle ground, and background, crisp natural materials and plausible three-dimensional depth. This is an AI-made stress-test source picture for photo-to-3D. Preserve physically realistic transparent surfaces, fine edges and reflections in the described scene. No people, human faces, logos, brands, writing, text, labels, signs, numerals, recognizable landmarks, or identifiable actual locations. Do not create a collage or grid. Animals when present are in profile or back view. A photorealistic close macro landscape photograph of a fresh green fern frond covered in separate transparent morning dew droplets in a fictional woodland. Thin tiny leaflets and curled young tips cross each other at several depths, the central frond and round droplets sharply in focus. Foreground moss softly blurred, middle fern sharp, background dark layered ferns and tree bark with gentle blur. Physically real clear droplets and delicate plant edges, no text, logos, people, or actual recognizable place.",
+    "generator": "OpenAI native image tool",
+    "generatorModel": "unknown",
+    "nativeSha256": "003e27abe3634632d6a871a4d6b20387fa7eb54a75c08382031b1d70d41b97ca",
+    "nativeDimensions": [1536, 1024],
+    "screening": {
+      "accepted": true,
+      "notes": "Fern leaflets, curled tips, and separate clear dew droplets retain crisp fine edges at several depths; no people, faces, text, branding, or identifiable place."
+    }
+  },
+  {
+    "prompt": "C57-P34",
+    "file": "cdx-hard-snail-shell",
+    "name": "Snail and wet moss",
+    "category": "macro",
+    "scene": "A photorealistic macro landscape photograph of a small brown garden snail in strict side profile carrying a detailed spiral shell across a lush wet mossy log in a fictional garden. Complete snail visible with two delicate raised eye stalks, fine shell ridges and tiny wet glints. Foreground close moss softly blurred, middle snail and moss sharp, background soft bark and anonymous green plants. Natural cloudy daylight, no people, human faces, writing, logos, or actual place.",
+    "generationPrompt": "Create one original fictional photorealistic landscape photograph, 1536 by 1024 composition with clear foreground, middle ground, and background, crisp natural materials and plausible three-dimensional depth. This is an AI-made stress-test source picture for photo-to-3D. Preserve physically realistic transparent surfaces, fine edges and reflections in the described scene. No people, human faces, logos, brands, writing, text, labels, signs, numerals, recognizable landmarks, or identifiable actual locations. Do not create a collage or grid. Animals when present are in profile or back view. A photorealistic macro landscape photograph of a small brown garden snail in strict side profile carrying a detailed spiral shell across a lush wet mossy log in a fictional garden. Complete snail visible with two delicate raised eye stalks, fine shell ridges and tiny wet glints. Foreground close moss softly blurred, middle snail and moss sharp, background soft bark and anonymous green plants. Natural cloudy daylight, no people, human faces, writing, logos, or actual place.",
+    "generator": "OpenAI native image tool",
+    "generatorModel": "unknown",
+    "nativeSha256": "620bb89ec2b26058ab60b18b0148c2b8e3e2cd48d203a147b470935d5111dce1",
+    "nativeDimensions": [1536, 1024],
+    "screening": {
+      "accepted": true,
+      "notes": "Snail appears in side profile with a detailed spiral shell, fine eye stalks, and wet moss texture; no people, human faces, text, branding, or identifiable place."
+    }
+  },
+  {
+    "prompt": "C57-P35",
+    "file": "cdx-hard-feather-lichen",
+    "name": "Feather on lichen",
+    "category": "macro",
+    "scene": "A single naturally shed small pale gray feather resting diagonally on a lichen-covered dark rock, photographed close in landscape macro format in a fictional woodland. Delicate separate feather barbs and wispy soft down cross the rock's textured lichen; no live bird. Foreground textured moss softly blurred, middle feather and lichen sharply focused, background soft woodland floor and fern fronds. Diffuse side light, no people, human faces, text, brands, or actual recognizable geography.",
+    "generationPrompt": "Create one original fictional photorealistic landscape photograph, 1536 by 1024 composition with clear foreground, middle ground, and background, crisp natural materials and plausible three-dimensional depth. This is an AI-made stress-test source picture for photo-to-3D. Preserve physically realistic transparent surfaces, fine edges and reflections in the described scene. No people, human faces, logos, brands, writing, text, labels, signs, numerals, recognizable landmarks, or identifiable actual locations. Do not create a collage or grid. Animals when present are in profile or back view. A single naturally shed small pale gray feather resting diagonally on a lichen-covered dark rock, photographed close in landscape macro format in a fictional woodland. Delicate separate feather barbs and wispy soft down cross the rock's textured lichen; no live bird. Foreground textured moss softly blurred, middle feather and lichen sharply focused, background soft woodland floor and fern fronds. Diffuse side light, no people, human faces, text, brands, or actual recognizable geography.",
+    "generator": "OpenAI native image tool",
+    "generatorModel": "unknown",
+    "nativeSha256": "4147b8cac9d5a52919c64c1326251bf243b1ce0e361b36e659b761fc192fb696",
+    "nativeDimensions": [1536, 1024],
+    "screening": {
+      "accepted": true,
+      "notes": "Separate feather barbs and wispy down remain distinct over detailed lichen and rock; no people, faces, text, branding, or identifiable place."
+    }
+  },
+  {
+    "prompt": "C57-P36",
+    "file": "cdx-hard-workshop-bench",
+    "name": "Workshop bench",
+    "category": "dense-clutter",
+    "scene": "A densely cluttered plain woodworking bench in an empty fictional small workshop. Many unmarked wooden blocks, clamps, small hand planes, plain metal nails in a shallow wooden tray, coiled copper wire, loose wood curls, and blank-handled chisels overlap at different depths. Foreground bench edge and wood shavings, middle dense tools and blocks, background rough wooden shelves with plain jars and boards. Natural window light. Absolutely no rulers, tape measures, numerals, books, labels, packaging, logos, maker stamps, people, or writing anywhere.",
+    "generationPrompt": "Create one original fictional photorealistic landscape photograph, 1536 by 1024 composition with clear foreground, middle ground, and background, crisp natural materials and plausible three-dimensional depth. This is an AI-made stress-test source picture for photo-to-3D. Preserve physically realistic transparent surfaces, fine edges and reflections in the described scene. No people, human faces, logos, brands, writing, text, labels, signs, numerals, recognizable landmarks, or identifiable actual locations. Do not create a collage or grid. Animals when present are in profile or back view. A densely cluttered plain woodworking bench in an empty fictional small workshop. Many unmarked wooden blocks, clamps, small hand planes, plain metal nails in a shallow wooden tray, coiled copper wire, loose wood curls, and blank-handled chisels overlap at different depths. Foreground bench edge and wood shavings, middle dense tools and blocks, background rough wooden shelves with plain jars and boards. Natural window light. Absolutely no rulers, tape measures, numerals, books, labels, packaging, logos, maker stamps, people, or writing anywhere.",
+    "generator": "OpenAI native image tool",
+    "generatorModel": "unknown",
+    "nativeSha256": "df112060d71ba26ada2815cf70ad07b95ee034b0ec05bb740919c2ee99fcbbba",
+    "nativeDimensions": [1536, 1024],
+    "screening": {
+      "accepted": true,
+      "notes": "Overlapping unmarked tools, wood blocks, curls, nails, and coiled wire fill a workshop bench at several depths; jars, reflective metal, and window show no people, faces, text, or branding."
+    }
+  },
+  {
+    "prompt": "C57-P37",
+    "file": "cdx-hard-market-stall",
+    "name": "Market stall",
+    "category": "dense-clutter",
+    "scene": "A densely layered produce stall under a plain unmarked cloth canopy in an empty completely fictional open-air market. Many rough unmarked wooden crates hold colorful apples, pears, oranges, tomatoes, squash, eggplants, and leafy vegetables, with woven baskets and loose produce overlapping at several depths. Foreground baskets and scattered leaves, middle stacked full crates and fruit, background further crates, plain canopy fabric, and anonymous stone wall. Crisp fruit skin, woven fibers, and wood grain under soft natural morning light with solid depth. Absolutely no people, human faces, signs, writing, labels, numerals, price tags, logos, branded packaging, or recognizable actual place.",
+    "generationPrompt": "Create one original fictional photorealistic landscape photograph, 1536 by 1024 composition with clear foreground, middle ground, and background, crisp natural materials and plausible three-dimensional depth. This is an AI-made stress-test source picture for photo-to-3D. Preserve physically realistic transparent surfaces, fine edges and reflections in the described scene. No people, human faces, logos, brands, writing, text, labels, signs, numerals, recognizable landmarks, or identifiable actual locations. Do not create a collage or grid. Animals when present are in profile or back view. A densely layered produce stall under a plain unmarked cloth canopy in an empty completely fictional open-air market. Many rough unmarked wooden crates hold colorful apples, pears, oranges, tomatoes, squash, eggplants, and leafy vegetables, with woven baskets and loose produce overlapping at several depths. Foreground baskets and scattered leaves, middle stacked full crates and fruit, background further crates, plain canopy fabric, and anonymous stone wall. Crisp fruit skin, woven fibers, and wood grain under soft natural morning light with solid depth. Absolutely no people, human faces, signs, writing, labels, numerals, price tags, logos, branded packaging, or recognizable actual place.",
+    "generator": "OpenAI native image tool",
+    "generatorModel": "unknown",
+    "nativeSha256": "ed6accefe22aa19e5e2b383ffe5e9bf0c6a2e15c0ebbc5e1e510d7e11f9b254f",
+    "nativeDimensions": [1536, 1024],
+    "screening": {
+      "accepted": true,
+      "notes": "Dense layers of colorful fruit, leafy vegetables, plain wooden crates, and woven baskets retain crisp fine texture and clear depth beneath a blank canopy; no people, faces, text, branding, or identifiable place."
+    }
+  },
+  {
+    "prompt": "C57-P38",
+    "file": "cdx-hard-potting-bench",
+    "name": "Potting bench",
+    "category": "dense-clutter",
+    "scene": "A densely cluttered old wooden potting bench in an empty completely fictional garden shed with an open doorway. Many layered plain weathered clay pots of different sizes, blank seedling trays holding small green sprouts, a simple unlabeled trowel and hand fork, loose soil, tangled roots, moss, fallen leaves, and coils of natural garden twine overlap at several depths. Foreground bench edge, broken blank clay pots, and loose leaves, middle dense pots and sprouting trays, background more unmarked clay pots on wooden shelves and softly lit anonymous foliage. Crisp pottery chips, plant edges, dirt grains, and fine moss in gentle natural daylight with solid depth. Absolutely no people, human faces, text, labels, numerals, signs, books, packaging, logos, or identifiable actual place.",
+    "generationPrompt": "Create one original fictional photorealistic landscape photograph, 1536 by 1024 composition with clear foreground, middle ground, and background, crisp natural materials and plausible three-dimensional depth. This is an AI-made stress-test source picture for photo-to-3D. Preserve physically realistic transparent surfaces, fine edges and reflections in the described scene. No people, human faces, logos, brands, writing, text, labels, signs, numerals, recognizable landmarks, or identifiable actual locations. Do not create a collage or grid. Animals when present are in profile or back view. A densely cluttered old wooden potting bench in an empty completely fictional garden shed with an open doorway. Many layered plain weathered clay pots of different sizes, blank seedling trays holding small green sprouts, a simple unlabeled trowel and hand fork, loose soil, tangled roots, moss, fallen leaves, and coils of natural garden twine overlap at several depths. Foreground bench edge, broken blank clay pots, and loose leaves, middle dense pots and sprouting trays, background more unmarked clay pots on wooden shelves and softly lit anonymous foliage. Crisp pottery chips, plant edges, dirt grains, and fine moss in gentle natural daylight with solid depth. Absolutely no people, human faces, text, labels, numerals, signs, books, packaging, logos, or identifiable actual place.",
+    "generator": "OpenAI native image tool",
+    "generatorModel": "unknown",
+    "nativeSha256": "fbc2c542636a1a1f2f244b73511e3b6306a18712165cac571a0b243bd473b3ac",
+    "nativeDimensions": [1536, 1024],
+    "screening": {
+      "accepted": true,
+      "notes": "Weathered clay pots, seedling trays, moss, roots, loose soil, and unmarked tools overlap at several depths with distinct fine edges; no people, faces, text, branding, or identifiable place."
+    }
+  },
+  {
+    "prompt": "C57-P39",
+    "file": "cdx-hard-sewing-materials",
+    "name": "Sewing materials",
+    "category": "dense-clutter",
+    "scene": "A densely layered collection of unbranded sewing materials on a rough wooden worktable in an empty completely fictional sewing room. Many plain wooden thread spools with colorful thread, folded and loosely draped solid-color fabrics, scattered plain buttons, simple unmarked steel scissors, balls of soft yarn, loose thread loops, and thin sewing needles resting on fabric overlap at different depths. Foreground cloth folds, loose buttons, and strands, middle dense spools and scissors with crisp reflective edges, background more yarn and blank fabrics on simple wooden shelves. Natural side-window light reveals woven fibers, thread ridges, and believable solid depth. Absolutely no people or reflected faces, no writing, text, logos, brands, numerals, labels, measuring tapes, rulers, books, packaging, patterned letters, or actual identifiable place.",
+    "generationPrompt": "Create one original fictional photorealistic landscape photograph, 1536 by 1024 composition with clear foreground, middle ground, and background, crisp natural materials and plausible three-dimensional depth. This is an AI-made stress-test source picture for photo-to-3D. Preserve physically realistic transparent surfaces, fine edges and reflections in the described scene. No people, human faces, logos, brands, writing, text, labels, signs, numerals, recognizable landmarks, or identifiable actual locations. Do not create a collage or grid. Animals when present are in profile or back view. A densely layered collection of unbranded sewing materials on a rough wooden worktable in an empty completely fictional sewing room. Many plain wooden thread spools with colorful thread, folded and loosely draped solid-color fabrics, scattered plain buttons, simple unmarked steel scissors, balls of soft yarn, loose thread loops, and thin sewing needles resting on fabric overlap at different depths. Foreground cloth folds, loose buttons, and strands, middle dense spools and scissors with crisp reflective edges, background more yarn and blank fabrics on simple wooden shelves. Natural side-window light reveals woven fibers, thread ridges, and believable solid depth. Absolutely no people or reflected faces, no writing, text, logos, brands, numerals, labels, measuring tapes, rulers, books, packaging, patterned letters, or actual identifiable place.",
+    "generator": "OpenAI native image tool",
+    "generatorModel": "unknown",
+    "nativeSha256": "89fc87de916244f64cf4c5f3e7cee54d34f93b2a17dac86f0ee313de68090cfe",
+    "nativeDimensions": [1536, 1024],
+    "screening": {
+      "accepted": true,
+      "notes": "Thread ridges, woven fabrics, loose yarn, buttons, needles, and unmarked scissors remain detailed amid dense overlapping materials; metal and window show no people, faces, text, or branding."
+    }
+  },
+  {
+    "prompt": "C57-P40",
+    "file": "cdx-hard-ceramic-shelf",
+    "name": "Ceramic studio shelf",
+    "category": "dense-clutter",
+    "scene": "A dense collection of many plain unmarked ceramic bowls and vases on stepped rough wooden shelves in an empty completely fictional pottery studio. Matte earth-colored, pale gray, muted teal, and warm cream vessels in many believable sizes overlap at different depths, with small plain clay scraps, a few unmarked pottery hand tools, and loose crumpled blank linen cloth. Foreground low shelf with bowls and clay scraps, middle tightly layered bowls, pots, and tall vases, background taller stepped wooden shelves with more blank vessels against a rough anonymous plaster wall. Crisp rims, curved surfaces, subtle glaze reflections, wood grain, and deep spatial separation under soft natural side light. All surfaces completely blank and unmarked. Absolutely no people, human faces or reflections of faces, text, labels, logos, brands, numerals, signs, packaging, books, or recognizable actual place.",
+    "generationPrompt": "Create one original fictional photorealistic landscape photograph, 1536 by 1024 composition with clear foreground, middle ground, and background, crisp natural materials and plausible three-dimensional depth. This is an AI-made stress-test source picture for photo-to-3D. Preserve physically realistic transparent surfaces, fine edges and reflections in the described scene. No people, human faces, logos, brands, writing, text, labels, signs, numerals, recognizable landmarks, or identifiable actual locations. Do not create a collage or grid. Animals when present are in profile or back view. A dense collection of many plain unmarked ceramic bowls and vases on stepped rough wooden shelves in an empty completely fictional pottery studio. Matte earth-colored, pale gray, muted teal, and warm cream vessels in many believable sizes overlap at different depths, with small plain clay scraps, a few unmarked pottery hand tools, and loose crumpled blank linen cloth. Foreground low shelf with bowls and clay scraps, middle tightly layered bowls, pots, and tall vases, background taller stepped wooden shelves with more blank vessels against a rough anonymous plaster wall. Crisp rims, curved surfaces, subtle glaze reflections, wood grain, and deep spatial separation under soft natural side light. All surfaces completely blank and unmarked. Absolutely no people, human faces or reflections of faces, text, labels, logos, brands, numerals, signs, packaging, books, or recognizable actual place.",
+    "generator": "OpenAI native image tool",
+    "generatorModel": "unknown",
+    "nativeSha256": "fcbe3ed3983f578550b6198675af4ce7539df7bc09d3acf75e4682b87dbeea2e",
+    "nativeDimensions": [1536, 1024],
+    "screening": {
+      "accepted": true,
+      "notes": "Blank bowls and vases fill multiple shelf depths with distinct rims, glaze reflections, clay scraps, and cloth texture; reflections and background show no people, faces, text, or branding."
+    }
+  }
+]

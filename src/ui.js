@@ -405,7 +405,7 @@ export function createUI(app) {
   for (const b of els.tools.querySelectorAll("button")) {
     b.addEventListener("click", () => {
       app.setTool(b.dataset.tool);
-      // A tool with settings (paint colours, clay, strength) opens them.
+      // A tool with settings (paint colors, clay, strength) opens them.
       if (b.dataset.tool !== "orbit") showTab("tools");
     });
   }
@@ -414,7 +414,7 @@ export function createUI(app) {
     b.type = "button";
     b.style.background = hex;
     b.dataset.color = hex;
-    b.setAttribute("aria-label", `Paint colour ${hex}`);
+    b.setAttribute("aria-label", `Paint color ${hex}`);
     b.setAttribute("aria-pressed", "false");
     b.addEventListener("click", () => app.setEffectParam("paint", "color", hex));
     els.swatches.appendChild(b);
@@ -619,7 +619,7 @@ export function createUI(app) {
         input.value = value;
         input.addEventListener("change", () => app.setToyOption(o.key, input.value));
       } else if (o.type === "flag") {
-        // A country's flag, from the flag catalogue (the Moon's flag).
+        // A country's flag, from the flag catalog (the Moon's flag).
         input = document.createElement("select");
         input.add(new Option(value.toUpperCase(), value));
         input.value = value;
@@ -1962,7 +1962,7 @@ export function createUI(app) {
   // The flag list is small; fetch it soon after start so pickers are full
   // before anyone opens them.
   setTimeout(listFlags, 1500);
-  // The quick "Flag colours" picker in the Play tab.
+  // The quick "Flag colors" picker in the Play tab.
   els.toyFlag.addEventListener("focus", listFlags);
   els.toyFlag.addEventListener("pointerdown", listFlags);
   els.toyFlag.addEventListener("change", () => {

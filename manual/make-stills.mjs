@@ -21,6 +21,11 @@ const STILLS = {
   "windmill-parts": ["demo-windmill.png", async (p) => { await p.click('#demo-windmill .code-line[data-lit="sails"]'); await p.fill("#wm-angle", "25"); }],
   "uv-torus": ["demo-uvtorus.png", async (p) => { await p.fill("#ut-progress", "0.6"); }],
   "share-link": ["demo-share.png", async (p) => { await p.click("#sh-break"); await p.waitForTimeout(400); }],
+  "moving-joints": ["demo-joints.png", async (p) => { await p.evaluate(() => { for (const [id, v] of [["mj-hinge", 55], ["mj-slide", 0.3], ["mj-dial", 200]]) { const e = document.getElementById(id); e.value = v; e.dispatchEvent(new Event("input", { bubbles: true })); } }); }],
+  "photo-depth": ["demo-depth.png", async (p) => { await p.fill("#pd-depth", "0.9"); await p.fill("#pd-turn", "0.8"); }],
+  "data-table": ["demo-table.png", async (p) => { await p.fill("#dt-turn", "35"); }],
+  "qr-damage": ["demo-qr.png", async (p) => { await p.click("#qd-scatter"); await p.waitForTimeout(300); }],
+  "splat-file": ["demo-file.png", async (p) => { await p.fill("#sf-strength", "1.4"); await p.fill("#sf-size", "0.85"); }],
   "program-fields": ["demo-fields.png", async (p) => { await p.fill("#pf-f-hue", "u/(2pi)"); await p.waitForTimeout(600); }],
 }; // prettier-ignore
 

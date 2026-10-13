@@ -47,7 +47,7 @@ export const DEFAULT_PATTERN = Object.freeze({
 
 let flagList = null;
 
-// The flag catalogue: [{ code, name, file, source, license, author }].
+// The flag catalog: [{ code, name, file, source, license, author }].
 export async function loadFlags() {
   if (!flagList) {
     flagList = fetch(assetURL("assets/flags/flags.json"))
@@ -342,7 +342,7 @@ export function patternUniforms(pattern, half, lum, on) {
   };
 }
 
-// Normalises a pattern object from a scene file.
+// Normalizes a pattern object from a scene file.
 export function normalizePattern(p, normalizeHex) {
   const src = p && typeof p === "object" ? p : {};
   const num = (v, d, lo, hi) => {

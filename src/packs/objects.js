@@ -142,7 +142,7 @@ function evenPoint(i, dims) {
   return out;
 }
 
-// Baked light from above, front and right, with a sheen towards the viewer.
+// Baked light from above, front and right, with a sheen toward the viewer.
 const LIGHT = unit([0.4, 0.85, 0.55]);
 const VIEW = unit([0.5, 0.35, 0.8]);
 const HALF = unit(add(LIGHT, VIEW));
@@ -415,7 +415,7 @@ function segDist(x, y, s) {
   const t = clamp(((x - s[0]) * dx + (y - s[1]) * dy) / (dx * dx + dy * dy || 1), 0, 1);
   return Math.hypot(x - s[0] - dx * t, y - s[1] - dy * t);
 }
-// Distance from (x, y) to a number drawn centred at the origin, 2 units tall.
+// Distance from (x, y) to a number drawn centered at the origin, 2 units tall.
 function textDist(str, x, y) {
   const adv = 1.5;
   const w = (str.length - 1) * adv + 1;
@@ -447,7 +447,7 @@ const BOOK = { W: 1, H: 1.36, ct: 0.045, leaves: 10, lt: 0.013 };
 const STORY =
   "ONCE UPON A TIME, IN A TOY BOX AT THE END OF A LONG HALL, THERE LIVED A SMALL " +
   "SPLAT CALLED PIP. PIP WAS NOT A BALL AND NOT A BLOCK. PIP WAS A SOFT LITTLE " +
-  "CLOUD OF COLOUR THAT COULD BE ANYTHING AT ALL. ON MONDAY PIP WAS A RED APPLE. " +
+  "CLOUD OF COLOR THAT COULD BE ANYTHING AT ALL. ON MONDAY PIP WAS A RED APPLE. " +
   "ON TUESDAY PIP WAS A BLUE WHALE. ON WEDNESDAY PIP TRIED TO BE THE MOON, AND " +
   "EVERY TOY IN THE BOX CAME TO LOOK. WHAT WILL YOU BE TOMORROW? ASKED THE OLD " +
   "TEDDY BEAR. PIP THOUGHT FOR A WHILE. I THINK, SAID PIP, I WILL BE A STORY. " +
@@ -472,7 +472,7 @@ BOOK.T = BOOK.pb + 2 * BOOK.ct;
 
 const LAPTOP = { W: 1.5, D: 1.0, hb: 0.06, hl: 0.035, open: 1.85 };
 
-// The laptop's keys: id (what it types), label, centre and size on the deck.
+// The laptop's keys: id (what it types), label, center and size on the deck.
 const LAPTOP_KEYS = (() => {
   const rows = [
     ["1234567890", [["DEL", 0.16]]],
@@ -901,7 +901,7 @@ export const RECIPES = {
       // Words on a page. x is measured from the spine, z across the page
       // (the top of the page is at -z). A page that faces down while the
       // book is closed reads the right way once its leaf has turned over, so
-      // its lines run from the outer edge towards the spine.
+      // its lines run from the outer edge toward the spine.
       const PX = 0.0082; // one font pixel
       const margin = 0.1;
       const perLine = Math.floor((W - 2 * margin) / (6 * PX));
@@ -1225,7 +1225,7 @@ export const RECIPES = {
     drive(t, c, out, info) {
       const st = LAPTOP_STATE;
       st.open = c.open > 0.9;
-      // Modelled open; closing turns the lid back down onto the keys.
+      // modeled open; closing turns the lid back down onto the keys.
       const a = LAPTOP.open * (1 - ease3(c.open));
       out.parts.lid = { angle: a };
       out.parts.bezel = { angle: a, visible: smoothstep(0.02, 0.3, c.open) };
@@ -1256,14 +1256,14 @@ export const RECIPES = {
     build(k, o) {
       const alu = o.color;
       const { W, D, hb, hl } = LAPTOP;
-      // Bead-blasted aluminium: smooth, lit, a faint soft grain (no speckle).
+      // Bead-blasted aluminum: smooth, lit, a faint soft grain (no speckle).
       const metal = (c) => {
         const grain = 0.985 + 0.02 * c.noise(c.p[0] * 20, c.p[1] * 20, c.p[2] * 20);
         return lit(shade(alu, grain), c.n, { amb: 0.66, dif: 0.4, spec: 0.35, pow: 20 });
       };
       const shell = { flat: 0.15, even: true, size: 1.1, jitter: 0.006 };
       // Base; the deck with the keys is its own part so it can hide under
-      // the closed lid (splats are ordered by their modelled positions).
+      // the closed lid (splats are ordered by their modeled positions).
       // Thin sides get small, dense splats so the edges stay crisp.
       k.add(roundBox(W, hb, D, 0.02, { bottom: false, top: false }), {
         ...shell,
@@ -1296,7 +1296,7 @@ export const RECIPES = {
         },
       });
       // Key caps: dark and raised. Each one goes down when pressed
-      // (behaviour "key").
+      // (behavior "key").
       const legendDots = [];
       LAPTOP_KEYS.forEach((key, i) => {
         const legend = key.label;
@@ -1357,7 +1357,7 @@ export const RECIPES = {
           params: [dot.key, 0],
         };
       });
-      // The lid, hinged along the back edge and modelled standing open.
+      // The lid, hinged along the back edge and modeled standing open.
       const pivot = [0, hb + hl / 2, -D / 2 + 0.01];
       const q = quatAxisAngle([1, 0, 0], -LAPTOP.open);
       const place = (p) => add(pivot, quatRotate(q, sub(p, pivot)));
@@ -1405,7 +1405,7 @@ export const RECIPES = {
           return keep(col, 0.35 + 0.65 * clamp(edge / 0.03, 0, 1));
         },
       });
-      // The screen: every splat shows the live picture (behaviour "screen").
+      // The screen: every splat shows the live picture (behavior "screen").
       k.add(quad(SW, SD, -1), {
         pos: place([0, lidY - hl / 2 - 0.002, 0.005]),
         quat: q,
@@ -1868,7 +1868,7 @@ export const RECIPES = {
           return keep(shade(dial, 0.97 + 0.03 * (1 - r)));
         },
       });
-      // Hands (parts turning about the centre). Each is a thin, flat blade
+      // Hands (parts turning about the center). Each is a thin, flat blade
       // with a round boss, stacked on a visible arbor a few millimetres apart
       // like a real clock's: high enough above the dial that the dial's big,
       // flat splats never sort in front of a hand (lane Fix4).
@@ -1886,7 +1886,7 @@ export const RECIPES = {
           pattern: false,
           color: (c) => keep(lit(col, [0, 0, 1], { spec: 0.4 })),
         };
-        // The blade: full width at the centre, tapering to a point.
+        // The blade: full width at the center, tapering to a point.
         const blade = k.param(
           (u, v) => {
             const y = -back + v * (len + back);
@@ -2221,7 +2221,7 @@ export const RECIPES = {
           { id: "plain", label: "Plain" },
         ],
       },
-      { key: "color", label: "Colour", type: "color", default: "#d7263d" },
+      { key: "color", label: "Color", type: "color", default: "#d7263d" },
     ],
     controls: [{ key: "open", label: "Open", type: "toggle", default: 1, ease: 1.1 }],
     action: { key: "open", label: "Open or close" },
@@ -2399,7 +2399,7 @@ export const RECIPES = {
 
   "desk-fan": {
     alive: true,
-    options: [{ key: "color", label: "Colour", type: "color", default: "#6cc2b3" }],
+    options: [{ key: "color", label: "Color", type: "color", default: "#6cc2b3" }],
     controls: [
       { key: "power", label: "On", type: "toggle", default: 1, ease: 1.8 },
       { key: "swing", label: "Swing", type: "toggle", default: 1, ease: 1 },
@@ -2625,7 +2625,7 @@ export const RECIPES = {
   lamp: {
     alive: true,
     density: 1,
-    options: [{ key: "color", label: "Colour", type: "color", default: "#3c7fc4" }],
+    options: [{ key: "color", label: "Color", type: "color", default: "#3c7fc4" }],
     controls: [{ key: "light", label: "Light", type: "toggle", default: 1, ease: 0.35 }],
     action: { key: "light", label: "Switch the light" },
     // Hands-on (lane Hands-on H3): bend the arm at its joints to point the
@@ -3067,7 +3067,7 @@ export const RECIPES = {
         pattern: false,
         color: (c) => keep(mix("#15305c", "#9ad1ff", 0.35 + 0.5 * Math.max(0, dot(c.n, HALF)))),
       });
-      // Draw tubes that slide out towards the eye.
+      // Draw tubes that slide out toward the eye.
       const t2 = k.part("tube2", { pivot: mount });
       const t3 = k.part("tube3", { pivot: mount });
       seg(-0.68, -0.3, 0.095, t2);

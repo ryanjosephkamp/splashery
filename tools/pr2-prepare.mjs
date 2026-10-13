@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Lane Photoreal r2: prepares the second round of photoreal captures (the entries in
-// tools/assets.json with "pack": "pr2") like tools/prepare-assets.mjs does: rotate upright, centre
+// tools/assets.json with "pack": "pr2") like tools/prepare-assets.mjs does: rotate upright, center
 // and scale to a radius of about 0.9, crop stray floaters, decimate, write a full and a lite SOG.
 // Unlike that tool it can keep spherical harmonics on the full file ("sh": 1..3 on the entry: the
 // shine of glossy things); the lite file never has them.

@@ -207,6 +207,11 @@
                   >AI-made Studio samples (Dot samples)</a
                 >
               </li>
+              <li>
+                <a href="#ai-made-studio-samples-hard-cases-codex-task-57"
+                  >AI-made Studio samples: hard cases (Codex task 57)</a
+                >
+              </li>
             </ul>
           </li>
           <li>
@@ -277,7 +282,7 @@
           <p>
             Every captured toy on Splashery's shelf (the Photoreal shelf) is either public domain
             (CC0) or licensed under Creative Commons Attribution 4.0 (CC BY 4.0). Nothing with a
-            stricter licence is used. The same attributions appear in the app under
+            stricter license is used. The same attributions appear in the app under
             <strong>About &amp; credits</strong>.
           </p>
           <h2 id="captured-toys">Captured toys</h2>
@@ -303,7 +308,7 @@
                   <th scope="col">Toy</th>
                   <th scope="col">Work</th>
                   <th scope="col">Author</th>
-                  <th scope="col">Licence</th>
+                  <th scope="col">License</th>
                   <th scope="col">Changes</th>
                 </tr>
               </thead>
@@ -416,15 +421,15 @@
             </li>
             <li>
               <strong>Strawberry, Heart cookie, Honeybee</strong>: SuperSplat scenes with downloads
-              enabled and the CC BY 4.0 licence chosen by their authors (checked on each scene page
-              on 22 September 2026). The source files are the SOG data the public SuperSplat viewer
+              enabled and the CC BY 4.0 license chosen by their authors (checked on each scene page
+              on September 22, 2026). The source files are the SOG data the public SuperSplat viewer
               streams for each scene.
             </li>
           </ul>
           <h3 id="more-scans-from-supersplat">More scans from SuperSplat</h3>
           <p>
-            Twelve more SuperSplat scenes, each with downloads enabled and the CC BY 4.0 licence
-            chosen by its author (checked on 23 September 2026 through the scene data SuperSplat
+            Twelve more SuperSplat scenes, each with downloads enabled and the CC BY 4.0 license
+            chosen by its author (checked on September 23, 2026 through the scene data SuperSplat
             publishes for each page). The source files are the SOG data the public viewer streams.
             Each was changed the same way by <code>tools/prepare-assets.mjs</code>: spherical
             harmonics removed, rotated upright, recentred, scaled to the common size, decimated to
@@ -438,7 +443,7 @@
                   <th scope="col">Toy</th>
                   <th scope="col">Work</th>
                   <th scope="col">Author</th>
-                  <th scope="col">Licence</th>
+                  <th scope="col">License</th>
                 </tr>
               </thead>
               <tbody>
@@ -1441,14 +1446,14 @@
               target="_blank"
               rel="noopener"
               >polyhaven.com/license</a
-            >), and each model's name and authors were checked in the Poly Haven API on 23 September
-            2026. <code>tools/mesh-to-splats.mjs</code> downloads each glTF, scatters splats over
-            its surfaces by area, colours them from the model's textures (glass materials are
+            >), and each model's name and authors were checked in the Poly Haven API on September
+            23, 2026. <code>tools/mesh-to-splats.mjs</code> downloads each glTF, scatters splats
+            over its surfaces by area, colors them from the model's textures (glass materials are
             skipped so the insides show), and writes a 3DGS PLY file;
             <code>tools/prepare-assets.mjs</code> then packs it like the scans (at most 200,000
             splats, 80,000 for phones). Poly Haven does not require credit, but it is given here
             anyway. Since Phase C1 the vintage camera, boombox, wooden elephant and horse statue
-            also have soft studio light baked into their colours (with the models' own normal and
+            also have soft studio light baked into their colors (with the models' own normal and
             occlusion maps), and the printed maker's names on the camera, its lens and the boombox
             are painted out (see <code>tools/models.json</code>).
           </p>
@@ -1459,7 +1464,7 @@
                   <th scope="col">Toy</th>
                   <th scope="col">Model</th>
                   <th scope="col">Author</th>
-                  <th scope="col">Licence</th>
+                  <th scope="col">License</th>
                 </tr>
               </thead>
               <tbody>
@@ -1734,8 +1739,8 @@
             Made from one photo with an image-to-3D model (lane G)
           </h3>
           <p>
-            Each of these started as a single photo (CC0 or CC BY, the licence checked on its
-            Wikimedia Commons page on 27 September 2026, with no brands or logos).
+            Each of these started as a single photo (CC0 or CC BY, the license checked on its
+            Wikimedia Commons page on September 27, 2026, with no brands or logos).
             <code>tools/image-to-3d.mjs</code> sent the photo, shrunk to 1024 px, to the public
             <a
               href="https://huggingface.co/spaces/trellis-community/TRELLIS"
@@ -1754,8 +1759,8 @@
               target="_blank"
               rel="noopener"
               >microsoft/TRELLIS-image-large</a
-            >, MIT). The MIT licence puts no terms on what the model makes, so each toy keeps its
-            photo's licence and credit. <code>tools/prepare-assets.mjs</code> then packs it like the
+            >, MIT). The MIT license puts no terms on what the model makes, so each toy keeps its
+            photo's license and credit. <code>tools/prepare-assets.mjs</code> then packs it like the
             scans. The sides the photo does not show are the model's guess.
           </p>
           <div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrolls sideways">
@@ -1765,7 +1770,7 @@
                   <th scope="col">Toy</th>
                   <th scope="col">Photo</th>
                   <th scope="col">Photographer</th>
-                  <th scope="col">Licence</th>
+                  <th scope="col">License</th>
                 </tr>
               </thead>
               <tbody>
@@ -6887,18 +6892,18 @@
               target="_blank"
               rel="noopener"
               >Wikimedia Commons</a
-            >, fetched by <code>tools/fetch-flags.mjs</code>, which reads each file's licence from
+            >, fetched by <code>tools/fetch-flags.mjs</code>, which reads each file's license from
             the Commons API and keeps only public domain and CC0 files. The files are unchanged.
-            Each flag's source page, author line and licence are listed in
+            Each flag's source page, author line and license are listed in
             <a
               href="https://github.com/ryanjosephkamp/splashery/blob/main/assets/flags/flags.json"
               target="_blank"
               rel="noopener"
               >assets/flags/flags.json</a
             >
-            (196 flags, checked on 23 September 2026). The flag of Oman is not included: its Commons
-            file is under Oman's Open Government Licence rather than a public-domain or Creative
-            Commons licence (see
+            (196 flags, checked on September 23, 2026). The flag of Oman is not included: its
+            Commons file is under Oman's Open Government Licence rather than a public-domain or
+            Creative Commons license (see
             <a
               href="https://github.com/ryanjosephkamp/splashery/blob/main/docs/BACKLOG.md"
               target="_blank"
@@ -7508,6 +7513,119 @@
             pictures, labeled AI-made in its picker and its credit: Felt farm (D37), Glass wave
             (D38), Mushrooms (D27), and Stone arch (D17).
           </p>
+          <h2 id="ai-made-studio-samples-hard-cases-codex-task-57">
+            AI-made Studio samples: hard cases (Codex task 57)
+          </h2>
+          <p>
+            Made by Ryan with Codex (GPT-6) and the OpenAI native image tool, October 13, 2026.
+            These 20 fictional pictures were selected from 40 original candidates measured in Photo
+            to 3D. They use the existing <strong>AI-made by the owner</strong> credit, with that
+            label beside each picture in the Hard cases picker group. The generator did not return
+            its model identity. No people, text, logos, or real landmarks were seen. They are Studio
+            samples, never real captures or real places, and never used for science, math,
+            engineering, or photoreal shelves. Each JPEG is 1,280 px wide (quality 82); its depth
+            map was made by the unchanged <code>tools/dsm-depth.mjs</code>. File hashes, prompts,
+            scores, and selection decisions are in
+            <a
+              href="https://github.com/ryanjosephkamp/splashery/blob/main/docs/audits/hard-case-samples-2026-10.md"
+              target="_blank"
+              rel="noopener"
+              >the scored report</a
+            >.
+          </p>
+          <ul>
+            <li>
+              Glass jug (C57-P01):
+              <code>assets/toys/photo-3d/hard-cases/cdx-hard-glass-jug.jpg</code> (glass-water).
+            </li>
+            <li>
+              Stones under water (C57-P05):
+              <code>assets/toys/photo-3d/hard-cases/cdx-hard-submerged-stones.jpg</code>
+              (glass-water).
+            </li>
+            <li>
+              Backlit dog (C57-P11):
+              <code>assets/toys/photo-3d/hard-cases/cdx-hard-backlit-dog.jpg</code> (hair-fur).
+            </li>
+            <li>
+              Wool fleece (C57-P12):
+              <code>assets/toys/photo-3d/hard-cases/cdx-hard-wool-fleece.jpg</code> (hair-fur).
+            </li>
+            <li>
+              Bicycle spokes (C57-P13):
+              <code>assets/toys/photo-3d/hard-cases/cdx-hard-bicycle-spokes.jpg</code>
+              (thin-structures).
+            </li>
+            <li>
+              Bare branches (C57-P16):
+              <code>assets/toys/photo-3d/hard-cases/cdx-hard-bare-branches.jpg</code>
+              (thin-structures).
+            </li>
+            <li>
+              Puddle reflection (C57-P19):
+              <code>assets/toys/photo-3d/hard-cases/cdx-hard-puddle-reflection.jpg</code>
+              (reflections).
+            </li>
+            <li>
+              Polished floor (C57-P20):
+              <code>assets/toys/photo-3d/hard-cases/cdx-hard-polished-floor.jpg</code>
+              (reflections).
+            </li>
+            <li>
+              Reflecting pool (C57-P24):
+              <code>assets/toys/photo-3d/hard-cases/cdx-hard-reflecting-pool.jpg</code>
+              (reflections).
+            </li>
+            <li>
+              Lanterns at night (C57-P25):
+              <code>assets/toys/photo-3d/hard-cases/cdx-hard-lanterns.jpg</code> (low-light).
+            </li>
+            <li>
+              Campfire (C57-P26):
+              <code>assets/toys/photo-3d/hard-cases/cdx-hard-campfire.jpg</code> (low-light).
+            </li>
+            <li>
+              Candle still life (C57-P27):
+              <code>assets/toys/photo-3d/hard-cases/cdx-hard-candle-still-life.jpg</code>
+              (low-light).
+            </li>
+            <li>
+              Moonlit greenhouse (C57-P28):
+              <code>assets/toys/photo-3d/hard-cases/cdx-hard-moonlit-greenhouse.jpg</code>
+              (low-light).
+            </li>
+            <li>
+              Lamps in a potting shed (C57-P29):
+              <code>assets/toys/photo-3d/hard-cases/cdx-hard-shed-lamps.jpg</code> (low-light).
+            </li>
+            <li>
+              Fire bowl at dusk (C57-P30):
+              <code>assets/toys/photo-3d/hard-cases/cdx-hard-fire-bowl.jpg</code> (low-light).
+            </li>
+            <li>
+              Snail and wet moss (C57-P34):
+              <code>assets/toys/photo-3d/hard-cases/cdx-hard-snail-shell.jpg</code> (macro).
+            </li>
+            <li>
+              Feather on lichen (C57-P35):
+              <code>assets/toys/photo-3d/hard-cases/cdx-hard-feather-lichen.jpg</code> (macro).
+            </li>
+            <li>
+              Workshop bench (C57-P36):
+              <code>assets/toys/photo-3d/hard-cases/cdx-hard-workshop-bench.jpg</code>
+              (dense-clutter).
+            </li>
+            <li>
+              Potting bench (C57-P38):
+              <code>assets/toys/photo-3d/hard-cases/cdx-hard-potting-bench.jpg</code>
+              (dense-clutter).
+            </li>
+            <li>
+              Ceramic studio shelf (C57-P40):
+              <code>assets/toys/photo-3d/hard-cases/cdx-hard-ceramic-shelf.jpg</code>
+              (dense-clutter).
+            </li>
+          </ul>
         </div>
       </section>
       <section class="md-file" aria-label="Third-party licenses">
@@ -7524,7 +7642,7 @@
           </p>
           <p>
             The captured splat toys under <code>assets/toys/</code> (scans, and CC0 models turned
-            into splats) have their own licences (CC0 and CC BY 4.0); see
+            into splats) have their own licenses (CC0 and CC BY 4.0); see
             <a href="../../about/credits/">CREDITS.md</a>.
           </p>
           <h3 id="playcanvas-engine-2-22-3">PlayCanvas Engine 2.22.3</h3>
@@ -7532,7 +7650,7 @@
             <li>
               Package: <code>playcanvas@2.22.3</code> (file:
               <code>vendor/playcanvas/playcanvas.min.mjs</code>, the package's single-file ESM build
-              <code>build/playcanvas.min.mjs</code>; licence copied to
+              <code>build/playcanvas.min.mjs</code>; license copied to
               <code>vendor/playcanvas/LICENSE</code>)
             </li>
             <li>
@@ -8150,7 +8268,7 @@ subject to the following conditions:
                 >https://huggingface.co/microsoft/TRELLIS-image-large</a
               >
               (MIT) and rembg's u2net background cut-out (Apache-2.0). It made the Real pencil and
-              Real tin can; their photos' licences are in CREDITS.md.
+              Real tin can; their photos' licenses are in CREDITS.md.
             </li>
             <li>
               <code>jsfive</code> 0.4.2 (public domain; based on pyfive, BSD-3-Clause, © 2016
