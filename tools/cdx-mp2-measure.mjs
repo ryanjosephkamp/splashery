@@ -147,70 +147,74 @@ export async function reconstructedSources(dir, ids = null) {
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   const option = (key, fallback) =>
     process.argv.find((a) => a.startsWith(`--${key}=`))?.slice(key.length + 3) || fallback;
-  const sources = option("sources", "")
-    ? JSON.parse(await fs.readFile(option("sources"), "utf8"))
-    : await reconstructedSources(".cache/cdx-mp2/sources");
-  const browser = await chromium.launch({
-    executablePath: process.env.SPLASHERY_CHROMIUM || undefined,
-    // Match the browser regression suite. Native video/canvas conversion
-    // and upload metrics can differ with plain headless Chromium's GPU setup.
-    args: [
-      "--use-angle=swiftshader",
-      "--enable-unsafe-swiftshader",
-      "--ignore-gpu-blocklist",
-      "--enable-webgl",
-      "--disable-gpu-driver-bug-workarounds",
-      "--enable-unsafe-webgpu",
-      "--enable-features=Vulkan,WebGPU",
-      "--use-webgpu-adapter=swiftshader",
-      "--use-vulkan=swiftshader",
-    ],
-  });
-  try {
-    const page = await browser.newPage();
-    page.setDefaultTimeout(600_000);
-    if (option("baseline", ""))
-      for (const file of [
-        "src/packs/moving-photo.js",
-        "src/packs/photo-sharp.js",
-        "src/packs/song-stream.js",
-        "src/live/clip-stabilize.js",
-      ])
-        await page.route(`**/${file}`, (route) =>
-          route.fulfill({
-            contentType: "text/javascript",
-            body: execFileSync("git", ["show", `${option("baseline")}:${file}`], {
-              encoding: "utf8",
+  if (process.argv.includes("--goal")) {
+    await (await import("./cdx-mp2-render.mjs")).renderGoal(option, reconstructedSources);
+  } else {
+    const sources = option("sources", "")
+      ? JSON.parse(await fs.readFile(option("sources"), "utf8"))
+      : await reconstructedSources(".cache/cdx-mp2/sources");
+    const browser = await chromium.launch({
+      executablePath: process.env.SPLASHERY_CHROMIUM || undefined,
+      // Match the browser regression suite. Native video/canvas conversion
+      // and upload metrics can differ with plain headless Chromium's GPU setup.
+      args: [
+        "--use-angle=swiftshader",
+        "--enable-unsafe-swiftshader",
+        "--ignore-gpu-blocklist",
+        "--enable-webgl",
+        "--disable-gpu-driver-bug-workarounds",
+        "--enable-unsafe-webgpu",
+        "--enable-features=Vulkan,WebGPU",
+        "--use-webgpu-adapter=swiftshader",
+        "--use-vulkan=swiftshader",
+      ],
+    });
+    try {
+      const page = await browser.newPage();
+      page.setDefaultTimeout(600_000);
+      if (option("baseline", ""))
+        for (const file of [
+          "src/packs/moving-photo.js",
+          "src/packs/photo-sharp.js",
+          "src/packs/song-stream.js",
+          "src/live/clip-stabilize.js",
+        ])
+          await page.route(`**/${file}`, (route) =>
+            route.fulfill({
+              contentType: "text/javascript",
+              body: execFileSync("git", ["show", `${option("baseline")}:${file}`], {
+                encoding: "utf8",
+              }),
             }),
-          }),
-        );
-    await page.goto(`${process.env.SPLASHERY_URL || "http://127.0.0.1:4173/"}LICENSES.md`);
-    const results = [];
-    for (const [id, path] of Object.entries(sources)) {
-      if (option("ids", "") && !option("ids").split(",").includes(id)) continue;
-      if (SAMPLES.some((s) => s.id === id && !s.long)) {
-        const r = await measure(page, { id, profile: option("profile", "low") });
+          );
+      await page.goto(`${process.env.SPLASHERY_URL || "http://127.0.0.1:4173/"}LICENSES.md`);
+      const results = [];
+      for (const [id, path] of Object.entries(sources)) {
+        if (option("ids", "") && !option("ids").split(",").includes(id)) continue;
+        if (SAMPLES.some((s) => s.id === id && !s.long)) {
+          const r = await measure(page, { id, profile: option("profile", "low") });
+          results.push(r);
+          console.log(JSON.stringify(r));
+        }
+        const r = await measure(page, { id, path, profile: option("profile", "low") });
         results.push(r);
         console.log(JSON.stringify(r));
+        await fs.writeFile(
+          option("out", ".cache/cdx-mp2/measure.json"),
+          JSON.stringify(
+            {
+              sourceKind: option("sources", "")
+                ? "specified originals"
+                : "original bunny and horse; other short videos reconstructed from sheets; synthetic 60 fps",
+              results,
+            },
+            null,
+            2,
+          ) + "\n",
+        );
       }
-      const r = await measure(page, { id, path, profile: option("profile", "low") });
-      results.push(r);
-      console.log(JSON.stringify(r));
-      await fs.writeFile(
-        option("out", ".cache/cdx-mp2/measure.json"),
-        JSON.stringify(
-          {
-            sourceKind: option("sources", "")
-              ? "specified originals"
-              : "original bunny and horse; other short videos reconstructed from sheets; synthetic 60 fps",
-            results,
-          },
-          null,
-          2,
-        ) + "\n",
-      );
+    } finally {
+      await browser.close();
     }
-  } finally {
-    await browser.close();
   }
 }
