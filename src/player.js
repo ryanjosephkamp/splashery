@@ -579,6 +579,10 @@ export class Player {
   async buildKit(def, toy, token, progress) {
     progress(0, `Building ${def.label}…`);
     const mod = await import(`./packs/${def.pack}.js`);
+    if (def.id === "photo-3d") {
+      const { addHardCaseSamples } = await import("./packs/hard-case-samples.js");
+      addHardCaseSamples(mod);
+    }
     if (token !== this.loadToken) return null;
     const recipe = mod.RECIPES?.[def.id];
     if (!recipe) throw new Error(`${def.label} is missing from its pack.`);
