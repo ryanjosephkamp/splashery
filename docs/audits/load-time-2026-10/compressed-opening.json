@@ -12,10 +12,10 @@
   {
     "source": "src/toy-help.js",
     "file": "assets/opening/toy-help.mjs.gz",
-    "sourceBytes": 344736,
-    "bytes": 115832,
-    "sourceSha256": "52a434da465618f547671bee6502e3369ef0f3ac0cfeb511a4aaa720b8dc8516",
-    "sha256": "7805c71a83fa3c07bc8977a13dc2ac09c361a3b5d0c34dff4e58ec85ddd1acff",
+    "sourceBytes": 344750,
+    "bytes": 115853,
+    "sourceSha256": "0e001f275863316e35e529db7c4d5f7ad02f86d4ca6ce4f7daa9739157169c45",
+    "sha256": "86b4d5b4b603eb14b35619b172514dc9b7c3be4d6d9033e814b5451bf20e98c5",
     "license": "MIT; existing Splashery code",
     "transformation": "Exact gzip copy made by Ryan with Codex (GPT-6); no source or decoded-byte changes"
   },

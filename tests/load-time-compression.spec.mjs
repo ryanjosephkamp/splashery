@@ -1,6 +1,7 @@
 import { test, expect } from "@playwright/test";
 import fs from "node:fs";
-import { gunzipSync } from "node:zlib";
+import { deflateRawSync, gunzipSync } from "node:zlib";
+import { createScene } from "../src/state.js";
 
 test("opening gzip copies preserve every original byte", () => {
   const copies = JSON.parse(
@@ -9,6 +10,34 @@ test("opening gzip copies preserve every original byte", () => {
   for (const { source, file } of copies)
     expect(gunzipSync(fs.readFileSync(file)).equals(fs.readFileSync(source)), source).toBe(true);
 });
+
+for (const [id, format] of [
+  ["sunglasses", "j"],
+  ["pyrite-cubes", "d"],
+])
+  test(`${format} links start their scan helper while the engine is still transferring`, async ({
+    page,
+  }) => {
+    let release;
+    const held = new Promise((resolve) => (release = resolve));
+    await page.route("**/playcanvas.min.mjs.gz", async (route) => {
+      await held;
+      await route.continue();
+    });
+    const scene = Buffer.from(JSON.stringify(createScene({ toy: { kind: "builtin", id } })));
+    const hash = `${format}.${(format === "d" ? deflateRawSync(scene) : scene).toString("base64url")}`;
+    const helpers = page.waitForRequest("**/src/packs/real-objects.js", { timeout: 10000 });
+    await page.goto(`/?renderer=webgl2&profile=weak&adapt=off&labs=1#s=${hash}`, {
+      waitUntil: "commit",
+    });
+    try {
+      await helpers;
+    } finally {
+      release();
+    }
+    await page.waitForSelector("body[data-ready='true']", { timeout: 180000 });
+    expect(await page.evaluate(() => window.__splashery.player.toyInfo.id)).toBe(id);
+  });
 
 test("engine transfer starts while the stylesheet still blocks DOM readiness", async ({ page }) => {
   let release;

@@ -27,6 +27,9 @@
     }
   }
   async function start() {
+    // A shared scan's helpers can transfer and compile before GPU setup.
+    // A failed or malformed link keeps the app's existing fallback behavior.
+    import("./opening-pack.js").then(({ warmOpeningPack }) => warmOpeningPack()).catch(() => {});
     if (
       typeof DecompressionStream === "function" &&
       HTMLScriptElement.supports?.("importmap") &&
