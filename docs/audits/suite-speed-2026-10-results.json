@@ -2184,6 +2184,1484 @@
       }
     },
     {
+      "localReceipt": "helper-wd-controlled-20/wd.json",
+      "sha256": "19bbf7354d66cd1151ad623c64783645715600801621a1a5dda5d65abdf064fa",
+      "stats": {
+        "startTime": "2026-10-13T05:44:28.362Z",
+        "duration": 3841148.037,
+        "expected": 40,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "suiteRun": {
+        "wall": 3842.519,
+        "code": 0,
+        "port": 45699,
+        "gl": "llvmpipe"
+      },
+      "configuredWorkers": 1,
+      "repeatEach": 20,
+      "topLevelErrors": [],
+      "tests": {
+        "wd.spec.mjs > worlds > each tier stays within its splat budget": {
+          "registered": 20,
+          "outcomes": {
+            "expected": 20
+          },
+          "annotations": [
+            [
+              {
+                "description": "2\u00d7 for fixture-created pages",
+                "type": "cpu-throttle-requested"
+              }
+            ]
+          ],
+          "statusSequence": [
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed"
+          ],
+          "durationMs": [
+            119028, 119647, 112883, 110488, 116235, 110359, 114254, 108808, 115244, 114403, 120614,
+            123940, 121839, 111591, 115804, 116440, 119844, 116158, 120128, 119721
+          ],
+          "startedAt": [
+            "2026-10-13T05:44:29.295Z",
+            "2026-10-13T05:47:41.843Z",
+            "2026-10-13T05:50:55.253Z",
+            "2026-10-13T05:54:01.962Z",
+            "2026-10-13T05:57:04.207Z",
+            "2026-10-13T06:00:08.994Z",
+            "2026-10-13T06:03:14.740Z",
+            "2026-10-13T06:06:23.733Z",
+            "2026-10-13T06:09:25.076Z",
+            "2026-10-13T06:12:36.510Z",
+            "2026-10-13T06:15:44.221Z",
+            "2026-10-13T06:18:57.535Z",
+            "2026-10-13T06:22:15.793Z",
+            "2026-10-13T06:25:30.110Z",
+            "2026-10-13T06:28:38.164Z",
+            "2026-10-13T06:31:54.055Z",
+            "2026-10-13T06:35:06.613Z",
+            "2026-10-13T06:38:33.682Z",
+            "2026-10-13T06:41:52.782Z",
+            "2026-10-13T06:45:10.679Z"
+          ],
+          "retrySequence": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        },
+        "wd.spec.mjs > worlds > screenshots at 390x844 and 1440x900": {
+          "registered": 20,
+          "outcomes": {
+            "expected": 20
+          },
+          "annotations": [
+            [
+              {
+                "description": "2\u00d7 for fixture-created pages",
+                "type": "cpu-throttle-requested"
+              }
+            ]
+          ],
+          "statusSequence": [
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed"
+          ],
+          "durationMs": [
+            71954, 72193, 72378, 69968, 67245, 73289, 73006, 70410, 74254, 71887, 70606, 72427,
+            70911, 74520, 78269, 74479, 84745, 81341, 75772, 78337
+          ],
+          "startedAt": [
+            "2026-10-13T05:46:28.749Z",
+            "2026-10-13T05:49:41.841Z",
+            "2026-10-13T05:52:48.463Z",
+            "2026-10-13T05:55:52.800Z",
+            "2026-10-13T05:59:00.837Z",
+            "2026-10-13T06:01:59.673Z",
+            "2026-10-13T06:05:09.410Z",
+            "2026-10-13T06:08:13.448Z",
+            "2026-10-13T06:11:20.672Z",
+            "2026-10-13T06:14:31.277Z",
+            "2026-10-13T06:17:45.854Z",
+            "2026-10-13T06:21:01.803Z",
+            "2026-10-13T06:24:18.034Z",
+            "2026-10-13T06:27:22.034Z",
+            "2026-10-13T06:30:34.372Z",
+            "2026-10-13T06:33:50.831Z",
+            "2026-10-13T06:37:07.243Z",
+            "2026-10-13T06:40:30.295Z",
+            "2026-10-13T06:43:53.282Z",
+            "2026-10-13T06:47:10.815Z"
+          ],
+          "retrySequence": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        }
+      }
+    },
+    {
+      "localReceipt": "operator-followup-check/suite-runner.json",
+      "sha256": "0ef21ddb90eccfdf9b67159c164b5bd5d11bb9bef84a27b8e75eb97eb591f1c9",
+      "stats": {
+        "startTime": "2026-10-13T14:48:39.432Z",
+        "duration": 34277.3,
+        "expected": 8,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "suiteRun": {
+        "wall": 35.906,
+        "code": 0,
+        "port": 43643,
+        "gl": "llvmpipe"
+      },
+      "configuredWorkers": 1,
+      "repeatEach": 1,
+      "topLevelErrors": [],
+      "tests": {
+        "suite-runner.spec.mjs > canceling during server startup stops the starting process": {
+          "registered": 1,
+          "outcomes": {
+            "expected": 1
+          },
+          "annotations": [],
+          "statusSequence": ["passed"],
+          "durationMs": [2745],
+          "startedAt": ["2026-10-13T14:48:41.314Z"],
+          "retrySequence": [0]
+        },
+        "suite-runner.spec.mjs > canceling during display startup stops the starting process": {
+          "registered": 1,
+          "outcomes": {
+            "expected": 1
+          },
+          "annotations": [],
+          "statusSequence": ["passed"],
+          "durationMs": [3332],
+          "startedAt": ["2026-10-13T14:48:44.232Z"],
+          "retrySequence": [0]
+        },
+        "suite-runner.spec.mjs > canceling an active lane stops its process group without starting the next file (forced leader)": {
+          "registered": 1,
+          "outcomes": {
+            "expected": 1
+          },
+          "annotations": [],
+          "statusSequence": ["passed"],
+          "durationMs": [4396],
+          "startedAt": ["2026-10-13T14:48:47.678Z"],
+          "retrySequence": [0]
+        },
+        "suite-runner.spec.mjs > canceling an active lane stops its process group without starting the next file (graceful leader)": {
+          "registered": 1,
+          "outcomes": {
+            "expected": 1
+          },
+          "annotations": [],
+          "statusSequence": ["passed"],
+          "durationMs": [399],
+          "startedAt": ["2026-10-13T14:48:52.158Z"],
+          "retrySequence": [0]
+        },
+        "suite-runner.spec.mjs > concurrent suite servers reserve different ports and serve their own checkout": {
+          "registered": 1,
+          "outcomes": {
+            "expected": 1
+          },
+          "annotations": [],
+          "statusSequence": ["passed"],
+          "durationMs": [237],
+          "startedAt": ["2026-10-13T14:48:52.575Z"],
+          "retrySequence": [0]
+        },
+        "suite-runner.spec.mjs > a suite process error or a report with no executed tests cannot count as a pass": {
+          "registered": 1,
+          "outcomes": {
+            "expected": 1
+          },
+          "annotations": [],
+          "statusSequence": ["passed"],
+          "durationMs": [6],
+          "startedAt": ["2026-10-13T14:48:52.827Z"],
+          "retrySequence": [0]
+        },
+        "suite-runner.spec.mjs > a complete failing baseline can measure a passing repair without hiding the failure": {
+          "registered": 1,
+          "outcomes": {
+            "expected": 1
+          },
+          "annotations": [],
+          "statusSequence": ["passed"],
+          "durationMs": [2688],
+          "startedAt": ["2026-10-13T14:48:52.852Z"],
+          "retrySequence": [0]
+        },
+        "suite-runner.spec.mjs > incomplete, retried, failed, or newly skipped final runs cannot produce a suite speedup": {
+          "registered": 1,
+          "outcomes": {
+            "expected": 1
+          },
+          "annotations": [],
+          "statusSequence": ["passed"],
+          "durationMs": [18038],
+          "startedAt": ["2026-10-13T14:48:55.579Z"],
+          "retrySequence": [0]
+        }
+      }
+    },
+    {
+      "localReceipt": "operator-smoke-check/smoke.json",
+      "sha256": "c6c29da7066ea056582f9143319f20aaeb20e9e2ac92552317cf612b0e19d173",
+      "stats": {
+        "startTime": "2026-10-13T14:50:10.652Z",
+        "duration": 50267.568999999996,
+        "expected": 1,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "suiteRun": {
+        "wall": 52.401,
+        "code": 0,
+        "port": 39989,
+        "gl": "llvmpipe"
+      },
+      "configuredWorkers": 1,
+      "repeatEach": 1,
+      "topLevelErrors": [],
+      "tests": {
+        "smoke.spec.mjs > Splashery v3 engine (WebGL2) > rigs pick splats by colour, run effects and show add-ons; shelf shapes have rigs": {
+          "registered": 1,
+          "outcomes": {
+            "expected": 1
+          },
+          "annotations": [],
+          "statusSequence": ["passed"],
+          "durationMs": [46960],
+          "startedAt": ["2026-10-13T14:50:12.579Z"],
+          "retrySequence": [0]
+        }
+      }
+    },
+    {
+      "localReceipt": "parent-controlled-20/hl1.json",
+      "sha256": "7b7f4f3f11ee04ef1db8d5b40c179980cd8a6efdb8615d8efe4b48a3f082f35b",
+      "stats": {
+        "startTime": "2026-10-13T06:50:12.182Z",
+        "duration": 292630.293,
+        "expected": 3,
+        "skipped": 36,
+        "unexpected": 1,
+        "flaky": 0
+      },
+      "suiteRun": {
+        "wall": 293.718,
+        "code": 1,
+        "port": 40367,
+        "gl": "llvmpipe"
+      },
+      "configuredWorkers": 1,
+      "repeatEach": 20,
+      "topLevelErrors": [
+        {
+          "message": "\u001b[31mTesting stopped early after 1 maximum allowed failures.\u001b[39m"
+        }
+      ],
+      "tests": {
+        "hl1.spec.mjs > the Level 1 sample covers every shelf and material family": {
+          "registered": 20,
+          "outcomes": {
+            "expected": 2,
+            "skipped": 18
+          },
+          "annotations": [
+            [
+              {
+                "description": "2\u00d7 for fixture-created pages",
+                "type": "cpu-throttle-requested"
+              }
+            ]
+          ],
+          "statusSequence": ["passed", "passed"],
+          "durationMs": [39, 13],
+          "startedAt": ["2026-10-13T06:50:13.454Z", "2026-10-13T06:52:44.270Z"],
+          "retrySequence": [0, 0]
+        },
+        "hl1.spec.mjs > Hands-on: lift, toss, land, settle and Reset": {
+          "registered": 20,
+          "outcomes": {
+            "expected": 1,
+            "unexpected": 1,
+            "skipped": 18
+          },
+          "annotations": [
+            [
+              {
+                "description": "2\u00d7 for fixture-created pages",
+                "type": "cpu-throttle-requested"
+              }
+            ]
+          ],
+          "statusSequence": ["passed", "failed"],
+          "durationMs": [149187, 140052],
+          "startedAt": ["2026-10-13T06:50:13.537Z", "2026-10-13T06:52:44.301Z"],
+          "retrySequence": [0, 0],
+          "errors": [
+            {
+              "message": "Error: Level 1 gaps; full receipts are attached\n\nexpect(received).toEqual(expected) // deep equality\n\n- Expected  - 1\n+ Received  + 3\n\n- Array []\n+ Array [\n+   \"waterfall: floor (expected no gaps)\",\n+ ]\n\n  342 |   });\n  343 |   expect(startupErrors).toEqual([]);\n> 344 |   expect(failures, \"Level 1 gaps; full receipts are attached\").toEqual([]);\n      |                                                                ^\n  345 | });\n  346 |\n    at /workspace/splashery/tests/hl1.spec.mjs:344:64",
+              "count": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "localReceipt": "parent-controlled-20/hh5-gems.json",
+      "sha256": "d93e644cd28c9f1c4cb86782e9ef7787e9b9e3935f3e9d9effd1ba90b8c2a631",
+      "stats": {
+        "startTime": "2026-10-13T06:55:05.730Z",
+        "duration": 37.138000000000034,
+        "expected": 0,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "suiteRun": {
+        "wall": 0.938,
+        "code": 1,
+        "port": 40367,
+        "gl": "llvmpipe"
+      },
+      "configuredWorkers": 1,
+      "repeatEach": 1,
+      "topLevelErrors": [
+        {
+          "message": "Error: No tests found.\nMake sure that arguments are regular expressions matching test files.\nYou may need to escape symbols like \"$\" or \"*\" and quote the arguments.",
+          "stack": "Error: No tests found.\nMake sure that arguments are regular expressions matching test files.\nYou may need to escape symbols like \"$\" or \"*\" and quote the arguments."
+        }
+      ],
+      "tests": {}
+    },
+    {
+      "localReceipt": "parent-controlled-20/phy.json",
+      "sha256": "b11d93586dfa7beade57ee30dc3249317aeee789eb67a2be790c7e5eb0cb2032",
+      "stats": {
+        "startTime": "2026-10-13T06:55:07.165Z",
+        "duration": 533516.885,
+        "expected": 20,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "suiteRun": {
+        "wall": 534.916,
+        "code": 0,
+        "port": 40367,
+        "gl": "swiftshader"
+      },
+      "configuredWorkers": 1,
+      "repeatEach": 20,
+      "topLevelErrors": [],
+      "tests": {
+        "phy.spec.mjs > Pebbles: stones pick up and stack into a new cairn; a careless one topples": {
+          "registered": 20,
+          "outcomes": {
+            "expected": 20
+          },
+          "annotations": [
+            [
+              {
+                "description": "2\u00d7 for fixture-created pages",
+                "type": "cpu-throttle-requested"
+              }
+            ]
+          ],
+          "statusSequence": [
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed"
+          ],
+          "durationMs": [
+            24484, 25118, 22991, 26730, 24532, 25722, 27273, 24556, 25093, 26988, 24747, 24723,
+            22515, 23599, 25372, 22449, 27518, 24974, 25797, 25332
+          ],
+          "startedAt": [
+            "2026-10-13T06:55:07.931Z",
+            "2026-10-13T06:55:34.248Z",
+            "2026-10-13T06:56:01.335Z",
+            "2026-10-13T06:56:26.258Z",
+            "2026-10-13T06:56:54.718Z",
+            "2026-10-13T06:57:21.033Z",
+            "2026-10-13T06:57:47.949Z",
+            "2026-10-13T06:58:16.400Z",
+            "2026-10-13T06:58:43.842Z",
+            "2026-10-13T06:59:10.243Z",
+            "2026-10-13T06:59:38.938Z",
+            "2026-10-13T07:00:05.612Z",
+            "2026-10-13T07:00:32.323Z",
+            "2026-10-13T07:00:56.614Z",
+            "2026-10-13T07:01:21.416Z",
+            "2026-10-13T07:01:47.980Z",
+            "2026-10-13T07:02:11.748Z",
+            "2026-10-13T07:02:40.485Z",
+            "2026-10-13T07:03:07.287Z",
+            "2026-10-13T07:03:34.734Z"
+          ],
+          "retrySequence": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        }
+      }
+    },
+    {
+      "localReceipt": "parent-controlled-20/p3d.json",
+      "sha256": "c573c581b7ff33149014bf7c74aa6022a2de6e7fc7a58a8ef85b3702bb682d32",
+      "stats": {
+        "startTime": "2026-10-13T07:04:01.476Z",
+        "duration": 1773937.392,
+        "expected": 200,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "suiteRun": {
+        "wall": 1774.799,
+        "code": 0,
+        "port": 40367,
+        "gl": "llvmpipe"
+      },
+      "configuredWorkers": 1,
+      "repeatEach": 20,
+      "topLevelErrors": [],
+      "tests": {
+        "p3d.spec.mjs > the conversion > the toy is a labs toy on the Studio shelf": {
+          "registered": 20,
+          "outcomes": {
+            "expected": 20
+          },
+          "annotations": [
+            [
+              {
+                "description": "2\u00d7 for fixture-created pages",
+                "type": "cpu-throttle-requested"
+              }
+            ]
+          ],
+          "statusSequence": [
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed"
+          ],
+          "durationMs": [10, 9, 7, 9, 7, 10, 11, 8, 9, 13, 8, 9, 13, 11, 8, 8, 9, 9, 10, 8],
+          "startedAt": [
+            "2026-10-13T07:04:03.602Z",
+            "2026-10-13T07:05:24.157Z",
+            "2026-10-13T07:06:49.918Z",
+            "2026-10-13T07:08:17.564Z",
+            "2026-10-13T07:09:47.530Z",
+            "2026-10-13T07:11:12.151Z",
+            "2026-10-13T07:12:40.673Z",
+            "2026-10-13T07:14:07.731Z",
+            "2026-10-13T07:15:35.514Z",
+            "2026-10-13T07:17:04.676Z",
+            "2026-10-13T07:18:28.727Z",
+            "2026-10-13T07:19:59.879Z",
+            "2026-10-13T07:21:28.669Z",
+            "2026-10-13T07:22:54.643Z",
+            "2026-10-13T07:24:25.588Z",
+            "2026-10-13T07:26:05.528Z",
+            "2026-10-13T07:27:39.749Z",
+            "2026-10-13T07:29:07.426Z",
+            "2026-10-13T07:30:34.127Z",
+            "2026-10-13T07:32:00.291Z"
+          ],
+          "retrySequence": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        },
+        "p3d.spec.mjs > the conversion > splat budgets follow the tiers": {
+          "registered": 20,
+          "outcomes": {
+            "expected": 20
+          },
+          "annotations": [
+            [
+              {
+                "description": "2\u00d7 for fixture-created pages",
+                "type": "cpu-throttle-requested"
+              }
+            ]
+          ],
+          "statusSequence": [
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed"
+          ],
+          "durationMs": [4, 6, 7, 6, 6, 5, 7, 5, 6, 8, 6, 6, 5, 5, 5, 9, 6, 5, 6, 6],
+          "startedAt": [
+            "2026-10-13T07:04:03.641Z",
+            "2026-10-13T07:05:24.197Z",
+            "2026-10-13T07:06:49.953Z",
+            "2026-10-13T07:08:17.603Z",
+            "2026-10-13T07:09:47.566Z",
+            "2026-10-13T07:11:12.183Z",
+            "2026-10-13T07:12:40.706Z",
+            "2026-10-13T07:14:07.764Z",
+            "2026-10-13T07:15:35.553Z",
+            "2026-10-13T07:17:04.731Z",
+            "2026-10-13T07:18:28.765Z",
+            "2026-10-13T07:19:59.912Z",
+            "2026-10-13T07:21:28.717Z",
+            "2026-10-13T07:22:54.688Z",
+            "2026-10-13T07:24:25.614Z",
+            "2026-10-13T07:26:05.562Z",
+            "2026-10-13T07:27:39.780Z",
+            "2026-10-13T07:29:07.466Z",
+            "2026-10-13T07:30:34.173Z",
+            "2026-10-13T07:32:00.319Z"
+          ],
+          "retrySequence": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        },
+        "p3d.spec.mjs > the conversion > area averaging keeps a flat color and halves a stripe": {
+          "registered": 20,
+          "outcomes": {
+            "expected": 20
+          },
+          "annotations": [
+            [
+              {
+                "description": "2\u00d7 for fixture-created pages",
+                "type": "cpu-throttle-requested"
+              }
+            ]
+          ],
+          "statusSequence": [
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed"
+          ],
+          "durationMs": [4, 5, 6, 6, 5, 6, 6, 7, 6, 7, 5, 7, 6, 5, 18, 412, 11, 5, 7, 5],
+          "startedAt": [
+            "2026-10-13T07:04:03.663Z",
+            "2026-10-13T07:05:24.216Z",
+            "2026-10-13T07:06:49.974Z",
+            "2026-10-13T07:08:17.631Z",
+            "2026-10-13T07:09:47.587Z",
+            "2026-10-13T07:11:12.202Z",
+            "2026-10-13T07:12:40.726Z",
+            "2026-10-13T07:14:07.780Z",
+            "2026-10-13T07:15:35.572Z",
+            "2026-10-13T07:17:04.756Z",
+            "2026-10-13T07:18:28.788Z",
+            "2026-10-13T07:19:59.936Z",
+            "2026-10-13T07:21:28.748Z",
+            "2026-10-13T07:22:54.715Z",
+            "2026-10-13T07:24:25.631Z",
+            "2026-10-13T07:26:05.601Z",
+            "2026-10-13T07:27:39.800Z",
+            "2026-10-13T07:29:07.482Z",
+            "2026-10-13T07:30:34.192Z",
+            "2026-10-13T07:32:00.338Z"
+          ],
+          "retrySequence": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        },
+        "p3d.spec.mjs > the conversion > depth is stretched to 0..1 and stored without loss that shows": {
+          "registered": 20,
+          "outcomes": {
+            "expected": 20
+          },
+          "annotations": [
+            [
+              {
+                "description": "2\u00d7 for fixture-created pages",
+                "type": "cpu-throttle-requested"
+              }
+            ]
+          ],
+          "statusSequence": [
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed"
+          ],
+          "durationMs": [
+            10, 19, 21, 10, 21, 9, 12, 29, 24, 24, 18, 25, 12, 14, 12, 87, 11, 20, 25, 15
+          ],
+          "startedAt": [
+            "2026-10-13T07:04:03.678Z",
+            "2026-10-13T07:05:24.233Z",
+            "2026-10-13T07:06:49.992Z",
+            "2026-10-13T07:08:17.649Z",
+            "2026-10-13T07:09:47.603Z",
+            "2026-10-13T07:11:12.228Z",
+            "2026-10-13T07:12:40.752Z",
+            "2026-10-13T07:14:07.799Z",
+            "2026-10-13T07:15:35.597Z",
+            "2026-10-13T07:17:04.777Z",
+            "2026-10-13T07:18:28.803Z",
+            "2026-10-13T07:19:59.958Z",
+            "2026-10-13T07:21:28.766Z",
+            "2026-10-13T07:22:54.731Z",
+            "2026-10-13T07:24:25.662Z",
+            "2026-10-13T07:26:06.315Z",
+            "2026-10-13T07:27:39.849Z",
+            "2026-10-13T07:29:07.498Z",
+            "2026-10-13T07:30:34.214Z",
+            "2026-10-13T07:32:00.363Z"
+          ],
+          "retrySequence": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        },
+        "p3d.spec.mjs > the conversion > splats sit at different depths where the photo's depth differs, and a near object is its own piece": {
+          "registered": 20,
+          "outcomes": {
+            "expected": 20
+          },
+          "annotations": [
+            [
+              {
+                "description": "2\u00d7 for fixture-created pages",
+                "type": "cpu-throttle-requested"
+              }
+            ]
+          ],
+          "statusSequence": [
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed"
+          ],
+          "durationMs": [
+            3085, 3319, 3175, 3725, 3112, 3227, 2989, 3837, 3881, 3020, 3603, 3300, 3746, 3078,
+            3018, 3288, 2875, 2855, 3749, 3254
+          ],
+          "startedAt": [
+            "2026-10-13T07:04:03.699Z",
+            "2026-10-13T07:05:24.263Z",
+            "2026-10-13T07:06:50.026Z",
+            "2026-10-13T07:08:17.672Z",
+            "2026-10-13T07:09:47.636Z",
+            "2026-10-13T07:11:12.248Z",
+            "2026-10-13T07:12:40.777Z",
+            "2026-10-13T07:14:07.854Z",
+            "2026-10-13T07:15:35.633Z",
+            "2026-10-13T07:17:04.819Z",
+            "2026-10-13T07:18:28.833Z",
+            "2026-10-13T07:19:59.995Z",
+            "2026-10-13T07:21:28.788Z",
+            "2026-10-13T07:22:54.755Z",
+            "2026-10-13T07:24:25.686Z",
+            "2026-10-13T07:26:06.456Z",
+            "2026-10-13T07:27:39.871Z",
+            "2026-10-13T07:29:07.530Z",
+            "2026-10-13T07:30:34.251Z",
+            "2026-10-13T07:32:00.391Z"
+          ],
+          "retrySequence": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        },
+        "p3d.spec.mjs > the conversion > the layers rise one after another and end where they should": {
+          "registered": 20,
+          "outcomes": {
+            "expected": 20
+          },
+          "annotations": [
+            [
+              {
+                "description": "2\u00d7 for fixture-created pages",
+                "type": "cpu-throttle-requested"
+              }
+            ]
+          ],
+          "statusSequence": [
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed"
+          ],
+          "durationMs": [2, 3, 2, 2, 1, 2, 3, 2, 2, 2, 2, 2, 2, 3, 2, 2, 2, 2, 2, 2],
+          "startedAt": [
+            "2026-10-13T07:04:06.798Z",
+            "2026-10-13T07:05:27.592Z",
+            "2026-10-13T07:06:53.210Z",
+            "2026-10-13T07:08:21.414Z",
+            "2026-10-13T07:09:50.757Z",
+            "2026-10-13T07:11:15.505Z",
+            "2026-10-13T07:12:43.798Z",
+            "2026-10-13T07:14:11.710Z",
+            "2026-10-13T07:15:39.524Z",
+            "2026-10-13T07:17:07.850Z",
+            "2026-10-13T07:18:32.446Z",
+            "2026-10-13T07:20:03.307Z",
+            "2026-10-13T07:21:32.552Z",
+            "2026-10-13T07:22:57.854Z",
+            "2026-10-13T07:24:28.734Z",
+            "2026-10-13T07:26:09.758Z",
+            "2026-10-13T07:27:42.774Z",
+            "2026-10-13T07:29:10.394Z",
+            "2026-10-13T07:30:38.018Z",
+            "2026-10-13T07:32:03.682Z"
+          ],
+          "retrySequence": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        },
+        "p3d.spec.mjs > the conversion > each sample builds within every tier's budget, with finite numbers": {
+          "registered": 20,
+          "outcomes": {
+            "expected": 20
+          },
+          "annotations": [
+            [
+              {
+                "description": "2\u00d7 for fixture-created pages",
+                "type": "cpu-throttle-requested"
+              }
+            ]
+          ],
+          "statusSequence": [
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed"
+          ],
+          "durationMs": [
+            20262, 22150, 25074, 23341, 22569, 24165, 25669, 22306, 23367, 22594, 23400, 25200,
+            21654, 24481, 25901, 27490, 23664, 21971, 22720, 27335
+          ],
+          "startedAt": [
+            "2026-10-13T07:04:06.808Z",
+            "2026-10-13T07:05:27.605Z",
+            "2026-10-13T07:06:53.223Z",
+            "2026-10-13T07:08:21.425Z",
+            "2026-10-13T07:09:50.768Z",
+            "2026-10-13T07:11:15.520Z",
+            "2026-10-13T07:12:43.809Z",
+            "2026-10-13T07:14:11.721Z",
+            "2026-10-13T07:15:39.536Z",
+            "2026-10-13T07:17:07.860Z",
+            "2026-10-13T07:18:32.457Z",
+            "2026-10-13T07:20:03.322Z",
+            "2026-10-13T07:21:32.561Z",
+            "2026-10-13T07:22:57.869Z",
+            "2026-10-13T07:24:28.744Z",
+            "2026-10-13T07:26:09.769Z",
+            "2026-10-13T07:27:42.786Z",
+            "2026-10-13T07:29:10.407Z",
+            "2026-10-13T07:30:38.029Z",
+            "2026-10-13T07:32:03.693Z"
+          ],
+          "retrySequence": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        },
+        "p3d.spec.mjs > the conversion > a photo of your own builds": {
+          "registered": 20,
+          "outcomes": {
+            "expected": 20
+          },
+          "annotations": [
+            [
+              {
+                "description": "2\u00d7 for fixture-created pages",
+                "type": "cpu-throttle-requested"
+              }
+            ]
+          ],
+          "statusSequence": [
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed"
+          ],
+          "durationMs": [
+            58, 42, 48, 49, 44, 46, 40, 44, 73, 69, 35, 35, 40, 36, 37, 54, 35, 29, 35, 53
+          ],
+          "startedAt": [
+            "2026-10-13T07:04:27.079Z",
+            "2026-10-13T07:05:49.768Z",
+            "2026-10-13T07:07:18.311Z",
+            "2026-10-13T07:08:44.775Z",
+            "2026-10-13T07:10:13.346Z",
+            "2026-10-13T07:11:39.696Z",
+            "2026-10-13T07:13:09.490Z",
+            "2026-10-13T07:14:34.035Z",
+            "2026-10-13T07:16:02.911Z",
+            "2026-10-13T07:17:30.463Z",
+            "2026-10-13T07:18:55.869Z",
+            "2026-10-13T07:20:28.534Z",
+            "2026-10-13T07:21:54.222Z",
+            "2026-10-13T07:23:22.361Z",
+            "2026-10-13T07:24:54.654Z",
+            "2026-10-13T07:26:37.271Z",
+            "2026-10-13T07:28:06.458Z",
+            "2026-10-13T07:29:32.386Z",
+            "2026-10-13T07:31:00.759Z",
+            "2026-10-13T07:32:31.041Z"
+          ],
+          "retrySequence": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        },
+        "p3d.spec.mjs > in the browser > nothing loads the depth model until a photo is opened; then it builds and taps": {
+          "registered": 20,
+          "outcomes": {
+            "expected": 20
+          },
+          "annotations": [
+            [
+              {
+                "description": "2\u00d7 for fixture-created pages",
+                "type": "cpu-throttle-requested"
+              }
+            ]
+          ],
+          "statusSequence": [
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed"
+          ],
+          "durationMs": [
+            28191, 30276, 30647, 33489, 30359, 30322, 30515, 31812, 33102, 31498, 32059, 30448,
+            30472, 33752, 32534, 33197, 32110, 30084, 29924, 35219
+          ],
+          "startedAt": [
+            "2026-10-13T07:04:27.147Z",
+            "2026-10-13T07:05:49.823Z",
+            "2026-10-13T07:07:18.374Z",
+            "2026-10-13T07:08:44.837Z",
+            "2026-10-13T07:10:13.401Z",
+            "2026-10-13T07:11:39.754Z",
+            "2026-10-13T07:13:09.541Z",
+            "2026-10-13T07:14:34.090Z",
+            "2026-10-13T07:16:02.996Z",
+            "2026-10-13T07:17:30.545Z",
+            "2026-10-13T07:18:55.914Z",
+            "2026-10-13T07:20:28.582Z",
+            "2026-10-13T07:21:54.293Z",
+            "2026-10-13T07:23:22.407Z",
+            "2026-10-13T07:24:54.702Z",
+            "2026-10-13T07:26:37.340Z",
+            "2026-10-13T07:28:06.502Z",
+            "2026-10-13T07:29:32.424Z",
+            "2026-10-13T07:31:00.806Z",
+            "2026-10-13T07:32:31.111Z"
+          ],
+          "retrySequence": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        },
+        "p3d.spec.mjs > in the browser > screenshots at phone and desktop size": {
+          "registered": 20,
+          "outcomes": {
+            "expected": 20
+          },
+          "annotations": [
+            [
+              {
+                "description": "2\u00d7 for fixture-created pages",
+                "type": "cpu-throttle-requested"
+              }
+            ]
+          ],
+          "statusSequence": [
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed"
+          ],
+          "durationMs": [
+            27005, 26948, 26639, 26602, 26069, 28020, 25696, 27735, 25793, 25087, 29236, 27833,
+            27141, 26667, 35940, 26528, 26714, 29763, 26714, 28031
+          ],
+          "startedAt": [
+            "2026-10-13T07:04:55.902Z",
+            "2026-10-13T07:06:20.927Z",
+            "2026-10-13T07:07:49.769Z",
+            "2026-10-13T07:09:18.836Z",
+            "2026-10-13T07:10:44.188Z",
+            "2026-10-13T07:12:10.646Z",
+            "2026-10-13T07:13:40.835Z",
+            "2026-10-13T07:15:06.423Z",
+            "2026-10-13T07:16:36.707Z",
+            "2026-10-13T07:18:02.503Z",
+            "2026-10-13T07:19:28.542Z",
+            "2026-10-13T07:20:59.544Z",
+            "2026-10-13T07:22:25.122Z",
+            "2026-10-13T07:23:56.662Z",
+            "2026-10-13T07:25:27.984Z",
+            "2026-10-13T07:27:11.204Z",
+            "2026-10-13T07:28:39.135Z",
+            "2026-10-13T07:30:02.970Z",
+            "2026-10-13T07:31:31.249Z",
+            "2026-10-13T07:33:06.955Z"
+          ],
+          "retrySequence": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        }
+      }
+    },
+    {
+      "localReceipt": "parent-controlled-20/ui4.json",
+      "sha256": "8c8b9660924480d03f2517b242c53ea919ccd017092a21d550d2cc7804e9aa3d",
+      "stats": {
+        "startTime": "2026-10-13T07:33:37.750Z",
+        "duration": 690379.502,
+        "expected": 40,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "suiteRun": {
+        "wall": 692.721,
+        "code": 0,
+        "port": 40367,
+        "gl": "llvmpipe"
+      },
+      "configuredWorkers": 1,
+      "repeatEach": 20,
+      "topLevelErrors": [],
+      "tests": {
+        "ui4.spec.mjs > 1440x900 > a drag along the keys plays each key it crosses, in order, up and back (1440x900)": {
+          "registered": 20,
+          "outcomes": {
+            "expected": 20
+          },
+          "annotations": [
+            [
+              {
+                "description": "2\u00d7 for fixture-created pages",
+                "type": "cpu-throttle-requested"
+              }
+            ]
+          ],
+          "statusSequence": [
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed"
+          ],
+          "durationMs": [
+            21455, 17291, 16836, 16375, 16602, 16393, 19159, 16417, 18371, 18154, 17548, 18023,
+            17834, 19821, 17184, 16699, 16804, 17118, 16594, 18479
+          ],
+          "startedAt": [
+            "2026-10-13T07:33:38.800Z",
+            "2026-10-13T07:34:16.818Z",
+            "2026-10-13T07:34:50.810Z",
+            "2026-10-13T07:35:24.149Z",
+            "2026-10-13T07:35:57.370Z",
+            "2026-10-13T07:36:29.453Z",
+            "2026-10-13T07:37:02.406Z",
+            "2026-10-13T07:37:38.761Z",
+            "2026-10-13T07:38:10.702Z",
+            "2026-10-13T07:38:45.264Z",
+            "2026-10-13T07:39:21.438Z",
+            "2026-10-13T07:39:54.699Z",
+            "2026-10-13T07:40:29.374Z",
+            "2026-10-13T07:41:04.961Z",
+            "2026-10-13T07:41:41.890Z",
+            "2026-10-13T07:42:15.761Z",
+            "2026-10-13T07:42:48.786Z",
+            "2026-10-13T07:43:21.160Z",
+            "2026-10-13T07:43:56.295Z",
+            "2026-10-13T07:44:31.331Z"
+          ],
+          "retrySequence": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        },
+        "ui4.spec.mjs > 390x844 > a drag along the keys plays each key it crosses, in order, up and back (390x844)": {
+          "registered": 20,
+          "outcomes": {
+            "expected": 20
+          },
+          "annotations": [
+            [
+              {
+                "description": "2\u00d7 for fixture-created pages",
+                "type": "cpu-throttle-requested"
+              }
+            ]
+          ],
+          "statusSequence": [
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed"
+          ],
+          "durationMs": [
+            14975, 14689, 14515, 15414, 14240, 14843, 14478, 14157, 14840, 16618, 13840, 15322,
+            15810, 14907, 15442, 14681, 14119, 15890, 16267, 17646
+          ],
+          "startedAt": [
+            "2026-10-13T07:34:00.700Z",
+            "2026-10-13T07:34:34.883Z",
+            "2026-10-13T07:35:08.608Z",
+            "2026-10-13T07:35:40.867Z",
+            "2026-10-13T07:36:14.345Z",
+            "2026-10-13T07:36:46.539Z",
+            "2026-10-13T07:37:22.813Z",
+            "2026-10-13T07:37:55.647Z",
+            "2026-10-13T07:38:29.422Z",
+            "2026-10-13T07:39:03.796Z",
+            "2026-10-13T07:39:39.833Z",
+            "2026-10-13T07:40:13.051Z",
+            "2026-10-13T07:40:48.150Z",
+            "2026-10-13T07:41:25.369Z",
+            "2026-10-13T07:41:59.472Z",
+            "2026-10-13T07:42:33.214Z",
+            "2026-10-13T07:43:05.975Z",
+            "2026-10-13T07:43:38.623Z",
+            "2026-10-13T07:44:13.370Z",
+            "2026-10-13T07:44:50.188Z"
+          ],
+          "retrySequence": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        }
+      }
+    },
+    {
+      "localReceipt": "helper-remaining-20/fl7.json",
+      "sha256": "dad257f90a558ac5da43138f6f212e499739ca57431d4b682a6cfc46cae597e5",
+      "stats": {
+        "startTime": "2026-10-13T05:32:47.716Z",
+        "duration": 693506.4330000001,
+        "expected": 60,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "suiteRun": {
+        "wall": 694.215,
+        "code": 0,
+        "port": 38503,
+        "gl": "llvmpipe"
+      },
+      "configuredWorkers": 1,
+      "repeatEach": 20,
+      "topLevelErrors": [],
+      "tests": {
+        "fl7.spec.mjs > on the CPU a phone halves a glass's liquid budget and a splash's vessel, and keeps the splash's pool": {
+          "registered": 20,
+          "outcomes": {
+            "expected": 20
+          },
+          "annotations": [
+            [
+              {
+                "description": "2\u00d7 for fixture-created pages",
+                "type": "cpu-throttle-requested"
+              }
+            ]
+          ],
+          "statusSequence": [
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed"
+          ],
+          "durationMs": [
+            27, 29, 21, 22, 27, 27, 21, 25, 25, 29, 23, 25, 36, 27, 33, 29, 32, 25, 22, 26
+          ],
+          "startedAt": [
+            "2026-10-13T05:32:49.059Z",
+            "2026-10-13T05:33:25.351Z",
+            "2026-10-13T05:33:57.997Z",
+            "2026-10-13T05:34:32.726Z",
+            "2026-10-13T05:35:07.317Z",
+            "2026-10-13T05:35:40.035Z",
+            "2026-10-13T05:36:12.485Z",
+            "2026-10-13T05:36:45.928Z",
+            "2026-10-13T05:37:18.333Z",
+            "2026-10-13T05:37:53.603Z",
+            "2026-10-13T05:38:28.322Z",
+            "2026-10-13T05:39:04.380Z",
+            "2026-10-13T05:39:38.173Z",
+            "2026-10-13T05:40:11.112Z",
+            "2026-10-13T05:40:45.944Z",
+            "2026-10-13T05:41:24.922Z",
+            "2026-10-13T05:42:00.654Z",
+            "2026-10-13T05:42:35.555Z",
+            "2026-10-13T05:43:09.879Z",
+            "2026-10-13T05:43:45.307Z"
+          ],
+          "retrySequence": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        },
+        "fl7.spec.mjs > the phone envelope: the hint, a 1.5 canvas cap, fewer prop splats, smaller gas grids": {
+          "registered": 20,
+          "outcomes": {
+            "expected": 20
+          },
+          "annotations": [
+            [
+              {
+                "description": "2\u00d7 for fixture-created pages",
+                "type": "cpu-throttle-requested"
+              }
+            ]
+          ],
+          "statusSequence": [
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed"
+          ],
+          "durationMs": [
+            20717, 18717, 19450, 19728, 19231, 18215, 18145, 18289, 19356, 19242, 19318, 18482,
+            19086, 20791, 19087, 21152, 20834, 18829, 19233, 21949
+          ],
+          "startedAt": [
+            "2026-10-13T05:32:49.104Z",
+            "2026-10-13T05:33:25.398Z",
+            "2026-10-13T05:33:58.034Z",
+            "2026-10-13T05:34:32.765Z",
+            "2026-10-13T05:35:07.361Z",
+            "2026-10-13T05:35:40.079Z",
+            "2026-10-13T05:36:12.521Z",
+            "2026-10-13T05:36:45.972Z",
+            "2026-10-13T05:37:18.375Z",
+            "2026-10-13T05:37:53.674Z",
+            "2026-10-13T05:38:28.362Z",
+            "2026-10-13T05:39:04.423Z",
+            "2026-10-13T05:39:38.234Z",
+            "2026-10-13T05:40:11.157Z",
+            "2026-10-13T05:40:45.998Z",
+            "2026-10-13T05:41:24.970Z",
+            "2026-10-13T05:42:00.704Z",
+            "2026-10-13T05:42:35.597Z",
+            "2026-10-13T05:43:09.918Z",
+            "2026-10-13T05:43:45.350Z"
+          ],
+          "retrySequence": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        },
+        "fl7.spec.mjs > a deliberate High detail (or ?profile=high) keeps the full lab on a phone": {
+          "registered": 20,
+          "outcomes": {
+            "expected": 20
+          },
+          "annotations": [
+            [
+              {
+                "description": "2\u00d7 for fixture-created pages",
+                "type": "cpu-throttle-requested"
+              }
+            ]
+          ],
+          "statusSequence": [
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed"
+          ],
+          "durationMs": [
+            14343, 12788, 14185, 13638, 12360, 13093, 13432, 12411, 13991, 14099, 15551, 12732,
+            12071, 12354, 18288, 13317, 12567, 14134, 14934, 13183
+          ],
+          "startedAt": [
+            "2026-10-13T05:33:10.115Z",
+            "2026-10-13T05:33:44.460Z",
+            "2026-10-13T05:34:17.782Z",
+            "2026-10-13T05:34:52.855Z",
+            "2026-10-13T05:35:26.913Z",
+            "2026-10-13T05:35:58.629Z",
+            "2026-10-13T05:36:31.284Z",
+            "2026-10-13T05:37:04.588Z",
+            "2026-10-13T05:37:38.092Z",
+            "2026-10-13T05:38:13.252Z",
+            "2026-10-13T05:38:47.992Z",
+            "2026-10-13T05:39:23.867Z",
+            "2026-10-13T05:39:57.690Z",
+            "2026-10-13T05:40:32.281Z",
+            "2026-10-13T05:41:05.420Z",
+            "2026-10-13T05:41:46.462Z",
+            "2026-10-13T05:42:22.127Z",
+            "2026-10-13T05:42:54.707Z",
+            "2026-10-13T05:43:29.482Z",
+            "2026-10-13T05:44:07.631Z"
+          ],
+          "retrySequence": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        }
+      }
+    },
+    {
       "localReceipt": "helper-remaining-20/qrs-toys.json",
       "sha256": "697df1dc35b1e33a9a941956b26ea96ddd9076507b89b6f7508e3f07caf4559e",
       "stats": {
@@ -4032,8 +5510,42 @@
       "tools/suite-runtime.mjs": "0f4ebba74567554bfc8ed986022841721d156510e1cdd41660590721ce3525e1"
     },
     "expectedPasses": 240,
-    "verifiedPasses": 140,
+    "verifiedPasses": 200,
     "receipts": {
+      "fl7": {
+        "report": ".cache/suite-speed/helper-remaining-20/fl7.json",
+        "sha256": "dad257f90a558ac5da43138f6f212e499739ca57431d4b682a6cfc46cae597e5",
+        "stats": {
+          "startTime": "2026-10-13T05:32:47.716Z",
+          "duration": 693506.4330000001,
+          "expected": 60,
+          "skipped": 0,
+          "unexpected": 0,
+          "flaky": 0
+        },
+        "suiteRun": {
+          "wall": 694.215,
+          "code": 0,
+          "port": 38503,
+          "gl": "llvmpipe"
+        },
+        "title_counts": [
+          {
+            "title": "fl7.spec.mjs \u203a on the CPU a phone halves a glass's liquid budget and a splash's vessel, and keeps the splash's pool",
+            "count": 20
+          },
+          {
+            "title": "fl7.spec.mjs \u203a the phone envelope: the hint, a 1.5 canvas cap, fewer prop splats, smaller gas grids",
+            "count": 20
+          },
+          {
+            "title": "fl7.spec.mjs \u203a a deliberate High detail (or ?profile=high) keeps the full lab on a phone",
+            "count": 20
+          }
+        ],
+        "measurements": {},
+        "verified": true
+      },
       "qrs-toys": {
         "report": ".cache/suite-speed/helper-remaining-20/qrs-toys.json",
         "sha256": "697df1dc35b1e33a9a941956b26ea96ddd9076507b89b6f7508e3f07caf4559e",

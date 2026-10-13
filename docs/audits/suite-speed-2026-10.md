@@ -1,15 +1,16 @@
 # Suite speed and load-dependent failures — October 13, 2026
 
-**Status: incomplete; draft for the protected-file exception.** The full-suite 2× speed target is
-not demonstrated, and several named flakes still lack a reproduced cause and 20 consecutive passes.
-The timing inventory below explicitly marks missing measurements. Do not use the exploratory runs as
-a before/after benchmark or remove the whole flaky list on the strength of this change.
+**Status: incomplete; applying the Operator’s finish instructions.** The full-suite 2× speed target
+is not demonstrated, and several named flakes still lack a reproduced cause and 20 consecutive
+passes. The timing inventory below explicitly marks missing measurements. Do not use the exploratory
+runs as a before/after benchmark or remove the whole flaky list on the strength of this change.
 
 ## Checkout and machine
 
 - Initial flake baseline: `main` at `49c809b4`; implementation branch: `codex/suite-speed`.
 - Main advanced during the investigation. The branch merged `a31f69df` and the later docs-only
-  `6bcebac2` and `555e8f5c` updates. Neither changed test or engine sources.
+  `6bcebac2` and `555e8f5c` updates. Neither changed test or engine sources. On October 13, the
+  branch merged `574a68d3`, including the US English sweep (#570) and the gallery audit fix.
 - A matching immutable benchmark baseline is prepared at `a31f69df` in
   `/tmp/splashery-suite-before-current`; its 255 files match current main's test inventory.
 - Four-CPU quota (`cpu.max`: `400000 100000`), 17 GiB memory; commands used affinity
@@ -31,8 +32,10 @@ is not proof that those fixes were completed.
 
 [Task 50](../codex/50-suite-speed-flakes.md) says: “Toys and tests the open PRs change (#560, #562,
 #566, #570, #576). Ask in the PR if a fix needs them.” Changed-file lists and current PR status were
-read from GitHub. PRs #560, #562, #566, and #570 remain open. PR #576 merged during the
-investigation and is included in the main merge above.
+read from GitHub. PRs #570 and #576 have merged. The Operator’s
+[October 13 finish instructions](https://github.com/ryanjosephkamp/splashery/pull/581#issuecomment-6146627253)
+explicitly authorize applying the tested smoke patch after merging main, then deleting the parked
+patch. The branch has done both. The other protected paths remain outside this change.
 
 The actual `smoke:734` case is
 `rigs pick splats by colour, run effects and show add-ons; shelf shapes have rigs`. Its untouched
@@ -50,10 +53,10 @@ limit). The full candidate controls the real effect phases rather than the wall 
 copy passed both complete pilot repetitions with two SwiftShader workers under concurrent renderer
 load (all original assertions and samples). The llvmpipe copy passed 20/20 complete repetitions with
 two workers, zero skips/retries, 1188.333 seconds Playwright duration (1191.590 seconds process
-wall), under concurrent renderer load. This is a proven candidate, not an applied protected-file
-fix. The protected test remains unchanged. The PR must request
-[the concrete patch](suite-speed-2026-10-smoke.patch) before it is applied. Its zero-context form
-passes `git apply --check --unidiff-zero`; approval is required before actual application.
+wall), under concurrent renderer load. After #570 merged, the exact candidate was applied to
+`tests/smoke.spec.mjs` and the parked patch was removed. All original thresholds, samples, console
+checks, and the 15-second comparison deadline remain. The real repository case still needs its
+post-merge 20-run receipt; the copy receipt is identified separately.
 
 The formerly protected `man5` sharing-demo assertion expected port 4173. Before #576 merged, its
 isolated-port run failed in 9.015 seconds at port 45093. After syncing updated main, the expected
@@ -63,7 +66,7 @@ origin in `tests/vw.spec.mjs` honors `SPLASHERY_PORT`; its three PDF checks also
 
 The clean four-mode benchmark matrix has not been completed. An initial baseline run was stopped
 before it completed a file because concurrent diagnostic browsers contaminated its timing; it is
-explicitly excluded. Protected smoke acceptance remains unresolved.
+explicitly excluded. The smoke permission boundary is resolved; final verification is still pending.
 
 ## Runner and measurement changes
 
@@ -149,28 +152,30 @@ are load proofs, never benchmark samples.
 References in Task 50 refer to source lines. Playwright's reported registration locations can
 differ; titles identify the actual cases. “Not reproduced” does not mean fixed.
 
-| Task reference     | Observed cause and change                                                                                                                                                                                                                                                                                                                                                                                                                     | Consecutive load proof                                                                                                                                                                                                           |
-| ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `smoke:734`        | Protected smoke test and app/player paths (#570); untouched. Reproduced 8/10 failures at strawberry return-to-rest, about 82,000 differing pixels. Diagnostics identify clamped toy time. The unapplied phase-control candidate passed 20/20 complete copies under concurrent load; the protected test remains untouched.                                                                                                                     | Candidate copy: 20/20 passed, no skips/retries. Not applied to the protected test.                                                                                                                                               |
-| `tpg:204`          | A service worker takes control after the first page and bypasses the mocked embed route. Three original attempts timed out at 240 seconds; seven remaining repetitions were interrupted, not completed. Block service workers in the two contexts that explicitly mock iframe content. Real embed tests remain real.                                                                                                                          | 20/20 passed, zero skips/retries, 811.514 seconds, under concurrent renderer load.                                                                                                                                               |
-| `hl1:75`           | Two animation-frame callbacks do not fence asynchronous sort upload before a GPU pick. Replace them with actual rendered-world readiness. Root cause is supported by engine order and readiness regressions, not a completed original/fixed 20-run comparison.                                                                                                                                                                                | Latest full 40-toy sample: 2/2 tests passed, 244.991 seconds process wall. No 20-run proof.                                                                                                                                      |
-| `stm:366`          | A model context appears before loading and input-panel replacement finish; an old visible warning can satisfy the next malformed-file check. Wait for loading completion, the named input panel, and this malformed file's warning. A loaded run also exceeded the lift-settle wall deadline because toy time is capped per rendered frame; advance the real player clock through the unchanged 3.2-second pulse. Original thresholds remain. | 20/20 passed, zero skips/retries, 1089.400 seconds Playwright duration (1091.486 seconds process wall), llvmpipe with CDP 2×.                                                                                                    |
-| `fl7:49`, `fl7:95` | No new reproduced cause. Main already waits for the gas grid in the phone-envelope case. Only opt-in load instrumentation was added.                                                                                                                                                                                                                                                                                                          | Not obtained.                                                                                                                                                                                                                    |
-| `qrs-toys:132`     | No historical healing failure was reproduced. Opt-in load instrumentation was added; no speculative assertion or toy change was made. The earlier ten three-code passes are a different case and are not healing proof.                                                                                                                                                                                                                       | Final code: 20/20 healing passes, zero skips/retries, 1083.568 seconds Playwright duration (1087.406 seconds process wall), llvmpipe with CDP 2×; frozen source hashes match.                                                    |
-| `live4:149`        | Pause's fixed delay does not guarantee a frame clearing the remaining drive. Wait for stopped playback and stationary sand, retaining the one-second stability observation. CDP 4× reproduced Start over at position 0.606888 after a second browser round trip, above the unchanged 0.3-second limit; click and snapshot are now atomic. Extreme SwiftShader contention also missed the first tune's settlement; that failure is unresolved. | 20/20 passed, zero skips/retries, 515.710 seconds Playwright duration (516.873 seconds process wall), llvmpipe with CDP 4× and no other browser jobs. Extreme competing-renderer failures remain unresolved.                     |
-| `phy:64`           | Screen projections used during camera easing/turntable motion can select the wrong stone. Disable automatic turntable motion in this manual-clock test and wait for the real camera/frame. Six whole-file checks passed under load; no changed physics threshold.                                                                                                                                                                             | 20/20 passed in the 80-test concurrent-renderer run. Final deadline preservation occurred during the run; a frozen final-code 20-run proof is still due.                                                                         |
-| `ui4:42`           | Original desktop drag fired only `[38,39,40]`, failing the unchanged `>5` crossing assertion. The 1500 ms delay did not settle the easing camera before projecting finger points. Wait for camera and rendered-world readiness. Both sizes and all four whole-file checks passed under load.                                                                                                                                                  | 20/20 passed at each size in the 80-test concurrent-renderer run; see checkpoint qualification below.                                                                                                                            |
-| `wd:187`, `wd:210` | No new reproduced cause for tier budgets or screenshots. Opt-in load instrumentation and a smaller logic-test viewport were added; all tier/location counts matched exactly. Screenshot sizes stay unchanged.                                                                                                                                                                                                                                 | Not obtained.                                                                                                                                                                                                                    |
-| `wdr3:133`         | No new reproduced cause for planted-foot measurements. Opt-in load instrumentation and a smaller logic-test viewport were added; every walk/run metric matched exactly.                                                                                                                                                                                                                                                                       | Final code: 20/20 passed, zero skips/retries, 3391.101 seconds Playwright duration (3393.668 seconds process wall), llvmpipe with CDP 2×; all 20 walk/run metric tuples match the original-size pilot, and frozen sources match. |
-| `smd-moving:101`   | No new reproduced cause for sample builds. The moving-photo source is protected by #560; no speculative source change was made.                                                                                                                                                                                                                                                                                                               | Final code: 100/100 passed, each of five sample titles 20/20, zero skips/retries, 1932.230 seconds Playwright duration (1933.547 seconds process wall), llvmpipe with CDP 2× in the existing solo lane; frozen sources match.    |
-| `hh5-gems:119`     | The crystal-ball test read rendered mist and its live body in separate browser tasks, allowing a physics step between snapshots. Read both atomically and retain the original `1e-6` offset assertion. Camera/screenshot delays now use readiness. All five whole-file checks passed under load.                                                                                                                                              | 20/20 passed in the 80-test concurrent-renderer run; see checkpoint qualification below.                                                                                                                                         |
-| `p3d`              | A custom-photo context is assigned before its new input panel is connected; a following invalid file can target the retiring panel. Wait for completed loading and the named replacement panel. Replace sample/screenshot sleeps with real readiness, including Sharp relief view. Latest full file: 10/10 passed under competing renderer load, 413.048 seconds process wall.                                                                | No 20-run full-file proof.                                                                                                                                                                                                       |
+| Task reference   | Observed cause and change                                                                                                                                                                                                                                                                        | Consecutive load proof                                                                                                                                                                             |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `smoke:734`      | Reproduced 8/10 strawberry return-to-rest failures: about 82,000 differing pixels. Slow rendered frames cap toy-time advancement. The approved patch advances the real player clock through the existing phases and waits for rendered readiness. Every original threshold and deadline remains. | Candidate copy: 20/20 under concurrent renderer load. Applied after #570 merged; actual post-merge 20-run proof pending.                                                                           |
+| `tpg:204`        | A service worker takes over after the first page and bypasses mocked iframe routes. Three original attempts timed out at 240 seconds; seven were interrupted. Block service workers only in the two contexts mocking players; actual embeds remain real.                                         | 20/20, zero skips/retries, 811.514 seconds under concurrent renderer load.                                                                                                                         |
+| `hl1:75`         | GPU picks require an uploaded splat sort, beyond two animation frames. Added rendered-world readiness. A later frozen CDP 2× proof failed at the waterfall floor check; investigating that separate failure.                                                                                     | 3 passes, 1 failure, and 36 unrun. No completed 20-run proof.                                                                                                                                      |
+| `stm:366`        | Wait for finished loading, the named replacement panel, and the specific malformed-file warning. Advance the real player through its unchanged pulse using 200 steps at 1/60 second; preserve the lift and exact-zero assertions.                                                                | 20/20, zero skips/retries, 1089.400 seconds Playwright (1091.486 process), CDP 2×/llvmpipe.                                                                                                        |
+| `fl7:49, fl7:95` | No new historical cause reproduced. Main already waits for the gas grid; only opt-in load instrumentation added.                                                                                                                                                                                 | Both named browser titles 20/20 at CDP 2×/llvmpipe; 60/60 whole file including 20 Node budget checks (Node is not CDP-throttled), zero skips/retries; 693.506 seconds Playwright, 694.215 process. |
+| `qrs-toys:132`   | No historical healing failure reproduced. Only opt-in load instrumentation added. Earlier three-code checks are a different case.                                                                                                                                                                | 20/20 healing, zero skips/retries, 1083.568 seconds Playwright (1087.406 process), CDP 2×/llvmpipe.                                                                                                |
+| `live4:149`      | Wait for stopped playback and stationary sand before the original one-second observation. Start-over click and position snapshot are atomic, avoiding another task’s physics/audio advancement. Extreme competing-renderer settlement failures remain unresolved.                                | 20/20 at CDP 4×/llvmpipe, zero skips/retries, 515.710 seconds Playwright (516.873 process), no other browsers.                                                                                     |
+| `phy:64`         | Disable the automatic turntable during manual-clock picking; wait for camera and rendered readiness with the original 30-second camera deadline. Every physics threshold remains.                                                                                                                | Frozen source: 20/20 at CDP 2×/SwiftShader, zero skips/retries; 533.517 seconds Playwright (534.916 process).                                                                                      |
+| `ui4:42`         | Original desktop drag fired only [38,39,40], below the unchanged >5 crossing assertion. Replace the 1500 ms camera sleep with real camera/render readiness; both sizes retained.                                                                                                                 | Frozen source: 20/20 at each viewport, 40/40, zero skips/retries, CDP 2×/llvmpipe; 690.380 seconds Playwright (692.721 process).                                                                   |
+| `wd:187, wd:210` | No historical budget/screenshot race reproduced. Logic-only viewport 640×360 preserves aspect, full scene, and every numerical measurement. Photos retain both original sizes. A stacked-load total timeout was retained, followed by a controlled proof.                                        | 20/20 each title, 40/40, zero skips/retries, CDP 2×/llvmpipe, one lane; 3841.148 seconds Playwright (3842.519 process).                                                                            |
+| `wdr3:133`       | No historical planted-foot cause reproduced. Smaller logic viewport and opt-in load instrumentation; all measured gait tuples equal the original-size pilot.                                                                                                                                     | 20/20, zero skips/retries, CDP 2×/llvmpipe; 3391.101 seconds Playwright (3393.668 process).                                                                                                        |
+| `smd-moving:101` | No historical sample-build cause reproduced. Protected source under #560 unchanged; no speculative fix.                                                                                                                                                                                          | Each five sample titles 20/20, 100/100, zero skips/retries, CDP 2×/llvmpipe solo lane; 1932.230 seconds Playwright (1933.547 process).                                                             |
+| `hh5-gems:119`   | Read rendered mist and live body in one browser task to preserve the original 1e-6 offset assertion. A real frame can advance physics between separate evaluations.                                                                                                                              | Earlier 20/20 checkpoint. The fresh filter anchored at the title’s start matched no tests; corrected final proof pending. No empty receipt counts as a pass.                                       |
+| `p3d`            | Wait for finished loading and the connected named photo panel before the invalid-file check. Replace camera/sample/photo sleeps with real readiness, including Sharp relief.                                                                                                                     | Whole file: ten distinct titles each 20/20, 200/200, zero skips/retries, CDP 2×/llvmpipe; 1773.937 seconds Playwright (1774.799 process).                                                          |
 
 The 80-test proof took 2287.230 seconds, with zero failures, skips, or retries. Each of its four
 case titles had 20 passes. It began before the stationary-scene fallback was added to the shared
 readiness helper and before the physics camera deadline was restored to its original 30 seconds.
-These are checkpoint receipts; the final helpers have separate regressions, but a fresh frozen-code
-proof is still required before removing these entries from the flaky list.
+These remain checkpoint receipts. The subsequent frozen-source PHY, UI4, and P3D proofs above
+completed; HH5’s fresh filter failed to select its case, and HL1 exposed a waterfall failure. The
+completed background proofs ran before the US English merge; their named spec files are
+byte-for-byte unchanged by that merge. The final full-suite pass must still cover the merged head.
 
 ## Exploratory timing receipts
 
@@ -192,7 +197,8 @@ The fresh WD proof failed with 3 passes, 1 timeout, and 36 unrun cases after the
 trace showed both world loads completing (48.761 and 64.467 seconds), all manual steps finishing,
 and both screenshots returning (13.122 and 30.951 seconds). The original 240-second test deadline
 expired around final close/teardown. This is aggregate cost under stacked jobs, not evidence of a
-stale-state assertion. The deadline remains unchanged. A controlled CDP 2× rerun is still required.
+stale-state assertion. The deadline remains unchanged. The subsequent controlled CDP 2× run passed
+40/40: both named titles passed 20 consecutive attempts. The failed attempt remains in the receipts.
 
 Two further HL1 repetitions completed before its concurrent-load queue was interrupted during the
 third. These are checkpoint attempts, not a 20-run proof. The full 2,229-test Playwright check was
@@ -211,18 +217,21 @@ these conclusions do not require temporary logs.
 The task requires a draft PR, not a merge. The full suite is not green and the four-mode benchmark
 is incomplete. The published draft passed `npx prettier --check .`,
 `node tools/us-english.mjs --diff`, and `git diff --check`. These checks must pass again before the
-next push. The protected-path intersection and generated screenshot diff are empty.
+next push. The Operator explicitly directs pushing the local timing-report follow-up before the
+final proof/benchmark/full-suite sequence; the full-check timing deviation is disclosed. The
+approved smoke file is now changed; other protected paths and `tests/taps.spec.mjs` remain
+untouched.
 
 ## Remaining acceptance work
 
-1. Approve and apply the concrete protected smoke repair requested in the draft PR.
-2. Reproduce the remaining named flakes and obtain 20 consecutive load passes for each final patch,
-   including the protected smoke case and the unresolved audio contention case.
-3. Freeze the code, stop all load generators, and complete four fresh whole-suite runs on the same
-   four-CPU machine and renderer: before jobs=1/jobs=2, after jobs=1/jobs=2.
-4. Generate the comparison using the original spec inventory. If the measured ratio is below 2×,
-   continue optimization without removing coverage. The current patch is not evidence that this
-   acceptance target has been met.
+1. Push the timing-report correction, two runner regressions, main merge, and approved smoke repair
+   after formatting, American English, and focused checks.
+2. Finish HL1, HH5, and actual smoke final-code 20-run proofs, retaining every failed attempt.
+3. Freeze code and complete fresh before jobs=1/jobs=2 and after jobs=1/jobs=2 on the same four-CPU
+   machine and renderer, using the same upstream production commit. The old benchmark controller
+   correctly stopped when the HL1 proof failed; no clean benchmark started beside proof browsers.
+4. Report the measured ratio. If below 2×, show where time goes, as the Operator instructs. Run the
+   complete suite on final head and report its exact pass/fail/capability-skip counts.
 
 Reproduce the profile once the four directories contain complete reports:
 

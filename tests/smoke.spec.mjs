@@ -4,6 +4,7 @@
 // Chromium offers no WebGPU adapter.
 
 import { test, expect } from "@playwright/test";
+import { waitForCamera, waitForRenderedToy } from "./render-ready.mjs";
 import fs from "node:fs";
 import path from "node:path";
 import { PNG } from "pngjs";
@@ -738,16 +739,40 @@ test.describe("Splashery v3 engine (WebGL2)", () => {
     await loadApp(page);
     await page.evaluate(() => window.__splashery.player.camera.setTurntable(false));
     const canvas = page.locator("#stage");
+    const ready = async (label) => {
+      await expect(page.locator("#toy-status")).toHaveText(new RegExp(`^${label}`), {
+        timeout: 180000,
+      });
+      await waitForCamera(page);
+      await waitForRenderedToy(page);
+    };
+    // Use the real player clock: software rendering caps toy time per
+    // frame, so fixed wall sleeps need not reach the intended effect phase.
+    const advance = async (seconds) => {
+      await page.evaluate((seconds) => {
+        const { player } = window.__splashery;
+        const paused = player.paused;
+        player.setPaused(false);
+        try {
+          for (let i = 0; i < Math.ceil(seconds * 60); i++) player.update(1 / 60);
+        } finally {
+          player.setPaused(paused);
+        }
+      }, seconds);
+      await waitForRenderedToy(page);
+    };
+
     // Strawberry: the seeds (a color key) pop out and the berry blushes, then settles.
     await page.click(".toy-card[data-toy='strawberry']");
-    await waitForToy(page, "Strawberry");
+    await ready("Strawberry");
     await expect(page.locator("#toy-action")).toHaveText("Pop seeds");
     const rest = await canvas.screenshot({ type: "png" });
     await page.click("#toy-action");
-    await page.waitForTimeout(600);
+    await advance(0.6);
     const popped = await canvas.screenshot({ type: "png" });
     const moved = await countDifferentPixels(page, rest, popped);
     expect(moved).toBeGreaterThan(3000);
+    await advance(2.2);
     // It settles back; slow machines take longer than the effect's own few seconds.
     const settled = async () =>
       countDifferentPixels(page, rest, await canvas.screenshot({ type: "png" }));
@@ -756,25 +781,25 @@ test.describe("Splashery v3 engine (WebGL2)", () => {
       .toBeLessThan(moved / 4);
     // Lantern: a toggle lights a flame add-on; a second tap puts it out.
     await page.click(".toy-card[data-toy='lantern']");
-    await waitForToy(page, "Lantern");
+    await ready("Lantern");
     expect(await page.evaluate(() => !!window.__splashery.player.stage.toy.addon)).toBe(true);
     const dark = await canvas.screenshot({ type: "png" });
     await page.click("#toy-action");
-    await page.waitForTimeout(1200);
+    await advance(1.2);
     const lit = await canvas.screenshot({ type: "png" });
     expect(await countDifferentPixels(page, dark, lit)).toBeGreaterThan(800);
     await page.click("#toy-action");
-    await page.waitForTimeout(1500);
+    await advance(1.5);
     const out = await canvas.screenshot({ type: "png" });
     expect(await countDifferentPixels(page, dark, out)).toBeLessThan(400);
     // The jelly blob (a procedural shelf shape) splits in three.
     await page.click(".chip[data-category='shapes']");
     await page.click(".toy-card[data-toy='blob']");
-    await waitForToy(page, "Jelly blob");
+    await ready("Jelly blob");
     await expect(page.locator("#toy-action")).toHaveText("Split");
     const whole = await canvas.screenshot({ type: "png" });
     await page.click("#toy-action");
-    await page.waitForTimeout(900);
+    await advance(0.9);
     const split = await canvas.screenshot({ type: "png" });
     expect(await countDifferentPixels(page, whole, split)).toBeGreaterThan(5000);
     expect(problems).toEqual([]);
