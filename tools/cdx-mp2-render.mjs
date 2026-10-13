@@ -788,6 +788,16 @@ export async function renderGoal(option, reconstructedSources) {
                 }),
               );
           const start = Date.now();
+          let openingDeadline = false;
+          const openingTimer = Number.isFinite(deadline)
+            ? setTimeout(
+                () => {
+                  openingDeadline = true;
+                  page.close().catch(() => {});
+                },
+                Math.max(1, deadline - Date.now()),
+              )
+            : null;
           try {
             const opening = await openRender(page, {
               id,
@@ -796,6 +806,7 @@ export async function renderGoal(option, reconstructedSources) {
               tier: config.tier,
               stepped: true,
             });
+            clearTimeout(openingTimer);
             const info = await page.evaluate(() => {
               const c = window.__mp3.MOVING.clip;
               return {
@@ -1000,9 +1011,16 @@ export async function renderGoal(option, reconstructedSources) {
             results.push(result);
             console.log(JSON.stringify({ ...result, frames: undefined }));
           } catch (e) {
-            errors.push({ profile, id, upload, message: e.message });
+            errors.push({
+              profile,
+              id,
+              upload,
+              message: e.message,
+              stoppedAtDeadline: openingDeadline,
+            });
             console.log(JSON.stringify(errors.at(-1)));
           } finally {
+            clearTimeout(openingTimer);
             await page.close();
           }
           await fs.writeFile(

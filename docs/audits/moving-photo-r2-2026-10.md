@@ -416,3 +416,413 @@ attachments were committed.
 The full upload gap is not claimed closed for every clip, native 60 fps depth inference is not
 promised within the existing geometry budget, original short-source downloads were not available for
 three comparisons, and real phone hardware/audio audition were not measured.
+
+## Round 3
+
+Codex task 48 started on October 12, 2026, at 23:05 UTC, with a 12-hour cutoff of October 13 at
+11:05 UTC. Work stays on `codex/moving-photo-r2-public`, with latest main merged at `a9069bfe`. The
+immutable comparison is #560's prior head, `93077cf6`. The requested Goal Mode switch is not
+available in this session; the same goal and stopping rule are being followed through normal
+execution.
+
+Before captures route the four task-owned modules from that immutable head into the current merged
+app. The only source file changed by the main merge is `src/live/relief.js`, for CameraDepth and
+Splat mirror; Moving photo's common mesh and depth worker are identical to the prior head. This
+compares the owned clip implementation while keeping the current app and renderer consistent.
+
+### Measurement and source correspondence
+
+`tools/cdx-mp2-measure.mjs --goal` now measures the entire projected picture on every decoded source
+frame. The camera is explicitly applied to the stage at yaw 0.18 and pitch 0.08. The reference uses
+the same compiled surface shader, with its cut threshold disabled by a uniform; changing shader code
+for the mask had produced false one-pixel differences at the outline. No central crop or rim
+exclusion is used. Prepared JPEG-sheet samples retain their existing 16 fps pictures; the native
+Bunny, long films, original-source uploads, and fast clip use their actual decoded timestamps. The
+source-clock enumeration includes the final decoded frame. Each stepped frame calls the actual
+screen draw, Sharp sync, camera update, and engine capture. Unrelated paused update callbacks are
+suspended after preparation; the real decoder, shader draws, and engine frame-end captures remain
+active. Eight paired source-frame PNGs, across the before and after versions, were byte-for-byte
+identical with those callbacks enabled and suspended. Startup and continuous playback are measured
+separately. Reusing the discovered brightness candidates avoids a duplicate image scan: 792 offline
+synthetic checks matched the original scan exactly, with unchanged thresholds.
+
+Holes are transparent pixels inside that complete reference. Their mask and denominator stay
+independent of the brightness scan. That scan also includes actual picture walls projecting beyond
+the reference outline. An independent geometry-role pass excludes the dark frame while retaining its
+depth occlusion. Bright candidates use a 12 CSS-pixel rim, a 5 × 5 screen-neighborhood median,
+luminance at least 160, and the unchanged 60-level brightness difference. An opaque candidate is
+introduced only if it is also more than 60 levels above the maximum of a 5 × 5 neighborhood in the
+exact displayed source frame, at independently mapped physical source coordinates. Legacy backing
+geometry uses its physical `uv`, before its borrowed color coordinate `cuv`; reconstructed walls use
+their declared owning depth cell. The source pass packs the exact native pixel index into opaque
+RGB24, without UV quantization or alpha premultiplication. Transparent tears cannot be excused by
+bright source content. The optional old screen-reference outlier counts remain diagnostics, and an
+unwitnessed opaque candidate remains a failure. Final sweeps skip that separate diagnostic scan; the
+independent geometry-role mask and its complete brightness scan still run on every frame.
+
+This corrects a demonstrated measurement error: Bunny at 0.42708375 seconds had two reported specks
+at screen pixels (212, 585) and (212, 586). Their mapped native pixels (203, 325) and (203, 326) are
+bright finger fur, with luminance 232.89 and 228.11; the rendered first point was 239.18. The
+stretched uncut triangle instead showed grass there. These are existing source details, within the
+same 60-level comparison, rather than newly introduced brightness. The source witness checks local
+source correspondence; it does not establish ground-truth depth or the physical correctness of
+unseen surfaces.
+
+The phone browser is 390 × 844 at device scale factor 3. The app's low-profile stage caps its actual
+canvas ratio at 1.5; that ratio is recorded rather than described as a 3× canvas. Desktop is 1440
+× 900. Chromium is `/usr/bin/chromium`; the documented `/opt/pw-browsers/chromium` is absent. WebGL2
+uses ANGLE with Mesa llvmpipe on Xvfb, and WebGPU regression checks use the real SwiftShader
+adapter. Physical phone performance is not measured. CPU-rate-4 timing uses CDP page throttling and
+does not throttle the model worker or emulate a physical phone.
+
+After the first two cases per version, subsequent sweeps and final isolated regressions limit
+llvmpipe with `LP_NUM_THREADS=2` to fit the environment's four-CPU quota. The first cases used the
+driver default. Sixteen independently repeated before/after frames had identical plain and reference
+PNGs, source/depth hashes, and every metric with two threads and the default. This establishes pixel
+equivalence for that check, rather than an isolated performance comparison. Each later case records
+its graphics-thread setting.
+
+### Fix log
+
+- The inset coarse backing and its borrowed far-side colors left real gaps and introduced bright
+  colors beside moving foreground edges. Clip-only observed pixel patches now have solid sides,
+  raster depth, and native texture sampling. Intact triangles retain their normal source rendering;
+  extra pixel geometry is selected around potential cuts, with a neighboring margin.
+- The frame now shares the actual surface's border vertices. Cutting the already softened border
+  from unsmoothed depth had discarded continuous border triangles. Clip cuts now use the existing
+  six-cell softened band's geometry, with the original interior cut threshold and full depth lift.
+- Side-wall UV gradients collapse along their normal. They now represent one observed depth cell's
+  finite source footprint along that direction and bound the real tangent gradient to the owning
+  patch. Native top filtering stays unchanged; no color blur or image mask is added.
+- Clip shaders specialize the roles already fixed by the clip path. The existing border stencil and
+  conservative vertex-edge magnitude use a small CPU field for the first preview. Regular playback
+  evaluates the vertex stencil on the GPU, with shared border anchors for the frame. The
+  measurement's large cut uniform still disables all reference cuts. The first full regression run
+  exposed four playback-clock failures with the CPU interior stencil. Moving that stencil back to
+  the GPU made all 16 unchanged `smd-moving` tests pass, including their original 3% clock bounds. A
+  later complete 188-test run passed 187 tests but missed Machine's slow playback bound: 3.19
+  seconds of the clip in 3.51 seconds. No other browser job ran during that suite.
+- Potential-cut selection now bounds adjacent horizontal and vertical depth changes separately,
+  including linear-sampler support and floating-point coordinate padding. The previous broad
+  neighborhood range could select intact ramps unnecessarily. Raising its threshold directly was
+  rejected: an 8/255 local range can still produce a 0.06172 summed triangle slope, above the
+  unchanged 0.05 fragment cut. Offline adversarial checks covered 30,800 triangle points and 831,600
+  vertex/stencil samples without omitting an actual cut. A second check covered 48 real grid
+  configurations and 3,110,400 sampler-support checks. A synthetic two-axis ramp's selected cells
+  fell from 51,276 to 18,824; this is a geometry-work diagnostic, not a hardware benchmark. The
+  directional filter runs after the original conservative selection and compacts its IDs, so it
+  never adds work on small noisy checkers. Another isolated suite passed 43 of 44 tests, with Horse
+  at 3.98 seconds of source in 4.14 seconds of wall time.
+- Regular clip texture and geometry preparation now runs after the player's media-clock drive,
+  during the same stage update and before rendering. Opening, paused or frozen manual captures,
+  builds, and Sharp-to-Splats handoffs retain immediate synchronization. The independent render test
+  recorded 21 depth uploads outside the drive and exact selected-depth bytes on all 25 rendered
+  frames. The unchanged Bridge and Machine slow-clock tests then measured 3.64/3.64 and 3.82/3.82
+  seconds, respectively. The final complete suite is still required to establish all regressions.
+- A zero-depth floor initially closed the junctions, but also added colored thickness to a flat
+  picture: the independent oblique flat-depth regression found 6,525 opaque pixels more than one
+  raster pixel beyond its projected plane. Shared lower corners now come from the minimum of the
+  four incident observed patches. Lower caps close their junctions, and flat patches collapse to one
+  surface. This geometry check is independent of the source-brightness witness.
+- A real first estimate uses a small opening geometry with the full available picture, before the
+  complete clip is prepared. Original full-resolution normalization, mean, refinement, playback
+  frame rate, and model inputs remain in use for the regular clip. Worker initialization overlaps
+  decoding. A long preview uses answer one while its original four-answer opening finishes.
+- Failed openings release video, audio, object URLs, and workers. Changing clips or toys releases
+  the paused player, closes an owned pending preview, and prevents a late custom-clip commit.
+  Cancellation is latched and tied to the selected toy object, including a switch away and back
+  before answer one exists.
+- Short-video extraction waits for a fresh compositor presentation after seeking, with two paint
+  cycles as a bounded fallback for paused videos that present while seeking and never issue another
+  callback. Cancellation, decode errors, and a 10-second timeout release callbacks and listeners.
+  The callback-only experiment timed out in a real browser and was rejected. This changes background
+  extraction; the first preview still comes before that read.
+
+The first native-role-v4 candidate completed 14 phone cases (3,846 frames): all holes were zero and
+all paired stability values were no worse. Machine long alone reported one introduced rim pixel at
+source time 22.42725, frame 538, screen (445, 594). Its shown RGB was (182, 195, 197), with
+luminance 192.38 versus native 5 × 5 maximum 67.67 at physical source pixel (522, 342). The source
+was the actual 640 × 360 long machine film, verified byte-for-byte. A diagnostic shader reported an
+X-positive wall and an extrapolated tangential footprint exceeding 32 native pixels. Bounding that
+derivative to the finite owner patch was tested separately: the pixel remained in WebGL but
+disappeared in WebGPU. That failed WebGL experiment is retained; its result does not establish that
+the sampling diagnosis was causal. A follow-up captured the actual compiled GLSL, uniforms, and draw
+calls: the bounds were active, while the native sampler used trilinear mipmaps and anisotropy 16.
+Replacing only the wall color read with zero-level native sampling produced RGB (52, 68, 68) and
+zero specks; a wall-only magenta read changed that exact pixel to magenta. These separate diagnostic
+variants retained the same source RGBA hash and zero holes. A final candidate must bound the actual
+mip footprint to the observed patch, rather than assume the anisotropic gradient path obeys those
+finite bounds. A separate visibility check retained the original shaders: primary only gave RGB (51,
+67, 68), cells only gave (182, 195, 197), and the frame was transparent at the target. The actual
+wall contributes the bright pixel; this is not a primary pixel misidentified by a different witness
+vertex shader. The final wall read computes an explicit mip level from the finite owner footprint;
+the primary surface keeps its existing filter. At native frames 537, 538, and 539 the prototype had
+zero holes, introduced specks, and unwitnessed specks in WebGL, with each complete source RGBA hash
+unchanged from its control. Frame 538 also passed on the actual WebGPU adapter. The corrected pixel
+was RGB (52, 68, 68) in WebGL and (51, 67, 68) in WebGPU. Production now uses the four-module hash
+`94a18adf3efac9ec6f84154b01ef2783701e28f96ecc278568a12a499a181413`; the final sweeps and 197-case
+regression invocation restarted on that immutable snapshot. The prior 14-case films were archived
+and will not be presented as the final version.
+
+Decoder input variability is recorded independently of depth quality. Two repeated old-code Bunny
+reads initially had identical retained colors, resized model inputs, raw model answers, and final
+depth bytes. In a later pair, the second old-code read changed retained RGB frame 30 and model
+input/output 45, with changed final depths from frame 24 onward. Its retained-grid jitter rose from
+0.00343899 to 0.00347205. Both new-reader runs matched the first old-code run exactly at every one
+of those hash checks, including all 72 final depth arrays. These retained-grid diagnostics are
+separate from the final native-frame quality tables. They establish sensitivity to decoder input;
+they do not justify replacing a worse before/after table entry with a better run. The earlier pinned
+candidate repeated this comparison without the optional video observer, which registers its own
+compositor callbacks. Both completed runs matched every old-code color, model input, raw answer, and
+final-depth hash. The final reader always completes two paint cycles after seeking, including when a
+compositor callback arrives earlier. The pre-mip-fix four-module code hash was
+`12c9f8e6f3a09c09932c9f24525e060c60b4a673f42fd03d6bb1db49ebb70710`.
+
+An independent paused-video check found a measurement freshness defect in the old-code sweep:
+Bunny's native frames 142 and 143 still displayed the preceding canvas picture, while the later
+source witness had advanced. Their texture/source comparisons differed in 302,707 and 99,270 RGBA
+bytes. The quarter-frame seek removes timestamp-boundary ambiguity but does not guarantee that the
+decoder's picture is ready for canvas. Waiting two paint cycles before drawing made both versions
+match at all 12 checked source times, all 72 texture snapshots, and all 72 direct native snapshots.
+The new `native-role-v4` harness checks the displayed native color canvas against the video before
+the plain capture, uses those exact copied pixels for source support, and checks that the native
+video remains byte-identical after the witness capture. Every measured frame records that check. The
+check establishes exact displayed/source RGBA correspondence at each requested source timestamp; it
+does not independently observe a compositor decoder-frame index. The enumeration comes from FFprobe
+timestamps, and seeks target a quarter frame beyond each boundary. The harness also waits for the
+selected scene's full build before freezing preparation, so an opening-preview clone cannot be
+mistaken for the final native source. Paused legacy long clips may not yet have received the screen
+draw that supplies their depth bytes; the capture setup explicitly performs that real draw and
+rebinds the full Sharp source before freezing. This corrects the old-code long-film capture
+timeouts. Earlier `native-role-v3` ledgers and review PNGs are archived; both complete sweeps
+restart with this stronger check. No thresholds, source crops, frame rates, or camera poses change.
+
+The cached-long regression exposed a separate canvas conversion difference: the 426 × 240 VP9
+picture at five seconds differed in 895 RGBA bytes, each by exactly one level, between Chromium's
+default canvas and read-frequent canvas paths. The unchanged production snapshot and an experimental
+extra paused repaint produced the same differences; that repaint was removed. The harness now
+independently draws the video through both canvas paths and requires the displayed full RGBA array
+to match one exactly, both before and after the witness capture. There is no per-pixel tolerance.
+The matching independent read supplies the source neighborhood, and each new frame records its
+canvas path. The first two cases per version already satisfied the read-frequent path's exact check.
+The cached-long regression then passed. Hole and speck thresholds remain unchanged.
+
+A later old-code Sintel-long upload capture rejected a frame after more than 600 valid frames
+because the native video changed between the picture and witness reads. That incomplete case is
+excluded and recaptured. Goal capture now permits at most three attempts only for that exact
+stale/changed-source failure. Every accepted attempt still passes the same complete byte-for-byte
+pre/post native check. Rejected attempts are logged, and accepted frames/cases record their retry
+counts; quality results, thresholds, source clocks, and still-region comparisons are never retried
+or loosened. A rejected source attempt occurs before the previous-frame stability state is updated.
+A retry also reinitializes the normal Sharp source identity without an intermediate render, so it
+refreshes both the paused native picture and the depth/patch cache. Before accepting a retry, the
+uploaded primary R8 bytes must exactly match its freshly computed depth field. Ordinary captures
+keep the app's established depth frame-rate cache; their stability values use the sampled depth
+field, as in the earlier tables. A retry's real source rebind can refresh geometry between ordinary
+12 Hz cache updates; its per-frame `nativeCaptureRetries` and `depthPixelsVerified` flags identify
+that distinction. Aggregate retry counts cover accepted measurement frames; evidence and exhausted
+attempts are retained in the capture log. Opening preparation is also bounded by the 11:05 UTC
+deadline; a timed-out opening closes its page and records that cutoff. Tests retain zero configured
+retries.
+
+Original short uploads are now derived from the original downloads, rather than JPEG sheets.
+`tools/cdx-mp2-originals.mjs` records source hashes and retains their native frame rates. Sintel
+uses the existing active-picture crop; Tears of Steel's downloaded picture is natively 1280 × 534.
+The machine cut starts at the native frame matching the prepared sample, PTS 329.666139; a rounded
+329.7-second seek had advanced to the next frame. No source downloads or private attachments are
+committed.
+
+### Results and verification
+
+The final every-frame tables, timing tables, spec counts, and review links are being collected. All
+16 existing required spec files are byte-identical to immutable #560 head `93077cf6`; the main
+merge's separate `cdx-mir` changes are outside this unchanged 167-case set. The final suite began
+alongside two capture jobs. Its early desktop startup cases missed their original 5,000 and 4,000 ms
+bounds at 5,491.8 and 4,738.6 ms. Those failures are retained. Captures pause at case boundaries for
+isolated reruns and final startup measurements. The contended video/sound test also crossed its
+six-second loop and reported a negative clock delta; its unchanged assertion is included in that
+isolated rerun. All five short sample/upload pairs then completed (1,038 final frames), with zero
+holes, zero introduced rim specks, and no larger paired stability values. No claim that the complete
+Goal holds is made before those runs finish.
+
+Before the final mip fix, the isolated full run passed all **167 original cases**, unchanged, and 28
+of 29 new cases. The one new cached-long failure was the canvas conversion check described above.
+After correcting the harness, all 15 Round 3 cases passed in one isolated rerun, including that
+cached-long test. Together, all **196 cases** passed on the pre-mip-fix production snapshot; no
+assertion changed, no case was skipped, and neither invocation used retries. The complete invocation
+took 41.3 minutes. The embed measured 9.1 MB against its unchanged 30 MB limit. Counts below
+distinguish the original task 38 file from the three new Round 3 files. The final mip fix adds one
+further real-frame regression, so its fresh full invocation has 197 cases; its final counts are
+reported after it finishes.
+
+| Spec file                 | Passed |
+| ------------------------- | -----: |
+| `cdx-mp2-decode.spec.mjs` |      7 |
+| `cdx-mp2-pixels.spec.mjs` |      7 |
+| `cdx-mp2-r3.spec.mjs`     |     16 |
+| `cdx-mp2.spec.mjs`        |     14 |
+| `cdx-stability.spec.mjs`  |     10 |
+| `live3-engine.spec.mjs`   |      4 |
+| `live3.spec.mjs`          |     11 |
+| `live5.spec.mjs`          |      5 |
+| `live6.spec.mjs`          |      3 |
+| `lv7-long.spec.mjs`       |      2 |
+| `phf-engine.spec.mjs`     |      5 |
+| `phf.spec.mjs`            |      7 |
+| `phf2.spec.mjs`           |      7 |
+| `psv.spec.mjs`            |      8 |
+| `psv2.spec.mjs`           |      6 |
+| `psv3.spec.mjs`           |     16 |
+| `smd-compare.spec.mjs`    |      3 |
+| `smd-moving.spec.mjs`     |     16 |
+| `smoke.spec.mjs`          |     50 |
+
+The final mip-fix full invocation completed in 68.1 minutes with **194/197 passed**, zero skipped
+cases, and zero configured retries. All 30 new cases passed. Its three earlier failures are the
+startup and wrapped sound-clock values described above; isolated reruns are recorded separately. The
+three isolated reruns then passed in 1.9 minutes, with the desktop first-Sharp check at 3,705 ms
+against its unchanged 5,000 ms ceiling. Together, all **197 cases** pass on final pin `94a18adf`,
+including all **167 original cases**, unchanged, and all **30 new cases**. Neither invocation
+configured retries or skipped a case. The 194/197 shared-device run and all its three failed values
+remain in the report; this is an aggregate of two invocations. All 16 `smd-moving` cases and all 16
+`psv3` cases passed unchanged. Bridge and Machine slow clocks were 3.59/3.59 and 3.79/3.79 seconds,
+and the embed again measured 9.1 MB against 30 MB.
+
+<!-- mp3-final-results -->
+
+**Interim status at October 13, 2026, 09:59 UTC; the run continues until 11:05 UTC.**
+
+Measured 1,038 candidate frames in 10/38 complete cases, and 5,934 before frames in 17/38 cases.
+
+**Phone**
+
+| Clip/path           |  Frames | Worst holes, before → after (% @ seconds) | Specks, before → after | Height jitter, before → after |   Flips/1,000, before → after |
+| ------------------- | ------: | ----------------------------------------- | ---------------------: | ----------------------------: | ----------------------------: |
+| Bunny sample        |     144 | 0.322350 @ 0.343750 → 0.000000 @ 0.010417 |                 42 → 0 |     0.003323712 → 0.003323712 |     3.236679709 → 3.236679709 |
+| Bunny upload        |     144 | 0.307561 @ 1.177084 → 0.000000 @ 0.010417 |                 58 → 0 |     0.001611490 → 0.001611490 |     0.435223464 → 0.435223464 |
+| Horse sample        |      15 | 0.274529 @ 0.025000 → 0.000000 @ 0.025000 |                 23 → 0 |     0.092114497 → 0.092114497 | 188.586643998 → 188.586643998 |
+| Horse upload        |      15 | 0.020708 @ 0.625000 → 0.000000 @ 0.025000 |                 10 → 0 |     0.009273013 → 0.009273013 |     0.010079502 → 0.010079502 |
+| Sintel sample       |      96 | 0.041761 @ 3.390625 → 0.000000 @ 0.015625 |                 17 → 0 |     0.011706760 → 0.011706760 |     6.110735788 → 6.110735788 |
+| Sintel upload       |     144 | 0.983508 @ 0.593250 → 0.000000 @ 0.010250 |                234 → 0 |     0.005720029 → 0.005720029 |     1.286823102 → 1.286823102 |
+| Bridge sample       |      96 | 4.079132 @ 0.640625 → 0.000000 @ 0.015625 |                236 → 0 |     0.014792007 → 0.014792007 |     3.109923304 → 3.109923304 |
+| Bridge upload       |     144 | 6.198708 @ 0.677250 → 0.000000 @ 0.010250 |                418 → 0 |     0.004186182 → 0.004186182 |     1.139781985 → 1.139781985 |
+| Machine sample      |      96 | 0.032019 @ 5.703125 → 0.000000 @ 0.015625 |                 23 → 0 |     0.012681900 → 0.012681900 |   16.311772724 → 16.311772724 |
+| Machine upload      |     144 | 2.377422 @ 3.260250 → 0.000000 @ 0.010250 |                447 → 0 |     0.003829699 → 0.003829699 |     0.683532055 → 0.683532055 |
+| Bunny long sample   | Pending | Pending                                   |                Pending |                       Pending |                       Pending |
+| Bunny long upload   | Pending | Pending                                   |                Pending |                       Pending |                       Pending |
+| Sintel long sample  | Pending | Pending                                   |                Pending |                       Pending |                       Pending |
+| Sintel long upload  | Pending | Pending                                   |                Pending |                       Pending |                       Pending |
+| Machine long sample | Pending | Pending                                   |                Pending |                       Pending |                       Pending |
+| Machine long upload | Pending | Pending                                   |                Pending |                       Pending |                       Pending |
+| Bridge long sample  | Pending | Pending                                   |                Pending |                       Pending |                       Pending |
+| Bridge long upload  | Pending | Pending                                   |                Pending |                       Pending |                       Pending |
+| Fast 60 fps upload  | Pending | Pending                                   |                Pending |                       Pending |                       Pending |
+
+**Desktop**
+
+| Clip/path           |  Frames | Worst holes, before → after (% @ seconds) | Specks, before → after | Height jitter, before → after | Flips/1,000, before → after |
+| ------------------- | ------: | ----------------------------------------- | ---------------------: | ----------------------------: | --------------------------: |
+| Bunny sample        | Pending | Pending                                   |                Pending |                       Pending |                     Pending |
+| Bunny upload        | Pending | Pending                                   |                Pending |                       Pending |                     Pending |
+| Horse sample        | Pending | Pending                                   |                Pending |                       Pending |                     Pending |
+| Horse upload        | Pending | Pending                                   |                Pending |                       Pending |                     Pending |
+| Sintel sample       | Pending | Pending                                   |                Pending |                       Pending |                     Pending |
+| Sintel upload       | Pending | Pending                                   |                Pending |                       Pending |                     Pending |
+| Bridge sample       | Pending | Pending                                   |                Pending |                       Pending |                     Pending |
+| Bridge upload       | Pending | Pending                                   |                Pending |                       Pending |                     Pending |
+| Machine sample      | Pending | Pending                                   |                Pending |                       Pending |                     Pending |
+| Machine upload      | Pending | Pending                                   |                Pending |                       Pending |                     Pending |
+| Bunny long sample   | Pending | Pending                                   |                Pending |                       Pending |                     Pending |
+| Bunny long upload   | Pending | Pending                                   |                Pending |                       Pending |                     Pending |
+| Sintel long sample  | Pending | Pending                                   |                Pending |                       Pending |                     Pending |
+| Sintel long upload  | Pending | Pending                                   |                Pending |                       Pending |                     Pending |
+| Machine long sample | Pending | Pending                                   |                Pending |                       Pending |                     Pending |
+| Machine long upload | Pending | Pending                                   |                Pending |                       Pending |                     Pending |
+| Bridge long sample  | Pending | Pending                                   |                Pending |                       Pending |                     Pending |
+| Bridge long upload  | Pending | Pending                                   |                Pending |                       Pending |                     Pending |
+| Fast 60 fps upload  | Pending | Pending                                   |                Pending |                       Pending |                     Pending |
+
+An asterisk marks a raw stability value above its paired before measurement. Source decoding
+variability is reported separately; these entries are retained.
+
+<!-- mp3-end-final-results -->
+
+<!-- mp3-startup-table -->
+
+Actual first presented Sharp frame, timed from UI selection. These pre-mip-fix cases use code hash
+`12c9f8e6f3a09c09932c9f24525e060c60b4a673f42fd03d6bb1db49ebb70710`. Each upload uses a cold model
+worker; each profile runs serially without competing browser jobs. Local HTTP, software graphics,
+and driver caches remain part of the environment. Both desktop settings passed **11/19** cases under
+two seconds, with zero browser errors. The startup Goal **does not hold**. The slow phone profile
+uses CDP page CPU-rate-4 throttling, without worker throttling; its range is 306.9–4,574.9 ms,
+rather than a physical-phone benchmark. The earlier 19/19 pass belonged to an older geometry
+iteration and is superseded by these complete pre-mip-fix measurements. Final mip-fix timing is
+recorded separately below.
+
+| Clip         | Path   | Desktop, default driver (ms) | Desktop, two graphics threads (ms) | Slow phone, default driver (ms) |
+| ------------ | ------ | ---------------------------: | ---------------------------------: | ------------------------------: |
+| Bunny        | Sample |                       3662.8 |                             2805.9 |                          1081.1 |
+| Bunny        | Upload |                       1936.1 |                             2141.2 |                          1514.6 |
+| Horse        | Sample |                        367.9 |                              259.9 |                           603.8 |
+| Horse        | Upload |                       3235.2 |                             2186.0 |                          3286.9 |
+| Sintel       | Sample |                        296.5 |                              247.9 |                           897.1 |
+| Sintel       | Upload |                       2033.5 |                             2566.1 |                          4574.9 |
+| Bridge       | Sample |                        291.4 |                              125.9 |                           627.6 |
+| Bridge       | Upload |                       1786.3 |                             2527.7 |                          1740.0 |
+| Machine      | Sample |                        273.9 |                              482.9 |                           306.9 |
+| Machine      | Upload |                       2914.9 |                             2512.4 |                          2488.8 |
+| Bunny long   | Sample |                        598.1 |                              358.0 |                          1290.8 |
+| Bunny long   | Upload |                       2376.8 |                             2712.4 |                          3721.3 |
+| Sintel long  | Sample |                        590.7 |                              566.7 |                          1432.3 |
+| Sintel long  | Upload |                       1553.5 |                             1702.3 |                          4441.8 |
+| Machine long | Sample |                       1014.8 |                              553.8 |                          1239.0 |
+| Machine long | Upload |                       4491.8 |                             1884.6 |                          2698.0 |
+| Bridge long  | Sample |                       1041.6 |                             1008.6 |                          1333.9 |
+| Bridge long  | Upload |                       2289.8 |                             2569.3 |                          2522.0 |
+| Fast 60 fps  | Upload |                       2199.6 |                             1770.9 |                          3022.6 |
+
+<!-- mp3-end-startup-table -->
+
+<!-- mp3-final-startup -->
+
+Final pin `94a18adf`: isolated serial measurements, driver default, 13/19 desktop cases below two
+seconds. Browser errors: 0 desktop, 0 slow phone. **The startup Goal does not hold.**
+
+Desktop range: 92.5–3,066.6 ms. Slow phone (CDP page CPU-rate-4, worker unthrottled): 380.4–7,793.7
+ms.
+
+| Clip         | Path   | Desktop (ms) | Slow phone (ms) |
+| ------------ | ------ | -----------: | --------------: |
+| Bunny        | Sample |      3,066.6 |           718.3 |
+| Bunny        | Upload |      2,688.5 |         2,652.7 |
+| Horse        | Sample |         92.5 |           380.4 |
+| Horse        | Upload |      2,573.1 |         4,456.7 |
+| Sintel       | Sample |        265.3 |         1,180.0 |
+| Sintel       | Upload |      1,616.0 |         4,258.2 |
+| Bridge       | Sample |        205.6 |           576.6 |
+| Bridge       | Upload |      1,746.7 |         7,793.7 |
+| Machine      | Sample |        436.3 |         1,288.6 |
+| Machine      | Upload |      1,689.5 |         5,308.1 |
+| Bunny long   | Sample |      1,255.8 |         1,228.7 |
+| Bunny long   | Upload |      2,178.0 |         3,392.9 |
+| Sintel long  | Sample |        504.5 |         1,896.0 |
+| Sintel long  | Upload |      2,654.2 |         5,234.4 |
+| Machine long | Sample |        854.3 |         1,420.5 |
+| Machine long | Upload |      1,642.7 |         5,072.3 |
+| Bridge long  | Sample |        450.7 |         2,329.0 |
+| Bridge long  | Upload |      2,575.6 |         3,635.4 |
+| Fast 60 fps  | Upload |      1,721.7 |         4,456.9 |
+
+<!-- mp3-end-final-startup -->
+
+### Rule check and remaining work
+
+The existing Tears of Steel footage, including its identifiable people, is retained under the
+[Operator's explicit confirmation](https://github.com/ryanjosephkamp/splashery/pull/560#issuecomment-6130226869).
+That confirmation also permits retaining the existing 61 MB of longer films. No additional
+live-action source is introduced. New before/after films belong only on the fresh, never-merged
+`codex/moving-photo-r3-clips` branch; the older review branch remains unmerged.
+
+Ground-truth reconstruction, physical phone frame rate, and perceptual audio quality are not claimed
+measured. Cold upload timing remains part of the Goal and will be stated explicitly even when it
+exceeds two seconds.
