@@ -422,8 +422,7 @@ three comparisons, and real phone hardware/audio audition were not measured.
 Codex task 48 started on October 12, 2026, at 23:05 UTC, with a 12-hour cutoff of October 13 at
 11:05 UTC. Work stays on `codex/moving-photo-r2-public`, with latest main merged at `a9069bfe`. The
 immutable comparison is #560's prior head, `93077cf6`. The requested Goal Mode switch is not
-available in this session; the same goal and stopping rule are being followed through normal
-execution.
+available in this session; the same goal and stopping rule were followed through normal execution.
 
 Before captures route the four task-owned modules from that immutable head into the current merged
 app. The only source file changed by the main merge is `src/live/relief.js`, for CameraDepth and
@@ -518,7 +517,7 @@ its graphics-thread setting.
   builds, and Sharp-to-Splats handoffs retain immediate synchronization. The independent render test
   recorded 21 depth uploads outside the drive and exact selected-depth bytes on all 25 rendered
   frames. The unchanged Bridge and Machine slow-clock tests then measured 3.64/3.64 and 3.82/3.82
-  seconds, respectively. The final complete suite is still required to establish all regressions.
+  seconds, respectively. The final aggregate regression results are recorded below.
 - A zero-depth floor initially closed the junctions, but also added colored thickness to a flat
   picture: the independent oblique flat-depth regression found 6,525 opaque pixels more than one
   raster pixel beyond its projected plane. Shared lower corners now come from the minimum of the
@@ -634,16 +633,16 @@ committed.
 
 ### Results and verification
 
-The final every-frame tables, timing tables, spec counts, and review links are being collected. All
-16 existing required spec files are byte-identical to immutable #560 head `93077cf6`; the main
-merge's separate `cdx-mir` changes are outside this unchanged 167-case set. The final suite began
-alongside two capture jobs. Its early desktop startup cases missed their original 5,000 and 4,000 ms
-bounds at 5,491.8 and 4,738.6 ms. Those failures are retained. Captures pause at case boundaries for
-isolated reruns and final startup measurements. The contended video/sound test also crossed its
-six-second loop and reported a negative clock delta; its unchanged assertion is included in that
-isolated rerun. All five short sample/upload pairs then completed (1,038 final frames), with zero
-holes, zero introduced rim specks, and no larger paired stability values. No claim that the complete
-Goal holds is made before those runs finish.
+The every-frame tables, timing tables, spec counts, and review links are recorded below. All 16
+existing required spec files are byte-identical to immutable #560 head `93077cf6`; the main merge's
+separate `cdx-mir` changes are outside this unchanged 167-case set. The final suite began alongside
+two capture jobs. Its early desktop startup cases missed their original 5,000 and 4,000 ms bounds at
+5,491.8 and 4,738.6 ms. Those failures are retained. Captures pause at case boundaries for isolated
+reruns and final startup measurements. The contended video/sound test also crossed its six-second
+loop and reported a clock ratio of −84.5523 against its unchanged 0.6–1.4 bounds; its unchanged
+assertion is included in that isolated rerun. All five short sample/upload pairs then completed
+(1,038 final frames), with zero holes, zero introduced rim specks, and no larger paired stability
+values. No claim that the complete Goal holds is made before those runs finish.
 
 Before the final mip fix, the isolated full run passed all **167 original cases**, unchanged, and 28
 of 29 new cases. The one new cached-long failure was the canvas conversion check described above.
@@ -652,8 +651,8 @@ cached-long test. Together, all **196 cases** passed on the pre-mip-fix producti
 assertion changed, no case was skipped, and neither invocation used retries. The complete invocation
 took 41.3 minutes. The embed measured 9.1 MB against its unchanged 30 MB limit. Counts below
 distinguish the original task 38 file from the three new Round 3 files. The final mip fix adds one
-further real-frame regression, so its fresh full invocation has 197 cases; its final counts are
-reported after it finishes.
+further real-frame regression, so its fresh full invocation has 197 cases. The table records the
+final aggregate counts, including the isolated reruns described below.
 
 | Spec file                 | Passed |
 | ------------------------- | -----: |
@@ -690,60 +689,104 @@ and the embed again measured 9.1 MB against 30 MB.
 
 <!-- mp3-final-results -->
 
-**Interim status at October 13, 2026, 09:59 UTC; the run continues until 11:05 UTC.**
+**Final status: the measurement window ended on October 13, 2026, at 11:05 UTC, after 12 hours.**
 
-Measured 1,038 candidate frames in 10/38 complete cases, and 5,934 before frames in 17/38 cases.
+The complete Goal **does not hold** at the 12-hour cutoff.
+
+- **Holes and edge specks:** the worst observed hole share is 0.000000% and the maximum introduced
+  rim-speck count is 0, across 5,456 measured candidate frames. 23/38 cases are complete; incomplete
+  or unmeasured paths are not certified. Both paths are complete in 9 sample/upload comparisons. The
+  detailed tables retain any failed hole, speck, or upload comparisons.
+- **Steady:** Raw stability is worse in these complete pairs: phone/bridge-long/sample,
+  desktop/sample/upload, phone/sample-long/upload. There are 23 complete before/after pairs; partial
+  pairs are not certified. These are sampled-depth still-region jitter and edge-flip measures,
+  rather than a full perceptual measure of rendered geometry.
+- **Startup:** **fails**. 13/19 isolated desktop cases present the first actual 3D frame within two
+  seconds; the slowest is 3.0666 seconds. Slow-phone CDP page CPU-rate-4 timings range from 0.3804
+  to 7.7937 seconds, with the worker unthrottled.
+- **Existing tests:** pass unchanged in aggregate, with all 167 required original cases plus 30
+  added cases. The shared-device full invocation was 194/197; its three unchanged failures passed in
+  the isolated rerun. The failures and timings remain in the audit.
+
+Measured 5,456 candidate frames in 23/38 complete cases, and 7,932 before frames in 30/38 complete
+cases. 23 cases have complete before/after pairs.
 
 **Phone**
 
-| Clip/path           |  Frames | Worst holes, before → after (% @ seconds) | Specks, before → after | Height jitter, before → after |   Flips/1,000, before → after |
-| ------------------- | ------: | ----------------------------------------- | ---------------------: | ----------------------------: | ----------------------------: |
-| Bunny sample        |     144 | 0.322350 @ 0.343750 → 0.000000 @ 0.010417 |                 42 → 0 |     0.003323712 → 0.003323712 |     3.236679709 → 3.236679709 |
-| Bunny upload        |     144 | 0.307561 @ 1.177084 → 0.000000 @ 0.010417 |                 58 → 0 |     0.001611490 → 0.001611490 |     0.435223464 → 0.435223464 |
-| Horse sample        |      15 | 0.274529 @ 0.025000 → 0.000000 @ 0.025000 |                 23 → 0 |     0.092114497 → 0.092114497 | 188.586643998 → 188.586643998 |
-| Horse upload        |      15 | 0.020708 @ 0.625000 → 0.000000 @ 0.025000 |                 10 → 0 |     0.009273013 → 0.009273013 |     0.010079502 → 0.010079502 |
-| Sintel sample       |      96 | 0.041761 @ 3.390625 → 0.000000 @ 0.015625 |                 17 → 0 |     0.011706760 → 0.011706760 |     6.110735788 → 6.110735788 |
-| Sintel upload       |     144 | 0.983508 @ 0.593250 → 0.000000 @ 0.010250 |                234 → 0 |     0.005720029 → 0.005720029 |     1.286823102 → 1.286823102 |
-| Bridge sample       |      96 | 4.079132 @ 0.640625 → 0.000000 @ 0.015625 |                236 → 0 |     0.014792007 → 0.014792007 |     3.109923304 → 3.109923304 |
-| Bridge upload       |     144 | 6.198708 @ 0.677250 → 0.000000 @ 0.010250 |                418 → 0 |     0.004186182 → 0.004186182 |     1.139781985 → 1.139781985 |
-| Machine sample      |      96 | 0.032019 @ 5.703125 → 0.000000 @ 0.015625 |                 23 → 0 |     0.012681900 → 0.012681900 |   16.311772724 → 16.311772724 |
-| Machine upload      |     144 | 2.377422 @ 3.260250 → 0.000000 @ 0.010250 |                447 → 0 |     0.003829699 → 0.003829699 |     0.683532055 → 0.683532055 |
-| Bunny long sample   | Pending | Pending                                   |                Pending |                       Pending |                       Pending |
-| Bunny long upload   | Pending | Pending                                   |                Pending |                       Pending |                       Pending |
-| Sintel long sample  | Pending | Pending                                   |                Pending |                       Pending |                       Pending |
-| Sintel long upload  | Pending | Pending                                   |                Pending |                       Pending |                       Pending |
-| Machine long sample | Pending | Pending                                   |                Pending |                       Pending |                       Pending |
-| Machine long upload | Pending | Pending                                   |                Pending |                       Pending |                       Pending |
-| Bridge long sample  | Pending | Pending                                   |                Pending |                       Pending |                       Pending |
-| Bridge long upload  | Pending | Pending                                   |                Pending |                       Pending |                       Pending |
-| Fast 60 fps upload  | Pending | Pending                                   |                Pending |                       Pending |                       Pending |
+| Clip/path             |     Frames | Worst holes, before → after (% @ seconds)              | Specks, before → after | Height jitter, before → after |   Flips/1,000, before → after |
+| --------------------- | ---------: | ------------------------------------------------------ | ---------------------: | ----------------------------: | ----------------------------: |
+| Bunny sample          |        144 | 0.322350 @ 0.343750 (f8) → 0.000000 @ 0.010417 (f0)    |                 42 → 0 |     0.003323712 → 0.003323712 |     3.236679709 → 3.236679709 |
+| Bunny upload          |        144 | 0.307561 @ 1.177084 (f28) → 0.000000 @ 0.010417 (f0)   |                 58 → 0 |     0.001611490 → 0.001611490 |     0.435223464 → 0.435223464 |
+| Horse sample          |         15 | 0.274529 @ 0.025000 (f0) → 0.000000 @ 0.025000 (f0)    |                 23 → 0 |     0.092114497 → 0.092114497 | 188.586643998 → 188.586643998 |
+| Horse upload          |         15 | 0.020708 @ 0.625000 (f6) → 0.000000 @ 0.025000 (f0)    |                 10 → 0 |     0.009273013 → 0.009273013 |     0.010079502 → 0.010079502 |
+| Sintel sample         |         96 | 0.041761 @ 3.390625 (f54) → 0.000000 @ 0.015625 (f0)   |                 17 → 0 |     0.011706760 → 0.011706760 |     6.110735788 → 6.110735788 |
+| Sintel upload         |        144 | 0.983508 @ 0.593250 (f14) → 0.000000 @ 0.010250 (f0)   |                234 → 0 |     0.005720029 → 0.005720029 |     1.286823102 → 1.286823102 |
+| Bridge sample         |         96 | 4.079132 @ 0.640625 (f10) → 0.000000 @ 0.015625 (f0)   |                236 → 0 |     0.014792007 → 0.014792007 |     3.109923304 → 3.109923304 |
+| Bridge upload         |        144 | 6.198708 @ 0.677250 (f16) → 0.000000 @ 0.010250 (f0)   |                418 → 0 |     0.004186182 → 0.004186182 |     1.139781985 → 1.139781985 |
+| Machine sample        |         96 | 0.032019 @ 5.703125 (f91) → 0.000000 @ 0.015625 (f0)   |                 23 → 0 |     0.012681900 → 0.012681900 |   16.311772724 → 16.311772724 |
+| Machine upload        |        144 | 2.377422 @ 3.260250 (f78) → 0.000000 @ 0.010250 (f0)   |                447 → 0 |     0.003829699 → 0.003829699 |     0.683532055 → 0.683532055 |
+| Bunny long sample     |        720 | 1.220795 @ 13.802250 (f331) → 0.000000 @ 0.010250 (f0) |                 56 → 0 |     0.004027254 → 0.004027254 |     1.735584974 → 1.735584974 |
+| Bunny long upload \*  |        720 | 1.355032 @ 12.593250 (f302) → 0.000000 @ 0.010250 (f0) |                 80 → 0 |     0.012248085 → 0.012176927 |     7.598676151 → 7.694871578 |
+| Sintel long sample    |        720 | 0.023094 @ 20.927250 (f502) → 0.000000 @ 0.010250 (f0) |                 13 → 0 |     0.004724679 → 0.004724679 |     4.394370858 → 4.394370858 |
+| Sintel long upload    | Unmeasured | 0.054228 @ 23.010250 (f552) → Unmeasured               |        15 → Unmeasured |      0.005351683 → Unmeasured |      2.517036828 → Unmeasured |
+| Machine long sample   |        720 | 0.780600 @ 3.843250 (f92) → 0.000000 @ 0.010250 (f0)   |                138 → 0 |     0.024425558 → 0.024425558 |   44.239005456 → 44.239005456 |
+| Machine long upload   | Unmeasured | 1.166959 @ 0.177250 (f4) → Unmeasured                  |       279 → Unmeasured |      0.026532305 → Unmeasured |     31.206012837 → Unmeasured |
+| Bridge long sample \* |        648 | 0.740603 @ 25.218250 (f605) → 0.000000 @ 0.010250 (f0) |                137 → 0 |     0.009810271 → 0.009810691 |   12.459788177 → 12.460314004 |
+| Bridge long upload    | Unmeasured | 0.114788 @ 15.343250 (f368) → Unmeasured               |        37 → Unmeasured |      0.004800130 → Unmeasured |      0.000156189 → Unmeasured |
+| Fast 60 fps upload    |        120 | 0.083399 @ 0.587000 (f35) → 0.000000 @ 0.004000 (f0)   |                 25 → 0 |     0.000611163 → 0.000611163 |     0.000000000 → 0.000000000 |
 
 **Desktop**
 
-| Clip/path           |  Frames | Worst holes, before → after (% @ seconds) | Specks, before → after | Height jitter, before → after | Flips/1,000, before → after |
-| ------------------- | ------: | ----------------------------------------- | ---------------------: | ----------------------------: | --------------------------: |
-| Bunny sample        | Pending | Pending                                   |                Pending |                       Pending |                     Pending |
-| Bunny upload        | Pending | Pending                                   |                Pending |                       Pending |                     Pending |
-| Horse sample        | Pending | Pending                                   |                Pending |                       Pending |                     Pending |
-| Horse upload        | Pending | Pending                                   |                Pending |                       Pending |                     Pending |
-| Sintel sample       | Pending | Pending                                   |                Pending |                       Pending |                     Pending |
-| Sintel upload       | Pending | Pending                                   |                Pending |                       Pending |                     Pending |
-| Bridge sample       | Pending | Pending                                   |                Pending |                       Pending |                     Pending |
-| Bridge upload       | Pending | Pending                                   |                Pending |                       Pending |                     Pending |
-| Machine sample      | Pending | Pending                                   |                Pending |                       Pending |                     Pending |
-| Machine upload      | Pending | Pending                                   |                Pending |                       Pending |                     Pending |
-| Bunny long sample   | Pending | Pending                                   |                Pending |                       Pending |                     Pending |
-| Bunny long upload   | Pending | Pending                                   |                Pending |                       Pending |                     Pending |
-| Sintel long sample  | Pending | Pending                                   |                Pending |                       Pending |                     Pending |
-| Sintel long upload  | Pending | Pending                                   |                Pending |                       Pending |                     Pending |
-| Machine long sample | Pending | Pending                                   |                Pending |                       Pending |                     Pending |
-| Machine long upload | Pending | Pending                                   |                Pending |                       Pending |                     Pending |
-| Bridge long sample  | Pending | Pending                                   |                Pending |                       Pending |                     Pending |
-| Bridge long upload  | Pending | Pending                                   |                Pending |                       Pending |                     Pending |
-| Fast 60 fps upload  | Pending | Pending                                   |                Pending |                       Pending |                     Pending |
+| Clip/path           |          Frames | Worst holes, before → after (% @ seconds)             | Specks, before → after | Height jitter, before → after |   Flips/1,000, before → after |
+| ------------------- | --------------: | ----------------------------------------------------- | ---------------------: | ----------------------------: | ----------------------------: |
+| Bunny sample        |             144 | 0.301592 @ 0.510417 (f12) → 0.000000 @ 0.010417 (f0)  |                 25 → 0 |     0.003323712 → 0.003323712 |     3.236679709 → 3.236679709 |
+| Bunny upload \*     |             144 | 0.270289 @ 0.343750 (f8) → 0.000000 @ 0.010417 (f0)   |                 46 → 0 |     0.000935115 → 0.000943718 |     0.546645249 → 0.546592645 |
+| Horse sample        |              15 | 0.275195 @ 0.025000 (f0) → 0.000000 @ 0.025000 (f0)   |                 15 → 0 |     0.092114497 → 0.092114497 | 188.586643998 → 188.586643998 |
+| Horse upload        |              15 | 0.000000 @ 0.025000 (f0) → 0.000000 @ 0.025000 (f0)   |                  0 → 0 |     0.008425683 → 0.008425683 |     0.047877635 → 0.047877635 |
+| Sintel sample       |              96 | 0.041620 @ 3.328125 (f53) → 0.000000 @ 0.015625 (f0)  |                 18 → 0 |     0.011706760 → 0.011706760 |     6.110735788 → 6.110735788 |
+| Sintel upload       |             144 | 0.351972 @ 1.760250 (f42) → 0.000000 @ 0.010250 (f0)  |                122 → 0 |     0.005665365 → 0.005665365 |     0.092582492 → 0.092582492 |
+| Bridge sample       | 92 / 96 partial | 3.921771 @ 0.578125 (f9) → 0.000000 @ 0.015625 (f0)   |                181 → 0 |     0.014792007 → 0.014950683 |     3.109923304 → 3.245678128 |
+| Bridge upload       |      Unmeasured | 5.421081 @ 0.302250 (f7) → Unmeasured                 |       468 → Unmeasured |      0.003171682 → Unmeasured |      1.280384164 → Unmeasured |
+| Machine sample      |      Unmeasured | 0.010030 @ 5.703125 (f91) → Unmeasured                |         9 → Unmeasured |      0.012681900 → Unmeasured |     16.311772724 → Unmeasured |
+| Machine upload      |      Unmeasured | 0.646841 @ 0.302250 (f7) → Unmeasured                 |       292 → Unmeasured |      0.002598764 → Unmeasured |      0.027568017 → Unmeasured |
+| Bunny long sample   |      Unmeasured | Unmeasured                                            |             Unmeasured |                    Unmeasured |                    Unmeasured |
+| Bunny long upload   |      Unmeasured | Unmeasured                                            |             Unmeasured |                    Unmeasured |                    Unmeasured |
+| Sintel long sample  |      Unmeasured | Unmeasured                                            |             Unmeasured |                    Unmeasured |                    Unmeasured |
+| Sintel long upload  |      Unmeasured | Unmeasured                                            |             Unmeasured |                    Unmeasured |                    Unmeasured |
+| Machine long sample |      Unmeasured | Unmeasured                                            |             Unmeasured |                    Unmeasured |                    Unmeasured |
+| Machine long upload |      Unmeasured | Unmeasured                                            |             Unmeasured |                    Unmeasured |                    Unmeasured |
+| Bridge long sample  |      Unmeasured | Unmeasured                                            |             Unmeasured |                    Unmeasured |                    Unmeasured |
+| Bridge long upload  |      Unmeasured | Unmeasured                                            |             Unmeasured |                    Unmeasured |                    Unmeasured |
+| Fast 60 fps upload  |             120 | 0.044479 @ 1.804000 (f108) → 0.000000 @ 0.004000 (f0) |                 12 → 0 |     0.000515692 → 0.000515692 |     0.000000000 → 0.000000000 |
 
-An asterisk marks a raw stability value above its paired before measurement. Source decoding
-variability is reported separately; these entries are retained.
+An asterisk marks a raw stability value above its complete paired before measurement. Values for a
+partial candidate row describe only its measured prefix; its complete before values remain visible,
+but that prefix is not a strict stability comparison. Missing sides are labeled separately. Source
+decoding variability is reported separately; these entries are retained.
+
+The frame number in each worst-hole cell identifies the measured source-clock frame (zero based).
+Partial rows describe only their measured prefix. The final scheduled captures retain their deadline
+flags and opening/capture errors in the raw ledgers. A second, independent capture job used the same
+production pin, oracle, source hashes, and profile to cover additional phone uploads while the main
+job measured desktop cases; its rows were combined only after both jobs stopped. Duplicate cases, if
+any, are excluded without comparing quality values. No quality result is retried.
+
+Final media:
+[all 11 before/after phone films](https://github.com/ryanjosephkamp/splashery/tree/codex/moving-photo-r3-clips/docs/reviews/moving-photo-r3),
+on the fresh branch that must never be merged. All nine samples and the original Bridge and Machine
+uploads retain every measured playback frame: 3,543 frames per side, 780×844 comparison pixels, 24
+fps for videos, 10 fps for the horse GIF, and the existing 16 fps for prepared short sample frames.
+Each encoded film is fully decoded to verify its count, rate, and dimensions; each movie's checksum
+and exact source-clock hashes are in the manifest. Frames at 25% and 75% of every movie were
+inspected together. The movies contain no audio.
+
+The media branch also contains the final
+[before ledger](https://github.com/ryanjosephkamp/splashery/blob/codex/moving-photo-r3-clips/docs/reviews/moving-photo-r3/quality-before.json),
+[after ledger](https://github.com/ryanjosephkamp/splashery/blob/codex/moving-photo-r3-clips/docs/reviews/moving-photo-r3/quality-after.json),
+desktop and slow-phone startup ledgers, and aggregate test counts. These preserve exact per-frame
+results and cutoff flags. The remaining work is to resolve the retained strict stability increases,
+meet the first-result deadline, and complete all 38 profile/path cases without weakening the oracle,
+test thresholds, lift, motion, or model budget.
 
 <!-- mp3-end-final-results -->
 

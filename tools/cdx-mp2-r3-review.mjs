@@ -40,11 +40,11 @@ const before = JSON.parse(
   await fs.readFile(option("before", ".cache/cdx-mp3/baseline-native.json"), "utf8"),
 );
 const after = JSON.parse(
-  await fs.readFile(option("after", ".cache/cdx-mp3/final-goal.json"), "utf8"),
+  await fs.readFile(option("after", ".cache/cdx-mp3/lod-goal.json"), "utf8"),
 );
 const input = [
   option("before-frames", ".cache/cdx-mp3/review-before"),
-  option("after-frames", ".cache/cdx-mp3/review-after"),
+  option("after-frames", ".cache/cdx-mp3/review-lod"),
 ];
 const dir = option("out", ".cache/cdx-mp3/review");
 if (
@@ -65,7 +65,7 @@ const manifest = {
   deviceScaleFactor: 3,
   camera: { yaw: 0.18, pitch: 0.08 },
   presentation:
-    "Actual phone-stage pixels, every source frame, native clocks; white background; before/after side by side",
+    "Actual phone-stage pixels, every measured playback frame at the source's app playback rate; white background; before/after side by side",
   cases: [],
 };
 const cases = after.results.filter(
@@ -244,7 +244,7 @@ for (const a of cases) {
       : {}),
     checked: "October 13, 2026",
     modifications:
-      "Existing source cut rendered as a 3D relief, every source frame, before/after side by side, white transparency background, phone-size comparison labels, VP9, no audio",
+      "Existing source cut rendered as a 3D relief, every measured playback frame, before/after side by side, white transparency background, phone-size comparison labels, VP9, no audio",
     madeBy: "Ryan with Codex (GPT-6)",
     ...protocol,
     encodedVerification: verifyMovie(),
