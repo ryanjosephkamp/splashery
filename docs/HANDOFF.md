@@ -62,11 +62,11 @@ batch merges as one PR.
 - This batch: Manual r7c (#561: the `ln` tests green again, the PDF down to 7.1 MB) and Builders r1b
   (#565: the baked format in `builders/`)
 
-**Lanes running:** US English (Sonnet, `session_01Lidt6WyFTaVR9bpedcY9Cu`, #570): the American
-spelling sweep the owner asked for on October 12, 2026; ready, waiting on his OK; manual/ follows in
-its Part 2. Manual r9 (#576: the owner's walkthrough of October 12, the last five demos, the PDF's
-clickable contents, task 47's two factual fixes; his marks all good) merged with Codex task 47's
-report (#575) in this batch. The manual is now final but for its Part 2 spelling sweep.
+**Lanes running:** none. US English (#570, the American spelling sweep the owner asked for on
+October 12, 2026) merged in this batch with his OK; identifiers and stored keys stay British (listed
+in docs/handoff/UsEnglish.md for a later decision). The same batch fixes `cdx-gallery:10`, red on
+main since #572 (Manual r8 changed six gallery captions; the program gallery audit now repeats the
+current ones).
 
 **Codex** (the owner runs these; tasks in `docs/codex/`, the Studio push 37 to 41 and the second
 wave 42 to 46). The Operator reviews each PR with a Sonnet helper and posts one comment listing the
