@@ -129,3 +129,6 @@
 {"v":1,"t":"2026-10-13T00:12:57.281Z","harness":"claude-code","event":"tool","session":"1b026e47-4d44-5d9d-a4b1-8769ff991926","tool":"Bash","cwd":"splashery"}
 {"v":1,"t":"2026-10-13T00:12:58.819Z","harness":"claude-code","event":"tool","session":"1b026e47-4d44-5d9d-a4b1-8769ff991926","tool":"mcp__github__update_pull_request","cwd":"splashery"}
 {"v":1,"t":"2026-10-13T00:13:09.065Z","harness":"claude-code","event":"turn-end","session":"1b026e47-4d44-5d9d-a4b1-8769ff991926","cwd":"splashery"}
+{"v":1,"t":"2026-10-13T00:17:18.132Z","harness":"claude-code","event":"session-end","session":"1b026e47-4d44-5d9d-a4b1-8769ff991926","cwd":"splashery"}
+{"v":1,"t":"2026-10-13T00:55:50.917Z","harness":"claude-code","event":"session-start","session":"1b026e47-4d44-5d9d-a4b1-8769ff991926","cwd":"splashery"}
+{"v":1,"t":"2026-10-13T00:55:50.918Z","harness":"claude-code","event":"turn-start","session":"1b026e47-4d44-5d9d-a4b1-8769ff991926","cwd":"splashery"}
