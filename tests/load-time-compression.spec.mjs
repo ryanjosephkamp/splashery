@@ -36,6 +36,29 @@ test("the app graph transfers while the selected scan helper is held", async ({ 
   expect(await page.evaluate(() => window.__splashery.player.toyInfo.id)).toBe("sunglasses");
 });
 
+test("the selected scan helper transfers while an app dependency is held", async ({ page }) => {
+  let release;
+  const held = new Promise((resolve) => (release = resolve));
+  await page.route("**/src/ui.js", async (route) => {
+    await held;
+    await route.continue();
+  });
+  const scene = Buffer.from(
+    JSON.stringify(createScene({ toy: { kind: "builtin", id: "soda-can" } })),
+  );
+  const helper = page.waitForRequest("**/src/packs/real-objects.js", { timeout: 10000 });
+  await page.goto(`/?renderer=webgl2&profile=weak&adapt=off#s=j.${scene.toString("base64url")}`, {
+    waitUntil: "commit",
+  });
+  try {
+    await helper;
+  } finally {
+    release();
+  }
+  await page.waitForSelector("body[data-ready='true']", { timeout: 180000 });
+  expect(await page.evaluate(() => window.__splashery.player.toyInfo.id)).toBe("soda-can");
+});
+
 for (const [id, format] of [
   ["sunglasses", "j"],
   ["pyrite-cubes", "d"],

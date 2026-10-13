@@ -53,6 +53,9 @@
       map.textContent = JSON.stringify({ imports });
       document.head.appendChild(map);
     }
+    // Warm the selected scan independently of the app's larger module graph.
+    // Both entry modules await its shared promise before GPU initialization.
+    import("./opening-pack.js").catch(() => {});
     await ready;
     await import(entry.href);
   }
