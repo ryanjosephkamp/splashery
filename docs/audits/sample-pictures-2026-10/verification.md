@@ -1,5 +1,9 @@
 # Task 54 verification: October 13, 2026
 
+This is the **superseded first-round record**, including the old default-link carrier selection. The
+final subject pictures, five-link tests, and current clean-main evidence are in
+[review-verification.md](review-verification.md).
+
 Made by Ryan with Codex (GPT-6). Linux container, Chromium 151.0.7922.173 at `/usr/bin/chromium`,
 SwiftShader, Node 24.19.0, pinned Playwright, one worker. Browser tests use the actual application,
 renderer, vendor decoders, and asset files. Pure encoder, kit, taps, and unit cases run JavaScript

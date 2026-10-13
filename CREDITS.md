@@ -1692,38 +1692,37 @@ readable text, logos, or real landmarks. Each JPEG is 1,280 px wide, with its de
 - Paper canyon (C54-P37): `assets/toys/photo-3d/ai/cdx-paper-canyon.jpg`.
 - Wood valley (C54-P40): `assets/toys/photo-3d/ai/cdx-wood-valley.jpg`.
 
-The following 24 Picture QR backgrounds are original procedural assets, **made by Ryan with Codex
-(GPT-6)**, offered under **CC0 1.0**. The picker carries their short names, and the selected
-picture’s in-app credit carries the maker and CC0 license. Generated with `tools/cdx-pics-qr.mjs`,
-`tools/cdx-pics-qr-print.mjs`, and `tools/cdx-pics-qr-grid.mjs`; checked October 13, 2026. Eighteen
-carry a luminance pattern tuned to the default URL; their picker labels say “default link,” and
-their detail ranking excludes that carrier:
+The following 24 Picture QR backgrounds show clear subjects and have no URL-specific carriers. 21
+are **AI-made by the owner with an AI image tool**, on his instruction, labeled **AI-made** in the
+picker and in-app credit. 3 are original procedural pictures, **made by Ryan with Codex (GPT-6)**,
+offered under **CC0 1.0**. Checked October 13, 2026:
 
-- Pebble pool 2: `assets/toys/qr-picture/codex/cdx-qr-3-2.jpg`.
-- Ceramic vase 7: `assets/toys/qr-picture/codex/cdx-qr-8-7.jpg`.
-- Pebble pool soft 6: `assets/toys/qr-picture/codex/cdx-qr-print-3-6.jpg`.
-- Leaf canopy soft 2: `assets/toys/qr-picture/codex/cdx-qr-print-5-2.jpg`.
-- Leaf canopy soft 6: `assets/toys/qr-picture/codex/cdx-qr-print-5-6.jpg`.
-- Ceramic vase soft 2: `assets/toys/qr-picture/codex/cdx-qr-print-8-2.jpg`.
-- Petal garden grid 3: `assets/toys/qr-picture/codex/cdx-qr-grid-1-3.jpg`.
-- Rolling hills grid 3: `assets/toys/qr-picture/codex/cdx-qr-grid-2-3.jpg`.
-- Rolling hills grid 4: `assets/toys/qr-picture/codex/cdx-qr-grid-2-4.jpg`.
-- Pebble pool grid 3: `assets/toys/qr-picture/codex/cdx-qr-grid-3-3.jpg`.
-- Leaf canopy grid 3: `assets/toys/qr-picture/codex/cdx-qr-grid-5-3.jpg`.
-- Leaf canopy grid 5: `assets/toys/qr-picture/codex/cdx-qr-grid-5-5.jpg`.
-- Leaf canopy grid 6: `assets/toys/qr-picture/codex/cdx-qr-grid-5-6.jpg`.
-- Sunlit dunes grid 3: `assets/toys/qr-picture/codex/cdx-qr-grid-6-3.jpg`.
-- Sunlit dunes grid 4: `assets/toys/qr-picture/codex/cdx-qr-grid-6-4.jpg`.
-- Orbiting spheres grid 3: `assets/toys/qr-picture/codex/cdx-qr-grid-7-3.jpg`.
-- Orbiting spheres grid 4: `assets/toys/qr-picture/codex/cdx-qr-grid-7-4.jpg`.
-- Orbiting spheres grid 5: `assets/toys/qr-picture/codex/cdx-qr-grid-7-5.jpg`.
-- Orbiting spheres grid 6: `assets/toys/qr-picture/codex/cdx-qr-grid-7-6.jpg`.
-- Orbiting spheres grid 7: `assets/toys/qr-picture/codex/cdx-qr-grid-7-7.jpg`.
-- Ceramic vase grid 3: `assets/toys/qr-picture/codex/cdx-qr-grid-8-3.jpg`.
-- Ceramic vase grid 5: `assets/toys/qr-picture/codex/cdx-qr-grid-8-5.jpg`.
-- Ceramic vase grid 6: `assets/toys/qr-picture/codex/cdx-qr-grid-8-6.jpg`.
-- Tidal shells grid 3: `assets/toys/qr-picture/codex/cdx-qr-grid-9-3.jpg`.
+- Split leaf (AI-made by the owner): `assets/toys/qr-picture/codex/cdx-qr-ai-monstera.jpg`.
+- Fern frond (AI-made by the owner): `assets/toys/qr-picture/codex/cdx-qr-ai-fern.jpg`.
+- Pebble pool soft 6 (CC0, Ryan with Codex): `assets/toys/qr-picture/codex/cdx-qr-print-3-6.jpg`.
+- Potted cactus (AI-made by the owner): `assets/toys/qr-picture/codex/cdx-qr-ai-cactus.jpg`.
+- Leaf canopy soft 6 (CC0, Ryan with Codex): `assets/toys/qr-picture/codex/cdx-qr-print-5-6.jpg`.
+- Clay pitcher (AI-made by the owner): `assets/toys/qr-picture/codex/cdx-qr-ai-pitcher.jpg`.
+- Pear (AI-made by the owner): `assets/toys/qr-picture/codex/cdx-qr-ai-pear.jpg`.
+- Balloon (AI-made by the owner): `assets/toys/qr-picture/codex/cdx-qr-ai-hot-air-balloon.jpg`.
+- Mushroom (AI-made by the owner): `assets/toys/qr-picture/codex/cdx-qr-ai-mushroom.jpg`.
+- Tulip (AI-made by the owner): `assets/toys/qr-picture/codex/cdx-qr-ai-tulip.jpg`.
+- Pinecone (AI-made by the owner): `assets/toys/qr-picture/codex/cdx-qr-ai-pinecone.jpg`.
+- Stacked stones (AI-made by the owner):
+  `assets/toys/qr-picture/codex/cdx-qr-ai-stacked-stones.jpg`.
+- Wooden rook (AI-made by the owner): `assets/toys/qr-picture/codex/cdx-qr-ai-rook.jpg`.
+- Paper rainbow (AI-made by the owner): `assets/toys/qr-picture/codex/cdx-qr-ai-rainbow.jpg`.
+- Wooden blocks (AI-made by the owner): `assets/toys/qr-picture/codex/cdx-qr-ai-wood-blocks.jpg`.
+- Clay teapot (AI-made by the owner): `assets/toys/qr-picture/codex/cdx-qr-ai-teapot.jpg`.
+- Lotus bloom (AI-made by the owner): `assets/toys/qr-picture/codex/cdx-qr-ai-lotus.jpg`.
+- Scallop shell (AI-made by the owner): `assets/toys/qr-picture/codex/cdx-qr-ai-scallop.jpg`.
+- Pumpkin (AI-made by the owner): `assets/toys/qr-picture/codex/cdx-qr-ai-pumpkin.jpg`.
+- Blue vase (AI-made by the owner): `assets/toys/qr-picture/codex/cdx-qr-ai-blue-vase.jpg`.
+- Ginkgo leaf (AI-made by the owner): `assets/toys/qr-picture/codex/cdx-qr-ai-ginkgo.jpg`.
+- Autumn squash (AI-made by the owner): `assets/toys/qr-picture/codex/cdx-qr-ai-squash.jpg`.
+- Ceramic vase 7 (CC0, Ryan with Codex): `assets/toys/qr-picture/codex/cdx-qr-8-7.jpg`.
+- Smooth pebbles (AI-made by the owner): `assets/toys/qr-picture/codex/cdx-qr-ai-pebbles.jpg`.
 
-The full prompts, scores, SHA-256 hashes, scan trials, and contact sheets are in
+The full prompts, hashes, scores, five-link scan rates, and phone-size contact sheet are in
 [the sample-pictures audit](docs/audits/sample-pictures-2026-10.md). No new asset loads before it is
 picked.

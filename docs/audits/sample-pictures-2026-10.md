@@ -1,26 +1,129 @@
 # Sample pictures: October 13, 2026
 
-Codex (GPT-6) built this for Ryan. Status: implemented on `codex/sample-pictures`, based on `main`
-commit `555e8f5c`. Nothing is merged.
+Made by Ryan with Codex (GPT-6). Implemented on `codex/sample-pictures`, draft
+[PR #582](https://github.com/ryanjosephkamp/splashery/pull/582). Main `574a68d3`, then `a2189958`,
+was merged into the branch, without rebasing. The latter adds task documents only; application and
+test code are identical to the clean-main failure baseline. Nothing is merged into main.
 
-40 original AI-made Photo to 3D candidates were generated; 20 were retained. A 16-image controlled
-QR study preceded 216 original procedural backgrounds in three batches; 24 were retained. Samples
-load only when picked; neither toy’s default sample changed.
+The accepted Photo to 3D set is unchanged: 20 AI-made samples from 40 measured candidates, with
+their original JPEGs, depth maps, labels, and records. The revised Picture QR set has **24
+recognizable subjects**, 21 AI-made and 3 procedural CC0, chosen from 32 new AI candidates and six
+earlier subject pictures. All 18 URL-specific carriers from the first selection are removed from the
+picker, asset records, and shipping folder. Neither toy's default picture changed; new pictures load
+only when selected.
 
 ## Scope and rules
 
-The October 13 version of CLAUDE.md on main permits AI-made Picture QR backgrounds, but this task
-uses its default: original made-by-code CC0 pictures for QR. Photo to 3D pictures use the existing
-“AI-made by the owner” credit and picker labels. No people, readable text, logos, or real landmarks
-were seen in the full candidate contact sheet. All scenes are fictional; the animal subjects are
-shown in profile.
+Main's AI-sample policy explicitly permits labeled AI-made Picture QR backgrounds (A3, #580). The
+new AI pictures are fictional still lifes with no people, faces, logos, readable text, or real
+landmarks. The complete native-candidate contact sheet was visually inspected. The Photo to 3D
+images remain under their accepted owner AI policy. The owner authorized registry additions in the
+first round; this review replaces only this task's QR entries and credit block, preserving all main
+and accepted Studio records. No renderer, encoder, depth model, manual page, or existing test
+assertion was edited. `tests/taps.spec.mjs` is untouched.
 
-Open PRs #560, #562, #566, and #570 were inspected before editing. Renderer files, `manual/`, and
-`tests/taps.spec.mjs` are untouched. The owner authorized additive asset records in `CREDITS.md` and
-`tools/assets.json`, resolving the task’s conflicting protected-file restriction for those two
-files. Their existing content is preserved. The added records are also available as
-[asset-credits.md](sample-pictures-2026-10/asset-credits.md) and
-[asset-records.json](sample-pictures-2026-10/asset-records.json).
+![Final 24: actual 330-pixel phone renders, score, and five-link scan rate](sample-pictures-2026-10/qr-final-phone.jpg)
+
+![The same 24 source pictures](sample-pictures-2026-10/qr-final-sources.jpg)
+
+## Revised QR selection and five-link protocol
+
+The Operator's review called for subjects that remain recognizable at phone size and backgrounds
+that do not encode the default URL. The new 32 AI candidates use large, distinct silhouettes,
+restrained colors, quiet corners, and broad surfaces. The source pictures contain no QR pattern,
+grid, or payload-derived luminance carrier. Their prompts are recorded in
+[the scene manifest](../../tools/cdx-pics-qr-ai-prompts.json). Native images are retained locally;
+the shipping JPEGs are 960×960 at quality 88, made with the repository's licensed Pillow.
+
+![All 32 new AI candidates](sample-pictures-2026-10/qr-ai-candidates.jpg)
+
+Five unrelated links, from 20 to 130 characters, are fixed in
+[cdx-pics-links.mjs](../../tools/cdx-pics-links.mjs). Every candidate uses H correction, Contrast
+0.5, small center, color style, and More detail. The production encoder's built-in adaptive
+reliability nudge remains enabled, as in the toy; its resulting margin is recorded per link. No
+source image is conditioned on any payload.
+
+- 43 characters: `https://ryanjosephkamp.github.io/splashery/`
+- 20 characters: `https://example.org/`
+- 41 characters: `https://example.com/gallery/summer-leaves`
+- 59 characters: `https://example.net/exhibits/ceramics?view=phone&color=blue`
+- 130 characters:
+  `https://example.org/collections/botanical-studies/2026/autumn/large-format-print?item=fern-frond&edition=public&ref=mobile-preview`
+
+The two standard production layout checks (4 and 8 pixels/module) are checked for each link.
+Screening then loads each JPEG through the toy's actual local-file decoder and builds its actual
+splats in Chromium/WebGL2. The front-camera capture follows `savePNG(900)` with two render frames
+and an 80 ms sort wait. Only the private measurement page's visible cover screenshot is omitted. The
+screening RGBA was byte-identical to `savePNG(900)` for the blue-vase default and 130-character
+cases; see [review-protocol-check.json](sample-pictures-2026-10/review-protocol-check.json). Final
+tests call the production scan check and `savePNG` as well.
+
+Each link has four rendered qualifying checks: the raw 330-pixel phone reduction, rendered
+reductions at 4 and 8 pixels/module, and the 900-pixel printed-size **camera simulation with
+0.2-module Gaussian focus blur**. The last is a simulation applied to real rendered pixels, not a
+physical print or camera measurement. The raw, unfiltered 900-pixel decode is separately reported
+below. It does not achieve 100% across links; a source can pass phone and focused-camera checks
+while its unresolved high-resolution halftone dots confuse jsQR. Standalone fixed-pixel CPU rasters
+at 330/900 and softer focus are also retained as diagnostics, including their failures. They are not
+substituted for the actual splat render.
+
+All retained backgrounds pass 5/5 links and 20/20 rendered qualifying checks. That is a finite test
+result, not a guarantee for every possible link, size, lighting condition, or physical camera.
+Arbitrarily long links can exceed practical phone resolution. Raw-export rates are not hidden or
+claimed to be perfect.
+
+The detail measure is the original RGB-fidelity/gradient-cosine metric applied to the production
+woven layout, averaged to one color per module:
+`100 × (0.55 × (1 − RGB_MAE) + 0.45 × max(0, gradient_cosine))`. **The minimum of the five link
+scores** ranks a candidate. It includes forced finder areas and is not a semantic-recognition
+percentage. Separately, the actual 330-pixel render is visually reviewed for a clear subject.
+Selection keeps the highest worst-link scores among fully scan-qualified, visually clear pictures,
+with one procedural variant per subject family. Every cut has a reason.
+[qr-review-scores.json](sample-pictures-2026-10/qr-review-scores.json),
+[qr-review-browser.json](sample-pictures-2026-10/qr-review-browser.json), and
+[qr-subject-review.json](sample-pictures-2026-10/qr-subject-review.json) contain the complete
+measurements and visual dispositions.
+
+| Candidate                 | Subject             | Origin  | Worst-link detail | Rendered links | Raw 900px links | Decision                                                                   |
+| ------------------------- | ------------------- | ------- | ----------------: | -------------: | --------------: | -------------------------------------------------------------------------- |
+| cdx-qr-3-2                | Pebble pool 2       | CC0     |            48.940 |            5/5 |             4/5 | Lower worst-link detail score or a repeated subject.                       |
+| cdx-qr-8-7                | Ceramic vase 7      | CC0     |            46.754 |            5/5 |             4/5 | Keep                                                                       |
+| cdx-qr-print-3-6          | Pebble pool soft 6  | CC0     |            49.532 |            5/5 |             4/5 | Keep                                                                       |
+| cdx-qr-print-5-2          | Leaf canopy soft 2  | CC0     |            49.001 |            5/5 |             4/5 | Lower worst-link detail score or a repeated subject.                       |
+| cdx-qr-print-5-6          | Leaf canopy soft 6  | CC0     |            49.129 |            5/5 |             4/5 | Keep                                                                       |
+| cdx-qr-print-8-2          | Ceramic vase soft 2 | CC0     |            46.271 |            5/5 |             4/5 | Lower worst-link detail score or a repeated subject.                       |
+| cdx-qr-ai-blue-vase       | Blue vase           | AI-made |            47.570 |            5/5 |             3/5 | Keep                                                                       |
+| cdx-qr-ai-teapot          | Clay teapot         | AI-made |            47.996 |            5/5 |             3/5 | Keep                                                                       |
+| cdx-qr-ai-fern            | Fern frond          | AI-made |            49.785 |            5/5 |             3/5 | Keep                                                                       |
+| cdx-qr-ai-ginkgo          | Ginkgo leaf         | AI-made |            47.144 |            5/5 |             3/5 | Keep                                                                       |
+| cdx-qr-ai-monstera        | Split leaf          | AI-made |            51.648 |            5/5 |             3/5 | Keep                                                                       |
+| cdx-qr-ai-cactus          | Potted cactus       | AI-made |            49.351 |            5/5 |             3/5 | Keep                                                                       |
+| cdx-qr-ai-succulent       | Succulent           | AI-made |            49.138 |            4/5 |             3/5 | Rendered link scan failure.                                                |
+| cdx-qr-ai-pebbles         | Smooth pebbles      | AI-made |            46.046 |            5/5 |             3/5 | Keep                                                                       |
+| cdx-qr-ai-pear            | Pear                | AI-made |            48.862 |            5/5 |             3/5 | Keep                                                                       |
+| cdx-qr-ai-citrus          | Citrus halves       | AI-made |            49.505 |            3/5 |             3/5 | Rendered link scan failure.                                                |
+| cdx-qr-ai-squash          | Autumn squash       | AI-made |            46.834 |            5/5 |             3/5 | Keep                                                                       |
+| cdx-qr-ai-mushroom        | Mushroom            | AI-made |            48.682 |            5/5 |             3/5 | Keep                                                                       |
+| cdx-qr-ai-shell           | Spiral shell        | AI-made |            45.966 |            4/5 |             3/5 | Rendered link scan failure.                                                |
+| cdx-qr-ai-scallop         | Scallop shell       | AI-made |            47.719 |            5/5 |             3/5 | Keep                                                                       |
+| cdx-qr-ai-tulip           | Tulip               | AI-made |            48.648 |            5/5 |             3/5 | Keep                                                                       |
+| cdx-qr-ai-lotus           | Lotus bloom         | AI-made |            47.875 |            5/5 |             3/5 | Keep                                                                       |
+| cdx-qr-ai-poppy           | Poppy bloom         | AI-made |            46.955 |            4/5 |             3/5 | Rendered link scan failure.                                                |
+| cdx-qr-ai-acorns          | Acorns              | AI-made |            48.117 |            4/5 |             3/5 | Rendered link scan failure.                                                |
+| cdx-qr-ai-pinecone        | Pinecone            | AI-made |            48.564 |            5/5 |             3/5 | Keep                                                                       |
+| cdx-qr-ai-pumpkin         | Pumpkin             | AI-made |            47.647 |            5/5 |             3/5 | Keep                                                                       |
+| cdx-qr-ai-wood-blocks     | Wooden blocks       | AI-made |            48.019 |            5/5 |             3/5 | Keep                                                                       |
+| cdx-qr-ai-rook            | Wooden rook         | AI-made |            48.380 |            5/5 |             4/5 | Keep                                                                       |
+| cdx-qr-ai-paper-boat      | Paper boat          | AI-made |            45.336 |            5/5 |             3/5 | Lower worst-link detail score or a repeated subject.                       |
+| cdx-qr-ai-hot-air-balloon | Balloon             | AI-made |            48.720 |            5/5 |             3/5 | Keep                                                                       |
+| cdx-qr-ai-sailboat        | Sailboat            | AI-made |            47.095 |            5/5 |             4/5 | The pale main structure is too faint against the background at 330 pixels. |
+| cdx-qr-ai-cup             | Stoneware cup       | AI-made |            45.229 |            5/5 |             3/5 | The pale main structure is too faint against the background at 330 pixels. |
+| cdx-qr-ai-tea-bowl        | Tea bowl            | AI-made |            47.734 |            4/5 |             3/5 | Rendered link scan failure.                                                |
+| cdx-qr-ai-pitcher         | Clay pitcher        | AI-made |            49.054 |            5/5 |             3/5 | Keep                                                                       |
+| cdx-qr-ai-watering-can    | Watering can        | AI-made |            45.794 |            5/5 |             3/5 | Lower worst-link detail score or a repeated subject.                       |
+| cdx-qr-ai-rainbow         | Paper rainbow       | AI-made |            48.178 |            5/5 |             3/5 | Keep                                                                       |
+| cdx-qr-ai-stacked-stones  | Stacked stones      | AI-made |            48.542 |            5/5 |             3/5 | Keep                                                                       |
+| cdx-qr-ai-crystal         | Crystal cluster     | AI-made |            45.390 |            5/5 |             3/5 | Crystal facets merge into a faint purple mass in the phone halftone.       |
 
 ## Photo to 3D method and limits
 
@@ -104,376 +207,298 @@ inspected; relief artifacts remain visible at large angles.
 | C54-P39   | Wool garden          | 95.844 |     2.3297% |               0.0993 | Cut      |
 | C54-P40   | Wood valley          | 96.664 |     2.5059% |               0.0696 | Keep     |
 
-## QR experiment and selection
+## Original QR experiment: retained as rejected-candidate history
 
-[The deterministic generator and scorer](../../tools/cdx-pics-qr.mjs) uses the actual
-`src/qr-craft/picture.js`, not a replacement QR layout. The decoder is vendored jsQR, using the same
-inversion setting as the production tests. Scan numbers from this generator are CPU raster
-simulations in Node, not physical camera or paper tests. The browser checks below exercise the toy’s
-own stage check and PNG export as well.
+Before the review, a 16-picture controlled study crossed tone range, detail location, edge density,
+and color, at L/M/Q/H and Fit/More/Most (384 trials).
+[qr-probes.json](sample-pictures-2026-10/qr-probes.json) retains all factors, properties, scans, and
+scores. This is a small exploratory sweep, not a population-level claim. It led to 216 procedural
+candidates in three 72-picture batches. The first-round CPU and browser scan histories remain in
+[qr-scores.json](sample-pictures-2026-10/qr-scores.json) and
+[qr-browser-scores.json](sample-pictures-2026-10/qr-browser-scores.json).
 
-The exploratory study crosses wide/narrow tone range, center/corner detail placement, sparse/dense
-edges, and color/grayscale, 16 candidates. Each uses four correction levels (L/M/Q/H), three code
-sizes (fit/more/most), and the toy’s two blurred scan sizes (4 and 8 pixels/module), 384 trials.
-[qr-probes.json](sample-pictures-2026-10/qr-probes.json) contains every factor, measured property,
-scan, and detail score. This small study gives no population-level guarantee.
+The third batch encoded a default-URL luminance carrier. Every carrier is now rejected. Its
+source-reference detail metric excluded the carrier, but that did not ensure recognizable subjects
+in the final phone render. The revised selection therefore adds a visual subject gate and five-link
+checks. The original default-URL selection and contact sheets below are **superseded**, not the
+shipping set.
 
-| Factor               | Off: passes / trials | On: passes / trials | Interpretation in this sweep                                                   |
-| -------------------- | -------------------: | ------------------: | ------------------------------------------------------------------------------ |
-| Wide tone range      |              190/192 |             192/192 | The fuller table records the payload, correction level, and size interactions. |
-| Detail near a corner |              190/192 |             192/192 | The fuller table records the payload, correction level, and size interactions. |
-| Dense edges          |              190/192 |             192/192 | The fuller table records the payload, correction level, and size interactions. |
-| Color                |              191/192 |             191/192 | Color alone had no scan effect.                                                |
+![All 216 first-round procedural candidates](sample-pictures-2026-10/qr-candidates.jpg)
 
-Three deterministic batches have 72 candidates each (nine families, eight variants):
+| Original candidate | Original detail score | Current decision                                               |
+| ------------------ | --------------------: | -------------------------------------------------------------- |
+| cdx-qr-1-1         |                47.379 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-1-2         |                47.195 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-1-3         |                47.742 | Cut: first-round scan failure                                  |
+| cdx-qr-1-4         |                47.127 | Cut: first-round scan failure                                  |
+| cdx-qr-1-5         |                47.483 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-1-6         |                48.307 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-1-7         |                48.058 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-1-8         |                47.775 | Cut: first-round scan failure                                  |
+| cdx-qr-2-1         |                47.807 | Cut: first-round scan failure                                  |
+| cdx-qr-2-2         |                47.854 | Cut: first-round scan failure                                  |
+| cdx-qr-2-3         |                48.020 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-2-4         |                48.195 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-2-5         |                47.158 | Cut: first-round scan failure                                  |
+| cdx-qr-2-6         |                46.683 | Cut: first-round scan failure                                  |
+| cdx-qr-2-7         |                47.114 | Cut: first-round scan failure                                  |
+| cdx-qr-2-8         |                47.573 | Cut: first-round scan failure                                  |
+| cdx-qr-3-1         |                49.859 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-3-2         |                49.551 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-3-3         |                50.472 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-3-4         |                49.524 | Cut: first-round scan failure                                  |
+| cdx-qr-3-5         |                48.786 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-3-6         |                50.214 | Cut: first-round scan failure                                  |
+| cdx-qr-3-7         |                50.291 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-3-8         |                49.977 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-4-1         |                49.633 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-4-2         |                49.380 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-4-3         |                49.832 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-4-4         |                49.458 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-4-5         |                48.272 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-4-6         |                49.073 | Cut: first-round scan failure                                  |
+| cdx-qr-4-7         |                48.925 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-4-8         |                48.988 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-5-1         |                50.049 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-5-2         |                49.782 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-5-3         |                50.638 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-5-4         |                49.542 | Cut: first-round scan failure                                  |
+| cdx-qr-5-5         |                50.315 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-5-6         |                51.850 | Cut: first-round scan failure                                  |
+| cdx-qr-5-7         |                51.537 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-5-8         |                50.062 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-6-1         |                48.886 | Cut: first-round scan failure                                  |
+| cdx-qr-6-2         |                48.846 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-6-3         |                49.272 | Cut: first-round scan failure                                  |
+| cdx-qr-6-4         |                49.061 | Cut: first-round scan failure                                  |
+| cdx-qr-6-5         |                48.541 | Cut: first-round scan failure                                  |
+| cdx-qr-6-6         |                49.166 | Cut: first-round scan failure                                  |
+| cdx-qr-6-7         |                49.118 | Cut: first-round scan failure                                  |
+| cdx-qr-6-8         |                49.068 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-7-1         |                50.444 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-7-2         |                50.566 | Cut: first-round scan failure                                  |
+| cdx-qr-7-3         |                51.457 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-7-4         |                50.626 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-7-5         |                49.815 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-7-6         |                51.507 | Cut: first-round scan failure                                  |
+| cdx-qr-7-7         |                51.329 | Cut: first-round scan failure                                  |
+| cdx-qr-7-8         |                51.244 | Cut: first-round scan failure                                  |
+| cdx-qr-8-1         |                48.749 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-8-2         |                48.691 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-8-3         |                49.216 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-8-4         |                48.295 | Cut: first-round scan failure                                  |
+| cdx-qr-8-5         |                48.298 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-8-6         |                49.083 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-8-7         |                48.971 | Kept after five-link/subject review                            |
+| cdx-qr-8-8         |                48.882 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-9-1         |                48.795 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-9-2         |                48.794 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-9-3         |                49.457 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-9-4         |                48.582 | Cut: first-round scan failure                                  |
+| cdx-qr-9-5         |                48.374 | Cut: first-round scan failure                                  |
+| cdx-qr-9-6         |                49.343 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-9-7         |                49.208 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-9-8         |                49.020 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-print-1-1   |                47.279 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-print-1-2   |                47.690 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-print-1-3   |                47.986 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-print-1-4   |                48.188 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-print-1-5   |                46.966 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-print-1-6   |                47.969 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-print-1-7   |                48.337 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-print-1-8   |                48.516 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-print-2-1   |                47.597 | Cut: first-round scan failure                                  |
+| cdx-qr-print-2-2   |                47.500 | Cut: first-round scan failure                                  |
+| cdx-qr-print-2-3   |                47.139 | Cut: first-round scan failure                                  |
+| cdx-qr-print-2-4   |                47.320 | Cut: first-round scan failure                                  |
+| cdx-qr-print-2-5   |                47.438 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-print-2-6   |                46.709 | Cut: first-round scan failure                                  |
+| cdx-qr-print-2-7   |                47.079 | Cut: first-round scan failure                                  |
+| cdx-qr-print-2-8   |                47.387 | Cut: first-round scan failure                                  |
+| cdx-qr-print-3-1   |                49.495 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-print-3-2   |                49.855 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-print-3-3   |                49.999 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-print-3-4   |                49.552 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-print-3-5   |                49.155 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-print-3-6   |                49.856 | Kept after five-link/subject review                            |
+| cdx-qr-print-3-7   |                49.585 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-print-3-8   |                49.577 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-print-4-1   |                49.380 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-print-4-2   |                49.296 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-print-4-3   |                48.969 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-print-4-4   |                48.146 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-print-4-5   |                48.937 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-print-4-6   |                49.008 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-print-4-7   |                48.241 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-print-4-8   |                47.994 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-print-5-1   |                49.675 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-print-5-2   |                49.653 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-print-5-3   |                51.430 | Cut: first-round scan failure                                  |
+| cdx-qr-print-5-4   |                51.154 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-print-5-5   |                49.427 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-print-5-6   |                50.001 | Kept after five-link/subject review                            |
+| cdx-qr-print-5-7   |                51.178 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-print-5-8   |                51.357 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-print-6-1   |                48.738 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-print-6-2   |                48.955 | Cut: first-round scan failure                                  |
+| cdx-qr-print-6-3   |                48.930 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-print-6-4   |                48.254 | Cut: first-round scan failure                                  |
+| cdx-qr-print-6-5   |                48.732 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-print-6-6   |                49.007 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-print-6-7   |                48.517 | Cut: first-round scan failure                                  |
+| cdx-qr-print-6-8   |                48.348 | Cut: first-round scan failure                                  |
+| cdx-qr-print-7-1   |                50.237 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-print-7-2   |                50.646 | Cut: first-round scan failure                                  |
+| cdx-qr-print-7-3   |                51.352 | Cut: first-round scan failure                                  |
+| cdx-qr-print-7-4   |                50.874 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-print-7-5   |                50.125 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-print-7-6   |                51.094 | Cut: first-round scan failure                                  |
+| cdx-qr-print-7-7   |                50.715 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-print-7-8   |                51.229 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-print-8-1   |                48.474 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-print-8-2   |                48.757 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-print-8-3   |                49.042 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-print-8-4   |                49.459 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-print-8-5   |                48.483 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-print-8-6   |                48.906 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-print-8-7   |                48.986 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-print-8-8   |                49.287 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-print-9-1   |                48.490 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-print-9-2   |                48.866 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-print-9-3   |                49.180 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-print-9-4   |                48.672 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-print-9-5   |                48.391 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-print-9-6   |                49.018 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-print-9-7   |                48.529 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-print-9-8   |                48.606 | Cut: no clear-subject/five-link advantage over final selection |
+| cdx-qr-grid-1-1    |                42.318 | Rejected: payload-specific carrier                             |
+| cdx-qr-grid-1-2    |                40.995 | Rejected: payload-specific carrier                             |
+| cdx-qr-grid-1-3    |                40.557 | Rejected: payload-specific carrier                             |
+| cdx-qr-grid-1-4    |                38.139 | Rejected: payload-specific carrier                             |
+| cdx-qr-grid-1-5    |                38.760 | Rejected: payload-specific carrier                             |
+| cdx-qr-grid-1-6    |                38.795 | Rejected: payload-specific carrier                             |
+| cdx-qr-grid-1-7    |                37.595 | Rejected: payload-specific carrier                             |
+| cdx-qr-grid-1-8    |                36.728 | Rejected: payload-specific carrier                             |
+| cdx-qr-grid-2-1    |                42.081 | Rejected: payload-specific carrier                             |
+| cdx-qr-grid-2-2    |                41.350 | Rejected: payload-specific carrier                             |
+| cdx-qr-grid-2-3    |                40.278 | Rejected: payload-specific carrier                             |
+| cdx-qr-grid-2-4    |                40.169 | Rejected: payload-specific carrier                             |
+| cdx-qr-grid-2-5    |                38.847 | Rejected: payload-specific carrier                             |
+| cdx-qr-grid-2-6    |                37.239 | Rejected: payload-specific carrier                             |
+| cdx-qr-grid-2-7    |                36.658 | Rejected: payload-specific carrier                             |
+| cdx-qr-grid-2-8    |                36.920 | Rejected: payload-specific carrier                             |
+| cdx-qr-grid-3-1    |                42.782 | Rejected: payload-specific carrier                             |
+| cdx-qr-grid-3-2    |                41.297 | Rejected: payload-specific carrier                             |
+| cdx-qr-grid-3-3    |                40.857 | Rejected: payload-specific carrier                             |
+| cdx-qr-grid-3-4    |                38.275 | Rejected: payload-specific carrier                             |
+| cdx-qr-grid-3-5    |                38.961 | Rejected: payload-specific carrier                             |
+| cdx-qr-grid-3-6    |                38.938 | Rejected: payload-specific carrier                             |
+| cdx-qr-grid-3-7    |                38.174 | Rejected: payload-specific carrier                             |
+| cdx-qr-grid-3-8    |                37.473 | Rejected: payload-specific carrier                             |
+| cdx-qr-grid-4-1    |                42.056 | Rejected: payload-specific carrier                             |
+| cdx-qr-grid-4-2    |                40.715 | Rejected: payload-specific carrier                             |
+| cdx-qr-grid-4-3    |                39.417 | Rejected: payload-specific carrier                             |
+| cdx-qr-grid-4-4    |                38.248 | Rejected: payload-specific carrier                             |
+| cdx-qr-grid-4-5    |                38.735 | Rejected: payload-specific carrier                             |
+| cdx-qr-grid-4-6    |                37.213 | Rejected: payload-specific carrier                             |
+| cdx-qr-grid-4-7    |                36.410 | Rejected: payload-specific carrier                             |
+| cdx-qr-grid-4-8    |                35.746 | Rejected: payload-specific carrier                             |
+| cdx-qr-grid-5-1    |                43.016 | Rejected: payload-specific carrier                             |
+| cdx-qr-grid-5-2    |                41.676 | Rejected: payload-specific carrier                             |
+| cdx-qr-grid-5-3    |                41.279 | Rejected: payload-specific carrier                             |
+| cdx-qr-grid-5-4    |                38.604 | Rejected: payload-specific carrier                             |
+| cdx-qr-grid-5-5    |                40.705 | Rejected: payload-specific carrier                             |
+| cdx-qr-grid-5-6    |                40.895 | Rejected: payload-specific carrier                             |
+| cdx-qr-grid-5-7    |                38.116 | Rejected: payload-specific carrier                             |
+| cdx-qr-grid-5-8    |                37.438 | Rejected: payload-specific carrier                             |
+| cdx-qr-grid-6-1    |                42.699 | Rejected: payload-specific carrier                             |
+| cdx-qr-grid-6-2    |                41.546 | Rejected: payload-specific carrier                             |
+| cdx-qr-grid-6-3    |                40.657 | Rejected: payload-specific carrier                             |
+| cdx-qr-grid-6-4    |                39.850 | Rejected: payload-specific carrier                             |
+| cdx-qr-grid-6-5    |                39.085 | Rejected: payload-specific carrier                             |
+| cdx-qr-grid-6-6    |                38.090 | Rejected: payload-specific carrier                             |
+| cdx-qr-grid-6-7    |                37.359 | Rejected: payload-specific carrier                             |
+| cdx-qr-grid-6-8    |                36.806 | Rejected: payload-specific carrier                             |
+| cdx-qr-grid-7-1    |                43.957 | Rejected: payload-specific carrier                             |
+| cdx-qr-grid-7-2    |                42.761 | Rejected: payload-specific carrier                             |
+| cdx-qr-grid-7-3    |                42.363 | Rejected: payload-specific carrier                             |
+| cdx-qr-grid-7-4    |                39.952 | Rejected: payload-specific carrier                             |
+| cdx-qr-grid-7-5    |                40.173 | Rejected: payload-specific carrier                             |
+| cdx-qr-grid-7-6    |                40.074 | Rejected: payload-specific carrier                             |
+| cdx-qr-grid-7-7    |                39.284 | Rejected: payload-specific carrier                             |
+| cdx-qr-grid-7-8    |                38.647 | Rejected: payload-specific carrier                             |
+| cdx-qr-grid-8-1    |                42.951 | Rejected: payload-specific carrier                             |
+| cdx-qr-grid-8-2    |                41.441 | Rejected: payload-specific carrier                             |
+| cdx-qr-grid-8-3    |                41.037 | Rejected: payload-specific carrier                             |
+| cdx-qr-grid-8-4    |                38.368 | Rejected: payload-specific carrier                             |
+| cdx-qr-grid-8-5    |                39.420 | Rejected: payload-specific carrier                             |
+| cdx-qr-grid-8-6    |                39.100 | Rejected: payload-specific carrier                             |
+| cdx-qr-grid-8-7    |                38.291 | Rejected: payload-specific carrier                             |
+| cdx-qr-grid-8-8    |                37.615 | Rejected: payload-specific carrier                             |
+| cdx-qr-grid-9-1    |                42.648 | Rejected: payload-specific carrier                             |
+| cdx-qr-grid-9-2    |                41.152 | Rejected: payload-specific carrier                             |
+| cdx-qr-grid-9-3    |                40.676 | Rejected: payload-specific carrier                             |
+| cdx-qr-grid-9-4    |                38.123 | Rejected: payload-specific carrier                             |
+| cdx-qr-grid-9-5    |                38.859 | Rejected: payload-specific carrier                             |
+| cdx-qr-grid-9-6    |                38.110 | Rejected: payload-specific carrier                             |
+| cdx-qr-grid-9-7    |                37.326 | Rejected: payload-specific carrier                             |
+| cdx-qr-grid-9-8    |                36.695 | Rejected: payload-specific carrier                             |
 
-1. Original macro shapes: petals, hills, pebbles, ribbons, leaves, dunes, spheres, a vase, and
-   shells.
-2. [Balanced midtones and lower chroma](../../tools/cdx-pics-qr-print.mjs), preserving those broad
-   shapes.
-3. [A default-URL luminance carrier](../../tools/cdx-pics-qr-grid.mjs), under the original colors.
-   It conditions only data modules, excluding finder and timing patterns, with alternating target
-   luminance based on the default H/more code. This is a visible grid and a payload-specific
-   background. Eighteen selected samples use it, and their picker names say “default link.” Changing
-   the link can remove its scan advantage.
+## Clean-main failures and verification
 
-The measured properties use a 96×96 square: luminance p95−p05 range, horizontal/vertical edge energy
-in the center and outside it, mean channel spread, and fraction of midtones between 0.3 and 0.7.
-Every candidate’s properties and scans are in
-[qr-scores.json](sample-pictures-2026-10/qr-scores.json). Broad shapes and balanced tones passed the
-blurred raster checks frequently, but many failed the stronger unfiltered browser export. The final
-carrier batch targets that measured failure without changing the encoder or renderer.
+The assertions are [`tests/qr4-craft.spec.mjs:153`](../../tests/qr4-craft.spec.mjs) and
+[`tests/p3d.spec.mjs:194`](../../tests/p3d.spec.mjs). Both were reproduced in a clean, detached
+checkout of main `574a68d3125c6ef8f0f5951b53a7da7b6124a341`, with the same pinned dependencies and
+Chromium. The hash failed 3/3 fresh runs; the warning failed 3/8 valid repeated runs and passed 5/8.
+No production or test code was altered in that checkout. See
+[main-hash-failure.txt](sample-pictures-2026-10/main-hash-failure.txt),
+[main-warning-failure.txt](sample-pictures-2026-10/main-warning-failure.txt), and
+[the failure screenshot](sample-pictures-2026-10/main-warning-failure.jpg). The warning is a
+panel-refresh race: its error appears after upload, then a rebuilt panel replaces it with a hidden
+warning. The hash expected/actual strings are in the attached log. The original clean-main
+`555e8f5c` observations also remain in the first verification record.
 
-Detail score compares the source macro picture with the halftone averaged to one color per module:
-`100 × (0.55 × (1 − RGB_MAE) + 0.45 × max(0, gradient_cosine))`. It includes forced finder areas.
-For the carrier batch, the reference is its original first-batch picture (`baseReference`), so the
-carrier cannot inflate its rank through self-similarity. `storedImageDetail` separately records that
-diagnostic comparison. This ranks color and edge preservation; it is not a perceptual percentage or
-a measure of semantic recognizability.
+Current run results and required checks are recorded in
+[review-verification.md](sample-pictures-2026-10/review-verification.md). The original
+[verification.md](sample-pictures-2026-10/verification.md) describes the first-round checks only.
+Neither existing assertion was weakened, and `tests/taps.spec.mjs` is untouched.
 
-The qualifying settings are the toy’s actual default URL, H correction, Contrast 0.5, small center,
-color style, and “Bigger (more detail).” Raster phone trials use the toy’s check at 4 and 8
-pixels/module with 0.2-module blur, plus an exact 330-pixel square with 0.3-module blur. Raster
-printed-size trials use an exact 900-pixel square with 0.2-module blur. Qualification also requires
-every equivalent “fit” trial to pass and module contrast above 3, as the existing QR tests require.
-No automatic contrast rescue is used in this raster study.
+## Reproduction and record
 
-[The browser screening tool](../../tools/cdx-pics-browser.mjs) then tests every raster-qualified
-candidate with the actual production stage scan, both layout checks, a 330-pixel reduction of the
-production render, and the raw, unfiltered 900-pixel render. The browser renderer follows the
-production capture camera, two render frames, and sort wait. Its RGBA output was byte-identical to
-`savePNG(900)` on the recorded
-[reference comparison](sample-pictures-2026-10/print-protocol-check.json). Final selected-sample
-tests call `savePNG(900)` directly for every kept sample. These are real Chromium/WebGL2
-measurements, not mock pixels. The production toy’s existing adaptive rendering is unchanged; all
-candidates use the same default controls.
+Made by Ryan with Codex (GPT-6), October 13, 2026. Status: implemented; one draft PR, not merged.
+Toy IDs: `photo-3d` and `qr-picture`. Existing recipe hooks, units, axes, pivots, part IDs, host
+APIs, and quaternion order are unchanged. Only selected picture data/imports and this task's
+evidence/tests/tools changed beyond the requested main merge.
 
-Raw export decoding exposed failures that the blurred CPU simulations missed. Two first-batch and
-four second-batch backgrounds passed every check. The carrier batch added 52 passing candidates.
-Candidate screening records every failure rather than retrying only favorable renders. The short
-alternate payload “Splashery picture QR” is an additional nondefault raster stress condition, not
-part of default qualification.
+1. Generate the 32 individual square QR pictures from their complete manifest prompts with the image
+   tool. Keep `{id,path,prompt}` local mappings in `.cache/cdx-pics/round2/ai/*.json`; preserve
+   native originals.
+2. Run `python3 tools/cdx-pics-qr-prepare.py`, then `node tools/cdx-pics-review.mjs`. The six
+   earlier procedural subjects are reused as recorded in the first-round generation tools.
+3. With the local server on 4173, run
+   `SPLASHERY_CHROMIUM=/usr/bin/chromium node tools/cdx-pics-review-browser.mjs`; it resumes
+   completed subjects. Delete the review browser score file for a complete new measurement.
+4. Inspect all actual phone renders and record each subject decision in qr-subject-review.json. Run
+   `node tools/cdx-pics-review-select.mjs`, then `python3 tools/cdx-pics-review-report.py`. Format
+   the resulting code, JSON, and Markdown with Prettier.
+5. Run the tests and pre-push checks listed in review-verification.md. The accepted Studio assets
+   and scores need no regeneration.
 
-“100%” refers to these finite default trials. Physical phone cameras and printed paper are
-unmeasured; changing payload, size, focus, or correction level can change the mask and result.
-
-Raster-qualified candidates: 174/216. All 174 received browser checks; 58 passed all qualifying
-conditions. The 24 highest detail scores among those fully qualified candidates were kept (two
-original, four balanced-midtone, and eighteen carrier backgrounds). The kept set passed 192/192
-default raster scans, 48/48 production layout checks, 48/48 stage checks, 24/24 phone reductions,
-and 24/24 raw 900-pixel captures.
-
-![All 216 original procedural candidates, score and disposition](sample-pictures-2026-10/qr-candidates.jpg)
-
-![The 24 kept backgrounds in the CPU halftone simulation](sample-pictures-2026-10/qr-kept-woven.jpg)
-
-![The 24 kept real-browser 900-pixel captures](sample-pictures-2026-10/qr-kept-browser.jpg)
-
-| Candidate        | Name                    | Detail score | Default raster scans | Alternate scans | Browser phone / print | Decision                       |
-| ---------------- | ----------------------- | -----------: | -------------------: | --------------: | --------------------- | ------------------------------ |
-| cdx-qr-1-1       | Petal garden 1          |       47.379 |                  8/8 |             3/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-1-2       | Petal garden 2          |       47.195 |                  8/8 |             4/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-1-3       | Petal garden 3          |       47.742 |                  7/8 |             2/4 | not qualified         | Cut: raster scan failure       |
-| cdx-qr-1-4       | Petal garden 4          |       47.127 |                  7/8 |             3/4 | not qualified         | Cut: raster scan failure       |
-| cdx-qr-1-5       | Petal garden 5          |       47.483 |                  8/8 |             2/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-1-6       | Petal garden 6          |       48.307 |                  8/8 |             3/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-1-7       | Petal garden 7          |       48.058 |                  8/8 |             2/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-1-8       | Petal garden 8          |       47.775 |                  7/8 |             2/4 | not qualified         | Cut: raster scan failure       |
-| cdx-qr-2-1       | Rolling hills 1         |       47.807 |                  8/8 |             3/4 | not qualified         | Cut: raster scan failure       |
-| cdx-qr-2-2       | Rolling hills 2         |       47.854 |                  8/8 |             3/4 | not qualified         | Cut: raster scan failure       |
-| cdx-qr-2-3       | Rolling hills 3         |       48.020 |                  8/8 |             3/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-2-4       | Rolling hills 4         |       48.195 |                  8/8 |             4/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-2-5       | Rolling hills 5         |       47.158 |                  8/8 |             3/4 | not qualified         | Cut: raster scan failure       |
-| cdx-qr-2-6       | Rolling hills 6         |       46.683 |                  8/8 |             4/4 | not qualified         | Cut: raster scan failure       |
-| cdx-qr-2-7       | Rolling hills 7         |       47.114 |                  8/8 |             3/4 | not qualified         | Cut: raster scan failure       |
-| cdx-qr-2-8       | Rolling hills 8         |       47.573 |                  8/8 |             3/4 | not qualified         | Cut: raster scan failure       |
-| cdx-qr-3-1       | Pebble pool 1           |       49.859 |                  8/8 |             3/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-3-2       | Pebble pool 2           |       49.551 |                  8/8 |             3/4 | pass / pass           | Keep: highest qualified detail |
-| cdx-qr-3-3       | Pebble pool 3           |       50.472 |                  8/8 |             3/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-3-4       | Pebble pool 4           |       49.524 |                  7/8 |             2/4 | not qualified         | Cut: raster scan failure       |
-| cdx-qr-3-5       | Pebble pool 5           |       48.786 |                  8/8 |             2/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-3-6       | Pebble pool 6           |       50.214 |                  7/8 |             4/4 | not qualified         | Cut: raster scan failure       |
-| cdx-qr-3-7       | Pebble pool 7           |       50.291 |                  8/8 |             3/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-3-8       | Pebble pool 8           |       49.977 |                  8/8 |             2/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-4-1       | Folded ribbons 1        |       49.633 |                  8/8 |             3/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-4-2       | Folded ribbons 2        |       49.380 |                  8/8 |             4/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-4-3       | Folded ribbons 3        |       49.832 |                  8/8 |             4/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-4-4       | Folded ribbons 4        |       49.458 |                  8/8 |             3/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-4-5       | Folded ribbons 5        |       48.272 |                  8/8 |             3/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-4-6       | Folded ribbons 6        |       49.073 |                  7/8 |             4/4 | not qualified         | Cut: raster scan failure       |
-| cdx-qr-4-7       | Folded ribbons 7        |       48.925 |                  8/8 |             4/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-4-8       | Folded ribbons 8        |       48.988 |                  8/8 |             4/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-5-1       | Leaf canopy 1           |       50.049 |                  8/8 |             3/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-5-2       | Leaf canopy 2           |       49.782 |                  8/8 |             3/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-5-3       | Leaf canopy 3           |       50.638 |                  8/8 |             3/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-5-4       | Leaf canopy 4           |       49.542 |                  7/8 |             3/4 | not qualified         | Cut: raster scan failure       |
-| cdx-qr-5-5       | Leaf canopy 5           |       50.315 |                  8/8 |             2/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-5-6       | Leaf canopy 6           |       51.850 |                  7/8 |             3/4 | not qualified         | Cut: raster scan failure       |
-| cdx-qr-5-7       | Leaf canopy 7           |       51.537 |                  8/8 |             3/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-5-8       | Leaf canopy 8           |       50.062 |                  8/8 |             3/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-6-1       | Sunlit dunes 1          |       48.886 |                  8/8 |             3/4 | not qualified         | Cut: raster scan failure       |
-| cdx-qr-6-2       | Sunlit dunes 2          |       48.846 |                  8/8 |             3/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-6-3       | Sunlit dunes 3          |       49.272 |                  7/8 |             3/4 | not qualified         | Cut: raster scan failure       |
-| cdx-qr-6-4       | Sunlit dunes 4          |       49.061 |                  7/8 |             4/4 | not qualified         | Cut: raster scan failure       |
-| cdx-qr-6-5       | Sunlit dunes 5          |       48.541 |                  8/8 |             3/4 | not qualified         | Cut: raster scan failure       |
-| cdx-qr-6-6       | Sunlit dunes 6          |       49.166 |                  8/8 |             3/4 | not qualified         | Cut: raster scan failure       |
-| cdx-qr-6-7       | Sunlit dunes 7          |       49.118 |                  7/8 |             4/4 | not qualified         | Cut: raster scan failure       |
-| cdx-qr-6-8       | Sunlit dunes 8          |       49.068 |                  8/8 |             4/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-7-1       | Orbiting spheres 1      |       50.444 |                  8/8 |             3/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-7-2       | Orbiting spheres 2      |       50.566 |                  7/8 |             3/4 | not qualified         | Cut: raster scan failure       |
-| cdx-qr-7-3       | Orbiting spheres 3      |       51.457 |                  8/8 |             3/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-7-4       | Orbiting spheres 4      |       50.626 |                  8/8 |             2/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-7-5       | Orbiting spheres 5      |       49.815 |                  8/8 |             3/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-7-6       | Orbiting spheres 6      |       51.507 |                  7/8 |             3/4 | not qualified         | Cut: raster scan failure       |
-| cdx-qr-7-7       | Orbiting spheres 7      |       51.329 |                  7/8 |             3/4 | not qualified         | Cut: raster scan failure       |
-| cdx-qr-7-8       | Orbiting spheres 8      |       51.244 |                  7/8 |             3/4 | not qualified         | Cut: raster scan failure       |
-| cdx-qr-8-1       | Ceramic vase 1          |       48.749 |                  8/8 |             2/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-8-2       | Ceramic vase 2          |       48.691 |                  8/8 |             2/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-8-3       | Ceramic vase 3          |       49.216 |                  8/8 |             3/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-8-4       | Ceramic vase 4          |       48.295 |                  7/8 |             3/4 | not qualified         | Cut: raster scan failure       |
-| cdx-qr-8-5       | Ceramic vase 5          |       48.298 |                  8/8 |             2/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-8-6       | Ceramic vase 6          |       49.083 |                  8/8 |             2/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-8-7       | Ceramic vase 7          |       48.971 |                  8/8 |             2/4 | pass / pass           | Keep: highest qualified detail |
-| cdx-qr-8-8       | Ceramic vase 8          |       48.882 |                  8/8 |             2/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-9-1       | Tidal shells 1          |       48.795 |                  8/8 |             2/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-9-2       | Tidal shells 2          |       48.794 |                  8/8 |             2/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-9-3       | Tidal shells 3          |       49.457 |                  8/8 |             2/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-9-4       | Tidal shells 4          |       48.582 |                  7/8 |             2/4 | not qualified         | Cut: raster scan failure       |
-| cdx-qr-9-5       | Tidal shells 5          |       48.374 |                  7/8 |             2/4 | not qualified         | Cut: raster scan failure       |
-| cdx-qr-9-6       | Tidal shells 6          |       49.343 |                  8/8 |             3/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-9-7       | Tidal shells 7          |       49.208 |                  8/8 |             3/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-9-8       | Tidal shells 8          |       49.020 |                  8/8 |             3/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-print-1-1 | Petal garden soft 1     |       47.279 |                  8/8 |             3/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-print-1-2 | Petal garden soft 2     |       47.690 |                  8/8 |             2/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-print-1-3 | Petal garden soft 3     |       47.986 |                  8/8 |             3/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-print-1-4 | Petal garden soft 4     |       48.188 |                  8/8 |             3/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-print-1-5 | Petal garden soft 5     |       46.966 |                  8/8 |             4/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-print-1-6 | Petal garden soft 6     |       47.969 |                  8/8 |             4/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-print-1-7 | Petal garden soft 7     |       48.337 |                  8/8 |             2/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-print-1-8 | Petal garden soft 8     |       48.516 |                  8/8 |             2/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-print-2-1 | Rolling hills soft 1    |       47.597 |                  8/8 |             4/4 | not qualified         | Cut: raster scan failure       |
-| cdx-qr-print-2-2 | Rolling hills soft 2    |       47.500 |                  8/8 |             4/4 | not qualified         | Cut: raster scan failure       |
-| cdx-qr-print-2-3 | Rolling hills soft 3    |       47.139 |                  8/8 |             4/4 | not qualified         | Cut: raster scan failure       |
-| cdx-qr-print-2-4 | Rolling hills soft 4    |       47.320 |                  8/8 |             4/4 | not qualified         | Cut: raster scan failure       |
-| cdx-qr-print-2-5 | Rolling hills soft 5    |       47.438 |                  8/8 |             3/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-print-2-6 | Rolling hills soft 6    |       46.709 |                  8/8 |             3/4 | not qualified         | Cut: raster scan failure       |
-| cdx-qr-print-2-7 | Rolling hills soft 7    |       47.079 |                  8/8 |             3/4 | not qualified         | Cut: raster scan failure       |
-| cdx-qr-print-2-8 | Rolling hills soft 8    |       47.387 |                  8/8 |             3/4 | not qualified         | Cut: raster scan failure       |
-| cdx-qr-print-3-1 | Pebble pool soft 1      |       49.495 |                  8/8 |             2/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-print-3-2 | Pebble pool soft 2      |       49.855 |                  8/8 |             4/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-print-3-3 | Pebble pool soft 3      |       49.999 |                  8/8 |             4/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-print-3-4 | Pebble pool soft 4      |       49.552 |                  8/8 |             3/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-print-3-5 | Pebble pool soft 5      |       49.155 |                  8/8 |             3/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-print-3-6 | Pebble pool soft 6      |       49.856 |                  8/8 |             4/4 | pass / pass           | Keep: highest qualified detail |
-| cdx-qr-print-3-7 | Pebble pool soft 7      |       49.585 |                  8/8 |             2/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-print-3-8 | Pebble pool soft 8      |       49.577 |                  8/8 |             2/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-print-4-1 | Folded ribbons soft 1   |       49.380 |                  8/8 |             4/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-print-4-2 | Folded ribbons soft 2   |       49.296 |                  8/8 |             3/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-print-4-3 | Folded ribbons soft 3   |       48.969 |                  8/8 |             4/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-print-4-4 | Folded ribbons soft 4   |       48.146 |                  8/8 |             3/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-print-4-5 | Folded ribbons soft 5   |       48.937 |                  8/8 |             4/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-print-4-6 | Folded ribbons soft 6   |       49.008 |                  8/8 |             4/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-print-4-7 | Folded ribbons soft 7   |       48.241 |                  8/8 |             3/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-print-4-8 | Folded ribbons soft 8   |       47.994 |                  8/8 |             3/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-print-5-1 | Leaf canopy soft 1      |       49.675 |                  8/8 |             3/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-print-5-2 | Leaf canopy soft 2      |       49.653 |                  8/8 |             3/4 | pass / pass           | Keep: highest qualified detail |
-| cdx-qr-print-5-3 | Leaf canopy soft 3      |       51.430 |                  7/8 |             4/4 | not qualified         | Cut: raster scan failure       |
-| cdx-qr-print-5-4 | Leaf canopy soft 4      |       51.154 |                  8/8 |             2/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-print-5-5 | Leaf canopy soft 5      |       49.427 |                  8/8 |             3/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-print-5-6 | Leaf canopy soft 6      |       50.001 |                  8/8 |             3/4 | pass / pass           | Keep: highest qualified detail |
-| cdx-qr-print-5-7 | Leaf canopy soft 7      |       51.178 |                  8/8 |             2/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-print-5-8 | Leaf canopy soft 8      |       51.357 |                  8/8 |             2/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-print-6-1 | Sunlit dunes soft 1     |       48.738 |                  8/8 |             3/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-print-6-2 | Sunlit dunes soft 2     |       48.955 |                  8/8 |             3/4 | not qualified         | Cut: raster scan failure       |
-| cdx-qr-print-6-3 | Sunlit dunes soft 3     |       48.930 |                  8/8 |             4/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-print-6-4 | Sunlit dunes soft 4     |       48.254 |                  8/8 |             3/4 | not qualified         | Cut: raster scan failure       |
-| cdx-qr-print-6-5 | Sunlit dunes soft 5     |       48.732 |                  8/8 |             3/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-print-6-6 | Sunlit dunes soft 6     |       49.007 |                  8/8 |             3/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-print-6-7 | Sunlit dunes soft 7     |       48.517 |                  8/8 |             3/4 | not qualified         | Cut: raster scan failure       |
-| cdx-qr-print-6-8 | Sunlit dunes soft 8     |       48.348 |                  8/8 |             3/4 | not qualified         | Cut: raster scan failure       |
-| cdx-qr-print-7-1 | Orbiting spheres soft 1 |       50.237 |                  8/8 |             3/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-print-7-2 | Orbiting spheres soft 2 |       50.646 |                  6/8 |             3/4 | not qualified         | Cut: raster scan failure       |
-| cdx-qr-print-7-3 | Orbiting spheres soft 3 |       51.352 |                  7/8 |             3/4 | not qualified         | Cut: raster scan failure       |
-| cdx-qr-print-7-4 | Orbiting spheres soft 4 |       50.874 |                  8/8 |             3/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-print-7-5 | Orbiting spheres soft 5 |       50.125 |                  8/8 |             3/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-print-7-6 | Orbiting spheres soft 6 |       51.094 |                  7/8 |             3/4 | not qualified         | Cut: raster scan failure       |
-| cdx-qr-print-7-7 | Orbiting spheres soft 7 |       50.715 |                  8/8 |             2/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-print-7-8 | Orbiting spheres soft 8 |       51.229 |                  8/8 |             2/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-print-8-1 | Ceramic vase soft 1     |       48.474 |                  8/8 |             2/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-print-8-2 | Ceramic vase soft 2     |       48.757 |                  8/8 |             3/4 | pass / pass           | Keep: highest qualified detail |
-| cdx-qr-print-8-3 | Ceramic vase soft 3     |       49.042 |                  8/8 |             3/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-print-8-4 | Ceramic vase soft 4     |       49.459 |                  8/8 |             3/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-print-8-5 | Ceramic vase soft 5     |       48.483 |                  8/8 |             2/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-print-8-6 | Ceramic vase soft 6     |       48.906 |                  8/8 |             3/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-print-8-7 | Ceramic vase soft 7     |       48.986 |                  8/8 |             2/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-print-8-8 | Ceramic vase soft 8     |       49.287 |                  8/8 |             2/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-print-9-1 | Tidal shells soft 1     |       48.490 |                  8/8 |             2/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-print-9-2 | Tidal shells soft 2     |       48.866 |                  8/8 |             3/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-print-9-3 | Tidal shells soft 3     |       49.180 |                  8/8 |             3/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-print-9-4 | Tidal shells soft 4     |       48.672 |                  8/8 |             3/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-print-9-5 | Tidal shells soft 5     |       48.391 |                  8/8 |             2/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-print-9-6 | Tidal shells soft 6     |       49.018 |                  8/8 |             2/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-print-9-7 | Tidal shells soft 7     |       48.529 |                  8/8 |             2/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-print-9-8 | Tidal shells soft 8     |       48.606 |                  8/8 |             3/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-grid-1-1  | Petal garden grid 1     |       42.318 |                  8/8 |             3/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-grid-1-2  | Petal garden grid 2     |       40.995 |                  8/8 |             4/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-grid-1-3  | Petal garden grid 3     |       40.557 |                  8/8 |             4/4 | pass / pass           | Keep: highest qualified detail |
-| cdx-qr-grid-1-4  | Petal garden grid 4     |       38.139 |                  8/8 |             4/4 | pass / pass           | Cut: lower qualified detail    |
-| cdx-qr-grid-1-5  | Petal garden grid 5     |       38.760 |                  8/8 |             4/4 | pass / pass           | Cut: lower qualified detail    |
-| cdx-qr-grid-1-6  | Petal garden grid 6     |       38.795 |                  8/8 |             4/4 | pass / pass           | Cut: lower qualified detail    |
-| cdx-qr-grid-1-7  | Petal garden grid 7     |       37.595 |                  8/8 |             3/4 | pass / pass           | Cut: lower qualified detail    |
-| cdx-qr-grid-1-8  | Petal garden grid 8     |       36.728 |                  8/8 |             3/4 | pass / pass           | Cut: lower qualified detail    |
-| cdx-qr-grid-2-1  | Rolling hills grid 1    |       42.081 |                  8/8 |             3/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-grid-2-2  | Rolling hills grid 2    |       41.350 |                  8/8 |             3/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-grid-2-3  | Rolling hills grid 3    |       40.278 |                  8/8 |             3/4 | pass / pass           | Keep: highest qualified detail |
-| cdx-qr-grid-2-4  | Rolling hills grid 4    |       40.169 |                  8/8 |             4/4 | pass / pass           | Keep: highest qualified detail |
-| cdx-qr-grid-2-5  | Rolling hills grid 5    |       38.847 |                  8/8 |             3/4 | pass / pass           | Cut: lower qualified detail    |
-| cdx-qr-grid-2-6  | Rolling hills grid 6    |       37.239 |                  8/8 |             4/4 | pass / pass           | Cut: lower qualified detail    |
-| cdx-qr-grid-2-7  | Rolling hills grid 7    |       36.658 |                  8/8 |             3/4 | pass / pass           | Cut: lower qualified detail    |
-| cdx-qr-grid-2-8  | Rolling hills grid 8    |       36.920 |                  8/8 |             4/4 | pass / pass           | Cut: lower qualified detail    |
-| cdx-qr-grid-3-1  | Pebble pool grid 1      |       42.782 |                  8/8 |             3/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-grid-3-2  | Pebble pool grid 2      |       41.297 |                  8/8 |             3/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-grid-3-3  | Pebble pool grid 3      |       40.857 |                  8/8 |             4/4 | pass / pass           | Keep: highest qualified detail |
-| cdx-qr-grid-3-4  | Pebble pool grid 4      |       38.275 |                  8/8 |             2/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-grid-3-5  | Pebble pool grid 5      |       38.961 |                  8/8 |             4/4 | pass / pass           | Cut: lower qualified detail    |
-| cdx-qr-grid-3-6  | Pebble pool grid 6      |       38.938 |                  8/8 |             3/4 | pass / pass           | Cut: lower qualified detail    |
-| cdx-qr-grid-3-7  | Pebble pool grid 7      |       38.174 |                  8/8 |             3/4 | pass / pass           | Cut: lower qualified detail    |
-| cdx-qr-grid-3-8  | Pebble pool grid 8      |       37.473 |                  8/8 |             3/4 | pass / pass           | Cut: lower qualified detail    |
-| cdx-qr-grid-4-1  | Folded ribbons grid 1   |       42.056 |                  8/8 |             4/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-grid-4-2  | Folded ribbons grid 2   |       40.715 |                  8/8 |             3/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-grid-4-3  | Folded ribbons grid 3   |       39.417 |                  8/8 |             4/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-grid-4-4  | Folded ribbons grid 4   |       38.248 |                  8/8 |             4/4 | pass / pass           | Cut: lower qualified detail    |
-| cdx-qr-grid-4-5  | Folded ribbons grid 5   |       38.735 |                  8/8 |             3/4 | pass / pass           | Cut: lower qualified detail    |
-| cdx-qr-grid-4-6  | Folded ribbons grid 6   |       37.213 |                  8/8 |             4/4 | pass / pass           | Cut: lower qualified detail    |
-| cdx-qr-grid-4-7  | Folded ribbons grid 7   |       36.410 |                  8/8 |             3/4 | pass / pass           | Cut: lower qualified detail    |
-| cdx-qr-grid-4-8  | Folded ribbons grid 8   |       35.746 |                  8/8 |             4/4 | pass / pass           | Cut: lower qualified detail    |
-| cdx-qr-grid-5-1  | Leaf canopy grid 1      |       43.016 |                  8/8 |             4/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-grid-5-2  | Leaf canopy grid 2      |       41.676 |                  8/8 |             3/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-grid-5-3  | Leaf canopy grid 3      |       41.279 |                  8/8 |             4/4 | pass / pass           | Keep: highest qualified detail |
-| cdx-qr-grid-5-4  | Leaf canopy grid 4      |       38.604 |                  8/8 |             2/4 | pass / pass           | Cut: lower qualified detail    |
-| cdx-qr-grid-5-5  | Leaf canopy grid 5      |       40.705 |                  8/8 |             4/4 | pass / pass           | Keep: highest qualified detail |
-| cdx-qr-grid-5-6  | Leaf canopy grid 6      |       40.895 |                  8/8 |             4/4 | pass / pass           | Keep: highest qualified detail |
-| cdx-qr-grid-5-7  | Leaf canopy grid 7      |       38.116 |                  8/8 |             3/4 | pass / pass           | Cut: lower qualified detail    |
-| cdx-qr-grid-5-8  | Leaf canopy grid 8      |       37.438 |                  8/8 |             2/4 | pass / pass           | Cut: lower qualified detail    |
-| cdx-qr-grid-6-1  | Sunlit dunes grid 1     |       42.699 |                  8/8 |             3/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-grid-6-2  | Sunlit dunes grid 2     |       41.546 |                  8/8 |             4/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-grid-6-3  | Sunlit dunes grid 3     |       40.657 |                  8/8 |             3/4 | pass / pass           | Keep: highest qualified detail |
-| cdx-qr-grid-6-4  | Sunlit dunes grid 4     |       39.850 |                  8/8 |             3/4 | pass / pass           | Keep: highest qualified detail |
-| cdx-qr-grid-6-5  | Sunlit dunes grid 5     |       39.085 |                  8/8 |             3/4 | pass / pass           | Cut: lower qualified detail    |
-| cdx-qr-grid-6-6  | Sunlit dunes grid 6     |       38.090 |                  8/8 |             4/4 | pass / pass           | Cut: lower qualified detail    |
-| cdx-qr-grid-6-7  | Sunlit dunes grid 7     |       37.359 |                  8/8 |             3/4 | pass / pass           | Cut: lower qualified detail    |
-| cdx-qr-grid-6-8  | Sunlit dunes grid 8     |       36.806 |                  8/8 |             4/4 | pass / pass           | Cut: lower qualified detail    |
-| cdx-qr-grid-7-1  | Orbiting spheres grid 1 |       43.957 |                  8/8 |             4/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-grid-7-2  | Orbiting spheres grid 2 |       42.761 |                  8/8 |             4/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-grid-7-3  | Orbiting spheres grid 3 |       42.363 |                  8/8 |             4/4 | pass / pass           | Keep: highest qualified detail |
-| cdx-qr-grid-7-4  | Orbiting spheres grid 4 |       39.952 |                  8/8 |             3/4 | pass / pass           | Keep: highest qualified detail |
-| cdx-qr-grid-7-5  | Orbiting spheres grid 5 |       40.173 |                  8/8 |             3/4 | pass / pass           | Keep: highest qualified detail |
-| cdx-qr-grid-7-6  | Orbiting spheres grid 6 |       40.074 |                  8/8 |             4/4 | pass / pass           | Keep: highest qualified detail |
-| cdx-qr-grid-7-7  | Orbiting spheres grid 7 |       39.284 |                  8/8 |             3/4 | pass / pass           | Keep: highest qualified detail |
-| cdx-qr-grid-7-8  | Orbiting spheres grid 8 |       38.647 |                  8/8 |             4/4 | pass / pass           | Cut: lower qualified detail    |
-| cdx-qr-grid-8-1  | Ceramic vase grid 1     |       42.951 |                  8/8 |             4/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-grid-8-2  | Ceramic vase grid 2     |       41.441 |                  8/8 |             4/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-grid-8-3  | Ceramic vase grid 3     |       41.037 |                  8/8 |             3/4 | pass / pass           | Keep: highest qualified detail |
-| cdx-qr-grid-8-4  | Ceramic vase grid 4     |       38.368 |                  8/8 |             4/4 | pass / pass           | Cut: lower qualified detail    |
-| cdx-qr-grid-8-5  | Ceramic vase grid 5     |       39.420 |                  8/8 |             4/4 | pass / pass           | Keep: highest qualified detail |
-| cdx-qr-grid-8-6  | Ceramic vase grid 6     |       39.100 |                  8/8 |             4/4 | pass / pass           | Keep: highest qualified detail |
-| cdx-qr-grid-8-7  | Ceramic vase grid 7     |       38.291 |                  8/8 |             3/4 | pass / pass           | Cut: lower qualified detail    |
-| cdx-qr-grid-8-8  | Ceramic vase grid 8     |       37.615 |                  8/8 |             3/4 | pass / pass           | Cut: lower qualified detail    |
-| cdx-qr-grid-9-1  | Tidal shells grid 1     |       42.648 |                  8/8 |             4/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-grid-9-2  | Tidal shells grid 2     |       41.152 |                  8/8 |             3/4 | pass / fail           | Cut: browser scan failure      |
-| cdx-qr-grid-9-3  | Tidal shells grid 3     |       40.676 |                  8/8 |             3/4 | pass / pass           | Keep: highest qualified detail |
-| cdx-qr-grid-9-4  | Tidal shells grid 4     |       38.123 |                  8/8 |             4/4 | pass / pass           | Cut: lower qualified detail    |
-| cdx-qr-grid-9-5  | Tidal shells grid 5     |       38.859 |                  8/8 |             3/4 | pass / pass           | Cut: lower qualified detail    |
-| cdx-qr-grid-9-6  | Tidal shells grid 6     |       38.110 |                  8/8 |             4/4 | pass / pass           | Cut: lower qualified detail    |
-| cdx-qr-grid-9-7  | Tidal shells grid 7     |       37.326 |                  8/8 |             3/4 | pass / pass           | Cut: lower qualified detail    |
-| cdx-qr-grid-9-8  | Tidal shells grid 8     |       36.695 |                  8/8 |             3/4 | pass / pass           | Cut: lower qualified detail    |
-
-## Reproduction and verification
-
-1. Generate the 40 individual pictures from the scene manifest with the image tool; record local
-   `{id,path}` mappings in `.cache/cdx-pics/generation-base.json` and/or
-   `.cache/cdx-pics/photo/*.json`.
-2. Run `python3 tools/cdx-pics-prepare.py`, then
-   `SPLASHERY_CHROMIUM=/usr/bin/chromium node tools/dsm-depth.mjs cdx-<id> ...` for the prepared
-   IDs, with the local HTTP server on port 4173.
-3. Run `SPLASHERY_CHROMIUM=/usr/bin/chromium node tools/cdx-pics-photo.mjs`; it resumes completed
-   rows. Delete the score file for a fresh measurement. Restore all 40 prepared candidates to the
-   temporary picker list before remeasuring.
-4. Run `node tools/cdx-pics-qr.mjs`, `node tools/cdx-pics-qr-print.mjs`, and
-   `node tools/cdx-pics-qr-grid.mjs`, in that order. This resets the candidate scores. Procedural
-   candidates are deterministic; scores use the generated JPEGs.
-5. Run `SPLASHERY_CHROMIUM=/usr/bin/chromium node tools/cdx-pics-browser.mjs`. Delete its browser
-   score file first for a complete new screening. Run `node tools/cdx-pics-select.mjs`, then
-   `node tools/cdx-pics-sheets.mjs`.
-6. Run `python3 tools/cdx-pics-report.py` after all measurements. It keeps selected files, moves
-   rejected full-size Photo to 3D candidates into the ignored cache, and writes records and contact
-   sheets with the repository’s existing Pillow 12.3.0. The registry entries match
-   asset-records.json; credit text is in asset-credits.md.
-7. Run the task’s Playwright files with the installed Chromium at `/usr/bin/chromium`; no browser
-   install is needed. Formatting and American English checks must pass before pushing.
-
-Verification results are in [verification.md](sample-pictures-2026-10/verification.md). All
-full-size rejected assets stay out of Git. The report folder is below 8 MB.
-
-## Record
-
-### Identity and status
-
-Task 54, sample pictures; toy IDs `photo-3d` and `qr-picture`. Branch `codex/sample-pictures`, one
-draft PR against main. Made by Ryan with Codex (GPT-6), October 13, 2026. Status: implemented; not
-merged. The PR link is in the handback.
-
-### Recipe contract and boundaries
-
-Only sample data and picker imports changed. Existing recipe hooks, controls, host APIs, axes,
-units, part IDs, pivots, and quaternion order are unchanged. The vendored model, encoder, jsQR, and
-WebGL2 renderer were reused as is. New work consists of 20 AI-made JPEG/depth pairs, 24 procedural
-JPEGs, data lists, verification tools, and this evidence. Depth is a baked monocular estimate; its
-relief is not a physical reconstruction. No new effect or simulated physics was introduced.
-
-### Generation and assets
-
-The steps above are the generation commands. Environment: managed Linux container, Node 24.19.0,
-Python 3, Chromium 151, pinned Playwright, jpeg-js 0.4.4, the vendored depth model/WASM runtime, and
-Pillow 12.3.0. Procedural generation is deterministic by family/variant; AI generation has no
-reproducible seed. No new dependency was installed or added. Code is MIT; procedural QR assets are
-CC0 1.0; AI pictures use the existing owner sample policy.
-
-Every retained file has a SHA-256 hash, source page, author, license, checked date, and
-transformations in [asset-records.json](sample-pictures-2026-10/asset-records.json). The
+AI generation is nondeterministic; procedural families/variants are deterministic. Shipping asset
+SHA-256 hashes, source pages, owner/agent credits, licenses, dates, and transformations are in
+[asset-records.json](sample-pictures-2026-10/asset-records.json) and tools/assets.json. Code is MIT;
+procedural pictures are CC0 1.0; AI pictures follow the owner's A3 sample policy. Node 24.19.0,
+Python 3, jpeg-js 0.4.4, Pillow 12.3.0, pinned Playwright, Chromium 151, the vendored depth
+model/WASM, and vendored jsQR are reused; no dependency was added. The
 [jpeg-js source](https://github.com/eugeneware/jpeg-js),
 [Pillow page](https://pillow.readthedocs.io/en/stable/about.html), and
-[CC0 deed](https://creativecommons.org/publicdomain/zero/1.0/) were opened on October 13, 2026.
+[CC0 deed](https://creativecommons.org/publicdomain/zero/1.0/) were opened in the original round.
 
-### Executed evidence and performance
+The depth maps remain baked monocular estimates, not physical reconstructions. Camera-focus effects
+above are mathematical simulations on actual browser pixels, not paper or hardware measurements.
+Real-phone memory, frame rate, load time, physical scanning, and printed-paper performance are
+unmeasured. The report folder remains below 8 MB; rejected full-size pictures stay in ignored local
+cache.
 
-The linked verification record distinguishes real-browser measurements and CPU simulations; none use
-mock render pixels. Photo scores record splat counts and all measured poses. Candidate file and
-depth sizes are reported there. Default first load is unchanged and new assets are fetched only when
-selected, verified by browser requests. Real-phone load time, memory, frame rate, physical scans,
-and printed-paper performance are unmeasured. Task 53’s future halo metric is also unmeasured. The
-PNG export comparison used the same browser renderer as the selected-sample regression; it is not a
-physical-print benchmark.
-
-Rule check: none. The owner authorized additive entries in the two asset registries; their existing
-records and all other protected files are unchanged.
+Rule check: none. The owner's registry exception remains limited to this task's records. All other
+protected open-PR files, manual/, and tests/taps.spec.mjs are unchanged relative to main.

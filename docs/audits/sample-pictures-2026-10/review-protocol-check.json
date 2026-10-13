@@ -1,0 +1,18 @@
+[
+  {
+    "text": "https://ryanjosephkamp.github.io/splashery/",
+    "codeSize": 53,
+    "source": "Blue vase",
+    "screeningRgbaSha256": "0341a76c5bc1a65279a682fe30020b99b30c6690f1859d18bee23fd7d216812c",
+    "savePNGRgbaSha256": "0341a76c5bc1a65279a682fe30020b99b30c6690f1859d18bee23fd7d216812c",
+    "identical": true
+  },
+  {
+    "text": "https://example.org/collections/botanical-studies/2026/autumn/large-format-print?item=fern-frond&edition=public&ref=mobile-preview",
+    "codeSize": 77,
+    "source": "Blue vase",
+    "screeningRgbaSha256": "37954ab989f436de7bdfa34476f59ab30d18d379f48656baa3fa8fa51a62aace",
+    "savePNGRgbaSha256": "37954ab989f436de7bdfa34476f59ab30d18d379f48656baa3fa8fa51a62aace",
+    "identical": true
+  }
+]
