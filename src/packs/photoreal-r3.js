@@ -9,8 +9,11 @@
 // One is NonCommercial (the Stannern stones, CC BY-NC 4.0, NHM Vienna): it carries `"nc": true`
 // in tools/models.json, and `node tools/nc-assets.mjs` lists it.
 
-import { addScan, decodeSplats } from "./real-objects.js";
 import { quatAxisAngle, quatMul, quatRotate, mix } from "../kit.js";
+
+// The catalog imports this module for its shelf entries. Scan helpers are
+// needed only when one of the museum scans opens.
+let addScan, decodeSplats;
 
 const TAU = Math.PI * 2;
 const clamp = (x, a, b) => Math.min(b, Math.max(a, x));
@@ -43,6 +46,7 @@ const qa = (axis, ang) => quatAxisAngle(unit(axis), ang);
 const SCANS = new Map();
 async function loadScan(id) {
   if (SCANS.has(id)) return SCANS.get(id);
+  ({ addScan, decodeSplats } = await import("./real-objects.js"));
   const url = new URL(`../../assets/toys/${id}/${id}.splats`, import.meta.url);
   let bytes;
   if (url.protocol === "file:") {
