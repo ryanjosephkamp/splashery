@@ -1311,6 +1311,18 @@ export const TOYS = [
   },
   // ---- End of pack: space-r2 ----
 
+  // ---- Pack: proto-orbit-transfer (Codex prototype) ----
+  {
+    id: "orbit-transfer",
+    label: "Orbit transfer planner",
+    category: "space",
+    kind: "kit",
+    pack: "proto-orbit-transfer",
+    labs: true,
+    tags: "hohmann transfer orbit planets mercury venus earth mars jupiter saturn uranus neptune launch window phase angle delta-v space",
+    camera: { yaw: 0, pitch: 0, roll: 0, distance: 2.7 },
+  },
+
   // ---- Pack: space-r4 (lane Space r4) ----
   {
     id: "solar-orbits",

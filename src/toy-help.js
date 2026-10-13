@@ -21,6 +21,11 @@
 // the toy's recipe and against a real source for every fact.
 
 export const TOY_HELP = {
+  "orbit-transfer": {
+    howTo: "Choose two planets in This toy. Tap to launch at the next simulated window.",
+    about:
+      "Plan a Hohmann transfer between any two different planets from Mercury through Neptune. Blue and coral mark the departure and destination orbits; gold marks the transfer ellipse and its two burns. The purple wedge shows the required launch phase: how far the destination must be ahead of, or behind, the departure planet.\n\nTap to advance to the next simulated window, launch the probe, and watch it meet the destination. Each burn has a short rising tone when sound is on. The diagram resets after arrival. Numbers use real orbital radii, but assume circular, coplanar orbits. Bodies are enlarged, time is compressed, and the epoch is illustrative. Delta-v is heliocentric; planetary escape and capture are excluded.",
+  },
   // ---- Photoreal r3 (lane Photoreal r3) ----
   "triceratops-skull": {
     howTo: "Tap it to make it look at you; drag to turn it.",

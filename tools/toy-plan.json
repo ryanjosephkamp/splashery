@@ -1,6 +1,12 @@
 {
   "about": "One entry per shelf toy: the owner's review notes (2026-09-23, docs/reviews/2026-09-23/review.md), a verdict, and a proposed tap effect and sound. v: keep = the effect is right (the owner liked it, or a later phase finished it; improved = what that phase changed); more = it has an effect that should be clearer or more dramatic; new = it only hops today and needs its own effect. fix = a visual problem to fix; fixed = what was done about it (and in which phase). interactive = the owner asked for touch-position or drag interaction. Proposals are suggestions; the owner may change them. tools/toy-plan.mjs checks this file against the shelf and writes docs/TOY-PLAN.md. On 2026-09-24 the owner approved every proposal in this file as written, including the sports-ball texture fixes.",
   "toys": {
+    "orbit-transfer": {
+      "v": "more",
+      "effect": "Advance to the next simulated Hohmann window, launch a rigid probe, coast along the transfer ellipse, and circularize at the destination. Reset the diagram after arrival; 4.4 seconds total.",
+      "sound": "A short, synthesized rising tone at each burn, played through the existing sound system only after a tap.",
+      "improved": "Codex prototype: eight planets in either direction, real mean orbital radii, two signed burn speeds, travel time, phase angle, an exact Kepler drift at fixed ticks, and independent moving planets. A polish pass should improve labels, the reset transition, and extreme-radius visibility."
+    },
     "cactus": {
       "v": "keep",
       "owner": "No special effect. Looks fine.",
