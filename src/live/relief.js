@@ -125,8 +125,8 @@ export const DEPTH_SIDE = { low: 140, mid: 196, high: 252, max: 308 };
 // (src/live/depth-worker.js), one frame at a time: whenever it is free it
 // is given the frame of that moment, so the depth follows the camera as
 // fast as the device allows; between answers the heights ease toward the
-// newest depth. The depth is scaled by its own 2nd and 98th percentiles,
-// eased too, so a person stepping nearer doesn't make the room flicker.
+// newest depth. Task 41 aligns successive answers on unchanged colors and
+// keeps one range, so relative depth scale changes do not make the room breathe.
 // Live r7: the depth's own grid holds at most this many cells (CameraDepth).
 const DEPTH_CELLS = 60000;
 // Live r7 (stability, October 6): a cell is still once it has held this long
@@ -134,16 +134,99 @@ const DEPTH_CELLS = 60000;
 const STILL = 0.6;
 const HOLD = 3;
 
+// Task 41: a robust scale/shift fit on the parts whose colors stayed put.
+// Reject depth outliers once so a moving object with wall-like colors cannot
+// pull the whole room toward it. No correspondence means no invented scale.
+export function relativeAlignment(d, reference, colors, oldColors) {
+  const identity = { scale: 1, shift: 0, samples: 0 };
+  if (!reference || !colors || !oldColors || reference.length !== d.length) return identity;
+  let lo = Infinity,
+    hi = -Infinity;
+  for (const v of reference) {
+    lo = Math.min(lo, v);
+    hi = Math.max(hi, v);
+  }
+  const span = Math.max(1e-6, hi - lo);
+  let fit = identity;
+  for (let pass = 0; pass < 2; pass++) {
+    let n = 0,
+      sx = 0,
+      sy = 0,
+      xx = 0,
+      xy = 0;
+    for (let i = 0; i < d.length; i++) {
+      const c = i * 3;
+      const change =
+        Math.abs(colors[c] - oldColors[c]) +
+        Math.abs(colors[c + 1] - oldColors[c + 1]) +
+        Math.abs(colors[c + 2] - oldColors[c + 2]);
+      if (change > 24 || !Number.isFinite(d[i]) || !Number.isFinite(reference[i])) continue;
+      if (pass && Math.abs(d[i] * fit.scale + fit.shift - reference[i]) > span * 0.08) continue;
+      n++;
+      sx += d[i];
+      sy += reference[i];
+      xx += d[i] * d[i];
+      xy += d[i] * reference[i];
+    }
+    if (n < Math.max(32, d.length * 0.08)) return identity;
+    const variance = xx - (sx * sx) / n;
+    const scale = variance > 1e-8 * n ? (xy - (sx * sy) / n) / variance : 1;
+    if (!Number.isFinite(scale) || scale < 0.1 || scale > 10) return identity;
+    fit = { scale, shift: (sy - scale * sx) / n, samples: n };
+  }
+  return fit;
+}
+
+// Depth is held exactly once the picture is still. A large change without
+// visible motion must persist on the SAME side for HOLD answers; alternating
+// guesses cannot build up a vote. A visible move has no extra edge delay.
+export function holdDepth(next, prev, still, colors, oldColors, jumps, sides) {
+  if (!prev || !oldColors) return next;
+  for (let i = 0; i < next.length; i++) {
+    const c = i * 3;
+    const change =
+      Math.abs(colors[c] - oldColors[c]) +
+      Math.abs(colors[c + 1] - oldColors[c + 1]) +
+      Math.abs(colors[c + 2] - oldColors[c + 2]);
+    const delta = next[i] - prev[i];
+    // The filtered picture's still mask is stronger evidence than a raw
+    // sensor pixel. It tolerates noise up to 60 summed channel levels;
+    // coherent motion clears that mask in draw() and follows immediately.
+    const quiet = change <= 24 || (still[i] && change <= 60);
+    if (quiet && Math.abs(delta) > 0.12) {
+      const side = delta > 0 ? 1 : -1;
+      jumps[i] = sides[i] === side ? Math.min(HOLD, jumps[i] + 1) : 1;
+      sides[i] = side;
+      if (jumps[i] < HOLD) next[i] = prev[i];
+    } else {
+      jumps[i] = 0;
+      sides[i] = 0;
+      const a = quiet && still[i] ? 0 : Math.min(1, 0.15 + Math.max(0, change - 12) / 48);
+      next[i] = prev[i] + delta * a;
+    }
+  }
+  return next;
+}
+
 // Live r7: a depth worked out on a dw by dh grid (d, 0..1, its jumps clean
 // steps after snapEdges), brought up to a gw by gh grid. Where the four
 // depth cells around a fine cell are one surface it is bilinear; across a
 // jump the fine cell takes the side whose cell's colors are nearest its own
 // (guide: the fine grid's RGBA colors; the depth cells' colors are their
 // means), so the outline is as fine as the picture. No guide: bilinear.
-export function upsampleSnap(d, dw, dh, gw, gh, guide = null) {
-  const out = new Float32Array(gw * gh);
-  let gc = null;
-  if (guide && guide.length >= gw * gh * 4) {
+export function upsampleSnap(
+  d,
+  dw,
+  dh,
+  gw,
+  gh,
+  guide = null,
+  sourceColors = null,
+  out = new Float32Array(gw * gh),
+  mask = null,
+) {
+  let gc = sourceColors;
+  if (!gc && guide && guide.length >= gw * gh * 4) {
     gc = new Float32Array(dw * dh * 3);
     const n = new Float32Array(dw * dh);
     for (let j = 0; j < gh; j++) {
@@ -166,6 +249,8 @@ export function upsampleSnap(d, dw, dh, gw, gh, guide = null) {
     const y1 = Math.min(dh - 1, y0 + 1);
     const ay = v - y0;
     for (let i = 0; i < gw; i++) {
+      const k = j * gw + i;
+      if (mask && !mask[k]) continue;
       const u = Math.max(0, Math.min(dw - 1, ((i + 0.5) * dw) / gw - 0.5));
       const x0 = Math.floor(u);
       const x1 = Math.min(dw - 1, x0 + 1);
@@ -176,7 +261,6 @@ export function upsampleSnap(d, dw, dh, gw, gh, guide = null) {
       const e = d[y1 * dw + x1];
       const lo = Math.min(a, b, c, e);
       const hi = Math.max(a, b, c, e);
-      const k = j * gw + i;
       if (hi - lo <= EDGE || !gc) {
         out[k] = (a * (1 - ax) + b * ax) * (1 - ay) + (c * (1 - ax) + e * ax) * ay;
         continue;
@@ -187,12 +271,9 @@ export function upsampleSnap(d, dw, dh, gw, gh, guide = null) {
       const bl = guide[o + 2];
       let best = Infinity;
       let pick = a;
-      for (const [x, y] of [
-        [x0, y0],
-        [x1, y0],
-        [x0, y1],
-        [x1, y1],
-      ]) {
+      for (let corner = 0; corner < 4; corner++) {
+        const x = corner & 1 ? x1 : x0;
+        const y = corner & 2 ? y1 : y0;
         const q = (y * dw + x) * 3;
         // (The nearer depth cell wins a tie, by a little distance.)
         const dist = (gc[q] - r) ** 2 + (gc[q + 1] - g) ** 2 + (gc[q + 2] - bl) ** 2 + 40 * ((x - u) ** 2 + (y - v) ** 2); // prettier-ignore
@@ -201,7 +282,25 @@ export function upsampleSnap(d, dw, dh, gw, gh, guide = null) {
           pick = d[y * dw + x];
         }
       }
-      out[k] = pick;
+      // Interpolate only WITHIN the chosen surface. Mixed edge colors are
+      // anti-aliased by the picture, without making an intermediate depth
+      // that stretches a foreground splat across the gap.
+      let sum = 0;
+      let weight = 0;
+      const mid = (lo + hi) / 2;
+      const nearSide = pick > mid;
+      for (let corner = 0; corner < 4; corner++) {
+        const x = corner & 1 ? x1 : x0;
+        const y = corner & 2 ? y1 : y0;
+        const value = d[y * dw + x];
+        if (value > mid !== nearSide) continue;
+        const q = (y * dw + x) * 3;
+        const color = (gc[q] - r) ** 2 + (gc[q + 1] - g) ** 2 + (gc[q + 2] - bl) ** 2;
+        const w = 1 / (1 + 4 * ((x - u) ** 2 + (y - v) ** 2) + color / 200);
+        sum += value * w;
+        weight += w;
+      }
+      out[k] = weight ? sum / weight : pick;
     }
   }
   return out;
@@ -227,7 +326,9 @@ export class CameraDepth {
     // out on a grid of at most DEPTH_CELLS (what its steps were tuned on, and
     // what a phone can do on every answer), then brought up to the picture's
     // grid by upsampleSnap.
-    const ds = Math.min(1, Math.sqrt(DEPTH_CELLS / (cols * rows)));
+    // Do not filter more depth cells than the model can resolve. The
+    // picture keeps its full grid; color-guided upsampling supplies edges.
+    const ds = Math.min(1, Math.sqrt(Math.min(DEPTH_CELLS, this.side ** 2 * 0.75) / (cols * rows)));
     this.dcols = Math.max(16, Math.round(cols * ds));
     this.drows = Math.max(12, Math.round(rows * ds));
     this.dt = new Float32Array(this.dcols * this.drows);
@@ -239,6 +340,8 @@ export class CameraDepth {
     this.dstill = new Uint8Array(this.dcols * this.drows);
     this.djump = new Uint8Array(this.dcols * this.drows);
     this.fjump = new Uint8Array(cols * rows);
+    this.dside = new Int8Array(this.dcols * this.drows);
+    this.fside = new Int8Array(cols * rows);
     this.moving = 0; // the share of the picture moving now
     this.have = false; // any depth yet
     this.lo = null;
@@ -250,7 +353,19 @@ export class CameraDepth {
     this.last = 0;
     this.worker = null;
     this.id = 0;
+    this.closed = false;
+    this.discarded = 0;
+    this.mediaFrame = null;
+    this.requestedFrame = null;
     this.crop = [0, 0, 1, 1]; // the part of the frame the grid shows (fractions)
+    if (video?.requestVideoFrameCallback) {
+      const watch = (time, metadata) => {
+        if (this.closed) return;
+        this.mediaFrame = metadata.presentedFrames;
+        this.frameCallback = video.requestVideoFrameCallback(watch);
+      };
+      this.frameCallback = video.requestVideoFrameCallback(watch);
+    }
     if (depth) this.startWorker();
   }
 
@@ -266,37 +381,79 @@ export class CameraDepth {
   // Sends the frame of this moment to the worker, if it is free.
   ask() {
     const v = this.video;
-    if (!this.worker || this.busy || !v?.videoWidth) return;
+    if (this.closed || !this.worker || this.busy || !v?.videoWidth) return;
+    if (this.mediaFrame !== null && this.mediaFrame === this.requestedFrame) return;
     const s = this.side / Math.max(v.videoWidth, v.videoHeight);
     const m = (x) => Math.max(14, Math.round((x * s) / 14) * 14);
     const w = m(v.videoWidth);
     const h = m(v.videoHeight);
     this.frameCanvas ||= document.createElement("canvas");
     const c = this.frameCanvas;
-    c.width = w;
-    c.height = h;
+    if (c.width !== w || c.height !== h) {
+      c.width = w;
+      c.height = h;
+    }
     const g = c.getContext("2d", { willReadFrequently: true });
     g.drawImage(v, 0, 0, w, h);
     const data = g.getImageData(0, 0, w, h).data;
     // r5: the background layer learns the wall from this same frame, when
     // its depth comes back (the colors of a later frame wouldn't match it);
     // Live r7: and the depth's edges follow its colors.
-    this.sent = { w, h, data: data.slice(), crop: this.crop.slice() };
+    const id = ++this.id;
+    this.sent = {
+      id,
+      w,
+      h,
+      data: data.slice(),
+      crop: this.crop.slice(),
+      capturedAt: performance.now(),
+      videoWidth: v.videoWidth,
+      videoHeight: v.videoHeight,
+    };
+    this.requestedFrame = this.mediaFrame;
     this.busy = true;
-    this.worker.postMessage({ type: "frame", id: ++this.id, w, h, data }, [data.buffer]);
+    this.worker.postMessage({ type: "frame", id, w, h, data }, [data.buffer]);
   }
 
   onAnswer(m) {
+    if (this.closed) return;
     if (m.type === "status") {
       this.status = m.text;
       return;
     }
-    this.busy = false;
     if (m.type === "error") {
+      this.busy = false;
       this.status = "The depth model stopped; the picture stays flat.";
       return;
     }
     if (m.type !== "depth") return;
+    const sent = this.sent;
+    if (!this.busy || !sent || m.id !== sent.id) {
+      this.discarded++;
+      return;
+    }
+    this.busy = false;
+    const stale = performance.now() - sent.capturedAt > Math.max(1500, 3 * m.ms);
+    const resized =
+      sent.videoWidth !== this.video.videoWidth || sent.videoHeight !== this.video.videoHeight;
+    const cropChanged = sent.crop.some((v, i) => Math.abs(v - this.crop[i]) > 1e-6);
+    if (
+      stale ||
+      resized ||
+      cropChanged ||
+      !Number.isInteger(m.w) ||
+      !Number.isInteger(m.h) ||
+      m.w < 1 ||
+      m.h < 1 ||
+      m.d?.length !== m.w * m.h ||
+      !m.d.every(Number.isFinite)
+    ) {
+      this.discarded++;
+      this.ask();
+      return;
+    }
+    // Apply this answer before the next draw captures a new request. Camera
+    // readback here would block the answer's first drawn frame.
     this.ms = m.ms;
     this.answers++;
     this.status = "";
@@ -307,7 +464,7 @@ export class CameraDepth {
     for (let j = 0; j < rows; j++)
       for (let i = 0; i < cols; i++) {
         const u = this.mirror ? 1 - (i + 0.5) / cols : (i + 0.5) / cols;
-        const [cx, cy, cw, ch] = this.crop;
+        const [cx, cy, cw, ch] = sent.crop;
         // r5: bilinear (the depth is smaller than the grid; nearest
         // sampling left its edges in steps).
         const fx = Math.max(0, Math.min(m.w - 1, (cx + u * cw) * m.w - 0.5));
@@ -322,95 +479,110 @@ export class CameraDepth {
         const bot = m.d[y1 * m.w + x0] * (1 - ax) + m.d[y1 * m.w + x1] * ax;
         t[j * cols + i] = top * (1 - ay) + bot * ay;
       }
-    const sorted = Float32Array.from(t).sort();
-    const lo = sorted[Math.floor(sorted.length * 0.02)];
-    const hi = sorted[Math.floor(sorted.length * 0.98)];
-    // (Live r7: the range wobbles a percent or two with the model's guess, and
-    // every height with it, so a change within 5% of the span eases by 0.04
-    // an answer; a bigger one, someone stepping nearer, by 0.3 as before.)
-    const warm = this.answers <= 6; // the first answers settle quickly
-    const ease = (was, now) => {
-      if (was === null) return now;
-      const span = Math.max(1e-6, (this.hi ?? hi) - (this.lo ?? lo));
-      if (warm) return was + (now - was) * 0.5;
-      // (Live r7, stability: still less while nothing moves.)
-      const small = this.moving < 0.005 ? 0.01 : 0.04;
-      return was + (now - was) * (Math.abs(now - was) < span * 0.05 ? small : 0.3);
-    };
-    const nlo = ease(this.lo, lo);
-    this.hi = ease(this.hi, hi);
-    this.lo = nlo;
+    const colors = gridColors(sent, cols, rows, this.mirror);
+    const oldColors = this.depthColors;
+    this.markStill();
+    const fit = relativeAlignment(t, this.reference, colors, oldColors);
+    if (fit.samples) for (let i = 0; i < t.length; i++) t[i] = t[i] * fit.scale + fit.shift;
+    // Keep the first aligned range. Replacing it on every answer was another
+    // source of breathing; a whole-scene change starts a new reference.
+    let reset = this.lo === null;
+    if (!reset && !fit.samples && oldColors) {
+      let changed = 0;
+      for (let i = 0; i < t.length; i++) {
+        const c = i * 3;
+        const difference =
+          Math.abs(colors[c] - oldColors[c]) +
+          Math.abs(colors[c + 1] - oldColors[c + 1]) +
+          Math.abs(colors[c + 2] - oldColors[c + 2]);
+        if (difference > 60) changed++;
+      }
+      // Decide from this answer's frame. The latest draw may already be
+      // still again by the time a changed view's depth arrives.
+      reset = changed > t.length * 0.5;
+    }
+    if (reset) {
+      const sorted = Float32Array.from(t).sort();
+      this.lo = sorted[Math.floor(sorted.length * 0.02)];
+      this.hi = sorted[Math.floor(sorted.length * 0.98)];
+      this.smooth = null;
+      this.filtered = null;
+      this.djump.fill(0);
+      this.dside.fill(0);
+    }
+    const reference = t.slice();
+    if (this.reference && !reset && oldColors)
+      for (let i = 0; i < t.length; i++) {
+        const c = i * 3;
+        const change =
+          Math.abs(colors[c] - oldColors[c]) +
+          Math.abs(colors[c + 1] - oldColors[c + 1]) +
+          Math.abs(colors[c + 2] - oldColors[c + 2]);
+        if (this.dstill[i] && change <= 60) reference[i] = this.reference[i];
+      }
+    this.reference = reference;
     const span = Math.max(1e-6, this.hi - this.lo);
     for (let i = 0; i < t.length; i++) t[i] = Math.max(0, Math.min(1, (t[i] - this.lo) / span));
-    // r5: where a near person stands before a far wall, the depth ramps
-    // across a few cells, and those cells hung as stretched splats between
-    // the two (the owner's "detaching" of October 3): each goes with the near
-    // or the far side, whichever it is closer to.
-    // r6 (the owner's "too flashy and too kind of grainy" of October 3):
-    // each answer blends with the last where they differ a little (the
-    // model's guess wanders from frame to frame), and keeps a real move
-    // (over a quarter) as it is; then the edges are cut. Cells along an
-    // outline used to flip between near and far from one answer to the next.
-    //
-    // Live r7 (the owner's push notes of October 4: "still a little bit too
-    // grainy"): a steadier blend (0.15 of a change within the model's
-    // wobble, rising smoothly to all of a clear move; was 0.4 below a quarter,
-    // which let the wobble through and held a move back); then each
-    // surface is smoothed within itself (smoothSurface: the model's guess
-    // wobbles from cell to cell, and the splats, lifted by it, showed that
-    // wobble as grain once turned), and only real jumps are cut, each cell
-    // going with the side whose colors it has (snapEdges with the frame's
-    // colors), so the cut follows the person's outline in the picture.
-    const prev = this.smooth;
-    // Live r7 (stability, October 6): where the picture has held still, the
-    // depth hardly moves: a change within the model's wobble moves a
-    // twentieth of the way, and a bigger one (the model's guess flipping
-    // along an outline) only once it has come HOLD answers in a row.
-    // Where anything moves, the depth follows as before.
-    this.markStill();
-    if (prev && prev.length === t.length)
-      for (let i = 0; i < t.length; i++) {
-        const d = Math.abs(t[i] - prev[i]);
-        let a = warm ? 0.6 : d <= 0.03 ? 0.15 : d >= 0.25 ? 1 : 0.15 + (0.85 * (d - 0.03)) / 0.22;
-        if (!warm && this.dstill[i]) {
-          this.djump[i] = d > 0.12 ? Math.min(255, this.djump[i] + 1) : 0;
-          a = this.djump[i] >= HOLD ? 1 : 0.05;
-        } else this.djump[i] = 0;
-        t[i] = prev[i] + (t[i] - prev[i]) * a;
-      }
-    this.smooth = Float32Array.from(t);
-    const colors = this.sent ? gridColors(this.sent, cols, rows, this.mirror) : null;
+    if (this.answers <= 2) this.dstill.fill(0);
+    // Suppress sensor/model noise before edge detection, so noise cannot
+    // manufacture thousands of small edges for snapEdges to process.
+    const previous = this.filtered;
+    holdDepth(t, previous, this.dstill, colors, oldColors, this.djump, this.dside);
+    this.filtered = t.slice();
     t.set(snapEdges(smoothSurface(t, cols, rows), cols, rows, colors));
-    // Live r7: the cells near an outline, with no lone cell on the wrong side.
-    // (A per-frame step that moved the outline by each frame's colors between
-    // answers was tried and left patches on a moving face; it is gone.)
-    this.band = colors ? edgeBand(t, cols, rows) : null;
-    if (this.band) tidyBand(this.band, t);
-    // Up to the picture's grid, its edges following the picture's own colors.
+    this.band = edgeBand(t, cols, rows);
+    tidyBand(this.band, t);
+    // A held cell also keeps its cleaned depth: filtering around moving
+    // neighbors must not reintroduce drift into a stationary surface.
+    if (previous && this.smooth)
+      for (let i = 0; i < t.length; i++)
+        if (this.filtered[i] === previous[i]) t[i] = this.smooth[i];
+    this.smooth = t.slice();
+    this.depthColors = colors;
+
+    // Learn and hold using the colors of the frame this answer describes.
+    // New camera colors are used only when the picture is drawn.
+    const oldGuide = this.depthGuide;
+    const rgb = gridColors(sent, this.cols, this.rows, this.mirror);
+    const guide = new Uint8ClampedArray(this.cols * this.rows * 4);
+    for (let i = 0; i < this.target.length; i++) {
+      guide[i * 4] = rgb[i * 3];
+      guide[i * 4 + 1] = rgb[i * 3 + 1];
+      guide[i * 4 + 2] = rgb[i * 3 + 2];
+      guide[i * 4 + 3] = 255;
+    }
+    this.depthGuide = guide;
+    const up = upsampleSnap(t, cols, rows, this.cols, this.rows, guide, colors);
     const fine = this.target;
-    const up = cols === this.cols && rows === this.rows ? t : upsampleSnap(t, cols, rows, this.cols, this.rows, this.lastColors); // prettier-ignore
-    // Live r7 (stability): a still cell of the picture keeps its depth unless
-    // the new one holds (a cell along the outline otherwise flipped between
-    // the person and the wall as the camera's noise moved the cut).
-    if (this.have && !warm)
+    if (this.have && this.answers > 2 && oldGuide)
       for (let i = 0; i < up.length; i++) {
-        if (this.stillT[i] < STILL) {
+        const o = i * 4;
+        const change =
+          Math.abs(guide[o] - oldGuide[o]) +
+          Math.abs(guide[o + 1] - oldGuide[o + 1]) +
+          Math.abs(guide[o + 2] - oldGuide[o + 2]);
+        if (this.stillT[i] < STILL || change > 60) {
           this.fjump[i] = 0;
+          this.fside[i] = 0;
           continue;
         }
-        const d = up[i] - fine[i];
-        if (Math.abs(d) > 0.12) {
-          this.fjump[i] = Math.min(255, this.fjump[i] + 1);
+        const delta = up[i] - fine[i];
+        if (Math.abs(delta) > 0.12) {
+          const side = delta > 0 ? 1 : -1;
+          this.fjump[i] = this.fside[i] === side ? Math.min(HOLD, this.fjump[i] + 1) : 1;
+          this.fside[i] = side;
           if (this.fjump[i] < HOLD) up[i] = fine[i];
         } else {
           this.fjump[i] = 0;
-          up[i] = fine[i] + d * 0.3;
+          this.fside[i] = 0;
+          up[i] = fine[i];
         }
       }
     fine.set(up);
-    if (this.back && this.sent) this.back.learn(this.sent, fine, this.cols, this.rows, this.mirror); // prettier-ignore
+    if (this.back) this.back.learn(sent, fine, this.cols, this.rows, this.mirror);
     if (!this.have) this.heights.set(fine);
     this.have = true;
+    this.answerCapturedAt = sent.capturedAt;
   }
 
   // Draws the frame now (and eases the heights) into g, a grid's canvas.
@@ -418,8 +590,7 @@ export class CameraDepth {
   draw(g, { gain = 1, dt = 1 / 60 } = {}) {
     const v = this.video;
     const { cols, rows } = this;
-    if (!v?.videoWidth) return false;
-    this.ask();
+    if (this.closed || !v?.videoWidth) return false;
     const sg = this.sg;
     sg.save();
     if (this.mirror) {
@@ -464,12 +635,35 @@ export class CameraDepth {
       for (let k = 0; k < n; k++) {
         const i = k * 4;
         const d = Math.abs(cp[i] - last[i]) + Math.abs(cp[i + 1] - last[i + 1]) + Math.abs(cp[i + 2] - last[i + 2]); // prettier-ignore
-        moved[k] = d > 40 ? 1 : 0;
+        // Isolated sensor noise is not motion. Check the signed change two
+        // cells away in four directions, so a moving outline follows on
+        // its first frame but one noisy camera pixel cannot release a face.
+        let coherent = d;
+        if (d > 40 && d <= 80) {
+          const x = k % cols;
+          const y = Math.floor(k / cols);
+          let r = cp[i] - last[i],
+            g = cp[i + 1] - last[i + 1],
+            b = cp[i + 2] - last[i + 2];
+          for (let side = 0; side < 4; side++) {
+            const xx = side === 0 ? Math.max(0, x - 2) : side === 1 ? Math.min(cols - 1, x + 2) : x;
+            const yy = side === 2 ? Math.max(0, y - 2) : side === 3 ? Math.min(rows - 1, y + 2) : y;
+            const q = (yy * cols + xx) * 4;
+            r += cp[q] - last[q];
+            g += cp[q + 1] - last[q + 1];
+            b += cp[q + 2] - last[q + 2];
+          }
+          coherent = (Math.abs(r) + Math.abs(g) + Math.abs(b)) / 5;
+        }
+        moved[k] = d > 80 || (d > 40 && coherent > 24) ? 1 : 0;
         m += moved[k];
       }
       this.moving = m / n;
       const near = grow(moved, cols, rows, 1);
       for (let k = 0; k < n; k++) still[k] = near[k] ? 0 : Math.min(60, still[k] + dt);
+      // Once the color average reaches its two-second cap, every held
+      // cell has the same weight. Compute that exponential once per draw.
+      const heldColor = 1 - Math.exp(-dt / 2);
       for (let i = 0; i < cp.length; i += 4) {
         const d = Math.abs(cp[i] - last[i]) + Math.abs(cp[i + 1] - last[i + 1]) + Math.abs(cp[i + 2] - last[i + 2]); // prettier-ignore
         // (Live r7, the finer grid of October 6: each cell averages fewer of
@@ -477,9 +671,15 @@ export class CameraDepth {
         // within the noise, was a fifth. Stability: that eighth is now
         // a quarter-second average at 30 frames a second, longer as the cell
         // holds still.)
-        const tau = 0.25 + Math.min(1.75, still[i >> 2] * 0.9);
-        const calm = 1 - Math.exp(-dt / tau);
-        const a = d <= 24 ? calm : d >= 80 ? 1 : calm + ((1 - calm) * (d - 24)) / 56;
+        const age = still[i >> 2];
+        const calm = age >= 1.75 / 0.9 ? heldColor : 1 - Math.exp(-dt / (0.25 + age * 0.9));
+        const a = near[i >> 2]
+          ? 1
+          : d <= 24
+            ? calm
+            : d >= 80
+              ? 1
+              : calm + ((1 - calm) * (d - 24)) / 56;
         last[i] += (cp[i] - last[i]) * a;
         last[i + 1] += (cp[i + 1] - last[i + 1]) * a;
         last[i + 2] += (cp[i + 2] - last[i + 2]) * a;
@@ -488,34 +688,59 @@ export class CameraDepth {
         cp[i + 2] = last[i + 2];
       }
     }
-    this.lastColors = cp.slice();
+    if (!this.lastColors || this.lastColors.length !== cp.length)
+      this.lastColors = new Uint8ClampedArray(cp.length);
+    this.lastColors.set(cp);
+    // Follow a moving outline with today's colors and the request's own
+    // color/depth pairs. Only changed pixels are revisited; a still face
+    // cannot acquire the patches a full per-frame recoloring used to make.
+    if (this.have && this.depthColors && this.moving > 0.0005)
+      upsampleSnap(
+        this.dt,
+        this.dcols,
+        this.drows,
+        cols,
+        rows,
+        this.lastColors,
+        this.depthColors,
+        this.target,
+        this.movedBuf,
+      );
     // Live r7: a light unsharp mask on what is drawn (the colors above stay
     // as they are, for the next frame): each cell moves away from the mean
     // of its 3 by 3 neighborhood by a share of the difference, so edges a cell or
     // two wide read crisply at phone size. The noise is smoothed first.
     // Live r7 polish (the owner's "the toys could still be sharper", October
     // 5): 1.2, held to 28 levels (sharpen); was 0.5.
-    sharpen(cp, cols, rows, 1.2, (this.blurBuf ||= new Float32Array(cols * rows * 3)));
+    // Noise has already averaged out. Keep weak eye and mouth edges crisp
+    // with a smaller coring threshold; other callers retain their old one.
+    sharpen(cp, cols, rows, 1.35, (this.blurBuf ||= new Float32Array(cols * rows * 3)), 28, 2);
     g.putImageData(cur, 0, 0);
     // Heights ease toward the newest depth (about a fifth of a second).
     const k = 1 - Math.exp(-dt / 0.12);
     const kBig = 1 - Math.exp(-dt / 0.04);
     const hts = this.heights;
     const t = this.target;
-    const img = g.createImageData(cols, rows);
+    const img = (this.heightImage ||= g.createImageData(cols, rows));
     const px = img.data;
     for (let i = 0; i < hts.length; i++) {
       // r5: a big jump (a person's edge moving) is quick, so no splat
       // lingers in the gap between near and far; r6: quick rather than at
       // once (it flashed), and small changes ease, which keeps the depth
       // from shimmering.
-      if (this.have) hts[i] += (t[i] - hts[i]) * (Math.abs(t[i] - hts[i]) > 0.3 ? kBig : k);
+      if (this.have) {
+        if (this.movedBuf?.[i]) hts[i] = t[i];
+        else hts[i] += (t[i] - hts[i]) * (Math.abs(t[i] - hts[i]) > 0.3 ? kBig : k);
+      }
       const o = i * 4;
       px[o] = Math.round(255 * (this.have ? hts[i] * gain : 0));
       px[o + 3] = 255;
     }
     g.putImageData(img, cols, 0);
     if (this.back) this.back.draw(g, cols, rows, gain, hts, dt);
+    if (this.answerCapturedAt) this.drawLatencyMs = performance.now() - this.answerCapturedAt;
+    // The crop and the colors above are current before a new request starts.
+    this.ask();
     return true;
   }
 
@@ -532,8 +757,20 @@ export class CameraDepth {
   }
 
   close() {
+    this.closed = true;
+    this.busy = false;
+    if (this.frameCallback != null) this.video?.cancelVideoFrameCallback?.(this.frameCallback);
     this.worker?.terminate();
     this.worker = null;
+    this.sent =
+      this.reference =
+      this.filtered =
+      this.depthColors =
+      this.depthGuide =
+      this.heightImage =
+      this.lastColors =
+      this.lastSmooth =
+        null;
   }
 }
 
@@ -697,11 +934,51 @@ export class BackPlate {
     // Which of its cells are near now, then that grown by two cells.
     const near = (this.near ||= new Uint8Array(bc * br));
     near.fill(0);
-    if (hts)
+    const cap = (this.cap ||= new Float32Array(bc * br));
+    cap.fill(1);
+    const cellKey = `${cols},${rows},${bc},${br}`;
+    if (this.cellKey !== cellKey) {
+      this.cellKey = cellKey;
+      this.cells = new Uint32Array(cols * rows);
       for (let j = 0; j < rows; j++) {
         const y = Math.min(br - 1, Math.floor((j * br) / rows));
-        for (let i = 0; i < cols; i++) if (hts[j * cols + i] >= FAR) near[y * bc + Math.min(bc - 1, Math.floor((i * bc) / cols))] = 1; // prettier-ignore
+        for (let i = 0; i < cols; i++)
+          this.cells[j * cols + i] = y * bc + Math.min(bc - 1, Math.floor((i * bc) / cols));
       }
+    }
+    // The mapping is fixed for this grid; depths and their footprint caps
+    // are still recomputed on every draw.
+    const cells = this.cells;
+    if (hts)
+      for (let i = 0; i < hts.length; i++) {
+        const b = cells[i];
+        const value = hts[i];
+        if (value >= FAR) near[b] = 1;
+        cap[b] = Math.min(cap[b], value);
+      }
+    // A coarse splat overlaps adjacent cells. Cap its ENTIRE footprint,
+    // not only its center, so it cannot peek through a lower visible wall.
+    const safe = (this.safe ||= new Float32Array(bc * br));
+    const rowMin = (this.rowMin ||= new Float32Array(bc * br));
+    // A 3 by 3 minimum separates into two three-cell passes. It covers
+    // the same footprint without rescanning nine neighbors for each cell.
+    for (let y = 0; y < br; y++)
+      for (let x = 0; x < bc; x++) {
+        const row = y * bc;
+        rowMin[row + x] = Math.min(
+          cap[row + Math.max(0, x - 1)],
+          cap[row + x],
+          cap[row + Math.min(bc - 1, x + 1)],
+        );
+      }
+    for (let y = 0; y < br; y++) {
+      const above = Math.max(0, y - 1) * bc;
+      const row = y * bc;
+      const below = Math.min(br - 1, y + 1) * bc;
+      for (let x = 0; x < bc; x++) {
+        safe[row + x] = Math.min(rowMin[above + x], rowMin[row + x], rowMin[below + x]);
+      }
+    }
     const show = (this.show ||= new Uint8Array(bc * br));
     show.fill(0);
     for (let y = 0; y < br; y++)
@@ -717,19 +994,32 @@ export class BackPlate {
       hold[b] = show[b] ? 1 : Math.max(0, hold[b] - dt);
       if (hold[b] > 0) show[b] = 1;
     }
+    // Every fine texel under one background cell has the same color and
+    // depth. Encode that cell once, then expand it with the cached mapping.
+    const encoded = (this.encoded ||= new Uint8ClampedArray(bc * br * 4));
+    for (let b = 0; b < bc * br; b++) {
+      const c = b * 4;
+      encoded[c] = vals[c];
+      encoded[c + 1] = vals[c + 1];
+      encoded[c + 2] = vals[c + 2];
+      const depth = Math.min(vals[c + 3], safe[b]);
+      encoded[c + 3] = Math.round(255 * (0.5 + Math.max(0, depth * gain) / 2));
+    }
     for (let j = 0; j < rows; j++) {
-      const y = Math.min(br - 1, Math.floor((j * br) / rows));
       for (let i = 0; i < cols; i++) {
-        const b = y * bc + Math.min(bc - 1, Math.floor((i * bc) / cols));
+        const b = cells[j * cols + i];
         const c = b * 4;
         const o = (j * cols * 2 + i) * 4;
-        px[o] = vals[c];
-        px[o + 1] = vals[c + 1];
-        px[o + 2] = vals[c + 2];
+        px[o] = encoded[c];
+        px[o + 1] = encoded[c + 1];
+        px[o + 2] = encoded[c + 2];
         px[o + 3] = 255;
         const q = o + cols * 4;
         px[q] = px[q + 1] = 128;
-        px[q + 2] = Math.round(255 * (0.5 + Math.max(0, vals[c + 3] * gain) / 2));
+        // A previously learned wall may be nearer than the current wall.
+        // Clamp each texel to the visible picture so the coarse plate's
+        // footprint cannot come through it, including when depth is flat.
+        px[q + 2] = encoded[c + 3];
         px[q + 3] = show[b] ? 255 : 0;
       }
     }
@@ -1080,32 +1370,41 @@ export function tidyBand(band, d) {
 // Live r7: an unsharp mask on RGBA pixels (w x h) in place: c + amount (c -
 // the 3 by 3 box mean), by rows then columns.
 const CORE = 4; // levels (sharpen)
-export function sharpen(px, w, h, amount, tmp) {
-  for (let ch = 0; ch < 3; ch++) {
-    for (let y = 0; y < h; y++)
-      for (let x = 0; x < w; x++) {
-        const a = px[(y * w + Math.max(0, x - 1)) * 4 + ch];
-        const b = px[(y * w + x) * 4 + ch];
-        const c = px[(y * w + Math.min(w - 1, x + 1)) * 4 + ch];
-        tmp[(y * w + x) * 3 + ch] = (a + b + c) / 3;
-      }
-  }
+export function sharpen(px, w, h, amount, tmp, limit = 28, core = CORE) {
+  // Walk the packed RGB cells together. The old channel-at-a-time pass
+  // recalculated the same neighbors three times; the arithmetic is identical.
+  for (let y = 0; y < h; y++)
+    for (let x = 0; x < w; x++) {
+      const k = y * w + x;
+      const a = (y * w + Math.max(0, x - 1)) * 4;
+      const b = k * 4;
+      const c = (y * w + Math.min(w - 1, x + 1)) * 4;
+      const q = k * 3;
+      tmp[q] = (px[a] + px[b] + px[c]) / 3;
+      tmp[q + 1] = (px[a + 1] + px[b + 1] + px[c + 1]) / 3;
+      tmp[q + 2] = (px[a + 2] + px[b + 2] + px[c + 2]) / 3;
+    }
   for (let y = 0; y < h; y++) {
     const y0 = Math.max(0, y - 1);
     const y1 = Math.min(h - 1, y + 1);
-    for (let x = 0; x < w; x++)
+    for (let x = 0; x < w; x++) {
+      const a = (y0 * w + x) * 3;
+      const b = (y * w + x) * 3;
+      const c = (y1 * w + x) * 3;
+      const q = (y * w + x) * 4;
       for (let ch = 0; ch < 3; ch++) {
-        const m = (tmp[(y0 * w + x) * 3 + ch] + tmp[(y * w + x) * 3 + ch] + tmp[(y1 * w + x) * 3 + ch]) / 3; // prettier-ignore
-        const o = (y * w + x) * 4 + ch;
+        const m = (tmp[a + ch] + tmp[b + ch] + tmp[c + ch]) / 3;
+        const o = q + ch;
         // (Live r7 polish: the push is held to 28 levels, so a strong edge
         // (an eye's rim) gets no halo while fine detail still sharpens; and a
         // difference within the camera's leftover noise, a few levels, gets
         // little of it (coring), so the picture is no less steady.)
         const d = px[o] - m;
         const ad = d < 0 ? -d : d;
-        const push = amount * (ad < CORE ? (d * ad) / CORE : d);
-        px[o] = px[o] + (push > 28 ? 28 : push < -28 ? -28 : push);
+        const push = amount * (ad < core ? (d * ad) / core : d);
+        px[o] = px[o] + (push > limit ? limit : push < -limit ? -limit : push);
       }
+    }
   }
 }
 
