@@ -47,6 +47,7 @@ import { code128, ean13, upcA, barSpans, guardModules } from "../qr-craft/barcod
 import { inkedLine } from "../qr-craft/glyphs.js";
 import { encodeQR } from "../qr/encode.js";
 import { TUNE, painter, moduleGrid } from "../qr/crisp.js";
+import { circleSplats, shapeHalf, shapeChoices, appendSplats, CIRCLE_QUIET } from "../qr/circle.js";
 import {
   MATERIALS,
   materialById,
@@ -240,14 +241,52 @@ const pictureNow = (o) => (o.picture === "own" ? PIC.own : PIC.pictures.get(samp
 // and a light underlay further back shows behind a tile while it turns.
 // Each splat moves with its module's tile.
 const LEAD = 0.004; // the dark splats' step forward (modules)
-function pictureSplats(w, budget) {
+// The original picture covers the whole sticker. Its center is cropped for
+// the unchanged square weave; decoration samples the same coordinates.
+function circleCrop(pic, size) {
+  const fraction = size / (2 * shapeHalf(size, "circle"));
+  const side = Math.min(pic.w, pic.h);
+  const n = Math.max(1, Math.floor(side * fraction));
+  const x0 = Math.floor((pic.w - n) / 2);
+  const y0 = Math.floor((pic.h - n) / 2);
+  const data = new Float32Array(n * n * 3);
+  for (let y = 0; y < n; y++)
+    for (let x = 0; x < n; x++) {
+      const i = ((y + y0) * pic.w + x + x0) * 3;
+      data.set(pic.data.subarray(i, i + 3), (y * n + x) * 3);
+    }
+  return { w: n, h: n, data };
+}
+
+function circleColor(pic, half, x, y, dark, style) {
+  if (!pic || style === "bw") return dark ? FG : BG;
+  const side = Math.min(pic.w, pic.h);
+  const px = Math.max(
+    0,
+    Math.min(pic.w - 1, Math.floor((pic.w - side) / 2 + (0.5 + x / (2 * half)) * side)),
+  );
+  const py = Math.max(
+    0,
+    Math.min(pic.h - 1, Math.floor((pic.h - side) / 2 + (0.5 - y / (2 * half)) * side)),
+  );
+  const at = (py * pic.w + px) * 3;
+  const col = Array.from(pic.data.subarray(at, at + 3));
+  const g = gray(col);
+  return dark
+    ? col.map((c) => c * Math.min(1, 0.25 / Math.max(g, 0.001)))
+    : col.map((c) => 1 - (1 - c) * Math.min(1, 0.2 / Math.max(1 - g, 0.001)));
+}
+
+function pictureSplats(w, budget, shape = "square", pic = null) {
   const N = w.code.size;
   const { k, G, cells } = w;
-  const H = N / 2 + QUIET;
+  const H = shapeHalf(N, shape);
   const make = (fine) => {
     const out = [];
+    const M = G * fine;
+    const encodedCount = M * M + (M - 1) * (M - 1);
     // The underlay, well behind (a turning tile swings through z < 0).
-    patch(out, -H, -H, H, H, -0.6, 0.34, BG, [0, 0]);
+    if (shape !== "circle") patch(out, -H, -H, H, H, -0.6, 0.34, BG, [0, 0]);
     // The quiet zone: a sheet just behind the code, around it.
     const qs = 0.34;
     const n = Math.round((2 * H) / qs);
@@ -257,12 +296,33 @@ function pictureSplats(w, budget) {
       for (let i = 0; i < n; i++) {
         const x = -H + (i + 0.5) * st;
         const y = -H + (j + 0.5) * st;
+        if (
+          shape === "circle" &&
+          (Math.hypot(x, y) > H - 0.7 || Math.max(Math.abs(x), Math.abs(y)) > N / 2 + QUIET)
+        )
+          continue;
         if (Math.abs(x) < N / 2 - 0.3 && Math.abs(y) < N / 2 - 0.3) continue;
         out.push({ p: [x, y, -0.02], scales: sc0, quat: [0, 0, 0, 1], color: BG, opacity: 1, params: [0, 0], pattern: false }); // prettier-ignore
       }
+    if (shape === "circle") {
+      const scale = Math.min(1.6, Math.max(0.8, 2 / fine));
+      let decoration;
+      for (let attempt = 0; attempt < 10; attempt++) {
+        decoration = circleSplats(w.code, {
+          fg: FG,
+          bg: BG,
+          scale,
+          coarse: attempt > 0,
+          sheetSpacing: attempt ? 0.7 + 0.3 * attempt : 0.45,
+          colorAt: (x, y, dark) => circleColor(pic, H, x, y, dark, w.style),
+          lightColorAt: (x, y) => circleColor(pic, H, x, y, false, w.style),
+        });
+        if (out.length + decoration.splats.length + encodedCount <= budget) break;
+      }
+      appendSplats(out, decoration.splats);
+    }
     // The code: one lattice of `fine` splats a cell each way, two staggered
     // layers (the second fills the low spots between the first's points).
-    const M = G * fine;
     const s0 = N / M;
     const sc = [0.55 * s0, 0.55 * s0, 0.004];
     // Dark splats a little tighter: their soft edges lie in front of the
@@ -307,9 +367,15 @@ function pictureSplats(w, budget) {
   };
   let splats = null;
   for (const fine of [3, 2, 1]) {
+    const M = G * fine;
+    if (shape === "circle" && M * M + (M - 1) * (M - 1) > budget) continue;
     splats = make(fine);
     if (splats.length <= budget) break;
   }
+  if (shape === "circle" && (!splats || splats.length > budget))
+    throw new Error(
+      "This code has too much detail for a circular picture on this device. Choose less detail, a smaller center dot, or a shorter text.",
+    );
   return { splats, half: H };
 }
 
@@ -347,11 +413,11 @@ async function checkPicture() {
   // The stage: the splats as drawn, front on, read at phone size and smaller.
   try {
     const kit = PIC.kit;
-    const half = w.code.size / 2 + QUIET;
+    const half = shapeHalf(w.code, PIC.options?.shape);
     const big = await renderFront(kit, half, 720, 1, SCANNING);
     // A newer build's own check takes over (and lifts the still).
     if (kit !== PIC.kit) return PIC.check;
-    const total = w.code.size + 2 * QUIET + 2; // the picture spans the margin too
+    const total = 2 * (half + 1); // the picture spans the margin too
     const at = (ppm) => {
       const img = pixels(shrink(big, total * ppm));
       return readRGBA(img.data, img.width, img.height);
@@ -398,7 +464,11 @@ function scheduleCheck(ms = 500) {
 async function makeItScan() {
   const pic = pictureNow(PIC.options || {});
   await loadJsQR();
-  const found = closestScanning(pic, PIC.options || {}, readRGBA);
+  const input =
+    pic && PIC.options?.shape === "circle" && PIC.woven
+      ? circleCrop(pic, PIC.woven.code.size)
+      : pic;
+  const found = closestScanning(input, PIC.options || {}, readRGBA);
   PIC.fix = found ? { changed: found.changed, options: found.options } : { none: true };
   PIC.panel?.refresh();
   if (found && found.changed.length) {
@@ -414,7 +484,7 @@ async function savePNG(size = 1600) {
   if (!a || !w) return null;
   return a.withBusy("Making the picture…", async () => {
     const { canvasToBlob, downloadBlob, timestampName } = await exportsJS();
-    const canvas = await renderFront(PIC.kit, w.code.size / 2 + QUIET, size, 0);
+    const canvas = await renderFront(PIC.kit, shapeHalf(w.code, PIC.options?.shape), size, 0);
     const blob = await canvasToBlob(canvas);
     downloadBlob(blob, timestampName("png", "splashery-picture-qr"));
     a.ui?.toast?.("Picture saved, with its quiet zone.");
@@ -475,6 +545,7 @@ const PICTURE = {
   density: 2,
   options: [
     { key: "text", label: "Text", type: "text", default: DEFAULT_TEXT, hidden: true },
+    { key: "shape", label: "Shape", type: "select", default: "square", choices: shapeChoices },
     { key: "picture", label: "Picture", type: "select", default: SAMPLES[0].id, choices: [...SAMPLES.map((s) => ({ id: s.id, label: s.label })), { id: "own", label: "Your own picture" }] }, // prettier-ignore
     { key: "contrast", label: "Contrast", type: "slider", min: 0, max: 1, step: 0.05, default: 0.5 }, // prettier-ignore
     { key: "center", label: "Center dot", type: "select", default: "small", choices: CENTERS.map((c) => ({ id: c.id, label: c.label })) }, // prettier-ignore
@@ -541,11 +612,17 @@ const PICTURE = {
       PIC.error = err.message;
       w = makeWoven(pic, { ...t, text: DEFAULT_TEXT, extra }, jsqr ? readRGBA : null);
     }
+    if (o.shape === "circle" && pic)
+      w = makeWoven(
+        circleCrop(pic, w.code.size),
+        { ...t, text: w.code.text, extra },
+        jsqr ? readRGBA : null,
+      );
+    const { splats, half } = pictureSplats(w, k.count, o.shape, pic);
     PIC.woven = w;
     PIC.options = { ...o, ...t };
     PIC.check = null;
     PIC.fix = PIC.fixKeep ? PIC.fix : null;
-    const { splats, half } = pictureSplats(w, k.count);
     k.reach([half + 1, half + 1, 1]);
     k.reach([-half - 1, -half - 1, -0.8]);
     k.cloud({ share: Math.min(1, splats.length / k.count), jitter: 0, pattern: false }, (rand, i) => splats[i] || null); // prettier-ignore
@@ -582,10 +659,13 @@ async function checkBuild() {
   if (!code) return null;
   await loadJsQR();
   const kit = BLD.kit;
-  const half = code.size / 2 + QUIET;
+  const half = shapeHalf(
+    code,
+    BLD.options?.shape === "circle" && BLD.options?.material !== "dominoes" ? "circle" : "square",
+  );
   const big = await renderFront(kit, half, 720);
   if (kit !== BLD.kit) return BLD.check;
-  const total = code.size + 2 * QUIET + 2;
+  const total = 2 * (half + 1);
   const at = (ppm) => {
     const img = pixels(shrink(big, total * ppm));
     return readRGBA(img.data, img.width, img.height);
@@ -629,6 +709,12 @@ function buildPanel() {
       out.replaceChildren();
       const c = BLD.code;
       if (c) out.append(el("p", { style: "margin:2px 0", textContent: `Version ${c.version} (${c.size} × ${c.size} modules), error correction ${c.ecc}: ${BLD.pieces} ${materialById(o.material).label.toLowerCase()}.` })); // prettier-ignore
+      if (BLD.options?.shape === "circle" && BLD.options?.material === "dominoes")
+        out.append(
+          note(
+            "Dominoes need a rectangular chain, so this build stays Square. Circle works with Marbles and Flip tiles.",
+          ),
+        );
       if (BLD.error) out.append(el("p", { style: "margin:2px 0;color:#b3261e", textContent: BLD.error })); // prettier-ignore
       const ck = BLD.check;
       if (!ck) out.append(el("p", { style: "margin:2px 0", textContent: "Checking that the finished code scans…" })); // prettier-ignore
@@ -648,6 +734,7 @@ const BUILD = {
   density: 2,
   options: [
     { key: "text", label: "Text", type: "text", default: DEFAULT_TEXT, hidden: true },
+    { key: "shape", label: "Shape", type: "select", default: "square", choices: shapeChoices },
     { key: "material", label: "Made of", type: "select", default: "dominoes", choices: MATERIALS.map((m) => ({ id: m.id, label: m.label })) }, // prettier-ignore
     { key: "level", label: "Error correction", type: "select", default: "M", choices: LEVELS.map((l) => ({ id: l, label: { L: "L: 7% can be lost", M: "M: 15%", Q: "Q: 25%", H: "H: 30%" }[l] })) }, // prettier-ignore
   ],
@@ -676,7 +763,7 @@ const BUILD = {
     const N = BLD.code.size;
     // The wave of flipping tiles crosses the code in what's left after one flip.
     const span = BUILD_SECS - FLIP_SECS - 0.35;
-    return buildModifier({ size: N, fg: COLORS.tileDark, bg: COLORS.tileLight, secs: BUILD_SECS, fall: FALL_SECS, roll: ROLL_SECS, flip: FLIP_SECS, dominoT: DOMINO_T, marbleR: MARBLE_R, tileT: TILE_T, startX: N / 2 + QUIET + 1.2, span, drop: DROP_SECS }, fit); // prettier-ignore
+    return buildModifier({ size: N, fg: COLORS.tileDark, bg: COLORS.tileLight, secs: BUILD_SECS, fall: FALL_SECS, roll: ROLL_SECS, flip: FLIP_SECS, dominoT: DOMINO_T, marbleR: MARBLE_R, tileT: TILE_T, startX: N / 2 + (o.shape === "circle" ? CIRCLE_QUIET - 0.7 : QUIET + 1.2), span, drop: DROP_SECS }, fit); // prettier-ignore
   },
   build(k, o) {
     const text = o.text ?? DEFAULT_TEXT;
@@ -690,7 +777,7 @@ const BUILD = {
       code = encodeQR(DEFAULT_TEXT, "M");
     }
     const material = materialById(o.material).id;
-    const { splats, half, layout } = buildPieces(code, material, k.count);
+    const { splats, half, layout } = buildPieces(code, material, k.count, { shape: o.shape });
     BLD.code = code;
     BLD.pieces = material === "tiles" ? layout.filter((t) => t.dark).length : layout.length;
     BLD.options = { ...o, text: code.text, material };

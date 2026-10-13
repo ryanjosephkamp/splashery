@@ -24,6 +24,8 @@
 
 import { encodeSteps, ROLE, LEVELS, LEVEL_RECOVERY, MASKS } from "../qr-lab/steps.js"; // prettier-ignore
 import { codeSplats, hexRGB, rgbHex, QUIET } from "../qr-lab/splats.js";
+import { painter, TUNE } from "../qr/crisp.js";
+import { circleSplats, shapeChoices, shapeHalf, appendSplats } from "../qr/circle.js";
 import { applyDamage, warpPoint, KINDS as DAMAGE_KINDS, REGIONS, describeDamage, tearFrom, burnFrom } from "../qr-lab/damage.js"; // prettier-ignore
 import { sampleModules, toDark, analyze } from "../qr-lab/read.js";
 import { encodeRGB, readRGB } from "../qr-lab/rgb.js";
@@ -140,6 +142,72 @@ const STEPS = [
   { id: "done", label: "12. The finished code" },
 ];
 const stepsFor = (s) => STEPS.filter((st) => st.id !== "version" || s.version >= 7);
+
+// Module interiors overlap enough to stay solid at phone size. Thin contour
+// splats draw open edges; round lattice patches alone scalloped their edges
+// and left pale seams where a row ended on the white card.
+function crispLabSplats(
+  modules,
+  size,
+  { scale = 0.8, lightTiles = false, fg = FG, bg = BG, colorOf = null, key = null } = {},
+) {
+  const out = [];
+  const { flat, crisp } = painter(out, { scale });
+  const H = size / 2 + QUIET;
+  flat(-H, -H, H, H, -0.5, 0.65, null, bg, [0, 0], { sigma: 0.65 });
+  for (const sp of out) {
+    sp.mod = -1;
+    sp.dark = 0;
+  }
+  const pad = TUNE.rings.reduce((a, b) => a + b, 0) * scale + 0.03;
+  for (let r = 0; r < size; r++)
+    for (let c = 0; c < size; c++) {
+      const i = r * size + c;
+      if (!modules[i] && !lightTiles) continue;
+      const group = key ? key(i) : modules[i];
+      const same = (rr, cc) =>
+        rr >= 0 &&
+        cc >= 0 &&
+        rr < size &&
+        cc < size &&
+        (modules[rr * size + cc] || lightTiles) &&
+        (key ? key(rr * size + cc) : modules[rr * size + cc]) === group;
+      const open = {
+        l: !same(r, c - 1),
+        r: !same(r, c + 1),
+        t: !same(r - 1, c),
+        b: !same(r + 1, c),
+      };
+      const x = c - size / 2 + 0.5;
+      const y = size / 2 - 0.5 - r;
+      const notches = [];
+      for (const [dr, dc] of [
+        [-1, -1],
+        [-1, 1],
+        [1, 1],
+        [1, -1],
+      ])
+        if (same(r + dr, c) && same(r, c + dc) && !same(r + dr, c + dc))
+          notches.push([x + dc * 0.5, y - dr * 0.5, dc, -dr]);
+      const start = out.length;
+      crisp({
+        x0: x - 0.5 - (open.l ? 0 : pad),
+        y0: y - 0.5 - (open.b ? 0 : pad),
+        x1: x + 0.5 + (open.r ? 0 : pad),
+        y1: y + 0.5 + (open.t ? 0 : pad),
+        open,
+        notches,
+        z: 0.14,
+        color: colorOf ? colorOf(i) : modules[i] ? fg : bg,
+        params: [1 + i, 0],
+      });
+      for (let at = start; at < out.length; at++) {
+        out[at].mod = i;
+        out[at].dark = modules[i] ? 1 : 0;
+      }
+    }
+  return out;
+}
 
 const AN = { steps: null, options: null, panel: null };
 
@@ -331,6 +399,19 @@ function stepText(s, id) {
 
 function anatomyPanel() {
   const box = el("div", { className: "qrs-anatomy" });
+  const circleLegend = el(
+    "p",
+    {
+      id: "qrs-circle-legend",
+      className: "note",
+      style: "display:flex;gap:12px;flex-wrap:wrap;font-size:13px;line-height:1.5",
+    },
+    el("span", { textContent: "Quiet zone: clear margin" }),
+    el("span", {
+      textContent: "decoration: carries no data",
+      style: "color:#075e65;font-weight:600",
+    }),
+  );
   const modeRow = row(
     button("qrs-view-parts", "The parts", () => switchTo({ view: "parts" }, "lift")),
     button("qrs-view-encode", "Encode your text", () =>
@@ -356,6 +437,7 @@ function anatomyPanel() {
   const err = el("p", { className: "warn", hidden: true });
   const encodeBox = el("div", {}, el("label", { htmlFor: "qrs-text", textContent: "Your text" }), input, row(level, make), nav); // prettier-ignore
   box.append(
+    circleLegend,
     modeRow,
     partsRow,
     encodeBox,
@@ -387,6 +469,7 @@ function anatomyPanel() {
       const s = AN.steps;
       if (!s) return;
       const enc = o.view === "encode";
+      circleLegend.hidden = o.shape !== "circle";
       partsRow.hidden = enc;
       encodeBox.hidden = !enc;
       for (const [id, on] of [
@@ -425,9 +508,11 @@ function anatomyPanel() {
 
 const ANATOMY = {
   alive: true,
+  render: { cull: 0.5, dpr: "native" },
   turntable: false,
   kernel: "sharp",
   options: [
+    { key: "shape", label: "Shape", type: "select", default: "square", choices: shapeChoices },
     { key: "text", label: "Text", type: "text", default: "HELLO WORLD", hidden: true },
     { key: "level", label: "Error correction", type: "select", default: "Q", hidden: true, choices: LEVELS.map((l) => ({ id: l, label: l })) }, // prettier-ignore
     { key: "view", label: "View", type: "select", default: "parts", hidden: true, choices: [{ id: "parts", label: "The parts" }, { id: "encode", label: "Encode" }] }, // prettier-ignore
@@ -435,7 +520,7 @@ const ANATOMY = {
     { key: "step", label: "Step", type: "select", default: "mode", hidden: true, choices: STEPS.map((s) => ({ id: s.id, label: s.label })) }, // prettier-ignore
     // The owner's idea of October 5, 2026: the lit part pops out of the code
     // (kept on as you tap through the parts and steps).
-    { key: "pop", label: "Pop the lit part out", type: "switch", default: false },
+    { key: "pop", label: "Pop the lit part out", type: "switch", default: true },
   ],
   controls: [
     { key: "lift", label: "Light it up", type: "pulse", ease: 1.2 },
@@ -494,8 +579,20 @@ const ANATOMY = {
     const look = anatomyLook(s, o);
     const N = s.size;
     let all;
-    for (let per = 6; per >= 2; per--) {
-      all = codeSplats(look.dark, N, { per, lightTiles: true, fg: FG, bg: BG });
+    for (const scale of [0.65, 0.8, 1, 1.3, 1.7, 2.2, 3]) {
+      all = crispLabSplats(look.dark, N, {
+        scale,
+        lightTiles: true,
+        key: (i) => `${look.dark[i]}:${look.color[i].join(",")}:${look.lift[i]}`,
+      });
+      if (o.shape === "circle") {
+        const circle = circleSplats(
+          { size: N, dark: s.modules },
+          { scale, decorColor: [0.03, 0.37, 0.4] },
+        );
+        AN.circle = circle.layout;
+        appendSplats(all, circle.splats, (sp) => ({ ...sp, mod: -1 }));
+      } else AN.circle = null;
       if (all.length <= k.count) break;
     }
     const splats = [];
@@ -509,7 +606,7 @@ const ANATOMY = {
       const kind = (order >= 0 ? 6 : 0) + (look.lift[i] ? 8 : 0);
       splats.push({ ...sp, color: look.color[i], params: [1 + i, kind + 16 * Math.max(0, order)], pattern: false }); // prettier-ignore
     }
-    const H = N / 2 + QUIET;
+    const H = shapeHalf(N, o.shape);
     k.reach([H + 1, H + 1, 1.5]);
     k.reach([-H - 1, -H - 1, -0.5]);
     k.cloud({ share: Math.min(1, splats.length / k.count), jitter: 0, pattern: false }, (rand, i) => splats[i] || null); // prettier-ignore
@@ -615,9 +712,9 @@ function damageCodes(o) {
 }
 
 // Where each code sits (code units) and the plate's width.
-function layoutFor(codes) {
+function layoutFor(codes, shape) {
   const N = codes[0].size;
-  const span = N + 2 * QUIET;
+  const span = 2 * shapeHalf(N, shape);
   if (codes.length === 1) return { N, offsets: [[0, 0]], width: span, half: span / 2 };
   const d = (span + 2) / 2;
   return { N, offsets: [[-d, d], [d, d], [-d, -d], [d, -d]], width: 2 * span + 2, half: span + 1 }; // prettier-ignore
@@ -644,11 +741,26 @@ function damagePanel() {
   region.setAttribute("aria-label", "Where");
   for (const r of REGIONS) region.append(el("option", { value: r.id, textContent: r.label }));
   region.addEventListener("change", () => switchTo({ region: region.value }, "drop"));
+  const circleActions = el(
+    "div",
+    { id: "qrs-circle-damage" },
+    note(
+      "The decorative dots carry no data. Erase them, or cover a finder in the square, and read the result below.",
+    ),
+    row(
+      button("qrs-erase-decoration", "Erase decoration", () =>
+        switchTo({ decorationDamage: true }, "drop"),
+      ),
+      button("qrs-cover-finder", "Cover a finder", () =>
+        switchTo({ damage: "sticker:0.45:finder:1", show: "damaged" }, "drop"),
+      ),
+    ),
+  );
   const actions = row(
     button("qrs-add", "Add damage", () => addDamage(), true),
     button("qrs-heal", "Heal it", () => heal()),
     button("qrs-clear", "Clear the damage", () =>
-      switchTo({ damage: "", show: "damaged" }, "drop"),
+      switchTo({ damage: "", decorationDamage: false, show: "damaged" }, "drop"),
     ),
   );
   const list = el("p", { className: "note", id: "qrs-damage-list" });
@@ -663,6 +775,7 @@ function damagePanel() {
     tools,
     row(el("span", { textContent: "Where: " }), region),
     actions,
+    circleActions,
     list,
     meter,
     note("Tilt, Curve and Move in time are the sliders in the Toy tab. The meter reads the very picture on the stage with jsQR, the reader the QR code toy uses, after every change. The block counts compare what a reader would see at each module's center with the true code: a block scans while it has lost no more codewords than its error correction can fix. Heal it shows the code as it was read and lets Reed–Solomon decoding set each block right."), // prettier-ignore
@@ -675,6 +788,8 @@ function damagePanel() {
       if (document.activeElement !== input) input.value = codes[0].text;
       level.value = o.level || "M";
       region.value = o.region || "all";
+      circleActions.hidden = o.shape !== "circle";
+      box.querySelector("#qrs-erase-decoration").disabled = !!o.decorationDamage;
       for (const k of BAKED) {
         const b = box.querySelector(`#qrs-tool-${k}`);
         const on = (o.tool || "scratch") === k;
@@ -683,6 +798,8 @@ function damagePanel() {
       }
       const dmg = parseDamage(o.damage);
       list.textContent = dmg.length ? `Damage: ${dmg.map((d) => `${describeDamage(d, codes[0].size)} (${whereText(d, codes[0].size)})`).join("; ")}.` : "No damage yet."; // prettier-ignore
+      if (o.shape === "circle" && o.decorationDamage)
+        list.textContent += " Decorative dots erased; the square and its quiet zone are unchanged.";
       meter.replaceChildren(...meterRows());
     },
   };
@@ -876,6 +993,14 @@ const DAMAGE = {
   turntable: false,
   kernel: "sharp",
   options: [
+    { key: "shape", label: "Shape", type: "select", default: "square", choices: shapeChoices },
+    {
+      key: "decorationDamage",
+      label: "Erase decoration",
+      type: "switch",
+      default: false,
+      hidden: true,
+    },
     { key: "text", label: "Text", type: "text", default: "https://ryanjosephkamp.github.io/splashery/", hidden: true }, // prettier-ignore
     { key: "level", label: "Error correction", type: "select", default: "M", hidden: true, choices: [...LEVELS, "all"].map((l) => ({ id: l, label: l })) }, // prettier-ignore
     { key: "damage", label: "Damage", type: "text", default: "", hidden: true },
@@ -934,7 +1059,7 @@ const DAMAGE = {
   },
   build(k, o) {
     const { codes } = damageCodes(o);
-    const L = layoutFor(codes);
+    const L = layoutFor(codes, o.shape);
     DM.layout = L;
     DM.kit = k;
     DM.options = { ...o };
@@ -945,16 +1070,61 @@ const DAMAGE = {
     const prev = DM.pendingPrev !== undefined ? parseDamage(DM.pendingPrev) : damage;
     DM.pendingPrev = undefined;
     const showRead = o.show === "read" && DM.read?.length === codes.length;
+    DM.circles = [];
     let torn = null;
     const make = (per) => {
       const splats = [];
       // The table behind.
       const T = L.half + 2.5;
-      const tn = Math.round(2 * T * 1.2);
+      const tn = Math.round(2 * T * Math.min(1.2, per));
       for (let j = 0; j < tn; j++) for (let i = 0; i < tn; i++) splats.push({ p: [-T + (i + 0.5) * (2 * T / tn), -T + (j + 0.5) * (2 * T / tn), -0.4], scales: [0.6 * (2 * T / tn), 0.6 * (2 * T / tn), 0.02], quat: [0, 0, 0, 1], color: mixc(TABLE, [0.25, 0.2, 0.15], ((i * 7 + j * 3) % 5) / 12), opacity: 1, params: [0, 4], pattern: false }); // prettier-ignore
       codes.forEach((s, ci) => {
         const [ox, oy] = L.offsets[ci];
         const id0 = ci * S;
+        if (o.shape === "circle") {
+          const circle = circleSplats(
+            { size: N, dark: s.modules },
+            {
+              scale: Math.max(0.8, Math.min(2, 4 / per)),
+              sheet: codes.length === 1,
+              dots: codes.length === 1 && !o.decorationDamage,
+            },
+          );
+          if (codes.length > 1) {
+            // Four stickers share the budget. Their paper and decoration
+            // can be coarser while every encoded module remains present.
+            const H = circle.half;
+            painter(circle.splats).flat(
+              -H,
+              -H,
+              H,
+              H,
+              -0.26,
+              0.85,
+              (x, y) => Math.hypot(x, y) < H - 0.12,
+              BG,
+              [0, 0],
+              { sigma: 0.65 },
+            );
+            if (!o.decorationDamage)
+              for (const { x, y } of circle.layout.dots)
+                circle.splats.push({
+                  p: [x, y, 0.14],
+                  scales: [0.27, 0.27, 0.01],
+                  quat: [0, 0, 0, 1],
+                  color: FG,
+                  opacity: 1,
+                  params: [0, 0],
+                  pattern: false,
+                });
+          }
+          DM.circles[ci] = circle.layout;
+          appendSplats(splats, circle.splats, (sp) => ({
+            ...sp,
+            p: [sp.p[0] + ox, sp.p[1] + oy, sp.p[2]],
+            params: [0, 0],
+          }));
+        }
         if (showRead) {
           // What a reader read: each module a tile of the color it was read as;
           // the ones each block's correction sets right turn over in turn.
@@ -968,7 +1138,13 @@ const DAMAGE = {
             s.role[m] === ROLE.data || s.role[m] === ROLE.ecc || s.role[m] === ROLE.remainder;
           for (let m = 0; m < S; m++) if (!data(m) && read[m] !== s.modules[m]) flip[m] = 0;
           a.changed.forEach((list, b) => list.forEach((m) => (flip[m] = b + 1)));
-          for (const sp of codeSplats(read, N, { per, lightTiles: true, fg: FG, bg: BG })) {
+          for (const sp of codeSplats(read, N, {
+            per,
+            lightTiles: true,
+            fg: FG,
+            bg: BG,
+            quiet: o.shape === "circle" ? 0 : QUIET,
+          })) {
             sp.p[0] += ox;
             sp.p[1] += oy;
             const wrong = sp.mod >= 0 && flip[sp.mod] >= 0;
@@ -979,7 +1155,12 @@ const DAMAGE = {
           }
           return;
         }
-        const base = codeSplats(s.modules, N, { per, fg: FG, bg: BG });
+        const base = codeSplats(s.modules, N, {
+          per,
+          fg: FG,
+          bg: BG,
+          quiet: o.shape === "circle" ? 0 : QUIET,
+        });
         base.forEach((sp, i) => (sp.id = i));
         const { splats: hit, pieces } = applyDamage(base, damage, { size: N });
         // Only the damage the last tap added moves: what the damage before it
@@ -991,6 +1172,14 @@ const DAMAGE = {
         const was = new Map(before ? before.splats.map((q) => [q.id, q]) : []);
         const stickerNew = !!before && JSON.stringify(damage.filter((d) => d.kind === "sticker")) !== JSON.stringify(prev.filter((d) => d.kind === "sticker")); // prettier-ignore
         for (const sp of hit) {
+          if (o.shape === "circle") {
+            // Physical damage stays on the encoded square; its clear margin
+            // and the decorative ring are separate pieces of the sticker.
+            const edge = N / 2;
+            if (Math.abs(sp.p[0]) >= edge || Math.abs(sp.p[1]) >= edge) continue;
+            sp.scales[0] = Math.min(sp.scales[0], (edge - Math.abs(sp.p[0])) / 3);
+            sp.scales[1] = Math.min(sp.scales[1], (edge - Math.abs(sp.p[1])) / 3);
+          }
           sp.p[0] += ox;
           sp.p[1] += oy;
           let kind = sp.piece === "sticker" ? (stickerNew ? 1 : 0) : 0;
@@ -1039,13 +1228,13 @@ const DAMAGE = {
       // Each code's level, on the table under it.
       codes.forEach((s, ci) => {
         const [ox, oy] = L.offsets[ci];
-        label(splats, `LEVEL ${s.level}`, ox, oy - s.size / 2 - QUIET - 1.05, 1.15);
+        label(splats, `LEVEL ${s.level}`, ox, oy - shapeHalf(s.size, o.shape) - 1.05, 1.15);
       });
       return splats;
     };
     // As many splats per module as the budget allows.
     let splats;
-    for (let per = 6; per >= 2; per--) {
+    for (let per = 6; per >= 1; per--) {
       torn = null;
       splats = make(per);
       if (splats.length <= k.count) break;
@@ -1142,6 +1331,7 @@ export async function readThree() {
 
 const THREE = {
   alive: true,
+  render: { cull: 0.5, dpr: "native" },
   turntable: false,
   kernel: "sharp",
   options: [
@@ -1187,13 +1377,14 @@ const THREE = {
     const ones = new Uint8Array(N * N).fill(1);
     const key = (i) => r.colors[i * 3] * 4 + r.colors[i * 3 + 1] * 2 + r.colors[i * 3 + 2];
     const tint = [o.c1, o.c2, o.c3].map((hex, ch) => inkColor(hexRGB(hex, TINTS[ch])));
-    // As many splats per module as the budget allows (four layers).
+    // Coarsen contour and interior spacing together to fit all four layers.
     let all;
-    for (let per = 6; per >= 2; per--) {
+    const firstScale = 1.1 * (N / 33) * Math.sqrt(160000 / k.count);
+    for (const scale of [0.8, 1, 1.3, 1.7, 2.2, 3, 4].filter((v) => v >= Math.min(4, firstScale))) {
       all = [];
       // Token 0: the square, every module in its own color.
       // (Its sheet a LAYER behind its tiles too, so it never ties with them.)
-      for (const sp of codeSplats(ones, N, { per, fg: FG, bg: BG, key }))
+      for (const sp of crispLabSplats(ones, N, { scale, fg: FG, bg: BG, key }))
         all.push({ ...sp, p: sp.mod >= 0 ? sp.p : [sp.p[0], sp.p[1], -LAYER], color: sp.mod >= 0 ? [r.colors[sp.mod * 3], r.colors[sp.mod * 3 + 1], r.colors[sp.mod * 3 + 2]] : sp.color, kind: "token", params: [0, 0], pattern: false }); // prettier-ignore
       // Tokens 1–3: each channel's code, in its own color on white. Lane QR
       // r5: splats sort in the pose they were built in, at a depth the sorter
@@ -1204,7 +1395,7 @@ const THREE = {
       // pass in front of each other as they split).
       for (let ch = 0; ch < 3; ch++) {
         const z0 = -LAYER * 2 * [2, 0, 1][ch] - LAYER;
-        for (const sp of codeSplats(r.codes[ch].modules, N, { per: Math.max(2, per - 1), fg: tint[ch], bg: BG })) all.push({ ...sp, p: [sp.p[0], sp.p[1], z0 + (sp.mod < 0 ? -LAYER : 0)], kind: "token", params: [ch + 1, 0], pattern: false }); // prettier-ignore
+        for (const sp of crispLabSplats(r.codes[ch].modules, N, { scale, fg: tint[ch], bg: BG })) all.push({ ...sp, p: [sp.p[0], sp.p[1], z0 + (sp.mod < 0 ? -LAYER : 0)], kind: "token", params: [ch + 1, 0], pattern: false }); // prettier-ignore
       }
       if (all.length <= k.count) break;
     }
@@ -1244,8 +1435,8 @@ if (typeof window !== "undefined" && window.__splashery) {
     else clearTimeout(DM.timer);
   });
   window.__splashery.qrLab = {
-    anatomy: () => ({ steps: AN.steps, options: AN.options }),
-    damage: () => ({ codes: DM.codes?.codes, layout: DM.layout, options: DM.options, check: DM.check }), // prettier-ignore
+    anatomy: () => ({ steps: AN.steps, options: AN.options, circle: AN.circle }),
+    damage: () => ({ codes: DM.codes?.codes, layout: DM.layout, options: DM.options, check: DM.check, circles: DM.circles }), // prettier-ignore
     checkDamage: () => checkDamage(),
     lastShot: () => DM.lastShot,
     heal: () => heal(),
