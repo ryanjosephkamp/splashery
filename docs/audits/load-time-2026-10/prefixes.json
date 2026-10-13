@@ -1,0 +1,292 @@
+[
+  {
+    "id": "water-bottle",
+    "budget": 90000,
+    "source": "assets/toys/water-bottle/water-bottle.splats",
+    "file": "assets/toys/water-bottle/water-bottle-opening.splats",
+    "sourceSha256": "1ce51984688ba9885c0b5c40b679dce8493e32b2d38682f0f774a1abc94f554f",
+    "sha256": "0bf74e1fd212e1857cf3647e7a9237725a2e55d2ce1226c82887aa1324b64e08",
+    "originalCount": 258505,
+    "capacity": 72000,
+    "beforeBytes": 3619114,
+    "afterBytes": 1008048,
+    "decodedPrefixEqual": true,
+    "arrays": {
+      "pos": "1a8b9c2c730aae63fd9b02c5603d76cbe66048e0b6e568a22816d3564b2e82f6",
+      "nrm": "c0ab4cb39d585489ff4a40e9a23d9c41c836cffcfab93eedff5c183fd1fc0a02",
+      "sig": "5a3659b9317286cd5444b12a47226e498cc8840f25e3807e079b65282ec9fb35",
+      "rgb": "8698a7f56bd3743c505f12b471a2a5485cda2cd41ab40382759cdc74c5902d5e",
+      "part": "0343edb372c87470f2c77c594f1779cd291f722066a7f505075d75800970a4bf"
+    },
+    "credit": {
+      "title": "Water bottle",
+      "author": "danny_p3d",
+      "url": "https://sketchfab.com/3d-models/water-bottle-42827e2ce39145eda296e6d6524f4c3d",
+      "license": "CC BY 4.0",
+      "inheritedFrom": "tools/ro-sources.mjs, CREDITS.md, and the toy's in-app credit",
+      "originalLicenseCheck": "September 29, 2026, as recorded by the original bake tool",
+      "transformation": "Exact prefix copy made by Ryan with Codex (GPT-6); same asset license"
+    }
+  },
+  {
+    "id": "water-bottle",
+    "budget": 210000,
+    "source": "assets/toys/water-bottle/water-bottle.splats",
+    "file": "assets/toys/water-bottle/water-bottle-opening-mid.splats",
+    "sourceSha256": "1ce51984688ba9885c0b5c40b679dce8493e32b2d38682f0f774a1abc94f554f",
+    "sha256": "053857073e06a1a00dfc789edda5fe3818b2406f6b585841c2f65510bf9b37f4",
+    "originalCount": 258505,
+    "capacity": 168000,
+    "beforeBytes": 3619114,
+    "afterBytes": 2352048,
+    "decodedPrefixEqual": true,
+    "arrays": {
+      "pos": "257372c10e5b108e97819996fcc3ae492f5c866b868085d9e23490e3a1d23865",
+      "nrm": "a1beef035a733a7544b845b481f507269cf6ae9726dd0a0573c0aaa44598faf9",
+      "sig": "957667a5fc993c232da8e2870b400c0de0b46767b4cd9f0d07366138bd3933b1",
+      "rgb": "211d07078798f902e7365a643cff7835bbb21dd541210e4871d7448e3526e3b6",
+      "part": "ce2cc188c577a7ab2d3966ddb1eb2aa2a53722d6f2cf0fb1a33b2441e17445b1"
+    },
+    "credit": {
+      "title": "Water bottle",
+      "author": "danny_p3d",
+      "url": "https://sketchfab.com/3d-models/water-bottle-42827e2ce39145eda296e6d6524f4c3d",
+      "license": "CC BY 4.0",
+      "inheritedFrom": "tools/ro-sources.mjs, CREDITS.md, and the toy's in-app credit",
+      "originalLicenseCheck": "September 29, 2026, as recorded by the original bake tool",
+      "transformation": "Exact prefix copy made by Ryan with Codex (GPT-6); same asset license"
+    }
+  },
+  {
+    "id": "sunglasses",
+    "budget": 90000,
+    "source": "assets/toys/sunglasses/sunglasses.splats",
+    "file": "assets/toys/sunglasses/sunglasses-opening.splats",
+    "sourceSha256": "bd1b0a773dbf9011712f4197f433380a54ab18e88b199e351e93446722c3b678",
+    "sha256": "90bc0d8bba03e7e4911fdd57b64554a2619aa736270cb3c3fc131bf306d84f14",
+    "originalCount": 275833,
+    "capacity": 70200,
+    "beforeBytes": 3861706,
+    "afterBytes": 982848,
+    "decodedPrefixEqual": true,
+    "arrays": {
+      "pos": "56ccdc19965d9f41f29777e0bfd76664a4469cd7248f4479113b2aa3e1ea80ea",
+      "nrm": "2bb6e19a38b38f84c60aa83bd11cdb4e537a77c33cce442ef88f32c2f37280e9",
+      "sig": "2c89b3bd88e107003fa19037b5394446259c6560ca75dcc5d8ab7a5e0c42e251",
+      "rgb": "83d89cf7f435d26a938bbf34a7e2f0325ca4fb909cc5b9ebdd2bc97d97ad6d74",
+      "part": "c1691f93bb83e5cf15d4371b772996830f839c94c99590d0d61aabf9a1031301"
+    },
+    "credit": {
+      "title": "Round Spectacles",
+      "author": "Sean Buckley",
+      "url": "https://polyhaven.com/a/round_spectacles",
+      "license": "CC0 1.0",
+      "inheritedFrom": "tools/ro-sources.mjs, CREDITS.md, and the toy's in-app credit",
+      "originalLicenseCheck": "September 29, 2026, as recorded by the original bake tool",
+      "transformation": "Exact prefix copy made by Ryan with Codex (GPT-6); same asset license"
+    }
+  },
+  {
+    "id": "sunglasses",
+    "budget": 210000,
+    "source": "assets/toys/sunglasses/sunglasses.splats",
+    "file": "assets/toys/sunglasses/sunglasses-opening-mid.splats",
+    "sourceSha256": "bd1b0a773dbf9011712f4197f433380a54ab18e88b199e351e93446722c3b678",
+    "sha256": "6dd8a0b297400129232503ce6774af16b726f909685a02cbf22f4bd7a77ee9cf",
+    "originalCount": 275833,
+    "capacity": 163800,
+    "beforeBytes": 3861706,
+    "afterBytes": 2293248,
+    "decodedPrefixEqual": true,
+    "arrays": {
+      "pos": "cfa0775b534b7c3aa8605096b45ec12ddf1020ba0d007a46b19edf08984e4084",
+      "nrm": "c3dc63dc3868075c503ed1d35756e967890900c0d6aed95eedffadbf9e95fb92",
+      "sig": "a8fc58baa34c1bb0bad20cd607c25830cf96f5544105c2c8fcc01fe9355022eb",
+      "rgb": "ac76cb607f52347bc9140c50ac7fa302f9b07fa7fcda799c9ca9b1007f0f101a",
+      "part": "430a14a90131f160b6ac99fee39c13393fb5bef2edbc4c444316b590675d61a7"
+    },
+    "credit": {
+      "title": "Round Spectacles",
+      "author": "Sean Buckley",
+      "url": "https://polyhaven.com/a/round_spectacles",
+      "license": "CC0 1.0",
+      "inheritedFrom": "tools/ro-sources.mjs, CREDITS.md, and the toy's in-app credit",
+      "originalLicenseCheck": "September 29, 2026, as recorded by the original bake tool",
+      "transformation": "Exact prefix copy made by Ryan with Codex (GPT-6); same asset license"
+    }
+  },
+  {
+    "id": "baseball-cap",
+    "budget": 90000,
+    "source": "assets/toys/baseball-cap/baseball-cap.splats",
+    "file": "assets/toys/baseball-cap/baseball-cap-opening.splats",
+    "sourceSha256": "837182e078cb1d812dc03a183da1c2bffbb0dddd381d15efd63260948885cb7d",
+    "sha256": "b5cdc98efc147a7482d74f84863e7deb2e1ec77f8a5784f34b6c22d22607371c",
+    "originalCount": 275850,
+    "capacity": 70200,
+    "beforeBytes": 3861944,
+    "afterBytes": 982848,
+    "decodedPrefixEqual": true,
+    "arrays": {
+      "pos": "2649b5f5789e00c591e7b25962bd6e1c5baef09e0a0be063947762cc1970114d",
+      "nrm": "40cc0658a04e232341c82e9a7e62f83cb4d406044e2db652cf2c04ffd12da2f4",
+      "sig": "75becfa34fccc2e245ccc2a528f5be0d41d9b8d795d77d5a282d4f309a8a424b",
+      "rgb": "f3e757002a9671d829544cfc23b8bfd4756c421354478e755ba1682022ba6474",
+      "part": "bf7cf12fa3e746c6b3df247e0b9491361b18c8c3a1e62e9e90f06b980d4aaa60"
+    },
+    "credit": {
+      "title": "Baseball Cap",
+      "author": "Scott VanArsdale",
+      "url": "https://sketchfab.com/3d-models/baseball-cap-1c1d34d73fd94e6b9e8f82b1eb7194a0",
+      "license": "CC BY 4.0",
+      "inheritedFrom": "tools/ro-sources.mjs, CREDITS.md, and the toy's in-app credit",
+      "originalLicenseCheck": "September 29, 2026, as recorded by the original bake tool",
+      "transformation": "Exact prefix copy made by Ryan with Codex (GPT-6); same asset license"
+    }
+  },
+  {
+    "id": "baseball-cap",
+    "budget": 210000,
+    "source": "assets/toys/baseball-cap/baseball-cap.splats",
+    "file": "assets/toys/baseball-cap/baseball-cap-opening-mid.splats",
+    "sourceSha256": "837182e078cb1d812dc03a183da1c2bffbb0dddd381d15efd63260948885cb7d",
+    "sha256": "1eeda1fa8196c8607b60b3b867b7e4402606744bcbff2a5c16710dd9ca4167a5",
+    "originalCount": 275850,
+    "capacity": 163800,
+    "beforeBytes": 3861944,
+    "afterBytes": 2293248,
+    "decodedPrefixEqual": true,
+    "arrays": {
+      "pos": "638779e8f172df82ee461d57133356296c4c18a9f407abee42b3f4122c753e04",
+      "nrm": "97d6375f39e013e272f9d9514c13515a0029c18fcc87b14c3c57549e59f78b3e",
+      "sig": "58686de13689f171a27ee6ab99307075b031bb13a978a0a76283384f17d50522",
+      "rgb": "1b87b69dca31a834b1918587263a5b064c5d8bd453e387ef257bd6725588a5d0",
+      "part": "3deb627bfed50840808f37e46e4eeee5c8b40158280083962005d8b15526fe6c"
+    },
+    "credit": {
+      "title": "Baseball Cap",
+      "author": "Scott VanArsdale",
+      "url": "https://sketchfab.com/3d-models/baseball-cap-1c1d34d73fd94e6b9e8f82b1eb7194a0",
+      "license": "CC BY 4.0",
+      "inheritedFrom": "tools/ro-sources.mjs, CREDITS.md, and the toy's in-app credit",
+      "originalLicenseCheck": "September 29, 2026, as recorded by the original bake tool",
+      "transformation": "Exact prefix copy made by Ryan with Codex (GPT-6); same asset license"
+    }
+  },
+  {
+    "id": "fountain-pen",
+    "budget": 90000,
+    "source": "assets/toys/fountain-pen/fountain-pen.splats",
+    "file": "assets/toys/fountain-pen/fountain-pen-opening.splats",
+    "sourceSha256": "4261c59d8354b08af22ee9ed2d717f46f284facbfe74ad8ad72b87ed59184bfe",
+    "sha256": "a89f2a1dfd71af459844dce9ae0f16c43055417885a37c6016694190c9d503ba",
+    "originalCount": 275830,
+    "capacity": 67500,
+    "beforeBytes": 3861664,
+    "afterBytes": 945048,
+    "decodedPrefixEqual": true,
+    "arrays": {
+      "pos": "e46566a75024757ba0bd32e14e85031332d17c40fe0557e3c4aea6d5b9619145",
+      "nrm": "df62fa259afb37a1f586f3b61bdc1048cc2dc203785d44744daf49bc07c92b2d",
+      "sig": "1efa7f3b0529c9ff5f74e9a0a89c68166b3806c4a730b9630098608e54814500",
+      "rgb": "e9f1ed8c35268d64c74c718d7d3d0cc4012cca4192d368973309f7aed18817e7",
+      "part": "1b5c85dd0b5ded49dbafc8138cbef1bd3f163ef0824ca75607ad76de491301b9"
+    },
+    "credit": {
+      "title": "Fountain pen in translucent green",
+      "author": "chemicalX",
+      "url": "https://sketchfab.com/3d-models/af3606f31c4343859d887049a1908fb0",
+      "license": "CC BY 4.0",
+      "inheritedFrom": "tools/ro-sources.mjs, CREDITS.md, and the toy's in-app credit",
+      "originalLicenseCheck": "September 29, 2026, as recorded by the original bake tool",
+      "transformation": "Exact prefix copy made by Ryan with Codex (GPT-6); same asset license"
+    }
+  },
+  {
+    "id": "fountain-pen",
+    "budget": 210000,
+    "source": "assets/toys/fountain-pen/fountain-pen.splats",
+    "file": "assets/toys/fountain-pen/fountain-pen-opening-mid.splats",
+    "sourceSha256": "4261c59d8354b08af22ee9ed2d717f46f284facbfe74ad8ad72b87ed59184bfe",
+    "sha256": "954978ece59bbbaf40e83bfa22d4c0d1abc5869057247d83cc67f33a51285107",
+    "originalCount": 275830,
+    "capacity": 157500,
+    "beforeBytes": 3861664,
+    "afterBytes": 2205048,
+    "decodedPrefixEqual": true,
+    "arrays": {
+      "pos": "5a73a7ceef5e114964560370c72ad67f9569f9c0c747bf77c2997171ff7c4be8",
+      "nrm": "bed7438e5f966ff48e6968df08da60155e15ea1f987b6ca0b35051d2d417713a",
+      "sig": "6dd06ee191631dd65d3a3b35fc3f86cd1caaac4792af1f4b4c1adea619d014d3",
+      "rgb": "d2a4861671faa2868c6ec152c671e18bae5b4fabb7ec89e23969ce47dceb65a3",
+      "part": "fb4219af84f2c1fc6aca3b21532402209519148ce94f89612c477e25722725d5"
+    },
+    "credit": {
+      "title": "Fountain pen in translucent green",
+      "author": "chemicalX",
+      "url": "https://sketchfab.com/3d-models/af3606f31c4343859d887049a1908fb0",
+      "license": "CC BY 4.0",
+      "inheritedFrom": "tools/ro-sources.mjs, CREDITS.md, and the toy's in-app credit",
+      "originalLicenseCheck": "September 29, 2026, as recorded by the original bake tool",
+      "transformation": "Exact prefix copy made by Ryan with Codex (GPT-6); same asset license"
+    }
+  },
+  {
+    "id": "soda-can",
+    "budget": 90000,
+    "source": "assets/toys/soda-can/soda-can.splats",
+    "file": "assets/toys/soda-can/soda-can-opening.splats",
+    "sourceSha256": "6c0456cc8fb615061e9e20d407138a3676530f9b9d33b8b9b6b7cdd9d3b777b6",
+    "sha256": "09d2015f033229fe738089dd03d0c0fd186d96ae6c1deb08efe330b4dc28d65f",
+    "originalCount": 275920,
+    "capacity": 62999,
+    "beforeBytes": 3862924,
+    "afterBytes": 882034,
+    "decodedPrefixEqual": true,
+    "arrays": {
+      "pos": "b6cdb0eb95dd07d6c8f2bcc75cb0694c2c8cba3310096fb0442f5ccb6811f242",
+      "nrm": "7fed1ac9282837b6b54fb1d3d0ba824c36b4f8225ee181e0f53a4c82dbaaa118",
+      "sig": "af6fb271ed192c1721a441fd146e5e474fa57cb852d1927fc4f9d868a35f122f",
+      "rgb": "9c82391c07faf03e499fc8ea7d42d625df015164f934ee3432b7f5537a85baae",
+      "part": "47b36b6717267097143c5463a5671b69df9b92a1f6384bb81e7e02b2c52606a5"
+    },
+    "credit": {
+      "title": "Soda Can",
+      "author": "RoutineStudio",
+      "url": "https://sketchfab.com/3d-models/soda-can-f3560f1b73a1498d9313a0f10fd11ef6",
+      "license": "CC BY 4.0",
+      "inheritedFrom": "tools/ro-sources.mjs, CREDITS.md, and the toy's in-app credit",
+      "originalLicenseCheck": "September 29, 2026, as recorded by the original bake tool",
+      "transformation": "Exact prefix copy made by Ryan with Codex (GPT-6); same asset license"
+    }
+  },
+  {
+    "id": "soda-can",
+    "budget": 210000,
+    "source": "assets/toys/soda-can/soda-can.splats",
+    "file": "assets/toys/soda-can/soda-can-opening-mid.splats",
+    "sourceSha256": "6c0456cc8fb615061e9e20d407138a3676530f9b9d33b8b9b6b7cdd9d3b777b6",
+    "sha256": "3a3302beab9e2f9a05a9340fe7b35ab4a0e29d955619c9244398a9331b35cb18",
+    "originalCount": 275920,
+    "capacity": 147000,
+    "beforeBytes": 3862924,
+    "afterBytes": 2058048,
+    "decodedPrefixEqual": true,
+    "arrays": {
+      "pos": "38405e1353a500a0027d8f831ac0ea462e8238a3c9a20538dcb32879f78e6a0a",
+      "nrm": "637690aa007619178ecab0eac530808ccf4e65e7cf82576be20c0ea76fe97e31",
+      "sig": "ab46379d2c47e85f78844d0f82100efeaba47814af1ad6113feadb2d82c464df",
+      "rgb": "b8d68c7f95ebd203b010a38cee536a15e717a69e251a0fc6314fbe053805aabc",
+      "part": "06c256d2e1e40c2a50e571f340a95f49ef1ca5620e8c60ed16fe79f621e0ee4e"
+    },
+    "credit": {
+      "title": "Soda Can",
+      "author": "RoutineStudio",
+      "url": "https://sketchfab.com/3d-models/soda-can-f3560f1b73a1498d9313a0f10fd11ef6",
+      "license": "CC BY 4.0",
+      "inheritedFrom": "tools/ro-sources.mjs, CREDITS.md, and the toy's in-app credit",
+      "originalLicenseCheck": "September 29, 2026, as recorded by the original bake tool",
+      "transformation": "Exact prefix copy made by Ryan with Codex (GPT-6); same asset license"
+    }
+  }
+]
