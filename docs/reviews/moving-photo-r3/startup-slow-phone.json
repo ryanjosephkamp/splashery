@@ -1,0 +1,5973 @@
+{
+  "environment": "Chromium, software graphics; local HTTP; UI selection to completed Sharp preview frame; cold worker per upload",
+  "snapshotHash": "94a18adf3efac9ec6f84154b01ef2783701e28f96ecc278568a12a499a181413",
+  "graphicsThreads": "driver default",
+  "results": [
+    {
+      "profile": "phone",
+      "cpuRate": 4,
+      "id": "sample",
+      "upload": false,
+      "firstResultMs": 718.2999999970198,
+      "timestampedPreview": true,
+      "completedAtMs": 11652,
+      "depthAnswersAtCompletion": 96,
+      "preparation": [],
+      "resources": [
+        {
+          "name": "/assets/toys/moving-photo-3d/bunny-sheet-1.jpg",
+          "startMs": 114.89999999850988,
+          "durationMs": 43.100000001490116
+        },
+        {
+          "name": "/assets/toys/moving-photo-3d/bunny.depth",
+          "startMs": 115,
+          "durationMs": 89.09999999403954
+        },
+        {
+          "name": "/src/live/relief-mesh.js",
+          "startMs": 481.09999999403954,
+          "durationMs": 9.5
+        },
+        {
+          "name": "/assets/toys/moving-photo-3d/bunny-sheet-2.jpg",
+          "startMs": 725.5999999940395,
+          "durationMs": 3.8000000044703484
+        },
+        {
+          "name": "/assets/toys/moving-photo-3d/bunny-sheet-3.jpg",
+          "startMs": 726,
+          "durationMs": 3.5999999940395355
+        },
+        {
+          "name": "/assets/toys/moving-photo-3d/bunny-sheet-4.jpg",
+          "startMs": 726.2999999970198,
+          "durationMs": 9.399999998509884
+        },
+        {
+          "name": "/assets/toys/moving-photo-3d/bunny-sheet-5.jpg",
+          "startMs": 726.3999999985099,
+          "durationMs": 26.399999998509884
+        },
+        {
+          "name": "/assets/toys/moving-photo-3d/bunny-sheet-6.jpg",
+          "startMs": 726.3999999985099,
+          "durationMs": 26.600000001490116
+        },
+        {
+          "name": "/assets/toys/moving-photo-3d/bunny-sheet-7.jpg",
+          "startMs": 726.6999999955297,
+          "durationMs": 25.899999998509884
+        },
+        {
+          "name": "/assets/toys/moving-photo-3d/thumb.webp",
+          "startMs": 10804.69999999553,
+          "durationMs": 120.10000000149012
+        }
+      ],
+      "under2s": true,
+      "errors": []
+    },
+    {
+      "profile": "phone",
+      "cpuRate": 4,
+      "id": "sample",
+      "upload": true,
+      "firstResultMs": 2652.6999999955297,
+      "timestampedPreview": true,
+      "completedAtMs": 2806.6999999955297,
+      "depthAnswersAtCompletion": 1,
+      "preparation": [
+        {
+          "type": "worker",
+          "ms": 138.5
+        },
+        {
+          "type": "send-init",
+          "ms": 140.59999999403954
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model (27 MB, once)…",
+          "ms": 200.5
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 0%",
+          "ms": 214.39999999850988
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 0%",
+          "ms": 215.89999999850988
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 1%",
+          "ms": 216.79999999701977
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 1%",
+          "ms": 218.29999999701977
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 3%",
+          "ms": 223.89999999850988
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 4%",
+          "ms": 224
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 8%",
+          "ms": 228.29999999701977
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 8%",
+          "ms": 228.39999999850988
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 8%",
+          "ms": 242.09999999403954
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 9%",
+          "ms": 243.89999999850988
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 9%",
+          "ms": 244.5
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 10%",
+          "ms": 244.59999999403954
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 11%",
+          "ms": 244.59999999403954
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 12%",
+          "ms": 244.59999999403954
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 13%",
+          "ms": 244.59999999403954
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 14%",
+          "ms": 244.59999999403954
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 15%",
+          "ms": 244.59999999403954
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 15%",
+          "ms": 244.59999999403954
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 16%",
+          "ms": 244.69999999552965
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 16%",
+          "ms": 638.6999999955297
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 17%",
+          "ms": 638.6999999955297
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 18%",
+          "ms": 643.1999999955297
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 19%",
+          "ms": 644.5999999940395
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 20%",
+          "ms": 644.6999999955297
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 20%",
+          "ms": 644.6999999955297
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 21%",
+          "ms": 644.6999999955297
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 22%",
+          "ms": 645.5
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 23%",
+          "ms": 645.5
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 24%",
+          "ms": 646.1999999955297
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 26%",
+          "ms": 646.2999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 27%",
+          "ms": 646.2999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 31%",
+          "ms": 646.2999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 35%",
+          "ms": 646.2999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 38%",
+          "ms": 646.2999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 43%",
+          "ms": 646.2999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 44%",
+          "ms": 646.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 46%",
+          "ms": 646.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 50%",
+          "ms": 646.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 54%",
+          "ms": 646.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 58%",
+          "ms": 646.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 60%",
+          "ms": 646.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 61%",
+          "ms": 646.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 62%",
+          "ms": 646.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 62%",
+          "ms": 646.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 62%",
+          "ms": 646.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 63%",
+          "ms": 646.5
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 63%",
+          "ms": 646.5999999940395
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 64%",
+          "ms": 646.5999999940395
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 65%",
+          "ms": 646.5999999940395
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 66%",
+          "ms": 646.5999999940395
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 68%",
+          "ms": 646.5999999940395
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 69%",
+          "ms": 646.5999999940395
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 69%",
+          "ms": 646.6999999955297
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 69%",
+          "ms": 646.6999999955297
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 70%",
+          "ms": 646.6999999955297
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 70%",
+          "ms": 646.6999999955297
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 71%",
+          "ms": 646.6999999955297
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 72%",
+          "ms": 646.6999999955297
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 72%",
+          "ms": 646.6999999955297
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 73%",
+          "ms": 646.6999999955297
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 75%",
+          "ms": 646.6999999955297
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 75%",
+          "ms": 646.6999999955297
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 75%",
+          "ms": 646.6999999955297
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 76%",
+          "ms": 646.6999999955297
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 76%",
+          "ms": 646.7999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 76%",
+          "ms": 646.7999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 76%",
+          "ms": 646.8999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 77%",
+          "ms": 646.8999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 77%",
+          "ms": 646.8999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 77%",
+          "ms": 646.8999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 77%",
+          "ms": 649.6999999955297
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 78%",
+          "ms": 649.7999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 78%",
+          "ms": 649.7999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 78%",
+          "ms": 649.7999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 79%",
+          "ms": 649.7999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 79%",
+          "ms": 649.7999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 81%",
+          "ms": 649.8999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 81%",
+          "ms": 649.8999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 82%",
+          "ms": 650.7999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 82%",
+          "ms": 650.8999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 83%",
+          "ms": 650.8999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 83%",
+          "ms": 650.8999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 83%",
+          "ms": 650.8999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 84%",
+          "ms": 650.8999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 84%",
+          "ms": 651
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 85%",
+          "ms": 651.7999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 86%",
+          "ms": 651.7999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 87%",
+          "ms": 651.7999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 87%",
+          "ms": 651.8999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 87%",
+          "ms": 651.8999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 89%",
+          "ms": 651.8999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 90%",
+          "ms": 651.8999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 91%",
+          "ms": 651.8999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 91%",
+          "ms": 652
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 91%",
+          "ms": 652
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 91%",
+          "ms": 652
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 92%",
+          "ms": 652
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 92%",
+          "ms": 652
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 92%",
+          "ms": 652
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 94%",
+          "ms": 652
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 95%",
+          "ms": 652
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 97%",
+          "ms": 652
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 97%",
+          "ms": 653.0999999940395
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 97%",
+          "ms": 653.0999999940395
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 98%",
+          "ms": 653.1999999955297
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 98%",
+          "ms": 653.2999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 99%",
+          "ms": 653.2999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 99%",
+          "ms": 653.2999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 99%",
+          "ms": 653.2999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 100%",
+          "ms": 653.2999999970198
+        },
+        {
+          "type": "status",
+          "text": "Starting the depth model…",
+          "ms": 653.2999999970198
+        },
+        {
+          "type": "send-frame",
+          "ms": 714.5999999940395
+        },
+        {
+          "type": "ready",
+          "ms": 1921.6999999955297
+        },
+        {
+          "type": "status",
+          "text": "",
+          "ms": 1927.3999999985099
+        },
+        {
+          "type": "depth",
+          "inferenceMs": 435,
+          "ms": 2364
+        }
+      ],
+      "resources": [],
+      "under2s": false,
+      "errors": []
+    },
+    {
+      "profile": "phone",
+      "cpuRate": 4,
+      "id": "horse",
+      "upload": false,
+      "firstResultMs": 380.3999999985099,
+      "timestampedPreview": true,
+      "completedAtMs": 2368,
+      "depthAnswersAtCompletion": 15,
+      "preparation": [],
+      "resources": [
+        {
+          "name": "/assets/toys/moving-photo-3d/horse-sheet-1.jpg",
+          "startMs": 10.200000002980232,
+          "durationMs": 47.29999999701977
+        },
+        {
+          "name": "/assets/toys/moving-photo-3d/horse.depth",
+          "startMs": 10.399999998509884,
+          "durationMs": 44.100000001490116
+        }
+      ],
+      "under2s": true,
+      "errors": []
+    },
+    {
+      "profile": "phone",
+      "cpuRate": 4,
+      "id": "horse",
+      "upload": true,
+      "firstResultMs": 4456.70000000298,
+      "timestampedPreview": true,
+      "completedAtMs": 5476.80000000447,
+      "depthAnswersAtCompletion": 1,
+      "preparation": [
+        {
+          "type": "worker",
+          "ms": 144.30000000447035
+        },
+        {
+          "type": "send-init",
+          "ms": 150.30000000447035
+        },
+        {
+          "type": "send-frame",
+          "ms": 657.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model (27 MB, once)…",
+          "ms": 670.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 4%",
+          "ms": 730.3000000044703
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 8%",
+          "ms": 735.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 12%",
+          "ms": 735.8000000044703
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 15%",
+          "ms": 740.6000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 23%",
+          "ms": 758.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 31%",
+          "ms": 785.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 38%",
+          "ms": 786.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 45%",
+          "ms": 786.5
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 46%",
+          "ms": 786.5
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 53%",
+          "ms": 786.6000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 54%",
+          "ms": 787.3000000044703
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 54%",
+          "ms": 787.3000000044703
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 55%",
+          "ms": 787.3000000044703
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 57%",
+          "ms": 787.3000000044703
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 58%",
+          "ms": 787.3000000044703
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 61%",
+          "ms": 787.3000000044703
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 62%",
+          "ms": 787.3000000044703
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 63%",
+          "ms": 787.3000000044703
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 63%",
+          "ms": 788.7000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 63%",
+          "ms": 792.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 64%",
+          "ms": 792.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 64%",
+          "ms": 792.3000000044703
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 64%",
+          "ms": 792.3000000044703
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 65%",
+          "ms": 800.6000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 65%",
+          "ms": 801.3000000044703
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 65%",
+          "ms": 801.3000000044703
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 66%",
+          "ms": 801.3000000044703
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 66%",
+          "ms": 801.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 66%",
+          "ms": 801.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 67%",
+          "ms": 803
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 68%",
+          "ms": 805.6000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 68%",
+          "ms": 805.7000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 68%",
+          "ms": 805.7000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 68%",
+          "ms": 810.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 69%",
+          "ms": 810.5
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 69%",
+          "ms": 810.6000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 70%",
+          "ms": 812.6000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 70%",
+          "ms": 813.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 71%",
+          "ms": 813.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 71%",
+          "ms": 814
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 71%",
+          "ms": 815.3000000044703
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 72%",
+          "ms": 817.8999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 73%",
+          "ms": 819.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 73%",
+          "ms": 821.8999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 74%",
+          "ms": 822
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 75%",
+          "ms": 822
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 75%",
+          "ms": 831.6000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 75%",
+          "ms": 832.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 75%",
+          "ms": 832.3000000044703
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 76%",
+          "ms": 833.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 76%",
+          "ms": 834.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 76%",
+          "ms": 834.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 77%",
+          "ms": 834.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 77%",
+          "ms": 834.8999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 77%",
+          "ms": 834.8999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 78%",
+          "ms": 836.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 78%",
+          "ms": 837.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 78%",
+          "ms": 837.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 79%",
+          "ms": 837.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 79%",
+          "ms": 837.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 79%",
+          "ms": 840.8999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 80%",
+          "ms": 840.8999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 80%",
+          "ms": 841
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 81%",
+          "ms": 841.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 81%",
+          "ms": 845.8000000044703
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 82%",
+          "ms": 846.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 82%",
+          "ms": 846.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 82%",
+          "ms": 846.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 85%",
+          "ms": 846.6000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 89%",
+          "ms": 846.6000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 89%",
+          "ms": 848.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 89%",
+          "ms": 848.3000000044703
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 89%",
+          "ms": 848.3000000044703
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 90%",
+          "ms": 848.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 90%",
+          "ms": 849.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 92%",
+          "ms": 849.3000000044703
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 93%",
+          "ms": 853.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 94%",
+          "ms": 853.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 94%",
+          "ms": 853.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 99%",
+          "ms": 854.8999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 99%",
+          "ms": 855.3000000044703
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 100%",
+          "ms": 869.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Starting the depth model…",
+          "ms": 869.1000000014901
+        },
+        {
+          "type": "ready",
+          "ms": 2825.10000000149
+        },
+        {
+          "type": "status",
+          "text": "",
+          "ms": 2825.39999999851
+        },
+        {
+          "type": "depth",
+          "inferenceMs": 488,
+          "ms": 3396
+        },
+        {
+          "type": "send-frame",
+          "ms": 5439.39999999851
+        }
+      ],
+      "resources": [],
+      "under2s": false,
+      "errors": []
+    },
+    {
+      "profile": "phone",
+      "cpuRate": 4,
+      "id": "dragon",
+      "upload": false,
+      "firstResultMs": 1180,
+      "timestampedPreview": true,
+      "completedAtMs": 12244.79999999702,
+      "depthAnswersAtCompletion": 96,
+      "preparation": [],
+      "resources": [
+        {
+          "name": "/assets/toys/moving-photo-3d/sintel-sheet-1.jpg",
+          "startMs": 79.10000000149012,
+          "durationMs": 15.399999998509884
+        },
+        {
+          "name": "/assets/toys/moving-photo-3d/sintel.depth",
+          "startMs": 105.39999999850988,
+          "durationMs": 23.5
+        },
+        {
+          "name": "/assets/toys/moving-photo-3d/sintel-sheet-2.jpg",
+          "startMs": 1184.3999999985099,
+          "durationMs": 55.899999998509884
+        },
+        {
+          "name": "/assets/toys/moving-photo-3d/sintel-sheet-3.jpg",
+          "startMs": 1184.7000000029802,
+          "durationMs": 57
+        },
+        {
+          "name": "/assets/toys/moving-photo-3d/sintel-sheet-4.jpg",
+          "startMs": 1184.7000000029802,
+          "durationMs": 57.399999998509884
+        },
+        {
+          "name": "/assets/toys/moving-photo-3d/sintel-sheet-5.jpg",
+          "startMs": 1185,
+          "durationMs": 55.79999999701977
+        },
+        {
+          "name": "/assets/toys/moving-photo-3d/sintel.mp3",
+          "startMs": 9978.79999999702,
+          "durationMs": 37.600000001490116
+        }
+      ],
+      "under2s": true,
+      "errors": []
+    },
+    {
+      "profile": "phone",
+      "cpuRate": 4,
+      "id": "dragon",
+      "upload": true,
+      "firstResultMs": 4258.20000000298,
+      "timestampedPreview": true,
+      "completedAtMs": 4384.89999999851,
+      "depthAnswersAtCompletion": 1,
+      "preparation": [
+        {
+          "type": "worker",
+          "ms": 290.79999999701977
+        },
+        {
+          "type": "send-init",
+          "ms": 290.79999999701977
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model (27 MB, once)…",
+          "ms": 553.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 1%",
+          "ms": 1383.7000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 2%",
+          "ms": 1384.7999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 3%",
+          "ms": 1390.5
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 7%",
+          "ms": 1390.6000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 8%",
+          "ms": 1391.5
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 8%",
+          "ms": 1391.6000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 9%",
+          "ms": 1391.6000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 11%",
+          "ms": 1391.7000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 11%",
+          "ms": 1392.7999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 12%",
+          "ms": 1392.7999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 13%",
+          "ms": 1392.7999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 13%",
+          "ms": 1392.8999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 13%",
+          "ms": 1393.8999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 13%",
+          "ms": 1393.8999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 14%",
+          "ms": 1393.8999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 14%",
+          "ms": 1393.8999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 15%",
+          "ms": 1393.8999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 15%",
+          "ms": 1394
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 15%",
+          "ms": 1394
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 15%",
+          "ms": 1394
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 16%",
+          "ms": 1394
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 16%",
+          "ms": 1394
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 17%",
+          "ms": 1394
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 17%",
+          "ms": 1394
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 17%",
+          "ms": 1394
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 18%",
+          "ms": 1394
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 18%",
+          "ms": 1394
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 18%",
+          "ms": 1394
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 18%",
+          "ms": 1394
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 19%",
+          "ms": 1394
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 19%",
+          "ms": 1394.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 19%",
+          "ms": 1395
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 20%",
+          "ms": 1395
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 20%",
+          "ms": 1396.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 20%",
+          "ms": 1396.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 21%",
+          "ms": 1396.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 21%",
+          "ms": 1396.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 21%",
+          "ms": 1396.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 21%",
+          "ms": 1396.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 22%",
+          "ms": 1396.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 22%",
+          "ms": 1396.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 23%",
+          "ms": 1396.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 23%",
+          "ms": 1396.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 23%",
+          "ms": 1396.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 24%",
+          "ms": 1396.2999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 24%",
+          "ms": 1396.2999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 25%",
+          "ms": 1396.2999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 25%",
+          "ms": 1396.2999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 25%",
+          "ms": 1396.2999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 25%",
+          "ms": 1396.2999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 26%",
+          "ms": 1397.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 27%",
+          "ms": 1397.6000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 29%",
+          "ms": 1397.7000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 29%",
+          "ms": 1397.7000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 30%",
+          "ms": 1397.7000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 30%",
+          "ms": 1397.7000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 31%",
+          "ms": 1397.7000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 35%",
+          "ms": 1397.7000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 36%",
+          "ms": 1397.7000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 36%",
+          "ms": 1397.7000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 37%",
+          "ms": 1398.5
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 37%",
+          "ms": 1398.6000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 38%",
+          "ms": 1399.6000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 39%",
+          "ms": 1399.6000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 40%",
+          "ms": 1399.6000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 40%",
+          "ms": 1399.7000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 41%",
+          "ms": 1412.5
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 41%",
+          "ms": 1413
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 43%",
+          "ms": 1413.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 43%",
+          "ms": 1422.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 43%",
+          "ms": 1422.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 44%",
+          "ms": 1422.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 44%",
+          "ms": 1422.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 44%",
+          "ms": 1422.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 45%",
+          "ms": 1423.2999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 45%",
+          "ms": 1423.2999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 46%",
+          "ms": 1423.2999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 46%",
+          "ms": 1423.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 47%",
+          "ms": 1423.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 47%",
+          "ms": 1423.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 47%",
+          "ms": 1423.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 48%",
+          "ms": 1423.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 48%",
+          "ms": 1423.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 49%",
+          "ms": 1432.7000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 49%",
+          "ms": 1432.7999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 49%",
+          "ms": 1432.8999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 49%",
+          "ms": 1441.7000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 50%",
+          "ms": 1442.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 50%",
+          "ms": 1442.5
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 50%",
+          "ms": 1445.7999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 51%",
+          "ms": 1448.8999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 51%",
+          "ms": 1449
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 52%",
+          "ms": 1461.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 52%",
+          "ms": 1461.2999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 52%",
+          "ms": 1461.2999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 53%",
+          "ms": 1461.2999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 53%",
+          "ms": 1491.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 53%",
+          "ms": 1492
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 54%",
+          "ms": 1502.5
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 54%",
+          "ms": 1503.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 54%",
+          "ms": 1503.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 54%",
+          "ms": 1503.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 55%",
+          "ms": 1503.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 55%",
+          "ms": 1503.5
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 55%",
+          "ms": 1503.5
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 56%",
+          "ms": 1537.7000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 56%",
+          "ms": 1537.8999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 56%",
+          "ms": 1537.8999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 56%",
+          "ms": 1538.6000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 56%",
+          "ms": 1552.6000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 57%",
+          "ms": 1557
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 57%",
+          "ms": 1557.5
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 57%",
+          "ms": 1557.5
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 58%",
+          "ms": 1557.5
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 58%",
+          "ms": 1557.5
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 58%",
+          "ms": 1557.5
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 59%",
+          "ms": 1557.6000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 59%",
+          "ms": 1558.7000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 60%",
+          "ms": 1558.7999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 60%",
+          "ms": 1558.7999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 60%",
+          "ms": 1583.8999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 60%",
+          "ms": 1598.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 61%",
+          "ms": 1598.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 61%",
+          "ms": 1598.5
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 61%",
+          "ms": 1598.6000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 61%",
+          "ms": 1598.6000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 62%",
+          "ms": 1598.6000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 62%",
+          "ms": 1611.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 62%",
+          "ms": 1611.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 62%",
+          "ms": 1611.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 63%",
+          "ms": 1611.5
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 63%",
+          "ms": 1612.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 63%",
+          "ms": 1612.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 63%",
+          "ms": 1612.7000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 63%",
+          "ms": 1612.7000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 64%",
+          "ms": 1612.7000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 64%",
+          "ms": 1612.7999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 64%",
+          "ms": 1612.7999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 65%",
+          "ms": 1613
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 67%",
+          "ms": 1647.3999999985099
+        },
+        {
+          "type": "send-frame",
+          "ms": 1679.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 69%",
+          "ms": 1679.2999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 69%",
+          "ms": 1685.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 69%",
+          "ms": 1685.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 69%",
+          "ms": 1685.2999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 70%",
+          "ms": 1685.2999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 70%",
+          "ms": 1685.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 70%",
+          "ms": 1685.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 71%",
+          "ms": 1706.2999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 71%",
+          "ms": 1706.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 71%",
+          "ms": 1706.5
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 71%",
+          "ms": 1706.5
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 72%",
+          "ms": 1706.6000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 73%",
+          "ms": 1712.8999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 73%",
+          "ms": 1715.5
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 73%",
+          "ms": 1715.5
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 74%",
+          "ms": 1719.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 74%",
+          "ms": 1719.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 74%",
+          "ms": 1719.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 74%",
+          "ms": 1730.5
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 75%",
+          "ms": 1730.5
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 75%",
+          "ms": 1730.6000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 75%",
+          "ms": 1730.6000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 76%",
+          "ms": 1730.7000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 76%",
+          "ms": 1730.7000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 76%",
+          "ms": 1730.7999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 77%",
+          "ms": 1730.7999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 77%",
+          "ms": 1736.7999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 77%",
+          "ms": 1736.8999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 77%",
+          "ms": 1738.2999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 78%",
+          "ms": 1740.5
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 78%",
+          "ms": 1740.5
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 78%",
+          "ms": 1740.6000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 78%",
+          "ms": 1740.6000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 79%",
+          "ms": 1750.6000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 79%",
+          "ms": 1750.7000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 79%",
+          "ms": 1750.7000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 80%",
+          "ms": 1750.7000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 80%",
+          "ms": 1750.7999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 80%",
+          "ms": 1866.8999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 80%",
+          "ms": 1875.6000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 81%",
+          "ms": 1875.6000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 81%",
+          "ms": 1884.5
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 81%",
+          "ms": 1884.5
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 82%",
+          "ms": 1884.5
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 82%",
+          "ms": 1908
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 82%",
+          "ms": 1908
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 82%",
+          "ms": 1908
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 83%",
+          "ms": 1908
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 84%",
+          "ms": 1908.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 85%",
+          "ms": 1912
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 85%",
+          "ms": 1912
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 86%",
+          "ms": 1912.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 87%",
+          "ms": 1912.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 88%",
+          "ms": 1912.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 88%",
+          "ms": 1912.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 89%",
+          "ms": 1912.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 89%",
+          "ms": 1912.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 89%",
+          "ms": 1912.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 89%",
+          "ms": 1912.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 90%",
+          "ms": 1912.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 90%",
+          "ms": 1912.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 90%",
+          "ms": 1912.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 90%",
+          "ms": 1912.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 91%",
+          "ms": 1922.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 91%",
+          "ms": 1922.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 91%",
+          "ms": 1923.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 92%",
+          "ms": 1925.7000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 92%",
+          "ms": 1925.7999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 92%",
+          "ms": 1925.8999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 92%",
+          "ms": 1925.8999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 93%",
+          "ms": 1927.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 93%",
+          "ms": 1934.7999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 94%",
+          "ms": 1934.8999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 94%",
+          "ms": 1934.8999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 94%",
+          "ms": 1934.8999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 94%",
+          "ms": 1934.8999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 94%",
+          "ms": 1934.8999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 95%",
+          "ms": 1944.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 95%",
+          "ms": 1948.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 96%",
+          "ms": 1950.7999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 96%",
+          "ms": 1950.8999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 96%",
+          "ms": 1954.5
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 96%",
+          "ms": 1962.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 97%",
+          "ms": 1962.2999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 97%",
+          "ms": 1962.2999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 97%",
+          "ms": 1972.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 98%",
+          "ms": 1972.7000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 98%",
+          "ms": 1976.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 98%",
+          "ms": 1976.5
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 98%",
+          "ms": 1979.2999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 99%",
+          "ms": 1979.2999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 99%",
+          "ms": 1979.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 99%",
+          "ms": 1984.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 99%",
+          "ms": 2003.7999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 99%",
+          "ms": 2003.7999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 99%",
+          "ms": 2003.7999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 99%",
+          "ms": 2003.7999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 100%",
+          "ms": 2029.6000000014901
+        },
+        {
+          "type": "status",
+          "text": "Starting the depth model…",
+          "ms": 2030.2000000029802
+        },
+        {
+          "type": "ready",
+          "ms": 3465.7000000029802
+        },
+        {
+          "type": "status",
+          "text": "",
+          "ms": 3465.7999999970198
+        },
+        {
+          "type": "depth",
+          "inferenceMs": 351.70000000298023,
+          "ms": 3827.60000000149
+        }
+      ],
+      "resources": [],
+      "under2s": false,
+      "errors": []
+    },
+    {
+      "profile": "phone",
+      "cpuRate": 4,
+      "id": "bridge",
+      "upload": false,
+      "firstResultMs": 576.6000000014901,
+      "timestampedPreview": true,
+      "completedAtMs": 13379.70000000298,
+      "depthAnswersAtCompletion": 96,
+      "preparation": [],
+      "resources": [
+        {
+          "name": "/assets/toys/moving-photo-3d/tears-sheet-1.jpg",
+          "startMs": 11.400000005960464,
+          "durationMs": 34.79999999701977
+        },
+        {
+          "name": "/assets/toys/moving-photo-3d/tears.depth",
+          "startMs": 13.400000005960464,
+          "durationMs": 33.19999999552965
+        },
+        {
+          "name": "/assets/toys/moving-photo-3d/tears-sheet-2.jpg",
+          "startMs": 601.1000000014901,
+          "durationMs": 41.100000001490116
+        },
+        {
+          "name": "/assets/toys/moving-photo-3d/tears-sheet-3.jpg",
+          "startMs": 601.8000000044703,
+          "durationMs": 40.600000001490116
+        },
+        {
+          "name": "/assets/toys/moving-photo-3d/tears-sheet-4.jpg",
+          "startMs": 602,
+          "durationMs": 68.20000000298023
+        },
+        {
+          "name": "/assets/toys/moving-photo-3d/tears-sheet-5.jpg",
+          "startMs": 607.8000000044703,
+          "durationMs": 32.19999999552965
+        },
+        {
+          "name": "/assets/toys/moving-photo-3d/tears.mp3",
+          "startMs": 10293.30000000447,
+          "durationMs": 9.299999997019768
+        }
+      ],
+      "under2s": true,
+      "errors": []
+    },
+    {
+      "profile": "phone",
+      "cpuRate": 4,
+      "id": "bridge",
+      "upload": true,
+      "firstResultMs": 7793.70000000298,
+      "timestampedPreview": true,
+      "completedAtMs": 9420.5,
+      "depthAnswersAtCompletion": 1,
+      "preparation": [
+        {
+          "type": "worker",
+          "ms": 833.5
+        },
+        {
+          "type": "send-init",
+          "ms": 833.7000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model (27 MB, once)…",
+          "ms": 938.9000000059605
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 0%",
+          "ms": 1030.8000000044703
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 1%",
+          "ms": 1051.9000000059605
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 1%",
+          "ms": 1052
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 2%",
+          "ms": 1052.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 2%",
+          "ms": 1052.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 2%",
+          "ms": 1386
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 3%",
+          "ms": 1445.5
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 3%",
+          "ms": 1449.8000000044703
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 4%",
+          "ms": 1449.9000000059605
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 6%",
+          "ms": 1450.3000000044703
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 7%",
+          "ms": 1452.7000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 7%",
+          "ms": 1452.8000000044703
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 7%",
+          "ms": 1452.8000000044703
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 8%",
+          "ms": 1452.9000000059605
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 8%",
+          "ms": 1452.9000000059605
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 10%",
+          "ms": 1453.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 10%",
+          "ms": 1453.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 10%",
+          "ms": 1453.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 11%",
+          "ms": 1453.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 11%",
+          "ms": 1453.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 11%",
+          "ms": 1453.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 12%",
+          "ms": 1453.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 12%",
+          "ms": 1453.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 12%",
+          "ms": 1453.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 13%",
+          "ms": 1504
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 13%",
+          "ms": 1504.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 14%",
+          "ms": 1580
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 14%",
+          "ms": 1595.7000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 15%",
+          "ms": 1596.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 15%",
+          "ms": 1642.3000000044703
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 15%",
+          "ms": 1642.4000000059605
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 16%",
+          "ms": 1642.9000000059605
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 16%",
+          "ms": 1643
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 16%",
+          "ms": 2463.8000000044703
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 19%",
+          "ms": 2498.5
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 21%",
+          "ms": 2525.4000000059605
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 23%",
+          "ms": 2526.3000000044703
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 29%",
+          "ms": 2526.3000000044703
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 31%",
+          "ms": 2526.3000000044703
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 33%",
+          "ms": 2526.4000000059605
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 37%",
+          "ms": 2526.4000000059605
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 38%",
+          "ms": 2527.10000000149
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 41%",
+          "ms": 2527.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 46%",
+          "ms": 2527.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 49%",
+          "ms": 2527.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 54%",
+          "ms": 2527.60000000149
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 56%",
+          "ms": 2527.7000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 62%",
+          "ms": 2527.7000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 64%",
+          "ms": 2527.8000000044703
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 69%",
+          "ms": 2527.8000000044703
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 72%",
+          "ms": 2528.4000000059605
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 73%",
+          "ms": 2528.5
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 74%",
+          "ms": 2528.5
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 76%",
+          "ms": 2528.5
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 77%",
+          "ms": 2528.8000000044703
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 84%",
+          "ms": 2528.8000000044703
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 85%",
+          "ms": 2528.8000000044703
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 92%",
+          "ms": 2685.9000000059605
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 99%",
+          "ms": 2853.9000000059605
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 100%",
+          "ms": 2886.9000000059605
+        },
+        {
+          "type": "status",
+          "text": "Starting the depth model…",
+          "ms": 2887
+        },
+        {
+          "type": "send-frame",
+          "ms": 3087.5
+        },
+        {
+          "type": "ready",
+          "ms": 5321.4000000059605
+        },
+        {
+          "type": "status",
+          "text": "",
+          "ms": 5321.9000000059605
+        },
+        {
+          "type": "depth",
+          "inferenceMs": 1414.8999999985099,
+          "ms": 6762.80000000447
+        }
+      ],
+      "resources": [],
+      "under2s": false,
+      "errors": []
+    },
+    {
+      "profile": "phone",
+      "cpuRate": 4,
+      "id": "machine",
+      "upload": false,
+      "firstResultMs": 1288.6000000014901,
+      "timestampedPreview": true,
+      "completedAtMs": 20104,
+      "depthAnswersAtCompletion": 96,
+      "preparation": [],
+      "resources": [
+        {
+          "name": "/assets/toys/moving-photo-3d/elephants-sheet-1.jpg",
+          "startMs": 15.899999998509884,
+          "durationMs": 38.70000000298023
+        },
+        {
+          "name": "/assets/toys/moving-photo-3d/elephants.depth",
+          "startMs": 17,
+          "durationMs": 39.899999998509884
+        },
+        {
+          "name": "/assets/toys/moving-photo-3d/elephants-sheet-2.jpg",
+          "startMs": 1307.8999999985099,
+          "durationMs": 207.29999999701977
+        },
+        {
+          "name": "/assets/toys/moving-photo-3d/elephants-sheet-3.jpg",
+          "startMs": 1309.1999999955297,
+          "durationMs": 205.5
+        },
+        {
+          "name": "/assets/toys/moving-photo-3d/elephants-sheet-4.jpg",
+          "startMs": 1311.5,
+          "durationMs": 175.5
+        },
+        {
+          "name": "/assets/toys/moving-photo-3d/elephants-sheet-5.jpg",
+          "startMs": 1312.2999999970198,
+          "durationMs": 138.70000000298023
+        },
+        {
+          "name": "/assets/toys/moving-photo-3d/elephants-sheet-6.jpg",
+          "startMs": 1313.5,
+          "durationMs": 110.10000000149012
+        },
+        {
+          "name": "/assets/toys/moving-photo-3d/elephants-sheet-7.jpg",
+          "startMs": 1313.6999999955297,
+          "durationMs": 95.40000000596046
+        },
+        {
+          "name": "/assets/toys/moving-photo-3d/elephants.mp3",
+          "startMs": 17309.69999999553,
+          "durationMs": 36.400000005960464
+        }
+      ],
+      "under2s": true,
+      "errors": []
+    },
+    {
+      "profile": "phone",
+      "cpuRate": 4,
+      "id": "machine",
+      "upload": true,
+      "firstResultMs": 5308.0999999940395,
+      "timestampedPreview": true,
+      "completedAtMs": 5962.19999999553,
+      "depthAnswersAtCompletion": 1,
+      "preparation": [
+        {
+          "type": "worker",
+          "ms": 450.8999999985099
+        },
+        {
+          "type": "send-init",
+          "ms": 451.8999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model (27 MB, once)…",
+          "ms": 556.2999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 0%",
+          "ms": 577.7999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 1%",
+          "ms": 610
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 2%",
+          "ms": 610
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 6%",
+          "ms": 611.5
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 6%",
+          "ms": 611.5
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 7%",
+          "ms": 611.5999999940395
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 8%",
+          "ms": 611.6999999955297
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 8%",
+          "ms": 614.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 8%",
+          "ms": 614.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 9%",
+          "ms": 614.5
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 10%",
+          "ms": 617.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 11%",
+          "ms": 617.5999999940395
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 11%",
+          "ms": 617.5999999940395
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 11%",
+          "ms": 617.5999999940395
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 12%",
+          "ms": 617.5999999940395
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 12%",
+          "ms": 618.6999999955297
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 12%",
+          "ms": 618.6999999955297
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 12%",
+          "ms": 618.6999999955297
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 13%",
+          "ms": 618.6999999955297
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 13%",
+          "ms": 618.7999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 15%",
+          "ms": 618.7999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 15%",
+          "ms": 618.7999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 16%",
+          "ms": 623.1999999955297
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 16%",
+          "ms": 623.1999999955297
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 16%",
+          "ms": 623.1999999955297
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 18%",
+          "ms": 629.5
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 19%",
+          "ms": 632.0999999940395
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 19%",
+          "ms": 632.6999999955297
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 19%",
+          "ms": 632.6999999955297
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 20%",
+          "ms": 633.1999999955297
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 20%",
+          "ms": 633.7999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 21%",
+          "ms": 635.7999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 21%",
+          "ms": 636.0999999940395
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 21%",
+          "ms": 636.0999999940395
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 22%",
+          "ms": 636.0999999940395
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 22%",
+          "ms": 636.1999999955297
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 22%",
+          "ms": 636.1999999955297
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 22%",
+          "ms": 636.2999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 23%",
+          "ms": 636.2999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 23%",
+          "ms": 636.2999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 23%",
+          "ms": 636.2999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 23%",
+          "ms": 636.2999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 24%",
+          "ms": 662
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 25%",
+          "ms": 662.0999999940395
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 26%",
+          "ms": 662.1999999955297
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 28%",
+          "ms": 662.1999999955297
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 28%",
+          "ms": 662.1999999955297
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 29%",
+          "ms": 662.1999999955297
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 29%",
+          "ms": 662.2999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 29%",
+          "ms": 662.2999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 30%",
+          "ms": 662.2999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 30%",
+          "ms": 662.2999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 31%",
+          "ms": 662.2999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 31%",
+          "ms": 662.2999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 31%",
+          "ms": 662.2999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 31%",
+          "ms": 662.2999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 32%",
+          "ms": 662.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 33%",
+          "ms": 662.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 34%",
+          "ms": 662.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 34%",
+          "ms": 662.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 35%",
+          "ms": 662.5
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 36%",
+          "ms": 662.5
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 36%",
+          "ms": 662.5
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 37%",
+          "ms": 662.5
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 37%",
+          "ms": 662.5
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 37%",
+          "ms": 662.5
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 37%",
+          "ms": 676.7999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 38%",
+          "ms": 681
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 38%",
+          "ms": 683.0999999940395
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 38%",
+          "ms": 684
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 38%",
+          "ms": 684
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 38%",
+          "ms": 684.0999999940395
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 39%",
+          "ms": 684.0999999940395
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 39%",
+          "ms": 684.0999999940395
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 40%",
+          "ms": 684.0999999940395
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 41%",
+          "ms": 684.0999999940395
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 41%",
+          "ms": 684.0999999940395
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 42%",
+          "ms": 684.1999999955297
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 42%",
+          "ms": 684.1999999955297
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 43%",
+          "ms": 710.1999999955297
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 44%",
+          "ms": 710.1999999955297
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 44%",
+          "ms": 710.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 45%",
+          "ms": 710.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 46%",
+          "ms": 710.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 50%",
+          "ms": 843.2999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 52%",
+          "ms": 843.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 54%",
+          "ms": 843.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 59%",
+          "ms": 843.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 62%",
+          "ms": 843.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 69%",
+          "ms": 843.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 72%",
+          "ms": 843.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 72%",
+          "ms": 843.8999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 73%",
+          "ms": 843.8999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 73%",
+          "ms": 843.8999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 73%",
+          "ms": 843.8999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 73%",
+          "ms": 843.8999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 74%",
+          "ms": 844
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 75%",
+          "ms": 844
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 75%",
+          "ms": 844
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 75%",
+          "ms": 844
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 75%",
+          "ms": 844
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 76%",
+          "ms": 844.0999999940395
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 76%",
+          "ms": 844.0999999940395
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 76%",
+          "ms": 844.0999999940395
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 77%",
+          "ms": 844.0999999940395
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 77%",
+          "ms": 844.0999999940395
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 77%",
+          "ms": 844.0999999940395
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 78%",
+          "ms": 844.0999999940395
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 78%",
+          "ms": 844.0999999940395
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 78%",
+          "ms": 844.0999999940395
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 79%",
+          "ms": 844.0999999940395
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 79%",
+          "ms": 844.0999999940395
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 79%",
+          "ms": 844.1999999955297
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 79%",
+          "ms": 844.1999999955297
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 80%",
+          "ms": 844.1999999955297
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 80%",
+          "ms": 844.1999999955297
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 81%",
+          "ms": 844.1999999955297
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 81%",
+          "ms": 844.1999999955297
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 82%",
+          "ms": 844.1999999955297
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 83%",
+          "ms": 844.2999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 83%",
+          "ms": 844.2999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 83%",
+          "ms": 844.2999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 83%",
+          "ms": 844.2999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 84%",
+          "ms": 848.2999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 85%",
+          "ms": 852.0999999940395
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 85%",
+          "ms": 852.1999999955297
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 85%",
+          "ms": 859.8999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 86%",
+          "ms": 860
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 86%",
+          "ms": 860
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 87%",
+          "ms": 881.6999999955297
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 87%",
+          "ms": 881.7999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 88%",
+          "ms": 881.7999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 90%",
+          "ms": 892
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 92%",
+          "ms": 896.7999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 98%",
+          "ms": 896.7999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 99%",
+          "ms": 899
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 100%",
+          "ms": 915.5
+        },
+        {
+          "type": "status",
+          "text": "Starting the depth model…",
+          "ms": 915.5999999940395
+        },
+        {
+          "type": "send-frame",
+          "ms": 1750.0999999940395
+        },
+        {
+          "type": "ready",
+          "ms": 3399
+        },
+        {
+          "type": "status",
+          "text": "",
+          "ms": 3400.0999999940395
+        },
+        {
+          "type": "depth",
+          "inferenceMs": 1100.4000000059605,
+          "ms": 4587.5999999940395
+        }
+      ],
+      "resources": [],
+      "under2s": false,
+      "errors": []
+    },
+    {
+      "profile": "phone",
+      "cpuRate": 4,
+      "id": "sample-long",
+      "upload": false,
+      "firstResultMs": 1228.7000000029802,
+      "timestampedPreview": true,
+      "completedAtMs": 5084.10000000149,
+      "depthAnswersAtCompletion": 720,
+      "preparation": [],
+      "resources": [
+        {
+          "name": "/assets/toys/moving-photo-3d/bunny-long.mp2depth",
+          "startMs": 34.399999998509884,
+          "durationMs": 471.80000000447035
+        },
+        {
+          "name": "/assets/toys/moving-photo-3d/bunny-long.webm",
+          "startMs": 68.10000000149012,
+          "durationMs": 27.899999998509884
+        }
+      ],
+      "under2s": true,
+      "errors": []
+    },
+    {
+      "profile": "phone",
+      "cpuRate": 4,
+      "id": "sample-long",
+      "upload": true,
+      "firstResultMs": 3392.89999999851,
+      "timestampedPreview": true,
+      "completedAtMs": 7086.89999999851,
+      "depthAnswersAtCompletion": 4,
+      "preparation": [
+        {
+          "type": "worker",
+          "ms": 754
+        },
+        {
+          "type": "send-init",
+          "ms": 754.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model (27 MB, once)…",
+          "ms": 1107.5
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 0%",
+          "ms": 1118
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 0%",
+          "ms": 1119.5
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 1%",
+          "ms": 1120.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 1%",
+          "ms": 1120.8999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 2%",
+          "ms": 1120.8999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 3%",
+          "ms": 1122.8999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 3%",
+          "ms": 1123.7999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 4%",
+          "ms": 1131.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 4%",
+          "ms": 1131.6000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 4%",
+          "ms": 1136.7000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 5%",
+          "ms": 1137.7999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 5%",
+          "ms": 1138.2999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 6%",
+          "ms": 1138.2999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 6%",
+          "ms": 1138.2999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 6%",
+          "ms": 1138.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 8%",
+          "ms": 1138.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 8%",
+          "ms": 1138.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 11%",
+          "ms": 1138.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 11%",
+          "ms": 1141
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 11%",
+          "ms": 1142.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 12%",
+          "ms": 1143.7999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 12%",
+          "ms": 1160.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 13%",
+          "ms": 1160.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 13%",
+          "ms": 1173.5
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 13%",
+          "ms": 1173.5
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 13%",
+          "ms": 1173.6000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 14%",
+          "ms": 1173.6000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 15%",
+          "ms": 1173.6000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 15%",
+          "ms": 1173.6000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 16%",
+          "ms": 1173.6000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 17%",
+          "ms": 1173.7999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 19%",
+          "ms": 1173.8999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 21%",
+          "ms": 1184.8999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 22%",
+          "ms": 1185.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 23%",
+          "ms": 1185.2999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 23%",
+          "ms": 1185.2999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 29%",
+          "ms": 1185.2999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 31%",
+          "ms": 1235.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 37%",
+          "ms": 1235.6000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 38%",
+          "ms": 1235.6000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 43%",
+          "ms": 1246.7999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 46%",
+          "ms": 1247.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 50%",
+          "ms": 1268
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 54%",
+          "ms": 1268.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 62%",
+          "ms": 1269.2999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 69%",
+          "ms": 1282.2999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 77%",
+          "ms": 1366
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 85%",
+          "ms": 1375.7999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 92%",
+          "ms": 1376
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 99%",
+          "ms": 1376
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 100%",
+          "ms": 1376.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Starting the depth model…",
+          "ms": 1377.3999999985099
+        },
+        {
+          "type": "send-frame",
+          "ms": 1873.1000000014901
+        },
+        {
+          "type": "ready",
+          "ms": 2563.39999999851
+        },
+        {
+          "type": "status",
+          "text": "",
+          "ms": 2569
+        },
+        {
+          "type": "depth",
+          "inferenceMs": 581,
+          "ms": 3157.7000000029802
+        },
+        {
+          "type": "send-frame",
+          "ms": 3596.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "",
+          "ms": 3608.7000000029802
+        },
+        {
+          "type": "depth",
+          "inferenceMs": 332.5,
+          "ms": 3932.89999999851
+        },
+        {
+          "type": "send-frame",
+          "ms": 4564.89999999851
+        },
+        {
+          "type": "status",
+          "text": "",
+          "ms": 4575.20000000298
+        },
+        {
+          "type": "depth",
+          "inferenceMs": 196.5,
+          "ms": 4778.5
+        },
+        {
+          "type": "send-frame",
+          "ms": 5175.20000000298
+        },
+        {
+          "type": "status",
+          "text": "",
+          "ms": 5189.5
+        },
+        {
+          "type": "depth",
+          "inferenceMs": 686.5,
+          "ms": 5866.20000000298
+        }
+      ],
+      "resources": [],
+      "under2s": false,
+      "errors": []
+    },
+    {
+      "profile": "phone",
+      "cpuRate": 4,
+      "id": "dragon-long",
+      "upload": false,
+      "firstResultMs": 1896,
+      "timestampedPreview": true,
+      "completedAtMs": 4946.20000000298,
+      "depthAnswersAtCompletion": 720,
+      "preparation": [],
+      "resources": [
+        {
+          "name": "/assets/toys/moving-photo-3d/sintel-long.mp2depth",
+          "startMs": 13.799999997019768,
+          "durationMs": 471.20000000298023
+        },
+        {
+          "name": "/assets/toys/moving-photo-3d/sintel-long.webm",
+          "startMs": 18.100000001490116,
+          "durationMs": 19.69999999552965
+        }
+      ],
+      "under2s": true,
+      "errors": []
+    },
+    {
+      "profile": "phone",
+      "cpuRate": 4,
+      "id": "dragon-long",
+      "upload": true,
+      "firstResultMs": 5234.39999999851,
+      "timestampedPreview": true,
+      "completedAtMs": 8150,
+      "depthAnswersAtCompletion": 4,
+      "preparation": [
+        {
+          "type": "worker",
+          "ms": 438.70000000298023
+        },
+        {
+          "type": "send-init",
+          "ms": 439.30000000447035
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model (27 MB, once)…",
+          "ms": 519.8999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 0%",
+          "ms": 557.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 0%",
+          "ms": 561.7000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 1%",
+          "ms": 563.7000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 2%",
+          "ms": 564
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 2%",
+          "ms": 564.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 4%",
+          "ms": 581.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 4%",
+          "ms": 581.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 4%",
+          "ms": 581.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 5%",
+          "ms": 581.3000000044703
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 5%",
+          "ms": 581.5
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 5%",
+          "ms": 581.8999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 5%",
+          "ms": 596.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 6%",
+          "ms": 599.8000000044703
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 7%",
+          "ms": 600.8000000044703
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 8%",
+          "ms": 608.5
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 8%",
+          "ms": 608.5
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 8%",
+          "ms": 608.5
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 9%",
+          "ms": 613.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 9%",
+          "ms": 613.3000000044703
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 9%",
+          "ms": 622
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 10%",
+          "ms": 622.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 10%",
+          "ms": 622.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 11%",
+          "ms": 629.3000000044703
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 12%",
+          "ms": 629.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 12%",
+          "ms": 629.5
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 13%",
+          "ms": 636
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 13%",
+          "ms": 641.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 13%",
+          "ms": 641.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 14%",
+          "ms": 641.5
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 15%",
+          "ms": 641.6000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 15%",
+          "ms": 707.8999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 15%",
+          "ms": 708
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 16%",
+          "ms": 708
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 17%",
+          "ms": 708.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 18%",
+          "ms": 708.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 19%",
+          "ms": 708.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 23%",
+          "ms": 937.7000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 31%",
+          "ms": 937.8000000044703
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 38%",
+          "ms": 996.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 46%",
+          "ms": 996.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 54%",
+          "ms": 1008.7000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 62%",
+          "ms": 1009.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 69%",
+          "ms": 1009.5
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 77%",
+          "ms": 1099.8999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 85%",
+          "ms": 1100.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 92%",
+          "ms": 1100.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 99%",
+          "ms": 1100.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 100%",
+          "ms": 1134.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Starting the depth model…",
+          "ms": 1134.1000000014901
+        },
+        {
+          "type": "send-frame",
+          "ms": 2268
+        },
+        {
+          "type": "ready",
+          "ms": 4020.89999999851
+        },
+        {
+          "type": "status",
+          "text": "",
+          "ms": 4040
+        },
+        {
+          "type": "depth",
+          "inferenceMs": 913.6000000014901,
+          "ms": 4855.5
+        },
+        {
+          "type": "send-frame",
+          "ms": 5543.70000000298
+        },
+        {
+          "type": "status",
+          "text": "",
+          "ms": 5599.39999999851
+        },
+        {
+          "type": "depth",
+          "inferenceMs": 334.40000000596046,
+          "ms": 5884.80000000447
+        },
+        {
+          "type": "send-frame",
+          "ms": 6494.39999999851
+        },
+        {
+          "type": "status",
+          "text": "",
+          "ms": 6515.5
+        },
+        {
+          "type": "depth",
+          "inferenceMs": 172.39999999850988,
+          "ms": 6687.70000000298
+        },
+        {
+          "type": "send-frame",
+          "ms": 6861.70000000298
+        },
+        {
+          "type": "status",
+          "text": "",
+          "ms": 6863.20000000298
+        },
+        {
+          "type": "depth",
+          "inferenceMs": 153.80000000447035,
+          "ms": 7016.70000000298
+        },
+        {
+          "type": "send-frame",
+          "ms": 7747.5
+        }
+      ],
+      "resources": [],
+      "under2s": false,
+      "errors": []
+    },
+    {
+      "profile": "phone",
+      "cpuRate": 4,
+      "id": "machine-long",
+      "upload": false,
+      "firstResultMs": 1420.5,
+      "timestampedPreview": true,
+      "completedAtMs": 6357,
+      "depthAnswersAtCompletion": 720,
+      "preparation": [],
+      "resources": [
+        {
+          "name": "/assets/toys/moving-photo-3d/elephants-long.mp2depth",
+          "startMs": 9.200000002980232,
+          "durationMs": 529.7999999970198
+        },
+        {
+          "name": "/assets/toys/moving-photo-3d/elephants-long.webm",
+          "startMs": 18.200000002980232,
+          "durationMs": 124.79999999701977
+        }
+      ],
+      "under2s": true,
+      "errors": []
+    },
+    {
+      "profile": "phone",
+      "cpuRate": 4,
+      "id": "machine-long",
+      "upload": true,
+      "firstResultMs": 5072.30000000447,
+      "timestampedPreview": true,
+      "completedAtMs": 8078.30000000447,
+      "depthAnswersAtCompletion": 4,
+      "preparation": [
+        {
+          "type": "worker",
+          "ms": 262.5
+        },
+        {
+          "type": "send-init",
+          "ms": 262.6000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model (27 MB, once)…",
+          "ms": 566.7000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 0%",
+          "ms": 619.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 0%",
+          "ms": 619.8999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 1%",
+          "ms": 620
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 1%",
+          "ms": 620.6000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 1%",
+          "ms": 620.6000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 2%",
+          "ms": 620.6000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 2%",
+          "ms": 620.7000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 3%",
+          "ms": 633.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 4%",
+          "ms": 640.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 5%",
+          "ms": 640.5
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 5%",
+          "ms": 646.3000000044703
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 6%",
+          "ms": 646.3000000044703
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 6%",
+          "ms": 647.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 6%",
+          "ms": 659.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 7%",
+          "ms": 668.6000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 8%",
+          "ms": 668.7000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 8%",
+          "ms": 669.7000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 8%",
+          "ms": 671.6000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 8%",
+          "ms": 671.6000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 9%",
+          "ms": 671.6000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 9%",
+          "ms": 671.7000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 9%",
+          "ms": 676.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 9%",
+          "ms": 676.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 10%",
+          "ms": 676.6000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 10%",
+          "ms": 676.8000000044703
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 10%",
+          "ms": 682.7000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 11%",
+          "ms": 683.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 12%",
+          "ms": 684.8000000044703
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 13%",
+          "ms": 684.8999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 13%",
+          "ms": 690.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 13%",
+          "ms": 691.8000000044703
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 13%",
+          "ms": 692.8999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 14%",
+          "ms": 693
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 14%",
+          "ms": 694
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 15%",
+          "ms": 695.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 15%",
+          "ms": 700.8999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 16%",
+          "ms": 700.8999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 16%",
+          "ms": 704.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 17%",
+          "ms": 704.5
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 17%",
+          "ms": 707
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 18%",
+          "ms": 708.8000000044703
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 20%",
+          "ms": 709.6000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 21%",
+          "ms": 711
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 21%",
+          "ms": 713.7000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 21%",
+          "ms": 717.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 22%",
+          "ms": 717.5
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 22%",
+          "ms": 718.5
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 22%",
+          "ms": 720.7000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 23%",
+          "ms": 720.8999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 23%",
+          "ms": 737.6000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 23%",
+          "ms": 738.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 23%",
+          "ms": 739.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 24%",
+          "ms": 739.3000000044703
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 24%",
+          "ms": 740.3000000044703
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 24%",
+          "ms": 740.3000000044703
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 25%",
+          "ms": 740.3000000044703
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 25%",
+          "ms": 741.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 26%",
+          "ms": 741.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 27%",
+          "ms": 748.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 27%",
+          "ms": 753.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 27%",
+          "ms": 753.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 28%",
+          "ms": 753.3000000044703
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 29%",
+          "ms": 754.3000000044703
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 29%",
+          "ms": 754.3000000044703
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 30%",
+          "ms": 755.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 31%",
+          "ms": 756
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 31%",
+          "ms": 756
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 32%",
+          "ms": 756
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 33%",
+          "ms": 756
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 35%",
+          "ms": 756.8000000044703
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 38%",
+          "ms": 756.8000000044703
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 38%",
+          "ms": 756.8000000044703
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 39%",
+          "ms": 756.8000000044703
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 40%",
+          "ms": 756.8000000044703
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 41%",
+          "ms": 756.8000000044703
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 41%",
+          "ms": 756.8999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 41%",
+          "ms": 756.8999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 42%",
+          "ms": 780.8000000044703
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 46%",
+          "ms": 978.6000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 54%",
+          "ms": 978.8000000044703
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 62%",
+          "ms": 978.8999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 69%",
+          "ms": 979.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 77%",
+          "ms": 979.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 84%",
+          "ms": 979.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 85%",
+          "ms": 979.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 92%",
+          "ms": 979.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 92%",
+          "ms": 979.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 95%",
+          "ms": 979.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 99%",
+          "ms": 979.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 100%",
+          "ms": 979.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Starting the depth model…",
+          "ms": 979.2000000029802
+        },
+        {
+          "type": "send-frame",
+          "ms": 2021.8999999985099
+        },
+        {
+          "type": "ready",
+          "ms": 2933.7000000029802
+        },
+        {
+          "type": "status",
+          "text": "",
+          "ms": 2933.89999999851
+        },
+        {
+          "type": "depth",
+          "inferenceMs": 1191.5999999940395,
+          "ms": 4207.70000000298
+        },
+        {
+          "type": "send-frame",
+          "ms": 5883.10000000149
+        },
+        {
+          "type": "status",
+          "text": "",
+          "ms": 5959.89999999851
+        },
+        {
+          "type": "depth",
+          "inferenceMs": 742.1999999955297,
+          "ms": 6627.10000000149
+        },
+        {
+          "type": "send-frame",
+          "ms": 6893.70000000298
+        },
+        {
+          "type": "status",
+          "text": "",
+          "ms": 6894.20000000298
+        },
+        {
+          "type": "depth",
+          "inferenceMs": 430.70000000298023,
+          "ms": 7326.20000000298
+        },
+        {
+          "type": "send-frame",
+          "ms": 7530.39999999851
+        },
+        {
+          "type": "status",
+          "text": "",
+          "ms": 7533
+        },
+        {
+          "type": "depth",
+          "inferenceMs": 307.90000000596046,
+          "ms": 7841.60000000149
+        }
+      ],
+      "resources": [],
+      "under2s": false,
+      "errors": []
+    },
+    {
+      "profile": "phone",
+      "cpuRate": 4,
+      "id": "bridge-long",
+      "upload": false,
+      "firstResultMs": 2329,
+      "timestampedPreview": true,
+      "completedAtMs": 5575.89999999851,
+      "depthAnswersAtCompletion": 648,
+      "preparation": [],
+      "resources": [
+        {
+          "name": "/assets/toys/moving-photo-3d/tears-long.mp2depth",
+          "startMs": 31.5,
+          "durationMs": 903.8999999985099
+        },
+        {
+          "name": "/assets/toys/moving-photo-3d/tears-long.webm",
+          "startMs": 32.899999998509884,
+          "durationMs": 88.30000000447035
+        }
+      ],
+      "under2s": false,
+      "errors": []
+    },
+    {
+      "profile": "phone",
+      "cpuRate": 4,
+      "id": "bridge-long",
+      "upload": true,
+      "firstResultMs": 3635.39999999851,
+      "timestampedPreview": true,
+      "completedAtMs": 6585.60000000149,
+      "depthAnswersAtCompletion": 4,
+      "preparation": [
+        {
+          "type": "worker",
+          "ms": 251.89999999850988
+        },
+        {
+          "type": "send-init",
+          "ms": 308.79999999701977
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model (27 MB, once)…",
+          "ms": 417
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 0%",
+          "ms": 425.70000000298023
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 1%",
+          "ms": 432.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 2%",
+          "ms": 432.70000000298023
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 8%",
+          "ms": 449.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 11%",
+          "ms": 449.20000000298023
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 13%",
+          "ms": 449.79999999701977
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 14%",
+          "ms": 449.79999999701977
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 14%",
+          "ms": 450.79999999701977
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 14%",
+          "ms": 453.79999999701977
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 15%",
+          "ms": 454.20000000298023
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 16%",
+          "ms": 455.70000000298023
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 16%",
+          "ms": 456.20000000298023
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 20%",
+          "ms": 478.5
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 23%",
+          "ms": 479.70000000298023
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 28%",
+          "ms": 479.79999999701977
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 31%",
+          "ms": 492.6000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 33%",
+          "ms": 492.70000000298023
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 33%",
+          "ms": 492.8999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 35%",
+          "ms": 492.8999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 38%",
+          "ms": 492.8999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 39%",
+          "ms": 492.8999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 41%",
+          "ms": 492.8999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 42%",
+          "ms": 493
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 44%",
+          "ms": 493
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 45%",
+          "ms": 493
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 45%",
+          "ms": 493
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 46%",
+          "ms": 511.70000000298023
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 46%",
+          "ms": 530.7000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 53%",
+          "ms": 530.7999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 54%",
+          "ms": 530.7999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 54%",
+          "ms": 530.7999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 56%",
+          "ms": 530.7999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 56%",
+          "ms": 533.6000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 56%",
+          "ms": 533.8999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 56%",
+          "ms": 533.8999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 57%",
+          "ms": 534
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 57%",
+          "ms": 534
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 57%",
+          "ms": 534
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 57%",
+          "ms": 534
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 60%",
+          "ms": 534
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 61%",
+          "ms": 535.8999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 61%",
+          "ms": 564.6000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 62%",
+          "ms": 564.6000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 62%",
+          "ms": 564.7000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 63%",
+          "ms": 674.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 64%",
+          "ms": 674.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 68%",
+          "ms": 674.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 68%",
+          "ms": 689
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 69%",
+          "ms": 689
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 69%",
+          "ms": 689
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 71%",
+          "ms": 689
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 72%",
+          "ms": 689.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 73%",
+          "ms": 689.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 74%",
+          "ms": 689.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 77%",
+          "ms": 689.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 82%",
+          "ms": 689.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 85%",
+          "ms": 689.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 89%",
+          "ms": 689.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 90%",
+          "ms": 689.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 92%",
+          "ms": 689.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 95%",
+          "ms": 689.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 98%",
+          "ms": 689.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 99%",
+          "ms": 689.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 99%",
+          "ms": 786.7999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 100%",
+          "ms": 789.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Starting the depth model…",
+          "ms": 789.2999999970198
+        },
+        {
+          "type": "send-frame",
+          "ms": 1219.6000000014901
+        },
+        {
+          "type": "ready",
+          "ms": 1959.5
+        },
+        {
+          "type": "status",
+          "text": "",
+          "ms": 1988.3999999985099
+        },
+        {
+          "type": "depth",
+          "inferenceMs": 781,
+          "ms": 2699.39999999851
+        },
+        {
+          "type": "send-frame",
+          "ms": 4218.60000000149
+        },
+        {
+          "type": "status",
+          "text": "",
+          "ms": 4286.60000000149
+        },
+        {
+          "type": "depth",
+          "inferenceMs": 817.2000000029802,
+          "ms": 5064.29999999702
+        },
+        {
+          "type": "send-frame",
+          "ms": 5551.60000000149
+        },
+        {
+          "type": "status",
+          "text": "",
+          "ms": 5588.70000000298
+        },
+        {
+          "type": "depth",
+          "inferenceMs": 136.59999999403954,
+          "ms": 5691.60000000149
+        },
+        {
+          "type": "send-frame",
+          "ms": 6204.5
+        },
+        {
+          "type": "status",
+          "text": "",
+          "ms": 6205.10000000149
+        },
+        {
+          "type": "depth",
+          "inferenceMs": 184.20000000298023,
+          "ms": 6390
+        }
+      ],
+      "resources": [],
+      "under2s": false,
+      "errors": []
+    },
+    {
+      "profile": "phone",
+      "cpuRate": 4,
+      "id": "fast60",
+      "upload": true,
+      "firstResultMs": 4456.89999999851,
+      "timestampedPreview": true,
+      "completedAtMs": 4760.60000000149,
+      "depthAnswersAtCompletion": 1,
+      "preparation": [
+        {
+          "type": "worker",
+          "ms": 109.29999999701977
+        },
+        {
+          "type": "send-init",
+          "ms": 109.29999999701977
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model (27 MB, once)…",
+          "ms": 312.6000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 1%",
+          "ms": 555.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 2%",
+          "ms": 555.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 3%",
+          "ms": 555.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 3%",
+          "ms": 555.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 3%",
+          "ms": 555.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 4%",
+          "ms": 555.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 4%",
+          "ms": 555.2999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 5%",
+          "ms": 555.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 5%",
+          "ms": 555.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 6%",
+          "ms": 555.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 6%",
+          "ms": 555.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 6%",
+          "ms": 555.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 7%",
+          "ms": 555.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 8%",
+          "ms": 555.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 8%",
+          "ms": 555.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 12%",
+          "ms": 555.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 14%",
+          "ms": 555.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 15%",
+          "ms": 555.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 15%",
+          "ms": 555.5
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 15%",
+          "ms": 555.5
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 16%",
+          "ms": 555.5
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 16%",
+          "ms": 555.5
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 16%",
+          "ms": 555.5
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 18%",
+          "ms": 555.5
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 19%",
+          "ms": 559.8999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 19%",
+          "ms": 559.8999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 23%",
+          "ms": 559.8999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 27%",
+          "ms": 560
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 28%",
+          "ms": 560
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 29%",
+          "ms": 560
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 30%",
+          "ms": 560
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 31%",
+          "ms": 560
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 31%",
+          "ms": 560
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 32%",
+          "ms": 560
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 32%",
+          "ms": 560.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 32%",
+          "ms": 560.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 33%",
+          "ms": 560.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 33%",
+          "ms": 560.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 33%",
+          "ms": 560.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 34%",
+          "ms": 560.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 34%",
+          "ms": 560.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 34%",
+          "ms": 560.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 34%",
+          "ms": 560.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 37%",
+          "ms": 560.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 37%",
+          "ms": 560.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 38%",
+          "ms": 560.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 38%",
+          "ms": 560.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 38%",
+          "ms": 560.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 38%",
+          "ms": 560.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 39%",
+          "ms": 560.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 39%",
+          "ms": 560.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 40%",
+          "ms": 560.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 40%",
+          "ms": 563.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 40%",
+          "ms": 563.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 41%",
+          "ms": 563.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 41%",
+          "ms": 563.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 42%",
+          "ms": 563.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 42%",
+          "ms": 563.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 43%",
+          "ms": 563.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 45%",
+          "ms": 564.6000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 46%",
+          "ms": 565.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 46%",
+          "ms": 566.7999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 47%",
+          "ms": 566.7999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 48%",
+          "ms": 568.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 48%",
+          "ms": 568.5
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 51%",
+          "ms": 574.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 54%",
+          "ms": 577.7999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 57%",
+          "ms": 579.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 62%",
+          "ms": 579.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 65%",
+          "ms": 579.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 69%",
+          "ms": 579.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 71%",
+          "ms": 579.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 73%",
+          "ms": 579.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 76%",
+          "ms": 579.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 77%",
+          "ms": 579.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 81%",
+          "ms": 579.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 82%",
+          "ms": 579.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 85%",
+          "ms": 579.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 85%",
+          "ms": 579.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 88%",
+          "ms": 579.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 91%",
+          "ms": 579.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 92%",
+          "ms": 579.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 93%",
+          "ms": 579.2999999970198
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 94%",
+          "ms": 580.1000000014901
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 94%",
+          "ms": 580.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 94%",
+          "ms": 580.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 94%",
+          "ms": 580.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 95%",
+          "ms": 580.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 95%",
+          "ms": 580.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 95%",
+          "ms": 580.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 96%",
+          "ms": 580.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 96%",
+          "ms": 580.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 96%",
+          "ms": 580.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 97%",
+          "ms": 580.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 97%",
+          "ms": 580.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 98%",
+          "ms": 580.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 98%",
+          "ms": 580.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 98%",
+          "ms": 580.2000000029802
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 99%",
+          "ms": 582.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 99%",
+          "ms": 582.5
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 99%",
+          "ms": 582.5
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 99%",
+          "ms": 582.8999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 99%",
+          "ms": 582.8999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 99%",
+          "ms": 582.8999999985099
+        },
+        {
+          "type": "status",
+          "text": "Loading the depth model… 100%",
+          "ms": 594.3999999985099
+        },
+        {
+          "type": "status",
+          "text": "Starting the depth model…",
+          "ms": 594.5
+        },
+        {
+          "type": "send-frame",
+          "ms": 615.6000000014901
+        },
+        {
+          "type": "ready",
+          "ms": 2732.89999999851
+        },
+        {
+          "type": "status",
+          "text": "",
+          "ms": 2733
+        },
+        {
+          "type": "depth",
+          "inferenceMs": 511.1000000014901,
+          "ms": 3279.7999999970198
+        }
+      ],
+      "resources": [],
+      "under2s": false,
+      "errors": []
+    }
+  ]
+}

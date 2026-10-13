@@ -57,3 +57,18 @@ Rule check: the existing short Tears of Steel footage includes identifiable peop
 and the existing longer films follow the
 [Operator's explicit confirmation on #560](https://github.com/ryanjosephkamp/splashery/pull/560#issuecomment-6130226869).
 No new live-action footage is introduced, and this branch is never merged.
+
+The 12-hour measurement window ended on October 13, 2026, at 11:05 UTC. The complete Goal did not
+hold: 23/38 candidate cases completed (5,456 measured frames), and desktop startup met two seconds
+in 13/19 cases. The worst observed hole share was 0.000000%, with at most 0 introduced rim specks
+per frame. Unmeasured frames are not certified. See the
+[Round 3 audit](https://github.com/ryanjosephkamp/splashery/blob/codex/moving-photo-r2-public/docs/audits/moving-photo-r2-2026-10.md#round-3)
+for the exact goal status and remaining work. Strict raw stability also remains unmet: Raw stability
+is worse in these complete pairs: phone/bridge-long/sample, desktop/sample/upload,
+phone/sample-long/upload.
+
+The final raw records are [before frames](quality-before.json), [after frames](quality-after.json),
+[goal summary](goal-summary.json), [desktop startup](startup-desktop.json),
+[slow-phone startup](startup-slow-phone.json), and [aggregate test counts](test-summary.json). The
+additional phone-upload job and its uncombined main ledger are retained separately when present. All
+197 tests passed in aggregate: 194 in the full invocation and three unchanged isolated reruns.

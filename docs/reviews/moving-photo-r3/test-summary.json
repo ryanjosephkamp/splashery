@@ -1,0 +1,81 @@
+{
+  "sourcePin": "94a18adf3efac9ec6f84154b01ef2783701e28f96ecc278568a12a499a181413",
+  "fullStats": {
+    "startTime": "2026-10-13T08:36:32.634Z",
+    "duration": 4084356.914,
+    "expected": 194,
+    "skipped": 0,
+    "unexpected": 3,
+    "flaky": 0
+  },
+  "isolatedRerunStats": {
+    "startTime": "2026-10-13T09:44:53.318Z",
+    "duration": 111324.724,
+    "expected": 3,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "totalCases": 197,
+  "passed": 197,
+  "failed": [],
+  "files": {
+    "cdx-mp2-decode.spec.mjs": {
+      "passed": 7
+    },
+    "cdx-mp2-pixels.spec.mjs": {
+      "passed": 7
+    },
+    "cdx-mp2-r3.spec.mjs": {
+      "passed": 16
+    },
+    "cdx-mp2.spec.mjs": {
+      "passed": 14
+    },
+    "cdx-stability.spec.mjs": {
+      "passed": 10
+    },
+    "live3-engine.spec.mjs": {
+      "passed": 4
+    },
+    "live3.spec.mjs": {
+      "passed": 11
+    },
+    "live5.spec.mjs": {
+      "passed": 5
+    },
+    "live6.spec.mjs": {
+      "passed": 3
+    },
+    "lv7-long.spec.mjs": {
+      "passed": 2
+    },
+    "phf-engine.spec.mjs": {
+      "passed": 5
+    },
+    "phf.spec.mjs": {
+      "passed": 7
+    },
+    "phf2.spec.mjs": {
+      "passed": 7
+    },
+    "psv.spec.mjs": {
+      "passed": 8
+    },
+    "psv2.spec.mjs": {
+      "passed": 6
+    },
+    "psv3.spec.mjs": {
+      "passed": 16
+    },
+    "smd-compare.spec.mjs": {
+      "passed": 3
+    },
+    "smd-moving.spec.mjs": {
+      "passed": 16
+    },
+    "smoke.spec.mjs": {
+      "passed": 50
+    }
+  }
+}

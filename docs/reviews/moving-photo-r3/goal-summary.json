@@ -1,0 +1,32 @@
+{
+  "beforeCases": 30,
+  "afterCases": 24,
+  "beforeCompleteCases": 30,
+  "afterCompleteCases": 23,
+  "pairedCompleteCases": 23,
+  "expected": 38,
+  "beforeFrames": 7932,
+  "afterFrames": 5456,
+  "complete": false,
+  "paired": false,
+  "failHoles": [],
+  "failRim": [],
+  "failUpload": [],
+  "failSteady": [
+    ["phone", "bridge-long", false],
+    ["desktop", "sample", true],
+    ["phone", "sample-long", true]
+  ],
+  "snapshotHash": "94a18adf3efac9ec6f84154b01ef2783701e28f96ecc278568a12a499a181413",
+  "beforeErrors": [],
+  "afterErrors": [
+    {
+      "profile": "phone",
+      "id": "dragon-long",
+      "upload": true,
+      "message": "page.waitForFunction: Target page, context or browser has been closed",
+      "stoppedAtDeadline": true
+    }
+  ],
+  "nativeCaptureRetriesAfter": 0
+}
