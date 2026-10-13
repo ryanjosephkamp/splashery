@@ -6,6 +6,9 @@
 // background photo"): four of the owner's AI-made Studio pictures (src/packs/dot-samples.js;
 // CREDITS.md, "AI-made Studio samples") come first. Their big, bold shapes stay clear in a
 // halftone. They are labeled AI-made beside them, in the picker and in the credit.
+// Task 54 adds original procedural CC0 backgrounds; default-link carriers are labeled.
+import { QR_PICTURES } from "./codex-pictures.js";
+
 const AI = (id, name, prompt) => ({ id: `ai-${id}`, label: `${name} (AI-made)`, file: `assets/toys/photo-3d/ai/${id}.jpg`, author: "Ryan, the owner of Splashery (made with an AI image tool)", page: "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md", ai: true, prompt }); // prettier-ignore
 
 export const SAMPLES = [
@@ -17,5 +20,9 @@ export const SAMPLES = [
   { id: "still-life", label: "Still life with cheese (a painting)", file: "assets/toys/photo-3d/still-life.jpg", author: "Antoine Vollon (Metropolitan Museum of Art Open Access)", page: "https://commons.wikimedia.org/wiki/File:Still_Life_with_Cheese_MET_DT1989.jpg" }, // prettier-ignore
   { id: "spiral-stairs", label: "A spiral staircase", file: "assets/toys/photo-3d/spiral-stairs.jpg", author: "Jorge Mendoza", page: "https://commons.wikimedia.org/wiki/File:Spiral_Staircase,_Keck_Center_(U.S._National_Academies).jpg" }, // prettier-ignore
   { id: "forest", label: "A forest path", file: "assets/toys/photo-3d/forest.jpg", author: "Seaq68 (from Pixabay, 2017)", page: "https://commons.wikimedia.org/wiki/File:Forest_Away_Path.jpg" }, // prettier-ignore
+  ...QR_PICTURES.map((s) => ({
+    ...s,
+    label: `${s.label}${s.defaultPayloadSpecific ? ", default link" : ""} (CC0, Ryan with Codex)`,
+  })),
 ];
 export const sampleById = (id) => SAMPLES.find((s) => s.id === id) || null;
