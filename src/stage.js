@@ -221,6 +221,7 @@ export class Stage {
   // get the full ratio (and, with adapt "drag", the default since September
   // 29, 2026, every view but a drag).
   setBusy(busy, drag = false) {
+    if (this.sharp?.adapt === "off") busy = false;
     if (this.sharp?.adapt === "drag") busy = drag; // Sharpness
     this.busy = busy;
     if (busy) {
@@ -247,7 +248,8 @@ export class Stage {
   // the frame time. Over about 24 ms while moving drops the ratio; still
   // over 40 ms at the lowest ratio for 30 frames asks for a lower tier.
   timeFrame(ms) {
-    if (!this.adaptive || this.fixedSize || ms > 100 || !this.busy) return;
+    if (!this.adaptive || this.sharp?.adapt === "off" || this.fixedSize || ms > 100 || !this.busy)
+      return;
     if (this.skipFrames > 0) {
       this.skipFrames--;
       return;
@@ -822,6 +824,11 @@ export class Stage {
     const g = this.app.scene.gsplat;
     this.aaDefault ??= g.antiAlias;
     this.sharp = sharp;
+    if (sharp?.adapt === "off" && this.reduced) {
+      clearTimeout(this.restoreTimer);
+      this.restoreTimer = 0;
+      this.reduced = false;
+    }
     this.applyCulling();
     const aa = sharp?.aa ? true : this.aaDefault;
     if (g.antiAlias !== aa) g.antiAlias = aa;
