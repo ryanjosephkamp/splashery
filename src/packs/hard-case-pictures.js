@@ -1,0 +1,123 @@
+// Task 57: the best 20 measured hard-case pictures; see the scored audit.
+export const HARD_CASE_PICTURES = [
+  {
+    prompt: "C57-P01",
+    file: "cdx-hard-glass-jug",
+    name: "Glass jug",
+    category: "glass-water",
+  },
+  {
+    prompt: "C57-P05",
+    file: "cdx-hard-submerged-stones",
+    name: "Stones under water",
+    category: "glass-water",
+  },
+  {
+    prompt: "C57-P11",
+    file: "cdx-hard-backlit-dog",
+    name: "Backlit dog",
+    category: "hair-fur",
+  },
+  {
+    prompt: "C57-P12",
+    file: "cdx-hard-wool-fleece",
+    name: "Wool fleece",
+    category: "hair-fur",
+  },
+  {
+    prompt: "C57-P13",
+    file: "cdx-hard-bicycle-spokes",
+    name: "Bicycle spokes",
+    category: "thin-structures",
+  },
+  {
+    prompt: "C57-P16",
+    file: "cdx-hard-bare-branches",
+    name: "Bare branches",
+    category: "thin-structures",
+  },
+  {
+    prompt: "C57-P19",
+    file: "cdx-hard-puddle-reflection",
+    name: "Puddle reflection",
+    category: "reflections",
+  },
+  {
+    prompt: "C57-P20",
+    file: "cdx-hard-polished-floor",
+    name: "Polished floor",
+    category: "reflections",
+  },
+  {
+    prompt: "C57-P24",
+    file: "cdx-hard-reflecting-pool",
+    name: "Reflecting pool",
+    category: "reflections",
+  },
+  {
+    prompt: "C57-P25",
+    file: "cdx-hard-lanterns",
+    name: "Lanterns at night",
+    category: "low-light",
+  },
+  {
+    prompt: "C57-P26",
+    file: "cdx-hard-campfire",
+    name: "Campfire",
+    category: "low-light",
+  },
+  {
+    prompt: "C57-P27",
+    file: "cdx-hard-candle-still-life",
+    name: "Candle still life",
+    category: "low-light",
+  },
+  {
+    prompt: "C57-P28",
+    file: "cdx-hard-moonlit-greenhouse",
+    name: "Moonlit greenhouse",
+    category: "low-light",
+  },
+  {
+    prompt: "C57-P29",
+    file: "cdx-hard-shed-lamps",
+    name: "Lamps in a potting shed",
+    category: "low-light",
+  },
+  {
+    prompt: "C57-P30",
+    file: "cdx-hard-fire-bowl",
+    name: "Fire bowl at dusk",
+    category: "low-light",
+  },
+  {
+    prompt: "C57-P34",
+    file: "cdx-hard-snail-shell",
+    name: "Snail and wet moss",
+    category: "macro",
+  },
+  {
+    prompt: "C57-P35",
+    file: "cdx-hard-feather-lichen",
+    name: "Feather on lichen",
+    category: "macro",
+  },
+  {
+    prompt: "C57-P36",
+    file: "cdx-hard-workshop-bench",
+    name: "Workshop bench",
+    category: "dense-clutter",
+  },
+  {
+    prompt: "C57-P38",
+    file: "cdx-hard-potting-bench",
+    name: "Potting bench",
+    category: "dense-clutter",
+  },
+  {
+    prompt: "C57-P40",
+    file: "cdx-hard-ceramic-shelf",
+    name: "Ceramic studio shelf",
+    category: "dense-clutter",
+  },
+];
