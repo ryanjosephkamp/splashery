@@ -269,6 +269,11 @@
                   >PDF motion audit build tools (Codex task 21; not shipped)</a
                 >
               </li>
+              <li>
+                <a href="#photo-to-3d-round-3-test-tools-not-shipped"
+                  >Photo to 3D round 3 test tools (not shipped)</a
+                >
+              </li>
             </ul>
           </li>
         </ul>
@@ -8446,6 +8451,57 @@ subject to the following conditions:
             is copied. All image, video and point payloads in these samples come from Splashery's
             procedural grapes toy.
           </p>
+          <h3 id="photo-to-3d-round-3-test-tools-not-shipped">
+            Photo to 3D round 3 test tools (not shipped)
+          </h3>
+          <p>
+            License sources were opened on October 13, 2026. These executables run only in the test
+            workspace; neither is copied into the site or the review media.
+          </p>
+          <ul>
+            <li>
+              Chromium 151.0.7922.173 (BSD-3-Clause for the Chromium project, with separately
+              licensed third-party components),
+              <a
+                href="https://chromium.googlesource.com/chromium/src/+/refs/heads/main/LICENSE?format=TEXT"
+                target="_blank"
+                rel="noopener"
+                >https://chromium.googlesource.com/chromium/src/+/refs/heads/main/LICENSE?format=TEXT</a
+              >: the workspace's existing browser captures and measures the actual photo renderer.
+            </li>
+            <li>
+              Xvfb 2:21.1.16-1.3+deb13u4 (X.Org's MIT/X11 notices and separately licensed bundled
+              components),
+              <a
+                href="https://metadata.ftp-master.debian.org/changelogs/main/x/xorg-server/xorg-server_21.1.16-1.3+deb13u4_copyright"
+                target="_blank"
+                rel="noopener"
+                >https://metadata.ftp-master.debian.org/changelogs/main/x/xorg-server/xorg-server_21.1.16-1.3+deb13u4_copyright</a
+              >: the Debian package supplies a temporary virtual display for Chromium's Mesa WebGL2
+              tests. Its complete notices remain with the extracted test runtime in the ignored
+              cache.
+            </li>
+            <li>
+              FFmpeg / ffprobe 7.1.5-0+deb13u1 (this Debian build reports GPL-2.0-or-later),
+              <a href="https://ffmpeg.org/legal.html" target="_blank" rel="noopener"
+                >https://ffmpeg.org/legal.html</a
+              >: the workspace's installed encoder makes the paired H.264 review clips using
+              libx264. Its actual license was also read from the Debian package's copyright file and
+              <code>ffmpeg -L</code>. This test build is separate from the 9.0.2 build used for the
+              earlier PDF audit.
+            </li>
+            <li>
+              Pillow 12.3.0 (MIT-CMU),
+              <a
+                href="https://pillow.readthedocs.io/en/stable/about.html"
+                target="_blank"
+                rel="noopener"
+                >https://pillow.readthedocs.io/en/stable/about.html</a
+              >: the existing workspace library makes the public CC0 GIF fixtures. No Pillow runtime
+              is copied into the review media.
+            </li>
+          </ul>
+          <p>These tool versions are retained with the public review evidence.</p>
         </div>
       </section>
       <p class="note">

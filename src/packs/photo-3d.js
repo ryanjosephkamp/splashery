@@ -9,6 +9,10 @@
 // three samples come with their depth maps, made by tools/p3d-depth.mjs.
 
 import { smoothstep, quatAxisAngle } from "../kit.js";
+import { minimumField } from "../photo3d/background.js";
+import { borderSplats } from "../photo3d/border.js";
+import { discardSurface, retireBitmap } from "../photo3d/bitmaps.js";
+import { setFilledBackground } from "../photo-splats.js";
 import {
   buildPhotoSplats,
   PHOTO_DENSITY,
@@ -16,11 +20,18 @@ import {
   LAYERS,
   SPLAT_OPACITY,
   SPLAT_FLAT,
+  FLAT_KEEP,
 } from "./photo-3d-core.js";
 import { DOT_SAMPLES } from "./dot-samples.js"; // lane Dot samples: the AI-made pictures
 
 export { PHOTO_BUDGETS };
-import { sharpEntry, sharpPhoto, sharpDrive } from "./photo-sharp.js"; // lane Photo sharp view
+import {
+  sharpEntry,
+  sharpPhoto,
+  sharpDrive,
+  SHARP_CELLS,
+  prepareSharpPhoto,
+} from "./photo-sharp.js"; // lane Photo sharp view
 import { SAMPLES as SOUND_FILES, specFor } from "../voices.js"; // lane Photo depth
 
 // ---- The depth sound (lane Photo depth) ---------------------------------------------
@@ -259,6 +270,48 @@ export const ALL_SAMPLES = [...SAMPLES, ...DOT_SAMPLES];
 // the splats near it and in their color (the far side of a depth edge), a little behind them.
 // Seen face-on they are hidden; seen from the side they fill what a near part uncovers.
 export function backingOf(s, rows = 56, reach = Math.round(rows * 0.22)) {
+  if (s.background) {
+    const b = s.background;
+    const cols = Math.max(2, Math.round(rows * s.aspect));
+    const size = 0.9 * Math.max(s.aspect / cols, 1 / rows);
+    const n = cols * rows;
+    const pos = new Float32Array(n * 3),
+      rgb = new Float32Array(n * 3);
+    const channel = new Uint8Array(n);
+    const photo = new Uint8Array(n);
+    const local = minimumField(s.edgeDepth || s.depth, s.gx, s.gy, Math.ceil(3 * size * s.gy));
+    for (let y = 0; y < rows; y++)
+      for (let x = 0; x < cols; x++) {
+        const i = y * cols + x;
+        const k =
+          Math.min(b.h - 1, Math.floor(((y + 0.5) * b.h) / rows)) * b.w +
+          Math.min(b.w - 1, Math.floor(((x + 0.5) * b.w) / cols));
+        const ex = s.aspect / 2 - 2.4 * size,
+          ey = 0.5 - 2.4 * size;
+        const px = Math.max(-ex, Math.min(ex, ((x + 0.5) / cols - 0.5) * s.aspect));
+        const py = Math.max(-ey, Math.min(ey, 0.5 - (y + 0.5) / rows));
+        const cell =
+          Math.min(s.gy - 1, Math.floor((0.5 - py) * s.gy)) * s.gx +
+          Math.min(s.gx - 1, Math.floor((px / s.aspect + 0.5) * s.gx));
+        // Each disc has a constant height: the minimum of all photographed
+        // points its footprint covers. Unlike a raised coarse mesh rim, it
+        // cannot interpolate up through the foreground between its samples.
+        const d = Math.min(local[cell], b.depth[k]);
+        const z = s.stats.relief * (d - 0.5) - 0.014;
+        pos.set(
+          [
+            Math.max(-ex, Math.min(ex, ((x + 0.5) / cols - 0.5) * s.aspect)),
+            Math.max(-ey, Math.min(ey, 0.5 - (y + 0.5) / rows)),
+            z,
+          ],
+          i * 3,
+        );
+        rgb.set([b.rgba[k * 4] / 255, b.rgba[k * 4 + 1] / 255, b.rgba[k * 4 + 2] / 255], i * 3);
+        channel[i] = z > 0 ? LAYERS - 1 : 0;
+        photo[i] = b.donor[k] === k ? 1 : 0;
+      }
+    return { n, pos, rgb, size, channel, photo };
+  }
   const cols = Math.max(2, Math.round(rows * s.aspect));
   const w = s.aspect / cols; // a cell's width, in picture heights
   const h = 1 / rows;
@@ -349,6 +402,7 @@ const P3D = {
   custom: null, // the photo somebody opened: { photo, depth, uid, name, ms }
   want: null,
   uid: 0,
+  preparing: 0,
   cache: new Map(),
   info: null, // what the last build made, for shown() and the tests
 };
@@ -362,6 +416,15 @@ const MAX_SIDE = 2048; // a bigger photo is reduced on the way in (memory)
 export async function decodePhoto(source) {
   if (typeof createImageBitmap === "function" && typeof document !== "undefined") {
     const blob = source instanceof Blob ? source : new Blob([source]);
+    if (typeof Worker !== "undefined" && typeof OffscreenCanvas !== "undefined") {
+      try {
+        const { decodeBytes } = await import("../photo3d/decode.js");
+        return await decodeBytes(blob, MAX_SIDE);
+      } catch {
+        // Older worker decoders may support fewer formats than the window.
+        // Keep the window decoder and its existing format-specific error below.
+      }
+    }
     let bmp;
     try {
       bmp = await createImageBitmap(blob, { imageOrientation: "from-image" });
@@ -478,14 +541,24 @@ export function usePhoto(photo, depth, name = "Your photo") {
 // works out the depth. Returns what the toy shows.
 export async function openPhoto(file, name) {
   const photo = await decodePhoto(file);
-  const { estimateDepth } = await import("./photo-3d-depth.js");
-  const depth = await estimateDepth(photo);
-  const p = usePhoto(photo, { w: depth.w, h: depth.h, d: depth.d }, name || "Your photo");
-  p.ms = depth.ms;
-  return p;
+  const { photoPreview } = await import("../photo3d/preview.js");
+  const close = photoPreview(photo);
+  try {
+    const { estimateDepth } = await import("./photo-3d-depth.js");
+    const depth = await estimateDepth(photo);
+    const p = usePhoto(photo, { w: depth.w, h: depth.h, d: depth.d }, name || "Your photo");
+    p.ms = depth.ms;
+    return p;
+  } finally {
+    close();
+  }
 }
 
 const fmt = (n) => Math.round(n).toLocaleString("en-US");
+// Option normalization can turn .95 into .9500000000000001 between prepare
+// and build. Both must select the same worker result, including its Sharp grid.
+const surfaceKey = (src, budget, depth, profile = "mid") =>
+  `${src.uid}/${budget}/${Math.round((depth ?? 0.5) * 1e6)}/${SHARP_CELLS[profile]}`;
 
 // The tap: the layers rise out of the flat picture one after another, the far one first.
 // `r` is how far it has risen (0 flat, 1 with its depth); returns each layer's morph (1 flat, 0 risen).
@@ -497,15 +570,24 @@ export function layerMorph(r, layer) {
 // Lane Photo fidelity: the photo itself, for the photo-textured splats (src/photo-splats.js).
 function photoCanvas(sh) {
   if (P3D.canvasFor === sh.uid) return P3D.canvas;
+  retireBitmap(P3D.canvas, globalThis.window?.__splashery?.player?.stage);
+  if (sh.bitmap) {
+    P3D.canvas = sh.bitmap;
+    P3D.canvasFor = sh.uid;
+    return sh.bitmap;
+  }
   const c = document.createElement("canvas");
   c.width = sh.photo.w;
   c.height = sh.photo.h;
-  c.getContext("2d").putImageData(new ImageData(new Uint8ClampedArray(sh.photo.data.buffer, sh.photo.data.byteOffset, sh.photo.data.byteLength), sh.photo.w, sh.photo.h), 0, 0); // prettier-ignore
+  // Keep static pixel painting on the CPU; PlayCanvas uploads the texture once.
+  c.getContext("2d", { willReadFrequently: true }).putImageData(new ImageData(new Uint8ClampedArray(sh.photo.data.buffer, sh.photo.data.byteOffset, sh.photo.data.byteLength), sh.photo.w, sh.photo.h), 0, 0); // prettier-ignore
   P3D.canvas = c;
   P3D.canvasFor = sh.uid;
   return c;
 }
 
+let inputRead = 0;
+let stopInputWarning = () => {};
 const PHOTO_3D = {
   density: PHOTO_DENSITY,
   photo: {
@@ -588,11 +670,31 @@ const PHOTO_3D = {
     note: "Open a JPEG, PNG or WebP photo (HEIC too, where the browser can read it). Large photos are scaled down to 2,048 pixels on the long side, and turned upright by their camera tag. A depth model that runs on this device (about 27 MB, loaded the first time) works out how far away each part of the picture is, and the photo is rebuilt as splats in 3D. Your photo never leaves your device. It takes a few seconds, longer on a phone.",
     async read(_text, fileName, file) {
       if (!file) throw new Error("Open a photo.");
-      const p = await openPhoto(
-        file,
-        (file.name || fileName || "Your photo").replace(/\.[^.]+$/, ""),
-      );
-      return { source: "custom", photoName: p.name };
+      const version = ++inputRead;
+      stopInputWarning();
+      const panel = globalThis.document?.getElementById("toy-input");
+      try {
+        const p = await openPhoto(
+          file,
+          (file.name || fileName || "Your photo").replace(/\.[^.]+$/, ""),
+        );
+        return { source: "custom", photoName: p.name };
+      } catch (error) {
+        const pl = globalThis.window?.__splashery?.player;
+        const source = pl?.scene?.toy?.options?.source;
+        if (panel) {
+          const { preserveInputWarning } = await import("../photo3d/input-warning.js");
+          stopInputWarning = preserveInputWarning(
+            panel,
+            error.message,
+            () =>
+              version === inputRead &&
+              pl?.scene?.toy?.id === "photo-3d" &&
+              pl.scene.toy.options?.source === source,
+          );
+        }
+        throw error;
+      }
     },
     // Lane Live input: the camera, and a button that takes the picture.
     live: [{ kind: "camera", capture: { button: "Take the picture", name: "Camera picture.jpg" }, status: mirrorStatus }, sharpEntry("photo-3d"), soundEntry()], // prettier-ignore
@@ -612,9 +714,72 @@ const PHOTO_3D = {
     license: s.license,
     licenseUrl: s.licenseUrl,
   })),
-  async prepare(o) {
-    if (o.source === "custom" && P3D.custom) P3D.want = P3D.custom;
-    else P3D.want = await loadSample(o.source === "custom" ? SAMPLES[0].id : o.source);
+  async prepare(o, _help, { profile = "mid" } = {}) {
+    const generation = ++P3D.preparing;
+    const pl = globalThis.window?.__splashery?.player;
+    const token = pl?.loadToken;
+    const current = () => generation === P3D.preparing && (!pl || token === pl.loadToken);
+    const src =
+      o.source === "custom" && P3D.custom
+        ? P3D.custom
+        : await loadSample(o.source === "custom" ? SAMPLES[0].id : o.source);
+    if (!current()) return;
+    P3D.want = src;
+    if (typeof window !== "undefined" && typeof Worker !== "undefined" && !liveOn()) {
+      const count = pl?.splatBudget?.(PHOTO_DENSITY) ?? PHOTO_BUDGETS[profile];
+      const budget = Math.max(100, Math.floor(count * 0.95));
+      const key = surfaceKey(src, budget, o.depth, profile);
+      const { prepareSurface, cancelSurface, cancelPendingSurface } =
+        await import("../photo3d/prepare.js");
+      if (!current()) return;
+      // A cached choice also supersedes pending work and its stale preview.
+      cancelPendingSurface();
+      if (!P3D.cache.has(key)) {
+        const { photoPreview } = await import("../photo3d/preview.js");
+        if (!current()) return;
+        const close = photoPreview(
+          src.photo,
+          cancelSurface,
+          () => !pl?.loading && pl?.proc?.ctx?.kit?.data?.photo?.uid === src.uid,
+        );
+        try {
+          await prepareSharpPhoto();
+          if (!current()) {
+            close(true);
+            return;
+          }
+          const s = await prepareSurface(
+            src.photo,
+            src.depth,
+            {
+              count: budget,
+              depth: o.depth ?? 0.5,
+              keepFlat: src === P3D.custom,
+              bitmap: P3D.canvasFor !== src.uid || !P3D.canvas,
+            },
+            SHARP_CELLS[profile],
+          );
+          if (!s || !current()) {
+            discardSurface(s, P3D.canvas);
+            close(true);
+            return;
+          }
+          if (P3D.canvasFor === src.uid && P3D.canvas) {
+            discardSurface(s, P3D.canvas);
+            s.bitmap = typeof P3D.canvas.close === "function" ? P3D.canvas : null;
+          }
+          for (const old of P3D.cache.values()) discardSurface(old, P3D.canvas);
+          P3D.cache.clear();
+          P3D.cache.set(key, s);
+        } catch (error) {
+          close(true);
+          throw error;
+        } finally {
+          close();
+        }
+      }
+      P3D.want = src;
+    }
   },
   screen: mirrorScreen, // lane Live input: the live view's colors and depth
   drive(t, c, out) {
@@ -638,6 +803,7 @@ const PHOTO_3D = {
   build(k, o) {
     P3D.original = null;
     if (liveOn()) {
+      setFilledBackground(globalThis.window?.__splashery?.player?.stage, null, null);
       // Lane Live input: the camera's live view.
       MIRROR.depth = o.depth ?? 0.5;
       buildMirror(k, { width: 2, lift: 0.9 });
@@ -653,10 +819,11 @@ const PHOTO_3D = {
     if (!src) throw new Error("There is no photo to show.");
     P3D.original = o.original === "on" ? src : null;
     const budget = Math.max(100, Math.floor(k.count * 0.95));
-    const key = `${src.uid}/${budget}/${o.depth}`;
+    const key = surfaceKey(src, budget, o.depth, globalThis.window?.__splashery?.player?.profile);
     let s = P3D.cache.get(key);
     if (!s) {
       s = buildPhotoSplats(src.photo, src.depth, { count: budget, depth: o.depth ?? 0.5, keepFlat: src === P3D.custom }); // prettier-ignore
+      for (const old of P3D.cache.values()) discardSurface(old, P3D.canvas);
       P3D.cache.clear();
       P3D.cache.set(key, s);
     }
@@ -664,25 +831,53 @@ const PHOTO_3D = {
     const parts = [];
     for (let b = 0; b < LAYERS; b++) parts.push(k.part(`layer${b}`, { pivot: [0, 0, 0], axis: [0, 0, 1] })); // prettier-ignore
     const unit = 1 / 0.01; // a cloud-only recipe's base splat size is 0.01
-    const share = Math.min(1, s.n / k.count);
-    k.cloud({ share, pattern: false }, (_r, i) => {
-      if (i >= s.n) return null;
-      const b = s.band[i];
-      return {
-        p: [s.relief[i * 3], s.relief[i * 3 + 1], s.relief[i * 3 + 2]],
-        to: [s.flat[i * 3], s.flat[i * 3 + 1], s.flat[i * 3 + 2]],
-        channel: b,
-        part: parts[b],
+    // Kit yields between clouds. Keep each emission small as well as preparing
+    // the depth/color images in a worker, so a dense photo does not monopolize JS.
+    for (let first = 0; first < s.n; first += 4096) {
+      const n = Math.min(4096, s.n - first);
+      k.cloud({ share: n / k.count, pattern: false }, (_r, local) => {
+        const i = first + local;
+        if (i >= s.n) return null;
+        const b = s.band[i];
+        return {
+          p: [s.relief[i * 3], s.relief[i * 3 + 1], s.relief[i * 3 + 2]],
+          to: [s.flat[i * 3], s.flat[i * 3 + 1], s.flat[i * 3 + 2]],
+          channel: b,
+          part: parts[b],
+          n: [0, 0, 1],
+          size: (o.detail === "splats" ? s.sigma[i] : s.coverage[i]) * unit,
+          flat: SPLAT_FLAT,
+          jitter: s.stats.flatness <= FLAT_KEEP ? 0.5 : 0,
+          color: [s.rgb[i * 3], s.rgb[i * 3 + 1], s.rgb[i * 3 + 2]],
+          opacity: SPLAT_OPACITY,
+          pattern: false,
+          photo: true,
+        };
+      });
+    }
+    P3D.shown = { photo: src.photo, aspect: s.aspect, uid: src.uid, bitmap: s.bitmap };
+    setFilledBackground(
+      globalThis.window?.__splashery?.player?.stage,
+      s.background,
+      typeof document === "undefined" ? null : photoCanvas(P3D.shown),
+    );
+    if (o.detail !== "splats" && s.stats.flatness > FLAT_KEEP) {
+      const edge = borderSplats(src.photo, s);
+      k.cloud({ share: edge.n / k.count, pattern: false }, (_r, i) => ({
+        p: Array.from(edge.pos.subarray(i * 3, i * 3 + 3)),
+        to: [edge.pos[i * 3], edge.pos[i * 3 + 1], 0],
+        channel: edge.band[i],
+        part: parts[edge.band[i]],
         n: [0, 0, 1],
-        size: s.sigma[i] * unit,
+        size: edge.size[i] * unit,
         flat: SPLAT_FLAT,
-        color: [s.rgb[i * 3], s.rgb[i * 3 + 1], s.rgb[i * 3 + 2]],
+        jitter: 0,
+        color: Array.from(edge.rgb.subarray(i * 3, i * 3 + 3)),
         opacity: SPLAT_OPACITY,
         pattern: false,
         photo: true,
-      };
-    });
-    P3D.shown = { photo: src.photo, aspect: s.aspect, uid: src.uid };
+      }));
+    }
     // Smd r2: a backing layer (see backingOf): where a near part pulls away from what is behind it
     // as the view turns, the gap shows that part of the picture, stretched, instead of empty space.
     const back = backingOf(
@@ -699,9 +894,46 @@ const PHOTO_3D = {
         n: [0, 0, 1],
         size: back.size * unit,
         flat: SPLAT_FLAT,
+        jitter: 0,
         color: [back.rgb[i * 3], back.rgb[i * 3 + 1], back.rgb[i * 3 + 2]],
         opacity: SPLAT_OPACITY,
         pattern: false,
+        photo: false,
+      };
+    });
+    // A continuous far plane covers the gaps between coarse backing patches
+    // when their depths differ. The shared texture supplies sharp filled color.
+    const floorRows = Math.max(8, Math.round(Math.sqrt(400 / s.aspect)));
+    const floorCols = Math.max(8, Math.round(floorRows * s.aspect));
+    const floorCount = floorRows * floorCols;
+    const floorZ = Math.min(
+      -0.02,
+      s.stats.relief * (s.background.depth.reduce((a, b) => Math.min(a, b), 1) - 0.5) - 0.02,
+    );
+    k.cloud({ share: floorCount / k.count, pattern: false }, (_r, i) => {
+      const x = ((i % floorCols) + 0.5) / floorCols,
+        y = (Math.floor(i / floorCols) + 0.5) / floorRows;
+      const c =
+        (Math.min(s.background.h - 1, Math.floor(y * s.background.h)) * s.background.w +
+          Math.min(s.background.w - 1, Math.floor(x * s.background.w))) *
+        4;
+      return {
+        p: [(x - 0.5) * s.aspect, 0.5 - y, floorZ],
+        to: [(x - 0.5) * s.aspect, 0.5 - y, -0.02],
+        channel: 0,
+        part: parts[0],
+        n: [0, 0, 1],
+        size: 0.9 * Math.max(s.aspect / floorCols, 1 / floorRows) * unit,
+        flat: SPLAT_FLAT,
+        jitter: 0,
+        color: [
+          s.background.rgba[c] / 255,
+          s.background.rgba[c + 1] / 255,
+          s.background.rgba[c + 2] / 255,
+        ],
+        opacity: SPLAT_OPACITY,
+        pattern: false,
+        photo: false,
       };
     });
     P3D.info = {
@@ -725,6 +957,7 @@ const PHOTO_3D = {
       gy: s.gy,
       aspect: s.aspect,
       relief: s.stats.relief,
+      background: s.background,
       uid: src.uid,
     }); // lane Photo sharp view
   },
