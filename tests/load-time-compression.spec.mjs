@@ -15,28 +15,34 @@ for (const [id, format] of [
   ["sunglasses", "j"],
   ["pyrite-cubes", "d"],
 ])
-  test(`${format} links start their scan helper while the engine is still transferring`, async ({
-    page,
-  }) => {
-    let release;
-    const held = new Promise((resolve) => (release = resolve));
-    await page.route("**/playcanvas.min.mjs.gz", async (route) => {
-      await held;
-      await route.continue();
+  test(`${format} links finish their scan helper before GPU initialization`, async ({ page }) => {
+    await page.addInitScript(() => {
+      window.__helperAtGpu = [];
+      const getContext = HTMLCanvasElement.prototype.getContext;
+      HTMLCanvasElement.prototype.getContext = function (kind, ...args) {
+        if (this.id === "stage" && kind === "webgl2")
+          window.__helperAtGpu.push(
+            performance
+              .getEntriesByType("resource")
+              .some((r) => r.name.endsWith("/src/packs/real-objects.js") && r.responseEnd > 0),
+          );
+        return getContext.call(this, kind, ...args);
+      };
     });
+    const requests = [];
+    page.on("request", (r) => requests.push(new URL(r.url()).pathname));
     const scene = Buffer.from(JSON.stringify(createScene({ toy: { kind: "builtin", id } })));
     const hash = `${format}.${(format === "d" ? deflateRawSync(scene) : scene).toString("base64url")}`;
-    const helpers = page.waitForRequest("**/src/packs/real-objects.js", { timeout: 10000 });
     await page.goto(`/?renderer=webgl2&profile=weak&adapt=off&labs=1#s=${hash}`, {
       waitUntil: "commit",
     });
-    try {
-      await helpers;
-    } finally {
-      release();
-    }
     await page.waitForSelector("body[data-ready='true']", { timeout: 180000 });
     expect(await page.evaluate(() => window.__splashery.player.toyInfo.id)).toBe(id);
+    const order = await page.evaluate(() => window.__helperAtGpu);
+    expect(order.length).toBeGreaterThan(0);
+    expect(order.every(Boolean)).toBe(true);
+    expect(requests).toContain("/vendor/playcanvas/playcanvas.min.mjs.gz");
+    expect(requests).not.toContain("/vendor/playcanvas/playcanvas.min.mjs");
   });
 
 test("engine transfer starts while the stylesheet still blocks DOM readiness", async ({ page }) => {

@@ -27,9 +27,11 @@
     }
   }
   async function start() {
-    // A shared scan's helpers can transfer and compile before GPU setup.
-    // A failed or malformed link keeps the app's existing fallback behavior.
-    import("./opening-pack.js").then(({ warmOpeningPack }) => warmOpeningPack()).catch(() => {});
+    // Only this small codec/ID module is safe to fetch before engine mapping.
+    const opening =
+      location.hash.includes("s=") || new URLSearchParams(location.search).has("toy")
+        ? import("./opening-pack.js").catch(() => null)
+        : null;
     if (
       typeof DecompressionStream === "function" &&
       HTMLScriptElement.supports?.("importmap") &&
@@ -55,6 +57,13 @@
       map.type = "importmap";
       map.textContent = JSON.stringify({ imports });
       document.head.appendChild(map);
+    }
+    if (opening) {
+      try {
+        await (await opening)?.warmOpeningPack();
+      } catch {
+        // A malformed scene or unavailable helper retains the app's fallback.
+      }
     }
     await ready;
     await import(entry.href);
