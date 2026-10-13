@@ -32,6 +32,7 @@ import { backingField } from "./relief-height.js"; // lane Photo depth
 
 const VS = /* glsl */ `
 attribute vec3 aPosition;
+attribute vec4 aSurface;
 uniform mat4 matrix_model;
 uniform mat4 matrix_viewProjection;
 uniform sampler2D uDepth;
@@ -53,6 +54,7 @@ varying vec2 vUv;
 varying float vD;
 varying float vEdge;
 varying vec2 vCenter;
+varying vec3 vCell;
 vec3 psvRot(vec4 q, vec3 v) { return v + 2.0 * cross(q.xyz, cross(q.xyz, v) + q.w * v); }
 vec4 psvPlace(vec3 p) {
   p = (p - uTf.xyz) * uTf.w;
@@ -85,8 +87,22 @@ float pdpDeep(vec2 uv) {
   vec2 c = r * uGrid.zw;
   return smoothstep(2.0, 6.0, min(c.x, c.y)) * smoothstep(0.02, 0.03, min(r.x, r.y));
 }
+float p3dCenter(vec2 uv) {
+  ivec2 size = textureSize(uDepth, 0);
+  ivec2 p = ivec2(floor(clamp(uv * vec2(size) - 0.5, vec2(0.0), vec2(size - 1))));
+  vec4 taps;
+  taps.x = texelFetch(uDepth, clamp(p, ivec2(0), size - 1), 0).r;
+  taps.y = texelFetch(uDepth, clamp(p + ivec2(1, 0), ivec2(0), size - 1), 0).r;
+  taps.z = texelFetch(uDepth, clamp(p + ivec2(0, 1), ivec2(0), size - 1), 0).r;
+  taps.w = texelFetch(uDepth, clamp(p + ivec2(1, 1), ivec2(0), size - 1), 0).r;
+  float span = max(max(taps.x, taps.y), max(taps.z, taps.w)) - min(min(taps.x, taps.y), min(taps.z, taps.w));
+  if (span > 2.0 * uLayer.y) return texelFetch(uDepth, clamp(ivec2(floor(uv * vec2(size))), ivec2(0), size - 1), 0).r;
+  return textureLod(uDepth, uv, 0.0).r;
+}
 void main(void) {
   float back = uLayer.z;
+  vCell = vec3(0.0);
+  if (uFill.x > 0.5 && back < 0.5) vCell = vec3(aSurface.w, aSurface.y, mod(aSurface.z, 256.0));
   if (back > 1.5) {
     // the frame: a corner -1 or 2 is that far outside the picture
     vec2 f = aPosition.xy;
@@ -123,12 +139,29 @@ void main(void) {
         if (t < d) { d = t; cuv = s; }
       }
   } else {
-    d = textureLod(uDepth, uv, 0.0).r;
-    if (filled && back < 0.5) {
-      float cd = textureLod(uDepth, center, 0.0).r;
+    d = filled && back < 0.5 ? aSurface.x : textureLod(uDepth, uv, 0.0).r;
+    if (filled && back < 0.5 && aSurface.z > 0.5) {
+      // Native R8 interpolation at a cut keeps geometry and color-tap
+      // eligibility consistent. Continuous interiors use the worker data.
+      float cd = p3dCenter(center);
       float cb = floor(textureLod(uBand, center, 0.0).r * 3.0 + 0.5);
       float vb = floor(textureLod(uBand, uv, 0.0).r * 3.0 + 0.5);
+      d = textureLod(uDepth, uv, 0.0).r;
       if (abs(d - cd) > uLayer.y || abs(cb - vb) > 0.5) d = cd;
+      vCell.xy = vec2(cd, cb);
+      if (aSurface.z >= 256.0) {
+        float mask = 0.0;
+        for (int axis = 0; axis < 2; axis++) for (int side = -1; side <= 1; side += 2) {
+          vec2 stepUv = vec2(0.0); stepUv[axis] = float(side) / uGrid[axis + 2];
+          vec2 neighbor = clamp(center + stepUv, 0.0, 1.0);
+          float nd = p3dCenter(neighbor);
+          float nb = floor(textureLod(uBand, neighbor, 0.0).r * 3.0 + 0.5);
+          float bit = float(axis * 2 + (side > 0 ? 1 : 0));
+          if (cd - nd > uLayer.y || cb > nb) mask += exp2(bit);
+          if (nd - cd > uLayer.y || nb > cb) mask += exp2(bit + 4.0);
+        }
+        vCell.z = mask;
+      }
     }
   }
   float z;
@@ -149,7 +182,7 @@ void main(void) {
     if (back < 0.5 && pieces) {
       // Lane Photo depth: the layer of this point's piece of surface (one for the whole piece, as
       // the splats have), eased into the old blend by depth within six cells of the border.
-      pb = floor(textureLod(uBand, filled ? center : uv, 0.0).r * 3.0 + 0.5);
+      pb = filled ? vCell.y : floor(textureLod(uBand, uv, 0.0).r * 3.0 + 0.5);
       b = mix(clamp(dz * 4.0 - 0.5, 0.0, 3.0), pb, pdpDeep(uv));
     }
     float i0 = min(floor(b), 2.0);
@@ -202,6 +235,7 @@ void main(void) {
 
 const FS = /* glsl */ `
 uniform sampler2D uColor;
+uniform sampler2D uBackground;
 uniform sampler2D uDepth;
 uniform sampler2D uBand;
 uniform vec4 uGrid;
@@ -212,22 +246,46 @@ varying vec2 vUv;
 varying float vD;
 varying float vEdge;
 varying vec2 vCenter;
+varying vec3 vCell;
 void main(void) {
   vec2 aa = max(fwidth(vUv), vec2(1e-7));
   float coverage = 1.0;
+  vec3 c = texture(uColor, vUv).rgb;
   if (uFill.x > 0.5 && uLayer.z < 0.5) {
-    float cd = textureLod(uDepth, vCenter, 0.0).r;
-    float cb = textureLod(uBand, vCenter, 0.0).r;
+    float cd = vCell.x;
+    float cb = vCell.y;
+    float mask = floor(vCell.z + 0.5);
+    bool cut = mask > 0.5;
+    bool farSide = mask >= 16.0;
     for (int axis = 0; axis < 2; axis++) for (int side = -1; side <= 1; side += 2) {
       vec2 stepUv = vec2(0.0); stepUv[axis] = float(side) / uGrid[axis + 2];
-      vec2 neighbor = clamp(vCenter + stepUv, 0.0, 1.0);
-      float nd = textureLod(uDepth, neighbor, 0.0).r;
-      float nb = textureLod(uBand, neighbor, 0.0).r;
-      if (cd - nd > uLayer.y || cb - nb > 0.2) {
+      float bit = float(axis * 2 + (side > 0 ? 1 : 0));
+      if (mod(floor(mask / exp2(bit)), 2.0) > 0.5) {
         float edge = vCenter[axis] + stepUv[axis] * 0.5;
         float distance = (edge - vUv[axis]) * float(side);
         coverage = min(coverage, smoothstep(-0.5 * aa[axis], 0.5 * aa[axis], distance));
       }
+    }
+    if (cut) {
+      // Mipmaps and bilinear filtering otherwise mix the other surface's
+      // color into this cut. Reconstruct only from texels on this side.
+      vec2 size = vec2(textureSize(uColor, 0));
+      vec2 pixel = vUv * size - 0.5;
+      vec2 fraction = fract(pixel);
+      vec3 sum = vec3(0.0);
+      float weight = 0.0;
+      for (int y = 0; y <= 1; y++) for (int x = 0; x <= 1; x++) {
+        vec2 uv = (floor(pixel) + vec2(float(x), float(y)) + 0.5) / size;
+        float d = textureLod(uDepth, uv, 0.0).r;
+        float b = textureLod(uBand, uv, 0.0).r * 3.0;
+        if (abs(d - cd) <= uLayer.y && abs(b - cb) < 0.5) {
+          vec2 w = mix(1.0 - fraction, fraction, vec2(float(x), float(y)));
+          float q = w.x * w.y;
+          sum += textureLod(uColor, uv, 0.0).rgb * q;
+          weight += q;
+        }
+      }
+      c = weight > 1e-6 ? sum / weight : (farSide ? textureLod(uBackground, vUv, 0.0).rgb : texelFetch(uColor, clamp(ivec2(floor(vCenter * size)), ivec2(0), ivec2(size) - 1), 0).rgb);
     }
   }
   // (nothing is cut within a cell and a half of the picture's border, so its edge stays straight)
@@ -245,7 +303,6 @@ void main(void) {
       if (abs(gu) / uGrid.z + abs(gv) / uGrid.w > uLayer.y) discard;
     }
   }
-  vec3 c = texture(uColor, vUv).rgb;
   if (uLayer.z > 0.5 && uLayer.z < 1.5 && uBack.w > 0.5) c = vec3(1.0, 0.0, 1.0); // (tests: the backing in magenta)
   gl_FragColor = vec4(uLayer.z > 1.5 ? vec3(0.133, 0.149, 0.173) : c, coverage);
 }
@@ -253,6 +310,7 @@ void main(void) {
 
 const VS_W = /* wgsl */ `
 attribute aPosition: vec3f;
+attribute aSurface: vec4f;
 uniform matrix_model: mat4x4f;
 uniform matrix_viewProjection: mat4x4f;
 uniform uGrid: vec4f;
@@ -278,6 +336,7 @@ varying vUv: vec2f;
 varying vD: f32;
 varying vEdge: f32;
 varying vCenter: vec2f;
+varying vCell: vec3f;
 fn psvRot(q: vec4f, v: vec3f) -> vec3f { return v + 2.0 * cross(q.xyz, cross(q.xyz, v) + q.w * v); }
 fn psvPlace(p0: vec3f) -> vec4f {
   var p = (p0 - uniform.uTf.xyz) * uniform.uTf.w;
@@ -308,9 +367,24 @@ fn pdpDeep(uv: vec2f) -> f32 {
   let c = r * uniform.uGrid.zw;
   return smoothstep(2.0, 6.0, min(c.x, c.y)) * smoothstep(0.02, 0.03, min(r.x, r.y));
 }
+fn p3dCenter(uv: vec2f) -> f32 {
+  let size = vec2i(textureDimensions(uDepth, 0));
+  let p = vec2i(floor(clamp(uv * vec2f(size) - 0.5, vec2f(0.0), vec2f(size - 1))));
+  let taps = vec4f(
+    textureLoad(uDepth, clamp(p, vec2i(0), size - 1), 0).r,
+    textureLoad(uDepth, clamp(p + vec2i(1, 0), vec2i(0), size - 1), 0).r,
+    textureLoad(uDepth, clamp(p + vec2i(0, 1), vec2i(0), size - 1), 0).r,
+    textureLoad(uDepth, clamp(p + vec2i(1, 1), vec2i(0), size - 1), 0).r
+  );
+  let span = max(max(taps.x, taps.y), max(taps.z, taps.w)) - min(min(taps.x, taps.y), min(taps.z, taps.w));
+  if (span > 2.0 * uniform.uLayer.y) { return textureLoad(uDepth, clamp(vec2i(floor(uv * vec2f(size))), vec2i(0), size - 1), 0).r; }
+  return textureSampleLevel(uDepth, uDepthSampler, uv, 0.0).r;
+}
 @vertex fn vertexMain(input: VertexInput) -> VertexOutput {
   var output: VertexOutput;
   let back = uniform.uLayer.z;
+  output.vCell = vec3f(0.0);
+  if (uniform.uFill.x > 0.5 && back < 0.5) { output.vCell = vec3f(input.aSurface.w, input.aSurface.y, f32(u32(round(input.aSurface.z)) & 255u)); }
   if (back > 1.5) {
     var f = input.aPosition.xy;
     f = mix(f, -uniform.uFrame.xy, step(f, vec2f(-0.5)));
@@ -347,10 +421,30 @@ fn pdpDeep(uv: vec2f) -> f32 {
   } else {
     d = textureSampleLevel(uDepth, uDepthSampler, uv, 0.0).r;
     if (filled && back < 0.5) {
-      let cd = textureSampleLevel(uDepth, uDepthSampler, center, 0.0).r;
-      let cb = floor(textureSampleLevel(uBand, uBandSampler, center, 0.0).r * 3.0 + 0.5);
-      let vb = floor(textureSampleLevel(uBand, uBandSampler, uv, 0.0).r * 3.0 + 0.5);
-      if (abs(d - cd) > uniform.uLayer.y || abs(cb - vb) > 0.5) { d = cd; }
+      d = input.aSurface.x;
+      if (input.aSurface.z > 0.5) {
+        let cd = p3dCenter(center);
+        let cb = floor(textureSampleLevel(uBand, uBandSampler, center, 0.0).r * 3.0 + 0.5);
+        let vb = floor(textureSampleLevel(uBand, uBandSampler, uv, 0.0).r * 3.0 + 0.5);
+        d = textureSampleLevel(uDepth, uDepthSampler, uv, 0.0).r;
+        if (abs(d - cd) > uniform.uLayer.y || abs(cb - vb) > 0.5) { d = cd; }
+        output.vCell = vec3f(cd, cb, output.vCell.z);
+        if (input.aSurface.z >= 256.0) {
+          var mask = 0u;
+          for (var axis: i32 = 0; axis < 2; axis++) {
+            for (var side: i32 = -1; side <= 1; side += 2) {
+              var stepUv = vec2f(0.0); stepUv[axis] = f32(side) / uniform.uGrid[axis + 2];
+              let neighbor = clamp(center + stepUv, vec2f(0.0), vec2f(1.0));
+              let nd = p3dCenter(neighbor);
+              let nb = floor(textureSampleLevel(uBand, uBandSampler, neighbor, 0.0).r * 3.0 + 0.5);
+              let bit = u32(axis * 2 + select(0, 1, side > 0));
+              if (cd - nd > uniform.uLayer.y || cb > nb) { mask |= 1u << bit; }
+              if (nd - cd > uniform.uLayer.y || nb > cb) { mask |= 1u << (bit + 4u); }
+            }
+          }
+          output.vCell.z = f32(mask);
+        }
+      }
     }
   }
   var z: f32;
@@ -371,7 +465,8 @@ fn pdpDeep(uv: vec2f) -> f32 {
     var b = clamp(d * 4.0 - 0.5, 0.0, 3.0);
     if (back > 0.5) { b = 0.0; }
     if (back < 0.5 && pieces) {
-      pb = floor(textureSampleLevel(uBand, uBandSampler, select(uv, center, filled), 0.0).r * 3.0 + 0.5);
+      if (filled) { pb = output.vCell.y; }
+      else { pb = floor(textureSampleLevel(uBand, uBandSampler, uv, 0.0).r * 3.0 + 0.5); }
       b = mix(clamp(dz * 4.0 - 0.5, 0.0, 3.0), pb, pdpDeep(uv));
     }
     let i0 = min(floor(b), 2.0);
@@ -425,6 +520,8 @@ uniform uBack: vec4f;
 uniform uFill: vec4f;
 var uColor: texture_2d<f32>;
 var uColorSampler: sampler;
+var uBackground: texture_2d<f32>;
+var uBackgroundSampler: sampler;
 var uDepth: texture_2d<f32>;
 var uDepthSampler: sampler;
 var uBand: texture_2d<f32>;
@@ -433,30 +530,55 @@ varying vUv: vec2f;
 varying vD: f32;
 varying vEdge: f32;
 varying vCenter: vec2f;
+varying vCell: vec3f;
 @fragment fn fragmentMain(input: FragmentInput) -> FragmentOutput {
   var output: FragmentOutput;
   let ux = dpdx(input.vUv);
   let uy = dpdy(input.vUv);
   let dx = dpdx(input.vD);
   let dy = dpdy(input.vD);
-  let c = textureSample(uColor, uColorSampler, input.vUv);
+  var rgb = textureSample(uColor, uColorSampler, input.vUv).rgb;
   let aa = max(fwidth(input.vUv), vec2f(1e-7));
   var coverage = 1.0;
   if (uniform.uFill.x > 0.5 && uniform.uLayer.z < 0.5) {
-    let cd = textureSampleLevel(uDepth, uDepthSampler, input.vCenter, 0.0).r;
-    let cb = textureSampleLevel(uBand, uBandSampler, input.vCenter, 0.0).r;
+    let cd = input.vCell.x;
+    let cb = input.vCell.y;
+    let mask = u32(round(input.vCell.z));
+    let cut = mask > 0u;
+    let farSide = mask >= 16u;
     for (var axis: i32 = 0; axis < 2; axis++) {
       for (var side: i32 = -1; side <= 1; side += 2) {
         var stepUv = vec2f(0.0); stepUv[axis] = f32(side) / uniform.uGrid[axis + 2];
-        let neighbor = clamp(input.vCenter + stepUv, vec2f(0.0), vec2f(1.0));
-        let nd = textureSampleLevel(uDepth, uDepthSampler, neighbor, 0.0).r;
-        let nb = textureSampleLevel(uBand, uBandSampler, neighbor, 0.0).r;
-        if (cd - nd > uniform.uLayer.y || cb - nb > 0.2) {
+        let bit = f32(axis * 2 + select(0, 1, side > 0));
+        if ((mask & (1u << u32(bit))) != 0u) {
           let edge = input.vCenter[axis] + stepUv[axis] * 0.5;
           let distance = (edge - input.vUv[axis]) * f32(side);
           coverage = min(coverage, smoothstep(-0.5 * aa[axis], 0.5 * aa[axis], distance));
         }
       }
+    }
+    if (cut) {
+      let size = vec2f(textureDimensions(uColor, 0));
+      let pixel = input.vUv * size - 0.5;
+      let fraction = fract(pixel);
+      var sum = vec3f(0.0);
+      var weight = 0.0;
+      for (var y: i32 = 0; y <= 1; y++) {
+        for (var x: i32 = 0; x <= 1; x++) {
+          let uv = (floor(pixel) + vec2f(f32(x), f32(y)) + 0.5) / size;
+          let d = textureSampleLevel(uDepth, uDepthSampler, uv, 0.0).r;
+          let b = textureSampleLevel(uBand, uBandSampler, uv, 0.0).r * 3.0;
+          if (abs(d - cd) <= uniform.uLayer.y && abs(b - cb) < 0.5) {
+            let w = mix(1.0 - fraction, fraction, vec2f(f32(x), f32(y)));
+            let q = w.x * w.y;
+            sum += textureSampleLevel(uColor, uColorSampler, uv, 0.0).rgb * q;
+            weight += q;
+          }
+        }
+      }
+      if (weight > 1e-6) { rgb = sum / weight; }
+      else if (farSide) { rgb = textureSampleLevel(uBackground, uBackgroundSampler, input.vUv, 0.0).rgb; }
+      else { rgb = textureLoad(uColor, clamp(vec2i(floor(input.vCenter * size)), vec2i(0), vec2i(size) - 1), 0).rgb; }
     }
   }
   let rim = min(input.vUv, 1.0 - input.vUv) * uniform.uGrid.zw;
@@ -469,7 +591,6 @@ varying vCenter: vec2f;
       if (abs(gu) / uniform.uGrid.z + abs(gv) / uniform.uGrid.w > uniform.uLayer.y) { discard; }
     }
   }
-  var rgb = c.rgb;
   if (uniform.uLayer.z > 0.5 && uniform.uLayer.z < 1.5 && uniform.uBack.w > 0.5) { rgb = vec3f(1.0, 0.0, 1.0); }
   output.color = vec4f(select(rgb, vec3f(0.133, 0.149, 0.173), uniform.uLayer.z > 1.5), coverage);
   return output;
@@ -488,9 +609,14 @@ function gridMesh(device, cols, rows, split = false, prepared = null) {
       idx = grid.indices;
     const mesh = new pc.Mesh(device);
     mesh.setPositions(pos, 3);
+    if (grid.meta) mesh.setVertexStream(pc.SEMANTIC_TEXCOORD0, grid.meta, 4);
     mesh.setIndices(idx);
     mesh.update(pc.PRIMITIVE_TRIANGLES);
-    return { mesh, bytes: pos.byteLength + idx.byteLength };
+    return {
+      mesh,
+      hasMeta: !!grid.meta,
+      bytes: pos.byteLength + idx.byteLength + (grid.meta?.byteLength || 0),
+    };
   }
   const pos = new Float32Array((cols + 1) * (rows + 1) * 3);
   let o = 0;
@@ -557,7 +683,22 @@ function frameMesh(device, n = 96) {
 }
 
 function shaderDescription(filled = false, back = 0) {
+  const surface = filled && back === 0;
   const specialize = (code, wgsl) => {
+    if (!surface) {
+      code = wgsl
+        ? code
+            .replace("attribute aSurface: vec4f;", "")
+            .replaceAll("input.aSurface", "vec4f(0.0)")
+            .replace("var uBackground: texture_2d<f32>;", "")
+            .replace("var uBackgroundSampler: sampler;", "")
+            .replaceAll("uBackgroundSampler", "uColorSampler")
+            .replaceAll("uBackground", "uColor")
+        : code
+            .replace("attribute vec4 aSurface;", "const vec4 aSurface = vec4(0.0);")
+            .replace("uniform sampler2D uBackground;", "")
+            .replaceAll("uBackground", "uColor");
+    }
     if (!filled) return code;
     // Each still material needs only its own branch. Clips retain the original
     // shader, including their 49-tap color search and depth blending.
@@ -572,7 +713,10 @@ function shaderDescription(filled = false, back = 0) {
   };
   return {
     uniqueName: filled ? `p3dFilled${back}` : "psvRelief",
-    attributes: { aPosition: pc.SEMANTIC_POSITION },
+    attributes: {
+      aPosition: pc.SEMANTIC_POSITION,
+      ...(surface ? { aSurface: pc.SEMANTIC_TEXCOORD0 } : {}),
+    },
     vertexGLSL: specialize(VS, false),
     fragmentGLSL: specialize(FS, false),
     vertexWGSL: specialize(VS_W, true),
@@ -729,6 +873,40 @@ export class ReliefMesh {
       this.miS.mesh = this.surface.mesh;
       old.mesh.destroy();
     }
+    if (filled) {
+      const prepared = b.surface;
+      const grid =
+        prepared?.meta && prepared.cols === this.cols && prepared.rows === this.rows
+          ? prepared
+          : surfaceGrid(this.cols, this.rows, {
+              depth: this.depth._levels[0],
+              band: Uint8Array.from(this.band._levels[0], (v) => Math.round((v * 3) / 255)),
+              gx: this.depth.width,
+              gy: this.depth.height,
+              cut: this.u.uLayer[1],
+              compact: true,
+            });
+      // Compact layouts can cross 65,535 vertices on a same-size source
+      // handoff. PlayCanvas grows the vertex buffer without changing an
+      // existing 16-bit index buffer, so replace that mesh at the crossing.
+      if (
+        !this.surface.hasMeta ||
+        (this.surface.mesh.indexBuffer[0]?.format === pc.INDEXFORMAT_UINT16 &&
+          grid.positions.length / 3 > 65535)
+      ) {
+        const old = this.surface;
+        this.surface = gridMesh(this.device, this.cols, this.rows, true, grid);
+        this.miS.mesh = this.surface.mesh;
+        old.mesh.destroy();
+      } else {
+        this.surface.mesh.setPositions(grid.positions, 3);
+        this.surface.mesh.setIndices(grid.indices);
+        this.surface.mesh.setVertexStream(pc.SEMANTIC_TEXCOORD0, grid.meta, 4);
+        this.surface.mesh.update(pc.PRIMITIVE_TRIANGLES);
+      }
+      this.surface.bytes =
+        this.surface.mesh.vertexBuffer.numBytes + this.surface.mesh.indexBuffer[0].numBytes;
+    }
     this.backgroundColor?.destroy();
     this.softDepth?.destroy();
     this.softDepth = this.byteTexture(
@@ -756,7 +934,14 @@ export class ReliefMesh {
       this.backgroundColor.magFilter = pc.FILTER_LINEAR;
       this.backgroundBytes = b.rgba.byteLength + (b.soft?.data.byteLength || 0);
       this.matB.setParameter("uColor", this.backgroundColor);
-    } else if (this.color) this.matB.setParameter("uColor", this.color);
+      this.matS.setParameter("uBackground", this.backgroundColor);
+    } else if (this.color) {
+      this.matB.setParameter("uColor", this.color);
+      this.matS.setParameter("uBackground", this.color);
+    }
+    for (const mat of [this.matS, this.matB, this.matF])
+      if (this.backgroundColor || this.color)
+        mat.setParameter("uBackground", this.backgroundColor || this.color);
     this.u.uFill[0] = filled ? 1 : 0;
     this.matS.blendType = filled ? pc.BLEND_NORMAL : pc.BLEND_NONE;
     this.matS.update();
@@ -802,7 +987,10 @@ export class ReliefMesh {
       this.color.unlock();
       this.colorSrc = null;
     }
-    for (const m of [this.matS, this.matB, this.matF]) m.setParameter("uColor", this.color);
+    for (const m of [this.matS, this.matB, this.matF]) {
+      m.setParameter("uColor", this.color);
+      m.setParameter("uBackground", this.backgroundColor || this.color);
+    }
     return true;
   }
 

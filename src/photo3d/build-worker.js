@@ -11,7 +11,13 @@ self.onmessage = ({ data: { id, photo, depth, options, cells } }) => {
     const cols = Math.max(8, Math.round(s.gx * f)),
       rows = Math.max(8, Math.round(s.gy * f));
     const backRows = Math.max(8, Math.round((96 * rows) / cols));
-    s.background.surface = surfaceGrid(cols, rows);
+    s.background.surface = surfaceGrid(cols, rows, {
+      depth: depthBytes(s.depth),
+      band: s.cellBand,
+      gx: s.gx,
+      gy: s.gy,
+      compact: true,
+    });
     s.background.field = backingField(depthBytes(s.depth), s.cellBand, s.gx, s.gy, {
       cols: 96,
       rows: backRows,

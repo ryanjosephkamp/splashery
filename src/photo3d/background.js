@@ -129,29 +129,27 @@ export function backgroundImage(photo, d, gx, gy, relief, pieces) {
     h = Math.max(2, Math.round(photo.h * f));
   const n = w * h;
   const original = new Float32Array(n);
-  const labels = new Int32Array(n);
   for (let y = 0; y < h; y++)
     for (let x = 0; x < w; x++) {
       const c =
         Math.min(gy - 1, Math.floor(((y + 0.5) * gy) / h)) * gx +
         Math.min(gx - 1, Math.floor(((x + 0.5) * gx) / w));
       original[y * w + x] = d[c];
-      labels[y * w + x] = pieces?.[c] ?? 0;
-    }
-  const foreground = new Set();
-  for (let y = 0; y < h; y++)
-    for (let x = 0; x < w; x++) {
-      const i = y * w + x;
-      for (const j of [x + 1 < w ? i + 1 : i, y + 1 < h ? i + w : i]) {
-        if (labels[i] === labels[j]) continue;
-        if (original[i] - original[j] > 0.03) foreground.add(labels[i]);
-        if (original[j] - original[i] > 0.03) foreground.add(labels[j]);
-      }
     }
   // Reach covers the disparity exposed at 30 degrees, plus two source cells.
   const reach = Math.min(0.5, 0.02 + relief * Math.tan(Math.PI / 6));
   const radius = Math.max(2, Math.ceil(reach * h));
   const depth = minimumField(original, w, h, radius);
+  // A far-side boundary pixel can contain the source photo's own edge
+  // antialiasing. Repeating it across a disocclusion turns that one pixel
+  // into a colored ribbon. Prefer donors whose surrounding two cells are
+  // also far, preserving the original boundary wherever it is visible.
+  const farInterior = minimumField(
+    Float32Array.from(original, (v) => -v),
+    w,
+    h,
+    2,
+  );
   const donor = new Int32Array(n);
   const nearest = new Int32Array(n);
   const queue = new Int32Array(n);
@@ -179,11 +177,36 @@ export function backgroundImage(photo, d, gx, gy, relief, pieces) {
       if (i + w < n) push(i + w);
     }
     for (let i = 0; i < n; i++)
-      if (Math.min(bins - 1, Math.floor(depth[i] * bins)) === b)
-        donor[i] =
-          original[i] - depth[i] < 0.03 || nearest[i] < 0 || (pieces && !foreground.has(labels[i]))
-            ? i
-            : nearest[i];
+      if (Math.min(bins - 1, Math.floor(depth[i] * bins)) === b) {
+        let k = original[i] - depth[i] < 0.03 || nearest[i] < 0 ? i : nearest[i];
+        if (k !== i && -farInterior[k] > limit) {
+          const x = k % w,
+            y = Math.floor(k / w),
+            targetX = i % w,
+            targetY = Math.floor(i / w);
+          let distance = Infinity,
+            interior = -1;
+          // Stay within two cells of the closest eligible donor. An
+          // accepted interior's whole two-cell neighborhood is eligible,
+          // so it is connected to that donor; distant far components can
+          // never replace a narrow nearby patch with a different color.
+          for (let dy = -2; dy <= 2; dy++)
+            for (let dx = -2; dx <= 2; dx++) {
+              const sx = x + dx,
+                sy = y + dy;
+              if (sx < 0 || sx >= w || sy < 0 || sy >= h) continue;
+              const q = sy * w + sx;
+              if (-farInterior[q] > limit) continue;
+              const delta = Math.abs(sx - targetX) + Math.abs(sy - targetY);
+              if (delta < distance) {
+                distance = delta;
+                interior = q;
+              }
+            }
+          if (interior >= 0) k = interior;
+        }
+        donor[i] = k;
+      }
   }
   const rgba = new Uint8Array(n * 4);
   for (let i = 0; i < n; i++) {

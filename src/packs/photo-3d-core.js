@@ -14,6 +14,7 @@
 // The tier budgets for the toy's splats (the kit's count: the tier's default count times the
 // recipe's density, capped at the tier's maximum). The same as the model toy's.
 import { backgroundImage, planarDepth, rimDepth, softenDepth } from "../photo3d/background.js";
+import { photoEdgeGuide, refineDepthEdges } from "../photo3d/depth-edges.js";
 
 export const PHOTO_DENSITY = 1.5;
 export const TIER_COUNTS = {
@@ -409,6 +410,8 @@ export function buildPhotoSplats(
   const rgb = keepFlat && flatness <= FLAT_KEEP ? sampled : sharpen(sampled, gx, gy);
   if (flatness < 1) for (let i = 0; i < dn.length; i++) dn[i] = 0.5 + (dn[i] - 0.5) * flatness;
   let d = upsampleDepth(dn, dw, dh, guideLo, gx, gy, rgb);
+  if (!(keepFlat && flatness <= FLAT_KEEP))
+    d = refineDepthEdges(d, photoEdgeGuide(photo, gx, gy), gx, gy, 3 * Math.max(gx / dw, gy / dh));
   const minCells = Math.max(6, Math.round(MIN_PIECE * gx * gy));
   let m = links(d, gx, gy, cut);
   d = smoothOnSurface(d, m, gx, gy, 1);
