@@ -1,0 +1,11 @@
+{
+  "candidates": 7563,
+  "colorRejected": 6921,
+  "depthRejected": 0,
+  "borderRejected": 642,
+  "evaluated": 0,
+  "anchors": [],
+  "sourceHash": "098b94c69a0301f243ddecf1adf58645ac49d65b093890d066541e25b7382bd7",
+  "depthHash": "6b41c7b0e5188bbd393e86fd27a1d8d6b815b349851cc31a03775cd8773d20e0",
+  "methodHash": "ea8603af37cec48bee4bfc6ff5b5fcfeae46411d18660cf1fdfb0a9e00296ba9"
+}

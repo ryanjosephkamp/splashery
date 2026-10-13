@@ -1,0 +1,68 @@
+{
+  "before": {
+    "renderer": "a5458f4d32d02ad075ed539fbc7775cf1c4c9ef9",
+    "files": {
+      "src/packs/photo-3d.js": "b7367bdae9e0bf44d4baefdf3e283f8857a263dcd3e0569d43afc16ba5c9a36d",
+      "src/photo3d/input-warning.js": "3a760de15afa35e661e40d9940fc38e52293846ec9fffef8da03343b26628964"
+    }
+  },
+  "after": {
+    "renderer": {
+      "commit": "a5458f4d32d02ad075ed539fbc7775cf1c4c9ef9",
+      "files": {
+        "src/packs/photo-3d-core.js": "01fc758b2af3198fd94f922a3195d313d8f598cdbed8a88e6caa4128567a586c",
+        "src/photo3d/depth-edges.js": "b14f137a829eadcac5235dcb9ef28c89f224129c19fc137959683ce76e4a4f70",
+        "src/photo3d/background.js": "d856a45bb5e5ca6de2794a9967d703515ccc1aceb19b91366c354635a065e5fa",
+        "src/photo3d/build-worker.js": "b75fa5aafb3516eb2d09542cb295ce9577920458cae5fa565946394888f94ea5",
+        "src/photo3d/surface.js": "10fcd61d2bea397a292c19d0654dad8b0cb169f8015a6f8e81512ed820391433",
+        "src/live/relief-mesh.js": "f37912019e9cb72a10dfc459c6afcf575116bea860ec7001e825bbfb58593971",
+        "src/photo-splats.js": "227cd345c3a8654e98cfd8f4d9adba5521a9db186e5f969838f6a8bb219c71b3",
+        "src/packs/photo-sharp.js": "df95e37b9252f0b0421b7cad99ba194efa98ba39f0e61d51265829e3618f797a",
+        "src/packs/moving-photo.js": "9d99d3d619025d4bd072bae91b991203bf51583ee21054b466dabc3ae86764e3"
+      }
+    },
+    "uiFiles": {
+      "src/packs/photo-3d.js": "bd1eba55b416860ecbdb41f1c442b83281f9e9f2f9ba8b2888f04edb85ec127b",
+      "src/photo3d/input-warning.js": "84705f3b81c57f653579f54d394550fa72217383047a88c7f355d063a8f0ef2b"
+    },
+    "uiCommit": "a0d6ddfaefa9360a293f390e7a3cf203111b3e21"
+  },
+  "red": {
+    "startTime": "2026-10-13T12:49:30.841Z",
+    "duration": 24050.26,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  },
+  "redFailure": "Current photo warning stayed hidden after a detached input dispatched a broken JPEG; detachment and loading-false assertions had passed.",
+  "green": [
+    {
+      "file": "cdx-p3d2-r3-input-race.spec.mjs",
+      "stats": {
+        "startTime": "2026-10-13T12:52:23.942Z",
+        "duration": 19855.994,
+        "expected": 1,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "testSha256": "726365476f3c2a449104959c7d35459cc8b8fd3ca4a4fea21a5a73128d603a53"
+    },
+    {
+      "file": "cdx-p3d2-input.spec.mjs",
+      "stats": {
+        "startTime": "2026-10-13T12:51:58.023Z",
+        "duration": 22823.244000000002,
+        "expected": 1,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "testSha256": "b27d7fc4cc69f1f26e920142e413573ae28b6f2cfe31e4bc5791d8d4d602e2bc"
+    }
+  ],
+  "existingTestUnchanged": true,
+  "measuredRendererUnchanged": true,
+  "limitation": "The existing source guard captures source in catch; it does not cancel source changes that occurred earlier during decoding."
+}

@@ -1,0 +1,35 @@
+{
+  "scope": "Two phone inputs; numerical rows and worst images with and without foreground activation. Does not establish equivalence for every input.",
+  "results": [
+    {
+      "id": "forest",
+      "poses": 18,
+      "rowValuesIdentical": true,
+      "pairs": [
+        {
+          "build": "before",
+          "rgbaIdentical": true
+        },
+        {
+          "build": "after",
+          "rgbaIdentical": true
+        }
+      ]
+    },
+    {
+      "id": "street",
+      "poses": 18,
+      "rowValuesIdentical": true,
+      "pairs": [
+        {
+          "build": "before",
+          "rgbaIdentical": true
+        },
+        {
+          "build": "after",
+          "rgbaIdentical": true
+        }
+      ]
+    }
+  ]
+}

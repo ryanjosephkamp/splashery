@@ -1,0 +1,605 @@
+{
+  "browser": "151.0.7922.173",
+  "rows": [
+    {
+      "name": "phone",
+      "id": "forest",
+      "view": "sharp",
+      "yaw": 0,
+      "pitch": 0,
+      "meanByteError": 0,
+      "maximumByteError": 0,
+      "changedPixels": 0
+    },
+    {
+      "name": "phone",
+      "id": "forest",
+      "view": "sharp",
+      "yaw": -30,
+      "pitch": 0,
+      "meanByteError": 0,
+      "maximumByteError": 0,
+      "changedPixels": 0
+    },
+    {
+      "name": "phone",
+      "id": "forest",
+      "view": "sharp",
+      "yaw": 30,
+      "pitch": 0,
+      "meanByteError": 0,
+      "maximumByteError": 0,
+      "changedPixels": 0
+    },
+    {
+      "name": "phone",
+      "id": "forest",
+      "view": "sharp",
+      "yaw": 0,
+      "pitch": -30,
+      "meanByteError": 0,
+      "maximumByteError": 0,
+      "changedPixels": 0
+    },
+    {
+      "name": "phone",
+      "id": "forest",
+      "view": "sharp",
+      "yaw": 0,
+      "pitch": 30,
+      "meanByteError": 0,
+      "maximumByteError": 0,
+      "changedPixels": 0
+    },
+    {
+      "name": "phone",
+      "id": "forest",
+      "view": "splats",
+      "yaw": 0,
+      "pitch": 0,
+      "meanByteError": 0,
+      "maximumByteError": 0,
+      "changedPixels": 0
+    },
+    {
+      "name": "phone",
+      "id": "forest",
+      "view": "splats",
+      "yaw": -30,
+      "pitch": 0,
+      "meanByteError": 0.5279431819716179,
+      "maximumByteError": 155,
+      "changedPixels": 126002
+    },
+    {
+      "name": "phone",
+      "id": "forest",
+      "view": "splats",
+      "yaw": 30,
+      "pitch": 0,
+      "meanByteError": 0.7582929387036812,
+      "maximumByteError": 158,
+      "changedPixels": 143384
+    },
+    {
+      "name": "phone",
+      "id": "forest",
+      "view": "splats",
+      "yaw": 0,
+      "pitch": -30,
+      "meanByteError": 0.527707340345571,
+      "maximumByteError": 148,
+      "changedPixels": 127834
+    },
+    {
+      "name": "phone",
+      "id": "forest",
+      "view": "splats",
+      "yaw": 0,
+      "pitch": 30,
+      "meanByteError": 0.9751187084520417,
+      "maximumByteError": 137,
+      "changedPixels": 164945
+    },
+    {
+      "name": "phone",
+      "id": "street",
+      "view": "sharp",
+      "yaw": 0,
+      "pitch": 0,
+      "meanByteError": 0,
+      "maximumByteError": 0,
+      "changedPixels": 0
+    },
+    {
+      "name": "phone",
+      "id": "street",
+      "view": "sharp",
+      "yaw": -30,
+      "pitch": 0,
+      "meanByteError": 0,
+      "maximumByteError": 0,
+      "changedPixels": 0
+    },
+    {
+      "name": "phone",
+      "id": "street",
+      "view": "sharp",
+      "yaw": 30,
+      "pitch": 0,
+      "meanByteError": 0,
+      "maximumByteError": 0,
+      "changedPixels": 0
+    },
+    {
+      "name": "phone",
+      "id": "street",
+      "view": "sharp",
+      "yaw": 0,
+      "pitch": -30,
+      "meanByteError": 0,
+      "maximumByteError": 0,
+      "changedPixels": 0
+    },
+    {
+      "name": "phone",
+      "id": "street",
+      "view": "sharp",
+      "yaw": 0,
+      "pitch": 30,
+      "meanByteError": 0,
+      "maximumByteError": 0,
+      "changedPixels": 0
+    },
+    {
+      "name": "phone",
+      "id": "street",
+      "view": "splats",
+      "yaw": 0,
+      "pitch": 0,
+      "meanByteError": 0,
+      "maximumByteError": 0,
+      "changedPixels": 0
+    },
+    {
+      "name": "phone",
+      "id": "street",
+      "view": "splats",
+      "yaw": -30,
+      "pitch": 0,
+      "meanByteError": 0,
+      "maximumByteError": 0,
+      "changedPixels": 0
+    },
+    {
+      "name": "phone",
+      "id": "street",
+      "view": "splats",
+      "yaw": 30,
+      "pitch": 0,
+      "meanByteError": 0,
+      "maximumByteError": 0,
+      "changedPixels": 0
+    },
+    {
+      "name": "phone",
+      "id": "street",
+      "view": "splats",
+      "yaw": 0,
+      "pitch": -30,
+      "meanByteError": 0.6736883559948331,
+      "maximumByteError": 167,
+      "changedPixels": 125768
+    },
+    {
+      "name": "phone",
+      "id": "street",
+      "view": "splats",
+      "yaw": 0,
+      "pitch": 30,
+      "meanByteError": 1.0529387936970875,
+      "maximumByteError": 172,
+      "changedPixels": 176296
+    },
+    {
+      "name": "phone",
+      "id": "dot-dragonfly",
+      "view": "sharp",
+      "yaw": 0,
+      "pitch": 0,
+      "meanByteError": 0,
+      "maximumByteError": 0,
+      "changedPixels": 0
+    },
+    {
+      "name": "phone",
+      "id": "dot-dragonfly",
+      "view": "sharp",
+      "yaw": -30,
+      "pitch": 0,
+      "meanByteError": 0,
+      "maximumByteError": 0,
+      "changedPixels": 0
+    },
+    {
+      "name": "phone",
+      "id": "dot-dragonfly",
+      "view": "sharp",
+      "yaw": 30,
+      "pitch": 0,
+      "meanByteError": 0,
+      "maximumByteError": 0,
+      "changedPixels": 0
+    },
+    {
+      "name": "phone",
+      "id": "dot-dragonfly",
+      "view": "sharp",
+      "yaw": 0,
+      "pitch": -30,
+      "meanByteError": 0,
+      "maximumByteError": 0,
+      "changedPixels": 0
+    },
+    {
+      "name": "phone",
+      "id": "dot-dragonfly",
+      "view": "sharp",
+      "yaw": 0,
+      "pitch": 30,
+      "meanByteError": 0,
+      "maximumByteError": 0,
+      "changedPixels": 0
+    },
+    {
+      "name": "phone",
+      "id": "dot-dragonfly",
+      "view": "splats",
+      "yaw": 0,
+      "pitch": 0,
+      "meanByteError": 0,
+      "maximumByteError": 0,
+      "changedPixels": 0
+    },
+    {
+      "name": "phone",
+      "id": "dot-dragonfly",
+      "view": "splats",
+      "yaw": -30,
+      "pitch": 0,
+      "meanByteError": 0.3642978985790992,
+      "maximumByteError": 90,
+      "changedPixels": 128218
+    },
+    {
+      "name": "phone",
+      "id": "dot-dragonfly",
+      "view": "splats",
+      "yaw": 30,
+      "pitch": 0,
+      "meanByteError": 0,
+      "maximumByteError": 0,
+      "changedPixels": 0
+    },
+    {
+      "name": "phone",
+      "id": "dot-dragonfly",
+      "view": "splats",
+      "yaw": 0,
+      "pitch": -30,
+      "meanByteError": 0.3768893209651504,
+      "maximumByteError": 124,
+      "changedPixels": 132651
+    },
+    {
+      "name": "phone",
+      "id": "dot-dragonfly",
+      "view": "splats",
+      "yaw": 0,
+      "pitch": 30,
+      "meanByteError": 0,
+      "maximumByteError": 0,
+      "changedPixels": 0
+    },
+    {
+      "name": "desktop",
+      "id": "forest",
+      "view": "sharp",
+      "yaw": 0,
+      "pitch": 0,
+      "meanByteError": 0,
+      "maximumByteError": 0,
+      "changedPixels": 0
+    },
+    {
+      "name": "desktop",
+      "id": "forest",
+      "view": "sharp",
+      "yaw": -30,
+      "pitch": 0,
+      "meanByteError": 0,
+      "maximumByteError": 0,
+      "changedPixels": 0
+    },
+    {
+      "name": "desktop",
+      "id": "forest",
+      "view": "sharp",
+      "yaw": 30,
+      "pitch": 0,
+      "meanByteError": 0,
+      "maximumByteError": 0,
+      "changedPixels": 0
+    },
+    {
+      "name": "desktop",
+      "id": "forest",
+      "view": "sharp",
+      "yaw": 0,
+      "pitch": -30,
+      "meanByteError": 0,
+      "maximumByteError": 0,
+      "changedPixels": 0
+    },
+    {
+      "name": "desktop",
+      "id": "forest",
+      "view": "sharp",
+      "yaw": 0,
+      "pitch": 30,
+      "meanByteError": 0,
+      "maximumByteError": 0,
+      "changedPixels": 0
+    },
+    {
+      "name": "desktop",
+      "id": "forest",
+      "view": "splats",
+      "yaw": 0,
+      "pitch": 0,
+      "meanByteError": 0.5866260288065843,
+      "maximumByteError": 155,
+      "changedPixels": 304296
+    },
+    {
+      "name": "desktop",
+      "id": "forest",
+      "view": "splats",
+      "yaw": -30,
+      "pitch": 0,
+      "meanByteError": 0.7487219650205761,
+      "maximumByteError": 178,
+      "changedPixels": 295012
+    },
+    {
+      "name": "desktop",
+      "id": "forest",
+      "view": "splats",
+      "yaw": 30,
+      "pitch": 0,
+      "meanByteError": 0,
+      "maximumByteError": 0,
+      "changedPixels": 0
+    },
+    {
+      "name": "desktop",
+      "id": "forest",
+      "view": "splats",
+      "yaw": 0,
+      "pitch": -30,
+      "meanByteError": 0,
+      "maximumByteError": 0,
+      "changedPixels": 0
+    },
+    {
+      "name": "desktop",
+      "id": "forest",
+      "view": "splats",
+      "yaw": 0,
+      "pitch": 30,
+      "meanByteError": 0,
+      "maximumByteError": 0,
+      "changedPixels": 0
+    },
+    {
+      "name": "desktop",
+      "id": "street",
+      "view": "sharp",
+      "yaw": 0,
+      "pitch": 0,
+      "meanByteError": 0,
+      "maximumByteError": 0,
+      "changedPixels": 0
+    },
+    {
+      "name": "desktop",
+      "id": "street",
+      "view": "sharp",
+      "yaw": -30,
+      "pitch": 0,
+      "meanByteError": 0,
+      "maximumByteError": 0,
+      "changedPixels": 0
+    },
+    {
+      "name": "desktop",
+      "id": "street",
+      "view": "sharp",
+      "yaw": 30,
+      "pitch": 0,
+      "meanByteError": 0,
+      "maximumByteError": 0,
+      "changedPixels": 0
+    },
+    {
+      "name": "desktop",
+      "id": "street",
+      "view": "sharp",
+      "yaw": 0,
+      "pitch": -30,
+      "meanByteError": 0,
+      "maximumByteError": 0,
+      "changedPixels": 0
+    },
+    {
+      "name": "desktop",
+      "id": "street",
+      "view": "sharp",
+      "yaw": 0,
+      "pitch": 30,
+      "meanByteError": 0,
+      "maximumByteError": 0,
+      "changedPixels": 0
+    },
+    {
+      "name": "desktop",
+      "id": "street",
+      "view": "splats",
+      "yaw": 0,
+      "pitch": 0,
+      "meanByteError": 0.8077901234567901,
+      "maximumByteError": 231,
+      "changedPixels": 300158
+    },
+    {
+      "name": "desktop",
+      "id": "street",
+      "view": "splats",
+      "yaw": -30,
+      "pitch": 0,
+      "meanByteError": 0,
+      "maximumByteError": 0,
+      "changedPixels": 0
+    },
+    {
+      "name": "desktop",
+      "id": "street",
+      "view": "splats",
+      "yaw": 30,
+      "pitch": 0,
+      "meanByteError": 0,
+      "maximumByteError": 0,
+      "changedPixels": 0
+    },
+    {
+      "name": "desktop",
+      "id": "street",
+      "view": "splats",
+      "yaw": 0,
+      "pitch": -30,
+      "meanByteError": 0,
+      "maximumByteError": 0,
+      "changedPixels": 0
+    },
+    {
+      "name": "desktop",
+      "id": "street",
+      "view": "splats",
+      "yaw": 0,
+      "pitch": 30,
+      "meanByteError": 0,
+      "maximumByteError": 0,
+      "changedPixels": 0
+    },
+    {
+      "name": "desktop",
+      "id": "dot-dragonfly",
+      "view": "sharp",
+      "yaw": 0,
+      "pitch": 0,
+      "meanByteError": 0,
+      "maximumByteError": 0,
+      "changedPixels": 0
+    },
+    {
+      "name": "desktop",
+      "id": "dot-dragonfly",
+      "view": "sharp",
+      "yaw": -30,
+      "pitch": 0,
+      "meanByteError": 0,
+      "maximumByteError": 0,
+      "changedPixels": 0
+    },
+    {
+      "name": "desktop",
+      "id": "dot-dragonfly",
+      "view": "sharp",
+      "yaw": 30,
+      "pitch": 0,
+      "meanByteError": 0,
+      "maximumByteError": 0,
+      "changedPixels": 0
+    },
+    {
+      "name": "desktop",
+      "id": "dot-dragonfly",
+      "view": "sharp",
+      "yaw": 0,
+      "pitch": -30,
+      "meanByteError": 0,
+      "maximumByteError": 0,
+      "changedPixels": 0
+    },
+    {
+      "name": "desktop",
+      "id": "dot-dragonfly",
+      "view": "sharp",
+      "yaw": 0,
+      "pitch": 30,
+      "meanByteError": 0,
+      "maximumByteError": 0,
+      "changedPixels": 0
+    },
+    {
+      "name": "desktop",
+      "id": "dot-dragonfly",
+      "view": "splats",
+      "yaw": 0,
+      "pitch": 0,
+      "meanByteError": 0.14863811728395063,
+      "maximumByteError": 92,
+      "changedPixels": 225688
+    },
+    {
+      "name": "desktop",
+      "id": "dot-dragonfly",
+      "view": "splats",
+      "yaw": -30,
+      "pitch": 0,
+      "meanByteError": 0,
+      "maximumByteError": 0,
+      "changedPixels": 0
+    },
+    {
+      "name": "desktop",
+      "id": "dot-dragonfly",
+      "view": "splats",
+      "yaw": 30,
+      "pitch": 0,
+      "meanByteError": 0,
+      "maximumByteError": 0,
+      "changedPixels": 0
+    },
+    {
+      "name": "desktop",
+      "id": "dot-dragonfly",
+      "view": "splats",
+      "yaw": 0,
+      "pitch": -30,
+      "meanByteError": 0,
+      "maximumByteError": 0,
+      "changedPixels": 0
+    },
+    {
+      "name": "desktop",
+      "id": "dot-dragonfly",
+      "view": "splats",
+      "yaw": 0,
+      "pitch": 30,
+      "meanByteError": 0,
+      "maximumByteError": 0,
+      "changedPixels": 0
+    }
+  ]
+}

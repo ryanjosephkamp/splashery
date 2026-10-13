@@ -1,0 +1,432 @@
+{
+  "build": {
+    "commit": "a5458f4d32d02ad075ed539fbc7775cf1c4c9ef9",
+    "files": {
+      "src/packs/photo-3d-core.js": "01fc758b2af3198fd94f922a3195d313d8f598cdbed8a88e6caa4128567a586c",
+      "src/photo3d/depth-edges.js": "b14f137a829eadcac5235dcb9ef28c89f224129c19fc137959683ce76e4a4f70",
+      "src/photo3d/background.js": "d856a45bb5e5ca6de2794a9967d703515ccc1aceb19b91366c354635a065e5fa",
+      "src/photo3d/build-worker.js": "b75fa5aafb3516eb2d09542cb295ce9577920458cae5fa565946394888f94ea5",
+      "src/photo3d/surface.js": "10fcd61d2bea397a292c19d0654dad8b0cb169f8015a6f8e81512ed820391433",
+      "src/live/relief-mesh.js": "f37912019e9cb72a10dfc459c6afcf575116bea860ec7001e825bbfb58593971",
+      "src/photo-splats.js": "227cd345c3a8654e98cfd8f4d9adba5521a9db186e5f969838f6a8bb219c71b3",
+      "src/packs/photo-sharp.js": "df95e37b9252f0b0421b7cad99ba194efa98ba39f0e61d51265829e3618f797a",
+      "src/packs/moving-photo.js": "9d99d3d619025d4bd072bae91b991203bf51583ee21054b466dabc3ae86764e3"
+    }
+  },
+  "names": ["phone", "desktop"],
+  "depths": [1],
+  "views": ["sharp", "splats"],
+  "poses": [
+    [0, 0],
+    [-20, 0],
+    [20, 0],
+    [0, -20],
+    [0, 20],
+    [-30, 0],
+    [30, 0],
+    [0, -30],
+    [0, 30]
+  ],
+  "samples": [
+    "forest",
+    "street",
+    "still-life",
+    "spiral-stairs",
+    "palace-stairs",
+    "wildflowers",
+    "dot-train",
+    "dot-oasis",
+    "dot-castle",
+    "dot-cove",
+    "dot-harbor",
+    "dot-paper-valley",
+    "dot-farm",
+    "dot-treehouses",
+    "dot-library",
+    "dot-workshop",
+    "dot-cloister",
+    "dot-greenhouse",
+    "dot-attic",
+    "dot-bamboo",
+    "dot-terraces",
+    "dot-canyon",
+    "dot-arch",
+    "dot-fallen-log",
+    "dot-alpine-lake",
+    "dot-ice-falls",
+    "dot-floating-isles",
+    "dot-wave",
+    "dot-explorer-desk",
+    "dot-watchmaker",
+    "dot-dragonfly",
+    "dot-mushrooms",
+    "dot-market",
+    "dot-gears",
+    "dot-chess",
+    "dot-book-city",
+    "lighthouse",
+    "sailboat",
+    "tulips",
+    "daffodils",
+    "red-barn",
+    "seashell",
+    "islands",
+    "tulip-field",
+    "mushroom",
+    "waterfall",
+    "seashell-gif",
+    "mushroom-gif",
+    "waterfall-gif"
+  ],
+  "methodHash": "3816c2696828f55f7e62928e53ca7e5e5cc25db2801913eb38d975a604f6b50f",
+  "inputHashes": [
+    {
+      "id": "forest",
+      "photo": "assets/toys/photo-3d/forest.jpg",
+      "depth": "assets/toys/photo-3d/forest.depth",
+      "photoHash": "3fd97b7fe4653bc05c7f0c5b097dbffc5ae39230899f6e5b3007bf5a91ed62af",
+      "depthHash": "adc3d64fbe0d83aefcd5a9efe620f9d55d8b15739ff9aa6366c11c2e2a4b86f2"
+    },
+    {
+      "id": "street",
+      "photo": "assets/toys/photo-3d/street.jpg",
+      "depth": "assets/toys/photo-3d/street.depth",
+      "photoHash": "b1475109359fdd1ff17e238a3b00f715c5778e05ec21e9b3a8e0b0c76ac0192e",
+      "depthHash": "9ac184e3755a2986a07c63630396507ac204aeb0535ddf169425c87414a2249a"
+    },
+    {
+      "id": "still-life",
+      "photo": "assets/toys/photo-3d/still-life.jpg",
+      "depth": "assets/toys/photo-3d/still-life.depth",
+      "photoHash": "45ea7fcd9ba7da38e7545c8e010cb41bf8cf1ace878863a6d1e26de1d361d8d4",
+      "depthHash": "7c5de852e9c55fb15ccfd9e5a0fb43ab7db7cc0c40d6647c6db80d4bb47805c3"
+    },
+    {
+      "id": "spiral-stairs",
+      "photo": "assets/toys/photo-3d/spiral-stairs.jpg",
+      "depth": "assets/toys/photo-3d/spiral-stairs.depth",
+      "photoHash": "f5ebb76d7ae6cfa0ba54666d7e198eb7d34b8af22057c50f033157bb523d52ac",
+      "depthHash": "c95a69047c6bfdb2f66f183e8a8fe092bcd726b387f87f64a9f6c25b358cdc86"
+    },
+    {
+      "id": "palace-stairs",
+      "photo": "assets/toys/photo-3d/palace-stairs.jpg",
+      "depth": "assets/toys/photo-3d/palace-stairs.depth",
+      "photoHash": "b7af6c4e1ef71af39d47e0569d423f3f63f999e21a1bfdd725e7c014e8d54056",
+      "depthHash": "d0dfb7bc795cd2a7808367cab9fa3bba551f90f47d36f0931a23b62cf8056bb0"
+    },
+    {
+      "id": "wildflowers",
+      "photo": "assets/toys/photo-3d/wildflowers.jpg",
+      "depth": "assets/toys/photo-3d/wildflowers.depth",
+      "photoHash": "298ad2d0f7c566ea06f682c6319ecda0461530865fc7bea25a00f3320ab7c26e",
+      "depthHash": "518eef20aaddfff040e2f26cd64302aea99a6c581c80346811a369699767f3d7"
+    },
+    {
+      "id": "dot-train",
+      "photo": "assets/toys/photo-3d/ai/train.jpg",
+      "depth": "assets/toys/photo-3d/ai/train.depth",
+      "photoHash": "144c3d68616a90a88b431ae5ce85af2bf162d6732984595dbe3c5b0d133b3c19",
+      "depthHash": "80a61d504491d0c617dda5ffccab0ad3a30ed0927604ed89b22b1113086834bd"
+    },
+    {
+      "id": "dot-oasis",
+      "photo": "assets/toys/photo-3d/ai/oasis.jpg",
+      "depth": "assets/toys/photo-3d/ai/oasis.depth",
+      "photoHash": "95bce78e814b4e716e043229cad9d6b6eb84d0b37fb2293addeef14738e00b25",
+      "depthHash": "76bcc6faf0d913034e0dad3fd2a5d7f21b106e4e96caf95462511fb1c0c34629"
+    },
+    {
+      "id": "dot-castle",
+      "photo": "assets/toys/photo-3d/ai/castle.jpg",
+      "depth": "assets/toys/photo-3d/ai/castle.depth",
+      "photoHash": "327657683c4bb4ebfeff4053c24b7a1935dc1b5993d7d814845d616da0f341c9",
+      "depthHash": "12cb96240a26168dccb377a730d23f06428c31498761d242b3e1ff1c50684367"
+    },
+    {
+      "id": "dot-cove",
+      "photo": "assets/toys/photo-3d/ai/cove.jpg",
+      "depth": "assets/toys/photo-3d/ai/cove.depth",
+      "photoHash": "e117988d621d24497eb41995cc0c2df8ec877fbfcd21041fa7ec1adcce2be962",
+      "depthHash": "a72f51ab2a1801d83e422446ccf33494c0cbb8c9a985a57465ab2154f9a9eb3c"
+    },
+    {
+      "id": "dot-harbor",
+      "photo": "assets/toys/photo-3d/ai/harbor.jpg",
+      "depth": "assets/toys/photo-3d/ai/harbor.depth",
+      "photoHash": "169d9933b2327ec98429e62d6d0f39a654fc07d67789c5e218739df85c1ac9c2",
+      "depthHash": "8430f4e598045ec1a4addae88c9627d9354c66905879d8aefd74617f0dc5316f"
+    },
+    {
+      "id": "dot-paper-valley",
+      "photo": "assets/toys/photo-3d/ai/paper-valley.jpg",
+      "depth": "assets/toys/photo-3d/ai/paper-valley.depth",
+      "photoHash": "6a1b1b83c1a47acd49f93662bf363fc51a73d523ed645ee8f165a8960ac9bffc",
+      "depthHash": "b1ba470dabc565a94e366e3d28103a8b7225725622b2cc7960d4a33aed05372c"
+    },
+    {
+      "id": "dot-farm",
+      "photo": "assets/toys/photo-3d/ai/farm.jpg",
+      "depth": "assets/toys/photo-3d/ai/farm.depth",
+      "photoHash": "d52fb26d5eaf2726d2b4d69cbd6715a455d3eebb676f77b73d6e8e8b3e361b8a",
+      "depthHash": "1be7f3b2406ec84afc0e567b6a260f69ce45ad29c6cb813b4d44f0fa1ae3a4a0"
+    },
+    {
+      "id": "dot-treehouses",
+      "photo": "assets/toys/photo-3d/ai/treehouses.jpg",
+      "depth": "assets/toys/photo-3d/ai/treehouses.depth",
+      "photoHash": "ff7785a675b45aaaf629209a8c0e2ced08a237623e6117cb4a4edd8595ace4ec",
+      "depthHash": "b3d01bb139ef7f97ced3a63c280169b9863ec6d0bf54a4ed9f9e07860a1448d7"
+    },
+    {
+      "id": "dot-library",
+      "photo": "assets/toys/photo-3d/ai/library.jpg",
+      "depth": "assets/toys/photo-3d/ai/library.depth",
+      "photoHash": "159a7200841e2da569509e3d105f10221e62816f36ff044101a2ad48685383e7",
+      "depthHash": "7734bc9435cd8d3fcee40f4d629d22e813114e65c93799f70aa66ee6ca8370ad"
+    },
+    {
+      "id": "dot-workshop",
+      "photo": "assets/toys/photo-3d/ai/workshop.jpg",
+      "depth": "assets/toys/photo-3d/ai/workshop.depth",
+      "photoHash": "827629c3066a0426c7dbbf15e9b67964e264aaf1d4aafc23f9005d1b0f235f56",
+      "depthHash": "a8aceab50427f3b1da9a56cf1d97dc0294a4c3af734f0224da4ff8bc6baf6e8b"
+    },
+    {
+      "id": "dot-cloister",
+      "photo": "assets/toys/photo-3d/ai/cloister.jpg",
+      "depth": "assets/toys/photo-3d/ai/cloister.depth",
+      "photoHash": "c6dd6be19588dfd36258a306cf3a3fd61928a04e3ab9724ed2410da9cbd66960",
+      "depthHash": "4508b77df16af0274330a25db4212c325c0a4ad2f6a3a7e116da67a0b816bfc4"
+    },
+    {
+      "id": "dot-greenhouse",
+      "photo": "assets/toys/photo-3d/ai/greenhouse.jpg",
+      "depth": "assets/toys/photo-3d/ai/greenhouse.depth",
+      "photoHash": "92628aca9001965ebb8f1f9c23a5dbd9b87384326fbcb9fbf0f9a996c91d0d48",
+      "depthHash": "f80d624b4b65a5fd105ab82e3af5f076a96fc3cc20e17f8ed2cf15c1eea7e1d9"
+    },
+    {
+      "id": "dot-attic",
+      "photo": "assets/toys/photo-3d/ai/attic.jpg",
+      "depth": "assets/toys/photo-3d/ai/attic.depth",
+      "photoHash": "ca62d8d11efd2031aa8c5327d082acaad90ca59ebd39bbbb6df3db06bc31b18d",
+      "depthHash": "8feb3f671279ec3673c3977275d5ac15b3e10b28b7a8c6a8b73b847f5150961a"
+    },
+    {
+      "id": "dot-bamboo",
+      "photo": "assets/toys/photo-3d/ai/bamboo.jpg",
+      "depth": "assets/toys/photo-3d/ai/bamboo.depth",
+      "photoHash": "995afee9bac39d4b4af161be5f8432937417574ea718c4444453585b7339c088",
+      "depthHash": "e45e6b2893351468519207fd3d5a1d1efe935763051615844f40cc7009696346"
+    },
+    {
+      "id": "dot-terraces",
+      "photo": "assets/toys/photo-3d/ai/terraces.jpg",
+      "depth": "assets/toys/photo-3d/ai/terraces.depth",
+      "photoHash": "978f0f60a45b291f2e914957332120e29c0e14062794e7a2f18d3bb49adb42a7",
+      "depthHash": "a20bb2e54f3fc63f2f16b78fdf40c8331d929390dfac086a0ed701f72a90db09"
+    },
+    {
+      "id": "dot-canyon",
+      "photo": "assets/toys/photo-3d/ai/canyon.jpg",
+      "depth": "assets/toys/photo-3d/ai/canyon.depth",
+      "photoHash": "f80db8c6ee4b757c732108dcde9deb7eeb55ee66bd63aa75fba92bdb1604c427",
+      "depthHash": "d18a1296da8d336b509fcb068e2de858c83d82267289f573baf9e598900a9782"
+    },
+    {
+      "id": "dot-arch",
+      "photo": "assets/toys/photo-3d/ai/arch.jpg",
+      "depth": "assets/toys/photo-3d/ai/arch.depth",
+      "photoHash": "c50d1b4f5e0a918f099f84ade78d83f83b514be18f406b8b9f538ef78abd7c5e",
+      "depthHash": "09c540d5ec543828de4d4936754bbed34cd179622bf05bb1ed68b7d24b7bef96"
+    },
+    {
+      "id": "dot-fallen-log",
+      "photo": "assets/toys/photo-3d/ai/fallen-log.jpg",
+      "depth": "assets/toys/photo-3d/ai/fallen-log.depth",
+      "photoHash": "bdabb2b02f842ec113f1eaeeb42a1b5b50398e9f4aa4a600fd32bd0252460da0",
+      "depthHash": "f6e42303cd744a83c599ec8317e7bde434265fd015f7dd81eccb17bb4971b67f"
+    },
+    {
+      "id": "dot-alpine-lake",
+      "photo": "assets/toys/photo-3d/ai/alpine-lake.jpg",
+      "depth": "assets/toys/photo-3d/ai/alpine-lake.depth",
+      "photoHash": "92f52289f7e3acee7cd0cdc50d106bcec524830e5b3c79ef2c9cb370cf775a7c",
+      "depthHash": "dc346729d3331ef13f058005a296f13a3f9a54bee8c6cfe2d3da207bb3aff37c"
+    },
+    {
+      "id": "dot-ice-falls",
+      "photo": "assets/toys/photo-3d/ai/ice-falls.jpg",
+      "depth": "assets/toys/photo-3d/ai/ice-falls.depth",
+      "photoHash": "5fab39693316f99f0600774592ce743286688c36997001e8c6f94194943ad27f",
+      "depthHash": "99bf20e570b9db0abbd3293d86e8bc0495371616622735023f00e962db6b39a4"
+    },
+    {
+      "id": "dot-floating-isles",
+      "photo": "assets/toys/photo-3d/ai/floating-isles.jpg",
+      "depth": "assets/toys/photo-3d/ai/floating-isles.depth",
+      "photoHash": "72a2aa55c3e44469d3e495c2d920b2446a23bcb327c1693cd29680917756e2d5",
+      "depthHash": "0bf63b6b949a8580986cbf474c800817043e0f8cf59f7fcac385135a90e7e28d"
+    },
+    {
+      "id": "dot-wave",
+      "photo": "assets/toys/photo-3d/ai/wave.jpg",
+      "depth": "assets/toys/photo-3d/ai/wave.depth",
+      "photoHash": "7a1927819029d6a15ebc98583f9902ea390ac40c3f944eeb1d09a1ee8c431af8",
+      "depthHash": "ea2eb4186200da8860ff22e78d2e17ffeb55be07b0a1409383a783c9f8c42240"
+    },
+    {
+      "id": "dot-explorer-desk",
+      "photo": "assets/toys/photo-3d/ai/explorer-desk.jpg",
+      "depth": "assets/toys/photo-3d/ai/explorer-desk.depth",
+      "photoHash": "8dfd9344af8c938ad43271a70dae9878b53f5fbc0b955057dac9e1c70c485cef",
+      "depthHash": "dc3406a10b70e77aa7f2316d59e76e78133729222448dc0b23e090069bff12ed"
+    },
+    {
+      "id": "dot-watchmaker",
+      "photo": "assets/toys/photo-3d/ai/watchmaker.jpg",
+      "depth": "assets/toys/photo-3d/ai/watchmaker.depth",
+      "photoHash": "8bd8e49a3bc88a9251bc6ab79b80e600bca9b65a3b51980cc61fced738b004d4",
+      "depthHash": "443457d2f5e4061c9ad187b0e4a2dd6b25af4ceb6964b5b417f4e8bdc0173d43"
+    },
+    {
+      "id": "dot-dragonfly",
+      "photo": "assets/toys/photo-3d/ai/dragonfly.jpg",
+      "depth": "assets/toys/photo-3d/ai/dragonfly.depth",
+      "photoHash": "9350d94e2333fafec5b0b2336e3ff9978a41308909dd0c8e69468773bea6b1d9",
+      "depthHash": "bdecd08490b971000bcc6920bdcc88bfd3e5f26f433403e1c8e932ad5d4c8848"
+    },
+    {
+      "id": "dot-mushrooms",
+      "photo": "assets/toys/photo-3d/ai/mushrooms.jpg",
+      "depth": "assets/toys/photo-3d/ai/mushrooms.depth",
+      "photoHash": "7d0c30bcd9b57b87cc29d3f91cfeb72fb6922b69d61f8ee458bb0e58846387b2",
+      "depthHash": "9c7e1453e86b869454d1daa860e39aa6e1c46c07807c5fe523fb26b6c670af7b"
+    },
+    {
+      "id": "dot-market",
+      "photo": "assets/toys/photo-3d/ai/market.jpg",
+      "depth": "assets/toys/photo-3d/ai/market.depth",
+      "photoHash": "a7967e4504a6faf52662b0f441296aebc1c4b5f15661641dd6dbfc6fff8954f1",
+      "depthHash": "c12d465f32d536bba85e19148e82d86e5bec934d12fe1c5940b7bc3a4c7ecd47"
+    },
+    {
+      "id": "dot-gears",
+      "photo": "assets/toys/photo-3d/ai/gears.jpg",
+      "depth": "assets/toys/photo-3d/ai/gears.depth",
+      "photoHash": "19e7d7491a161423c634d7a96bc7f9a6152c7295f8144012a4fa9da32f53d2ae",
+      "depthHash": "7a8bdea9bbea09dfd478ebc2a65440ec586f3877ba3737ccf2a3cde67cf2515f"
+    },
+    {
+      "id": "dot-chess",
+      "photo": "assets/toys/photo-3d/ai/chess.jpg",
+      "depth": "assets/toys/photo-3d/ai/chess.depth",
+      "photoHash": "462ee8741ab230e85a77a9a20cb923655e6648f4b8ded372c8573bdbfff8fbd5",
+      "depthHash": "c432ff5c61fa1d14593cf6f07a07f3ec3e403073234fc0781fd34c3c221ba088"
+    },
+    {
+      "id": "dot-book-city",
+      "photo": "assets/toys/photo-3d/ai/book-city.jpg",
+      "depth": "assets/toys/photo-3d/ai/book-city.depth",
+      "photoHash": "6f97479f00c34d81d97d57f360b05c9da0635789f191f64aa297425523cd7039",
+      "depthHash": "9fe143be6e27746a379f73d797a9cc77cc422fa08cb33142cef8fc7170d3d901"
+    },
+    {
+      "id": "lighthouse",
+      "photo": ".cache/cdx-p3d2/r3/sources/lighthouse.jpg",
+      "depth": ".cache/cdx-p3d2/r3/sources/lighthouse.depth",
+      "photoHash": "dbbf80d10cd7e70dd15e9a974861ddf29b4837db1f21aaafe6592b9eed7e1abc",
+      "depthHash": "41b840482e4a4fe4a33998ad71e7410637057f82c9365092b176774820a73ae1"
+    },
+    {
+      "id": "sailboat",
+      "photo": ".cache/cdx-p3d2/r3/sources/sailboat.jpg",
+      "depth": ".cache/cdx-p3d2/r3/sources/sailboat.depth",
+      "photoHash": "6cf2bb7000d0ce3c20bceb9ab036bff287e67406d8dffcc89ad65e18400dfa1f",
+      "depthHash": "048ecae5e557e0b02d010d76fd94f5d253b937fe012ced638f860802b1a78748"
+    },
+    {
+      "id": "tulips",
+      "photo": ".cache/cdx-p3d2/r3/sources/tulips.jpg",
+      "depth": ".cache/cdx-p3d2/r3/sources/tulips.depth",
+      "photoHash": "fc3671778f7badd088f3bdf9362303b39ad646bb9ca71dcb238eb2729b76ad06",
+      "depthHash": "55ed1404a6732d8c5a0ab95b994e4206eb091688b495a6b5f8f831a45fe38921"
+    },
+    {
+      "id": "daffodils",
+      "photo": ".cache/cdx-p3d2/r3/sources/daffodils.jpg",
+      "depth": ".cache/cdx-p3d2/r3/sources/daffodils.depth",
+      "photoHash": "fb637a70cb6eed538f27d9317e2e9093f4e5fc2d0b1f9ef553eeed1660abd909",
+      "depthHash": "3833aecbb28de43afc0a2195df5274b84716f6eeb438841e7e578670ab0a89b9"
+    },
+    {
+      "id": "red-barn",
+      "photo": ".cache/cdx-p3d2/r3/sources/red-barn.jpg",
+      "depth": ".cache/cdx-p3d2/r3/sources/red-barn.depth",
+      "photoHash": "150651deeadaa57b5379eea83d3d0feea92cb9d23db0ceea217e8314b2790d90",
+      "depthHash": "79e2ca36f522a97bc8a1041039d690404538a0c35f275cae5c903b1eaba4696b"
+    },
+    {
+      "id": "seashell",
+      "photo": ".cache/cdx-p3d2/r3/sources/seashell.jpg",
+      "depth": ".cache/cdx-p3d2/r3/sources/seashell.depth",
+      "photoHash": "77ce64a83c91cf79d8d05b098276b5a0ce40b6253573ad18934214cc12ee2476",
+      "depthHash": "b554af4a5f1c7aa4a3ab8a5d167676300553ffe9d1b49d454371126e8a83a583"
+    },
+    {
+      "id": "islands",
+      "photo": ".cache/cdx-p3d2/r3/sources/islands.jpg",
+      "depth": ".cache/cdx-p3d2/r3/sources/islands.depth",
+      "photoHash": "e15df9107aa85efb9c95529465fd4172ef76c1bf1826f03b9786fa2d7ccf18b2",
+      "depthHash": "3a6300de2f6c61ea619ada1401d8bce36fe75aaaef769f6ee50dc5184e4b3d24"
+    },
+    {
+      "id": "tulip-field",
+      "photo": ".cache/cdx-p3d2/r3/sources/tulip-field.jpg",
+      "depth": ".cache/cdx-p3d2/r3/sources/tulip-field.depth",
+      "photoHash": "7020a9f8a3d8e66e025cd83f65c0866769e90abbe0d92609164ae07908be9f83",
+      "depthHash": "fafd8edbb57b884a4b514c6d46e8ff1f5cbcff20e05eae189ecd8d36eff0192f"
+    },
+    {
+      "id": "mushroom",
+      "photo": ".cache/cdx-p3d2/r3/sources/mushroom.jpg",
+      "depth": ".cache/cdx-p3d2/r3/sources/mushroom.depth",
+      "photoHash": "a5cb152f0f28059eb135dd601148d22ccd0a8fd83384c8eaa01e4f3d94b2d9b6",
+      "depthHash": "7218148687c211b8fba27e4186fe318a1ea7ac774a6e81ba0ac90b1797fd0f0d"
+    },
+    {
+      "id": "waterfall",
+      "photo": ".cache/cdx-p3d2/r3/sources/waterfall.jpg",
+      "depth": ".cache/cdx-p3d2/r3/sources/waterfall.depth",
+      "photoHash": "62c01b365fb6833caed0cefcfef7449ec93958814cd6557eeaa43cd7611d6e50",
+      "depthHash": "7bb64b6281e5a4499953cea355bfe38ea78bfeeeb3f054a1beba0253e9273af8"
+    },
+    {
+      "id": "seashell-gif",
+      "photo": ".cache/cdx-p3d2/r3/sources/seashell-gif.gif",
+      "depth": ".cache/cdx-p3d2/r3/sources/seashell-gif.depth",
+      "photoHash": "65124e509b9db0fa908b914cdf2056a2d8654b62708d4c501dc48601f3350f68",
+      "depthHash": "5c12dc5fc2d0a76b36ba38f7fdeab2321b9507d23314f99cb211e479c77aa26c"
+    },
+    {
+      "id": "mushroom-gif",
+      "photo": ".cache/cdx-p3d2/r3/sources/mushroom-gif.gif",
+      "depth": ".cache/cdx-p3d2/r3/sources/mushroom-gif.depth",
+      "photoHash": "a348952674c902a8d20a5f38a8631f373ac1801b6ee6569feb458c979f7f2321",
+      "depthHash": "e799a47b559dcd7c1be976ac77f5124c53944fec0a896c94071bcfb270d1a4b9"
+    },
+    {
+      "id": "waterfall-gif",
+      "photo": ".cache/cdx-p3d2/r3/sources/waterfall-gif.gif",
+      "depth": ".cache/cdx-p3d2/r3/sources/waterfall-gif.depth",
+      "photoHash": "5666a38972442a3788b93e468100c84236e7c3536914d059bfc33ee401b4287d",
+      "depthHash": "fc1ecc747fedbc7ecedaf1dab1fd32667b64799a557e8b0f7e005ac6ccead341"
+    }
+  ],
+  "capturePolicy": {
+    "sharpFirstFrames": 2,
+    "sharpRestFrames": 1,
+    "splatsFrames": 2
+  }
+}

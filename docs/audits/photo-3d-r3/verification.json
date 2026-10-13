@@ -1,0 +1,143 @@
+{
+  "before": "7c6073016e6c1c092091533302f903d80b4af44e",
+  "measuredRenderer": "a5458f4d32d02ad075ed539fbc7775cf1c4c9ef9",
+  "main": "555e8f5c1dae8b9192d7678493b4a2a38eb1e6d5",
+  "backgroundDonorProof": {
+    "beforeCommit": "9aa5cdb1",
+    "afterCommit": "a5458f4d32d02ad075ed539fbc7775cf1c4c9ef9",
+    "poses": [
+      [-30, 0],
+      [30, 0],
+      [0, -30],
+      [0, 30]
+    ],
+    "beforeRGB": [124, 60, 104],
+    "afterRGB": [24, 72, 184],
+    "correctedFixture": "Byte depths, only custom backing visible, sample inside buffer. Foreground hidden: donor-color proof, not a universal exposed-halo score.",
+    "beforeLog": "background-proof-before.log",
+    "afterLog": "background-proof-after.log",
+    "afterTestsPassed": 4
+  },
+  "compactGeometryProof": {
+    "beforeCommit": "11453ddf",
+    "afterCommit": "e1c163c3",
+    "sharpFramePairs": 30,
+    "maxByteDifference": 0,
+    "inputs": ["forest", "street", "dot-dragonfly"],
+    "profiles": ["phone", "desktop"],
+    "poses": [
+      [0, 0],
+      [-30, 0],
+      [30, 0],
+      [0, -30],
+      [0, 30]
+    ],
+    "limitation": "Before later donor refinement; Fine Splats may vary with asynchronous sorting."
+  },
+  "phoneProfile": {
+    "css": [390, 844],
+    "deviceScaleFactor": 3,
+    "existingRatioCap": 1.5,
+    "buffer": [585, 1266]
+  },
+  "goalSweep": {
+    "depth": 1,
+    "inputs": 49,
+    "profiles": 2,
+    "views": 2,
+    "posesPerView": 9,
+    "expectedBeforeRows": 882,
+    "expectedAfterRows": 1764,
+    "baselineViews": ["sharp"],
+    "targetViews": ["sharp", "splats"]
+  },
+  "additionalSensitivity": {
+    "beforeRows": 810,
+    "afterRows": 54,
+    "depths": [0.2, 0.5, 1],
+    "limitation": "Partial retained checkpoints, not exhaustive acceptance coverage."
+  },
+  "text": {
+    "testsPassed": 5,
+    "testsFailed": 0,
+    "testsSkipped": 0,
+    "photoNCC": {
+      "webgl2": 0.9342488699876922,
+      "webgpu": 0.9322310555475012
+    },
+    "source": "Unchanged phf-engine spec and its own unchanged textMatch fixture."
+  },
+  "boundedStop": {
+    "deadline": "2026-10-13T16:33:41+00:00",
+    "stoppedAt": "2026-10-13T16:33:41.197171+00:00",
+    "roots": [119878, 153651, 153654, 231403, 243448],
+    "pids": [
+      119878, 119979, 120009, 120011, 120118, 120120, 120139, 120232, 120259, 120947, 120954,
+      120955, 153651, 153654, 153685, 153728, 153731, 153736, 153765, 153767, 153781, 153782,
+      153786, 153881, 153885, 153897, 231403, 235391, 235398, 235399, 240398, 240405, 240407,
+      243448, 243469, 243494, 243495, 243514, 243516, 243519, 243565, 243574, 243575
+    ],
+    "action": "Freeze all owned goal-capture producers and descendants; preserve committed groups and persistent error histories."
+  },
+  "finalCoverage": {
+    "before": 468,
+    "after": 1674,
+    "expectedAfter": 1764,
+    "completeTargetGroups": 93,
+    "expectedGroups": 98,
+    "worstHole": {
+      "id": "dot-library",
+      "builtin": true,
+      "screen": "desktop",
+      "depth": 1,
+      "view": "sharp",
+      "yaw": 0,
+      "pitch": 30,
+      "dpr": 1,
+      "ratio": 1,
+      "buffer": [1440, 900],
+      "area": 391466,
+      "holes": 119,
+      "holeFraction": 0.00030398553131050975,
+      "edgePixels": 46688,
+      "haloPixels": 351,
+      "haloFraction": 0.007517991775188485,
+      "haloMean": 0.0008491076348291201,
+      "haloP95": 0,
+      "haloMax": 0.40784313725490196,
+      "sourceColorMAE": 0.019539527028540487,
+      "contrastLoss": 0.24251039740004537,
+      "contrastPixels": 19518
+    },
+    "violations": 0,
+    "errors": {
+      "before": [],
+      "after": ["Invalid blank capture: desktop/tulip-field/sharp/0/0/color"]
+    },
+    "captureFailure": {
+      "detectedAt": "2026-10-13T16:13:10.423898+00:00",
+      "invalidatedSamples": [
+        "dot-book-city",
+        "lighthouse",
+        "sailboat",
+        "tulips",
+        "daffodils",
+        "red-barn",
+        "seashell",
+        "islands",
+        "tulip-field",
+        "mushroom",
+        "waterfall",
+        "seashell-gif",
+        "mushroom-gif",
+        "waterfall-gif"
+      ],
+      "remainingValidRows": 630,
+      "reason": "Desktop output became fully black with zero Sharp diagnostic coverage. Raw rows and images are preserved separately; all affected groups, starting at dot-book-city, are excluded and recaptured in a fresh browser. Cause not established.",
+      "historicalConsoleErrors": [],
+      "archive": "sweep-after-desktop-invalid-black",
+      "producerPids": [236762]
+    }
+  },
+  "pairedSharpClips": 49
+}

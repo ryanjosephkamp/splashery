@@ -1,0 +1,54 @@
+{
+  "reason": "GitHub rejected the private-email gallery push. Original local refs remain intact; new no-reply publication commits descend from the public PR head and main.",
+  "before": "7c6073016e6c1c092091533302f903d80b4af44e",
+  "main": "555e8f5c1dae8b9192d7678493b4a2a38eb1e6d5",
+  "equivalents": [
+    {
+      "measuredLocalCommit": "6fbe45e5",
+      "publicCommit": "06854a312ae614577da382a236d3b14745f8289a",
+      "entireTreeEqual": true,
+      "tree": "ec4ed05be9147899495e2c916a0252fc0cd52f49"
+    },
+    {
+      "measuredLocalCommit": "a5458f4d32d02ad075ed539fbc7775cf1c4c9ef9",
+      "publicCommit": "81b89e11dc86c7aa62a2efa8713e7bca9f0f86d9",
+      "entireTreeEqual": true,
+      "tree": "cb05afd48bc846710748610d6384a614a35edac8"
+    },
+    {
+      "measuredLocalCommit": "17d5fc0e6413ebc479e04cca67edbab236e0e233",
+      "publicCommit": "91db750d8ff6f4a590f0193b9b5b259f88725836",
+      "entireTreeEqual": true,
+      "tree": "77e05c3e50bf7227941030b35c43a00568fcc471"
+    },
+    {
+      "measuredLocalCommit": "a3fb89527188dddd84a9793fda397909db232810",
+      "publicCommit": "39b8f79a0753f3b2e0e6cee8609525e2f3c6ee9a",
+      "entireTreeEqual": true,
+      "tree": "974185249661cfd8c779a3951f155c978428f58e"
+    },
+    {
+      "measuredLocalCommit": "b26960bf5c00bad1b5519e29d3916c0e1876f62b",
+      "publicCommit": "9111cfae6b75924f5c40c501df630b0038373bc2",
+      "entireTreeEqual": true,
+      "tree": "e92f3bda35a65a7fb32b724c9ec3a6fa795e36f0"
+    }
+  ],
+  "rawMeasurementIdentities": "Unchanged. Measurements ran on the original local checkout, not on these newly packaged public commits.",
+  "rendererFileHashes": {
+    "src/packs/photo-3d-core.js": "01fc758b2af3198fd94f922a3195d313d8f598cdbed8a88e6caa4128567a586c",
+    "src/photo3d/depth-edges.js": "b14f137a829eadcac5235dcb9ef28c89f224129c19fc137959683ce76e4a4f70",
+    "src/photo3d/background.js": "d856a45bb5e5ca6de2794a9967d703515ccc1aceb19b91366c354635a065e5fa",
+    "src/photo3d/build-worker.js": "b75fa5aafb3516eb2d09542cb295ce9577920458cae5fa565946394888f94ea5",
+    "src/photo3d/surface.js": "10fcd61d2bea397a292c19d0654dad8b0cb169f8015a6f8e81512ed820391433",
+    "src/live/relief-mesh.js": "f37912019e9cb72a10dfc459c6afcf575116bea860ec7001e825bbfb58593971",
+    "src/photo-splats.js": "227cd345c3a8654e98cfd8f4d9adba5521a9db186e5f969838f6a8bb219c71b3",
+    "src/packs/photo-sharp.js": "df95e37b9252f0b0421b7cad99ba194efa98ba39f0e61d51265829e3618f797a",
+    "src/packs/moving-photo.js": "9d99d3d619025d4bd072bae91b991203bf51583ee21054b466dabc3ae86764e3"
+  },
+  "uiFileHashes": {
+    "src/packs/photo-3d.js": "bd1eba55b416860ecbdb41f1c442b83281f9e9f2f9ba8b2888f04edb85ec127b",
+    "src/photo3d/input-warning.js": "84705f3b81c57f653579f54d394550fa72217383047a88c7f355d063a8f0ef2b"
+  },
+  "publicCommitIdentityCheck": "All newly packaged source commits use the confirmed public no-reply identity for author and committer."
+}

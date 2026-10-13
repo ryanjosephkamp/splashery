@@ -1,0 +1,67 @@
+{
+  "before": {
+    "commit": "7c6073016e6c1c092091533302f903d80b4af44e",
+    "files": {
+      "src/packs/photo-3d-core.js": "d0d35d56e009fffcd28e5987e858c553744d1ed881422529fb7c951dc10035fd",
+      "src/photo3d/background.js": "50714fabcfbe8bce89b5759d38ce511df44d7dbfd1bbca88fa3ddfd212437cbf",
+      "src/photo3d/build-worker.js": "e5c247be52200b05e35cc1a5c03ed1ce4740894bce159e1f602037433bb28ed9",
+      "src/photo3d/surface.js": "6c3195814c048d26b451e1c5cd55e633d6e8577ca2cf44cc044bba920490b688",
+      "src/live/relief-mesh.js": "5e918d3ce3fd558736f2ec60d66bf0306f11fea3d9a125a0b0195ffd9a63542e",
+      "src/photo-splats.js": "227cd345c3a8654e98cfd8f4d9adba5521a9db186e5f969838f6a8bb219c71b3",
+      "src/packs/photo-sharp.js": "df95e37b9252f0b0421b7cad99ba194efa98ba39f0e61d51265829e3618f797a",
+      "src/packs/moving-photo.js": "9d99d3d619025d4bd072bae91b991203bf51583ee21054b466dabc3ae86764e3"
+    }
+  },
+  "main": {
+    "commit": "555e8f5c1dae8b9192d7678493b4a2a38eb1e6d5",
+    "files": {
+      "src/packs/photo-3d-core.js": "d5fc44c843a9fe602ccbd4da87eda020cafc7bafaab1e8d54cf79387cc56d733",
+      "src/live/relief-mesh.js": "97dae66876e87b4c4fa722afcdf82cd9bdd89f2a53ae8fc4789ab115c8dbef4b",
+      "src/photo-splats.js": "fd040cc0b448354031540a1653c5da317806d3f4cbfa065f3d4342ede5127a11",
+      "src/packs/photo-sharp.js": "d4f5a885995bed0d7b0ffc68eed5db9a4f046d3c69abba38f1b7d24566159729",
+      "src/packs/moving-photo.js": "9d99d3d619025d4bd072bae91b991203bf51583ee21054b466dabc3ae86764e3"
+    }
+  },
+  "after": {
+    "commit": "a5458f4d32d02ad075ed539fbc7775cf1c4c9ef9",
+    "files": {
+      "src/packs/photo-3d-core.js": "01fc758b2af3198fd94f922a3195d313d8f598cdbed8a88e6caa4128567a586c",
+      "src/photo3d/depth-edges.js": "b14f137a829eadcac5235dcb9ef28c89f224129c19fc137959683ce76e4a4f70",
+      "src/photo3d/background.js": "d856a45bb5e5ca6de2794a9967d703515ccc1aceb19b91366c354635a065e5fa",
+      "src/photo3d/build-worker.js": "b75fa5aafb3516eb2d09542cb295ce9577920458cae5fa565946394888f94ea5",
+      "src/photo3d/surface.js": "10fcd61d2bea397a292c19d0654dad8b0cb169f8015a6f8e81512ed820391433",
+      "src/live/relief-mesh.js": "f37912019e9cb72a10dfc459c6afcf575116bea860ec7001e825bbfb58593971",
+      "src/photo-splats.js": "227cd345c3a8654e98cfd8f4d9adba5521a9db186e5f969838f6a8bb219c71b3",
+      "src/packs/photo-sharp.js": "df95e37b9252f0b0421b7cad99ba194efa98ba39f0e61d51265829e3618f797a",
+      "src/packs/moving-photo.js": "9d99d3d619025d4bd072bae91b991203bf51583ee21054b466dabc3ae86764e3"
+    }
+  },
+  "afterIndependent": {
+    "commit": "11453ddfbe56e5c01857c516029f86e0c34e681f",
+    "files": {
+      "src/packs/photo-3d-core.js": "01fc758b2af3198fd94f922a3195d313d8f598cdbed8a88e6caa4128567a586c",
+      "src/photo3d/depth-edges.js": "b14f137a829eadcac5235dcb9ef28c89f224129c19fc137959683ce76e4a4f70",
+      "src/photo3d/background.js": "bfdfa215dca7f4c644196a7e2aa9c161d81b7204cb23ebf9f56c014e81fc0820",
+      "src/photo3d/build-worker.js": "e56211fa36a1aa762f803d8d4e0339942ed95fd1456ec8f6f545e7dd4c498408",
+      "src/photo3d/surface.js": "256aa5613ab5899481181620d4512ad51239f464a6a3b3c10ef12998296a6510",
+      "src/live/relief-mesh.js": "bd47a672ffb2c5bff1eccea49049c196a2a29085c47aa432826079d8e2fde5df",
+      "src/photo-splats.js": "227cd345c3a8654e98cfd8f4d9adba5521a9db186e5f969838f6a8bb219c71b3",
+      "src/packs/photo-sharp.js": "df95e37b9252f0b0421b7cad99ba194efa98ba39f0e61d51265829e3618f797a",
+      "src/packs/moving-photo.js": "9d99d3d619025d4bd072bae91b991203bf51583ee21054b466dabc3ae86764e3"
+    }
+  },
+  "afterBeforeDonorGuard": {
+    "commit": "e1c163c337433fa17e9f80472bff4cf4a8a91c9b",
+    "files": {
+      "src/packs/photo-3d-core.js": "01fc758b2af3198fd94f922a3195d313d8f598cdbed8a88e6caa4128567a586c",
+      "src/photo3d/depth-edges.js": "b14f137a829eadcac5235dcb9ef28c89f224129c19fc137959683ce76e4a4f70",
+      "src/photo3d/background.js": "bfdfa215dca7f4c644196a7e2aa9c161d81b7204cb23ebf9f56c014e81fc0820",
+      "src/photo3d/build-worker.js": "b75fa5aafb3516eb2d09542cb295ce9577920458cae5fa565946394888f94ea5",
+      "src/photo3d/surface.js": "10fcd61d2bea397a292c19d0654dad8b0cb169f8015a6f8e81512ed820391433",
+      "src/live/relief-mesh.js": "f37912019e9cb72a10dfc459c6afcf575116bea860ec7001e825bbfb58593971",
+      "src/photo-splats.js": "227cd345c3a8654e98cfd8f4d9adba5521a9db186e5f969838f6a8bb219c71b3",
+      "src/packs/photo-sharp.js": "df95e37b9252f0b0421b7cad99ba194efa98ba39f0e61d51265829e3618f797a",
+      "src/packs/moving-photo.js": "9d99d3d619025d4bd072bae91b991203bf51583ee21054b466dabc3ae86764e3"
+    }
+  }
+}

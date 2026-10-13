@@ -1,0 +1,278 @@
+[
+  {
+    "id": "lighthouse",
+    "file": "sources/lighthouse.jpg",
+    "author": "-anna--",
+    "source": "https://www.flickr.com/photos/77532212@N07/16563630874",
+    "license": "CC0 1.0",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "checked": "October 13, 2026",
+    "status": 200,
+    "sha256": "dbbf80d10cd7e70dd15e9a974861ddf29b4837db1f21aaafe6592b9eed7e1abc",
+    "changes": "Existing repository image, unchanged.",
+    "depthFile": "sources/lighthouse.depth",
+    "depthInfo": {
+      "w": 599,
+      "h": 900,
+      "depthW": 350,
+      "depthH": 518,
+      "ms": 5152.300000000047
+    },
+    "depthSha256": "41b840482e4a4fe4a33998ad71e7410637057f82c9365092b176774820a73ae1"
+  },
+  {
+    "id": "sailboat",
+    "file": "sources/sailboat.jpg",
+    "author": "leex6221",
+    "source": "https://www.flickr.com/photos/135788700@N05/35295085365",
+    "license": "CC0 1.0",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "checked": "October 13, 2026",
+    "status": 200,
+    "sha256": "6cf2bb7000d0ce3c20bceb9ab036bff287e67406d8dffcc89ad65e18400dfa1f",
+    "changes": "Existing repository image, unchanged.",
+    "depthFile": "sources/sailboat.depth",
+    "depthInfo": {
+      "w": 900,
+      "h": 597,
+      "depthW": 518,
+      "depthH": 350,
+      "ms": 3294.399999999907
+    },
+    "depthSha256": "048ecae5e557e0b02d010d76fd94f5d253b937fe012ced638f860802b1a78748"
+  },
+  {
+    "id": "tulips",
+    "file": "sources/tulips.jpg",
+    "author": "Lucía Quiñónez",
+    "source": "https://www.flickr.com/photos/133590734@N04/17935969728",
+    "license": "CC0 1.0",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "checked": "October 13, 2026",
+    "status": 200,
+    "sha256": "fc3671778f7badd088f3bdf9362303b39ad646bb9ca71dcb238eb2729b76ad06",
+    "changes": "Existing repository image, unchanged.",
+    "depthFile": "sources/tulips.depth",
+    "depthInfo": {
+      "w": 900,
+      "h": 675,
+      "depthW": 518,
+      "depthH": 392,
+      "ms": 5181.800000000047
+    },
+    "depthSha256": "55ed1404a6732d8c5a0ab95b994e4206eb091688b495a6b5f8f831a45fe38921"
+  },
+  {
+    "id": "daffodils",
+    "file": "sources/daffodils.jpg",
+    "author": "patrick jourdheuille",
+    "source": "https://www.flickr.com/photos/128176757@N06/16361600725",
+    "license": "CC0 1.0",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "checked": "October 13, 2026",
+    "status": 200,
+    "sha256": "fb637a70cb6eed538f27d9317e2e9093f4e5fc2d0b1f9ef553eeed1660abd909",
+    "changes": "Existing repository image, unchanged.",
+    "depthFile": "sources/daffodils.depth",
+    "depthInfo": {
+      "w": 615,
+      "h": 900,
+      "depthW": 350,
+      "depthH": 518,
+      "ms": 2887
+    },
+    "depthSha256": "3833aecbb28de43afc0a2195df5274b84716f6eeb438841e7e578670ab0a89b9"
+  },
+  {
+    "id": "red-barn",
+    "file": "sources/red-barn.jpg",
+    "author": "Alan Levine",
+    "source": "https://www.flickr.com/photos/37996646802@N01/51912951761",
+    "license": "CC0 1.0",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "checked": "October 13, 2026",
+    "status": 200,
+    "sha256": "150651deeadaa57b5379eea83d3d0feea92cb9d23db0ceea217e8314b2790d90",
+    "changes": "Existing repository image, unchanged.",
+    "depthFile": "sources/red-barn.depth",
+    "depthInfo": {
+      "w": 900,
+      "h": 556,
+      "depthW": 518,
+      "depthH": 322,
+      "ms": 3293.899999999907
+    },
+    "depthSha256": "79e2ca36f522a97bc8a1041039d690404538a0c35f275cae5c903b1eaba4696b"
+  },
+  {
+    "id": "seashell",
+    "file": "sources/seashell.jpg",
+    "author": "samsonites89",
+    "source": "https://www.flickr.com/photos/116158494@N02/20532087302",
+    "license": "CC0 1.0",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "checked": "October 13, 2026",
+    "status": 200,
+    "sha256": "77ce64a83c91cf79d8d05b098276b5a0ce40b6253573ad18934214cc12ee2476",
+    "changes": "Existing repository image, unchanged.",
+    "depthFile": "sources/seashell.depth",
+    "depthInfo": {
+      "w": 900,
+      "h": 600,
+      "depthW": 518,
+      "depthH": 350,
+      "ms": 2991.7000000001863
+    },
+    "depthSha256": "b554af4a5f1c7aa4a3ab8a5d167676300553ffe9d1b49d454371126e8a83a583"
+  },
+  {
+    "id": "islands",
+    "file": "sources/islands.jpg",
+    "author": "Camilla K",
+    "source": "https://www.flickr.com/photos/148372846@N03/37778143022",
+    "license": "CC0 1.0",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "checked": "October 13, 2026",
+    "status": 200,
+    "sha256": "e15df9107aa85efb9c95529465fd4172ef76c1bf1826f03b9786fa2d7ccf18b2",
+    "changes": "Existing repository image, unchanged.",
+    "depthFile": "sources/islands.depth",
+    "depthInfo": {
+      "w": 900,
+      "h": 675,
+      "depthW": 518,
+      "depthH": 392,
+      "ms": 2874.1999999999534
+    },
+    "depthSha256": "3a6300de2f6c61ea619ada1401d8bce36fe75aaaef769f6ee50dc5184e4b3d24"
+  },
+  {
+    "id": "tulip-field",
+    "file": "sources/tulip-field.jpg",
+    "author": "DennisM2",
+    "source": "https://www.flickr.com/photos/14674348@N04/13825345834",
+    "license": "CC0 1.0",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "checked": "October 13, 2026",
+    "status": 200,
+    "sha256": "7020a9f8a3d8e66e025cd83f65c0866769e90abbe0d92609164ae07908be9f83",
+    "changes": "Existing repository image, unchanged.",
+    "depthFile": "sources/tulip-field.depth",
+    "depthInfo": {
+      "w": 1024,
+      "h": 768,
+      "depthW": 518,
+      "depthH": 392,
+      "ms": 3353.899999999907
+    },
+    "depthSha256": "fafd8edbb57b884a4b514c6d46e8ff1f5cbcff20e05eae189ecd8d36eff0192f"
+  },
+  {
+    "id": "mushroom",
+    "file": "sources/mushroom.jpg",
+    "author": "Bildflut85",
+    "source": "https://www.flickr.com/photos/144218922@N07/36613251921",
+    "license": "CC0 1.0",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "checked": "October 13, 2026",
+    "status": 200,
+    "sha256": "a5cb152f0f28059eb135dd601148d22ccd0a8fd83384c8eaa01e4f3d94b2d9b6",
+    "changes": "Flickr large image, unchanged.",
+    "depthFile": "sources/mushroom.depth",
+    "depthInfo": {
+      "w": 1024,
+      "h": 576,
+      "depthW": 518,
+      "depthH": 294,
+      "ms": 2552.5
+    },
+    "depthSha256": "7218148687c211b8fba27e4186fe318a1ea7ac774a6e81ba0ac90b1797fd0f0d"
+  },
+  {
+    "id": "waterfall",
+    "file": "sources/waterfall.jpg",
+    "author": "sqraz",
+    "source": "https://www.flickr.com/photos/163451215@N07/40875830184",
+    "license": "CC0 1.0",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "checked": "October 13, 2026",
+    "status": 200,
+    "sha256": "62c01b365fb6833caed0cefcfef7449ec93958814cd6557eeaa43cd7611d6e50",
+    "changes": "Flickr large image, unchanged.",
+    "depthFile": "sources/waterfall.depth",
+    "depthInfo": {
+      "w": 1024,
+      "h": 680,
+      "depthW": 518,
+      "depthH": 350,
+      "ms": 2847.4000000001397
+    },
+    "depthSha256": "7bb64b6281e5a4499953cea355bfe38ea78bfeeeb3f054a1beba0253e9273af8"
+  },
+  {
+    "id": "seashell-gif",
+    "file": "sources/seashell-gif.gif",
+    "author": "samsonites89",
+    "source": "https://www.flickr.com/photos/116158494@N02/20532087302",
+    "license": "CC0 1.0",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "checked": "October 13, 2026",
+    "status": 200,
+    "sha256": "65124e509b9db0fa908b914cdf2056a2d8654b62708d4c501dc48601f3350f68",
+    "changes": "Review GIF: resized to at most 640x480, palette quantized, with 12 translated source windows. Photo to 3D decodes its first frame.",
+    "depthFile": "sources/seashell-gif.depth",
+    "depthInfo": {
+      "w": 632,
+      "h": 427,
+      "depthW": 518,
+      "depthH": 350,
+      "ms": 2667.8000000000466
+    },
+    "depthSha256": "5c12dc5fc2d0a76b36ba38f7fdeab2321b9507d23314f99cb211e479c77aa26c",
+    "derivativeMadeBy": "Ryan with Codex (GPT-6)"
+  },
+  {
+    "id": "mushroom-gif",
+    "file": "sources/mushroom-gif.gif",
+    "author": "Bildflut85",
+    "source": "https://www.flickr.com/photos/144218922@N07/36613251921",
+    "license": "CC0 1.0",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "checked": "October 13, 2026",
+    "status": 200,
+    "sha256": "a348952674c902a8d20a5f38a8631f373ac1801b6ee6569feb458c979f7f2321",
+    "changes": "Review GIF: resized to at most 640x480, palette quantized, with 12 translated source windows. Photo to 3D decodes its first frame.",
+    "depthFile": "sources/mushroom-gif.depth",
+    "depthInfo": {
+      "w": 632,
+      "h": 360,
+      "depthW": 518,
+      "depthH": 294,
+      "ms": 2279.899999999907
+    },
+    "depthSha256": "e799a47b559dcd7c1be976ac77f5124c53944fec0a896c94071bcfb270d1a4b9",
+    "derivativeMadeBy": "Ryan with Codex (GPT-6)"
+  },
+  {
+    "id": "waterfall-gif",
+    "file": "sources/waterfall-gif.gif",
+    "author": "sqraz",
+    "source": "https://www.flickr.com/photos/163451215@N07/40875830184",
+    "license": "CC0 1.0",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "checked": "October 13, 2026",
+    "status": 200,
+    "sha256": "5666a38972442a3788b93e468100c84236e7c3536914d059bfc33ee401b4287d",
+    "changes": "Review GIF: resized to at most 640x480, palette quantized, with 12 translated source windows. Photo to 3D decodes its first frame.",
+    "depthFile": "sources/waterfall-gif.depth",
+    "depthInfo": {
+      "w": 632,
+      "h": 425,
+      "depthW": 518,
+      "depthH": 350,
+      "ms": 2770.1999999999534
+    },
+    "depthSha256": "fc1ecc747fedbc7ecedaf1dab1fd32667b64799a557e8b0f7e005ac6ccead341",
+    "derivativeMadeBy": "Ryan with Codex (GPT-6)"
+  }
+]

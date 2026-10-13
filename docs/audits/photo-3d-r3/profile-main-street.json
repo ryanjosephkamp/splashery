@@ -1,0 +1,56 @@
+{
+  "browser": "151.0.7922.173",
+  "url": "http://127.0.0.1:4176/",
+  "geometry": [
+    {
+      "layer": 0,
+      "vertices": 60562,
+      "triangles": 120132,
+      "metaVertices": 0,
+      "cutVertices": 0,
+      "uncertainVertices": 0
+    },
+    {
+      "layer": 1,
+      "vertices": 7178,
+      "triangles": 14016,
+      "metaVertices": 0,
+      "cutVertices": 0,
+      "uncertainVertices": 0
+    },
+    {
+      "layer": 2,
+      "vertices": 784,
+      "triangles": 776,
+      "metaVertices": 0,
+      "cutVertices": 0,
+      "uncertainVertices": 0
+    }
+  ],
+  "timerQuery": false,
+  "disjoint": null,
+  "draws": [],
+  "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)",
+  "sharp": {
+    "views": {
+      "photo-3d": "sharp",
+      "moving-photo-3d": "sharp"
+    },
+    "on": true,
+    "kind": "photo",
+    "grid": [282, 213],
+    "color": [1280, 960],
+    "depth": [648, 488],
+    "video": false,
+    "videoTime": null,
+    "cost": {
+      "color": 6553600,
+      "depth": 316224,
+      "mesh": 2422656,
+      "pieces": 344936,
+      "triangles": 134148,
+      "total": 9637416
+    },
+    "splatsOff": true
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "browser": "151.0.7922.173",
+  "renderer": "webgl2",
+  "rows": [
+    {
+      "font": "sans-serif",
+      "detail": "splats",
+      "ncc": 0.8468175259165295,
+      "n": 65296,
+      "photo": false,
+      "toyPhoto": false,
+      "device": "webgl2",
+      "rb": [18, 32, 359, 561],
+      "sb": [10, 13, 453, 698],
+      "camera": {
+        "yaw": 0,
+        "pitch": 0,
+        "roll": 0,
+        "distance": 1.618023369462109
+      },
+      "info": {
+        "name": "Text",
+        "uid": 1,
+        "splats": 199500,
+        "backing": 3456,
+        "grid": [480, 720],
+        "pieces": 1,
+        "cutEdges": 34,
+        "relief": 0.43,
+        "ms": 0,
+        "custom": true
+      }
+    },
+    {
+      "font": "sans-serif",
+      "detail": "photo",
+      "ncc": 0.9342488699876922,
+      "n": 65296,
+      "photo": true,
+      "toyPhoto": true,
+      "device": "webgl2",
+      "rb": [18, 32, 359, 561],
+      "sb": [10, 13, 453, 698],
+      "camera": {
+        "yaw": 0,
+        "pitch": 0,
+        "roll": 0,
+        "distance": 1.618023369462109
+      },
+      "info": {
+        "name": "Text",
+        "uid": 3,
+        "splats": 199500,
+        "backing": 3456,
+        "grid": [480, 720],
+        "pieces": 1,
+        "cutEdges": 34,
+        "relief": 0.43,
+        "ms": 0,
+        "custom": true
+      }
+    }
+  ],
+  "errors": []
+}

@@ -1,0 +1,21 @@
+{
+  "browser": "151.0.7922.173",
+  "url": "http://127.0.0.1:4177/",
+  "build": {
+    "commit": "a5458f4d32d02ad075ed539fbc7775cf1c4c9ef9",
+    "files": {
+      "src/packs/photo-3d-core.js": "01fc758b2af3198fd94f922a3195d313d8f598cdbed8a88e6caa4128567a586c",
+      "src/photo3d/depth-edges.js": "b14f137a829eadcac5235dcb9ef28c89f224129c19fc137959683ce76e4a4f70",
+      "src/photo3d/background.js": "d856a45bb5e5ca6de2794a9967d703515ccc1aceb19b91366c354635a065e5fa",
+      "src/photo3d/build-worker.js": "b75fa5aafb3516eb2d09542cb295ce9577920458cae5fa565946394888f94ea5",
+      "src/photo3d/surface.js": "10fcd61d2bea397a292c19d0654dad8b0cb169f8015a6f8e81512ed820391433",
+      "src/live/relief-mesh.js": "f37912019e9cb72a10dfc459c6afcf575116bea860ec7001e825bbfb58593971",
+      "src/photo-splats.js": "227cd345c3a8654e98cfd8f4d9adba5521a9db186e5f969838f6a8bb219c71b3",
+      "src/packs/photo-sharp.js": "df95e37b9252f0b0421b7cad99ba194efa98ba39f0e61d51265829e3618f797a",
+      "src/packs/moving-photo.js": "9d99d3d619025d4bd072bae91b991203bf51583ee21054b466dabc3ae86764e3"
+    }
+  },
+  "renderer": "llvmpipe",
+  "rows": 882,
+  "errors": []
+}

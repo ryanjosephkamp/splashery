@@ -1,0 +1,13 @@
+{
+  "rejected": true,
+  "launchedBrowser": false,
+  "before": {
+    "cdx-p3d2-r3-clips.mjs": "81a8ac1a9708cf1bb7ec9535df41d7c96ff27aa341e3fb8dfd2e548de3cea9b7",
+    "cdx-p3d2-r3-common.mjs": "480f06ec89e75f5d93bd1685cd8bcd9c64d1213594729e1f9bf0a5c7f78da8f4"
+  },
+  "after": {
+    "cdx-p3d2-r3-clips.mjs": "81a8ac1a9708cf1bb7ec9535df41d7c96ff27aa341e3fb8dfd2e548de3cea9b7",
+    "cdx-p3d2-r3-common.mjs": "480f06ec89e75f5d93bd1685cd8bcd9c64d1213594729e1f9bf0a5c7f78da8f4"
+  },
+  "archivesUnchanged": true
+}

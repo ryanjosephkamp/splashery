@@ -1,0 +1,117 @@
+{
+  "mainBuild": {
+    "commit": "555e8f5c1dae8b9192d7678493b4a2a38eb1e6d5",
+    "files": {
+      "src/packs/photo-3d-core.js": "d5fc44c843a9fe602ccbd4da87eda020cafc7bafaab1e8d54cf79387cc56d733",
+      "src/live/relief-mesh.js": "97dae66876e87b4c4fa722afcdf82cd9bdd89f2a53ae8fc4789ab115c8dbef4b",
+      "src/photo-splats.js": "fd040cc0b448354031540a1653c5da317806d3f4cbfa065f3d4342ede5127a11",
+      "src/packs/photo-sharp.js": "d4f5a885995bed0d7b0ffc68eed5db9a4f046d3c69abba38f1b7d24566159729",
+      "src/packs/moving-photo.js": "9d99d3d619025d4bd072bae91b991203bf51583ee21054b466dabc3ae86764e3"
+    }
+  },
+  "afterRenderer": {
+    "commit": "a5458f4d32d02ad075ed539fbc7775cf1c4c9ef9",
+    "files": {
+      "src/packs/photo-3d-core.js": "01fc758b2af3198fd94f922a3195d313d8f598cdbed8a88e6caa4128567a586c",
+      "src/photo3d/depth-edges.js": "b14f137a829eadcac5235dcb9ef28c89f224129c19fc137959683ce76e4a4f70",
+      "src/photo3d/background.js": "d856a45bb5e5ca6de2794a9967d703515ccc1aceb19b91366c354635a065e5fa",
+      "src/photo3d/build-worker.js": "b75fa5aafb3516eb2d09542cb295ce9577920458cae5fa565946394888f94ea5",
+      "src/photo3d/surface.js": "10fcd61d2bea397a292c19d0654dad8b0cb169f8015a6f8e81512ed820391433",
+      "src/live/relief-mesh.js": "f37912019e9cb72a10dfc459c6afcf575116bea860ec7001e825bbfb58593971",
+      "src/photo-splats.js": "227cd345c3a8654e98cfd8f4d9adba5521a9db186e5f969838f6a8bb219c71b3",
+      "src/packs/photo-sharp.js": "df95e37b9252f0b0421b7cad99ba194efa98ba39f0e61d51265829e3618f797a",
+      "src/packs/moving-photo.js": "9d99d3d619025d4bd072bae91b991203bf51583ee21054b466dabc3ae86764e3"
+    }
+  },
+  "runs": [
+    {
+      "folder": "main-controls",
+      "file": "smd-moving.spec.mjs",
+      "stats": {
+        "startTime": "2026-10-13T12:56:49.073Z",
+        "duration": 326098.767,
+        "expected": 15,
+        "skipped": 0,
+        "unexpected": 1,
+        "flaky": 0
+      },
+      "failures": [
+        {
+          "title": "bridge on a slow device plays at its source's speed",
+          "status": "failed",
+          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m0.03\u001b[39m\nReceived:   \u001b[31m0.2267402593807002\u001b[39m"
+        }
+      ],
+      "testSha256": "abcbdc26557e7c6cdfe9e61df7dd1a12a9e56490a9ac0e6c72ddafb8bbdab5d9"
+    },
+    {
+      "folder": "main-controls",
+      "file": "phy.spec.mjs",
+      "stats": {
+        "startTime": "2026-10-13T13:02:18.703Z",
+        "duration": 254733.48400000003,
+        "expected": 5,
+        "skipped": 0,
+        "unexpected": 1,
+        "flaky": 0
+      },
+      "failures": [
+        {
+          "title": "Pebbles: stones pick up and stack into a new cairn; a careless one topples",
+          "status": "failed",
+          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: > \u001b[32m0.21939673013412686\u001b[39m\nReceived:   \u001b[31m0.1734122494834285\u001b[39m"
+        }
+      ],
+      "testSha256": "0100467edc3f8a6719e5f7dafaf89f7637b3f64b83e8f722ba9ff802f88a9afb"
+    },
+    {
+      "folder": "full-suite-rechecks",
+      "file": "smd-moving.spec.mjs",
+      "stats": {
+        "startTime": "2026-10-13T12:44:50.881Z",
+        "duration": 277923.645,
+        "expected": 16,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "failures": [],
+      "testSha256": "abcbdc26557e7c6cdfe9e61df7dd1a12a9e56490a9ac0e6c72ddafb8bbdab5d9"
+    },
+    {
+      "folder": "full-suite-rechecks",
+      "file": "phy.spec.mjs",
+      "stats": {
+        "startTime": "2026-10-13T13:06:35.829Z",
+        "duration": 279109.451,
+        "expected": 5,
+        "skipped": 0,
+        "unexpected": 1,
+        "flaky": 0
+      },
+      "failures": [
+        {
+          "title": "Pebbles: stones pick up and stack into a new cairn; a careless one topples",
+          "status": "failed",
+          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: > \u001b[32m0.21939783634108012\u001b[39m\nReceived:   \u001b[31m0.17435864136666893\u001b[39m"
+        }
+      ],
+      "testSha256": "0100467edc3f8a6719e5f7dafaf89f7637b3f64b83e8f722ba9ff802f88a9afb"
+    },
+    {
+      "folder": "full-suite-rechecks",
+      "file": "spg.spec.mjs",
+      "stats": {
+        "startTime": "2026-10-13T13:11:19.034Z",
+        "duration": 55511.392,
+        "expected": 8,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "failures": [],
+      "testSha256": "c93895e408ccadeb7d929cffaaa32fd0ed2c0ae942e60036d0f9175855276ff2"
+    }
+  ],
+  "startupFailure": "First main attempt did not run because the checkout lacked its existing test-dependency link; no browser was installed. The link was repaired and the actual whole-file control is recorded below."
+}

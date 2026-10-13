@@ -1,0 +1,7 @@
+{
+  "at": "2026-10-13T15:29:01.466621+00:00",
+  "pids": [153651, 153685, 153728, 153731, 153781, 153782, 153786, 240398, 240405, 240407],
+  "completedRows": 882,
+  "phoneRows": 882,
+  "reason": "Phone phase complete; desktop uses identical method in separate sweep-after-desktop."
+}

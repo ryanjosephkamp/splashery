@@ -1,0 +1,24 @@
+{
+  "detectedAt": "2026-10-13T16:13:10.423898+00:00",
+  "invalidatedSamples": [
+    "dot-book-city",
+    "lighthouse",
+    "sailboat",
+    "tulips",
+    "daffodils",
+    "red-barn",
+    "seashell",
+    "islands",
+    "tulip-field",
+    "mushroom",
+    "waterfall",
+    "seashell-gif",
+    "mushroom-gif",
+    "waterfall-gif"
+  ],
+  "remainingValidRows": 630,
+  "reason": "Desktop output became fully black with zero Sharp diagnostic coverage. Raw rows and images are preserved separately; all affected groups, starting at dot-book-city, are excluded and recaptured in a fresh browser. Cause not established.",
+  "historicalConsoleErrors": [],
+  "archive": "sweep-after-desktop-invalid-black",
+  "producerPids": [236762]
+}
