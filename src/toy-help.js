@@ -21,6 +21,12 @@
 // the toy's recipe and against a real source for every fact.
 
 export const TOY_HELP = {
+  "gear-train": {
+    howTo:
+      "Drag the gold input gear to turn the chain. Tap to run at 60 rpm. Set teeth and gear count in the Toy tab.",
+    about:
+      "Build a chain of two to five spur gears with 12 to 36 teeth each. Drag the gold input gear around its axle, or tap the model to run the input at 60 revolutions per minute for four seconds. Change the tooth counts and the number of gears in the Toy tab.\n\nEach mesh reverses direction. A 12-tooth input driving a 36-tooth output gives a 3:1 reduction: at 60 rpm in, the output turns at −20 rpm. Adding a third gear restores the input's direction. Intermediate gears change direction, but the first and last tooth counts determine the speed ratio.\n\nThe torque multiplier assumes an ideal train with no losses. The model uses matching involute teeth, a 25-degree pressure angle, and a 2 mm module. It shows constrained motion, without friction, backlash, or elastic deformation. Positive speeds turn counterclockwise when viewed from the front.",
+  },
   // ---- Photoreal r3 (lane Photoreal r3) ----
   "triceratops-skull": {
     howTo: "Tap it to make it look at you; drag to turn it.",
