@@ -55,11 +55,11 @@ test("an exact mean prefix builds the same shaded buffers as a complete scan", (
   }
   for (const k of ["pos", "nrm", "sig", "rgb", "part"])
     partial[k] = full[k].subarray(0, capacity * (["pos", "nrm", "rgb"].includes(k) ? 3 : 1));
-  const build = (scan) => {
+  const build = (scan, smooth = 0.35) => {
     const it = buildRecipe(
       {
         build(k) {
-          addScan(k, scan, { share: 0.86, smooth: 0.35, sizeMul: 0.85, exact: true });
+          addScan(k, scan, { share: 0.86, smooth, sizeMul: 0.85, exact: true });
         },
       },
       { seed: 424242, count: 5000 },
@@ -77,5 +77,9 @@ test("an exact mean prefix builds the same shaded buffers as a complete scan", (
   expect(b.count).toBe(a.count);
   for (const k of Object.keys(a).filter((k) => ArrayBuffer.isView(a[k])))
     expect(hash(b[k]), k).toBe(hash(a[k]));
+  const unsmoothed = build(partial, 0),
+    reference = build(full, 0);
+  for (const k of Object.keys(reference).filter((k) => ArrayBuffer.isView(reference[k])))
+    expect(hash(unsmoothed[k]), `unsmoothed ${k}`).toBe(hash(reference[k]));
   expect(() => build({ ...partial, meanCell: 0.024 })).toThrow(/full records/);
 });

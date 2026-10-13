@@ -89,13 +89,19 @@ export function addScan(
 ) {
   k.data = k.data || {}; // sortWhileMoving keeps its state here
   const m = Math.min(scan.n, Math.max(1000, Math.floor(k.count * share)));
-  if (m > scan.capacity || (smooth > 0 && scan.capacity < scan.n))
+  const bakedMean =
+    scan.meanCell === cell &&
+    scan.meanColor instanceof Float64Array &&
+    scan.meanColor.length >= m * 3;
+  if (m > scan.capacity || (smooth > 0 && scan.capacity < scan.n && !bakedMean))
     throw new Error("This scan needs its full records at this detail setting.");
   const grow = Math.sqrt(scan.n / m);
   const list = [];
   for (let i = 0; i < m; i++) if (!keep || keep(scan.part[i], i)) list.push(i);
   let mean = null;
-  if (smooth > 0) {
+  if (smooth > 0 && bakedMean) {
+    mean = (i) => [scan.meanColor[i * 3], scan.meanColor[i * 3 + 1], scan.meanColor[i * 3 + 2]];
+  } else if (smooth > 0) {
     // Mean color per grid cell (and part), over every splat in the file.
     const sums = new Map();
     const key = (i) =>
