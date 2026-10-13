@@ -7,13 +7,19 @@ import { PNG } from "pngjs";
 import { TOYS } from "../src/toys.js";
 import { createScene } from "../src/state.js";
 
-const out = "docs/audits/load-time-2026-10/images";
+const option = (key, fallback) =>
+  process.argv.find((s) => s.startsWith(`--${key}=`))?.slice(key.length + 3) ?? fallback;
+const raw = path.resolve(option("out", "../load-time-runs/visuals"));
+const out = path.join(raw, "images");
 fs.mkdirSync(out, { recursive: true });
 const pilot = process.argv.includes("--pilot");
 const allIds = [
   "cactus",
   "pyrite-cubes",
   "celestial-globe",
+  "armillary-sphere",
+  "stannern-meteorites",
+  "your-book",
   "water-bottle",
   "sunglasses",
   "baseball-cap",
@@ -32,7 +38,7 @@ const browser = await chromium.launch({
     "--ignore-gpu-blocklist",
   ],
 });
-const recordsFile = "docs/audits/load-time-2026-10/image-diffs.json";
+const recordsFile = path.join(raw, "image-diffs.json");
 const records = fs.existsSync(recordsFile) ? JSON.parse(fs.readFileSync(recordsFile)) : [];
 async function shot(id, device, phase, pose, halfBudget = false) {
   const def = TOYS.find((t) => t.id === id);
@@ -114,6 +120,7 @@ async function shot(id, device, phase, pose, halfBudget = false) {
     { timeout: 60000 },
   );
   await page.waitForTimeout(1500);
+  await page.evaluate(() => window.__splashery.player.stage.device.gl?.finish());
   const file = `${id}-${device}-${halfBudget ? "lossy-half-budget" : phase}-${pose}.png`;
   await page.locator("#stage").screenshot({ path: path.join(out, file), scale: "css" });
   const info = await page.evaluate(() => ({
@@ -165,8 +172,18 @@ try {
   for (const device of pilot ? ["phone"] : ["phone", "desktop", "phone-mid"])
     for (const id of ids)
       for (const pose of ["rest", "tap"]) {
-        if (id === "cactus" && pose === "tap") continue;
-        if (device === "phone-mid" && ["cactus", "pyrite-cubes", "celestial-globe"].includes(id))
+        if (["cactus", "your-book"].includes(id) && pose === "tap") continue;
+        if (
+          device === "phone-mid" &&
+          [
+            "cactus",
+            "pyrite-cubes",
+            "celestial-globe",
+            "armillary-sphere",
+            "stannern-meteorites",
+            "your-book",
+          ].includes(id)
+        )
           continue;
         if (records.some((r) => r.id === id && r.device === device && r.pose === pose)) continue;
         const before = await shot(id, device, "before", pose);
@@ -180,10 +197,7 @@ try {
         }
         records.push({ captureVersion: 2, id, device, pose, before, after, ...delta });
         console.log(`${id} ${device} ${pose}: ${delta.differentPixels} changed pixels`);
-        fs.writeFileSync(
-          "docs/audits/load-time-2026-10/image-diffs.json",
-          JSON.stringify(records, null, 2) + "\n",
-        );
+        fs.writeFileSync(recordsFile, JSON.stringify(records, null, 2) + "\n");
       }
   const lossy = [];
   if (pilot) process.exitCode = 0;
@@ -201,10 +215,7 @@ try {
         ...diff(before.file, after.file, `${id}-phone-lossy-diff.png`),
       });
     }
-    fs.writeFileSync(
-      "docs/audits/load-time-2026-10/lossy-options.json",
-      JSON.stringify(lossy, null, 2) + "\n",
-    );
+    fs.writeFileSync(path.join(raw, "lossy-options.json"), JSON.stringify(lossy, null, 2) + "\n");
   }
 } finally {
   await browser.close();

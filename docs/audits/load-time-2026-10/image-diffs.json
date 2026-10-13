@@ -15,7 +15,8 @@
       "canvas": {
         "width": 585,
         "height": 967
-      }
+      },
+      "pngSha256": "9d018f14c74b80e435a659f40d71578d350d439e9f3a07a995c4dd57e6e9fc12"
     },
     "after": {
       "file": "cactus-phone-after-rest.png",
@@ -28,13 +29,15 @@
       "canvas": {
         "width": 585,
         "height": 967
-      }
+      },
+      "pngSha256": "9d018f14c74b80e435a659f40d71578d350d439e9f3a07a995c4dd57e6e9fc12"
     },
     "differentPixels": 0,
     "pixels": 251550,
     "rmsRGB": 0,
     "maxChannelDifference": 0,
-    "diff": "cactus-phone-diff-rest.png"
+    "diff": "cactus-phone-diff-rest.png",
+    "preview": "cactus-phone-before-rest.png"
   },
   {
     "captureVersion": 2,
@@ -52,7 +55,8 @@
       "canvas": {
         "width": 585,
         "height": 967
-      }
+      },
+      "pngSha256": "e331b5cf3c8f6fb3361a1a3f98fe571476b581b34c3304a6153fa5ac97a7cad8"
     },
     "after": {
       "file": "pyrite-cubes-phone-after-rest.png",
@@ -65,13 +69,15 @@
       "canvas": {
         "width": 585,
         "height": 967
-      }
+      },
+      "pngSha256": "e331b5cf3c8f6fb3361a1a3f98fe571476b581b34c3304a6153fa5ac97a7cad8"
     },
     "differentPixels": 0,
     "pixels": 251550,
     "rmsRGB": 0,
     "maxChannelDifference": 0,
-    "diff": "pyrite-cubes-phone-diff-rest.png"
+    "diff": "pyrite-cubes-phone-diff-rest.png",
+    "preview": "pyrite-cubes-phone-before-rest.png"
   },
   {
     "captureVersion": 2,
@@ -89,7 +95,8 @@
       "canvas": {
         "width": 585,
         "height": 967
-      }
+      },
+      "pngSha256": "d9ffb330d821e24fb972ad895f4ef156f9df8c769ea7b35eeddeff75d06aed0f"
     },
     "after": {
       "file": "pyrite-cubes-phone-after-tap.png",
@@ -102,14 +109,16 @@
       "canvas": {
         "width": 585,
         "height": 967
-      }
+      },
+      "pngSha256": "d9ffb330d821e24fb972ad895f4ef156f9df8c769ea7b35eeddeff75d06aed0f"
     },
     "differentPixels": 0,
     "pixels": 251550,
     "rmsRGB": 0,
     "maxChannelDifference": 0,
     "diff": "pyrite-cubes-phone-diff-tap.png",
-    "tapChangedPixels": 31482
+    "tapChangedPixels": 31482,
+    "preview": null
   },
   {
     "captureVersion": 2,
@@ -127,7 +136,8 @@
       "canvas": {
         "width": 585,
         "height": 967
-      }
+      },
+      "pngSha256": "a7939cc75a5c4bba7086891f2d96fa78b86d655bf24a0d3b3d1d8139236dd8f5"
     },
     "after": {
       "file": "water-bottle-phone-after-rest.png",
@@ -140,13 +150,15 @@
       "canvas": {
         "width": 585,
         "height": 967
-      }
+      },
+      "pngSha256": "a7939cc75a5c4bba7086891f2d96fa78b86d655bf24a0d3b3d1d8139236dd8f5"
     },
     "differentPixels": 0,
     "pixels": 251550,
     "rmsRGB": 0,
     "maxChannelDifference": 0,
-    "diff": "water-bottle-phone-diff-rest.png"
+    "diff": "water-bottle-phone-diff-rest.png",
+    "preview": "water-bottle-phone-before-rest.png"
   },
   {
     "captureVersion": 2,
@@ -164,7 +176,8 @@
       "canvas": {
         "width": 585,
         "height": 967
-      }
+      },
+      "pngSha256": "2285df757b44d6eb1672b26ea355eeccd2d820e87e77c7cfed6e756e78792f34"
     },
     "after": {
       "file": "water-bottle-phone-after-tap.png",
@@ -177,14 +190,16 @@
       "canvas": {
         "width": 585,
         "height": 967
-      }
+      },
+      "pngSha256": "2285df757b44d6eb1672b26ea355eeccd2d820e87e77c7cfed6e756e78792f34"
     },
     "differentPixels": 0,
     "pixels": 251550,
     "rmsRGB": 0,
     "maxChannelDifference": 0,
     "diff": "water-bottle-phone-diff-tap.png",
-    "tapChangedPixels": 22839
+    "tapChangedPixels": 22839,
+    "preview": null
   },
   {
     "captureVersion": 2,
@@ -202,7 +217,8 @@
       "canvas": {
         "width": 585,
         "height": 967
-      }
+      },
+      "pngSha256": "33501894fa2ca5065f2f4cf911dbc4fc8c4f2448342f99114c49b24157409a15"
     },
     "after": {
       "file": "sunglasses-phone-after-rest.png",
@@ -215,13 +231,15 @@
       "canvas": {
         "width": 585,
         "height": 967
-      }
+      },
+      "pngSha256": "33501894fa2ca5065f2f4cf911dbc4fc8c4f2448342f99114c49b24157409a15"
     },
     "differentPixels": 0,
     "pixels": 251550,
     "rmsRGB": 0,
     "maxChannelDifference": 0,
-    "diff": "sunglasses-phone-diff-rest.png"
+    "diff": "sunglasses-phone-diff-rest.png",
+    "preview": "sunglasses-phone-before-rest.png"
   },
   {
     "captureVersion": 2,
@@ -239,7 +257,8 @@
       "canvas": {
         "width": 585,
         "height": 967
-      }
+      },
+      "pngSha256": "6392fda88f4d96c6bac402612a11cd8668bb669546c034c025009d2536aa51c9"
     },
     "after": {
       "file": "sunglasses-phone-after-tap.png",
@@ -252,14 +271,16 @@
       "canvas": {
         "width": 585,
         "height": 967
-      }
+      },
+      "pngSha256": "6392fda88f4d96c6bac402612a11cd8668bb669546c034c025009d2536aa51c9"
     },
     "differentPixels": 0,
     "pixels": 251550,
     "rmsRGB": 0,
     "maxChannelDifference": 0,
     "diff": "sunglasses-phone-diff-tap.png",
-    "tapChangedPixels": 39797
+    "tapChangedPixels": 39797,
+    "preview": null
   },
   {
     "captureVersion": 2,
@@ -277,7 +298,8 @@
       "canvas": {
         "width": 585,
         "height": 967
-      }
+      },
+      "pngSha256": "ea0a74839e05fd2adc17af5c1ae8bc89a02fcaa0ba6d4c734f2100056d62490e"
     },
     "after": {
       "file": "baseball-cap-phone-after-rest.png",
@@ -290,13 +312,15 @@
       "canvas": {
         "width": 585,
         "height": 967
-      }
+      },
+      "pngSha256": "ea0a74839e05fd2adc17af5c1ae8bc89a02fcaa0ba6d4c734f2100056d62490e"
     },
     "differentPixels": 0,
     "pixels": 251550,
     "rmsRGB": 0,
     "maxChannelDifference": 0,
-    "diff": "baseball-cap-phone-diff-rest.png"
+    "diff": "baseball-cap-phone-diff-rest.png",
+    "preview": "baseball-cap-phone-before-rest.png"
   },
   {
     "captureVersion": 2,
@@ -314,7 +338,8 @@
       "canvas": {
         "width": 585,
         "height": 967
-      }
+      },
+      "pngSha256": "87c162773aaf27b793e5cfae18f2caaf67263ee33f8271f487ffc3cca3445917"
     },
     "after": {
       "file": "fountain-pen-phone-after-rest.png",
@@ -327,13 +352,15 @@
       "canvas": {
         "width": 585,
         "height": 967
-      }
+      },
+      "pngSha256": "87c162773aaf27b793e5cfae18f2caaf67263ee33f8271f487ffc3cca3445917"
     },
     "differentPixels": 0,
     "pixels": 251550,
     "rmsRGB": 0,
     "maxChannelDifference": 0,
-    "diff": "fountain-pen-phone-diff-rest.png"
+    "diff": "fountain-pen-phone-diff-rest.png",
+    "preview": "fountain-pen-phone-before-rest.png"
   },
   {
     "captureVersion": 2,
@@ -351,7 +378,8 @@
       "canvas": {
         "width": 585,
         "height": 967
-      }
+      },
+      "pngSha256": "92f6f8a94bc81892a44d41ff6ea77da32cede963a29171052592ff775d4ab4d9"
     },
     "after": {
       "file": "fountain-pen-phone-after-tap.png",
@@ -364,14 +392,16 @@
       "canvas": {
         "width": 585,
         "height": 967
-      }
+      },
+      "pngSha256": "92f6f8a94bc81892a44d41ff6ea77da32cede963a29171052592ff775d4ab4d9"
     },
     "differentPixels": 0,
     "pixels": 251550,
     "rmsRGB": 0,
     "maxChannelDifference": 0,
     "diff": "fountain-pen-phone-diff-tap.png",
-    "tapChangedPixels": 5325
+    "tapChangedPixels": 5325,
+    "preview": null
   },
   {
     "captureVersion": 2,
@@ -389,7 +419,8 @@
       "canvas": {
         "width": 585,
         "height": 967
-      }
+      },
+      "pngSha256": "3dfd66ab1a457d0912471d912a92a7278e4889aa13c39c6b8f313a63ca76fb75"
     },
     "after": {
       "file": "soda-can-phone-after-rest.png",
@@ -402,13 +433,15 @@
       "canvas": {
         "width": 585,
         "height": 967
-      }
+      },
+      "pngSha256": "3dfd66ab1a457d0912471d912a92a7278e4889aa13c39c6b8f313a63ca76fb75"
     },
     "differentPixels": 0,
     "pixels": 251550,
     "rmsRGB": 0,
     "maxChannelDifference": 0,
-    "diff": "soda-can-phone-diff-rest.png"
+    "diff": "soda-can-phone-diff-rest.png",
+    "preview": "soda-can-phone-before-rest.png"
   },
   {
     "captureVersion": 2,
@@ -426,7 +459,8 @@
       "canvas": {
         "width": 585,
         "height": 967
-      }
+      },
+      "pngSha256": "a841850b8b03fd7620ad730ae3224f140279c0049f55e10c4420a0e3b8d6b463"
     },
     "after": {
       "file": "soda-can-phone-after-tap.png",
@@ -439,14 +473,16 @@
       "canvas": {
         "width": 585,
         "height": 967
-      }
+      },
+      "pngSha256": "a841850b8b03fd7620ad730ae3224f140279c0049f55e10c4420a0e3b8d6b463"
     },
     "differentPixels": 0,
     "pixels": 251550,
     "rmsRGB": 0,
     "maxChannelDifference": 0,
     "diff": "soda-can-phone-diff-tap.png",
-    "tapChangedPixels": 1055
+    "tapChangedPixels": 1055,
+    "preview": null
   },
   {
     "captureVersion": 2,
@@ -464,7 +500,8 @@
       "canvas": {
         "width": 1072,
         "height": 900
-      }
+      },
+      "pngSha256": "706f59fbaa9923e58d8832072e0872a4f518ace53bc00058b93ece0293595389"
     },
     "after": {
       "file": "cactus-desktop-after-rest.png",
@@ -477,13 +514,15 @@
       "canvas": {
         "width": 1072,
         "height": 900
-      }
+      },
+      "pngSha256": "706f59fbaa9923e58d8832072e0872a4f518ace53bc00058b93ece0293595389"
     },
     "differentPixels": 0,
     "pixels": 964800,
     "rmsRGB": 0,
     "maxChannelDifference": 0,
-    "diff": "cactus-desktop-diff-rest.png"
+    "diff": "cactus-desktop-diff-rest.png",
+    "preview": null
   },
   {
     "captureVersion": 2,
@@ -502,7 +541,8 @@
       "canvas": {
         "width": 585,
         "height": 967
-      }
+      },
+      "pngSha256": "8309f9ebf71ec966fa4e66a51d4760c83253dd21cd17fd1d922d3c5d67a6fb99"
     },
     "after": {
       "file": "baseball-cap-phone-after-tap.png",
@@ -516,14 +556,16 @@
       "canvas": {
         "width": 585,
         "height": 967
-      }
+      },
+      "pngSha256": "8309f9ebf71ec966fa4e66a51d4760c83253dd21cd17fd1d922d3c5d67a6fb99"
     },
     "differentPixels": 0,
     "pixels": 251550,
     "rmsRGB": 0,
     "maxChannelDifference": 0,
     "diff": "baseball-cap-phone-diff-tap.png",
-    "tapChangedPixels": 21389
+    "tapChangedPixels": 21389,
+    "preview": null
   },
   {
     "captureVersion": 2,
@@ -542,7 +584,8 @@
       "canvas": {
         "width": 1072,
         "height": 900
-      }
+      },
+      "pngSha256": "eb2f859ad31118b23dd5a625c22fa9d9d5f7cbd447a35906c9fff4ca6054abd3"
     },
     "after": {
       "file": "pyrite-cubes-desktop-after-rest.png",
@@ -556,13 +599,15 @@
       "canvas": {
         "width": 1072,
         "height": 900
-      }
+      },
+      "pngSha256": "eb2f859ad31118b23dd5a625c22fa9d9d5f7cbd447a35906c9fff4ca6054abd3"
     },
     "differentPixels": 0,
     "pixels": 964800,
     "rmsRGB": 0,
     "maxChannelDifference": 0,
-    "diff": "pyrite-cubes-desktop-diff-rest.png"
+    "diff": "pyrite-cubes-desktop-diff-rest.png",
+    "preview": null
   },
   {
     "captureVersion": 2,
@@ -581,7 +626,8 @@
       "canvas": {
         "width": 1072,
         "height": 900
-      }
+      },
+      "pngSha256": "939ca25766538e10580d17411771fa860a81ade8105f4b975ef95e16f7169a83"
     },
     "after": {
       "file": "pyrite-cubes-desktop-after-tap.png",
@@ -595,14 +641,16 @@
       "canvas": {
         "width": 1072,
         "height": 900
-      }
+      },
+      "pngSha256": "939ca25766538e10580d17411771fa860a81ade8105f4b975ef95e16f7169a83"
     },
     "differentPixels": 0,
     "pixels": 964800,
     "rmsRGB": 0,
     "maxChannelDifference": 0,
     "diff": "pyrite-cubes-desktop-diff-tap.png",
-    "tapChangedPixels": 162507
+    "tapChangedPixels": 162507,
+    "preview": null
   },
   {
     "captureVersion": 2,
@@ -621,7 +669,8 @@
       "canvas": {
         "width": 1072,
         "height": 900
-      }
+      },
+      "pngSha256": "c7f017202bd10395abe46eefa58f6bd1ead81c4fbbf08c60925bbd40d3b21145"
     },
     "after": {
       "file": "water-bottle-desktop-after-rest.png",
@@ -635,13 +684,15 @@
       "canvas": {
         "width": 1072,
         "height": 900
-      }
+      },
+      "pngSha256": "c7f017202bd10395abe46eefa58f6bd1ead81c4fbbf08c60925bbd40d3b21145"
     },
     "differentPixels": 0,
     "pixels": 964800,
     "rmsRGB": 0,
     "maxChannelDifference": 0,
-    "diff": "water-bottle-desktop-diff-rest.png"
+    "diff": "water-bottle-desktop-diff-rest.png",
+    "preview": null
   },
   {
     "captureVersion": 2,
@@ -660,7 +711,8 @@
       "canvas": {
         "width": 1072,
         "height": 900
-      }
+      },
+      "pngSha256": "75982b6b7f7f9d1a9150fc846b9464d3a83823e9318684f7d8be199d90956642"
     },
     "after": {
       "file": "water-bottle-desktop-after-tap.png",
@@ -674,14 +726,16 @@
       "canvas": {
         "width": 1072,
         "height": 900
-      }
+      },
+      "pngSha256": "75982b6b7f7f9d1a9150fc846b9464d3a83823e9318684f7d8be199d90956642"
     },
     "differentPixels": 0,
     "pixels": 964800,
     "rmsRGB": 0,
     "maxChannelDifference": 0,
     "diff": "water-bottle-desktop-diff-tap.png",
-    "tapChangedPixels": 114807
+    "tapChangedPixels": 114807,
+    "preview": null
   },
   {
     "captureVersion": 2,
@@ -700,7 +754,8 @@
       "canvas": {
         "width": 1072,
         "height": 900
-      }
+      },
+      "pngSha256": "1aee84d44ed87e0c883ad7dc7bfce3c877fb22436bf3662e7386d47c6543939f"
     },
     "after": {
       "file": "sunglasses-desktop-after-rest.png",
@@ -714,13 +769,15 @@
       "canvas": {
         "width": 1072,
         "height": 900
-      }
+      },
+      "pngSha256": "1aee84d44ed87e0c883ad7dc7bfce3c877fb22436bf3662e7386d47c6543939f"
     },
     "differentPixels": 0,
     "pixels": 964800,
     "rmsRGB": 0,
     "maxChannelDifference": 0,
-    "diff": "sunglasses-desktop-diff-rest.png"
+    "diff": "sunglasses-desktop-diff-rest.png",
+    "preview": null
   },
   {
     "captureVersion": 2,
@@ -739,7 +796,8 @@
       "canvas": {
         "width": 1072,
         "height": 900
-      }
+      },
+      "pngSha256": "d1711589105cd13577cd40b24eaea149562467984ff1965806b259c59cfa4b72"
     },
     "after": {
       "file": "sunglasses-desktop-after-tap.png",
@@ -753,14 +811,16 @@
       "canvas": {
         "width": 1072,
         "height": 900
-      }
+      },
+      "pngSha256": "d1711589105cd13577cd40b24eaea149562467984ff1965806b259c59cfa4b72"
     },
     "differentPixels": 0,
     "pixels": 964800,
     "rmsRGB": 0,
     "maxChannelDifference": 0,
     "diff": "sunglasses-desktop-diff-tap.png",
-    "tapChangedPixels": 208295
+    "tapChangedPixels": 208295,
+    "preview": null
   },
   {
     "captureVersion": 2,
@@ -779,7 +839,8 @@
       "canvas": {
         "width": 1072,
         "height": 900
-      }
+      },
+      "pngSha256": "61509c46f3eac275f84ad6352cadbc08a726c3a5ee2f3d8a71be4c75035c1f7f"
     },
     "after": {
       "file": "baseball-cap-desktop-after-rest.png",
@@ -793,13 +854,15 @@
       "canvas": {
         "width": 1072,
         "height": 900
-      }
+      },
+      "pngSha256": "61509c46f3eac275f84ad6352cadbc08a726c3a5ee2f3d8a71be4c75035c1f7f"
     },
     "differentPixels": 0,
     "pixels": 964800,
     "rmsRGB": 0,
     "maxChannelDifference": 0,
-    "diff": "baseball-cap-desktop-diff-rest.png"
+    "diff": "baseball-cap-desktop-diff-rest.png",
+    "preview": null
   },
   {
     "captureVersion": 2,
@@ -818,7 +881,8 @@
       "canvas": {
         "width": 1072,
         "height": 900
-      }
+      },
+      "pngSha256": "4683927b5378689fbbda2cb19fc21fb14b00cc4a743b1fce828edf078e4657e8"
     },
     "after": {
       "file": "baseball-cap-desktop-after-tap.png",
@@ -832,14 +896,16 @@
       "canvas": {
         "width": 1072,
         "height": 900
-      }
+      },
+      "pngSha256": "4683927b5378689fbbda2cb19fc21fb14b00cc4a743b1fce828edf078e4657e8"
     },
     "differentPixels": 0,
     "pixels": 964800,
     "rmsRGB": 0,
     "maxChannelDifference": 0,
     "diff": "baseball-cap-desktop-diff-tap.png",
-    "tapChangedPixels": 107931
+    "tapChangedPixels": 107931,
+    "preview": null
   },
   {
     "captureVersion": 2,
@@ -858,7 +924,8 @@
       "canvas": {
         "width": 1072,
         "height": 900
-      }
+      },
+      "pngSha256": "1da84ecf7aaebad7040f1a75af88cf1b7c0e7896bf2c557609b7bee8c7ab6dd1"
     },
     "after": {
       "file": "fountain-pen-desktop-after-rest.png",
@@ -872,13 +939,15 @@
       "canvas": {
         "width": 1072,
         "height": 900
-      }
+      },
+      "pngSha256": "1da84ecf7aaebad7040f1a75af88cf1b7c0e7896bf2c557609b7bee8c7ab6dd1"
     },
     "differentPixels": 0,
     "pixels": 964800,
     "rmsRGB": 0,
     "maxChannelDifference": 0,
-    "diff": "fountain-pen-desktop-diff-rest.png"
+    "diff": "fountain-pen-desktop-diff-rest.png",
+    "preview": null
   },
   {
     "captureVersion": 2,
@@ -897,7 +966,8 @@
       "canvas": {
         "width": 1072,
         "height": 900
-      }
+      },
+      "pngSha256": "60c881fdfb1223064b0a5beb527667e27a3e3cfb8da738abc4e72c102477d5bb"
     },
     "after": {
       "file": "fountain-pen-desktop-after-tap.png",
@@ -911,14 +981,16 @@
       "canvas": {
         "width": 1072,
         "height": 900
-      }
+      },
+      "pngSha256": "60c881fdfb1223064b0a5beb527667e27a3e3cfb8da738abc4e72c102477d5bb"
     },
     "differentPixels": 0,
     "pixels": 964800,
     "rmsRGB": 0,
     "maxChannelDifference": 0,
     "diff": "fountain-pen-desktop-diff-tap.png",
-    "tapChangedPixels": 26713
+    "tapChangedPixels": 26713,
+    "preview": null
   },
   {
     "captureVersion": 2,
@@ -937,7 +1009,8 @@
       "canvas": {
         "width": 1072,
         "height": 900
-      }
+      },
+      "pngSha256": "c59cdee03a16b5738a6133f6cefa2c52febbeab9d99a6b3db9dc1a1060433e49"
     },
     "after": {
       "file": "soda-can-desktop-after-rest.png",
@@ -951,13 +1024,15 @@
       "canvas": {
         "width": 1072,
         "height": 900
-      }
+      },
+      "pngSha256": "c59cdee03a16b5738a6133f6cefa2c52febbeab9d99a6b3db9dc1a1060433e49"
     },
     "differentPixels": 0,
     "pixels": 964800,
     "rmsRGB": 0,
     "maxChannelDifference": 0,
-    "diff": "soda-can-desktop-diff-rest.png"
+    "diff": "soda-can-desktop-diff-rest.png",
+    "preview": null
   },
   {
     "captureVersion": 2,
@@ -976,7 +1051,8 @@
       "canvas": {
         "width": 1072,
         "height": 900
-      }
+      },
+      "pngSha256": "d8d55c753afab6e6f424e8e9d7658bfc1a697a48efd81b458a617ace8a82e153"
     },
     "after": {
       "file": "soda-can-desktop-after-tap.png",
@@ -990,14 +1066,16 @@
       "canvas": {
         "width": 1072,
         "height": 900
-      }
+      },
+      "pngSha256": "d8d55c753afab6e6f424e8e9d7658bfc1a697a48efd81b458a617ace8a82e153"
     },
     "differentPixels": 0,
     "pixels": 964800,
     "rmsRGB": 0,
     "maxChannelDifference": 0,
     "diff": "soda-can-desktop-diff-tap.png",
-    "tapChangedPixels": 4664
+    "tapChangedPixels": 4664,
+    "preview": null
   },
   {
     "captureVersion": 2,
@@ -1016,7 +1094,8 @@
       "canvas": {
         "width": 1170,
         "height": 1935
-      }
+      },
+      "pngSha256": "11e53cc52da9c7ff06d8760a11cd73efe45330a7fa1451153353f25b49cae638"
     },
     "after": {
       "file": "water-bottle-phone-mid-after-rest.png",
@@ -1030,13 +1109,15 @@
       "canvas": {
         "width": 1170,
         "height": 1935
-      }
+      },
+      "pngSha256": "11e53cc52da9c7ff06d8760a11cd73efe45330a7fa1451153353f25b49cae638"
     },
     "differentPixels": 0,
     "pixels": 251550,
     "rmsRGB": 0,
     "maxChannelDifference": 0,
-    "diff": "water-bottle-phone-mid-diff-rest.png"
+    "diff": "water-bottle-phone-mid-diff-rest.png",
+    "preview": null
   },
   {
     "captureVersion": 2,
@@ -1055,7 +1136,8 @@
       "canvas": {
         "width": 1170,
         "height": 1935
-      }
+      },
+      "pngSha256": "125fb24932f545aa4d25fca16d615c9e4ffaa114fd07d06c4f8f0c606afff9b6"
     },
     "after": {
       "file": "water-bottle-phone-mid-after-tap.png",
@@ -1069,14 +1151,16 @@
       "canvas": {
         "width": 1170,
         "height": 1935
-      }
+      },
+      "pngSha256": "125fb24932f545aa4d25fca16d615c9e4ffaa114fd07d06c4f8f0c606afff9b6"
     },
     "differentPixels": 0,
     "pixels": 251550,
     "rmsRGB": 0,
     "maxChannelDifference": 0,
     "diff": "water-bottle-phone-mid-diff-tap.png",
-    "tapChangedPixels": 21769
+    "tapChangedPixels": 21769,
+    "preview": null
   },
   {
     "captureVersion": 2,
@@ -1095,7 +1179,8 @@
       "canvas": {
         "width": 1170,
         "height": 1935
-      }
+      },
+      "pngSha256": "7f78c411126388b259570ead815f2c1edea028f5eaa68ce915196ea6523bf889"
     },
     "after": {
       "file": "sunglasses-phone-mid-after-rest.png",
@@ -1109,13 +1194,15 @@
       "canvas": {
         "width": 1170,
         "height": 1935
-      }
+      },
+      "pngSha256": "7f78c411126388b259570ead815f2c1edea028f5eaa68ce915196ea6523bf889"
     },
     "differentPixels": 0,
     "pixels": 251550,
     "rmsRGB": 0,
     "maxChannelDifference": 0,
-    "diff": "sunglasses-phone-mid-diff-rest.png"
+    "diff": "sunglasses-phone-mid-diff-rest.png",
+    "preview": null
   },
   {
     "captureVersion": 2,
@@ -1134,7 +1221,8 @@
       "canvas": {
         "width": 1170,
         "height": 1935
-      }
+      },
+      "pngSha256": "756e999c56be00a282b05c88f7b2ee24f243869e35c614b157d5cf788aa8230c"
     },
     "after": {
       "file": "sunglasses-phone-mid-after-tap.png",
@@ -1148,14 +1236,16 @@
       "canvas": {
         "width": 1170,
         "height": 1935
-      }
+      },
+      "pngSha256": "756e999c56be00a282b05c88f7b2ee24f243869e35c614b157d5cf788aa8230c"
     },
     "differentPixels": 0,
     "pixels": 251550,
     "rmsRGB": 0,
     "maxChannelDifference": 0,
     "diff": "sunglasses-phone-mid-diff-tap.png",
-    "tapChangedPixels": 37871
+    "tapChangedPixels": 37871,
+    "preview": null
   },
   {
     "captureVersion": 2,
@@ -1174,7 +1264,8 @@
       "canvas": {
         "width": 1170,
         "height": 1935
-      }
+      },
+      "pngSha256": "ac2de4e02c274610234e81a53dbe92da300149bd17aa79e3c375e5d8bb7d93ba"
     },
     "after": {
       "file": "baseball-cap-phone-mid-after-rest.png",
@@ -1188,13 +1279,15 @@
       "canvas": {
         "width": 1170,
         "height": 1935
-      }
+      },
+      "pngSha256": "ac2de4e02c274610234e81a53dbe92da300149bd17aa79e3c375e5d8bb7d93ba"
     },
     "differentPixels": 0,
     "pixels": 251550,
     "rmsRGB": 0,
     "maxChannelDifference": 0,
-    "diff": "baseball-cap-phone-mid-diff-rest.png"
+    "diff": "baseball-cap-phone-mid-diff-rest.png",
+    "preview": null
   },
   {
     "captureVersion": 2,
@@ -1213,7 +1306,8 @@
       "canvas": {
         "width": 1170,
         "height": 1935
-      }
+      },
+      "pngSha256": "0ac9a5be5cfb128ac3a8b788dea78637a46235d520eb1e49507d92d2f075fde0"
     },
     "after": {
       "file": "baseball-cap-phone-mid-after-tap.png",
@@ -1227,14 +1321,16 @@
       "canvas": {
         "width": 1170,
         "height": 1935
-      }
+      },
+      "pngSha256": "0ac9a5be5cfb128ac3a8b788dea78637a46235d520eb1e49507d92d2f075fde0"
     },
     "differentPixels": 0,
     "pixels": 251550,
     "rmsRGB": 0,
     "maxChannelDifference": 0,
     "diff": "baseball-cap-phone-mid-diff-tap.png",
-    "tapChangedPixels": 20452
+    "tapChangedPixels": 20452,
+    "preview": null
   },
   {
     "captureVersion": 2,
@@ -1253,7 +1349,8 @@
       "canvas": {
         "width": 1170,
         "height": 1935
-      }
+      },
+      "pngSha256": "2e97713b4c5723d32aa032183b7bb2b5f0ae6b301ba67e3b35e8e84d50c6415a"
     },
     "after": {
       "file": "fountain-pen-phone-mid-after-rest.png",
@@ -1267,13 +1364,15 @@
       "canvas": {
         "width": 1170,
         "height": 1935
-      }
+      },
+      "pngSha256": "2e97713b4c5723d32aa032183b7bb2b5f0ae6b301ba67e3b35e8e84d50c6415a"
     },
     "differentPixels": 0,
     "pixels": 251550,
     "rmsRGB": 0,
     "maxChannelDifference": 0,
-    "diff": "fountain-pen-phone-mid-diff-rest.png"
+    "diff": "fountain-pen-phone-mid-diff-rest.png",
+    "preview": null
   },
   {
     "captureVersion": 2,
@@ -1292,7 +1391,8 @@
       "canvas": {
         "width": 1170,
         "height": 1935
-      }
+      },
+      "pngSha256": "bdc3f39a220064db09f61fd5442e652a5519d68f9646fa810e6f24c71f2b1c13"
     },
     "after": {
       "file": "fountain-pen-phone-mid-after-tap.png",
@@ -1306,14 +1406,16 @@
       "canvas": {
         "width": 1170,
         "height": 1935
-      }
+      },
+      "pngSha256": "bdc3f39a220064db09f61fd5442e652a5519d68f9646fa810e6f24c71f2b1c13"
     },
     "differentPixels": 0,
     "pixels": 251550,
     "rmsRGB": 0,
     "maxChannelDifference": 0,
     "diff": "fountain-pen-phone-mid-diff-tap.png",
-    "tapChangedPixels": 4932
+    "tapChangedPixels": 4932,
+    "preview": null
   },
   {
     "captureVersion": 2,
@@ -1332,7 +1434,8 @@
       "canvas": {
         "width": 1170,
         "height": 1935
-      }
+      },
+      "pngSha256": "6397ef89acf046591e26cc80562903da023bff9932a1f15ce54a0df1ab0b0e67"
     },
     "after": {
       "file": "soda-can-phone-mid-after-rest.png",
@@ -1346,13 +1449,15 @@
       "canvas": {
         "width": 1170,
         "height": 1935
-      }
+      },
+      "pngSha256": "6397ef89acf046591e26cc80562903da023bff9932a1f15ce54a0df1ab0b0e67"
     },
     "differentPixels": 0,
     "pixels": 251550,
     "rmsRGB": 0,
     "maxChannelDifference": 0,
-    "diff": "soda-can-phone-mid-diff-rest.png"
+    "diff": "soda-can-phone-mid-diff-rest.png",
+    "preview": null
   },
   {
     "captureVersion": 2,
@@ -1371,7 +1476,8 @@
       "canvas": {
         "width": 1170,
         "height": 1935
-      }
+      },
+      "pngSha256": "14c3071ce7607fe82ad3641ebe13c19c5da3f507487bd6bf9b6a56ff50fe9b65"
     },
     "after": {
       "file": "soda-can-phone-mid-after-tap.png",
@@ -1385,14 +1491,16 @@
       "canvas": {
         "width": 1170,
         "height": 1935
-      }
+      },
+      "pngSha256": "14c3071ce7607fe82ad3641ebe13c19c5da3f507487bd6bf9b6a56ff50fe9b65"
     },
     "differentPixels": 0,
     "pixels": 251550,
     "rmsRGB": 0,
     "maxChannelDifference": 0,
     "diff": "soda-can-phone-mid-diff-tap.png",
-    "tapChangedPixels": 913
+    "tapChangedPixels": 913,
+    "preview": null
   },
   {
     "captureVersion": 2,
@@ -1411,7 +1519,8 @@
       "canvas": {
         "width": 585,
         "height": 967
-      }
+      },
+      "pngSha256": "021b39401ae2f1931eecaf39fa25e773107ac1548307bf6b21a9a7571fe2f9bc"
     },
     "after": {
       "file": "celestial-globe-phone-after-rest.png",
@@ -1425,13 +1534,15 @@
       "canvas": {
         "width": 585,
         "height": 967
-      }
+      },
+      "pngSha256": "021b39401ae2f1931eecaf39fa25e773107ac1548307bf6b21a9a7571fe2f9bc"
     },
     "differentPixels": 0,
     "pixels": 251550,
     "rmsRGB": 0,
     "maxChannelDifference": 0,
-    "diff": "celestial-globe-phone-diff-rest.png"
+    "diff": "celestial-globe-phone-diff-rest.png",
+    "preview": "celestial-globe-phone-before-rest.png"
   },
   {
     "captureVersion": 2,
@@ -1450,7 +1561,8 @@
       "canvas": {
         "width": 585,
         "height": 967
-      }
+      },
+      "pngSha256": "f26af5b65dbf447455bc6103b2f3510eec549221ba6f8c30f123027272a6b708"
     },
     "after": {
       "file": "celestial-globe-phone-after-tap.png",
@@ -1464,14 +1576,16 @@
       "canvas": {
         "width": 585,
         "height": 967
-      }
+      },
+      "pngSha256": "f26af5b65dbf447455bc6103b2f3510eec549221ba6f8c30f123027272a6b708"
     },
     "differentPixels": 0,
     "pixels": 251550,
     "rmsRGB": 0,
     "maxChannelDifference": 0,
     "diff": "celestial-globe-phone-diff-tap.png",
-    "tapChangedPixels": 12701
+    "tapChangedPixels": 12701,
+    "preview": null
   },
   {
     "captureVersion": 2,
@@ -1490,7 +1604,8 @@
       "canvas": {
         "width": 1072,
         "height": 900
-      }
+      },
+      "pngSha256": "75ad5290909be88db44e9b014a95b648b65cf41a1a19f3fcc01866b1611597ee"
     },
     "after": {
       "file": "celestial-globe-desktop-after-rest.png",
@@ -1504,13 +1619,15 @@
       "canvas": {
         "width": 1072,
         "height": 900
-      }
+      },
+      "pngSha256": "75ad5290909be88db44e9b014a95b648b65cf41a1a19f3fcc01866b1611597ee"
     },
     "differentPixels": 0,
     "pixels": 964800,
     "rmsRGB": 0,
     "maxChannelDifference": 0,
-    "diff": "celestial-globe-desktop-diff-rest.png"
+    "diff": "celestial-globe-desktop-diff-rest.png",
+    "preview": null
   },
   {
     "captureVersion": 2,
@@ -1529,7 +1646,8 @@
       "canvas": {
         "width": 1072,
         "height": 900
-      }
+      },
+      "pngSha256": "9aedfb686375620cf2fe706da0dfbe72922decf46edd84795253dd3c117e1406"
     },
     "after": {
       "file": "celestial-globe-desktop-after-tap.png",
@@ -1543,13 +1661,15 @@
       "canvas": {
         "width": 1072,
         "height": 900
-      }
+      },
+      "pngSha256": "9aedfb686375620cf2fe706da0dfbe72922decf46edd84795253dd3c117e1406"
     },
     "differentPixels": 0,
     "pixels": 964800,
     "rmsRGB": 0,
     "maxChannelDifference": 0,
     "diff": "celestial-globe-desktop-diff-tap.png",
-    "tapChangedPixels": 66104
+    "tapChangedPixels": 66104,
+    "preview": null
   }
 ]

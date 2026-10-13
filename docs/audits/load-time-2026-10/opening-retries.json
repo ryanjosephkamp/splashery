@@ -3,25 +3,15 @@
   "attempts": [
     {
       "id": "anatomy-atlas",
-      "label": "Anatomy atlas",
-      "labs": true,
-      "pack": "anatomy-atlas",
       "device": "desktop",
-      "sample": 0,
       "status": "error",
-      "collectorVersion": 2,
       "error": "page.waitForFunction: Timeout 120000ms exceeded.",
       "errors": []
     },
     {
       "id": "oak",
-      "label": "Oak tree",
-      "labs": false,
-      "pack": "nature",
       "device": "desktop",
-      "sample": 0,
       "status": "error",
-      "collectorVersion": 2,
       "error": "page.goto: Timeout 60000ms exceeded.\nCall log:\n\u001b[2m  - navigating to \"http://127.0.0.1:4173/?renderer=webgl2&profile=high&adapt=off&labs=0#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJjcmVhdGVkQXQiOiIyMDI2LTEwLTEzVDE1OjU4OjU0Ljk0NFoiLCJzZWVkIjo0MjQyNDIsInRveSI6eyJraW5kIjoiYnVpbHRpbiIsImlkIjoib2FrIn0sImxvb2siOnsiYmFja2dyb3VuZCI6InBhZ2UiLCJ0aGVtZSI6ImF1dG8iLCJhY2NlbnQiOiJhdXRvIiwic3BsYXRTY2FsZSI6MSwiZXhwb3N1cmUiOjF9LCJlZmZlY3RzIjp7InBva2UiOnsib24iOmZhbHNlLCJzdHJlbmd0aCI6MC42LCJ3b2JibGUiOjAuNX0sIndpbmQiOnsib24iOmZhbHNlLCJzdHJlbmd0aCI6MC41NSwiZGlyZWN0aW9uIjowfSwiZGlzc29sdmUiOnsib24iOmZhbHNlLCJzcHJlYWQiOjAuNTUsInNwZWVkIjowLjV9LCJkcm9wIjp7Im9uIjpmYWxzZSwiYm91bmNlIjowLjQ1LCJzY2F0dGVyIjowLjV9LCJtYWduZXQiOnsib24iOmZhbHNlLCJzdHJlbmd0aCI6MC43LCJyYWRpdXMiOjAuNDV9LCJ0d2lzdCI6eyJvbiI6ZmFsc2UsImFtb3VudCI6MC41LCJ3b2JibGUiOjAuMywiYXhpcyI6InkifSwic2xpY2UiOnsib24iOmZhbHNlLCJwb3NpdGlvbiI6MCwic3dlZXAiOjAuMzUsImF4aXMiOiJ4In0sInBhaW50Ijp7Im9uIjpmYWxzZSwic2l6ZSI6MC41LCJzcGxhc2giOjAuNSwiY29sb3IiOiIjZTYzYjJlIn19LCJwYWludCI6eyJzdGFtcHMiOltdfSwiY2FtZXJhIjp7InlhdyI6MC41LCJwaXRjaCI6MC4yMiwicm9sbCI6MCwiZGlzdGFuY2UiOjQuMn0sImF1dG9wbGF5Ijp7InR1cm50YWJsZSI6dHJ1ZSwiZWZmZWN0Ijoibm9uZSJ9LCJwYXR0ZXJuIjp7ImlkIjoibm9uZSIsImZsYWciOiIiLCJwcm9qZWN0aW9uIjoid3JhcCIsInJlcGVhdHMiOjEsImNvbG9ycyI6WyIjZmZmZmZmIiwiI2U2M2IyZSIsIiMwYjRmOWMiXSwic2NhbGUiOjAuNSwiYW1vdW50IjoxLCJkZXRhaWwiOjAuNn0sIm1vdGlvbiI6eyJhbGl2ZSI6dHJ1ZSwibW92ZSI6InN0aWxsIiwic3BlZWQiOjAuNSwiY29udHJvbHMiOnt9fX0\", waiting until \"domcontentloaded\"\u001b[22m\n",
       "errors": []
     }

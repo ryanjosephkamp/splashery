@@ -14,7 +14,7 @@ const option = (key, fallback) =>
   process.argv.find((s) => s.startsWith(`--${key}=`))?.slice(key.length + 3) ?? fallback;
 const phase = option("phase", "before");
 const base = option("base", "http://127.0.0.1:4174");
-const out = path.resolve(option("out", "docs/audits/load-time-2026-10"));
+const out = path.resolve(option("out", "../load-time-runs/current"));
 const only = option("only", "").split(",").filter(Boolean);
 const device = option("device", "");
 const samples = Number(option("samples", "1"));
