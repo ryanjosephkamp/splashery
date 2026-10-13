@@ -277,7 +277,7 @@
           <p>
             Every captured toy on Splashery's shelf (the Photoreal shelf) is either public domain
             (CC0) or licensed under Creative Commons Attribution 4.0 (CC BY 4.0). Nothing with a
-            stricter licence is used. The same attributions appear in the app under
+            stricter license is used. The same attributions appear in the app under
             <strong>About &amp; credits</strong>.
           </p>
           <h2 id="captured-toys">Captured toys</h2>
@@ -303,7 +303,7 @@
                   <th scope="col">Toy</th>
                   <th scope="col">Work</th>
                   <th scope="col">Author</th>
-                  <th scope="col">Licence</th>
+                  <th scope="col">License</th>
                   <th scope="col">Changes</th>
                 </tr>
               </thead>
@@ -416,15 +416,15 @@
             </li>
             <li>
               <strong>Strawberry, Heart cookie, Honeybee</strong>: SuperSplat scenes with downloads
-              enabled and the CC BY 4.0 licence chosen by their authors (checked on each scene page
-              on 22 September 2026). The source files are the SOG data the public SuperSplat viewer
+              enabled and the CC BY 4.0 license chosen by their authors (checked on each scene page
+              on September 22, 2026). The source files are the SOG data the public SuperSplat viewer
               streams for each scene.
             </li>
           </ul>
           <h3 id="more-scans-from-supersplat">More scans from SuperSplat</h3>
           <p>
-            Twelve more SuperSplat scenes, each with downloads enabled and the CC BY 4.0 licence
-            chosen by its author (checked on 23 September 2026 through the scene data SuperSplat
+            Twelve more SuperSplat scenes, each with downloads enabled and the CC BY 4.0 license
+            chosen by its author (checked on September 23, 2026 through the scene data SuperSplat
             publishes for each page). The source files are the SOG data the public viewer streams.
             Each was changed the same way by <code>tools/prepare-assets.mjs</code>: spherical
             harmonics removed, rotated upright, recentred, scaled to the common size, decimated to
@@ -438,7 +438,7 @@
                   <th scope="col">Toy</th>
                   <th scope="col">Work</th>
                   <th scope="col">Author</th>
-                  <th scope="col">Licence</th>
+                  <th scope="col">License</th>
                 </tr>
               </thead>
               <tbody>
@@ -1441,14 +1441,14 @@
               target="_blank"
               rel="noopener"
               >polyhaven.com/license</a
-            >), and each model's name and authors were checked in the Poly Haven API on 23 September
-            2026. <code>tools/mesh-to-splats.mjs</code> downloads each glTF, scatters splats over
-            its surfaces by area, colours them from the model's textures (glass materials are
+            >), and each model's name and authors were checked in the Poly Haven API on September
+            23, 2026. <code>tools/mesh-to-splats.mjs</code> downloads each glTF, scatters splats
+            over its surfaces by area, colors them from the model's textures (glass materials are
             skipped so the insides show), and writes a 3DGS PLY file;
             <code>tools/prepare-assets.mjs</code> then packs it like the scans (at most 200,000
             splats, 80,000 for phones). Poly Haven does not require credit, but it is given here
             anyway. Since Phase C1 the vintage camera, boombox, wooden elephant and horse statue
-            also have soft studio light baked into their colours (with the models' own normal and
+            also have soft studio light baked into their colors (with the models' own normal and
             occlusion maps), and the printed maker's names on the camera, its lens and the boombox
             are painted out (see <code>tools/models.json</code>).
           </p>
@@ -1459,7 +1459,7 @@
                   <th scope="col">Toy</th>
                   <th scope="col">Model</th>
                   <th scope="col">Author</th>
-                  <th scope="col">Licence</th>
+                  <th scope="col">License</th>
                 </tr>
               </thead>
               <tbody>
@@ -1734,8 +1734,8 @@
             Made from one photo with an image-to-3D model (lane G)
           </h3>
           <p>
-            Each of these started as a single photo (CC0 or CC BY, the licence checked on its
-            Wikimedia Commons page on 27 September 2026, with no brands or logos).
+            Each of these started as a single photo (CC0 or CC BY, the license checked on its
+            Wikimedia Commons page on September 27, 2026, with no brands or logos).
             <code>tools/image-to-3d.mjs</code> sent the photo, shrunk to 1024 px, to the public
             <a
               href="https://huggingface.co/spaces/trellis-community/TRELLIS"
@@ -1754,8 +1754,8 @@
               target="_blank"
               rel="noopener"
               >microsoft/TRELLIS-image-large</a
-            >, MIT). The MIT licence puts no terms on what the model makes, so each toy keeps its
-            photo's licence and credit. <code>tools/prepare-assets.mjs</code> then packs it like the
+            >, MIT). The MIT license puts no terms on what the model makes, so each toy keeps its
+            photo's license and credit. <code>tools/prepare-assets.mjs</code> then packs it like the
             scans. The sides the photo does not show are the model's guess.
           </p>
           <div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrolls sideways">
@@ -1765,7 +1765,7 @@
                   <th scope="col">Toy</th>
                   <th scope="col">Photo</th>
                   <th scope="col">Photographer</th>
-                  <th scope="col">Licence</th>
+                  <th scope="col">License</th>
                 </tr>
               </thead>
               <tbody>
@@ -6887,18 +6887,18 @@
               target="_blank"
               rel="noopener"
               >Wikimedia Commons</a
-            >, fetched by <code>tools/fetch-flags.mjs</code>, which reads each file's licence from
+            >, fetched by <code>tools/fetch-flags.mjs</code>, which reads each file's license from
             the Commons API and keeps only public domain and CC0 files. The files are unchanged.
-            Each flag's source page, author line and licence are listed in
+            Each flag's source page, author line and license are listed in
             <a
               href="https://github.com/ryanjosephkamp/splashery/blob/main/assets/flags/flags.json"
               target="_blank"
               rel="noopener"
               >assets/flags/flags.json</a
             >
-            (196 flags, checked on 23 September 2026). The flag of Oman is not included: its Commons
-            file is under Oman's Open Government Licence rather than a public-domain or Creative
-            Commons licence (see
+            (196 flags, checked on September 23, 2026). The flag of Oman is not included: its
+            Commons file is under Oman's Open Government Licence rather than a public-domain or
+            Creative Commons license (see
             <a
               href="https://github.com/ryanjosephkamp/splashery/blob/main/docs/BACKLOG.md"
               target="_blank"
@@ -7524,7 +7524,7 @@
           </p>
           <p>
             The captured splat toys under <code>assets/toys/</code> (scans, and CC0 models turned
-            into splats) have their own licences (CC0 and CC BY 4.0); see
+            into splats) have their own licenses (CC0 and CC BY 4.0); see
             <a href="../../about/credits/">CREDITS.md</a>.
           </p>
           <h3 id="playcanvas-engine-2-22-3">PlayCanvas Engine 2.22.3</h3>
@@ -7532,7 +7532,7 @@
             <li>
               Package: <code>playcanvas@2.22.3</code> (file:
               <code>vendor/playcanvas/playcanvas.min.mjs</code>, the package's single-file ESM build
-              <code>build/playcanvas.min.mjs</code>; licence copied to
+              <code>build/playcanvas.min.mjs</code>; license copied to
               <code>vendor/playcanvas/LICENSE</code>)
             </li>
             <li>
@@ -8150,7 +8150,7 @@ subject to the following conditions:
                 >https://huggingface.co/microsoft/TRELLIS-image-large</a
               >
               (MIT) and rembg's u2net background cut-out (Apache-2.0). It made the Real pencil and
-              Real tin can; their photos' licences are in CREDITS.md.
+              Real tin can; their photos' licenses are in CREDITS.md.
             </li>
             <li>
               <code>jsfive</code> 0.4.2 (public domain; based on pyfive, BSD-3-Clause, © 2016

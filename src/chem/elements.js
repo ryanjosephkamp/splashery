@@ -1,15 +1,15 @@
 // Per-element data for the chemistry toys: symbol, name, atomic number,
-// covalent radius, typical valences, valence electrons and a display colour.
+// covalent radius, typical valences, valence electrons and a display color.
 //
 // Covalent radii are single-bond radii in ångströms (Cordero et al. 2008,
 // low-spin values for Mn, Fe and Co). Valences list the usual bond counts,
 // most common first. Valence electrons (`ve`) are only given for main-group
-// elements; the 3D embedder uses them to count lone pairs. Colours are the
-// familiar Jmol "CPK" colours.
+// elements; the 3D embedder uses them to count lone pairs. Colors are the
+// familiar Jmol "CPK" colors.
 
 // prettier-ignore
 const TABLE = [
-  // symbol, name, Z, radius, valences, valence electrons, colour
+  // symbol, name, Z, radius, valences, valence electrons, color
   ["H", "hydrogen", 1, 0.31, [1], 1, "#ffffff"],
   ["He", "helium", 2, 0.28, [0], 2, "#d9ffff"],
   ["Li", "lithium", 3, 1.28, [1], 1, "#cc80ff"],

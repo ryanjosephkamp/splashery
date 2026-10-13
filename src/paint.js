@@ -1,6 +1,6 @@
 // Paint: a GPU pass (GSplatProcessor) recolours the splats inside a brush
 // sphere by writing into a per-splat RGBA8 stream that the effect modifier
-// blends over the splat colour. The stream persists until cleared, and the
+// blends over the splat color. The stream persists until cleared, and the
 // stamps are kept as data so a saved scene can replay them.
 
 import * as pc from "./pc.js";
@@ -8,7 +8,7 @@ import { mulberry32 } from "./noise.js";
 import { hexToRgb } from "./effects.js";
 
 const PROCESS_GLSL = /* glsl */ `
-uniform vec4 uBrush;      // xyz centre (toy coordinates), w radius
+uniform vec4 uBrush;      // xyz center (toy coordinates), w radius
 uniform vec4 uBrushColor; // rgb, a = opacity
 void process() {
   vec3 c = getCenter();

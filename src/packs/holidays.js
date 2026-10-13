@@ -153,8 +153,8 @@ const JACK_BODY = { type: "ellipsoid", r: [1, 0.72, 1] };
 const EGG_HAND = { a: null, a0: null, w: 0, lean: 0, head: 0, t: null, slot: 0, again: false };
 const EGG_FOOT = [0, -0.75, 0];
 
-// Fireworks: the three launch tubes (x, z, colour), the burst each one
-// makes (centre, radius and colours) and the shell types.
+// Fireworks: the three launch tubes (x, z, color), the burst each one
+// makes (center, radius and colors) and the shell types.
 const FW = {
   ground: -0.95,
   tubes: [
@@ -205,7 +205,7 @@ export const RECIPES = {
       out.amount = 0.9;
     },
     build(k) {
-      const face = 0.3; // the face looks a little towards the viewer
+      const face = 0.3; // the face looks a little toward the viewer
       const S = [1, 0.78, 1];
       const rib = (phi) => 1 - 0.08 * Math.pow(1 - Math.abs(Math.cos(phi * 5)), 1.4);
       const R = (phi, e) => rib(phi) * (1 - 0.3 * Math.max(0, Math.abs(Math.sin(e)) - 0.82));
@@ -219,7 +219,7 @@ export const RECIPES = {
       };
       const zig = (x) => Math.abs(fract(x) - 0.5) * 4 - 1;
       const cutE = (phi) => 0.95 + 0.06 * zig((phi / TAU) * 12);
-      // The carved face, in (angle, elevation) around the face centre.
+      // The carved face, in (angle, elevation) around the face center.
       const tri = (X, Y, cx, cy, w, h, g) => {
         const y0 = cy - h / 2 - g;
         const yy = Y - y0;
@@ -396,7 +396,7 @@ export const RECIPES = {
       const r = on ? band(s, 3.1, SNOW.secs - 0.2) : 0;
       const d = info.data;
       if (!d) return;
-      // The balls: each shrinks about its centre and sits on the one below.
+      // The balls: each shrinks about its center and sits on the one below.
       const melted = d.balls.map((b, i) => 1 - 0.85 * band(m, b.from, b.to));
       const grown = d.balls.map((b, i) => {
         const g = band(r, 0.12 * i, 0.12 * i + 0.25);
@@ -682,7 +682,7 @@ export const RECIPES = {
     drive(t, c, out, info) {
       // Each launch picks another tube (a free one while others fly) and
       // another shell type (never the same as the last), so no two in a row
-      // look alike. The burst is the colour of the tube that fired it. Each
+      // look alike. The burst is the color of the tube that fired it. Each
       // show keeps its own clock from its tap, so several fly at once; a
       // tap while all three tubes fly starts the oldest's tube again.
       const m = mem(c);
@@ -862,8 +862,8 @@ export const RECIPES = {
           };
         });
       }
-      // Its burst: one per tube colour and shell type, each revealed from the
-      // centre outwards as it grows. Flat shapes face the home view.
+      // Its burst: one per tube color and shell type, each revealed from the
+      // center outwards as it grows. Flat shapes face the home view.
       const e1 = vec.unit(vec.cross([0, 1, 0], VIEW));
       const e2 = vec.cross(VIEW, e1);
       const ringN = vec.unit([0.25, 0.55, 0.8]);
@@ -1224,8 +1224,8 @@ export const RECIPES = {
           { id: "stars", label: "Stars" },
         ],
       },
-      { key: "c1", label: "Colour 1", type: "color", default: "#c8262e" },
-      { key: "c2", label: "Colour 2", type: "color", default: "#f2c230" },
+      { key: "c1", label: "Color 1", type: "color", default: "#c8262e" },
+      { key: "c2", label: "Color 2", type: "color", default: "#f2c230" },
     ],
     controls: [{ key: "spin", label: "Spin", type: "pulse", ease: 2.6 }],
     action: { key: "spin", label: "Spin" },
@@ -1386,7 +1386,7 @@ export const RECIPES = {
     options: [
       {
         key: "color",
-        label: "Colour",
+        label: "Color",
         type: "select",
         default: "red",
         choices: [
@@ -1562,7 +1562,7 @@ export const RECIPES = {
     },
     build(k) {
       const base = -0.55;
-      // A rangoli of coloured powder under the lamp.
+      // A rangoli of colored powder under the lamp.
       const rc = ["#ff4f8a", "#ffb020", "#2fbf71", "#3b82ff", "#ff7a2a", "#f4f0e6"];
       k.add(k.disc(1), {
         pos: [0, base - 0.02, 0],

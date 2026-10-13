@@ -151,7 +151,7 @@
       "kind": "kit",
       "recipeFile": "src/packs/maths.js",
       "recipeKB": 219,
-      "recipeGzipKB": 65.1,
+      "recipeGzipKB": 65,
       "sharedBy": 23
     },
     "newtons-cradle": {

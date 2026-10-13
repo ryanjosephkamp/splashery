@@ -18,7 +18,7 @@ test("the engine: a box lands flat and sleeps", () => {
   const b = w.add(new Body({ pos: [0, 2, 0], quat: quat.axisAngle([1, 0.3, 0.2], 0.7), solid, points: surfacePoints(solid, 1) })); // prettier-ignore
   run(w, 6);
   expect(w.asleep).toBe(true);
-  // It rests on one of its faces: its centre is one half-extent up.
+  // It rests on one of its faces: its center is one half-extent up.
   expect([0.3, 0.4, 0.5].some((h) => Math.abs(b.pos[1] - h) < 0.02)).toBe(true);
 });
 

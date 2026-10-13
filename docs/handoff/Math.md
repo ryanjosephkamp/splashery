@@ -10,7 +10,7 @@ in the shared lists, `tests/math.spec.mjs`, its `math-*` screenshots and this fi
 Written by the Operator on September 27, 2026, from the ideas the owner approved on the Toy Ideas
 page, and his notes on the snail.
 
-Build 5 new kit-built toys for the Maths shelf, a small safe equation reader for the two plotters,
+Build 5 new kit-built toys for the Math shelf, a small safe equation reader for the two plotters,
 and two fixes to existing toys (the snail and the American football).
 
 You own: src/packs/maths.js (frozen until now; add your toys, and keep the existing ones as they

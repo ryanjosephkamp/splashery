@@ -42,7 +42,7 @@ const band = (x, a, b) => clamp((x - a) / (b - a), 0, 1);
 const dot = (a, b) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
 const fract = (x) => x - Math.floor(x);
 
-// Fake light: brighter towards the light, a little gloss.
+// Fake light: brighter toward the light, a little gloss.
 function lit(c, col, k = 0.3, gloss = 0) {
   const d = dot(c.n, LIGHT);
   let out = shade(col, 1 + k * (0.9 * d - 0.15));
@@ -123,7 +123,7 @@ function beam(g, a, b, w, color, opts = {}) {
   });
 }
 
-// Inside a five-pointed star of radius R (point up) centred at the origin.
+// Inside a five-pointed star of radius R (point up) centered at the origin.
 function inStar(x, y, R) {
   const seg = TAU / 5;
   const a = Math.atan2(x, y);
@@ -365,7 +365,7 @@ function direction(c, key) {
 
 const GEMS = { ruby: "#d0183c", sapphire: "#1f55d6", emerald: "#11a35a", amethyst: "#8a3fd1" };
 
-// A faceted gem colour: facets catch the light in steps.
+// A faceted gem color: facets catch the light in steps.
 function gem(c, base) {
   const n = c.n;
   const f = Math.floor((Math.atan2(n[0], n[2]) / TAU + 0.5) * 8) / 8;
@@ -947,7 +947,7 @@ export const RECIPES = {
       leg([TC[0] - 0.45, ground, 0], [TC[0] - 0.1, TC[1] + 0.4, 0]);
       leg([TC[0] + 0.06, TC[1] - 0.46, -0.32], [TC[0] + 0.06, TC[1] - 0.46, 0.32]);
 
-      // The bow: a stave in the XY plane, its back towards the target.
+      // The bow: a stave in the XY plane, its back toward the target.
       const stave = spline([
         [G.sx, -G.half - 0.02, 0],
         [G.sx - 0.07, -0.5, 0],
@@ -1906,7 +1906,7 @@ export const RECIPES = {
           color: (c) => lit(c, "#f6efe2", 0.35, 0.6),
         });
       }
-      // Each jewel's light: a glow of its own colour over it that appears
+      // Each jewel's light: a glow of its own color over it that appears
       // as channel 0 passes its turn (hidden at rest).
       k.cloud({ share: 0.012, size: 2, pattern: false }, (rand, j) => {
         const i = j % 8;

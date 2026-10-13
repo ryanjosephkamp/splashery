@@ -1,4 +1,4 @@
-// Sound effects, synthesised with WebAudio (the voices are in src/voices.js),
+// Sound effects, synthesized with WebAudio (the voices are in src/voices.js),
 // plus a few short recorded samples from assets/sounds/, fetched only when a
 // sound that uses one first plays. Off until the visitor presses the speaker
 // button; the choice is remembered in this browser. Embeds never make sound.

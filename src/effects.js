@@ -6,8 +6,8 @@
 // (EffectDriver) only turns the scene settings and the clock into a handful
 // of vec4 uniforms; there are no per-splat CPU loops.
 //
-// Everything is computed in world space around the toy's centre. The toy's
-// "home" position is the splat centre before any effect. Per-splat
+// Everything is computed in world space around the toy's center. The toy's
+// "home" position is the splat center before any effect. Per-splat
 // randomness comes from a hash of the splat index and the scene seed, so the
 // result is deterministic for a given seed and time; only pointer input
 // (pokes, magnet, paint) adds anything else.
@@ -16,7 +16,7 @@ import { PHOTO_WRITE } from "./photo-splats.js"; // lane Photo fidelity
 
 const clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
 
-// ---- Effect catalogue -------------------------------------------------------
+// ---- Effect catalog -------------------------------------------------------
 
 // Each effect has one or two sliders (0..1 unless stated). Tools act where the
 // pointer touches the toy; ambient effects run on their own once switched on.
@@ -129,7 +129,7 @@ export function defaultEffects() {
 
 const GLSL = /* glsl */ `
 uniform vec4 uSpClock;   // x time (s), y splat scale, z exposure, w seed
-uniform vec4 uSpToy;     // xyz toy centre (world), w radius
+uniform vec4 uSpToy;     // xyz toy center (world), w radius
 uniform vec4 uSpPoke0;   // xyz point, w start time
 uniform vec4 uSpPoke1;
 uniform vec4 uSpPoke2;
@@ -148,10 +148,10 @@ uniform vec4 uSpGrabD;   // xyz how far it is pulled, w on
 uniform vec4 uSpTwist;   // xyz axis (unit), w angle across the toy (radians)
 uniform vec4 uSpSlice;   // xyz plane normal, w offset (world)
 uniform vec4 uSpSliceP;  // x on, y glow width (world)
-uniform vec4 uSpAccent;  // rgb accent colour
+uniform vec4 uSpAccent;  // rgb accent color
 uniform vec4 uSpBodyQ;   // whole-toy rotation (quaternion x, y, z, w)
 uniform vec4 uSpBodyT;   // xyz whole-toy offset, w squash (+ flattens, - stretches)
-uniform vec4 uSpBodyF;   // x floor distance below the toy centre
+uniform vec4 uSpBodyF;   // x floor distance below the toy center
 uniform vec4 uSpBodyS;   // Hands-on squish (lane Physics): xyz axis, w amount (+ flattens)
 uniform vec4 uSpBodyP;   // xyz the squish's pivot, where it touched
 uniform vec4 uSpPoseQ;   // Any pose: the toy's turn in Hands-on (quaternion; src/effects-pose.js)
@@ -220,7 +220,7 @@ vec3 spPoseOut(vec3 p) {
 }
 
 // Whole-toy motion (bounce, spin, wobble, float): squash about the floor,
-// rotate about the centre, then move.
+// rotate about the center, then move.
 vec3 spBody(vec3 p) {
   vec4 q = uSpBodyQ;
   if (q.w == 0.0 && dot(q.xyz, q.xyz) == 0.0) q = vec4(0.0, 0.0, 0.0, 1.0);
@@ -779,7 +779,7 @@ fn modifySplatColor(center: vec3f, color: ptr<function, vec4f>) {
 
 // Generated toys carry a per-splat "splatAnim" stream (RGBA32F): x = part
 // index (0..15) + 16 when the pattern layer should skip the splat, y =
-// behaviour kind (see KINDS), z and w = the behaviour's two parameters.
+// behavior kind (see KINDS), z and w = the behavior's two parameters.
 // Parts are rigid groups moved by uSpParts (3 vec4 per part: rotation,
 // pivot, offset + visibility). Captured toys have no such stream, so they
 // use the variant without these pieces.
@@ -790,7 +790,7 @@ export const MORPH_RANGE = 2;
 export const KINDS = {
   none: 0,
   orbit: 1, // turn about the toy's up axis: z = turns per unit time at the rim, w = falloff (0 rigid, 1.5 Keplerian)
-  beat: 2, // heartbeat swell from the centre: z = amount, w = phase
+  beat: 2, // heartbeat swell from the center: z = amount, w = phase
   breathe: 3, // slow sine swell: z = amount, w = phase
   flame: 4, // rise, shrink and redden in a loop: z = height (toy radii), w = phase
   rise: 5, // drift up and fade in a loop (embers, bubbles, smoke): z = height, w = phase
@@ -798,18 +798,18 @@ export const KINDS = {
   twinkle: 7, // brightness flicker: z = amount, w = phase
   sway: 8, // bend with height above a base (plants, tentacles): z = amount, w = base height
   grow: 9, // appear as the grow control passes z (0..1)
-  melt: 10, // slump and spread towards the floor as energy rises: z = how easily
+  melt: 10, // slump and spread toward the floor as energy rises: z = how easily
   pulse: 11, // a glow runs along a path: z = position along the path (0..1)
   wave: 12, // ripple up and down: z = amount, w = phase
   glint: 13, // sparkle as the camera moves: z = amount
   token: 14, // a game piece moved and turned by uSpTokens: z = token index (0..47)
-  screen: 15, // a screen pixel coloured from the uSpScreen texture: z, w = u, v
+  screen: 15, // a screen pixel colored from the uSpScreen texture: z, w = u, v
   key: 16, // a key that goes down when pressed: z = key index (uSpKitB.w = index + depth)
   // Channel kinds follow out.morph (uSpMorph, four channels), with motion on or off:
-  morph: 17, // move towards a target by the channel: z = x * 4096 + y, w = z + 4096 * channel (12-bit offsets, see Kit.encodeMorphs)
+  morph: 17, // move toward a target by the channel: z = x * 4096 + y, w = z + 4096 * channel (12-bit offsets, see Kit.encodeMorphs)
   band: 18, // glow (uSpGlowC) where the channel passes z: w = channel + band width
   fade: 19, // fade out as the channel passes z: w = channel + width (negative: fade in)
-  skin: 20, // follow two tokens' offsets: z = a + 64 * b, w = blend towards b
+  skin: 20, // follow two tokens' offsets: z = a + 64 * b, w = blend toward b
   // Pictures (lane Pictures): a page that turns about a book's spine and curls
   // like paper (uSpLeaf): z = distance from the spine along the page, w = leaf slot (0..9)
   leaf: 21,
@@ -825,8 +825,8 @@ export const KINDS = {
   // z = opacity face on (0..1), w = sharpness (about 2 to 8).
   rim: 23,
   // Relief (lane Live input; 24 since lane Fix4 took 23): a splat lifted from its place by a live
-  // height and coloured from a live picture, both drawn by the recipe into
-  // its screen canvas (recipe.screen): the colour at (u / 2, v), the height
+  // height and colored from a live picture, both drawn by the recipe into
+  // its screen canvas (recipe.screen): the color at (u / 2, v), the height
   // (red, 0..1) at (1 / 2 + u / 2, v). z = u + 2 * axis (0 x, 1 y, 2 z; 3:
   // a 3D offset, red, green and blue each signed about a half, along x, y
   // and z, with alpha under a half hiding the splat),
@@ -850,8 +850,8 @@ export const MAX_LEVERS = 96;
 export const MAX_LEVER_GROUPS = 6;
 
 const GLSL_KIT_UNIFORMS = `uniform vec4 uSpKit;     // x time, y alive (0/1), z speed, w energy (melt 0..1)
-uniform vec4 uSpKitB;    // x grow progress 0..1, y floor distance below the centre, z amount
-uniform vec4 uSpGlowC;   // rgb pulse glow colour, a strength
+uniform vec4 uSpKitB;    // x grow progress 0..1, y floor distance below the center, z amount
+uniform vec4 uSpGlowC;   // rgb pulse glow color, a strength
 uniform vec4 uSpCam;     // xyz camera position
 uniform vec4 uSpParts[48];
 uniform vec4 uSpTokens[96]; // per token: xyz offset + w visibility, then a rotation
@@ -859,7 +859,7 @@ uniform vec4 uSpMorph;   // the four channels of the morph, band and fade kinds
 uniform sampler2D uSpScreen; // a live screen picture (the laptop's)
 vec3 spScreenUV = vec3(0.0); // xy uv, z > 0 for a screen splat
 uniform vec4 uSpLeaf[8]; // Pictures: spine point, spine axis, page direction, then (angle, curl) per leaf
-uniform vec4 uSpLever[18]; // Pianos: per lever group, pivot + amount, direction + mode, glow colour + channel
+uniform vec4 uSpLever[18]; // Pianos: per lever group, pivot + amount, direction + mode, glow color + channel
 uniform vec4 uSpLevers[24]; // Pianos: 96 levers' amounts, three 8-bit channels packed in each float
 uniform vec4 uSpVol;     // Imaging: cutting plane normal (xyz) and offset (w), toy coordinates
 uniform vec4 uSpVolP;    // Imaging: x cut on, y slab half width (0: half space), z, w density window
@@ -1078,12 +1078,12 @@ vec3 spKitCenter(vec3 p) {
     p = pv.xyz + spQuatRotate(q, (p - pv.xyz) * (1.0 + pv.w)) + ofs.xyz;
     spPartQ = q;
     // w <= -1: a culled part (visibility -w - 1). Its splats on the far side
-    // of the part's centre are hidden, so a turning shell's back never draws
+    // of the part's center are hidden, so a turning shell's back never draws
     // over its front (splats sort in their built pose).
     float vis = ofs.w;
     if (vis < -9.5) {
       // w <= -10 (lane Night sky): a part culled below the level plane
-      // through its centre (visibility -w - 10): a sky's stars set.
+      // through its center (visibility -w - 10): a sky's stars set.
       vis = -vis - 10.0;
       vec3 fc = pv.xyz + ofs.xyz;
       vis *= smoothstep(-0.004, 0.004, normalize(p - fc + vec3(1e-6)).y);
@@ -1337,7 +1337,7 @@ fn spKitCenter(p0: vec3f) -> vec3f {
     spPartQ = q;
     var vis = ofs.w;
     if (vis < -9.5) {
-      // Lane Night sky: culled below the level plane through its centre.
+      // Lane Night sky: culled below the level plane through its center.
       vis = -vis - 10.0;
       let fc = pv.xyz + ofs.xyz;
       vis = vis * smoothstep(-0.004, 0.004, normalize(p - fc + vec3f(1e-6)).y);
@@ -1381,7 +1381,7 @@ fn spKitCenter(p0: vec3f) -> vec3f {
 const GLSL_RIG_UNIFORMS = `uniform vec4 uSpParts[48];
 uniform vec4 uSpRigTint[16]; // per part: rgb glow added, a brightness gain
 uniform vec4 uSpFx[40];      // whole-body effects: 4 slots of 10 vec4 (see fxTable in src/rig-fx.js)
-uniform vec4 uSpRigDbg;  // x > 0 tints each part (?rig=show), and the colour keys`;
+uniform vec4 uSpRigDbg;  // x > 0 tints each part (?rig=show), and the color keys`;
 
 const GLSL_RIG_FUNCTIONS = `
 float spCellHash(vec3 c) {
@@ -2073,7 +2073,7 @@ export class EffectDriver {
     u.uSpPoke3 = this.pokes[3];
     u.uSpPokeP = [0.4 + 2.2 * fx.poke.strength, fx.poke.wobble, 0, 0];
 
-    // Wind: the direction slider is screen-relative (0 = towards the right
+    // Wind: the direction slider is screen-relative (0 = toward the right
     // edge, 90 = away from the viewer), flattened onto the ground plane.
     const up = [0, 1, 0];
     if (fx.wind.on && fx.wind.strength > 0) {
@@ -2172,7 +2172,7 @@ export class EffectDriver {
       u.uSpTwist = [0, 1, 0, 0];
     }
 
-    // Slice: offset in world units from the toy centre along the axis.
+    // Slice: offset in world units from the toy center along the axis.
     if (fx.slice.on) {
       const n = AXIS_VEC[fx.slice.axis] || AXIS_VEC.x;
       const extent = toy.extentAlong(n);

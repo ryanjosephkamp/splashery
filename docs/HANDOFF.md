@@ -62,11 +62,11 @@ batch merges as one PR.
 - This batch: Manual r7c (#561: the `ln` tests green again, the PDF down to 7.1 MB) and Builders r1b
   (#565: the baked format in `builders/`)
 
-**Lanes running:** US English (Sonnet, `session_01Lidt6WyFTaVR9bpedcY9Cu`, #570): the American
-spelling sweep the owner asked for on October 12, 2026; ready, waiting on his OK; manual/ follows in
-its Part 2. Manual r9 (#576: the owner's walkthrough of October 12, the last five demos, the PDF's
-clickable contents, task 47's two factual fixes; his marks all good) merged with Codex task 47's
-report (#575) in this batch. The manual is now final but for its Part 2 spelling sweep.
+**Lanes running:** none. US English (#570, the American spelling sweep the owner asked for on
+October 12, 2026) merged in this batch with his OK; identifiers and stored keys stay British (listed
+in docs/handoff/UsEnglish.md for a later decision). The same batch fixes `cdx-gallery:10`, red on
+main since #572 (Manual r8 changed six gallery captions; the program gallery audit now repeats the
+current ones).
 
 **Codex** (the owner runs these; tasks in `docs/codex/`, the Studio push 37 to 41 and the second
 wave 42 to 46). The Operator reviews each PR with a Sonnet helper and posts one comment listing the
@@ -262,8 +262,7 @@ the reset, the Sonnet polish lane for Codex prototypes #518, #515 and #517.
   owner starts them. Lane Physics drafted the hands-on plan for every toy (docs/HANDS-ON-PLAN.md on
   its branch); the owner marks it on the Hands-on Plan page (OPERATING.md, "Pages"), and category
   lanes build what he approves.
-- Locked (owner approved, do not change its look or behaviour): the laptop. Its smoke test guards
-  it.
+- Locked (owner approved, do not change its look or behavior): the laptop. Its smoke test guards it.
 
 ## Active lanes
 
@@ -342,7 +341,7 @@ Each has its full notes in handoff/history.md (the phase is in brackets) and, fo
 - Draw order (E2): splats sort in their built pose; build pieces where they are seen at their
   fullest; turning about the view keeps the order; spinning bodies are built twice.
 - Hidden pieces count in the fit (E2); `fit: false` (E3 review) leaves a shape out of the fit.
-- Channels and morphs (E3): one behaviour per splat; rounder or larger splats where a morph turns or
+- Channels and morphs (E3): one behavior per splat; rounder or larger splats where a morph turns or
   stretches a surface.
 - Loose pieces as tokens, and pieces built where they end (E4).
 - Skinned sheets, twists of space, negative glow, spinning gloss, `cull` for one spinning body, and
@@ -641,4 +640,4 @@ Settled on September 30, 2026 (the owner's answers to the Operator's plan after 
 
 Still open (ask when it comes up, in Phase H):
 
-- The favourite maths toy for the homepage: Menger sponge or hypercube? One embed or several?
+- The favorite math toy for the homepage: Menger sponge or hypercube? One embed or several?
