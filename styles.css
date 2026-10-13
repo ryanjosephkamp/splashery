@@ -176,6 +176,11 @@ textarea {
   line-height: 1.2;
 }
 
+.brand h1 a {
+  color: inherit;
+  pointer-events: auto;
+}
+
 .brand p {
   margin: 0;
   font-size: 13px;
@@ -3372,5 +3377,82 @@ body.focus .stage-zoom {
   }
   body.app .live-indicator {
     top: 188px;
+  }
+}
+
+/* Short wide screens: the gallery must leave room for scrollable settings.
+   Keep the full-height stage beside the panel, including after rotation. */
+@media (min-width: 761px) and (max-height: 500px) {
+  body.app:not(.panel-folded):not(.focus):not(.gallery-page) #stage {
+    width: calc(
+      100% - var(--panel-w) - 12px -
+        max(12px, var(--playground-safe-right, env(safe-area-inset-right, 0px)))
+    );
+  }
+
+  body .panel {
+    top: max(12px, var(--playground-safe-top, env(safe-area-inset-top, 0px)));
+    right: max(12px, var(--playground-safe-right, env(safe-area-inset-right, 0px)));
+    bottom: max(12px, var(--playground-safe-bottom, env(safe-area-inset-bottom, 0px)));
+  }
+
+  body.gallery-page .panel {
+    left: max(12px, var(--playground-safe-left, env(safe-area-inset-left, 0px)));
+  }
+
+  .focus-exit {
+    top: calc(10px + var(--playground-safe-top, env(safe-area-inset-top, 0px)));
+    right: calc(10px + var(--playground-safe-right, env(safe-area-inset-right, 0px)));
+  }
+
+  body:not(.gallery-page) .dock {
+    flex: 0 1 auto;
+    min-height: 0;
+    max-height: 55%;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+
+  body:not(.gallery-page) .shelf {
+    max-height: min(var(--shelf-h), 72px);
+  }
+
+  body:not(.gallery-page) .panel-body {
+    flex: 1 0 45%;
+  }
+
+  body:not(.gallery-page) .grip-shelf {
+    display: none;
+  }
+
+  .brand,
+  .toy-status {
+    left: calc(18px + var(--playground-safe-left, env(safe-area-inset-left, 0px)));
+  }
+
+  .brand,
+  .view-button,
+  .sound-toggle,
+  .help-toggle {
+    top: calc(14px + var(--playground-safe-top, env(safe-area-inset-top, 0px)));
+  }
+
+  .toy-status {
+    bottom: calc(14px + var(--playground-safe-bottom, env(safe-area-inset-bottom, 0px)));
+  }
+
+  .view-button:not(#gallery-open),
+  .sound-toggle,
+  .help-toggle {
+    transform: translateX(
+      calc(12px - max(12px, var(--playground-safe-right, env(safe-area-inset-right, 0px))))
+    );
+  }
+
+  .panel-fold {
+    right: calc(
+      var(--panel-w) + 1px +
+        max(12px, var(--playground-safe-right, env(safe-area-inset-right, 0px)))
+    );
   }
 }
