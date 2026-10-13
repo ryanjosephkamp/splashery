@@ -771,3 +771,13 @@
 {"v":1,"t":"2026-10-13T17:36:34.215Z","harness":"claude-code","event":"session-end","session":"79605116-f2ec-5d25-8d5d-daf5af9e8ce8","cwd":"splashery"}
 {"v":1,"t":"2026-10-13T17:45:19.680Z","harness":"claude-code","event":"session-start","session":"79605116-f2ec-5d25-8d5d-daf5af9e8ce8","cwd":"splashery"}
 {"v":1,"t":"2026-10-13T18:08:30.229Z","harness":"claude-code","event":"turn-start","session":"79605116-f2ec-5d25-8d5d-daf5af9e8ce8","cwd":"splashery"}
+{"v":1,"t":"2026-10-13T18:08:33.024Z","harness":"claude-code","event":"tool","session":"79605116-f2ec-5d25-8d5d-daf5af9e8ce8","tool":"ReadNotifications","cwd":"splashery"}
+{"v":1,"t":"2026-10-13T18:08:40.478Z","harness":"claude-code","event":"tool","session":"79605116-f2ec-5d25-8d5d-daf5af9e8ce8","tool":"mcp__Claude_Code_Remote__send_later","cwd":"splashery"}
+{"v":1,"t":"2026-10-13T18:08:41.193Z","harness":"claude-code","event":"tool","session":"79605116-f2ec-5d25-8d5d-daf5af9e8ce8","tool":"ArtifactData","cwd":"splashery"}
+{"v":1,"t":"2026-10-13T18:08:42.208Z","harness":"claude-code","event":"tool","session":"79605116-f2ec-5d25-8d5d-daf5af9e8ce8","tool":"Bash","cwd":"splashery"}
+{"v":1,"t":"2026-10-13T18:08:50.712Z","harness":"claude-code","event":"subagent-start","session":"79605116-f2ec-5d25-8d5d-daf5af9e8ce8","agent":"a49c3e81fdedfe0c7","type":"general-purpose"}
+{"v":1,"t":"2026-10-13T18:08:50.763Z","harness":"claude-code","event":"tool","session":"79605116-f2ec-5d25-8d5d-daf5af9e8ce8","tool":"Agent","spawned":"a49c3e81fdedfe0c7","cwd":"splashery"}
+{"v":1,"t":"2026-10-13T18:08:55.121Z","harness":"claude-code","event":"tool","session":"79605116-f2ec-5d25-8d5d-daf5af9e8ce8","tool":"ArtifactData","cwd":"splashery"}
+{"v":1,"t":"2026-10-13T18:08:55.685Z","harness":"claude-code","event":"tool","session":"79605116-f2ec-5d25-8d5d-daf5af9e8ce8","agent":"a49c3e81fdedfe0c7","type":"general-purpose","tool":"Bash"}
+{"v":1,"t":"2026-10-13T18:08:58.805Z","harness":"claude-code","event":"turn-end","session":"79605116-f2ec-5d25-8d5d-daf5af9e8ce8","cwd":"splashery"}
+{"v":1,"t":"2026-10-13T18:08:59.819Z","harness":"claude-code","event":"tool","session":"79605116-f2ec-5d25-8d5d-daf5af9e8ce8","agent":"a49c3e81fdedfe0c7","type":"general-purpose","tool":"Bash"}
