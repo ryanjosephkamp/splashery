@@ -3,13 +3,13 @@
 // 3D sequence, which shows as diagonal hatching on each flat face. These
 // shapes give the same surfaces a 2D even layout (sampleEven), so a box or a
 // cylinder built with even: true looks smooth. They sample exactly like the
-// kit's (the same face, side, cap, u and v fields), so colour functions work
+// kit's (the same face, side, cap, u and v fields), so color functions work
 // unchanged: k.add(evenBox(1, 2, 3), { even: true, ... }).
 
 const TAU = Math.PI * 2;
 const clamp01 = (x) => Math.min(1, Math.max(0, x));
 
-// A box centred at the origin, like k.box(sx, sy, sz).
+// A box centered at the origin, like k.box(sx, sy, sz).
 export function evenBox(sx, sy, sz) {
   const hx = sx / 2;
   const hy = sy / 2;

@@ -165,7 +165,7 @@
               <li><a href="#5f-hands-on-bodies-and-fields">5f. Hands-on: bodies and fields</a></li>
               <li><a href="#5g-hands-on-joints">5g. Hands-on: joints</a></li>
               <li><a href="#5h-hands-on-soft-parts">5h. Hands-on: soft parts</a></li>
-              <li><a href="#6-behaviours">6. Behaviours</a></li>
+              <li><a href="#6-behaviors">6. Behaviors</a></li>
               <li><a href="#7-house-rules">7. House rules</a></li>
               <li><a href="#7b-effect-quality">7b. Effect quality</a></li>
               <li><a href="#7c-sharp-kit-toys">7c. Sharp kit toys</a></li>
@@ -192,7 +192,7 @@
           </p>
           <h2 id="1-the-two-places-a-toy-lives">1. The two places a toy lives</h2>
           <p>
-            <strong>The catalogue</strong> (<code>src/toys.js</code>, the <code>TOYS</code> array)
+            <strong>The catalog</strong> (<code>src/toys.js</code>, the <code>TOYS</code> array)
             holds metadata only. Add entries under your pack's
             <code>// ---- Pack: &lt;name&gt; ----</code> marker:
           </p>
@@ -213,8 +213,8 @@
 
 export const RECIPES = {
   comet: {
-    alive: true,                 // has behaviours that move by themselves
-    options: [...],              // rebuild the toy (style, colour); optional
+    alive: true,                 // has behaviors that move by themselves
+    options: [...],              // rebuild the toy (style, color); optional
     controls: [...],             // change it live (sliders, switches, pulses); optional
     action: { key, label, sound }, // what a tap on the toy does; optional
     drive(t, c, out, info) {},   // per frame: parts, amounts; optional
@@ -228,7 +228,7 @@ export const RECIPES = {
               above: +Z faces the viewer, +X is to the right.
             </li>
             <li>
-              Model in any units around the origin. After <code>build</code>, the kit centres the
+              Model in any units around the origin. After <code>build</code>, the kit centers the
               toy and scales it to fit a sphere of radius 0.95, and moves part pivots with it. Keep
               proportions, not absolute sizes.
             </li>
@@ -274,7 +274,7 @@ export const RECIPES = {
                 <tr>
                   <th scope="row"><code>k.cylinder(r, h, { caps })</code></th>
                   <td>
-                    Cylinder along Y, centred. <code>caps</code>: <code>true</code>,
+                    Cylinder along Y, centered. <code>caps</code>: <code>true</code>,
                     <code>false</code>, <code>&quot;top&quot;</code> or
                     <code>&quot;bottom&quot;</code>. Samples carry <code>side</code> or
                     <code>cap</code> and <code>radial</code>.
@@ -360,20 +360,20 @@ export const RECIPES = {
             <pre><code>k.add(shape, {
   pos: [x, y, z], rot: [degX, degY, degZ], // or quat: [x, y, z, w]
   scale: 1 | [sx, sy, sz],
-  color: &quot;#hex&quot; | [r, g, b] | (c) =&gt; colour,
+  color: &quot;#hex&quot; | [r, g, b] | (c) =&gt; color,
   weight: 1,        // density relative to the rest (2 = twice as many splats per area)
   share: 0.1,       // or: exactly this fraction of the whole budget
   size: 1,          // splat size multiplier
   flat: 0.25,       // splat thickness (0 flat discs .. 1 round blobs)
   stretch: 3,       // for tubes: splats elongated along the tube
   opacity: 0.95,
-  jitter: 0.04,     // colour noise (keep it low, 0.01..0.02, on smooth materials)
+  jitter: 0.04,     // color noise (keep it low, 0.01..0.02, on smooth materials)
   even: true,       // place surface splats evenly (spheres, boxes, cylinders, cones, lathes, param)
   interior: 0.12,   // share of this shape's splats that fill its inside (for Slice)
-  core: &quot;#hex&quot; | (c) =&gt; colour,   // colour of the inside
+  core: &quot;#hex&quot; | (c) =&gt; color,   // color of the inside
   part: index,      // from k.part(...), or (c) =&gt; index to split a shape between parts
-  kind: &quot;flame&quot;, params: [a, b] | (c) =&gt; [a, b],  // a behaviour (section 6)
-  pattern: false,   // keep this shape's own colours under flags and patterns
+  kind: &quot;flame&quot;, params: [a, b] | (c) =&gt; [a, b],  // a behavior (section 6)
+  pattern: false,   // keep this shape's own colors under flags and patterns
   fit: false,       // leave it out of the fit (see &quot;Hidden pieces count in the fit&quot;)
 });</code></pre>
           </details>
@@ -384,16 +384,16 @@ export const RECIPES = {
             look sparse (eyes, stitches, gems).
           </p>
           <p>
-            Splats are unlit, so a material reads from colour alone. Random placement leaves thin
+            Splats are unlit, so a material reads from color alone. Random placement leaves thin
             spots where the far side of the toy shows through as dark speckle;
             <code>even: true</code> closes them (it made the sports balls read as leather and rubber
-            instead of grain). For smooth materials also bake a little light into the colour (a key
+            instead of grain). For smooth materials also bake a little light into the color (a key
             light from above, and a sheen for gloss) instead of adding noise: see
             <code>lit()</code> and <code>grip()</code> in <code>src/packs/balls.js</code>. Parts
             that are hidden most of the time can have a low <code>weight</code> so the faces people
             see get the splats (see the storybook's pages).
           </p>
-          <p><strong>The colour function</strong> gets <code>c</code> with:</p>
+          <p><strong>The color function</strong> gets <code>c</code> with:</p>
           <div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrolls sideways">
             <table>
               <thead>
@@ -446,7 +446,7 @@ export const RECIPES = {
             </table>
           </div>
           <p>
-            It returns a colour, or <code>null</code> to leave a hole (openings, cut-outs, a missing
+            It returns a color, or <code>null</code> to leave a hole (openings, cut-outs, a missing
             box face), or <code>{ c: colour, keep: true, size: 0.8 }</code> to keep one splat out of
             the pattern layer (seams, stitches, eyes, labels) or resize it.
           </p>
@@ -496,7 +496,7 @@ export const RECIPES = {
   out.amount = 0.5 + c.size;   // scales beat, breathe, flame, rise, twinkle, sway and wave
   out.energy = c.melt;         // drives &quot;melt&quot; (0..1)
   out.grow = c.bloom;          // drives &quot;grow&quot; (0..1)
-  out.glow = [r, g, b, strength]; // colour of the &quot;pulse&quot; glow
+  out.glow = [r, g, b, strength]; // color of the &quot;pulse&quot; glow
   out.body = { offset: [0, 0.1, 0], quat, squash };  // move the whole toy (in toy radii)
 }</code></pre>
           <p>
@@ -655,13 +655,13 @@ bat: [
             are the real test.
           </p>
           <p>
-            <strong>Flag colours</strong>: <code>patternProjection: &quot;top&quot;</code> makes a
-            toy lay flag colours on from above (a flat toy: the chess board) when a flag is picked;
+            <strong>Flag colors</strong>: <code>patternProjection: &quot;top&quot;</code> makes a
+            toy lay flag colors on from above (a flat toy: the chess board) when a flag is picked;
             <code>patternAmount: 0.3</code> lays them on gently and
             <code>patternDetail: 1</code> keeps each splat's own light and dark under them (the
             chess board's light and dark squares stay easy to tell apart). The app switches to the
             toy's way when it comes out with a flag on, and back to the usual way for the next toy
-            unless the look was changed. Splats a colour function returns with
+            unless the look was changed. Splats a color function returns with
             <code>keep: true</code>, or with <code>pattern: false</code> on their shape, never take
             a pattern (the chess pieces keep their own ivory and ebony under any flag).
           </p>
@@ -732,7 +732,7 @@ bat: [
             A GPU pass tags each splat with the region it falls in when the toy loads;
             <code>soft</code> (a fraction of the radius) blends the edge so the part bends into the
             rest of the toy. Up to 15 parts and 12 regions. Open the app with
-            <code>?rig=show</code> to tint each part (and the colour keys) while placing regions, or
+            <code>?rig=show</code> to tint each part (and the color keys) while placing regions, or
             render <code>tools/rig-map.mjs &lt;dir&gt; --rig &lt;id&gt;</code> for front, side and
             top views on a world grid. <code>out.body</code> (squash, offset, rotation) moves the
             whole scan, for squeezes and hops. Shelf shapes (blob, donut, knot, planet) use rigs
@@ -744,13 +744,13 @@ bat: [
           </p>
           <ul>
             <li>
-              A region can take only splats of one colour:
+              A region can take only splats of one color:
               <code>{ at, r, color: &quot;#d84a34&quot;, tol: 0.4 }</code> (the alarm clock's red
               second hand).
             </li>
             <li>
               <code>keys: [{ color: &quot;#c9b25a&quot;, tol: 0.2 }]</code> marks up to two sets of
-              splats by colour (optionally only within <code>r</code> of <code>at</code>), or
+              splats by color (optionally only within <code>r</code> of <code>at</code>), or
               <code>{ long: 0.42 }</code> for long thin splats (the donut's sprinkles).
             </li>
             <li>
@@ -762,8 +762,8 @@ bat: [
               <code>fx</code> lists up to four whole-body effects for things too many or too small
               for parts: each picks splats (<code>select</code>: all, a key or a part;
               <code>mask</code>: half-space, strips, sphere or wedge), moves them (push, along,
-              scatter, hop, shiver, turn, counter-rotating bands, bend, peel, split) and colours
-              them (glow, recolour, brighten, sparkle, fade, darken), shaped by a pattern (a growing
+              scatter, hop, shiver, turn, counter-rotating bands, bend, peel, split) and colors them
+              (glow, recolour, brighten, sparkle, fade, darken), shaped by a pattern (a growing
               shell, a band, a stagger per piece, a swirl wipe, a wave). <code>drive()</code> sets
               <code>out.fx.&lt;name&gt; = { move, color, phase }</code> each frame.
             </li>
@@ -2131,9 +2131,9 @@ joints: (d) =&gt; d.wedges.map((w) =&gt; ({ type: &quot;socket&quot;, token: w.t
             <code>player.handsOn.state().soft</code> gives each strand's nodes, their homes and how
             many links are broken. <code>tests/hec-engine.spec.mjs</code> measures each piece.
           </p>
-          <h2 id="6-behaviours">6. Behaviours</h2>
+          <h2 id="6-behaviors">6. Behaviors</h2>
           <p>
-            A behaviour moves each splat on the GPU, every frame. Set <code>kind</code> and
+            A behavior moves each splat on the GPU, every frame. Set <code>kind</code> and
             <code>params: [a, b]</code> on a shape or a cloud splat:
           </p>
           <div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrolls sideways">
@@ -2155,7 +2155,7 @@ joints: (d) =&gt; d.wedges.map((w) =&gt; ({ type: &quot;socket&quot;, token: w.t
                 </tr>
                 <tr>
                   <th scope="row"><code>beat</code></th>
-                  <td>Heartbeat swell from the centre.</td>
+                  <td>Heartbeat swell from the center.</td>
                   <td>amount (0.05)</td>
                   <td>phase</td>
                 </tr>
@@ -2242,7 +2242,7 @@ joints: (d) =&gt; d.wedges.map((w) =&gt; ({ type: &quot;socket&quot;, token: w.t
           </div>
           <p>
             <code>amount</code> from <code>drive</code> multiplies beat, breathe, flame, rise,
-            twinkle, sway and wave. Behaviours run in the toy's rest pose, before parts move it.
+            twinkle, sway and wave. Behaviors run in the toy's rest pose, before parts move it.
           </p>
           <p>
             <strong>Rim (glass; lane Fix4, September 30, 2026).</strong>
@@ -2276,11 +2276,11 @@ joints: (d) =&gt; d.wedges.map((w) =&gt; ({ type: &quot;socket&quot;, token: w.t
               <code>null</code> to keep a splat still. Targets count in the fit. Splats keep the
               orientation they were built with, so where the surface turns a lot use rounder splats
               (<code>flat</code> 0.4 or more). Morph combines with a part (the part moves the
-              morphed splat), not with another behaviour.
+              morphed splat), not with another behavior.
             </li>
             <li>
               <strong>Band</strong>: <code>kind: &quot;band&quot;, params: [at, width]</code> adds
-              the glow colour where the channel passes <code>at</code>: a wave of light that starts
+              the glow color where the channel passes <code>at</code>: a wave of light that starts
               at the tap (a calcium wave, a sheen wiping across). Give each splat its
               <code>at</code> from its place (distance along an arm, height).
             </li>
@@ -2309,7 +2309,7 @@ joints: (d) =&gt; d.wedges.map((w) =&gt; ({ type: &quot;socket&quot;, token: w.t
             <li>
               <strong>Bending one piece that touches itself</strong> (a pretzel): use one smooth
               twist of space for every splat, so crossings stay joined. Moving each splat along a
-              new centre line lifts the rope off itself where it crosses (E5's pretzel r2; r3 fixed
+              new center line lifts the rope off itself where it crosses (E5's pretzel r2; r3 fixed
               it).
             </li>
             <li>
@@ -2318,11 +2318,11 @@ joints: (d) =&gt; d.wedges.map((w) =&gt; ({ type: &quot;socket&quot;, token: w.t
               shape (<code>to</code> at full reach).
             </li>
             <li>
-              <strong>A travelling wave with morphs</strong>: split the moving pieces between three
+              <strong>A traveling wave with morphs</strong>: split the moving pieces between three
               channels driven a third of a cycle apart (E6b's sea urchin spines).
             </li>
             <li>
-              <strong>Negative glow darkens</strong>: <code>out.glow</code> with negative colours on
+              <strong>Negative glow darkens</strong>: <code>out.glow</code> with negative colors on
               a <code>band</code> layer makes night fall (the Taj Mahal) or casts a moving shadow
               (the Washington Monument's sundial shadow, a band on the ground at each splat's
               bearing).
@@ -2333,8 +2333,8 @@ joints: (d) =&gt; d.wedges.map((w) =&gt; ({ type: &quot;socket&quot;, token: w.t
               follows the channel (the Eiffel Tower's gold lights, Stonehenge's stones).
             </li>
             <li>
-              <strong>A frayed edge</strong>: a colour function that returns <code>null</code> for
-              more splats towards an edge makes a surface fade into its surroundings instead of
+              <strong>A frayed edge</strong>: a color function that returns <code>null</code> for
+              more splats toward an edge makes a surface fade into its surroundings instead of
               stopping at a straight line (the ocean wave).
             </li>
           </ul>
@@ -2372,7 +2372,7 @@ joints: (d) =&gt; d.wedges.map((w) =&gt; ({ type: &quot;socket&quot;, token: w.t
             </li>
             <li>
               <strong>Generic designs</strong>: no logos, brands, league marks or named products.
-              Landmarks may be modelled; modern named buildings become generic
+              Landmarks may be modeled; modern named buildings become generic
               (&quot;supertall&quot;). Weapons are medieval or fantasy only. Anatomy is stylised and
               friendly, never gory.
             </li>
@@ -2391,7 +2391,7 @@ joints: (d) =&gt; d.wedges.map((w) =&gt; ({ type: &quot;socket&quot;, token: w.t
               items; bucket or precompute.
             </li>
             <li>
-              <strong>Stable</strong>: at most 15 parts; behaviour names from the table; positions
+              <strong>Stable</strong>: at most 15 parts; behavior names from the table; positions
               finite.
             </li>
           </ul>
@@ -2411,7 +2411,7 @@ joints: (d) =&gt; d.wedges.map((w) =&gt; ({ type: &quot;socket&quot;, token: w.t
               </p>
               <ol>
                 <li>
-                  cut the part out with hard edges (<code>soft: 0.02</code>, colour-keyed regions)
+                  cut the part out with hard edges (<code>soft: 0.02</code>, color-keyed regions)
                   and keep the move small enough that no gap shows;
                 </li>
                 <li>
@@ -2474,8 +2474,8 @@ joints: (d) =&gt; d.wedges.map((w) =&gt; ({ type: &quot;socket&quot;, token: w.t
                 <li>
                   A solid body turned more than a quarter turn draws its far side over its near side
                   (it looks hollow). For a full turn, build it twice, the second copy half a turn
-                  round and coloured as the first would be there, and show whichever copy is within
-                  a quarter turn of its built pose (<code>spinParts</code> in
+                  round and colored as the first would be there, and show whichever copy is within a
+                  quarter turn of its built pose (<code>spinParts</code> in
                   <code>src/packs/space.js</code>: Venus, Jupiter, Neptune).
                 </li>
                 <li>
@@ -2496,7 +2496,7 @@ joints: (d) =&gt; d.wedges.map((w) =&gt; ({ type: &quot;socket&quot;, token: w.t
                   covered wherever the body's shown copy was built nearer the camera. Build four
                   copies a quarter turn apart and show one that was built on the far side of where
                   it is shown (<code>spinQuarters</code>: side -1 when the layer is on the side the
-                  ground turns towards, +1 when it turns away). Things that ride over that layer
+                  ground turns toward, +1 when it turns away). Things that ride over that layer
                   (Earth's city lights) are built where they first come into it, so they are always
                   shown at or past their built pose.
                 </li>
@@ -2529,7 +2529,7 @@ joints: (d) =&gt; d.wedges.map((w) =&gt; ({ type: &quot;socket&quot;, token: w.t
                   finger holes) draw through the shell once it turns. Paint them on the surface.
                 </li>
                 <li>
-                  Figures that walk towards the camera are built at the point of their path nearest
+                  Figures that walk toward the camera are built at the point of their path nearest
                   the camera (the Parthenon's procession vanished under the rock when built where it
                   started).
                 </li>
@@ -2547,7 +2547,7 @@ joints: (d) =&gt; d.wedges.map((w) =&gt; ({ type: &quot;socket&quot;, token: w.t
             </li>
             <li>
               <strong>Glossy things that spin.</strong> Baked light turns with a spinning body, so a
-              rolling pool ball looks like glass. Spin an unlit copy built tiny at the centre (it
+              rolling pool ball looks like glass. Spin an unlit copy built tiny at the center (it
               sorts behind everything, from any camera) under a fixed see-through layer of light
               (<code>glossSpin()</code> in <code>src/packs/balls.js</code>).
             </li>
@@ -2616,11 +2616,11 @@ joints: (d) =&gt; d.wedges.map((w) =&gt; ({ type: &quot;socket&quot;, token: w.t
               goes (the apple: a bite, then a worm and it heals).
             </li>
             <li>
-              <strong>Light that plays over a surface.</strong> A layer of splats coloured exactly
-              as the surface is there (invisible at rest) with
+              <strong>Light that plays over a surface.</strong> A layer of splats colored exactly as
+              the surface is there (invisible at rest) with
               <code>kind: &quot;pulse&quot;</code> flashes as <code>out.glow</code> runs over it;
-              change the glow's colour each frame for rainbow fire (diamond, opal) or keep it one
-              colour for a running light (emerald, the aurora's folds). The glow runs at a fixed
+              change the glow's color each frame for rainbow fire (diamond, opal) or keep it one
+              color for a running light (emerald, the aurora's folds). The glow runs at a fixed
               speed (a pass every 2.9 s at normal speed), so it suits loops and repeats, not a front
               that must start at the tap: for that, use <code>kind: &quot;grow&quot;</code> and
               <code>out.grow</code> (the Moon's terminator, the Mars dust front, the ruby's glow).
@@ -2808,10 +2808,10 @@ SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium node tools/effect-clip.mjs clips &l
 SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium npx playwright test tests/kit.spec.mjs</code></pre>
           <p>
             Look at the contact sheet: every toy should be recognisable at 200 px, fill its square,
-            and face the viewer. <code>make-thumbs</code> renders with motion off, so behaviours
-            show their resting pose. Check a tap effect with <code>effect-strip</code>: it should
-            last at least 1.5 s, move at least about a tenth of the toy (or change its light
-            clearly), and be obvious within the first half second.
+            and face the viewer. <code>make-thumbs</code> renders with motion off, so behaviors show
+            their resting pose. Check a tap effect with <code>effect-strip</code>: it should last at
+            least 1.5 s, move at least about a tenth of the toy (or change its light clearly), and
+            be obvious within the first half second.
           </p>
           <h2 id="9-models-to-splats">9. Models to splats</h2>
           <p>

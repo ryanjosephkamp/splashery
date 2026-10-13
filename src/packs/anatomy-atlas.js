@@ -571,7 +571,7 @@ function bodyShape(k, prims, i, level, under = null) {
   return shape;
 }
 
-// ---- Light and colour ---------------------------------------------------------------------
+// ---- Light and color ---------------------------------------------------------------------
 
 const LIGHT = unit([-0.45, 0.8, 0.45]);
 const VIEW = unit([0.35, 0.25, 0.9]);
@@ -992,8 +992,8 @@ function buildSkeleton(k, part, note) {
 
 // Another recipe's build, placed into this toy: its shapes are moved to
 // `at`, turned by `quat` and scaled by `scale`, on our organs part, with
-// its moving effects left out (they stay still here). Its colour functions
-// see their own coordinates, so they colour it as they do in its own toy.
+// its moving effects left out (they stay still here). Its color functions
+// see their own coordinates, so they color it as they do in its own toy.
 function placed(k, { at, scale, quat = [0, 0, 0, 1], part, weight = 1, mirror = false, note }) {
   const qi = qinv(quat);
   const mx = mirror ? -1 : 1;

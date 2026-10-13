@@ -81,7 +81,7 @@ too big, could still be a little sharper."
 - The CO2 coil's yearly lean is small at phone size (the true size of the cycle: about ±3 ppm on a
   rise of 94 ppm); it shows when you zoom in.
 - Labels face the camera only about the vertical: seen from high above they foreshorten.
-- `tests/smoke.spec.mjs` "rigs pick splats by colour …" failed twice on this branch (the strawberry
+- `tests/smoke.spec.mjs` "rigs pick splats by color …" failed twice on this branch (the strawberry
   had not settled within its 15 s poll) and then passed on the same commit; it passed on main too.
   It looks timing-dependent, not tied to this lane (the lane doesn't touch rigs or the strawberry).
 - Reading a file of a few hundred thousand rows takes a few seconds on the main thread (about 2 s

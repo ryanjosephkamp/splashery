@@ -1,4 +1,4 @@
-// Tiny splat files for the tests, built in memory: a coloured ball as PLY,
+// Tiny splat files for the tests, built in memory: a colored ball as PLY,
 // antimatter15 .splat and Niantic SPZ (version 2, gzip).
 import zlib from "node:zlib";
 

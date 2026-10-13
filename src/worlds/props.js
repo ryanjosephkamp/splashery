@@ -314,7 +314,7 @@ function randDir(r) {
   return [Math.cos(a) * s, z, Math.sin(a) * s];
 }
 
-// A kit buffer without its per-splat behaviour data.
+// A kit buffer without its per-splat behavior data.
 function plain(buf) {
   const out = new SplatBuffer(buf.count);
   for (let i = 0; i < buf.count; i++) {

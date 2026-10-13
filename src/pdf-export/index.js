@@ -277,7 +277,7 @@ export function openPdfDialog(app) {
     const v = values();
     const name = `splashery-${String(app.player.toyInfo?.id || "toy").replace(/[^a-z0-9-]+/gi, "-")}.pdf`; // prettier-ignore
     const handle = await pickFile(name);
-    if (handle === false) return; // cancelled in the file picker
+    if (handle === false) return; // canceled in the file picker
     dialog.close();
     await app.withBusy("Making a PDF…", async (progress) => {
       const out = await makeToyPDF(app, { ...v, onProgress: progress });

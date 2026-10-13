@@ -156,7 +156,7 @@ export class HandsOn {
     this.player.motion.handsAddon = null; // lane Hands engine B
   }
 
-  // Pieces live in the recipe's own coordinates (a kit toy is centred and
+  // Pieces live in the recipe's own coordinates (a kit toy is centered and
   // scaled to fit); the whole toy lives in the world.
   units() {
     const tf = this.mode === "pieces" ? this.player.motion.ctx?.transform : null;
@@ -259,7 +259,7 @@ export class HandsOn {
         pts.push(stage.modelToWorld([centers[j], centers[j + 1], centers[j + 2]]));
       }
     } else {
-      // No centres to read: the toy's box.
+      // No centers to read: the toy's box.
       const c = info.center;
       for (const sx of [-1, 1])
         for (const sy of [-1, 1])

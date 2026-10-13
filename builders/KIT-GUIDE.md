@@ -137,8 +137,8 @@ makes the parts.
         part: stone,
       });
       starGlints(k, shape, q, 7, { part: k.part("glints") });
-      // Fire: points over the crown coloured as the stone is there, which
-      // flash as a running glow of changing colour passes them (drive).
+      // Fire: points over the crown colored as the stone is there, which
+      // flash as a running glow of changing color passes them (drive).
       overlay(k, shape, {
         share: 0.06,
         part: stone,

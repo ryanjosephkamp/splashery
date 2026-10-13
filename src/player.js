@@ -1,6 +1,6 @@
 // The Splashery runtime shared by the app, the embed player and the
 // <splashery-toy> element: loads a toy, runs the clock, the camera, the
-// effect uniforms, idle behaviour and the pointer tools, and renders only
+// effect uniforms, idle behavior and the pointer tools, and renders only
 // when something changes.
 
 import * as pc from "./pc.js";
@@ -381,7 +381,7 @@ export class Player {
         this.profile,
       );
       // A shelf shape keeps its rig (its tap effect) while its shape and
-      // colours are the shelf's (any of its looks'), even when edited with clay.
+      // colors are the shelf's (any of its looks'), even when edited with clay.
       const shelf = preset || (toy.id ? findToy(toy.id) : null);
       const palettes = shelf?.generator ? [shelf.generator.palette, ...(shelf.looks || []).map((l) => l.generator?.palette)] : []; // prettier-ignore
       const same = shelf?.generator && generator.shape === shelf.generator.shape && palettes.includes(generator.palette); // prettier-ignore
@@ -405,7 +405,7 @@ export class Player {
       const def = findToy(toy.id) || findToy("blob");
       if (def.kind === "procedural")
         return this.loadToy({ kind: "builtin", id: def.id }, { onProgress });
-      // A scan may come in several looks (colours, a label): the scene's
+      // A scan may come in several looks (colors, a label): the scene's
       // `look` option picks one, and a missing or unknown look is the first.
       const look = pickLook(def, toy.options);
       const src = look?.url ? look : def;
@@ -448,7 +448,7 @@ export class Player {
       const scale = 0.9 / r;
       const flip = !!toy.flip;
       const c = bounds.center;
-      // Centre and scale; flipping turns the model 180 degrees about Z.
+      // Center and scale; flipping turns the model 180 degrees about Z.
       const transform = {
         position: flip
           ? [c[0] * scale, c[1] * scale, -c[2] * scale]
@@ -530,7 +530,7 @@ export class Player {
     );
   }
 
-  // World-space centre, radius and half extents of the toy.
+  // World-space center, radius and half extents of the toy.
   measure(resource, transform, known) {
     const b = known || robustBounds(resource);
     const s = transform ? transform.scale : 1;
@@ -575,7 +575,7 @@ export class Player {
   }
 
   // A toy from a pack: loads the pack module, builds the recipe with the
-  // scene's options and clay, and shows it with its parts and behaviours.
+  // scene's options and clay, and shows it with its parts and behaviors.
   async buildKit(def, toy, token, progress) {
     progress(0, `Building ${def.label}…`);
     const mod = await import(`./packs/${def.pack}.js`);
@@ -1507,7 +1507,7 @@ export class Player {
   }
 
   // A world point in the current toy's recipe coordinates: a kit toy's
-  // build space (before it was centred and scaled), else the world.
+  // build space (before it was centered and scaled), else the world.
   toRecipe(world) {
     const tf = this.motion.ctx?.transform;
     if (!tf || !this.stage.toy) return world.slice();
@@ -1529,7 +1529,7 @@ export class Player {
 
   // ---- Frame ------------------------------------------------------------------
 
-  // Effect settings with the idle behaviour blended in.
+  // Effect settings with the idle behavior blended in.
   effectiveEffects() {
     const fx = this.scene.effects;
     const w = this.idle.weight;
@@ -1586,7 +1586,7 @@ export class Player {
       this.stage.requestRender();
     }
 
-    // Idle behaviour fades in after a pause and out on interaction.
+    // Idle behavior fades in after a pause and out on interaction.
     const idleMode = this.scene.autoplay.effect;
     if (!this.frozen) {
       const idleNow =

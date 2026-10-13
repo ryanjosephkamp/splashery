@@ -13,7 +13,7 @@
 // The kit shares the splat budget between shapes by surface area (times an
 // optional weight), so the whole toy has an even density; shapes can also
 // ask for an exact share of the budget. When everything is added, the toy
-// is centred and scaled to fit a sphere of radius 0.95, and part pivots are
+// is centered and scaled to fit a sphere of radius 0.95, and part pivots are
 // moved with it. Every choice comes from the seed, so a toy rebuilds exactly.
 
 import { mulberry32, createNoise3, mixSeed } from "./noise.js";
@@ -111,7 +111,7 @@ function quatBasis(x, y, z) {
   return [q[0] / l, q[1] / l, q[2] / l, q[3] / l];
 }
 
-// ---- Colours -------------------------------------------------------------------
+// ---- Colors -------------------------------------------------------------------
 
 export function rgb(c) {
   if (Array.isArray(c)) return c;
@@ -134,7 +134,7 @@ export function shade(c, f) {
   return [clamp01(x[0] * f), clamp01(x[1] * f), clamp01(x[2] * f)];
 }
 
-// Samples a list of colour stops at t (0..1).
+// Samples a list of color stops at t (0..1).
 export function ramp(stops, t) {
   const n = stops.length - 1;
   const x = Math.min(n, Math.max(0, t * n));
@@ -610,7 +610,7 @@ function kindOf(k) {
   if (typeof k === "number") return k;
   if (!k) return 0;
   const n = KINDS[k];
-  if (n === undefined) throw new Error(`Unknown behaviour "${k}"`);
+  if (n === undefined) throw new Error(`Unknown behavior "${k}"`);
   return n;
 }
 
@@ -767,7 +767,7 @@ export class Kit {
     this.levers.push({ mode, channel, pivot: pivot.slice(), dir: unit(d), amount, glow: c, glowChannel }); // prettier-ignore
     return this.levers.length - 1;
   }
-  // The first behaviour value of a lever splat: its index in its group.
+  // The first behavior value of a lever splat: its index in its group.
   leverParam(group, index) {
     if (index < 0 || index >= MAX_LEVERS)
       throw new Error(`A lever index is 0 to ${MAX_LEVERS - 1}.`);
@@ -786,17 +786,17 @@ export class Kit {
 
   // Adds a shape. Options:
   //   pos, rot (degrees, X then Y then Z) or quat, scale (number or [x,y,z])
-  //   color: "#hex" | [r,g,b] | (c) => colour, where c = { p, n, lp, ln, u, v,
-  //          t, rand, noise, fbm }. A colour function can also return
-  //          { c: colour, keep: true, size } to keep one splat out of the
+  //   color: "#hex" | [r,g,b] | (c) => color, where c = { p, n, lp, ln, u, v,
+  //          t, rand, noise, fbm }. A color function can also return
+  //          { c: color, keep: true, size } to keep one splat out of the
   //          pattern layer (seams, stitches) or resize it, or null to leave
   //          a hole.
   //   weight (density, default 1) | share (fraction of the budget) | count
   //   size (splat size multiplier), flat (thickness 0..1), stretch (length
-  //   along the shape's tangent), opacity, jitter (colour noise 0..1)
+  //   along the shape's tangent), opacity, jitter (color noise 0..1)
   //   interior (fraction of this shape's splats that fill its inside), core
   //   part (an index, or (c) => index to split a shape between parts),
-  //   kind (behaviour name), params ([a, b] or (c) => [a, b])
+  //   kind (behavior name), params ([a, b] or (c) => [a, b])
   //   to: (c) => [x, y, z] | null: a morph target in recipe coordinates
   //          (kind "morph"; the splat moves there as its channel goes to 1)
   //   channel: 0..3 or (c) => 0..3: which of out.morph drives a morph,
@@ -901,7 +901,7 @@ export class Kit {
     yield 1;
   }
 
-  // The last two behaviour values of a splat. Morph, band, fade and skin
+  // The last two behavior values of a splat. Morph, band, fade and skin
   // splats pack their data (see KINDS in effects.js); a morph's target is
   // kept aside until the fit and packed by encodeMorphs().
   animParams(kind, p, pr, to, ch, skin) {
@@ -943,7 +943,7 @@ export class Kit {
   }
 
   // Packs each morph splat's offset to its target (in toy coordinates,
-  // after the fit) into its behaviour values: 12 bits per axis over
+  // after the fit) into its behavior values: 12 bits per axis over
   // +-MORPH_RANGE, z = x * 4096 + y and w = z + 4096 * channel (exact in a
   // float32).
   encodeMorphs() {
@@ -1120,7 +1120,7 @@ export class Kit {
     }
   }
 
-  // Centres the toy and scales it to fit FIT_RADIUS; moves part pivots too.
+  // Centers the toy and scales it to fit FIT_RADIUS; moves part pivots too.
   fit() {
     const buf = this.buf;
     const lo = [Infinity, Infinity, Infinity];
@@ -1266,7 +1266,7 @@ export function meanLuminance(buf) {
   return n ? sum / n : 0.5;
 }
 
-// Clay on kit toys takes its colour from the nearest existing splat.
+// Clay on kit toys takes its color from the nearest existing splat.
 export function nearestColoring(buf) {
   const G = 24;
   let grid = null;

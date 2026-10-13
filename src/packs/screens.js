@@ -31,7 +31,7 @@ const hash = (i) => {
   return x - Math.floor(x);
 };
 
-// Baked light from above, front and right, with a sheen towards the viewer.
+// Baked light from above, front and right, with a sheen toward the viewer.
 const LIGHT = unit([0.4, 0.85, 0.55]);
 const VIEW = unit([0.3, 0.3, 0.9]);
 const HALF = unit(add(LIGHT, VIEW));
@@ -1199,7 +1199,7 @@ function buildCinema(k) {
       );
     }
   }
-  // Rows of seats in front, stepping up towards the back (house lights dim
+  // Rows of seats in front, stepping up toward the back (house lights dim
   // on channel 0 as the film starts: a dark band over the seat backs).
   const rows = [
     { z: 0.45, y: -0.72, n: 7 },

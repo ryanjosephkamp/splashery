@@ -46,7 +46,7 @@ export function canUse(kind) {
 
 // What each source asks for. The camera prefers the one facing the person
 // (a mirror) at a modest size; the microphone turns off the browser's echo
-// cancelling, noise suppression and gain control, so a clap's decay and a
+// canceling, noise suppression and gain control, so a clap's decay and a
 // sung note arrive as they are.
 function constraints(kind, opts) {
   if (kind === "mic")

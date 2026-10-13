@@ -5,12 +5,12 @@ files under `vendor/` are unmodified copies of the published npm builds, except 
 comment was removed from `gifenc.esm.js` because the map is not shipped.
 
 The captured splat toys under `assets/toys/` (scans, and CC0 models turned into splats) have their
-own licences (CC0 and CC BY 4.0); see [CREDITS.md](CREDITS.md).
+own licenses (CC0 and CC BY 4.0); see [CREDITS.md](CREDITS.md).
 
 ## PlayCanvas Engine 2.22.3
 
 - Package: `playcanvas@2.22.3` (file: `vendor/playcanvas/playcanvas.min.mjs`, the package's
-  single-file ESM build `build/playcanvas.min.mjs`; licence copied to `vendor/playcanvas/LICENSE`)
+  single-file ESM build `build/playcanvas.min.mjs`; license copied to `vendor/playcanvas/LICENSE`)
 - Source: https://github.com/playcanvas/engine
 - License: MIT
 
@@ -317,7 +317,7 @@ These are `devDependencies` used to prepare assets and run tests; nothing from t
 - The TRELLIS Space on Hugging Face (not a package; `tools/image-to-3d.mjs` calls it over HTTPS with
   plain fetch): https://huggingface.co/spaces/trellis-community/TRELLIS (MIT), running the TRELLIS
   model https://huggingface.co/microsoft/TRELLIS-image-large (MIT) and rembg's u2net background
-  cut-out (Apache-2.0). It made the Real pencil and Real tin can; their photos' licences are in
+  cut-out (Apache-2.0). It made the Real pencil and Real tin can; their photos' licenses are in
   CREDITS.md.
 - `jsfive` 0.4.2 (public domain; based on pyfive, BSD-3-Clause, © 2016 Jonathan J. Helmus),
   https://github.com/usnistgov/jsfive, with its dependency `pako` 2.2.0 (MIT AND Zlib),

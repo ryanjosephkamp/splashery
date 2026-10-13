@@ -85,7 +85,7 @@ function hash(i) {
   return (x >>> 0) / 4294967296;
 }
 
-// A rainbow colour for hue h (0..1).
+// A rainbow color for hue h (0..1).
 function hue(h, s = 1, v = 1) {
   const f = (n) => {
     const k = (n + h * 6) % 6;
@@ -332,7 +332,7 @@ function stepCut(A = 1.3, B = 0.92, corner = 0.3) {
   return planes;
 }
 
-// A pretend studio: what a facet facing n reflects towards the default
+// A pretend studio: what a facet facing n reflects toward the default
 // camera. Bright softboxes above and to the side, a dark floor.
 function studio(n) {
   const r = sub(mul(n, 2 * dot(n, VIEW)), VIEW);
@@ -342,7 +342,7 @@ function studio(n) {
   return v;
 }
 
-// Colours a cut stone: each facet a brightness from the studio mixed with a
+// Colors a cut stone: each facet a brightness from the studio mixed with a
 // facet-dependent "internal reflection", bright edges, and flashes of fire.
 function gemColor(
   c,
@@ -401,7 +401,7 @@ const placed = (shape, s, lift = 0) => {
   );
   return { p: add(p, mul(n, lift)), n };
 };
-// A layer of splats over a stone's facets (picked by keep(s)), coloured as
+// A layer of splats over a stone's facets (picked by keep(s)), colored as
 // the stone is there unless col is given: used for light that plays over
 // it (a running glow, or a part that lights up).
 function overlay(k, shape, { share, keep = () => true, col, lift = 0.004, size = 1, ...extra }) {
@@ -526,7 +526,7 @@ function crystalCloud(k, crystals, share, color, extra = {}) {
         r2 = 1 - r2;
       }
     }
-    // r2 runs towards the tip.
+    // r2 runs toward the tip.
     const p = add(f.a, add(mul(sub(f.b, f.a), r1), mul(sub(f.tip, f.a), r2)));
     const out = color(f.n, r2, rand, f.cr);
     return {
@@ -565,7 +565,7 @@ export const RECIPES = {
     controls: [{ key: "fire", label: "Fire", type: "pulse", ease: 3.8 }],
     action: { key: "fire", label: "Turn it in the light" },
     // A tap turns it one way and the other in the light, as you would a
-    // ring: facet after facet flashes with fire (rainbow colours, the light
+    // ring: facet after facet flashes with fire (rainbow colors, the light
     // split by the stone) and the star glints flare.
     drive(t, c, out) {
       const p = progress(c.fire);
@@ -589,8 +589,8 @@ export const RECIPES = {
         part: stone,
       });
       starGlints(k, shape, q, 7, { part: k.part("glints") });
-      // Fire: points over the crown coloured as the stone is there, which
-      // flash as a running glow of changing colour passes them (drive).
+      // Fire: points over the crown colored as the stone is there, which
+      // flash as a running glow of changing color passes them (drive).
       overlay(k, shape, {
         share: 0.06,
         part: stone,
@@ -607,7 +607,7 @@ export const RECIPES = {
   // ---- Ruby -----------------------------------------------------------------------------
   ruby: {
     alive: true,
-    options: [{ key: "color", label: "Colour", type: "color", default: "#d0103a" }],
+    options: [{ key: "color", label: "Color", type: "color", default: "#d0103a" }],
     controls: [{ key: "glow", label: "Glow", type: "pulse", ease: 4 }],
     action: { key: "glow", label: "Make it glow" },
     // Rubies glow red in ultraviolet light (chromium in them fluoresces).
@@ -670,7 +670,7 @@ export const RECIPES = {
   // ---- Emerald --------------------------------------------------------------------------
   emerald: {
     alive: true,
-    options: [{ key: "color", label: "Colour", type: "color", default: "#119a5b" }],
+    options: [{ key: "color", label: "Color", type: "color", default: "#119a5b" }],
     controls: [{ key: "shine", label: "Shine", type: "pulse", ease: 4 }],
     action: { key: "shine", label: "Run light round the steps" },
     // A step cut is a hall of mirrors. A tap sends green light racing
@@ -710,13 +710,13 @@ export const RECIPES = {
   // ---- Sapphire -------------------------------------------------------------------------
   sapphire: {
     alive: true,
-    options: [{ key: "color", label: "Colour", type: "color", default: "#1f4fd1" }],
+    options: [{ key: "color", label: "Color", type: "color", default: "#1f4fd1" }],
     controls: [{ key: "star", label: "Star", type: "pulse", ease: 3.6 }],
     action: { key: "star", label: "Catch the star" },
     // Some sapphires show a six-rayed star (asterism: light off fine
     // needles inside) that glides over the stone as the light moves. A tap
     // catches the star on one side: its rays spread out over the stone from
-    // a bright centre, it glides across the top (its rays keep their
+    // a bright center, it glides across the top (its rays keep their
     // directions, set by the crystal), and the rays draw back in at the
     // other side. The rays lie on the stone and end at its edge, so the star
     // is built afresh at points along its path (one part each) and the
@@ -756,10 +756,10 @@ export const RECIPES = {
         dark: 0.22,
         light: "#dfe8ff",
       });
-      // The star (hidden until a tap): a soft bright centre and six rays of
+      // The star (hidden until a tap): a soft bright center and six rays of
       // light lying on the top of the stone, dipping down its crown past the
       // table's edge and ending at the girdle. Each ray grows out from the
-      // centre (grow) as the star is caught.
+      // center (grow) as the star is caught.
       const top = 0.02 + (1 - table) * Math.tan(crown);
       const onTop = (x, z) => {
         const r = Math.hypot(x, z);
@@ -786,7 +786,7 @@ export const RECIPES = {
           let t;
           let dir;
           if (rand() < 0.14) {
-            // The bright centre.
+            // The bright center.
             const r = 0.07 * Math.sqrt(rand());
             const a = rand() * TAU;
             t = r / 0.6;
@@ -1125,7 +1125,7 @@ export const RECIPES = {
         shape.opts = { pos, quat: quatEuler(...rot) };
         const part = k.part(`point${order.indexOf(i)}`);
         // Its glow (hidden until its turn): the faces lit from within,
-        // brightest towards the point, and a star at the tip.
+        // brightest toward the point, and a star at the tip.
         // (Bigger, fainter splats than the crystal's own, so the light
         // reads as a glow, not as dots.)
         overlay(k, shape, {
@@ -1215,11 +1215,11 @@ export const RECIPES = {
         ],
       },
     ],
-    controls: [{ key: "play", label: "Play of colour", type: "pulse", ease: 4.2 }],
+    controls: [{ key: "play", label: "Play of color", type: "pulse", ease: 4.2 }],
     action: { key: "play", label: "Tilt it in the light" },
-    // A tap rocks the stone in the light, and flashes of colour roll across
+    // A tap rocks the stone in the light, and flashes of color roll across
     // it, patch by patch, changing hue as they go (an opal's play of
-    // colour: light split by the tiny spheres it is made of).
+    // color: light split by the tiny spheres it is made of).
     drive(t, c, out) {
       const p = progress(c.play);
       const on = c.play > 0 ? 1 : 0;
@@ -1242,7 +1242,7 @@ export const RECIPES = {
       }
       prof.unshift([0.96, -0.1], [0.6, -0.12], [0, -0.12]);
       prof.sort((a, b) => a[1] - b[1] || a[0] - b[0]);
-      // Patches of colour: cells round random points.
+      // Patches of color: cells round random points.
       const cells = [];
       for (let i = 0; i < 120; i++) {
         cells.push({
@@ -1269,7 +1269,7 @@ export const RECIPES = {
         const lp = [c.lp[0] * 1.35, c.lp[1], c.lp[2]];
         const { cell, b1, b2 } = cellOf(lp);
         const edge = smoothstep(0, 0.02, Math.sqrt(b2) - Math.sqrt(b1));
-        // Play of colour: the hue shifts with the facing, as if with the light.
+        // Play of color: the hue shifts with the facing, as if with the light.
         const h = (cell.h + 0.08 * c.n[0] + 0.05 * c.n[2] + 1) % 1;
         const flash = hue(h, 0.85, 1);
         const glow = 0.35 + 0.65 * smoothstep(-0.3, 0.6, c.noise(lp[0] * 7, lp[1] * 7, lp[2] * 7));
@@ -1292,8 +1292,8 @@ export const RECIPES = {
         params: (c) => [c.rand() < 0.5 ? 1 : 0.3, 0],
         color: (c) => opalColor(c),
       });
-      // Play of colour: points over the dome coloured as the stone is
-      // there, which flash as a running glow of changing colour rolls
+      // Play of color: points over the dome colored as the stone is
+      // there, which flash as a running glow of changing color rolls
       // across the stone, patch by patch (drive).
       lathe.opts = { scale: [1.35, 1, 1], quat: opalQ };
       overlay(k, lathe, {
@@ -1380,7 +1380,7 @@ export const RECIPES = {
         kind: "glint",
         params: (c) => [c.rand() < 0.25 ? 0.8 : 0.1, 0],
         color: (c) => {
-          // Lustre: soft shading, a pink and green orient, a crisp highlight.
+          // Luster: soft shading, a pink and green orient, a crisp highlight.
           const f = dot(c.n, VIEW);
           let col = mix(shade(pearlCol, 0.78), pearlCol, smoothstep(-0.2, 0.9, dot(c.n, LIGHT)));
           col = mix(
