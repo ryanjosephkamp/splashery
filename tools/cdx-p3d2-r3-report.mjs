@@ -99,6 +99,13 @@ const pose = (r) =>
 const percent = (r) => (r ? `${(100 * r.holeFraction).toFixed(4)}%` : "not measured");
 const number = (r, key) => (r ? r[key].toFixed(6) : "not measured");
 const comparisons = [];
+const captureFailure = read(path.join(root, "capture-failure-proof.json"));
+const invalidatedDesktop = new Set(captureFailure?.invalidatedSamples || []);
+const completeTarget = (rows) =>
+  complete(rows) &&
+  rows.every(
+    (r) => r.screen !== "desktop" || !invalidatedDesktop.has(r.id) || r.captureValidated === true,
+  );
 for (const entry of inputs())
   for (const screen of ["phone", "desktop"]) {
     const select = (rows) => rows.filter((r) => r.id === entry.id && r.screen === screen);
@@ -110,8 +117,8 @@ for (const entry of inputs())
       beforeRows: b.length,
       afterRows: a.length,
       beforeComplete: complete(b, expectedBeforeGroupRows, beforeKeys),
-      afterComplete: complete(a),
-      complete: complete(b, expectedBeforeGroupRows, beforeKeys) && complete(a),
+      afterComplete: completeTarget(a),
+      complete: complete(b, expectedBeforeGroupRows, beforeKeys) && completeTarget(a),
       beforeHole: worst(b, "holeFraction"),
       afterHole: worst(a, "holeFraction"),
       beforeHalo: worst(b, "haloMean"),
@@ -408,6 +415,7 @@ const summary = {
       read(path.join(root, "target-phone-complete.json"))?.phoneRows === 882,
     recordedErrors: errorsFor(name),
   })),
+  captureFailure,
 };
 fs.writeFileSync(path.join(root, "summary.json"), JSON.stringify(summary, null, 2));
 const text = [

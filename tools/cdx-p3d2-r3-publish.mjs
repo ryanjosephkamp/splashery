@@ -196,8 +196,15 @@ for (const name of [
   "goal-status-final-prepared.md",
   "publication-provenance.json",
   "bounded-stop.json",
+  "capture-failure-proof.json",
 ])
   if (fs.existsSync(path.join(cache, name))) copy(path.join(cache, name), name);
+const invalidCaptureDir = "sweep-after-desktop-invalid-black";
+const invalidCaptureSource = path.join(cache, invalidCaptureDir);
+if (fs.existsSync(invalidCaptureSource))
+  for (const name of fs.readdirSync(invalidCaptureSource))
+    if (/\.(json|png)$/.test(name))
+      copy(path.join(invalidCaptureSource, name), `${invalidCaptureDir}/${name}`);
 for (const round of [1, 2])
   for (const build of ["main", "after"]) {
     const name = `frame-retake-${round}-${build}.json`;

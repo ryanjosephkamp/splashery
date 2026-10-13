@@ -292,6 +292,21 @@ async function main() {
               const frames =
                 view === "sharp" && warmed.has(mode) ? settings.capturePolicy.sharpRestFrames : 2;
               const shot = await poseR3(page, yaw, pitch, mode, [0, 1, 0], frames);
+              const pixels = decode(shot.image).data;
+              let rgb = false;
+              let alpha = false;
+              for (let p = 0; p < pixels.length && !(rgb && alpha); p += 4) {
+                rgb ||= pixels[p] > 0 || pixels[p + 1] > 0 || pixels[p + 2] > 0;
+                alpha ||= pixels[p + 3] > 0;
+              }
+              if (!rgb || !alpha) {
+                recordError(
+                  `Invalid blank capture: ${name}/${entry.id}/${view}/${yaw}/${pitch}/${mode}`,
+                );
+                throw new Error(
+                  "The browser returned an empty capture; this pose is not measured.",
+                );
+              }
               warmed.add(mode);
               return shot;
             };
@@ -332,6 +347,7 @@ async function main() {
                 view,
                 yaw,
                 pitch,
+                captureValidated: true,
                 ...display,
                 ...hole,
                 ...edge,
