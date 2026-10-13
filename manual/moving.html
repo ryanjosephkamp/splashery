@@ -148,8 +148,10 @@
         their velocities and gravity, then moves them to where they would be if nothing overlapped
         and every joint held, then works out velocities from how far they moved. The world is built
         on the first pick-up, so opening a toy costs nothing. It steps 1/60 of a second at a time
-        whatever the frame rate, in 8 smaller substeps for a whole toy and 10 for a toy with pieces,
-        and it falls asleep once everything has been slower than a small speed for half a second.
+        whatever the frame rate, in 8 smaller
+        <span class="term" data-g="g-substep">substeps</span> for a whole toy and 10 for a toy with
+        pieces, and it falls asleep once everything has been slower than a small speed for half a
+        second.
       </p>
       <p>
         Most toys play as one rigid body: their pose moves the toy's whole entity, so the splats are

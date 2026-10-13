@@ -124,6 +124,32 @@
           4<var>d</var><sub>1</sub>² + <var>d</var><sub>2</sub>², and setting it to 1 draws an
           ellipse. The exponent of a Gaussian holds one [<a href="references.html#ref-5">5</a>].
         </dd>
+        <dt id="g-inverse">Matrix inverse</dt>
+        <dd>
+          The matrix that undoes another one: multiplying a matrix by its inverse gives the identity
+          matrix (1s on the diagonal, 0s everywhere else). A Gaussian bell uses the inverse
+          <var>Σ</var><sup>−1</sup> of its covariance. Only a matrix whose determinant is not 0 has
+          one.
+        </dd>
+        <dt id="g-determinant">Determinant</dt>
+        <dd>
+          One number that sums up a square matrix. For a 2-by-2 covariance with entries
+          <var>a</var>, <var>b</var>, <var>b</var>, <var>c</var> it is <var>a</var><var>c</var> −
+          <var>b</var><sup>2</sup>, which is also the product of its two eigenvalues. A determinant
+          of 0 means the matrix is flat in one direction and has no inverse.
+        </dd>
+        <dt id="g-eigen">Eigenvalue, eigenvector</dt>
+        <dd>
+          An eigenvector of a matrix is a direction the matrix only stretches, never turns; its
+          eigenvalue says by how much. For a covariance, the eigenvectors are the axes of the bell's
+          ellipse, and the eigenvalues are the squares of its widths along them.
+        </dd>
+        <dt id="g-posdef">Positive definite</dt>
+        <dd>
+          A symmetric matrix whose eigenvalues are all above 0 (for a 2-by-2 matrix:
+          <var>a</var> above 0 and the determinant above 0). A covariance has to be positive
+          definite, so that the bell falls off in every direction instead of growing in one.
+        </dd>
         <dt id="g-tilt">Tilt, rotation</dt>
         <dd>
           Tilt is the off-diagonal terms of <var>Σ</var>: zero when a splat's axes line up with
@@ -134,6 +160,13 @@
         <dd>
           Different widths along the axes, or equal widths in every direction. A plain kit splat is
           isotropic; the flat discs that cover a surface are anisotropic.
+        </dd>
+        <dt id="g-radian">Radian</dt>
+        <dd>
+          A way to measure an angle by the length of arc it cuts off on a circle of radius 1. A full
+          turn is 2<var>π</var> (about 6.28) radians, a half turn is <var>π</var>, and a quarter
+          turn is <var>π</var>/2. The equation language's <code>sin</code> and <code>cos</code>, and
+          the angles in a recipe, use radians, not degrees.
         </dd>
         <dt id="g-quaternion">Quaternion <var>q</var></dt>
         <dd>
@@ -161,6 +194,12 @@
         <dd>
           Laying colors over one another in order, each weighted by its opacity and by how much of
           the pixel is still uncovered.
+        </dd>
+        <dt id="g-antialias">Anti-aliasing</dt>
+        <dd>
+          Softening the jagged stair-steps on an edge by blending the pixels it only partly covers.
+          Splashery's own option (off unless a labs switch turns it on) lowers each splat's opacity
+          to make up for the energy that a little extra blur spreads out.
         </dd>
         <dt id="g-sh">Spherical harmonics</dt>
         <dd>
@@ -199,6 +238,13 @@
           recipe's <code>drive</code>. A morph is a splat sliding from its own place to a target
           place.
         </dd>
+        <dt id="g-paramsurf">Parametric surface</dt>
+        <dd>
+          A surface drawn by giving <var>x</var>, <var>y</var>, and <var>z</var> each as a formula
+          of two numbers, <var>u</var> and <var>v</var>. Each splat gets its own pair (<var>u</var>,
+          <var>v</var>), and the equations carry it to a place in space. A sphere, a torus, and a
+          Möbius strip are all parametric surfaces.
+        </dd>
         <dt id="g-kernel">Kernel</dt>
         <dd>
           The rule for how a splat's weight falls off across its patch. The site normally draws a
@@ -210,6 +256,11 @@
           a sail. Every splat carries the number of its part; number 0 is the body, so a toy has up
           to 15 more (Chapter 2). A <b>token</b> is one of up to 48 separate pieces, such as a game
           piece, that a recipe moves by its own offset.
+        </dd>
+        <dt id="g-lever">Lever</dt>
+        <dd>
+          A piece that a recipe can move or turn by its own offset, such as a piano key. A kit toy
+          can have up to 96 levers in 6 groups, besides its parts and tokens.
         </dd>
         <dt id="g-drive">Drive</dt>
         <dd>
@@ -278,6 +329,12 @@
           own engine uses an extended form of it [<a href="references.html#ref-11">11</a>,
           <a href="references.html#ref-12">12</a>].
         </dd>
+        <dt id="g-substep">Substep</dt>
+        <dd>
+          One of the smaller steps a physics engine takes inside a single time step, to be more
+          accurate. Hands-on steps 1/60 of a second at a time, in 8 substeps for a whole toy and 10
+          for a toy with pieces; smaller steps keep fast pieces from sinking into one another.
+        </dd>
         <dt id="g-joint">Joint: hinge, slider, dial, socket, break</dt>
         <dd>
           The ways a part may move in hands-on play. A <b>hinge</b> swings about an axis, a
@@ -308,6 +365,12 @@
           apart. A <b>B-factor</b> says how much an atom's place is blurred in a crystal, by motion
           or disorder.
         </dd>
+        <dt id="g-ctmri">CT, MRI</dt>
+        <dd>
+          Two kinds of medical scan that measure the inside of a body slice by slice: CT (computed
+          tomography) uses X-rays, and MRI (magnetic resonance imaging) uses magnetic fields and
+          radio waves. Each slice is a grid of numbers, and a stack of slices is a volume of voxels.
+        </dd>
         <dt id="g-voxel">Voxel</dt>
         <dd>
           A volume pixel: one little cube of a 3D scan, with one number for how dense the material
@@ -318,6 +381,12 @@
           A <b>window</b> picks the range of values that show, from a lower to an upper level, and
           the rest is hidden or faded. In a CT scan the values are in <b>Hounsfield units</b>, on
           which water is 0 and air is about −1000.
+        </dd>
+        <dt id="g-spectrogram">Spectrogram</dt>
+        <dd>
+          A picture of a sound over time: time runs along one side, pitch along the other, and
+          brightness shows how loud each pitch is at that moment. The Song landscape toy turns the
+          spectrogram of a song into a 3D field.
         </dd>
         <dt id="g-pointcloud">Point cloud, lidar, LAS and LAZ</dt>
         <dd>

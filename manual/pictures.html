@@ -221,11 +221,11 @@ export const RECIPES = {
         and a spine to turn about: <code>k.spine({ at, axis, dir })</code> gives the spine's place,
         its direction, and the direction from it along the pages when they lie flat. Each frame,
         <code>drive</code> sets <code>out.leaves[slot] = { angle, curl }</code>: the
-        <code>angle</code> in radians (0 lying flat, π turned all the way over) and the
-        <code>curl</code>, how much the page bends along a circular arc (a negative number lets the
-        free edge lag behind, like paper in air). Every splat of the page turns with the curve at
-        its place, so it stays a solid sheet at every angle, which a page bent with soft regions
-        would not.
+        <code>angle</code> in <span class="term" data-g="g-radian">radians</span> (0 lying flat, π
+        turned all the way over) and the <code>curl</code>, how much the page bends along a circular
+        arc (a negative number lets the free edge lag behind, like paper in air). Every splat of the
+        page turns with the curve at its place, so it stays a solid sheet at every angle, which a
+        page bent with soft regions would not.
       </p>
       <figure>
         <div class="shots one">

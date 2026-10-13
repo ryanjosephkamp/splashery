@@ -25,6 +25,22 @@ export default {
     title: "Quadratic form",
     body: 'An expression in which every term has two factors of the input. In two dimensions,\n          <var>a</var><var>d</var><sub>1</sub>² + 2<var>b</var><var>d</var><sub>1</sub><var>d</var\n          ><sub>2</sub> + <var>c</var><var>d</var><sub>2</sub>². With 4 and 1 on the diagonal it is\n          4<var>d</var><sub>1</sub>² + <var>d</var><sub>2</sub>², and setting it to 1 draws an\n          ellipse. The exponent of a Gaussian holds one [<a href="references.html#ref-5">5</a>].',
   },
+  "g-inverse": {
+    title: "Matrix inverse",
+    body: "The matrix that undoes another one: multiplying a matrix by its inverse gives the identity\n          matrix (1s on the diagonal, 0s everywhere else). A Gaussian bell uses the inverse\n          <var>Σ</var><sup>−1</sup> of its covariance. Only a matrix whose determinant is not 0 has\n          one.",
+  },
+  "g-determinant": {
+    title: "Determinant",
+    body: "One number that sums up a square matrix. For a 2-by-2 covariance with entries\n          <var>a</var>, <var>b</var>, <var>b</var>, <var>c</var> it is <var>a</var><var>c</var> −\n          <var>b</var><sup>2</sup>, which is also the product of its two eigenvalues. A determinant\n          of 0 means the matrix is flat in one direction and has no inverse.",
+  },
+  "g-eigen": {
+    title: "Eigenvalue, eigenvector",
+    body: "An eigenvector of a matrix is a direction the matrix only stretches, never turns; its\n          eigenvalue says by how much. For a covariance, the eigenvectors are the axes of the bell's\n          ellipse, and the eigenvalues are the squares of its widths along them.",
+  },
+  "g-posdef": {
+    title: "Positive definite",
+    body: "A symmetric matrix whose eigenvalues are all above 0 (for a 2-by-2 matrix:\n          <var>a</var> above 0 and the determinant above 0). A covariance has to be positive\n          definite, so that the bell falls off in every direction instead of growing in one.",
+  },
   "g-tilt": {
     title: "Tilt, rotation",
     body: "Tilt is the off-diagonal terms of <var>Σ</var>: zero when a splat's axes line up with\n          <var>x</var>, <var>y</var>, and <var>z</var>. Rotation is a splat's own turn. \"Tilt lock\"\n          is a different thing: the camera control in Chapter 5.",
@@ -32,6 +48,10 @@ export default {
   "g-aniso": {
     title: "Anisotropic, isotropic",
     body: "Different widths along the axes, or equal widths in every direction. A plain kit splat is\n          isotropic; the flat discs that cover a surface are anisotropic.",
+  },
+  "g-radian": {
+    title: "Radian",
+    body: "A way to measure an angle by the length of arc it cuts off on a circle of radius 1. A full\n          turn is 2<var>π</var> (about 6.28) radians, a half turn is <var>π</var>, and a quarter\n          turn is <var>π</var>/2. The equation language's <code>sin</code> and <code>cos</code>, and\n          the angles in a recipe, use radians, not degrees.",
   },
   "g-quaternion": {
     title: "Quaternion <var>q</var>",
@@ -57,6 +77,10 @@ export default {
     title: "Alpha compositing",
     body: "Laying colors over one another in order, each weighted by its opacity and by how much of\n          the pixel is still uncovered.",
   },
+  "g-antialias": {
+    title: "Anti-aliasing",
+    body: "Softening the jagged stair-steps on an edge by blending the pixels it only partly covers.\n          Splashery's own option (off unless a labs switch turns it on) lowers each splat's opacity\n          to make up for the energy that a little extra blur spreads out.",
+  },
   "g-sh": {
     title: "Spherical harmonics",
     body: "A compact way to store how a color changes with the direction you look from. Many trained\n          captures store them; a kit splat has one base color.",
@@ -81,6 +105,10 @@ export default {
     title: "u, v, t, morph",
     body: "<var>u</var> and <var>v</var> are the coordinates of the flat sheet of points that each\n          splat gets a place on, before the equations bend it into shape. They are parameters of a\n          parametric surface, not a substitution [<a href=\"references.html#ref-9\">9</a>].\n          <var>t</var> is time: 0 to 2π in the equation language, and the toy's running time in a\n          recipe's <code>drive</code>. A morph is a splat sliding from its own place to a target\n          place.",
   },
+  "g-paramsurf": {
+    title: "Parametric surface",
+    body: "A surface drawn by giving <var>x</var>, <var>y</var>, and <var>z</var> each as a formula\n          of two numbers, <var>u</var> and <var>v</var>. Each splat gets its own pair (<var>u</var>,\n          <var>v</var>), and the equations carry it to a place in space. A sphere, a torus, and a\n          Möbius strip are all parametric surfaces.",
+  },
   "g-kernel": {
     title: "Kernel",
     body: "The rule for how a splat's weight falls off across its patch. The site normally draws a\n          cut-off Gaussian; a labs setting can use a sharper one. Neither is the ideal bell.",
@@ -88,6 +116,10 @@ export default {
   "g-part": {
     title: "Part, token",
     body: "A <b>part</b> is a group of a toy's splats that moves as one solid piece, such as a lid or\n          a sail. Every splat carries the number of its part; number 0 is the body, so a toy has up\n          to 15 more (Chapter 2). A <b>token</b> is one of up to 48 separate pieces, such as a game\n          piece, that a recipe moves by its own offset.",
+  },
+  "g-lever": {
+    title: "Lever",
+    body: "A piece that a recipe can move or turn by its own offset, such as a piano key. A kit toy\n          can have up to 96 levers in 6 groups, besides its parts and tokens.",
   },
   "g-drive": {
     title: "Drive",
@@ -137,6 +169,10 @@ export default {
     title: "Position-based dynamics (XPBD)",
     body: 'A way to simulate physics by moving things to where they would be if nothing overlapped\n          and every joint held, then working out their speeds from how far they moved. Splashery\'s\n          own engine uses an extended form of it [<a href="references.html#ref-11">11</a>,\n          <a href="references.html#ref-12">12</a>].',
   },
+  "g-substep": {
+    title: "Substep",
+    body: "One of the smaller steps a physics engine takes inside a single time step, to be more\n          accurate. Hands-on steps 1/60 of a second at a time, in 8 substeps for a whole toy and 10\n          for a toy with pieces; smaller steps keep fast pieces from sinking into one another.",
+  },
   "g-joint": {
     title: "Joint: hinge, slider, dial, socket, break",
     body: "The ways a part may move in hands-on play. A <b>hinge</b> swings about an axis, a\n          <b>slider</b> moves along a line, a <b>dial</b> turns round and round, a\n          <b>socket</b> lets a loose piece click back into its place, and a <b>break</b> lets a\n          piece snap off when pulled hard. Each of the first three is moved by one number, an angle\n          or a distance.",
@@ -157,6 +193,10 @@ export default {
     title: "Ångström, B-factor",
     body: "An <b>ångström</b> is a tenth of a nanometer; atoms in a bond are about 1 to 2 of them\n          apart. A <b>B-factor</b> says how much an atom's place is blurred in a crystal, by motion\n          or disorder.",
   },
+  "g-ctmri": {
+    title: "CT, MRI",
+    body: "Two kinds of medical scan that measure the inside of a body slice by slice: CT (computed\n          tomography) uses X-rays, and MRI (magnetic resonance imaging) uses magnetic fields and\n          radio waves. Each slice is a grid of numbers, and a stack of slices is a volume of voxels.",
+  },
   "g-voxel": {
     title: "Voxel",
     body: "A volume pixel: one little cube of a 3D scan, with one number for how dense the material\n          is there.",
@@ -164,6 +204,10 @@ export default {
   "g-window": {
     title: "Window and level, Hounsfield unit",
     body: "A <b>window</b> picks the range of values that show, from a lower to an upper level, and\n          the rest is hidden or faded. In a CT scan the values are in <b>Hounsfield units</b>, on\n          which water is 0 and air is about −1000.",
+  },
+  "g-spectrogram": {
+    title: "Spectrogram",
+    body: "A picture of a sound over time: time runs along one side, pitch along the other, and\n          brightness shows how loud each pitch is at that moment. The Song landscape toy turns the\n          spectrogram of a song into a 3D field.",
   },
   "g-pointcloud": {
     title: "Point cloud, lidar, LAS and LAZ",

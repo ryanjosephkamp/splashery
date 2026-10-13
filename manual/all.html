@@ -992,18 +992,19 @@
       <details class="fold tip" id="quadratic-form">
         <summary>Two words in that formula: the inverse and the quadratic form</summary>
         <p>
-          The inverse <var>Σ</var><sup>−1</sup> is the matrix that undoes <var>Σ</var>. And a
-          <b>quadratic form</b> is an expression where every term has two factors of the input, like
-          <var>a</var><var>d</var><sub>1</sub>² + 2<var>b</var><var>d</var><sub>1</sub><var>d</var
-          ><sub>2</sub> + <var>c</var><var>d</var><sub>2</sub>². In two dimensions, with
-          <var>d</var> = (<var>d</var><sub>1</sub>, <var>d</var><sub>2</sub>) = <var>p</var> −
-          <var>μ</var>, and <var>Σ</var><sup>−1</sup> with 4 and 1 on its diagonal (and zeros
-          elsewhere), the form <var>d</var><sup>T</sup> <var>Σ</var><sup>−1</sup> <var>d</var> is
-          4<var>d</var><sub>1</sub>² + <var>d</var><sub>2</sub>². Setting it equal to 1 draws an
-          ellipse that reaches ½ along the first axis and 1 along the second. A quadratic form is
-          what turns a point's offset from the center into one number for how far out it is,
-          measured in the splat's own widths. In three dimensions, the same idea draws an ellipsoid
-          [<a href="#ref-5">5</a>].
+          The <span class="term" data-g="g-inverse">inverse</span> <var>Σ</var><sup>−1</sup> is the
+          matrix that undoes <var>Σ</var>. And a <b>quadratic form</b> is an expression where every
+          term has two factors of the input, like <var>a</var><var>d</var><sub>1</sub>² + 2<var
+            >b</var
+          ><var>d</var><sub>1</sub><var>d</var><sub>2</sub> + <var>c</var><var>d</var><sub>2</sub>².
+          In two dimensions, with <var>d</var> = (<var>d</var><sub>1</sub>, <var>d</var
+          ><sub>2</sub>) = <var>p</var> − <var>μ</var>, and <var>Σ</var><sup>−1</sup> with 4 and 1
+          on its diagonal (and zeros elsewhere), the form <var>d</var><sup>T</sup> <var>Σ</var
+          ><sup>−1</sup> <var>d</var> is 4<var>d</var><sub>1</sub>² + <var>d</var><sub>2</sub>².
+          Setting it equal to 1 draws an ellipse that reaches ½ along the first axis and 1 along the
+          second. A quadratic form is what turns a point's offset from the center into one number
+          for how far out it is, measured in the splat's own widths. In three dimensions, the same
+          idea draws an ellipsoid [<a href="#ref-5">5</a>].
         </p>
       </details>
       <div class="approx">
@@ -1021,8 +1022,9 @@
       </h3>
       <p>
         Not every 3-by-3 matrix is a valid covariance. It has to be symmetric, and it has to be
-        positive definite (the bell must fall off in every direction). Instead of picking its nine
-        numbers directly, a splat builds it from its three sizes and its rotation:
+        <span class="term" data-g="g-posdef">positive definite</span> (the bell must fall off in
+        every direction). Instead of picking its nine numbers directly, a splat builds it from its
+        three sizes and its rotation:
       </p>
       <p class="math">
         <var>Σ</var> = <var>R</var> <var>S</var> <var>S</var><sup>T</sup> <var>R</var><sup>T</sup>,
@@ -1224,9 +1226,12 @@
       </p>
       <p>
         keeping only its top-left 2-by-2 block. That 2-by-2 matrix is a flat bell on the screen: an
-        ellipse. Its eigenvectors are the directions of the ellipse's axes, and the square roots of
-        its eigenvalues are how far it spreads along them. This trick comes from EWA splatting
-        (Zwicker, Pfister, van Baar, and Gross, 2001) [<a href="#ref-2">2</a>].
+        ellipse. Its <span class="term" data-g="g-eigen">eigenvectors</span> are the directions of
+        the ellipse's axes, and the square roots of its eigenvalues are how far it spreads along
+        them. This trick comes from EWA splatting (Zwicker, Pfister, van Baar, and Gross, 2001) [<a
+          href="#ref-2"
+          >2</a
+        >].
       </p>
       <p>
         That is the first-order footprint, and a real renderer draws a little more than it. To keep
@@ -1237,10 +1242,12 @@
         entries, and it keeps the smaller eigenvalue at least 0.1. It also skips splats that come
         out under about 2 pixels on the screen (the cull settings in
         <code>src/sharpness.js</code> explain how). A separate, optional setting, the engine's
-        anti-aliasing (off unless a labs switch turns it on), does something else: it lowers each
-        splat's opacity to make up for the energy that blur spread out, using the ratio of the
-        determinants before and after. So the demo below shows Σ′ itself, the unfiltered geometry;
-        the pixels on your screen have that extra blur on top, whichever way the option is set.
+        <span class="term" data-g="g-antialias">anti-aliasing</span> (off unless a labs switch turns
+        it on), does something else: it lowers each splat's opacity to make up for the energy that
+        blur spread out, using the ratio of the
+        <span class="term" data-g="g-determinant">determinants</span> before and after. So the demo
+        below shows Σ′ itself, the unfiltered geometry; the pixels on your screen have that extra
+        blur on top, whichever way the option is set.
       </p>
       <section class="demo-live" data-demo="projection" id="demo-projection">
         <h4>Try it: one ellipsoid, and a camera you can move</h4>
@@ -2244,7 +2251,8 @@
           two flags move, moving the part table out of the shader's small set of uniform values and
           into a texture, and checking real phones. That is a change to the engine, not to a recipe.
           The kit has other ways to get many moving pieces: up to 48 tokens (game pieces moved and
-          turned by their own offsets) and up to 96 levers in 6 groups (the piano keys).
+          turned by their own offsets) and up to 96
+          <span class="term" data-g="g-lever">levers</span> in 6 groups (the piano keys).
         </p>
         <p class="where">
           Where it lives: <code>part</code> in <code>src/kit.js</code>; the part number in the
@@ -2566,12 +2574,12 @@ export const RECIPES = {
       <p>
         The toy lays out its splats on a grid of two numbers, <var>u</var> and <var>v</var>, each
         running over a range you choose. Think of them as the coordinates of a flat sheet of points,
-        laid out before the equations bend it into shape. They are the parameters of a parametric
-        surface [<a href="#ref-9">9</a>], not a substitution: nothing is replaced by <var>u</var> or
-        <var>v</var>; each splat simply has its own pair. Your equations turn each splat's
-        (<var>u</var>, <var>v</var>) into a place in space, (<var>x</var>, <var>y</var>,
-        <var>z</var>). If <var>u</var> goes around a circle and <var>v</var> around a smaller
-        circle, the grid wraps into a torus:
+        laid out before the equations bend it into shape. They are the parameters of a
+        <span class="term" data-g="g-paramsurf">parametric surface</span> [<a href="#ref-9">9</a>],
+        not a substitution: nothing is replaced by <var>u</var> or <var>v</var>; each splat simply
+        has its own pair. Your equations turn each splat's (<var>u</var>, <var>v</var>) into a place
+        in space, (<var>x</var>, <var>y</var>, <var>z</var>). If <var>u</var> goes around a circle
+        and <var>v</var> around a smaller circle, the grid wraps into a torus:
       </p>
       <pre><code>x = (2 + cos v)·cos u
 y = sin v
@@ -6277,11 +6285,11 @@ export const RECIPES = {
         and a spine to turn about: <code>k.spine({ at, axis, dir })</code> gives the spine's place,
         its direction, and the direction from it along the pages when they lie flat. Each frame,
         <code>drive</code> sets <code>out.leaves[slot] = { angle, curl }</code>: the
-        <code>angle</code> in radians (0 lying flat, π turned all the way over) and the
-        <code>curl</code>, how much the page bends along a circular arc (a negative number lets the
-        free edge lag behind, like paper in air). Every splat of the page turns with the curve at
-        its place, so it stays a solid sheet at every angle, which a page bent with soft regions
-        would not.
+        <code>angle</code> in <span class="term" data-g="g-radian">radians</span> (0 lying flat, π
+        turned all the way over) and the <code>curl</code>, how much the page bends along a circular
+        arc (a negative number lets the free edge lag behind, like paper in air). Every splat of the
+        page turns with the curve at its place, so it stays a solid sheet at every angle, which a
+        page bent with soft regions would not.
       </p>
       <figure>
         <div class="shots one">
@@ -6589,8 +6597,10 @@ export const RECIPES = {
         velocities and gravity, then moves them to where they would be if nothing overlapped and
         every joint held, then works out velocities from how far they moved. The world is built on
         the first pick-up, so opening a toy costs nothing. It steps 1/60 of a second at a time
-        whatever the frame rate, in 8 smaller substeps for a whole toy and 10 for a toy with pieces,
-        and it falls asleep once everything has been slower than a small speed for half a second.
+        whatever the frame rate, in 8 smaller
+        <span class="term" data-g="g-substep">substeps</span> for a whole toy and 10 for a toy with
+        pieces, and it falls asleep once everything has been slower than a small speed for half a
+        second.
       </p>
       <p>
         Most toys play as one rigid body: their pose moves the toy's whole entity, so the splats are
@@ -7286,9 +7296,10 @@ export const RECIPES = {
 
       <h3 id="volumes-and-point-clouds">Volumes and point clouds</h3>
       <p>
-        <b>What it is.</b> A CT scan or an MRI is not a surface but a block of numbers, one per
-        little cube (a <i>voxel</i>), measuring how dense the material is there. A lidar scan is a
-        cloud of points with places and sometimes colors. Both can be splats. The
+        <b>What it is.</b> A <span class="term" data-g="g-ctmri">CT</span> scan or an
+        <span class="term" data-g="g-ctmri">MRI</span> is not a surface but a block of numbers, one
+        per little cube (a <i>voxel</i>), measuring how dense the material is there. A lidar scan is
+        a cloud of points with places and sometimes colors. Both can be splats. The
         <b>Volume viewer</b> opens a medical or microscope scan and shows it as a block of splats
         you can cut through. The <b>Point clouds</b> toy opens a lidar scan or any list of points.
         Both are on the Studio shelf, behind the labs switch, and nothing is uploaded.
@@ -8973,10 +8984,10 @@ export const RECIPES = {
       <h3 id="studio-sound-and-photos">Studio: sound and photos</h3>
       <p>
         The Studio shelf turns other things into splats on your device. The song landscape makes a
-        spectrogram of a song you open into a 3D field, and the Chladni plate shows sand finding a
-        plate's still lines. Photo to 3D runs a depth model on your device, works out how far each
-        part of a photo is, and rebuilds the photo as splats at their depths. The Studio toys are
-        behind the labs switch.
+        <span class="term" data-g="g-spectrogram">spectrogram</span> of a song you open into a 3D
+        field, and the Chladni plate shows sand finding a plate's still lines. Photo to 3D runs a
+        depth model on your device, works out how far each part of a photo is, and rebuilds the
+        photo as splats at their depths. The Studio toys are behind the labs switch.
       </p>
 
       <figure class="item-pic">
@@ -10007,6 +10018,32 @@ export const RECIPES = {
           4<var>d</var><sub>1</sub>² + <var>d</var><sub>2</sub>², and setting it to 1 draws an
           ellipse. The exponent of a Gaussian holds one [<a href="#ref-5">5</a>].
         </dd>
+        <dt id="g-inverse">Matrix inverse</dt>
+        <dd>
+          The matrix that undoes another one: multiplying a matrix by its inverse gives the identity
+          matrix (1s on the diagonal, 0s everywhere else). A Gaussian bell uses the inverse
+          <var>Σ</var><sup>−1</sup> of its covariance. Only a matrix whose determinant is not 0 has
+          one.
+        </dd>
+        <dt id="g-determinant">Determinant</dt>
+        <dd>
+          One number that sums up a square matrix. For a 2-by-2 covariance with entries
+          <var>a</var>, <var>b</var>, <var>b</var>, <var>c</var> it is <var>a</var><var>c</var> −
+          <var>b</var><sup>2</sup>, which is also the product of its two eigenvalues. A determinant
+          of 0 means the matrix is flat in one direction and has no inverse.
+        </dd>
+        <dt id="g-eigen">Eigenvalue, eigenvector</dt>
+        <dd>
+          An eigenvector of a matrix is a direction the matrix only stretches, never turns; its
+          eigenvalue says by how much. For a covariance, the eigenvectors are the axes of the bell's
+          ellipse, and the eigenvalues are the squares of its widths along them.
+        </dd>
+        <dt id="g-posdef">Positive definite</dt>
+        <dd>
+          A symmetric matrix whose eigenvalues are all above 0 (for a 2-by-2 matrix:
+          <var>a</var> above 0 and the determinant above 0). A covariance has to be positive
+          definite, so that the bell falls off in every direction instead of growing in one.
+        </dd>
         <dt id="g-tilt">Tilt, rotation</dt>
         <dd>
           Tilt is the off-diagonal terms of <var>Σ</var>: zero when a splat's axes line up with
@@ -10017,6 +10054,13 @@ export const RECIPES = {
         <dd>
           Different widths along the axes, or equal widths in every direction. A plain kit splat is
           isotropic; the flat discs that cover a surface are anisotropic.
+        </dd>
+        <dt id="g-radian">Radian</dt>
+        <dd>
+          A way to measure an angle by the length of arc it cuts off on a circle of radius 1. A full
+          turn is 2<var>π</var> (about 6.28) radians, a half turn is <var>π</var>, and a quarter
+          turn is <var>π</var>/2. The equation language's <code>sin</code> and <code>cos</code>, and
+          the angles in a recipe, use radians, not degrees.
         </dd>
         <dt id="g-quaternion">Quaternion <var>q</var></dt>
         <dd>
@@ -10044,6 +10088,12 @@ export const RECIPES = {
         <dd>
           Laying colors over one another in order, each weighted by its opacity and by how much of
           the pixel is still uncovered.
+        </dd>
+        <dt id="g-antialias">Anti-aliasing</dt>
+        <dd>
+          Softening the jagged stair-steps on an edge by blending the pixels it only partly covers.
+          Splashery's own option (off unless a labs switch turns it on) lowers each splat's opacity
+          to make up for the energy that a little extra blur spreads out.
         </dd>
         <dt id="g-sh">Spherical harmonics</dt>
         <dd>
@@ -10081,6 +10131,13 @@ export const RECIPES = {
           to 2π in the equation language, and the toy's running time in a recipe's
           <code>drive</code>. A morph is a splat sliding from its own place to a target place.
         </dd>
+        <dt id="g-paramsurf">Parametric surface</dt>
+        <dd>
+          A surface drawn by giving <var>x</var>, <var>y</var>, and <var>z</var> each as a formula
+          of two numbers, <var>u</var> and <var>v</var>. Each splat gets its own pair (<var>u</var>,
+          <var>v</var>), and the equations carry it to a place in space. A sphere, a torus, and a
+          Möbius strip are all parametric surfaces.
+        </dd>
         <dt id="g-kernel">Kernel</dt>
         <dd>
           The rule for how a splat's weight falls off across its patch. The site normally draws a
@@ -10092,6 +10149,11 @@ export const RECIPES = {
           a sail. Every splat carries the number of its part; number 0 is the body, so a toy has up
           to 15 more (Chapter 2). A <b>token</b> is one of up to 48 separate pieces, such as a game
           piece, that a recipe moves by its own offset.
+        </dd>
+        <dt id="g-lever">Lever</dt>
+        <dd>
+          A piece that a recipe can move or turn by its own offset, such as a piano key. A kit toy
+          can have up to 96 levers in 6 groups, besides its parts and tokens.
         </dd>
         <dt id="g-drive">Drive</dt>
         <dd>
@@ -10160,6 +10222,12 @@ export const RECIPES = {
           own engine uses an extended form of it [<a href="#ref-11">11</a>,
           <a href="#ref-12">12</a>].
         </dd>
+        <dt id="g-substep">Substep</dt>
+        <dd>
+          One of the smaller steps a physics engine takes inside a single time step, to be more
+          accurate. Hands-on steps 1/60 of a second at a time, in 8 substeps for a whole toy and 10
+          for a toy with pieces; smaller steps keep fast pieces from sinking into one another.
+        </dd>
         <dt id="g-joint">Joint: hinge, slider, dial, socket, break</dt>
         <dd>
           The ways a part may move in hands-on play. A <b>hinge</b> swings about an axis, a
@@ -10190,6 +10258,12 @@ export const RECIPES = {
           apart. A <b>B-factor</b> says how much an atom's place is blurred in a crystal, by motion
           or disorder.
         </dd>
+        <dt id="g-ctmri">CT, MRI</dt>
+        <dd>
+          Two kinds of medical scan that measure the inside of a body slice by slice: CT (computed
+          tomography) uses X-rays, and MRI (magnetic resonance imaging) uses magnetic fields and
+          radio waves. Each slice is a grid of numbers, and a stack of slices is a volume of voxels.
+        </dd>
         <dt id="g-voxel">Voxel</dt>
         <dd>
           A volume pixel: one little cube of a 3D scan, with one number for how dense the material
@@ -10200,6 +10274,12 @@ export const RECIPES = {
           A <b>window</b> picks the range of values that show, from a lower to an upper level, and
           the rest is hidden or faded. In a CT scan the values are in <b>Hounsfield units</b>, on
           which water is 0 and air is about −1000.
+        </dd>
+        <dt id="g-spectrogram">Spectrogram</dt>
+        <dd>
+          A picture of a sound over time: time runs along one side, pitch along the other, and
+          brightness shows how loud each pitch is at that moment. The Song landscape toy turns the
+          spectrogram of a song into a 3D field.
         </dd>
         <dt id="g-pointcloud">Point cloud, lidar, LAS and LAZ</dt>
         <dd>
