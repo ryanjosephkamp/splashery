@@ -8481,11 +8481,27 @@ subject to the following conditions:
               tests. Its complete notices remain with the extracted test runtime in the ignored
               cache.
             </li>
+            <li>
+              FFmpeg / ffprobe 7.1.5-0+deb13u1 (this Debian build reports GPL-2.0-or-later),
+              <a href="https://ffmpeg.org/legal.html" target="_blank" rel="noopener"
+                >https://ffmpeg.org/legal.html</a
+              >: the workspace's installed encoder makes the paired H.264 review clips using
+              libx264. Its actual license was also read from the Debian package's copyright file and
+              <code>ffmpeg -L</code>. This test build is separate from the 9.0.2 build used for the
+              earlier PDF audit.
+            </li>
+            <li>
+              Pillow 12.3.0 (MIT-CMU),
+              <a
+                href="https://pillow.readthedocs.io/en/stable/about.html"
+                target="_blank"
+                rel="noopener"
+                >https://pillow.readthedocs.io/en/stable/about.html</a
+              >: the existing workspace library makes the public CC0 GIF fixtures. No Pillow runtime
+              is copied into the review media.
+            </li>
           </ul>
-          <p>
-            The already listed Pillow and FFmpeg tools make the public CC0 GIF fixtures and paired
-            review clips.
-          </p>
+          <p>These tool versions are retained with the public review evidence.</p>
         </div>
       </section>
       <p class="note">
