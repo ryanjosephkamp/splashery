@@ -123,9 +123,9 @@ OR OTHER DEALINGS IN THE SOFTWARE.
   `88efe9aaf32279b0b9bcb781ea0deb4d60c49dff` (September 23, 2026; package version 0.1.0). Files in
   `vendor/splatjs/src/`: the 20 modules that `session.js` and its two workers reach (structure from
   motion, the WebGPU trainer, frame decoding and the PLY writer), unchanged except for the local
-  Session option below; the list and what was left out are in `vendor/splatjs/VERSION.md`. The
-  library's own video reader (`src/io/video.js`, which loads Mediabunny, MPL-2.0) is not vendored:
-  Splashery picks the frames itself.
+  changes below; the list and what was left out are in `vendor/splatjs/VERSION.md`. The library's
+  own video reader (`src/io/video.js`, which loads Mediabunny, MPL-2.0) is not vendored: Splashery
+  picks the frames itself.
 - Loaded only when someone opens a video in the Video to 3D toy (a dynamic import in
   `src/video3d/run.js`); never on the shelf, in another toy or in an embed. Labs only.
 - License: MIT (Copyright (c) 2026 Stratum1 GmbH; checked on the live repository page on September
@@ -136,6 +136,34 @@ OR OTHER DEALINGS IN THE SOFTWARE.
   can refine a short run explicitly. Omitted or null values retain the original 1,500-step
   threshold; `src/video3d/run.js` does not pass this option, so browser training keeps the upstream
   schedule. The vendor edit is isolated in commit `ffcc71cc`. The MIT notice is retained.
+- Local change by Codex for task 55 (October 13, 2026): `src/gs/trainer.js` binds the existing
+  camera-gradient buffer at binding 8 in the optional D-SSIM backward pass. Its shader requires that
+  buffer even when camera optimization is off; the missing binding invalidated every command buffer
+  while the iteration counter continued advancing. The offline tool requests the nine storage
+  bindings this pass needs and rejects GPU validation errors. The browser toy still uses the
+  original MSE training default. The MIT notice is retained.
+
+## Codex CPU Gaussian fitter (task 55, build only)
+
+- Source: `tools/cdx-v3d-cpu-train.cpp` and `tools/cdx-v3d-cpu-bake.mjs`, made by Ryan with Codex
+  (GPT-6), offered under this repository's MIT license. The C++ fitter is compiled with the system
+  C++ and OpenMP toolchain and runs only at build time; it is never imported by the page. It fits
+  existing capture-derived Gaussians with sorted alpha compositing, a photometric loss, perspective
+  covariance derivatives, Adam updates, splitting, and opacity pruning. Quaternion optimization is
+  optional; the final task 55 finishing passes enable it. Optional alternating black and white
+  training backgrounds fit opaque photographic surfaces and prevent a light viewer background from
+  washing out a model fitted against black alone. Its finite-difference check covers every optimized
+  parameter. Source images, trained models, and derived tiers retain each capture's recorded
+  license.
+- `tools/cdx-v3d-clarity*.mjs` freeze the evaluation frames and score renders with PSNR,
+  Gaussian-window luminance SSIM, and Laplacian variance. They use the already listed PNG.js and
+  Playwright build dependencies. No new browser dependency is shipped.
+- The cloud camera solve uses the Python bindings in pycolmap 4.2.1, under COLMAP's
+  [BSD-3-Clause license](https://github.com/colmap/colmap/blob/4.2.1/COPYING.txt), and NumPy 2.5.4,
+  under its [BSD-3-Clause license](https://github.com/numpy/numpy/blob/v2.5.4/LICENSE.txt) and the
+  component notices retained in the installed wheel. License texts were checked October 13, 2026.
+  These packages are temporary offline build tools, never browser dependencies. The Forest path's
+  native-resolution solve ran in this container; the separate Mac/Metal workflow remains available.
 
 ## omggif 1.0.10 (lane Pictures)
 
