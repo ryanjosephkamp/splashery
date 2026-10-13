@@ -268,25 +268,13 @@
     }
   },
   "protectedFiles": {
-    "pullRequests": [
-      560,
-      562,
-      566,
-      570,
-      576
-    ],
+    "pullRequests": [560, 562, 566, 570, 576],
     "protectedFileCount": 392,
     "changedFileCount": 201,
     "intersection": [],
     "finalRefresh": {
       "checkedAt": "2026-10-13T18:59:03.032Z",
-      "pullRequests": [
-        560,
-        562,
-        566,
-        570,
-        576
-      ],
+      "pullRequests": [560, 562, 566, 570, 576],
       "protected": 428,
       "newProtected": [
         "tests/cdx-mp2-decode.spec.mjs",

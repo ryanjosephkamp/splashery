@@ -5,6 +5,10 @@ Codex built these changes and this audit on `codex/load-time`.
 - Frozen main: `49c809b4ee798f9011ad3f223ecb2e6021caec65`.
 - Measured runtime source: `2c229dbd95774b00c2ee7f6e182d4a4c3371dea0`; later commits add audit
   evidence and tests and integrate newer main.
+- Published equivalent runtime: `b9c081a67a9cc8c12ea49956183e11811202d8f4`, with identical tree
+  `843478b9bfcf82189f2460c7704c38bda6d715ac`. GitHub rejected the original unpublished commit
+  emails; only author/committer email metadata was rewritten. Raw method receipts retain their
+  original measured IDs and add the published equivalents.
 - Coverage: 319 public and 143 labs toys, at both task 06 settings.
 - Five recipes transfer only the exact scan records their low or mid budget uses; their original
   population count and rendered buffers are preserved.
@@ -1207,17 +1211,17 @@ Reproduction: serve archives of the recorded frozen main on port 4174 and measur
 with `python3 -m http.server PORT --bind 127.0.0.1`. Run
 `node tools/load-time-audit.mjs --phase=before` and then
 `node tools/load-time-audit.mjs --phase=after --base=http://127.0.0.1:4173`, adding
-`--frozen-main=49c809b4 --candidate-source=2c229dbd --out=NEW_DIR` to both commands, with
-`SPLASHERY_CHROMIUM`, `DISPLAY`, `SPLASHERY_GL=llvmpipe`, and `LP_NUM_THREADS=2`. Use a new output
-directory for fresh measurements; each run resumes completed version-2 cells. The explicit commit
-options keep method receipts accurate when the collector repository has advanced beyond the served
-archives. `--only=ID,ID`, `--device=phone`, `--samples=N`, and `--out=DIR` support focused reruns.
-`node tools/load-time-paired.mjs --only=ID,ID --samples=5` accepts the same commit options and
-alternates before/after phase order while adding one sample per pass. Recovery runs used
-`nice -n 10` and `--navigation-timeout=180000 --readiness-timeout=300000`; focused recovery
-additionally used `--cell-timeout=180000`. Run `tools/load-time-visuals.mjs` for stills,
-`tools/load-time-prefixes.mjs` and `tools/load-time-smoothing.mjs` to regenerate exact opening
-assets, and `tools/load-time-report.mjs` for this report.
+`--frozen-main=49c809b4 --candidate-source=b9c081a67a9cc8c12ea49956183e11811202d8f4 --out=NEW_DIR`
+to both commands, with `SPLASHERY_CHROMIUM`, `DISPLAY`, `SPLASHERY_GL=llvmpipe`, and
+`LP_NUM_THREADS=2`. Use a new output directory for fresh measurements; each run resumes completed
+version-2 cells. The explicit commit options keep method receipts accurate when the collector
+repository has advanced beyond the served archives. `--only=ID,ID`, `--device=phone`, `--samples=N`,
+and `--out=DIR` support focused reruns. `node tools/load-time-paired.mjs --only=ID,ID --samples=5`
+accepts the same commit options and alternates before/after phase order while adding one sample per
+pass. Recovery runs used `nice -n 10` and `--navigation-timeout=180000 --readiness-timeout=300000`;
+focused recovery additionally used `--cell-timeout=180000`. Run `tools/load-time-visuals.mjs` for
+stills, `tools/load-time-prefixes.mjs` and `tools/load-time-smoothing.mjs` to regenerate exact
+opening assets, and `tools/load-time-report.mjs` for this report.
 
 ## Verification and remaining work
 
