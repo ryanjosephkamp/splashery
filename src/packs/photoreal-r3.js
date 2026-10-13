@@ -53,11 +53,22 @@ async function loadScan(id, ctx) {
     typeof DecompressionStream === "function";
   const cached = SCANS.get(id);
   if (cached && cached.capacity >= (opening ? Math.floor(90000 * 0.86) : cached.n)) return cached;
-  ({ addScan, decodeSplats } = await import("./real-objects.js"));
+  // The scan transfer and its deferred helpers are independent. Start both
+  // together instead of putting the whole transfer behind module loading.
+  const helpers = import("./real-objects.js");
   const url = new URL(
     `../../assets/toys/${id}/${id}${opening ? "-opening.splats.gz" : ".splats"}`,
     import.meta.url,
   );
+  const [module, bytes] = await Promise.all([helpers, readScanBytes(url, opening)]);
+  ({ addScan, decodeSplats } = module);
+  const loaded = decodeSplats(bytes),
+    latest = SCANS.get(id);
+  if (!latest || loaded.capacity > latest.capacity) SCANS.set(id, loaded);
+  return SCANS.get(id);
+}
+
+async function readScanBytes(url, opening) {
   let bytes;
   if (url.protocol === "file:") {
     const fs = await import("node:fs/promises");
@@ -78,10 +89,7 @@ async function loadScan(id, ctx) {
       bytes = new Uint8Array(await new Response(stream).arrayBuffer());
     }
   }
-  const loaded = decodeSplats(bytes),
-    latest = SCANS.get(id);
-  if (!latest || loaded.capacity > latest.capacity) SCANS.set(id, loaded);
-  return SCANS.get(id);
+  return bytes;
 }
 
 const VMM = "Virtual Museums of Małopolska";
