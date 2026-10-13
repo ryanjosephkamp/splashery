@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-13T19:00:39.970Z",
+  "generatedAt": "2026-10-13T19:16:23.120Z",
   "runtimeSource": "2c229dbd95774b00c2ee7f6e182d4a4c3371dea0",
   "frozenMain": "49c809b4ee798f9011ad3f223ecb2e6021caec65",
   "environment": {
@@ -269,7 +269,7 @@
   "protectedFiles": {
     "pullRequests": [560, 562, 566, 570, 576],
     "protectedFileCount": 392,
-    "changedFileCount": 200,
+    "changedFileCount": 201,
     "intersection": [],
     "finalRefresh": {
       "checkedAt": "2026-10-13T18:59:03.032Z",
@@ -315,6 +315,19 @@
       ],
       "changed": 200,
       "intersection": []
+    },
+    "postMergeScope": {
+      "base": "c66a49e963f1d9f9adf79949d51db1ec9cf71d74",
+      "protected": 428,
+      "changed": 201,
+      "intersection": [],
+      "modifiedRuntimeFilesUnchangedSinceMeasurement": true,
+      "runtimePaths": [
+        "src/exports.js",
+        "src/scan-format.js",
+        "src/packs/photoreal-r3.js",
+        "src/packs/real-objects.js"
+      ]
     }
   },
   "independentReview": {
@@ -349,9 +362,23 @@
   },
   "browserAndMockScope": "Request/detail/native-fallback/tap/export/image checks ran in Chromium. The already HTTP-decoded gzip check fulfills a request with the real decompressed file. Decoder, buffer equality, and delayed filesystem-read checks run in Node; they do not substitute for the browser image comparisons.",
   "checks": {
-    "prettier": "pending",
-    "americanEnglish": "pending",
-    "diffWhitespace": "pending"
+    "prettier": {
+      "command": "npx prettier --check .",
+      "processPriority": 15,
+      "exitCode": 0,
+      "output": "Checking formatting...\nAll matched files use Prettier code style!",
+      "note": "The final updated verification receipt is also formatted and checked separately."
+    },
+    "americanEnglish": {
+      "command": "node tools/us-english.mjs --diff",
+      "exitCode": 0,
+      "output": "No British spellings found.",
+      "earlierNote": "The first attempt exceeded the protected checker's 64 MiB diff buffer. Four raw request matrices now have scoped -diff attributes; their JSON data and formatting checks are retained. JSON is outside this checker's public-text scope."
+    },
+    "diffWhitespace": {
+      "command": "git diff --check; git diff --cached --check",
+      "exitCode": 0
+    }
   },
   "beforeMatrix": {
     "cells": 924,
@@ -971,5 +998,29 @@
       "firstFrameMs": 4906.20000000298
     },
     "scope": "Actual collector and browser on frozen main; checks forced watchdog termination and successful resume, not timing comparability with the llvmpipe matrix."
+  },
+  "integratedMain": "c66a49e963f1d9f9adf79949d51db1ec9cf71d74",
+  "integrationSuite": {
+    "source": "9769ce31",
+    "integratedMain": "c66a49e963f1d9f9adf79949d51db1ec9cf71d74",
+    "command": "DISPLAY=:91 LP_NUM_THREADS=2 SPLASHERY_GL=llvmpipe SPLASHERY_CHROMIUM=/usr/bin/chromium nice -n 10 npx playwright test tests/unit.spec.mjs tests/load-time.spec.mjs tests/load-time-catalog.spec.mjs tests/load-time-exports.spec.mjs tests/load-time-format.spec.mjs tests/load-time-metrics.spec.mjs tests/load-time-means.spec.mjs tests/load-time-smoothing.spec.mjs tests/load-time-store.spec.mjs --workers=1 --reporter=line,json",
+    "stats": {
+      "startTime": "2026-10-13T19:05:15.715Z",
+      "duration": 223445.402,
+      "expected": 37,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "note": "37 additional checks after integrating main; the four modified runtime modules are unchanged from measured source 2c229dbd. The full 160-test required suite was not repeated after this merge."
+  },
+  "collectorSourceMetadataProbe": {
+    "command": "SPLASHERY_CHROMIUM=/usr/bin/chromium nice -n 10 node tools/load-time-audit.mjs --phase=before --base=http://127.0.0.1:4174 --only=cactus --device=phone --samples=1 --frozen-main=49c809b4 --candidate-source=2c229dbd --out=NEW_DIR --cell-timeout=180000",
+    "exitCode": 0,
+    "frozenMain": "49c809b4ee798f9011ad3f223ecb2e6021caec65",
+    "candidateSource": "2c229dbd95774b00c2ee7f6e182d4a4c3371dea0",
+    "status": "ok",
+    "consoleErrors": 0,
+    "scope": "Actual frozen-main browser opening verifies explicit source references after the collector repository advanced. Headless SwiftShader probe is separate from all measured llvmpipe timing cells."
   }
 }

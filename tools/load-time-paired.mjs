@@ -31,6 +31,8 @@ for (let sample = 0; sample < samples; sample++) {
             `--navigation-timeout=${navigationTimeout}`,
             `--readiness-timeout=${readinessTimeout}`,
             `--cell-timeout=${cellTimeout}`,
+            `--frozen-main=${option("frozen-main", "origin/main")}`,
+            `--candidate-source=${option("candidate-source", "HEAD")}`,
             ...(device ? [`--device=${device}`] : []),
           ],
           { stdio: "inherit" },

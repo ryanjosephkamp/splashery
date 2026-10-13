@@ -1174,6 +1174,12 @@ and [timing screening](load-time-2026-10/screening.json). The
 [after method](load-time-2026-10/after-method.json) record browser flags, settings, and source
 commits. Focused reruns retain their own before/after rows under `load-time-2026-10/paired/`.
 
+The four large request matrices retain their full JSON contents and formatting checks.
+`.gitattributes` disables their line diffs so Git and the required American English checker do not
+collect millions of irrelevant JSON lines. The first English-check attempt exceeded that checker's
+64 MiB diff buffer; its source is protected and was not edited. JSON is outside that checker's
+public-text scope.
+
 [Task 06's opening method](perf-2026-10.md) is retained: phone 390×844, device scale 3,
 touch/mobile, weak/low; desktop 1440×900, device scale 1, high. WebGL2, adaptation off, sound off,
 no reduced motion, seed 424242, preset camera, default options, still-toy turntable choice,
@@ -1197,15 +1203,19 @@ heap census were not repeated. A single cold run per cell is a screening measure
 shader caches, and OS caches can move the first-frame result. Timing increases need paired reruns
 before declaring a regression or claiming the no-slower target.
 
-Reproduction: serve frozen main on port 4174 and the candidate on 4173 with
-`python3 -m http.server PORT --bind 127.0.0.1`. Run `node tools/load-time-audit.mjs --phase=before`
-and then `node tools/load-time-audit.mjs --phase=after --base=http://127.0.0.1:4173`, with
-`SPLASHERY_CHROMIUM`, `DISPLAY`, `SPLASHERY_GL=llvmpipe`, and `LP_NUM_THREADS=2`. Each run resumes
-completed version-2 cells. `--only=ID,ID`, `--device=phone`, `--samples=N`, and `--out=DIR` support
-focused reruns. `node tools/load-time-paired.mjs --only=ID,ID --samples=5` alternates before/after
-phase order while adding one sample per pass. Recovery runs used `nice -n 10` and
-`--navigation-timeout=180000 --readiness-timeout=300000`; focused recovery additionally used
-`--cell-timeout=180000`. Run `tools/load-time-visuals.mjs` for stills,
+Reproduction: serve archives of the recorded frozen main on port 4174 and measured candidate on 4173
+with `python3 -m http.server PORT --bind 127.0.0.1`. Run
+`node tools/load-time-audit.mjs --phase=before` and then
+`node tools/load-time-audit.mjs --phase=after --base=http://127.0.0.1:4173`, adding
+`--frozen-main=49c809b4 --candidate-source=2c229dbd --out=NEW_DIR` to both commands, with
+`SPLASHERY_CHROMIUM`, `DISPLAY`, `SPLASHERY_GL=llvmpipe`, and `LP_NUM_THREADS=2`. Use a new output
+directory for fresh measurements; each run resumes completed version-2 cells. The explicit commit
+options keep method receipts accurate when the collector repository has advanced beyond the served
+archives. `--only=ID,ID`, `--device=phone`, `--samples=N`, and `--out=DIR` support focused reruns.
+`node tools/load-time-paired.mjs --only=ID,ID --samples=5` accepts the same commit options and
+alternates before/after phase order while adding one sample per pass. Recovery runs used
+`nice -n 10` and `--navigation-timeout=180000 --readiness-timeout=300000`; focused recovery
+additionally used `--cell-timeout=180000`. Run `tools/load-time-visuals.mjs` for stills,
 `tools/load-time-prefixes.mjs` and `tools/load-time-smoothing.mjs` to regenerate exact opening
 assets, and `tools/load-time-report.mjs` for this report.
 
@@ -1224,14 +1234,16 @@ recorded in the verification receipt. The final protected-file refresh covers 42
 intersection with this PR's changes.
 
 Test and formatting receipts are recorded in
-[verification.json](load-time-2026-10/verification.json). The final required suite passed all 160
-tests without skips or retries: smoke, taps, kit, unit, the Real objects spec, and the new load-time
-specs. Three additional audit-store recovery tests passed separately. An actual browser probe forced
-the collector's watchdog to exit with status 2, then successfully resumed the same output with a
-normal timeout. The embed test observed 9.1 MiB, below its 30 MiB limit. All 15 touched-pack recipes
-passed their Node checks. Photoreal r3 has no dedicated existing pack spec; its browser
-deferred-load/tap test and all eight recipes' Node pack checks cover that pack. Lossy samples, all
-raw request observations, and the timing screening flags are retained for review.
+[verification.json](load-time-2026-10/verification.json). On the measured runtime, the required
+suite passed all 160 tests without skips or retries: smoke, taps, kit, unit, the Real objects spec,
+and the new load-time specs. Three additional audit-store recovery tests passed separately. After
+integrating main, all 37 unit and load-time checks passed; the full required suite was not repeated
+after that merge. An actual browser probe forced the collector's watchdog to exit with status 2,
+then successfully resumed the same output with a normal timeout. The embed test observed 9.1 MiB,
+below its 30 MiB limit. All 15 touched-pack recipes passed their Node checks. Photoreal r3 has no
+dedicated existing pack spec; its browser deferred-load/tap test and all eight recipes' Node pack
+checks cover that pack. Lossy samples, all raw request observations, and the timing screening flags
+are retained for review.
 
 An earlier broad suite had one strawberry return-to-rest image-threshold failure; isolated checks on
 frozen main and the candidate, and the final broad suite, passed. During the candidate matrix the

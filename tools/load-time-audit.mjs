@@ -71,8 +71,12 @@ fs.writeFileSync(
       args,
       base,
       definitions,
-      frozenMain: execFileSync("git", ["rev-parse", "origin/main"], { encoding: "utf8" }).trim(),
-      candidateSource: execFileSync("git", ["rev-parse", "HEAD"], { encoding: "utf8" }).trim(),
+      frozenMain: execFileSync("git", ["rev-parse", option("frozen-main", "origin/main")], {
+        encoding: "utf8",
+      }).trim(),
+      candidateSource: execFileSync("git", ["rev-parse", option("candidate-source", "HEAD")], {
+        encoding: "utf8",
+      }).trim(),
       host: {
         platform: os.platform(),
         architecture: os.arch(),
