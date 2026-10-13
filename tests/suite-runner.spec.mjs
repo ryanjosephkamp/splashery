@@ -2,7 +2,8 @@ import { test, expect } from "@playwright/test";
 import fs from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
-import { spawn } from "node:child_process";
+import { spawn, execFile } from "node:child_process";
+import { promisify } from "node:util";
 import { startServer, reportProblems } from "../tools/suite-runtime.mjs";
 
 async function processRunning(pid) {
@@ -181,4 +182,87 @@ test("a suite process error or a report with no executed tests cannot count as a
   expect(reportProblems({ ...passed, errors: [{ message: "Server failed to start" }] }, 0)).toContain("Server failed to start"); // prettier-ignore
   expect(reportProblems({ ...passed, stats: { expected: 0, unexpected: 0, skipped: 0, flaky: 0 } }, 0)).toContain("No tests executed"); // prettier-ignore
   expect(reportProblems(null, 0)).toContain("No JSON report");
+});
+
+function timingReceipt(status = "passed") {
+  return {
+    stats: { startTime: "2026-10-13T00:00:00.000Z", duration: 1000, expected: status === "passed" ? 1 : 0, unexpected: status === "failed" ? 1 : 0, skipped: status === "skipped" ? 1 : 0, flaky: 0 }, // prettier-ignore
+    suiteRun: { wall: 1, code: status === "failed" ? 1 : 0 },
+    errors: [],
+    suites: [{ title: "hl1.spec.mjs", specs: [{ title: "the same original sample", tests: [{ expectedStatus: "passed", projectName: "chromium", results: [{ status, duration: 950, retry: 0 }] }] }] }], // prettier-ignore
+  };
+}
+
+async function timingProfile(before, after, { afterJobs = 1 } = {}) {
+  const dir = await fs.mkdtemp(path.join(os.tmpdir(), "suite-profile-"));
+  try {
+    for (const name of ["original", "before", "after"]) await fs.mkdir(path.join(dir, name));
+    await fs.writeFile(path.join(dir, "original/hl1.spec.mjs"), "// Original file inventory.\n");
+    for (const [name, receipt] of [
+      ["before", before],
+      ["after", after],
+    ]) {
+      await fs.writeFile(path.join(dir, name, "hl1.json"), JSON.stringify(receipt));
+      await fs.writeFile(path.join(dir, name, "run.json"), JSON.stringify({ started: "2026-10-12T23:59:59.000Z", finished: "2026-10-13T00:00:02.000Z", elapsed: name === "before" ? 2 : 1, jobs: name === "before" ? 1 : afterJobs, files: ["hl1"], gl: "swiftshader", browser: "/same/chromium" })); // prettier-ignore
+    }
+    const { stdout } = await promisify(execFile)(process.execPath, [
+      new URL("../tools/suite-profile.mjs", import.meta.url).pathname,
+      `--original-specs-dir=${path.join(dir, "original")}`,
+      `--before-jobs1=${path.join(dir, "before")}`,
+      `--after-jobs${afterJobs}=${path.join(dir, "after")}`,
+    ]);
+    return stdout;
+  } finally {
+    await fs.rm(dir, { recursive: true, force: true });
+  }
+}
+
+test("a complete failing baseline can measure a passing repair without hiding the failure", async () => {
+  const profile = await timingProfile(timingReceipt("failed"), timingReceipt());
+  expect(profile).toContain("Before failures: 1; after failures: 0.");
+  expect(profile).toContain("Measured whole-run ratio: 2.000×");
+  expect(profile).toContain("includes the cost of baseline failures");
+  const parallel = await timingProfile(timingReceipt("failed"), timingReceipt(), { afterJobs: 2 });
+  expect(parallel).toContain("Before jobs=1 → after jobs=2: all 1 original files");
+  expect(parallel).toContain("Measured whole-run ratio: 2.000×");
+});
+
+test("incomplete, retried, failed, or newly skipped final runs cannot produce a suite speedup", async () => {
+  for (const kind of [
+    "interrupted",
+    "missing",
+    "retried",
+    "failed",
+    "skipped",
+    "changed sample",
+    "repeated",
+    "CPU load",
+  ]) {
+    const after = timingReceipt(kind === "failed" || kind === "skipped" ? kind : "passed");
+    const result = after.suites[0].specs[0].tests[0];
+    if (kind === "interrupted") {
+      result.results[0].status = "interrupted";
+      after.suiteRun.code = 143;
+    } else if (kind === "missing") result.results = [];
+    else if (kind === "retried")
+      result.results.unshift({ status: "failed", duration: 950, retry: 0 });
+    else if (kind === "changed sample") after.suites[0].specs[0].title = "a different sample";
+    else if (kind === "repeated") after.config = { projects: [{ repeatEach: 20 }] };
+    else if (kind === "CPU load")
+      result.annotations = [{ type: "cpu-throttle-requested", description: "2×" }];
+    const profile = await timingProfile(timingReceipt(), after);
+    expect(profile, kind).toContain("Jobs=1: no complete-coverage speedup claim.");
+    expect(profile, kind).not.toContain("Measured whole-run ratio:");
+  }
+  const before = timingReceipt("failed");
+  before.suiteRun.code = 143;
+  expect(await timingProfile(before, timingReceipt())).not.toContain("Measured whole-run ratio:");
+  const inconsistent = timingReceipt("failed");
+  inconsistent.suiteRun.code = 0;
+  expect(await timingProfile(inconsistent, timingReceipt())).not.toContain(
+    "Measured whole-run ratio:",
+  );
+  expect(await timingProfile(timingReceipt("skipped"), timingReceipt("skipped"))).toContain(
+    "Measured whole-run ratio:",
+  );
 });

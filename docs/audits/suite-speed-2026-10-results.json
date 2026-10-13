@@ -1274,6 +1274,204 @@
       }
     },
     {
+      "localReceipt": "profile-red.json",
+      "sha256": "27a8df23c91016d1e89c4324857ed976a5597042cf0d113ccca7bc659cde70d1",
+      "stats": {
+        "startTime": "2026-10-13T04:54:12.701Z",
+        "duration": 10353.881,
+        "expected": 1,
+        "skipped": 0,
+        "unexpected": 1,
+        "flaky": 0
+      },
+      "suiteRun": null,
+      "configuredWorkers": 1,
+      "repeatEach": 1,
+      "topLevelErrors": [],
+      "tests": {
+        "suite-runner.spec.mjs > a complete failing baseline can measure a passing repair without hiding the failure": {
+          "registered": 1,
+          "outcomes": {
+            "unexpected": 1
+          },
+          "annotations": [],
+          "statusSequence": ["failed"],
+          "durationMs": [974],
+          "startedAt": ["2026-10-13T04:54:14.329Z"],
+          "retrySequence": [0],
+          "errors": [
+            {
+              "message": "Error: expect(received).toContain(expected) // indexOf\n\nExpected substring: \"Before failures: 1; after failures: 0.\"\nReceived string:    \"# Suite timing profile\u00b7\nCurrent spec files: 257. Original inventory: 1 files from `/tmp/suite-profile-mCmcGF/original`.\u00b7\nWaits are numeric-literal waitForTimeout call sites in the current source. Literal milliseconds are summed once per call site, ignoring loop counts, branches, helper reuse, and dynamic arguments; they are not runtime estimates. Other columns count member calls named goto, chooseToy, and screenshot, plus calls whose names contain clip/record or exportGif/exportWebM/exportVideo. Comments and quoted examples are excluded.\u00b7\nTiming cells are measured wall / summed test-result durations / residual seconds. Residual is wall minus test durations: an estimate of process, startup, hook, and teardown time outside reported test durations, not a direct measurement of any one phase. It may be negative with overlapping tests. Wall prefers suiteRun.wall; stats.duration is used when process wall was not recorded. \u26a0 means incomplete, failed, retried, or nonzero process exit; such files are excluded from speedup claims.\u00b7\n| File | Literal waits | Literal ms | goto | chooseToy | Screenshots | Clip/record calls | Before jobs=1 (w/t/r) | Before jobs=2 (w/t/r) | After jobs=1 (w/t/r) | After jobs=2 (w/t/r) |\n| --- | ---: | ---: | ---: | ---: | ---: | ---: | --- | --- | --- | --- |\n| abb (added) | 2 | 2200 | 1 | 1 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| ai (added) | 1 | 1500 | 1 | 1 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| ai-engine (added) | 0 | 0 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| an (added) | 1 | 800 | 2 | 2 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| an-engine (added) | 0 | 0 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| arc (added) | 0 | 0 | 2 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| arc-engine (added) | 3 | 900 | 1 | 2 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| arc2 (added) | 0 | 0 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| arc2-engine (added) | 0 | 0 | 1 | 2 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| arc3 (added) | 0 | 0 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| asc (added) | 4 | 5900 | 1 | 0 | 2 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| asc-core (added) | 0 | 0 | 1 | 0 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| asc-engine (added) | 0 | 0 | 1 | 0 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| asc-repeat (added) | 2 | 600 | 1 | 0 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| asc-unit (added) | 0 | 0 | 1 | 0 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| asc2 (added) | 0 | 0 | 3 | 0 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| bk (added) | 3 | 640 | 1 | 7 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| bk5 (added) | 0 | 0 | 3 | 3 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| bk5-engine (added) | 0 | 0 | 1 | 4 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| bkd (added) | 2 | 1100 | 1 | 1 | 4 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| bkd-format (added) | 0 | 0 | 0 | 0 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| bld (added) | 0 | 0 | 0 | 0 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| cdx-depth (added) | 0 | 0 | 5 | 0 | 0 | 1 | unmeasured | unmeasured | unmeasured | unmeasured |\n| cdx-depth-ui (added) | 0 | 0 | 1 | 1 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| cdx-gallery (added) | 0 | 0 | 1 | 0 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| cdx-mir (added) | 0 | 0 | 3 | 0 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| chem (added) | 0 | 0 | 0 | 0 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| chr (added) | 0 | 0 | 1 | 0 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| chs (added) | 2 | 4000 | 1 | 1 | 2 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| chs-engine (added) | 0 | 0 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| cmp2-engine (added) | 0 | 0 | 1 | 0 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| cmp2-enigma (added) | 0 | 0 | 0 | 0 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| cmp2-shots (added) | 1 | 1500 | 1 | 1 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| cmp2-sort (added) | 0 | 0 | 0 | 0 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| dcl (added) | 1 | 2500 | 2 | 3 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| dsm-samples (added) | 0 | 0 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| e4f (added) | 0 | 0 | 0 | 0 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| e5 (added) | 1 | 1500 | 1 | 1 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| e6a (added) | 1 | 1500 | 1 | 1 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| e6b (added) | 0 | 0 | 0 | 0 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| evidence-computing (added) | 0 | 0 | 1 | 0 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| f (added) | 10 | 7800 | 1 | 2 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| fb (added) | 1 | 2000 | 1 | 1 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| fid (added) | 0 | 0 | 1 | 0 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| fix3 (added) | 1 | 1500 | 1 | 1 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| fl (added) | 2 | 2000 | 3 | 8 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| fl7 (added) | 2 | 2300 | 3 | 5 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| fx10 (added) | 0 | 0 | 0 | 0 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| fx4 (added) | 1 | 1500 | 2 | 2 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| fx4-engine (added) | 1 | 1500 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| fx5 (added) | 1 | 1500 | 1 | 1 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| fx6 (added) | 1 | 800 | 4 | 2 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| fx6-2 (added) | 8 | 10500 | 1 | 1 | 3 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| fx6-engine (added) | 3 | 1500 | 4 | 4 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| fx7 (added) | 8 | 7050 | 1 | 1 | 8 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| fx8 (added) | 1 | 1500 | 2 | 0 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| fx9 (added) | 2 | 3300 | 2 | 2 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| fx9-engine (added) | 1 | 800 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| g (added) | 1 | 1500 | 3 | 1 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| geo (added) | 1 | 1500 | 2 | 2 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| hea (added) | 1 | 300 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| hea-engine (added) | 1 | 300 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| heb (added) | 1 | 800 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| heb-engine (added) | 0 | 0 | 0 | 0 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| hec (added) | 1 | 400 | 1 | 1 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| hec-engine (added) | 0 | 0 | 0 | 0 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| help (added) | 4 | 6400 | 2 | 1 | 3 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| hh1-balls (added) | 0 | 0 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| hh1-clothing (added) | 0 | 0 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| hh1-engine (added) | 0 | 0 | 2 | 3 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| hh1-shapes (added) | 0 | 0 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| hh1-toys (added) | 0 | 0 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| hh2-engine (added) | 1 | 800 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| hh2-food (added) | 1 | 800 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| hh2-nature (added) | 1 | 800 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| hh3-crossbow (added) | 1 | 800 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| hh3-engine (added) | 3 | 1800 | 3 | 3 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| hh3-engine2 (added) | 1 | 800 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| hh3-holidays (added) | 1 | 800 | 2 | 2 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| hh3-level1 (added) | 0 | 0 | 2 | 2 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| hh3-level1-engine (added) | 1 | 600 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| hh3-medieval (added) | 1 | 800 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| hh3-music (added) | 1 | 800 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| hh3-open-me (added) | 1 | 800 | 2 | 2 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| hh3-pictures (added) | 2 | 2300 | 2 | 2 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| hh3-sort (added) | 2 | 1400 | 1 | 1 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| hh3-storybook (added) | 0 | 0 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| hh4-engine (added) | 0 | 0 | 4 | 4 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| hh4-landmarks (added) | 1 | 500 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| hh4-space (added) | 1 | 500 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| hh4-tiny (added) | 1 | 500 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| hh4-vehicles (added) | 1 | 500 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| hh4-weather (added) | 1 | 500 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| hh5-ai (added) | 2 | 1400 | 1 | 1 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| hh5-animals (added) | 2 | 1400 | 1 | 1 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| hh5-atoms (added) | 2 | 1400 | 1 | 1 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| hh5-body (added) | 2 | 1400 | 1 | 1 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| hh5-engine (added) | 0 | 0 | 0 | 0 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| hh5-gems (added) | 0 | 0 | 1 | 1 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| hh5-math (added) | 2 | 1400 | 1 | 1 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| hl1 | 0 | 0 | 1 | 1 | 0 | 0 | 1.000 / 0.950 / 0.050 \u26a0 | unmeasured | 1.000 / 0.950 / 0.050 | unmeasured |\n| hta (added) | 0 | 0 | 1 | 1 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| img (added) | 0 | 0 | 0 | 0 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| img-engine (added) | 2 | 1900 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| kit (added) | 0 | 0 | 0 | 0 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| klab (added) | 0 | 0 | 0 | 0 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| klab-engine (added) | 0 | 0 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| lab (added) | 0 | 0 | 2 | 2 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| lab-engine (added) | 0 | 0 | 3 | 4 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| lat (added) | 2 | 3000 | 1 | 1 | 2 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| live (added) | 5 | 15750 | 2 | 2 | 7 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| live-engine (added) | 1 | 600 | 1 | 4 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| live2 (added) | 6 | 5900 | 1 | 1 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| live2-engine (added) | 2 | 3000 | 2 | 2 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| live3 (added) | 7 | 8650 | 1 | 1 | 0 | 3 | unmeasured | unmeasured | unmeasured | unmeasured |\n| live3-engine (added) | 0 | 0 | 3 | 3 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| live4 (added) | 4 | 4250 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| live5 (added) | 4 | 2750 | 2 | 3 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| live6 (added) | 9 | 8650 | 1 | 1 | 0 | 1 | unmeasured | unmeasured | unmeasured | unmeasured |\n| ln (added) | 0 | 0 | 2 | 0 | 2 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| lv10 (added) | 4 | 6350 | 4 | 4 | 3 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| lv7 (added) | 15 | 22050 | 5 | 5 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| lv7-engine (added) | 0 | 0 | 0 | 0 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| lv7-long (added) | 4 | 6250 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| lv8 (added) | 0 | 0 | 1 | 1 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| lv8-dial (added) | 0 | 0 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| lv9 (added) | 11 | 5800 | 3 | 3 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| lv9-2 (added) | 4 | 900 | 2 | 2 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| man (added) | 3 | 4600 | 6 | 2 | 2 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| man2 (added) | 0 | 0 | 1 | 0 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| man3 (added) | 0 | 0 | 5 | 0 | 2 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| man3-2 (added) | 0 | 0 | 16 | 0 | 5 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| man4 (added) | 2 | 1500 | 16 | 0 | 6 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| man4-pages (added) | 1 | 300 | 13 | 0 | 4 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| man5 (added) | 0 | 0 | 6 | 0 | 2 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| man6 (added) | 0 | 0 | 7 | 0 | 6 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| man7a (added) | 3 | 3800 | 10 | 0 | 3 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| man7b (added) | 0 | 0 | 1 | 0 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| man9 (added) | 3 | 1700 | 14 | 0 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| math (added) | 1 | 1500 | 7 | 3 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| mca (added) | 1 | 1500 | 1 | 1 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| mol (added) | 0 | 0 | 2 | 1 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| mol-engine (added) | 0 | 0 | 2 | 2 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| mt2 (added) | 1 | 1500 | 1 | 1 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| opm (added) | 0 | 0 | 0 | 0 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| ops-media (added) | 0 | 0 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| ops-text (added) | 1 | 3000 | 1 | 4 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| opt (added) | 3 | 1300 | 3 | 2 | 4 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| p3d (added) | 0 | 0 | 2 | 2 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| pdf (added) | 6 | 7200 | 5 | 4 | 0 | 1 | unmeasured | unmeasured | unmeasured | unmeasured |\n| pdf-engine (added) | 0 | 0 | 1 | 0 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| pdp (added) | 1 | 700 | 2 | 2 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| pdp-engine (added) | 1 | 200 | 2 | 3 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| pg6 (added) | 0 | 0 | 3 | 5 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| pg6-engine (added) | 0 | 0 | 1 | 2 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| phf (added) | 2 | 1750 | 2 | 4 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| phf-engine (added) | 0 | 0 | 1 | 3 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| phf2 (added) | 1 | 1500 | 1 | 1 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| phy (added) | 1 | 1500 | 1 | 1 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| phy-engine (added) | 2 | 820 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| pic (added) | 1 | 500 | 9 | 3 | 2 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| pno (added) | 0 | 0 | 1 | 1 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| pno-engine (added) | 0 | 0 | 1 | 6 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| pose (added) | 1 | 600 | 3 | 1 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| pose-engine (added) | 0 | 0 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| pot (added) | 0 | 0 | 2 | 2 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| pot-engine (added) | 0 | 0 | 2 | 5 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| pr2 (added) | 0 | 0 | 0 | 0 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| psv (added) | 4 | 4600 | 1 | 2 | 3 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| psv2 (added) | 3 | 1400 | 1 | 3 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| psv3 (added) | 0 | 0 | 1 | 3 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| qr (added) | 2 | 800 | 3 | 2 | 3 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| qr3 (added) | 0 | 0 | 2 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| qr4-2 (added) | 0 | 0 | 3 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| qr4-2-engine (added) | 0 | 0 | 1 | 0 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| qr4-craft (added) | 0 | 0 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| qr4-flash (added) | 3 | 7500 | 2 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| qr4-scan (added) | 0 | 0 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| qr5 (added) | 4 | 10500 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| qrc-barcodes (added) | 1 | 500 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| qrc-build (added) | 1 | 500 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| qrc-picture (added) | 1 | 4500 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| qrl (added) | 0 | 0 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| qrs-heal (added) | 0 | 0 | 0 | 0 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| qrs-steps (added) | 0 | 0 | 0 | 0 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| qrs-study (added) | 0 | 0 | 0 | 0 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| qrs-toys (added) | 8 | 16300 | 1 | 1 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| rel (added) | 4 | 6150 | 1 | 1 | 3 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| rel-engine (added) | 0 | 0 | 0 | 0 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| ro (added) | 2 | 1100 | 1 | 1 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| sci (added) | 1 | 1500 | 2 | 4 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| sci-engine (added) | 0 | 0 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| sci3 (added) | 0 | 0 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| sci3-engine (added) | 0 | 0 | 1 | 2 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| scr (added) | 1 | 800 | 1 | 1 | 2 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| scr-engine (added) | 0 | 0 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| scr2 (added) | 2 | 1600 | 1 | 1 | 3 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| scr2-engine (added) | 0 | 0 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| sha (added) | 1 | 2000 | 1 | 1 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| sha-book (added) | 1 | 2000 | 1 | 1 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| shb (added) | 1 | 2500 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| shb-engine (added) | 0 | 0 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| shp (added) | 0 | 0 | 2 | 7 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| shv (added) | 2 | 1900 | 5 | 2 | 2 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| shw (added) | 1 | 600 | 5 | 0 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| site (added) | 4 | 8400 | 23 | 0 | 2 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| sky (added) | 3 | 4100 | 5 | 2 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| sky-engine (added) | 0 | 0 | 1 | 2 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| sll (added) | 6 | 5750 | 1 | 1 | 6 | 3 | unmeasured | unmeasured | unmeasured | unmeasured |\n| smd-compare (added) | 1 | 300 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| smd-models (added) | 0 | 0 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| smd-moving (added) | 0 | 0 | 2 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| smd-photo (added) | 0 | 0 | 0 | 0 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| smoke (added) | 44 | 55120 | 12 | 0 | 58 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| snda (added) | 2 | 2000 | 3 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| snda-engine (added) | 2 | 800 | 3 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| sndb (added) | 1 | 800 | 4 | 3 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| sndc (added) | 7 | 3600 | 1 | 2 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| sndc-engine (added) | 6 | 3700 | 2 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| sndd (added) | 0 | 0 | 0 | 0 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| sng (added) | 3 | 4200 | 2 | 2 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| sp2 (added) | 1 | 2000 | 2 | 2 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| sp3 (added) | 1 | 1500 | 1 | 1 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| sp4 (added) | 1 | 800 | 1 | 1 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| spg (added) | 0 | 0 | 12 | 0 | 7 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| st2 (added) | 5 | 1600 | 22 | 0 | 2 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| st3 (added) | 0 | 0 | 2 | 0 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| st4 (added) | 4 | 8100 | 30 | 0 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| st4-engine (added) | 0 | 0 | 2 | 0 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| st5 (added) | 0 | 0 | 2 | 0 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| stm (added) | 0 | 0 | 2 | 2 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| stm-engine (added) | 0 | 0 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| sts (added) | 5 | 5600 | 2 | 2 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| sts-engine (added) | 0 | 0 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| suite-readiness (added) | 0 | 0 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| suite-runner (added) | 0 | 0 | 0 | 0 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| taps (added) | 0 | 0 | 0 | 0 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| tp2 (added) | 2 | 3000 | 2 | 0 | 2 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| tp2-engine (added) | 4 | 4000 | 1 | 0 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| tpg (added) | 1 | 1500 | 8 | 0 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| tpg-engine (added) | 0 | 0 | 1 | 0 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| tw2-cells (added) | 1 | 1500 | 1 | 1 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| tw2-dna (added) | 0 | 0 | 0 | 0 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| ui2 (added) | 13 | 4366 | 2 | 1 | 11 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| ui3 (added) | 7 | 6800 | 1 | 1 | 3 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| ui4 (added) | 3 | 2600 | 1 | 1 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| ui4-engine (added) | 5 | 4700 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| ui5 (added) | 4 | 4700 | 1 | 1 | 4 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| ui5-engine (added) | 3 | 1600 | 1 | 1 | 7 | 2 | unmeasured | unmeasured | unmeasured | unmeasured |\n| unit (added) | 0 | 0 | 0 | 0 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| v3d (added) | 3 | 3100 | 2 | 3 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| vol (added) | 0 | 0 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| vw (added) | 1 | 300 | 1 | 9 | 2 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| vwr (added) | 5 | 6100 | 3 | 4 | 2 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| wd (added) | 0 | 0 | 4 | 0 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| wdh (added) | 1 | 500 | 1 | 0 | 2 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| wdr3 (added) | 2 | 1200 | 2 | 0 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\u00b7\nCurrent source totals: 418 literal waits, 456546 literal ms, 10 dynamic wait call sites.\u00b7\nAdded files excluded from comparisons: `abb`, `ai`, `ai-engine`, `an`, `an-engine`, `arc`, `arc-engine`, `arc2`, `arc2-engine`, `arc3`, `asc`, `asc-core`, `asc-engine`, `asc-repeat`, `asc-unit`, `asc2`, `bk`, `bk5`, `bk5-engine`, `bkd`, `bkd-format`, `bld`, `cdx-depth`, `cdx-depth-ui`, `cdx-gallery`, `cdx-mir`, `chem`, `chr`, `chs`, `chs-engine`, `cmp2-engine`, `cmp2-enigma`, `cmp2-shots`, `cmp2-sort`, `dcl`, `dsm-samples`, `e4f`, `e5`, `e6a`, `e6b`, `evidence-computing`, `f`, `fb`, `fid`, `fix3`, `fl`, `fl7`, `fx10`, `fx4`, `fx4-engine`, `fx5`, `fx6`, `fx6-2`, `fx6-engine`, `fx7`, `fx8`, `fx9`, `fx9-engine`, `g`, `geo`, `hea`, `hea-engine`, `heb`, `heb-engine`, `hec`, `hec-engine`, `help`, `hh1-balls`, `hh1-clothing`, `hh1-engine`, `hh1-shapes`, `hh1-toys`, `hh2-engine`, `hh2-food`, `hh2-nature`, `hh3-crossbow`, `hh3-engine`, `hh3-engine2`, `hh3-holidays`, `hh3-level1`, `hh3-level1-engine`, `hh3-medieval`, `hh3-music`, `hh3-open-me`, `hh3-pictures`, `hh3-sort`, `hh3-storybook`, `hh4-engine`, `hh4-landmarks`, `hh4-space`, `hh4-tiny`, `hh4-vehicles`, `hh4-weather`, `hh5-ai`, `hh5-animals`, `hh5-atoms`, `hh5-body`, `hh5-engine`, `hh5-gems`, `hh5-math`, `hta`, `img`, `img-engine`, `kit`, `klab`, `klab-engine`, `lab`, `lab-engine`, `lat`, `live`, `live-engine`, `live2`, `live2-engine`, `live3`, `live3-engine`, `live4`, `live5`, `live6`, `ln`, `lv10`, `lv7`, `lv7-engine`, `lv7-long`, `lv8`, `lv8-dial`, `lv9`, `lv9-2`, `man`, `man2`, `man3`, `man3-2`, `man4`, `man4-pages`, `man5`, `man6`, `man7a`, `man7b`, `man9`, `math`, `mca`, `mol`, `mol-engine`, `mt2`, `opm`, `ops-media`, `ops-text`, `opt`, `p3d`, `pdf`, `pdf-engine`, `pdp`, `pdp-engine`, `pg6`, `pg6-engine`, `phf`, `phf-engine`, `phf2`, `phy`, `phy-engine`, `pic`, `pno`, `pno-engine`, `pose`, `pose-engine`, `pot`, `pot-engine`, `pr2`, `psv`, `psv2`, `psv3`, `qr`, `qr3`, `qr4-2`, `qr4-2-engine`, `qr4-craft`, `qr4-flash`, `qr4-scan`, `qr5`, `qrc-barcodes`, `qrc-build`, `qrc-picture`, `qrl`, `qrs-heal`, `qrs-steps`, `qrs-study`, `qrs-toys`, `rel`, `rel-engine`, `ro`, `sci`, `sci-engine`, `sci3`, `sci3-engine`, `scr`, `scr-engine`, `scr2`, `scr2-engine`, `sha`, `sha-book`, `shb`, `shb-engine`, `shp`, `shv`, `shw`, `site`, `sky`, `sky-engine`, `sll`, `smd-compare`, `smd-models`, `smd-moving`, `smd-photo`, `smoke`, `snda`, `snda-engine`, `sndb`, `sndc`, `sndc-engine`, `sndd`, `sng`, `sp2`, `sp3`, `sp4`, `spg`, `st2`, `st3`, `st4`, `st4-engine`, `st5`, `stm`, `stm-engine`, `sts`, `sts-engine`, `suite-readiness`, `suite-runner`, `taps`, `tp2`, `tp2-engine`, `tpg`, `tpg-engine`, `tw2-cells`, `tw2-dna`, `ui2`, `ui3`, `ui4`, `ui4-engine`, `ui5`, `ui5-engine`, `unit`, `v3d`, `vol`, `vw`, `vwr`, `wd`, `wdh`, `wdr3`. Removed original files: none.\u00b7\n## Measurement coverage\u00b7\n### before-jobs1\u00b7\nDirectory: `/tmp/suite-profile-mCmcGF/before`. 1/1 original files reported; 0 comparable.\u00b7\nMeasured-file sums: 1.000 wall seconds, 0.950 test seconds, 0.050 residual seconds, 1 registered tests, 1 attempts, 1 failures, 0 skipped.\u00b7\nWhole-run elapsed: 2.000 seconds. Recorded server/display startup: unmeasured seconds. Whole-run wall cannot be reconstructed by adding concurrent file walls.\u00b7\nMissing: none.\u00b7\nExcluded or incomplete: `hl1`. Reports outside original inventory: none.\u00b7\n- `hl1`: 1 failures; exit 1.\u00b7\n### before-jobs2\u00b7\nDirectory: not supplied. 0/1 original files reported; 0 comparable.\u00b7\nMeasured-file sums: unmeasured wall seconds, unmeasured test seconds, unmeasured residual seconds, 0 registered tests, 0 attempts, 0 failures, 0 skipped.\u00b7\nWhole-run elapsed: unmeasured seconds. Recorded server/display startup: unmeasured seconds. Whole-run wall cannot be reconstructed by adding concurrent file walls.\u00b7\nMissing: `hl1`.\u00b7\nExcluded or incomplete: none. Reports outside original inventory: none.\u00b7\n### after-jobs1\u00b7\nDirectory: `/tmp/suite-profile-mCmcGF/after`. 1/1 original files reported; 1 comparable.\u00b7\nMeasured-file sums: 1.000 wall seconds, 0.950 test seconds, 0.050 residual seconds, 1 registered tests, 1 attempts, 0 failures, 0 skipped.\u00b7\nWhole-run elapsed: 1.000 seconds. Recorded server/display startup: unmeasured seconds. Whole-run wall cannot be reconstructed by adding concurrent file walls.\u00b7\nMissing: none.\u00b7\nExcluded or incomplete: none. Reports outside original inventory: none.\u00b7\n### after-jobs2\u00b7\nDirectory: not supplied. 0/1 original files reported; 0 comparable.\u00b7\nMeasured-file sums: unmeasured wall seconds, unmeasured test seconds, unmeasured residual seconds, 0 registered tests, 0 attempts, 0 failures, 0 skipped.\u00b7\nWhole-run elapsed: unmeasured seconds. Recorded server/display startup: unmeasured seconds. Whole-run wall cannot be reconstructed by adding concurrent file walls.\u00b7\nMissing: `hl1`.\u00b7\nExcluded or incomplete: none. Reports outside original inventory: none.\u00b7\n## Comparable original coverage\u00b7\nJobs=1: no complete-coverage speedup claim. Missing pairs: 0; excluded pairs: 1; changed test/project/outcome coverage: 1; removed original files: 0.\u00b7\nCoverage mismatches: `hl1`.\u00b7\nJobs=2: no complete-coverage speedup claim. Missing pairs: 1; excluded pairs: 0; changed test/project/outcome coverage: 0; removed original files: 0.\u00b7\n\"\n\n  218 | test(\"a complete failing baseline can measure a passing repair without hiding the failure\", async () => {\n  219 |   const profile = await timingProfile(timingReceipt(\"failed\"), timingReceipt());\n> 220 |   expect(profile).toContain(\"Before failures: 1; after failures: 0.\");\n      |                   ^\n  221 |   expect(profile).toContain(\"Measured whole-run ratio: 2.000\u00d7\");\n  222 |   expect(profile).toContain(\"includes the cost of baseline failures\");\n  223 | });\n    at /workspace/splashery/tests/suite-runner.spec.mjs:220:19",
+              "count": 1
+            }
+          ]
+        },
+        "suite-runner.spec.mjs > incomplete, retried, failed, or newly skipped final runs cannot produce a suite speedup": {
+          "registered": 1,
+          "outcomes": {
+            "expected": 1
+          },
+          "annotations": [],
+          "statusSequence": ["passed"],
+          "durationMs": [6606],
+          "startedAt": ["2026-10-13T04:54:16.385Z"],
+          "retrySequence": [0]
+        }
+      }
+    },
+    {
+      "localReceipt": "profile-load-red.json",
+      "sha256": "66cdfa054c31c3160f493d59d48ae94f3a68c404e25dd673b2e9bc331e4fe369",
+      "stats": {
+        "startTime": "2026-10-13T04:56:45.768Z",
+        "duration": 12002.739000000001,
+        "expected": 1,
+        "skipped": 0,
+        "unexpected": 1,
+        "flaky": 0
+      },
+      "suiteRun": null,
+      "configuredWorkers": 1,
+      "repeatEach": 1,
+      "topLevelErrors": [],
+      "tests": {
+        "suite-runner.spec.mjs > a complete failing baseline can measure a passing repair without hiding the failure": {
+          "registered": 1,
+          "outcomes": {
+            "expected": 1
+          },
+          "annotations": [],
+          "statusSequence": ["passed"],
+          "durationMs": [2021],
+          "startedAt": ["2026-10-13T04:56:47.268Z"],
+          "retrySequence": [0]
+        },
+        "suite-runner.spec.mjs > incomplete, retried, failed, or newly skipped final runs cannot produce a suite speedup": {
+          "registered": 1,
+          "outcomes": {
+            "unexpected": 1
+          },
+          "annotations": [],
+          "statusSequence": ["failed"],
+          "durationMs": [8316],
+          "startedAt": ["2026-10-13T04:56:49.334Z"],
+          "retrySequence": [0],
+          "errors": [
+            {
+              "message": "Error: repeated\n\nexpect(received).toContain(expected) // indexOf\n\nExpected substring: \"Jobs=1: no complete-coverage speedup claim.\"\nReceived string:    \"# Suite timing profile\u00b7\nCurrent spec files: 257. Original inventory: 1 files from `/tmp/suite-profile-ojX9pX/original`.\u00b7\nWaits are numeric-literal waitForTimeout call sites in the current source. Literal milliseconds are summed once per call site, ignoring loop counts, branches, helper reuse, and dynamic arguments; they are not runtime estimates. Other columns count member calls named goto, chooseToy, and screenshot, plus calls whose names contain clip/record or exportGif/exportWebM/exportVideo. Comments and quoted examples are excluded.\u00b7\nTiming cells are measured wall / summed test-result durations / residual seconds. Residual is wall minus test durations: an estimate of process, startup, hook, and teardown time outside reported test durations, not a direct measurement of any one phase. It may be negative with overlapping tests. Wall prefers suiteRun.wall; stats.duration is used when process wall was not recorded. \u26a0 marks failed or otherwise ineligible files. Complete, single-attempt baseline test failures can be compared with passing repairs; their cost is explicitly included and reported. Partial, interrupted, or retried baselines and failing final runs are excluded from speedup claims.\u00b7\n| File | Literal waits | Literal ms | goto | chooseToy | Screenshots | Clip/record calls | Before jobs=1 (w/t/r) | Before jobs=2 (w/t/r) | After jobs=1 (w/t/r) | After jobs=2 (w/t/r) |\n| --- | ---: | ---: | ---: | ---: | ---: | ---: | --- | --- | --- | --- |\n| abb (added) | 2 | 2200 | 1 | 1 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| ai (added) | 1 | 1500 | 1 | 1 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| ai-engine (added) | 0 | 0 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| an (added) | 1 | 800 | 2 | 2 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| an-engine (added) | 0 | 0 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| arc (added) | 0 | 0 | 2 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| arc-engine (added) | 3 | 900 | 1 | 2 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| arc2 (added) | 0 | 0 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| arc2-engine (added) | 0 | 0 | 1 | 2 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| arc3 (added) | 0 | 0 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| asc (added) | 4 | 5900 | 1 | 0 | 2 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| asc-core (added) | 0 | 0 | 1 | 0 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| asc-engine (added) | 0 | 0 | 1 | 0 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| asc-repeat (added) | 2 | 600 | 1 | 0 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| asc-unit (added) | 0 | 0 | 1 | 0 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| asc2 (added) | 0 | 0 | 3 | 0 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| bk (added) | 3 | 640 | 1 | 7 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| bk5 (added) | 0 | 0 | 3 | 3 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| bk5-engine (added) | 0 | 0 | 1 | 4 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| bkd (added) | 2 | 1100 | 1 | 1 | 4 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| bkd-format (added) | 0 | 0 | 0 | 0 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| bld (added) | 0 | 0 | 0 | 0 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| cdx-depth (added) | 0 | 0 | 5 | 0 | 0 | 1 | unmeasured | unmeasured | unmeasured | unmeasured |\n| cdx-depth-ui (added) | 0 | 0 | 1 | 1 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| cdx-gallery (added) | 0 | 0 | 1 | 0 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| cdx-mir (added) | 0 | 0 | 3 | 0 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| chem (added) | 0 | 0 | 0 | 0 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| chr (added) | 0 | 0 | 1 | 0 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| chs (added) | 2 | 4000 | 1 | 1 | 2 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| chs-engine (added) | 0 | 0 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| cmp2-engine (added) | 0 | 0 | 1 | 0 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| cmp2-enigma (added) | 0 | 0 | 0 | 0 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| cmp2-shots (added) | 1 | 1500 | 1 | 1 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| cmp2-sort (added) | 0 | 0 | 0 | 0 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| dcl (added) | 1 | 2500 | 2 | 3 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| dsm-samples (added) | 0 | 0 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| e4f (added) | 0 | 0 | 0 | 0 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| e5 (added) | 1 | 1500 | 1 | 1 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| e6a (added) | 1 | 1500 | 1 | 1 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| e6b (added) | 0 | 0 | 0 | 0 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| evidence-computing (added) | 0 | 0 | 1 | 0 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| f (added) | 10 | 7800 | 1 | 2 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| fb (added) | 1 | 2000 | 1 | 1 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| fid (added) | 0 | 0 | 1 | 0 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| fix3 (added) | 1 | 1500 | 1 | 1 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| fl (added) | 2 | 2000 | 3 | 8 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| fl7 (added) | 2 | 2300 | 3 | 5 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| fx10 (added) | 0 | 0 | 0 | 0 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| fx4 (added) | 1 | 1500 | 2 | 2 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| fx4-engine (added) | 1 | 1500 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| fx5 (added) | 1 | 1500 | 1 | 1 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| fx6 (added) | 1 | 800 | 4 | 2 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| fx6-2 (added) | 8 | 10500 | 1 | 1 | 3 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| fx6-engine (added) | 3 | 1500 | 4 | 4 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| fx7 (added) | 8 | 7050 | 1 | 1 | 8 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| fx8 (added) | 1 | 1500 | 2 | 0 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| fx9 (added) | 2 | 3300 | 2 | 2 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| fx9-engine (added) | 1 | 800 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| g (added) | 1 | 1500 | 3 | 1 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| geo (added) | 1 | 1500 | 2 | 2 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| hea (added) | 1 | 300 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| hea-engine (added) | 1 | 300 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| heb (added) | 1 | 800 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| heb-engine (added) | 0 | 0 | 0 | 0 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| hec (added) | 1 | 400 | 1 | 1 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| hec-engine (added) | 0 | 0 | 0 | 0 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| help (added) | 4 | 6400 | 2 | 1 | 3 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| hh1-balls (added) | 0 | 0 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| hh1-clothing (added) | 0 | 0 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| hh1-engine (added) | 0 | 0 | 2 | 3 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| hh1-shapes (added) | 0 | 0 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| hh1-toys (added) | 0 | 0 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| hh2-engine (added) | 1 | 800 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| hh2-food (added) | 1 | 800 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| hh2-nature (added) | 1 | 800 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| hh3-crossbow (added) | 1 | 800 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| hh3-engine (added) | 3 | 1800 | 3 | 3 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| hh3-engine2 (added) | 1 | 800 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| hh3-holidays (added) | 1 | 800 | 2 | 2 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| hh3-level1 (added) | 0 | 0 | 2 | 2 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| hh3-level1-engine (added) | 1 | 600 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| hh3-medieval (added) | 1 | 800 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| hh3-music (added) | 1 | 800 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| hh3-open-me (added) | 1 | 800 | 2 | 2 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| hh3-pictures (added) | 2 | 2300 | 2 | 2 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| hh3-sort (added) | 2 | 1400 | 1 | 1 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| hh3-storybook (added) | 0 | 0 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| hh4-engine (added) | 0 | 0 | 4 | 4 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| hh4-landmarks (added) | 1 | 500 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| hh4-space (added) | 1 | 500 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| hh4-tiny (added) | 1 | 500 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| hh4-vehicles (added) | 1 | 500 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| hh4-weather (added) | 1 | 500 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| hh5-ai (added) | 2 | 1400 | 1 | 1 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| hh5-animals (added) | 2 | 1400 | 1 | 1 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| hh5-atoms (added) | 2 | 1400 | 1 | 1 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| hh5-body (added) | 2 | 1400 | 1 | 1 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| hh5-engine (added) | 0 | 0 | 0 | 0 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| hh5-gems (added) | 0 | 0 | 1 | 1 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| hh5-math (added) | 2 | 1400 | 1 | 1 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| hl1 | 0 | 0 | 1 | 1 | 0 | 0 | 1.000 / 0.950 / 0.050 | unmeasured | 1.000 / 0.950 / 0.050 | unmeasured |\n| hta (added) | 0 | 0 | 1 | 1 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| img (added) | 0 | 0 | 0 | 0 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| img-engine (added) | 2 | 1900 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| kit (added) | 0 | 0 | 0 | 0 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| klab (added) | 0 | 0 | 0 | 0 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| klab-engine (added) | 0 | 0 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| lab (added) | 0 | 0 | 2 | 2 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| lab-engine (added) | 0 | 0 | 3 | 4 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| lat (added) | 2 | 3000 | 1 | 1 | 2 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| live (added) | 5 | 15750 | 2 | 2 | 7 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| live-engine (added) | 1 | 600 | 1 | 4 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| live2 (added) | 6 | 5900 | 1 | 1 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| live2-engine (added) | 2 | 3000 | 2 | 2 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| live3 (added) | 7 | 8650 | 1 | 1 | 0 | 3 | unmeasured | unmeasured | unmeasured | unmeasured |\n| live3-engine (added) | 0 | 0 | 3 | 3 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| live4 (added) | 4 | 4250 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| live5 (added) | 4 | 2750 | 2 | 3 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| live6 (added) | 9 | 8650 | 1 | 1 | 0 | 1 | unmeasured | unmeasured | unmeasured | unmeasured |\n| ln (added) | 0 | 0 | 2 | 0 | 2 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| lv10 (added) | 4 | 6350 | 4 | 4 | 3 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| lv7 (added) | 15 | 22050 | 5 | 5 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| lv7-engine (added) | 0 | 0 | 0 | 0 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| lv7-long (added) | 4 | 6250 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| lv8 (added) | 0 | 0 | 1 | 1 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| lv8-dial (added) | 0 | 0 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| lv9 (added) | 11 | 5800 | 3 | 3 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| lv9-2 (added) | 4 | 900 | 2 | 2 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| man (added) | 3 | 4600 | 6 | 2 | 2 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| man2 (added) | 0 | 0 | 1 | 0 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| man3 (added) | 0 | 0 | 5 | 0 | 2 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| man3-2 (added) | 0 | 0 | 16 | 0 | 5 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| man4 (added) | 2 | 1500 | 16 | 0 | 6 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| man4-pages (added) | 1 | 300 | 13 | 0 | 4 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| man5 (added) | 0 | 0 | 6 | 0 | 2 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| man6 (added) | 0 | 0 | 7 | 0 | 6 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| man7a (added) | 3 | 3800 | 10 | 0 | 3 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| man7b (added) | 0 | 0 | 1 | 0 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| man9 (added) | 3 | 1700 | 14 | 0 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| math (added) | 1 | 1500 | 7 | 3 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| mca (added) | 1 | 1500 | 1 | 1 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| mol (added) | 0 | 0 | 2 | 1 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| mol-engine (added) | 0 | 0 | 2 | 2 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| mt2 (added) | 1 | 1500 | 1 | 1 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| opm (added) | 0 | 0 | 0 | 0 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| ops-media (added) | 0 | 0 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| ops-text (added) | 1 | 3000 | 1 | 4 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| opt (added) | 3 | 1300 | 3 | 2 | 4 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| p3d (added) | 0 | 0 | 2 | 2 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| pdf (added) | 6 | 7200 | 5 | 4 | 0 | 1 | unmeasured | unmeasured | unmeasured | unmeasured |\n| pdf-engine (added) | 0 | 0 | 1 | 0 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| pdp (added) | 1 | 700 | 2 | 2 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| pdp-engine (added) | 1 | 200 | 2 | 3 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| pg6 (added) | 0 | 0 | 3 | 5 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| pg6-engine (added) | 0 | 0 | 1 | 2 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| phf (added) | 2 | 1750 | 2 | 4 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| phf-engine (added) | 0 | 0 | 1 | 3 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| phf2 (added) | 1 | 1500 | 1 | 1 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| phy (added) | 1 | 1500 | 1 | 1 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| phy-engine (added) | 2 | 820 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| pic (added) | 1 | 500 | 9 | 3 | 2 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| pno (added) | 0 | 0 | 1 | 1 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| pno-engine (added) | 0 | 0 | 1 | 6 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| pose (added) | 1 | 600 | 3 | 1 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| pose-engine (added) | 0 | 0 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| pot (added) | 0 | 0 | 2 | 2 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| pot-engine (added) | 0 | 0 | 2 | 5 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| pr2 (added) | 0 | 0 | 0 | 0 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| psv (added) | 4 | 4600 | 1 | 2 | 3 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| psv2 (added) | 3 | 1400 | 1 | 3 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| psv3 (added) | 0 | 0 | 1 | 3 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| qr (added) | 2 | 800 | 3 | 2 | 3 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| qr3 (added) | 0 | 0 | 2 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| qr4-2 (added) | 0 | 0 | 3 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| qr4-2-engine (added) | 0 | 0 | 1 | 0 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| qr4-craft (added) | 0 | 0 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| qr4-flash (added) | 3 | 7500 | 2 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| qr4-scan (added) | 0 | 0 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| qr5 (added) | 4 | 10500 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| qrc-barcodes (added) | 1 | 500 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| qrc-build (added) | 1 | 500 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| qrc-picture (added) | 1 | 4500 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| qrl (added) | 0 | 0 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| qrs-heal (added) | 0 | 0 | 0 | 0 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| qrs-steps (added) | 0 | 0 | 0 | 0 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| qrs-study (added) | 0 | 0 | 0 | 0 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| qrs-toys (added) | 8 | 16300 | 1 | 1 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| rel (added) | 4 | 6150 | 1 | 1 | 3 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| rel-engine (added) | 0 | 0 | 0 | 0 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| ro (added) | 2 | 1100 | 1 | 1 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| sci (added) | 1 | 1500 | 2 | 4 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| sci-engine (added) | 0 | 0 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| sci3 (added) | 0 | 0 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| sci3-engine (added) | 0 | 0 | 1 | 2 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| scr (added) | 1 | 800 | 1 | 1 | 2 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| scr-engine (added) | 0 | 0 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| scr2 (added) | 2 | 1600 | 1 | 1 | 3 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| scr2-engine (added) | 0 | 0 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| sha (added) | 1 | 2000 | 1 | 1 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| sha-book (added) | 1 | 2000 | 1 | 1 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| shb (added) | 1 | 2500 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| shb-engine (added) | 0 | 0 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| shp (added) | 0 | 0 | 2 | 7 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| shv (added) | 2 | 1900 | 5 | 2 | 2 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| shw (added) | 1 | 600 | 5 | 0 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| site (added) | 4 | 8400 | 23 | 0 | 2 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| sky (added) | 3 | 4100 | 5 | 2 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| sky-engine (added) | 0 | 0 | 1 | 2 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| sll (added) | 6 | 5750 | 1 | 1 | 6 | 3 | unmeasured | unmeasured | unmeasured | unmeasured |\n| smd-compare (added) | 1 | 300 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| smd-models (added) | 0 | 0 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| smd-moving (added) | 0 | 0 | 2 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| smd-photo (added) | 0 | 0 | 0 | 0 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| smoke (added) | 44 | 55120 | 12 | 0 | 58 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| snda (added) | 2 | 2000 | 3 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| snda-engine (added) | 2 | 800 | 3 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| sndb (added) | 1 | 800 | 4 | 3 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| sndc (added) | 7 | 3600 | 1 | 2 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| sndc-engine (added) | 6 | 3700 | 2 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| sndd (added) | 0 | 0 | 0 | 0 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| sng (added) | 3 | 4200 | 2 | 2 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| sp2 (added) | 1 | 2000 | 2 | 2 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| sp3 (added) | 1 | 1500 | 1 | 1 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| sp4 (added) | 1 | 800 | 1 | 1 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| spg (added) | 0 | 0 | 12 | 0 | 7 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| st2 (added) | 5 | 1600 | 22 | 0 | 2 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| st3 (added) | 0 | 0 | 2 | 0 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| st4 (added) | 4 | 8100 | 30 | 0 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| st4-engine (added) | 0 | 0 | 2 | 0 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| st5 (added) | 0 | 0 | 2 | 0 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| stm (added) | 0 | 0 | 2 | 2 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| stm-engine (added) | 0 | 0 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| sts (added) | 5 | 5600 | 2 | 2 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| sts-engine (added) | 0 | 0 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| suite-readiness (added) | 0 | 0 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| suite-runner (added) | 0 | 0 | 0 | 0 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| taps (added) | 0 | 0 | 0 | 0 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| tp2 (added) | 2 | 3000 | 2 | 0 | 2 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| tp2-engine (added) | 4 | 4000 | 1 | 0 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| tpg (added) | 1 | 1500 | 8 | 0 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| tpg-engine (added) | 0 | 0 | 1 | 0 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| tw2-cells (added) | 1 | 1500 | 1 | 1 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| tw2-dna (added) | 0 | 0 | 0 | 0 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| ui2 (added) | 13 | 4366 | 2 | 1 | 11 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| ui3 (added) | 7 | 6800 | 1 | 1 | 3 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| ui4 (added) | 3 | 2600 | 1 | 1 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| ui4-engine (added) | 5 | 4700 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| ui5 (added) | 4 | 4700 | 1 | 1 | 4 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| ui5-engine (added) | 3 | 1600 | 1 | 1 | 7 | 2 | unmeasured | unmeasured | unmeasured | unmeasured |\n| unit (added) | 0 | 0 | 0 | 0 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| v3d (added) | 3 | 3100 | 2 | 3 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| vol (added) | 0 | 0 | 1 | 1 | 0 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| vw (added) | 1 | 300 | 1 | 9 | 2 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| vwr (added) | 5 | 6100 | 3 | 4 | 2 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| wd (added) | 0 | 0 | 4 | 0 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| wdh (added) | 1 | 500 | 1 | 0 | 2 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\n| wdr3 (added) | 2 | 1200 | 2 | 0 | 1 | 0 | unmeasured | unmeasured | unmeasured | unmeasured |\u00b7\nCurrent source totals: 418 literal waits, 456546 literal ms, 10 dynamic wait call sites.\u00b7\nAdded files excluded from comparisons: `abb`, `ai`, `ai-engine`, `an`, `an-engine`, `arc`, `arc-engine`, `arc2`, `arc2-engine`, `arc3`, `asc`, `asc-core`, `asc-engine`, `asc-repeat`, `asc-unit`, `asc2`, `bk`, `bk5`, `bk5-engine`, `bkd`, `bkd-format`, `bld`, `cdx-depth`, `cdx-depth-ui`, `cdx-gallery`, `cdx-mir`, `chem`, `chr`, `chs`, `chs-engine`, `cmp2-engine`, `cmp2-enigma`, `cmp2-shots`, `cmp2-sort`, `dcl`, `dsm-samples`, `e4f`, `e5`, `e6a`, `e6b`, `evidence-computing`, `f`, `fb`, `fid`, `fix3`, `fl`, `fl7`, `fx10`, `fx4`, `fx4-engine`, `fx5`, `fx6`, `fx6-2`, `fx6-engine`, `fx7`, `fx8`, `fx9`, `fx9-engine`, `g`, `geo`, `hea`, `hea-engine`, `heb`, `heb-engine`, `hec`, `hec-engine`, `help`, `hh1-balls`, `hh1-clothing`, `hh1-engine`, `hh1-shapes`, `hh1-toys`, `hh2-engine`, `hh2-food`, `hh2-nature`, `hh3-crossbow`, `hh3-engine`, `hh3-engine2`, `hh3-holidays`, `hh3-level1`, `hh3-level1-engine`, `hh3-medieval`, `hh3-music`, `hh3-open-me`, `hh3-pictures`, `hh3-sort`, `hh3-storybook`, `hh4-engine`, `hh4-landmarks`, `hh4-space`, `hh4-tiny`, `hh4-vehicles`, `hh4-weather`, `hh5-ai`, `hh5-animals`, `hh5-atoms`, `hh5-body`, `hh5-engine`, `hh5-gems`, `hh5-math`, `hta`, `img`, `img-engine`, `kit`, `klab`, `klab-engine`, `lab`, `lab-engine`, `lat`, `live`, `live-engine`, `live2`, `live2-engine`, `live3`, `live3-engine`, `live4`, `live5`, `live6`, `ln`, `lv10`, `lv7`, `lv7-engine`, `lv7-long`, `lv8`, `lv8-dial`, `lv9`, `lv9-2`, `man`, `man2`, `man3`, `man3-2`, `man4`, `man4-pages`, `man5`, `man6`, `man7a`, `man7b`, `man9`, `math`, `mca`, `mol`, `mol-engine`, `mt2`, `opm`, `ops-media`, `ops-text`, `opt`, `p3d`, `pdf`, `pdf-engine`, `pdp`, `pdp-engine`, `pg6`, `pg6-engine`, `phf`, `phf-engine`, `phf2`, `phy`, `phy-engine`, `pic`, `pno`, `pno-engine`, `pose`, `pose-engine`, `pot`, `pot-engine`, `pr2`, `psv`, `psv2`, `psv3`, `qr`, `qr3`, `qr4-2`, `qr4-2-engine`, `qr4-craft`, `qr4-flash`, `qr4-scan`, `qr5`, `qrc-barcodes`, `qrc-build`, `qrc-picture`, `qrl`, `qrs-heal`, `qrs-steps`, `qrs-study`, `qrs-toys`, `rel`, `rel-engine`, `ro`, `sci`, `sci-engine`, `sci3`, `sci3-engine`, `scr`, `scr-engine`, `scr2`, `scr2-engine`, `sha`, `sha-book`, `shb`, `shb-engine`, `shp`, `shv`, `shw`, `site`, `sky`, `sky-engine`, `sll`, `smd-compare`, `smd-models`, `smd-moving`, `smd-photo`, `smoke`, `snda`, `snda-engine`, `sndb`, `sndc`, `sndc-engine`, `sndd`, `sng`, `sp2`, `sp3`, `sp4`, `spg`, `st2`, `st3`, `st4`, `st4-engine`, `st5`, `stm`, `stm-engine`, `sts`, `sts-engine`, `suite-readiness`, `suite-runner`, `taps`, `tp2`, `tp2-engine`, `tpg`, `tpg-engine`, `tw2-cells`, `tw2-dna`, `ui2`, `ui3`, `ui4`, `ui4-engine`, `ui5`, `ui5-engine`, `unit`, `v3d`, `vol`, `vw`, `vwr`, `wd`, `wdh`, `wdr3`. Removed original files: none.\u00b7\n## Measurement coverage\u00b7\n### before-jobs1\u00b7\nDirectory: `/tmp/suite-profile-ojX9pX/before`. 1/1 original files reported; 1 eligible for this mode.\u00b7\nMeasured-file sums: 1.000 wall seconds, 0.950 test seconds, 0.050 residual seconds, 1 registered tests, 1 attempts, 0 failures, 0 skipped.\u00b7\nWhole-run elapsed: 2.000 seconds. Recorded server/display startup: unmeasured seconds. Whole-run wall cannot be reconstructed by adding concurrent file walls.\u00b7\nMissing: none.\u00b7\nExcluded or incomplete: none. Reports outside original inventory: none.\u00b7\n### before-jobs2\u00b7\nDirectory: not supplied. 0/1 original files reported; 0 eligible for this mode.\u00b7\nMeasured-file sums: unmeasured wall seconds, unmeasured test seconds, unmeasured residual seconds, 0 registered tests, 0 attempts, 0 failures, 0 skipped.\u00b7\nWhole-run elapsed: unmeasured seconds. Recorded server/display startup: unmeasured seconds. Whole-run wall cannot be reconstructed by adding concurrent file walls.\u00b7\nMissing: `hl1`.\u00b7\nExcluded or incomplete: none. Reports outside original inventory: none.\u00b7\n### after-jobs1\u00b7\nDirectory: `/tmp/suite-profile-ojX9pX/after`. 1/1 original files reported; 1 eligible for this mode.\u00b7\nMeasured-file sums: 1.000 wall seconds, 0.950 test seconds, 0.050 residual seconds, 1 registered tests, 1 attempts, 0 failures, 0 skipped.\u00b7\nWhole-run elapsed: 1.000 seconds. Recorded server/display startup: unmeasured seconds. Whole-run wall cannot be reconstructed by adding concurrent file walls.\u00b7\nMissing: none.\u00b7\nExcluded or incomplete: none. Reports outside original inventory: none.\u00b7\n### after-jobs2\u00b7\nDirectory: not supplied. 0/1 original files reported; 0 eligible for this mode.\u00b7\nMeasured-file sums: unmeasured wall seconds, unmeasured test seconds, unmeasured residual seconds, 0 registered tests, 0 attempts, 0 failures, 0 skipped.\u00b7\nWhole-run elapsed: unmeasured seconds. Recorded server/display startup: unmeasured seconds. Whole-run wall cannot be reconstructed by adding concurrent file walls.\u00b7\nMissing: `hl1`.\u00b7\nExcluded or incomplete: none. Reports outside original inventory: none.\u00b7\n## Comparable original coverage\u00b7\nJobs=1: all 1 original files have matching test/project/skip coverage and passing final outcomes. Before failures: 0; after failures: 0. Summed file-wall ratio: 1.000\u00d7 (1.000 \u2192 1.000 seconds). This ratio measures per-file process cost, not concurrent suite elapsed time.\u00b7\nMeasured whole-run ratio: 2.000\u00d7 (2.000 \u2192 1.000 seconds).\u00b7\nJobs=2: no complete-coverage speedup claim. Missing pairs: 1; excluded pairs: 0; changed test/project/skip coverage: 0; removed original files: 0.\u00b7\nBefore jobs=1 \u2192 after jobs=2: no complete-coverage speedup claim. Missing pairs: 1; excluded pairs: 0; changed test/project/skip coverage: 0; removed original files: 0.\u00b7\n\"\n\n  242 |     else if (kind === \"CPU load\") result.annotations = [{ type: \"cpu-throttle-requested\", description: \"2\u00d7\" }];\n  243 |     const profile = await timingProfile(timingReceipt(), after);\n> 244 |     expect(profile, kind).toContain(\"Jobs=1: no complete-coverage speedup claim.\");\n      |                           ^\n  245 |     expect(profile, kind).not.toContain(\"Measured whole-run ratio:\");\n  246 |   }\n  247 |   const before = timingReceipt(\"failed\");\n    at /workspace/splashery/tests/suite-runner.spec.mjs:244:27",
+              "count": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "localReceipt": "runner-profile-final.json",
+      "sha256": "12106df97c36a2f50409d6c452d4e206fd8ad8801b1c9d3d4af0db1fac123455",
+      "stats": {
+        "startTime": "2026-10-13T04:57:49.250Z",
+        "duration": 22223.072,
+        "expected": 8,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "suiteRun": null,
+      "configuredWorkers": 1,
+      "repeatEach": 1,
+      "topLevelErrors": [],
+      "tests": {
+        "suite-runner.spec.mjs > canceling during server startup stops the starting process": {
+          "registered": 1,
+          "outcomes": {
+            "expected": 1
+          },
+          "annotations": [],
+          "statusSequence": ["passed"],
+          "durationMs": [2445],
+          "startedAt": ["2026-10-13T04:57:50.555Z"],
+          "retrySequence": [0]
+        },
+        "suite-runner.spec.mjs > canceling during display startup stops the starting process": {
+          "registered": 1,
+          "outcomes": {
+            "expected": 1
+          },
+          "annotations": [],
+          "statusSequence": ["passed"],
+          "durationMs": [2416],
+          "startedAt": ["2026-10-13T04:57:53.033Z"],
+          "retrySequence": [0]
+        },
+        "suite-runner.spec.mjs > canceling an active lane stops its process group without starting the next file (forced leader)": {
+          "registered": 1,
+          "outcomes": {
+            "expected": 1
+          },
+          "annotations": [],
+          "statusSequence": ["passed"],
+          "durationMs": [2434],
+          "startedAt": ["2026-10-13T04:57:55.464Z"],
+          "retrySequence": [0]
+        },
+        "suite-runner.spec.mjs > canceling an active lane stops its process group without starting the next file (graceful leader)": {
+          "registered": 1,
+          "outcomes": {
+            "expected": 1
+          },
+          "annotations": [],
+          "statusSequence": ["passed"],
+          "durationMs": [413],
+          "startedAt": ["2026-10-13T04:57:57.910Z"],
+          "retrySequence": [0]
+        },
+        "suite-runner.spec.mjs > concurrent suite servers reserve different ports and serve their own checkout": {
+          "registered": 1,
+          "outcomes": {
+            "expected": 1
+          },
+          "annotations": [],
+          "statusSequence": ["passed"],
+          "durationMs": [189],
+          "startedAt": ["2026-10-13T04:57:58.343Z"],
+          "retrySequence": [0]
+        },
+        "suite-runner.spec.mjs > a suite process error or a report with no executed tests cannot count as a pass": {
+          "registered": 1,
+          "outcomes": {
+            "expected": 1
+          },
+          "annotations": [],
+          "statusSequence": ["passed"],
+          "durationMs": [14],
+          "startedAt": ["2026-10-13T04:57:58.557Z"],
+          "retrySequence": [0]
+        },
+        "suite-runner.spec.mjs > a complete failing baseline can measure a passing repair without hiding the failure": {
+          "registered": 1,
+          "outcomes": {
+            "expected": 1
+          },
+          "annotations": [],
+          "statusSequence": ["passed"],
+          "durationMs": [1912],
+          "startedAt": ["2026-10-13T04:57:58.606Z"],
+          "retrySequence": [0]
+        },
+        "suite-runner.spec.mjs > incomplete, retried, failed, or newly skipped final runs cannot produce a suite speedup": {
+          "registered": 1,
+          "outcomes": {
+            "expected": 1
+          },
+          "annotations": [],
+          "statusSequence": ["passed"],
+          "durationMs": [10903],
+          "startedAt": ["2026-10-13T04:58:00.533Z"],
+          "retrySequence": [0]
+        }
+      }
+    },
+    {
       "localReceipt": "tpg-final/tpg.json",
       "sha256": "46068ff19b28de73ce5f88b950e5ccce34d06c038f2648197786234804bbc431",
       "stats": {
@@ -1986,6 +2184,92 @@
       }
     },
     {
+      "localReceipt": "helper-remaining-20/qrs-toys.json",
+      "sha256": "697df1dc35b1e33a9a941956b26ea96ddd9076507b89b6f7508e3f07caf4559e",
+      "stats": {
+        "startTime": "2026-10-13T04:22:51.442Z",
+        "duration": 1083567.63,
+        "expected": 20,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "suiteRun": {
+        "wall": 1087.406,
+        "code": 0,
+        "port": 41313,
+        "gl": "llvmpipe"
+      },
+      "configuredWorkers": 1,
+      "repeatEach": 20,
+      "topLevelErrors": [],
+      "tests": {
+        "qrs-toys.spec.mjs > healing: a code with a covered finder scans again": {
+          "registered": 20,
+          "outcomes": {
+            "expected": 20
+          },
+          "annotations": [
+            [
+              {
+                "description": "2\u00d7 for fixture-created pages",
+                "type": "cpu-throttle-requested"
+              }
+            ]
+          ],
+          "statusSequence": [
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed"
+          ],
+          "durationMs": [
+            101983, 99023, 92094, 67713, 42434, 40120, 45277, 43508, 38546, 41225, 40870, 42501,
+            41756, 41496, 38124, 41884, 41894, 39627, 42582, 40922
+          ],
+          "startedAt": [
+            "2026-10-13T04:22:55.557Z",
+            "2026-10-13T04:24:45.276Z",
+            "2026-10-13T04:26:29.063Z",
+            "2026-10-13T04:28:07.217Z",
+            "2026-10-13T04:29:16.741Z",
+            "2026-10-13T04:30:01.789Z",
+            "2026-10-13T04:30:44.839Z",
+            "2026-10-13T04:31:33.167Z",
+            "2026-10-13T04:32:18.128Z",
+            "2026-10-13T04:32:59.743Z",
+            "2026-10-13T04:33:43.433Z",
+            "2026-10-13T04:34:27.822Z",
+            "2026-10-13T04:35:12.062Z",
+            "2026-10-13T04:35:56.011Z",
+            "2026-10-13T04:36:38.988Z",
+            "2026-10-13T04:37:20.080Z",
+            "2026-10-13T04:38:03.667Z",
+            "2026-10-13T04:38:47.184Z",
+            "2026-10-13T04:39:28.806Z",
+            "2026-10-13T04:40:12.931Z"
+          ],
+          "retrySequence": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        }
+      }
+    },
+    {
       "localReceipt": "helper-remaining-20/wd.json",
       "sha256": "1087194540163e8ff875352bb2d8dfe87285e198ba40d08e9ecb82e53d8e5e15",
       "stats": {
@@ -2054,6 +2338,92 @@
               "count": 1
             }
           ]
+        }
+      }
+    },
+    {
+      "localReceipt": "helper-remaining-20/wdr3.json",
+      "sha256": "43bda1994e7e444a5a5e5e091ace7c139e2a02f382612b36d2603f6129b9f83e",
+      "stats": {
+        "startTime": "2026-10-13T04:04:02.358Z",
+        "duration": 3391101.391,
+        "expected": 20,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "suiteRun": {
+        "wall": 3393.668,
+        "code": 0,
+        "port": 38503,
+        "gl": "llvmpipe"
+      },
+      "configuredWorkers": 1,
+      "repeatEach": 20,
+      "topLevelErrors": [],
+      "tests": {
+        "wdr3.spec.mjs > worlds r3 > idle, walk and run play, and the standing foot stays planted while it walks and runs": {
+          "registered": 20,
+          "outcomes": {
+            "expected": 20
+          },
+          "annotations": [
+            [
+              {
+                "description": "2\u00d7 for fixture-created pages",
+                "type": "cpu-throttle-requested"
+              }
+            ]
+          ],
+          "statusSequence": [
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed"
+          ],
+          "durationMs": [
+            261708, 374335, 452883, 379805, 172658, 149778, 148651, 152251, 132563, 97721, 102280,
+            98368, 99741, 98431, 102228, 93497, 109147, 112230, 100723, 99526
+          ],
+          "startedAt": [
+            "2026-10-13T04:04:04.567Z",
+            "2026-10-13T04:08:29.780Z",
+            "2026-10-13T04:14:52.950Z",
+            "2026-10-13T04:22:32.674Z",
+            "2026-10-13T04:28:56.037Z",
+            "2026-10-13T04:31:51.511Z",
+            "2026-10-13T04:34:24.150Z",
+            "2026-10-13T04:36:54.520Z",
+            "2026-10-13T04:39:28.785Z",
+            "2026-10-13T04:41:43.289Z",
+            "2026-10-13T04:43:22.432Z",
+            "2026-10-13T04:45:06.776Z",
+            "2026-10-13T04:46:46.390Z",
+            "2026-10-13T04:48:27.264Z",
+            "2026-10-13T04:50:07.488Z",
+            "2026-10-13T04:51:50.910Z",
+            "2026-10-13T04:53:25.499Z",
+            "2026-10-13T04:55:15.790Z",
+            "2026-10-13T04:57:10.550Z",
+            "2026-10-13T04:58:52.736Z"
+          ],
+          "retrySequence": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         }
       }
     },
@@ -3309,5 +3679,126 @@
     "completeJSONReport": false,
     "exitCode": 143,
     "note": "Stopped after stacked proof/full-check work exhausted the original WD screenshot deadline. Graceful interruption did not finish; owned full-check processes were terminated. No complete-suite success or timing claim."
+  },
+  "helperFinalProofValidation": {
+    "sourcesUnchanged": true,
+    "sourceFileHashes": {
+      "tests/fl7.spec.mjs": "c405d35675cbbb8326208ff1bf05679fe09caa1468153a701643dd8763c319d6",
+      "tests/qrs-toys.spec.mjs": "196d7e6b042acdf912ef13aad0cc70fea68475fa29ffb29de7fd3101349f555b",
+      "tests/wd.spec.mjs": "20585d2db70d16018bd040dbba60b5276ac15221092d4a4275645e24fe9f79dd",
+      "tests/wdr3.spec.mjs": "70fc4b37151f14c44a373e4557209471f14a4d9a12ee97b42a812a7f240278e0",
+      "tests/smd-moving.spec.mjs": "77ece514729b11c4752cd668d74f5d4b3242b709598dd2af6a4ecc746c0bf40b",
+      "tests/suite-load.mjs": "300f14593d08dfcc1be618b215205f4d19f6c9f0856658c24c5ba2050540df2d",
+      "playwright.config.mjs": "ec96e1fa326a44e517d3c536ef795bb972ad9a06ea6afabf24eb55c4fea53b2f",
+      "tools/suite.mjs": "c7432089435f63a460d1d21c744d8babb4c613664bf9052c9bf4c88d7c492861",
+      "tools/suite-runtime.mjs": "0f4ebba74567554bfc8ed986022841721d156510e1cdd41660590721ce3525e1"
+    },
+    "expectedPasses": 240,
+    "verifiedPasses": 40,
+    "receipts": {
+      "qrs-toys": {
+        "report": ".cache/suite-speed/helper-remaining-20/qrs-toys.json",
+        "sha256": "697df1dc35b1e33a9a941956b26ea96ddd9076507b89b6f7508e3f07caf4559e",
+        "stats": {
+          "startTime": "2026-10-13T04:22:51.442Z",
+          "duration": 1083567.63,
+          "expected": 20,
+          "skipped": 0,
+          "unexpected": 0,
+          "flaky": 0
+        },
+        "suiteRun": {
+          "wall": 1087.406,
+          "code": 0,
+          "port": 41313,
+          "gl": "llvmpipe"
+        },
+        "title_counts": [
+          {
+            "title": "qrs-toys.spec.mjs \u203a healing: a code with a covered finder scans again",
+            "count": 20
+          }
+        ],
+        "measurements": {},
+        "verified": true
+      },
+      "wd": {
+        "report": ".cache/suite-speed/helper-remaining-20/wd.json",
+        "sha256": "1087194540163e8ff875352bb2d8dfe87285e198ba40d08e9ecb82e53d8e5e15",
+        "stats": {
+          "startTime": "2026-10-13T04:04:02.319Z",
+          "duration": 1125155.285,
+          "expected": 3,
+          "skipped": 36,
+          "unexpected": 1,
+          "flaky": 0
+        },
+        "suiteRun": {
+          "wall": 1127.8,
+          "code": 1,
+          "port": 41313,
+          "gl": "llvmpipe"
+        },
+        "title_counts": [
+          {
+            "title": "wd.spec.mjs \u203a worlds \u203a each tier stays within its splat budget",
+            "count": 20
+          },
+          {
+            "title": "wd.spec.mjs \u203a worlds \u203a screenshots at 390x844 and 1440x900",
+            "count": 20
+          }
+        ],
+        "measurements": {
+          "identical_budget_repetitions": {
+            "low": 2,
+            "mid": 2,
+            "high": 2,
+            "max": 2
+          },
+          "tuples": [
+            ["low", "273345", "297196", "300000", "161291"],
+            ["mid", "516386", "502615", "550000", "363510"],
+            ["high", "814930", "808206", "900000", "641953"],
+            ["max", "1339616", "1307798", "1400000", "1136153"]
+          ]
+        },
+        "verified": false
+      },
+      "wdr3": {
+        "report": ".cache/suite-speed/helper-remaining-20/wdr3.json",
+        "sha256": "43bda1994e7e444a5a5e5e091ace7c139e2a02f382612b36d2603f6129b9f83e",
+        "stats": {
+          "startTime": "2026-10-13T04:04:02.358Z",
+          "duration": 3391101.391,
+          "expected": 20,
+          "skipped": 0,
+          "unexpected": 0,
+          "flaky": 0
+        },
+        "suiteRun": {
+          "wall": 3393.668,
+          "code": 0,
+          "port": 38503,
+          "gl": "llvmpipe"
+        },
+        "title_counts": [
+          {
+            "title": "wdr3.spec.mjs \u203a worlds r3 \u203a idle, walk and run play, and the standing foot stays planted while it walks and runs",
+            "count": 20
+          }
+        ],
+        "measurements": {
+          "identical_gait_repetitions": [20],
+          "tuples": [
+            [
+              "{\"speed\":1.299999999493908,\"slide\":0.04681979920761567,\"lift\":0.11423628961990251,\"state\":\"Move\"}",
+              "{\"speed\":2.699999998948886,\"slide\":0.16265365121307698,\"lift\":0.14454857605559468,\"state\":\"Move\"}"
+            ]
+          ]
+        },
+        "verified": true
+      }
+    }
   }
 }

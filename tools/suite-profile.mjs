@@ -78,6 +78,10 @@ export function measurement(report) {
           key: JSON.stringify([...here, spec.title, test.projectName || test.projectId || ""]),
           expected: test.expectedStatus || "passed",
           results: test.results || [],
+          annotations: [
+            ...(test.annotations || []),
+            ...(test.results || []).flatMap((result) => result.annotations || []),
+          ],
         });
     for (const child of suite.suites || []) walk(child, here);
   };
@@ -96,6 +100,14 @@ export function measurement(report) {
     problems.push("unfinished/interrupted results");
   if (results.some((result) => !finite(result.duration))) problems.push("missing result durations");
   if (report.errors?.length) problems.push(`${report.errors.length} process errors`);
+  if (report.config?.projects?.some((project) => (project.repeatEach ?? 1) !== 1))
+    problems.push("repeat-each is not 1; a repetition proof is not a clean suite benchmark");
+  if (
+    tests.some((test) =>
+      test.annotations.some((annotation) => annotation.type === "cpu-throttle-requested"),
+    )
+  )
+    problems.push("CPU-throttled proof is not a clean suite benchmark");
   const wall = finite(report.suiteRun?.wall)
     ? report.suiteRun.wall
     : finite(report.stats?.duration)
@@ -116,6 +128,21 @@ export function measurement(report) {
     .map((test) => `${test.key}:${test.expected}:${test.results.at(-1)?.status || "missing"}`)
     .sort()
     .join("\n");
+  const coverageSignature = tests
+    .map(
+      (test) => `${test.key}:${test.expected}:skipped=${test.results.at(-1)?.status === "skipped"}`,
+    )
+    .sort()
+    .join("\n");
+  // Fixing a known failure changes its outcome, not its coverage. A complete
+  // baseline may fail normally, but a signal, process error, or partial report
+  // must never become a convenient slow baseline.
+  const baselineComparable =
+    !problems.length &&
+    !retried &&
+    !report.stats?.flaky &&
+    (((report.suiteRun?.code ?? 0) === 0 && failures === 0 && !report.stats?.unexpected) ||
+      (report.suiteRun?.code === 1 && failures > 0 && report.stats?.unexpected === failures));
   return {
     wall,
     wallSource: finite(report.suiteRun?.wall) ? "suiteRun.wall" : "stats.duration",
@@ -126,8 +153,10 @@ export function measurement(report) {
     failures,
     skipped: tests.filter((test) => test.results.at(-1)?.status === "skipped").length,
     signature,
+    coverageSignature,
     problems,
     complete: !problems.length,
+    baselineComparable,
     comparable:
       !problems.length &&
       !retried &&
@@ -208,7 +237,7 @@ async function main() {
     "",
     "Waits are numeric-literal waitForTimeout call sites in the current source. Literal milliseconds are summed once per call site, ignoring loop counts, branches, helper reuse, and dynamic arguments; they are not runtime estimates. Other columns count member calls named goto, chooseToy, and screenshot, plus calls whose names contain clip/record or exportGif/exportWebM/exportVideo. Comments and quoted examples are excluded.",
     "",
-    "Timing cells are measured wall / summed test-result durations / residual seconds. Residual is wall minus test durations: an estimate of process, startup, hook, and teardown time outside reported test durations, not a direct measurement of any one phase. It may be negative with overlapping tests. Wall prefers suiteRun.wall; stats.duration is used when process wall was not recorded. ⚠ means incomplete, failed, retried, or nonzero process exit; such files are excluded from speedup claims.",
+    "Timing cells are measured wall / summed test-result durations / residual seconds. Residual is wall minus test durations: an estimate of process, startup, hook, and teardown time outside reported test durations, not a direct measurement of any one phase. It may be negative with overlapping tests. Wall prefers suiteRun.wall; stats.duration is used when process wall was not recorded. ⚠ marks failed or otherwise ineligible files. Complete, single-attempt baseline test failures can be compared with passing repairs; their cost is explicitly included and reported. Partial, interrupted, or retried baselines and failing final runs are excluded from speedup claims.",
     "",
     "| File | Literal waits | Literal ms | goto | chooseToy | Screenshots | Clip/record calls | Before jobs=1 (w/t/r) | Before jobs=2 (w/t/r) | After jobs=1 (w/t/r) | After jobs=2 (w/t/r) |",
     "| --- | ---: | ---: | ---: | ---: | ---: | ---: | --- | --- | --- | --- |",
@@ -227,9 +256,10 @@ async function main() {
     const run = runs[mode];
     const rows = baseline.map((f) => run.reports.get(f)).filter(Boolean);
     const missing = baseline.filter((f) => !run.reports.has(f));
-    const incomplete = baseline.filter((f) => run.reports.has(f) && !run.reports.get(f).comparable);
+    const eligible = (row) => (mode.startsWith("before") ? row.baselineComparable : row.comparable);
+    const incomplete = baseline.filter((f) => run.reports.has(f) && !eligible(run.reports.get(f)));
     const extras = [...run.reports.keys()].filter((f) => !baseline.includes(f)).sort();
-    lines.push(`### ${mode}`, "", `Directory: ${run.dir ? `\`${markdown(run.dir)}\`${fs.existsSync(run.dir) ? "" : " (missing)"}` : "not supplied"}. ${rows.length}/${baseline.length} original files reported; ${rows.filter((r) => r.comparable).length} comparable.`, ""); // prettier-ignore
+    lines.push(`### ${mode}`, "", `Directory: ${run.dir ? `\`${markdown(run.dir)}\`${fs.existsSync(run.dir) ? "" : " (missing)"}` : "not supplied"}. ${rows.length}/${baseline.length} original files reported; ${rows.filter(eligible).length} eligible for this mode.`, ""); // prettier-ignore
     const wall = sum(rows, "wall");
     const testTime = sum(rows, "sum");
     const residual =
@@ -245,14 +275,22 @@ async function main() {
     if (incomplete.length || run.invalid.length) lines.push("");
   }
   lines.push("## Comparable original coverage", "");
-  for (const jobs of [1, 2]) {
-    const before = runs[`before-jobs${jobs}`];
-    const after = runs[`after-jobs${jobs}`];
+  for (const [beforeJobs, afterJobs] of [
+    [1, 1],
+    [2, 2],
+    [1, 2],
+  ]) {
+    const label =
+      beforeJobs === afterJobs
+        ? `Jobs=${beforeJobs}`
+        : `Before jobs=${beforeJobs} → after jobs=${afterJobs}`;
+    const before = runs[`before-jobs${beforeJobs}`];
+    const after = runs[`after-jobs${afterJobs}`];
     const absent = baseline.filter((f) => !before.reports.has(f) || !after.reports.has(f));
-    const invalid = baseline.filter((f) => before.reports.has(f) && after.reports.has(f) && (!before.reports.get(f).comparable || !after.reports.get(f).comparable)); // prettier-ignore
-    const mismatch = baseline.filter((f) => before.reports.has(f) && after.reports.has(f) && before.reports.get(f).signature !== after.reports.get(f).signature); // prettier-ignore
+    const invalid = baseline.filter((f) => before.reports.has(f) && after.reports.has(f) && (!before.reports.get(f).baselineComparable || !after.reports.get(f).comparable)); // prettier-ignore
+    const mismatch = baseline.filter((f) => before.reports.has(f) && after.reports.has(f) && before.reports.get(f).coverageSignature !== after.reports.get(f).coverageSignature); // prettier-ignore
     if (!original || absent.length || invalid.length || mismatch.length || removed.length) {
-      lines.push(`Jobs=${jobs}: no complete-coverage speedup claim. Missing pairs: ${absent.length}; excluded pairs: ${invalid.length}; changed test/project/outcome coverage: ${mismatch.length}; removed original files: ${removed.length}.`, ""); // prettier-ignore
+      lines.push(`${label}: no complete-coverage speedup claim. Missing pairs: ${absent.length}; excluded pairs: ${invalid.length}; changed test/project/skip coverage: ${mismatch.length}; removed original files: ${removed.length}.`, ""); // prettier-ignore
       if (mismatch.length) lines.push(`Coverage mismatches: ${list(mismatch)}.`, "");
       continue;
     }
@@ -264,8 +302,17 @@ async function main() {
       baseline.map((f) => after.reports.get(f)),
       "wall",
     );
-    lines.push(`Jobs=${jobs}: all ${baseline.length} original files have matching successful test/project/outcome coverage. Summed file-wall ratio: ${afterWall > 0 ? `${(beforeWall / afterWall).toFixed(3)}×` : "unavailable"} (${seconds(beforeWall)} → ${seconds(afterWall)} seconds). This ratio measures per-file process cost, not concurrent suite elapsed time.`, ""); // prettier-ignore
-    const sameSchedule = [before, after].every((run) => {
+    const baselineFailures = baseline.reduce(
+      (count, file) => count + before.reports.get(file).failures,
+      0,
+    );
+    lines.push(`${label}: all ${baseline.length} original files have matching test/project/skip coverage and passing final outcomes. Before failures: ${baselineFailures}; after failures: 0. Summed file-wall ratio: ${afterWall > 0 ? `${(beforeWall / afterWall).toFixed(3)}×` : "unavailable"} (${seconds(beforeWall)} → ${seconds(afterWall)} seconds). This ratio measures per-file process cost, not concurrent suite elapsed time.`, ""); // prettier-ignore
+    if (baselineFailures)
+      lines.push("This comparison includes the cost of baseline failures, including their timeouts. It is not a comparison of two passing suites.", ""); // prettier-ignore
+    const sameSchedule = [
+      [before, beforeJobs],
+      [after, afterJobs],
+    ].every(([run, jobs]) => {
       const started = Date.parse(run.run?.started);
       const finished = Date.parse(run.run?.finished);
       return (
@@ -285,9 +332,14 @@ async function main() {
         })
       );
     });
-    if (sameSchedule && finite(before.run?.elapsed) && finite(after.run?.elapsed) && after.run.elapsed > 0) // prettier-ignore
+    const sameEnvironment =
+      typeof before.run?.gl === "string" &&
+      before.run.gl === after.run?.gl &&
+      typeof before.run?.browser === "string" &&
+      before.run.browser === after.run?.browser;
+    if (sameSchedule && sameEnvironment && finite(before.run?.elapsed) && finite(after.run?.elapsed) && after.run.elapsed > 0) // prettier-ignore
       lines.push(`Measured whole-run ratio: ${(before.run.elapsed / after.run.elapsed).toFixed(3)}× (${seconds(before.run.elapsed)} → ${seconds(after.run.elapsed)} seconds).`, ""); // prettier-ignore
-    else lines.push("Whole-run speedup unavailable: elapsed metadata, exact original-only coverage, or evidence that every report was produced inside this run's interval is missing.", ""); // prettier-ignore
+    else lines.push("Whole-run speedup unavailable: matching renderer/browser, elapsed metadata, exact original-only coverage, or evidence that every report was produced inside this run's interval is missing.", ""); // prettier-ignore
   }
   console.log(lines.join("\n"));
 }
