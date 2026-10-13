@@ -36,7 +36,7 @@ The toys, with his approved taps (the ideas' ids are the toy ids):
    its drawstrings swing, then the sleeves (cut at the shoulders) swing in and cross, and it all
    settles back (4.5 s)." No logos.
 6. **Sunglasses** (`sunglasses`, Clothing): "The arms fold in on their hinges one after the other,
-   the glasses flip to face you and the lenses darken from clear to deep grey like light-changing
+   the glasses flip to face you and the lenses darken from clear to deep gray like light-changing
    lenses; then they unfold (3.5 s)."
 7. **Baseball cap** (`baseball-cap`, Clothing): "It flips up off its stand, spins flat like a flying
    disc and lands brim-backwards; then a second flip turns it round the right way (3 s)." No logos.

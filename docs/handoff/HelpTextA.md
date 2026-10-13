@@ -1,7 +1,7 @@
 # Lane HelpTextA: toy help text for the science and nature shelves
 
 Prefix `hta`. Owns the entries in `src/toy-help.js` for the Photoreal, Shapes, Space, Tiny world,
-Atoms, Gems, Body, Nature, Weather & fire and Maths shelves, `tests/hta.spec.mjs` (if added), the
+Atoms, Gems, Body, Nature, Weather & fire and Math shelves, `tests/hta.spec.mjs` (if added), the
 `hta-*` screenshots and this file. How lanes work: [OPERATING.md](../OPERATING.md). The style guide
 is in [Help.md](Help.md), "Style guide for the text lanes".
 
@@ -12,7 +12,7 @@ ROADMAP.md, "Toy help", step 2 of the plan.
 
 Your shelves (149 toys; 45 already have a how-to line and 7 an About text): Photoreal (32), Shapes
 (4), Space (23), Tiny world (18), Atoms (5), Gems (9), Body (6), Nature (23), Weather & fire (13)
-and Maths (16). Lane HelpTextB writes the other shelves at the same time. For the Maths toys, read
+and Math (16). Lane HelpTextB writes the other shelves at the same time. For the Math toys, read
 docs/handoff/Math.md; for the scans, src/rigs.js and the toy's credit; for the nature, weather,
 space and tiny-world taps, the E-lane handoffs in docs/handoff/.
 
@@ -54,7 +54,7 @@ Your job: give every toy on your shelves both a how-to line (`howTo`) and an Abo
    and craft, not fighting). Flags and places stay respectful.
 7. American English (color, center, gray, meter, math, -ize). Run
    `node tools/us-english.mjs --diff`. Some Toy tab labels still use older British spelling: quote a
-   label exactly only when you name that control ("Try the Colour slider…" is right if that is its
+   label exactly only when you name that control ("Try the Color slider…" is right if that is its
    label), otherwise write "color".
 8. Work shelf by shelf and commit and push each shelf as you finish it, so the owner can start
    reading early.
@@ -113,7 +113,7 @@ September 28, 2026: all ten shelves written; draft PR
 | Body           | 6    | 6            | 6           |
 | Nature         | 23   | 23           | 23          |
 | Weather & fire | 13   | 13           | 13          |
-| Maths          | 16   | 16           | 16          |
+| Math           | 16   | 16           | 16          |
 | **Total**      | 149  | 149          | 149         |
 
 The donut's how-to line went in after the Operator's PR #61 fixed `tests/help.spec.mjs` (September
@@ -139,7 +139,7 @@ unless he marks it "fix".
   Where a toy does something the real thing doesn't (a bacterium or a cell that joins back up, a
   diatom that opens like a clam, a virus that buds copies by itself), the text says "the toy" does
   it and describes the real thing separately.
-- Helper: one Opus 5.5 helper drafted Space, Tiny world, Atoms and Gems, Weather & fire and Maths in
+- Helper: one Opus 5.5 helper drafted Space, Tiny world, Atoms and Gems, Weather & fire and Math in
   the scratchpad, with a source for each fact; every line was checked and several were changed (less
   certain facts cut or softened, a match-and-candle fact swapped for the round candle flame in
   space).

@@ -28,9 +28,9 @@ Each of the three becomes a toy that belongs on the Science or Tools shelf, behi
 
 ## Don't touch
 
-Files the open PRs change (#560, #562, #566, #570, #576), the engine (`src/` outside your new packs
-and your lines in the shared lists), and `vendor/`. If you truly need an engine change, make it a
-separate small additive PR titled "Engine: …" and say why.
+Files the open PRs change (#560, #562, #566, #581 and #582), the engine (`src/` outside your new
+packs and your lines in the shared lists), and `vendor/`. If you truly need an engine change, make
+it a separate small additive PR titled "Engine: …" and say why.
 
 ## Report
 

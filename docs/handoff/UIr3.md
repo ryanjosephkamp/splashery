@@ -110,7 +110,7 @@ by a permission check, say exactly which edit it is, and I'll handle it.
   restart. Fixed on October 1, 2026 in `src/motion.js`: a long effect pauses only once a frame has
   drawn it (`unseen`), so a second tap before that starts it again. The test is unchanged and
   passes.
-- `tests/smoke.spec.mjs:730` ("rigs pick splats by colour…", the strawberry) fails on main too
+- `tests/smoke.spec.mjs:730` ("rigs pick splats by color…", the strawberry) fails on main too
   (8a2e05e, run alone) and on the UI r2 head: not this lane's.
 - `tests/help.spec.mjs:261` at 1440x900 failed because the Fourier circles now face you: fixed in
   `src/ui.js` (the help line moves to the bottom left for a toy that holds still when the toy

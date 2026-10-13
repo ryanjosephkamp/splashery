@@ -212,7 +212,7 @@ const TP = (() => {
     // Each hammer leans forward on its rail at rest and swings up and back
     // through about a sixth of a turn to meet its rod.
     hamPivot: [0.52, -0.13], // y, z
-    hamHead: [0.632, -0.002], // the head's centre at rest
+    hamHead: [0.632, -0.002], // the head's center at rest
     headR: 0.025,
     step: 0.28, // seconds between the song's notes
     songAt: 0.2, // the first key starts down
@@ -301,7 +301,7 @@ function crisp(color, w, h) {
     return col && typeof col === "object" && !Array.isArray(col) ? { ...col, size: (col.size ?? 1) * size } : { c: col, size }; // prettier-ignore
   };
 }
-// `opts.quat` turns the whole box about its centre.
+// `opts.quat` turns the whole box about its center.
 function box6(k, at, size, opts = {}, skip = "") {
   const [sx, sy, sz] = size;
   const q = opts.quat || [0, 0, 0, 1];
@@ -1083,7 +1083,7 @@ export const RECIPES = {
       const lacquer = (c) => lit(c, body, 0.32, 0.55);
       const inside = (c) => lit(c, wood(c, "#e2c192", c.p, 0, 0.88), 0.25, 0.1);
       const gold = "#e9c35a";
-      // Ivory keys, their top edges a touch darker so neighbours stay apart.
+      // Ivory keys, their top edges a touch darker so neighbors stay apart.
       const ivory = (c) => {
         const edge = c.n[1] > 0.9 ? Math.min(c.u, 1 - c.u) * 0.096 : 1;
         return lit(c, edge < 0.005 ? "#d9d2c2" : "#f8f4ea", 0.16, 0.35);

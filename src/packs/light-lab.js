@@ -589,7 +589,7 @@ function buildPrism(k, o) {
     cols: colsFor(k, 0.14, x1 - x0, ((x1 - x0) * CARD.h) / CARD.w, 360),
   });
   // The prism: glass, nearly clear face on and denser where its faces turn
-  // away (behaviour "rim"), with brighter edges, standing on the table.
+  // away (behavior "rim"), with brighter edges, standing on the table.
   const H = 0.36;
   const y0 = -0.17;
   const tri = [P.a, P.apex, P.b];

@@ -337,7 +337,7 @@ export class Stage {
   // ---- Toy ----------------------------------------------------------------
 
   // Shows a gsplat resource as the toy. transform: { position, rotation
-  // (euler degrees), scale } normalises it around the origin. `kit` marks a
+  // (euler degrees), scale } normalizes it around the origin. `kit` marks a
   // generated toy whose format carries the per-splat splatAnim stream; `rig`
   // a captured toy with moving parts (a splatPart stream, see src/rig.js).
   // Lab: `modifier` ({ glsl, wgsl }) replaces a kit toy's work-buffer program

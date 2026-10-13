@@ -53,7 +53,7 @@ const KELP_SECS = 5.6;
 const STONE_BACK = 5.4;
 // How far (radians) a pinecone scale tips out when the cone opens.
 const CONE_OPEN = 0.8;
-// The saguaro's wedge slides out this way: towards the camera and to the
+// The saguaro's wedge slides out this way: toward the camera and to the
 // left, so it clears the hole it leaves.
 const SAGUARO_OUT = [-0.2, 0.02, 0.38];
 // How far each joint of a young fern frond is bent to roll it into a
@@ -114,16 +114,16 @@ function lotusSplash(t, hands, out) {
   return { ring: g < 1.6 ? 1.4 * (g / 1.6) : null };
 }
 // The breeze through the willow: its direction (to the right on screen and a
-// little towards the camera) and how far a strand bends per unit of drop.
+// little toward the camera) and how far a strand bends per unit of drop.
 const WIND = [0.9985, 0, 0.0555];
 const WILLOW_BEND = 0.5;
 // The bonsai's new branch is cut this far along it; the cut piece drops this far.
 const BONSAI_CUT = 0.26;
 const BONSAI_DROP = 0.22;
 const BONSAI_TIP = -0.45;
-// The scissors come in from here (towards the camera and to the right).
+// The scissors come in from here (toward the camera and to the right).
 const SCISSORS_OUT = [0.45, -0.35, 0.7];
-// Trees rock about this horizontal axis (roughly towards the home camera),
+// Trees rock about this horizontal axis (roughly toward the home camera),
 // so they sway from side to side on screen.
 const SHAKE_AXIS = [0.43, 0, 0.9];
 const GOLDEN = Math.PI * (3 - Math.sqrt(5));
@@ -133,7 +133,7 @@ const lerp3 = (a, b, t) => [lerp(a[0], b[0], t), lerp(a[1], b[1], t), lerp(a[2],
 
 // ---- Light, directions ------------------------------------------------------
 
-// A fake light from the upper left, in front; colour functions shade with it.
+// A fake light from the upper left, in front; color functions shade with it.
 const LIGHT = unit([-0.35, 0.85, 0.45]);
 const lit = (col, n, k = 0.3) => shade(col, 1 + k * (dot(n, LIGHT) - 0.25));
 
@@ -163,7 +163,7 @@ function along(pts, t) {
 // Grows a branching skeleton. Each level has its own length, spread and
 // number of children (per-level arrays, the last entry repeats). Children
 // sprout along the upper part of their parent, turned by the golden angle;
-// `up` bends growth towards the light (negative droops), `wobble` gnarls it.
+// `up` bends growth toward the light (negative droops), `wobble` gnarls it.
 function growTree(rand, o) {
   const at = (arr, i) => (Array.isArray(arr) ? arr[Math.min(arr.length - 1, i)] : arr);
   const branches = [];
@@ -273,7 +273,7 @@ function addRoots(k, count, r, y, color, extra = {}) {
 }
 
 // Foliage: flat leaf splats on the shells of clumps (ellipsoids), skipping
-// leaves buried inside a neighbouring clump. `color(t, rand, info)` gets a
+// leaves buried inside a neighboring clump. `color(t, rand, info)` gets a
 // light value t (0 dark underside .. 1 sunlit top).
 function foliage(k, clumps, o) {
   const cum = [];
@@ -441,7 +441,7 @@ function grassMound(k, r, y, o = {}) {
   }
 }
 
-// Clumps spread over a dome-shaped canopy envelope (centre c, radii r), with
+// Clumps spread over a dome-shaped canopy envelope (center c, radii r), with
 // a noisy outline, plus clumps at the skeleton's tips pushed out to it.
 function domeClumps(k, { c, r, n = 40, size = [0.2, 0.3], below = -0.4, tips = [] }) {
   const out = [];
@@ -479,7 +479,7 @@ function domeClumps(k, { c, r, n = 40, size = [0.2, 0.3], below = -0.4, tips = [
 
 // A flat-ish blade on a frame (origin, direction along it, direction across
 // it): length L, width profile w(v), cupped across by `cup`, bent along by
-// `bend(v)` (towards the normal). Returns a param shape.
+// `bend(v)` (toward the normal). Returns a param shape.
 function blade(k, { L, W, width, cup = 0, bend = null, grid = 16, twist = 0 }) {
   const wf = width || ((v) => Math.sin(Math.PI * Math.min(1, v)) ** 0.8);
   return k.param(
@@ -536,7 +536,7 @@ function turnPart(a, b, f) {
   if (l < 1e-6) return [0, 0, 0, 1];
   return quatAxisAngle(ax, Math.atan2(l, dot(a, b)) * f);
 }
-// The top of grassMound(k, R, y, { h }) at distance r from its centre.
+// The top of grassMound(k, R, y, { h }) at distance r from its center.
 function moundTop(R, y, h, r) {
   const f = r / R;
   if (f < 0.5) return y + h * (1 - 0.2 * f);
@@ -592,7 +592,7 @@ const mapleReach = (a) => {
 };
 
 // Loose leaves as tokens: each a small flat leaf on the canopy, facing out.
-// spots: [{ p, n, roll }]; shape: "oak" | "maple"; color(i) -> colour.
+// spots: [{ p, n, roll }]; shape: "oak" | "maple"; color(i) -> color.
 function tokenLeaves(k, spots, { size = 0.1, shape = "oak", color, part, first = 0 }) {
   const oakShape = k.param(
     (u, v) => {
@@ -871,7 +871,7 @@ function planStones(k, stones, cairn, reach = 0.98) {
 // A loose pinecone scale over the effect's clock s: it opens with the
 // others (open, 0..1), breaks off at sc.tb and tumbles down to land flat at
 // sc.land with a little bounce, lies there, and at sc.back flies up in an
-// arc into its place again. Turns are about the scale's centre (its base).
+// arc into its place again. Turns are about the scale's center (its base).
 function looseScale(sc, s, open) {
   const qOpen = quatAxisAngle(sc.tip, sc.ang * open);
   const atOpen = sub(add(sc.hinge, quatRotate(qOpen, sub(sc.p, sc.hinge))), sc.p);
@@ -1575,7 +1575,7 @@ export const RECIPES = {
     // Hands-on (lane Hands-on H2): pull a branch's foliage and it bends after
     // your finger; let go and it springs back.
     hands: { floor: -0.36, stretch: { radius: 0.45, max: 0.3, hz: 4, damping: 0.3, at: (p) => p[1] > 0.45 } }, // prettier-ignore
-    // A tap grows a new branch out of the trunk towards you, with a pad of
+    // A tap grows a new branch out of the trunk toward you, with a pad of
     // leaves on its end; then a pair of bonsai scissors comes in, opens,
     // and snips it off. The cut piece drops onto the moss and is cleared
     // away, the scissors go, and the stub heals over.
@@ -1814,7 +1814,7 @@ export const RECIPES = {
       ]) {
         const part = k.part(name, { pivot, axis: dir });
         const z = side * 0.009;
-        // The blade, tapering to a point, its cutting edge towards the other.
+        // The blade, tapering to a point, its cutting edge toward the other.
         k.add(k.ellipsoid(0.17, 0.03, 0.008), {
           pos: toW([0.16, side * 0.012, z]),
           quat: Q,
@@ -2244,7 +2244,7 @@ export const RECIPES = {
 
   rose: {
     alive: true,
-    options: [{ key: "color", label: "Colour", type: "color", default: "#c8102e" }],
+    options: [{ key: "color", label: "Color", type: "color", default: "#c8102e" }],
     controls: [{ key: "bloom", label: "Bloom", type: "pulse", ease: ROSE_SECS }],
     action: { key: "bloom", label: "Open the bloom" },
     // Hands-on (lane Hands-on H2): pull the petals off one by one; each drifts down,
@@ -2662,7 +2662,7 @@ export const RECIPES = {
 
   tulip: {
     alive: true,
-    options: [{ key: "color", label: "Colour", type: "color", default: "#d8202e" }],
+    options: [{ key: "color", label: "Color", type: "color", default: "#d8202e" }],
     controls: [{ key: "open", label: "Open", type: "pulse", ease: TULIP_SECS }],
     action: { key: "open", label: "Open to the sun" },
     // Hands-on (lane Hands-on H2): push a tulip and it bends on its stem; let
@@ -3637,7 +3637,7 @@ export const RECIPES = {
     action: { key: "poke", label: "Spines out, then a look inside" },
     // Taps take turns. The first shoots every spine out along its own line
     // and draws them back with a quiver (a morph); the next slides a wedge
-    // out of the trunk (towards you and to the left) to show the inside:
+    // out of the trunk (toward you and to the left) to show the inside:
     // wet, pale green flesh round a ring of woody ribs, dripping; then it
     // slides home.
     // (The cactus scan beside it on the shelf blooms instead.)
@@ -3672,7 +3672,7 @@ export const RECIPES = {
         col = shade(col, 0.95 + 0.1 * c.noise(c.p[0] * 5, c.p[1] * 30, c.p[2] * 5));
         return lit(col, c.n, 0.45);
       };
-      // The wedge that slides out for a look inside: towards the camera,
+      // The wedge that slides out for a look inside: toward the camera,
       // below the arms.
       const W0 = 0.45;
       const WW = 0.75;
@@ -5371,7 +5371,7 @@ export const RECIPES = {
     },
     build(k) {
       const rand = k.rand;
-      // The kelp bends away from the nibbling fish (a morph towards +x, more
+      // The kelp bends away from the nibbling fish (a morph toward +x, more
       // the higher it is), one channel per band of stalks from left to right.
       const bent = (p, g) => {
         const f = Math.pow(Math.max(0, (p[1] - 0.05) / 2.3), 1.7);
@@ -5635,7 +5635,7 @@ export const RECIPES = {
         snow: o.snow ? 1 : 0,
         colors: ["#46602a", "#5e7a33", "#7a8f44"],
       });
-      // Tiers of drooping branches: radius shrinks towards the top.
+      // Tiers of drooping branches: radius shrinks toward the top.
       const tiers = [];
       const T = 8;
       for (let i = 0; i < T; i++) {

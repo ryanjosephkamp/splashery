@@ -261,7 +261,7 @@ test("a rig's effects and part glow reach the modifier's uniforms", async () => 
   // Slot 0 (seeds): selected by key 0, pushed out, staggered, glowing.
   expect([...fx.slice(0, 4)]).toEqual([2, 0, 1, 3]);
   expect(fx[4]).toBeGreaterThan(0); // move
-  expect(fx[5]).toBeGreaterThan(0); // colour
+  expect(fx[5]).toBeGreaterThan(0); // color
   expect(fx[28]).toBeCloseTo(0.4, 5); // seconds since the tap
   expect(u["uSpRigTint[0]"]).toHaveLength(64);
   // A part driven with tint and scale: the lantern's glass glows when lit.

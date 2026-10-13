@@ -7,29 +7,29 @@
 //
 // For each model: downloads the glTF (Poly Haven's API for "polyhaven:<asset>"
 // sources, or a direct URL), samples points on its surface evenly by area,
-// takes each point's colour from the base-colour texture (times the
-// material's colour factor; alpha-masked texels are skipped), and writes
+// takes each point's color from the base-color texture (times the
+// material's color factor; alpha-masked texels are skipped), and writes
 // flat splats lying on the surface to .cache/models/<id>/<id>.ply.
 //
 // Textures are read through a mip chain at the level that matches a splat's
-// footprint, so a splat gets the average colour of the texels it covers rather
+// footprint, so a splat gets the average color of the texels it covers rather
 // than one random texel (that aliasing made busy textures look grainy).
 //
 // Options per model in tools/models.json (all optional):
 //   splats, seed, sizeScale, flat   count, random seed, splat size and thickness
 //   skipMaterials   regex of material names to leave out (default "glass")
 //   darkGlass       regex of material names drawn as dark glass (camera lenses)
-//   light           bake soft studio light into the colours: {} for the
+//   light           bake soft studio light into the colors: {} for the
 //                   defaults, or { ambient, key, dir: [x, y, z] }. Splats are
 //                   unlit, so without it a mesh looks flat; with it the shape
 //                   and (with normalMap) the carved or embossed detail read.
 //   normalMap       true: use the material's normal map for the baked light
 //   armAO           true: the metallic-roughness texture is Poly Haven's
 //                   "arm" pack, whose red channel is ambient occlusion
-//   exposure, gamma tone the final colour (exposure multiplies linear light)
+//   exposure, gamma tone the final color (exposure multiplies linear light)
 //   paintOut        [{ image, uv: [u0, v0, u1, v1], color: [r, g, b] }]: paint
-//                   the light, grey texels in a UV box of one texture (the
-//                   image file name contains `image`) with a colour, to hide
+//                   the light, gray texels in a UV box of one texture (the
+//                   image file name contains `image`) with a color, to hide
 //                   brand names printed on a model.
 //
 // Build-time only: @gltf-transform/core (MIT), jpeg-js (BSD-3-Clause) and
@@ -165,7 +165,7 @@ const norm = (v) => {
 };
 const dot = (a, b) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
 
-// Soft studio light baked into a colour: a sky/ground ambient, a key light
+// Soft studio light baked into a color: a sky/ground ambient, a key light
 // from above and in front, and for polished metal a brighter top and a
 // highlight. `col` is sRGB; so is the result.
 function bakeLight(col, n, { metal = 0, rough = 1, ao = 1 }, light, model) {

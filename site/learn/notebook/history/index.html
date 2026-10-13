@@ -227,7 +227,7 @@
               >E6b.md</a
             >; their lessons are in PACKS.md (sections 3, 6 and 7b). Two smoke tests each failed
             once in a lane's full run and passed when run again: &quot;rigs pick splats by
-            colour…&quot; (the strawberry had not settled 3 s after its tap) and &quot;a scan rig
+            color…&quot; (the strawberry had not settled 3 s after its tap) and &quot;a scan rig
             moves a part of a captured toy&quot; (a SwiftShader console warning, like the rare
             engine warning in HANDOFF.md). Keep <code>test-results/</code> if either comes back.
           </p>
@@ -912,7 +912,7 @@
                   the base and fly back (7.2 s); six seeds (was sixteen).
                 </li>
                 <li>
-                  Lava lamp: colour sets, a blob count (2 to 12), blob size and shape, and Flow and
+                  Lava lamp: color sets, a blob count (2 to 12), blob size and shape, and Flow and
                   Glow sliders; the default lamp builds exactly as before.
                 </li>
               </ul>
@@ -920,8 +920,8 @@
             <li>
               Known issues: the wave's white water shows as a sheet for a tenth of a second at
               impact and its near end shows the profile's edge; the swan's wing tips break along
-              straight lines and its pedestal does not melt; some lava colour sets read less clearly
-              at 320 px; a colour set other than &quot;Pick below&quot; ignores the Wax and Liquid
+              straight lines and its pedestal does not melt; some lava color sets read less clearly
+              at 320 px; a color set other than &quot;Pick below&quot; ignores the Wax and Liquid
               pickers (the Toy tab cannot hide an option by another's value).
             </li>
           </ul>
@@ -1020,7 +1020,7 @@
               <strong>E3 review (2026-09-26).</strong> The owner marked 23 of the 26 E3 clips good
               (verdicts <code>e3-&lt;id&gt;</code> on the Effect review page). The three notes were
               fixed in the same PR: the Möbius strip has a Rider option (a blue race car by default,
-              red on the Ocean colours; a rolling beach ball; a duck on a bicycle; the ant), whose
+              red on the Ocean colors; a rolling beach ball; a duck on a bicycle; the ant), whose
               pieces are tokens listed in <code>RIDERS</code> in <code>src/packs/maths.js</code>;
               the lungs' deep breath is about twice as big (<code>lungEmpty</code> in
               <code>src/packs/anatomy.js</code>, larger splats so the stretched surface stays
@@ -1047,7 +1047,7 @@
                   <code>morph</code> (kind 17): <code>to: (c) =&gt; [x, y, z]</code> gives each
                   splat its own target (recipe coordinates); it moves there in a straight line as
                   its <code>channel</code> goes 0 → 1 (values past 1 or below 0 extrapolate). The
-                  offset is packed into the splat's two behaviour values (12 bits per axis over
+                  offset is packed into the splat's two behavior values (12 bits per axis over
                   ±<code>MORPH_RANGE</code> = 2 toy units, <code>Kit.encodeMorphs</code>), so no new
                   stream was needed. Targets count in the fit unless the recipe sets
                   <code>k.fitMorphs = false</code> (then keep the morphed shape within about 1.2 toy
@@ -1085,18 +1085,18 @@
               splats spread apart and the far side shows through as speckle: use slightly larger
               splats on the morphing copy (<code>size</code> 1.25–1.3: the torus knot, the gyroid)
               or keep the stretch modest (the white cell's cup). A two-sided surface with a
-              different colour per side (the gyroid) speckles wherever one face has gaps. A morph
-              and another behaviour cannot share a splat: morphing toys lost their
-              <code>breathe</code>; several drive a gentle idle morph or a body squash instead. A
-              toy that turns its body (the virus, the pollen grain) and sends pieces off undoes the
-              body's turn in the pieces' part so they leave in a fixed place on screen.
+              different color per side (the gyroid) speckles wherever one face has gaps. A morph and
+              another behavior cannot share a splat: morphing toys lost their <code>breathe</code>;
+              several drive a gentle idle morph or a body squash instead. A toy that turns its body
+              (the virus, the pollen grain) and sends pieces off undoes the body's turn in the
+              pieces' part so they leave in a fixed place on screen.
             </li>
             <li>
               <strong>Effects (E3).</strong> Tiny in <code>src/packs/tiny.js</code> (fission
               <code>BAC</code>, division <code>CELL</code>, phagocytosis <code>WBC</code>,
               <code>AMOEBA_DIR</code>, <code>PARAMECIUM</code>, <code>VIRUS</code>,
               <code>DIATOM_AXIS</code> and <code>snowflake()</code> at the end), anatomy in
-              <code>src/packs/anatomy.js</code>, maths in <code>src/packs/maths.js</code>. Two E3
+              <code>src/packs/anatomy.js</code>, math in <code>src/packs/maths.js</code>. Two E3
               effects differ from the plan: the Menger sponge is carved level by level (a zoom into
               itself blurred), and the Mandelbulb is wrung (a twist, as the owner's note asked)
               instead of changing power. The paramecium swims its loop about the view direction
@@ -1130,7 +1130,7 @@
             <li>
               <strong>Settings panel (after the E2 review, PR <code>-2</code>).</strong> Tabs:
               <strong>Toy</strong> (the main tab: action, controls, options, Motion with the
-              turntable ON/OFF switch, Quick settings with flag colours, Detail and
+              turntable ON/OFF switch, Quick settings with flag colors, Detail and
               <strong>Reset everything</strong>), <strong>Tools</strong> (the picked tool's
               settings, opened by picking a tool, and the effects), Look, Make, Share and About (an
               ⓘ icon). Reset everything (<code>app.resetAll</code>) makes a fresh scene for the same
@@ -1145,17 +1145,17 @@
               (<code>game.step</code>, <code>game.jump</code>); pausing keeps the position; a tap on
               a finished game that is still playing starts it again (<code>action.at</code> fires a
               <code>restart</code> pulse). The game's details (PGN tags) can be edited in the panel.
-              Flag colours lie over the board from above, gently (the new
+              Flag colors lie over the board from above, gently (the new
               <code>top</code> projection; <code>patternProjection</code>,
               <code>patternAmount: 0.3</code> and <code>patternDetail: 1</code> in the recipe), so
               the light and dark squares stay clear; the pieces keep their own ivory and ebony
-              (<code>pattern: false</code>), as the owner asked after seeing them in flag colours
+              (<code>pattern: false</code>), as the owner asked after seeing them in flag colors
               (review page, 2026-09-25).
             </li>
             <li>
               <strong>Chemistry (PR <code>-3</code>).</strong> <code>src/chem/</code> reads
               molecules and proteins with no libraries: <code>elements.js</code> (69 elements up to
-              uranium, CPK colours, covalent radii, formulas), <code>smiles.js</code> (a SMILES
+              uranium, CPK colors, covalent radii, formulas), <code>smiles.js</code> (a SMILES
               parser with rings, branches, charges, isotopes and aromatic kekulisation; implicit
               hydrogens), <code>embed.js</code> (a seeded 3D layout: distance geometry then a small
               force field with bond lengths, angles, planar rings and repulsion),
@@ -1278,8 +1278,8 @@
               <strong>Kit parts for scans (E1c).</strong> When a scan's part cannot move without
               tearing (the elephant's trunk is fused to its forehead), hide it (a rig part with
               <code>visible: 0</code>) and build a replacement in the rig's add-on, traced from the
-              scan's splats and coloured from them: the elephant's trunk is five tube segments on
-              ball joints, driven as a chain. To read a scan's colours, unzip its
+              scan's splats and colored from them: the elephant's trunk is five tube segments on
+              ball joints, driven as a chain. To read a scan's colors, unzip its
               <code>.sog</code> and decode <code>sh0.webp</code> with <code>meta.json</code>'s
               codebook (pixel i is splat i). A cut can also follow a measured plane: the cat's head
               is everything above its neck's slanted plane (a huge sphere region) and its collar
@@ -1328,15 +1328,15 @@
             <li>
               <strong>Scan fixes (E1b).</strong> Rig regions now default to hard edges (<code
                 >soft: 0.03</code
-              >), overlapping regions split by the nearest centre, <code>over: true</code> makes a
-              region win (a jaw inside a head), and <code>notColor</code> keeps a colour out (the
+              >), overlapping regions split by the nearest center, <code>over: true</code> makes a
+              region win (a jaw inside a head), and <code>notColor</code> keeps a color out (the
               tomatoes' plate). New effect movers: <code>fall</code> (Voronoi pieces break off, fall
               to the floor and come back), <code>vibrate</code> (a string's standing wave) and
-              <code>writhe</code> (a travelling wave that contorts a shape). The cat, horse,
+              <code>writhe</code> (a traveling wave that contorts a shape). The cat, horse,
               elephant, bust, fly, tomatoes, basket, ukulele, raspberry, blackberry, blueberry,
               donut and knot were redone (see TOY-PLAN.md). <code>tools/rig-map.mjs</code> has
               <code>--center</code>/<code>--half</code> zoom and left and bottom views. To place
-              regions on a scan, read its splat centres in the page
+              regions on a scan, read its splat centers in the page
               (<code>player.stage.toy.resource.centers</code>) and slice them numerically; that
               found the fly's legs, which the renders hid.
             </li>
@@ -1350,8 +1350,8 @@
               <code>assets/toys/chess-set/</code> and <code>tools/assets.json</code>.
             </li>
             <li>
-              <strong>Laptop (E1b).</strong> Keycaps with letters (behaviour &quot;key&quot;: the
-              pressed key goes down), a live screen (behaviour &quot;screen&quot;: splats read the
+              <strong>Laptop (E1b).</strong> Keycaps with letters (behavior &quot;key&quot;: the
+              pressed key goes down), a live screen (behavior &quot;screen&quot;: splats read the
               <code>uSpScreen</code> texture, drawn by the recipe's <code>screen.draw</code> when
               <code>screen.version</code> changes), <code>typeKey</code> for a real keyboard (it
               gets first pick of the keys before the app's shortcuts), and <code>drag</code> for the
@@ -1377,9 +1377,9 @@
               </p>
               <ul>
                 <li>
-                  Colour keys: a region can take only splats of one colour, and
-                  <code>keys</code> marks up to two sets of splats by colour (or long thin splats)
-                  in the <code>splatPart</code> stream's spare channels. Used for the strawberry's
+                  Color keys: a region can take only splats of one color, and
+                  <code>keys</code> marks up to two sets of splats by color (or long thin splats) in
+                  the <code>splatPart</code> stream's spare channels. Used for the strawberry's
                   seeds, the cookie's jam, the millipede's legs, the basket's shells, the clock's
                   red second hand, the ukulele's strings, the planet's clouds and the donut's
                   sprinkles.
@@ -1392,8 +1392,8 @@
                 <li>
                   Whole-body effects (<code>fx</code>, up to four per rig, <code>uSpFx</code>):
                   select, mask (half-space, strips, sphere, wedge), move (push, along, scatter, hop,
-                  shiver, turn, bands, bend, peel, split), colour (glow, recolour, brighten,
-                  sparkle, fade, darken) and pattern (front, band, stagger, ramp, swirl, wave).
+                  shiver, turn, bands, bend, peel, split), color (glow, recolour, brighten, sparkle,
+                  fade, darken) and pattern (front, band, stagger, ramp, swirl, wave).
                 </li>
                 <li>
                   Add-ons (option b): <code>addon.build(k)</code> builds a small kit toy in world
@@ -1438,7 +1438,7 @@
               <p><strong>Sound engine (D).</strong></p>
               <ul>
                 <li>
-                  <code>src/voices.js</code> is a voice library of about 80 synthesised voices
+                  <code>src/voices.js</code> is a voice library of about 80 synthesized voices
                   (plucked strings with Karplus-Strong, modal bells, bars, glass and wood, drums,
                   buzz, quack, squawk, mew, hoot, ribbit and cheer formant voices, crunch, rattle,
                   patter, crackle, splash, wind, roar, engines, horns, theremin, pads) and a note
@@ -1469,7 +1469,7 @@
                 </li>
                 <li>
                   No samples were used: the quack, the crowd cheer and the alarm bells are
-                  synthesised. Nothing was added to CREDITS.md.
+                  synthesized. Nothing was added to CREDITS.md.
                 </li>
                 <li>
                   The owner can audition every sound on a private page, the &quot;Splashery Sound
@@ -1830,11 +1830,11 @@
                   page and under effects such as Dissolve.
                 </li>
                 <li>
-                  Several vehicles' windows used random colour per splat, like the tractor's did
+                  Several vehicles' windows used random color per splat, like the tractor's did
                   (static). Only the tractor's were fixed.
                 </li>
                 <li>
-                  Flags on vehicles were checked (all 14 in the French flag): windows, lights, tyres
+                  Flags on vehicles were checked (all 14 in the French flag): windows, lights, tires
                   and now wheel rims, hubs and spokes stay unpainted. Launch pads, helipads and the
                   flying saucer's pad do take the flag.
                 </li>
@@ -1941,19 +1941,19 @@
                 </li>
                 <li>
                   Morphing toys lost their <code>breathe</code> idle swell (a splat has one
-                  behaviour); several now idle with a gentle morph instead. The animal cell's
+                  behavior); several now idle with a gentle morph instead. The animal cell's
                   daughters are drawn a little small (so they stay in view), and its cutaway wedge
                   ends up stretched over the right-hand daughter.
                 </li>
                 <li>
                   Some effects that send pieces past the resting shape leave them out of the fit
                   (<code>k.fitMorphs = false</code>): the white cell's cup, the pollen puff, the ATP
-                  sparks and the amoeba's pods reach towards the edge of the view.
+                  sparks and the amoeba's pods reach toward the edge of the view.
                 </li>
                 <li>
                   The snowflake holds three flakes (one shown at a time), so each has a third of the
-                  splats; the glint behaviour on its arms was replaced by the growth front (the
-                  centre still glints).
+                  splats; the glint behavior on its arms was replaced by the growth front (the
+                  center still glints).
                 </li>
                 <li>The paramecium's loop is small, so it reads partly as a spin in place.</li>
                 <li>
@@ -2163,7 +2163,7 @@
           <p>
             <strong>On 2026-09-24 the owner approved every proposal in the plan as written</strong>,
             including the sports-ball texture fixes added that day, and all toys are marked approved
-            on the page below. Build them as proposed; use judgement on details.
+            on the page below. Build them as proposed; use judgment on details.
           </p>
           <p>
             The owner can still mark a proposal Approve, Change or Skip (with notes) on a private
@@ -2239,7 +2239,7 @@
                 <tr>
                   <th scope="row">E1</th>
                   <td>
-                    Done: new tap effects for the scans and shapes (33 toys), with colour keys,
+                    Done: new tap effects for the scans and shapes (33 toys), with color keys,
                     whole-body effects and kit-built add-ons for rigs.
                   </td>
                   <td>splashery</td>
@@ -2271,7 +2271,7 @@
                 <tr>
                   <th scope="row">E3</th>
                   <td>
-                    Done: new tap effects for tiny things, anatomy and maths (26 toys), and channel
+                    Done: new tap effects for tiny things, anatomy and math (26 toys), and channel
                     kinds (morph, band, fade, skin) for soft shapes and light fronts.
                   </td>
                   <td>splashery</td>
@@ -2341,8 +2341,8 @@
               and dark mode.
             </li>
             <li>
-              Later the homepage embed will change to a favourite maths toy (the Menger sponge or
-              the hypercube; the voice transcript is ambiguous, ask) at the highest detail, maybe
+              Later the homepage embed will change to a favorite math toy (the Menger sponge or the
+              hypercube; the voice transcript is ambiguous, ask) at the highest detail, maybe
               several embeds. That needs an owner-set embed option such as
               <code>?detail=high</code> (Detail is deliberately not in share links; an embed the
               site owner chooses is a different case). See BACKLOG.md.
@@ -2397,7 +2397,7 @@
                 </li>
                 <li>
                   Inputs are our own CC0 images, such as renders. Check the model and output
-                  licences.
+                  licenses.
                 </li>
                 <li>
                   Set a quality bar against the procedural toys, and only ship results that beat
@@ -2434,7 +2434,7 @@
           <p>Still open (ask when it comes up, in Phase H):</p>
           <ul>
             <li>
-              The favourite maths toy for the homepage: Menger sponge or hypercube? One embed or
+              The favorite math toy for the homepage: Menger sponge or hypercube? One embed or
               several?
             </li>
           </ul>

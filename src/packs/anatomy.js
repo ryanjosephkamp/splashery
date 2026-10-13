@@ -180,7 +180,7 @@ const KIDNEY_RUNS = [
 const HEART_RACE = 5; // seconds a tap's race lasts
 const HEART_REST = 1.1; // resting beats per second of the toy's clock
 const HEART_EXTRA = 5; // whole beats a race adds
-// The ventricles squeeze towards their base and wring about their long axis.
+// The ventricles squeeze toward their base and wring about their long axis.
 const HEART_PIVOT = [-0.14, 0.32, 0];
 const HEART_AXIS = unit([0.41, -0.91, 0]);
 // Extra beats a race has added s seconds after the tap: the tempo climbs for
@@ -213,7 +213,7 @@ export const RECIPES = {
           { id: "love", label: "Love heart" },
         ],
       },
-      { key: "color", label: "Colour", type: "color", default: RED },
+      { key: "color", label: "Color", type: "color", default: RED },
     ],
     controls: [
       { key: "strength", label: "Beat", type: "slider", default: 0.6 },
@@ -262,7 +262,7 @@ export const RECIPES = {
       if (o.style === "love") {
         const vent = k.part("vent", { pivot: [0, 0.1, 0] });
         // The classic heart surface, (x² + 9/4 z² + y² - 1)³ - x² y³ - 9/80 z² y³ = 0,
-        // with y up and z towards the viewer.
+        // with y up and z toward the viewer.
         const f = ([x, y, z]) => {
           const a = x * x + 2.25 * z * z + y * y - 1;
           return a * a * a - x * x * y * y * y - 0.1125 * z * z * y * y * y;
@@ -284,7 +284,7 @@ export const RECIPES = {
         });
         return;
       }
-      // The ventricles squeeze towards their base, the atria towards their
+      // The ventricles squeeze toward their base, the atria toward their
       // middles, and the aorta swells a little as blood is pushed into it.
       const vent = k.part("vent", { pivot: HEART_PIVOT });
       const atriumR = k.part("atriumR", { pivot: [-0.38, 0.4, 0.02] });
@@ -402,7 +402,7 @@ export const RECIPES = {
     options: [
       {
         key: "colors",
-        label: "Colours",
+        label: "Colors",
         type: "select",
         default: "lobes",
         choices: [
@@ -545,13 +545,13 @@ export const RECIPES = {
           interior: 0.1,
           kind: "band",
           channel: (c) => (c.inside ? 0 : BRAIN_CHANNEL[off + LOBES.indexOf(region(c.p))]),
-          // The colour function has just worked out this splat's groove.
+          // The color function has just worked out this splat's groove.
           params: (c) => {
             if (c.inside || !lastG || (lastG.fold < 0.25 && lastG.deep < 0.4)) return noSpark;
             return sparkAt(off + LOBES.indexOf(region(c.p)), c.p);
           },
           core: (c) => {
-            // Grey matter near the surface, white matter within.
+            // gray matter near the surface, white matter within.
             const q = sub(c.p, [0, 0, cz]);
             const d = unit(q);
             return len(q) > shape(d) * 0.86 ? "#c98e96" : "#f4e4d4";
@@ -704,7 +704,7 @@ export const RECIPES = {
     build(k, o) {
       const ball = k.part("ball", { pivot: [0, 0, 0] });
       const iris = o.iris;
-      // The white of the eye, with fine vessels towards the back.
+      // The white of the eye, with fine vessels toward the back.
       k.add(k.sphere(1), {
         even: true,
         opacity: 1,
@@ -722,7 +722,7 @@ export const RECIPES = {
           return lit(col, c.n, 0.66, 0.4);
         },
       });
-      // Iris: a shallow cone of radial fibres, a dark rim and a pale ring.
+      // Iris: a shallow cone of radial fibers, a dark rim and a pale ring.
       const irisR = 0.5;
       const iz = Math.sqrt(1 - irisR * irisR) + 0.01;
       k.add(
@@ -882,7 +882,7 @@ export const RECIPES = {
         pattern: false,
         color: (c) => keep("#ffffff"),
       });
-      // The eyelids (only there while it blinks): skin-coloured shells over
+      // The eyelids (only there while it blinks): skin-colored shells over
       // the front that close from above and below, with a lash line.
       for (const up of [1, -1]) {
         const lid = k.part(up > 0 ? "lid" : "lidLow", { pivot: [0, 0, 0], axis: [1, 0, 0] });
@@ -920,7 +920,7 @@ export const RECIPES = {
   // ---- Lungs ----------------------------------------------------------------------------
   lungs: {
     alive: true,
-    options: [{ key: "color", label: "Colour", type: "color", default: "#f095a3" }],
+    options: [{ key: "color", label: "Color", type: "color", default: "#f095a3" }],
     controls: [
       { key: "breath", label: "Breath", type: "slider", default: 0.5 },
       { key: "deep", label: "Deep breath", type: "pulse", ease: LUNG_BREATH },
@@ -1285,7 +1285,7 @@ export const RECIPES = {
   // ---- Kidney ---------------------------------------------------------------------------
   kidney: {
     alive: true,
-    options: [{ key: "color", label: "Colour", type: "color", default: "#c2504a" }],
+    options: [{ key: "color", label: "Color", type: "color", default: "#c2504a" }],
     controls: [{ key: "flow", label: "Flow", type: "pulse", ease: KIDNEY_FLOW }],
     action: { key: "flow", label: "Pump blood through" },
     // A tap sends three pulses through: each runs in along the artery,
@@ -1320,7 +1320,7 @@ export const RECIPES = {
         const base = shade(col, 1 + 0.06 * n);
         return gloss(lit(base, c.n, 0.6, 0.45), c.n, 0.45, 18);
       };
-      // A faint layer just over the surface, coloured as it is, carries a
+      // A faint layer just over the surface, colored as it is, carries a
       // soft flush that spreads out from the hilum with each pulse (channel 1).
       const beanAt = (u, v) => {
         const a = u * TAU;

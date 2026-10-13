@@ -22,8 +22,8 @@ less with the same decoded scene). Most visitors are on phones (Rules v1, D4).
 
 Static files only, no bundler or CDN (D1); PlayCanvas stays 2.22.3 through `src/pc.js` (D2); old
 `#s=` links and saved scenes keep loading (D3). Engine changes go in their own small additive
-"Engine: …" commits with a test. Don't touch the files of the open PRs (#560, #562, #566, #570,
-#576).
+"Engine: …" commits with a test. Don't touch the files of the open PRs (#560, #562, #566, #581 and
+#582).
 
 ## Report
 

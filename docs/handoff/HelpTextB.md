@@ -58,7 +58,7 @@ Your job: give every toy on your shelves both a how-to line (`howTo`) and an Abo
    and craft, not fighting). Flags and places stay respectful.
 7. American English (color, center, gray, meter, math, -ize). Run
    `node tools/us-english.mjs --diff`. Some Toy tab labels still use older British spelling: quote a
-   label exactly only when you name that control ("Try the Colour slider…" is right if that is its
+   label exactly only when you name that control ("Try the Color slider…" is right if that is its
    label), otherwise write "color".
 8. Work shelf by shelf and commit and push each shelf as you finish it, so the owner can start
    reading early.

@@ -204,7 +204,7 @@ if (wav) {
 }
 
 if (sheet) {
-  // Draw the spectrograms in the browser: 6 per row, labelled, 60 to a
+  // Draw the spectrograms in the browser: 6 per row, labeled, 60 to a
   // page (sheet.png, then sheet-2.png, ...).
   const all = results.filter((r) => r.grid);
   for (let pg = 0; pg * 60 < all.length; pg++) {
