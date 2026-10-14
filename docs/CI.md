@@ -80,6 +80,7 @@ summary still has the report. Each job has a time limit (checks 20 minutes, a sh
 
 ## Known flakes
 
-The `known` list in `tools/suite.json` holds the tests known to fail on plain `main` too, as
-`file:line` (docs/OPERATOR.md, "Known flaky tests"): the report marks them but still counts them.
-Add one only with evidence (it fails on `main` too), and take it off when it is fixed.
+The `known` list in `tools/suite.json` holds the tests known to fail on plain `main` too (in the
+cloud container, or only on Actions: docs/handoff/CI.md has the evidence), as `file:line`
+(docs/OPERATOR.md, "Known flaky tests"): the report marks them but still counts them. Add one only
+with evidence (it fails on `main` too), and take it off when it is fixed.

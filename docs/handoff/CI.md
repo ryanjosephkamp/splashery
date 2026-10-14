@@ -50,32 +50,39 @@ Codex task 77 (docs/codex/77-ci-suite.md), which never opened a PR.
 
 ## Known issues
 
-- On Actions, the report gave hh5-gems's tests lines 5 to 21 below where they are (133 for the
-  crystal ball at 119); locally the same file reports 119. The cause is not found yet. The rerun
+- cdx-pics takes 35 to 37 minutes alone in its shard, so a run takes about 44 minutes however many
+  shards there are; the other 15 shards finish in 11 to 27. Splitting that file is what would bring
+  a run near 25 minutes.
+- On Actions, run 2's report gave hh5-gems's tests lines 5 to 21 below where they are (133 for the
+  crystal ball at 119); run 3 and local runs give the right lines. The cause is not found. The rerun
   finds a test by file and title, so it no longer depends on the line.
-
-- cdx-pics alone takes about 31 to 35 minutes, so a run can't finish faster than that however many
-  shards there are. Splitting that file (or running its describe blocks apart) is what would bring a
-  run near 20 minutes.
-- Failing only on Actions, and failing alone too (they pass in the cloud container; findings, not
-  skipped):
-  - cdx-mir:329: `drawMs` after the fix must stay under 1.1 × before; the runner gave 25.6 ms
-    against a limit of 24.05 ms. It is a wall-clock bound on a shared 4-vCPU runner.
-  - sndc-engine:27: 800 ms after resume, the toy piano had scheduled no new sound (42, then 42).
+- man5:201 still failed in run 3 on Inter alone; the fix after run 3 writes the cloud container's
+  fontconfig rule. Unconfirmed until run 4.
 
 ## For the Operator
 
-Run 1 (head 59e560d): 284 of 284 files, 2,435 tests: 2,424 passed, 10 failed, 1 skipped. About 43
-minutes from push to comment; the shards took 12 to 26 minutes, except 12/16 at 40 (cdx-pics, at
-2,085 s, had no time in suite.json and shared a shard). Checks took 3.5 minutes.
+Three runs on this PR, each 284 of 284 spec files and 2,435 tests. "Alone" is the rerun of the
+failing test by itself in the same shard; ✓ passed alone, ✗ failed alone, blank passed outright.
 
-| Test                                                                 | Alone  | Why                                                                                                                                                                                                                                                             |
-| -------------------------------------------------------------------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| bld:57                                                               | failed | This lane's: the reports' `ci-out/` folder at the top. Fixed (they go to `$RUNNER_TEMP`).                                                                                                                                                                       |
-| man5:201                                                             | failed | Known red. Run 2 showed the cause: "No usable sandbox" (Ubuntu 24.04's AppArmor blocks the user namespaces `manual-pdf.mjs`'s sandboxed Chromium needs). The runner now lifts that restriction and installs the cloud container's fonts (the PDF's next check). |
-| kit:87                                                               | failed | Known red on main ("too much detail for a circular picture on this device").                                                                                                                                                                                    |
-| cdx-mir:329                                                          | failed | Actions only: a draw-time bound (see Known issues).                                                                                                                                                                                                             |
-| sndc-engine:27                                                       | failed | Actions only: no new sound 800 ms after resume (see Known issues).                                                                                                                                                                                              |
-| hh3-engine2:122, img-engine:85, ops-text:41, qrc-picture:119, ui3:50 | passed | Load on a busy runner.                                                                                                                                                                                                                                          |
+| Run (head)  | Failed | Wall    | Notes                                                          |
+| ----------- | -----: | ------- | -------------------------------------------------------------- |
+| 1 (59e560d) |     10 | ~43 min | cdx-pics untimed; shared shard 12 (40 min).                    |
+| 2 (cffe051) |     13 | ~40 min | Every file timed; cdx-pics alone in shard 1 (36 min).          |
+| 3 (343bfe0) |     17 | ~44 min | Sandbox fixed; man5 then stopped on the missing Inter (fixed). |
 
-smoke:734 and tpg:205 passed on Actions.
+| Test                    | Run 1 | Run 2 | Run 3 | Reading                                                                                                                                                                                                 |
+| ----------------------- | ----- | ----- | ----- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| kit:87                  | ✗     | ✗     | ✗     | Known red on main ("too much detail for a circular picture on this device").                                                                                                                            |
+| man5:201                | ✗     | ✗     | ✗     | Known red. On Actions: AppArmor blocked Chromium's sandbox (fixed in run 3), then the runner lacked the container's Inter rule (fixed after run 3).                                                     |
+| bld:57                  | ✗     |       |       | This lane's own `ci-out/` folder; fixed in run 2.                                                                                                                                                       |
+| spg:138                 |       | ✗     | ✗     | Actions only: closing the context after the embed guide's live toy runs past 240 s. Passes in the cloud container (12 s alone, and the whole file on llvmpipe in 138 s). For its lane.                  |
+| ui3:50, ui3:129         | ✓     | ✓     | ✗     | Pause and resume with sound; failed alone in run 3. With sndc-engine:27, the audio-clock tests are unsteady on a busy runner. For its lane.                                                             |
+| sndc-engine:27          | ✗     | ✗     | ✓     | The same audio-clock family; passes in the cloud container. For its lane.                                                                                                                               |
+| scr2-engine:10          |       | ✗     |       | A held GIF frame; failed alone in run 2 only. Passes in the cloud container.                                                                                                                            |
+| cdx-mir:329             | ✗     | ✓     |       | A draw-time bound (25.6 ms against 24.05); load.                                                                                                                                                        |
+| smoke:734               |       |       |       | Passed in all three.                                                                                                                                                                                    |
+| tpg:205, ui4:42, phy:64 |       | ✓     | ✓     | Known flakes; passed alone.                                                                                                                                                                             |
+| others                  | ✓     | ✓     | ✓     | Passed alone: hh3-engine2:122, img-engine:85, ops-text:41, qrc-picture:119, cdx-mir:294, fx4-engine:79, ui2:361, hh5-gems:133/147, live5:63, hh4-tiny:206, phy-engine:90, hh4-space:147, chs-engine:11. |
+
+Until the fragile tests above are steadied, expect a few ✗ on every run. Read the comment's "Alone"
+column: a ✗ that is not on this list is new and real.
