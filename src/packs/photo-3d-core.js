@@ -14,7 +14,7 @@
 // The tier budgets for the toy's splats (the kit's count: the tier's default count times the
 // recipe's density, capped at the tier's maximum). The same as the model toy's.
 import { backgroundImage, planarDepth, rimDepth, softenDepth } from "../photo3d/background.js";
-import { photoEdgeGuide, refineDepthEdges } from "../photo3d/depth-edges.js";
+import { photoEdgeGuide, prepareDepthEdges, refineDepthEdges } from "../photo3d/depth-edges.js";
 import { modelSize, resampleArea } from "../photo3d/pixels.js";
 export { modelSize, resampleArea } from "../photo3d/pixels.js";
 
@@ -149,20 +149,14 @@ function depthAxis(length, size) {
 // the model-dependent part of an upload.
 function upsamplePreparedDepth(dLo, dw, gx, gy, prepared) {
   const out = new Float32Array(gx * gy),
-    { ax, ay, weights } = prepared;
-  let tap = 0;
+    { ax, ay, weights, indices, totals } = prepared;
   for (let j = 0; j < gy; j++)
     for (let i = 0; i < gx; i++) {
-      let sum = 0,
-        wsum = 0;
-      for (let jj = 0; jj < 4; jj++) {
-        const y = ay.index[j * 4 + jj] * dw;
-        for (let ii = 0; ii < 4; ii++) {
-          const w = weights[tap++];
-          sum += w * dLo[y + ax.index[i * 4 + ii]];
-          wsum += w;
-        }
-      }
+      const cell = j * gx + i,
+        end = (cell + 1) * 16;
+      let sum = 0;
+      for (let tap = cell * 16; tap < end; tap++) sum += weights[tap] * dLo[indices[tap]];
+      const wsum = totals[cell];
       if (wsum > 1e-4) out[j * gx + i] = sum / wsum;
       else {
         let bil = 0;
@@ -432,6 +426,7 @@ export function buildPhotoSplats(
       gx,
       gy,
       3 * Math.max(gx / dw, gy / dh),
+      colors?.edgeWork,
     );
   const minCells = Math.max(6, Math.round(MIN_PIECE * gx * gy));
   let m = links(d, gx, gy, cut);
@@ -809,6 +804,7 @@ export function preparePhotoColors(
   const sampled = resampleArea(photo, gx, gy),
     guideLo = resampleArea(photo, dw, dh),
     rgb = sharpen(sampled, gx, gy);
+  const edges = photoEdgeGuide(photo, gx, gy);
   const result = {
     ...layout,
     photo,
@@ -816,15 +812,18 @@ export function preparePhotoColors(
     sampled,
     guideLo,
     sharpened: rgb,
-    edges: photoEdgeGuide(photo, gx, gy),
+    edges,
+    edgeWork: prepareDepthEdges(edges, gx, gy, 3 * Math.max(gx / dw, gy / dh)),
     depthWidth: dw,
     depthHeight: dh,
     depthWeights: null,
   };
-  if (gx * gy * 16 * 8 > maxWeightBytes) return result;
+  if (gx * gy * (16 * (8 + 4) + 8) > maxWeightBytes) return result;
   const ax = depthAxis(dw, gx),
     ay = depthAxis(dh, gy),
     weights = new Float64Array(gx * gy * 16),
+    indices = new Uint32Array(gx * gy * 16),
+    totals = new Float64Array(gx * gy),
     sigmaColor = 0.09,
     inv = 1 / (2 * sigmaColor * sigmaColor);
   let tap = 0;
@@ -843,10 +842,26 @@ export function preparePhotoColors(
             dg = guideLo[p + 1] - g,
             db = guideLo[p + 2] - b;
           const ws = wy * ax.spatial[i * 4 + ii];
-          weights[tap++] = ws * Math.exp(-(dr * dr + dg * dg + db * db) * inv);
+          const weight = ws * Math.exp(-(dr * dr + dg * dg + db * db) * inv);
+          weights[tap] = weight;
+          indices[tap++] = p / 3;
+          totals[j * gx + i] += weight;
         }
       }
     }
-  result.depthWeights = { dw, dh, gx, gy, guideLo, guideHi: rgb, sigmaColor, ax, ay, weights };
+  result.depthWeights = {
+    dw,
+    dh,
+    gx,
+    gy,
+    guideLo,
+    guideHi: rgb,
+    sigmaColor,
+    ax,
+    ay,
+    weights,
+    indices,
+    totals,
+  };
   return result;
 }
