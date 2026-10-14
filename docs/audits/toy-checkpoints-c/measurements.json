@@ -1,0 +1,906 @@
+{
+  "checkpoint": "41b21e74e04ccca178b95ac02b4e5dc0e51b4b45",
+  "browser": "151.0.7922.173",
+  "viewport": [390, 844],
+  "dpr": 1,
+  "renderer": "WebGL2 / ANGLE SwiftShader",
+  "cpuThrottle": 1,
+  "adaptation": false,
+  "results": [
+    {
+      "id": "chladni-cell",
+      "readyMs": 3117.055617,
+      "selectionMs": 1041.0999999999767,
+      "activeWindowMs": 3053.037375,
+      "drawnFrames": 54,
+      "drawFps": 17.68730394268429,
+      "before": {
+        "profile": "low",
+        "splats": 19115,
+        "frames": 23,
+        "clock": 0.48320000000000074,
+        "particles": {
+          "n": 6300,
+          "mode": "cube-012",
+          "moving": false,
+          "settled": 0,
+          "ringing": 0,
+          "colors": "amber",
+          "paint": [
+            0.854110836982727, 0.5429142713546753, 0.19335994124412537, 0.8244654536247253,
+            0.4988696873188019, 0.16286756098270416, 0.8823550939559937, 0.5848771929740906,
+            0.22241120040416718, 0.9131587743759155, 0.6306425929069519, 0.2540949583053589,
+            0.8847353458404541, 0.5884135365486145, 0.22485944628715515, 0.9044848084449768,
+            0.617755651473999, 0.24517320096492767, 0.8457723259925842, 0.5305255651473999,
+            0.1847831755876541, 0.890870988368988, 0.5975293517112732, 0.2311704009771347,
+            0.9083223938941956, 0.623457133769989, 0.24912041425704956, 0.8671207427978516,
+            0.5622432827949524, 0.2067415714263916
+          ]
+        },
+        "song": null,
+        "canvas": [390, 645]
+      },
+      "after": {
+        "profile": "low",
+        "splats": 19115,
+        "frames": 77,
+        "clock": 3.499700000000001,
+        "particles": {
+          "n": 6300,
+          "mode": "cube-012",
+          "moving": true,
+          "settled": 1,
+          "ringing": 0.9999999999999206,
+          "colors": "amber",
+          "paint": [
+            0.854110836982727, 0.5429142713546753, 0.19335994124412537, 0.8244654536247253,
+            0.4988696873188019, 0.16286756098270416, 0.8823550939559937, 0.5848771929740906,
+            0.22241120040416718, 0.9131587743759155, 0.6306425929069519, 0.2540949583053589,
+            0.8847353458404541, 0.5884135365486145, 0.22485944628715515, 0.9044848084449768,
+            0.617755651473999, 0.24517320096492767, 0.8457723259925842, 0.5305255651473999,
+            0.1847831755876541, 0.890870988368988, 0.5975293517112732, 0.2311704009771347,
+            0.9083223938941956, 0.623457133769989, 0.24912041425704956, 0.8671207427978516,
+            0.5622432827949524, 0.2067415714263916
+          ]
+        },
+        "song": null,
+        "canvas": [390, 645]
+      },
+      "resources": [
+        {
+          "url": "/src/packs/studio.js",
+          "encodedBodySize": 76580,
+          "transferSize": 76880,
+          "duration": 3.5
+        },
+        {
+          "url": "/src/packs/studio-audio.js",
+          "encodedBodySize": 5869,
+          "transferSize": 6169,
+          "duration": 17.699999999953434
+        },
+        {
+          "url": "/src/live/analysis.js",
+          "encodedBodySize": 11882,
+          "transferSize": 12182,
+          "duration": 18
+        },
+        {
+          "url": "/src/packs/song-stream.js",
+          "encodedBodySize": 9525,
+          "transferSize": 9825,
+          "duration": 18.29999999998836
+        },
+        {
+          "url": "/src/packs/song-looks.js",
+          "encodedBodySize": 34484,
+          "transferSize": 34784,
+          "duration": 18.5
+        },
+        {
+          "url": "/src/live/relief.js",
+          "encodedBodySize": 72932,
+          "transferSize": 73232,
+          "duration": 18.900000000023283
+        },
+        {
+          "url": "/src/packs/song-analysis.js",
+          "encodedBodySize": 8824,
+          "transferSize": 9124,
+          "duration": 18.600000000034925
+        },
+        {
+          "url": "/src/packs/song-record.js",
+          "encodedBodySize": 7477,
+          "transferSize": 7777,
+          "duration": 32.5
+        },
+        {
+          "url": "/src/packs/chladni-sand.js",
+          "encodedBodySize": 7403,
+          "transferSize": 7703,
+          "duration": 32.70000000001164
+        },
+        {
+          "url": "/src/packs/chladni-colors.js",
+          "encodedBodySize": 8772,
+          "transferSize": 9072,
+          "duration": 30.400000000023283
+        },
+        {
+          "url": "/src/packs/chladni-3d.js",
+          "encodedBodySize": 57115,
+          "transferSize": 57415,
+          "duration": 31.900000000023283
+        },
+        {
+          "url": "/src/packs/song-mp3.js",
+          "encodedBodySize": 2454,
+          "transferSize": 2754,
+          "duration": 17
+        },
+        {
+          "url": "/assets/toys/enigma-machine/thumb.webp",
+          "encodedBodySize": 18874,
+          "transferSize": 19174,
+          "duration": 15.099999999976717
+        },
+        {
+          "url": "/assets/toys/bombe/thumb.webp",
+          "encodedBodySize": 14566,
+          "transferSize": 14866,
+          "duration": 29.79999999998836
+        },
+        {
+          "url": "/assets/toys/your-book/thumb.webp",
+          "encodedBodySize": 5588,
+          "transferSize": 5888,
+          "duration": 28.599999999976717
+        },
+        {
+          "url": "/assets/toys/picture-lab/thumb.webp",
+          "encodedBodySize": 20436,
+          "transferSize": 20736,
+          "duration": 30
+        },
+        {
+          "url": "/assets/toys/photo-album/thumb.webp",
+          "encodedBodySize": 4896,
+          "transferSize": 5196,
+          "duration": 30.699999999953434
+        },
+        {
+          "url": "/assets/toys/picture-frame/thumb.webp",
+          "encodedBodySize": 17506,
+          "transferSize": 17806,
+          "duration": 31.899999999965075
+        },
+        {
+          "url": "/assets/toys/song-landscape/thumb.webp",
+          "encodedBodySize": 11056,
+          "transferSize": 11356,
+          "duration": 30.100000000034925
+        },
+        {
+          "url": "/assets/toys/chladni-plate/thumb.webp",
+          "encodedBodySize": 15964,
+          "transferSize": 16264,
+          "duration": 57
+        },
+        {
+          "url": "/assets/toys/chladni-cell/thumb.webp",
+          "encodedBodySize": 30518,
+          "transferSize": 30818,
+          "duration": 56.90000000002328
+        },
+        {
+          "url": "/assets/toys/room-echo/thumb.webp",
+          "encodedBodySize": 6354,
+          "transferSize": 6654,
+          "duration": 57.100000000034925
+        },
+        {
+          "url": "/assets/toys/splat-mirror/thumb.webp",
+          "encodedBodySize": 9892,
+          "transferSize": 10192,
+          "duration": 57.40000000002328
+        },
+        {
+          "url": "/assets/toys/model-splats/thumb.webp",
+          "encodedBodySize": 5564,
+          "transferSize": 5864,
+          "duration": 57.29999999998836
+        },
+        {
+          "url": "/assets/toys/qr-code/thumb.webp",
+          "encodedBodySize": 11870,
+          "transferSize": 12170,
+          "duration": 57.40000000002328
+        },
+        {
+          "url": "/assets/toys/qr-anatomy/thumb.webp",
+          "encodedBodySize": 6378,
+          "transferSize": 6678,
+          "duration": 68.40000000002328
+        },
+        {
+          "url": "/assets/toys/qr-damage/thumb.webp",
+          "encodedBodySize": 18090,
+          "transferSize": 18390,
+          "duration": 68.19999999995343
+        },
+        {
+          "url": "/assets/toys/qr-three/thumb.webp",
+          "encodedBodySize": 16624,
+          "transferSize": 16924,
+          "duration": 67.70000000001164
+        },
+        {
+          "url": "/assets/toys/qr-picture/thumb.webp",
+          "encodedBodySize": 26832,
+          "transferSize": 27132,
+          "duration": 69
+        },
+        {
+          "url": "/assets/toys/qr-build/thumb.webp",
+          "encodedBodySize": 15008,
+          "transferSize": 15308,
+          "duration": 85.40000000002328
+        },
+        {
+          "url": "/assets/toys/barcodes/thumb.webp",
+          "encodedBodySize": 5874,
+          "transferSize": 6174,
+          "duration": 85.89999999996508
+        },
+        {
+          "url": "/assets/toys/photo-3d/thumb.webp",
+          "encodedBodySize": 19724,
+          "transferSize": 20024,
+          "duration": 86.19999999995343
+        },
+        {
+          "url": "/assets/toys/moving-photo-3d/thumb.webp",
+          "encodedBodySize": 8392,
+          "transferSize": 8692,
+          "duration": 86.40000000002328
+        },
+        {
+          "url": "/assets/toys/video-3d/thumb.webp",
+          "encodedBodySize": 19714,
+          "transferSize": 20014,
+          "duration": 89.10000000003492
+        },
+        {
+          "url": "/assets/toys/screen/thumb.webp",
+          "encodedBodySize": 6638,
+          "transferSize": 6938,
+          "duration": 89.39999999996508
+        }
+      ],
+      "errors": []
+    },
+    {
+      "id": "chladni-plate",
+      "readyMs": 2843.186917000001,
+      "selectionMs": 488.4000000000233,
+      "activeWindowMs": 3008.576032000001,
+      "drawnFrames": 18,
+      "drawFps": 5.9828968284488395,
+      "before": {
+        "profile": "low",
+        "splats": 51398,
+        "frames": 25,
+        "clock": 0.5331999999999995,
+        "particles": {
+          "n": 7200,
+          "moving": false,
+          "steps": 0,
+          "at": [
+            0.4880542457103729, 0.42969781160354614, 0.9314958453178406, 0.15801429748535156,
+            0.3888714015483856, 0.9217938184738159, 0.44090181589126587, 0.458169549703598,
+            0.5351964831352234, 0.2928422689437866, 0.2896059453487396, 0.2542177140712738,
+            0.39825865626335144, 0.6723209619522095, 0.30733194947242737, 0.09993802011013031,
+            0.9441894888877869, 0.9436997771263123, 0.411817729473114, 0.31020739674568176,
+            0.3179861903190613, 0.36761265993118286, 0.48289406299591064, 0.7298393845558167,
+            0.1172279417514801, 0.8197208642959595, 0.14606927335262299, 0.2910415530204773,
+            0.30838823318481445, 0.9464775323867798, 0.9664216041564941, 0.4854346513748169,
+            0.9191080927848816, 0.5457190275192261, 0.8651313185691833, 0.4278357923030853,
+            0.17226050794124603, 0.11752010881900787, 0.8241255283355713, 0.7555351853370667,
+            0.960666298866272, 0.4367818832397461, 0.24445073306560516, 0.3343220055103302,
+            0.6578627228736877, 0.3167437016963959, 0.21211445331573486, 0.7259405255317688,
+            0.3540666103363037, 0.5201290845870972, 0.8500607013702393, 0.25318142771720886,
+            0.259013295173645, 0.9425122141838074, 0.4486156702041626, 0.6740610003471375,
+            0.13173417747020721, 0.7037106156349182, 0.7390161156654358, 0.5853182673454285,
+            0.4242405593395233, 0.2082248032093048, 0.4870206117630005, 0.3351843059062958,
+            0.7303277254104614, 0.0720001608133316, 0.7420552372932434, 0.6249642372131348,
+            0.6401945948600769, 0.9060441851615906, 0.2887640595436096, 0.1667373776435852,
+            0.7787278294563293, 0.8807665109634399, 0.8256555795669556, 0.9282041192054749,
+            0.8062542676925659, 0.0598224513232708, 0.3774758577346802, 0.39996153116226196,
+            0.21863645315170288, 0.04689447954297066, 0.9383792281150818, 0.6478052735328674,
+            0.09745476394891739, 0.5978924632072449, 0.21254900097846985, 0.4308379888534546,
+            0.12401968985795975, 0.7420211434364319, 0.1882554143667221, 0.5459023714065552,
+            0.9111369252204895, 0.7926421761512756, 0.43807685375213623, 0.09133560210466385,
+            0.3411242365837097, 0.758100688457489, 0.7004437446594238, 0.9310100078582764
+          ],
+          "amps": {},
+          "colors": "sand",
+          "paint": [
+            0.9292951822280884, 0.8709323406219482, 0.7139530181884766, 0.9558822512626648,
+            0.9116992354393005, 0.7813069820404053, 0.929473876953125, 0.8712063431739807,
+            0.7144057154655457, 0.9364909529685974, 0.8819658756256104, 0.7321822643280029,
+            0.9202296137809753, 0.8570318222045898, 0.6909869909286499, 0.9332388043403625,
+            0.8769792318344116, 0.7239434719085693, 0.9439244866371155, 0.893363893032074,
+            0.7510138750076294, 0.9371297359466553, 0.8829452991485596, 0.7338005304336548,
+            0.9177625775337219, 0.8532490134239197, 0.6847370266914368, 0.9220433831214905,
+            0.8598129153251648, 0.6955817341804504
+          ]
+        },
+        "song": null,
+        "canvas": [390, 645]
+      },
+      "after": {
+        "profile": "low",
+        "splats": 51398,
+        "frames": 43,
+        "clock": 2.0832999999999995,
+        "particles": {
+          "n": 7200,
+          "moving": true,
+          "steps": 18,
+          "at": [
+            0.48690006136894226, 0.4167322814464569, 0.8046471476554871, 0.09639333188533783,
+            0.4879583418369293, 0.7712249159812927, 0.424172967672348, 0.35228031873703003,
+            0.5667487978935242, 0.32999661564826965, 0.19794942438602448, 0.2784102261066437,
+            0.4473167359828949, 0.6685675382614136, 0.28189337253570557, 0.17818178236484528,
+            0.9403687119483948, 0.8212413191795349, 0.39151817560195923, 0.4222736060619354,
+            0.2805342376232147, 0.3637765944004059, 0.4919019341468811, 0.8118657469749451,
+            0.14660131931304932, 0.8076831698417664, 0.16753168404102325, 0.19779115915298462,
+            0.20295463502407074, 0.948937177658081, 0.9048706293106079, 0.5645598769187927,
+            0.8250585794448853, 0.3840559124946594, 0.8910707831382751, 0.4169617295265198,
+            0.14954353868961334, 0.17933359742164612, 0.8532806634902954, 0.7576549053192139,
+            0.904317319393158, 0.44644343852996826, 0.16698674857616425, 0.2629399001598358,
+            0.6039958596229553, 0.17593342065811157, 0.2097633183002472, 0.7335535883903503,
+            0.32510989904403687, 0.42811256647109985, 0.8435890078544617, 0.19758129119873047,
+            0.20718809962272644, 0.8995643258094788, 0.5138556957244873, 0.7207388281822205,
+            0.1862935870885849, 0.6529226899147034, 0.8073093295097351, 0.6570025682449341,
+            0.41901499032974243, 0.22880524396896362, 0.5371872186660767, 0.32916852831840515,
+            0.7168856859207153, 0.08750118315219879, 0.7973231673240662, 0.5587978363037109,
+            0.615498960018158, 0.9025903344154358, 0.2351968139410019, 0.21109899878501892,
+            0.8349857926368713, 0.858881413936615, 0.85130375623703, 0.9294890761375427,
+            0.8330219388008118, 0.04592364653944969, 0.37226811051368713, 0.4085143208503723,
+            0.10477172583341599, 0.10698413848876953, 0.8383597135543823, 0.6230859756469727,
+            0.1081400215625763, 0.5838451981544495, 0.18435679376125336, 0.4614675045013428,
+            0.15012894570827484, 0.7415838241577148, 0.1011161208152771, 0.5480477213859558,
+            0.8285290002822876, 0.7389664053916931, 0.40308406949043274, 0.16248111426830292,
+            0.3410956859588623, 0.7602121233940125, 0.6820210218429565, 0.9011618494987488
+          ],
+          "amps": {
+            "2-3+": 0.9999999961540684
+          },
+          "colors": "sand",
+          "paint": [
+            0.9292951822280884, 0.8709323406219482, 0.7139530181884766, 0.9558822512626648,
+            0.9116992354393005, 0.7813069820404053, 0.929473876953125, 0.8712063431739807,
+            0.7144057154655457, 0.9364909529685974, 0.8819658756256104, 0.7321822643280029,
+            0.9202296137809753, 0.8570318222045898, 0.6909869909286499, 0.9332388043403625,
+            0.8769792318344116, 0.7239434719085693, 0.9439244866371155, 0.893363893032074,
+            0.7510138750076294, 0.9371297359466553, 0.8829452991485596, 0.7338005304336548,
+            0.9177625775337219, 0.8532490134239197, 0.6847370266914368, 0.9220433831214905,
+            0.8598129153251648, 0.6955817341804504
+          ]
+        },
+        "song": null,
+        "canvas": [390, 645]
+      },
+      "resources": [
+        {
+          "url": "/src/packs/studio.js",
+          "encodedBodySize": 76580,
+          "transferSize": 76880,
+          "duration": 4.099999999976717
+        },
+        {
+          "url": "/src/packs/studio-audio.js",
+          "encodedBodySize": 5869,
+          "transferSize": 6169,
+          "duration": 9.399999999965075
+        },
+        {
+          "url": "/src/live/analysis.js",
+          "encodedBodySize": 11882,
+          "transferSize": 12182,
+          "duration": 9.299999999988358
+        },
+        {
+          "url": "/src/live/relief.js",
+          "encodedBodySize": 72932,
+          "transferSize": 73232,
+          "duration": 23.5
+        },
+        {
+          "url": "/src/packs/song-record.js",
+          "encodedBodySize": 7477,
+          "transferSize": 7777,
+          "duration": 12.300000000046566
+        },
+        {
+          "url": "/src/packs/song-stream.js",
+          "encodedBodySize": 9525,
+          "transferSize": 9825,
+          "duration": 22.300000000046566
+        },
+        {
+          "url": "/src/packs/song-looks.js",
+          "encodedBodySize": 34484,
+          "transferSize": 34784,
+          "duration": 23.20000000001164
+        },
+        {
+          "url": "/src/packs/song-analysis.js",
+          "encodedBodySize": 8824,
+          "transferSize": 9124,
+          "duration": 23.300000000046566
+        },
+        {
+          "url": "/src/packs/chladni-sand.js",
+          "encodedBodySize": 7403,
+          "transferSize": 7703,
+          "duration": 14.200000000011642
+        },
+        {
+          "url": "/src/packs/chladni-3d.js",
+          "encodedBodySize": 57115,
+          "transferSize": 57415,
+          "duration": 22.400000000023283
+        },
+        {
+          "url": "/src/packs/chladni-colors.js",
+          "encodedBodySize": 8772,
+          "transferSize": 9072,
+          "duration": 26.400000000023283
+        },
+        {
+          "url": "/src/packs/song-mp3.js",
+          "encodedBodySize": 2454,
+          "transferSize": 2754,
+          "duration": 6.400000000023283
+        },
+        {
+          "url": "/assets/toys/difference-engine/thumb.webp",
+          "encodedBodySize": 12230,
+          "transferSize": 12530,
+          "duration": 16.099999999976717
+        },
+        {
+          "url": "/assets/toys/enigma-machine/thumb.webp",
+          "encodedBodySize": 18874,
+          "transferSize": 19174,
+          "duration": 21.599999999976717
+        },
+        {
+          "url": "/assets/toys/bombe/thumb.webp",
+          "encodedBodySize": 14566,
+          "transferSize": 14866,
+          "duration": 22.20000000001164
+        },
+        {
+          "url": "/assets/toys/picture-lab/thumb.webp",
+          "encodedBodySize": 20436,
+          "transferSize": 20736,
+          "duration": 21.900000000023283
+        },
+        {
+          "url": "/assets/toys/your-book/thumb.webp",
+          "encodedBodySize": 5588,
+          "transferSize": 5888,
+          "duration": 24.100000000034925
+        },
+        {
+          "url": "/assets/toys/photo-album/thumb.webp",
+          "encodedBodySize": 4896,
+          "transferSize": 5196,
+          "duration": 25.300000000046566
+        },
+        {
+          "url": "/assets/toys/picture-frame/thumb.webp",
+          "encodedBodySize": 17506,
+          "transferSize": 17806,
+          "duration": 31.900000000023283
+        },
+        {
+          "url": "/assets/toys/song-landscape/thumb.webp",
+          "encodedBodySize": 11056,
+          "transferSize": 11356,
+          "duration": 27.899999999965075
+        },
+        {
+          "url": "/assets/toys/chladni-plate/thumb.webp",
+          "encodedBodySize": 15964,
+          "transferSize": 16264,
+          "duration": 44.79999999998836
+        },
+        {
+          "url": "/assets/toys/chladni-cell/thumb.webp",
+          "encodedBodySize": 30518,
+          "transferSize": 30818,
+          "duration": 39
+        },
+        {
+          "url": "/assets/toys/splat-mirror/thumb.webp",
+          "encodedBodySize": 9892,
+          "transferSize": 10192,
+          "duration": 39.699999999953434
+        },
+        {
+          "url": "/assets/toys/qr-code/thumb.webp",
+          "encodedBodySize": 11870,
+          "transferSize": 12170,
+          "duration": 40
+        },
+        {
+          "url": "/assets/toys/model-splats/thumb.webp",
+          "encodedBodySize": 5564,
+          "transferSize": 5864,
+          "duration": 40.399999999965075
+        },
+        {
+          "url": "/assets/toys/room-echo/thumb.webp",
+          "encodedBodySize": 6354,
+          "transferSize": 6654,
+          "duration": 44.899999999965075
+        },
+        {
+          "url": "/assets/toys/qr-anatomy/thumb.webp",
+          "encodedBodySize": 6378,
+          "transferSize": 6678,
+          "duration": 50.90000000002328
+        },
+        {
+          "url": "/assets/toys/qr-damage/thumb.webp",
+          "encodedBodySize": 18090,
+          "transferSize": 18390,
+          "duration": 51.5
+        },
+        {
+          "url": "/assets/toys/qr-three/thumb.webp",
+          "encodedBodySize": 16624,
+          "transferSize": 16924,
+          "duration": 51
+        },
+        {
+          "url": "/assets/toys/qr-picture/thumb.webp",
+          "encodedBodySize": 26832,
+          "transferSize": 27132,
+          "duration": 51.59999999997672
+        },
+        {
+          "url": "/assets/toys/barcodes/thumb.webp",
+          "encodedBodySize": 5874,
+          "transferSize": 6174,
+          "duration": 60.29999999998836
+        },
+        {
+          "url": "/assets/toys/qr-build/thumb.webp",
+          "encodedBodySize": 15008,
+          "transferSize": 15308,
+          "duration": 61.70000000001164
+        },
+        {
+          "url": "/assets/toys/photo-3d/thumb.webp",
+          "encodedBodySize": 19724,
+          "transferSize": 20024,
+          "duration": 61.90000000002328
+        },
+        {
+          "url": "/assets/toys/screen/thumb.webp",
+          "encodedBodySize": 6638,
+          "transferSize": 6938,
+          "duration": 61.09999999997672
+        },
+        {
+          "url": "/assets/toys/moving-photo-3d/thumb.webp",
+          "encodedBodySize": 8392,
+          "transferSize": 8692,
+          "duration": 62
+        }
+      ],
+      "errors": []
+    },
+    {
+      "id": "song-landscape",
+      "readyMs": 2881.2961240000004,
+      "selectionMs": 738.3000000000466,
+      "activeWindowMs": 3006.9324049999996,
+      "drawnFrames": 26,
+      "drawFps": 8.646685890499757,
+      "before": {
+        "profile": "low",
+        "splats": 49297,
+        "frames": 27,
+        "clock": 0.41669999999999985,
+        "particles": null,
+        "song": {
+          "play": {
+            "on": false,
+            "pos": 0,
+            "audio": false
+          },
+          "analysis": {
+            "progress": 1,
+            "finished": true,
+            "error": null,
+            "doneMs": 856.2999999999884,
+            "look": null,
+            "land": true
+          },
+          "nt": 95,
+          "nf": 104
+        },
+        "canvas": [390, 645]
+      },
+      "after": {
+        "profile": "low",
+        "splats": 49297,
+        "frames": 53,
+        "clock": 2.8832000000000013,
+        "particles": null,
+        "song": {
+          "play": {
+            "on": true,
+            "pos": 2.3665000000000016,
+            "audio": false
+          },
+          "analysis": {
+            "progress": 1,
+            "finished": true,
+            "error": null,
+            "doneMs": 856.2999999999884,
+            "look": null,
+            "land": true
+          },
+          "nt": 95,
+          "nf": 104
+        },
+        "canvas": [390, 645]
+      },
+      "resources": [
+        {
+          "url": "/src/packs/studio.js",
+          "encodedBodySize": 76580,
+          "transferSize": 76880,
+          "duration": 4.7999999999883585
+        },
+        {
+          "url": "/src/packs/studio-audio.js",
+          "encodedBodySize": 5869,
+          "transferSize": 6169,
+          "duration": 11.899999999965075
+        },
+        {
+          "url": "/src/packs/song-stream.js",
+          "encodedBodySize": 9525,
+          "transferSize": 9825,
+          "duration": 18.599999999976717
+        },
+        {
+          "url": "/src/live/analysis.js",
+          "encodedBodySize": 11882,
+          "transferSize": 12182,
+          "duration": 20.79999999998836
+        },
+        {
+          "url": "/src/live/relief.js",
+          "encodedBodySize": 72932,
+          "transferSize": 73232,
+          "duration": 20.099999999976717
+        },
+        {
+          "url": "/src/packs/song-looks.js",
+          "encodedBodySize": 34484,
+          "transferSize": 34784,
+          "duration": 14.400000000023283
+        },
+        {
+          "url": "/src/packs/song-analysis.js",
+          "encodedBodySize": 8824,
+          "transferSize": 9124,
+          "duration": 20.400000000023283
+        },
+        {
+          "url": "/src/packs/song-record.js",
+          "encodedBodySize": 7477,
+          "transferSize": 7777,
+          "duration": 24.70000000001164
+        },
+        {
+          "url": "/src/packs/chladni-sand.js",
+          "encodedBodySize": 7403,
+          "transferSize": 7703,
+          "duration": 25.599999999976717
+        },
+        {
+          "url": "/src/packs/chladni-3d.js",
+          "encodedBodySize": 57115,
+          "transferSize": 57415,
+          "duration": 30.899999999965075
+        },
+        {
+          "url": "/src/packs/chladni-colors.js",
+          "encodedBodySize": 8772,
+          "transferSize": 9072,
+          "duration": 31.5
+        },
+        {
+          "url": "/src/packs/song-mp3.js",
+          "encodedBodySize": 2454,
+          "transferSize": 2754,
+          "duration": 10.399999999965075
+        },
+        {
+          "url": "/assets/toys/song-landscape/sample.wav",
+          "encodedBodySize": 882044,
+          "transferSize": 882344,
+          "duration": 5.300000000046566
+        },
+        {
+          "url": "/src/packs/song-worker.js",
+          "encodedBodySize": 3933,
+          "transferSize": 4233,
+          "duration": -147.5
+        },
+        {
+          "url": "/src/packs/song-analysis.js",
+          "encodedBodySize": 8824,
+          "transferSize": 0,
+          "duration": 1.1999999999534339
+        },
+        {
+          "url": "/src/packs/studio-audio.js",
+          "encodedBodySize": 5869,
+          "transferSize": 0,
+          "duration": 2.400000000023283
+        },
+        {
+          "url": "/assets/toys/turing-machine/thumb.webp",
+          "encodedBodySize": 10602,
+          "transferSize": 10902,
+          "duration": 37.5
+        },
+        {
+          "url": "/assets/toys/difference-engine/thumb.webp",
+          "encodedBodySize": 12230,
+          "transferSize": 12530,
+          "duration": 23.600000000034925
+        },
+        {
+          "url": "/assets/toys/enigma-machine/thumb.webp",
+          "encodedBodySize": 18874,
+          "transferSize": 19174,
+          "duration": 30.100000000034925
+        },
+        {
+          "url": "/assets/toys/bombe/thumb.webp",
+          "encodedBodySize": 14566,
+          "transferSize": 14866,
+          "duration": 29.5
+        },
+        {
+          "url": "/assets/toys/picture-lab/thumb.webp",
+          "encodedBodySize": 20436,
+          "transferSize": 20736,
+          "duration": 36.29999999998836
+        },
+        {
+          "url": "/assets/toys/your-book/thumb.webp",
+          "encodedBodySize": 5588,
+          "transferSize": 5888,
+          "duration": 36.70000000001164
+        },
+        {
+          "url": "/assets/toys/photo-album/thumb.webp",
+          "encodedBodySize": 4896,
+          "transferSize": 5196,
+          "duration": 51.29999999998836
+        },
+        {
+          "url": "/assets/toys/song-landscape/thumb.webp",
+          "encodedBodySize": 11056,
+          "transferSize": 11356,
+          "duration": 52
+        },
+        {
+          "url": "/assets/toys/picture-frame/thumb.webp",
+          "encodedBodySize": 17506,
+          "transferSize": 17806,
+          "duration": 50.79999999998836
+        },
+        {
+          "url": "/assets/toys/chladni-cell/thumb.webp",
+          "encodedBodySize": 30518,
+          "transferSize": 30818,
+          "duration": 56.899999999965075
+        },
+        {
+          "url": "/assets/toys/chladni-plate/thumb.webp",
+          "encodedBodySize": 15964,
+          "transferSize": 16264,
+          "duration": 56.59999999997672
+        },
+        {
+          "url": "/assets/toys/room-echo/thumb.webp",
+          "encodedBodySize": 6354,
+          "transferSize": 6654,
+          "duration": 57.59999999997672
+        },
+        {
+          "url": "/assets/toys/splat-mirror/thumb.webp",
+          "encodedBodySize": 9892,
+          "transferSize": 10192,
+          "duration": 61.40000000002328
+        },
+        {
+          "url": "/assets/toys/qr-code/thumb.webp",
+          "encodedBodySize": 11870,
+          "transferSize": 12170,
+          "duration": 70.20000000001164
+        },
+        {
+          "url": "/assets/toys/model-splats/thumb.webp",
+          "encodedBodySize": 5564,
+          "transferSize": 5864,
+          "duration": 80.90000000002328
+        },
+        {
+          "url": "/assets/toys/qr-anatomy/thumb.webp",
+          "encodedBodySize": 6378,
+          "transferSize": 6678,
+          "duration": 70
+        },
+        {
+          "url": "/assets/toys/qr-three/thumb.webp",
+          "encodedBodySize": 16624,
+          "transferSize": 16924,
+          "duration": 70
+        },
+        {
+          "url": "/assets/toys/qr-damage/thumb.webp",
+          "encodedBodySize": 18090,
+          "transferSize": 18390,
+          "duration": 70.19999999995343
+        },
+        {
+          "url": "/assets/toys/qr-picture/thumb.webp",
+          "encodedBodySize": 26832,
+          "transferSize": 27132,
+          "duration": 80.39999999996508
+        },
+        {
+          "url": "/assets/toys/qr-build/thumb.webp",
+          "encodedBodySize": 15008,
+          "transferSize": 15308,
+          "duration": 82.79999999998836
+        },
+        {
+          "url": "/assets/toys/barcodes/thumb.webp",
+          "encodedBodySize": 5874,
+          "transferSize": 6174,
+          "duration": 84.09999999997672
+        },
+        {
+          "url": "/assets/toys/photo-3d/thumb.webp",
+          "encodedBodySize": 19724,
+          "transferSize": 20024,
+          "duration": 91.5
+        },
+        {
+          "url": "/assets/toys/screen/thumb.webp",
+          "encodedBodySize": 6638,
+          "transferSize": 6938,
+          "duration": 91.59999999997672
+        }
+      ],
+      "errors": []
+    }
+  ]
+}
