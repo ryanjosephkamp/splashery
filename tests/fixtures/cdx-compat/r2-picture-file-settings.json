@@ -1,0 +1,126 @@
+{
+  "$comment": "Source: 2734137f308d792277fed2f8135f4b6e1b9be292:src/state.js. Reconstructed picture-file metadata: the app retains the reference and warns; the embed intentionally uses the sample without the file reference.",
+  "$compat": {
+    "commit": "2734137f308d792277fed2f8135f4b6e1b9be292",
+    "file": "src/state.js",
+    "description": "Reconstructed picture-file metadata: the app retains the reference and warns; the embed intentionally uses the sample without the file reference.",
+    "origin": "historical reconstruction",
+    "reconstruction": "task 65, October 14, 2026",
+    "category": "pictures",
+    "hash": "d.HY7NCsIwEITfZc5pSdP6w958B0_e0nYjizEt6VYUybtLPA0D38fMFy_OmywJ1BtMmb3yfFEQnHXHprNN567dmQ6WBttaa28w2Jhn0PHgTga6fEBfPCTNIIy7RJUEA6l1lUn3zE30IwyePIuvcJDINZN_MghB3pVq13SHwfhR3kCd64dSioHfdVmj_6_onpP6sdrBx40NOASe6t20JEYpPw",
+    "expected": {
+      "app": "splashery",
+      "version": 3,
+      "seed": 6527,
+      "toy": {
+        "kind": "builtin",
+        "id": "picture-lab",
+        "media": {
+          "file": {
+            "name": "fixture.png",
+            "bytes": 1234
+          }
+        }
+      },
+      "look": {
+        "background": "page",
+        "theme": "auto",
+        "accent": "auto",
+        "splatScale": 1,
+        "exposure": 1
+      },
+      "effects": {
+        "poke": {
+          "on": false,
+          "strength": 0.6,
+          "wobble": 0.5
+        },
+        "wind": {
+          "on": false,
+          "strength": 0.55,
+          "direction": 0
+        },
+        "dissolve": {
+          "on": false,
+          "spread": 0.55,
+          "speed": 0.5
+        },
+        "drop": {
+          "on": false,
+          "bounce": 0.45,
+          "scatter": 0.5
+        },
+        "magnet": {
+          "on": false,
+          "strength": 0.7,
+          "radius": 0.45
+        },
+        "twist": {
+          "on": false,
+          "amount": 0.5,
+          "wobble": 0.3,
+          "axis": "y"
+        },
+        "slice": {
+          "on": false,
+          "position": 0,
+          "sweep": 0.35,
+          "axis": "x"
+        },
+        "paint": {
+          "on": false,
+          "size": 0.5,
+          "splash": 0.5,
+          "color": "#e63b2e"
+        }
+      },
+      "paint": {
+        "stamps": []
+      },
+      "camera": {
+        "yaw": 0.55,
+        "pitch": 0.28,
+        "roll": 0,
+        "distance": 5
+      },
+      "autoplay": {
+        "turntable": false,
+        "effect": "none"
+      },
+      "pattern": {
+        "id": "none",
+        "flag": "",
+        "projection": "wrap",
+        "repeats": 1,
+        "colors": ["#ffffff", "#e63b2e", "#0b4f9c"],
+        "scale": 0.5,
+        "amount": 1,
+        "detail": 0.6
+      },
+      "motion": {
+        "alive": true,
+        "move": "still",
+        "speed": 0.5,
+        "controls": {}
+      }
+    },
+    "embedDropsMedia": true
+  },
+  "version": 3,
+  "createdAt": "2026-10-12T18:50:40.000Z",
+  "seed": 6527,
+  "toy": {
+    "kind": "builtin",
+    "id": "picture-lab",
+    "media": {
+      "file": {
+        "name": "fixture.png",
+        "bytes": 1234
+      }
+    }
+  },
+  "autoplay": {
+    "turntable": false,
+    "effect": "none"
+  }
+}
