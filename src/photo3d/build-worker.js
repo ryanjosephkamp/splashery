@@ -1,12 +1,24 @@
 // The depth model is owned by task 37. This worker only constructs the surfaces
 // from an already available photo and depth map.
-import { buildPhotoSplats } from "../packs/photo-3d-core.js";
+import { buildPhotoSplats, preparePhotoColors } from "../packs/photo-3d-core.js";
 import { backingField, depthBytes } from "../live/relief-height.js";
 import { surfaceGrid } from "./surface.js";
 
-self.onmessage = ({ data: { id, photo, depth, options, cells } }) => {
+let colors;
+self.onmessage = ({ data: { type, id, photo, depth, options, cells } }) => {
   try {
-    const s = buildPhotoSplats(photo, depth, { ...options, sharpCells: cells });
+    if (type === "colors") {
+      colors = { id, photo, prepared: preparePhotoColors(photo, options) };
+      self.postMessage({ id, precomputed: true });
+      return;
+    }
+    const cached = colors?.id === options.colorKey ? colors : null;
+    const s = buildPhotoSplats(cached?.photo || photo, depth, {
+      ...options,
+      prepared: cached?.prepared,
+      sharpCells: cells,
+    });
+    if (cached) cached.prepared.depthWeights = null;
     const f = Math.min(1, Math.sqrt(cells / (s.gx * s.gy)));
     const cols = Math.max(8, Math.round(s.gx * f)),
       rows = Math.max(8, Math.round(s.gy * f));
