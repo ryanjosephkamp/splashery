@@ -145,9 +145,9 @@ this checkpoint does not claim to reproduce that paper's full method. The primar
 not be retrieved during this task, so its detailed algorithm was not independently verified.
 Diffusion weights, Gaussian weights, and threshold details here are read from the implementation.
 
-`measure()` reports the relative-luminance ratio of mean dark versus light module colors and the a
-fixed ink-to-paper center reference, plus a gray gap between free picture cells. The center
-reference is not a measurement of every hue-preserving center. The formula follows the opened
+`measure()` reports the relative-luminance ratio of mean dark versus light module colors and a fixed
+ink-to-paper center reference, plus a gray gap between free picture cells. The center reference is
+not a measurement of every hue-preserving center. The formula follows the opened
 [WCAG contrast explanation](https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html). Mean
 module contrast is not the worst local contrast and is not a universal QR scan guarantee. Circular
 decoration is outside the clear margin and carries no encoded data; `shapeHalf()` and
