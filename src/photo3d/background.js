@@ -165,7 +165,10 @@ export function backgroundImage(photo, d, gx, gy, relief, pieces) {
   const nearest = new Int32Array(n);
   const queue = new Int32Array(n);
   const bins = 32;
+  const used = new Uint8Array(bins);
+  for (let i = 0; i < n; i++) used[Math.min(bins - 1, Math.floor(depth[i] * bins))] = 1;
   for (let b = 0; b < bins; b++) {
+    if (!used[b]) continue;
     nearest.fill(-1);
     let tail = 0;
     const limit = (b + 1) / bins;
