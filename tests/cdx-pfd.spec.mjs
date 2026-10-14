@@ -6,11 +6,39 @@ import { TOY_SOUNDS } from "../src/toy-sounds.js";
 import { parseNotes } from "../src/voices.js";
 import { encodeSceneHash, decodeSceneHash } from "../src/codec.js";
 import { normalizeScene } from "../src/state.js";
+import fs from "node:fs";
+import path from "node:path";
+import { spawnSync } from "node:child_process";
 
 const ID = "name-toy";
 const APP = "/?labs=1&renderer=webgl2&profile=low&adapt=off";
 const load = () => import("../src/packs/name-toy.js");
 const blank = () => ({ parts: {}, tokens: [], cues: [] });
+
+test("the language check preserves the shared word module's filename and checks public messages", () => {
+  const actual = spawnSync(process.execPath, ["tools/us-english.mjs", "src/packs/name-toy.js"], {
+    encoding: "utf8",
+  });
+  expect(actual.status, actual.stdout).toBe(0);
+  const dir = fs.mkdtempSync("src/.cdx-pfd-english-");
+  try {
+    const fixture = path.join(dir, "labels.js");
+    fs.writeFileSync(
+      fixture,
+      'import { words } from "./maths.js"; const label = "colour";\nawait import("./grey-model.js");\nexport { words } from "./colour-palette.js";\n',
+    );
+    const checked = spawnSync(process.execPath, ["tools/us-english.mjs", fixture], {
+      encoding: "utf8",
+    });
+    expect(checked.status).toBe(1);
+    expect(checked.stdout).toContain('"colour" → color');
+    expect(checked.stdout).toContain("1 British spelling.");
+    expect(checked.stdout).not.toContain('"maths"');
+    expect(checked.stdout).not.toContain('"grey"');
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
+});
 
 async function build(given = {}, count = 60000) {
   const { RECIPES } = await load();
