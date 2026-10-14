@@ -11,6 +11,11 @@ export default defineConfig({
   testDir: path.join(root, "tests"),
   outputDir: path.join(root, ".cache/studio-truth/playwright"),
   workers: 1,
+  webServer: {
+    ...base.webServer,
+    cwd: root,
+    reuseExistingServer: false,
+  },
   use: {
     ...base.use,
     launchOptions: {

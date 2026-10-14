@@ -4,10 +4,11 @@ Codex (GPT-6) reconstructed this implementation from task 56's repository brief.
 this report comes from this implementation's Linux cloud runs. The baseline is unmodified `main` at
 `58f3d8ede13714bf4b3d1f99fbf3b29d7f60e492`; no product source or vendor files are changed.
 
-This checkpoint contains 12 validated still fixtures, the seeded Blender generator, independent
-camera checks, the browser scorer, and the fixture validator. All twelve full scene sequences are
-freshly generated. Supplemental held-out truth and all-scene baseline measurements are still in
-progress. This is not a completed baseline.
+The implementation contains 12 validated still fixtures, the seeded Blender generator, independent
+camera checks, the browser scorer, and the fixture validator. All twelve complete scene sets and 444
+supplemental held-out views are freshly generated. Photo depth, flat views, held-out views, and
+Moving depth/temporal measurements are recorded for all twelve inputs. Moving render metrics and all
+Video measurements remain unavailable; this is explicitly partial coverage of the three toys.
 
 ![The 12 original procedural scenes](../../tests/fixtures/truth/contact-sheet.jpg)
 
@@ -54,7 +55,8 @@ Fresh checkpoint verification:
   unchanged after the generator fix.
 - Sandboxed Chromium 151.0.7922.173 launches with no graphics overrides; its initial probe offers
   WebGL2 but no WebGPU. The real toy probe measured Photo to 3D depth and captured an actual flat
-  front-view image. All-scene baseline scoring is in progress.
+  front-view image. All-scene Photo and registered Moving depth baselines are recorded; Video is
+  capability-blocked.
 - Pip exposes no compatible `bpy` wheel for Python 3.12 in this environment; the generator uses the
   installed native Linux Blender 4.3.2 instead.
 
@@ -83,12 +85,12 @@ hardware evidence. Desktop browser viewports are not phone testing.
 
 The [complete measurements and capture references](studio-truth-2026-10/main-photo.json) contain
 twelve real Photo inference runs and twelve actual flat front-view captures. All depth-hole and
-front-view alpha-hole counts are zero on valid diffuse truth pixels. Flat SSIM and sharpness measure
-source preservation, not novel-view quality. Sharpness greater than one can indicate oversharpening
-or resampling. The edge-band error is RGB MAE in a depth-edge band (0–255), a halo proxy rather than
-a pure halo detector. Video capability probes are blocked for all twelve inputs: no graphics
-adapter. Moving depth and temporal scoring has completed all twelve scenes. All rows retain partial
-render coverage.
+front-view alpha-hole counts are zero on valid unflagged opaque truth pixels. Flat SSIM and
+sharpness measure source preservation, not novel-view quality. Sharpness greater than one can
+indicate oversharpening or resampling. The edge-band error is RGB MAE in a depth-edge band (0–255),
+a halo proxy rather than a pure halo detector. Video capability probes are blocked for all twelve
+inputs: no graphics adapter. Moving depth and temporal scoring has completed all twelve scenes. All
+rows retain partial render coverage.
 
 | Scene      | Depth AbsRel | Depth RMSE (m) | Flat edge-band MAE | Flat SSIM | Flat sharpness ratio |
 | ---------- | -----------: | -------------: | -----------------: | --------: | -------------------: |
@@ -131,14 +133,48 @@ remains partial.
 | leaves     |       0.1915 |         2.6591 |                            0 |                         0.1156 |
 | steps      |       0.1172 |         1.8136 |                            0 |                         0.0543 |
 
+## Held-out Photo camera diagnostics
+
+The [first four scene measurements](studio-truth-2026-10/main-photo-novel-part1.json) and
+[remaining eight](studio-truth-2026-10/main-photo-novel-part2.json) record all 444 actual toy
+captures (37 per scene), with source hashes, camera calibration, and capture hashes. All twelve rows
+completed with zero browser page errors. The second batch exited 0; the first four rows completed
+before an environment restart interrupted the next scene. That original interrupted row is retained
+in the ignored run checkpoint and was rerun in the second batch.
+
+Camera placement uses the source median-depth plane, not a fit to evaluation pixels. SSIM and
+sharpness below are unweighted means over 37 views; alpha-hole fractions and edge-band RGB errors
+weight their respective valid pixels. These noisy beauty references and the declared relief-scale
+assumption limit interpretation. No quality threshold or claim of metric reconstruction is attached
+to a measured row.
+
+| Scene      | Mean SSIM | Mean sharpness ratio | Alpha-hole fraction | Edge-band MAE (0–255) |
+| ---------- | --------: | -------------------: | ------------------: | --------------------: |
+| still-life |    0.2683 |               0.0288 |              0.0050 |                51.248 |
+| room       |    0.0952 |               0.0328 |              0.0399 |                52.333 |
+| forest     |    0.1071 |               0.0149 |              0.0028 |                33.945 |
+| stairs     |    0.1449 |               0.1029 |              0.0062 |                52.548 |
+| coast      |    0.1748 |               0.1084 |              0.0008 |                51.442 |
+| desk       |    0.2383 |               0.0301 |              0.0205 |                42.962 |
+| fur        |    0.2361 |               0.0493 |              0.0066 |                56.242 |
+| night      |    0.0649 |               0.0674 |              0.0028 |                31.140 |
+| lattice    |    0.0845 |               0.3110 |              0.0078 |                58.462 |
+| arches     |    0.0638 |               0.0450 |              0.0051 |                49.862 |
+| leaves     |    0.1621 |               0.1157 |              0.0030 |                47.701 |
+| steps      |    0.1439 |               0.0415 |              0.0053 |                55.365 |
+
+![Still-life reference and actual held-out Photo views](studio-truth-2026-10/held-out-still-life.jpg)
+
+![Room reference and actual held-out Photo views](studio-truth-2026-10/held-out-room.jpg)
+
 ## Measurement contract and limits
 
 The scorer imports real product entry points in sandboxed Chromium, blocks outside-origin requests,
 and opens one page at a time. It verifies that `src/` and `vendor/` match the baseline. Model output
 is relative inverse depth. A positive affine inverse-depth calibration is fitted to a fixed
-one-eighth of valid diffuse pixels; the other seven-eighths are scored. This is a calibrated
-geometric benchmark, not a claim of metric-depth inference. Nonpositive or nonfinite calibrated
-inverse depths are counted separately as missing depth.
+one-eighth of valid unflagged opaque pixels; the other seven-eighths are scored. This is a
+calibrated geometric benchmark, not a claim of metric-depth inference. Nonpositive or nonfinite
+calibrated inverse depths are counted separately as missing depth.
 
 Temporal jitter follows the same world point through camera poses and rejects occlusion. It measures
 changes in signed depth error, not movement of a fixed screen pixel. The first frame's calibration
@@ -149,9 +185,10 @@ variances.
 Flat front-view diagnostics use Photo's actual projected source rectangle and its flat control.
 Alpha holes and source color error in a depth-edge band are measured in this view. These do not
 establish turned-view holes, disocclusion, or held-out sharpness. Moving color metrics are withheld.
-Held-out results have not run at this checkpoint. Video to 3D's capability probe reports no WebGPU
-graphics adapter. Training and held-out rendering are unavailable; a solved-camera alignment and a
-training-frame exclusion adapter are also still needed.
+All held-out Photo camera diagnostics are recorded; Moving held-out results remain null. Video to
+3D's capability probe reports no WebGPU graphics adapter. Training and held-out rendering are
+unavailable; a solved-camera render-scoring adapter is also still needed. Training-only clips
+exclude evaluation RGB.
 
 An early Moving probe registered 28 of 60 extracted frames and measured 27 adjacent depth-error
 changes. The other 32 frames have null metrics and break temporal adjacency. Its earlier color
@@ -169,8 +206,8 @@ without changing any prediction values or scoring formulas.
 
 The supplemental builder reserves 37 walk frames for evaluation, adds their exact depth and masks,
 and encodes a separate training video from the other 262 raw frames. Photo held-out camera
-diagnostics use a declared source median-depth plane calibration; they have not run at this
-checkpoint. The code's similarity calibration is tested against a known transform, but the Video
+diagnostics use a declared source median-depth plane calibration; all twelve scenes have been
+measured. The code's similarity calibration is tested against a known transform, but the Video
 solved-camera/render adapter is still incomplete and has no GPU evidence.
 
 The beauty references contain Monte Carlo noise: walk frames use two Cycles samples at 640×360,
@@ -200,5 +237,43 @@ front-view image. The failed probe is preserved separately.
 
 No product assertions or thresholds were changed. The repository's default Playwright launcher uses
 unsafe graphics flags and bypasses the GPU blocklist; it is not used. The added safe config replaces
-those options with sandboxed Chromium defaults. A safe regression attempt and the required
-formatting and English checks will be reported at handback.
+those options with sandboxed Chromium defaults. The first safe regression attempt served the config
+directory instead of the repository root: 8 tests passed, 1 was interrupted during app readiness,
+and 70 did not run (exit 130). Its screenshot and trace remain in `.cache/studio-truth/playwright/`.
+The safe config now pins the web server to the repository root and refuses to reuse an unrelated
+server. The corrected attempt has a separate output folder to preserve the first evidence. Final
+regression, formatting, and English results are recorded below at handback.
+
+## Final verification
+
+All checks use the selected Linux cloud environment. Numeric checks were rerun sequentially after
+the final source changes: 16 Node tests, 3 camera tests, 3 required-truth validation tests, and 7
+native Blender tests passed (29 total). The archive build and checksum-verified extraction both
+validated 12 complete scenes, 5,052 RGB frames/poses, and 1,896 depth/mask pairs.
+
+The corrected safe Playwright attempt selected `p3d.spec.mjs`, `phf-engine.spec.mjs`,
+`smoke.spec.mjs`, and `v3d.spec.mjs`, using one worker, a 1,200-second bound, and a three-failure
+stop. It exited 1 after 7.5 minutes: **13 passed, 3 failed, 1 skipped, and 62 did not run**.
+Playwright also reported one runner-stop error outside a test when the failure limit was reached.
+
+- Photo texture legibility: the one-color-per-splat correlation was 0.3821459065; the unchanged
+  assertion requires greater than 0.75 (`phf-engine.spec.mjs`).
+- Shelf startup: the unchanged empty-console assertion rejected Chromium's warning that automatic
+  software WebGL fallback is deprecated (`smoke.spec.mjs`).
+- Shelf filtering/Surprise me: the same warning and ReadPixels GPU-stall warnings failed the
+  unchanged empty-console assertion (`smoke.spec.mjs`).
+- The WebGPU compilation/drawing check skipped because the adapter was unavailable. Video tests and
+  the remaining smoke checks were not reached.
+
+These results are against unchanged product source at the recorded baseline, under Chromium's
+default graphics policy and an enabled sandbox. No warning filters, assertion changes, unsafe
+graphics flags, or blocklist bypasses were added. Screenshots and traces remain in
+`.cache/studio-truth/playwright-final/`; generated standard screenshots were copied to
+`.cache/studio-truth/regression-shots/` before restoring their committed versions. The full default
+suite is unrun: its launcher and several nested launchers use flags forbidden for this task.
+
+The required embed transfer check is run separately with the same safe policy; its exact result is
+recorded at handback. No physical phone testing was performed. The Git addition is about 24.13 MB
+using a conservative count of the entire added/modified task files, below 40 MB. Formatting and
+American English checks are clean. Current `main` has advanced in QR/docs work; the Studio benchmark
+source files are unchanged, and draft PR #602 remains mergeable. The worker did not merge or deploy.

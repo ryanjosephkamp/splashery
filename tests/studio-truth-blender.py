@@ -4,10 +4,8 @@ import importlib.util
 from pathlib import Path
 import tempfile
 import unittest
-import hashlib
-import json
-import subprocess
 import sys
+import shutil
 from unittest.mock import patch
 
 import bpy
@@ -73,19 +71,23 @@ class KnownGeometry(unittest.TestCase):
         self.assertTrue(np.all(mask==0))
 
     def test_resume_rejects_changed_camera_helper_before_mutating_outputs(self):
-        settings={'source_sha256':hashlib.sha256(path.read_bytes()).hexdigest(),
-            'camera_helper_sha256':'0'*64,'blender':bpy.app.version_string,'samples':8,
-            'clip_samples':2,'clip_side':640,'limit':0,
-            'ffmpeg':subprocess.check_output(['ffmpeg','-version'],text=True).splitlines()[0],
-            'python':sys.version.split()[0],'numpy':np.__version__}
         with tempfile.TemporaryDirectory() as folder:
-            file=Path(folder)/'build-settings.json'
-            original=json.dumps(settings).encode()
-            file.write_bytes(original)
-            with patch.object(sys,'argv',['test','--','--out',folder,'--mode','still']):
+            folder=Path(folder)
+            driver=folder/path.name
+            helper=folder/'studio_truth_camera.py'
+            shutil.copyfile(path,driver)
+            shutil.copyfile(path.parent/helper.name,helper)
+            output=folder/'output'
+            argv=['test','--','--out',str(output),'--mode','still','--scenes','not-a-scene']
+            with patch.object(generator,'__file__',str(driver)),patch.object(sys,'argv',argv):
+                # The invalid selection stops before rendering, after recording valid settings.
+                with self.assertRaises(SystemExit):generator.main()
+                file=output/'build-settings.json'
+                original=file.read_bytes()
+                helper.write_bytes(helper.read_bytes()+b'\n# Changed helper identity\n')
                 with self.assertRaisesRegex(ValueError,'different source or settings'):
                     generator.main()
-            self.assertEqual(file.read_bytes(),original)
+                self.assertEqual(file.read_bytes(),original)
 
 
 if __name__=='__main__':

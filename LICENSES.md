@@ -415,13 +415,15 @@ These tool versions are retained with the public review evidence.
 
 # Studio truth build tools (Codex task 56; not shipped)
 
-- Native Linux Blender 4.3.2 (GPL-3.0-or-later), https://pypi.org/project/bpy/4.3.0/: the installed
+- Native Linux Blender 4.3.2 (GPL-2.0-or-later, as recorded in the installed Debian copyright file),
+  https://www.blender.org/about/license/ and https://pypi.org/project/bpy/4.3.0/: the installed
   native Blender runs `tools/studio-truth-generate.py`; no Blender program is served. Pip has no
   compatible wheel for the environment's Python 3.12. The Blender website rejected this
   environment's license-page request (HTTP 403); the installed build and PyPI metadata identify the
   build-time tool.
-- NumPy 2.3.5 (BSD-3-Clause), https://pypi.org/project/numpy/2.3.5/: calibration, numeric depth
-  encoding, and fixture validation.
+- NumPy 2.3.5 in the validator and 2.2.4 in native Blender (BSD-3-Clause),
+  https://pypi.org/project/numpy/2.3.5/ and https://pypi.org/project/numpy/2.2.4/: calibration,
+  numeric depth encoding, and fixture validation.
 - Pillow 12.3.0 (MIT-CMU), https://pypi.org/project/pillow/12.3.0/: the contact sheet and build-time
   image validation.
 - FFmpeg / ffprobe 7.1.5-0+deb13u1 (the installed Debian build reports GPL-2.0-or-later),

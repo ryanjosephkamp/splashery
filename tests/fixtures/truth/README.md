@@ -43,7 +43,7 @@ render. Depth is stored as gzip-compressed IEEE-754 float32 little endian, row-m
 with no header. Dimensions come from the pose. No geometric hit is NaN, including sky. Float32
 rounding is the storage limit.
 
-PNG mask values are exact integers in the red channel: 0 = no hit, 1 = valid opaque diffuse
+PNG mask values are exact integers in the red channel: 0 = no hit, 1 = valid unflagged opaque
 geometry, and 3 = valid geometry with ambiguous appearance. Bit 0 means geometry exists; bit 1 flags
 transmission, metallic reflection, or emission. Geometry metrics can use either valid hit category;
 the scorer's appearance and calibrated depth comparisons use mask == 1. The mask does not claim to
@@ -93,7 +93,9 @@ cameras, using the source median-depth plane to calibrate the toy's stylized rel
 declared camera calibration assumption, not metric reconstruction or pixel fitting to the held-out
 images. Moving held-out scores remain null until both color and depth source poses can be
 registered. Video training/rendering remains null without WebGPU; its solved-camera adapter is not
-complete. None of these measurements establishes phone performance.
+complete. With an adapter, the scorer feeds only `train.mp4` to actual training and reports
+`partial`, with training statistics and null render metrics, until solved-camera render scoring is
+implemented. None of these measurements establishes phone performance.
 
 The explicit helper digest is required for legacy manifests that did not record it at startup. New
 builds also check the helper identity in their resume settings. For a fixed historical baseline,

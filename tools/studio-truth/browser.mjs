@@ -276,11 +276,12 @@ export async function trainVideo(page, url, timeoutMs) {
       const gpu = await webgpuStatus();
       if (!gpu.ok) return { status: "blocked", reason: gpu.reason };
       const response = await fetch(url);
-      if (!response.ok) return { status: "blocked", reason: "Missing walk clip" };
+      if (!response.ok)
+        return { status: "blocked", reason: "Missing held-out-excluding training clip" };
       const controller = new AbortController();
       const timer = setTimeout(() => controller.abort(), timeoutMs);
       try {
-        const file = new File([await response.blob()], "truth-walk.mp4", { type: "video/mp4" });
+        const file = new File([await response.blob()], "truth-training.mp4", { type: "video/mp4" });
         const r = await videoTo3D(file, {
           start: 0,
           length: 10,
@@ -292,7 +293,7 @@ export async function trainVideo(page, url, timeoutMs) {
           status: "partial",
           stats: r.stats,
           reason:
-            "Solved camera alignment and truly held-out training inputs require a separate adapter; no held-out score is claimed.",
+            "Training inputs exclude held-out pixels; solved camera alignment and render scoring require a separate adapter. No held-out score is claimed.",
         };
       } catch (e) {
         return { status: "failed", reason: String(e) };

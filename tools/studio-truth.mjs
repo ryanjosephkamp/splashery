@@ -397,7 +397,7 @@ try {
                 "Registered depth was measured; color/render metrics remain unregistered.";
           } else {
             // Probe before accessing a full dataset; an absent GPU is an actual limitation.
-            Object.assign(row, await trainVideo(page, `/__truth/${scene.id}/walk.mp4`, timeoutMs));
+            Object.assign(row, await trainVideo(page, `/__truth/${scene.id}/train.mp4`, timeoutMs));
           }
         }, timeoutMs);
       } catch (error) {
