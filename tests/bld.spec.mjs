@@ -7,6 +7,7 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { execFileSync, spawnSync } from "node:child_process";
+import { MANUAL_PDF } from "../manual/pdf-edition.js";
 
 const root = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
 const builders = path.join(root, "builders");
@@ -84,6 +85,12 @@ function miniRepo() {
   for (const f of ["CLAUDE.md", "README.md", "LICENSE", "LICENSES.md", "CREDITS.md"]) put(f, `# ${f}\n`); // prettier-ignore
   put("docs/PACKS.md", "# Packs\n");
   put("docs/SCENE-SCHEMA.md", "# Scenes\n");
+  put("package.json", '{"type":"module"}\n');
+  put(
+    "manual/pdf-edition.js",
+    'export const MANUAL_PDF = "tinkerers-manual-0123456789abcdef.pdf";\n',
+  );
+  put("manual/tinkerers-manual-0123456789abcdef.pdf", "%PDF-1.4 selected edition\n");
   put("manual/tinkerers-manual.pdf", "%PDF-1.4 stand-in\n");
   return dir;
 }
@@ -112,12 +119,17 @@ test("builders-pack.mjs builds the ZIP of the real repo", () => {
     "CREDITS.md",
     "docs/PACKS.md",
     "docs/SCENE-SCHEMA.md",
+    "manual/pdf-edition.js",
+    `manual/${MANUAL_PDF}`,
+    // Compatibility coverage for old links in packed guides.
     "manual/tinkerers-manual.pdf",
     "PACK-INFO.txt",
   ])
     expect(names, f).toContain(f);
   const info = execFileSync("unzip", ["-p", zip, "PACK-INFO.txt"], { encoding: "utf8" });
   expect(info).toMatch(/^Commit: [0-9a-f]{40}$/m);
+  const pdf = execFileSync("unzip", ["-p", zip, `manual/${MANUAL_PDF}`], { maxBuffer: 10e6 });
+  expect(pdf.equals(fs.readFileSync(path.join(root, "manual", MANUAL_PDF)))).toBe(true);
 });
 
 test("builders-pack.mjs builds from a small checkout and refuses a planted token", () => {
@@ -126,6 +138,13 @@ test("builders-pack.mjs builds from a small checkout and refuses a planted token
   const ok = pack(["--root=" + dir, "--out=" + out, "--date=2026-01-02"]);
   expect(ok.status, ok.stderr).toBe(0);
   expect(fs.existsSync(path.join(out, "builders-pack-2026-01-02.zip"))).toBe(true);
+  const zip = path.join(out, "builders-pack-2026-01-02.zip");
+  expect(list(zip)).toContain("manual/tinkerers-manual-0123456789abcdef.pdf");
+  expect(
+    execFileSync("unzip", ["-p", zip, "manual/tinkerers-manual-0123456789abcdef.pdf"], {
+      encoding: "utf8",
+    }),
+  ).toBe("%PDF-1.4 selected edition\n");
 
   // A Hugging Face token (built here so this file never holds one) in a packed file.
   const token = "hf_" + "aB3dE5gH7jK9mN1pQ3sT5vW7yZ9bC1dE3fG5"; // 3 + 36 characters

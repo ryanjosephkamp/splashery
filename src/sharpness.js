@@ -65,7 +65,12 @@ export function pickSharpness({ labs, params, recipe = null, native = 1 }) {
   const pick = (k, def) => get(k) ?? recipe?.[k] ?? (preset ? def : null);
   const cull = cullValue(pick("cull", "low"));
   const dpr = dprValue(pick("dpr", "native"), native);
-  const adapt = (get("adapt") ?? recipe?.adapt ?? "drag") === "drag" ? "drag" : null;
+  const urlAdapt = get("adapt");
+  const adaptValue = urlAdapt ?? recipe?.adapt ?? "drag";
+  // URL adapt=off already disables the player's adaptive stage. Keep its existing parsed
+  // value, while a recipe can opt out on its own without changing the global URL contract.
+  const adapt =
+    urlAdapt == null && adaptValue === "off" ? "off" : adaptValue === "drag" ? "drag" : null;
   const aaV = pick("aa", null);
   const aa = aaV === "1" || aaV === 1 || aaV === true;
   if (!cull && !dpr && !adapt && !aa) return null;
