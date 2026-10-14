@@ -7806,6 +7806,16 @@
               >the sample-pictures audit</a
             >. No new asset loads before it is picked.
           </p>
+          <p>
+            The original procedural fixtures in <code>tests/fixtures/truth/</code>, including their
+            rendered pictures, camera paths, depth maps, masks, and contact sheet, are
+            <strong>made by Ryan with Codex (GPT-6)</strong> and dedicated to CC0-1.0. These are
+            rendered scenes, not real captures. No outside assets are used. Their source is
+            <code>tools/studio-truth-generate.py</code>, and each committed file's size and SHA-256
+            are recorded in <code>tests/fixtures/truth/assets.json</code>. Full sequences are kept
+            separately from the shipped site. The build-time code is offered under this repository's
+            MIT license.
+          </p>
         </div>
       </section>
       <section class="md-file" aria-label="Third-party licenses">
@@ -8677,6 +8687,47 @@ subject to the following conditions:
             </li>
           </ul>
           <p>These tool versions are retained with the public review evidence.</p>
+          <ul>
+            <li>
+              Native Linux Blender 4.3.2 (GPL-2.0-or-later, as recorded in the installed Debian
+              copyright file),
+              <a href="https://www.blender.org/about/license/" target="_blank" rel="noopener"
+                >https://www.blender.org/about/license/</a
+              >
+              and
+              <a href="https://pypi.org/project/bpy/4.3.0/" target="_blank" rel="noopener"
+                >https://pypi.org/project/bpy/4.3.0/</a
+              >: the installed native Blender runs <code>tools/studio-truth-generate.py</code>; no
+              Blender program is served. Pip has no compatible wheel for the environment's Python
+              3.12. The Blender website rejected this environment's license-page request (HTTP 403);
+              the installed build and PyPI metadata identify the build-time tool.
+            </li>
+            <li>
+              NumPy 2.3.5 in the validator and 2.2.4 in native Blender (BSD-3-Clause),
+              <a href="https://pypi.org/project/numpy/2.3.5/" target="_blank" rel="noopener"
+                >https://pypi.org/project/numpy/2.3.5/</a
+              >
+              and
+              <a href="https://pypi.org/project/numpy/2.2.4/" target="_blank" rel="noopener"
+                >https://pypi.org/project/numpy/2.2.4/</a
+              >: calibration, numeric depth encoding, and fixture validation.
+            </li>
+            <li>
+              Pillow 12.3.0 (MIT-CMU),
+              <a href="https://pypi.org/project/pillow/12.3.0/" target="_blank" rel="noopener"
+                >https://pypi.org/project/pillow/12.3.0/</a
+              >: the contact sheet and build-time image validation.
+            </li>
+            <li>
+              FFmpeg / ffprobe 7.1.5-0+deb13u1 (the installed Debian build reports
+              GPL-2.0-or-later),
+              <a href="https://ffmpeg.org/legal.html" target="_blank" rel="noopener"
+                >https://ffmpeg.org/legal.html</a
+              >: H.264 video encoding with libx264 and checks of frame counts, duration, and
+              dimensions. No executable is served. These are build tools allowed by Rules v1; the
+              original rendered output is CC0.
+            </li>
+          </ul>
         </div>
       </section>
       <p class="note">
