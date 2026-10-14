@@ -82,6 +82,18 @@ for (const b of zoomButtons.querySelectorAll("button")) {
   b.addEventListener("click", () => viewer.zoomBy(Number(b.dataset.zoom)));
 }
 
+// Studio builds read saved view settings through this player during startup.
+window.__splashery = {
+  viewer,
+  get player() {
+    return viewer.player;
+  },
+  get ready() {
+    return document.body.dataset.ready === "true";
+  },
+  scene: () => viewer.player.scene,
+};
+
 try {
   await viewer.start();
   openLink.href = viewer.openURL();
@@ -96,14 +108,3 @@ try {
   zoomButtons.hidden = true;
 }
 document.body.dataset.ready = "true";
-
-window.__splashery = {
-  viewer,
-  get player() {
-    return viewer.player;
-  },
-  get ready() {
-    return document.body.dataset.ready === "true";
-  },
-  scene: () => viewer.player.scene,
-};

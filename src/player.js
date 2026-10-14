@@ -1230,10 +1230,17 @@ export class Player {
   // ---- Scene ----------------------------------------------------------------
 
   // Applies everything except the toy itself.
-  applySettings(scene, { camera = true } = {}) {
+  applySettings(scene, { camera = true, restoredCamera = true } = {}) {
     this.scene = scene;
     this.camera.setTurntable(scene.autoplay.turntable);
-    if (camera) this.camera.setState(scene.camera, { asHome: true });
+    if (camera) {
+      this.camera.setState(scene.camera, { asHome: true });
+      // Video's idle opening pose is for a newly chosen sample. A camera
+      // restored from a scene is already visitor-owned; explicit Replay can
+      // still start the flight through its normal control.
+      const flight = this.motion.ctx?.kit?.data?.flight;
+      if (restoredCamera && flight?.state) flight.state.userMoved = true;
+    }
     this.applyLook();
     this.applyPattern();
     for (const [k, v] of Object.entries(scene.motion?.controls || {}))

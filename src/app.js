@@ -231,7 +231,7 @@ class App {
     }
     if (!scene) scene = createScene({ toy: { kind: "builtin", id: TOYS[0].id } });
     try {
-      await this.applyScene(scene);
+      await this.applyScene(scene, { restoredCamera: !!s });
     } catch (err) {
       ui.toast(err.message, 6000);
       await this.applyScene(createScene({ toy: { kind: "builtin", id: TOYS[0].id } }));
@@ -241,7 +241,7 @@ class App {
 
   // ---- Scenes -------------------------------------------------------------------
 
-  async applyScene(scene, { file = null } = {}) {
+  async applyScene(scene, { file = null, restoredCamera = true } = {}) {
     const player = this.player;
     const ui = this.ui;
     // The device's turntable choice holds for links too (lane Viewer).
@@ -278,7 +278,7 @@ class App {
       );
     }
     await this.loadToy(scene.toy, { file });
-    player.applySettings(scene);
+    player.applySettings(scene, { restoredCamera });
     ui.setLook(scene.look, player.resolvedTheme());
     ui.setEffects(scene.effects);
     ui.setPattern(scene.pattern);
@@ -670,7 +670,7 @@ class App {
     }
     const file = toy.kind === "file" ? this.file : null;
     if (toy.kind === "file" && !file) return;
-    await this.applyScene(fresh, { file });
+    await this.applyScene(fresh, { file, restoredCamera: false });
     if (player.detail !== "auto" || player.splats) await this.setDetail("auto");
     this.resetCamera();
     this.ui.toast("Everything is back to how it started.");
