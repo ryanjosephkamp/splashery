@@ -42,7 +42,11 @@ for (const [width, height, dpr] of sizes) {
     if (process.env.QR72_NO_WEBGPU === "1") {
       // Exercise the normal no-adapter fallback without unsafe launch flags.
       await page.addInitScript(() => {
-        Object.defineProperty(navigator, "gpu", { value: undefined, configurable: true });
+        if (navigator.gpu)
+          Object.defineProperty(navigator.gpu, "requestAdapter", {
+            value: async () => null,
+            configurable: true,
+          });
       });
     }
     const errors = [];
