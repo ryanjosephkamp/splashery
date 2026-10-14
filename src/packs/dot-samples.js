@@ -4,6 +4,8 @@
 // and in the credit. They are never real captures or real places (CLAUDE.md, "AI-made samples").
 // Each is assets/toys/photo-3d/ai/<id>.jpg with its depth map <id>.depth (tools/dsm-depth.mjs).
 
+import { PICTURES } from "./codex-picture-samples.js";
+
 const CREDITS = "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md";
 
 // [prompt id, file id, name, group]
@@ -38,6 +40,7 @@ const DOTS = [
   ["D31", "gears", "Giant gears", "Close-ups"],
   ["D40", "chess", "Chess board", "Close-ups"],
   ["D29", "book-city", "City of books", "Close-ups"],
+  ...PICTURES,
 ];
 
 export const AI_GROUP = "AI-made by the owner: ";

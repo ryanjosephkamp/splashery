@@ -1,0 +1,23 @@
+// Task 54: selected AI-made Studio pictures; see the scored audit.
+export const PICTURES = [
+  ["C54-P04", "cdx-stoneware", "Stoneware", "More Still life"],
+  ["C54-P05", "cdx-autumn-squash", "Autumn squash", "More Still life"],
+  ["C54-P07", "cdx-wooden-toys", "Wooden toys", "More Objects on tables"],
+  ["C54-P09", "cdx-clay-tools", "Clay tools", "More Objects on tables"],
+  ["C54-P10", "cdx-tea-tray", "Tea tray", "More Objects on tables"],
+  ["C54-P12", "cdx-arched-room", "Arched room", "More Interiors"],
+  ["C54-P14", "cdx-plant-studio", "Plant studio", "More Interiors"],
+  ["C54-P16", "cdx-moss-stream", "Mossy stream", "More Landscapes"],
+  ["C54-P17", "cdx-dune-grass", "Dune grass", "More Landscapes"],
+  ["C54-P20", "cdx-redwood-path", "Woodland path", "More Landscapes"],
+  ["C54-P22", "cdx-pinecone", "Pinecone", "More Macro"],
+  ["C54-P23", "cdx-acorns", "Acorns", "More Macro"],
+  ["C54-P25", "cdx-fern-curl", "Fern curl", "More Macro"],
+  ["C54-P27", "cdx-cliff-terrace", "Cliff terrace", "More Fantasy architecture"],
+  ["C54-P28", "cdx-mushroom-house", "Mushroom house", "More Fantasy architecture"],
+  ["C54-P29", "cdx-crystal-court", "Crystal court", "More Fantasy architecture"],
+  ["C54-P32", "cdx-tortoise", "Tortoise", "More Animals in nature"],
+  ["C54-P34", "cdx-deer-grove", "Deer in a grove", "More Animals in nature"],
+  ["C54-P37", "cdx-paper-canyon", "Paper canyon", "More Miniatures"],
+  ["C54-P40", "cdx-wood-valley", "Wood valley", "More Miniatures"],
+];

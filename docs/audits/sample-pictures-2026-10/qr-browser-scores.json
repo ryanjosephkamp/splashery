@@ -1,0 +1,7118 @@
+[
+  {
+    "id": "cdx-qr-1-1",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "a8a2b87d068b800f7f787b52d7d00f37287d7c9d6b28ffe80718bd33bbc99d10",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-1-2",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "54c1d86ff967908a542ed07f894e1ec5d062072a3e4b2d56a171bd38a164cb9d",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-1-5",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "ae46c8bc2fb362c231b24c94427f443cd2ffa42d5548ba7c2996be314d0583db",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-1-6",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "f5721e64c602e9cdd3de3918c645f8af111ec6dbe834723aeb9865cdac8e8e28",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-1-7",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "26c9be615178d50861894adf01939ab9338664931dfdb907c8a1f82003af7cfb",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-2-3",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "c4ddf76d300026eb701dc9788747595bd697cbbfbc798472b4bba2a5c8c7932d",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-2-4",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "730cef21e78825ee6ee40481ed8c350e07e60d5e326375b47509f4fad485876a",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-3-1",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "a2b490f14bf5e2949e3fec48d917c3722f6263f44832d698df9e8a9dc58413d8",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-3-2",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": true,
+    "printPixels": 900,
+    "exportSha256": "3c5f3a20d44af26f33189dd5468934d6a922064ff4faab7bbcd5e963dd5afa82",
+    "eligible": true
+  },
+  {
+    "id": "cdx-qr-3-3",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "d2b216cb58da25c7c0b23576085a644e9ac5a97df472c5aba6a81d9f1f99e113",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-3-5",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "c540d3ac201ecd8b530b5db3f7c884cbb466d1a853dadfb50a59a9f4866b98fc",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-3-7",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "64ca490cd8602000e1379f1fe8cdc48e6978d26ede0da0b0ad061da6baad7591",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-3-8",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "8912aa8be29348154075176e393ab9647db1cb960c0c9bd2c37d7b6d966c2c6d",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-4-1",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "f07df69d2f3c0f6cc45c71587c568f3c24825b4b56cd630b39cc7b5504c34028",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-4-2",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "86eb8f399fa4cdeeccfcd18ce5c5e0d26c51dc0b0babd388ced185132f42f013",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-4-3",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "c4dfbb835e8e8f45022637f2864c3b6aff95ed8331ca0160ef3ba8ca8a0ff7b3",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-4-4",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "7b0d312e9bca204141d90d06798bcffed10b8d41ab0492ca20b6aefb5198ae05",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-4-5",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "cbdd52218416bb0d39b01a2570929c0704e87012f587cdfd7a605b50cb96a3a5",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-4-7",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "08bdf03c2545c5329eec800b3651fd96dc5b4a84e88b9797ac4c6ef3563b0b20",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-4-8",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "b9ed29efb8a6b656f9d72d526a51729df65aa516ea62eb46bf3abb01344cbd7f",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-5-1",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "40f941b90f60a8faec490bacb481452190bc23bc5ea0fd790b7c909a656639e3",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-5-2",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "faf0cfc4efd09635c99fa44c985ed6fb0a312d2eafeb7956f2d40562d351ba5e",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-5-3",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "04f2857322e128c84e2e5a23849575734c2420fe9f6f3ce3c3f31d198097df9e",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-5-5",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "cb5e7a2b627b751a00e7e4e1b4ffa6bfa9dc9aa39b2ed04260138c9e185f294c",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-5-7",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "22facea5637b9d2b4688469f8d4ae24fc1ceea5db79fc62a6ace166d980df6bf",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-5-8",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "ccb47198989c60cc058a8ce9aca751ee315c77d83f91273d89db88a0f0abf858",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-6-2",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "c3159f36b12c11c75a9696b079aa0b9c3960da78921df06e89ef75af1b5a7d20",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-6-8",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "bd4107ab3b167b6103088ee549831239cae361bb47a787b27528ba952899c876",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-7-1",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "f80080a5826a60288772a9c1182984687ab231ed2d240c164a21414f3fbce2e6",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-7-3",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "26809e8bd4b4ac9c19fcace33fafd04254a68b0153bee0a0b8d19c4ab0401536",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-7-4",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "90dfcd9d86d4be992b06fb69b4b437ef6341b54fe66a09b41880245c2a8ea341",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-7-5",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "e405e5663c4ebd24ab7785c58e5295ebc2b1f2de837f3912dfb377982dce7335",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-8-1",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "4066e9b35d0aab633814b23aee33e7a06d3059741eef67fe407b9ded3de5013f",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-8-2",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "54f24c003e2a8747d29ab35b0724299e82d9a22eb17db65c8f87ab67856c2658",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-8-3",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "7f79552e1119fd66e3c21d76e2df2017d31046530ae8a3baeba898cacf184ff8",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-8-5",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "03923a6dbc9c4a0ec16e7537f3e0891784518f26ae4c3b675c3e6bfa93309a65",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-8-6",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "e3ab6341c767b37885fbd78d4bf63edffdf3a5e8a4487968d2e425ddf33c41e0",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-8-7",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": true,
+    "printPixels": 900,
+    "exportSha256": "d08cbc14443c4038be3e31bec8a5e90926c6b9ed3abbeb7978968dee392b0dff",
+    "eligible": true
+  },
+  {
+    "id": "cdx-qr-8-8",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "55cea3bebeba89868e3c3fea3c255a42f363326cc3d049a42e8273d51f7bb12f",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-9-1",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "dbbeef5adc713564dc7422f86135c6116eb3794968f6bb4adb365bf31838bf47",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-9-2",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "b90da8e8775a8b0550564efaf4315924ae0a047b705df478580add257849ecd7",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-9-3",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "1bcd259910e4eff637a31eaf0f1cd8bf458942119a9ccdddb894991c4bdf173f",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-9-6",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "4eafab90fe7996f0326e312158185ee09c708b32461f445760d1be4e2718875c",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-9-7",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "dbc83c8f46c0ac7c098a53a511d6a9fef6f8bea69c9d7a18512b8e62f3d9674f",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-9-8",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "731b805c970acb4ae674691051f294118144a2d2ccb7da405109a13949e386ed",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-print-1-1",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "c86145f399b2eb6bee104d94868b52240567fdd277e3bd7530105c9cd748e0d0",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-print-1-2",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "04e0d0bfdc566fd0cb09af4aad932e31ceddbb39c3e9a7367767a31d3e86650d",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-print-1-3",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "597f1eeb66597415785b6ada943f0a33d9128e55a696936b1963b1f341820fc5",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-print-1-4",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "c7bb6cbbd072bdfe104e68e29c47ae1e8f7b34aa63bd92283660f4e6965572e9",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-print-1-5",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "31d8794289f1b24f185063e82abdff1912d255da4884bea515eca26f33963be3",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-print-1-6",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "03ac7baa505796aaf150acb3b76727e0644109790f59a91d6624aac0b47e94ab",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-print-1-7",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "53569c2f72179c10c69e34da37b24edc7f8311b26a58a5a52baa04a331d376b7",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-print-1-8",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "a75041c43e52d03b8601e069278a9a526d8f9800a0e78eabd2fb23bce6d4cdb9",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-print-2-5",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "7a5b10a6b3118b359b207268da5f1ad2ea01c9934c43649930eec725072f0327",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-print-3-1",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "571ed7816590667a04fd287bf8ae7b8d3b7660863dbbc1ed3093c62c2ca2b428",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-print-3-2",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "e7ee7a9d5bf43330c54dc8adab804b7ff2f7f993cfce126bda8da5ecb735363c",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-print-3-3",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "b8a057915f302fc7f152cabcbd3634b44bd4036d183a8a541611c2a478e73c4a",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-print-3-4",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "8734c0613aaac9ca75a9ef9a3bed9b86a63deda0167854f00e04ac79b6e35bdf",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-print-3-5",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "59539857aeae81a4a2a6e7c30e6fdb7ebca1b7ebdb0ed1ef1c194c18a4a6af61",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-print-3-6",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": true,
+    "printPixels": 900,
+    "exportSha256": "8cce2d429606ff6251b065f7df373bd46f054c97a11c366bbdff4dd7a1ac34f2",
+    "eligible": true
+  },
+  {
+    "id": "cdx-qr-print-3-7",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "a724e26ccfbe9fc795770a84e34e510333c8755813773e90a50f9b6dc0b2abee",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-print-3-8",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "6e526754ef54e3a1a228f59fe3b60abb0cd84f5cd802ec3b94fcc731661b439e",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-print-4-1",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "361111f10facc63dc5582e01e4d818b32b116a027d20998b654c718683cd2d60",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-print-4-2",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "a9ec8b8246cc59534fb04b804e16fb50fd23d3fb158c762373928fb25c956ddc",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-print-4-3",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "1dfbb36764f9efe790714967653a23d9a0ae3a577f740cac2e09aedaebecffd0",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-print-4-4",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "0e9e03d68caf4525a9745de7e5caa1b75a532ba65a12766e495d531e9331fc21",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-print-4-5",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "023011e6f5acb78022a8ee2c17f214a25ae09f4e561dc84f26279ec256fa8797",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-print-4-6",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "07157ecbc2fdfcaf9fcc2b98914f61ffc95b3e1737ea2717498862d1a1bb8c9e",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-print-4-7",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "d61b952cfb57b093a7453f8e6bdcc45a69fe4ad02eaf2952362e624311398d3c",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-print-4-8",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "7a81d082809077f1f7b378447af68a3f124803fa10aedc44917bf1da3ddf2217",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-print-5-1",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "60847bf0adce8f4bd21c72fb9a7ce59ab245496aa402dc1fc8111d0d787ed710",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-print-5-2",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": true,
+    "printPixels": 900,
+    "exportSha256": "837166b57e80ef863b2270ddd9f37fd593378d01870a19d53873223637e9a073",
+    "eligible": true
+  },
+  {
+    "id": "cdx-qr-print-5-4",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "a263cfe3d9e18c29c31a6cff1588a75cf45df4007587c9ba2839f21254d50f47",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-print-5-5",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "4a82a552e79633c60323bfb8474c454faf46779cfea6b4ace41590a4183d9db7",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-print-5-6",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": true,
+    "printPixels": 900,
+    "exportSha256": "664b5a5df4cd9d90cca5ecb69536774c2ed01edb8352493123728614612424c7",
+    "eligible": true
+  },
+  {
+    "id": "cdx-qr-print-5-7",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "7c8d6f9fe434132e4a65be729119e4329b4254c456cb574e37594f25d63fa642",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-print-5-8",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "9738c341d7fd3b29b048b8dc38a1870b4f8fb62832d473689a185cbd1fdf2ecd",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-print-6-1",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "7ee310268c16242611641b9a4acb5c08cce855d15c9e5965e91120df124e4d2e",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-print-6-3",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "3b98b2aec2d4777db5469ebf85a1033fcd7bd84c2ab61a1cb7d47f098265b609",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-print-6-5",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "094bc044c58aad5413565132fde4a3fe74a3804fc32834c74da975a9837092d8",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-print-6-6",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "cbf0a9298df2b4c6dd61f6699e348b81626f021e74e1d054dc60176d52e1e5aa",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-print-7-1",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "e7ae33203732c3e522ae7b7b02c786f31efed6df1d3d12269c5cd87edca602b5",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-print-7-4",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "ef6e80acc20699e20b7d304eb9c61668d5e00aec73d9da01a0781f850b2ea35a",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-print-7-5",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "5cccb50bd5707edf6b8e861796eac65a8ac85b655fa441c52b1d1aca24016398",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-print-7-7",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "0d492d37d2116c6d6fbbbdadbd525f5dc76039add25983f779eccf091a04be98",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-print-7-8",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "f6eb79531454f5811235b964ae73b8cedecd3b4385d1c98d45483ca8bc1a7faa",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-print-8-1",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "630c8aee296f1b608a1c8e84986de68234a3b36e43297d0437acb8851b2502a9",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-print-8-2",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": true,
+    "printPixels": 900,
+    "exportSha256": "c324ab46a4e77f18685cfcd9dcf64c910a2de4604188404a26c2b99da969e517",
+    "eligible": true
+  },
+  {
+    "id": "cdx-qr-print-8-3",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "e79b2d0ac3a01db3498f681921e8d6fdd80bfb30c136b5cdfcafd91cc32840ba",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-print-8-4",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "5e959b7ec510ff213452212d2467ffa1e1c504ce491b49853866acb0279d8e3d",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-print-8-5",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "5b308b03049735a3814744281b2d34a47d3bfc5cea67bbfd9749ec3dd9fe596e",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-print-8-6",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "68a45acb5798ea8829919edb0c621e4a190afb4d23856e699d02e26dc29bd0ea",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-print-8-7",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "e8453786d75c3535025c4e48841183c240c69ead60b610a9953ae9351b4279e3",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-print-8-8",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "f0def4462147072294ac6ee69a373df4417429b9278f3959d6d5add9519d0175",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-print-9-1",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "8e55ec81f9c34411e79d3a14ec43bb701c43d9ce1084267e90193457089ca543",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-print-9-2",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "8e227155b1a9233ea65f515dd25d82a39cfc148ac9c89601401c13a5b5e54454",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-print-9-3",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "dc00f60784655b37a1fe796f422f535ac8a765e8468a9d413b624018931e7779",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-print-9-4",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "91ed9a4aba63e90ca64fab171e43a58ae7b353cbc4786cef85d1633190397b2a",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-print-9-5",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "81e85b214ceb64c7cb6107c37765132e0669c0231931dad32c7ad2d19876ca3c",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-print-9-6",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "ba1ffc2d836be39107f016c55e2457f7d35b0233a834cf8b55704f4c8fbccba6",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-print-9-7",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "6c4947dcfccb0cc300fb2a9d9767f11b9fe3047a1dfa3c896341e99c8e198460",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-print-9-8",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "57d2bbfae425144cf18e1d8022256ee7ee924beb4b1df7f3cc431aead844134d",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-grid-1-1",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "a8423728bb94f1d0ef10af7f4effd2d45b1d9a56f095dd99c0a74eb1a8023ffb",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-grid-1-2",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "5d07a82a80e2384206f46cdc5eedc3dd68d05d0a56a87c903f6e799acac8c1ae",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-grid-1-3",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": true,
+    "printPixels": 900,
+    "exportSha256": "3cd3280356cc432563c5437b0732f470fb5a536c4e292aed6b844f44ef6a81d2",
+    "eligible": true
+  },
+  {
+    "id": "cdx-qr-grid-1-4",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": true,
+    "printPixels": 900,
+    "exportSha256": "742319ac27aaa0ef88a00a7593cbd83129cf32fd4708defc9d38c046b8074ec6",
+    "eligible": true
+  },
+  {
+    "id": "cdx-qr-grid-1-5",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": true,
+    "printPixels": 900,
+    "exportSha256": "ff737df979d4ed86e34d0ee08d1dd2e84ff7c9795bd7d7cff26efac4f725b3d0",
+    "eligible": true
+  },
+  {
+    "id": "cdx-qr-grid-1-6",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": true,
+    "printPixels": 900,
+    "exportSha256": "9fe052e68baa8a56e9286ed02c077f74550212693eae0f90575a6a463f7e2931",
+    "eligible": true
+  },
+  {
+    "id": "cdx-qr-grid-1-7",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": true,
+    "printPixels": 900,
+    "exportSha256": "01abc3d99f0006abe00a3eb09fd143764b069fb44e7efeb4a951b344aa7e5fcf",
+    "eligible": true
+  },
+  {
+    "id": "cdx-qr-grid-1-8",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": true,
+    "printPixels": 900,
+    "exportSha256": "68c12189df6b683be6690dc0d648c62269395138ae846d896207ac8ecf07cac3",
+    "eligible": true
+  },
+  {
+    "id": "cdx-qr-grid-2-1",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "536883abb2f0d05bc789428f42ce241a9afbaa27917b71823b9b15c6fc71121a",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-grid-2-2",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "d08f33f5335324b50dbb9e7f3060e21b5cde54a9e02efd775ffd5f2a7714d0fb",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-grid-2-3",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": true,
+    "printPixels": 900,
+    "exportSha256": "4d085f4c3d52537eba3dff94813c7ce627a16adc3726638e52644991d74c2fee",
+    "eligible": true
+  },
+  {
+    "id": "cdx-qr-grid-2-4",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": true,
+    "printPixels": 900,
+    "exportSha256": "1e2a57b2b07d1a04aecc9114943ad1fa2c2af3587d09c2d899df507e8b0b1b68",
+    "eligible": true
+  },
+  {
+    "id": "cdx-qr-grid-2-5",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": true,
+    "printPixels": 900,
+    "exportSha256": "5e234cd66e9496fe36b9f8f6ab7d57a887b3fc0ff4a66e0d13e6fdddb8f6d816",
+    "eligible": true
+  },
+  {
+    "id": "cdx-qr-grid-2-6",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": true,
+    "printPixels": 900,
+    "exportSha256": "7b28680da03110d6972dc0f8cd5e7ef1b6892a675907bae5d81ca45dd649b0b9",
+    "eligible": true
+  },
+  {
+    "id": "cdx-qr-grid-2-7",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": true,
+    "printPixels": 900,
+    "exportSha256": "536b075c2bb1cc95600fe3fafd1dbe3dad88f04e418911474e07c7086fd134c2",
+    "eligible": true
+  },
+  {
+    "id": "cdx-qr-grid-2-8",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": true,
+    "printPixels": 900,
+    "exportSha256": "877de2ac70073f9737b6bc3e41aaea46f4d9ec77e9e95f4d6fa5cc1c6d8f48f7",
+    "eligible": true
+  },
+  {
+    "id": "cdx-qr-grid-3-1",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "ce6e5f370ceda6263ca16f9a3cc0d4288be482febfa890fe12f77e2afbec3d96",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-grid-3-2",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "ae5eac98723463993f5f1433caeb54e92b668f4ca89384faee74104b541145f1",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-grid-3-3",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": true,
+    "printPixels": 900,
+    "exportSha256": "18f0af3f38367a99c64f1e1f1ee552a624a58ca0dc6c4309adc3cc53a5ab38d9",
+    "eligible": true
+  },
+  {
+    "id": "cdx-qr-grid-3-4",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "ad00bd787a3f512b2d14ef268cc16334288229e9182ca19ccf11ae1bd9d840a5",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-grid-3-5",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": true,
+    "printPixels": 900,
+    "exportSha256": "3908c43dd6a82a0202e0ef2b269f6815c0364b3302857feab49874c649692166",
+    "eligible": true
+  },
+  {
+    "id": "cdx-qr-grid-3-6",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": true,
+    "printPixels": 900,
+    "exportSha256": "d7972733fd52e9d796563be04f9781fb2739b0533508128c0a228226c30ee89f",
+    "eligible": true
+  },
+  {
+    "id": "cdx-qr-grid-3-7",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": true,
+    "printPixels": 900,
+    "exportSha256": "e245d3412738270255023a3132613726f7856d44a634875ab1f18b48ec0543f3",
+    "eligible": true
+  },
+  {
+    "id": "cdx-qr-grid-3-8",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": true,
+    "printPixels": 900,
+    "exportSha256": "a40702377e43a76f1a06771ecbcb43ca891cec13f2b0c7efcb6bf4f4d6228068",
+    "eligible": true
+  },
+  {
+    "id": "cdx-qr-grid-4-1",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "e83290661e3b0c70c8d47ac61545c2b3a7d75b5c2d2604fba225a72ea4e66488",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-grid-4-2",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "889868893b35563e439c0f4fa6b9687e9acd65c86f2a512875b91f0d9a94fa80",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-grid-4-3",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "fceb09bce24efb930fea633fd0af112c25ca9037233456abe6148d781bfbeb44",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-grid-4-4",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": true,
+    "printPixels": 900,
+    "exportSha256": "d67ec8842eed1209ad62ad13e05e4e2a9c1e3c268970578a858def81365ddc40",
+    "eligible": true
+  },
+  {
+    "id": "cdx-qr-grid-4-5",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": true,
+    "printPixels": 900,
+    "exportSha256": "32bcba1811fdc2fb87384101d297c05300d2fb3610c5540581412de86d82ea32",
+    "eligible": true
+  },
+  {
+    "id": "cdx-qr-grid-4-6",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": true,
+    "printPixels": 900,
+    "exportSha256": "8ebd719a2474cec787c31715c916a70eb47ee475aa4a965975440d7b6973cfa4",
+    "eligible": true
+  },
+  {
+    "id": "cdx-qr-grid-4-7",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": true,
+    "printPixels": 900,
+    "exportSha256": "004597373834498d7c905b49ec83f887cd1b34bfa572180aa34e1b49cf63b21a",
+    "eligible": true
+  },
+  {
+    "id": "cdx-qr-grid-4-8",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": true,
+    "printPixels": 900,
+    "exportSha256": "8fffa02e98ba94e06cbd4ad7007e01cc9c8e51ee065a21ca1dbbed786d4cd74d",
+    "eligible": true
+  },
+  {
+    "id": "cdx-qr-grid-5-1",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "3879ff757562bd1dedc07dc9150426fd44afa83a8b6625702f9a3ed53f6df1d9",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-grid-5-2",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "0623c41a7c2db5ad1d4738813e5cea72a9514c065704928eca6eb6b0f0feef04",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-grid-5-3",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": true,
+    "printPixels": 900,
+    "exportSha256": "bd8481980b12d5ed1815d8c6506c5ff6d528d51b310e3a612f8af7a15ca61317",
+    "eligible": true
+  },
+  {
+    "id": "cdx-qr-grid-5-4",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": true,
+    "printPixels": 900,
+    "exportSha256": "c5ce34ed10faf3043c7bfb1cce0684503fcbc06a88c22272c5d908ffca83b8b6",
+    "eligible": true
+  },
+  {
+    "id": "cdx-qr-grid-5-5",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": true,
+    "printPixels": 900,
+    "exportSha256": "535707cc478c02e41cabd0e03e0420b93f707f017f6312280afc1d17a9c28706",
+    "eligible": true
+  },
+  {
+    "id": "cdx-qr-grid-5-6",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": true,
+    "printPixels": 900,
+    "exportSha256": "ec8171fa0c0ad761720d53318cdd4dbdd22e002e78953d18095391445a85b844",
+    "eligible": true
+  },
+  {
+    "id": "cdx-qr-grid-5-7",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": true,
+    "printPixels": 900,
+    "exportSha256": "9225a4ed70bed55190caf8a2653469264e10c6a98a38a6d9a433526b7b3c4494",
+    "eligible": true
+  },
+  {
+    "id": "cdx-qr-grid-5-8",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": true,
+    "printPixels": 900,
+    "exportSha256": "4ef459c44926889f3c5150accd162078480295ada7500a7fce39e8f448185235",
+    "eligible": true
+  },
+  {
+    "id": "cdx-qr-grid-6-1",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "930fe52f6d07ca74dc6f6889cfde34469aa23695b87585d26dfaafb0d26d756c",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-grid-6-2",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "664edac2b84cc2699a3e112a596462ba32236e443b4485ce8283a511123a56ca",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-grid-6-3",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": true,
+    "printPixels": 900,
+    "exportSha256": "cb0261815bf7ec2072292c5747761d717557178c51aba077d48589b0dc3b5048",
+    "eligible": true
+  },
+  {
+    "id": "cdx-qr-grid-6-4",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": true,
+    "printPixels": 900,
+    "exportSha256": "5b0a968a06f44971500d3fd8ed75672e7e15a93ca0d4bf2dc5e62010ff26e1df",
+    "eligible": true
+  },
+  {
+    "id": "cdx-qr-grid-6-5",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": true,
+    "printPixels": 900,
+    "exportSha256": "efc560af61c79358e8c46c21c896d580068ee90592a082b531a59c3aa736a6cd",
+    "eligible": true
+  },
+  {
+    "id": "cdx-qr-grid-6-6",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": true,
+    "printPixels": 900,
+    "exportSha256": "34ebc2468c3e8ec84cddef4aeb0710efdb2714fcd51a1cb9742997e6a34f5ee3",
+    "eligible": true
+  },
+  {
+    "id": "cdx-qr-grid-6-7",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": true,
+    "printPixels": 900,
+    "exportSha256": "b9a03d95d124b449382c4295abf1dc8597c9d67716f8d13b34e073d7cdad1c24",
+    "eligible": true
+  },
+  {
+    "id": "cdx-qr-grid-6-8",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": true,
+    "printPixels": 900,
+    "exportSha256": "9fe2638ad6ea73036b3c1bf9db8a22ffd62ebbdc99709c9aa3c358f7032347e7",
+    "eligible": true
+  },
+  {
+    "id": "cdx-qr-grid-7-1",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "26665c6c1f269fee286db66665029e4cd077dbd756d5318e5b1e57576442ed49",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-grid-7-2",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "79bfdb64287c0621394e703f32015f8d16dc0d046aa1151d604be39b42650b7d",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-grid-7-3",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": true,
+    "printPixels": 900,
+    "exportSha256": "df61b324b60cf305a8cff058301c8184aa0ffd053ff8aa5c01fe4f0166b14ee2",
+    "eligible": true
+  },
+  {
+    "id": "cdx-qr-grid-7-4",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": true,
+    "printPixels": 900,
+    "exportSha256": "28cba458e57d4d06b2a3b2d8d9f344a85fd85c99397193e7d21a0f17e32c8d8f",
+    "eligible": true
+  },
+  {
+    "id": "cdx-qr-grid-7-5",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": true,
+    "printPixels": 900,
+    "exportSha256": "d7df75316bf7bf0e3f31c2df7f5ca476defc4b1ef1bd57f0537f0f7458b3c567",
+    "eligible": true
+  },
+  {
+    "id": "cdx-qr-grid-7-6",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": true,
+    "printPixels": 900,
+    "exportSha256": "6e2a4e51b8c8e76bf1a00803de80924626b32d728ee9cd2bb5d09c8462e218df",
+    "eligible": true
+  },
+  {
+    "id": "cdx-qr-grid-7-7",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": true,
+    "printPixels": 900,
+    "exportSha256": "df7056036e57c573638c60f9664fd205810cb2dffe1b70d45b928bdc68b62d87",
+    "eligible": true
+  },
+  {
+    "id": "cdx-qr-grid-7-8",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": true,
+    "printPixels": 900,
+    "exportSha256": "0e0dd001bdefb22ea559d8fc513235645419b8262da7fd768d38f3d1073cda3a",
+    "eligible": true
+  },
+  {
+    "id": "cdx-qr-grid-8-1",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "16270ba92100b87b68d557f1772a1faa80ce3e8fceddbdd94181588c9f63fb1c",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-grid-8-2",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "ce127972eae004b462fe0f4fc6bb9ed37bc206b0d55ff00ac949c3ff6e62329d",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-grid-8-3",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": true,
+    "printPixels": 900,
+    "exportSha256": "befd0e0dbcd2ffaddee38864ff128e6ec8e10c0c25cbb2adff26fccb1acdd2a0",
+    "eligible": true
+  },
+  {
+    "id": "cdx-qr-grid-8-4",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": true,
+    "printPixels": 900,
+    "exportSha256": "331157dcd812a4ebe157e9e0327f3a8e7f6a6ea4d0bc8abe49908107c9819e03",
+    "eligible": true
+  },
+  {
+    "id": "cdx-qr-grid-8-5",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": true,
+    "printPixels": 900,
+    "exportSha256": "ba92928a85e832c3757253a5e3b67fa04aa0a4d66cb024ac53acab459ce222ba",
+    "eligible": true
+  },
+  {
+    "id": "cdx-qr-grid-8-6",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": true,
+    "printPixels": 900,
+    "exportSha256": "a00b1e653ad1e91e7fba3ba20bb2ff1657c12b6283a8aca147a74db8d0e93904",
+    "eligible": true
+  },
+  {
+    "id": "cdx-qr-grid-8-7",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": true,
+    "printPixels": 900,
+    "exportSha256": "885e9db0c7dfbcdc99ecde66f879d72dc7808ba8a9b198e186cfb5594ef5b657",
+    "eligible": true
+  },
+  {
+    "id": "cdx-qr-grid-8-8",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": true,
+    "printPixels": 900,
+    "exportSha256": "6c561e4f3c3e941c4aeefe909d40ad61cc4709ff3957a14d57c4309ec8af7b43",
+    "eligible": true
+  },
+  {
+    "id": "cdx-qr-grid-9-1",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "cd90b40b7c95e947371869e637009c1a52124c8008fe420353123faeba13b499",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-grid-9-2",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": false,
+    "printPixels": 900,
+    "exportSha256": "fe66defbdfc5c3f0945b0a7b2063d4e7d9f6633fe6abce67a05e591d83d57bdc",
+    "eligible": false
+  },
+  {
+    "id": "cdx-qr-grid-9-3",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": true,
+    "printPixels": 900,
+    "exportSha256": "065e75ec96503f69a1a9280981b5962e9cd285399ed42bed2232372af41c7850",
+    "eligible": true
+  },
+  {
+    "id": "cdx-qr-grid-9-4",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": true,
+    "printPixels": 900,
+    "exportSha256": "1a5e90a1a53ea99434cf475e7eb59d5efa17d73d8aa6bd6802981bed8a83204c",
+    "eligible": true
+  },
+  {
+    "id": "cdx-qr-grid-9-5",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": true,
+    "printPixels": 900,
+    "exportSha256": "313ed6017328e42b2631403a8b0dc74457ec931abe79a2717cef0394969711e6",
+    "eligible": true
+  },
+  {
+    "id": "cdx-qr-grid-9-6",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": true,
+    "printPixels": 900,
+    "exportSha256": "505a0f43e996907f7efe782cfa2b5a3c3d14d71348670a24badcd1e25d532643",
+    "eligible": true
+  },
+  {
+    "id": "cdx-qr-grid-9-7",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": true,
+    "printPixels": 900,
+    "exportSha256": "daf23cc772fb373016f49bd1f5a4838b1fd3647fc44b5439ca1eb28af87ebf07",
+    "eligible": true
+  },
+  {
+    "id": "cdx-qr-grid-9-8",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "picture": "own",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "method": "renderFront protocol; reference RGBA identity verified",
+    "layout": [
+      {
+        "ppm": 8,
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "ok": true
+      }
+    ],
+    "stage": [
+      {
+        "ppm": 8,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      },
+      {
+        "ppm": 4,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "ok": true
+      }
+    ],
+    "stageError": null,
+    "phone330": true,
+    "print900": true,
+    "printPixels": 900,
+    "exportSha256": "308795841bf9f376fbe2701e908a68add30db855f6a1cd3a0596cd63a1e38178",
+    "eligible": true
+  }
+]
