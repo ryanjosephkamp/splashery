@@ -178,8 +178,8 @@ const OPENING_GRAPHS = {
     // Deep dependencies otherwise wait for recursive discovery and can trigger
     // Chromium's unused script-preload warning on a slow opening.
     for (const source of sources) {
-      source.removeAttribute("as");
       source.rel = "modulepreload";
+      source.removeAttribute("as");
     }
     // Preserve the original engine preload: fetch and compile the mapped
     // module while the app's remaining dependency graph is still loading.

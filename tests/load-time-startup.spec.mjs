@@ -25,10 +25,10 @@ test("the app graph starts transferring before the compressed engine finishes", 
   await expect(page.locator("#worlds-link")).toHaveJSProperty("hidden", false);
 });
 
-test("warmed graph responses do not produce unused-preload warnings", async ({ page }) => {
+test("warmed graph responses do not produce preload warnings", async ({ page }) => {
   const warnings = [];
   page.on("console", (message) => {
-    if (message.type() === "warning" && message.text().includes("preloaded using link preload"))
+    if (message.type() === "warning" && message.text().includes("preload"))
       warnings.push(message.text());
   });
   await page.goto("/?renderer=none");
