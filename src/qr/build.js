@@ -18,6 +18,7 @@
 
 import { QUIET } from "./encode.js";
 import { TUNE, painter, moduleGrid } from "./crisp.js";
+import { circleLayout, circleSplats, appendSplats } from "./circle.js";
 
 export { TUNE };
 
@@ -190,10 +191,14 @@ export function buildCode(code, o, budget = 120000) {
 function buildOnce(code, o, budget, scale) {
   const style = STYLES.some((s) => s.id === o.style) ? o.style : "classic";
   const N = code.size;
-  const H = N / 2 + QUIET; // half the width of the code with its quiet zone
+  const circle = o.shape === "circle" ? circleLayout(code) : null;
+  const H = circle?.half ?? N / 2 + QUIET; // circular or square backing
+  const lo = circle ? Math.floor(N / 2 - H) : 0;
+  const hi = circle ? N - lo : N;
+  const real = (r, c) => r >= 0 && c >= 0 && r < N && c < N;
   const pal = palette(o);
   const out = [];
-  const dark = (r, c) => r >= 0 && c >= 0 && r < N && c < N && code.dark[r * N + c] === 1;
+  const dark = (r, c) => (real(r, c) ? code.dark[r * N + c] === 1 : !!circle?.dark(r, c));
   let nDark = 0;
   for (let i = 0; i < N * N; i++) nDark += code.dark[i];
   // Splats per module edge: as many as the budget allows, 3 to 5 (more,
@@ -219,6 +224,7 @@ function buildOnce(code, o, budget, scale) {
   // modules, from where the path starts), for Alive's current.
   const path = pathDistances(code);
   const pieceOf = (r, c) => {
+    if (!real(r, c)) return [0, 0];
     const id = code.piece[r * N + c];
     const along = 100 * path[r * N + c];
     if (id < 0) return [1 + r * N + c, 1 + along];
@@ -227,6 +233,7 @@ function buildOnce(code, o, budget, scale) {
     return [1 + (p.row + h) * N + (p.col + h), p.n + (p.kind === "finder" ? 10 : 0) + along];
   };
   const isEye = (r, c) => {
+    if (!real(r, c)) return false;
     const id = code.piece[r * N + c];
     return id >= 0 && code.pieces[id].kind === "finder";
   };
@@ -249,7 +256,7 @@ function buildOnce(code, o, budget, scale) {
   const sheetZ = scale ? -0.12 : 0;
 
   // ---- The plate under it.
-  buildPlate(o.plate || "paper", H, pal, out, flat, dot);
+  buildPlate(o.plate || "paper", H, pal, out, flat, dot, !!circle);
 
   // A module's cell with its outer corners rounded where neither neighbor on
   // that corner is dark (radius rad), so runs of modules merge.
@@ -344,13 +351,13 @@ function buildOnce(code, o, budget, scale) {
         out.push({ p, scales: sc, quat: quatTo(n), color: col, opacity: 1, params, pattern: false }); // prettier-ignore
       }
   }
-  const inPattern = (r, c) => code.piece[r * N + c] >= 0;
+  const inPattern = (r, c) => real(r, c) && code.piece[r * N + c] >= 0;
 
   // ---- The dark modules, style by style.
   const shapes = {
     classic() {
-      for (let r = 0; r < N; r++)
-        for (let c = 0; c < N; c++) {
+      for (let r = lo; r < hi; r++)
+        for (let c = lo; c < hi; c++) {
           if (!dark(r, c)) continue;
           const x = cx(c);
           const y = cy(r);
@@ -363,9 +370,9 @@ function buildOnce(code, o, budget, scale) {
       // Data modules are round dots; each finder is a rounded ring around a
       // rounded square (one piece); each alignment pattern a rounded ring
       // and a dot.
-      for (let r = 0; r < N; r++)
-        for (let c = 0; c < N; c++) {
-          if (!dark(r, c) || code.piece[r * N + c] >= 0) continue;
+      for (let r = lo; r < hi; r++)
+        for (let c = lo; c < hi; c++) {
+          if (!dark(r, c) || inPattern(r, c)) continue;
           const x = cx(c);
           const y = cy(r);
           crisp({ x0: x - 0.44, y0: y - 0.44, x1: x + 0.44, y1: y + 0.44, rad: [0.44, 0.44, 0.44, 0.44], z: 0.14, color: (px, py) => codeColor(px, py, false), params: pieceOf(r, c) }); // prettier-ignore
@@ -400,8 +407,8 @@ function buildOnce(code, o, budget, scale) {
     rounded() {
       // Square cells whose outer corners round off where neither neighbor
       // on that corner is dark, so runs of modules merge into soft shapes.
-      for (let r = 0; r < N; r++)
-        for (let c = 0; c < N; c++) {
+      for (let r = lo; r < hi; r++)
+        for (let c = lo; c < hi; c++) {
           if (!dark(r, c)) continue;
           const x = cx(c);
           const y = cy(r);
@@ -416,8 +423,8 @@ function buildOnce(code, o, budget, scale) {
       const Hb = 0.5; // height
       const e = 0.03; // the gap between blocks (half)
       const bev = 0.1;
-      for (let r = 0; r < N; r++)
-        for (let c = 0; c < N; c++) {
+      for (let r = lo; r < hi; r++)
+        for (let c = lo; c < hi; c++) {
           if (!dark(r, c)) continue;
           const x = cx(c);
           const y = cy(r);
@@ -460,8 +467,8 @@ function buildOnce(code, o, budget, scale) {
       const zb = 0.14;
       const t = 0.2; // half the table
       const a = 0.47; // half the girdle
-      for (let r = 0; r < N; r++)
-        for (let c = 0; c < N; c++) {
+      for (let r = lo; r < hi; r++)
+        for (let c = lo; c < hi; c++) {
           if (!dark(r, c)) continue;
           const x = cx(c);
           const y = cy(r);
@@ -512,8 +519,8 @@ function buildOnce(code, o, budget, scale) {
     bubbles() {
       // Glossy spheres: a lit dome per module with a small highlight.
       const R = 0.46;
-      for (let r = 0; r < N; r++)
-        for (let c = 0; c < N; c++) {
+      for (let r = lo; r < hi; r++)
+        for (let c = lo; c < hi; c++) {
           if (!dark(r, c)) continue;
           const x = cx(c);
           const y = cy(r);
@@ -558,8 +565,8 @@ function buildOnce(code, o, budget, scale) {
       // glowing pieces: readers find a code by their even runs.
       const light = pal.neonLight;
       const w = 0.31; // half the tube's width
-      for (let r = 0; r < N; r++)
-        for (let c = 0; c < N; c++) {
+      for (let r = lo; r < hi; r++)
+        for (let c = lo; c < hi; c++) {
           if (!dark(r, c)) continue;
           const x = cx(c);
           const y = cy(r);
@@ -654,11 +661,18 @@ function buildOnce(code, o, budget, scale) {
   // Lane QR r3: an underlay in the light color just behind the sheet, so
   // whatever moves away (a module bursting off, the paper folding) shows
   // light paper behind it, never a hole through to the plate's back.
-  if (scale) flat(-H, -H, H, H, sheetZ - 0.06, 0.6, null, pal.bg, [0, 0], { sigma: 0.6 });
+  const inside = (x, y) => !circle || Math.hypot(x, y) < H - 0.15;
+  if (circle)
+    appendSplats(
+      out,
+      circleSplats(code, { fg: pal.fg, bg: pal.bg, scale: scale || 0.8, sheet: false, dots: false })
+        .splats,
+    );
+  if (scale) flat(-H, -H, H, H, sheetZ - 0.06, 0.6, inside, pal.bg, [0, 0], { sigma: 0.6 });
   // params [0, 20]: the sheet (it folds with the code in the Fold motion).
   if (scale)
-    flat(-H, -H, H, H, sheetZ, TUNE.sheet * scale, (px, py) => !covered(px, py), pal.bg, [0, 20], { sigma: 0.6 }); // prettier-ignore
-  else flat(-H, -H, H, H, sheetZ, sp, null, pal.bg, [0, 20], { sigma: 0.6 });
+    flat(-H, -H, H, H, sheetZ, TUNE.sheet * scale, (px, py) => inside(px, py) && !covered(px, py), pal.bg, [0, 20], { sigma: 0.6 }); // prettier-ignore
+  else flat(-H, -H, H, H, sheetZ, sp, inside, pal.bg, [0, 20], { sigma: 0.6 });
   const depth = { bricks: 0.5, gems: 0.44, bubbles: 0.42, neon: 0.14 }[style] ?? 0.14;
   return { splats: out, half: H, depth, perModule: m, scale };
 }
@@ -705,7 +719,7 @@ export function pathDistances(code) {
 // A plate under the code: a slab a little bigger than the quiet zone. Paper is
 // a thin card in the code's light color; wood a board with grain around a
 // light print; metal a brushed plate with a bevel. None: the sheet alone.
-function buildPlate(kind, H, pal, out, flat, dot) {
+function buildPlate(kind, H, pal, out, flat, dot, circle = false) {
   if (kind === "none") return;
   const M = kind === "paper" ? 0.6 : 1.6; // the border around the quiet zone
   const T = kind === "paper" ? 0.25 : 1.1; // thickness
@@ -734,6 +748,30 @@ function buildPlate(kind, H, pal, out, flat, dot) {
       return mixc([0.6, 0.62, 0.65], [0.8, 0.82, 0.85], 0.55 * sheen + 0.15 * brush);
     };
     side = [0.48, 0.5, 0.53];
+  }
+  if (circle) {
+    flat(
+      -E,
+      -E,
+      E,
+      E,
+      -0.01,
+      s,
+      (x, y) => Math.hypot(x, y) < E && Math.hypot(x, y) > H - 0.25,
+      face,
+      P,
+      { sigma: 0.6 },
+    );
+    flat(-E, -E, E, E, -T - 0.12, s, (x, y) => Math.hypot(x, y) < E, side, P, { sigma: 0.6 });
+    const around = Math.ceil((2 * Math.PI * E) / s);
+    const rows = Math.max(2, Math.round(T / s));
+    for (let j = 0; j < rows; j++)
+      for (let i = 0; i < around; i++) {
+        const a = ((i + 0.5) * 2 * Math.PI) / around;
+        const n = [Math.cos(a), Math.sin(a), 0];
+        dot([E * n[0], E * n[1], -0.12 - ((j + 0.5) * T) / rows], n, s, side, P);
+      }
+    return;
   }
   // The border ring (behind the sheet's plane, so the sheet draws over it).
   const inBorder = (x, y) => Math.max(Math.abs(x), Math.abs(y)) > H - 0.25;
