@@ -1,0 +1,187 @@
+{
+  "device": {
+    "type": "webgpu",
+    "renderer": "WebGPU",
+    "demotedShaders": 0
+  },
+  "viewport": [391, 843],
+  "dpr": 2.625,
+  "results": [
+    {
+      "state": "together",
+      "canvas": [1026, 1690],
+      "samples": 2454,
+      "max": 14,
+      "p95": 9,
+      "bright": 0,
+      "worst": [
+        {
+          "ch": 2,
+          "row": 8,
+          "col": 28,
+          "brightness": 13
+        },
+        {
+          "ch": 2,
+          "row": 17,
+          "col": 3,
+          "brightness": 13
+        },
+        {
+          "ch": 2,
+          "row": 18,
+          "col": 8,
+          "brightness": 13
+        },
+        {
+          "ch": 2,
+          "row": 22,
+          "col": 4,
+          "brightness": 13
+        },
+        {
+          "ch": 2,
+          "row": 28,
+          "col": 9,
+          "brightness": 13
+        },
+        {
+          "ch": 1,
+          "row": 3,
+          "col": 14,
+          "brightness": 14
+        },
+        {
+          "ch": 1,
+          "row": 22,
+          "col": 4,
+          "brightness": 14
+        },
+        {
+          "ch": 2,
+          "row": 22,
+          "col": 4,
+          "brightness": 14
+        }
+      ]
+    },
+    {
+      "state": "apart",
+      "canvas": [1026, 1690],
+      "samples": 2454,
+      "max": 255,
+      "p95": 253,
+      "bright": 197,
+      "worst": [
+        {
+          "ch": 1,
+          "row": 3,
+          "col": 4,
+          "brightness": 255
+        },
+        {
+          "ch": 1,
+          "row": 3,
+          "col": 4,
+          "brightness": 255
+        },
+        {
+          "ch": 1,
+          "row": 4,
+          "col": 13,
+          "brightness": 255
+        },
+        {
+          "ch": 1,
+          "row": 4,
+          "col": 15,
+          "brightness": 255
+        },
+        {
+          "ch": 1,
+          "row": 4,
+          "col": 22,
+          "brightness": 255
+        },
+        {
+          "ch": 1,
+          "row": 4,
+          "col": 22,
+          "brightness": 255
+        },
+        {
+          "ch": 1,
+          "row": 10,
+          "col": 3,
+          "brightness": 255
+        },
+        {
+          "ch": 1,
+          "row": 13,
+          "col": 5,
+          "brightness": 255
+        }
+      ]
+    },
+    {
+      "state": "returned",
+      "canvas": [1026, 1690],
+      "samples": 2454,
+      "max": 14,
+      "p95": 9,
+      "bright": 0,
+      "worst": [
+        {
+          "ch": 2,
+          "row": 8,
+          "col": 28,
+          "brightness": 13
+        },
+        {
+          "ch": 2,
+          "row": 22,
+          "col": 4,
+          "brightness": 13
+        },
+        {
+          "ch": 2,
+          "row": 28,
+          "col": 9,
+          "brightness": 13
+        },
+        {
+          "ch": 1,
+          "row": 17,
+          "col": 3,
+          "brightness": 14
+        },
+        {
+          "ch": 1,
+          "row": 22,
+          "col": 4,
+          "brightness": 14
+        },
+        {
+          "ch": 2,
+          "row": 17,
+          "col": 3,
+          "brightness": 14
+        },
+        {
+          "ch": 2,
+          "row": 18,
+          "col": 8,
+          "brightness": 14
+        },
+        {
+          "ch": 2,
+          "row": 22,
+          "col": 4,
+          "brightness": 14
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stageIntegration": "unapplied"
+}
