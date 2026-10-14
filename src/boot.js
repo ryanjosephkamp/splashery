@@ -1,3 +1,110 @@
+// BEGIN GENERATED OPENING GRAPHS (tools/load-time-opening-graph.mjs)
+const OPENING_GRAPHS = {
+  app: [
+    "manual/pdf-edition.js",
+    "src/app.js",
+    "src/camera.js",
+    "src/chunks.js",
+    "src/codec.js",
+    "src/effects-pose.js",
+    "src/effects.js",
+    "src/exports.js",
+    "src/font.js",
+    "src/generators.js",
+    "src/gzip.js",
+    "src/kernels.js",
+    "src/kit.js",
+    "src/live/live.js",
+    "src/live/panel.js",
+    "src/live/record.js",
+    "src/loaders.js",
+    "src/media.js",
+    "src/motion.js",
+    "src/noise.js",
+    "src/opening-pack.js",
+    "src/packs/dog-plush-fill.js",
+    "src/packs/even.js",
+    "src/packs/photoreal-r2.js",
+    "src/packs/photoreal-r3-bases.js",
+    "src/packs/photoreal-r3-rigs.js",
+    "src/packs/photoreal-r3.js",
+    "src/paint.js",
+    "src/patterns.js",
+    "src/pc.js",
+    "src/photo-splats.js",
+    "src/physics/fields.js",
+    "src/physics/hands-on.js",
+    "src/physics/joints.js",
+    "src/physics/materials.js",
+    "src/physics/soft.js",
+    "src/physics/world.js",
+    "src/picture-splats.js",
+    "src/pictures.js",
+    "src/player.js",
+    "src/pose.js",
+    "src/rig-fx.js",
+    "src/rig.js",
+    "src/rigs.js",
+    "src/sharpness.js",
+    "src/site-toy-pages.js",
+    "src/sound-credits.js",
+    "src/sound.js",
+    "src/stage.js",
+    "src/state.js",
+    "src/toy-sounds.js",
+    "src/toys.js",
+    "src/ui.js",
+    "src/voices.js",
+  ],
+  embed: [
+    "manual/pdf-edition.js",
+    "src/camera.js",
+    "src/chunks.js",
+    "src/codec.js",
+    "src/effects-pose.js",
+    "src/effects.js",
+    "src/embed.js",
+    "src/font.js",
+    "src/generators.js",
+    "src/gzip.js",
+    "src/kernels.js",
+    "src/kit.js",
+    "src/loaders.js",
+    "src/media.js",
+    "src/motion.js",
+    "src/noise.js",
+    "src/opening-pack.js",
+    "src/packs/dog-plush-fill.js",
+    "src/packs/even.js",
+    "src/packs/photoreal-r2.js",
+    "src/packs/photoreal-r3-bases.js",
+    "src/packs/photoreal-r3-rigs.js",
+    "src/packs/photoreal-r3.js",
+    "src/paint.js",
+    "src/patterns.js",
+    "src/pc.js",
+    "src/photo-splats.js",
+    "src/physics/fields.js",
+    "src/physics/hands-on.js",
+    "src/physics/joints.js",
+    "src/physics/materials.js",
+    "src/physics/soft.js",
+    "src/physics/world.js",
+    "src/picture-splats.js",
+    "src/pictures.js",
+    "src/player.js",
+    "src/pose.js",
+    "src/rig-fx.js",
+    "src/rig.js",
+    "src/rigs.js",
+    "src/sharpness.js",
+    "src/stage.js",
+    "src/state.js",
+    "src/toys.js",
+    "src/viewer.js",
+  ],
+};
+// END GENERATED OPENING GRAPHS
 // Start the page with the exact vendored engine source. The import map is
 // installed before the app's module graph starts, preserving all native/live exports.
 // A harmless resolution probe detects support for adding import maps after a module starts.
@@ -27,15 +134,27 @@
     }
   }
   async function start() {
-    if (
+    const compressed =
       typeof DecompressionStream === "function" &&
       HTMLScriptElement.supports?.("importmap") &&
       canAddImportMaps() &&
       location.origin !== "null" &&
-      !new URLSearchParams(location.search).has("raw-engine")
-    ) {
+      !new URLSearchParams(location.search).has("raw-engine");
+    const transfer = compressed ? fetch(`${engine.href}.gz`) : null;
+    // Fetch source responses while the engine transfers. Unlike modulepreload,
+    // script preloads do not resolve imports before the native engine map exists.
+    const graph = entry.pathname.endsWith("/embed.js") ? OPENING_GRAPHS.embed : OPENING_GRAPHS.app;
+    for (const file of graph) {
+      const source = document.createElement("link");
+      source.rel = "preload";
+      source.as = "script";
+      source.crossOrigin = "anonymous";
+      source.href = new URL(`../${file}`, base).href;
+      document.head.appendChild(source);
+    }
+    if (transfer) {
       try {
-        const response = await fetch(`${engine.href}.gz`);
+        const response = await transfer;
         if (!response.ok) throw new Error("Compressed engine unavailable");
         let bytes = new Uint8Array(await response.arrayBuffer());
         if (bytes[0] === 0x1f && bytes[1] === 0x8b) {
