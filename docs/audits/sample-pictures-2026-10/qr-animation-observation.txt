@@ -1,0 +1,37 @@
+Task branch, final selected samples. Existing assertion tests/qrc-picture.spec.mjs:158.
+The Wildflowers background and production animation code are unchanged.
+
+  2) [chromium] › tests/qrc-picture.spec.mjs:132:1 › Picture QR in the browser: the splats read back, the PNG reads back, and a tap ends on a code that reads
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 1
+    + Received  + 1
+
+      Array [
+        "Splashery picture QR",
+    -   "Splashery picture QR",
+    +   null,
+      ]
+
+      156 |   await page.waitForTimeout(4500);
+      157 |   const after = await page.evaluate(() => window.__splashery.qrCraft.checkPicture().then((c) => c.stage.map((s) => s.text))); // prettier-ignore
+    > 158 |   expect(after).toEqual([own, own]);
+          |                 ^
+      159 |   expect(errors).toEqual([]);
+      160 | });
+      161 |
+        at /workspace/splashery/tests/qrc-picture.spec.mjs:158:17
+
+
+Isolated retry after other test browsers finished:
+
+Running 1 test using 1 worker
+
+(node:62208) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:62208) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 [chromium] › tests/qrc-picture.spec.mjs:132:1 › Picture QR in the browser: the splats read back, the PNG reads back, and a tap ends on a code that reads (33.9s)
+
+  1 passed (38.8s)

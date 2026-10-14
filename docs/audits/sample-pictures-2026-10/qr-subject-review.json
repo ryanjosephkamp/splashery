@@ -1,0 +1,194 @@
+{
+  "cdx-qr-3-2": {
+    "clear": true,
+    "reason": "Recognizable Pebble pool 2 silhouette and color regions in the actual 330-pixel phone render; visually reviewed by Codex (GPT-6)."
+  },
+  "cdx-qr-8-7": {
+    "clear": false,
+    "reason": "Retired after the final Operator review: flat vase silhouette; replace with a subject with stronger volume."
+  },
+  "cdx-qr-print-3-6": {
+    "clear": false,
+    "reason": "Retired after the final Operator review: dark panel with pale blobs; replace with a clearer single AI-made subject."
+  },
+  "cdx-qr-print-5-2": {
+    "clear": true,
+    "reason": "Recognizable Leaf canopy soft 2 silhouette and color regions in the actual 330-pixel phone render; visually reviewed by Codex (GPT-6)."
+  },
+  "cdx-qr-print-5-6": {
+    "clear": false,
+    "reason": "Retired after the final Operator review: dark panel with pale blobs; replace with a clearer single AI-made subject."
+  },
+  "cdx-qr-print-8-2": {
+    "clear": true,
+    "reason": "Recognizable Ceramic vase soft 2 silhouette and color regions in the actual 330-pixel phone render; visually reviewed by Codex (GPT-6)."
+  },
+  "cdx-qr-ai-blue-vase": {
+    "clear": true,
+    "reason": "Recognizable Blue vase silhouette and color regions in the actual 330-pixel phone render; visually reviewed by Codex (GPT-6)."
+  },
+  "cdx-qr-ai-teapot": {
+    "clear": true,
+    "reason": "Recognizable Clay teapot silhouette and color regions in the actual 330-pixel phone render; visually reviewed by Codex (GPT-6)."
+  },
+  "cdx-qr-ai-fern": {
+    "clear": true,
+    "reason": "Recognizable Fern frond silhouette and color regions in the actual 330-pixel phone render; visually reviewed by Codex (GPT-6)."
+  },
+  "cdx-qr-ai-ginkgo": {
+    "clear": true,
+    "reason": "Recognizable Ginkgo leaf silhouette and color regions in the actual 330-pixel phone render; visually reviewed by Codex (GPT-6)."
+  },
+  "cdx-qr-ai-monstera": {
+    "clear": true,
+    "reason": "Recognizable Split leaf silhouette and color regions in the actual 330-pixel phone render; visually reviewed by Codex (GPT-6)."
+  },
+  "cdx-qr-ai-cactus": {
+    "clear": true,
+    "reason": "Recognizable Potted cactus silhouette and color regions in the actual 330-pixel phone render; visually reviewed by Codex (GPT-6)."
+  },
+  "cdx-qr-ai-succulent": {
+    "clear": true,
+    "reason": "Recognizable Succulent silhouette and color regions in the actual 330-pixel phone render; visually reviewed by Codex (GPT-6)."
+  },
+  "cdx-qr-ai-pebbles": {
+    "clear": true,
+    "reason": "Recognizable Smooth pebbles silhouette and color regions in the actual 330-pixel phone render; visually reviewed by Codex (GPT-6)."
+  },
+  "cdx-qr-ai-pear": {
+    "clear": true,
+    "reason": "Recognizable Pear silhouette and color regions in the actual 330-pixel phone render; visually reviewed by Codex (GPT-6)."
+  },
+  "cdx-qr-ai-citrus": {
+    "clear": true,
+    "reason": "Recognizable Citrus halves silhouette and color regions in the actual 330-pixel phone render; visually reviewed by Codex (GPT-6)."
+  },
+  "cdx-qr-ai-squash": {
+    "clear": true,
+    "reason": "Recognizable Autumn squash silhouette and color regions in the actual 330-pixel phone render; visually reviewed by Codex (GPT-6)."
+  },
+  "cdx-qr-ai-mushroom": {
+    "clear": true,
+    "reason": "Recognizable Mushroom silhouette and color regions in the actual 330-pixel phone render; visually reviewed by Codex (GPT-6)."
+  },
+  "cdx-qr-ai-shell": {
+    "clear": false,
+    "reason": "Spiral shell structure is too faint in the phone halftone."
+  },
+  "cdx-qr-ai-scallop": {
+    "clear": true,
+    "reason": "Recognizable Scallop shell silhouette and color regions in the actual 330-pixel phone render; visually reviewed by Codex (GPT-6)."
+  },
+  "cdx-qr-ai-tulip": {
+    "clear": true,
+    "reason": "Recognizable Tulip silhouette and color regions in the actual 330-pixel phone render; visually reviewed by Codex (GPT-6)."
+  },
+  "cdx-qr-ai-lotus": {
+    "clear": true,
+    "reason": "Recognizable Lotus bloom silhouette and color regions in the actual 330-pixel phone render; visually reviewed by Codex (GPT-6)."
+  },
+  "cdx-qr-ai-poppy": {
+    "clear": true,
+    "reason": "Recognizable Poppy bloom silhouette and color regions in the actual 330-pixel phone render; visually reviewed by Codex (GPT-6)."
+  },
+  "cdx-qr-ai-acorns": {
+    "clear": true,
+    "reason": "Recognizable Acorns silhouette and color regions in the actual 330-pixel phone render; visually reviewed by Codex (GPT-6)."
+  },
+  "cdx-qr-ai-pinecone": {
+    "clear": true,
+    "reason": "Recognizable Pinecone silhouette and color regions in the actual 330-pixel phone render; visually reviewed by Codex (GPT-6)."
+  },
+  "cdx-qr-ai-pumpkin": {
+    "clear": true,
+    "reason": "Recognizable Pumpkin silhouette and color regions in the actual 330-pixel phone render; visually reviewed by Codex (GPT-6)."
+  },
+  "cdx-qr-ai-wood-blocks": {
+    "clear": true,
+    "reason": "Recognizable Wooden blocks silhouette and color regions in the actual 330-pixel phone render; visually reviewed by Codex (GPT-6)."
+  },
+  "cdx-qr-ai-rook": {
+    "clear": true,
+    "reason": "Recognizable Wooden rook silhouette and color regions in the actual 330-pixel phone render; visually reviewed by Codex (GPT-6)."
+  },
+  "cdx-qr-ai-paper-boat": {
+    "clear": true,
+    "reason": "Recognizable Paper boat silhouette and color regions in the actual 330-pixel phone render; visually reviewed by Codex (GPT-6)."
+  },
+  "cdx-qr-ai-hot-air-balloon": {
+    "clear": true,
+    "reason": "Recognizable Balloon silhouette and color regions in the actual 330-pixel phone render; visually reviewed by Codex (GPT-6)."
+  },
+  "cdx-qr-ai-sailboat": {
+    "clear": false,
+    "reason": "The pale main structure is too faint against the background at 330 pixels."
+  },
+  "cdx-qr-ai-cup": {
+    "clear": false,
+    "reason": "The pale main structure is too faint against the background at 330 pixels."
+  },
+  "cdx-qr-ai-tea-bowl": {
+    "clear": true,
+    "reason": "Recognizable Tea bowl silhouette and color regions in the actual 330-pixel phone render; visually reviewed by Codex (GPT-6)."
+  },
+  "cdx-qr-ai-pitcher": {
+    "clear": true,
+    "reason": "Recognizable Clay pitcher silhouette and color regions in the actual 330-pixel phone render; visually reviewed by Codex (GPT-6)."
+  },
+  "cdx-qr-ai-watering-can": {
+    "clear": true,
+    "reason": "Recognizable Watering can silhouette and color regions in the actual 330-pixel phone render; visually reviewed by Codex (GPT-6)."
+  },
+  "cdx-qr-ai-rainbow": {
+    "clear": true,
+    "reason": "Recognizable Paper rainbow silhouette and color regions in the actual 330-pixel phone render; visually reviewed by Codex (GPT-6)."
+  },
+  "cdx-qr-ai-stacked-stones": {
+    "clear": true,
+    "reason": "Recognizable Stacked stones silhouette and color regions in the actual 330-pixel phone render; visually reviewed by Codex (GPT-6)."
+  },
+  "cdx-qr-ai-crystal": {
+    "clear": false,
+    "reason": "Crystal facets merge into a faint purple mass in the phone halftone."
+  },
+  "cdx-qr-ai-spinning-top": {
+    "clear": true,
+    "reason": "Complete single-object silhouette, shading, and distinctive parts remain visible in the actual 330-pixel render."
+  },
+  "cdx-qr-ai-wicker-basket": {
+    "clear": true,
+    "reason": "Complete single-object silhouette, shading, and distinctive parts remain visible in the actual 330-pixel render."
+  },
+  "cdx-qr-ai-copper-kettle": {
+    "clear": true,
+    "reason": "Complete single-object silhouette, shading, and distinctive parts remain visible in the actual 330-pixel render."
+  },
+  "cdx-qr-ai-wooden-mallet": {
+    "clear": true,
+    "reason": "Complete single-object silhouette, shading, and distinctive parts remain visible in the actual 330-pixel render."
+  },
+  "cdx-qr-ai-clay-mortar": {
+    "clear": true,
+    "reason": "Complete single-object silhouette, shading, and distinctive parts remain visible in the actual 330-pixel render."
+  },
+  "cdx-qr-ai-brass-padlock": {
+    "clear": true,
+    "reason": "Complete single-object silhouette, shading, and distinctive parts remain visible in the actual 330-pixel render."
+  },
+  "cdx-qr-ai-red-apple": {
+    "clear": true,
+    "reason": "Round red body, leaf, stem, and shading remain clear at 330 pixels."
+  },
+  "cdx-qr-ai-ceramic-bell": {
+    "clear": true,
+    "reason": "Flared blue bell body, handle, open mouth, and clapper remain clear at 330 pixels."
+  },
+  "cdx-qr-ai-green-watering-can": {
+    "clear": true,
+    "reason": "Rounded green body, open rim, spout, and arching handle remain distinct at 330 pixels."
+  },
+  "cdx-qr-ai-stacking-rings": {
+    "clear": true,
+    "reason": "Four rounded colored rings and the peg remain distinct, with visible depth, at 330 pixels."
+  }
+}

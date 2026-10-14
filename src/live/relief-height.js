@@ -14,6 +14,8 @@
 // depth (backingHeight), less a small offset. As each layer's height rises with its depth, that is
 // the lowest point of the surface near it, whatever the four channels are doing.
 
+import { minimumField } from "../photo3d/background.js";
+
 export const NONE = 255; // (a layer with no surface within reach)
 
 // The surface's height at a point of depth d (0..1) in a layer (0..3).
@@ -88,39 +90,30 @@ export function backingField(
       if (depth[c] < all[q]) all[q] = depth[c];
     }
   const out = new Uint8Array((cols + 1) * (rows + 1) * 4);
+  // A conservative extra block accounts for fractional window centers. These
+  // separable minima replace a repeated square search at every backing vertex.
+  const radius = Math.ceil((reach * gy) / k) + 1;
+  const fields = Array.from({ length: 4 }, (_, b) => {
+    const v = Float32Array.from({ length: bx * by }, (_, i) => blk[i * 4 + b]);
+    return minimumField(v, bx, by, radius);
+  });
+  const border = minimumField(all, bx, by, Math.ceil(((reach + soft) * gy) / k) + 1);
   // (a window in picture heights is this many cells across and down: the cells are square)
-  const cellsPer = gy;
   for (let j = 0; j <= rows; j++)
     for (let i = 0; i <= cols; i++) {
       const u = 0.5 + (i / cols - 0.5) * inset;
       const v = 0.5 + (j / rows - 0.5) * inset;
       const ci = u * gx;
       const cj = v * gy;
-      const r = reach * cellsPer;
-      const x0 = Math.max(0, Math.floor((ci - r) / k));
-      const x1 = Math.min(bx - 1, Math.floor((ci + r) / k));
-      const y0 = Math.max(0, Math.floor((cj - r) / k));
-      const y1 = Math.min(by - 1, Math.floor((cj + r) / k));
-      const m = [NONE, NONE, NONE, NONE];
-      for (let y = y0; y <= y1; y++)
-        for (let x = x0; x <= x1; x++) {
-          const q = (y * bx + x) * 4;
-          for (let b = 0; b < 4; b++) if (blk[q + b] < m[b]) m[b] = blk[q + b];
-        }
+      const q = Math.min(by - 1, Math.floor(cj / k)) * bx + Math.min(bx - 1, Math.floor(ci / k));
+      const m = fields.map((f) => f[q]);
       // Near the border the surface eases into a softened depth (an average reaching `soft`
       // further), with its layers blended: below the lowest depth there, and never above the flat
       // picture, it stays behind whatever the channels do.
       const aspect = gx / gy;
       const near = Math.min(u * aspect, (1 - u) * aspect, v, 1 - v) < reach + rim;
       if (near) {
-        const s = (reach + soft) * cellsPer;
-        let a = 255;
-        const sx0 = Math.max(0, Math.floor((ci - s) / k));
-        const sx1 = Math.min(bx - 1, Math.floor((ci + s) / k));
-        const sy0 = Math.max(0, Math.floor((cj - s) / k));
-        const sy1 = Math.min(by - 1, Math.floor((cj + s) / k));
-        for (let y = sy0; y <= sy1; y++)
-          for (let x = sx0; x <= sx1; x++) if (all[y * bx + x] < a) a = all[y * bx + x];
+        const a = border[q];
         m[0] = Math.min(m[0], a, Math.floor(base * 255)); // (at most the flat picture's depth)
       }
       out.set(m, (j * (cols + 1) + i) * 4);

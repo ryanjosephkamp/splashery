@@ -1,0 +1,15 @@
+{
+  "case": "tests/p3d.spec.mjs: invalid photo warning after a successful custom photo upload",
+  "branch": "codex/sample-pictures",
+  "run": "isolated retry",
+  "evidence": "Real Chromium Playwright trace, no mock DOM",
+  "validPhotoFinishedMs": 25185.527,
+  "invalidUploadStartedMs": 25276.372,
+  "invalidUploadReturnedMs": 25352.14,
+  "visibleErrorAfterUpload": "This browser couldn't read that file as a photo. Save it as a JPEG, PNG or WebP and open that.",
+  "assertionStartedMs": 25355.772,
+  "assertionEndedMs": 85435.783,
+  "finalWarningHidden": true,
+  "sourceObservation": "src/ui.js renderInputPanel constructs a new initially hidden warning when the option panel is rebuilt. The input error handler changes the prior warning node.",
+  "baselineFirstRun": "Passed the initial unchanged-main run; failed the same warning assertion during the repeated unchanged-main run."
+}

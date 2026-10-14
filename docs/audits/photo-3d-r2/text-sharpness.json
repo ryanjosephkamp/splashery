@@ -1,0 +1,186 @@
+[
+  {
+    "toy": "photo-3d",
+    "tier": "low",
+    "view": "fit",
+    "label": "after",
+    "ssim": 0.9125,
+    "gaps": {
+      "9-12": {
+        "lines": 1,
+        "read": 1,
+        "gaps": 17,
+        "kept": 17,
+        "readShare": 1,
+        "keptShare": 1
+      },
+      "12-16": {
+        "lines": 6,
+        "read": 6,
+        "gaps": 233,
+        "kept": 232,
+        "readShare": 1,
+        "keptShare": 0.996
+      }
+    },
+    "ncc": 0.9762,
+    "onScreenCss": [374.4, 811.8],
+    "reg": {
+      "s": 1,
+      "dx": 0,
+      "dy": 0
+    },
+    "info": {
+      "name": "Text",
+      "uid": 1,
+      "splats": 85499,
+      "backing": 2376,
+      "grid": [488, 1048],
+      "pieces": 1,
+      "cutEdges": 11,
+      "relief": 0.43,
+      "ms": 0,
+      "custom": true
+    },
+    "count": null,
+    "buildMs": 46025
+  },
+  {
+    "toy": "photo-3d",
+    "tier": "mid",
+    "view": "fit",
+    "label": "after",
+    "ssim": 0.9869,
+    "gaps": {
+      "9-12": {
+        "lines": 1,
+        "read": 1,
+        "gaps": 17,
+        "kept": 17,
+        "readShare": 1,
+        "keptShare": 1
+      },
+      "12-16": {
+        "lines": 6,
+        "read": 6,
+        "gaps": 233,
+        "kept": 233,
+        "readShare": 1,
+        "keptShare": 1
+      }
+    },
+    "ncc": 0.9959,
+    "onScreenCss": [374.4, 811.4],
+    "reg": {
+      "s": 1,
+      "dx": 0,
+      "dy": 0
+    },
+    "info": {
+      "name": "Text",
+      "uid": 1,
+      "splats": 199499,
+      "backing": 2376,
+      "grid": [464, 1000],
+      "pieces": 1,
+      "cutEdges": 8,
+      "relief": 0.43,
+      "ms": 0,
+      "custom": true
+    },
+    "count": null,
+    "buildMs": 131780
+  },
+  {
+    "toy": "photo-3d",
+    "tier": "high",
+    "view": "fit",
+    "label": "after",
+    "ssim": 0.9869,
+    "gaps": {
+      "9-12": {
+        "lines": 1,
+        "read": 1,
+        "gaps": 17,
+        "kept": 17,
+        "readShare": 1,
+        "keptShare": 1
+      },
+      "12-16": {
+        "lines": 6,
+        "read": 6,
+        "gaps": 233,
+        "kept": 233,
+        "readShare": 1,
+        "keptShare": 1
+      }
+    },
+    "ncc": 0.9959,
+    "onScreenCss": [374.4, 811.4],
+    "reg": {
+      "s": 1,
+      "dx": 0,
+      "dy": 0
+    },
+    "info": {
+      "name": "Text",
+      "uid": 1,
+      "splats": 285000,
+      "backing": 2376,
+      "grid": [576, 1232],
+      "pieces": 1,
+      "cutEdges": 12,
+      "relief": 0.43,
+      "ms": 0,
+      "custom": true
+    },
+    "count": null,
+    "buildMs": 140158
+  },
+  {
+    "toy": "photo-3d",
+    "tier": "max",
+    "view": "fit",
+    "label": "after",
+    "ssim": 0.9869,
+    "gaps": {
+      "9-12": {
+        "lines": 1,
+        "read": 1,
+        "gaps": 17,
+        "kept": 17,
+        "readShare": 1,
+        "keptShare": 1
+      },
+      "12-16": {
+        "lines": 6,
+        "read": 6,
+        "gaps": 233,
+        "kept": 233,
+        "readShare": 1,
+        "keptShare": 1
+      }
+    },
+    "ncc": 0.9959,
+    "onScreenCss": [374.4, 811.4],
+    "reg": {
+      "s": 1,
+      "dx": 0,
+      "dy": 0
+    },
+    "info": {
+      "name": "Text",
+      "uid": 1,
+      "splats": 379998,
+      "backing": 2376,
+      "grid": [672, 1472],
+      "pieces": 1,
+      "cutEdges": 17,
+      "relief": 0.43,
+      "ms": 0,
+      "custom": true
+    },
+    "count": null,
+    "buildMs": 147459
+  }
+]
