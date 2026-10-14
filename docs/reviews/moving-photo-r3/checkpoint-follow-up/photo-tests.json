@@ -1,0 +1,69 @@
+{
+  "stats": {
+    "startTime": "2026-10-14T16:09:03.165Z",
+    "duration": 1209871.8360000001,
+    "expected": 97,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "files": {
+    "cdx-p3d2-core.spec.mjs": {
+      "expected": 4
+    },
+    "cdx-p3d2-input.spec.mjs": {
+      "expected": 1
+    },
+    "cdx-p3d2-r3-anchored.spec.mjs": {
+      "expected": 6
+    },
+    "cdx-p3d2-r3-background-interior.spec.mjs": {
+      "expected": 4
+    },
+    "cdx-p3d2-r3-background.spec.mjs": {
+      "expected": 1
+    },
+    "cdx-p3d2-r3-compact.spec.mjs": {
+      "expected": 4
+    },
+    "cdx-p3d2-r3-depth.spec.mjs": {
+      "expected": 7
+    },
+    "cdx-p3d2-r3-edges.spec.mjs": {
+      "expected": 3
+    },
+    "cdx-p3d2-r3-footprint.spec.mjs": {
+      "expected": 2
+    },
+    "cdx-p3d2-r3-input-race.spec.mjs": {
+      "expected": 1
+    },
+    "cdx-p3d2-r3-metrics.spec.mjs": {
+      "expected": 2
+    },
+    "cdx-p3d2-r3-surface.spec.mjs": {
+      "expected": 4
+    },
+    "cdx-p3d2-render.spec.mjs": {
+      "expected": 16
+    },
+    "cdx-p3d2-text.spec.mjs": {
+      "expected": 2
+    },
+    "p3d.spec.mjs": {
+      "expected": 10
+    },
+    "psv.spec.mjs": {
+      "expected": 8
+    },
+    "psv2.spec.mjs": {
+      "expected": 6
+    },
+    "psv3.spec.mjs": {
+      "expected": 16
+    }
+  },
+  "failures": [],
+  "skipped": [],
+  "configuredRetries": 0
+}

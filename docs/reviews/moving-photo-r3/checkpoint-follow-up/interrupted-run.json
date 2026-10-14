@@ -1,0 +1,55 @@
+{
+  "attemptedCases": 266,
+  "interruptedDuringCase": 222,
+  "finalReport": false,
+  "cause": "workspace restart",
+  "connectionFailures": 11,
+  "error": "net::ERR_CONNECTION_REFUSED: helper defaulted to port4173 before server startup",
+  "failedCases": [
+    {
+      "file": "tests/cdx-p3d2-r3-edges.spec.mjs",
+      "title": "texture filtering keeps each side's own color at a depth cut"
+    },
+    {
+      "file": "tests/cdx-p3d2-render.spec.mjs",
+      "title": "source bitmaps are reused for depth changes and retired after a source handoff"
+    },
+    {
+      "file": "tests/cdx-p3d2-render.spec.mjs",
+      "title": "a late source decode cannot replace a newer prepared photo"
+    },
+    {
+      "file": "tests/cdx-p3d2-render.spec.mjs",
+      "title": "added clay retains its color and extends beyond the photo boundary"
+    },
+    {
+      "file": "tests/cdx-p3d2-render.spec.mjs",
+      "title": "forest sharp: at least 80% fewer holes and tears at twenty degrees"
+    },
+    {
+      "file": "tests/cdx-p3d2-render.spec.mjs",
+      "title": "forest splats: at least 80% fewer holes and tears at twenty degrees"
+    },
+    {
+      "file": "tests/cdx-p3d2-render.spec.mjs",
+      "title": "spiral-stairs sharp: at least 80% fewer holes and tears at twenty degrees"
+    },
+    {
+      "file": "tests/cdx-p3d2-render.spec.mjs",
+      "title": "spiral-stairs splats: at least 80% fewer holes and tears at twenty degrees"
+    },
+    {
+      "file": "tests/cdx-p3d2-render.spec.mjs",
+      "title": "dot-castle sharp: at least 80% fewer holes and tears at twenty degrees"
+    },
+    {
+      "file": "tests/cdx-p3d2-render.spec.mjs",
+      "title": "dot-castle splats: at least 80% fewer holes and tears at twenty degrees"
+    },
+    {
+      "file": "tests/cdx-p3d2-render.spec.mjs",
+      "title": "the forest's raised Splats surface closes its steep slopes at 20 degrees"
+    }
+  ],
+  "supersededBy": "photo-tests.json: 97/97 pass unchanged with helper URL configured"
+}

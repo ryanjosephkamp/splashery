@@ -1,0 +1,103 @@
+{
+  "checkpoint": "58f3d8ede13714bf4b3d1f99fbf3b29d7f60e492",
+  "main": "6c3764ff9a1aa3fbba202af12d6764ac23ed2d6e",
+  "mergedHead": "7f7449c01d58ad56bc8ebd9e9202f7377b744d8a",
+  "productionHash": "ef0e056b84eb2f37f8dcfc3b7f3fcb240df8b6a7b57bbb4bc212d7ca62565a63",
+  "unchangedPhotoModules": [
+    "src/packs/photo-3d.js",
+    "src/packs/photo-3d-core.js",
+    "src/photo-splats.js",
+    "src/live/relief-mesh.js",
+    "src/live/relief-height.js",
+    "src/live/relief.js"
+  ],
+  "unchangedRequestedSpecs": [
+    {
+      "file": "tests/psv.spec.mjs",
+      "sha256": "71a2350974a82bbd8dfc2e4c31c6ec996eb96a60a2688fb1900874efb99f9bd1"
+    },
+    {
+      "file": "tests/psv2.spec.mjs",
+      "sha256": "33d1b049972147e38af88b89f655154e10fae6dcd2301de0369544a96dc99090"
+    },
+    {
+      "file": "tests/psv3.spec.mjs",
+      "sha256": "e468ca280626660f1adecd728fa578c2253b420227d5612e574a6b47a345e59c"
+    },
+    {
+      "file": "tests/p3d.spec.mjs",
+      "sha256": "538492ef255bab0df3d47e16812632f21f446a97fe01e3fb0ccf083f9c4b2159"
+    },
+    {
+      "file": "tests/cdx-p3d2-r3-background-interior.spec.mjs",
+      "sha256": "5d31cb916960f3a52cb7a754a02fe303c2c51f1f83b8c09ba48f5aa363e099fc"
+    },
+    {
+      "file": "tests/cdx-p3d2-r3-anchored.spec.mjs",
+      "sha256": "9d6246edf49516d4eab91d77280495ae073ad7f43e90578a52054be822d174d7"
+    },
+    {
+      "file": "tests/cdx-p3d2-core.spec.mjs",
+      "sha256": "296806a49872dbced72b789b371ab178580bc2fc81495b8221bcb18961d93cb7"
+    },
+    {
+      "file": "tests/cdx-p3d2-r3-background.spec.mjs",
+      "sha256": "38bc3eccb2368cee6a3e544b255dacdb2fdf2c5a975aba3c83bff3b467f79962"
+    },
+    {
+      "file": "tests/cdx-p3d2-r3-depth.spec.mjs",
+      "sha256": "1f6063c7ef1afc75dbc15ba6c787a1fc2d02864b96b55ab4e4cd818f0fae6b71"
+    },
+    {
+      "file": "tests/cdx-p3d2-r3-footprint.spec.mjs",
+      "sha256": "170b189bb6bc27f22d8b8f67c9de7dab8f7185d5b2f18cdcce97a2539d825de7"
+    },
+    {
+      "file": "tests/cdx-p3d2-r3-input-race.spec.mjs",
+      "sha256": "726365476f3c2a449104959c7d35459cc8b8fd3ca4a4fea21a5a73128d603a53"
+    },
+    {
+      "file": "tests/cdx-p3d2-r3-surface.spec.mjs",
+      "sha256": "ac783196f3ebae453c633d016df9196f61a2ceb12fb7fb44d3396363850b635a"
+    },
+    {
+      "file": "tests/cdx-p3d2-input.spec.mjs",
+      "sha256": "b27d7fc4cc69f1f26e920142e413573ae28b6f2cfe31e4bc5791d8d4d602e2bc"
+    },
+    {
+      "file": "tests/cdx-p3d2-render.spec.mjs",
+      "sha256": "78aa7fada3125faced3d483df300313b8d686f4903ef14f80dbfcc97a5ead158"
+    },
+    {
+      "file": "tests/cdx-p3d2-r3-compact.spec.mjs",
+      "sha256": "448bfab441dd3e48cfec89129b0165bf2a8ac0b8eae795ddd5f5cade50606ed0"
+    },
+    {
+      "file": "tests/cdx-p3d2-r3-edges.spec.mjs",
+      "sha256": "dfc500bf809dcd6f22e41cc744775dc1d861c46783046a9aefaa3abcf74ae477"
+    },
+    {
+      "file": "tests/cdx-p3d2-text.spec.mjs",
+      "sha256": "ea40622cf04e3584f1fdeb03f74bb2d0f87e4890666660096a1a9fe96dcaa652"
+    },
+    {
+      "file": "tests/cdx-p3d2-r3-metrics.spec.mjs",
+      "sha256": "4c1953e255e0e0c79c136ba75074d9dcc408532672fae2e9ecaa2aa9288f67dd"
+    }
+  ],
+  "checkpointSourceScope": [
+    "src/packs/photo-3d.js",
+    "src/packs/photo-3d-core.js",
+    "src/packs/photo-sharp.js",
+    "src/photo3d",
+    "src/photo-splats.js",
+    "src/live/relief-mesh.js",
+    "src/live/relief-height.js",
+    "src/live/relief.js",
+    "src/depth",
+    "src/packs/dot-samples.js",
+    "src/packs/hard-case-samples.js",
+    "src/packs/hard-case-pictures.js"
+  ],
+  "changedWithinSourceScope": ["src/packs/photo-sharp.js"]
+}

@@ -1,0 +1,44 @@
+{
+  "madeBy": "Ryan with Codex (GPT-6)",
+  "checked": "October 14, 2026",
+  "main": "6c3764ff9a1aa3fbba202af12d6764ac23ed2d6e",
+  "mergedHead": "7f7449c01d58ad56bc8ebd9e9202f7377b744d8a",
+  "productionHash": "ef0e056b84eb2f37f8dcfc3b7f3fcb240df8b6a7b57bbb4bc212d7ca62565a63",
+  "files": [
+    {
+      "file": "README.md",
+      "bytes": 6857,
+      "sha256": "9a96f843a76effe063df3bda45c3166480bddc79e0d46ac3eb84c1f1bfc95541"
+    },
+    {
+      "file": "branch-playback.json",
+      "bytes": 103732,
+      "sha256": "4743682eead8c26a2115dc33fe2566b943fd99d514e99ca7ce8490dcadb99b6f"
+    },
+    {
+      "file": "checkpoint-proof.json",
+      "bytes": 3561,
+      "sha256": "58e564fababf5f49615ef0226e9cbc5e2709707c1a1c5953aab041f95cfa9ba4"
+    },
+    {
+      "file": "interrupted-run.json",
+      "bytes": 1974,
+      "sha256": "97f0681e6504b79a2e08568d2b51dbd8c0c72130fcda68af5d27436e9a940544"
+    },
+    {
+      "file": "main-playback.json",
+      "bytes": 266549,
+      "sha256": "6fd108991cd34efe69884c1cbf942e7dcdff7e0faed98bb3d23d6e3b1cc801d6"
+    },
+    {
+      "file": "photo-tests.json",
+      "bytes": 1361,
+      "sha256": "1e5646a4761773c1f94d763cea3f178ef44ed5a590a4ce9d1c58493d85e23483"
+    },
+    {
+      "file": "smoke-tests.json",
+      "bytes": 298,
+      "sha256": "6d1b3562ae91fd403388f2ed4e78438527dfe8f137a191c1cae14f25e33dde2f"
+    }
+  ]
+}
