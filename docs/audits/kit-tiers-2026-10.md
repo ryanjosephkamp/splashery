@@ -42,4 +42,11 @@ inventory and four-tier build run passed 66 checks. Further regression results, 
 effect clips, and the completed record will be added after this source checkpoint. Engine tier
 changes remain proposals for separate review.
 
+The count-repair tier study also exposed a size problem: glyph strokes inherited the surrounding
+board's splat size, which merged nearby strokes at Low, most visibly in the Pythagoras proof. The
+helper now ties stroke radii to bitmap cells at every tier. Four stroke-size regressions failed
+before this repair and passed afterward (5.6 seconds); a real Low-tier Pythagoras capture confirms
+that the letters and exponents are readable. The final Math pictures and clips will follow this
+source checkpoint; the earlier study images remain available as intermediate evidence.
+
 Rule check: none.

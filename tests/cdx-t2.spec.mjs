@@ -28,6 +28,27 @@ for (const [id, expected] of Object.entries(GLYPH_SAMPLES)) {
   });
 }
 
+// Text strokes follow their bitmap cell, rather than the density of the
+// surrounding board. Otherwise Low merges nearby strokes into blobs.
+for (const [id, radius] of Object.entries({
+  "graph-plotter": (0.09 / 7) * 0.42,
+  "surface-plotter": (0.09 / 7) * 0.3,
+  "unit-circle": (0.1 / 7) * 0.42,
+  "pythagoras-proof": (0.16 / 7) * 0.42,
+})) {
+  test(`${id}: glyph stroke size is independent of the Auto tier`, async () => {
+    const def = TOYS_T2.find((t) => t.id === id);
+    for (const tier of TIERS) {
+      const { kit, buf, transform } = await buildToy(def, tier);
+      const text = kit.items.find(
+        (it) => it.kind === "cloud" && it.sample(() => 0.5, 0, it.n)?.flat === 0.4,
+      );
+      // Undo Kit's whole-toy fit to compare the same recipe-space stroke.
+      expect(buf.scale[text.start * 3] / transform.scale, tier).toBeCloseTo(radius, 6);
+    }
+  });
+}
+
 test("task 66 covers 65 toys and leaves task 44's seven worlds alone", () => {
   expect(TOYS_T2).toHaveLength(65);
   expect(new Set(TOYS_T2.map((t) => t.id)).size).toBe(65);
