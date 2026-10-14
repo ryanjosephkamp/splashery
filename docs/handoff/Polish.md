@@ -46,10 +46,26 @@ or "BLOCKED:".
 
 ## State
 
-- October 14, 2026: round 1 (audit) started on main 41b21e74. Clips render in the session's
-  scratchpad; nothing in the toys has changed yet.
+- October 14, 2026: round 1 (audit) on main 41b21e74. Nothing in the toys has changed. Cards posted
+  on Effect review page 2, lane `Polish` (8 of 13 so far): `pol-splat-mirror`, `pol-chladni-cell`,
+  `pol-chladni-plate`, `pol-song-landscape`, `pol-powers-of-ten`, `pol-smlm-microscope`,
+  `pol-galaxy-box`, `pol-volume-viewer`. Each has its phone-size clip and numbered fixes (small,
+  medium, or large) in its "You said" line. Still to post: `pol-picture-lab`, `pol-your-book`,
+  `pol-photo-album`, `pol-model-splats`, `pol-point-clouds`.
 
 ## Notes
+
+- How the audit clips were made (all at 390×844, the clock stepped by hand): `tools/lv10-clip.mjs`
+  (the plate with the test song, the cell's mode tour), `tools/live-clip.mjs` (taps with the page's
+  own UI; the mirror on `tools/lv7-mannequin.mjs`'s talking mannequin with `--video --depth`; the
+  Song landscape with `--song`), `tools/sci-clip.mjs` (`sci-microscope-r3`,
+  `sci-microscope-nucleus-r2`, `sci-galaxy-r4`), `tools/vol-clip.mjs` (`vol-walnut-cut`,
+  `vol-gar-sweep`) and `tools/pot-clip.mjs` (`--z=0.3,7,14,21.4 --secs=16` out,
+  `--z=0.3,-3,-6,-7.5 --secs=14` in). Clips joined with ffmpeg.
+- `tools/lv10-clip.mjs --tour` rings only the cell's modes; for the plate it never taps, so the sand
+  stays scattered (a tool limit, not a toy bug).
+- The relief code (`src/live/relief*.js`) is shared with Photo to 3D, which isn't this lane's: a
+  mirror fix stays in the mirror's own path.
 
 ## Known issues
 
