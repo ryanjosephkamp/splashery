@@ -267,6 +267,8 @@ for (const c of cases) {
           await expect(
             page.locator(surface === "embed" ? "#embed-status" : "#toast"),
           ).toContainText(c.expected.refused);
+          // Retain the original aggregate's current-schema refusal check.
+          expect.soft(await page.evaluate(() => window.__splashery.player.scene.version)).toBe(3);
           if (before)
             expect(await page.evaluate(() => window.__splashery.player.scene)).toEqual(before);
         } else {
