@@ -1,6 +1,25 @@
 {
-  "note": "tools/suite.mjs: seconds per test file on the cloud container (4 CPUs, one at a time; longest first, --shard), the files that run alone when --jobs is above 1 (they check the wall clock and fail beside another file), and the files that run on SwiftShader even with --gl=llvmpipe (they fail on llvmpipe). Refresh the seconds with --save-times.",
+  "note": "tools/suite.mjs: seconds per test file on the cloud container (4 CPUs, one at a time; longest first, --shard), the files that run alone when --jobs is above 1 (they check the wall clock and fail beside another file), the files that run on SwiftShader even with --gl=llvmpipe (they fail on llvmpipe), and the tests known to fail on plain main too (file:line; tools/ci-report.mjs marks them). Refresh the seconds with --save-times.",
   "solo": ["bk", "f", "fl7", "heb", "hec", "math", "phf-engine", "phy", "smd-moving", "spg"],
+  "known": [
+    "fl7:49",
+    "fl7:95",
+    "hl1:75",
+    "kit:87",
+    "live4:149",
+    "man5:201",
+    "phy:64",
+    "qrs-toys:132",
+    "smd-moving:101",
+    "smoke:734",
+    "stm:366",
+    "tpg:204",
+    "tpg:205",
+    "ui4:42",
+    "wd:187",
+    "wd:210",
+    "wdr3:133"
+  ],
   "swiftshader": ["hh3-engine2", "phy", "sndc-engine", "ui2", "ui3"],
   "seconds": {
     "abb": 39,
