@@ -6,10 +6,11 @@ work is in [OPERATING.md](OPERATING.md).
 
 ## Now (October 14, 2026, about 06:50 UTC)
 
-The Operator is handing over on schedule from `session_011WeiHJ3ygHhoTrrJiThHzX` (Opus 5.5, since
-October 12, 08:47 UTC) to a fresh Opus 5.5 session, which updates this line with its id in its first
-Ops PR. Its own handover is due two days after it takes over, or sooner at about 400k tokens. This
-section is current. The sections below it are history. The runbook is [OPERATOR.md](OPERATOR.md).
+The Operator is `session_01UFMfX9RBAFMSqMHSrisZuo` (Opus 5.5), since October 14, 2026, 07:33 UTC. It
+took over from `session_011WeiHJ3ygHhoTrrJiThHzX` (October 12, 08:47 UTC, to October 14), which
+stands by for a day. Its own handover is due by October 16, 2026, about 07:30 UTC, or sooner at
+about 400k tokens. This section is current. The sections below it are history. The runbook is
+[OPERATOR.md](OPERATOR.md).
 
 **Main** is `236f29bb4` (Ops #617). Merged October 13 and 14: tasks 57 (#586), 39 and 53 (#590), 70
 (#593), 54 (#598), 69, the circular QR codes (#603), 73, the manual PDF per edition (#615), and
