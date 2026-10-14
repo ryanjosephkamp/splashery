@@ -49,3 +49,10 @@
 {"v":1,"t":"2026-10-14T07:35:15.778Z","harness":"claude-code","event":"tool","session":"34a45a83-e3ff-54bb-8c4f-1f4d3f9e003d","agent":"a039f114be41b8efe","type":"general-purpose","tool":"SubagentHandback"}
 {"v":1,"t":"2026-10-14T07:35:15.805Z","harness":"claude-code","event":"subagent-stop","session":"34a45a83-e3ff-54bb-8c4f-1f4d3f9e003d","agent":"a039f114be41b8efe","type":"general-purpose"}
 {"v":1,"t":"2026-10-14T07:35:15.871Z","harness":"claude-code","event":"turn-start","session":"34a45a83-e3ff-54bb-8c4f-1f4d3f9e003d","cwd":"splashery"}
+{"v":1,"t":"2026-10-14T07:35:52.148Z","harness":"claude-code","event":"subagent-start","session":"34a45a83-e3ff-54bb-8c4f-1f4d3f9e003d","agent":"a2bb4aa6700811db2","type":"general-purpose"}
+{"v":1,"t":"2026-10-14T07:35:52.257Z","harness":"claude-code","event":"subagent-start","session":"34a45a83-e3ff-54bb-8c4f-1f4d3f9e003d","agent":"a7c7a533421c1bcd9","type":"general-purpose"}
+{"v":1,"t":"2026-10-14T07:35:52.269Z","harness":"claude-code","event":"subagent-start","session":"34a45a83-e3ff-54bb-8c4f-1f4d3f9e003d","agent":"ad2d7d1ae0a15a5dc","type":"general-purpose"}
+{"v":1,"t":"2026-10-14T07:35:52.383Z","harness":"claude-code","event":"tool","session":"34a45a83-e3ff-54bb-8c4f-1f4d3f9e003d","tool":"Agent","spawned":"a2bb4aa6700811db2","cwd":"splashery"}
+{"v":1,"t":"2026-10-14T07:35:52.420Z","harness":"claude-code","event":"tool","session":"34a45a83-e3ff-54bb-8c4f-1f4d3f9e003d","tool":"Agent","spawned":"a7c7a533421c1bcd9","cwd":"splashery"}
+{"v":1,"t":"2026-10-14T07:35:52.434Z","harness":"claude-code","event":"tool","session":"34a45a83-e3ff-54bb-8c4f-1f4d3f9e003d","tool":"Agent","spawned":"ad2d7d1ae0a15a5dc","cwd":"splashery"}
+{"v":1,"t":"2026-10-14T07:35:57.690Z","harness":"claude-code","event":"turn-end","session":"34a45a83-e3ff-54bb-8c4f-1f4d3f9e003d","cwd":"splashery"}
