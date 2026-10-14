@@ -122,14 +122,48 @@ OR OTHER DEALINGS IN THE SOFTWARE.
 - Source: https://github.com/arrival-space/splat.js, commit
   `88efe9aaf32279b0b9bcb781ea0deb4d60c49dff` (September 23, 2026; package version 0.1.0). Files in
   `vendor/splatjs/src/`: the 20 modules that `session.js` and its two workers reach (structure from
-  motion, the WebGPU trainer, frame decoding and the PLY writer), all unmodified; the list and what
-  was left out are in `vendor/splatjs/VERSION.md`. The library's own video reader
-  (`src/io/video.js`, which loads Mediabunny, MPL-2.0) is not vendored: Splashery picks the frames
-  itself.
+  motion, the WebGPU trainer, frame decoding and the PLY writer), unchanged except for the local
+  changes below; the list and what was left out are in `vendor/splatjs/VERSION.md`. The library's
+  own video reader (`src/io/video.js`, which loads Mediabunny, MPL-2.0) is not vendored: Splashery
+  picks the frames itself.
 - Loaded only when someone opens a video in the Video to 3D toy (a dynamic import in
   `src/video3d/run.js`); never on the shelf, in another toy or in an embed. Labs only.
 - License: MIT (Copyright (c) 2026 Stratum1 GmbH; checked on the live repository page on September
   30, 2026; the full text is in `vendor/splatjs/LICENSE`).
+- Local change by Codex for task 40 (October 12, 2026): `src/session.js` accepts `refineStart`, an
+  opt-in first-refinement threshold for short offline build-tool passes. It replaces the hardcoded
+  `trainer.iter > 1500` check with `trainer.iter > (this.opts.refineStart ?? 1500)` so a build tool
+  can refine a short run explicitly. Omitted or null values retain the original 1,500-step
+  threshold; `src/video3d/run.js` does not pass this option, so browser training keeps the upstream
+  schedule. The vendor edit is isolated in commit `ffcc71cc`. The MIT notice is retained.
+- Local change by Codex for task 55 (October 13, 2026): `src/gs/trainer.js` binds the existing
+  camera-gradient buffer at binding 8 in the optional D-SSIM backward pass. Its shader requires that
+  buffer even when camera optimization is off; the missing binding invalidated every command buffer
+  while the iteration counter continued advancing. The offline tool requests the nine storage
+  bindings this pass needs and rejects GPU validation errors. The browser toy still uses the
+  original MSE training default. The MIT notice is retained.
+
+## Codex CPU Gaussian fitter (task 55, build only)
+
+- Source: `tools/cdx-v3d-cpu-train.cpp` and `tools/cdx-v3d-cpu-bake.mjs`, made by Ryan with Codex
+  (GPT-6), offered under this repository's MIT license. The C++ fitter is compiled with the system
+  C++ and OpenMP toolchain and runs only at build time; it is never imported by the page. It fits
+  existing capture-derived Gaussians with sorted alpha compositing, a photometric loss, perspective
+  covariance derivatives, Adam updates, splitting, and opacity pruning. Quaternion optimization is
+  optional; the final task 55 finishing passes enable it. Optional alternating black and white
+  training backgrounds fit opaque photographic surfaces and prevent a light viewer background from
+  washing out a model fitted against black alone. Its finite-difference check covers every optimized
+  parameter. Source images, trained models, and derived tiers retain each capture's recorded
+  license.
+- `tools/cdx-v3d-clarity*.mjs` freeze the evaluation frames and score renders with PSNR,
+  Gaussian-window luminance SSIM, and Laplacian variance. They use the already listed PNG.js and
+  Playwright build dependencies. No new browser dependency is shipped.
+- The cloud camera solve uses the Python bindings in pycolmap 4.2.1, under COLMAP's
+  [BSD-3-Clause license](https://github.com/colmap/colmap/blob/4.2.1/COPYING.txt), and NumPy 2.5.4,
+  under its [BSD-3-Clause license](https://github.com/numpy/numpy/blob/v2.5.4/LICENSE.txt) and the
+  component notices retained in the installed wheel. License texts were checked October 13, 2026.
+  These packages are temporary offline build tools, never browser dependencies. The Forest path's
+  native-resolution solve ran in this container; the separate Mac/Metal workflow remains available.
 
 ## omggif 1.0.10 (lane Pictures)
 
@@ -350,6 +384,13 @@ trained from them) is ours, and the models and textures they use keep their own 
   (`tools/fidelity/run-orrery.sh`). The version used is recorded in each run's report.
 - msplat (Apache-2.0), https://github.com/rayanht/msplat: the second choice of trainer on Apple
   Silicon, if Brush can't run.
+- Video to 3D's native Mac bake workflow pins COLMAP 4.2.1 (BSD-3-Clause),
+  https://github.com/colmap/colmap/blob/4.2.1/COPYING.txt, and msplat 1.1.4 (Apache-2.0),
+  https://github.com/rayanht/msplat/blob/6b819711fa7c90f054567cb4fb4937743367afdd/LICENSE. Its
+  Python CLI uses tyro 0.9.35 (MIT), https://github.com/brentyi/tyro/blob/v0.9.35/LICENSE. License
+  pages checked October 12, 2026. Native frame preparation and CLI help were checked here; COLMAP
+  solving and Metal training were not run. These tools and their dependencies are never shipped to
+  the browser.
 - GROOPH 0.4.0 (MIT, by the owner), https://www.npmjs.com/package/grooph: the command line
   (`npx grooph@0.4.0`, run by `tools/site-loop.mjs`) draws the project's lane loop as an SVG for the
   draft page "The loop a lane follows" (lane Site r2). Nothing of it is served; only the SVG it
@@ -412,3 +453,21 @@ neither is copied into the site or the review media.
   media.
 
 These tool versions are retained with the public review evidence.
+
+# Studio truth build tools (Codex task 56; not shipped)
+
+- Native Linux Blender 4.3.2 (GPL-2.0-or-later, as recorded in the installed Debian copyright file),
+  https://www.blender.org/about/license/ and https://pypi.org/project/bpy/4.3.0/: the installed
+  native Blender runs `tools/studio-truth-generate.py`; no Blender program is served. Pip has no
+  compatible wheel for the environment's Python 3.12. The Blender website rejected this
+  environment's license-page request (HTTP 403); the installed build and PyPI metadata identify the
+  build-time tool.
+- NumPy 2.3.5 in the validator and 2.2.4 in native Blender (BSD-3-Clause),
+  https://pypi.org/project/numpy/2.3.5/ and https://pypi.org/project/numpy/2.2.4/: calibration,
+  numeric depth encoding, and fixture validation.
+- Pillow 12.3.0 (MIT-CMU), https://pypi.org/project/pillow/12.3.0/: the contact sheet and build-time
+  image validation.
+- FFmpeg / ffprobe 7.1.5-0+deb13u1 (the installed Debian build reports GPL-2.0-or-later),
+  https://ffmpeg.org/legal.html: H.264 video encoding with libx264 and checks of frame counts,
+  duration, and dimensions. No executable is served. These are build tools allowed by Rules v1; the
+  original rendered output is CC0.
