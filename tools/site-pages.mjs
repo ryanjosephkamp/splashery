@@ -11,6 +11,7 @@
 // tools/site-build.mjs. Text fields are plain HTML (written here, never user input).
 
 import fs from "node:fs";
+import { MANUAL_PDF } from "../manual/pdf-edition.js";
 import { toyPageEntries } from "./site-toy-pages.mjs";
 
 // The front-door switch (lane Site r4). Off, the site is a preview under site/ and the Playground
@@ -368,7 +369,7 @@ export const PAGES = [
     lead: "How the toys work, how to make your own, and how Splashery itself is made.",
     styles: ["hubs.css"],
     cards: [
-      { main: true, icon: "book", href: "../manual/", title: "The Tinkerer's Manual", text: "How to program splats, from the math of one splat to your own equations, toys and pictures. Start here if you want to make something.", also: [{ href: "../manual/tinkerers-manual.pdf", label: "Download the PDF" }] }, // prettier-ignore
+      { main: true, icon: "book", href: "../manual/", title: "The Tinkerer's Manual", text: "How to program splats, from the math of one splat to your own equations, toys and pictures. Start here if you want to make something.", also: [{ href: `../manual/${MANUAL_PDF}`, label: "Download the PDF" }] }, // prettier-ignore
       { icon: "splat", href: "learn/splats/", title: "How 3D Gaussian splats work", text: "A soft colored blob, hundreds of thousands of them, sorted and blended: what a splat is and what a recipe is, with small drawings." }, // prettier-ignore
       { icon: "splat", href: "learn/can-do/", title: "What Splashery can do", text: "Everything on the site today, which parts are behind the labs switch, and what other splat tools don't do, as far as we know." }, // prettier-ignore
       { icon: "notebook", href: "learn/notebook/", title: "The lab notebook", text: "What each lane built, which model built it, and what the team learned along the way." }, // prettier-ignore
