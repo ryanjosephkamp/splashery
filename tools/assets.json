@@ -6987,7 +6987,6 @@
     {
       "id": "j-glass-source",
       "file": "assets/depth-lab/j/j-glass-source.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Glass, an AI-made Studio test input (source)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -7019,7 +7018,6 @@
     {
       "id": "j-glass-ev-m15-b00",
       "file": "assets/depth-lab/j/j-glass-ev-m15-b00.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Glass, an AI-made Studio test input (-1.5 stops, 0 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -7043,7 +7041,6 @@
     {
       "id": "j-glass-ev-m10-b00",
       "file": "assets/depth-lab/j/j-glass-ev-m10-b00.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Glass, an AI-made Studio test input (-1 stops, 0 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -7067,7 +7064,6 @@
     {
       "id": "j-glass-ev-m05-b00",
       "file": "assets/depth-lab/j/j-glass-ev-m05-b00.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Glass, an AI-made Studio test input (-0.5 stops, 0 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -7091,7 +7087,6 @@
     {
       "id": "j-glass-ev-p00-b00",
       "file": "assets/depth-lab/j/j-glass-ev-p00-b00.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Glass, an AI-made Studio test input (0 stops, 0 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -7115,7 +7110,6 @@
     {
       "id": "j-glass-ev-p05-b00",
       "file": "assets/depth-lab/j/j-glass-ev-p05-b00.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Glass, an AI-made Studio test input (0.5 stops, 0 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -7139,7 +7133,6 @@
     {
       "id": "j-glass-ev-p10-b00",
       "file": "assets/depth-lab/j/j-glass-ev-p10-b00.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Glass, an AI-made Studio test input (1 stops, 0 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -7163,7 +7156,6 @@
     {
       "id": "j-glass-ev-p15-b00",
       "file": "assets/depth-lab/j/j-glass-ev-p15-b00.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Glass, an AI-made Studio test input (1.5 stops, 0 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -7187,7 +7179,6 @@
     {
       "id": "j-glass-ev-p00-b10",
       "file": "assets/depth-lab/j/j-glass-ev-p00-b10.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Glass, an AI-made Studio test input (0 stops, 1 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -7211,7 +7202,6 @@
     {
       "id": "j-glass-ev-p00-b20",
       "file": "assets/depth-lab/j/j-glass-ev-p00-b20.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Glass, an AI-made Studio test input (0 stops, 2 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -7235,7 +7225,6 @@
     {
       "id": "j-glass-ev-p00-b30",
       "file": "assets/depth-lab/j/j-glass-ev-p00-b30.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Glass, an AI-made Studio test input (0 stops, 3 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -7259,7 +7248,6 @@
     {
       "id": "j-glass-ev-p00-b40",
       "file": "assets/depth-lab/j/j-glass-ev-p00-b40.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Glass, an AI-made Studio test input (0 stops, 4 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -7283,7 +7271,6 @@
     {
       "id": "j-glass-ev-m10-b10",
       "file": "assets/depth-lab/j/j-glass-ev-m10-b10.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Glass, an AI-made Studio test input (-1 stops, 1 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -7307,7 +7294,6 @@
     {
       "id": "j-glass-ev-m10-b40",
       "file": "assets/depth-lab/j/j-glass-ev-m10-b40.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Glass, an AI-made Studio test input (-1 stops, 4 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -7331,7 +7317,6 @@
     {
       "id": "j-glass-ev-p10-b10",
       "file": "assets/depth-lab/j/j-glass-ev-p10-b10.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Glass, an AI-made Studio test input (1 stops, 1 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -7355,7 +7340,6 @@
     {
       "id": "j-glass-ev-p10-b40",
       "file": "assets/depth-lab/j/j-glass-ev-p10-b40.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Glass, an AI-made Studio test input (1 stops, 4 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -7379,7 +7363,6 @@
     {
       "id": "j-mirror-source",
       "file": "assets/depth-lab/j/j-mirror-source.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Mirror, an AI-made Studio test input (source)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -7411,7 +7394,6 @@
     {
       "id": "j-mirror-ev-m15-b00",
       "file": "assets/depth-lab/j/j-mirror-ev-m15-b00.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Mirror, an AI-made Studio test input (-1.5 stops, 0 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -7435,7 +7417,6 @@
     {
       "id": "j-mirror-ev-m10-b00",
       "file": "assets/depth-lab/j/j-mirror-ev-m10-b00.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Mirror, an AI-made Studio test input (-1 stops, 0 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -7459,7 +7440,6 @@
     {
       "id": "j-mirror-ev-m05-b00",
       "file": "assets/depth-lab/j/j-mirror-ev-m05-b00.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Mirror, an AI-made Studio test input (-0.5 stops, 0 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -7483,7 +7463,6 @@
     {
       "id": "j-mirror-ev-p00-b00",
       "file": "assets/depth-lab/j/j-mirror-ev-p00-b00.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Mirror, an AI-made Studio test input (0 stops, 0 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -7507,7 +7486,6 @@
     {
       "id": "j-mirror-ev-p05-b00",
       "file": "assets/depth-lab/j/j-mirror-ev-p05-b00.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Mirror, an AI-made Studio test input (0.5 stops, 0 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -7531,7 +7509,6 @@
     {
       "id": "j-mirror-ev-p10-b00",
       "file": "assets/depth-lab/j/j-mirror-ev-p10-b00.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Mirror, an AI-made Studio test input (1 stops, 0 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -7555,7 +7532,6 @@
     {
       "id": "j-mirror-ev-p15-b00",
       "file": "assets/depth-lab/j/j-mirror-ev-p15-b00.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Mirror, an AI-made Studio test input (1.5 stops, 0 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -7579,7 +7555,6 @@
     {
       "id": "j-mirror-ev-p00-b10",
       "file": "assets/depth-lab/j/j-mirror-ev-p00-b10.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Mirror, an AI-made Studio test input (0 stops, 1 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -7603,7 +7578,6 @@
     {
       "id": "j-mirror-ev-p00-b20",
       "file": "assets/depth-lab/j/j-mirror-ev-p00-b20.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Mirror, an AI-made Studio test input (0 stops, 2 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -7627,7 +7601,6 @@
     {
       "id": "j-mirror-ev-p00-b30",
       "file": "assets/depth-lab/j/j-mirror-ev-p00-b30.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Mirror, an AI-made Studio test input (0 stops, 3 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -7651,7 +7624,6 @@
     {
       "id": "j-mirror-ev-p00-b40",
       "file": "assets/depth-lab/j/j-mirror-ev-p00-b40.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Mirror, an AI-made Studio test input (0 stops, 4 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -7675,7 +7647,6 @@
     {
       "id": "j-mirror-ev-m10-b10",
       "file": "assets/depth-lab/j/j-mirror-ev-m10-b10.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Mirror, an AI-made Studio test input (-1 stops, 1 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -7699,7 +7670,6 @@
     {
       "id": "j-mirror-ev-m10-b40",
       "file": "assets/depth-lab/j/j-mirror-ev-m10-b40.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Mirror, an AI-made Studio test input (-1 stops, 4 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -7723,7 +7693,6 @@
     {
       "id": "j-mirror-ev-p10-b10",
       "file": "assets/depth-lab/j/j-mirror-ev-p10-b10.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Mirror, an AI-made Studio test input (1 stops, 1 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -7747,7 +7716,6 @@
     {
       "id": "j-mirror-ev-p10-b40",
       "file": "assets/depth-lab/j/j-mirror-ev-p10-b40.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Mirror, an AI-made Studio test input (1 stops, 4 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -7771,7 +7739,6 @@
     {
       "id": "j-hair-source",
       "file": "assets/depth-lab/j/j-hair-source.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Hair, an AI-made Studio test input (source)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -7803,7 +7770,6 @@
     {
       "id": "j-hair-ev-m15-b00",
       "file": "assets/depth-lab/j/j-hair-ev-m15-b00.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Hair, an AI-made Studio test input (-1.5 stops, 0 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -7827,7 +7793,6 @@
     {
       "id": "j-hair-ev-m10-b00",
       "file": "assets/depth-lab/j/j-hair-ev-m10-b00.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Hair, an AI-made Studio test input (-1 stops, 0 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -7851,7 +7816,6 @@
     {
       "id": "j-hair-ev-m05-b00",
       "file": "assets/depth-lab/j/j-hair-ev-m05-b00.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Hair, an AI-made Studio test input (-0.5 stops, 0 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -7875,7 +7839,6 @@
     {
       "id": "j-hair-ev-p00-b00",
       "file": "assets/depth-lab/j/j-hair-ev-p00-b00.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Hair, an AI-made Studio test input (0 stops, 0 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -7899,7 +7862,6 @@
     {
       "id": "j-hair-ev-p05-b00",
       "file": "assets/depth-lab/j/j-hair-ev-p05-b00.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Hair, an AI-made Studio test input (0.5 stops, 0 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -7923,7 +7885,6 @@
     {
       "id": "j-hair-ev-p10-b00",
       "file": "assets/depth-lab/j/j-hair-ev-p10-b00.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Hair, an AI-made Studio test input (1 stops, 0 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -7947,7 +7908,6 @@
     {
       "id": "j-hair-ev-p15-b00",
       "file": "assets/depth-lab/j/j-hair-ev-p15-b00.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Hair, an AI-made Studio test input (1.5 stops, 0 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -7971,7 +7931,6 @@
     {
       "id": "j-hair-ev-p00-b10",
       "file": "assets/depth-lab/j/j-hair-ev-p00-b10.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Hair, an AI-made Studio test input (0 stops, 1 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -7995,7 +7954,6 @@
     {
       "id": "j-hair-ev-p00-b20",
       "file": "assets/depth-lab/j/j-hair-ev-p00-b20.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Hair, an AI-made Studio test input (0 stops, 2 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -8019,7 +7977,6 @@
     {
       "id": "j-hair-ev-p00-b30",
       "file": "assets/depth-lab/j/j-hair-ev-p00-b30.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Hair, an AI-made Studio test input (0 stops, 3 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -8043,7 +8000,6 @@
     {
       "id": "j-hair-ev-p00-b40",
       "file": "assets/depth-lab/j/j-hair-ev-p00-b40.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Hair, an AI-made Studio test input (0 stops, 4 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -8067,7 +8023,6 @@
     {
       "id": "j-hair-ev-m10-b10",
       "file": "assets/depth-lab/j/j-hair-ev-m10-b10.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Hair, an AI-made Studio test input (-1 stops, 1 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -8091,7 +8046,6 @@
     {
       "id": "j-hair-ev-m10-b40",
       "file": "assets/depth-lab/j/j-hair-ev-m10-b40.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Hair, an AI-made Studio test input (-1 stops, 4 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -8115,7 +8069,6 @@
     {
       "id": "j-hair-ev-p10-b10",
       "file": "assets/depth-lab/j/j-hair-ev-p10-b10.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Hair, an AI-made Studio test input (1 stops, 1 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -8139,7 +8092,6 @@
     {
       "id": "j-hair-ev-p10-b40",
       "file": "assets/depth-lab/j/j-hair-ev-p10-b40.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Hair, an AI-made Studio test input (1 stops, 4 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -8163,7 +8115,6 @@
     {
       "id": "j-fur-source",
       "file": "assets/depth-lab/j/j-fur-source.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Fur, an AI-made Studio test input (source)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -8195,7 +8146,6 @@
     {
       "id": "j-fur-ev-m15-b00",
       "file": "assets/depth-lab/j/j-fur-ev-m15-b00.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Fur, an AI-made Studio test input (-1.5 stops, 0 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -8219,7 +8169,6 @@
     {
       "id": "j-fur-ev-m10-b00",
       "file": "assets/depth-lab/j/j-fur-ev-m10-b00.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Fur, an AI-made Studio test input (-1 stops, 0 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -8243,7 +8192,6 @@
     {
       "id": "j-fur-ev-m05-b00",
       "file": "assets/depth-lab/j/j-fur-ev-m05-b00.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Fur, an AI-made Studio test input (-0.5 stops, 0 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -8267,7 +8215,6 @@
     {
       "id": "j-fur-ev-p00-b00",
       "file": "assets/depth-lab/j/j-fur-ev-p00-b00.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Fur, an AI-made Studio test input (0 stops, 0 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -8291,7 +8238,6 @@
     {
       "id": "j-fur-ev-p05-b00",
       "file": "assets/depth-lab/j/j-fur-ev-p05-b00.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Fur, an AI-made Studio test input (0.5 stops, 0 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -8315,7 +8261,6 @@
     {
       "id": "j-fur-ev-p10-b00",
       "file": "assets/depth-lab/j/j-fur-ev-p10-b00.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Fur, an AI-made Studio test input (1 stops, 0 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -8339,7 +8284,6 @@
     {
       "id": "j-fur-ev-p15-b00",
       "file": "assets/depth-lab/j/j-fur-ev-p15-b00.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Fur, an AI-made Studio test input (1.5 stops, 0 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -8363,7 +8307,6 @@
     {
       "id": "j-fur-ev-p00-b10",
       "file": "assets/depth-lab/j/j-fur-ev-p00-b10.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Fur, an AI-made Studio test input (0 stops, 1 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -8387,7 +8330,6 @@
     {
       "id": "j-fur-ev-p00-b20",
       "file": "assets/depth-lab/j/j-fur-ev-p00-b20.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Fur, an AI-made Studio test input (0 stops, 2 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -8411,7 +8353,6 @@
     {
       "id": "j-fur-ev-p00-b30",
       "file": "assets/depth-lab/j/j-fur-ev-p00-b30.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Fur, an AI-made Studio test input (0 stops, 3 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -8435,7 +8376,6 @@
     {
       "id": "j-fur-ev-p00-b40",
       "file": "assets/depth-lab/j/j-fur-ev-p00-b40.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Fur, an AI-made Studio test input (0 stops, 4 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -8459,7 +8399,6 @@
     {
       "id": "j-fur-ev-m10-b10",
       "file": "assets/depth-lab/j/j-fur-ev-m10-b10.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Fur, an AI-made Studio test input (-1 stops, 1 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -8483,7 +8422,6 @@
     {
       "id": "j-fur-ev-m10-b40",
       "file": "assets/depth-lab/j/j-fur-ev-m10-b40.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Fur, an AI-made Studio test input (-1 stops, 4 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -8507,7 +8445,6 @@
     {
       "id": "j-fur-ev-p10-b10",
       "file": "assets/depth-lab/j/j-fur-ev-p10-b10.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Fur, an AI-made Studio test input (1 stops, 1 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -8531,7 +8468,6 @@
     {
       "id": "j-fur-ev-p10-b40",
       "file": "assets/depth-lab/j/j-fur-ev-p10-b40.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Fur, an AI-made Studio test input (1 stops, 4 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -8555,7 +8491,6 @@
     {
       "id": "j-thin-source",
       "file": "assets/depth-lab/j/j-thin-source.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Thin parts, an AI-made Studio test input (source)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -8587,7 +8522,6 @@
     {
       "id": "j-thin-ev-m15-b00",
       "file": "assets/depth-lab/j/j-thin-ev-m15-b00.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Thin parts, an AI-made Studio test input (-1.5 stops, 0 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -8611,7 +8545,6 @@
     {
       "id": "j-thin-ev-m10-b00",
       "file": "assets/depth-lab/j/j-thin-ev-m10-b00.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Thin parts, an AI-made Studio test input (-1 stops, 0 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -8635,7 +8568,6 @@
     {
       "id": "j-thin-ev-m05-b00",
       "file": "assets/depth-lab/j/j-thin-ev-m05-b00.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Thin parts, an AI-made Studio test input (-0.5 stops, 0 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -8659,7 +8591,6 @@
     {
       "id": "j-thin-ev-p00-b00",
       "file": "assets/depth-lab/j/j-thin-ev-p00-b00.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Thin parts, an AI-made Studio test input (0 stops, 0 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -8683,7 +8614,6 @@
     {
       "id": "j-thin-ev-p05-b00",
       "file": "assets/depth-lab/j/j-thin-ev-p05-b00.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Thin parts, an AI-made Studio test input (0.5 stops, 0 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -8707,7 +8637,6 @@
     {
       "id": "j-thin-ev-p10-b00",
       "file": "assets/depth-lab/j/j-thin-ev-p10-b00.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Thin parts, an AI-made Studio test input (1 stops, 0 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -8731,7 +8660,6 @@
     {
       "id": "j-thin-ev-p15-b00",
       "file": "assets/depth-lab/j/j-thin-ev-p15-b00.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Thin parts, an AI-made Studio test input (1.5 stops, 0 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -8755,7 +8683,6 @@
     {
       "id": "j-thin-ev-p00-b10",
       "file": "assets/depth-lab/j/j-thin-ev-p00-b10.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Thin parts, an AI-made Studio test input (0 stops, 1 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -8779,7 +8706,6 @@
     {
       "id": "j-thin-ev-p00-b20",
       "file": "assets/depth-lab/j/j-thin-ev-p00-b20.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Thin parts, an AI-made Studio test input (0 stops, 2 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -8803,7 +8729,6 @@
     {
       "id": "j-thin-ev-p00-b30",
       "file": "assets/depth-lab/j/j-thin-ev-p00-b30.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Thin parts, an AI-made Studio test input (0 stops, 3 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -8827,7 +8752,6 @@
     {
       "id": "j-thin-ev-p00-b40",
       "file": "assets/depth-lab/j/j-thin-ev-p00-b40.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Thin parts, an AI-made Studio test input (0 stops, 4 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -8851,7 +8775,6 @@
     {
       "id": "j-thin-ev-m10-b10",
       "file": "assets/depth-lab/j/j-thin-ev-m10-b10.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Thin parts, an AI-made Studio test input (-1 stops, 1 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -8875,7 +8798,6 @@
     {
       "id": "j-thin-ev-m10-b40",
       "file": "assets/depth-lab/j/j-thin-ev-m10-b40.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Thin parts, an AI-made Studio test input (-1 stops, 4 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -8899,7 +8821,6 @@
     {
       "id": "j-thin-ev-p10-b10",
       "file": "assets/depth-lab/j/j-thin-ev-p10-b10.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Thin parts, an AI-made Studio test input (1 stops, 1 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -8923,7 +8844,6 @@
     {
       "id": "j-thin-ev-p10-b40",
       "file": "assets/depth-lab/j/j-thin-ev-p10-b40.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Thin parts, an AI-made Studio test input (1 stops, 4 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -8947,7 +8867,6 @@
     {
       "id": "j-night-source",
       "file": "assets/depth-lab/j/j-night-source.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Night scene, an AI-made Studio test input (source)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -8979,7 +8898,6 @@
     {
       "id": "j-night-ev-m15-b00",
       "file": "assets/depth-lab/j/j-night-ev-m15-b00.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Night scene, an AI-made Studio test input (-1.5 stops, 0 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -9003,7 +8921,6 @@
     {
       "id": "j-night-ev-m10-b00",
       "file": "assets/depth-lab/j/j-night-ev-m10-b00.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Night scene, an AI-made Studio test input (-1 stops, 0 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -9027,7 +8944,6 @@
     {
       "id": "j-night-ev-m05-b00",
       "file": "assets/depth-lab/j/j-night-ev-m05-b00.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Night scene, an AI-made Studio test input (-0.5 stops, 0 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -9051,7 +8967,6 @@
     {
       "id": "j-night-ev-p00-b00",
       "file": "assets/depth-lab/j/j-night-ev-p00-b00.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Night scene, an AI-made Studio test input (0 stops, 0 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -9075,7 +8990,6 @@
     {
       "id": "j-night-ev-p05-b00",
       "file": "assets/depth-lab/j/j-night-ev-p05-b00.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Night scene, an AI-made Studio test input (0.5 stops, 0 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -9099,7 +9013,6 @@
     {
       "id": "j-night-ev-p10-b00",
       "file": "assets/depth-lab/j/j-night-ev-p10-b00.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Night scene, an AI-made Studio test input (1 stops, 0 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -9123,7 +9036,6 @@
     {
       "id": "j-night-ev-p15-b00",
       "file": "assets/depth-lab/j/j-night-ev-p15-b00.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Night scene, an AI-made Studio test input (1.5 stops, 0 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -9147,7 +9059,6 @@
     {
       "id": "j-night-ev-p00-b10",
       "file": "assets/depth-lab/j/j-night-ev-p00-b10.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Night scene, an AI-made Studio test input (0 stops, 1 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -9171,7 +9082,6 @@
     {
       "id": "j-night-ev-p00-b20",
       "file": "assets/depth-lab/j/j-night-ev-p00-b20.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Night scene, an AI-made Studio test input (0 stops, 2 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -9195,7 +9105,6 @@
     {
       "id": "j-night-ev-p00-b30",
       "file": "assets/depth-lab/j/j-night-ev-p00-b30.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Night scene, an AI-made Studio test input (0 stops, 3 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -9219,7 +9128,6 @@
     {
       "id": "j-night-ev-p00-b40",
       "file": "assets/depth-lab/j/j-night-ev-p00-b40.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Night scene, an AI-made Studio test input (0 stops, 4 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -9243,7 +9151,6 @@
     {
       "id": "j-night-ev-m10-b10",
       "file": "assets/depth-lab/j/j-night-ev-m10-b10.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Night scene, an AI-made Studio test input (-1 stops, 1 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -9267,7 +9174,6 @@
     {
       "id": "j-night-ev-m10-b40",
       "file": "assets/depth-lab/j/j-night-ev-m10-b40.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Night scene, an AI-made Studio test input (-1 stops, 4 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -9291,7 +9197,6 @@
     {
       "id": "j-night-ev-p10-b10",
       "file": "assets/depth-lab/j/j-night-ev-p10-b10.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Night scene, an AI-made Studio test input (1 stops, 1 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -9315,7 +9220,6 @@
     {
       "id": "j-night-ev-p10-b40",
       "file": "assets/depth-lab/j/j-night-ev-p10-b40.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Night scene, an AI-made Studio test input (1 stops, 4 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -9339,7 +9243,6 @@
     {
       "id": "j-painting-source",
       "file": "assets/depth-lab/j/j-painting-source.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Painting, an AI-made Studio test input (source)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -9371,7 +9274,6 @@
     {
       "id": "j-painting-ev-m15-b00",
       "file": "assets/depth-lab/j/j-painting-ev-m15-b00.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Painting, an AI-made Studio test input (-1.5 stops, 0 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -9395,7 +9297,6 @@
     {
       "id": "j-painting-ev-m10-b00",
       "file": "assets/depth-lab/j/j-painting-ev-m10-b00.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Painting, an AI-made Studio test input (-1 stops, 0 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -9419,7 +9320,6 @@
     {
       "id": "j-painting-ev-m05-b00",
       "file": "assets/depth-lab/j/j-painting-ev-m05-b00.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Painting, an AI-made Studio test input (-0.5 stops, 0 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -9443,7 +9343,6 @@
     {
       "id": "j-painting-ev-p00-b00",
       "file": "assets/depth-lab/j/j-painting-ev-p00-b00.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Painting, an AI-made Studio test input (0 stops, 0 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -9467,7 +9366,6 @@
     {
       "id": "j-painting-ev-p05-b00",
       "file": "assets/depth-lab/j/j-painting-ev-p05-b00.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Painting, an AI-made Studio test input (0.5 stops, 0 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -9491,7 +9389,6 @@
     {
       "id": "j-painting-ev-p10-b00",
       "file": "assets/depth-lab/j/j-painting-ev-p10-b00.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Painting, an AI-made Studio test input (1 stops, 0 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -9515,7 +9412,6 @@
     {
       "id": "j-painting-ev-p15-b00",
       "file": "assets/depth-lab/j/j-painting-ev-p15-b00.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Painting, an AI-made Studio test input (1.5 stops, 0 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -9539,7 +9435,6 @@
     {
       "id": "j-painting-ev-p00-b10",
       "file": "assets/depth-lab/j/j-painting-ev-p00-b10.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Painting, an AI-made Studio test input (0 stops, 1 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -9563,7 +9458,6 @@
     {
       "id": "j-painting-ev-p00-b20",
       "file": "assets/depth-lab/j/j-painting-ev-p00-b20.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Painting, an AI-made Studio test input (0 stops, 2 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -9587,7 +9481,6 @@
     {
       "id": "j-painting-ev-p00-b30",
       "file": "assets/depth-lab/j/j-painting-ev-p00-b30.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Painting, an AI-made Studio test input (0 stops, 3 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -9611,7 +9504,6 @@
     {
       "id": "j-painting-ev-p00-b40",
       "file": "assets/depth-lab/j/j-painting-ev-p00-b40.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Painting, an AI-made Studio test input (0 stops, 4 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -9635,7 +9527,6 @@
     {
       "id": "j-painting-ev-m10-b10",
       "file": "assets/depth-lab/j/j-painting-ev-m10-b10.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Painting, an AI-made Studio test input (-1 stops, 1 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -9659,7 +9550,6 @@
     {
       "id": "j-painting-ev-m10-b40",
       "file": "assets/depth-lab/j/j-painting-ev-m10-b40.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Painting, an AI-made Studio test input (-1 stops, 4 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -9683,7 +9573,6 @@
     {
       "id": "j-painting-ev-p10-b10",
       "file": "assets/depth-lab/j/j-painting-ev-p10-b10.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Painting, an AI-made Studio test input (1 stops, 1 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -9707,7 +9596,6 @@
     {
       "id": "j-painting-ev-p10-b40",
       "file": "assets/depth-lab/j/j-painting-ev-p10-b40.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Painting, an AI-made Studio test input (1 stops, 4 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -9731,7 +9619,6 @@
     {
       "id": "j-line-art-source",
       "file": "assets/depth-lab/j/j-line-art-source.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Line art, an AI-made Studio test input (source)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -9763,7 +9650,6 @@
     {
       "id": "j-line-art-ev-m15-b00",
       "file": "assets/depth-lab/j/j-line-art-ev-m15-b00.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Line art, an AI-made Studio test input (-1.5 stops, 0 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -9787,7 +9673,6 @@
     {
       "id": "j-line-art-ev-m10-b00",
       "file": "assets/depth-lab/j/j-line-art-ev-m10-b00.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Line art, an AI-made Studio test input (-1 stops, 0 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -9811,7 +9696,6 @@
     {
       "id": "j-line-art-ev-m05-b00",
       "file": "assets/depth-lab/j/j-line-art-ev-m05-b00.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Line art, an AI-made Studio test input (-0.5 stops, 0 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -9835,7 +9719,6 @@
     {
       "id": "j-line-art-ev-p00-b00",
       "file": "assets/depth-lab/j/j-line-art-ev-p00-b00.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Line art, an AI-made Studio test input (0 stops, 0 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -9859,7 +9742,6 @@
     {
       "id": "j-line-art-ev-p05-b00",
       "file": "assets/depth-lab/j/j-line-art-ev-p05-b00.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Line art, an AI-made Studio test input (0.5 stops, 0 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -9883,7 +9765,6 @@
     {
       "id": "j-line-art-ev-p10-b00",
       "file": "assets/depth-lab/j/j-line-art-ev-p10-b00.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Line art, an AI-made Studio test input (1 stops, 0 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -9907,7 +9788,6 @@
     {
       "id": "j-line-art-ev-p15-b00",
       "file": "assets/depth-lab/j/j-line-art-ev-p15-b00.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Line art, an AI-made Studio test input (1.5 stops, 0 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -9931,7 +9811,6 @@
     {
       "id": "j-line-art-ev-p00-b10",
       "file": "assets/depth-lab/j/j-line-art-ev-p00-b10.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Line art, an AI-made Studio test input (0 stops, 1 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -9955,7 +9834,6 @@
     {
       "id": "j-line-art-ev-p00-b20",
       "file": "assets/depth-lab/j/j-line-art-ev-p00-b20.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Line art, an AI-made Studio test input (0 stops, 2 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -9979,7 +9857,6 @@
     {
       "id": "j-line-art-ev-p00-b30",
       "file": "assets/depth-lab/j/j-line-art-ev-p00-b30.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Line art, an AI-made Studio test input (0 stops, 3 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -10003,7 +9880,6 @@
     {
       "id": "j-line-art-ev-p00-b40",
       "file": "assets/depth-lab/j/j-line-art-ev-p00-b40.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Line art, an AI-made Studio test input (0 stops, 4 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -10027,7 +9903,6 @@
     {
       "id": "j-line-art-ev-m10-b10",
       "file": "assets/depth-lab/j/j-line-art-ev-m10-b10.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Line art, an AI-made Studio test input (-1 stops, 1 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -10051,7 +9926,6 @@
     {
       "id": "j-line-art-ev-m10-b40",
       "file": "assets/depth-lab/j/j-line-art-ev-m10-b40.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Line art, an AI-made Studio test input (-1 stops, 4 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -10075,7 +9949,6 @@
     {
       "id": "j-line-art-ev-p10-b10",
       "file": "assets/depth-lab/j/j-line-art-ev-p10-b10.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Line art, an AI-made Studio test input (1 stops, 1 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -10099,7 +9972,6 @@
     {
       "id": "j-line-art-ev-p10-b40",
       "file": "assets/depth-lab/j/j-line-art-ev-p10-b40.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Line art, an AI-made Studio test input (1 stops, 4 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -10123,7 +9995,6 @@
     {
       "id": "j-graphic-source",
       "file": "assets/depth-lab/j/j-graphic-source.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Flat graphic design, an AI-made Studio test input (source)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -10155,7 +10026,6 @@
     {
       "id": "j-graphic-ev-m15-b00",
       "file": "assets/depth-lab/j/j-graphic-ev-m15-b00.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Flat graphic design, an AI-made Studio test input (-1.5 stops, 0 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -10179,7 +10049,6 @@
     {
       "id": "j-graphic-ev-m10-b00",
       "file": "assets/depth-lab/j/j-graphic-ev-m10-b00.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Flat graphic design, an AI-made Studio test input (-1 stops, 0 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -10203,7 +10072,6 @@
     {
       "id": "j-graphic-ev-m05-b00",
       "file": "assets/depth-lab/j/j-graphic-ev-m05-b00.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Flat graphic design, an AI-made Studio test input (-0.5 stops, 0 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -10227,7 +10095,6 @@
     {
       "id": "j-graphic-ev-p00-b00",
       "file": "assets/depth-lab/j/j-graphic-ev-p00-b00.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Flat graphic design, an AI-made Studio test input (0 stops, 0 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -10251,7 +10118,6 @@
     {
       "id": "j-graphic-ev-p05-b00",
       "file": "assets/depth-lab/j/j-graphic-ev-p05-b00.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Flat graphic design, an AI-made Studio test input (0.5 stops, 0 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -10275,7 +10141,6 @@
     {
       "id": "j-graphic-ev-p10-b00",
       "file": "assets/depth-lab/j/j-graphic-ev-p10-b00.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Flat graphic design, an AI-made Studio test input (1 stops, 0 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -10299,7 +10164,6 @@
     {
       "id": "j-graphic-ev-p15-b00",
       "file": "assets/depth-lab/j/j-graphic-ev-p15-b00.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Flat graphic design, an AI-made Studio test input (1.5 stops, 0 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -10323,7 +10187,6 @@
     {
       "id": "j-graphic-ev-p00-b10",
       "file": "assets/depth-lab/j/j-graphic-ev-p00-b10.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Flat graphic design, an AI-made Studio test input (0 stops, 1 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -10347,7 +10210,6 @@
     {
       "id": "j-graphic-ev-p00-b20",
       "file": "assets/depth-lab/j/j-graphic-ev-p00-b20.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Flat graphic design, an AI-made Studio test input (0 stops, 2 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -10371,7 +10233,6 @@
     {
       "id": "j-graphic-ev-p00-b30",
       "file": "assets/depth-lab/j/j-graphic-ev-p00-b30.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Flat graphic design, an AI-made Studio test input (0 stops, 3 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -10395,7 +10256,6 @@
     {
       "id": "j-graphic-ev-p00-b40",
       "file": "assets/depth-lab/j/j-graphic-ev-p00-b40.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Flat graphic design, an AI-made Studio test input (0 stops, 4 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -10419,7 +10279,6 @@
     {
       "id": "j-graphic-ev-m10-b10",
       "file": "assets/depth-lab/j/j-graphic-ev-m10-b10.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Flat graphic design, an AI-made Studio test input (-1 stops, 1 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -10443,7 +10302,6 @@
     {
       "id": "j-graphic-ev-m10-b40",
       "file": "assets/depth-lab/j/j-graphic-ev-m10-b40.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Flat graphic design, an AI-made Studio test input (-1 stops, 4 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -10467,7 +10325,6 @@
     {
       "id": "j-graphic-ev-p10-b10",
       "file": "assets/depth-lab/j/j-graphic-ev-p10-b10.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Flat graphic design, an AI-made Studio test input (1 stops, 1 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -10491,7 +10348,6 @@
     {
       "id": "j-graphic-ev-p10-b40",
       "file": "assets/depth-lab/j/j-graphic-ev-p10-b40.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Flat graphic design, an AI-made Studio test input (1 stops, 4 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -10515,7 +10371,6 @@
     {
       "id": "j-clutter-source",
       "file": "assets/depth-lab/j/j-clutter-source.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Clutter, an AI-made Studio test input (source)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -10547,7 +10402,6 @@
     {
       "id": "j-clutter-ev-m15-b00",
       "file": "assets/depth-lab/j/j-clutter-ev-m15-b00.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Clutter, an AI-made Studio test input (-1.5 stops, 0 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -10571,7 +10425,6 @@
     {
       "id": "j-clutter-ev-m10-b00",
       "file": "assets/depth-lab/j/j-clutter-ev-m10-b00.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Clutter, an AI-made Studio test input (-1 stops, 0 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -10595,7 +10448,6 @@
     {
       "id": "j-clutter-ev-m05-b00",
       "file": "assets/depth-lab/j/j-clutter-ev-m05-b00.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Clutter, an AI-made Studio test input (-0.5 stops, 0 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -10619,7 +10471,6 @@
     {
       "id": "j-clutter-ev-p00-b00",
       "file": "assets/depth-lab/j/j-clutter-ev-p00-b00.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Clutter, an AI-made Studio test input (0 stops, 0 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -10643,7 +10494,6 @@
     {
       "id": "j-clutter-ev-p05-b00",
       "file": "assets/depth-lab/j/j-clutter-ev-p05-b00.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Clutter, an AI-made Studio test input (0.5 stops, 0 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -10667,7 +10517,6 @@
     {
       "id": "j-clutter-ev-p10-b00",
       "file": "assets/depth-lab/j/j-clutter-ev-p10-b00.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Clutter, an AI-made Studio test input (1 stops, 0 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -10691,7 +10540,6 @@
     {
       "id": "j-clutter-ev-p15-b00",
       "file": "assets/depth-lab/j/j-clutter-ev-p15-b00.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Clutter, an AI-made Studio test input (1.5 stops, 0 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -10715,7 +10563,6 @@
     {
       "id": "j-clutter-ev-p00-b10",
       "file": "assets/depth-lab/j/j-clutter-ev-p00-b10.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Clutter, an AI-made Studio test input (0 stops, 1 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -10739,7 +10586,6 @@
     {
       "id": "j-clutter-ev-p00-b20",
       "file": "assets/depth-lab/j/j-clutter-ev-p00-b20.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Clutter, an AI-made Studio test input (0 stops, 2 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -10763,7 +10609,6 @@
     {
       "id": "j-clutter-ev-p00-b30",
       "file": "assets/depth-lab/j/j-clutter-ev-p00-b30.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Clutter, an AI-made Studio test input (0 stops, 3 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -10787,7 +10632,6 @@
     {
       "id": "j-clutter-ev-p00-b40",
       "file": "assets/depth-lab/j/j-clutter-ev-p00-b40.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Clutter, an AI-made Studio test input (0 stops, 4 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -10811,7 +10655,6 @@
     {
       "id": "j-clutter-ev-m10-b10",
       "file": "assets/depth-lab/j/j-clutter-ev-m10-b10.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Clutter, an AI-made Studio test input (-1 stops, 1 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -10835,7 +10678,6 @@
     {
       "id": "j-clutter-ev-m10-b40",
       "file": "assets/depth-lab/j/j-clutter-ev-m10-b40.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Clutter, an AI-made Studio test input (-1 stops, 4 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -10859,7 +10701,6 @@
     {
       "id": "j-clutter-ev-p10-b10",
       "file": "assets/depth-lab/j/j-clutter-ev-p10-b10.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Clutter, an AI-made Studio test input (1 stops, 1 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
@@ -10883,7 +10724,6 @@
     {
       "id": "j-clutter-ev-p10-b40",
       "file": "assets/depth-lab/j/j-clutter-ev-p10-b40.jpg",
-      "toy": "photo-3d",
       "category": "J",
       "name": "Clutter, an AI-made Studio test input (1 stops, 4 px blur)",
       "author": "Ryan, the owner of Splashery (made with Codex (GPT-6) and ChatGPT Images)",
