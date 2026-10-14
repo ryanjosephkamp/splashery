@@ -4,18 +4,19 @@
     "shipped": false,
     "option": "Half the phone recipe's splat budget (45000 instead of 90000); fewer rendered splats, no asset changes",
     "before": {
-      "file": "fountain-pen-phone-after-rest.png",
+      "file": "fountain-pen-phone-before-rest.png",
       "id": "fountain-pen",
       "splats": 90273,
       "title": "Splashery · splats you can play with",
       "controls": {
         "write": 0
       },
-      "settledFrames": 27,
+      "settledFrames": 26,
       "canvas": {
         "width": 585,
         "height": 967
-      }
+      },
+      "sha256": "4487cd8800c271bef0bc5c3770a002b9356bfd131affd0d86318e9ca1c5b3372"
     },
     "after": {
       "file": "fountain-pen-phone-lossy-half-budget-rest.png",
@@ -25,11 +26,12 @@
       "controls": {
         "write": 0
       },
-      "settledFrames": 31,
+      "settledFrames": 32,
       "canvas": {
         "width": 585,
         "height": 967
-      }
+      },
+      "sha256": "2ccfe205fa8abf8c7dcb470c4feb8704085ccf63cde4a1ea580ce347977ce2f1"
     },
     "differentPixels": 29272,
     "pixels": 251550,
@@ -42,18 +44,19 @@
     "shipped": false,
     "option": "Half the phone recipe's splat budget (45000 instead of 90000); fewer rendered splats, no asset changes",
     "before": {
-      "file": "sunglasses-phone-after-rest.png",
+      "file": "sunglasses-phone-before-rest.png",
       "id": "sunglasses",
       "splats": 88274,
       "title": "Splashery · splats you can play with",
       "controls": {
         "flip": 0
       },
-      "settledFrames": 32,
+      "settledFrames": 28,
       "canvas": {
         "width": 585,
         "height": 967
-      }
+      },
+      "sha256": "8710b89a6a7d4ad4d23b9b421bc458b7978223108c61d8001c4a54d288927237"
     },
     "after": {
       "file": "sunglasses-phone-lossy-half-budget-rest.png",
@@ -63,11 +66,12 @@
       "controls": {
         "flip": 0
       },
-      "settledFrames": 38,
+      "settledFrames": 37,
       "canvas": {
         "width": 585,
         "height": 967
-      }
+      },
+      "sha256": "492514ef927b75b284208df6dc29cb524780ed8df134deb147f7b66b9ebfa864"
     },
     "differentPixels": 27216,
     "pixels": 251550,

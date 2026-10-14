@@ -1,4 +1,4 @@
-# Load-time audit — October 13, 2026
+# Load-time audit — October 14, 2026
 
 Codex built the lossless changes and this audit on `codex/load-time`. This revision addresses
 [the Operator's review](https://github.com/ryanjosephkamp/splashery/pull/588#issuecomment-6153708959).
@@ -7,6 +7,11 @@ Codex built the lossless changes and this audit on `codex/load-time`. This revis
 
 - Museum scans fetch alongside their deferred helpers. A browser test holds the helper response and
   verifies that the scan transfer has already started.
+- Shared Real objects and museum scans load their helper module eagerly after the engine mapping is
+  installed and before GPU initialization. Browser checks observe the actual WebGL-context creation
+  order for both `j.` and `d.` links and verify that only the compressed engine transfers. Unrelated
+  toys still defer the helper. The async ES-module bootstrap starts the engine request while a
+  stylesheet blocks DOM readiness.
 - The engine's complete, unchanged 2.22.3 source loads through a native import-map alias and
   `src/pc.js`. All 1,318 exports, including the live `app` binding, are checked in a browser.
   Unsupported decompression or import-map additions retain the original URL. Custom elements retain
@@ -14,42 +19,109 @@ Codex built the lossless changes and this audit on `codex/load-time`. This revis
 - Help and the manual use exact gzip copies. The full help text, PDF pages, and notices are
   retained. The manual transfers while PDF.js loads.
 - Five Real objects recipes retain exact low/mid scan records and original population counts. The
-  globe, armillary, and Stannern low-tier files also retain exact Float64 means computed over every
-  original record. Larger budgets retain full scans. No rendered count, camera, texture, or color
-  precision was reduced.
+  globe, armillary, Stannern, and Pyrite low-tier files also retain exact Float64 means computed
+  over every original record. Larger budgets retain full scans. No rendered count, camera, texture,
+  or color precision was reduced.
+- The mapped engine retains a module preload. Selected scans start their normal recipe preparation
+  before GPU setup, with the same profile, budget, and options; the later build reuses the cached
+  scan. Browser checks observe the actual transfer before WebGL-context creation, and the preload's
+  completion while the app entry is held.
 
 | Exact gzip source                    | Original bytes | Compressed bytes | Saving |
 | ------------------------------------ | -------------: | ---------------: | -----: |
 | vendor/playcanvas/playcanvas.min.mjs |      2,465,494 |          634,277 |  74.3% |
-| src/toy-help.js                      |        344,736 |          115,832 |  66.4% |
+| src/toy-help.js                      |        344,750 |          115,853 |  66.4% |
 | manual/tinkerers-manual.pdf          |      7,968,242 |        6,004,462 |  24.6% |
 
 | Additional scan     | Original bytes | Opening bytes | License      |
 | ------------------- | -------------: | ------------: | ------------ |
 | armillary-sphere    |      4,009,378 |     1,887,314 | CC BY 4.0    |
 | stannern-meteorites |      4,140,082 |     2,179,245 | CC BY-NC 4.0 |
+| pyrite-cubes        |      3,586,718 |     1,962,488 | CC0 1.0      |
 
 Hashes and unchanged-byte checks are in
 [compressed-opening.json](load-time-2026-10/compressed-opening.json). Museum hashes,
 transformations, and inherited credits are in
-[museum-prefixes.json](load-time-2026-10/museum-prefixes.json). The live pages were opened on
-October 13, 2026; Stannern retains its NC tag and in-app notice.
+[museum-prefixes.json](load-time-2026-10/museum-prefixes.json). Armillary and Stannern's live pages
+were opened on October 13, 2026. On October 14, 2026, Pyrite's model page returned 503; its
+[live model API](https://api.sketchfab.com/v3/models/0b7c6e8e32144b72806ed31cb49b4145) confirmed CC0
+and Digital Atlas of Ancient Life. Stannern retains its NC tag and in-app notice.
 
 ## Reviewed timing increases
 
-Final paired measurements are pending. Earlier five-run observations are retained in compact
-summaries under `paired/`.
+Sources: baseline main `acaebd19dc3d95ed74d0f4176a52e5b865f75020`; frozen candidate
+`31054ebe3bb7be9c8112db5061399896b806e1b1`.
 
-The initial Pyrite path serialized helper loading before scan fetching; this dependency is removed.
-The earlier larger increases also contained delays before the helper request and after the scan
-completed. Unchanged controls slowed after GPU/display/execution-service interruptions. Those
-observations do not isolate a per-toy code cause. New immediate pairs and fresh browsers avoid
-shared-browser code-cache and phase drift; final measured increases, if any, must remain explicit.
+One fresh browser and context per opening, with each toy/setting's before/after pair adjacent. Phase
+order alternates on each pass. At least five observations per phase/setting; each row lists its
+sample count, median, and range in milliseconds. Phone Sunglasses was extended to a fixed 15 pairs
+after its first five had overlapping ranges and a higher median; every observation is retained.
+
+| Toy          | Setting | Samples per phase |   Before median (range) |    After median (range) | Change |
+| ------------ | ------- | ----------------: | ----------------------: | ----------------------: | -----: |
+| pyrite-cubes | phone   |                 5 |  3429.5 (2836.7–4669.9) |  2527.8 (2386.1–3078.7) | -26.3% |
+| soda-can     | phone   |                 5 |  2979.3 (2689.9–3187.8) |  2661.0 (2458.1–3311.4) | -10.7% |
+| sunglasses   | phone   |                15 | 7374.9 (2135.5–14459.4) | 5615.8 (2179.7–17524.7) | -23.9% |
+| fountain-pen | phone   |                 5 |  3047.4 (2105.6–6147.9) |  2811.8 (2653.3–4122.4) |  -7.7% |
+| pyrite-cubes | desktop |                 5 |  5202.8 (4112.6–8358.2) |  4729.3 (4201.3–6126.6) |  -9.1% |
+| soda-can     | desktop |                 5 |  4251.5 (3525.8–4973.2) |  3712.0 (3386.0–4127.2) | -12.7% |
+| sunglasses   | desktop |                 5 |  3879.1 (3326.8–5137.3) |  3564.4 (2921.7–3685.0) |  -8.1% |
+| fountain-pen | desktop |                 5 |  4151.5 (3854.7–4264.3) |  3598.6 (2766.9–3902.8) | -13.3% |
+
+Phone Sunglasses' original five-pair medians were 3243.5 → 3490.5 ms (7.6%). The extended sample
+does not remove or replace those observations. The ten added pairs were collected after validation,
+in a later session where both phases often took longer. Adjacent pairs and alternating order reduce
+phase bias, but the combined 15-pair median mixes those time windows. It is not a claim that the
+original five-pair increase disappeared.
+
+Pyrite's museum path serialized helper loading before scan fetching; the parallel transfer removes
+that dependency. Soda can, Sunglasses, and Fountain pen inherited a later helper import after the
+catalog stopped loading it eagerly: traces showed the selected pack waiting until after renderer
+initialization. Their helpers now transfer independently of the app graph and finish before GPU
+setup. Their scan data also starts transferring before WebGL initialization, with the original
+recipe choosing its profile, budget, and options. The first compressed bootstrap deferred its engine
+request behind DOM/style readiness and omitted the original engine preload; async module startup and
+the mapped preload restore early transfer and compilation. Pyrite additionally uses exact full-scan
+means to avoid recalculating smoothing over unrendered records. Original observations had large
+delays on unchanged controls after GPU/display/execution-service interruptions. Those are
+measurement limits, not proof that every earlier increase had a code cause. New immediate pairs and
+fresh browsers avoid shared-browser code-cache and phase drift; any final measured increases remain
+explicit.
 
 ## The 20 heaviest phone openings
 
-Final top-20 observations are pending. The initial revision saved 2.1% combined; it did not meet the
-target.
+Sources: baseline main `acaebd19dc3d95ed74d0f4176a52e5b865f75020`; frozen candidate
+`31054ebe3bb7be9c8112db5061399896b806e1b1`. The set is the initial full-catalog screen's 20 heaviest
+phone toys; bytes and requests below are means over five openings, and timings are medians.
+
+Combined bytes: 194,352,795 → 143,906,049 (26.0% saving). 4/20 individually meet 25%.
+
+8/20 have a higher measured first-frame median in this five-pair payload screen. The task's
+no-slower-opening target is not established. These observations are retained; they are not discarded
+as noise or replaced by the historical full-catalog results.
+
+| Toy                 | Before bytes | After bytes | Saving | Requests before → after | First frame before → after (ms) |
+| ------------------- | -----------: | ----------: | -----: | ----------------------: | ------------------------------: |
+| your-book           |   15,198,019 |  11,083,615 |  27.1% |               100 → 101 |                 2731.6 → 3255.3 |
+| video-3d            |   13,239,642 |  11,078,392 |  16.3% |               103 → 104 |                 2542.6 → 2772.3 |
+| splat-toolkit       |   11,654,987 |   9,504,363 |  18.5% |               110 → 111 |                 8608.3 → 8675.7 |
+| living-city         |   10,578,631 |   8,428,007 |  20.3% |                99 → 100 |                 3200.9 → 3146.8 |
+| point-clouds        |    9,241,738 |   7,091,114 |  23.3% |               110 → 111 |                 4564.3 → 4486.9 |
+| celestial-globe     |    9,202,887 |   4,741,396 |  48.5% |                 96 → 99 |                 2754.5 → 1978.7 |
+| stannern-meteorites |    9,169,005 |   5,150,990 |  43.8% |                 96 → 99 |                 2432.5 → 2318.4 |
+| crochet-earth       |    9,162,353 |   7,011,729 |  23.5% |                 96 → 97 |                 2769.1 → 2686.3 |
+| moving-photo-3d     |    9,131,016 |   6,980,392 |  23.6% |               127 → 128 |                9766.2 → 11833.4 |
+| seeded-loaf         |    9,124,092 |   6,973,468 |  23.6% |                 91 → 92 |                 4024.6 → 3209.8 |
+| dog-plush           |    9,120,651 |   6,970,027 |  23.6% |                 96 → 97 |                 2688.7 → 3334.7 |
+| turtle-souvenir     |    9,100,327 |   6,920,086 |  24.0% |                 99 → 97 |                 3678.9 → 2906.4 |
+| alum-crystal        |    9,097,047 |   6,946,423 |  23.6% |                 96 → 97 |                 3293.4 → 3140.0 |
+| mushroom-photo      |    9,095,880 |   6,945,256 |  23.6% |                 96 → 97 |                 3008.6 → 2996.0 |
+| armillary-sphere    |    9,058,331 |   4,879,089 |  46.1% |                 96 → 99 |                 3268.2 → 2591.2 |
+| murex-shell         |    9,049,899 |   6,899,275 |  23.8% |                 96 → 97 |                 3573.0 → 2968.5 |
+| maple-tree          |    9,033,840 |   6,883,216 |  23.8% |                 96 → 97 |                 2495.5 → 2771.9 |
+| cave-lioness        |    9,026,180 |   6,875,556 |  23.8% |                 96 → 97 |                 2523.7 → 3456.0 |
+| toy-trex            |    9,018,306 |   6,867,682 |  23.8% |                 96 → 97 |                 2890.1 → 2721.3 |
+| powers-of-ten       |    7,049,964 |   5,675,973 |  19.5% |               103 → 104 |                 2074.5 → 2808.1 |
 
 The 1.33 MiB unused-normal PLY opportunity from [task 06](perf-2026-10.md) is deferred: PR #562's
 protected manifest pins the original `liberty.ply` checksum. Its default loading path is also
@@ -59,53 +131,66 @@ These limits are separate from lossless code/manual compression.
 
 ## Image evidence
 
-The original 40 comparisons had zero changed RGBA pixels, with 19 moved tap poses. Full PNGs, diffs,
-and request traces are outside Git; SHA-256 values and comparison results are retained in
+50 comparisons have 8 changed RGBA pixels, with 23 moved tap poses. Full PNGs, diffs, and request
+traces are outside Git; SHA-256 values and comparison results are retained in
 [image-diffs.json](load-time-2026-10/image-diffs.json). Identical before/after PNG bytes share a
-single retained representative file.
+single retained representative file. The desktop book pair is visually identical: eight of 964,800
+pixels differ by at most one RGB level (RMS 0.00288). Both stills were inspected, and the original
+PDF and decoded gzip copy are byte-identical. Its before/after stills and amplified diff are
+retained. Every scan comparison remains pixel-identical.
 
-| Toy             | Setting   | Pose | Changed pixels | Representative                                                                    |
-| --------------- | --------- | ---- | -------------: | --------------------------------------------------------------------------------- |
-| cactus          | phone     | rest |              0 | [Identical still](load-time-2026-10/images/cactus-phone-before-rest.png)          |
-| pyrite-cubes    | phone     | rest |              0 | [Identical still](load-time-2026-10/images/pyrite-cubes-phone-before-rest.png)    |
-| pyrite-cubes    | phone     | tap  |              0 | Regenerate from script                                                            |
-| water-bottle    | phone     | rest |              0 | [Identical still](load-time-2026-10/images/water-bottle-phone-before-rest.png)    |
-| water-bottle    | phone     | tap  |              0 | Regenerate from script                                                            |
-| sunglasses      | phone     | rest |              0 | [Identical still](load-time-2026-10/images/sunglasses-phone-before-rest.png)      |
-| sunglasses      | phone     | tap  |              0 | Regenerate from script                                                            |
-| baseball-cap    | phone     | rest |              0 | [Identical still](load-time-2026-10/images/baseball-cap-phone-before-rest.png)    |
-| fountain-pen    | phone     | rest |              0 | [Identical still](load-time-2026-10/images/fountain-pen-phone-before-rest.png)    |
-| fountain-pen    | phone     | tap  |              0 | Regenerate from script                                                            |
-| soda-can        | phone     | rest |              0 | [Identical still](load-time-2026-10/images/soda-can-phone-before-rest.png)        |
-| soda-can        | phone     | tap  |              0 | Regenerate from script                                                            |
-| cactus          | desktop   | rest |              0 | Regenerate from script                                                            |
-| baseball-cap    | phone     | tap  |              0 | Regenerate from script                                                            |
-| pyrite-cubes    | desktop   | rest |              0 | Regenerate from script                                                            |
-| pyrite-cubes    | desktop   | tap  |              0 | Regenerate from script                                                            |
-| water-bottle    | desktop   | rest |              0 | Regenerate from script                                                            |
-| water-bottle    | desktop   | tap  |              0 | Regenerate from script                                                            |
-| sunglasses      | desktop   | rest |              0 | Regenerate from script                                                            |
-| sunglasses      | desktop   | tap  |              0 | Regenerate from script                                                            |
-| baseball-cap    | desktop   | rest |              0 | Regenerate from script                                                            |
-| baseball-cap    | desktop   | tap  |              0 | Regenerate from script                                                            |
-| fountain-pen    | desktop   | rest |              0 | Regenerate from script                                                            |
-| fountain-pen    | desktop   | tap  |              0 | Regenerate from script                                                            |
-| soda-can        | desktop   | rest |              0 | Regenerate from script                                                            |
-| soda-can        | desktop   | tap  |              0 | Regenerate from script                                                            |
-| water-bottle    | phone-mid | rest |              0 | Regenerate from script                                                            |
-| water-bottle    | phone-mid | tap  |              0 | Regenerate from script                                                            |
-| sunglasses      | phone-mid | rest |              0 | Regenerate from script                                                            |
-| sunglasses      | phone-mid | tap  |              0 | Regenerate from script                                                            |
-| baseball-cap    | phone-mid | rest |              0 | Regenerate from script                                                            |
-| baseball-cap    | phone-mid | tap  |              0 | Regenerate from script                                                            |
-| fountain-pen    | phone-mid | rest |              0 | Regenerate from script                                                            |
-| fountain-pen    | phone-mid | tap  |              0 | Regenerate from script                                                            |
-| soda-can        | phone-mid | rest |              0 | Regenerate from script                                                            |
-| soda-can        | phone-mid | tap  |              0 | Regenerate from script                                                            |
-| celestial-globe | phone     | rest |              0 | [Identical still](load-time-2026-10/images/celestial-globe-phone-before-rest.png) |
-| celestial-globe | phone     | tap  |              0 | Regenerate from script                                                            |
-| celestial-globe | desktop   | rest |              0 | Regenerate from script                                                            |
-| celestial-globe | desktop   | tap  |              0 | Regenerate from script                                                            |
+| Toy                 | Setting   | Pose | Changed pixels | Representative                                                                                                                                                                                             |
+| ------------------- | --------- | ---- | -------------: | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| cactus              | phone     | rest |              0 | Regenerate from script                                                                                                                                                                                     |
+| pyrite-cubes        | phone     | rest |              0 | [Identical still](load-time-2026-10/images/pyrite-cubes-phone-before-rest.png)                                                                                                                             |
+| pyrite-cubes        | phone     | tap  |              0 | Regenerate from script                                                                                                                                                                                     |
+| celestial-globe     | phone     | rest |              0 | [Identical still](load-time-2026-10/images/celestial-globe-phone-before-rest.png)                                                                                                                          |
+| celestial-globe     | phone     | tap  |              0 | Regenerate from script                                                                                                                                                                                     |
+| armillary-sphere    | phone     | rest |              0 | [Identical still](load-time-2026-10/images/armillary-sphere-phone-before-rest.png)                                                                                                                         |
+| armillary-sphere    | phone     | tap  |              0 | Regenerate from script                                                                                                                                                                                     |
+| stannern-meteorites | phone     | rest |              0 | [Identical still](load-time-2026-10/images/stannern-meteorites-phone-before-rest.png)                                                                                                                      |
+| stannern-meteorites | phone     | tap  |              0 | Regenerate from script                                                                                                                                                                                     |
+| your-book           | phone     | rest |              0 | [Identical still](load-time-2026-10/images/your-book-phone-before-rest.png)                                                                                                                                |
+| water-bottle        | phone     | rest |              0 | [Identical still](load-time-2026-10/images/water-bottle-phone-before-rest.png)                                                                                                                             |
+| water-bottle        | phone     | tap  |              0 | Regenerate from script                                                                                                                                                                                     |
+| sunglasses          | phone     | rest |              0 | [Identical still](load-time-2026-10/images/sunglasses-phone-before-rest.png)                                                                                                                               |
+| sunglasses          | phone     | tap  |              0 | Regenerate from script                                                                                                                                                                                     |
+| baseball-cap        | phone     | rest |              0 | [Identical still](load-time-2026-10/images/baseball-cap-phone-before-rest.png)                                                                                                                             |
+| baseball-cap        | phone     | tap  |              0 | Regenerate from script                                                                                                                                                                                     |
+| fountain-pen        | phone     | rest |              0 | [Identical still](load-time-2026-10/images/fountain-pen-phone-before-rest.png)                                                                                                                             |
+| fountain-pen        | phone     | tap  |              0 | Regenerate from script                                                                                                                                                                                     |
+| soda-can            | phone     | rest |              0 | [Identical still](load-time-2026-10/images/soda-can-phone-before-rest.png)                                                                                                                                 |
+| soda-can            | phone     | tap  |              0 | Regenerate from script                                                                                                                                                                                     |
+| cactus              | desktop   | rest |              0 | Regenerate from script                                                                                                                                                                                     |
+| pyrite-cubes        | desktop   | rest |              0 | Regenerate from script                                                                                                                                                                                     |
+| pyrite-cubes        | desktop   | tap  |              0 | Regenerate from script                                                                                                                                                                                     |
+| celestial-globe     | desktop   | rest |              0 | Regenerate from script                                                                                                                                                                                     |
+| celestial-globe     | desktop   | tap  |              0 | Regenerate from script                                                                                                                                                                                     |
+| armillary-sphere    | desktop   | rest |              0 | Regenerate from script                                                                                                                                                                                     |
+| armillary-sphere    | desktop   | tap  |              0 | Regenerate from script                                                                                                                                                                                     |
+| stannern-meteorites | desktop   | rest |              0 | Regenerate from script                                                                                                                                                                                     |
+| stannern-meteorites | desktop   | tap  |              0 | Regenerate from script                                                                                                                                                                                     |
+| your-book           | desktop   | rest |              8 | [Before](load-time-2026-10/images/your-book-desktop-before-rest.png), [after](load-time-2026-10/images/your-book-desktop-after-rest.png), [diff](load-time-2026-10/images/your-book-desktop-diff-rest.png) |
+| water-bottle        | desktop   | rest |              0 | Regenerate from script                                                                                                                                                                                     |
+| water-bottle        | desktop   | tap  |              0 | Regenerate from script                                                                                                                                                                                     |
+| sunglasses          | desktop   | rest |              0 | Regenerate from script                                                                                                                                                                                     |
+| sunglasses          | desktop   | tap  |              0 | Regenerate from script                                                                                                                                                                                     |
+| baseball-cap        | desktop   | rest |              0 | Regenerate from script                                                                                                                                                                                     |
+| baseball-cap        | desktop   | tap  |              0 | Regenerate from script                                                                                                                                                                                     |
+| fountain-pen        | desktop   | rest |              0 | Regenerate from script                                                                                                                                                                                     |
+| fountain-pen        | desktop   | tap  |              0 | Regenerate from script                                                                                                                                                                                     |
+| soda-can            | desktop   | rest |              0 | Regenerate from script                                                                                                                                                                                     |
+| soda-can            | desktop   | tap  |              0 | Regenerate from script                                                                                                                                                                                     |
+| water-bottle        | phone-mid | rest |              0 | Regenerate from script                                                                                                                                                                                     |
+| water-bottle        | phone-mid | tap  |              0 | Regenerate from script                                                                                                                                                                                     |
+| sunglasses          | phone-mid | rest |              0 | Regenerate from script                                                                                                                                                                                     |
+| sunglasses          | phone-mid | tap  |              0 | Regenerate from script                                                                                                                                                                                     |
+| baseball-cap        | phone-mid | rest |              0 | Regenerate from script                                                                                                                                                                                     |
+| baseball-cap        | phone-mid | tap  |              0 | Regenerate from script                                                                                                                                                                                     |
+| fountain-pen        | phone-mid | rest |              0 | Regenerate from script                                                                                                                                                                                     |
+| fountain-pen        | phone-mid | tap  |              0 | Regenerate from script                                                                                                                                                                                     |
+| soda-can            | phone-mid | rest |              0 | Regenerate from script                                                                                                                                                                                     |
+| soda-can            | phone-mid | tap  |              0 | Regenerate from script                                                                                                                                                                                     |
 
 Captures use seed 424242, preset cameras, frozen production clocks, the actual one-second tap decay,
 explicit center resets/resorting, at least 12 frame-end events, and a settling delay. The revised
@@ -118,10 +203,10 @@ timing.
 These remain owner decision examples. A 45,000 recipe budget replaces 90,000 in the capture tool
 only; the current asset transfer is unchanged. Smaller data files would be needed for wire savings.
 
-| Toy          | Before                                                               | After                                                                            | Changed pixels |
-| ------------ | -------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------: |
-| fountain-pen | [90,000](load-time-2026-10/images/fountain-pen-phone-after-rest.png) | [45,000](load-time-2026-10/images/fountain-pen-phone-lossy-half-budget-rest.png) |         29,272 |
-| sunglasses   | [90,000](load-time-2026-10/images/sunglasses-phone-after-rest.png)   | [45,000](load-time-2026-10/images/sunglasses-phone-lossy-half-budget-rest.png)   |         27,216 |
+| Toy          | Before                                                                | After                                                                            | Changed pixels |
+| ------------ | --------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------: |
+| fountain-pen | [90,000](load-time-2026-10/images/fountain-pen-phone-before-rest.png) | [45,000](load-time-2026-10/images/fountain-pen-phone-lossy-half-budget-rest.png) |         29,272 |
+| sunglasses   | [90,000](load-time-2026-10/images/sunglasses-phone-before-rest.png)   | [45,000](load-time-2026-10/images/sunglasses-phone-lossy-half-budget-rest.png)   |         27,216 |
 
 ## Method, limits, and reproduction
 
@@ -141,10 +226,12 @@ Serve archived baseline main on port 4174 and the frozen candidate on 4173.
 `--device=phone`, `--samples=5`, `--out=DIR`, `--frozen-main=COMMIT`, and
 `--candidate-source=COMMIT`. Their defaults save raw runs beside the repository, not under
 `docs/audits/`. Run with
-`DISPLAY=:91 LP_NUM_THREADS=2 SPLASHERY_GL=llvmpipe SPLASHERY_CHROMIUM=/usr/bin/chromium nice -n 10`.
+`DISPLAY=:93 LP_NUM_THREADS=2 SPLASHERY_GL=llvmpipe SPLASHERY_CHROMIUM=/usr/bin/chromium nice -n 10`.
 The paired script creates a fresh browser per opening and alternates each adjacent pair.
 
-`tools/load-time-visuals.mjs --out=DIR` writes full captures outside Git.
+`tools/load-time-visuals.mjs --out=DIR --frozen-main=COMMIT --candidate-source=COMMIT` writes full
+captures outside Git. `tools/load-time-publish-visuals.mjs --visuals=DIR` retains representative
+stills and hashes after checking 50 visually identical comparisons and GPU completion.
 `tools/load-time-prefixes.mjs`, `tools/load-time-smoothing.mjs`, and `tools/load-time-compress.mjs`
 regenerate production files. `tools/load-time-report.mjs --timing=DIR --payload=DIR` publishes
 compact summaries and tables. No raw request JSON or bulk captures belong in this task's audit tree.
@@ -154,7 +241,33 @@ compact summaries and tables. No raw request JSON or bulk captures belong in thi
 [verification.json](load-time-2026-10/verification.json) preserves the original 160-test run,
 separate recovery checks, image hashes, and method limits. The initial broad run's strawberry image
 threshold failure is retained; isolated baseline/candidate runs and the later 160-test run passed.
-Final review validation is recorded separately when complete.
+
+Review validation on merged source `cdd812820939d43a0aa872c09f73eab136ceddb1`, including main
+`58f3d8ede13714bf4b3d1f99fbf3b29d7f60e492`: the requested suite recorded 176 passed, 3 failed, 0
+skipped, and 0 flaky. It includes smoke, taps, kit, unit, Real Objects, and every load-time spec.
+The 3 initial failures are retained. Isolated reruns with tracing disabled recorded 1 passed and 2
+failed; assertions and test deadlines were unchanged. The idle pack check still exceeded its
+1.5-second build threshold; its counts, timings, and errors are retained. The NC check passed. The
+embed transfer ceiling remains green. Measurements and captures use frozen runtime
+`31054ebe3bb7be9c8112db5061399896b806e1b1`; the merge leaves its optimized runtime files unchanged.
+
+The Real Objects walkthrough passed in isolation. The kit catalog still exceeded its 10-minute
+deadline, and the scan-rig strawberry return-to-rest check failed twice on this branch while passing
+on frozen main. The latter remains an unresolved regression check. Frozen main also exceeded the
+pack speed threshold for 10 builds, versus eight in the idle candidate check; neither reported
+non-finite geometry.
+
+Later main `e404cf36b60e7509f2cabc21dcd0f9f076fa8ef4` adds QR work and documentation. On integrated
+source `f9cfb2db11df92f4d7f15a849a2a4f5ef8fbf6d0`, unit, taps, every load-time spec, and the two new
+QR specs recorded 135 passed, 0 failed, and 0 skipped. The full smoke, kit, and Real Objects specs
+were not repeated after this later merge. Optimized runtime files remain unchanged; the frozen
+measurements exclude the incoming QR changes.
+
+The revised runtime was measured for the 20 heaviest phone openings and the four reviewed toys on
+phone and desktop; the historical full-catalog screen was not repeated. These observations do not
+establish that every toy opens sooner on physical phones. Capture recovery preserved completed rows
+after a renderer exit; the final ten mid-tier pairs use a fixed canvas crop to avoid an
+element-stability timeout. All captures use the same canvas dimensions and GPU fence.
 
 Protected paths are PRs #560, #562, #566, #581, and #582. Their union was refreshed before the
 review changes. No renderer version, production budget, original scan, protected PLY, or protected

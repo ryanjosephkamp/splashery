@@ -1086,5 +1086,245 @@
         "tree": "ca786ab9924700f4d5f42c8e561be610da0a1dd5"
       }
     ]
+  },
+  "reviewValidation": {
+    "at": "2026-10-14T03:33:01.178Z",
+    "source": "cdd812820939d43a0aa872c09f73eab136ceddb1",
+    "integratedMain": "58f3d8ede13714bf4b3d1f99fbf3b29d7f60e492",
+    "baseline": "acaebd19dc3d95ed74d0f4176a52e5b865f75020",
+    "measuredSource": "31054ebe3bb7be9c8112db5061399896b806e1b1",
+    "suite": {
+      "command": "DISPLAY=:93 LP_NUM_THREADS=2 SPLASHERY_GL=llvmpipe SPLASHERY_CHROMIUM=/usr/bin/chromium nice -n 10 npx playwright test tests/smoke.spec.mjs tests/taps.spec.mjs tests/kit.spec.mjs tests/unit.spec.mjs tests/ro.spec.mjs tests/load-time*.spec.mjs --workers=1 --reporter=line,json",
+      "stats": {
+        "startTime": "2026-10-14T01:48:42.131Z",
+        "duration": 3439245.304,
+        "expected": 176,
+        "skipped": 0,
+        "unexpected": 3,
+        "flaky": 0
+      },
+      "failures": [
+        {
+          "file": "kit.spec.mjs",
+          "title": "every kit toy has a recipe that builds deterministically and fits the unit ball",
+          "status": "unexpected",
+          "results": [
+            {
+              "status": "timedOut",
+              "duration": 600649,
+              "errors": ["\u001b[31mTest timeout of 600000ms exceeded.\u001b[39m"]
+            }
+          ]
+        },
+        {
+          "file": "ro.spec.mjs",
+          "title": "each toy opens and plays its tap in the app, with screenshots",
+          "status": "unexpected",
+          "results": [
+            {
+              "status": "timedOut",
+              "duration": 305016,
+              "errors": [
+                "\u001b[31mTest timeout of 300000ms exceeded.\u001b[39m",
+                "TimeoutError: page.waitForSelector: Timeout 180000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('body[data-ready=\\'true\\']') to be visible\u001b[22m\n\n\n  126 |       page.on(\"pageerror\", (e) => errors.push(e.message));\n  127 |       await page.goto(APP);\n> 128 |       await page.waitForSelector(\"body[data-ready='true']\", { timeout: 180_000 });\n      |                  ^\n  129 |       for (const id of IDS) {\n  130 |         await page.evaluate((id) => window.__splashery.app.chooseToy(id), id);\n  131 |         await page.waitForFunction((id) => window.__splashery.player.toyInfo?.id === id && window.__splashery.player.proc?.ctx?.buf?.count > 50000, id, { timeout: 90_000 }); // prettier-ignore\n    at /workspace/splashery/tests/ro.spec.mjs:128:18"
+              ]
+            }
+          ]
+        },
+        {
+          "file": "smoke.spec.mjs",
+          "title": "rigs pick splats by colour, run effects and show add-ons; shelf shapes have rigs",
+          "status": "unexpected",
+          "results": [
+            {
+              "status": "failed",
+              "duration": 49816,
+              "errors": [
+                "Error: Timeout 15000ms exceeded while waiting on the predicate\n\n  752 |     const settled = async () =>\n  753 |       countDifferentPixels(page, rest, await canvas.screenshot({ type: \"png\" }));\n> 754 |     await expect\n      |     ^\n  755 |       .poll(settled, { timeout: 15_000, intervals: [3000, 1000] })\n  756 |       .toBeLessThan(moved / 4);\n  757 |     // Lantern: a toggle lights a flame add-on; a second tap puts it out.\n    at /workspace/splashery/tests/smoke.spec.mjs:754:5"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "isolated": {
+      "command": "Same environment; failed checks rerun in isolation with --trace=off",
+      "stats": {
+        "startTime": "2026-10-14T02:46:07.378Z",
+        "duration": 901915.508,
+        "expected": 1,
+        "skipped": 0,
+        "unexpected": 2,
+        "flaky": 0
+      },
+      "results": [
+        {
+          "file": "kit.spec.mjs",
+          "title": "every kit toy has a recipe that builds deterministically and fits the unit ball",
+          "status": "unexpected",
+          "results": [
+            {
+              "status": "timedOut",
+              "duration": 600172,
+              "errors": ["\u001b[31mTest timeout of 600000ms exceeded.\u001b[39m"]
+            }
+          ]
+        },
+        {
+          "file": "ro.spec.mjs",
+          "title": "each toy opens and plays its tap in the app, with screenshots",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 238271,
+              "errors": []
+            }
+          ]
+        },
+        {
+          "file": "smoke.spec.mjs",
+          "title": "rigs pick splats by colour, run effects and show add-ons; shelf shapes have rigs",
+          "status": "unexpected",
+          "results": [
+            {
+              "status": "failed",
+              "duration": 49884,
+              "errors": [
+                "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m21251.25\u001b[39m\nReceived:   \u001b[31m81148\u001b[39m\n\nCall Log:\n- Timeout 15000ms exceeded while waiting on the predicate\n\n  752 |     const settled = async () =>\n  753 |       countDifferentPixels(page, rest, await canvas.screenshot({ type: \"png\" }));\n> 754 |     await expect\n      |     ^\n  755 |       .poll(settled, { timeout: 15_000, intervals: [3000, 1000] })\n  756 |       .toBeLessThan(moved / 4);\n  757 |     // Lantern: a toggle lights a flame add-on; a second tap puts it out.\n    at /workspace/splashery/tests/smoke.spec.mjs:754:5"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "rerunNote": "The 3 initial failures are retained. Isolated reruns with tracing disabled recorded 1 passed and 2 failed; assertions and test deadlines were unchanged.",
+    "packs": {
+      "initialExitCode": 1,
+      "initialLog": "celestial-globe           172000 splats  4750 ms  too slow (keep builds under 1.5 s)\narmillary-sphere          172000 splats  3410 ms  too slow (keep builds under 1.5 s)\nstannern-meteorites       172000 splats  1508 ms  too slow (keep builds under 1.5 s)\nfluorite-crystal          180000 splats  1913 ms  too slow (keep builds under 1.5 s)\nammonite-agate            172000 splats  1483 ms\nmorasko-meteorite         172000 splats  2172 ms  too slow (keep builds under 1.5 s)\npyrite-cubes              172000 splats  1360 ms\nmegalodon-tooth           172000 splats   915 ms\nfountain-pen              197122 splats   726 ms\nwater-bottle              189314 splats   769 ms\nsoda-can                  197734 splats  1069 ms\nrunning-shoe              165382 splats  1379 ms\nhoodie                    188418 splats  1507 ms  too slow (keep builds under 1.5 s)\nsunglasses                196074 splats   809 ms\nbaseball-cap              188000 splats   849 ms\n\n6 problem(s).",
+      "idleExitCode": 1,
+      "idleLog": "celestial-globe           172000 splats  2931 ms  too slow (keep builds under 1.5 s)\narmillary-sphere          172000 splats  5042 ms  too slow (keep builds under 1.5 s)\nstannern-meteorites       172000 splats  2887 ms  too slow (keep builds under 1.5 s)\nfluorite-crystal          180000 splats  2948 ms  too slow (keep builds under 1.5 s)\nammonite-agate            172000 splats  1927 ms  too slow (keep builds under 1.5 s)\nmorasko-meteorite         172000 splats  2276 ms  too slow (keep builds under 1.5 s)\npyrite-cubes              172000 splats  1146 ms\nmegalodon-tooth           172000 splats  1209 ms\nfountain-pen              197122 splats   644 ms\nwater-bottle              189314 splats  1410 ms\nsoda-can                  197734 splats  2498 ms  too slow (keep builds under 1.5 s)\nrunning-shoe              165382 splats  2701 ms  too slow (keep builds under 1.5 s)\nhoodie                    188418 splats  1498 ms\nsunglasses                196074 splats   779 ms\nbaseball-cap              188000 splats  1482 ms\n\n8 problem(s)."
+    },
+    "baselineChecks": {
+      "source": "acaebd19dc3d95ed74d0f4176a52e5b865f75020",
+      "rig": {
+        "command": "SPLASHERY_PORT=4174 npx playwright test tests/smoke.spec.mjs --grep \"rigs pick splats\" --trace=off --workers=1 --reporter=line,json; same Chromium/Mesa environment",
+        "stats": {
+          "startTime": "2026-10-14T03:02:20.369Z",
+          "duration": 128385.701,
+          "expected": 1,
+          "skipped": 0,
+          "unexpected": 0,
+          "flaky": 0
+        },
+        "results": [
+          {
+            "file": "smoke.spec.mjs",
+            "title": "rigs pick splats by colour, run effects and show add-ons; shelf shapes have rigs",
+            "status": "expected",
+            "results": [
+              {
+                "status": "passed",
+                "duration": 112647,
+                "errors": []
+              }
+            ]
+          }
+        ]
+      },
+      "packs": {
+        "exitCode": 1,
+        "log": "celestial-globe           172000 splats  2847 ms  too slow (keep builds under 1.5 s)\narmillary-sphere          172000 splats  2724 ms  too slow (keep builds under 1.5 s)\nstannern-meteorites       172000 splats  2448 ms  too slow (keep builds under 1.5 s)\nfluorite-crystal          180000 splats  3978 ms  too slow (keep builds under 1.5 s)\nammonite-agate            172000 splats  1959 ms  too slow (keep builds under 1.5 s)\nmorasko-meteorite         172000 splats  1173 ms\npyrite-cubes              172000 splats  1591 ms  too slow (keep builds under 1.5 s)\nmegalodon-tooth           172000 splats  1170 ms\nfountain-pen              197122 splats  1599 ms  too slow (keep builds under 1.5 s)\nwater-bottle              189314 splats  1532 ms  too slow (keep builds under 1.5 s)\nsoda-can                  197734 splats  1333 ms\nrunning-shoe              165382 splats  3470 ms  too slow (keep builds under 1.5 s)\nhoodie                    188418 splats  2243 ms  too slow (keep builds under 1.5 s)\nsunglasses                196074 splats  1365 ms\nbaseball-cap              188000 splats  1223 ms\n\n10 problem(s)."
+      },
+      "note": "The rig passed on baseline and failed twice on the candidate; it remains an unresolved regression check. Both baseline and candidate exceeded pack speed thresholds; baseline had 10 slow builds and the idle candidate had 8. No non-finite geometry was reported."
+    },
+    "packNote": "The idle pack check still exceeded its 1.5-second build threshold; its counts, timings, and errors are retained.",
+    "nc": {
+      "exitCode": 0,
+      "result": "OK: 4 NC assets, all tagged; no ND license."
+    },
+    "embed": {
+      "transferMB": 7.3,
+      "ceilingMB": 30
+    },
+    "runtimeMergeProof": {
+      "unchangedPaths": [
+        "src/boot.js",
+        "src/opening-pack.js",
+        "src/gzip.js",
+        "src/app.js",
+        "src/player.js",
+        "src/ui.js",
+        "src/pc.js",
+        "src/media.js",
+        "src/packs/real-objects.js",
+        "src/packs/photoreal-r3.js",
+        "src/embed.js",
+        "src/toy-help.js",
+        "assets/opening",
+        "index.html",
+        "embed/index.html",
+        "manual/tinkerers-manual.pdf",
+        "manual/tinkerers-manual.pdf.gz",
+        "assets/toys/pyrite-cubes",
+        "assets/toys/armillary-sphere",
+        "assets/toys/stannern-meteorites"
+      ],
+      "changedPaths": []
+    },
+    "protection": {
+      "checkedAt": "2026-10-14T03:17:02.091Z",
+      "pullRequests": [560, 562, 566, 581, 582],
+      "base": "e404cf36b60e7509f2cabc21dcd0f9f076fa8ef4",
+      "protected": 382,
+      "changed": 99,
+      "intersection": []
+    },
+    "captures": {
+      "comparisons": 50,
+      "pixelIdentical": 49,
+      "visuallyIdentical": 50,
+      "movedTapPoses": 23,
+      "nonzeroComparison": {
+        "id": "your-book",
+        "device": "desktop",
+        "pose": "rest",
+        "differentPixels": 8,
+        "pixels": 964800,
+        "maxChannelDifference": 1,
+        "rmsRGB": 0.002879561418604534
+      },
+      "version": 3,
+      "gpuFence": "gl.finish()",
+      "recovery": "31 rows preserved after renderer exit; 40 preserved after screenshot element-stability timeout. The final 10 mid-tier comparisons use fixed canvas crops. No completed pair was replaced."
+    },
+    "timing": {
+      "rawDirectory": "../load-time-runs/review-timing-pyrite",
+      "samplesPerPhase": 50,
+      "focused": "Four reviewed toys on phone and desktop; five pairs per setting except 15 phone Sunglasses pairs. Original five Sunglasses pairs retained."
+    },
+    "payload": {
+      "rawDirectory": "../load-time-runs/review-top20",
+      "samplesPerPhase": 100,
+      "phoneToys": 20,
+      "pairsPerToy": 5
+    },
+    "historicalLimit": "The 924-cell complete-catalog screen applies to the original revision, not this runtime. No physical-phone measurement, full revised catalog screen, or frame-cadence audit is claimed.",
+    "ruleCheck": "Prior unpublished email-metadata history rewrite conflicts with E1. Review changes are additive; no published history was rewritten.",
+    "latestIntegration": {
+      "source": "f9cfb2db11df92f4d7f15a849a2a4f5ef8fbf6d0",
+      "main": "e404cf36b60e7509f2cabc21dcd0f9f076fa8ef4",
+      "stats": {
+        "startTime": "2026-10-14T03:15:30.769Z",
+        "duration": 1018561.987,
+        "expected": 135,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "failures": [],
+      "command": "Same Chromium/Mesa environment; npx playwright test tests/unit.spec.mjs tests/taps.spec.mjs tests/load-time*.spec.mjs tests/cdx-circle-lab.spec.mjs tests/cdx-circle-qr.spec.mjs --workers=1 --reporter=line,json",
+      "scope": "Later QR source, thumbnail, and documentation merge. The optimized runtime files are unchanged. Full smoke, kit, and Real Objects were not repeated after this later merge; their requested-suite and isolated results remain above."
+    }
   }
 }

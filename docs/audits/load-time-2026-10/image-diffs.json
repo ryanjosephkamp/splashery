@@ -1,6 +1,9 @@
 [
   {
-    "captureVersion": 2,
+    "captureVersion": 3,
+    "frozenMain": "acaebd19dc3d95ed74d0f4176a52e5b865f75020",
+    "candidateSource": "31054ebe3bb7be9c8112db5061399896b806e1b1",
+    "gpuCompletion": "WebGL gl.finish() immediately before capture",
     "id": "cactus",
     "device": "phone",
     "pose": "rest",
@@ -12,11 +15,12 @@
       "controls": {
         "bloom": 0
       },
+      "settledFrames": 25,
       "canvas": {
         "width": 585,
         "height": 967
       },
-      "pngSha256": "9d018f14c74b80e435a659f40d71578d350d439e9f3a07a995c4dd57e6e9fc12"
+      "sha256": "b5bed95e74544acb13338680b6cc2e9b4781017fb9865c68c4e83beb671d4cde"
     },
     "after": {
       "file": "cactus-phone-after-rest.png",
@@ -26,21 +30,25 @@
       "controls": {
         "bloom": 0
       },
+      "settledFrames": 25,
       "canvas": {
         "width": 585,
         "height": 967
       },
-      "pngSha256": "9d018f14c74b80e435a659f40d71578d350d439e9f3a07a995c4dd57e6e9fc12"
+      "sha256": "b5bed95e74544acb13338680b6cc2e9b4781017fb9865c68c4e83beb671d4cde"
     },
     "differentPixels": 0,
     "pixels": 251550,
     "rmsRGB": 0,
     "maxChannelDifference": 0,
     "diff": "cactus-phone-diff-rest.png",
-    "preview": "cactus-phone-before-rest.png"
+    "equality": "pixel-identical"
   },
   {
-    "captureVersion": 2,
+    "captureVersion": 3,
+    "frozenMain": "acaebd19dc3d95ed74d0f4176a52e5b865f75020",
+    "candidateSource": "31054ebe3bb7be9c8112db5061399896b806e1b1",
+    "gpuCompletion": "WebGL gl.finish() immediately before capture",
     "id": "pyrite-cubes",
     "device": "phone",
     "pose": "rest",
@@ -52,11 +60,12 @@
       "controls": {
         "tap": 0
       },
+      "settledFrames": 33,
       "canvas": {
         "width": 585,
         "height": 967
       },
-      "pngSha256": "e331b5cf3c8f6fb3361a1a3f98fe571476b581b34c3304a6153fa5ac97a7cad8"
+      "sha256": "da5c0c351ee608ad3d81e8b90f111dcb47ba2f8fcbd9f3fb90021e2251a16fe8"
     },
     "after": {
       "file": "pyrite-cubes-phone-after-rest.png",
@@ -66,21 +75,26 @@
       "controls": {
         "tap": 0
       },
+      "settledFrames": 27,
       "canvas": {
         "width": 585,
         "height": 967
       },
-      "pngSha256": "e331b5cf3c8f6fb3361a1a3f98fe571476b581b34c3304a6153fa5ac97a7cad8"
+      "sha256": "da5c0c351ee608ad3d81e8b90f111dcb47ba2f8fcbd9f3fb90021e2251a16fe8"
     },
     "differentPixels": 0,
     "pixels": 251550,
     "rmsRGB": 0,
     "maxChannelDifference": 0,
     "diff": "pyrite-cubes-phone-diff-rest.png",
+    "equality": "pixel-identical",
     "preview": "pyrite-cubes-phone-before-rest.png"
   },
   {
-    "captureVersion": 2,
+    "captureVersion": 3,
+    "frozenMain": "acaebd19dc3d95ed74d0f4176a52e5b865f75020",
+    "candidateSource": "31054ebe3bb7be9c8112db5061399896b806e1b1",
+    "gpuCompletion": "WebGL gl.finish() immediately before capture",
     "id": "pyrite-cubes",
     "device": "phone",
     "pose": "tap",
@@ -92,11 +106,12 @@
       "controls": {
         "tap": 0.7142857142857143
       },
+      "settledFrames": 31,
       "canvas": {
         "width": 585,
         "height": 967
       },
-      "pngSha256": "d9ffb330d821e24fb972ad895f4ef156f9df8c769ea7b35eeddeff75d06aed0f"
+      "sha256": "e8b13cc6dd0663e5fc4f0ae35d17c33933afc9054828fe252457d9a68d980bd5"
     },
     "after": {
       "file": "pyrite-cubes-phone-after-tap.png",
@@ -106,11 +121,12 @@
       "controls": {
         "tap": 0.7142857142857143
       },
+      "settledFrames": 32,
       "canvas": {
         "width": 585,
         "height": 967
       },
-      "pngSha256": "d9ffb330d821e24fb972ad895f4ef156f9df8c769ea7b35eeddeff75d06aed0f"
+      "sha256": "e8b13cc6dd0663e5fc4f0ae35d17c33933afc9054828fe252457d9a68d980bd5"
     },
     "differentPixels": 0,
     "pixels": 251550,
@@ -118,10 +134,341 @@
     "maxChannelDifference": 0,
     "diff": "pyrite-cubes-phone-diff-tap.png",
     "tapChangedPixels": 31482,
-    "preview": null
+    "equality": "pixel-identical"
   },
   {
-    "captureVersion": 2,
+    "captureVersion": 3,
+    "frozenMain": "acaebd19dc3d95ed74d0f4176a52e5b865f75020",
+    "candidateSource": "31054ebe3bb7be9c8112db5061399896b806e1b1",
+    "gpuCompletion": "WebGL gl.finish() immediately before capture",
+    "id": "celestial-globe",
+    "device": "phone",
+    "pose": "rest",
+    "before": {
+      "file": "celestial-globe-phone-before-rest.png",
+      "id": "celestial-globe",
+      "splats": 77400,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "tap": 0
+      },
+      "settledFrames": 29,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "sha256": "9e5de43a0e586bb9b019ed4278d10b7300e6efdf8ac13cb995209271b62c455a"
+    },
+    "after": {
+      "file": "celestial-globe-phone-after-rest.png",
+      "id": "celestial-globe",
+      "splats": 77400,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "tap": 0
+      },
+      "settledFrames": 26,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "sha256": "9e5de43a0e586bb9b019ed4278d10b7300e6efdf8ac13cb995209271b62c455a"
+    },
+    "differentPixels": 0,
+    "pixels": 251550,
+    "rmsRGB": 0,
+    "maxChannelDifference": 0,
+    "diff": "celestial-globe-phone-diff-rest.png",
+    "equality": "pixel-identical",
+    "preview": "celestial-globe-phone-before-rest.png"
+  },
+  {
+    "captureVersion": 3,
+    "frozenMain": "acaebd19dc3d95ed74d0f4176a52e5b865f75020",
+    "candidateSource": "31054ebe3bb7be9c8112db5061399896b806e1b1",
+    "gpuCompletion": "WebGL gl.finish() immediately before capture",
+    "id": "celestial-globe",
+    "device": "phone",
+    "pose": "tap",
+    "before": {
+      "file": "celestial-globe-phone-before-tap.png",
+      "id": "celestial-globe",
+      "splats": 77400,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "tap": 0.7222222222222222
+      },
+      "settledFrames": 30,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "sha256": "2b3494f51f6cbbf0334d405877f5b829b5f319d6bf93b7714cadd9a025823035"
+    },
+    "after": {
+      "file": "celestial-globe-phone-after-tap.png",
+      "id": "celestial-globe",
+      "splats": 77400,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "tap": 0.7222222222222222
+      },
+      "settledFrames": 31,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "sha256": "2b3494f51f6cbbf0334d405877f5b829b5f319d6bf93b7714cadd9a025823035"
+    },
+    "differentPixels": 0,
+    "pixels": 251550,
+    "rmsRGB": 0,
+    "maxChannelDifference": 0,
+    "diff": "celestial-globe-phone-diff-tap.png",
+    "tapChangedPixels": 12701,
+    "equality": "pixel-identical"
+  },
+  {
+    "captureVersion": 3,
+    "frozenMain": "acaebd19dc3d95ed74d0f4176a52e5b865f75020",
+    "candidateSource": "31054ebe3bb7be9c8112db5061399896b806e1b1",
+    "gpuCompletion": "WebGL gl.finish() immediately before capture",
+    "id": "armillary-sphere",
+    "device": "phone",
+    "pose": "rest",
+    "before": {
+      "file": "armillary-sphere-phone-before-rest.png",
+      "id": "armillary-sphere",
+      "splats": 77400,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "tap": 0
+      },
+      "settledFrames": 32,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "sha256": "f9da9a74f2d8794b79340e66e8a9bb634fdb3c150acbd79c8e4c4b1d3954f8d3"
+    },
+    "after": {
+      "file": "armillary-sphere-phone-after-rest.png",
+      "id": "armillary-sphere",
+      "splats": 77400,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "tap": 0
+      },
+      "settledFrames": 26,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "sha256": "f9da9a74f2d8794b79340e66e8a9bb634fdb3c150acbd79c8e4c4b1d3954f8d3"
+    },
+    "differentPixels": 0,
+    "pixels": 251550,
+    "rmsRGB": 0,
+    "maxChannelDifference": 0,
+    "diff": "armillary-sphere-phone-diff-rest.png",
+    "equality": "pixel-identical",
+    "preview": "armillary-sphere-phone-before-rest.png"
+  },
+  {
+    "captureVersion": 3,
+    "frozenMain": "acaebd19dc3d95ed74d0f4176a52e5b865f75020",
+    "candidateSource": "31054ebe3bb7be9c8112db5061399896b806e1b1",
+    "gpuCompletion": "WebGL gl.finish() immediately before capture",
+    "id": "armillary-sphere",
+    "device": "phone",
+    "pose": "tap",
+    "before": {
+      "file": "armillary-sphere-phone-before-tap.png",
+      "id": "armillary-sphere",
+      "splats": 77400,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "tap": 0.7058823529411764
+      },
+      "settledFrames": 30,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "sha256": "c1d1f8259e5797898dae40acb44f0d66506416efc74df7f7d3f980b94a628734"
+    },
+    "after": {
+      "file": "armillary-sphere-phone-after-tap.png",
+      "id": "armillary-sphere",
+      "splats": 77400,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "tap": 0.7058823529411764
+      },
+      "settledFrames": 32,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "sha256": "c1d1f8259e5797898dae40acb44f0d66506416efc74df7f7d3f980b94a628734"
+    },
+    "differentPixels": 0,
+    "pixels": 251550,
+    "rmsRGB": 0,
+    "maxChannelDifference": 0,
+    "diff": "armillary-sphere-phone-diff-tap.png",
+    "tapChangedPixels": 6391,
+    "equality": "pixel-identical"
+  },
+  {
+    "captureVersion": 3,
+    "frozenMain": "acaebd19dc3d95ed74d0f4176a52e5b865f75020",
+    "candidateSource": "31054ebe3bb7be9c8112db5061399896b806e1b1",
+    "gpuCompletion": "WebGL gl.finish() immediately before capture",
+    "id": "stannern-meteorites",
+    "device": "phone",
+    "pose": "rest",
+    "before": {
+      "file": "stannern-meteorites-phone-before-rest.png",
+      "id": "stannern-meteorites",
+      "splats": 77400,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "tap": 0
+      },
+      "settledFrames": 33,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "sha256": "2eea95ea8b29a02b485cb01c98f7d44569e7c0d0290e9568c89e0e2afbdd4569"
+    },
+    "after": {
+      "file": "stannern-meteorites-phone-after-rest.png",
+      "id": "stannern-meteorites",
+      "splats": 77400,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "tap": 0
+      },
+      "settledFrames": 30,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "sha256": "2eea95ea8b29a02b485cb01c98f7d44569e7c0d0290e9568c89e0e2afbdd4569"
+    },
+    "differentPixels": 0,
+    "pixels": 251550,
+    "rmsRGB": 0,
+    "maxChannelDifference": 0,
+    "diff": "stannern-meteorites-phone-diff-rest.png",
+    "equality": "pixel-identical",
+    "preview": "stannern-meteorites-phone-before-rest.png"
+  },
+  {
+    "captureVersion": 3,
+    "frozenMain": "acaebd19dc3d95ed74d0f4176a52e5b865f75020",
+    "candidateSource": "31054ebe3bb7be9c8112db5061399896b806e1b1",
+    "gpuCompletion": "WebGL gl.finish() immediately before capture",
+    "id": "stannern-meteorites",
+    "device": "phone",
+    "pose": "tap",
+    "before": {
+      "file": "stannern-meteorites-phone-before-tap.png",
+      "id": "stannern-meteorites",
+      "splats": 77400,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "tap": 0.7058823529411764
+      },
+      "settledFrames": 32,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "sha256": "4d4c89a1f021a21a5dc407fecace912da23e1408c009050852a4de7d28e18c13"
+    },
+    "after": {
+      "file": "stannern-meteorites-phone-after-tap.png",
+      "id": "stannern-meteorites",
+      "splats": 77400,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "tap": 0.7058823529411764
+      },
+      "settledFrames": 29,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "sha256": "4d4c89a1f021a21a5dc407fecace912da23e1408c009050852a4de7d28e18c13"
+    },
+    "differentPixels": 0,
+    "pixels": 251550,
+    "rmsRGB": 0,
+    "maxChannelDifference": 0,
+    "diff": "stannern-meteorites-phone-diff-tap.png",
+    "tapChangedPixels": 11224,
+    "equality": "pixel-identical"
+  },
+  {
+    "captureVersion": 3,
+    "frozenMain": "acaebd19dc3d95ed74d0f4176a52e5b865f75020",
+    "candidateSource": "31054ebe3bb7be9c8112db5061399896b806e1b1",
+    "gpuCompletion": "WebGL gl.finish() immediately before capture",
+    "id": "your-book",
+    "device": "phone",
+    "pose": "rest",
+    "before": {
+      "file": "your-book-phone-before-rest.png",
+      "id": "your-book",
+      "splats": 55572,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "turn": 0,
+        "pop": 0,
+        "box": 0,
+        "layers": 0
+      },
+      "settledFrames": 31,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "sha256": "fdcba5a0b66f42695207eb5633261c558992de7ab3e104582b67fb5c39f64c2f"
+    },
+    "after": {
+      "file": "your-book-phone-after-rest.png",
+      "id": "your-book",
+      "splats": 55572,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "turn": 0,
+        "pop": 0,
+        "box": 0,
+        "layers": 0
+      },
+      "settledFrames": 35,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "sha256": "fdcba5a0b66f42695207eb5633261c558992de7ab3e104582b67fb5c39f64c2f"
+    },
+    "differentPixels": 0,
+    "pixels": 251550,
+    "rmsRGB": 0,
+    "maxChannelDifference": 0,
+    "diff": "your-book-phone-diff-rest.png",
+    "equality": "pixel-identical",
+    "preview": "your-book-phone-before-rest.png"
+  },
+  {
+    "captureVersion": 3,
+    "frozenMain": "acaebd19dc3d95ed74d0f4176a52e5b865f75020",
+    "candidateSource": "31054ebe3bb7be9c8112db5061399896b806e1b1",
+    "gpuCompletion": "WebGL gl.finish() immediately before capture",
     "id": "water-bottle",
     "device": "phone",
     "pose": "rest",
@@ -133,11 +480,12 @@
       "controls": {
         "pour": 0
       },
+      "settledFrames": 29,
       "canvas": {
         "width": 585,
         "height": 967
       },
-      "pngSha256": "a7939cc75a5c4bba7086891f2d96fa78b86d655bf24a0d3b3d1d8139236dd8f5"
+      "sha256": "f0ced2b4ee7394d555e3689ce5c13f3c347bd0a66060e9a4e92d9bb724127cb4"
     },
     "after": {
       "file": "water-bottle-phone-after-rest.png",
@@ -147,21 +495,26 @@
       "controls": {
         "pour": 0
       },
+      "settledFrames": 26,
       "canvas": {
         "width": 585,
         "height": 967
       },
-      "pngSha256": "a7939cc75a5c4bba7086891f2d96fa78b86d655bf24a0d3b3d1d8139236dd8f5"
+      "sha256": "f0ced2b4ee7394d555e3689ce5c13f3c347bd0a66060e9a4e92d9bb724127cb4"
     },
     "differentPixels": 0,
     "pixels": 251550,
     "rmsRGB": 0,
     "maxChannelDifference": 0,
     "diff": "water-bottle-phone-diff-rest.png",
+    "equality": "pixel-identical",
     "preview": "water-bottle-phone-before-rest.png"
   },
   {
-    "captureVersion": 2,
+    "captureVersion": 3,
+    "frozenMain": "acaebd19dc3d95ed74d0f4176a52e5b865f75020",
+    "candidateSource": "31054ebe3bb7be9c8112db5061399896b806e1b1",
+    "gpuCompletion": "WebGL gl.finish() immediately before capture",
     "id": "water-bottle",
     "device": "phone",
     "pose": "tap",
@@ -173,11 +526,12 @@
       "controls": {
         "pour": 0.7777777777777778
       },
+      "settledFrames": 29,
       "canvas": {
         "width": 585,
         "height": 967
       },
-      "pngSha256": "2285df757b44d6eb1672b26ea355eeccd2d820e87e77c7cfed6e756e78792f34"
+      "sha256": "22c4b0b707c8892e1086711d1c013f9d7ccd92a71e188b8f145b230fb0379122"
     },
     "after": {
       "file": "water-bottle-phone-after-tap.png",
@@ -187,11 +541,12 @@
       "controls": {
         "pour": 0.7777777777777778
       },
+      "settledFrames": 26,
       "canvas": {
         "width": 585,
         "height": 967
       },
-      "pngSha256": "2285df757b44d6eb1672b26ea355eeccd2d820e87e77c7cfed6e756e78792f34"
+      "sha256": "22c4b0b707c8892e1086711d1c013f9d7ccd92a71e188b8f145b230fb0379122"
     },
     "differentPixels": 0,
     "pixels": 251550,
@@ -199,10 +554,13 @@
     "maxChannelDifference": 0,
     "diff": "water-bottle-phone-diff-tap.png",
     "tapChangedPixels": 22839,
-    "preview": null
+    "equality": "pixel-identical"
   },
   {
-    "captureVersion": 2,
+    "captureVersion": 3,
+    "frozenMain": "acaebd19dc3d95ed74d0f4176a52e5b865f75020",
+    "candidateSource": "31054ebe3bb7be9c8112db5061399896b806e1b1",
+    "gpuCompletion": "WebGL gl.finish() immediately before capture",
     "id": "sunglasses",
     "device": "phone",
     "pose": "rest",
@@ -214,11 +572,12 @@
       "controls": {
         "flip": 0
       },
+      "settledFrames": 32,
       "canvas": {
         "width": 585,
         "height": 967
       },
-      "pngSha256": "33501894fa2ca5065f2f4cf911dbc4fc8c4f2448342f99114c49b24157409a15"
+      "sha256": "8710b89a6a7d4ad4d23b9b421bc458b7978223108c61d8001c4a54d288927237"
     },
     "after": {
       "file": "sunglasses-phone-after-rest.png",
@@ -228,21 +587,26 @@
       "controls": {
         "flip": 0
       },
+      "settledFrames": 32,
       "canvas": {
         "width": 585,
         "height": 967
       },
-      "pngSha256": "33501894fa2ca5065f2f4cf911dbc4fc8c4f2448342f99114c49b24157409a15"
+      "sha256": "8710b89a6a7d4ad4d23b9b421bc458b7978223108c61d8001c4a54d288927237"
     },
     "differentPixels": 0,
     "pixels": 251550,
     "rmsRGB": 0,
     "maxChannelDifference": 0,
     "diff": "sunglasses-phone-diff-rest.png",
+    "equality": "pixel-identical",
     "preview": "sunglasses-phone-before-rest.png"
   },
   {
-    "captureVersion": 2,
+    "captureVersion": 3,
+    "frozenMain": "acaebd19dc3d95ed74d0f4176a52e5b865f75020",
+    "candidateSource": "31054ebe3bb7be9c8112db5061399896b806e1b1",
+    "gpuCompletion": "WebGL gl.finish() immediately before capture",
     "id": "sunglasses",
     "device": "phone",
     "pose": "tap",
@@ -254,11 +618,12 @@
       "controls": {
         "flip": 0.7142857142857143
       },
+      "settledFrames": 31,
       "canvas": {
         "width": 585,
         "height": 967
       },
-      "pngSha256": "6392fda88f4d96c6bac402612a11cd8668bb669546c034c025009d2536aa51c9"
+      "sha256": "865e80550aa1b3a247d9e297a80286c8a4b2c3db8764f109fe198a12de8c605a"
     },
     "after": {
       "file": "sunglasses-phone-after-tap.png",
@@ -268,11 +633,12 @@
       "controls": {
         "flip": 0.7142857142857143
       },
+      "settledFrames": 31,
       "canvas": {
         "width": 585,
         "height": 967
       },
-      "pngSha256": "6392fda88f4d96c6bac402612a11cd8668bb669546c034c025009d2536aa51c9"
+      "sha256": "865e80550aa1b3a247d9e297a80286c8a4b2c3db8764f109fe198a12de8c605a"
     },
     "differentPixels": 0,
     "pixels": 251550,
@@ -280,10 +646,13 @@
     "maxChannelDifference": 0,
     "diff": "sunglasses-phone-diff-tap.png",
     "tapChangedPixels": 39797,
-    "preview": null
+    "equality": "pixel-identical"
   },
   {
-    "captureVersion": 2,
+    "captureVersion": 3,
+    "frozenMain": "acaebd19dc3d95ed74d0f4176a52e5b865f75020",
+    "candidateSource": "31054ebe3bb7be9c8112db5061399896b806e1b1",
+    "gpuCompletion": "WebGL gl.finish() immediately before capture",
     "id": "baseball-cap",
     "device": "phone",
     "pose": "rest",
@@ -295,11 +664,12 @@
       "controls": {
         "toss": 0
       },
+      "settledFrames": 27,
       "canvas": {
         "width": 585,
         "height": 967
       },
-      "pngSha256": "ea0a74839e05fd2adc17af5c1ae8bc89a02fcaa0ba6d4c734f2100056d62490e"
+      "sha256": "8e2114f7217fc901962fd98206bc5e3ed353dfa5a824de1b86d67026785500cc"
     },
     "after": {
       "file": "baseball-cap-phone-after-rest.png",
@@ -309,223 +679,26 @@
       "controls": {
         "toss": 0
       },
+      "settledFrames": 30,
       "canvas": {
         "width": 585,
         "height": 967
       },
-      "pngSha256": "ea0a74839e05fd2adc17af5c1ae8bc89a02fcaa0ba6d4c734f2100056d62490e"
+      "sha256": "8e2114f7217fc901962fd98206bc5e3ed353dfa5a824de1b86d67026785500cc"
     },
     "differentPixels": 0,
     "pixels": 251550,
     "rmsRGB": 0,
     "maxChannelDifference": 0,
     "diff": "baseball-cap-phone-diff-rest.png",
+    "equality": "pixel-identical",
     "preview": "baseball-cap-phone-before-rest.png"
   },
   {
-    "captureVersion": 2,
-    "id": "fountain-pen",
-    "device": "phone",
-    "pose": "rest",
-    "before": {
-      "file": "fountain-pen-phone-before-rest.png",
-      "id": "fountain-pen",
-      "splats": 90273,
-      "title": "Splashery · splats you can play with",
-      "controls": {
-        "write": 0
-      },
-      "canvas": {
-        "width": 585,
-        "height": 967
-      },
-      "pngSha256": "87c162773aaf27b793e5cfae18f2caaf67263ee33f8271f487ffc3cca3445917"
-    },
-    "after": {
-      "file": "fountain-pen-phone-after-rest.png",
-      "id": "fountain-pen",
-      "splats": 90273,
-      "title": "Splashery · splats you can play with",
-      "controls": {
-        "write": 0
-      },
-      "canvas": {
-        "width": 585,
-        "height": 967
-      },
-      "pngSha256": "87c162773aaf27b793e5cfae18f2caaf67263ee33f8271f487ffc3cca3445917"
-    },
-    "differentPixels": 0,
-    "pixels": 251550,
-    "rmsRGB": 0,
-    "maxChannelDifference": 0,
-    "diff": "fountain-pen-phone-diff-rest.png",
-    "preview": "fountain-pen-phone-before-rest.png"
-  },
-  {
-    "captureVersion": 2,
-    "id": "fountain-pen",
-    "device": "phone",
-    "pose": "tap",
-    "before": {
-      "file": "fountain-pen-phone-before-tap.png",
-      "id": "fountain-pen",
-      "splats": 90273,
-      "title": "Splashery · splats you can play with",
-      "controls": {
-        "write": 0.75
-      },
-      "canvas": {
-        "width": 585,
-        "height": 967
-      },
-      "pngSha256": "92f6f8a94bc81892a44d41ff6ea77da32cede963a29171052592ff775d4ab4d9"
-    },
-    "after": {
-      "file": "fountain-pen-phone-after-tap.png",
-      "id": "fountain-pen",
-      "splats": 90273,
-      "title": "Splashery · splats you can play with",
-      "controls": {
-        "write": 0.75
-      },
-      "canvas": {
-        "width": 585,
-        "height": 967
-      },
-      "pngSha256": "92f6f8a94bc81892a44d41ff6ea77da32cede963a29171052592ff775d4ab4d9"
-    },
-    "differentPixels": 0,
-    "pixels": 251550,
-    "rmsRGB": 0,
-    "maxChannelDifference": 0,
-    "diff": "fountain-pen-phone-diff-tap.png",
-    "tapChangedPixels": 5325,
-    "preview": null
-  },
-  {
-    "captureVersion": 2,
-    "id": "soda-can",
-    "device": "phone",
-    "pose": "rest",
-    "before": {
-      "file": "soda-can-phone-before-rest.png",
-      "id": "soda-can",
-      "splats": 89317,
-      "title": "Splashery · splats you can play with",
-      "controls": {
-        "open": 0
-      },
-      "canvas": {
-        "width": 585,
-        "height": 967
-      },
-      "pngSha256": "3dfd66ab1a457d0912471d912a92a7278e4889aa13c39c6b8f313a63ca76fb75"
-    },
-    "after": {
-      "file": "soda-can-phone-after-rest.png",
-      "id": "soda-can",
-      "splats": 89317,
-      "title": "Splashery · splats you can play with",
-      "controls": {
-        "open": 0
-      },
-      "canvas": {
-        "width": 585,
-        "height": 967
-      },
-      "pngSha256": "3dfd66ab1a457d0912471d912a92a7278e4889aa13c39c6b8f313a63ca76fb75"
-    },
-    "differentPixels": 0,
-    "pixels": 251550,
-    "rmsRGB": 0,
-    "maxChannelDifference": 0,
-    "diff": "soda-can-phone-diff-rest.png",
-    "preview": "soda-can-phone-before-rest.png"
-  },
-  {
-    "captureVersion": 2,
-    "id": "soda-can",
-    "device": "phone",
-    "pose": "tap",
-    "before": {
-      "file": "soda-can-phone-before-tap.png",
-      "id": "soda-can",
-      "splats": 89317,
-      "title": "Splashery · splats you can play with",
-      "controls": {
-        "open": 0.75
-      },
-      "canvas": {
-        "width": 585,
-        "height": 967
-      },
-      "pngSha256": "a841850b8b03fd7620ad730ae3224f140279c0049f55e10c4420a0e3b8d6b463"
-    },
-    "after": {
-      "file": "soda-can-phone-after-tap.png",
-      "id": "soda-can",
-      "splats": 89317,
-      "title": "Splashery · splats you can play with",
-      "controls": {
-        "open": 0.75
-      },
-      "canvas": {
-        "width": 585,
-        "height": 967
-      },
-      "pngSha256": "a841850b8b03fd7620ad730ae3224f140279c0049f55e10c4420a0e3b8d6b463"
-    },
-    "differentPixels": 0,
-    "pixels": 251550,
-    "rmsRGB": 0,
-    "maxChannelDifference": 0,
-    "diff": "soda-can-phone-diff-tap.png",
-    "tapChangedPixels": 1055,
-    "preview": null
-  },
-  {
-    "captureVersion": 2,
-    "id": "cactus",
-    "device": "desktop",
-    "pose": "rest",
-    "before": {
-      "file": "cactus-desktop-before-rest.png",
-      "id": "cactus",
-      "splats": 450000,
-      "title": "Splashery · splats you can play with",
-      "controls": {
-        "bloom": 0
-      },
-      "canvas": {
-        "width": 1072,
-        "height": 900
-      },
-      "pngSha256": "706f59fbaa9923e58d8832072e0872a4f518ace53bc00058b93ece0293595389"
-    },
-    "after": {
-      "file": "cactus-desktop-after-rest.png",
-      "id": "cactus",
-      "splats": 450000,
-      "title": "Splashery · splats you can play with",
-      "controls": {
-        "bloom": 0
-      },
-      "canvas": {
-        "width": 1072,
-        "height": 900
-      },
-      "pngSha256": "706f59fbaa9923e58d8832072e0872a4f518ace53bc00058b93ece0293595389"
-    },
-    "differentPixels": 0,
-    "pixels": 964800,
-    "rmsRGB": 0,
-    "maxChannelDifference": 0,
-    "diff": "cactus-desktop-diff-rest.png",
-    "preview": null
-  },
-  {
-    "captureVersion": 2,
+    "captureVersion": 3,
+    "frozenMain": "acaebd19dc3d95ed74d0f4176a52e5b865f75020",
+    "candidateSource": "31054ebe3bb7be9c8112db5061399896b806e1b1",
+    "gpuCompletion": "WebGL gl.finish() immediately before capture",
     "id": "baseball-cap",
     "device": "phone",
     "pose": "tap",
@@ -537,12 +710,12 @@
       "controls": {
         "toss": 0.6666666666666667
       },
-      "settledFrames": 25,
+      "settledFrames": 30,
       "canvas": {
         "width": 585,
         "height": 967
       },
-      "pngSha256": "8309f9ebf71ec966fa4e66a51d4760c83253dd21cd17fd1d922d3c5d67a6fb99"
+      "sha256": "09f0fe513459017da8a62d6ca35cf12f254a558792dccd690641b9ea7219d75d"
     },
     "after": {
       "file": "baseball-cap-phone-after-tap.png",
@@ -552,12 +725,12 @@
       "controls": {
         "toss": 0.6666666666666667
       },
-      "settledFrames": 27,
+      "settledFrames": 26,
       "canvas": {
         "width": 585,
         "height": 967
       },
-      "pngSha256": "8309f9ebf71ec966fa4e66a51d4760c83253dd21cd17fd1d922d3c5d67a6fb99"
+      "sha256": "09f0fe513459017da8a62d6ca35cf12f254a558792dccd690641b9ea7219d75d"
     },
     "differentPixels": 0,
     "pixels": 251550,
@@ -565,10 +738,242 @@
     "maxChannelDifference": 0,
     "diff": "baseball-cap-phone-diff-tap.png",
     "tapChangedPixels": 21389,
-    "preview": null
+    "equality": "pixel-identical"
   },
   {
-    "captureVersion": 2,
+    "captureVersion": 3,
+    "frozenMain": "acaebd19dc3d95ed74d0f4176a52e5b865f75020",
+    "candidateSource": "31054ebe3bb7be9c8112db5061399896b806e1b1",
+    "gpuCompletion": "WebGL gl.finish() immediately before capture",
+    "id": "fountain-pen",
+    "device": "phone",
+    "pose": "rest",
+    "before": {
+      "file": "fountain-pen-phone-before-rest.png",
+      "id": "fountain-pen",
+      "splats": 90273,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "write": 0
+      },
+      "settledFrames": 29,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "sha256": "4487cd8800c271bef0bc5c3770a002b9356bfd131affd0d86318e9ca1c5b3372"
+    },
+    "after": {
+      "file": "fountain-pen-phone-after-rest.png",
+      "id": "fountain-pen",
+      "splats": 90273,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "write": 0
+      },
+      "settledFrames": 26,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "sha256": "4487cd8800c271bef0bc5c3770a002b9356bfd131affd0d86318e9ca1c5b3372"
+    },
+    "differentPixels": 0,
+    "pixels": 251550,
+    "rmsRGB": 0,
+    "maxChannelDifference": 0,
+    "diff": "fountain-pen-phone-diff-rest.png",
+    "equality": "pixel-identical",
+    "preview": "fountain-pen-phone-before-rest.png"
+  },
+  {
+    "captureVersion": 3,
+    "frozenMain": "acaebd19dc3d95ed74d0f4176a52e5b865f75020",
+    "candidateSource": "31054ebe3bb7be9c8112db5061399896b806e1b1",
+    "gpuCompletion": "WebGL gl.finish() immediately before capture",
+    "id": "fountain-pen",
+    "device": "phone",
+    "pose": "tap",
+    "before": {
+      "file": "fountain-pen-phone-before-tap.png",
+      "id": "fountain-pen",
+      "splats": 90273,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "write": 0.75
+      },
+      "settledFrames": 27,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "sha256": "508439c26183da543c4cc6a9a6e0e7ab23dc59ff2e80e546b91b0f4bdd7a0f45"
+    },
+    "after": {
+      "file": "fountain-pen-phone-after-tap.png",
+      "id": "fountain-pen",
+      "splats": 90273,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "write": 0.75
+      },
+      "settledFrames": 27,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "sha256": "508439c26183da543c4cc6a9a6e0e7ab23dc59ff2e80e546b91b0f4bdd7a0f45"
+    },
+    "differentPixels": 0,
+    "pixels": 251550,
+    "rmsRGB": 0,
+    "maxChannelDifference": 0,
+    "diff": "fountain-pen-phone-diff-tap.png",
+    "tapChangedPixels": 5325,
+    "equality": "pixel-identical"
+  },
+  {
+    "captureVersion": 3,
+    "frozenMain": "acaebd19dc3d95ed74d0f4176a52e5b865f75020",
+    "candidateSource": "31054ebe3bb7be9c8112db5061399896b806e1b1",
+    "gpuCompletion": "WebGL gl.finish() immediately before capture",
+    "id": "soda-can",
+    "device": "phone",
+    "pose": "rest",
+    "before": {
+      "file": "soda-can-phone-before-rest.png",
+      "id": "soda-can",
+      "splats": 89317,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "open": 0
+      },
+      "settledFrames": 30,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "sha256": "38b0e150f692371535480a1b7688beaa13ccbe814e674da4151e7dde98071c43"
+    },
+    "after": {
+      "file": "soda-can-phone-after-rest.png",
+      "id": "soda-can",
+      "splats": 89317,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "open": 0
+      },
+      "settledFrames": 32,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "sha256": "38b0e150f692371535480a1b7688beaa13ccbe814e674da4151e7dde98071c43"
+    },
+    "differentPixels": 0,
+    "pixels": 251550,
+    "rmsRGB": 0,
+    "maxChannelDifference": 0,
+    "diff": "soda-can-phone-diff-rest.png",
+    "equality": "pixel-identical",
+    "preview": "soda-can-phone-before-rest.png"
+  },
+  {
+    "captureVersion": 3,
+    "frozenMain": "acaebd19dc3d95ed74d0f4176a52e5b865f75020",
+    "candidateSource": "31054ebe3bb7be9c8112db5061399896b806e1b1",
+    "gpuCompletion": "WebGL gl.finish() immediately before capture",
+    "id": "soda-can",
+    "device": "phone",
+    "pose": "tap",
+    "before": {
+      "file": "soda-can-phone-before-tap.png",
+      "id": "soda-can",
+      "splats": 89317,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "open": 0.75
+      },
+      "settledFrames": 31,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "sha256": "3fcaba245c7dcac66b631c40210ca37112bfc90bc0e34e7ddf785b97d801f786"
+    },
+    "after": {
+      "file": "soda-can-phone-after-tap.png",
+      "id": "soda-can",
+      "splats": 89317,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "open": 0.75
+      },
+      "settledFrames": 24,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "sha256": "3fcaba245c7dcac66b631c40210ca37112bfc90bc0e34e7ddf785b97d801f786"
+    },
+    "differentPixels": 0,
+    "pixels": 251550,
+    "rmsRGB": 0,
+    "maxChannelDifference": 0,
+    "diff": "soda-can-phone-diff-tap.png",
+    "tapChangedPixels": 1055,
+    "equality": "pixel-identical"
+  },
+  {
+    "captureVersion": 3,
+    "frozenMain": "acaebd19dc3d95ed74d0f4176a52e5b865f75020",
+    "candidateSource": "31054ebe3bb7be9c8112db5061399896b806e1b1",
+    "gpuCompletion": "WebGL gl.finish() immediately before capture",
+    "id": "cactus",
+    "device": "desktop",
+    "pose": "rest",
+    "before": {
+      "file": "cactus-desktop-before-rest.png",
+      "id": "cactus",
+      "splats": 450000,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "bloom": 0
+      },
+      "settledFrames": 33,
+      "canvas": {
+        "width": 1072,
+        "height": 900
+      },
+      "sha256": "7ac2fa405d5dd8a52fb8288e1a29df2b6f760c5379099cfae537b0c7621be0f5"
+    },
+    "after": {
+      "file": "cactus-desktop-after-rest.png",
+      "id": "cactus",
+      "splats": 450000,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "bloom": 0
+      },
+      "settledFrames": 22,
+      "canvas": {
+        "width": 1072,
+        "height": 900
+      },
+      "sha256": "7ac2fa405d5dd8a52fb8288e1a29df2b6f760c5379099cfae537b0c7621be0f5"
+    },
+    "differentPixels": 0,
+    "pixels": 964800,
+    "rmsRGB": 0,
+    "maxChannelDifference": 0,
+    "diff": "cactus-desktop-diff-rest.png",
+    "equality": "pixel-identical"
+  },
+  {
+    "captureVersion": 3,
+    "frozenMain": "acaebd19dc3d95ed74d0f4176a52e5b865f75020",
+    "candidateSource": "31054ebe3bb7be9c8112db5061399896b806e1b1",
+    "gpuCompletion": "WebGL gl.finish() immediately before capture",
     "id": "pyrite-cubes",
     "device": "desktop",
     "pose": "rest",
@@ -580,12 +985,12 @@
       "controls": {
         "tap": 0
       },
-      "settledFrames": 23,
+      "settledFrames": 21,
       "canvas": {
         "width": 1072,
         "height": 900
       },
-      "pngSha256": "eb2f859ad31118b23dd5a625c22fa9d9d5f7cbd447a35906c9fff4ca6054abd3"
+      "sha256": "4d4183f9bb492df785f6bc40d9619836d8513fbf46e90395f57fa91f1a3550c4"
     },
     "after": {
       "file": "pyrite-cubes-desktop-after-rest.png",
@@ -600,17 +1005,20 @@
         "width": 1072,
         "height": 900
       },
-      "pngSha256": "eb2f859ad31118b23dd5a625c22fa9d9d5f7cbd447a35906c9fff4ca6054abd3"
+      "sha256": "4d4183f9bb492df785f6bc40d9619836d8513fbf46e90395f57fa91f1a3550c4"
     },
     "differentPixels": 0,
     "pixels": 964800,
     "rmsRGB": 0,
     "maxChannelDifference": 0,
     "diff": "pyrite-cubes-desktop-diff-rest.png",
-    "preview": null
+    "equality": "pixel-identical"
   },
   {
-    "captureVersion": 2,
+    "captureVersion": 3,
+    "frozenMain": "acaebd19dc3d95ed74d0f4176a52e5b865f75020",
+    "candidateSource": "31054ebe3bb7be9c8112db5061399896b806e1b1",
+    "gpuCompletion": "WebGL gl.finish() immediately before capture",
     "id": "pyrite-cubes",
     "device": "desktop",
     "pose": "tap",
@@ -627,7 +1035,7 @@
         "width": 1072,
         "height": 900
       },
-      "pngSha256": "939ca25766538e10580d17411771fa860a81ade8105f4b975ef95e16f7169a83"
+      "sha256": "53ac0dcd2a5dcd919383aed6628427484680762586b5e145a8b9584caa5e6222"
     },
     "after": {
       "file": "pyrite-cubes-desktop-after-tap.png",
@@ -637,12 +1045,12 @@
       "controls": {
         "tap": 0.7142857142857143
       },
-      "settledFrames": 22,
+      "settledFrames": 23,
       "canvas": {
         "width": 1072,
         "height": 900
       },
-      "pngSha256": "939ca25766538e10580d17411771fa860a81ade8105f4b975ef95e16f7169a83"
+      "sha256": "53ac0dcd2a5dcd919383aed6628427484680762586b5e145a8b9584caa5e6222"
     },
     "differentPixels": 0,
     "pixels": 964800,
@@ -650,10 +1058,341 @@
     "maxChannelDifference": 0,
     "diff": "pyrite-cubes-desktop-diff-tap.png",
     "tapChangedPixels": 162507,
-    "preview": null
+    "equality": "pixel-identical"
   },
   {
-    "captureVersion": 2,
+    "captureVersion": 3,
+    "frozenMain": "acaebd19dc3d95ed74d0f4176a52e5b865f75020",
+    "candidateSource": "31054ebe3bb7be9c8112db5061399896b806e1b1",
+    "gpuCompletion": "WebGL gl.finish() immediately before capture",
+    "id": "celestial-globe",
+    "device": "desktop",
+    "pose": "rest",
+    "before": {
+      "file": "celestial-globe-desktop-before-rest.png",
+      "id": "celestial-globe",
+      "splats": 258000,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "tap": 0
+      },
+      "settledFrames": 28,
+      "canvas": {
+        "width": 1072,
+        "height": 900
+      },
+      "sha256": "1069cdd0ad21a3ac9486ea633894f804a5bc58a637b32569a6615001d762d1cb"
+    },
+    "after": {
+      "file": "celestial-globe-desktop-after-rest.png",
+      "id": "celestial-globe",
+      "splats": 258000,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "tap": 0
+      },
+      "settledFrames": 22,
+      "canvas": {
+        "width": 1072,
+        "height": 900
+      },
+      "sha256": "1069cdd0ad21a3ac9486ea633894f804a5bc58a637b32569a6615001d762d1cb"
+    },
+    "differentPixels": 0,
+    "pixels": 964800,
+    "rmsRGB": 0,
+    "maxChannelDifference": 0,
+    "diff": "celestial-globe-desktop-diff-rest.png",
+    "equality": "pixel-identical"
+  },
+  {
+    "captureVersion": 3,
+    "frozenMain": "acaebd19dc3d95ed74d0f4176a52e5b865f75020",
+    "candidateSource": "31054ebe3bb7be9c8112db5061399896b806e1b1",
+    "gpuCompletion": "WebGL gl.finish() immediately before capture",
+    "id": "celestial-globe",
+    "device": "desktop",
+    "pose": "tap",
+    "before": {
+      "file": "celestial-globe-desktop-before-tap.png",
+      "id": "celestial-globe",
+      "splats": 258000,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "tap": 0.7222222222222222
+      },
+      "settledFrames": 24,
+      "canvas": {
+        "width": 1072,
+        "height": 900
+      },
+      "sha256": "e8bae424ced1bea1f6e0acbce10236c58ccfbd265aec22437e34d6711fe3a839"
+    },
+    "after": {
+      "file": "celestial-globe-desktop-after-tap.png",
+      "id": "celestial-globe",
+      "splats": 258000,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "tap": 0.7222222222222222
+      },
+      "settledFrames": 25,
+      "canvas": {
+        "width": 1072,
+        "height": 900
+      },
+      "sha256": "e8bae424ced1bea1f6e0acbce10236c58ccfbd265aec22437e34d6711fe3a839"
+    },
+    "differentPixels": 0,
+    "pixels": 964800,
+    "rmsRGB": 0,
+    "maxChannelDifference": 0,
+    "diff": "celestial-globe-desktop-diff-tap.png",
+    "tapChangedPixels": 66104,
+    "equality": "pixel-identical"
+  },
+  {
+    "captureVersion": 3,
+    "frozenMain": "acaebd19dc3d95ed74d0f4176a52e5b865f75020",
+    "candidateSource": "31054ebe3bb7be9c8112db5061399896b806e1b1",
+    "gpuCompletion": "WebGL gl.finish() immediately before capture",
+    "id": "armillary-sphere",
+    "device": "desktop",
+    "pose": "rest",
+    "before": {
+      "file": "armillary-sphere-desktop-before-rest.png",
+      "id": "armillary-sphere",
+      "splats": 258000,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "tap": 0
+      },
+      "settledFrames": 20,
+      "canvas": {
+        "width": 1072,
+        "height": 900
+      },
+      "sha256": "94902210a521ff75a708071cc38731915aec89f7921a8abe37e243fa3961c03a"
+    },
+    "after": {
+      "file": "armillary-sphere-desktop-after-rest.png",
+      "id": "armillary-sphere",
+      "splats": 258000,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "tap": 0
+      },
+      "settledFrames": 22,
+      "canvas": {
+        "width": 1072,
+        "height": 900
+      },
+      "sha256": "94902210a521ff75a708071cc38731915aec89f7921a8abe37e243fa3961c03a"
+    },
+    "differentPixels": 0,
+    "pixels": 964800,
+    "rmsRGB": 0,
+    "maxChannelDifference": 0,
+    "diff": "armillary-sphere-desktop-diff-rest.png",
+    "equality": "pixel-identical"
+  },
+  {
+    "captureVersion": 3,
+    "frozenMain": "acaebd19dc3d95ed74d0f4176a52e5b865f75020",
+    "candidateSource": "31054ebe3bb7be9c8112db5061399896b806e1b1",
+    "gpuCompletion": "WebGL gl.finish() immediately before capture",
+    "id": "armillary-sphere",
+    "device": "desktop",
+    "pose": "tap",
+    "before": {
+      "file": "armillary-sphere-desktop-before-tap.png",
+      "id": "armillary-sphere",
+      "splats": 258000,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "tap": 0.7058823529411764
+      },
+      "settledFrames": 22,
+      "canvas": {
+        "width": 1072,
+        "height": 900
+      },
+      "sha256": "8fe9e2c604c8d413e27f769b3a5187cbc2a348e1611db5162f3ae567170a6017"
+    },
+    "after": {
+      "file": "armillary-sphere-desktop-after-tap.png",
+      "id": "armillary-sphere",
+      "splats": 258000,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "tap": 0.7058823529411764
+      },
+      "settledFrames": 20,
+      "canvas": {
+        "width": 1072,
+        "height": 900
+      },
+      "sha256": "8fe9e2c604c8d413e27f769b3a5187cbc2a348e1611db5162f3ae567170a6017"
+    },
+    "differentPixels": 0,
+    "pixels": 964800,
+    "rmsRGB": 0,
+    "maxChannelDifference": 0,
+    "diff": "armillary-sphere-desktop-diff-tap.png",
+    "tapChangedPixels": 30902,
+    "equality": "pixel-identical"
+  },
+  {
+    "captureVersion": 3,
+    "frozenMain": "acaebd19dc3d95ed74d0f4176a52e5b865f75020",
+    "candidateSource": "31054ebe3bb7be9c8112db5061399896b806e1b1",
+    "gpuCompletion": "WebGL gl.finish() immediately before capture",
+    "id": "stannern-meteorites",
+    "device": "desktop",
+    "pose": "rest",
+    "before": {
+      "file": "stannern-meteorites-desktop-before-rest.png",
+      "id": "stannern-meteorites",
+      "splats": 258000,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "tap": 0
+      },
+      "settledFrames": 22,
+      "canvas": {
+        "width": 1072,
+        "height": 900
+      },
+      "sha256": "c16a4498078e64b4ff25b955c41e26f8f68fdafceee005b490bc15cd62808abf"
+    },
+    "after": {
+      "file": "stannern-meteorites-desktop-after-rest.png",
+      "id": "stannern-meteorites",
+      "splats": 258000,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "tap": 0
+      },
+      "settledFrames": 22,
+      "canvas": {
+        "width": 1072,
+        "height": 900
+      },
+      "sha256": "c16a4498078e64b4ff25b955c41e26f8f68fdafceee005b490bc15cd62808abf"
+    },
+    "differentPixels": 0,
+    "pixels": 964800,
+    "rmsRGB": 0,
+    "maxChannelDifference": 0,
+    "diff": "stannern-meteorites-desktop-diff-rest.png",
+    "equality": "pixel-identical"
+  },
+  {
+    "captureVersion": 3,
+    "frozenMain": "acaebd19dc3d95ed74d0f4176a52e5b865f75020",
+    "candidateSource": "31054ebe3bb7be9c8112db5061399896b806e1b1",
+    "gpuCompletion": "WebGL gl.finish() immediately before capture",
+    "id": "stannern-meteorites",
+    "device": "desktop",
+    "pose": "tap",
+    "before": {
+      "file": "stannern-meteorites-desktop-before-tap.png",
+      "id": "stannern-meteorites",
+      "splats": 258000,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "tap": 0.7058823529411764
+      },
+      "settledFrames": 23,
+      "canvas": {
+        "width": 1072,
+        "height": 900
+      },
+      "sha256": "0f7d2ed0b1842319b5782748cfd73c7001ff90bc05564cbef814c2b9622b860b"
+    },
+    "after": {
+      "file": "stannern-meteorites-desktop-after-tap.png",
+      "id": "stannern-meteorites",
+      "splats": 258000,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "tap": 0.7058823529411764
+      },
+      "settledFrames": 23,
+      "canvas": {
+        "width": 1072,
+        "height": 900
+      },
+      "sha256": "0f7d2ed0b1842319b5782748cfd73c7001ff90bc05564cbef814c2b9622b860b"
+    },
+    "differentPixels": 0,
+    "pixels": 964800,
+    "rmsRGB": 0,
+    "maxChannelDifference": 0,
+    "diff": "stannern-meteorites-desktop-diff-tap.png",
+    "tapChangedPixels": 55499,
+    "equality": "pixel-identical"
+  },
+  {
+    "captureVersion": 3,
+    "frozenMain": "acaebd19dc3d95ed74d0f4176a52e5b865f75020",
+    "candidateSource": "31054ebe3bb7be9c8112db5061399896b806e1b1",
+    "gpuCompletion": "WebGL gl.finish() immediately before capture",
+    "id": "your-book",
+    "device": "desktop",
+    "pose": "rest",
+    "before": {
+      "file": "your-book-desktop-before-rest.png",
+      "id": "your-book",
+      "splats": 187383,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "turn": 0,
+        "pop": 0,
+        "box": 0,
+        "layers": 0
+      },
+      "settledFrames": 21,
+      "canvas": {
+        "width": 1072,
+        "height": 900
+      },
+      "sha256": "d9d893c037e3a0d2734faa4916e021474cfde32bdeebb3c13e9f25aaf9d011f1"
+    },
+    "after": {
+      "file": "your-book-desktop-after-rest.png",
+      "id": "your-book",
+      "splats": 187383,
+      "title": "Splashery · splats you can play with",
+      "controls": {
+        "turn": 0,
+        "pop": 0,
+        "box": 0,
+        "layers": 0
+      },
+      "settledFrames": 48,
+      "canvas": {
+        "width": 1072,
+        "height": 900
+      },
+      "sha256": "9352dd14bb33f98fa897c8d094628ed652fb25543c79e3e7e44fd4ba70698778"
+    },
+    "differentPixels": 8,
+    "pixels": 964800,
+    "rmsRGB": 0.002879561418604534,
+    "maxChannelDifference": 1,
+    "diff": "your-book-desktop-diff-rest.png",
+    "equality": "visually-identical",
+    "note": "Visually inspected paired stills; eight pixels differ by at most one RGB level. Original and decoded compressed PDF bytes match exactly.",
+    "previewBefore": "your-book-desktop-before-rest.png",
+    "previewAfter": "your-book-desktop-after-rest.png",
+    "diffPreview": "your-book-desktop-diff-rest.png"
+  },
+  {
+    "captureVersion": 3,
+    "frozenMain": "acaebd19dc3d95ed74d0f4176a52e5b865f75020",
+    "candidateSource": "31054ebe3bb7be9c8112db5061399896b806e1b1",
+    "gpuCompletion": "WebGL gl.finish() immediately before capture",
     "id": "water-bottle",
     "device": "desktop",
     "pose": "rest",
@@ -665,12 +1404,12 @@
       "controls": {
         "pour": 0
       },
-      "settledFrames": 22,
+      "settledFrames": 21,
       "canvas": {
         "width": 1072,
         "height": 900
       },
-      "pngSha256": "c7f017202bd10395abe46eefa58f6bd1ead81c4fbbf08c60925bbd40d3b21145"
+      "sha256": "47bd346b01fb2b4f78b7bb0dd80c94d6f9fe64321dc614f0b22a87a4a8578815"
     },
     "after": {
       "file": "water-bottle-desktop-after-rest.png",
@@ -685,17 +1424,20 @@
         "width": 1072,
         "height": 900
       },
-      "pngSha256": "c7f017202bd10395abe46eefa58f6bd1ead81c4fbbf08c60925bbd40d3b21145"
+      "sha256": "47bd346b01fb2b4f78b7bb0dd80c94d6f9fe64321dc614f0b22a87a4a8578815"
     },
     "differentPixels": 0,
     "pixels": 964800,
     "rmsRGB": 0,
     "maxChannelDifference": 0,
     "diff": "water-bottle-desktop-diff-rest.png",
-    "preview": null
+    "equality": "pixel-identical"
   },
   {
-    "captureVersion": 2,
+    "captureVersion": 3,
+    "frozenMain": "acaebd19dc3d95ed74d0f4176a52e5b865f75020",
+    "candidateSource": "31054ebe3bb7be9c8112db5061399896b806e1b1",
+    "gpuCompletion": "WebGL gl.finish() immediately before capture",
     "id": "water-bottle",
     "device": "desktop",
     "pose": "tap",
@@ -707,12 +1449,12 @@
       "controls": {
         "pour": 0.7777777777777778
       },
-      "settledFrames": 20,
+      "settledFrames": 22,
       "canvas": {
         "width": 1072,
         "height": 900
       },
-      "pngSha256": "75982b6b7f7f9d1a9150fc846b9464d3a83823e9318684f7d8be199d90956642"
+      "sha256": "a35e8e6d5edfdb86f21780f41827c6838024b321c3030b7ff8fadc3112eeb7f3"
     },
     "after": {
       "file": "water-bottle-desktop-after-tap.png",
@@ -722,12 +1464,12 @@
       "controls": {
         "pour": 0.7777777777777778
       },
-      "settledFrames": 22,
+      "settledFrames": 21,
       "canvas": {
         "width": 1072,
         "height": 900
       },
-      "pngSha256": "75982b6b7f7f9d1a9150fc846b9464d3a83823e9318684f7d8be199d90956642"
+      "sha256": "a35e8e6d5edfdb86f21780f41827c6838024b321c3030b7ff8fadc3112eeb7f3"
     },
     "differentPixels": 0,
     "pixels": 964800,
@@ -735,10 +1477,13 @@
     "maxChannelDifference": 0,
     "diff": "water-bottle-desktop-diff-tap.png",
     "tapChangedPixels": 114807,
-    "preview": null
+    "equality": "pixel-identical"
   },
   {
-    "captureVersion": 2,
+    "captureVersion": 3,
+    "frozenMain": "acaebd19dc3d95ed74d0f4176a52e5b865f75020",
+    "candidateSource": "31054ebe3bb7be9c8112db5061399896b806e1b1",
+    "gpuCompletion": "WebGL gl.finish() immediately before capture",
     "id": "sunglasses",
     "device": "desktop",
     "pose": "rest",
@@ -755,7 +1500,7 @@
         "width": 1072,
         "height": 900
       },
-      "pngSha256": "1aee84d44ed87e0c883ad7dc7bfce3c877fb22436bf3662e7386d47c6543939f"
+      "sha256": "6d13ed1fcecdd0d14c1d959152d2ea50a22809faa10badbf3212ea57196dadcf"
     },
     "after": {
       "file": "sunglasses-desktop-after-rest.png",
@@ -765,22 +1510,25 @@
       "controls": {
         "flip": 0
       },
-      "settledFrames": 22,
+      "settledFrames": 23,
       "canvas": {
         "width": 1072,
         "height": 900
       },
-      "pngSha256": "1aee84d44ed87e0c883ad7dc7bfce3c877fb22436bf3662e7386d47c6543939f"
+      "sha256": "6d13ed1fcecdd0d14c1d959152d2ea50a22809faa10badbf3212ea57196dadcf"
     },
     "differentPixels": 0,
     "pixels": 964800,
     "rmsRGB": 0,
     "maxChannelDifference": 0,
     "diff": "sunglasses-desktop-diff-rest.png",
-    "preview": null
+    "equality": "pixel-identical"
   },
   {
-    "captureVersion": 2,
+    "captureVersion": 3,
+    "frozenMain": "acaebd19dc3d95ed74d0f4176a52e5b865f75020",
+    "candidateSource": "31054ebe3bb7be9c8112db5061399896b806e1b1",
+    "gpuCompletion": "WebGL gl.finish() immediately before capture",
     "id": "sunglasses",
     "device": "desktop",
     "pose": "tap",
@@ -797,7 +1545,7 @@
         "width": 1072,
         "height": 900
       },
-      "pngSha256": "d1711589105cd13577cd40b24eaea149562467984ff1965806b259c59cfa4b72"
+      "sha256": "545201bdf00dfa2b66e5b7b59114572221ce5bc8307d80c19c56ec68c10dabff"
     },
     "after": {
       "file": "sunglasses-desktop-after-tap.png",
@@ -807,12 +1555,12 @@
       "controls": {
         "flip": 0.7142857142857143
       },
-      "settledFrames": 22,
+      "settledFrames": 24,
       "canvas": {
         "width": 1072,
         "height": 900
       },
-      "pngSha256": "d1711589105cd13577cd40b24eaea149562467984ff1965806b259c59cfa4b72"
+      "sha256": "545201bdf00dfa2b66e5b7b59114572221ce5bc8307d80c19c56ec68c10dabff"
     },
     "differentPixels": 0,
     "pixels": 964800,
@@ -820,10 +1568,13 @@
     "maxChannelDifference": 0,
     "diff": "sunglasses-desktop-diff-tap.png",
     "tapChangedPixels": 208295,
-    "preview": null
+    "equality": "pixel-identical"
   },
   {
-    "captureVersion": 2,
+    "captureVersion": 3,
+    "frozenMain": "acaebd19dc3d95ed74d0f4176a52e5b865f75020",
+    "candidateSource": "31054ebe3bb7be9c8112db5061399896b806e1b1",
+    "gpuCompletion": "WebGL gl.finish() immediately before capture",
     "id": "baseball-cap",
     "device": "desktop",
     "pose": "rest",
@@ -835,12 +1586,12 @@
       "controls": {
         "toss": 0
       },
-      "settledFrames": 22,
+      "settledFrames": 23,
       "canvas": {
         "width": 1072,
         "height": 900
       },
-      "pngSha256": "61509c46f3eac275f84ad6352cadbc08a726c3a5ee2f3d8a71be4c75035c1f7f"
+      "sha256": "98d0b909650468e93efb3645b814c8220cd1dd12d86c8f442406e4600ad4e577"
     },
     "after": {
       "file": "baseball-cap-desktop-after-rest.png",
@@ -850,22 +1601,25 @@
       "controls": {
         "toss": 0
       },
-      "settledFrames": 23,
+      "settledFrames": 21,
       "canvas": {
         "width": 1072,
         "height": 900
       },
-      "pngSha256": "61509c46f3eac275f84ad6352cadbc08a726c3a5ee2f3d8a71be4c75035c1f7f"
+      "sha256": "98d0b909650468e93efb3645b814c8220cd1dd12d86c8f442406e4600ad4e577"
     },
     "differentPixels": 0,
     "pixels": 964800,
     "rmsRGB": 0,
     "maxChannelDifference": 0,
     "diff": "baseball-cap-desktop-diff-rest.png",
-    "preview": null
+    "equality": "pixel-identical"
   },
   {
-    "captureVersion": 2,
+    "captureVersion": 3,
+    "frozenMain": "acaebd19dc3d95ed74d0f4176a52e5b865f75020",
+    "candidateSource": "31054ebe3bb7be9c8112db5061399896b806e1b1",
+    "gpuCompletion": "WebGL gl.finish() immediately before capture",
     "id": "baseball-cap",
     "device": "desktop",
     "pose": "tap",
@@ -877,12 +1631,12 @@
       "controls": {
         "toss": 0.6666666666666667
       },
-      "settledFrames": 22,
+      "settledFrames": 24,
       "canvas": {
         "width": 1072,
         "height": 900
       },
-      "pngSha256": "4683927b5378689fbbda2cb19fc21fb14b00cc4a743b1fce828edf078e4657e8"
+      "sha256": "d470e8d1d5cb50bfb85a7a5cc0da75079a023b0632f522738543d0e8ad4451eb"
     },
     "after": {
       "file": "baseball-cap-desktop-after-tap.png",
@@ -892,12 +1646,12 @@
       "controls": {
         "toss": 0.6666666666666667
       },
-      "settledFrames": 22,
+      "settledFrames": 24,
       "canvas": {
         "width": 1072,
         "height": 900
       },
-      "pngSha256": "4683927b5378689fbbda2cb19fc21fb14b00cc4a743b1fce828edf078e4657e8"
+      "sha256": "d470e8d1d5cb50bfb85a7a5cc0da75079a023b0632f522738543d0e8ad4451eb"
     },
     "differentPixels": 0,
     "pixels": 964800,
@@ -905,10 +1659,13 @@
     "maxChannelDifference": 0,
     "diff": "baseball-cap-desktop-diff-tap.png",
     "tapChangedPixels": 107931,
-    "preview": null
+    "equality": "pixel-identical"
   },
   {
-    "captureVersion": 2,
+    "captureVersion": 3,
+    "frozenMain": "acaebd19dc3d95ed74d0f4176a52e5b865f75020",
+    "candidateSource": "31054ebe3bb7be9c8112db5061399896b806e1b1",
+    "gpuCompletion": "WebGL gl.finish() immediately before capture",
     "id": "fountain-pen",
     "device": "desktop",
     "pose": "rest",
@@ -925,7 +1682,7 @@
         "width": 1072,
         "height": 900
       },
-      "pngSha256": "1da84ecf7aaebad7040f1a75af88cf1b7c0e7896bf2c557609b7bee8c7ab6dd1"
+      "sha256": "385ccaf52acc6a7d4dd45982bd0a82c6730935a96af0a13b823e2846bc9e4336"
     },
     "after": {
       "file": "fountain-pen-desktop-after-rest.png",
@@ -935,22 +1692,25 @@
       "controls": {
         "write": 0
       },
-      "settledFrames": 23,
+      "settledFrames": 22,
       "canvas": {
         "width": 1072,
         "height": 900
       },
-      "pngSha256": "1da84ecf7aaebad7040f1a75af88cf1b7c0e7896bf2c557609b7bee8c7ab6dd1"
+      "sha256": "385ccaf52acc6a7d4dd45982bd0a82c6730935a96af0a13b823e2846bc9e4336"
     },
     "differentPixels": 0,
     "pixels": 964800,
     "rmsRGB": 0,
     "maxChannelDifference": 0,
     "diff": "fountain-pen-desktop-diff-rest.png",
-    "preview": null
+    "equality": "pixel-identical"
   },
   {
-    "captureVersion": 2,
+    "captureVersion": 3,
+    "frozenMain": "acaebd19dc3d95ed74d0f4176a52e5b865f75020",
+    "candidateSource": "31054ebe3bb7be9c8112db5061399896b806e1b1",
+    "gpuCompletion": "WebGL gl.finish() immediately before capture",
     "id": "fountain-pen",
     "device": "desktop",
     "pose": "tap",
@@ -962,12 +1722,12 @@
       "controls": {
         "write": 0.75
       },
-      "settledFrames": 20,
+      "settledFrames": 21,
       "canvas": {
         "width": 1072,
         "height": 900
       },
-      "pngSha256": "60c881fdfb1223064b0a5beb527667e27a3e3cfb8da738abc4e72c102477d5bb"
+      "sha256": "d6119cfed0536ca86a7a91de36ee691e4f8ca3b64f80ed19e484165a1e34bc52"
     },
     "after": {
       "file": "fountain-pen-desktop-after-tap.png",
@@ -977,12 +1737,12 @@
       "controls": {
         "write": 0.75
       },
-      "settledFrames": 23,
+      "settledFrames": 26,
       "canvas": {
         "width": 1072,
         "height": 900
       },
-      "pngSha256": "60c881fdfb1223064b0a5beb527667e27a3e3cfb8da738abc4e72c102477d5bb"
+      "sha256": "d6119cfed0536ca86a7a91de36ee691e4f8ca3b64f80ed19e484165a1e34bc52"
     },
     "differentPixels": 0,
     "pixels": 964800,
@@ -990,10 +1750,13 @@
     "maxChannelDifference": 0,
     "diff": "fountain-pen-desktop-diff-tap.png",
     "tapChangedPixels": 26713,
-    "preview": null
+    "equality": "pixel-identical"
   },
   {
-    "captureVersion": 2,
+    "captureVersion": 3,
+    "frozenMain": "acaebd19dc3d95ed74d0f4176a52e5b865f75020",
+    "candidateSource": "31054ebe3bb7be9c8112db5061399896b806e1b1",
+    "gpuCompletion": "WebGL gl.finish() immediately before capture",
     "id": "soda-can",
     "device": "desktop",
     "pose": "rest",
@@ -1005,12 +1768,12 @@
       "controls": {
         "open": 0
       },
-      "settledFrames": 23,
+      "settledFrames": 26,
       "canvas": {
         "width": 1072,
         "height": 900
       },
-      "pngSha256": "c59cdee03a16b5738a6133f6cefa2c52febbeab9d99a6b3db9dc1a1060433e49"
+      "sha256": "85d3af797d50f8dff13bf3f20f5fb41d265f45e4215fca3256634d636c276e4f"
     },
     "after": {
       "file": "soda-can-desktop-after-rest.png",
@@ -1025,17 +1788,20 @@
         "width": 1072,
         "height": 900
       },
-      "pngSha256": "c59cdee03a16b5738a6133f6cefa2c52febbeab9d99a6b3db9dc1a1060433e49"
+      "sha256": "85d3af797d50f8dff13bf3f20f5fb41d265f45e4215fca3256634d636c276e4f"
     },
     "differentPixels": 0,
     "pixels": 964800,
     "rmsRGB": 0,
     "maxChannelDifference": 0,
     "diff": "soda-can-desktop-diff-rest.png",
-    "preview": null
+    "equality": "pixel-identical"
   },
   {
-    "captureVersion": 2,
+    "captureVersion": 3,
+    "frozenMain": "acaebd19dc3d95ed74d0f4176a52e5b865f75020",
+    "candidateSource": "31054ebe3bb7be9c8112db5061399896b806e1b1",
+    "gpuCompletion": "WebGL gl.finish() immediately before capture",
     "id": "soda-can",
     "device": "desktop",
     "pose": "tap",
@@ -1047,12 +1813,12 @@
       "controls": {
         "open": 0.75
       },
-      "settledFrames": 22,
+      "settledFrames": 20,
       "canvas": {
         "width": 1072,
         "height": 900
       },
-      "pngSha256": "d8d55c753afab6e6f424e8e9d7658bfc1a697a48efd81b458a617ace8a82e153"
+      "sha256": "bb9b6ef2d188605731874ffc251613dae1c8748ed9583fd511cf710e804dbba7"
     },
     "after": {
       "file": "soda-can-desktop-after-tap.png",
@@ -1062,12 +1828,12 @@
       "controls": {
         "open": 0.75
       },
-      "settledFrames": 22,
+      "settledFrames": 23,
       "canvas": {
         "width": 1072,
         "height": 900
       },
-      "pngSha256": "d8d55c753afab6e6f424e8e9d7658bfc1a697a48efd81b458a617ace8a82e153"
+      "sha256": "bb9b6ef2d188605731874ffc251613dae1c8748ed9583fd511cf710e804dbba7"
     },
     "differentPixels": 0,
     "pixels": 964800,
@@ -1075,10 +1841,13 @@
     "maxChannelDifference": 0,
     "diff": "soda-can-desktop-diff-tap.png",
     "tapChangedPixels": 4664,
-    "preview": null
+    "equality": "pixel-identical"
   },
   {
-    "captureVersion": 2,
+    "captureVersion": 3,
+    "frozenMain": "acaebd19dc3d95ed74d0f4176a52e5b865f75020",
+    "candidateSource": "31054ebe3bb7be9c8112db5061399896b806e1b1",
+    "gpuCompletion": "WebGL gl.finish() immediately before capture",
     "id": "water-bottle",
     "device": "phone-mid",
     "pose": "rest",
@@ -1090,12 +1859,12 @@
       "controls": {
         "pour": 0
       },
-      "settledFrames": 22,
+      "settledFrames": 19,
       "canvas": {
         "width": 1170,
         "height": 1935
       },
-      "pngSha256": "11e53cc52da9c7ff06d8760a11cd73efe45330a7fa1451153353f25b49cae638"
+      "sha256": "49416c0a31ae2f2f1dce2bb470a00926b8580e7a52d69cbd3192a3c3809e7ec7"
     },
     "after": {
       "file": "water-bottle-phone-mid-after-rest.png",
@@ -1105,22 +1874,25 @@
       "controls": {
         "pour": 0
       },
-      "settledFrames": 23,
+      "settledFrames": 20,
       "canvas": {
         "width": 1170,
         "height": 1935
       },
-      "pngSha256": "11e53cc52da9c7ff06d8760a11cd73efe45330a7fa1451153353f25b49cae638"
+      "sha256": "49416c0a31ae2f2f1dce2bb470a00926b8580e7a52d69cbd3192a3c3809e7ec7"
     },
     "differentPixels": 0,
     "pixels": 251550,
     "rmsRGB": 0,
     "maxChannelDifference": 0,
     "diff": "water-bottle-phone-mid-diff-rest.png",
-    "preview": null
+    "equality": "pixel-identical"
   },
   {
-    "captureVersion": 2,
+    "captureVersion": 3,
+    "frozenMain": "acaebd19dc3d95ed74d0f4176a52e5b865f75020",
+    "candidateSource": "31054ebe3bb7be9c8112db5061399896b806e1b1",
+    "gpuCompletion": "WebGL gl.finish() immediately before capture",
     "id": "water-bottle",
     "device": "phone-mid",
     "pose": "tap",
@@ -1132,12 +1904,12 @@
       "controls": {
         "pour": 0.7777777777777778
       },
-      "settledFrames": 21,
+      "settledFrames": 20,
       "canvas": {
         "width": 1170,
         "height": 1935
       },
-      "pngSha256": "125fb24932f545aa4d25fca16d615c9e4ffaa114fd07d06c4f8f0c606afff9b6"
+      "sha256": "b5e4dbf71d130267fa1bd489a3ae08b8969370f9a492cfb433eadbb367dde6fd"
     },
     "after": {
       "file": "water-bottle-phone-mid-after-tap.png",
@@ -1152,7 +1924,7 @@
         "width": 1170,
         "height": 1935
       },
-      "pngSha256": "125fb24932f545aa4d25fca16d615c9e4ffaa114fd07d06c4f8f0c606afff9b6"
+      "sha256": "b5e4dbf71d130267fa1bd489a3ae08b8969370f9a492cfb433eadbb367dde6fd"
     },
     "differentPixels": 0,
     "pixels": 251550,
@@ -1160,10 +1932,13 @@
     "maxChannelDifference": 0,
     "diff": "water-bottle-phone-mid-diff-tap.png",
     "tapChangedPixels": 21769,
-    "preview": null
+    "equality": "pixel-identical"
   },
   {
-    "captureVersion": 2,
+    "captureVersion": 3,
+    "frozenMain": "acaebd19dc3d95ed74d0f4176a52e5b865f75020",
+    "candidateSource": "31054ebe3bb7be9c8112db5061399896b806e1b1",
+    "gpuCompletion": "WebGL gl.finish() immediately before capture",
     "id": "sunglasses",
     "device": "phone-mid",
     "pose": "rest",
@@ -1180,7 +1955,7 @@
         "width": 1170,
         "height": 1935
       },
-      "pngSha256": "7f78c411126388b259570ead815f2c1edea028f5eaa68ce915196ea6523bf889"
+      "sha256": "b364fec79dd0880cd9bbea83027ebfd16c7c52b1acb7b7415724883ef9e70a4e"
     },
     "after": {
       "file": "sunglasses-phone-mid-after-rest.png",
@@ -1190,22 +1965,25 @@
       "controls": {
         "flip": 0
       },
-      "settledFrames": 23,
+      "settledFrames": 20,
       "canvas": {
         "width": 1170,
         "height": 1935
       },
-      "pngSha256": "7f78c411126388b259570ead815f2c1edea028f5eaa68ce915196ea6523bf889"
+      "sha256": "b364fec79dd0880cd9bbea83027ebfd16c7c52b1acb7b7415724883ef9e70a4e"
     },
     "differentPixels": 0,
     "pixels": 251550,
     "rmsRGB": 0,
     "maxChannelDifference": 0,
     "diff": "sunglasses-phone-mid-diff-rest.png",
-    "preview": null
+    "equality": "pixel-identical"
   },
   {
-    "captureVersion": 2,
+    "captureVersion": 3,
+    "frozenMain": "acaebd19dc3d95ed74d0f4176a52e5b865f75020",
+    "candidateSource": "31054ebe3bb7be9c8112db5061399896b806e1b1",
+    "gpuCompletion": "WebGL gl.finish() immediately before capture",
     "id": "sunglasses",
     "device": "phone-mid",
     "pose": "tap",
@@ -1217,12 +1995,12 @@
       "controls": {
         "flip": 0.7142857142857143
       },
-      "settledFrames": 23,
+      "settledFrames": 20,
       "canvas": {
         "width": 1170,
         "height": 1935
       },
-      "pngSha256": "756e999c56be00a282b05c88f7b2ee24f243869e35c614b157d5cf788aa8230c"
+      "sha256": "a00da406722c60bf8f0bb303864e6770c985d65e1fb9f4d06cb95760526b4925"
     },
     "after": {
       "file": "sunglasses-phone-mid-after-tap.png",
@@ -1237,7 +2015,7 @@
         "width": 1170,
         "height": 1935
       },
-      "pngSha256": "756e999c56be00a282b05c88f7b2ee24f243869e35c614b157d5cf788aa8230c"
+      "sha256": "a00da406722c60bf8f0bb303864e6770c985d65e1fb9f4d06cb95760526b4925"
     },
     "differentPixels": 0,
     "pixels": 251550,
@@ -1245,10 +2023,13 @@
     "maxChannelDifference": 0,
     "diff": "sunglasses-phone-mid-diff-tap.png",
     "tapChangedPixels": 37871,
-    "preview": null
+    "equality": "pixel-identical"
   },
   {
-    "captureVersion": 2,
+    "captureVersion": 3,
+    "frozenMain": "acaebd19dc3d95ed74d0f4176a52e5b865f75020",
+    "candidateSource": "31054ebe3bb7be9c8112db5061399896b806e1b1",
+    "gpuCompletion": "WebGL gl.finish() immediately before capture",
     "id": "baseball-cap",
     "device": "phone-mid",
     "pose": "rest",
@@ -1260,12 +2041,12 @@
       "controls": {
         "toss": 0
       },
-      "settledFrames": 22,
+      "settledFrames": 20,
       "canvas": {
         "width": 1170,
         "height": 1935
       },
-      "pngSha256": "ac2de4e02c274610234e81a53dbe92da300149bd17aa79e3c375e5d8bb7d93ba"
+      "sha256": "33cec2bd1eac2d7cc208afb9650b8633067355fc6f755733e976eaae4548d3e4"
     },
     "after": {
       "file": "baseball-cap-phone-mid-after-rest.png",
@@ -1275,22 +2056,25 @@
       "controls": {
         "toss": 0
       },
-      "settledFrames": 23,
+      "settledFrames": 19,
       "canvas": {
         "width": 1170,
         "height": 1935
       },
-      "pngSha256": "ac2de4e02c274610234e81a53dbe92da300149bd17aa79e3c375e5d8bb7d93ba"
+      "sha256": "33cec2bd1eac2d7cc208afb9650b8633067355fc6f755733e976eaae4548d3e4"
     },
     "differentPixels": 0,
     "pixels": 251550,
     "rmsRGB": 0,
     "maxChannelDifference": 0,
     "diff": "baseball-cap-phone-mid-diff-rest.png",
-    "preview": null
+    "equality": "pixel-identical"
   },
   {
-    "captureVersion": 2,
+    "captureVersion": 3,
+    "frozenMain": "acaebd19dc3d95ed74d0f4176a52e5b865f75020",
+    "candidateSource": "31054ebe3bb7be9c8112db5061399896b806e1b1",
+    "gpuCompletion": "WebGL gl.finish() immediately before capture",
     "id": "baseball-cap",
     "device": "phone-mid",
     "pose": "tap",
@@ -1302,12 +2086,12 @@
       "controls": {
         "toss": 0.6666666666666667
       },
-      "settledFrames": 22,
+      "settledFrames": 20,
       "canvas": {
         "width": 1170,
         "height": 1935
       },
-      "pngSha256": "0ac9a5be5cfb128ac3a8b788dea78637a46235d520eb1e49507d92d2f075fde0"
+      "sha256": "8a98e1619f08b3fd3b7a45efda5f8f62acdf9894ca18002ff0505481490acc0e"
     },
     "after": {
       "file": "baseball-cap-phone-mid-after-tap.png",
@@ -1317,12 +2101,12 @@
       "controls": {
         "toss": 0.6666666666666667
       },
-      "settledFrames": 23,
+      "settledFrames": 20,
       "canvas": {
         "width": 1170,
         "height": 1935
       },
-      "pngSha256": "0ac9a5be5cfb128ac3a8b788dea78637a46235d520eb1e49507d92d2f075fde0"
+      "sha256": "8a98e1619f08b3fd3b7a45efda5f8f62acdf9894ca18002ff0505481490acc0e"
     },
     "differentPixels": 0,
     "pixels": 251550,
@@ -1330,10 +2114,13 @@
     "maxChannelDifference": 0,
     "diff": "baseball-cap-phone-mid-diff-tap.png",
     "tapChangedPixels": 20452,
-    "preview": null
+    "equality": "pixel-identical"
   },
   {
-    "captureVersion": 2,
+    "captureVersion": 3,
+    "frozenMain": "acaebd19dc3d95ed74d0f4176a52e5b865f75020",
+    "candidateSource": "31054ebe3bb7be9c8112db5061399896b806e1b1",
+    "gpuCompletion": "WebGL gl.finish() immediately before capture",
     "id": "fountain-pen",
     "device": "phone-mid",
     "pose": "rest",
@@ -1345,12 +2132,12 @@
       "controls": {
         "write": 0
       },
-      "settledFrames": 22,
+      "settledFrames": 21,
       "canvas": {
         "width": 1170,
         "height": 1935
       },
-      "pngSha256": "2e97713b4c5723d32aa032183b7bb2b5f0ae6b301ba67e3b35e8e84d50c6415a"
+      "sha256": "79cb76e6c583e14f35713ec57bcc3b371d7afe7205ecd214c4e6eef2982378a4"
     },
     "after": {
       "file": "fountain-pen-phone-mid-after-rest.png",
@@ -1360,22 +2147,25 @@
       "controls": {
         "write": 0
       },
-      "settledFrames": 23,
+      "settledFrames": 26,
       "canvas": {
         "width": 1170,
         "height": 1935
       },
-      "pngSha256": "2e97713b4c5723d32aa032183b7bb2b5f0ae6b301ba67e3b35e8e84d50c6415a"
+      "sha256": "79cb76e6c583e14f35713ec57bcc3b371d7afe7205ecd214c4e6eef2982378a4"
     },
     "differentPixels": 0,
     "pixels": 251550,
     "rmsRGB": 0,
     "maxChannelDifference": 0,
     "diff": "fountain-pen-phone-mid-diff-rest.png",
-    "preview": null
+    "equality": "pixel-identical"
   },
   {
-    "captureVersion": 2,
+    "captureVersion": 3,
+    "frozenMain": "acaebd19dc3d95ed74d0f4176a52e5b865f75020",
+    "candidateSource": "31054ebe3bb7be9c8112db5061399896b806e1b1",
+    "gpuCompletion": "WebGL gl.finish() immediately before capture",
     "id": "fountain-pen",
     "device": "phone-mid",
     "pose": "tap",
@@ -1387,12 +2177,12 @@
       "controls": {
         "write": 0.75
       },
-      "settledFrames": 24,
+      "settledFrames": 21,
       "canvas": {
         "width": 1170,
         "height": 1935
       },
-      "pngSha256": "bdc3f39a220064db09f61fd5442e652a5519d68f9646fa810e6f24c71f2b1c13"
+      "sha256": "d6493d48858d784e4bfd4ea69d8b5f5dea5c96e1a164417c55a7b26c15bdff6a"
     },
     "after": {
       "file": "fountain-pen-phone-mid-after-tap.png",
@@ -1402,12 +2192,12 @@
       "controls": {
         "write": 0.75
       },
-      "settledFrames": 23,
+      "settledFrames": 21,
       "canvas": {
         "width": 1170,
         "height": 1935
       },
-      "pngSha256": "bdc3f39a220064db09f61fd5442e652a5519d68f9646fa810e6f24c71f2b1c13"
+      "sha256": "d6493d48858d784e4bfd4ea69d8b5f5dea5c96e1a164417c55a7b26c15bdff6a"
     },
     "differentPixels": 0,
     "pixels": 251550,
@@ -1415,10 +2205,13 @@
     "maxChannelDifference": 0,
     "diff": "fountain-pen-phone-mid-diff-tap.png",
     "tapChangedPixels": 4932,
-    "preview": null
+    "equality": "pixel-identical"
   },
   {
-    "captureVersion": 2,
+    "captureVersion": 3,
+    "frozenMain": "acaebd19dc3d95ed74d0f4176a52e5b865f75020",
+    "candidateSource": "31054ebe3bb7be9c8112db5061399896b806e1b1",
+    "gpuCompletion": "WebGL gl.finish() immediately before capture",
     "id": "soda-can",
     "device": "phone-mid",
     "pose": "rest",
@@ -1430,12 +2223,12 @@
       "controls": {
         "open": 0
       },
-      "settledFrames": 24,
+      "settledFrames": 19,
       "canvas": {
         "width": 1170,
         "height": 1935
       },
-      "pngSha256": "6397ef89acf046591e26cc80562903da023bff9932a1f15ce54a0df1ab0b0e67"
+      "sha256": "862e6e640ccd5514cd52d3895a083eac080cea2ce7d7fa5a871c8a2a3c99fbc7"
     },
     "after": {
       "file": "soda-can-phone-mid-after-rest.png",
@@ -1445,22 +2238,25 @@
       "controls": {
         "open": 0
       },
-      "settledFrames": 24,
+      "settledFrames": 19,
       "canvas": {
         "width": 1170,
         "height": 1935
       },
-      "pngSha256": "6397ef89acf046591e26cc80562903da023bff9932a1f15ce54a0df1ab0b0e67"
+      "sha256": "862e6e640ccd5514cd52d3895a083eac080cea2ce7d7fa5a871c8a2a3c99fbc7"
     },
     "differentPixels": 0,
     "pixels": 251550,
     "rmsRGB": 0,
     "maxChannelDifference": 0,
     "diff": "soda-can-phone-mid-diff-rest.png",
-    "preview": null
+    "equality": "pixel-identical"
   },
   {
-    "captureVersion": 2,
+    "captureVersion": 3,
+    "frozenMain": "acaebd19dc3d95ed74d0f4176a52e5b865f75020",
+    "candidateSource": "31054ebe3bb7be9c8112db5061399896b806e1b1",
+    "gpuCompletion": "WebGL gl.finish() immediately before capture",
     "id": "soda-can",
     "device": "phone-mid",
     "pose": "tap",
@@ -1472,12 +2268,12 @@
       "controls": {
         "open": 0.75
       },
-      "settledFrames": 23,
+      "settledFrames": 22,
       "canvas": {
         "width": 1170,
         "height": 1935
       },
-      "pngSha256": "14c3071ce7607fe82ad3641ebe13c19c5da3f507487bd6bf9b6a56ff50fe9b65"
+      "sha256": "02963b10f4670577eeaf888968ae134358edc9aaaf83905607a9b55a1c4ee781"
     },
     "after": {
       "file": "soda-can-phone-mid-after-tap.png",
@@ -1487,12 +2283,12 @@
       "controls": {
         "open": 0.75
       },
-      "settledFrames": 23,
+      "settledFrames": 19,
       "canvas": {
         "width": 1170,
         "height": 1935
       },
-      "pngSha256": "14c3071ce7607fe82ad3641ebe13c19c5da3f507487bd6bf9b6a56ff50fe9b65"
+      "sha256": "02963b10f4670577eeaf888968ae134358edc9aaaf83905607a9b55a1c4ee781"
     },
     "differentPixels": 0,
     "pixels": 251550,
@@ -1500,176 +2296,6 @@
     "maxChannelDifference": 0,
     "diff": "soda-can-phone-mid-diff-tap.png",
     "tapChangedPixels": 913,
-    "preview": null
-  },
-  {
-    "captureVersion": 2,
-    "id": "celestial-globe",
-    "device": "phone",
-    "pose": "rest",
-    "before": {
-      "file": "celestial-globe-phone-before-rest.png",
-      "id": "celestial-globe",
-      "splats": 77400,
-      "title": "Splashery · splats you can play with",
-      "controls": {
-        "tap": 0
-      },
-      "settledFrames": 28,
-      "canvas": {
-        "width": 585,
-        "height": 967
-      },
-      "pngSha256": "021b39401ae2f1931eecaf39fa25e773107ac1548307bf6b21a9a7571fe2f9bc"
-    },
-    "after": {
-      "file": "celestial-globe-phone-after-rest.png",
-      "id": "celestial-globe",
-      "splats": 77400,
-      "title": "Splashery · splats you can play with",
-      "controls": {
-        "tap": 0
-      },
-      "settledFrames": 28,
-      "canvas": {
-        "width": 585,
-        "height": 967
-      },
-      "pngSha256": "021b39401ae2f1931eecaf39fa25e773107ac1548307bf6b21a9a7571fe2f9bc"
-    },
-    "differentPixels": 0,
-    "pixels": 251550,
-    "rmsRGB": 0,
-    "maxChannelDifference": 0,
-    "diff": "celestial-globe-phone-diff-rest.png",
-    "preview": "celestial-globe-phone-before-rest.png"
-  },
-  {
-    "captureVersion": 2,
-    "id": "celestial-globe",
-    "device": "phone",
-    "pose": "tap",
-    "before": {
-      "file": "celestial-globe-phone-before-tap.png",
-      "id": "celestial-globe",
-      "splats": 77400,
-      "title": "Splashery · splats you can play with",
-      "controls": {
-        "tap": 0.7222222222222222
-      },
-      "settledFrames": 27,
-      "canvas": {
-        "width": 585,
-        "height": 967
-      },
-      "pngSha256": "f26af5b65dbf447455bc6103b2f3510eec549221ba6f8c30f123027272a6b708"
-    },
-    "after": {
-      "file": "celestial-globe-phone-after-tap.png",
-      "id": "celestial-globe",
-      "splats": 77400,
-      "title": "Splashery · splats you can play with",
-      "controls": {
-        "tap": 0.7222222222222222
-      },
-      "settledFrames": 29,
-      "canvas": {
-        "width": 585,
-        "height": 967
-      },
-      "pngSha256": "f26af5b65dbf447455bc6103b2f3510eec549221ba6f8c30f123027272a6b708"
-    },
-    "differentPixels": 0,
-    "pixels": 251550,
-    "rmsRGB": 0,
-    "maxChannelDifference": 0,
-    "diff": "celestial-globe-phone-diff-tap.png",
-    "tapChangedPixels": 12701,
-    "preview": null
-  },
-  {
-    "captureVersion": 2,
-    "id": "celestial-globe",
-    "device": "desktop",
-    "pose": "rest",
-    "before": {
-      "file": "celestial-globe-desktop-before-rest.png",
-      "id": "celestial-globe",
-      "splats": 258000,
-      "title": "Splashery · splats you can play with",
-      "controls": {
-        "tap": 0
-      },
-      "settledFrames": 23,
-      "canvas": {
-        "width": 1072,
-        "height": 900
-      },
-      "pngSha256": "75ad5290909be88db44e9b014a95b648b65cf41a1a19f3fcc01866b1611597ee"
-    },
-    "after": {
-      "file": "celestial-globe-desktop-after-rest.png",
-      "id": "celestial-globe",
-      "splats": 258000,
-      "title": "Splashery · splats you can play with",
-      "controls": {
-        "tap": 0
-      },
-      "settledFrames": 24,
-      "canvas": {
-        "width": 1072,
-        "height": 900
-      },
-      "pngSha256": "75ad5290909be88db44e9b014a95b648b65cf41a1a19f3fcc01866b1611597ee"
-    },
-    "differentPixels": 0,
-    "pixels": 964800,
-    "rmsRGB": 0,
-    "maxChannelDifference": 0,
-    "diff": "celestial-globe-desktop-diff-rest.png",
-    "preview": null
-  },
-  {
-    "captureVersion": 2,
-    "id": "celestial-globe",
-    "device": "desktop",
-    "pose": "tap",
-    "before": {
-      "file": "celestial-globe-desktop-before-tap.png",
-      "id": "celestial-globe",
-      "splats": 258000,
-      "title": "Splashery · splats you can play with",
-      "controls": {
-        "tap": 0.7222222222222222
-      },
-      "settledFrames": 25,
-      "canvas": {
-        "width": 1072,
-        "height": 900
-      },
-      "pngSha256": "9aedfb686375620cf2fe706da0dfbe72922decf46edd84795253dd3c117e1406"
-    },
-    "after": {
-      "file": "celestial-globe-desktop-after-tap.png",
-      "id": "celestial-globe",
-      "splats": 258000,
-      "title": "Splashery · splats you can play with",
-      "controls": {
-        "tap": 0.7222222222222222
-      },
-      "settledFrames": 23,
-      "canvas": {
-        "width": 1072,
-        "height": 900
-      },
-      "pngSha256": "9aedfb686375620cf2fe706da0dfbe72922decf46edd84795253dd3c117e1406"
-    },
-    "differentPixels": 0,
-    "pixels": 964800,
-    "rmsRGB": 0,
-    "maxChannelDifference": 0,
-    "diff": "celestial-globe-desktop-diff-tap.png",
-    "tapChangedPixels": 66104,
-    "preview": null
+    "equality": "pixel-identical"
   }
 ]

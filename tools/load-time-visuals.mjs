@@ -50,6 +50,35 @@ const browser = await chromium.launch({
 });
 const recordsFile = path.join(raw, "image-diffs.json");
 const records = fs.existsSync(recordsFile) ? JSON.parse(fs.readFileSync(recordsFile)) : [];
+function watchdog(label) {
+  const timer = setTimeout(
+    () => {
+      console.error(`Capture stalled at ${label}; completed comparisons can resume.`);
+      const rows = execFileSync("ps", ["-eo", "pid=,ppid="], { encoding: "utf8" })
+        .trim()
+        .split("\n")
+        .map((line) => line.trim().split(/\s+/).map(Number));
+      const owned = new Set([process.pid]);
+      for (;;) {
+        const children = rows.filter(([, parent]) => owned.has(parent)).map(([pid]) => pid);
+        if (children.every((pid) => owned.has(pid))) break;
+        for (const pid of children) owned.add(pid);
+      }
+      for (const pid of [...owned].reverse()) {
+        if (pid === process.pid) continue;
+        try {
+          process.kill(pid, "SIGKILL");
+        } catch (error) {
+          if (error.code !== "ESRCH") throw error;
+        }
+      }
+      process.exit(2);
+    },
+    Number(option("cell-timeout", "300000")),
+  );
+  timer.unref();
+  return () => clearTimeout(timer);
+}
 async function shot(id, device, phase, pose, halfBudget = false) {
   const def = TOYS.find((t) => t.id === id);
   const phone = device.startsWith("phone");
@@ -72,6 +101,7 @@ async function shot(id, device, phase, pose, halfBudget = false) {
   const base = phase === "before" ? "http://127.0.0.1:4174" : "http://127.0.0.1:4173";
   await page.goto(
     `${base}/?renderer=webgl2&profile=${device === "phone" ? "weak" : device === "phone-mid" ? "mid" : "high"}&adapt=off&labs=1#s=j.${Buffer.from(JSON.stringify(scene)).toString("base64url")}`,
+    { timeout: 180000 },
   );
   await page.waitForFunction(
     (id) => document.body.dataset.ready === "true" && window.__splashery.player.toyInfo?.id === id,
@@ -136,7 +166,9 @@ async function shot(id, device, phase, pose, halfBudget = false) {
     gl.finish();
   });
   const file = `${id}-${device}-${halfBudget ? "lossy-half-budget" : phase}-${pose}.png`;
-  await page.locator("#stage").screenshot({ path: path.join(out, file), scale: "css" });
+  const clip = await page.locator("#stage").boundingBox();
+  if (!clip) throw new Error("The frozen stage has no capture bounds");
+  await page.screenshot({ path: path.join(out, file), clip, scale: "css", timeout: 180000 });
   const info = await page.evaluate(() => ({
     id: window.__splashery.player.toyInfo.id,
     splats: window.__splashery.player.toyInfo.splats,
@@ -200,6 +232,7 @@ try {
         )
           continue;
         if (records.some((r) => r.id === id && r.device === device && r.pose === pose)) continue;
+        const completed = watchdog(`${id}:${device}:${pose}`);
         const before = await shot(id, device, "before", pose);
         const after = await shot(id, device, "after", pose);
         const delta = diff(before.file, after.file, `${id}-${device}-diff-${pose}.png`);
@@ -212,11 +245,13 @@ try {
         records.push({ captureVersion: 3, ...source, id, device, pose, before, after, ...delta });
         console.log(`${id} ${device} ${pose}: ${delta.differentPixels} changed pixels`);
         fs.writeFileSync(recordsFile, JSON.stringify(records, null, 2) + "\n");
+        completed();
       }
   const lossy = [];
   if (pilot) process.exitCode = 0;
   else {
     for (const id of ["fountain-pen", "sunglasses"]) {
+      const completed = watchdog(`${id}:phone:lossy-option`);
       const before = await shot(id, "phone", "after", "rest");
       const after = await shot(id, "phone", "after", "rest", true);
       lossy.push({
@@ -228,6 +263,7 @@ try {
         after,
         ...diff(before.file, after.file, `${id}-phone-lossy-diff.png`),
       });
+      completed();
     }
     fs.writeFileSync(path.join(raw, "lossy-options.json"), JSON.stringify(lossy, null, 2) + "\n");
   }
