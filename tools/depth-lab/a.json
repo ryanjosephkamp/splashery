@@ -1,0 +1,2824 @@
+[
+  {
+    "id": "a-gray-0",
+    "category": "A",
+    "file": "a/a-gray-0.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "solid",
+      "hueDeg": 0,
+      "saturation": 0,
+      "value": 0
+    },
+    "controls": "Sweep gray; only value varies. All other variables in this record, the 1024-pixel square, opaque sRGB encoding, PNG format, and seed 7 stay fixed.",
+    "expect": "No geometric depth cue: a constant plane is the null control; color or noise alone must not create confident relief."
+  },
+  {
+    "id": "a-gray-32",
+    "category": "A",
+    "file": "a/a-gray-32.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "solid",
+      "hueDeg": 0,
+      "saturation": 0,
+      "value": 32
+    },
+    "controls": "Sweep gray; only value varies. All other variables in this record, the 1024-pixel square, opaque sRGB encoding, PNG format, and seed 7 stay fixed.",
+    "expect": "No geometric depth cue: a constant plane is the null control; color or noise alone must not create confident relief."
+  },
+  {
+    "id": "a-gray-64",
+    "category": "A",
+    "file": "a/a-gray-64.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "solid",
+      "hueDeg": 0,
+      "saturation": 0,
+      "value": 64
+    },
+    "controls": "Sweep gray; only value varies. All other variables in this record, the 1024-pixel square, opaque sRGB encoding, PNG format, and seed 7 stay fixed.",
+    "expect": "No geometric depth cue: a constant plane is the null control; color or noise alone must not create confident relief."
+  },
+  {
+    "id": "a-gray-96",
+    "category": "A",
+    "file": "a/a-gray-96.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "solid",
+      "hueDeg": 0,
+      "saturation": 0,
+      "value": 96
+    },
+    "controls": "Sweep gray; only value varies. All other variables in this record, the 1024-pixel square, opaque sRGB encoding, PNG format, and seed 7 stay fixed.",
+    "expect": "No geometric depth cue: a constant plane is the null control; color or noise alone must not create confident relief."
+  },
+  {
+    "id": "a-gray-128",
+    "category": "A",
+    "file": "a/a-gray-128.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "solid",
+      "hueDeg": 0,
+      "saturation": 0,
+      "value": 128
+    },
+    "controls": "Sweep gray; only value varies. All other variables in this record, the 1024-pixel square, opaque sRGB encoding, PNG format, and seed 7 stay fixed.",
+    "expect": "No geometric depth cue: a constant plane is the null control; color or noise alone must not create confident relief."
+  },
+  {
+    "id": "a-gray-160",
+    "category": "A",
+    "file": "a/a-gray-160.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "solid",
+      "hueDeg": 0,
+      "saturation": 0,
+      "value": 160
+    },
+    "controls": "Sweep gray; only value varies. All other variables in this record, the 1024-pixel square, opaque sRGB encoding, PNG format, and seed 7 stay fixed.",
+    "expect": "No geometric depth cue: a constant plane is the null control; color or noise alone must not create confident relief."
+  },
+  {
+    "id": "a-gray-192",
+    "category": "A",
+    "file": "a/a-gray-192.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "solid",
+      "hueDeg": 0,
+      "saturation": 0,
+      "value": 192
+    },
+    "controls": "Sweep gray; only value varies. All other variables in this record, the 1024-pixel square, opaque sRGB encoding, PNG format, and seed 7 stay fixed.",
+    "expect": "No geometric depth cue: a constant plane is the null control; color or noise alone must not create confident relief."
+  },
+  {
+    "id": "a-gray-224",
+    "category": "A",
+    "file": "a/a-gray-224.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "solid",
+      "hueDeg": 0,
+      "saturation": 0,
+      "value": 224
+    },
+    "controls": "Sweep gray; only value varies. All other variables in this record, the 1024-pixel square, opaque sRGB encoding, PNG format, and seed 7 stay fixed.",
+    "expect": "No geometric depth cue: a constant plane is the null control; color or noise alone must not create confident relief."
+  },
+  {
+    "id": "a-gray-255",
+    "category": "A",
+    "file": "a/a-gray-255.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "solid",
+      "hueDeg": 0,
+      "saturation": 0,
+      "value": 255
+    },
+    "controls": "Sweep gray; only value varies. All other variables in this record, the 1024-pixel square, opaque sRGB encoding, PNG format, and seed 7 stay fixed.",
+    "expect": "No geometric depth cue: a constant plane is the null control; color or noise alone must not create confident relief."
+  },
+  {
+    "id": "a-hue-0",
+    "category": "A",
+    "file": "a/a-hue-0.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "solid",
+      "hueDeg": 0,
+      "saturation": 1,
+      "value": 192
+    },
+    "controls": "Sweep hue; only hueDeg varies. All other variables in this record, the 1024-pixel square, opaque sRGB encoding, PNG format, and seed 7 stay fixed.",
+    "expect": "No geometric depth cue: a constant plane is the null control; color or noise alone must not create confident relief."
+  },
+  {
+    "id": "a-hue-40",
+    "category": "A",
+    "file": "a/a-hue-40.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "solid",
+      "hueDeg": 40,
+      "saturation": 1,
+      "value": 192
+    },
+    "controls": "Sweep hue; only hueDeg varies. All other variables in this record, the 1024-pixel square, opaque sRGB encoding, PNG format, and seed 7 stay fixed.",
+    "expect": "No geometric depth cue: a constant plane is the null control; color or noise alone must not create confident relief."
+  },
+  {
+    "id": "a-hue-80",
+    "category": "A",
+    "file": "a/a-hue-80.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "solid",
+      "hueDeg": 80,
+      "saturation": 1,
+      "value": 192
+    },
+    "controls": "Sweep hue; only hueDeg varies. All other variables in this record, the 1024-pixel square, opaque sRGB encoding, PNG format, and seed 7 stay fixed.",
+    "expect": "No geometric depth cue: a constant plane is the null control; color or noise alone must not create confident relief."
+  },
+  {
+    "id": "a-hue-120",
+    "category": "A",
+    "file": "a/a-hue-120.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "solid",
+      "hueDeg": 120,
+      "saturation": 1,
+      "value": 192
+    },
+    "controls": "Sweep hue; only hueDeg varies. All other variables in this record, the 1024-pixel square, opaque sRGB encoding, PNG format, and seed 7 stay fixed.",
+    "expect": "No geometric depth cue: a constant plane is the null control; color or noise alone must not create confident relief."
+  },
+  {
+    "id": "a-hue-160",
+    "category": "A",
+    "file": "a/a-hue-160.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "solid",
+      "hueDeg": 160,
+      "saturation": 1,
+      "value": 192
+    },
+    "controls": "Sweep hue; only hueDeg varies. All other variables in this record, the 1024-pixel square, opaque sRGB encoding, PNG format, and seed 7 stay fixed.",
+    "expect": "No geometric depth cue: a constant plane is the null control; color or noise alone must not create confident relief."
+  },
+  {
+    "id": "a-hue-200",
+    "category": "A",
+    "file": "a/a-hue-200.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "solid",
+      "hueDeg": 200,
+      "saturation": 1,
+      "value": 192
+    },
+    "controls": "Sweep hue; only hueDeg varies. All other variables in this record, the 1024-pixel square, opaque sRGB encoding, PNG format, and seed 7 stay fixed.",
+    "expect": "No geometric depth cue: a constant plane is the null control; color or noise alone must not create confident relief."
+  },
+  {
+    "id": "a-hue-240",
+    "category": "A",
+    "file": "a/a-hue-240.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "solid",
+      "hueDeg": 240,
+      "saturation": 1,
+      "value": 192
+    },
+    "controls": "Sweep hue; only hueDeg varies. All other variables in this record, the 1024-pixel square, opaque sRGB encoding, PNG format, and seed 7 stay fixed.",
+    "expect": "No geometric depth cue: a constant plane is the null control; color or noise alone must not create confident relief."
+  },
+  {
+    "id": "a-hue-280",
+    "category": "A",
+    "file": "a/a-hue-280.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "solid",
+      "hueDeg": 280,
+      "saturation": 1,
+      "value": 192
+    },
+    "controls": "Sweep hue; only hueDeg varies. All other variables in this record, the 1024-pixel square, opaque sRGB encoding, PNG format, and seed 7 stay fixed.",
+    "expect": "No geometric depth cue: a constant plane is the null control; color or noise alone must not create confident relief."
+  },
+  {
+    "id": "a-hue-320",
+    "category": "A",
+    "file": "a/a-hue-320.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "solid",
+      "hueDeg": 320,
+      "saturation": 1,
+      "value": 192
+    },
+    "controls": "Sweep hue; only hueDeg varies. All other variables in this record, the 1024-pixel square, opaque sRGB encoding, PNG format, and seed 7 stay fixed.",
+    "expect": "No geometric depth cue: a constant plane is the null control; color or noise alone must not create confident relief."
+  },
+  {
+    "id": "a-saturation-0",
+    "category": "A",
+    "file": "a/a-saturation-0.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "solid",
+      "hueDeg": 200,
+      "saturation": 0,
+      "value": 192
+    },
+    "controls": "Sweep saturation; only saturation varies. All other variables in this record, the 1024-pixel square, opaque sRGB encoding, PNG format, and seed 7 stay fixed.",
+    "expect": "No geometric depth cue: a constant plane is the null control; color or noise alone must not create confident relief."
+  },
+  {
+    "id": "a-saturation-0p125",
+    "category": "A",
+    "file": "a/a-saturation-0p125.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "solid",
+      "hueDeg": 200,
+      "saturation": 0.125,
+      "value": 192
+    },
+    "controls": "Sweep saturation; only saturation varies. All other variables in this record, the 1024-pixel square, opaque sRGB encoding, PNG format, and seed 7 stay fixed.",
+    "expect": "No geometric depth cue: a constant plane is the null control; color or noise alone must not create confident relief."
+  },
+  {
+    "id": "a-saturation-0p25",
+    "category": "A",
+    "file": "a/a-saturation-0p25.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "solid",
+      "hueDeg": 200,
+      "saturation": 0.25,
+      "value": 192
+    },
+    "controls": "Sweep saturation; only saturation varies. All other variables in this record, the 1024-pixel square, opaque sRGB encoding, PNG format, and seed 7 stay fixed.",
+    "expect": "No geometric depth cue: a constant plane is the null control; color or noise alone must not create confident relief."
+  },
+  {
+    "id": "a-saturation-0p375",
+    "category": "A",
+    "file": "a/a-saturation-0p375.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "solid",
+      "hueDeg": 200,
+      "saturation": 0.375,
+      "value": 192
+    },
+    "controls": "Sweep saturation; only saturation varies. All other variables in this record, the 1024-pixel square, opaque sRGB encoding, PNG format, and seed 7 stay fixed.",
+    "expect": "No geometric depth cue: a constant plane is the null control; color or noise alone must not create confident relief."
+  },
+  {
+    "id": "a-saturation-0p5",
+    "category": "A",
+    "file": "a/a-saturation-0p5.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "solid",
+      "hueDeg": 200,
+      "saturation": 0.5,
+      "value": 192
+    },
+    "controls": "Sweep saturation; only saturation varies. All other variables in this record, the 1024-pixel square, opaque sRGB encoding, PNG format, and seed 7 stay fixed.",
+    "expect": "No geometric depth cue: a constant plane is the null control; color or noise alone must not create confident relief."
+  },
+  {
+    "id": "a-saturation-0p625",
+    "category": "A",
+    "file": "a/a-saturation-0p625.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "solid",
+      "hueDeg": 200,
+      "saturation": 0.625,
+      "value": 192
+    },
+    "controls": "Sweep saturation; only saturation varies. All other variables in this record, the 1024-pixel square, opaque sRGB encoding, PNG format, and seed 7 stay fixed.",
+    "expect": "No geometric depth cue: a constant plane is the null control; color or noise alone must not create confident relief."
+  },
+  {
+    "id": "a-saturation-0p75",
+    "category": "A",
+    "file": "a/a-saturation-0p75.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "solid",
+      "hueDeg": 200,
+      "saturation": 0.75,
+      "value": 192
+    },
+    "controls": "Sweep saturation; only saturation varies. All other variables in this record, the 1024-pixel square, opaque sRGB encoding, PNG format, and seed 7 stay fixed.",
+    "expect": "No geometric depth cue: a constant plane is the null control; color or noise alone must not create confident relief."
+  },
+  {
+    "id": "a-saturation-0p875",
+    "category": "A",
+    "file": "a/a-saturation-0p875.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "solid",
+      "hueDeg": 200,
+      "saturation": 0.875,
+      "value": 192
+    },
+    "controls": "Sweep saturation; only saturation varies. All other variables in this record, the 1024-pixel square, opaque sRGB encoding, PNG format, and seed 7 stay fixed.",
+    "expect": "No geometric depth cue: a constant plane is the null control; color or noise alone must not create confident relief."
+  },
+  {
+    "id": "a-saturation-1",
+    "category": "A",
+    "file": "a/a-saturation-1.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "solid",
+      "hueDeg": 200,
+      "saturation": 1,
+      "value": 192
+    },
+    "controls": "Sweep saturation; only saturation varies. All other variables in this record, the 1024-pixel square, opaque sRGB encoding, PNG format, and seed 7 stay fixed.",
+    "expect": "No geometric depth cue: a constant plane is the null control; color or noise alone must not create confident relief."
+  },
+  {
+    "id": "a-direction-0",
+    "category": "A",
+    "file": "a/a-direction-0.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "gradient",
+      "shape": "linear",
+      "angleDeg": 0,
+      "span": 192,
+      "midpoint": 127.5,
+      "gamma": 1,
+      "centerX": 0.5,
+      "centerY": 0.5,
+      "radius": 0.5,
+      "noiseAmplitude": 0,
+      "noiseCellPx": 1
+    },
+    "controls": "Sweep direction; only angleDeg varies. All other variables in this record, the 1024-pixel square, opaque sRGB encoding, PNG format, and seed 7 stay fixed.",
+    "expect": "A smooth field has no unique geometry: do not mistake its brightness ramp for known surface depth."
+  },
+  {
+    "id": "a-direction-45",
+    "category": "A",
+    "file": "a/a-direction-45.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "gradient",
+      "shape": "linear",
+      "angleDeg": 45,
+      "span": 192,
+      "midpoint": 127.5,
+      "gamma": 1,
+      "centerX": 0.5,
+      "centerY": 0.5,
+      "radius": 0.5,
+      "noiseAmplitude": 0,
+      "noiseCellPx": 1
+    },
+    "controls": "Sweep direction; only angleDeg varies. All other variables in this record, the 1024-pixel square, opaque sRGB encoding, PNG format, and seed 7 stay fixed.",
+    "expect": "A smooth field has no unique geometry: do not mistake its brightness ramp for known surface depth."
+  },
+  {
+    "id": "a-direction-90",
+    "category": "A",
+    "file": "a/a-direction-90.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "gradient",
+      "shape": "linear",
+      "angleDeg": 90,
+      "span": 192,
+      "midpoint": 127.5,
+      "gamma": 1,
+      "centerX": 0.5,
+      "centerY": 0.5,
+      "radius": 0.5,
+      "noiseAmplitude": 0,
+      "noiseCellPx": 1
+    },
+    "controls": "Sweep direction; only angleDeg varies. All other variables in this record, the 1024-pixel square, opaque sRGB encoding, PNG format, and seed 7 stay fixed.",
+    "expect": "A smooth field has no unique geometry: do not mistake its brightness ramp for known surface depth."
+  },
+  {
+    "id": "a-direction-135",
+    "category": "A",
+    "file": "a/a-direction-135.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "gradient",
+      "shape": "linear",
+      "angleDeg": 135,
+      "span": 192,
+      "midpoint": 127.5,
+      "gamma": 1,
+      "centerX": 0.5,
+      "centerY": 0.5,
+      "radius": 0.5,
+      "noiseAmplitude": 0,
+      "noiseCellPx": 1
+    },
+    "controls": "Sweep direction; only angleDeg varies. All other variables in this record, the 1024-pixel square, opaque sRGB encoding, PNG format, and seed 7 stay fixed.",
+    "expect": "A smooth field has no unique geometry: do not mistake its brightness ramp for known surface depth."
+  },
+  {
+    "id": "a-direction-180",
+    "category": "A",
+    "file": "a/a-direction-180.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "gradient",
+      "shape": "linear",
+      "angleDeg": 180,
+      "span": 192,
+      "midpoint": 127.5,
+      "gamma": 1,
+      "centerX": 0.5,
+      "centerY": 0.5,
+      "radius": 0.5,
+      "noiseAmplitude": 0,
+      "noiseCellPx": 1
+    },
+    "controls": "Sweep direction; only angleDeg varies. All other variables in this record, the 1024-pixel square, opaque sRGB encoding, PNG format, and seed 7 stay fixed.",
+    "expect": "A smooth field has no unique geometry: do not mistake its brightness ramp for known surface depth."
+  },
+  {
+    "id": "a-direction-225",
+    "category": "A",
+    "file": "a/a-direction-225.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "gradient",
+      "shape": "linear",
+      "angleDeg": 225,
+      "span": 192,
+      "midpoint": 127.5,
+      "gamma": 1,
+      "centerX": 0.5,
+      "centerY": 0.5,
+      "radius": 0.5,
+      "noiseAmplitude": 0,
+      "noiseCellPx": 1
+    },
+    "controls": "Sweep direction; only angleDeg varies. All other variables in this record, the 1024-pixel square, opaque sRGB encoding, PNG format, and seed 7 stay fixed.",
+    "expect": "A smooth field has no unique geometry: do not mistake its brightness ramp for known surface depth."
+  },
+  {
+    "id": "a-direction-270",
+    "category": "A",
+    "file": "a/a-direction-270.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "gradient",
+      "shape": "linear",
+      "angleDeg": 270,
+      "span": 192,
+      "midpoint": 127.5,
+      "gamma": 1,
+      "centerX": 0.5,
+      "centerY": 0.5,
+      "radius": 0.5,
+      "noiseAmplitude": 0,
+      "noiseCellPx": 1
+    },
+    "controls": "Sweep direction; only angleDeg varies. All other variables in this record, the 1024-pixel square, opaque sRGB encoding, PNG format, and seed 7 stay fixed.",
+    "expect": "A smooth field has no unique geometry: do not mistake its brightness ramp for known surface depth."
+  },
+  {
+    "id": "a-direction-315",
+    "category": "A",
+    "file": "a/a-direction-315.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "gradient",
+      "shape": "linear",
+      "angleDeg": 315,
+      "span": 192,
+      "midpoint": 127.5,
+      "gamma": 1,
+      "centerX": 0.5,
+      "centerY": 0.5,
+      "radius": 0.5,
+      "noiseAmplitude": 0,
+      "noiseCellPx": 1
+    },
+    "controls": "Sweep direction; only angleDeg varies. All other variables in this record, the 1024-pixel square, opaque sRGB encoding, PNG format, and seed 7 stay fixed.",
+    "expect": "A smooth field has no unique geometry: do not mistake its brightness ramp for known surface depth."
+  },
+  {
+    "id": "a-span-0",
+    "category": "A",
+    "file": "a/a-span-0.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "gradient",
+      "shape": "linear",
+      "angleDeg": 0,
+      "span": 0,
+      "midpoint": 127.5,
+      "gamma": 1,
+      "centerX": 0.5,
+      "centerY": 0.5,
+      "radius": 0.5,
+      "noiseAmplitude": 0,
+      "noiseCellPx": 1
+    },
+    "controls": "Sweep span; only span varies. All other variables in this record, the 1024-pixel square, opaque sRGB encoding, PNG format, and seed 7 stay fixed.",
+    "expect": "A smooth field has no unique geometry: do not mistake its brightness ramp for known surface depth."
+  },
+  {
+    "id": "a-span-24",
+    "category": "A",
+    "file": "a/a-span-24.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "gradient",
+      "shape": "linear",
+      "angleDeg": 0,
+      "span": 24,
+      "midpoint": 127.5,
+      "gamma": 1,
+      "centerX": 0.5,
+      "centerY": 0.5,
+      "radius": 0.5,
+      "noiseAmplitude": 0,
+      "noiseCellPx": 1
+    },
+    "controls": "Sweep span; only span varies. All other variables in this record, the 1024-pixel square, opaque sRGB encoding, PNG format, and seed 7 stay fixed.",
+    "expect": "A smooth field has no unique geometry: do not mistake its brightness ramp for known surface depth."
+  },
+  {
+    "id": "a-span-48",
+    "category": "A",
+    "file": "a/a-span-48.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "gradient",
+      "shape": "linear",
+      "angleDeg": 0,
+      "span": 48,
+      "midpoint": 127.5,
+      "gamma": 1,
+      "centerX": 0.5,
+      "centerY": 0.5,
+      "radius": 0.5,
+      "noiseAmplitude": 0,
+      "noiseCellPx": 1
+    },
+    "controls": "Sweep span; only span varies. All other variables in this record, the 1024-pixel square, opaque sRGB encoding, PNG format, and seed 7 stay fixed.",
+    "expect": "A smooth field has no unique geometry: do not mistake its brightness ramp for known surface depth."
+  },
+  {
+    "id": "a-span-72",
+    "category": "A",
+    "file": "a/a-span-72.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "gradient",
+      "shape": "linear",
+      "angleDeg": 0,
+      "span": 72,
+      "midpoint": 127.5,
+      "gamma": 1,
+      "centerX": 0.5,
+      "centerY": 0.5,
+      "radius": 0.5,
+      "noiseAmplitude": 0,
+      "noiseCellPx": 1
+    },
+    "controls": "Sweep span; only span varies. All other variables in this record, the 1024-pixel square, opaque sRGB encoding, PNG format, and seed 7 stay fixed.",
+    "expect": "A smooth field has no unique geometry: do not mistake its brightness ramp for known surface depth."
+  },
+  {
+    "id": "a-span-96",
+    "category": "A",
+    "file": "a/a-span-96.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "gradient",
+      "shape": "linear",
+      "angleDeg": 0,
+      "span": 96,
+      "midpoint": 127.5,
+      "gamma": 1,
+      "centerX": 0.5,
+      "centerY": 0.5,
+      "radius": 0.5,
+      "noiseAmplitude": 0,
+      "noiseCellPx": 1
+    },
+    "controls": "Sweep span; only span varies. All other variables in this record, the 1024-pixel square, opaque sRGB encoding, PNG format, and seed 7 stay fixed.",
+    "expect": "A smooth field has no unique geometry: do not mistake its brightness ramp for known surface depth."
+  },
+  {
+    "id": "a-span-120",
+    "category": "A",
+    "file": "a/a-span-120.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "gradient",
+      "shape": "linear",
+      "angleDeg": 0,
+      "span": 120,
+      "midpoint": 127.5,
+      "gamma": 1,
+      "centerX": 0.5,
+      "centerY": 0.5,
+      "radius": 0.5,
+      "noiseAmplitude": 0,
+      "noiseCellPx": 1
+    },
+    "controls": "Sweep span; only span varies. All other variables in this record, the 1024-pixel square, opaque sRGB encoding, PNG format, and seed 7 stay fixed.",
+    "expect": "A smooth field has no unique geometry: do not mistake its brightness ramp for known surface depth."
+  },
+  {
+    "id": "a-span-144",
+    "category": "A",
+    "file": "a/a-span-144.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "gradient",
+      "shape": "linear",
+      "angleDeg": 0,
+      "span": 144,
+      "midpoint": 127.5,
+      "gamma": 1,
+      "centerX": 0.5,
+      "centerY": 0.5,
+      "radius": 0.5,
+      "noiseAmplitude": 0,
+      "noiseCellPx": 1
+    },
+    "controls": "Sweep span; only span varies. All other variables in this record, the 1024-pixel square, opaque sRGB encoding, PNG format, and seed 7 stay fixed.",
+    "expect": "A smooth field has no unique geometry: do not mistake its brightness ramp for known surface depth."
+  },
+  {
+    "id": "a-span-168",
+    "category": "A",
+    "file": "a/a-span-168.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "gradient",
+      "shape": "linear",
+      "angleDeg": 0,
+      "span": 168,
+      "midpoint": 127.5,
+      "gamma": 1,
+      "centerX": 0.5,
+      "centerY": 0.5,
+      "radius": 0.5,
+      "noiseAmplitude": 0,
+      "noiseCellPx": 1
+    },
+    "controls": "Sweep span; only span varies. All other variables in this record, the 1024-pixel square, opaque sRGB encoding, PNG format, and seed 7 stay fixed.",
+    "expect": "A smooth field has no unique geometry: do not mistake its brightness ramp for known surface depth."
+  },
+  {
+    "id": "a-span-192",
+    "category": "A",
+    "file": "a/a-span-192.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "gradient",
+      "shape": "linear",
+      "angleDeg": 0,
+      "span": 192,
+      "midpoint": 127.5,
+      "gamma": 1,
+      "centerX": 0.5,
+      "centerY": 0.5,
+      "radius": 0.5,
+      "noiseAmplitude": 0,
+      "noiseCellPx": 1
+    },
+    "controls": "Sweep span; only span varies. All other variables in this record, the 1024-pixel square, opaque sRGB encoding, PNG format, and seed 7 stay fixed.",
+    "expect": "A smooth field has no unique geometry: do not mistake its brightness ramp for known surface depth."
+  },
+  {
+    "id": "a-falloff-0p25",
+    "category": "A",
+    "file": "a/a-falloff-0p25.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "gradient",
+      "shape": "linear",
+      "angleDeg": 0,
+      "span": 192,
+      "midpoint": 127.5,
+      "gamma": 0.25,
+      "centerX": 0.5,
+      "centerY": 0.5,
+      "radius": 0.5,
+      "noiseAmplitude": 0,
+      "noiseCellPx": 1
+    },
+    "controls": "Sweep falloff; only gamma varies. All other variables in this record, the 1024-pixel square, opaque sRGB encoding, PNG format, and seed 7 stay fixed.",
+    "expect": "A smooth field has no unique geometry: do not mistake its brightness ramp for known surface depth."
+  },
+  {
+    "id": "a-falloff-0p5",
+    "category": "A",
+    "file": "a/a-falloff-0p5.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "gradient",
+      "shape": "linear",
+      "angleDeg": 0,
+      "span": 192,
+      "midpoint": 127.5,
+      "gamma": 0.5,
+      "centerX": 0.5,
+      "centerY": 0.5,
+      "radius": 0.5,
+      "noiseAmplitude": 0,
+      "noiseCellPx": 1
+    },
+    "controls": "Sweep falloff; only gamma varies. All other variables in this record, the 1024-pixel square, opaque sRGB encoding, PNG format, and seed 7 stay fixed.",
+    "expect": "A smooth field has no unique geometry: do not mistake its brightness ramp for known surface depth."
+  },
+  {
+    "id": "a-falloff-0p75",
+    "category": "A",
+    "file": "a/a-falloff-0p75.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "gradient",
+      "shape": "linear",
+      "angleDeg": 0,
+      "span": 192,
+      "midpoint": 127.5,
+      "gamma": 0.75,
+      "centerX": 0.5,
+      "centerY": 0.5,
+      "radius": 0.5,
+      "noiseAmplitude": 0,
+      "noiseCellPx": 1
+    },
+    "controls": "Sweep falloff; only gamma varies. All other variables in this record, the 1024-pixel square, opaque sRGB encoding, PNG format, and seed 7 stay fixed.",
+    "expect": "A smooth field has no unique geometry: do not mistake its brightness ramp for known surface depth."
+  },
+  {
+    "id": "a-falloff-1",
+    "category": "A",
+    "file": "a/a-falloff-1.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "gradient",
+      "shape": "linear",
+      "angleDeg": 0,
+      "span": 192,
+      "midpoint": 127.5,
+      "gamma": 1,
+      "centerX": 0.5,
+      "centerY": 0.5,
+      "radius": 0.5,
+      "noiseAmplitude": 0,
+      "noiseCellPx": 1
+    },
+    "controls": "Sweep falloff; only gamma varies. All other variables in this record, the 1024-pixel square, opaque sRGB encoding, PNG format, and seed 7 stay fixed.",
+    "expect": "A smooth field has no unique geometry: do not mistake its brightness ramp for known surface depth."
+  },
+  {
+    "id": "a-falloff-1p5",
+    "category": "A",
+    "file": "a/a-falloff-1p5.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "gradient",
+      "shape": "linear",
+      "angleDeg": 0,
+      "span": 192,
+      "midpoint": 127.5,
+      "gamma": 1.5,
+      "centerX": 0.5,
+      "centerY": 0.5,
+      "radius": 0.5,
+      "noiseAmplitude": 0,
+      "noiseCellPx": 1
+    },
+    "controls": "Sweep falloff; only gamma varies. All other variables in this record, the 1024-pixel square, opaque sRGB encoding, PNG format, and seed 7 stay fixed.",
+    "expect": "A smooth field has no unique geometry: do not mistake its brightness ramp for known surface depth."
+  },
+  {
+    "id": "a-falloff-2",
+    "category": "A",
+    "file": "a/a-falloff-2.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "gradient",
+      "shape": "linear",
+      "angleDeg": 0,
+      "span": 192,
+      "midpoint": 127.5,
+      "gamma": 2,
+      "centerX": 0.5,
+      "centerY": 0.5,
+      "radius": 0.5,
+      "noiseAmplitude": 0,
+      "noiseCellPx": 1
+    },
+    "controls": "Sweep falloff; only gamma varies. All other variables in this record, the 1024-pixel square, opaque sRGB encoding, PNG format, and seed 7 stay fixed.",
+    "expect": "A smooth field has no unique geometry: do not mistake its brightness ramp for known surface depth."
+  },
+  {
+    "id": "a-falloff-3",
+    "category": "A",
+    "file": "a/a-falloff-3.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "gradient",
+      "shape": "linear",
+      "angleDeg": 0,
+      "span": 192,
+      "midpoint": 127.5,
+      "gamma": 3,
+      "centerX": 0.5,
+      "centerY": 0.5,
+      "radius": 0.5,
+      "noiseAmplitude": 0,
+      "noiseCellPx": 1
+    },
+    "controls": "Sweep falloff; only gamma varies. All other variables in this record, the 1024-pixel square, opaque sRGB encoding, PNG format, and seed 7 stay fixed.",
+    "expect": "A smooth field has no unique geometry: do not mistake its brightness ramp for known surface depth."
+  },
+  {
+    "id": "a-falloff-4",
+    "category": "A",
+    "file": "a/a-falloff-4.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "gradient",
+      "shape": "linear",
+      "angleDeg": 0,
+      "span": 192,
+      "midpoint": 127.5,
+      "gamma": 4,
+      "centerX": 0.5,
+      "centerY": 0.5,
+      "radius": 0.5,
+      "noiseAmplitude": 0,
+      "noiseCellPx": 1
+    },
+    "controls": "Sweep falloff; only gamma varies. All other variables in this record, the 1024-pixel square, opaque sRGB encoding, PNG format, and seed 7 stay fixed.",
+    "expect": "A smooth field has no unique geometry: do not mistake its brightness ramp for known surface depth."
+  },
+  {
+    "id": "a-falloff-6",
+    "category": "A",
+    "file": "a/a-falloff-6.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "gradient",
+      "shape": "linear",
+      "angleDeg": 0,
+      "span": 192,
+      "midpoint": 127.5,
+      "gamma": 6,
+      "centerX": 0.5,
+      "centerY": 0.5,
+      "radius": 0.5,
+      "noiseAmplitude": 0,
+      "noiseCellPx": 1
+    },
+    "controls": "Sweep falloff; only gamma varies. All other variables in this record, the 1024-pixel square, opaque sRGB encoding, PNG format, and seed 7 stay fixed.",
+    "expect": "A smooth field has no unique geometry: do not mistake its brightness ramp for known surface depth."
+  },
+  {
+    "id": "a-shape-linear",
+    "category": "A",
+    "file": "a/a-shape-linear.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "gradient",
+      "shape": "linear",
+      "angleDeg": 0,
+      "span": 192,
+      "midpoint": 127.5,
+      "gamma": 1,
+      "centerX": 0.5,
+      "centerY": 0.5,
+      "radius": 0.5,
+      "noiseAmplitude": 0,
+      "noiseCellPx": 1
+    },
+    "controls": "Sweep shape; only shape varies. All other variables in this record, the 1024-pixel square, opaque sRGB encoding, PNG format, and seed 7 stay fixed.",
+    "expect": "A smooth field has no unique geometry: do not mistake its brightness ramp for known surface depth."
+  },
+  {
+    "id": "a-shape-radial",
+    "category": "A",
+    "file": "a/a-shape-radial.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "gradient",
+      "shape": "radial",
+      "angleDeg": 0,
+      "span": 192,
+      "midpoint": 127.5,
+      "gamma": 1,
+      "centerX": 0.5,
+      "centerY": 0.5,
+      "radius": 0.5,
+      "noiseAmplitude": 0,
+      "noiseCellPx": 1
+    },
+    "controls": "Sweep shape; only shape varies. All other variables in this record, the 1024-pixel square, opaque sRGB encoding, PNG format, and seed 7 stay fixed.",
+    "expect": "A smooth field has no unique geometry: do not mistake its brightness ramp for known surface depth."
+  },
+  {
+    "id": "a-shape-diamond",
+    "category": "A",
+    "file": "a/a-shape-diamond.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "gradient",
+      "shape": "diamond",
+      "angleDeg": 0,
+      "span": 192,
+      "midpoint": 127.5,
+      "gamma": 1,
+      "centerX": 0.5,
+      "centerY": 0.5,
+      "radius": 0.5,
+      "noiseAmplitude": 0,
+      "noiseCellPx": 1
+    },
+    "controls": "Sweep shape; only shape varies. All other variables in this record, the 1024-pixel square, opaque sRGB encoding, PNG format, and seed 7 stay fixed.",
+    "expect": "A smooth field has no unique geometry: do not mistake its brightness ramp for known surface depth."
+  },
+  {
+    "id": "a-shape-square",
+    "category": "A",
+    "file": "a/a-shape-square.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "gradient",
+      "shape": "square",
+      "angleDeg": 0,
+      "span": 192,
+      "midpoint": 127.5,
+      "gamma": 1,
+      "centerX": 0.5,
+      "centerY": 0.5,
+      "radius": 0.5,
+      "noiseAmplitude": 0,
+      "noiseCellPx": 1
+    },
+    "controls": "Sweep shape; only shape varies. All other variables in this record, the 1024-pixel square, opaque sRGB encoding, PNG format, and seed 7 stay fixed.",
+    "expect": "A smooth field has no unique geometry: do not mistake its brightness ramp for known surface depth."
+  },
+  {
+    "id": "a-shape-conic",
+    "category": "A",
+    "file": "a/a-shape-conic.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "gradient",
+      "shape": "conic",
+      "angleDeg": 0,
+      "span": 192,
+      "midpoint": 127.5,
+      "gamma": 1,
+      "centerX": 0.5,
+      "centerY": 0.5,
+      "radius": 0.5,
+      "noiseAmplitude": 0,
+      "noiseCellPx": 1
+    },
+    "controls": "Sweep shape; only shape varies. All other variables in this record, the 1024-pixel square, opaque sRGB encoding, PNG format, and seed 7 stay fixed.",
+    "expect": "A smooth field has no unique geometry: do not mistake its brightness ramp for known surface depth."
+  },
+  {
+    "id": "a-radius-0p125",
+    "category": "A",
+    "file": "a/a-radius-0p125.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "gradient",
+      "shape": "radial",
+      "angleDeg": 0,
+      "span": 192,
+      "midpoint": 127.5,
+      "gamma": 1,
+      "centerX": 0.5,
+      "centerY": 0.5,
+      "radius": 0.125,
+      "noiseAmplitude": 0,
+      "noiseCellPx": 1
+    },
+    "controls": "Sweep radius; only radius varies. All other variables in this record, the 1024-pixel square, opaque sRGB encoding, PNG format, and seed 7 stay fixed.",
+    "expect": "A smooth field has no unique geometry: do not mistake its brightness ramp for known surface depth."
+  },
+  {
+    "id": "a-radius-0p1875",
+    "category": "A",
+    "file": "a/a-radius-0p1875.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "gradient",
+      "shape": "radial",
+      "angleDeg": 0,
+      "span": 192,
+      "midpoint": 127.5,
+      "gamma": 1,
+      "centerX": 0.5,
+      "centerY": 0.5,
+      "radius": 0.1875,
+      "noiseAmplitude": 0,
+      "noiseCellPx": 1
+    },
+    "controls": "Sweep radius; only radius varies. All other variables in this record, the 1024-pixel square, opaque sRGB encoding, PNG format, and seed 7 stay fixed.",
+    "expect": "A smooth field has no unique geometry: do not mistake its brightness ramp for known surface depth."
+  },
+  {
+    "id": "a-radius-0p25",
+    "category": "A",
+    "file": "a/a-radius-0p25.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "gradient",
+      "shape": "radial",
+      "angleDeg": 0,
+      "span": 192,
+      "midpoint": 127.5,
+      "gamma": 1,
+      "centerX": 0.5,
+      "centerY": 0.5,
+      "radius": 0.25,
+      "noiseAmplitude": 0,
+      "noiseCellPx": 1
+    },
+    "controls": "Sweep radius; only radius varies. All other variables in this record, the 1024-pixel square, opaque sRGB encoding, PNG format, and seed 7 stay fixed.",
+    "expect": "A smooth field has no unique geometry: do not mistake its brightness ramp for known surface depth."
+  },
+  {
+    "id": "a-radius-0p3125",
+    "category": "A",
+    "file": "a/a-radius-0p3125.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "gradient",
+      "shape": "radial",
+      "angleDeg": 0,
+      "span": 192,
+      "midpoint": 127.5,
+      "gamma": 1,
+      "centerX": 0.5,
+      "centerY": 0.5,
+      "radius": 0.3125,
+      "noiseAmplitude": 0,
+      "noiseCellPx": 1
+    },
+    "controls": "Sweep radius; only radius varies. All other variables in this record, the 1024-pixel square, opaque sRGB encoding, PNG format, and seed 7 stay fixed.",
+    "expect": "A smooth field has no unique geometry: do not mistake its brightness ramp for known surface depth."
+  },
+  {
+    "id": "a-radius-0p375",
+    "category": "A",
+    "file": "a/a-radius-0p375.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "gradient",
+      "shape": "radial",
+      "angleDeg": 0,
+      "span": 192,
+      "midpoint": 127.5,
+      "gamma": 1,
+      "centerX": 0.5,
+      "centerY": 0.5,
+      "radius": 0.375,
+      "noiseAmplitude": 0,
+      "noiseCellPx": 1
+    },
+    "controls": "Sweep radius; only radius varies. All other variables in this record, the 1024-pixel square, opaque sRGB encoding, PNG format, and seed 7 stay fixed.",
+    "expect": "A smooth field has no unique geometry: do not mistake its brightness ramp for known surface depth."
+  },
+  {
+    "id": "a-radius-0p4375",
+    "category": "A",
+    "file": "a/a-radius-0p4375.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "gradient",
+      "shape": "radial",
+      "angleDeg": 0,
+      "span": 192,
+      "midpoint": 127.5,
+      "gamma": 1,
+      "centerX": 0.5,
+      "centerY": 0.5,
+      "radius": 0.4375,
+      "noiseAmplitude": 0,
+      "noiseCellPx": 1
+    },
+    "controls": "Sweep radius; only radius varies. All other variables in this record, the 1024-pixel square, opaque sRGB encoding, PNG format, and seed 7 stay fixed.",
+    "expect": "A smooth field has no unique geometry: do not mistake its brightness ramp for known surface depth."
+  },
+  {
+    "id": "a-radius-0p5",
+    "category": "A",
+    "file": "a/a-radius-0p5.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "gradient",
+      "shape": "radial",
+      "angleDeg": 0,
+      "span": 192,
+      "midpoint": 127.5,
+      "gamma": 1,
+      "centerX": 0.5,
+      "centerY": 0.5,
+      "radius": 0.5,
+      "noiseAmplitude": 0,
+      "noiseCellPx": 1
+    },
+    "controls": "Sweep radius; only radius varies. All other variables in this record, the 1024-pixel square, opaque sRGB encoding, PNG format, and seed 7 stay fixed.",
+    "expect": "A smooth field has no unique geometry: do not mistake its brightness ramp for known surface depth."
+  },
+  {
+    "id": "a-radius-0p625",
+    "category": "A",
+    "file": "a/a-radius-0p625.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "gradient",
+      "shape": "radial",
+      "angleDeg": 0,
+      "span": 192,
+      "midpoint": 127.5,
+      "gamma": 1,
+      "centerX": 0.5,
+      "centerY": 0.5,
+      "radius": 0.625,
+      "noiseAmplitude": 0,
+      "noiseCellPx": 1
+    },
+    "controls": "Sweep radius; only radius varies. All other variables in this record, the 1024-pixel square, opaque sRGB encoding, PNG format, and seed 7 stay fixed.",
+    "expect": "A smooth field has no unique geometry: do not mistake its brightness ramp for known surface depth."
+  },
+  {
+    "id": "a-radius-0p75",
+    "category": "A",
+    "file": "a/a-radius-0p75.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "gradient",
+      "shape": "radial",
+      "angleDeg": 0,
+      "span": 192,
+      "midpoint": 127.5,
+      "gamma": 1,
+      "centerX": 0.5,
+      "centerY": 0.5,
+      "radius": 0.75,
+      "noiseAmplitude": 0,
+      "noiseCellPx": 1
+    },
+    "controls": "Sweep radius; only radius varies. All other variables in this record, the 1024-pixel square, opaque sRGB encoding, PNG format, and seed 7 stay fixed.",
+    "expect": "A smooth field has no unique geometry: do not mistake its brightness ramp for known surface depth."
+  },
+  {
+    "id": "a-center-0p1",
+    "category": "A",
+    "file": "a/a-center-0p1.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "gradient",
+      "shape": "radial",
+      "angleDeg": 0,
+      "span": 192,
+      "midpoint": 127.5,
+      "gamma": 1,
+      "centerX": 0.1,
+      "centerY": 0.5,
+      "radius": 0.5,
+      "noiseAmplitude": 0,
+      "noiseCellPx": 1
+    },
+    "controls": "Sweep center; only centerX varies. All other variables in this record, the 1024-pixel square, opaque sRGB encoding, PNG format, and seed 7 stay fixed.",
+    "expect": "A smooth field has no unique geometry: do not mistake its brightness ramp for known surface depth."
+  },
+  {
+    "id": "a-center-0p2",
+    "category": "A",
+    "file": "a/a-center-0p2.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "gradient",
+      "shape": "radial",
+      "angleDeg": 0,
+      "span": 192,
+      "midpoint": 127.5,
+      "gamma": 1,
+      "centerX": 0.2,
+      "centerY": 0.5,
+      "radius": 0.5,
+      "noiseAmplitude": 0,
+      "noiseCellPx": 1
+    },
+    "controls": "Sweep center; only centerX varies. All other variables in this record, the 1024-pixel square, opaque sRGB encoding, PNG format, and seed 7 stay fixed.",
+    "expect": "A smooth field has no unique geometry: do not mistake its brightness ramp for known surface depth."
+  },
+  {
+    "id": "a-center-0p3",
+    "category": "A",
+    "file": "a/a-center-0p3.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "gradient",
+      "shape": "radial",
+      "angleDeg": 0,
+      "span": 192,
+      "midpoint": 127.5,
+      "gamma": 1,
+      "centerX": 0.3,
+      "centerY": 0.5,
+      "radius": 0.5,
+      "noiseAmplitude": 0,
+      "noiseCellPx": 1
+    },
+    "controls": "Sweep center; only centerX varies. All other variables in this record, the 1024-pixel square, opaque sRGB encoding, PNG format, and seed 7 stay fixed.",
+    "expect": "A smooth field has no unique geometry: do not mistake its brightness ramp for known surface depth."
+  },
+  {
+    "id": "a-center-0p4",
+    "category": "A",
+    "file": "a/a-center-0p4.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "gradient",
+      "shape": "radial",
+      "angleDeg": 0,
+      "span": 192,
+      "midpoint": 127.5,
+      "gamma": 1,
+      "centerX": 0.4,
+      "centerY": 0.5,
+      "radius": 0.5,
+      "noiseAmplitude": 0,
+      "noiseCellPx": 1
+    },
+    "controls": "Sweep center; only centerX varies. All other variables in this record, the 1024-pixel square, opaque sRGB encoding, PNG format, and seed 7 stay fixed.",
+    "expect": "A smooth field has no unique geometry: do not mistake its brightness ramp for known surface depth."
+  },
+  {
+    "id": "a-center-0p5",
+    "category": "A",
+    "file": "a/a-center-0p5.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "gradient",
+      "shape": "radial",
+      "angleDeg": 0,
+      "span": 192,
+      "midpoint": 127.5,
+      "gamma": 1,
+      "centerX": 0.5,
+      "centerY": 0.5,
+      "radius": 0.5,
+      "noiseAmplitude": 0,
+      "noiseCellPx": 1
+    },
+    "controls": "Sweep center; only centerX varies. All other variables in this record, the 1024-pixel square, opaque sRGB encoding, PNG format, and seed 7 stay fixed.",
+    "expect": "A smooth field has no unique geometry: do not mistake its brightness ramp for known surface depth."
+  },
+  {
+    "id": "a-center-0p6",
+    "category": "A",
+    "file": "a/a-center-0p6.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "gradient",
+      "shape": "radial",
+      "angleDeg": 0,
+      "span": 192,
+      "midpoint": 127.5,
+      "gamma": 1,
+      "centerX": 0.6,
+      "centerY": 0.5,
+      "radius": 0.5,
+      "noiseAmplitude": 0,
+      "noiseCellPx": 1
+    },
+    "controls": "Sweep center; only centerX varies. All other variables in this record, the 1024-pixel square, opaque sRGB encoding, PNG format, and seed 7 stay fixed.",
+    "expect": "A smooth field has no unique geometry: do not mistake its brightness ramp for known surface depth."
+  },
+  {
+    "id": "a-center-0p7",
+    "category": "A",
+    "file": "a/a-center-0p7.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "gradient",
+      "shape": "radial",
+      "angleDeg": 0,
+      "span": 192,
+      "midpoint": 127.5,
+      "gamma": 1,
+      "centerX": 0.7,
+      "centerY": 0.5,
+      "radius": 0.5,
+      "noiseAmplitude": 0,
+      "noiseCellPx": 1
+    },
+    "controls": "Sweep center; only centerX varies. All other variables in this record, the 1024-pixel square, opaque sRGB encoding, PNG format, and seed 7 stay fixed.",
+    "expect": "A smooth field has no unique geometry: do not mistake its brightness ramp for known surface depth."
+  },
+  {
+    "id": "a-center-0p8",
+    "category": "A",
+    "file": "a/a-center-0p8.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "gradient",
+      "shape": "radial",
+      "angleDeg": 0,
+      "span": 192,
+      "midpoint": 127.5,
+      "gamma": 1,
+      "centerX": 0.8,
+      "centerY": 0.5,
+      "radius": 0.5,
+      "noiseAmplitude": 0,
+      "noiseCellPx": 1
+    },
+    "controls": "Sweep center; only centerX varies. All other variables in this record, the 1024-pixel square, opaque sRGB encoding, PNG format, and seed 7 stay fixed.",
+    "expect": "A smooth field has no unique geometry: do not mistake its brightness ramp for known surface depth."
+  },
+  {
+    "id": "a-center-0p9",
+    "category": "A",
+    "file": "a/a-center-0p9.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "gradient",
+      "shape": "radial",
+      "angleDeg": 0,
+      "span": 192,
+      "midpoint": 127.5,
+      "gamma": 1,
+      "centerX": 0.9,
+      "centerY": 0.5,
+      "radius": 0.5,
+      "noiseAmplitude": 0,
+      "noiseCellPx": 1
+    },
+    "controls": "Sweep center; only centerX varies. All other variables in this record, the 1024-pixel square, opaque sRGB encoding, PNG format, and seed 7 stay fixed.",
+    "expect": "A smooth field has no unique geometry: do not mistake its brightness ramp for known surface depth."
+  },
+  {
+    "id": "a-noise-amplitude-0",
+    "category": "A",
+    "file": "a/a-noise-amplitude-0.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "noise",
+      "midpoint": 128,
+      "noiseAmplitude": 0,
+      "noiseCellPx": 1
+    },
+    "controls": "Sweep noise-amplitude; only noiseAmplitude varies. All other variables in this record, the 1024-pixel square, opaque sRGB encoding, PNG format, and seed 7 stay fixed.",
+    "expect": "No geometric depth cue: a constant plane is the null control; color or noise alone must not create confident relief."
+  },
+  {
+    "id": "a-noise-amplitude-1",
+    "category": "A",
+    "file": "a/a-noise-amplitude-1.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "noise",
+      "midpoint": 128,
+      "noiseAmplitude": 1,
+      "noiseCellPx": 1
+    },
+    "controls": "Sweep noise-amplitude; only noiseAmplitude varies. All other variables in this record, the 1024-pixel square, opaque sRGB encoding, PNG format, and seed 7 stay fixed.",
+    "expect": "No geometric depth cue: a constant plane is the null control; color or noise alone must not create confident relief."
+  },
+  {
+    "id": "a-noise-amplitude-2",
+    "category": "A",
+    "file": "a/a-noise-amplitude-2.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "noise",
+      "midpoint": 128,
+      "noiseAmplitude": 2,
+      "noiseCellPx": 1
+    },
+    "controls": "Sweep noise-amplitude; only noiseAmplitude varies. All other variables in this record, the 1024-pixel square, opaque sRGB encoding, PNG format, and seed 7 stay fixed.",
+    "expect": "No geometric depth cue: a constant plane is the null control; color or noise alone must not create confident relief."
+  },
+  {
+    "id": "a-noise-amplitude-4",
+    "category": "A",
+    "file": "a/a-noise-amplitude-4.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "noise",
+      "midpoint": 128,
+      "noiseAmplitude": 4,
+      "noiseCellPx": 1
+    },
+    "controls": "Sweep noise-amplitude; only noiseAmplitude varies. All other variables in this record, the 1024-pixel square, opaque sRGB encoding, PNG format, and seed 7 stay fixed.",
+    "expect": "No geometric depth cue: a constant plane is the null control; color or noise alone must not create confident relief."
+  },
+  {
+    "id": "a-noise-amplitude-8",
+    "category": "A",
+    "file": "a/a-noise-amplitude-8.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "noise",
+      "midpoint": 128,
+      "noiseAmplitude": 8,
+      "noiseCellPx": 1
+    },
+    "controls": "Sweep noise-amplitude; only noiseAmplitude varies. All other variables in this record, the 1024-pixel square, opaque sRGB encoding, PNG format, and seed 7 stay fixed.",
+    "expect": "No geometric depth cue: a constant plane is the null control; color or noise alone must not create confident relief."
+  },
+  {
+    "id": "a-noise-amplitude-16",
+    "category": "A",
+    "file": "a/a-noise-amplitude-16.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "noise",
+      "midpoint": 128,
+      "noiseAmplitude": 16,
+      "noiseCellPx": 1
+    },
+    "controls": "Sweep noise-amplitude; only noiseAmplitude varies. All other variables in this record, the 1024-pixel square, opaque sRGB encoding, PNG format, and seed 7 stay fixed.",
+    "expect": "No geometric depth cue: a constant plane is the null control; color or noise alone must not create confident relief."
+  },
+  {
+    "id": "a-noise-amplitude-32",
+    "category": "A",
+    "file": "a/a-noise-amplitude-32.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "noise",
+      "midpoint": 128,
+      "noiseAmplitude": 32,
+      "noiseCellPx": 1
+    },
+    "controls": "Sweep noise-amplitude; only noiseAmplitude varies. All other variables in this record, the 1024-pixel square, opaque sRGB encoding, PNG format, and seed 7 stay fixed.",
+    "expect": "No geometric depth cue: a constant plane is the null control; color or noise alone must not create confident relief."
+  },
+  {
+    "id": "a-noise-amplitude-64",
+    "category": "A",
+    "file": "a/a-noise-amplitude-64.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "noise",
+      "midpoint": 128,
+      "noiseAmplitude": 64,
+      "noiseCellPx": 1
+    },
+    "controls": "Sweep noise-amplitude; only noiseAmplitude varies. All other variables in this record, the 1024-pixel square, opaque sRGB encoding, PNG format, and seed 7 stay fixed.",
+    "expect": "No geometric depth cue: a constant plane is the null control; color or noise alone must not create confident relief."
+  },
+  {
+    "id": "a-noise-amplitude-96",
+    "category": "A",
+    "file": "a/a-noise-amplitude-96.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "noise",
+      "midpoint": 128,
+      "noiseAmplitude": 96,
+      "noiseCellPx": 1
+    },
+    "controls": "Sweep noise-amplitude; only noiseAmplitude varies. All other variables in this record, the 1024-pixel square, opaque sRGB encoding, PNG format, and seed 7 stay fixed.",
+    "expect": "No geometric depth cue: a constant plane is the null control; color or noise alone must not create confident relief."
+  },
+  {
+    "id": "a-noise-cell-1",
+    "category": "A",
+    "file": "a/a-noise-cell-1.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "noise",
+      "midpoint": 128,
+      "noiseAmplitude": 32,
+      "noiseCellPx": 1
+    },
+    "controls": "Sweep noise-cell; only noiseCellPx varies. All other variables in this record, the 1024-pixel square, opaque sRGB encoding, PNG format, and seed 7 stay fixed.",
+    "expect": "No geometric depth cue: a constant plane is the null control; color or noise alone must not create confident relief."
+  },
+  {
+    "id": "a-noise-cell-2",
+    "category": "A",
+    "file": "a/a-noise-cell-2.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "noise",
+      "midpoint": 128,
+      "noiseAmplitude": 32,
+      "noiseCellPx": 2
+    },
+    "controls": "Sweep noise-cell; only noiseCellPx varies. All other variables in this record, the 1024-pixel square, opaque sRGB encoding, PNG format, and seed 7 stay fixed.",
+    "expect": "No geometric depth cue: a constant plane is the null control; color or noise alone must not create confident relief."
+  },
+  {
+    "id": "a-noise-cell-4",
+    "category": "A",
+    "file": "a/a-noise-cell-4.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "noise",
+      "midpoint": 128,
+      "noiseAmplitude": 32,
+      "noiseCellPx": 4
+    },
+    "controls": "Sweep noise-cell; only noiseCellPx varies. All other variables in this record, the 1024-pixel square, opaque sRGB encoding, PNG format, and seed 7 stay fixed.",
+    "expect": "No geometric depth cue: a constant plane is the null control; color or noise alone must not create confident relief."
+  },
+  {
+    "id": "a-noise-cell-8",
+    "category": "A",
+    "file": "a/a-noise-cell-8.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "noise",
+      "midpoint": 128,
+      "noiseAmplitude": 32,
+      "noiseCellPx": 8
+    },
+    "controls": "Sweep noise-cell; only noiseCellPx varies. All other variables in this record, the 1024-pixel square, opaque sRGB encoding, PNG format, and seed 7 stay fixed.",
+    "expect": "No geometric depth cue: a constant plane is the null control; color or noise alone must not create confident relief."
+  },
+  {
+    "id": "a-noise-cell-16",
+    "category": "A",
+    "file": "a/a-noise-cell-16.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "noise",
+      "midpoint": 128,
+      "noiseAmplitude": 32,
+      "noiseCellPx": 16
+    },
+    "controls": "Sweep noise-cell; only noiseCellPx varies. All other variables in this record, the 1024-pixel square, opaque sRGB encoding, PNG format, and seed 7 stay fixed.",
+    "expect": "No geometric depth cue: a constant plane is the null control; color or noise alone must not create confident relief."
+  },
+  {
+    "id": "a-noise-cell-32",
+    "category": "A",
+    "file": "a/a-noise-cell-32.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "noise",
+      "midpoint": 128,
+      "noiseAmplitude": 32,
+      "noiseCellPx": 32
+    },
+    "controls": "Sweep noise-cell; only noiseCellPx varies. All other variables in this record, the 1024-pixel square, opaque sRGB encoding, PNG format, and seed 7 stay fixed.",
+    "expect": "No geometric depth cue: a constant plane is the null control; color or noise alone must not create confident relief."
+  },
+  {
+    "id": "a-noise-cell-64",
+    "category": "A",
+    "file": "a/a-noise-cell-64.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "noise",
+      "midpoint": 128,
+      "noiseAmplitude": 32,
+      "noiseCellPx": 64
+    },
+    "controls": "Sweep noise-cell; only noiseCellPx varies. All other variables in this record, the 1024-pixel square, opaque sRGB encoding, PNG format, and seed 7 stay fixed.",
+    "expect": "No geometric depth cue: a constant plane is the null control; color or noise alone must not create confident relief."
+  },
+  {
+    "id": "a-noise-cell-128",
+    "category": "A",
+    "file": "a/a-noise-cell-128.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "noise",
+      "midpoint": 128,
+      "noiseAmplitude": 32,
+      "noiseCellPx": 128
+    },
+    "controls": "Sweep noise-cell; only noiseCellPx varies. All other variables in this record, the 1024-pixel square, opaque sRGB encoding, PNG format, and seed 7 stay fixed.",
+    "expect": "No geometric depth cue: a constant plane is the null control; color or noise alone must not create confident relief."
+  },
+  {
+    "id": "a-noise-cell-256",
+    "category": "A",
+    "file": "a/a-noise-cell-256.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "noise",
+      "midpoint": 128,
+      "noiseAmplitude": 32,
+      "noiseCellPx": 256
+    },
+    "controls": "Sweep noise-cell; only noiseCellPx varies. All other variables in this record, the 1024-pixel square, opaque sRGB encoding, PNG format, and seed 7 stay fixed.",
+    "expect": "No geometric depth cue: a constant plane is the null control; color or noise alone must not create confident relief."
+  },
+  {
+    "id": "a-grid-direction-span-0-0",
+    "category": "A",
+    "file": "a/a-grid-direction-span-0-0.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "gradient",
+      "shape": "linear",
+      "angleDeg": 0,
+      "span": 0,
+      "midpoint": 127.5,
+      "gamma": 1,
+      "centerX": 0.5,
+      "centerY": 0.5,
+      "radius": 0.5,
+      "noiseAmplitude": 0,
+      "noiseCellPx": 1
+    },
+    "controls": "5 by 5 grid; angleDeg and span vary independently. Every other recorded variable, PNG encoding, 1024-pixel size, and seed stay fixed.",
+    "expect": "A smooth field has no unique geometry: do not mistake its brightness ramp for known surface depth."
+  },
+  {
+    "id": "a-grid-direction-span-0-48",
+    "category": "A",
+    "file": "a/a-grid-direction-span-0-48.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "gradient",
+      "shape": "linear",
+      "angleDeg": 0,
+      "span": 48,
+      "midpoint": 127.5,
+      "gamma": 1,
+      "centerX": 0.5,
+      "centerY": 0.5,
+      "radius": 0.5,
+      "noiseAmplitude": 0,
+      "noiseCellPx": 1
+    },
+    "controls": "5 by 5 grid; angleDeg and span vary independently. Every other recorded variable, PNG encoding, 1024-pixel size, and seed stay fixed.",
+    "expect": "A smooth field has no unique geometry: do not mistake its brightness ramp for known surface depth."
+  },
+  {
+    "id": "a-grid-direction-span-0-96",
+    "category": "A",
+    "file": "a/a-grid-direction-span-0-96.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "gradient",
+      "shape": "linear",
+      "angleDeg": 0,
+      "span": 96,
+      "midpoint": 127.5,
+      "gamma": 1,
+      "centerX": 0.5,
+      "centerY": 0.5,
+      "radius": 0.5,
+      "noiseAmplitude": 0,
+      "noiseCellPx": 1
+    },
+    "controls": "5 by 5 grid; angleDeg and span vary independently. Every other recorded variable, PNG encoding, 1024-pixel size, and seed stay fixed.",
+    "expect": "A smooth field has no unique geometry: do not mistake its brightness ramp for known surface depth."
+  },
+  {
+    "id": "a-grid-direction-span-0-144",
+    "category": "A",
+    "file": "a/a-grid-direction-span-0-144.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "gradient",
+      "shape": "linear",
+      "angleDeg": 0,
+      "span": 144,
+      "midpoint": 127.5,
+      "gamma": 1,
+      "centerX": 0.5,
+      "centerY": 0.5,
+      "radius": 0.5,
+      "noiseAmplitude": 0,
+      "noiseCellPx": 1
+    },
+    "controls": "5 by 5 grid; angleDeg and span vary independently. Every other recorded variable, PNG encoding, 1024-pixel size, and seed stay fixed.",
+    "expect": "A smooth field has no unique geometry: do not mistake its brightness ramp for known surface depth."
+  },
+  {
+    "id": "a-grid-direction-span-0-192",
+    "category": "A",
+    "file": "a/a-grid-direction-span-0-192.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "gradient",
+      "shape": "linear",
+      "angleDeg": 0,
+      "span": 192,
+      "midpoint": 127.5,
+      "gamma": 1,
+      "centerX": 0.5,
+      "centerY": 0.5,
+      "radius": 0.5,
+      "noiseAmplitude": 0,
+      "noiseCellPx": 1
+    },
+    "controls": "5 by 5 grid; angleDeg and span vary independently. Every other recorded variable, PNG encoding, 1024-pixel size, and seed stay fixed.",
+    "expect": "A smooth field has no unique geometry: do not mistake its brightness ramp for known surface depth."
+  },
+  {
+    "id": "a-grid-direction-span-45-0",
+    "category": "A",
+    "file": "a/a-grid-direction-span-45-0.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "gradient",
+      "shape": "linear",
+      "angleDeg": 45,
+      "span": 0,
+      "midpoint": 127.5,
+      "gamma": 1,
+      "centerX": 0.5,
+      "centerY": 0.5,
+      "radius": 0.5,
+      "noiseAmplitude": 0,
+      "noiseCellPx": 1
+    },
+    "controls": "5 by 5 grid; angleDeg and span vary independently. Every other recorded variable, PNG encoding, 1024-pixel size, and seed stay fixed.",
+    "expect": "A smooth field has no unique geometry: do not mistake its brightness ramp for known surface depth."
+  },
+  {
+    "id": "a-grid-direction-span-45-48",
+    "category": "A",
+    "file": "a/a-grid-direction-span-45-48.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "gradient",
+      "shape": "linear",
+      "angleDeg": 45,
+      "span": 48,
+      "midpoint": 127.5,
+      "gamma": 1,
+      "centerX": 0.5,
+      "centerY": 0.5,
+      "radius": 0.5,
+      "noiseAmplitude": 0,
+      "noiseCellPx": 1
+    },
+    "controls": "5 by 5 grid; angleDeg and span vary independently. Every other recorded variable, PNG encoding, 1024-pixel size, and seed stay fixed.",
+    "expect": "A smooth field has no unique geometry: do not mistake its brightness ramp for known surface depth."
+  },
+  {
+    "id": "a-grid-direction-span-45-96",
+    "category": "A",
+    "file": "a/a-grid-direction-span-45-96.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "gradient",
+      "shape": "linear",
+      "angleDeg": 45,
+      "span": 96,
+      "midpoint": 127.5,
+      "gamma": 1,
+      "centerX": 0.5,
+      "centerY": 0.5,
+      "radius": 0.5,
+      "noiseAmplitude": 0,
+      "noiseCellPx": 1
+    },
+    "controls": "5 by 5 grid; angleDeg and span vary independently. Every other recorded variable, PNG encoding, 1024-pixel size, and seed stay fixed.",
+    "expect": "A smooth field has no unique geometry: do not mistake its brightness ramp for known surface depth."
+  },
+  {
+    "id": "a-grid-direction-span-45-144",
+    "category": "A",
+    "file": "a/a-grid-direction-span-45-144.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "gradient",
+      "shape": "linear",
+      "angleDeg": 45,
+      "span": 144,
+      "midpoint": 127.5,
+      "gamma": 1,
+      "centerX": 0.5,
+      "centerY": 0.5,
+      "radius": 0.5,
+      "noiseAmplitude": 0,
+      "noiseCellPx": 1
+    },
+    "controls": "5 by 5 grid; angleDeg and span vary independently. Every other recorded variable, PNG encoding, 1024-pixel size, and seed stay fixed.",
+    "expect": "A smooth field has no unique geometry: do not mistake its brightness ramp for known surface depth."
+  },
+  {
+    "id": "a-grid-direction-span-45-192",
+    "category": "A",
+    "file": "a/a-grid-direction-span-45-192.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "gradient",
+      "shape": "linear",
+      "angleDeg": 45,
+      "span": 192,
+      "midpoint": 127.5,
+      "gamma": 1,
+      "centerX": 0.5,
+      "centerY": 0.5,
+      "radius": 0.5,
+      "noiseAmplitude": 0,
+      "noiseCellPx": 1
+    },
+    "controls": "5 by 5 grid; angleDeg and span vary independently. Every other recorded variable, PNG encoding, 1024-pixel size, and seed stay fixed.",
+    "expect": "A smooth field has no unique geometry: do not mistake its brightness ramp for known surface depth."
+  },
+  {
+    "id": "a-grid-direction-span-90-0",
+    "category": "A",
+    "file": "a/a-grid-direction-span-90-0.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "gradient",
+      "shape": "linear",
+      "angleDeg": 90,
+      "span": 0,
+      "midpoint": 127.5,
+      "gamma": 1,
+      "centerX": 0.5,
+      "centerY": 0.5,
+      "radius": 0.5,
+      "noiseAmplitude": 0,
+      "noiseCellPx": 1
+    },
+    "controls": "5 by 5 grid; angleDeg and span vary independently. Every other recorded variable, PNG encoding, 1024-pixel size, and seed stay fixed.",
+    "expect": "A smooth field has no unique geometry: do not mistake its brightness ramp for known surface depth."
+  },
+  {
+    "id": "a-grid-direction-span-90-48",
+    "category": "A",
+    "file": "a/a-grid-direction-span-90-48.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "gradient",
+      "shape": "linear",
+      "angleDeg": 90,
+      "span": 48,
+      "midpoint": 127.5,
+      "gamma": 1,
+      "centerX": 0.5,
+      "centerY": 0.5,
+      "radius": 0.5,
+      "noiseAmplitude": 0,
+      "noiseCellPx": 1
+    },
+    "controls": "5 by 5 grid; angleDeg and span vary independently. Every other recorded variable, PNG encoding, 1024-pixel size, and seed stay fixed.",
+    "expect": "A smooth field has no unique geometry: do not mistake its brightness ramp for known surface depth."
+  },
+  {
+    "id": "a-grid-direction-span-90-96",
+    "category": "A",
+    "file": "a/a-grid-direction-span-90-96.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "gradient",
+      "shape": "linear",
+      "angleDeg": 90,
+      "span": 96,
+      "midpoint": 127.5,
+      "gamma": 1,
+      "centerX": 0.5,
+      "centerY": 0.5,
+      "radius": 0.5,
+      "noiseAmplitude": 0,
+      "noiseCellPx": 1
+    },
+    "controls": "5 by 5 grid; angleDeg and span vary independently. Every other recorded variable, PNG encoding, 1024-pixel size, and seed stay fixed.",
+    "expect": "A smooth field has no unique geometry: do not mistake its brightness ramp for known surface depth."
+  },
+  {
+    "id": "a-grid-direction-span-90-144",
+    "category": "A",
+    "file": "a/a-grid-direction-span-90-144.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "gradient",
+      "shape": "linear",
+      "angleDeg": 90,
+      "span": 144,
+      "midpoint": 127.5,
+      "gamma": 1,
+      "centerX": 0.5,
+      "centerY": 0.5,
+      "radius": 0.5,
+      "noiseAmplitude": 0,
+      "noiseCellPx": 1
+    },
+    "controls": "5 by 5 grid; angleDeg and span vary independently. Every other recorded variable, PNG encoding, 1024-pixel size, and seed stay fixed.",
+    "expect": "A smooth field has no unique geometry: do not mistake its brightness ramp for known surface depth."
+  },
+  {
+    "id": "a-grid-direction-span-90-192",
+    "category": "A",
+    "file": "a/a-grid-direction-span-90-192.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "gradient",
+      "shape": "linear",
+      "angleDeg": 90,
+      "span": 192,
+      "midpoint": 127.5,
+      "gamma": 1,
+      "centerX": 0.5,
+      "centerY": 0.5,
+      "radius": 0.5,
+      "noiseAmplitude": 0,
+      "noiseCellPx": 1
+    },
+    "controls": "5 by 5 grid; angleDeg and span vary independently. Every other recorded variable, PNG encoding, 1024-pixel size, and seed stay fixed.",
+    "expect": "A smooth field has no unique geometry: do not mistake its brightness ramp for known surface depth."
+  },
+  {
+    "id": "a-grid-direction-span-180-0",
+    "category": "A",
+    "file": "a/a-grid-direction-span-180-0.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "gradient",
+      "shape": "linear",
+      "angleDeg": 180,
+      "span": 0,
+      "midpoint": 127.5,
+      "gamma": 1,
+      "centerX": 0.5,
+      "centerY": 0.5,
+      "radius": 0.5,
+      "noiseAmplitude": 0,
+      "noiseCellPx": 1
+    },
+    "controls": "5 by 5 grid; angleDeg and span vary independently. Every other recorded variable, PNG encoding, 1024-pixel size, and seed stay fixed.",
+    "expect": "A smooth field has no unique geometry: do not mistake its brightness ramp for known surface depth."
+  },
+  {
+    "id": "a-grid-direction-span-180-48",
+    "category": "A",
+    "file": "a/a-grid-direction-span-180-48.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "gradient",
+      "shape": "linear",
+      "angleDeg": 180,
+      "span": 48,
+      "midpoint": 127.5,
+      "gamma": 1,
+      "centerX": 0.5,
+      "centerY": 0.5,
+      "radius": 0.5,
+      "noiseAmplitude": 0,
+      "noiseCellPx": 1
+    },
+    "controls": "5 by 5 grid; angleDeg and span vary independently. Every other recorded variable, PNG encoding, 1024-pixel size, and seed stay fixed.",
+    "expect": "A smooth field has no unique geometry: do not mistake its brightness ramp for known surface depth."
+  },
+  {
+    "id": "a-grid-direction-span-180-96",
+    "category": "A",
+    "file": "a/a-grid-direction-span-180-96.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "gradient",
+      "shape": "linear",
+      "angleDeg": 180,
+      "span": 96,
+      "midpoint": 127.5,
+      "gamma": 1,
+      "centerX": 0.5,
+      "centerY": 0.5,
+      "radius": 0.5,
+      "noiseAmplitude": 0,
+      "noiseCellPx": 1
+    },
+    "controls": "5 by 5 grid; angleDeg and span vary independently. Every other recorded variable, PNG encoding, 1024-pixel size, and seed stay fixed.",
+    "expect": "A smooth field has no unique geometry: do not mistake its brightness ramp for known surface depth."
+  },
+  {
+    "id": "a-grid-direction-span-180-144",
+    "category": "A",
+    "file": "a/a-grid-direction-span-180-144.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "gradient",
+      "shape": "linear",
+      "angleDeg": 180,
+      "span": 144,
+      "midpoint": 127.5,
+      "gamma": 1,
+      "centerX": 0.5,
+      "centerY": 0.5,
+      "radius": 0.5,
+      "noiseAmplitude": 0,
+      "noiseCellPx": 1
+    },
+    "controls": "5 by 5 grid; angleDeg and span vary independently. Every other recorded variable, PNG encoding, 1024-pixel size, and seed stay fixed.",
+    "expect": "A smooth field has no unique geometry: do not mistake its brightness ramp for known surface depth."
+  },
+  {
+    "id": "a-grid-direction-span-180-192",
+    "category": "A",
+    "file": "a/a-grid-direction-span-180-192.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "gradient",
+      "shape": "linear",
+      "angleDeg": 180,
+      "span": 192,
+      "midpoint": 127.5,
+      "gamma": 1,
+      "centerX": 0.5,
+      "centerY": 0.5,
+      "radius": 0.5,
+      "noiseAmplitude": 0,
+      "noiseCellPx": 1
+    },
+    "controls": "5 by 5 grid; angleDeg and span vary independently. Every other recorded variable, PNG encoding, 1024-pixel size, and seed stay fixed.",
+    "expect": "A smooth field has no unique geometry: do not mistake its brightness ramp for known surface depth."
+  },
+  {
+    "id": "a-grid-direction-span-270-0",
+    "category": "A",
+    "file": "a/a-grid-direction-span-270-0.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "gradient",
+      "shape": "linear",
+      "angleDeg": 270,
+      "span": 0,
+      "midpoint": 127.5,
+      "gamma": 1,
+      "centerX": 0.5,
+      "centerY": 0.5,
+      "radius": 0.5,
+      "noiseAmplitude": 0,
+      "noiseCellPx": 1
+    },
+    "controls": "5 by 5 grid; angleDeg and span vary independently. Every other recorded variable, PNG encoding, 1024-pixel size, and seed stay fixed.",
+    "expect": "A smooth field has no unique geometry: do not mistake its brightness ramp for known surface depth."
+  },
+  {
+    "id": "a-grid-direction-span-270-48",
+    "category": "A",
+    "file": "a/a-grid-direction-span-270-48.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "gradient",
+      "shape": "linear",
+      "angleDeg": 270,
+      "span": 48,
+      "midpoint": 127.5,
+      "gamma": 1,
+      "centerX": 0.5,
+      "centerY": 0.5,
+      "radius": 0.5,
+      "noiseAmplitude": 0,
+      "noiseCellPx": 1
+    },
+    "controls": "5 by 5 grid; angleDeg and span vary independently. Every other recorded variable, PNG encoding, 1024-pixel size, and seed stay fixed.",
+    "expect": "A smooth field has no unique geometry: do not mistake its brightness ramp for known surface depth."
+  },
+  {
+    "id": "a-grid-direction-span-270-96",
+    "category": "A",
+    "file": "a/a-grid-direction-span-270-96.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "gradient",
+      "shape": "linear",
+      "angleDeg": 270,
+      "span": 96,
+      "midpoint": 127.5,
+      "gamma": 1,
+      "centerX": 0.5,
+      "centerY": 0.5,
+      "radius": 0.5,
+      "noiseAmplitude": 0,
+      "noiseCellPx": 1
+    },
+    "controls": "5 by 5 grid; angleDeg and span vary independently. Every other recorded variable, PNG encoding, 1024-pixel size, and seed stay fixed.",
+    "expect": "A smooth field has no unique geometry: do not mistake its brightness ramp for known surface depth."
+  },
+  {
+    "id": "a-grid-direction-span-270-144",
+    "category": "A",
+    "file": "a/a-grid-direction-span-270-144.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "gradient",
+      "shape": "linear",
+      "angleDeg": 270,
+      "span": 144,
+      "midpoint": 127.5,
+      "gamma": 1,
+      "centerX": 0.5,
+      "centerY": 0.5,
+      "radius": 0.5,
+      "noiseAmplitude": 0,
+      "noiseCellPx": 1
+    },
+    "controls": "5 by 5 grid; angleDeg and span vary independently. Every other recorded variable, PNG encoding, 1024-pixel size, and seed stay fixed.",
+    "expect": "A smooth field has no unique geometry: do not mistake its brightness ramp for known surface depth."
+  },
+  {
+    "id": "a-grid-direction-span-270-192",
+    "category": "A",
+    "file": "a/a-grid-direction-span-270-192.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "gradient",
+      "shape": "linear",
+      "angleDeg": 270,
+      "span": 192,
+      "midpoint": 127.5,
+      "gamma": 1,
+      "centerX": 0.5,
+      "centerY": 0.5,
+      "radius": 0.5,
+      "noiseAmplitude": 0,
+      "noiseCellPx": 1
+    },
+    "controls": "5 by 5 grid; angleDeg and span vary independently. Every other recorded variable, PNG encoding, 1024-pixel size, and seed stay fixed.",
+    "expect": "A smooth field has no unique geometry: do not mistake its brightness ramp for known surface depth."
+  },
+  {
+    "id": "a-grid-noise-0-1",
+    "category": "A",
+    "file": "a/a-grid-noise-0-1.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "noise",
+      "midpoint": 128,
+      "noiseAmplitude": 0,
+      "noiseCellPx": 1
+    },
+    "controls": "5 by 5 grid; noiseAmplitude and noiseCellPx vary independently. Every other recorded variable, PNG encoding, 1024-pixel size, and seed stay fixed.",
+    "expect": "No geometric depth cue: a constant plane is the null control; color or noise alone must not create confident relief."
+  },
+  {
+    "id": "a-grid-noise-0-4",
+    "category": "A",
+    "file": "a/a-grid-noise-0-4.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "noise",
+      "midpoint": 128,
+      "noiseAmplitude": 0,
+      "noiseCellPx": 4
+    },
+    "controls": "5 by 5 grid; noiseAmplitude and noiseCellPx vary independently. Every other recorded variable, PNG encoding, 1024-pixel size, and seed stay fixed.",
+    "expect": "No geometric depth cue: a constant plane is the null control; color or noise alone must not create confident relief."
+  },
+  {
+    "id": "a-grid-noise-0-16",
+    "category": "A",
+    "file": "a/a-grid-noise-0-16.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "noise",
+      "midpoint": 128,
+      "noiseAmplitude": 0,
+      "noiseCellPx": 16
+    },
+    "controls": "5 by 5 grid; noiseAmplitude and noiseCellPx vary independently. Every other recorded variable, PNG encoding, 1024-pixel size, and seed stay fixed.",
+    "expect": "No geometric depth cue: a constant plane is the null control; color or noise alone must not create confident relief."
+  },
+  {
+    "id": "a-grid-noise-0-64",
+    "category": "A",
+    "file": "a/a-grid-noise-0-64.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "noise",
+      "midpoint": 128,
+      "noiseAmplitude": 0,
+      "noiseCellPx": 64
+    },
+    "controls": "5 by 5 grid; noiseAmplitude and noiseCellPx vary independently. Every other recorded variable, PNG encoding, 1024-pixel size, and seed stay fixed.",
+    "expect": "No geometric depth cue: a constant plane is the null control; color or noise alone must not create confident relief."
+  },
+  {
+    "id": "a-grid-noise-0-256",
+    "category": "A",
+    "file": "a/a-grid-noise-0-256.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "noise",
+      "midpoint": 128,
+      "noiseAmplitude": 0,
+      "noiseCellPx": 256
+    },
+    "controls": "5 by 5 grid; noiseAmplitude and noiseCellPx vary independently. Every other recorded variable, PNG encoding, 1024-pixel size, and seed stay fixed.",
+    "expect": "No geometric depth cue: a constant plane is the null control; color or noise alone must not create confident relief."
+  },
+  {
+    "id": "a-grid-noise-4-1",
+    "category": "A",
+    "file": "a/a-grid-noise-4-1.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "noise",
+      "midpoint": 128,
+      "noiseAmplitude": 4,
+      "noiseCellPx": 1
+    },
+    "controls": "5 by 5 grid; noiseAmplitude and noiseCellPx vary independently. Every other recorded variable, PNG encoding, 1024-pixel size, and seed stay fixed.",
+    "expect": "No geometric depth cue: a constant plane is the null control; color or noise alone must not create confident relief."
+  },
+  {
+    "id": "a-grid-noise-4-4",
+    "category": "A",
+    "file": "a/a-grid-noise-4-4.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "noise",
+      "midpoint": 128,
+      "noiseAmplitude": 4,
+      "noiseCellPx": 4
+    },
+    "controls": "5 by 5 grid; noiseAmplitude and noiseCellPx vary independently. Every other recorded variable, PNG encoding, 1024-pixel size, and seed stay fixed.",
+    "expect": "No geometric depth cue: a constant plane is the null control; color or noise alone must not create confident relief."
+  },
+  {
+    "id": "a-grid-noise-4-16",
+    "category": "A",
+    "file": "a/a-grid-noise-4-16.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "noise",
+      "midpoint": 128,
+      "noiseAmplitude": 4,
+      "noiseCellPx": 16
+    },
+    "controls": "5 by 5 grid; noiseAmplitude and noiseCellPx vary independently. Every other recorded variable, PNG encoding, 1024-pixel size, and seed stay fixed.",
+    "expect": "No geometric depth cue: a constant plane is the null control; color or noise alone must not create confident relief."
+  },
+  {
+    "id": "a-grid-noise-4-64",
+    "category": "A",
+    "file": "a/a-grid-noise-4-64.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "noise",
+      "midpoint": 128,
+      "noiseAmplitude": 4,
+      "noiseCellPx": 64
+    },
+    "controls": "5 by 5 grid; noiseAmplitude and noiseCellPx vary independently. Every other recorded variable, PNG encoding, 1024-pixel size, and seed stay fixed.",
+    "expect": "No geometric depth cue: a constant plane is the null control; color or noise alone must not create confident relief."
+  },
+  {
+    "id": "a-grid-noise-4-256",
+    "category": "A",
+    "file": "a/a-grid-noise-4-256.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "noise",
+      "midpoint": 128,
+      "noiseAmplitude": 4,
+      "noiseCellPx": 256
+    },
+    "controls": "5 by 5 grid; noiseAmplitude and noiseCellPx vary independently. Every other recorded variable, PNG encoding, 1024-pixel size, and seed stay fixed.",
+    "expect": "No geometric depth cue: a constant plane is the null control; color or noise alone must not create confident relief."
+  },
+  {
+    "id": "a-grid-noise-16-1",
+    "category": "A",
+    "file": "a/a-grid-noise-16-1.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "noise",
+      "midpoint": 128,
+      "noiseAmplitude": 16,
+      "noiseCellPx": 1
+    },
+    "controls": "5 by 5 grid; noiseAmplitude and noiseCellPx vary independently. Every other recorded variable, PNG encoding, 1024-pixel size, and seed stay fixed.",
+    "expect": "No geometric depth cue: a constant plane is the null control; color or noise alone must not create confident relief."
+  },
+  {
+    "id": "a-grid-noise-16-4",
+    "category": "A",
+    "file": "a/a-grid-noise-16-4.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "noise",
+      "midpoint": 128,
+      "noiseAmplitude": 16,
+      "noiseCellPx": 4
+    },
+    "controls": "5 by 5 grid; noiseAmplitude and noiseCellPx vary independently. Every other recorded variable, PNG encoding, 1024-pixel size, and seed stay fixed.",
+    "expect": "No geometric depth cue: a constant plane is the null control; color or noise alone must not create confident relief."
+  },
+  {
+    "id": "a-grid-noise-16-16",
+    "category": "A",
+    "file": "a/a-grid-noise-16-16.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "noise",
+      "midpoint": 128,
+      "noiseAmplitude": 16,
+      "noiseCellPx": 16
+    },
+    "controls": "5 by 5 grid; noiseAmplitude and noiseCellPx vary independently. Every other recorded variable, PNG encoding, 1024-pixel size, and seed stay fixed.",
+    "expect": "No geometric depth cue: a constant plane is the null control; color or noise alone must not create confident relief."
+  },
+  {
+    "id": "a-grid-noise-16-64",
+    "category": "A",
+    "file": "a/a-grid-noise-16-64.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "noise",
+      "midpoint": 128,
+      "noiseAmplitude": 16,
+      "noiseCellPx": 64
+    },
+    "controls": "5 by 5 grid; noiseAmplitude and noiseCellPx vary independently. Every other recorded variable, PNG encoding, 1024-pixel size, and seed stay fixed.",
+    "expect": "No geometric depth cue: a constant plane is the null control; color or noise alone must not create confident relief."
+  },
+  {
+    "id": "a-grid-noise-16-256",
+    "category": "A",
+    "file": "a/a-grid-noise-16-256.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "noise",
+      "midpoint": 128,
+      "noiseAmplitude": 16,
+      "noiseCellPx": 256
+    },
+    "controls": "5 by 5 grid; noiseAmplitude and noiseCellPx vary independently. Every other recorded variable, PNG encoding, 1024-pixel size, and seed stay fixed.",
+    "expect": "No geometric depth cue: a constant plane is the null control; color or noise alone must not create confident relief."
+  },
+  {
+    "id": "a-grid-noise-32-1",
+    "category": "A",
+    "file": "a/a-grid-noise-32-1.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "noise",
+      "midpoint": 128,
+      "noiseAmplitude": 32,
+      "noiseCellPx": 1
+    },
+    "controls": "5 by 5 grid; noiseAmplitude and noiseCellPx vary independently. Every other recorded variable, PNG encoding, 1024-pixel size, and seed stay fixed.",
+    "expect": "No geometric depth cue: a constant plane is the null control; color or noise alone must not create confident relief."
+  },
+  {
+    "id": "a-grid-noise-32-4",
+    "category": "A",
+    "file": "a/a-grid-noise-32-4.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "noise",
+      "midpoint": 128,
+      "noiseAmplitude": 32,
+      "noiseCellPx": 4
+    },
+    "controls": "5 by 5 grid; noiseAmplitude and noiseCellPx vary independently. Every other recorded variable, PNG encoding, 1024-pixel size, and seed stay fixed.",
+    "expect": "No geometric depth cue: a constant plane is the null control; color or noise alone must not create confident relief."
+  },
+  {
+    "id": "a-grid-noise-32-16",
+    "category": "A",
+    "file": "a/a-grid-noise-32-16.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "noise",
+      "midpoint": 128,
+      "noiseAmplitude": 32,
+      "noiseCellPx": 16
+    },
+    "controls": "5 by 5 grid; noiseAmplitude and noiseCellPx vary independently. Every other recorded variable, PNG encoding, 1024-pixel size, and seed stay fixed.",
+    "expect": "No geometric depth cue: a constant plane is the null control; color or noise alone must not create confident relief."
+  },
+  {
+    "id": "a-grid-noise-32-64",
+    "category": "A",
+    "file": "a/a-grid-noise-32-64.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "noise",
+      "midpoint": 128,
+      "noiseAmplitude": 32,
+      "noiseCellPx": 64
+    },
+    "controls": "5 by 5 grid; noiseAmplitude and noiseCellPx vary independently. Every other recorded variable, PNG encoding, 1024-pixel size, and seed stay fixed.",
+    "expect": "No geometric depth cue: a constant plane is the null control; color or noise alone must not create confident relief."
+  },
+  {
+    "id": "a-grid-noise-32-256",
+    "category": "A",
+    "file": "a/a-grid-noise-32-256.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "noise",
+      "midpoint": 128,
+      "noiseAmplitude": 32,
+      "noiseCellPx": 256
+    },
+    "controls": "5 by 5 grid; noiseAmplitude and noiseCellPx vary independently. Every other recorded variable, PNG encoding, 1024-pixel size, and seed stay fixed.",
+    "expect": "No geometric depth cue: a constant plane is the null control; color or noise alone must not create confident relief."
+  },
+  {
+    "id": "a-grid-noise-64-1",
+    "category": "A",
+    "file": "a/a-grid-noise-64-1.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "noise",
+      "midpoint": 128,
+      "noiseAmplitude": 64,
+      "noiseCellPx": 1
+    },
+    "controls": "5 by 5 grid; noiseAmplitude and noiseCellPx vary independently. Every other recorded variable, PNG encoding, 1024-pixel size, and seed stay fixed.",
+    "expect": "No geometric depth cue: a constant plane is the null control; color or noise alone must not create confident relief."
+  },
+  {
+    "id": "a-grid-noise-64-4",
+    "category": "A",
+    "file": "a/a-grid-noise-64-4.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "noise",
+      "midpoint": 128,
+      "noiseAmplitude": 64,
+      "noiseCellPx": 4
+    },
+    "controls": "5 by 5 grid; noiseAmplitude and noiseCellPx vary independently. Every other recorded variable, PNG encoding, 1024-pixel size, and seed stay fixed.",
+    "expect": "No geometric depth cue: a constant plane is the null control; color or noise alone must not create confident relief."
+  },
+  {
+    "id": "a-grid-noise-64-16",
+    "category": "A",
+    "file": "a/a-grid-noise-64-16.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "noise",
+      "midpoint": 128,
+      "noiseAmplitude": 64,
+      "noiseCellPx": 16
+    },
+    "controls": "5 by 5 grid; noiseAmplitude and noiseCellPx vary independently. Every other recorded variable, PNG encoding, 1024-pixel size, and seed stay fixed.",
+    "expect": "No geometric depth cue: a constant plane is the null control; color or noise alone must not create confident relief."
+  },
+  {
+    "id": "a-grid-noise-64-64",
+    "category": "A",
+    "file": "a/a-grid-noise-64-64.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "noise",
+      "midpoint": 128,
+      "noiseAmplitude": 64,
+      "noiseCellPx": 64
+    },
+    "controls": "5 by 5 grid; noiseAmplitude and noiseCellPx vary independently. Every other recorded variable, PNG encoding, 1024-pixel size, and seed stay fixed.",
+    "expect": "No geometric depth cue: a constant plane is the null control; color or noise alone must not create confident relief."
+  },
+  {
+    "id": "a-grid-noise-64-256",
+    "category": "A",
+    "file": "a/a-grid-noise-64-256.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "field": "noise",
+      "midpoint": 128,
+      "noiseAmplitude": 64,
+      "noiseCellPx": 256
+    },
+    "controls": "5 by 5 grid; noiseAmplitude and noiseCellPx vary independently. Every other recorded variable, PNG encoding, 1024-pixel size, and seed stay fixed.",
+    "expect": "No geometric depth cue: a constant plane is the null control; color or noise alone must not create confident relief."
+  }
+]
