@@ -121,6 +121,10 @@ lists. All of these files are already preserved by the whole-repository checkpoi
 
 ## How to restore it
 
+Restoring `src/powers/` and `docs/evidence/powers-of-ten.json` brings back the old City and Mall
+labels; preserve [task 81's corrected wording](https://github.com/ryanjosephkamp/splashery/pull/627)
+after a restore.
+
 For an exact runnable copy, fetch into an explicit remote-tracking ref (a fetch of only the branch
 name may leave only `FETCH_HEAD` in a narrowly configured checkout), verify the SHA, and create a
 separate restore worktree:
