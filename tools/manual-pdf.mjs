@@ -172,6 +172,7 @@ const PUBLIC = "https://ryanjosephkamp.github.io/splashery/";
 
 const browser = await chromium.launch({
   executablePath: process.env.SPLASHERY_CHROMIUM || undefined,
+  chromiumSandbox: true,
 });
 const major = Number(browser.version().split(".")[0]);
 console.log(`Chromium ${browser.version()}`);
@@ -365,6 +366,7 @@ if (publish) {
   );
   console.log(`Published ${edition}. Keep earlier edition PDFs for old links.`);
 }
+// The legacy copy exists only for old links; every published edition refreshes it.
 fs.writeFileSync(out, pdf);
 console.log(`${out}: ${(pdf.length / 1024).toFixed(0)} KB`);
 if (publish) {

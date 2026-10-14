@@ -98,6 +98,16 @@ for (const [width, height] of [
       (await import("/src/packs/pictures.js")).RECIPES["your-book"].pictures.sample(),
     );
     expect(sample).toBe(`manual/${MANUAL_PDF}`);
+    for (const url of ["/site/about/credits/", "/site/learn/notebook/books/"]) {
+      await page.goto(url);
+      const link = page.locator('a[href*="/manual/tinkerers-manual"]');
+      await expect(link).toHaveCount(1);
+      expect((await link.getAttribute("href")).endsWith(`/manual/${MANUAL_PDF}`)).toBe(true);
+      expect(
+        (await page.request.get(new URL(await link.getAttribute("href"), page.url()).href)).ok(),
+      ).toBe(true);
+      await expect(page.locator("main")).not.toContainText("manual/tinkerers-manual.pdf");
+    }
   });
 
   test(`PDF.js follows contents links, bookmarks, and printed page numbers at ${width}x${height}`, async ({
