@@ -99,7 +99,7 @@ ${live("toy-piano")}
 <p class="pit-num">03</p>
 <h2 id="h-pit-photo">A photo becomes 3D, on the device</h2>
 <p>A depth model runs in the page and lifts a single photo into a relief you can turn. It downloads only when you ask for it, and the photo is never sent anywhere. A short video becomes a scene you can fly through, solved and trained on the device too.</p>
-<p class="pit-own" hidden><button type="button" class="button" data-pit-own>Use your own photo</button><input type="file" accept="image/jpeg,image/png,image/webp" data-pit-own-file hidden /><span>Or drop one on the picture. It stays on this device; the depth model (about 27 MB) downloads the first time.</span></p>
+<p class="pit-own" hidden><button type="button" class="button" data-pit-own>Use your own photo</button><input type="file" accept="image/jpeg,image/png,image/webp" aria-label="Your own photo" data-pit-own-file hidden /><span>Or drop one on the picture. It stays on this device; the depth model (about 27 MB) downloads the first time.</span></p>
 ${links("photo-3d", `<a href="${up}studio/">The Studio</a>`)}
 </div>
 <figure class="pit-figure">
