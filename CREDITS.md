@@ -1773,3 +1773,8 @@ the picker and in-app credit. Checked October 13, 2026:
 The full prompts, hashes, scores, five-link scan rates, and phone-size contact sheet are in
 [the sample-pictures audit](docs/audits/sample-pictures-2026-10.md). No new asset loads before it is
 picked.
+
+Photo to 3D round 4 startup work, comparison tools, and review recordings were made by Ryan with
+Codex (GPT-6), October 14, 2026. Code is MIT; the original recording contribution is CC0 1.0,
+subject to each source image's existing license. See the
+[round 4 audit](docs/audits/photo-3d-r4-2026-10.md).
