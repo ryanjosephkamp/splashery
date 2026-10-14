@@ -120,9 +120,11 @@ export class Stage {
     // Rendering is on demand, but splat sorting finishes on a worker a few
     // frames after a change, so every request keeps frames coming briefly.
     this.aliveUntil = 0;
+    this.renderHolds = new Set();
     app.on("update", (dt) => {
       for (const fn of this.updateHandlers) fn(dt);
-      if (performance.now() < this.aliveUntil) app.renderNextFrame = true;
+      if (this.renderHolds.size && !this.captureWaiters.length) app.renderNextFrame = false;
+      else if (performance.now() < this.aliveUntil) app.renderNextFrame = true;
     });
     this.graveyard = [];
     this.projectorTries = 0; // Fluids r7 (hookProjector)
@@ -279,6 +281,18 @@ export class Stage {
   requestRender(keepAliveMs = 1000) {
     this.app.renderNextFrame = true;
     this.aliveUntil = Math.max(this.aliveUntil, performance.now() + keepAliveMs);
+  }
+
+  // An opaque loading cover can spare the GPU while a worker prepares the next
+  // scene. Keep updates, input, and explicitly requested captures alive. Each
+  // cover releases its own hold, so a stale cleanup cannot resume another one.
+  holdRendering() {
+    const hold = {};
+    this.renderHolds.add(hold);
+    this.app.renderNextFrame = false;
+    return () => {
+      if (this.renderHolds.delete(hold) && !this.renderHolds.size) this.requestRender();
+    };
   }
 
   // The canvas size comes from CSS. app.resizeCanvas() would pin it with
