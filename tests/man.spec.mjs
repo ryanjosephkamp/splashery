@@ -232,6 +232,7 @@ test("the manual page opens, and every example link opens the toy with its progr
   // Every picture on the page is there.
   const imgs = await page.locator("img").evaluateAll((is) => is.map((i) => [i.getAttribute("src"), i.complete && i.naturalWidth > 0])); // prettier-ignore
   for (const [src, ok] of imgs) expect(ok, src).toBe(true);
+  // Compatibility coverage: the original download address still exists.
   expect(fs.existsSync("manual/tinkerers-manual.pdf")).toBe(true);
   expect(problems).toEqual([]);
 });

@@ -116,7 +116,7 @@
       "kind": "kit",
       "recipeFile": "src/packs/pictures.js",
       "recipeKB": 128.7,
-      "recipeGzipKB": 41.4,
+      "recipeGzipKB": 41.5,
       "sharedBy": 5
     },
     "model-splats": {
@@ -185,7 +185,7 @@
     "qr-code": {
       "kind": "kit",
       "recipeFile": "src/packs/qr.js",
-      "recipeKB": 48.6,
+      "recipeKB": 48.8,
       "recipeGzipKB": 15.7,
       "sharedBy": 1
     },

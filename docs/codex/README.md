@@ -82,6 +82,11 @@ merges.
 | 71-renderer-diagnostics.md        | When 3D can't start: keep the real cause, a local report, honest tests and guidance                 | start-up path (an Engine commit), tests              | no            |
 | 72-three-codes-lines.md           | The white lines in Three QR codes in one, reproduced on Android and fixed at the cause              | the qr-three toy, tests                              | no            |
 | 73-manual-pdf-phone.md            | The manual PDF on phones: no stale copies, a contents page that works in any viewer                 | the PDF build, links                                 | no            |
+| 74-photo-3d-explained.md          | Photo to 3D explained from the code, and compared with every other photo-to-3D approach             | two reports, diagrams                                | yes           |
+| 75-depth-lab-images.md            | The depth lab's systematic test pictures, in five parallel parts (a to e)                           | generators, manifests, contact sheets                | yes           |
+| 76-photo-3d-r4.md                 | Photo to 3D round 4: better fill behind objects, clean thin parts, faster (a Goal run)              | Photo to 3D, tests, clips                            | yes           |
+| 77-ci-suite.md                    | The test suite on GitHub Actions, sharded, for every PR                                             | a workflow, a short doc                              | no            |
+| 78-portfolio-toys.md              | Four splat toys from the owner's portfolio concepts, in four parallel parts (a to d)                | four labs toys, tests, clips                         | no            |
 
 The Codex cloud environment is set up with `tools/codex-setup.sh`; [SETUP.md](SETUP.md) has the
 steps for creating it and fixing a failed setup.

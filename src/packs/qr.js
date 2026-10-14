@@ -18,6 +18,7 @@
 
 import { encodeQR, ECC_RECOVERY, QUIET } from "../qr/encode.js";
 import { buildCode, STYLES, PLATES, PRESETS, palette, codeContrast } from "../qr/build.js";
+import { shapeChoices, shapeHalf } from "../qr/circle.js";
 import { qrModifier, MOTION_SECS, MOTION_IDS, PATTERNS, PHASE_RATE } from "../qr/field.js";
 import { readCode } from "../qr/scan.js";
 import { KINDS, kindById, contentText, shareableFields } from "../qr/content.js";
@@ -182,7 +183,7 @@ export function scanPose(margin = 1) {
   const cam = app?.player?.camera;
   const fit = fitNow();
   if (!cam || !fit || !QR.code) return { yaw: 0, pitch: 0, roll: 0, distance: 3 };
-  const half = (QR.code.size / 2 + QUIET + margin) * fit.scale; // toy units
+  const half = (shapeHalf(QR.code, QR.options?.shape) + margin) * fit.scale; // toy units
   // The camera aims at the toy's center: the middle of the reach (z from
   // -1.2 to 0.6), 0.3 modules behind the code's face.
   const d = half / Math.tan((19 * Math.PI) / 180) + 0.3 * fit.scale;
@@ -819,6 +820,7 @@ export const RECIPES = {
       { key: "kind", label: "What it holds", type: "select", default: "link", hidden: true, choices: KINDS.map((k) => ({ id: k.id, label: k.label })) }, // prettier-ignore
       { key: "fields", label: "Its details", type: "text", default: "", hidden: true },
       // Picked in the panel's style row, which also sets the style's colors.
+      { key: "shape", label: "Shape", type: "select", default: "square", choices: shapeChoices },
       { key: "style", label: "Style", type: "select", default: "classic", choices: choices(STYLES), hidden: true }, // prettier-ignore
       {
         key: "ecc",
