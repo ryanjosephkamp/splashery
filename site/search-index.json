@@ -4301,6 +4301,16 @@
     "l": 1
   },
   {
+    "t": "Neuron specimen",
+    "u": "toys/specimen-neuron/",
+    "k": "toy",
+    "s": "Tiny world",
+    "d": "Tap to fire a spike. In Toy, change the stain or turn Focus to merge the splats.",
+    "w": "neuron specimen tiny world tiny world nerve cell dendrite axon myelin stain focus gaussian hodgkin huxley specimen biology specimen-neuron",
+    "i": "../assets/toys/specimen-neuron/thumb.webp",
+    "l": 1
+  },
+  {
     "t": "Home",
     "u": "",
     "k": "page",

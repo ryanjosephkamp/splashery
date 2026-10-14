@@ -365,6 +365,7 @@ export const SITE_TOY_IDS = [
   "sound-lab",
   "sound-recorder",
   "space-shuttle",
+  "specimen-neuron",
   "spinning-top",
   "spiral-galaxy",
   "splat-equation",

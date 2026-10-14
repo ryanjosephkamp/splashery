@@ -1773,3 +1773,17 @@ the picker and in-app credit. Checked October 13, 2026:
 The full prompts, hashes, scores, five-link scan rates, and phone-size contact sheet are in
 [the sample-pictures audit](docs/audits/sample-pictures-2026-10.md). No new asset loads before it is
 picked.
+
+## Neuron specimen (Codex task 78b, October 14, 2026)
+
+From a concept by Ryan Kamp. The procedural neuron, Gaussian moment-matching tree, and membrane
+model were ported from Ryan's own Specimen concept on `claude/portfolio-ref`, read directly from
+`ref/portfolio/specimen/specimen.js`. No reference pages, fonts, or renderers ship. The new
+procedural specimen and thumbnail are made by Ryan with Codex (GPT-6), CC0; the port's code is
+offered under Splashery's MIT license. The three stain palettes are illustrative. The quiet
+synthesized tap cue is a visual aid, not a recording of a nerve cell.
+
+The [Hodgkin-Huxley model](https://en.wikipedia.org/wiki/Hodgkin%E2%80%93Huxley_model) page was
+opened on October 14, 2026. This toy integrates the concept's squid giant axon equations with a 0.01
+ms Euler step, samples the potential at 0.1 ms, and displays 7 model milliseconds per second.
+Geometry and timing are schematic, not a measured human neuron.

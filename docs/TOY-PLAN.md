@@ -10,8 +10,8 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 462 toys. 462 have a tap action today; the other 0 only hop.
-- **keep** (the effect is right: the owner liked it, or C2 finished it): 439.
+- 463 toys. 463 have a tap action today; the other 0 only hop.
+- **keep** (the effect is right: the owner liked it, or C2 finished it): 440.
 - **more** (has an effect; make it clearer or more dramatic): 0.
 - **new** (needs its own effect): 23.
 - Visual fixes: 0 open, 31 done. Touch or drag interaction asked for: 4.
@@ -83,7 +83,7 @@ Proposals below are suggestions; the owner may change them.
   city, Stork migration, Earthquakes, Airport X-ray scanner, How CT works, Walnut CT scan, MRI of a
   fruit, Electron microscope, Thermal camera, Screen, Shardball, Longtail, Grain Garden, Page
   Breaker, Strata, Volley Table, Stone Belt, Soft Landing, Night Owl Pinball, Cast a Shadow, Photo
-  Dash, Note Rider, Night sky, Data in 3D.
+  Dash, Note Rider, Night sky, Data in 3D, Neuron specimen.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
@@ -1540,7 +1540,7 @@ Proposals below are suggestions; the owner may change them.
     the finger (an engine change: from inside, a drag turns as far as it spans on screen).
   - Sound: One soft, low tine and a faint breath as the ring marks it.
 
-## Tiny (22)
+## Tiny (23)
 
 - **Virus** (`virus`). Now: tap: Make copies. Plan: keep.
   - Owner: Looks good; pick an effect.
@@ -1723,6 +1723,15 @@ Proposals below are suggestions; the owner may change them.
     grain.
   - Sound: A soft stretch as the pseudopods reach out, a gulp as the phagosome closes and a low fizz
     as it is digested.
+- **Neuron specimen** (`specimen-neuron`). Now: tap: Fire a spike. Plan: keep.
+  - Effect: A slowed Hodgkin-Huxley spike travels through the dendrites, cell body, myelinated axon,
+    and terminals. Focus merges Gaussian pairs without losing mass, center, or covariance.
+  - Improved: Codex task 78b: from Ryan Kamp's Specimen concept, a labs neuron with 32,768 visible
+    desktop splats or 8,192 on the phone profile, three stain choices, a moment-matched focus tree,
+    and the concept's Hodgkin-Huxley waveform. Made by Ryan with Codex (GPT-6); procedural geometry
+    CC0, code MIT.
+  - Sound: A quiet, illustrative electric cue at the cell body's activation; real nerve cells are
+    not audible.
 
 ## Atoms (10)
 

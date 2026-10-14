@@ -6982,5 +6982,19 @@
       "prompt": "C54-Q8",
       "note": "AI-made by the owner with an AI image tool, on his instruction. Fictional subject; no people, faces, logos, readable text, or real landmarks. Native square image resized to 960×960, JPEG quality 88. Full prompt: tools/cdx-pics-qr-ai-prompts.json. No payload-specific image conditioning."
     }
+  ],
+  "portfolioSpecimens": [
+    {
+      "id": "specimen-neuron",
+      "file": "assets/toys/specimen-neuron/thumb.webp",
+      "recipe": "src/packs/neuron.js",
+      "author": "Made by Ryan with Codex (GPT-6)",
+      "license": "CC0 1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "checked": "October 14, 2026",
+      "sha256": "789ebc33a3b807f9216262c4076a2b5d482618e45bd614a7b78d104a624166a2",
+      "sourceNote": "Original procedural specimen, from a concept by Ryan Kamp. Math read from claude/portfolio-ref at 5191138bdf91c29093af1c6b02a466c6b8ac6aa6:ref/portfolio/specimen/specimen.js; no reference files, fonts, or renderer copied.",
+      "changes": "Procedural geometry ported onto the Kit; 32,768 visible desktop leaves or 8,192 on the phone profile; moment-matched focus levels. Thumbnail rendered with tools/make-thumbs.mjs."
+    }
   ]
 }
