@@ -1,0 +1,3162 @@
+[
+  {
+    "id": "i-resolution-gray-256",
+    "category": "I",
+    "file": "i/i-resolution-gray-256.png",
+    "width": 256,
+    "height": 256,
+    "seed": 7,
+    "variables": {
+      "reference": "gray",
+      "resolutionPx": 256,
+      "jpegQuality": null,
+      "noiseSigma": 0,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only resolutionPx and the matching file dimensions vary in this sweep. One fixed 4096-pixel source, area resampling, reference content, PNG format, zero noise, and seed 7 stay fixed.",
+    "expect": "Keep the flat control flat; compression or noise must not introduce confident new geometric depth."
+  },
+  {
+    "id": "i-resolution-gray-384",
+    "category": "I",
+    "file": "i/i-resolution-gray-384.png",
+    "width": 384,
+    "height": 384,
+    "seed": 7,
+    "variables": {
+      "reference": "gray",
+      "resolutionPx": 384,
+      "jpegQuality": null,
+      "noiseSigma": 0,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only resolutionPx and the matching file dimensions vary in this sweep. One fixed 4096-pixel source, area resampling, reference content, PNG format, zero noise, and seed 7 stay fixed.",
+    "expect": "Keep the flat control flat; compression or noise must not introduce confident new geometric depth."
+  },
+  {
+    "id": "i-resolution-gray-512",
+    "category": "I",
+    "file": "i/i-resolution-gray-512.png",
+    "width": 512,
+    "height": 512,
+    "seed": 7,
+    "variables": {
+      "reference": "gray",
+      "resolutionPx": 512,
+      "jpegQuality": null,
+      "noiseSigma": 0,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only resolutionPx and the matching file dimensions vary in this sweep. One fixed 4096-pixel source, area resampling, reference content, PNG format, zero noise, and seed 7 stay fixed.",
+    "expect": "Keep the flat control flat; compression or noise must not introduce confident new geometric depth."
+  },
+  {
+    "id": "i-resolution-gray-768",
+    "category": "I",
+    "file": "i/i-resolution-gray-768.png",
+    "width": 768,
+    "height": 768,
+    "seed": 7,
+    "variables": {
+      "reference": "gray",
+      "resolutionPx": 768,
+      "jpegQuality": null,
+      "noiseSigma": 0,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only resolutionPx and the matching file dimensions vary in this sweep. One fixed 4096-pixel source, area resampling, reference content, PNG format, zero noise, and seed 7 stay fixed.",
+    "expect": "Keep the flat control flat; compression or noise must not introduce confident new geometric depth."
+  },
+  {
+    "id": "i-resolution-gray-1024",
+    "category": "I",
+    "file": "i/i-resolution-gray-1024.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "gray",
+      "resolutionPx": 1024,
+      "jpegQuality": null,
+      "noiseSigma": 0,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only resolutionPx and the matching file dimensions vary in this sweep. One fixed 4096-pixel source, area resampling, reference content, PNG format, zero noise, and seed 7 stay fixed.",
+    "expect": "Keep the flat control flat; compression or noise must not introduce confident new geometric depth."
+  },
+  {
+    "id": "i-resolution-gray-1536",
+    "category": "I",
+    "file": "i/i-resolution-gray-1536.png",
+    "width": 1536,
+    "height": 1536,
+    "seed": 7,
+    "variables": {
+      "reference": "gray",
+      "resolutionPx": 1536,
+      "jpegQuality": null,
+      "noiseSigma": 0,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only resolutionPx and the matching file dimensions vary in this sweep. One fixed 4096-pixel source, area resampling, reference content, PNG format, zero noise, and seed 7 stay fixed.",
+    "expect": "Keep the flat control flat; compression or noise must not introduce confident new geometric depth."
+  },
+  {
+    "id": "i-resolution-gray-2048",
+    "category": "I",
+    "file": "i/i-resolution-gray-2048.png",
+    "width": 2048,
+    "height": 2048,
+    "seed": 7,
+    "variables": {
+      "reference": "gray",
+      "resolutionPx": 2048,
+      "jpegQuality": null,
+      "noiseSigma": 0,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only resolutionPx and the matching file dimensions vary in this sweep. One fixed 4096-pixel source, area resampling, reference content, PNG format, zero noise, and seed 7 stay fixed.",
+    "expect": "Keep the flat control flat; compression or noise must not introduce confident new geometric depth."
+  },
+  {
+    "id": "i-resolution-gray-3072",
+    "category": "I",
+    "file": "i/i-resolution-gray-3072.png",
+    "width": 3072,
+    "height": 3072,
+    "seed": 7,
+    "variables": {
+      "reference": "gray",
+      "resolutionPx": 3072,
+      "jpegQuality": null,
+      "noiseSigma": 0,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only resolutionPx and the matching file dimensions vary in this sweep. One fixed 4096-pixel source, area resampling, reference content, PNG format, zero noise, and seed 7 stay fixed.",
+    "expect": "Keep the flat control flat; compression or noise must not introduce confident new geometric depth."
+  },
+  {
+    "id": "i-resolution-gray-4096",
+    "category": "I",
+    "file": "i/i-resolution-gray-4096.png",
+    "width": 4096,
+    "height": 4096,
+    "seed": 7,
+    "variables": {
+      "reference": "gray",
+      "resolutionPx": 4096,
+      "jpegQuality": null,
+      "noiseSigma": 0,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only resolutionPx and the matching file dimensions vary in this sweep. One fixed 4096-pixel source, area resampling, reference content, PNG format, zero noise, and seed 7 stay fixed.",
+    "expect": "Keep the flat control flat; compression or noise must not introduce confident new geometric depth."
+  },
+  {
+    "id": "i-jpeg-gray-10",
+    "category": "I",
+    "file": "i/i-jpeg-gray-10.jpg",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "gray",
+      "resolutionPx": 1024,
+      "jpegQuality": 10,
+      "noiseSigma": 0,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only jpegQuality varies in this sweep. Reference content, 1024-pixel size, area resampling, JPEG encoder, zero noise, and seed 7 stay fixed. Compare with the matching resolution-1024 PNG for a lossless control.",
+    "expect": "Keep the flat control flat; compression or noise must not introduce confident new geometric depth."
+  },
+  {
+    "id": "i-jpeg-gray-20",
+    "category": "I",
+    "file": "i/i-jpeg-gray-20.jpg",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "gray",
+      "resolutionPx": 1024,
+      "jpegQuality": 20,
+      "noiseSigma": 0,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only jpegQuality varies in this sweep. Reference content, 1024-pixel size, area resampling, JPEG encoder, zero noise, and seed 7 stay fixed. Compare with the matching resolution-1024 PNG for a lossless control.",
+    "expect": "Keep the flat control flat; compression or noise must not introduce confident new geometric depth."
+  },
+  {
+    "id": "i-jpeg-gray-30",
+    "category": "I",
+    "file": "i/i-jpeg-gray-30.jpg",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "gray",
+      "resolutionPx": 1024,
+      "jpegQuality": 30,
+      "noiseSigma": 0,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only jpegQuality varies in this sweep. Reference content, 1024-pixel size, area resampling, JPEG encoder, zero noise, and seed 7 stay fixed. Compare with the matching resolution-1024 PNG for a lossless control.",
+    "expect": "Keep the flat control flat; compression or noise must not introduce confident new geometric depth."
+  },
+  {
+    "id": "i-jpeg-gray-40",
+    "category": "I",
+    "file": "i/i-jpeg-gray-40.jpg",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "gray",
+      "resolutionPx": 1024,
+      "jpegQuality": 40,
+      "noiseSigma": 0,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only jpegQuality varies in this sweep. Reference content, 1024-pixel size, area resampling, JPEG encoder, zero noise, and seed 7 stay fixed. Compare with the matching resolution-1024 PNG for a lossless control.",
+    "expect": "Keep the flat control flat; compression or noise must not introduce confident new geometric depth."
+  },
+  {
+    "id": "i-jpeg-gray-50",
+    "category": "I",
+    "file": "i/i-jpeg-gray-50.jpg",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "gray",
+      "resolutionPx": 1024,
+      "jpegQuality": 50,
+      "noiseSigma": 0,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only jpegQuality varies in this sweep. Reference content, 1024-pixel size, area resampling, JPEG encoder, zero noise, and seed 7 stay fixed. Compare with the matching resolution-1024 PNG for a lossless control.",
+    "expect": "Keep the flat control flat; compression or noise must not introduce confident new geometric depth."
+  },
+  {
+    "id": "i-jpeg-gray-65",
+    "category": "I",
+    "file": "i/i-jpeg-gray-65.jpg",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "gray",
+      "resolutionPx": 1024,
+      "jpegQuality": 65,
+      "noiseSigma": 0,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only jpegQuality varies in this sweep. Reference content, 1024-pixel size, area resampling, JPEG encoder, zero noise, and seed 7 stay fixed. Compare with the matching resolution-1024 PNG for a lossless control.",
+    "expect": "Keep the flat control flat; compression or noise must not introduce confident new geometric depth."
+  },
+  {
+    "id": "i-jpeg-gray-80",
+    "category": "I",
+    "file": "i/i-jpeg-gray-80.jpg",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "gray",
+      "resolutionPx": 1024,
+      "jpegQuality": 80,
+      "noiseSigma": 0,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only jpegQuality varies in this sweep. Reference content, 1024-pixel size, area resampling, JPEG encoder, zero noise, and seed 7 stay fixed. Compare with the matching resolution-1024 PNG for a lossless control.",
+    "expect": "Keep the flat control flat; compression or noise must not introduce confident new geometric depth."
+  },
+  {
+    "id": "i-jpeg-gray-90",
+    "category": "I",
+    "file": "i/i-jpeg-gray-90.jpg",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "gray",
+      "resolutionPx": 1024,
+      "jpegQuality": 90,
+      "noiseSigma": 0,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only jpegQuality varies in this sweep. Reference content, 1024-pixel size, area resampling, JPEG encoder, zero noise, and seed 7 stay fixed. Compare with the matching resolution-1024 PNG for a lossless control.",
+    "expect": "Keep the flat control flat; compression or noise must not introduce confident new geometric depth."
+  },
+  {
+    "id": "i-jpeg-gray-100",
+    "category": "I",
+    "file": "i/i-jpeg-gray-100.jpg",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "gray",
+      "resolutionPx": 1024,
+      "jpegQuality": 100,
+      "noiseSigma": 0,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only jpegQuality varies in this sweep. Reference content, 1024-pixel size, area resampling, JPEG encoder, zero noise, and seed 7 stay fixed. Compare with the matching resolution-1024 PNG for a lossless control.",
+    "expect": "Keep the flat control flat; compression or noise must not introduce confident new geometric depth."
+  },
+  {
+    "id": "i-sensor-luma-gray-0",
+    "category": "I",
+    "file": "i/i-sensor-luma-gray-0.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "gray",
+      "resolutionPx": 1024,
+      "jpegQuality": null,
+      "noiseSigma": 0,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only noiseSigma varies in this sweep. One fixed seeded Gaussian noise realization, channel mode, reference content, 1024-pixel size, area resampling, and PNG format stay fixed. Noise is added after resizing and before encoding.",
+    "expect": "Keep the flat control flat; compression or noise must not introduce confident new geometric depth."
+  },
+  {
+    "id": "i-sensor-luma-gray-0p5",
+    "category": "I",
+    "file": "i/i-sensor-luma-gray-0p5.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "gray",
+      "resolutionPx": 1024,
+      "jpegQuality": null,
+      "noiseSigma": 0.5,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only noiseSigma varies in this sweep. One fixed seeded Gaussian noise realization, channel mode, reference content, 1024-pixel size, area resampling, and PNG format stay fixed. Noise is added after resizing and before encoding.",
+    "expect": "Keep the flat control flat; compression or noise must not introduce confident new geometric depth."
+  },
+  {
+    "id": "i-sensor-luma-gray-1",
+    "category": "I",
+    "file": "i/i-sensor-luma-gray-1.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "gray",
+      "resolutionPx": 1024,
+      "jpegQuality": null,
+      "noiseSigma": 1,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only noiseSigma varies in this sweep. One fixed seeded Gaussian noise realization, channel mode, reference content, 1024-pixel size, area resampling, and PNG format stay fixed. Noise is added after resizing and before encoding.",
+    "expect": "Keep the flat control flat; compression or noise must not introduce confident new geometric depth."
+  },
+  {
+    "id": "i-sensor-luma-gray-2",
+    "category": "I",
+    "file": "i/i-sensor-luma-gray-2.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "gray",
+      "resolutionPx": 1024,
+      "jpegQuality": null,
+      "noiseSigma": 2,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only noiseSigma varies in this sweep. One fixed seeded Gaussian noise realization, channel mode, reference content, 1024-pixel size, area resampling, and PNG format stay fixed. Noise is added after resizing and before encoding.",
+    "expect": "Keep the flat control flat; compression or noise must not introduce confident new geometric depth."
+  },
+  {
+    "id": "i-sensor-luma-gray-4",
+    "category": "I",
+    "file": "i/i-sensor-luma-gray-4.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "gray",
+      "resolutionPx": 1024,
+      "jpegQuality": null,
+      "noiseSigma": 4,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only noiseSigma varies in this sweep. One fixed seeded Gaussian noise realization, channel mode, reference content, 1024-pixel size, area resampling, and PNG format stay fixed. Noise is added after resizing and before encoding.",
+    "expect": "Keep the flat control flat; compression or noise must not introduce confident new geometric depth."
+  },
+  {
+    "id": "i-sensor-luma-gray-8",
+    "category": "I",
+    "file": "i/i-sensor-luma-gray-8.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "gray",
+      "resolutionPx": 1024,
+      "jpegQuality": null,
+      "noiseSigma": 8,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only noiseSigma varies in this sweep. One fixed seeded Gaussian noise realization, channel mode, reference content, 1024-pixel size, area resampling, and PNG format stay fixed. Noise is added after resizing and before encoding.",
+    "expect": "Keep the flat control flat; compression or noise must not introduce confident new geometric depth."
+  },
+  {
+    "id": "i-sensor-luma-gray-16",
+    "category": "I",
+    "file": "i/i-sensor-luma-gray-16.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "gray",
+      "resolutionPx": 1024,
+      "jpegQuality": null,
+      "noiseSigma": 16,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only noiseSigma varies in this sweep. One fixed seeded Gaussian noise realization, channel mode, reference content, 1024-pixel size, area resampling, and PNG format stay fixed. Noise is added after resizing and before encoding.",
+    "expect": "Keep the flat control flat; compression or noise must not introduce confident new geometric depth."
+  },
+  {
+    "id": "i-sensor-luma-gray-32",
+    "category": "I",
+    "file": "i/i-sensor-luma-gray-32.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "gray",
+      "resolutionPx": 1024,
+      "jpegQuality": null,
+      "noiseSigma": 32,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only noiseSigma varies in this sweep. One fixed seeded Gaussian noise realization, channel mode, reference content, 1024-pixel size, area resampling, and PNG format stay fixed. Noise is added after resizing and before encoding.",
+    "expect": "Keep the flat control flat; compression or noise must not introduce confident new geometric depth."
+  },
+  {
+    "id": "i-sensor-luma-gray-64",
+    "category": "I",
+    "file": "i/i-sensor-luma-gray-64.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "gray",
+      "resolutionPx": 1024,
+      "jpegQuality": null,
+      "noiseSigma": 64,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only noiseSigma varies in this sweep. One fixed seeded Gaussian noise realization, channel mode, reference content, 1024-pixel size, area resampling, and PNG format stay fixed. Noise is added after resizing and before encoding.",
+    "expect": "Keep the flat control flat; compression or noise must not introduce confident new geometric depth."
+  },
+  {
+    "id": "i-sensor-rgb-gray-0",
+    "category": "I",
+    "file": "i/i-sensor-rgb-gray-0.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "gray",
+      "resolutionPx": 1024,
+      "jpegQuality": null,
+      "noiseSigma": 0,
+      "noiseChannels": "rgb",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only noiseSigma varies in this sweep. One fixed seeded Gaussian noise realization, channel mode, reference content, 1024-pixel size, area resampling, and PNG format stay fixed. Noise is added after resizing and before encoding.",
+    "expect": "Keep the flat control flat; compression or noise must not introduce confident new geometric depth."
+  },
+  {
+    "id": "i-sensor-rgb-gray-0p5",
+    "category": "I",
+    "file": "i/i-sensor-rgb-gray-0p5.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "gray",
+      "resolutionPx": 1024,
+      "jpegQuality": null,
+      "noiseSigma": 0.5,
+      "noiseChannels": "rgb",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only noiseSigma varies in this sweep. One fixed seeded Gaussian noise realization, channel mode, reference content, 1024-pixel size, area resampling, and PNG format stay fixed. Noise is added after resizing and before encoding.",
+    "expect": "Keep the flat control flat; compression or noise must not introduce confident new geometric depth."
+  },
+  {
+    "id": "i-sensor-rgb-gray-1",
+    "category": "I",
+    "file": "i/i-sensor-rgb-gray-1.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "gray",
+      "resolutionPx": 1024,
+      "jpegQuality": null,
+      "noiseSigma": 1,
+      "noiseChannels": "rgb",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only noiseSigma varies in this sweep. One fixed seeded Gaussian noise realization, channel mode, reference content, 1024-pixel size, area resampling, and PNG format stay fixed. Noise is added after resizing and before encoding.",
+    "expect": "Keep the flat control flat; compression or noise must not introduce confident new geometric depth."
+  },
+  {
+    "id": "i-sensor-rgb-gray-2",
+    "category": "I",
+    "file": "i/i-sensor-rgb-gray-2.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "gray",
+      "resolutionPx": 1024,
+      "jpegQuality": null,
+      "noiseSigma": 2,
+      "noiseChannels": "rgb",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only noiseSigma varies in this sweep. One fixed seeded Gaussian noise realization, channel mode, reference content, 1024-pixel size, area resampling, and PNG format stay fixed. Noise is added after resizing and before encoding.",
+    "expect": "Keep the flat control flat; compression or noise must not introduce confident new geometric depth."
+  },
+  {
+    "id": "i-sensor-rgb-gray-4",
+    "category": "I",
+    "file": "i/i-sensor-rgb-gray-4.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "gray",
+      "resolutionPx": 1024,
+      "jpegQuality": null,
+      "noiseSigma": 4,
+      "noiseChannels": "rgb",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only noiseSigma varies in this sweep. One fixed seeded Gaussian noise realization, channel mode, reference content, 1024-pixel size, area resampling, and PNG format stay fixed. Noise is added after resizing and before encoding.",
+    "expect": "Keep the flat control flat; compression or noise must not introduce confident new geometric depth."
+  },
+  {
+    "id": "i-sensor-rgb-gray-8",
+    "category": "I",
+    "file": "i/i-sensor-rgb-gray-8.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "gray",
+      "resolutionPx": 1024,
+      "jpegQuality": null,
+      "noiseSigma": 8,
+      "noiseChannels": "rgb",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only noiseSigma varies in this sweep. One fixed seeded Gaussian noise realization, channel mode, reference content, 1024-pixel size, area resampling, and PNG format stay fixed. Noise is added after resizing and before encoding.",
+    "expect": "Keep the flat control flat; compression or noise must not introduce confident new geometric depth."
+  },
+  {
+    "id": "i-sensor-rgb-gray-16",
+    "category": "I",
+    "file": "i/i-sensor-rgb-gray-16.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "gray",
+      "resolutionPx": 1024,
+      "jpegQuality": null,
+      "noiseSigma": 16,
+      "noiseChannels": "rgb",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only noiseSigma varies in this sweep. One fixed seeded Gaussian noise realization, channel mode, reference content, 1024-pixel size, area resampling, and PNG format stay fixed. Noise is added after resizing and before encoding.",
+    "expect": "Keep the flat control flat; compression or noise must not introduce confident new geometric depth."
+  },
+  {
+    "id": "i-sensor-rgb-gray-32",
+    "category": "I",
+    "file": "i/i-sensor-rgb-gray-32.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "gray",
+      "resolutionPx": 1024,
+      "jpegQuality": null,
+      "noiseSigma": 32,
+      "noiseChannels": "rgb",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only noiseSigma varies in this sweep. One fixed seeded Gaussian noise realization, channel mode, reference content, 1024-pixel size, area resampling, and PNG format stay fixed. Noise is added after resizing and before encoding.",
+    "expect": "Keep the flat control flat; compression or noise must not introduce confident new geometric depth."
+  },
+  {
+    "id": "i-sensor-rgb-gray-64",
+    "category": "I",
+    "file": "i/i-sensor-rgb-gray-64.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "gray",
+      "resolutionPx": 1024,
+      "jpegQuality": null,
+      "noiseSigma": 64,
+      "noiseChannels": "rgb",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only noiseSigma varies in this sweep. One fixed seeded Gaussian noise realization, channel mode, reference content, 1024-pixel size, area resampling, and PNG format stay fixed. Noise is added after resizing and before encoding.",
+    "expect": "Keep the flat control flat; compression or noise must not introduce confident new geometric depth."
+  },
+  {
+    "id": "i-resolution-ramp-256",
+    "category": "I",
+    "file": "i/i-resolution-ramp-256.png",
+    "width": 256,
+    "height": 256,
+    "seed": 7,
+    "variables": {
+      "reference": "ramp",
+      "resolutionPx": 256,
+      "jpegQuality": null,
+      "noiseSigma": 0,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only resolutionPx and the matching file dimensions vary in this sweep. One fixed 4096-pixel source, area resampling, reference content, PNG format, zero noise, and seed 7 stay fixed.",
+    "expect": "Keep the flat control flat; compression or noise must not introduce confident new geometric depth."
+  },
+  {
+    "id": "i-resolution-ramp-384",
+    "category": "I",
+    "file": "i/i-resolution-ramp-384.png",
+    "width": 384,
+    "height": 384,
+    "seed": 7,
+    "variables": {
+      "reference": "ramp",
+      "resolutionPx": 384,
+      "jpegQuality": null,
+      "noiseSigma": 0,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only resolutionPx and the matching file dimensions vary in this sweep. One fixed 4096-pixel source, area resampling, reference content, PNG format, zero noise, and seed 7 stay fixed.",
+    "expect": "Keep the flat control flat; compression or noise must not introduce confident new geometric depth."
+  },
+  {
+    "id": "i-resolution-ramp-512",
+    "category": "I",
+    "file": "i/i-resolution-ramp-512.png",
+    "width": 512,
+    "height": 512,
+    "seed": 7,
+    "variables": {
+      "reference": "ramp",
+      "resolutionPx": 512,
+      "jpegQuality": null,
+      "noiseSigma": 0,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only resolutionPx and the matching file dimensions vary in this sweep. One fixed 4096-pixel source, area resampling, reference content, PNG format, zero noise, and seed 7 stay fixed.",
+    "expect": "Keep the flat control flat; compression or noise must not introduce confident new geometric depth."
+  },
+  {
+    "id": "i-resolution-ramp-768",
+    "category": "I",
+    "file": "i/i-resolution-ramp-768.png",
+    "width": 768,
+    "height": 768,
+    "seed": 7,
+    "variables": {
+      "reference": "ramp",
+      "resolutionPx": 768,
+      "jpegQuality": null,
+      "noiseSigma": 0,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only resolutionPx and the matching file dimensions vary in this sweep. One fixed 4096-pixel source, area resampling, reference content, PNG format, zero noise, and seed 7 stay fixed.",
+    "expect": "Keep the flat control flat; compression or noise must not introduce confident new geometric depth."
+  },
+  {
+    "id": "i-resolution-ramp-1024",
+    "category": "I",
+    "file": "i/i-resolution-ramp-1024.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "ramp",
+      "resolutionPx": 1024,
+      "jpegQuality": null,
+      "noiseSigma": 0,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only resolutionPx and the matching file dimensions vary in this sweep. One fixed 4096-pixel source, area resampling, reference content, PNG format, zero noise, and seed 7 stay fixed.",
+    "expect": "Keep the flat control flat; compression or noise must not introduce confident new geometric depth."
+  },
+  {
+    "id": "i-resolution-ramp-1536",
+    "category": "I",
+    "file": "i/i-resolution-ramp-1536.png",
+    "width": 1536,
+    "height": 1536,
+    "seed": 7,
+    "variables": {
+      "reference": "ramp",
+      "resolutionPx": 1536,
+      "jpegQuality": null,
+      "noiseSigma": 0,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only resolutionPx and the matching file dimensions vary in this sweep. One fixed 4096-pixel source, area resampling, reference content, PNG format, zero noise, and seed 7 stay fixed.",
+    "expect": "Keep the flat control flat; compression or noise must not introduce confident new geometric depth."
+  },
+  {
+    "id": "i-resolution-ramp-2048",
+    "category": "I",
+    "file": "i/i-resolution-ramp-2048.png",
+    "width": 2048,
+    "height": 2048,
+    "seed": 7,
+    "variables": {
+      "reference": "ramp",
+      "resolutionPx": 2048,
+      "jpegQuality": null,
+      "noiseSigma": 0,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only resolutionPx and the matching file dimensions vary in this sweep. One fixed 4096-pixel source, area resampling, reference content, PNG format, zero noise, and seed 7 stay fixed.",
+    "expect": "Keep the flat control flat; compression or noise must not introduce confident new geometric depth."
+  },
+  {
+    "id": "i-resolution-ramp-3072",
+    "category": "I",
+    "file": "i/i-resolution-ramp-3072.png",
+    "width": 3072,
+    "height": 3072,
+    "seed": 7,
+    "variables": {
+      "reference": "ramp",
+      "resolutionPx": 3072,
+      "jpegQuality": null,
+      "noiseSigma": 0,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only resolutionPx and the matching file dimensions vary in this sweep. One fixed 4096-pixel source, area resampling, reference content, PNG format, zero noise, and seed 7 stay fixed.",
+    "expect": "Keep the flat control flat; compression or noise must not introduce confident new geometric depth."
+  },
+  {
+    "id": "i-resolution-ramp-4096",
+    "category": "I",
+    "file": "i/i-resolution-ramp-4096.png",
+    "width": 4096,
+    "height": 4096,
+    "seed": 7,
+    "variables": {
+      "reference": "ramp",
+      "resolutionPx": 4096,
+      "jpegQuality": null,
+      "noiseSigma": 0,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only resolutionPx and the matching file dimensions vary in this sweep. One fixed 4096-pixel source, area resampling, reference content, PNG format, zero noise, and seed 7 stay fixed.",
+    "expect": "Keep the flat control flat; compression or noise must not introduce confident new geometric depth."
+  },
+  {
+    "id": "i-jpeg-ramp-10",
+    "category": "I",
+    "file": "i/i-jpeg-ramp-10.jpg",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "ramp",
+      "resolutionPx": 1024,
+      "jpegQuality": 10,
+      "noiseSigma": 0,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only jpegQuality varies in this sweep. Reference content, 1024-pixel size, area resampling, JPEG encoder, zero noise, and seed 7 stay fixed. Compare with the matching resolution-1024 PNG for a lossless control.",
+    "expect": "Keep the flat control flat; compression or noise must not introduce confident new geometric depth."
+  },
+  {
+    "id": "i-jpeg-ramp-20",
+    "category": "I",
+    "file": "i/i-jpeg-ramp-20.jpg",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "ramp",
+      "resolutionPx": 1024,
+      "jpegQuality": 20,
+      "noiseSigma": 0,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only jpegQuality varies in this sweep. Reference content, 1024-pixel size, area resampling, JPEG encoder, zero noise, and seed 7 stay fixed. Compare with the matching resolution-1024 PNG for a lossless control.",
+    "expect": "Keep the flat control flat; compression or noise must not introduce confident new geometric depth."
+  },
+  {
+    "id": "i-jpeg-ramp-30",
+    "category": "I",
+    "file": "i/i-jpeg-ramp-30.jpg",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "ramp",
+      "resolutionPx": 1024,
+      "jpegQuality": 30,
+      "noiseSigma": 0,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only jpegQuality varies in this sweep. Reference content, 1024-pixel size, area resampling, JPEG encoder, zero noise, and seed 7 stay fixed. Compare with the matching resolution-1024 PNG for a lossless control.",
+    "expect": "Keep the flat control flat; compression or noise must not introduce confident new geometric depth."
+  },
+  {
+    "id": "i-jpeg-ramp-40",
+    "category": "I",
+    "file": "i/i-jpeg-ramp-40.jpg",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "ramp",
+      "resolutionPx": 1024,
+      "jpegQuality": 40,
+      "noiseSigma": 0,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only jpegQuality varies in this sweep. Reference content, 1024-pixel size, area resampling, JPEG encoder, zero noise, and seed 7 stay fixed. Compare with the matching resolution-1024 PNG for a lossless control.",
+    "expect": "Keep the flat control flat; compression or noise must not introduce confident new geometric depth."
+  },
+  {
+    "id": "i-jpeg-ramp-50",
+    "category": "I",
+    "file": "i/i-jpeg-ramp-50.jpg",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "ramp",
+      "resolutionPx": 1024,
+      "jpegQuality": 50,
+      "noiseSigma": 0,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only jpegQuality varies in this sweep. Reference content, 1024-pixel size, area resampling, JPEG encoder, zero noise, and seed 7 stay fixed. Compare with the matching resolution-1024 PNG for a lossless control.",
+    "expect": "Keep the flat control flat; compression or noise must not introduce confident new geometric depth."
+  },
+  {
+    "id": "i-jpeg-ramp-65",
+    "category": "I",
+    "file": "i/i-jpeg-ramp-65.jpg",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "ramp",
+      "resolutionPx": 1024,
+      "jpegQuality": 65,
+      "noiseSigma": 0,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only jpegQuality varies in this sweep. Reference content, 1024-pixel size, area resampling, JPEG encoder, zero noise, and seed 7 stay fixed. Compare with the matching resolution-1024 PNG for a lossless control.",
+    "expect": "Keep the flat control flat; compression or noise must not introduce confident new geometric depth."
+  },
+  {
+    "id": "i-jpeg-ramp-80",
+    "category": "I",
+    "file": "i/i-jpeg-ramp-80.jpg",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "ramp",
+      "resolutionPx": 1024,
+      "jpegQuality": 80,
+      "noiseSigma": 0,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only jpegQuality varies in this sweep. Reference content, 1024-pixel size, area resampling, JPEG encoder, zero noise, and seed 7 stay fixed. Compare with the matching resolution-1024 PNG for a lossless control.",
+    "expect": "Keep the flat control flat; compression or noise must not introduce confident new geometric depth."
+  },
+  {
+    "id": "i-jpeg-ramp-90",
+    "category": "I",
+    "file": "i/i-jpeg-ramp-90.jpg",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "ramp",
+      "resolutionPx": 1024,
+      "jpegQuality": 90,
+      "noiseSigma": 0,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only jpegQuality varies in this sweep. Reference content, 1024-pixel size, area resampling, JPEG encoder, zero noise, and seed 7 stay fixed. Compare with the matching resolution-1024 PNG for a lossless control.",
+    "expect": "Keep the flat control flat; compression or noise must not introduce confident new geometric depth."
+  },
+  {
+    "id": "i-jpeg-ramp-100",
+    "category": "I",
+    "file": "i/i-jpeg-ramp-100.jpg",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "ramp",
+      "resolutionPx": 1024,
+      "jpegQuality": 100,
+      "noiseSigma": 0,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only jpegQuality varies in this sweep. Reference content, 1024-pixel size, area resampling, JPEG encoder, zero noise, and seed 7 stay fixed. Compare with the matching resolution-1024 PNG for a lossless control.",
+    "expect": "Keep the flat control flat; compression or noise must not introduce confident new geometric depth."
+  },
+  {
+    "id": "i-sensor-luma-ramp-0",
+    "category": "I",
+    "file": "i/i-sensor-luma-ramp-0.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "ramp",
+      "resolutionPx": 1024,
+      "jpegQuality": null,
+      "noiseSigma": 0,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only noiseSigma varies in this sweep. One fixed seeded Gaussian noise realization, channel mode, reference content, 1024-pixel size, area resampling, and PNG format stay fixed. Noise is added after resizing and before encoding.",
+    "expect": "Keep the flat control flat; compression or noise must not introduce confident new geometric depth."
+  },
+  {
+    "id": "i-sensor-luma-ramp-0p5",
+    "category": "I",
+    "file": "i/i-sensor-luma-ramp-0p5.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "ramp",
+      "resolutionPx": 1024,
+      "jpegQuality": null,
+      "noiseSigma": 0.5,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only noiseSigma varies in this sweep. One fixed seeded Gaussian noise realization, channel mode, reference content, 1024-pixel size, area resampling, and PNG format stay fixed. Noise is added after resizing and before encoding.",
+    "expect": "Keep the flat control flat; compression or noise must not introduce confident new geometric depth."
+  },
+  {
+    "id": "i-sensor-luma-ramp-1",
+    "category": "I",
+    "file": "i/i-sensor-luma-ramp-1.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "ramp",
+      "resolutionPx": 1024,
+      "jpegQuality": null,
+      "noiseSigma": 1,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only noiseSigma varies in this sweep. One fixed seeded Gaussian noise realization, channel mode, reference content, 1024-pixel size, area resampling, and PNG format stay fixed. Noise is added after resizing and before encoding.",
+    "expect": "Keep the flat control flat; compression or noise must not introduce confident new geometric depth."
+  },
+  {
+    "id": "i-sensor-luma-ramp-2",
+    "category": "I",
+    "file": "i/i-sensor-luma-ramp-2.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "ramp",
+      "resolutionPx": 1024,
+      "jpegQuality": null,
+      "noiseSigma": 2,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only noiseSigma varies in this sweep. One fixed seeded Gaussian noise realization, channel mode, reference content, 1024-pixel size, area resampling, and PNG format stay fixed. Noise is added after resizing and before encoding.",
+    "expect": "Keep the flat control flat; compression or noise must not introduce confident new geometric depth."
+  },
+  {
+    "id": "i-sensor-luma-ramp-4",
+    "category": "I",
+    "file": "i/i-sensor-luma-ramp-4.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "ramp",
+      "resolutionPx": 1024,
+      "jpegQuality": null,
+      "noiseSigma": 4,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only noiseSigma varies in this sweep. One fixed seeded Gaussian noise realization, channel mode, reference content, 1024-pixel size, area resampling, and PNG format stay fixed. Noise is added after resizing and before encoding.",
+    "expect": "Keep the flat control flat; compression or noise must not introduce confident new geometric depth."
+  },
+  {
+    "id": "i-sensor-luma-ramp-8",
+    "category": "I",
+    "file": "i/i-sensor-luma-ramp-8.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "ramp",
+      "resolutionPx": 1024,
+      "jpegQuality": null,
+      "noiseSigma": 8,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only noiseSigma varies in this sweep. One fixed seeded Gaussian noise realization, channel mode, reference content, 1024-pixel size, area resampling, and PNG format stay fixed. Noise is added after resizing and before encoding.",
+    "expect": "Keep the flat control flat; compression or noise must not introduce confident new geometric depth."
+  },
+  {
+    "id": "i-sensor-luma-ramp-16",
+    "category": "I",
+    "file": "i/i-sensor-luma-ramp-16.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "ramp",
+      "resolutionPx": 1024,
+      "jpegQuality": null,
+      "noiseSigma": 16,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only noiseSigma varies in this sweep. One fixed seeded Gaussian noise realization, channel mode, reference content, 1024-pixel size, area resampling, and PNG format stay fixed. Noise is added after resizing and before encoding.",
+    "expect": "Keep the flat control flat; compression or noise must not introduce confident new geometric depth."
+  },
+  {
+    "id": "i-sensor-luma-ramp-32",
+    "category": "I",
+    "file": "i/i-sensor-luma-ramp-32.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "ramp",
+      "resolutionPx": 1024,
+      "jpegQuality": null,
+      "noiseSigma": 32,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only noiseSigma varies in this sweep. One fixed seeded Gaussian noise realization, channel mode, reference content, 1024-pixel size, area resampling, and PNG format stay fixed. Noise is added after resizing and before encoding.",
+    "expect": "Keep the flat control flat; compression or noise must not introduce confident new geometric depth."
+  },
+  {
+    "id": "i-sensor-luma-ramp-64",
+    "category": "I",
+    "file": "i/i-sensor-luma-ramp-64.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "ramp",
+      "resolutionPx": 1024,
+      "jpegQuality": null,
+      "noiseSigma": 64,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only noiseSigma varies in this sweep. One fixed seeded Gaussian noise realization, channel mode, reference content, 1024-pixel size, area resampling, and PNG format stay fixed. Noise is added after resizing and before encoding.",
+    "expect": "Keep the flat control flat; compression or noise must not introduce confident new geometric depth."
+  },
+  {
+    "id": "i-sensor-rgb-ramp-0",
+    "category": "I",
+    "file": "i/i-sensor-rgb-ramp-0.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "ramp",
+      "resolutionPx": 1024,
+      "jpegQuality": null,
+      "noiseSigma": 0,
+      "noiseChannels": "rgb",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only noiseSigma varies in this sweep. One fixed seeded Gaussian noise realization, channel mode, reference content, 1024-pixel size, area resampling, and PNG format stay fixed. Noise is added after resizing and before encoding.",
+    "expect": "Keep the flat control flat; compression or noise must not introduce confident new geometric depth."
+  },
+  {
+    "id": "i-sensor-rgb-ramp-0p5",
+    "category": "I",
+    "file": "i/i-sensor-rgb-ramp-0p5.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "ramp",
+      "resolutionPx": 1024,
+      "jpegQuality": null,
+      "noiseSigma": 0.5,
+      "noiseChannels": "rgb",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only noiseSigma varies in this sweep. One fixed seeded Gaussian noise realization, channel mode, reference content, 1024-pixel size, area resampling, and PNG format stay fixed. Noise is added after resizing and before encoding.",
+    "expect": "Keep the flat control flat; compression or noise must not introduce confident new geometric depth."
+  },
+  {
+    "id": "i-sensor-rgb-ramp-1",
+    "category": "I",
+    "file": "i/i-sensor-rgb-ramp-1.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "ramp",
+      "resolutionPx": 1024,
+      "jpegQuality": null,
+      "noiseSigma": 1,
+      "noiseChannels": "rgb",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only noiseSigma varies in this sweep. One fixed seeded Gaussian noise realization, channel mode, reference content, 1024-pixel size, area resampling, and PNG format stay fixed. Noise is added after resizing and before encoding.",
+    "expect": "Keep the flat control flat; compression or noise must not introduce confident new geometric depth."
+  },
+  {
+    "id": "i-sensor-rgb-ramp-2",
+    "category": "I",
+    "file": "i/i-sensor-rgb-ramp-2.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "ramp",
+      "resolutionPx": 1024,
+      "jpegQuality": null,
+      "noiseSigma": 2,
+      "noiseChannels": "rgb",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only noiseSigma varies in this sweep. One fixed seeded Gaussian noise realization, channel mode, reference content, 1024-pixel size, area resampling, and PNG format stay fixed. Noise is added after resizing and before encoding.",
+    "expect": "Keep the flat control flat; compression or noise must not introduce confident new geometric depth."
+  },
+  {
+    "id": "i-sensor-rgb-ramp-4",
+    "category": "I",
+    "file": "i/i-sensor-rgb-ramp-4.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "ramp",
+      "resolutionPx": 1024,
+      "jpegQuality": null,
+      "noiseSigma": 4,
+      "noiseChannels": "rgb",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only noiseSigma varies in this sweep. One fixed seeded Gaussian noise realization, channel mode, reference content, 1024-pixel size, area resampling, and PNG format stay fixed. Noise is added after resizing and before encoding.",
+    "expect": "Keep the flat control flat; compression or noise must not introduce confident new geometric depth."
+  },
+  {
+    "id": "i-sensor-rgb-ramp-8",
+    "category": "I",
+    "file": "i/i-sensor-rgb-ramp-8.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "ramp",
+      "resolutionPx": 1024,
+      "jpegQuality": null,
+      "noiseSigma": 8,
+      "noiseChannels": "rgb",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only noiseSigma varies in this sweep. One fixed seeded Gaussian noise realization, channel mode, reference content, 1024-pixel size, area resampling, and PNG format stay fixed. Noise is added after resizing and before encoding.",
+    "expect": "Keep the flat control flat; compression or noise must not introduce confident new geometric depth."
+  },
+  {
+    "id": "i-sensor-rgb-ramp-16",
+    "category": "I",
+    "file": "i/i-sensor-rgb-ramp-16.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "ramp",
+      "resolutionPx": 1024,
+      "jpegQuality": null,
+      "noiseSigma": 16,
+      "noiseChannels": "rgb",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only noiseSigma varies in this sweep. One fixed seeded Gaussian noise realization, channel mode, reference content, 1024-pixel size, area resampling, and PNG format stay fixed. Noise is added after resizing and before encoding.",
+    "expect": "Keep the flat control flat; compression or noise must not introduce confident new geometric depth."
+  },
+  {
+    "id": "i-sensor-rgb-ramp-32",
+    "category": "I",
+    "file": "i/i-sensor-rgb-ramp-32.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "ramp",
+      "resolutionPx": 1024,
+      "jpegQuality": null,
+      "noiseSigma": 32,
+      "noiseChannels": "rgb",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only noiseSigma varies in this sweep. One fixed seeded Gaussian noise realization, channel mode, reference content, 1024-pixel size, area resampling, and PNG format stay fixed. Noise is added after resizing and before encoding.",
+    "expect": "Keep the flat control flat; compression or noise must not introduce confident new geometric depth."
+  },
+  {
+    "id": "i-sensor-rgb-ramp-64",
+    "category": "I",
+    "file": "i/i-sensor-rgb-ramp-64.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "ramp",
+      "resolutionPx": 1024,
+      "jpegQuality": null,
+      "noiseSigma": 64,
+      "noiseChannels": "rgb",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only noiseSigma varies in this sweep. One fixed seeded Gaussian noise realization, channel mode, reference content, 1024-pixel size, area resampling, and PNG format stay fixed. Noise is added after resizing and before encoding.",
+    "expect": "Keep the flat control flat; compression or noise must not introduce confident new geometric depth."
+  },
+  {
+    "id": "i-resolution-scene-256",
+    "category": "I",
+    "file": "i/i-resolution-scene-256.png",
+    "width": 256,
+    "height": 256,
+    "seed": 7,
+    "variables": {
+      "reference": "scene",
+      "resolutionPx": 256,
+      "jpegQuality": null,
+      "noiseSigma": 0,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only resolutionPx and the matching file dimensions vary in this sweep. One fixed 4096-pixel source, area resampling, reference content, PNG format, zero noise, and seed 7 stay fixed.",
+    "expect": "Preserve the clean reference's relative depth ordering as detail permits; corruption adds uncertainty, not new geometry."
+  },
+  {
+    "id": "i-resolution-scene-384",
+    "category": "I",
+    "file": "i/i-resolution-scene-384.png",
+    "width": 384,
+    "height": 384,
+    "seed": 7,
+    "variables": {
+      "reference": "scene",
+      "resolutionPx": 384,
+      "jpegQuality": null,
+      "noiseSigma": 0,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only resolutionPx and the matching file dimensions vary in this sweep. One fixed 4096-pixel source, area resampling, reference content, PNG format, zero noise, and seed 7 stay fixed.",
+    "expect": "Preserve the clean reference's relative depth ordering as detail permits; corruption adds uncertainty, not new geometry."
+  },
+  {
+    "id": "i-resolution-scene-512",
+    "category": "I",
+    "file": "i/i-resolution-scene-512.png",
+    "width": 512,
+    "height": 512,
+    "seed": 7,
+    "variables": {
+      "reference": "scene",
+      "resolutionPx": 512,
+      "jpegQuality": null,
+      "noiseSigma": 0,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only resolutionPx and the matching file dimensions vary in this sweep. One fixed 4096-pixel source, area resampling, reference content, PNG format, zero noise, and seed 7 stay fixed.",
+    "expect": "Preserve the clean reference's relative depth ordering as detail permits; corruption adds uncertainty, not new geometry."
+  },
+  {
+    "id": "i-resolution-scene-768",
+    "category": "I",
+    "file": "i/i-resolution-scene-768.png",
+    "width": 768,
+    "height": 768,
+    "seed": 7,
+    "variables": {
+      "reference": "scene",
+      "resolutionPx": 768,
+      "jpegQuality": null,
+      "noiseSigma": 0,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only resolutionPx and the matching file dimensions vary in this sweep. One fixed 4096-pixel source, area resampling, reference content, PNG format, zero noise, and seed 7 stay fixed.",
+    "expect": "Preserve the clean reference's relative depth ordering as detail permits; corruption adds uncertainty, not new geometry."
+  },
+  {
+    "id": "i-resolution-scene-1024",
+    "category": "I",
+    "file": "i/i-resolution-scene-1024.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "scene",
+      "resolutionPx": 1024,
+      "jpegQuality": null,
+      "noiseSigma": 0,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only resolutionPx and the matching file dimensions vary in this sweep. One fixed 4096-pixel source, area resampling, reference content, PNG format, zero noise, and seed 7 stay fixed.",
+    "expect": "Preserve the clean reference's relative depth ordering as detail permits; corruption adds uncertainty, not new geometry."
+  },
+  {
+    "id": "i-resolution-scene-1536",
+    "category": "I",
+    "file": "i/i-resolution-scene-1536.png",
+    "width": 1536,
+    "height": 1536,
+    "seed": 7,
+    "variables": {
+      "reference": "scene",
+      "resolutionPx": 1536,
+      "jpegQuality": null,
+      "noiseSigma": 0,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only resolutionPx and the matching file dimensions vary in this sweep. One fixed 4096-pixel source, area resampling, reference content, PNG format, zero noise, and seed 7 stay fixed.",
+    "expect": "Preserve the clean reference's relative depth ordering as detail permits; corruption adds uncertainty, not new geometry."
+  },
+  {
+    "id": "i-resolution-scene-2048",
+    "category": "I",
+    "file": "i/i-resolution-scene-2048.png",
+    "width": 2048,
+    "height": 2048,
+    "seed": 7,
+    "variables": {
+      "reference": "scene",
+      "resolutionPx": 2048,
+      "jpegQuality": null,
+      "noiseSigma": 0,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only resolutionPx and the matching file dimensions vary in this sweep. One fixed 4096-pixel source, area resampling, reference content, PNG format, zero noise, and seed 7 stay fixed.",
+    "expect": "Preserve the clean reference's relative depth ordering as detail permits; corruption adds uncertainty, not new geometry."
+  },
+  {
+    "id": "i-resolution-scene-3072",
+    "category": "I",
+    "file": "i/i-resolution-scene-3072.png",
+    "width": 3072,
+    "height": 3072,
+    "seed": 7,
+    "variables": {
+      "reference": "scene",
+      "resolutionPx": 3072,
+      "jpegQuality": null,
+      "noiseSigma": 0,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only resolutionPx and the matching file dimensions vary in this sweep. One fixed 4096-pixel source, area resampling, reference content, PNG format, zero noise, and seed 7 stay fixed.",
+    "expect": "Preserve the clean reference's relative depth ordering as detail permits; corruption adds uncertainty, not new geometry."
+  },
+  {
+    "id": "i-resolution-scene-4096",
+    "category": "I",
+    "file": "i/i-resolution-scene-4096.png",
+    "width": 4096,
+    "height": 4096,
+    "seed": 7,
+    "variables": {
+      "reference": "scene",
+      "resolutionPx": 4096,
+      "jpegQuality": null,
+      "noiseSigma": 0,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only resolutionPx and the matching file dimensions vary in this sweep. One fixed 4096-pixel source, area resampling, reference content, PNG format, zero noise, and seed 7 stay fixed.",
+    "expect": "Preserve the clean reference's relative depth ordering as detail permits; corruption adds uncertainty, not new geometry."
+  },
+  {
+    "id": "i-jpeg-scene-10",
+    "category": "I",
+    "file": "i/i-jpeg-scene-10.jpg",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "scene",
+      "resolutionPx": 1024,
+      "jpegQuality": 10,
+      "noiseSigma": 0,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only jpegQuality varies in this sweep. Reference content, 1024-pixel size, area resampling, JPEG encoder, zero noise, and seed 7 stay fixed. Compare with the matching resolution-1024 PNG for a lossless control.",
+    "expect": "Preserve the clean reference's relative depth ordering as detail permits; corruption adds uncertainty, not new geometry."
+  },
+  {
+    "id": "i-jpeg-scene-20",
+    "category": "I",
+    "file": "i/i-jpeg-scene-20.jpg",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "scene",
+      "resolutionPx": 1024,
+      "jpegQuality": 20,
+      "noiseSigma": 0,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only jpegQuality varies in this sweep. Reference content, 1024-pixel size, area resampling, JPEG encoder, zero noise, and seed 7 stay fixed. Compare with the matching resolution-1024 PNG for a lossless control.",
+    "expect": "Preserve the clean reference's relative depth ordering as detail permits; corruption adds uncertainty, not new geometry."
+  },
+  {
+    "id": "i-jpeg-scene-30",
+    "category": "I",
+    "file": "i/i-jpeg-scene-30.jpg",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "scene",
+      "resolutionPx": 1024,
+      "jpegQuality": 30,
+      "noiseSigma": 0,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only jpegQuality varies in this sweep. Reference content, 1024-pixel size, area resampling, JPEG encoder, zero noise, and seed 7 stay fixed. Compare with the matching resolution-1024 PNG for a lossless control.",
+    "expect": "Preserve the clean reference's relative depth ordering as detail permits; corruption adds uncertainty, not new geometry."
+  },
+  {
+    "id": "i-jpeg-scene-40",
+    "category": "I",
+    "file": "i/i-jpeg-scene-40.jpg",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "scene",
+      "resolutionPx": 1024,
+      "jpegQuality": 40,
+      "noiseSigma": 0,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only jpegQuality varies in this sweep. Reference content, 1024-pixel size, area resampling, JPEG encoder, zero noise, and seed 7 stay fixed. Compare with the matching resolution-1024 PNG for a lossless control.",
+    "expect": "Preserve the clean reference's relative depth ordering as detail permits; corruption adds uncertainty, not new geometry."
+  },
+  {
+    "id": "i-jpeg-scene-50",
+    "category": "I",
+    "file": "i/i-jpeg-scene-50.jpg",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "scene",
+      "resolutionPx": 1024,
+      "jpegQuality": 50,
+      "noiseSigma": 0,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only jpegQuality varies in this sweep. Reference content, 1024-pixel size, area resampling, JPEG encoder, zero noise, and seed 7 stay fixed. Compare with the matching resolution-1024 PNG for a lossless control.",
+    "expect": "Preserve the clean reference's relative depth ordering as detail permits; corruption adds uncertainty, not new geometry."
+  },
+  {
+    "id": "i-jpeg-scene-65",
+    "category": "I",
+    "file": "i/i-jpeg-scene-65.jpg",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "scene",
+      "resolutionPx": 1024,
+      "jpegQuality": 65,
+      "noiseSigma": 0,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only jpegQuality varies in this sweep. Reference content, 1024-pixel size, area resampling, JPEG encoder, zero noise, and seed 7 stay fixed. Compare with the matching resolution-1024 PNG for a lossless control.",
+    "expect": "Preserve the clean reference's relative depth ordering as detail permits; corruption adds uncertainty, not new geometry."
+  },
+  {
+    "id": "i-jpeg-scene-80",
+    "category": "I",
+    "file": "i/i-jpeg-scene-80.jpg",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "scene",
+      "resolutionPx": 1024,
+      "jpegQuality": 80,
+      "noiseSigma": 0,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only jpegQuality varies in this sweep. Reference content, 1024-pixel size, area resampling, JPEG encoder, zero noise, and seed 7 stay fixed. Compare with the matching resolution-1024 PNG for a lossless control.",
+    "expect": "Preserve the clean reference's relative depth ordering as detail permits; corruption adds uncertainty, not new geometry."
+  },
+  {
+    "id": "i-jpeg-scene-90",
+    "category": "I",
+    "file": "i/i-jpeg-scene-90.jpg",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "scene",
+      "resolutionPx": 1024,
+      "jpegQuality": 90,
+      "noiseSigma": 0,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only jpegQuality varies in this sweep. Reference content, 1024-pixel size, area resampling, JPEG encoder, zero noise, and seed 7 stay fixed. Compare with the matching resolution-1024 PNG for a lossless control.",
+    "expect": "Preserve the clean reference's relative depth ordering as detail permits; corruption adds uncertainty, not new geometry."
+  },
+  {
+    "id": "i-jpeg-scene-100",
+    "category": "I",
+    "file": "i/i-jpeg-scene-100.jpg",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "scene",
+      "resolutionPx": 1024,
+      "jpegQuality": 100,
+      "noiseSigma": 0,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only jpegQuality varies in this sweep. Reference content, 1024-pixel size, area resampling, JPEG encoder, zero noise, and seed 7 stay fixed. Compare with the matching resolution-1024 PNG for a lossless control.",
+    "expect": "Preserve the clean reference's relative depth ordering as detail permits; corruption adds uncertainty, not new geometry."
+  },
+  {
+    "id": "i-sensor-luma-scene-0",
+    "category": "I",
+    "file": "i/i-sensor-luma-scene-0.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "scene",
+      "resolutionPx": 1024,
+      "jpegQuality": null,
+      "noiseSigma": 0,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only noiseSigma varies in this sweep. One fixed seeded Gaussian noise realization, channel mode, reference content, 1024-pixel size, area resampling, and PNG format stay fixed. Noise is added after resizing and before encoding.",
+    "expect": "Preserve the clean reference's relative depth ordering as detail permits; corruption adds uncertainty, not new geometry."
+  },
+  {
+    "id": "i-sensor-luma-scene-0p5",
+    "category": "I",
+    "file": "i/i-sensor-luma-scene-0p5.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "scene",
+      "resolutionPx": 1024,
+      "jpegQuality": null,
+      "noiseSigma": 0.5,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only noiseSigma varies in this sweep. One fixed seeded Gaussian noise realization, channel mode, reference content, 1024-pixel size, area resampling, and PNG format stay fixed. Noise is added after resizing and before encoding.",
+    "expect": "Preserve the clean reference's relative depth ordering as detail permits; corruption adds uncertainty, not new geometry."
+  },
+  {
+    "id": "i-sensor-luma-scene-1",
+    "category": "I",
+    "file": "i/i-sensor-luma-scene-1.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "scene",
+      "resolutionPx": 1024,
+      "jpegQuality": null,
+      "noiseSigma": 1,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only noiseSigma varies in this sweep. One fixed seeded Gaussian noise realization, channel mode, reference content, 1024-pixel size, area resampling, and PNG format stay fixed. Noise is added after resizing and before encoding.",
+    "expect": "Preserve the clean reference's relative depth ordering as detail permits; corruption adds uncertainty, not new geometry."
+  },
+  {
+    "id": "i-sensor-luma-scene-2",
+    "category": "I",
+    "file": "i/i-sensor-luma-scene-2.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "scene",
+      "resolutionPx": 1024,
+      "jpegQuality": null,
+      "noiseSigma": 2,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only noiseSigma varies in this sweep. One fixed seeded Gaussian noise realization, channel mode, reference content, 1024-pixel size, area resampling, and PNG format stay fixed. Noise is added after resizing and before encoding.",
+    "expect": "Preserve the clean reference's relative depth ordering as detail permits; corruption adds uncertainty, not new geometry."
+  },
+  {
+    "id": "i-sensor-luma-scene-4",
+    "category": "I",
+    "file": "i/i-sensor-luma-scene-4.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "scene",
+      "resolutionPx": 1024,
+      "jpegQuality": null,
+      "noiseSigma": 4,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only noiseSigma varies in this sweep. One fixed seeded Gaussian noise realization, channel mode, reference content, 1024-pixel size, area resampling, and PNG format stay fixed. Noise is added after resizing and before encoding.",
+    "expect": "Preserve the clean reference's relative depth ordering as detail permits; corruption adds uncertainty, not new geometry."
+  },
+  {
+    "id": "i-sensor-luma-scene-8",
+    "category": "I",
+    "file": "i/i-sensor-luma-scene-8.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "scene",
+      "resolutionPx": 1024,
+      "jpegQuality": null,
+      "noiseSigma": 8,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only noiseSigma varies in this sweep. One fixed seeded Gaussian noise realization, channel mode, reference content, 1024-pixel size, area resampling, and PNG format stay fixed. Noise is added after resizing and before encoding.",
+    "expect": "Preserve the clean reference's relative depth ordering as detail permits; corruption adds uncertainty, not new geometry."
+  },
+  {
+    "id": "i-sensor-luma-scene-16",
+    "category": "I",
+    "file": "i/i-sensor-luma-scene-16.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "scene",
+      "resolutionPx": 1024,
+      "jpegQuality": null,
+      "noiseSigma": 16,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only noiseSigma varies in this sweep. One fixed seeded Gaussian noise realization, channel mode, reference content, 1024-pixel size, area resampling, and PNG format stay fixed. Noise is added after resizing and before encoding.",
+    "expect": "Preserve the clean reference's relative depth ordering as detail permits; corruption adds uncertainty, not new geometry."
+  },
+  {
+    "id": "i-sensor-luma-scene-32",
+    "category": "I",
+    "file": "i/i-sensor-luma-scene-32.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "scene",
+      "resolutionPx": 1024,
+      "jpegQuality": null,
+      "noiseSigma": 32,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only noiseSigma varies in this sweep. One fixed seeded Gaussian noise realization, channel mode, reference content, 1024-pixel size, area resampling, and PNG format stay fixed. Noise is added after resizing and before encoding.",
+    "expect": "Preserve the clean reference's relative depth ordering as detail permits; corruption adds uncertainty, not new geometry."
+  },
+  {
+    "id": "i-sensor-luma-scene-64",
+    "category": "I",
+    "file": "i/i-sensor-luma-scene-64.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "scene",
+      "resolutionPx": 1024,
+      "jpegQuality": null,
+      "noiseSigma": 64,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only noiseSigma varies in this sweep. One fixed seeded Gaussian noise realization, channel mode, reference content, 1024-pixel size, area resampling, and PNG format stay fixed. Noise is added after resizing and before encoding.",
+    "expect": "Preserve the clean reference's relative depth ordering as detail permits; corruption adds uncertainty, not new geometry."
+  },
+  {
+    "id": "i-sensor-rgb-scene-0",
+    "category": "I",
+    "file": "i/i-sensor-rgb-scene-0.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "scene",
+      "resolutionPx": 1024,
+      "jpegQuality": null,
+      "noiseSigma": 0,
+      "noiseChannels": "rgb",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only noiseSigma varies in this sweep. One fixed seeded Gaussian noise realization, channel mode, reference content, 1024-pixel size, area resampling, and PNG format stay fixed. Noise is added after resizing and before encoding.",
+    "expect": "Preserve the clean reference's relative depth ordering as detail permits; corruption adds uncertainty, not new geometry."
+  },
+  {
+    "id": "i-sensor-rgb-scene-0p5",
+    "category": "I",
+    "file": "i/i-sensor-rgb-scene-0p5.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "scene",
+      "resolutionPx": 1024,
+      "jpegQuality": null,
+      "noiseSigma": 0.5,
+      "noiseChannels": "rgb",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only noiseSigma varies in this sweep. One fixed seeded Gaussian noise realization, channel mode, reference content, 1024-pixel size, area resampling, and PNG format stay fixed. Noise is added after resizing and before encoding.",
+    "expect": "Preserve the clean reference's relative depth ordering as detail permits; corruption adds uncertainty, not new geometry."
+  },
+  {
+    "id": "i-sensor-rgb-scene-1",
+    "category": "I",
+    "file": "i/i-sensor-rgb-scene-1.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "scene",
+      "resolutionPx": 1024,
+      "jpegQuality": null,
+      "noiseSigma": 1,
+      "noiseChannels": "rgb",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only noiseSigma varies in this sweep. One fixed seeded Gaussian noise realization, channel mode, reference content, 1024-pixel size, area resampling, and PNG format stay fixed. Noise is added after resizing and before encoding.",
+    "expect": "Preserve the clean reference's relative depth ordering as detail permits; corruption adds uncertainty, not new geometry."
+  },
+  {
+    "id": "i-sensor-rgb-scene-2",
+    "category": "I",
+    "file": "i/i-sensor-rgb-scene-2.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "scene",
+      "resolutionPx": 1024,
+      "jpegQuality": null,
+      "noiseSigma": 2,
+      "noiseChannels": "rgb",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only noiseSigma varies in this sweep. One fixed seeded Gaussian noise realization, channel mode, reference content, 1024-pixel size, area resampling, and PNG format stay fixed. Noise is added after resizing and before encoding.",
+    "expect": "Preserve the clean reference's relative depth ordering as detail permits; corruption adds uncertainty, not new geometry."
+  },
+  {
+    "id": "i-sensor-rgb-scene-4",
+    "category": "I",
+    "file": "i/i-sensor-rgb-scene-4.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "scene",
+      "resolutionPx": 1024,
+      "jpegQuality": null,
+      "noiseSigma": 4,
+      "noiseChannels": "rgb",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only noiseSigma varies in this sweep. One fixed seeded Gaussian noise realization, channel mode, reference content, 1024-pixel size, area resampling, and PNG format stay fixed. Noise is added after resizing and before encoding.",
+    "expect": "Preserve the clean reference's relative depth ordering as detail permits; corruption adds uncertainty, not new geometry."
+  },
+  {
+    "id": "i-sensor-rgb-scene-8",
+    "category": "I",
+    "file": "i/i-sensor-rgb-scene-8.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "scene",
+      "resolutionPx": 1024,
+      "jpegQuality": null,
+      "noiseSigma": 8,
+      "noiseChannels": "rgb",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only noiseSigma varies in this sweep. One fixed seeded Gaussian noise realization, channel mode, reference content, 1024-pixel size, area resampling, and PNG format stay fixed. Noise is added after resizing and before encoding.",
+    "expect": "Preserve the clean reference's relative depth ordering as detail permits; corruption adds uncertainty, not new geometry."
+  },
+  {
+    "id": "i-sensor-rgb-scene-16",
+    "category": "I",
+    "file": "i/i-sensor-rgb-scene-16.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "scene",
+      "resolutionPx": 1024,
+      "jpegQuality": null,
+      "noiseSigma": 16,
+      "noiseChannels": "rgb",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only noiseSigma varies in this sweep. One fixed seeded Gaussian noise realization, channel mode, reference content, 1024-pixel size, area resampling, and PNG format stay fixed. Noise is added after resizing and before encoding.",
+    "expect": "Preserve the clean reference's relative depth ordering as detail permits; corruption adds uncertainty, not new geometry."
+  },
+  {
+    "id": "i-sensor-rgb-scene-32",
+    "category": "I",
+    "file": "i/i-sensor-rgb-scene-32.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "scene",
+      "resolutionPx": 1024,
+      "jpegQuality": null,
+      "noiseSigma": 32,
+      "noiseChannels": "rgb",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only noiseSigma varies in this sweep. One fixed seeded Gaussian noise realization, channel mode, reference content, 1024-pixel size, area resampling, and PNG format stay fixed. Noise is added after resizing and before encoding.",
+    "expect": "Preserve the clean reference's relative depth ordering as detail permits; corruption adds uncertainty, not new geometry."
+  },
+  {
+    "id": "i-sensor-rgb-scene-64",
+    "category": "I",
+    "file": "i/i-sensor-rgb-scene-64.png",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "scene",
+      "resolutionPx": 1024,
+      "jpegQuality": null,
+      "noiseSigma": 64,
+      "noiseChannels": "rgb",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "Only noiseSigma varies in this sweep. One fixed seeded Gaussian noise realization, channel mode, reference content, 1024-pixel size, area resampling, and PNG format stay fixed. Noise is added after resizing and before encoding.",
+    "expect": "Preserve the clean reference's relative depth ordering as detail permits; corruption adds uncertainty, not new geometry."
+  },
+  {
+    "id": "i-grid-resolution-jpeg-256-10",
+    "category": "I",
+    "file": "i/i-grid-resolution-jpeg-256-10.jpg",
+    "width": 256,
+    "height": 256,
+    "seed": 7,
+    "variables": {
+      "reference": "scene",
+      "resolutionPx": 256,
+      "jpegQuality": 10,
+      "noiseSigma": 0,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "5 by 5 grid; resolutionPx (and file dimensions) and jpegQuality vary independently. The scene reference, fixed 4096-pixel source, area resampling, zero noise, and seed 7 stay fixed.",
+    "expect": "Preserve the clean reference's relative depth ordering as detail permits; corruption adds uncertainty, not new geometry."
+  },
+  {
+    "id": "i-grid-resolution-jpeg-256-30",
+    "category": "I",
+    "file": "i/i-grid-resolution-jpeg-256-30.jpg",
+    "width": 256,
+    "height": 256,
+    "seed": 7,
+    "variables": {
+      "reference": "scene",
+      "resolutionPx": 256,
+      "jpegQuality": 30,
+      "noiseSigma": 0,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "5 by 5 grid; resolutionPx (and file dimensions) and jpegQuality vary independently. The scene reference, fixed 4096-pixel source, area resampling, zero noise, and seed 7 stay fixed.",
+    "expect": "Preserve the clean reference's relative depth ordering as detail permits; corruption adds uncertainty, not new geometry."
+  },
+  {
+    "id": "i-grid-resolution-jpeg-256-50",
+    "category": "I",
+    "file": "i/i-grid-resolution-jpeg-256-50.jpg",
+    "width": 256,
+    "height": 256,
+    "seed": 7,
+    "variables": {
+      "reference": "scene",
+      "resolutionPx": 256,
+      "jpegQuality": 50,
+      "noiseSigma": 0,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "5 by 5 grid; resolutionPx (and file dimensions) and jpegQuality vary independently. The scene reference, fixed 4096-pixel source, area resampling, zero noise, and seed 7 stay fixed.",
+    "expect": "Preserve the clean reference's relative depth ordering as detail permits; corruption adds uncertainty, not new geometry."
+  },
+  {
+    "id": "i-grid-resolution-jpeg-256-80",
+    "category": "I",
+    "file": "i/i-grid-resolution-jpeg-256-80.jpg",
+    "width": 256,
+    "height": 256,
+    "seed": 7,
+    "variables": {
+      "reference": "scene",
+      "resolutionPx": 256,
+      "jpegQuality": 80,
+      "noiseSigma": 0,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "5 by 5 grid; resolutionPx (and file dimensions) and jpegQuality vary independently. The scene reference, fixed 4096-pixel source, area resampling, zero noise, and seed 7 stay fixed.",
+    "expect": "Preserve the clean reference's relative depth ordering as detail permits; corruption adds uncertainty, not new geometry."
+  },
+  {
+    "id": "i-grid-resolution-jpeg-256-100",
+    "category": "I",
+    "file": "i/i-grid-resolution-jpeg-256-100.jpg",
+    "width": 256,
+    "height": 256,
+    "seed": 7,
+    "variables": {
+      "reference": "scene",
+      "resolutionPx": 256,
+      "jpegQuality": 100,
+      "noiseSigma": 0,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "5 by 5 grid; resolutionPx (and file dimensions) and jpegQuality vary independently. The scene reference, fixed 4096-pixel source, area resampling, zero noise, and seed 7 stay fixed.",
+    "expect": "Preserve the clean reference's relative depth ordering as detail permits; corruption adds uncertainty, not new geometry."
+  },
+  {
+    "id": "i-grid-resolution-jpeg-512-10",
+    "category": "I",
+    "file": "i/i-grid-resolution-jpeg-512-10.jpg",
+    "width": 512,
+    "height": 512,
+    "seed": 7,
+    "variables": {
+      "reference": "scene",
+      "resolutionPx": 512,
+      "jpegQuality": 10,
+      "noiseSigma": 0,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "5 by 5 grid; resolutionPx (and file dimensions) and jpegQuality vary independently. The scene reference, fixed 4096-pixel source, area resampling, zero noise, and seed 7 stay fixed.",
+    "expect": "Preserve the clean reference's relative depth ordering as detail permits; corruption adds uncertainty, not new geometry."
+  },
+  {
+    "id": "i-grid-resolution-jpeg-512-30",
+    "category": "I",
+    "file": "i/i-grid-resolution-jpeg-512-30.jpg",
+    "width": 512,
+    "height": 512,
+    "seed": 7,
+    "variables": {
+      "reference": "scene",
+      "resolutionPx": 512,
+      "jpegQuality": 30,
+      "noiseSigma": 0,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "5 by 5 grid; resolutionPx (and file dimensions) and jpegQuality vary independently. The scene reference, fixed 4096-pixel source, area resampling, zero noise, and seed 7 stay fixed.",
+    "expect": "Preserve the clean reference's relative depth ordering as detail permits; corruption adds uncertainty, not new geometry."
+  },
+  {
+    "id": "i-grid-resolution-jpeg-512-50",
+    "category": "I",
+    "file": "i/i-grid-resolution-jpeg-512-50.jpg",
+    "width": 512,
+    "height": 512,
+    "seed": 7,
+    "variables": {
+      "reference": "scene",
+      "resolutionPx": 512,
+      "jpegQuality": 50,
+      "noiseSigma": 0,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "5 by 5 grid; resolutionPx (and file dimensions) and jpegQuality vary independently. The scene reference, fixed 4096-pixel source, area resampling, zero noise, and seed 7 stay fixed.",
+    "expect": "Preserve the clean reference's relative depth ordering as detail permits; corruption adds uncertainty, not new geometry."
+  },
+  {
+    "id": "i-grid-resolution-jpeg-512-80",
+    "category": "I",
+    "file": "i/i-grid-resolution-jpeg-512-80.jpg",
+    "width": 512,
+    "height": 512,
+    "seed": 7,
+    "variables": {
+      "reference": "scene",
+      "resolutionPx": 512,
+      "jpegQuality": 80,
+      "noiseSigma": 0,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "5 by 5 grid; resolutionPx (and file dimensions) and jpegQuality vary independently. The scene reference, fixed 4096-pixel source, area resampling, zero noise, and seed 7 stay fixed.",
+    "expect": "Preserve the clean reference's relative depth ordering as detail permits; corruption adds uncertainty, not new geometry."
+  },
+  {
+    "id": "i-grid-resolution-jpeg-512-100",
+    "category": "I",
+    "file": "i/i-grid-resolution-jpeg-512-100.jpg",
+    "width": 512,
+    "height": 512,
+    "seed": 7,
+    "variables": {
+      "reference": "scene",
+      "resolutionPx": 512,
+      "jpegQuality": 100,
+      "noiseSigma": 0,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "5 by 5 grid; resolutionPx (and file dimensions) and jpegQuality vary independently. The scene reference, fixed 4096-pixel source, area resampling, zero noise, and seed 7 stay fixed.",
+    "expect": "Preserve the clean reference's relative depth ordering as detail permits; corruption adds uncertainty, not new geometry."
+  },
+  {
+    "id": "i-grid-resolution-jpeg-1024-10",
+    "category": "I",
+    "file": "i/i-grid-resolution-jpeg-1024-10.jpg",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "scene",
+      "resolutionPx": 1024,
+      "jpegQuality": 10,
+      "noiseSigma": 0,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "5 by 5 grid; resolutionPx (and file dimensions) and jpegQuality vary independently. The scene reference, fixed 4096-pixel source, area resampling, zero noise, and seed 7 stay fixed.",
+    "expect": "Preserve the clean reference's relative depth ordering as detail permits; corruption adds uncertainty, not new geometry."
+  },
+  {
+    "id": "i-grid-resolution-jpeg-1024-30",
+    "category": "I",
+    "file": "i/i-grid-resolution-jpeg-1024-30.jpg",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "scene",
+      "resolutionPx": 1024,
+      "jpegQuality": 30,
+      "noiseSigma": 0,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "5 by 5 grid; resolutionPx (and file dimensions) and jpegQuality vary independently. The scene reference, fixed 4096-pixel source, area resampling, zero noise, and seed 7 stay fixed.",
+    "expect": "Preserve the clean reference's relative depth ordering as detail permits; corruption adds uncertainty, not new geometry."
+  },
+  {
+    "id": "i-grid-resolution-jpeg-1024-50",
+    "category": "I",
+    "file": "i/i-grid-resolution-jpeg-1024-50.jpg",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "scene",
+      "resolutionPx": 1024,
+      "jpegQuality": 50,
+      "noiseSigma": 0,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "5 by 5 grid; resolutionPx (and file dimensions) and jpegQuality vary independently. The scene reference, fixed 4096-pixel source, area resampling, zero noise, and seed 7 stay fixed.",
+    "expect": "Preserve the clean reference's relative depth ordering as detail permits; corruption adds uncertainty, not new geometry."
+  },
+  {
+    "id": "i-grid-resolution-jpeg-1024-80",
+    "category": "I",
+    "file": "i/i-grid-resolution-jpeg-1024-80.jpg",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "scene",
+      "resolutionPx": 1024,
+      "jpegQuality": 80,
+      "noiseSigma": 0,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "5 by 5 grid; resolutionPx (and file dimensions) and jpegQuality vary independently. The scene reference, fixed 4096-pixel source, area resampling, zero noise, and seed 7 stay fixed.",
+    "expect": "Preserve the clean reference's relative depth ordering as detail permits; corruption adds uncertainty, not new geometry."
+  },
+  {
+    "id": "i-grid-resolution-jpeg-1024-100",
+    "category": "I",
+    "file": "i/i-grid-resolution-jpeg-1024-100.jpg",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "scene",
+      "resolutionPx": 1024,
+      "jpegQuality": 100,
+      "noiseSigma": 0,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "5 by 5 grid; resolutionPx (and file dimensions) and jpegQuality vary independently. The scene reference, fixed 4096-pixel source, area resampling, zero noise, and seed 7 stay fixed.",
+    "expect": "Preserve the clean reference's relative depth ordering as detail permits; corruption adds uncertainty, not new geometry."
+  },
+  {
+    "id": "i-grid-resolution-jpeg-2048-10",
+    "category": "I",
+    "file": "i/i-grid-resolution-jpeg-2048-10.jpg",
+    "width": 2048,
+    "height": 2048,
+    "seed": 7,
+    "variables": {
+      "reference": "scene",
+      "resolutionPx": 2048,
+      "jpegQuality": 10,
+      "noiseSigma": 0,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "5 by 5 grid; resolutionPx (and file dimensions) and jpegQuality vary independently. The scene reference, fixed 4096-pixel source, area resampling, zero noise, and seed 7 stay fixed.",
+    "expect": "Preserve the clean reference's relative depth ordering as detail permits; corruption adds uncertainty, not new geometry."
+  },
+  {
+    "id": "i-grid-resolution-jpeg-2048-30",
+    "category": "I",
+    "file": "i/i-grid-resolution-jpeg-2048-30.jpg",
+    "width": 2048,
+    "height": 2048,
+    "seed": 7,
+    "variables": {
+      "reference": "scene",
+      "resolutionPx": 2048,
+      "jpegQuality": 30,
+      "noiseSigma": 0,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "5 by 5 grid; resolutionPx (and file dimensions) and jpegQuality vary independently. The scene reference, fixed 4096-pixel source, area resampling, zero noise, and seed 7 stay fixed.",
+    "expect": "Preserve the clean reference's relative depth ordering as detail permits; corruption adds uncertainty, not new geometry."
+  },
+  {
+    "id": "i-grid-resolution-jpeg-2048-50",
+    "category": "I",
+    "file": "i/i-grid-resolution-jpeg-2048-50.jpg",
+    "width": 2048,
+    "height": 2048,
+    "seed": 7,
+    "variables": {
+      "reference": "scene",
+      "resolutionPx": 2048,
+      "jpegQuality": 50,
+      "noiseSigma": 0,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "5 by 5 grid; resolutionPx (and file dimensions) and jpegQuality vary independently. The scene reference, fixed 4096-pixel source, area resampling, zero noise, and seed 7 stay fixed.",
+    "expect": "Preserve the clean reference's relative depth ordering as detail permits; corruption adds uncertainty, not new geometry."
+  },
+  {
+    "id": "i-grid-resolution-jpeg-2048-80",
+    "category": "I",
+    "file": "i/i-grid-resolution-jpeg-2048-80.jpg",
+    "width": 2048,
+    "height": 2048,
+    "seed": 7,
+    "variables": {
+      "reference": "scene",
+      "resolutionPx": 2048,
+      "jpegQuality": 80,
+      "noiseSigma": 0,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "5 by 5 grid; resolutionPx (and file dimensions) and jpegQuality vary independently. The scene reference, fixed 4096-pixel source, area resampling, zero noise, and seed 7 stay fixed.",
+    "expect": "Preserve the clean reference's relative depth ordering as detail permits; corruption adds uncertainty, not new geometry."
+  },
+  {
+    "id": "i-grid-resolution-jpeg-2048-100",
+    "category": "I",
+    "file": "i/i-grid-resolution-jpeg-2048-100.jpg",
+    "width": 2048,
+    "height": 2048,
+    "seed": 7,
+    "variables": {
+      "reference": "scene",
+      "resolutionPx": 2048,
+      "jpegQuality": 100,
+      "noiseSigma": 0,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "5 by 5 grid; resolutionPx (and file dimensions) and jpegQuality vary independently. The scene reference, fixed 4096-pixel source, area resampling, zero noise, and seed 7 stay fixed.",
+    "expect": "Preserve the clean reference's relative depth ordering as detail permits; corruption adds uncertainty, not new geometry."
+  },
+  {
+    "id": "i-grid-resolution-jpeg-4096-10",
+    "category": "I",
+    "file": "i/i-grid-resolution-jpeg-4096-10.jpg",
+    "width": 4096,
+    "height": 4096,
+    "seed": 7,
+    "variables": {
+      "reference": "scene",
+      "resolutionPx": 4096,
+      "jpegQuality": 10,
+      "noiseSigma": 0,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "5 by 5 grid; resolutionPx (and file dimensions) and jpegQuality vary independently. The scene reference, fixed 4096-pixel source, area resampling, zero noise, and seed 7 stay fixed.",
+    "expect": "Preserve the clean reference's relative depth ordering as detail permits; corruption adds uncertainty, not new geometry."
+  },
+  {
+    "id": "i-grid-resolution-jpeg-4096-30",
+    "category": "I",
+    "file": "i/i-grid-resolution-jpeg-4096-30.jpg",
+    "width": 4096,
+    "height": 4096,
+    "seed": 7,
+    "variables": {
+      "reference": "scene",
+      "resolutionPx": 4096,
+      "jpegQuality": 30,
+      "noiseSigma": 0,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "5 by 5 grid; resolutionPx (and file dimensions) and jpegQuality vary independently. The scene reference, fixed 4096-pixel source, area resampling, zero noise, and seed 7 stay fixed.",
+    "expect": "Preserve the clean reference's relative depth ordering as detail permits; corruption adds uncertainty, not new geometry."
+  },
+  {
+    "id": "i-grid-resolution-jpeg-4096-50",
+    "category": "I",
+    "file": "i/i-grid-resolution-jpeg-4096-50.jpg",
+    "width": 4096,
+    "height": 4096,
+    "seed": 7,
+    "variables": {
+      "reference": "scene",
+      "resolutionPx": 4096,
+      "jpegQuality": 50,
+      "noiseSigma": 0,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "5 by 5 grid; resolutionPx (and file dimensions) and jpegQuality vary independently. The scene reference, fixed 4096-pixel source, area resampling, zero noise, and seed 7 stay fixed.",
+    "expect": "Preserve the clean reference's relative depth ordering as detail permits; corruption adds uncertainty, not new geometry."
+  },
+  {
+    "id": "i-grid-resolution-jpeg-4096-80",
+    "category": "I",
+    "file": "i/i-grid-resolution-jpeg-4096-80.jpg",
+    "width": 4096,
+    "height": 4096,
+    "seed": 7,
+    "variables": {
+      "reference": "scene",
+      "resolutionPx": 4096,
+      "jpegQuality": 80,
+      "noiseSigma": 0,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "5 by 5 grid; resolutionPx (and file dimensions) and jpegQuality vary independently. The scene reference, fixed 4096-pixel source, area resampling, zero noise, and seed 7 stay fixed.",
+    "expect": "Preserve the clean reference's relative depth ordering as detail permits; corruption adds uncertainty, not new geometry."
+  },
+  {
+    "id": "i-grid-resolution-jpeg-4096-100",
+    "category": "I",
+    "file": "i/i-grid-resolution-jpeg-4096-100.jpg",
+    "width": 4096,
+    "height": 4096,
+    "seed": 7,
+    "variables": {
+      "reference": "scene",
+      "resolutionPx": 4096,
+      "jpegQuality": 100,
+      "noiseSigma": 0,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "5 by 5 grid; resolutionPx (and file dimensions) and jpegQuality vary independently. The scene reference, fixed 4096-pixel source, area resampling, zero noise, and seed 7 stay fixed.",
+    "expect": "Preserve the clean reference's relative depth ordering as detail permits; corruption adds uncertainty, not new geometry."
+  },
+  {
+    "id": "i-grid-noise-jpeg-0-10",
+    "category": "I",
+    "file": "i/i-grid-noise-jpeg-0-10.jpg",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "scene",
+      "resolutionPx": 1024,
+      "jpegQuality": 10,
+      "noiseSigma": 0,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "5 by 5 grid; noiseSigma and jpegQuality vary independently. The scene reference, 1024-pixel size, luma channel mode, fixed noise realization, area resampling, and seed 7 stay fixed. Noise is added before JPEG encoding.",
+    "expect": "Preserve the clean reference's relative depth ordering as detail permits; corruption adds uncertainty, not new geometry."
+  },
+  {
+    "id": "i-grid-noise-jpeg-0-30",
+    "category": "I",
+    "file": "i/i-grid-noise-jpeg-0-30.jpg",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "scene",
+      "resolutionPx": 1024,
+      "jpegQuality": 30,
+      "noiseSigma": 0,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "5 by 5 grid; noiseSigma and jpegQuality vary independently. The scene reference, 1024-pixel size, luma channel mode, fixed noise realization, area resampling, and seed 7 stay fixed. Noise is added before JPEG encoding.",
+    "expect": "Preserve the clean reference's relative depth ordering as detail permits; corruption adds uncertainty, not new geometry."
+  },
+  {
+    "id": "i-grid-noise-jpeg-0-50",
+    "category": "I",
+    "file": "i/i-grid-noise-jpeg-0-50.jpg",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "scene",
+      "resolutionPx": 1024,
+      "jpegQuality": 50,
+      "noiseSigma": 0,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "5 by 5 grid; noiseSigma and jpegQuality vary independently. The scene reference, 1024-pixel size, luma channel mode, fixed noise realization, area resampling, and seed 7 stay fixed. Noise is added before JPEG encoding.",
+    "expect": "Preserve the clean reference's relative depth ordering as detail permits; corruption adds uncertainty, not new geometry."
+  },
+  {
+    "id": "i-grid-noise-jpeg-0-80",
+    "category": "I",
+    "file": "i/i-grid-noise-jpeg-0-80.jpg",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "scene",
+      "resolutionPx": 1024,
+      "jpegQuality": 80,
+      "noiseSigma": 0,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "5 by 5 grid; noiseSigma and jpegQuality vary independently. The scene reference, 1024-pixel size, luma channel mode, fixed noise realization, area resampling, and seed 7 stay fixed. Noise is added before JPEG encoding.",
+    "expect": "Preserve the clean reference's relative depth ordering as detail permits; corruption adds uncertainty, not new geometry."
+  },
+  {
+    "id": "i-grid-noise-jpeg-0-100",
+    "category": "I",
+    "file": "i/i-grid-noise-jpeg-0-100.jpg",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "scene",
+      "resolutionPx": 1024,
+      "jpegQuality": 100,
+      "noiseSigma": 0,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "5 by 5 grid; noiseSigma and jpegQuality vary independently. The scene reference, 1024-pixel size, luma channel mode, fixed noise realization, area resampling, and seed 7 stay fixed. Noise is added before JPEG encoding.",
+    "expect": "Preserve the clean reference's relative depth ordering as detail permits; corruption adds uncertainty, not new geometry."
+  },
+  {
+    "id": "i-grid-noise-jpeg-2-10",
+    "category": "I",
+    "file": "i/i-grid-noise-jpeg-2-10.jpg",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "scene",
+      "resolutionPx": 1024,
+      "jpegQuality": 10,
+      "noiseSigma": 2,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "5 by 5 grid; noiseSigma and jpegQuality vary independently. The scene reference, 1024-pixel size, luma channel mode, fixed noise realization, area resampling, and seed 7 stay fixed. Noise is added before JPEG encoding.",
+    "expect": "Preserve the clean reference's relative depth ordering as detail permits; corruption adds uncertainty, not new geometry."
+  },
+  {
+    "id": "i-grid-noise-jpeg-2-30",
+    "category": "I",
+    "file": "i/i-grid-noise-jpeg-2-30.jpg",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "scene",
+      "resolutionPx": 1024,
+      "jpegQuality": 30,
+      "noiseSigma": 2,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "5 by 5 grid; noiseSigma and jpegQuality vary independently. The scene reference, 1024-pixel size, luma channel mode, fixed noise realization, area resampling, and seed 7 stay fixed. Noise is added before JPEG encoding.",
+    "expect": "Preserve the clean reference's relative depth ordering as detail permits; corruption adds uncertainty, not new geometry."
+  },
+  {
+    "id": "i-grid-noise-jpeg-2-50",
+    "category": "I",
+    "file": "i/i-grid-noise-jpeg-2-50.jpg",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "scene",
+      "resolutionPx": 1024,
+      "jpegQuality": 50,
+      "noiseSigma": 2,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "5 by 5 grid; noiseSigma and jpegQuality vary independently. The scene reference, 1024-pixel size, luma channel mode, fixed noise realization, area resampling, and seed 7 stay fixed. Noise is added before JPEG encoding.",
+    "expect": "Preserve the clean reference's relative depth ordering as detail permits; corruption adds uncertainty, not new geometry."
+  },
+  {
+    "id": "i-grid-noise-jpeg-2-80",
+    "category": "I",
+    "file": "i/i-grid-noise-jpeg-2-80.jpg",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "scene",
+      "resolutionPx": 1024,
+      "jpegQuality": 80,
+      "noiseSigma": 2,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "5 by 5 grid; noiseSigma and jpegQuality vary independently. The scene reference, 1024-pixel size, luma channel mode, fixed noise realization, area resampling, and seed 7 stay fixed. Noise is added before JPEG encoding.",
+    "expect": "Preserve the clean reference's relative depth ordering as detail permits; corruption adds uncertainty, not new geometry."
+  },
+  {
+    "id": "i-grid-noise-jpeg-2-100",
+    "category": "I",
+    "file": "i/i-grid-noise-jpeg-2-100.jpg",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "scene",
+      "resolutionPx": 1024,
+      "jpegQuality": 100,
+      "noiseSigma": 2,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "5 by 5 grid; noiseSigma and jpegQuality vary independently. The scene reference, 1024-pixel size, luma channel mode, fixed noise realization, area resampling, and seed 7 stay fixed. Noise is added before JPEG encoding.",
+    "expect": "Preserve the clean reference's relative depth ordering as detail permits; corruption adds uncertainty, not new geometry."
+  },
+  {
+    "id": "i-grid-noise-jpeg-8-10",
+    "category": "I",
+    "file": "i/i-grid-noise-jpeg-8-10.jpg",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "scene",
+      "resolutionPx": 1024,
+      "jpegQuality": 10,
+      "noiseSigma": 8,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "5 by 5 grid; noiseSigma and jpegQuality vary independently. The scene reference, 1024-pixel size, luma channel mode, fixed noise realization, area resampling, and seed 7 stay fixed. Noise is added before JPEG encoding.",
+    "expect": "Preserve the clean reference's relative depth ordering as detail permits; corruption adds uncertainty, not new geometry."
+  },
+  {
+    "id": "i-grid-noise-jpeg-8-30",
+    "category": "I",
+    "file": "i/i-grid-noise-jpeg-8-30.jpg",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "scene",
+      "resolutionPx": 1024,
+      "jpegQuality": 30,
+      "noiseSigma": 8,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "5 by 5 grid; noiseSigma and jpegQuality vary independently. The scene reference, 1024-pixel size, luma channel mode, fixed noise realization, area resampling, and seed 7 stay fixed. Noise is added before JPEG encoding.",
+    "expect": "Preserve the clean reference's relative depth ordering as detail permits; corruption adds uncertainty, not new geometry."
+  },
+  {
+    "id": "i-grid-noise-jpeg-8-50",
+    "category": "I",
+    "file": "i/i-grid-noise-jpeg-8-50.jpg",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "scene",
+      "resolutionPx": 1024,
+      "jpegQuality": 50,
+      "noiseSigma": 8,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "5 by 5 grid; noiseSigma and jpegQuality vary independently. The scene reference, 1024-pixel size, luma channel mode, fixed noise realization, area resampling, and seed 7 stay fixed. Noise is added before JPEG encoding.",
+    "expect": "Preserve the clean reference's relative depth ordering as detail permits; corruption adds uncertainty, not new geometry."
+  },
+  {
+    "id": "i-grid-noise-jpeg-8-80",
+    "category": "I",
+    "file": "i/i-grid-noise-jpeg-8-80.jpg",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "scene",
+      "resolutionPx": 1024,
+      "jpegQuality": 80,
+      "noiseSigma": 8,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "5 by 5 grid; noiseSigma and jpegQuality vary independently. The scene reference, 1024-pixel size, luma channel mode, fixed noise realization, area resampling, and seed 7 stay fixed. Noise is added before JPEG encoding.",
+    "expect": "Preserve the clean reference's relative depth ordering as detail permits; corruption adds uncertainty, not new geometry."
+  },
+  {
+    "id": "i-grid-noise-jpeg-8-100",
+    "category": "I",
+    "file": "i/i-grid-noise-jpeg-8-100.jpg",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "scene",
+      "resolutionPx": 1024,
+      "jpegQuality": 100,
+      "noiseSigma": 8,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "5 by 5 grid; noiseSigma and jpegQuality vary independently. The scene reference, 1024-pixel size, luma channel mode, fixed noise realization, area resampling, and seed 7 stay fixed. Noise is added before JPEG encoding.",
+    "expect": "Preserve the clean reference's relative depth ordering as detail permits; corruption adds uncertainty, not new geometry."
+  },
+  {
+    "id": "i-grid-noise-jpeg-16-10",
+    "category": "I",
+    "file": "i/i-grid-noise-jpeg-16-10.jpg",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "scene",
+      "resolutionPx": 1024,
+      "jpegQuality": 10,
+      "noiseSigma": 16,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "5 by 5 grid; noiseSigma and jpegQuality vary independently. The scene reference, 1024-pixel size, luma channel mode, fixed noise realization, area resampling, and seed 7 stay fixed. Noise is added before JPEG encoding.",
+    "expect": "Preserve the clean reference's relative depth ordering as detail permits; corruption adds uncertainty, not new geometry."
+  },
+  {
+    "id": "i-grid-noise-jpeg-16-30",
+    "category": "I",
+    "file": "i/i-grid-noise-jpeg-16-30.jpg",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "scene",
+      "resolutionPx": 1024,
+      "jpegQuality": 30,
+      "noiseSigma": 16,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "5 by 5 grid; noiseSigma and jpegQuality vary independently. The scene reference, 1024-pixel size, luma channel mode, fixed noise realization, area resampling, and seed 7 stay fixed. Noise is added before JPEG encoding.",
+    "expect": "Preserve the clean reference's relative depth ordering as detail permits; corruption adds uncertainty, not new geometry."
+  },
+  {
+    "id": "i-grid-noise-jpeg-16-50",
+    "category": "I",
+    "file": "i/i-grid-noise-jpeg-16-50.jpg",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "scene",
+      "resolutionPx": 1024,
+      "jpegQuality": 50,
+      "noiseSigma": 16,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "5 by 5 grid; noiseSigma and jpegQuality vary independently. The scene reference, 1024-pixel size, luma channel mode, fixed noise realization, area resampling, and seed 7 stay fixed. Noise is added before JPEG encoding.",
+    "expect": "Preserve the clean reference's relative depth ordering as detail permits; corruption adds uncertainty, not new geometry."
+  },
+  {
+    "id": "i-grid-noise-jpeg-16-80",
+    "category": "I",
+    "file": "i/i-grid-noise-jpeg-16-80.jpg",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "scene",
+      "resolutionPx": 1024,
+      "jpegQuality": 80,
+      "noiseSigma": 16,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "5 by 5 grid; noiseSigma and jpegQuality vary independently. The scene reference, 1024-pixel size, luma channel mode, fixed noise realization, area resampling, and seed 7 stay fixed. Noise is added before JPEG encoding.",
+    "expect": "Preserve the clean reference's relative depth ordering as detail permits; corruption adds uncertainty, not new geometry."
+  },
+  {
+    "id": "i-grid-noise-jpeg-16-100",
+    "category": "I",
+    "file": "i/i-grid-noise-jpeg-16-100.jpg",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "scene",
+      "resolutionPx": 1024,
+      "jpegQuality": 100,
+      "noiseSigma": 16,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "5 by 5 grid; noiseSigma and jpegQuality vary independently. The scene reference, 1024-pixel size, luma channel mode, fixed noise realization, area resampling, and seed 7 stay fixed. Noise is added before JPEG encoding.",
+    "expect": "Preserve the clean reference's relative depth ordering as detail permits; corruption adds uncertainty, not new geometry."
+  },
+  {
+    "id": "i-grid-noise-jpeg-32-10",
+    "category": "I",
+    "file": "i/i-grid-noise-jpeg-32-10.jpg",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "scene",
+      "resolutionPx": 1024,
+      "jpegQuality": 10,
+      "noiseSigma": 32,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "5 by 5 grid; noiseSigma and jpegQuality vary independently. The scene reference, 1024-pixel size, luma channel mode, fixed noise realization, area resampling, and seed 7 stay fixed. Noise is added before JPEG encoding.",
+    "expect": "Preserve the clean reference's relative depth ordering as detail permits; corruption adds uncertainty, not new geometry."
+  },
+  {
+    "id": "i-grid-noise-jpeg-32-30",
+    "category": "I",
+    "file": "i/i-grid-noise-jpeg-32-30.jpg",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "scene",
+      "resolutionPx": 1024,
+      "jpegQuality": 30,
+      "noiseSigma": 32,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "5 by 5 grid; noiseSigma and jpegQuality vary independently. The scene reference, 1024-pixel size, luma channel mode, fixed noise realization, area resampling, and seed 7 stay fixed. Noise is added before JPEG encoding.",
+    "expect": "Preserve the clean reference's relative depth ordering as detail permits; corruption adds uncertainty, not new geometry."
+  },
+  {
+    "id": "i-grid-noise-jpeg-32-50",
+    "category": "I",
+    "file": "i/i-grid-noise-jpeg-32-50.jpg",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "scene",
+      "resolutionPx": 1024,
+      "jpegQuality": 50,
+      "noiseSigma": 32,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "5 by 5 grid; noiseSigma and jpegQuality vary independently. The scene reference, 1024-pixel size, luma channel mode, fixed noise realization, area resampling, and seed 7 stay fixed. Noise is added before JPEG encoding.",
+    "expect": "Preserve the clean reference's relative depth ordering as detail permits; corruption adds uncertainty, not new geometry."
+  },
+  {
+    "id": "i-grid-noise-jpeg-32-80",
+    "category": "I",
+    "file": "i/i-grid-noise-jpeg-32-80.jpg",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "scene",
+      "resolutionPx": 1024,
+      "jpegQuality": 80,
+      "noiseSigma": 32,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "5 by 5 grid; noiseSigma and jpegQuality vary independently. The scene reference, 1024-pixel size, luma channel mode, fixed noise realization, area resampling, and seed 7 stay fixed. Noise is added before JPEG encoding.",
+    "expect": "Preserve the clean reference's relative depth ordering as detail permits; corruption adds uncertainty, not new geometry."
+  },
+  {
+    "id": "i-grid-noise-jpeg-32-100",
+    "category": "I",
+    "file": "i/i-grid-noise-jpeg-32-100.jpg",
+    "width": 1024,
+    "height": 1024,
+    "seed": 7,
+    "variables": {
+      "reference": "scene",
+      "resolutionPx": 1024,
+      "jpegQuality": 100,
+      "noiseSigma": 32,
+      "noiseChannels": "luma",
+      "sourceSizePx": 4096,
+      "resampling": "area",
+      "noiseModel": "Gaussian-additive-sRGB"
+    },
+    "controls": "5 by 5 grid; noiseSigma and jpegQuality vary independently. The scene reference, 1024-pixel size, luma channel mode, fixed noise realization, area resampling, and seed 7 stay fixed. Noise is added before JPEG encoding.",
+    "expect": "Preserve the clean reference's relative depth ordering as detail permits; corruption adds uncertainty, not new geometry."
+  }
+]
