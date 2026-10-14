@@ -28,6 +28,7 @@ import * as prettier from "prettier";
 import { PAGES, label } from "./pages.mjs";
 import { toyHref, HOME_URL, PLAYGROUND_URL, PLAYGROUND_REL } from "./links.mjs";
 import { RULES } from "./railroad.js";
+import { MANUAL_PDF } from "./pdf-edition.js";
 
 const dir = new URL("./", import.meta.url);
 const read = (f) => fs.readFileSync(new URL(f, dir), "utf8");
@@ -45,6 +46,7 @@ const plain = (html) => html.replace(/<[^>]+>/g, "").replace(/&amp;/g, "&").repl
 
 const toyLinks = (html) =>
   html
+    .replace(/href="tinkerers-manual(?:-[a-f0-9]{16})?\.pdf"/g, `href="${MANUAL_PDF}"`)
     .replace(/<a\s+href="toy:([a-z0-9-]+)"\s*>/g, (all, id) => `<a href="${toyHref(id)}" target="_blank" rel="noopener">`) // prettier-ignore
     // The Playground, wherever a page links to it.
     .replace(/href="(?:\.\.\/|\.\.\/playground\/)"/g, `href="${PLAYGROUND_REL}"`)

@@ -359,6 +359,7 @@ test.describe("the staged front door", () => {
         "/embed/",
         "/worlds/",
         "/manual/",
+        // Compatibility coverage: old PDF links survive the front-door layout.
         "/manual/tinkerers-manual.pdf",
         "/pdf-lab/",
       ]) {
