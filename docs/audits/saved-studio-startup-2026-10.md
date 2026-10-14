@@ -7,9 +7,8 @@ inputs, and leaves the protected Photo to 3D, Moving photo to 3D, and Video to 3
 An embed now publishes its player before the first toy build. The existing photo-view hook can read
 `view: "splats"` from the restored scene at the time it builds the relief. When applying a saved
 camera, the player marks the existing flight state as visitor-owned. The idle opening pose therefore
-leaves that camera alone. New video selections and Reset keep the native opening behavior;
-explicitly starting Replay still flies the path. No schema, asset, renderer setting, or threshold
-changes.
+leaves that camera alone. New video selections keep the native opening behavior; explicitly starting
+Replay still flies the path. No schema, asset, renderer setting, or threshold changes.
 
 ## Introducing commits
 
@@ -48,9 +47,33 @@ After-fix browser validation: **7 passed, 0 failed, 0 skipped, 0 retries, 222.16
 checks the real embed view, app Save JSON download, fresh-context import, and second Save JSON
 download for all three Studio toys in v2 and v3. Camera checks use the original pose and pan, not
 the first saved document. The separate native opening and Replay case checks that the compatibility
-fix preserves those behaviors. Historical source probes: **5 assertions passed**. The complete
-revised task-65 corpus and existing source units are now running against this Engine branch; those
-results are not yet claimed.
+fix preserves those behaviors. Historical source probes: **5 assertions passed**.
+
+The task-65 corpus log records **96 passes: all 94 scene cases and both corpus units**, with no
+failures and a maximum scene time of **43.4 seconds** against the 120-second per-case budget. The
+environment transition interrupted Worlds before a final report. The partial log is retained; its
+successful download assertions ran, but buffered attachments were not emitted. The independent
+Engine report retains **12 actual first/reloaded Studio JSON downloads**.
+
+The resumed batch completed **23 passed, 0 failed, 0 skipped, 0 retries, 310.799 seconds**: Worlds,
+both corpus units, and all 20 source units. Worlds verified load/reload, definition, spawn, and prop
+coordinates in **298.226 seconds**, within its separate documented 420-second budget. The first
+resume attempt started no tests because of an orphaned server; that failure is retained. No
+uninterrupted 117-test run is claimed.
+
+Main `4907a003a43be0be97ce25403d94f6f1e9208600` is merged. Its additions since tested main are
+depth-lab tools/assets and documentation; runtime source, tested assets, Worlds, and tests are
+identical. A direct #197 tests-only run finished **3 passed, 3 failed, 0 skipped, 0 retries, 141.232
+seconds**: corpus units and the v1-refusal case pass, while both photo embed-view cases and Video to
+3D fail without this Engine change. The two actual before-fix video downloads again contain the
+changed camera; all four after-fix video downloads preserve the original pose and pan.
+
+The unchanged embed transfer check passed on the merged Engine tree: **1 passed, 0 failed, 0
+skipped, 0 retries, 13.244 seconds**; it printed **9.2 MB**, below the unchanged 30 MB threshold.
+The first attempt failed at its absolute-origin presence assertion because the diagnostic server
+used port 4174 while `smoke.spec.mjs` expects port 4173. That **0 passed / 1 failed, 15.166-second**
+harness attempt is retained. The rerun used the expected port without changing the test or
+threshold.
 
 ## Remaining limits
 
