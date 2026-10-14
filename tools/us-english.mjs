@@ -120,11 +120,8 @@ const isCode = (f) => /\.(js|mjs|html)$/.test(f);
 function textOf(file, line) {
   if (!isCode(file)) return line.replace(/`[^`]*`/g, " "); // inline code is code
   const parts = [];
-  for (const m of line.matchAll(/"((?:[^"\\]|\\.)*)"|'((?:[^'\\]|\\.)*)'|`((?:[^`\\]|\\.)*)`/g)) {
-    // Module specifiers keep their stored file names.
-    if (/\b(?:from\s+|import\s*(?:\(\s*)?)$/.test(line.slice(0, m.index))) continue;
+  for (const m of line.matchAll(/"((?:[^"\\]|\\.)*)"|'((?:[^'\\]|\\.)*)'|`((?:[^`\\]|\\.)*)`/g))
     parts.push(m[1] ?? m[2] ?? m[3] ?? "");
-  }
   if (/\.html$/.test(file)) parts.push(line.replace(/<[^>]*>/g, " "));
   return parts.join(" | ");
 }

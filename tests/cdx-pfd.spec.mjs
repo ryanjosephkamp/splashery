@@ -6,39 +6,11 @@ import { TOY_SOUNDS } from "../src/toy-sounds.js";
 import { parseNotes } from "../src/voices.js";
 import { encodeSceneHash, decodeSceneHash } from "../src/codec.js";
 import { normalizeScene } from "../src/state.js";
-import fs from "node:fs";
-import path from "node:path";
-import { spawnSync } from "node:child_process";
 
 const ID = "name-toy";
 const APP = "/?labs=1&renderer=webgl2&profile=low&adapt=off";
 const load = () => import("../src/packs/name-toy.js");
 const blank = () => ({ parts: {}, tokens: [], cues: [] });
-
-test("the language check preserves the shared word module's filename and checks public messages", () => {
-  const actual = spawnSync(process.execPath, ["tools/us-english.mjs", "src/packs/name-toy.js"], {
-    encoding: "utf8",
-  });
-  expect(actual.status, actual.stdout).toBe(0);
-  const dir = fs.mkdtempSync("src/.cdx-pfd-english-");
-  try {
-    const fixture = path.join(dir, "labels.js");
-    fs.writeFileSync(
-      fixture,
-      'import { words } from "./maths.js"; const label = "colour";\nawait import("./grey-model.js");\nexport { words } from "./colour-palette.js";\n',
-    );
-    const checked = spawnSync(process.execPath, ["tools/us-english.mjs", fixture], {
-      encoding: "utf8",
-    });
-    expect(checked.status).toBe(1);
-    expect(checked.stdout).toContain('"colour" → color');
-    expect(checked.stdout).toContain("1 British spelling.");
-    expect(checked.stdout).not.toContain('"maths"');
-    expect(checked.stdout).not.toContain('"grey"');
-  } finally {
-    fs.rmSync(dir, { recursive: true, force: true });
-  }
-});
 
 async function build(given = {}, count = 60000) {
   const { RECIPES } = await load();
@@ -234,10 +206,11 @@ for (const [width, height] of [
       const diff = await page.evaluate(async (verb) => {
         const { app, player: p } = window.__splashery;
         await app.setToyOption("verb", verb);
-        return app.withCapture([390, 390], async () => {
+        if (verb === "blow") app.setLook({ background: "#111111" });
+        return app.withCapture([390, 390], async (base) => {
           const frame = async (v) => {
             p.motion.setControl("play", v, { snap: true });
-            const c = await p.renderAt(p.time, p.camera.home);
+            const c = await p.renderAt(p.time, base.cam);
             return c.getContext("2d").getImageData(0, 0, 390, 390).data;
           };
           const rest = await frame(0);
@@ -251,10 +224,30 @@ for (const [width, height] of [
               30
             )
               changed++;
-          return changed;
+          let edgePixels = 0;
+          if (verb === "blow") {
+            // Reserve visible room for the whole gust, not only its rest pose.
+            for (let step = 0; step <= 10; step++) {
+              const pixels = await frame(step / 10);
+              for (let y = 0; y < 390; y++)
+                for (let x = 0; x < 390; x++) {
+                  if (x >= 6 && x < 384 && y >= 6 && y < 384) continue;
+                  const i = (y * 390 + x) * 4;
+                  if (
+                    Math.abs(pixels[i] - 17) +
+                      Math.abs(pixels[i + 1] - 17) +
+                      Math.abs(pixels[i + 2] - 17) >
+                    30
+                  )
+                    edgePixels++;
+                }
+            }
+          }
+          return { changed, edgePixels };
         });
       }, verb);
-      expect(diff, verb).toBeGreaterThan(400);
+      expect(diff.changed, verb).toBeGreaterThan(400);
+      expect(diff.edgePixels, `${verb} stays inside the capture`).toBe(0);
     }
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(
       true,

@@ -284,6 +284,12 @@ export const RECIPES = {
             .hex,
       );
       const verb = VERBS.includes(o.verb) ? o.verb : "poke";
+      if (verb === "blow") {
+        // Frame the gust's travel and tilt, so edge letters stay visible.
+        for (const x of [-1, 1])
+          for (const y of [-1, 1])
+            k.reach([x * (layout.width / 2 + 0.35), y * (layout.height / 2 + 0.35), 0.15]);
+      }
       active = { layout, verb, color: o.color, paints, count };
       k.data = { layout, colors, verb, sort: -1 };
       layout.letters.forEach((letter, i) => {
