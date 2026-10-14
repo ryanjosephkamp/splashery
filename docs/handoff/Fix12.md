@@ -103,6 +103,9 @@ The four tests (root cause and fix; the runs are in "Notes"):
 - Reproduced on plain main (41b21e74): kit:87 threw "too much detail for a circular picture" (6.3
   min); smoke:734 failed with 82,359 (and 82,306 to 83,233 across the bisect); tpg:205 passed here
   in 3.5 min of its 4 min limit, with 6 to 12 s per page after the second (timed per page).
+- Closing run (October 14, 2026, branch head c8c04ffc, SwiftShader, one worker): kit:87, the rigs
+  test (smoke:749) and tpg:205 with `--repeat-each=3`: 9 of 9 passed (30.4 min). Then kit, smoke,
+  tpg, help, unit, taps and fx12-qr-circle-budget in full: 169 of 169 passed (32.3 min).
 - Bisect of smoke:734 (its title, one run each): d7b2ef4b (October 2) pass, 26fd8a90 (October 5)
   pass, 50af44bd (October 6) pass, 20a22840 (October 6) fail, 953f6e44 (October 7) pass, 9bb2e68f,
   0bf4746a, 9101fa2f, a0b68bc3, 3ec2a578, 574a68d3, 58f3d8ed, 11d83626 fail.
