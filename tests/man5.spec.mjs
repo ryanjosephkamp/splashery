@@ -4,6 +4,7 @@
 
 import { test, expect } from "@playwright/test";
 import fs from "node:fs";
+import { MANUAL_PDF } from "../manual/pdf-edition.js";
 import path from "node:path";
 import { execFileSync } from "node:child_process";
 import { PAGES } from "../manual/pages.mjs";
@@ -166,11 +167,10 @@ test.describe("the PDF", () => {
   }) => {
     await page.goto("/manual/");
     const res = await page.evaluate(async () => {
+      const { MANUAL_PDF } = await import("/manual/pdf-edition.js");
       const pdfjs = await import("/vendor/pdfjs/pdf.min.mjs");
       pdfjs.GlobalWorkerOptions.workerSrc = "/vendor/pdfjs/pdf.worker.min.mjs";
-      const data = new Uint8Array(
-        await (await fetch("/manual/tinkerers-manual.pdf")).arrayBuffer(),
-      );
+      const data = new Uint8Array(await (await fetch(`/manual/${MANUAL_PDF}`)).arrayBuffer());
       const doc = await pdfjs.getDocument({ data }).promise;
       let text = "";
       const urls = [];
@@ -210,7 +210,7 @@ test.describe("the PDF", () => {
     const A = fs.readFileSync(a);
     expect(A.equals(fs.readFileSync(b))).toBe(true);
     // The shipped PDF is that print of this input (when the pinned Chromium made it).
-    const shipped = fs.readFileSync("manual/tinkerers-manual.pdf");
+    const shipped = fs.readFileSync(`manual/${MANUAL_PDF}`);
     if (A.toString("latin1").includes("Skia/PDF m141") && shipped.toString("latin1").includes("Skia/PDF m141")) // prettier-ignore
       expect(A.equals(shipped), "run tools/manual-pdf.mjs again: the shipped PDF is out of date").toBe(true); // prettier-ignore
     fs.rmSync(dir, { recursive: true, force: true });
