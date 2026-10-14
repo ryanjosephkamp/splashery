@@ -9,6 +9,15 @@ Mid, High, and Max captures, plus replacement captures of the four repaired Math
 samples, intermediate repair, test failures, and final media are preserved on the never-merged
 evidence branch at `e6fab794836a1479124abe8a3b56657b93f02e5b`.
 
+## Completed main comparison
+
+The [review follow-up](kit-tiers-2026-10-review.md) contains four High before/after pairs, four Max
+pairs, and every named failure from complete requested reruns. Main: **170 passed, 38 failed, 1
+skipped**. Branch: **245 passed, 37 failed, 1 skipped**. No interrupted or unrun titles remain in
+those final valid unique totals. Every shared branch failure also failed on main; main alone failed
+the Kit circular-QR detail-limit check. Both equation-layout issues were already present on main.
+The earlier stopped-run counts below remain historical implementation evidence.
+
 ## Implemented recipe repairs
 
 Only the Math pack's bitmap-text helper changes:
@@ -188,7 +197,7 @@ Nothing on the evidence branch is intended to merge.
   cap from one home view. Physical phone, higher-DPR, memory, and frame-rate measurements remain
   necessary before changing Auto policy.
 
-## Verification and remaining limits
+## Original implementation verification and limits (historical)
 
 The final recipe source was checked across ten selected spec files with one worker in three
 serialized invocations. The first stopped after the recorded Help failures for a normal Mesa probe.

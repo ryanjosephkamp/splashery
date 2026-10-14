@@ -14,6 +14,30 @@
 - Immutable evidence checkpoint: `e6fab794836a1479124abe8a3b56657b93f02e5b` on
   `codex/t2-open-shelves-clips`, never merge.
 
+## Completed review follow-up
+
+The [main comparison and upper-tier review](kit-tiers-2026-10-review.md) records the complete
+requested reruns and immutable High/Max before-and-after pairs. Main
+`6c3764ff9a1aa3fbba202af12d6764ac23ed2d6e`: **170 passed, 38 failed, 1 skipped** across 209 unique
+titles. Branch `4b920ee3cf37236d240de7bc61662f698e67ef7d`: **245 passed, 37 failed, 1 skipped**
+across 283 titles. Each includes one timeout in the failed count; no interrupted or unrun titles
+remain in the final valid totals. All shared branch failures also failed on main. The cat-rig case
+also hit the same zero-pixel assertion in an unchanged isolated run on each tree; original full-run
+failures remain recorded. Main alone failed the Kit circular-QR limit check. All 74 task checks, 92
+Kit/tap/unit checks, 50 Math checks, and 3 HelpTextA checks passed on the branch. Embed transfer
+passed at 9.2 MiB on both trees.
+
+**Both equation-layout issues were already present on main**, confirmed in fresh High and Max pairs.
+No new truncation or loss of legibility was found in the four changed toys' default High/Max home
+renders. The Math helper is unchanged from the original tested repair.
+
+The follow-up adds a per-test checkpoint reporter after an exec transport interruption and fixes the
+task-local automatic server to serve the repository root. The invalid wrong-root attempt, its
+failures, and its interrupted case are preserved separately. Its browser results are excluded from
+the valid comparison, and the full branch run was repeated. No tests, timeouts, browser security, or
+graphics restrictions were weakened. The earlier executed-evidence table below is historical
+evidence for the original implementation; the linked review supersedes its unrun counts.
+
 ## The recipe contract
 
 - Hooks: existing `build`, `prepare`, `drive`, controls, and actions. Only the Math pack's
@@ -102,7 +126,7 @@ material is committed.
 - Not simulated: no new simulation. Existing effects and data are retained; this study does not
   independently validate physical models.
 
-## Executed evidence
+## Original executed evidence (historical)
 
 | Check                                                                       | Method                                                                                  | Result                                                                 |
 | --------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
