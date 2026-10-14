@@ -3,6 +3,7 @@ import { TOYS } from "../src/toys.js";
 import { PROFILES, applyClay } from "../src/generators.js";
 import { buildRecipe } from "../src/kit.js";
 import { resolveOptions } from "../src/player.js";
+import { hash32 } from "../src/noise.js";
 
 // Task 44 owns these worlds. The other prototype tasks have no catalog
 // entries in the task's baseline; do not add their branches to this audit.
@@ -29,13 +30,17 @@ export function budget(recipe, tier) {
   return Math.round(Math.min(p.maxCount, p.defaultCount * (recipe.density ?? 1)));
 }
 
-export async function buildToy(def, tier, seed = 1) {
+export async function buildToy(def, tier, seed) {
   const { RECIPES } = await import(`../src/packs/${def.pack}.js`);
   const recipe = RECIPES[def.id];
   const options = resolveOptions(recipe, {});
   const count = budget(recipe, tier);
-  await recipe.prepare?.(options);
-  const it = buildRecipe(recipe, { seed, count, options }, applyClay);
+  await recipe.prepare?.(options, undefined, { profile: tier, count });
+  const it = buildRecipe(
+    recipe,
+    { seed: seed ?? recipe.seed ?? hash32(def.id), count, options },
+    applyClay,
+  );
   let r = it.next();
   while (!r.done) r = it.next();
   return r.value;

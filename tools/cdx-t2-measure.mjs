@@ -8,7 +8,7 @@ if (!out) throw new Error("Supply an output JSON path.");
 const report = {
   source: execFileSync("git", ["rev-parse", "HEAD"], { encoding: "utf8" }).trim(),
   environment: { platform: process.platform, arch: process.arch, node: process.version },
-  seed: 1,
+  seed: "recipe.seed or hash32(toy id), matching the player",
   options: "recipe defaults; Auto detail; density and profile cap applied",
   excluded: EXCLUDED,
   rows: [],

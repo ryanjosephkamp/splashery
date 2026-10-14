@@ -1,6 +1,6 @@
 # Task 66: open-shelf kit tiers
 
-Status: reconstructed measurement checkpoint; visual recommendations are pending.
+Status: reconstructed recipe fix; visual recommendations are pending.
 
 Made by Ryan with Codex (GPT-6), October 14, 2026. Code is MIT. No new assets.
 
@@ -22,8 +22,24 @@ The task-local Playwright configuration launches installed Chromium with `chromi
 no added browser flags. Every test runner and capture is run sequentially with one worker. The
 shared configuration and capture tools have unsafe graphics flags, so they are not used unchanged.
 
-No previous capture or test result is treated as evidence for this reconstruction. Recipe changes,
-per-tier pictures, effect clips, test results, and the completed record will be added after this
-checkpoint. Engine tier changes remain proposals for separate review.
+No previous capture or test result is treated as evidence for this reconstruction.
+
+## Recipe fix
+
+The Math pack's bitmap-text helper supplied a fixed `count` to Kit, which scales that count from a
+160,000-splat reference. At Low, it sampled only the beginning of each label. For example, the
+unit-circle equation emitted 266 of its 708 samples, and the graph plotter's slider label emitted 25
+of 56 samples.
+
+The helper now reserves an absolute share for every bitmap sample. This repairs the graph plotter,
+surface plotter, unit circle, and Pythagoras proof at Low and Mid, and avoids reserving unused text
+samples at higher tiers. No glyph design, part, pivot, control, effect duration, density, or engine
+profile changes.
+
+The four new glyph-completeness tests failed on the original helper and pass after the fix. The
+post-fix inventory, glyph, and four-tier build run passed 70 checks (2.1 minutes). The initial
+inventory and four-tier build run passed 66 checks. Further regression results, per-tier pictures,
+effect clips, and the completed record will be added after this source checkpoint. Engine tier
+changes remain proposals for separate review.
 
 Rule check: none.
