@@ -5,7 +5,7 @@
 
 import { Viewer } from "./viewer.js";
 import { parseHash } from "./codec.js";
-import { showRendererDetails } from "./renderer-diagnostics.js";
+import { showRendererDetails } from "./renderer-fallback.js";
 
 const canvas = document.getElementById("stage");
 const status = document.getElementById("embed-status");

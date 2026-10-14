@@ -3,7 +3,7 @@
 
 import { Player, Gestures, ui2On } from "./player.js";
 import { createUI } from "./ui.js";
-import { showRendererDetails } from "./renderer-diagnostics.js";
+import { showRendererDetails } from "./renderer-fallback.js";
 import { canPlay } from "./physics/hands-on.js"; // lane Physics
 import {
   createScene,
