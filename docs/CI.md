@@ -31,7 +31,10 @@ together.
 
 ## How long
 
-See the PR comment's "Time per shard". The first runs are in [handoff/CI.md](handoff/CI.md).
+About 35 to 45 minutes from push to comment: a few minutes of setup per shard, then the shards. The
+longest file, cdx-pics (about 31 minutes on its own), sets the floor; the other shards take about 15
+to 25 minutes each. Checks take about 4 minutes. The PR comment's "Time per shard" has each run's
+times, and the first runs are in [handoff/CI.md](handoff/CI.md).
 
 ## Reading the comment
 
