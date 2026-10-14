@@ -42,37 +42,19 @@ test("the opening scan starts transferring before GPU initialization", async ({ 
   expect(await page.evaluate(() => window.__splashery.player.toyInfo.id)).toBe("soda-can");
 });
 
-test("the mapped engine transfers while the app entry is held", async ({ page }) => {
-  await page.addInitScript(() => {
-    window.__mappedEnginePreloaded = false;
-    new MutationObserver((records) => {
-      for (const record of records)
-        for (const node of record.addedNodes)
-          if (
-            node instanceof HTMLLinkElement &&
-            node.rel === "modulepreload" &&
-            node.href.startsWith("blob:")
-          )
-            node.addEventListener(
-              "load",
-              () => {
-                window.__mappedEnginePreloaded = true;
-              },
-              { once: true },
-            );
-    }).observe(document, { childList: true, subtree: true });
-  });
+test("the native engine finishes transferring while the app entry is held", async ({ page }) => {
   let release;
   const held = new Promise((resolve) => (release = resolve));
   await page.route("**/src/app.js", async (route) => {
     await held;
     await route.continue();
   });
+  const engine = page.waitForResponse("**/vendor/playcanvas/playcanvas.min.mjs");
   await page.goto(`/?renderer=webgl2&profile=weak&adapt=off#s=j.${openingHash}`, {
     waitUntil: "commit",
   });
   try {
-    await page.waitForFunction(() => window.__mappedEnginePreloaded, null, { timeout: 10000 });
+    await (await engine).finished();
   } finally {
     release();
   }
@@ -158,8 +140,8 @@ for (const [id, format] of [
     const order = await page.evaluate(() => window.__helperAtGpu);
     expect(order.length).toBeGreaterThan(0);
     expect(order.every(Boolean)).toBe(true);
-    expect(requests).toContain("/vendor/playcanvas/playcanvas.min.mjs.gz");
-    expect(requests).not.toContain("/vendor/playcanvas/playcanvas.min.mjs");
+    expect(requests).toContain("/vendor/playcanvas/playcanvas.min.mjs");
+    expect(requests).not.toContain("/vendor/playcanvas/playcanvas.min.mjs.gz");
   });
 
 test("engine transfer starts while the stylesheet still blocks DOM readiness", async ({ page }) => {
@@ -169,7 +151,7 @@ test("engine transfer starts while the stylesheet still blocks DOM readiness", a
     await held;
     await route.continue();
   });
-  const engine = page.waitForRequest("**/playcanvas.min.mjs.gz", { timeout: 10000 });
+  const engine = page.waitForRequest("**/playcanvas.min.mjs", { timeout: 10000 });
   await page.goto(`/?renderer=webgl2&profile=weak&adapt=off#s=j.${openingHash}`, {
     waitUntil: "commit",
   });
@@ -181,7 +163,7 @@ test("engine transfer starts while the stylesheet still blocks DOM readiness", a
   await page.waitForSelector("body[data-ready='true']", { timeout: 180000 });
 });
 
-test("compressed startup preserves the complete live PlayCanvas namespace and help", async ({
+test("native startup preserves the complete live PlayCanvas namespace and compressed help", async ({
   page,
 }) => {
   const requests = [];
@@ -205,8 +187,8 @@ test("compressed startup preserves the complete live PlayCanvas namespace and he
   });
   expect(result).toMatchObject({ version: "2.22.3", exports: 1318, equal: true, liveApp: true });
   expect(result.help).toBe(result.originalHelp);
-  expect(requests).toContain("/vendor/playcanvas/playcanvas.min.mjs.gz");
-  expect(requests).not.toContain("/vendor/playcanvas/playcanvas.min.mjs");
+  expect(requests).toContain("/vendor/playcanvas/playcanvas.min.mjs");
+  expect(requests).not.toContain("/vendor/playcanvas/playcanvas.min.mjs.gz");
   expect(requests).toContain("/assets/opening/toy-help.mjs.gz");
 });
 
@@ -248,25 +230,4 @@ test("the manual transfer overlaps PDF.js loading and keeps the original PDF pag
   expect(
     await page.evaluate(() => window.__splashery.player.pictures.info().count),
   ).toBeGreaterThan(100);
-});
-
-test("an HTTP-decoded compressed engine retains its native exports", async ({ page }) => {
-  await page.route("**/playcanvas.min.mjs.gz", (route) =>
-    route.fulfill({
-      contentType: "text/javascript",
-      body: fs.readFileSync("vendor/playcanvas/playcanvas.min.mjs"),
-    }),
-  );
-  await page.goto(`/?renderer=webgl2&profile=weak&adapt=off#s=j.${openingHash}`);
-  await page.waitForSelector("body[data-ready='true']", { timeout: 180000 });
-  expect(await page.evaluate(async () => (await import("/src/pc.js")).version)).toBe("2.22.3");
-});
-
-test("a missing compressed engine falls back to its original module", async ({ page }) => {
-  await page.route("**/playcanvas.min.mjs.gz", (route) => route.fulfill({ status: 404, body: "" }));
-  const original = page.waitForRequest("**/vendor/playcanvas/playcanvas.min.mjs");
-  await page.goto(`/?renderer=webgl2&profile=weak&adapt=off#s=j.${openingHash}`);
-  await original;
-  await page.waitForSelector("body[data-ready='true']", { timeout: 180000 });
-  expect(await page.evaluate(async () => (await import("/src/pc.js")).version)).toBe("2.22.3");
 });

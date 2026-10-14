@@ -6,11 +6,6 @@ import { gzipSync, gunzipSync } from "node:zlib";
 import { MANUAL_PDF } from "../manual/pdf-edition.js";
 
 const copies = [
-  [
-    "vendor/playcanvas/playcanvas.min.mjs",
-    "vendor/playcanvas/playcanvas.min.mjs.gz",
-    "MIT; existing PlayCanvas 2.22.3 notices",
-  ],
   ["src/toy-help.js", "assets/opening/toy-help.mjs.gz", "MIT; existing Splashery code"],
   [
     "manual/tinkerers-manual.pdf",

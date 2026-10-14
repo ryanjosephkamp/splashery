@@ -25,9 +25,15 @@
     />
     <link rel="stylesheet" href="./styles.css" />
     <script type="importmap">
-      { "imports": { "gifenc": "./vendor/gifenc/gifenc.esm.js" } }
+      {
+        "imports": {
+          "gifenc": "./vendor/gifenc/gifenc.esm.js"
+        }
+      }
     </script>
-    <script async type="module" src="./src/boot.js" data-splashery-entry="app.js"></script>
+    <link rel="modulepreload" href="./vendor/playcanvas/playcanvas.min.mjs" />
+    <script type="module" src="./src/opening-pack.js"></script>
+    <script type="module" src="./src/app.js"></script>
   </head>
   <body class="app">
     <a class="skip-link" href="#panel">Skip to controls</a>
@@ -1326,6 +1332,10 @@
                 <a href="worlds/?labs=1">Splashery Worlds</a>: walk around a small world made of
                 splats (labs)
               </p>
+              <script type="module">
+                import { labsOn } from "./src/toys.js";
+                if (labsOn()) document.getElementById("worlds-link").hidden = false;
+              </script>
               <!-- /Worlds -->
               <p class="note">
                 <a href="https://github.com/ryanjosephkamp/splashery">Source on GitHub</a> ·

@@ -1,5 +1,5 @@
-// Keep the selected scan's helpers eager, after the engine mapping is installed
-// and before GPU setup. The normal recipe still chooses and loads its data.
+// Keep the selected scan's helpers eager before GPU setup.
+// The normal recipe still chooses and loads its data.
 import { decodeSceneHash, parseHash } from "./codec.js";
 
 const SCAN_IDS = new Set([
@@ -29,6 +29,6 @@ export async function warmOpeningPack() {
   if (SCAN_IDS.has(toy.id)) await import("./packs/real-objects.js");
 }
 
-// Entry modules import this after the engine mapping is installed. Their
-// remaining graph transfers in parallel; only GPU initialization awaits it.
+// HTML starts this module independently of the app graph. Entry modules
+// await its shared promise before GPU initialization.
 export const openingReady = warmOpeningPack().catch(() => {});

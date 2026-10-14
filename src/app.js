@@ -24,7 +24,7 @@ import { toySound } from "./toy-sounds.js";
 import { SOUND_CREDITS } from "./sound-credits.js";
 import { normalizeGenerator, PROFILES } from "./generators.js";
 import { decodeSceneHash, parseHash } from "./codec.js";
-import { TOYS, findToy, holdsStill, labsOn } from "./toys.js";
+import { TOYS, findToy, holdsStill } from "./toys.js";
 import { extOf, readPlyHeader, decimatePly, resourceFromProps, LIMITS } from "./loaders.js";
 import {
   downloadBlob,
@@ -150,7 +150,6 @@ class App {
   }
 
   async start() {
-    document.getElementById("worlds-link").hidden = !labsOn();
     document.documentElement.dataset.theme = matchMedia("(prefers-color-scheme: dark)").matches
       ? "dark"
       : "light";

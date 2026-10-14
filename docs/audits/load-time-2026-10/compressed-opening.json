@@ -1,15 +1,5 @@
 [
   {
-    "source": "vendor/playcanvas/playcanvas.min.mjs",
-    "file": "vendor/playcanvas/playcanvas.min.mjs.gz",
-    "sourceBytes": 2465494,
-    "bytes": 634277,
-    "sourceSha256": "cfa18c70e2e0fd5362399f37897c531b7796a7f41a652144ab4ceda991b5d46c",
-    "sha256": "2ca410f1c8899d1dd0166a9f5515c4076542aa374d3fd23a2d62647ef5191816",
-    "license": "MIT; existing PlayCanvas 2.22.3 notices",
-    "transformation": "Exact gzip copy made by Ryan with Codex (GPT-6); no source or decoded-byte changes"
-  },
-  {
     "source": "src/toy-help.js",
     "file": "assets/opening/toy-help.mjs.gz",
     "sourceBytes": 344750,
