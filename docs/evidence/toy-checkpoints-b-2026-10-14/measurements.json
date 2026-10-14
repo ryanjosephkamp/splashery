@@ -1,0 +1,2034 @@
+{
+  "revision": "41b21e74e04ccca178b95ac02b4e5dc0e51b4b45",
+  "viewport": [390, 844],
+  "deviceScaleFactor": 1,
+  "profile": "mid",
+  "renderer": "WebGL2 / SwiftShader",
+  "cpuThrottle": "none",
+  "networkThrottle": "none",
+  "clips": {
+    "moving-photo-3d": {
+      "readyMs": 10383,
+      "cameraWarmMs": null,
+      "measure": {
+        "elapsedMs": 6000.5,
+        "renderedFrames": 41,
+        "renderedFps": 6.8327639363386385,
+        "medianIntervalMs": 143.40000000002328,
+        "p95IntervalMs": 184.70000000001164,
+        "canvas": [390, 645]
+      },
+      "states": {
+        "moving": {
+          "clip": {
+            "name": "Big Buck Bunny (a six-second scene)",
+            "n": 96,
+            "w": 480,
+            "h": 270
+          },
+          "frame": 59,
+          "t": 3.688606,
+          "status": ""
+        },
+        "sharp": {
+          "views": {
+            "photo-3d": "sharp",
+            "moving-photo-3d": "sharp"
+          },
+          "on": true,
+          "kind": "clip",
+          "grid": [462, 260],
+          "color": [640, 360],
+          "depth": [480, 270],
+          "video": true,
+          "videoTime": 3.706916,
+          "cost": {
+            "color": 1228800,
+            "depth": 129600,
+            "mesh": 4521432,
+            "pieces": 0,
+            "background": 0,
+            "triangles": 250608,
+            "total": 5879832
+          },
+          "splatsOff": true
+        }
+      },
+      "transferBodyBytes": 14846264,
+      "resources": [
+        {
+          "path": "/styles.css",
+          "bytes": 58392
+        },
+        {
+          "path": "/vendor/playcanvas/playcanvas.min.mjs",
+          "bytes": 2465494
+        },
+        {
+          "path": "/src/app.js",
+          "bytes": 72048
+        },
+        {
+          "path": "/src/toys.js",
+          "bytes": 129692
+        },
+        {
+          "path": "/src/player.js",
+          "bytes": 84896
+        },
+        {
+          "path": "/src/ui.js",
+          "bytes": 140737
+        },
+        {
+          "path": "/src/physics/hands-on.js",
+          "bytes": 57519
+        },
+        {
+          "path": "/src/state.js",
+          "bytes": 12987
+        },
+        {
+          "path": "/src/patterns.js",
+          "bytes": 11866
+        },
+        {
+          "path": "/src/effects.js",
+          "bytes": 89392
+        },
+        {
+          "path": "/src/sound.js",
+          "bytes": 8825
+        },
+        {
+          "path": "/src/voices.js",
+          "bytes": 101479
+        },
+        {
+          "path": "/src/toy-sounds.js",
+          "bytes": 136851
+        },
+        {
+          "path": "/src/sound-credits.js",
+          "bytes": 22909
+        },
+        {
+          "path": "/src/generators.js",
+          "bytes": 26672
+        },
+        {
+          "path": "/src/codec.js",
+          "bytes": 2454
+        },
+        {
+          "path": "/src/exports.js",
+          "bytes": 12864
+        },
+        {
+          "path": "/src/loaders.js",
+          "bytes": 13354
+        },
+        {
+          "path": "/src/packs/photoreal-r2.js",
+          "bytes": 21432
+        },
+        {
+          "path": "/src/packs/photoreal-r3.js",
+          "bytes": 13910
+        },
+        {
+          "path": "/src/physics/fields.js",
+          "bytes": 42466
+        },
+        {
+          "path": "/src/physics/world.js",
+          "bytes": 36203
+        },
+        {
+          "path": "/src/physics/joints.js",
+          "bytes": 46363
+        },
+        {
+          "path": "/src/physics/soft.js",
+          "bytes": 26315
+        },
+        {
+          "path": "/src/pc.js",
+          "bytes": 313
+        },
+        {
+          "path": "/src/camera.js",
+          "bytes": 21601
+        },
+        {
+          "path": "/src/stage.js",
+          "bytes": 40103
+        },
+        {
+          "path": "/src/paint.js",
+          "bytes": 5392
+        },
+        {
+          "path": "/src/motion.js",
+          "bytes": 24878
+        },
+        {
+          "path": "/src/kit.js",
+          "bytes": 48544
+        },
+        {
+          "path": "/src/rig.js",
+          "bytes": 8416
+        },
+        {
+          "path": "/src/pose.js",
+          "bytes": 4468
+        },
+        {
+          "path": "/src/rig-fx.js",
+          "bytes": 8541
+        },
+        {
+          "path": "/src/effects-pose.js",
+          "bytes": 5216
+        },
+        {
+          "path": "/src/rigs.js",
+          "bytes": 86882
+        },
+        {
+          "path": "/src/photo-splats.js",
+          "bytes": 20907
+        },
+        {
+          "path": "/src/kernels.js",
+          "bytes": 3494
+        },
+        {
+          "path": "/src/sharpness.js",
+          "bytes": 3953
+        },
+        {
+          "path": "/src/noise.js",
+          "bytes": 3218
+        },
+        {
+          "path": "/src/chunks.js",
+          "bytes": 5374
+        },
+        {
+          "path": "/src/pictures.js",
+          "bytes": 32222
+        },
+        {
+          "path": "/src/live/panel.js",
+          "bytes": 15236
+        },
+        {
+          "path": "/src/site-toy-pages.js",
+          "bytes": 7357
+        },
+        {
+          "path": "/vendor/gifenc/gifenc.esm.js",
+          "bytes": 9060
+        },
+        {
+          "path": "/src/physics/materials.js",
+          "bytes": 15065
+        },
+        {
+          "path": "/src/packs/real-objects.js",
+          "bytes": 90416
+        },
+        {
+          "path": "/src/font.js",
+          "bytes": 2989
+        },
+        {
+          "path": "/src/packs/even.js",
+          "bytes": 9655
+        },
+        {
+          "path": "/src/packs/dog-plush-fill.js",
+          "bytes": 18691
+        },
+        {
+          "path": "/src/packs/photoreal-r3-rigs.js",
+          "bytes": 47121
+        },
+        {
+          "path": "/src/picture-splats.js",
+          "bytes": 19581
+        },
+        {
+          "path": "/src/media.js",
+          "bytes": 30370
+        },
+        {
+          "path": "/src/live/live.js",
+          "bytes": 12088
+        },
+        {
+          "path": "/src/live/record.js",
+          "bytes": 4347
+        },
+        {
+          "path": "/src/packs/photoreal-r3-bases.js",
+          "bytes": 24293
+        },
+        {
+          "path": "/assets/toys/cactus/cactus.sog",
+          "bytes": 5869356
+        },
+        {
+          "path": "/assets/toys/cactus/thumb.webp",
+          "bytes": 9872
+        },
+        {
+          "path": "/assets/toys/strawberry/thumb.webp",
+          "bytes": 11586
+        },
+        {
+          "path": "/assets/toys/cookie/thumb.webp",
+          "bytes": 10846
+        },
+        {
+          "path": "/assets/toys/bee/thumb.webp",
+          "bytes": 11922
+        },
+        {
+          "path": "/assets/toys/cluster-fly/thumb.webp",
+          "bytes": 13314
+        },
+        {
+          "path": "/assets/toys/may-beetle/thumb.webp",
+          "bytes": 9856
+        },
+        {
+          "path": "/assets/toys/millipede/thumb.webp",
+          "bytes": 6578
+        },
+        {
+          "path": "/assets/toys/bumblebee/thumb.webp",
+          "bytes": 13314
+        },
+        {
+          "path": "/assets/toys/raspberry/thumb.webp",
+          "bytes": 11614
+        },
+        {
+          "path": "/assets/toys/blackberry/thumb.webp",
+          "bytes": 6704
+        },
+        {
+          "path": "/assets/toys/blueberry/thumb.webp",
+          "bytes": 11212
+        },
+        {
+          "path": "/assets/toys/grape/thumb.webp",
+          "bytes": 5934
+        },
+        {
+          "path": "/assets/toys/star-cookie/thumb.webp",
+          "bytes": 8384
+        },
+        {
+          "path": "/assets/toys/tomatoes/thumb.webp",
+          "bytes": 7696
+        },
+        {
+          "path": "/src/toy-help.js",
+          "bytes": 344750
+        },
+        {
+          "path": "/src/packs/live.js",
+          "bytes": 20383
+        },
+        {
+          "path": "/src/live/relief.js",
+          "bytes": 72932
+        },
+        {
+          "path": "/src/live/analysis.js",
+          "bytes": 11882
+        },
+        {
+          "path": "/src/packs/photo-3d.js",
+          "bytes": 38783
+        },
+        {
+          "path": "/src/packs/moving-photo.js",
+          "bytes": 72088
+        },
+        {
+          "path": "/src/packs/song-record.js",
+          "bytes": 7477
+        },
+        {
+          "path": "/src/packs/photo-3d-core.js",
+          "bytes": 31900
+        },
+        {
+          "path": "/src/packs/photo-sharp.js",
+          "bytes": 19529
+        },
+        {
+          "path": "/src/photo3d/border.js",
+          "bytes": 1840
+        },
+        {
+          "path": "/src/photo3d/bitmaps.js",
+          "bytes": 1157
+        },
+        {
+          "path": "/src/photo3d/background.js",
+          "bytes": 8146
+        },
+        {
+          "path": "/src/packs/dot-samples.js",
+          "bytes": 2951
+        },
+        {
+          "path": "/src/photo3d/depth-edges.js",
+          "bytes": 5694
+        },
+        {
+          "path": "/src/live/relief-height.js",
+          "bytes": 8045
+        },
+        {
+          "path": "/src/packs/codex-picture-samples.js",
+          "bytes": 1494
+        },
+        {
+          "path": "/assets/toys/moving-photo-3d/bunny-sheet-1.jpg",
+          "bytes": 243317
+        },
+        {
+          "path": "/assets/toys/moving-photo-3d/bunny-sheet-2.jpg",
+          "bytes": 255139
+        },
+        {
+          "path": "/assets/toys/moving-photo-3d/bunny-sheet-3.jpg",
+          "bytes": 252771
+        },
+        {
+          "path": "/assets/toys/moving-photo-3d/bunny-sheet-4.jpg",
+          "bytes": 254539
+        },
+        {
+          "path": "/assets/toys/moving-photo-3d/bunny-sheet-5.jpg",
+          "bytes": 263182
+        },
+        {
+          "path": "/assets/toys/moving-photo-3d/bunny-sheet-6.jpg",
+          "bytes": 266757
+        },
+        {
+          "path": "/assets/toys/moving-photo-3d/bunny-sheet-7.jpg",
+          "bytes": 124720
+        },
+        {
+          "path": "/src/photo3d/decode.js",
+          "bytes": 1190
+        },
+        {
+          "path": "/src/photo3d/decode-worker.js",
+          "bytes": 1667
+        },
+        {
+          "path": "/assets/flags/flags.json",
+          "bytes": 53129
+        },
+        {
+          "path": "/assets/toys/moving-photo-3d/bunny.depth",
+          "bytes": 1055234
+        },
+        {
+          "path": "/src/packs/song-stream.js",
+          "bytes": 9525
+        },
+        {
+          "path": "/src/packs/song-analysis.js",
+          "bytes": 8824
+        },
+        {
+          "path": "/src/packs/song-mp3.js",
+          "bytes": 2454
+        },
+        {
+          "path": "/src/packs/studio-audio.js",
+          "bytes": 5869
+        },
+        {
+          "path": "/assets/toys/screen/bunny.mp4",
+          "bytes": 377969
+        },
+        {
+          "path": "/src/live/relief-mesh.js",
+          "bytes": 46809
+        },
+        {
+          "path": "/assets/toys/model-splats/thumb.webp",
+          "bytes": 5564
+        },
+        {
+          "path": "/assets/toys/qr-code/thumb.webp",
+          "bytes": 11870
+        },
+        {
+          "path": "/assets/toys/qr-anatomy/thumb.webp",
+          "bytes": 6378
+        },
+        {
+          "path": "/assets/toys/qr-three/thumb.webp",
+          "bytes": 16624
+        },
+        {
+          "path": "/assets/toys/qr-picture/thumb.webp",
+          "bytes": 26832
+        },
+        {
+          "path": "/assets/toys/qr-damage/thumb.webp",
+          "bytes": 18090
+        },
+        {
+          "path": "/assets/toys/qr-build/thumb.webp",
+          "bytes": 15008
+        },
+        {
+          "path": "/assets/toys/barcodes/thumb.webp",
+          "bytes": 5874
+        },
+        {
+          "path": "/assets/toys/moving-photo-3d/thumb.webp",
+          "bytes": 8392
+        },
+        {
+          "path": "/assets/toys/photo-3d/thumb.webp",
+          "bytes": 19724
+        },
+        {
+          "path": "/assets/toys/video-3d/thumb.webp",
+          "bytes": 19714
+        },
+        {
+          "path": "/assets/toys/sound-lab/thumb.webp",
+          "bytes": 10142
+        },
+        {
+          "path": "/assets/toys/sound-recorder/thumb.webp",
+          "bytes": 7738
+        },
+        {
+          "path": "/assets/toys/splat-toolkit/thumb.webp",
+          "bytes": 15246
+        },
+        {
+          "path": "/assets/toys/point-clouds/thumb.webp",
+          "bytes": 25318
+        },
+        {
+          "path": "/assets/toys/volume-viewer/thumb.webp",
+          "bytes": 7206
+        },
+        {
+          "path": "/assets/toys/splat-field/thumb.webp",
+          "bytes": 22000
+        },
+        {
+          "path": "/assets/toys/light-lab/thumb.webp",
+          "bytes": 8692
+        },
+        {
+          "path": "/assets/toys/baked-chest/thumb.webp",
+          "bytes": 5798
+        },
+        {
+          "path": "/assets/toys/fluid-lab/thumb.webp",
+          "bytes": 12004
+        },
+        {
+          "path": "/assets/toys/shardball/thumb.webp",
+          "bytes": 10602
+        },
+        {
+          "path": "/assets/toys/data-in-3d/thumb.webp",
+          "bytes": 20286
+        },
+        {
+          "path": "/assets/toys/longtail/thumb.webp",
+          "bytes": 18586
+        },
+        {
+          "path": "/src/photo3d/surface.js",
+          "bytes": 5362
+        },
+        {
+          "path": "/assets/toys/screen/bunny.mp4",
+          "bytes": 377969
+        }
+      ],
+      "errors": [],
+      "capture": {
+        "frames": 56,
+        "durationSeconds": 8.17771291732788,
+        "width": 390,
+        "height": 844
+      }
+    },
+    "video-3d": {
+      "readyMs": 3955,
+      "cameraWarmMs": null,
+      "measure": {
+        "elapsedMs": 6001.100000000035,
+        "renderedFrames": 24,
+        "renderedFps": 3.9992668010864443,
+        "medianIntervalMs": 210.09999999997672,
+        "p95IntervalMs": 305.79999999998836,
+        "canvas": [390, 645]
+      },
+      "states": {
+        "name": "Statue, flown around",
+        "uid": "liberty",
+        "splats": 58242,
+        "cams": 51,
+        "custom": false,
+        "stats": {
+          "tier": "offline-native",
+          "adapter": "CPU/OpenMP",
+          "frames": 51,
+          "registered": 51,
+          "points": 3511,
+          "splats": 59857,
+          "iters": 4252,
+          "psnr": null,
+          "plyBytes": 3352353,
+          "start": 0,
+          "end": 13.6,
+          "rate": 1.985,
+          "exportedSplats": 59857,
+          "trainSide": 640,
+          "stoppedEarly": false,
+          "psnrIteration": null,
+          "psnrTrainSide": null
+        },
+        "pruned": {
+          "faint": 639,
+          "smear": 0,
+          "giant": 0,
+          "atCamera": 0,
+          "unsupported": 63,
+          "ray": 913,
+          "atPath": 0,
+          "invalid": 0
+        },
+        "clamped": 0,
+        "skyDome": {
+          "center": [0, 0, 0],
+          "radius": 48.85200431468489
+        },
+        "error": ""
+      },
+      "transferBodyBytes": 12335239,
+      "resources": [
+        {
+          "path": "/styles.css",
+          "bytes": 58392
+        },
+        {
+          "path": "/src/app.js",
+          "bytes": 72048
+        },
+        {
+          "path": "/vendor/playcanvas/playcanvas.min.mjs",
+          "bytes": 2465494
+        },
+        {
+          "path": "/src/toys.js",
+          "bytes": 129692
+        },
+        {
+          "path": "/src/player.js",
+          "bytes": 84896
+        },
+        {
+          "path": "/src/ui.js",
+          "bytes": 140737
+        },
+        {
+          "path": "/src/physics/hands-on.js",
+          "bytes": 57519
+        },
+        {
+          "path": "/src/state.js",
+          "bytes": 12987
+        },
+        {
+          "path": "/src/effects.js",
+          "bytes": 89392
+        },
+        {
+          "path": "/src/patterns.js",
+          "bytes": 11866
+        },
+        {
+          "path": "/src/sound.js",
+          "bytes": 8825
+        },
+        {
+          "path": "/src/toy-sounds.js",
+          "bytes": 136851
+        },
+        {
+          "path": "/src/voices.js",
+          "bytes": 101479
+        },
+        {
+          "path": "/src/sound-credits.js",
+          "bytes": 22909
+        },
+        {
+          "path": "/src/codec.js",
+          "bytes": 2454
+        },
+        {
+          "path": "/src/generators.js",
+          "bytes": 26672
+        },
+        {
+          "path": "/src/loaders.js",
+          "bytes": 13354
+        },
+        {
+          "path": "/src/exports.js",
+          "bytes": 12864
+        },
+        {
+          "path": "/src/packs/photoreal-r2.js",
+          "bytes": 21432
+        },
+        {
+          "path": "/src/packs/photoreal-r3.js",
+          "bytes": 13910
+        },
+        {
+          "path": "/src/pc.js",
+          "bytes": 313
+        },
+        {
+          "path": "/src/camera.js",
+          "bytes": 21601
+        },
+        {
+          "path": "/src/stage.js",
+          "bytes": 40103
+        },
+        {
+          "path": "/src/paint.js",
+          "bytes": 5392
+        },
+        {
+          "path": "/src/kit.js",
+          "bytes": 48544
+        },
+        {
+          "path": "/src/motion.js",
+          "bytes": 24878
+        },
+        {
+          "path": "/src/rig.js",
+          "bytes": 8416
+        },
+        {
+          "path": "/src/pose.js",
+          "bytes": 4468
+        },
+        {
+          "path": "/src/effects-pose.js",
+          "bytes": 5216
+        },
+        {
+          "path": "/src/rig-fx.js",
+          "bytes": 8541
+        },
+        {
+          "path": "/src/rigs.js",
+          "bytes": 86882
+        },
+        {
+          "path": "/src/kernels.js",
+          "bytes": 3494
+        },
+        {
+          "path": "/src/photo-splats.js",
+          "bytes": 20907
+        },
+        {
+          "path": "/src/noise.js",
+          "bytes": 3218
+        },
+        {
+          "path": "/src/sharpness.js",
+          "bytes": 3953
+        },
+        {
+          "path": "/src/pictures.js",
+          "bytes": 32222
+        },
+        {
+          "path": "/src/chunks.js",
+          "bytes": 5374
+        },
+        {
+          "path": "/src/live/panel.js",
+          "bytes": 15236
+        },
+        {
+          "path": "/src/site-toy-pages.js",
+          "bytes": 7357
+        },
+        {
+          "path": "/src/physics/world.js",
+          "bytes": 36203
+        },
+        {
+          "path": "/src/physics/fields.js",
+          "bytes": 42466
+        },
+        {
+          "path": "/src/physics/joints.js",
+          "bytes": 46363
+        },
+        {
+          "path": "/src/physics/soft.js",
+          "bytes": 26315
+        },
+        {
+          "path": "/vendor/gifenc/gifenc.esm.js",
+          "bytes": 9060
+        },
+        {
+          "path": "/src/packs/real-objects.js",
+          "bytes": 90416
+        },
+        {
+          "path": "/src/font.js",
+          "bytes": 2989
+        },
+        {
+          "path": "/src/packs/even.js",
+          "bytes": 9655
+        },
+        {
+          "path": "/src/packs/dog-plush-fill.js",
+          "bytes": 18691
+        },
+        {
+          "path": "/src/packs/photoreal-r3-rigs.js",
+          "bytes": 47121
+        },
+        {
+          "path": "/src/picture-splats.js",
+          "bytes": 19581
+        },
+        {
+          "path": "/src/media.js",
+          "bytes": 30370
+        },
+        {
+          "path": "/src/live/live.js",
+          "bytes": 12088
+        },
+        {
+          "path": "/src/live/record.js",
+          "bytes": 4347
+        },
+        {
+          "path": "/src/physics/materials.js",
+          "bytes": 15065
+        },
+        {
+          "path": "/src/packs/photoreal-r3-bases.js",
+          "bytes": 24293
+        },
+        {
+          "path": "/assets/toys/cactus/cactus.sog",
+          "bytes": 5869356
+        },
+        {
+          "path": "/assets/toys/cactus/thumb.webp",
+          "bytes": 9872
+        },
+        {
+          "path": "/assets/toys/cookie/thumb.webp",
+          "bytes": 10846
+        },
+        {
+          "path": "/assets/toys/strawberry/thumb.webp",
+          "bytes": 11586
+        },
+        {
+          "path": "/assets/toys/bee/thumb.webp",
+          "bytes": 11922
+        },
+        {
+          "path": "/assets/toys/cluster-fly/thumb.webp",
+          "bytes": 13314
+        },
+        {
+          "path": "/assets/toys/millipede/thumb.webp",
+          "bytes": 6578
+        },
+        {
+          "path": "/assets/toys/may-beetle/thumb.webp",
+          "bytes": 9856
+        },
+        {
+          "path": "/assets/toys/bumblebee/thumb.webp",
+          "bytes": 13314
+        },
+        {
+          "path": "/assets/toys/raspberry/thumb.webp",
+          "bytes": 11614
+        },
+        {
+          "path": "/assets/toys/blackberry/thumb.webp",
+          "bytes": 6704
+        },
+        {
+          "path": "/assets/toys/grape/thumb.webp",
+          "bytes": 5934
+        },
+        {
+          "path": "/assets/toys/blueberry/thumb.webp",
+          "bytes": 11212
+        },
+        {
+          "path": "/assets/toys/star-cookie/thumb.webp",
+          "bytes": 8384
+        },
+        {
+          "path": "/assets/toys/tomatoes/thumb.webp",
+          "bytes": 7696
+        },
+        {
+          "path": "/src/toy-help.js",
+          "bytes": 344750
+        },
+        {
+          "path": "/src/packs/video3d.js",
+          "bytes": 26107
+        },
+        {
+          "path": "/src/video3d/ply.js",
+          "bytes": 2673
+        },
+        {
+          "path": "/src/video3d/baked.js",
+          "bytes": 1107
+        },
+        {
+          "path": "/src/video3d/scene.js",
+          "bytes": 12159
+        },
+        {
+          "path": "/src/video3d/flight.js",
+          "bytes": 11385
+        },
+        {
+          "path": "/src/video3d/guide.js",
+          "bytes": 1351
+        },
+        {
+          "path": "/src/video3d/samples.js",
+          "bytes": 4368
+        },
+        {
+          "path": "/src/video3d/cleanup.js",
+          "bytes": 5688
+        },
+        {
+          "path": "/src/video3d/walk.js",
+          "bytes": 13235
+        },
+        {
+          "path": "/src/video3d/region.js",
+          "bytes": 6158
+        },
+        {
+          "path": "/src/video3d/tiers.js",
+          "bytes": 1484
+        },
+        {
+          "path": "/src/video3d/credit.js",
+          "bytes": 1859
+        },
+        {
+          "path": "/src/baked.js",
+          "bytes": 16565
+        },
+        {
+          "path": "/assets/toys/video-3d/liberty-baked/manifest.json",
+          "bytes": 2581
+        },
+        {
+          "path": "/assets/toys/video-3d/liberty.json",
+          "bytes": 265108
+        },
+        {
+          "path": "/assets/toys/video-3d/liberty-baked/assets/liberty-phone-59857-0.bkd.gz",
+          "bytes": 968499
+        },
+        {
+          "path": "/assets/flags/flags.json",
+          "bytes": 53129
+        },
+        {
+          "path": "/assets/toys/qr-code/thumb.webp",
+          "bytes": 11870
+        },
+        {
+          "path": "/assets/toys/qr-three/thumb.webp",
+          "bytes": 16624
+        },
+        {
+          "path": "/assets/toys/qr-anatomy/thumb.webp",
+          "bytes": 6378
+        },
+        {
+          "path": "/assets/toys/qr-damage/thumb.webp",
+          "bytes": 18090
+        },
+        {
+          "path": "/assets/toys/qr-picture/thumb.webp",
+          "bytes": 26832
+        },
+        {
+          "path": "/assets/toys/qr-build/thumb.webp",
+          "bytes": 15008
+        },
+        {
+          "path": "/assets/toys/barcodes/thumb.webp",
+          "bytes": 5874
+        },
+        {
+          "path": "/assets/toys/photo-3d/thumb.webp",
+          "bytes": 19724
+        },
+        {
+          "path": "/assets/toys/sound-lab/thumb.webp",
+          "bytes": 10142
+        },
+        {
+          "path": "/assets/toys/moving-photo-3d/thumb.webp",
+          "bytes": 8392
+        },
+        {
+          "path": "/assets/toys/video-3d/thumb.webp",
+          "bytes": 19714
+        },
+        {
+          "path": "/assets/toys/sound-recorder/thumb.webp",
+          "bytes": 7738
+        },
+        {
+          "path": "/assets/toys/splat-toolkit/thumb.webp",
+          "bytes": 15246
+        },
+        {
+          "path": "/assets/toys/volume-viewer/thumb.webp",
+          "bytes": 7206
+        },
+        {
+          "path": "/assets/toys/point-clouds/thumb.webp",
+          "bytes": 25318
+        },
+        {
+          "path": "/assets/toys/splat-field/thumb.webp",
+          "bytes": 22000
+        },
+        {
+          "path": "/assets/toys/light-lab/thumb.webp",
+          "bytes": 8692
+        },
+        {
+          "path": "/assets/toys/baked-chest/thumb.webp",
+          "bytes": 5798
+        },
+        {
+          "path": "/assets/toys/fluid-lab/thumb.webp",
+          "bytes": 12004
+        },
+        {
+          "path": "/assets/toys/shardball/thumb.webp",
+          "bytes": 10602
+        },
+        {
+          "path": "/assets/toys/longtail/thumb.webp",
+          "bytes": 18586
+        },
+        {
+          "path": "/assets/toys/grain-garden/thumb.webp",
+          "bytes": 11810
+        },
+        {
+          "path": "/assets/toys/data-in-3d/thumb.webp",
+          "bytes": 20286
+        }
+      ],
+      "errors": [],
+      "capture": {
+        "frames": 40,
+        "durationSeconds": 8.153429985046387,
+        "width": 390,
+        "height": 844
+      }
+    },
+    "splat-mirror": {
+      "readyMs": 5489,
+      "cameraWarmMs": 1160,
+      "measure": {
+        "elapsedMs": 6013.299999999988,
+        "renderedFrames": 18,
+        "renderedFps": 2.9933647082300956,
+        "medianIntervalMs": 315.8999999999651,
+        "p95IntervalMs": 744.3000000000466,
+        "canvas": [390, 645]
+      },
+      "states": {
+        "cols": 423,
+        "rows": 317,
+        "depthSide": 252,
+        "answers": 3,
+        "lastInferenceMs": 507.5999999999767,
+        "discarded": 1
+      },
+      "transferBodyBytes": 12220546,
+      "resources": [
+        {
+          "path": "/styles.css",
+          "bytes": 58392
+        },
+        {
+          "path": "/vendor/playcanvas/playcanvas.min.mjs",
+          "bytes": 2465494
+        },
+        {
+          "path": "/src/app.js",
+          "bytes": 72048
+        },
+        {
+          "path": "/src/toys.js",
+          "bytes": 129692
+        },
+        {
+          "path": "/src/player.js",
+          "bytes": 84896
+        },
+        {
+          "path": "/src/ui.js",
+          "bytes": 140737
+        },
+        {
+          "path": "/src/physics/hands-on.js",
+          "bytes": 57519
+        },
+        {
+          "path": "/src/state.js",
+          "bytes": 12987
+        },
+        {
+          "path": "/src/effects.js",
+          "bytes": 89392
+        },
+        {
+          "path": "/src/patterns.js",
+          "bytes": 11866
+        },
+        {
+          "path": "/src/toy-sounds.js",
+          "bytes": 136851
+        },
+        {
+          "path": "/src/sound.js",
+          "bytes": 8825
+        },
+        {
+          "path": "/src/voices.js",
+          "bytes": 101479
+        },
+        {
+          "path": "/src/sound-credits.js",
+          "bytes": 22909
+        },
+        {
+          "path": "/src/generators.js",
+          "bytes": 26672
+        },
+        {
+          "path": "/src/codec.js",
+          "bytes": 2454
+        },
+        {
+          "path": "/src/exports.js",
+          "bytes": 12864
+        },
+        {
+          "path": "/src/loaders.js",
+          "bytes": 13354
+        },
+        {
+          "path": "/src/packs/photoreal-r2.js",
+          "bytes": 21432
+        },
+        {
+          "path": "/src/packs/photoreal-r3.js",
+          "bytes": 13910
+        },
+        {
+          "path": "/src/physics/fields.js",
+          "bytes": 42466
+        },
+        {
+          "path": "/src/physics/world.js",
+          "bytes": 36203
+        },
+        {
+          "path": "/src/physics/joints.js",
+          "bytes": 46363
+        },
+        {
+          "path": "/src/physics/soft.js",
+          "bytes": 26315
+        },
+        {
+          "path": "/src/pc.js",
+          "bytes": 313
+        },
+        {
+          "path": "/src/stage.js",
+          "bytes": 40103
+        },
+        {
+          "path": "/src/camera.js",
+          "bytes": 21601
+        },
+        {
+          "path": "/src/paint.js",
+          "bytes": 5392
+        },
+        {
+          "path": "/src/kit.js",
+          "bytes": 48544
+        },
+        {
+          "path": "/src/motion.js",
+          "bytes": 24878
+        },
+        {
+          "path": "/src/rig.js",
+          "bytes": 8416
+        },
+        {
+          "path": "/src/pose.js",
+          "bytes": 4468
+        },
+        {
+          "path": "/src/effects-pose.js",
+          "bytes": 5216
+        },
+        {
+          "path": "/src/rig-fx.js",
+          "bytes": 8541
+        },
+        {
+          "path": "/src/rigs.js",
+          "bytes": 86882
+        },
+        {
+          "path": "/src/kernels.js",
+          "bytes": 3494
+        },
+        {
+          "path": "/src/photo-splats.js",
+          "bytes": 20907
+        },
+        {
+          "path": "/src/sharpness.js",
+          "bytes": 3953
+        },
+        {
+          "path": "/src/noise.js",
+          "bytes": 3218
+        },
+        {
+          "path": "/src/pictures.js",
+          "bytes": 32222
+        },
+        {
+          "path": "/src/chunks.js",
+          "bytes": 5374
+        },
+        {
+          "path": "/vendor/gifenc/gifenc.esm.js",
+          "bytes": 9060
+        },
+        {
+          "path": "/src/live/panel.js",
+          "bytes": 15236
+        },
+        {
+          "path": "/src/site-toy-pages.js",
+          "bytes": 7357
+        },
+        {
+          "path": "/src/packs/real-objects.js",
+          "bytes": 90416
+        },
+        {
+          "path": "/src/physics/materials.js",
+          "bytes": 15065
+        },
+        {
+          "path": "/src/font.js",
+          "bytes": 2989
+        },
+        {
+          "path": "/src/packs/even.js",
+          "bytes": 9655
+        },
+        {
+          "path": "/src/packs/dog-plush-fill.js",
+          "bytes": 18691
+        },
+        {
+          "path": "/src/packs/photoreal-r3-rigs.js",
+          "bytes": 47121
+        },
+        {
+          "path": "/src/picture-splats.js",
+          "bytes": 19581
+        },
+        {
+          "path": "/src/media.js",
+          "bytes": 30370
+        },
+        {
+          "path": "/src/live/live.js",
+          "bytes": 12088
+        },
+        {
+          "path": "/src/live/record.js",
+          "bytes": 4347
+        },
+        {
+          "path": "/src/packs/photoreal-r3-bases.js",
+          "bytes": 24293
+        },
+        {
+          "path": "/assets/toys/cactus/cactus.sog",
+          "bytes": 5869356
+        },
+        {
+          "path": "/assets/toys/cactus/thumb.webp",
+          "bytes": 9872
+        },
+        {
+          "path": "/assets/toys/strawberry/thumb.webp",
+          "bytes": 11586
+        },
+        {
+          "path": "/assets/toys/cookie/thumb.webp",
+          "bytes": 10846
+        },
+        {
+          "path": "/assets/toys/cluster-fly/thumb.webp",
+          "bytes": 13314
+        },
+        {
+          "path": "/assets/toys/bee/thumb.webp",
+          "bytes": 11922
+        },
+        {
+          "path": "/assets/toys/may-beetle/thumb.webp",
+          "bytes": 9856
+        },
+        {
+          "path": "/assets/toys/millipede/thumb.webp",
+          "bytes": 6578
+        },
+        {
+          "path": "/assets/toys/raspberry/thumb.webp",
+          "bytes": 11614
+        },
+        {
+          "path": "/assets/toys/bumblebee/thumb.webp",
+          "bytes": 13314
+        },
+        {
+          "path": "/assets/toys/blackberry/thumb.webp",
+          "bytes": 6704
+        },
+        {
+          "path": "/assets/toys/blueberry/thumb.webp",
+          "bytes": 11212
+        },
+        {
+          "path": "/assets/toys/grape/thumb.webp",
+          "bytes": 5934
+        },
+        {
+          "path": "/assets/toys/star-cookie/thumb.webp",
+          "bytes": 8384
+        },
+        {
+          "path": "/assets/toys/tomatoes/thumb.webp",
+          "bytes": 7696
+        },
+        {
+          "path": "/src/toy-help.js",
+          "bytes": 344750
+        },
+        {
+          "path": "/src/packs/live.js",
+          "bytes": 20383
+        },
+        {
+          "path": "/src/live/analysis.js",
+          "bytes": 11882
+        },
+        {
+          "path": "/src/live/relief.js",
+          "bytes": 72932
+        },
+        {
+          "path": "/src/packs/photo-3d.js",
+          "bytes": 38783
+        },
+        {
+          "path": "/src/packs/moving-photo.js",
+          "bytes": 72088
+        },
+        {
+          "path": "/src/photo3d/background.js",
+          "bytes": 8146
+        },
+        {
+          "path": "/src/photo3d/bitmaps.js",
+          "bytes": 1157
+        },
+        {
+          "path": "/src/photo3d/border.js",
+          "bytes": 1840
+        },
+        {
+          "path": "/src/packs/dot-samples.js",
+          "bytes": 2951
+        },
+        {
+          "path": "/src/packs/photo-3d-core.js",
+          "bytes": 31900
+        },
+        {
+          "path": "/src/packs/photo-sharp.js",
+          "bytes": 19529
+        },
+        {
+          "path": "/src/packs/song-record.js",
+          "bytes": 7477
+        },
+        {
+          "path": "/src/packs/codex-picture-samples.js",
+          "bytes": 1494
+        },
+        {
+          "path": "/src/photo3d/depth-edges.js",
+          "bytes": 5694
+        },
+        {
+          "path": "/src/live/relief-height.js",
+          "bytes": 8045
+        },
+        {
+          "path": "/assets/toys/photo-3d/still-life.jpg",
+          "bytes": 376283
+        },
+        {
+          "path": "/assets/toys/photo-3d/still-life.depth",
+          "bytes": 507652
+        },
+        {
+          "path": "/src/photo3d/decode.js",
+          "bytes": 1190
+        },
+        {
+          "path": "/src/photo3d/decode-worker.js",
+          "bytes": 1667
+        },
+        {
+          "path": "/assets/flags/flags.json",
+          "bytes": 53129
+        },
+        {
+          "path": "/assets/toys/picture-lab/thumb.webp",
+          "bytes": 20436
+        },
+        {
+          "path": "/assets/toys/your-book/thumb.webp",
+          "bytes": 5588
+        },
+        {
+          "path": "/assets/toys/photo-album/thumb.webp",
+          "bytes": 4896
+        },
+        {
+          "path": "/assets/toys/picture-frame/thumb.webp",
+          "bytes": 17506
+        },
+        {
+          "path": "/assets/toys/song-landscape/thumb.webp",
+          "bytes": 11056
+        },
+        {
+          "path": "/assets/toys/chladni-plate/thumb.webp",
+          "bytes": 15964
+        },
+        {
+          "path": "/assets/toys/chladni-cell/thumb.webp",
+          "bytes": 30518
+        },
+        {
+          "path": "/assets/toys/room-echo/thumb.webp",
+          "bytes": 6354
+        },
+        {
+          "path": "/assets/toys/splat-mirror/thumb.webp",
+          "bytes": 9892
+        },
+        {
+          "path": "/assets/toys/model-splats/thumb.webp",
+          "bytes": 5564
+        },
+        {
+          "path": "/assets/toys/qr-code/thumb.webp",
+          "bytes": 11870
+        },
+        {
+          "path": "/assets/toys/qr-anatomy/thumb.webp",
+          "bytes": 6378
+        },
+        {
+          "path": "/assets/toys/qr-damage/thumb.webp",
+          "bytes": 18090
+        },
+        {
+          "path": "/assets/toys/qr-three/thumb.webp",
+          "bytes": 16624
+        },
+        {
+          "path": "/assets/toys/qr-picture/thumb.webp",
+          "bytes": 26832
+        },
+        {
+          "path": "/assets/toys/qr-build/thumb.webp",
+          "bytes": 15008
+        },
+        {
+          "path": "/assets/toys/barcodes/thumb.webp",
+          "bytes": 5874
+        },
+        {
+          "path": "/assets/toys/photo-3d/thumb.webp",
+          "bytes": 19724
+        },
+        {
+          "path": "/assets/toys/moving-photo-3d/thumb.webp",
+          "bytes": 8392
+        },
+        {
+          "path": "/assets/toys/video-3d/thumb.webp",
+          "bytes": 19714
+        },
+        {
+          "path": "/assets/toys/sound-recorder/thumb.webp",
+          "bytes": 7738
+        },
+        {
+          "path": "/assets/toys/sound-lab/thumb.webp",
+          "bytes": 10142
+        },
+        {
+          "path": "/assets/toys/screen/thumb.webp",
+          "bytes": 6638
+        },
+        {
+          "path": "/src/live/depth-worker.js",
+          "bytes": 2189
+        },
+        {
+          "path": "/src/depth/engine.js",
+          "bytes": 5439
+        },
+        {
+          "path": "/src/depth/clip.js",
+          "bytes": 3483
+        },
+        {
+          "path": "/src/packs/photo-3d-core.js",
+          "bytes": 31900
+        },
+        {
+          "path": "/src/depth/io.js",
+          "bytes": 826
+        },
+        {
+          "path": "/src/photo3d/background.js",
+          "bytes": 8146
+        },
+        {
+          "path": "/src/photo3d/depth-edges.js",
+          "bytes": 5694
+        }
+      ],
+      "errors": [],
+      "capture": {
+        "frames": 65,
+        "durationSeconds": 8.512226819992065,
+        "width": 390,
+        "height": 844
+      }
+    },
+    "model-splats": {
+      "readyMs": 4929,
+      "cameraWarmMs": null,
+      "measure": {
+        "elapsedMs": 6003.400000000023,
+        "renderedFrames": 15,
+        "renderedFps": 2.4985841356564515,
+        "medianIntervalMs": 376.9000000000233,
+        "p95IntervalMs": 452.8999999999651,
+        "canvas": [390, 645]
+      },
+      "states": {
+        "name": "Burger",
+        "format": "glb",
+        "triangles": 294,
+        "wire": false,
+        "notes": [],
+        "up": "y",
+        "textured": true,
+        "splats": 202712
+      },
+      "transferBodyBytes": 11100684,
+      "resources": [
+        {
+          "path": "/styles.css",
+          "bytes": 58392
+        },
+        {
+          "path": "/src/app.js",
+          "bytes": 72048
+        },
+        {
+          "path": "/vendor/playcanvas/playcanvas.min.mjs",
+          "bytes": 2465494
+        },
+        {
+          "path": "/src/toys.js",
+          "bytes": 129692
+        },
+        {
+          "path": "/src/player.js",
+          "bytes": 84896
+        },
+        {
+          "path": "/src/physics/hands-on.js",
+          "bytes": 57519
+        },
+        {
+          "path": "/src/ui.js",
+          "bytes": 140737
+        },
+        {
+          "path": "/src/state.js",
+          "bytes": 12987
+        },
+        {
+          "path": "/src/effects.js",
+          "bytes": 89392
+        },
+        {
+          "path": "/src/patterns.js",
+          "bytes": 11866
+        },
+        {
+          "path": "/src/sound.js",
+          "bytes": 8825
+        },
+        {
+          "path": "/src/voices.js",
+          "bytes": 101479
+        },
+        {
+          "path": "/src/sound-credits.js",
+          "bytes": 22909
+        },
+        {
+          "path": "/src/toy-sounds.js",
+          "bytes": 136851
+        },
+        {
+          "path": "/src/loaders.js",
+          "bytes": 13354
+        },
+        {
+          "path": "/src/generators.js",
+          "bytes": 26672
+        },
+        {
+          "path": "/src/codec.js",
+          "bytes": 2454
+        },
+        {
+          "path": "/src/exports.js",
+          "bytes": 12864
+        },
+        {
+          "path": "/src/packs/photoreal-r2.js",
+          "bytes": 21432
+        },
+        {
+          "path": "/src/packs/photoreal-r3.js",
+          "bytes": 13910
+        },
+        {
+          "path": "/src/physics/world.js",
+          "bytes": 36203
+        },
+        {
+          "path": "/src/physics/soft.js",
+          "bytes": 26315
+        },
+        {
+          "path": "/src/physics/fields.js",
+          "bytes": 42466
+        },
+        {
+          "path": "/src/physics/joints.js",
+          "bytes": 46363
+        },
+        {
+          "path": "/src/live/panel.js",
+          "bytes": 15236
+        },
+        {
+          "path": "/src/motion.js",
+          "bytes": 24878
+        },
+        {
+          "path": "/src/site-toy-pages.js",
+          "bytes": 7357
+        },
+        {
+          "path": "/src/pc.js",
+          "bytes": 313
+        },
+        {
+          "path": "/src/stage.js",
+          "bytes": 40103
+        },
+        {
+          "path": "/src/camera.js",
+          "bytes": 21601
+        },
+        {
+          "path": "/src/paint.js",
+          "bytes": 5392
+        },
+        {
+          "path": "/src/kit.js",
+          "bytes": 48544
+        },
+        {
+          "path": "/src/rig.js",
+          "bytes": 8416
+        },
+        {
+          "path": "/src/pose.js",
+          "bytes": 4468
+        },
+        {
+          "path": "/src/effects-pose.js",
+          "bytes": 5216
+        },
+        {
+          "path": "/src/rig-fx.js",
+          "bytes": 8541
+        },
+        {
+          "path": "/src/kernels.js",
+          "bytes": 3494
+        },
+        {
+          "path": "/src/photo-splats.js",
+          "bytes": 20907
+        },
+        {
+          "path": "/src/rigs.js",
+          "bytes": 86882
+        },
+        {
+          "path": "/src/noise.js",
+          "bytes": 3218
+        },
+        {
+          "path": "/src/sharpness.js",
+          "bytes": 3953
+        },
+        {
+          "path": "/src/pictures.js",
+          "bytes": 32222
+        },
+        {
+          "path": "/src/chunks.js",
+          "bytes": 5374
+        },
+        {
+          "path": "/vendor/gifenc/gifenc.esm.js",
+          "bytes": 9060
+        },
+        {
+          "path": "/src/packs/real-objects.js",
+          "bytes": 90416
+        },
+        {
+          "path": "/src/physics/materials.js",
+          "bytes": 15065
+        },
+        {
+          "path": "/src/live/live.js",
+          "bytes": 12088
+        },
+        {
+          "path": "/src/live/record.js",
+          "bytes": 4347
+        },
+        {
+          "path": "/src/font.js",
+          "bytes": 2989
+        },
+        {
+          "path": "/src/packs/even.js",
+          "bytes": 9655
+        },
+        {
+          "path": "/src/packs/dog-plush-fill.js",
+          "bytes": 18691
+        },
+        {
+          "path": "/src/packs/photoreal-r3-rigs.js",
+          "bytes": 47121
+        },
+        {
+          "path": "/src/picture-splats.js",
+          "bytes": 19581
+        },
+        {
+          "path": "/src/media.js",
+          "bytes": 30370
+        },
+        {
+          "path": "/src/packs/photoreal-r3-bases.js",
+          "bytes": 24293
+        },
+        {
+          "path": "/assets/toys/cactus/cactus.sog",
+          "bytes": 5869356
+        },
+        {
+          "path": "/assets/toys/cactus/thumb.webp",
+          "bytes": 9872
+        },
+        {
+          "path": "/assets/toys/strawberry/thumb.webp",
+          "bytes": 11586
+        },
+        {
+          "path": "/assets/toys/cookie/thumb.webp",
+          "bytes": 10846
+        },
+        {
+          "path": "/assets/toys/cluster-fly/thumb.webp",
+          "bytes": 13314
+        },
+        {
+          "path": "/assets/toys/bee/thumb.webp",
+          "bytes": 11922
+        },
+        {
+          "path": "/assets/toys/may-beetle/thumb.webp",
+          "bytes": 9856
+        },
+        {
+          "path": "/assets/toys/bumblebee/thumb.webp",
+          "bytes": 13314
+        },
+        {
+          "path": "/assets/toys/millipede/thumb.webp",
+          "bytes": 6578
+        },
+        {
+          "path": "/assets/toys/raspberry/thumb.webp",
+          "bytes": 11614
+        },
+        {
+          "path": "/assets/toys/blackberry/thumb.webp",
+          "bytes": 6704
+        },
+        {
+          "path": "/assets/toys/blueberry/thumb.webp",
+          "bytes": 11212
+        },
+        {
+          "path": "/assets/toys/grape/thumb.webp",
+          "bytes": 5934
+        },
+        {
+          "path": "/assets/toys/star-cookie/thumb.webp",
+          "bytes": 8384
+        },
+        {
+          "path": "/assets/toys/tomatoes/thumb.webp",
+          "bytes": 7696
+        },
+        {
+          "path": "/src/toy-help.js",
+          "bytes": 344750
+        },
+        {
+          "path": "/src/packs/studio-models.js",
+          "bytes": 16982
+        },
+        {
+          "path": "/src/packs/studio-models-core.js",
+          "bytes": 74752
+        },
+        {
+          "path": "/assets/toys/model-splats/burger.glb",
+          "bytes": 42364
+        },
+        {
+          "path": "/assets/flags/flags.json",
+          "bytes": 53129
+        },
+        {
+          "path": "/assets/toys/your-book/thumb.webp",
+          "bytes": 5588
+        },
+        {
+          "path": "/assets/toys/picture-frame/thumb.webp",
+          "bytes": 17506
+        },
+        {
+          "path": "/assets/toys/photo-album/thumb.webp",
+          "bytes": 4896
+        },
+        {
+          "path": "/assets/toys/song-landscape/thumb.webp",
+          "bytes": 11056
+        },
+        {
+          "path": "/assets/toys/chladni-plate/thumb.webp",
+          "bytes": 15964
+        },
+        {
+          "path": "/assets/toys/chladni-cell/thumb.webp",
+          "bytes": 30518
+        },
+        {
+          "path": "/assets/toys/splat-mirror/thumb.webp",
+          "bytes": 9892
+        },
+        {
+          "path": "/assets/toys/room-echo/thumb.webp",
+          "bytes": 6354
+        },
+        {
+          "path": "/assets/toys/model-splats/thumb.webp",
+          "bytes": 5564
+        },
+        {
+          "path": "/assets/toys/qr-code/thumb.webp",
+          "bytes": 11870
+        },
+        {
+          "path": "/assets/toys/qr-anatomy/thumb.webp",
+          "bytes": 6378
+        },
+        {
+          "path": "/assets/toys/qr-damage/thumb.webp",
+          "bytes": 18090
+        },
+        {
+          "path": "/assets/toys/qr-three/thumb.webp",
+          "bytes": 16624
+        },
+        {
+          "path": "/assets/toys/qr-picture/thumb.webp",
+          "bytes": 26832
+        },
+        {
+          "path": "/assets/toys/qr-build/thumb.webp",
+          "bytes": 15008
+        },
+        {
+          "path": "/assets/toys/barcodes/thumb.webp",
+          "bytes": 5874
+        },
+        {
+          "path": "/assets/toys/photo-3d/thumb.webp",
+          "bytes": 19724
+        },
+        {
+          "path": "/assets/toys/moving-photo-3d/thumb.webp",
+          "bytes": 8392
+        },
+        {
+          "path": "/assets/toys/video-3d/thumb.webp",
+          "bytes": 19714
+        },
+        {
+          "path": "/assets/toys/sound-lab/thumb.webp",
+          "bytes": 10142
+        },
+        {
+          "path": "/assets/toys/sound-recorder/thumb.webp",
+          "bytes": 7738
+        },
+        {
+          "path": "/assets/toys/splat-toolkit/thumb.webp",
+          "bytes": 15246
+        },
+        {
+          "path": "/assets/toys/screen/thumb.webp",
+          "bytes": 6638
+        }
+      ],
+      "errors": [],
+      "capture": {
+        "frames": 21,
+        "durationSeconds": 7.546550035476685,
+        "width": 390,
+        "height": 844
+      }
+    }
+  },
+  "browser": "Chromium 151.0.7922.173",
+  "node": "24.19.0",
+  "playwright": "1.56.1",
+  "userAgent": "Mozilla/5.0 (Linux; Android 13) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Mobile Safari/537.36",
+  "camera": "generated 320x240 turning mannequin at 15 fps; real WASM depth worker",
+  "date": "October 14, 2026",
+  "measurementNotes": "postrender counts before screencast; one local cloud run; body bytes include main-document resource entries and shell, omit worker resource timing; no physical device, no custom-video training"
+}

@@ -1,0 +1,30 @@
+
+Running 19 tests using 1 worker
+
+(node:1414) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:1414) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 [chromium] › tests/cdx-mir.spec.mjs:23:1 › scale and shift align on unchanged colors while a moving object keeps its depth (27ms)
+  ✓   2 [chromium] › tests/cdx-mir.spec.mjs:43:1 › still depths do not accumulate noise; flips need consecutive answers on the same side (144ms)
+  ✓   3 [chromium] › tests/cdx-mir.spec.mjs:74:1 › upsampling uses the request's colors to move an edge, without a stretched depth ramp (4ms)
+  ✓   4 [chromium] › tests/live5.spec.mjs:123:1 › the mirror's depth edges cut clean: no cell hangs between the near and far sides (4ms)
+  ✓   5 [chromium] › tests/live5.spec.mjs:141:1 › the mirror's background layer shows the wall behind a person, never the person (10ms)
+  ✓   6 [chromium] › tests/lv7-long.spec.mjs:55:1 › a long video's memory is bounded on every tier, for ten minutes or an hour (614ms)
+  ✓   7 [chromium] › tests/lv7.spec.mjs:27:3 › the mirror's depth (no browser) › a face's gentle relief is kept smooth, not cut into terraces; a real jump still cuts clean (28ms)
+  ✓   8 [chromium] › tests/lv7.spec.mjs:64:3 › the mirror's depth (no browser) › at a jump each cell goes with the side whose colors it has (86ms)
+  ✓   9 [chromium] › tests/psv.spec.mjs:59:3 › the module › Sharp picture is the default, and the relief fits each profile's budget (2ms)
+  ✓  10 [chromium] › tests/stm.spec.mjs:143:3 › the conversion › the tier budgets are the kit's counts for the toy (3ms)
+  ✓  11 [chromium] › tests/stm.spec.mjs:151:3 › the conversion › a sample model stays within each tier's budget, in splats and in a wireframe (3.5s)
+  ✓  12 [chromium] › tests/stm.spec.mjs:173:3 › the conversion › a flat quad closes: no holes, and nothing to see through (498ms)
+  ✓  13 [chromium] › tests/stm.spec.mjs:228:3 › the conversion › colors follow the texture (the quad's four colors land where they should) (51ms)
+  ✓  14 [chromium] › tests/stm.spec.mjs:258:3 › the conversion › vertex colors and MTL colors show, and light shades them softly (57ms)
+  ✓  15 [chromium] › tests/stm.spec.mjs:298:3 › the conversion › hard edges are found, and an upright STL turns to Y up (10ms)
+  ✓  16 [chromium] › tests/stm.spec.mjs:310:3 › the conversion › the wireframe is the mesh's edges (120ms)
+(node:1499) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  17 [chromium] › tests/stm.spec.mjs:324:3 › the conversion › the command-line tool writes a splat PLY (101ms)
+  ✓  18 [chromium] › tests/stm.spec.mjs:338:3 › the tap › the lift is 0 at rest, rises through the model like a wave and settles back to 0 (62ms)
+  ✓  19 [chromium] › tests/stm.spec.mjs:352:3 › the tap › each splat has its own place in the cloud, and every number is finite (44ms)
+
+  19 passed (7.9s)

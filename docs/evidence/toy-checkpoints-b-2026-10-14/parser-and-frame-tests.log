@@ -1,0 +1,25 @@
+
+Running 11 tests using 1 worker
+
+(node:1006) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:1006) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 [chromium] › tests/stm.spec.mjs:67:3 › reading model files › a glTF binary (a textured quad) loads (15ms)
+  ✓   2 [chromium] › tests/stm.spec.mjs:74:3 › reading model files › a glTF with embedded data and vertex colors loads (4ms)
+  ✓   3 [chromium] › tests/stm.spec.mjs:81:3 › reading model files › a glTF that needs its own file says which, and loads once it has it (4ms)
+  ✓   4 [chromium] › tests/stm.spec.mjs:96:3 › reading model files › an OBJ takes its colors from its MTL, and shows gray without it (4ms)
+  ✓   5 [chromium] › tests/stm.spec.mjs:105:3 › reading model files › an STL loads, binary and ASCII (4ms)
+  ✓   6 [chromium] › tests/stm.spec.mjs:113:3 › reading model files › things that are not models give a plain message (27ms)
+  ✓   7 [chromium] › tests/stm.spec.mjs:124:3 › reading model files › every format turns into splats that lie on it (91ms)
+  ✓   8 [chromium] › tests/v3d.spec.mjs:48:1 › the stretch and frame rate pick the right frames (167ms)
+  ✓   9 [chromium] › tests/v3d.spec.mjs:126:1 › a sharp picture scores higher than the same picture blurred (3ms)
+  ✓  10 [chromium] › tests/v3d.spec.mjs:140:1 › the PLY reader turns a small known PLY into the right splats (50ms)
+  ✓  11 [chromium] › tests/v3d.spec.mjs:192:1 › the scene frame puts the cameras' up at +y and the video's view toward -z (31ms)
+
+  11 passed (5.7s)
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice
