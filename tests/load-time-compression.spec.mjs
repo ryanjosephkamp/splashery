@@ -4,6 +4,10 @@ import { deflateRawSync, gunzipSync } from "node:zlib";
 import { createScene } from "../src/state.js";
 import { MANUAL_PDF } from "../manual/pdf-edition.js";
 
+const openingHash = Buffer.from(
+  JSON.stringify(createScene({ toy: { kind: "builtin", id: "cactus" } })),
+).toString("base64url");
+
 test("opening gzip copies preserve every original byte", () => {
   const copies = JSON.parse(
     fs.readFileSync("docs/audits/load-time-2026-10/compressed-opening.json"),
@@ -64,7 +68,9 @@ test("the mapped engine transfers while the app entry is held", async ({ page })
     await held;
     await route.continue();
   });
-  await page.goto("/?renderer=webgl2&profile=weak&adapt=off", { waitUntil: "commit" });
+  await page.goto(`/?renderer=webgl2&profile=weak&adapt=off#s=j.${openingHash}`, {
+    waitUntil: "commit",
+  });
   try {
     await page.waitForFunction(() => window.__mappedEnginePreloaded, null, { timeout: 10000 });
   } finally {
@@ -164,7 +170,9 @@ test("engine transfer starts while the stylesheet still blocks DOM readiness", a
     await route.continue();
   });
   const engine = page.waitForRequest("**/playcanvas.min.mjs.gz", { timeout: 10000 });
-  await page.goto("/?renderer=webgl2&profile=weak&adapt=off", { waitUntil: "commit" });
+  await page.goto(`/?renderer=webgl2&profile=weak&adapt=off#s=j.${openingHash}`, {
+    waitUntil: "commit",
+  });
   try {
     await engine;
   } finally {
@@ -178,7 +186,7 @@ test("compressed startup preserves the complete live PlayCanvas namespace and he
 }) => {
   const requests = [];
   page.on("request", (r) => requests.push(new URL(r.url()).pathname));
-  await page.goto("/?renderer=webgl2&profile=weak&adapt=off&help=show");
+  await page.goto(`/?renderer=webgl2&profile=weak&adapt=off&help=show#s=j.${openingHash}`);
   await page.waitForSelector("body[data-ready='true']", { timeout: 180000 });
   await expect(page.locator("#help-toggle")).toBeVisible();
   const result = await page.evaluate(async () => {
@@ -208,7 +216,7 @@ test("unsupported native decompression retains the original engine and help", as
   );
   const requests = [];
   page.on("request", (r) => requests.push(new URL(r.url()).pathname));
-  await page.goto("/?renderer=webgl2&profile=weak&adapt=off&help=show");
+  await page.goto(`/?renderer=webgl2&profile=weak&adapt=off&help=show#s=j.${openingHash}`);
   await page.waitForSelector("body[data-ready='true']", { timeout: 180000 });
   await expect(page.locator("#help-toggle")).toBeVisible();
   expect(requests).toContain("/vendor/playcanvas/playcanvas.min.mjs");
@@ -249,7 +257,7 @@ test("an HTTP-decoded compressed engine retains its native exports", async ({ pa
       body: fs.readFileSync("vendor/playcanvas/playcanvas.min.mjs"),
     }),
   );
-  await page.goto("/?renderer=webgl2&profile=weak&adapt=off");
+  await page.goto(`/?renderer=webgl2&profile=weak&adapt=off#s=j.${openingHash}`);
   await page.waitForSelector("body[data-ready='true']", { timeout: 180000 });
   expect(await page.evaluate(async () => (await import("/src/pc.js")).version)).toBe("2.22.3");
 });
@@ -257,7 +265,7 @@ test("an HTTP-decoded compressed engine retains its native exports", async ({ pa
 test("a missing compressed engine falls back to its original module", async ({ page }) => {
   await page.route("**/playcanvas.min.mjs.gz", (route) => route.fulfill({ status: 404, body: "" }));
   const original = page.waitForRequest("**/vendor/playcanvas/playcanvas.min.mjs");
-  await page.goto("/?renderer=webgl2&profile=weak&adapt=off");
+  await page.goto(`/?renderer=webgl2&profile=weak&adapt=off#s=j.${openingHash}`);
   await original;
   await page.waitForSelector("body[data-ready='true']", { timeout: 180000 });
   expect(await page.evaluate(async () => (await import("/src/pc.js")).version)).toBe("2.22.3");

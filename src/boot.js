@@ -134,7 +134,12 @@ const OPENING_GRAPHS = {
     }
   }
   async function start() {
+    // Keep the homepage's original HTTP module path. Its shelf interactions
+    // failed the unchanged return-to-rest check with a freshly inflated Blob.
+    const defaultHomepage =
+      entry.pathname.endsWith("/app.js") && !new URLSearchParams(location.hash.slice(1)).get("s");
     const compressed =
+      !defaultHomepage &&
       typeof DecompressionStream === "function" &&
       HTMLScriptElement.supports?.("importmap") &&
       canAddImportMaps() &&
