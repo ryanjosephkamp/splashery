@@ -5,13 +5,14 @@
 //
 //   python3 -m http.server 4173 --bind 127.0.0.1 &
 //   SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium node tools/v3d-clip.mjs <out.gif> \
-//     --scene=<sample id> --mode=turn|replay|roam|steer [--size=390x844] [--secs=8] [--fps=12]
+//     --scene=<sample id> --mode=turn|replay|roam|steer|walk [--size=390x844] [--secs=8] [--fps=12]
 //
 // turn: the camera swings around the scene. replay: the tap (Replay flight) flies the video's
 // camera path. roam: the flight, then the camera turns away from where the flight ended. steer
 // (r7): the flight, a drag that turns the view while it flies (2 to 4 s), a tap that pauses it
 // (at 5.5 s, the view held) and a tap that goes on (at 8 s).
 // --strip=6 also writes <out>-strip.png, six frames side by side.
+// --profile=low --phone=1 captures the compact phone tier; the legacy default is high.
 
 import { chromium } from "@playwright/test";
 import fs from "node:fs";
@@ -35,7 +36,11 @@ const settings = {
   swing: Number(opt("swing", 0.9)),
   bg: opt("bg", "#111111"),
   prune: opt("prune", "1") !== "0",
+  profile: opt("profile", "high"),
+  phone: opt("phone", "0") === "1",
 };
+if (!["auto", "low", "mid", "high", "max"].includes(settings.profile))
+  throw new Error("Choose an existing render profile.");
 const kernel = opt("kernel", "");
 
 const browser = await chromium.launch({
@@ -45,7 +50,7 @@ const browser = await chromium.launch({
 const page = await browser.newPage({ viewport: { width: w, height: h } });
 page.on("pageerror", (e) => console.error("page error:", e.message));
 await page.goto(
-  `${base}?labs=1&renderer=webgl2&profile=high&adapt=off${kernel ? `&kernel=${kernel}` : ""}`,
+  `${base}?labs=1&renderer=webgl2&profile=${settings.profile}&adapt=off${kernel ? `&kernel=${kernel}` : ""}`,
 );
 await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
 const res = await page.evaluate(
@@ -53,8 +58,10 @@ const res = await page.evaluate(
     const { app, player } = window.__splashery;
     const { GIFEncoder, quantize, applyPalette } = await import("gifenc");
     globalThis.__v3dNoPrune = !s.prune;
+    if (s.phone) globalThis.__v3dPhone = true;
     await app.chooseToy("video-3d");
     if (s.scene) await app.setToyOptions({ source: s.scene });
+    if (s.mode === "walk") await app.setToyOptions({ navigation: "walk" });
     app.setLook({ background: s.bg });
     player.opts.idleDelay = 1e9;
     player.idle.weight = 0;
@@ -91,6 +98,12 @@ const res = await page.evaluate(
     let roamFrom = null;
     const frame = async () => {
       const f = n / Math.max(1, total - 1);
+      if (s.mode === "walk") {
+        window.dispatchEvent(new KeyboardEvent("keydown", { key: "w" }));
+        window.dispatchEvent(
+          new KeyboardEvent(f > 0.4 && f < 0.6 ? "keydown" : "keyup", { key: "d" }),
+        );
+      }
       if (s.mode === "turn") {
         const yaw = home.yaw + s.swing * Math.sin(f * Math.PI * 2);
         cam.cur = { ...home, yaw, pitch: home.pitch + 0.15 * Math.sin(f * Math.PI * 4) };
@@ -123,7 +136,13 @@ const res = await page.evaluate(
           cam.tgt = { ...cam.cur };
         }
       }
-      pending = step;
+      // Walking caps a resumed tab's time step. Subdivide a low-frame-rate review clip so its
+      // movement still covers the advertised number of seconds.
+      if (s.mode === "walk") {
+        const parts = Math.ceil(step / 0.05);
+        for (let i = 0; i < parts; i++) for (const fn of handlers) fn(step / parts);
+        pending = 0;
+      } else pending = step;
       await stage.captureFrame();
       pending = 0;
       const c = await stage.captureFrame();
@@ -135,7 +154,7 @@ const res = await page.evaluate(
     };
     pending = 0.5;
     await stage.captureFrame();
-    if (s.mode !== "turn") {
+    if (s.mode !== "turn" && s.mode !== "walk") {
       for (let i = 0; i < 4; i++) await frame();
       player.act(null);
     }

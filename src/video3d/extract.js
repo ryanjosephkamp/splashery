@@ -6,7 +6,7 @@ import { windowTimes, sharpness, fitSide, panoSafeCrop } from "./frames.js";
 
 // Opens the video: resolves { video, url, duration, width, height }. Throws a plain message when
 // the browser cannot play the file.
-export async function openVideo(file) {
+export async function openVideo(file, { signal, timeoutMs = 20000 } = {}) {
   const url = URL.createObjectURL(file);
   const video = document.createElement("video");
   video.muted = true;
@@ -15,43 +15,87 @@ export async function openVideo(file) {
   video.src = url;
   try {
     await new Promise((resolve, reject) => {
-      const t = setTimeout(() => reject(new Error("timeout")), 20000);
-      video.onloadedmetadata = () => {
+      const finish = (error) => {
         clearTimeout(t);
-        resolve();
+        signal?.removeEventListener("abort", abort);
+        video.onloadedmetadata = video.onerror = null;
+        error ? reject(error) : resolve();
+      };
+      const abort = () => finish(new DOMException("Stopped", "AbortError"));
+      const t = setTimeout(() => finish(new Error("timeout")), timeoutMs);
+      signal?.addEventListener("abort", abort, { once: true });
+      video.onloadedmetadata = () => {
+        finish();
       };
       video.onerror = () => {
-        clearTimeout(t);
-        reject(new Error("error"));
+        finish(new Error("error"));
       };
+      if (signal?.aborted) abort();
     });
-  } catch {
+  } catch (error) {
+    video.removeAttribute("src");
+    video.load();
     URL.revokeObjectURL(url);
-    throw new Error(
+    if (error?.name === "AbortError") throw error;
+    const failure = new Error(
       "This browser cannot play that video. Try an MP4 (H.264) or WebM file, or a shorter clip.",
     );
+    failure.code = error?.message === "timeout" ? "V3D_VIDEO_TIMEOUT" : "V3D_VIDEO_UNPLAYABLE";
+    throw failure;
   }
   const duration = Number.isFinite(video.duration) ? video.duration : 0;
   if (!duration || !video.videoWidth) {
+    video.removeAttribute("src");
+    video.load();
     URL.revokeObjectURL(url);
-    throw new Error("That video has no picture or no length this browser can read.");
+    const failure = new Error("That video has no picture or no length this browser can read.");
+    failure.code = "V3D_VIDEO_UNPLAYABLE";
+    throw failure;
   }
   return { video, url, duration, width: video.videoWidth, height: video.videoHeight };
 }
 
-function seek(video, t) {
-  return new Promise((resolve) => {
+export function seek(video, t, { signal, timeoutMs = 4000 } = {}) {
+  return new Promise((resolve, reject) => {
     let done = false;
-    const finish = () => {
+    const finish = (error) => {
       if (done) return;
       done = true;
-      video.removeEventListener("seeked", finish);
-      resolve();
+      clearTimeout(timer);
+      video.removeEventListener("seeked", ready);
+      video.removeEventListener("loadeddata", ready);
+      video.removeEventListener("error", failed);
+      signal?.removeEventListener("abort", abort);
+      error ? reject(error) : resolve();
     };
-    video.addEventListener("seeked", finish);
-    // Some browsers skip "seeked" when the time does not change.
-    setTimeout(finish, 4000);
-    video.currentTime = t;
+    const ready = () => {
+      if (!video.seeking && video.readyState >= 2) finish();
+    };
+    const abort = () => finish(new DOMException("Stopped", "AbortError"));
+    const failed = () => {
+      const failure = new Error(
+        "This browser cannot read a picture from that video. Try an MP4 (H.264) or WebM file.",
+      );
+      failure.code = "V3D_VIDEO_UNPLAYABLE";
+      finish(failure);
+    };
+    const timer = setTimeout(
+      () => finish(new Error("The video took too long to show a frame.")),
+      timeoutMs,
+    );
+    video.addEventListener("seeked", ready);
+    video.addEventListener("loadeddata", ready);
+    video.addEventListener("error", failed);
+    signal?.addEventListener("abort", abort, { once: true });
+    try {
+      video.currentTime = t;
+    } catch (error) {
+      finish(error);
+      return;
+    }
+    if (signal?.aborted) abort();
+    else if (video.error) failed();
+    else ready();
   });
 }
 
@@ -78,7 +122,7 @@ export async function grabFrames(opened, plan, { side = 960, tries = 3, onFrame,
     if (signal?.aborted) throw new DOMException("Stopped", "AbortError");
     let best = null;
     for (const t of windowTimes(plan.windows[i], tries)) {
-      await seek(video, t);
+      await seek(video, t, { signal });
       gs.drawImage(video, crop.sx, 0, crop.sw, opened.height, 0, 0, sw, sh);
       const px = gs.getImageData(0, 0, sw, sh).data;
       for (let k = 0; k < gray.length; k++)
