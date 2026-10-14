@@ -1,16 +1,8 @@
 // Task 72 uses native graphics with Chromium's sandbox and security checks.
-import { createRequire } from "node:module";
-import path from "node:path";
-
-const require = createRequire(import.meta.url);
-// The pinned runner disables some security features by default. Discover its
-// exact switch so it can be excluded without copying a version-specific list.
-const { chromiumSwitches } = require(
-  path.join(
-    path.dirname(require.resolve("playwright-core/package.json")),
-    "lib/server/chromium/chromiumSwitches.js",
-  ),
-);
+// Playwright 1.56.1's pinned default. A changed switch is rejected by the live
+// argument audit rather than silently disabling browser security features.
+const disabledFeatures =
+  "AcceptCHFrame,AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,Translate,AutoDeElevate,RenderDocument";
 
 export const ignoredDefaults = [
   "--enable-unsafe-swiftshader",
@@ -18,7 +10,7 @@ export const ignoredDefaults = [
   "--disable-client-side-phishing-detection",
   "--disable-ipc-flooding-protection",
   "--disable-popup-blocking",
-  ...chromiumSwitches(false).filter((arg) => arg.startsWith("--disable-features=")),
+  `--disable-features=${disabledFeatures}`,
 ];
 
 export function safeLaunchOptions() {

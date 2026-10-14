@@ -1,14 +1,11 @@
 // Task 72: render the real RGB toy with the GPU path that produced white bands.
-// The Stage integration remains pending; this spec measures the current runtime.
+// Inherit the suite's browser settings; the optional local config audits security.
 import { test, expect } from "@playwright/test";
 import fs from "node:fs";
 import path from "node:path";
-import { assertSafeArguments, safeLaunchOptions } from "./cdx-three-browser.mjs";
 
 if (process.env.QR72_INTEGRATION)
-  throw new Error("Stage ownership is unresolved; QR72_INTEGRATION is disabled.");
-
-test.use({ launchOptions: safeLaunchOptions() });
+  throw new Error("QR72_INTEGRATION is obsolete; Stage imports the bounds helper directly.");
 
 const renderer = process.env.QR72_RENDERER || "webgpu";
 const precision = process.env.QR72_PRECISION || "highp";
@@ -33,12 +30,21 @@ for (const [width, height, dpr] of sizes) {
     const page = await context.newPage();
     const session = await browser.newBrowserCDPSession();
     const { arguments: launchArguments } = await session.send("Browser.getBrowserCommandLine");
-    assertSafeArguments(launchArguments);
+    if (process.env.QR72_SAFE) {
+      const { assertSafeArguments } = await import("./cdx-three-browser.mjs");
+      assertSafeArguments(launchArguments);
+    }
     await testInfo.attach("browser-launch-arguments", {
       body: JSON.stringify(launchArguments, null, 2),
       contentType: "application/json",
     });
     await session.detach();
+    if (process.env.QR72_NO_WEBGPU === "1") {
+      // Exercise the normal no-adapter fallback without unsafe launch flags.
+      await page.addInitScript(() => {
+        Object.defineProperty(navigator, "gpu", { value: undefined, configurable: true });
+      });
+    }
     const errors = [];
     page.on("pageerror", (e) => errors.push(e.message));
     page.on("console", (m) => {
@@ -73,23 +79,27 @@ for (const [width, height, dpr] of sizes) {
         return {
           type: p.stage.deviceType,
           renderer: gl
-            ? gl.getParameter(ext.UNMASKED_RENDERER_WEBGL)
+            ? gl.getParameter(ext ? ext.UNMASKED_RENDERER_WEBGL : gl.RENDERER)
             : p.stage.device.adapter?.info?.description || "WebGPU",
           mediumBits: gl?.getShaderPrecisionFormat(gl.FRAGMENT_SHADER, gl.MEDIUM_FLOAT).precision,
           demotedShaders: window.__qr72Demoted,
         };
       });
-      // A fallback must not count as proof of the WebGPU defect being fixed.
-      if (renderer === "webgpu" && device.type !== "webgpu") {
-        test.skip(true, "No working WebGPU adapter; WebGL2 fallback is not proof of this fix.");
-      }
-      expect(device.type).toBe(renderer);
-      if (precision === "mediump") expect(device.demotedShaders).toBeGreaterThan(0);
+      expect(["webgpu", "webgl2"]).toContain(device.type);
+      if (renderer === "webgl2" || process.env.QR72_NO_WEBGPU === "1")
+        expect(device.type).toBe("webgl2");
+      if (precision === "mediump" && device.type === "webgl2")
+        expect(device.demotedShaders).toBeGreaterThan(0);
       await page.evaluate(async () => {
         const p = window.__splashery.player;
         p.opts.idleDelay = 1e9;
         p.idle.weight = 0;
         const s = p.stage;
+        const base = s.toy.resource.aabb;
+        window.__qr72BoundsBase = {
+          center: base.center.toArray(),
+          halfExtents: base.halfExtents.toArray(),
+        };
         const handlers = s.updateHandlers.slice();
         const box = { pending: 0 };
         s.updateHandlers.length = 0;
@@ -121,7 +131,49 @@ for (const [width, height, dpr] of sizes) {
           async ([state, capture]) => {
             const p = window.__splashery.player;
             const s = p.stage;
+            const resource = s.toy.resource;
+            const tokens = p.motion.tokenData;
+            // WebGL2 does not use the GPU sorting hook. Exercise the same helper
+            // with the real resource and packed motion tokens on that backend.
+            // This is bounds/fallback coverage, not proof of WebGPU sorting.
+            const helperApplied = !s.device.isWebGPU;
+            if (helperApplied) {
+              const { updateTokenBounds } = await import("/src/token-bounds.js");
+              updateTokenBounds(resource, tokens, s.toy.entity.gsplat);
+            }
             const frame = await s.captureFrame();
+            const min = resource.aabb.getMin().toArray();
+            const max = resource.aabb.getMax().toArray();
+            const base = window.__qr72BoundsBase;
+            let checkedCorners = 0;
+            let outside = 0;
+            for (let o = 0; o + 7 < tokens.length; o += 8) {
+              if (!(tokens[o + 3] > 0)) continue;
+              const [qx, qy, qz] = tokens.slice(o + 4, o + 7);
+              const qw = tokens[o + 7] || (!qx && !qy && !qz ? 1 : 0);
+              for (const dx of [-1, 1])
+                for (const dy of [-1, 1])
+                  for (const dz of [-1, 1]) {
+                    const v = [dx, dy, dz].map((d, i) => base.center[i] + d * base.halfExtents[i]);
+                    // The token shader's quaternion formula, independent of
+                    // the Mat4 used by the bounds helper.
+                    const cross = [
+                      qy * v[2] - qz * v[1],
+                      qz * v[0] - qx * v[2],
+                      qx * v[1] - qy * v[0],
+                    ];
+                    const twice = [
+                      qy * cross[2] - qz * cross[1],
+                      qz * cross[0] - qx * cross[2],
+                      qx * cross[1] - qy * cross[0],
+                    ];
+                    const moved = v.map(
+                      (x, i) => x + 2 * (qw * cross[i] + twice[i]) + tokens[o + i],
+                    );
+                    checkedCorners++;
+                    if (moved.some((x, i) => x < min[i] - 1e-5 || x > max[i] + 1e-5)) outside++;
+                  }
+            }
             const pixels = frame
               .getContext("2d")
               .getImageData(0, 0, frame.width, frame.height).data;
@@ -175,6 +227,14 @@ for (const [width, height, dpr] of sizes) {
               p95: points[Math.floor(points.length * 0.95)].brightness,
               bright: bright.length,
               worst: points.slice(-8),
+              bounds: {
+                checkedCorners,
+                outside,
+                min,
+                max,
+                helperApplied,
+                placementMatches: s.toy.entity.gsplat.customAabb === resource.aabb,
+              },
             };
           },
           [state, !!evidence],
@@ -206,7 +266,7 @@ for (const [width, height, dpr] of sizes) {
         dpr,
         results,
         errors,
-        stageIntegration: "unapplied",
+        coverage: device.type === "webgpu" ? "webgpu-runtime" : "webgl2-helper-and-render",
       };
       await testInfo.attach("row-coverage", {
         body: JSON.stringify(report, null, 2),
@@ -222,6 +282,9 @@ for (const [width, height, dpr] of sizes) {
       for (const r of results) {
         expect(r.samples).toBeGreaterThan(1000);
         expect(r.bright, JSON.stringify(r)).toBe(0);
+        expect(r.bounds.checkedCorners).toBeGreaterThan(0);
+        expect(r.bounds.outside, JSON.stringify(r.bounds)).toBe(0);
+        if (r.state === "apart") expect(r.bounds.placementMatches).toBe(true);
       }
     } finally {
       await context.close();

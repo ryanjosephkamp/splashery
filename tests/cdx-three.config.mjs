@@ -2,6 +2,7 @@ import { defineConfig } from "@playwright/test";
 import { safeLaunchOptions } from "./cdx-three-browser.mjs";
 
 const port = Number(process.env.SPLASHERY_PORT) || 4272;
+process.env.QR72_SAFE = "1";
 
 // Standalone config: never inherit the repository's software-GPU overrides.
 export default defineConfig({
