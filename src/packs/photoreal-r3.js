@@ -46,7 +46,7 @@ const qa = (axis, ang) => quatAxisAngle(unit(axis), ang);
 const SCANS = new Map();
 async function loadScan(id, ctx) {
   const opening =
-    ["celestial-globe", "armillary-sphere", "stannern-meteorites"].includes(id) &&
+    ["celestial-globe", "armillary-sphere", "stannern-meteorites", "pyrite-cubes"].includes(id) &&
     ["low", "weak"].includes(ctx?.profile) &&
     ctx?.count > 0 &&
     ctx.count <= 90000 &&

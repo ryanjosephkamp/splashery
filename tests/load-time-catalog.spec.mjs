@@ -39,7 +39,7 @@ test("a museum scan starts fetching while its deferred helpers are still loading
     await held;
     await route.continue();
   });
-  const scan = page.waitForRequest("**/assets/toys/pyrite-cubes/pyrite-cubes.splats", {
+  const scan = page.waitForRequest("**/assets/toys/pyrite-cubes/pyrite-cubes-opening.splats.gz", {
     timeout: 10000,
   });
   const chosen = page.evaluate(() => window.__splashery.app.chooseToy("pyrite-cubes"));

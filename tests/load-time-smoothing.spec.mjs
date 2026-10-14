@@ -34,10 +34,10 @@ test("a compressed exact-mean scan preserves low-budget and high-detail buffers"
   }
 });
 
-test("armillary and Stannern openings preserve all low and high geometry and shading buffers", async () => {
+test("museum openings preserve all low and high geometry and shading buffers", async () => {
   const full = await import("../src/packs/photoreal-r3.js?museum-full-reference");
   const hash = (x) => crypto.createHash("sha256").update(new Uint8Array(x.buffer)).digest("hex");
-  for (const id of ["armillary-sphere", "stannern-meteorites"]) {
+  for (const id of ["armillary-sphere", "stannern-meteorites", "pyrite-cubes"]) {
     const small = await import(`../src/packs/photoreal-r3.js?museum-prefix-${id}`);
     const build = async (module, profile, count) => {
       const recipe = module.RECIPES[id],

@@ -322,7 +322,15 @@
       "splats": 300000,
       "pack": "pr3",
       "checked": "2026-10-08",
-      "bake": "tools/pr3-bake.mjs"
+      "bake": "tools/pr3-bake.mjs",
+      "opening": {
+        "file": "assets/toys/pyrite-cubes/pyrite-cubes-opening.splats.gz",
+        "sha256": "bbe021d3148650ab2f271e225ee0247a5d94e3f64b58e3935d2ec775ae98495d",
+        "sourceSha256": "839b0763f08a5a2734cafe81480fbcd3755279a3f5c521cdc02a564b56908c07",
+        "checked": "October 14, 2026",
+        "transformation": "Exact record prefix plus the original per-cell mean colors, gzip compressed; made by Ryan with Codex (GPT-6).",
+        "nc": false
+      }
     },
     {
       "id": "megalodon-tooth",

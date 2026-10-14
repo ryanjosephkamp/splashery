@@ -48,5 +48,30 @@
       "inheritedFrom": "tools/models.json and the toy's in-app credit",
       "transformation": "Exact record prefix plus the original per-cell mean colors, gzip compressed; made by Ryan with Codex (GPT-6)."
     }
+  },
+  {
+    "id": "pyrite-cubes",
+    "budget": 90000,
+    "capacity": 77400,
+    "originalCount": 256191,
+    "source": "assets/toys/pyrite-cubes/pyrite-cubes.splats",
+    "file": "assets/toys/pyrite-cubes/pyrite-cubes-opening.splats.gz",
+    "sourceSha256": "839b0763f08a5a2734cafe81480fbcd3755279a3f5c521cdc02a564b56908c07",
+    "rawSha256": "b6c8810552dca677caea93fd2f1b1ab7e1fe3b98a37fd544925a0d327ed2ea80",
+    "sha256": "bbe021d3148650ab2f271e225ee0247a5d94e3f64b58e3935d2ec775ae98495d",
+    "beforeBytes": 3586718,
+    "afterBytes": 1962488,
+    "rawBytes": 2941256,
+    "meanCell": 0.012,
+    "meanPrecision": "IEEE 754 Float64; no rounding to Float32",
+    "credit": {
+      "author": "Digital Atlas of Ancient Life (Paleontological Research Institution)",
+      "license": "CC0 1.0",
+      "url": "https://sketchfab.com/3d-models/pyrite-0b7c6e8e32144b72806ed31cb49b4145",
+      "checked": "October 14, 2026",
+      "nc": false,
+      "inheritedFrom": "tools/models.json and the toy's in-app credit",
+      "transformation": "Exact record prefix plus the original per-cell mean colors, gzip compressed; made by Ryan with Codex (GPT-6)."
+    }
   }
 ]

@@ -93,5 +93,17 @@
     },
     "verifiedLicense": "CC BY-NC 4.0",
     "authorVerified": true
+  },
+  {
+    "id": "pyrite-cubes",
+    "url": "https://sketchfab.com/3d-models/pyrite-0b7c6e8e32144b72806ed31cb49b4145",
+    "status": 503,
+    "checked": "October 14, 2026",
+    "verificationUrl": "https://api.sketchfab.com/v3/models/0b7c6e8e32144b72806ed31cb49b4145",
+    "verificationStatus": 200,
+    "licenseLabel": "CC0 Public Domain",
+    "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/",
+    "author": "Digital Atlas of Ancient Life",
+    "note": "The model page temporarily failed; its live model API confirms CC0 and the author."
   }
 ]

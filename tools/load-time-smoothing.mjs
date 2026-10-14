@@ -40,7 +40,7 @@ if (process.argv[1] && pathToFileURL(path.resolve(process.argv[1])).href === imp
   const models = JSON.parse(fs.readFileSync("tools/models.json")).models;
   const sha = (bytes) => crypto.createHash("sha256").update(bytes).digest("hex");
   const records = [];
-  for (const id of ["celestial-globe", "armillary-sphere", "stannern-meteorites"]) {
+  for (const id of ["celestial-globe", "armillary-sphere", "stannern-meteorites", "pyrite-cubes"]) {
     const model = models.find((m) => m.id === id);
     const source = `assets/toys/${id}/${id}.splats`;
     const file = `assets/toys/${id}/${id}-opening.splats.gz`;
@@ -69,7 +69,7 @@ if (process.argv[1] && pathToFileURL(path.resolve(process.argv[1])).href === imp
         author: model.author,
         license: model.license,
         url: model.page,
-        checked: "October 13, 2026",
+        checked: id === "pyrite-cubes" ? "October 14, 2026" : "October 13, 2026",
         nc: model.nc === true,
         inheritedFrom: "tools/models.json and the toy's in-app credit",
         transformation:
