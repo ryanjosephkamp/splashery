@@ -95,7 +95,7 @@ function easeTo(c, key, t, goal, rate) {
   return e.v;
 }
 
-// Fake light: brighter towards the light, with an optional wet gloss.
+// Fake light: brighter toward the light, with an optional wet gloss.
 function lit(c, col, k = 0.3, gloss = 0) {
   const d = dot(c.n, LIGHT);
   let out = shade(col, 1 + k * (0.9 * d - 0.15));
@@ -150,7 +150,7 @@ const rod = (k, a, b, r, opts) =>
 
 // ---- Pufferfish geometry (shared by build and drive) -------------------------------
 // The rest pose is the fish puffed up: a ball made of twelve overlapping
-// patches. Deflating pulls each patch in towards a slim fish shape.
+// patches. Deflating pulls each patch in toward a slim fish shape.
 const PUFF = (() => {
   const P = (1 + Math.sqrt(5)) / 2;
   const raw = [];
@@ -197,7 +197,7 @@ const NAUT = (() => {
   const b = Math.log(3) / TAU;
   const tMax = (5 * Math.PI) / 4 + 2 * TAU;
   const r = (t) => Math.exp(b * (t - tMax));
-  // Cross-section at angle t: centre radius, radial and lateral half-widths.
+  // Cross-section at angle t: center radius, radial and lateral half-widths.
   const sec = (t) => {
     const ro = r(t);
     const ri = 0.3 * ro;
@@ -405,7 +405,7 @@ export const RECIPES = {
     options: [
       {
         key: "kind",
-        label: "Colour",
+        label: "Color",
         type: "select",
         default: "moon",
         choices: [
@@ -524,7 +524,7 @@ export const RECIPES = {
           return lit(c, col, 0.25, 0.5);
         },
       });
-      // The underside of the bell, a little deeper in colour.
+      // The underside of the bell, a little deeper in color.
       k.add(
         k.lathe(
           bellProf.map(([r, y]) => [r * 0.9, y - 0.05]),
@@ -1167,7 +1167,7 @@ export const RECIPES = {
     action: { key: "hide", label: "Hide in the shell" },
     drive(t, c, out) {
       // Startled, the nautilus jets back a little and pulls its tentacles
-      // in behind its hood (each shortens towards its base). It waits, peeks
+      // in behind its hood (each shortens toward its base). It waits, peeks
       // out halfway, then slowly reaches out again.
       const on = c.hide > 0;
       const s = progress(c.hide) * 4.4;
@@ -1327,7 +1327,7 @@ export const RECIPES = {
             ),
           );
         }
-        // Each tentacle shortens towards its base on channel 0 (its rings
+        // Each tentacle shortens toward its base on channel 0 (its rings
         // bunch up), keeping its thickness.
         const curve = spline(pts);
         const rad = (t) => 0.02 * (1 - 0.55 * t);
@@ -1837,7 +1837,7 @@ export const RECIPES = {
     options: [
       {
         key: "color",
-        label: "Colour",
+        label: "Color",
         type: "select",
         default: "coral",
         choices: [
@@ -2034,7 +2034,7 @@ export const RECIPES = {
     options: [
       {
         key: "color",
-        label: "Colour",
+        label: "Color",
         type: "select",
         default: "orange",
         choices: [
@@ -2157,7 +2157,7 @@ export const RECIPES = {
     options: [
       {
         key: "color",
-        label: "Colour",
+        label: "Color",
         type: "select",
         default: "purple",
         choices: [
@@ -2272,7 +2272,7 @@ export const RECIPES = {
     options: [
       {
         key: "color",
-        label: "Colour",
+        label: "Color",
         type: "select",
         default: "green",
         choices: [

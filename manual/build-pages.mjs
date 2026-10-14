@@ -28,6 +28,7 @@ import * as prettier from "prettier";
 import { PAGES, label } from "./pages.mjs";
 import { toyHref, HOME_URL, PLAYGROUND_URL, PLAYGROUND_REL } from "./links.mjs";
 import { RULES } from "./railroad.js";
+import { MANUAL_PDF } from "./pdf-edition.js";
 
 const dir = new URL("./", import.meta.url);
 const read = (f) => fs.readFileSync(new URL(f, dir), "utf8");
@@ -45,19 +46,30 @@ const plain = (html) => html.replace(/<[^>]+>/g, "").replace(/&amp;/g, "&").repl
 
 const toyLinks = (html) =>
   html
+    .replace(/href="tinkerers-manual(?:-[a-f0-9]{16})?\.pdf"/g, `href="${MANUAL_PDF}"`)
     .replace(/<a\s+href="toy:([a-z0-9-]+)"\s*>/g, (all, id) => `<a href="${toyHref(id)}" target="_blank" rel="noopener">`) // prettier-ignore
     // The Playground, wherever a page links to it.
     .replace(/href="(?:\.\.\/|\.\.\/playground\/)"/g, `href="${PLAYGROUND_REL}"`)
     .replace(/href="https:\/\/ryanjosephkamp\.github\.io\/splashery\/(?:playground\/)?"/g, `href="${PLAYGROUND_URL}"`); // prettier-ignore
 
-// Every link in the manual opens in a new tab (the owner's requirement, Codex task 36): any `<a href>`
-// without a `target` gets `target="_blank"` and `noopener`. Applied to the hand-written chapters and
-// to the chrome this tool writes (the contents button, the pager, the cover's contents, all.html).
-// A link to a place on the same page (`href="#x"`) stays as it is: a new tab would only reload the
-// page, and the owner's other tests (tests/man3.spec.mjs) take those as exempt too.
+// The link rule (the owner's call of October 12, 2026, Manual r9): a link to another manual page or to
+// a place in a page (`#x`, `chapter.html`, `chapter.html#x`, the cover) opens in the same tab. Only a
+// link that leaves the manual (another site, the Playground, GitHub, a paper, the PDF) opens in a new
+// tab, with `target="_blank"` and `noopener`. Applied to the hand-written chapters and to the chrome
+// this tool writes (the contents button, the pager, the cover's contents, all.html). It works both
+// ways, so a link written with a `target` by hand follows the same rule.
+const staysInManual = (href) => /^(?:#[^"]*|[a-z0-9-]+\.html(?:#[^"]*)?)$/.test(href);
 const newTab = (html) =>
   html.replace(/<a\s[^>]*?href=[^>]*?>/g, (tag) => {
-    if (/\starget=/.test(tag) || /\shref="#/.test(tag)) return tag;
+    const href = (tag.match(/\shref="([^"]*)"/) || [])[1] || "";
+    if (staysInManual(href)) {
+      // Same tab: take out a target and the noopener that went with it.
+      return tag
+        .replace(/\starget="_blank"/, "")
+        .replace(/\srel="noopener"/, "")
+        .replace(/\srel="([^"]*)\s+noopener"/, ' rel="$1"');
+    }
+    if (/\starget=/.test(tag)) return tag;
     const rel = tag.match(/\srel="([^"]*)"/);
     const withRel = rel
       ? tag.replace(rel[0], ` rel="${rel[1]} noopener"`)

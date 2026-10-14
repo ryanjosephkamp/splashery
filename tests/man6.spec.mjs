@@ -3,6 +3,7 @@
 
 import { test, expect } from "@playwright/test";
 import fs from "node:fs";
+import { MANUAL_PDF } from "../manual/pdf-edition.js";
 import path from "node:path";
 import { execFileSync } from "node:child_process";
 import { covFacts } from "../manual/demo-math.js";
@@ -75,6 +76,16 @@ test.describe("R2-F02: the covariance demo's verdicts", () => {
     await page.screenshot({ path: path.join(SHOTS, "man6-covariance-390x844.png") });
     await set(0.2, 0.2, 0.2);
     await expect(v).toContainText("determinant is 0");
+    // Positive in exact arithmetic but below double precision's reach (the sliders cannot reach it):
+    // the helper calls it flat, with a determinant that is not 0, and the page says "near-singular".
+    const facts = await page.evaluate(async () => {
+      const { covFacts } = await import("/manual/demo-math.js");
+      return covFacts({ a: 1e-15, b: 0, c: 1 });
+    });
+    expect(facts.flat).toBe(true);
+    expect(facts.det).toBeGreaterThan(0);
+    const src = await page.evaluate(() => fetch("/manual/demos.js").then((r) => r.text()));
+    expect(src).toContain("numerically near-singular");
     await set(0.3, 0, 0.2);
     await expect(v).toContainText("Valid");
     await ctx.close();
@@ -305,7 +316,7 @@ test.describe("F22: the PDF's fonts are named, and a rebuild checks them", () =>
   test("the shipped PDF embeds exactly the families the builder lists", () => {
     const src = fs.readFileSync("tools/manual-pdf.mjs", "utf8");
     const listed = JSON.parse(/const PINNED_FONTS = (\[[^\]]*\])/.exec(src)[1]);
-    const pdf = fs.readFileSync("manual/tinkerers-manual.pdf").toString("latin1");
+    const pdf = fs.readFileSync(`manual/${MANUAL_PDF}`).toString("latin1");
     const got = [...new Set([...pdf.matchAll(/\/FontName\s*\/[A-Z]{6}\+([A-Za-z0-9]+)/g)].map((m) => m[1].replace(/(Regular|Bold|SemiBold|Italic|Oblique|Book)+$/, "")))].sort(); // prettier-ignore
     expect(got).toEqual(listed);
     expect(src).toContain("--allow-other-fonts");
@@ -315,9 +326,10 @@ test.describe("F22: the PDF's fonts are named, and a rebuild checks them", () =>
   test("its text holds every chapter, the new sentences, and the arrow", async ({ page }) => {
     await page.goto("/manual/");
     const res = await page.evaluate(async () => {
+      const { MANUAL_PDF } = await import("/manual/pdf-edition.js");
       const pdfjs = await import("/vendor/pdfjs/pdf.min.mjs");
       pdfjs.GlobalWorkerOptions.workerSrc = "/vendor/pdfjs/pdf.worker.min.mjs";
-      const data = new Uint8Array(await (await fetch("/manual/tinkerers-manual.pdf")).arrayBuffer()); // prettier-ignore
+      const data = new Uint8Array(await (await fetch(`/manual/${MANUAL_PDF}`)).arrayBuffer()); // prettier-ignore
       const doc = await pdfjs.getDocument({ data }).promise;
       let text = "";
       for (let i = 1; i <= doc.numPages; i++)

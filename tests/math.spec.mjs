@@ -1,5 +1,5 @@
 // Lane Math: unit checks for the equation reader (no browser), then the
-// new maths toys and the two fixes in the app.
+// new math toys and the two fixes in the app.
 
 import { test, expect } from "@playwright/test";
 import fs from "node:fs";

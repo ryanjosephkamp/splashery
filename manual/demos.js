@@ -85,7 +85,9 @@ function covDemo() {
       (!f.flat && f.l1 > 0 && f.l2 > 0
         ? `so the sizes are ${Math.sqrt(f.l1).toFixed(3)} and ${Math.sqrt(f.l2).toFixed(3)}; both must be above 0`
         : f.flat
-          ? "one of them is 0: that axis has no size at all"
+          ? f.det === 0
+            ? "one of them is 0: that axis has no size at all"
+            : "one of them is so close to 0 that this computer cannot tell it from 0: that axis is numerically flat"
           : f.l1 <= 0
             ? "both are negative: a squared size can't be below 0, so there is no real size"
             : "the second one is negative: a squared size can't be below 0, so there is no real size"); // prettier-ignore
@@ -96,7 +98,10 @@ function covDemo() {
         : "Valid: it falls off in every direction.";
       v.className = "verdict ok";
     } else if (f.flat) {
-      v.textContent = "Not valid: its determinant is 0, so it has no inverse (it is flat in one direction)."; // prettier-ignore
+      v.textContent =
+        f.det === 0
+          ? "Not valid: its determinant is 0, so it has no inverse (it is flat in one direction)."
+          : `Not valid here: its determinant (${f.det.toExponential(1)}) is so close to 0 that it is numerically near-singular. In exact arithmetic it would still be positive definite, but a computer cannot tell it from a flat matrix, so it has no usable inverse.`;
       v.className = "verdict bad";
     } else if (f.det < 0) {
       v.textContent = "Not valid: it has an inverse, but one eigenvalue is positive and one negative, so in some direction it grows instead of falling off (it isn't positive definite)."; // prettier-ignore

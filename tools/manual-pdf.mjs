@@ -7,7 +7,10 @@
 //   python3 -m http.server 4173 --bind 127.0.0.1 &
 //   SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium node tools/manual-pdf.mjs [out.pdf]
 //
-// Writes manual/tinkerers-manual.pdf by default. With --pages=out-%d.png it
+// By default, publishes an immutable PDF named by its content hash and a copy at the legacy
+// manual/tinkerers-manual.pdf address. Updates manual/pdf-edition.js and rebuilds the manual
+// and site pages so their download links follow the edition.
+// An explicit [out.pdf] only writes that file (for comparison builds). With --pages=out-%d.png it
 // also saves the first two pages as pictures (for review); --which=1,20,24
 // picks other pages (the file name's %d is the page number) and --scale=0.64
 // sets their size (1.5 by default).
@@ -18,15 +21,146 @@
 // page and lost the arrow in "p ↦ Ap + b"). Pass --allow-other-browser to print anyway. The only
 // bytes that vary from run to run are the creation and modification dates Chromium writes; they
 // are set to the manual's own "Updated" date, and the numbers it gives the structure elements are
-// renumbered in order. Links to files in the manual (the example recipe, the
+// renumbered in order. The links and the bookmarks are made robust after printing (Manual r9, the
+// owner's report that the contents were not clickable): every link to a place in the manual gets an
+// explicit destination (a page and a position) in place of Chromium's old-style named destination,
+// the named destinations are also written as a name tree, and the bookmarks are rebuilt as a flat
+// list (cover, then one entry per chapter, closed, with its sections under it) with clean titles
+// (Chromium prints some headings' text twice). Links to files in the manual (the example recipe, the
 // PDF) are made absolute, so a PDF read away from a local server still reaches the public copies.
 
 import { chromium } from "@playwright/test";
 import fs from "node:fs";
+import { execFileSync } from "node:child_process";
+import { contentsPages, checkNavigation, editionName } from "./manual-pdf-check.mjs";
+import {
+  PDFDocument,
+  PDFName,
+  PDFArray,
+  PDFDict,
+  PDFRef,
+  PDFNumber,
+  PDFString,
+  PDFHexString,
+} from "../vendor/pdf-lib/pdf-lib.esm.min.js";
+
+// Keep standard PDF links and bookmarks. Viewer support varies; printed page numbers also work
+// when a viewer does not follow an internal link. Chromium writes a link as `/Dest /name`
+// (a name object looked up in the catalog's /Dests dictionary, the PDF 1.1 way), which some viewers
+// (phones, Brave's, Chrome's on some builds) do not follow. Each such link gets the destination
+// itself, `[page /XYZ x y 0]`; /Dests stays, and a name tree (/Names /Dests, with the same
+// destinations) is added for viewers that look for that. Bookmarks: Chromium builds one root entry
+// holding everything and prints some headings' text twice ("GlossaryGlossary"). The root becomes
+// the first entry ("Cover and contents"), the chapters follow it at the top level (closed), and
+// each title is made from the heading as written. The same input gives the same bytes.
+async function fixLinksAndBookmarks(bytes, headings) {
+  const doc = await PDFDocument.load(bytes, { updateMetadata: false });
+  const ctx = doc.context;
+  const catalog = doc.catalog;
+  const N = (n) => PDFName.of(n);
+  const dests = catalog.lookup(N("Dests"), PDFDict);
+  const destOf = new Map();
+  for (const [key, value] of dests.entries()) {
+    const arr = value instanceof PDFRef ? ctx.lookup(value) : value;
+    if (arr instanceof PDFArray) destOf.set(key.decodeText(), arr);
+    else if (arr instanceof PDFDict && arr.get(N("D")) instanceof PDFArray) destOf.set(key.decodeText(), arr.get(N("D"))); // prettier-ignore
+  }
+  let links = 0;
+  let broken = 0;
+  for (const page of doc.getPages()) {
+    const annots = page.node.lookupMaybe(N("Annots"), PDFArray);
+    if (!annots) continue;
+    for (let i = 0; i < annots.size(); i++) {
+      const a = annots.lookup(i, PDFDict);
+      const d = a.get(N("Dest"));
+      if (!(d instanceof PDFName || d instanceof PDFString || d instanceof PDFHexString)) continue;
+      const name = d instanceof PDFName ? d.decodeText() : d.decodeText();
+      const target = destOf.get(name);
+      if (!target) {
+        broken++;
+        continue;
+      }
+      a.set(N("Dest"), ctx.obj([...target.asArray()]));
+      links++;
+    }
+  }
+  if (broken) throw new Error(`${broken} links in the PDF point at a place that is not there.`);
+  // The name tree, sorted as the format asks.
+  const names = [...destOf.keys()].sort();
+  const flat = [];
+  for (const k of names) flat.push(PDFString.of(k), ctx.obj([...destOf.get(k).asArray()]));
+  const tree = ctx.obj({ Names: flat });
+  const existing = catalog.lookupMaybe(N("Names"), PDFDict);
+  if (existing) existing.set(N("Dests"), ctx.register(tree));
+  else catalog.set(N("Names"), ctx.obj({ Dests: ctx.register(tree) }));
+  catalog.set(N("PageMode"), N("UseOutlines"));
+  // The bookmarks.
+  const outlinesRef = catalog.get(N("Outlines"));
+  const outlines = catalog.lookup(N("Outlines"), PDFDict);
+  const root = outlines.lookup(N("First"), PDFDict);
+  const rootRef = outlines.get(N("First"));
+  let marks = 0;
+  if (root.get(N("First"))) {
+    // The headings' keys: all spaces out, lower case.
+    const key = (t) => t.replace(/\s+/g, "").toLowerCase();
+    const clean = new Map(headings.map((h) => [key(h), h]));
+    const undouble = (t) => {
+      for (let n = Math.floor(t.length / 2); n >= 3; n--)
+        if (t.slice(0, n) === t.slice(n, 2 * n)) return t.slice(0, n) + t.slice(2 * n);
+      return t;
+    };
+    const retitle = (item) => {
+      const raw = item.lookup(N("Title")).decodeText();
+      const text = clean.get(key(raw)) ?? clean.get(key(undouble(raw))) ?? undouble(raw).replace(/^CHAPTER (\d+)/, "Chapter $1: "); // prettier-ignore
+      item.set(N("Title"), PDFHexString.fromText(text));
+    };
+    const first = root.get(N("First"));
+    const last = root.get(N("Last"));
+    let ref = first;
+    let top = 0;
+    while (ref) {
+      const item = ctx.lookup(ref, PDFDict);
+      item.set(N("Parent"), outlinesRef);
+      retitle(item);
+      // Sections stay under their chapter, closed, with clean titles too.
+      const sub = (r) => {
+        for (let c = r; c; ) {
+          const it = ctx.lookup(c, PDFDict);
+          retitle(it);
+          marks++;
+          if (it.get(N("First"))) sub(it.get(N("First")));
+          c = it.get(N("Next"));
+        }
+      };
+      if (item.get(N("First"))) {
+        sub(item.get(N("First")));
+        const n = item.lookup(N("Count"), PDFNumber).asNumber();
+        item.set(N("Count"), PDFNumber.of(-Math.abs(n)));
+      }
+      marks++;
+      top++;
+      ref = item.get(N("Next"));
+    }
+    // The old root is the first entry, with nothing under it; the chapters come after it.
+    root.set(N("Title"), PDFHexString.fromText("Cover and contents"));
+    root.delete(N("First"));
+    root.delete(N("Last"));
+    root.delete(N("Count"));
+    root.set(N("Parent"), outlinesRef);
+    root.set(N("Next"), first);
+    ctx.lookup(first, PDFDict).set(N("Prev"), rootRef);
+    root.delete(N("Prev"));
+    outlines.set(N("Last"), last);
+    outlines.set(N("Count"), PDFNumber.of(top + 1));
+  }
+  console.log(`${links} links to places in the manual now carry their own destination; ${marks} bookmarks retitled`); // prettier-ignore
+  return Buffer.from(await doc.save({ useObjectStreams: false }));
+}
 
 const base = process.env.SPLASHERY_URL || "http://127.0.0.1:4173/";
 const args = process.argv.slice(2);
 const out = args.find((a) => !a.startsWith("--")) || "manual/tinkerers-manual.pdf";
+const publish = !args.some((a) => !a.startsWith("--"));
 const pagesArg = args.find((a) => a.startsWith("--pages="))?.slice(8);
 const scale = Number(args.find((a) => a.startsWith("--scale="))?.slice(8)) || 1.5;
 const which = (args.find((a) => a.startsWith("--which="))?.slice(8) || "1,2").split(",").map(Number); // prettier-ignore
@@ -38,6 +172,7 @@ const PUBLIC = "https://ryanjosephkamp.github.io/splashery/";
 
 const browser = await chromium.launch({
   executablePath: process.env.SPLASHERY_CHROMIUM || undefined,
+  chromiumSandbox: true,
 });
 const major = Number(browser.version().split(".")[0]);
 console.log(`Chromium ${browser.version()}`);
@@ -115,18 +250,66 @@ await page.evaluate(
 );
 // The PDF prints every fold open (the web version starts them closed).
 await page.evaluate(() => document.querySelectorAll("details").forEach((d) => (d.open = true)));
+// The headings as written, for the bookmarks' titles (see fixLinksAndBookmarks below).
+const headings = await page.evaluate(() =>
+  [...document.querySelectorAll("h1, h2, h3, h4, h5")].map((h) => {
+    const lv = h.querySelector(".level");
+    const text = (el) => el.textContent.replace(/\s+/g, " ").trim();
+    return lv ? `${text(lv)}: ${text(h).slice(text(lv).length).trim()}` : text(h);
+  }),
+);
 const footer = `<div style="width:100%;font:9px sans-serif;color:#666;padding:0 0.75in;display:flex;justify-content:space-between"><span>The Tinkerer's Manual</span><span><span class="pageNumber"></span> of <span class="totalPages"></span></span></div>`; // prettier-ignore
 const updated = await page.evaluate(() => /Updated ([A-Z][a-z]+) (\d+), (\d{4})/.exec(document.body.textContent)); // prettier-ignore
-let pdf = await page.pdf({
-  format: "Letter",
-  printBackground: true,
-  preferCSSPageSize: true,
-  displayHeaderFooter: true,
-  headerTemplate: "<span></span>",
-  footerTemplate: footer,
-  outline: true,
-  tagged: true,
+// Reserve a fixed gutter before the first print, so adding or changing digits cannot reflow a
+// contents entry. The web pages and their wording stay as written. Number every contents entry,
+// including sections, from the PDF's real destinations. Reprint until the numbers agree.
+const entries = await page.evaluate(() =>
+  [...document.querySelectorAll('.toc a[href^="#"]')].map((a) => {
+    a.parentElement.classList.add("pdf-toc-entry");
+    const span = document.createElement("span");
+    span.className = "pdf-page-number";
+    span.dataset.pdfTarget = a.getAttribute("href").slice(1);
+    span.textContent = "p. 000";
+    a.after(span);
+    return { id: span.dataset.pdfTarget, title: a.textContent.replace(/\s+/g, " ").trim() };
+  }),
+);
+await page.addStyleTag({
+  content: `.toc li.pdf-toc-entry { position:relative; padding-right:4em; }
+.pdf-page-number { position:absolute; right:0; top:0; white-space:nowrap; font-family:sans-serif; }`,
 });
+const print = () =>
+  page.pdf({
+    format: "Letter",
+    printBackground: true,
+    preferCSSPageSize: true,
+    displayHeaderFooter: true,
+    headerTemplate: "<span></span>",
+    footerTemplate: footer,
+    outline: true,
+    tagged: true,
+  });
+let pdf;
+let numbers = {};
+let stable = false;
+for (let pass = 0; pass < 4; pass++) {
+  pdf = await print();
+  const actual = await contentsPages(pdf, entries);
+  if (JSON.stringify(actual) === JSON.stringify(numbers)) {
+    stable = true;
+    break;
+  }
+  numbers = actual;
+  await page.evaluate(
+    (numbers) =>
+      document.querySelectorAll("[data-pdf-target]").forEach((el) => {
+        el.textContent = `p. ${numbers[el.dataset.pdfTarget]}`;
+      }),
+    numbers,
+  );
+}
+if (!stable) throw new Error("Printed contents page numbers did not settle after four passes.");
+pdf = await fixLinksAndBookmarks(pdf, headings);
 // The fonts the PDF embeds are whatever the machine has for the manual's font stacks (ui-sans-serif,
 // the browser's serif, monospace, and an emoji font), so the same Chromium on a machine with other
 // fonts prints different lines and glyphs. The family names the shipped PDF uses are listed here; a
@@ -166,8 +349,30 @@ if (updated) {
     "latin1",
   );
 }
+const navigation = await checkNavigation(pdf, entries);
+console.log(
+  `${navigation.pages} pages; checked ${navigation.internalLinks} internal links, ${navigation.bookmarks.length} bookmarks, and ${navigation.contents.length} printed contents numbers.`,
+);
+if (problems.length) throw new Error(problems.join("\n"));
+if (publish) {
+  const name = editionName(pdf);
+  const edition = `manual/${name}`;
+  if (fs.existsSync(edition) && !pdf.equals(fs.readFileSync(edition)))
+    throw new Error(`Refusing to overwrite the immutable edition ${edition}.`);
+  fs.writeFileSync(edition, pdf);
+  fs.writeFileSync(
+    "manual/pdf-edition.js",
+    `// Written by tools/manual-pdf.mjs after the PDF passes its navigation checks.\nexport const MANUAL_PDF = "${name}";\n`,
+  );
+  console.log(`Published ${edition}. Keep earlier edition PDFs for old links.`);
+}
+// The legacy copy exists only for old links; every published edition refreshes it.
 fs.writeFileSync(out, pdf);
 console.log(`${out}: ${(pdf.length / 1024).toFixed(0)} KB`);
+if (publish) {
+  for (const script of ["manual/build-pages.mjs", "tools/site-build.mjs"])
+    execFileSync(process.execPath, [script], { stdio: "inherit" });
+}
 
 // The first two pages as pictures: render the PDF with the site's own
 // PDF.js, in the same browser.

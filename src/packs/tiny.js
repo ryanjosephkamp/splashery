@@ -57,7 +57,7 @@ function fired(m, key, v) {
 }
 
 // Fake lighting (splats are unlit): a soft key light from the upper left
-// front and a highlight towards the default camera.
+// front and a highlight toward the default camera.
 const LIGHT = unit([-0.45, 0.8, 0.45]);
 const VIEW = unit([0.5, 0.3, 0.82]);
 const HALF = unit(add(LIGHT, VIEW));
@@ -696,12 +696,12 @@ export const RECIPES = {
           color: "#c98f2a",
         });
       }
-      // Six bent tail fibres, like the legs of a lander.
+      // Six bent tail fibers, like the legs of a lander.
       for (let i = 0; i < 6; i++) {
         const a = (i / 6) * TAU + TAU / 12;
         const dir = [Math.cos(a), 0, Math.sin(a)];
         const at = (r, y) => [dir[0] * r, y, dir[2] * r];
-        // Each fibre swings up and out about its root when the phage fires.
+        // Each fiber swings up and out about its root when the phage fires.
         const leg = k.part(`leg${i}`, {
           pivot: at(hexR - 0.02, py),
           axis: [-Math.sin(a), 0, Math.cos(a)],
@@ -759,7 +759,7 @@ export const RECIPES = {
   // ---- Bacterium ----------------------------------------------------------------------
   bacterium: {
     alive: true,
-    options: [{ key: "color", label: "Colour", type: "color", default: "#62b845" }],
+    options: [{ key: "color", label: "Color", type: "color", default: "#62b845" }],
     controls: [
       { key: "swim", label: "Swim", type: "slider", default: 0.5 },
       { key: "divide", label: "Divide", type: "pulse", ease: 5 },
@@ -912,7 +912,7 @@ export const RECIPES = {
   // ---- Red blood cell ----------------------------------------------------------------
   "red-blood-cell": {
     alive: true,
-    options: [{ key: "color", label: "Colour", type: "color", default: "#d8323f" }],
+    options: [{ key: "color", label: "Color", type: "color", default: "#d8323f" }],
     controls: [{ key: "sickle", label: "Sickle", type: "pulse", ease: 4 }],
     action: { key: "sickle", label: "Sickle and relax" },
     // Hands-on (lane Hands-on H4): pinch and bend the soft disc; let go and
@@ -1688,7 +1688,7 @@ export const RECIPES = {
   // ---- White blood cell --------------------------------------------------------------
   "white-blood-cell": {
     alive: true,
-    options: [{ key: "color", label: "Colour", type: "color", default: "#cdb4f0" }],
+    options: [{ key: "color", label: "Color", type: "color", default: "#cdb4f0" }],
     controls: [{ key: "eat", label: "Engulf", type: "pulse", ease: 5.6 }],
     action: { key: "eat", label: "Catch a bacterium" },
     // Hands-on (lane Hands-on H4): a bacterium waits beside the cell. Drag it
@@ -1735,7 +1735,7 @@ export const RECIPES = {
         visible: on && digest < 0.98 ? 1 : 0,
       };
       out.glow = [1, 0.5, 0.8, 2.2];
-      // The cell leans towards its catch, and breathes gently at rest.
+      // The cell leans toward its catch, and breathes gently at rest.
       out.body = {
         quat: quatAxisAngle([0.2, 1, 0.1], 0.3 * Math.sin(t * 0.3) * (1 - 0.8 * c.eat)),
         offset: mul(E, 0.05 * cup),
@@ -1983,7 +1983,7 @@ export const RECIPES = {
       const across = unit(add(tip, mul(cross(VIEW, tip), -0.5)));
       const ribs = 24;
       // The glass pattern on a valve face: radial ribs, rings of pores and a
-      // clear centre. Returns null for a pore (a hole in the glass).
+      // clear center. Returns null for a pore (a hole in the glass).
       const valve = (r, a, top) => {
         const f = ((a / TAU) * ribs + 10) % 1;
         const ringW = 0.085;
@@ -2065,7 +2065,7 @@ export const RECIPES = {
   // ---- Tardigrade ---------------------------------------------------------------------
   tardigrade: {
     alive: true,
-    options: [{ key: "color", label: "Colour", type: "color", default: "#e7c39b" }],
+    options: [{ key: "color", label: "Color", type: "color", default: "#e7c39b" }],
     controls: [{ key: "wiggle", label: "Wiggle", type: "pulse", ease: 2.5 }],
     action: { key: "wiggle", label: "Wiggle" },
     drive(t, c, out) {
@@ -2199,7 +2199,7 @@ export const RECIPES = {
           { id: "lily", label: "Lily" },
         ],
       },
-      { key: "color", label: "Colour", type: "color", default: "#f5c131" },
+      { key: "color", label: "Color", type: "color", default: "#f5c131" },
     ],
     controls: [{ key: "burst", label: "Burst", type: "pulse", ease: 3.8 }],
     action: { key: "burst", label: "Burst" },
@@ -2359,7 +2359,7 @@ export const RECIPES = {
     controls: [{ key: "regrow", label: "Regrow", type: "pulse", ease: 3.6 }],
     action: { key: "regrow", label: "Grow a new flake" },
     // A tap melts the arms back from their tips to the middle, then a new
-    // flake grows out from the centre, branch by branch: three patterns
+    // flake grows out from the center, branch by branch: three patterns
     // (parts), one after another, each tap.
     drive(t, c, out) {
       const p = progress(c.regrow);
@@ -2386,17 +2386,17 @@ export const RECIPES = {
   // ---- Chromosome ---------------------------------------------------------------------
   chromosome: {
     alive: true,
-    options: [{ key: "color", label: "Colour", type: "color", default: "#8f6fe0" }],
+    options: [{ key: "color", label: "Color", type: "color", default: "#8f6fe0" }],
     controls: [{ key: "split", label: "Split", type: "pulse", ease: 4.6 }],
     action: { key: "split", label: "Pull apart" },
     // Hands-on (lane Hands-on H4): pull the two sister chromatids apart at
     // the waist (their centromere leads, the arms trail); let go and they
     // spring back together.
     hands: { watch: true, joints: (d) => chromosomeJoints(d) },
-    // A tap plays anaphase: spindle fibres reach in from two poles to the
+    // A tap plays anaphase: spindle fibers reach in from two poles to the
     // kinetochores and pull the sister chromatids apart (channel 0), each
     // led by its centromere with its arms trailing; then they come back
-    // together and the fibres let go.
+    // together and the fibers let go.
     drive(t, c, out, info) {
       const p = progress(c.split);
       const s = p * 4.6;
@@ -2478,7 +2478,7 @@ export const RECIPES = {
         to: (c) => pull(c.p, c.p[0] >= 0 ? 1 : -1, 0.38),
         color: (c) => litGloss("#ff6b8b", c.n, 0.4),
       });
-      // The spindle: a bright centrosome at each pole and fibres from it to
+      // The spindle: a bright centrosome at each pole and fibers from it to
       // the kinetochores, which shorten as they pull (hidden at rest).
       const spindle = k.part("spindle");
       for (const side of [-1, 1]) {
@@ -2511,7 +2511,7 @@ export const RECIPES = {
   mitochondrion: {
     alive: true,
     options: [
-      { key: "color", label: "Colour", type: "color", default: "#f08a4b" },
+      { key: "color", label: "Color", type: "color", default: "#f08a4b" },
       { key: "cutaway", label: "Cutaway", type: "switch", default: true },
     ],
     controls: [{ key: "power", label: "Power up", type: "pulse", ease: 4 }],
@@ -2542,7 +2542,7 @@ export const RECIPES = {
       k.fitMorphs = false; // the sparks fly out past the frame
       const half = 0.75;
       const R = 0.45;
-      // Lying across the view with the open side turned up towards the viewer.
+      // Lying across the view with the open side turned up toward the viewer.
       const q = frameQuat([0.92, 0.12, -0.38], [0.2, 0.85, 0.5]);
       const qi = [-q[0], -q[1], -q[2], q[3]];
       // Local frame: X along the length, Y up. The cut takes off the top.
@@ -2631,7 +2631,7 @@ export const RECIPES = {
         const a = k.rand() * TAU;
         const r = (R - 0.15) * Math.sqrt(k.rand());
         const lp = [Math.min(r * Math.cos(a), cutY - 0.02), x, r * Math.sin(a)];
-        // Out mostly through the cut (local +x, towards the viewer).
+        // Out mostly through the cut (local +x, toward the viewer).
         const d = unit([0.9 + 0.6 * k.rand(), (k.rand() * 2 - 1) * 0.9, (k.rand() * 2 - 1) * 1.1]);
         const go = add(lp, mul(d, 0.5 + 0.7 * k.rand()));
         sparks.push({ p: W(lp), to: W(go), channel: 1 + (i % 3), hot: k.rand() < 0.6 });
@@ -2654,7 +2654,7 @@ export const RECIPES = {
   // ---- Paramecium ---------------------------------------------------------------------
   paramecium: {
     alive: true,
-    options: [{ key: "color", label: "Colour", type: "color", default: "#7fcb98" }],
+    options: [{ key: "color", label: "Color", type: "color", default: "#7fcb98" }],
     controls: [
       { key: "swim", label: "Swim", type: "slider", default: 0.5 },
       { key: "loop", label: "Loop", type: "pulse", ease: 4.2 },
@@ -2711,7 +2711,7 @@ export const RECIPES = {
           const stripe = Math.abs(Math.sin(Math.atan2(d[2], d[1]) * 16 + d[0] * 5)) > 0.8;
           let col2 = stripe ? shade(col, 0.85) : col;
           col2 = mix(col2, shade(col, 0.55), groove);
-          // Darker towards the outline, like a cell under the microscope.
+          // Darker toward the outline, like a cell under the microscope.
           const face = Math.abs(dot(c.ln, viewL));
           return litGloss(shade(col2, 0.62 + 0.45 * face), c.n, 0.3);
         },
@@ -2810,7 +2810,7 @@ export const RECIPES = {
   // ---- Amoeba -------------------------------------------------------------------------
   amoeba: {
     alive: true,
-    options: [{ key: "color", label: "Colour", type: "color", default: "#9fb6ea" }],
+    options: [{ key: "color", label: "Color", type: "color", default: "#9fb6ea" }],
     controls: [{ key: "crawl", label: "Crawl", type: "pulse", ease: 5.2 }],
     action: { key: "crawl", label: "Crawl" },
     // Hands-on (lane Physics): pull a pseudopod out; let go and it oozes back.
@@ -3088,7 +3088,7 @@ const BAC = (() => {
     tilt,
     untilt: [-tilt[0], -tilt[1], -tilt[2], tilt[3]],
     axis: quatRotate(tilt, [1, 0, 0]),
-    D: hd + Rd + 0.025, // a daughter's centre from the middle
+    D: hd + Rd + 0.025, // a daughter's center from the middle
     apart: 0.13, // how far each daughter slides out
   };
 })();
@@ -3137,9 +3137,9 @@ function inside(P) {
 // ---- Animal cell division -----------------------------------------------------------
 
 // The cell (radius about 1) divides along AXIS, across the view. Each half
-// becomes a daughter cell of radius Rd centred D from the middle; the
-// nucleus (centre nc, radius NR) splits into two of radius NRd at the
-// daughters' centres.
+// becomes a daughter cell of radius Rd centered D from the middle; the
+// nucleus (center nc, radius NR) splits into two of radius NRd at the
+// daughters' centers.
 const CELL = (() => {
   const Rd = 0.62;
   return {
@@ -3154,7 +3154,7 @@ const CELL = (() => {
 
 // A point of a sphere about `center` whose halves (across the division
 // axis) each become a whole sphere of `r0` times the point's distance,
-// centred `to` from the middle: the angle from the axis doubles, so the
+// centered `to` from the middle: the angle from the axis doubles, so the
 // rim between the halves closes into each new sphere's inner end.
 function halveSphere(P, center, scale, to) {
   const A = CELL.axis;
@@ -3200,7 +3200,7 @@ function cellInside(P) {
   return add(mul(A, sgn * CELL.D), off);
 }
 
-// The nucleus splits into two smaller ones at the daughters' centres.
+// The nucleus splits into two smaller ones at the daughters' centers.
 function nucleusSplit(P) {
   return halveSphere(P, CELL.nc, CELL.NRd / CELL.NR, CELL.D);
 }
@@ -3243,7 +3243,7 @@ function wbcCup(P) {
   const g = Math.acos(clamp(dot(d, E), -1, 1));
   const rim = Math.exp(-(((g - 0.6) / 0.3) ** 2));
   const dip = Math.exp(-((g / 0.32) ** 2));
-  const toAxis = sub(mul(E, dot(d, E)), d); // towards the cup's middle
+  const toAxis = sub(mul(E, dot(d, E)), d); // toward the cup's middle
   return add(P, add(mul(E, 0.44 * rim - 0.14 * dip), mul(toAxis, 0.38 * rim)));
 }
 
@@ -3264,11 +3264,11 @@ const VIRUS = (() => {
   };
 })();
 
-// The diatom's shell faces up and a little towards the view.
+// The diatom's shell faces up and a little toward the view.
 const DIATOM_AXIS = unit([0.15, 0.85, 0.5]);
 
 // The paramecium's loop: F is its front as seen on screen, N the side it
-// turns towards (turning about VIEW by a positive angle).
+// turns toward (turning about VIEW by a positive angle).
 const PARAMECIUM = (() => {
   const front = quatRotate(quatEuler(0, 31, 24), [1, 0, 0]);
   const F = unit(sub(front, mul(VIEW, dot(front, VIEW))));
@@ -3278,7 +3278,7 @@ const PARAMECIUM = (() => {
 // ---- Snowflake ----------------------------------------------------------------------
 
 // One six-armed flake of a style and variant, as a part. Each splat grows
-// in (kind "grow") by its distance from the centre, so the arms grow out
+// in (kind "grow") by its distance from the center, so the arms grow out
 // from the middle and melt back from their tips.
 function snowflake(k, style, variant, part) {
   const grow = {

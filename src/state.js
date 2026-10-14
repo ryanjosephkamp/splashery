@@ -103,7 +103,7 @@ export function normalizeEffects(fx) {
     if (def.axis) o.axis = AXES.includes(e.axis) ? e.axis : def.axis;
     if (def.id === "paint") o.color = normalizeHex(e.color, "#e63b2e");
   }
-  // Drop and dissolve both move splats towards a target: never both.
+  // Drop and dissolve both move splats toward a target: never both.
   if (out.drop.on && out.dissolve.on) out.dissolve.on = false;
   return out;
 }
@@ -170,7 +170,7 @@ const WORD_RE = /^[a-z0-9-]{1,24}$/;
 export const TEXT_MAX = 24000;
 
 // Recipe options for a kit toy: a few short values (numbers, switches,
-// colours, words). The recipe itself checks their meaning when it builds.
+// colors, words). The recipe itself checks their meaning when it builds.
 export function normalizeOptions(o) {
   if (!o || typeof o !== "object" || Array.isArray(o)) return {};
   const out = {};

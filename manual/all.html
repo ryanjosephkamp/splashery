@@ -40,16 +40,21 @@
           splats do what they say. It goes chapter by chapter. You can stop after any chapter and
           still have something to play with.
         </p>
-        <p>
-          Splashery is primarily splat based, but not only. Two honest exceptions. The photo toys
-          (Photo to 3D and Moving photo to 3D) open in a <b>Sharp view</b>, a second way to see the
-          same photo: the picture at its full resolution on a textured relief (a mesh of triangles)
-          lifted by the same depth, so small text stays readable. That view is not drawn with
-          splats; the splats are switched off while it shows. The Splats / Sharp switch in the toy's
-          panel brings the splats back. And the liquids and flames are part splats and part
-          something else: see "What else Splashery does now" for how each fluid is drawn. (The
-          Studio toys are behind the labs switch; see the same chapter.)
-        </p>
+        <p>Splashery is primarily splat based, but not entirely. Two honest exceptions:</p>
+        <ul>
+          <li>
+            The photo toys (Photo to 3D and Moving photo to 3D) open in a <b>Sharp view</b>, a
+            second way to see the same photo: the picture at its full resolution on a textured
+            relief (a mesh of triangles) lifted by the same depth, so small text stays readable.
+            That view is not drawn with splats; the splats are switched off while it shows. The
+            Splats / Sharp switch in the toy's panel brings the splats back.
+          </li>
+          <li>
+            The liquids and flames are part splats and part something else: see "What else Splashery
+            does now" for how each fluid is drawn. (The Studio toys are behind the labs switch; see
+            the same chapter.)
+          </li>
+        </ul>
         <!-- TOC:START (written by manual/build-pages.mjs; do not edit by hand) -->
         <nav class="toc" aria-label="Contents">
           <strong>Contents</strong>
@@ -295,11 +300,9 @@
           <span class="muted">Definitions, derivations, notes, and long tables start folded.</span>
         </p>
         <p class="no-print">
-          <a href="tinkerers-manual.pdf" target="_blank" rel="noopener"
+          <a href="tinkerers-manual-85d32b96193ea275.pdf" target="_blank" rel="noopener"
             >Download this manual as a PDF</a
           >
-          ·
-          <a href="all.html" rel="noopener" target="_blank">Read it all on one page</a>
           ·
           <a href="../" target="_blank" rel="noopener">Back to the Splashery Playground</a>
         </p>
@@ -355,7 +358,7 @@
             below divide by zero.
           </p>
         </details>
-        <p><b>Three ways splats come to exist</b> (Figure 1). Do not mix them up:</p>
+        <p><b>Three ways splats come to exist</b> (Figure 1):</p>
         <ul>
           <li>
             <b>A recipe's placed splats.</b> A toy's recipe places them by rule: points sampled on
@@ -757,7 +760,7 @@
           <b>What it did not test.</b> One pair of budgets (140,000 and 200,000), one phone size,
           one renderer (software, not a real phone's graphics chip), and the toys as they were on
           that day, before later changes. The Kit lab's larger sweep is in Chapter 2, under
-          <a href="#splat-count" rel="noopener" target="_blank">How many splats?</a>.
+          <a href="#splat-count">How many splats?</a>.
         </p>
         <p>
           <b>If it were chosen differently.</b> A bigger budget costs memory and drawing time on a
@@ -888,11 +891,7 @@
       </figure>
       <p>
         In three dimensions, the width becomes a 3-by-3 matrix <var>Σ</var> (capital sigma), called
-        the <b><span class="term" data-g="g-covariance">covariance</span></b> [<a
-          href="#ref-4"
-          rel="noopener"
-          target="_blank"
-          >4</a
+        the <b><span class="term" data-g="g-covariance">covariance</span></b> [<a href="#ref-4">4</a
         >], and the squared distance becomes a quadratic form. For a point <var>p</var> in space,
         the splat's strength there is
       </p>
@@ -993,18 +992,19 @@
       <details class="fold tip" id="quadratic-form">
         <summary>Two words in that formula: the inverse and the quadratic form</summary>
         <p>
-          The inverse <var>Σ</var><sup>−1</sup> is the matrix that undoes <var>Σ</var>. And a
-          <b>quadratic form</b> is an expression where every term has two factors of the input, like
-          <var>a</var><var>d</var><sub>1</sub>² + 2<var>b</var><var>d</var><sub>1</sub><var>d</var
-          ><sub>2</sub> + <var>c</var><var>d</var><sub>2</sub>². In two dimensions, with
-          <var>d</var> = (<var>d</var><sub>1</sub>, <var>d</var><sub>2</sub>) = <var>p</var> −
-          <var>μ</var>, and <var>Σ</var><sup>−1</sup> with 4 and 1 on its diagonal (and zeros
-          elsewhere), the form <var>d</var><sup>T</sup> <var>Σ</var><sup>−1</sup> <var>d</var> is
-          4<var>d</var><sub>1</sub>² + <var>d</var><sub>2</sub>². Setting it equal to 1 draws an
-          ellipse that reaches ½ along the first axis and 1 along the second. A quadratic form is
-          what turns a point's offset from the center into one number for how far out it is,
-          measured in the splat's own widths. In three dimensions, the same idea draws an ellipsoid
-          [<a href="#ref-5" rel="noopener" target="_blank">5</a>].
+          The <span class="term" data-g="g-inverse">inverse</span> <var>Σ</var><sup>−1</sup> is the
+          matrix that undoes <var>Σ</var>. And a <b>quadratic form</b> is an expression where every
+          term has two factors of the input, like <var>a</var><var>d</var><sub>1</sub>² + 2<var
+            >b</var
+          ><var>d</var><sub>1</sub><var>d</var><sub>2</sub> + <var>c</var><var>d</var><sub>2</sub>².
+          In two dimensions, with <var>d</var> = (<var>d</var><sub>1</sub>, <var>d</var
+          ><sub>2</sub>) = <var>p</var> − <var>μ</var>, and <var>Σ</var><sup>−1</sup> with 4 and 1
+          on its diagonal (and zeros elsewhere), the form <var>d</var><sup>T</sup> <var>Σ</var
+          ><sup>−1</sup> <var>d</var> is 4<var>d</var><sub>1</sub>² + <var>d</var><sub>2</sub>².
+          Setting it equal to 1 draws an ellipse that reaches ½ along the first axis and 1 along the
+          second. A quadratic form is what turns a point's offset from the center into one number
+          for how far out it is, measured in the splat's own widths. In three dimensions, the same
+          idea draws an ellipsoid [<a href="#ref-5">5</a>].
         </p>
       </details>
       <div class="approx">
@@ -1022,8 +1022,9 @@
       </h3>
       <p>
         Not every 3-by-3 matrix is a valid covariance. It has to be symmetric, and it has to be
-        positive definite (the bell must fall off in every direction). Instead of picking its nine
-        numbers directly, a splat builds it from its three sizes and its rotation:
+        <span class="term" data-g="g-posdef">positive definite</span> (the bell must fall off in
+        every direction). Instead of picking its nine numbers directly, a splat builds it from its
+        three sizes and its rotation:
       </p>
       <p class="math">
         <var>Σ</var> = <var>R</var> <var>S</var> <var>S</var><sup>T</sup> <var>R</var><sup>T</sup>,
@@ -1216,8 +1217,8 @@
         its best straight-line stand-in there is a matrix <var>J</var> (the
         <span class="term" data-g="g-jacobian">Jacobian</span> of the projection). Such a stand-in
         is called <b><span class="term" data-g="g-affine">affine</span></b
-        >: a straight-line map plus a shift [<a href="#ref-6" rel="noopener" target="_blank">6</a>].
-        Then the splat's covariance on the screen is
+        >: a straight-line map plus a shift [<a href="#ref-6">6</a>]. Then the splat's covariance on
+        the screen is
       </p>
       <p class="math">
         <var>Σ′</var> = <var>J</var> <var>W</var> <var>Σ</var> <var>W</var><sup>T</sup> <var>J</var
@@ -1225,12 +1226,10 @@
       </p>
       <p>
         keeping only its top-left 2-by-2 block. That 2-by-2 matrix is a flat bell on the screen: an
-        ellipse. Its eigenvectors are the directions of the ellipse's axes, and the square roots of
-        its eigenvalues are how far it spreads along them. This trick comes from EWA splatting
-        (Zwicker, Pfister, van Baar, and Gross, 2001) [<a
+        ellipse. Its <span class="term" data-g="g-eigen">eigenvectors</span> are the directions of
+        the ellipse's axes, and the square roots of its eigenvalues are how far it spreads along
+        them. This trick comes from EWA splatting (Zwicker, Pfister, van Baar, and Gross, 2001) [<a
           href="#ref-2"
-          rel="noopener"
-          target="_blank"
           >2</a
         >].
       </p>
@@ -1243,10 +1242,12 @@
         entries, and it keeps the smaller eigenvalue at least 0.1. It also skips splats that come
         out under about 2 pixels on the screen (the cull settings in
         <code>src/sharpness.js</code> explain how). A separate, optional setting, the engine's
-        anti-aliasing (off unless a labs switch turns it on), does something else: it lowers each
-        splat's opacity to make up for the energy that blur spread out, using the ratio of the
-        determinants before and after. So the demo below shows Σ′ itself, the unfiltered geometry;
-        the pixels on your screen have that extra blur on top, whichever way the option is set.
+        <span class="term" data-g="g-antialias">anti-aliasing</span> (off unless a labs switch turns
+        it on), does something else: it lowers each splat's opacity to make up for the energy that
+        blur spread out, using the ratio of the
+        <span class="term" data-g="g-determinant">determinants</span> before and after. So the demo
+        below shows Σ′ itself, the unfiltered geometry; the pixels on your screen have that extra
+        blur on top, whichever way the option is set.
       </p>
       <section class="demo-live" data-demo="projection" id="demo-projection">
         <h4>Try it: one ellipsoid, and a camera you can move</h4>
@@ -1370,19 +1371,10 @@
       </p>
       <p>
         Each splat shows as much as the splats in front of it let through. This "over" operation is
-        from computer graphics' classic paper on compositing [<a
-          href="#ref-3"
-          rel="noopener"
-          target="_blank"
-          >3</a
-        >]. It is how the 2023 paper that started the craze, "3D Gaussian Splatting for Real-Time
-        Radiance Field Rendering" (Kerbl, Kopanas, Leimkühler, and Drettakis) [<a
-          href="#ref-1"
-          rel="noopener"
-          target="_blank"
-          >1</a
-        >], draws its scenes, and it is how Splashery blends its splats (the cover lists the
-        exceptions).
+        from computer graphics' classic paper on compositing [<a href="#ref-3">3</a>]. It is how the
+        2023 paper that started the craze, "3D Gaussian Splatting for Real-Time Radiance Field
+        Rendering" (Kerbl, Kopanas, Leimkühler, and Drettakis) [<a href="#ref-1">1</a>], draws its
+        scenes, and it is how Splashery blends its splats (the cover lists the exceptions).
       </p>
       <figure class="diagram">
         <svg
@@ -1685,7 +1677,7 @@
           rel="noopener"
           >docs/PACKS.md</a
         >
-        in the source code [<a href="#ref-10" rel="noopener" target="_blank">10</a>].
+        in the source code [<a href="#ref-10">10</a>].
       </p>
 
       <h3 id="two-places-a-toy-lives">Two places a toy lives</h3>
@@ -2259,7 +2251,8 @@
           two flags move, moving the part table out of the shader's small set of uniform values and
           into a texture, and checking real phones. That is a change to the engine, not to a recipe.
           The kit has other ways to get many moving pieces: up to 48 tokens (game pieces moved and
-          turned by their own offsets) and up to 96 levers in 6 groups (the piano keys).
+          turned by their own offsets) and up to 96
+          <span class="term" data-g="g-lever">levers</span> in 6 groups (the piano keys).
         </p>
         <p class="where">
           Where it lives: <code>part</code> in <code>src/kit.js</code>; the part number in the
@@ -2373,9 +2366,8 @@ export const RECIPES = {
         sails part: steadily with the wind, plus one extra turn while the gust pulse runs, eased
         with the <b><span class="term" data-g="g-smoothstep">smoothstep</span></b> curve
         3<var>g</var>² − 2<var>g</var>³ (an S-shaped ramp that rises from 0 to 1 and is flat at both
-        ends [<a href="#ref-7" rel="noopener" target="_blank">7</a>]) so it starts and ends gently.
-        A full extra turn lands the sails where they would have been anyway, so nothing jumps when
-        the gust ends.
+        ends [<a href="#ref-7">7</a>]) so it starts and ends gently. A full extra turn lands the
+        sails where they would have been anyway, so nothing jumps when the gust ends.
       </p>
       <section class="demo-live" data-demo="windmill-parts" id="demo-windmill">
         <h4>Try it: which splats each line of the recipe made</h4>
@@ -2582,12 +2574,12 @@ export const RECIPES = {
       <p>
         The toy lays out its splats on a grid of two numbers, <var>u</var> and <var>v</var>, each
         running over a range you choose. Think of them as the coordinates of a flat sheet of points,
-        laid out before the equations bend it into shape. They are the parameters of a parametric
-        surface [<a href="#ref-9" rel="noopener" target="_blank">9</a>], not a substitution: nothing
-        is replaced by <var>u</var> or <var>v</var>; each splat simply has its own pair. Your
-        equations turn each splat's (<var>u</var>, <var>v</var>) into a place in space,
-        (<var>x</var>, <var>y</var>, <var>z</var>). If <var>u</var> goes around a circle and
-        <var>v</var> around a smaller circle, the grid wraps into a torus:
+        laid out before the equations bend it into shape. They are the parameters of a
+        <span class="term" data-g="g-paramsurf">parametric surface</span> [<a href="#ref-9">9</a>],
+        not a substitution: nothing is replaced by <var>u</var> or <var>v</var>; each splat simply
+        has its own pair. Your equations turn each splat's (<var>u</var>, <var>v</var>) into a place
+        in space, (<var>x</var>, <var>y</var>, <var>z</var>). If <var>u</var> goes around a circle
+        and <var>v</var> around a smaller circle, the grid wraps into a torus:
       </p>
       <pre><code>x = (2 + cos v)·cos u
 y = sin v
@@ -3087,9 +3079,7 @@ v = 0 .. 2pi</code></pre>
       <p>Here is the core grammar. Note: words in quotes must be typed exactly as written below.</p>
       <p>
         A grammar is a short list of rules for what counts as a valid program. Its notation follows
-        EBNF, a standard way to write such rules [<a href="#ref-8" rel="noopener" target="_blank"
-          >8</a
-        >]:
+        EBNF, a standard way to write such rules [<a href="#ref-8">8</a>]:
       </p>
       <ul>
         <li>
@@ -6295,11 +6285,11 @@ export const RECIPES = {
         and a spine to turn about: <code>k.spine({ at, axis, dir })</code> gives the spine's place,
         its direction, and the direction from it along the pages when they lie flat. Each frame,
         <code>drive</code> sets <code>out.leaves[slot] = { angle, curl }</code>: the
-        <code>angle</code> in radians (0 lying flat, π turned all the way over) and the
-        <code>curl</code>, how much the page bends along a circular arc (a negative number lets the
-        free edge lag behind, like paper in air). Every splat of the page turns with the curve at
-        its place, so it stays a solid sheet at every angle, which a page bent with soft regions
-        would not.
+        <code>angle</code> in <span class="term" data-g="g-radian">radians</span> (0 lying flat, π
+        turned all the way over) and the <code>curl</code>, how much the page bends along a circular
+        arc (a negative number lets the free edge lag behind, like paper in air). Every splat of the
+        page turns with the curve at its place, so it stays a solid sheet at every angle, which a
+        page bent with soft regions would not.
       </p>
       <figure>
         <div class="shots one">
@@ -6602,15 +6592,15 @@ export const RECIPES = {
       <p>
         <b>How Splashery does it.</b> Splashery has a small physics engine of its own, with no
         library (<code>src/physics/world.js</code>). It is
-        <i>extended position-based dynamics</i> [<a href="#ref-11" rel="noopener" target="_blank"
-          >11</a
-        >, <a href="#ref-12" rel="noopener" target="_blank">12</a>]: each step first predicts where
-        the bodies go from their velocities and gravity, then moves them to where they would be if
-        nothing overlapped and every joint held, then works out velocities from how far they moved.
-        The world is built on the first pick-up, so opening a toy costs nothing. It steps 1/60 of a
-        second at a time whatever the frame rate, in 8 smaller substeps for a whole toy and 10 for a
-        toy with pieces, and it falls asleep once everything has been slower than a small speed for
-        half a second.
+        <i>extended position-based dynamics</i> [<a href="#ref-11">11</a>,
+        <a href="#ref-12">12</a>]: each step first predicts where the bodies go from their
+        velocities and gravity, then moves them to where they would be if nothing overlapped and
+        every joint held, then works out velocities from how far they moved. The world is built on
+        the first pick-up, so opening a toy costs nothing. It steps 1/60 of a second at a time
+        whatever the frame rate, in 8 smaller
+        <span class="term" data-g="g-substep">substeps</span> for a whole toy and 10 for a toy with
+        pieces, and it falls asleep once everything has been slower than a small speed for half a
+        second.
       </p>
       <p>
         Most toys play as one rigid body: their pose moves the toy's whole entity, so the splats are
@@ -6851,13 +6841,62 @@ export const RECIPES = {
         serves a scan: a scan's rig (<code>src/rigs.js</code>) names the parts of a captured toy,
         and <code>src/physics/joints.js</code> turns them into pieces.
       </p>
-      <div class="demo-placeholder">
-        <p class="demo-tag">A demo goes here later</p>
-        <p>
-          A box that lets you grab a hinge, a slider, and a dial on a simple toy, with the one
-          number each of them is moved by shown beside it.
+      <section class="demo-live" data-demo="moving-joints" id="demo-joints">
+        <h4>Try it: grab a hinge, a slider, and a dial</h4>
+        <p class="hint">
+          Drag the lid, the blade, or the knob (or use the sliders under the picture). Each part is
+          posed from one number, shown beside it. Let go of the lid and it falls by its weight and
+          bounces a little off its stop; the blade stays where you leave it, held by friction like
+          the sword in the stone; flick the dial and it coasts. Nothing leaves this page.
         </p>
-      </div>
+        <canvas
+          id="mj-canvas"
+          width="400"
+          height="240"
+          role="img"
+          aria-label="A chest with a lid on a hinge, a blade in a stone, and a dial, each with the number that moves it"
+        ></canvas>
+        <div class="controls">
+          <label for="mj-hinge"
+            >Hinge (angle)
+            <input id="mj-hinge" type="range" min="0" max="90" step="1" value="20" /><output
+              id="mj-hinge-out"
+              for="mj-hinge"
+            ></output
+          ></label>
+          <label for="mj-slide"
+            >Slider (distance)
+            <input id="mj-slide" type="range" min="0" max="0.5" step="0.01" value="0.18" /><output
+              id="mj-slide-out"
+              for="mj-slide"
+            ></output
+          ></label>
+          <label for="mj-dial"
+            >Dial (angle)
+            <input id="mj-dial" type="range" min="-720" max="720" step="1" value="34" /><output
+              id="mj-dial-out"
+              for="mj-dial"
+            ></output
+          ></label>
+        </div>
+        <div class="row"><button type="button" id="mj-reset">Reset</button></div>
+        <script type="module" src="demos6.js"></script>
+      </section>
+      <figure class="demo-still" data-demo-still="moving-joints">
+        <img
+          src="img/demo-joints.png"
+          alt="The joints demo: a chest with its lid half open, a blade partway out of a stone, and a dial turned about a third of the way round, each with its number"
+        />
+        <figcaption>
+          Interactive in the web version:
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/manual/moving.html#demo-joints"
+            target="_blank"
+            rel="noopener"
+            >ryanjosephkamp.github.io/splashery/manual/moving.html#demo-joints</a
+          >
+        </figcaption>
+      </figure>
 
       <h3 id="ropes-cloth-and-soft-stretch">Ropes, cloth, and soft stretch</h3>
       <p>
@@ -6971,7 +7010,7 @@ export const RECIPES = {
         part's splats are all turned by the same rotation, so a part cannot bend. The limit is that
         a splat can belong to only one part, which is why a toy has at most 15 parts beside the body
         (Chapter 2's
-        <a href="#why-parts" rel="noopener" target="_blank">fold on the number of parts</a>
+        <a href="#why-parts">fold on the number of parts</a>
         says why).
       </p>
 
@@ -7106,8 +7145,6 @@ export const RECIPES = {
         green fluorescent protein, lysozyme, a stretch of B-DNA, and caffeine; each is a snapshot of
         the entry, dated October 5, 2026, and the data are CC0 from the Protein Data Bank [<a
           href="#ref-14"
-          rel="noopener"
-          target="_blank"
           >14</a
         >].
       </p>
@@ -7167,11 +7204,10 @@ export const RECIPES = {
       <p>
         <b>How Splashery does it.</b> The toy offers three views: the past week at magnitude 2.5 and
         up, the past month at 4.5 and up, and a year at 5 and up. The first two read the USGS's
-        GeoJSON summary feeds [<a href="#ref-15" rel="noopener" target="_blank">15</a>] when the toy
-        opens or when you tap its plaque to refresh. Each quake is a row of five numbers (time,
-        longitude, latitude, depth in kilometers, magnitude). A quake with a missing magnitude or
-        depth is left out rather than shown as zero. A dot's radius is 0.009 + 0.006 × (<i>M</i> −
-        2)<sup>1.4</sup>
+        GeoJSON summary feeds [<a href="#ref-15">15</a>] when the toy opens or when you tap its
+        plaque to refresh. Each quake is a row of five numbers (time, longitude, latitude, depth in
+        kilometers, magnitude). A quake with a missing magnitude or depth is left out rather than
+        shown as zero. A dot's radius is 0.009 + 0.006 × (<i>M</i> − 2)<sup>1.4</sup>
         times the globe's radius (for a magnitude of 2 or more), drawn as a flat disc of splats with
         a crisp edge, and a bigger dot gets more splats, in proportion to its area. The plaque
         beside the globe says what is showing: the feed, the number of quakes, and when it was made.
@@ -7218,17 +7254,18 @@ export const RECIPES = {
       </p>
       <p>
         <b>How Splashery does it.</b> The star catalog is a file of 5,071 stars: every star brighter
-        than magnitude 6 in the HYG database [<a href="#ref-16" rel="noopener" target="_blank">16</a
-        >], plus the fainter ones a constellation line needs. Each displayed star gets a main splat,
-        sized by brightness and colored by temperature, and the brightest also get a larger halo
-        splat. The stars sit at their J2000 positions as one part, and the whole sky turns as one
-        rigid piece: first precession to the date, then the sky's turn for the place's sidereal time
-        (Meeus [<a href="#ref-17" rel="noopener" target="_blank">17</a>]). The planets use the
-        approximate orbital elements that NASA's Jet Propulsion Laboratory publishes for 1800 to
-        2050 [<a href="#ref-18" rel="noopener" target="_blank">18</a>], solved with Kepler's
-        equation, and the Moon uses the Astronomical Almanac's low-precision series, good to about
-        0.3 degrees in longitude. This is the same hinge as every part in Chapter 2. A star field
-        turning about a point is a part turning about its pivot.
+        than magnitude 6 in the HYG database [<a href="#ref-16">16</a>], plus the fainter ones a
+        constellation line needs. Each displayed star gets a main splat, sized by brightness and
+        colored by temperature, and the brightest also get a larger halo splat. The stars sit at
+        their J2000 positions as one part, and the whole sky turns as one rigid piece: first
+        precession to the date, then the sky's turn for the place's sidereal time (Meeus [<a
+          href="#ref-17"
+          >17</a
+        >]). The planets use the approximate orbital elements that NASA's Jet Propulsion Laboratory
+        publishes for 1800 to 2050 [<a href="#ref-18">18</a>], solved with Kepler's equation, and
+        the Moon uses the Astronomical Almanac's low-precision series, good to about 0.3 degrees in
+        longitude. This is the same hinge as every part in Chapter 2. A star field turning about a
+        point is a part turning about its pivot.
       </p>
       <p>
         <b>Your place.</b> You pick a city, or tap <b>Use my location</b>, which asks your browser
@@ -7259,9 +7296,10 @@ export const RECIPES = {
 
       <h3 id="volumes-and-point-clouds">Volumes and point clouds</h3>
       <p>
-        <b>What it is.</b> A CT scan or an MRI is not a surface but a block of numbers, one per
-        little cube (a <i>voxel</i>), measuring how dense the material is there. A lidar scan is a
-        cloud of points with places and sometimes colors. Both can be splats. The
+        <b>What it is.</b> A <span class="term" data-g="g-ctmri">CT</span> scan or an
+        <span class="term" data-g="g-ctmri">MRI</span> is not a surface but a block of numbers, one
+        per little cube (a <i>voxel</i>), measuring how dense the material is there. A lidar scan is
+        a cloud of points with places and sometimes colors. Both can be splats. The
         <b>Volume viewer</b> opens a medical or microscope scan and shows it as a block of splats
         you can cut through. The <b>Point clouds</b> toy opens a lidar scan or any list of points.
         Both are on the Studio shelf, behind the labs switch, and nothing is uploaded.
@@ -7447,13 +7485,75 @@ export const RECIPES = {
           </div>
         </div>
       </figure>
-      <div class="demo-placeholder">
-        <p class="demo-tag">A demo goes here later</p>
-        <p>
-          A small table of numbers that you edit, with each row appearing as a splat whose place,
-          size, and color come from its columns, to show that a splat is just a row of numbers.
+      <section class="demo-live" data-demo="data-table" id="demo-table">
+        <h4>Try it: a splat is a row of numbers</h4>
+        <p class="hint">
+          Each row of the table is one splat: <b>x</b>, <b>y</b>, and <b>z</b> place it,
+          <b>size</b> sets its radius, and <b>hue</b> (0 to 360 degrees) colors it. Change a number
+          and the splat moves, grows, or changes color; add or remove a row and a splat appears or
+          goes. Drag the picture to turn the box. Nothing leaves this page.
         </p>
-      </div>
+        <div class="demo-grid">
+          <div class="table-wrap">
+            <table class="dt-table">
+              <thead>
+                <tr>
+                  <th scope="col">row</th>
+                  <th scope="col">x</th>
+                  <th scope="col">y</th>
+                  <th scope="col">z</th>
+                  <th scope="col">size</th>
+                  <th scope="col">hue</th>
+                </tr>
+              </thead>
+              <tbody id="dt-rows"></tbody>
+            </table>
+            <div class="row">
+              <button type="button" id="dt-add">Add a row</button>
+              <button type="button" id="dt-remove">Remove the last</button>
+              <button type="button" id="dt-reset">Reset</button>
+            </div>
+          </div>
+          <div>
+            <canvas
+              id="dt-canvas"
+              width="400"
+              height="300"
+              role="img"
+              aria-label="The table's rows drawn as colored splats in a box"
+            ></canvas>
+            <div class="controls">
+              <label for="dt-turn"
+                >Turn the box
+                <input
+                  id="dt-turn"
+                  type="range"
+                  min="-90"
+                  max="90"
+                  step="1"
+                  value="30" /><output></output
+              ></label>
+            </div>
+          </div>
+        </div>
+        <p class="readout" id="dt-read" aria-live="polite"></p>
+        <script type="module" src="demos6.js"></script>
+      </section>
+      <figure class="demo-still" data-demo-still="data-table">
+        <img
+          src="img/demo-table.png"
+          alt="The table demo: a table of four rows of numbers beside four colored splats in a box, one for each row"
+        />
+        <figcaption>
+          Interactive in the web version:
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/manual/data.html#demo-table"
+            target="_blank"
+            rel="noopener"
+            >ryanjosephkamp.github.io/splashery/manual/data.html#demo-table</a
+          >
+        </figcaption>
+      </figure>
 
       <h3 id="the-rules-for-live-data">The rules for live data</h3>
       <p>A toy that reads from outside the page follows a short list of rules:</p>
@@ -7571,18 +7671,13 @@ export const RECIPES = {
       </p>
       <p>
         <b>How Splashery does it.</b> A depth model works out, for every part of the picture, how
-        far away it is. The model is Depth Anything V2 Small [<a
-          href="#ref-13"
-          rel="noopener"
-          target="_blank"
-          >13</a
-        >] in its 8-bit quantized form, a file of 27 MB that runs in your browser through ONNX
-        Runtime Web on one thread. (A page on GitHub Pages cannot share memory between threads, so
-        the runtime has just one.) Both files are Splashery's own, served from the site; nothing is
-        fetched from anywhere else and your photo is not uploaded. They load only when you open a
-        photo of your own. The sample pictures on the toy come with their depth maps already worked
-        out, so they need no model at all. Some samples are AI-made pictures, and each one says so
-        beside it.
+        far away it is. The model is Depth Anything V2 Small [<a href="#ref-13">13</a>] in its 8-bit
+        quantized form, a file of 27 MB that runs in your browser through ONNX Runtime Web on one
+        thread. (A page on GitHub Pages cannot share memory between threads, so the runtime has just
+        one.) Both files are Splashery's own, served from the site; nothing is fetched from anywhere
+        else and your photo is not uploaded. They load only when you open a photo of your own. The
+        sample pictures on the toy come with their depth maps already worked out, so they need no
+        model at all. Some samples are AI-made pictures, and each one says so beside it.
       </p>
       <p>
         The picture goes to the model scaled so its long side is about 518 pixels, each side a
@@ -7645,11 +7740,76 @@ export const RECIPES = {
         unaffected, since it reads the splats.
       </p>
       <p>
-        <b>Why this way.</b> Splashery is primarily splat-based but not only splat-based, and this
-        is the clearest place it is not. The Sharp view is there because splats are the wrong tool
-        for reading small text, and because the toy is still the same toy: the same depth, the same
-        controls, the same saved link.
+        <b>Why this way.</b> Splashery is primarily splat-based but not entirely splat-based, and
+        this is the clearest place it is not. The Sharp view is there because splats are the wrong
+        tool for reading small text, and because the toy is still the same toy: the same depth, the
+        same controls, the same saved link.
       </p>
+
+      <section class="demo-live" data-demo="photo-depth" id="demo-depth">
+        <h4>Try it: a picture cut into depth layers</h4>
+        <p class="hint">
+          A small picture with a depth for every dot (made by hand for this page, not by a model).
+          On the left the depth is cut into eight layers, each a flat card; on the right is the
+          Sharp view's way, one continuous relief. Raise <b>Depth</b> and turn the view (drag the
+          picture, or use the slider): the layers part and leave gaps, while the relief stretches.
+          At zero depth both are the flat picture. Nothing leaves this page.
+        </p>
+        <div class="photo-pair">
+          <figure>
+            <canvas
+              id="pd-layers"
+              width="200"
+              height="150"
+              role="img"
+              aria-label="The picture as eight layers at their depths"
+            ></canvas>
+            <figcaption>Layers</figcaption>
+          </figure>
+          <figure>
+            <canvas
+              id="pd-sharp"
+              width="200"
+              height="150"
+              role="img"
+              aria-label="The same picture as one continuous relief"
+            ></canvas>
+            <figcaption>Sharp view</figcaption>
+          </figure>
+        </div>
+        <div class="controls">
+          <label for="pd-depth"
+            >Depth
+            <input id="pd-depth" type="range" min="0" max="1" step="0.01" value="0.8" /><output
+              id="pd-depth-out"
+              for="pd-depth"
+            ></output
+          ></label>
+          <label for="pd-turn"
+            >Turn the view
+            <input id="pd-turn" type="range" min="-1" max="1" step="0.01" value="0.7" /><output
+              id="pd-turn-out"
+              for="pd-turn"
+            ></output
+          ></label>
+        </div>
+        <script type="module" src="demos6.js"></script>
+      </section>
+      <figure class="demo-still" data-demo-still="photo-depth">
+        <img
+          src="img/demo-depth.png"
+          alt="The depth demo: a small landscape with a house and a tree drawn as eight depth layers with gaps between them, beside the same picture as one stretched relief"
+        />
+        <figcaption>
+          Interactive in the web version:
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/manual/photo3d.html#demo-depth"
+            target="_blank"
+            rel="noopener"
+            >ryanjosephkamp.github.io/splashery/manual/photo3d.html#demo-depth</a
+          >
+        </figcaption>
+      </figure>
 
       <h3 id="moving-photo-to-3d">Moving photo to 3D</h3>
       <p>
@@ -7679,22 +7839,18 @@ export const RECIPES = {
         different and harder: it takes <i>many</i> views of a still scene (the frames of a video
         that walks or flies around something), works out where the camera was for each, and trains a
         real 3D Gaussian splat scene that looks right from each of those places. It is the method of
-        Chapter 1's first reference [<a href="#ref-1" rel="noopener" target="_blank">1</a>], running
-        in your browser. A scene that stands still works. A moving car or person blurs or vanishes.
+        Chapter 1's first reference [<a href="#ref-1">1</a>], running in your browser. A scene that
+        stands still works. A moving car or person blurs or vanishes.
       </p>
       <p>
-        <b>How Splashery does it.</b> It uses Splat.js [<a
-          href="#ref-21"
-          rel="noopener"
-          target="_blank"
-          >21</a
-        >], an MIT-licensed library vendored in <code>vendor/splatjs/</code> and loaded only when
-        you open a video in this toy. The toy first picks the sharpest frame in each window of the
-        stretch you choose. Splat.js then works out the camera's path (it finds features, matches
-        them between frames, registers each camera, and adjusts them all together), seeds a splat
-        cloud, and trains it on the graphics chip through WebGPU: the splats' places, sizes, colors,
-        and opacities are nudged by gradient descent until the scene renders like each frame. The
-        result is shown as the toy's splats, and you can turn it, zoom, save it as a PLY, or tap
+        <b>How Splashery does it.</b> It uses Splat.js [<a href="#ref-21">21</a>], an MIT-licensed
+        library vendored in <code>vendor/splatjs/</code> and loaded only when you open a video in
+        this toy. The toy first picks the sharpest frame in each window of the stretch you choose.
+        Splat.js then works out the camera's path (it finds features, matches them between frames,
+        registers each camera, and adjusts them all together), seeds a splat cloud, and trains it on
+        the graphics chip through WebGPU: the splats' places, sizes, colors, and opacities are
+        nudged by gradient descent until the scene renders like each frame. The result is shown as
+        the toy's splats, and you can turn it, zoom, save it as a PLY, or tap
         <b>Replay flight</b> to fly the video's own camera path with its sound.
       </p>
       <p>
@@ -7777,13 +7933,6 @@ export const RECIPES = {
           4.0. Credits and licenses show beside each toy in the Playground.
         </figcaption>
       </figure>
-      <div class="demo-placeholder">
-        <p class="demo-tag">A demo goes here later</p>
-        <p>
-          A photo with a slider that turns a flat picture into layers at their depths, side by side
-          with the Sharp view, so the guess and the picture can be compared at once.
-        </p>
-      </div>
 
       <h3 id="try-it-8">Where to try it</h3>
       <ul>
@@ -7864,16 +8013,14 @@ export const RECIPES = {
         Wi-Fi network, a contact card, an email, a phone number, a text message, or a map location,
         and draws it as splats in one of seven styles (Classic, Dots, Rounded, Bricks, Gems,
         Bubbles, Neon) on a plate of paper, wood, or metal, or on none. The encoding itself is done
-        by Project Nayuki's QR Code generator [<a href="#ref-20" rel="noopener" target="_blank"
-          >20</a
-        >], a small MIT-licensed library that is vendored and loaded only when the toy opens.
-        Splashery asks it for a code and then marks which modules belong to the finder patterns, to
-        the alignment patterns, and to the rest, so each can be built and moved as a piece of its
-        own. A tap bursts the code into its modules, which fall and fly back and land exactly on
-        their grid again; the toy also has an assemble motion, a flip, and an "alive" color wave.
-        Each module moves as a solid tile, and the alive hue waves keep the gray values a reader
-        sees unchanged (the electric patterns brighten dark modules by a bounded amount), so every
-        frame of it still scans.
+        by Project Nayuki's QR Code generator [<a href="#ref-20">20</a>], a small MIT-licensed
+        library that is vendored and loaded only when the toy opens. Splashery asks it for a code
+        and then marks which modules belong to the finder patterns, to the alignment patterns, and
+        to the rest, so each can be built and moved as a piece of its own. A tap bursts the code
+        into its modules, which fall and fly back and land exactly on their grid again; the toy also
+        has an assemble motion, a flip, and an "alive" color wave. Each module moves as a solid
+        tile, and the alive hue waves keep the gray values a reader sees unchanged (the electric
+        patterns brighten dark modules by a bounded amount), so every frame of it still scans.
       </p>
       <p>
         It checks itself. <b>Scan view</b> turns the code flat and square to the camera, and after
@@ -7885,12 +8032,11 @@ export const RECIPES = {
       </p>
       <p>
         <b>Error correction.</b> A QR code carries extra codewords (a codeword is 8 modules) made
-        with a Reed–Solomon code [<a href="#ref-19" rel="noopener" target="_blank">19</a>]. There
-        are four levels, L, M, Q, and H, which can lose about 7, 15, 25, and 30 percent of the
-        codewords and still scan. That percentage counts codewords, not squares, and the code is cut
-        into blocks that are corrected separately, so damage to the three finder squares, or damage
-        spread over many blocks, can defeat a code that has lost far less than its limit. The toy
-        uses level M by default.
+        with a Reed–Solomon code [<a href="#ref-19">19</a>]. There are four levels, L, M, Q, and H,
+        which can lose about 7, 15, 25, and 30 percent of the codewords and still scan. That
+        percentage counts codewords, not squares, and the code is cut into blocks that are corrected
+        separately, so damage to the three finder squares, or damage spread over many blocks, can
+        defeat a code that has lost far less than its limit. The toy uses level M by default.
       </p>
       <details class="fold why" id="why-qr-limits">
         <summary>Why these numbers? Contrast, module size, and level M</summary>
@@ -7922,7 +8068,7 @@ export const RECIPES = {
         a saved scene: it lives in the page's memory while the page is open.
       </p>
       <figure>
-        <div class="shots two">
+        <div class="shots two even">
           <div>
             <img src="img/r7b-qr-code.jpg" alt="A QR code drawn with splats on a plate" />
             <p class="shot-label">The QR code toy</p>
@@ -7975,13 +8121,69 @@ export const RECIPES = {
         </li>
       </ul>
       <p>All of these are on the Studio shelf and behind the labs switch.</p>
-      <div class="demo-placeholder">
-        <p class="demo-tag">A demo goes here later</p>
-        <p>
-          A small QR code with a damage brush: scratch some modules, and a meter shows how many
-          codewords are lost against how many the code can repair.
+      <section class="demo-live" data-demo="qr-damage" id="demo-qr">
+        <h4>Try it: scratch a QR code</h4>
+        <p class="hint">
+          Drag over the code to scratch the ink off (touch, mouse, or pen). The meter counts, block
+          by block, the codewords lost against the ones error correction can repair. It uses the QR
+          lab's own Reed–Solomon code on the code's modules; it does not use a camera, so "scans"
+          here means the codewords can be put right. Try level L against level H.
         </p>
-      </div>
+        <div id="qd-meter" class="qd-meter" aria-live="polite"></div>
+        <p class="verdict" id="qd-verdict" aria-live="polite"></p>
+        <div class="demo-grid">
+          <canvas
+            id="qd-canvas"
+            width="360"
+            height="360"
+            role="img"
+            aria-label="A QR code"
+          ></canvas>
+          <div class="controls">
+            <label for="qd-level"
+              >Level
+              <select id="qd-level">
+                <option value="L">L (about 7%)</option>
+                <option value="M" selected>M (about 15%)</option>
+                <option value="Q">Q (about 25%)</option>
+                <option value="H">H (about 30%)</option></select
+              ><output></output
+            ></label>
+            <label for="qd-brush"
+              >Brush
+              <input
+                id="qd-brush"
+                type="range"
+                min="1"
+                max="4"
+                step="1"
+                value="2" /><output></output
+            ></label>
+            <div class="row">
+              <button type="button" id="qd-scatter">Scatter scratches</button>
+              <button type="button" id="qd-heal">Let Reed–Solomon repair it</button>
+              <button type="button" id="qd-clear">Clear</button>
+            </div>
+          </div>
+        </div>
+        <p class="hint" id="qd-summary" aria-live="polite"></p>
+        <script type="module" src="demos6.js"></script>
+      </section>
+      <figure class="demo-still" data-demo-still="qr-damage">
+        <img
+          src="img/demo-qr.png"
+          alt="The QR damage demo: a QR code with several scratched patches in pale red, and a meter of codewords lost against codewords that can be repaired for each block"
+        />
+        <figcaption>
+          Interactive in the web version:
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/manual/codes.html#demo-qr"
+            target="_blank"
+            rel="noopener"
+            >ryanjosephkamp.github.io/splashery/manual/codes.html#demo-qr</a
+          >
+        </figcaption>
+      </figure>
 
       <h3 id="pages-pdfs-and-gifs">Pages, PDFs, and GIFs</h3>
       <p>
@@ -7990,11 +8192,7 @@ export const RECIPES = {
         sheet.
       </p>
       <p>
-        <b>How Splashery does it.</b> A PDF is drawn page by page by PDF.js [<a
-          href="#ref-22"
-          rel="noopener"
-          target="_blank"
-          >22</a
+        <b>How Splashery does it.</b> A PDF is drawn page by page by PDF.js [<a href="#ref-22">22</a
         >], vendored and loaded only when someone opens a PDF. A worker turns each page's pixels
         into splats. Pages stream through a few sheets, so a 200-page book costs the same as its
         open pages, and a small cache keeps the pages next to the open ones ready. Each sheet is
@@ -8060,10 +8258,9 @@ export const RECIPES = {
       </p>
       <p>
         <b>Where it goes next.</b> A link is text, so it can be a QR code. The
-        <a href="#share" rel="noopener" target="_blank">share links chapter</a> takes one apart,
-        lets you break one, and counts how many characters a code can hold. Here, notice what codes
-        and pages have in common with links: they all put a lot of meaning in a small, exact
-        picture.
+        <a href="#share">share links chapter</a> takes one apart, lets you break one, and counts how
+        many characters a code can hold. Here, notice what codes and pages have in common with
+        links: they all put a lot of meaning in a small, exact picture.
       </p>
 
       <h3 id="try-it-9">Where to try it</h3>
@@ -8444,13 +8641,61 @@ export const RECIPES = {
         colors are kept), SOG (the smallest; base colors only), and <code>.splat</code> (simple;
         base colors only). A file is saved to a place you choose.
       </p>
-      <div class="demo-placeholder">
-        <p class="demo-tag">A demo goes here later</p>
-        <p>
-          A tiny splat file in the page, with a crop box and a floater filter you can move, and the
-          counts changing as you do.
+      <section class="demo-live" data-demo="splat-file" id="demo-file">
+        <h4>Try it: crop a splat file and filter its floaters</h4>
+        <p class="hint">
+          A tiny splat file (420 splats) lives in this page: a ring and sixty strays. Drag inside
+          the picture to move the crop box (or use the arrow keys), change its size, and set how far
+          a splat may sit from its neighbors before the floater filter calls it a stray (a lower
+          number removes more). Splats outside the box fade; the floaters the filter removes turn
+          red. This runs the Splat toolkit's own crop and filter. Nothing leaves this page.
         </p>
-      </div>
+        <canvas
+          id="sf-canvas"
+          width="400"
+          height="300"
+          tabindex="0"
+          role="img"
+          aria-label="A ring of splats with a crop box"
+        ></canvas>
+        <div class="controls">
+          <label for="sf-size"
+            >Box size
+            <input id="sf-size" type="range" min="0.2" max="1.4" step="0.05" value="1" /><output
+              id="sf-size-out"
+              for="sf-size"
+            ></output
+          ></label>
+          <label for="sf-strength"
+            >Tolerance
+            <input id="sf-strength" type="range" min="0.5" max="3" step="0.1" value="2" /><output
+              id="sf-strength-out"
+              for="sf-strength"
+            ></output
+          ></label>
+          <label class="check"
+            ><input id="sf-floaters" type="checkbox" checked /> Remove floaters</label
+          >
+        </div>
+        <div class="row"><button type="button" id="sf-reset">Reset</button></div>
+        <p class="readout" id="sf-counts" aria-live="polite"></p>
+        <script type="module" src="demos6.js"></script>
+      </section>
+      <figure class="demo-still" data-demo-still="splat-file">
+        <img
+          src="img/demo-file.png"
+          alt="The splat file demo: a ring of colored splats inside a dashed crop box, with a few red strays removed and the counts underneath"
+        />
+        <figcaption>
+          Interactive in the web version:
+          <a
+            href="https://ryanjosephkamp.github.io/splashery/manual/make.html#demo-file"
+            target="_blank"
+            rel="noopener"
+            >ryanjosephkamp.github.io/splashery/manual/make.html#demo-file</a
+          >
+        </figcaption>
+      </figure>
 
       <h3 id="writing-a-recipe">Writing a recipe</h3>
       <p>
@@ -8652,6 +8897,17 @@ export const RECIPES = {
         />
         <figcaption>The QR code toy, drawn from splats.</figcaption>
       </figure>
+      <figure class="item-pic">
+        <img
+          src="img/pic-more-damage.webp"
+          width="720"
+          height="360"
+          alt="Left, the QR damage lab as it opens: a black-and-white code in a wooden frame labeled Level M. Right, Picture QR: a painting of a red barn woven into a working code as dark and light dots."
+        />
+        <figcaption>
+          The QR damage lab as it opens (left) and Picture QR, a painting woven into a code (right).
+        </figcaption>
+      </figure>
       <h3 id="captures-and-file-formats">Captures and file formats</h3>
       <p>
         The viewer opens <code>.ply</code>, <code>.sog</code>, <code>.splat</code>, and
@@ -8672,6 +8928,15 @@ export const RECIPES = {
         <figcaption>
           Two captures from the Scans shelf: a marble bust and a wooden elephant.
         </figcaption>
+      </figure>
+      <figure class="item-pic">
+        <img
+          src="img/pic-more-bonsai.webp"
+          width="720"
+          height="360"
+          alt="Two more captures from the Scans shelf: a bonsai tree with a rounded green crown in a blue tray, and a sunflower on a grassy mound, both drawn from splats."
+        />
+        <figcaption>Two more captures: a bonsai tree and a sunflower.</figcaption>
       </figure>
       <h3 id="camera-microphone-and-screen">Camera, microphone, and screen</h3>
       <p>
@@ -8719,10 +8984,10 @@ export const RECIPES = {
       <h3 id="studio-sound-and-photos">Studio: sound and photos</h3>
       <p>
         The Studio shelf turns other things into splats on your device. The song landscape makes a
-        spectrogram of a song you open into a 3D field, and the Chladni plate shows sand finding a
-        plate's still lines. Photo to 3D runs a depth model on your device, works out how far each
-        part of a photo is, and rebuilds the photo as splats at their depths. The Studio toys are
-        behind the labs switch.
+        <span class="term" data-g="g-spectrogram">spectrogram</span> of a song you open into a 3D
+        field, and the Chladni plate shows sand finding a plate's still lines. Photo to 3D runs a
+        depth model on your device, works out how far each part of a photo is, and rebuilds the
+        photo as splats at their depths. The Studio toys are behind the labs switch.
       </p>
 
       <figure class="item-pic">
@@ -8802,6 +9067,26 @@ export const RECIPES = {
           alt="Left, the Fluid lab: a glass of blue liquid on a table beside a basketball hoop. Right, a grand piano whose keys and strings are separate moving parts."
         />
         <figcaption>The Fluid lab (left) and a grand piano that plays songs (right).</figcaption>
+      </figure>
+      <figure class="item-pic">
+        <img
+          src="img/pic-more-flames.webp"
+          width="720"
+          height="360"
+          alt="Left, a campfire of crossed logs in a ring of stones with sparks and smoke rising. Right, a lit candle on a brass holder with wax drips and a wisp of smoke."
+        />
+        <figcaption>Flames and smoke: a campfire (left) and a candle (right).</figcaption>
+      </figure>
+      <figure class="item-pic">
+        <img
+          src="img/pic-more-body.webp"
+          width="720"
+          height="360"
+          alt="Left, the anatomy atlas as it opens: a smooth gray mannequin figure. Right, a round glass bottle of purple potion with a cork."
+        />
+        <figcaption>
+          The anatomy atlas (left) and a bottle toy, the potion bottle (right).
+        </figcaption>
       </figure>
       <h3 id="solid-fine-and-dots-and-the-detail-you-see">
         Solid, Fine, and Dots, and the detail you see
@@ -8945,7 +9230,7 @@ export const RECIPES = {
               <code>d.</code> in front (<code>src/codec.js</code>). Where a browser cannot compress,
               the link carries <code>j.</code> and the same JSON, uncompressed but still in
               base64url, so it is not readable as plain text.
-              <a href="#share" rel="noopener" target="_blank">Share links and QR codes</a>
+              <a href="#share">Share links and QR codes</a>
               explains the whole path.
             </li>
             <li>
@@ -9205,7 +9490,7 @@ export const RECIPES = {
       </div>
       <p>
         So the engine is the drawing machine, and the toys are ours. Splashery is
-        <b>primarily splat based</b>, not only: the photo toys' Sharp view is a textured mesh of
+        <b>primarily splat based</b>, not entirely: the photo toys' Sharp view is a textured mesh of
         triangles (<code>src/live/relief-mesh.js</code>), the WebGPU liquid surface and the gas grid
         are extra passes drawn after the splats (<code>src/fluids/gpu/</code>), and the hands-on
         physics and the games' rules are ordinary JavaScript with no drawing in them at all. (See
@@ -9731,12 +10016,33 @@ export const RECIPES = {
           <var>a</var><var>d</var><sub>1</sub>² + 2<var>b</var><var>d</var><sub>1</sub><var>d</var
           ><sub>2</sub> + <var>c</var><var>d</var><sub>2</sub>². With 4 and 1 on the diagonal it is
           4<var>d</var><sub>1</sub>² + <var>d</var><sub>2</sub>², and setting it to 1 draws an
-          ellipse. The exponent of a Gaussian holds one [<a
-            href="#ref-5"
-            rel="noopener"
-            target="_blank"
-            >5</a
-          >].
+          ellipse. The exponent of a Gaussian holds one [<a href="#ref-5">5</a>].
+        </dd>
+        <dt id="g-inverse">Matrix inverse</dt>
+        <dd>
+          The matrix that undoes another one: multiplying a matrix by its inverse gives the identity
+          matrix (1s on the diagonal, 0s everywhere else). A Gaussian bell uses the inverse
+          <var>Σ</var><sup>−1</sup> of its covariance. Only a matrix whose determinant is not 0 has
+          one.
+        </dd>
+        <dt id="g-determinant">Determinant</dt>
+        <dd>
+          One number that sums up a square matrix. For a 2-by-2 covariance with entries
+          <var>a</var>, <var>b</var>, <var>b</var>, <var>c</var> it is <var>a</var><var>c</var> −
+          <var>b</var><sup>2</sup>, which is also the product of its two eigenvalues. A determinant
+          of 0 means the matrix is flat in one direction and has no inverse.
+        </dd>
+        <dt id="g-eigen">Eigenvalue, eigenvector</dt>
+        <dd>
+          An eigenvector of a matrix is a direction the matrix only stretches, never turns; its
+          eigenvalue says by how much. For a covariance, the eigenvectors are the axes of the bell's
+          ellipse, and the eigenvalues are the squares of its widths along them.
+        </dd>
+        <dt id="g-posdef">Positive definite</dt>
+        <dd>
+          A symmetric matrix whose eigenvalues are all above 0 (for a 2-by-2 matrix:
+          <var>a</var> above 0 and the determinant above 0). A covariance has to be positive
+          definite, so that the bell falls off in every direction instead of growing in one.
         </dd>
         <dt id="g-tilt">Tilt, rotation</dt>
         <dd>
@@ -9749,6 +10055,13 @@ export const RECIPES = {
           Different widths along the axes, or equal widths in every direction. A plain kit splat is
           isotropic; the flat discs that cover a surface are anisotropic.
         </dd>
+        <dt id="g-radian">Radian</dt>
+        <dd>
+          A way to measure an angle by the length of arc it cuts off on a circle of radius 1. A full
+          turn is 2<var>π</var> (about 6.28) radians, a half turn is <var>π</var>, and a quarter
+          turn is <var>π</var>/2. The equation language's <code>sin</code> and <code>cos</code>, and
+          the angles in a recipe, use radians, not degrees.
+        </dd>
         <dt id="g-quaternion">Quaternion <var>q</var></dt>
         <dd>
           Four numbers that describe a rotation. They only describe a rotation when their length is
@@ -9757,7 +10070,7 @@ export const RECIPES = {
         <dt id="g-affine">Affine</dt>
         <dd>
           A straight-line map plus a shift, <var>p</var> ↦ <var>A</var><var>p</var> + <var>b</var>.
-          Straight lines stay straight [<a href="#ref-6" rel="noopener" target="_blank">6</a>].
+          Straight lines stay straight [<a href="#ref-6">6</a>].
         </dd>
         <dt id="g-footprint">Footprint</dt>
         <dd>The patch of the screen where one splat can add any color.</dd>
@@ -9775,6 +10088,12 @@ export const RECIPES = {
         <dd>
           Laying colors over one another in order, each weighted by its opacity and by how much of
           the pixel is still uncovered.
+        </dd>
+        <dt id="g-antialias">Anti-aliasing</dt>
+        <dd>
+          Softening the jagged stair-steps on an edge by blending the pixels it only partly covers.
+          Splashery's own option (off unless a labs switch turns it on) lowers each splat's opacity
+          to make up for the energy that a little extra blur spreads out.
         </dd>
         <dt id="g-sh">Spherical harmonics</dt>
         <dd>
@@ -9795,29 +10114,29 @@ export const RECIPES = {
         <dt id="g-smoothstep">Smoothstep</dt>
         <dd>
           The curve 3<var>g</var>² − 2<var>g</var>³, an S-shaped ramp from 0 to 1 that is flat at
-          both ends, used to start and stop a motion gently [<a
-            href="#ref-7"
-            rel="noopener"
-            target="_blank"
-            >7</a
-          >].
+          both ends, used to start and stop a motion gently [<a href="#ref-7">7</a>].
         </dd>
         <dt id="g-grammar">Grammar, atom</dt>
         <dd>
           A grammar is a list of rules for what counts as a valid program. In it, <code>=</code> is
           "is made of", <code>|</code> is "or", <code>{ }</code> repeats, <code>[ ]</code> is
           optional, and quotes mark text typed exactly. An atom is the smallest piece of an
-          expression that can stand alone [<a href="#ref-8" rel="noopener" target="_blank">8</a>].
+          expression that can stand alone [<a href="#ref-8">8</a>].
         </dd>
         <dt id="g-uvt">u, v, t, morph</dt>
         <dd>
           <var>u</var> and <var>v</var> are the coordinates of the flat sheet of points that each
           splat gets a place on, before the equations bend it into shape. They are parameters of a
-          parametric surface, not a substitution [<a href="#ref-9" rel="noopener" target="_blank"
-            >9</a
-          >]. <var>t</var> is time: 0 to 2π in the equation language, and the toy's running time in
-          a recipe's <code>drive</code>. A morph is a splat sliding from its own place to a target
-          place.
+          parametric surface, not a substitution [<a href="#ref-9">9</a>]. <var>t</var> is time: 0
+          to 2π in the equation language, and the toy's running time in a recipe's
+          <code>drive</code>. A morph is a splat sliding from its own place to a target place.
+        </dd>
+        <dt id="g-paramsurf">Parametric surface</dt>
+        <dd>
+          A surface drawn by giving <var>x</var>, <var>y</var>, and <var>z</var> each as a formula
+          of two numbers, <var>u</var> and <var>v</var>. Each splat gets its own pair (<var>u</var>,
+          <var>v</var>), and the equations carry it to a place in space. A sphere, a torus, and a
+          Möbius strip are all parametric surfaces.
         </dd>
         <dt id="g-kernel">Kernel</dt>
         <dd>
@@ -9830,6 +10149,11 @@ export const RECIPES = {
           a sail. Every splat carries the number of its part; number 0 is the body, so a toy has up
           to 15 more (Chapter 2). A <b>token</b> is one of up to 48 separate pieces, such as a game
           piece, that a recipe moves by its own offset.
+        </dd>
+        <dt id="g-lever">Lever</dt>
+        <dd>
+          A piece that a recipe can move or turn by its own offset, such as a piano key. A kit toy
+          can have up to 96 levers in 6 groups, besides its parts and tokens.
         </dd>
         <dt id="g-drive">Drive</dt>
         <dd>
@@ -9895,9 +10219,14 @@ export const RECIPES = {
         <dd>
           A way to simulate physics by moving things to where they would be if nothing overlapped
           and every joint held, then working out their speeds from how far they moved. Splashery's
-          own engine uses an extended form of it [<a href="#ref-11" rel="noopener" target="_blank"
-            >11</a
-          >, <a href="#ref-12" rel="noopener" target="_blank">12</a>].
+          own engine uses an extended form of it [<a href="#ref-11">11</a>,
+          <a href="#ref-12">12</a>].
+        </dd>
+        <dt id="g-substep">Substep</dt>
+        <dd>
+          One of the smaller steps a physics engine takes inside a single time step, to be more
+          accurate. Hands-on steps 1/60 of a second at a time, in 8 substeps for a whole toy and 10
+          for a toy with pieces; smaller steps keep fast pieces from sinking into one another.
         </dd>
         <dt id="g-joint">Joint: hinge, slider, dial, socket, break</dt>
         <dd>
@@ -9929,6 +10258,12 @@ export const RECIPES = {
           apart. A <b>B-factor</b> says how much an atom's place is blurred in a crystal, by motion
           or disorder.
         </dd>
+        <dt id="g-ctmri">CT, MRI</dt>
+        <dd>
+          Two kinds of medical scan that measure the inside of a body slice by slice: CT (computed
+          tomography) uses X-rays, and MRI (magnetic resonance imaging) uses magnetic fields and
+          radio waves. Each slice is a grid of numbers, and a stack of slices is a volume of voxels.
+        </dd>
         <dt id="g-voxel">Voxel</dt>
         <dd>
           A volume pixel: one little cube of a 3D scan, with one number for how dense the material
@@ -9939,6 +10274,12 @@ export const RECIPES = {
           A <b>window</b> picks the range of values that show, from a lower to an upper level, and
           the rest is hidden or faded. In a CT scan the values are in <b>Hounsfield units</b>, on
           which water is 0 and air is about −1000.
+        </dd>
+        <dt id="g-spectrogram">Spectrogram</dt>
+        <dd>
+          A picture of a sound over time: time runs along one side, pitch along the other, and
+          brightness shows how loud each pitch is at that moment. The Song landscape toy turns the
+          spectrogram of a song into a 3D field.
         </dd>
         <dt id="g-pointcloud">Point cloud, lidar, LAS and LAZ</dt>
         <dd>
@@ -9982,10 +10323,7 @@ export const RECIPES = {
         <dd>
           <b>Gradient descent</b> nudges numbers again and again in the direction that lowers an
           error. <b>Training</b> a splat scene is gradient descent on the splats' places, sizes,
-          colors, and opacities until pictures drawn from them match the photos [<a
-            href="#ref-1"
-            rel="noopener"
-            target="_blank"
+          colors, and opacities until pictures drawn from them match the photos [<a href="#ref-1"
             >1</a
           >].
         </dd>
@@ -10016,9 +10354,9 @@ export const RECIPES = {
         <dt id="g-ecc">Error correction, Reed–Solomon, codeword</dt>
         <dd>
           A QR code holds extra <b>codewords</b> (8 modules each) made with a
-          <b>Reed–Solomon</b> code [<a href="#ref-19" rel="noopener" target="_blank">19</a>], so a
-          reader can rebuild the text if some are lost. The level (L, M, Q, or H) sets how much
-          damage it can repair: about 7, 15, 25, or 30 percent of the codewords lost.
+          <b>Reed–Solomon</b> code [<a href="#ref-19">19</a>], so a reader can rebuild the text if
+          some are lost. The level (L, M, Q, or H) sets how much damage it can repair: about 7, 15,
+          25, or 30 percent of the codewords lost.
         </dd>
         <dt id="g-version">QR version</dt>
         <dd>

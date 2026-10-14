@@ -28,8 +28,8 @@ Starting points from the E4 session (2026-09-26):
   (parts or tokens): extremities (beak, head, wing tips, tail) thin and break off first and drop as
   pieces, while the body wears away piece by piece, faster as it goes; drips fall and a puddle
   grows; then it refreezes with the frost front. The Temperature slider should drive the same melt.
-- Lava lamp: the colours are already options (Wax, Liquid, Base). Add a blob count (the current 6 as
-  the default) and a blob size, and consider colour presets and other wishes from the owner.
+- Lava lamp: the colors are already options (Wax, Liquid, Base). Add a blob count (the current 6 as
+  the default) and a blob size, and consider color presets and other wishes from the owner.
 - Ocean wave: a morph moves each splat along one straight line, so a whole-wave curl needs the
   wave's profile as a chain of pieces that turn at their joints (like the fern's fronds), or another
   approach that curls the face and not only the lip.
@@ -65,14 +65,14 @@ the owner marked. Waiting for the owner's marks.
   breaks off from the bottom up, tumbles and lands flat in a pile round the base (a scale that lands
   on others lies a little higher), and flies back top first. Each leaves a small broken stub on the
   core, hidden under it at rest. 7.2 s.
-- **Lava lamp** (`src/packs/elements.js`, `LAVA_SETS`, `lavaBlobs`, `lavaGlassR`): new options
-  Colour set, Blobs (2 to 12), Blob size (0.5 to 1.5) and Blob shape (mixed, round, tall), and new
-  sliders Flow (a quarter to one and three quarters as fast) and Glow (the wax and liquid lit from
-  within at rest). The six classic blobs come first; extra ones each have their own seed, so a blob
-  keeps its path whatever the count; blobs get smaller as they get many; a blob made bigger rises
-  less far so it stays in the glass. Flow runs a clock kept in `mem(c)`, so a change of speed never
-  jumps. The default lamp builds exactly as before (same splats; checked by hashing the build), so
-  its thumbnail was not re-rendered. A colour set other than "Pick below" ignores the Wax and Liquid
+- **Lava lamp** (`src/packs/elements.js`, `LAVA_SETS`, `lavaBlobs`, `lavaGlassR`): new options Color
+  set, Blobs (2 to 12), Blob size (0.5 to 1.5) and Blob shape (mixed, round, tall), and new sliders
+  Flow (a quarter to one and three quarters as fast) and Glow (the wax and liquid lit from within at
+  rest). The six classic blobs come first; extra ones each have their own seed, so a blob keeps its
+  path whatever the count; blobs get smaller as they get many; a blob made bigger rises less far so
+  it stays in the glass. Flow runs a clock kept in `mem(c)`, so a change of speed never jumps. The
+  default lamp builds exactly as before (same splats; checked by hashing the build), so its
+  thumbnail was not re-rendered. A color set other than "Pick below" ignores the Wax and Liquid
   pickers (the Base picker still works).
 - **Ice swan** (`ICE_PIECES`, `iceAttached`, `icePose`, `ICE_DROPS`): the `melt` kind is gone. Ten
   parts, each melting by getting smaller about where it joins the rest and riding on the piece it
@@ -89,7 +89,7 @@ the owner marked. Waiting for the owner's marks.
   Catmull-Rom paths, a closed loop from the resting curl. Skinning moves splats in the profile's
   plane only, and the camera looks nearly along z, so the draw order holds. The home camera turned
   to three quarters (`src/toys.js`: yaw 0.6, pitch 0.22), which shows the curl as a wave; the sea
-  and the wave's ends fray (splats dropped by a colour function returning null) instead of stopping
+  and the wave's ends fray (splats dropped by a color function returning null) instead of stopping
   at a straight edge. Spray is ten clumps now (was 44), to make room for the controls. 5.8 s.
 - Sounds re-timed in `src/toy-sounds.js` (pinecone, ocean wave, ice swan); the wave's swell and curl
   and the ice swan's cracks, refreeze crackle and sparkle are cues from drive().
@@ -109,7 +109,7 @@ the owner marked. Waiting for the owner's marks.
   flat tops while they melt; the pedestal itself does not melt.
 - Pinecone: only the side facing the home camera breaks off; from behind, the far side's scales just
   open and close.
-- Lava lamp: some colour sets read less clearly at 320 px, since the liquid tints the wax.
+- Lava lamp: some color sets read less clearly at 320 px, since the liquid tints the wax.
 
 ## For the Operator
 
@@ -117,7 +117,7 @@ the owner marked. Waiting for the owner's marks.
   whole surface through keyframes (the ocean wave); keep the bending in the plane the camera looks
   along, and use rounder splats. (2) Pieces that melt should ride on the piece they grow from (scale
   about the parent's pivot too), or they are left hanging (the ice swan's `iceAttached`). (3) A
-  colour function that returns null for more splats towards an edge makes a surface fray into its
+  color function that returns null for more splats toward an edge makes a surface fray into its
   surroundings instead of stopping at a straight line.
 - The lava lamp's option set could become a pattern for other toys: a preset select plus the
   pickers, with the pickers ignored by a preset (the UI cannot hide an option by another's value).

@@ -1,0 +1,3570 @@
+[
+  {
+    "id": "probe-0",
+    "factors": {
+      "wide": false,
+      "corner": false,
+      "dense": false,
+      "color": false
+    },
+    "properties": {
+      "contrastRange": 0.12188109755516052,
+      "edgeDensity": 0.0034255975171849436,
+      "centerDetail": 0.004660681180146659,
+      "outerDetail": 0.0030139029628643717,
+      "color": 0,
+      "midtones": 1
+    },
+    "scans": [
+      {
+        "level": "L",
+        "size": "fit",
+        "score": 44.117072488445274,
+        "fidelity": 0.7920319529525637,
+        "edges": 0.012340335023428255,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": false
+          }
+        ]
+      },
+      {
+        "level": "L",
+        "size": "more",
+        "score": 45.79250120097173,
+        "fidelity": 0.8278986493721912,
+        "edges": 0.005735010788915684,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "L",
+        "size": "most",
+        "score": 47.77660054498428,
+        "fidelity": 0.863861552887062,
+        "edges": 0.005871447471019167,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "M",
+        "size": "fit",
+        "score": 45.18598526663245,
+        "fidelity": 0.8145256728107206,
+        "edges": 0.00860162804539588,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "M",
+        "size": "more",
+        "score": 46.47635677252565,
+        "fidelity": 0.8396587984319133,
+        "edges": 0.006558285750453579,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "M",
+        "size": "most",
+        "score": 47.83688437938662,
+        "fidelity": 0.8659196524530708,
+        "edges": 0.004695633210393888,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "Q",
+        "size": "fit",
+        "score": 44.81804174372567,
+        "fidelity": 0.8103885735517107,
+        "edges": 0.0054815599640351655,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "Q",
+        "size": "more",
+        "score": 46.44979417202556,
+        "fidelity": 0.839507471010302,
+        "edges": 0.0061529614768655715,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "Q",
+        "size": "most",
+        "score": 48.0924011512928,
+        "fidelity": 0.8692797511686705,
+        "edges": 0.006266996378131484,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "H",
+        "size": "fit",
+        "score": 45.9441299005697,
+        "fidelity": 0.829025479035857,
+        "edges": 0.0077273011910570484,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "H",
+        "size": "more",
+        "score": 46.926664733730995,
+        "fidelity": 0.8480156362074415,
+        "edges": 0.006351216496037945,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "H",
+        "size": "most",
+        "score": 48.284316134135146,
+        "fidelity": 0.8724459458716584,
+        "edges": 0.006661980248754022,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "probe-1",
+    "factors": {
+      "wide": true,
+      "corner": false,
+      "dense": false,
+      "color": false
+    },
+    "properties": {
+      "contrastRange": 0.3216307163238525,
+      "edgeDensity": 0.009039771218222156,
+      "centerDetail": 0.012299020111479873,
+      "outerDetail": 0.007953354920469584,
+      "color": 0,
+      "midtones": 0.3123914930555556
+    },
+    "scans": [
+      {
+        "level": "L",
+        "size": "fit",
+        "score": 43.70783901989538,
+        "fidelity": 0.779415343194503,
+        "edges": 0.01866655875994915,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "L",
+        "size": "more",
+        "score": 45.13071761941072,
+        "fidelity": 0.8123522772661452,
+        "edges": 0.010029830439393919,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "L",
+        "size": "most",
+        "score": 46.81854860968964,
+        "fidelity": 0.8427153360330534,
+        "edges": 0.010426780619371107,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "M",
+        "size": "fit",
+        "score": 44.23719468580703,
+        "fidelity": 0.794762273013756,
+        "edges": 0.01167265933445428,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "M",
+        "size": "more",
+        "score": 45.5915403697732,
+        "fidelity": 0.8202639669490228,
+        "edges": 0.010600493057265372,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "M",
+        "size": "most",
+        "score": 46.83795433308718,
+        "fidelity": 0.8442201338505604,
+        "edges": 0.00901882158458578,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "Q",
+        "size": "fit",
+        "score": 44.101204714778234,
+        "fidelity": 0.7939096659303332,
+        "edges": 0.009692735302442398,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "Q",
+        "size": "more",
+        "score": 45.585030261719965,
+        "fidelity": 0.820323677157654,
+        "edges": 0.010382844845533012,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "Q",
+        "size": "most",
+        "score": 47.06469169821315,
+        "fidelity": 0.847499567613564,
+        "edges": 0.01004923287704723,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "H",
+        "size": "fit",
+        "score": 45.04937818290388,
+        "fidelity": 0.8094489862804491,
+        "edges": 0.011770754166203741,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "H",
+        "size": "more",
+        "score": 46.06139058769596,
+        "fidelity": 0.8290477349295005,
+        "edges": 0.0103058925905207,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "H",
+        "size": "most",
+        "score": 47.04622911046996,
+        "fidelity": 0.847479153087783,
+        "edges": 0.009663904236486583,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "probe-2",
+    "factors": {
+      "wide": false,
+      "corner": true,
+      "dense": false,
+      "color": false
+    },
+    "properties": {
+      "contrastRange": 0.23604810237884521,
+      "edgeDensity": 0.003003480674293366,
+      "centerDetail": 0.0031966861420057646,
+      "outerDetail": 0.0029390788517225665,
+      "color": 0,
+      "midtones": 1
+    },
+    "scans": [
+      {
+        "level": "L",
+        "size": "fit",
+        "score": 44.78836871465854,
+        "fidelity": 0.7871282905918995,
+        "edges": 0.03325139404675703,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "L",
+        "size": "more",
+        "score": 46.587536690929596,
+        "fidelity": 0.8270285622990181,
+        "edges": 0.024465905877413274,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "L",
+        "size": "most",
+        "score": 48.4322707572739,
+        "fidelity": 0.8642315286563992,
+        "edges": 0.019989704026043154,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "M",
+        "size": "fit",
+        "score": 45.974239845459266,
+        "fidelity": 0.8135437447980234,
+        "edges": 0.027318530701510597,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "M",
+        "size": "more",
+        "score": 47.26386803157731,
+        "fidelity": 0.8403029065735883,
+        "edges": 0.023271292667332213,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "M",
+        "size": "most",
+        "score": 48.5772248542347,
+        "fidelity": 0.8678214776128002,
+        "edges": 0.018823190789570808,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "Q",
+        "size": "fit",
+        "score": 46.05750861388808,
+        "fidelity": 0.8134709687217646,
+        "edges": 0.029257896315356084,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "Q",
+        "size": "more",
+        "score": 47.059024691474946,
+        "fidelity": 0.8395133168870635,
+        "edges": 0.01968427250414337,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "Q",
+        "size": "most",
+        "score": 48.546946411819,
+        "fidelity": 0.8685962037198407,
+        "edges": 0.01720344904950577,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "H",
+        "size": "fit",
+        "score": 46.90633751055483,
+        "fidelity": 0.8297791577601683,
+        "edges": 0.028188529638790392,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "H",
+        "size": "more",
+        "score": 47.639969676569116,
+        "fidelity": 0.8489411113326399,
+        "edges": 0.021071301183864737,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "H",
+        "size": "most",
+        "score": 48.65739961616803,
+        "fidelity": 0.8715918062823765,
+        "edges": 0.01599667268082926,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "probe-3",
+    "factors": {
+      "wide": true,
+      "corner": true,
+      "dense": false,
+      "color": false
+    },
+    "properties": {
+      "contrastRange": 0.6229046881198883,
+      "edgeDensity": 0.007925851441727551,
+      "centerDetail": 0.00843569905496712,
+      "outerDetail": 0.007755902237314363,
+      "color": 0,
+      "midtones": 0.1685112847222222
+    },
+    "scans": [
+      {
+        "level": "L",
+        "size": "fit",
+        "score": 44.12884985204242,
+        "fidelity": 0.7679591540644389,
+        "edges": 0.04202436396662834,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "L",
+        "size": "more",
+        "score": 45.81113817660432,
+        "fidelity": 0.8041148387919728,
+        "edges": 0.0352182676232402,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "L",
+        "size": "most",
+        "score": 47.274590741988305,
+        "fidelity": 0.835806685659948,
+        "edges": 0.02900495623758137,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "M",
+        "size": "fit",
+        "score": 45.417686377067966,
+        "fidelity": 0.7946821538167588,
+        "edges": 0.038003731492138516,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "M",
+        "size": "more",
+        "score": 46.122505429747704,
+        "fidelity": 0.8112918803563767,
+        "edges": 0.0333656002254885,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "M",
+        "size": "most",
+        "score": 47.26216565334549,
+        "fidelity": 0.836440041643628,
+        "edges": 0.02795474139879879,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "Q",
+        "size": "fit",
+        "score": 45.29562810988228,
+        "fidelity": 0.7920716509181934,
+        "edges": 0.038481940208480746,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "Q",
+        "size": "more",
+        "score": 46.25376868709785,
+        "fidelity": 0.8161724807817903,
+        "edges": 0.03031738320220861,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "Q",
+        "size": "most",
+        "score": 47.37997064611522,
+        "fidelity": 0.8402407036812818,
+        "edges": 0.025927376525438226,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "H",
+        "size": "fit",
+        "score": 45.9937239224531,
+        "fidelity": 0.8046491048705819,
+        "edges": 0.03862273676824641,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "H",
+        "size": "more",
+        "score": 46.69880663502168,
+        "fidelity": 0.8228832474361892,
+        "edges": 0.032005067245139324,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "H",
+        "size": "most",
+        "score": 47.38228624814836,
+        "fidelity": 0.8407123364815398,
+        "edges": 0.025402394259192673,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "probe-4",
+    "factors": {
+      "wide": false,
+      "corner": false,
+      "dense": true,
+      "color": false
+    },
+    "properties": {
+      "contrastRange": 0.1896417737007141,
+      "edgeDensity": 0.013632709372092178,
+      "centerDetail": 0.02663956831461059,
+      "outerDetail": 0.009297089724586042,
+      "color": 0,
+      "midtones": 0.9978298611111112
+    },
+    "scans": [
+      {
+        "level": "L",
+        "size": "fit",
+        "score": 45.36449903429586,
+        "fidelity": 0.7857478048314285,
+        "edges": 0.047741550412606346,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "L",
+        "size": "more",
+        "score": 47.070114735511424,
+        "fidelity": 0.8237950332567034,
+        "edges": 0.03914195347539398,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "L",
+        "size": "most",
+        "score": 49.05031175618652,
+        "fidelity": 0.8592980023829577,
+        "edges": 0.03975381389164079,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "M",
+        "size": "fit",
+        "score": 46.87538110528987,
+        "fidelity": 0.8103197500369657,
+        "edges": 0.05128433007237236,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "M",
+        "size": "more",
+        "score": 47.92667807405388,
+        "fidelity": 0.8364964231246712,
+        "edges": 0.04265277338215484,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "M",
+        "size": "most",
+        "score": 49.241408128675474,
+        "fidelity": 0.863987735848455,
+        "edges": 0.03826850348912092,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "Q",
+        "size": "fit",
+        "score": 46.4961859405366,
+        "fidelity": 0.8065102429091839,
+        "edges": 0.047513835122921816,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "Q",
+        "size": "more",
+        "score": 47.64974295659615,
+        "fidelity": 0.8351812593377201,
+        "edges": 0.03810608206714539,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "Q",
+        "size": "most",
+        "score": 49.50076360397059,
+        "fidelity": 0.866331902436721,
+        "edges": 0.04116686599890954,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "H",
+        "size": "fit",
+        "score": 47.47425829994986,
+        "fidelity": 0.8254182987261608,
+        "edges": 0.04613893044468917,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "H",
+        "size": "more",
+        "score": 48.218114922401746,
+        "fidelity": 0.8447296066143143,
+        "edges": 0.03906636796921006,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "H",
+        "size": "most",
+        "score": 49.651866348804234,
+        "fidelity": 0.8688829655810614,
+        "edges": 0.04140673870768569,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "probe-5",
+    "factors": {
+      "wide": true,
+      "corner": false,
+      "dense": true,
+      "color": false
+    },
+    "properties": {
+      "contrastRange": 0.5004435181617737,
+      "edgeDensity": 0.03589788219740133,
+      "centerDetail": 0.06998956623040696,
+      "outerDetail": 0.024533987519732785,
+      "color": 0,
+      "midtones": 0.3228081597222222
+    },
+    "scans": [
+      {
+        "level": "L",
+        "size": "fit",
+        "score": 47.275833293661,
+        "fidelity": 0.7689596490518847,
+        "edges": 0.11073450212905188,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "L",
+        "size": "more",
+        "score": 48.266866228789915,
+        "fidelity": 0.8054938223160835,
+        "edges": 0.08810457780900698,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "L",
+        "size": "most",
+        "score": 49.63822948153029,
+        "fidelity": 0.8375606339504607,
+        "edges": 0.07938654698344329,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "M",
+        "size": "fit",
+        "score": 48.72054815347403,
+        "fidelity": 0.7924292753660098,
+        "edges": 0.11415417796318855,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "M",
+        "size": "more",
+        "score": 48.880900475613466,
+        "fidelity": 0.8164727975494511,
+        "edges": 0.08833103578652544,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "M",
+        "size": "most",
+        "score": 49.81289452104334,
+        "fidelity": 0.8415336834008877,
+        "edges": 0.07841204297765576,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "Q",
+        "size": "fit",
+        "score": 47.76854218899722,
+        "fidelity": 0.7883292546933092,
+        "edges": 0.09800962624144938,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "Q",
+        "size": "more",
+        "score": 48.60206863454414,
+        "fidelity": 0.8162223872303649,
+        "edges": 0.08244082970831254,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "Q",
+        "size": "most",
+        "score": 50.10699104449423,
+        "fidelity": 0.8442866920872318,
+        "edges": 0.08158273288214403,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "H",
+        "size": "fit",
+        "score": 48.815816075687614,
+        "fidelity": 0.8032631566410143,
+        "edges": 0.1030298324540404,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "H",
+        "size": "more",
+        "score": 49.201997831612154,
+        "fidelity": 0.825113843551335,
+        "edges": 0.08490525413974946,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "H",
+        "size": "most",
+        "score": 50.24419920748897,
+        "fidelity": 0.8458270459255066,
+        "edges": 0.08274914847969111,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "probe-6",
+    "factors": {
+      "wide": false,
+      "corner": true,
+      "dense": true,
+      "color": false
+    },
+    "properties": {
+      "contrastRange": 0.1766880154609679,
+      "edgeDensity": 0.007635496779365635,
+      "centerDetail": 0.0063235373208834714,
+      "outerDetail": 0.00807281659885969,
+      "color": 0,
+      "midtones": 0.9979383680555556
+    },
+    "scans": [
+      {
+        "level": "L",
+        "size": "fit",
+        "score": 43.51363318161222,
+        "fidelity": 0.7835746827021128,
+        "edges": 0.009267236288800162,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "L",
+        "size": "more",
+        "score": 46.29702415672408,
+        "fidelity": 0.8265836486379796,
+        "edges": 0.018553855147448707,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "L",
+        "size": "most",
+        "score": 48.571872965576176,
+        "fidelity": 0.8627986623538093,
+        "edges": 0.024843256358148012,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "M",
+        "size": "fit",
+        "score": 45.616996771426344,
+        "fidelity": 0.8129160386234531,
+        "edges": 0.020146992158587125,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "M",
+        "size": "more",
+        "score": 46.92948088164918,
+        "fidelity": 0.8380906565742461,
+        "edges": 0.018544328223680937,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "M",
+        "size": "most",
+        "score": 48.99446124058786,
+        "fidelity": 0.8673929123977232,
+        "edges": 0.02861891241584621,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "Q",
+        "size": "fit",
+        "score": 45.570071209860885,
+        "fidelity": 0.8109616304040502,
+        "edges": 0.021492923058624838,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "Q",
+        "size": "more",
+        "score": 47.30363964701181,
+        "fidelity": 0.8391045582521198,
+        "edges": 0.025619754292115944,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "Q",
+        "size": "most",
+        "score": 49.0882698388847,
+        "fidelity": 0.8682054001175206,
+        "edges": 0.029710507387134887,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "H",
+        "size": "fit",
+        "score": 46.911055391445345,
+        "fidelity": 0.8282222100743302,
+        "edges": 0.030196307496826245,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "H",
+        "size": "more",
+        "score": 47.437655994456506,
+        "fidelity": 0.8464823957579946,
+        "edges": 0.019580538394817954,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "H",
+        "size": "most",
+        "score": 49.28778857398788,
+        "fidelity": 0.8716044914427821,
+        "edges": 0.029989812102996973,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "probe-7",
+    "factors": {
+      "wide": true,
+      "corner": true,
+      "dense": true,
+      "color": false
+    },
+    "properties": {
+      "contrastRange": 0.4662599712610245,
+      "edgeDensity": 0.020075753786516385,
+      "centerDetail": 0.016687111914724502,
+      "outerDetail": 0.021205301077113676,
+      "color": 0,
+      "midtones": 0.16959635416666666
+    },
+    "scans": [
+      {
+        "level": "L",
+        "size": "fit",
+        "score": 42.95818674133302,
+        "fidelity": 0.7622579685336675,
+        "edges": 0.02297774382180693,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "L",
+        "size": "more",
+        "score": 46.344918530567114,
+        "fidelity": 0.8029415021609867,
+        "edges": 0.04851413137139651,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "L",
+        "size": "most",
+        "score": 48.14109171192676,
+        "fidelity": 0.8334822101033119,
+        "edges": 0.05110155902765794,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "M",
+        "size": "fit",
+        "score": 45.609253392676976,
+        "fidelity": 0.7923134875646015,
+        "edges": 0.045155812813864174,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "M",
+        "size": "more",
+        "score": 46.39733316597461,
+        "fidelity": 0.809390803505013,
+        "edges": 0.04179642162664196,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "M",
+        "size": "most",
+        "score": 48.51864788979326,
+        "fidelity": 0.8361395845011141,
+        "edges": 0.056243794271821634,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "Q",
+        "size": "fit",
+        "score": 45.349404372689975,
+        "fidelity": 0.7906490589797333,
+        "edges": 0.04141569175121414,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "Q",
+        "size": "more",
+        "score": 47.4284933879229,
+        "fidelity": 0.8144024990113199,
+        "edges": 0.05858568760667331,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "Q",
+        "size": "most",
+        "score": 48.76566082224592,
+        "fidelity": 0.8393286298518114,
+        "edges": 0.05783524845325084,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "H",
+        "size": "fit",
+        "score": 46.778394215388225,
+        "fidelity": 0.8040430963489299,
+        "edges": 0.056800531471046134,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "H",
+        "size": "more",
+        "score": 47.13250126246822,
+        "fidelity": 0.818704644605558,
+        "edges": 0.046749906870278204,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "H",
+        "size": "most",
+        "score": 48.83063085769054,
+        "fidelity": 0.8394447918082789,
+        "edges": 0.05913705129411549,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "probe-8",
+    "factors": {
+      "wide": false,
+      "corner": false,
+      "dense": false,
+      "color": true
+    },
+    "properties": {
+      "contrastRange": 0.12188110839128491,
+      "edgeDensity": 0.0034255975248577816,
+      "centerDetail": 0.004660681272420521,
+      "outerDetail": 0.0030139029423368754,
+      "color": 0.2536893310672086,
+      "midtones": 1
+    },
+    "scans": [
+      {
+        "level": "L",
+        "size": "fit",
+        "score": 44.22085903305011,
+        "fidelity": 0.7928223908892521,
+        "edges": 0.013680611869805305,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": false
+          }
+        ]
+      },
+      {
+        "level": "L",
+        "size": "more",
+        "score": 45.89451165186308,
+        "fidelity": 0.8289084136486053,
+        "edges": 0.00676775335977299,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "L",
+        "size": "most",
+        "score": 47.862131514887615,
+        "fidelity": 0.8647202031379382,
+        "edges": 0.0067226742733557995,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "M",
+        "size": "fit",
+        "score": 45.31606113139926,
+        "fidelity": 0.8155613944452127,
+        "edges": 0.010226320820279114,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "M",
+        "size": "more",
+        "score": 46.56534881819725,
+        "fidelity": 0.8405381789508295,
+        "edges": 0.00746108835336938,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "M",
+        "size": "most",
+        "score": 47.9289379549379,
+        "fidelity": 0.8668087352947488,
+        "edges": 0.005654611416149132,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "Q",
+        "size": "fit",
+        "score": 44.934284488417916,
+        "fidelity": 0.810904095945398,
+        "edges": 0.007434649142689507,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "Q",
+        "size": "more",
+        "score": 46.535331594843996,
+        "fidelity": 0.8403022485413718,
+        "edges": 0.007082398334856521,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "Q",
+        "size": "most",
+        "score": 48.181240989841164,
+        "fidelity": 0.870274610285458,
+        "edges": 0.007025276092021579,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "H",
+        "size": "fit",
+        "score": 46.058892745821296,
+        "fidelity": 0.8297813908462981,
+        "edges": 0.009353694428330993,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "H",
+        "size": "more",
+        "score": 47.0183477965584,
+        "fidelity": 0.8488931124003223,
+        "edges": 0.007316146989792719,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "H",
+        "size": "most",
+        "score": 48.362978416401816,
+        "fidelity": 0.8732797019045402,
+        "edges": 0.007390995814491226,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "probe-9",
+    "factors": {
+      "wide": true,
+      "corner": false,
+      "dense": false,
+      "color": true
+    },
+    "properties": {
+      "contrastRange": 0.3214702928334474,
+      "edgeDensity": 0.009022793285728194,
+      "centerDetail": 0.012288353434129626,
+      "outerDetail": 0.007934273236261063,
+      "color": 0.2534682005519959,
+      "midtones": 0.3123914930555556
+    },
+    "scans": [
+      {
+        "level": "L",
+        "size": "fit",
+        "score": 43.43704405016069,
+        "fidelity": 0.7752704640945236,
+        "edges": 0.017714856110264143,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "L",
+        "size": "more",
+        "score": 44.987956665307685,
+        "fidelity": 0.8099553960256107,
+        "edges": 0.009786886308868776,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "L",
+        "size": "most",
+        "score": 46.73338449554102,
+        "fidelity": 0.8413631786438469,
+        "edges": 0.010186881558431785,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "M",
+        "size": "fit",
+        "score": 44.02144213102528,
+        "fidelity": 0.7913837436579411,
+        "edges": 0.011007471774189414,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "M",
+        "size": "more",
+        "score": 45.4628893033279,
+        "fidelity": 0.8181668583409005,
+        "edges": 0.010304713212852538,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "M",
+        "size": "most",
+        "score": 46.76567227780367,
+        "fidelity": 0.842994358925403,
+        "edges": 0.008910723042366548,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "Q",
+        "size": "fit",
+        "score": 43.88388970623646,
+        "fidelity": 0.7902769809938548,
+        "edges": 0.009303461146098755,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "Q",
+        "size": "more",
+        "score": 45.45714917577477,
+        "fidelity": 0.8182871427575082,
+        "edges": 0.01003014053581803,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "Q",
+        "size": "most",
+        "score": 46.99599391645196,
+        "fidelity": 0.8463233264736495,
+        "edges": 0.009960243564471857,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "H",
+        "size": "fit",
+        "score": 44.89135780348528,
+        "fidelity": 0.8068464564260063,
+        "edges": 0.011440060001220607,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "H",
+        "size": "more",
+        "score": 45.951774621172184,
+        "fidelity": 0.8273120059186614,
+        "edges": 0.00999142879212891,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "H",
+        "size": "most",
+        "score": 46.982476956451194,
+        "fidelity": 0.8465231631345405,
+        "edges": 0.009415621867810314,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "probe-10",
+    "factors": {
+      "wide": false,
+      "corner": true,
+      "dense": false,
+      "color": true
+    },
+    "properties": {
+      "contrastRange": 0.23604810488224026,
+      "edgeDensity": 0.0030034805471137425,
+      "centerDetail": 0.0031966860688275004,
+      "outerDetail": 0.0029390787065424985,
+      "color": 0.2511710911381265,
+      "midtones": 1
+    },
+    "scans": [
+      {
+        "level": "L",
+        "size": "fit",
+        "score": 44.624754542813974,
+        "fidelity": 0.7880229474448799,
+        "edges": 0.028522054074346187,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "L",
+        "size": "more",
+        "score": 46.58215539747892,
+        "fidelity": 0.8281472853034613,
+        "edges": 0.022978993461967634,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "L",
+        "size": "most",
+        "score": 48.45864987992855,
+        "fidelity": 0.8652276786994167,
+        "edges": 0.01935839003245833,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "M",
+        "size": "fit",
+        "score": 45.87415930334885,
+        "fidelity": 0.8143845741042111,
+        "edges": 0.024066838391494188,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "M",
+        "size": "more",
+        "score": 47.25961766584864,
+        "fidelity": 0.8411834834961449,
+        "edges": 0.02210057941245925,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "M",
+        "size": "most",
+        "score": 48.618326353224504,
+        "fidelity": 0.8689347225815587,
+        "edges": 0.01837592469419495,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "Q",
+        "size": "fit",
+        "score": 45.942951010733054,
+        "fidelity": 0.814329003981897,
+        "edges": 0.02566346203841596,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "Q",
+        "size": "more",
+        "score": 47.08113654907197,
+        "fidelity": 0.8405654295631437,
+        "edges": 0.018889731624423586,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "Q",
+        "size": "most",
+        "score": 48.59441478124547,
+        "fidelity": 0.8696758648429866,
+        "edges": 0.01693871588624899,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "H",
+        "size": "fit",
+        "score": 46.812342071567876,
+        "fidelity": 0.8303926591549385,
+        "edges": 0.02534990706769449,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "H",
+        "size": "more",
+        "score": 47.65702839634155,
+        "fidelity": 0.8499391546027084,
+        "edges": 0.020230553182057465,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "H",
+        "size": "most",
+        "score": 48.712371462745175,
+        "fidelity": 0.8726717850723759,
+        "edges": 0.015898295194766626,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "probe-11",
+    "factors": {
+      "wide": true,
+      "corner": true,
+      "dense": false,
+      "color": true
+    },
+    "properties": {
+      "contrastRange": 0.6208664848417044,
+      "edgeDensity": 0.007872959917773668,
+      "centerDetail": 0.008379608474988458,
+      "outerDetail": 0.007704077065368811,
+      "color": 0.24677669205486724,
+      "midtones": 0.1685112847222222
+    },
+    "scans": [
+      {
+        "level": "L",
+        "size": "fit",
+        "score": 43.82233696969967,
+        "fidelity": 0.7636221478446017,
+        "edges": 0.040513751961034995,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "L",
+        "size": "more",
+        "score": 45.63522975122478,
+        "fidelity": 0.8016328612600712,
+        "edges": 0.034342719598241235,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "L",
+        "size": "most",
+        "score": 47.2245978441247,
+        "fidelity": 0.8348769038863306,
+        "edges": 0.02903040289725582,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "M",
+        "size": "fit",
+        "score": 45.27121693048285,
+        "fidelity": 0.7913553642937063,
+        "edges": 0.03881493098508883,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "M",
+        "size": "more",
+        "score": 46.0100729469869,
+        "fidelity": 0.8093972920416629,
+        "edges": 0.03318270854878751,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "M",
+        "size": "most",
+        "score": 47.26328142220966,
+        "fidelity": 0.8363513170136789,
+        "edges": 0.028087977476829215,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "Q",
+        "size": "fit",
+        "score": 45.08851103992753,
+        "fidelity": 0.7888150342570855,
+        "edges": 0.037859647906396024,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "Q",
+        "size": "more",
+        "score": 46.10089457030778,
+        "fidelity": 0.8141295743340018,
+        "edges": 0.029417066265281667,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "Q",
+        "size": "most",
+        "score": 47.33465261910601,
+        "fidelity": 0.8395565664873205,
+        "edges": 0.025756476940075036,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "H",
+        "size": "fit",
+        "score": 45.80524305603752,
+        "fidelity": 0.8021593173587852,
+        "edges": 0.037477346695651816,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "H",
+        "size": "more",
+        "score": 46.59485276675082,
+        "fidelity": 0.8212318137397903,
+        "edges": 0.03171340024583008,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "H",
+        "size": "most",
+        "score": 47.34440988882541,
+        "fidelity": 0.8402031550917444,
+        "edges": 0.025183030195099272,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "probe-12",
+    "factors": {
+      "wide": false,
+      "corner": false,
+      "dense": true,
+      "color": true
+    },
+    "properties": {
+      "contrastRange": 0.18964177281856526,
+      "edgeDensity": 0.013632709686393706,
+      "centerDetail": 0.02663956847365573,
+      "outerDetail": 0.009297090090639675,
+      "color": 0.26751295490248594,
+      "midtones": 0.9978298611111112
+    },
+    "scans": [
+      {
+        "level": "L",
+        "size": "fit",
+        "score": 45.56592533353931,
+        "fidelity": 0.7866310499552409,
+        "edges": 0.05113816857780123,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "L",
+        "size": "more",
+        "score": 47.24188943010344,
+        "fidelity": 0.8251832798963467,
+        "edges": 0.041262423017874875,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "L",
+        "size": "most",
+        "score": 49.205721057427,
+        "fidelity": 0.8606415368322242,
+        "edges": 0.04156525625899245,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "M",
+        "size": "fit",
+        "score": 47.04325384198891,
+        "fidelity": 0.8112950413600454,
+        "edges": 0.05382281260414247,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "M",
+        "size": "more",
+        "score": 48.069444047645604,
+        "fidelity": 0.8375798872863768,
+        "edges": 0.04450111659766396,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "M",
+        "size": "most",
+        "score": 49.39260075212706,
+        "fidelity": 0.8653136842367212,
+        "edges": 0.040007735980164286,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "Q",
+        "size": "fit",
+        "score": 46.66052346442153,
+        "fidelity": 0.8075957060907005,
+        "edges": 0.04983910287628873,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "Q",
+        "size": "more",
+        "score": 47.82024768376785,
+        "fidelity": 0.8365126126379242,
+        "edges": 0.040267866415155916,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "Q",
+        "size": "most",
+        "score": 49.64245589654877,
+        "fidelity": 0.8675392713281648,
+        "edges": 0.042839910522215446,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "H",
+        "size": "fit",
+        "score": 47.65806657029088,
+        "fidelity": 0.8265607671656616,
+        "edges": 0.048827208359544086,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "H",
+        "size": "more",
+        "score": 48.382801109540985,
+        "fidelity": 0.8459894533696917,
+        "edges": 0.04118624831573197,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "H",
+        "size": "most",
+        "score": 49.79096243886485,
+        "fidelity": 0.8701258870656104,
+        "edges": 0.042978636672361716,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "probe-13",
+    "factors": {
+      "wide": true,
+      "corner": false,
+      "dense": true,
+      "color": true
+    },
+    "properties": {
+      "contrastRange": 0.4997905560940503,
+      "edgeDensity": 0.035599838692031566,
+      "centerDetail": 0.06904672928720512,
+      "outerDetail": 0.024450875160307053,
+      "color": 0.2663926925913688,
+      "midtones": 0.3228081597222222
+    },
+    "scans": [
+      {
+        "level": "L",
+        "size": "fit",
+        "score": 46.81950118308229,
+        "fidelity": 0.7648119563939468,
+        "edges": 0.10566319069811585,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "L",
+        "size": "more",
+        "score": 47.98931108726763,
+        "fidelity": 0.8041281863348759,
+        "edges": 0.08360579641887651,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "L",
+        "size": "most",
+        "score": 49.49966843508967,
+        "fidelity": 0.8367863750698188,
+        "edges": 0.0772537290277696,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "M",
+        "size": "fit",
+        "score": 48.43984764415804,
+        "fidelity": 0.7888411255728652,
+        "edges": 0.1123019052811212,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "M",
+        "size": "more",
+        "score": 48.61244534947298,
+        "fidelity": 0.8147953070254338,
+        "edges": 0.08441563251275816,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "M",
+        "size": "most",
+        "score": 49.72254030374703,
+        "fidelity": 0.841017064902205,
+        "edges": 0.07703559409168344,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "Q",
+        "size": "fit",
+        "score": 47.54893544915557,
+        "fidelity": 0.7856588638500159,
+        "edges": 0.09639328749788213,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "Q",
+        "size": "more",
+        "score": 48.419635369005945,
+        "fidelity": 0.8148329274269484,
+        "edges": 0.08008498578941724,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "Q",
+        "size": "most",
+        "score": 50.034872133030305,
+        "fidelity": 0.8436465469032061,
+        "edges": 0.08076249007453262,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "H",
+        "size": "fit",
+        "score": 48.6475545406892,
+        "fidelity": 0.8009747470773273,
+        "edges": 0.10208763225413782,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "H",
+        "size": "more",
+        "score": 48.98182679754463,
+        "fidelity": 0.8239001377832446,
+        "edges": 0.08149598265480375,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "H",
+        "size": "most",
+        "score": 50.12194000476215,
+        "fidelity": 0.8453561976177335,
+        "edges": 0.08060775857304038,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "probe-14",
+    "factors": {
+      "wide": false,
+      "corner": true,
+      "dense": true,
+      "color": true
+    },
+    "properties": {
+      "contrastRange": 0.17668798559904098,
+      "edgeDensity": 0.007635496755079578,
+      "centerDetail": 0.006323537051100286,
+      "outerDetail": 0.008072816656405994,
+      "color": 0.24059289999584305,
+      "midtones": 0.9979383680555556
+    },
+    "scans": [
+      {
+        "level": "L",
+        "size": "fit",
+        "score": 43.564873771168145,
+        "fidelity": 0.7841007746047342,
+        "edges": 0.009762914842394731,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "L",
+        "size": "more",
+        "score": 46.44170207326764,
+        "fidelity": 0.827608039036945,
+        "edges": 0.02051688724968144,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "L",
+        "size": "most",
+        "score": 48.67249438576111,
+        "fidelity": 0.8637661933772113,
+        "edges": 0.025896750000321864,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "M",
+        "size": "fit",
+        "score": 45.689791796799014,
+        "fidelity": 0.8137943342984872,
+        "edges": 0.020691186897382457,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "M",
+        "size": "more",
+        "score": 47.053323701786034,
+        "fidelity": 0.8389538287517554,
+        "edges": 0.020241402676432856,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "M",
+        "size": "most",
+        "score": 49.07424272918639,
+        "fidelity": 0.8682864063302206,
+        "edges": 0.029299786244983358,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "Q",
+        "size": "fit",
+        "score": 45.62387919177558,
+        "fidelity": 0.8116769725670636,
+        "edges": 0.021814348901935,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "Q",
+        "size": "more",
+        "score": 47.40523732201295,
+        "fidelity": 0.8399815563912584,
+        "edges": 0.02680559378874962,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "Q",
+        "size": "most",
+        "score": 49.16465941207474,
+        "fidelity": 0.8691372428364185,
+        "edges": 0.03026913457937159,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "H",
+        "size": "fit",
+        "score": 46.95978525632505,
+        "fidelity": 0.8287862860254264,
+        "edges": 0.030589767220590956,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "H",
+        "size": "more",
+        "score": 47.56446344794909,
+        "fidelity": 0.8473313581675885,
+        "edges": 0.02136086108292713,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "H",
+        "size": "most",
+        "score": 49.35647619133543,
+        "fidelity": 0.872418588782562,
+        "edges": 0.03052119573987821,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "probe-15",
+    "factors": {
+      "wide": true,
+      "corner": true,
+      "dense": true,
+      "color": true
+    },
+    "properties": {
+      "contrastRange": 0.46421683949232095,
+      "edgeDensity": 0.01975657093730992,
+      "centerDetail": 0.01656480004787061,
+      "outerDetail": 0.02082049456712312,
+      "color": 0.23634546519494576,
+      "midtones": 0.16959635416666666
+    },
+    "scans": [
+      {
+        "level": "L",
+        "size": "fit",
+        "score": 42.51730697520981,
+        "fidelity": 0.7575626309854031,
+        "edges": 0.018919161578058702,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "L",
+        "size": "more",
+        "score": 46.254451704188384,
+        "fidelity": 0.8003047245459641,
+        "edges": 0.04972648564800777,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "L",
+        "size": "most",
+        "score": 48.03123079439388,
+        "fidelity": 0.8324326654187294,
+        "edges": 0.049942982141416764,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "M",
+        "size": "fit",
+        "score": 45.55005942097645,
+        "fidelity": 0.788841307427776,
+        "edges": 0.048084166943305966,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "M",
+        "size": "more",
+        "score": 46.479176191081855,
+        "fidelity": 0.8072027025640365,
+        "edges": 0.046289501112441074,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "M",
+        "size": "most",
+        "score": 48.41653683518603,
+        "fidelity": 0.8353185467506355,
+        "edges": 0.054978150308912704,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "Q",
+        "size": "fit",
+        "score": 45.30679898272156,
+        "fidelity": 0.7872190384427047,
+        "edges": 0.04466115263050668,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "Q",
+        "size": "more",
+        "score": 47.29786187467654,
+        "fidelity": 0.812039733378534,
+        "edges": 0.05857058975238168,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "Q",
+        "size": "most",
+        "score": 48.567792404715746,
+        "fidelity": 0.8382929280120983,
+        "edges": 0.054704030312229764,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "H",
+        "size": "fit",
+        "score": 46.62099667068224,
+        "fidelity": 0.8013023502229301,
+        "edges": 0.05665260907602402,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "H",
+        "size": "more",
+        "score": 46.98167505157834,
+        "fidelity": 0.8168945079679724,
+        "edges": 0.045610602518663515,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "level": "H",
+        "size": "most",
+        "score": 48.688570253865166,
+        "fidelity": 0.838735422907714,
+        "edges": 0.05684715542090872,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      }
+    ]
+  }
+]

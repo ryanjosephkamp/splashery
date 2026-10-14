@@ -1,0 +1,310 @@
+[
+  {
+    "profile": "cold-low",
+    "start": 2278.699999999255,
+    "totalMs": 1990,
+    "previewMs": 788.3000000007451,
+    "maxStepMs": 14.599999997764826,
+    "steps": [
+      {
+        "label": "Kit.emitCloud",
+        "start": 3771.800000000745,
+        "ms": 6
+      },
+      {
+        "label": "Kit.emitCloud",
+        "start": 3777.800000000745,
+        "ms": 5.600000001490116
+      },
+      {
+        "label": "Kit.emitCloud",
+        "start": 3783.400000002235,
+        "ms": 2.099999997764826
+      },
+      {
+        "label": "Kit.emitCloud",
+        "start": 3785.5,
+        "ms": 2.300000000745058
+      },
+      {
+        "label": "Kit.emitCloud",
+        "start": 3787.800000000745,
+        "ms": 1.3999999985098839
+      },
+      {
+        "label": "Kit.emitCloud",
+        "start": 3789.199999999255,
+        "ms": 1.6000000014901161
+      },
+      {
+        "label": "Kit.emitCloud",
+        "start": 3790.800000000745,
+        "ms": 1.5
+      },
+      {
+        "label": "Kit.emitCloud",
+        "start": 3792.300000000745,
+        "ms": 1.6000000014901161
+      },
+      {
+        "label": "Kit.emitCloud",
+        "start": 3793.900000002235,
+        "ms": 1.3999999985098839
+      },
+      {
+        "label": "Kit.emitCloud",
+        "start": 3795.300000000745,
+        "ms": 1.699999999254942
+      },
+      {
+        "label": "Kit.emitCloud",
+        "start": 3797,
+        "ms": 1.4000000022351742
+      },
+      {
+        "label": "Kit.emitCloud",
+        "start": 3798.400000002235,
+        "ms": 1.5
+      },
+      {
+        "label": "Kit.emitCloud",
+        "start": 3799.900000002235,
+        "ms": 1.699999999254942
+      },
+      {
+        "label": "Kit.emitCloud",
+        "start": 3801.60000000149,
+        "ms": 1.8999999985098839
+      },
+      {
+        "label": "Kit.emitCloud",
+        "start": 3803.60000000149,
+        "ms": 1.5999999977648258
+      },
+      {
+        "label": "Kit.emitCloud",
+        "start": 3805.199999999255,
+        "ms": 1.5
+      },
+      {
+        "label": "Kit.emitCloud",
+        "start": 3806.699999999255,
+        "ms": 1.800000000745058
+      },
+      {
+        "label": "Kit.emitCloud",
+        "start": 3808.5,
+        "ms": 1.199999999254942
+      },
+      {
+        "label": "Kit.emitCloud",
+        "start": 3809.699999999255,
+        "ms": 1.4000000022351742
+      },
+      {
+        "label": "Kit.emitCloud",
+        "start": 3811.10000000149,
+        "ms": 1.300000000745058
+      },
+      {
+        "label": "Kit.emitCloud",
+        "start": 3812.400000002235,
+        "ms": 1.0999999977648258
+      },
+      {
+        "label": "Kit.emitCloud",
+        "start": 3813.5,
+        "ms": 1.5
+      },
+      {
+        "label": "Kit.emitCloud",
+        "start": 3815,
+        "ms": 1.4000000022351742
+      },
+      {
+        "label": "Kit.emitCloud",
+        "start": 3818.10000000149,
+        "ms": 0.5
+      },
+      {
+        "label": "Kit.fit",
+        "start": 3818.60000000149,
+        "ms": 7.399999998509884
+      },
+      {
+        "label": "Kit.encodeMorphs",
+        "start": 3826,
+        "ms": 3.199999999254942
+      },
+      {
+        "label": "Kit.encodeReliefs",
+        "start": 3829.199999999255,
+        "ms": 0
+      },
+      {
+        "label": "Player.makeContainer",
+        "start": 3829.900000002235,
+        "ms": 14.599999997764826
+      },
+      {
+        "label": "Stage.setToy",
+        "start": 3845.400000002235,
+        "ms": 0.5999999977648258
+      },
+      {
+        "label": "Canvas.getContext",
+        "start": 3846.10000000149,
+        "ms": 0.09999999776482582
+      },
+      {
+        "label": "Sharp.setColor",
+        "start": 3859.699999999255,
+        "ms": 3.2000000029802322
+      },
+      {
+        "label": "Sharp.setDepth",
+        "start": 3864.900000002235,
+        "ms": 0.29999999701976776
+      },
+      {
+        "label": "Sharp.setPieces",
+        "start": 3865.199999999255,
+        "ms": 2.100000001490116,
+        "field": true
+      },
+      {
+        "label": "Sharp.setBackground",
+        "start": 3867.300000000745,
+        "ms": 1.199999999254942
+      }
+    ],
+    "longTasks": [
+      {
+        "start": 2283,
+        "ms": 402
+      },
+      {
+        "start": 3752.699999999255,
+        "ms": 63
+      },
+      {
+        "start": 3848.900000002235,
+        "ms": 80
+      }
+    ],
+    "sharp": {
+      "color": 5823147,
+      "depth": 297472,
+      "mesh": 4539240,
+      "pieces": 323080,
+      "background": 570112,
+      "triangles": 132276,
+      "total": 11553051
+    },
+    "splats": 89824
+  },
+  {
+    "profile": "low",
+    "totalMs": 1589.5,
+    "previewMs": 53.20000000298023,
+    "maxStepMs": 72.19999999925494,
+    "maxima": {
+      "Kit.emitCloud": 16,
+      "Kit.fit": 6.400000002235174,
+      "Kit.encodeMorphs": 4.799999997019768,
+      "Kit.encodeReliefs": 0,
+      "Player.makeContainer": 72.19999999925494,
+      "Stage.setToy": 0.30000000074505806,
+      "Canvas.getContext": 0.09999999776482582,
+      "Sharp.setColor": 2.099999997764826,
+      "Sharp.setDepth": 0.19999999925494194,
+      "Sharp.setPieces": 3.399999998509884,
+      "Sharp.setBackground": 0.30000000074505806
+    },
+    "steps": [
+      {
+        "label": "Sharp.setPieces",
+        "start": 5392.300000000745,
+        "ms": 3.399999998509884,
+        "field": true
+      }
+    ],
+    "longTasks": [
+      {
+        "start": 5166.900000002235,
+        "ms": 70
+      },
+      {
+        "start": 5237.5,
+        "ms": 100
+      }
+    ],
+    "sharp": {
+      "color": 5823147,
+      "depth": 439552,
+      "mesh": 4553712,
+      "pieces": 465160,
+      "background": 712192,
+      "triangles": 132678,
+      "total": 11993763
+    },
+    "splats": 89824,
+    "heapBytes": 128105513
+  },
+  {
+    "profile": "max",
+    "totalMs": 2959,
+    "previewMs": 8.700000002980232,
+    "maxStepMs": 116.5,
+    "maxima": {
+      "Kit.emitCloud": 12.600000001490116,
+      "Kit.fit": 35.80000000074506,
+      "Kit.encodeMorphs": 12,
+      "Kit.encodeReliefs": 0,
+      "Player.makeContainer": 116.5,
+      "Stage.setToy": 0.3999999985098839,
+      "Canvas.getContext": 0.09999999776482582,
+      "Sharp.setColor": 1.8999999985098839,
+      "Sharp.setDepth": 0.30000000074505806,
+      "Sharp.setPieces": 14.599999997764826,
+      "Sharp.setBackground": 0.5
+    },
+    "steps": [
+      {
+        "label": "Sharp.setPieces",
+        "start": 7951.900000002235,
+        "ms": 14.599999997764826,
+        "field": true
+      }
+    ],
+    "longTasks": [
+      {
+        "start": 7459,
+        "ms": 98
+      },
+      {
+        "start": 7672.800000000745,
+        "ms": 80
+      },
+      {
+        "start": 7753.800000000745,
+        "ms": 124
+      },
+      {
+        "start": 7878.199999999255,
+        "ms": 97
+      }
+    ],
+    "sharp": {
+      "color": 5823147,
+      "depth": 833280,
+      "mesh": 21802380,
+      "pieces": 858500,
+      "background": 1105920,
+      "triangles": 611712,
+      "total": 30423227
+    },
+    "splats": 388926,
+    "heapBytes": 221963214
+  }
+]

@@ -11,8 +11,10 @@ import { MOVES } from "./motion.js";
 import { PATTERNS, PROJECTIONS, loadFlags } from "./patterns.js";
 import { initLive, renderLive } from "./live/panel.js"; // lane Live input
 import { ui2On } from "./player.js"; // UI r2
+import { SITE_TOY_IDS } from "./site-toy-pages.js";
 
 const $ = (id) => document.getElementById(id);
+const siteToyIds = new Set(SITE_TOY_IDS);
 
 const SWATCHES = [
   "#e63b2e",
@@ -405,7 +407,7 @@ export function createUI(app) {
   for (const b of els.tools.querySelectorAll("button")) {
     b.addEventListener("click", () => {
       app.setTool(b.dataset.tool);
-      // A tool with settings (paint colours, clay, strength) opens them.
+      // A tool with settings (paint colors, clay, strength) opens them.
       if (b.dataset.tool !== "orbit") showTab("tools");
     });
   }
@@ -414,7 +416,7 @@ export function createUI(app) {
     b.type = "button";
     b.style.background = hex;
     b.dataset.color = hex;
-    b.setAttribute("aria-label", `Paint colour ${hex}`);
+    b.setAttribute("aria-label", `Paint color ${hex}`);
     b.setAttribute("aria-pressed", "false");
     b.addEventListener("click", () => app.setEffectParam("paint", "color", hex));
     els.swatches.appendChild(b);
@@ -619,7 +621,7 @@ export function createUI(app) {
         input.value = value;
         input.addEventListener("change", () => app.setToyOption(o.key, input.value));
       } else if (o.type === "flag") {
-        // A country's flag, from the flag catalogue (the Moon's flag).
+        // A country's flag, from the flag catalog (the Moon's flag).
         input = document.createElement("select");
         input.add(new Option(value.toUpperCase(), value));
         input.value = value;
@@ -1962,7 +1964,7 @@ export function createUI(app) {
   // The flag list is small; fetch it soon after start so pickers are full
   // before anyone opens them.
   setTimeout(listFlags, 1500);
-  // The quick "Flag colours" picker in the Play tab.
+  // The quick "Flag colors" picker in the Play tab.
   els.toyFlag.addEventListener("focus", listFlags);
   els.toyFlag.addEventListener("pointerdown", listFlags);
   els.toyFlag.addEventListener("change", () => {
@@ -2958,6 +2960,8 @@ export function createUI(app) {
     aboutText: $("toy-about-text"),
     howTo: $("toy-about-howto"),
     can: $("toy-about-can"),
+    siteRow: $("toy-site-row"),
+    siteLink: $("toy-site-link"),
   };
   let helpModule = null;
   let helpKey = null;
@@ -3065,6 +3069,13 @@ export function createUI(app) {
   }
   async function setToyHelp(info) {
     helpInfo = info;
+    // The site build records only toy pages that exist. Scene files and old
+    // share links reach this same path; a file or a toy made here has no page.
+    const id = info?.id;
+    const hasPage = siteToyIds.has(id);
+    help.siteRow.hidden = !hasPage;
+    if (hasPage) help.siteLink.setAttribute("href", `./site/toys/${encodeURIComponent(id)}/`);
+    else help.siteLink.removeAttribute("href");
     // A new toy shows the line; the same toy rebuilt (an option, the detail
     // tier) only updates the text.
     const key = info ? `${info.kind}:${info.id ?? info.label}` : null;

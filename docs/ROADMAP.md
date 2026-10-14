@@ -206,7 +206,7 @@ their own, open and close, and can wear patterns and flags.
 | -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | How many toys, which first | As many as possible, mostly generated in code. Sports balls and flags first, then the other packs in the order below.                                                                                                            |
 | PR slicing                 | Stacked draft PRs, one branch each (`claude/splashery-expansion-alignment-q9os3b` and `…-q9os3b-<part>`), all targeting `main`. Merge them in order; each shrinks to its own diff once the one before it is merged.              |
-| Flags                      | Every national flag, from Wikimedia Commons, public domain only (each file's licence checked), usable on any toy.                                                                                                                |
+| Flags                      | Every national flag, from Wikimedia Commons, public domain only (each file's license checked), usable on any toy.                                                                                                                |
 | Outside models             | Allowed: CC0 or CC BY models and scans (Poly Haven, NASA, SuperSplat and similar), turned into splats at build time and credited. AI image-to-3D at build time is allowed with a Hugging Face token (added 2026-09-23; Phase G). |
 | Anatomy                    | Stylised and friendly, never gory.                                                                                                                                                                                               |
 | Sound                      | Optional soft sounds (WebAudio, no files), off until the speaker button is pressed, never on in embeds by default.                                                                                                               |
@@ -216,7 +216,7 @@ their own, open and close, and can wear patterns and flags.
 ## How toys are made
 
 1. **Generated in code** (the main route): seeded recipes built in the browser from a small toy kit
-   of surface and volume primitives. No licence risk, almost no download, recolourable, and a toy
+   of surface and volume primitives. No license risk, almost no download, recolourable, and a toy
    fits in a share link.
 2. **Captured splats**: CC0 or CC BY scans converted with `tools/prepare-assets.mjs`. Photoreal but
    about 5 MB each (plus a 1.5 MB lite copy), so the shelf keeps at most about 30.
@@ -228,7 +228,7 @@ their own, open and close, and can wear patterns and flags.
 
 ## How toys move
 
-- **Behaviours**: built-in motion driven by the clock and per-splat data (beat, breathe, spin, orbit
+- **Behaviors**: built-in motion driven by the clock and per-splat data (beat, breathe, spin, orbit
   with differential rotation, flicker, bloom and grow, melt, rain and lightning, pulse along a path,
   twinkle, sway, flap, inflate, pop).
 - **Parts**: splats grouped into rigid parts with hinges or spins (book covers, laptop lids, chest
@@ -236,19 +236,19 @@ their own, open and close, and can wear patterns and flags.
 - **Patterns**: a pattern layer wraps a design around any toy (stripes, dots, checks, stars,
   gradients and every national flag), under the toy's own seams and details.
 - 4D Gaussian splat captures are not used: there is no standard format for them in PlayCanvas, the
-  files are huge, and behaviours give the same "alive" feel for free.
+  files are huge, and behaviors give the same "alive" feel for free.
 
 ## The PRs
 
 | #   | Branch suffix | What                                                                                                                                                                                      |
 | --- | ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | 1   | (none)        | Phone sheet (tap outside or swipe down to close, grab handle, tabs, roomier rows), shelf that scales (categories, search, Surprise me, lazy thumbnails), canvas resize fix, this roadmap. |
-| 2   | `-engine`     | Toy kit and per-pack loading, behaviours, parts, pattern layer and flags, scene schema v3 with a v2 migration, optional sound.                                                            |
+| 2   | `-engine`     | Toy kit and per-pack loading, behaviors, parts, pattern layer and flags, scene schema v3 with a v2 migration, optional sound.                                                             |
 | 3   | `-balls`      | Sports balls.                                                                                                                                                                             |
 | 4   | `-space`      | Space.                                                                                                                                                                                    |
 | 5   | `-tiny`       | Tiny world (microbiology), atoms and chemistry, gems and minerals, anatomy.                                                                                                               |
 | 6   | `-nature`     | Plants and trees, weather and elements, food.                                                                                                                                             |
-| 7   | `-play`       | Toys and playthings, maths and art, things that open, medieval and fantasy, animals, holidays, music.                                                                                     |
+| 7   | `-play`       | Toys and playthings, math and art, things that open, medieval and fantasy, animals, holidays, music.                                                                                      |
 | 8   | `-world`      | Vehicles, landmarks, ships; the model-to-splat tool with CC0/CC BY models; more photoreal scans; AI image-to-3D if the token is set.                                                      |
 
 ## The toy list
@@ -289,7 +289,7 @@ their own, open and close, and can wear patterns and flags.
     or trebuchet that throws paint, crossbow, knight's helmet, crown, dragon egg, wizard's orb.
 13. **Animals**: ★jellyfish, ★fish school, ★butterfly, ★pufferfish, ★nautilus shell, ladybug, snail,
     octopus, starfish, frog, penguin.
-14. **Maths and art**: ★Lorenz attractor, ★Möbius strip, ★Klein bottle, ★Menger sponge, ★4D
+14. **Math and art**: ★Lorenz attractor, ★Möbius strip, ★Klein bottle, ★Menger sponge, ★4D
     hypercube, torus knots, gyroid, Mandelbulb, Sierpinski tetrahedron, Platonic solids.
 15. **Holidays**: jack-o'-lantern, snowman that melts, fireworks, decorated tree, patterned egg,
     paper lantern, diya lamp.
@@ -319,7 +319,7 @@ See [BACKLOG.md](BACKLOG.md) for the reasons and what would unblock each one.
 - **Submissions**: now part of the plan above ("Toy Workshop, AI package and submissions"): a
   pre-filled GitHub issue form, files optional, and no email route at launch.
 - **Approval from a phone**: say "add issue #N to the gallery" in a session, or let a GitHub Action
-  (built-in `GITHUB_TOKEN`, no secrets) turn a labelled issue into a PR the owner merges.
+  (built-in `GITHUB_TOKEN`, no secrets) turn a labeled issue into a PR the owner merges.
 - **Grid performance**: browsers allow about 16 WebGL contexts, so the grid shows still or animated
   thumbnails and opens one live player when a card is tapped.
 - **Later, only if it takes off**: a hosted backend for one-click submissions and likes (Cloudflare

@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Lane Photoreal r3: prepares the third round's splat captures (the entries in tools/assets.json
 // with "pack": "pr3"), exactly as tools/pr2-prepare.mjs prepares the second round's (a copy of it,
-// so that lane's tool stays as it is) like tools/prepare-assets.mjs does: rotate upright, centre
+// so that lane's tool stays as it is) like tools/prepare-assets.mjs does: rotate upright, center
 // and scale to a radius of about 0.9, crop stray floaters, decimate, write a full and a lite SOG.
 // Unlike that tool it can keep spherical harmonics on the full file ("sh": 1..3 on the entry: the
 // shine of glossy things); the lite file never has them.

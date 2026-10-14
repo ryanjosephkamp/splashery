@@ -591,7 +591,7 @@ be established are identified explicitly rather than guessed.
   [Orizuru](https://en.wikipedia.org/wiki/Orizuru).
 - **Balloon dog** (`balloon-dog`): **OK** — Pop matches the recipe; no factual correction
   identified. [recipe](../../src/packs/playthings.js);
-  [Balloon modelling](https://en.wikipedia.org/wiki/Balloon_modelling).
+  [Balloon modeling](https://en.wikipedia.org/wiki/Balloon_modelling).
 - **Soap bubbles** (`soap-bubbles`): **OK** — Blow bubbles matches the recipe; no factual correction
   identified. [recipe](../../src/packs/playthings.js);
   [Soap bubble](https://en.wikipedia.org/wiki/Soap_bubble).
@@ -719,7 +719,7 @@ be established are identified explicitly rather than guessed.
 - **Owl** (`owl`): **OK** — Turn the head matches the recipe; no factual correction identified.
   [recipe](../../src/packs/animals.js); [Owl](https://en.wikipedia.org/wiki/Owl).
 
-## Maths (17)
+## Math (17)
 
 - **Lorenz attractor** (`lorenz`): **Fixed** — Qualified chaos to suitable parameters and the toy to
   a finite path. [recipe](../../src/packs/maths.js);

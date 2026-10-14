@@ -97,7 +97,7 @@ public Tinkerer's Manual that is also the book's default PDF.
 
 Build two things:
 
-1. **Splat equation** (`splat-equation`, on the Maths shelf, `labs: true`).
+1. **Splat equation** (`splat-equation`, on the Math shelf, `labs: true`).
    - You type where the splats go and what color they are, as equations in u, v and time t: x(u, v,
      t), y(u, v, t), z(u, v, t), the ranges of u and v, a color (a hue expression, or r, g and b), a
      splat size and a splat count.
@@ -288,7 +288,7 @@ Effect review page (lane `Manual`, cards `man-*`).
 - README line: the manual is at `manual/` (and its PDF), linked from the About tab.
 - No exceptions needed in `tests/taps.spec.mjs`.
 - Two other lanes' spec files count toys and fail with this lane's new toy (only the Operator or
-  their lanes edit them): `tests/hta.spec.mjs` expects 149 toys on its shelves (the Maths shelf now
+  their lanes edit them): `tests/hta.spec.mjs` expects 149 toys on its shelves (the Math shelf now
   has one more: 150), and `tests/pic.spec.mjs` ("the Picture lab is a labs toy on its own shelf, and
   only it") expects Picture lab to be the only labs toy (now also `splat-equation`; lanes Books and
   Screens will add more). Suggested: count only the toys that aren't `labs`, and check that every

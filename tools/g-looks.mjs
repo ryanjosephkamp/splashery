@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Lane G: paints the default look onto the two photo-made scans, keeping the
-// scan's own light and shade. Each splat takes a new colour by region, scaled
+// scan's own light and shade. Each splat takes a new color by region, scaled
 // by its own brightness against the region's median, so ribs, facets, dents
 // and the photo's shading stay; nothing moves and no splat is added.
 //
@@ -34,7 +34,7 @@ const ids = args.filter((a) => !a.startsWith("--"));
 const work = path.join(root, ".cache/g/looks");
 fs.mkdirSync(work, { recursive: true });
 
-// Colours are the look's colour at the region's median brightness.
+// Colors are the look's color at the region's median brightness.
 export const LOOKS = {
   "pencil-real": {
     yellow: { body: [0.98, 0.66, 0.02], ferrule: "silver", eraser: [0.93, 0.5, 0.52], imprint: [0.12, 0.1, 0.06] }, // prettier-ignore
@@ -90,7 +90,7 @@ const median = (v) => {
 };
 const clamp = (x, a, b) => Math.min(b, Math.max(a, x));
 
-// Each splat as { i, p: [x, y, z], c: [r, g, b] } (colour 0..1).
+// Each splat as { i, p: [x, y, z], c: [r, g, b] } (color 0..1).
 function splats(ply) {
   const [ix, ic] = [ply.props.indexOf("x"), ply.props.indexOf("f_dc_0")];
   const out = [];
@@ -112,8 +112,8 @@ function setColor(ply, s, c) {
 // the group's median (kept within a sensible range, so glare and the unseen
 // side's guesswork do not turn to white or black).
 // With `smooth` (a cell size), each splat's brightness is the mean over its
-// neighbours within about a cell: the facets' light stays, while fine grain
-// in the scan (wood fibres) no longer turns into speckle under a dark paint.
+// neighbors within about a cell: the facets' light stays, while fine grain
+// in the scan (wood fibers) no longer turns into speckle under a dark paint.
 function paint(ply, group, color, lo = 0.35, hi = 1.35, smooth = 0) {
   if (!group.length) return;
   const bright = smooth ? smoothed(group, smooth) : new Map(group.map((s) => [s, lum(s.c)]));
@@ -205,12 +205,12 @@ function pencil(ply, look) {
   };
   const glyph = inked("HB", -0.27, 0.24, 0.085);
   const mark = (s) => face(s) && glyph(s.p[0], s.p[2] - cz);
-  // A bare wood body keeps the scan's own colour under its mark.
+  // A bare wood body keeps the scan's own color under its mark.
   if (!look.body) paint(ply, body.filter(mark), look.imprint);
   else paint(ply, body, (s) => (mark(s) ? look.imprint : look.body), 0.35, 1.35, 0.012);
 }
 
-// Two block capitals, drawn from 5x7 cells: x from x0, width w, centred on
+// Two block capitals, drawn from 5x7 cells: x from x0, width w, centered on
 // z = 0 across the face, height h. Returns (x, z) => inked?
 function inked(text, x0, w, h) {
   const FONT = {
@@ -248,7 +248,7 @@ async function drawLabel(kind) {
 
 // Runs in the page: the label as a PNG data URL. Two front panels, half a
 // turn apart (so it reads from either side), each a fruit picture in an oval
-// over a banner with the word; bands of colour and a gold rule above and below.
+// over a banner with the word; bands of color and a gold rule above and below.
 function labelArt({ kind, w, h }) {
   const cv = document.createElement("canvas");
   cv.width = w;
@@ -369,7 +369,7 @@ function can(ply, look, art) {
   // Bare tinplate keeps the wall's full shading: on metal the photo's glare
   // reads as a shine.
   if (look.metal) return paint(ply, side, look.metal, 0.45, 1.3);
-  // The front panel (u = 0.25) faces the home camera, which sits towards
+  // The front panel (u = 0.25) faces the home camera, which sits toward
   // (sin yaw, 0, cos yaw); u runs left to right seen from outside.
   const front = Math.atan2(Math.cos(HOME_YAW), Math.sin(HOME_YAW));
   const sample = (u, v) => {
@@ -386,7 +386,7 @@ function can(ply, look, art) {
       const o = ((y0 + dy) * art.width + (x0 + dx)) * 4;
       for (let k = 0; k < 3; k++) c[k] += wt * art.data[o + k];
     }
-    // sRGB to the scan's colour scale (the scan's whites sit at about 0.8).
+    // sRGB to the scan's color scale (the scan's whites sit at about 0.8).
     return c.map((v) => (v / 255) * 0.86);
   };
   // Label paper takes the wall's shading softly: the photo's glare and the

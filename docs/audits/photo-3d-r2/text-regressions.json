@@ -1,0 +1,116 @@
+[
+  {
+    "spec": "cdx-p3d2-core",
+    "passed": 4,
+    "failed": 0,
+    "skipped": 0
+  },
+  {
+    "spec": "cdx-p3d2-input",
+    "passed": 1,
+    "failed": 0,
+    "skipped": 0
+  },
+  {
+    "spec": "cdx-p3d2-render",
+    "passed": 16,
+    "failed": 0,
+    "skipped": 0
+  },
+  {
+    "spec": "cdx-p3d2-text",
+    "passed": 2,
+    "failed": 0,
+    "skipped": 0
+  },
+  {
+    "spec": "dsm-samples",
+    "passed": 6,
+    "failed": 0,
+    "skipped": 0
+  },
+  {
+    "spec": "live3",
+    "passed": 11,
+    "failed": 0,
+    "skipped": 0
+  },
+  {
+    "spec": "lv8-dial",
+    "passed": 2,
+    "failed": 0,
+    "skipped": 0
+  },
+  {
+    "spec": "p3d",
+    "passed": 10,
+    "failed": 0,
+    "skipped": 0
+  },
+  {
+    "spec": "pdp-engine",
+    "passed": 7,
+    "failed": 0,
+    "skipped": 0
+  },
+  {
+    "spec": "pdp",
+    "passed": 6,
+    "failed": 0,
+    "skipped": 0
+  },
+  {
+    "spec": "phf-engine",
+    "passed": 5,
+    "failed": 0,
+    "skipped": 0
+  },
+  {
+    "spec": "phf",
+    "passed": 7,
+    "failed": 0,
+    "skipped": 0
+  },
+  {
+    "spec": "phf2",
+    "passed": 7,
+    "failed": 0,
+    "skipped": 0
+  },
+  {
+    "spec": "psv",
+    "passed": 8,
+    "failed": 0,
+    "skipped": 0
+  },
+  {
+    "spec": "psv2",
+    "passed": 6,
+    "failed": 0,
+    "skipped": 0
+  },
+  {
+    "spec": "psv3",
+    "passed": 16,
+    "failed": 0,
+    "skipped": 0
+  },
+  {
+    "spec": "smd-compare",
+    "passed": 3,
+    "failed": 0,
+    "skipped": 0
+  },
+  {
+    "spec": "smd-moving",
+    "passed": 16,
+    "failed": 0,
+    "skipped": 0
+  },
+  {
+    "spec": "smd-photo",
+    "passed": 4,
+    "failed": 0,
+    "skipped": 0
+  }
+]

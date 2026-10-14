@@ -4,7 +4,43 @@ Where Splashery stands, in short. The Operator session keeps this file; each lan
 in [handoff/](handoff/). The ground rules are in [CLAUDE.md](../CLAUDE.md); how the parallel lanes
 work is in [OPERATING.md](OPERATING.md).
 
-## Now (October 12, 2026, about 10:00 UTC)
+## Now (October 14, 2026, about 06:50 UTC)
+
+The Operator is handing over on schedule from `session_011WeiHJ3ygHhoTrrJiThHzX` (Opus 5.5, since
+October 12, 08:47 UTC) to a fresh Opus 5.5 session, which updates this line with its id in its first
+Ops PR. Its own handover is due two days after it takes over, or sooner at about 400k tokens. This
+section is current. The sections below it are history. The runbook is [OPERATOR.md](OPERATOR.md).
+
+**Main** is `236f29bb4` (Ops #617). Merged October 13 and 14: tasks 57 (#586), 39 and 53 (#590), 70
+(#593), 54 (#598), 69, the circular QR codes (#603), 73, the manual PDF per edition (#615), and
+#589, the engine's full resolution within the device's pixel cap (#617); Codex task files 55 to 78
+(#584, #587, #592, #596, #604, #605); the Photo to 3D checkpoint (#604).
+
+**Photo to 3D checkpoint:** [docs/studio/photo-3d-checkpoint.md](studio/photo-3d-checkpoint.md).
+Every later change to it must beat the checkpoint branch or be reverted.
+
+**Known red on main:**
+
+- `kit.spec.mjs:87` since #603: a circular QR recipe stops with "too much detail for a circular
+  picture on this device" in the cloud browser. A fix task is offered to the owner.
+- `man5.spec.mjs:201` only where Chromium's sandbox can't start (Claude cloud containers run as
+  root): since #615 the PDF tool keeps the sandbox on. Keep it on; the owner chose to merge as is.
+  Task 77's GitHub Actions run should cover it.
+
+**Codex** (the owner runs these from the private Codex Board; tasks in `docs/codex/`): open PRs #560
+(48), #562 (55), #581 (50), #588 (51), #594 (52, public: the owner's good after its chess fix), #599
+(66), #600 (72), #601 (71), #602 (56), #197 (65), #611 (74), #606 to #610 (75a to 75e), #612 to #614
+and #616 (78a to 78d, the portfolio toys, labs). Running without a PR yet: 58, 76, 77. Moved to the
+Splash Shop: 42 to 46, 49, 59 to 64, 67, and 68.
+
+**The Splash Shop** (`ryanjosephkamp/splashdot`) is read-only for Splashery sessions. Work comes
+back only through a promotion note the owner brings, then an Operator-written port.
+
+**Next for the Operator:** review each Codex PR as it reports done (a Sonnet helper, one comment);
+merge labs work after its tests; send public changes to the owner first; write docs/STATUS.md after
+the Dot's activation report.
+
+## October 12 to 13, 2026 (history)
 
 The Operator is `session_011WeiHJ3ygHhoTrrJiThHzX` (Opus 5.5), since October 12, 2026, 08:47 UTC. It
 took over from `session_01BbS2vUAWpeFF2i6KoJAqCt` (01:38 to 08:47 UTC), which stands by for a day.
@@ -62,11 +98,11 @@ batch merges as one PR.
 - This batch: Manual r7c (#561: the `ln` tests green again, the PDF down to 7.1 MB) and Builders r1b
   (#565: the baked format in `builders/`)
 
-**Lanes running:** US English (Sonnet, `session_01Lidt6WyFTaVR9bpedcY9Cu`, #570): the American
-spelling sweep the owner asked for on October 12, 2026; files the open Codex PRs change wait for its
-Part 2. Manual r8 (#571, the third audit's fixes, the owner's marks all good) merged with Codex task
-37 (#558) in this batch; its phrasing-only items wait in docs/handoff/ManualR8.md for the owner's
-rewording pass.
+**Lanes running:** none. US English (#570, the American spelling sweep the owner asked for on
+October 12, 2026) merged in this batch with his OK; identifiers and stored keys stay British (listed
+in docs/handoff/UsEnglish.md for a later decision). The same batch fixes `cdx-gallery:10`, red on
+main since #572 (Manual r8 changed six gallery captions; the program gallery audit now repeats the
+current ones).
 
 **Codex** (the owner runs these; tasks in `docs/codex/`, the Studio push 37 to 41 and the second
 wave 42 to 46). The Operator reviews each PR with a Sonnet helper and posts one comment listing the
@@ -81,8 +117,9 @@ fixes; the owner tells the Codex session "Read the Operator's comment on your PR
   legibility 0.775, under 0.8), sent back to Codex.
 - All are labs: merge after the fixes, the tests (`cdx-*` plus the toys' specs) and the owner's
   look.
-- Not yet opened: tasks 42 to 46, and 47 (a short audit of Manual r8's fixes, before the owner's
-  rewording pass) (46 may start now that the Baked engine is in).
+- Ready for the owner to start: tasks 42 to 46 and 49 to 52 (`docs/codex/`). Task 48 (Moving photo,
+  a long Goal run on #560's branch) is running. #562 (Video to 3D) passed its specs but the owner
+  wants it better before it merges. (46 may start now that the Baked engine is in).
 
 Finished and safe to archive with the owner's OK: the Baked engine, Site r5, Manual r7a, Manual r7b,
 Privacy r1, Manual r6, Site r4, and the earlier list below.
@@ -261,8 +298,7 @@ the reset, the Sonnet polish lane for Codex prototypes #518, #515 and #517.
   owner starts them. Lane Physics drafted the hands-on plan for every toy (docs/HANDS-ON-PLAN.md on
   its branch); the owner marks it on the Hands-on Plan page (OPERATING.md, "Pages"), and category
   lanes build what he approves.
-- Locked (owner approved, do not change its look or behaviour): the laptop. Its smoke test guards
-  it.
+- Locked (owner approved, do not change its look or behavior): the laptop. Its smoke test guards it.
 
 ## Active lanes
 
@@ -341,7 +377,7 @@ Each has its full notes in handoff/history.md (the phase is in brackets) and, fo
 - Draw order (E2): splats sort in their built pose; build pieces where they are seen at their
   fullest; turning about the view keeps the order; spinning bodies are built twice.
 - Hidden pieces count in the fit (E2); `fit: false` (E3 review) leaves a shape out of the fit.
-- Channels and morphs (E3): one behaviour per splat; rounder or larger splats where a morph turns or
+- Channels and morphs (E3): one behavior per splat; rounder or larger splats where a morph turns or
   stretches a surface.
 - Loose pieces as tokens, and pieces built where they end (E4).
 - Skinned sheets, twists of space, negative glow, spinning gloss, `cull` for one spinning body, and
@@ -640,4 +676,4 @@ Settled on September 30, 2026 (the owner's answers to the Operator's plan after 
 
 Still open (ask when it comes up, in Phase H):
 
-- The favourite maths toy for the homepage: Menger sponge or hypercube? One embed or several?
+- The favorite math toy for the homepage: Menger sponge or hypercube? One embed or several?

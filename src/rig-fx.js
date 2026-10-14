@@ -20,11 +20,11 @@ function unitAxis(a) {
 //   name     drive() sets out.fx[name] = { move, color, phase } each frame
 //            (move: amount, in world units or radians; color: 0..1; phase:
 //            where the pattern is, see below). time since the tap is added.
-//   select   "all" | "key0" | "key1" | "not-key0" (colour keys, see `keys`)
+//   select   "all" | "key0" | "key1" | "not-key0" (color keys, see `keys`)
 //            | { part: "name" } (splats of a rig part)
 //   mask     { half: normal, at } keeps splats with dot(p - origin, normal) > at
 //            { stripes: axis, n } keeps n strips round the axis (half of each sector)
-//            { sphere: centre, r } keeps splats within r of the centre
+//            { sphere: center, r } keeps splats within r of the center
 //            { wedge: axis, toward, angle } keeps splats within angle (radians)
 //                                           of the direction toward, round the axis
 //   origin   world point the effect works from (default [0, 0, 0])
@@ -46,7 +46,7 @@ function unitAxis(a) {
 //            { vibrate: dir, freq, along, length }
 //                                           strings: a standing wave between the origin
 //                                           and origin + along * length, shaking along dir
-//            { writhe: axis, k, lift }      a travelling wave of k lobes round the axis
+//            { writhe: axis, k, lift }      a traveling wave of k lobes round the axis
 //                                           swells and lifts the shape (phase moves it)
 //   Cells: `cell` cuts pieces on a grid; with `voronoi: true` they are
 //   rounder pieces round jittered points (drupelets, chunks).

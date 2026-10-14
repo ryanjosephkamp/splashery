@@ -43,7 +43,7 @@ const BOND_SYMBOLS = { "-": 1, "=": 2, "#": 3, $: 4, ":": 1.5, "/": 1, "\\": 1 }
 const AROMATIC_BOND = 1.5;
 
 // Valences an element can have with a given charge. A charge makes an atom
-// behave like its neighbour in the periodic table: N+ bonds like C (4),
+// behave like its neighbor in the periodic table: N+ bonds like C (4),
 // O- like F (1), C+ and C- both make 3 bonds, B- makes 4.
 export function valencesFor(el, charge = 0) {
   const e = element(el);

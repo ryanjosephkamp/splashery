@@ -16,13 +16,13 @@ Written by the Operator on 2026-09-26 from the G outline in the old HANDOFF.md:
 - Try a public Space through its API from a tool script in `tools/`. TRELLIS outputs Gaussians
   directly; Hunyuan3D is an alternative.
 - Inputs are our own CC0 images, such as renders (`tools/toy-shots.mjs` renders toys to PNG). Check
-  the model and output licences.
+  the model and output licenses.
 - Set a quality bar against the procedural toys, and only ship results that beat them.
 - The free GPU quota is limited. If anything would cost money, stop and ask the owner.
 
 Anything shipped is a new scan toy: packed with `tools/prepare-assets.mjs` (SOG), listed in
 `src/toys.js` and `tools/assets.json`, credited in `CREDITS.md` and the toy's in-app credit, its
-licence in `LICENSES.md` (CC0, CC BY or public domain only; never BY-SA or NC). Build tools may use
+license in `LICENSES.md` (CC0, CC BY or public domain only; never BY-SA or NC). Build tools may use
 pinned devDependencies listed in `LICENSES.md`, but a new devDependency changes `package.json`,
 which the Operator keeps: ask it first. Keep "embed transfer ≤ 30 MB" green.
 
@@ -42,7 +42,7 @@ on the engine branch). Report page: https://claude.ai/artifact/GFHZX3NF5DA4Vs39s
 - `HF_TOKEN` checked with whoami: account `ryanjosephkamp`, role `read`.
 - Space: `trellis-community/TRELLIS` (ZeroGPU, MIT; runs `microsoft/TRELLIS-image-large`, MIT;
   background removal is `rembg` with `u2net`, Apache-2.0). `microsoft/TRELLIS` itself is down
-  (config error). `tencent/Hunyuan3D-2` and `-2.1` run too, but their Tencent community licence
+  (config error). `tencent/Hunyuan3D-2` and `-2.1` run too, but their Tencent community license
   excludes some regions and outputs a mesh, so they were not used.
 - `tools/image-to-3d.mjs` runs one photo through the Space with plain fetch (no new devDependency)
   and saves the cut-out, the Space's turntable and the Gaussians (PLY) to `.cache/g/out/<name>/`.
@@ -54,7 +54,7 @@ on the engine branch). Report page: https://claude.ai/artifact/GFHZX3NF5DA4Vs39s
   rim, spins round like a settling coin and drops flat).
 - Failed: fountain pen (the thin nib broke into spikes).
 - Owner's review (2026-09-27): both "look great", but the defaults should look like the real thing,
-  not blank. `tools/g-looks.mjs` now paints them over the scan's own shading (each splat's colour
+  not blank. `tools/g-looks.mjs` now paints them over the scan's own shading (each splat's color
   scaled by its brightness against its region's median): the pencil is a classic yellow pencil
   (yellow body, silver ferrule, pink eraser, bare wood cone, graphite point, a plain "HB" mark); the
   can wears an original vintage-style "Peaches" label (CC0, drawn by the tool in Chromium's canvas)
@@ -75,7 +75,7 @@ on the engine branch). Report page: https://claude.ai/artifact/GFHZX3NF5DA4Vs39s
 - Waiting on quota: the clear water bottle (CC0 photo ready). The free ZeroGPU quota ran out after
   four runs.
 - Report only: the red water bottle and the running shoe are rawpixel previews with a watermark, and
-  their licence pages block automated checks, so they cannot ship.
+  their license pages block automated checks, so they cannot ship.
 - No usable photo: soda can (all branded or cropped) and hoodie (worn, branded or tiny).
 
 ## Notes
@@ -83,7 +83,7 @@ on the engine branch). Report page: https://claude.ai/artifact/GFHZX3NF5DA4Vs39s
 - Inputs: shrink photos to 1024 px first (the Space works at 518 px). The Space cuts out the
   background itself unless the PNG has alpha.
 - The side the photo cannot see is a guess: the pencil's underside came out dark, so a roll showed
-  it. Taps that keep the photographed side towards the camera work better (the spin).
+  it. Taps that keep the photographed side toward the camera work better (the spin).
 - Painting a scan: paint every splat of a region, not only the outer layer. Unpainted splats just
   under the surface showed through as pale speckle under dark paints (black, blue). Under dark
   colors, shade by brightness averaged over about 1 cm, so fine grain does not turn into speckle.

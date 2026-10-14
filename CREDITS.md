@@ -1,7 +1,7 @@
 # Credits
 
 Every captured toy on Splashery's shelf (the Photoreal shelf) is either public domain (CC0) or
-licensed under Creative Commons Attribution 4.0 (CC BY 4.0). Nothing with a stricter licence is
+licensed under Creative Commons Attribution 4.0 (CC BY 4.0). Nothing with a stricter license is
 used. The same attributions appear in the app under **About & credits**.
 
 ## Captured toys
@@ -14,7 +14,7 @@ The first four were changed the same way with `tools/prepare-assets.mjs` (the co
 common size, cropped to the object, decimated to at most 450,000 splats, and a lighter 120,000-splat
 copy made for phones.
 
-| Toy          | Work                                                                          | Author                                                                                | Licence                                                       | Changes                                                                                                             |
+| Toy          | Work                                                                          | Author                                                                                | License                                                       | Changes                                                                                                             |
 | ------------ | ----------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
 | Cactus       | [3DGS PLY sample data: cactus](https://note.com/steam_studio/n/ne9736d94f162) | steam studio / 3D SCAN STUDIO iris (Lespace Vision Inc.), https://www.steam-studio.jp | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | Converted to SOG, SH removed, recentred, scaled, cropped to the pot.                                                |
 | Strawberry   | [Strawberry](https://superspl.at/scene/84df8849)                              | Dany Bittel ([patreon.com/DanyBittel](https://www.patreon.com/DanyBittel))            | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)     | Decimated from 1.5M to 450k splats, SH removed, recentred, scaled.                                                  |
@@ -29,19 +29,19 @@ Where the files came from:
   free to use them for commercial and non-commercial purposes without any copyright restrictions."
   The authors ask for a credit link to https://www.steam-studio.jp.
 - **Strawberry, Heart cookie, Honeybee**: SuperSplat scenes with downloads enabled and the CC BY 4.0
-  licence chosen by their authors (checked on each scene page on 22 September 2026). The source
+  license chosen by their authors (checked on each scene page on September 22, 2026). The source
   files are the SOG data the public SuperSplat viewer streams for each scene.
 
 ### More scans from SuperSplat
 
-Twelve more SuperSplat scenes, each with downloads enabled and the CC BY 4.0 licence chosen by its
-author (checked on 23 September 2026 through the scene data SuperSplat publishes for each page). The
-source files are the SOG data the public viewer streams. Each was changed the same way by
+Twelve more SuperSplat scenes, each with downloads enabled and the CC BY 4.0 license chosen by its
+author (checked on September 23, 2026 through the scene data SuperSplat publishes for each page).
+The source files are the SOG data the public viewer streams. Each was changed the same way by
 `tools/prepare-assets.mjs`: spherical harmonics removed, rotated upright, recentred, scaled to the
 common size, decimated to at most 300,000 splats, and a lighter 100,000-splat copy made for phones.
 The Mandeltorus is a rendered fractal rather than a scan.
 
-| Toy                  | Work                                                                                             | Author                                  | Licence                                                   |
+| Toy                  | Work                                                                                             | Author                                  | License                                                   |
 | -------------------- | ------------------------------------------------------------------------------------------------ | --------------------------------------- | --------------------------------------------------------- |
 | Cluster fly          | [Cluster Fly](https://superspl.at/scene/285082b2)                                                | Dany Bittel                             | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) |
 | May beetle           | [MAY-BEETLE-HIRES](https://superspl.at/scene/9d4c4442)                                           | trilithon                               | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) |
@@ -137,16 +137,16 @@ carry `"nc": true` in `tools/models.json`, and `node tools/nc-assets.mjs` lists 
 
 Fifteen textured 3D models from [Poly Haven](https://polyhaven.com), all CC0: Poly Haven publishes
 every asset under CC0 ([polyhaven.com/license](https://polyhaven.com/license)), and each model's
-name and authors were checked in the Poly Haven API on 23 September 2026. `tools/mesh-to-splats.mjs`
-downloads each glTF, scatters splats over its surfaces by area, colours them from the model's
-textures (glass materials are skipped so the insides show), and writes a 3DGS PLY file;
-`tools/prepare-assets.mjs` then packs it like the scans (at most 200,000 splats, 80,000 for phones).
-Poly Haven does not require credit, but it is given here anyway. Since Phase C1 the vintage camera,
-boombox, wooden elephant and horse statue also have soft studio light baked into their colours (with
-the models' own normal and occlusion maps), and the printed maker's names on the camera, its lens
-and the boombox are painted out (see `tools/models.json`).
+name and authors were checked in the Poly Haven API on September 23, 2026.
+`tools/mesh-to-splats.mjs` downloads each glTF, scatters splats over its surfaces by area, colors
+them from the model's textures (glass materials are skipped so the insides show), and writes a 3DGS
+PLY file; `tools/prepare-assets.mjs` then packs it like the scans (at most 200,000 splats, 80,000
+for phones). Poly Haven does not require credit, but it is given here anyway. Since Phase C1 the
+vintage camera, boombox, wooden elephant and horse statue also have soft studio light baked into
+their colors (with the models' own normal and occlusion maps), and the printed maker's names on the
+camera, its lens and the boombox are painted out (see `tools/models.json`).
 
-| Toy              | Model                                                                    | Author                       | Licence                                                       |
+| Toy              | Model                                                                    | Author                       | License                                                       |
 | ---------------- | ------------------------------------------------------------------------ | ---------------------------- | ------------------------------------------------------------- |
 | Real rubber duck | [Rubber Duck Toy](https://polyhaven.com/a/rubber_duck_toy)               | Plat251                      | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
 | Garden gnome     | [Garden Gnome](https://polyhaven.com/a/garden_gnome)                     | Bhargav Kubal                | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
@@ -166,17 +166,17 @@ and the boombox are painted out (see `tools/models.json`).
 
 ### Made from one photo with an image-to-3D model (lane G)
 
-Each of these started as a single photo (CC0 or CC BY, the licence checked on its Wikimedia Commons
-page on 27 September 2026, with no brands or logos). `tools/image-to-3d.mjs` sent the photo, shrunk
+Each of these started as a single photo (CC0 or CC BY, the license checked on its Wikimedia Commons
+page on September 27, 2026, with no brands or logos). `tools/image-to-3d.mjs` sent the photo, shrunk
 to 1024 px, to the public [TRELLIS Space](https://huggingface.co/spaces/trellis-community/TRELLIS)
 on Hugging Face, which cut out the background (rembg with the u2net model, Apache-2.0) and generated
 3D Gaussians with [TRELLIS](https://github.com/microsoft/TRELLIS) (model
 [microsoft/TRELLIS-image-large](https://huggingface.co/microsoft/TRELLIS-image-large), MIT). The MIT
-licence puts no terms on what the model makes, so each toy keeps its photo's licence and credit.
+license puts no terms on what the model makes, so each toy keeps its photo's license and credit.
 `tools/prepare-assets.mjs` then packs it like the scans. The sides the photo does not show are the
 model's guess.
 
-| Toy          | Photo                                                                                                  | Photographer | Licence                                                       |
+| Toy          | Photo                                                                                                  | Photographer | License                                                       |
 | ------------ | ------------------------------------------------------------------------------------------------------ | ------------ | ------------------------------------------------------------- |
 | Real pencil  | [Kleiner Bleistift](<https://commons.wikimedia.org/wiki/File:Kleiner_Bleistift_(40045317711).jpg>)     | Tim Reckmann | [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/)     |
 | Real tin can | [Can opened with side opener](https://commons.wikimedia.org/wiki/File:Can_opened_with_side_opener.jpg) | Ll1324       | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
@@ -1564,11 +1564,11 @@ September 30, 2026), decimated into three levels of detail each:
 
 The pattern layer can wrap a national flag around any toy. The flags are SVG files from
 [Wikimedia Commons](https://commons.wikimedia.org/wiki/Category:SVG_flags_of_countries), fetched by
-`tools/fetch-flags.mjs`, which reads each file's licence from the Commons API and keeps only public
-domain and CC0 files. The files are unchanged. Each flag's source page, author line and licence are
-listed in [assets/flags/flags.json](assets/flags/flags.json) (196 flags, checked on 23 September
+`tools/fetch-flags.mjs`, which reads each file's license from the Commons API and keeps only public
+domain and CC0 files. The files are unchanged. Each flag's source page, author line and license are
+listed in [assets/flags/flags.json](assets/flags/flags.json) (196 flags, checked on September 23,
 2026). The flag of Oman is not included: its Commons file is under Oman's Open Government Licence
-rather than a public-domain or Creative Commons licence (see [docs/BACKLOG.md](docs/BACKLOG.md)).
+rather than a public-domain or Creative Commons license (see [docs/BACKLOG.md](docs/BACKLOG.md)).
 
 ## Sounds
 
@@ -1695,3 +1695,116 @@ to the owner, who made them; no third-party work is in them. Checked October 7, 
 Picture QR (lane QR r4, October 10, 2026) also offers four of them as its sample pictures, labeled
 AI-made in its picker and its credit: Felt farm (D37), Glass wave (D38), Mushrooms (D27), and Stone
 arch (D17).
+
+## AI-made Studio samples: hard cases (Codex task 57)
+
+Made by Ryan with Codex (GPT-6) and the OpenAI native image tool, October 13, 2026. These 20
+fictional pictures were selected from 40 original candidates measured in Photo to 3D. They use the
+existing **AI-made by the owner** credit, with that label beside each picture in the Hard cases
+picker group. The generator did not return its model identity. No people, text, logos, or real
+landmarks were seen. They are Studio samples, never real captures or real places, and never used for
+science, math, engineering, or photoreal shelves. Each JPEG is 1,280 px wide (quality 82); its depth
+map was made by the unchanged `tools/dsm-depth.mjs`. File hashes, prompts, scores, and selection
+decisions are in [the scored report](docs/audits/hard-case-samples-2026-10.md).
+
+- Glass jug (C57-P01): `assets/toys/photo-3d/hard-cases/cdx-hard-glass-jug.jpg` (glass-water).
+- Stones under water (C57-P05): `assets/toys/photo-3d/hard-cases/cdx-hard-submerged-stones.jpg`
+  (glass-water).
+- Backlit dog (C57-P11): `assets/toys/photo-3d/hard-cases/cdx-hard-backlit-dog.jpg` (hair-fur).
+- Wool fleece (C57-P12): `assets/toys/photo-3d/hard-cases/cdx-hard-wool-fleece.jpg` (hair-fur).
+- Bicycle spokes (C57-P13): `assets/toys/photo-3d/hard-cases/cdx-hard-bicycle-spokes.jpg`
+  (thin-structures).
+- Bare branches (C57-P16): `assets/toys/photo-3d/hard-cases/cdx-hard-bare-branches.jpg`
+  (thin-structures).
+- Puddle reflection (C57-P19): `assets/toys/photo-3d/hard-cases/cdx-hard-puddle-reflection.jpg`
+  (reflections).
+- Polished floor (C57-P20): `assets/toys/photo-3d/hard-cases/cdx-hard-polished-floor.jpg`
+  (reflections).
+- Reflecting pool (C57-P24): `assets/toys/photo-3d/hard-cases/cdx-hard-reflecting-pool.jpg`
+  (reflections).
+- Lanterns at night (C57-P25): `assets/toys/photo-3d/hard-cases/cdx-hard-lanterns.jpg` (low-light).
+- Campfire (C57-P26): `assets/toys/photo-3d/hard-cases/cdx-hard-campfire.jpg` (low-light).
+- Candle still life (C57-P27): `assets/toys/photo-3d/hard-cases/cdx-hard-candle-still-life.jpg`
+  (low-light).
+- Moonlit greenhouse (C57-P28): `assets/toys/photo-3d/hard-cases/cdx-hard-moonlit-greenhouse.jpg`
+  (low-light).
+- Lamps in a potting shed (C57-P29): `assets/toys/photo-3d/hard-cases/cdx-hard-shed-lamps.jpg`
+  (low-light).
+- Fire bowl at dusk (C57-P30): `assets/toys/photo-3d/hard-cases/cdx-hard-fire-bowl.jpg` (low-light).
+- Snail and wet moss (C57-P34): `assets/toys/photo-3d/hard-cases/cdx-hard-snail-shell.jpg` (macro).
+- Feather on lichen (C57-P35): `assets/toys/photo-3d/hard-cases/cdx-hard-feather-lichen.jpg`
+  (macro).
+- Workshop bench (C57-P36): `assets/toys/photo-3d/hard-cases/cdx-hard-workshop-bench.jpg`
+  (dense-clutter).
+- Potting bench (C57-P38): `assets/toys/photo-3d/hard-cases/cdx-hard-potting-bench.jpg`
+  (dense-clutter).
+- Ceramic studio shelf (C57-P40): `assets/toys/photo-3d/hard-cases/cdx-hard-ceramic-shelf.jpg`
+  (dense-clutter).
+
+## Task 54: more sample pictures
+
+Codex (GPT-6) built the sample selection and verification tools for Ryan under Splashery’s MIT
+license.
+
+Twenty more Studio samples are AI-made by the owner with an AI image tool, on his instruction. They
+are labeled AI-made in the picker and beside the result. They are fictional scenes with no people,
+readable text, logos, or real landmarks. Each JPEG is 1,280 px wide, with its depth map made by
+`tools/dsm-depth.mjs`. Checked October 13, 2026:
+
+- Stoneware (C54-P04): `assets/toys/photo-3d/ai/cdx-stoneware.jpg`.
+- Autumn squash (C54-P05): `assets/toys/photo-3d/ai/cdx-autumn-squash.jpg`.
+- Wooden toys (C54-P07): `assets/toys/photo-3d/ai/cdx-wooden-toys.jpg`.
+- Clay tools (C54-P09): `assets/toys/photo-3d/ai/cdx-clay-tools.jpg`.
+- Tea tray (C54-P10): `assets/toys/photo-3d/ai/cdx-tea-tray.jpg`.
+- Arched room (C54-P12): `assets/toys/photo-3d/ai/cdx-arched-room.jpg`.
+- Plant studio (C54-P14): `assets/toys/photo-3d/ai/cdx-plant-studio.jpg`.
+- Mossy stream (C54-P16): `assets/toys/photo-3d/ai/cdx-moss-stream.jpg`.
+- Dune grass (C54-P17): `assets/toys/photo-3d/ai/cdx-dune-grass.jpg`.
+- Woodland path (C54-P20): `assets/toys/photo-3d/ai/cdx-redwood-path.jpg`.
+- Pinecone (C54-P22): `assets/toys/photo-3d/ai/cdx-pinecone.jpg`.
+- Acorns (C54-P23): `assets/toys/photo-3d/ai/cdx-acorns.jpg`.
+- Fern curl (C54-P25): `assets/toys/photo-3d/ai/cdx-fern-curl.jpg`.
+- Cliff terrace (C54-P27): `assets/toys/photo-3d/ai/cdx-cliff-terrace.jpg`.
+- Mushroom house (C54-P28): `assets/toys/photo-3d/ai/cdx-mushroom-house.jpg`.
+- Crystal court (C54-P29): `assets/toys/photo-3d/ai/cdx-crystal-court.jpg`.
+- Tortoise (C54-P32): `assets/toys/photo-3d/ai/cdx-tortoise.jpg`.
+- Deer in a grove (C54-P34): `assets/toys/photo-3d/ai/cdx-deer-grove.jpg`.
+- Paper canyon (C54-P37): `assets/toys/photo-3d/ai/cdx-paper-canyon.jpg`.
+- Wood valley (C54-P40): `assets/toys/photo-3d/ai/cdx-wood-valley.jpg`.
+
+The following 24 Picture QR backgrounds show clear subjects and have no URL-specific carriers. All
+24 are **AI-made by the owner with an AI image tool**, on his instruction, labeled **AI-made** in
+the picker and in-app credit. Checked October 13, 2026:
+
+- Split leaf (AI-made by the owner): `assets/toys/qr-picture/codex/cdx-qr-ai-monstera.jpg`.
+- Fern frond (AI-made by the owner): `assets/toys/qr-picture/codex/cdx-qr-ai-fern.jpg`.
+- Green watering can (AI-made by the owner):
+  `assets/toys/qr-picture/codex/cdx-qr-ai-green-watering-can.jpg`.
+- Potted cactus (AI-made by the owner): `assets/toys/qr-picture/codex/cdx-qr-ai-cactus.jpg`.
+- Clay pitcher (AI-made by the owner): `assets/toys/qr-picture/codex/cdx-qr-ai-pitcher.jpg`.
+- Wooden stacking rings (AI-made by the owner):
+  `assets/toys/qr-picture/codex/cdx-qr-ai-stacking-rings.jpg`.
+- Pear (AI-made by the owner): `assets/toys/qr-picture/codex/cdx-qr-ai-pear.jpg`.
+- Balloon (AI-made by the owner): `assets/toys/qr-picture/codex/cdx-qr-ai-hot-air-balloon.jpg`.
+- Mushroom (AI-made by the owner): `assets/toys/qr-picture/codex/cdx-qr-ai-mushroom.jpg`.
+- Wooden spinning top (AI-made by the owner):
+  `assets/toys/qr-picture/codex/cdx-qr-ai-spinning-top.jpg`.
+- Tulip (AI-made by the owner): `assets/toys/qr-picture/codex/cdx-qr-ai-tulip.jpg`.
+- Pinecone (AI-made by the owner): `assets/toys/qr-picture/codex/cdx-qr-ai-pinecone.jpg`.
+- Stacked stones (AI-made by the owner):
+  `assets/toys/qr-picture/codex/cdx-qr-ai-stacked-stones.jpg`.
+- Wooden rook (AI-made by the owner): `assets/toys/qr-picture/codex/cdx-qr-ai-rook.jpg`.
+- Paper rainbow (AI-made by the owner): `assets/toys/qr-picture/codex/cdx-qr-ai-rainbow.jpg`.
+- Wooden blocks (AI-made by the owner): `assets/toys/qr-picture/codex/cdx-qr-ai-wood-blocks.jpg`.
+- Clay teapot (AI-made by the owner): `assets/toys/qr-picture/codex/cdx-qr-ai-teapot.jpg`.
+- Lotus bloom (AI-made by the owner): `assets/toys/qr-picture/codex/cdx-qr-ai-lotus.jpg`.
+- Scallop shell (AI-made by the owner): `assets/toys/qr-picture/codex/cdx-qr-ai-scallop.jpg`.
+- Pumpkin (AI-made by the owner): `assets/toys/qr-picture/codex/cdx-qr-ai-pumpkin.jpg`.
+- Blue vase (AI-made by the owner): `assets/toys/qr-picture/codex/cdx-qr-ai-blue-vase.jpg`.
+- Ginkgo leaf (AI-made by the owner): `assets/toys/qr-picture/codex/cdx-qr-ai-ginkgo.jpg`.
+- Autumn squash (AI-made by the owner): `assets/toys/qr-picture/codex/cdx-qr-ai-squash.jpg`.
+- Smooth pebbles (AI-made by the owner): `assets/toys/qr-picture/codex/cdx-qr-ai-pebbles.jpg`.
+
+The full prompts, hashes, scores, five-link scan rates, and phone-size contact sheet are in
+[the sample-pictures audit](docs/audits/sample-pictures-2026-10.md). No new asset loads before it is
+picked.

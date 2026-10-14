@@ -13,14 +13,14 @@
       "owner": "No special effect. Looks fine.",
       "effect": "Seeds pop out and sparkle, then settle back; the berry blushes redder.",
       "sound": "Juicy squish.",
-      "improved": "E1: the seeds (picked by colour) pop out in a staggered wave and glow, the red flesh blushes deeper, then all settles (2.2 s)."
+      "improved": "E1: the seeds (picked by color) pop out in a staggered wave and glow, the red flesh blushes deeper, then all settles (2.2 s)."
     },
     "cookie": {
       "v": "keep",
       "owner": "No special effect. Looks fine.",
       "effect": "The jam heart glows and throbs twice like a heartbeat.",
       "sound": "Short crunch and a soft double thump.",
-      "improved": "E1: the jam heart (picked by colour) glows red and swells twice like a heartbeat, timed with the two thumps (1.6 s)."
+      "improved": "E1: the jam heart (picked by color) glows red and swells twice like a heartbeat, timed with the two thumps (1.6 s)."
     },
     "bee": {
       "v": "keep",
@@ -48,7 +48,7 @@
       "owner": "Great chance for all the legs to move and the body to stretch out.",
       "effect": "A leg wave ripples down the body while it stretches and curls.",
       "sound": "Soft many-footed patter.",
-      "improved": "E1: a leg wave (the legs, picked by colour) ripples down the body while it stretches straight, then curls tighter and relaxes (2.8 s)."
+      "improved": "E1: a leg wave (the legs, picked by color) ripples down the body while it stretches straight, then curls tighter and relaxes (2.8 s)."
     },
     "bumblebee": {
       "v": "keep",
@@ -76,7 +76,7 @@
       "owner": "Looks good.",
       "effect": "The bloom (dusty coat) wipes off in a swirl, showing deep blue, then returns.",
       "sound": "Small round pop.",
-      "improved": "E1b: now like the grape (the owner's favourite): the dark skin peels back towards you in five strips, showing the pale green flesh, then closes (3.2 s)."
+      "improved": "E1b: now like the grape (the owner's favorite): the dark skin peels back toward you in five strips, showing the pale green flesh, then closes (3.2 s)."
     },
     "grape": {
       "v": "keep",
@@ -130,11 +130,11 @@
     },
     "wooden-elephant": {
       "v": "keep",
-      "fixed": "C1: soft studio light and the model's normal map baked into the colours, and textures filtered to each splat's size, so the carving reads. The model stays (it is the best CC0 elephant found).",
+      "fixed": "C1: soft studio light and the model's normal map baked into the colors, and textures filtered to each splat's size, so the carving reads. The model stays (it is the best CC0 elephant found).",
       "owner": "Underwhelming; the style seems off.",
       "effect": "Trunk lifts and it rocks on its wooden feet.",
       "sound": "A light wooden knock, then a real elephant trumpeting as the trunk lifts.",
-      "improved": "E1c: the scan's trunk is fused to the forehead, so it could only tear; it is replaced by a kit-built trunk traced from the scan (five segments on ball joints, in the carving's colours). A tap uncurls it straight up to trumpet with a few toots, and it curls back down while the elephant rocks on its feet (2.6 s). A small kit patch covers the forehead where the tip rested."
+      "improved": "E1c: the scan's trunk is fused to the forehead, so it could only tear; it is replaced by a kit-built trunk traced from the scan (five segments on ball joints, in the carving's colors). A tap uncurls it straight up to trumpet with a few toots, and it curls back down while the elephant rocks on its feet (2.6 s). A small kit patch covers the forehead where the tip rested."
     },
     "marble-bust": {
       "v": "keep",
@@ -437,7 +437,7 @@
     },
     "flying-disc": {
       "v": "keep",
-      "fixed": "C1: glossy plastic with a highlight and two moulded flight rings.",
+      "fixed": "C1: glossy plastic with a highlight and two molded flight rings.",
       "owner": "Looks fine.",
       "effect": "Spins fast and hovers, tilting.",
       "sound": "Whirring whoosh.",
@@ -500,10 +500,10 @@
     "lava-lamp": {
       "v": "keep",
       "fixed": "C1: the glass now tapers into the cap and sits in rolled metal collars top and bottom.",
-      "owner": "Moves really well. On tap: blobs move faster, light up or change colours.",
-      "effect": "Blobs speed up, glow and shift colour for a few seconds.",
+      "owner": "Moves really well. On tap: blobs move faster, light up or change colors.",
+      "effect": "Blobs speed up, glow and shift color for a few seconds.",
       "sound": "Only the gloops and bubbles (the rising hum is gone).",
-      "improved": "E4: a tap heats the lamp: the wax blobs speed up to about three and a half times, smoothly with no jump, the wax glows and shifts through its colour set's glow (orange, magenta, gold for the classic lamp) and the liquid brightens, then it all eases back (about 4.5 s). The glow also shows with motion off. After the owner's review: a Colour set (Pick below, Ocean, Violet, Lime, Sunset, Midnight), Blobs (2 to 12), Blob size and Blob shape (mixed, round, tall), and Flow and Glow sliders. Hands-on H4: in Hands-on, pick the lamp up and tip it: the wax blobs slide over to the glass's upper side, lagging and wobbling, and slide back when it stands again."
+      "improved": "E4: a tap heats the lamp: the wax blobs speed up to about three and a half times, smoothly with no jump, the wax glows and shifts through its color set's glow (orange, magenta, gold for the classic lamp) and the liquid brightens, then it all eases back (about 4.5 s). The glow also shows with motion off. After the owner's review: a Color set (Pick below, Ocean, Violet, Lime, Sunset, Midnight), Blobs (2 to 12), Blob size and Blob shape (mixed, round, tall), and Flow and Glow sliders. Hands-on H4: in Hands-on, pick the lamp up and tip it: the wax blobs slide over to the glass's upper side, lagging and wobbling, and slide back when it stands again."
     },
     "snow-globe": {
       "v": "keep",
@@ -538,9 +538,9 @@
     "rainbow": {
       "v": "keep",
       "owner": "Pick an effect.",
-      "effect": "The arc draws itself colour by colour and sparkles at the ends.",
+      "effect": "The arc draws itself color by color and sparkles at the ends.",
       "sound": "Rising harp glissando.",
-      "improved": "E4: a tap wipes the arc away in a blink, then redraws it colour by colour, red first, each band sweeping left to right behind a bright pen, and sparkles burst from both clouds and settle (about 5 s)."
+      "improved": "E4: a tap wipes the arc away in a blink, then redraws it color by color, red first, each band sweeping left to right behind a bright pen, and sparkles burst from both clouds and settle (about 5 s)."
     },
     "iceberg": {
       "v": "keep",
@@ -680,7 +680,7 @@
       "v": "keep",
       "effect": "Bands race and the Great Red Spot spins up.",
       "sound": "Low gas-giant drone.",
-      "improved": "E2: a tap sets the cloud bands racing, neighbours in opposite directions (the equator fastest), and the Great Red Spot's swirl spins up inside its oval; each band turns whole turns, so the picture comes back together (4.2 s)."
+      "improved": "E2: a tap sets the cloud bands racing, neighbors in opposite directions (the equator fastest), and the Great Red Spot's swirl spins up inside its oval; each band turns whole turns, so the picture comes back together (4.2 s)."
     },
     "saturn": {
       "v": "keep",
@@ -707,7 +707,7 @@
       "owner": "The auroras should actually move, realistically and dynamically.",
       "effect": "Idle: auroras ripple as curtains. Tap: a bright surge of green and violet.",
       "sound": "The same aurora air, much lower and gentler (Sound C, October 2, 2026).",
-      "improved": "E2: the curtains move all the time: bright folds race round the oval, rays flicker and the oval sways. A tap sets off a substorm: the oval flares, a wider curtain with violet tops bursts out towards the equator and the folds race brighter, then it calms (4.2 s)."
+      "improved": "E2: the curtains move all the time: bright folds race round the oval, rays flicker and the oval sways. A tap sets off a substorm: the oval flares, a wider curtain with violet tops bursts out toward the equator and the folds race brighter, then it calms (4.2 s)."
     },
     "asteroid": {
       "v": "keep",
@@ -874,7 +874,7 @@
       "owner": "Melt it, or change into another shape.",
       "effect": "Arms regrow into a new pattern each tap.",
       "sound": "Crystalline tinkle.",
-      "improved": "E3: the arms melt back from their tips to the middle, then a new flake grows out from the centre: three patterns of the chosen kind, one after another, each tap (3.6 s)."
+      "improved": "E3: the arms melt back from their tips to the middle, then a new flake grows out from the center: three patterns of the chosen kind, one after another, each tap (3.6 s)."
     },
     "chromosome": {
       "v": "keep",
@@ -915,7 +915,7 @@
       "v": "keep",
       "effect": "Electrons speed up into blurred shells.",
       "sound": "The periodic table's atom sound: a soft electric blip as the electrons speed up and a ping as they blur into rings; no motor (Sound C, October 2, 2026).",
-      "improved": "E2: a tap energises the atom: the electrons whirl faster and faster until each shell blurs into a glowing ring, then slow down (4.6 s). The cloud style's shells swell and brighten."
+      "improved": "E2: a tap energizes the atom: the electrons whirl faster and faster until each shell blurs into a glowing ring, then slow down (4.6 s). The cloud style's shells swell and brighten."
     },
     "molecule": {
       "v": "keep",
@@ -928,7 +928,7 @@
       "owner": "(Asked for in the E2 review: a protein toy that can take a PDB file.)",
       "effect": "The protein pulls apart into its helices, strands and loops, then locks back together.",
       "sound": "A real tearing apart as it separates, with a whoosh, then a pressing-together and a soft thud as it reassembles (no building blocks).",
-      "improved": "New after the E2 review: a cartoon of a real structure from the Protein Data Bank (ubiquitin, insulin, GFP, hemoglobin; CC0), helices as coiled bands, strands as flat arrows, loops as tubes, bound molecules (hemes, zinc, GFP's chromophore) as balls and sticks; coloured rainbow start to end, by chain or by structure. Open any PDB or mmCIF file. A tap pulls it apart into its pieces, turning a little, and puts it back (5 s); in GFP the chromophore glows green while the barrel is open. Fix7: a tap while it is apart brings the pieces back at once (1.4 s), instead of pausing; the next tap pulls it apart again. Hands-on H5: with ✋ Hands-on on, a helix, strand or loop pulled out of the fold tugs its neighbors along the chain after it, and let go it glides back into its place."
+      "improved": "New after the E2 review: a cartoon of a real structure from the Protein Data Bank (ubiquitin, insulin, GFP, hemoglobin; CC0), helices as coiled bands, strands as flat arrows, loops as tubes, bound molecules (hemes, zinc, GFP's chromophore) as balls and sticks; colored rainbow start to end, by chain or by structure. Open any PDB or mmCIF file. A tap pulls it apart into its pieces, turning a little, and puts it back (5 s); in GFP the chromophore glows green while the barrel is open. Fix7: a tap while it is apart brings the pieces back at once (1.4 s), instead of pausing; the next tap pulls it apart again. Hands-on H5: with ✋ Hands-on on, a helix, strand or loop pulled out of the fold tugs its neighbors along the chain after it, and let go it glides back into its place."
     },
     "crystal-lattice": {
       "v": "keep",
@@ -973,7 +973,7 @@
       "v": "keep",
       "effect": "A star shimmer (asterism) glides across it.",
       "sound": "The crisp gem tap alone, without the wind and sandy shuffle (Sound C, October 2, 2026).",
-      "improved": "E2: a tap catches a six-rayed star (asterism): its rays spread out over the stone from a bright centre, lying on the stone and ending at its edge; it glides across the top with its rays keeping their directions, and the rays draw back in at the far side (3.6 s). Sharpness A (October 2, 2026): sharper look (even, solid splats and calmer textures)."
+      "improved": "E2: a tap catches a six-rayed star (asterism): its rays spread out over the stone from a bright center, lying on the stone and ending at its edge; it glides across the top with its rays keeping their directions, and the rays draw back in at the far side (3.6 s). Sharpness A (October 2, 2026): sharper look (even, solid splats and calmer textures)."
     },
     "quartz-cluster": {
       "v": "keep",
@@ -983,9 +983,9 @@
     },
     "opal": {
       "v": "keep",
-      "effect": "Colour play: flashes of colour roll across it.",
+      "effect": "Color play: flashes of color roll across it.",
       "sound": "A softer, duller real tap and the stone rocking gently on the table (no synth shimmer).",
-      "improved": "E2: a tap rocks the stone in the light while flashes of colour roll across it patch by patch, changing hue as they go (4.2 s)."
+      "improved": "E2: a tap rocks the stone in the light while flashes of color roll across it patch by patch, changing hue as they go (4.2 s)."
     },
     "pearl": {
       "v": "keep",
@@ -1232,7 +1232,7 @@
       "owner": "Some sort of twisting, like the knots.",
       "effect": "Untwists into a rope and twists back.",
       "sound": "Soft dough squished and pulled, with a wet stretching sound.",
-      "improved": "E5 (r3, after the owner's notes): the pretzel twists like a knot, all in one piece: its two sides wring opposite ways and its loops fold a little towards you, and wherever the rope crosses or rests on itself it stays joined; let go, it springs a little past its shape into the opposite twist and wobbles to a stop (about 3.8 s). Hands-on H2 (Hands-on): Pull one side of the loop and the soft pretzel stretches after your finger; let go and it springs back into its twist."
+      "improved": "E5 (r3, after the owner's notes): the pretzel twists like a knot, all in one piece: its two sides wring opposite ways and its loops fold a little toward you, and wherever the rope crosses or rests on itself it stays joined; let go, it springs a little past its shape into the opposite twist and wobbles to a stop (about 3.8 s). Hands-on H2 (Hands-on): Pull one side of the loop and the soft pretzel stretches after your finger; let go and it springs back into its twist."
     },
     "croissant": {
       "v": "keep",
@@ -1313,7 +1313,7 @@
       "owner": "Maybe it gets cut.",
       "effect": "Cut into rings that stack.",
       "sound": "Chop.",
-      "improved": "E5: four chops, top first: with each, everything above lifts and leans towards you, until five rings stand apart in a leaning stack showing their golden faces and pale cores; then they drop back onto each other (about 3 s). Hands-on H2 (Hands-on): Lift the rings off one by one, the crown with the top one, and stack them as you like."
+      "improved": "E5: four chops, top first: with each, everything above lifts and leans toward you, until five rings stand apart in a leaning stack showing their golden faces and pale cores; then they drop back onto each other (about 3 s). Hands-on H2 (Hands-on): Lift the rings off one by one, the crown with the top one, and stack them as you like."
     },
     "cherries": {
       "v": "keep",
@@ -1359,7 +1359,7 @@
     },
     "dice": {
       "v": "keep",
-      "owner": "Maybe my favourite; rolls feel random like real dice. Keep it.",
+      "owner": "Maybe my favorite; rolls feel random like real dice. Keep it.",
       "sound": "Two dice thrown on a wooden table, bouncing with quicker, quieter knocks and settling; real CC0 recordings now (dice-throw.mp3), with the synthesized sound as a fallback.",
       "improved": "Hands-on H1: in Hands-on, throw them: each die tumbles, bounces and lands on a real face (two rounded cubes, or the d20's corners), with a clatter."
     },
@@ -1457,14 +1457,14 @@
     },
     "menger-sponge": {
       "v": "keep",
-      "owner": "No idea for an effect; looks good. The owner calls one of these a favourite and a likely homepage embed (the transcript may refer to the next toy, the hypercube).",
+      "owner": "No idea for an effect; looks good. The owner calls one of these a favorite and a likely homepage embed (the transcript may refer to the next toy, the hypercube).",
       "effect": "Zooms into itself: the holes open to show the next level down.",
       "sound": "Descending recursive blips.",
       "improved": "E3: a tap plugs every hole with a solid cube, smallest first, closing the sponge into a plain cube; then it is carved again level by level: the six big cubes slide out of the faces, then the next size down, then the smallest, each fading as it leaves (about 4 s). (Built instead of a zoom, which blurred.) Hands-on H5: with ✋ Hands-on on, each of the twenty level-one cubes (each a smaller sponge, now closed on every side) holds fast and snaps out under a pull, lands and tumbles; Reset mends them."
     },
     "hypercube": {
       "v": "keep",
-      "owner": "Possibly the favourite and homepage embed (see the Menger sponge).",
+      "owner": "Possibly the favorite and homepage embed (see the Menger sponge).",
       "effect": "Rotates through the fourth dimension, turning inside out.",
       "sound": "No \"vroom\"; a great slow rush as it turns inside out and again as it turns home, over a low chord.",
       "improved": "E3: a tap turns the tesseract once round through the fourth dimension: the pink inner cube swells out to become the outer one while the blue one folds inside, holds a moment, then turns on back to where it started (about 5 s); at rest it rocks gently in 4D. Math r2: seven color themes (Colors; Blue and pink is the default and unchanged)."
@@ -1488,7 +1488,7 @@
       "owner": "Like the Mandeltorus: twisting.",
       "effect": "Morphs through powers (bulb shapes twist and bloom).",
       "sound": "Deep morphing tone.",
-      "improved": "E3: a tap turns the bulb's seven horizontal discs like the dials of a combination lock: neighbours click round in opposite directions, top to bottom, then back the other way, bottom to top; each turns a seventh of a turn (the bulb's own symmetry), so it lands on the same picture (about 4 s). This replaced a twist after the owner's review. Math r2: a Power option (5 to 12; power n has n − 1-fold symmetry, so the slices turn 1/(n − 1) of a turn) and a Julia bulb (four fixed points c off the axis; with no turning symmetry the whole bulb turns a quarter turn and back). Hands-on H5: with ✋ Hands-on on, each disc turns by dragging round it like a lock's dial, clicking a seventh of a turn at a time where the bulb looks the same again (shown never more than a few degrees off its built pose); a Julia bulb off its axis keeps its discs still."
+      "improved": "E3: a tap turns the bulb's seven horizontal discs like the dials of a combination lock: neighbors click round in opposite directions, top to bottom, then back the other way, bottom to top; each turns a seventh of a turn (the bulb's own symmetry), so it lands on the same picture (about 4 s). This replaced a twist after the owner's review. Math r2: a Power option (5 to 12; power n has n − 1-fold symmetry, so the slices turn 1/(n − 1) of a turn) and a Julia bulb (four fixed points c off the axis; with no turning symmetry the whole bulb turns a quarter turn and back). Hands-on H5: with ✋ Hands-on on, each disc turns by dragging round it like a lock's dial, clicking a seventh of a turn at a time where the bulb looks the same again (shown never more than a few degrees off its built pose); a Julia bulb off its axis keeps its discs still."
     },
     "sierpinski": {
       "v": "keep",
@@ -1689,7 +1689,7 @@
       "owner": "Enter and exit its shell.",
       "effect": "Tentacles pull into the shell, then peek back out.",
       "sound": "A jet of water, the hollow shell, a knock and bubbles.",
-      "improved": "E6: startled, it jets back a little and pulls its tentacles in behind its hood (each shortens towards its base); it waits, peeks out halfway, then slowly reaches out again (about 4.5 s)."
+      "improved": "E6: startled, it jets back a little and pulls its tentacles in behind its hood (each shortens toward its base); it waits, peeks out halfway, then slowly reaches out again (about 4.5 s)."
     },
     "ladybug": {
       "v": "keep",
@@ -1758,10 +1758,10 @@
     },
     "fireworks": {
       "v": "keep",
-      "owner": "Outstanding. Make each launch different (like the dice), and the burst match the colour of the cannon that fires it.",
-      "effect": "Random shell types each tap; burst colour matches its tube.",
+      "owner": "Outstanding. Make each launch different (like the dice), and the burst match the color of the cannon that fires it.",
+      "effect": "Random shell types each tap; burst color matches its tube.",
       "sound": "A real firework, the launch's thump and rush (no whistle), a deep boom and the stars' soft crackle; real CC0 recordings now (fireworks-burst.mp3), with the synthesized sound as a fallback.",
-      "improved": "C2: each tap fires a different tube and shell type (peony, ring, willow or star); the rocket rises from its tube and the burst takes that tube's colour. Fix7: a tap never pauses the show; rapid taps launch more shells, up to three at once (one per tube), each with its own rocket and its own clock; the burst now flies out from its middle (about 3.4 s each). Sharpness A (October 2, 2026): sharper look (even, solid splats and calmer textures)."
+      "improved": "C2: each tap fires a different tube and shell type (peony, ring, willow or star); the rocket rises from its tube and the burst takes that tube's color. Fix7: a tap never pauses the show; rapid taps launch more shells, up to three at once (one per tube), each with its own rocket and its own clock; the burst now flies out from its middle (about 3.4 s each). Sharpness A (October 2, 2026): sharper look (even, solid splats and calmer textures)."
     },
     "decorated-tree": {
       "v": "keep",
@@ -1938,7 +1938,7 @@
     },
     "ufo": {
       "v": "keep",
-      "owner": "Maybe my favourite; really cool.",
+      "owner": "Maybe my favorite; really cool.",
       "sound": "A deep pulsing hum and a heavy rush as it lifts (no whistling theremin).",
       "improved": "Hands-on H4: in Hands-on, pick the cow up and set it on the grass; drag it under the beam and it floats up to the saucer, turning slowly; switch the beam off and it drops."
     },
@@ -2002,7 +2002,7 @@
       "owner": "Gladiators fighting inside?",
       "effect": "Non-violent: a tiny chariot race loops the arena while the crowd cheers (no fighting, per the no-gore rule).",
       "sound": "A real crowd in the stands and horses' hooves trotting; real CC0 recordings now (colosseum-crowd.mp3, colosseum-hooves.mp3), with the synthesized sound as a fallback.",
-      "improved": "E6: a chariot race (no fighting): a crowd fills the seats, and four chariots in the team colours (red, white, blue and green) race a lap and a quarter of the arena in two lanes, swapping the lead, while the crowd jumps and cheers; then they fade away (about 5 s). Sharpness A (October 2, 2026): sharper look (even, solid splats and calmer textures)."
+      "improved": "E6: a chariot race (no fighting): a crowd fills the seats, and four chariots in the team colors (red, white, blue and green) race a lap and a quarter of the arena in two lanes, swapping the lead, while the crowd jumps and cheers; then they fade away (about 5 s). Sharpness A (October 2, 2026): sharper look (even, solid splats and calmer textures)."
     },
     "parthenon": {
       "v": "keep",

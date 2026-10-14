@@ -5,12 +5,12 @@ files under `vendor/` are unmodified copies of the published npm builds, except 
 comment was removed from `gifenc.esm.js` because the map is not shipped.
 
 The captured splat toys under `assets/toys/` (scans, and CC0 models turned into splats) have their
-own licences (CC0 and CC BY 4.0); see [CREDITS.md](CREDITS.md).
+own licenses (CC0 and CC BY 4.0); see [CREDITS.md](CREDITS.md).
 
 ## PlayCanvas Engine 2.22.3
 
 - Package: `playcanvas@2.22.3` (file: `vendor/playcanvas/playcanvas.min.mjs`, the package's
-  single-file ESM build `build/playcanvas.min.mjs`; licence copied to `vendor/playcanvas/LICENSE`)
+  single-file ESM build `build/playcanvas.min.mjs`; license copied to `vendor/playcanvas/LICENSE`)
 - Source: https://github.com/playcanvas/engine
 - License: MIT
 
@@ -317,7 +317,7 @@ These are `devDependencies` used to prepare assets and run tests; nothing from t
 - The TRELLIS Space on Hugging Face (not a package; `tools/image-to-3d.mjs` calls it over HTTPS with
   plain fetch): https://huggingface.co/spaces/trellis-community/TRELLIS (MIT), running the TRELLIS
   model https://huggingface.co/microsoft/TRELLIS-image-large (MIT) and rembg's u2net background
-  cut-out (Apache-2.0). It made the Real pencil and Real tin can; their photos' licences are in
+  cut-out (Apache-2.0). It made the Real pencil and Real tin can; their photos' licenses are in
   CREDITS.md.
 - `jsfive` 0.4.2 (public domain; based on pyfive, BSD-3-Clause, © 2016 Jonathan J. Helmus),
   https://github.com/usnistgov/jsfive, with its dependency `pako` 2.2.0 (MIT AND Zlib),
@@ -389,3 +389,26 @@ were opened on October 4, 2026; installed package notices were also inspected wh
 The existing Playwright, qrcode-generator, jsQR and pngjs tools listed above capture the toy and
 build/check its QR. No DoomPDF, PDF Tetris, Flash player or outside game asset is copied. All image,
 video and point payloads in these samples come from Splashery's procedural grapes toy.
+
+## Photo to 3D round 3 test tools (not shipped)
+
+License sources were opened on October 13, 2026. These executables run only in the test workspace;
+neither is copied into the site or the review media.
+
+- Chromium 151.0.7922.173 (BSD-3-Clause for the Chromium project, with separately licensed
+  third-party components),
+  https://chromium.googlesource.com/chromium/src/+/refs/heads/main/LICENSE?format=TEXT: the
+  workspace's existing browser captures and measures the actual photo renderer.
+- Xvfb 2:21.1.16-1.3+deb13u4 (X.Org's MIT/X11 notices and separately licensed bundled components),
+  https://metadata.ftp-master.debian.org/changelogs/main/x/xorg-server/xorg-server_21.1.16-1.3+deb13u4_copyright:
+  the Debian package supplies a temporary virtual display for Chromium's Mesa WebGL2 tests. Its
+  complete notices remain with the extracted test runtime in the ignored cache.
+- FFmpeg / ffprobe 7.1.5-0+deb13u1 (this Debian build reports GPL-2.0-or-later),
+  https://ffmpeg.org/legal.html: the workspace's installed encoder makes the paired H.264 review
+  clips using libx264. Its actual license was also read from the Debian package's copyright file and
+  `ffmpeg -L`. This test build is separate from the 9.0.2 build used for the earlier PDF audit.
+- Pillow 12.3.0 (MIT-CMU), https://pillow.readthedocs.io/en/stable/about.html: the existing
+  workspace library makes the public CC0 GIF fixtures. No Pillow runtime is copied into the review
+  media.
+
+These tool versions are retained with the public review evidence.

@@ -93,12 +93,18 @@ test("every planned demo is built: none is a placeholder any more, and each is h
   }
 });
 
-test("every link in the manual opens in a new tab, and the level map is gone", async ({ page }) => {
+test("a link inside the manual opens in the same tab, one that leaves it in a new tab, and the level map is gone", async ({
+  page,
+}) => {
   await page.goto("/manual/all.html");
+  // The rule (Manual r9): `#x`, `chapter.html` and `chapter.html#x` stay in the tab; everything else
+  // (another site, the Playground, GitHub, a paper, a file) opens a new one.
   const bad = await page.evaluate(() =>
     [...document.querySelectorAll("a[href]")]
-      .filter((a) => !a.getAttribute("href").startsWith("#"))
-      .filter((a) => a.target !== "_blank" || !/noopener/.test(a.rel))
+      .filter((a) => {
+        const inside = /^(?:#.*|[a-z0-9-]+\.html(?:#.*)?)$/.test(a.getAttribute("href"));
+        return inside ? a.target === "_blank" : a.target !== "_blank" || !/noopener/.test(a.rel);
+      })
       .map((a) => a.getAttribute("href").slice(0, 60)),
   );
   expect(bad).toEqual([]);

@@ -303,7 +303,7 @@ export function insideSolid(solid, p, pad = 0) {
     const k = v3.len(q);
     if (k >= 1) return null;
     if (k < 1e-9) return { depth: Math.min(...r), n: [0, 1, 0], s: [0, solid.r[1], 0] };
-    // The surface point along the ray from the centre (close enough for
+    // The surface point along the ray from the center (close enough for
     // pebbles), and the true normal there.
     const s = v3.scale(p, 1 / k);
     const n = v3.norm([s[0] / (r[0] * r[0]), s[1] / (r[1] * r[1]), s[2] / (r[2] * r[2])]);

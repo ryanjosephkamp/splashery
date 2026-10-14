@@ -164,7 +164,10 @@ export class Stage {
 
   // The ratio frames render at now.
   pixelRatio() {
-    const cap = Math.min(this.sharp?.dpr ?? this.pixelCap, this.fluidCap ?? Infinity); // Sharpness (dpr is labs only); Fluids r7 (fluidCap)
+    // A recipe that disables adaptation must still respect the device profile's cap,
+    // including later tier changes. In particular, low/weak stays at or below 1.5.
+    const profileCap = this.sharp?.adapt === "off" ? this.pixelCap : Infinity;
+    const cap = Math.min(this.sharp?.dpr ?? this.pixelCap, profileCap, this.fluidCap ?? Infinity);
     const full = Math.min(window.devicePixelRatio || 1, cap);
     return this.reduced ? Math.max(1, full / 1.5) : full;
   }
@@ -221,6 +224,7 @@ export class Stage {
   // get the full ratio (and, with adapt "drag", the default since September
   // 29, 2026, every view but a drag).
   setBusy(busy, drag = false) {
+    if (this.sharp?.adapt === "off") busy = false;
     if (this.sharp?.adapt === "drag") busy = drag; // Sharpness
     this.busy = busy;
     if (busy) {
@@ -247,7 +251,8 @@ export class Stage {
   // the frame time. Over about 24 ms while moving drops the ratio; still
   // over 40 ms at the lowest ratio for 30 frames asks for a lower tier.
   timeFrame(ms) {
-    if (!this.adaptive || this.fixedSize || ms > 100 || !this.busy) return;
+    if (!this.adaptive || this.sharp?.adapt === "off" || this.fixedSize || ms > 100 || !this.busy)
+      return;
     if (this.skipFrames > 0) {
       this.skipFrames--;
       return;
@@ -337,7 +342,7 @@ export class Stage {
   // ---- Toy ----------------------------------------------------------------
 
   // Shows a gsplat resource as the toy. transform: { position, rotation
-  // (euler degrees), scale } normalises it around the origin. `kit` marks a
+  // (euler degrees), scale } normalizes it around the origin. `kit` marks a
   // generated toy whose format carries the per-splat splatAnim stream; `rig`
   // a captured toy with moving parts (a splatPart stream, see src/rig.js).
   // Lab: `modifier` ({ glsl, wgsl }) replaces a kit toy's work-buffer program
@@ -822,6 +827,11 @@ export class Stage {
     const g = this.app.scene.gsplat;
     this.aaDefault ??= g.antiAlias;
     this.sharp = sharp;
+    if (sharp?.adapt === "off" && this.reduced) {
+      clearTimeout(this.restoreTimer);
+      this.restoreTimer = 0;
+      this.reduced = false;
+    }
     this.applyCulling();
     const aa = sharp?.aa ? true : this.aaDefault;
     if (g.antiAlias !== aa) g.antiAlias = aa;
