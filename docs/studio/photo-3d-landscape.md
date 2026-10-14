@@ -230,32 +230,39 @@ novel-view leaderboard. ([src/packs/photo-3d-core.js:436](../../src/packs/photo-
 [Depthy viewer](https://raw.githubusercontent.com/panrafal/depthy/master/app/scripts/classes/DepthyViewer.js),
 [Depthy filter](https://raw.githubusercontent.com/panrafal/depthy/master/app/scripts/pixi/DepthPerspectiveFilter.js))
 
-Each linked figure has the untouched renderer pixels in two rows, with captions and padding outside
-them. Columns follow the five signed controls above; the second row is explicitly labeled as a
-displacement control rather than degrees. Four hard-case figures are marked AI-made. The record
-preserves native buffer sizes; no smoothing, retouching, or alignment was applied to the evidence
-pixels.
+Each linked figure is a **1,600-pixel-wide JPEG preview at quality 85**, resized from the original
+two-row PNG sheet with Lanczos filtering. Columns follow the five signed controls above; the second
+row is explicitly labeled as a displacement control rather than degrees. Four hard-case figures
+remain marked AI-made. The previews are lossy and resampled, so they are for visual review, not
+pixel-level scoring. No scene panel was cropped, aligned, or retouched.
+
+The raw PNG sheets and native captures are kept in the ignored cache and are not committed in this
+revision. [build.json](../audits/photo-3d-explained-2026-10/build.json) preserves the ten original
+PNG hashes and dimensions; the records also retain the native capture hashes and buffer sizes.
+Earlier PR history is preserved, including the original PNG publication; the revised file tree and
+Pages output contain only the smaller JPEG previews.
 
 | Input                       | Side-by-side stills                                                                    | What to inspect                                                                   |
 | --------------------------- | -------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
-| Forest path                 | [Five view pairs](../audits/photo-3d-explained-2026-10/forest.png)                     | Foliage depth transitions, repeated color behind leaves, and outer edges.         |
-| Cobbled street              | [Five view pairs](../audits/photo-3d-explained-2026-10/street.png)                     | Sloped road, wall edges, and the different orbit versus displacement geometry.    |
-| Still life                  | [Five view pairs](../audits/photo-3d-explained-2026-10/still-life.png)                 | Occluding table objects and a painting's plausible but unverified inferred depth. |
-| Spiral staircase            | [Five view pairs](../audits/photo-3d-explained-2026-10/spiral-stairs.png)              | Thin rails, newly exposed regions, and repeating background texture.              |
-| Palace staircase            | [Five view pairs](../audits/photo-3d-explained-2026-10/palace-stairs.png)              | Balustrades, depth compression, and side-surface foreshortening.                  |
-| Wildflowers up close        | [Five view pairs](../audits/photo-3d-explained-2026-10/wildflowers.png)                | Thin stems, busy depth boundaries, and small foreground components.               |
-| Glass jug (AI-made)         | [Five view pairs](../audits/photo-3d-explained-2026-10/cdx-hard-glass-jug.png)         | Glass edges and the single-depth treatment of transmitted background.             |
-| Bicycle spokes (AI-made)    | [Five view pairs](../audits/photo-3d-explained-2026-10/cdx-hard-bicycle-spokes.png)    | Thin-spoke continuity, foreground edges, and revealed background.                 |
-| Puddle reflection (AI-made) | [Five view pairs](../audits/photo-3d-explained-2026-10/cdx-hard-puddle-reflection.png) | Relief assigned to reflection content rather than a reflective material.          |
-| Workshop bench (AI-made)    | [Five view pairs](../audits/photo-3d-explained-2026-10/cdx-hard-workshop-bench.png)    | Dense clutter, copied donors, and depth transitions around small tools.           |
+| Forest path                 | [Five view pairs](../audits/photo-3d-explained-2026-10/forest.jpg)                     | Foliage depth transitions, repeated color behind leaves, and outer edges.         |
+| Cobbled street              | [Five view pairs](../audits/photo-3d-explained-2026-10/street.jpg)                     | Sloped road, wall edges, and the different orbit versus displacement geometry.    |
+| Still life                  | [Five view pairs](../audits/photo-3d-explained-2026-10/still-life.jpg)                 | Occluding table objects and a painting's plausible but unverified inferred depth. |
+| Spiral staircase            | [Five view pairs](../audits/photo-3d-explained-2026-10/spiral-stairs.jpg)              | Thin rails, newly exposed regions, and repeating background texture.              |
+| Palace staircase            | [Five view pairs](../audits/photo-3d-explained-2026-10/palace-stairs.jpg)              | Balustrades, depth compression, and side-surface foreshortening.                  |
+| Wildflowers up close        | [Five view pairs](../audits/photo-3d-explained-2026-10/wildflowers.jpg)                | Thin stems, busy depth boundaries, and small foreground components.               |
+| Glass jug (AI-made)         | [Five view pairs](../audits/photo-3d-explained-2026-10/cdx-hard-glass-jug.jpg)         | Glass edges and the single-depth treatment of transmitted background.             |
+| Bicycle spokes (AI-made)    | [Five view pairs](../audits/photo-3d-explained-2026-10/cdx-hard-bicycle-spokes.jpg)    | Thin-spoke continuity, foreground edges, and revealed background.                 |
+| Puddle reflection (AI-made) | [Five view pairs](../audits/photo-3d-explained-2026-10/cdx-hard-puddle-reflection.jpg) | Relief assigned to reflection content rather than a reflective material.          |
+| Workshop bench (AI-made)    | [Five view pairs](../audits/photo-3d-explained-2026-10/cdx-hard-workshop-bench.jpg)    | Dense clutter, copied donors, and depth transitions around small tools.           |
 
-![Forest: Splashery orbit views above, Depthy displacement views below](../audits/photo-3d-explained-2026-10/forest.png)
+![Forest: Splashery orbit views above, Depthy displacement views below](../audits/photo-3d-explained-2026-10/forest.jpg)
 
 All **100 native frames** passed the nonempty-image check (minimum 31,898 distinct RGB colors), and
-all 50 Splashery captures passed the active-Sharp and fixed-buffer assertions. Each committed figure
-region was checked byte-for-byte against its native RGBA frame. Those are capture-integrity checks,
-not image-quality scores. See the
-[frame record](../audits/photo-3d-explained-2026-10/frame-validation.json) and
+all 50 Splashery captures passed the active-Sharp and fixed-buffer assertions. Each original PNG
+figure region was checked byte-for-byte against its native RGBA frame before preview conversion.
+Those are capture-integrity checks, not image-quality scores or claims about the published JPEG
+pixels. The resized previews were separately checked for dimensions, content, and file hashes. See
+the [frame record](../audits/photo-3d-explained-2026-10/frame-validation.json) and
 [input/figure credits](../audits/photo-3d-explained-2026-10/credits.json).
 
 Visual inspection supports a narrower finding than a winner: Splashery visibly turns a finite relief

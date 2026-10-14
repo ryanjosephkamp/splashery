@@ -42,10 +42,33 @@ uploaded owner photos, newly downloaded dataset images, or third-party demo pict
   fork commit `69f7015c2540d821f2dfcb8a7972630c80bd9180`, and Lodash tag 2.4.1. These dependencies
   live only in the ignored cache. The original Angular app, hosted integrations, analytics, and
   bundled sample imagery were not used to produce the committed figures.
-- All 100 accepted native frames passed a nonempty/color-diversity check; every figure region
-  preserves its native RGBA bytes exactly. Browser captures and all ten figures were inspected. The
-  frame check is recorded in [frame-validation.json](frame-validation.json); it cannot certify
-  geometry accuracy, absence of halos, or hidden-color correctness.
+- All 100 accepted native frames passed a nonempty/color-diversity check; every original PNG figure
+  region preserved its native RGBA bytes exactly. Browser captures and all ten original figures were
+  inspected. The published figures are resized, lossy JPEG previews, separately checked for format,
+  dimensions, nonempty content, and hashes. The native frame check in
+  [frame-validation.json](frame-validation.json) applies to the originals, not the JPEG pixels; it
+  cannot certify geometry accuracy, absence of halos, or hidden-color correctness.
+
+## Published previews and retained originals
+
+The Operator requested smaller Pages downloads. The ten published figures are now progressive JPEGs
+at **1,600×725 pixels, quality 85**, produced by uniformly resizing each full PNG sheet with Lanczos
+filtering. Only the preview's header note changes before resizing; source scene panels are not
+cropped, aligned, or retouched. AI-made labels and all five signed view pairs remain visible. The
+whole evidence folder is **under 2.6 MB**, below the requested 5 MB limit.
+
+Raw native captures remain under `.cache/photo-3d-explained/results/`, and the ten original
+2472×1120 PNG sheets remain under `.cache/photo-3d-explained/raw-figures/`. They are not committed
+in this revision. [build.json](build.json) preserves the original PNG bytes, SHA-256 hashes,
+dimensions, and storage scope. Earlier PR commit `7cb11c2b953f8121b1bed8917fb1ec50253e5f06`
+contained the former PNGs; that history is preserved, while the revised file tree contains only JPEG
+previews. A fresh clone can regenerate the originals with the steps below.
+
+The raw capture dimensions, pixel hashes, and original figure-region checks remain historical
+measurement data. JPEG preview hashes describe different files, and the previews are not pixel-exact
+substitutes for those raw measurements. [credits.json](credits.json),
+[comparison.json](comparison.json), and [frame-validation.json](frame-validation.json) identify both
+scopes explicitly.
 
 The first eight-row timing attempt allowed paused Player updates to expire Sharp freshness and used
 responsive stage sizes. All retained terminal states show Sharp off. That attempt is **rejected**,
@@ -79,8 +102,8 @@ The opened primary URLs for the upstream tool and dependencies are recorded in
 [sources.json](sources.json). Check downloaded-file hashes against [build.json](build.json).
 Existing sample depth is unpacked and normalized, inverted to match Depthy's `1-depth.r`, and saved
 as an 8-bit PNG. Splashery keeps its real cleanup path. Depthy's source aspect is fitted within
-480×480; Splashery's drawing buffer is exactly 480×480. No resizing or shared crop is claimed for
-the comparison outputs.
+480×480; Splashery's drawing buffer is exactly 480×480. Native comparison captures have no resizing
+or shared crop; the later JPEG publication step resizes their assembled sheets.
 
 Write this minimal viewer page to `.cache/photo-3d-explained/depthy.html`:
 
@@ -193,13 +216,16 @@ The harness writes raw PNGs and incremental JSON into `.cache/photo-3d-explained
 `sharp.on` and `sharp.splatsOff` in all eight timing rows, and the ten complete groups in
 `comparison.json`. Timing naturally varies between runs; these data are not thresholds.
 
-## Figure layout and pixel verification
+## Original figure layout and pixel verification
 
-The following documentation preserves the exact layout/verification script. It requires the existing
-Pillow installation and DejaVu Sans font at the paths shown. Write it to
+The following documentation preserves the original layout/verification script. It requires the
+existing Pillow installation and DejaVu Sans font at the paths shown. Write it to
 `.cache/photo-3d-explained/figures.py` and run it only after all ten groups complete. It produces
-reports under `docs/audits/photo-3d-explained-2026-10/`; it does not edit application assets. The
-separate inspection thumbnail is resized; committed evidence figures are not.
+raw reports under `docs/audits/photo-3d-explained-2026-10/`; it does not edit application assets.
+The pixel checks and native-pixel caption in this historical script describe the original PNG
+sheets. Its separate inspection thumbnail is resized. After running it, **also run the preview
+publication step below**, which retains the raw originals in the ignored cache, publishes smaller
+JPEGs, and updates the records. Do not commit the intermediate PNGs.
 
 <!-- prettier-ignore -->
 ```python
@@ -241,6 +267,145 @@ print('Validated native frames',len(valid),'minimum RGB colors',min(v['distinctC
 
 ```sh
 python3 .cache/photo-3d-explained/figures.py
+```
+
+## Preview publication
+
+Save the following script as `.cache/photo-3d-explained/publish-figures.py` and run it after the
+original figure generator. It verifies each original hash, keeps a cache copy, writes the JPEG
+preview, removes the large PNG from the report folder, updates the JSON records and report links,
+and enforces the whole-folder limit. It can also run again from the retained originals. The JPEG
+header identifies the preview, replacing the original PNG's native-pixel caption only in this
+published copy. Keep the cache copies out of Git.
+
+<!-- prettier-ignore -->
+```python
+"""Publish task 74 previews; preserve raw provenance outside the current Git tree."""
+from pathlib import Path
+from PIL import Image, ImageDraw, ImageFont
+import hashlib, json, shutil
+
+out = Path('docs/audits/photo-3d-explained-2026-10')
+raw = Path('.cache/photo-3d-explained/raw-figures')
+raw.mkdir(parents=True, exist_ok=True)
+credits = json.loads((out / 'credits.json').read_text())
+build = json.loads((out / 'build.json').read_text())
+comparison = json.loads((out / 'comparison.json').read_text())
+validation = json.loads((out / 'frame-validation.json').read_text())
+font = ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf', 14)
+originals = {}
+published = {}
+for record in credits['figures']:
+    original = record.get('original', {'file': record['file'], 'sha256': record['sha256']})
+    name = original['file']
+    assert name.endswith('.png')
+    source = out / name
+    cached = raw / name
+    if source.exists():
+        assert hashlib.sha256(source.read_bytes()).hexdigest() == original['sha256']
+        shutil.copyfile(source, cached)
+    assert hashlib.sha256(cached.read_bytes()).hexdigest() == original['sha256']
+    with Image.open(cached) as image:
+        original_size = list(image.size)
+        preview = image.convert('RGB')
+        # Clarify the old native-pixel caption only in the published copy.
+        draw = ImageDraw.Draw(preview)
+        draw.rectangle((0, 36, preview.width, 62), fill=(23, 30, 40))
+        draw.text((12, 40),
+            'JPEG preview: 1,600 px wide, quality 85. Native-pixel checks apply to the uncommitted original PNGs.',
+            fill='white', font=font)
+        size = (1600, round(image.height * 1600 / image.width))
+        preview = preview.resize(size, Image.Resampling.LANCZOS)
+        dest = out / (Path(name).stem + '.jpg')
+        preview.save(dest, 'JPEG', quality=85, optimize=True, progressive=True)
+    with Image.open(dest) as check:
+        check.load()
+        assert check.format == 'JPEG' and check.size == size
+        assert len(check.convert('RGB').getcolors(check.width * check.height)) > 100
+    originals[name] = {
+        'bytes': cached.stat().st_size,
+        'sha256': original['sha256'],
+        'dimensions': original_size,
+        'committedInCurrentTree': False,
+    }
+    preview_record = {
+        'file': dest.name,
+        'bytes': dest.stat().st_size,
+        'sha256': hashlib.sha256(dest.read_bytes()).hexdigest(),
+        'dimensions': list(size),
+        'format': 'JPEG', 'quality': 85, 'resample': 'LANCZOS',
+        'original': {'file': name, **originals[name]},
+    }
+    record.update(preview_record)
+    record['changes'] = (
+        'Local browser relief/parallax renders assembled as an original native RGBA PNG sheet. '
+        'The published copy replaces the header note, uniformly resizes the whole sheet to 1,600 pixels '
+        'wide using Lanczos, and uses progressive JPEG quality 85. Scene panels are not cropped, '
+        'aligned, or retouched; the published pixels are resampled and lossy. AI-made inputs remain labeled. '
+        'Original PNG hashes are preserved in build.json; originals are not committed in this revision.'
+    )
+    published[Path(name).stem] = preview_record
+    if source.exists():
+        source.unlink()
+
+publication = {
+    'format': 'JPEG', 'width': 1600, 'quality': 85, 'resample': 'LANCZOS',
+    'originalFiguresCommittedInCurrentTree': False,
+    'originalsStorage': str(raw),
+    'originalFiguresBytes': sum(x['bytes'] for x in originals.values()),
+    'publishedFiguresBytes': sum(x['bytes'] for x in published.values()),
+    'pixelExact': False,
+    'note': 'Published previews are resized and lossy. Native capture hashes, dimensions, '
+            'and exact-pixel checks describe the original PNGs, not these JPEG previews. '
+            'Earlier PR commit 7cb11c2b953f8121b1bed8917fb1ec50253e5f06 contains the former PNGs; '
+            'its history is preserved, while the revised file tree contains only previews.',
+}
+build['originalFigures'] = {
+    'committedInCurrentTree': False, 'storage': str(raw),
+    'previousPrCommit': '7cb11c2b953f8121b1bed8917fb1ec50253e5f06',
+    'note': 'Raw originals are not committed in this revision. The earlier PR history is not rewritten.',
+    'files': originals,
+}
+build['figurePublication'] = publication
+credits['publication'] = publication
+comparison['figurePublication'] = publication
+for row in comparison['rows']:
+    row['publishedFigure'] = published[row['id']]
+validation['scope'] = (
+    'Historical native captures and the original uncommitted PNG sheets. '
+    'Original figure coordinates and exact-pixel checks do not apply to resized, lossy published JPEGs.'
+)
+validation['method'] = (
+    'Reject empty/uniform original captures (distinct RGB colors >100). Assert Sharp for each '
+    'Splashery capture and a 480x480 buffer. Verify each original PNG figure region byte-for-byte '
+    'against source RGBA. The original sheets are kept in the ignored cache; their hashes are '
+    'preserved in build.json. Published JPEG previews are separately checked for format, dimensions, '
+    'nonempty image content, and file hashes. These checks do not measure depth accuracy or hidden-view correctness.'
+)
+validation['publishedFigures'] = list(published.values())
+for frame in validation['frames']:
+    if 'figureRegion' in frame:
+        frame['originalFigureRegion'] = frame.pop('figureRegion')
+    if 'preservedExactly' in frame:
+        frame['preservedExactlyInOriginalFigure'] = frame.pop('preservedExactly')
+for name, data in [('build.json', build), ('credits.json', credits),
+                   ('comparison.json', comparison), ('frame-validation.json', validation)]:
+    (out / name).write_text(json.dumps(data, indent=2) + '\n')
+for path in [Path('docs/studio/photo-3d-explained.md'), Path('docs/studio/photo-3d-landscape.md')]:
+    text = path.read_text()
+    for name in originals:
+        text = text.replace('/' + name + ')', '/' + Path(name).stem + '.jpg)')
+    path.write_text(text)
+assert not list(out.glob('*.png'))
+folder_bytes = sum(p.stat().st_size for p in out.rglob('*') if p.is_file())
+assert folder_bytes < 5_000_000, folder_bytes
+print(json.dumps({'originalFigureBytes': publication['originalFiguresBytes'],
+                  'publishedFigureBytes': publication['publishedFiguresBytes'],
+                  'wholeFolderBytes': folder_bytes, 'count': len(published)}))
+```
+
+```sh
+python3 .cache/photo-3d-explained/publish-figures.py
 ```
 
 ## Verification scope

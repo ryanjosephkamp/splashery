@@ -104,5 +104,85 @@
       "bytes": 229855,
       "sha256": "14fd5488cd35a65a9c8d98f0ac5e97fca338d1a3532179ee3dc92d7e4667c4ce"
     }
+  },
+  "originalFigures": {
+    "committedInCurrentTree": false,
+    "storage": ".cache/photo-3d-explained/raw-figures",
+    "previousPrCommit": "7cb11c2b953f8121b1bed8917fb1ec50253e5f06",
+    "note": "Raw originals are not committed in this revision. The earlier PR history is not rewritten.",
+    "files": {
+      "forest.png": {
+        "bytes": 3362115,
+        "sha256": "89551b81e7566f711b3c782cc123943ceedddda28e9bcf82670eeba5aa04057c",
+        "dimensions": [2472, 1120],
+        "committedInCurrentTree": false
+      },
+      "street.png": {
+        "bytes": 3582884,
+        "sha256": "bc7093dd956795173f03378d0eb50b77106c82b65aa19316f60d85bffdb364e9",
+        "dimensions": [2472, 1120],
+        "committedInCurrentTree": false
+      },
+      "still-life.png": {
+        "bytes": 3249422,
+        "sha256": "806d6ec56b5815d4d849515fd7b378d150b21407d14194a46de9acd6464fb028",
+        "dimensions": [2472, 1120],
+        "committedInCurrentTree": false
+      },
+      "spiral-stairs.png": {
+        "bytes": 2756915,
+        "sha256": "6f75f4f882141f25dd5c76e61e88a6ab8b59a3a5556ed5ed597d5bb4969c87f7",
+        "dimensions": [2472, 1120],
+        "committedInCurrentTree": false
+      },
+      "palace-stairs.png": {
+        "bytes": 2587063,
+        "sha256": "9eb342e9443b4fc758194f147c08ee8fd893d642ce5f9469d72cf19813bfacef",
+        "dimensions": [2472, 1120],
+        "committedInCurrentTree": false
+      },
+      "wildflowers.png": {
+        "bytes": 3229240,
+        "sha256": "3a1a07cf16537c44f7c762e7239a601a9e356807c976c49eaef6497aef3ac3a1",
+        "dimensions": [2472, 1120],
+        "committedInCurrentTree": false
+      },
+      "cdx-hard-glass-jug.png": {
+        "bytes": 3030974,
+        "sha256": "0c947ba2ee89eb0e9c8e90c6334075e53cf54f27d311a55d5566290ba13a6ab9",
+        "dimensions": [2472, 1120],
+        "committedInCurrentTree": false
+      },
+      "cdx-hard-bicycle-spokes.png": {
+        "bytes": 3657164,
+        "sha256": "95965dad8ece350a660297ca8947731eea090d9f56b6f28d0e4792931e2502b4",
+        "dimensions": [2472, 1120],
+        "committedInCurrentTree": false
+      },
+      "cdx-hard-puddle-reflection.png": {
+        "bytes": 3301536,
+        "sha256": "51696d34d3f2877b8bb961d8fb28e0c5aa04eb459a26243d5672f54dc1818537",
+        "dimensions": [2472, 1120],
+        "committedInCurrentTree": false
+      },
+      "cdx-hard-workshop-bench.png": {
+        "bytes": 2903185,
+        "sha256": "b3564d692145e842b957e439591b43b9bad3744a730aaf602e0cfc25059ecea7",
+        "dimensions": [2472, 1120],
+        "committedInCurrentTree": false
+      }
+    }
+  },
+  "figurePublication": {
+    "format": "JPEG",
+    "width": 1600,
+    "quality": 85,
+    "resample": "LANCZOS",
+    "originalFiguresCommittedInCurrentTree": false,
+    "originalsStorage": ".cache/photo-3d-explained/raw-figures",
+    "originalFiguresBytes": 31660498,
+    "publishedFiguresBytes": 2283390,
+    "pixelExact": false,
+    "note": "Published previews are resized and lossy. Native capture hashes, dimensions, and exact-pixel checks describe the original PNGs, not these JPEG previews. Earlier PR commit 7cb11c2b953f8121b1bed8917fb1ec50253e5f06 contains the former PNGs; its history is preserved, while the revised file tree contains only previews."
   }
 }

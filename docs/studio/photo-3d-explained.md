@@ -390,10 +390,14 @@ certify a RAM minimum or a supported device list.
 
 The mechanism predicts the risks below. The ten-sample stills in the
 [landscape report](photo-3d-landscape.md#ten-sample-local-comparison) let readers inspect the
-current output. These are examples of stress cases, not depth-error measurements: none has
-ground-truth geometry in this checkout. The existing
-[hard-case audit](../audits/hard-case-samples-2026-10.md) also explicitly separates its hole/halo
-proxy from depth accuracy.
+current output, including the
+[Forest path preview](../audits/photo-3d-explained-2026-10/forest.jpg). Published figures are
+1,600-pixel-wide JPEGs at quality 85, so they are resized, lossy review previews. The native PNG
+originals are not committed in this revision; their hashes are retained in
+[build.json](../audits/photo-3d-explained-2026-10/build.json). Pixel checks describe those
+originals. These are examples of stress cases, not depth-error measurements: none has ground-truth
+geometry in this checkout. The existing [hard-case audit](../audits/hard-case-samples-2026-10.md)
+also explicitly separates its hole/halo proxy from depth accuracy.
 
 | Picture type / sample                                                 | Limit and cause                                                                                                                                                                                                                                                                                                                                                                                   |
 | --------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

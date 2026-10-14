@@ -250,7 +250,23 @@
             }
           }
         }
-      ]
+      ],
+      "publishedFigure": {
+        "file": "forest.jpg",
+        "bytes": 219606,
+        "sha256": "7a8038fd0a8bf2ca23c4645e38105efd36311dd00232e9c6e4e2bccb8cf7f781",
+        "dimensions": [1600, 725],
+        "format": "JPEG",
+        "quality": 85,
+        "resample": "LANCZOS",
+        "original": {
+          "file": "forest.png",
+          "bytes": 3362115,
+          "sha256": "89551b81e7566f711b3c782cc123943ceedddda28e9bcf82670eeba5aa04057c",
+          "dimensions": [2472, 1120],
+          "committedInCurrentTree": false
+        }
+      }
     },
     {
       "id": "street",
@@ -495,7 +511,23 @@
             }
           }
         }
-      ]
+      ],
+      "publishedFigure": {
+        "file": "street.jpg",
+        "bytes": 254410,
+        "sha256": "9316cc1e34a3646381587e4d4a3dba9af36b0a610c9e64384771e2e61c192d8e",
+        "dimensions": [1600, 725],
+        "format": "JPEG",
+        "quality": 85,
+        "resample": "LANCZOS",
+        "original": {
+          "file": "street.png",
+          "bytes": 3582884,
+          "sha256": "bc7093dd956795173f03378d0eb50b77106c82b65aa19316f60d85bffdb364e9",
+          "dimensions": [2472, 1120],
+          "committedInCurrentTree": false
+        }
+      }
     },
     {
       "id": "still-life",
@@ -740,7 +772,23 @@
             }
           }
         }
-      ]
+      ],
+      "publishedFigure": {
+        "file": "still-life.jpg",
+        "bytes": 195163,
+        "sha256": "d8ef713650aaf5fab35ef16e55125ac261282d51998614f435ba02807e14e151",
+        "dimensions": [1600, 725],
+        "format": "JPEG",
+        "quality": 85,
+        "resample": "LANCZOS",
+        "original": {
+          "file": "still-life.png",
+          "bytes": 3249422,
+          "sha256": "806d6ec56b5815d4d849515fd7b378d150b21407d14194a46de9acd6464fb028",
+          "dimensions": [2472, 1120],
+          "committedInCurrentTree": false
+        }
+      }
     },
     {
       "id": "spiral-stairs",
@@ -985,7 +1033,23 @@
             }
           }
         }
-      ]
+      ],
+      "publishedFigure": {
+        "file": "spiral-stairs.jpg",
+        "bytes": 192608,
+        "sha256": "faff65688386cdddd9d478596a8eceec42b81b9c330cf4d5ca47464007717a24",
+        "dimensions": [1600, 725],
+        "format": "JPEG",
+        "quality": 85,
+        "resample": "LANCZOS",
+        "original": {
+          "file": "spiral-stairs.png",
+          "bytes": 2756915,
+          "sha256": "6f75f4f882141f25dd5c76e61e88a6ab8b59a3a5556ed5ed597d5bb4969c87f7",
+          "dimensions": [2472, 1120],
+          "committedInCurrentTree": false
+        }
+      }
     },
     {
       "id": "palace-stairs",
@@ -1230,7 +1294,23 @@
             }
           }
         }
-      ]
+      ],
+      "publishedFigure": {
+        "file": "palace-stairs.jpg",
+        "bytes": 176511,
+        "sha256": "ff5c8253e69bf63f89e238b867e6b5ff76da142a444a9d5b16686cd7b7d023aa",
+        "dimensions": [1600, 725],
+        "format": "JPEG",
+        "quality": 85,
+        "resample": "LANCZOS",
+        "original": {
+          "file": "palace-stairs.png",
+          "bytes": 2587063,
+          "sha256": "9eb342e9443b4fc758194f147c08ee8fd893d642ce5f9469d72cf19813bfacef",
+          "dimensions": [2472, 1120],
+          "committedInCurrentTree": false
+        }
+      }
     },
     {
       "id": "wildflowers",
@@ -1475,7 +1555,23 @@
             }
           }
         }
-      ]
+      ],
+      "publishedFigure": {
+        "file": "wildflowers.jpg",
+        "bytes": 251622,
+        "sha256": "9324c74ad8e50641415897ad96c192e7dc5c65d1d26d2cbf2d3ef06413f3fab4",
+        "dimensions": [1600, 725],
+        "format": "JPEG",
+        "quality": 85,
+        "resample": "LANCZOS",
+        "original": {
+          "file": "wildflowers.png",
+          "bytes": 3229240,
+          "sha256": "3a1a07cf16537c44f7c762e7239a601a9e356807c976c49eaef6497aef3ac3a1",
+          "dimensions": [2472, 1120],
+          "committedInCurrentTree": false
+        }
+      }
     },
     {
       "id": "cdx-hard-glass-jug",
@@ -1720,7 +1816,23 @@
             }
           }
         }
-      ]
+      ],
+      "publishedFigure": {
+        "file": "cdx-hard-glass-jug.jpg",
+        "bytes": 236943,
+        "sha256": "a420079878ef079584991643d74135df79066416f5e45423eedb7c1bf2cc10de",
+        "dimensions": [1600, 725],
+        "format": "JPEG",
+        "quality": 85,
+        "resample": "LANCZOS",
+        "original": {
+          "file": "cdx-hard-glass-jug.png",
+          "bytes": 3030974,
+          "sha256": "0c947ba2ee89eb0e9c8e90c6334075e53cf54f27d311a55d5566290ba13a6ab9",
+          "dimensions": [2472, 1120],
+          "committedInCurrentTree": false
+        }
+      }
     },
     {
       "id": "cdx-hard-bicycle-spokes",
@@ -1965,7 +2077,23 @@
             }
           }
         }
-      ]
+      ],
+      "publishedFigure": {
+        "file": "cdx-hard-bicycle-spokes.jpg",
+        "bytes": 277116,
+        "sha256": "29ec488427aad7702804da8e39529354032eecf7f34102d97b3fce78e8e26f85",
+        "dimensions": [1600, 725],
+        "format": "JPEG",
+        "quality": 85,
+        "resample": "LANCZOS",
+        "original": {
+          "file": "cdx-hard-bicycle-spokes.png",
+          "bytes": 3657164,
+          "sha256": "95965dad8ece350a660297ca8947731eea090d9f56b6f28d0e4792931e2502b4",
+          "dimensions": [2472, 1120],
+          "committedInCurrentTree": false
+        }
+      }
     },
     {
       "id": "cdx-hard-puddle-reflection",
@@ -2210,7 +2338,23 @@
             }
           }
         }
-      ]
+      ],
+      "publishedFigure": {
+        "file": "cdx-hard-puddle-reflection.jpg",
+        "bytes": 249171,
+        "sha256": "35b2a9cfa249bf619945b5bd7266a5578f0816cf3ce35874c5f6f2aed0d3593f",
+        "dimensions": [1600, 725],
+        "format": "JPEG",
+        "quality": 85,
+        "resample": "LANCZOS",
+        "original": {
+          "file": "cdx-hard-puddle-reflection.png",
+          "bytes": 3301536,
+          "sha256": "51696d34d3f2877b8bb961d8fb28e0c5aa04eb459a26243d5672f54dc1818537",
+          "dimensions": [2472, 1120],
+          "committedInCurrentTree": false
+        }
+      }
     },
     {
       "id": "cdx-hard-workshop-bench",
@@ -2455,7 +2599,23 @@
             }
           }
         }
-      ]
+      ],
+      "publishedFigure": {
+        "file": "cdx-hard-workshop-bench.jpg",
+        "bytes": 230240,
+        "sha256": "4df56367cc55e4aa9e94a62d5dc3aa528e23124a9abf4bdaea320a55433a333e",
+        "dimensions": [1600, 725],
+        "format": "JPEG",
+        "quality": 85,
+        "resample": "LANCZOS",
+        "original": {
+          "file": "cdx-hard-workshop-bench.png",
+          "bytes": 2903185,
+          "sha256": "b3564d692145e842b957e439591b43b9bad3744a730aaf602e0cfc25059ecea7",
+          "dimensions": [2472, 1120],
+          "committedInCurrentTree": false
+        }
+      }
     }
   ],
   "inference": {
@@ -2487,5 +2647,17 @@
       }
     ]
   },
-  "depthyCommit": "6ff99c1eb975e820e7feee988cd0df3978ce0df2"
+  "depthyCommit": "6ff99c1eb975e820e7feee988cd0df3978ce0df2",
+  "figurePublication": {
+    "format": "JPEG",
+    "width": 1600,
+    "quality": 85,
+    "resample": "LANCZOS",
+    "originalFiguresCommittedInCurrentTree": false,
+    "originalsStorage": ".cache/photo-3d-explained/raw-figures",
+    "originalFiguresBytes": 31660498,
+    "publishedFiguresBytes": 2283390,
+    "pixelExact": false,
+    "note": "Published previews are resized and lossy. Native capture hashes, dimensions, and exact-pixel checks describe the original PNGs, not these JPEG previews. Earlier PR commit 7cb11c2b953f8121b1bed8917fb1ec50253e5f06 contains the former PNGs; its history is preserved, while the revised file tree contains only previews."
+  }
 }
