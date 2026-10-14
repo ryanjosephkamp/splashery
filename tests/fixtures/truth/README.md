@@ -62,7 +62,8 @@ Run numeric checks sequentially:
 
 ```sh
 python3 tests/studio-truth-camera.py
-node --test tests/studio-truth.test.mjs
+node --test --test-concurrency=1 tests/studio-truth*.test.mjs
+python3 tests/studio-truth-validation.py
 ```
 
 The browser scorer launches sandboxed Chromium with one page at a time and no unsafe graphics flags.
@@ -79,7 +80,8 @@ After full generation finishes, prepare held-out truth and a separate training-o
 
 ```sh
 blender -b --factory-startup --threads 4 --python-exit-code 1 \
-  --python tools/studio-truth-novel-truth.py -- --input .cache/studio-truth/full
+  --python tools/studio-truth-novel-truth.py -- --input .cache/studio-truth/full \
+  --camera-helper-sha256 c6484004609f177b1d2ac077b60d5470b143f32b85c956db8dfbaef65f1b215b
 python3 tools/studio-truth-assets.py --input .cache/studio-truth/full --full --archive
 ```
 
@@ -92,6 +94,11 @@ declared camera calibration assumption, not metric reconstruction or pixel fitti
 images. Moving held-out scores remain null until both color and depth source poses can be
 registered. Video training/rendering remains null without WebGPU; its solved-camera adapter is not
 complete. None of these measurements establishes phone performance.
+
+The explicit helper digest is required for legacy manifests that did not record it at startup. New
+builds also check the helper identity in their resume settings. For a fixed historical baseline,
+pass `--baseline 58f3d8ede13714bf4b3d1f99fbf3b29d7f60e492`; the scorer rejects product source that
+differs from the requested commit, even when `main` has moved.
 
 Retrieve the full archive with `node tools/studio-truth-fetch.mjs`. An unpublished draft archive
 requires repository collaborator access. The tool verifies SHA-256, rejects links and unsafe archive

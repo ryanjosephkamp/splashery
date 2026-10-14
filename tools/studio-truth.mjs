@@ -38,7 +38,7 @@ for (let i = 2; i < process.argv.length; i++) {
 }
 if (args.help) {
   console.log(
-    "node tools/studio-truth.mjs --fixtures .cache/studio-truth/full-v1 --out .cache/studio-truth/main.json [--scenes still-life,room] [--toys photo,moving,video] [--timeout 600] [--novel | --depth-only]\nRuns unmodified product modules; one sandboxed page, no GPU policy overrides. --novel adds held-out Photo camera diagnostics with source median-plane calibration. Unregistered Moving color and unavailable GPU measurements remain null.",
+    "node tools/studio-truth.mjs --fixtures .cache/studio-truth/full-v1 --out .cache/studio-truth/main.json [--baseline <commit>] [--scenes still-life,room] [--toys photo,moving,video] [--timeout 600] [--novel | --depth-only]\nRuns unmodified product modules; one sandboxed page, no GPU policy overrides. --novel adds held-out Photo camera diagnostics with source median-plane calibration. Unregistered Moving color and unavailable GPU measurements remain null.",
   );
   process.exit(0);
 }
@@ -48,16 +48,22 @@ const out = path.resolve(root, args.out || ".cache/studio-truth/main.json");
 const evidence = out.replace(/\.json$/, "") + "-images";
 await fs.mkdir(path.dirname(out), { recursive: true });
 await fs.mkdir(evidence, { recursive: true });
-const baseline = execFileSync("git", ["rev-parse", "origin/main"], {
-  cwd: root,
-  encoding: "utf8",
-}).trim();
+const baseline = execFileSync(
+  "git",
+  ["rev-parse", "--verify", "--end-of-options", `${args.baseline || "origin/main"}^{commit}`],
+  {
+    cwd: root,
+    encoding: "utf8",
+  },
+).trim();
 const productDiff = execFileSync("git", ["diff", baseline, "--", "src/", "vendor/"], {
   cwd: root,
   encoding: "utf8",
 });
 if (productDiff)
-  throw new Error("Baseline scorer requires src/ and vendor/ identical to origin/main");
+  throw new Error(
+    "Baseline scorer requires src/ and vendor/ identical to the requested baseline commit",
+  );
 const manifest = JSON.parse(await fs.readFile(path.join(fixtureRoot, "manifest.json"), "utf8"));
 const requested = args.scenes?.split(",");
 const scenes = manifest.scenes.filter((s) => !requested || requested.includes(s.id));
@@ -104,6 +110,22 @@ const report = {
   },
   rows: [],
 };
+report.scorerInputs = {};
+for (const name of [
+  "tools/studio-truth.mjs",
+  "tools/studio-truth/browser.mjs",
+  "tools/studio-truth/metrics.mjs",
+  "tools/studio-truth/sampling.mjs",
+  "tools/studio-truth/novel.mjs",
+  "tools/studio-truth/alignment.mjs",
+  "tools/studio-truth/transport.mjs",
+  "vendor/depth-anything-v2-small/model_quantized.onnx",
+]) {
+  report.scorerInputs[name] = createHash("sha256")
+    .update(await fs.readFile(path.join(root, name)))
+    .digest("hex");
+}
+report.fixtureManifest = manifest;
 const save = () => fs.writeFile(out, JSON.stringify(report, null, 2) + "\n");
 const server = await serve(root, fixtureRoot);
 let browser;
@@ -142,17 +164,11 @@ async function front(page, toy, scene, t, frame = 0) {
   const capture = await captureFront(page, toy, frame);
   const ref = sampleTruth(t, capture.w, capture.h);
   const file = path.join(evidence, `${scene}-${toy}-${String(frame).padStart(3, "0")}.png`);
-  await fs.writeFile(file, Buffer.from(capture.png, "base64"));
+  const png = Buffer.from(capture.png, "base64");
+  await fs.writeFile(file, png);
   return {
     frame,
-    ...imageMetrics(
-      ref.rgba,
-      Uint8Array.from(capture.data),
-      capture.w,
-      capture.h,
-      ref.mask,
-      ref.edges,
-    ),
+    ...imageMetrics(ref.rgba, PNG.sync.read(png).data, capture.w, capture.h, ref.mask, ref.edges),
     registration: capture.registration,
     convention: capture.convention,
     image: path.relative(root, file),
@@ -179,11 +195,12 @@ async function heldOut(page, toy, scene, base) {
       evidence,
       `${scene}-${toy}-held-out-${String(pose.frame).padStart(3, "0")}.png`,
     );
-    await fs.writeFile(file, Buffer.from(capture.png, "base64"));
+    const png = Buffer.from(capture.png, "base64");
+    await fs.writeFile(file, png);
     rows.push({
       frame: pose.frame,
       time: pose.time,
-      ...imageMetrics(ref.rgba, Uint8Array.from(capture.data), 640, 360, ref.mask, ref.edges),
+      ...imageMetrics(ref.rgba, PNG.sync.read(png).data, 640, 360, ref.mask, ref.edges),
       camera: capture.camera,
       sourceMedianMeters: median,
       inputHashes: t.hashes,
@@ -265,6 +282,10 @@ try {
             row.inputHashes = t.hashes;
             row.phase = "photo inference";
             await save();
+            if (!depthOnly) {
+              await page.evaluate(() => window.__splashery.player.setPaused(true));
+              row.renderDuringInference = "unrelated stage animation paused through the player API";
+            }
             const result = await openPhoto(page, `/__truth/${scene.id}/still/${t.pose.rgb}`);
             const sampled = sampleTruth(t, result.w, result.h);
             const prediction = Float32Array.from(result.d);
@@ -279,6 +300,7 @@ try {
               row.phase = "photo viewer";
               await save();
               await showPhoto(page);
+              await page.evaluate(() => window.__splashery.player.setPaused(false));
               row.phase = "photo capture";
               await save();
               row.frontView = [await front(page, toy, scene.id, t)];
@@ -293,7 +315,12 @@ try {
             await fs.access(path.join(fixtureRoot, scene.id, "handheld.mp4"));
             row.phase = "moving clip inference";
             await save();
-            const clip = await openMoving(page, `/__truth/${scene.id}/handheld.mp4`, !depthOnly);
+            if (!depthOnly) {
+              await page.evaluate(() => window.__splashery.player.setPaused(true));
+              row.renderDuringInference = "unrelated stage animation paused through the player API";
+            }
+            // Color is unregistered, so do not spend time preparing an unscored renderer.
+            const clip = await openMoving(page, `/__truth/${scene.id}/handheld.mp4`, false);
             row.frameTimestampSources = [...new Set(clip.captures.map((frame) => frame.source))];
             row.captureFrames = clip.captures;
             row.unregisteredFrames = clip.captures.flatMap((frame, i) =>
@@ -308,6 +335,8 @@ try {
             row.colorStatus = "unregistered";
             row.colorReason =
               "The Sharp renderer asynchronously seeks a separate video copy; its uploaded decoded color timestamp is not exposed. Color, hole, and edge-band render metrics remain null.";
+            row.phase = "registered depth scoring";
+            await save();
             let fit, previous;
             for (let i = 0; i < clip.times.length; i++) {
               if (clip.captures[i].source !== "requestVideoFrameCallback") {
@@ -350,6 +379,7 @@ try {
                   ),
                 });
               previous = { calibrated, sampled };
+              if (i % 8 === 0) await save();
             }
             row.calibration = fit;
             row.extractedFrames = clip.times.length;
@@ -358,10 +388,13 @@ try {
               row.heldOutReason =
                 "The displayed color source pose and inferred depth source pose cannot both be registered; no held-out Moving score is claimed.";
             }
-            row.status = row.unregisteredFrames.length ? "partial" : "measured";
+            row.status = row.unregisteredFrames.length || !depthOnly ? "partial" : "measured";
             if (row.unregisteredFrames.length)
               row.reason =
                 "Unregistered decoded frames have null metrics; no all-frame pass is claimed.";
+            else if (!depthOnly)
+              row.reason =
+                "Registered depth was measured; color/render metrics remain unregistered.";
           } else {
             // Probe before accessing a full dataset; an absent GPU is an actual limitation.
             Object.assign(row, await trainVideo(page, `/__truth/${scene.id}/walk.mp4`, timeoutMs));

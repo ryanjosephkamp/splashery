@@ -1,4 +1,5 @@
 // Actual product entry points, in a sandboxed real browser. No substitute inference.
+import { decodeNear } from "./transport.mjs";
 export async function openPhoto(page, url) {
   return page.evaluate(async (url) => {
     const m = await import("/src/packs/photo-3d.js");
@@ -119,14 +120,11 @@ export async function openMoving(page, url, render = true) {
 }
 
 export async function movingDepth(page, index) {
-  return page.evaluate(
-    async (index) =>
-      Array.from(
-        (await import("/src/packs/moving-photo.js")).MOVING.custom.near[index],
-        (v) => v / 255,
-      ),
-    index,
-  );
+  const encoded = await page.evaluate(async (index) => {
+    const { encodeBytes } = await import("/tools/studio-truth/transport.mjs");
+    return encodeBytes((await import("/src/packs/moving-photo.js")).MOVING.custom.near[index]);
+  }, index);
+  return decodeNear(encoded);
 }
 
 export async function prepareNovel(page, toy) {
@@ -189,11 +187,9 @@ export async function captureNovel(page, toy, base, target, median) {
       try {
         for (let i = 0; i < 3; i++) await st.captureFrame();
         const canvas = await st.captureFrame();
-        const data = Array.from(canvas.getContext("2d").getImageData(0, 0, 640, 360).data);
         return {
           w: 640,
           h: 360,
-          data,
           png: canvas.toDataURL("image/png").split(",")[1],
           camera: pose,
         };
@@ -259,13 +255,11 @@ export async function captureFront(page, toy, frame = 0) {
       out.height = 180;
       const g = out.getContext("2d");
       g.drawImage(frameCanvas, sx, sy, sw, sh, 0, 0, 320, 180);
-      const data = Array.from(g.getImageData(0, 0, 320, 180).data);
       const png = out.toDataURL("image/png").split(",")[1];
       st.setFixedSize(null);
       return {
         w: 320,
         h: 180,
-        data,
         png,
         registration: { sx, sy, sw, sh, capture: [frameCanvas.width, frameCanvas.height] },
         convention: "flat front view, actual toy projection; no held-out or disocclusion claim",
@@ -295,7 +289,7 @@ export async function trainVideo(page, url, timeoutMs) {
           signal: controller.signal,
         });
         return {
-          status: "trained-unscored",
+          status: "partial",
           stats: r.stats,
           reason:
             "Solved camera alignment and truly held-out training inputs require a separate adapter; no held-out score is claimed.",

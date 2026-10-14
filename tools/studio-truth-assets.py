@@ -41,7 +41,8 @@ def validate(folder, full):
                 np.testing.assert_allclose(c2w[:3,:3].T@c2w[:3,:3],np.eye(3),atol=1e-6)
                 assert np.linalg.det(c2w[:3,:3]) > .99999
                 assert k[0,0] == k[1,1] and k[0,2] == p['width']/2 and k[1,2] == p['height']/2
-                assert Image.open(root/p['rgb']).size == (p['width'],p['height'])
+                with Image.open(root/p['rgb']) as image:
+                    assert image.size == (p['width'],p['height'])
                 assert ('depth' in p) == ('mask' in p), 'Depth and mask must occur together'
                 if kind in ['still','handheld']:
                     assert 'depth' in p, f'{scene["id"]}/{kind}: missing required truth'
@@ -49,7 +50,8 @@ def validate(folder, full):
                     raw = gzip.decompress((root/p['depth']).read_bytes())
                     assert len(raw) == p['width']*p['height']*4
                     z = np.frombuffer(raw,dtype='<f4')
-                    mask = np.asarray(Image.open(root/p['mask']))[:,:,0].ravel()
+                    with Image.open(root/p['mask']) as image:
+                        mask = np.array(image)[:,:,0].ravel()
                     assert set(np.unique(mask)) <= {0,1,3}
                     assert np.all(np.isnan(z[mask==0]))
                     assert np.all(np.isfinite(z[mask!=0])) and np.all(z[mask!=0] > 0)

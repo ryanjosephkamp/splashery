@@ -39,8 +39,10 @@ video dataset.
 Fresh checkpoint verification:
 
 - `python3 tests/studio-truth-camera.py`: 3 passed.
-- `node --test --test-concurrency=1 tests/studio-truth*.test.mjs`: 15 passed, including camera-gauge
-  alignment and median-plane projection checks.
+- `python3 tests/studio-truth-validation.py`: 3 passed; missing still/handheld depth or unpaired
+  masks are rejected.
+- `node --test --test-concurrency=1 tests/studio-truth*.test.mjs`: 16 passed, including lossless
+  prediction transport, camera-gauge alignment and median-plane projection checks.
 - `blender -b --factory-startup --threads 4 --python-exit-code 1 --python tests/studio-truth-blender.py`:
   3 passed against real BVH geometry.
 - Sandboxed Chromium 151.0.7922.173 launches with no graphics overrides; its initial probe offers
@@ -87,8 +89,8 @@ The scorer imports real product entry points in sandboxed Chromium, blocks outsi
 and opens one page at a time. It verifies that `src/` and `vendor/` match the baseline. Model output
 is relative inverse depth. A positive affine inverse-depth calibration is fitted to a fixed
 one-eighth of valid diffuse pixels; the other seven-eighths are scored. This is a calibrated
-geometric benchmark, not a claim of metric-depth inference. Nonpositive or nonfinite predictions are
-counted separately as missing depth.
+geometric benchmark, not a claim of metric-depth inference. Nonpositive or nonfinite calibrated
+inverse depths are counted separately as missing depth.
 
 Temporal jitter follows the same world point through camera poses and rejects occlusion. It measures
 changes in signed depth error, not movement of a fixed screen pixel. The first frame's calibration
@@ -96,19 +98,26 @@ is kept for later frames. Color references are area-averaged to avoid comparing 
 with aliased source noise. SSIM uses valid 7×7 windows; sharpness is the ratio of Laplacian
 variances.
 
-Flat front-view diagnostics use the toy's actual projected source rectangle. Photo uses its flat
-control, and Moving photo uses depth zero. Alpha holes and source color error in a depth-edge band
-are measured in this view. These do not establish turned-view holes, disocclusion, or held-out
-sharpness. Held-out results stay null. Video to 3D's capability probe reports no WebGPU graphics
-adapter. Training and held-out rendering are unavailable; a solved-camera alignment and a
+Flat front-view diagnostics use Photo's actual projected source rectangle and its flat control.
+Alpha holes and source color error in a depth-edge band are measured in this view. These do not
+establish turned-view holes, disocclusion, or held-out sharpness. Moving color metrics are withheld.
+Held-out results have not run at this checkpoint. Video to 3D's capability probe reports no WebGPU
+graphics adapter. Training and held-out rendering are unavailable; a solved-camera alignment and a
 training-frame exclusion adapter are also still needed.
 
-The latest Moving probe registered 28 of 60 extracted frames and measured 27 adjacent depth-error
+An early Moving probe registered 28 of 60 extracted frames and measured 27 adjacent depth-error
 changes. The other 32 frames have null metrics and break temporal adjacency. Its earlier color
 captures are excluded from baseline evidence: review found that the separate Sharp renderer video
 seeks asynchronously, so a fixed capture delay cannot establish its decoded color timestamp. Moving
 color and held-out scores are withheld until this registration is available. The scorer does not
 guess a decoded timestamp from a seek target.
+
+The [latest complete first-scene depth row](studio-truth-2026-10/main-moving-first.json) registered
+all 60 extracted frames and measured 59 adjacent depth comparisons. Overall coverage remains partial
+because color/render metrics are unavailable. Unrelated stage animation is paused through the player
+API during inference. The earlier unpaused batch reached its 600-second bound with 22 depth frames
+scored; that failure is preserved. Lossless byte transport avoids serializing large decimal arrays
+without changing any prediction values or scoring formulas.
 
 The supplemental builder reserves 37 walk frames for evaluation, adds their exact depth and masks,
 and encodes a separate training video from the other 262 raw frames. Photo held-out camera
