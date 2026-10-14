@@ -1,0 +1,586 @@
+{
+  "checkpoint": "41b21e74e04ccca178b95ac02b4e5dc0e51b4b45",
+  "capturedAt": "2026-10-14T19:55:37.918Z",
+  "browser": "151.0.7922.173",
+  "node": "v24.19.0",
+  "platform": "linux",
+  "viewport": [390, 844],
+  "deviceScaleFactor": 1,
+  "profile": "low",
+  "renderer": "webgl2 / SwiftShader",
+  "url": "/?renderer=webgl2&adapt=off&profile=low&labs=1",
+  "measurements": [
+    {
+      "id": "qr-code",
+      "chooseToyMs": 321.69999999995343,
+      "chooseToCheckCompleteMs": 3231,
+      "profile": "low",
+      "splats": 100947,
+      "allocatedSplatArrayBytes": 8721792,
+      "canvas": [390, 645],
+      "options": {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "kind": "link",
+        "fields": "",
+        "shape": "square",
+        "style": "classic",
+        "ecc": "auto",
+        "fg": "#14161c",
+        "bg": "#ffffff",
+        "gradient": "none",
+        "fg2": "#1d4f9c",
+        "eyes": "same",
+        "eye": "#b3261e",
+        "plate": "paper",
+        "back": "#e8743b",
+        "wave": "#1d4f9c",
+        "alivePattern": "wave",
+        "theme": ""
+      },
+      "version": 4,
+      "modules": 33,
+      "check": {
+        "ok": true,
+        "read": "https://ryanjosephkamp.github.io/splashery/",
+        "reader": "jsQR",
+        "inverted": false,
+        "text": "https://ryanjosephkamp.github.io/splashery/"
+      },
+      "pictureError": "",
+      "resources": [
+        {
+          "path": "/src/packs/qr.js",
+          "bodyBytes": 49945,
+          "transferBytes": 50245,
+          "durationMs": 2.5
+        },
+        {
+          "path": "/src/qr/encode.js",
+          "bodyBytes": 6077,
+          "transferBytes": 6377,
+          "durationMs": 12.600000000093132
+        },
+        {
+          "path": "/src/qr/build.js",
+          "bodyBytes": 36884,
+          "transferBytes": 37184,
+          "durationMs": 13.099999999860302
+        },
+        {
+          "path": "/src/qr/circle.js",
+          "bodyBytes": 5747,
+          "transferBytes": 6047,
+          "durationMs": 12.199999999953434
+        },
+        {
+          "path": "/src/qr/scan.js",
+          "bodyBytes": 3212,
+          "transferBytes": 3512,
+          "durationMs": 10.400000000139698
+        },
+        {
+          "path": "/src/qr/field.js",
+          "bodyBytes": 29931,
+          "transferBytes": 30231,
+          "durationMs": 12.199999999953434
+        },
+        {
+          "path": "/src/qr/content.js",
+          "bodyBytes": 4403,
+          "transferBytes": 4703,
+          "durationMs": 12.199999999953434
+        },
+        {
+          "path": "/src/qr/themes.js",
+          "bodyBytes": 11224,
+          "transferBytes": 11524,
+          "durationMs": 14.100000000093132
+        },
+        {
+          "path": "/vendor/qrcodegen/qrcodegen.js",
+          "bodyBytes": 45866,
+          "transferBytes": 46166,
+          "durationMs": 2.699999999953434
+        },
+        {
+          "path": "/src/qr/crisp.js",
+          "bodyBytes": 11035,
+          "transferBytes": 11335,
+          "durationMs": 3.300000000046566
+        },
+        {
+          "path": "/vendor/jsqr/jsQR.js",
+          "bodyBytes": 256885,
+          "transferBytes": 257185,
+          "durationMs": 2.8999999999068677
+        }
+      ],
+      "activeRendering": {
+        "motion": "Alive wave",
+        "elapsedMs": 2500.3000000000466,
+        "renderedFrames": 18,
+        "fps": 7.199136103667426,
+        "medianFrameMs": 138.10000000009313,
+        "p95FrameMs": 303.19999999995343
+      },
+      "clips": [
+        {
+          "name": "qr-code-square-390x844.gif",
+          "frames": 50,
+          "fps": 10,
+          "durationSeconds": 5,
+          "bytes": 900964,
+          "previewFrames": [0, 14, 29, 49],
+          "viewportReads": [
+            {
+              "frame": 0,
+              "text": "https://ryanjosephkamp.github.io/splashery/"
+            },
+            {
+              "frame": 14,
+              "text": null
+            },
+            {
+              "frame": 29,
+              "text": "https://ryanjosephkamp.github.io/splashery/"
+            },
+            {
+              "frame": 49,
+              "text": "https://ryanjosephkamp.github.io/splashery/"
+            }
+          ],
+          "method": "real browser; clock stepped at 0.1 seconds, two rendered frames before each viewport screenshot; silent GIF"
+        },
+        {
+          "name": "qr-code-circle-390x844.gif",
+          "frames": 50,
+          "fps": 10,
+          "durationSeconds": 5,
+          "bytes": 1356920,
+          "previewFrames": [0, 14, 29, 49],
+          "viewportReads": [
+            {
+              "frame": 0,
+              "text": "https://ryanjosephkamp.github.io/splashery/"
+            },
+            {
+              "frame": 14,
+              "text": null
+            },
+            {
+              "frame": 29,
+              "text": "https://ryanjosephkamp.github.io/splashery/"
+            },
+            {
+              "frame": 49,
+              "text": "https://ryanjosephkamp.github.io/splashery/"
+            }
+          ],
+          "method": "real browser; clock stepped at 0.1 seconds, two rendered frames before each viewport screenshot; silent GIF"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "id": "qr-damage",
+      "chooseToyMs": 439.39999999990687,
+      "chooseToCheckCompleteMs": 1907.1000000000931,
+      "profile": "low",
+      "splats": 51450,
+      "allocatedSplatArrayBytes": 4784400,
+      "canvas": [390, 645],
+      "options": {
+        "shape": "square",
+        "decorationDamage": false,
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "level": "M",
+        "damage": "",
+        "tool": "scratch",
+        "region": "all",
+        "show": "damaged"
+      },
+      "version": 4,
+      "modules": 33,
+      "check": {
+        "codes": [
+          {
+            "scans": true,
+            "wrongModules": 0,
+            "decodes": true,
+            "blocks": [
+              {
+                "lost": 0,
+                "fixable": 9,
+                "ok": true
+              },
+              {
+                "lost": 0,
+                "fixable": 9,
+                "ok": true
+              }
+            ]
+          }
+        ]
+      },
+      "resources": [
+        {
+          "path": "/src/packs/qr-lab.js",
+          "bodyBytes": 75484,
+          "transferBytes": 75784,
+          "durationMs": 2.5
+        },
+        {
+          "path": "/src/qr-lab/steps.js",
+          "bodyBytes": 21564,
+          "transferBytes": 21864,
+          "durationMs": 8.200000000186265
+        },
+        {
+          "path": "/src/qr-lab/splats.js",
+          "bodyBytes": 5264,
+          "transferBytes": 5564,
+          "durationMs": 4.599999999860302
+        },
+        {
+          "path": "/src/qr/crisp.js",
+          "bodyBytes": 11035,
+          "transferBytes": 11335,
+          "durationMs": 8.199999999953434
+        },
+        {
+          "path": "/src/qr-lab/damage.js",
+          "bodyBytes": 16619,
+          "transferBytes": 16919,
+          "durationMs": 6.699999999953434
+        },
+        {
+          "path": "/src/qr/circle.js",
+          "bodyBytes": 5747,
+          "transferBytes": 6047,
+          "durationMs": 7.699999999953434
+        },
+        {
+          "path": "/src/qr-lab/read.js",
+          "bodyBytes": 7408,
+          "transferBytes": 7708,
+          "durationMs": 7.899999999906868
+        },
+        {
+          "path": "/src/qr-lab/rgb.js",
+          "bodyBytes": 2683,
+          "transferBytes": 2983,
+          "durationMs": 11.199999999953434
+        },
+        {
+          "path": "/src/qr-lab/field.js",
+          "bodyBytes": 19282,
+          "transferBytes": 19582,
+          "durationMs": 8.700000000186265
+        },
+        {
+          "path": "/src/qr/encode.js",
+          "bodyBytes": 6077,
+          "transferBytes": 6377,
+          "durationMs": 2
+        },
+        {
+          "path": "/src/qr-lab/rs.js",
+          "bodyBytes": 5700,
+          "transferBytes": 6000,
+          "durationMs": 1.8999999999068677
+        },
+        {
+          "path": "/vendor/qrcodegen/qrcodegen.js",
+          "bodyBytes": 45866,
+          "transferBytes": 46166,
+          "durationMs": 2.300000000046566
+        },
+        {
+          "path": "/vendor/jsqr/jsQR.js",
+          "bodyBytes": 256885,
+          "transferBytes": 257185,
+          "durationMs": 3.3999999999068677
+        }
+      ],
+      "activeRendering": {
+        "motion": "Move in time 0.3",
+        "elapsedMs": 2500.399999999907,
+        "renderedFrames": 29,
+        "fps": 11.598144296912926,
+        "medianFrameMs": 77.39999999990687,
+        "p95FrameMs": 249
+      },
+      "clips": [
+        {
+          "name": "qr-damage-square-390x844.gif",
+          "frames": 90,
+          "fps": 10,
+          "durationSeconds": 9,
+          "bytes": 3126063,
+          "previewFrames": [0, 14, 29, 89],
+          "viewportReads": [
+            {
+              "frame": 0,
+              "text": "https://ryanjosephkamp.github.io/splashery/"
+            },
+            {
+              "frame": 14,
+              "text": null
+            },
+            {
+              "frame": 29,
+              "text": null
+            },
+            {
+              "frame": 89,
+              "text": "https://ryanjosephkamp.github.io/splashery/"
+            }
+          ],
+          "method": "real browser; clock stepped at 0.1 seconds, two rendered frames before each viewport screenshot; silent GIF"
+        },
+        {
+          "name": "qr-damage-circle-390x844.gif",
+          "frames": 90,
+          "fps": 10,
+          "durationSeconds": 9,
+          "bytes": 4094408,
+          "previewFrames": [0, 14, 29, 89],
+          "viewportReads": [
+            {
+              "frame": 0,
+              "text": "https://ryanjosephkamp.github.io/splashery/"
+            },
+            {
+              "frame": 14,
+              "text": null
+            },
+            {
+              "frame": 29,
+              "text": null
+            },
+            {
+              "frame": 89,
+              "text": null
+            }
+          ],
+          "method": "real browser; clock stepped at 0.1 seconds, two rendered frames before each viewport screenshot; silent GIF"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "id": "qr-picture",
+      "chooseToyMs": 1365.8999999999069,
+      "chooseToCheckCompleteMs": 3698.1999999999534,
+      "profile": "low",
+      "splats": 120000,
+      "allocatedSplatArrayBytes": 10368000,
+      "canvas": [390, 645],
+      "options": {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "shape": "square",
+        "picture": "ai-farm",
+        "contrast": 0.5,
+        "center": "small",
+        "level": "H",
+        "style": "color",
+        "size": "more"
+      },
+      "version": 9,
+      "modules": 53,
+      "check": {
+        "ok": true,
+        "sizes": [
+          {
+            "id": "phone",
+            "label": "phone size",
+            "ppm": 8,
+            "blur": 0.2,
+            "text": "https://ryanjosephkamp.github.io/splashery/",
+            "ok": true
+          },
+          {
+            "id": "small",
+            "label": "smaller",
+            "ppm": 4,
+            "blur": 0.2,
+            "text": "https://ryanjosephkamp.github.io/splashery/",
+            "ok": true
+          }
+        ],
+        "stage": [
+          {
+            "ppm": 8,
+            "text": "https://ryanjosephkamp.github.io/splashery/",
+            "ok": true
+          },
+          {
+            "ppm": 4,
+            "text": "https://ryanjosephkamp.github.io/splashery/",
+            "ok": true
+          }
+        ],
+        "measure": {
+          "module": 3.597154927288817,
+          "center": 18.375705646557403,
+          "darkGray": 0.3004317934609955,
+          "lightGray": 0.6618815659531899,
+          "gap": -0.9186804204928688
+        }
+      },
+      "margin": 0.12000000000000001,
+      "pictureError": "",
+      "resources": [
+        {
+          "path": "/src/packs/qr-craft.js",
+          "bodyBytes": 52201,
+          "transferBytes": 52501,
+          "durationMs": 4.800000000046566
+        },
+        {
+          "path": "/src/qr-craft/picture.js",
+          "bodyBytes": 24708,
+          "transferBytes": 25008,
+          "durationMs": 6.699999999953434
+        },
+        {
+          "path": "/src/qr-craft/barcodes.js",
+          "bodyBytes": 10862,
+          "transferBytes": 11162,
+          "durationMs": 5.100000000093132
+        },
+        {
+          "path": "/src/qr-craft/samples.js",
+          "bodyBytes": 2369,
+          "transferBytes": 2669,
+          "durationMs": 6.300000000046566
+        },
+        {
+          "path": "/src/qr-craft/field.js",
+          "bodyBytes": 12803,
+          "transferBytes": 13103,
+          "durationMs": 6.800000000046566
+        },
+        {
+          "path": "/src/qr-craft/glyphs.js",
+          "bodyBytes": 2985,
+          "transferBytes": 3285,
+          "durationMs": 6
+        },
+        {
+          "path": "/src/qr/encode.js",
+          "bodyBytes": 6077,
+          "transferBytes": 6377,
+          "durationMs": 6.399999999906868
+        },
+        {
+          "path": "/src/qr-craft/pieces.js",
+          "bodyBytes": 14782,
+          "transferBytes": 15082,
+          "durationMs": 9.299999999813735
+        },
+        {
+          "path": "/src/qr/crisp.js",
+          "bodyBytes": 11035,
+          "transferBytes": 11335,
+          "durationMs": 9.099999999860302
+        },
+        {
+          "path": "/src/qr/circle.js",
+          "bodyBytes": 5747,
+          "transferBytes": 6047,
+          "durationMs": 9.299999999813735
+        },
+        {
+          "path": "/src/qr-craft/codex-pictures.js",
+          "bodyBytes": 9367,
+          "transferBytes": 9667,
+          "durationMs": 2.9000000001396984
+        },
+        {
+          "path": "/vendor/qrcodegen/qrcodegen.js",
+          "bodyBytes": 45866,
+          "transferBytes": 46166,
+          "durationMs": 2.199999999953434
+        },
+        {
+          "path": "/vendor/jsqr/jsQR.js",
+          "bodyBytes": 256885,
+          "transferBytes": 257185,
+          "durationMs": 1.6999999999534339
+        },
+        {
+          "path": "/assets/toys/photo-3d/ai/farm.jpg",
+          "bodyBytes": 244277,
+          "transferBytes": 244577,
+          "durationMs": 4.699999999953434
+        }
+      ],
+      "activeRendering": {
+        "motion": "ripple",
+        "elapsedMs": 2500.2999999998137,
+        "renderedFrames": 18,
+        "fps": 7.1991361036680965,
+        "medianFrameMs": 148.5,
+        "p95FrameMs": 282.9000000001397
+      },
+      "clips": [
+        {
+          "name": "qr-picture-square-390x844.gif",
+          "frames": 50,
+          "fps": 10,
+          "durationSeconds": 5,
+          "bytes": 3431090,
+          "previewFrames": [0, 14, 29, 49],
+          "viewportReads": [
+            {
+              "frame": 0,
+              "text": "https://ryanjosephkamp.github.io/splashery/"
+            },
+            {
+              "frame": 14,
+              "text": "https://ryanjosephkamp.github.io/splashery/"
+            },
+            {
+              "frame": 29,
+              "text": "https://ryanjosephkamp.github.io/splashery/"
+            },
+            {
+              "frame": 49,
+              "text": "https://ryanjosephkamp.github.io/splashery/"
+            }
+          ],
+          "method": "real browser; clock stepped at 0.1 seconds, two rendered frames before each viewport screenshot; silent GIF"
+        },
+        {
+          "name": "qr-picture-circle-390x844.gif",
+          "frames": 50,
+          "fps": 10,
+          "durationSeconds": 5,
+          "bytes": 3184493,
+          "previewFrames": [0, 14, 29, 49],
+          "viewportReads": [
+            {
+              "frame": 0,
+              "text": "https://ryanjosephkamp.github.io/splashery/"
+            },
+            {
+              "frame": 14,
+              "text": null
+            },
+            {
+              "frame": 29,
+              "text": "https://ryanjosephkamp.github.io/splashery/"
+            },
+            {
+              "frame": 49,
+              "text": "https://ryanjosephkamp.github.io/splashery/"
+            }
+          ],
+          "method": "real browser; clock stepped at 0.1 seconds, two rendered frames before each viewport screenshot; silent GIF"
+        }
+      ],
+      "errors": []
+    }
+  ]
+}

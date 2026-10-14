@@ -1,0 +1,102 @@
+[
+  {
+    "damage": "",
+    "scans": true,
+    "decodes": true,
+    "wrong": 0,
+    "blocks": [
+      [0, 9],
+      [0, 9]
+    ]
+  },
+  {
+    "damage": "scratch:0.24:all:1",
+    "scans": true,
+    "decodes": true,
+    "wrong": 12,
+    "blocks": [
+      [4, 9],
+      [6, 9]
+    ]
+  },
+  {
+    "damage": "blur:0.5:all:1",
+    "scans": false,
+    "decodes": true,
+    "wrong": 0,
+    "blocks": [
+      [0, 9],
+      [0, 9]
+    ]
+  },
+  {
+    "damage": "shrink:0.6:all:1;jitter:0.3:all:2",
+    "scans": false,
+    "decodes": true,
+    "wrong": 0,
+    "blocks": [
+      [0, 9],
+      [0, 9]
+    ]
+  },
+  {
+    "damage": "sticker:0.35:center:1",
+    "scans": true,
+    "decodes": true,
+    "wrong": 26,
+    "blocks": [
+      [4, 9],
+      [6, 9]
+    ]
+  },
+  {
+    "damage": "sticker:0.8:center:1",
+    "scans": false,
+    "decodes": false,
+    "wrong": 124,
+    "blocks": [
+      [23, 9],
+      [18, 9]
+    ]
+  },
+  {
+    "damage": "tear:0.4:corner:1;smudge:0.5:center:2",
+    "scans": true,
+    "decodes": true,
+    "wrong": 19,
+    "blocks": [
+      [3, 9],
+      [5, 9]
+    ]
+  },
+  {
+    "damage": "sticker:0.24:finder:1",
+    "scans": false,
+    "decodes": true,
+    "wrong": 14,
+    "blocks": [
+      [0, 9],
+      [0, 9]
+    ]
+  },
+  {
+    "damage": "fade:0.75:all:1",
+    "scans": false,
+    "decodes": true,
+    "wrong": 0,
+    "blocks": [
+      [0, 9],
+      [0, 9]
+    ]
+  },
+  {
+    "damage": "color:0.85:all:1",
+    "scans": true,
+    "decodes": true,
+    "wrong": 0,
+    "blocks": [
+      [0, 9],
+      [0, 9]
+    ]
+  }
+]
