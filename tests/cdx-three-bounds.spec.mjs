@@ -90,10 +90,11 @@ test("different resources keep independent envelopes", () => {
   expect(second.aabb.getMax().z).toBe(4.5);
 });
 
-for (const [name, isWebGPU, kit, expectedMin] of [
-  ["WebGPU kit", true, true, -10.5],
-  ["WebGL2 kit", false, true, -0.5],
-  ["WebGPU asset", true, false, -0.5],
+for (const [name, isWebGPU, kit, customModifier, expectedMin] of [
+  ["WebGPU kit", true, true, false, -10.5],
+  ["WebGL2 kit", false, true, false, -0.5],
+  ["WebGPU asset", true, false, false, -0.5],
+  ["WebGPU custom field", true, true, true, -0.5],
 ]) {
   test(`Stage applies ${name} token uniforms with the appropriate bounds`, () => {
     const r = resource();
@@ -105,11 +106,12 @@ for (const [name, isWebGPU, kit, expectedMin] of [
     };
     const tokens = new Float32Array([0, 0, -10, 1, 0, 0, 0, 1]);
     Stage.prototype.setUniforms.call(
-      { device: { isWebGPU }, toy: { kit, resource: r, entity: { gsplat: g } } },
+      { device: { isWebGPU }, toy: { kit, customModifier, resource: r, entity: { gsplat: g } } },
       { "uSpTokens[0]": tokens },
     );
     expect(uploads).toEqual([{ key: "uSpTokens[0]", value: tokens, minZ: expectedMin }]);
-    expect(r.updates).toBe(isWebGPU && kit ? 1 : 0);
-    if (isWebGPU && kit) expect(g.customAabb).toBe(r.aabb);
+    const expanded = isWebGPU && kit && !customModifier;
+    expect(r.updates).toBe(expanded ? 1 : 0);
+    if (expanded) expect(g.customAabb).toBe(r.aabb);
   });
 }
