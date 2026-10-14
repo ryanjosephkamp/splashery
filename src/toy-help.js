@@ -1604,9 +1604,9 @@ export const TOY_HELP = {
   },
   "one-splat": {
     howTo:
-      "Move the level dial from 1 to 16,384 splats. Tap a splat to split it, or hold to see its numbers. Type a word or open a picture in the Toy tab.",
+      "Turn the dial from 1 to 16,384 splats. Tap a splat to split it; hold to read its numbers.",
     about:
-      "A word or picture becomes a tree of Gaussian splats. Each splat has the exact center and covariance of the raster pixels beneath it, including the spread within a square pixel. Each split divides those pixels at the median along their principal axis. The two children conserve their parent's pixel count, center, and covariance when their separation is included.\n\nThe level dial picks powers of two. Tap a splat to release its two children from its center, or hold it to inspect its center, size, angle, and covariance in pixel units. Replay the last split with the play button. Opened pictures stay on this device; a shared scene falls back to its word on another device.\n\nFrom a concept by Ryan Kamp. Port made by Ryan with Codex (GPT-6). Code: MIT. Procedural splats: CC0.",
+      "A word or picture becomes a tree of Gaussian splats. Each splat has the exact center and covariance of the raster pixels beneath it, including the spread within a square pixel. Each split divides those pixels at the median along their principal axis. The two children conserve their parent's pixel count, center, and covariance when their separation is included.\n\nType a word or open a picture in the Toy tab. Tap a splat to split it; hold to see its center, size, angle, and covariance. Replay the last split with the play button. Pictures stay on this device; shared scenes fall back to their word. From a concept by Ryan Kamp. Made by Ryan with Codex (GPT-6). Code: MIT. Procedural splats: CC0.",
   },
   "splat-equation": {
     howTo: "Tap to play time t. Pick a program, or type your own equations, in the Toy tab.",

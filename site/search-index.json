@@ -2685,7 +2685,7 @@
     "u": "toys/one-splat/",
     "k": "toy",
     "s": "Math",
-    "d": "Move the level dial from 1 to 16,384 splats. Tap a splat to split it, or hold to see its numbers. Type a word or open a picture in the Toy tab.",
+    "d": "Turn the dial from 1 to 16,384 splats. Tap a splat to split it; hold to read its numbers.",
     "w": "one splat, many splats math math gaussian pixels word picture tree mean covariance eigenvector split portfolio one-splat",
     "i": "../assets/toys/one-splat/thumb.webp",
     "l": 1
