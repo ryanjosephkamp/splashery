@@ -103,6 +103,7 @@ test("the task browser launch retains sandboxing and rejects unsafe arguments", 
     "--disable-gpu-sandbox=true",
     "--ignore-gpu-blocklist",
     "--disable-web-security",
+    "--disable-features=HttpsUpgrades,ThirdPartyStoragePartitioning",
     "--unsafely-disable-devtools-self-xss-warnings",
   ])
     expect(() => assertSafeArguments([arg])).toThrow(/Unsafe browser launch/);

@@ -1,10 +1,24 @@
 // Task 72 uses native graphics with Chromium's sandbox and security checks.
+import { createRequire } from "node:module";
+import path from "node:path";
+
+const require = createRequire(import.meta.url);
+// The pinned runner disables some security features by default. Discover its
+// exact switch so it can be excluded without copying a version-specific list.
+const { chromiumSwitches } = require(
+  path.join(
+    path.dirname(require.resolve("playwright-core/package.json")),
+    "lib/server/chromium/chromiumSwitches.js",
+  ),
+);
+
 export const ignoredDefaults = [
   "--enable-unsafe-swiftshader",
   "--unsafely-disable-devtools-self-xss-warnings",
   "--disable-client-side-phishing-detection",
   "--disable-ipc-flooding-protection",
   "--disable-popup-blocking",
+  ...chromiumSwitches(false).filter((arg) => arg.startsWith("--disable-features=")),
 ];
 
 export function safeLaunchOptions() {
@@ -22,6 +36,7 @@ export function assertSafeArguments(args) {
   const forbidden = args.filter(
     (arg) =>
       /^--(?:enable-unsafe-|unsafely-)/.test(arg) ||
+      arg.startsWith("--disable-features=") ||
       [
         "--no-sandbox",
         "--disable-setuid-sandbox",
