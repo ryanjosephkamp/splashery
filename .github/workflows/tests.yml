@@ -90,6 +90,27 @@ jobs:
         # Outside the checkout (bld.spec.mjs checks every top-level folder against REPO-MAP.md) and
         # not under a dot folder (upload-artifact leaves hidden files out).
         run: echo "OUT=$RUNNER_TEMP/ci-out/shard-${{ matrix.shard }}" >> "$GITHUB_ENV"
+      - name: Prefer Inter, as the cloud container does
+        # Its /etc/fonts/conf.d/56-prefer-inter.conf (from no package): ui-sans-serif, sans-serif and
+        # the system UI names draw in Inter, which the manual's PDF embeds (man5:201).
+        run: |
+          sudo tee /etc/fonts/conf.d/56-prefer-inter.conf > /dev/null <<'EOF'
+          <?xml version="1.0"?>
+          <!DOCTYPE fontconfig SYSTEM "urn:fontconfig:fonts.dtd">
+          <fontconfig>
+            <alias><family>system-ui</family><prefer><family>Inter</family></prefer></alias>
+            <alias><family>ui-sans-serif</family><prefer><family>Inter</family></prefer></alias>
+            <alias><family>-apple-system</family><prefer><family>Inter</family></prefer></alias>
+            <alias><family>BlinkMacSystemFont</family><prefer><family>Inter</family></prefer></alias>
+            <alias><family>SF Pro Text</family><prefer><family>Inter</family></prefer></alias>
+            <alias><family>SF Pro Display</family><prefer><family>Inter</family></prefer></alias>
+            <alias><family>Segoe UI</family><prefer><family>Inter</family></prefer></alias>
+            <alias><family>Helvetica Neue</family><prefer><family>Inter</family></prefer></alias>
+            <alias><family>sans-serif</family><prefer><family>Inter</family></prefer></alias>
+          </fontconfig>
+          EOF
+          fc-cache -f > /dev/null
+          fc-match ui-sans-serif
       - name: Let Chromium's sandbox start
         # Ubuntu 24.04's AppArmor blocks the user namespaces Chromium's sandbox needs; man5's PDF
         # print (tools/manual-pdf.mjs) launches with the sandbox on.

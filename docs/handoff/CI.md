@@ -43,7 +43,8 @@ Codex task 77 (docs/codex/77-ci-suite.md), which never opened a PR.
   the manual with `chromiumSandbox: true`).
 - ffmpeg (cdx-v3d), Xvfb, Mesa's llvmpipe and the cloud container's fonts (DejaVu, Inter,
   Liberation, Noto Color Emoji; `tools/manual-pdf.mjs` stops on any other set, man5:201) come from
-  apt in each shard.
+  apt in each shard, and the container's own `56-prefer-inter.conf` (in no package: it draws
+  `ui-sans-serif` and `sans-serif` in Inter) is written into `/etc/fonts/conf.d/`.
 - Reports go to `$RUNNER_TEMP/ci-out/`: outside the checkout, since bld:57 checks every top-level
   folder against builders/REPO-MAP.md, and not under a dot folder, which upload-artifact leaves out.
 
