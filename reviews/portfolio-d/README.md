@@ -16,3 +16,14 @@ not measure a real phone's frame rate and do not contain audio.
 - [Blow](blow.gif): a gust moves and tilts the letters, then they come home.
 
 The adjacent `*-strip.png` files show eight frames of each effect.
+
+## Phone Blow review
+
+[Blow on the phone profile](blow-phone.gif) shows the same tap gust at 390 × 390 pixels, from a 390
+× 844 viewport with labs enabled and the low profile's 24,000-splat Auto detail. The solid letters
+drift to the right and upward, tilt in the gust, and return to their rows. They stay inside the
+frame throughout the effect.
+
+This clip uses the `tools/effect-clip.mjs` capture loop with only its startup viewport and URL
+changed in a temporary runner. It keeps the same 12 frames per second and 3.6-second effect;
+[the phone strip](blow-phone-strip.png) shows 12 frames. It does not measure physical phone speed.
