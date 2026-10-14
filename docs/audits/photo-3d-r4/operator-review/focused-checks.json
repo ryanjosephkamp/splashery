@@ -1,0 +1,59 @@
+{
+  "ordinary-main": {
+    "stats": {
+      "startTime": "2026-10-14T16:16:31.764Z",
+      "duration": 14277.389000000001,
+      "expected": 1,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "sha256": "1b65a96a29cef7d4527e27de69b0ae382842bccb30e68fa45144c96532fc9ddf"
+  },
+  "weight-release-original": {
+    "stats": {
+      "startTime": "2026-10-14T16:16:46.975Z",
+      "duration": 6635.933000000001,
+      "expected": 1,
+      "skipped": 0,
+      "unexpected": 2,
+      "flaky": 0
+    },
+    "sha256": "339bfd96275c5007b64e9acb91d20a8cb219205e3e807a4b98189e081bbdf1dd",
+    "note": "Expected before-fix failure: matching build passed; stale-token and failed-build weight-release assertions failed."
+  },
+  "weight-release-fixed": {
+    "stats": {
+      "startTime": "2026-10-14T16:16:54.590Z",
+      "duration": 4036.944,
+      "expected": 3,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "sha256": "fd8d0c652f2e870e7f69466f27279b34e8898b2a5cb4bd4aef9e3c57ae871ed8"
+  },
+  "showcase-facts-fixed": {
+    "stats": {
+      "startTime": "2026-10-14T16:16:59.534Z",
+      "duration": 1453.516,
+      "expected": 1,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "sha256": "4d1fa25fe82084118b4eeae8eb4b28b4efc034d13152970b961e0a1df249b92f"
+  },
+  "scene-and-cache-branch": {
+    "stats": {
+      "startTime": "2026-10-14T16:14:44.938Z",
+      "duration": 38436.229999999996,
+      "expected": 5,
+      "skipped": 0,
+      "unexpected": 3,
+      "flaky": 0
+    },
+    "sha256": "321d744885a9562d5aa45c7d422a37198f5658467157d4cd3056518d5ef96f46",
+    "note": "Five normal/hold/full-field checks passed; the three initial cache checks stopped at a MIME fixture error. Those cache assertions were subsequently exercised on original and fixed workers."
+  }
+}

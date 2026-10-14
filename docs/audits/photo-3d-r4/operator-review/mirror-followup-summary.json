@@ -1,0 +1,63 @@
+{
+  "mainControls": [
+    {
+      "index": 0,
+      "build": "main",
+      "heightJitter": 0.0001510705211543822,
+      "limit": 0.00055,
+      "passed": true
+    },
+    {
+      "index": 3,
+      "build": "main",
+      "heightJitter": 0.0002886679325554822,
+      "limit": 0.00055,
+      "passed": true
+    }
+  ],
+  "branchControls": [
+    {
+      "index": 1,
+      "build": "branch",
+      "heightJitter": 5.538788464692262e-6,
+      "limit": 0.00055,
+      "passed": true
+    },
+    {
+      "index": 2,
+      "build": "branch",
+      "heightJitter": 0.0005930915600746065,
+      "limit": 0.00055,
+      "passed": false
+    }
+  ],
+  "completeBranchRecheck": {
+    "index": 4,
+    "build": "branch-full",
+    "root": "/workspace/splashery",
+    "port": 4173,
+    "args": [
+      "npx",
+      "playwright",
+      "test",
+      "tests/cdx-mir.spec.mjs",
+      "--workers=1",
+      "--reporter=json",
+      "--output=/workspace/splashery/.cache/photo-3d-r4/operator-review/mirror-followup/artifacts/04-branch-full"
+    ],
+    "stats": {
+      "startTime": "2026-10-14T18:06:15.811Z",
+      "duration": 360188.55000000005,
+      "expected": 10,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "returncode": 0,
+    "finishedUTC": "2026-10-14T18:12:16.021117+00:00",
+    "testSha256": "90eee0d17fadaa17d20d98b585f251436cac31e4339a78e02b0d9fdd790acd61"
+  },
+  "initialFailuresRetained": true,
+  "causeIsolated": false,
+  "notes": "The standard-port refusal is an environment issue. Live still-capture exceedances occurred twice on branch; both predefined main controls passed. A single complete-file branch recheck passed all ten assertions. This does not establish absence of intermittent live-capture regressions."
+}
