@@ -1661,6 +1661,30 @@ Picture QR (lane QR r4, October 10, 2026) also offers four of them as its sample
 AI-made in its picker and its credit: Felt farm (D37), Glass wave (D38), Mushrooms (D27), and Stone
 arch (D17).
 
+## AI-made Studio test inputs: depth lab J (Codex task 75e)
+
+Made by Ryan with Codex (GPT-6) and **ChatGPT Images** (the OpenAI native image tool), October
+14, 2026. These are **AI-made by the owner**, original fictional Studio test inputs, CC0 under Rules
+B4. They are never real captures, real places, or measured depth references. They are not used in
+science, math, or engineering toys, or on photoreal shelves. No people, faces, text, logos, or
+identifiable landmarks were seen in the ten inspected native images.
+
+The 160 JPEGs under `assets/depth-lab/j/` comprise ten source pictures and 150 fixed-source
+exposure/blur variants. Every picture is 1,280 × 1,280, JPEG quality 0.78. The native images were
+1,254 × 1,254 and were resampled once; this does not add captured detail. The image tool did not
+expose its model identity or generation seed. Prompts, native hashes, individual file hashes,
+dimensions, dates, transformations, and credits are recorded under `depthLabSamples` in
+`tools/assets.json`. The [J manifest](tools/depth-lab/j.json),
+[contact sheet](docs/audits/depth-lab/j.jpg), and
+[J README section](docs/audits/depth-lab/README.md#j-hard-real-world-cases-part-e) label them as
+AI-made. No public picker or runtime source was changed.
+
+The source files are `j-glass-source.jpg`, `j-mirror-source.jpg`, `j-hair-source.jpg`,
+`j-fur-source.jpg`, `j-thin-source.jpg`, `j-night-source.jpg`, `j-painting-source.jpg`,
+`j-line-art-source.jpg`, `j-graphic-source.jpg`, and `j-clutter-source.jpg`, all in that directory.
+Their variants keep the same scene prefix. Full prompts and deterministic variant processing are in
+`tools/depth-lab/gen-j.mjs` (code offered under Splashery's MIT license).
+
 ## AI-made Studio samples: hard cases (Codex task 57)
 
 Made by Ryan with Codex (GPT-6) and the OpenAI native image tool, October 13, 2026. These 20
