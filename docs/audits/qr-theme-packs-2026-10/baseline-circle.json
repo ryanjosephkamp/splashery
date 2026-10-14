@@ -1,0 +1,11 @@
+{
+  "mainCommit": "c044dc9d",
+  "checkedSourceCommit": "d40261ee",
+  "sourceDiffFromMain": "none; d40261ee merges documentation changes only",
+  "method": "Extract HEAD src into an isolated cache directory with git archive; reuse unchanged vendor and node_modules; invoke buildRecipe with the existing qr-picture recipe, resolveOptions({shape: circle}), seed 3, count 8000, and applyClay.",
+  "picture": "ai-farm",
+  "shape": "circle",
+  "count": 8000,
+  "result": "Throws the same guard as the broad kit regression before the new picture choices are exercised.",
+  "error": "This code has too much detail for a circular picture on this device. Choose less detail, a smaller center dot, or a shorter text."
+}
