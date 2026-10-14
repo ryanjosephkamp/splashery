@@ -24,3 +24,15 @@ test("the app graph starts transferring before the compressed engine finishes", 
   expect(requests).not.toContain("/vendor/playcanvas/playcanvas.min.mjs");
   await expect(page.locator("#worlds-link")).toHaveJSProperty("hidden", false);
 });
+
+test("warmed graph responses do not produce unused-preload warnings", async ({ page }) => {
+  const warnings = [];
+  page.on("console", (message) => {
+    if (message.type() === "warning" && message.text().includes("preloaded using link preload"))
+      warnings.push(message.text());
+  });
+  await page.goto("/?renderer=none");
+  await page.waitForSelector("body[data-ready='true']");
+  await page.waitForTimeout(6000);
+  expect(warnings).toEqual([]);
+});

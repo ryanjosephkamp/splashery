@@ -144,6 +144,7 @@ const OPENING_GRAPHS = {
     // Fetch source responses while the engine transfers. Unlike modulepreload,
     // script preloads do not resolve imports before the native engine map exists.
     const graph = entry.pathname.endsWith("/embed.js") ? OPENING_GRAPHS.embed : OPENING_GRAPHS.app;
+    const sources = [];
     for (const file of graph) {
       const source = document.createElement("link");
       source.rel = "preload";
@@ -151,6 +152,7 @@ const OPENING_GRAPHS = {
       source.crossOrigin = "anonymous";
       source.href = new URL(`../${file}`, base).href;
       document.head.appendChild(source);
+      sources.push(source);
     }
     if (transfer) {
       try {
@@ -171,6 +173,13 @@ const OPENING_GRAPHS = {
       map.type = "importmap";
       map.textContent = JSON.stringify({ imports });
       document.head.appendChild(map);
+    }
+    // Claim every warmed response as a module once its engine imports can resolve.
+    // Deep dependencies otherwise wait for recursive discovery and can trigger
+    // Chromium's unused script-preload warning on a slow opening.
+    for (const source of sources) {
+      source.removeAttribute("as");
+      source.rel = "modulepreload";
     }
     // Preserve the original engine preload: fetch and compile the mapped
     // module while the app's remaining dependency graph is still loading.
