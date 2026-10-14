@@ -1,0 +1,84 @@
+{
+  "stats": {
+    "startTime": "2026-10-14T04:25:58.515Z",
+    "duration": 2838177.105,
+    "expected": 199,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "files": {
+    "cdx-mp2-decode.spec.mjs": {
+      "expected": 7
+    },
+    "cdx-mp2-mobile.spec.mjs": {
+      "expected": 2
+    },
+    "cdx-mp2-pixels.spec.mjs": {
+      "expected": 7
+    },
+    "cdx-mp2-r3.spec.mjs": {
+      "expected": 16
+    },
+    "cdx-mp2.spec.mjs": {
+      "expected": 14
+    },
+    "cdx-stability.spec.mjs": {
+      "expected": 10
+    },
+    "live3-engine.spec.mjs": {
+      "expected": 4
+    },
+    "live3.spec.mjs": {
+      "expected": 11
+    },
+    "live5.spec.mjs": {
+      "expected": 5
+    },
+    "live6.spec.mjs": {
+      "expected": 3
+    },
+    "lv7-long.spec.mjs": {
+      "expected": 2
+    },
+    "phf-engine.spec.mjs": {
+      "expected": 5
+    },
+    "phf.spec.mjs": {
+      "expected": 7
+    },
+    "phf2.spec.mjs": {
+      "expected": 7
+    },
+    "psv.spec.mjs": {
+      "expected": 8
+    },
+    "psv2.spec.mjs": {
+      "expected": 6
+    },
+    "psv3.spec.mjs": {
+      "expected": 16
+    },
+    "smd-compare.spec.mjs": {
+      "expected": 3
+    },
+    "smd-moving.spec.mjs": {
+      "expected": 16
+    },
+    "smoke.spec.mjs": {
+      "expected": 50
+    }
+  },
+  "failures": [],
+  "skipped": [],
+  "configuredRetries": 0,
+  "productionHash": "94a18adf3efac9ec6f84154b01ef2783701e28f96ecc278568a12a499a181413",
+  "originalCases": 167,
+  "addedCases": 32,
+  "interruptedRepositoryRun": {
+    "command": "npm test -- --reporter=line,json",
+    "declaredCases": 2256,
+    "reachedCase": 112,
+    "result": "incomplete: workspace restart; no final report"
+  }
+}

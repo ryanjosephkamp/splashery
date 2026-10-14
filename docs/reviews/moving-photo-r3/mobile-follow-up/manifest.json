@@ -1,0 +1,27 @@
+{
+  "madeBy": "Ryan with Codex (GPT-6)",
+  "checked": "October 14, 2026",
+  "main": "e404cf36b60e7509f2cabc21dcd0f9f076fa8ef4",
+  "branch": "8014b67669ffd3a40499516461ef41c1ea801f3a",
+  "viewport": [390, 844],
+  "deviceScaleFactor": 3,
+  "cpuRate": 4,
+  "screenshots": [
+    {
+      "file": "main-machine-shows-bunny.png",
+      "bytes": 519102,
+      "sha256": "8b618d9918898dc6ef1ca46f459f56d4260c927bd30dd4a56b6bbe2c9f373f3a"
+    },
+    {
+      "file": "branch-machine.png",
+      "bytes": 654938,
+      "sha256": "2f3ec65abd0726fbaad401cafbd66b47ac0227f40d66165549c1d2346475edae"
+    }
+  ],
+  "note": "Main screenshot reproduces selected Machine with the prior Bunny picture. Branch screenshot shows the selected Machine. Main uses headless SwiftShader; branch uses ANGLE/Mesa llvmpipe. Playback probes are contended software-rendered checks, not physical-phone performance.",
+  "productionHash": "94a18adf3efac9ec6f84154b01ef2783701e28f96ecc278568a12a499a181413",
+  "regression": "mobile-regression.json",
+  "regressionSha256": "b12995d51311fafabe89a90c82110aa2440ae73ec7cff6d8ba678af3bef8b1cf",
+  "regressionSpec": "tests/cdx-mp2-mobile.spec.mjs",
+  "regressionSpecSha256": "c1a565e602581b61e1ddd182fab105981abaff61418ea3dadb043b3187dc91b5"
+}

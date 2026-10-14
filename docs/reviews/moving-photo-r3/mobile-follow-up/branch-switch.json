@@ -1,0 +1,426 @@
+{
+  "base": "http://127.0.0.1:4388",
+  "rows": [
+    {
+      "sample": "sample",
+      "frame": 25,
+      "sharp": {
+        "views": {
+          "photo-3d": "sharp",
+          "moving-photo-3d": "sharp"
+        },
+        "on": true,
+        "kind": "clip",
+        "grid": [327, 184],
+        "color": [640, 360],
+        "depth": [480, 270],
+        "video": true,
+        "videoTime": 1.566299,
+        "cost": {
+          "color": 1228800,
+          "depth": 129600,
+          "mesh": 2398020,
+          "pieces": 5636480,
+          "triangles": 538080,
+          "total": 9392900
+        },
+        "splatsOff": true
+      },
+      "uploads": [
+        {
+          "sample": "sample",
+          "frame": 25,
+          "bytes": true,
+          "url": "",
+          "kind": "Object"
+        },
+        {
+          "sample": "sample",
+          "frame": 25,
+          "bytes": false,
+          "url": "",
+          "kind": "HTMLCanvasElement"
+        }
+      ],
+      "texture": [640, 360],
+      "colorSource": "",
+      "ownBytes": false,
+      "maxTexture": 16384,
+      "ua": "Mozilla/5.0 (Linux; Android 14; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Mobile Safari/537.36"
+    },
+    {
+      "sample": "horse",
+      "frame": 0,
+      "sharp": {
+        "views": {
+          "photo-3d": "sharp",
+          "moving-photo-3d": "sharp"
+        },
+        "on": true,
+        "kind": "clip",
+        "grid": [300, 200],
+        "color": [300, 200],
+        "depth": [300, 200],
+        "video": false,
+        "videoTime": null,
+        "cost": {
+          "color": 320000,
+          "depth": 60000,
+          "mesh": 2425728,
+          "pieces": 3128016,
+          "triangles": 253828,
+          "total": 5933744
+        },
+        "splatsOff": true
+      },
+      "uploads": [
+        {
+          "sample": "sample",
+          "frame": 25,
+          "bytes": true,
+          "url": "",
+          "kind": "Object"
+        },
+        {
+          "sample": "sample",
+          "frame": 25,
+          "bytes": true,
+          "url": "",
+          "kind": "Object"
+        },
+        {
+          "sample": "horse",
+          "frame": 0,
+          "bytes": true,
+          "url": "",
+          "kind": "Object"
+        },
+        {
+          "sample": "horse",
+          "frame": 0,
+          "bytes": true,
+          "url": "",
+          "kind": "Object"
+        }
+      ],
+      "texture": [300, 200],
+      "colorSource": "",
+      "ownBytes": true,
+      "maxTexture": 16384,
+      "ua": "Mozilla/5.0 (Linux; Android 14; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Mobile Safari/537.36"
+    },
+    {
+      "sample": "dragon",
+      "frame": 0,
+      "sharp": {
+        "views": {
+          "photo-3d": "sharp",
+          "moving-photo-3d": "sharp"
+        },
+        "on": true,
+        "kind": "clip",
+        "grid": [376, 160],
+        "color": [480, 204],
+        "depth": [480, 204],
+        "video": false,
+        "videoTime": null,
+        "cost": {
+          "color": 522240,
+          "depth": 97920,
+          "mesh": 2354748,
+          "pieces": 4496272,
+          "triangles": 369516,
+          "total": 7471180
+        },
+        "splatsOff": true
+      },
+      "uploads": [
+        {
+          "sample": "horse",
+          "frame": 0,
+          "bytes": true,
+          "url": "",
+          "kind": "Object"
+        },
+        {
+          "sample": "horse",
+          "frame": 0,
+          "bytes": true,
+          "url": "",
+          "kind": "Object"
+        },
+        {
+          "sample": "dragon",
+          "frame": 0,
+          "bytes": true,
+          "url": "",
+          "kind": "Object"
+        },
+        {
+          "sample": "dragon",
+          "frame": 0,
+          "bytes": true,
+          "url": "",
+          "kind": "Object"
+        }
+      ],
+      "texture": [480, 204],
+      "colorSource": "",
+      "ownBytes": true,
+      "maxTexture": 16384,
+      "ua": "Mozilla/5.0 (Linux; Android 14; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Mobile Safari/537.36"
+    },
+    {
+      "sample": "bridge",
+      "frame": 0,
+      "sharp": {
+        "views": {
+          "photo-3d": "sharp",
+          "moving-photo-3d": "sharp"
+        },
+        "on": true,
+        "kind": "clip",
+        "grid": [379, 158],
+        "color": [480, 200],
+        "depth": [480, 200],
+        "video": false,
+        "videoTime": null,
+        "cost": {
+          "color": 512000,
+          "depth": 96000,
+          "mesh": 2341356,
+          "pieces": 4422720,
+          "triangles": 792696,
+          "total": 7372076
+        },
+        "splatsOff": true
+      },
+      "uploads": [
+        {
+          "sample": "dragon",
+          "frame": 0,
+          "bytes": true,
+          "url": "",
+          "kind": "Object"
+        },
+        {
+          "sample": "dragon",
+          "frame": 0,
+          "bytes": true,
+          "url": "",
+          "kind": "Object"
+        },
+        {
+          "sample": "bridge",
+          "frame": 0,
+          "bytes": true,
+          "url": "",
+          "kind": "Object"
+        },
+        {
+          "sample": "bridge",
+          "frame": 0,
+          "bytes": true,
+          "url": "",
+          "kind": "Object"
+        }
+      ],
+      "texture": [480, 200],
+      "colorSource": "",
+      "ownBytes": true,
+      "maxTexture": 16384,
+      "ua": "Mozilla/5.0 (Linux; Android 14; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Mobile Safari/537.36"
+    },
+    {
+      "sample": "machine",
+      "frame": 0,
+      "sharp": {
+        "views": {
+          "photo-3d": "sharp",
+          "moving-photo-3d": "sharp"
+        },
+        "on": true,
+        "kind": "clip",
+        "grid": [327, 184],
+        "color": [480, 270],
+        "depth": [480, 270],
+        "video": false,
+        "videoTime": null,
+        "cost": {
+          "color": 691200,
+          "depth": 129600,
+          "mesh": 2398020,
+          "pieces": 5636480,
+          "triangles": 348276,
+          "total": 8855300
+        },
+        "splatsOff": true
+      },
+      "uploads": [
+        {
+          "sample": "bridge",
+          "frame": 0,
+          "bytes": true,
+          "url": "",
+          "kind": "Object"
+        },
+        {
+          "sample": "bridge",
+          "frame": 0,
+          "bytes": true,
+          "url": "",
+          "kind": "Object"
+        },
+        {
+          "sample": "machine",
+          "frame": 0,
+          "bytes": true,
+          "url": "",
+          "kind": "Object"
+        },
+        {
+          "sample": "machine",
+          "frame": 0,
+          "bytes": true,
+          "url": "",
+          "kind": "Object"
+        }
+      ],
+      "texture": [480, 270],
+      "colorSource": "",
+      "ownBytes": true,
+      "maxTexture": 16384,
+      "ua": "Mozilla/5.0 (Linux; Android 14; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Mobile Safari/537.36"
+    },
+    {
+      "sample": "sample",
+      "frame": 0,
+      "sharp": {
+        "views": {
+          "photo-3d": "sharp",
+          "moving-photo-3d": "sharp"
+        },
+        "on": true,
+        "kind": "clip",
+        "grid": [327, 184],
+        "color": [640, 360],
+        "depth": [480, 270],
+        "video": true,
+        "videoTime": 0,
+        "cost": {
+          "color": 1228800,
+          "depth": 129600,
+          "mesh": 2398020,
+          "pieces": 5636480,
+          "triangles": 512160,
+          "total": 9392900
+        },
+        "splatsOff": true
+      },
+      "uploads": [
+        {
+          "sample": "machine",
+          "frame": 0,
+          "bytes": true,
+          "url": "",
+          "kind": "Object"
+        },
+        {
+          "sample": "machine",
+          "frame": 0,
+          "bytes": true,
+          "url": "",
+          "kind": "Object"
+        },
+        {
+          "sample": "sample",
+          "frame": 0,
+          "bytes": true,
+          "url": "",
+          "kind": "Object"
+        },
+        {
+          "sample": "sample",
+          "frame": 0,
+          "bytes": true,
+          "url": "",
+          "kind": "Object"
+        },
+        {
+          "sample": "sample",
+          "frame": 0,
+          "bytes": false,
+          "url": "",
+          "kind": "HTMLCanvasElement"
+        }
+      ],
+      "texture": [640, 360],
+      "colorSource": "",
+      "ownBytes": false,
+      "maxTexture": 16384,
+      "ua": "Mozilla/5.0 (Linux; Android 14; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Mobile Safari/537.36"
+    },
+    {
+      "sample": "machine",
+      "frame": 0,
+      "sharp": {
+        "views": {
+          "photo-3d": "sharp",
+          "moving-photo-3d": "sharp"
+        },
+        "on": true,
+        "kind": "clip",
+        "grid": [327, 184],
+        "color": [480, 270],
+        "depth": [480, 270],
+        "video": false,
+        "videoTime": null,
+        "cost": {
+          "color": 691200,
+          "depth": 129600,
+          "mesh": 2398020,
+          "pieces": 5636480,
+          "triangles": 348276,
+          "total": 8855300
+        },
+        "splatsOff": true
+      },
+      "uploads": [
+        {
+          "sample": "sample",
+          "frame": 0,
+          "bytes": true,
+          "url": "",
+          "kind": "Object"
+        },
+        {
+          "sample": "sample",
+          "frame": 0,
+          "bytes": true,
+          "url": "",
+          "kind": "Object"
+        },
+        {
+          "sample": "machine",
+          "frame": 0,
+          "bytes": true,
+          "url": "",
+          "kind": "Object"
+        },
+        {
+          "sample": "machine",
+          "frame": 0,
+          "bytes": true,
+          "url": "",
+          "kind": "Object"
+        }
+      ],
+      "texture": [480, 270],
+      "colorSource": "",
+      "ownBytes": true,
+      "maxTexture": 16384,
+      "ua": "Mozilla/5.0 (Linux; Android 14; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Mobile Safari/537.36"
+    }
+  ],
+  "errors": []
+}

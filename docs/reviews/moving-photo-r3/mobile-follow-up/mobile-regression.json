@@ -1,0 +1,328 @@
+{
+  "viewport": [390, 844],
+  "deviceScaleFactor": 3,
+  "pageCpuRate": 4,
+  "workerThrottled": false,
+  "appRenderCapDpr": 1.5,
+  "productionHash": "94a18adf3efac9ec6f84154b01ef2783701e28f96ecc278568a12a499a181413",
+  "delayedSheet": "sintel-sheet-1.jpg",
+  "finalCheck": "Machine after older Sintel preview/completion",
+  "profiles": [
+    {
+      "mode": "mobile",
+      "rows": [
+        {
+          "sample": "sample",
+          "selected": "sample",
+          "sharp": true,
+          "own": true,
+          "bound": true,
+          "size": [640, 360],
+          "sourceTime": 1.06065,
+          "clipTime": 1.0606509999992548,
+          "sourceKind": "HTMLCanvasElement",
+          "audio": "http://127.0.0.1:4388/assets/toys/screen/bunny.mp4"
+        },
+        {
+          "sample": "horse",
+          "selected": "horse",
+          "sharp": true,
+          "own": true,
+          "bound": true,
+          "size": [300, 200],
+          "clipTime": 0
+        },
+        {
+          "sample": "dragon",
+          "selected": "dragon",
+          "sharp": true,
+          "own": true,
+          "bound": true,
+          "size": [480, 204],
+          "clipTime": 0,
+          "audio": "http://127.0.0.1:4388/assets/toys/moving-photo-3d/sintel.mp3"
+        },
+        {
+          "sample": "bridge",
+          "selected": "bridge",
+          "sharp": true,
+          "own": true,
+          "bound": true,
+          "size": [480, 200],
+          "clipTime": 0,
+          "audio": "http://127.0.0.1:4388/assets/toys/moving-photo-3d/tears.mp3"
+        },
+        {
+          "sample": "machine",
+          "selected": "machine",
+          "sharp": true,
+          "own": true,
+          "bound": true,
+          "size": [480, 270],
+          "clipTime": 0,
+          "audio": "http://127.0.0.1:4388/assets/toys/moving-photo-3d/elephants.mp3"
+        },
+        {
+          "sample": "sample-long",
+          "selected": "sample-long",
+          "sharp": true,
+          "own": true,
+          "bound": true,
+          "size": [426, 240],
+          "sourceTime": 0,
+          "clipTime": 0,
+          "sourceKind": "HTMLCanvasElement",
+          "audio": "http://127.0.0.1:4388/assets/toys/moving-photo-3d/bunny-long.webm"
+        },
+        {
+          "sample": "dragon-long",
+          "selected": "dragon-long",
+          "sharp": true,
+          "own": true,
+          "bound": true,
+          "size": [564, 240],
+          "sourceTime": 0,
+          "clipTime": 0,
+          "sourceKind": "HTMLCanvasElement",
+          "audio": "http://127.0.0.1:4388/assets/toys/moving-photo-3d/sintel-long.webm"
+        },
+        {
+          "sample": "machine-long",
+          "selected": "machine-long",
+          "sharp": true,
+          "own": true,
+          "bound": true,
+          "size": [640, 360],
+          "sourceTime": 0,
+          "clipTime": 0,
+          "sourceKind": "HTMLCanvasElement",
+          "audio": "http://127.0.0.1:4388/assets/toys/moving-photo-3d/elephants-long.webm"
+        },
+        {
+          "sample": "bridge-long",
+          "selected": "bridge-long",
+          "sharp": true,
+          "own": true,
+          "bound": true,
+          "size": [642, 268],
+          "sourceTime": 0,
+          "clipTime": 0,
+          "sourceKind": "HTMLCanvasElement",
+          "audio": "http://127.0.0.1:4388/assets/toys/moving-photo-3d/tears-long.webm"
+        },
+        {
+          "sample": "sample",
+          "selected": "sample",
+          "sharp": true,
+          "own": true,
+          "bound": true,
+          "size": [640, 360],
+          "sourceTime": 0,
+          "clipTime": 0,
+          "sourceKind": "HTMLCanvasElement",
+          "audio": "http://127.0.0.1:4388/assets/toys/screen/bunny.mp4"
+        },
+        {
+          "sample": "machine",
+          "selected": "machine",
+          "sharp": true,
+          "own": true,
+          "bound": true,
+          "size": [480, 270],
+          "clipTime": 0,
+          "audio": "http://127.0.0.1:4388/assets/toys/moving-photo-3d/elephants.mp3"
+        },
+        {
+          "sample": "sample",
+          "selected": "sample",
+          "sharp": true,
+          "own": true,
+          "bound": true,
+          "size": [640, 360],
+          "sourceTime": 0,
+          "clipTime": 0,
+          "sourceKind": "HTMLCanvasElement",
+          "audio": "http://127.0.0.1:4388/assets/toys/screen/bunny.mp4"
+        },
+        {
+          "sample": "bridge",
+          "selected": "bridge",
+          "sharp": true,
+          "own": true,
+          "bound": true,
+          "size": [480, 200],
+          "clipTime": 0,
+          "audio": "http://127.0.0.1:4388/assets/toys/moving-photo-3d/tears.mp3"
+        },
+        {
+          "sample": "machine",
+          "selected": "machine",
+          "sharp": true,
+          "own": true,
+          "bound": true,
+          "size": [480, 270],
+          "clipTime": 0,
+          "audio": "http://127.0.0.1:4388/assets/toys/moving-photo-3d/elephants.mp3"
+        }
+      ]
+    },
+    {
+      "mode": "desktop site",
+      "rows": [
+        {
+          "sample": "sample",
+          "selected": "sample",
+          "sharp": true,
+          "own": true,
+          "bound": true,
+          "size": [640, 360],
+          "sourceTime": 0.938785,
+          "clipTime": 0.938785000000745,
+          "sourceKind": "HTMLCanvasElement",
+          "audio": "http://127.0.0.1:4388/assets/toys/screen/bunny.mp4"
+        },
+        {
+          "sample": "horse",
+          "selected": "horse",
+          "sharp": true,
+          "own": true,
+          "bound": true,
+          "size": [300, 200],
+          "clipTime": 0
+        },
+        {
+          "sample": "dragon",
+          "selected": "dragon",
+          "sharp": true,
+          "own": true,
+          "bound": true,
+          "size": [480, 204],
+          "clipTime": 0,
+          "audio": "http://127.0.0.1:4388/assets/toys/moving-photo-3d/sintel.mp3"
+        },
+        {
+          "sample": "bridge",
+          "selected": "bridge",
+          "sharp": true,
+          "own": true,
+          "bound": true,
+          "size": [480, 200],
+          "clipTime": 0,
+          "audio": "http://127.0.0.1:4388/assets/toys/moving-photo-3d/tears.mp3"
+        },
+        {
+          "sample": "machine",
+          "selected": "machine",
+          "sharp": true,
+          "own": true,
+          "bound": true,
+          "size": [480, 270],
+          "clipTime": 0,
+          "audio": "http://127.0.0.1:4388/assets/toys/moving-photo-3d/elephants.mp3"
+        },
+        {
+          "sample": "sample-long",
+          "selected": "sample-long",
+          "sharp": true,
+          "own": true,
+          "bound": true,
+          "size": [426, 240],
+          "sourceTime": 0,
+          "clipTime": 0,
+          "sourceKind": "HTMLCanvasElement",
+          "audio": "http://127.0.0.1:4388/assets/toys/moving-photo-3d/bunny-long.webm"
+        },
+        {
+          "sample": "dragon-long",
+          "selected": "dragon-long",
+          "sharp": true,
+          "own": true,
+          "bound": true,
+          "size": [564, 240],
+          "sourceTime": 0,
+          "clipTime": 0,
+          "sourceKind": "HTMLCanvasElement",
+          "audio": "http://127.0.0.1:4388/assets/toys/moving-photo-3d/sintel-long.webm"
+        },
+        {
+          "sample": "machine-long",
+          "selected": "machine-long",
+          "sharp": true,
+          "own": true,
+          "bound": true,
+          "size": [640, 360],
+          "sourceTime": 0,
+          "clipTime": 0,
+          "sourceKind": "HTMLCanvasElement",
+          "audio": "http://127.0.0.1:4388/assets/toys/moving-photo-3d/elephants-long.webm"
+        },
+        {
+          "sample": "bridge-long",
+          "selected": "bridge-long",
+          "sharp": true,
+          "own": true,
+          "bound": true,
+          "size": [642, 268],
+          "sourceTime": 0,
+          "clipTime": 0,
+          "sourceKind": "HTMLCanvasElement",
+          "audio": "http://127.0.0.1:4388/assets/toys/moving-photo-3d/tears-long.webm"
+        },
+        {
+          "sample": "sample",
+          "selected": "sample",
+          "sharp": true,
+          "own": true,
+          "bound": true,
+          "size": [640, 360],
+          "sourceTime": 0,
+          "clipTime": 0,
+          "sourceKind": "HTMLCanvasElement",
+          "audio": "http://127.0.0.1:4388/assets/toys/screen/bunny.mp4"
+        },
+        {
+          "sample": "machine",
+          "selected": "machine",
+          "sharp": true,
+          "own": true,
+          "bound": true,
+          "size": [480, 270],
+          "clipTime": 0,
+          "audio": "http://127.0.0.1:4388/assets/toys/moving-photo-3d/elephants.mp3"
+        },
+        {
+          "sample": "sample",
+          "selected": "sample",
+          "sharp": true,
+          "own": true,
+          "bound": true,
+          "size": [640, 360],
+          "sourceTime": 0,
+          "clipTime": 0,
+          "sourceKind": "HTMLCanvasElement",
+          "audio": "http://127.0.0.1:4388/assets/toys/screen/bunny.mp4"
+        },
+        {
+          "sample": "bridge",
+          "selected": "bridge",
+          "sharp": true,
+          "own": true,
+          "bound": true,
+          "size": [480, 200],
+          "clipTime": 0,
+          "audio": "http://127.0.0.1:4388/assets/toys/moving-photo-3d/tears.mp3"
+        },
+        {
+          "sample": "machine",
+          "selected": "machine",
+          "sharp": true,
+          "own": true,
+          "bound": true,
+          "size": [480, 270],
+          "clipTime": 0,
+          "audio": "http://127.0.0.1:4388/assets/toys/moving-photo-3d/elephants.mp3"
+        }
+      ]
+    }
+  ]
+}

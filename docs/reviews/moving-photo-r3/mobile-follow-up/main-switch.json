@@ -1,0 +1,245 @@
+{
+  "base": "http://127.0.0.1:4390",
+  "rows": [
+    {
+      "sample": "sample",
+      "frame": 68,
+      "sharp": {
+        "views": {
+          "photo-3d": "sharp",
+          "moving-photo-3d": "sharp"
+        },
+        "on": false,
+        "kind": "clip",
+        "grid": [327, 184],
+        "color": null,
+        "depth": [480, 270],
+        "video": false,
+        "videoTime": null,
+        "cost": {
+          "color": 0,
+          "depth": 129600,
+          "mesh": 2360628,
+          "pieces": 0,
+          "background": 0,
+          "triangles": 130704,
+          "total": 2490228
+        },
+        "splatsOff": true
+      },
+      "uploads": [],
+      "texture": null,
+      "colorSource": "",
+      "ownBytes": false,
+      "maxTexture": 8192,
+      "ua": "Mozilla/5.0 (Linux; Android 14; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Mobile Safari/537.36"
+    },
+    {
+      "sample": "horse",
+      "frame": 0,
+      "sharp": {
+        "views": {
+          "photo-3d": "sharp",
+          "moving-photo-3d": "sharp"
+        },
+        "on": true,
+        "kind": "clip",
+        "grid": [300, 200],
+        "color": [300, 200],
+        "depth": [300, 200],
+        "video": false,
+        "videoTime": null,
+        "cost": {
+          "color": 320000,
+          "depth": 60000,
+          "mesh": 2389128,
+          "pieces": 0,
+          "background": 0,
+          "triangles": 132288,
+          "total": 2769128
+        },
+        "splatsOff": true
+      },
+      "uploads": [
+        {
+          "sample": "horse",
+          "frame": 0,
+          "bytes": true,
+          "url": "",
+          "kind": "Object"
+        }
+      ],
+      "texture": [300, 200],
+      "colorSource": "",
+      "ownBytes": true,
+      "maxTexture": 8192,
+      "ua": "Mozilla/5.0 (Linux; Android 14; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Mobile Safari/537.36"
+    },
+    {
+      "sample": "dragon",
+      "frame": 0,
+      "sharp": {
+        "views": {
+          "photo-3d": "sharp",
+          "moving-photo-3d": "sharp"
+        },
+        "on": false,
+        "kind": "clip",
+        "grid": [376, 160],
+        "color": null,
+        "depth": [480, 204],
+        "video": false,
+        "videoTime": null,
+        "cost": {
+          "color": 0,
+          "depth": 97920,
+          "mesh": 2315556,
+          "pieces": 0,
+          "background": 0,
+          "triangles": 128192,
+          "total": 2413476
+        },
+        "splatsOff": true
+      },
+      "uploads": [],
+      "texture": null,
+      "colorSource": "",
+      "ownBytes": false,
+      "maxTexture": 8192,
+      "ua": "Mozilla/5.0 (Linux; Android 14; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Mobile Safari/537.36"
+    },
+    {
+      "sample": "bridge",
+      "frame": 0,
+      "sharp": {
+        "views": {
+          "photo-3d": "sharp",
+          "moving-photo-3d": "sharp"
+        },
+        "on": false,
+        "kind": "clip",
+        "grid": [379, 158],
+        "color": null,
+        "depth": [480, 200],
+        "video": false,
+        "videoTime": null,
+        "cost": {
+          "color": 0,
+          "depth": 96000,
+          "mesh": 2302092,
+          "pieces": 0,
+          "background": 0,
+          "triangles": 127444,
+          "total": 2398092
+        },
+        "splatsOff": true
+      },
+      "uploads": [],
+      "texture": null,
+      "colorSource": "",
+      "ownBytes": false,
+      "maxTexture": 8192,
+      "ua": "Mozilla/5.0 (Linux; Android 14; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Mobile Safari/537.36"
+    },
+    {
+      "sample": "machine",
+      "frame": 0,
+      "sharp": {
+        "views": {
+          "photo-3d": "sharp",
+          "moving-photo-3d": "sharp"
+        },
+        "on": false,
+        "kind": "clip",
+        "grid": [327, 184],
+        "color": null,
+        "depth": [480, 270],
+        "video": false,
+        "videoTime": null,
+        "cost": {
+          "color": 0,
+          "depth": 129600,
+          "mesh": 2360628,
+          "pieces": 0,
+          "background": 0,
+          "triangles": 130704,
+          "total": 2490228
+        },
+        "splatsOff": true
+      },
+      "uploads": [],
+      "texture": null,
+      "colorSource": "",
+      "ownBytes": false,
+      "maxTexture": 8192,
+      "ua": "Mozilla/5.0 (Linux; Android 14; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Mobile Safari/537.36"
+    },
+    {
+      "sample": "sample",
+      "frame": 0,
+      "sharp": {
+        "views": {
+          "photo-3d": "sharp",
+          "moving-photo-3d": "sharp"
+        },
+        "on": false,
+        "kind": "clip",
+        "grid": [327, 184],
+        "color": null,
+        "depth": [480, 270],
+        "video": false,
+        "videoTime": null,
+        "cost": {
+          "color": 0,
+          "depth": 129600,
+          "mesh": 2360628,
+          "pieces": 0,
+          "background": 0,
+          "triangles": 130704,
+          "total": 2490228
+        },
+        "splatsOff": true
+      },
+      "uploads": [],
+      "texture": null,
+      "colorSource": "",
+      "ownBytes": false,
+      "maxTexture": 8192,
+      "ua": "Mozilla/5.0 (Linux; Android 14; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Mobile Safari/537.36"
+    },
+    {
+      "sample": "machine",
+      "frame": 0,
+      "sharp": {
+        "views": {
+          "photo-3d": "sharp",
+          "moving-photo-3d": "sharp"
+        },
+        "on": true,
+        "kind": "clip",
+        "grid": [327, 184],
+        "color": [640, 360],
+        "depth": [480, 270],
+        "video": true,
+        "videoTime": 0,
+        "cost": {
+          "color": 1228800,
+          "depth": 129600,
+          "mesh": 2360628,
+          "pieces": 0,
+          "background": 0,
+          "triangles": 130704,
+          "total": 3719028
+        },
+        "splatsOff": true
+      },
+      "uploads": [],
+      "texture": [640, 360],
+      "colorSource": "http://127.0.0.1:4390/assets/toys/screen/bunny.mp4",
+      "ownBytes": false,
+      "maxTexture": 8192,
+      "ua": "Mozilla/5.0 (Linux; Android 14; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Mobile Safari/537.36"
+    }
+  ],
+  "errors": []
+}

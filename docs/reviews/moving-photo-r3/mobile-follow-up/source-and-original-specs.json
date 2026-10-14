@@ -1,0 +1,70 @@
+{
+  "productionHash": "94a18adf3efac9ec6f84154b01ef2783701e28f96ecc278568a12a499a181413",
+  "originalSpecBase": "93077cf6",
+  "originalSpecs": [
+    {
+      "file": "tests/cdx-stability.spec.mjs",
+      "sha256": "8493e521cb2690d013fa2a82fc9eed1bf0649b0312aa8821dc32731c693b4649"
+    },
+    {
+      "file": "tests/psv.spec.mjs",
+      "sha256": "71a2350974a82bbd8dfc2e4c31c6ec996eb96a60a2688fb1900874efb99f9bd1"
+    },
+    {
+      "file": "tests/psv2.spec.mjs",
+      "sha256": "33d1b049972147e38af88b89f655154e10fae6dcd2301de0369544a96dc99090"
+    },
+    {
+      "file": "tests/psv3.spec.mjs",
+      "sha256": "e468ca280626660f1adecd728fa578c2253b420227d5612e574a6b47a345e59c"
+    },
+    {
+      "file": "tests/phf-engine.spec.mjs",
+      "sha256": "6ed45a7164fc09464507e5d16703d3c12d0bf359eb314c30634fd00fb7a82a39"
+    },
+    {
+      "file": "tests/phf.spec.mjs",
+      "sha256": "3b2ca72be11303ae81209e1b84c7728a02c32ae60aa42d901d584945d0737d34"
+    },
+    {
+      "file": "tests/phf2.spec.mjs",
+      "sha256": "6cc3760b9df6da18e18ba7440e351b241074e00db3f38f858646c95b3b24301b"
+    },
+    {
+      "file": "tests/smd-moving.spec.mjs",
+      "sha256": "abcbdc26557e7c6cdfe9e61df7dd1a12a9e56490a9ac0e6c72ddafb8bbdab5d9"
+    },
+    {
+      "file": "tests/smd-compare.spec.mjs",
+      "sha256": "de20bbf94c90bfa2a016535933940a364fc2d43f8e73cccc2334c580f586c195"
+    },
+    {
+      "file": "tests/live3-engine.spec.mjs",
+      "sha256": "e879c5c22214d726a32de83715dd15f7ced809de74e72ae136c8468266933abb"
+    },
+    {
+      "file": "tests/live3.spec.mjs",
+      "sha256": "431a611e385631e816167eb838d1d882ad487645586599657029ba822a0739c9"
+    },
+    {
+      "file": "tests/live5.spec.mjs",
+      "sha256": "825ae99a631e35ad2cd4787d8c737b2a618aeab6d5eecb5652dcb526f3b1655f"
+    },
+    {
+      "file": "tests/live6.spec.mjs",
+      "sha256": "95c8f7bc68900465eafb40870970b138fbac479e5f09979b6563996e1bbf3e2f"
+    },
+    {
+      "file": "tests/lv7-long.spec.mjs",
+      "sha256": "c2618a002fb445e53b295a5f3b61958e20158ebcd4dd7558be4b0d9fb62a07f3"
+    },
+    {
+      "file": "tests/smoke.spec.mjs",
+      "sha256": "d164c14a24cdd36652177cc5757112245500826005d99a5ea56d3008e4d2d056"
+    },
+    {
+      "file": "tests/cdx-mp2.spec.mjs",
+      "sha256": "fe59d4ccf57ac4a7ba425bf090094629de6595b1143bac931fbcf0d6b3e37d92"
+    }
+  ]
+}
