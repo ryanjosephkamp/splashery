@@ -230,6 +230,7 @@ export const SITE_TOY_IDS = [
   "mushroom",
   "mushroom-photo",
   "music-box",
+  "name-toy",
   "nautilus",
   "nearby-stars",
   "nebula",

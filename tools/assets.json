@@ -6982,5 +6982,19 @@
       "prompt": "C54-Q8",
       "note": "AI-made by the owner with an AI image tool, on his instruction. Fictional subject; no people, faces, logos, readable text, or real landmarks. Native square image resized to 960×960, JPEG quality 88. Full prompt: tools/cdx-pics-qr-ai-prompts.json. No payload-specific image conditioning."
     }
+  ],
+  "proceduralToys": [
+    {
+      "id": "name-toy",
+      "toy": "name-toy",
+      "label": "Your name in splats",
+      "source": "src/packs/name-toy.js",
+      "author": "Made by Ryan with Codex (GPT-6)",
+      "license": "CC0 1.0",
+      "checked": "October 14, 2026",
+      "thumbnail": "assets/toys/name-toy/thumb.webp",
+      "sha256": "66715b03758b4ff22129c8bb901ca65cf40877990ce7f377e6904beacb6a55c1",
+      "sourceNote": "From a concept by Ryan Kamp. Original procedural splat letters rendered by Splashery, reusing the Fourier circles Your words paths. Code is MIT; shapes and the thumbnail are CC0. No reference fonts, files, or renderer are shipped."
+    }
   ]
 }

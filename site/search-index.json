@@ -3621,6 +3621,16 @@
     "i": "../assets/toys/bombe/thumb.webp"
   },
   {
+    "t": "Your name in splats",
+    "u": "toys/name-toy/",
+    "k": "toy",
+    "s": "Pictures and pages",
+    "d": "Type a name in Toy. Pick an action, then tap a letter; turn on sound to hear its note.",
+    "w": "your name in splats pictures and pages pictures and pages name words letters text spin poke paint drop blow portfolio toybox name-toy",
+    "i": "../assets/toys/name-toy/thumb.webp",
+    "l": 1
+  },
+  {
     "t": "Picture lab",
     "u": "toys/picture-lab/",
     "k": "toy",
