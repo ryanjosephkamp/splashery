@@ -1326,5 +1326,1662 @@
       "command": "Same Chromium/Mesa environment; npx playwright test tests/unit.spec.mjs tests/taps.spec.mjs tests/load-time*.spec.mjs tests/cdx-circle-lab.spec.mjs tests/cdx-circle-qr.spec.mjs --workers=1 --reporter=line,json",
       "scope": "Later QR source, thumbnail, and documentation merge. The optimized runtime files are unchanged. Full smoke, kit, and Real Objects were not repeated after this later merge; their requested-suite and isolated results remain above."
     }
+  },
+  "historicalReceipts": "All other top-level receipts describe earlier source pins and environments. The round3 object is the current validation answer.",
+  "round3": {
+    "at": "2026-10-14T22:33:13.845Z",
+    "validationSource": "d52fa21f0120e532f1e1a14beae48ea97df90db7",
+    "frozenMain": "226644fb2b4e70dbd02136caec8e0f57c9f7f662",
+    "runtimeSource": "2b5eaae37a07961de240a4b426a90c6a91060787",
+    "integratedLatestMain": {
+      "main": "41b21e74e04ccca178b95ac02b4e5dc0e51b4b45",
+      "merge": "d52fa21f0120e532f1e1a14beae48ea97df90db7",
+      "measuredMain": "226644fb2b4e70dbd02136caec8e0f57c9f7f662",
+      "runtimeDiff": [],
+      "note": "After pairs were frozen, the latest main added only docs/STATUS.md. That additive merge precedes the repeated required validation. git diff excludes docs and confirms zero runtime/test/tool/asset differences between measured candidate and validation sources; native startup receipts retain their actual earlier 2b5eaae3 pin."
+    },
+    "environment": {
+      "browser": "/usr/bin/chromium",
+      "chromium": "151.0.7922.173",
+      "display": ":99",
+      "renderer": "llvmpipe",
+      "mesaThreads": 3,
+      "processPriority": 10,
+      "workers": 1,
+      "cpuQuotaCores": 4,
+      "note": "The prior runs used two Mesa threads. Both current phases use three threads and run sequentially before final required validation, with no competing browser or heavy validation job. Environment restarts interrupted earlier validation attempts. Local servers and Xvfb were restarted; interrupted logs are retained outside Git and are not reported as complete suites. Final required scopes have individual source-pinned receipts; smoke runs in three sequential shards with one worker."
+    },
+    "required": {
+      "raw": "/workspace/load-time-runs/round3-current-validation/required.json",
+      "stats": {
+        "startTime": "2026-10-14T20:25:33.073Z",
+        "duration": 2481863.2,
+        "expected": 183,
+        "skipped": 0,
+        "unexpected": 1,
+        "flaky": 0
+      },
+      "files": [
+        {
+          "file": "smoke.spec.mjs",
+          "passed": 50,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 1324908
+        },
+        {
+          "file": "ro.spec.mjs",
+          "passed": 4,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 249295
+        },
+        {
+          "file": "taps.spec.mjs",
+          "passed": 62,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 96274
+        },
+        {
+          "file": "unit.spec.mjs",
+          "passed": 20,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 11041
+        },
+        {
+          "file": "load-time-exports.spec.mjs",
+          "passed": 1,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 492
+        },
+        {
+          "file": "load-time-format.spec.mjs",
+          "passed": 1,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 109
+        },
+        {
+          "file": "load-time-means.spec.mjs",
+          "passed": 2,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 4694
+        },
+        {
+          "file": "load-time-metrics.spec.mjs",
+          "passed": 2,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 57
+        },
+        {
+          "file": "load-time-store.spec.mjs",
+          "passed": 3,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 55
+        },
+        {
+          "file": "load-time.spec.mjs",
+          "passed": 3,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 48380
+        },
+        {
+          "file": "load-time-catalog.spec.mjs",
+          "passed": 2,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 23178
+        },
+        {
+          "file": "load-time-manual.spec.mjs",
+          "passed": 1,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 4864
+        },
+        {
+          "file": "load-time-smoothing.spec.mjs",
+          "passed": 5,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 74432
+        },
+        {
+          "file": "kit.spec.mjs",
+          "passed": 9,
+          "failed": 1,
+          "skipped": 0,
+          "durationMs": 417224
+        },
+        {
+          "file": "load-time-compression.spec.mjs",
+          "passed": 11,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 90667
+        },
+        {
+          "file": "load-time-startup.spec.mjs",
+          "passed": 6,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 42570
+        },
+        {
+          "file": "load-time-audit-budget.spec.mjs",
+          "passed": 1,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 24
+        }
+      ],
+      "failures": [
+        {
+          "file": "kit.spec.mjs",
+          "title": "every kit toy has a recipe that builds deterministically and fits the unit ball",
+          "status": "failed",
+          "durationMs": 414785,
+          "errors": [
+            "Error: This code has too much detail for a circular picture on this device. Choose less detail, a smaller center dot, or a shorter text.\n\n   at ../src/packs/qr-craft.js:395\n\n  393 |   const stage = app()?.player?.stage;\n  394 |   if (typeof window === \"undefined\" || PIC.noAuto || !stage?.cover || PIC.holding) return;\n> 395 |   PIC.holding = stage;\n      |                       ^\n  396 |   stage.cover({ label: SCANNING });\n  397 |   clearTimeout(PIC.holdTimer);\n  398 |   PIC.holdTimer = setTimeout(release, 30000);\n    at pictureSplats (/workspace/splashery/src/packs/qr-craft.js:395:72)\n    at Object.build (/workspace/splashery/src/packs/qr-craft.js:799:9)\n    at next (/workspace/splashery/src/kit.js:1332:10)\n    at build (/workspace/splashery/tests/kit.spec.mjs:108:20)\n    at /workspace/splashery/tests/kit.spec.mjs:112:17"
+          ]
+        }
+      ]
+    },
+    "requiredGroups": [
+      {
+        "source": "d52fa21f0120e532f1e1a14beae48ea97df90db7",
+        "command": "node_modules/.bin/playwright test tests/smoke.spec.mjs --fully-parallel --shard=1/3 --workers=1 --trace=off --reporter=line,json",
+        "exit": 0,
+        "signal": null,
+        "at": "2026-10-14T21:48:47.518Z",
+        "display": ":99",
+        "mesaThreads": "3",
+        "port": "4173"
+      },
+      {
+        "source": "d52fa21f0120e532f1e1a14beae48ea97df90db7",
+        "command": "node_modules/.bin/playwright test tests/smoke.spec.mjs --fully-parallel --shard=2/3 --workers=1 --trace=off --reporter=line,json",
+        "exit": 0,
+        "signal": null,
+        "at": "2026-10-14T21:56:51.487Z",
+        "display": ":99",
+        "mesaThreads": "3",
+        "port": "4173"
+      },
+      {
+        "source": "d52fa21f0120e532f1e1a14beae48ea97df90db7",
+        "command": "node_modules/.bin/playwright test tests/smoke.spec.mjs --fully-parallel --shard=3/3 --workers=1 --trace=off --reporter=line,json",
+        "exit": 0,
+        "signal": null,
+        "at": "2026-10-14T22:02:22.510Z",
+        "display": ":99",
+        "mesaThreads": "3",
+        "port": "4173"
+      },
+      {
+        "source": "d52fa21f0120e532f1e1a14beae48ea97df90db7",
+        "command": "node_modules/.bin/playwright test tests/ro.spec.mjs --workers=1 --trace=off --reporter=line,json",
+        "exit": 0,
+        "signal": null,
+        "at": "2026-10-14T22:06:42.819Z",
+        "display": ":99",
+        "mesaThreads": "3",
+        "port": "4173"
+      },
+      {
+        "source": "d52fa21f0120e532f1e1a14beae48ea97df90db7",
+        "command": "node_modules/.bin/playwright test tests/taps.spec.mjs --workers=1 --trace=off --reporter=line,json",
+        "exit": 0,
+        "signal": null,
+        "at": "2026-10-14T22:08:25.872Z",
+        "display": ":99",
+        "mesaThreads": "3",
+        "port": "4173"
+      },
+      {
+        "source": "d52fa21f0120e532f1e1a14beae48ea97df90db7",
+        "command": "node_modules/.bin/playwright test tests/unit.spec.mjs --workers=1 --trace=off --reporter=line,json",
+        "exit": 0,
+        "signal": null,
+        "at": "2026-10-14T22:08:42.498Z",
+        "display": ":99",
+        "mesaThreads": "3",
+        "port": "4173"
+      },
+      {
+        "source": "d52fa21f0120e532f1e1a14beae48ea97df90db7",
+        "command": "node_modules/.bin/playwright test tests/load-time-exports.spec.mjs --workers=1 --trace=off --reporter=line,json",
+        "exit": 0,
+        "signal": null,
+        "at": "2026-10-14T22:08:47.045Z",
+        "display": ":99",
+        "mesaThreads": "3",
+        "port": "4173"
+      },
+      {
+        "source": "d52fa21f0120e532f1e1a14beae48ea97df90db7",
+        "command": "node_modules/.bin/playwright test tests/load-time-format.spec.mjs --workers=1 --trace=off --reporter=line,json",
+        "exit": 0,
+        "signal": null,
+        "at": "2026-10-14T22:08:51.240Z",
+        "display": ":99",
+        "mesaThreads": "3",
+        "port": "4173"
+      },
+      {
+        "source": "d52fa21f0120e532f1e1a14beae48ea97df90db7",
+        "command": "node_modules/.bin/playwright test tests/load-time-means.spec.mjs --workers=1 --trace=off --reporter=line,json",
+        "exit": 0,
+        "signal": null,
+        "at": "2026-10-14T22:09:03.287Z",
+        "display": ":99",
+        "mesaThreads": "3",
+        "port": "4173"
+      },
+      {
+        "source": "d52fa21f0120e532f1e1a14beae48ea97df90db7",
+        "command": "node_modules/.bin/playwright test tests/load-time-metrics.spec.mjs --workers=1 --trace=off --reporter=line,json",
+        "exit": 0,
+        "signal": null,
+        "at": "2026-10-14T22:09:08.862Z",
+        "display": ":99",
+        "mesaThreads": "3",
+        "port": "4173"
+      },
+      {
+        "source": "d52fa21f0120e532f1e1a14beae48ea97df90db7",
+        "command": "node_modules/.bin/playwright test tests/load-time-store.spec.mjs --workers=1 --trace=off --reporter=line,json",
+        "exit": 0,
+        "signal": null,
+        "at": "2026-10-14T22:09:14.967Z",
+        "display": ":99",
+        "mesaThreads": "3",
+        "port": "4173"
+      },
+      {
+        "source": "d52fa21f0120e532f1e1a14beae48ea97df90db7",
+        "command": "node_modules/.bin/playwright test tests/load-time.spec.mjs --workers=1 --trace=off --reporter=line,json",
+        "exit": 0,
+        "signal": null,
+        "at": "2026-10-14T22:10:10.848Z",
+        "display": ":99",
+        "mesaThreads": "3",
+        "port": "4173"
+      },
+      {
+        "source": "d52fa21f0120e532f1e1a14beae48ea97df90db7",
+        "command": "node_modules/.bin/playwright test tests/load-time-catalog.spec.mjs --workers=1 --trace=off --reporter=line,json",
+        "exit": 0,
+        "signal": null,
+        "at": "2026-10-14T22:10:41.898Z",
+        "display": ":99",
+        "mesaThreads": "3",
+        "port": "4173"
+      },
+      {
+        "source": "d52fa21f0120e532f1e1a14beae48ea97df90db7",
+        "command": "node_modules/.bin/playwright test tests/load-time-manual.spec.mjs --workers=1 --trace=off --reporter=line,json",
+        "exit": 0,
+        "signal": null,
+        "at": "2026-10-14T22:10:54.936Z",
+        "display": ":99",
+        "mesaThreads": "3",
+        "port": "4173"
+      },
+      {
+        "source": "d52fa21f0120e532f1e1a14beae48ea97df90db7",
+        "command": "node_modules/.bin/playwright test tests/load-time-smoothing.spec.mjs --workers=1 --trace=off --reporter=line,json",
+        "exit": 0,
+        "signal": null,
+        "at": "2026-10-14T22:12:16.329Z",
+        "display": ":99",
+        "mesaThreads": "3",
+        "port": "4173"
+      },
+      {
+        "source": "d52fa21f0120e532f1e1a14beae48ea97df90db7",
+        "command": "node_modules/.bin/playwright test tests/kit.spec.mjs --workers=1 --trace=off --reporter=line,json",
+        "exit": 1,
+        "signal": null,
+        "at": "2026-10-14T22:19:23.270Z",
+        "display": ":99",
+        "mesaThreads": "3",
+        "port": "4173"
+      },
+      {
+        "source": "2b5eaae37a07961de240a4b426a90c6a91060787",
+        "command": "npx playwright test tests/load-time-startup.spec.mjs tests/load-time-compression.spec.mjs --workers=1 --trace=off --reporter=line,json",
+        "exit": 0,
+        "at": "2026-10-14T20:25:33.073Z",
+        "display": ":99",
+        "mesaThreads": "3",
+        "note": "Completed before the native-entry commit, with byte-identical production/test files. Prettier reported all touched files unchanged before commit."
+      },
+      {
+        "source": "d52fa21f0120e532f1e1a14beae48ea97df90db7",
+        "command": "npx playwright test tests/load-time-audit-budget.spec.mjs --workers=1 --trace=off --reporter=line,json",
+        "exit": 0,
+        "signal": null,
+        "at": "2026-10-14T22:32:43.680Z",
+        "scope": "Final generated audit artifacts"
+      }
+    ],
+    "supersededRetainedScopes": {
+      "source": "230fa5b3b5fc61aeea81e9f7de71922cc6dd7468",
+      "oldSource": "8a3a6488a6a5d0d592bf981e5ead034f023c9109",
+      "scopes": [
+        "taps",
+        "unit",
+        "load-time-audit-budget",
+        "load-time-exports",
+        "load-time-format",
+        "load-time-means",
+        "load-time-metrics",
+        "load-time-store",
+        "kit"
+      ],
+      "promotionSource": "af805a765e00ec70c091f57e10680298441e68f9",
+      "retainedPromotionScopes": [
+        "real-objects",
+        "load-time-catalog",
+        "load-time-compression",
+        "load-time-manual",
+        "load-time-smoothing",
+        "load-time"
+      ],
+      "proof": "Only src/boot.js and the startup warning assertion changed. Node scopes never execute this browser bootstrap. Geometry, namespace, and media checks retain their af805a76 results: the subsequent bootstrap correction only assigns rel before removing as. The complete smoke suite and both startup checks run on the final source. Individual source pins are preserved, and audit-budget is repeated after final artifacts."
+    },
+    "kitQrComparison": {
+      "at": "2026-10-14T18:03:47Z",
+      "baselineSource": "6c3764ff9a1aa3fbba202af12d6764ac23ed2d6e",
+      "candidateSource": "af805a765e00ec70c091f57e10680298441e68f9",
+      "scope": "Actual Node recipe.prepare and buildRecipe, with the original kit test's seed, budget, and circle option. This is a focused reproduction, not a full kit pass or a browser measurement.",
+      "toy": "qr-picture",
+      "seed": 3,
+      "count": 8000,
+      "given": {
+        "shape": "circle"
+      },
+      "recipeSha256BothSources": "bb3d1b49be8d665ad13d1d1c63eac73fb762f10afcabe0d3ef6303c573840a31",
+      "baselineOutcome": "This code has too much detail for a circular picture on this device. Choose less detail, a smaller center dot, or a shorter text.",
+      "candidateOutcome": "This code has too much detail for a circular picture on this device. Choose less detail, a smaller center dot, or a shorter text."
+    },
+    "precedingSuite": {
+      "runtimeSource": "8a3a6488a6a5d0d592bf981e5ead034f023c9109",
+      "raw": "/workspace/load-time-runs/round3-validation/required.json.source-8a3a6488",
+      "stats": {
+        "startTime": "2026-10-14T16:39:36.587Z",
+        "duration": 4254300.977,
+        "expected": 176,
+        "skipped": 0,
+        "unexpected": 5,
+        "flaky": 0
+      },
+      "files": [
+        {
+          "file": "taps.spec.mjs",
+          "passed": 62,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 260080
+        },
+        {
+          "file": "unit.spec.mjs",
+          "passed": 20,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 29302
+        },
+        {
+          "file": "ro.spec.mjs",
+          "passed": 3,
+          "failed": 1,
+          "skipped": 0,
+          "durationMs": 430881
+        },
+        {
+          "file": "load-time-audit-budget.spec.mjs",
+          "passed": 1,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 200
+        },
+        {
+          "file": "load-time-catalog.spec.mjs",
+          "passed": 2,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 78838
+        },
+        {
+          "file": "load-time-compression.spec.mjs",
+          "passed": 13,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 188546
+        },
+        {
+          "file": "load-time-exports.spec.mjs",
+          "passed": 1,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 1504
+        },
+        {
+          "file": "load-time-format.spec.mjs",
+          "passed": 1,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 299
+        },
+        {
+          "file": "load-time-manual.spec.mjs",
+          "passed": 1,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 9373
+        },
+        {
+          "file": "load-time-means.spec.mjs",
+          "passed": 2,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 2679
+        },
+        {
+          "file": "load-time-metrics.spec.mjs",
+          "passed": 2,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 52
+        },
+        {
+          "file": "load-time-smoothing.spec.mjs",
+          "passed": 5,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 134704
+        },
+        {
+          "file": "load-time-startup.spec.mjs",
+          "passed": 1,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 9221
+        },
+        {
+          "file": "load-time-store.spec.mjs",
+          "passed": 3,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 111
+        },
+        {
+          "file": "load-time.spec.mjs",
+          "passed": 3,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 108392
+        },
+        {
+          "file": "smoke.spec.mjs",
+          "passed": 47,
+          "failed": 3,
+          "skipped": 0,
+          "durationMs": 2102979
+        },
+        {
+          "file": "kit.spec.mjs",
+          "passed": 9,
+          "failed": 1,
+          "skipped": 0,
+          "durationMs": 629549
+        }
+      ],
+      "failures": [
+        {
+          "file": "ro.spec.mjs",
+          "title": "each toy opens and plays its tap in the app, with screenshots",
+          "status": "timedOut",
+          "durationMs": 305419,
+          "errors": [
+            "\u001b[31mTest timeout of 300000ms exceeded.\u001b[39m",
+            "Error: page.screenshot: Test ended.\nCall log:\n\u001b[2m  - taking page screenshot\u001b[22m\n\u001b[2m  - waiting for fonts to load...\u001b[22m\n\u001b[2m  - fonts loaded\u001b[22m\n\n\n  131 |         await page.waitForFunction((id) => window.__splashery.player.toyInfo?.id === id && window.__splashery.player.proc?.ctx?.buf?.count > 50000, id, { timeout: 90_000 }); // prettier-ignore\n  132 |         await page.waitForTimeout(700);\n> 133 |         await page.screenshot({ path: `tests/screenshots/ro-${id}-${w}x${h}.png` });\n      |                    ^\n  134 |         await page.evaluate(() => window.__splashery.player.act(null));\n  135 |         await page.waitForTimeout(400);\n  136 |       }\n    at /workspace/splashery/tests/ro.spec.mjs:133:20"
+          ]
+        },
+        {
+          "file": "smoke.spec.mjs",
+          "title": "rigs pick splats by colour, run effects and show add-ons; shelf shapes have rigs",
+          "status": "failed",
+          "durationMs": 65424,
+          "errors": [
+            "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m22399\u001b[39m\nReceived:   \u001b[31m66196\u001b[39m\n\nCall Log:\n- Timeout 15000ms exceeded while waiting on the predicate\n\n  752 |     const settled = async () =>\n  753 |       countDifferentPixels(page, rest, await canvas.screenshot({ type: \"png\" }));\n> 754 |     await expect\n      |     ^\n  755 |       .poll(settled, { timeout: 15_000, intervals: [3000, 1000] })\n  756 |       .toBeLessThan(moved / 4);\n  757 |     // Lantern: a toggle lights a flame add-on; a second tap puts it out.\n    at /workspace/splashery/tests/smoke.spec.mjs:754:5"
+          ]
+        },
+        {
+          "file": "smoke.spec.mjs",
+          "title": "v3 screenshots at 1440x900 and 390x844",
+          "status": "failed",
+          "durationMs": 47397,
+          "errors": [
+            "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 4\u001b[39m\n\n\u001b[32m- Array []\u001b[39m\n\u001b[31m+ Array [\u001b[39m\n\u001b[31m+   \"warning: The resource http://127.0.0.1:4173/src/packs/photoreal-r3-bases.js was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally.\",\u001b[39m\n\u001b[31m+   \"warning: The resource http://127.0.0.1:4173/manual/pdf-edition.js was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally.\",\u001b[39m\n\u001b[31m+ ]\u001b[39m\n\n  940 |     await page.waitForTimeout(2200);\n  941 |     await page.screenshot({ path: path.join(SHOTS, \"v3-1440x900.png\") });\n> 942 |     expect(problems).toEqual([]);\n      |                      ^\n  943 |     await desk.close();\n  944 |     const phone = await browser.newContext({\n  945 |       viewport: { width: 390, height: 844 },\n    at /workspace/splashery/tests/smoke.spec.mjs:942:22"
+          ]
+        },
+        {
+          "file": "smoke.spec.mjs",
+          "title": "flag colours lie gently over the chess board, and stay with the toy they were chosen on",
+          "status": "failed",
+          "durationMs": 74680,
+          "errors": [
+            "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 3\u001b[39m\n\n\u001b[32m- Array []\u001b[39m\n\u001b[31m+ Array [\u001b[39m\n\u001b[31m+   \"warning: WebGL: CONTEXT_LOST_WEBGL: loseContext: context lost\",\u001b[39m\n\u001b[31m+ ]\u001b[39m\n\n  1071 |     await waitForToy(page, \"Jelly blob\");\n  1072 |     await expect.poll(pattern).toMatchObject({ projection: \"wrap\", amount: 1, id: \"flag\" });\n> 1073 |     expect(problems).toEqual([]);\n       |                      ^\n  1074 |   });\n  1075 |\n  1076 |   test(\"the chess game bar plays, pauses, steps and jumps, and a tap after the end starts again\", async ({\n    at /workspace/splashery/tests/smoke.spec.mjs:1073:22"
+          ]
+        },
+        {
+          "file": "kit.spec.mjs",
+          "title": "every kit toy has a recipe that builds deterministically and fits the unit ball",
+          "status": "failed",
+          "durationMs": 624149,
+          "errors": [
+            "Error: This code has too much detail for a circular picture on this device. Choose less detail, a smaller center dot, or a shorter text.\n\n   at ../src/packs/qr-craft.js:395\n\n  393 |   const stage = app()?.player?.stage;\n  394 |   if (typeof window === \"undefined\" || PIC.noAuto || !stage?.cover || PIC.holding) return;\n> 395 |   PIC.holding = stage;\n      |                       ^\n  396 |   stage.cover({ label: SCANNING });\n  397 |   clearTimeout(PIC.holdTimer);\n  398 |   PIC.holdTimer = setTimeout(release, 30000);\n    at pictureSplats (/workspace/splashery/src/packs/qr-craft.js:395:72)\n    at Object.build (/workspace/splashery/src/packs/qr-craft.js:799:9)\n    at next (/workspace/splashery/src/kit.js:1332:10)\n    at build (/workspace/splashery/tests/kit.spec.mjs:108:20)\n    at /workspace/splashery/tests/kit.spec.mjs:112:17"
+          ]
+        }
+      ],
+      "note": "Complete preceding run exposed unused script-preload warnings. Browser scopes were repeated after promotion. The full smoke suite and startup checks were repeated after the later attribute-order correction; geometry, namespace, and media checks retain their passing promotion results. Individual source pins and compatibility proof are retained. Audit size is checked again after final artifacts."
+    },
+    "supersededPreloadClaimFix": {
+      "red": {
+        "raw": "/workspace/load-time-runs/round3-validation/preload-claim-red.json",
+        "stats": {
+          "startTime": "2026-10-14T17:38:40.253Z",
+          "duration": 37746.166000000005,
+          "expected": 0,
+          "skipped": 0,
+          "unexpected": 1,
+          "flaky": 0
+        },
+        "files": [
+          {
+            "file": "load-time-startup.spec.mjs",
+            "passed": 0,
+            "failed": 1,
+            "skipped": 0,
+            "durationMs": 27318
+          }
+        ],
+        "failures": [
+          {
+            "file": "load-time-startup.spec.mjs",
+            "title": "warmed graph responses do not produce unused-preload warnings",
+            "status": "failed",
+            "durationMs": 27318,
+            "errors": [
+              "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 4\u001b[39m\n\n\u001b[32m- Array []\u001b[39m\n\u001b[31m+ Array [\u001b[39m\n\u001b[31m+   \"The resource http://127.0.0.1:4173/src/packs/photoreal-r3-bases.js was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally.\",\u001b[39m\n\u001b[31m+   \"The resource http://127.0.0.1:4173/manual/pdf-edition.js was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally.\",\u001b[39m\n\u001b[31m+ ]\u001b[39m\n\n  35 |   await page.waitForSelector(\"body[data-ready='true']\");\n  36 |   await page.waitForTimeout(6000);\n> 37 |   expect(warnings).toEqual([]);\n     |                    ^\n  38 | });\n  39 |\n    at /workspace/splashery/tests/load-time-startup.spec.mjs:37:20"
+            ]
+          }
+        ]
+      },
+      "green": {
+        "raw": "/workspace/load-time-runs/round3-validation/preload-claim-green.json",
+        "stats": {
+          "startTime": "2026-10-14T17:39:46.172Z",
+          "duration": 31094.239999999998,
+          "expected": 2,
+          "skipped": 0,
+          "unexpected": 0,
+          "flaky": 0
+        },
+        "files": [
+          {
+            "file": "load-time-startup.spec.mjs",
+            "passed": 2,
+            "failed": 0,
+            "skipped": 0,
+            "durationMs": 22104
+          }
+        ],
+        "failures": []
+      },
+      "scope": "Actual Chromium test reproduces both unused-preload warnings on archived 8a3a6488 without GPU rendering. Promoting warmed links to native modulepreload after the engine map exists removes the warnings and preserves early requests, single response reuse, and engine mapping. The protected smoke spec is unchanged."
+    },
+    "supersededPreloadOrderFix": {
+      "red": {
+        "raw": "/workspace/load-time-runs/round3-validation/preload-order-red.json",
+        "stats": {
+          "startTime": "2026-10-14T18:15:14.362Z",
+          "duration": 13707.592,
+          "expected": 0,
+          "skipped": 0,
+          "unexpected": 1,
+          "flaky": 0
+        },
+        "files": [
+          {
+            "file": "load-time-startup.spec.mjs",
+            "passed": 0,
+            "failed": 1,
+            "skipped": 0,
+            "durationMs": 10568
+          }
+        ],
+        "failures": [
+          {
+            "file": "load-time-startup.spec.mjs",
+            "title": "warmed graph responses do not produce preload warnings",
+            "status": "failed",
+            "durationMs": 10568,
+            "errors": [
+              "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  -  1\u001b[39m\n\u001b[31m+ Received  + 56\u001b[39m\n\n\u001b[32m- Array []\u001b[39m\n\u001b[31m+ Array [\u001b[39m\n\u001b[31m+   \"<link rel=preload> must have a valid `as` value\",\u001b[39m\n\u001b[31m+   \"<link rel=preload> must have a valid `as` value\",\u001b[39m\n\u001b[31m+   \"<link rel=preload> must have a valid `as` value\",\u001b[39m\n\u001b[31m+   \"<link rel=preload> must have a valid `as` value\",\u001b[39m\n\u001b[31m+   \"<link rel=preload> must have a valid `as` value\",\u001b[39m\n\u001b[31m+   \"<link rel=preload> must have a valid `as` value\",\u001b[39m\n\u001b[31m+   \"<link rel=preload> must have a valid `as` value\",\u001b[39m\n\u001b[31m+   \"<link rel=preload> must have a valid `as` value\",\u001b[39m\n\u001b[31m+   \"<link rel=preload> must have a valid `as` value\",\u001b[39m\n\u001b[31m+   \"<link rel=preload> must have a valid `as` value\",\u001b[39m\n\u001b[31m+   \"<link rel=preload> must have a valid `as` value\",\u001b[39m\n\u001b[31m+   \"<link rel=preload> must have a valid `as` value\",\u001b[39m\n\u001b[31m+   \"<link rel=preload> must have a valid `as` value\",\u001b[39m\n\u001b[31m+   \"<link rel=preload> must have a valid `as` value\",\u001b[39m\n\u001b[31m+   \"<link rel=preload> must have a valid `as` value\",\u001b[39m\n\u001b[31m+   \"<link rel=preload> must have a valid `as` value\",\u001b[39m\n\u001b[31m+   \"<link rel=preload> must have a valid `as` value\",\u001b[39m\n\u001b[31m+   \"<link rel=preload> must have a valid `as` value\",\u001b[39m\n\u001b[31m+   \"<link rel=preload> must have a valid `as` value\",\u001b[39m\n\u001b[31m+   \"<link rel=preload> must have a valid `as` value\",\u001b[39m\n\u001b[31m+   \"<link rel=preload> must have a valid `as` value\",\u001b[39m\n\u001b[31m+   \"<link rel=preload> must have a valid `as` value\",\u001b[39m\n\u001b[31m+   \"<link rel=preload> must have a valid `as` value\",\u001b[39m\n\u001b[31m+   \"<link rel=preload> must have a valid `as` value\",\u001b[39m\n\u001b[31m+   \"<link rel=preload> must have a valid `as` value\",\u001b[39m\n\u001b[31m+   \"<link rel=preload> must have a valid `as` value\",\u001b[39m\n\u001b[31m+   \"<link rel=preload> must have a valid `as` value\",\u001b[39m\n\u001b[31m+   \"<link rel=preload> must have a valid `as` value\",\u001b[39m\n\u001b[31m+   \"<link rel=preload> must have a valid `as` value\",\u001b[39m\n\u001b[31m+   \"<link rel=preload> must have a valid `as` value\",\u001b[39m\n\u001b[31m+   \"<link rel=preload> must have a valid `as` value\",\u001b[39m\n\u001b[31m+   \"<link rel=preload> must have a valid `as` value\",\u001b[39m\n\u001b[31m+   \"<link rel=preload> must have a valid `as` value\",\u001b[39m\n\u001b[31m+   \"<link rel=preload> must have a valid `as` value\",\u001b[39m\n\u001b[31m+   \"<link rel=preload> must have a valid `as` value\",\u001b[39m\n\u001b[31m+   \"<link rel=preload> must have a valid `as` value\",\u001b[39m\n\u001b[31m+   \"<link rel=preload> must have a valid `as` value\",\u001b[39m\n\u001b[31m+   \"<link rel=preload> must have a valid `as` value\",\u001b[39m\n\u001b[31m+   \"<link rel=preload> must have a valid `as` value\",\u001b[39m\n\u001b[31m+   \"<link rel=preload> must have a valid `as` value\",\u001b[39m\n\u001b[31m+   \"<link rel=preload> must have a valid `as` value\",\u001b[39m\n\u001b[31m+   \"<link rel=preload> must have a valid `as` value\",\u001b[39m\n\u001b[31m+   \"<link rel=preload> must have a valid `as` value\",\u001b[39m\n\u001b[31m+   \"<link rel=preload> must have a valid `as` value\",\u001b[39m\n\u001b[31m+   \"<link rel=preload> must have a valid `as` value\",\u001b[39m\n\u001b[31m+   \"<link rel=preload> must have a valid `as` value\",\u001b[39m\n\u001b[31m+   \"<link rel=preload> must have a valid `as` value\",\u001b[39m\n\u001b[31m+   \"<link rel=preload> must have a valid `as` value\",\u001b[39m\n\u001b[31m+   \"<link rel=preload> must have a valid `as` value\",\u001b[39m\n\u001b[31m+   \"<link rel=preload> must have a valid `as` value\",\u001b[39m\n\u001b[31m+   \"<link rel=preload> must have a valid `as` value\",\u001b[39m\n\u001b[31m+   \"<link rel=preload> must have a valid `as` value\",\u001b[39m\n\u001b[31m+   \"<link rel=preload> must have a valid `as` value\",\u001b[39m\n\u001b[31m+   \"<link rel=preload> must have a valid `as` value\",\u001b[39m\n\u001b[31m+ ]\u001b[39m\n\n  35 |   await page.waitForSelector(\"body[data-ready='true']\");\n  36 |   await page.waitForTimeout(6000);\n> 37 |   expect(warnings).toEqual([]);\n     |                    ^\n  38 | });\n  39 |\n    at /workspace/splashery/tests/load-time-startup.spec.mjs:37:20"
+            ]
+          }
+        ]
+      },
+      "green": {
+        "raw": "/workspace/load-time-runs/round3-validation/preload-order-green.json",
+        "stats": {
+          "startTime": "2026-10-14T18:15:39.889Z",
+          "duration": 18838.814,
+          "expected": 2,
+          "skipped": 0,
+          "unexpected": 0,
+          "flaky": 0
+        },
+        "files": [
+          {
+            "file": "load-time-startup.spec.mjs",
+            "passed": 2,
+            "failed": 0,
+            "skipped": 0,
+            "durationMs": 13801
+          }
+        ],
+        "failures": []
+      },
+      "protectedSmoke": {
+        "raw": "/workspace/load-time-runs/round3-validation/preload-order-smoke.json",
+        "stats": {
+          "startTime": "2026-10-14T18:17:13.971Z",
+          "duration": 76759.455,
+          "expected": 2,
+          "skipped": 0,
+          "unexpected": 0,
+          "flaky": 0
+        },
+        "files": [
+          {
+            "file": "smoke.spec.mjs",
+            "passed": 2,
+            "failed": 0,
+            "skipped": 0,
+            "durationMs": 67527
+          }
+        ],
+        "failures": []
+      },
+      "scope": "The first promotion briefly removed as while rel was still preload and emitted invalid-as warnings. The broader startup assertion reproduced this. Assigning modulepreload first avoids the invalid intermediate state. Both startup tests and both protected smoke cases pass; console warnings are not suppressed."
+    },
+    "embedTransfer": {
+      "observed": "9.1 MiB (rounded by the unmodified current smoke log)",
+      "limitBytes": 31457280,
+      "scope": "The unmodified strong-profile Bee embed check in the current required smoke run."
+    },
+    "supersededCompressedStartup": {
+      "red": {
+        "raw": "/workspace/load-time-runs/round3-validation/load-time-round3-red.json",
+        "stats": {
+          "startTime": "2026-10-14T15:44:31.314Z",
+          "duration": 146665.28,
+          "expected": 0,
+          "skipped": 0,
+          "unexpected": 2,
+          "flaky": 0
+        },
+        "files": [
+          {
+            "file": "load-time-round3.spec.mjs",
+            "passed": 0,
+            "failed": 2,
+            "skipped": 0,
+            "durationMs": 27167
+          }
+        ],
+        "failures": [
+          {
+            "file": "load-time-round3.spec.mjs",
+            "title": "the app graph starts transferring before the compressed engine finishes",
+            "status": "failed",
+            "durationMs": 14867,
+            "errors": [
+              "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\nCall Log:\n- Timeout 5000ms exceeded while waiting on the predicate\n\n  15 |   try {\n  16 |     await page.goto(\"/?renderer=none\", { waitUntil: \"commit\" });\n> 17 |     await expect.poll(() => requests.includes(\"/src/app.js\"), { timeout: 5000 }).toBe(true);\n     |     ^\n  18 |   } finally {\n  19 |     release();\n  20 |   }\n    at /workspace/splashery/tests/load-time-round3.spec.mjs:17:5"
+            ]
+          },
+          {
+            "file": "load-time-round3.spec.mjs",
+            "title": "the current content-addressed manual uses lossless compression",
+            "status": "failed",
+            "durationMs": 12300,
+            "errors": [
+              "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoContain\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // indexOf\u001b[22m\n\nExpected value: \u001b[32m\"/manual/tinkerers-manual-85d32b96193ea275.pdf.gz\"\u001b[39m\nReceived array: \u001b[31m[\"/tools/\", \"/src/media.js\", \"/src/loaders.js\", \"/src/state.js\", \"/src/gzip.js\", \"/src/pc.js\", \"/src/noise.js\", \"/src/generators.js\", \"/src/effects.js\", \"/src/camera.js\", …]\u001b[39m\n\n  38 |   expect(result.kind).toBe(\"pdf\");\n  39 |   expect(result.count).toBeGreaterThan(100);\n> 40 |   expect(requests).toContain(`/manual/${MANUAL_PDF}.gz`);\n     |                    ^\n  41 |   expect(requests).not.toContain(`/manual/${MANUAL_PDF}`);\n  42 | });\n  43 |\n    at /workspace/splashery/tests/load-time-round3.spec.mjs:40:20"
+            ]
+          }
+        ]
+      },
+      "manualGreen": {
+        "raw": "/workspace/load-time-runs/round3-validation/load-time-round3-manual-green.json",
+        "stats": {
+          "startTime": "2026-10-14T15:48:47.949Z",
+          "duration": 10820.523,
+          "expected": 1,
+          "skipped": 0,
+          "unexpected": 0,
+          "flaky": 0
+        },
+        "files": [
+          {
+            "file": "load-time-round3.spec.mjs",
+            "passed": 1,
+            "failed": 0,
+            "skipped": 0,
+            "durationMs": 7322
+          }
+        ],
+        "failures": []
+      },
+      "startupGreen": {
+        "raw": "/workspace/load-time-runs/round3-validation/load-time-round3-overlap-green.json",
+        "stats": {
+          "startTime": "2026-10-14T15:51:21.192Z",
+          "duration": 29061.825,
+          "expected": 1,
+          "skipped": 0,
+          "unexpected": 0,
+          "flaky": 0
+        },
+        "files": [
+          {
+            "file": "load-time-round3.spec.mjs",
+            "passed": 1,
+            "failed": 0,
+            "skipped": 0,
+            "durationMs": 11135
+          }
+        ],
+        "failures": []
+      },
+      "inlineRed": {
+        "raw": "/workspace/load-time-runs/round3-validation/inline-red.json",
+        "stats": {
+          "startTime": "2026-10-14T16:29:14.295Z",
+          "duration": 19414.667,
+          "expected": 0,
+          "skipped": 0,
+          "unexpected": 1,
+          "flaky": 0
+        },
+        "files": [
+          {
+            "file": "load-time-startup.spec.mjs",
+            "passed": 0,
+            "failed": 1,
+            "skipped": 0,
+            "durationMs": 7135
+          }
+        ],
+        "failures": [
+          {
+            "file": "load-time-startup.spec.mjs",
+            "title": "the app graph starts transferring before the compressed engine finishes",
+            "status": "failed",
+            "durationMs": 7135,
+            "errors": [
+              "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mnot\u001b[2m.\u001b[22mtoContain\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // indexOf\u001b[22m\n\nExpected value: not \u001b[32m\"/vendor/playcanvas/playcanvas.min.mjs\"\u001b[39m\nReceived array:     \u001b[31m[\"/\", \"/styles.css\", \"/src/boot.js\", \"/src/toys.js\", \"/vendor/playcanvas/playcanvas.min.mjs.gz\", \"/manual/pdf-edition.js\", \"/src/app.js\", \"/src/camera.js\", \"/src/chunks.js\", \"/src/codec.js\", \"/src/effects-pose.js\", \"/src/effects.js\", \"/src/exports.js\", \"/src/font.js\", \"/src/generators.js\", \"/src/gzip.js\", \"/src/kernels.js\", \"/src/kit.js\", \"/src/live/live.js\", \"/src/live/panel.js\", \"/src/live/record.js\", \"/src/loaders.js\", \"/src/media.js\", \"/src/motion.js\", \"/src/noise.js\", \"/src/opening-pack.js\", \"/src/packs/dog-plush-fill.js\", \"/src/packs/even.js\", \"/src/packs/photoreal-r2.js\", \"/src/packs/photoreal-r3-bases.js\", \"/src/packs/photoreal-r3-rigs.js\", \"/src/packs/photoreal-r3.js\", \"/src/paint.js\", \"/src/patterns.js\", \"/src/pc.js\", \"/src/photo-splats.js\", \"/src/physics/fields.js\", \"/src/physics/hands-on.js\", \"/src/physics/joints.js\", \"/src/physics/materials.js\", \"/src/physics/soft.js\", \"/src/physics/world.js\", \"/src/picture-splats.js\", \"/src/pictures.js\", \"/src/player.js\", \"/src/pose.js\", \"/src/rig-fx.js\", \"/src/rig.js\", \"/src/rigs.js\", \"/src/sharpness.js\", \"/src/site-toy-pages.js\", \"/src/sound-credits.js\", \"/src/sound.js\", \"/src/stage.js\", \"/src/state.js\", \"/src/toy-sounds.js\", \"/src/ui.js\", \"/src/voices.js\", \u001b[7m\"/vendor/playcanvas/playcanvas.min.mjs\"\u001b[27m]\u001b[39m\n\n  16 |     await expect.poll(() => requests.includes(\"/src/app.js\"), { timeout: 5000 }).toBe(true);\n  17 |     await page.waitForLoadState(\"domcontentloaded\");\n> 18 |     expect(requests).not.toContain(\"/vendor/playcanvas/playcanvas.min.mjs\");\n     |                          ^\n  19 |   } finally {\n  20 |     release();\n  21 |   }\n    at /workspace/splashery/tests/load-time-startup.spec.mjs:18:26"
+            ]
+          }
+        ]
+      },
+      "inlineGreen": {
+        "raw": "/workspace/load-time-runs/round3-validation/inline-green.json",
+        "stats": {
+          "startTime": "2026-10-14T16:37:34.569Z",
+          "duration": 58257.776,
+          "expected": 1,
+          "skipped": 0,
+          "unexpected": 0,
+          "flaky": 0
+        },
+        "files": [
+          {
+            "file": "load-time-startup.spec.mjs",
+            "passed": 1,
+            "failed": 0,
+            "skipped": 0,
+            "durationMs": 24109
+          }
+        ],
+        "failures": []
+      },
+      "scope": "Manual test supplies an exact gzip route to test the selected fetch path; separate compression specs verify generated file bytes. Startup test holds the actual compressed engine through DOM readiness and checks early app requests, reuse, absence of a raw engine request, and the labs link. Holding through DOM readiness reproduces the independent inline catalog import racing the engine mapping; moving the existing link toggle into app startup fixes it. The earlier required run was stopped at this newly reproduced failure and did not produce a complete receipt."
+    },
+    "protectedQrCurrentSource": {
+      "path": "src/packs/qr-craft.js",
+      "candidateSource": "d52fa21f0120e532f1e1a14beae48ea97df90db7",
+      "mainSource": "41b21e74e04ccca178b95ac02b4e5dc0e51b4b45",
+      "sha256": "bb3d1b49be8d665ad13d1d1c63eac73fb762f10afcabe0d3ef6303c573840a31",
+      "byteIdentical": true
+    },
+    "latestMainKit": {
+      "raw": "/workspace/load-time-runs/round3-current-validation/kit-main-latest.json",
+      "stats": {
+        "startTime": "2026-10-14T22:19:25.467Z",
+        "duration": 536889.648,
+        "expected": 9,
+        "skipped": 0,
+        "unexpected": 1,
+        "flaky": 0
+      },
+      "files": [
+        {
+          "file": "kit.spec.mjs",
+          "passed": 9,
+          "failed": 1,
+          "skipped": 0,
+          "durationMs": 514619
+        }
+      ],
+      "failures": [
+        {
+          "file": "kit.spec.mjs",
+          "title": "every kit toy has a recipe that builds deterministically and fits the unit ball",
+          "status": "failed",
+          "durationMs": 509117,
+          "errors": [
+            "Error: This code has too much detail for a circular picture on this device. Choose less detail, a smaller center dot, or a shorter text.\n\n   at ../src/packs/qr-craft.js:395\n\n  393 |   const stage = app()?.player?.stage;\n  394 |   if (typeof window === \"undefined\" || PIC.noAuto || !stage?.cover || PIC.holding) return;\n> 395 |   PIC.holding = stage;\n      |                       ^\n  396 |   stage.cover({ label: SCANNING });\n  397 |   clearTimeout(PIC.holdTimer);\n  398 |   PIC.holdTimer = setTimeout(release, 30000);\n    at pictureSplats (/workspace/load-time-round3-current-main/src/packs/qr-craft.js:395:72)\n    at Object.build (/workspace/load-time-round3-current-main/src/packs/qr-craft.js:799:9)\n    at next (/workspace/load-time-round3-current-main/src/kit.js:1332:10)\n    at build (/workspace/load-time-round3-current-main/tests/kit.spec.mjs:108:20)\n    at /workspace/load-time-round3-current-main/tests/kit.spec.mjs:112:17"
+          ]
+        }
+      ],
+      "receipt": {
+        "source": "41b21e74e04ccca178b95ac02b4e5dc0e51b4b45",
+        "command": "node_modules/.bin/playwright test tests/kit.spec.mjs --workers=1 --trace=off --reporter=line,json",
+        "exit": 1,
+        "signal": null,
+        "at": "2026-10-14T22:28:22.517Z",
+        "display": ":99",
+        "mesaThreads": "3",
+        "port": "4174"
+      },
+      "scope": "Actual archived latest main 41b21e74 (only docs/STATUS.md differs from timing baseline 226644fb), original kit spec and pack imports, unchanged 600000 ms catalog deadline. This independent baseline run is not included in candidate totals.",
+      "deadlineOverrun": false
+    },
+    "frozenMainKit": {
+      "raw": "/workspace/load-time-runs/round3-validation/load-time-round3-main-kit.json",
+      "stats": {
+        "startTime": "2026-10-14T15:44:42.013Z",
+        "duration": 818236.72,
+        "expected": 9,
+        "skipped": 0,
+        "unexpected": 1,
+        "flaky": 0
+      },
+      "files": [
+        {
+          "file": "kit.spec.mjs",
+          "passed": 9,
+          "failed": 1,
+          "skipped": 0,
+          "durationMs": 665332
+        }
+      ],
+      "failures": [
+        {
+          "file": "kit.spec.mjs",
+          "title": "every kit toy has a recipe that builds deterministically and fits the unit ball",
+          "status": "timedOut",
+          "durationMs": 659194,
+          "errors": ["\u001b[31mTest timeout of 600000ms exceeded.\u001b[39m"]
+        }
+      ],
+      "command": "DISPLAY=:94 LP_NUM_THREADS=2 SPLASHERY_GL=llvmpipe SPLASHERY_CHROMIUM=/usr/bin/chromium SPLASHERY_PORT=4174 nice -n 10 npx playwright test tests/kit.spec.mjs --workers=1 --trace=off --reporter=line,json",
+      "note": "Actual archived main runs the unmodified kit catalog with its 600000 ms deadline."
+    },
+    "frozenMainRealObjects": {
+      "raw": "/workspace/load-time-runs/round3-validation/main-real-objects.json",
+      "stats": {
+        "startTime": "2026-10-14T18:53:04.741Z",
+        "duration": 307365.402,
+        "expected": 1,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "files": [
+        {
+          "file": "ro.spec.mjs",
+          "passed": 1,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 294524
+        }
+      ],
+      "failures": [],
+      "scope": "Unmodified original five-minute browser screenshot case, actual archived main at 6c3764ff; DISPLAY=:97, LP_NUM_THREADS=3, llvmpipe, one worker, port 4174, nice 10."
+    },
+    "frozenMainStrawberryMesa": {
+      "raw": "/workspace/load-time-runs/round3-validation/main-strawberry-mesa.json",
+      "stats": {
+        "startTime": "2026-10-14T18:58:16.360Z",
+        "duration": 142404.656,
+        "expected": 1,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "files": [
+        {
+          "file": "smoke.spec.mjs",
+          "passed": 1,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 131958
+        }
+      ],
+      "failures": [],
+      "scope": "Unmodified original strawberry smoke case, actual archived main at 6c3764ff; earlier DISPLAY=:97, LP_NUM_THREADS=3, llvmpipe, one worker, port 4174, nice 10 comparison. Final validation uses DISPLAY=:99."
+    },
+    "supersededHomepageOnlyFallback": {
+      "red": {
+        "raw": "/workspace/load-time-runs/round3-validation/default-engine-red.json",
+        "stats": {
+          "startTime": "2026-10-14T19:12:37.166Z",
+          "duration": 16458.758,
+          "expected": 0,
+          "skipped": 0,
+          "unexpected": 1,
+          "flaky": 0
+        },
+        "files": [
+          {
+            "file": "load-time-startup.spec.mjs",
+            "passed": 0,
+            "failed": 1,
+            "skipped": 0,
+            "durationMs": 6762
+          }
+        ],
+        "failures": [
+          {
+            "file": "load-time-startup.spec.mjs",
+            "title": "the default homepage keeps the original engine module",
+            "status": "failed",
+            "durationMs": 6762,
+            "errors": [
+              "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoContain\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // indexOf\u001b[22m\n\nExpected value: \u001b[32m\"/vendor/playcanvas/playcanvas.min.mjs\"\u001b[39m\nReceived array: \u001b[31m[\"/\", \"/styles.css\", \"/src/boot.js\", \"/vendor/playcanvas/playcanvas.min.mjs.gz\", \"/manual/pdf-edition.js\", \"/src/app.js\", \"/src/camera.js\", \"/src/chunks.js\", \"/src/codec.js\", \"/src/effects-pose.js\", …]\u001b[39m\n\n  43 |   await page.goto(\"/?renderer=none\");\n  44 |   await page.waitForSelector(\"body[data-ready='true']\");\n> 45 |   expect(requests).toContain(\"/vendor/playcanvas/playcanvas.min.mjs\");\n     |                    ^\n  46 |   expect(requests).not.toContain(\"/vendor/playcanvas/playcanvas.min.mjs.gz\");\n  47 | });\n  48 |\n    at /workspace/splashery/tests/load-time-startup.spec.mjs:45:20"
+            ]
+          }
+        ]
+      },
+      "green": {
+        "raw": "/workspace/load-time-runs/round3-validation/default-engine-green.json",
+        "stats": {
+          "startTime": "2026-10-14T19:13:15.630Z",
+          "duration": 196606.399,
+          "expected": 16,
+          "skipped": 0,
+          "unexpected": 0,
+          "flaky": 0
+        },
+        "files": [
+          {
+            "file": "load-time-compression.spec.mjs",
+            "passed": 13,
+            "failed": 0,
+            "skipped": 0,
+            "durationMs": 164800
+          },
+          {
+            "file": "load-time-startup.spec.mjs",
+            "passed": 3,
+            "failed": 0,
+            "skipped": 0,
+            "durationMs": 16733
+          }
+        ],
+        "failures": []
+      },
+      "finalStartup": {
+        "raw": "/workspace/load-time-runs/round3-validation/default-engine-startup-final.json",
+        "stats": {
+          "startTime": "2026-10-14T19:17:04.970Z",
+          "duration": 39239.642,
+          "expected": 4,
+          "skipped": 0,
+          "unexpected": 0,
+          "flaky": 0
+        },
+        "files": [
+          {
+            "file": "load-time-startup.spec.mjs",
+            "passed": 4,
+            "failed": 0,
+            "skipped": 0,
+            "durationMs": 27861
+          }
+        ],
+        "failures": []
+      },
+      "firstProtectedRerun": {
+        "raw": "/workspace/load-time-runs/round3-current-validation/required-strawberry.json",
+        "stats": {
+          "startTime": "2026-10-14T19:19:35.423Z",
+          "duration": 52630.367,
+          "expected": 0,
+          "skipped": 0,
+          "unexpected": 1,
+          "flaky": 0
+        },
+        "files": [
+          {
+            "file": "smoke.spec.mjs",
+            "passed": 0,
+            "failed": 1,
+            "skipped": 0,
+            "durationMs": 45311
+          }
+        ],
+        "failures": [
+          {
+            "file": "smoke.spec.mjs",
+            "title": "rigs pick splats by colour, run effects and show add-ons; shelf shapes have rigs",
+            "status": "failed",
+            "durationMs": 45311,
+            "errors": [
+              "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m22822\u001b[39m\nReceived:   \u001b[31m79691\u001b[39m\n\nCall Log:\n- Timeout 15000ms exceeded while waiting on the predicate\n\n  752 |     const settled = async () =>\n  753 |       countDifferentPixels(page, rest, await canvas.screenshot({ type: \"png\" }));\n> 754 |     await expect\n      |     ^\n  755 |       .poll(settled, { timeout: 15_000, intervals: [3000, 1000] })\n  756 |       .toBeLessThan(moved / 4);\n  757 |     // Lantern: a toggle lights a flame add-on; a second tap puts it out.\n    at /workspace/splashery/tests/smoke.spec.mjs:754:5"
+            ]
+          }
+        ]
+      },
+      "rawCandidateControl": {
+        "raw": "/workspace/load-time-runs/round3-validation/candidate-strawberry-raw.json",
+        "stats": {
+          "startTime": "2026-10-14T19:04:08.031Z",
+          "duration": 227279.421,
+          "expected": 1,
+          "skipped": 0,
+          "unexpected": 0,
+          "flaky": 0
+        },
+        "files": [
+          {
+            "file": "smoke.spec.mjs",
+            "passed": 1,
+            "failed": 0,
+            "skipped": 0,
+            "durationMs": 201641
+          }
+        ],
+        "failures": []
+      },
+      "scope": "Original HTTP engine for app openings without a nonempty shared scene. This conservative fallback is not a demonstrated fix: the first protected rerun still fails. The subsequent external-fixture observation records both latest main and candidate failing before the unchanged pulse completes. This earlier homepage-only fallback was superseded by native engine loading for every route. Protected assertions, production clocks, and animations are unchanged. Raw and compressed startup warning checks are retained."
+    },
+    "nativeEngineRestoration": {
+      "source": "2b5eaae37a07961de240a4b426a90c6a91060787",
+      "red": {
+        "raw": "/workspace/load-time-runs/round3-validation/native-entry-red.json",
+        "stats": {
+          "startTime": "2026-10-14T20:17:09.883Z",
+          "duration": 23473.174,
+          "expected": 0,
+          "skipped": 0,
+          "unexpected": 2,
+          "flaky": 0
+        },
+        "files": [
+          {
+            "file": "load-time-startup.spec.mjs",
+            "passed": 0,
+            "failed": 2,
+            "skipped": 0,
+            "durationMs": 7204
+          }
+        ],
+        "failures": [
+          {
+            "file": "load-time-startup.spec.mjs",
+            "title": "j Book openings retain the eager native entry",
+            "status": "failed",
+            "durationMs": 3333,
+            "errors": [
+              "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoContain\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // indexOf\u001b[22m\n\nExpected value: \u001b[32m\"/vendor/playcanvas/playcanvas.min.mjs\"\u001b[39m\nReceived array: \u001b[31m[\"/\", \"/styles.css\", \"/src/boot.js\", \"/vendor/playcanvas/playcanvas.min.mjs.gz\", \"/manual/pdf-edition.js\", \"/src/app.js\", \"/src/camera.js\", \"/src/chunks.js\", \"/src/codec.js\", \"/src/effects-pose.js\", …]\u001b[39m\n\n  66 |     await page.goto(`/?renderer=none#s=${format}.${bytes.toString(\"base64url\")}`);\n  67 |     await page.waitForSelector(\"body[data-ready='true']\");\n> 68 |     expect(requests).toContain(\"/vendor/playcanvas/playcanvas.min.mjs\");\n     |                      ^\n  69 |     expect(requests).not.toContain(\"/vendor/playcanvas/playcanvas.min.mjs.gz\");\n  70 |     expect(requests).not.toContain(\"/src/boot.js\");\n  71 |   });\n    at /workspace/splashery/tests/load-time-startup.spec.mjs:68:22"
+            ]
+          },
+          {
+            "file": "load-time-startup.spec.mjs",
+            "title": "d Book openings retain the eager native entry",
+            "status": "failed",
+            "durationMs": 3871,
+            "errors": [
+              "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoContain\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // indexOf\u001b[22m\n\nExpected value: \u001b[32m\"/vendor/playcanvas/playcanvas.min.mjs\"\u001b[39m\nReceived array: \u001b[31m[\"/\", \"/styles.css\", \"/src/boot.js\", \"/vendor/playcanvas/playcanvas.min.mjs.gz\", \"/manual/pdf-edition.js\", \"/src/app.js\", \"/src/camera.js\", \"/src/chunks.js\", \"/src/codec.js\", \"/src/effects-pose.js\", …]\u001b[39m\n\n  66 |     await page.goto(`/?renderer=none#s=${format}.${bytes.toString(\"base64url\")}`);\n  67 |     await page.waitForSelector(\"body[data-ready='true']\");\n> 68 |     expect(requests).toContain(\"/vendor/playcanvas/playcanvas.min.mjs\");\n     |                      ^\n  69 |     expect(requests).not.toContain(\"/vendor/playcanvas/playcanvas.min.mjs.gz\");\n  70 |     expect(requests).not.toContain(\"/src/boot.js\");\n  71 |   });\n    at /workspace/splashery/tests/load-time-startup.spec.mjs:68:22"
+            ]
+          }
+        ]
+      },
+      "firstAttempt": {
+        "raw": "/workspace/load-time-runs/round3-validation/native-entry-green.json",
+        "stats": {
+          "startTime": "2026-10-14T20:19:46.221Z",
+          "duration": 143561.706,
+          "expected": 17,
+          "skipped": 0,
+          "unexpected": 1,
+          "flaky": 0
+        },
+        "files": [
+          {
+            "file": "load-time-compression.spec.mjs",
+            "passed": 10,
+            "failed": 1,
+            "skipped": 0,
+            "durationMs": 98803
+          },
+          {
+            "file": "load-time-startup.spec.mjs",
+            "passed": 7,
+            "failed": 0,
+            "skipped": 0,
+            "durationMs": 31438
+          }
+        ],
+        "failures": [
+          {
+            "file": "load-time-compression.spec.mjs",
+            "title": "the selected scan helper transfers while an app dependency is held",
+            "status": "failed",
+            "durationMs": 13810,
+            "errors": [
+              "TimeoutError: page.waitForRequest: Timeout 10000ms exceeded while waiting for event \"request\"\n=========================== logs ===========================\nwaiting for request \"**/src/packs/real-objects.js\"\n============================================================\n\n   98 |     JSON.stringify(createScene({ toy: { kind: \"builtin\", id: \"soda-can\" } })),\n   99 |   );\n> 100 |   const helper = page.waitForRequest(\"**/src/packs/real-objects.js\", { timeout: 10000 });\n      |                       ^\n  101 |   await page.goto(`/?renderer=webgl2&profile=weak&adapt=off#s=j.${scene.toString(\"base64url\")}`, {\n  102 |     waitUntil: \"commit\",\n  103 |   });\n    at /workspace/splashery/tests/load-time-compression.spec.mjs:100:23"
+            ]
+          }
+        ]
+      },
+      "green": {
+        "raw": "/workspace/load-time-runs/round3-validation/native-entry-final-green.json",
+        "stats": {
+          "startTime": "2026-10-14T20:25:33.073Z",
+          "duration": 145601.978,
+          "expected": 17,
+          "skipped": 0,
+          "unexpected": 0,
+          "flaky": 0
+        },
+        "files": [
+          {
+            "file": "load-time-compression.spec.mjs",
+            "passed": 11,
+            "failed": 0,
+            "skipped": 0,
+            "durationMs": 90667
+          },
+          {
+            "file": "load-time-startup.spec.mjs",
+            "passed": 6,
+            "failed": 0,
+            "skipped": 0,
+            "durationMs": 42570
+          }
+        ],
+        "failures": []
+      },
+      "scope": "The final production change restores native engine URL/preload and app/embed module entries for all routes, removes boot.js and engine gzip, and independently starts the opening-pack module. The first native attempt reproduced helper discovery blocked by a held ui response (17 passed, one failed). The final independent module passes all 17 startup/compression cases. That green run used byte-identical files committed at runtimeSource. Tests assert held-engine overlap, held-app/UI helper discovery, no duplicate engine, export/namespace compatibility, exact remaining gzip copies, old j/d entry discovery, and warning absence without filtering."
+    },
+    "productionTransport": {
+      "at": "2026-10-14T20:25:41.248275+00:00",
+      "method": "Actual public GitHub Pages GET via curl --compressed. size_download counts transferred body bytes; curl writes decoded bytes, which are compared byte-for-byte with the local source. This is a per-file production check, not a production per-toy opening measurement.",
+      "files": [
+        {
+          "source": "vendor/playcanvas/playcanvas.min.mjs",
+          "url": "https://ryanjosephkamp.github.io/splashery/vendor/playcanvas/playcanvas.min.mjs",
+          "status": 200,
+          "headers": {
+            "content-type": "text/javascript; charset=utf-8",
+            "content-encoding": "gzip",
+            "vary": "Accept-Encoding",
+            "content-length": "640711"
+          },
+          "wireBytes": 640711,
+          "decodedBytes": 2465494,
+          "decodedSha256": "cfa18c70e2e0fd5362399f37897c531b7796a7f41a652144ab4ceda991b5d46c",
+          "localSourceMatches": true,
+          "customGzipBytes": 634277,
+          "customGzipWireDifference": 6434
+        },
+        {
+          "source": "src/toy-help.js",
+          "url": "https://ryanjosephkamp.github.io/splashery/src/toy-help.js",
+          "status": 200,
+          "headers": {
+            "content-type": "application/javascript; charset=utf-8",
+            "content-encoding": "gzip",
+            "vary": "Accept-Encoding",
+            "content-length": "118347"
+          },
+          "wireBytes": 118347,
+          "decodedBytes": 344750,
+          "decodedSha256": "0e001f275863316e35e529db7c4d5f7ad02f86d4ca6ce4f7daa9739157169c45",
+          "localSourceMatches": true,
+          "customGzipBytes": 115853,
+          "customGzipWireDifference": 2494
+        },
+        {
+          "source": "manual/tinkerers-manual-85d32b96193ea275.pdf",
+          "url": "https://ryanjosephkamp.github.io/splashery/manual/tinkerers-manual-85d32b96193ea275.pdf",
+          "status": 200,
+          "headers": {
+            "content-type": "application/pdf",
+            "vary": "Accept-Encoding",
+            "content-length": "7792711"
+          },
+          "wireBytes": 7792711,
+          "decodedBytes": 7792711,
+          "decodedSha256": "85d32b96193ea27502854ded8910470b1f50f571aae61adf1847972b5bfc54f7",
+          "localSourceMatches": true,
+          "customGzipBytes": 5858411,
+          "customGzipWireDifference": 1934300
+        }
+      ],
+      "decision": "Retain native PlayCanvas URL, preload, and ES module entry. Its public response already uses gzip and matches the vendored source. Remove the full-body custom decode/Blob/import-map bootstrap; the localhost plain-server engine saving does not represent a comparable production-wire saving.",
+      "candidateLimitation": "Custom gzip sizes are local proposed file sizes compared with measured public original response bodies. Candidate gzip files have not been deployed; their public HTTP transfer size has not been measured."
+    },
+    "finalStrawberry": {
+      "source": "d52fa21f0120e532f1e1a14beae48ea97df90db7",
+      "result": {
+        "title": "rigs pick splats by colour, run effects and show add-ons; shelf shapes have rigs",
+        "status": "passed",
+        "durationMs": 63762,
+        "errors": []
+      },
+      "interpretation": "Current original protected full-suite outcome. Earlier native-path passes and failures remain in this receipt; a current pass does not prove that the startup restoration fixes the effect or identify a branch-specific animation defect."
+    },
+    "originalTestObservation": {
+      "method": "Original protected smoke test body and assertions, with an external Playwright fixture observer; production dt, controls, and animation are unchanged. State is recorded after each original PNG comparison, so it may lead the image by intervening frames. Raw per-frame records remain outside Git.",
+      "candidateSource": "9302132734fe38a8b7a7345ca2fe71c26fbbb0ab",
+      "mainSource": "226644fb2b4e70dbd02136caec8e0f57c9f7f662",
+      "renderer": "llvmpipe",
+      "display": ":98",
+      "mesaThreads": 3,
+      "phases": {
+        "candidate": {
+          "status": "failed",
+          "engineRequests": ["http://127.0.0.1:4173/vendor/playcanvas/playcanvas.min.mjs"],
+          "rows": [
+            {
+              "differentPixels": 89643,
+              "wallMs": 40239.5,
+              "simulationSeconds": 2.249900000000006,
+              "tapSeconds": 1.3166000000000024,
+              "sinceTapSeconds": 0.9333000000000036,
+              "pop": 0.5757727272727263,
+              "pausedAt": null,
+              "profile": "low",
+              "canvas": {
+                "width": 912,
+                "height": 800
+              },
+              "frames": 40,
+              "frameMsMedian": 705.9000000003725,
+              "frameMsMax": 7077,
+              "postTapUpdateGapMedianMs": 928.0999999996275,
+              "postTapUpdateGapMaxMs": 4607.699999999255
+            },
+            {
+              "differentPixels": 82058,
+              "wallMs": 55187.10000000149,
+              "simulationSeconds": 3.183300000000001,
+              "tapSeconds": 1.3166000000000024,
+              "sinceTapSeconds": 1.8666999999999985,
+              "pop": 0.15150000000000163,
+              "pausedAt": null,
+              "profile": "low",
+              "canvas": {
+                "width": 912,
+                "height": 800
+              },
+              "frames": 51,
+              "frameMsMedian": 790.3000000007451,
+              "frameMsMax": 7077,
+              "postTapUpdateGapMedianMs": 1099.0499999998137,
+              "postTapUpdateGapMaxMs": 4607.699999999255
+            }
+          ]
+        },
+        "main": {
+          "status": "failed",
+          "engineRequests": ["http://127.0.0.1:4174/vendor/playcanvas/playcanvas.min.mjs"],
+          "rows": [
+            {
+              "differentPixels": 82252,
+              "wallMs": 59246.09999999963,
+              "simulationSeconds": 2.2499000000000025,
+              "tapSeconds": 1.0833000000000028,
+              "sinceTapSeconds": 1.1665999999999996,
+              "pop": 0.4697272727272738,
+              "pausedAt": null,
+              "profile": "low",
+              "canvas": {
+                "width": 912,
+                "height": 800
+              },
+              "frames": 80,
+              "frameMsMedian": 31.09999999962747,
+              "frameMsMax": 6143.699999999255,
+              "postTapUpdateGapMedianMs": 19.09999999962747,
+              "postTapUpdateGapMaxMs": 3175.300000000745
+            },
+            {
+              "differentPixels": 81270,
+              "wallMs": 72150.40000000037,
+              "simulationSeconds": 3.0164999999999944,
+              "tapSeconds": 1.0833000000000028,
+              "sinceTapSeconds": 1.9331999999999916,
+              "pop": 0.12127272727273221,
+              "pausedAt": null,
+              "profile": "low",
+              "canvas": {
+                "width": 912,
+                "height": 800
+              },
+              "frames": 90,
+              "frameMsMedian": 398.3500000005588,
+              "frameMsMax": 6143.699999999255,
+              "postTapUpdateGapMedianMs": 21.59999999962747,
+              "postTapUpdateGapMaxMs": 4114.199999999255
+            }
+          ]
+        }
+      },
+      "conclusion": "Both observed executions fail before the unchanged 2.2-second pulse finishes. Candidate elapsed 1.8667/pop 0.1515; main elapsed 1.9332/pop 0.1213. Both use the original HTTP engine. This establishes an unfinished effect at the threshold and software-renderer frame-cadence limitation; it does not establish that the homepage fallback fixes the original failure or that compression caused it."
+    },
+    "frozenMainFlags": {
+      "raw": "/workspace/load-time-runs/round3-validation/main-flags.json",
+      "stats": {
+        "startTime": "2026-10-14T19:00:42.774Z",
+        "duration": 126902.64,
+        "expected": 1,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "files": [
+        {
+          "file": "smoke.spec.mjs",
+          "passed": 1,
+          "failed": 0,
+          "skipped": 0,
+          "durationMs": 110359
+        }
+      ],
+      "failures": []
+    },
+    "strawberry": {
+      "candidateComparisonSource": "183eb1cb8bcbf4b7a9f1d1d26beb6c5e21e86c48",
+      "mainComparisonSource": "6c3764ff9a1aa3fbba202af12d6764ac23ed2d6e",
+      "candidateOriginal": {
+        "raw": "/workspace/load-time-runs/round3-validation/load-time-round3-candidate-strawberry.json",
+        "stats": {
+          "startTime": "2026-10-14T15:58:28.631Z",
+          "duration": 235150.83000000002,
+          "expected": 0,
+          "skipped": 0,
+          "unexpected": 1,
+          "flaky": 0
+        },
+        "files": [
+          {
+            "file": "smoke.spec.mjs",
+            "passed": 0,
+            "failed": 1,
+            "skipped": 0,
+            "durationMs": 191329
+          }
+        ],
+        "failures": [
+          {
+            "file": "smoke.spec.mjs",
+            "title": "rigs pick splats by colour, run effects and show add-ons; shelf shapes have rigs",
+            "status": "failed",
+            "durationMs": 191329,
+            "errors": [
+              "Error: Timeout 15000ms exceeded while waiting on the predicate\n\n  752 |     const settled = async () =>\n  753 |       countDifferentPixels(page, rest, await canvas.screenshot({ type: \"png\" }));\n> 754 |     await expect\n      |     ^\n  755 |       .poll(settled, { timeout: 15_000, intervals: [3000, 1000] })\n  756 |       .toBeLessThan(moved / 4);\n  757 |     // Lantern: a toggle lights a flame add-on; a second tap puts it out.\n    at /workspace/splashery/tests/smoke.spec.mjs:754:5"
+            ]
+          }
+        ]
+      },
+      "mainOriginal": {
+        "raw": "/workspace/load-time-runs/round3-validation/load-time-round3-main-strawberry.json",
+        "stats": {
+          "startTime": "2026-10-14T16:02:29.582Z",
+          "duration": 175549.06399999998,
+          "expected": 0,
+          "skipped": 0,
+          "unexpected": 1,
+          "flaky": 0
+        },
+        "files": [
+          {
+            "file": "smoke.spec.mjs",
+            "passed": 0,
+            "failed": 1,
+            "skipped": 0,
+            "durationMs": 159664
+          }
+        ],
+        "failures": [
+          {
+            "file": "smoke.spec.mjs",
+            "title": "rigs pick splats by colour, run effects and show add-ons; shelf shapes have rigs",
+            "status": "failed",
+            "durationMs": 159664,
+            "errors": [
+              "Error: Timeout 15000ms exceeded while waiting on the predicate\n\n  752 |     const settled = async () =>\n  753 |       countDifferentPixels(page, rest, await canvas.screenshot({ type: \"png\" }));\n> 754 |     await expect\n      |     ^\n  755 |       .poll(settled, { timeout: 15_000, intervals: [3000, 1000] })\n  756 |       .toBeLessThan(moved / 4);\n  757 |     // Lantern: a toggle lights a flame add-on; a second tap puts it out.\n    at /workspace/splashery/tests/smoke.spec.mjs:754:5"
+            ]
+          }
+        ]
+      },
+      "originalMethod": "Unmodified protected smoke test, headless SwiftShader, Chromium, one page at a time. Both comparison sources time out at the 15-second return-to-rest predicate. Final-candidate Mesa results are in required, not this earlier comparison.",
+      "probeMethod": "DISPLAY=:94 LP_NUM_THREADS=2 SPLASHERY_GL=llvmpipe. Wraps player.update only to record dt; leaves production time, controls, camera, and geometry unchanged. Rest/pop/settled screenshots compare RGB differences above 24, as the original smoke predicate does. Each source uses its normal scene seed; these are within-source return-to-rest comparisons, not cross-source pixel identity proof.",
+      "candidateProbe": {
+        "errors": [],
+        "rows": [
+          {
+            "pose": "rest",
+            "wallMs": 63150.5,
+            "simulationSeconds": 0.8667000000000042,
+            "frames": 48,
+            "recentDtMax": 0.1,
+            "pop": 0,
+            "difference": null,
+            "canvas": {
+              "width": 912,
+              "height": 800
+            }
+          },
+          {
+            "pose": "popped",
+            "wallMs": 93694.1000000001,
+            "simulationSeconds": 1.7667000000000193,
+            "frames": 60,
+            "recentDtMax": 0.1,
+            "pop": 0.6969999999999976,
+            "difference": {
+              "changed": 69414,
+              "pixels": 729600
+            },
+            "canvas": {
+              "width": 912,
+              "height": 800
+            }
+          },
+          {
+            "pose": "settled-0",
+            "wallMs": 134718.30000000005,
+            "simulationSeconds": 2.833400000000017,
+            "frames": 71,
+            "recentDtMax": 0.1,
+            "pop": 0.21213636363636268,
+            "difference": {
+              "changed": 82068,
+              "pixels": 729600
+            },
+            "canvas": {
+              "width": 912,
+              "height": 800
+            }
+          },
+          {
+            "pose": "settled-1",
+            "wallMs": 272846.20000000007,
+            "simulationSeconds": 4.016700000000007,
+            "frames": 96,
+            "recentDtMax": 0.1,
+            "pop": 0,
+            "difference": {
+              "changed": 81,
+              "pixels": 729600
+            },
+            "canvas": {
+              "width": 912,
+              "height": 800
+            }
+          }
+        ]
+      },
+      "mainProbe": {
+        "errors": [],
+        "rows": [
+          {
+            "pose": "rest",
+            "wallMs": 104432.20000000007,
+            "simulationSeconds": 1.0500999999999985,
+            "frames": 83,
+            "recentDtMax": 0.1,
+            "pop": 0,
+            "difference": null,
+            "canvas": {
+              "width": 912,
+              "height": 800
+            }
+          },
+          {
+            "pose": "popped",
+            "wallMs": 168480.29999999993,
+            "simulationSeconds": 2.333300000000011,
+            "frames": 97,
+            "recentDtMax": 0.1,
+            "pop": 0.5076363636363588,
+            "difference": {
+              "changed": 91389,
+              "pixels": 729600
+            },
+            "canvas": {
+              "width": 912,
+              "height": 800
+            }
+          },
+          {
+            "pose": "settled-0",
+            "wallMs": 229249.20000000007,
+            "simulationSeconds": 3.0999000000000176,
+            "frames": 105,
+            "recentDtMax": 0.1,
+            "pop": 0.1591818181818106,
+            "difference": {
+              "changed": 73933,
+              "pixels": 729600
+            },
+            "canvas": {
+              "width": 912,
+              "height": 800
+            }
+          },
+          {
+            "pose": "settled-1",
+            "wallMs": 240205.29999999993,
+            "simulationSeconds": 4.1165000000000225,
+            "frames": 138,
+            "recentDtMax": 0.1,
+            "pop": 0,
+            "difference": {
+              "changed": 5,
+              "pixels": 729600
+            },
+            "canvas": {
+              "width": 912,
+              "height": 800
+            }
+          }
+        ]
+      },
+      "cause": "The unchanged native update caps dt at 0.1 seconds; pulse decay advances in simulation time, while the smoke predicate has a 15-second wall-time budget. Both sources eventually return to rest in the probe. However, the later controlled Mesa comparison passes on main and on the raw candidate, while the compressed candidate fails. No exact engine-byte, module-export, rig, or relative-worker difference was found. The homepage retains its original HTTP engine module, but a later original-test rerun still fails. An external fixture observer then records both latest main and candidate failing before the pulse completes. The homepage fallback is not a demonstrated fix; the subsequent native-entry commit restores the original HTTP engine globally. This observation diagnoses unfinished simulation time and does not establish a production animation defect or a demonstrated timing fix."
+    },
+    "ruleCheck": "E1: earlier unpublished email metadata history rewrite. All round3 commits are additive.",
+    "finalChecks": {
+      "at": "2026-10-14T22:29:22.297Z",
+      "source": "d52fa21f0120e532f1e1a14beae48ea97df90db7",
+      "checks": {
+        "prettier": {
+          "command": "npx prettier --check .",
+          "exit": 0,
+          "signal": null,
+          "log": "/workspace/load-time-runs/round3-current-validation/final-prettier.log"
+        },
+        "americanEnglish": {
+          "command": "node tools/us-english.mjs --diff",
+          "exit": 0,
+          "signal": null,
+          "log": "/workspace/load-time-runs/round3-current-validation/final-americanEnglish.log"
+        },
+        "whitespace": {
+          "command": "git diff --check",
+          "exit": 0,
+          "signal": null,
+          "log": "/workspace/load-time-runs/round3-current-validation/final-whitespace.log"
+        },
+        "auditBudget": {
+          "command": "npx playwright test tests/load-time-audit-budget.spec.mjs --workers=1 --trace=off --reporter=line,json",
+          "exit": 0,
+          "signal": null,
+          "log": "/workspace/load-time-runs/round3-current-validation/final-auditBudget.log",
+          "stats": {
+            "startTime": "2026-10-14T22:32:43.680Z",
+            "duration": 2041.8079999999995,
+            "expected": 1,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          }
+        }
+      },
+      "protected": {
+        "at": "2026-10-14T22:10:13.013155+00:00",
+        "method": "All pages from gh api pulls/N/files?per_page=100 --paginate; filenames only.",
+        "prs": {
+          "560": 37,
+          "562": 124,
+          "566": 86,
+          "581": 25,
+          "582": 123
+        },
+        "unionCount": 388,
+        "candidateSource": "d52fa21f0120e532f1e1a14beae48ea97df90db7",
+        "committedIntersection": [],
+        "worktreeIntersection": [],
+        "generatedShotsRestored": true
+      }
+    },
+    "summary": "Current validation on d52fa21f0120e532f1e1a14beae48ea97df90db7 (runtime byte-identical to measured 2b5eaae37a07961de240a4b426a90c6a91060787): 183 passed, 1 failed, 0 skipped. Smoke (three sequential shards), kit, Real Objects, catalog, manual, scan-prefix, and smoothing browser checks repeat after the latest merge and global native-entry restoration. Taps, unit, and the pure Node load-time checks also repeat on this source; the final 17-case startup/compression run precedes the documentation-only merge and has byte-identical runtime and test files. The latest main 41b21e74 kit run has 9 passes and 1 failure; no deadline overrun was recorded in that run. The earlier main 6c kit run had 9 passes and one unchanged 600,000 ms catalog timeout; the protected QR recipe error reproduces on both sources. The native entry removes the custom engine path globally; the current original strawberry case passed, and no causal timing fix is claimed. Both latest main and the candidate failed the observed original test before the effect completed; prior original-test passes and failures remain source-pinned. Exact current failures are retained in the verification receipt."
   }
 }

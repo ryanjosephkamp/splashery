@@ -1,0 +1,5302 @@
+{
+  "before": [
+    {
+      "id": "your-book",
+      "label": "Your book",
+      "device": "phone",
+      "sample": 0,
+      "status": "ok",
+      "bytes": 15014149,
+      "requests": 101,
+      "firstFrameMs": 6652.800000000745,
+      "errors": [],
+      "profile": "low",
+      "splats": 55572,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "video-3d",
+      "label": "Video to 3D",
+      "device": "phone",
+      "sample": 0,
+      "status": "ok",
+      "bytes": 6522446,
+      "requests": 111,
+      "firstFrameMs": 4777.89999999851,
+      "errors": [],
+      "profile": "low",
+      "splats": 59682,
+      "canvas": {
+        "width": 1170,
+        "height": 1935
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "splat-toolkit",
+      "label": "Splat toolkit",
+      "device": "phone",
+      "sample": 0,
+      "status": "ok",
+      "bytes": 11561533,
+      "requests": 110,
+      "firstFrameMs": 14872.099999997765,
+      "errors": [],
+      "profile": "low",
+      "splats": 113905,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "living-city",
+      "label": "Living city",
+      "device": "phone",
+      "sample": 0,
+      "status": "ok",
+      "bytes": 10579375,
+      "requests": 99,
+      "firstFrameMs": 5014.199999999255,
+      "errors": [],
+      "profile": "low",
+      "splats": 304087,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "powers-of-ten",
+      "label": "Powers of ten",
+      "device": "phone",
+      "sample": 0,
+      "status": "ok",
+      "bytes": 9391233,
+      "requests": 103,
+      "firstFrameMs": 3303.2999999970198,
+      "errors": [],
+      "profile": "low",
+      "splats": 5404,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "point-clouds",
+      "label": "Point clouds",
+      "device": "phone",
+      "sample": 0,
+      "status": "ok",
+      "bytes": 9151914,
+      "requests": 110,
+      "firstFrameMs": 8193.300000000745,
+      "errors": [],
+      "profile": "low",
+      "splats": 111663,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "celestial-globe",
+      "label": "Celestial globe",
+      "device": "phone",
+      "sample": 0,
+      "status": "ok",
+      "bytes": 9203631,
+      "requests": 96,
+      "firstFrameMs": 5237,
+      "errors": [],
+      "profile": "low",
+      "splats": 77400,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "stannern-meteorites",
+      "label": "Stannern meteorite",
+      "device": "phone",
+      "sample": 0,
+      "status": "ok",
+      "bytes": 9169749,
+      "requests": 96,
+      "firstFrameMs": 5694.89999999851,
+      "errors": [],
+      "profile": "low",
+      "splats": 77400,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "crochet-earth",
+      "label": "Crochet Earth",
+      "device": "phone",
+      "sample": 0,
+      "status": "ok",
+      "bytes": 9163097,
+      "requests": 96,
+      "firstFrameMs": 4130.199999999255,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "seeded-loaf",
+      "label": "Seeded bread loaf",
+      "device": "phone",
+      "sample": 0,
+      "status": "ok",
+      "bytes": 9124836,
+      "requests": 91,
+      "firstFrameMs": 5985.5,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "dog-plush",
+      "label": "Dog plush",
+      "device": "phone",
+      "sample": 0,
+      "status": "ok",
+      "bytes": 9121395,
+      "requests": 96,
+      "firstFrameMs": 6119,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "alum-crystal",
+      "label": "Alum crystal",
+      "device": "phone",
+      "sample": 0,
+      "status": "ok",
+      "bytes": 9097791,
+      "requests": 96,
+      "firstFrameMs": 8942,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "mushroom-photo",
+      "label": "Mushroom (photo)",
+      "device": "phone",
+      "sample": 0,
+      "status": "ok",
+      "bytes": 9096624,
+      "requests": 96,
+      "firstFrameMs": 4090.599999997765,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "moving-photo-3d",
+      "label": "Moving photo to 3D",
+      "device": "phone",
+      "sample": 0,
+      "status": "ok",
+      "bytes": 9033471,
+      "requests": 128,
+      "firstFrameMs": 19243.60000000149,
+      "errors": [],
+      "profile": "low",
+      "splats": 98893,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "turtle-souvenir",
+      "label": "Souvenir turtle",
+      "device": "phone",
+      "sample": 0,
+      "status": "ok",
+      "bytes": 9071454,
+      "requests": 96,
+      "firstFrameMs": 3621.5,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "armillary-sphere",
+      "label": "Armillary sphere",
+      "device": "phone",
+      "sample": 0,
+      "status": "ok",
+      "bytes": 9059075,
+      "requests": 96,
+      "firstFrameMs": 4103.699999999255,
+      "errors": [],
+      "profile": "low",
+      "splats": 77400,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "murex-shell",
+      "label": "Murex shell",
+      "device": "phone",
+      "sample": 0,
+      "status": "ok",
+      "bytes": 9050643,
+      "requests": 96,
+      "firstFrameMs": 4009.60000000149,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "maple-tree",
+      "label": "Golden maple",
+      "device": "phone",
+      "sample": 0,
+      "status": "ok",
+      "bytes": 9034584,
+      "requests": 96,
+      "firstFrameMs": 13216.099999997765,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "cave-lioness",
+      "label": "Cave lioness",
+      "device": "phone",
+      "sample": 0,
+      "status": "ok",
+      "bytes": 9026924,
+      "requests": 96,
+      "firstFrameMs": 4769.79999999702,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "toy-trex",
+      "label": "Toy T. rex",
+      "device": "phone",
+      "sample": 0,
+      "status": "ok",
+      "bytes": 9019050,
+      "requests": 96,
+      "firstFrameMs": 5098.5,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "your-book",
+      "label": "Your book",
+      "device": "phone",
+      "sample": 1,
+      "status": "ok",
+      "bytes": 15308119,
+      "requests": 125,
+      "firstFrameMs": 5836,
+      "errors": [],
+      "profile": "low",
+      "splats": 55572,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "video-3d",
+      "label": "Video to 3D",
+      "device": "phone",
+      "sample": 1,
+      "status": "ok",
+      "bytes": 6834108,
+      "requests": 135,
+      "firstFrameMs": 6126,
+      "errors": [],
+      "profile": "low",
+      "splats": 59682,
+      "canvas": {
+        "width": 1170,
+        "height": 1935
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "splat-toolkit",
+      "label": "Splat toolkit",
+      "device": "phone",
+      "sample": 1,
+      "status": "ok",
+      "bytes": 11561533,
+      "requests": 110,
+      "firstFrameMs": 15047.800000000745,
+      "errors": [],
+      "profile": "low",
+      "splats": 113905,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "living-city",
+      "label": "Living city",
+      "device": "phone",
+      "sample": 1,
+      "status": "ok",
+      "bytes": 10579375,
+      "requests": 99,
+      "firstFrameMs": 22271.199999999255,
+      "errors": [],
+      "profile": "low",
+      "splats": 304087,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "powers-of-ten",
+      "label": "Powers of ten",
+      "device": "phone",
+      "sample": 1,
+      "status": "ok",
+      "bytes": 5508068,
+      "requests": 103,
+      "firstFrameMs": 5043.800000000745,
+      "errors": [],
+      "profile": "low",
+      "splats": 5404,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "point-clouds",
+      "label": "Point clouds",
+      "device": "phone",
+      "sample": 1,
+      "status": "ok",
+      "bytes": 9151914,
+      "requests": 110,
+      "firstFrameMs": 12878.10000000149,
+      "errors": [],
+      "profile": "low",
+      "splats": 111663,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "celestial-globe",
+      "label": "Celestial globe",
+      "device": "phone",
+      "sample": 1,
+      "status": "ok",
+      "bytes": 9203631,
+      "requests": 96,
+      "firstFrameMs": 4318.60000000149,
+      "errors": [],
+      "profile": "low",
+      "splats": 77400,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "stannern-meteorites",
+      "label": "Stannern meteorite",
+      "device": "phone",
+      "sample": 1,
+      "status": "ok",
+      "bytes": 9169749,
+      "requests": 96,
+      "firstFrameMs": 3923.2000000029802,
+      "errors": [],
+      "profile": "low",
+      "splats": 77400,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "crochet-earth",
+      "label": "Crochet Earth",
+      "device": "phone",
+      "sample": 1,
+      "status": "ok",
+      "bytes": 9163097,
+      "requests": 96,
+      "firstFrameMs": 6166.300000000745,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "seeded-loaf",
+      "label": "Seeded bread loaf",
+      "device": "phone",
+      "sample": 1,
+      "status": "ok",
+      "bytes": 9267840,
+      "requests": 99,
+      "firstFrameMs": 3567.89999999851,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "dog-plush",
+      "label": "Dog plush",
+      "device": "phone",
+      "sample": 1,
+      "status": "ok",
+      "bytes": 9121395,
+      "requests": 96,
+      "firstFrameMs": 3878.39999999851,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "alum-crystal",
+      "label": "Alum crystal",
+      "device": "phone",
+      "sample": 1,
+      "status": "ok",
+      "bytes": 9097791,
+      "requests": 96,
+      "firstFrameMs": 5178,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "mushroom-photo",
+      "label": "Mushroom (photo)",
+      "device": "phone",
+      "sample": 1,
+      "status": "ok",
+      "bytes": 9299138,
+      "requests": 118,
+      "firstFrameMs": 4021.800000000745,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "moving-photo-3d",
+      "label": "Moving photo to 3D",
+      "device": "phone",
+      "sample": 1,
+      "status": "ok",
+      "bytes": 9033471,
+      "requests": 128,
+      "firstFrameMs": 11544.099999997765,
+      "errors": [],
+      "profile": "low",
+      "splats": 98893,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "turtle-souvenir",
+      "label": "Souvenir turtle",
+      "device": "phone",
+      "sample": 1,
+      "status": "ok",
+      "bytes": 9071454,
+      "requests": 96,
+      "firstFrameMs": 3533.699999999255,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "armillary-sphere",
+      "label": "Armillary sphere",
+      "device": "phone",
+      "sample": 1,
+      "status": "ok",
+      "bytes": 9059075,
+      "requests": 96,
+      "firstFrameMs": 3271.7999999970198,
+      "errors": [],
+      "profile": "low",
+      "splats": 77400,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "murex-shell",
+      "label": "Murex shell",
+      "device": "phone",
+      "sample": 1,
+      "status": "ok",
+      "bytes": 9050643,
+      "requests": 96,
+      "firstFrameMs": 3739.60000000149,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "maple-tree",
+      "label": "Golden maple",
+      "device": "phone",
+      "sample": 1,
+      "status": "ok",
+      "bytes": 9034584,
+      "requests": 96,
+      "firstFrameMs": 3910.099999997765,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "cave-lioness",
+      "label": "Cave lioness",
+      "device": "phone",
+      "sample": 1,
+      "status": "ok",
+      "bytes": 9026924,
+      "requests": 96,
+      "firstFrameMs": 5525.89999999851,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "toy-trex",
+      "label": "Toy T. rex",
+      "device": "phone",
+      "sample": 1,
+      "status": "ok",
+      "bytes": 9019050,
+      "requests": 96,
+      "firstFrameMs": 4322.199999999255,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "your-book",
+      "label": "Your book",
+      "device": "phone",
+      "sample": 2,
+      "status": "ok",
+      "bytes": 15014149,
+      "requests": 101,
+      "firstFrameMs": 6596.89999999851,
+      "errors": [],
+      "profile": "low",
+      "splats": 55572,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "video-3d",
+      "label": "Video to 3D",
+      "device": "phone",
+      "sample": 2,
+      "status": "ok",
+      "bytes": 6834108,
+      "requests": 135,
+      "firstFrameMs": 5632.800000000745,
+      "errors": [],
+      "profile": "low",
+      "splats": 59682,
+      "canvas": {
+        "width": 1170,
+        "height": 1935
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "splat-toolkit",
+      "label": "Splat toolkit",
+      "device": "phone",
+      "sample": 2,
+      "status": "ok",
+      "bytes": 11561533,
+      "requests": 110,
+      "firstFrameMs": 45634.39999999851,
+      "errors": [],
+      "profile": "low",
+      "splats": 113905,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "living-city",
+      "label": "Living city",
+      "device": "phone",
+      "sample": 2,
+      "status": "ok",
+      "bytes": 10579375,
+      "requests": 99,
+      "firstFrameMs": 22859.800000000745,
+      "errors": [],
+      "profile": "low",
+      "splats": 304087,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "powers-of-ten",
+      "label": "Powers of ten",
+      "device": "phone",
+      "sample": 2,
+      "status": "ok",
+      "bytes": 5508068,
+      "requests": 102,
+      "firstFrameMs": 10921.60000000149,
+      "errors": [],
+      "profile": "low",
+      "splats": 5404,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "point-clouds",
+      "label": "Point clouds",
+      "device": "phone",
+      "sample": 2,
+      "status": "ok",
+      "bytes": 9151914,
+      "requests": 110,
+      "firstFrameMs": 17205.5,
+      "errors": [],
+      "profile": "low",
+      "splats": 111663,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "celestial-globe",
+      "label": "Celestial globe",
+      "device": "phone",
+      "sample": 2,
+      "status": "ok",
+      "bytes": 9479029,
+      "requests": 120,
+      "firstFrameMs": 12500.300000000745,
+      "errors": [],
+      "profile": "low",
+      "splats": 77400,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "stannern-meteorites",
+      "label": "Stannern meteorite",
+      "device": "phone",
+      "sample": 2,
+      "status": "ok",
+      "bytes": 9169749,
+      "requests": 96,
+      "firstFrameMs": 4321.10000000149,
+      "errors": [],
+      "profile": "low",
+      "splats": 77400,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "crochet-earth",
+      "label": "Crochet Earth",
+      "device": "phone",
+      "sample": 2,
+      "status": "ok",
+      "bytes": 9163097,
+      "requests": 96,
+      "firstFrameMs": 3847,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "seeded-loaf",
+      "label": "Seeded bread loaf",
+      "device": "phone",
+      "sample": 2,
+      "status": "ok",
+      "bytes": 9267840,
+      "requests": 99,
+      "firstFrameMs": 3602.099999997765,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "dog-plush",
+      "label": "Dog plush",
+      "device": "phone",
+      "sample": 2,
+      "status": "ok",
+      "bytes": 9121395,
+      "requests": 96,
+      "firstFrameMs": 3729,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "alum-crystal",
+      "label": "Alum crystal",
+      "device": "phone",
+      "sample": 2,
+      "status": "ok",
+      "bytes": 9097791,
+      "requests": 96,
+      "firstFrameMs": 8254.099999997765,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "mushroom-photo",
+      "label": "Mushroom (photo)",
+      "device": "phone",
+      "sample": 2,
+      "status": "ok",
+      "bytes": 9096624,
+      "requests": 96,
+      "firstFrameMs": 4692.800000000745,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "moving-photo-3d",
+      "label": "Moving photo to 3D",
+      "device": "phone",
+      "sample": 2,
+      "status": "ok",
+      "bytes": 9033471,
+      "requests": 128,
+      "firstFrameMs": 13242.5,
+      "errors": [],
+      "profile": "low",
+      "splats": 98893,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "turtle-souvenir",
+      "label": "Souvenir turtle",
+      "device": "phone",
+      "sample": 2,
+      "status": "ok",
+      "bytes": 9071454,
+      "requests": 96,
+      "firstFrameMs": 3530.7999999970198,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "armillary-sphere",
+      "label": "Armillary sphere",
+      "device": "phone",
+      "sample": 2,
+      "status": "ok",
+      "bytes": 9059075,
+      "requests": 96,
+      "firstFrameMs": 5409.89999999851,
+      "errors": [],
+      "profile": "low",
+      "splats": 77400,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "murex-shell",
+      "label": "Murex shell",
+      "device": "phone",
+      "sample": 2,
+      "status": "ok",
+      "bytes": 9050643,
+      "requests": 96,
+      "firstFrameMs": 3794.699999999255,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "maple-tree",
+      "label": "Golden maple",
+      "device": "phone",
+      "sample": 2,
+      "status": "ok",
+      "bytes": 9034584,
+      "requests": 96,
+      "firstFrameMs": 3920.5,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "cave-lioness",
+      "label": "Cave lioness",
+      "device": "phone",
+      "sample": 2,
+      "status": "ok",
+      "bytes": 9026924,
+      "requests": 96,
+      "firstFrameMs": 3079.699999999255,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "toy-trex",
+      "label": "Toy T. rex",
+      "device": "phone",
+      "sample": 2,
+      "status": "ok",
+      "bytes": 9019050,
+      "requests": 96,
+      "firstFrameMs": 9118.89999999851,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "your-book",
+      "label": "Your book",
+      "device": "phone",
+      "sample": 3,
+      "status": "ok",
+      "bytes": 15014149,
+      "requests": 101,
+      "firstFrameMs": 3406.7000000029802,
+      "errors": [],
+      "profile": "low",
+      "splats": 55572,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "video-3d",
+      "label": "Video to 3D",
+      "device": "phone",
+      "sample": 3,
+      "status": "ok",
+      "bytes": 6522446,
+      "requests": 111,
+      "firstFrameMs": 3862.800000000745,
+      "errors": [],
+      "profile": "low",
+      "splats": 59682,
+      "canvas": {
+        "width": 1170,
+        "height": 1935
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "splat-toolkit",
+      "label": "Splat toolkit",
+      "device": "phone",
+      "sample": 3,
+      "status": "ok",
+      "bytes": 11561533,
+      "requests": 110,
+      "firstFrameMs": 7704.900000002235,
+      "errors": [],
+      "profile": "low",
+      "splats": 113905,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "living-city",
+      "label": "Living city",
+      "device": "phone",
+      "sample": 3,
+      "status": "ok",
+      "bytes": 10579375,
+      "requests": 99,
+      "firstFrameMs": 3592.800000000745,
+      "errors": [],
+      "profile": "low",
+      "splats": 304087,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "powers-of-ten",
+      "label": "Powers of ten",
+      "device": "phone",
+      "sample": 3,
+      "status": "ok",
+      "bytes": 9391233,
+      "requests": 103,
+      "firstFrameMs": 19373.5,
+      "errors": [],
+      "profile": "low",
+      "splats": 5404,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "point-clouds",
+      "label": "Point clouds",
+      "device": "phone",
+      "sample": 3,
+      "status": "ok",
+      "bytes": 9151914,
+      "requests": 110,
+      "firstFrameMs": 4684,
+      "errors": [],
+      "profile": "low",
+      "splats": 111663,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "celestial-globe",
+      "label": "Celestial globe",
+      "device": "phone",
+      "sample": 3,
+      "status": "ok",
+      "bytes": 9203631,
+      "requests": 96,
+      "firstFrameMs": 2722.60000000149,
+      "errors": [],
+      "profile": "low",
+      "splats": 77400,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "stannern-meteorites",
+      "label": "Stannern meteorite",
+      "device": "phone",
+      "sample": 3,
+      "status": "ok",
+      "bytes": 9169749,
+      "requests": 96,
+      "firstFrameMs": 4779.900000002235,
+      "errors": [],
+      "profile": "low",
+      "splats": 77400,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "crochet-earth",
+      "label": "Crochet Earth",
+      "device": "phone",
+      "sample": 3,
+      "status": "ok",
+      "bytes": 9163097,
+      "requests": 96,
+      "firstFrameMs": 3380.5,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "seeded-loaf",
+      "label": "Seeded bread loaf",
+      "device": "phone",
+      "sample": 3,
+      "status": "ok",
+      "bytes": 9124836,
+      "requests": 91,
+      "firstFrameMs": 2818.699999999255,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "dog-plush",
+      "label": "Dog plush",
+      "device": "phone",
+      "sample": 3,
+      "status": "ok",
+      "bytes": 9121395,
+      "requests": 96,
+      "firstFrameMs": 3874,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "alum-crystal",
+      "label": "Alum crystal",
+      "device": "phone",
+      "sample": 3,
+      "status": "ok",
+      "bytes": 9097791,
+      "requests": 96,
+      "firstFrameMs": 3087,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "mushroom-photo",
+      "label": "Mushroom (photo)",
+      "device": "phone",
+      "sample": 3,
+      "status": "ok",
+      "bytes": 9096624,
+      "requests": 96,
+      "firstFrameMs": 3051.60000000149,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "moving-photo-3d",
+      "label": "Moving photo to 3D",
+      "device": "phone",
+      "sample": 3,
+      "status": "ok",
+      "bytes": 9033471,
+      "requests": 128,
+      "firstFrameMs": 9843.89999999851,
+      "errors": [],
+      "profile": "low",
+      "splats": 98893,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "turtle-souvenir",
+      "label": "Souvenir turtle",
+      "device": "phone",
+      "sample": 3,
+      "status": "ok",
+      "bytes": 9071454,
+      "requests": 96,
+      "firstFrameMs": 2858.199999999255,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "armillary-sphere",
+      "label": "Armillary sphere",
+      "device": "phone",
+      "sample": 3,
+      "status": "ok",
+      "bytes": 9059075,
+      "requests": 96,
+      "firstFrameMs": 3987.39999999851,
+      "errors": [],
+      "profile": "low",
+      "splats": 77400,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "murex-shell",
+      "label": "Murex shell",
+      "device": "phone",
+      "sample": 3,
+      "status": "ok",
+      "bytes": 9050643,
+      "requests": 96,
+      "firstFrameMs": 8421.199999999255,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "maple-tree",
+      "label": "Golden maple",
+      "device": "phone",
+      "sample": 3,
+      "status": "ok",
+      "bytes": 9034584,
+      "requests": 96,
+      "firstFrameMs": 3896.10000000149,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "cave-lioness",
+      "label": "Cave lioness",
+      "device": "phone",
+      "sample": 3,
+      "status": "ok",
+      "bytes": 9026924,
+      "requests": 96,
+      "firstFrameMs": 3839.800000000745,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "toy-trex",
+      "label": "Toy T. rex",
+      "device": "phone",
+      "sample": 3,
+      "status": "ok",
+      "bytes": 9019050,
+      "requests": 96,
+      "firstFrameMs": 4470.39999999851,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "your-book",
+      "label": "Your book",
+      "device": "phone",
+      "sample": 4,
+      "status": "ok",
+      "bytes": 15014149,
+      "requests": 101,
+      "firstFrameMs": 8045.60000000149,
+      "errors": [],
+      "profile": "low",
+      "splats": 55572,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "video-3d",
+      "label": "Video to 3D",
+      "device": "phone",
+      "sample": 4,
+      "status": "ok",
+      "bytes": 6522446,
+      "requests": 111,
+      "firstFrameMs": 4424.900000002235,
+      "errors": [],
+      "profile": "low",
+      "splats": 59682,
+      "canvas": {
+        "width": 1170,
+        "height": 1935
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "splat-toolkit",
+      "label": "Splat toolkit",
+      "device": "phone",
+      "sample": 4,
+      "status": "ok",
+      "bytes": 11561533,
+      "requests": 110,
+      "firstFrameMs": 11785.900000002235,
+      "errors": [],
+      "profile": "low",
+      "splats": 113905,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "living-city",
+      "label": "Living city",
+      "device": "phone",
+      "sample": 4,
+      "status": "ok",
+      "bytes": 10579375,
+      "requests": 99,
+      "firstFrameMs": 3171,
+      "errors": [],
+      "profile": "low",
+      "splats": 304087,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "powers-of-ten",
+      "label": "Powers of ten",
+      "device": "phone",
+      "sample": 4,
+      "status": "ok",
+      "bytes": 5508068,
+      "requests": 103,
+      "firstFrameMs": 2612.60000000149,
+      "errors": [],
+      "profile": "low",
+      "splats": 5404,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "point-clouds",
+      "label": "Point clouds",
+      "device": "phone",
+      "sample": 4,
+      "status": "ok",
+      "bytes": 9151914,
+      "requests": 110,
+      "firstFrameMs": 16059.10000000149,
+      "errors": [],
+      "profile": "low",
+      "splats": 111663,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "celestial-globe",
+      "label": "Celestial globe",
+      "device": "phone",
+      "sample": 4,
+      "status": "ok",
+      "bytes": 9203631,
+      "requests": 96,
+      "firstFrameMs": 3413.800000000745,
+      "errors": [],
+      "profile": "low",
+      "splats": 77400,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "stannern-meteorites",
+      "label": "Stannern meteorite",
+      "device": "phone",
+      "sample": 4,
+      "status": "ok",
+      "bytes": 9169749,
+      "requests": 96,
+      "firstFrameMs": 3042.7000000029802,
+      "errors": [],
+      "profile": "low",
+      "splats": 77400,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "crochet-earth",
+      "label": "Crochet Earth",
+      "device": "phone",
+      "sample": 4,
+      "status": "ok",
+      "bytes": 9163097,
+      "requests": 96,
+      "firstFrameMs": 4364,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "seeded-loaf",
+      "label": "Seeded bread loaf",
+      "device": "phone",
+      "sample": 4,
+      "status": "ok",
+      "bytes": 9124836,
+      "requests": 91,
+      "firstFrameMs": 3410.2000000029802,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "dog-plush",
+      "label": "Dog plush",
+      "device": "phone",
+      "sample": 4,
+      "status": "ok",
+      "bytes": 9121395,
+      "requests": 96,
+      "firstFrameMs": 4274.199999999255,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "alum-crystal",
+      "label": "Alum crystal",
+      "device": "phone",
+      "sample": 4,
+      "status": "ok",
+      "bytes": 9097791,
+      "requests": 96,
+      "firstFrameMs": 4199.5,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "mushroom-photo",
+      "label": "Mushroom (photo)",
+      "device": "phone",
+      "sample": 4,
+      "status": "ok",
+      "bytes": 9096624,
+      "requests": 96,
+      "firstFrameMs": 4996.5,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "moving-photo-3d",
+      "label": "Moving photo to 3D",
+      "device": "phone",
+      "sample": 4,
+      "status": "ok",
+      "bytes": 9033471,
+      "requests": 128,
+      "firstFrameMs": 15668.70000000298,
+      "errors": [],
+      "profile": "low",
+      "splats": 98893,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "turtle-souvenir",
+      "label": "Souvenir turtle",
+      "device": "phone",
+      "sample": 4,
+      "status": "ok",
+      "bytes": 9071454,
+      "requests": 96,
+      "firstFrameMs": 4573.5,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "armillary-sphere",
+      "label": "Armillary sphere",
+      "device": "phone",
+      "sample": 4,
+      "status": "ok",
+      "bytes": 9059075,
+      "requests": 96,
+      "firstFrameMs": 5656.10000000149,
+      "errors": [],
+      "profile": "low",
+      "splats": 77400,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "murex-shell",
+      "label": "Murex shell",
+      "device": "phone",
+      "sample": 4,
+      "status": "ok",
+      "bytes": 9050643,
+      "requests": 96,
+      "firstFrameMs": 2929.89999999851,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "maple-tree",
+      "label": "Golden maple",
+      "device": "phone",
+      "sample": 4,
+      "status": "ok",
+      "bytes": 9034584,
+      "requests": 96,
+      "firstFrameMs": 5118.79999999702,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "cave-lioness",
+      "label": "Cave lioness",
+      "device": "phone",
+      "sample": 4,
+      "status": "ok",
+      "bytes": 9026924,
+      "requests": 96,
+      "firstFrameMs": 3924.39999999851,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "toy-trex",
+      "label": "Toy T. rex",
+      "device": "phone",
+      "sample": 4,
+      "status": "ok",
+      "bytes": 9019050,
+      "requests": 96,
+      "firstFrameMs": 3326.60000000149,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "pyrite-cubes",
+      "label": "Pyrite",
+      "device": "phone",
+      "sample": 0,
+      "status": "ok",
+      "bytes": 8578799,
+      "requests": 96,
+      "firstFrameMs": 3928.699999999255,
+      "errors": [],
+      "profile": "low",
+      "splats": 77400,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "soda-can",
+      "label": "Soda can",
+      "device": "phone",
+      "sample": 0,
+      "status": "ok",
+      "bytes": 8882577,
+      "requests": 96,
+      "firstFrameMs": 2949.5,
+      "errors": [],
+      "profile": "low",
+      "splats": 89317,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "sunglasses",
+      "label": "Sunglasses",
+      "device": "phone",
+      "sample": 0,
+      "status": "ok",
+      "bytes": 8902661,
+      "requests": 96,
+      "firstFrameMs": 4163.89999999851,
+      "errors": [],
+      "profile": "low",
+      "splats": 88274,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "fountain-pen",
+      "label": "Fountain pen",
+      "device": "phone",
+      "sample": 0,
+      "status": "ok",
+      "bytes": 8886507,
+      "requests": 96,
+      "firstFrameMs": 4457.70000000298,
+      "errors": [],
+      "profile": "low",
+      "splats": 90273,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "pyrite-cubes",
+      "label": "Pyrite",
+      "device": "desktop",
+      "sample": 0,
+      "status": "ok",
+      "bytes": 9347411,
+      "requests": 175,
+      "firstFrameMs": 6904.39999999851,
+      "errors": [],
+      "profile": "high",
+      "splats": 256191,
+      "canvas": {
+        "width": 1072,
+        "height": 900
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "soda-can",
+      "label": "Soda can",
+      "device": "desktop",
+      "sample": 0,
+      "status": "ok",
+      "bytes": 10218207,
+      "requests": 239,
+      "firstFrameMs": 8096,
+      "errors": [],
+      "profile": "high",
+      "splats": 296278,
+      "canvas": {
+        "width": 1072,
+        "height": 900
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "sunglasses",
+      "label": "Sunglasses",
+      "device": "desktop",
+      "sample": 0,
+      "status": "ok",
+      "bytes": 9982749,
+      "requests": 239,
+      "firstFrameMs": 3387.5,
+      "errors": [],
+      "profile": "high",
+      "splats": 294074,
+      "canvas": {
+        "width": 1072,
+        "height": 900
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "fountain-pen",
+      "label": "Fountain pen",
+      "device": "desktop",
+      "sample": 0,
+      "status": "ok",
+      "bytes": 9992027,
+      "requests": 239,
+      "firstFrameMs": 3807.2000000029802,
+      "errors": [],
+      "profile": "high",
+      "splats": 293727,
+      "canvas": {
+        "width": 1072,
+        "height": 900
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "pyrite-cubes",
+      "label": "Pyrite",
+      "device": "phone",
+      "sample": 1,
+      "status": "ok",
+      "bytes": 8578799,
+      "requests": 96,
+      "firstFrameMs": 3997.39999999851,
+      "errors": [],
+      "profile": "low",
+      "splats": 77400,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "soda-can",
+      "label": "Soda can",
+      "device": "phone",
+      "sample": 1,
+      "status": "ok",
+      "bytes": 8882577,
+      "requests": 96,
+      "firstFrameMs": 3030,
+      "errors": [],
+      "profile": "low",
+      "splats": 89317,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "sunglasses",
+      "label": "Sunglasses",
+      "device": "phone",
+      "sample": 1,
+      "status": "ok",
+      "bytes": 8902661,
+      "requests": 96,
+      "firstFrameMs": 3109.900000002235,
+      "errors": [],
+      "profile": "low",
+      "splats": 88274,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "fountain-pen",
+      "label": "Fountain pen",
+      "device": "phone",
+      "sample": 1,
+      "status": "ok",
+      "bytes": 8886507,
+      "requests": 96,
+      "firstFrameMs": 2724,
+      "errors": [],
+      "profile": "low",
+      "splats": 90273,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "pyrite-cubes",
+      "label": "Pyrite",
+      "device": "desktop",
+      "sample": 1,
+      "status": "ok",
+      "bytes": 9347411,
+      "requests": 175,
+      "firstFrameMs": 4000.800000000745,
+      "errors": [],
+      "profile": "high",
+      "splats": 256191,
+      "canvas": {
+        "width": 1072,
+        "height": 900
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "soda-can",
+      "label": "Soda can",
+      "device": "desktop",
+      "sample": 1,
+      "status": "ok",
+      "bytes": 10218207,
+      "requests": 239,
+      "firstFrameMs": 5527.800000000745,
+      "errors": [],
+      "profile": "high",
+      "splats": 296278,
+      "canvas": {
+        "width": 1072,
+        "height": 900
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "sunglasses",
+      "label": "Sunglasses",
+      "device": "desktop",
+      "sample": 1,
+      "status": "ok",
+      "bytes": 9982749,
+      "requests": 239,
+      "firstFrameMs": 7243.800000000745,
+      "errors": [],
+      "profile": "high",
+      "splats": 294074,
+      "canvas": {
+        "width": 1072,
+        "height": 900
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "fountain-pen",
+      "label": "Fountain pen",
+      "device": "desktop",
+      "sample": 1,
+      "status": "ok",
+      "bytes": 9992027,
+      "requests": 239,
+      "firstFrameMs": 6712.60000000149,
+      "errors": [],
+      "profile": "high",
+      "splats": 293727,
+      "canvas": {
+        "width": 1072,
+        "height": 900
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "pyrite-cubes",
+      "label": "Pyrite",
+      "device": "phone",
+      "sample": 2,
+      "status": "ok",
+      "bytes": 8578799,
+      "requests": 96,
+      "firstFrameMs": 4154.099999997765,
+      "errors": [],
+      "profile": "low",
+      "splats": 77400,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "soda-can",
+      "label": "Soda can",
+      "device": "phone",
+      "sample": 2,
+      "status": "ok",
+      "bytes": 8882577,
+      "requests": 96,
+      "firstFrameMs": 3611.900000002235,
+      "errors": [],
+      "profile": "low",
+      "splats": 89317,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "sunglasses",
+      "label": "Sunglasses",
+      "device": "phone",
+      "sample": 2,
+      "status": "ok",
+      "bytes": 8902661,
+      "requests": 96,
+      "firstFrameMs": 2726.5,
+      "errors": [],
+      "profile": "low",
+      "splats": 88274,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "fountain-pen",
+      "label": "Fountain pen",
+      "device": "phone",
+      "sample": 2,
+      "status": "ok",
+      "bytes": 8886507,
+      "requests": 96,
+      "firstFrameMs": 4503.10000000149,
+      "errors": [],
+      "profile": "low",
+      "splats": 90273,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "pyrite-cubes",
+      "label": "Pyrite",
+      "device": "desktop",
+      "sample": 2,
+      "status": "ok",
+      "bytes": 9347411,
+      "requests": 175,
+      "firstFrameMs": 5378,
+      "errors": [],
+      "profile": "high",
+      "splats": 256191,
+      "canvas": {
+        "width": 1072,
+        "height": 900
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "soda-can",
+      "label": "Soda can",
+      "device": "desktop",
+      "sample": 2,
+      "status": "ok",
+      "bytes": 10218207,
+      "requests": 239,
+      "firstFrameMs": 4607.89999999851,
+      "errors": [],
+      "profile": "high",
+      "splats": 296278,
+      "canvas": {
+        "width": 1072,
+        "height": 900
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "sunglasses",
+      "label": "Sunglasses",
+      "device": "desktop",
+      "sample": 2,
+      "status": "ok",
+      "bytes": 9982749,
+      "requests": 239,
+      "firstFrameMs": 4798.199999999255,
+      "errors": [],
+      "profile": "high",
+      "splats": 294074,
+      "canvas": {
+        "width": 1072,
+        "height": 900
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "fountain-pen",
+      "label": "Fountain pen",
+      "device": "desktop",
+      "sample": 2,
+      "status": "ok",
+      "bytes": 9992027,
+      "requests": 239,
+      "firstFrameMs": 4654.5,
+      "errors": [],
+      "profile": "high",
+      "splats": 293727,
+      "canvas": {
+        "width": 1072,
+        "height": 900
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "pyrite-cubes",
+      "label": "Pyrite",
+      "device": "phone",
+      "sample": 3,
+      "status": "ok",
+      "bytes": 8578799,
+      "requests": 96,
+      "firstFrameMs": 2768.5,
+      "errors": [],
+      "profile": "low",
+      "splats": 77400,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "soda-can",
+      "label": "Soda can",
+      "device": "phone",
+      "sample": 3,
+      "status": "ok",
+      "bytes": 8882577,
+      "requests": 96,
+      "firstFrameMs": 2438.5,
+      "errors": [],
+      "profile": "low",
+      "splats": 89317,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "sunglasses",
+      "label": "Sunglasses",
+      "device": "phone",
+      "sample": 3,
+      "status": "ok",
+      "bytes": 8902661,
+      "requests": 96,
+      "firstFrameMs": 2120.300000000745,
+      "errors": [],
+      "profile": "low",
+      "splats": 88274,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "fountain-pen",
+      "label": "Fountain pen",
+      "device": "phone",
+      "sample": 3,
+      "status": "ok",
+      "bytes": 8886507,
+      "requests": 96,
+      "firstFrameMs": 5167.89999999851,
+      "errors": [],
+      "profile": "low",
+      "splats": 90273,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "pyrite-cubes",
+      "label": "Pyrite",
+      "device": "desktop",
+      "sample": 3,
+      "status": "ok",
+      "bytes": 9347411,
+      "requests": 175,
+      "firstFrameMs": 4980.5,
+      "errors": [],
+      "profile": "high",
+      "splats": 256191,
+      "canvas": {
+        "width": 1072,
+        "height": 900
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "soda-can",
+      "label": "Soda can",
+      "device": "desktop",
+      "sample": 3,
+      "status": "ok",
+      "bytes": 10218207,
+      "requests": 239,
+      "firstFrameMs": 6938.800000000745,
+      "errors": [],
+      "profile": "high",
+      "splats": 296278,
+      "canvas": {
+        "width": 1072,
+        "height": 900
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "sunglasses",
+      "label": "Sunglasses",
+      "device": "desktop",
+      "sample": 3,
+      "status": "ok",
+      "bytes": 9982749,
+      "requests": 239,
+      "firstFrameMs": 5243.39999999851,
+      "errors": [],
+      "profile": "high",
+      "splats": 294074,
+      "canvas": {
+        "width": 1072,
+        "height": 900
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "fountain-pen",
+      "label": "Fountain pen",
+      "device": "desktop",
+      "sample": 3,
+      "status": "ok",
+      "bytes": 9992027,
+      "requests": 239,
+      "firstFrameMs": 3763.199999999255,
+      "errors": [],
+      "profile": "high",
+      "splats": 293727,
+      "canvas": {
+        "width": 1072,
+        "height": 900
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "pyrite-cubes",
+      "label": "Pyrite",
+      "device": "phone",
+      "sample": 4,
+      "status": "ok",
+      "bytes": 8578799,
+      "requests": 96,
+      "firstFrameMs": 3335.699999999255,
+      "errors": [],
+      "profile": "low",
+      "splats": 77400,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "soda-can",
+      "label": "Soda can",
+      "device": "phone",
+      "sample": 4,
+      "status": "ok",
+      "bytes": 8882577,
+      "requests": 96,
+      "firstFrameMs": 3044.5,
+      "errors": [],
+      "profile": "low",
+      "splats": 89317,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "sunglasses",
+      "label": "Sunglasses",
+      "device": "phone",
+      "sample": 4,
+      "status": "ok",
+      "bytes": 8902661,
+      "requests": 96,
+      "firstFrameMs": 2685.39999999851,
+      "errors": [],
+      "profile": "low",
+      "splats": 88274,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "fountain-pen",
+      "label": "Fountain pen",
+      "device": "phone",
+      "sample": 4,
+      "status": "ok",
+      "bytes": 8886507,
+      "requests": 96,
+      "firstFrameMs": 2391.7999999970198,
+      "errors": [],
+      "profile": "low",
+      "splats": 90273,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "pyrite-cubes",
+      "label": "Pyrite",
+      "device": "desktop",
+      "sample": 4,
+      "status": "ok",
+      "bytes": 9347411,
+      "requests": 175,
+      "firstFrameMs": 5867.60000000149,
+      "errors": [],
+      "profile": "high",
+      "splats": 256191,
+      "canvas": {
+        "width": 1072,
+        "height": 900
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "soda-can",
+      "label": "Soda can",
+      "device": "desktop",
+      "sample": 4,
+      "status": "ok",
+      "bytes": 10218207,
+      "requests": 239,
+      "firstFrameMs": 4680.599999997765,
+      "errors": [],
+      "profile": "high",
+      "splats": 296278,
+      "canvas": {
+        "width": 1072,
+        "height": 900
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "sunglasses",
+      "label": "Sunglasses",
+      "device": "desktop",
+      "sample": 4,
+      "status": "ok",
+      "bytes": 9982749,
+      "requests": 239,
+      "firstFrameMs": 4993.300000000745,
+      "errors": [],
+      "profile": "high",
+      "splats": 294074,
+      "canvas": {
+        "width": 1072,
+        "height": 900
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "fountain-pen",
+      "label": "Fountain pen",
+      "device": "desktop",
+      "sample": 4,
+      "status": "ok",
+      "bytes": 9992027,
+      "requests": 239,
+      "firstFrameMs": 4616.300000000745,
+      "errors": [],
+      "profile": "high",
+      "splats": 293727,
+      "canvas": {
+        "width": 1072,
+        "height": 900
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    }
+  ],
+  "after": [
+    {
+      "id": "your-book",
+      "label": "Your book",
+      "device": "phone",
+      "sample": 0,
+      "status": "ok",
+      "bytes": 12757613,
+      "requests": 101,
+      "firstFrameMs": 6578.800000000745,
+      "errors": [],
+      "profile": "low",
+      "splats": 55572,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "video-3d",
+      "label": "Video to 3D",
+      "device": "phone",
+      "sample": 0,
+      "status": "ok",
+      "bytes": 6200356,
+      "requests": 112,
+      "firstFrameMs": 4568.5,
+      "errors": [],
+      "profile": "low",
+      "splats": 59682,
+      "canvas": {
+        "width": 1170,
+        "height": 1935
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "splat-toolkit",
+      "label": "Splat toolkit",
+      "device": "phone",
+      "sample": 0,
+      "status": "ok",
+      "bytes": 11239443,
+      "requests": 111,
+      "firstFrameMs": 14198.60000000149,
+      "errors": [],
+      "profile": "low",
+      "splats": 113905,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "living-city",
+      "label": "Living city",
+      "device": "phone",
+      "sample": 0,
+      "status": "ok",
+      "bytes": 10257285,
+      "requests": 100,
+      "firstFrameMs": 6230,
+      "errors": [],
+      "profile": "low",
+      "splats": 304087,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "powers-of-ten",
+      "label": "Powers of ten",
+      "device": "phone",
+      "sample": 0,
+      "status": "ok",
+      "bytes": 5185978,
+      "requests": 104,
+      "firstFrameMs": 4626,
+      "errors": [],
+      "profile": "low",
+      "splats": 5404,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "point-clouds",
+      "label": "Point clouds",
+      "device": "phone",
+      "sample": 0,
+      "status": "ok",
+      "bytes": 8829824,
+      "requests": 111,
+      "firstFrameMs": 12382.099999997765,
+      "errors": [],
+      "profile": "low",
+      "splats": 111663,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "celestial-globe",
+      "label": "Celestial globe",
+      "device": "phone",
+      "sample": 0,
+      "status": "ok",
+      "bytes": 6581300,
+      "requests": 99,
+      "firstFrameMs": 6402.900000002235,
+      "errors": [],
+      "profile": "low",
+      "splats": 77400,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "stannern-meteorites",
+      "label": "Stannern meteorite",
+      "device": "phone",
+      "sample": 0,
+      "status": "ok",
+      "bytes": 6980268,
+      "requests": 99,
+      "firstFrameMs": 4269.599999997765,
+      "errors": [],
+      "profile": "low",
+      "splats": 77400,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "crochet-earth",
+      "label": "Crochet Earth",
+      "device": "phone",
+      "sample": 0,
+      "status": "ok",
+      "bytes": 8841007,
+      "requests": 97,
+      "firstFrameMs": 7024.39999999851,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "seeded-loaf",
+      "label": "Seeded bread loaf",
+      "device": "phone",
+      "sample": 0,
+      "status": "ok",
+      "bytes": 8802746,
+      "requests": 92,
+      "firstFrameMs": 4025.599999997765,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "dog-plush",
+      "label": "Dog plush",
+      "device": "phone",
+      "sample": 0,
+      "status": "ok",
+      "bytes": 8799305,
+      "requests": 97,
+      "firstFrameMs": 3811.300000000745,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "alum-crystal",
+      "label": "Alum crystal",
+      "device": "phone",
+      "sample": 0,
+      "status": "ok",
+      "bytes": 8775701,
+      "requests": 97,
+      "firstFrameMs": 5304,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "mushroom-photo",
+      "label": "Mushroom (photo)",
+      "device": "phone",
+      "sample": 0,
+      "status": "ok",
+      "bytes": 8774534,
+      "requests": 97,
+      "firstFrameMs": 3872.099999997765,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "moving-photo-3d",
+      "label": "Moving photo to 3D",
+      "device": "phone",
+      "sample": 0,
+      "status": "ok",
+      "bytes": 8711381,
+      "requests": 129,
+      "firstFrameMs": 13305.199999999255,
+      "errors": [],
+      "profile": "low",
+      "splats": 98893,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "turtle-souvenir",
+      "label": "Souvenir turtle",
+      "device": "phone",
+      "sample": 0,
+      "status": "ok",
+      "bytes": 8749364,
+      "requests": 97,
+      "firstFrameMs": 4170.89999999851,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "armillary-sphere",
+      "label": "Armillary sphere",
+      "device": "phone",
+      "sample": 0,
+      "status": "ok",
+      "bytes": 6708367,
+      "requests": 99,
+      "firstFrameMs": 3902.199999999255,
+      "errors": [],
+      "profile": "low",
+      "splats": 77400,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "murex-shell",
+      "label": "Murex shell",
+      "device": "phone",
+      "sample": 0,
+      "status": "ok",
+      "bytes": 8728553,
+      "requests": 97,
+      "firstFrameMs": 4410.79999999702,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "maple-tree",
+      "label": "Golden maple",
+      "device": "phone",
+      "sample": 0,
+      "status": "ok",
+      "bytes": 8712494,
+      "requests": 97,
+      "firstFrameMs": 4017.5,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "cave-lioness",
+      "label": "Cave lioness",
+      "device": "phone",
+      "sample": 0,
+      "status": "ok",
+      "bytes": 8704834,
+      "requests": 97,
+      "firstFrameMs": 6688.400000002235,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "toy-trex",
+      "label": "Toy T. rex",
+      "device": "phone",
+      "sample": 0,
+      "status": "ok",
+      "bytes": 8696960,
+      "requests": 97,
+      "firstFrameMs": 18167,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "your-book",
+      "label": "Your book",
+      "device": "phone",
+      "sample": 1,
+      "status": "ok",
+      "bytes": 13051583,
+      "requests": 125,
+      "firstFrameMs": 17326.5,
+      "errors": [],
+      "profile": "low",
+      "splats": 55572,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "video-3d",
+      "label": "Video to 3D",
+      "device": "phone",
+      "sample": 1,
+      "status": "ok",
+      "bytes": 6200356,
+      "requests": 112,
+      "firstFrameMs": 5116.5,
+      "errors": [],
+      "profile": "low",
+      "splats": 59682,
+      "canvas": {
+        "width": 1170,
+        "height": 1935
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "splat-toolkit",
+      "label": "Splat toolkit",
+      "device": "phone",
+      "sample": 1,
+      "status": "ok",
+      "bytes": 11239443,
+      "requests": 111,
+      "firstFrameMs": 13454.60000000149,
+      "errors": [],
+      "profile": "low",
+      "splats": 113905,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "living-city",
+      "label": "Living city",
+      "device": "phone",
+      "sample": 1,
+      "status": "ok",
+      "bytes": 10257285,
+      "requests": 100,
+      "firstFrameMs": 5557.29999999702,
+      "errors": [],
+      "profile": "low",
+      "splats": 304087,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "powers-of-ten",
+      "label": "Powers of ten",
+      "device": "phone",
+      "sample": 1,
+      "status": "ok",
+      "bytes": 5185978,
+      "requests": 104,
+      "firstFrameMs": 3883.099999997765,
+      "errors": [],
+      "profile": "low",
+      "splats": 5404,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "point-clouds",
+      "label": "Point clouds",
+      "device": "phone",
+      "sample": 1,
+      "status": "ok",
+      "bytes": 8829824,
+      "requests": 111,
+      "firstFrameMs": 8690.5,
+      "errors": [],
+      "profile": "low",
+      "splats": 111663,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "celestial-globe",
+      "label": "Celestial globe",
+      "device": "phone",
+      "sample": 1,
+      "status": "ok",
+      "bytes": 6581300,
+      "requests": 99,
+      "firstFrameMs": 5096.699999999255,
+      "errors": [],
+      "profile": "low",
+      "splats": 77400,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "stannern-meteorites",
+      "label": "Stannern meteorite",
+      "device": "phone",
+      "sample": 1,
+      "status": "ok",
+      "bytes": 7284110,
+      "requests": 123,
+      "firstFrameMs": 5445.20000000298,
+      "errors": [],
+      "profile": "low",
+      "splats": 77400,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "crochet-earth",
+      "label": "Crochet Earth",
+      "device": "phone",
+      "sample": 1,
+      "status": "ok",
+      "bytes": 8841007,
+      "requests": 97,
+      "firstFrameMs": 5236,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "seeded-loaf",
+      "label": "Seeded bread loaf",
+      "device": "phone",
+      "sample": 1,
+      "status": "ok",
+      "bytes": 8802746,
+      "requests": 92,
+      "firstFrameMs": 7420.5,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "dog-plush",
+      "label": "Dog plush",
+      "device": "phone",
+      "sample": 1,
+      "status": "ok",
+      "bytes": 8799305,
+      "requests": 97,
+      "firstFrameMs": 4723.79999999702,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "alum-crystal",
+      "label": "Alum crystal",
+      "device": "phone",
+      "sample": 1,
+      "status": "ok",
+      "bytes": 8775701,
+      "requests": 97,
+      "firstFrameMs": 4987.300000000745,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "mushroom-photo",
+      "label": "Mushroom (photo)",
+      "device": "phone",
+      "sample": 1,
+      "status": "ok",
+      "bytes": 8977048,
+      "requests": 119,
+      "firstFrameMs": 4422.89999999851,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "moving-photo-3d",
+      "label": "Moving photo to 3D",
+      "device": "phone",
+      "sample": 1,
+      "status": "ok",
+      "bytes": 8711381,
+      "requests": 129,
+      "firstFrameMs": 15562.699999999255,
+      "errors": [],
+      "profile": "low",
+      "splats": 98893,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "turtle-souvenir",
+      "label": "Souvenir turtle",
+      "device": "phone",
+      "sample": 1,
+      "status": "ok",
+      "bytes": 8749364,
+      "requests": 97,
+      "firstFrameMs": 4233,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "armillary-sphere",
+      "label": "Armillary sphere",
+      "device": "phone",
+      "sample": 1,
+      "status": "ok",
+      "bytes": 6708367,
+      "requests": 99,
+      "firstFrameMs": 3858.300000000745,
+      "errors": [],
+      "profile": "low",
+      "splats": 77400,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "murex-shell",
+      "label": "Murex shell",
+      "device": "phone",
+      "sample": 1,
+      "status": "ok",
+      "bytes": 8728553,
+      "requests": 97,
+      "firstFrameMs": 3362.199999999255,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "maple-tree",
+      "label": "Golden maple",
+      "device": "phone",
+      "sample": 1,
+      "status": "ok",
+      "bytes": 8934134,
+      "requests": 121,
+      "firstFrameMs": 4197.5,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "cave-lioness",
+      "label": "Cave lioness",
+      "device": "phone",
+      "sample": 1,
+      "status": "ok",
+      "bytes": 8704834,
+      "requests": 97,
+      "firstFrameMs": 5015.39999999851,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "toy-trex",
+      "label": "Toy T. rex",
+      "device": "phone",
+      "sample": 1,
+      "status": "ok",
+      "bytes": 8696960,
+      "requests": 97,
+      "firstFrameMs": 4075.39999999851,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "your-book",
+      "label": "Your book",
+      "device": "phone",
+      "sample": 2,
+      "status": "ok",
+      "bytes": 12757613,
+      "requests": 101,
+      "firstFrameMs": 5498.199999999255,
+      "errors": [],
+      "profile": "low",
+      "splats": 55572,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "video-3d",
+      "label": "Video to 3D",
+      "device": "phone",
+      "sample": 2,
+      "status": "ok",
+      "bytes": 6200356,
+      "requests": 112,
+      "firstFrameMs": 10011.800000000745,
+      "errors": [],
+      "profile": "low",
+      "splats": 59682,
+      "canvas": {
+        "width": 1170,
+        "height": 1935
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "splat-toolkit",
+      "label": "Splat toolkit",
+      "device": "phone",
+      "sample": 2,
+      "status": "ok",
+      "bytes": 11573147,
+      "requests": 135,
+      "firstFrameMs": 33083.70000000298,
+      "errors": [],
+      "profile": "low",
+      "splats": 113905,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "living-city",
+      "label": "Living city",
+      "device": "phone",
+      "sample": 2,
+      "status": "ok",
+      "bytes": 10257285,
+      "requests": 100,
+      "firstFrameMs": 10947.800000000745,
+      "errors": [],
+      "profile": "low",
+      "splats": 304087,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "powers-of-ten",
+      "label": "Powers of ten",
+      "device": "phone",
+      "sample": 2,
+      "status": "ok",
+      "bytes": 5100731,
+      "requests": 103,
+      "firstFrameMs": 7764.60000000149,
+      "errors": [],
+      "profile": "low",
+      "splats": 5404,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "point-clouds",
+      "label": "Point clouds",
+      "device": "phone",
+      "sample": 2,
+      "status": "ok",
+      "bytes": 8829824,
+      "requests": 111,
+      "firstFrameMs": 17280.39999999851,
+      "errors": [],
+      "profile": "low",
+      "splats": 111663,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "celestial-globe",
+      "label": "Celestial globe",
+      "device": "phone",
+      "sample": 2,
+      "status": "ok",
+      "bytes": 6581300,
+      "requests": 99,
+      "firstFrameMs": 6816.699999999255,
+      "errors": [],
+      "profile": "low",
+      "splats": 77400,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "stannern-meteorites",
+      "label": "Stannern meteorite",
+      "device": "phone",
+      "sample": 2,
+      "status": "ok",
+      "bytes": 6980268,
+      "requests": 99,
+      "firstFrameMs": 6490.10000000149,
+      "errors": [],
+      "profile": "low",
+      "splats": 77400,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "crochet-earth",
+      "label": "Crochet Earth",
+      "device": "phone",
+      "sample": 2,
+      "status": "ok",
+      "bytes": 8841007,
+      "requests": 97,
+      "firstFrameMs": 4680,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "seeded-loaf",
+      "label": "Seeded bread loaf",
+      "device": "phone",
+      "sample": 2,
+      "status": "ok",
+      "bytes": 8802746,
+      "requests": 92,
+      "firstFrameMs": 4157.800000000745,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "dog-plush",
+      "label": "Dog plush",
+      "device": "phone",
+      "sample": 2,
+      "status": "ok",
+      "bytes": 8799305,
+      "requests": 97,
+      "firstFrameMs": 3390.400000002235,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "alum-crystal",
+      "label": "Alum crystal",
+      "device": "phone",
+      "sample": 2,
+      "status": "ok",
+      "bytes": 8775701,
+      "requests": 97,
+      "firstFrameMs": 4794.89999999851,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "mushroom-photo",
+      "label": "Mushroom (photo)",
+      "device": "phone",
+      "sample": 2,
+      "status": "ok",
+      "bytes": 8774534,
+      "requests": 97,
+      "firstFrameMs": 3786.599999997765,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "moving-photo-3d",
+      "label": "Moving photo to 3D",
+      "device": "phone",
+      "sample": 2,
+      "status": "ok",
+      "bytes": 8711381,
+      "requests": 129,
+      "firstFrameMs": 15723.800000000745,
+      "errors": [],
+      "profile": "low",
+      "splats": 98893,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "turtle-souvenir",
+      "label": "Souvenir turtle",
+      "device": "phone",
+      "sample": 2,
+      "status": "ok",
+      "bytes": 8897448,
+      "requests": 111,
+      "firstFrameMs": 3825.699999999255,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "armillary-sphere",
+      "label": "Armillary sphere",
+      "device": "phone",
+      "sample": 2,
+      "status": "ok",
+      "bytes": 6708367,
+      "requests": 99,
+      "firstFrameMs": 2450.699999999255,
+      "errors": [],
+      "profile": "low",
+      "splats": 77400,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "murex-shell",
+      "label": "Murex shell",
+      "device": "phone",
+      "sample": 2,
+      "status": "ok",
+      "bytes": 8728553,
+      "requests": 97,
+      "firstFrameMs": 3105.400000002235,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "maple-tree",
+      "label": "Golden maple",
+      "device": "phone",
+      "sample": 2,
+      "status": "ok",
+      "bytes": 8712494,
+      "requests": 97,
+      "firstFrameMs": 3602.60000000149,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "cave-lioness",
+      "label": "Cave lioness",
+      "device": "phone",
+      "sample": 2,
+      "status": "ok",
+      "bytes": 8704834,
+      "requests": 97,
+      "firstFrameMs": 4540,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "toy-trex",
+      "label": "Toy T. rex",
+      "device": "phone",
+      "sample": 2,
+      "status": "ok",
+      "bytes": 8696960,
+      "requests": 97,
+      "firstFrameMs": 2820.199999999255,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "your-book",
+      "label": "Your book",
+      "device": "phone",
+      "sample": 3,
+      "status": "ok",
+      "bytes": 12757613,
+      "requests": 101,
+      "firstFrameMs": 3707.900000002235,
+      "errors": [],
+      "profile": "low",
+      "splats": 55572,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "video-3d",
+      "label": "Video to 3D",
+      "device": "phone",
+      "sample": 3,
+      "status": "ok",
+      "bytes": 6200356,
+      "requests": 112,
+      "firstFrameMs": 4339.60000000149,
+      "errors": [],
+      "profile": "low",
+      "splats": 59682,
+      "canvas": {
+        "width": 1170,
+        "height": 1935
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "splat-toolkit",
+      "label": "Splat toolkit",
+      "device": "phone",
+      "sample": 3,
+      "status": "ok",
+      "bytes": 11239443,
+      "requests": 111,
+      "firstFrameMs": 14970.699999999255,
+      "errors": [],
+      "profile": "low",
+      "splats": 113905,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "living-city",
+      "label": "Living city",
+      "device": "phone",
+      "sample": 3,
+      "status": "ok",
+      "bytes": 10257285,
+      "requests": 100,
+      "firstFrameMs": 3944.400000002235,
+      "errors": [],
+      "profile": "low",
+      "splats": 304087,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "powers-of-ten",
+      "label": "Powers of ten",
+      "device": "phone",
+      "sample": 3,
+      "status": "ok",
+      "bytes": 9069143,
+      "requests": 104,
+      "firstFrameMs": 3013.800000000745,
+      "errors": [],
+      "profile": "low",
+      "splats": 5404,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "point-clouds",
+      "label": "Point clouds",
+      "device": "phone",
+      "sample": 3,
+      "status": "ok",
+      "bytes": 8829824,
+      "requests": 111,
+      "firstFrameMs": 5424.5,
+      "errors": [],
+      "profile": "low",
+      "splats": 111663,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "celestial-globe",
+      "label": "Celestial globe",
+      "device": "phone",
+      "sample": 3,
+      "status": "ok",
+      "bytes": 6581300,
+      "requests": 99,
+      "firstFrameMs": 2559.5,
+      "errors": [],
+      "profile": "low",
+      "splats": 77400,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "stannern-meteorites",
+      "label": "Stannern meteorite",
+      "device": "phone",
+      "sample": 3,
+      "status": "ok",
+      "bytes": 6980268,
+      "requests": 99,
+      "firstFrameMs": 3119.699999999255,
+      "errors": [],
+      "profile": "low",
+      "splats": 77400,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "crochet-earth",
+      "label": "Crochet Earth",
+      "device": "phone",
+      "sample": 3,
+      "status": "ok",
+      "bytes": 8841007,
+      "requests": 97,
+      "firstFrameMs": 3486,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "seeded-loaf",
+      "label": "Seeded bread loaf",
+      "device": "phone",
+      "sample": 3,
+      "status": "ok",
+      "bytes": 8802746,
+      "requests": 92,
+      "firstFrameMs": 2439.699999999255,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "dog-plush",
+      "label": "Dog plush",
+      "device": "phone",
+      "sample": 3,
+      "status": "ok",
+      "bytes": 8799305,
+      "requests": 97,
+      "firstFrameMs": 3583.199999999255,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "alum-crystal",
+      "label": "Alum crystal",
+      "device": "phone",
+      "sample": 3,
+      "status": "ok",
+      "bytes": 8775701,
+      "requests": 97,
+      "firstFrameMs": 3674.5,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "mushroom-photo",
+      "label": "Mushroom (photo)",
+      "device": "phone",
+      "sample": 3,
+      "status": "ok",
+      "bytes": 8774534,
+      "requests": 97,
+      "firstFrameMs": 2997.099999997765,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "moving-photo-3d",
+      "label": "Moving photo to 3D",
+      "device": "phone",
+      "sample": 3,
+      "status": "ok",
+      "bytes": 8711381,
+      "requests": 129,
+      "firstFrameMs": 9726.400000002235,
+      "errors": [],
+      "profile": "low",
+      "splats": 98893,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "turtle-souvenir",
+      "label": "Souvenir turtle",
+      "device": "phone",
+      "sample": 3,
+      "status": "ok",
+      "bytes": 8749364,
+      "requests": 97,
+      "firstFrameMs": 2650.5,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "armillary-sphere",
+      "label": "Armillary sphere",
+      "device": "phone",
+      "sample": 3,
+      "status": "ok",
+      "bytes": 6655238,
+      "requests": 99,
+      "firstFrameMs": 4805.70000000298,
+      "errors": [],
+      "profile": "low",
+      "splats": 77400,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "murex-shell",
+      "label": "Murex shell",
+      "device": "phone",
+      "sample": 3,
+      "status": "ok",
+      "bytes": 8728553,
+      "requests": 97,
+      "firstFrameMs": 3283.5,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "maple-tree",
+      "label": "Golden maple",
+      "device": "phone",
+      "sample": 3,
+      "status": "ok",
+      "bytes": 8712494,
+      "requests": 97,
+      "firstFrameMs": 4895.699999999255,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "cave-lioness",
+      "label": "Cave lioness",
+      "device": "phone",
+      "sample": 3,
+      "status": "ok",
+      "bytes": 8704834,
+      "requests": 97,
+      "firstFrameMs": 3230.099999997765,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "toy-trex",
+      "label": "Toy T. rex",
+      "device": "phone",
+      "sample": 3,
+      "status": "ok",
+      "bytes": 8696960,
+      "requests": 97,
+      "firstFrameMs": 7466.300000000745,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "your-book",
+      "label": "Your book",
+      "device": "phone",
+      "sample": 4,
+      "status": "ok",
+      "bytes": 12757613,
+      "requests": 101,
+      "firstFrameMs": 4794.10000000149,
+      "errors": [],
+      "profile": "low",
+      "splats": 55572,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "video-3d",
+      "label": "Video to 3D",
+      "device": "phone",
+      "sample": 4,
+      "status": "ok",
+      "bytes": 6200356,
+      "requests": 112,
+      "firstFrameMs": 5842.199999999255,
+      "errors": [],
+      "profile": "low",
+      "splats": 59682,
+      "canvas": {
+        "width": 1170,
+        "height": 1935
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "splat-toolkit",
+      "label": "Splat toolkit",
+      "device": "phone",
+      "sample": 4,
+      "status": "ok",
+      "bytes": 11239443,
+      "requests": 111,
+      "firstFrameMs": 10315.300000000745,
+      "errors": [],
+      "profile": "low",
+      "splats": 113905,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "living-city",
+      "label": "Living city",
+      "device": "phone",
+      "sample": 4,
+      "status": "ok",
+      "bytes": 10257285,
+      "requests": 100,
+      "firstFrameMs": 6508.10000000149,
+      "errors": [],
+      "profile": "low",
+      "splats": 304087,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "powers-of-ten",
+      "label": "Powers of ten",
+      "device": "phone",
+      "sample": 4,
+      "status": "ok",
+      "bytes": 5185978,
+      "requests": 104,
+      "firstFrameMs": 2838.900000002235,
+      "errors": [],
+      "profile": "low",
+      "splats": 5404,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "point-clouds",
+      "label": "Point clouds",
+      "device": "phone",
+      "sample": 4,
+      "status": "ok",
+      "bytes": 8829824,
+      "requests": 111,
+      "firstFrameMs": 6941.300000000745,
+      "errors": [],
+      "profile": "low",
+      "splats": 111663,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "celestial-globe",
+      "label": "Celestial globe",
+      "device": "phone",
+      "sample": 4,
+      "status": "ok",
+      "bytes": 6581300,
+      "requests": 99,
+      "firstFrameMs": 2885.60000000149,
+      "errors": [],
+      "profile": "low",
+      "splats": 77400,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "stannern-meteorites",
+      "label": "Stannern meteorite",
+      "device": "phone",
+      "sample": 4,
+      "status": "ok",
+      "bytes": 6980268,
+      "requests": 99,
+      "firstFrameMs": 2738.89999999851,
+      "errors": [],
+      "profile": "low",
+      "splats": 77400,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "crochet-earth",
+      "label": "Crochet Earth",
+      "device": "phone",
+      "sample": 4,
+      "status": "ok",
+      "bytes": 8841007,
+      "requests": 97,
+      "firstFrameMs": 3833.300000000745,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "seeded-loaf",
+      "label": "Seeded bread loaf",
+      "device": "phone",
+      "sample": 4,
+      "status": "ok",
+      "bytes": 8802746,
+      "requests": 92,
+      "firstFrameMs": 3847.89999999851,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "dog-plush",
+      "label": "Dog plush",
+      "device": "phone",
+      "sample": 4,
+      "status": "ok",
+      "bytes": 8799305,
+      "requests": 97,
+      "firstFrameMs": 4343.699999999255,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "alum-crystal",
+      "label": "Alum crystal",
+      "device": "phone",
+      "sample": 4,
+      "status": "ok",
+      "bytes": 8775701,
+      "requests": 97,
+      "firstFrameMs": 4505.5,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "mushroom-photo",
+      "label": "Mushroom (photo)",
+      "device": "phone",
+      "sample": 4,
+      "status": "ok",
+      "bytes": 8774534,
+      "requests": 97,
+      "firstFrameMs": 9205.199999999255,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "moving-photo-3d",
+      "label": "Moving photo to 3D",
+      "device": "phone",
+      "sample": 4,
+      "status": "ok",
+      "bytes": 8711381,
+      "requests": 129,
+      "firstFrameMs": 13616.20000000298,
+      "errors": [],
+      "profile": "low",
+      "splats": 98893,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "turtle-souvenir",
+      "label": "Souvenir turtle",
+      "device": "phone",
+      "sample": 4,
+      "status": "ok",
+      "bytes": 8749364,
+      "requests": 97,
+      "firstFrameMs": 21116.89999999851,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "armillary-sphere",
+      "label": "Armillary sphere",
+      "device": "phone",
+      "sample": 4,
+      "status": "ok",
+      "bytes": 6708367,
+      "requests": 99,
+      "firstFrameMs": 4209.60000000149,
+      "errors": [],
+      "profile": "low",
+      "splats": 77400,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "murex-shell",
+      "label": "Murex shell",
+      "device": "phone",
+      "sample": 4,
+      "status": "ok",
+      "bytes": 8728553,
+      "requests": 97,
+      "firstFrameMs": 6896.199999999255,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "maple-tree",
+      "label": "Golden maple",
+      "device": "phone",
+      "sample": 4,
+      "status": "ok",
+      "bytes": 8712494,
+      "requests": 97,
+      "firstFrameMs": 4080.699999999255,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "cave-lioness",
+      "label": "Cave lioness",
+      "device": "phone",
+      "sample": 4,
+      "status": "ok",
+      "bytes": 8704834,
+      "requests": 97,
+      "firstFrameMs": 3606.599999997765,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "toy-trex",
+      "label": "Toy T. rex",
+      "device": "phone",
+      "sample": 4,
+      "status": "ok",
+      "bytes": 8696960,
+      "requests": 97,
+      "firstFrameMs": 4041.900000002235,
+      "errors": [],
+      "profile": "low",
+      "splats": 300000,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "pyrite-cubes",
+      "label": "Pyrite",
+      "device": "phone",
+      "sample": 0,
+      "status": "ok",
+      "bytes": 6725925,
+      "requests": 99,
+      "firstFrameMs": 3684.5,
+      "errors": [],
+      "profile": "low",
+      "splats": 77400,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "soda-can",
+      "label": "Soda can",
+      "device": "phone",
+      "sample": 0,
+      "status": "ok",
+      "bytes": 5673043,
+      "requests": 99,
+      "firstFrameMs": 6916.89999999851,
+      "errors": [],
+      "profile": "low",
+      "splats": 89317,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "sunglasses",
+      "label": "Sunglasses",
+      "device": "phone",
+      "sample": 0,
+      "status": "ok",
+      "bytes": 5795159,
+      "requests": 99,
+      "firstFrameMs": 3679.7999999970198,
+      "errors": [],
+      "profile": "low",
+      "splats": 88274,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "fountain-pen",
+      "label": "Fountain pen",
+      "device": "phone",
+      "sample": 0,
+      "status": "ok",
+      "bytes": 5741247,
+      "requests": 99,
+      "firstFrameMs": 3930.89999999851,
+      "errors": [],
+      "profile": "low",
+      "splats": 90273,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "pyrite-cubes",
+      "label": "Pyrite",
+      "device": "desktop",
+      "sample": 0,
+      "status": "ok",
+      "bytes": 9118767,
+      "requests": 178,
+      "firstFrameMs": 5825.20000000298,
+      "errors": [],
+      "profile": "high",
+      "splats": 256191,
+      "canvas": {
+        "width": 1072,
+        "height": 900
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "soda-can",
+      "label": "Soda can",
+      "device": "desktop",
+      "sample": 0,
+      "status": "ok",
+      "bytes": 9989563,
+      "requests": 242,
+      "firstFrameMs": 5280.800000000745,
+      "errors": [],
+      "profile": "high",
+      "splats": 296278,
+      "canvas": {
+        "width": 1072,
+        "height": 900
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "sunglasses",
+      "label": "Sunglasses",
+      "device": "desktop",
+      "sample": 0,
+      "status": "ok",
+      "bytes": 9754105,
+      "requests": 242,
+      "firstFrameMs": 4497.5,
+      "errors": [],
+      "profile": "high",
+      "splats": 294074,
+      "canvas": {
+        "width": 1072,
+        "height": 900
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "fountain-pen",
+      "label": "Fountain pen",
+      "device": "desktop",
+      "sample": 0,
+      "status": "ok",
+      "bytes": 9763383,
+      "requests": 242,
+      "firstFrameMs": 5678.800000000745,
+      "errors": [],
+      "profile": "high",
+      "splats": 293727,
+      "canvas": {
+        "width": 1072,
+        "height": 900
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "pyrite-cubes",
+      "label": "Pyrite",
+      "device": "phone",
+      "sample": 1,
+      "status": "ok",
+      "bytes": 6725925,
+      "requests": 99,
+      "firstFrameMs": 6176,
+      "errors": [],
+      "profile": "low",
+      "splats": 77400,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "soda-can",
+      "label": "Soda can",
+      "device": "phone",
+      "sample": 1,
+      "status": "ok",
+      "bytes": 5673043,
+      "requests": 99,
+      "firstFrameMs": 3035.89999999851,
+      "errors": [],
+      "profile": "low",
+      "splats": 89317,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "sunglasses",
+      "label": "Sunglasses",
+      "device": "phone",
+      "sample": 1,
+      "status": "ok",
+      "bytes": 5795159,
+      "requests": 99,
+      "firstFrameMs": 3593.60000000149,
+      "errors": [],
+      "profile": "low",
+      "splats": 88274,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "fountain-pen",
+      "label": "Fountain pen",
+      "device": "phone",
+      "sample": 1,
+      "status": "ok",
+      "bytes": 5741247,
+      "requests": 99,
+      "firstFrameMs": 2619.699999999255,
+      "errors": [],
+      "profile": "low",
+      "splats": 90273,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "pyrite-cubes",
+      "label": "Pyrite",
+      "device": "desktop",
+      "sample": 1,
+      "status": "ok",
+      "bytes": 9118767,
+      "requests": 178,
+      "firstFrameMs": 6717.400000002235,
+      "errors": [],
+      "profile": "high",
+      "splats": 256191,
+      "canvas": {
+        "width": 1072,
+        "height": 900
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "soda-can",
+      "label": "Soda can",
+      "device": "desktop",
+      "sample": 1,
+      "status": "ok",
+      "bytes": 9989563,
+      "requests": 242,
+      "firstFrameMs": 6659.5,
+      "errors": [],
+      "profile": "high",
+      "splats": 296278,
+      "canvas": {
+        "width": 1072,
+        "height": 900
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "sunglasses",
+      "label": "Sunglasses",
+      "device": "desktop",
+      "sample": 1,
+      "status": "ok",
+      "bytes": 9754105,
+      "requests": 242,
+      "firstFrameMs": 3338.5,
+      "errors": [],
+      "profile": "high",
+      "splats": 294074,
+      "canvas": {
+        "width": 1072,
+        "height": 900
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "fountain-pen",
+      "label": "Fountain pen",
+      "device": "desktop",
+      "sample": 1,
+      "status": "ok",
+      "bytes": 9763383,
+      "requests": 242,
+      "firstFrameMs": 4232.900000002235,
+      "errors": [],
+      "profile": "high",
+      "splats": 293727,
+      "canvas": {
+        "width": 1072,
+        "height": 900
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "pyrite-cubes",
+      "label": "Pyrite",
+      "device": "phone",
+      "sample": 2,
+      "status": "ok",
+      "bytes": 6725925,
+      "requests": 99,
+      "firstFrameMs": 3160.300000000745,
+      "errors": [],
+      "profile": "low",
+      "splats": 77400,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "soda-can",
+      "label": "Soda can",
+      "device": "phone",
+      "sample": 2,
+      "status": "ok",
+      "bytes": 5673043,
+      "requests": 99,
+      "firstFrameMs": 4172.20000000298,
+      "errors": [],
+      "profile": "low",
+      "splats": 89317,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "sunglasses",
+      "label": "Sunglasses",
+      "device": "phone",
+      "sample": 2,
+      "status": "ok",
+      "bytes": 5795159,
+      "requests": 99,
+      "firstFrameMs": 3908,
+      "errors": [],
+      "profile": "low",
+      "splats": 88274,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "fountain-pen",
+      "label": "Fountain pen",
+      "device": "phone",
+      "sample": 2,
+      "status": "ok",
+      "bytes": 5741247,
+      "requests": 99,
+      "firstFrameMs": 3253.39999999851,
+      "errors": [],
+      "profile": "low",
+      "splats": 90273,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "pyrite-cubes",
+      "label": "Pyrite",
+      "device": "desktop",
+      "sample": 2,
+      "status": "ok",
+      "bytes": 9118767,
+      "requests": 178,
+      "firstFrameMs": 5999.70000000298,
+      "errors": [],
+      "profile": "high",
+      "splats": 256191,
+      "canvas": {
+        "width": 1072,
+        "height": 900
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "soda-can",
+      "label": "Soda can",
+      "device": "desktop",
+      "sample": 2,
+      "status": "ok",
+      "bytes": 9989563,
+      "requests": 242,
+      "firstFrameMs": 3802.2999999970198,
+      "errors": [],
+      "profile": "high",
+      "splats": 296278,
+      "canvas": {
+        "width": 1072,
+        "height": 900
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "sunglasses",
+      "label": "Sunglasses",
+      "device": "desktop",
+      "sample": 2,
+      "status": "ok",
+      "bytes": 9754105,
+      "requests": 242,
+      "firstFrameMs": 4428.199999999255,
+      "errors": [],
+      "profile": "high",
+      "splats": 294074,
+      "canvas": {
+        "width": 1072,
+        "height": 900
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "fountain-pen",
+      "label": "Fountain pen",
+      "device": "desktop",
+      "sample": 2,
+      "status": "ok",
+      "bytes": 9763383,
+      "requests": 242,
+      "firstFrameMs": 4458.89999999851,
+      "errors": [],
+      "profile": "high",
+      "splats": 293727,
+      "canvas": {
+        "width": 1072,
+        "height": 900
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "pyrite-cubes",
+      "label": "Pyrite",
+      "device": "phone",
+      "sample": 3,
+      "status": "ok",
+      "bytes": 6725925,
+      "requests": 99,
+      "firstFrameMs": 2708.400000002235,
+      "errors": [],
+      "profile": "low",
+      "splats": 77400,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "soda-can",
+      "label": "Soda can",
+      "device": "phone",
+      "sample": 3,
+      "status": "ok",
+      "bytes": 5673043,
+      "requests": 99,
+      "firstFrameMs": 2424.5,
+      "errors": [],
+      "profile": "low",
+      "splats": 89317,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "sunglasses",
+      "label": "Sunglasses",
+      "device": "phone",
+      "sample": 3,
+      "status": "ok",
+      "bytes": 5795159,
+      "requests": 99,
+      "firstFrameMs": 1933.0999999977648,
+      "errors": [],
+      "profile": "low",
+      "splats": 88274,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "fountain-pen",
+      "label": "Fountain pen",
+      "device": "phone",
+      "sample": 3,
+      "status": "ok",
+      "bytes": 5741247,
+      "requests": 99,
+      "firstFrameMs": 2428.60000000149,
+      "errors": [],
+      "profile": "low",
+      "splats": 90273,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "pyrite-cubes",
+      "label": "Pyrite",
+      "device": "desktop",
+      "sample": 3,
+      "status": "ok",
+      "bytes": 9118767,
+      "requests": 178,
+      "firstFrameMs": 5058.599999997765,
+      "errors": [],
+      "profile": "high",
+      "splats": 256191,
+      "canvas": {
+        "width": 1072,
+        "height": 900
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "soda-can",
+      "label": "Soda can",
+      "device": "desktop",
+      "sample": 3,
+      "status": "ok",
+      "bytes": 9989563,
+      "requests": 242,
+      "firstFrameMs": 4219.199999999255,
+      "errors": [],
+      "profile": "high",
+      "splats": 296278,
+      "canvas": {
+        "width": 1072,
+        "height": 900
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "sunglasses",
+      "label": "Sunglasses",
+      "device": "desktop",
+      "sample": 3,
+      "status": "ok",
+      "bytes": 9754105,
+      "requests": 242,
+      "firstFrameMs": 6250.199999999255,
+      "errors": [],
+      "profile": "high",
+      "splats": 294074,
+      "canvas": {
+        "width": 1072,
+        "height": 900
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "fountain-pen",
+      "label": "Fountain pen",
+      "device": "desktop",
+      "sample": 3,
+      "status": "ok",
+      "bytes": 9763383,
+      "requests": 242,
+      "firstFrameMs": 4156.699999999255,
+      "errors": [],
+      "profile": "high",
+      "splats": 293727,
+      "canvas": {
+        "width": 1072,
+        "height": 900
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "pyrite-cubes",
+      "label": "Pyrite",
+      "device": "phone",
+      "sample": 4,
+      "status": "ok",
+      "bytes": 6725925,
+      "requests": 99,
+      "firstFrameMs": 2856.89999999851,
+      "errors": [],
+      "profile": "low",
+      "splats": 77400,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "soda-can",
+      "label": "Soda can",
+      "device": "phone",
+      "sample": 4,
+      "status": "ok",
+      "bytes": 5673043,
+      "requests": 99,
+      "firstFrameMs": 4364.60000000149,
+      "errors": [],
+      "profile": "low",
+      "splats": 89317,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "sunglasses",
+      "label": "Sunglasses",
+      "device": "phone",
+      "sample": 4,
+      "status": "ok",
+      "bytes": 5795159,
+      "requests": 99,
+      "firstFrameMs": 2681.5,
+      "errors": [],
+      "profile": "low",
+      "splats": 88274,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "fountain-pen",
+      "label": "Fountain pen",
+      "device": "phone",
+      "sample": 4,
+      "status": "ok",
+      "bytes": 5741247,
+      "requests": 99,
+      "firstFrameMs": 2685.300000000745,
+      "errors": [],
+      "profile": "low",
+      "splats": 90273,
+      "canvas": {
+        "width": 585,
+        "height": 967
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "pyrite-cubes",
+      "label": "Pyrite",
+      "device": "desktop",
+      "sample": 4,
+      "status": "ok",
+      "bytes": 9118767,
+      "requests": 178,
+      "firstFrameMs": 9988.199999999255,
+      "errors": [],
+      "profile": "high",
+      "splats": 256191,
+      "canvas": {
+        "width": 1072,
+        "height": 900
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "soda-can",
+      "label": "Soda can",
+      "device": "desktop",
+      "sample": 4,
+      "status": "ok",
+      "bytes": 9989563,
+      "requests": 242,
+      "firstFrameMs": 4730.300000000745,
+      "errors": [],
+      "profile": "high",
+      "splats": 296278,
+      "canvas": {
+        "width": 1072,
+        "height": 900
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "sunglasses",
+      "label": "Sunglasses",
+      "device": "desktop",
+      "sample": 4,
+      "status": "ok",
+      "bytes": 9754105,
+      "requests": 242,
+      "firstFrameMs": 5183.39999999851,
+      "errors": [],
+      "profile": "high",
+      "splats": 294074,
+      "canvas": {
+        "width": 1072,
+        "height": 900
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    },
+    {
+      "id": "fountain-pen",
+      "label": "Fountain pen",
+      "device": "desktop",
+      "sample": 4,
+      "status": "ok",
+      "bytes": 9763383,
+      "requests": 242,
+      "firstFrameMs": 4635.5,
+      "errors": [],
+      "profile": "high",
+      "splats": 293727,
+      "canvas": {
+        "width": 1072,
+        "height": 900
+      },
+      "gpu": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
+    }
+  ],
+  "method": {
+    "before": {
+      "at": "2026-10-14T21:19:03.690Z",
+      "browser": "151.0.7922.173",
+      "args": [
+        "--use-gl=angle",
+        "--use-angle=gl",
+        "--hide-scrollbars",
+        "--enable-unsafe-swiftshader",
+        "--enable-webgl",
+        "--ignore-gpu-blocklist",
+        "--disable-background-timer-throttling",
+        "--disable-renderer-backgrounding",
+        "--disable-backgrounding-occluded-windows"
+      ],
+      "base": "http://127.0.0.1:4174",
+      "definitions": [
+        {
+          "name": "phone",
+          "viewport": {
+            "width": 390,
+            "height": 844
+          },
+          "deviceScaleFactor": 3,
+          "isMobile": true,
+          "hasTouch": true,
+          "profile": "weak"
+        },
+        {
+          "name": "desktop",
+          "viewport": {
+            "width": 1440,
+            "height": 900
+          },
+          "deviceScaleFactor": 1,
+          "isMobile": false,
+          "hasTouch": false,
+          "profile": "high"
+        }
+      ],
+      "frozenMain": "226644fb2b4e70dbd02136caec8e0f57c9f7f662",
+      "candidateSource": "2b5eaae37a07961de240a4b426a90c6a91060787",
+      "host": {
+        "platform": "linux",
+        "architecture": "x64",
+        "availableCPUs": 4,
+        "mesaThreads": "3",
+        "processPriority": 10,
+        "display": ":99"
+      },
+      "sound": "off",
+      "seed": 424242,
+      "renderer": "webgl2",
+      "adaptation": "off",
+      "cache": "fresh context per toy; CDP cache disabled; service workers blocked",
+      "firstFrame": "navigation to first postrender after requested toy is ready",
+      "timeouts": {
+        "navigationMs": 180000,
+        "readinessMs": 300000,
+        "cellMs": 180000
+      },
+      "payload": "completed HTTP body bytes after 1500 ms settling; Content-Length with Resource Timing fallback, including worker imports; headers excluded",
+      "deviationFromTask06": "Linux llvmpipe instead of Mac Metal; opening metrics only, without the idle/tap frame-cadence windows"
+    },
+    "after": {
+      "at": "2026-10-14T21:19:18.820Z",
+      "browser": "151.0.7922.173",
+      "args": [
+        "--use-gl=angle",
+        "--use-angle=gl",
+        "--hide-scrollbars",
+        "--enable-unsafe-swiftshader",
+        "--enable-webgl",
+        "--ignore-gpu-blocklist",
+        "--disable-background-timer-throttling",
+        "--disable-renderer-backgrounding",
+        "--disable-backgrounding-occluded-windows"
+      ],
+      "base": "http://127.0.0.1:4173",
+      "definitions": [
+        {
+          "name": "phone",
+          "viewport": {
+            "width": 390,
+            "height": 844
+          },
+          "deviceScaleFactor": 3,
+          "isMobile": true,
+          "hasTouch": true,
+          "profile": "weak"
+        },
+        {
+          "name": "desktop",
+          "viewport": {
+            "width": 1440,
+            "height": 900
+          },
+          "deviceScaleFactor": 1,
+          "isMobile": false,
+          "hasTouch": false,
+          "profile": "high"
+        }
+      ],
+      "frozenMain": "226644fb2b4e70dbd02136caec8e0f57c9f7f662",
+      "candidateSource": "2b5eaae37a07961de240a4b426a90c6a91060787",
+      "host": {
+        "platform": "linux",
+        "architecture": "x64",
+        "availableCPUs": 4,
+        "mesaThreads": "3",
+        "processPriority": 10,
+        "display": ":99"
+      },
+      "sound": "off",
+      "seed": 424242,
+      "renderer": "webgl2",
+      "adaptation": "off",
+      "cache": "fresh context per toy; CDP cache disabled; service workers blocked",
+      "firstFrame": "navigation to first postrender after requested toy is ready",
+      "timeouts": {
+        "navigationMs": 180000,
+        "readinessMs": 300000,
+        "cellMs": 180000
+      },
+      "payload": "completed HTTP body bytes after 1500 ms settling; Content-Length with Resource Timing fallback, including worker imports; headers excluded",
+      "deviationFromTask06": "Linux llvmpipe instead of Mac Metal; opening metrics only, without the idle/tap frame-cadence windows"
+    }
+  },
+  "timingMethod": {
+    "before": {
+      "at": "2026-10-14T21:39:13.548Z",
+      "browser": "151.0.7922.173",
+      "args": [
+        "--use-gl=angle",
+        "--use-angle=gl",
+        "--hide-scrollbars",
+        "--enable-unsafe-swiftshader",
+        "--enable-webgl",
+        "--ignore-gpu-blocklist",
+        "--disable-background-timer-throttling",
+        "--disable-renderer-backgrounding",
+        "--disable-backgrounding-occluded-windows"
+      ],
+      "base": "http://127.0.0.1:4174",
+      "definitions": [
+        {
+          "name": "phone",
+          "viewport": {
+            "width": 390,
+            "height": 844
+          },
+          "deviceScaleFactor": 3,
+          "isMobile": true,
+          "hasTouch": true,
+          "profile": "weak"
+        },
+        {
+          "name": "desktop",
+          "viewport": {
+            "width": 1440,
+            "height": 900
+          },
+          "deviceScaleFactor": 1,
+          "isMobile": false,
+          "hasTouch": false,
+          "profile": "high"
+        }
+      ],
+      "frozenMain": "226644fb2b4e70dbd02136caec8e0f57c9f7f662",
+      "candidateSource": "2b5eaae37a07961de240a4b426a90c6a91060787",
+      "host": {
+        "platform": "linux",
+        "architecture": "x64",
+        "availableCPUs": 4,
+        "mesaThreads": "3",
+        "processPriority": 10,
+        "display": ":99"
+      },
+      "sound": "off",
+      "seed": 424242,
+      "renderer": "webgl2",
+      "adaptation": "off",
+      "cache": "fresh context per toy; CDP cache disabled; service workers blocked",
+      "firstFrame": "navigation to first postrender after requested toy is ready",
+      "timeouts": {
+        "navigationMs": 180000,
+        "readinessMs": 300000,
+        "cellMs": 180000
+      },
+      "payload": "completed HTTP body bytes after 1500 ms settling; Content-Length with Resource Timing fallback, including worker imports; headers excluded",
+      "deviationFromTask06": "Linux llvmpipe instead of Mac Metal; opening metrics only, without the idle/tap frame-cadence windows"
+    },
+    "after": {
+      "at": "2026-10-14T21:39:24.305Z",
+      "browser": "151.0.7922.173",
+      "args": [
+        "--use-gl=angle",
+        "--use-angle=gl",
+        "--hide-scrollbars",
+        "--enable-unsafe-swiftshader",
+        "--enable-webgl",
+        "--ignore-gpu-blocklist",
+        "--disable-background-timer-throttling",
+        "--disable-renderer-backgrounding",
+        "--disable-backgrounding-occluded-windows"
+      ],
+      "base": "http://127.0.0.1:4173",
+      "definitions": [
+        {
+          "name": "phone",
+          "viewport": {
+            "width": 390,
+            "height": 844
+          },
+          "deviceScaleFactor": 3,
+          "isMobile": true,
+          "hasTouch": true,
+          "profile": "weak"
+        },
+        {
+          "name": "desktop",
+          "viewport": {
+            "width": 1440,
+            "height": 900
+          },
+          "deviceScaleFactor": 1,
+          "isMobile": false,
+          "hasTouch": false,
+          "profile": "high"
+        }
+      ],
+      "frozenMain": "226644fb2b4e70dbd02136caec8e0f57c9f7f662",
+      "candidateSource": "2b5eaae37a07961de240a4b426a90c6a91060787",
+      "host": {
+        "platform": "linux",
+        "architecture": "x64",
+        "availableCPUs": 4,
+        "mesaThreads": "3",
+        "processPriority": 10,
+        "display": ":99"
+      },
+      "sound": "off",
+      "seed": 424242,
+      "renderer": "webgl2",
+      "adaptation": "off",
+      "cache": "fresh context per toy; CDP cache disabled; service workers blocked",
+      "firstFrame": "navigation to first postrender after requested toy is ready",
+      "timeouts": {
+        "navigationMs": 180000,
+        "readinessMs": 300000,
+        "cellMs": 180000
+      },
+      "payload": "completed HTTP body bytes after 1500 ms settling; Content-Length with Resource Timing fallback, including worker imports; headers excluded",
+      "deviationFromTask06": "Linux llvmpipe instead of Mac Metal; opening metrics only, without the idle/tap frame-cadence windows"
+    }
+  }
+}
