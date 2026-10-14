@@ -13,12 +13,18 @@ self.onmessage = ({ data: { type, id, photo, depth, options, cells } }) => {
       return;
     }
     const cached = colors?.id === options.colorKey ? colors : null;
-    const s = buildPhotoSplats(cached?.photo || photo, depth, {
-      ...options,
-      prepared: cached?.prepared,
-      sharpCells: cells,
-    });
-    if (cached) cached.prepared.depthWeights = null;
+    let s;
+    try {
+      s = buildPhotoSplats(cached?.photo || photo, depth, {
+        ...options,
+        prepared: cached?.prepared,
+        sharpCells: cells,
+      });
+    } finally {
+      // Weights are single-build work, including a stale-token fallback or a
+      // failed build. Keep only the source-color preparation for later depth edits.
+      if (colors) colors.prepared.depthWeights = null;
+    }
     const f = Math.min(1, Math.sqrt(cells / (s.gx * s.gy)));
     const cols = Math.max(8, Math.round(s.gx * f)),
       rows = Math.max(8, Math.round(s.gy * f));
