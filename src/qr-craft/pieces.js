@@ -26,6 +26,7 @@
 // with a = 1 + the piece's home module, b = kind + 16 × extra (field.js).
 
 import { QUIET } from "../qr/encode.js";
+import { circleLayout, circleSplats, shapeHalf, appendSplats } from "../qr/circle.js";
 
 export const MATERIALS = [
   { id: "dominoes", label: "Dominoes" },
@@ -201,18 +202,44 @@ const ms = (s) => Math.max(0, Math.round(s * 1000));
 // ---- Splats --------------------------------------------------------------------------------
 
 // Returns { splats, half, layout }. `budget`: about how many splats to use.
-export function buildPieces(code, material, budget = 200000, { tap = [0, 0] } = {}) {
+export function buildPieces(
+  code,
+  material,
+  budget = 200000,
+  { tap = [0, 0], shape = "square" } = {},
+) {
   const N = code.size;
-  const H = N / 2 + QUIET;
+  const circle = shape === "circle" && material !== "dominoes";
+  const H = shapeHalf(N, circle ? "circle" : "square");
+  const decoration = circle
+    ? circleLayout(code).dots.map((d) => ({
+        r: d.row,
+        c: d.col,
+        dark: true,
+        start: 0,
+        decoration: true,
+      }))
+    : [];
   const cx = (c) => c - N / 2; // a module's left edge
   const cy = (r) => N / 2 - r; // a module's top edge
   const make = (s) => {
     const out = [];
     // The marbles roll in over the board from its right side.
-    board(out, N, 0.34, material === "marbles" ? 1.6 : 0);
+    if (circle)
+      appendSplats(
+        out,
+        circleSplats(code, {
+          fg: material === "marbles" ? COLORS.marble : COLORS.tileDark,
+          bg: COLORS.board,
+          z: 0.05,
+          dots: false,
+          scale: Math.max(0.8, s * 6),
+        }).splats,
+      );
+    else board(out, N, 0.34, material === "marbles" ? 1.6 : 0);
     let layout;
     if (material === "marbles") {
-      layout = marbleLayout(code);
+      layout = marbleLayout(code).concat(decoration);
       // The frames: the dark modules of each eye and alignment mark as one
       // solid walnut piece (its pivot the pattern's middle module).
       for (const f of frameLayout(code)) {
@@ -224,9 +251,12 @@ export function buildPieces(code, material, budget = 200000, { tap = [0, 0] } = 
             box(out, cx(c), cy(r) - 1, 0, cx(c) + 1, cy(r), 0.6, s, { top: COLORS.walnut, side: mul(COLORS.walnut, 1.7), end: mul(COLORS.walnut, 1.4) }, params); // prettier-ignore
           }
       }
-      const n = Math.max(40, Math.round((4 * Math.PI * MARBLE_R * MARBLE_R) / (s * s * 0.55)));
+      const n = Math.max(
+        circle ? 32 : 40,
+        Math.round((4 * Math.PI * MARBLE_R * MARBLE_R) / (s * s * 0.55)),
+      );
       for (const m of layout) {
-        const id = 1 + m.r * N + m.c;
+        const id = m.decoration ? 0 : 1 + m.r * N + m.c;
         const params = [id, KIND.marble + 16 * ms(m.start)];
         const x = cx(m.c) + 0.5;
         const y = cy(m.r) - 0.5;
@@ -249,7 +279,7 @@ export function buildPieces(code, material, budget = 200000, { tap = [0, 0] } = 
       // A shallow dimple under each dark module: a darker ring on the board
       // reads as the cup each marble settles in (it sits under the marble).
     } else if (material === "tiles") {
-      layout = tileLayout(code, tap);
+      layout = tileLayout(code, tap).concat(decoration);
       const g = 0.035; // the gap between tiles
       for (const t of layout) {
         const x0 = cx(t.c) + g;
@@ -260,8 +290,11 @@ export function buildPieces(code, material, budget = 200000, { tap = [0, 0] } = 
         const down = t.dark ? COLORS.tileLight : COLORS.tileDark;
         // Only the dark modules' tiles flip; the others lie still.
         const id = 1 + t.r * N + t.c;
-        const params = t.dark ? [id, KIND.tile] : [0, KIND.board];
-        const fp = t.dark ? { bottom: [id, KIND.tileBottom], side: [id, KIND.tileSide] } : {};
+        const params = t.dark && !t.decoration ? [id, KIND.tile] : [0, KIND.board];
+        const fp =
+          t.dark && !t.decoration
+            ? { bottom: [id, KIND.tileBottom], side: [id, KIND.tileSide] }
+            : {};
         box(out, x0, y0, 0, x1, y1, TILE_T, s, { top: up, bottom: t.dark ? down : null, side: mul(COLORS.tileLight, 0.86), end: mul(COLORS.tileLight, 0.8) }, params, fp); // prettier-ignore
       }
     } else {
@@ -286,7 +319,7 @@ export function buildPieces(code, material, budget = 200000, { tap = [0, 0] } = 
   };
   let s = 0.12;
   let r = make(s);
-  while (r.out.length > budget && s < 0.4) {
+  while (r.out.length > budget && s < (circle ? 0.9 : 0.4)) {
     s *= 1.2;
     r = make(s);
   }
