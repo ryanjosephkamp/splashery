@@ -1,0 +1,8 @@
+{
+  "reference": "cdx-qr-3-1",
+  "productionExport": "savePNG(900)",
+  "screeningExport": "same renderFront camera, size, sort wait, and two real renderAt frames, without UI busy wait or download",
+  "productionRgbaSha256": "e96e3901dd3d0252cba4c8cac717a9831381ebe001c427a94caa659d677989ad",
+  "screeningRgbaSha256": "e96e3901dd3d0252cba4c8cac717a9831381ebe001c427a94caa659d677989ad",
+  "identical": true
+}

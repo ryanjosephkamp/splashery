@@ -3,6 +3,27 @@
 October 14, 2026. Built by Codex on `codex/manual-pdf-phone` for
 [task 73](../codex/73-manual-pdf-phone.md). Rule check: none.
 
+This is the original build and test record at `c8c013687df5a4792661f8bfbcedd782385e3e8e`. Its passes
+and screenshots are historical evidence. The follow-up continues that implementation, merges main at
+`58f3d8ede13714bf4b3d1f99fbf3b29d7f60e492`, and regenerates the service worker. Fresh check counts,
+failures, and limits are reported separately in the Verification section of
+[draft PR #597](https://github.com/ryanjosephkamp/splashery/pull/597).
+
+The credits page, Books notebook page, and builders pack now follow `manual/pdf-edition.js` too. The
+page generator resolves historical PDF mentions to edition links without changing the source
+records' wording. The pack reads the edition module from its selected `--root` checkout and includes
+the current PDF, the module, and the compatibility copy for old links in packed guides. Every
+published build refreshes that copy. Current-PDF assertions in `man5`, `man6`, `man9`, and `ln` use
+the edition module. Only `cdx-manual-pdf` (byte equality and HTTP access), `man` (file existence),
+`st4` (old-link HTTP access after the front-door swap), and `bld` (old links in the ZIP)
+deliberately test the legacy address.
+
+Follow-up checks run in Linux cloud Chromium with the sandbox enabled. A temporary Playwright config
+omits the repository's unsafe graphics flags and GPU-blocklist overrides; it retains one worker,
+zero retries, the existing assertions, and failure traces. The PDF builder also enables Chromium's
+sandbox. Browser archives, fonts, config, logs, and failure artifacts stay outside tracked files.
+The full repository suite and real Android viewers remain outside this follow-up's measured scope.
+
 The current download is
 [tinkerers-manual-85d32b96193ea275.pdf](../../manual/tinkerers-manual-85d32b96193ea275.pdf): 153
 Letter pages, 7,792,711 bytes. Its filename contains the first 16 hexadecimal characters of its

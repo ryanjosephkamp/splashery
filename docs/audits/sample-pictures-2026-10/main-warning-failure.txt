@@ -1,0 +1,80 @@
+Clean main: 574a68d3125c6ef8f0f5951b53a7da7b6124a341
+Tracked and untracked working tree clean before execution. Same pinned dependencies and Chromium.
+
+  1) [chromium] › tests/p3d.spec.mjs:176:3 › in the browser › nothing loads the depth model until a photo is opened; then it builds and taps
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: locator('.warning:visible')
+    Expected: visible
+    Timeout: 60000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" with timeout 60000ms
+      - waiting for locator('.warning:visible')
+
+
+      192 |     // a file that is not a photo says so
+      193 |     await page.locator("#toy-input-file").setInputFiles({ name: "x.jpg", mimeType: "image/jpeg", buffer: Buffer.from("not a photo") }); // prettier-ignore
+    > 194 |     await expect(page.locator(".warning:visible")).toBeVisible();
+          |                                                    ^
+      195 |     expect(errors).toEqual([]);
+      196 |   });
+      197 |
+        at /workspace/splashery/.cache/cdx-pics/round2-main/tests/p3d.spec.mjs:194:52
+
+
+  2) [chromium] › tests/p3d.spec.mjs:176:3 › in the browser › nothing loads the depth model until a photo is opened; then it builds and taps
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: locator('.warning:visible')
+    Expected: visible
+    Timeout: 60000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" with timeout 60000ms
+      - waiting for locator('.warning:visible')
+
+
+      192 |     // a file that is not a photo says so
+      193 |     await page.locator("#toy-input-file").setInputFiles({ name: "x.jpg", mimeType: "image/jpeg", buffer: Buffer.from("not a photo") }); // prettier-ignore
+    > 194 |     await expect(page.locator(".warning:visible")).toBeVisible();
+          |                                                    ^
+      195 |     expect(errors).toEqual([]);
+      196 |   });
+      197 |
+        at /workspace/splashery/.cache/cdx-pics/round2-main/tests/p3d.spec.mjs:194:52
+
+
+  3) [chromium] › tests/p3d.spec.mjs:176:3 › in the browser › nothing loads the depth model until a photo is opened; then it builds and taps
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: locator('.warning:visible')
+    Expected: visible
+    Timeout: 60000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" with timeout 60000ms
+      - waiting for locator('.warning:visible')
+
+
+      192 |     // a file that is not a photo says so
+      193 |     await page.locator("#toy-input-file").setInputFiles({ name: "x.jpg", mimeType: "image/jpeg", buffer: Buffer.from("not a photo") }); // prettier-ignore
+    > 194 |     await expect(page.locator(".warning:visible")).toBeVisible();
+          |                                                    ^
+      195 |     expect(errors).toEqual([]);
+      196 |   });
+      197 |
+        at /workspace/splashery/.cache/cdx-pics/round2-main/tests/p3d.spec.mjs:194:52
+
+
+  3 failed
+    [chromium] › tests/p3d.spec.mjs:176:3 › in the browser › nothing loads the depth model until a photo is opened; then it builds and taps
+    [chromium] › tests/p3d.spec.mjs:176:3 › in the browser › nothing loads the depth model until a photo is opened; then it builds and taps
+    [chromium] › tests/p3d.spec.mjs:176:3 › in the browser › nothing loads the depth model until a photo is opened; then it builds and taps
+  5 passed (6.8m)
