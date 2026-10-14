@@ -28,6 +28,7 @@ import { hubTypes } from "./site-hubs.mjs";
 import { toyPage, toyPath, toyPageDirs, TOY_DATES, dateText } from "./site-toy-pages.mjs";
 import { swapLayout, liftHtml } from "./site-front-door.mjs";
 import { buildPlaygroundLinks } from "./site-playground-links.mjs";
+import { pitchPage } from "./site-pitch.mjs";
 
 const root = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
 const OUT = path.join(root, "site");
@@ -110,7 +111,7 @@ const EARLY = `(function(){var d=document.documentElement;d.classList.add("js");
 // A page's link preview picture: its own (a toy's thumbnail, relative to site/), or the site's.
 function ogImage(page) {
   const img = page.image
-    ? { src: new URL(page.image, SITE.origin + SITE.base).href, w: page.imageSize, h: page.imageSize, alt: page.imageAlt, card: "summary" } // prettier-ignore
+    ? { src: new URL(page.image, SITE.origin + SITE.base).href, w: page.imageWidth || page.imageSize, h: page.imageHeight || page.imageSize, alt: page.imageAlt, card: page.imageCard || "summary" } // prettier-ignore
     : { src: `${SITE.origin + SITE.base}assets/og.png`, w: 1200, h: 630, alt: "A strawberry made of soft 3D splats, beside the word Splashery", card: "summary_large_image" }; // prettier-ignore
   return `<meta property="og:image" content="${esc(img.src)}" />
 <meta property="og:image:width" content="${img.w}" />
@@ -441,6 +442,9 @@ ${shelfSections(page.shelves, up)}`;
   // A page for every toy (lane Toy pages): tools/site-toy-pages.mjs.
   toy: (page, ctx) => toyPage(page, { ...ctx, esc, toyCard, galleryHref, thumbHref, shelfName, howTo, arrow }), // prettier-ignore
 
+  // The one-link page (lane Pitch): tools/site-pitch.mjs.
+  pitch: (page, ctx) => pitchPage(page, { ...ctx, esc, thumbHref, toyPath, arrow, countToys, TOYS, galleryHref, galleryHash, SITE }), // prettier-ignore
+
   notFound() {
     return `<div class="page-intro"><h1>This page isn't here</h1>
 <p class="lead">It may have moved. Try a search, or start from the home page.</p></div>
@@ -720,7 +724,7 @@ async function buildPreview() {
   // (tools/upkeep.mjs) rebuilds them after each merge. --check reports them but
   // fails only on the rest: the shell, the hand-written pages and everything else
   // the build makes. A new page type that reads toys belongs in TOY_TYPES.
-  const TOY_TYPES = new Set(["home", "shelves", "tools", "science", "learn", "about", "terms", "news", "markdown", "article", "embed", "toy"]); // prettier-ignore
+  const TOY_TYPES = new Set(["home", "shelves", "tools", "science", "learn", "about", "terms", "news", "markdown", "article", "embed", "toy", "pitch"]); // prettier-ignore
   const followsMain = new Set([
     ...PAGES.filter((p) => TOY_TYPES.has(p.type)).map((p) => `${p.path}index.html`),
     "search-index.json",

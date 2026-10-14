@@ -1,0 +1,251 @@
+/* The one-link page (lane Pitch): site/about/splashery/. Loaded only there, after site.css, and
+   uses its tokens. Each section is the words beside one live toy; on a phone, the words above it. */
+
+.pit {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 var(--gutter) 48px;
+}
+.pit h1 {
+  font: 760 clamp(2rem, 1.3rem + 3.2vw, 3.4rem) / 1.05 var(--font-display);
+  letter-spacing: -0.03em;
+  margin: 6px 0 14px;
+  max-width: 13em;
+}
+.pit h2 {
+  font: 740 clamp(1.5rem, 1.2rem + 1.2vw, 2.1rem) / 1.12 var(--font-display);
+  letter-spacing: -0.02em;
+  margin: 2px 0 12px;
+}
+.pit p {
+  line-height: 1.6;
+  max-width: 34em;
+}
+.pit-eyebrow,
+.pit-num {
+  font: 600 0.8rem / 1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0;
+}
+.pit-lead {
+  font-size: 1.12rem;
+  color: var(--muted);
+}
+.pit-stats {
+  display: flex;
+  gap: 24px;
+  padding: 0;
+  margin: 18px 0 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+.pit-stats b {
+  display: block;
+  font: 720 1.6rem / 1.1 var(--font-display);
+  color: var(--ink);
+}
+
+/* ---- Sections: words and a live toy side by side ---- */
+
+.pit-hero,
+.pit-sec {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  gap: 24px 56px;
+  align-items: center;
+  padding: 56px 0;
+}
+.pit-hero {
+  padding-top: 32px;
+}
+.pit-sec {
+  border-top: 1px solid var(--line);
+}
+.pit-sec:nth-of-type(odd) .pit-text {
+  order: 2;
+}
+.pit-figure {
+  margin: 0;
+  min-width: 0;
+}
+.pit-figure figcaption {
+  margin-top: 10px;
+  font-size: 0.88rem;
+  color: var(--muted);
+}
+.pit-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 20px;
+  margin: 16px 0 0;
+}
+.pit-links a {
+  font-weight: 600;
+}
+.pit-links .arrow {
+  vertical-align: -2px;
+  margin-left: 4px;
+}
+.pit-credit {
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+/* ---- The live toy: its still, the player on top once it starts ---- */
+
+.pit-stage {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--raised);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+}
+.pit-hero-stage {
+  box-shadow: var(--shadow-lg);
+}
+.pit-still {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: min(62%, 300px);
+  height: auto;
+  transition: opacity 0.4s var(--ease);
+}
+.pit-stage iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: transparent;
+  opacity: 0;
+  transition: opacity 0.5s var(--ease);
+}
+.pit-stage[data-state="ready"] iframe {
+  opacity: 1;
+}
+.pit-stage[data-state="ready"] .pit-still {
+  opacity: 0;
+}
+.pit-note:empty {
+  display: none;
+}
+.pit-note {
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: 10px;
+  margin: 0;
+  font-size: 0.82rem;
+  color: var(--muted);
+  text-align: center;
+}
+.pit-start[hidden] {
+  display: none;
+}
+.pit-start {
+  position: absolute;
+  left: 50%;
+  bottom: 16px;
+  transform: translateX(-50%);
+}
+
+/* ---- One splat ---- */
+
+.pit-one {
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--line);
+  background: var(--card);
+  overflow: hidden;
+}
+.pit-one canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+.pit-sliders {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px 20px;
+  padding: 14px 16px 16px;
+  border-top: 1px solid var(--line);
+  font-size: 0.86rem;
+  color: var(--muted);
+}
+.pit-sliders label {
+  display: grid;
+  gap: 4px;
+}
+.pit-sliders input {
+  width: 100%;
+  accent-color: var(--accent);
+}
+
+/* ---- The claims ---- */
+
+.pit-claims {
+  grid-template-columns: minmax(0, 1fr);
+  align-items: start;
+}
+.pit-sec.pit-claims .pit-text {
+  order: 0;
+}
+.pit-claim-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  background: var(--line);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.pit-claim-list li {
+  background: var(--page);
+  padding: 18px 20px;
+}
+.pit-claim-list b {
+  display: block;
+  margin-bottom: 6px;
+}
+.pit-claim-list span {
+  color: var(--muted);
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+.pit-end {
+  margin-top: 28px;
+}
+
+@media (max-width: 859px) {
+  .pit-hero,
+  .pit-sec {
+    grid-template-columns: minmax(0, 1fr);
+    padding: 36px 0;
+  }
+  .pit-hero {
+    padding-top: 20px;
+  }
+  .pit-sec:nth-of-type(odd) .pit-text {
+    order: 0;
+  }
+  .pit-claim-list {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pit-still,
+  .pit-stage iframe {
+    transition: none;
+  }
+}

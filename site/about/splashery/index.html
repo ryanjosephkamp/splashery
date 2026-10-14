@@ -1,0 +1,618 @@
+<!doctype html>
+<html lang="en" data-root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Splashery, in two minutes</title>
+    <meta
+      name="description"
+      content="A real-time 3D Gaussian splat engine and studio that runs in a browser tab: objects built from recipes, photos turned into 3D on the device, real science data, and scenes that fit in a link."
+    />
+    <meta name="robots" content="noindex" />
+    <link rel="canonical" href="https://ryanjosephkamp.github.io/splashery/site/about/splashery/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Splashery" />
+    <meta property="og:title" content="Splashery, in two minutes" />
+    <meta
+      property="og:description"
+      content="A real-time 3D Gaussian splat engine and studio that runs in a browser tab: objects built from recipes, photos turned into 3D on the device, real science data, and scenes that fit in a link."
+    />
+    <meta
+      property="og:url"
+      content="https://ryanjosephkamp.github.io/splashery/site/about/splashery/"
+    />
+    <meta
+      property="og:image"
+      content="https://ryanjosephkamp.github.io/splashery/site/assets/pitch-og.png"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="A grape, a toy piano, and a QR code, each made of soft 3D splats, beside the words: a 3D Gaussian splat engine and studio, in a browser tab"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#101010" />
+    <link rel="manifest" href="../../manifest.webmanifest" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cg opacity='.92'%3E%3Cellipse cx='24' cy='26' rx='14' ry='11' fill='%23ff5fa2'/%3E%3Cellipse cx='40' cy='24' rx='12' ry='13' fill='%237bdff2'/%3E%3Cellipse cx='33' cy='41' rx='15' ry='11' fill='%23ffd166'/%3E%3C/g%3E%3C/svg%3E"
+    />
+    <link rel="apple-touch-icon" href="../../../assets/app/icon-180.png" />
+    <script>
+      (function () {
+        var d = document.documentElement;
+        d.classList.add("js");
+        try {
+          var t = localStorage.getItem("splashery.site.theme");
+          if (t === "light" || t === "dark") d.dataset.theme = t;
+          var q = new URLSearchParams(location.search).get("labs");
+          if (q === "1") localStorage.setItem("splashery.labs", "1");
+          else if (q === "0") localStorage.removeItem("splashery.labs");
+          if (localStorage.getItem("splashery.labs") === "1") d.classList.add("labs");
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="stylesheet" href="../../assets/site.css" />
+    <link rel="stylesheet" href="../../assets/pitch.css" />
+    <script type="module" src="../../assets/site.js"></script>
+    <script type="module" src="../../assets/pitch.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to the page</a>
+    <header class="site-header">
+      <div class="bar">
+        <a class="brand" href="../../" aria-label="Splashery home"
+          ><svg class="logo" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true">
+            <g opacity=".92">
+              <ellipse cx="24" cy="26" rx="14" ry="11" fill="#ff5fa2" />
+              <ellipse cx="40" cy="24" rx="12" ry="13" fill="#7bdff2" />
+              <ellipse cx="33" cy="41" rx="15" ry="11" fill="#ffd166" />
+            </g></svg
+          ><span>Splashery</span></a
+        >
+        <a class="search-link" href="../../search/" aria-label="Search"
+          ><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+            <circle
+              cx="10.5"
+              cy="10.5"
+              r="6.5"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            />
+            <path
+              d="m15.5 15.5 5 5"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            /></svg
+        ></a>
+        <button type="button" class="menu-button" aria-expanded="false" aria-controls="site-menu">
+          <span class="menu-icon" aria-hidden="true"></span><span class="menu-label">Menu</span>
+        </button>
+        <div class="menu" id="site-menu">
+          <nav aria-label="Site">
+            <ul>
+              <li><a href="../../">Home</a></li>
+              <li><a href="../../toys/">Toys</a></li>
+              <li><a href="../../tools/">Tools</a></li>
+              <li><a href="../../science/">Science</a></li>
+              <li><a href="../../studio/">Studio</a></li>
+              <li><a href="../../learn/">Learn</a></li>
+              <li><a href="../../new/">What's new</a></li>
+              <li><a href="../../about/" aria-current="page">About</a></li>
+            </ul>
+          </nav>
+          <form class="search-form" role="search" action="../../search/" method="get">
+            <label class="visually-hidden" for="site-search">Search toys and pages</label>
+            <input
+              id="site-search"
+              type="search"
+              name="q"
+              placeholder="Search toys"
+              autocomplete="off"
+              enterkeyhint="search"
+            />
+            <button type="submit">Search</button>
+          </form>
+          <button type="button" class="theme-button" aria-label="Color theme: follows your device">
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+              <path d="M12 3a9 9 0 1 0 0 18V3z" fill="currentColor" />
+              <circle
+                cx="12"
+                cy="12"
+                r="8.25"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+              />
+            </svg>
+            <span class="theme-label">Auto</span>
+          </button>
+        </div>
+      </div>
+    </header>
+    <main id="main" tabindex="-1">
+      <article class="pit">
+        <section class="pit-hero" aria-labelledby="h-pit">
+          <div class="pit-hero-text">
+            <p class="pit-eyebrow">Splashery</p>
+            <h1 id="h-pit">A 3D Gaussian splat engine and studio, in a browser tab.</h1>
+            <p class="pit-lead">
+              Everything here is drawn from soft, colored splats, sorted and blended on your own
+              graphics chip. There is nothing to install, and nothing you open leaves your device.
+            </p>
+            <p class="pit-stats">
+              <span><b>319</b> toys</span><span><b>0</b> installs</span
+              ><span><b>0</b> uploads</span>
+            </p>
+          </div>
+          <figure class="pit-figure">
+            <div class="pit-stage pit-hero-stage" data-pit-demo="grape">
+              <img
+                class="pit-still"
+                src="../../../assets/toys/grape/thumb.webp"
+                alt=""
+                width="480"
+                height="480"
+                fetchpriority="high"
+                decoding="async"
+              />
+              <iframe
+                data-src="../../play/?toy=grape&controls=0"
+                title="A grape, captured from photos: drag to turn it, tap to peel it"
+                allow="fullscreen"
+                tabindex="0"
+                hidden
+              ></iframe>
+              <button type="button" class="pit-start" hidden>Start the live toy</button>
+              <p class="pit-note" role="status" aria-live="polite"></p>
+            </div>
+            <figcaption>
+              A grape, captured from photos. Drag to turn it; tap it to peel the skin.
+            </figcaption>
+          </figure>
+        </section>
+
+        <section class="pit-sec" aria-labelledby="h-pit-one">
+          <div class="pit-text">
+            <p class="pit-num">01</p>
+            <h2 id="h-pit-one">One splat</h2>
+            <p>
+              A splat is a soft blob with a position, a shape, a color, and an opacity. Change them
+              here. Every scene on the site is this, repeated a few hundred thousand times and
+              sorted back to front.
+            </p>
+            <p class="pit-links">
+              <a href="../../../manual/splat.html"
+                >The manual, from one splat up<svg
+                  class="arrow"
+                  viewBox="0 0 16 16"
+                  width="16"
+                  height="16"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M3 8h9M8.5 4 12.5 8l-4 4"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  /></svg></a
+              ><a href="../../learn/splats/">How splats work</a>
+            </p>
+          </div>
+          <figure class="pit-figure">
+            <div class="pit-one" data-pit-one>
+              <canvas
+                width="480"
+                height="480"
+                role="img"
+                aria-label="One splat: a soft colored ellipse that fades out from its center"
+              ></canvas>
+              <div class="pit-sliders">
+                <label
+                  >Width
+                  <input type="range" min="0.06" max="0.42" step="0.01" value="0.26" data-k="sx"
+                /></label>
+                <label
+                  >Height
+                  <input type="range" min="0.06" max="0.42" step="0.01" value="0.14" data-k="sy"
+                /></label>
+                <label
+                  >Turn <input type="range" min="0" max="180" step="1" value="30" data-k="rot"
+                /></label>
+                <label
+                  >Opacity
+                  <input type="range" min="0.05" max="1" step="0.01" value="0.9" data-k="a"
+                /></label>
+              </div>
+            </div>
+            <figcaption>
+              One splat, drawn the way the engine blends it: brightest at the center, fading as a
+              bell curve.
+            </figcaption>
+          </figure>
+        </section>
+
+        <section class="pit-sec" aria-labelledby="h-pit-recipe">
+          <div class="pit-text">
+            <p class="pit-num">02</p>
+            <h2 id="h-pit-recipe">Built from recipes, not downloaded</h2>
+            <p>
+              Most objects here were never captured. A recipe of a few kilobytes says what an object
+              is made of and which parts move, and your device builds the splats. Parts move as
+              solid pieces on hinges, pivots, and sliders, inside one splat cloud.
+            </p>
+            <p>The piano is played: each key goes down as it sounds.</p>
+            <p class="pit-links">
+              <a
+                href="../../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InRveS1waWFubyJ9LCJjYW1lcmEiOnsieWF3IjowLjQ1LCJwaXRjaCI6MC40Miwicm9sbCI6MCwiZGlzdGFuY2UiOjQuN30sImF1dG9wbGF5Ijp7InR1cm50YWJsZSI6ZmFsc2UsImVmZmVjdCI6Im5vbmUifX0"
+                target="_blank"
+                rel="noopener"
+                >Open it in the Playground<svg
+                  class="arrow"
+                  viewBox="0 0 16 16"
+                  width="16"
+                  height="16"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M3 8h9M8.5 4 12.5 8l-4 4"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  /></svg></a
+              ><a href="../../toys/toy-piano/">Its page</a
+              ><a href="../../learn/recipes/">Writing a recipe</a>
+            </p>
+          </div>
+          <figure class="pit-figure">
+            <div class="pit-stage" data-pit-demo="toy-piano">
+              <img
+                class="pit-still"
+                src="../../../assets/toys/toy-piano/thumb.webp"
+                alt=""
+                width="480"
+                height="480"
+                loading="lazy"
+                decoding="async"
+              />
+              <iframe
+                data-src="../../play/?toy=toy-piano&sound=on&controls=0"
+                title="A toy piano built from a recipe: tap or drag along the keys to play it"
+                allow="fullscreen"
+                tabindex="0"
+                hidden
+              ></iframe>
+              <button type="button" class="pit-start" hidden>Start the live toy</button>
+              <p class="pit-note" role="status" aria-live="polite"></p>
+            </div>
+            <figcaption>
+              A toy piano, built from a recipe on your device. Tap or drag along the keys. Sound
+              plays only after you tap.
+            </figcaption>
+          </figure>
+        </section>
+
+        <section class="pit-sec" aria-labelledby="h-pit-photo">
+          <div class="pit-text">
+            <p class="pit-num">03</p>
+            <h2 id="h-pit-photo">A photo becomes 3D, on the device</h2>
+            <p>
+              A depth model runs in the page and lifts a single photo into a relief you can turn. It
+              downloads only when you ask for it, and the photo is never sent anywhere. A short
+              video becomes a scene you can fly through, the same way.
+            </p>
+            <p>In the Playground, open your own photo in the toy's tab.</p>
+            <p class="pit-links">
+              <a
+                href="../../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBob3RvLTNkIn0sImNhbWVyYSI6eyJ5YXciOjAsInBpdGNoIjowLCJyb2xsIjowLCJkaXN0YW5jZSI6My40fX0"
+                target="_blank"
+                rel="noopener"
+                >Open it in the Playground<svg
+                  class="arrow"
+                  viewBox="0 0 16 16"
+                  width="16"
+                  height="16"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M3 8h9M8.5 4 12.5 8l-4 4"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  /></svg></a
+              ><a href="../../toys/photo-3d/">Its page</a><a href="../../studio/">The Studio</a>
+            </p>
+          </div>
+          <figure class="pit-figure">
+            <div class="pit-stage" data-pit-demo="photo-3d">
+              <img
+                class="pit-still"
+                src="../../../assets/toys/photo-3d/thumb.webp"
+                alt=""
+                width="480"
+                height="480"
+                loading="lazy"
+                decoding="async"
+              />
+              <iframe
+                data-src="../../play/?toy=photo-3d&turntable=off&controls=0"
+                title="A photo turned into 3D: tap to lift its depth, drag to turn it"
+                allow="fullscreen"
+                tabindex="0"
+                hidden
+              ></iframe>
+              <button type="button" class="pit-start" hidden>Start the live toy</button>
+              <p class="pit-note" role="status" aria-live="polite"></p>
+            </div>
+            <figcaption>
+              A sample photo with its depth. Tap to lift it out of the picture; tap again to lay it
+              flat.
+            </figcaption>
+          </figure>
+        </section>
+
+        <section class="pit-sec" aria-labelledby="h-pit-data">
+          <div class="pit-text">
+            <p class="pit-num">04</p>
+            <h2 id="h-pit-data">Real data</h2>
+            <p>
+              The science toys show measured things. This is a real walnut, scanned with X-ray CT at
+              CWI in Amsterdam: more than a thousand X-ray pictures, worked back into a volume. Each
+              splat is one small block of it, 0.3 mm across.
+            </p>
+            <p class="pit-links">
+              <a
+                href="../../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6IndhbG51dC1jdCJ9LCJjYW1lcmEiOnsieWF3IjowLjM1LCJwaXRjaCI6MC4yLCJyb2xsIjowLCJkaXN0YW5jZSI6Mi44fX0"
+                target="_blank"
+                rel="noopener"
+                >Open it in the Playground<svg
+                  class="arrow"
+                  viewBox="0 0 16 16"
+                  width="16"
+                  height="16"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M3 8h9M8.5 4 12.5 8l-4 4"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  /></svg></a
+              ><a href="../../toys/walnut-ct/">Its page</a><a href="../../science/">Science</a>
+            </p>
+            <p class="pit-credit">
+              Data: Der Sarkissian et al., CWI,
+              <a href="https://doi.org/10.5281/zenodo.2686726" target="_blank" rel="noopener"
+                >Zenodo</a
+              >, CC BY 4.0.
+            </p>
+          </div>
+          <figure class="pit-figure">
+            <div class="pit-stage" data-pit-demo="walnut-ct">
+              <img
+                class="pit-still"
+                src="../../../assets/toys/walnut-ct/thumb.webp"
+                alt=""
+                width="480"
+                height="480"
+                loading="lazy"
+                decoding="async"
+              />
+              <iframe
+                data-src="../../play/?toy=walnut-ct&zoom=0.7&controls=0"
+                title="A real CT scan of a walnut: drag up or down to cut into it"
+                allow="fullscreen"
+                tabindex="0"
+                hidden
+              ></iframe>
+              <button type="button" class="pit-start" hidden>Start the live toy</button>
+              <p class="pit-note" role="status" aria-live="polite"></p>
+            </div>
+            <figcaption>Drag up or down on the walnut to cut into it, slice by slice.</figcaption>
+          </figure>
+        </section>
+
+        <section class="pit-sec" aria-labelledby="h-pit-qr">
+          <div class="pit-text">
+            <p class="pit-num">05</p>
+            <h2 id="h-pit-qr">A code that scans</h2>
+            <p>
+              Text, pictures, PDFs, and codes can all become splats. This QR code is made of them,
+              and it still reads: point a phone's camera at it. The QR tools also show how a code
+              works, how much damage it survives, and how to hide three in one picture.
+            </p>
+            <p class="pit-links">
+              <a
+                href="../../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InFyLWNvZGUifSwiY2FtZXJhIjp7InlhdyI6MCwicGl0Y2giOjAsInJvbGwiOjAsImRpc3RhbmNlIjozLjF9fQ"
+                target="_blank"
+                rel="noopener"
+                >Open it in the Playground<svg
+                  class="arrow"
+                  viewBox="0 0 16 16"
+                  width="16"
+                  height="16"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M3 8h9M8.5 4 12.5 8l-4 4"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  /></svg></a
+              ><a href="../../toys/qr-code/">Its page</a><a href="../../tools/#qr">QR tools</a>
+            </p>
+          </div>
+          <figure class="pit-figure">
+            <div class="pit-stage" data-pit-demo="qr-code">
+              <img
+                class="pit-still"
+                src="../../../assets/toys/qr-code/thumb.webp"
+                alt=""
+                width="480"
+                height="480"
+                loading="lazy"
+                decoding="async"
+              />
+              <iframe
+                data-src="../../play/?toy=qr-code&turntable=off&zoom=0.72&controls=0"
+                title="A QR code made of splats that a phone camera reads"
+                allow="fullscreen"
+                tabindex="0"
+                hidden
+              ></iframe>
+              <button type="button" class="pit-start" hidden>Start the live toy</button>
+              <p class="pit-note" role="status" aria-live="polite"></p>
+            </div>
+            <figcaption>A QR code in splats. It opens Splashery.</figcaption>
+          </figure>
+        </section>
+
+        <section class="pit-sec pit-claims" aria-labelledby="h-pit-claims">
+          <div class="pit-text">
+            <p class="pit-num">06</p>
+            <h2 id="h-pit-claims">What other splat tools don't do</h2>
+            <p>
+              To our knowledge, after looking at the public ones. Splat editors work on captured
+              files; Splashery mostly starts from rules.
+            </p>
+          </div>
+          <ul class="pit-claim-list">
+            <li>
+              <b>Objects from code</b
+              ><span
+                >A recipe of a few kilobytes becomes a budget of 60,000 to 400,000 splats on your
+                device, with parts that move as solid pieces.</span
+              >
+            </li>
+            <li>
+              <b>Nothing to install</b
+              ><span>WebGPU or WebGL2 in any current browser, on a phone or a desktop.</span>
+            </li>
+            <li>
+              <b>Files stay on the device</b
+              ><span
+                >Photos, videos, PDFs, splat files, and models are opened in the page. There is no
+                upload and no account.</span
+              >
+            </li>
+            <li>
+              <b>A whole scene in a link</b
+              ><span
+                >The grape above, with its camera, fits in a link of 97 characters. No server holds
+                it.</span
+              >
+            </li>
+            <li>
+              <b>Photos and video to 3D</b
+              ><span>Depth and structure are worked out in the browser, on a phone too.</span>
+            </li>
+            <li>
+              <b>A manual from one splat up</b
+              ><span
+                >The Tinkerer's Manual teaches splats from a single bell curve to writing your own
+                toys, with live demos in its pages.</span
+              >
+            </li>
+          </ul>
+          <p class="pit-links pit-end">
+            <a class="button primary" href="../../../" target="_blank" rel="noopener"
+              >Open the Playground<svg
+                class="arrow"
+                viewBox="0 0 16 16"
+                width="16"
+                height="16"
+                aria-hidden="true"
+              >
+                <path
+                  d="M3 8h9M8.5 4 12.5 8l-4 4"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                /></svg></a
+            ><a class="button" href="../../../manual/">Read the manual</a
+            ><a
+              class="button"
+              href="https://github.com/ryanjosephkamp/splashery"
+              target="_blank"
+              rel="noopener"
+              >Source on GitHub</a
+            >
+          </p>
+        </section>
+      </article>
+    </main>
+    <footer class="site-footer">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="brand" href="../../"
+            ><svg class="logo" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true">
+              <g opacity=".92">
+                <ellipse cx="24" cy="26" rx="14" ry="11" fill="#ff5fa2" />
+                <ellipse cx="40" cy="24" rx="12" ry="13" fill="#7bdff2" />
+                <ellipse cx="33" cy="41" rx="15" ry="11" fill="#ffd166" />
+              </g></svg
+            ><span>Splashery</span></a
+          >
+          <p>
+            splats you can play with. Free, in your browser, with nothing to install; files you open
+            stay on your device.
+          </p>
+        </div>
+        <nav aria-label="Explore">
+          <h2>Explore</h2>
+          <ul>
+            <li><a href="../../">Home</a></li>
+            <li><a href="../../toys/">Toys</a></li>
+            <li><a href="../../tools/">Tools</a></li>
+            <li><a href="../../science/">Science</a></li>
+            <li><a href="../../studio/">Studio</a></li>
+            <li><a href="../../learn/">Learn</a></li>
+            <li><a href="../../new/">What's new</a></li>
+            <li><a href="../../about/">About</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="More">
+          <h2>More</h2>
+          <ul>
+            <li><a href="../../../" target="_blank" rel="noopener">The Playground</a></li>
+            <li><a href="../../search/">Search</a></li>
+            <li><a href="../../../manual/">The Tinkerer's Manual</a></li>
+            <li>
+              <a href="https://github.com/ryanjosephkamp/splashery" target="_blank" rel="noopener"
+                >Source on GitHub</a
+              >
+            </li>
+            <li><a href="../../share/">Embed and share</a></li>
+            <li><a href="../../about/credits/">Credits</a></li>
+            <li><a href="../../about/contact/">Contact</a></li>
+            <li><a href="../../about/privacy/">Privacy</a></li>
+            <li><a href="../../about/terms/">Terms</a></li>
+          </ul>
+        </nav>
+      </div>
+      <p class="fine">
+        Made by <a href="../../about/contact/">Ryan Kamp</a>. Code under the MIT license; each toy's
+        assets keep their own licenses. Built on the PlayCanvas engine. This is a preview of
+        Splashery's new site; the toys live in
+        <a href="../../../" target="_blank" rel="noopener">the Playground</a>.
+      </p>
+    </footer>
+  </body>
+</html>

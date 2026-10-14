@@ -523,6 +523,24 @@ export const PAGES = [
   },
 ];
 
+// The one-link page (lane Pitch): Splashery in two minutes, with live toys. Not linked from the
+// home page or the menu; the owner decides that. Built by tools/site-pitch.mjs.
+PAGES.push({
+  path: "about/splashery/",
+  type: "pitch",
+  nav: "about",
+  title: "Splashery, in two minutes",
+  description: "A real-time 3D Gaussian splat engine and studio that runs in a browser tab: objects built from recipes, photos turned into 3D on the device, real science data, and scenes that fit in a link.", // prettier-ignore
+  lead: "A real-time 3D Gaussian splat engine and studio, in a browser tab.",
+  styles: ["pitch.css"],
+  scripts: ["pitch.js"],
+  image: "assets/pitch-og.png",
+  imageWidth: 1200,
+  imageHeight: 630,
+  imageCard: "summary_large_image",
+  imageAlt: "A grape, a toy piano, and a QR code, each made of soft 3D splats, beside the words: a 3D Gaussian splat engine and studio, in a browser tab", // prettier-ignore
+});
+
 // A page for every toy, at toys/<id>/ (lane Toy pages: tools/site-toy-pages.mjs).
 PAGES.push(...toyPageEntries());
 

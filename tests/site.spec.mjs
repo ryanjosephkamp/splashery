@@ -91,7 +91,8 @@ test.describe("site", () => {
       }));
       expect(meta.title, p.path).toMatch(/Splashery/);
       expect(meta.desc?.length, p.path).toBeGreaterThan(30);
-      expect(meta.ogImage).toMatch(/\/site\/assets\/og\.png$/);
+      // The site's card, or a page's own (the one-link page's, lane Pitch).
+      expect(meta.ogImage).toMatch(p.image ? new RegExp(`/site/${p.image}$`) : /\/site\/assets\/og\.png$/); // prettier-ignore
       expect(meta.ogTitle).toBeTruthy();
       expect(meta.canonical).toMatch(/^https:\/\/ryanjosephkamp\.github\.io\/splashery\/site\//);
       expect(meta.manifest).toBe(`${ORIGIN}/site/manifest.webmanifest`);

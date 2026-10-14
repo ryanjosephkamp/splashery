@@ -12,7 +12,7 @@
 //   refreshed in the background, so a toy played once keeps working offline.
 // - A page under site/ that isn't there gets site/404.html.
 
-const VERSION = "061310d4b0d7";
+const VERSION = "75a53ee01785";
 const PRECACHE = [
   "./",
   "toys/",
@@ -32,6 +32,7 @@ const PRECACHE = [
   "about/privacy/",
   "about/contact/",
   "search/",
+  "about/splashery/",
   "learn/recipes/",
   "learn/scene-format/",
   "learn/evidence/",
@@ -48,6 +49,8 @@ const PRECACHE = [
   "assets/offline.js",
   "assets/outline.css",
   "assets/outline.js",
+  "assets/pitch.css",
+  "assets/pitch.js",
   "assets/play.js",
   "assets/search.js",
   "assets/site.css",
