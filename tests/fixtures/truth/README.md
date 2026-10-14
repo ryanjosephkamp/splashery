@@ -67,3 +67,13 @@ node --test tests/studio-truth.test.mjs
 
 The browser scorer launches sandboxed Chromium with one page at a time and no unsafe graphics flags.
 See `node tools/studio-truth.mjs --help`.
+
+`--depth-only` calls the actual product inference entry points in a minimal browser harness and
+explicitly omits render evidence. The real-app mode supplies flat front-view diagnostics, which do
+not establish novel-view quality or phone performance. Held-out scores remain null until
+training-frame exclusion and camera alignment are implemented.
+
+Retrieve the full archive with `node tools/studio-truth-fetch.mjs`. An unpublished draft archive
+requires repository collaborator access. The tool verifies SHA-256, rejects links and unsafe archive
+paths, extracts into a new folder, and validates every sequence. It never publishes an archive. The
+report records when the archive is actually available.

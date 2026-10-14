@@ -226,6 +226,8 @@ export function temporalJitter(
   return {
     pixels: errors.length,
     meanMeters: mean(errors),
-    maxMeters: errors.length ? Math.max(...errors) : null,
+    maxMeters: errors.length
+      ? errors.reduce((max, value) => Math.max(max, value), -Infinity)
+      : null,
   };
 }

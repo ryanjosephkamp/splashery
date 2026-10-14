@@ -100,3 +100,25 @@ test("camera motion is removed before temporal depth jitter is counted", () => {
   const bad = new Float32Array(16).fill(2.6);
   assert.ok(m.temporalJitter(zA, bad, zA, zB, mask, mask, a, b, 4, 4).meanMeters > 0.09);
 });
+
+test("temporal scoring handles a full frame without an argument-stack overflow", () => {
+  const w = 640,
+    h = 360;
+  const k = [
+    [640, 0, w / 2],
+    [0, 640, h / 2],
+    [0, 0, 1],
+  ];
+  const identity = [
+    [1, 0, 0, 0],
+    [0, 1, 0, 0],
+    [0, 0, 1, 0],
+    [0, 0, 0, 1],
+  ];
+  const p = { K: k, camera_to_world: identity, world_to_camera: identity };
+  const z = new Float32Array(w * h).fill(3),
+    mask = new Uint8Array(w * h).fill(1);
+  const score = m.temporalJitter(z, z, z, z, mask, mask, p, p, w, h);
+  assert.equal(score.pixels, w * h);
+  near(score.maxMeters, 0);
+});

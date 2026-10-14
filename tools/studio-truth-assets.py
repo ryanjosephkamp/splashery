@@ -99,14 +99,16 @@ def main():
         print(f'Compact fixtures: {total} bytes')
     if args.archive:
         archive=folder.parent/'studio-truth-2026-10.tar.gz'
-        with tarfile.open(archive,'w:gz',compresslevel=6) as tar:
-            for file in sorted(folder.rglob('*')):
-                if not file.is_file(): continue
-                info=tar.gettarinfo(str(file),arcname='truth/'+str(file.relative_to(folder)))
-                info.uid=info.gid=0
-                info.uname=info.gname=''
-                info.mtime=0
-                with file.open('rb') as handle: tar.addfile(info,handle)
+        with archive.open('wb') as raw:
+            with gzip.GzipFile(filename='',mode='wb',fileobj=raw,compresslevel=6,mtime=0) as compressed:
+                with tarfile.open(fileobj=compressed,mode='w') as tar:
+                    for file in sorted(folder.rglob('*')):
+                        if not file.is_file(): continue
+                        info=tar.gettarinfo(str(file),arcname='truth/'+str(file.relative_to(folder)))
+                        info.uid=info.gid=0
+                        info.uname=info.gname=''
+                        info.mtime=0
+                        with file.open('rb') as handle: tar.addfile(info,handle)
         sha=digest(archive)
         archive.with_suffix(archive.suffix+'.sha256').write_text(f'{sha}  {archive.name}\n')
         print(json.dumps({'archive':str(archive),'bytes':archive.stat().st_size,'sha256':sha}))
