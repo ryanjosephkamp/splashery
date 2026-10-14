@@ -82,3 +82,21 @@ screenshots were refreshed by its browser tests.
 `node tools/us-english.mjs --diff` reports one inherited generated heading, `Maths`, whose count
 changes when Part A is added. The requested restoration retains main's heading; the Operator
 reserved the heading decision for a separate change. No new prose introduces that spelling.
+
+## Operator follow-up: short help text, October 14, 2026
+
+Addressed the Operator's [help-text review](https://github.com/ryanjosephkamp/splashery/pull/616#issuecomment-6173339732).
+The how-to line is 89 characters and ends with a period. Word/picture input instructions are in
+About, which is two paragraphs and 122 words, preserving the concept credit and licenses. The
+original 143-character line failed both `help` and `hta` length checks before the fix.
+
+Merged main at `4907a003` and regenerated the toy page. The requested full run of
+`tests/help.spec.mjs`, `tests/hta.spec.mjs`, `tests/cdx-pfa.spec.mjs`, and
+`tests/taps.spec.mjs` passed: **88 tests** in 6.0 minutes.
+
+Main advanced during the test run. Merged `915e6793`, whose source changes are confined to
+Video3D, and regenerated the site after resolving its generated service-worker conflict.
+All three focused help/About metadata checks passed again after this merge.
+`node tools/site-build.mjs --check`, `node tools/check-packs.mjs one-splat`, and
+`npx prettier --check .` passed. The English diff still reports only the inherited generated
+heading documented above. Test-generated screenshot changes were restored for this text fix.
